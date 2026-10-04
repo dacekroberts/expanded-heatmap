@@ -4335,6 +4335,44 @@ street address.
   storefronts, 1.2%, in Villa Lugano, Villa Soldati and Villa Riachuelo), the
   heritage tramway, and the commuter railways.
 
+### Mendoza - the capital's commercial accounts, one category per business
+
+**One category per business.** The Municipalidad lists each open commercial
+account with every activity it is taxed for; the business type (its rama)
+decides the category, and a business with a storefront rama beside others
+(a restaurant that also sells wine) is on the map once, in the first of Food
+service, Retail and Personal services it qualifies for. Of 8,309 open
+accounts at June 2025, 4,406 are storefronts.
+
+**Excluded by business type** (3,752) - among them doctors' and other health
+practices (503 consulting rooms, 58 laboratories, 35 clinics), offices and
+administration with no trade named (189 offices, 168 administrations and
+others), rental flats, hotels, hostels and guest houses (476 in all), parking
+(261), travel agencies (134), institutes, academies and schools (mostly
+teaching and medical), gyms (73), printers and copy shops, insurers, banks
+and estate agents, car workshops and car washes, locksmiths and other repair
+workshops, veterinary clinics (28), and lottery and quiniela agencies.
+
+**Street stands are out** - 38 sidewalk newsstands, 26 produce stands at the
+feria franca and the flower kiosks on the public way, as food stalls are
+everywhere on this site. Arcades' and shopping centers' own accounts are out
+too: the shops inside them are listed one by one.
+
+**No business type at all** - 151 accounts carry no rama and are left out.
+
+**Shown, but not named** - 92 storefronts whose name is written as a
+person's own, surname first, show their type of business instead.
+
+**Cafés, not shops** - the register's confiterías (137) count as food
+service: here they hold sidewalk-table permits and serve alcohol as cafés
+do, while pastry and bread shops have their own type.
+
+**Stations.** The Metrotranvía is drawn to both its ends, Gutiérrez in Maipú
+to Avellaneda in Las Heras; 7 of its 25 stations are in the Ciudad de Mendoza
+and get rings. The 18 in Godoy Cruz, Las Heras and Maipú are listed on
+Mendoza's page as left out: those departments publish no business register.
+- Not drawn: buses.
+
 ### Palma - the island's restaurant register, food only, placed by address
 
 **Only food is on this map.** The Consell de Mallorca registers every

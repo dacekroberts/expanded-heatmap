@@ -122,6 +122,8 @@ OSM_RAIL_BY_CITY = {
     "Sydney": ("the train and metro routes of Sydney and its City boundary", True),
     "Melbourne": ("the train and metro routes of Melbourne and its City boundary", True),
     "Buenos Aires": ("Buenos Aires's Subte and Premetro routes and its boundary", True),
+    "Mendoza": ("Mendoza's Metrotranvía and its stations, and the department boundaries "
+                "used to select them", True),
     "Seattle (Regional)": ("Seattle's Link 1 and 2 Lines", True),
     "London": ("the lines and stations of London's Underground, DLR, Elizabeth line and "
                "Overground, and the boundaries used to select them", True),

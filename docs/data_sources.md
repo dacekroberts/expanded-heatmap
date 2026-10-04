@@ -3535,6 +3535,28 @@ of 2026-10-02.)
 - **MUST NOT**: present the outline as an authoritative boundary location
   ("can only be provided by a licensed land surveyor").
 
+**141. Municipalidad de la Ciudad de Mendoza (Mendoza) — required, and
+DISPLAYED** (written into `render_site_notices()` with Mendoza, 2026-10-04.)
+
+- **PERMITTED WITH CONDITIONS**<!-- internal --> (`licence-read` 2026-10-03)<!-- /internal -->:
+  CC BY 4.0 at every level - the dataset's `license_id` CC-BY-4.0, the
+  portal and the resources agree. Rows in
+  [`data_sources/argentina.md`](data_sources/argentina.md).
+- **MUST DISPLAY** (CC BY 4.0 section 3(a)): credit to the Municipalidad de la
+  Ciudad de Mendoza with the dataset's title, "Listado Comercios por Actividad
+  2025", linked to its page; the licence linked; and a statement of the
+  modifications (filtered to storefront businesses, grouped into three
+  categories, reprojected from the Gauss-Krüger grid, names that read as a
+  person's own replaced by the business type). No wording is prescribed; the
+  notice is this project's.
+- **MUST NOT**: suggest endorsement by the Municipalidad; use the city's logo.
+- **Personal data**: Argentina's Ley 25.326 is outside the licence. The name
+  rule (a trade name written as a person's own, surname first, shows the
+  business type) and `check_personal_exposure.py` carry it; no address is
+  shown.
+- **Mendoza's rail and the department boundaries are OpenStreetMap data**
+  (ODbL, notice 1).
+
 **142. City of Tacoma (Tacoma) — required, and DISPLAYED on every page**
 (written into `render_site_notices()` with Tacoma, 2026-10-04.)
 

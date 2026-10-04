@@ -253,6 +253,12 @@ REGISTRIES = {
     "buenos_aires": dict(raw=None, trade=None, owner=None, name_is_address=True,
                          processed="businesses_clean.csv",
                          address=("business_name",)),
+    # Mendoza (2026-10-04): one name column, `nombre_fantasia`, filled on
+    # every business and never falling back to another. A sole trader writes
+    # it as their own name, surname first with a comma; step 2 shows the
+    # business type for those (Vancouver's rule). No address column is kept.
+    "mendoza": dict(raw=None, trade=None, owner=None,
+                    processed="businesses_clean.csv", address=None),
     # Glasgow reads the same FSA file format through pipeline/fsa.py: no
     # fallback name, and the flat rule (a storefront at a "Flat" address is
     # never placed, 185 rows) is the structural guard this check cannot see.

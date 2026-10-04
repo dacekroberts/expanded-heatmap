@@ -4278,6 +4278,32 @@ CITIES = [
         # 375, 768 and 1200. Above, it overlapped Seattle (Regional)'s pill.
         "label_offset": ("middle", 0, 22),
     },
+    {
+        "name": "Mendoza",
+        "lat": -32.8895,
+        "lon": -68.8458,
+        "page": "pages/193_Mendoza_Heatmap.py",
+        # 2026-10-04. `mode` light_rail on the light-rail test (a converted
+        # railway, every 10 minutes at peak and 13 at midday on STM's winter
+        # 2026 weekday timetable); `coverage` full (owner, 2026-10-04): all
+        # three buckets from one register, Personal services small but complete.
+        # rail_extra "Trams" as Manchester's (light rail counts).
+        "coverage": "full",
+        "mode": "light_rail",
+        "placement": "Register coordinates (100%)",
+        "data_age": "Open accounts, June 2025",
+        "rail_extra": "Trams",
+        "record_kind": "License register",
+        "categories": "All three",
+        "blurb": "Metrotranvía, one light-rail line",
+        "region": "South America",
+        "country": "Argentina",
+        "in_default_view": False,
+        # Above the dot, the default, scored (width 61.8 px measured in the
+        # browser pane, 2026-10-04): with South America's zoom leaving Mendoza
+        # out (REGION_ZOOM_WITHOUT, below), PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
@@ -4521,7 +4547,14 @@ if set(COUNTRY_VIEWS) - set(REGION_ORDER):
 # clipping only for a dot on the canvas). In the fit the zoom drops and all
 # five fit, with San Francisco's and Sacramento's labels re-placed to suit
 # (PROBLEMS 0 in the region at 375, 768 and 1200).
-REGION_ZOOM_WITHOUT = {"Europe": ("Riga", "Stockholm", "Bucharest", "Liepāja", "Daugavpils")}
+# Mendoza (2026-10-04), 10 degrees west of Buenos Aires, joins South America's
+# list on Riga's measurement: fitted to it, the zoom dropped and the Brazilian
+# coast's labels collided (12 problems at every width, whatever Mendoza's own
+# offset). Its centre still counts, so the frame sits further west: on a phone
+# (375 px) Rio de Janeiro's pill clips 87 px (42.5 before), Recife's 36,
+# Porto Alegre's 8 and Mendoza's 9; PROBLEMS 0.
+REGION_ZOOM_WITHOUT = {"Europe": ("Riga", "Stockholm", "Bucharest", "Liepāja", "Daugavpils"),
+                       "South America": ("Mendoza",)}
 
 # A REGION'S ZOOM SET OUTRIGHT, after the fit (owner, 2026-09-30): France North
 # and France South at 5.0, where every French label places. Fitted, each would

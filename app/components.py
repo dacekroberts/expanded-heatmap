@@ -573,7 +573,7 @@ _OSM_RAIL = (
     "Ostrava", "Liberec (Regional)", "Most (Regional)", *_BRAZIL, "Prague",
     "Amsterdam", "Rotterdam", "Hong Kong", "Seoul", "Taichung", "Taoyuan",
     "Taipei (Regional)", "Daegu", "Busan", *_KOREA_SEMAS, "Sydney", "Melbourne",
-    "Buenos Aires", "Seattle (Regional)", "London", "Glasgow",
+    "Buenos Aires", "Mendoza", "Seattle (Regional)", "London", "Glasgow",
     "Newcastle (Regional)", "Manchester (Regional)", "Birmingham (Regional)",
     "Edinburgh", "Sheffield", "Nottingham (Regional)", "Blackpool (Regional)",
     "Liverpool (Regional)", "Stockholm", "Bucharest", "Tbilisi", "Montpellier", "Strasbourg",
@@ -1040,7 +1040,8 @@ _NOTICES = [
      "Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu and "
      "Anyang, and those cities' boundaries, the train and metro routes of Sydney and "
      "Melbourne and their City boundaries, Buenos Aires's Subte and Premetro routes and "
-     "its boundary, Seattle's Link 1 and 2 Lines, "
+     "its boundary, Mendoza's Metrotranvía and its stations and the department boundaries "
+     "used to select them, Seattle's Link 1 and 2 Lines, "
      "the lines and stations of London's Underground, DLR, Elizabeth line and "
      "Overground, the Glasgow Subway, the Tyne and Wear Metro, Manchester "
      "Metrolink, West Midlands Metro, Edinburgh Trams, Sheffield Supertram, "
@@ -2843,6 +2844,20 @@ _NOTICES = [
      "are from the Massachusetts Municipalities layer. Source: MassGIS (Bureau "
      "of Geographic Information), Commonwealth of Massachusetts EOTSS.",
      False, ("Boston",)),
+    # Mendoza (notice 141): the Municipalidad's commercial accounts list, CC BY
+    # 4.0 (licence-read 2026-10-03): the credit with the dataset's title and
+    # page, the licence linked, a statement of the modifications and no
+    # suggestion of endorsement (section 3(a)). No wording is prescribed; this
+    # is the build's draft (docs/decisions_drafts/new-cities.md).
+    Notice(141, "Municipalidad de la Ciudad de Mendoza (Mendoza)",
+     "Mendoza's businesses are from the Municipalidad de la Ciudad de Mendoza, "
+     "[Listado Comercios por Actividad 2025]"
+     "(https://datos.ciudaddemendoza.gob.ar/dataset/listado-comercios-por-actividad-2025), "
+     "licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Modified by "
+     "this project: filtered to storefront businesses, grouped into three categories, "
+     "reprojected from the Gauss-Krüger grid, and names that read as a person's own replaced "
+     "by the business type. The Municipalidad de la Ciudad de Mendoza does not endorse this map.",
+     False, ("Mendoza",)),
     # Tacoma (notice 142): the City of Tacoma's open-data disclaimer, which its
     # terms require of any application using the data - Chicago's and Kansas
     # City's template, so displayed site-wide as theirs are. Word for word from

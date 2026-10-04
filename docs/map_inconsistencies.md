@@ -708,6 +708,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Liverpool (Regional) | Merseyrail (suburban rail run as a metro), the Northern and Wirral Lines | The City Line, other national rail trains, buses and the Mersey Ferries | OpenStreetMap route relations; gate 3 exact on 37 and 34 (Merseytravel's timetable booklets) and name by name against NaPTAN's rail records | The four Merseyrail council areas (Liverpool, Sefton, Knowsley, Wirral) | 10 / 0 |
 | **Argentina** | | | | | |
 | Buenos Aires | Subte Líneas A–E and H | Premetro, heritage tramway, commuter railways | SBASE's station and track layers (BA Data); names from OpenStreetMap; gate 3 exact on six lines against SBASE and OSM | Ciudad Autónoma (all 89 stations inside) | 0 / 0 |
+| Mendoza | Metrotranvía (light rail), one line, drawn to both ends | Buses | OpenStreetMap route relations; gate 3 exact against es.wikipedia (secondary; the operator's page unreconciled) | Ciudad de Mendoza, the capital department (OSM) | 18 / 0 |
 | **Australia** | | | | | |
 | Sydney | Sydney Trains T1, T2, T3, T4, T8 and T9 and Sydney Metro M1 (7 lines, refs on the map, full names in the legend) | Light rail L1-L3 (22 stops in the LGA), NSW TrainLink, ferries | OpenStreetMap route relations (Transport for NSW's GTFS needs an API key); gate 3 exact on the 16 stations inside the LGA | The City of Sydney LGA (lines cut at the boundary) | 157 / 0 |
 | Melbourne | Metro Trains Melbourne by line group: Burnley, Clifton Hill, Northern, Cross City, Frankston, Metro Tunnel (6 lines, the group on the map, its lines in the legend) | Trams (22 routes, 155 stops in the LGA), the event-day Flemington Racecourse line, the City Circle, V/Line | OpenStreetMap route relations (119, assigned to groups by line name); gate 3 exact on the 17 stations inside the LGA | The City of Melbourne LGA (lines cut at the boundary) | 199 / 0 |
@@ -901,6 +902,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Liverpool (Regional) | Food hygiene register | The Food Standards Agency's FHRS files, 4 councils | FSA business type | 1,107 / 2,625 / — | No Personal services; Retail = food shops only ("Food shops") |
 | **Argentina** | | | | | |
 | Buenos Aires | Street survey (2022–2024) | The city's Relevamiento Usos del Suelo (BA Data; no names) | Survey's own use subtypes (385, enumerated) | 30,586 / 6,987 / 4,612 | Malls and arcades not itemised (593 left out); unidentified shopfronts (6,243, 7.2%) dropped |
+| Mendoza | License register | The capital's commercial accounts list (open accounts, June 2025) | Its own business types (RAM, 418, enumerated), one per business | 413 / 173 / 55 | Personal services small but complete; confiterías counted as cafés |
 | **Australia** | | | | | |
 | Sydney | Street survey or census | The City of Sydney's Floor Space and Employment Survey, 2022 (FES Industry of occupation; no names) | ANZSIC 2006 class | 2,490 / 2,769 / 642 | One council, the City of Sydney; points per building; religious and membership organisations, parking, clubs, catering, funerals, brothels and other personal services n.e.c. excluded by class |
 | Melbourne | Street survey or census | The City of Melbourne's Census of Land Use and Employment, 2024 (CLUE; trading names) | ANZSIC 2006 class | 1,768 / 2,546 / 446 | One council, the City of Melbourne; points per property; the same class exclusions as Sydney |
@@ -1083,6 +1085,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Liverpool (Regional) | Register coordinates (94%) and postcode centers (6%, OS postcode centroids for a full postcode with no register point); 223 not placed | Food only; about one storefront in thirty-three unplaced, most in Sefton and Wirral; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a private address or a flat address never placed; the name after "trading as" shown |
 | **Argentina** | | | |
 | Buenos Aires | Parcel centres (99.8%) and block centres (0.1%), a join to the city's Parcelas on the survey's parcel key; 3 not placed | Each block surveyed once, 2022–2024; unidentified shopfronts 7.2% (32% in Villa Riachuelo); malls not itemised; businesses in one building share a point | Homes with a business inside (filed as housing); car repair, finance, lottery, health and veterinary, offices, wholesale by use |
+| Mendoza | Register coordinates (100%), Gauss-Krüger zone 2 reprojected; none outside the capital | The neighboring departments, where 18 stations lie, publish no register | Offices, health practices, lodging, parking, street stands; accounts with no business type (151); the business type shown for a person-named account (92) |
 | **Australia** | | | |
 | Sydney | Census coordinates (per building; 5,054 distinct points for 7,074 storefronts) | The City of Sydney LGA only; a five-yearly survey (2022); no names | Parking, non-store retail, organisations, licensed members' clubs, catering, funerals, brothels and other personal services n.e.c. by class; one n.e.c. catch-all kept |
 | Melbourne | Census coordinates (per property; 1,840 distinct points for 4,959 storefronts) | The City of Melbourne LGA; upper-floor tenancies kept | Parking, non-store retail, organisations, licensed members' clubs, catering, funerals, brothels and other personal services n.e.c. by class; one n.e.c. catch-all kept |
@@ -1276,6 +1279,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Liverpool (Regional) | Extracts of 2026-10-02, per council (fetched 2026-10-04) | B | 0.6 mi | Yes | 52% | Registered name; the trade name where registered "trading as" |
 | **Argentina** | | | | | | |
 | Buenos Aires | Surveyed 2022–2024, published October 2025 (2026-09-28) | B (prose) | 0.6 mi | Yes | 66% | Street address + use (the survey has no names) |
+| Mendoza | Open accounts, June 2025 (2026-10-04) | B | 0.3 mi | Yes | 15% | Trade name; the business type for a person-named account |
 | **Australia** | | | | | | |
 | Sydney | Survey of 2022 (layer last edited 2025-02-12; fetched 2026-09-28) | B | 0.6 mi | Yes | 83% | Kind of business (the survey has no names) |
 | Melbourne | Census of 2024 (dataset modified 2021-11-02 per its metadata; fetched 2026-09-28) | B | 0.6 mi | Yes | 96% | Registered name (the trading name) |
