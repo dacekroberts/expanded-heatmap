@@ -197,7 +197,7 @@ The 10 rows sum to 6,880.
   4. the rest are thinned to **one per half mile** (`THIN_SPACING_MILES =
      0.5`), measured along the line's own stop sequence, one direction per
      line.
-  Each cut goes to `outputs/brussels/excluded_stations.csv` with a reason
+  Each cut goes to the city's excluded-stations file with a reason
   containing "spacing", and the city page names the thinned lines.
 - **The size of it (ASSERTED, one source):** the City's stop list
   (`arrets-bus-tram-metro-societes-transport-public-vbx`, a region-wide
