@@ -4,6 +4,33 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - Gaziantep's licence read: catalogued sets only, and one desk check of the data's origin (owner)
+
+- **The licence read** (the Gaziantep Açık Veri Lisansı, Turkish only, no
+  licensor named): worldwide, royalty-free, commercial use, publication and
+  derived works granted, on condition of a source credit and a link to the
+  licence where possible; nothing to do beyond that. It grants no rights in
+  personal data, third-party rights or trademarks.
+- **The owner: "yes 2 and 3"**, on staging's two recommendations:
+  1. **Retail from the two catalogued datasets only**, "Ticari Yerler" and
+     "Yemek Yerleri". The shopping endpoint (AlisverisNoktalari, 4.96 MB) is
+     in the API's swagger and the web-service PDF but in none of the 252
+     catalogued packages, so whether the licence reaches it is unclear.
+     Tradeoff accepted: a thinner retail layer.
+  2. **One desk check of the data's origin before anything else.** 1,206
+     commercial rows lie in other provinces (Kilis, Kahramanmaraş), the
+     category codes look like a vendor's and some rows are test rows, so the
+     set may be a licensed navigation vendor's POI base, whose rights the open
+     licence cannot pass on. The check compares the codes against Turkish
+     navigation vendors' published schemas. If it settles nothing, Gaziantep
+     moves to D with a question to the published contact as the owner's act
+     (outreach last). Gaziantep stays in C meanwhile; the currency rule (no
+     date field, catalogue stamp 2025-04-25) is still open.
+- **Not a call, for the build:** personal data falls to
+  `check_personal_exposure.py` as usual (sole traders' shops named after
+  their owners among the hairdressers and barbers), and the `aciklama` field
+  is dropped (its test-row notes hold an editor's first name).
+
 ### 2026-10-04 - The next probe items after the reset's work (owner)
 
 - **The owner, on the country census's "where new cities could still come
