@@ -10,9 +10,9 @@ as ready"), to ONE build session. It works in `.claude/worktrees/belgium`
 on branch `belgium-build`, cut from origin/master by staging. There,
 `data/` and `.venv-lean` are junctions to the main checkout's. The branch
 has no upstream, so a plain `git push` can never reach master. Everything
-lands at the owner's review time. **TEC's licence read was still running
-at release:** check `docs/decisions_drafts/staging.md` (merged from
-master) before Charleroi's and Liège's step 1; OSM if it is restrictive.
+lands at the owner's review time. **One call is open at release:** how
+pages use the "TEC" name (below, Notices); ask staging before writing
+Charleroi's or Liège's page text.
 
 **Two other build sessions run beside this one:** Korea
 (`docs/handoff_korea_sweep_2026-10-03.md`) and the other cities
@@ -85,7 +85,7 @@ countries are listed (the `add-country` skill's checklist).
 | **147** | SPW LoGIC 2024, CC BY 4.0 | The SPW citation verbatim, the working catalogue link beside its 404 URI, a modification statement |
 | **148** | STIB-MIVB GTFS (Belgian Mobility Company portal), CC BY 4.0 | "Source: STIB-MIVB – Open Data – [feed date]", the modified-data line, the portal |
 | **149** | De Lijn GTFS (Belgian Mobility Company portal); read 2026-10-04: permitted with conditions | "Source: De Lijn – Open Data – [feed date]", the modified-data line, the portal, the CC BY 4.0 title and link; no delijn.be link |
-| **150** | TEC GTFS (Belgian Mobility Company portal) | "Source: TEC – Open Data – [feed date]", the modified-data line, the portal (subject to its licence read) |
+| **150** | TEC GTFS (Belgian Mobility Company portal); read 2026-10-04: permitted with conditions (CC BY 4.0; TEC's national-access-point entry says CC0, and complying with CC BY satisfies both) | "Source: LETEC – Open Data – [date of dataset update]" (the update date, not the fetch date), the modified-data line, the CC BY 4.0 title and link, the portal; no TEC logo. **Open for the owner:** TEC's website terms claim the "TEC" name; staging recommends crediting "LETEC" (the name the portal and the feed's agency use) and labelling lines by their public names (M2, M3, M4, T1) without "TEC" in legends or prose |
 | **151** | KBO/BCE Open Data (FPS Economy), Brussels (Regional) only | Source and the update date, not presented as a guarantee; companies only |
 | **152** | BeST-Address Brussels (FPS BOSA), Brussels (Regional) only | CC BY 4.0, BOSA and the Brussels address register, a statement that business addresses were matched to the points |
 

@@ -4,6 +4,26 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - TEC's GTFS read: permitted with conditions; the "TEC" name raised
+
+- **`licence-read`, 2026-10-04: PERMITTED WITH CONDITIONS.** The Belgian
+  Mobility Company portal's CC BY 4.0 (art. 3, TEC the sole licensor);
+  TEC's own transportdata.be entry declares CC0 for the same BMC URL.
+  Complying with CC BY 4.0 and art. 4 satisfies either reading, so no
+  owner decision on the licence. letec.be answered every path with a
+  Cloudflare challenge and was not read past it; its website terms were
+  read in the Wayback copy of 2026-05-02.
+- **Display (notice 150):** "Source: LETEC – Open Data – [date of dataset
+  update]" (the update date, not the fetch date), the modified-data line,
+  the CC BY 4.0 title and link, the portal; no TEC logo; no implied
+  endorsement. The feed's `route_color` is licensed data (Charleroi uses
+  the project's palette anyway, owner).
+- **Raised with the owner:** TEC's website terms (art. 8, 8.1) claim the
+  "TEC" name and logo. They are scoped to letec.be and the app, and naming
+  the operator in a required credit is their stated exception; staging
+  recommends crediting "LETEC" and labelling lines by their public names
+  (M2, M3, M4, T1), with no "TEC" in legends or prose.
+
 ### 2026-10-04 - De Lijn's GTFS read: permitted with conditions
 
 - **`licence-read`, 2026-10-04: PERMITTED WITH CONDITIONS.** On the Belgian
