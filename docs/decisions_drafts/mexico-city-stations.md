@@ -96,6 +96,15 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
   in OpenStreetMap only as stop positions on their line's route, so the named
   stops of each drawn route are added wherever no station node of that name
   exists, and every stop on a drawn route must end up with a station."
+- **Verified: `python pipeline/drift_check.py mexico_city` reported zero
+  drift against commit 097fb3af** (`excluded_stations.csv` and
+  `baseline.json` identical, `heatmap.html` identical after Folium-id
+  normalization; baseline's 7 figures unchanged: 462,732 DENUE rows,
+  442,146 fijo, 280,186 storefront, 280,185 clean, Retail 202,419, Food
+  service 49,164, Personal services 28,603; measured peak 1.43 GB).
+  `check_provenance.py` names Mexico City OK; `check_all.py` passed 48 of 48
+  once `ring_shares.json` was rewritten. Only Mexico City was drift-checked,
+  by instruction.
 - **The step re-runs on this branch wrote the shared
   `data/mexico_city/processed/stations.csv`; master's copy was restored
   afterwards** (`project_shared_data_junction`). Whoever lands this branch
