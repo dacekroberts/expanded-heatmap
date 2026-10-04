@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**499 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**500 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-03**
 
@@ -73,6 +73,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Visuals rebuilt for 158 cities at master 37eec480: 143 cards, every count updated](#2026-10-03---visuals-rebuilt-for-158-cities-at-master-37eec480-143-cards-every-count-updated)
 - [Vancouver's 130-132 on the card face; private pages moved to analytics' 37eec480 rerun](#2026-10-03---vancouvers-130-132-on-the-card-face-private-pages-moved-to-analytics-37eec480-rerun)
 - [Region captions read "in the United States" (owner)](#2026-10-03---region-captions-read-in-the-united-states-owner)
+- [San Diego and Los Angeles: a trade name that is the registrant's own name shows the street address (owner)](#2026-10-03---san-diego-and-los-angeles-a-trade-name-that-is-the-registrants-own-name-shows-the-street-address-owner)
 
 **2026-10-02**
 
@@ -20286,3 +20287,46 @@ until the owner rules):**
   already used (`_TAKES_THE` in `app/cities.py`): the United States, its
   West and East halves, the United Kingdom and the Seoul Capital Area. The
   menu labels are unchanged.
+
+### 2026-10-03 - San Diego and Los Angeles: a trade name that is the registrant's own name shows the street address (owner)
+
+- **Found by the review-time deploy check** (lane 3): a San Diego dot whose
+  name read as a person's own. San Diego's verdict of 2026-10-01 stood on 1
+  person-like name at a residential unit of 2,228 pins, but the exposure
+  check's broader heuristic counted 461 person-like names (20.7%), and the
+  owner's rule of 2026-10-03 is that a person's own name never goes on a pin.
+- **Measured (423 of the 461 matched back to the register):** 128 showed a
+  `dba_name` identical to `business_owner_name`, 120 of them sole
+  proprietorships: the registrant's own name typed into the trade-name
+  field, which is no trade name. 175 belong to corporations or LLCs, names a
+  business chose, kept as Los Angeles keeps its 1,470. 51 are sole
+  proprietors in personal services sharing a street address with other
+  accounts (the booth-renter shape, `docs/category_rules.md`), not acted on.
+  Los Angeles has the same case on about 10 pins: its own-name registrants
+  mostly leave the trade name blank, which Kansas City's rule already covers.
+- **Options put to the owner:** own-name to street address (recommended);
+  that plus a booth-renter exclusion for San Diego; or no change. **The
+  owner chose own-name to street address.**
+- **Built:** Kansas City's rule as Los Angeles applies it (2026-10-01),
+  widened: a trade name repeating the registrant's own name verbatim counts
+  as none given, and where it reads as a person (`residence.looks_personal`,
+  the exposure check's test) the pin keeps its place and shows its street
+  address. San Diego: in step 2, after the home filter, 539 rows city-wide.
+  Los Angeles: step 2 flags `own_name_dba` on City of LA rows only (Long
+  Beach fills both columns from DBANAME), step 3 reads it;
+  `name_as_address` 6,338 -> 6,422 (baseline re-recorded).
+- **Measured after, against the committed maps:** San Diego 140 names
+  changed, every one person-like to a street address, person-like pins 461
+  -> 321, at a residential unit 1 -> 0; Los Angeles 9 changed, the same way,
+  1,572 -> 1,563, at a residential unit 0. Every pin's position, category,
+  station and ring identical in both; storefronts unchanged (San Diego 2,228
+  in rings of 9,124, Los Angeles 14,642 of 60,740). Los Angeles steps 2-4
+  measured 0.46 GB.
+- **Privacy verdicts:** San Diego publish, Los Angeles (Regional) publish,
+  re-recorded on these numbers. San Diego's page gains "The businesses" with
+  Los Angeles's approved sentence, less its dwelling-unit clause: "Where a
+  business is registered under a person's name alone, with no trade name,
+  the map shows its street address instead of a name."
+- **Left open:** the 51 booth-renter-shaped pins, and San Diego's 62 sole
+  proprietors with person-like names under the 452 catch-all, for a later
+  look.

@@ -47,6 +47,11 @@ st.markdown(
 
 - Stations are represented by blue dots along the MTS Trolley's five lines: Blue, Orange, Green,
   Copper and Silver, each labeled directly on the map.
+
+**The businesses**
+
+- Where a business is registered under a person's name alone, with no trade name, the map shows
+  its street address instead of a name.
 """
 )
 

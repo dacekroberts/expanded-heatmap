@@ -180,6 +180,11 @@ def main():
     # --- Display name --------------------------------------------------------
     # Trade name (dba_name) when there is one, else the registrant's name.
     dba = df["dba_name"].fillna("").str.strip()
+    # A trade name that repeats the registrant's own name verbatim gives no
+    # trade name (owner, 2026-10-03); step 3 reads this flag. City rows only:
+    # Long Beach's frame fills both columns from DBANAME, so it is never set.
+    df["own_name_dba"] = (dba != "") & (
+        dba.str.upper() == df["business_name"].fillna("").str.strip().str.upper())
     df["business_name"] = df["business_name"].where(dba == "", dba)
     blank = df["business_name"].fillna("").str.strip() == ""
     if blank.any():

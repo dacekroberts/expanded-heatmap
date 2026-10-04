@@ -219,7 +219,12 @@ def main():
     # the street address too, wherever it is. The person test is the exposure
     # check's (looks_personal), not Kansas City's holder_is_person, which reads
     # Los Angeles names such as "HERCULES FURNITURE" as people.
-    registrant = (out["dba_name"].fillna("").str.strip() == "") & names.map(looks_personal)
+    # Widened (owner, 2026-10-03): a trade name that repeats the registrant's
+    # own name verbatim (step 2's own_name_dba) counts as none given.
+    no_trade_name = out["dba_name"].fillna("").str.strip() == ""
+    if "own_name_dba" in out.columns:
+        no_trade_name = no_trade_name | out["own_name_dba"].astype(str).str.lower().eq("true")
+    registrant = no_trade_name & names.map(looks_personal)
     # Long Beach (regional): FULLNAME is never loaded, so a licence with no
     # trade name has no name at all; it shows the street address the same way.
     if "source" in out.columns:
