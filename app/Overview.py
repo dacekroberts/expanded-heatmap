@@ -34,6 +34,7 @@ from cities import (
     REGION_MEMBERS,
     REGION_ZOOM_WITHOUT,
     REGIONS,
+    region_caption,
     SWITCHER_ORDER,
 )
 from label_competition import compete
@@ -702,12 +703,9 @@ if region == DEFAULT_REGION:
 elif len(REGIONS) > 1:
     # A region view states its own count only (owner, 2026-10-03): the
     # whole-map sentence belongs to Global, and the list below still holds
-    # every city, its other regions closed.
-    _n_here = len(_region_cities[region])
-    st.caption(
-        # East Asia (Hong Kong, 2026-09-24) was the first one-city region.
-        f"Showing {_n_here} {'city' if _n_here == 1 else 'cities'} in {region}."
-    )
+    # every city, its other regions closed. The sentence is cities.py's, which
+    # check_macro_labels.py holds to the labels the view draws.
+    st.caption(region_caption(region))
 
 st.caption("Or pick a city from the list:")
 # THE LIST FOLLOWS THE REGION SELECTOR (owner, 2026-10-01): one expander per

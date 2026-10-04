@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**491 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**492 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-03**
 
@@ -65,6 +65,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Los Angeles (Regional): Long Beach added on its own licence layer, its holder names never loaded](#2026-10-03---los-angeles-regional-long-beach-added-on-its-own-licence-layer-its-holder-names-never-loaded)
 - [Vancouver (Regional) extended: Burnaby, New Westminster and Coquitlam on their own registers](#2026-10-03---vancouver-regional-extended-burnaby-new-westminster-and-coquitlam-on-their-own-registers)
 - [Burnaby, New Westminster and Coquitlam: the OGL personal-information exemption read cautiously (owner)](#2026-10-03---burnaby-new-westminster-and-coquitlam-the-ogl-personal-information-exemption-read-cautiously-owner)
+- [Overview: a region view's caption names the regions whose anchors it labels (owner)](#2026-10-03---overview-a-region-views-caption-names-the-regions-whose-anchors-it-labels-owner)
 
 **2026-10-02**
 
@@ -19992,3 +19993,25 @@ until the owner rules):**
   is no key list to add.
 - **Consequence:** the open terms question below is closed; the three
   cities are no longer held off the Visuals cards.
+
+### 2026-10-03 - Overview: a region view's caption names the regions whose anchors it labels (owner)
+
+- **The finding (owner, 2026-10-03):** East Asia's caption said "Showing 6
+  cities in East Asia." while the view labelled 15. Measured: East Asia
+  labels 9 anchors from Japan West, Japan East and the Seoul Capital Area,
+  Europe 3 from the United Kingdom (REGION_LABELS_ALSO, the owner's calls
+  of 2026-09-30 and 2026-10-02). Every other region labels only its own.
+- **Options put to the owner:** name the other regions in the caption
+  (recommended), drop the anchors, or count them (which would contradict
+  the menu's "(6)" and the list below). **The owner chose naming them**,
+  with the wording: "Showing 6 cities in East Asia, with the main cities of
+  Japan West, Japan East and the Seoul Capital Area labeled too." Europe:
+  "Showing 23 cities in Europe, with the main cities of the United Kingdom
+  labeled too."
+- **Built:** the sentence is `cities.region_caption()`, generated from
+  REGION_LABELS_ALSO (its tuple order is the order named), and Overview.py
+  renders it. `check_macro_labels.py` now reads that sentence at 375, 768
+  and 1200 and fails a view that labels a city its caption neither counts
+  nor names, or states a number other than the region's own. It failed
+  East Asia and Europe at all three widths before the change and passes
+  after.
