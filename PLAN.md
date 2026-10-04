@@ -25,6 +25,14 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   (owner, 2026-10-03).** Expected to be the mobile-tap-targets landing at
   review time; the audit follows the live check of its three asks.
 
+- [ ] **Land mobile-tap-targets at review time** (branch at b68903a5, ready
+  2026-10-03; owner approved, touch only). At landing: fold its drafts,
+  re-check the three asks at 375 (tap reach, the fixed panel and ring, a
+  spiderfied group surviving the second tap), deploy-verify `map-chrome`;
+  no app/ diff, so no reboot. Left for the owner by that session: on
+  desktop, stations sit under lines (hovering a station centre shows the
+  line), and a spiderfied group still closes on a desktop click.
+
 - [x] **The macro-info pages (owner, 2026-10-03):** Why the Maps Differ's
   key above its table; Japan folded into East Asia in the country selector.
   DECISIONS 2026-10-03, "The country selector folds Japan into East Asia".

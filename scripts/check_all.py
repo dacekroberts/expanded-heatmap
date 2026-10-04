@@ -47,6 +47,8 @@ CHECKS = [
     ["scripts/check_conflict_markers.py"],
     ["scripts/check_conflict_markers_selftest.py"],
     ["scripts/check_discard_evidence.py"],
+    ["scripts/check_html_lang.py"],
+    ["scripts/check_html_lang.py", "--selftest"],
     ["scripts/check_inconsistency_list.py"],
     ["scripts/check_inline_arrays.py"],
     ["scripts/check_macro_facts.py"],
