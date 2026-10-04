@@ -2208,6 +2208,47 @@ the other 18 communes and beyond the Region get no ring; 7 tram stops on trams
 which never enter the City, buses and SNCB trains are not drawn. The other 18
 communes are on the Brussels (Regional) page.
 
+### Antwerp - FAVV-AFSCA's food list, food only, placed on the business register's points
+
+**One category, food.** The map is FAVV-AFSCA's list of registered food
+businesses, placed by each establishment's KBO number on Flanders' copy of the
+business register (VKBO). Food shops are counted as food, as in Göteborg.
+
+**Excluded from the list** - caterers (340), food sold beside a non-food main
+trade (201), school, crèche, care-home and other collective kitchens (655),
+market and mobile sales (250), vending (57), B&Bs (53), pharmacies (137), and
+wholesale, manufacturing, transport and farms.
+
+**Missing rather than excluded** - every shop that is not a food business,
+and personal services: the list registers food only. About 4 in 100
+food-service businesses could not be placed: their KBO number has no point in
+VKBO (most are on its placeholder for an unmatched address).
+
+**Shown, but not named** - the list carries no names, so a dot shows the type
+of business only.
+
+**Stations.** De Lijn's tram lines 1, 2, 4, 6, 7, 8, 10, 11, 12, 24, A3 and A9
+are drawn. Lines 3, 5, 9 and 15 are not in the current timetable and no tram
+serves the left bank (Linkeroever) during works. Hoboken Jan Van de Wouwer is
+closed for works. 16 stops in Mortsel, Wijnegem, Wommelgem and Boechout get no
+ring. No stop is thinned. Buses and NMBS trains are not drawn.
+
+### Ghent - FAVV-AFSCA's food list, as Antwerp
+
+**One category, food**, by Antwerp's rules.
+
+**Excluded from the list** - caterers (175), food sold beside another trade
+(96), collective kitchens (391), B&Bs (75), and the other trades Antwerp
+leaves out.
+
+**Missing rather than excluded** - everything that is not a food business,
+and about 5 in 100 food-service businesses that could not be placed.
+
+**Shown, but not named** - a dot shows the type of business only.
+
+**Stations.** De Lijn's trams T1, T2 and T4 are drawn. T2's stop in Melle
+gets no ring. No stop is thinned. Buses and NMBS trains are not drawn.
+
 ### Charleroi - a survey that sees every shop only in the commercial districts
 
 **Two categories.** The map is Wallonia's LoGIC 2024 survey, done on the

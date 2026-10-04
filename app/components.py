@@ -2864,6 +2864,31 @@ _NOTICES = [
      "View link columns are removed. Neither the City of Brussels nor "
      "hub.brussels endorses this project.",
      False, ("Brussels",)),
+    # FAVV-AFSCA's operator list: CC BY 4.0. Credit with the extract date, no
+    # implied endorsement; linked to the agency's HOME PAGE only (its site
+    # terms ask the webmaster's say before a deep link). The wording is the
+    # Belgium build's, from the Antwerp brief's proposal.
+    Notice(145, "FAVV-AFSCA (Antwerp and Ghent)",
+     "Antwerp's and Ghent's food businesses are from the list of operators of "
+     "the Federal Agency for the Safety of the Food Chain "
+     "([FAVV-AFSCA](https://favv-afsca.be/)), extracted on September 28, 2026, "
+     "and used under the [Creative Commons Attribution 4.0 International "
+     "license](https://creativecommons.org/licenses/by/4.0/). Modified by this "
+     "project: food-service and food-shop activities are selected and placed on "
+     "VKBO's address points. FAVV-AFSCA does not endorse this map.",
+     False, ("Antwerp", "Ghent")),
+    # VKBO (Digitaal Vlaanderen): the Modellicentie voor gratis hergebruik
+    # v1.0 and its PRESCRIBED Dutch credit line, verbatim, with the extract
+    # date (which also meets KBO's art. 2.8 should the federal terms reach the
+    # KBO-derived fields). Only the unit number, type, NIS code, postcode and
+    # point are read.
+    Notice(146, "Digitaal Vlaanderen, VKBO (Antwerp and Ghent)",
+     "The points that place Antwerp's and Ghent's food businesses: “publieke KBO "
+     "gegevens, verrijkt met adressen uit het Vlaamse Adressenregister.” "
+     "(VKBO, Digitaal Vlaanderen), extracted on October 4, 2026, under the "
+     "[Modellicentie voor gratis hergebruik v1.0](https://data.vlaanderen.be/id/"
+     "licentie/modellicentie-gratis-hergebruik/v1.0).",
+     False, ("Antwerp", "Ghent")),
     # LoGIC 2024 (SPW), the downloaded GeoPackage only (never the MapServer,
     # whose service terms forbid altering the data): CC BY 4.0 with the SPW
     # citation VERBATIM from the Metawal record (its geodata.wallonie.be URI
@@ -2881,6 +2906,22 @@ _NOTICES = [
      "that reads as a person's own name is replaced by the shop's category. The "
      "Service public de Wallonie does not endorse this project.",
      False, ("Charleroi", "Liège")),
+    # De Lijn's GTFS on the Belgian Mobility Company's portal: CC BY 4.0, De
+    # Lijn the sole licensor (art. 3); art. 4's credit with the DATE OF THE
+    # DATASET UPDATE (feed_version 20261003_20261130_003000: 2026-10-03;
+    # re-date at every refresh). No delijn.be link or content (its website
+    # terms are private use only); no logo.
+    Notice(149, "De Lijn (Antwerp and Ghent)",
+     "Source: De Lijn – Open Data – October 3, 2026. Contains data originally "
+     "published by De Lijn, modified by this project: Antwerp's and Ghent's tram "
+     "lines are extracted from De Lijn's GTFS feed and redrawn, platforms are "
+     "grouped into stations, and two line colors are darkened to read on the "
+     "map. Published on the Belgian Mobility Company's "
+     "[open-data portal](https://data.belgianmobility.io/) under the "
+     "[Creative Commons Attribution 4.0 International license]"
+     "(https://creativecommons.org/licenses/by/4.0/). De Lijn does not endorse "
+     "this project.",
+     False, ("Antwerp", "Ghent")),
     # LETEC's GTFS on the Belgian Mobility Company's portal: CC BY 4.0 (TEC's
     # national-access-point entry says CC0; complying with CC BY satisfies
     # both). Art. 4's credit with the DATE OF THE DATASET UPDATE (feed_version

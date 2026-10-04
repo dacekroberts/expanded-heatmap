@@ -3546,6 +3546,32 @@ of 2026-10-03.)
   portal's terms, 3.1); imply endorsement. What the "Google Maps" contributor
   credit covers is not stated by the publisher; it is named as listed.
 
+**145. FAVV-AFSCA (Antwerp and Ghent) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-04, from staging's licence read
+of 2026-10-03.)
+
+- **PERMITTED WITH CONDITIONS (CC BY 4.0)**: the agency's open-data page
+  ("Creative Commons Naamsvermelding 4.0 Internationaal"). The list carries no
+  name or street column. Rows in [`data_sources/belgium.md`](data_sources/belgium.md).
+- **MUST DISPLAY**: the credit with the extract date, the license link, a
+  statement of the changes, no implied endorsement, nothing misleading.
+- **MUST NOT**: deep-link the agency's site (its terms ask the webmaster's
+  say first): the credit links its home page only. The site terms' prior
+  approval for downloadable documents is read, as the Dutch text limits it,
+  as covering brochures and the like (owner, 2026-10-03).
+
+**146. Digitaal Vlaanderen, VKBO (Antwerp and Ghent) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-04, from staging's licence read
+of 2026-10-03.)
+
+- **PERMITTED WITH CONDITIONS**: the Modellicentie voor gratis hergebruik
+  v1.0. KBO's purpose limit binds its registrants, not VKBO's reusers. Rows
+  in [`data_sources/belgium.md`](data_sources/belgium.md).
+- **MUST DISPLAY**, verbatim, the prescribed credit: "publieke KBO gegevens,
+  verrijkt met adressen uit het Vlaamse Adressenregister." with the extract
+  date (which also meets KBO's art. 2.8, should the federal terms ever reach
+  the KBO-derived fields).
+
 **147. Service public de Wallonie, LoGIC 2024 (Charleroi and Liège) — required, and DISPLAYED**
 (written into `render_site_notices()` 2026-10-04, from staging's licence read
 of 2026-10-03.)
@@ -3576,6 +3602,23 @@ of 2026-10-03.)
   the portal named (its FAQ).
 - **MUST NOT**: take anything from stib-mivb.be itself (its website terms are
   for private use): no logo, network map or brand material.
+
+**149. De Lijn (Antwerp and Ghent) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-04, from staging's licence read
+of 2026-10-04.)
+
+- **PERMITTED WITH CONDITIONS (CC BY 4.0)**: the Belgian Mobility Company
+  portal's Terms of Use (art. 3), De Lijn the sole licensor; De Lijn's own
+  portal's Flemish license and the national access point's ODC-BY are
+  attribution-only too. Rows in [`data_sources/belgium.md`](data_sources/belgium.md).
+- **MUST DISPLAY**: "Source: De Lijn – Open Data – [date of dataset update]"
+  (art. 4), re-dated at every refresh; the modified-data line; the license
+  title and link (which also meets the Flemish license's "bron: De Lijn");
+  the portal.
+- **MUST NOT**: link delijn.be or take its content (its website terms allow
+  private use only and ask the webmaster's say before a link); imply official
+  status or approval. Its line pages are read privately for station counts
+  only.
 
 **150. LETEC (Charleroi and Liège) — required, and DISPLAYED**
 (written into `render_site_notices()` 2026-10-04, from staging's licence read

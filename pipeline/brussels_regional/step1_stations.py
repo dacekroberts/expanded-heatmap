@@ -50,7 +50,7 @@ def main():
 
     def reason_outside(name, pt):
         if base(name) in config.CITY_CORRIDOR or city.contains(pt):
-            return "in the City of Brussels (21004), on the Brussels page"
+            return "in the City of Brussels (21004), outside the 18 communes: on the Brussels page"
         return "outside the Brussels-Capital Region"
 
     build(config, label="Brussels (Regional)", fetch=FETCH, inside_of=inside_of,
