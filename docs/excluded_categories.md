@@ -5388,6 +5388,61 @@ stations outside are listed on Anyang's page): Line 1 and Line 4,
 have, and was built for the share of its storefronts within a ring instead
 (owner, 2026-09-29). No other line has a station in the city.
 
+### Daejeon - SEMAS's national storefront register, all three buckets
+
+**Incheon's source and rules**, as for Goyang, Seongnam and Yongin (the
+sections above).
+
+**Out by name**: hostess bars 266, dance halls 18, staff canteens 164,
+household fuel dealers 114; and, as in Incheon, offices, education, health,
+estate agents, lodging, recreation, repairs, funeral services, wedding halls
+and matchmaking.
+
+**Names withheld** - 79 storefronts whose registered name is a bare personal
+name at an address that reads residential.
+
+**Stations**: Line 1 of the Daejeon Metro, 22 stations, every one inside the
+city. Line 2, a tram under construction, is not drawn, nor are Korail's
+intercity lines.
+
+### Gwangju - SEMAS's national storefront register, all three buckets
+
+**Incheon's source and rules**, as for Goyang, Seongnam and Yongin (the
+sections above). Since 2026 Gwangju's five districts sit in the merged
+전남광주통합특별시 with all of South Jeolla; the map keeps only the five.
+
+**Out by name**: hostess bars 571, dance halls 38, staff canteens 173,
+household fuel dealers 70; and, as in Incheon, offices, education, health,
+estate agents, lodging, recreation, repairs, funeral services, wedding halls
+and matchmaking.
+
+**Names withheld** - 82 storefronts whose registered name is a bare personal
+name at an address that reads residential.
+
+**Stations**: Line 1 of the Gwangju Metro, 20 stations, every one inside the
+city. Line 2, under construction, is not drawn, nor are Korail's intercity
+lines.
+
+### Gimhae - SEMAS's national storefront register, all three buckets
+
+**Incheon's source and rules**, as for Goyang, Seongnam and Yongin (the
+sections above). Busan's map counts businesses from a different record, so
+the two pages never add up.
+
+**Out by name**: hostess bars 503, dance halls 9, staff canteens 155,
+household fuel dealers 89; and, as in Incheon, offices, education, health,
+estate agents, lodging, recreation, repairs, funeral services, wedding halls
+and matchmaking.
+
+**Names withheld** - 12 storefronts whose registered name is a bare personal
+name at an address that reads residential.
+
+**Stations**, cut at Gimhae's boundary (the line drawn to its end; stations
+outside are listed on Gimhae's page): the Busan–Gimhae LRT, 12 stations in
+Gimhae; its other 9 are in Busan and on Busan's map. Busan Lines 2 and 3,
+which pass near the city, have no station in Gimhae and are not drawn, nor is
+Korail's intercity line.
+
 ### Tbilisi - a national register of businesses, district centers left off, and a person's business shown by category
 
 **The source** is the National Statistics Office of Georgia's Statistical

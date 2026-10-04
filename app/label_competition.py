@@ -238,6 +238,9 @@ TEXT_WIDTH = {
     "Kawasaki": 62.6, "Yokosuka": 63.7, "Himeji": 40.3, "Nishinomiya": 82.1, "Takamatsu": 72.8,
     "Toyota": 46.9, "Yokkaichi": 63.8, "Ōtsu": 31.8, "Nara": 30.8, "Hamamatsu": 79.2,
     "Higashiōsaka": 89.1, "Kurume": 51.3, "Sasebo": 49.5, "Shimonoseki": 85.5,
+    # The Korea sweep, 2026-10-04, the same method; controls Goyang, Uijeongbu,
+    # Anyang, Busan and Daegu, each reproduced to 0.1 px.
+    "Daejeon": 54.4, "Gwangju": 58.2, "Gimhae": 49.5,
     # Dallas, 2026-09-30; controls Prague, Tokyo, Houston, Toronto, Yokohama.
     "Dallas": 40.1,
     "Guadalajara (Regional)": 152.7, "Madrid": 47.2,

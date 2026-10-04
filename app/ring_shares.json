@@ -833,5 +833,20 @@
   "in_ring": 641,
   "all": 4406,
   "map_blob": "1652039d6a120c9099442012ead4aa494b16100b"
+ },
+ "daejeon": {
+  "in_ring": 21252,
+  "all": 50939,
+  "map_blob": "9899bafed8b925f543b6a9971bf261b635346df1"
+ },
+ "gwangju": {
+  "in_ring": 14077,
+  "all": 47214,
+  "map_blob": "16c06ed18461770802cb9504c7d6c2b915f577c2"
+ },
+ "gimhae": {
+  "in_ring": 6736,
+  "all": 17879,
+  "map_blob": "68bebc298722d734d57e79f0ec9da663a32e20cf"
  }
 }

@@ -452,6 +452,28 @@ def by_country(lines, secs, built_rows, ready, actual, candidates, n_built):
                         "apart from the candidates, owner 2026-10-02)")
     band_of = {k: letter for letter, mem in ready.items() for k in mem}
     built_by_country = {key(c): (n, len(names)) for _, c, n, names, _ in built_rows}
+    # A country whose flag marks entries in more than one Built row is counted
+    # by those entries, not by a row that happens to share its name: the
+    # South Korea view (owner, 2026-10-04) is a Built row written "**South
+    # Korea** (5; ...)" holding 5 of the country's 16 cities, the Seoul Capital
+    # Area row the other 11.
+    flag_rows, flag_names = {}, {}
+    for t, bs, be in secs:
+        if not re.match(r"^##\s+Built\b", t):
+            continue
+        for h, brows in tables(lines, bs, be):
+            if [x.lower() for x in h[:2]] != ["country", "cities"]:
+                continue
+            for _, brow in brows:
+                for fl in set(FLAG_RE.findall(brow[1])):
+                    flag_rows[fl] = flag_rows.get(fl, 0) + 1
+                for seg in brow[1].split(" · "):
+                    for fl in set(FLAG_RE.findall(seg)):
+                        flag_names[fl] = flag_names.get(fl, 0) + 1
+    for _, crow in rows:
+        cflags = FLAG_RE.findall(crow[0])
+        if len(cflags) == 1 and flag_rows.get(cflags[0], 0) > 1:
+            built_by_country[key(cell_name(crow[0]))] = (None, flag_names[cflags[0]])
 
     sum_built = sum_cand = sum_restr = 0
     total = None

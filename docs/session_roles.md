@@ -99,6 +99,7 @@ step instead of an implicit race.
 | Four extensions to built cities (**LANDED 2026-10-03**, worktree removed and its handoff note deleted; released 2026-10-02; one lead session; registered 2026-10-03) | `.claude/worktrees/extensions` | `extensions-build`, never pushed to master (app/ lands at review time); `data/` and `.venv-lean` are junctions to the main checkout's. **Claimed 2026-10-03:** notices **129-136** as pre-assigned, taken in build order as the reads require them (Long Beach's, then New Westminster's, Coquitlam's and Burnaby's OGL statements); no new pages |
 | Belgium builds, six pages (**LANDED 2026-10-04**, its handoff note deleted; released 2026-10-03; one lead session with agents; registered 2026-10-04) | `.claude/worktrees/belgium` | `belgium-build`, never pushed to master (app/ lands at review time); `data/` and `.venv-lean` are junctions to the main checkout's. **Claimed 2026-10-03:** pages **196-201** as pre-assigned (Brussels 196, Antwerp 197, Ghent 198, Charleroi 199, Liège 200, Brussels (Regional) 201); notices **144-152**, one per source as the handoff's table assigns them |
 | Other cities: Liverpool (Regional), Tacoma, Mendoza (**LANDED 2026-10-04**, its handoff note deleted; released 2026-10-03; one lead session with agents; registered 2026-10-03) | `.claude/worktrees/new-cities` | `new-cities-build`, no upstream, never pushed to master (app/ lands at review time); `data/` and `.venv-lean` are junctions to the main checkout's. **Claimed 2026-10-03:** pages **193** Mendoza, **194** Tacoma, **195** Liverpool (Regional); notices **141** Mendoza, **142** Tacoma, **143** Liverpool's Food Standards Agency notice; the Department for Transport, NaPTAN notice 86 reworded, no new notice |
+| Korea sweep builds, Daejeon, Gwangju and Gimhae (**LANDED 2026-10-04**, its handoff note deleted; released 2026-10-03; one lead session, sequential; registered 2026-10-03) | `.claude/worktrees/korea-sweep` | `korea-sweep-build`, never pushed to master (app/ lands at review time); `data/` and `.venv-lean` are junctions to the main checkout's. **Claimed 2026-10-03:** pages **190** Daejeon, **191** Gwangju, **192** Gimhae (staging's pre-assignment); no notices (SEMAS's 68 covers all three) |
 | Tram kit, the ten other T1 cities (2026-09-30: `docs/handoff_tram_kit_2026-09-30.md`; holding before builds) | `.claude/worktrees/tram-kit` | `worktree-tram-kit`; `data/` and `.venv-lean` are junctions to the main checkout's |
 | Build `<city>` | `.claude/worktrees/<city>` | `<city>-build` - the name every build since Dublin has actually used, rather than the `worktree-<role>` form above. Delete the branch when the worktree goes: merged build branches have tended to outlive their worktrees |
 
@@ -202,12 +203,12 @@ caches, and Rennes' feed is quota-limited. Before removing a worktree:
 at once never take the same "next free" number: the UK six **156–161**
 (build order), the Japan batch **162–173** (its kit's table order),
 Seattle (Regional) **174** and Tbilisi **175**. Notice numbers are claimed
-here, by the session, before one is written; open claims (staging,
-2026-10-03, the coverage sweep's kits): the Korean three, pages 190, 191
-and 192 and no notices; the other cities (Mendoza, Tacoma, Liverpool
-(Regional)), pages 193, 194 and 195 and notices **141–143** and 153 (Liverpool's Ordnance Survey notice); Belgium, pages
-196 to 201 and notices **144–152**; 133–136, released unused by the four
-extensions on 2026-10-03, stay unassigned; the next free notice is 154. Every earlier block has landed:
+here, by the session, before one is written; no claims are open;
+133–136, released unused by the four extensions on 2026-10-03, stay
+unassigned; the next free notice is 154. Every earlier block has landed:
+the coverage sweep's on 2026-10-04 (the Korean three, pages 190–192 and no
+notices; Mendoza, Tacoma and Liverpool (Regional), pages 193–195 and
+notices 141–143 and 153; Belgium, pages 196–201 and notices 144–152);
 Japan wave 2's 115–128, the extensions' 129–132 and lane-app's 137–140 on
 2026-10-03, and everything up to 114 on 2026-10-02. Pages: Japan wave 2 took
 176–189; the extensions took none; the next free page is 202.

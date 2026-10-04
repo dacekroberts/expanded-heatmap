@@ -1,0 +1,51 @@
+{
+  "semas": {
+    "file": "sbiz_15083033.zip",
+    "page": "https://www.data.go.kr/data/15083033/fileData.do",
+    "url": "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003695831&fileDetailSn=1&insertDataPrcus=N",
+    "bytes": 352699739,
+    "sha256": "57aa361544108ff4fc73334f87d2ced61e41fe8638dd70bcd842930f865d2386",
+    "retrieved": "2026-09-29T09:34:52+00:00",
+    "edition": "2026-06-30"
+  },
+  "osm": {
+    "file": "osm_all.json",
+    "host": "overpass-api.de",
+    "query": "[out:json][timeout:600];relation[\"type\"=\"route\"][\"route\"~\"^(subway|light_rail|monorail|tram)$\"](36.17,127.22,36.52,127.57)->.r;(node[\"railway\"=\"station\"](36.17,127.22,36.52,127.57);way[\"railway\"=\"station\"](36.17,127.22,36.52,127.57);)->.s;relation[\"boundary\"=\"administrative\"][\"admin_level\"=\"4\"][\"name\"=\"대전광역시\"](36.17,127.22,36.52,127.57)->.b;.r out geom;node(r.r);out body;.s out tags center;.b out geom;",
+    "bytes": 203963,
+    "sha256": "11f5ced2465ec2ec31ae7b9f672659b46a4fc9ac7ed0fa54736fa4a7767efd38",
+    "osm_base": "2026-10-04T07:00:50Z"
+  },
+  "osm_rail": {
+    "file": "osm_rail_routes.json",
+    "split_from": "osm_all.json",
+    "bytes": 86731,
+    "sha256": "ace7a201a94b5fca64c1c83ae75f47a352f300a72c7f100385771ad0bb1f6a11",
+    "elements": {
+      "relation": 3,
+      "node": 44
+    },
+    "osm_base": "2026-10-04T07:00:50Z"
+  },
+  "osm_station_names": {
+    "file": "osm_station_names.json",
+    "split_from": "osm_all.json",
+    "bytes": 19042,
+    "sha256": "efb105f3fed008d541e1553300c76ac7e3b23bce11c4db2e93a7c05dc4f61f6c",
+    "elements": {
+      "node": 27,
+      "way": 1
+    },
+    "osm_base": "2026-10-04T07:00:50Z"
+  },
+  "osm_boundary": {
+    "file": "osm_boundary.json",
+    "split_from": "osm_all.json",
+    "bytes": 98017,
+    "sha256": "7ef95ee267d446e53e304305c14fb359cc10122b2dff83035b010086c9de065b",
+    "elements": {
+      "relation": 1
+    },
+    "osm_base": "2026-10-04T07:00:50Z"
+  }
+}
