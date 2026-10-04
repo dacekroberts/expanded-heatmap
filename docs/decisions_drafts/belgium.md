@@ -21,6 +21,16 @@ hands the drafts off, then empties this file (owner, 2026-09-30).
   3. **One placement pass for Den Haag and Rotterdam** in the Europe view.
   4. **A broader Overpass query for Antwerp** (every tram route in the box),
      after the narrow one returned nothing.
+- **Done, call 2 (owner: "Yes to own communes", "Yes move dot")**: the
+  pages stay separate; Brussels (Regional)'s macro dot moves into its own
+  communes. Candidates: the 18 communes' centroid and each commune's
+  representative point, kept if inside the 18 and outside the City, each
+  scored by `check_macro_labels.py` with four label sides for the pair. The
+  centroid fails; the nearest passing point is Forest's (50.814, 4.3239),
+  3.5 km from the centroid and 2.5 km outside the City, with Brussels' label
+  above its dot as before and Brussels (Regional)'s below. PROBLEMS 0 in
+  every region at every width. The master list's Built table gives Belgium
+  its own row (Europe back to 23), as the view requires.
 - **Done, call 3**: of 144 offset pairs for Den Haag and Rotterdam in the
   Europe view scored by `check_macro_labels.py`, one has no problem at 375,
   768 and 1200 px: Rotterdam above-right ("start", 10, -12), Den Haag
