@@ -549,7 +549,7 @@ _BRAZIL = ("São Paulo", "Rio de Janeiro (Regional)", "Belo Horizonte (Regional)
            "Salvador", "Fortaleza (Regional)", "Porto Alegre (Regional)",
            "Recife (Regional)", "Santos (Regional)")
 _KOREA_SEMAS = ("Incheon", "Goyang", "Seongnam", "Yongin", "Suwon", "Bucheon",
-                "Namyangju", "Ansan", "Uijeongbu", "Anyang", "Daejeon", "Gwangju")
+                "Namyangju", "Ansan", "Uijeongbu", "Anyang", "Daejeon", "Gwangju", "Gimhae")
 _FRANCE = ("Paris", "Marseille", "Toulouse", "Lille (Regional)", "Rennes",
            "Le Mans", "Besançon", "Avignon", "Tours", "Dijon", "Reims", "Orléans",
            "Mulhouse", "Brest", "Saint-Étienne", "Nice", "Montpellier",
@@ -1036,7 +1036,7 @@ _NOTICES = [
      "Light Rail lines and stations, and its boundary, Seoul's subway lines and stations and "
      "its boundary, the subway, light-rail and Korail lines and stations of Daegu, Busan, "
      "Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, "
-     "Anyang, Daejeon and Gwangju, and those cities' boundaries, the train and metro routes of Sydney and "
+     "Anyang, Daejeon, Gwangju and Gimhae, and those cities' boundaries, the train and metro routes of Sydney and "
      "Melbourne and their City boundaries, Buenos Aires's Subte and Premetro routes and "
      "its boundary, Seattle's Link 1 and 2 Lines, "
      "the lines and stations of London's Underground, DLR, Elizabeth line and "
@@ -2485,8 +2485,8 @@ _NOTICES = [
     # policy read as covering its homepage (owner, 2026-09-29, Daegu's reading). Written
     # under the owner's pre-approval of this build's prose. Covers every Korean city on
     # the register (Incheon; the Gyeonggi satellites add their names).
-    Notice(68, "Small Enterprise and Market Service (Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang, Daejeon, Gwangju)",
-     "Storefronts for Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang, Daejeon and Gwangju are from the Small "
+    Notice(68, "Small Enterprise and Market Service (Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang, Daejeon, Gwangju, Gimhae)",
+     "Storefronts for Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang, Daejeon, Gwangju and Gimhae are from the Small "
      "Enterprise and "
      "Market Service's "
      "commercial-district register (소상공인시장진흥공단, 상가(상권)정보, via 공공데이터포털 "

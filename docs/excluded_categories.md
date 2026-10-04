@@ -5148,6 +5148,26 @@ name at an address that reads residential.
 city. Line 2, under construction, is not drawn, nor are Korail's intercity
 lines.
 
+### Gimhae - SEMAS's national storefront register, all three buckets
+
+**Incheon's source and rules**, as for Goyang, Seongnam and Yongin (the
+sections above). Busan's map counts businesses from a different record, so
+the two pages never add up.
+
+**Out by name**: hostess bars 503, dance halls 9, staff canteens 155,
+household fuel dealers 89; and, as in Incheon, offices, education, health,
+estate agents, lodging, recreation, repairs, funeral services, wedding halls
+and matchmaking.
+
+**Names withheld** - 12 storefronts whose registered name is a bare personal
+name at an address that reads residential.
+
+**Stations**, cut at Gimhae's boundary (the line drawn to its end; stations
+outside are listed on Gimhae's page): the Busan–Gimhae LRT, 12 stations in
+Gimhae; its other 9 are in Busan and on Busan's map. Busan Lines 2 and 3,
+which pass near the city, have no station in Gimhae and are not drawn, nor is
+Korail's intercity line.
+
 ### Tbilisi - a national register of businesses, district centers left off, and a person's business shown by category
 
 **The source** is the National Statistics Office of Georgia's Statistical

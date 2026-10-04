@@ -4,6 +4,45 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - Gimhae built: the Busan–Gimhae LRT on SEMAS's register, its own page
+
+**Built** on branch `korea-sweep-build`, page 192, region East Asia, from
+Daejeon's files (Incheon's module); its own page, not a Busan regional map
+(owner, 2026-10-03). Downloads and page prose under the owner's pre-approval
+(2026-09-30); the page is Bucheon's and Incheon's approved text with Gimhae's
+line. **17,879 storefronts** (food service 8,558, retail 6,662, personal
+services 2,659), exactly the brief's, from 26,700 SEMAS rows under 48250;
+**6,736 within the rings (37.7%)**. **12 stations** inside Gimhae, a 729 m
+median gap (minimum 596 m, Gimhae City Hall / Buwon), the brief's figure:
+standard rings. `mode` light_rail (the brief's, for the owner's approval with
+the build), `rail_extra` "—" (a grade-separated driverless light metro, as
+Busan, Uijeongbu and Yongin record theirs), `coverage` full, `categories`
+"All three".
+
+- **The LRT drawn as Busan draws it**: `ref=BGL`, light_rail, #8652A1,
+  "Busan–Gimhae LRT", to both ends; Gimhae's own Overpass query (one, first
+  try), Busan's cache never read. Busan Lines 2 and 3 reach the box with no
+  station in Gimhae: placed as not drawn.
+- **Gate 3 exact** on the whole line (21, the operator's station list and
+  Busan's `LINE_STATION_COUNTS`). The 12 inside Gimhae are **the same 12
+  names** Busan's committed `excluded_stations.csv` lists as outside Busan;
+  Gimhae's lists Busan's 9 as outside Gimhae.
+- **The light-rail test passes**, re-measured: 729 m median spacing, every
+  5-6 minutes all day (the operator's 부원 timetable, the brief).
+- **Boundary**: OSM relation 7224485 (김해시, admin_level 6), **460 km²**,
+  gated at 450-470.
+- **Line color**: #8652A1, Delta-E 33.8 from Retail, kept as Busan's.
+- **Personal exposure: PASS.** 0 of 17,879 rows show a Korean personal name
+  at a residential address; 12 withheld by step 2 (5 of them in-ring pins).
+- **Licence**: notice 68 and notice 1 gain Gimhae; no new notice.
+- **Page prose proposal**: "Not drawn: Korail's intercity line. No other rail
+  line has a station in the city." (Uijeongbu's "No other rail line" sentence
+  with Korail named.)
+- **Downstream**: notice 68 a caption, notice 1 rail, boundary and names;
+  the known SEMAS card hold applies (notice 68 only).
+- **Master list**: Gimhae's Band A row marked built; South Korea has no
+  candidate left.
+
 ### 2026-10-04 - Gwangju built: Gwangju Metro Line 1 on SEMAS's register, the merged member's codes and a five-district boundary
 
 **Built** on branch `korea-sweep-build`, page 191, region East Asia, from
