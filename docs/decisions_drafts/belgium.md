@@ -4,6 +4,23 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then empties this file (owner, 2026-09-30).
 
+### 2026-10-04 - Brussels (Regional): the privacy verdict, a call for the owner
+
+- **Recommended: publish, with one pin's name withheld by key.**
+  `check_personal_exposure.py brussels_regional` on the rendered map: 10,006
+  in-ring pins, 9,424 distinct names. Step 2 keeps KBO's establishment units
+  of companies (legal persons) only and never opens `contact.csv`, so no pin
+  can fall back to a natural person; the dot's name is the unit's
+  commercial name (10,981 of 13,680) or the company's (2,699). 3,010 pins
+  (30.1%) match the person-name heuristic, the same share as the City's
+  street survey (30.0%), as company and trade names in a European city do.
+  1 pin carries a person-like name at an address the check reads as a
+  residential unit; the recommendation withholds that name by key
+  (`config.PERSON_NAMED`, the pin then shows its type) without reading it by
+  eye, under the standing rule that no person's name is printed. The
+  alternative, publishing all, rests on every name being a legal person's.
+  `PERSON_NAMED` stays empty until the owner answers.
+
 ### 2026-10-04 - Brussels (Regional): KBO control re-based on brussels_hub, 1-point tolerance (owner)
 
 - **The diagnostic confirmed half of call 6, and the owner approved the

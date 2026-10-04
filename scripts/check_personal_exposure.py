@@ -885,6 +885,13 @@ REGISTRIES.update({
                processed="businesses_clean.csv", address=None)
     for slug in ("charleroi", "liege")
 })
+# Brussels (Regional): KBO's establishment units of companies (legal persons)
+# only; the dot's name is the unit's commercial name, else the company's.
+# `contact.csv` is never opened and no natural person's denomination is read
+# (`pipeline/countries/belgium_kbo.py`). A company name read as a person's own
+# shows the unit's type (config.PERSON_NAMED, keys).
+REGISTRIES["brussels_regional"] = dict(raw=None, trade=None, owner=None,
+                                       processed="businesses_clean.csv", address=("address",))
 
 # Unit designators that suggest a residence, as opposed to a commercial suite.
 # Splitting these is why Los Angeles' jewellery district stopped reading as 42%
