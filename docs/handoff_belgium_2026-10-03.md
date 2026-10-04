@@ -23,57 +23,32 @@ countries are listed (the `add-country` skill's checklist).
 
 **Delete this file** once all six pages have landed.
 
-## SAVEPOINT 2026-10-04, second (all six built; four owner calls open)
+## SAVEPOINT 2026-10-04, third (all six built, every owner call applied; ready for review time)
 
-Branch `belgium-build`, merged with origin/master at 888bdbd9; nothing pushed.
-Decisions in `docs/decisions_drafts/belgium.md`, newest first.
+Branch `belgium-build`, merged with origin/master at cd358bd2; nothing
+pushed. **`check_all.py`: 48 of 48 pass.** Decisions in
+`docs/decisions_drafts/belgium.md`, newest first.
 
-- **All six pages built and committed**: Brussels (196), Antwerp (197),
-  Ghent (198), Charleroi (199), Liège (200), Brussels (Regional) (201):
-  steps 1-3, maps, pages, city entries, notices 144-152, source rows,
-  What Is Excluded sections, privacy rows, map_inconsistencies rows (tables
-  A-D), ring shares, macro facts, the master list (Built 164, Europe 29,
-  Bands A 5 and B 1), README and rendered surfaces regenerated (only the
-  six added; nothing else moved).
-- **Applied from the six approved calls**: the cafeteria exception; the
-  Brussels, Charleroi and Liège privacy rows (`publish`); the Belgium macro
-  view (Czechia's mechanism); the KBO control re-based on `brussels_hub` at
-  a 1-point tolerance (owner, after the diagnostic confirmed only Retail's
-  half); step 2 for Brussels (Regional) then ran green (13,680 storefronts).
-- **`check_all.py`**: every check passes except `check_macro_labels.py`
-  (9 problems, below). Not yet run: `drift_check.py` (heavy; one job) and
-  the merge with origin/master.
+- **All six pages built**: Brussels (196), Antwerp (197), Ghent (198),
+  Charleroi (199), Liège (200), Brussels (Regional) (201), with notices
+  144-152, source rows, What Is Excluded sections, privacy rows (all
+  `publish` or `publish-structural`), map_inconsistencies rows, ring
+  shares, macro facts, the master list (Built 164, candidates 19 after the
+  probe wave's merge), README, rendered surfaces and project context.
+- **Drift check: zero drift for the six; baselines recorded.**
+- **Every owner call applied**: the six of the first round; then
+  Brussels (Regional)'s one name withheld by key; its macro dot moved into
+  its own communes (Forest's point); Den Haag and Rotterdam placed in the
+  Europe view (labels 0 problems everywhere); Antwerp's two OSM queries run
+  (OSM has no relation for lines 3, 9 or 15, so the left-bank stations stay
+  unlisted, as the page says).
 
-**Open for the owner (recommendation, then the tradeoff):**
-
-1. **Brussels (Regional)'s privacy verdict** (row `pending`): 1 pin has a
-   person-like company name at an address the exposure check reads as a
-   residential unit. Recommended: withhold that one name by key (the pin
-   shows its type), not read by eye. Alternative: publish all, resting on
-   every name being a legal person's.
-2. **The Brussels and Brussels (Regional) dots sit 2.4 px apart** in the
-   Belgium view (both near central Brussels), so their pills overlap at
-   every width. Recommended: move Brussels (Regional)'s dot to a point
-   inside its 18 communes clear of the City (Ixelles or Etterbeek), then
-   place the two labels on opposite sides. Alternative: list the pair in
-   `KNOWN_STACKED` for the UI pass, as Kobe and Osaka are.
-3. **Rotterdam's Europe label covers Liège's (unlabelled) dot.** No
-   offset clears it: ten tried, each trades Liège for Den Haag, Amsterdam,
-   London or the UK dots. Recommended: give Den Haag and Rotterdam's pair
-   one more placement pass together (taste, so the owner's); alternative:
-   accept Liège's dot under the pill until the UI pass.
-4. **Antwerp's left bank**: the approved Overpass query (tram route
-   relations 3, 9 and 15, `fetch_sources.py --left-bank-trams`) found no
-   such relations on overpass-api.de (an empty answer, twice) and timed out
-   on kumi.systems; the one retry after the minute did the same (drafts).
-   A broader query (every tram route in the box) is a new query: the owner's call; else De Lijn's notice,
-   which the build cannot republish.
-
-**Still to do after those**: the drift check; merge origin/master and
-`check_all.py`; `docs/project_context.md`'s current state; the downstream
-note to Visuals and Analytics after the push (every notice caption-only;
-open terms questions: hub.brussels's "Google Maps" credit, KBO's declared
-purpose).
+**At review time (the owner's call):** land `belgium-build` on master;
+`check_deploy_imports.py` and a reboot (app/ changes); `deploy-verify`
+with `scope: city-added`; then `downstream_changes.py` to Visuals and
+Analytics (six new cities; every notice caption-only; open terms questions:
+hub.brussels's "Google Maps" credit, KBO's declared purpose). Then this
+file is deleted.
 
 ---
 
