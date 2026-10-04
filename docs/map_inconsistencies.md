@@ -373,10 +373,10 @@ really shopfronts. Several pages say which way their map leans.
   bars at four station areas); London, Glasgow, Newcastle (Regional) and
   Manchester (Regional) and the rest of the UK six (a premises stays listed until the council
   removes it, as each page says).
-- **Undisclosed on the city page:** San Francisco (only about 37% of rows carry a
-  NAICS code) and Los Angeles (about 9% carry none), so both are floors. San Diego
-  undercounts neighbourhoods registered under their own name. All three are open
-  `PLAN.md` items.
+- **Stated on the city page since 2026-10-04 (owner):** San Francisco (about one
+  open business in five has no NAICS code and is left off) and Los Angeles (about
+  one City row in eleven), so both are floors. San Diego's neighborhoods are
+  counted since its city limits replaced the address-name match.
 - **Reason:** how each source is compiled.
 
 ### 11. What falls inside a category differs at the edges
@@ -736,7 +736,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 |---|---|---|---|---|---|
 | **United States** | | | | | |
 | San Diego | Tax register | Business Tax Certificates | NAICS | 1,079 / 551 / 598 | Undercount: neighbourhoods registered under own name (PLAN) |
-| San Francisco | License register | Registered Business Locations | NAICS | 5,038 / 4,591 / 2,091 | Floor: about 37% of rows have NAICS (DEC) |
+| San Francisco | License register | Registered Business Locations | NAICS | 3,556 / 3,254 / 1,492 | Floor: 21.4% of open locations carry no NAICS code (2026-10-04); closed locations left out since 2026-10-04 (were 4,668 of 16,394 pins) |
 | Los Angeles (Regional) | Tax register; Long Beach's license register | Listing of Active Businesses; Long Beach Business Licenses Public View | NAICS; Long Beach's license types | 8,360 / 4,094 / 2,188 | Floor: about 9% of LA's rows lack NAICS (DEC) |
 | Chicago | License register | Business Licenses | Own licence types | 5,476 / 4,196 / 2,049 | — |
 | New York | 4 activity registers | DOHMH, NYS food stores, NYS salons, DCWP | Per-source dispatch | 14,822 / 22,060 / 7,478 | Retail thin |
@@ -937,7 +937,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 |---|---|---|---|
 | **United States** | | | |
 | San Diego | Source coordinates (98.4% populated) | None on page | Nonstore 454, parking (project-wide) |
-| San Francisco | Source point | Surface stops thinned | 812990 "solo massage"; individual practitioner licences (tattoo, massage), 2026-10-01 |
+| San Francisco | Source point | Surface stops thinned | 812990 "solo massage"; individual practitioner licences (tattoo, massage), 2026-10-01; closed locations (an end date on or before the export date), 2026-10-04 |
 | Los Angeles (Regional) | Source + Census geocoder for corrupt points (98.7% recovered); Long Beach's register points | Corrupt coordinates geocoded | 812990 catch-all (30.7% of storefronts); Long Beach's booth and practitioner licenses |
 | Chicago | Source coordinates | Licences without coordinates left off | Home-based, peddlers, endorsements, Limited Business |
 | New York | Source + Census geocoder (582 of 1,449 recovered; 1.4% lost) | Retail thin; possible double counts | Person-held licences, contractors, chair renters |
@@ -1133,7 +1133,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 |---|---|---|---|---|---|---|
 | **United States** | | | | | | |
 | San Diego | UNKNOWN (2026-09-18) | — | 0.6 mi | Yes | 24% | Trade name |
-| San Francisco | UNKNOWN (≈2026-09-19) | — | 0.6 mi | Yes | 72% | Name |
+| San Francisco | 2026-09-18, the export's `data_as_of` (≈2026-09-19) | — | 0.6 mi | Yes | 71% | Name |
 | Los Angeles (Regional) | UNKNOWN (≈2026-09-19); Long Beach's layer, edited nightly, fetched 2026-10-03 | — | 0.6 mi | Yes | 24% | Trade name, else registrant (Long Beach: else street address) |
 | Chicago | Active licences (2026-09-20) | — | 0.6 mi | Yes | 57% | Name |
 | New York | UNKNOWN (2026-09-21) | — | 0.3 mi | Yes | 71% | Name |
@@ -1415,11 +1415,13 @@ wording lands at review time.
     Montréal's REM and exo, are not mentioned in any file read. Unknown whether they
     were considered. *(2026-09-27: the REM is now drawn; exo, Cablebús and the
     Tren Suburbano remain open.)*
-13. **Undisclosed floors in the first US cities.** San Francisco (about 37% of rows
-    have NAICS) and Los Angeles (about 9% have none), from DEC's 2026-09-18/19
-    entries, and San Diego's neighbourhood undercount (La Jolla). All three are open
-    in `PLAN.md` (around lines 1675–1682) and absent from the pages. It is also
-    unknown whether the SF and LA figures still hold after later rebuilds.
+13. **Undisclosed floors in the first US cities: settled 2026-10-04 (owner).**
+    Re-measured: Los Angeles 8.8% of City rows have no NAICS code; San Francisco
+    21.4% of OPEN rows (the 37% counted closed locations, which the map also
+    showed until 2026-10-04: 4,668 pins); San Diego dropped 724 storefronts inside
+    the city by matching the address's city name. Los Angeles and San Francisco
+    now state their undercount on their pages; San Diego is decided by its
+    boundary instead, and closed San Francisco locations are left out.
 14. **Car dealers.** `madrid_epigrafe.py:60` and `norway_sn2025.py:17` justify
     counting car dealers because "every other city in this project already counts a
     car dealer as retail". `france_naf.py` maps division 47 only, so the five French

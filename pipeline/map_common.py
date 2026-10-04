@@ -18,6 +18,7 @@ import html
 import json
 import re
 import zipfile
+from pathlib import Path
 
 import folium
 import geopandas as gpd
@@ -2767,9 +2768,12 @@ def add_pin_layer(m, rows, group_name, color, tooltip_field_label,
             var STATIONS = {json.dumps(list(stations))};
             var BANDS = {json.dumps(list(bands))};
             return function (row) {{
+                // bubblingMouseEvents false: a click on a dot of a spiderfied
+                // group no longer reaches the map, where Leaflet.markercluster
+                // unspiderfies on any click (desktop; owner, 2026-10-04).
                 var marker = L.circleMarker(new L.LatLng(row[0], row[1]), {{
                     radius: 5, color: '{color}', fillColor: '{color}',
-                    fillOpacity: 0.85, weight: 1
+                    fillOpacity: 0.85, weight: 1, bubblingMouseEvents: false
                 }});
                 var html = '<b>' + row[2] + '</b><br>' +
                     '{tooltip_field_label}: ' + CATEGORIES[row[3]] + '<br>' +
@@ -2945,6 +2949,19 @@ OSM_ATTRIBUTION = (
     '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" '
     'rel="noopener noreferrer">OpenStreetMap</a> contributors'
 )
+
+
+_FINGERPRINT_TABLE = Path(__file__).with_name("fingerprint_marks.json")
+_fingerprint_cache = {}
+
+
+def fingerprint_mark(ident):
+    """`ehm:v1:<ident>:<check>` from pipeline/fingerprint_marks.json, or None
+    when the table has no entry (scripts/fingerprint.py explains the marks)."""
+    if not _fingerprint_cache and _FINGERPRINT_TABLE.exists():
+        _fingerprint_cache.update(json.loads(_FINGERPRINT_TABLE.read_text(encoding="utf-8")))
+    check = _fingerprint_cache.get(ident)
+    return f"ehm:v1:{ident}:{check}" if check else None
 
 
 def render_heatmap(*, output_path, map_title, city_name, system_name,
@@ -3127,7 +3144,6 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
             tooltip=folium.Tooltip(f"<b>{html.escape(station['station'])}</b><br>{html.escape(reason)}",
                                    sticky=True),
         ).add_to(station_layer)
-    station_layer.add_to(m)
 
     # Transit lines: always-on context, permanent label + legend entry each
     # (label tips were worked out above, before the map was created).
@@ -3146,6 +3162,10 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
                             class_name=f"hm-line hm-line-{n}").add_to(rail_layer)
         add_line_label(rail_layer, tips[key], label, color, dark=dark_labels[key], line=n)
         rail_layer.add_to(m)
+    # Stations after the lines, so they draw above them: a mouse over a
+    # station's centre now finds the station, not the line through it (0 of 6
+    # on Paris and Tokyo before; owner, 2026-10-04).
+    station_layer.add_to(m)
 
     # Category grouping via the city's own taxonomy, never a hardcoded one.
     # A multi-field taxonomy (Chicago) lists its extra columns in EXTRA_COLUMNS.
@@ -3255,6 +3275,16 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     if lang is not None:
         m.get_root().header.add_child(folium.Element(
             f"<style>:root {{ --hm-font: {font_stack(lang)}; }}</style>"))
+
+    # The authorship mark (scripts/fingerprint.py; owner, 2026-10-04):
+    # metadata only, never visible, read from the committed table, so no key
+    # is needed to render. A map with no table entry renders unmarked and
+    # `fingerprint.py coverage` fails it.
+    mark = fingerprint_mark(f"map/{output_path.parent.name}")
+    if mark:
+        m.get_root().header.add_child(folium.Element(
+            f'<meta name="generator" content="expanded-heatmap ehm:v1">\n<!-- {mark} -->'))
+        m.get_root().html.add_child(folium.Element(f'<div hidden data-ehm="{mark}"></div>'))
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     m.save(str(output_path))

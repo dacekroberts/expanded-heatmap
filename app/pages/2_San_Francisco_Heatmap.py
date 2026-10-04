@@ -64,6 +64,8 @@ st.markdown(
 
 - Where a business is registered under a person's name alone at an apartment or other dwelling
   unit, the map shows its street address instead of a name.
+- About one open business in five gives no industry code and is left off, so the map undercounts
+  by about one storefront in eight to one in five.
 """
 )
 

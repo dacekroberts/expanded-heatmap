@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**31 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**33 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-04**
 
@@ -55,6 +55,8 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [The owner's calls of the evening: US dates on every caption, the site-wide notices folded, SFMTA's notice kept, Boston measured, communications filed](#2026-10-04---the-owners-calls-of-the-evening-us-dates-on-every-caption-the-site-wide-notices-folded-sfmtas-notice-kept-boston-measured-communications-filed)
 - [The efficiency review's three changes adopted, and the review itself a skill (owner)](#2026-10-04---the-efficiency-reviews-three-changes-adopted-and-the-review-itself-a-skill-owner)
 - [Japan's carry-overs: the 20 built cities take wave 2's rules, delis by form count as Food shops (owner)](#2026-10-04---japans-carry-overs-the-20-built-cities-take-wave-2s-rules-delis-by-form-count-as-food-shops-owner)
+- [San Diego, San Francisco and Los Angeles state or fix their lean; booth rentals out; the desktop map's two leftovers fixed (owner)](#2026-10-04---san-diego-san-francisco-and-los-angeles-state-or-fix-their-lean-booth-rentals-out-the-desktop-maps-two-leftovers-fixed-owner)
+- [Authorship: Dace Roberts named, the code MIT, the writing and design reserved, and invisible marks in every map and page (owner)](#2026-10-04---authorship-dace-roberts-named-the-code-mit-the-writing-and-design-reserved-and-invisible-marks-in-every-map-and-page-owner)
 
 **Archived weeks** (`scripts/archive_decisions.py`), newest first:
 
@@ -1136,4 +1138,66 @@ standard rings. `coverage` full, `categories` "All three", `mode` metro,
   peak 4.74 GB) with `--update-baseline`; Toyota and Hamamatsu unchanged
   beyond Folium's ids (restored); `regen_generated.py` rewrote the macro
   facts, ring shares and ring rules; `check_all` 49 of 49.
+
+### 2026-10-04 - San Diego, San Francisco and Los Angeles state or fix their lean; booth rentals out; the desktop map's two leftovers fixed (owner)
+
+- **The owner: "these sound good"**, to the night's list: the desktop fixes A
+  and B-lite, San Diego's booth-rental codes and own names in any word order,
+  and the three leans (Los Angeles' bullet; San Francisco's closed locations
+  removed first, then its bullet; San Diego decided by its boundary).
+- **San Diego** (`pipeline/san_diego/step2_clean_businesses.py`): NAICS
+  812114 and 812115 ("booth rental") out under the person-licence rule, D.C.'s
+  "Beauty Booth" precedent (67 pins, 347 rows); an own-name trade name now
+  matches in any word order (6 more pins show the street address); the city
+  is its SanGIS boundary, tested in UTM, not `address_city == "SAN DIEGO"`
+  (185 pins back, San Ysidro 134 and La Jolla 51; 52 rows outside the city
+  gone, none of them pins). The parcel cache predates the rows the boundary
+  brought in, so **89 person-like sole proprietorships it cannot test for a
+  home are left off as a home would be** (cleanup's call under the privacy
+  rule, never shown with a name or an address) until `fetch_parcels.py` is
+  re-run. Pins in rings 2,228 -> 2,316; `check_personal_exposure.py`: 0 at a
+  residential unit, 313 person-like names (13.5%), all chosen trade names.
+- **San Francisco**: step 2 drops a location whose `location_end_date` (or
+  `dba_end_date`) falls on or before the export's `data_as_of`
+  (2026-09-18): 4,668 closed locations had been on the map, 28% of its pins
+  (16,394 -> 11,726 citywide; in rings 11,720 -> 8,302). Of open rows, 21.4%
+  carry no NAICS code; the page now says "About one open business in five
+  gives no industry code and is left off, so the map undercounts by about one
+  storefront in eight to one in five."
+- **Los Angeles**: 8.8% of City rows have no NAICS code and no fallback; the
+  page says "About one business in eleven in the City's registry has no
+  industry code, so it is left off: the map undercounts by about one
+  storefront in twelve." Why the Maps Differ drops its hedge: "Each city's page
+  says which way its map leans."
+- **Desktop** (`pipeline/map_common.py`): stations are added after the lines,
+  so they draw above them and a mouse at a station's centre finds the station
+  (A); business dots set `bubblingMouseEvents: false`, so a click on a dot of a
+  spiderfied group no longer closes it (B-lite). Touch behavior is unchanged
+  (TAP_SELECT_SCRIPT listens in capture).
+
+### 2026-10-04 - Authorship: Dace Roberts named, the code MIT, the writing and design reserved, and invisible marks in every map and page (owner)
+
+- **The owner asked for a code signature "specific to me throughout the
+  database"**; hidden fake records and invisible characters in text were
+  ruled out (they would publish false data or break copying and screen
+  readers). **The owner: name "Dace Roberts"; "MIT code, all rights reserved
+  for content"; the hidden layer in tonight's re-render.**
+- **Visible:** `LICENSE` names Dace Roberts; MIT now covers the source code
+  only, and the prose, the reader-facing text and the design of the site and
+  its maps are © 2026 Dace Roberts, all rights reserved; the third-party data
+  keeps its own terms and the Fukui CC BY-SA offer stands. README says "Built
+  by Dace Roberts". Every page's footer: "Built by Dace Roberts. © 2026 Dace
+  Roberts: writing and design, all rights reserved. Code: MIT License. Data:
+  each source's own terms."
+- **Hidden** (`scripts/fingerprint.py`): a mark `ehm:v1:<id>:<check>`, the
+  check the first 16 hex digits of HMAC-SHA256 over a stable id with a key
+  kept outside the repository (`~/.ehm/fingerprint.key`, made by `init`;
+  never read into a session). The checks are committed
+  (`pipeline/fingerprint_marks.json`, 341 ids: the site, 170 pages, 170 maps),
+  so rendering needs no key. Maps carry an HTML comment, a generator meta tag
+  and a hidden `data-ehm` element; every page's footer carries a hidden span.
+  `fingerprint.py coverage` (in `check_all`) fails an unmarked map or page;
+  `verify <file or URL>` proves a copy with the key. A new city runs `table`
+  before its final render (publish-city step 4a). No coordinate, count, name or
+  visible text changes.
 

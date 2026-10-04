@@ -57,6 +57,8 @@ st.markdown(
   into the same three categories from each license's type.
 - Some businesses in the Los Angeles registry carry corrupt coordinates, mostly recent
   registrations; these were placed from their street address instead of being dropped.
+- About one business in eleven in the City's registry has no industry code, so it is left off:
+  the map undercounts by about one storefront in twelve.
 - In Long Beach, a license that gives no trade name shows its street address.
 - Where a business is registered under a person's name alone, with no trade name, or a person's
   name sits at an apartment or other dwelling unit, the map shows its street address instead of a

@@ -1,12 +1,12 @@
 {
  "san_diego": {
-  "in_ring": 2228,
-  "all": 9124,
+  "in_ring": 2316,
+  "all": 9335,
   "map_blob": "292bde372d5129423d02305fcbce7115ad38f8af"
  },
  "san_francisco": {
-  "in_ring": 11720,
-  "all": 16394,
+  "in_ring": 8302,
+  "all": 11726,
   "map_blob": "15700e13b38e8c7ee5171af3a187be6fe5efd094"
  },
  "los_angeles": {

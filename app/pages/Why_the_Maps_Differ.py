@@ -176,8 +176,7 @@ publish none.
 shopfronts. Some miss businesses: France withholds a share of establishments
 for privacy, and in Japan food shops that only notify the city hold no permit.
 Others count too many: a register may keep closed businesses, empty units, or
-premises with no shopfront. Where it is known, each city's page says which way
-its map leans.
+premises with no shopfront. Each city's page says which way its map leans.
 
 **A few businesses fall into different categories.** The three categories are
 meant to mean the same thing everywhere, but national classifications and

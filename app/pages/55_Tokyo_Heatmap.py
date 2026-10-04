@@ -28,6 +28,7 @@ from components import (  # noqa: E402
     render_site_notices,
     scroll_table,
     set_base_font,
+    us_dates,
 )
 
 st.set_page_config(page_title="Tokyo Heatmap", page_icon="\U0001f5fa️", layout="wide")
@@ -94,7 +95,7 @@ if shares.exists():
     cols = ["Ward", "Restaurant permits in the list", "Official count", "Share", "The list"]
     scroll_table(cols,
                  [[by_code[r["code"]]["en"], f"{r['rows']:,}", f"{r['official']:,}",
-                   f"{r['share_pct']:.1f}%", by_code[r["code"]]["share_note"]] for r in rows],
+                   f"{r['share_pct']:.1f}%", us_dates(by_code[r["code"]]["share_note"])] for r in rows],
                  right=("Restaurant permits in the list", "Official count", "Share"))
     render_caption(f"Official count: {rows[0]['source']}.")
 

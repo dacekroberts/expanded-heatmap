@@ -1,6 +1,8 @@
 """Step 2 - Clean San Diego's business tax certificate export.
 
 Input:  data/san_diego/raw/sd_businesses_active_datasd.csv
+        data/san_diego/raw/municipal_boundaries.geojson  (city limits)
+        data/san_diego/raw/parcels_centroids.csv  (fetch_parcels.py)
 Output: data/san_diego/processed/businesses_clean.csv
 
 San Diego's export ships pre-geocoded (`lat`/`lng` columns, 98.4% populated - checked
@@ -15,7 +17,9 @@ Run:  python pipeline/san_diego/step2_clean_businesses.py
 import sys
 from pathlib import Path
 
+import geopandas as gpd
 import pandas as pd
+import shapely
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.residence import flag_home_based, looks_personal, report  # noqa: E402
@@ -23,7 +27,11 @@ from pipeline.san_diego.config import (  # noqa: E402
     BUSINESSES_RAW_CSV,
     BUSINESSES_CLEAN_CSV,
     BUSINESSES_PREFILTER_CSV,
+    CITY_BOUNDARY_NAME,
     CITY_KEEP,
+    CRS_GEOGRAPHIC,
+    CRS_PROJECTED,
+    MUNICIPAL_BOUNDARIES_GEOJSON,
     NAICS_EXCLUDE_CODES,
     PARCEL_RESIDENTIAL_CODES,
     PARCELS_CENTROIDS_CSV,
@@ -36,12 +44,33 @@ from pipeline.san_diego.config import (  # noqa: E402
 from pipeline.taxonomies import filter_to_storefront, load_taxonomy_module  # noqa: E402
 
 
+def within_city(lon, lat):
+    """True where a point lies inside San Diego's city limits, as a boolean
+    array aligned with the inputs. Both sides are projected to UTM first."""
+    boundary = gpd.read_file(MUNICIPAL_BOUNDARIES_GEOJSON)
+    boundary = (boundary.set_crs(CRS_GEOGRAPHIC) if boundary.crs is None
+                else boundary.to_crs(CRS_GEOGRAPHIC))
+    city = boundary[boundary["Name"] == CITY_BOUNDARY_NAME]
+    if city.empty:
+        sys.exit(f"No {CITY_BOUNDARY_NAME!r} feature in {MUNICIPAL_BOUNDARIES_GEOJSON}")
+    polygon = city.to_crs(CRS_PROJECTED).geometry.union_all()
+    shapely.prepare(polygon)
+    points = gpd.GeoSeries(gpd.points_from_xy(lon, lat), crs=CRS_GEOGRAPHIC).to_crs(CRS_PROJECTED)
+    return points.within(polygon).to_numpy()
+
+
 def main():
     if not BUSINESSES_RAW_CSV.exists():
         sys.exit(
             f"No file at {BUSINESSES_RAW_CSV}.\n"
             "Download from https://seshat.datasd.org/business_tax_certificates/"
             "sd_businesses_active_datasd.csv"
+        )
+    if not MUNICIPAL_BOUNDARIES_GEOJSON.exists():
+        sys.exit(
+            f"No boundary file at {MUNICIPAL_BOUNDARIES_GEOJSON}.\n"
+            "Download it from "
+            "https://geo.sandag.org/server/rest/directories/downloads/Municipal_Boundaries.geojson"
         )
 
     df = pd.read_csv(BUSINESSES_RAW_CSV, dtype=str, low_memory=False, encoding=SOURCE_ENCODING)
@@ -52,16 +81,6 @@ def main():
     value_column = load_taxonomy_module(TAXONOMY_SYSTEM).VALUE_COLUMN
     df = df.rename(columns={RAW_CLASSIFICATION_COLUMN: value_column})
 
-    # --- Restrict to San Diego ---------------------------------------------
-    # Do this before any other filter so drop counts below describe the
-    # population this project is actually about. Known limitation - see config.py's CITY_KEEP comment:
-    # this is an exact match on the raw address_city field, which
-    # undercounts neighborhoods (La Jolla foremost) recorded under their
-    # own name rather than "San Diego."
-    before = len(df)
-    df = df[df["address_city"].str.upper().str.strip() == CITY_KEEP]
-    print(f"San Diego filter: {before:,} -> {len(df):,} rows")
-
     # --- Filter to storefront categories -----------------------------------
     before = len(df)
     df = filter_to_storefront(df, TAXONOMY_SYSTEM)
@@ -71,7 +90,8 @@ def main():
     # EXACT match: "8129" must not take 81291 pet care or 81292 photofinishing.
     before = len(df)
     df = df[~df[value_column].astype(str).str.strip().isin(NAICS_EXCLUDE_CODES)]
-    print(f"Excluded codes {sorted(NAICS_EXCLUDE_CODES)} (owner, 2026-09-29): "
+    print(f"Excluded codes {sorted(NAICS_EXCLUDE_CODES)} (owner, 2026-09-29; "
+          f"booth rental 2026-10-04): "
           f"{before:,} -> {len(df):,} rows")
 
     # --- Drop rows without usable coordinates -------------------------------
@@ -89,6 +109,23 @@ def main():
     ]
     print(f"Coordinate sanity bounds: {before:,} -> {len(df):,} rows "
           f"(catches swapped lat/lng and wild mismatches)")
+
+    # --- Restrict to San Diego city limits ----------------------------------
+    # A point-in-polygon test against the city's own boundary, the polygon
+    # step 1 keeps stations by (owner, 2026-10-04). It replaced an exact match
+    # on address_city, which dropped storefronts inside the city whose address
+    # names the neighborhood (La Jolla, San Ysidro, Del Mar and stray
+    # spellings) and kept a few outside it; see config.CITY_KEEP. Tested in
+    # UTM metres (CRS_PROJECTED), never in degrees. After the coordinate
+    # checks, because the test needs a usable point.
+    before = len(df)
+    df = df[within_city(df["lng"], df["lat"])]
+    print(f"San Diego city limits ({CITY_BOUNDARY_NAME}, "
+          f"{MUNICIPAL_BOUNDARIES_GEOJSON.name}): {before:,} -> {len(df):,} rows")
+    named = df["address_city"].fillna("").str.upper().str.strip()
+    print("  kept with an address city other than San Diego: "
+          f"{int((named != CITY_KEEP).sum()):,} "
+          f"{named[named != CITY_KEEP].value_counts().head(5).to_dict()}")
 
     # --- Deduplicate --------------------------------------------------------
     # account_key is this export's primary key (per the data dictionary),
@@ -151,6 +188,12 @@ def main():
               f"{int(found.sum()):,} "
               f"({100 * found.sum() / max(int(looked_up.sum()), 1):.1f}%), "
               f"median distance {dist.median():.1f} m")
+        # A person-like row with no cache row cannot be flagged. Non-zero means
+        # the cache predates rows step 2 now keeps: re-run fetch_parcels.py.
+        unlooked = m["business_name"].map(looks_personal) & ~looked_up
+        print(f"Person-like rows with NO parcel lookup (not testable): "
+              f"{int(unlooked.sum()):,}, sole proprietorships "
+              f"{int((unlooked & m['ownership_type'].fillna('').str.strip().eq(SOLE_OWNERSHIP_TYPE)).sum()):,}")
 
         landuse = pd.to_numeric(m["asr_landuse"], errors="coerce")
         at_home = flag_home_based(
@@ -164,6 +207,16 @@ def main():
         report("person-like name + sole proprietorship + single-family parcel "
                "+ owner-occupied", at_home, before,
                extra={"NAICS": m["naics"], "asr_landuse": m["asr_landuse"]})
+        # UNTESTED, LEFT OFF (owner's privacy rule; 2026-10-04): a person-like
+        # sole proprietorship the parcel cache has no row for cannot be tested
+        # for a home, so it is dropped as a home would be, never shown with a
+        # name or a street address. 85 rows (29 pins) when the city-limits test
+        # replaced the address_city match; re-running fetch_parcels.py covers
+        # them and this then drops nothing.
+        untested = unlooked & m["ownership_type"].fillna("").str.strip().eq(SOLE_OWNERSHIP_TYPE)
+        report("person-like sole proprietorship with no parcel lookup (untested)",
+               untested, before, extra={"NAICS": m["naics"]})
+        at_home = at_home | untested
         df = df[~at_home.reindex(df.index, fill_value=False)].reset_index(drop=True)
         df["record_id"] = df.index.astype(str)
     else:
@@ -181,9 +234,20 @@ def main():
     # without the suite. Measured before the change: 128 of 423 person-like
     # names on the map, 120 of them sole proprietorships. HERE, AFTER the home
     # filter, which tests the displayed name.
+    #
+    # In any word order (owner, 2026-10-04): the two names match when their
+    # sorted whitespace tokens do, so a trade name that reorders the owner's
+    # own name counts as the same name. Measured before the change: 6 to 7
+    # pins. Punctuation is NOT stripped, which leaves one more row a
+    # punctuation-blind test would catch (2026-10-04).
     names = df["business_name"].fillna("").astype(str).str.strip()
     owner = df["business_owner_name"].fillna("").astype(str).str.strip()
-    own = (names != "") & (names.str.upper() == owner.str.upper()) & names.map(looks_personal)
+
+    def tokens(s):
+        return s.str.upper().str.split().map(lambda t: tuple(sorted(t)))
+
+    own = (names != "") & (tokens(names) == tokens(owner)) & names.map(looks_personal)
+    verbatim = own & (names.str.upper() == owner.str.upper())
     street = (df[["address_no", "address_no_fraction", "address_pd", "address_road", "address_sfx"]]
               .fillna("").astype(str).agg(" ".join, axis=1)
               .str.split().str.join(" "))
@@ -192,7 +256,8 @@ def main():
     df["name_is_address"] = own
     df.loc[own, "business_name"] = street[own]
     print(f"A registrant's own name shows the street address instead (pins kept): "
-          f"{int(own.sum()):,}")
+          f"{int(own.sum()):,} ({int(verbatim.sum()):,} verbatim, "
+          f"{int((own & ~verbatim).sum()):,} in another word order)")
 
     BUSINESSES_CLEAN_CSV.parent.mkdir(parents=True, exist_ok=True)
     df.to_csv(BUSINESSES_CLEAN_CSV, index=False)

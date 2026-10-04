@@ -278,6 +278,9 @@ COLUMNS["naics"] = {
     "health_food": [loc("446191", "food (health) supplement stores (2017)"),
                     loc("456191", "food (health) supplement retailers (2022)")],
     "health_food_nonstore": [loc("454390", "other direct selling (health-food MLM sellers)")],
+    "person_licence": [
+        outside("pipeline/san_diego/config.py", '"812114"', "San Diego's BARBER SHOPS - BOOTH RENTAL"),
+        outside("pipeline/san_diego/config.py", '"812115"', "San Diego's BEAUTY SHOPS - BOOTH RENTAL")],
     "mobile_unit": [
         loc("722330", "mobile food services"), loc("72233", "mobile food, San Diego's five digits"),
         loc("454210", "vending machine operators (2017)"),
