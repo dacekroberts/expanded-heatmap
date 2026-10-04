@@ -556,7 +556,7 @@ Desktop is unaffected — the label is fully visible there.
 - [x] **Tbilisi: the full placeholder check run 2026-10-02** on
   `tbilisi-placeholder-check`: the rule with a 5-company minimum (owner),
   thirteen points, 13,211 storefronts placed. `docs/decisions_drafts/tbilisi-placeholder-check.md`.
-- [ ] **Tbilisi: record the drift baseline when `tbilisi-placeholder-check`
+- [x] **DONE 2026-10-03 (17 figures, zero drift).** **Tbilisi: record the drift baseline when `tbilisi-placeholder-check`
   lands** (`python pipeline/drift_check.py tbilisi --update-baseline`): its
   run writes the shared processed folder, so it cannot run before.
 - **Seattle - deferred by the owner 2026-09-21, and scoped as the project's
