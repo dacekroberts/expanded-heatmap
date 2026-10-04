@@ -33,7 +33,7 @@ owner's hard line; memory "External project sessions").
 | Expanded Heatmap Visuals | `visual` / `visual-handoff` | ongoing; drafts entry **040ea615** to fold at the next landing |
 | Expanded Heatmap Analytics | `analytics` / `analytics-handoff` | ongoing; private; its `data/_analysis/` edits needed the owner's own settings.local.json allow rules (data/ is a junction) |
 | Expanded-heatmap staging session | `staging` / `worktree-staging` | fresh since 2026-10-03, from `docs/handoff_staging_2026-09-30.md` |
-| Make map dots and lines easy to tap on phones | `charming-vaughan-f62c30` / `mobile-tap-targets` | building; also asked for a fixed details box (bottom-left or equivalent) and a highlight on the selected dot (owner, 2026-10-03). Brings the owner a before/after; all maps re-render after approval; lands at review time |
+| Make map dots and lines easy to tap on phones | `charming-vaughan-f62c30` / `mobile-tap-targets` | building. Owner's three asks (2026-10-03): wider tap targets on phones; a fixed details box (bottom-left or equivalent) instead of a tooltip that clips off the map's edge, with a highlight on the selected dot; and clustered dots around commercial hubs, where the first tap expands a cluster and the second often collapses it instead of selecting the dot. Brings the owner a before/after; all maps re-render after approval; lands at review time. Check all three at its landing |
 | Jpn Wave 2, Extension regional builds | worktrees removed | LANDED; the owner archives them (the empty folders go then) |
 
 The two 2026-09-23 "Resume ..." sessions in the main checkout are finished
