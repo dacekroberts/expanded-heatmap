@@ -71,10 +71,9 @@ RULES = [
     # Japan wave 2 (2026-10-03): a deli on a restaurant permit, Kawasaki's
     # 飲食店（そうざい店） (301) as the そう菜店 already here, and Nara's old-law
     # そうざい屋 where it leads the sub-types (そうざい屋・弁当屋; 軽飲食・そうざい屋
-    # is a restaurant). 複合型そうざい製造業 stays out, as every built city reads
-    # it: counting it moves eight built cities (about 55 pins), a cross-city
-    # change for review time (docs/decisions_drafts/japan-wave2.md).
-    ("deli (owner: そうざい counts)", "Retail", r"^(そうざい製造|惣菜製造|飲食惣菜|そうざい屋)|そう菜店|そうざい店"),
+    # is a restaurant). 複合型そうざい製造業, a deli under the 2021 permit
+    # law's combined type, counts too (owner, 2026-10-04; DECISIONS).
+    ("deli (owner: そうざい counts)", "Retail", r"^(複合型そうざい製造|そうざい製造|惣菜製造|飲食惣菜|そうざい屋)|そう菜店|そうざい店"),
     # Nara's old-law 簡易菓子製造業
     ("confectioner / bakery (owner: 菓子 counts)", "Retail", r"^(簡易)?菓子"),
     ("butcher", "Retail", r"^(食肉販売|肉販)"),
@@ -138,6 +137,9 @@ FORM_RULES = [
     # restaurant permit is a shop
     ("konbini holding a restaurant permit", "Retail", r"コンビニ"),
     ("department store / supermarket", "Retail", r"百貨店|スーパー"),
+    # A deli by its 業態 alone, a restaurant permit filed as 総菜屋, 惣菜店 or
+    # そうざい屋 (owner, 2026-10-04; DECISIONS): a shop, as the deli types are.
+    ("deli (業態; owner: そうざい counts)", "Retail", r"総菜|惣菜|そうざい|そう菜"),
 ]
 _FORM_COMPILED = [(name, bucket, re.compile(pat)) for name, bucket, pat in FORM_RULES]
 
@@ -209,7 +211,7 @@ for _v, _want in (("飲食店営業", "Food service"), ("① 飲食店営業", "
                   ("飲食店営業（集団給食）", None), ("飲食店営業（一般・コンビニ）", "Retail"),
                   ("飲食店営業（一般・カラオケ）", None), ("飲食給食", None), ("飲食一般", "Food service"),
                   ("菓子製造業", "Retail"), ("菓子製造業（期間申請）", None), ("⑪ 菓子製造業", "Retail"),
-                  ("そうざい製造業", "Retail"), ("複合型そうざい製造業", None), ("複合型冷凍食品製造業", None),
+                  ("そうざい製造業", "Retail"), ("複合型そうざい製造業", "Retail"), ("複合型冷凍食品製造業", None),
                   ("⑬ その他の食料・飲料販売業", "Retail"),
                   # Japan wave 2: Kawasaki's 飲食店（sub-type） and its carve-outs; Nara's old-law sub-types
                   ("飲食店（一般食堂）", "Food service"), ("飲食店（バー）", "Food service"),
@@ -257,7 +259,7 @@ for _v, _f, _want in (("飲食店営業（バー・キャバレー）", "", None
                       ("① 飲食店営業", "露店", None), ("① 飲食店営業", "ろ店", "Food service"),
                       ("① 飲食店営業", "定置屋台", "Food service"),
                       # Japan wave 2: Yokosuka's 詳細業種 and Sasebo's 種目 read as the form
-                      ("飲食店営業", "総菜屋", "Food service"), ("飲食店営業", "旅館の経営を兼ねる飲食店営業", None), ("飲食店営業", "屋台型臨時営業", None),
+                      ("飲食店営業", "総菜屋", "Retail"), ("飲食店営業", "旅館の経営を兼ねる飲食店営業", None), ("飲食店営業", "屋台型臨時営業", None),
                       ("飲食店営業", "自動車による営業(タンク容量80リットル)", None), ("喫茶店営業", "自動販売機", None),
                       ("飲食店営業", "飲食店（客席を設ける営業）", "Food service"), ("飲食店営業", "露店：定置", None)):
     assert classify({VALUE_COLUMN: _v, "form": _f}) == _want, (_v, _f, classify({VALUE_COLUMN: _v, "form": _f}))

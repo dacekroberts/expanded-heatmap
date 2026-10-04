@@ -1,13 +1,13 @@
 {
-  "join_block": 12160,
+  "join_block": 12165,
   "join_chome": 152,
   "join_none": 2,
   "line_station_rows": 110,
   "name_rule_spread_rows": 0,
   "names_withheld": 0,
   "not_a_premises": 3399,
-  "not_storefront": 1163,
-  "repeat_permits_dropped": 418,
+  "not_storefront": 1158,
+  "repeat_permits_dropped": 419,
   "rows_barber": 558,
   "rows_beauty": 1763,
   "rows_food": 14022,
@@ -15,10 +15,10 @@
   "stations_collapsed": 101,
   "stations_excluded": 49,
   "stations_in_scope": 52,
-  "storefronts": 11894,
+  "storefronts": 11898,
   "storefronts_food_service": 7811,
   "storefronts_personal_services": 2831,
-  "storefronts_retail": 1252,
-  "sweets_deli_factory_like": 45,
-  "sweets_deli_rows": 975
+  "storefronts_retail": 1256,
+  "sweets_deli_factory_like": 48,
+  "sweets_deli_rows": 979
 }

@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**30 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**31 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-04**
 
@@ -54,6 +54,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Burnaby's optometrists and opticians stay out (owner)](#2026-10-04---burnabys-optometrists-and-opticians-stay-out-owner)
 - [The owner's calls of the evening: US dates on every caption, the site-wide notices folded, SFMTA's notice kept, Boston measured, communications filed](#2026-10-04---the-owners-calls-of-the-evening-us-dates-on-every-caption-the-site-wide-notices-folded-sfmtas-notice-kept-boston-measured-communications-filed)
 - [The efficiency review's three changes adopted, and the review itself a skill (owner)](#2026-10-04---the-efficiency-reviews-three-changes-adopted-and-the-review-itself-a-skill-owner)
+- [Japan's carry-overs: the 20 built cities take wave 2's rules, delis by form count as Food shops (owner)](#2026-10-04---japans-carry-overs-the-20-built-cities-take-wave-2s-rules-delis-by-form-count-as-food-shops-owner)
 
 **Archived weeks** (`scripts/archive_decisions.py`), newest first:
 
@@ -1096,4 +1097,43 @@ standard rings. `coverage` full, `categories` "All three", `mode` metro,
   (exact conflicts by `git merge-tree`), load per session, re-renders,
   DECISIONS volume, the gate and the hook; a ranked table with evidence,
   saving and whose habit; the top three changes; what improved; Limits.
+
+### 2026-10-04 - Japan's carry-overs: the 20 built cities take wave 2's rules, delis by form count as Food shops (owner)
+
+- **The owner on the cleanup handoff's Japan calls: "1a-c yes, d food
+  service okay, e stay a note but flag if it comes up, f move only if
+  there's a better candidate for placement".**
+- **(a) and (b).** The twenty built Japanese cities opt into
+  `japan_register.WAVE2_RULES` like the fourteen of wave 2
+  (`pipeline/countries/japan.py`): the seven join rules (`oaza`,
+  `aza_letter`, `kou_bare`, `chome_missing`, `machi`, `citywide`,
+  `form_cols`) and `coop`. Unplaced rows fell as the wave-2 measurement said:
+  Fukuoka 92 -> 28, Hiroshima 152 -> 7, Kumamoto 62 -> 13, Matsuyama 84 ->
+  41, Utsunomiya 17 -> 6. Names withheld as a person's own fell where a
+  cooperative was read as a person: Kobe 10 -> 3, Sapporo 6 -> 3, Fukui
+  6 -> 1, Toyama 5 -> 1, Fukuoka 4 -> 1, Osaka 9 -> 8, Hiroshima 1 -> 0.
+  `check_personal_exposure.py` on those eight (Kyoto too): the Japan rule
+  prints 0, and 0 person-like names at a residential unit.
+- **(c).** `japan_eigyo`: 複合型そうざい製造業 counts as a deli (Food shops),
+  and a restaurant permit whose 業態 names a deli (総菜, 惣菜, そうざい,
+  そう菜) is a shop. **Larger than the 55 pins the wave-2 note measured,
+  because (a)'s `form_cols` now reads the built cities' form columns too**:
+  Nagasaki's 244 permits filed with the form そう菜, Tokyo's 118 そう菜店
+  (専門店 98, 併設店 20), Fukuoka's 46 そうざい, Yokkaichi's 72 飲食店営業(惣菜店).
+  Food service -> Food shops by city, the largest: Nagasaki 283 -> 231
+  (repeat permits at one premises then count once), Tokyo 161 -> 103,
+  Hiroshima, Kurume, Yokkaichi, Sakai, Kitakyushu, Fukuoka, Nara 28-70 each.
+  Read by eye, the matched forms are delis (a bento-and-deli or butcher-
+  and-deli form included); put to the owner with the counts before the push.
+- **(d)** Sasebo's 4 カフェー permits stay Food service (no rule reads them;
+  no change). **(e)** The JR-stretch exclusion stays Shimonoseki's note; a
+  second city meeting it is flagged to the owner. **(f)** Kawasaki's dot
+  stays at Shin-Yurigaoka: Musashi-Kosugi, Mizonokuchi and Kawasaki Station
+  each sit 3.7-5.9 px from Tokyo's or Yokohama's dot in Japan East, a
+  stacked pair `check_macro_labels.py` fails (PROBLEMS 6 each; the current
+  point 0).
+- **Proven:** the 34-city drift check through the gate (`--jobs 1`, measured
+  peak 4.74 GB) with `--update-baseline`; Toyota and Hamamatsu unchanged
+  beyond Folium's ids (restored); `regen_generated.py` rewrote the macro
+  facts, ring shares and ring rules; `check_all` 49 of 49.
 

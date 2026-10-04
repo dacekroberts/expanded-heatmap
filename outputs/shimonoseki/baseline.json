@@ -1,6 +1,6 @@
 {
   "closed": 21,
-  "join_block": 2814,
+  "join_block": 2822,
   "join_chome": 30,
   "join_none": 3,
   "join_own": 347,
@@ -9,7 +9,7 @@
   "names_withheld": 0,
   "no_address": 290,
   "not_a_premises": 351,
-  "not_storefront": 1183,
+  "not_storefront": 1175,
   "own_coords_block_median_m": 40,
   "own_coords_block_within_250m_pct": "95.9",
   "own_coords_chome_median_m": 2660,
@@ -17,15 +17,15 @@
   "own_point_default_refused": 29,
   "own_point_from_chome": 330,
   "own_point_from_none": 17,
-  "repeat_permits_dropped": 219,
+  "repeat_permits_dropped": 221,
   "rows_mhlw": 5039,
   "stations_collapsed": 16,
   "stations_excluded": 9,
   "stations_in_scope": 14,
   "stations_left_out_branch": 7,
-  "storefronts": 2972,
-  "storefronts_food_service": 2030,
-  "storefronts_retail": 942,
-  "sweets_deli_factory_like": 18,
-  "sweets_deli_rows": 279
+  "storefronts": 2978,
+  "storefronts_food_service": 2021,
+  "storefronts_retail": 957,
+  "sweets_deli_factory_like": 22,
+  "sweets_deli_rows": 295
 }

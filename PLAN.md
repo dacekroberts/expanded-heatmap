@@ -29,14 +29,8 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   too. Either is a map_common change and a full re-render at review time.
   DECISIONS 2026-10-03, "A tap on a phone selects the nearest dot".
 
-- [~] **Japan's carry-overs (owner, 2026-10-04: 1a-c yes).** The 20 built
-  cities read `WAVE2_RULES` (the join rules and "coop"), and delis by
-  複合型そうざい製造業 or by 業態 count as Food shops (`japan_eigyo`); the
-  34-city drift run with `--update-baseline` is under way, then privacy
-  checks for the coop cities and one push. (d) Sasebo's カフェー stays Food
-  service (no change); (e) the JR-stretch exclusion stays Shimonoseki's note,
-  flagged if another city meets it; (f) Kawasaki's dot moves only if a
-  measured candidate beats Shin-Yurigaoka.
+- [x] **Japan's carry-overs applied 2026-10-04** (DECISIONS, "Japan's
+  carry-overs"): the deli count to be confirmed by the owner before the push.
 
 - [ ] **San Diego's names: measured 2026-10-04, recommendation with the
   owner.** Drop the register's booth-rental codes 812114 and 812115 (65 pins;
