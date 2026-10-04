@@ -122,7 +122,8 @@ page.
   underground station, every terminus and every interchange is kept. It applies
   to San Francisco's Muni Metro and F Market & Wharves, Philadelphia's
   trolleys, the Boston Green Line's surface branches, the trams of Amsterdam,
-  Rotterdam and Riga, Rome's tram 8, and Hong Kong's Light Rail.<!-- internal --> The reasoning is in
+  Rotterdam and Riga, Rome's tram 8, Hong Kong's Light Rail, and the Brussels
+  trams 10, 51 and 62.<!-- internal --> The reasoning is in
   `docs/sub_transit_line_filters.md`.<!-- /internal -->
 - **It is on a stretch that runs too rarely.** Light rail is drawn only where
   it runs at least every 15 minutes by day. Aarhus's Letbane runs every 7 to 8
@@ -2175,6 +2176,37 @@ stops outside the municipality are left out - 12 in Amstelveen, 5 in Diemen, 3
 in Uithoorn, 2 in Ouder-Amstel - and 59 tram stops are thinned to about one per
 half mile. Tram 3, which GVB discontinued on March 29, 2026, the museum tram,
 ferries and NS trains are not drawn.
+
+### Brussels - empty shop units, which a survey can see, and the City's other 18 neighbors
+
+**One survey, three categories.** The map is hub.brussels's survey of the City
+of Brussels's ground-floor commercial units, dated October 17, 2025. A survey
+records what is on the street, so it sees empty units, and it names each
+business by its sign.
+
+**Excluded from the survey** - 1,068 empty units; and 743 units whose every
+type is one this map leaves out: hotels, hostels and guest houses, hall hire,
+offices, banks, insurers, agencies and money transfer, post offices, call
+shops and telecom providers' shops, printers and photo studios, rentals,
+repairs (garages, car washes, shoe and clothing repair, key cutting), gyms,
+pools, cinemas, theatres, museums and other venues, casinos and betting,
+cabarets and peep shows, members' clubs, funeral directors, and a
+heating-fuel dealer.
+
+**Counted once** - a unit recorded under several types (175 span two
+categories) is shown in the first of Food service, Retail and Personal
+services among its types.
+
+**Missing rather than excluded** - shops that opened after the survey, and
+anything above the ground floor.
+
+**Stations.** STIB's metro lines 1, 2, 5 and 6 and the fifteen tram lines that
+enter the City are drawn. The map covers the City of Brussels alone, one of
+the Brussels-Capital Region's 19 communes, so 195 stations on those lines in
+the other 18 communes and beyond the Region get no ring; 7 tram stops on trams
+10, 51 and 62 are thinned to about one per half mile. Trams 18, 39 and 44,
+which never enter the City, buses and SNCB trains are not drawn. The other 18
+communes are on the Brussels (Regional) page.
 
 ### Rome - a register of premises with no names and no closing dates
 
