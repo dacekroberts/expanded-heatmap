@@ -12,13 +12,13 @@ items are done or moved into PLAN.
   owner's reboot, master 37eec480: the 14 Japan wave 2 pages, the four
   regional extensions, Required_Notices listing 115-132 and 137-140).
   `check_all.py` 46/46.
-- **[verified]** One commit on `prose-pass` waits for its push and a reboot
-  when this note was written: 716888c6, the Overview's region caption (a
-  region view says only "Showing N cities in <region>.", owner) and the
-  "All required source notices" link moved into the reference-links row
-  above the notices (owner). A short local render check was running; if the
-  push did not happen, re-run that check, push, ask the owner to reboot,
-  live-check those two things.
+- **[verified]** Pushed at a11c586f after a local render check: the
+  Overview's region caption (a region view says only "Showing N cities in
+  <region>.", owner) and the "All required source notices" link moved into
+  the reference-links row above the notices (owner; on the reference pages,
+  which have no such row, it stands alone in the same place). **[unverified]**
+  The owner's reboot and a live check of those two things were still to come
+  when this note was written; check them first.
 - The cleanup worktree is `.claude/worktrees/cleanup` on `prose-pass`; it
   lands work by merging onto `prose-pass` and pushing `HEAD:master` with
   the fetch-merge-push loop (CLAUDE.md, "Re-check origin/master").
