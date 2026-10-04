@@ -14,6 +14,7 @@ import streamlit as st
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.bucheon.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
+    render_caption,
     render_city_nav,
     render_city_title,
     render_country_links,
@@ -44,7 +45,7 @@ if PROVENANCE_JSON.exists():
         _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
         _ed = (_prov.get("semas") or {}).get("edition")
         if _ed:
-            st.caption(f"Snapshot: the Small Enterprise and Market Service's storefront "
+            render_caption(f"Snapshot: the Small Enterprise and Market Service's storefront "
                        f"register, edition of **{_ed}**.")
     except (ValueError, OSError, AttributeError, TypeError):
         # A malformed provenance file must not take the page down.

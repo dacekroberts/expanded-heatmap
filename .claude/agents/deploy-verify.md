@@ -277,7 +277,11 @@ until a reader clicked. Chicago's terms require its disclaimer "at the site
 where the software application ... can be accessed", and this project's own rule
 for the OSM attribution is that it must not sit "beneath UI, behind toggles, or
 off-screen". **When verifying a required notice, confirm it is present with the
-page in its default state** - do not expand anything first.
+page in its default state** - do not expand anything first. Since 2026-10-04
+(owner) the site-wide notices other than a page's own sit in a closed HTML
+`<details>` ("Required notices for data used across this site"), which IS in
+the DOM while closed: confirm the notice text is inside it, and that the city's
+own notices and LA Metro's are outside it.
 
 ### On the DEPLOYED site, DOM probes come back empty while the page renders
 

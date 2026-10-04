@@ -14,6 +14,7 @@ import streamlit as st
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.london.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
+    render_caption,
     render_city_nav,
     render_city_title,
     render_country_links,
@@ -45,7 +46,7 @@ if PROVENANCE_JSON.exists():
         _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
         _lo, _hi = (_prov.get("fsa_extract_range") or ["", ""])[:2]
         if _lo and _hi:
-            st.caption(f"Snapshot: food businesses as extracted by each borough between "
+            render_caption(f"Snapshot: food businesses as extracted by each borough between "
                        f"**{_lo}** and **{_hi}** (Food Standards Agency).")
     except (ValueError, OSError, AttributeError, TypeError):
         # A malformed provenance file must not take the page down.

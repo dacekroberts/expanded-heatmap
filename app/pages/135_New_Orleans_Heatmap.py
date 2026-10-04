@@ -14,6 +14,7 @@ import streamlit as st
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.new_orleans.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
+    render_caption,
     render_city_nav,
     render_city_title,
     render_country_links,
@@ -45,7 +46,7 @@ if PROVENANCE_JSON.exists():
         _reg = (_prov.get("register") or {}).get("rows_updated") or ""
         _rail = ((_prov.get("files_utc") or {}).get("osm_rail.json") or "")[:10]
         if _reg and _rail:
-            st.caption(f"Occupational license data from the City of New Orleans, updated "
+            render_caption(f"Occupational license data from the City of New Orleans, updated "
                        f"**{_reg}**; the streetcar lines and their stops from "
                        f"OpenStreetMap, fetched **{_rail}**.")
     except (ValueError, OSError, AttributeError):

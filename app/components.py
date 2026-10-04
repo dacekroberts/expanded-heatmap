@@ -6,6 +6,7 @@ identically on every page lives here once and gets called from each page,
 rather than duplicated per page.
 """
 
+import re
 import sys
 from pathlib import Path
 from typing import NamedTuple
@@ -1084,7 +1085,7 @@ _NOTICES = [
     # atencioenlinia.ajuntament.barcelona.cat) did not respond from two
     # independent networks while seuelectronica.ajuntament.barcelona.cat
     # answered in 2.4s from the same /24. The attempt log lives in
-    # docs/notifications/barcelona-city-council.md; when it is sent, update
+    # docs/communications/barcelona-city-council.md; when it is sent, update
     # this sentence and that file together.
     Notice(21, "Ajuntament de Barcelona",
      "Source of the data: Barcelona City Council. The premises shown for "
@@ -3053,7 +3054,7 @@ _UNSETTLED_TERMS = (
     "**Some sources neither grant nor forbid reuse, and this site reads them "
     "in its favor.** Philadelphia's data carries a City license that grants "
     "nothing and website terms that forbid republication; the City was asked "
-    "for its position on 21 September 2026 and has not replied. Sources for "
+    "for its position on September 21, 2026 and has not replied. Sources for "
     "Los Angeles, Miami, Tucson, Dallas, Seattle (King County, Bellevue and "
     "Snohomish County), Amsterdam, Den Haag, Stockholm, Bucharest and Daegu carry no "
     "license, or terms written for a website rather than its data, and "
@@ -3163,11 +3164,9 @@ def render_site_notices(city=None, show_links: bool = True,
 
     # NOT in an st.expander, and that was a real mistake worth naming: these
     # were briefly collapsed behind one, which kept them out of the DOM until
-    # a reader clicked. Chicago's terms require its paragraph "at the site
-    # where the software application ... can be accessed", and this project's
-    # own rule for the OSM attribution is that it must not sit "beneath UI,
-    # behind toggles, or off-screen". A required notice behind a toggle is not
-    # displayed. So they render inline, always.
+    # a reader clicked. The city's own notices render inline, always; the
+    # every-page set below folds into a <details>, which keeps its text in
+    # the DOM (owner, 2026-10-04).
     #
     # A city's own notices come first and at body size, not caption size:
     # TransLink's (11) and CRTM's (20) must be prominent, and the Ordnance
@@ -3185,12 +3184,36 @@ def render_site_notices(city=None, show_links: bool = True,
             st.caption(_NOTICES_INTRO)
         # ONE block, not one element per notice (owner, 2026-10-02: condense
         # the scroll without hiding anything). Each st.caption was its own
-        # element with a 16 px gap. All text stays inline and in the DOM; only
-        # spacing, size and, from 900 px, two columns change.
+        # element with a 16 px gap.
+        #
+        # COLLAPSED SINCE 2026-10-04 (owner: "is collapsed list allowed? if so
+        # use that"). The every-page notices other than the page's own sit in a
+        # closed <details>: Chicago's, Kansas City's and Tacoma's terms name a
+        # place ("at the site", "with any application"), not prominence, and
+        # the OSM credit the licence needs is the one on every map. A <details>
+        # keeps its text in the DOM (find-in-page opens it), unlike the
+        # st.expander that the inline rule above was written against. Kept
+        # inline: LA Metro (4), whose placement guidelines could not be found,
+        # and on a page without a city (the Overview and the reference pages,
+        # which show figures derived from them) INEGI (8) and Barcelona (21).
+        rest = [n for n in every_page_notices() if n not in own]
+        inline_nums = INLINE_EVERY_PAGE | (set() if city else INLINE_OFF_CITY_PAGES)
+        inline = [n for n in rest if n.number in inline_nums]
+        folded = [n for n in rest if n.number not in inline_nums]
         with st.container(key="site-notices"):
-            st.caption(_notice_text(
-                [n for n in every_page_notices() if n not in own]))
+            if inline:
+                st.caption(_notice_text(inline))
+            if folded:
+                st.caption(f"<details><summary>Required notices for data used across "
+                           f"this site ({len(folded)})</summary>\n\n"
+                           f"{_notice_text(folded)}\n\n</details>",
+                           unsafe_allow_html=True)
     st.caption(_UNSETTLED_TERMS)
+
+
+# The every-page notices that stay inline rather than folded (render_site_notices).
+INLINE_EVERY_PAGE = {4}
+INLINE_OFF_CITY_PAGES = {8, 21}
 
 
 def render_all_notices():
@@ -3254,11 +3277,40 @@ def render_city_title(name):
                     unsafe_allow_html=True, text_alignment="center")
 
 
+_MONTHS = ("January", "February", "March", "April", "May", "June", "July",
+           "August", "September", "October", "November", "December")
+_ISO_DATE = re.compile(r"\b(\d{4})-(0[1-9]|1[0-2])(?:-(0[1-9]|[12]\d|3[01]))?\b")
+
+
+def us_dates(text):
+    """cities.py's data_age with its ISO dates written the US way, as the
+    pages' prose writes them (owner, 2026-10-04): 2026-08-31 -> August 31,
+    2026, and 2026-03 -> March 2026. The stored text stays ISO, so the sort
+    order and the Visuals session's copy are unchanged."""
+    def us(m):
+        month = _MONTHS[int(m.group(2)) - 1]
+        return f"{month} {int(m.group(3))}, {m.group(1)}" if m.group(3) else f"{month} {m.group(1)}"
+    return _ISO_DATE.sub(us, str(text))
+
+
+assert us_dates("Extracts of 2026-09-09 to 2026-10-02") == \
+    "Extracts of September 9, 2026 to October 2, 2026"
+assert us_dates("registers as of 2026-03; N02-25, 2024-2025") == \
+    "registers as of March 2026; N02-25, 2024-2025"
+
+
+def render_caption(body, **kwargs):
+    """st.caption with its ISO dates written the US way (us_dates): every city
+    page's captions under the map, the provenance dates they print included
+    (owner, 2026-10-04)."""
+    return st.caption(us_dates(body), **kwargs)
+
+
 def render_data_age(name):
     """The date caption under the map for a page that reads no provenance
     file: the city's data_age from cities.py, the text the Overview's city
-    list shows."""
-    st.caption(f"Data: {city_entry(name)['data_age']}.")
+    list shows, its dates written the US way (us_dates)."""
+    st.caption(f"Data: {us_dates(city_entry(name)['data_age'])}.")
 
 
 # The layer control's icon as the maps draw it: Leaflet 1.9.3's own image, from

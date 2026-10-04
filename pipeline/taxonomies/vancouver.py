@@ -595,7 +595,7 @@ BURNABY_BUCKETS = {
     "HEALTH SERVICES - GENERAL": None,  # 183  clinics, naturopaths, hearing clinics, NAICS 621
     "HEALTH SERVICES - PHYSICIAN & SURGEON": None,  # 171  NAICS 6211
     "HEALTH SERVICES - CHIROPRACTOR": None,  # 100  NAICS 6213 (Surrey Professional Practitioner-Chiropractor)
-    "HEALTH SERVICES - OPTOMETRIST/OPTICIAN": None,  # 39  filed under HEALTH SERVICES, mostly optometrists: out, as Surrey's Optometrist and Melbourne's opticians (filed in health); pending in the continuity table for the owner
+    "HEALTH SERVICES - OPTOMETRIST/OPTICIAN": None,  # 39  filed under HEALTH SERVICES, mostly optometrists: out, as Surrey's Optometrist and Melbourne's opticians (filed in health); confirmed by the owner, 2026-10-04
     "HEALTH SERVICES - LABORATORY": None,  # 14  NAICS 6215 (Surrey Medical Laboratory)
     "PERSONAL CARE FACILITY - (DAYCARE - CHILDREN)": None,  # 58  child care, NAICS 6244
     "PERSONAL CARE FACILITY (ADULT NURSING HOME & SUPPORTIVE HOUSING FACILITY)": None,  # 8  NAICS 623

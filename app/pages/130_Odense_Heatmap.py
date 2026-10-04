@@ -14,6 +14,7 @@ import streamlit as st
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.odense.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
+    render_caption,
     render_city_nav,
     render_city_title,
     render_country_links,
@@ -51,7 +52,7 @@ if PROVENANCE_JSON.exists():
         _points = ((_osm.get("address_points") or {}).get("file_utc") or "")[:10]
         _rail = ((_osm.get("rail") or {}).get("file_utc") or "")[:10]
         if _times and _points and _rail:
-            st.caption(f"Business and address data from Datafordeler's weekly "
+            render_caption(f"Business and address data from Datafordeler's weekly "
                        f"extracts, generated **{_times[0][:10]}**; address points "
                        f"from OpenStreetMap, fetched **{_points}**; the tram line "
                        f"and its stops from OpenStreetMap, fetched **{_rail}**.")

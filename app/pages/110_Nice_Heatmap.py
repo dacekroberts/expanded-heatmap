@@ -18,6 +18,7 @@ import streamlit as st
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.nice.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
+    render_caption,
     render_city_nav,
     render_city_title,
     render_country_links,
@@ -62,7 +63,7 @@ if PROVENANCE_JSON.exists():
             _line = "Transit data © Métropole Nice Côte d'Azur (Lignes d'Azur), via transport.data.gouv.fr"
             if _start and _end:
                 _line += f", from the feed published for **{_start}** to **{_end}**"
-            st.caption(_line + f"; snapshot taken **{_taken}**.")
+            render_caption(_line + f"; snapshot taken **{_taken}**.")
     except (ValueError, OSError):
         # A malformed provenance file must not take the page down.
         pass
@@ -72,7 +73,7 @@ if PROVENANCE_JSON.exists():
 # provenance block so a missing or malformed provenance file cannot drop it;
 # only the edition comes from that file. Check M of
 # scripts/check_provenance.py refuses a page that nests it again.
-st.caption("Business data: Source : Insee, SIRENE"
+render_caption("Business data: Source : Insee, SIRENE"
            + (f" ({_edition} edition)" if _edition else "")
            + " and its geolocation file.")
 

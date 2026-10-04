@@ -16,6 +16,7 @@ import streamlit as st
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.charleroi.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
+    render_caption,
     render_city_nav,
     render_city_title,
     render_country_links,
@@ -48,7 +49,7 @@ if PROVENANCE_JSON.exists():
         _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
         _feed = ((_prov.get("tec_gtfs") or {}).get("fetched_utc") or "")[:10]
         if _feed:
-            st.caption("Shops and horeca premises from the Service public de Wallonie's LoGIC "
+            render_caption("Shops and horeca premises from the Service public de Wallonie's LoGIC "
                        "2024 survey (CC BY 4.0), surveyed **August 2024**; the light-metro lines "
                        f"and their stations from LETEC's open data, fetched **{_feed}**.")
     except (ValueError, OSError, AttributeError):

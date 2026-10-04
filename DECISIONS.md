@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**27 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**29 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-04**
 
@@ -51,6 +51,8 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [korea_sbiz: a 시군구코드 filter beside the 시군구명 prefix, zero drift on the ten built SEMAS cities](#2026-10-04---korea_sbiz-a-시군구코드-filter-beside-the-시군구명-prefix-zero-drift-on-the-ten-built-semas-cities)
 - [Tacoma on the Visuals cards with its disclaimer in full; Liverpool (Regional) stays minor (owner)](#2026-10-04---tacoma-on-the-visuals-cards-with-its-disclaimer-in-full-liverpool-regional-stays-minor-owner)
 - [East Asia frames the anchors it labels, not only its own four cities (owner)](#2026-10-04---east-asia-frames-the-anchors-it-labels-not-only-its-own-four-cities-owner)
+- [Burnaby's optometrists and opticians stay out (owner)](#2026-10-04---burnabys-optometrists-and-opticians-stay-out-owner)
+- [The owner's calls of the evening: US dates on every caption, the site-wide notices folded, SFMTA's notice kept, Boston measured, communications filed](#2026-10-04---the-owners-calls-of-the-evening-us-dates-on-every-caption-the-site-wide-notices-folded-sfmtas-notice-kept-boston-measured-communications-filed)
 
 **Archived weeks** (`scripts/archive_decisions.py`), newest first:
 
@@ -1002,4 +1004,56 @@ standard rings. `coverage` full, `categories` "All three", `mode` metro,
   PROBLEMS 0 at 375, 768 and 1200, 21 regions, 170 cities; one clip,
   Yokohama 1.7 px at 375. A local render at 1200 showed all twelve labels
   readable from Hong Kong to Sapporo.
+
+### 2026-10-04 - Burnaby's optometrists and opticians stay out (owner)
+
+- **The owner: "drop the opticians if we can".** Burnaby files optometrists
+  and opticians as one type, HEALTH SERVICES - OPTOMETRIST/OPTICIAN (39 rows,
+  about 6 reading as optical shops). The taxonomy already sent the type out,
+  as Surrey's Optometrist and Melbourne's opticians (filed in health); the
+  continuity table held it as pending. It is now an exception on this
+  heading, and `AWAITING_OWNER` is empty. No map moves.
+
+### 2026-10-04 - The owner's calls of the evening: US dates on every caption, the site-wide notices folded, SFMTA's notice kept, Boston measured, communications filed
+
+- **Dates (owner: "change").** `components.us_dates` writes an ISO date the
+  US way (2026-08-31 -> August 31, 2026; 2026-03 -> March 2026) at display:
+  the "Data:" line (`render_data_age`, 58 pages), the Overview's tooltip and
+  city list, and every city page's own captions through `render_caption`
+  (115 pages, 142 calls: the provenance dates, "snapshot taken ..."). The
+  stored text stays ISO, so Visuals' copy and any sort are unchanged.
+  `check_provenance.py` (M), `check_city_page_format.py` (D) and
+  `check_internal_prose.py` read `render_caption` as a display call;
+  `scripts/france_page.py` writes it. The footer's "21 September 2026" now
+  reads "September 21, 2026".
+- **The site-wide notices fold (owner: "is collapsed list allowed? if so use
+  that").** A read of every every-page notice's recorded terms: the rule
+  "never behind an expander" was a build session's of 2026-09-21 (the
+  expander had kept the text out of the DOM), not a licence's. Chicago's,
+  Kansas City's and Tacoma's terms name a place ("at the site", "with any
+  application"), not prominence; OSM's licence is met by the credit on every
+  map. So the every-page notices other than a page's own sit in a closed
+  HTML `<details>`, "Required notices for data used across this site (N)",
+  whose text stays in the DOM. Kept inline: LA Metro (4), whose placement
+  guidelines were never found; and, on a page without a city (the Overview
+  and the reference pages, which show derived figures), INEGI (8) and
+  Barcelona (21). A city's own notices stay inline. Rendered locally (Le
+  Mans): closed, 6 inside with their links and bold, LA Metro outside.
+- **SFMTA's clause 4 (owner: "drop if we don't need").** Kept: the project
+  is the Licensee by use (clause 15), and "shall display or include this
+  disclaimer in any use agreement" reads two ways, one of which requires
+  display; clause 12's notice is required in full either way.
+- **Boston's General On Premise licences (owner: "measure then decide").**
+  27 active across 7 types (the 2026-09-30 call counted the 17 All Alc.);
+  11 already on the map through a food permit, 16 not (6 theaters, 5
+  museums and institutions, 3 event spaces, 2 bars, one maybe not yet
+  trading). Kept out as decided on 2026-09-30; the What Is Excluded count
+  corrected to 27, eleven already mapped.
+- **Communications (owner).** `docs/notifications/` is now
+  `docs/communications/`, with a README table for batch check-ins;
+  Philadelphia (sent 2026-09-21, no reply) is not chased.
+- **Housekeeping (owner).** The superseded `gtfs-nl.zip` (244 MB) and
+  `rome_static_gtfs.zip` (47 MB) deleted from `data/`; the CARTO-key backlog
+  removed from PLAN (the key landed 2026-10-02). The tram rescope stays
+  parked, to be raised when the owner asks what is next.
 

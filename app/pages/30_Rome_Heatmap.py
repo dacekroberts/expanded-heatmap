@@ -15,6 +15,7 @@ import streamlit as st
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.rome.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
+    render_caption,
     render_city_nav,
     render_city_title,
     render_country_links,
@@ -63,7 +64,7 @@ if PROVENANCE_JSON.exists():
             _bits.append(f"metro and rail lines and stations from OpenStreetMap, "
                          f"retrieved **{_got}**")
         if _bits:
-            st.caption("Snapshot: " + "; ".join(_bits) + ".")
+            render_caption("Snapshot: " + "; ".join(_bits) + ".")
     except (ValueError, OSError, AttributeError):
         # A malformed provenance file must not take the page down.
         pass

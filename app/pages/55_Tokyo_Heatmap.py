@@ -18,6 +18,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.tokyo.config import HEATMAP_HTML, OUTPUTS  # noqa: E402
 from pipeline.tokyo.wards import WARDS  # noqa: E402
 from components import (  # noqa: E402
+    render_caption,
     render_city_nav,
     render_city_title,
     render_country_links,
@@ -95,7 +96,7 @@ if shares.exists():
                  [[by_code[r["code"]]["en"], f"{r['rows']:,}", f"{r['official']:,}",
                    f"{r['share_pct']:.1f}%", by_code[r["code"]]["share_note"]] for r in rows],
                  right=("Restaurant permits in the list", "Official count", "Share"))
-    st.caption(f"Official count: {rows[0]['source']}.")
+    render_caption(f"Official count: {rows[0]['source']}.")
 
 st.markdown(
     """

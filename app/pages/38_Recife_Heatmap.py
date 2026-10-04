@@ -17,6 +17,7 @@ import streamlit as st
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.recife.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
+    render_caption,
     render_city_nav,
     render_city_title,
     render_country_links,
@@ -66,7 +67,7 @@ if PROVENANCE_JSON.exists():
             if _got:
                 _bits.append(f"{_what}, retrieved **{_got[-1]}**")
         if _bits:
-            st.caption("Snapshot: " + "; ".join(_bits) + ".")
+            render_caption("Snapshot: " + "; ".join(_bits) + ".")
     except (ValueError, TypeError, KeyError, OSError, AttributeError):
         # A malformed provenance file must not take the page down.
         pass

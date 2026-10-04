@@ -108,10 +108,6 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     2026-10-01): a licence read, an address join and a call on "Shop And
     Premises".
 
-- [ ] Owner: `data/amsterdam/raw/gtfs-nl.zip` (243.8 MB, superseded by
-  `gtfs-openov-nl.zip`) and `data/rome/raw/rome_static_gtfs.zip` (46.8 MB,
-  downloaded, then not used) may be deleted from the main checkout.
-
 - [x] **Tokyo's page scrolls sideways on a phone** FIXED at review time 2026-09-28 (a table that scrolls inside itself, `components.scroll_table`; deploy-verify: 375 and 343 px pass). (deploy-verify at review
   time, 2026-09-28): at 375 px its ward-share table is 469 px wide in a 343 px
   column, so the "The list" column is off screen until the reader scrolls. A
@@ -313,8 +309,10 @@ Desktop is unaffected — the label is fully visible there.
     time: `app/macro_facts.json`, written from the processed files saved in
     `data/_review_category-continuity_2026-09-29/`, then landing.
   - Stockholm's torghandel stall waits for `stockholm-catering` to land.
-  - Still with the owner: Boston's General On Premise licences (measure
-    first).
+  - [x] Boston's General On Premise licences: measured 2026-10-04 (27 active
+    across 7 types, 11 already mapped through a food permit, the rest
+    theaters, museums, event spaces, a lounge and 2 bars); kept out as the
+    owner decided 2026-09-30, the disclosure's count corrected (DECISIONS).
 - [ ] **Next cross-city discrepancy audits (owner, 2026-09-29), AFTER the
   exclusions batch lands.** Each is read-only and runs one at a time; each ends in rules
   for the owner to decide, as the fringe-category audit did.
@@ -900,7 +898,7 @@ brief names.
 
 **Owner's outside actions** are tracked in `docs/gated_access.md`, the list of
 every key, account and letter:
-- [ ] Item 21: send Sendai's request (`docs/notifications/sendai-permission-request.md`).
+- [ ] Item 21: send Sendai's request (`docs/communications/sendai-permission-request.md`).
 - [ ] Item 22: request Chiyoda's ledger.
 - [ ] Item 23: place the Tallinn building-register orders (two reports).
 - Items 25–27 (Hiroshima, MHLW, Osaka) are optional confirmations, not gates.
@@ -919,10 +917,12 @@ every key, account and letter:
     - [x] **Followed up 2026-09-28** (one week), at the owner's request. The
       owner SENT the request on 2026-09-21 to `maps@phila.gov`, copying
       `LIGISTEAM@phila.gov` (text in
-      `docs/notifications/philadelphia-permission-request.md`). **No reply as
+      `docs/communications/philadelphia-permission-request.md`). **No reply as
       of 2026-09-28** (the owner, checked that day).
-    - [ ] **Owner to choose the next step:** wait, chase once, or ring the Open
-      Data Program. **Silence is not consent** - the interim position holds on
+    - [x] **The owner's next step (2026-10-04): no chase.** The request is filed
+      in `docs/communications/` and checked at the batch check-ins with every
+      other communication (its README's table). Earlier wording: wait, chase
+      once, or ring the Open Data Program. **Silence is not consent** - the interim position holds on
       the reasoned reading and the disclosure, not on the absence of an
       objection, and it does not strengthen with time. Sending it is the owner's to do. **Nothing in this project may
       claim a request is outstanding until it has actually been sent**, and
@@ -1056,22 +1056,6 @@ every key, account and letter:
     one, the Positron design credit on About the Data, and a one-line note
     that tiles load through Cloudflare. Test scripts must never script tile
     downloads (its ToS bars automated collection).
-  - **Backlog, the CARTO-key route,** in case a key is obtained:
-    - The owner requests a free non-commercial key at
-      carto.com/basemaps/apikey/: email only, no card, 5M tile requests a
-      month, lockable to the site's host.
-    - Conditions: an uncapped indemnity (§17) and New York law, for the owner
-      to accept. A key is revocable at any time; the terms changed four times
-      in a year; a lapsed key means blank tiles.
-    - Streamlit does not send its own `cartoKey`, so the key likely needs a
-      self-hosted Positron style carrying `?key=` on every URL. Test it with a
-      real key.
-    - Fix the on-map CARTO link to carto.com/attribution/; an OpenMapTiles
-      credit is probably owed.
-    - Possibly a privacy line: CARTO processes visitors' request data, and the
-      site is the controller.
-    - The full reads are in the cleanup session's scratchpad
-      (`openfreemap/`, `ofm/`) and DECISIONS.
 - [ ] **Licence gaps from staging's ranking** (2026-10-03: item 1 DONE, the footer link and the header icons; the second item's Dublin and SFMTA credits DONE; Milan's ATM, STM and MLIT still open) (`docs/licence_positions.md`,
   5813011a; its notice numbers were stripped as unreliable, so verify each
   item against the code first). The first two are the most visible:

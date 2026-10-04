@@ -83,8 +83,10 @@ def problems(source):
         elif iframe is not None and i < iframe:
             out.append(f"C {want} comes before the map")
     for node in ast.walk(tree):
-        if (isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute)
-                and node.func.attr in RENDERS_TEXT):
+        # components.render_caption is st.caption with US dates (2026-10-04).
+        if (isinstance(node, ast.Call)
+                and ((isinstance(node.func, ast.Attribute) and node.func.attr in RENDERS_TEXT)
+                     or getattr(node.func, "id", None) == "render_caption")):
             for arg in node.args:
                 for sub in ast.walk(arg):
                     if isinstance(sub, ast.Constant) and isinstance(sub.value, str):

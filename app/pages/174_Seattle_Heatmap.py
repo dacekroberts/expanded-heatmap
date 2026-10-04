@@ -15,6 +15,7 @@ import streamlit as st
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.seattle.config import HEATMAP_HTML  # noqa: E402
 from components import (  # noqa: E402
+    render_caption,
     render_city_nav,
     render_city_title,
     render_country_links,
@@ -45,7 +46,7 @@ render_data_age("Seattle (Regional)")
 # The credits the sources require on the city's own page (notices 109-113):
 # King County's two texts word for word, Snohomish County's in the owner's
 # words, the Liquor Board's list date and its own note. Unconditional.
-st.caption(
+render_caption(
     "Food inspection data: Public Health – Seattle & King County. Data provided by "
     "permission of King County. Lynnwood and Mountlake Terrace food: Snohomish County, "
     "Food Service Establishments (2025). Shops licensed to sell alcohol: Washington State "

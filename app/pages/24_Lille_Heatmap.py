@@ -19,6 +19,7 @@ import streamlit as st
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.lille.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
+    render_caption,
     render_city_nav,
     render_city_title,
     render_country_links,
@@ -53,7 +54,7 @@ if PROVENANCE_JSON.exists():
         _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
         _taken = (_prov.get("fetched_utc") or "")[:10]
         if _taken:
-            st.caption(
+            render_caption(
                 "Station locations, tram routes and line colors © Métropole "
                 "Européenne de Lille and Ilévia, Licence Ouverte 2.0, retrieved "
                 f"**{_taken}**. MEL publishes no update date for these layers, "
@@ -73,7 +74,7 @@ if PROVENANCE_JSON.exists():
 # record it: it is the title fetch_sources.py recorded for the shared national
 # cache (data/france/raw, fetched 2026-09-23). Change it with the next SIRENE
 # refetch.
-st.caption("Business data: Source : Insee, SIRENE (01 septembre 2026 edition)"
+render_caption("Business data: Source : Insee, SIRENE (01 septembre 2026 edition)"
            " and its geolocation file.")
 
 st.markdown(

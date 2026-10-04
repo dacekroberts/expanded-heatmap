@@ -14,6 +14,7 @@ import streamlit as st
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.copenhagen.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
+    render_caption,
     render_city_nav,
     render_city_title,
     render_country_links,
@@ -47,7 +48,7 @@ if PROVENANCE_JSON.exists():
         _times = sorted(v.get("generation_time") or "" for k, v in _files.items()
                         if k.startswith("cvr/") and v.get("generation_time"))
         if _times:
-            st.caption(f"Business and address data from Datafordeler's weekly "
+            render_caption(f"Business and address data from Datafordeler's weekly "
                        f"extracts, generated **{_times[0][:10]}**.")
     except (ValueError, OSError, AttributeError):
         # A malformed provenance file must not take the page down.

@@ -15,6 +15,7 @@ import streamlit as st
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.tbilisi.config import HEATMAP_HTML  # noqa: E402
 from components import (  # noqa: E402
+    render_caption,
     render_city_nav,
     render_city_title,
     render_country_links,
@@ -43,7 +44,7 @@ else:
 # replaces this with its own caption of the sources' dates and credits.
 render_data_age("Tbilisi")
 # The credit Geostat's terms require (notice 114), on the city's own page.
-st.caption(
+render_caption(
     "Business data: National Statistics Office of Georgia (Geostat), Statistical "
     "Business Register, retrieved 2026-10-02; processed by this project. Rail: "
     "OpenStreetMap."

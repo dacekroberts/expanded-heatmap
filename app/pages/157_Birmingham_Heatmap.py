@@ -16,6 +16,7 @@ import streamlit as st
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.birmingham.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
+    render_caption,
     render_city_nav,
     render_city_title,
     render_country_links,
@@ -52,7 +53,7 @@ if PROVENANCE_JSON.exists():
             _when = f"on **{_lo}**" if _lo == _hi else f"between **{_lo}** and **{_hi}**"
             _rail = (f"; the West Midlands Metro line and its stops from OpenStreetMap, "
                      f"fetched **{_osm}**") if _osm else ""
-            st.caption(f"Snapshot: food businesses as extracted by each council {_when} "
+            render_caption(f"Snapshot: food businesses as extracted by each council {_when} "
                        f"(Food Standards Agency){_rail}.")
     except (ValueError, OSError, AttributeError, TypeError):
         # A malformed provenance file must not take the page down.

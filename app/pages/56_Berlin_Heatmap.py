@@ -14,6 +14,7 @@ import streamlit as st
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.berlin.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
+    render_caption,
     render_city_nav,
     render_city_title,
     render_country_links,
@@ -53,13 +54,13 @@ if PROVENANCE_JSON.exists():
             _bits.append(f"timetable data valid **{_start[:4]}-{_start[4:6]}-{_start[6:]}** "
                          f"to **{_end[:4]}-{_end[4:6]}-{_end[6:]}** (VBB)")
         if _bits:
-            st.caption("Snapshot: " + "; ".join(_bits) + ".")
+            render_caption("Snapshot: " + "; ".join(_bits) + ".")
     except (ValueError, OSError, AttributeError):
         # A malformed provenance file must not take the page down.
         pass
 
 # A courtesy credit, not a licence condition: CC0 asks for none (owner, 2026-09-28).
-st.caption("Business data: IHK Berlin (CC0).")
+render_caption("Business data: IHK Berlin (CC0).")
 
 # Approved by the owner 2026-09-28; set as bullets 2026-10-01.
 st.markdown(

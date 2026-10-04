@@ -14,6 +14,7 @@ import streamlit as st
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.marseille.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
+    render_caption,
     render_city_nav,
     render_city_title,
     render_country_links,
@@ -53,7 +54,7 @@ if PROVENANCE_JSON.exists():
                      f"taken **{_taken}**")
             if len(_end) == 8:
                 _line += f", feed valid to **{_end[:4]}-{_end[4:6]}-{_end[6:]}**"
-            st.caption(_line + ".")
+            render_caption(_line + ".")
     except (ValueError, OSError):
         # A malformed provenance file must not take the page down.
         pass
@@ -68,7 +69,7 @@ if PROVENANCE_JSON.exists():
 # record it: it is the title fetch_sources.py recorded for the shared national
 # cache (data/france/raw, fetched 2026-09-23). Change it with the next SIRENE
 # refetch.
-st.caption("Business data: Source : Insee, SIRENE (01 septembre 2026 edition)"
+render_caption("Business data: Source : Insee, SIRENE (01 septembre 2026 edition)"
            " and its geolocation file.")
 
 st.markdown(

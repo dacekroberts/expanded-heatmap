@@ -16,6 +16,7 @@ import streamlit as st
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.tacoma.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
+    render_caption,
     render_city_nav,
     render_city_title,
     render_country_links,
@@ -48,7 +49,7 @@ if PROVENANCE_JSON.exists():
         _reg = (_prov.get("register") or {}).get("data_last_edit") or ""
         _rail = ((_prov.get("files_utc") or {}).get("osm_rail.json") or "")[:10]
         if _reg and _rail:
-            st.caption(f"Business license accounts from the City of Tacoma, Tax & License "
+            render_caption(f"Business license accounts from the City of Tacoma, Tax & License "
                        f"(data.tacoma.gov), last updated **{_reg}**; the tram line and its stops "
                        f"from OpenStreetMap, fetched **{_rail}**.")
     except (ValueError, OSError, AttributeError):

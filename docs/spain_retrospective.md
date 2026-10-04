@@ -192,7 +192,7 @@ a host in the **same /24** answers in 2.4 s. The fallback is closed too — the
 electronic registry requires a Spanish digital certificate. There is **no email
 to fall back on**: the dataset's CKAN metadata carries no contact address, and
 `datos.gob.es` names only a web form. Logged with dates in
-[`notifications/barcelona-city-council.md`](notifications/barcelona-city-council.md).
+[`communications/barcelona-city-council.md`](communications/barcelona-city-council.md).
 
 ### Terms behind a CAPTCHA, and what was decided
 

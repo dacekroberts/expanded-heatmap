@@ -14,6 +14,7 @@ import streamlit as st
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.zurich.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
+    render_caption,
     render_city_nav,
     render_city_title,
     render_country_links,
@@ -54,7 +55,7 @@ if PROVENANCE_JSON.exists():
         _rail = (_files.get("osm_rail.json") or "")[:10]
         if _reg and _rail:
             _as_of = f"last updated **{_upd}**, " if _upd else ""
-            st.caption(f"Premises data: Stadt Zürich, Gastwirtschaftsbetriebe (CC0), "
+            render_caption(f"Premises data: Stadt Zürich, Gastwirtschaftsbetriebe (CC0), "
                        f"{_as_of}fetched **{_reg}**; the tram lines and their stops "
                        f"from OpenStreetMap, fetched **{_rail}**.")
     except (ValueError, OSError, AttributeError, TypeError):

@@ -14,6 +14,7 @@ import streamlit as st
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.den_haag.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
+    render_caption,
     render_city_nav,
     render_city_title,
     render_country_links,
@@ -49,7 +50,7 @@ if PROVENANCE_JSON.exists():
         _bag = (_files.get("bag_verblijfsobjecten_winkelfunctie.json") or "")[:10]
         _rail = (_files.get("osm_rail.json") or "")[:10]
         if _edited and _bag and _rail:
-            st.caption(f"Permit data from the Gemeente Den Haag, its permit layer last edited "
+            render_caption(f"Permit data from the Gemeente Den Haag, its permit layer last edited "
                        f"**{_edited}**; shop units from the BAG (Kadaster, via PDOK), fetched "
                        f"**{_bag}**; the tram lines and their stops from OpenStreetMap, "
                        f"fetched **{_rail}**.")

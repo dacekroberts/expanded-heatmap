@@ -735,10 +735,10 @@ Alley` 10, seven Farmer Brewery/Winery/Distillery pouring licenses, and five
 `Fortune Teller`): NAICS 713/312, which none of the three categories covers
 in any city here.
 
-Also left out: 17 **General On Premise** all-alcohol licenses. Ten of those
-venues are on the map already, through their Inspectional Services food permit;
-the rest are theatres, a college, public institutions and a single bar, so
-taking the license type would add almost nothing the map is meant to show.
+Also left out: 27 **General On Premise** licenses. Eleven of those venues are
+on the map already, through their Inspectional Services food permit; the rest
+are theaters, museums, event spaces, an airport lounge and two bars, so taking
+the license type would add almost nothing the map is meant to show.
 
 From the food data, `MFW` (Mobile Food Walk On, 10 premises) is out as mobile
 trade is everywhere else, and the cannabis register's one `Delivery (operator)`

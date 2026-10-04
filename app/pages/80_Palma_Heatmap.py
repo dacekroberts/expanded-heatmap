@@ -14,6 +14,7 @@ import streamlit as st
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.palma.config import HEATMAP_HTML, PROVENANCE_JSON  # noqa: E402
 from components import (  # noqa: E402
+    render_caption,
     render_city_nav,
     render_city_title,
     render_country_links,
@@ -44,7 +45,7 @@ if PROVENANCE_JSON.exists():
         _prov = json.loads(PROVENANCE_JSON.read_text(encoding="utf-8"))
         _date = _prov.get("as_of_date")
         if _date:
-            st.caption(f"Snapshot: the Consell de Mallorca's register as last updated on "
+            render_caption(f"Snapshot: the Consell de Mallorca's register as last updated on "
                        f"**{_date}**; Catastro's address points as accessed on "
                        f"**{_prov.get('files_utc', {}).get('A.ES.SDGC.AD.07040.zip', '')[:10]}**.")
     except (ValueError, OSError, AttributeError, TypeError):
