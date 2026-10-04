@@ -1335,7 +1335,9 @@ WHEEL_ZOOM_SCRIPT = """
 # 4 px line is too thin to tap, and the hidden line is never what was hit.
 # Leaflet's own clipped, projected `_parts` are measured, as its
 # _containsPoint does. A tap on a business dot, station or ring is left alone.
-# The legend's open/collapsed state is never touched.
+# The legend's open/collapsed state is never touched. On a touch screen a tap
+# reaches here only when TAP_SELECT_SCRIPT found no dot, station or cluster
+# nearer than the nearest line.
 LINE_HIGHLIGHT_SCRIPT = """
 <style>
 .map-legend .hm-line-row { cursor: pointer; border-radius: 3px; }
@@ -1383,7 +1385,8 @@ LINE_HIGHLIGHT_SCRIPT = """
         var rows = legend ? legend.querySelectorAll(".hm-line-row[data-line]") : [];
         var mq = function (q) { return !!(window.matchMedia && window.matchMedia(q).matches); };
         var HOVER = mq("(hover: hover) and (pointer: fine)");
-        var TOL = mq("(pointer: coarse)") ? 16 : 7;
+        // 22 on a touch screen is TAP_SELECT_SCRIPT's REACH: a 44 px target.
+        var TOL = mq("(pointer: coarse)") ? 22 : 7;
         var sel = null, hov = null, shown = null, outTimer = null;
 
         // The picked line's paths go last within the run of line paths, so
@@ -1454,11 +1457,16 @@ LINE_HIGHLIGHT_SCRIPT = """
         }
 
         m.on("click", function (e) {
+            // On a touch screen TAP_SELECT_SCRIPT has already measured this
+            // tap from where the finger lifted and sent it on as a line tap.
+            var tap = window.__HEATMAP_TAP && window.__HEATMAP_TAP.last;
+            var mine = !!(tap && tap.event === e.originalEvent);
+            var at = mine ? m.containerPointToLayerPoint(tap.point) : e.layerPoint;
             var t = e.originalEvent && e.originalEvent.target;
-            if (t && t.classList && t.classList.contains("leaflet-interactive") && !t._hmLine) return;
+            if (!mine && t && t.classList && t.classList.contains("leaflet-interactive") && !t._hmLine) return;
             var found = [];
             keys.forEach(function (k, i) {
-                var d = distance(lines[k], e.layerPoint);
+                var d = distance(lines[k], at);
                 if (d <= TOL) found.push({k: k, d: d, z: k === shown ? keys.length : i});
             });
             if (!found.length) { clearTimeout(outTimer); sel = null; hov = null; show(); return; }
@@ -1640,6 +1648,276 @@ TOUCH_GESTURE_SCRIPT = (
     .replace("@@LIGHT_BORDER@@", LIGHT["border"])
 )
 assert "@@" not in TOUCH_GESTURE_SCRIPT, "unresolved placeholder in TOUCH_GESTURE_SCRIPT"
+# A TAP SELECTS THE NEAREST THING WITHIN REACH, on a touch screen (owner,
+# 2026-10-03, from an iPhone). A business dot is drawn 5 px across plus a 1 px
+# stroke, so its SVG hit area is 11 px wide, a station's 13 px, and stations
+# sit UNDER their lines (drawn later), so a tap on a station's centre hit the
+# line. Measured before this script (docs/decisions_drafts/mobile-tap-targets.md,
+# CDP touch emulation at 375 px on Edmonton, Paris, Tokyo and Odense): with no
+# touch adjustment (WebKit's case) 0 of 43 taps 8 px off a dot opened it, and
+# 0 of 6 taps on Tokyo's station centres opened the station. A spiderfied
+# group closed under every second tap, even one dead on a dot: a path's
+# click bubbles to the map (bubblingMouseEvents) and Leaflet.markercluster
+# unspiderfies on any map click.
+#
+# So on a device whose primary pointer is coarse (the same test as
+# TOUCH_GESTURE_SCRIPT), a capture listener on the map container sees every
+# tap's click before Leaflet does and finds what is nearest, by geometry, not
+# by what was hit: a dot or station within REACH px of its centre, a cluster
+# within REACH of its centre or anywhere on its badge, a line within REACH of
+# its centreline (LINE_HIGHLIGHT_SCRIPT's own tolerance on a touch screen is
+# the same REACH). REACH 22 makes a 44 px target (WCAG 2.5.5, Apple's HIG).
+# The nearest EDGE wins, and within TIE_PX a dot or station beats a cluster,
+# which beats a line: a tap on a station's centre opens the station, a tap on
+# the line beside it picks the line. While a group is spiderfied its own dots
+# within reach win outright: the reader has just opened it, and a group beside
+# a line otherwise lost taps 8 px out to the line (Tokyo, Odense).
+#
+# - A dot or station: the click goes no further (so Leaflet never sees an
+#   empty-map click: a spiderfied group stays open, which is what closed it
+#   under a reader's second tap), its tooltip text goes into a panel pinned
+#   bottom-left, and a ring marks the dot. A tooltip anchored to the dot ran
+#   off the 343 px map's left edge (Odense, owner's screenshot), so on a
+#   touch screen the tooltip pane is hidden and the panel replaces it.
+# - A cluster: the click is re-sent to the cluster's own badge, so
+#   Leaflet.markercluster zooms or spiderfies exactly as for a direct tap.
+#   A spiderfied cluster is skipped, so a tap among its legs finds a dot.
+# - A line, or nothing within reach: the panel closes and the click goes on
+#   to Leaflet unchanged (line picking, closing a spiderfied group).
+#
+# The panel is fixed in the body like the legend, above the OSM credit (24 px
+# from the map's bottom edge, the legend's clamp) and above the legend when
+# the legend leaves ROOM_PX over it, else beside it; it is re-placed on each
+# showing, on resize and when the legend opens or closes. It closes on its
+# own button, Escape, a tap on empty map or a line, and a new selection moves
+# it. The ring follows its dot when a spiderfied group closes (the dot's
+# `move`). PHONE_FIT_SCRIPT's guard is untouched: its capture listener on the
+# same container still sees the tap's mousedown and click. Mouse and trackpad
+# readers never reach any of this; their tooltips are unchanged.
+_TAP_SELECT_TEMPLATE = """
+<style>
+.hm-tap-panel { display: none; position: fixed; z-index: 10000; box-sizing: border-box;
+    left: 10px; bottom: 24px; max-width: 420px; overflow-y: auto;
+    padding: 8px 40px 8px 12px; border-radius: 4px; overflow-wrap: anywhere;
+    font: 13px/1.4 @@FONT_STACK@@;
+    background: @@LIGHT_SURFACE@@; color: @@LIGHT_TEXT@@; border: 1px solid @@LIGHT_BORDER@@;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.3); }
+.hm-tap-panel.hm-shown { display: block; }
+.hm-tap-close { position: absolute; top: 0; right: 0; width: 40px; height: 40px;
+    padding: 0; border: 0; background: none; color: inherit; cursor: pointer;
+    font: 22px/40px @@FONT_STACK@@; }
+.dark-base .hm-tap-panel { background: var(--dm-surface); color: var(--dm-text);
+    border-color: var(--dm-border); box-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+.hm-tap-ring { box-sizing: border-box; border-radius: 50%; pointer-events: none;
+    border: 2px solid #fff; box-shadow: 0 0 0 2px #111, 0 0 6px 2px rgba(0,0,0,0.45); }
+@media (pointer: coarse) { .leaflet-tooltip-pane { display: none; } }
+</style>
+<script>
+(function () {
+    var NAME = "__MAP_NAME__";
+    var REACH = 22;         // px from a centre or centreline: a 44 px target
+    var TIE_PX = 2;         // edges this close count as a tie, broken by kind
+    var ROOM_PX = 200;      // map height the panel needs above the legend
+    var RING_PX = 26;       // the selection ring's outer diameter
+    var LIFT_MS = 800;      // a click this soon after a touchend is that tap's
+    var tries = 0;
+
+    function start() {
+        var m = window[NAME];
+        if (!m || !m.getContainer || !m.eachLayer) {
+            if (tries++ < 60) setTimeout(start, 100);
+            return;
+        }
+        var el = m.getContainer();
+        var mq = window.matchMedia ? window.matchMedia("(pointer: coarse)") : null;
+        var legend = document.querySelector("details.map-legend");
+        var TAP = window.__HEATMAP_TAP = {reach: REACH, last: null};
+
+        var panel = document.createElement("div");
+        panel.className = "hm-tap-panel";
+        var body = document.createElement("div");
+        body.setAttribute("role", "status");
+        body.setAttribute("aria-live", "polite");
+        var close = document.createElement("button");
+        close.type = "button";
+        close.className = "hm-tap-close";
+        close.setAttribute("aria-label", "Close");
+        close.innerHTML = "&times;";
+        panel.appendChild(body);
+        panel.appendChild(close);
+        document.body.appendChild(panel);
+
+        var ring = null, picked = null, passing = false;
+        function follow() { if (ring && picked) { ring.setLatLng(picked.getLatLng()); place(); } }
+        function clear() {
+            panel.classList.remove("hm-shown");
+            panel.removeAttribute("data-for");
+            body.innerHTML = "";
+            if (ring) { m.removeLayer(ring); ring = null; }
+            if (picked) { picked.off("move", follow); picked = null; }
+        }
+
+        // Pinned bottom-left, clear of the OSM credit and of the legend.
+        function place() {
+            if (!panel.classList.contains("hm-shown")) return;
+            var c = el.getBoundingClientRect();
+            var vw = document.documentElement.clientWidth || window.innerWidth;
+            var vh = document.documentElement.clientHeight || window.innerHeight;
+            var top = Math.max(c.top, 0), bot = Math.min(c.bottom, vh);
+            var left = Math.max(c.left, 0) + 10, right = vw - Math.min(c.right, vw) + 10;
+            var bottom = vh - bot + 24;
+            var lg = legend ? legend.getBoundingClientRect() : null;
+            if (lg && lg.width && lg.left < vw - right && lg.top < bot - 24) {
+                if (lg.top - top >= ROOM_PX) bottom = Math.max(bottom, vh - lg.top + 8);
+                else right = Math.max(right, vw - lg.left + 8);
+            }
+            panel.style.left = left + "px";
+            panel.style.right = right + "px";
+            panel.style.top = "auto";
+            panel.style.bottom = bottom + "px";
+            panel.style.maxHeight = Math.max(80, Math.round(0.45 * (bot - top))) + "px";
+            // Never over the dot it describes: then it goes to the top, under
+            // the zoom and layer controls and the button row.
+            if (ring && ring._icon && overlaps(ring._icon.getBoundingClientRect(), panel.getBoundingClientRect())) {
+                var under = top;
+                [el.querySelector(".leaflet-top.leaflet-left"), document.getElementById("map-actions")]
+                    .forEach(function (n) { if (n) under = Math.max(under, n.getBoundingClientRect().bottom); });
+                panel.style.bottom = "auto";
+                panel.style.top = (under + 8) + "px";
+                if (overlaps(ring._icon.getBoundingClientRect(), panel.getBoundingClientRect())) {
+                    panel.style.top = "auto";
+                    panel.style.bottom = bottom + "px";
+                }
+            }
+        }
+        function overlaps(a, b) {
+            return a.right + 8 > b.left && a.left - 8 < b.right && a.bottom + 8 > b.top && a.top - 8 < b.bottom;
+        }
+        window.addEventListener("resize", place);
+        m.on("moveend", place);
+        if (legend) legend.addEventListener("toggle", place);
+        close.addEventListener("click", clear);
+        document.addEventListener("keydown", function (e) { if (e.key === "Escape") clear(); });
+
+        function select(layer) {
+            var tip = layer.getTooltip(), text = tip.getContent();
+            if (typeof text === "function") text = text(layer);
+            if (picked !== layer) { clear(); }
+            if (typeof text === "string") body.innerHTML = text;
+            else if (text && text.cloneNode) { body.innerHTML = ""; body.appendChild(text.cloneNode(true)); }
+            panel.setAttribute("data-for", String(L.stamp(layer)));
+            panel.classList.add("hm-shown");
+            if (!ring) {
+                ring = L.marker(layer.getLatLng(), {
+                    interactive: false, keyboard: false,
+                    icon: L.divIcon({className: "hm-tap-ring", iconSize: [RING_PX, RING_PX]})
+                }).addTo(m);
+            }
+            if (picked !== layer) { picked = layer; layer.on("move", follow); }
+            place();
+            if (layer.isTooltipOpen()) layer.closeTooltip();
+        }
+
+        function isLine(l) {
+            return (" " + (l.options.className || "") + " ").indexOf(" hm-line ") >= 0;
+        }
+        // Where the finger actually lifted. Chromium's touch adjustment moves
+        // a tap's click onto a nearby target (a spiderfied cluster's badge,
+        // say) and reports the moved point; the touch events keep the real one.
+        var lift = null;
+        el.addEventListener("touchend", function (e) {
+            var t = e.changedTouches && e.changedTouches[0];
+            lift = t ? {x: t.clientX, y: t.clientY, at: Date.now()} : null;
+        }, {capture: true, passive: true});
+        function tapPoint(e) {
+            if (lift && Date.now() - lift.at < LIFT_MS &&
+                Math.abs(lift.x - e.clientX) + Math.abs(lift.y - e.clientY) <= 2 * REACH) {
+                return m.mouseEventToContainerPoint({clientX: lift.x, clientY: lift.y});
+            }
+            return m.mouseEventToContainerPoint(e);
+        }
+
+        // The nearest dot, station, cluster or line within reach of a tap.
+        function nearest(p) {
+            var lp = m.containerPointToLayerPoint(p);
+            var best = null, fanned = null;
+            function consider(kind, layer, d, reach, edge, rank) {
+                if (d > reach) return;
+                // Equal distance and kind: the later layer, drawn on top, is
+                // the one the reader sees (categories cluster separately, so
+                // two badges can share one point).
+                if (!best || edge < best.edge - TIE_PX ||
+                    (edge <= best.edge + TIE_PX && rank < best.rank) ||
+                    (rank === best.rank && Math.abs(edge - best.edge) < 0.5)) {
+                    best = {kind: kind, layer: layer, edge: edge, rank: rank};
+                }
+                // A dot of a spiderfied group the reader has just opened.
+                if (layer._spiderLeg && (!fanned || edge < fanned.edge)) {
+                    fanned = {kind: kind, layer: layer, edge: edge, rank: rank};
+                }
+            }
+            m.eachLayer(function (l) {
+                var q, r, d;
+                if (l instanceof L.CircleMarker) {
+                    // Rings (L.Circle) carry no tooltip and are not targets.
+                    if (l instanceof L.Circle || !l.getTooltip || !l.getTooltip() || !l._point) return;
+                    q = m.latLngToContainerPoint(l.getLatLng());
+                    r = l._radius + (l.options.stroke ? l.options.weight / 2 : 0);
+                    d = q.distanceTo(p);
+                    consider("point", l, d, Math.max(REACH, r), d - r, 0);
+                } else if (L.MarkerCluster && l instanceof L.MarkerCluster && l._icon) {
+                    if (l._group && l._group._spiderfied === l) return;
+                    q = m.latLngToContainerPoint(l.getLatLng());
+                    r = l._icon.offsetWidth / 2;
+                    d = q.distanceTo(p);
+                    consider("cluster", l, d, Math.max(REACH, r), d - r, 1);
+                } else if (l instanceof L.Polyline && l._parts && isLine(l)) {
+                    d = Infinity;
+                    l._parts.forEach(function (part) {
+                        for (var i = 1; i < part.length; i++) {
+                            d = Math.min(d, L.LineUtil.pointToSegmentDistance(lp, part[i - 1], part[i]));
+                        }
+                    });
+                    consider("line", l, d, REACH, d - l.options.weight / 2, 2);
+                }
+            });
+            return fanned || best;
+        }
+
+        el.addEventListener("click", function (e) {
+            if (passing || !(mq && mq.matches)) return;
+            var t = e.target;
+            if (t && t.closest && t.closest(".leaflet-control")) return;
+            var p = tapPoint(e), best = nearest(p);
+            if (!best || best.kind === "line") {
+                // On to Leaflet; LINE_HIGHLIGHT_SCRIPT reads this point.
+                if (best) TAP.last = {event: e, point: p};
+                clear();
+                return;
+            }
+            e.stopPropagation();
+            if (best.kind === "point") { select(best.layer); return; }
+            clear();
+            passing = true;
+            try {
+                best.layer._icon.dispatchEvent(new MouseEvent("click", {
+                    bubbles: true, cancelable: true, view: window,
+                    clientX: e.clientX, clientY: e.clientY}));
+            } finally { passing = false; }
+        }, true);
+    }
+    start();
+})();
+</script>
+"""
+TAP_SELECT_SCRIPT = (
+    _TAP_SELECT_TEMPLATE
+    .replace("@@FONT_STACK@@", FONT_VAR)
+    .replace("@@LIGHT_SURFACE@@", LIGHT["surface"])
+    .replace("@@LIGHT_TEXT@@", LIGHT["text"])
+    .replace("@@LIGHT_BORDER@@", LIGHT["border"])
+)
+assert "@@" not in TAP_SELECT_SCRIPT, "unresolved placeholder in TAP_SELECT_SCRIPT"
 LEGEND_ROW = """
   <div style="display:flex; align-items:center; margin:3px 0;">
     <span style="display:inline-block; width:11px; height:11px;
@@ -2922,6 +3200,11 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     # See TOUCH_GESTURE_SCRIPT.
     m.get_root().html.add_child(folium.Element(
         TOUCH_GESTURE_SCRIPT.replace("__MAP_NAME__", m.get_name())))
+    # On a touch screen a tap selects the nearest dot, station, cluster or
+    # line within reach, and a dot's details go in a fixed panel.
+    # See TAP_SELECT_SCRIPT.
+    m.get_root().html.add_child(folium.Element(
+        TAP_SELECT_SCRIPT.replace("__MAP_NAME__", m.get_name())))
 
     # A declared language: its font order on --hm-font, which every shared
     # block reads through theme.FONT_VAR, so the shared blocks stay identical.
