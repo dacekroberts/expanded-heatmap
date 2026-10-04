@@ -4,6 +4,46 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - Japan's third wave, Germany south and Poland banded (owner)
+
+- **Poland, "49 yes 50 yes 51 discard, 52 no download":** Wrocław's precedent
+  confirmed (alcohol-sale lists alone give two partial buckets and fail rule
+  1), so Gdańsk (1,713 points, CC BY, the cleanest list), Szczecin, the
+  Silesian network and Olsztyn are coverage discards; Łódź, Bydgoszcz, Toruń,
+  Częstochowa, Elbląg, Gorzów Wielkopolski and Grudziądz absence discards;
+  Gdynia/Sopot and Lublin rail discards (trolleybuses; checked by web search
+  before writing). Olsztyn was staging's recommendation over the probe's R:
+  even read in full, its known register would meet Wrocław's precedent.
+  Toruń's one alcohol PDF stays unread.
+- **Japan's third wave, "53 yes ... 60 yes, 51 yes"** (staging reads the
+  last as 61, Niigata, the only one of 53 to 61 not otherwise answered):
+  Maebashi and Fukuyama to A; Shizuoka, Funabashi, Matsudo and Ichikawa to
+  B, personal services only (Kōchi's shape); Kanazawa to B on its 2024 CC BY
+  food snapshot (84% of restaurants in force, under five years old);
+  Sagamihara to C with a licence read now (its terms say CC BY 4.0 and that a
+  download is acceptance); Kurashiki to C with its 791 KB food CSV approved
+  for a count; Naha to C (does a rebuild from monthly permits reach the stock,
+  Nagoya's trap); Takasaki, Hachiōji and Saitama to R (site terms forbid
+  reuse, or ledgers by request); Niigata discarded. The probe's ~100 quick
+  calls drew a 403 from `data.bodik.jp`, probably a rate block; not retried.
+- **Germany south, "62 yes 63 yes 64 yes":** 21 absence discards (Karlsruhe
+  on Dresden's precedent, its city-map food layer the reopen condition);
+  Ludwigshafen and Ulm to R (bot protection, 403 to both agents); Stuttgart
+  in the open gap (its catalogue answered 502 three times).
+
+### 2026-10-04 - Probe slips in the Poland screen: a form fetched, names printed to a console
+
+- **A 107 KB Word application form** was fetched from `bip.olsztyn.eu`. It
+  is a form, not data, but no brief named it; it was not found saved in the
+  scratchpad afterwards.
+- **One alcohol-list row (a company name) and some staff names from page
+  metadata** were printed to the agent's console. None reached the report
+  or any file. The rule (never print a person's name) stands in every
+  probe prompt; this one broke it in passing, as the 2026-10-03 slip did.
+- **Recorded, not a slip:** `elblag.eu` and `um.gorzow.pl` answer 403 to
+  curl's own agent and 200 to the project's identified agent, which the
+  owner's user-agent rule of the same day allows.
+
 ### 2026-10-04 - The India and Switzerland/Norway/Sweden screens banded (owner)
 
 - **The owner: "42. keep in D, i will decide on R later 43-44 yes to both
