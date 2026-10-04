@@ -53,15 +53,20 @@ the pointers. **Delete a section when its item is done.**
 - After a background subagent reports, stop any process it left (an orphaned
   grep held 4.7 GB on 2026-09-30).
 
-## Where things stand (2026-10-03)
+## Where things stand (2026-10-04, saved at the weekly limit)
 
-- **On master, `docs/city_master_list.md`: 158 built across 25 countries;
-  12 candidates (A 6 · B 5 · D 1); 23 restricted (Band R, counted apart
-  from candidates); 122 discards.** Japan wave 2 and the four extensions
-  LANDED at review time on 2026-10-03; both kits are deleted. Published
-  artifact (version 8): https://claude.ai/artifact/LTzi7Vj5emzHnb3zAZy4Vn
-- **The 12 candidates come from the coverage sweep** (its section below),
-  screened, licence-read and banded by the owner on 2026-10-03.
+- **On master, `docs/city_master_list.md`: 158 built; 20 candidates (A 9 ·
+  B 6 · C 2 · D 3); 24 restricted; 143 discards.** The artifact is at
+  version 8 (12 candidates): republish it from the list.
+- **Three build sessions are out**, each landing at review time: "Korean
+  build session" (Daejeon 190, Gwangju 191, Gimhae 192;
+  `docs/handoff_korea_sweep_2026-10-03.md`), "Mendoza Tacoma Liverpool"
+  (193-195, notices 141-143 and 153; `docs/handoff_new_cities_2026-10-03.md`)
+  and "Belgium build session" (196-201, notices 144-152;
+  `docs/handoff_belgium_2026-10-03.md`). Next free page 202, notice 154.
+  Every owner call for them is in `docs/decisions_drafts/staging.md`.
+- **Waiting on the owner:** the DSVSA browser fetches for Timișoara, Iași
+  and Cluj-Napoca (Band D, Bucharest's route).
 - A build session may ask staging to correct a brief or re-run its checks:
   correct a brief when a check fails on a real claim (never relax the check),
   re-run on a RETRY or a 429, log each correction in the drafts file.
@@ -92,10 +97,18 @@ the pointers. **Delete a section when its item is done.**
 
 ## NEXT - pick up here
 
-1. **Briefs for the eleven A and B cities** (`docs/build_briefs/`, each with
-   a checks block and its notices, the downstream card-face line), then a
-   kit when the owner releases a build. Every fact is in the screens and the
-   drafts file's licence-read entry.
+1. **The probe wave (2026-10-04), paused or finishing at the weekly limit.**
+   Reports land in the staging scratchpad's `probe2\` folder (readable by
+   path while the machine keeps it): `korea.md` and `group2_europe.md` are
+   banded on master; still out at the save: `group2_world.md` (Jerusalem,
+   Macau, Almaty, Astana, Ahmedabad, Thessaloniki, Quito, Cuenca),
+   `bolivia_puerto_rico.md`, `mauritius_armenia.md`,
+   `pakistan_bangladesh.md`, `one_city_countries.md` (Chile, Venezuela,
+   Egypt, Algeria, Türkiye, Qatar). Read each, bring proposed bands to the
+   owner, and re-run any probe whose report is missing or cut short. Then
+   briefs for Gimpo, Siheung and Geneva (its SITG licence read was running:
+   re-run it if no verdict is in the drafts), and kits when the owner
+   releases builds.
 2. **Watch-item dates** from `docs/recheck_calendar.md`:
    - Tainan, 18 Oct;
    - Salvador and Teresina, after 25 Oct;
@@ -115,7 +128,7 @@ the pointers. **Delete a section when its item is done.**
    - Re-probes of Band C open gaps (`reprobe-city`) and the Band R cities
      whose blockers have a date.
 
-## Coverage sweep (2026-10-03): first group banded
+## Coverage sweep (2026-10-03): first group banded (now building)
 
 Sweep reports in the staging scratchpad,
 `...\54e23bab-5cd9-4850-8946-900a2a7b665b\scratchpad\sweep\`, screens in
