@@ -144,7 +144,9 @@ section when its item is done.** The older history is in
   owner opens the commuter-rail overhaul (the measurements so far, Auckland,
   Liverpool and the Korean lines, were done by hand).
 - Visuals and Analytics were each sent a suggestion to write a skill of their
-  own (2026-10-04). Visuals has put an outline to the owner; Visuals also
+  own (2026-10-04). Analytics wrote one and keeps it local
+  (`data/_analysis/skill/SKILL.md`, gitignored, the owner's choice: nothing
+  to land). Visuals has put an outline to the owner; Visuals also
   noted that `scripts/fingerprint.py` marks maps and app pages only, and
   whether cards carry a mark is the owner's open question.
 
