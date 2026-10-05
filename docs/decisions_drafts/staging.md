@@ -60,6 +60,12 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
 - **Not a staging fix**: the name rule is shared pipeline code and the
   outputs are published. Put to the owner as a privacy call with staging's
   recommendation; the outcome goes here when made.
+- **Outcome (2026-10-05):** the owner said yes (the entry above); Cleanup
+  landed the repair (DECISIONS 2026-10-05, "MHLW's 法人名 joins the
+  Japanese name rule"; the last commit 80f73929): 17 cities re-run, names
+  withheld 12 to 46, 12 displayed pins changed in 7 maps. Staging's count
+  re-run with the name rule's cooperative exception (which the first count
+  left out) finds **0** of the 79 left; every remainder was a 組合.
 
 ### 2026-10-04 - Maebashi's brief written, the city's half unmeasured: BODIK refused
 
