@@ -163,7 +163,8 @@ def build_tree(tmp, scenario, staged, competing=(), country_views=(), groups=Non
                   else sorted(first, key=first.get))
     new_regions = list(dict.fromkeys(
         r for r in [row["region"] for row in rows] + list(retag.values())
-        if r not in built.REGION_ORDER and r not in jp_regions))
+        if r not in built.REGION_ORDER and r not in jp_regions
+        and r not in ("Europe West", "Europe East")))
     (tmp / "stage.json").write_text(json.dumps({"retag": retag, "rows": rows}, ensure_ascii=False),
                                     encoding="utf-8")
 
@@ -194,8 +195,8 @@ def build_tree(tmp, scenario, staged, competing=(), country_views=(), groups=Non
     if scenario != "now":
         src = replace_once(src, ', "Japan West": 6.0}', "}", "REGION_ZOOM's Japan West")
     if meridian is not None:
-        src = replace_once(src, '    "Europe",\n    "France North",',
-                           '    "Europe West",\n    "Europe East",\n    "France North",',
+        src = replace_once(src, '\n    "Europe",\n',
+                           '\n    "Europe West",\n    "Europe East",\n',
                            "REGION_ORDER's Europe")
         src = replace_once(src, 'REGION_ZOOM_WITHOUT = {"Europe": (',
                            'REGION_ZOOM_WITHOUT = {"(Europe before the split)": (', "REGION_ZOOM_WITHOUT")

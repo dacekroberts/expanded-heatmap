@@ -309,7 +309,7 @@ TEXT_WIDTH = {
     "Aomori": 47.1, "Arad": 31.0, "Asahikawa": 71.3, "Brăila": 37.9, "Chōfu": 40.7,
     "Craiova": 49.9, "Ekurhuleni": 70.8, "Fuchū": 41.5, "Fuji": 23.4, "Fujisawa": 57.8,
     "Fukushima": 72.2, "Galați": 37.4, "Ghaziabad": 70.8, "Gifu": 27.6,
-    "Greater Copenhagen Light Rail": 205.4, "Hachinohe": 71.6, "Higashimurayama": 119.8,
+    "Hachinohe": 71.6, "Higashimurayama": 119.8,
     "Higashiyamato": 100.4, "Hino": 30.0, "Hirakata": 55.9, "Hódmezővásárhely": 127.8,
     "Ibaraki": 45.5, "Ichihara": 54.2, "Ichinomiya": 73.6, "Imizu": 35.1, "Ina": 20.3,
     "Ino": 20.8, "Isesaki": 45.9, "Itami": 33.7, "Iwaki": 34.2, "Johannesburg": 97.7,
