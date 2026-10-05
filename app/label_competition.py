@@ -300,6 +300,30 @@ TEXT_WIDTH = {
     # Los Angeles renamed (Regional) by its Long Beach extension; the same
     # 2026-10-03 run and controls.
     "Los Angeles (Regional)": 153.8,
+    # The staged cities of docs/staged_cities.json, measured ahead of their
+    # builds (2026-10-04, local app, lean venv, canvas measureText after
+    # document.fonts.load); controls Tacoma 51.8, Mendoza 61.8, Paris 32.9,
+    # Liverpool (Regional) 135.0, Belo Horizonte (Regional) 171.5 and
+    # Higashiōsaka 89.1 reproduced. A build that renames its city re-measures.
+    "Adana": 42.6, "Ageo": 34.5, "Akashi": 44.2, "Akita": 34.8, "Amagasaki": 72.6,
+    "Aomori": 47.1, "Arad": 31.0, "Asahikawa": 71.3, "Brăila": 37.9, "Chōfu": 40.7,
+    "Craiova": 49.9, "Ekurhuleni": 70.8, "Fuchū": 41.5, "Fuji": 23.4, "Fujisawa": 57.8,
+    "Fukushima": 72.2, "Galați": 37.4, "Ghaziabad": 70.8, "Gifu": 27.6,
+    "Greater Copenhagen Light Rail": 205.4, "Hachinohe": 71.6, "Higashimurayama": 119.8,
+    "Higashiyamato": 100.4, "Hino": 30.0, "Hirakata": 55.9, "Hódmezővásárhely": 127.8,
+    "Ibaraki": 45.5, "Ichihara": 54.2, "Ichinomiya": 73.6, "Imizu": 35.1, "Ina": 20.3,
+    "Ino": 20.8, "Isesaki": 45.9, "Itami": 33.7, "Iwaki": 34.2, "Johannesburg": 97.7,
+    "Kadoma": 54.2, "Kakogawa": 68.8, "Kamakura": 66.6, "Kasugai": 53.4,
+    "Kasukabe": 65.5, "Kawagoe": 61.3, "Kawaguchi": 73.7, "Koshigaya": 70.2,
+    "Kōriyama": 62.9, "Machida": 57.8, "Matsue": 50.4, "Memphis": 61.0, "Minoh": 41.7,
+    "Mira-Bhayandar": 108.9, "Moriguchi": 68.1, "Nagakute": 65.0, "Nagaoka": 58.5,
+    "Nankoku": 58.4, "Navi Mumbai": 85.5, "Neyagawa": 70.1, "Nishitōkyō": 72.4,
+    "Nisshin": 48.6, "Okazaki": 52.0, "Oradea": 47.8, "Perugia": 51.2, "Ploiești": 50.3,
+    "Saga": 33.5, "Sakura": 46.4, "Settsu": 43.6, "Suita": 35.2, "Sōka": 32.8,
+    "Tachikawa": 70.2, "Tama": 35.1, "Thane": 41.7, "Tokorozawa": 79.5,
+    "Tokushima": 71.6, "Toyokawa": 67.4, "Toyonaka": 65.1, "Tshwane": 58.9, "Tsu": 23.1,
+    "Tsukuba": 56.5, "Uji": 16.7, "Urasoe": 46.8, "Urayasu": 55.2, "Yachiyo": 53.2,
+    "Yamato": 49.9, "Ōita": 27.6, "Ōta": 23.9,
 }
 
 PILL_H = 18.0             # measured from rendered pixels, 14 px text
@@ -374,23 +398,32 @@ def rank_key(city, storefronts):
     return (-MODE_RANK.get(city.get("mode"), 0), *(keys[k] for k in RANK_ORDER), city["name"])
 
 
-def compete(cities, centre_lat, centre_lon, zoom, storefronts, strict=False):
+def compete(cities, centre_lat, centre_lon, zoom, storefronts, strict=False,
+            entrants=None, region="Global"):
     """{name: (anchor, dx, dy)} for the cities that win a Global label.
 
     `cities` is every city drawn (all dots count as obstacles); `storefronts`
     is macro_facts.json's map. Positions are scored on the widest canvas and
-    checked against the controls at every width where the dot is on screen."""
+    checked against the controls at every width where the dot is on screen.
+
+    A REGION VIEW MAY COMPETE TOO (cities.COMPETING_REGIONS, 2026-10-04): then
+    `entrants` is the set of names that view labels, replacing the static
+    filter (a region labels its own trams and minor cities), and `region`
+    picks each city's own offset from `label_offset_by_region`."""
     pos = {}
     for c in cities:
         pos[c["name"]] = {w: project(c["lat"], c["lon"], centre_lat, centre_lon, zoom, w, CANVAS_H)
                           for w in CANVAS.values()}
     ref = max(CANVAS.values())
     placed, won, won_dots = [], {}, []
-    for c in sorted((c for c in cities if eligible(c)), key=lambda c: rank_key(c, storefronts)):
+    def enters(c):
+        return eligible(c) if entrants is None else c["name"] in entrants
+
+    for c in sorted((c for c in cities if enters(c)), key=lambda c: rank_key(c, storefronts)):
         cx0, cy0 = pos[c["name"]][ref]
         if any(p[0] < cx0 < p[2] and p[1] < cy0 < p[3] for p in placed):
             continue
-        own = ((c.get("label_offset_by_region") or {}).get("Global") or c.get("label_offset"))
+        own = ((c.get("label_offset_by_region") or {}).get(region) or c.get("label_offset"))
         tries = ([tuple(own)] if own else []) + [o for o in CANDIDATES if o != (tuple(own) if own else None)]
         for off in tries:
             x, y = pos[c["name"]][ref]

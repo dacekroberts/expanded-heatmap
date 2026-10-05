@@ -4905,6 +4905,22 @@ if _bad_rof:
 # Each tuple's order is the order region_caption() names them in.
 REGION_LABELS_ALSO = {"East Asia": ("Japan West", "Japan East", "Seoul Capital Area", "South Korea"), "Europe": ("United Kingdom",)}
 
+# A REGION VIEW THAT HAS OUTGROWN HAND PLACEMENT COMPETES FOR ITS LABELS, as
+# Global does (2026-10-04): the cities the view labels enter
+# app/label_competition.py's competition at the view's own zoom, the winners
+# carry pills and draw on top, and the rest keep a faded dot, a tooltip and
+# their row in the list below the map. Hand-placed offsets beat the
+# competition in a small region (United Kingdom: 10 of 10 labelled by hand, 7
+# by competition), so a region joins only when its labels no longer clear
+# scripts/check_macro_labels.py by hand. scripts/stress_overview.py measures
+# which regions the staged cities push past it (docs/scaling_thresholds.md).
+# Empty: every region today is hand-placed.
+COMPETING_REGIONS = ()
+_bad_compete = [r for r in COMPETING_REGIONS if r not in LEAF_REGIONS]
+if _bad_compete:
+    raise ValueError(f"cities.py: COMPETING_REGIONS {_bad_compete} are not leaf regions "
+                     f"({LEAF_REGIONS}); only a leaf region's view competes")
+
 
 def region_caption(region):
     """The caption under a region view of the macro map (not Global's).
