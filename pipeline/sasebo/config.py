@@ -94,7 +94,7 @@ SOURCE_ENCODING = {"mhlw": "utf-8-sig", "food": "utf-8-sig"}
 # selected: 施設_電話番号(固定), and MHLW's 法人名 / 法人番号 / 法人住所 and phones.
 REQUIRED_COLUMNS = {
     "mhlw": ("営業施設名称、屋号又は商号", "営業の種類", "業態", "営業施設所在地", "緯度", "経度", "申請区分",
-             "廃業年月日"),
+             "廃業年月日", "法人名"),
     "food": ("施設_名称", "施設_所在地", "業種", "種目", "終了年月日", "申請者_氏名"),
 }
 # MHLW publishes an address only where the filer agreed to it (Fukuoka's).

@@ -96,7 +96,7 @@ REQUIRED_COLUMNS = {
     **{f"new_{m}": _FOOD for m in MONTHS},
     **{f"closed_{m}": ("許可番号", "廃業届出日") for m in MONTHS},
     "mhlw": ("営業施設名称、屋号又は商号", "営業の種類", "業態", "営業施設所在地", "緯度", "経度", "申請区分",
-             "廃業年月日"),
+             "廃業年月日", "法人名"),
 }
 # The columns a rebuilt row carries on into step 2: the premises' own, the
 # dates, and the two operator-name columns for the name rule (in memory).

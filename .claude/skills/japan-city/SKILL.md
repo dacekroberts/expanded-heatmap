@@ -273,6 +273,12 @@ build (a brief to correct, never a check to relax), in particular:
   申請者名, 代表者名) and ADD the city's spelling there (Tokyo's 営業者氏名,
   Fukuoka's 開設者法人名（開設者氏名）, Kyoto's 申請者＿申請者名 / 申請者氏名),
   or the rule silently compares nothing - then re-run the Minato control.
+  **法人名 is an operator column too** (owner, 2026-10-05, reversing the
+  2026-09-28 Fukuoka position): MHLW's and the national schema's 法人名
+  holds a sole trader's own name as often as a company's (40,312 of
+  190,682 filled MHLW rows carry no company marker and no 法人番号), so it is
+  in `OPERATOR_COLS`, and every MHLW source's `REQUIRED_COLUMNS` names it.
+  A cooperative (組合) is not a person under the `coop` rule.
 - Several still list as open what the owner decided on 2026-09-24 (the
   Shinkansen, 菓子/そうざい, the city-line scope). Mark them decided.
 - None has run the **Economic Census join control** (PLAN, "Join control").
@@ -354,7 +360,7 @@ replaced under the same resource id (Fukuoka's, 2026-09-25): check
 - Operator columns: MHLW 法人名 / 法人住所 / phones; BODIK
   開設者法人名（開設者氏名） and phones. Some fields are masked ＊＊＊ at source.
   MHLW's FAQ lets a sole trader enter their own name as 屋号 - exactly what the
-  name rule is for.
+  name rule is for; it compares 屋号 against 法人名 since 2026-10-05.
 - Rail passes (subway 100%, Nishitetsu Kaizuka 9 of 10). ▶ **Leave out the
   JR Hakata-Minami line** (`LEFT_OUT_LINES`): only Hakata is inside.
 - Notices: MHLW (PDL 1.0: source, processed, by whom; no completeness claim)

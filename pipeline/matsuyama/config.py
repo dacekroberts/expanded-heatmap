@@ -92,7 +92,7 @@ REQUIRED_COLUMNS = {
     "beauty": ("施設名称１", "施設所在地１", "開設者氏名"),
     "laundry": ("施設名称１", "施設所在地１", "営業者氏名", "クリーニング種別１"),
     "mhlw": ("営業施設名称、屋号又は商号", "営業の種類", "業態", "営業施設所在地", "緯度", "経度", "申請区分",
-             "廃業年月日"),
+             "廃業年月日", "法人名"),
 }
 # MHLW publishes an address only where the filer agreed to it.
 ADDRESS_BY_CONSENT = {"mhlw"}

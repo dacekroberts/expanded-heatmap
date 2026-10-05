@@ -65,12 +65,13 @@ SOURCES = {k: v[0] for k, v in SOURCE_FILES.items()}
 # Declared, never inferred: UTF-8 with a BOM.
 SOURCE_ENCODING = {"mhlw": "utf-8-sig"}
 # The columns the file must carry; fetch_sources.py and step 2 stop on a
-# header without them. MHLW has no column for an individual operator (法人名 is
-# a company's), so the name rule has nothing to compare (Okayama's
-# precedent). Never selected: 法人名, 法人番号, 法人住所 and 営業施設電話番号.
+# header without them. MHLW's 法人名 holds a sole trader's own name as
+# well as a company's, so it is REQUIRED and read IN MEMORY by the name rule only,
+# never kept (owner 2026-10-05, reversing Okayama's precedent). Never selected: 法人番号, 法人住所 and
+# 営業施設電話番号.
 REQUIRED_COLUMNS = {
     "mhlw": ("営業施設名称、屋号又は商号", "営業の種類", "業態", "営業施設所在地", "緯度", "経度", "申請区分",
-             "廃業年月日"),
+             "廃業年月日", "法人名"),
 }
 # MHLW publishes an address only where the filer agreed to it (Fukuoka's): a
 # row without one is counted apart for the page's disclosure. 1,022 rows read

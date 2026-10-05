@@ -262,7 +262,7 @@
  "fukuoka": {
   "in_ring": 24603,
   "all": 29938,
-  "map_blob": "b62febbe66b6673aca47862f49db136871622857"
+  "map_blob": "2758d00f12b3ded1ac979c8ae3f5f9ca5a265d19"
  },
  "kyoto": {
   "in_ring": 27990,
@@ -272,7 +272,7 @@
  "tokyo": {
   "in_ring": 59829,
   "all": 61317,
-  "map_blob": "6f057137103cbebd88203b25ad2bcbad4872f00f"
+  "map_blob": "395de696e8c7dc3ddaa9045ca34376cdbc338300"
  },
  "berlin": {
   "in_ring": 49394,
@@ -672,22 +672,22 @@
  "nagasaki": {
   "in_ring": 4174,
   "all": 7266,
-  "map_blob": "8fa195035678debcd48a60c9482e7cbac3fafc00"
+  "map_blob": "3c287dd464f50f47ac157fe992bb682db8f1bed0"
  },
  "utsunomiya": {
   "in_ring": 3786,
   "all": 8045,
-  "map_blob": "bd3d6a605c029b4f2e17120a459fded40c2a30a8"
+  "map_blob": "07f9ac2f1870423f5acf7da3c0e9f7ab6774cfde"
  },
  "kitakyushu": {
   "in_ring": 10576,
   "all": 14858,
-  "map_blob": "5ca2575fceb9bf74954a6afe4b85a9fadc00db73"
+  "map_blob": "6743a01b6743ec8be9332d35cb0fb8bbdd1c0fda"
  },
  "sakai": {
   "in_ring": 6040,
   "all": 8018,
-  "map_blob": "165ff2ec7cf15b5ac800ae9c976a8fcd37d126f1"
+  "map_blob": "b985d8a61e2df0233bf387298bb7a21eda86cc51"
  },
  "hakodate": {
   "in_ring": 331,
@@ -777,7 +777,7 @@
  "kurume": {
   "in_ring": 1941,
   "all": 3067,
-  "map_blob": "f0fe6e5fb59383067bf5dfd3ae9be97b87d24163"
+  "map_blob": "2f08940eb66aadd959e736871060e4f3c1d59df1"
  },
  "sasebo": {
   "in_ring": 1697,

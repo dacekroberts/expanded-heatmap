@@ -20,7 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**42 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**43 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+
+**2026-10-05**
+
+- [MHLW's 法人名 joins the Japanese name rule: 17 cities re-run, 46 names withheld where 12 were, 12 pins on the maps changed (owner, privacy repair)](#2026-10-05---mhlws-法人名-joins-the-japanese-name-rule-17-cities-re-run-46-names-withheld-where-12-were-12-pins-on-the-maps-changed-owner-privacy-repair)
 
 **2026-10-04**
 
@@ -1538,4 +1542,58 @@ standard rings. `coverage` full, `categories` "All three", `mode` metro,
   they land, as seven pairs already are.
 - The plan item is in PLAN "Now"; nothing here changes the live site until
   `overview-scale` lands at review time.
+
+### 2026-10-05 - MHLW's 法人名 joins the Japanese name rule: 17 cities re-run, 46 names withheld where 12 were, 12 pins on the maps changed (owner, privacy repair)
+
+- **The owner: "4 yes"** to staging's call (drafts, "MHLW's 法人名 joins the
+  name rule as a privacy repair"), then to Cleanup: "yes take it now". It
+  reverses DECISIONS 2026-09-28 (Fukuoka, "MHLW's name-rule gap is
+  accepted") and Okayama's whole-city call of 2026-10-02: MHLW's 法人名, and
+  the national schema's, holds a sole trader's own name as well as a
+  company's (staging: 40,312 filled rows with no company marker and no
+  法人番号 across the 47 cached files).
+- **The change:** `japan_register.OPERATOR_COLS` gains 法人名, read in memory
+  by the name rule only and never kept; every MHLW source's
+  `REQUIRED_COLUMNS` names it (Higashiōsaka's national-schema `RAW_COLUMNS`
+  too), so the rule cannot silently compare nothing; the six config comments
+  that called 法人名 a company's are corrected; the `japan-city` skill says
+  it. A cooperative (組合) stays out under the `coop` rule, on in every built
+  city.
+- **Measured (counts only):** the rule flags 281 more source rows (MHLW's
+  file in 15 cities, Sakai's notifications among them; Tokyo's four MHLW ward
+  slices and Shibuya's own national-schema list). Steps 2 and 3
+  re-run for the 17 cities whose sources carry the column; names withheld,
+  before -> after, and pins whose shown name changed on the map (the maps
+  embed only pins inside a ring):
+  Fukuoka 1 -> 4 (1 on the map)
+  Hiroshima 0 -> 1 (0 on the map)
+  Kagoshima 0 -> 3 (0 on the map)
+  Kitakyushu 0 -> 2 (2 on the map)
+  Kumamoto 3 -> 3 (0 on the map)
+  Kurume 0 -> 2 (1 on the map)
+  Matsuyama 3 -> 3 (0 on the map)
+  Nagasaki 0 -> 6 (1 on the map)
+  Nara 0 -> 2 (0 on the map)
+  Okayama 0 -> 1 (0 on the map)
+  Sakai 1 -> 4 (2 on the map)
+  Sasebo 0 -> 1 (0 on the map)
+  Shimonoseki 0 -> 5 (0 on the map)
+  Takamatsu 1 -> 1 (0 on the map)
+  Utsunomiya 1 -> 2 (1 on the map)
+  Higashiōsaka 0 -> 0 (0 on the map)
+  Tokyo 2 -> 6 (4 on the map)
+  Toyama (MHLW a point donor only) and Yokkaichi (no 法人名) are unchanged.
+- **Staging's 79 shown rows re-measured: 0 remain.** Every one is now
+  withheld or was a cooperative, which staging's count compared without the
+  `coop` exception (Fukuoka's 9 left after the re-run, Kumamoto's 1 and the
+  Toyama, Sakai and Nagasaki city-list rows).
+- **Checks:** `check_personal_exposure.py` on all 17 (the Japan pass prints
+  0; permit-type pins as above); the Minato control unchanged (block 98.0 /
+  chōme 0.2 / none 1.8); `drift_check.py` over all 34 Japanese cities
+  (`--jobs 1 --update-baseline`, peak 4.74 GB): only `names_withheld` and
+  `name_rule_spread_rows` moved, in 13 cities, and only the seven maps
+  above changed; join and storefront counts identical everywhere. Verdicts
+  in `docs/privacy_verdicts.md`: publish, all 17.
+- **Landed without waiting for review time** (owner): only `outputs/` maps
+  and pipeline code change, so no reboot.
 

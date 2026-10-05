@@ -107,13 +107,14 @@ SOURCE_ENCODING = {"food": "utf-8-sig", "mhlw": "utf-8-sig", "barber": "cp932", 
 # nothing: 営業者氏名 (food) and 開設者法人名（開設者氏名）(registers) are read IN
 # MEMORY by that rule only, and never kept. Never selected: the phones, 郵便番号,
 # 開設者法人住所 (an operator's own address), 開設者法人代表者名及び役職, and
-# MHLW's 法人名 / 法人番号 / 法人住所. MHLW has no column for an individual
-# operator, so the rule cannot run on its rows (DECISIONS 2026-09-28).
+# MHLW's 法人番号 / 法人住所. MHLW's 法人名 holds a sole trader's own name as
+# well as a company's, so it is REQUIRED and read IN MEMORY by the name rule only,
+# never kept (owner 2026-10-05, reversing DECISIONS 2026-09-28).
 _REGISTER_COLUMNS = ("施設名称", "施設所在地", "開設者法人名（開設者氏名）")
 REQUIRED_COLUMNS = {
     "food": ("屋号", "業種", "業態", "営業所所在地", "営業者氏名"),
     "mhlw": ("営業施設名称、屋号又は商号", "営業の種類", "業態", "営業施設所在地", "緯度", "経度", "申請区分",
-             "廃業年月日"),
+             "廃業年月日", "法人名"),
     "barber": (*_REGISTER_COLUMNS, "業務種別"),
     "beauty": (*_REGISTER_COLUMNS, "業務種別"),
     "laundry": (*_REGISTER_COLUMNS, "種別"),
