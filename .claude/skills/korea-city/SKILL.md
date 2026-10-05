@@ -249,11 +249,11 @@ light_rail), 9 stations in Gimpo, every 6 min, 1,457 m median spacing;
 stations (오이도 and 정왕 shared). Copy Ansan's `LINES`, colors and gate 3.
 시흥능곡 and 달월 lack `name:en`: take the station object's name first.
 
-**Their open question.** Both briefs say the build "waits for [the
-시군구코드 filter] to land, or carries that commit" (`gimpo.md` line 73,
-`siheung.md` line 70). It has landed (8f0471c9 on `origin/master`), so the
-wait is over; whether each city's 시군구명 prefix agrees with its code is
-still unmeasured. Re-run `brief_check.py` first either way.
+**Their register config.** Both briefs were corrected 2026-10-04: the filter
+is on master, so configure as Gimhae (`SEMAS_SIGUNGU = None`,
+`SEMAS_SIGUNGU_CODES = ("41570",)` or `("41390",)`). Each code and its
+시군구명 prefix pick identical rows in the 2026-06-30 edition (Gimpo 25,160,
+Siheung 25,119; measured by staging). Re-run `brief_check.py` first.
 
 **Yangsan** (Band C, `city_master_list.md` line 139): 11,202 storefronts; Busan
 Line 2, 5 stations, headway unread (Busan's operator pages refuse scripts);

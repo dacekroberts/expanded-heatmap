@@ -4,6 +4,22 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - Gimpo's and Siheung's briefs corrected: the 시군구코드 filter is on master, each code measured against its name
+
+- **The owner's start instruction to the new staging session:** "Correct
+  Gimpo's and Siheung's briefs first, since the district-code filter they
+  wait on has landed (8f0471c9)."
+- **Measured** (staging, through `korea_sbiz.province("경기도")`, edition
+  2026-06-30, `heavy_job.py` label `semas-city-screen`, peak 0.33 GB): code
+  **41570** and the prefix 김포시 pick the identical **25,160** rows; code
+  **41390** and the prefix 시흥시 the identical **25,119**. Each code carries
+  one name and each name one code. Both counts equal the screen's.
+- **The correction:** both briefs now configure the register as Gimhae does
+  (`SEMAS_SIGUNGU = None`, `SEMAS_SIGUNGU_CODES` one code) and drop the
+  "waits for it to land, or carries that commit" condition. The
+  `korea-city` skill's per-city sheet says the same. `brief_check.py gimpo
+  siheung geneva thessaloniki`: 20/20 claims hold.
+
 ### 2026-10-04 - Staging's tools for the mass development: a probe agent, four skills, a push script; the handoff rewritten (owner)
 
 - **The owner: "yes 1-6 and send the messages in 7, 8 and 9 can be passed on

@@ -5,14 +5,16 @@
 expansions marked (owner)": "approve all" on staging's recommendations).
 **Siheung was never screened before 2026-10-04**: the satellites' briefs of
 2026-09-28 and 09-29 did not list it. Step 0 screened 2026-10-04 (staging
-probe; counts only, nothing downloaded). Brief written 2026-10-04. Run
-`python scripts/brief_check.py siheung` before writing any code.
+probe; counts only, nothing downloaded). Brief written 2026-10-04; corrected the
+same night (the 시군구코드 filter is on master, code and name measured to
+agree). Run `python scripts/brief_check.py siheung` before writing any code.
 
 Korean city: read `cjk-text` first, then Gyeonggi's brief
 (`docs/build_briefs/gyeonggi.md`, "Ansan" and the Bucheon note). The business
 leg is Incheon's source and module; the rail is Ansan's three lines.
 **Copy Ansan's pipeline** (`pipeline/ansan/`: one 시 inside 경기도, Line 4,
-the Suin–Bundang Line and the Seohae Line, its colors and its gate 3).
+the Suin–Bundang Line and the Seohae Line, its colors and its gate 3),
+with Gimhae's code-keyed register config.
 
 ---
 
@@ -63,14 +65,21 @@ row without a point.
   route relations, 2026-09-25 to 09-29). Below Ansan's 64.3% and Suwon's
   47.6%, above Hwaseong's 5.2% (left out); the build re-measures it on step
   1's stations.
-- **Config:** `SEMAS_SIDO = "경기도"` and the code `41390`. **Key on the
-  code.** The `sigungu_codes` filter is on the Korea build's branch
-  `korea-sweep-build` (commit 8f0471c9, "korea_sbiz: a 시군구코드 filter, zero
-  drift on the ten built SEMAS cities"), landing at review time. **A build
-  waits for it to land, or carries that commit** and drift-checks the built
-  SEMAS cities; never a second copy of the filter. The 시군구명 prefix
-  `("시흥시",)` is not measured against the code; the filter asserts that the
-  code and the name agree.
+- **Config, keyed on the code, as Gimhae's** (`pipeline/gimhae/config.py`):
+  `SEMAS_SIDO = "경기도"`, `SEMAS_SIGUNGU = None`,
+  `SEMAS_SIGUNGU_CODES = ("41390",)`, and step 2 passes
+  `sigungu_codes=config.SEMAS_SIGUNGU_CODES` to `storefronts()`. Ansan's
+  config keys on a prefix; take Ansan's rail and Gimhae's register config.
+  The filter is on master (commit 8f0471c9, "korea_sbiz: a 시군구코드 filter,
+  zero drift on the ten built SEMAS cities"; Daejeon, Gwangju and Gimhae
+  build on it): nothing to wait for or carry, and never a second copy of the
+  filter.
+- **Code and name agree** (measured 2026-10-04 by staging through
+  `korea_sbiz.province("경기도")`, edition 2026-06-30, `heavy_job.py` label
+  `semas-city-screen`): `41390` and the 시군구명 prefix `시흥시` pick the
+  **identical 25,119 rows**; the code carries only the name 시흥시 and the
+  name only the code 41390. The prefix is redundant, so leave it `None`;
+  `storefronts()` exits on an unknown code.
 
 ### Privacy
 

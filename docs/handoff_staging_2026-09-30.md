@@ -101,11 +101,10 @@ section when its item is done.** The older history is in
 ## NEXT - pick up here, in this order
 
 1. **Briefs for the Band A cities**, then a build session: Maebashi, Fukuyama
-   and Sagamihara (Japan) need briefs; Gimpo, Siheung (their briefs still say
-   they wait on a district-code filter, but it landed as 8f0471c9,
-   `korea_sbiz`'s 시군구코드 filter; check each city's district name against
-   its code and correct the briefs), Geneva, and Thessaloniki (Band B, the owner's build
-   calls answered) have passing briefs. Then licence reads for Bremen and the Band
+   and Sagamihara (Japan) need briefs; Gimpo, Siheung (briefs corrected
+   2026-10-04: keyed on 시군구코드 as Gimhae, each code measured against its
+   name), Geneva, and Thessaloniki (Band B, the owner's build
+   calls answered) have passing briefs (20/20 on 2026-10-04). Then licence reads for Bremen and the Band
    B Japanese sources, and briefs for Band B.
 2. **The ranked unscreened 1-4, the next action item, held for cost** (owner,
    2026-10-04): the Greater Copenhagen Light Rail (about 10 municipalities,
