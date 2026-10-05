@@ -83,10 +83,10 @@ JAPAN = [
 ]
 
 # (display name, country, rank, region under today's scheme, label tier,
-#  mode, lat, lon). Approximate centres; the Copenhagen line is one page
-# (owner, 2026-10-04), centred near Glostrup on Ring 3.
+#  mode, lat, lon). Approximate centres. The Greater Copenhagen Light Rail
+# is not here: it extends Copenhagen's own page (owner, 2026-10-04), so it
+# adds no dot; as a page of its own its dot sat 1.3-1.7 px from Copenhagen's.
 OTHERS = [
-    ("Greater Copenhagen Light Rail", "Denmark", 1, "Europe", "minor", "light_rail", 55.67, 12.40),
     ("Arad", "Romania", 2, "Europe", "minor", "tram", 46.19, 21.31),
     ("Brăila", "Romania", 2, "Europe", "minor", "tram", 45.27, 27.96),
     ("Craiova", "Romania", 2, "Europe", "minor", "tram", 44.32, 23.80),
