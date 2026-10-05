@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**40 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**41 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-04**
 
@@ -64,6 +64,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [San Diego's swap-meet stalls out, its parcel cache refreshed; the five thinning variants moved onto the shared thin() (owner)](#2026-10-04---san-diegos-swap-meet-stalls-out-its-parcel-cache-refreshed-the-five-thinning-variants-moved-onto-the-shared-thin-owner)
 - [The full drift sweep after the night's shared changes: zero drift in all 170 cities](#2026-10-04---the-full-drift-sweep-after-the-nights-shared-changes-zero-drift-in-all-170-cities)
 - [Housing for the ranked 93 before they are built: a staged roster, a stress test of the macro map, page blocks; Japan may take more regions, the Copenhagen line one page (owner)](#2026-10-04---housing-for-the-ranked-93-before-they-are-built-a-staged-roster-a-stress-test-of-the-macro-map-page-blocks-japan-may-take-more-regions-the-copenhagen-line-one-page-owner)
+- [Region views can compete for their labels (branch overview-scale, held for review time); Japan and Europe splits measured, Eastern Europe proposed by the owner](#2026-10-04---region-views-can-compete-for-their-labels-branch-overview-scale-held-for-review-time-japan-and-europe-splits-measured-eastern-europe-proposed-by-the-owner)
 
 **Archived weeks** (`scripts/archive_decisions.py`), newest first:
 
@@ -1474,4 +1475,37 @@ standard rings. `coverage` full, `categories` "All three", `mode` metro,
   alone (12) still past it. Recommended: the eight regions, applied when wave
   4 lands, since re-tagging the 34 built cities now would change the live
   map.
+
+### 2026-10-04 - Region views can compete for their labels (branch overview-scale, held for review time); Japan and Europe splits measured, Eastern Europe proposed by the owner
+
+- **Step 2 of the housing work** (owner: "step 1 and 2 okay to run in
+  sequence"), on branch `overview-scale`, pushed as a branch only:
+  `cities.COMPETING_REGIONS` lets a region view run Global's label
+  competition at its own zoom (`compete(..., entrants=, region=)`), drawn and
+  scored exactly as Global is (`Overview.py`, `check_macro_labels.py`). It
+  is empty, so landing it changes nothing on the live map;
+  `check_macro_labels.py` 0 problems and `check_deploy_imports.py` clean on
+  the branch. A region joins when its labels stop clearing the check by
+  hand, since hand placement beats the competition in a small region.
+- **The 84 staged names measured** into `TEXT_WIDTH` on the branch (local
+  app, six controls reproduced exactly); a build that renames its city
+  re-measures.
+- **The owner: "should we make a west and east europe (latvian cities could
+  go with romanian, maybe some others like czechia)".** Measured
+  (`docs/scaling_thresholds.md`): Latvia, Romania and Hungary as Eastern
+  Europe (11) lets the rest of Europe (21) tighten its frame and lose the
+  Dutch stacking; folding Czechia in costs labels its own view keeps today.
+  Recommended: Eastern Europe of Latvia, Romania and Hungary, Czechia kept as
+  a view of its own, made when the Romanian six land.
+- **Japan, recommended:** the eight traditional regions with Osaka
+  Prefecture a view of its own, made when wave 4 lands; Kanto, Kansai, Osaka
+  Prefecture and Chubu compete.
+- **Open for the owner:** the Copenhagen line's dot sits 1.3-1.7 px from
+  Copenhagen's in every split as a page of its own, which argues for one
+  page as Copenhagen's own extension (`regional-extension`); Brăila and
+  Galați, Nagakute and Nisshin, Itami and Toyonaka stack at any regional
+  zoom (accept, as `KNOWN_STACKED` does for seven pairs, or a closer view).
+- **The Visuals session's notice** (2026-10-04): `visual-handoff` is no
+  longer merged into master, since its history holds files now kept local;
+  `docs/derived_use_licensing.md`'s pointer to that drafts file reworded.
 
