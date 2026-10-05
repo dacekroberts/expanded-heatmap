@@ -62,7 +62,7 @@ python scripts/staging_artifacts/country_census.py      # per-country counts fro
 python scripts/coverage_sweep/recount.py [--gaps-only]   # rail-city universe vs the master list (docs/coverage_sweep/); coarse, reads only
 python scripts/coverage_sweep/parse_wiki_tram.py [--wiki PATH] [--out PATH]   # saved tram-list wikitext -> rows, for a new universe
 python scripts/staged_cities_build.py                    # ranked unbuilt cities -> docs/staged_cities.json (pipeline env, cached N02/N03)
-python scripts/stress_overview.py [--scenario now|six|eight|pref] [--keep DIR]   # the macro map with the staged cities added, in a temporary copy of app/
+python scripts/stress_overview.py [--scenario now|six|eight|eight_osaka|pref] [--compete REGION] [--country-view COUNTRY] [--group "NAME=C1,C2"] [--keep DIR]   # the macro map with the staged cities added, in a temporary copy of app/
 python scripts/scaffold_city.py --slug <slug> --name <Name> --system-name <system> --taxonomy <key> --lat <lat> --lon <lon> --region <region> --country <country> --mode <metro|light_rail|tram>   # add --dry-run first
 .venv-lean/Scripts/python.exe -m streamlit run "app/Overview.py"
 ```

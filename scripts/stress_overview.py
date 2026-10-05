@@ -16,15 +16,27 @@ to that copy of cities.py, re-tags Japan for the scenario, and runs there:
   3. the menu and list sizes: regions in the menu, cities in the largest
      region's list.
 
+`--compete REGION` (repeatable) puts that region in the copy's
+COMPETING_REGIONS, so step 1 scores it as the app would draw it: the check's
+problems for it should fall to zero. `--country-view COUNTRY` gives a
+country a view of its own (Romania, as Czechia and Belgium have), built and
+staged cities alike; `--group "NAME=Country,Country"` makes a region of whole
+countries (an Eastern Europe); `--split-meridian LON` cuts what is still
+Europe into Europe West and Europe East at a longitude, and
+`--snap-countries` keeps each country whole on its mean longitude's side.
+
 Staged names without a measured pill width get an estimate from the table's
 own width per character, reported as such; measure them before trusting a
 count near the line.
 
-    python scripts/stress_overview.py [--scenario NAME ...] [--keep DIR]
+    python scripts/stress_overview.py [--scenario NAME ...] [--compete REGION ...]
+                                      [--country-view COUNTRY ...] [--group NAME=C1,C2 ...]
+                                      [--split-meridian LON [--snap-countries]] [--keep DIR]
 
 Scenarios: now (Japan West / Japan East), eight (the eight traditional
-regions), six (Hokkaido and Tohoku together, Chugoku and Shikoku together),
-pref (one region per prefecture). Fetches nothing; any Python runs it.
+regions), eight_osaka (the eight, with Osaka Prefecture a view of its own),
+six (Hokkaido and Tohoku together, Chugoku and Shikoku together), pref (one
+region per prefecture). Fetches nothing; any Python runs it.
 """
 import argparse
 import contextlib
@@ -51,12 +63,11 @@ JP8 = {**{"01": "Hokkaido"},
 SIX = {"Hokkaido": "Hokkaido and Tohoku", "Tohoku": "Hokkaido and Tohoku",
        "Chugoku": "Chugoku and Shikoku", "Shikoku": "Chugoku and Shikoku"}
 PREF = dict(zip([f"{p:02d}" for p in range(1, 48)], (
-    "Hokkaido Pref Aomori Iwate Miyagi Akita Yamagata Fukushima Ibaraki Tochigi "
+    "Hokkaido Aomori Iwate Miyagi Akita Yamagata Fukushima Ibaraki Tochigi "
     "Gunma Saitama Chiba Tokyo Kanagawa Niigata Toyama Ishikawa Fukui Yamanashi "
     "Nagano Gifu Shizuoka Aichi Mie Shiga Kyoto Osaka Hyogo Nara Wakayama Tottori "
     "Shimane Okayama Hiroshima Yamaguchi Tokushima Kagawa Ehime Kochi Fukuoka Saga "
-    "Nagasaki Kumamoto Oita Miyazaki Kagoshima Okinawa").replace("Hokkaido Pref", "Hokkaido-do").split()))
-PREF["01"] = "Hokkaido"
+    "Nagasaki Kumamoto Oita Miyazaki Kagoshima Okinawa").split()))
 
 # The built Japanese cities' prefectures, by display name (cities.py carries
 # none). The script stops if a Japanese city is missing here.
@@ -70,8 +81,7 @@ BUILT_PREF = {
     "Kitakyushu": "40", "Kurume": "40", "Kumamoto": "43", "Nagasaki": "42",
     "Sasebo": "42", "Kagoshima": "46",
 }
-SCENARIOS = ("now", "six", "eight", "pref")
-NEW_REGIONS = ("Africa", "South Asia")
+SCENARIOS = ("now", "six", "eight", "eight_osaka", "pref")
 
 
 def region_for(scenario, pref, today):
@@ -79,6 +89,8 @@ def region_for(scenario, pref, today):
         return today
     if scenario == "eight":
         return JP8[pref]
+    if scenario == "eight_osaka":
+        return "Osaka Prefecture" if pref == "27" else JP8[pref]
     if scenario == "six":
         return SIX.get(JP8[pref], JP8[pref])
     return PREF[pref]
@@ -91,7 +103,8 @@ def replace_once(text, old, new, what):
     return text.replace(old, new)
 
 
-def build_tree(tmp, scenario, staged):
+def build_tree(tmp, scenario, staged, competing=(), country_views=(), groups=None,
+               meridian=None, snap=False):
     app = tmp / "app"
     shutil.copytree(ROOT / "app", app, ignore=shutil.ignore_patterns("__pycache__", "pages", "assets"))
     (tmp / "scripts").mkdir()
@@ -107,24 +120,51 @@ def build_tree(tmp, scenario, staged):
         raise SystemExit(f"stress_overview: add {unknown} to BUILT_PREF")
     today = {c["name"]: c["region"] for c in built.CITIES}
     retag = {n: region_for(scenario, BUILT_PREF[n], today[n]) for n in jp_built}
+    retag.update({c["name"]: c["country"] for c in built.CITIES if c["country"] in country_views})
+    # A region made of whole countries, cut from wherever they sit today.
+    group_of = {k: g for g, ks in (groups or {}).items() for k in ks}
+    retag.update({c["name"]: group_of[c["country"]] for c in built.CITIES if c["country"] in group_of})
     rows = []
     for s in staged:
         row = {"name": s["name"], "country": s["country"], "lat": s["lat"], "lon": s["lon"],
                "mode": s["mode"], "coverage": "narrowed", "page": "pages/staged.py",
                "region": (region_for(scenario, s["pref"], s["region"])
-                          if s["country"] == "Japan" else s["region"])}
+                          if s["country"] == "Japan" else
+                          s["country"] if s["country"] in country_views else
+                          group_of.get(s["country"], s["region"]))}
         if s.get("label_tier"):
             row["label_tier"] = s["label_tier"]
         rows.append(row)
-    jp_regions = list(dict.fromkeys(
-        [r for r in (retag[n] for n in jp_built)] + [r["region"] for r in rows if r["country"] == "Japan"]))
-    if scenario != "now":
-        jp_regions = sorted(jp_regions, key=lambda r: min(
-            p for p in BUILT_PREF.values() if region_for(scenario, p, "") == r)
-            if any(region_for(scenario, p, "") == r for p in BUILT_PREF.values()) else
-            min(s["pref"] for s in staged if s.get("pref") and region_for(scenario, s["pref"], "") == r))
-    else:
-        jp_regions = ["Japan West", "Japan East"]
+    # EUROPE CUT BY A MERIDIAN (owner, 2026-10-04): what is still tagged
+    # Europe goes to Europe West or Europe East by its longitude, or, with
+    # `snap`, by its country's mean longitude so no country is cut in two.
+    if meridian is not None:
+        europe = [(c["name"], c["country"], c["lon"]) for c in built.CITIES
+                  if retag.get(c["name"], c["region"]) == "Europe"]
+        europe += [(r["name"], r["country"], r["lon"]) for r in rows if r["region"] == "Europe"]
+        mean = {}
+        for _, k, lon in europe:
+            mean.setdefault(k, []).append(lon)
+        side = {}
+        for name, k, lon in europe:
+            x = sum(mean[k]) / len(mean[k]) if snap else lon
+            side[name] = "Europe West" if x < meridian else "Europe East"
+        retag.update({n: s for n, s in side.items() if n in today})
+        for r in rows:
+            if r["name"] in side:
+                r["region"] = side[r["name"]]
+
+    # Japan's regions in prefecture-code order, north to south.
+    first = {}
+    for p in list(BUILT_PREF.values()) + [s["pref"] for s in staged if s["country"] == "Japan"]:
+        r = region_for(scenario, p, "")
+        first[r] = min(first.get(r, p), p)
+    jp_regions = (["Japan West", "Japan East"] if scenario == "now"
+                  else sorted(first, key=first.get))
+    new_regions = list(dict.fromkeys(
+        r for r in [row["region"] for row in rows] + list(retag.values())
+        if r not in built.REGION_ORDER and r not in jp_regions
+        and r not in ("Europe West", "Europe East")))
     (tmp / "stage.json").write_text(json.dumps({"retag": retag, "rows": rows}, ensure_ascii=False),
                                     encoding="utf-8")
 
@@ -136,7 +176,8 @@ def build_tree(tmp, scenario, staged):
         "    if _c['name'] in _STAGE['retag']:\n"
         "        _c['region'] = _STAGE['retag'][_c['name']]\n"
         "    _rof = {k: v for k, v in (_c.get('label_offset_by_region') or {}).items()\n"
-        f"            if k not in ('Japan West', 'Japan East') or {scenario == 'now'!r}}}\n"
+        f"            if not (k in ('Japan West', 'Japan East') and {scenario != 'now'!r})\n"
+        f"            and not (k == 'Europe' and {meridian is not None!r})}}\n"
         "    if 'label_offset_by_region' in _c:\n"
         "        _c['label_offset_by_region'] = _rof\n"
         "CITIES.extend(_STAGE['rows'])\n"
@@ -145,13 +186,25 @@ def build_tree(tmp, scenario, staged):
     jp_lines = "".join(f'    "{r}",\n' for r in jp_regions)
     src = replace_once(src, '    "Japan West",\n    "Japan East",\n', jp_lines, "REGION_ORDER's Japan rows")
     src = replace_once(src, '    "West Asia",\n]', '    "West Asia",\n'
-                       + "".join(f'    "{r}",\n' for r in NEW_REGIONS) + "]", "REGION_ORDER's end")
+                       + "".join(f'    "{r}",\n' for r in new_regions) + "]", "REGION_ORDER's end")
     jp_tuple = ", ".join(f'"{r}"' for r in jp_regions)
-    src = replace_once(src, '"Japan West", "Japan East")', jp_tuple + ")", "COUNTRY_VIEWS")
+    views = "".join(f', "{c}"' for c in country_views)
+    src = replace_once(src, '"Japan West", "Japan East")', jp_tuple + views + ")", "COUNTRY_VIEWS")
     src = replace_once(src, '"East Asia": ("Japan West", "Japan East", ',
                        f'"East Asia": ({jp_tuple}, ', "REGION_LABELS_ALSO")
     if scenario != "now":
         src = replace_once(src, ', "Japan West": 6.0}', "}", "REGION_ZOOM's Japan West")
+    if meridian is not None:
+        src = replace_once(src, '\n    "Europe",\n',
+                           '\n    "Europe West",\n    "Europe East",\n',
+                           "REGION_ORDER's Europe")
+        src = replace_once(src, 'REGION_ZOOM_WITHOUT = {"Europe": (',
+                           'REGION_ZOOM_WITHOUT = {"(Europe before the split)": (', "REGION_ZOOM_WITHOUT")
+        src = replace_once(src, '"Europe": ("United Kingdom",)',
+                           '"Europe West": ("United Kingdom",)', "REGION_LABELS_ALSO's Europe")
+    if competing:
+        src = replace_once(src, "\nCOMPETING_REGIONS = ()\n",
+                           f"\nCOMPETING_REGIONS = {tuple(competing)!r}\n", "COMPETING_REGIONS")
     (app / "cities.py").write_text(src, encoding="utf-8")
 
     # Estimated widths for names the table has not measured.
@@ -199,9 +252,13 @@ def inner(tmp):
         if region["name"] == cities.DEFAULT_REGION or region["name"] in cities.REGION_MEMBERS:
             continue
         clat, clon, zoom = cml.region_view(region)
+        # The hand rule's set, not a competing region's winners.
+        saved = cml.REGION_WON.pop(region["name"], None)
         labelled = cml.scored_labels(region, clat, clon, zoom)
-        lc.eligible = lambda c, L=labelled: c["name"] in L
-        won = lc.compete(cities.CITIES, clat, clon, zoom, store)
+        if saved is not None:
+            cml.REGION_WON[region["name"]] = saved
+        won = lc.compete(cities.CITIES, clat, clon, zoom, store, entrants=labelled,
+                         region=region["name"])
         regions.append({"region": region["name"], "cities": len(region["cities"]),
                         "labelled": len(labelled), "won": len(won),
                         "hand_problems": per_region.get(region["name"], 0)})
@@ -214,9 +271,20 @@ def inner(tmp):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--scenario", action="append", choices=SCENARIOS)
+    ap.add_argument("--compete", action="append", default=[],
+                    help="a region to score as competing (repeatable)")
+    ap.add_argument("--country-view", action="append", default=[],
+                    help="give a country a view of its own, built and staged cities alike")
+    ap.add_argument("--group", action="append", default=[],
+                    help='a region of whole countries: "Eastern Europe=Latvia,Romania"')
+    ap.add_argument("--split-meridian", type=float,
+                    help="cut Europe into Europe West and Europe East at this longitude")
+    ap.add_argument("--snap-countries", action="store_true",
+                    help="with --split-meridian, keep each country whole, by its mean longitude")
     ap.add_argument("--keep", help="build the trees here and keep them")
     ap.add_argument("--inner", help=argparse.SUPPRESS)
     args = ap.parse_args()
+    groups = {g.split("=")[0]: g.split("=")[1].split(",") for g in args.group}
     if args.inner:
         return inner(Path(args.inner))
     if hasattr(sys.stdout, "reconfigure"):
@@ -229,7 +297,8 @@ def main():
             shutil.rmtree(tmp)
         tmp.mkdir(parents=True)
         try:
-            n_est, per_char = build_tree(tmp, scenario, staged)
+            n_est, per_char = build_tree(tmp, scenario, staged, args.compete, args.country_view, groups,
+                                         args.split_meridian, args.snap_countries)
             res = subprocess.run([sys.executable, __file__, "--inner", str(tmp)],
                                  capture_output=True, text=True, encoding="utf-8")
             if res.returncode:
@@ -240,7 +309,13 @@ def main():
                 shutil.rmtree(base, ignore_errors=True)
         print(f"\n## Scenario {scenario}: {r['cities']} cities, {r['menu']} menu entries, "
               f"{r['problems']} label problems under hand placement "
-              f"({r['global_problems']} in Global); {n_est} widths estimated at {per_char} px/char")
+              f"({r['global_problems']} in Global); {n_est} widths estimated at {per_char} px/char"
+              + (f"; competing: {', '.join(args.compete)}" if args.compete else "")
+              + (f"; own views: {', '.join(args.country_view)}" if args.country_view else "")
+              + "".join(f"; {g}: {', '.join(ks)}" for g, ks in groups.items())
+              + (f"; Europe cut at {args.split_meridian} E"
+                 + (", countries whole" if args.snap_countries else "")
+                 if args.split_meridian is not None else ""))
         print(f"{'region':<24}{'cities':>7}{'labelled':>10}{'fit':>6}{'unlabelled':>12}{'hand problems':>15}")
         for g in sorted(r["regions"], key=lambda g: -g["labelled"]):
             print(f"{g['region']:<24}{g['cities']:>7}{g['labelled']:>10}{g['won']:>6}"

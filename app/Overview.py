@@ -574,9 +574,13 @@ if _basemap_style is None:
 # in app/label_competition.py, which check_macro_labels.py and
 # check_deploy_imports.py score too. Europe had become a block of overlapping
 # names, and hand-placing offsets against every neighbour did not scale.
-if region == DEFAULT_REGION:
+# A region view in cities.COMPETING_REGIONS competes the same way, its entrants
+# the cities it labels (_members above) rather than Global's static filter.
+_competes = region in getattr(sys.modules.get("cities"), "COMPETING_REGIONS", ())
+if region == DEFAULT_REGION or _competes:
     _won = compete(CITIES, view.latitude, view.longitude, view.zoom,
-                   _FACTS.get("storefronts", {}))
+                   _FACTS.get("storefronts", {}),
+                   **({"entrants": _members, "region": region} if _competes else {}))
     _lab = cities[cities["name"].isin(_won)].copy()
     _lab["anchor"] = _lab["name"].map(lambda n: _won[n][0])
     _lab["dx"] = _lab["name"].map(lambda n: _won[n][1])
