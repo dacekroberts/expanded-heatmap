@@ -86,7 +86,7 @@ Source: memory note, ARCH:4941-4947, 5562-5570 (registry file unreadable).
 ## e. Newest cities and Japan
 
 - **Belgium:**
-  - **KBO:** reuse only "within the purpose the owner declared" (DS:3731). The owner ruled "KBO is fine" (visual worktree, docs/decisions_drafts/visual-handoff.md:89-95). The source and update date are still owed, with no alteration and no direct marketing.
+  - **KBO:** reuse only "within the purpose the owner declared" (DS:3731). The owner ruled "KBO is fine" (2026-10-04, in the Visuals session; its log is kept locally since then). The source and update date are still owed, with no alteration and no direct marketing.
   - **The other sources:** CC BY 4.0, each with a statement of changes. VKBO's credit must be verbatim, and the transit operators' credits are dated.
 - **Daejeon, Gwangju, Gimhae:** SEMAS; held with the other SEMAS cities.
 - **Liverpool:** OGL credits for the FSA and Ordnance Survey; no ratings.

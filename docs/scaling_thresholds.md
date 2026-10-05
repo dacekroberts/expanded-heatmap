@@ -35,7 +35,31 @@ character.
   only; every other region gains nothing.
 
 So a region view that outgrows hand placement switches to the competition,
-region by region, rather than the whole map changing at once.
+region by region, rather than the whole map changing at once
+(`COMPETING_REGIONS`, branch `overview-scale`, held for review time).
+
+**Re-run with the competition and measured widths** (all 84 names measured
+in the local app the same evening; 125 problems estimated, 122 measured):
+
+- **Japan, the eight regions with Osaka Prefecture a view of its own** (30
+  menu entries), Kanto, Kansai, Osaka Prefecture and Chubu competing: no
+  label collision in any of them. At Kansai's zoom without the Osaka view,
+  eight pairs of Osaka suburbs stack dot on dot (2.3 to 5.6 px apart); at
+  Osaka Prefecture's zoom they separate. Two pairs stay stacked: Nagakute and
+  Nisshin (5.2 px, Chubu), Itami and Toyonaka (5.3 px, Kansai).
+- **Europe split, Latvia, Romania and Hungary as an Eastern Europe** (11
+  cities): the rest of Europe (21) tightens its frame, the Dutch stacking
+  goes, and the competition labels 23 of its 24; Eastern Europe is within
+  hand placement's reach (9 of 11 by competition, 40 problems at default
+  offsets). Folding Czechia in too (18) labels only 13 of 18 by
+  competition, where Czechia's own view labels all 7 by hand today; it stays
+  a view of its own. Romania alone as a view leaves the Dutch cities
+  stacked in Europe.
+- **Every split leaves:** the Copenhagen line's dot 1.3-1.7 px from
+  Copenhagen's as a page of its own, and Brăila and Galați 3.4-4.0 px apart.
+- **Hand tuning still owed at build time**, as for every city: Kyushu-Okinawa
+  (Urasoe pulls the frame south: 52 problems at default offsets), Shikoku,
+  Tohoku, South Asia.
 
 ## Measured 2026-09-30 at 106 cities, before the Band B and France landings
 
