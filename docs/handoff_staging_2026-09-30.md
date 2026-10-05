@@ -151,7 +151,7 @@ section when its item is done.** The older history is in
 ## The two private pages
 
 - **City master list**, version 13: https://claude.ai/artifact/LTzi7Vj5emzHnb3zAZy4Vn
-- **Country census**, version 12: https://claude.ai/artifact/CKCadsYtUhbWwWKzV9sDeD
+- **Country census**, version 13: https://claude.ai/artifact/CKCadsYtUhbWwWKzV9sDeD
 - How to update both: `scripts/staging_artifacts/README.md`. The published
   page is the source; the master list wins when they disagree. Master-list
   republishes in chat use the banded format (the owner's memory).
