@@ -8,6 +8,35 @@ Each entry says what actually breaks, the number where it starts to hurt, and
 what to do about it. Where a claim was measured or verified, that is stated;
 where it is an estimate, it says so.
 
+## Staged at 254 cities, 2026-10-04: region-view labels are the one thing that breaks
+
+`scripts/stress_overview.py` adds the 84 staged entries of
+`docs/staged_cities.json` (the master list's ranked 93, the Copenhagen line
+as one page) to a temporary copy of the app and scores the macro map. "Fit"
+is how many of a region's labelled cities win a pill when Global's label
+competition runs inside that region; hand-placed offsets beat it in small
+regions (United Kingdom: all 10 hand-placed, 7 by competition), so it is a
+floor, not a ceiling. Widths of unmeasured names were estimated at 7.47 px a
+character.
+
+- **Global holds:** 0 label problems at 254 cities. The competition scales.
+- **Japan's two regions do not.** Japan East would hold 57 cities (16 fit),
+  Japan West 43 (23 fit); at default offsets, 1,858 label problems.
+- **The eight traditional regions:** Kanto 32 (18 fit), Kansai 25 (11), Chubu
+  14 (9); Kyushu-Okinawa 10, Tohoku 6, Shikoku 6, Chugoku 4 and Hokkaido 3
+  are within hand placement's reach. 29 menu entries. Merging Hokkaido with
+  Tohoku and Chugoku with Shikoku (27 entries) roughly doubles those
+  regions' problems.
+- **Prefectures:** 59 menu entries, and Osaka Prefecture alone (12 cities,
+  8 fit) still needs the competition.
+- **Europe:** 23 to 32 cities (the Romanian six, Hódmezővásárhely, Perugia,
+  the Copenhagen line): 297 problems at default offsets, 18 of 35 fit.
+- **Unchanged:** South Asia and Africa, new regions of 4 and 3, need offsets
+  only; every other region gains nothing.
+
+So a region view that outgrows hand placement switches to the competition,
+region by region, rather than the whole map changing at once.
+
 ## Measured 2026-09-30 at 106 cities, before the Band B and France landings
 
 On a measurement-only trial tree: master's 75 cities plus the 11 Band B

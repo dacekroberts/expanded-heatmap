@@ -1,0 +1,251 @@
+"""Measure the Overview's macro map at the size the site is heading for: every
+built city plus the staged ones in docs/staged_cities.json, under each way of
+splitting Japan into regions (owner, 2026-10-04: "more regions okay: typical
+japanese regions or prefecture").
+
+Nothing in app/ changes. The script copies app/'s modules and
+scripts/check_macro_labels.py into a temporary tree, adds the staged cities
+to that copy of cities.py, re-tags Japan for the scenario, and runs there:
+
+  1. check_macro_labels.py as written: the label problems hand placement
+     would have to clear (staged cities sit at the default offset, above the
+     dot, as a new city's entry does until tuned);
+  2. the Global competition (app/label_competition.py) run inside each region
+     instead, with the region's own labelled cities as the entrants: how many
+     names fit and how many go unlabelled;
+  3. the menu and list sizes: regions in the menu, cities in the largest
+     region's list.
+
+Staged names without a measured pill width get an estimate from the table's
+own width per character, reported as such; measure them before trusting a
+count near the line.
+
+    python scripts/stress_overview.py [--scenario NAME ...] [--keep DIR]
+
+Scenarios: now (Japan West / Japan East), eight (the eight traditional
+regions), six (Hokkaido and Tohoku together, Chugoku and Shikoku together),
+pref (one region per prefecture). Fetches nothing; any Python runs it.
+"""
+import argparse
+import contextlib
+import io
+import json
+import re
+import shutil
+import subprocess
+import sys
+import tempfile
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+STAGED = ROOT / "docs" / "staged_cities.json"
+
+JP8 = {**{"01": "Hokkaido"},
+       **{f"{p:02d}": "Tohoku" for p in range(2, 8)},
+       **{f"{p:02d}": "Kanto" for p in range(8, 15)},
+       **{f"{p:02d}": "Chubu" for p in range(15, 24)},
+       **{f"{p:02d}": "Kansai" for p in range(24, 31)},
+       **{f"{p:02d}": "Chugoku" for p in range(31, 36)},
+       **{f"{p:02d}": "Shikoku" for p in range(36, 40)},
+       **{f"{p:02d}": "Kyushu-Okinawa" for p in range(40, 48)}}
+SIX = {"Hokkaido": "Hokkaido and Tohoku", "Tohoku": "Hokkaido and Tohoku",
+       "Chugoku": "Chugoku and Shikoku", "Shikoku": "Chugoku and Shikoku"}
+PREF = dict(zip([f"{p:02d}" for p in range(1, 48)], (
+    "Hokkaido Pref Aomori Iwate Miyagi Akita Yamagata Fukushima Ibaraki Tochigi "
+    "Gunma Saitama Chiba Tokyo Kanagawa Niigata Toyama Ishikawa Fukui Yamanashi "
+    "Nagano Gifu Shizuoka Aichi Mie Shiga Kyoto Osaka Hyogo Nara Wakayama Tottori "
+    "Shimane Okayama Hiroshima Yamaguchi Tokushima Kagawa Ehime Kochi Fukuoka Saga "
+    "Nagasaki Kumamoto Oita Miyazaki Kagoshima Okinawa").replace("Hokkaido Pref", "Hokkaido-do").split()))
+PREF["01"] = "Hokkaido"
+
+# The built Japanese cities' prefectures, by display name (cities.py carries
+# none). The script stops if a Japanese city is missing here.
+BUILT_PREF = {
+    "Sapporo": "01", "Hakodate": "01", "Tokyo": "13", "Yokohama": "14", "Kawasaki": "14",
+    "Yokosuka": "14", "Utsunomiya": "09", "Toyama": "16", "Fukui": "18", "Toyota": "23",
+    "Hamamatsu": "22", "Yokkaichi": "24", "Kobe": "28", "Himeji": "28", "Nishinomiya": "28",
+    "Osaka": "27", "Sakai": "27", "Higashiōsaka": "27", "Kyoto": "26", "Ōtsu": "25",
+    "Nara": "29", "Hiroshima": "34", "Okayama": "33", "Shimonoseki": "35",
+    "Matsuyama": "38", "Kōchi": "39", "Takamatsu": "37", "Fukuoka": "40",
+    "Kitakyushu": "40", "Kurume": "40", "Kumamoto": "43", "Nagasaki": "42",
+    "Sasebo": "42", "Kagoshima": "46",
+}
+SCENARIOS = ("now", "six", "eight", "pref")
+NEW_REGIONS = ("Africa", "South Asia")
+
+
+def region_for(scenario, pref, today):
+    if scenario == "now":
+        return today
+    if scenario == "eight":
+        return JP8[pref]
+    if scenario == "six":
+        return SIX.get(JP8[pref], JP8[pref])
+    return PREF[pref]
+
+
+def replace_once(text, old, new, what):
+    if text.count(old) != 1:
+        raise SystemExit(f"stress_overview: cities.py no longer has {what} in the expected "
+                         f"form; update replace_once()'s anchor for it")
+    return text.replace(old, new)
+
+
+def build_tree(tmp, scenario, staged):
+    app = tmp / "app"
+    shutil.copytree(ROOT / "app", app, ignore=shutil.ignore_patterns("__pycache__", "pages", "assets"))
+    (tmp / "scripts").mkdir()
+    shutil.copy(ROOT / "scripts" / "check_macro_labels.py", tmp / "scripts")
+
+    sys.path.insert(0, str(ROOT / "app"))
+    import cities as built
+    import label_competition as lc
+    sys.path.pop(0)
+    jp_built = [c["name"] for c in built.CITIES if c["country"] == "Japan"]
+    unknown = sorted(set(jp_built) - set(BUILT_PREF))
+    if unknown:
+        raise SystemExit(f"stress_overview: add {unknown} to BUILT_PREF")
+    today = {c["name"]: c["region"] for c in built.CITIES}
+    retag = {n: region_for(scenario, BUILT_PREF[n], today[n]) for n in jp_built}
+    rows = []
+    for s in staged:
+        row = {"name": s["name"], "country": s["country"], "lat": s["lat"], "lon": s["lon"],
+               "mode": s["mode"], "coverage": "narrowed", "page": "pages/staged.py",
+               "region": (region_for(scenario, s["pref"], s["region"])
+                          if s["country"] == "Japan" else s["region"])}
+        if s.get("label_tier"):
+            row["label_tier"] = s["label_tier"]
+        rows.append(row)
+    jp_regions = list(dict.fromkeys(
+        [r for r in (retag[n] for n in jp_built)] + [r["region"] for r in rows if r["country"] == "Japan"]))
+    if scenario != "now":
+        jp_regions = sorted(jp_regions, key=lambda r: min(
+            p for p in BUILT_PREF.values() if region_for(scenario, p, "") == r)
+            if any(region_for(scenario, p, "") == r for p in BUILT_PREF.values()) else
+            min(s["pref"] for s in staged if s.get("pref") and region_for(scenario, s["pref"], "") == r))
+    else:
+        jp_regions = ["Japan West", "Japan East"]
+    (tmp / "stage.json").write_text(json.dumps({"retag": retag, "rows": rows}, ensure_ascii=False),
+                                    encoding="utf-8")
+
+    src = (app / "cities.py").read_text(encoding="utf-8")
+    block = (
+        "\nimport json as _json\n"
+        f"_STAGE = _json.loads(open({str(tmp / 'stage.json')!r}, encoding='utf-8').read())\n"
+        "for _c in CITIES:\n"
+        "    if _c['name'] in _STAGE['retag']:\n"
+        "        _c['region'] = _STAGE['retag'][_c['name']]\n"
+        "    _rof = {k: v for k, v in (_c.get('label_offset_by_region') or {}).items()\n"
+        f"            if k not in ('Japan West', 'Japan East') or {scenario == 'now'!r}}}\n"
+        "    if 'label_offset_by_region' in _c:\n"
+        "        _c['label_offset_by_region'] = _rof\n"
+        "CITIES.extend(_STAGE['rows'])\n"
+    )
+    src = replace_once(src, "\nIN_DEFAULT_VIEW = ", block + "\nIN_DEFAULT_VIEW = ", "IN_DEFAULT_VIEW")
+    jp_lines = "".join(f'    "{r}",\n' for r in jp_regions)
+    src = replace_once(src, '    "Japan West",\n    "Japan East",\n', jp_lines, "REGION_ORDER's Japan rows")
+    src = replace_once(src, '    "West Asia",\n]', '    "West Asia",\n'
+                       + "".join(f'    "{r}",\n' for r in NEW_REGIONS) + "]", "REGION_ORDER's end")
+    jp_tuple = ", ".join(f'"{r}"' for r in jp_regions)
+    src = replace_once(src, '"Japan West", "Japan East")', jp_tuple + ")", "COUNTRY_VIEWS")
+    src = replace_once(src, '"East Asia": ("Japan West", "Japan East", ',
+                       f'"East Asia": ({jp_tuple}, ', "REGION_LABELS_ALSO")
+    if scenario != "now":
+        src = replace_once(src, ', "Japan West": 6.0}', "}", "REGION_ZOOM's Japan West")
+    (app / "cities.py").write_text(src, encoding="utf-8")
+
+    # Estimated widths for names the table has not measured.
+    per_char = sum(lc.TEXT_WIDTH.values()) / sum(len(n) for n in lc.TEXT_WIDTH)
+    est = {r["name"]: round(len(r["name"]) * per_char, 1) for r in rows
+           if r["name"] not in lc.TEXT_WIDTH}
+    lsrc = (app / "label_competition.py").read_text(encoding="utf-8")
+    lsrc = replace_once(lsrc, "\nPILL_H = ", f"\nTEXT_WIDTH.update({est!r})\nPILL_H = ",
+                        "label_competition.py's PILL_H")
+    (app / "label_competition.py").write_text(lsrc, encoding="utf-8")
+    return len(est), round(per_char, 2)
+
+
+def inner(tmp):
+    """Runs inside the temporary tree: one scenario's numbers, as JSON."""
+    sys.path.insert(0, str(tmp / "app"))
+    sys.path.insert(0, str(tmp / "scripts"))
+    import cities
+    import check_macro_labels as cml
+    import label_competition as lc
+
+    sys.argv = ["check_macro_labels.py"]
+    buf = io.StringIO()
+    with contextlib.redirect_stdout(buf):
+        try:
+            cml.main()
+        except SystemExit:
+            pass
+    out = buf.getvalue()
+    names = sorted((r["name"] for r in cities.REGIONS), key=len, reverse=True)
+    per_region = {}
+    in_problems = False
+    for line in out.splitlines():
+        if line.startswith("PROBLEMS"):
+            in_problems = True
+            continue
+        if in_problems and line.startswith("  "):
+            body = line.strip()
+            r = next((n for n in names if body.startswith(n)), "(other)")
+            per_region[r] = per_region.get(r, 0) + 1
+    facts = json.loads((tmp / "app" / "macro_facts.json").read_text(encoding="utf-8"))
+    store = facts.get("storefronts", {})
+    regions = []
+    for region in cities.REGIONS:
+        if region["name"] == cities.DEFAULT_REGION or region["name"] in cities.REGION_MEMBERS:
+            continue
+        clat, clon, zoom = cml.region_view(region)
+        labelled = cml.scored_labels(region, clat, clon, zoom)
+        lc.eligible = lambda c, L=labelled: c["name"] in L
+        won = lc.compete(cities.CITIES, clat, clon, zoom, store)
+        regions.append({"region": region["name"], "cities": len(region["cities"]),
+                        "labelled": len(labelled), "won": len(won),
+                        "hand_problems": per_region.get(region["name"], 0)})
+    total = int(re.search(r"PROBLEMS (\d+)", out).group(1))
+    print(json.dumps({"menu": len(cities.REGIONS), "cities": len(cities.CITIES),
+                      "problems": total, "global_problems": per_region.get("Global", 0),
+                      "regions": regions}))
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--scenario", action="append", choices=SCENARIOS)
+    ap.add_argument("--keep", help="build the trees here and keep them")
+    ap.add_argument("--inner", help=argparse.SUPPRESS)
+    args = ap.parse_args()
+    if args.inner:
+        return inner(Path(args.inner))
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    staged = json.loads(STAGED.read_text(encoding="utf-8"))["cities"]
+    for scenario in args.scenario or SCENARIOS:
+        base = Path(args.keep) if args.keep else Path(tempfile.mkdtemp(prefix="stress_"))
+        tmp = base / scenario
+        if tmp.exists():
+            shutil.rmtree(tmp)
+        tmp.mkdir(parents=True)
+        try:
+            n_est, per_char = build_tree(tmp, scenario, staged)
+            res = subprocess.run([sys.executable, __file__, "--inner", str(tmp)],
+                                 capture_output=True, text=True, encoding="utf-8")
+            if res.returncode:
+                raise SystemExit(res.stderr[-2000:])
+            r = json.loads(res.stdout.strip().splitlines()[-1])
+        finally:
+            if not args.keep:
+                shutil.rmtree(base, ignore_errors=True)
+        print(f"\n## Scenario {scenario}: {r['cities']} cities, {r['menu']} menu entries, "
+              f"{r['problems']} label problems under hand placement "
+              f"({r['global_problems']} in Global); {n_est} widths estimated at {per_char} px/char")
+        print(f"{'region':<24}{'cities':>7}{'labelled':>10}{'fit':>6}{'unlabelled':>12}{'hand problems':>15}")
+        for g in sorted(r["regions"], key=lambda g: -g["labelled"]):
+            print(f"{g['region']:<24}{g['cities']:>7}{g['labelled']:>10}{g['won']:>6}"
+                  f"{g['labelled'] - g['won']:>12}{g['hand_problems']:>15}")
+
+
+if __name__ == "__main__":
+    main()
