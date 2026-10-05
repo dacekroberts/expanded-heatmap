@@ -874,13 +874,17 @@ def join_city(permits, blocks, chome, rules=()):
 # Each list's own spelling of its operator column. Fukuoka's (2026-09-28): the
 # food list's 営業者氏名 (Tokyo's lists spell it so too) and the registers'
 # 開設者法人名（開設者氏名）- a company's name, or a sole trader's own. Without
-# them the rule compared nothing there. MHLW's open data has NO column for an
-# individual operator (法人名 is a company's), so the rule cannot run on its rows.
+# them the rule compared nothing there. MHLW's 法人名 (owner, 2026-10-05,
+# reversing DECISIONS 2026-09-28): it holds a sole trader's own name as well as
+# a company's (40,312 rows of the 47 cached files carry no company marker and
+# no 法人番号; staging measured 790 whose trade name equals it), so the rule
+# compares it, in memory, like every column here; KYOTO_CORP keeps companies out.
 # Kyoto's (2026-09-28): the food lists' 申請者＿申請者名 and the registers'
 # 申請者氏名; kyoto_permit_stream compares them itself and carries only the answer.
 # Tokyo's (2026-09-28): the catalogue registers' 法人代表者氏名 (Taitō, Shibuya),
 # a company's representative - a person, as 代表者名. The national-schema food
-# lists (Chūō, Minato, Shinjuku, Kōtō, Shibuya) carry 法人名 only, as MHLW's do.
+# lists (Chūō, Minato, Shinjuku, Kōtō, Shibuya) carry 法人名 only, as MHLW's do,
+# so they are compared on it too since 2026-10-05.
 # The 2026-10-02 batch, each list's spelling (without them the rule compared
 # nothing there): Matsuyama's 申請者個人名 (food) and 開設者氏名 (registers;
 # Kumamoto's and Hakodate's too); Kumamoto's 代表者氏名（法人のみ）; Fukui's
@@ -903,7 +907,7 @@ OPERATOR_COLS = ("営業者名", "開設者名", "申請者名", "代表者名",
                  "法人代表者名", "開設者", "代表者", "代表者氏名", "開設者法人名", "営業者法人名",
                  "営業者氏名（法人のみ）", "営業者氏名・法人名称", "氏名", "開設者申請者名", "開設者代表者名",
                  "営業者申請者名", "営業者代表者名", "申請者_氏名", "申請者代表者名", "開設者氏名（法人）",
-                 "開設者代表者")
+                 "開設者代表者", "法人名")
 
 
 def _name_key(s):

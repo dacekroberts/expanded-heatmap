@@ -114,7 +114,7 @@ SOURCE_ENCODING = {"mhlw": "utf-8-sig", "food": "utf-8-sig", "barber": "cp932", 
 _REGISTER = ("営業所所在地", "開設者", "代表者")
 REQUIRED_COLUMNS = {
     "mhlw": ("営業施設名称、屋号又は商号", "営業の種類", "業態", "営業施設所在地", "緯度", "経度", "申請区分",
-             "廃業年月日"),
+             "廃業年月日", "法人名"),
     "food": ("営業所名称", "業種名", "営業所", "申請者氏名", "満了年月日3"),
     "barber": ("営業所名称", *_REGISTER),
     "beauty": ("名称", *_REGISTER),

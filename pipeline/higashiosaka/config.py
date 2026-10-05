@@ -88,12 +88,13 @@ SOURCES = {"food": SOURCE_FILES["food"][0]}
 # Declared, never inferred: UTF-8 CSV with a BOM, every file.
 SOURCE_ENCODING = {k: "utf-8-sig" for k in SOURCE_FILES}
 # The national schema's columns each raw file must carry (fetch_sources.py
-# and source_rows stop on a header without them). 法人名 is a company's, so no
-# column names an individual operator and the name rule has nothing to
-# compare (Okayama's call, owner 2026-10-02: the whole page without the rule).
-# Never selected: 施設電話番号, 連絡先メールアドレス, 連絡先FormURL,
-# 連絡先備考_その他SNSなど, 法人名 and 法人番号.
-RAW_COLUMNS = ("施設名称", "営業の種類", "業態", "所在地_連結表記", "許可年月日", "許可満了日", "廃業年月日")
+# and source_rows stop on a header without them). 法人名 holds a sole trader's
+# own name as well as a company's, so it is REQUIRED and read IN MEMORY by the
+# name rule only, never kept (owner 2026-10-05, reversing Okayama's call of
+# 2026-10-02). Never selected: 施設電話番号, 連絡先メールアドレス, 連絡先FormURL,
+# 連絡先備考_その他SNSなど and 法人番号.
+RAW_COLUMNS = ("施設名称", "営業の種類", "業態", "所在地_連結表記", "許可年月日", "許可満了日", "廃業年月日",
+               "法人名")
 # step 2 checks the rebuilt rows (japan_register.rebuilt_register's premises
 # columns) against REQUIRED_COLUMNS["food"]: the columns both shapes carry.
 REQUIRED_COLUMNS = {

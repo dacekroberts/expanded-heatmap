@@ -6,7 +6,7 @@
   "join_own": 347,
   "line_station_rows": 18,
   "name_rule_spread_rows": 0,
-  "names_withheld": 0,
+  "names_withheld": 5,
   "no_address": 290,
   "not_a_premises": 351,
   "not_storefront": 1175,

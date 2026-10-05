@@ -92,12 +92,12 @@ SOURCE_ENCODING = {"mhlw": "utf-8-sig", "food": "utf-8-sig", "barber": "cp932", 
 # header without them. The old-law list's 申請者_氏名 and the registers'
 # 開設者名 / 開設者氏名 and 開設者代表者 are REQUIRED so the name rule
 # (japan_register.name_is_operator; owner 2026-09-27) cannot silently compare
-# nothing; they are read IN MEMORY by that rule only, never kept. MHLW has no
-# column for an individual operator (Fukuoka's precedent). Never selected:
-# MHLW's 法人名 / 法人番号 / 法人住所 and phones.
+# nothing; they are read IN MEMORY by that rule only, never kept, and since
+# 2026-10-05 MHLW's 法人名 too (owner: it holds a sole trader's own name as
+# well as a company's). Never selected: MHLW's 法人番号 / 法人住所 and phones.
 REQUIRED_COLUMNS = {
     "mhlw": ("営業施設名称、屋号又は商号", "営業の種類", "業態", "営業施設所在地", "緯度", "経度", "申請区分",
-             "廃業年月日"),
+             "廃業年月日", "法人名"),
     "food": ("営業所名称", "営業所_住所１", "業種", "許可有効期限", "申請者_氏名"),
     "barber": ("理容所名称", "理容所所在地", "開設者名", "開設者代表者"),
     "beauty": ("美容所名称", "美容所所在地", "開設者氏名", "開設者代表者"),

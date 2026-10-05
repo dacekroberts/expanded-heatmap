@@ -83,7 +83,7 @@ SOURCE_ENCODING = {"food": "xlsx", "mhlw": "utf-8-sig"}
 REQUIRED_COLUMNS = {
     "food": ("営業の種類", "施設名称", "申請者名", "許可条件", "自動車登録番号", "許可満了日"),
     "mhlw": ("営業施設名称、屋号又は商号", "営業の種類", "業態", "営業施設所在地", "緯度", "経度", "申請区分",
-             "廃業年月日"),
+             "廃業年月日", "法人名"),
 }
 # As Fukuoka's (owner-approved wording, 2026-09-24): MHLW publishes an address
 # only where the filer agreed to it.
