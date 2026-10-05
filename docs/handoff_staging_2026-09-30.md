@@ -100,12 +100,17 @@ section when its item is done.** The older history is in
 
 ## NEXT - pick up here, in this order
 
-1. **Briefs for the Band A cities**, then a build session: Maebashi, Fukuyama
-   and Sagamihara (Japan) need briefs; Gimpo, Siheung (briefs corrected
-   2026-10-04: keyed on 시군구코드 as Gimhae, each code measured against its
-   name), Geneva, and Thessaloniki (Band B, the owner's build
-   calls answered) have passing briefs (20/20 on 2026-10-04). Then licence reads for Bremen and the Band
-   B Japanese sources, and briefs for Band B.
+1. **Briefs for the Band A cities**: all written and passing. Gimpo,
+   Siheung (keyed on 시군구코드 as Gimhae), Geneva, Thessaloniki (Band B),
+   Fukuyama and Sagamihara (their calls answered 2026-10-05). **Maebashi's
+   city half waits on BODIK** (HTTP 403 on 2026-10-04): retry about a day
+   later, one `package_show` per dataset 12 s or more apart, fill the
+   brief's pending sections, then its two licence reads (owner's call 9).
+   **The build session is held** while new builds stay paused (owner's call
+   3, 2026-10-04). **MHLW's 法人名 privacy repair** (owner's call 4,
+   2026-10-05) is Cleanup's: every Japanese MHLW city re-renders. Then
+   licence reads for Bremen and the Band B Japanese sources, and briefs for
+   Band B.
 2. **The ranked unscreened 1-4, the next action item, held for cost** (owner,
    2026-10-04): the Greater Copenhagen Light Rail (about 10 municipalities,
    `regional-extension`); Romania's six other tram cities and

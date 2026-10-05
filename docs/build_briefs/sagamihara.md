@@ -368,7 +368,12 @@ Keiō Sagamihara Line's one-station stub stays as cut; Kawasaki's name-rule
 bullet for every layer; MHLW as a control only; the minor tier and Japan
 East; `mode` metro; §4 and §5 accepted (2026-10-04).
 
-**Open:**
+✅ **Both answered as recommended (owner, 2026-10-05, "7 yes, 8 yes";
+`docs/decisions_drafts/staging.md`):** the Chūō Line and both Odakyū lines
+are drawn as cut, the Chūō Line's timetable read at the build and recorded;
+the notification list stays out, and nothing of it is downloaded.
+
+**Were open:**
 
 1. **Three lines cut to two stations: JR's Chūō Main Line (相模湖, 藤野; 2 of
    75), Odakyū Odawara (相模大野, 小田急相模原; 2 of 47), Odakyū Enoshima

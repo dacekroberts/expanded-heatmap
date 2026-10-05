@@ -4,6 +4,37 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-05 - MHLW's 法人名 joins the name rule as a privacy repair; the Japanese briefs' calls made (owner)
+
+- **The owner: "4 yes, 5 yes, 6 yes, 7 yes, 8 yes, 9 yes"**, on staging's
+  calls of 2026-10-04, night.
+  4. **MHLW's 法人名 is read by the name rule, in memory, never kept**, for
+     every city on MHLW's file; the 16 built cities with a matching shown
+     row (79 rows, the entry below) are re-run, drift-checked and given new
+     privacy verdicts, and the repair **lands without waiting for review
+     time**. Shared pipeline code, so handed to Cleanup (staging's
+     recommendation), with the counts and staging's scratch scripts. It
+     reverses the position of DECISIONS 2026-09-28 (Fukuoka) and the
+     Okayama call of 2026-10-02 that 法人名 is a company's.
+  5. **Fukuyama takes MHLW beside the city's complete list**, Matsuyama's
+     shape: MHLW's own point where the block join misses (90.1% to 95.9%),
+     its notifications as a partial food-shops layer disclosed as partial,
+     and its 44 open permits in no city file, de-duplicated.
+  6. **Fukuyama's closure filter**: a rebuilt new-law permit whose number
+     MHLW's live file no longer holds is dropped (151 rows; restaurants
+     4,238 to 4,123, 95.8% of e-Stat's 4,302). A new method; the page still
+     says the list may hold closed premises (334 old-law restaurants
+     unchecked).
+  7. **Sagamihara draws the Chūō Line and both Odakyū lines as cut** (two
+     stations each in the city; Kawasaki's, Higashiōsaka's and
+     Nishinomiya's precedent), the Chūō Line's timetable read at the build;
+     Keiō's one-station stub stays as cut by the standing call.
+  8. **Sagamihara leaves out the city's food-notification dataset**
+     (`todokede_eigyo`), Kawasaki's and Yokosuka's shape.
+  9. **Maebashi's BODIK fetch is retried after the rate block lapses**
+     (about a day, from 2026-10-05), one `package_show` per dataset 12 s or
+     more apart, and the two licence reads run then.
+
 ### 2026-10-04 - MHLW's 法人名 holds sole traders' own names: measured across every cached file, put to the owner
 
 - **Found by Maebashi's brief agent**: in MHLW's 10201 file, 1,482 live
