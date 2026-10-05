@@ -4,6 +4,26 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - Band A's Japanese briefs: Step 0 downloads and licence reads approved; the four briefed cities' build held; the Korean rows corrected (owner)
+
+- **The owner: "1 yes, 2 yes, 3 hold, fix the Korean rows"**, on staging's
+  calls of the night.
+  1. **Downloads for the Maebashi, Fukuyama and Sagamihara briefs**, each
+     from its publisher's own host: Maebashi's BODIK `102016_eiseikensa01`
+     and `102016_eiseikensa02` with the monthly new and closed files,
+     Fukuyama's CKAN `licensed_food` and `licensed_env`, Sagamihara's four
+     生活衛生課 zips, MHLW's file for each city's code, and MLIT's address
+     blocks for each prefecture. One background agent per city; BODIK's calls
+     spaced (it answered 403 to wave 3's probes on 2026-10-04).
+  2. **Licence reads for Maebashi's and Fukuyama's sources** (no row in
+     `docs/data_sources/japan.md`), one `licence-read` agent per source.
+  3. **Held:** a build session for Gimpo, Siheung, Geneva and Thessaloniki
+     (their briefs pass 20/20), while new builds stay paused for the week
+     (owner, 2026-10-04).
+- **The Korean rows:** the master list still called Daejeon, Gwangju and
+  Gimhae "built on `korea-sweep-build`, for the owner's review"; they landed
+  2026-10-04 (`docs/session_roles.md`), and the rows now say so.
+
 ### 2026-10-04 - Gimpo's and Siheung's briefs corrected: the 시군구코드 filter is on master, each code measured against its name
 
 - **The owner's start instruction to the new staging session:** "Correct
