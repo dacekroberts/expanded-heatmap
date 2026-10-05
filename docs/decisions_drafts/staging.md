@@ -4,6 +4,47 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - Staging's tools for the mass development: a probe agent, four skills, a push script; the handoff rewritten (owner)
+
+- **The owner: "yes 1-6 and send the messages in 7, 8 and 9 can be passed on
+  the handoff"**, on staging's list of skills and tools drawn from a week of
+  screening, before a fresh staging session takes the held queue.
+  1. **`city-probe` agent** (`.claude/agents/city-probe.md`): the probe
+     rules every agent of the reset wave and probe wave 4 ran under, with
+     reports shaped like master-list rows (Kind, Methods, City host asked?)
+     and frequencies marked ASSERTED unless read (Indore).
+  2. **`screen-wave` skill**: queue to probes to numbered owner calls to rows
+     to push to the two private pages, with the traps of the week.
+  3. **`regional-extension` skill**, drafted by an agent from the record
+     (the extensions kit of 2026-10-02 its main source): the city alone at
+     zero drift first, one register cut by code or one publisher per
+     municipality, the "(Regional)" rename, the Band R add-ons.
+  4. **`japan-city` gains "Screening a Japanese city"**: MHLW's cover,
+     addressed and placeable shares, prefecture-licensed towns and the Chiba
+     ceiling, station groups not a cut-off (Takarazuka built on 11).
+  5. **`korea-city` skill**, drafted by an agent from the record, flagged for
+     the first Korean build session to verify (the owner's per-country rule,
+     overdue at 15 built cities). It found that `korea_sbiz`'s 시군구코드
+     filter landed as 8f0471c9, so Gimpo's and Siheung's briefs still name
+     a blocker that is gone.
+  6. **`scripts/push_docs.py`**: the docs-only push ritual, refusing `app/`,
+     `outputs/` and `pipeline/` and stopping when a merge rewrites a
+     generated file.
+  - Also committed: `scripts/staging_artifacts/` (the census's Hottest
+    leads rebuild and per-country counts, with a README on updating both
+    private pages), usage lines in `docs/commands.md`, and two pointers in
+    CLAUDE.md's "Where to start" (screening, extensions, Korea).
+- **Item 7:** Visuals and Analytics were each sent a suggestion to write a
+  skill of their own. Visuals has put an outline to the owner and corrected
+  one point: `scripts/fingerprint.py` marks maps and app pages only, and
+  whether cards carry a mark is an open owner question.
+- **Items 8 and 9 go on the handoff**: `romania-city` at the next Romanian
+  build, `hungary-city` after Budapest, and a commuter-rail measurement
+  script only with the overhaul.
+- **The handoff is rewritten** (`docs/handoff_staging_2026-09-30.md`) for a
+  fresh staging session, and `docs/recheck_calendar.md`'s SEMAS row now
+  counts 13 Korean cities, as its Asia table does.
+
 ### 2026-10-04 - A global re-probe calendared for about 2027-10 (owner)
 
 - **The owner: "ideally we would re-probe the global data for new entries or

@@ -56,6 +56,9 @@ python scripts/python_memcap.py [--install|--check|--selftest]   # per-process m
 python scripts/heavy_job.py run --label <job> [--peak-gb <N> --estimate <basis>] --session <you> [--wait <min>] -- <command>   # the heavy-job gate; `status` shows who holds memory
 python scripts/archive_decisions.py [--dry-run]          # start of each week: older entries -> docs/decisions/
 python scripts/merge_append_only.py DECISIONS.md [--dry-run]   # archived entries count as present
+python scripts/push_docs.py [--dry-run]                  # a docs-only session's push ritual; refuses app/, outputs/, pipeline/
+python scripts/staging_artifacts/leads_build.py <census page HTML>   # rebuild the private census's Hottest leads (README beside it)
+python scripts/staging_artifacts/country_census.py      # per-country counts from the master list, read-only
 python scripts/coverage_sweep/recount.py [--gaps-only]   # rail-city universe vs the master list (docs/coverage_sweep/); coarse, reads only
 python scripts/coverage_sweep/parse_wiki_tram.py [--wiki PATH] [--out PATH]   # saved tram-list wikitext -> rows, for a new universe
 python scripts/staged_cities_build.py                    # ranked unbuilt cities -> docs/staged_cities.json (pipeline env, cached N02/N03)

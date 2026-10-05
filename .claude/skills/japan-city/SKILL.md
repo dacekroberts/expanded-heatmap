@@ -441,6 +441,51 @@ reproduced the brief's eight shares exactly. Wards without data get hollow
   Shibuya). Each non-catalogue ward needs its own credit; Shinjuku's 2026 PDF
   is NOT permitted.
 
+## Screening a Japanese city (before any brief)
+
+Added 2026-10-04 by staging, from the wave-2 scoping (2026-10-02) and wave 3's
+results, for the Japan wave 4 queued on the master list (66 municipalities,
+"Unscreened, ranked"). The scoping write-up and its CSV are in
+`docs/coverage_sweep/` (`japan_scope.md`, `japan_universe_mhlw.csv`).
+
+**Rail counts JR and private lines here.** Japan's builds draw them: Fukuyama
+and Maebashi reached Band A with no metro or tram. Count N02 station groups
+inside the city line (Shinkansen out). **Groups are not a cut-off**:
+Takarazuka was built on 11, while the scoping marked Tottori and Kure (13)
+"too few stations"; the call rests on frequency and where the stations sit,
+so read the timetable, never a count alone.
+
+**The food leg starts from MHLW's file, by health authority.** A city with its
+own health centre has its own file (`<code>`); every other municipality sits
+in its prefecture's (`<pref>000`) and can be placed only by its address. Three
+shares decide it, all in the CSV:
+- **cover**: MHLW's open 飲食店営業 permits over e-Stat's in-force count. At
+  0.85 or more the city enters every permit; 0.25 to 0.85 is partial; under
+  0.10 is opt-in filing only, so the food leg depends wholly on the city's
+  own list.
+- **addressed share**: placement needs about 70%. Matsumoto (35.4%) and
+  Miyazaki (36.8%) fail; Shizuoka (60%), Fukuyama (67%), Kure and Kōfu sit
+  just under and need a second list.
+- **placeable of official**: cover times addressed, the share a map could show.
+
+**Then the city's own lists**: BODIK (it rate-blocked wave 3's probes on
+2026-10-04; space the calls), the city's open-data page, and barber, beauty and laundry
+registers for the personal-services bucket (Kōchi's shape, personal services
+only, is a legitimate Band B page).
+
+**Prefecture-licensed towns have a ceiling.** Chiba Prefecture's food set is
+old-law only, so Matsudo, Ichikawa and Kashiwa top out at personal services
+(Band B), and wave 4's Ichihara, Urayasu, Sakura and Yachiyo should be expected
+to as well. Saitama, Tokyo (Tama), Kanagawa, Aichi, Ōsaka and Hyōgo prefecture
+files are opt-in and thin (under 0.25 addressed restaurants per Economic Census
+establishment), so their towns need a prefecture or city list of their own.
+Tokushima (12.7% addressed) and Saga (29.9%) prefecture files fail placement.
+
+**Cost and order.** About 30 to 35 agent-minutes per city to screen and brief at
+wave 2's rate, plus a licence read per new source. Screen with the `city-probe`
+agent in groups sharing a prefecture, highest station groups first, and band
+by the master list's first-blocker rule.
+
 ## Recommending the next city
 
 **The owner's Japanese list is complete**: all six on the owner's order

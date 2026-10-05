@@ -41,7 +41,7 @@ research for a region when its table runs out, or after a large landing.
 | 10-20 | Zurich | VBZ publishes the detail of its 13 December change. | staging |
 | after 10-25 | Salvador, Teresina (watch) | Salvador's VLT is in free trial to year-end; Teresina's all-day service may return after the works. | staging |
 | 10-25 / 10-31 | Montréal, New York, Toronto | Feeds end (STM 10-25; NY and TTC 10-31). | — |
-| 10-31 | 10 Korean cities | SEMAS's next edition; one re-run covers Incheon and the Gyeonggi cities. | a build session |
+| 10-31 | 13 Korean cities | SEMAS's next edition; one re-run covers Incheon, the Gyeonggi cities, Daejeon, Gwangju and Gimhae (the full list in the Asia table below). | a build session |
 | 10-31 | Japan | MHLW's permit system maintenance; check the downloads still work afterwards. | — |
 | ≈11-01 | Birmingham (Regional) | Line 2 to Dudley: "autumn 2026" (TfWM); 1 November only from Dudley Council. Dudley joins if it opens (pre-approved). | a build session |
 | 11-23 | Rome | ATAC's trams return in phases, the whole network by 11-23 (news). Drawing trams 2, 3, 5, 14 and 19 is the owner's call. | **owner** |

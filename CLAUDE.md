@@ -36,8 +36,10 @@ a rule, not before obeying one.
   geocoder.** [#address-join]
 - Chinese, Japanese or Korean text -> `cjk-text`. [#cjk-text]
 - Re-probing a thin city (open-gap row, one-bucket Band C) -> `reprobe-city`. [#reprobe-city]
+- Screening cities -> `screen-wave`, probes by the `city-probe` agent; extending
+  a built map -> `regional-extension`.
 - Brazilian city -> `brazil-city`; Taiwanese city -> `taiwan-city`; Japanese
-  city -> `japan-city`; French city -> `france-tram-city`; a trams-only
+  city -> `japan-city`; Korean city -> `korea-city`; French city -> `france-tram-city`; a trams-only
   city outside France and Czechia -> `tram-city`. [#country-skills]
 - **Overpass: one query in flight per session, one per city**, never
   parallel; after a 504 or 429 wait at least 60 s before a retry (owner,

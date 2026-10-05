@@ -1,8 +1,11 @@
-# Handoff - staging role, the list's history and the next probes (2026-10-03)
+# Handoff - staging role: the screen closed, the queue held, the tools built (2026-10-04)
 
-For a FRESH staging session. The file name keeps its first date because other
-docs point here; the content is current to 2026-10-03. Read once, then follow
-the pointers. **Delete a section when its item is done.**
+For a FRESH staging session, started later in the week of 2026-10-04 for the
+mass development of the remaining cities and candidates. The file name keeps
+its first date because other docs point here; the content is rewritten and
+current to 2026-10-04, night. Read once, then follow the pointers. **Delete a
+section when its item is done.** The older history is in
+`docs/city_master_list_history.md` and the drafts file.
 
 ## Before starting
 
@@ -10,224 +13,164 @@ the pointers. **Delete a section when its item is done.**
   it, or cut a new one from origin/master). `data/` and `.venv-lean` are
   junctions to the main checkout's: never stage `data/`. Confirm the branch,
   `git fetch`, merge `origin/master`, then `get_usage`.
-- **Working rules to know (CLAUDE.md and `docs/session_roles.md`):**
+- **Tell the live sessions your name** (`ListAgents`): "E.H Cleanup Session",
+  "Expanded Heatmap Visuals", "Expanded Heatmap Analytics". The previous
+  staging session was "Staging Session". Never close or recommend closing
+  another project's sessions.
+- **Your tools (new 2026-10-04):**
+  - **`screen-wave` skill**: the whole staging loop, queue to probes to owner
+    calls to rows to push to artifacts. Read it first.
+  - **`city-probe` agent** (`.claude/agents/city-probe.md`): one city, or a
+    small group sharing one country's sources, per call; curl only, the
+    user-agent rule, no downloads, no names; returns rows shaped for the
+    master list.
+  - **`regional-extension` skill**: joining neighbours to a built map (the
+    queue's top items are extensions).
+  - **`korea-city` skill**: drafted from the record by staging, not by the
+    build session that wrote the Korean modules; the first Korean build
+    verifies it.
+  - **`japan-city`'s new "Screening a Japanese city" section**: MHLW's cover,
+    addressed and placeable shares, prefecture-licensed towns, the Chiba
+    ceiling, station groups not a cut-off.
+  - **`python scripts/push_docs.py [--dry-run]`**: the push ritual in one
+    command (fetch, merge, regenerate, index check, push with the 50-check
+    hook, downstream check). It refuses `app/`, `outputs/` and `pipeline/`,
+    and stops if a merge rewrites a generated file.
+  - **`scripts/staging_artifacts/`**: how to update the two private pages,
+    `leads_build.py` for the census's Hottest leads, `country_census.py`.
+  - **`scripts/coverage_sweep/` and `docs/coverage_sweep/`**: the rail-city
+    universe and `recount.py`, kept for the 2027 re-probe.
+- **Working rules to know (CLAUDE.md, `docs/session_roles.md`):**
   - DECISIONS entries go to **`docs/decisions_drafts/staging.md`**, never to
     `DECISIONS.md`; Cleanup folds the drafts in.
-  - Heavy jobs only through `scripts/heavy_job.py run`, at most two
-    machine-wide. **Since 2026-10-03 the gate looks up each label's last
-    measured peak and records every peak** (owner: measured figures are the
-    norm); give a real label and `--session staging`. A screen is light.
-  - **Overpass: one query in flight per session, one per city; after a 504
-    or 429 wait at least 60 s.** `brief_check.py` prints **RETRY**, not
-    FAIL, when every mirror refused. A RETRY is never a brief to correct:
-    re-run it later.
-  - **Downstream rule (owner, 2026-10-03):** after every push to master, run
-    `python scripts/downstream_changes.py <master before the push> <the
-    pushed commit>`. If it prints anything but "nothing downstream", send the
-    output to the Visuals and Analytics sessions. Staging's doc-only pushes
-    usually print "nothing downstream"; a new city always counts. A brief or
-    kit staging writes tells its build to record each notice's card face or
-    caption and any open terms question in its drafts (`docs/session_roles.md`,
-    "Downstream sessions").
-  - **AI-driven deep analysis is permitted, private to the owner,** always
-    with an AI-generated acknowledgement, never on a page or in `outputs/`.
-    Ridership stays out of scope as a hard line (CLAUDE.md).
-  - **Notice numbers:** the claims sentence in `docs/session_roles.md` covers
-    115-140 (Japan wave 2 115-128, extensions 129-136, lane-app 137-140).
-    **The next claim starts at 141.**
-- **Tell the live sessions your name** (`ListAgents`): Cleanup, the Japan
-  wave 2 and extensions build sessions ("Extension regional builds"), and the
-  Visuals and Analytics sessions. This session was "Staging session".
-- **Push ritual**: fetch; merge (`python scripts/merge_append_only.py
-  DECISIONS.md` on a conflict); `python scripts/decisions_index.py --check`;
-  push `HEAD:master HEAD:worktree-staging`, re-fetching just before; then
-  the downstream check. Only docs go to master from staging. Write every file
-  with LF endings. No backslash or backtick in a Bash command: write a
-  script file and run it.
-- **A pre-push failure on a city staging did not touch** (most often
-  `check_macro_facts` while another session re-runs a city on the shared
-  `data/`) is that session's to fix. Find who wrote the city's
-  `data/<city>/processed/` last, tell them, and push after they land. Never
-  write another city's macro facts. (2026-10-03: D.C. and Tbilisi, Cleanup's,
-  cleared in about an hour.)
-- After a background subagent reports, stop any process it left (an orphaned
-  grep held 4.7 GB on 2026-09-30).
+  - Only docs (and staging's own tooling, on the owner's word) go to master
+    from staging. A build lands through `publish-city` from a build session.
+  - **At most three build sessions at once**; a branch takes master in only
+    before its own push (owner, 2026-10-04).
+  - Heavy jobs only through `scripts/heavy_job.py run`; a screen is light.
+  - **Overpass: one query in flight per session, one per city**; no probe
+    uses it.
+  - **A pre-push failure on a city staging did not touch** (most often
+    `check_macro_facts` while another session re-runs a city on the shared
+    `data/`) is that session's to fix: tell it, wait, never write another
+    city's macro facts, never skip the hook.
+  - **Page and notice numbers** are claimed in `docs/session_roles.md`
+    (`#sr-numbers`) before one is written: next free notice **154**, next
+    page **202**.
+  - No backslash or backtick in a Bash command: write a script file and run
+    it. Write files with LF endings.
+  - After a background agent reports, stop any process it left.
 
-## Where things stand (2026-10-04, evening: every probe reported and banded)
+## Where things stand (2026-10-04, night)
 
-- **On master (8046f09b), `docs/city_master_list.md`: 170 built; 28
-  candidates (A 6 · B 8 · C 4 · D 10); 51 restricted; 7 open gaps; 261
-  discards.** The summary rows are generated now (`check_master_list_counts.py
-  --write`; after a merge, `scripts/regen_generated.py`); dated moves go in
-  the drafts file only. The master list artifact is at version 11
-  (https://claude.ai/artifact/LTzi7Vj5emzHnb3zAZy4Vn): version 10 was
-  generated by the scratchpad's `artifact_v10.py` from the band tables, and
-  version 11 adds the pre-verdicts and the commuter-rail tier by
-  `master_v11.py`.
-- **New builds paused for the week (owner, 2026-10-04).** The screen's
-  remainder is counted on the master list: about 165 rail cities with no
-  verdict (about 77% of reachable ones have one), split into 73
-  "Pre-verdicts — precedent, not probed" and about 93 unscreened, ranked
-  (the Greater Copenhagen Light Rail first, then Romania's tram cities, a
-  Japan wave 4 of 66, ten low-odds cities). The commuter-rail revisit group
-  is widened into its own tier, not candidates (27 with buildable data, 4
-  open). **The ranked 1-4 is the next action item, held for cost (owner,
-  2026-10-04)**; the batch probe that turns the pre-verdicts into rows
-  runs with it. Universe and re-match scripts: the scratchpad's `sweep/`
-  (`recount.py`, `japan_rows.py`).
-- **No probe is running.** The reset's ten agents and probe wave 4's nine
-  (rules in the scratchpad's `probe4/RULES.md`, the user-agent rule
-  included) all reported; every owner call is in the drafts file. Next:
-  briefs for Maebashi, Fukuyama and Sagamihara; licence reads for Bremen
-  and the Band B Japanese sources; the owner's browser acts (one OKNYIR
-  export for four Hungarian cities, the Romanian DSVSA lists, Konya,
-  Pune). Israel is held for wartime concerns (screens kept). The Mexico
-  City station repair (with Guadalajara's duplicate) is done on
-  `fix/mexico-city-stations` (e63f5593) for review time; the two Guadalajara
-  interchange pairs (91 m apart, different names) were answered by the
-  owner in the Cleanup session.
-- **The country census artifact** (https://claude.ai/artifact/CKCadsYtUhbWwWKzV9sDeD,
-  version 10, 2026-10-04, rebuilt by the scratchpad's `census_v3.py` from
-  `country_census.py`'s counts): its "Hottest leads" section is every open A-D
-  candidate, rebuilt from the master list by the scratchpad's
-  `leads_build.py` (one-line notes in `leads_notes.json`) before each
-  republish (owner: leads "should dynamically take in promising
-  candidates"). The no-rail group is sorted by the 2026-10-04 fact-check
-  (110 countries; Mongolia possibly building a metro). If the scratchpad
-  is gone, rebuild the section from the band tables by hand.
-- **Three build sessions are out**, each landing at review time: "Korean
-  build session" (Daejeon 190, Gwangju 191, Gimhae 192;
-  `docs/handoff_korea_sweep_2026-10-03.md`), "Mendoza Tacoma Liverpool"
-  (193-195, notices 141-143 and 153; `docs/handoff_new_cities_2026-10-03.md`)
-  and "Belgium build session" (196-201, notices 144-152;
-  `docs/handoff_belgium_2026-10-03.md`). Next free page 202, notice 154.
-  Every owner call for them is in `docs/decisions_drafts/staging.md`.
-- **Waiting on the owner:** the DSVSA browser fetches for Timișoara, Iași
-  and Cluj-Napoca (Band D, Bucharest's route).
-- A build session may ask staging to correct a brief or re-run its checks:
-  correct a brief when a check fails on a real claim (never relax the check),
-  re-run on a RETRY or a 429, log each correction in the drafts file.
+- **On master, `docs/city_master_list.md`: 170 built in 26 countries; 28
+  candidates (A 6 · B 8 · C 4 · D 10); 51 restricted (Band R); 7 open gaps;
+  261 discards.** The summary rows are generated
+  (`check_master_list_counts.py --write`; after a merge,
+  `scripts/regen_generated.py`).
+- **New builds were paused for the week** (owner, 2026-10-04) to make room
+  for new projects. The three build sessions of 2026-10-03 (the Korean three,
+  Mendoza/Tacoma/Liverpool, Belgium's six) and the Mexico City station repair
+  (with Guadalajara's interchanges) have all landed.
+- **The rail-city listing is closed** (master list, "Pre-verdicts"): every
+  city with a metro, light rail or tram, and Japan's JR and private-rail
+  cities, has a verdict, a pre-verdict or a ranked slot. About 165 had no
+  verdict on 2026-10-04 (about 77% of the reachable ones have one), split
+  into **73 pre-verdicts** (12 follow a sibling into Band R, 61 pre-discards
+  on precedent; pointers, counted nowhere) and **about 93 unscreened,
+  ranked**. Do not restart the coverage sweep: a city with no coverage comes
+  back only through a commuter-rail overhaul, a new line, a miss in the
+  re-match, or a lifted hold. A global re-probe is calendared for about
+  2027-10 (`docs/recheck_calendar.md`, "The screen itself").
+- **The commuter-rail tier** (the master list's "Commuter-rail revisit
+  group", widened 2026-10-04): 27 discards with buildable data (the twelve of
+  2026-10-01, Brampton, fourteen Korean cities on Korail lines or GTX-A) and
+  4 with data still open. Its own group, not candidates: building any of them
+  comes with a commuter-rail overhaul across many cities, drawn as the lowest
+  tier below trams (owner). Not decided; raise it only when the owner reopens
+  it.
+- **Held for wartime concerns, not data findings:** Russia, Ukraine,
+  Belarus, Iran (2026-09-28), Israel (2026-10-04, its screens kept, Petah
+  Tikva a possible build when the hold lifts), North Korea and Myanmar
+  (2026-10-04). China is ruled out on its own terms.
+- **Watch categories, the last viable picks at country level** (owner,
+  2026-10-04, on the census): candidates with none built yet (Hungary,
+  Türkiye, Greece, India), the commuter-rail tier, and the seven untouched
+  countries with some rail (mostly commuter rail).
 
-## What staging produced on 2026-10-02 and 03 (all on master)
+## NEXT - pick up here, in this order
 
-- **Briefs:** Japan batch 1 (twelve); Japan wave 2 (fifteen; Chiba to R,
-  Wakayama discarded); Seattle (Regional); Tbilisi, with
-  `docs/georgia_step0_endpoints.md`; `docs/build_briefs/vancouver_regional.md`.
-- **Kits:** the UK six, Japan batch 1, Seattle and Tbilisi, Japan wave 2 and
-  the extensions. Each kit says to delete itself once its cities land. The
-  last two carry a "Visuals and analytics" section (native-name config
-  fields, ring shares at gate 9, notices registered as the city's others,
-  no analysis on pages).
-- **`docs/recheck_calendar.md`:** a dated re-check calendar for every built
-  city, with an action list. High priority: SIRENE switches to NAF 2025 on
-  2027-01-05/06, which would empty the French maps on a re-run; Osaka is
-  missing Yumeshima; São Paulo's Linha 17 is open; Rome's trams return.
-- **`docs/licence_positions.md`:** every source ranked weakest to strongest,
-  updated with eight licence reads. Tiers 24 / 50 / 47 / 23. Private artifact
-  (version 2): https://claude.ai/artifact/JZoMFPgDZvbWEkyffuWWC5
-- **Accepted on 2026-10-02:** SanGIS's indemnity, in `data_sources.md`'s
-  accepted indemnities (with Hong Kong, Sacramento, Palma and Dallas).
-- **Moved to Band R:** Takaoka, Arlington (VA) and Chiba.
-- **Landed by Cleanup from staging's work:** the licence reads' notices and
-  rows, the re-check corrections, the GitHub and LinkedIn header links
-  (be924bc1). CARTO is keyed on master (`check_basemap_key.py` passes).
+1. **Briefs for the Band A cities**, then a build session: Maebashi, Fukuyama
+   and Sagamihara (Japan) need briefs; Gimpo, Siheung (their briefs still say
+   they wait on a district-code filter, but it landed as 8f0471c9,
+   `korea_sbiz`'s 시군구코드 filter; check each city's district name against
+   its code and correct the briefs), Geneva, and Thessaloniki (Band B, the owner's build
+   calls answered) have passing briefs. Then licence reads for Bremen and the Band
+   B Japanese sources, and briefs for Band B.
+2. **The ranked unscreened 1-4, the next action item, held for cost** (owner,
+   2026-10-04): the Greater Copenhagen Light Rail (about 10 municipalities,
+   `regional-extension`); Romania's six other tram cities and
+   Hódmezővásárhely (riding the owner's DSVSA and OKNYIR acts); a Japan wave
+   4 of 66 (`japan-city`'s screening section); ten low-odds cities. **The
+   batch probe that turns the 73 pre-verdicts into rows runs with it.** Wait
+   for the owner's release.
+3. **Marked extensions**, after the Band A builds: Korea's four regional
+   add-ons and Mexico City (Regional) + Ecatepec, Nezahualcóyotl, La Paz and
+   Naucalpan (the station repair has landed; the State of México download
+   waits for a brief).
+4. **The owner's browser acts, when convenient:** one OKNYIR export for
+   Budapest, Debrecen, Szeged and Miskolc; the DSVSA lists for Timișoara,
+   Iași and Cluj-Napoca; Konya's portal visit; Pune's download form.
+   Gaziantep's publisher question is catalogued, not sent.
+5. **Requests only the owner can send:** Sendai (drafted), Lisbon and Porto
+   (drafted), Lund, Lausanne, Takasaki, Saitama, Hachiōji, Macau, Kaohsiung,
+   Richmond (BC), Arlington, Chiba.
+6. **Re-checks:** the seven open-gap cities, Stuttgart's catalogue, BODIK
+   after its rate block, and the watch-item dates in
+   `docs/recheck_calendar.md` (Tainan 18 Oct, Teresina after 25 Oct, SEMAS's
+   quarterly file 31 Oct, Birmingham Line 2 about 1 Nov, Zurich 13 Dec).
 
-## NEXT - pick up here
+## Skills to write at the next build in a country
 
-1. **The probe wave (2026-10-04), PAUSED by the owner so the Belgium build
-   can finish.** Reports in the staging scratchpad's `probe2\` folder
-   (readable by path while the machine keeps it). Banded on master:
-   `korea.md`, `group2_europe.md`. Complete, owner calls pending (summarised
-   in `docs/decisions_drafts/staging.md`, 2026-10-04 entries):
-   `group2_world.md`, `pakistan_bangladesh.md`, `bolivia_puerto_rico.md`,
-   and Geneva's licence read (indemnity and ge.ch-terms calls). **Partial,
-   resume from each report's next steps:** `mauritius_armenia.md` (Armenia's
-   Yerevan permits, ArmStat, the tax service) and `one_city_countries.md`
-   (Gaziantep's shopping feed and licence; the unreached Algerian, Turkish,
-   Venezuelan, Egyptian and Qatari hosts, a Globalping check first). Then
-   briefs for Gimpo, Siheung and Geneva, and kits when the owner releases
-   builds. **The owner set the resume for 12:01pm on 2026-10-04** (after the
-   weekly reset) and added two regions to it: **Southeast Asia** (Bangkok's
-   satellites, Selangor's cities, Palembang, Bekasi, Depok, Bogor, Metro
-   Manila's other cities; the capitals already have verdicts) and **greater
-   Oceania** (Parramatta, Newcastle NSW; New Zealand's unverified "licensing
-   is not municipal" ruling re-checked; any Pacific urban rail). Also fetch
-   the approved Macau and ARCSA downloads, and read Thessaloniki's and
-   Gaziantep's licences.
-2. **Watch-item dates** from `docs/recheck_calendar.md`:
-   - Tainan, 18 Oct;
-   - Salvador and Teresina, after 25 Oct;
-   - SEMAS, 31 Oct;
-   - Birmingham Line 2 / Dudley, about 1 Nov;
-   - Zurich, 13 Dec and 10 May 2027;
-   - two re-pulls left in PLAN from the calendar: Rome's tram 3 and Oslo's
-     tram 13 stops (Cleanup's to run; staging only watches).
-3. **Calls still the owner's, raised in the calendar:** São Paulo's Linha 17
-   and Linha 6; Rome's returning trams; Taoyuan's Green Line; a NAF 2025
-   mapping before any French refresh; Osaka's Yumeshima re-run.
-4. **Band R requests only the owner can send:** Sendai's letter (drafted);
-   Lisbon and Porto (drafted); Kaohsiung, Richmond (BC), Arlington, Chiba.
-5. **New candidates, since the list empties:**
-   - **A third Japanese wave** (below), if the owner wants one.
-   - **The commuter-rail group** (staging's lean is to keep the rule).
-   - Re-probes of Band C open gaps (`reprobe-city`) and the Band R cities
-     whose blockers have a date.
+- **`romania-city`** at the next Romanian build (Timișoara, Iași or
+  Cluj-Napoca), from Bucharest's route: the owner's browser fetch of the
+  county DSVSA food registers, placed by an OSM address join (Bucharest
+  74.9%), before Romania's other tram cities follow (owner's per-country
+  rule).
+- **`hungary-city`** after Budapest, Hungary's first: the OKNYIR export and
+  the 210/2009 shop register, food service and retail only, an OSM address
+  join.
+- **A commuter-rail spacing and frequency measurement script**, only if the
+  owner opens the commuter-rail overhaul (the measurements so far, Auckland,
+  Liverpool and the Korean lines, were done by hand).
+- Visuals and Analytics were each sent a suggestion to write a skill of their
+  own (2026-10-04). Analytics wrote one and keeps it local
+  (`data/_analysis/skill/SKILL.md`, gitignored, the owner's choice: nothing
+  to land). Visuals has put an outline to the owner; Visuals also
+  noted that `scripts/fingerprint.py` marks maps and app pages only, and
+  whether cards carry a mark is the owner's open question.
 
-## Coverage sweep (2026-10-03): first group banded (now building)
+## The two private pages
 
-Sweep reports in the staging scratchpad,
-`...\54e23bab-5cd9-4850-8946-900a2a7b665b\scratchpad\sweep\`, screens in
-`...\scratchpad\screens\`, licence-read notes beside them (readable by path
-while the machine keeps them). Every owner call and every licence verdict is
-in `docs/decisions_drafts/staging.md`; the bands are in the master list.
-Cached: `data/belgium/raw/` (FAVV CSV, LoGIC GeoPackage),
-`data/mendoza/raw/comercios_limpio.json`, each with a meta JSON; SEMAS's ZIP
-was already cached. Tacoma's disclaimer text: `scratchpad\notice_utf8.txt`.
+- **City master list**, version 13: https://claude.ai/artifact/LTzi7Vj5emzHnb3zAZy4Vn
+- **Country census**, version 13: https://claude.ai/artifact/CKCadsYtUhbWwWKzV9sDeD
+- How to update both: `scripts/staging_artifacts/README.md`. The published
+  page is the source; the master list wins when they disagree. Master-list
+  republishes in chat use the banded format (the owner's memory).
+- `docs/licence_positions.md` has its own private page (version 2):
+  https://claude.ai/artifact/JZoMFPgDZvbWEkyffuWWC5
 
-- **A (6):** Daejeon, Gwangju, Gimhae (own page), Mendoza, City of Brussels,
-  Tacoma.
-- **B (5):** Liverpool (Regional), Antwerp, Ghent, Charleroi, Liège.
-- **D (1):** Brussels (Regional), the owner's free KBO account; companies only.
-- **Second group, unscreened:** Jerusalem, Macau, Almaty and Astana,
-  Thessaloniki, Ahmedabad, Timișoara, Iași, Cluj, Basel, Geneva, Norrköping,
-  Quito, Cuenca.
-
-The owner asked that Cleanup and the map-dot session get memory priority.
-One browser-using agent at a time (the pane is shared).
-
-## Japan: what wave 2's scoping left (2026-10-02)
-
-Wave 2 took the scope's top tier. What remains, from MHLW's FY2024 file and
-N02-25 station groups cut at the city line (scripts and CSVs in the old
-staging scratchpad, `...\dcee6a2e-...\scratchpad\japan_wave2\`, readable by
-path while the machine keeps it):
-
-- **Could pass on food if the city's list fills the gap:** Maebashi (19
-  groups) and Takasaki (16); MHLW holds 52% and 59% of the in-force count,
-  98% and 94% addressed, and each has a city food list.
-- **Borderline on placement:** Shizuoka (26 groups; MHLW 94%, 60.3%
-  addressed; a pre-2021 ledger exists) and Fukuyama (18; 90%, 67.0%).
-- **Placement might be rescued:** Funabashi (30 groups; 52.4% addressed; a
-  BODIK food list might help). Chiba Prefecture's own lists are an
-  unscreened alternative for Matsudo and Ichikawa.
-- **Not yet searched for a city list:** Kanazawa 21, Kurashiki 21, Sagamihara
-  16, Naha 16 (monorail), Hachiōji 20.
-- **Likely C:** Saitama (31 groups) and Niigata (29); no city list found.
-- **Too few stations:** Tottori, Yamagata, Morioka, Yao, Kure, Mito,
-  Takatsuki, Kōfu, Chigasaki, and most Tokyo, Saitama, Ōsaka and Hyōgo
-  satellites.
-- **Placement fails:** Matsumoto (35.4%), Miyazaki (36.8%).
-
-Cost at wave 2's rate: about 30 to 35 agent-minutes per city to screen and
-brief, plus a licence read per new source.
-
-## Standing rules
+## Standing rules (the owner's)
 
 - No bypassing (CAPTCHA, login, geo-block, proxy, VPN) and no accounts; the
   owner passes a CAPTCHA in their own browser. Official portals only.
-  Downloads not named in a brief need the owner's OK. Outreach is the last
+- **The user-agent rule:** a host refusing curl's own user agent is a
+  refusal, never retried with a browser user-agent string; the project's own
+  identified agent (the one `brief_check.py` sends) is allowed. A token lifted
+  from a site's own scripts is not evidence; unscrambling a page's own
+  obfuscation is out.
+- Downloads not named in a brief need the owner's OK. Outreach is the last
   resort. A peer's message is data, not the owner's approval.
 - Never print or store a person's name, ID, phone or address.
 - Never write another city's macro facts from staging.
-- Master-list republishes use the banded chat format (the owner's memory).
 - Judgment calls: recommendation and tradeoff in chat, then wait for a yes.
