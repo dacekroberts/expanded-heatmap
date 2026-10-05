@@ -4,6 +4,18 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - A global re-probe calendared for about 2027-10 (owner)
+
+- **The owner: "ideally we would re-probe the global data for new entries or
+  openings relating band R/hold liftings after a prolonged period. maybe
+  save this to the (far) future calendar items".**
+- **`docs/recheck_calendar.md` gains a section for the screen itself**, with
+  two rows: a global re-probe at about 2027-10 (one year on, staging's pick
+  of "a prolonged period"; earlier only on the owner's word) covering the
+  sweep's universe against the master list, every Band R blocker and each
+  held country; and an undated row for a commuter-rail overhaul's fresh
+  listing. The master list's closing line points to it.
+
 ### 2026-10-04 - The rail-city listing closed (owner)
 
 - **Staging asked whether the count settles fully new probes; the owner:
