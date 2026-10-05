@@ -4,6 +4,93 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - MHLW's 法人名 holds sole traders' own names: measured across every cached file, put to the owner
+
+- **Found by Maebashi's brief agent**: in MHLW's 10201 file, 1,482 live
+  rows carry a 法人名 with no company marker and no 法人番号, nearly all 3 to
+  5 characters, and the name rule's comparison finds 19 trade names equal to
+  it. The project's position since Fukuoka (DECISIONS 2026-09-28, "MHLW's
+  name-rule gap is accepted"; Okayama's whole-city call, owner 2026-10-02)
+  is that 法人名 is a company's, so MHLW rows are never compared.
+- **Measured by staging** (counts only, no value printed; `heavy_job.py`
+  labels `mhlw-corp-names`, `mhlw-names-outputs`, peak 0.15 GB), over the 47
+  MHLW files cached under `data/*/raw/`: 190,682 rows fill 法人名, **40,312**
+  with no company marker and no 法人番号; `same_person` on
+  `営業施設名称、屋号又は商号` against 法人名 is true on **790 rows (789
+  open)**. In the built cities' `data/<city>/processed/businesses_clean.csv`,
+  **79 shown rows in 16 cities** carry a name equal, on the name rule's key,
+  to such a trade name: Shimonoseki 15, Fukuoka 12, Nagasaki 11, Kagoshima 5,
+  Kurume 5, Kitakyushu 4, Nara 4, Sakai 4, Utsunomiya 4, Hiroshima 3, Okayama
+  3, Toyama 3, Matsuyama 2, Sasebo 2, Kumamoto 1 and Takamatsu 1.
+  Method control: most open MHLW restaurant names are found in
+  each processed file (Fukuoka 14,198 of 16,277; Shimonoseki 2,091 of
+  2,591). The match is by name, so a different premises with the same name
+  could count; an upper bound in that sense.
+- **Not a staging fix**: the name rule is shared pipeline code and the
+  outputs are published. Put to the owner as a privacy call with staging's
+  recommendation; the outcome goes here when made.
+
+### 2026-10-04 - Maebashi's brief written, the city's half unmeasured: BODIK refused
+
+- **`data.bodik.jp` answered HTTP 403** (nginx, 146 B) to `package_show` for
+  both of the city's datasets, six calls from 23:04 to 23:26 with the
+  project's agent, each retried once after 60 s and once more 15 minutes
+  later; no other agent, mirror or host tried. The resource list and the
+  declared licences (food `cc-by-40-intl`, 生活衛生 `cc-by-21-jp`) come from
+  search.ckan.jp's harvest of BODIK's records, catalogue metadata only.
+- **Measured:** MHLW's 10201 file (1,394,571 B; 1,850 open restaurant
+  permits, first permits from 2023 on, 52% of e-Stat's 3,533), MLIT's 10201
+  blocks (89.7% block, MHLW's own point covering 239 of the 241 misses); 19
+  N02 groups (Jōmō 14, Ryōmō 4, Jōetsu 2), frequencies read from the
+  operators' pages (Jōmō every 30 minutes). `brief_check.py maebashi` 7/7.
+- **Slip:** one stray `curl` to BODIK about two minutes after a retry,
+  outside the 60-second pattern; also 403.
+- **Held:** Maebashi's two licence reads would meet the same 403; they wait
+  for BODIK with the re-fetch.
+
+### 2026-10-04 - Probe slip: Sagamihara's brief agent printed three business rows to its console
+
+- **What happened:** a keyword search over Sagamihara's food-list PDF, run
+  by the brief agent, printed three data lines to its own console: two care
+  facilities' names with their phone numbers and one company's address.
+  Businesses, not persons, and nothing reached a file, the brief or a
+  commit; it still breaks the rule that no phone or address is printed.
+- **Also reported:** the April correction sheet (`food_correction_r8_04.xlsx`,
+  20,797 B) was fetched as one of the food dataset's update files, inside
+  the approved set; the terms PDF, which `pdftotext` could not extract, was
+  read from page renders, and the brief's §3(3) credit form comes from them.
+- **For the next brief agent:** search a register by column and count, never
+  by printing matching lines; the rules file now says so.
+
+### 2026-10-04 - Fukuyama's two lists read: permitted with conditions, display only
+
+- **Two `licence-read` agents**, one per dataset (the owner's call 2 of the
+  night), curl with the project's agent, every host 200, no data downloaded.
+- **`licensed_food` and `licensed_env`** (営業許認可等施設一覧（食品衛生関係）
+  and （環境衛生関係）, 生活衛生課, `data.city.fukuyama.hiroshima.jp`):
+  **PERMITTED WITH CONDITIONS.** CKAN declares `license_id: cc-by` with no
+  version (an Open Definition link); no resource carries its own licence. The
+  catalogue's `/terms` applies PDL 1.0 「権利表記の記載がない限り」, and the
+  division's pages (`seikatsueisei/108007.html`, `107599.html`) send users
+  there. PDL 1.0 §1.7 grants CC BY 4.0 use, so either reading permits the
+  map and one credit meets both (Kumamoto's shape).
+- **MUST DISPLAY** the city's 重要情報 §1.1 template, modified form:
+  「営業許認可等施設一覧（食品衛生関係）」(福山市)(dataset URL)を加工して作成,
+  likewise for 環境衛生関係, with who processed it, and the CC BY 4.0 link.
+  **MUST DO:** nothing (use is acceptance). **MUST NOT:** present the
+  processed data as the city's unprocessed data, use city logos, or claim the
+  lists complete or current (both say closed premises may remain). Liability
+  is the fault-based class (PDL 1.0 §1.6), no indemnity.
+- **Not governing:** the main city site's copyright page
+  (`site/userguide/16651.html`) bars copying, but it covers the city's web
+  pages, and the city's open-data page sends the catalogue to `/terms`.
+- **Privacy, for the build:** `licensed_food`'s data dictionary carries
+  applicant and representative name and address fields; the trade name is
+  営業所名称. Step 2 never reads the applicant fields into an output.
+- **Recorded** in the master list's row and the brief; the
+  `docs/data_sources/japan.md` row and the notice number come at the build,
+  as for Sagamihara.
+
 ### 2026-10-04 - Band A's Japanese briefs: Step 0 downloads and licence reads approved; the four briefed cities' build held; the Korean rows corrected (owner)
 
 - **The owner: "1 yes, 2 yes, 3 hold, fix the Korean rows"**, on staging's
