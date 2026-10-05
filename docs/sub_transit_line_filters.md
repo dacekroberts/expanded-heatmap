@@ -111,11 +111,15 @@ city keeps two things:
 - **the reason's wording**, which must contain "spacing" for
   `app/station_scope.py`.
 
-It marks interchanges before the spacing pass, so an interchange resets the
-count. San Francisco's own `select_line_stations()` (and Boston's copy)
-force-keeps them afterwards instead, so an interchange there does not reset
-the count. Hong Kong and Riga still have their own haversine copies of the
-shared rule.
+By default it marks interchanges before the spacing pass, so an interchange
+resets the count. Every city's walk is now this one (owner, 2026-10-04; zero
+drift in each): `thin(..., spacing=, distance=haversine_miles, since_key=)`
+measures in miles (Hong Kong, Riga), and `thin_sequence(...,
+interchange_after=True)` force-keeps interchanges after the walk so they do
+not reset the count (San Francisco, Boston, Philadelphia; `keep_last=False`
+is Philadelphia's branch junction). It walks by position, so two platforms
+sharing a name (San Francisco's M line) both stay in the record. One
+`haversine_miles()` replaces the five copies.
 
 ## Implementation notes (from San Francisco's build)
 

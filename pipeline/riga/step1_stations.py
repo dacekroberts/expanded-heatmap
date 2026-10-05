@@ -16,7 +16,6 @@ Reads the cache and NEVER fetches.
 
     python pipeline/riga/step1_stations.py
 """
-import math
 import sys
 import zipfile
 from pathlib import Path
@@ -28,20 +27,13 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.baseline import emit  # noqa: E402
 from pipeline.riga import config  # noqa: E402
 from pipeline import stations as station_gates  # noqa: E402
+from pipeline.stations import haversine_miles  # noqa: E402
 
 
 def need(path, what):
     if not path.exists():
         sys.exit(f"missing {path} ({what}).\nRun: python pipeline/riga/fetch_sources.py")
     return path
-
-
-def haversine_miles(a, b):
-    (la1, lo1), (la2, lo2) = a, b
-    p1, p2 = math.radians(la1), math.radians(la2)
-    h = (math.sin((p2 - p1) / 2) ** 2
-         + math.cos(p1) * math.cos(p2) * math.sin(math.radians(lo2 - lo1) / 2) ** 2)
-    return 2 * 3958.7613 * math.asin(math.sqrt(h))
 
 
 def city_polygon():
@@ -199,21 +191,15 @@ def main():
     # --- thinning -----------------------------------------------------------------
     coords = {r.station: (r.latitude, r.longitude) for r in stations.itertuples()}
     interchange = {n for n, ls in lines_of.items() if len(ls) >= 2}
+    # The shared filter, one regular pattern at a time so each cut keeps its
+    # route; in haversine miles over (lat, lon) as this city was first measured.
     kept, cuts = set(), []
     for short, seq in seqs:
-        mark = [n in interchange for n in seq]
-        mark[0] = mark[-1] = True
-        since, last = 0.0, seq[0]
-        for i in range(1, len(seq)):
-            since += haversine_miles(coords[seq[i - 1]], coords[seq[i]])
-            if mark[i]:
-                since, last = 0.0, seq[i]
-            elif since >= config.THIN_SPACING_MILES:
-                mark[i], since, last = True, 0.0, seq[i]
-            else:
-                cuts.append({"station": seq[i], "line": short, "nearest_kept": last,
-                             "miles_since_kept": round(since, 3)})
-        kept |= {n for n, m in zip(seq, mark) if m}
+        k, c = station_gates.thin([seq], coords, spacing=config.THIN_SPACING_MILES,
+                                  distance=haversine_miles, interchange=interchange,
+                                  since_key="miles_since_kept")
+        kept |= k
+        cuts += [{**x, "line": short} for x in c]
     cuts = [c for c in cuts if c["station"] not in kept]
     print(f"\n  thinning (terminals and {len(interchange)} interchanges kept, the rest one per "
           f"{config.THIN_SPACING_MILES} mi): {len(stations)} -> {len(kept)} stations")
@@ -230,7 +216,7 @@ def main():
         la, lo = coords[c["station"]]
         excluded.append({"station": c["station"].split("#")[0], "lines": " ".join(lines_of[c["station"]]),
                          # "spacing filter" is the phrase app/station_scope.py reads.
-                         "reason": f"spacing filter on tram {c['line']}: {c['miles_since_kept']} mi after "
+                         "reason": f"spacing filter on tram {c['line']}: {round(c['miles_since_kept'], 3)} mi after "
                                    f"{c['nearest_kept']}, under {config.THIN_SPACING_MILES} mi",
                          "latitude": la, "longitude": lo})
     pd.DataFrame(excluded, columns=["station", "lines", "reason", "latitude", "longitude"]).to_csv(

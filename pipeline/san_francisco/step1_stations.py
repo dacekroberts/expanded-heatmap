@@ -37,7 +37,6 @@ meaningless) while still reaching every district the full network does:
 Run:  python pipeline/san_francisco/step1_stations.py
 """
 
-import math
 import re
 import sys
 import zipfile
@@ -61,7 +60,8 @@ from pipeline.san_francisco.config import (  # noqa: E402
     OPERATOR_STATION_COUNTS,
     OPERATOR_COUNTS_SOURCE,
 )
-from pipeline.stations import check_operator_counts  # noqa: E402
+from pipeline.stations import (  # noqa: E402
+    check_operator_counts, haversine_miles, thin_sequence)
 
 # Representative trip's shape_id per line (its single most-used trip
 # shape - see pipeline/san_diego/step1_stations.py's sibling reasoning
@@ -92,13 +92,14 @@ def is_subway(canonical: str) -> bool:
     return any(k in canonical for k in SUBWAY_STATION_KEYWORDS)
 
 
-def haversine_miles(lat1, lon1, lat2, lon2):
-    r = 3958.8
-    p1, p2 = math.radians(lat1), math.radians(lat2)
-    dphi = math.radians(lat2 - lat1)
-    dlambda = math.radians(lon2 - lon1)
-    a = math.sin(dphi / 2) ** 2 + math.cos(p1) * math.cos(p2) * math.sin(dlambda / 2) ** 2
-    return 2 * r * math.asin(math.sqrt(a))
+# The earth radius this filter was measured with; another moves the cut
+# distances in excluded_stations.csv (pipeline/stations.py haversine_miles).
+HAVERSINE_RADIUS_MILES = 3958.8
+
+
+def miles_between(a, b):
+    """Haversine miles between two (lat, lon) points, at this city's radius."""
+    return haversine_miles(a, b, radius_miles=HAVERSINE_RADIUS_MILES)
 
 
 def load_gtfs_table(zip_path, filename):
@@ -125,73 +126,36 @@ def ordered_stop_sequence(line: str, trips: pd.DataFrame, stop_times: pd.DataFra
 def select_line_stations(line: str, ordered: pd.DataFrame, interchange_names: set):
     """Apply the four filters to one line's ordered stop sequence.
 
+    The shared walk, pipeline/stations.py thin_sequence(), by position: the
+    M starts at two "San Jose Ave & Geneva Ave" platforms, and the second is
+    a cut row of its own. Filter 1 is `keep_always`, filter 2 the two ends,
+    filter 3 the spacing walk in haversine miles along the line's real path,
+    counted fresh from each kept stop; filter 4 is `interchange_after`, so a
+    force-kept interchange never resets filter 3's count.
+
     Returns (kept, excluded) - excluded carries enough to document every
     cut station (name, line, why, and what it was closest to instead), so
     the thinning is auditable, not a silent drop.
     """
-    n = len(ordered)
-    kept_mask = [False] * n
-    # last_kept_name[i]: the most recent kept-by-any-filter stop at the
-    # moment row i was evaluated - the "nearest kept station" context in
-    # the excluded-stations report.
-    last_kept_name = [None] * n
-
-    # Filter 1: subway stations - always kept, never thinned.
-    for i in range(n):
-        if is_subway(ordered.iloc[i]["canonical"]):
-            kept_mask[i] = True
-
-    # Filter 2: this line's own two terminals.
-    kept_mask[0] = True
-    kept_mask[n - 1] = True
-
-    # Filter 3: ~1 per STATION_SPACING_MILES along the line's real path,
-    # counted fresh from whichever stop was most recently kept (a
-    # terminal or a subway station) - not from the line's start
-    # regardless of what filters 1/2 already kept.
-    cursor_lat, cursor_lon = ordered.iloc[0]["latitude"], ordered.iloc[0]["longitude"]
-    since_last_kept = 0.0
-    most_recent_kept = ordered.iloc[0]["canonical"]
-    exclusion_distance = {}  # canonical name -> miles since the last kept stop, at exclusion time
-    for i in range(1, n - 1):
-        row = ordered.iloc[i]
-        since_last_kept += haversine_miles(cursor_lat, cursor_lon, row["latitude"], row["longitude"])
-        cursor_lat, cursor_lon = row["latitude"], row["longitude"]
-        if kept_mask[i]:
-            since_last_kept = 0.0  # already kept by filter 1/2 - reset the spacing counter here
-            most_recent_kept = row["canonical"]
-            continue
-        if since_last_kept >= STATION_SPACING_MILES:
-            kept_mask[i] = True
-            since_last_kept = 0.0
-            most_recent_kept = row["canonical"]
-        else:
-            last_kept_name[i] = most_recent_kept
-            exclusion_distance[row["canonical"]] = since_last_kept
-
-    # Filter 4: force-include real interchange stops (shared by 2+ lines)
-    # even where filter 3's spacing alone would have dropped them.
-    for i in range(n):
-        if ordered.iloc[i]["canonical"] in interchange_names:
-            kept_mask[i] = True
+    names = list(ordered["canonical"])
+    kept_mask, cuts = thin_sequence(
+        names, list(zip(ordered["latitude"], ordered["longitude"])),
+        spacing=STATION_SPACING_MILES, distance=miles_between,
+        keep_always={n for n in names if is_subway(n)},
+        interchange=interchange_names, interchange_after=True)
 
     kept = ordered[kept_mask].drop_duplicates(subset="canonical")
 
-    excluded_rows = []
-    for i in range(n):
-        if kept_mask[i]:
-            continue
-        name = ordered.iloc[i]["canonical"]
-        excluded_rows.append({
-            "station": name,
-            "line": line,
-            "latitude": ordered.iloc[i]["latitude"],
-            "longitude": ordered.iloc[i]["longitude"],
-            "reason": "spacing filter (surface stop, < "
-                      f"{STATION_SPACING_MILES}mi since nearest kept stop)",
-            "nearest_kept_station": last_kept_name[i],
-            "miles_since_nearest_kept": round(exclusion_distance.get(name, float("nan")), 3),
-        })
+    excluded_rows = [{
+        "station": names[i],
+        "line": line,
+        "latitude": ordered.iloc[i]["latitude"],
+        "longitude": ordered.iloc[i]["longitude"],
+        "reason": "spacing filter (surface stop, < "
+                  f"{STATION_SPACING_MILES}mi since nearest kept stop)",
+        "nearest_kept_station": nearest_kept,
+        "miles_since_nearest_kept": round(since, 3),
+    } for i, nearest_kept, since in cuts]
     excluded = pd.DataFrame(excluded_rows).drop_duplicates(subset=["station", "line"])
 
     return kept, excluded

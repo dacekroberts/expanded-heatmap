@@ -65,7 +65,8 @@ from pipeline.philadelphia.config import (  # noqa: E402
     SUBWAY_STATION_NAMES,
     THINNED_GROUPS,
 )
-from pipeline.stations import check_operator_counts  # noqa: E402
+from pipeline.stations import (  # noqa: E402
+    check_operator_counts, haversine_miles, thin_sequence)
 
 SUFFIX_RE = re.compile(STATION_SUFFIX_PATTERN)
 
@@ -80,13 +81,14 @@ def canonical_name(stop_name: str) -> str:
     return STATION_NAME_ALIASES.get(stripped, stripped)
 
 
-def haversine_miles(lat1, lon1, lat2, lon2):
-    r = 3958.8
-    p1, p2 = math.radians(lat1), math.radians(lat2)
-    dphi = math.radians(lat2 - lat1)
-    dlambda = math.radians(lon2 - lon1)
-    a = math.sin(dphi / 2) ** 2 + math.cos(p1) * math.cos(p2) * math.sin(dlambda / 2) ** 2
-    return 2 * r * math.asin(math.sqrt(a))
+# The earth radius this filter was measured with; another moves the cut
+# distances in excluded_stations.csv (pipeline/stations.py haversine_miles).
+HAVERSINE_RADIUS_MILES = 3958.8
+
+
+def miles_between(a, b):
+    """Haversine miles between two (lat, lon) points, at this city's radius."""
+    return haversine_miles(a, b, radius_miles=HAVERSINE_RADIUS_MILES)
 
 
 def load_gtfs_table(zip_path, filename, usecols=None):
@@ -158,72 +160,36 @@ def select_line_stations(route_id, ordered, interchange_names,
 
     `junction_last`: `ordered` is a branch (branch_stop_sequence) whose last
     stop is the junction on the main sequence. Only its first stop is a
-    terminal, and the junction is left to the main sequence's own filters.
+    terminal, and the junction is left to the main sequence's own filters
+    (`keep_last=False`: neither kept nor cut here).
+
+    The shared walk, pipeline/stations.py thin_sequence(): filter 1 is
+    `keep_always` (the central-corridor tunnel stations; never fires on G,
+    which has no tunnel), filter 2 the terminals, filter 3 one stop per
+    STATION_SPACING_MILES of haversine miles along the real stop-to-stop
+    path, counted fresh from each kept stop; filter 4 is `interchange_after`:
+    a stop 2+ line groups share is force-kept after the walk and never resets
+    its count.
     """
-    n = len(ordered)
-    kept_mask = [False] * n
-    last_kept_name = [None] * n
-
-    # Filter 1: central-corridor (tunnel) stations - always kept, never
-    # thinned. Never fires on G, which has no tunnel.
-    for i in range(n):
-        if ordered.iloc[i]["canonical"] in SUBWAY_STATION_NAMES:
-            kept_mask[i] = True
-
-    # Filter 2: this route's own two terminals (a branch's one).
-    kept_mask[0] = True
-    if not junction_last:
-        kept_mask[n - 1] = True
-
-    # Filter 3: ~1 per STATION_SPACING_MILES along the route's real
-    # stop-to-stop path, counted fresh from whichever stop was most recently
-    # kept by ANY filter - not from the route's start.
-    cursor_lat = ordered.iloc[0]["latitude"]
-    cursor_lon = ordered.iloc[0]["longitude"]
-    since_last_kept = 0.0
-    most_recent_kept = ordered.iloc[0]["canonical"]
-    exclusion_distance = {}
-    for i in range(1, n - 1):
-        row = ordered.iloc[i]
-        since_last_kept += haversine_miles(cursor_lat, cursor_lon,
-                                           row["latitude"], row["longitude"])
-        cursor_lat, cursor_lon = row["latitude"], row["longitude"]
-        if kept_mask[i]:
-            since_last_kept = 0.0
-            most_recent_kept = row["canonical"]
-            continue
-        if since_last_kept >= STATION_SPACING_MILES:
-            kept_mask[i] = True
-            since_last_kept = 0.0
-            most_recent_kept = row["canonical"]
-        else:
-            last_kept_name[i] = most_recent_kept
-            exclusion_distance[row["canonical"]] = since_last_kept
-
-    # Filter 4: force-keep real transfer points (a stop 2+ routes share) even
-    # where filter 3's spacing alone would have dropped them.
-    for i in range(n):
-        if ordered.iloc[i]["canonical"] in interchange_names:
-            kept_mask[i] = True
+    names = list(ordered["canonical"])
+    kept_mask, cuts = thin_sequence(
+        names, list(zip(ordered["latitude"], ordered["longitude"])),
+        spacing=STATION_SPACING_MILES, distance=miles_between,
+        keep_always=SUBWAY_STATION_NAMES, interchange=interchange_names,
+        interchange_after=True, keep_last=not junction_last)
 
     kept = ordered[kept_mask].drop_duplicates(subset="canonical")
 
-    excluded_rows = []
-    for i in range(n):
-        if kept_mask[i] or (junction_last and i == n - 1):
-            continue
-        name = ordered.iloc[i]["canonical"]
-        excluded_rows.append({
-            "station": name,
-            "line": route_id,
-            "latitude": ordered.iloc[i]["latitude"],
-            "longitude": ordered.iloc[i]["longitude"],
-            "reason": f"spacing filter (street-running stop, < "
-                      f"{STATION_SPACING_MILES}mi since nearest kept stop)",
-            "nearest_kept_station": last_kept_name[i],
-            "miles_since_nearest_kept": round(
-                exclusion_distance.get(name, float("nan")), 3),
-        })
+    excluded_rows = [{
+        "station": names[i],
+        "line": route_id,
+        "latitude": ordered.iloc[i]["latitude"],
+        "longitude": ordered.iloc[i]["longitude"],
+        "reason": f"spacing filter (street-running stop, < "
+                  f"{STATION_SPACING_MILES}mi since nearest kept stop)",
+        "nearest_kept_station": nearest_kept,
+        "miles_since_nearest_kept": round(since, 3),
+    } for i, nearest_kept, since in cuts]
     excluded = pd.DataFrame(excluded_rows)
     if not excluded.empty:
         excluded = excluded.drop_duplicates(subset=["station", "line"])
@@ -242,7 +208,7 @@ def closed_for_works_rows(sequences):
         lat, lon = entry["latitude"], entry["longitude"]
         near = [s for s, la, lo in zip(seq["canonical"], seq["latitude"],
                                        seq["longitude"])
-                if s == name or haversine_miles(lat, lon, la, lo) * 1609.344
+                if s == name or miles_between((lat, lon), (la, lo)) * 1609.344
                 < CLOSED_REOPEN_METRES]
         if near:
             sys.exit(f"{name!r} is closed for works in config.CLOSED_FOR_WORKS, but "

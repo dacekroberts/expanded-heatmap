@@ -113,7 +113,75 @@ def projected_xy(names, lon, lat, crs_projected, crs_geographic="EPSG:4326"):
     return {n: (p.x, p.y) for n, p in zip(names, pts)}
 
 
-def thin(seqs, xy, *, spacing_m, keep_always=(), interchange=()):
+EARTH_RADIUS_MILES = 3958.7613
+
+
+def haversine_miles(a, b, *, radius_miles=EARTH_RADIUS_MILES):
+    """Great-circle distance in miles between two (lat, lon) points given in
+    degrees: spherical trigonometry, not planar degree arithmetic.
+
+    For `thin(distance=...)` in the five cities whose filter has always
+    measured in miles along the stop path (Hong Kong, Riga, San Francisco,
+    Boston, Philadelphia); a new city projects to metres instead. San
+    Francisco and Philadelphia pass `radius_miles=3958.8`, the radius their
+    filters were measured with: a different radius moves cut distances in the
+    third decimal of excluded_stations.csv."""
+    (la1, lo1), (la2, lo2) = a, b
+    p1, p2 = math.radians(la1), math.radians(la2)
+    h = (math.sin((p2 - p1) / 2) ** 2
+         + math.cos(p1) * math.cos(p2) * math.sin(math.radians(lo2 - lo1) / 2) ** 2)
+    return 2 * radius_miles * math.asin(math.sqrt(h))
+
+
+def _planar(p, q):
+    (x0, y0), (x1, y1) = p, q
+    return math.hypot(x1 - x0, y1 - y0)
+
+
+def thin_sequence(seq, pts, *, spacing, distance=_planar, keep_always=(),
+                  interchange=(), interchange_after=False, keep_last=True):
+    """`thin()` on ONE ordered sequence, position by position, for a caller
+    whose sequence can repeat a name at two points (San Francisco's M starts
+    at two "San Jose Ave & Geneva Ave" platforms) or that needs each kept
+    position's own row.
+
+    `pts` holds one point per position of `seq`, in whatever `distance` reads.
+    The first position is always kept; the last too unless `keep_last` is
+    False, which marks it as a junction left to another sequence: neither
+    kept nor cut here (Philadelphia's G1 branch). Names in `keep_always` are
+    kept and reset the spacing count. `interchange` names do the same, unless
+    `interchange_after`: then they are force-kept only after the spacing walk,
+    so they never reset the count (San Francisco's, Boston's and
+    Philadelphia's filter 4).
+
+    Returns (mark, cuts): mark[i] is True for each kept position; cuts is
+    [(i, nearest_kept, since)] for each cut position in order, `since` in
+    `distance`'s unit. A cut position whose name is kept at another position
+    is still listed; `thin()` filters by name.
+    """
+    n = len(seq)
+    mark = [s in keep_always or (s in interchange and not interchange_after)
+            for s in seq]
+    mark[0] = True
+    if keep_last:
+        mark[-1] = True
+    cuts, since, last = [], 0.0, seq[0]
+    for i in range(1, n - 1):
+        since += distance(pts[i - 1], pts[i])
+        if mark[i]:
+            since, last = 0.0, seq[i]
+        elif since >= spacing:
+            mark[i], since, last = True, 0.0, seq[i]
+        else:
+            cuts.append((i, last, since))
+    if interchange_after:
+        mark = [m or s in interchange for s, m in zip(seq, mark)]
+        cuts = [c for c in cuts if not mark[c[0]]]
+    return mark, cuts
+
+
+def thin(seqs, xy, *, spacing_m=None, keep_always=(), interchange=(),
+         spacing=None, distance=None, since_key="metres_since_kept"):
     """The sub-transit-line thinning filter (docs/sub_transit_line_filters.md),
     San Francisco's rule: along each ordered stop-name sequence, keep both
     ends, every name in `keep_always` or `interchange`, and the first stop at
@@ -126,29 +194,32 @@ def thin(seqs, xy, *, spacing_m, keep_always=(), interchange=()):
     the line. So is the reason's wording, which must keep the word "spacing"
     for app/station_scope.py.
 
+    Another unit: pass `distance` (a function of two `xy` values, such as
+    `haversine_miles` over {name: (lat, lon)}) with `spacing` in its unit in
+    place of `spacing_m`, and `since_key` to name the cut field
+    ("miles_since_kept" in Hong Kong and Riga).
+
     Returns (kept, cuts): the kept names, and one dict per cut not kept by
-    another sequence in this call - {station, nearest_kept, metres_since_kept}
-    - in sequence order. A caller thinning line by line still filters the
-    cuts against every line's kept set.
+    another sequence in this call - {station, nearest_kept, <since_key>} -
+    in sequence order. A caller thinning line by line still filters the
+    cuts against every line's kept set. `thin_sequence()` is the same walk
+    by position, with interchanges optionally added after it.
     """
+    if (spacing_m is None) == (spacing is None):
+        raise TypeError("thin() takes exactly one of spacing_m and spacing")
+    if spacing is None:
+        spacing = spacing_m
     kept, cuts = set(), []
     for seq in seqs:
         if not seq:
             continue
-        mark = [n in keep_always or n in interchange for n in seq]
-        mark[0] = mark[-1] = True
-        since, last = 0.0, seq[0]
-        for i in range(1, len(seq)):
-            (x0, y0), (x1, y1) = xy[seq[i - 1]], xy[seq[i]]
-            since += math.hypot(x1 - x0, y1 - y0)
-            if mark[i]:
-                since, last = 0.0, seq[i]
-            elif since >= spacing_m:
-                mark[i], since, last = True, 0.0, seq[i]
-            else:
-                cuts.append({"station": seq[i], "nearest_kept": last,
-                             "metres_since_kept": since})
-        kept |= {n for n, m in zip(seq, mark) if m}
+        mark, cut = thin_sequence(seq, [xy[s] for s in seq], spacing=spacing,
+                                  distance=distance or _planar,
+                                  keep_always=keep_always,
+                                  interchange=interchange)
+        cuts += [{"station": seq[i], "nearest_kept": last, since_key: since}
+                 for i, last, since in cut]
+        kept |= {s for s, m in zip(seq, mark) if m}
     return kept, [c for c in cuts if c["station"] not in kept]
 
 
