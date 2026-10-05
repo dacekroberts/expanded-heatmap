@@ -355,7 +355,7 @@ Wakō, Hiratsuka and Atsugi with one or two station groups (Uiwang's and
 Hwaseong's precedent). Station-group counts alone are no precedent:
 Takarazuka was built on 11.
 
-**Unscreened, ranked (about 93 cities).** Screen in this order when builds resume:
+**Unscreened, ranked (about 93 cities): the next action item, held for cost (owner, 2026-10-04).** Screen in this order when the owner releases it:
 1. **The Greater Copenhagen Light Rail** (about 10 municipalities, Lyngby-Taarbæk to Ishøj): Copenhagen's and Aarhus's national CVR and DAR modules; frequency and the page's shape are the questions.
 2. **Riding an act the owner already owes** (7): Arad, Brăila, Craiova, Galați, Oradea and Ploiești on Timișoara's DSVSA route; Hódmezővásárhely on Szeged's OKNYIR export. A frequency check first.
 3. **A Japan wave 4** (66), by N02 station groups. 15 or more: Tsu, Fukushima, Ichihara, Ichinomiya, Toyokawa, Aomori, Ōita, Fuji, Akashi, Fujisawa, Asahikawa, Matsue, Okazaki, Kamakura, Suita. 8 to 14: Iwaki, Nagaoka, Fuchū, Hachinohe, Tachikawa, Uji, Gifu, Hirakata, Akita, Amagasaki, Kawagoe, Kōriyama, Kasugai, Toyonaka, Sakura, Ino, Nankoku, Hino, Ibaraki, Imizu, Tokorozawa, Tokushima, Chōfu, Machida, Ōta, Kawaguchi, Higashimurayama, Koshigaya, Kakogawa, Yamato, Kasukabe. 3 to 7: Tama, Urayasu, Yachiyo, Itami, Moriguchi, Nagakute, Minoh, Kadoma, Ina, Nishitōkyō, Isesaki, Higashiyamato, Settsu, Ageo, Neyagawa, Saga, Sōka, Tsukuba, Nisshin, Urasoe (Naha's add-on). Chiba Prefecture's cities (Ichihara, Urayasu, Sakura, Yachiyo) top out at personal services, Matsudo's and Kashiwa's precedent.

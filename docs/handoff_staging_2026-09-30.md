@@ -71,8 +71,9 @@ the pointers. **Delete a section when its item is done.**
   (the Greater Copenhagen Light Rail first, then Romania's tram cities, a
   Japan wave 4 of 66, ten low-odds cities). The commuter-rail revisit group
   is widened into its own tier, not candidates (27 with buildable data, 4
-  open). When builds resume: the batch probe that turns the pre-verdicts
-  into rows. Universe and re-match scripts: the scratchpad's `sweep/`
+  open). **The ranked 1-4 is the next action item, held for cost (owner,
+  2026-10-04)**; the batch probe that turns the pre-verdicts into rows
+  runs with it. Universe and re-match scripts: the scratchpad's `sweep/`
   (`recount.py`, `japan_rows.py`).
 - **No probe is running.** The reset's ten agents and probe wave 4's nine
   (rules in the scratchpad's `probe4/RULES.md`, the user-agent rule

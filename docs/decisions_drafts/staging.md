@@ -4,6 +4,15 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - The ranked unscreened 1-4 is the next action item, held for cost (owner)
+
+- **The owner: "1-4 in most likely to succeed should be the next action
+  item, currently held due to cost".** The master list's ranked unscreened
+  cities (the Greater Copenhagen Light Rail; Romania's six other tram cities
+  and Hódmezővásárhely; a Japan wave 4 of 66; ten low-odds cities) are the
+  next screening work, held until the owner releases the cost. The batch
+  probe that turns the 73 pre-verdicts into rows runs with it.
+
 ### 2026-10-04 - North Korea and Myanmar held for wartime concerns; Côte d'Ivoire to the no-rail group; three watch categories (owner)
 
 - **The owner: "categories to watch in country census: untouched, some rail
