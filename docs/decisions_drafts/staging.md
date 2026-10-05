@@ -4,6 +4,58 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - A global re-probe calendared for about 2027-10 (owner)
+
+- **The owner: "ideally we would re-probe the global data for new entries or
+  openings relating band R/hold liftings after a prolonged period. maybe
+  save this to the (far) future calendar items".**
+- **`docs/recheck_calendar.md` gains a section for the screen itself**, with
+  two rows: a global re-probe at about 2027-10 (one year on, staging's pick
+  of "a prolonged period"; earlier only on the owner's word) covering the
+  sweep's universe against the master list, every Band R blocker and each
+  held country; and an undated row for a commuter-rail overhaul's fresh
+  listing. The master list's closing line points to it.
+
+### 2026-10-04 - The rail-city listing closed (owner)
+
+- **Staging asked whether the count settles fully new probes; the owner:
+  "yes add it".** Every city with a metro, light rail or tram (and Japan's
+  JR and private-rail cities) has a verdict, a pre-verdict or a ranked slot,
+  so the coverage sweep is not restarted. The master list's pre-verdict
+  section names the four ways a city with no coverage can come back: a
+  commuter-rail overhaul, a line opening after 2026-10-03, a miss in the
+  coarse name re-match, or a hold lifting.
+
+### 2026-10-04 - The ranked unscreened 1-4 is the next action item, held for cost (owner)
+
+- **The owner: "1-4 in most likely to succeed should be the next action
+  item, currently held due to cost".** The master list's ranked unscreened
+  cities (the Greater Copenhagen Light Rail; Romania's six other tram cities
+  and Hódmezővásárhely; a Japan wave 4 of 66; ten low-odds cities) are the
+  next screening work, held until the owner releases the cost. The batch
+  probe that turns the 73 pre-verdicts into rows runs with it.
+
+### 2026-10-04 - North Korea and Myanmar held for wartime concerns; Côte d'Ivoire to the no-rail group; three watch categories (owner)
+
+- **The owner: "categories to watch in country census: untouched, some rail
+  (minus North Korea, Cote d-Ivoire, Myanmar) cote is likely with mongolia
+  and the other two go into the wartime concerns with russia, ukraine,
+  israel, etc"**, then "other categories: candidates none built yet" and
+  "these along with the commuter rail seem to be the last of our viable
+  picks".
+- **North Korea and Myanmar held for wartime concerns**, as Russia,
+  Ukraine, Belarus, Iran and Israel: never probed, not a data finding.
+  Recorded on the master list's "Countries ruled out" and the country
+  shortlist.
+- **Côte d'Ivoire to the census's no-rail group**, under construction beside
+  Mongolia: the Abidjan Metro is not open.
+- **Three watch categories, the last viable picks at country level:**
+  candidates with none built yet (Hungary, Türkiye, Greece, India), the
+  commuter-rail tier, and the seven untouched countries with some rail
+  (mostly commuter rail, so the same overhaul). The census groups now read
+  built 26, candidates 4, restricted 15, probed with no city 29, ruled out
+  or held 8, untouched 7, no rail 111.
+
 ### 2026-10-04 - Toluca to the pre-verdicts; the commuter-rail group widened into its own tier, not candidates (owner)
 
 - **The owner asked what the El Insurgente ruling was.** Call 37 of the

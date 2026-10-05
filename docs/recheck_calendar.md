@@ -462,3 +462,12 @@ indemnity and Taiwan's OGDL v1 are accepted standing terms, not periodic).
 2. **Seoul's Wirye note** (`PLAN.md` lines 720-727) counts only stops "inside Seoul", but the line's Bokjeong and Namwirye ends are in Seongnam, a built city. The re-check should cover Seongnam too (Seoul mediahub; redaily, 2026-10-02).
 3. Checked and NOT wrong: Kumamoto's "2026 earthquake" (令和8年熊本地震) is the city's own name for it. `pipeline/countries/japan.py`'s N02-25 publication date (2026-04-07) agrees with MLIT's "2026年4月".
 
+## The screen itself: far-future items (owner, 2026-10-04)
+
+Not about any built city: the global screen that feeds `docs/city_master_list.md`.
+The rail-city listing closed on 2026-10-04; these rows say when to reopen it.
+
+| When | Scope | What | Who |
+|---|---|---|---|
+| ≈2027-10 (one year on; earlier only on the owner's word) | Every country | **A global re-probe after a prolonged gap** (owner, 2026-10-04): re-run the coverage sweep's universe (Wikipedia's metro and tram and light-rail lists, plus openings since 2026-10-03) against the master list for new entries and openings; re-check each Band R row's blocker (a geo-block, a sign-in, a request-only register, a portal that refused this machine); and re-ask each held or left-out country whether the owner lifts the hold (Russia, Ukraine, Belarus, Iran, Israel, North Korea, Myanmar; China's ruling on its own terms). Universe and re-match scripts were in staging's scratchpad (`sweep/recount.py`, `japan_rows.py`); rebuild them if the machine has cleared it | staging; the owner for any hold |
+| Whenever the owner opens a commuter-rail overhaul | Commuter-only cities outside Japan | Never listed: a fresh listing of several hundred cities, the commuter-rail tier on the master list as its seed | staging |

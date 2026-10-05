@@ -299,6 +299,8 @@ Band R row.
 
 ## Pre-verdicts — precedent, not probed (not counted; owner, 2026-10-04)
 
+**The listing is closed as of 2026-10-04 (owner).** Every city with a metro, light rail or tram (and Japan's cities on JR or private rail) has a verdict, a pre-verdict below or a ranked slot; do not restart the coverage sweep. A city with no coverage can come back only four ways: a commuter-rail overhaul (commuter-only cities outside Japan were never listed), a line opening after 2026-10-03, a miss in the coarse name re-match (the batch probe re-reads each group), or a hold lifting (Russia, Ukraine, Belarus, Iran, North Korea, Myanmar, China). A global re-probe for new entries, openings, Band R blockers and lifted holds is calendared for about 2027-10 (`docs/recheck_calendar.md`, "The screen itself").
+
 **Approved by the owner on 2026-10-04** with the remainder count: the rail
 cities the 2026-10-03 coverage sweep found with no verdict, re-matched
 against this list on 2026-10-04. **These rows are pointers, not verdicts.** A
@@ -355,7 +357,7 @@ Wakō, Hiratsuka and Atsugi with one or two station groups (Uiwang's and
 Hwaseong's precedent). Station-group counts alone are no precedent:
 Takarazuka was built on 11.
 
-**Unscreened, ranked (about 93 cities).** Screen in this order when builds resume:
+**Unscreened, ranked (about 93 cities): the next action item, held for cost (owner, 2026-10-04).** Screen in this order when the owner releases it:
 1. **The Greater Copenhagen Light Rail** (about 10 municipalities, Lyngby-Taarbæk to Ishøj): Copenhagen's and Aarhus's national CVR and DAR modules; frequency and the page's shape are the questions.
 2. **Riding an act the owner already owes** (7): Arad, Brăila, Craiova, Galați, Oradea and Ploiești on Timișoara's DSVSA route; Hódmezővásárhely on Szeged's OKNYIR export. A frequency check first.
 3. **A Japan wave 4** (66), by N02 station groups. 15 or more: Tsu, Fukushima, Ichihara, Ichinomiya, Toyokawa, Aomori, Ōita, Fuji, Akashi, Fujisawa, Asahikawa, Matsue, Okazaki, Kamakura, Suita. 8 to 14: Iwaki, Nagaoka, Fuchū, Hachinohe, Tachikawa, Uji, Gifu, Hirakata, Akita, Amagasaki, Kawagoe, Kōriyama, Kasugai, Toyonaka, Sakura, Ino, Nankoku, Hino, Ibaraki, Imizu, Tokorozawa, Tokushima, Chōfu, Machida, Ōta, Kawaguchi, Higashimurayama, Koshigaya, Kakogawa, Yamato, Kasukabe. 3 to 7: Tama, Urayasu, Yachiyo, Itami, Moriguchi, Nagakute, Minoh, Kadoma, Ina, Nishitōkyō, Isesaki, Higashiyamato, Settsu, Ageo, Neyagawa, Saga, Sōka, Tsukuba, Nisshin, Urasoe (Naha's add-on). Chiba Prefecture's cities (Ichihara, Urayasu, Sakura, Yachiyo) top out at personal services, Matsudo's and Kashiwa's precedent.
@@ -961,6 +963,11 @@ four it was screened first, and the screens stay: Jerusalem, Bnei Brak and
 Bat Yam in Band R, Tel Aviv, Ramat Gan and Haifa in the discards, and
 Petah Tikva's findings on the watch-item list, so the country reopens
 without a new probe when the owner lifts the hold.
+
+🇰🇵 **North Korea** and 🇲🇲 **Myanmar: held for wartime concerns** *(owner,
+2026-10-04, as Russia, Ukraine, Belarus, Iran and Israel; not a data
+finding)*. Never probed: the Pyongyang Metro, and Yangon's Circular Railway
+(commuter rail). Both had sat in staging's untouched-countries census.
 
 *🇳🇿 **New Zealand left this list on 2026-10-04** (owner): "licensing is not municipal" was wrong. Under the Food Act 2014 a food business registers with its council or MPI, and Hamilton and Marlborough publish food registers, though neither has urban rail. Auckland and Wellington, the two rail cities, are discarded on rail.*
 
