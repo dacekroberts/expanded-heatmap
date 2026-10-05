@@ -1,0 +1,2746 @@
+[
+ {
+  "city": "Augsburg",
+  "country": "Germany",
+  "system": "Trams (5 lines)",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Bad Schandau",
+  "country": "Germany",
+  "system": "Kirnitzschtal tramway",
+  "status": "OUT OF MODE (heritage/tourist, suspended, guided bus or not open)",
+  "ptr": "-",
+  "note": "Kirnitzschtal tourist tram"
+ },
+ {
+  "city": "Berlin",
+  "country": "Germany",
+  "system": "U-Bahn, S-Bahn, trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:50",
+  "note": ""
+ },
+ {
+  "city": "Bielefeld",
+  "country": "Germany",
+  "system": "Stadtbahn",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Bochum",
+  "country": "Germany",
+  "system": "Stadtbahn U35 + trams (Bogestra)",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Gelsenkirchen",
+  "country": "Germany",
+  "system": "Bogestra trams + Stadtbahn",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Bonn",
+  "country": "Germany",
+  "system": "Stadtbahn + trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Brandenburg an der Havel",
+  "country": "Germany",
+  "system": "Trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Braunschweig",
+  "country": "Germany",
+  "system": "Trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Bremen",
+  "country": "Germany",
+  "system": "Trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Chemnitz",
+  "country": "Germany",
+  "system": "Trams / Chemnitz model",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Cologne",
+  "country": "Germany",
+  "system": "Stadtbahn",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:291",
+  "note": "no premises register"
+ },
+ {
+  "city": "Cottbus",
+  "country": "Germany",
+  "system": "Trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Darmstadt",
+  "country": "Germany",
+  "system": "Trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Dessau-Roßlau",
+  "country": "Germany",
+  "system": "Trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Dortmund",
+  "country": "Germany",
+  "system": "Stadtbahn",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Dresden",
+  "country": "Germany",
+  "system": "Trams",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:480",
+  "note": "no premises register"
+ },
+ {
+  "city": "Duisburg",
+  "country": "Germany",
+  "system": "Trams + Stadtbahn U79",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Düsseldorf",
+  "country": "Germany",
+  "system": "Stadtbahn + trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Erfurt",
+  "country": "Germany",
+  "system": "Stadtbahn (trams)",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Essen",
+  "country": "Germany",
+  "system": "Stadtbahn + trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Frankfurt am Main",
+  "country": "Germany",
+  "system": "U-Bahn + trams",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:290",
+  "note": "no premises register"
+ },
+ {
+  "city": "Frankfurt (Oder)",
+  "country": "Germany",
+  "system": "Trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Freiburg im Breisgau",
+  "country": "Germany",
+  "system": "Trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Gera",
+  "country": "Germany",
+  "system": "Trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Görlitz",
+  "country": "Germany",
+  "system": "Trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Gotha",
+  "country": "Germany",
+  "system": "Trams + Thüringerwaldbahn",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Halberstadt",
+  "country": "Germany",
+  "system": "Trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Halle (Saale)",
+  "country": "Germany",
+  "system": "Trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Hamburg",
+  "country": "Germany",
+  "system": "U-Bahn + S-Bahn",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:312",
+  "note": "2016 retail survey only (currency)"
+ },
+ {
+  "city": "Hanover",
+  "country": "Germany",
+  "system": "Stadtbahn",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Heidelberg",
+  "country": "Germany",
+  "system": "Trams (RNV)",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Heilbronn",
+  "country": "Germany",
+  "system": "Stadtbahn (Karlsruhe model, street-running)",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Jena",
+  "country": "Germany",
+  "system": "Trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Karlsruhe",
+  "country": "Germany",
+  "system": "Trams + Stadtbahn",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Kassel",
+  "country": "Germany",
+  "system": "Trams + RegioTram",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Krefeld",
+  "country": "Germany",
+  "system": "Trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Leipzig",
+  "country": "Germany",
+  "system": "Trams + S-Bahn",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:481",
+  "note": "no premises register"
+ },
+ {
+  "city": "Magdeburg",
+  "country": "Germany",
+  "system": "Trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Mainz",
+  "country": "Germany",
+  "system": "Trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Mannheim",
+  "country": "Germany",
+  "system": "Trams (RNV)",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Ludwigshafen",
+  "country": "Germany",
+  "system": "Trams (RNV)",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "satellite; sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Mülheim an der Ruhr",
+  "country": "Germany",
+  "system": "Trams + Stadtbahn U18",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Oberhausen",
+  "country": "Germany",
+  "system": "Trams (line 112)",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "satellite; sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Munich",
+  "country": "Germany",
+  "system": "U-Bahn, S-Bahn, trams",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:289",
+  "note": "no premises register"
+ },
+ {
+  "city": "Naumburg",
+  "country": "Germany",
+  "system": "Heritage tram",
+  "status": "OUT OF MODE (heritage/tourist, suspended, guided bus or not open)",
+  "ptr": "-",
+  "note": "heritage ring"
+ },
+ {
+  "city": "Nordhausen",
+  "country": "Germany",
+  "system": "Trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Nuremberg",
+  "country": "Germany",
+  "system": "U-Bahn + trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Fürth",
+  "country": "Germany",
+  "system": "Nuremberg U-Bahn U1",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "satellite; sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Plauen",
+  "country": "Germany",
+  "system": "Trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Potsdam",
+  "country": "Germany",
+  "system": "Trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Rostock",
+  "country": "Germany",
+  "system": "Trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Saarbrücken",
+  "country": "Germany",
+  "system": "Saarbahn",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Schwerin",
+  "country": "Germany",
+  "system": "Trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Strausberg",
+  "country": "Germany",
+  "system": "Strausberg Railway (tram)",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Woltersdorf",
+  "country": "Germany",
+  "system": "Woltersdorf tramway",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Schöneiche",
+  "country": "Germany",
+  "system": "Schöneiche–Rüdersdorf tramway",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Stuttgart",
+  "country": "Germany",
+  "system": "Stadtbahn + S-Bahn",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Ulm",
+  "country": "Germany",
+  "system": "Trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Würzburg",
+  "country": "Germany",
+  "system": "Trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Zwickau",
+  "country": "Germany",
+  "system": "Trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Wuppertal",
+  "country": "Germany",
+  "system": "Schwebebahn (suspended monorail)",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Herne",
+  "country": "Germany",
+  "system": "Stadtbahn U35",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "satellite; sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Neuss",
+  "country": "Germany",
+  "system": "Düsseldorf Stadtbahn U75 / tram 709",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "satellite; sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Vienna",
+  "country": "Austria",
+  "system": "U-Bahn + trams",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:316",
+  "note": "no premises register; GISA strips addresses"
+ },
+ {
+  "city": "Graz",
+  "country": "Austria",
+  "system": "Trams",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:482",
+  "note": "no premises register"
+ },
+ {
+  "city": "Linz",
+  "country": "Austria",
+  "system": "Trams",
+  "status": "NEVER SCREENED (named only in a feed or catalogue listing)",
+  "ptr": "city_master_list_evidence.md:391",
+  "note": "named only inside Vienna's re-probe row"
+ },
+ {
+  "city": "Innsbruck",
+  "country": "Austria",
+  "system": "Trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "country reading: GISA strips addresses; Vienna and Graz negatives (ML:316, 482, 573)"
+ },
+ {
+  "city": "Gmunden",
+  "country": "Austria",
+  "system": "Traunseetram",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "country reading: GISA strips addresses; Vienna and Graz negatives (ML:316, 482, 573)"
+ },
+ {
+  "city": "Baden bei Wien",
+  "country": "Austria",
+  "system": "Badner Bahn",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "satellite; country reading: GISA strips addresses; Vienna and Graz negatives (ML:316, 482, 573)"
+ },
+ {
+  "city": "Basel",
+  "country": "Switzerland",
+  "system": "Trams (BVB, BLT)",
+  "status": "NEVER SCREENED (named only in a feed or catalogue listing)",
+  "ptr": "city_master_list.md:324",
+  "note": "named only as the parent of Saint-Louis's tram stops"
+ },
+ {
+  "city": "Bern",
+  "country": "Switzerland",
+  "system": "Trams",
+  "status": "NEVER RECORDED",
+  "ptr": "-",
+  "note": "positive sibling: Zurich built on the city food register (ML:50, 550)"
+ },
+ {
+  "city": "Geneva",
+  "country": "Switzerland",
+  "system": "Trams",
+  "status": "NEVER SCREENED (named only in a feed or catalogue listing)",
+  "ptr": "city_master_list.md:324",
+  "note": "named only as the parent of Annemasse's tram stop"
+ },
+ {
+  "city": "Lausanne",
+  "country": "Switzerland",
+  "system": "Metro M1/M2",
+  "status": "NEVER RECORDED",
+  "ptr": "-",
+  "note": "positive sibling: Zurich built on the city food register (ML:50, 550)"
+ },
+ {
+  "city": "Neuchâtel",
+  "country": "Switzerland",
+  "system": "Littorail tram",
+  "status": "NEVER RECORDED",
+  "ptr": "-",
+  "note": "positive sibling: Zurich built on the city food register (ML:50, 550)"
+ },
+ {
+  "city": "Zurich",
+  "country": "Switzerland",
+  "system": "Trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:50",
+  "note": ""
+ },
+ {
+  "city": "Amsterdam",
+  "country": "Netherlands",
+  "system": "Metro + trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:50",
+  "note": ""
+ },
+ {
+  "city": "Rotterdam",
+  "country": "Netherlands",
+  "system": "Metro + trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:50",
+  "note": ""
+ },
+ {
+  "city": "Den Haag",
+  "country": "Netherlands",
+  "system": "Trams + RandstadRail",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:50",
+  "note": ""
+ },
+ {
+  "city": "Utrecht",
+  "country": "Netherlands",
+  "system": "Sneltram",
+  "status": "IN A BAND (R)",
+  "ptr": "city_master_list.md:169",
+  "note": "portal 403 to scripts and browser"
+ },
+ {
+  "city": "Nieuwegein",
+  "country": "Netherlands",
+  "system": "Utrecht sneltram",
+  "status": "RECORDED, NO ROW (add-on, suburb or sibling-row note)",
+  "ptr": "tram_city_list.md:169, 354",
+  "note": "Utrecht add-on, not a candidate"
+ },
+ {
+  "city": "Amstelveen",
+  "country": "Netherlands",
+  "system": "Amsterdam tram 25",
+  "status": "RECORDED, NO ROW (add-on, suburb or sibling-row note)",
+  "ptr": "tram_city_list.md:354",
+  "note": "regional add-on, not a candidate"
+ },
+ {
+  "city": "Delft",
+  "country": "Netherlands",
+  "system": "HTM trams",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:395",
+  "note": "no food source"
+ },
+ {
+  "city": "Rijswijk",
+  "country": "Netherlands",
+  "system": "HTM trams",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:394",
+  "note": "no food source"
+ },
+ {
+  "city": "Zoetermeer",
+  "country": "Netherlands",
+  "system": "RandstadRail",
+  "status": "RECORDED, NO ROW (add-on, suburb or sibling-row note)",
+  "ptr": "tram_city_list.md:354",
+  "note": "regional add-on, not a candidate"
+ },
+ {
+  "city": "Copenhagen",
+  "country": "Denmark",
+  "system": "Metro + S-tog",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:50",
+  "note": ""
+ },
+ {
+  "city": "Greater Copenhagen Light Rail (Lyngby, Gladsaxe, Herlev, Glostrup, Brøndby, Albertslund, Høje-Taastrup, Ishøj)",
+  "country": "Denmark",
+  "system": "Hovedstadens Letbane (2025)",
+  "status": "RECORDED, NO ROW (add-on, suburb or sibling-row note)",
+  "ptr": "tram_city_list.md:355",
+  "note": "Lyngby-Taarbæk named as a regional add-on; the 2025 Ring 3 line itself never assessed"
+ },
+ {
+  "city": "Aarhus",
+  "country": "Denmark",
+  "system": "Letbane",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:50",
+  "note": ""
+ },
+ {
+  "city": "Odense",
+  "country": "Denmark",
+  "system": "Letbane",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:50",
+  "note": ""
+ },
+ {
+  "city": "Stockholm",
+  "country": "Sweden",
+  "system": "Tunnelbana + trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:50",
+  "note": ""
+ },
+ {
+  "city": "Göteborg",
+  "country": "Sweden",
+  "system": "Trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:50",
+  "note": ""
+ },
+ {
+  "city": "Lund",
+  "country": "Sweden",
+  "system": "Lund tramway (2020)",
+  "status": "NEVER RECORDED",
+  "ptr": "-",
+  "note": "positive siblings: Stockholm, Göteborg food registers (ML:549)"
+ },
+ {
+  "city": "Norrköping",
+  "country": "Sweden",
+  "system": "Trams",
+  "status": "NEVER RECORDED",
+  "ptr": "-",
+  "note": "positive siblings: Stockholm, Göteborg food registers (ML:549)"
+ },
+ {
+  "city": "Malmö",
+  "country": "Sweden",
+  "system": "Heritage tram only",
+  "status": "OUT OF MODE (heritage/tourist, suspended, guided bus or not open)",
+  "ptr": "city_master_list_evidence.md:274 (sample mention)",
+  "note": "heritage line only"
+ },
+ {
+  "city": "Malmköping",
+  "country": "Sweden",
+  "system": "Museum tram",
+  "status": "OUT OF MODE (heritage/tourist, suspended, guided bus or not open)",
+  "ptr": "-",
+  "note": "museum tram"
+ },
+ {
+  "city": "Oslo",
+  "country": "Norway",
+  "system": "T-bane + trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:50",
+  "note": ""
+ },
+ {
+  "city": "Bergen",
+  "country": "Norway",
+  "system": "Bybanen",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:50",
+  "note": ""
+ },
+ {
+  "city": "Trondheim",
+  "country": "Norway",
+  "system": "Gråkallbanen tram",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:321",
+  "note": "reach: 3.7% within 483 m"
+ },
+ {
+  "city": "Helsinki",
+  "country": "Finland",
+  "system": "Metro + trams",
+  "status": "IN A BAND (R)",
+  "ptr": "city_master_list.md:154",
+  "note": "hri.fi / avoindata.fi geo-blocked"
+ },
+ {
+  "city": "Espoo",
+  "country": "Finland",
+  "system": "Länsimetro + Jokeri light rail",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "satellite; sibling: Helsinki R, avoindata.fi geo-blocked (ML:154)"
+ },
+ {
+  "city": "Tampere",
+  "country": "Finland",
+  "system": "Tampere light rail (2021)",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling: Helsinki R, avoindata.fi geo-blocked (ML:154)"
+ },
+ {
+  "city": "Vantaa",
+  "country": "Finland",
+  "system": "Jokeri light rail; Vantaa tram u/c",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "satellite; sibling: Helsinki R, avoindata.fi geo-blocked (ML:154)"
+ },
+ {
+  "city": "Tallinn",
+  "country": "Estonia",
+  "system": "Trams",
+  "status": "IN A BAND (R)",
+  "ptr": "city_master_list.md:165",
+  "note": "food register geo-blocked; EHR order"
+ },
+ {
+  "city": "Riga",
+  "country": "Latvia",
+  "system": "Trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:50",
+  "note": ""
+ },
+ {
+  "city": "Daugavpils",
+  "country": "Latvia",
+  "system": "Trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:50",
+  "note": ""
+ },
+ {
+  "city": "Liepāja",
+  "country": "Latvia",
+  "system": "Trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:50",
+  "note": ""
+ },
+ {
+  "city": "Warsaw",
+  "country": "Poland",
+  "system": "Metro + trams",
+  "status": "IN A BAND (R)",
+  "ptr": "city_master_list.md:152",
+  "note": "geo-blocked to Poland"
+ },
+ {
+  "city": "Kraków",
+  "country": "Poland",
+  "system": "Trams",
+  "status": "IN A BAND (R)",
+  "ptr": "city_master_list.md:170",
+  "note": "portal times out"
+ },
+ {
+  "city": "Łódź",
+  "country": "Poland",
+  "system": "Trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: Wrocław alcohol-only, Poznań aggregates, Warsaw/Kraków R (ML:567)"
+ },
+ {
+  "city": "Wrocław",
+  "country": "Poland",
+  "system": "Trams",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:484",
+  "note": "alcohol layers only"
+ },
+ {
+  "city": "Poznań",
+  "country": "Poland",
+  "system": "Trams (incl. Pestka)",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:310",
+  "note": "aggregates only"
+ },
+ {
+  "city": "Gdańsk",
+  "country": "Poland",
+  "system": "Trams",
+  "status": "NEVER SCREENED (named only in a feed or catalogue listing)",
+  "ptr": "city_master_list.md:152",
+  "note": "named only as \"the alcohol-sales-points lead was Gdańsk's\" in Warsaw's R row"
+ },
+ {
+  "city": "Szczecin",
+  "country": "Poland",
+  "system": "Trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: Wrocław alcohol-only, Poznań aggregates, Warsaw/Kraków R (ML:567)"
+ },
+ {
+  "city": "Bydgoszcz",
+  "country": "Poland",
+  "system": "Trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: Wrocław alcohol-only, Poznań aggregates, Warsaw/Kraków R (ML:567)"
+ },
+ {
+  "city": "Toruń",
+  "country": "Poland",
+  "system": "Trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: Wrocław alcohol-only, Poznań aggregates, Warsaw/Kraków R (ML:567)"
+ },
+ {
+  "city": "Katowice",
+  "country": "Poland",
+  "system": "Silesian Interurbans (Tramwaje Śląskie)",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: Wrocław alcohol-only, Poznań aggregates, Warsaw/Kraków R (ML:567)"
+ },
+ {
+  "city": "Chorzów, Bytom, Gliwice, Sosnowiec, Zabrze, Ruda Śląska, Dąbrowa Górnicza, Będzin",
+  "country": "Poland",
+  "system": "Tramwaje Śląskie",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "satellite; sibling pattern: Wrocław alcohol-only, Poznań aggregates, Warsaw/Kraków R (ML:567)"
+ },
+ {
+  "city": "Częstochowa",
+  "country": "Poland",
+  "system": "Trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: Wrocław alcohol-only, Poznań aggregates, Warsaw/Kraków R (ML:567)"
+ },
+ {
+  "city": "Olsztyn",
+  "country": "Poland",
+  "system": "Trams (2015)",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: Wrocław alcohol-only, Poznań aggregates, Warsaw/Kraków R (ML:567)"
+ },
+ {
+  "city": "Elbląg",
+  "country": "Poland",
+  "system": "Trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: Wrocław alcohol-only, Poznań aggregates, Warsaw/Kraków R (ML:567)"
+ },
+ {
+  "city": "Gorzów Wielkopolski",
+  "country": "Poland",
+  "system": "Trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: Wrocław alcohol-only, Poznań aggregates, Warsaw/Kraków R (ML:567)"
+ },
+ {
+  "city": "Grudziądz",
+  "country": "Poland",
+  "system": "Trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling pattern: Wrocław alcohol-only, Poznań aggregates, Warsaw/Kraków R (ML:567)"
+ },
+ {
+  "city": "Mrozy",
+  "country": "Poland",
+  "system": "Heritage horse tram",
+  "status": "OUT OF MODE (heritage/tourist, suspended, guided bus or not open)",
+  "ptr": "-",
+  "note": "horse tram"
+ },
+ {
+  "city": "Prague",
+  "country": "Czechia",
+  "system": "Metro + trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:53",
+  "note": ""
+ },
+ {
+  "city": "Brno",
+  "country": "Czechia",
+  "system": "Trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:53",
+  "note": ""
+ },
+ {
+  "city": "Ostrava",
+  "country": "Czechia",
+  "system": "Trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:53",
+  "note": ""
+ },
+ {
+  "city": "Plzeň",
+  "country": "Czechia",
+  "system": "Trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:53",
+  "note": ""
+ },
+ {
+  "city": "Olomouc",
+  "country": "Czechia",
+  "system": "Trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:53",
+  "note": ""
+ },
+ {
+  "city": "Liberec",
+  "country": "Czechia",
+  "system": "Trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:53",
+  "note": ""
+ },
+ {
+  "city": "Most",
+  "country": "Czechia",
+  "system": "Trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:53",
+  "note": ""
+ },
+ {
+  "city": "Bratislava",
+  "country": "Slovakia",
+  "system": "Trams",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:311",
+  "note": "no premises register"
+ },
+ {
+  "city": "Košice",
+  "country": "Slovakia",
+  "system": "Trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling: Bratislava negative, national catalogue enumerated (ML:311); Slovakia once filed \"no urban rail\" (SL:3227)"
+ },
+ {
+  "city": "Trenčianske Teplice",
+  "country": "Slovakia",
+  "system": "Heritage interurban",
+  "status": "OUT OF MODE (heritage/tourist, suspended, guided bus or not open)",
+  "ptr": "-",
+  "note": "heritage interurban"
+ },
+ {
+  "city": "Budapest",
+  "country": "Hungary",
+  "system": "Metro + trams + HÉV",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:303",
+  "note": "no open register (FELIR CAPTCHA lookup)"
+ },
+ {
+  "city": "Debrecen",
+  "country": "Hungary",
+  "system": "Trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling: Budapest negative (ML:303)"
+ },
+ {
+  "city": "Miskolc",
+  "country": "Hungary",
+  "system": "Trams",
+  "status": "NEVER SCREENED (named only in a feed or catalogue listing)",
+  "ptr": "global_country_shortlist.md:3209",
+  "note": "Hungary feed row; unprobed"
+ },
+ {
+  "city": "Szeged",
+  "country": "Hungary",
+  "system": "Trams + tram-train",
+  "status": "NEVER SCREENED (named only in a feed or catalogue listing)",
+  "ptr": "global_country_shortlist.md:3209",
+  "note": "Hungary feed row; unprobed"
+ },
+ {
+  "city": "Hódmezővásárhely",
+  "country": "Hungary",
+  "system": "Tram-train",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling: Budapest negative (ML:303)"
+ },
+ {
+  "city": "Bucharest",
+  "country": "Romania",
+  "system": "Metro + trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:50",
+  "note": ""
+ },
+ {
+  "city": "Arad",
+  "country": "Romania",
+  "system": "Trams",
+  "status": "NEVER RECORDED",
+  "ptr": "-",
+  "note": "positive sibling: Bucharest built on DSVSA food registers (ML:50, 551)"
+ },
+ {
+  "city": "Brăila",
+  "country": "Romania",
+  "system": "Trams",
+  "status": "NEVER RECORDED",
+  "ptr": "-",
+  "note": "positive sibling: Bucharest built on DSVSA food registers (ML:50, 551)"
+ },
+ {
+  "city": "Cluj-Napoca",
+  "country": "Romania",
+  "system": "Trams; metro u/c",
+  "status": "NEVER RECORDED",
+  "ptr": "-",
+  "note": "positive sibling: Bucharest built on DSVSA food registers (ML:50, 551)"
+ },
+ {
+  "city": "Craiova",
+  "country": "Romania",
+  "system": "Trams",
+  "status": "NEVER RECORDED",
+  "ptr": "-",
+  "note": "positive sibling: Bucharest built on DSVSA food registers (ML:50, 551)"
+ },
+ {
+  "city": "Galați",
+  "country": "Romania",
+  "system": "Trams",
+  "status": "NEVER RECORDED",
+  "ptr": "-",
+  "note": "positive sibling: Bucharest built on DSVSA food registers (ML:50, 551)"
+ },
+ {
+  "city": "Iași",
+  "country": "Romania",
+  "system": "Trams",
+  "status": "NEVER RECORDED",
+  "ptr": "-",
+  "note": "positive sibling: Bucharest built on DSVSA food registers (ML:50, 551)"
+ },
+ {
+  "city": "Oradea",
+  "country": "Romania",
+  "system": "Trams",
+  "status": "NEVER SCREENED (named only in a feed or catalogue listing)",
+  "ptr": "global_country_shortlist.md:3208",
+  "note": "Romania feed row; business data unprobed"
+ },
+ {
+  "city": "Ploiești",
+  "country": "Romania",
+  "system": "Trams",
+  "status": "NEVER RECORDED",
+  "ptr": "-",
+  "note": "positive sibling: Bucharest built on DSVSA food registers (ML:50, 551)"
+ },
+ {
+  "city": "Reșița",
+  "country": "Romania",
+  "system": "Trams (reopened)",
+  "status": "NEVER RECORDED",
+  "ptr": "-",
+  "note": "positive sibling: Bucharest built on DSVSA food registers (ML:50, 551)"
+ },
+ {
+  "city": "Timișoara",
+  "country": "Romania",
+  "system": "Trams",
+  "status": "NEVER RECORDED",
+  "ptr": "-",
+  "note": "positive sibling: Bucharest built on DSVSA food registers (ML:50, 551)"
+ },
+ {
+  "city": "Botoșani",
+  "country": "Romania",
+  "system": "Trams",
+  "status": "NEVER RECORDED",
+  "ptr": "-",
+  "note": "positive sibling: Bucharest built on DSVSA food registers (ML:50, 551)"
+ },
+ {
+  "city": "Sofia",
+  "country": "Bulgaria",
+  "system": "Metro + trams",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:296",
+  "note": "no premises register"
+ },
+ {
+  "city": "Belgrade",
+  "country": "Serbia",
+  "system": "Trams (metro u/c)",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:488",
+  "note": "no premises list"
+ },
+ {
+  "city": "Zagreb",
+  "country": "Croatia",
+  "system": "Trams",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:304",
+  "note": "no premises register"
+ },
+ {
+  "city": "Osijek",
+  "country": "Croatia",
+  "system": "Trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling: Zagreb negative, \"Croatia devolves to municipalities\" (ML:304); filed \"no urban rail\" (SL:3227)"
+ },
+ {
+  "city": "Sarajevo",
+  "country": "Bosnia and Herzegovina",
+  "system": "Trams",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:489",
+  "note": "no premises list"
+ },
+ {
+  "city": "Athens",
+  "country": "Greece",
+  "system": "Metro + tram",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:309",
+  "note": "no premises register"
+ },
+ {
+  "city": "Thessaloniki",
+  "country": "Greece",
+  "system": "Metro (2024)",
+  "status": "NEVER SCREENED (named only in a feed or catalogue listing)",
+  "ptr": "global_country_shortlist.md:3212",
+  "note": "Greece feed row; unprobed; metro opened 2024"
+ },
+ {
+  "city": "Milan",
+  "country": "Italy",
+  "system": "Metro + trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:50",
+  "note": ""
+ },
+ {
+  "city": "Rome",
+  "country": "Italy",
+  "system": "Metro + trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:50",
+  "note": ""
+ },
+ {
+  "city": "Florence",
+  "country": "Italy",
+  "system": "Tramvia",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:50",
+  "note": ""
+ },
+ {
+  "city": "Turin",
+  "country": "Italy",
+  "system": "Metro + trams",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:306",
+  "note": "2019 stock, stale"
+ },
+ {
+  "city": "Naples",
+  "country": "Italy",
+  "system": "Metro + trams",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:313",
+  "note": "no premises register"
+ },
+ {
+  "city": "Genoa",
+  "country": "Italy",
+  "system": "Metro",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:337",
+  "note": "no premises register"
+ },
+ {
+  "city": "Brescia",
+  "country": "Italy",
+  "system": "Metro",
+  "status": "IN A BAND (R)",
+  "ptr": "city_master_list.md:171",
+  "note": "portal times out"
+ },
+ {
+  "city": "Catania",
+  "country": "Italy",
+  "system": "Metro",
+  "status": "IN A BAND (R)",
+  "ptr": "city_master_list.md:172",
+  "note": "portal times out / firewall"
+ },
+ {
+  "city": "Bergamo",
+  "country": "Italy",
+  "system": "TEB light rail",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:339",
+  "note": "no premises register"
+ },
+ {
+  "city": "Cagliari",
+  "country": "Italy",
+  "system": "Metrocagliari light rail",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:496",
+  "note": "no premises register"
+ },
+ {
+  "city": "Messina",
+  "country": "Italy",
+  "system": "Tram",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:315",
+  "note": "no premises register"
+ },
+ {
+  "city": "Venice (Mestre)",
+  "country": "Italy",
+  "system": "Translohr",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:342",
+  "note": "Translohr, not rail"
+ },
+ {
+  "city": "Padua",
+  "country": "Italy",
+  "system": "Translohr (SIR)",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:341",
+  "note": "Translohr, not rail"
+ },
+ {
+  "city": "Palermo",
+  "country": "Italy",
+  "system": "Trams",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:338",
+  "note": "no premises register"
+ },
+ {
+  "city": "Sassari",
+  "country": "Italy",
+  "system": "Metrosassari",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:340",
+  "note": "no premises register"
+ },
+ {
+  "city": "Trieste",
+  "country": "Italy",
+  "system": "Opicina tramway (suspended)",
+  "status": "OUT OF MODE (heritage/tourist, suspended, guided bus or not open)",
+  "ptr": "-",
+  "note": "Opicina tramway suspended since 2016"
+ },
+ {
+  "city": "Ritten/Renon",
+  "country": "Italy",
+  "system": "Rittnerbahn",
+  "status": "OUT OF MODE (heritage/tourist, suspended, guided bus or not open)",
+  "ptr": "-",
+  "note": "Rittnerbahn, rural"
+ },
+ {
+  "city": "Bologna",
+  "country": "Italy",
+  "system": "Tram Linea Rossa (u/c)",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:343",
+  "note": "tram opens spring 2027 (watch item ML:213)"
+ },
+ {
+  "city": "Perugia",
+  "country": "Italy",
+  "system": "Minimetrò people mover",
+  "status": "NEVER RECORDED",
+  "ptr": "-",
+  "note": ""
+ },
+ {
+  "city": "Madrid",
+  "country": "Spain",
+  "system": "Metro + Metro Ligero",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:50",
+  "note": ""
+ },
+ {
+  "city": "Barcelona",
+  "country": "Spain",
+  "system": "Metro + trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:50",
+  "note": ""
+ },
+ {
+  "city": "Palma",
+  "country": "Spain",
+  "system": "Metro",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:50",
+  "note": ""
+ },
+ {
+  "city": "Valencia",
+  "country": "Spain",
+  "system": "Metrovalencia",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:301",
+  "note": "no premises register"
+ },
+ {
+  "city": "Bilbao",
+  "country": "Spain",
+  "system": "Metro + tram",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:305",
+  "note": "aggregates only"
+ },
+ {
+  "city": "Seville",
+  "country": "Spain",
+  "system": "Metro L1 + MetroCentro",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:297",
+  "note": "no premises register"
+ },
+ {
+  "city": "Málaga",
+  "country": "Spain",
+  "system": "Metro",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:302",
+  "note": "business parks only"
+ },
+ {
+  "city": "Alicante",
+  "country": "Spain",
+  "system": "TRAM",
+  "status": "IN A BAND (R)",
+  "ptr": "city_master_list.md:173",
+  "note": "portal times out"
+ },
+ {
+  "city": "Zaragoza",
+  "country": "Spain",
+  "system": "Tram",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:349",
+  "note": "placement fails (36% numbered)"
+ },
+ {
+  "city": "Granada",
+  "country": "Spain",
+  "system": "Metro (light rail)",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:346",
+  "note": "no premises register"
+ },
+ {
+  "city": "Murcia",
+  "country": "Spain",
+  "system": "Tram",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:345",
+  "note": "no premises register"
+ },
+ {
+  "city": "Vitoria-Gasteiz",
+  "country": "Spain",
+  "system": "Tram",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:344",
+  "note": "no premises register"
+ },
+ {
+  "city": "Santa Cruz de Tenerife / La Laguna",
+  "country": "Spain",
+  "system": "Metrotenerife",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:393",
+  "note": "placement 57.7%"
+ },
+ {
+  "city": "Cádiz (Chiclana, San Fernando)",
+  "country": "Spain",
+  "system": "Tram-train (2022)",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling: Andalucía catalogue enumerated for Granada/Jaén (ML:346-347)"
+ },
+ {
+  "city": "Parla",
+  "country": "Spain",
+  "system": "Tram",
+  "status": "RECORDED, NO ROW (add-on, suburb or sibling-row note)",
+  "ptr": "city_master_list.md:428",
+  "note": "Madrid suburb, \"no register\", no row"
+ },
+ {
+  "city": "Jaén",
+  "country": "Spain",
+  "system": "Tram (reopened 2025?)",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:347",
+  "note": "not in service; no register"
+ },
+ {
+  "city": "Sóller",
+  "country": "Spain",
+  "system": "Heritage tram",
+  "status": "OUT OF MODE (heritage/tourist, suspended, guided bus or not open)",
+  "ptr": "-",
+  "note": "heritage tram"
+ },
+ {
+  "city": "Lisbon",
+  "country": "Portugal",
+  "system": "Metro + trams",
+  "status": "IN A BAND (R)",
+  "ptr": "city_master_list.md:168",
+  "note": "DGAE register, request drafted not sent"
+ },
+ {
+  "city": "Porto",
+  "country": "Portugal",
+  "system": "Metro do Porto (light rail)",
+  "status": "IN A BAND (R)",
+  "ptr": "city_master_list.md:168, 569",
+  "note": "named in Lisbon's R row: follows on the DGAE answer"
+ },
+ {
+  "city": "Almada / Seixal",
+  "country": "Portugal",
+  "system": "Metro Transportes do Sul",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "sibling: Lisbon/Porto in R on the DGAE request (ML:168)"
+ },
+ {
+  "city": "Vila Nova de Gaia / Matosinhos / Maia",
+  "country": "Portugal",
+  "system": "Metro do Porto",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "satellite; sibling: Lisbon/Porto in R on the DGAE request (ML:168)"
+ },
+ {
+  "city": "Sintra",
+  "country": "Portugal",
+  "system": "Heritage tram",
+  "status": "OUT OF MODE (heritage/tourist, suspended, guided bus or not open)",
+  "ptr": "-",
+  "note": "heritage tram"
+ },
+ {
+  "city": "London",
+  "country": "United Kingdom",
+  "system": "Underground etc",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:51",
+  "note": ""
+ },
+ {
+  "city": "Glasgow",
+  "country": "United Kingdom",
+  "system": "Subway",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:51",
+  "note": ""
+ },
+ {
+  "city": "Newcastle",
+  "country": "United Kingdom",
+  "system": "Tyne and Wear Metro",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:51",
+  "note": ""
+ },
+ {
+  "city": "Manchester",
+  "country": "United Kingdom",
+  "system": "Metrolink",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:51",
+  "note": ""
+ },
+ {
+  "city": "Birmingham",
+  "country": "United Kingdom",
+  "system": "West Midlands Metro",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:51",
+  "note": ""
+ },
+ {
+  "city": "Edinburgh",
+  "country": "United Kingdom",
+  "system": "Trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:51",
+  "note": ""
+ },
+ {
+  "city": "Sheffield",
+  "country": "United Kingdom",
+  "system": "Supertram",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:51",
+  "note": ""
+ },
+ {
+  "city": "Nottingham",
+  "country": "United Kingdom",
+  "system": "NET",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:51",
+  "note": ""
+ },
+ {
+  "city": "Blackpool",
+  "country": "United Kingdom",
+  "system": "Tramway",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:51",
+  "note": ""
+ },
+ {
+  "city": "Liverpool",
+  "country": "United Kingdom",
+  "system": "Merseyrail (commuter)",
+  "status": "NEVER RECORDED",
+  "ptr": "-",
+  "note": "positive: FSA register, UK six shared steps (ML:51, 565)"
+ },
+ {
+  "city": "Seaton",
+  "country": "United Kingdom",
+  "system": "Heritage tram",
+  "status": "OUT OF MODE (heritage/tourist, suspended, guided bus or not open)",
+  "ptr": "-",
+  "note": "heritage tram"
+ },
+ {
+  "city": "Wirral (Birkenhead)",
+  "country": "United Kingdom",
+  "system": "Heritage tram",
+  "status": "OUT OF MODE (heritage/tourist, suspended, guided bus or not open)",
+  "ptr": "-",
+  "note": "heritage tram"
+ },
+ {
+  "city": "Douglas (Isle of Man)",
+  "country": "Isle of Man",
+  "system": "Horse tram, Manx Electric",
+  "status": "OUT OF MODE (heritage/tourist, suspended, guided bus or not open)",
+  "ptr": "-",
+  "note": "horse tram / Manx Electric, crown dependency"
+ },
+ {
+  "city": "Dublin",
+  "country": "Ireland",
+  "system": "Luas + DART",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:50",
+  "note": ""
+ },
+ {
+  "city": "Luxembourg",
+  "country": "Luxembourg",
+  "system": "Tram (2017)",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:483",
+  "note": "no premises register"
+ },
+ {
+  "city": "Minsk",
+  "country": "Belarus",
+  "system": "Metro + trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Vitebsk",
+  "country": "Belarus",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Mazyr",
+  "country": "Belarus",
+  "system": "Tram",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Navapolatsk",
+  "country": "Belarus",
+  "system": "Tram",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Kyiv",
+  "country": "Ukraine",
+  "system": "Metro + trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 3218",
+  "note": ""
+ },
+ {
+  "city": "Kharkiv",
+  "country": "Ukraine",
+  "system": "Metro + trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 3218",
+  "note": ""
+ },
+ {
+  "city": "Dnipro",
+  "country": "Ukraine",
+  "system": "Metro + trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 3218",
+  "note": ""
+ },
+ {
+  "city": "Kryvyi Rih",
+  "country": "Ukraine",
+  "system": "Metrotram + trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 3218",
+  "note": ""
+ },
+ {
+  "city": "Lviv",
+  "country": "Ukraine",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 3218",
+  "note": ""
+ },
+ {
+  "city": "Odesa",
+  "country": "Ukraine",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 3218",
+  "note": ""
+ },
+ {
+  "city": "Zaporizhzhia",
+  "country": "Ukraine",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 3218",
+  "note": ""
+ },
+ {
+  "city": "Mykolaiv",
+  "country": "Ukraine",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 3218",
+  "note": ""
+ },
+ {
+  "city": "Vinnytsia",
+  "country": "Ukraine",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 3218",
+  "note": ""
+ },
+ {
+  "city": "Zhytomyr",
+  "country": "Ukraine",
+  "system": "Tram",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 3218",
+  "note": ""
+ },
+ {
+  "city": "Konotop",
+  "country": "Ukraine",
+  "system": "Tram",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 3218",
+  "note": ""
+ },
+ {
+  "city": "Kamianske",
+  "country": "Ukraine",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 3218",
+  "note": ""
+ },
+ {
+  "city": "Donetsk",
+  "country": "Ukraine (occupied)",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 3218",
+  "note": ""
+ },
+ {
+  "city": "Horlivka",
+  "country": "Ukraine (occupied)",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 3218",
+  "note": ""
+ },
+ {
+  "city": "Yenakiieve",
+  "country": "Ukraine (occupied)",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 3218",
+  "note": ""
+ },
+ {
+  "city": "Druzhkivka",
+  "country": "Ukraine",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 3218",
+  "note": ""
+ },
+ {
+  "city": "Mariupol",
+  "country": "Ukraine (occupied)",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 3218",
+  "note": ""
+ },
+ {
+  "city": "Yevpatoria",
+  "country": "Ukraine (Crimea, occupied)",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 3218",
+  "note": ""
+ },
+ {
+  "city": "Moscow",
+  "country": "Russia",
+  "system": "Metro + MCC + trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Saint Petersburg",
+  "country": "Russia",
+  "system": "Metro + trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Nizhny Novgorod",
+  "country": "Russia",
+  "system": "Metro + trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Novosibirsk",
+  "country": "Russia",
+  "system": "Metro + trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Samara",
+  "country": "Russia",
+  "system": "Metro + trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Yekaterinburg",
+  "country": "Russia",
+  "system": "Metro + trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Kazan",
+  "country": "Russia",
+  "system": "Metro + trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Volgograd",
+  "country": "Russia",
+  "system": "Metrotram + trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Achinsk",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Angarsk",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Barnaul",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Biysk",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Chelyabinsk",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Cherepovets",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Cheryomushki",
+  "country": "Russia",
+  "system": "Tram",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Irkutsk",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Izhevsk",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Kaliningrad",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Kemerovo",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Khabarovsk",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Kolomna",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Krasnodar",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Krasnoturyinsk",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Krasnoyarsk",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Kursk",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Lipetsk",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Magnitogorsk",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Naberezhnye Chelny",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Nizhnekamsk",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Nizhny Tagil",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Novocherkassk",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Novokuznetsk",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Novotroitsk",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Omsk",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Orsk",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Oryol",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Osinniki",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Perm",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Prokopyevsk",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Pyatigorsk",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Rostov-on-Don",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Salavat",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Saratov",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Smolensk",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Stary Oskol",
+  "country": "Russia",
+  "system": "Light rail",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Taganrog",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Tomsk",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Tula",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Ufa",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Ulan-Ude",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Ulyanovsk",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Usolye-Sibirskoye",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Vladikavkaz",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Vladivostok",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Volchansk",
+  "country": "Russia",
+  "system": "Tram",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Volzhsky",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Yaroslavl",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Zlatoust",
+  "country": "Russia",
+  "system": "Trams",
+  "status": "COUNTRY RULED OUT (policy: war/sanctions)",
+  "ptr": "city_master_list.md:406; global_country_shortlist.md:2104, 2113",
+  "note": ""
+ },
+ {
+  "city": "Istanbul",
+  "country": "Türkiye",
+  "system": "Metro + trams + Marmaray",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:387",
+  "note": "districts license; no list"
+ },
+ {
+  "city": "Ankara",
+  "country": "Türkiye",
+  "system": "Metro + Ankaray",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:388",
+  "note": "Istanbul's shape"
+ },
+ {
+  "city": "İzmir",
+  "country": "Türkiye",
+  "system": "Metro + trams + İZBAN",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "country row: districts license shops, no lists (ML:554; Istanbul/Ankara ML:387-388)"
+ },
+ {
+  "city": "Bursa",
+  "country": "Türkiye",
+  "system": "Bursaray + trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "country row: districts license shops, no lists (ML:554; Istanbul/Ankara ML:387-388)"
+ },
+ {
+  "city": "Adana",
+  "country": "Türkiye",
+  "system": "Metro",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "country row: districts license shops, no lists (ML:554; Istanbul/Ankara ML:387-388)"
+ },
+ {
+  "city": "Antalya",
+  "country": "Türkiye",
+  "system": "AntRay light rail + trams",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "country row: districts license shops, no lists (ML:554; Istanbul/Ankara ML:387-388)"
+ },
+ {
+  "city": "Eskişehir",
+  "country": "Türkiye",
+  "system": "EsTram",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "country row: districts license shops, no lists (ML:554; Istanbul/Ankara ML:387-388)"
+ },
+ {
+  "city": "Gaziantep",
+  "country": "Türkiye",
+  "system": "Light rail + Gaziray",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "country row: districts license shops, no lists (ML:554; Istanbul/Ankara ML:387-388)"
+ },
+ {
+  "city": "Kocaeli (İzmit)",
+  "country": "Türkiye",
+  "system": "Akçaray tram",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "country row: districts license shops, no lists (ML:554; Istanbul/Ankara ML:387-388)"
+ },
+ {
+  "city": "Kayseri",
+  "country": "Türkiye",
+  "system": "Kayseray",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "country row: districts license shops, no lists (ML:554; Istanbul/Ankara ML:387-388)"
+ },
+ {
+  "city": "Konya",
+  "country": "Türkiye",
+  "system": "Tram",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "country row: districts license shops, no lists (ML:554; Istanbul/Ankara ML:387-388)"
+ },
+ {
+  "city": "Samsun",
+  "country": "Türkiye",
+  "system": "Samulaş light rail",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "country row: districts license shops, no lists (ML:554; Istanbul/Ankara ML:387-388)"
+ },
+ {
+  "city": "Gebze",
+  "country": "Türkiye",
+  "system": "Gebze–Darıca metro (u/c)",
+  "status": "OUT OF MODE (heritage/tourist, suspended, guided bus or not open)",
+  "ptr": "-",
+  "note": "Gebze-Darıca metro: phase 1 expected by end of 2026, not open"
+ },
+ {
+  "city": "Mersin",
+  "country": "Türkiye",
+  "system": "Metro (u/c)",
+  "status": "OUT OF MODE (heritage/tourist, suspended, guided bus or not open)",
+  "ptr": "-",
+  "note": "metro under construction"
+ },
+ {
+  "city": "Tbilisi",
+  "country": "Georgia",
+  "system": "Metro",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:59",
+  "note": ""
+ },
+ {
+  "city": "Baku",
+  "country": "Azerbaijan",
+  "system": "Metro",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:283",
+  "note": "no publishable premises list"
+ },
+ {
+  "city": "Yerevan",
+  "country": "Armenia",
+  "system": "Metro",
+  "status": "NEVER SCREENED (named only in a feed or catalogue listing)",
+  "ptr": "app/cities.py:3972",
+  "note": "named only in a region comment; staging drafts list it as a gap (decisions_drafts/staging.md:18)"
+ },
+ {
+  "city": "Paris",
+  "country": "France",
+  "system": "Métro, RER, trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:50, 52",
+  "note": ""
+ },
+ {
+  "city": "Marseille",
+  "country": "France",
+  "system": "Métro + trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:50, 52",
+  "note": ""
+ },
+ {
+  "city": "Toulouse",
+  "country": "France",
+  "system": "Métro + trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:50, 52",
+  "note": ""
+ },
+ {
+  "city": "Lille",
+  "country": "France",
+  "system": "VAL + trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:50, 52",
+  "note": ""
+ },
+ {
+  "city": "Rennes",
+  "country": "France",
+  "system": "VAL",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:50, 52",
+  "note": ""
+ },
+ {
+  "city": "Lyon",
+  "country": "France",
+  "system": "Métro + trams",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:293",
+  "note": "terms (account, indemnity, marks clause)"
+ },
+ {
+  "city": "Clermont-Ferrand",
+  "country": "France",
+  "system": "Tram (Translohr, being converted)",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:323",
+  "note": "Translohr, not rail"
+ },
+ {
+  "city": "Aubagne",
+  "country": "France",
+  "system": "Tram",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:322",
+  "note": "too thin"
+ },
+ {
+  "city": "Annemasse",
+  "country": "France",
+  "system": "Geneva tram line 17",
+  "status": "RECORDED, NO ROW (add-on, suburb or sibling-row note)",
+  "ptr": "city_master_list.md:324",
+  "note": "named in Saint-Louis's discard row as the same shape (1 stop of Geneva 17)"
+ },
+ {
+  "city": "Saint-Louis (Haut-Rhin)",
+  "country": "France",
+  "system": "Basel tram line 3",
+  "status": "DISCARDED",
+  "ptr": "city_master_list.md:324",
+  "note": "4 stops of a Swiss line"
+ },
+ {
+  "city": "Kehl",
+  "country": "Germany",
+  "system": "Strasbourg tram D",
+  "status": "RECORDED, NO ROW (add-on, suburb or sibling-row note)",
+  "ptr": "tram_city_list.md:243",
+  "note": "Strasbourg tram D, 3 stops in Kehl (screen note)"
+ },
+ {
+  "city": "Weil am Rhein",
+  "country": "Germany",
+  "system": "Basel tram line 8",
+  "status": "NEVER RECORDED (sibling/country verdict only)",
+  "ptr": "-",
+  "note": "satellite; sibling pattern: six city negatives (Munich, Frankfurt, Cologne, Hamburg, Dresden, Leipzig; ML:572) beside Berlin built on IHK Berlin"
+ },
+ {
+  "city": "Montpellier",
+  "country": "France",
+  "system": "Trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:52",
+  "note": ""
+ },
+ {
+  "city": "Nice",
+  "country": "France",
+  "system": "Trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:52",
+  "note": ""
+ },
+ {
+  "city": "Strasbourg",
+  "country": "France",
+  "system": "Trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:52",
+  "note": ""
+ },
+ {
+  "city": "Bordeaux",
+  "country": "France",
+  "system": "Trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:52",
+  "note": ""
+ },
+ {
+  "city": "Nantes",
+  "country": "France",
+  "system": "Trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:52",
+  "note": ""
+ },
+ {
+  "city": "Grenoble",
+  "country": "France",
+  "system": "Trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:52",
+  "note": ""
+ },
+ {
+  "city": "Rouen",
+  "country": "France",
+  "system": "Trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:52",
+  "note": ""
+ },
+ {
+  "city": "Saint-Étienne",
+  "country": "France",
+  "system": "Trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:52",
+  "note": ""
+ },
+ {
+  "city": "Angers",
+  "country": "France",
+  "system": "Trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:52",
+  "note": ""
+ },
+ {
+  "city": "Dijon",
+  "country": "France",
+  "system": "Trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:52",
+  "note": ""
+ },
+ {
+  "city": "Tours",
+  "country": "France",
+  "system": "Trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:52",
+  "note": ""
+ },
+ {
+  "city": "Le Havre",
+  "country": "France",
+  "system": "Trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:52",
+  "note": ""
+ },
+ {
+  "city": "Mulhouse",
+  "country": "France",
+  "system": "Trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:52",
+  "note": ""
+ },
+ {
+  "city": "Reims",
+  "country": "France",
+  "system": "Trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:52",
+  "note": ""
+ },
+ {
+  "city": "Caen",
+  "country": "France",
+  "system": "Trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:52",
+  "note": ""
+ },
+ {
+  "city": "Brest",
+  "country": "France",
+  "system": "Trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:52",
+  "note": ""
+ },
+ {
+  "city": "Besançon",
+  "country": "France",
+  "system": "Trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:52",
+  "note": ""
+ },
+ {
+  "city": "Orléans",
+  "country": "France",
+  "system": "Trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:52",
+  "note": ""
+ },
+ {
+  "city": "Le Mans",
+  "country": "France",
+  "system": "Trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:52",
+  "note": ""
+ },
+ {
+  "city": "Avignon",
+  "country": "France",
+  "system": "Trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:52",
+  "note": ""
+ },
+ {
+  "city": "Valenciennes",
+  "country": "France",
+  "system": "Trams",
+  "status": "BUILT",
+  "ptr": "city_master_list.md:52",
+  "note": ""
+ }
+]
