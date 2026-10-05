@@ -112,6 +112,16 @@ the owner reminded Kobe's build that it exists for the cities after it.
     2026-10-02).
   - The first city of the batch makes this change, and it lands at review
     time with that city's `app/` diff.
+- **Wave 4 retags Japan** (owner, 2026-10-04): the first wave-4 city to land
+  replaces Japan West and Japan East with the eight traditional regions,
+  Osaka Prefecture a view of its own (Hokkaido, Tohoku, Kanto, Chubu,
+  Kansai, Osaka Prefecture, Chugoku, Shikoku, Kyushu-Okinawa; Mie is
+  Kansai, so Yokkaichi moves), built cities included. Kanto, Kansai, Osaka
+  Prefecture and Chubu go into `cities.COMPETING_REGIONS` (branch
+  `overview-scale` must have landed). Measure first with
+  `scripts/stress_overview.py --scenario eight_osaka`; DECISIONS.md,
+  2026-10-04, has the numbers. Nagakute and Nisshin, Itami and Toyonaka go
+  into `KNOWN_STACKED` (accepted).
 
 ## The traps Kobe measured
 

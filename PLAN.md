@@ -31,6 +31,15 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 - [x] **San Diego, San Francisco and Los Angeles applied 2026-10-04 (owner;
   DECISIONS).** The swap meet and the parcel refresh followed the same night.
 
+- [ ] **Macro-map regions for the ranked 93 (owner, 2026-10-04; DECISIONS,
+  "Region views can compete" and "Europe West and Europe East").** Branch
+  `overview-scale` (`COMPETING_REGIONS`, empty; the staged names' widths)
+  lands at review time, with a reboot. Then, each made by the first city
+  that needs it: Japan's eight regions plus Osaka Prefecture (wave 4; the
+  `japan-city` skill); Europe West and Europe East, Latvia, Romania and
+  Hungary in the east, Czechia kept apart (the Romanian six); Brăila and
+  Galați, Nagakute and Nisshin, Itami and Toyonaka into `KNOWN_STACKED`.
+
 - [ ] São Paulo's Linha 6-Laranja stays out until full service (sentence
   OK'd); re-check when it leaves trial operation.
 
