@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**41 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**42 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-04**
 
@@ -65,6 +65,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [The full drift sweep after the night's shared changes: zero drift in all 170 cities](#2026-10-04---the-full-drift-sweep-after-the-nights-shared-changes-zero-drift-in-all-170-cities)
 - [Housing for the ranked 93 before they are built: a staged roster, a stress test of the macro map, page blocks; Japan may take more regions, the Copenhagen line one page (owner)](#2026-10-04---housing-for-the-ranked-93-before-they-are-built-a-staged-roster-a-stress-test-of-the-macro-map-page-blocks-japan-may-take-more-regions-the-copenhagen-line-one-page-owner)
 - [Region views can compete for their labels (branch overview-scale, held for review time); Japan and Europe splits measured, Eastern Europe proposed by the owner](#2026-10-04---region-views-can-compete-for-their-labels-branch-overview-scale-held-for-review-time-japan-and-europe-splits-measured-eastern-europe-proposed-by-the-owner)
+- [Europe West and Europe East by country, after a meridian test; Japan's eight regions plus Osaka Prefecture; the Copenhagen line extends Copenhagen; three stacked pairs accepted (owner)](#2026-10-04---europe-west-and-europe-east-by-country-after-a-meridian-test-japans-eight-regions-plus-osaka-prefecture-the-copenhagen-line-extends-copenhagen-three-stacked-pairs-accepted-owner)
 
 **Archived weeks** (`scripts/archive_decisions.py`), newest first:
 
@@ -1508,4 +1509,33 @@ standard rings. `coverage` full, `categories` "All three", `mode` metro,
 - **The Visuals session's notice** (2026-10-04): `visual-handoff` is no
   longer merged into master, since its history holds files now kept local;
   `docs/derived_use_licensing.md`'s pointer to that drafts file reworded.
+
+### 2026-10-04 - Europe West and Europe East by country, after a meridian test; Japan's eight regions plus Osaka Prefecture; the Copenhagen line extends Copenhagen; three stacked pairs accepted (owner)
+
+- **The owner: "instead of western europe, how about Europe West (doesn't
+  correspond with colloquial naming = less confusion when alignments are not
+  the same) also let's run more tests like drawing a vertical line broadly
+  splitting the existing european dots into two halves (based on area
+  covered not literally 50/50 on dot count, high-city-count countries would
+  skew) to see if we can get a more viable split. Otherwise current split is
+  OK. 2 yes, 3 extension, 4 accept".**
+- **The meridian test** (`stress_overview.py --split-meridian`, with and
+  without `--snap-countries`; cuts at 8, 10, 11, 12, 13 and 15 E, both halves
+  competing; numbers in `docs/scaling_thresholds.md`): every cut clears the
+  names and labels 29 to 31 of 34 pills; Latvia, Romania and Hungary as the
+  east labels 32 and keeps Brăila and Galați furthest apart (4.0 px, against
+  2.2-3.3). No cut is more viable, so the country split stands: **Europe West
+  and Europe East**, Latvia, Romania and Hungary in the east, Czechia a view
+  of its own. Made by the first of the Romanian six to land; its builder
+  re-measures with the stress test then.
+- **Japan: the eight traditional regions plus Osaka Prefecture**, made by
+  the first wave-4 city to land (the `japan-city` skill says how).
+- **The Greater Copenhagen Light Rail extends Copenhagen's own page**
+  (`regional-extension`): no dot of its own, page 202 released, the staged
+  roster down to 83, its pill width dropped from the branch.
+- **Accepted stacked pairs:** Brăila and Galați, Nagakute and Nisshin,
+  Itami and Toyonaka go into `check_macro_labels.py`'s `KNOWN_STACKED` when
+  they land, as seven pairs already are.
+- The plan item is in PLAN "Now"; nothing here changes the live site until
+  `overview-scale` lands at review time.
 

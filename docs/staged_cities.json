@@ -992,17 +992,6 @@
    "centre": "mean of 3 N02 stations"
   },
   {
-   "name": "Greater Copenhagen Light Rail",
-   "country": "Denmark",
-   "rank": 1,
-   "region": "Europe",
-   "label_tier": "minor",
-   "mode": "light_rail",
-   "lat": 55.67,
-   "lon": 12.4,
-   "centre": "approximate city centre"
-  },
-  {
    "name": "Arad",
    "country": "Romania",
    "rank": 2,

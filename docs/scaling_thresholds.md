@@ -56,7 +56,16 @@ in the local app the same evening; 125 problems estimated, 122 measured):
   a view of its own. Romania alone as a view leaves the Dutch cities
   stacked in Europe.
 - **Every split leaves:** the Copenhagen line's dot 1.3-1.7 px from
-  Copenhagen's as a page of its own, and Brăila and Galați 3.4-4.0 px apart.
+  Copenhagen's as a page of its own (it extends Copenhagen's page instead,
+  owner), and Brăila and Galați 3.4-4.0 px apart.
+- **Europe cut by a meridian instead** (owner's test: a vertical line halving
+  the area the dots cover, not their count; `--split-meridian`, with and
+  without `--snap-countries` keeping each country whole), cut at 8, 10, 11,
+  12, 13 and 15 E with both halves competing: every cut clears the names, and
+  every one labels fewer than the country split: 29 to 31 of 34 pills, against
+  32 of 34 for Latvia, Romania and Hungary as the east. The cuts near the area's midpoint (11 E) split
+  Denmark and Italy; every cut puts Brăila and Galați closer (2.2-3.3 px,
+  against 4.0), since the eastern frame widens.
 - **Hand tuning still owed at build time**, as for every city: Kyushu-Okinawa
   (Urasoe pulls the frame south: 52 problems at default offsets), Shikoku,
   Tohoku, South Asia.

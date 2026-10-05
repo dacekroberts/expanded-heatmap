@@ -151,9 +151,9 @@ notices; Mendoza, Tacoma and Liverpool (Regional), pages 193–195 and
 notices 141–143 and 153; Belgium, pages 196–201 and notices 144–152);
 Japan wave 2's 115–128, the extensions' 129–132 and lane-app's 137–140 on
 2026-10-03, and everything up to 114 on 2026-10-02. Pages reserved for the ranked
-list (2026-10-04; `docs/staged_cities.json`): the Copenhagen line 202, the
-owed-act seven 203–209, Japan wave 4 210–289, rank 4 290–299; the next free
-page outside them is 300.
+list (2026-10-04; `docs/staged_cities.json`): the owed-act seven
+203–209, Japan wave 4 210–289, rank 4 290–299; the free pages outside them
+are 202 and 300 on.
 Check D of `check_provenance.py` reads every range in that sentence and lets
 a branch skip exactly those numbers; any other gap still fails. Keep the
 ranges in that one sentence, and delete a batch's range once it lands.
