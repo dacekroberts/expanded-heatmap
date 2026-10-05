@@ -370,7 +370,14 @@ not in `docs/staged_cities.json`).
 the minor tier and Japan West; the Ibara Railway and the Sanyō Line drawn as
 cut (standing call, no stub); the Shinkansen out.
 
-**Open, each with a recommendation:**
+✅ **Both answered as recommended (owner, 2026-10-05, "5 yes, 6 yes";
+`docs/decisions_drafts/staging.md`):** MHLW sits beside the city's list in
+all three ways (own point, the partial food-shops layer, the 44 permits),
+and the closure filter drops the 151 new-law permits MHLW no longer holds.
+MHLW's 法人名 is read by the name rule (owner, 2026-10-05, the privacy
+repair handed to Cleanup): take the shared code as it lands.
+
+**Were open, each with a recommendation:**
 
 1. **MHLW beside the city's complete list: follow Matsuyama** (owner,
    2026-10-02, "approve all recommendations"). (a) **Its own point** where

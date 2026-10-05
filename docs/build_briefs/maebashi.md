@@ -338,7 +338,14 @@ licence reads (owner, 2026-10-04); the standing Japanese calls above; the
 minor label tier and the Japan sub-region (owner, 2026-10-02); `metro` by the
 owner's mode rule of 2026-10-02 (staging's reading, as Kurume's).
 
-**Open:**
+✅ **Both answered (owner, 2026-10-05, "4 yes ... 9 yes";
+`docs/decisions_drafts/staging.md`):** staging retries BODIK after the rate
+block lapses (about a day from 2026-10-05) and runs the two licence reads
+then; MHLW's 法人名 is read by the name rule for every MHLW city, a shared
+repair handed to Cleanup, so this build takes the shared code as it lands
+and needs no opt-in of its own.
+
+**Were open:**
 
 1. 🚨 **BODIK refuses this machine (HTTP 403, nginx), so half the food leg
    and the whole personal-services bucket are unmeasured.** Recommendation:
