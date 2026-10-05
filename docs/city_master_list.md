@@ -299,6 +299,8 @@ Band R row.
 
 ## Pre-verdicts — precedent, not probed (not counted; owner, 2026-10-04)
 
+**The listing is closed as of 2026-10-04 (owner).** Every city with a metro, light rail or tram (and Japan's cities on JR or private rail) has a verdict, a pre-verdict below or a ranked slot; do not restart the coverage sweep. A city with no coverage can come back only four ways: a commuter-rail overhaul (commuter-only cities outside Japan were never listed), a line opening after 2026-10-03, a miss in the coarse name re-match (the batch probe re-reads each group), or a hold lifting (Russia, Ukraine, Belarus, Iran, North Korea, Myanmar, China).
+
 **Approved by the owner on 2026-10-04** with the remainder count: the rail
 cities the 2026-10-03 coverage sweep found with no verdict, re-matched
 against this list on 2026-10-04. **These rows are pointers, not verdicts.** A

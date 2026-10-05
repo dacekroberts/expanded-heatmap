@@ -4,6 +4,16 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - The rail-city listing closed (owner)
+
+- **Staging asked whether the count settles fully new probes; the owner:
+  "yes add it".** Every city with a metro, light rail or tram (and Japan's
+  JR and private-rail cities) has a verdict, a pre-verdict or a ranked slot,
+  so the coverage sweep is not restarted. The master list's pre-verdict
+  section names the four ways a city with no coverage can come back: a
+  commuter-rail overhaul, a line opening after 2026-10-03, a miss in the
+  coarse name re-match, or a hold lifting.
+
 ### 2026-10-04 - The ranked unscreened 1-4 is the next action item, held for cost (owner)
 
 - **The owner: "1-4 in most likely to succeed should be the next action
