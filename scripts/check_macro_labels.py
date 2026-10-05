@@ -50,6 +50,7 @@ if hasattr(sys.stdout, "reconfigure"):   # "Montréal" is unprintable under cp12
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "app"))
 from cities import (  # noqa: E402
     CITIES,
+    COMPETING_REGIONS,
     DEFAULT_FRAME,
     DEFAULT_REGION,
     REGION_MEMBERS,
@@ -70,6 +71,9 @@ from label_competition import TEXT_WIDTH, compete  # noqa: E402
 # labels the winners of app/label_competition.py's competition at their
 # winning offsets, so this check scores exactly those. Filled in by main().
 GLOBAL_WON = {}
+# The same for each region in cities.COMPETING_REGIONS (2026-10-04), keyed by
+# region: its labelled cities compete at its own view.
+REGION_WON = {}
 
 PILL_PAD_X = 5            # background_padding=[5, 2]
 PILL_H = 18.0             # measured from rendered pixels, 14 px text
@@ -207,6 +211,8 @@ def scored_labels(region, clat, clon, zoom):
     def labelled(c):
         return c.get("label_tier") != "minor" or c.get("region") == region["name"]
 
+    if region["name"] in REGION_WON:
+        return set(REGION_WON[region["name"]])
     if region["name"] != DEFAULT_REGION:
         # Plus another region's anchors where this view labels them (East Asia
         # names Seoul) - REGION_LABELS_ALSO in cities.py, as Overview.py reads it.
@@ -236,6 +242,8 @@ def pill(city, x, y, region_name=None):
     off = (city.get("label_offset_by_region") or {}).get(region_name)
     if region_name == DEFAULT_REGION and city["name"] in GLOBAL_WON:
         off = GLOBAL_WON[city["name"]]
+    if city["name"] in REGION_WON.get(region_name, {}):
+        off = REGION_WON[region_name][city["name"]]
     anchor, dx, dy = tuple(off or city.get("label_offset") or DEFAULT_OFFSET)
     try:
         w = TEXT_WIDTH[city["name"]]
@@ -354,9 +362,16 @@ def main():
     facts = __import__("json").loads((pathlib.Path(__file__).resolve().parents[1] / "app"
                                        / "macro_facts.json").read_text(encoding="utf-8"))
     GLOBAL_WON.clear()
+    REGION_WON.clear()
     GLOBAL_WON.update(compete(CITIES, *region_view(g), facts.get("storefronts", {}), strict=True))
     for region in REGIONS:
         clat, clon, zoom = region_view(region)
+        if region["name"] in COMPETING_REGIONS:
+            # Entrants first (the hand rule's labelled set), then the winners
+            # replace them, exactly as Overview.py runs it.
+            REGION_WON[region["name"]] = compete(
+                CITIES, clat, clon, zoom, facts.get("storefronts", {}), strict=True,
+                entrants=scored_labels(region, clat, clon, zoom), region=region["name"])
         for vw in widths:
             cw = CANVAS.get(vw, vw)
             # MARKERS ARE EVERY CITY; LABELS ARE NOT. Overview.py draws the whole
@@ -406,9 +421,12 @@ def main():
                 # measured as BOTH rendering normally. Grazing contact is listed
                 # under `near` instead.
                 for other, ox, oy, _ in markers:
-                    # In Global a non-winner's dot is drawn faded UNDER the
-                    # pills by design (Overview.py); only a winner's counts.
-                    if region["name"] == DEFAULT_REGION and other["name"] not in GLOBAL_WON:
+                    # In Global and a competing region a non-winner's dot is
+                    # drawn faded UNDER the pills by design (Overview.py);
+                    # only a winner's counts.
+                    won = (GLOBAL_WON if region["name"] == DEFAULT_REGION
+                           else REGION_WON.get(region["name"]))
+                    if won is not None and other["name"] not in won:
                         continue
                     who = ("its OWN marker" if other is city
                            else f"{other['name']}'s marker")
