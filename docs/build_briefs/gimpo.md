@@ -8,14 +8,16 @@ satellites' brief left it out on 2026-09-29 ("the smaller 시군", and the
 Goldline screened as an edge network on 2026-09-28, not re-measured); the
 2026-10-04 screen answered the edge question with the timetable. Step 0
 screened 2026-10-04 (staging probe; counts only, nothing downloaded). Brief
-written 2026-10-04. Run `python scripts/brief_check.py gimpo` before writing
+written 2026-10-04; corrected the same night (the 시군구코드 filter is on
+master, code and name measured to agree). Run `python scripts/brief_check.py gimpo` before writing
 any code.
 
 Korean city: read `cjk-text` first, then Gyeonggi's and Gimhae's briefs
 (`docs/build_briefs/gyeonggi.md`, `gimhae.md`). The business leg is
 Incheon's source and module; the rail is one light metro, as Uijeongbu's U
 Line and Yongin's EverLine. **Copy a Gyeonggi satellite's pipeline**
-(Uijeongbu's: one 시 inside 경기도, a light metro as its main line).
+(Uijeongbu's: one 시 inside 경기도, a light metro as its main line), with
+Gimhae's code-keyed register config.
 
 ---
 
@@ -66,14 +68,19 @@ row without a point.
 - The province portal's count on 2026-09-28 was 11,453 (the satellites'
   brief, with cafés, takeaway and barbers out); SEMAS supersedes it, as for
   every satellite.
-- **Config:** `SEMAS_SIDO = "경기도"` and the code `41570`. **Key on the
-  code.** The `sigungu_codes` filter is on the Korea build's branch
-  `korea-sweep-build` (commit 8f0471c9, "korea_sbiz: a 시군구코드 filter, zero
-  drift on the ten built SEMAS cities"), landing at review time. **A build
-  waits for it to land, or carries that commit** and drift-checks the built
-  SEMAS cities; never a second copy of the filter. The 시군구명 prefix
-  `("김포시",)` is not measured against the code; the filter asserts that the
-  code and the name agree.
+- **Config, keyed on the code, as Gimhae's** (`pipeline/gimhae/config.py`):
+  `SEMAS_SIDO = "경기도"`, `SEMAS_SIGUNGU = None`,
+  `SEMAS_SIGUNGU_CODES = ("41570",)`, and step 2 passes
+  `sigungu_codes=config.SEMAS_SIGUNGU_CODES` to `storefronts()`. The filter
+  is on master (commit 8f0471c9, "korea_sbiz: a 시군구코드 filter, zero drift
+  on the ten built SEMAS cities"; Daejeon, Gwangju and Gimhae build on it):
+  nothing to wait for or carry, and never a second copy of the filter.
+- **Code and name agree** (measured 2026-10-04 by staging through
+  `korea_sbiz.province("경기도")`, edition 2026-06-30, `heavy_job.py` label
+  `semas-city-screen`): `41570` and the 시군구명 prefix `김포시` pick the
+  **identical 25,160 rows**; the code carries only the name 김포시 and the
+  name only the code 41570. The prefix is redundant, so leave it `None`;
+  `storefronts()` exits on an unknown code.
 
 ### Privacy
 

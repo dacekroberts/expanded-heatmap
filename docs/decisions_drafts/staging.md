@@ -4,6 +4,42 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-04 - Band A's Japanese briefs: Step 0 downloads and licence reads approved; the four briefed cities' build held; the Korean rows corrected (owner)
+
+- **The owner: "1 yes, 2 yes, 3 hold, fix the Korean rows"**, on staging's
+  calls of the night.
+  1. **Downloads for the Maebashi, Fukuyama and Sagamihara briefs**, each
+     from its publisher's own host: Maebashi's BODIK `102016_eiseikensa01`
+     and `102016_eiseikensa02` with the monthly new and closed files,
+     Fukuyama's CKAN `licensed_food` and `licensed_env`, Sagamihara's four
+     生活衛生課 zips, MHLW's file for each city's code, and MLIT's address
+     blocks for each prefecture. One background agent per city; BODIK's calls
+     spaced (it answered 403 to wave 3's probes on 2026-10-04).
+  2. **Licence reads for Maebashi's and Fukuyama's sources** (no row in
+     `docs/data_sources/japan.md`), one `licence-read` agent per source.
+  3. **Held:** a build session for Gimpo, Siheung, Geneva and Thessaloniki
+     (their briefs pass 20/20), while new builds stay paused for the week
+     (owner, 2026-10-04).
+- **The Korean rows:** the master list still called Daejeon, Gwangju and
+  Gimhae "built on `korea-sweep-build`, for the owner's review"; they landed
+  2026-10-04 (`docs/session_roles.md`), and the rows now say so.
+
+### 2026-10-04 - Gimpo's and Siheung's briefs corrected: the 시군구코드 filter is on master, each code measured against its name
+
+- **The owner's start instruction to the new staging session:** "Correct
+  Gimpo's and Siheung's briefs first, since the district-code filter they
+  wait on has landed (8f0471c9)."
+- **Measured** (staging, through `korea_sbiz.province("경기도")`, edition
+  2026-06-30, `heavy_job.py` label `semas-city-screen`, peak 0.33 GB): code
+  **41570** and the prefix 김포시 pick the identical **25,160** rows; code
+  **41390** and the prefix 시흥시 the identical **25,119**. Each code carries
+  one name and each name one code. Both counts equal the screen's.
+- **The correction:** both briefs now configure the register as Gimhae does
+  (`SEMAS_SIGUNGU = None`, `SEMAS_SIGUNGU_CODES` one code) and drop the
+  "waits for it to land, or carries that commit" condition. The
+  `korea-city` skill's per-city sheet says the same. `brief_check.py gimpo
+  siheung geneva thessaloniki`: 20/20 claims hold.
+
 ### 2026-10-04 - Staging's tools for the mass development: a probe agent, four skills, a push script; the handoff rewritten (owner)
 
 - **The owner: "yes 1-6 and send the messages in 7, 8 and 9 can be passed on
