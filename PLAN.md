@@ -29,15 +29,7 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   carry-overs"): the deli count to be confirmed by the owner before the push.
 
 - [x] **San Diego, San Francisco and Los Angeles applied 2026-10-04 (owner;
-  DECISIONS).** Open from it: San Diego's swap-meet stalls (72-113 non-food
-  pins at one swap meet; R1 covers food stalls only), an owner call; and
-  re-running `pipeline/san_diego/fetch_parcels.py` so the 89 untested
-  person-like sole proprietorships can be home-tested and the real
-  businesses among them return (about 20 minutes against SANDAG).
-
-- [ ] **Move San Francisco's, Boston's and Philadelphia's thinning variants
-  into `pipeline/stations.py` `thin()`** with Hong Kong's and Riga's (owner,
-  2026-10-04), each with its own drift measurement; after the Japan run.
+  DECISIONS).** The swap meet and the parcel refresh followed the same night.
 
 - [ ] São Paulo's Linha 6-Laranja stays out until full service (sentence
   OK'd); re-check when it leaves trial operation.
@@ -86,12 +78,6 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   - **Sheffield's business-rates list**, a later second bucket (owner,
     2026-10-01): a licence read, an address join and a call on "Shop And
     Premises".
-
-- [ ] **Port Hong Kong's Light Rail thinning and Riga's inline loop to
-  `pipeline/stations.py` `thin()`** (owner, 2026-09-28). Both measure in
-  haversine; each port gets its own drift measurement first. Pipeline only,
-  on a branch for review time. San Francisco, Boston and Philadelphia keep
-  their own variant until the owner decides.
 
 - [ ] ⏸ **Per-city restriction disclosures on every city's page (owner,
   2026-09-28).** **Before any drafting, the owner looks over the live pages

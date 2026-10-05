@@ -18,7 +18,6 @@ Reads the cache and NEVER fetches.
 """
 import csv
 import json
-import math
 import re
 import sys
 from pathlib import Path
@@ -44,14 +43,6 @@ def need(path, what):
     if not path.exists():
         sys.exit(f"missing {path} ({what}).\nRun: python pipeline/hong_kong/fetch_sources.py files")
     return path
-
-
-def haversine_miles(a, b):
-    (la1, lo1), (la2, lo2) = a, b
-    p1, p2 = math.radians(la1), math.radians(la2)
-    h = (math.sin((p2 - p1) / 2) ** 2
-         + math.cos(p1) * math.cos(p2) * math.sin(math.radians(lo2 - lo1) / 2) ** 2)
-    return 2 * 3958.7613 * math.asin(math.sqrt(h))
 
 
 def load_osm():
@@ -146,28 +137,6 @@ def mtr_lists():
     return per
 
 
-def thin(seqs, keep_always, coords):
-    """The sub-transit-line filters on each Light Rail route's stop order."""
-    kept, cut = set(), []
-    for seq in seqs:
-        if not seq:
-            continue
-        mark = [n in keep_always for n in seq]
-        mark[0] = mark[-1] = True
-        since, last = 0.0, seq[0]
-        for i in range(1, len(seq)):
-            since += haversine_miles(coords[seq[i - 1]], coords[seq[i]])
-            if mark[i]:
-                since, last = 0.0, seq[i]
-            elif since >= config.THIN_SPACING_MILES:
-                mark[i], since, last = True, 0.0, seq[i]
-            else:
-                cut.append({"station": seq[i], "nearest_kept": last,
-                            "miles_since_kept": round(since, 3)})
-        kept |= {n for n, m in zip(seq, mark) if m}
-    return kept, [c for c in cut if c["station"] not in kept]
-
-
 def main():
     config.DATA_PROCESSED.mkdir(parents=True, exist_ok=True)
     config.OUTPUTS.mkdir(parents=True, exist_ok=True)
@@ -258,7 +227,12 @@ def main():
     coords = {r.station: (r.latitude, r.longitude) for r in stations.itertuples()}
     mtr_names = set().union(*(line_names[k] for k in config.LINE_ORDER if k != "LR"))
     lr_only = line_names["LR"] - mtr_names
-    kept_lr, cuts = thin(lr_seqs, mtr_names, coords)
+    # The shared filter, in haversine miles over (lat, lon) as this city was
+    # first measured; MTR stations are never thinned.
+    kept_lr, cuts = station_gates.thin(
+        lr_seqs, coords, spacing=config.THIN_SPACING_MILES,
+        distance=station_gates.haversine_miles, keep_always=mtr_names,
+        since_key="miles_since_kept")
     keep = mtr_names | kept_lr
     print(f"\n  Light Rail: {len(line_names['LR'])} stops ({len(line_names['LR'] & mtr_names)} are MTR "
           f"stations) -> {len(kept_lr & lr_only)} of {len(lr_only)} Light-Rail-only stops kept, "
@@ -288,7 +262,7 @@ def main():
         la, lo = coords[c["station"]]
         excluded.append({"station": c["station"], "lines": "LR",
                          # "spacing filter" is the phrase app/station_scope.py reads.
-                         "reason": f"spacing filter on the Light Rail: {c['miles_since_kept']} mi after "
+                         "reason": f"spacing filter on the Light Rail: {round(c['miles_since_kept'], 3)} mi after "
                                    f"{c['nearest_kept']}, under {config.THIN_SPACING_MILES} mi",
                          "latitude": la, "longitude": lo})
     out = pd.DataFrame(excluded, columns=["station", "lines", "reason", "latitude", "longitude"])

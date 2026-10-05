@@ -27,7 +27,6 @@ Run:  python pipeline/boston/step1_stations.py
 """
 
 import io
-import math
 import re
 import sys
 import zipfile
@@ -57,7 +56,8 @@ from pipeline.boston.config import (  # noqa: E402
     THINNED_GROUPS,
     TOWN_BOUNDARIES_GEOJSON,
 )
-from pipeline.stations import check_operator_counts  # noqa: E402
+from pipeline.stations import (  # noqa: E402
+    check_operator_counts, haversine_miles, thin_sequence)
 
 _SUFFIX = re.compile(STATION_SUFFIX_PATTERN)
 NEAR_DUPLICATE_M = 150.0
@@ -70,14 +70,6 @@ def canonical_name(stop_name: str) -> str:
         prev = raw
         raw = _SUFFIX.sub("", raw).strip()
     return STATION_NAME_ALIASES.get(raw, raw)
-
-
-def haversine_miles(lat1, lon1, lat2, lon2):
-    r = 3958.7613
-    p1, p2 = math.radians(lat1), math.radians(lat2)
-    dp, dl = p2 - p1, math.radians(lon2 - lon1)
-    a = math.sin(dp / 2) ** 2 + math.cos(p1) * math.cos(p2) * math.sin(dl / 2) ** 2
-    return 2 * r * math.asin(math.sqrt(a))
 
 
 def load(zip_path, filename, usecols=None):
@@ -111,59 +103,32 @@ def ordered_stop_sequence(shape_id, trips, stop_times, stops, parent_of, name_of
 
 
 def select_line_stations(group, ordered, interchange_names):
-    """The four filters, applied to one line's ordered sequence."""
-    n = len(ordered)
-    kept = [False] * n
-    last_kept_name = [None] * n
-
-    # Filter 1: central-subway stations are never thinned.
-    for i in range(n):
-        if ordered.iloc[i]["canonical"] in SUBWAY_STATION_NAMES:
-            kept[i] = True
-    # Filter 2: this line's own two terminals.
-    kept[0] = True
-    kept[n - 1] = True
-
-    # Filter 3: ~1 per STATION_SPACING_MILES along the real path, counted
-    # fresh from whichever stop was most recently kept by ANY filter.
-    cur_lat, cur_lon = ordered.iloc[0]["latitude"], ordered.iloc[0]["longitude"]
-    since = 0.0
-    most_recent = ordered.iloc[0]["canonical"]
-    at_exclusion = {}
-    for i in range(1, n - 1):
-        row = ordered.iloc[i]
-        since += haversine_miles(cur_lat, cur_lon, row["latitude"], row["longitude"])
-        cur_lat, cur_lon = row["latitude"], row["longitude"]
-        if kept[i]:
-            since = 0.0
-            most_recent = row["canonical"]
-            continue
-        if since >= STATION_SPACING_MILES:
-            kept[i] = True
-            since = 0.0
-            most_recent = row["canonical"]
-        else:
-            last_kept_name[i] = most_recent
-            at_exclusion[row["canonical"]] = since
-
-    # Filter 4: a stop shared by 2+ line GROUPS is force-kept.
-    for i in range(n):
-        if ordered.iloc[i]["canonical"] in interchange_names:
-            kept[i] = True
+    """The four filters, applied to one line's ordered sequence, through the
+    shared walk (pipeline/stations.py thin_sequence()). Filter 1 is
+    `keep_always` (the central subway, never thinned), filter 2 the two
+    ends, filter 3 one stop per STATION_SPACING_MILES of haversine miles
+    along the real path, counted fresh from each kept stop; filter 4 is
+    `interchange_after`: a stop shared by 2+ line GROUPS is force-kept after
+    the walk and never resets its count."""
+    names = list(ordered["canonical"])
+    kept, cuts = thin_sequence(
+        names, list(zip(ordered["latitude"], ordered["longitude"])),
+        spacing=STATION_SPACING_MILES, distance=haversine_miles,
+        keep_always=SUBWAY_STATION_NAMES, interchange=interchange_names,
+        interchange_after=True)
 
     keep_df = ordered[kept].drop_duplicates(subset="canonical")
     excluded = [{
-        "station": ordered.iloc[i]["canonical"],
+        "station": names[i],
         "line": LINE_NAMES[group][0],
         "latitude": ordered.iloc[i]["latitude"],
         "longitude": ordered.iloc[i]["longitude"],
         "reason": f"Green Line spacing filter (surface stop, under "
                   f"{STATION_SPACING_MILES} mi since the nearest kept stop)",
         "located_in": "",
-        "nearest_kept_station": last_kept_name[i],
-        "miles_since_nearest_kept": round(at_exclusion.get(
-            ordered.iloc[i]["canonical"], float("nan")), 3),
-    } for i in range(n) if not kept[i]]
+        "nearest_kept_station": nearest_kept,
+        "miles_since_nearest_kept": round(since, 3),
+    } for i, nearest_kept, since in cuts]
     return keep_df, pd.DataFrame(excluded)
 
 

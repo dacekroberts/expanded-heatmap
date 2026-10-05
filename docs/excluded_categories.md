@@ -327,18 +327,20 @@ at DFW Airport) are left out, the lines drawn to their ends. The Dallas
 Streetcar and the M-Line trolley are not drawn (owner, 2026-09-30); the Silver
 Line and the TRE are commuter rail.
 
-### San Diego - its own codes for massage parlors, cottage kitchens, kiosks and booth rentals
+### San Diego - its own codes for massage parlors, cottage kitchens, kiosks, booth rentals and swap-meet stalls
 
-San Diego's registry extends NAICS with codes of its own, and six are left
+San Diego's registry extends NAICS with codes of its own, and seven are left
 out: `812193` massage parlors (144; massage therapy, `812198`, stays), `72234`
 cottage-food operators (192, a licensed home kitchen), `81295`/`812959` kiosk
 businesses (26, ecoATM phone-recycling machines), `8129` "other personal
 services" filed at group level (569; calibration labs, waste haulers,
-remodelers), and `812114`/`812115` barber and beauty booth rentals (347). A
-booth rental is a chair rented inside someone else's shop, on the renter's own
-license; the shop's own license keeps the shop on the map. With the `81299`
+remodelers), `812114`/`812115` barber and beauty booth rentals (347), and `452999`
+swap-meet vendors (176). A booth rental is a chair rented inside someone
+else's shop, on the renter's own license; the shop's own license keeps the
+shop on the map. A swap-meet stall trades at a weekend market, not from a
+storefront. With the `81299`
 catch-all (585), caterers, mobile food and food contractors (296) and funeral
-services (19), 2,178 pins leave the map. Pet care and photofinishing stay.
+services (19), 2,354 pins leave the map. Pet care and photofinishing stay.
 
 A business counts as in San Diego when its point falls inside the city limits,
 not when its address names the city, so businesses inside the city with a La

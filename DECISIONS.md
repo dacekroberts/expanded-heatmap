@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**37 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**38 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-04**
 
@@ -61,6 +61,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [The owner's answers on the station repair: two Guadalajara interchanges merged, two Mexico City sentences approved (owner, via Cleanup)](#2026-10-04---the-owners-answers-on-the-station-repair-two-guadalajara-interchanges-merged-two-mexico-city-sentences-approved-owner-via-cleanup)
 - [Guadalajara's Ávila Camacho collapsed to one station (owner, via Staging; branch, lands with Mexico City's repair)](#2026-10-04---guadalajaras-ávila-camacho-collapsed-to-one-station-owner-via-staging-branch-lands-with-mexico-citys-repair)
 - [Mexico City's stations repaired: nine stop-only stations added, two interchanges collapsed, two shared checks that raise (branch, held for review time)](#2026-10-04---mexico-citys-stations-repaired-nine-stop-only-stations-added-two-interchanges-collapsed-two-shared-checks-that-raise-branch-held-for-review-time)
+- [San Diego's swap-meet stalls out, its parcel cache refreshed; the five thinning variants moved onto the shared thin() (owner)](#2026-10-04---san-diegos-swap-meet-stalls-out-its-parcel-cache-refreshed-the-five-thinning-variants-moved-onto-the-shared-thin-owner)
 
 **Archived weeks** (`scripts/archive_decisions.py`), newest first:
 
@@ -1410,3 +1411,28 @@ standard rings. `coverage` full, `categories` "All three", `mode` metro,
   afterwards** (`project_shared_data_junction`). Whoever lands this branch
   re-runs `pipeline/mexico_city/step1_stations.py` at merge, then the full
   drift sweep (the `pipeline/stations.py` change reaches every city).
+
+### 2026-10-04 - San Diego's swap-meet stalls out, its parcel cache refreshed; the five thinning variants moved onto the shared thin() (owner)
+
+- **The owner: "A"** to San Diego's swap meet: the register's own code
+  `452999` "SWAP MEET VENDOR" leaves the map (176 rows city-wide, 55 pins at
+  the largest swap meet; accounts there filed as ordinary retail stay, since
+  dropping by address would catch real shops on the lot). The precedent:
+  Mexico City keeps fixed premises only, and R1 drops food stalls; a weekend
+  stall is not a storefront.
+- **The parcel cache refreshed** (`fetch_parcels.py --force`; 1,989
+  person-like rows looked up, nearest parcel for 95.1%, 0 failures). The
+  untested person-like sole proprietorships left off fell from 89 to 4; 194
+  home businesses withheld by the four-condition test. Pins in rings 2,316 ->
+  2,267; `check_personal_exposure.py`: 0 at a residential unit, 323
+  person-like names (14.2%), chosen trade names.
+- **The owner: "you can move the station-thinning code now".** Hong Kong,
+  Riga, San Francisco, Boston and Philadelphia now walk `pipeline/stations.py`
+  `thin()` / `thin_sequence()`: options for a distance (one shared
+  `haversine_miles`), the cut field's name, interchanges kept after the walk
+  (`interchange_after`, so they do not reset the count) and Philadelphia's
+  branch junction (`keep_last=False`). Zero drift in all five, and in
+  Amsterdam, Rotterdam, Rome and Brussels on the default path; 268 lines
+  removed, 194 added. The full drift sweep follows the landing, as for Mexico
+  City's stricter station check.
+

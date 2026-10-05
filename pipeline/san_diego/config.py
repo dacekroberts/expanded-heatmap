@@ -147,7 +147,11 @@ RAW_CLASSIFICATION_COLUMN = "naics_code"
 #           "Washington D.C. drops "Beauty Booth" under the person-licence
 #           rule"). The shop's own 812111/812112 licence keeps the shop on the
 #           map. Measured before the change: 67 pins (58 + 9), 347 rows.
-NAICS_EXCLUDE_CODES = {"8129", "72234", "81295", "812959", "812114", "812115"}
+#   452999  "SWAP MEET VENDOR" (owner, 2026-10-04): a stall at a weekend
+#           swap meet is not a storefront, as Mexico City keeps fixed premises
+#           only and R1 drops food stalls. 176 rows city-wide, 55 pins at the
+#           largest swap meet; accounts there filed as ordinary retail stay.
+NAICS_EXCLUDE_CODES = {"8129", "72234", "81295", "812959", "812114", "812115", "452999"}
 
 # The near misses: exact matching must leave 81291 pet care and 81292
 # photofinishing classified and on the map.
