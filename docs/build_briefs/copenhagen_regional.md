@@ -336,7 +336,8 @@ Odense did; the currency rule's clock is five years.
   "Copenhagen's Metro and S-tog lines and stations and the municipal
   boundaries used to select them" (`app/components.py`): it gains the
   Letbane. A rendered string; the wording is a drafts proposal.
-- **Notices 30 and 31 name their cities** in the title, the text and
+- **The Det Centrale Virksomhedsregister and Klimadatastyrelsen notices (30,
+  31) name their cities** in the title, the text and
   `_DENMARK` ("spelled as app/cities.py spells them"): they follow the
   rename. A title such as "(Copenhagen (Regional), Aarhus, Odense)" nests
   parentheses; the form is a drafts proposal.
