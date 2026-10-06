@@ -1,8 +1,9 @@
-"""The heavy-job gate: at most three heavy jobs on the machine, each admitted
+"""The heavy-job gate: at most four heavy jobs on the machine, each admitted
 against the memory actually available (owner, 2026-09-30; three since
-2026-10-04, with no other heavy processes on the machine).
+2026-10-04; four since 2026-10-05, when the machine went from 16 GB to 32 GB).
 
-WHY A GATE, NOT A MONITOR. Every session shares one 16 GB machine. On
+WHY A GATE, NOT A MONITOR. Every session shares one machine (16 GB until
+2026-10-05, 32 GB since). On
 2026-09-28 overlapping jobs ran it out of memory and Windows closed the Claude
 app twice. A monitor polls all day and reacts after the damage; a gate is
 asked once, before the damage, by the session about to cause it. A FIXED
@@ -60,8 +61,10 @@ import psutil
 
 ROOT = Path(__file__).resolve().parents[1]
 # Two from 2026-09-30; three from 2026-10-04 (owner: "allow three heavy jobs
-# since i have no other open processes"). Memory still decides each one.
-MAX_JOBS = 3
+# since i have no other open processes"); four from 2026-10-05, when the RAM
+# went from 16 GB to 32 GB (owner: "tweak our memory gate"). The count now
+# guards the 6 physical cores more than memory; memory still decides each job.
+MAX_JOBS = 4
 MARGIN_GB = 2.0
 DEFAULT_PEAK_GB = 8.0
 BIG_PROCESS_GB = 1.5
@@ -300,8 +303,10 @@ def selftest():
     case("the same job at 5 GB reserves 0.4, so a 0.5 GB job fits in 7 GB", ok)
     ok, _, _ = decide([job(1, 0.5), job(2, 0.5)], 0.5, 12.0, {})
     case("a third job is admitted when memory allows", ok)
-    ok, why, _ = decide([job(1, 0.5), job(2, 0.5), job(3, 0.5)], 0.5, 12.0, {})
-    case("a fourth job is refused however much is free", not ok and "at most" in why)
+    ok, _, _ = decide([job(1, 0.5), job(2, 0.5), job(3, 0.5)], 0.5, 12.0, {})
+    case("a fourth job is admitted when memory allows", ok)
+    ok, why, _ = decide([job(n, 0.5) for n in range(1, MAX_JOBS + 1)], 0.5, 12.0, {})
+    case(f"job {MAX_JOBS + 1} is refused however much is free", not ok and "at most" in why)
     case("a dead pid is dropped on read", live([job(1, 1), job(2, 1)], alive=lambda p: p == 2) == [job(2, 1)])
 
     hist = [{"label": "kyoto step 2", "measured_gb": 0.30, "ended": "d1"},

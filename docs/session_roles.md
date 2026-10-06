@@ -182,15 +182,15 @@ headings too. A conflict is resolved **keep both**
 uncommitted.** `git status` in the main checkout shows this. Leave the line
 for them, or add it after they commit.
 
-## At most three heavy jobs, each admitted by the gate
+## At most four heavy jobs, each admitted by the gate
 
-Every session shares one 16 GB machine, and overlapping heavy jobs have run it
-out of memory and closed the Claude app (`#sr-heavy-jobs`, `#memory`).
-**Since 2026-10-04, three heavy jobs at most (owner, with no other heavy
-processes open on the machine), each admitted by `scripts/heavy_job.py`**
+Every session shares one machine (32 GB since 2026-10-05, 16 GB before), and
+overlapping heavy jobs have run it out of memory and closed the Claude app
+(`#sr-heavy-jobs`, `#memory`). **Since 2026-10-05, four heavy jobs at most
+(owner, after the RAM upgrade), each admitted by `scripts/heavy_job.py`**
 against the memory actually available; the memory test, not the count, is
-what usually refuses a job. If other heavy programs come back onto the
-machine, return `MAX_JOBS` to 2.
+what usually refuses a job. If refusals or a slow machine become common,
+lower `MAX_JOBS` again.
 
 - **A heavy job** is anything likely to pass 2 GB or run for minutes: a
   multi-city drift check, a full re-render, `deploy-verify`, a national or
@@ -198,7 +198,7 @@ machine, return `MAX_JOBS` to 2.
   large register (Oslo's near 5.4 GB). A streamed read is not.
 - **Run it through the gate:**
   `python scripts/heavy_job.py run --label "<city> <step>" --peak-gb <N> --session <you> -- <command>`.
-  It admits the job only if fewer than three are running and available memory,
+  It admits the job only if fewer than four are running and available memory,
   less what running jobs have yet to claim, covers the peak plus 2 GB. It
   removes the entry when the job ends and records the MEASURED peak
   (`heavy_job.py status` lists them). An unknown peak counts as 8 GB.

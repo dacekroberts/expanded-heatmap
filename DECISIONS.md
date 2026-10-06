@@ -20,11 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**43 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**44 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-05**
 
 - [MHLW's 法人名 joins the Japanese name rule: 17 cities re-run, 46 names withheld where 12 were, 12 pins on the maps changed (owner, privacy repair)](#2026-10-05---mhlws-法人名-joins-the-japanese-name-rule-17-cities-re-run-46-names-withheld-where-12-were-12-pins-on-the-maps-changed-owner-privacy-repair)
+- [The machine went from 16 GB to 32 GB: four heavy jobs at once; the Python caps and the drift check's two cities left for the owner](#2026-10-05---the-machine-went-from-16-gb-to-32-gb-four-heavy-jobs-at-once-the-python-caps-and-the-drift-checks-two-cities-left-for-the-owner)
 
 **2026-10-04**
 
@@ -1596,4 +1597,23 @@ standard rings. `coverage` full, `categories` "All three", `mode` metro,
   in `docs/privacy_verdicts.md`: publish, all 17.
 - **Landed without waiting for review time** (owner): only `outputs/` maps
   and pipeline code change, so no reboot.
+
+### 2026-10-05 - The machine went from 16 GB to 32 GB: four heavy jobs at once; the Python caps and the drift check's two cities left for the owner
+
+- **The owner: "ram has been upgraded to 32GB from 16, mhz up to 3600 from
+  3200. inform all sessions and tweak our memory gate".** Measured:
+  `heavy_job.py status` reads 31.9 GB total, 23.6 GB available with the
+  sessions open; 6 physical cores, 12 logical.
+- **`scripts/heavy_job.py` `MAX_JOBS` 3 -> 4.** Admission already reads the
+  memory available at the time, so it took the upgrade on its own; the count
+  now guards the cores more than the memory. `MARGIN_GB` stays 2.0 and an
+  unknown peak still counts as 8 GB (the per-process cap). Self-test updated
+  for the fourth job (16 of 16). `CLAUDE.md` and `docs/session_roles.md` say
+  four.
+- **Not changed, the owner's numbers:** the Python cap (8 GB a process, 12 GB
+  with its children; `scripts/python_memcap.py`) and `drift_check.py`'s
+  `MAX_JOBS = 2`. They move together: three Japanese cities at once measure
+  about 14 GB in one process tree (4.74 GB each), over the 12 GB tree cap.
+  No step needs more than 5.4 GB (Oslo's step 2, now measured 2.38 GB), so
+  the per-process cap has no reason to move.
 
