@@ -467,6 +467,15 @@ reader had already found and immediately found five more.
   backslash or backtick. A plain `grep "\.py$"` and every Windows path in this
   repository are untouched, because a guard that cries wolf gets disabled.
 
+  **Narrowed to match the hook, 2026-10-06 (owner, staging's call 94).**
+  The rule's first line forbade a backslash in ANY Bash command, while the
+  hook enforced only the intersection above, so plain `sed` and `grep`
+  escapes passed every day without harm: two city-probe agents and
+  Cleanup's own edits that day, all landed intact. A session reading the
+  rule took the gap for a broken hook. The wording now says what is
+  enforced, plus a backtick inside a double-quoted argument, which the
+  shell itself runs as a command.
+
 <a id="fetch-before-push"></a>
 ### Re-check origin/master at the push
 

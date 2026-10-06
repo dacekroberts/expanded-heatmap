@@ -175,10 +175,13 @@ a rule, not before obeying one.
   template. A source not in the brief goes to the owner first; a sentence no
   template covers is a proposal in the drafts file, flagged at review time;
   other interpretive prose is drafted in chat first.
-- **A backslash or a backtick never goes into a Bash command. Write the
-  content to a file with the Write tool and run the file.** Escapes, not
-  length, are the test; quoting the heredoc delimiter does not help.
-  `.claude/hooks/block_heredoc.py` enforces it. [#no-escapes]
+- **No backslash or backtick inside a heredoc or an inline interpreter
+  string (`python -c`, `perl -e`, `node -e`), and no backtick inside a
+  double-quoted argument: write the content to a file with the Write tool
+  and run the file.** Escapes, not length, are the test; quoting the
+  heredoc delimiter does not help. A plain `sed` or `grep` with escapes is
+  fine. `.claude/hooks/block_heredoc.py` enforces the heredoc and inline
+  cases. [#no-escapes]
 - **Once per review time, Cleanup tells Visuals and Analytics what moved**
   (`scripts/downstream_changes.py`; `docs/session_roles.md`). At most three
   build sessions at once; a branch takes master in only before its own push

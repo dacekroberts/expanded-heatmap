@@ -20,11 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**46 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**47 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-06**
 
 - [The Japanese name rule's version 2, a sign rule for bare personal names: all 34 Japanese cities re-run, 135 names withheld where 56 were in the 20 that moved, 55 pins on the maps changed (owner, privacy repair)](#2026-10-06---the-japanese-name-rules-version-2-a-sign-rule-for-bare-personal-names-all-34-japanese-cities-re-run-135-names-withheld-where-56-were-in-the-20-that-moved-55-pins-on-the-maps-changed-owner-privacy-repair)
+- [The escapes rule says what the hook enforces: no backslash or backtick in a heredoc or an inline interpreter string (owner)](#2026-10-06---the-escapes-rule-says-what-the-hook-enforces-no-backslash-or-backtick-in-a-heredoc-or-an-inline-interpreter-string-owner)
 
 **2026-10-05**
 
@@ -1693,4 +1694,22 @@ standard rings. `coverage` full, `categories` "All three", `mode` metro,
 - **Landed without waiting for review time** (owner: "Land now"); only
   `outputs/` maps and pipeline code change, so no reboot. The pages'
   name-rule bullet gains the case at review time (PLAN, proposal).
+
+### 2026-10-06 - The escapes rule says what the hook enforces: no backslash or backtick in a heredoc or an inline interpreter string (owner)
+
+- **Staging's call 94 (owner):** two city-probe agents ran plain `sed` and
+  `grep` commands with backslashes that `.claude/hooks/block_heredoc.py` did
+  not block. Cleanup's reading: the hook works as designed - it blocks only
+  a backslash or backtick COMBINED with a heredoc or a `python -c` /
+  `perl -e` / `node -e` string, the combination behind all four corruptions
+  of 2026-09-22, and lets every other escape through so Windows paths never
+  trip it. The gap was `CLAUDE.md`'s wording, which forbade a backslash in
+  any Bash command. Nothing was corrupted; Cleanup's own `sed` edits the same
+  day landed intact.
+- **The owner: "yes"** to narrowing the wording rather than widening the
+  hook. `CLAUDE.md` now says: no backslash or backtick inside a heredoc or
+  an inline interpreter string, and no backtick inside a double-quoted
+  argument (the shell runs it); a plain `sed` or `grep` with escapes is
+  fine. `docs/rule_history.md` (`#no-escapes`) records the change. The hook
+  is unchanged.
 
