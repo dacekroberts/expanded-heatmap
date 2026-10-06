@@ -4,6 +4,24 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-05 - Bremen's brief written from the cache; a Hamburg lead found in passing
+
+- **The brief** (`docs/build_briefs/bremen.md`, `brief_check.py` 4/4): every
+  count in the row reproduces (3,153 in the city by `Gemeinde`, 5,573 in the
+  region; six fields, no name, address or person field). BSAG's timetable
+  (valid 2026-08-17 to 2027-03-21) gives **164 distinct stations** on the 8
+  lines; about 10 on line 4 past Borgfeld look to be in Lilienthal (by name;
+  the build's polygon decides). GovData's record calls the survey retail "im
+  engeren Sinn", repeated every five years: the five-year rule runs to
+  2027-09-30 at the latest. Six owner calls open in the brief.
+- **Hamburg lead, not acted on:** GovData's search returned "Einzelhandel -
+  Zentrale Versorgungsbereiche (ZVB) – Hamburg"
+  (`geodienste.hamburg.de/HH_WFS_Einzelhandel_ZVB`, dl-de/by-2-0, issued
+  2026-07-11), with layers for services, restaurants and snack bars, and
+  bars. Hamburg was discarded on currency 2026-09-24 (the 2016 retail survey,
+  no other register); this layer was not among the sources measured then.
+  Put to the owner as a re-check.
+
 ### 2026-10-05 - Gelsenkirchen's brief written from the cache; a probe slip
 
 - **The brief** (`docs/build_briefs/gelsenkirchen.md`, `brief_check.py` 14/14):
