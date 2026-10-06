@@ -100,40 +100,60 @@ section when its item is done.** The older history is in
 
 ## NEXT - pick up here, in this order
 
-1. **Every Band A and Band B city has a passing brief** (fourteen, as of
-   2026-10-06), each source's licence read and every owner call answered:
-   Gimpo, Siheung, Geneva, Maebashi, Fukuyama, Sagamihara (A); Thessaloniki,
-   Shizuoka, Funabashi, Matsudo, Ichikawa, Kanazawa, Bremen, Gelsenkirchen
-   (B). **Build sessions are held** while new builds stay paused (owner,
-   2026-10-04), at most three at once when they resume. **MHLW's 法人名
-   repair landed** (Cleanup, 2026-10-05). **The Japanese name rule's version
-   2 landed** (owner, 2026-10-06: a bare personal name, surname-space-name,
-   shows its category; Cleanup, 47452fa8); staging's re-count found 0 strict
-   matches shown of 432,489 rows. The Japanese briefs build on it. A new rule from
-   2026-10-06: an urban line cut to ONE station in its city is left out,
-   two or more are drawn cut.
-2. **The ranked unscreened 1-4, the next action item, held for cost** (owner,
-   2026-10-04): the Greater Copenhagen Light Rail (about 10 municipalities,
-   `regional-extension`); Romania's six other tram cities and
-   Hódmezővásárhely (riding the owner's DSVSA and OKNYIR acts); a Japan wave
-   4 of 66 (`japan-city`'s screening section); ten low-odds cities. **The
-   batch probe that turns the 73 pre-verdicts into rows runs with it.** Wait
-   for the owner's release.
-3. **Marked extensions**, after the Band A builds: Korea's four regional
-   add-ons and Mexico City (Regional) + Ecatepec, Nezahualcóyotl, La Paz and
-   Naucalpan (the station repair has landed; the State of México download
-   waits for a brief).
-4. **The owner's browser acts, when convenient:** one OKNYIR export for
-   Budapest, Debrecen, Szeged and Miskolc; the DSVSA lists for Timișoara,
-   Iași and Cluj-Napoca; Konya's portal visit; Pune's download form.
-   Gaziantep's publisher question is catalogued, not sent.
-5. **Requests only the owner can send:** Sendai (drafted), Lisbon and Porto
+**Wave 5 ran on 2026-10-06** (owner: "We can start on the next items, i want
+to get a bunch of briefs ready for build time"): the ranked queue and all 73
+pre-verdicts now have rows; the master list stands at A 32, B 27, C 7, D 16,
+R 77, 328 discarded, 10 open gaps. Calls 46 to 170 are in
+`docs/decisions_drafts/staging.md` (three wave 5 entries). Rules made: no
+frequency floor for JR or private lines in Japan (call 46), low-frequency
+stretches drawn and named (86), the one-station rule applied as written where a
+station keeps its ring through another line (165, 167 pending), shared-code
+rules for the build (drop expired permits, a city-name-only address is not a
+premises, combined-form restaurants stay in Food service, 自動車以外 is not a
+vehicle).
+
+1. **Briefs for build time.** Passing on master: the fourteen of 2026-10-05,
+   the extensions (Seoul, Anyang, Busan, Daegu, Mexico City and Copenhagen
+   (Regional)), and 33 Japanese briefs from wave 5 (Uji, Sakura, Yachiyo,
+   Urayasu, Ichihara, Ichinomiya, Tsu, Aomori, Ōita, Iwaki, Akita, Toyonaka,
+   Fukushima, Hirakata, Mito, Fujisawa, Morioka, Amagasaki, Suita, Itami,
+   Kakogawa, Ibaraki (Osaka), Minoh, Moriguchi, Kadoma, Tama, Higashimurayama,
+   Higashiyamato, Nishitōkyō, Ageo (Regional), Sōka, Tokorozawa, Kasukabe).
+   Running at handoff: Okazaki, Neyagawa, Matsue, Gifu, Koshigaya, Kawaguchi,
+   Matsumoto, Tottori, Yamagata, Yao, Takatsuki, Kure's measurement, and
+   Fujisawa's official count. Not yet briefed: Fuji (its Shizuoka Prefecture
+   lists' download not yet named in an approval). **Build sessions stay held**
+   (new builds paused, owner 2026-10-04), three at a time when they resume;
+   each brief's open calls and "for the build" shared-code notes go with it.
+2. **Open owner calls at handoff:** 166 (Minoh's floor as "Minoh's page",
+   294), 167 (Kadoma: subway drawn cut, monorail left out), 168 ("Ibaraki
+   (Osaka)"), 169 (MHLW's extra rows for the four Tama cities, Tokyo wards'
+   precedent), 170 (Higashiyamato `metro`), 171-173 (Saitama: add the
+   prefecture's old-law list to the food source; drop post-date permits; no
+   share sentence), and whatever the running briefs return.
+3. **Liabilities list** (owner asked, 2026-10-06): a private page of every
+   indemnity, reimbursement, own-cost and release clause, 67 entries,
+   https://claude.ai/artifact/FMZrsssfiCtydpHroo1V16 (source data:
+   staging's scratchpad `indemnities.json`; rebuild with
+   `build_liability_page.py` there). Conflicts found for Cleanup: Fukushima §4
+   (fault-based text, accepted as uncapped), Shizuoka Prefecture §6 (read two
+   ways), PDL 1.0 §1.6, `docs/licence_positions.md` predating CARTO and
+   SanGIS. Ireland's NTA indemnity stays declined (call 148).
+4. **The owner's browser acts, when convenient:** the DSVSA lists, now nine
+   Romanian cities (Timișoara, Iași, Cluj-Napoca, Arad, Galați, Ploiești,
+   Craiova, Reșița, Oradea; every county host answers 403 to scripts since
+   2026-10-06); one OKNYIR export for Budapest, Debrecen, Szeged and Miskolc;
+   Konya's portal visit; Pune's download form.
+5. **SEMAS's social-post scope**, before Seoul, Busan and Daegu (Regional)
+   build (call 71); Anyang (Regional) builds first.
+6. **Requests only the owner can send:** Sendai (drafted), Lisbon and Porto
    (drafted), Lund, Lausanne, Takasaki, Saitama, Hachiōji, Macau, Kaohsiung,
-   Richmond (BC), Arlington, Chiba.
-6. **Re-checks:** the seven open-gap cities, Stuttgart's catalogue, BODIK
-   after its rate block, and the watch-item dates in
-   `docs/recheck_calendar.md` (Tainan 18 Oct, Teresina after 25 Oct, SEMAS's
-   quarterly file 31 Oct, Birmingham Line 2 about 1 Nov, Zurich 13 Dec).
+   Richmond (BC), Arlington, Chiba; wave 5 added Machida, Isesaki, Ōta,
+   Tsukuba, Kōriyama, Kawagoe, Asahikawa, Kamakura, Yamato, Kōfu, Atsugi.
+7. **Re-checks:** the ten open-gap cities (Perugia, Faridabad, Howrah new),
+   Stuttgart's catalogue, the five untouched countries, and the watch-item
+   dates in `docs/recheck_calendar.md` (Tainan 18 Oct, Teresina after 25 Oct,
+   SEMAS's quarterly file 31 Oct, Birmingham Line 2 about 1 Nov, Zurich 13 Dec).
 
 ## Skills to write at the next build in a country
 
@@ -157,11 +177,12 @@ section when its item is done.** The older history is in
 
 ## The two private pages
 
-- **City master list**, version 15: https://claude.ai/artifact/LTzi7Vj5emzHnb3zAZy4Vn
-- **Country census**, version 15: https://claude.ai/artifact/CKCadsYtUhbWwWKzV9sDeD
+- **City master list**, version 16: https://claude.ai/artifact/LTzi7Vj5emzHnb3zAZy4Vn
+- **Country census**, version 16: https://claude.ai/artifact/CKCadsYtUhbWwWKzV9sDeD
 - How to update both: `scripts/staging_artifacts/README.md`. The published
   page is the source; the master list wins when they disagree. Master-list
   republishes in chat use the banded format (the owner's memory).
+- **Accepted liabilities** (2026-10-06): https://claude.ai/artifact/FMZrsssfiCtydpHroo1V16
 - `docs/licence_positions.md` has its own private page (version 2):
   https://claude.ai/artifact/JZoMFPgDZvbWEkyffuWWC5
 
