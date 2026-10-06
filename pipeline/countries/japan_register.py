@@ -920,10 +920,38 @@ def name_is_operator(row, rules=()):
     operator's name is not returned (owner 2026-09-27, see the docstring).
     A company operator is never an individual: KYOTO_CORP's markers say so.
     A rebuilt register (Kyoto's) carries the answer itself, never the name."""
+    name = next((row[c] for c in NAME_COLS if (row.get(c) or "").strip()), "")
+    if bare_personal_name(name):
+        return True
     if "name_is_operator" in row:
         return bool(row["name_is_operator"])
-    name = next((row[c] for c in NAME_COLS if (row.get(c) or "").strip()), "")
     return same_person(name, (row.get(c) for c in OPERATOR_COLS), "coop" in rules)
+
+
+# THE SIGN RULE, the name rule's version 2 (owner, 2026-10-06; v1 2026-09-27,
+# 法人名 added 2026-10-05): a trade name written as a bare personal name - a
+# common surname, a space (full-width or half-width), then 1 to 3 kanji or
+# hiragana, nothing else - is withheld whatever the operator column holds.
+# Liège's and Brussels' sign rule (Gelsenkirchen's call 15) adapted to
+# Japanese. Staging measured 78 such shown rows in 22 of the 34 built cities
+# (432,489 rows). The same shape WITHOUT the space is not used: it matched 523
+# rows, mostly shop names (DECISIONS 2026-10-06).
+BARE_SURNAMES = tuple(sorted(set("""
+佐藤 鈴木 高橋 田中 伊藤 渡辺 渡邊 山本 中村 小林 加藤 吉田 山田 佐々木 山口 松本 井上 木村 林 斎藤 斉藤 清水 山崎
+森 池田 橋本 阿部 石川 山下 中島 石井 小川 前田 岡田 長谷川 藤田 後藤 近藤 村上 遠藤 青木 坂本 福田 太田 西村 藤井
+金子 岡本 藤原 中野 三浦 原田 中川 松田 竹内 小野 田村 中山 和田 石田 森田 上田 原 内田 柴田 酒井 宮崎 横山 高木 安藤
+宮本 大野 小島 谷口 工藤 今井 高田 丸山 増田 杉山 村田 大塚 小山 平野 藤本 河野 上野 野口 武田 松井 千葉 岩崎 菅原 木下
+久保 佐野 野村 松尾 市川 菊地 杉本 古川 大西 島田 水野 桜井 高野 渡部 吉川 山内 西田 飯田 菊池 西川 小松 北村 安田 五十嵐
+川口 平田 関 中田 久保田 服部 東 岩田 土屋 川崎 福島 本田 辻 樋口 秋山 田口 永井 山中 中西 吉村 川上 石原 大橋 松岡 馬場
+浜田 森本 星野 矢野 浅野 大久保 松下 吉岡 小池 野田 荒木 大谷 内藤 松浦 熊谷 黒田 尾崎 永田 川村 望月 田辺 松村 荒井
+""".split()), key=len, reverse=True))
+_BARE_NAME = re.compile(r"^(?:" + "|".join(map(re.escape, BARE_SURNAMES)) + r")\s+[一-龥々ぁ-ゖ]{1,3}$")
+
+
+def bare_personal_name(name):
+    """True when a trade name is a bare personal name (the sign rule above).
+    NFKC turns the full-width space into a plain one."""
+    return bool(_BARE_NAME.match(unicodedata.normalize("NFKC", name or "").strip()))
 
 
 # Not a person, for the name rule where a city opts into "coop": KYOTO_CORP's

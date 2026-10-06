@@ -279,6 +279,10 @@ build (a brief to correct, never a check to relax), in particular:
   190,682 filled MHLW rows carry no company marker and no 法人番号), so it is
   in `OPERATOR_COLS`, and every MHLW source's `REQUIRED_COLUMNS` names it.
   A cooperative (組合) is not a person under the `coop` rule.
+  **The name rule's version 2, the sign rule** (owner, 2026-10-06): a trade
+  name that is a bare personal name (a common surname, a space, 1 to 3 kanji
+  or hiragana) is withheld whatever the operator column holds
+  (`japan_register.bare_personal_name`); a new city needs nothing extra.
 - Several still list as open what the owner decided on 2026-09-24 (the
   Shinkansen, 菓子/そうざい, the city-line scope). Mark them decided.
 - None has run the **Economic Census join control** (PLAN, "Join control").

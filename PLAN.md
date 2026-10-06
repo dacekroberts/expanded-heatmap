@@ -40,6 +40,12 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   Hungary in the east, Czechia kept apart (the Romanian six); Brăila and
   Galați, Nagakute and Nisshin, Itami and Toyonaka into `KNOWN_STACKED`.
 
+- [ ] **Review time: the Japanese pages' name-rule bullet gains the sign rule**
+  (owner, 2026-10-06; DECISIONS, "the name rule's version 2"). Proposal, every
+  Japanese page's variant alike: "Where a business's trade name is its
+  operator's own name, or is written as a bare personal name, the dot shows its
+  permit type instead." The rule itself landed 2026-10-06.
+
 - [ ] São Paulo's Linha 6-Laranja stays out until full service (sentence
   OK'd); re-check when it leaves trial operation.
 

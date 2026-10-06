@@ -3,7 +3,7 @@
   "join_own": 165,
   "line_station_rows": 64,
   "name_rule_spread_rows": 0,
-  "names_withheld": 0,
+  "names_withheld": 1,
   "not_a_premises": 0,
   "not_storefront": 0,
   "own_coords_block_median_m": 40,

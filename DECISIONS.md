@@ -20,7 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**45 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**46 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+
+**2026-10-06**
+
+- [The Japanese name rule's version 2, a sign rule for bare personal names: all 34 Japanese cities re-run, 135 names withheld where 56 were in the 20 that moved, 55 pins on the maps changed (owner, privacy repair)](#2026-10-06---the-japanese-name-rules-version-2-a-sign-rule-for-bare-personal-names-all-34-japanese-cities-re-run-135-names-withheld-where-56-were-in-the-20-that-moved-55-pins-on-the-maps-changed-owner-privacy-repair)
 
 **2026-10-05**
 
@@ -1638,4 +1642,55 @@ standard rings. `coverage` full, `categories` "All three", `mode` metro,
   `docs/commands.md`, and the `publish-city` and `regional-extension` skills
   now say `--jobs 3` and 16 GB. A full sweep runs in one pass at `--jobs 3`
   instead of in memory-sized chunks.
+
+### 2026-10-06 - The Japanese name rule's version 2, a sign rule for bare personal names: all 34 Japanese cities re-run, 135 names withheld where 56 were in the 20 that moved, 55 pins on the maps changed (owner, privacy repair)
+
+- **The owner: "45: sounds good note the version change here"** to staging's
+  call 45, then to Cleanup: "Land now". **The name rule's version 2**: v1
+  2026-09-27 (Kobe: the trade name equals the operator's own name), 法人名
+  added 2026-10-05, and now a SIGN RULE: a trade name written as a bare
+  personal name - one of 166 common surnames, a space (full-width or
+  half-width), then 1 to 3 kanji or hiragana, nothing else - is withheld
+  whatever the operator column holds. Liège's and Brussels' sign rule
+  (Gelsenkirchen's call 15) adapted to Japanese.
+- **The loose shape is not used**: the same surname and 1 to 3 characters
+  WITHOUT a space matched 523 shown rows, mostly shop names (staging).
+- **The change:** `japan_register.bare_personal_name()` and `BARE_SURNAMES`
+  (staging's list); `name_is_operator()` applies it first, so a rebuilt
+  register's precomputed answer (Kyoto's) is covered too. Every Japanese
+  city's step 2 goes through it.
+- **Re-run:** `drift_check.py` over all 34 Japanese cities, `--jobs 3
+  --update-baseline` (measured peak 5.13 GB). Only `names_withheld` and
+  `name_rule_spread_rows` moved, in 20 cities; joins and storefront counts
+  unchanged. Names withheld, before -> after, and pins whose shown name
+  changed on the map (the maps embed only pins inside a ring):
+  Fukuoka 4 -> 7 (2 on the map)
+  Hamamatsu 0 -> 1 (1 on the map)
+  Himeji 3 -> 4 (0 on the map)
+  Kawasaki 0 -> 3 (2 on the map)
+  Kitakyushu 2 -> 4 (2 on the map)
+  Kobe 3 -> 8 (4 on the map)
+  Kōchi 0 -> 3 (1 on the map)
+  Kyoto 8 -> 22 (6 on the map)
+  Nagasaki 6 -> 8 (0 on the map)
+  Nara 2 -> 4 (2 on the map)
+  Osaka 8 -> 29 (19 on the map)
+  Ōtsu 3 -> 5 (2 on the map)
+  Sapporo 3 -> 4 (1 on the map)
+  Sasebo 1 -> 2 (0 on the map)
+  Tokyo 6 -> 12 (6 on the map)
+  Toyama 1 -> 5 (2 on the map)
+  Utsunomiya 2 -> 5 (2 on the map)
+  Yokkaichi 3 -> 6 (1 on the map)
+  Yokohama 0 -> 1 (1 on the map)
+  Yokosuka 1 -> 2 (1 on the map)
+  Unchanged: Fukui, Hakodate, Higashiōsaka, Hiroshima, Kagoshima, Kumamoto, Kurume, Matsuyama, Nishinomiya, Okayama, Sakai, Shimonoseki, Takamatsu, Toyota.
+- **Staging's count re-run: 0 strict matches shown** (432,489 rows); the
+  unused loose shape 484.
+- **Checks:** the Minato control unchanged (block 98.0 / chōme 0.2 / none
+  1.8); `check_personal_exposure.py` on all 34 (exit 0, the Japan pass prints
+  0). Verdicts in `docs/privacy_verdicts.md`: publish, all 34.
+- **Landed without waiting for review time** (owner: "Land now"); only
+  `outputs/` maps and pipeline code change, so no reboot. The pages'
+  name-rule bullet gains the case at review time (PLAN, proposal).
 
