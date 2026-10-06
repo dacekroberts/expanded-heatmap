@@ -4,6 +4,24 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-05 - Hamburg re-checked: the "new" retail layer is the 2016 survey re-stamped; the discard stands
+
+- **The owner's call 28 (2026-10-05)**: one `city-probe` agent, catalogue
+  and service-metadata reads only, hits-only counts, every request HTTP 200.
+- **Found:** `HH_WFS_Einzelhandel_ZVB` holds 15 layers, 11 of them premises
+  points (services 5,650, mixed doctors, lawyers, hairdressers and banks;
+  restaurants and snack bars 1,948; pubs, bars and cafés 1,128; others), all
+  from the 2016 survey (fieldwork 2016-02-22 to 2016-08-26). Every record's
+  `erhebungsstand` is 2016; the record's frequency is `NEVER`; the
+  2026-07-11 "issued" date is version 18 of the same dataset. The record
+  itself says the data reflects today's retail only in part. The survey
+  covered the centres' extra uses, not the whole city.
+- **Outcome:** the discard stands on currency, Kind unchanged; the
+  re-check is added to the row as a measured method, and
+  `geodienste.hamburg.de` to the hosts asked. Hamburg's 2016 survey covers
+  all three buckets but fails the five-year rule; a currency exception
+  would have no precedent and was not proposed.
+
 ### 2026-10-05 - Band B's licence terms accepted, the briefs' calls made, the Japanese Band B briefs and a Hamburg re-check approved (owner)
 
 - **The owner: "10. yes 11. yes 20. yes 28. yes 12-30 accept. 13. no
