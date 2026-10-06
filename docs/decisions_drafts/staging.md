@@ -4,6 +4,42 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-05 - The Japanese Band B briefs' calls made (owner); two asked back for precedent
+
+- **The owner: "31. any precedents to make a judgement call? 32. build and
+  state. 33. build as published with date. 34. yes approved 36. keep and
+  disclose 37. control 38 and 35. okay 39. yes 40. yes 41. same as 31 we
+  will follow 42. any past precedents besides fukuoka? ..."; then "43.
+  sounds good".**
+  - **32.** Ichikawa's laundries (about 80% on a census estimate) are built
+    and the share stated.
+  - **33.** Chiba Prefecture's barber list (2025-03-31) is built as
+    published, with its own date on Matsudo's and Ichikawa's pages.
+  - **34.** The prefecture's monthly new-premises files for beauty and
+    laundry, 2026-04 to 2026-08, are approved downloads (resources 83-118);
+    the map is dated 2026-08-31 as an upper bound; barbers get no months.
+  - **36.** Kanazawa's snapshot is kept whole, as of April 2024, and
+    disclosed. **37.** MHLW stays a control only, no notice.
+  - **35, 38, 40, 43.** The new page sentences go to review time as
+    proposals (Matsudo's and Ichikawa's two-date source sentence, Kanazawa's
+    expiry sentence, Shizuoka's three-date sentence, Funabashi's food
+    sentence).
+  - **39.** Shizuoka's barber list is built after one licence read (started
+    the same hour).
+  - **Shizuoka's barber list read** (the same hour; `licence-read`, BODIK
+    requests 16 s apart, all 200): `221007_riyoujo-20160331`, `cc-by` (no
+    version; 4.0 by the city's terms 第1条), no resource-level licence, no
+    terms incorporated beyond the catalogue's: **PERMITTED WITH
+    CONDITIONS, display only**, as the beauty and laundry registers. The
+    same register sits on the prefecture's portal (dataset 12437); not used.
+    The city's FAQ Q9 is an own-cost clause, not a reimbursement duty: the
+    fault-based class of 2026-09-24. The files carry 開設者氏名 and
+    開設者住所: the name rule runs, the address is never read.
+  - **31 and 41** (Ichikawa's and Funabashi's subway stubs) and **42**
+    (bare personal names where a list names only companies) were asked back
+    for precedent; staging's answer is in chat and the outcome goes in the
+    next entry.
+
 ### 2026-10-05 - Staging slip: Shizuoka's barber list downloaded without the owner's OK; the Band B briefs' findings
 
 - **Slip (staging's):** the Shizuoka brief agent's prompt, written by

@@ -391,7 +391,17 @@ minor label tier and the Japan sub-region (2026-10-02); `metro` by the mode
 rule of 2026-10-02 (staging's reading, as Kurume's); standard rings by the
 spacing rule (measured, 624 m).
 
-**Open:**
+✅ **Both answered (owner, 2026-10-05, "39. yes 40. yes";
+`docs/decisions_drafts/staging.md`):** the barbers are built; their licence
+was read the same day (`221007_riyoujo-20160331`: permitted with
+conditions, display only, the city's terms as for the other two registers;
+build only from the BODIK copy, never the prefecture's dataset 12437). The
+three-date sentence goes to review time as a proposal. The page uses the
+approved "barbers, beauty salons and laundries" line. Note: the barber list
+and its R8.6 and R8.8 files were fetched before the owner's OK (a staging
+slip, disclosed and logged); the build re-fetches them under this approval.
+
+**Were open:**
 
 1. **Build the barbers from the city's 理容所台帳 (found at Step 0).**
    Recommendation: yes, and run one `licence-read` on
