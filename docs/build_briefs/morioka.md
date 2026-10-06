@@ -479,7 +479,14 @@ Shinkansen not counted; no frequency floor; the Yamada and Hanawa stretches
 named (call 86); MHLW's notifications in as partial Food shops (127b) and its
 points where the join misses (127c); the food share stated (125).
 
-**Open, with a recommendation:**
+**Answered by the owner on 2026-10-06:** the food share stated at 83.5%
+with the city's own reason (Ichinomiya's call 125); call 161, **permits past
+their end date dropped** (a shared rule for the build, with Mito's MHLW
+proposal); call 162, **an address of the city name alone (盛岡市) is not a
+premises** (a shared rule: "we can exclude", owner). The recommendations
+below are kept as the record.
+
+**Weighed, with a recommendation:**
 
 1. **The stated share's reason.** The withheld fifth is an operator opt-out,
    not a gap in the list (Ichinomiya's 67.7% was a list that stopped short).

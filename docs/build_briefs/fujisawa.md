@@ -475,7 +475,9 @@ addressed Retail notifications as a partial Food-shops layer (call 127b) and
 its own point where the block join misses (127c); Kawasaki's name bullet for
 every layer.
 
-**Open, each with a recommendation:**
+**Answered by the owner on 2026-10-06:** call 158, **restaurant rows with combined forms stay in Food service unless the cell names 給食 or 旅館** (a shared-code change for the build session: it applies to every Japanese city); call 159, **MHLW's 6 August closures dropped**; call 160, **the city health centre's yearly report approved** for the official restaurant count (measured below once fetched). The recommendations below are kept as the record.
+
+**Weighed, each with a recommendation:**
 
 1. **Combined 詳細業種 cells.** Of 312 fixed restaurant rows with several
    forms in one cell, 263 name a public restaurant form (飲食店, 一般食堂,
