@@ -4,6 +4,35 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-05 - Staging slip: Shizuoka's barber list downloaded without the owner's OK; the Band B briefs' findings
+
+- **Slip (staging's):** the Shizuoka brief agent's prompt, written by
+  staging, let it download from the city's own catalogue a list found
+  there "if reported first in the brief". That exceeded the owner's rule
+  that a download not named in a brief needs the owner's OK. The agent
+  found the city's barber list (`221007_riyoujo-20160331`, 「理容所台帳」,
+  `cc-by`, no version) and downloaded its full list (`riyosyo.csv`, 96,799
+  B) and the R8.6 and R8.8 monthly files into the untracked
+  `data/shizuoka/raw/`. Nothing uses them; nothing is committed. Disclosed
+  to the owner the same hour; the use, and a licence read, are put to the
+  owner. Funabashi's brief agent was given a strict scope: any further
+  dataset is recorded, never downloaded.
+- **Shizuoka** (`docs/build_briefs/shizuoka.md`, 10/10): the full lists
+  plus the monthly openings rebuild to barbers 689 (99.9% of e-Stat's
+  FY2024), beauty 1,784 (103.1%), laundries 307 (98.4%); closures are not
+  published, so an upper bound. Block join 97.3%. 26 N02 groups, 24 drawn
+  (the Ikawa Line left out, owner). The master list's "no barber list was
+  found" is corrected.
+- **Matsudo and Ichikawa** (`matsudo.md` 9/9, `ichikawa.md` 8/8): Chiba
+  Prefecture's barber file is the **2025-03-31** list (workbook saved
+  2025-04-23, no row dated later; the catalogue declares a larger file than
+  is served), beauty and laundry 2026-03-31; the master list corrected.
+  Matsudo 1,247 storefronts (98.4% block), Ichikawa 1,009 (99.5%).
+- **Kanazawa** (`kanazawa.md` 13/13): the snapshot holds **6,478 restaurant
+  permits, 100.9%** of e-Stat's 6,420 in force at 2024-03-31; the screen's
+  5,412 (84%) left out 飲食店営業（４）. The master list corrected; the band
+  is unchanged.
+
 ### 2026-10-05 - Hamburg re-checked: the "new" retail layer is the 2016 survey re-stamped; the discard stands
 
 - **The owner's call 28 (2026-10-05)**: one `city-probe` agent, catalogue
