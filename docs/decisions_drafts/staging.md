@@ -4,6 +4,65 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-06 - Toei Shinjuku left out, the Tōzai drawn cut; bare personal names measured; the Japanese name rule's version 2 (owner)
+
+- **The owner: "confirm, record toei shinjuku out, note on page. 44 note
+  this and determine if we need a sweep. 45: sounds good note the version
+  change here"**, after "the tozai 3 and 2 stations seem more reasonable".
+- **Calls 31 and 41, the subway stubs.** **The Tōzai Line is drawn cut at
+  the city line** in Ichikawa (3 of 23) and Funabashi (2 of 23), on Sakai's
+  (the Midōsuji, 3 of 20) and Higashiōsaka's (the Chūō Line, 2 of 12)
+  precedent. **The Toei Shinjuku Line is left out of Ichikawa**
+  (`LEFT_OUT_LINES`): one station, 本八幡, its terminus; 本八幡 keeps its
+  ring through JR and Keisei. The page says so (the owner: "note on page"),
+  a proposal for review time: "The Toei Shinjuku Line, which ends at
+  Motoyawata just inside the city, is not drawn; the station is shown on the
+  JR and Keisei lines." **The precedent, measured for the owner:** built
+  Japanese maps draw 14 lines with one station in their city (Kobe's JR
+  Takarazuka, Yokohama's JR Nambu, Hakodate's South Hokkaido Railway and 11
+  more, in 11 cities), every one a JR or private regional line under the
+  standing one-station-stub call (2026-09-27); none a subway. 21 lines are
+  drawn with two (Higashiōsaka's Chūō Line among them). Seoul leaves its
+  one-station urban stubs (the Gimpo Goldline, the Seohae Line) undrawn.
+  **Rule, from here:** an urban line cut to one station in its city is left
+  out, its station kept through the other lines; two or more stations are
+  drawn cut.
+- **Call 44, bare personal names where a list names only companies**
+  (staging, counts only, no name printed; `heavy_job.py` label
+  `bare-names`, peak 0.07 GB). Over the 432,489 shown rows of the 34 built
+  Japanese cities, a **loose shape test** (one of about 150 common
+  surnames, then 1-3 kanji or kana, no shop word) matches **523 (0.12%)**;
+  the **strict form** (a surname, a space, then 1-3 kanji or kana, as a
+  person's name is written) matches **78 in 22 cities**.
+  - The loose rate is no higher where the lists name only companies (Fukui
+    0.20%, Yokosuka 0.09%, Toyama 0.05%, Kawasaki 0.04%, Sasebo 0.04%;
+    Fukuoka's 31 are 27 MHLW rows, under the name rule since 2026-10-05) than
+    where they name every operator (Kyoto 0.16%, Tokyo 0.13%, Kobe 0.11%,
+    Osaka 0.10%). In those cities every shown name has already been compared
+    with its operator's and differs, so their loose matches are shop names
+    (a family name with a trade word the test misses), not operators' own
+    names. The same rate in the companies-only cities points the same way.
+  - **Determined: no separate sweep.** The loose matches look like the
+    test's own false positives, and checking them would mean reading names,
+    which no session may print. The strict form is the signal worth acting
+    on, and call 45 acts on it in every Japanese city at once, which is the
+    sweep. Re-measure with the same script after call 45 lands (expected:
+    0 strict matches shown); the script is staging's scratch
+    `bare_names.py`, to be kept with the repair if Cleanup wants it.
+- **Call 45: the Japanese name rule, version 2.** Version 1 (2026-09-27,
+  `japan_register.name_is_operator`): a trade name that equals its
+  operator's own name shows the permit type; MHLW's 法人名 joined the
+  operator columns on 2026-10-05 (Cleanup). **Version 2 adds a sign rule**:
+  a trade name written as a bare personal name (a common surname, a space,
+  then 1-3 kanji or kana, nothing else) shows its category instead, whatever
+  the operator column holds, on Gelsenkirchen's call 15 (Liège's and
+  Brussels' rule) adapted to Japanese. The loose shape is not used. Shared
+  code with re-renders of every Japanese city: handed to Cleanup, with the
+  Minato control and the exposure check per city; the page's name-rule
+  bullet gains the new case (a proposal). The tradeoff the owner accepted:
+  a few real shops written as "surname space name" lose their name on the
+  map.
+
 ### 2026-10-05 - The Japanese Band B briefs' calls made (owner); two asked back for precedent
 
 - **The owner: "31. any precedents to make a judgement call? 32. build and

@@ -439,7 +439,18 @@ Japanese calls above; the minor label tier and the Japan sub-region (owner,
 agrees); the Hokusō Line at 小室 kept as cut by the standing call (a commuter
 railway, not an urban line).
 
-**Open:**
+✅ **All answered (owner, 2026-10-05/06, "41. same as 31", "42 ...",
+"43. sounds good", "45: sounds good"; `docs/decisions_drafts/staging.md`):**
+the **Tōzai Line is drawn cut** (2 of 23: 原木中山, 西船橋), on Sakai's and
+Higashiōsaka's precedent; the five bare-name-shaped trade names are handled
+by the **Japanese name rule, version 2** (Cleanup's shared change): a trade
+name written as a bare personal name (surname, a space, 1-3 kanji or kana)
+shows its category, whatever the operator column holds; the food sentence
+goes to review time as a proposal. Rule from 2026-10-06: an urban line cut to
+ONE station is left out (Ichikawa's Toei Shinjuku); two or more are drawn
+cut.
+
+**Were open:**
 
 1. **The Tōzai Line cut to 2 of 23** (原木中山, 西船橋). An urban line cut to a
    stub goes back to the owner; it is Ichikawa's open call 1 (Tōzai 3 of 23

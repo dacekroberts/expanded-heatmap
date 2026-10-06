@@ -375,7 +375,16 @@ precedent; `metro` by the owner's mode rule of 2026-10-02 (staging's
 reading, as Kurume's); the name rule on a list that names companies only
 (Toyama's position, owner, 2026-10-02).
 
-**Open:**
+✅ **All answered (owner, 2026-10-05, "36. keep and disclose 37. control
+38 ... okay"; `docs/decisions_drafts/staging.md`):** the snapshot is kept
+whole, as of April 2024, and disclosed; MHLW stays a control only, with no
+notice; the expiry sentence goes to review time as a proposal. **Name rule,
+version 2** (owner, 2026-10-06, call 45; Cleanup's shared change): a trade
+name written as a bare personal name (surname, a space, 1-3 kanji or kana)
+shows its category; the city names companies only, so this is the case it
+covers here.
+
+**Were open:**
 
 1. **Keep the whole snapshot, or drop the permits that have expired since.**
    43% of the storefront rows (79% of the old-law restaurant permits) have
