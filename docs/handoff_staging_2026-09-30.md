@@ -100,17 +100,18 @@ section when its item is done.** The older history is in
 
 ## NEXT - pick up here, in this order
 
-1. **Briefs for the Band A cities**: all written and passing. Gimpo,
-   Siheung (keyed on 시군구코드 as Gimhae), Geneva, Thessaloniki (Band B),
-   Fukuyama and Sagamihara (their calls answered 2026-10-05). **Maebashi's
-   city half waits on BODIK** (HTTP 403 on 2026-10-04): retry about a day
-   later, one `package_show` per dataset 12 s or more apart, fill the
-   brief's pending sections, then its two licence reads (owner's call 9).
-   **The build session is held** while new builds stay paused (owner's call
-   3, 2026-10-04). **MHLW's 法人名 privacy repair** (owner's call 4,
-   2026-10-05) is Cleanup's: every Japanese MHLW city re-renders. Then
-   licence reads for Bremen and the Band B Japanese sources, and briefs for
-   Band B.
+1. **Every Band A and Band B city has a passing brief** (fourteen, as of
+   2026-10-06), each source's licence read and every owner call answered:
+   Gimpo, Siheung, Geneva, Maebashi, Fukuyama, Sagamihara (A); Thessaloniki,
+   Shizuoka, Funabashi, Matsudo, Ichikawa, Kanazawa, Bremen, Gelsenkirchen
+   (B). **Build sessions are held** while new builds stay paused (owner,
+   2026-10-04), at most three at once when they resume. **MHLW's 法人名
+   repair landed** (Cleanup, 2026-10-05). **The Japanese name rule's version
+   2** (owner, 2026-10-06: a bare personal name, surname-space-name, shows
+   its category) is with Cleanup; after it lands, re-run staging's
+   bare-name count (expected 0 strict matches shown). A new rule from
+   2026-10-06: an urban line cut to ONE station in its city is left out,
+   two or more are drawn cut.
 2. **The ranked unscreened 1-4, the next action item, held for cost** (owner,
    2026-10-04): the Greater Copenhagen Light Rail (about 10 municipalities,
    `regional-extension`); Romania's six other tram cities and
@@ -156,8 +157,8 @@ section when its item is done.** The older history is in
 
 ## The two private pages
 
-- **City master list**, version 14: https://claude.ai/artifact/LTzi7Vj5emzHnb3zAZy4Vn
-- **Country census**, version 14: https://claude.ai/artifact/CKCadsYtUhbWwWKzV9sDeD
+- **City master list**, version 15: https://claude.ai/artifact/LTzi7Vj5emzHnb3zAZy4Vn
+- **Country census**, version 15: https://claude.ai/artifact/CKCadsYtUhbWwWKzV9sDeD
 - How to update both: `scripts/staging_artifacts/README.md`. The published
   page is the source; the master list wins when they disagree. Master-list
   republishes in chat use the banded format (the owner's memory).
