@@ -4,6 +4,66 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-05 - Band B's Japanese sources read: Kanazawa, Chiba Prefecture and Shizuoka permitted with conditions
+
+- **The owner: "yes start license reads and then brief"**, one `licence-read`
+  agent per source, curl with the project's agent, no host refused, no data
+  downloaded. Funabashi's BODIK lists wait for BODIK with Maebashi's.
+- **Kanazawa, `172014-syokuhineisei-kyokashisetsu`** (the city's CKAN,
+  `catalog-data.city.kanazawa.ishikawa.jp`): **PERMITTED WITH CONDITIONS.**
+  `license_id: cc-by`, no version. 金沢市オープンデータ利用規約 (revised
+  2024-09-17) 2(1) applies each dataset's label, and 2(4) sends only
+  「オープンデータ以外の情報」 to the main site's all-rights-reserved page
+  (3255.html), so that default does not reach the catalogue. **MUST
+  DISPLAY** 2(2)'s four items (name, source, URL, that it was processed), in
+  the form 「「…」（金沢市）（URL）を加工して作成」, and the title as the
+  city writes it, 「クリエイティブ・コモンズ 表示」, no version. **MUST NOT**
+  claim it complete, accurate or current (a 2024 snapshot). **Liability:**
+  clause 5 makes the user reimburse the city's costs, judgments included,
+  arising from the user's own breach or infringement: fault-based, amount
+  open; put to the owner. The CSV's 画像 column is never read.
+- **Chiba Prefecture, dataset 6** (理容所, 美容所, クリーニング所; resources
+  79-81 on `opendata.pref.chiba.lg.jp`): **PERMITTED WITH CONDITIONS, display
+  only.** Every resource `resource_license_id: pdl`, no rights notice; the
+  catalogue's terms apply PDL 1.0. The prefecture's website default
+  (`homepage/about-site/link.html`) covers its web pages, and the division's
+  own page sends data users to the open-data terms, so Chiba City's block does
+  not repeat here: cite and build from the catalogue only. **MUST DISPLAY**
+  the catalogue's 加工 form, 「「…」（千葉県オープンデータサイト）（URL）を加工して作成」,
+  naming the project as PDL 1.0 requires. **MUST NOT** present it as the
+  prefecture's own or use its logos. No indemnity. Lists hold only applicants
+  who agreed to open publication. **For the build:** the barber file's date
+  (named 202503, titled 令和8年3月末).
+- **Shizuoka City's 美容所台帳 and クリーニング所台帳** (datasets 12258,
+  12260 on the prefecture's catalogue; the same records on the city's BODIK
+  catalogue, `221007_biyoujo-20160331`, `221007_cleaning-20160331`):
+  **PERMITTED WITH CONDITIONS.** Both sets of terms grant CC BY 4.0; the
+  city's 第4条 says its terms prevail where the same data sits elsewhere.
+  **MUST DISPLAY** the CC BY 4.0 改変 form (the prefecture prescribes one),
+  and label any link to the prefecture site as such. **Liability:** the
+  prefecture's §6 has the same reimbursement clause as Kanazawa's, binding a
+  user who fetches from `opendata.pref.shizuoka.jp`; the city's terms have
+  none. The city asks, 「できれば」, to be told of use: a courtesy, not a
+  condition. **The laundry list's full file is now 2026-03-31** (resource
+  105882), not 2025-03-31.
+- **Bremen, "Einzelhandelsbestand in der Region Bremen 2022"** (metadata
+  `f6323bd1-bd38-4f72-a7ec-cb08209564ff`, read through GovData's CKAN and
+  GDI-DE's CSW copy; MetaVer answered HTTP 429 to both agents and was not
+  retried): **PERMITTED WITH CONDITIONS, display only.** "Creative Commons
+  Namensnennung (CC-BY)", **no version** (DCAT-AP.de's unversioned `cc-by`).
+  **The rights holder is the Kommunalverbund Niedersachsen/Bremen e.V.**; the
+  Landesamt GeoInformation Bremen only hosts it. **MUST DISPLAY** "Quellenvermerk:
+  Kommunalverbund Niedersachsen/Bremen e.V.", the licence title as written,
+  a link to the licence page the record links, and that the data was changed
+  (CC BY 4.0 §3(a), the strictest version). **MUST NOT** imply endorsement.
+  **Not governing:** geo.bremen.de's CC BY-NC-ND footer ("Sofern nicht
+  anders angegeben", page content) and the Kommunalverbund imprint's
+  private-use clause (its own pages; not incorporated anywhere). **Not
+  this source's credit:** "© GeoBasis-DE / Landesamt GeoInformation Bremen",
+  which is the surveying offices' base data. **Open:** the CC BY version,
+  which decides whether the EU database right is expressly licensed (4.0) or
+  not (3.0); put to the owner.
+
 ### 2026-10-05 - MHLW's 法人名 joins the name rule as a privacy repair; the Japanese briefs' calls made (owner)
 
 - **The owner: "4 yes, 5 yes, 6 yes, 7 yes, 8 yes, 9 yes"**, on staging's
