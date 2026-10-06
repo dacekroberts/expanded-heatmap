@@ -4,6 +4,23 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-05 - Gelsenkirchen's brief written from the cache; a probe slip
+
+- **The brief** (`docs/build_briefs/gelsenkirchen.md`, `brief_check.py` 14/14):
+  the row's counts reproduce exactly from the cached layers under
+  `docs/category_rules.md` (food 346, retail 1,322, personal services 104,
+  188 uncategorised out). The row's "82% of services in centres against 53%
+  of retail" holds only on the widest reading of the centres (with
+  prospective local centres and supplementary sites); on the designated
+  centres alone it is 81% against 47%. No date field in any layer. Six
+  owner calls open in the brief, put to the owner; six page sentences
+  flagged as proposals there.
+- **Probe slip:** the agent's first structure scan wrote low-variety field
+  values, the free-text `Info` field among them, to a scratch file; it saw
+  the first 75 characters of one line (category words) and deleted the
+  file unread. It also deleted a saved catalogue search result holding the
+  city's contact e-mails. Nothing reached the brief or any output.
+
 ### 2026-10-05 - Band B's Japanese sources read: Kanazawa, Chiba Prefecture and Shizuoka permitted with conditions
 
 - **The owner: "yes start license reads and then brief"**, one `licence-read`
