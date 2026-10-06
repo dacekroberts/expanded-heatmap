@@ -22,7 +22,10 @@ under each URL's own file name as `japan_fetch.get` saves:
 
 **1,789,614 B in all, 14 files.** Nothing else was downloaded: not the PDF
 twins, not the registers' monthly CSVs (five files of 1 to 3 KB, not named in
-the approval; the next quarterly list carries them).
+the approval; the next quarterly list carries them). **Added 2026-10-06
+under call 160**: the 統計年報 2025's health chapter,
+`11roudoushakaihoshouhokeneisei_r7.pdf` (1,924,927 B, the same host), for the
+official counts ("Counts against the official stock").
 
 **Run `python scripts/brief_check.py fujisawa` before writing any code.** Then
 the `japan-city` skill, **Yokosuka's shape** (the same Kanagawa permit system:
@@ -86,8 +89,10 @@ August (call 126): **4,579 permits, 3,654 restaurants**. **No per-city
 official count exists** (Fujisawa is neither a designated nor a core city):
 3,790 restaurant permits per 2021 census establishment is **2.54**, the
 bottom of the four e-Stat-listed Kanagawa cities' **2.52-2.87** (an estimate,
-not a share). Barbers 203, beauty salons 821, laundries 140 (+2 storeless) as
-of 2026-06-30. Through `japan_eigyo`: **Food service 2,887, Retail 638**
+not a share; the city's 統計年報 2025 carries no food-permit table, measured
+2026-10-06). Barbers 203, beauty salons 821, laundries 140 (+2 storeless) as
+of 2026-06-30, **102.0%, 104.3% and 94.7%** of the city's official counts at
+2025-03-31 (199, 787, 150; 統計年報 2025, table 135). Through `japan_eigyo`: **Food service 2,887, Retail 638**
 fixed premises; census control **1.90**. Block join **98.6%** (food), 99.5%
 (barbers, beauty), 96.4% (laundry), **unplaced 0**. MHLW holds 272 of the
 city's open permits (271 in its files) and 979 notifications (592 addressed).
@@ -203,9 +208,25 @@ force, vehicles included, per 2021 Economic Census 飲食店 establishment,
 
 Fujisawa's list sits at the bottom of the peers' range: at the peers' rates
 it would hold **88% to 101%** of the city's stock. An estimate, not a share;
-the page states no coverage percentage. The city's own 保健所 yearly report
-would give the official count (a document not fetched: staging asks, see
-the last section).
+the page states no coverage percentage.
+
+**The yearly report (call 160), read 2026-10-06: no food count.** The city
+host publishes no 保健所 事業年報 or 保健所年報 (the five 健康医療部 section
+pages, the food-inspection page, the sitemap and a web search, 2026-10-06).
+Its equivalent, the city's 統計年報 2025年版 (page
+`/bunsho/shise/toke/nenpo/2025.html`, 更新日 2026-03-27), splits by chapter;
+chapter 11 (労働・社会保障・保健・衛生) was fetched as the one approved file:
+`/documents/35832/11roudoushakaihoshouhokeneisei_r7.pdf`, **1,924,927 B**,
+HTTP 200, Last-Modified 2026-03-27, into `data/fujisawa/raw/`. Its
+health-centre tables are 135 環境衛生施設の状況 (below) and vital
+statistics; **it has no food-permit table**, so the merge's 3,654 restaurants
+(2026-08-31) and the June list's 3,611 have no official count to divide by,
+and the estimate above stands. Leads, each a further document the owner
+would approve: the health centre's food-inspection plan and results
+(`/documents/9695/keikaku_1.pdf`, 令和8年度監視指導計画, and
+`/documents/9695/r7jissikekka.pdf`, 令和7年度実施結果), which commonly state
+the permitted-premises count; Kanagawa's 衛生統計年報 (the yearbook's source
+for its vital statistics), on the prefecture's host.
 
 ### Counts through `japan_eigyo` (merge, fixed premises)
 
@@ -299,6 +320,21 @@ not fetched).
 
   Together and for laundry, Fujisawa sits with its peers; the split leans to
   beauty salons. Nothing suggests a thin list.
+- **Against the city's official counts** (統計年報 2025年版, table 135
+  環境衛生施設の状況, 各年度末現在, source 藤沢市保健所 生活衛生課; the
+  latest year is FY2024, so **2025-03-31**, fifteen months before the lists'
+  2026-06-30):
+
+  | | Official, 2025-03-31 | List, 2026-06-30 | Share |
+  |---|---|---|---|
+  | Barbers | 199 | 203 | **102.0%** |
+  | Beauty salons | 787 | 821 | **104.3%** |
+  | Laundries (取次 included) | 150 (取次 99) | 142 (取次 93); 140 without the 2 無店舗 | **94.7%** (93.3% fixed) |
+
+  The prior years: barbers 201 and 198, salons 767 and 795, laundries 167
+  and 161 (FY2022, FY2023). Shares over 100% are the date gap (salons grew
+  by 28 and fell by 8 in the two years shown), not a list wider than the
+  register.
 
 ## Coordinates — a JOIN to MLIT 位置参照情報 (wardless)
 
@@ -475,7 +511,7 @@ addressed Retail notifications as a partial Food-shops layer (call 127b) and
 its own point where the block join misses (127c); Kawasaki's name bullet for
 every layer.
 
-**Answered by the owner on 2026-10-06:** call 158, **restaurant rows with combined forms stay in Food service unless the cell names 給食 or 旅館** (a shared-code change for the build session: it applies to every Japanese city); call 159, **MHLW's 6 August closures dropped**; call 160, **the city health centre's yearly report approved** for the official restaurant count (measured below once fetched). The recommendations below are kept as the record.
+**Answered by the owner on 2026-10-06:** call 158, **restaurant rows with combined forms stay in Food service unless the cell names 給食 or 旅館** (a shared-code change for the build session: it applies to every Japanese city); call 159, **MHLW's 6 August closures dropped**; call 160, **the city health centre's yearly report approved** for the official restaurant count (read 2026-10-06: no such report on the city host; its equivalent, the 統計年報 2025's health chapter, gives the registers' counts but no food count, "Counts against the official stock"). The recommendations below are kept as the record.
 
 **Weighed, each with a recommendation:**
 
@@ -511,11 +547,11 @@ every layer.
   only three months**, so a build after mid-October takes the 2026-09-30 full
   list (due quarterly) plus the months after it and re-measures; `as_of` from
   the link text (2026-06-30 here, with the months to 2026-08-31), never today.
-- **The official count**: the city's 保健所 yearly report (事業概要 or
-  衛生年報) should hold year-end permit and register counts by type. It was
-  not fetched (not named in call 147): staging asks the owner whether one
-  document read is approved, so the page can state a coverage figure; without
-  it the page states none.
+- **The official count**: the registers' are measured (統計年報 2025, table
+  135, 2025-03-31: 102.0%, 104.3%, 94.7%); **the food count is still
+  missing** (the yearbook has no food table; call 160's one file is spent).
+  The leads under "Counts against the official stock" each need the owner;
+  without one the page states no food coverage figure.
 - The one MHLW permit in no city file; the 6 closed (open call 2).
 - Gate 3 (each operator), OSM `name:en`, line colours on both basemaps, the
   labels on the Sōtetsu and Monorail stubs (1.18 and 0.99 km inside), the
@@ -552,6 +588,13 @@ every layer.
     "kind": "http_ok",
     "url": "https://www.city.fujisawa.kanagawa.jp/documents/13230/riyoukiyaku20250401.pdf",
     "min_bytes": 140000
+  },
+  {
+    "id": "fujisawa-yearbook-health-chapter",
+    "claim": "The 統計年報 2025年版 health chapter (1,924,927 B on 2026-10-06), source of the official barber, beauty and laundry counts at 2025-03-31 (table 135: 199, 787, 150), answers a plain GET; it carries no food-permit table",
+    "kind": "http_ok",
+    "url": "https://www.city.fujisawa.kanagawa.jp/documents/35832/11roudoushakaihoshouhokeneisei_r7.pdf",
+    "min_bytes": 1700000
   },
   {
     "id": "fujisawa-food-houjin-live",
