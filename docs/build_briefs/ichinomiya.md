@@ -445,7 +445,14 @@ rounded out: (35.24, 136.70, 35.38, 136.88).
 and Japan East (Chubu after the retag); no frequency floor (call 46); the
 Tōkaidō Line drawn as cut (standing call, not a stub).
 
-**Open, each with a recommendation:**
+**Answered by the owner on 2026-10-06** (calls 125-128): **Band A stays,
+with the food share stated on the page** (about two restaurants in three);
+**merge (a)**, the full list kept whole plus the months; **MHLW (a) no, (b)
+yes, (c) yes**; **the registers' 2026 monthly CSVs approved** for download
+at build. Item 3 remains a page-text proposal for review time. The
+recommendations below are kept as the record of what was weighed.
+
+**Weighed, each with a recommendation:**
 
 1. **How the months merge with the March list.** (a) **Keep the full list
    whole and add the months** (`rebuilt_register` with `as_of` 2026-03-31:
