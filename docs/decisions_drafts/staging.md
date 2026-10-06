@@ -4,6 +4,20 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-06 - The Japanese name rule's version 2 landed; staging's bare-name count re-run: 0 shown
+
+- **Cleanup landed version 2 on master** (47452fa8, 2030af23; the owner:
+  "Land now"; DECISIONS 2026-10-06 "The Japanese name rule's version 2"):
+  `japan_register.bare_personal_name()` with staging's 166-surname list,
+  the strict spaced form only, applied first in `name_is_operator`.
+- **Staging re-ran its own count on the merged master**, not taking the
+  peer's figure: the strict spaced form matches **0 of 432,489 shown rows**
+  in the built Japanese cities, as expected. The loose unspaced shape (484)
+  stays unused, as the owner decided: it catches shop names such as a
+  surname run into a trade word.
+- **No separate sweep needed** (the open question in the entry below): the
+  rule itself is the sweep, and the re-run confirms it.
+
 ### 2026-10-06 - Toei Shinjuku left out, the Tōzai drawn cut; bare personal names measured; the Japanese name rule's version 2 (owner)
 
 - **The owner: "confirm, record toei shinjuku out, note on page. 44 note

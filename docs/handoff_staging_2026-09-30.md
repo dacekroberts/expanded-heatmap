@@ -107,9 +107,9 @@ section when its item is done.** The older history is in
    (B). **Build sessions are held** while new builds stay paused (owner,
    2026-10-04), at most three at once when they resume. **MHLW's 法人名
    repair landed** (Cleanup, 2026-10-05). **The Japanese name rule's version
-   2** (owner, 2026-10-06: a bare personal name, surname-space-name, shows
-   its category) is with Cleanup; after it lands, re-run staging's
-   bare-name count (expected 0 strict matches shown). A new rule from
+   2 landed** (owner, 2026-10-06: a bare personal name, surname-space-name,
+   shows its category; Cleanup, 47452fa8); staging's re-count found 0 strict
+   matches shown of 432,489 rows. The Japanese briefs build on it. A new rule from
    2026-10-06: an urban line cut to ONE station in its city is left out,
    two or more are drawn cut.
 2. **The ranked unscreened 1-4, the next action item, held for cost** (owner,
