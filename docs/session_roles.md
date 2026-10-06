@@ -304,7 +304,7 @@ each waking a session on its full context).
   `python scripts/downstream_changes.py <the last noted master> origin/master`.
   The last noted master is the commit in the line below, which Cleanup
   updates after each note. A removal request carried out is noted at once.
-  **Last noted: 80f73929 (2026-10-05).**
+  **Last noted: 2030af23 (2026-10-06).**
   If it prints anything but "nothing downstream", it sends that output,
   unchanged, to both sessions ("Expanded Heatmap Visuals" and "Expanded
   Heatmap Analytics", found with ListAgents), with one line on WHY the
