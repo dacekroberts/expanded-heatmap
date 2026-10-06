@@ -4,6 +4,52 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-05 - Maebashi's two BODIK lists read: permitted with conditions; one label conflict
+
+- **Two `licence-read` agents**, one at a time, BODIK requests at least 12 s
+  apart, every one HTTP 200; no data downloaded.
+- **The food file, `102016_eiseikensa01`**: **PERMITTED WITH CONDITIONS.**
+  `cc-by-40-intl`; 前橋市オープンデータ利用規約 (odcs.bodik.jp/102016/tos/, in
+  force 2025-02-19; the city-hosted PDF matches) 第１条 grants CC BY 4.0, and
+  the city's open-data page says no permission or fee is needed. **MUST
+  DISPLAY** title and copyright holder (第６条; no 改変 form prescribed), the
+  licence link and a modification statement. **MUST NOT** claim it complete
+  or current (第３条), or imply endorsement. 第３条(3) is a fault-based
+  own-cost clause, **no reimbursement**: the class accepted 2026-09-24. The
+  main website's copyright page (site/14135.html) covers its web pages only.
+  The city's open-data page says downloading accepts the terms "and the
+  following", one bullet of which (no harm to others' rights) is not in the
+  terms: put to the owner.
+- **The barber, beauty and laundry lists, `102016_eiseikensa02`**:
+  **PERMITTED WITH CONDITIONS.** The dataset is labelled **CC BY 2.1 JP**
+  while the terms grant 4.0; 第１条's last sentence lets an individual
+  licence on a resource prevail, but every CKAN resource's own licence is
+  null, so either reading stands. **MUST DISPLAY** (2.1 JP 第5条) the
+  licence URI, the author, the title and a credit for the original's use;
+  under 4.0 also a modification statement: one credit naming both licences
+  meets both. **MUST DO, on notice only:** remove the credit if the licensor
+  asks (2.1 JP 第5条). The dataset states 「事業者の要望により、一部の施設情報は掲載されないことがあります」,
+  a stated cause of at least part of the laundry shortfall. The files carry
+  operator names and companies' addresses: the name rule applies, the
+  address columns are never selected. Which licence governs: put to the
+  owner.
+- **Funabashi's barber, beauty and laundry lists** (BODIK organization
+  122041; `122041_20260401_seikatsueisei-eigyoushisetsu_riyousyo`,
+  `_biyousyo`, `_kuri-ninngu`; files 20260801, 20260801, 20260701):
+  **PERMITTED WITH CONDITIONS.** All three `cc-by-40-intl`; 船橋市オープンデータ
+  利用規約 ２ grants CC BY 4.0 「注記があるものを除いて」 (no 注記 found), and
+  the city's own open-data page incorporates the same terms (its PDF
+  matches). **MUST DISPLAY** the prescribed 改変 form,
+  「この[…]は以下の著作物を改変して利用しています。[タイトル]、船橋市、クリエイティブ・コモンズ・ライセンス表示 4.0（URL）」;
+  label any link as going to the city's catalogue; no framing. **Liability:**
+  ５ makes the user reimburse the city's costs, judgments included, arising
+  from the user's own breach or infringement (Kanazawa's and Shizuoka
+  Prefecture's class); ４ is an own-cost clause. Put to the owner with
+  Kanazawa's. **Not governing:** the city website's copyright page and its
+  link-notification request (city-site links only; link the catalogue).
+  The files carry operator and representative names (the name rule);
+  mobile phone numbers were removed by the city.
+
 ### 2026-10-05 - Bremen's brief written from the cache; a Hamburg lead found in passing
 
 - **The brief** (`docs/build_briefs/bremen.md`, `brief_check.py` 4/4): every
