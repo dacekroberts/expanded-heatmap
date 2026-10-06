@@ -20,12 +20,13 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**44 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**45 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-05**
 
 - [MHLW's 法人名 joins the Japanese name rule: 17 cities re-run, 46 names withheld where 12 were, 12 pins on the maps changed (owner, privacy repair)](#2026-10-05---mhlws-法人名-joins-the-japanese-name-rule-17-cities-re-run-46-names-withheld-where-12-were-12-pins-on-the-maps-changed-owner-privacy-repair)
 - [The machine went from 16 GB to 32 GB: four heavy jobs at once; the Python caps and the drift check's two cities left for the owner](#2026-10-05---the-machine-went-from-16-gb-to-32-gb-four-heavy-jobs-at-once-the-python-caps-and-the-drift-checks-two-cities-left-for-the-owner)
+- [After the 32 GB upgrade: the Python tree cap 16 GB, three drift cities at once, four deploy-verify lanes (owner)](#2026-10-05---after-the-32-gb-upgrade-the-python-tree-cap-16-gb-three-drift-cities-at-once-four-deploy-verify-lanes-owner)
 
 **2026-10-04**
 
@@ -1616,4 +1617,25 @@ standard rings. `coverage` full, `categories` "All three", `mode` metro,
   about 14 GB in one process tree (4.74 GB each), over the 12 GB tree cap.
   No step needs more than 5.4 GB (Oslo's step 2, now measured 2.38 GB), so
   the per-process cap has no reason to move.
+
+### 2026-10-05 - After the 32 GB upgrade: the Python tree cap 16 GB, three drift cities at once, four deploy-verify lanes (owner)
+
+- **The owner: "yes do all three"**, on Cleanup's list of what the doubled
+  RAM can raise.
+- **The Python cap: 8 GB a process (unchanged), 16 GB with its children (was
+  12).** `scripts/python_memcap.py` `TREE_GB`, reinstalled for Python 3.14.6
+  (`--check` and `--selftest`, 5 of 5, pass). No step has needed more than
+  5.4 GB, so the per-process cap has no reason to move.
+- **`drift_check.py` `MAX_JOBS` 2 -> 3**, one run per machine as before.
+  The Japan sweep's heaviest city measured 4.74 GB, so three like it would
+  need about 14 GB, inside the new tree cap. Tested: Tokyo, Osaka and Kobe
+  at `--jobs 3` through the gate, zero drift, measured peak 0.72 GB together;
+  `--jobs 4` is refused with the new reason.
+- **Four deploy-verify lanes at once** (`docs/review_lane_kit.md`, 7b): about
+  10 GB, scaled from three browsers' 7.43 GB (2026-10-01); four Streamlit
+  servers and no static ones, inside the browser tool's five per worktree.
+- **The rules say so:** `CLAUDE.md`, `docs/session_roles.md`,
+  `docs/commands.md`, and the `publish-city` and `regional-extension` skills
+  now say `--jobs 3` and 16 GB. A full sweep runs in one pass at `--jobs 3`
+  instead of in memory-sized chunks.
 

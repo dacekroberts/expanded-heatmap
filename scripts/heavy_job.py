@@ -45,7 +45,7 @@ THE LEDGER is data/_heavy_jobs.json. data/ is one junction shared by every
 worktree, so every session reads the same file; it is gitignored. An entry
 whose pid is dead is dropped on read, so a crashed job never blocks anyone.
 Writes take an O_EXCL lock file, so two sessions starting at once cannot both
-slip in. The Python cap (scripts/python_memcap.py, 8 GB a process, 12 GB with
+slip in. The Python cap (scripts/python_memcap.py, 8 GB a process, 16 GB with
 children) stays as the backstop.
 """
 import argparse

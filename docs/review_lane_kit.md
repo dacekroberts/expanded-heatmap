@@ -84,8 +84,10 @@ path. `--tall` makes one image of the whole page. Against the live site use
 
 **Memory (lesson 4): declare real peaks.** Measured: one capture 1.1 GB
 (2026-10-01); a lane's app about 0.2 GB; deploy-verify driving three browsers
-at once 7.43 GB (2026-10-01). Count each browser, or run one at a time. At
-most two heavy jobs run on the machine.
+at once 7.43 GB (2026-10-01). Count each browser, or run one at a time. Up
+to four heavy jobs run on the machine since the 32 GB upgrade (2026-10-05),
+so four deploy-verify lanes fit at once (about 10 GB, scaled from three
+browsers' 7.43 GB).
 
 ## 6. Prose comes back as proposals, never as edits
 
@@ -136,14 +138,17 @@ the reboot, and the calls the lanes surface.
 A `scope: full` deploy-verify of 124 cities ran about 75 minutes as one agent
 in this project's history; split across agents on one commit it took the
 longest lane's time (2026-10-02, the prose pass: 44 to 80 minutes per lane of
-about 41 cities). What made it work, and what went wrong first:
+about 41 cities). Four lanes since the 32 GB upgrade (2026-10-05): about 43 of
+170 cities each, so the longest lane, not the city count, sets the time.
+What made it work, and what went wrong first:
 
 - **Its own server pair per agent.** Add `streamlit-app-lean-dvN` and
   `heatmap-static-dvN` (ports 8891-8893 and 8894-8896) to the worktree's local
   `.claude/launch.json`, and tell each agent to use only its pair. The browser
   tool allows **at most 5 servers per worktree**, so with three Streamlit
   servers running a lane runs its standalone maps from the page's own
-  `srcdoc` rather than a sixth server.
+  `srcdoc` rather than a sixth server; with four lanes, run four Streamlit
+  servers and no static ones, every lane on `srcdoc`.
 - **Override the agent's steps 1 and 8 in the prompt:** never stop another
   server, never clear `__pycache__` (the caller clears it once, before
   launching), and pass its own `tabId` to every browser call.
