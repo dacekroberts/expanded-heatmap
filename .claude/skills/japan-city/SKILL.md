@@ -472,8 +472,12 @@ results, for the Japan wave 4 queued on the master list (66 municipalities,
 and Maebashi reached Band A with no metro or tram. Count N02 station groups
 inside the city line (Shinkansen out). **Groups are not a cut-off**:
 Takarazuka was built on 11, while the scoping marked Tottori and Kure (13)
-"too few stations"; the call rests on frequency and where the stations sit,
-so read the timetable, never a count alone.
+"too few stations". **No frequency floor applies to JR or private lines in
+Japan** (owner, 2026-10-06, call 46; Maebashi's Jōmō line every 30 minutes
+and Fukuyama's hourly JR were approved): a city passes or fails on its
+business data, not its timetable. Read the timetable anyway and name in the
+brief any stretch with about 11 trains a day or fewer: it is drawn, not left
+out (owner, 2026-10-06, call 86; Shimonoseki's earlier cut predates this).
 
 **The food leg starts from MHLW's file, by health authority.** A city with its
 own health centre has its own file (`<code>`); every other municipality sits

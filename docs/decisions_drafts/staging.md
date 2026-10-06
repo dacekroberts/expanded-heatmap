@@ -4,6 +4,77 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-06 - Wave 5: the ranked queue and the pre-verdicts screened; Japan's lines carry no frequency floor (owner)
+
+- **The owner released NEXT items 2 onward** ("We can start on the next items, i
+  want to get a bunch of briefs ready for build time"). Staging ran 18 city-probe
+  agents and two brief agents, curl only, no data downloads, no names; calls 46
+  to 93 went to the owner in numbered groups.
+- **Japan's frequency floor (call 46, "46 yes").** No 15-minute floor applies to
+  JR or private lines in Japan, on Maebashi's approved brief (the Jōmō line every
+  30 minutes) and Fukuyama's (never less than hourly); the japan-city screening
+  section had said the call rests on frequency, and now agrees. **Call 86** (the
+  owner: "check my call on 46 and manage accordingly, note these 11> trains
+  though"): stretches with about 11 trains a day or fewer are drawn and named in
+  each brief, not left out; Shimonoseki's built cut (8 to 10 trains a day)
+  predates this and is not reopened. Cleanup told.
+- **Bands (owner, 2026-10-06):**
+  - **A:** Ichinomiya, Tsu, Uji (food only, its own page, Gimhae's precedent),
+    Fukushima (a licence read first), Iwaki, Akita, Toyonaka (99.8% of
+    restaurants in force).
+  - **B:** Okazaki and Aomori (food only); Urayasu, Sakura, Yachiyo and Ichihara
+    (personal services, Matsudo's shape; the Kominato line drawn); Ibaraki and
+    Minoh (barbers and beauty only, thinner than any page published, measured
+    against Hakodate's 1,077 and Kōchi's 1,406 storefronts).
+  - **C:** Oradea (the city's own 2022 lists); Asahikawa (a licence read
+    decides); eight Tama cities on the Tokyo Metropolitan Government's monthly
+    ledgers (one download approved to measure them); Amagasaki, Suita, Itami,
+    Kakogawa (files approved to measure).
+  - **D:** Arad, Galați, Ploiești, Craiova and Reșița on Timișoara's DSVSA act.
+  - **R:** Imizu, Isesaki, Ōta, Tsukuba, Toyokawa, Kōriyama, Machida; Espoo,
+    Tampere; Almada, Seixal, Vila Nova de Gaia, Matosinhos, Maia; Pavlodar,
+    Oskemen; Samarkand.
+  - **Open gaps:** Perugia (the Minimetrò counted as rail, Téléo's precedent),
+    Faridabad, Howrah.
+  - **Discards, 61:** the rail pre-verdicts less Reșița; Brăila and
+    Hódmezővásárhely; Ino, Nankoku, Hachinohe, Nagaoka, Akashi, Settsu ("too
+    thin", unless a thinner city is published: none is); Adana, Memphis,
+    Thane, Mira-Bhayandar, Ghaziabad; the Aburrá towns, Santo Domingo's two,
+    San Miguelito, Bidhannagar, Giza, New Cairo, Abuja; Gauteng's three
+    (vendor POI layers count as absence; not in the commuter-rail tier);
+    Temirtau, Vantaa; eight German, Austrian and Dutch towns on absence and
+    Nieuwegein; Strausberg, Woltersdorf and Schöneiche on rail.
+  - **Commuter-rail tier** gains Toluca's four (data buildable) and Trenton,
+    Oceanside, Escondido, Vicente López, San Isidro, Tigre, Cádiz, Chiclana,
+    San Fernando, Dakar, Thane and Vantaa (data open or blocked).
+  - **Potentials, not now:** Amsterdam + Amstelveen (Gemeenteblad notices,
+    "let's revisit"); Strausberg, Woltersdorf and Schöneiche ("mark the three
+    on rail as potentials to allow through but not now").
+- **One-station stubs, two exceptions (calls 54, 92):** the Tōzai at 浦安
+  (Urayasu) and the Midōsuji at Esaka (Suita) are drawn cut, because no other
+  line keeps the station's ring, which the one-station rule of 2026-10-06
+  assumes. The Maihama Resort Line counts as rail (call 53).
+- **Extensions (calls 68 to 72):** Mexico City (Regional) keeps Naucalpan (Línea
+  2 ends at Cuatro Caminos, it is not cut), takes boundaries from OSM matched on
+  INEGI codes, and the two State of México files (81 MB) are approved. Busan +
+  Yangsan and Daegu + Gyeongsan are extensions, not pages (Yangsan and Gyeongsan
+  leave Band C); SEMAS's retail step at the city line is built and disclosed;
+  Anyang (Regional) builds first, Seoul, Busan and Daegu after the owner rules
+  on SEMAS's social-post scope; the Gwangmyeong shuttle station stays.
+- **Housekeeping:** Navi Mumbai was on the low-odds list though discarded on
+  2026-10-04; Noida's row names `greaternoidaauthority.in` (the old domain
+  redirects to a shop); every county DSVSA host now answers 403 to scripts;
+  Chiba's beauty workbook repeats 印旛 as 海匝 (Matsudo's and Ichikawa's
+  controls corrected to 92.3%); Akashi's outreach option noted, not sent.
+- **Probe slips:** the Mie/Aichi probe retried Aichi Prefecture once with a
+  cookie jar after an Imperva challenge (no disguise, no success); two probes
+  ran Bash commands with backslash escapes (Gauteng, Hyōgo), which the hook
+  allows by design outside heredocs (Cleanup, call 94: the gap is CLAUDE.md's
+  stricter wording, put to the owner). Staging's own call 60 said "eighteen"
+  rail discards where the rows were sixteen plus Tigre's three.
+- **Open:** call 66 (the Copenhagen Light Rail), the western Japanese group's
+  calls, Fuji's food measurement, two probe groups running.
+
 ### 2026-10-06 - The Japanese name rule's version 2 landed; staging's bare-name count re-run: 0 shown
 
 - **Cleanup landed version 2 on master** (47452fa8, 2030af23; the owner:
