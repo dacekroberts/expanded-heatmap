@@ -209,8 +209,9 @@ lower `MAX_JOBS` again.
 - **A job you cannot wrap** (a subagent's, a browser run): `heavy_job.py start
   --pid <its pid> ...` before, `end --pid <pid>` after. A dead pid drops off
   on its own, so a crash never blocks anyone.
-- `drift_check.py` enforces its own share: one run per machine, `--jobs 2`
-  at most. The Python cap (8 GB a process, 12 GB with its children) stays as
+- `drift_check.py` enforces its own share: one run per machine, `--jobs 3`
+  at most (2 before 2026-10-05). The Python cap (8 GB a process, 16 GB with
+  its children since 2026-10-05) stays as
   the backstop: it turns a runaway into a `MemoryError` instead of a crash.
 - Light work needs no gate: greps, git, `check_all.py`, one small city's
   steps.

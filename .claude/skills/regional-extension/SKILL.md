@@ -76,7 +76,7 @@ City's station repair landed").
 - **A city with no `baseline.json` figures gets a first baseline first**, with
   `--update-baseline`, outputs unchanged (Vancouver: `2026-09-27.md`,
   "Vancouver (Regional) extended").
-- **The drift check is a heavy job**: `scripts/heavy_job.py run ...`, `--jobs 2`
+- **The drift check is a heavy job**: `scripts/heavy_job.py run ...`, `--jobs 3`
   at most. The extensions measured 0.31 to 0.44 GB per city.
 - **Regional processed files go to `data/<slug>/processed/regional/`** from the
   first run (`DATA_PROCESSED` in both configs above). `data/` is one junction

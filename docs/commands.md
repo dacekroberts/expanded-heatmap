@@ -9,7 +9,7 @@ reference; `python scripts/check_all.py --list` lists the pass/fail checks.
 python pipeline/<city_slug>/step1_stations.py
 python pipeline/<city_slug>/step2_clean_businesses.py
 python pipeline/<city_slug>/step3_map.py
-python pipeline/drift_check.py [city_slug] [--jobs N]   # every city; --jobs 2 at most, one run per machine
+python pipeline/drift_check.py [city_slug] [--jobs N]   # every city; --jobs 3 at most, one run per machine
 python pipeline/drift_check.py --render-only [--jobs N] # map step only, against data/<city>/processed/ as it stands; never the pre-deploy gate
 python scripts/drift_check_selftest.py                  # touches nothing
 python scripts/brief_check.py [city_slug]               # re-run a brief's claims live

@@ -186,14 +186,14 @@ a rule, not before obeying one.
 - **Re-check `origin/master` in the same breath as the push**: `git fetch`,
   merge if behind, push, nothing slow in between; re-fetch if a gate re-runs
   after that merge. [#fetch-before-push]
-- **Python is capped at 8 GB a process, 12 GB with its children**
+- **Python is capped at 8 GB a process, 16 GB with its children**
   (`scripts/python_memcap.py`). **At most four heavy jobs, each admitted by
   the gate: `python scripts/heavy_job.py run --label <job> --session <you> --
   <command>`**; a refused job waits (`--wait <min>`), and `heavy_job.py status`
   names what holds the memory. Declare the label's measured peak (the
   default), else an estimate scaled from measured ones (`--peak-gb N
   --estimate "..."`); the rest is in `docs/session_roles.md`. Drift checks
-  `--jobs 2` at most, one per machine. A `MemoryError` is a script to fix,
+  `--jobs 3` at most, one per machine. A `MemoryError` is a script to fix,
   never a cap to raise. PDFs: `pdftotext` or `pypdf`, never a hand-written
   decoder. [#memory]
 - **Resolve a conflicted append-only file with

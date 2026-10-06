@@ -75,8 +75,9 @@ re-download. It prints each raw input's size and modified time so a reader
 can tell code drift (raw files unchanged, outputs changed) from source
 drift (raw files were refreshed since the baseline).
 
-`--jobs N` runs CITIES concurrently (default 1, at most MAX_JOBS = 2 since
-2026-09-28's memory crashes; one drift check per machine at a time). The full
+`--jobs N` runs CITIES concurrently (default 1, at most MAX_JOBS = 3 since
+the 32 GB upgrade of 2026-10-05, 2 after 2026-09-28's memory crashes; one
+drift check per machine at a time). The full
 sweep is this project's only O(n)-in-pipeline-runs cost, so it is the binding
 operational limiter as the city count grows; see
 `docs/scaling_thresholds.md`. Steps WITHIN a city stay sequential, because
@@ -336,9 +337,12 @@ def resolve_changed(ref: str, all_cities) -> list:
 
 
 # Owner, 2026-09-28, after two memory-exhaustion crashes: at most two cities
-# at once on this 16 GB machine, whose Python is capped at 12 GB a process tree
-# (scripts/python_memcap.py). Change it with the owner's word, not to go faster.
-MAX_JOBS = 2
+# at once on the 16 GB machine. Three since 2026-10-05 (owner, after the
+# upgrade to 32 GB), with the Python tree cap raised to 16 GB to match: three
+# cities as heavy as the Japan sweep's heaviest (4.74 GB) would need about
+# 14 GB (scripts/python_memcap.py).
+# Change it with the owner's word, not to go faster.
+MAX_JOBS = 3
 LOCK_OFFSET = 1 << 20  # lock a byte past the text, so a waiter can read who holds it
 
 
@@ -402,12 +406,13 @@ def main():
     if "--jobs" in args:
         i = args.index("--jobs")
         if i + 1 >= len(args) or not args[i + 1].isdigit() or int(args[i + 1]) < 1:
-            sys.exit("--jobs needs a positive integer, e.g. --jobs 2")
+            sys.exit("--jobs needs a positive integer, e.g. --jobs 3")
         jobs = int(args[i + 1])
         if jobs > MAX_JOBS:
             sys.exit(f"--jobs {jobs} is over this machine's limit of {MAX_JOBS} "
-                     "(owner, 2026-09-28: Oslo's step 2 alone peaks near 5.4 GB, and "
-                     "Python is capped at 12 GB a process tree). Use --jobs "
+                     "(owner, 2026-10-05: three cities as heavy as the heaviest measured "
+                     "one need about 14 GB, and Python is capped at 16 GB a process tree). "
+                     "Use --jobs "
                      f"{MAX_JOBS} or fewer.")
         del args[i:i + 2]
 

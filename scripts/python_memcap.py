@@ -24,7 +24,12 @@ import os
 import sys
 
 PROCESS_GB = 8
-TREE_GB = 12
+# 12 until 2026-10-05; 16 since the machine went from 16 GB to 32 GB (owner),
+# so drift_check.py can run three cities at once: the Japan sweep's heaviest
+# city measured 4.74 GB, so three like it would need about 14 GB (Tokyo, Osaka
+# and Kobe together measured 0.72 GB, 2026-10-05). The per-process cap stays 8:
+# no step has needed more than 5.4 GB (Oslo's step 2, now 2.38 GB).
+TREE_GB = 16
 _GB = 1 << 30
 _JOB = None  # the job handle, held for the life of the process
 
