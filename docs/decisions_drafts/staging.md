@@ -14,10 +14,14 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
   (the Midōsuji, 3 of 20) and Higashiōsaka's (the Chūō Line, 2 of 12)
   precedent. **The Toei Shinjuku Line is left out of Ichikawa**
   (`LEFT_OUT_LINES`): one station, 本八幡, its terminus; 本八幡 keeps its
-  ring through JR and Keisei. The page says so (the owner: "note on page"),
+  ring through JR's Sōbu Line (in N02 its station group holds only JR and
+  Toei; Keisei's 京成八幡 is a separate group with its own ring, as the
+  brief agent found; staging's first wording, "JR and Keisei", was wrong
+  and was corrected in chat). The page says so (the owner: "note on page"),
   a proposal for review time: "The Toei Shinjuku Line, which ends at
   Motoyawata just inside the city, is not drawn; the station is shown on the
-  JR and Keisei lines." **The precedent, measured for the owner:** built
+  JR Sobu Line, and Keisei's Keisei-Yawata station is nearby."
+  **The precedent, measured for the owner:** built
   Japanese maps draw 14 lines with one station in their city (Kobe's JR
   Takarazuka, Yokohama's JR Nambu, Hakodate's South Hokkaido Railway and 11
   more, in 11 cities), every one a JR or private regional line under the

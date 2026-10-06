@@ -4,7 +4,9 @@
 wave; the Step 0 downloads approved 2026-10-05, staging's call 10,
 `docs/decisions_drafts/staging.md`, "Band B's licence terms accepted, the
 briefs' calls made, the Japanese Band B briefs and a Hamburg re-check
-approved"). **Step 0 measured 2026-10-05** (staging). Downloaded, each from
+approved"); the monthly beauty and laundry files approved 2026-10-05 (call
+34, "The Japanese Band B briefs' calls made (owner)"). **Step 0 measured
+2026-10-05; the monthly files 2026-10-06** (staging). Downloaded, each from
 its publisher's own host, into `data/matsudo/raw/` (gitignored), named as the
 publisher serves them:
 
@@ -17,9 +19,21 @@ publisher serves them:
   Ichikawa (copied to `data/ichikawa/raw/`; `docs/build_briefs/ichikawa.md`).
 - From `nlftp.mlit.go.jp`: `isj/12207-24.0a.zip` (269,856 B) and
   `isj/12207-19.0b.zip` (8,546 B).
+- 2026-10-06, from `opendata.pref.chiba.lg.jp` (each resource's title read
+  by `resource_show` first, so only the approved months were fetched; 3 s
+  apart, each HTTP 200, each the catalogue's size): **beauty** 美容所新規施設
+  令和8年4月-8月, resources 103 → `shinki-biyou2604.xlsx` (72,493 B), 102 →
+  `shinki-biyou2605.xlsx` (71,517 B), 101 → `shinki-biyou2606.xlsx`
+  (72,316 B), 100 → `shinki-biyou2607.xlsx` (71,818 B), 99 →
+  `shinki-biyou2608-2.xlsx` (70,264 B; the `-2` is the publisher's, a second
+  upload, Last-Modified 2026-09-29); **laundry** クリーニング所新規施設 令和8年4月-8月,
+  115 → `shinki-clean2604.xlsx` (46,248 B), 114 → `shinki-clean2605.xlsx`
+  (46,093 B), 113 → `shinki-clean2606.xlsx` (45,239 B), 112 →
+  `shinki-clean2607.xlsx` (46,503 B), 111 → `shinki-clean2608.xlsx`
+  (45,519 B). Copied to `data/ichikawa/raw/` as before.
 - Not fetched: MHLW's prefecture file (12000), since food is off and no
-  control needed it; the dataset's monthly new-premises files (resources
-  83-130), which were not on the approved list (open call 2).
+  control needed it; the barber months and every month before 2026-04 (not
+  approved: barbers get no months, owner call 34).
 
 **Run `python scripts/brief_check.py matsudo` before writing any code.** Then
 the `japan-city` skill, **Kōchi's shape** (personal services only, a full
@@ -68,8 +82,11 @@ backbone, the Keisei Matsudo Line, a railway (N02 class 12).
 **Personal services only, from Chiba Prefecture's open-data lists of barbers,
 beauty salons and laundries (dataset 6, PDL 1.0), cut to Matsudo by address:
 304 barbers (⚠️ the list is as of 2025-03-31, not 2026-03-31 as the catalogue
-title says), 759 beauty salons and 186 laundries (184 premises) as of
-2026-03-31; 1,247 storefronts, 1,241 pins, placed at the block 98.4%.** No
+title says, built as published with its own date, owner call 33), and beauty
+salons and laundries rebuilt to **2026-08-31** from the 2026-03-31 lists and
+five months of new premises (an upper bound: closures are not published;
+owner call 34): **774 beauty rows (773 premises) and 186 laundries (184
+premises); 1,262 storefronts, 1,255 pins, placed at the block 98.3%.** No
 per-city official count exists (e-Stat counts the prefecture's jurisdiction as
 one); prefecture-wide, the barber list is 99.6% of the official count on the
 same date. Food stays off (the master list: the prefecture's food set is
@@ -86,7 +103,7 @@ Tōbu 1).
 | **Dataset** | `https://opendata.pref.chiba.lg.jp/datasets/6`, 「【千葉県】環境衛生関係施設一覧」, organisation 衛生指導課 (contact 健康福祉部衛生指導課：生活衛生推進班), 「毎月」; `package_show` metadata modified 2026-09-29; 52 resources, every one `resource_license_id: pdl` |
 | **Its notes** | 「施設一覧は令和7年3月末時点の情報について掲載されています。」 (the lists are as of 2025-03-31: stale for two of the three files, right for the barber file, below); new premises added monthly around the 20th-25th; **only applicants who agreed to open publication are listed** (「申請者にオープンデータ掲載に賛同いただいているものに限定して掲載」); **Chiba, Funabashi and Kashiwa are not included** (their own health centres) |
 | **Files used** | resource 79 「【千葉県】理容所施設一覧（令和8年3月末時点）」, 80 美容所, 81 クリーニング所 (`https://opendata.pref.chiba.lg.jp/resource_download/<id>`); 82 (旅館・ホテル) is out of scope |
-| **Monthly files (not fetched)** | 新規施設 for each kind, 令和7年9月 to 令和8年8月: barbers 83-94, beauty 95-106, laundries 107-118 (open call 2). No closure files |
+| **Monthly files** | 新規施設 for each kind, 令和7年9月 to 令和8年8月: barbers 83-94, beauty 95-106, laundries 107-118. **Used: beauty 99-103 and laundry 111-115 (2026-04 to 2026-08)**, owner call 34; the rebuild below. No closure files |
 | **Layout** | One workbook per kind, **one sheet per health centre** (習志野, 市川, 松戸, 野田, 印旛, 香取, 海匝, 山武, 長生, 夷隅, 安房, 君津, 市原); the header is row 1, no title rows |
 | **Columns** | barber, beauty: **開設者名** (the operator), **施設名称１**, 施設名称２, **施設所在地１**, 施設所在地２, 施設電話番号, **業務種別**, 検査確認番号, 検査確認日. Laundry: **営業者名** in place of 開設者名, plus **クリーニング種別１** (取次所, 洗い+仕上場, 仕上場, 洗い場, 無店舗取次店) and クリーニング種別２ (特定洗濯物, リネンサプライ, 無し). The 印旛 barber sheet and the 海匝 laundry sheet order or name theirs differently; neither is read for Matsudo |
 | **Dates** | 検査確認日 in the era-letter dot form (`H01.03.03`, `R07.01.30`, `S64.01.07`); `japan_register.wareki_date` reads H and R but returns None for every S (Shōwa) date. Nothing in the build reads it (no expiry on a 生活衛生 confirmation); say so if a step ever does |
@@ -147,7 +164,7 @@ own as-of (`SOURCE_AS_OF`), 2025-03-31.
 
 - **One pin per premises**: 6 (address, trade name) pairs repeat, 4 a barber
   and a beauty salon at one premises under one name (e-Stat's 重複開設) and 2
-  inside the beauty list, so **step 2 draws 1,241 pins** (one per premises and
+  inside the beauty list, so **step 2 draws 1,241 pins** from the 2026-03-31 lists (1,255 with the months, below; one per premises and
   bucket).
 - **No closed rows**: the lists carry no closure column; each is a snapshot of
   premises on file at its date. After it, closures are invisible.
@@ -161,6 +178,43 @@ own as-of (`SOURCE_AS_OF`), 2025-03-31.
   Minato control).
 - `japan_eigyo` buckets every remaining type (理容所, 美容所, 取次所, 洗い+仕上場,
   仕上場, 洗い場) as Personal services; nothing falls out by rule.
+
+### The rebuild to 2026-08-31 (owner call 34; measured 2026-10-06)
+
+The monthly 新規施設 files have the base lists' layout (13 health-centre
+sheets, the same columns; a few other centres' sheets write 施設名称 for
+施設名称１, or add 開設者役職名 / 開設者代表者名, none of them 松戸). A centre
+with nothing that month has a sheet holding only a title cell
+(「5月新規なし」) and no header, which `xlsx_rows` already passes over.
+
+| Month | Beauty: 松戸 sheet rows | Matsudo's | 検査確認日 range | Repeats a base row | Laundry: Matsudo's |
+|---|---|---|---|---|---|
+| 2026-04 | 10 | **6** | 04-09 .. 04-30 | 0 | 0 (「４月新規なし」) |
+| 2026-05 | 0 (「5月新規なし」) | **0** | | | 0 |
+| 2026-06 | 4 | **4** | 06-02 .. 06-10 | 0 | 0 |
+| 2026-07 | 4 | **2** | 07-16 .. 07-27 | **1** by address and name | 0 |
+| 2026-08 | 3 | **3** | 08-04 .. 08-28 | 0 | 0 |
+| **Total** | 21 | **15** | | **1** | **0** |
+
+- **No new laundry in Matsudo in any month** (the 松戸 sheet reads 「…新規なし」
+  in all five), so laundries stay **186 rows, 184 premises**, now dated
+  2026-08-31.
+- **Beauty: 759 + 15 = 774 rows.** No added row repeats a base 検査確認番号,
+  and none repeats another added row's; **one July row repeats a base row's
+  address and trade name under a new number** (a re-confirmation, a change of
+  operator, say). Step 2's one pin per premises keeps one: **773 premises**.
+  The additions' operators: 開設者名 filled on all 15, 6 with a company marker;
+  the name rule flags 0; none is a vehicle or a 無店舗.
+- **The join takes the additions as it takes the base**: 14 block, 1
+  chōme, 0 unplaced.
+- **Rebuilt totals at 2026-08-31**: barbers 304 (their own 2025-03-31), beauty
+  774 rows, laundries 186 rows; **1,262 storefronts** (2 laundries not
+  premises), **1,255 pins** (7 shared premises: 4 a barber and a salon, 3
+  inside the beauty list).
+- **An upper bound**: openings are added, closures are not published (Kōchi's
+  and Kyoto's disclosure). Pin `as_of` to 2026-08-31 for beauty and laundry
+  (`SOURCE_AS_OF`), never the download date; the barber list keeps
+  2025-03-31.
 
 ### Coverage — against e-Stat and the Economic Census
 
@@ -186,9 +240,12 @@ and `…_cleaning_by_city.csv`, on disk, read here) list prefectures, 指定都�
   to census ratio (barbers 3,181 / 2,846 = 1.118; beauty 7,067 / 4,430 = 1.595;
   laundries 1,589 / 1,228 = 1.294), Matsudo's census counts (理容業 274, 美容業
   461, 洗濯業 147) give about **306 barbers, 735 salons and 190 laundries**:
-  the lists hold **304 (99%), 759 (103%) and 184 (97%)**. Matsudo is not
-  thinner than the prefecture's average. A modelled figure, recorded as a
-  measurement and never stated on the page.
+  the lists hold **304 (99%), 759 (103%) and 184 (97%)**; rebuilt to
+  2026-08-31, **beauty 773 premises (105%)**, the rest unchanged. Matsudo is
+  not thinner than the prefecture's average. A modelled figure, recorded as a
+  measurement; the owner's call 32 states Ichikawa's laundry share on its page,
+  and if the pages carry these figures, Matsudo's go in the same words (a
+  review-time proposal).
 
 ## Coordinates — a JOIN to MLIT 位置参照情報 (one municipality, 12207)
 
@@ -203,6 +260,7 @@ storefronts:
 | Block | **97.7%** | **98.8%** | **97.8%** | **98.4%** |
 | Town-chōme / 大字 centroid | 2.3% (7) | 1.1% (8) | 1.6% (3) | 1.4% (18) |
 | Unplaced | 0 | 0.1% (1) | 0.5% (1) | 0.2% (2) |
+| **With the 15 beauty additions (1,262)** | | block 764, chōme 9, none 1 (774) | | **block 98.3%, chōme 1.5% (19), none 0.2% (2)** |
 
 - **The shifted-chōme rule carries most of it**: the lists write `町名4-5-6`
   without 丁目 (571 of 1,247 rows take `join_city`'s chōme shift). 5 rows use
@@ -247,7 +305,11 @@ N02-25 agree on every station here; use N02-25.
 - **One-station stubs, kept as cut (standing call)**: the Tōbu Urban Park Line
   (六実, 1 of 35) and **the Keisei Narita Sky Access (東松戸, 1 of 8), which the
   master list did not name**. Both are commuter railways (class 12), not urban
-  lines, so neither goes back to the owner. ⚠️ The Sky Access runs on the
+  lines, so neither goes back to the owner, and the owner's rule of
+  2026-10-06 (an URBAN line cut to one station is left out, as Ichikawa's
+  Toei Shinjuku Line) does not reach them: the 14 one-station lines the built
+  Japanese maps draw are all JR or private regional lines like these
+  (drafts, "Toei Shinjuku left out, the Tōzai drawn cut"). ⚠️ The Sky Access runs on the
   Hokusō Line's track through Matsudo (矢切, 秋山 and 松飛台 passed without a
   stop): read how N02 files 成田空港線's sections at build. If they overlay the
   Hokusō track, draw it as its own line over that track (Tokyo's overlapping
@@ -325,8 +387,20 @@ in-memory comparisons.
   both already in `japan_register.OPERATOR_COLS`; filled on every row. In the
   松戸 sheet, 407 of 457 barber operators, 814 of 1,244 beauty and 107 of 288
   laundry carry no company or cooperative marker: mostly people's own names.
-- **The name rule flags 0 rows** in Matsudo's 1,249, whether it compares
-  施設名称１ alone (what `NAME_COLS` reads) or 施設名称１ + 施設名称２.
+- **The name rule (version 1) flags 0 rows** in Matsudo's 1,249, whether it
+  compares 施設名称１ alone (what `NAME_COLS` reads) or 施設名称１ + 施設名称２,
+  and 0 of the 15 beauty additions.
+- **The name rule's version 2 is coming from Cleanup** (owner call 45,
+  2026-10-06; drafts, "Toei Shinjuku left out, the Tōzai drawn cut; bare
+  personal names measured; the Japanese name rule's version 2"): **a trade
+  name written as a bare personal name (a common surname, a space, then 1-3
+  kanji or kana, nothing else) shows its category**, whatever the operator
+  column holds. Counted here with staging's patterns (counts only, no name
+  printed): **5 of Matsudo's 1,264 rows** take the strict form (barbers 3,
+  beauty 2, laundries 0), every one with an operator name that differs; the
+  loose shape, which version 2 does not use, matches 1 more. Build on the
+  shared rule once it lands (never a city copy), and check that
+  `check_personal_exposure.py` sees the 5.
 - **Never selected**: 施設電話番号; 開設者名 / 営業者名 beyond the rule's
   in-memory comparison. The lists carry no operator address.
 - 施設名称２ (a second line of the name) is filled on 4 barber, 35 beauty and 20
@@ -359,49 +433,49 @@ Japan sub-region (owner, 2026-10-02); `metro` by the owner's mode rule of
 2026-10-02 (staging's reading, as Kurume's and Maebashi's); the two
 one-station stubs (Tōbu, Keisei Sky Access) kept as cut by the standing call.
 
-**Open:**
+**✅ Answered by the owner, 2026-10-05 and 2026-10-06** (`docs/decisions_drafts/
+staging.md`, "The Japanese Band B briefs' calls made (owner); two asked back
+for precedent", calls 33-35, and "Toei Shinjuku left out, the Tōzai drawn cut;
+bare personal names measured; the Japanese name rule's version 2", call 45):
 
-1. **The barber list is a year older than the other two** (2025-03-31 against
-   2026-03-31). Recommendation: build it as published with its own as-of
-   (`SOURCE_AS_OF`), the page naming both dates, and re-check resource 79 at
-   build in case the prefecture replaces it (the catalogue's size says a
-   different file was meant). Tradeoff: a page with two dates, against leaving
-   barbers off (304 pins, a quarter of the page) or waiting for the
-   prefecture. Shared with Ichikawa.
-2. **The monthly new-premises files** (dataset 6, resources 83-118:
-   2025-09 to 2026-08 per kind), the way Kōchi carries its monthly additions.
-   Not fetched (not on the approved list). Recommendation: approve beauty's and
-   laundry's 2026-04 to 2026-08 files (five months each, unbroken after the
-   2026-03-31 lists), pin `as_of` to 2026-08-31 and call the register an upper
-   bound (closures are invisible, Kyoto's and Kōchi's disclosure); leave the
-   barber months out, because the catalogue has none for 2025-04 to 2025-08 and
-   adding later months would hide that gap. Tradeoff: a fresher map with an
-   upper-bound caveat, against the plain 2026-03-31 snapshot (no caveat beyond
-   "may include closed premises"). Same host and licence (PDL 1.0 per
-   resource); shared with Ichikawa.
-3. **Page wording**: the approved one-bucket line is Yokohama's ("barbers,
-   beauty salons and laundries"), but the source sentence names the
-   prefecture, not the city, and carries two dates: a sentence outside the
-   template, a proposal for the drafts file at build. Recommendation: "From
-   Chiba Prefecture's open-data registers of barbers (as of March 31, 2025),
-   beauty salons and laundries (as of March 31, 2026), which list only
-   premises whose operators agreed to publication." No per-city share on the
-   page (no official per-city count exists).
+1. **The barber list (2025-03-31) is built as published, with its own date**
+   on the page (call 33). Re-check resource 79 at build in case the
+   prefecture replaces it.
+2. **The monthly beauty and laundry files, 2026-04 to 2026-08, approved**
+   (call 34): fetched 2026-10-06 and measured above (beauty +15, one a
+   repeat; laundries +0). The map is dated **2026-08-31 as an upper bound**;
+   **barbers get no months**.
+3. **The two-date source sentence is a proposal for review time** (call 35).
+   The draft, now with the rebuild's date: "From Chiba Prefecture's open-data
+   registers of barbers (as of March 31, 2025) and of beauty salons and
+   laundries (as of March 31, 2026, with openings to August 31, 2026), which
+   list only premises whose operators agreed to publication."
+4. **The name rule's version 2** (call 45): the privacy section above; shared
+   code from Cleanup.
+5. (Ichikawa's calls on its subway stubs and its laundry share are its own,
+   `ichikawa.md`; nothing here depends on them beyond the shared wording.)
+
+**Open:** none.
 
 ## What the build must still measure
 
-- The Kōchi config shape: `SOURCE_FILES` for the three resources (one download
-  each, shared with Ichikawa through the same file names; each city's
-  `fetch_sources.py` fetches into its own `raw/`), `SOURCE_AS_OF` per kind,
+- The Kōchi config shape: `SOURCE_FILES` for the three lists and the ten
+  monthly files (each city's `fetch_sources.py` fetches into its own `raw/`,
+  under the publisher's file names above), `SOURCE_AS_OF` per kind (barbers
+  2025-03-31; beauty and laundry 2026-08-31, the last month read),
+  `MONTHLY` as Kōchi's (beauty 2026-04 to 08, laundry 2026-04 to 08),
   `REQUIRED_COLUMNS` naming 施設名称１, 施設所在地１, 業務種別 and 開設者名 /
-  営業者名 (and クリーニング種別１ for laundries), and a **`source_rows`** that
-  reads sheet 松戸, keeps rows whose 施設所在地１ starts `松戸市` (304 / 759 /
-  186 on these files), and carries クリーニング種別１ as the laundry type.
+  営業者名 (and クリーニング種別１ for laundries; a monthly sheet holding only
+  「…新規なし」 has no header and must not stop the check), and a
+  **`source_rows`** that reads sheet 松戸 of each list and month, keeps rows
+  whose 施設所在地１ starts `松戸市` (304 / 774 / 186), and carries
+  クリーニング種別１ as the laundry type. Step 2's one pin per premises takes
+  the July repeat.
 - ⚠️ **Shared code**, if the build prefers it to `source_rows`: `TYPE_COLS` +=
   クリーニング種別１ ahead of 業務種別, then the Minato control
   (`screen_japan_join.py minato`, 98.0 / 0.2 / 1.8) and every city screen.
 - Resource 79's served name and bytes (above); the newest edition of each file.
-- The two unplaced rows (本町4丁目, 松戸3丁目) and the 18 chōme-tier rows; GSI
+- The two unplaced rows (本町4丁目, 松戸3丁目) and the 19 chōme-tier rows; GSI
   on a sample.
 - Gate 3 against JR East's, Keisei's, Hokusō's and Tōbu's station lists; how
   N02 files the Sky Access; JR's Jōban services as Tokyo's routes; OSM
@@ -443,6 +517,34 @@ one-station stubs (Tōbu, Keisei Sky Access) kept as cut by the standing call.
     "kind": "http_ok",
     "url": "https://opendata.pref.chiba.lg.jp/resource_download/80",
     "min_bytes": 700000
+  },
+  {
+    "id": "matsudo-monthly-package",
+    "claim": "Dataset 6 still lists the ten approved monthly files (beauty 99-103, laundry 111-115: 新規施設 令和8年4月 to 8月) under those titles",
+    "kind": "http_contains",
+    "url": "https://opendata.pref.chiba.lg.jp/ckan_api/package_show?id=6",
+    "present": ["【千葉県】美容所新規施設（令和8年4月）", "【千葉県】美容所新規施設（令和8年8月）", "【千葉県】クリーニング所新規施設（令和8年4月）", "【千葉県】クリーニング所新規施設（令和8年8月）", "resource_download/99", "resource_download/103", "resource_download/111", "resource_download/115"]
+  },
+  {
+    "id": "matsudo-beauty-aug-size",
+    "claim": "The August beauty file (resource 99, served as shinki-biyou2608-2.xlsx, a second upload) still declares 70,264 B; a new size means a third upload: re-fetch and re-measure the month",
+    "kind": "http_contains",
+    "url": "https://opendata.pref.chiba.lg.jp/ckan_api/resource_show?id=99",
+    "present": ["\"size\":\"70264\"", "美容所新規施設（令和8年8月）"]
+  },
+  {
+    "id": "matsudo-beauty-aug-live",
+    "claim": "The newest beauty month (resource 99, 2026-08) answers a keyless GET",
+    "kind": "http_ok",
+    "url": "https://opendata.pref.chiba.lg.jp/resource_download/99",
+    "min_bytes": 40000
+  },
+  {
+    "id": "matsudo-laundry-aug-live",
+    "claim": "The newest laundry month (resource 111, 2026-08) answers a keyless GET",
+    "kind": "http_ok",
+    "url": "https://opendata.pref.chiba.lg.jp/resource_download/111",
+    "min_bytes": 30000
   },
   {
     "id": "matsudo-laundry-live",
