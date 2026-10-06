@@ -427,7 +427,9 @@ stated (125); `mode: metro`; the minor tier and Japan East (Kantō after the
 retag); the Suigun Line drawn as cut from 水戸 (standing call, a JR stub); no
 frequency floor.
 
-**Open, with a recommendation:**
+**Answered by the owner on 2026-10-06:** call 156, **偕楽園 left out** (a seasonal station, the Sagano and Mojikō Retro precedents), so 5 station groups; call 157, **the food share in two figures together**: MHLW holds about 91% of permits, and about one fixed restaurant in five withholds its address. The recommendations below are kept as the record.
+
+**Weighed, with a recommendation:**
 
 1. **偕楽園, the seasonal station.** (a) **Leave it out** (recommended): no
    train stops there in the October 2026 timetable, so a ring would mark

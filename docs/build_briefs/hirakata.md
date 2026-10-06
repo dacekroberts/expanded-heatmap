@@ -420,7 +420,9 @@ whole plus the months (126); MHLW's notifications as a partial Food-shops
 layer (127b) and its own point where the join misses (127c); MHLW's 6 extra
 permits out (126); no frequency floor (call 46); no stub.
 
-**Open, each with a recommendation:**
+**Answered by the owner on 2026-10-06:** call 154, **no food-share sentence**: the page names the list's exclusion of stalls, vehicles and vending, as other pages do, and Hirakata stays in Band A; call 155, **the registers' five monthly XLSX files approved** for download at build. The recommendations below are kept as the record.
+
+**Weighed, each with a recommendation:**
 
 1. **The food share on the page** (call 125's question for a list below
    about 90%). The list holds 85.8% of e-Stat's restaurants, and the gap is
