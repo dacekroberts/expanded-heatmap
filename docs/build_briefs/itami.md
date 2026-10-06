@@ -429,7 +429,9 @@ minor tier and Japan West (Kansai after the retag); the JR Takarazuka and
 Hankyu Itami lines drawn as cut (standing call 3); no frequency floor; a stated
 share where a list cannot be measured per city (call 125, as about 86%).
 
-**Open, with a recommendation:**
+**Answered by the owner on 2026-10-06:** call 163, **the Osaka Monorail's one station (大阪空港) drawn cut** (no other line serves it: calls 54 and 92), so 6 station groups drawn; call 164, **Hyōgo's own notification list added as a Food-shops layer** (Yokkaichi's precedent; its operator-name rows go through the name rule). The recommendations below are kept as the record.
+
+**Weighed, with a recommendation:**
 
 1. **Hyōgo's own notification list as a Food-shops layer** (416 Retail pins:
    konbini 75, supermarkets 60, other food and drink sales 194, milk, produce,

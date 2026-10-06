@@ -419,6 +419,8 @@ frequency floor (call 46); hostess venues, canteens, karaoke and catering
 out by 業態 (`docs/category_rules.md`); the two same-named station pairs kept
 apart (trap 1, Kobe's 御影).
 
+**Answered by the owner on 2026-10-06:** call 164, **the city's own notification list as the Food-shops layer** (confirmed; Yokkaichi's precedent).
+
 **Open:** none for the owner. ⚠️ If `check_macro_labels.py` cannot place
 Amagasaki's label beside Osaka's and Itami's, `KNOWN_STACKED` on the Itami and
 Toyonaka precedent (the `japan-city` skill, accepted 2026-10-04) is a new name

@@ -81,8 +81,9 @@ permit in term on **2026-10-01** holds **4,041 rows, 3,139 restaurants
 MHLW's file holds about 5% of the city's permits: a control, not a source.
 **Rail: 12 station groups**, all JR East (Ōu Main Line 8, Uetsu Main Line 5,
 秋田 shared; the Oga Line's 追分 a JR one-station stub kept as cut), read from
-JR East's own timetables: **never less than hourly 07-18, nothing at or
-under 11 trains a day** (the thinnest, 桂根, 13 and 14).
+JR East's own timetables (recounted 2026-10-06): 13 to 46 weekday departures
+per direction everywhere but **桂根 on the Uetsu Line, 3 and 4 a day, named
+and drawn under call 86** (no frequency floor in Japan).
 
 ---
 
@@ -314,33 +315,47 @@ in-memory `CITIES` entry (scratch `rail.py`).
   draw the service from 秋田 if the stub cannot carry a label, a taste call
   for the owner only if it comes to that). The Ōu Line's 8 of 105 and the
   Uetsu Line's 5 of 60 are main lines cut at the line, not stubs.
-- **Frequency, read 2026-10-06 from JR East's own station timetables** by
-  plain GET with the project user-agent (`timetables.jreast.co.jp`, the index
-  `timetable/list<code>.html` and its weekday pages under `2610/timetable/`,
-  the October 2026 timetable; each page's departures counted whole):
+- **Frequency, recounted 2026-10-06 from JR East's own station timetables**
+  for all 12 station groups (31 weekday pages, every request HTTP 200, none
+  refused) by plain GET with the project user-agent
+  (`timetables.jreast.co.jp`, the index `timetable/list<code>.html` and its
+  weekday pages under `2610/timetable/`, the October 2026 timetable).
+  **Method: one departure per train entry on the page (each train once,
+  marked trains included), an empty hour counting nothing**; the entries
+  match the page's train links one for one on every page.
 
   | Station (line, direction) | Weekday departures | Per hour 07-18 |
   |---|---|---|
-  | 秋田 (Ōu, to 東能代・弘前) | 34 | 1-3 |
-  | 秋田 (Ōu, to 大曲・湯沢) | 20 | 1 |
-  | 秋田 (Uetsu, to 酒田・鶴岡) | 24 | 1-2 |
-  | 秋田 (Oga, to 男鹿) | 18 | 1 |
-  | 追分 (Ōu, to 東能代 / to 秋田; Oga, to 男鹿) | 27 / 46 / 19 | 1-6 |
-  | 大張野 (Ōu, to 秋田 / to 大曲) | 24 / 20 | 1-2 |
-  | 四ツ小屋 (Ōu, to 秋田 / to 大曲) | 23 / 20 | 1-3 |
-  | 下浜 (Uetsu, to 秋田 / to 酒田) | 18 / 18 | 1-2 |
-  | **桂根 (Uetsu, to 秋田 / to 酒田)** | **13 / 14** | 1-2 (some trains pass it) |
+  | 秋田 (Ōu, to 東能代・弘前 / to 大曲・湯沢) | 34 / 18 | 1-3 / 0-1 |
+  | 秋田 (Uetsu, to 酒田・鶴岡) | 21 | 0-2 |
+  | 秋田 (Oga, to 男鹿) | 14 | 0-1 |
+  | 泉外旭川 (Ōu, to 東能代 / to 秋田; Oga, to 男鹿) | 28 / 43 / 14 | 1-2 / 1-5 / 0-1 |
+  | 土崎 (Ōu, to 東能代 / to 秋田; Oga, to 男鹿) | 28 / 43 / 14 | 0-3 / 1-5 / 0-1 |
+  | 上飯島 (Ōu, to 東能代 / to 秋田; Oga, to 男鹿) | 28 / 43 / 14 | 0-3 / 1-5 / 0-1 |
+  | 追分 (Ōu, to 東能代 / to 秋田; Oga, to 男鹿) | 26 / 46 / 14 | 0-4 / 1-6 / 0-2 |
+  | 四ツ小屋 (Ōu, to 秋田 / to 大曲) | 20 / 18 | 0-3 / 0-1 |
+  | 和田 (Ōu, to 秋田 / to 大曲) | 21 / 18 | 0-2 / 0-2 |
+  | 大張野 (Ōu, to 秋田 / to 大曲) | 20 / 18 | 0-2 / 0-2 |
+  | 羽後牛島 (Uetsu, to 秋田 / to 酒田) | 21 / 19 | 0-3 / 0-2 |
+  | 新屋 (Uetsu, to 秋田 / to 酒田) | 21 / 13 | 0-3 / 0-1 |
+  | **桂根 (Uetsu, to 秋田 / to 酒田)** | **3 / 4** | 0-2 / 0-1 |
+  | 下浜 (Uetsu, to 秋田 / to 酒田) | 15 / 13 | 0-2 / 0-1 |
 
-  **No stretch is at or under about 11 trains a day** (call 86): the
-  thinnest is 桂根 on the Uetsu Line, 13 and 14, hourly 07-18; 新屋 and 羽後牛島
-  beside it have 19 to 23. Counts are every departure a page lists,
-  limited expresses included where they stop; the Akita Shinkansen is not
-  in them. ⚠️ **The wave-5 probe's timetable reader
-  (`jre.py` in the `japan_j4` scratch) undercounts**: it skips any departure
-  whose minute is wrapped in a mark span (`<span class="sp">`, the ◆ trains),
-  and read the Oga Line at 秋田 as 11 a day where the page holds 18. Counts
-  above are from a whole-page reader (`katsurane.py`). Only counts are
-  recorded, never a timetable on the page.
+  **Named and drawn under call 86** (no frequency floor in Japan; such a
+  stretch is drawn, not left out): **the Uetsu Line at 桂根**, between 新屋
+  and 下浜, **3 trains a day toward 秋田 and 4 toward 酒田** (none 08-17
+  toward 秋田, none 07-16 toward 酒田); most of the 13 to 15 trains a day
+  between 新屋 and 下浜 pass it. No other station is at or under about 11:
+  the next thinnest are 新屋 and 下浜 toward 酒田 (13) and the Oga Line (14
+  at every station from 秋田 to 追分). Counts include limited expresses and
+  rapids where they stop; the Akita Shinkansen (18 at 秋田) is not in them.
+  ⚠️ **Both earlier readers were wrong**: the wave-5 probe's (`jre.py` in
+  the `japan_j4` scratch) skipped departures whose minute sits in a mark
+  span (the ◆ trains) and read the Oga Line at 秋田 as 11; the first brief
+  reader (`katsurane.py`) counted every minute tag, including the empty tag
+  each train-less hour carries, and read it as 18, 桂根 as 13 and 14. The
+  counts above are from `akita_recount/tt.py` in the wave-5 scratch. Only
+  counts are recorded, never a timetable on the page.
 - ⚠️ **Gate 3** at build: JR East's station counts inside the city (Ōu 8,
   Uetsu 5, Oga 1). **OSM `name:en`** for 12 groups (one Overpass query at
   build, in the box below; not queried here).

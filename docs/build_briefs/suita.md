@@ -395,7 +395,9 @@ the Monorail's two lines and Kita-Osaka Kyuko drawn cut (two stations each);
 linen supply out (Osaka, 2026-09-27); no 業態, Food service taken whole
 (Toyonaka's, Kobe's and Osaka's lists); the two 吹田 kept apart (trap 1).
 
-**Open, with a recommendation:**
+**Answered by the owner on 2026-10-06:** call 165, **the one-station rule applied as written**: in N02, Esaka's station group also holds Kita-Osaka Kyuko, so the station keeps its ring through that line and **the Midōsuji Line is left out** (call 92's premise, no other line, did not hold). The recommendations below are kept as the record.
+
+**Weighed, with a recommendation:**
 
 1. **Call 92's premise, measured.** The owner drew the Midōsuji cut at 江坂
    "because no other line keeps the station's ring". **In N02 the 江坂 group

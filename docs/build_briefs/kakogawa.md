@@ -378,7 +378,9 @@ calls; `mode: metro`; the minor tier and Japan West (Kansai after the retag);
 the three lines drawn as cut (standing call 3); no frequency floor; a stated
 share where a list cannot be measured per city (call 125, as about 87%).
 
-**Open, with a recommendation:**
+**Answered by the owner on 2026-10-06:** call 164, **Hyōgo's own notification list added as a Food-shops layer** (Yokkaichi's precedent; 18 operator-name rows and 3 bare personal names withheld by the name rule); call 145, the block-join tiers disclosed. The recommendations below are kept as the record.
+
+**Weighed, with a recommendation:**
 
 1. **Hyōgo's own notification list as a Food-shops layer** (642 Retail pins:
    konbini 94, supermarkets 49, other food and drink sales 381, milk, produce,
