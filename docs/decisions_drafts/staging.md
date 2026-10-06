@@ -4,6 +4,53 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-05 - Band B's licence terms accepted, the briefs' calls made, the Japanese Band B briefs and a Hamburg re-check approved (owner)
+
+- **The owner: "10. yes 11. yes 20. yes 28. yes 12-30 accept. 13. no
+  outreach. 21. yes 29. one credit for both yes. 14. build and state. 15.
+  category 16. yes 17. got it 18. sounds good 19. okay 22. retail 23. yes
+  24. sounds good 25. yes and explain why 26. yes 27. sounds good"**, on
+  staging's calls 10-30. "12-30 accept" read as calls 12 and 30 (the two
+  reimbursement clauses), "17. got it" as a yes; staging said so in chat.
+  - **10.** Step 0 downloads for the Japanese Band B briefs, each from its
+    publisher's own host: Shizuoka's lists, Chiba Prefecture's dataset 6
+    (Matsudo, Ichikawa), Kanazawa's catalogue dataset, Funabashi's BODIK
+    lists, with MHLW's file and MLIT's address blocks where a join needs
+    them.
+  - **11.** Shizuoka's lists are fetched from the city's BODIK copy
+    (`221007_biyoujo-20160331`, `221007_cleaning-20160331`), under the
+    city's terms, which carry no reimbursement clause.
+  - **12, 30.** Kanazawa's clause 5 and Funabashi's ５ (reimbursement of the
+    city's costs arising from the user's own breach or infringement) are
+    **accepted**, the fault-based class of 2026-09-24.
+  - **13.** Bremen's CC BY version: **no outreach**; the title as written,
+    CC BY 4.0's notice terms met.
+  - **14.** Maebashi's laundries (139 of 170, 82%) are built and the share
+    stated, citing the dataset's own note that some premises are withheld
+    at the operator's request.
+  - **15-19, Gelsenkirchen:** a sign that reads as a person's name shows
+    its category (Liège's and Brussels' rule); the OSM boundary; lines 302,
+    107 and U11 cut at the city line; `tram` kept if OSM types U11 light
+    rail; Fax, Info, Internetbeschreibung, Strasse and ADRKOMBI never read,
+    only the used fields fetched, the 2026-10-04 cache kept until the owner
+    says otherwise.
+  - **20.** Gelsenkirchen's gate 3 for lines 107 and U11 from Ruhrbahn's
+    current timetables (a page read, the operator's own).
+  - **21.** The 他者の権利 bullet on Maebashi's open-data page binds; the
+    name rule meets it.
+  - **22-27, Bremen:** "Sonstige EH-Einrichtungen" (94) stay Retail; the
+    City of Bremen only, line 4 drawn to Lilienthal with its stops there
+    listed outside; a "Retail only" `categories` value added to
+    `check_inconsistency_list.py` by the build; gate 3 from BSAG's own
+    timetable (staging's reason given in chat: the operator's published
+    count is the check that catches an OSM stop missed or doubled, and the
+    tram-city rule requires it in every city); the OSM boundary; the new
+    page sentences and the notice to review time as proposals.
+  - **28.** Hamburg's "Einzelhandel - Zentrale Versorgungsbereiche" layer
+    gets one `city-probe` re-check, catalogue pages only.
+  - **29.** Maebashi's registers carry one credit naming CC BY 2.1 JP and
+    4.0.
+
 ### 2026-10-05 - Maebashi's two BODIK lists read: permitted with conditions; one label conflict
 
 - **Two `licence-read` agents**, one at a time, BODIK requests at least 12 s

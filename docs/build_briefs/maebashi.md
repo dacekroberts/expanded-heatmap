@@ -365,7 +365,18 @@ the standing Japanese calls above; the minor label tier and the Japan
 sub-region (owner, 2026-10-02); `metro` by the owner's mode rule of
 2026-10-02 (staging's reading, as Kurume's).
 
-**Open:**
+✅ **Answered (owner, 2026-10-05; `docs/decisions_drafts/staging.md`):**
+build the laundries and state the share ("14. build and state"), citing the
+dataset's own note that some premises are withheld at the operator's request
+(「事業者の要望により、一部の施設情報は掲載されないことがあります」) as a stated
+cause, never as the whole of the gap. **Licences** (read 2026-10-05, the
+drafts): the food file CC BY 4.0 under the city's terms; the registers
+labelled CC BY 2.1 JP against the terms' 4.0, so **one credit names both**
+(owner, call 29); the 他者の権利 bullet on the city's open-data page binds and
+the name rule meets it (call 21); on notice, remove the credit if the city
+asks (2.1 JP 第5条). The address columns 住所（法人のみ） are never selected.
+
+**Was open:**
 
 1. **Laundries at 82% of the official count** (139 against FY2024's 170).
    Recommendation: build them as they stand and disclose the share on the

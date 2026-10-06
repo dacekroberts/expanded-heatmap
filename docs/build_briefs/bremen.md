@@ -56,15 +56,22 @@ business leg is new (record kind on Madrid's and Barcelona's precedent).
   against the operator, OSM rail where no feed is in the brief (the kit's
   standing calls, `tram-city`).
 
-**Open, carried (not this build's to settle):**
-- ⚠️ **The CC BY version.** The record names "Creative Commons Namensnennung
-  (CC-BY)" with no version. Whether 4.0 (the EU database right expressly
-  licensed) or 3.0 (not) applies is an open owner question, held by staging.
-  The notice below satisfies the strictest reading (4.0 §3(a)); the build
-  does not resolve it.
+✅ **All answered as recommended (owner, 2026-10-05, calls 13 and 22-27;
+`docs/decisions_drafts/staging.md`):** the CC BY version gets **no
+outreach**: the licence title exactly as written, CC BY 4.0 §3(a)'s notice
+met; "Sonstige EH-Einrichtungen" stay Retail; the City of Bremen only, line
+4 drawn to Lilienthal with its stops there listed outside; the build adds a
+"Retail only" `categories` value to `check_inconsistency_list.py`; gate 3
+from BSAG's own timetable (the operator's published count is the check that
+catches an OSM stop missed or doubled; `tram-city` requires it in every
+city); the OSM boundary; the new page sentences and the notice go to review
+time as proposals.
 
-**New calls for the owner at build** (each with a recommendation and its
-tradeoff):
+**Was carried:**
+- **The CC BY version.** The record names "Creative Commons Namensnennung
+  (CC-BY)" with no version. Answered: no outreach (above).
+
+**Were new calls** (each with the recommendation the owner took):
 1. **"Sonstige EH-Einrichtungen" (other retail facilities), 94 rows in the
    city (3.0%): keep as Retail** (recommended). The survey files them as retail
    establishments in a survey of retail only, and the public file gives

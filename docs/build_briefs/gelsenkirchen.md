@@ -28,6 +28,20 @@ Zurich or Florence (`pipeline/osm_tram.py` wrappers) for the OSM tram step 1.
 
 ## For the owner, with the build
 
+✅ **The six open calls answered as recommended (owner, 2026-10-05, calls
+15-20; `docs/decisions_drafts/staging.md`):** (1) a sign that reads as a
+person's name shows its category instead, stored as keys (Liège's and
+Brussels' rule); (2) the OSM boundary from the build's one Overpass query;
+(3) lines 302, 107 and U11 **cut at the city line**, as Berlin at its Land
+border; if 107 is left a stub, bring it back with Rotthausen's case
+measured; (4) `mode` stays `tram` if OSM types U11 light rail; (5)
+Fax, Info, Internetbeschreibung, Strasse and ADRKOMBI join the never-read
+list, the build fetches only the fields it uses, and the 2026-10-04 cache is
+kept until the owner says otherwise; (6) gate 3 for 107 and U11 from
+**Ruhrbahn's current timetables** (a page read, the operator's own; name the
+URL in the build's notes). The six page sentences stay proposals for review
+time.
+
 | | Proposed | Why |
 |---|---|---|
 | **`mode`** | **`tram`** | Trams 301, 302 and 107 carry the network; U11 is an Essen Stadtbahn line whose Gelsenkirchen end is a few stops (open call 4) |
