@@ -17,13 +17,12 @@ brief**:
   (765,694 B), `ichiran-clean202603.xlsx` (254,290 B), `shinki-biyou2604.xlsx`
   to `shinki-biyou2608-2.xlsx` and `shinki-clean2604.xlsx` to
   `shinki-clean2608.xlsx`.
-- ⚠️ **Not on disk and not fetched: MLIT's address blocks for Sakura (12212)**.
-  The cached `data/matsudo/raw/isj/` holds Matsudo's 12207 only, and the
-  wave-5 approval covers the downloads a task names, which these were not.
-  A HEAD request (no body) confirmed both answer: `isj/dls/data/24.0a/12212-24.0a.zip`
-  (HTTP 200, 160,947 B, Last-Modified 2026-05-19) and
-  `…/19.0b/12212-19.0b.zip` (HTTP 200, 7,690 B). **The block join is
-  therefore unmeasured** (open call 1).
+- **MLIT's address blocks for Sakura (12212)**: approved by the owner on
+  2026-10-06 (call 106) and fetched that day by staging's measurement agent,
+  as `pipeline/countries/japan_fetch.py` fetches them, into
+  `data/sakura/raw/isj/`: `12212-24.0a.zip` (160,947 B) and `12212-19.0b.zip`
+  (7,690 B) from `nlftp.mlit.go.jp`. **The block join is measured: 94.2%**
+  (below, "Coordinates").
 - Not fetched: MHLW's prefecture file (food is off); the barber months
   (barbers get no months, Matsudo's call 34).
 
@@ -76,9 +75,8 @@ with its own date, Matsudo's call 33), 256 beauty salons and 79 laundry rows
 (78 premises) rebuilt to 2026-08-31 (an upper bound: closures are not
 published); 451 storefronts, 446 pins.** ⚠️ **The beauty workbook's 海匝
 sheet is an exact copy of 印旛**: filter on the 印旛 sheet AND the address, or
-Sakura's 255 salons count twice. The block join is not measured yet (MLIT's
-12212 files are not on disk; open call 1); every address carries a parseable
-number. Against a census-based estimate the lists hold about 104%, 96% and
+Sakura's 255 salons count twice. **The block join places 94.2% at the block**
+(425 of 451; 24 at a chōme or 大字 centroid, 2 unplaced). Against a census-based estimate the lists hold about 104%, 96% and
 134%. Rail: **11 N02 station groups** (Yamaman 6, Keisei 5, JR 1; ユーカリが丘 is
 Keisei's and Yamaman's), four lines drawn.
 
@@ -189,12 +187,39 @@ Ichikawa's call 32): the 2021 Economic Census
   78) may be counted under that shop's industry. A modelled figure; no call
   follows from it.
 
-## Coordinates — a JOIN to MLIT 位置参照情報 (one municipality, 12212): ⚠️ NOT MEASURED
+## Coordinates — a JOIN to MLIT 位置参照情報 (one municipality, 12212): ✅ 94.2% at the block
 
 The join target is `https://nlftp.mlit.go.jp/isj/dls/data/24.0a/12212-24.0a.zip`
-and `…/19.0b/12212-19.0b.zip` (both HTTP 200 by HEAD, above). One municipality,
-no wards (`"wardless": True`). **Unmeasured until the two files are approved
-and fetched** (open call 1). What can be said from the lists alone:
+and `…/19.0b/12212-19.0b.zip`, approved by the owner on 2026-10-06 (call 106)
+and saved in `data/sakura/raw/isj/`. One municipality, no wards
+(`"wardless": True`); 19,506 block keys, 191 town-chōme keys.
+
+**Measured 2026-10-06** (staging's measurement agent, a scratch script only:
+`japan_register.permits_from_rows`, `load_city_isj` and `join_city` with
+`WAVE2_RULES` unchanged, no normalisation changed, so no Minato re-run was
+needed), on the 451 storefronts (sheet 印旛 and the address, the April
+addition de-duplicated by 検査確認番号, the 無店舗取次店 out):
+
+| Kind | Storefronts | Block | Chōme / 大字 centroid | Unplaced |
+|---|---|---|---|---|
+| Barbers | 117 | 111 (94.9%) | 6 | 0 |
+| Beauty | 256 | 242 (94.5%) | 12 | 2 |
+| Laundries | 78 | 72 (92.3%) | 6 | 0 |
+| **All** | **451** | **425 (94.2%)** | **24 (5.3%)** | **2 (0.4%)** |
+
+- The chōme shift placed 221 rows; 5 字 addresses took their 大字's centroid.
+- **The 24 chōme-tier rows, by class**: **19 carry a 地番 MLIT's 24.0a lacks
+  in a town it has** (上志津, 江原, 臼井台, 臼井田 and a few 町 such as 城内町
+  and 並木町); **5 are 字 addresses** (上志津字…, 城字…, 神門字…, 六崎字…)
+  placed at the 大字 centroid, since 24.0a keys no block under those 小字.
+- **The 2 unplaced write a 大字 and its 小字 without 字** (井野 + 東作, 城 +
+  松ケ丘), where the 大字 has one or two characters, below rule C's
+  three-character floor.
+- As the shapes below predicted, the chōme tier (5.3%) runs above Matsudo's
+  (1.5%), in the 大字 + 地番 areas. Still at build: GSI's address search on a
+  sample, with the 24 centroid rows' distance read.
+
+What the lists alone said before the join:
 
 - **Every one of the 452 storefronts (450 + 2 additions) parses to a block
   number** with `permits_from_rows` (`WAVE2_RULES`), across 49 / 56 / 39
@@ -204,10 +229,11 @@ and fetched** (open call 1). What can be said from the lists alone:
   shifted-chōme rule, as in Matsudo (571 rows there). The two-part and
   bare-number forms are 大字 + 地番 (and 地番-枝番) in Sakura's large 大字
   areas: MLIT's block edition numbers some 地番 areas and not others, so
-  expect a larger chōme / 大字-centroid tier than Matsudo's 1.5%.
-- **At build**: the join with `japan_register` and `WAVE2_RULES` unchanged,
-  tiers per kind, the misses read by town; GSI's address search on a sample
-  (`screen_japan_join.py`'s `gsi_check`, 150 rows, one request per second).
+  expect a larger chōme / 大字-centroid tier than Matsudo's 1.5% (it is: 5.3%,
+  measured above).
+- **At build**: the join re-run on the build's own rows; GSI's address search
+  on a sample (`screen_japan_join.py`'s `gsi_check`, 150 rows, one request per
+  second).
 
 ## 🚇 Rail — MLIT N02-25 cut at the N03 city line (12212)
 
@@ -342,15 +368,9 @@ stub question: 6 of 6 inside).
 
 **Open:**
 
-1. **MLIT's address blocks for 12212 are not on disk** (the task expected
-   them in `data/matsudo/raw/isj/`, which holds 12207 only). **Recommendation:
-   approve the two files** (`12212-24.0a.zip`, 160,947 B, and
-   `12212-19.0b.zip`, 7,690 B, from `nlftp.mlit.go.jp`, the download every
-   Japanese brief has made), then measure the join with this brief's scratch
-   script (`…/scratchpad/wave5/brief_sakura_yachiyo/`, Matsudo's `m4_join.py`
-   shape). Tradeoff: without it the brief carries no block share, and Sakura's
-   大字 + 地番 addresses (204 of 451 rows two-part or bare numbers) are the
-   likeliest place for a chōme-tier share above Matsudo's.
+1. ✅ **MLIT's address blocks for 12212: approved by the owner (call 106,
+   2026-10-06)**, fetched and measured: 94.2% at the block, 5.3% at a chōme
+   or 大字 centroid (see "Coordinates"). Kept here so the numbering holds.
 2. **`mode`**: no subway or tram; the Yamaman AGT is the largest network by
    in-city groups (6 against Keisei's 5), JR has 1. **Recommendation:
    `metro`**, the mode following the backbone as Matsudo's and Kurume's did:
@@ -362,8 +382,8 @@ stub question: 6 of 6 inside).
 
 ## What the build must still measure
 
-- **The block join** (call 1): tiers per kind, the chōme-tier towns, misses
-  read; GSI on a sample.
+- **The block join** (measured at 94.2%, call 106): re-run on the build's own
+  rows; GSI on a sample, with the 24 centroid rows' distance read.
 - Matsudo's config shape: `SOURCE_FILES` for the three lists and the ten
   months (the city's own `fetch_sources.py`, the publisher's file names),
   `SOURCE_AS_OF` per kind (barbers 2025-03-31; beauty and laundry

@@ -17,12 +17,12 @@ already cached for Matsudo, read in place, never written to:
   URLs, bytes and the title checks in `docs/build_briefs/matsudo.md`).
 - `data/japan/raw/`: N02-25 and N02-24, N03 (`N03-20250101_12_GML.zip`), and
   the 2021 Economic Census table (`estat_census_r3_b1_009_1a.xlsx`).
-- ⚠️ **MLIT's address blocks for Urayasu (12227) are NOT on disk** (no Chiba
-  ISJ file but 12101-12106, 12203, 12204 and 12207 exists in `data/`), and
-  wave 5 approved no download beyond the files named in the task. **The block
-  join is not measured**: an open call below. The build's own
-  `fetch_sources.py` fetches `isj/12227-24.0a.zip` and `isj/12227-19.0b.zip`
-  from `nlftp.mlit.go.jp` (the brief checks below confirm both answer).
+- **MLIT's address blocks for Urayasu (12227)**: approved by the owner on
+  2026-10-06 (call 106) and fetched that day by staging's measurement agent,
+  as `pipeline/countries/japan_fetch.py` fetches them, into
+  `data/urayasu/raw/isj/`: `12227-24.0a.zip` (39,441 B) and `12227-19.0b.zip`
+  (5,882 B) from `nlftp.mlit.go.jp`. **The block join is measured: 99.1%**
+  (below, "Coordinates").
 - **The build's own copies**: `fetch_sources.py` fetches the three lists and
   the ten months into `data/urayasu/raw/` under the publisher's file names, or
   the build copies the cached files byte for byte from `data/matsudo/raw/`
@@ -80,7 +80,7 @@ owner call 33), and beauty salons and laundries rebuilt to 2026-08-31 from the
 2026-03-31 lists and five months of new premises (an upper bound, owner call
 34): 195 beauty rows (194 premises) and 58 laundries; 329 storefronts, 326
 pins.** Against a census-based estimate: about 119%, 113% and 121%. **The
-block join is not measured** (ISJ 12227 not on disk). Food stays off (the
+block join places 99.1% at the block** (326 of 329; 1 chōme, 2 unplaced). Food stays off (the
 prefecture's food set is old-law only). Rail: **7 N02 station groups**: the
 Disney Resort Line 4 (counted as rail, owner call 53), JR Keiyō 2, and the
 Tōzai Line's one station, 浦安, **drawn cut** (owner calls 54 and 92).
@@ -193,16 +193,37 @@ and 48 laundries**. The lists hold **76 (119%), 192 (112%) and 58 (121%)**;
 rebuilt, **beauty 194 premises (113%)**. Urayasu is not thin in any kind; the
 excess is in the census side (establishments, 2021) and is not a defect.
 
-## Coordinates — a JOIN to MLIT 位置参照情報 (12227): ⚠️ NOT MEASURED
+## Coordinates — a JOIN to MLIT 位置参照情報 (12227): ✅ 99.1% at the block
 
 `https://nlftp.mlit.go.jp/isj/dls/data/24.0a/12227-24.0a.zip` and
-`…/19.0b/12227-19.0b.zip` (the brief checks confirm both answer keyless:
-39,441 B and 5,882 B on 2026-10-06, streamed by `brief_check.py`, not saved). One
-municipality, no wards (`"wardless": True`). **Neither file is on disk, and
-their download was not named in wave 5's approval**, so the join with
-`japan_register` and `WAVE2_RULES` was not run (open call 1).
+`…/19.0b/12227-19.0b.zip` (39,441 B and 5,882 B), approved by the owner on
+2026-10-06 (call 106) and saved in `data/urayasu/raw/isj/`. One municipality,
+no wards (`"wardless": True`); 1,654 block keys, 83 town-chōme keys.
 
-What the address shapes say, without the join (329 storefronts with the
+**Measured 2026-10-06** (staging's measurement agent, a scratch script only:
+`japan_register.permits_from_rows`, `load_city_isj` and `join_city` with
+`WAVE2_RULES` unchanged, no normalisation changed, so no Minato re-run was
+needed), on the 329 storefronts with the months:
+
+| Kind | Storefronts | Block | Chōme | Unplaced |
+|---|---|---|---|---|
+| Barbers | 76 | 98.7% | 0 | 1 |
+| Beauty | 195 | 100.0% | 0 | 0 |
+| Laundries | 58 | 96.6% | 1 | 1 |
+| **All** | **329** | **326 (99.1%)** | **1 (0.3%)** | **2 (0.6%)** |
+
+- The chōme shift (`町名1-2-3` read as 町名一丁目 2番) placed 267 rows. No
+  affix, 甲乙, 町, 大字 or twin rule fired.
+- **The misses**: the chōme row is a block number MLIT's 24.0a lacks in a
+  chōme it has (日の出); **the 2 unplaced rows are written in the dashed form
+  with a first number no chōme carries** (北栄 has chōme 1-4, 日の出 1-8; the
+  rows read 11 and 22), most likely a dropped hyphen or chōme in the source.
+  A row error, not a rule to add; the build leaves them unplaced or reads
+  them by hand.
+- Still at build: GSI's address search on a sample (`screen_japan_join.py`'s
+  `gsi_check`, 150 rows, one request per second).
+
+What the address shapes said before the join (329 storefronts with the
 months, shapes counted after the city prefix, no value printed):
 
 | Shape | Rows | Share |
@@ -211,13 +232,9 @@ months, shapes counted after the city prefix, no value printed):
 | `町名1丁目2-3` | 34 | 10.3% |
 | `町名12-3` (地番 or block-number, two parts) | 34 | 10.3% |
 
-- 36 distinct towns parsed. Urayasu is almost wholly under 住居表示, so a
-  block share near Ichikawa's (99.5%) and Matsudo's (98.3%) is expected; the
-  34 two-part rows are where a chōme tier or a miss would come from (which
-  towns they sit in was not read). **Measure at build**:
-  block / chōme / unplaced per kind, the misses' towns, GSI's address search
-  on a sample (`screen_japan_join.py`'s `gsi_check`, 150 rows, one request per
-  second).
+- 36 distinct towns parsed. Urayasu is almost wholly under 住居表示, and the
+  join bore out the expectation of a share near Ichikawa's (99.5%) and
+  Matsudo's (98.3%).
 
 ## 🚇 Rail — MLIT N02-25 cut at the N03 city line (12227)
 
@@ -353,13 +370,9 @@ beauty salons and laundries (as of March 31, 2026, with openings to August 31,
 
 **Open:**
 
-1. **MLIT ISJ 12227 (two files, `nlftp.mlit.go.jp`) to measure the block
-   join.** Not on disk; not named in wave 5's approval. **Recommendation:
-   approve them** (the same host and editions every Japanese build fetches;
-   the base rules for Japanese brief agents list them) and re-run this brief's
-   scratch join before the build starts. Tradeoff: without it the brief rests
-   on address shapes, and Urayasu's 住居表示 makes a high block share likely
-   but unproven.
+1. ✅ **MLIT ISJ 12227: approved by the owner (call 106, 2026-10-06)**,
+   fetched and measured: 99.1% at the block (see "Coordinates"). Kept here so
+   the numbering holds.
 2. **The monorail's on-map label.** N02 and the line's own name say
    ディズニーリゾートライン; Maihama Resort Line is the operator (the master
    list's wording). **Recommendation: label and legend "Disney Resort Line"**,
@@ -369,9 +382,9 @@ beauty salons and laundries (as of March 31, 2026, with openings to August 31,
 
 ## What the build must still measure
 
-- **The block join** (open call 1): `jr.load_city_isj` on 12227, the 329
-  storefronts through `join_city`, tiers per kind, misses read, GSI on a
-  sample; the 取次所 with no municipality against Urayasu's town list.
+- **The block join** (measured at 99.1%, call 106): re-run it on the build's
+  own rows, GSI on a sample, the 2 dashed-form misses read; the 取次所 with no
+  municipality against Urayasu's town list.
 - Matsudo's config shape: `SOURCE_FILES` (three lists, ten months),
   `SOURCE_AS_OF` per kind, `MONTHLY`, `REQUIRED_COLUMNS` (a month holding only
   「…新規なし」 has no header and must not stop the check), and the
@@ -446,7 +459,7 @@ beauty salons and laundries (as of March 31, 2026, with openings to August 31,
   },
   {
     "id": "urayasu-isj-block-live",
-    "claim": "MLIT's block-level address file for Urayasu (12227, 24.0a, 39,441 B on 2026-10-06) answers keyless - the join target the build fetches (not on disk at Step 0)",
+    "claim": "MLIT's block-level address file for Urayasu (12227, 24.0a, 39,441 B on 2026-10-06) answers keyless - the join target, fetched into data/urayasu/raw/isj/ on 2026-10-06 (owner call 106)",
     "kind": "http_ok",
     "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/12227-24.0a.zip",
     "min_bytes": 35000

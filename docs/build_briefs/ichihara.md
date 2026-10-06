@@ -21,12 +21,12 @@ written to:
 - The Kominato Railway's timetable page as staging's wave-5 probe saved it
   (2026-10-06, from `https://www.kominato.co.jp/timetable/`, HTTP 200), read
   from the probe's scratch copy, not re-fetched.
-- ⚠️ **MLIT's address blocks for Ichihara (12219) are NOT on disk** (no Chiba
-  ISJ file but 12101-12106, 12203, 12204 and 12207 exists in `data/`), and
-  wave 5 approved no download beyond the files named in the task. **The block
-  join is not measured**: open call 1. The build's own `fetch_sources.py`
-  fetches `isj/12219-24.0a.zip` and `isj/12219-19.0b.zip` from
-  `nlftp.mlit.go.jp` (the brief checks below confirm both answer).
+- **MLIT's address blocks for Ichihara (12219)**: approved by the owner on
+  2026-10-06 (call 106) and fetched that day by staging's measurement agent,
+  as `pipeline/countries/japan_fetch.py` fetches them, into
+  `data/ichihara/raw/isj/`: `12219-24.0a.zip` (504,111 B) and
+  `12219-19.0b.zip` (11,134 B) from `nlftp.mlit.go.jp`. **The block join is
+  measured: 93.2%** (below, "Coordinates").
 - **The build's own copies**: `fetch_sources.py` fetches the three lists and
   the ten months into `data/ichihara/raw/` under the publisher's file names,
   or the build copies the cached files byte for byte from `data/matsudo/raw/`
@@ -83,9 +83,9 @@ alone): 218 barbers (the 2025-03-31 list, built with its own date, owner call
 lists and five months of new premises (an upper bound, owner call 34): 423
 beauty rows (422 premises) and 76 laundries; 717 storefronts, 714 pins.**
 Against a census-based estimate: about 100%, 101% and **81%** (laundries thin,
-as Ichikawa's: open call 2). **The block join is not measured** (ISJ 12219
-not on disk), and **about half the addresses are written in 地番 form**, so it
-matters here more than in Matsudo. Food stays off (the prefecture's food set
+as Ichikawa's: open call 2). **About half the addresses are written in 地番
+form, and the block join places 93.2% at the block** (668 of 717; 43 at a
+chōme or 大字 centroid, 6 unplaced), five points under Matsudo's. Food stays off (the prefecture's food set
 is old-law only). Rail: **20 N02 station groups**: the Kominato Railway 17
 (drawn, no frequency floor; 上総牛久-養老渓谷 about 11-12 trains a day, named
 under call 86), JR Uchibō 3 (五井 shared with the Kominato), and Keisei's
@@ -210,15 +210,46 @@ look thin, as Ichikawa's did** (148, about 80%), where Matsudo's read 97%; the
 cause is not known (consent, closures since 2021, or what the census counts as
 洗濯業). Open call 2.
 
-## Coordinates — a JOIN to MLIT 位置参照情報 (12219): ⚠️ NOT MEASURED
+## Coordinates — a JOIN to MLIT 位置参照情報 (12219): ⚠️ 93.2% at the block
 
 `https://nlftp.mlit.go.jp/isj/dls/data/24.0a/12219-24.0a.zip` and
-`…/19.0b/12219-19.0b.zip` (504,111 B and 11,134 B on 2026-10-06, streamed by
-`brief_check.py`, not saved). One municipality, no wards (`"wardless": True`).
-**Neither file is on disk, and their download was not named in wave 5's
-approval**, so the join was not run (open call 1).
+`…/19.0b/12219-19.0b.zip` (504,111 B and 11,134 B), approved by the owner on
+2026-10-06 (call 106) and saved in `data/ichihara/raw/isj/`. One municipality,
+no wards (`"wardless": True`); 92,360 block keys, 394 town-chōme keys.
 
-What the address shapes say, without the join (717 storefronts with the
+**Measured 2026-10-06** (staging's measurement agent, a scratch script only:
+`japan_register.permits_from_rows`, `load_city_isj` and `join_city` with
+`WAVE2_RULES` unchanged, no normalisation changed, so no Minato re-run was
+needed; the barber sheet read with the half-width header mapped locally), on
+the 717 storefronts with the months:
+
+| Kind | Storefronts | Block | Chōme / 大字 centroid | Unplaced |
+|---|---|---|---|---|
+| Barbers | 218 | 203 (93.1%) | 13 | 2 |
+| Beauty | 423 | 394 (93.1%) | 25 | 4 |
+| Laundries | 76 | 71 (93.4%) | 5 | 0 |
+| **All** | **717** | **668 (93.2%)** | **43 (6.0%)** | **6 (0.8%)** |
+
+- The chōme shift placed 330 rows; rule C (a known town as prefix) 2; one
+  字 address took its 大字's centroid.
+- **The 43 chōme-tier rows, by class**: **28 carry a number MLIT's 24.0a
+  lacks in a town it has**: 地番 inside 大字 such as 五井 and 牛久, and a few
+  in newer 住居表示 chōme (五井中央南・西1丁目) whose blocks the edition does not
+  hold; **15 sit in rural 大字 with no block points at all in 24.0a** (朝生原,
+  養老, 月崎, 高滝, 飯給 …, the south of the city): a 大字 centroid, which in a
+  large rural 大字 can sit a kilometre or more from the shop.
+- **The 6 unplaced, by class**: **3 write a 大字 and its 小字 without 字**
+  (犬成 + 小字, 五井 + 川岸, 五井 + 梨ノ木) where the 大字 has two characters,
+  below rule C's three-character floor; **3 write the town short** (白金 for
+  MLIT's 白金町N丁目, 南国分寺 for 南国分寺台, 八幡海岸 for 八幡海岸通).
+- ⚠️ **For staging and the owner**: 93.2% is below the built Chiba cities
+  (Matsudo 98.3%, Ichikawa 99.5%). Whether that is "well below" (the trigger
+  this brief set for going back to the owner before step 3) is the owner's
+  call; the 43 centroid rows are 6% of the page, 15 of them rural. GSI's
+  address search on a sample (`screen_japan_join.py`'s `gsi_check`, 150 rows,
+  one request per second) gives their distance at build.
+
+What the address shapes said before the join (717 storefronts with the
 months, shapes counted after the city prefix, no value printed):
 
 | Shape | Rows | Share |
@@ -235,15 +266,9 @@ months, shapes counted after the city prefix, no value printed):
   edition carries 地番 points for that 大字**; otherwise they fall to the
   大字 centroid, which in a rural 大字 can sit a kilometre or more from the
   shop. Matsudo's chōme tier (1.5%) came wholly from such 大字 areas.
-  **The block file is nearly twice Matsudo's** (504,111 B against 269,856 B
-  for Matsudo's 39,921 block keys), which suggests MLIT numbers many of
-  Ichihara's 地番 areas; a hint, not a measurement.
-- **The build measures first, then decides**: block / chōme / unplaced per
-  kind, the chōme-tier towns, and GSI's address search on a sample
-  (`screen_japan_join.py`'s `gsi_check`, 150 rows, one request per second).
-  **If the block share lands well below the built Japanese cities' (Matsudo
-  98.3%, Ichikawa 99.5%), it goes back to the owner before step 3**, with the
-  rows at the 大字 centroid counted and their distance read on a GSI sample.
+  **The block file is nearly twice Matsudo's** (504,111 B; 92,360 block keys
+  against Matsudo's 39,921): MLIT numbers most of Ichihara's 地番 areas, which
+  is why the 地番 half still joins at 93.2% overall (measured above).
 
 ## 🚇 Rail — MLIT N02-25 cut at the N03 city line (12219)
 
@@ -389,12 +414,15 @@ of beauty salons and laundries (as of March 31, 2026, with openings to August
 
 **Open:**
 
-1. **MLIT ISJ 12219 (two files, `nlftp.mlit.go.jp`) to measure the block
-   join.** Not on disk; not named in wave 5's approval. **Recommendation:
-   approve them and measure before the build starts**: here it decides more
-   than in any Chiba city so far, since about half the addresses are 地番.
-   Tradeoff: without it the brief cannot say whether those rows land at a
-   block or a 大字 centroid.
+1. ✅ **MLIT ISJ 12219: approved by the owner (call 106, 2026-10-06)**,
+   fetched and measured: 93.2% at the block, 6.0% at a chōme or 大字
+   centroid (see "Coordinates"). ⚠️ What remains open is whether 93.2% is
+   "well below" the built Chiba cities and goes back to the owner before step
+   3. **Recommendation: build**, stating nothing new on the page; read the
+   43 centroid rows' distance on the build's GSI sample and bring them back
+   only if their median distance runs past about 500 m. Tradeoff:
+   about one pin in seventeen sits at a town or 大字 centroid, mostly in the
+   rural south.
 2. **Laundries at about 80% of the census estimate** (76 of about 94).
    **Recommendation: Ichikawa's call 32, built and the share stated on the
    page as an estimate** (a review-time proposal in Ichikawa's words: "The
@@ -405,10 +433,9 @@ of beauty salons and laundries (as of March 31, 2026, with openings to August
 
 ## What the build must still measure
 
-- **The block join** (open call 1): `jr.load_city_isj` on 12219, the 717
-  storefronts through `join_city`, tiers per kind, the chōme-tier 大字, GSI on
-  a sample; back to the owner if the block share is well below the built
-  cities'.
+- **The block join** (measured at 93.2%, call 106): re-run it on the build's
+  own rows, GSI on a sample with the 43 centroid rows' distance read (open
+  call 1's remaining question), the 6 unplaced read.
 - **The barber header** (city-local `source_rows` or shared `ADDR_COLS`,
   above), with a count guard of 218.
 - Matsudo's config shape: `SOURCE_FILES` (three lists, ten months),
@@ -491,7 +518,7 @@ of beauty salons and laundries (as of March 31, 2026, with openings to August
   },
   {
     "id": "ichihara-isj-block-live",
-    "claim": "MLIT's block-level address file for Ichihara (12219, 24.0a, 504,111 B on 2026-10-06) answers keyless - the join target the build fetches (not on disk at Step 0)",
+    "claim": "MLIT's block-level address file for Ichihara (12219, 24.0a, 504,111 B on 2026-10-06) answers keyless - the join target, fetched into data/ichihara/raw/isj/ on 2026-10-06 (owner call 106)",
     "kind": "http_ok",
     "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/12219-24.0a.zip",
     "min_bytes": 400000
