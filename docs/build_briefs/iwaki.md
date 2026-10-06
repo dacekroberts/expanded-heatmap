@@ -388,7 +388,12 @@ sub-type naming snack bars, out whole as Tokyo's バー・キャバレー is (ow
 2026-09-29; `docs/category_rules.md`, adult and hostess venues): 719
 restaurant permits, a fifth of them.
 
-**Open, each with a recommendation:**
+**Answered by the owner on 2026-10-06:** call 149, **merge** (the full list
+kept whole plus the months, Ichinomiya's call 126); call 150, **MHLW's
+notifications left out** (164 addressed rows, too thin for a partial layer,
+as Aomori's 248). The recommendations below are kept as the record.
+
+**Weighed, each with a recommendation:**
 
 1. **How the months merge with the March list.** (a) **Keep the full list
    whole and add the months** (`rebuilt_register` with `as_of` 2026-03-31):
