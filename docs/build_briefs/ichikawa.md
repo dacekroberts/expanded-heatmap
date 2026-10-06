@@ -201,9 +201,13 @@ has a sheet holding only a title cell (「7月新規なし」) and no header, wh
 | Kind | Official FY2024 (2025-03-31), prefecture's jurisdiction | The prefecture's list, every sheet | Share | Same date? |
 |---|---|---|---|---|
 | 理容所 | 4,350 − 600 − 331 − 238 = **3,181** | **3,168** (2025-03-31) | **99.6%** | yes |
-| 美容所 | 10,486 − 1,701 − 960 − 758 = **7,067** | **7,607** (2026-03-31) | 107.6% | a year later |
+| 美容所 | 10,486 − 1,701 − 960 − 758 = **7,067** | **6,520** (2026-03-31; 7,607 rows less the 海匝 sheet, an exact copy of 印旛, 1,087 rows) | 92.3%, 海匝's own salons missing | a year later |
 | クリーニング所 (施設) | 2,366 − 428 − 220 − 129 = **1,589** | **1,509** premises + 22 無店舗 | 95.0% | a year later |
 
+- **The beauty workbook repeats a sheet** (staging, 2026-10-06): its 海匝 sheet is an exact copy of
+  印旛 (1,087 rows, identical hashes), so 海匝's own salons are absent and a prefecture-wide sum
+  double-counts 印旛. This city's own sheet is unaffected; the build filters on the city's sheet
+  and its address, never a sum of sheets.
 - **The consent filter is thin** prefecture-wide (barbers 99.6% on the same
   date). Disclose it as the coverage reason (the licence read's condition),
   with no number, since none is published.
