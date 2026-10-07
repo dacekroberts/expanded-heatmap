@@ -102,7 +102,7 @@ section when its item is done.** The older history is in
 
 **Wave 5 ran on 2026-10-06** (owner: "We can start on the next items, i want
 to get a bunch of briefs ready for build time"): the ranked queue and all 73
-pre-verdicts now have rows; the master list stands at A 32, B 27, C 7, D 16,
+pre-verdicts now have rows; the master list stands at A 32, B 28, C 6, D 16,
 R 77, 328 discarded, 10 open gaps. Calls 46 to 184 are in
 `docs/decisions_drafts/staging.md` (four wave 5 entries). Rules made: no
 frequency floor for JR or private lines in Japan (call 46), low-frequency
@@ -122,12 +122,11 @@ vehicle).
    Also passing: Okazaki, Neyagawa, Matsue, Gifu, Koshigaya, Kawaguchi,
    Matsumoto, Tottori, Yamagata, Yao and Takatsuki, with the owner's calls
    to 184 recorded in each. Running at handoff: Fuji (download approved,
-   call 174). Not yet briefed: Kure (call 185). **Build sessions stay held**
+   call 174) and Kure (B, share stated, call 185). **Build sessions stay held**
    (new builds paused, owner 2026-10-04), three at a time when they resume;
    each brief's open calls and "for the build" shared-code notes go with it.
-2. **Open owner calls at handoff:** 185 (Kure, 69.4% of fixed premises
-   placeable: B, food only, share stated, recommended), and whatever Fuji's
-   brief returns. Calls 154-184 are in the drafts file's fourth wave 5 entry.
+2. **Open owner calls at handoff:** none beyond what the Fuji and Kure
+   briefs return (Kure to B, call 185). Calls 154-184 are in the drafts file's fourth wave 5 entry.
 3. **Liabilities list** (owner asked, 2026-10-06): a private page of every
    indemnity, reimbursement, own-cost and release clause, 67 entries,
    https://claude.ai/artifact/FMZrsssfiCtydpHroo1V16 (source data:

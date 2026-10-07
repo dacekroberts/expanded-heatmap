@@ -19,7 +19,7 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
   - Tottori's Inbi Line is drawn cut in two pieces (180). Its food share is stated as "about 8 in 10", with a note that the figure may understate (181).
   - Yamagata withholds the 4 city trade names that match an individual's 法人名 (182).
   - Matsue builds with its tiers disclosed (183).
-- **Open:** Kure, 69.4% of fixed premises placeable (185, recommended B, food only, with the share stated).
+- **Kure (call 185, "185 yes, B with share stated"):** 69.4% of fixed premises carry a real address (1,025 of 1,477), taken as about 70% on call 139's bar; moved from C to B, food only, the share stated. Bands now A 32, B 28, C 6, D 16, R 77.
 - **Slips:**
   - The Matsue brief agent printed rows holding personal data to its own console once. The Yao agent listed business addresses on its console and ran a grep with backslashes (within the hook's rule). Nothing was stored.
   - The Tokorozawa agent fetched an 11.3 MB file beyond its conditional approval; it was kept for the owner to confirm. The Fujisawa agent fetched the monorail operator's timetable PDF without it being named; counts only.
