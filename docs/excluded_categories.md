@@ -4589,6 +4589,46 @@ line.
 - Left out: 9 stations beyond it: 3 in Fuchū, 2 in Setagaya, 2 in Inagi, 1
   in Suginami and 1 in Kawasaki (Tama Ward).
 
+### Ageo (Regional) - Saitama Prefecture's lists for Ageo City and Ina Town, joined to MLIT's address blocks
+
+The page covers two municipalities, Ageo City and Ina Town, which the New
+Shuttle runs through; Ina alone is too small for a page of its own (owner,
+2026-10-06).
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Premises the prefecture leaves out at their operators' request.
+- 191 school, hospital and staff canteens, 139 vending machines, 5
+  linen-supply laundries and 1 mail-order business.
+- 145 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 1 permit past its term, and 8 that start after October 6, 2026.
+- Food trucks and stalls cannot be told apart from restaurants in the
+  prefecture's lists, so they stay in Food service.
+
+**Counted** - the prefecture's live food layers as of October 6, 2026, its
+list of permits under the old food law as of March 31, 2026 (shown while
+their term runs, so that part is an upper bound: closures since March are
+not seen), and its barber, beauty and laundry lists as of March 31, 2026
+with new premises to August 31, 2026. 15 of the 171 bakery, confectioner and
+deli rows (8.8%) have a trade name that reads as a factory; they are kept
+(owner, 2026-09-24).
+
+**One pin per premises** - 147 repeat permits are shown once.
+
+**Not placed** - 3 rows (0.1%). Another 44 sit at their town's center, and
+124 at the prefecture's own coordinates.
+
+**Names not shown** - 1 pin whose trade name is its operator's own name
+shows its permit type.
+
+**Stations.** The lines with a station in Ageo or Ina are drawn, cut at the
+two towns' line. The New Shuttle's five stations in Ina, its terminus
+Uchijuku among them, are drawn and ringed.
+- Left out: 7 stations beyond it: 6 in Saitama City (5 in Kita Ward, 1 in
+  Ōmiya Ward) and 1 in Okegawa.
+- The Shinkansen is not drawn.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

@@ -595,7 +595,7 @@ _OSM_STATION_NAMES = (
     "Kawasaki", "Yokosuka", "Himeji", "Nishinomiya", "Takamatsu", "Toyota", "Yokkaichi", "Ōtsu", "Nara",
     "Hamamatsu", "Higashiōsaka", "Kurume", "Sasebo", "Shimonoseki",
     # East-1 (2026-10-07)
-    "Higashiyamato", "Nishitōkyō", "Tama", "Higashimurayama", "Chōfu",
+    "Higashiyamato", "Nishitōkyō", "Tama", "Higashimurayama", "Chōfu", "Ageo (Regional)",
 )
 
 # Verbatim where verbatim is required. Each entry is a Notice, and the sources
@@ -1064,7 +1064,7 @@ _NOTICES = [
      "Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, "
      "Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, "
      "Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, "
-     "Higashiōsaka, Kurume, Sasebo, Shimonoseki, Higashiyamato, Nishitōkyō, Tama, Higashimurayama and Chōfu, and the "
+     "Higashiōsaka, Kurume, Sasebo, Shimonoseki, Higashiyamato, Nishitōkyō, Tama, Higashimurayama, Chōfu and Ageo (Regional), and the "
      "metro and light-rail lines and stations of Taipei and New Taipei are from OpenStreetMap, "
      "© OpenStreetMap contributors, available "
      "under the Open Database License. The alignments drawn are OSM's own "
@@ -2422,6 +2422,23 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
      "The Tokyo Metropolitan Government, MHLW and MLIT did not make and do not endorse this map.",
      False, ("Higashimurayama",)),
+    # Ageo (Regional) (notice 161): Saitama Prefecture's lists, PDL 1.0 through the
+    # prefecture portal's terms (§1.1's processed-use credit, each dataset by
+    # its title); MLIT as in Kobe's, N02 in its 2025 edition. Drafted from the
+    # approved Japanese notices; the credit's titles are a review-time check.
+    Notice(161, "Saitama Prefecture and MLIT (Ageo (Regional))",
+     "Ageo (Regional)'s businesses: 出典：「食品営業施設_新法_公開」「食品営業施設_旧法_公開」「kyuho_R080331」"
+     "（埼玉県GISオープンデータカタログ）（[https://portal-pref-saitama.hub.arcgis.com/pages/opendatacatalog](https://portal-pref-saitama.hub.arcgis.com/pages/opendatacatalog)）及び"
+     "「【埼玉県】生活衛生営業施設一覧」（埼玉県オープンデータポータルサイト）（[https://www.pref.saitama.lg.jp/a0706/6hou/ichiran.html](https://www.pref.saitama.lg.jp/a0706/6hou/ichiran.html)）を加工して作成. "
+     "Processed by this project, which cut the prefecture's lists to Ageo and Ina by address, kept the "
+     "permits in term, showed a premises once, selected the storefront types, placed each by its address "
+     "or the prefecture's own coordinates, and counted them around stations. The prefecture leaves out "
+     "some premises at their operators' request, and the old-law permits are as of March 31, 2026. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
+     "Saitama Prefecture and MLIT did not make and do not endorse this map.",
+     False, ("Ageo (Regional)",)),
     # Chōfu (notice 166): the same ledgers and MHLW file as Higashiyamato's
     # (157), the city changed.
     Notice(166, "Tokyo Metropolitan Government, MHLW and MLIT (Chōfu)",

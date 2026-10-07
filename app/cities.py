@@ -4655,6 +4655,33 @@ CITIES = [
         "label_offset": ("middle", 0, -22),
     },
     {
+        "name": "Ageo (Regional)",
+        "lat": 35.9773,
+        "lon": 139.5932,
+        "page": "pages/214_Ageo_Regional_Heatmap.py",
+        "coverage": "narrowed",
+        "placement": "Joined to address blocks (93.6%); the prefecture's coordinates where missed",
+        "data_age": "Food layers 2026-10-06; old-law list 2026-03-31; registers to 2026-08-31",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
+        "blurb": "The New Shuttle and JR East's Takasaki Line, through Ageo and Ina",
+        "region": "Japan East",
+        "country": "Japan",
+        # metro on Sakura's precedent (owner, 2026-10-06, call 121)
+        "mode": "metro",
+        "in_default_view": False,
+        # No label tier and the scaffold's starting offset: Cleanup builds
+        # Japan's region views and their labels (owner, call 198, 2026-10-07).
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
         "name": "Chōfu",
         "lat": 35.6506,
         "lon": 139.5407,

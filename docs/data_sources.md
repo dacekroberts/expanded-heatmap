@@ -100,7 +100,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
 | South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang, Daejeon, Gwangju, Gimhae |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
-| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki, Higashiyamato, Nishitōkyō, Tama, Higashimurayama, Chōfu |
+| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki, Higashiyamato, Nishitōkyō, Tama, Higashimurayama, Ageo (Regional), Chōfu |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional) |
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
@@ -3830,6 +3830,27 @@ time).
 - **MUST DO:** `check_personal_exposure.py higashimurayama` with its Japan pass,
   run 2026-10-07; the verdict is in
   `docs/decisions_drafts/worktree-japan-east-1.md` ("Higashimurayama built",
+  2026-10-07).<!-- /internal -->
+
+**161. Saitama Prefecture and MLIT (Ageo (Regional)) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with East-1 at review
+time).
+
+- **PERMITTED WITH CONDITIONS** (the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)): the food layers and the
+  R8.3.31 list through the GIS catalogue, which applies the prefecture
+  portal's terms (PDL 1.0); the 生活衛生 lists through the portal's 2024 PDL
+  record (owner, call 143). MLIT's 位置参照情報 and N02 (the 2025 edition)
+  are **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks stations
+  and is **never drawn** (the Survey Act). MHLW's file is a control only.
+- **MUST DISPLAY**: the portal terms' §1.1 credit for processed use, each
+  dataset by its own title, `出典：「食品営業施設_新法_公開」「食品営業施設_旧法_公開」「kyuho_R080331」（埼玉県GISオープンデータカタログ）（…）及び「【埼玉県】生活衛生営業施設一覧」（埼玉県オープンデータポータルサイト）（…）を加工して作成`;
+  who processed it; MLIT's credit lines.
+- **MUST NOT**: present the map as made by Saitama Prefecture; claim the
+  lists are complete.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py ageo_regional` with its Japan pass,
+  run 2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-1.md` ("Ageo (Regional) built",
   2026-10-07).<!-- /internal -->
 
 **166. Tokyo Metropolitan Government, MHLW and MLIT (Chōfu) — required, and DISPLAYED**
