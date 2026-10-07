@@ -115,6 +115,14 @@ notices 176-186.
   sentence. In its What Is Excluded section: the Hisai (久居) clause of
   Counted, and the Meisho Line's sentence. The notice (179) follows staging's
   credit form and adds "No list is claimed to be complete or current".
+- **Akita** (page 235): "The JR Uetsu Line is infrequent at Katsurane: 3
+  trains a weekday stop there toward Akita and 4 toward Sakata." (call 86;
+  Fukushima's proposed form). In its What Is Excluded section: "The list's
+  form of business does not mark snack bars, so they stay in Food service."
+  (adapted from Higashiōsaka's approved sentence) and the Uetsu Line's
+  Stations bullet. The notice (182) credits the three edition titles in the
+  出典 form, since staging's read found no prescribed wording. Line names
+  drop "Main" ("JR Ou Line", as Fukushima's), against the brief's table.
 
 ## Shared-code findings for review time (not changed here)
 
@@ -137,8 +145,73 @@ notices 176-186.
 - **`city_rows` trusts the file extension**: Ichinomiya's July beauty file is
   an XLSX named .csv, read city-locally by its magic bytes. Checking the
   bytes first in shared code would cover the next city.
+- **`map_common.render_heatmap` anchors a line's label on its first
+  segment** (Akita): the Oga Line's first N02 segment lies wholly outside the
+  city, so its label lands at 出戸浜 in 潟上市, about 2 km past the city line.
+  It places cleanly at desktop width; run `check_map_labels.js` at 375 and
+  343 at review time. The fix is `LINE_LABEL_ENDS` or anchoring on all
+  segments in shared code.
+- **A yatai form moves a Retail notification to Food service** (Akita): one
+  MHLW ⑬その他の食料・飲料販売業 row with 業態 屋台 becomes Food service through
+  the shared yatai `FORM_RULES`, although a form is meant never to bring a
+  row in. One pin; a taxonomy question, not Akita's.
 
 ## Entries
+
+### 2026-10-07 - Akita built, the city's full food list of October 2026, its barber and beauty registers and MHLW's notifications
+
+- **Akita built (page 235, notice 182): 4,961 storefronts (Food service
+  2,727, Food shops 997, Personal services 1,237) around 12 stations on 3
+  lines, 32.7% of them in a ring (1,622).** The city's 食品営業許可施設一覧 is
+  one XLSX of every permit in term on 2026-10-01 (4,041 rows), so nothing is
+  rebuilt; the registers are one file per kind (理容所台帳 420, 美容所台帳 850,
+  as of 2026-08-31); no laundry list exists. All CC BY 4.0, read 2026-10-07
+  by staging (no prescribed wording, no cost clause; the use-report request
+  is not a condition). No `"rules"` key. Built by a subagent of the
+  Regional-1 lead, integrated by the lead.
+- **The food file is renamed monthly:** `SOURCE_LINKS` reads the current
+  `r\d{6}.xlsx` link from the page at a re-fetch (Kawasaki's and Ōtsu's
+  precedent). `TERM_AS_OF` is 2026-10-01, the title's date. Past term 0;
+  starting after the as-of 0.
+- **MHLW's notifications in, as a partial Food-shops layer** (the brief's open
+  call 1), by staging's precedent of 2026-10-06 naming Akita and Ichinomiya's
+  shape (call 127): 1,227 届出 rows, 248 without a published address, 429
+  pins (428 Retail, 1 Food service read as a yatai). MHLW's 245 permits not
+  added. `OWN_POINT_FALLBACK` places 34 notification rows the join misses.
+  `SUPERSEDES` keeps the MHLW row and drops 67 city rows.
+- **The brief's food figures reproduce exactly** on the food list alone (not
+  a premises 345, temporary or mobile by 業態 16, 仕出し 16, vending 1, no rule
+  179; Food service 2,764 and Retail 720 storefront rows; 147 repeat permits;
+  2 names withheld). With the foundation's 字 rules the food join rose from
+  95.0% to 95.8% at the block and unplaced food rows fell from about 35 to 7.
+- **Step 2, all sources:** 6,538 rows read. Not a premises 436; set aside 6
+  (4 MHLW area-wide, 1 MHLW city-name-only, 1 mobile salon); closed 2. Out by
+  rule 600. On the map: 95.9% block, 1.9% 小字, 1.7% town-chōme, 0.5% MHLW's
+  point; 10 unplaced (4 in 御所野堤台3丁目, which MLIT's files lack). MHLW's
+  points a median 56 m from the block point, 86.7% within 250 m; one point
+  546 km off refused by the bbox guard.
+- The 菓子 / そうざい factory share: 20 of 455 (4.4%), kept (owner,
+  2026-09-24).
+- **Economic Census control: 2.13** (2,727 Food service pins against 1,283
+  飲食店 establishments in 05201), above the built cities' 1.56-1.92 (the
+  brief predicted 2.11). The city's 業態名 carries no hostess-venue marker, so
+  snack bars stay in Food service (`docs/category_rules.md` R3; Higashiōsaka's
+  precedent). Built cities with a marker drop 14-16% of their restaurant
+  permits that way (Fukushima 277 of 1,930, Maebashi 407 of 2,481); at that
+  share Akita's ratio would be 1.79-1.82.
+- **Privacy verdict: publish.** `check_personal_exposure.py akita`: the Japan
+  pass prints 0; 15 distinct trade names in the raw files are an operator's
+  own name, 2 pins show their permit type. The registers have no operator
+  column, so only the sign test applies there (0 names).
+- **Rail:** N02-25, 12 stations: JR Ou 8, Uetsu 5, Oga 1 (秋田 one group for
+  Ou and Uetsu, 追分 for Ou and Oga). Gate 3 exact against JR East's station
+  timetables. 2 excluded, both in 潟上市. The Akita Shinkansen runs over the Ou
+  Line's track and is not counted. The Oga Line is a one-station JR stub kept
+  as cut (Kobe's JR Takarazuka Line). The Uetsu Line at 桂根 (3 and 4 trains a
+  weekday) is drawn and named (calls 46 and 86). OSM's 12 English names stand
+  with no override. Colours from `line_colour_search.py` (Ou keeps
+  Fukushima's orange; closest pair 61.6). Median station gap 3,093 m:
+  standard rings.
 
 ### 2026-10-07 - Tsu built, Mie Prefecture's lists cut to the city by address
 

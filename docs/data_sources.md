@@ -100,7 +100,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
 | South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang, Daejeon, Gwangju, Gimhae |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
-| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki, Maebashi, Fukushima, Fukuyama, Ichinomiya, Tsu |
+| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki, Maebashi, Fukushima, Fukuyama, Ichinomiya, Tsu, Akita |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional) |
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
@@ -3879,6 +3879,30 @@ batch at review time).
 - **MUST DO:** `check_personal_exposure.py fukushima` with its Japan pass,
   run 2026-10-07; the verdict is in
   `docs/decisions_drafts/worktree-japan-regional-1.md` ("Fukushima built",
+  2026-10-07).<!-- /internal -->
+
+**182. Akita City, MHLW and MLIT (Akita) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with the Regional-1
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-07 by staging; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's food list and
+  its barber and beauty registers are **CC BY 4.0** as each dataset page
+  states; the city's 利用にあたって page adds nothing more restrictive and
+  prescribes no wording. MHLW's open data is **PDL 1.0**, as in Sasebo's
+  (127); MLIT's 位置参照情報 and N02 (the 2025 edition) are **PDL 1.0**, as in
+  Kobe's (50). N03 (CC BY 4.0) only picks stations and is **never drawn** (the
+  Survey Act).
+- **MUST DISPLAY**: CC BY 4.0's attribution with the edition titles used
+  (the food file is renamed monthly), 秋田市, the licence link and that the
+  data was modified; MHLW's 出典 line and who processed it; MLIT's credit
+  lines.
+- **MUST NOT**: imply endorsement; use MHLW's logo; claim the ministry's list
+  complete. The city's request that users report their use is not a
+  condition; nothing was sent.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py akita` with its Japan pass, run
+  2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-regional-1.md` ("Akita built",
   2026-10-07).<!-- /internal -->
 
 

@@ -2464,6 +2464,30 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The City of Fukushima and MLIT did not make "
      "and do not endorse this map.",
      False, ("Fukushima",)),
+    # Akita (notice 182): the city's own lists, CC BY 4.0 as each dataset page
+    # states (catalogue code op_cc_1; read 2026-10-07 by staging: no wording
+    # prescribed, no cost clause, the use-report request not a condition),
+    # credited with the edition titles used (the food file is renamed
+    # monthly), 秋田市, the licence link and a modification line; MHLW as in
+    # Sasebo's, its notifications only; MLIT as in Kobe's, N02 in its 2025
+    # edition. Written from Tsu's, Ichinomiya's and Sasebo's approved wording
+    # under the owner's pre-approval of template prose (2026-09-30).
+    Notice(182, "Akita City, MHLW and MLIT (Akita)",
+     "Akita's businesses: 出典：「食品営業許可施設一覧（令和8年10月1日現在）」（秋田市）"
+     "（[https://www.city.akita.lg.jp/kurashi/kenko/1005368/1010019/1017339.html](https://www.city.akita.lg.jp/kurashi/kenko/1005368/1010019/1017339.html)）、"
+     "「理容所台帳（令和８年８月３１日現在）」「美容所台帳（令和８年８月３１日現在）」（秋田市）"
+     "（[https://www.city.akita.lg.jp/kurashi/kenko/1005367/1012953/1027245.html](https://www.city.akita.lg.jp/kurashi/kenko/1005367/1012953/1027245.html)）を加工して作成 "
+     "([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.ja)); and "
+     "出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一覧」を加工して作成. "
+     "Processed by this project, which selected the storefront types, took only the ministry's "
+     "notifications, showed a premises in both once, placed each by its address or the ministry's own "
+     "coordinates, and counted them around stations. The ministry's list holds only filings whose "
+     "applicants agreed to publish them and is not complete. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
+     "Akita City, MHLW and MLIT did not make and do not endorse this map.",
+     False, ("Akita",)),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no

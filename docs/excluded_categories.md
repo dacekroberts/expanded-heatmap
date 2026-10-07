@@ -4609,6 +4609,54 @@ line.
 - The JR Meisho Line runs about 8 trains a day each way inside the city; it is
   drawn (owner, 2026-10-06).
 
+### Akita - the city's food list, its barber and beauty-salon registers and the national notifications, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, except where the national filings
+  include notifications.
+- Laundries: the city publishes no list of them.
+- 248 national notifications whose filers did not publish an address.
+- 481 food trucks, street and festival stalls and other temporary or mobile
+  permits and filings (345 of the city's permits addressed to the whole
+  city), 5 national notifications addressed to a whole area or to the city
+  alone, and 2 mobile beauty salons.
+- 330 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit or notification types that are not a
+  counter.
+- 162 school, hospital and staff canteens, 40 vending machines, 4 mail-order
+  businesses, 1 premises inside a hotel or inn and 17 caterers (仕出し).
+- 2 closed premises, which the national filings keep, marked.
+
+**Counted** - every food permit in term on October 1, 2026 in the city's
+list, old-law permits included; the city's barber and beauty-salon registers
+of August 31, 2026; and the national notifications as downloaded on October
+6, 2026. The registers list 420 barbers and 850 beauty salons, against 431
+and 841 in the national count a year earlier. The list's form of business
+does not mark snack bars, so they stay in Food service. 20 of the 455 bakery,
+confectioner and deli rows (4.4%) have a trade name that reads as a factory;
+they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 208 repeat rows are shown once (among them 25
+premises in both the barber and the beauty register), and 67 rows of the
+city's list for a premises already in the national notifications.
+
+**Not placed** - 10 rows (0.2%), 7 of the city's food permits and 3 barbers,
+at addresses MLIT's files do not hold; 4 of them in 御所野堤台3丁目, where
+MLIT's files hold only 1丁目 and 2丁目. Another 93 sit at the center of their
+小字 (a named part of a town), 85 at their town's center, and 24 at the
+ministry's own coordinates.
+
+**Names not shown** - 2 pins whose trade name is the operator's own name show
+their permit type.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 2 stations beyond it, both in Katagami.
+- The Akita Shinkansen is not drawn (Akita appears as a JR station).
+- The JR Uetsu Line runs 3 trains a weekday toward Akita and 4 toward Sakata
+  at Katsurane; it is drawn (owner, 2026-10-06).
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

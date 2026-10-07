@@ -43,25 +43,54 @@ else:
 # replaces this with its own caption of the sources' dates and credits.
 render_data_age("Akita")
 
-# TODO: replace every TODO bullet with prose true for this city, as short
-# bullets under bold headings (app/pages/43_Seoul_Heatmap.py is the model):
-# the lines by name, what is not drawn, the area and the stations left out, the
-# source and its limitations. Detail a reference page carries stays there.
+# From the japan-city skill's template, Kochi's page (the laundry sentence)
+# and Matsuyama's and Ichinomiya's pages (the ministry's notifications and its
+# points) (approved wording, pre-approved for this build, 2026-09-30); the
+# Uetsu Line's bullet is a proposal in
+# docs/decisions_drafts/worktree-japan-regional-1.md. The dates are the lists'
+# own (config.SOURCE_AS_OF); MHLW's file states no date, so it is dated by
+# download. The ring share, 32.7%, is step 3's (1,622 of 4,961, 2026-10-07).
 st.markdown(
     """
 **The lines**
 
-- TODO: the lines drawn, by name (each is labeled on the map and in the legend).
-- TODO: what is not drawn, and why.
-- TODO: the area covered; stations left out are listed below.
+- Three lines are drawn, each labeled on the map and in the legend: JR East's Ou, Uetsu and Oga
+  lines.
+- Lines and stations come from MLIT's national railway data (国土数値情報); station names in
+  English are from OpenStreetMap. Line colors are this project's own, not the operators'.
+- Only stations inside Akita City get rings, because the business data covers the city alone:
+  lines running on to Katagami, Daisen and Yurihonjo are cut at the city line. The stations left
+  out are listed below.
+- The Shinkansen is not drawn (Akita appears as a JR station).
+- The JR Uetsu Line is infrequent at Katsurane: 3 trains a weekday stop there toward Akita and 4
+  toward Sakata.
 
 **The businesses**
 
-- TODO: the data source, and any category it is missing.
+- From Akita City's list of food-business permits (as of October 1, 2026) and its registers of
+  barbers and beauty salons (as of August 31, 2026).
+- Akita City publishes no list of laundries, so they are not on this map.
+- Japan has no general business license, so shops other than food shops (clothing, electronics,
+  pharmacies) do not appear: the Food shops layer is food retail only (bakeries and confectioners,
+  delis, butchers and fishmongers).
+- Shops that only notify rather than hold a permit, such as supermarkets, convenience stores and
+  greengrocers, appear only where they chose to publish in the Ministry of Health, Labour and
+  Welfare's open data (downloaded October 6, 2026), so that part of the Food shops layer is partial.
+- The lists may include premises that have closed, so a dot means a permit on file, not a
+  business open today.
+
+**Reading the map**
+
+- The lists give an address but no location. Each address is matched to MLIT's address reference
+  data, which places most at their street block; where that fails, the dot sits at the ministry's
+  own coordinates for the same premises, or else at its district's center.
+- Where a trade name is its operator's own name, the dot shows its permit type instead.
+- Names and permit types are shown in Japanese, as the lists record them.
+- **About 33% of storefronts sit within a ring.**
 """
 )
 
-render_map_help("three business categories (Retail, Food service and Personal services)")
+render_map_help("three business categories (Food shops, Food service and Personal services)")
 render_excluded_stations("Akita")
 render_country_links("Akita")
 
