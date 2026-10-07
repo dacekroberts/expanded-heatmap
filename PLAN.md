@@ -34,13 +34,16 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 - [ ] **Macro-map regions for the ranked 93 (owner, 2026-10-04; DECISIONS,
   "Region views can compete" and "Europe West and Europe East").** The
   competition (`COMPETING_REGIONS`, empty; the staged names' widths) is on
-  master since 2026-10-05, with no visible change. Still to come, each made
-  by the first city that needs it: Japan's eight regions plus Osaka
-  Prefecture (wave 4; the `japan-city` skill); Europe West and Europe East,
-  Latvia, Romania and Hungary in the east, Czechia kept apart (the Romanian
-  six); Brăila and Galați, Nagakute and Nisshin, Itami and Toyonaka into
-  `KNOWN_STACKED`. Greece was not in the measured roster: Thessaloniki joins
-  "Europe" as built, and the split assigns Greece when it is made.
+  master since 2026-10-05, with no visible change. **Europe West and Europe
+  East (Greece east), the Germany and Benelux views, and every country's top
+  city labelled first are built on branch `europe-split`** (owner, calls 194,
+  195, 197, 2026-10-07; DECISIONS, "Europe splits West and East"), based on
+  Abroad's tip: it lands at review time after Abroad's batch, merging master
+  first, with a reboot and a `map-chrome` deploy-verify. Still to come, each
+  made by the first city that needs it: Japan's eight regions plus Osaka
+  Prefecture (wave 4; the `japan-city` skill), with views enough that no
+  city is labelled nowhere (27 staged Japanese cities would be); Brăila and
+  Galați, Nagakute and Nisshin, Itami and Toyonaka into `KNOWN_STACKED`.
 
 - [ ] **Review time: the Japanese pages' name-rule bullet gains the sign rule**
   (owner, 2026-10-06; DECISIONS, "the name rule's version 2"). Proposal, every
