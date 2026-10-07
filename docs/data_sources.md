@@ -3809,6 +3809,27 @@ batch at review time).
   2026-10-07; the verdict is in `docs/decisions_drafts/worktree-japan-kansai-1.md`
   ("Hirakata, Suita, Amagasaki and Uji built", 2026-10-07).<!-- /internal -->
 
+**171. Suita City, MHLW and MLIT (Suita) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with the Kansai-1
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-07; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's two food lists
+  and three registers are **CC BY 4.0** by the 衛生管理課 page and
+  吹田市オープンデータ利用規約; MHLW's open data is **PDL 1.0**, as in Sakai's
+  (104); MLIT's 位置参照情報 and N02 (the 2025 edition) are **PDL 1.0**, as in
+  Kobe's (50). N03 (CC BY 4.0) only picks stations and is **never drawn** (the
+  Survey Act).
+- **MUST DISPLAY**: the terms' form for a modified work (2(3)),
+  「この地図は以下の著作物を改変して利用しています。【タイトル】、吹田市、クリエイティブ・コモンズ・ライセンス表示 4.0（https://creativecommons.org/licenses/by/4.0/deed.ja）」;
+  MHLW's 出典 line and who processed it; MLIT's credit lines.
+- **MUST NOT** (§5): present the edited data as if the city made it; harm or
+  defame the city or others; use its logo; claim the ministry's opt-in list
+  is complete.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py suita` with its Japan pass, run
+  2026-10-07; the verdict is in `docs/decisions_drafts/worktree-japan-kansai-1.md`
+  ("Hirakata, Suita, Amagasaki and Uji built", 2026-10-07).<!-- /internal -->
+
 **172. Hyōgo Prefecture and MLIT (Itami) — required, and DISPLAYED**
 (written into `render_site_notices()` 2026-10-07; lands with the Kansai-1
 batch at review time).
@@ -3839,6 +3860,44 @@ batch at review time).
 - **MUST DO:** `check_personal_exposure.py kakogawa` with its Japan pass, run
   2026-10-07; the verdict is in `docs/decisions_drafts/worktree-japan-kansai-1.md`
   ("Kakogawa built", 2026-10-07).<!-- /internal -->
+
+**174. Amagasaki City and MLIT (Amagasaki) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with the Kansai-1
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-07; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's food permit
+  and notification lists and its barber, beauty and laundry registers are
+  **CC BY 4.0** by each open-data page and 尼崎市オープンデータ利用規約 §2;
+  MLIT's 位置参照情報 and N02 (the 2025 edition) are **PDL 1.0**, as in Kobe's
+  (50). N03 (CC BY 4.0) only picks stations and is **never drawn** (the Survey
+  Act). MHLW's file for the city is a control only and is not credited.
+- **MUST DISPLAY** (§3): the source and that it was modified; no wording is
+  prescribed, so Yokkaichi's 出典 form with the titles, 尼崎市, the date and
+  the licence link; MLIT's credit lines.
+- **MUST NOT** (§6): present the edited data as if the city made it; harm or
+  defame the city or others; imply endorsement.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py amagasaki` with its Japan pass, run
+  2026-10-07; the verdict is in `docs/decisions_drafts/worktree-japan-kansai-1.md`
+  ("Hirakata, Suita, Amagasaki and Uji built", 2026-10-07).<!-- /internal -->
+
+**175. MHLW and MLIT (Uji) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with the Kansai-1
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS** (the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). MHLW's open data for Kyoto
+  Prefecture is **PDL 1.0**, as in Kurume's (126); MLIT's 位置参照情報 and N02
+  (the 2025 edition) are **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only
+  picks stations and is **never drawn** (the Survey Act). No city source is
+  used.
+- **MUST DISPLAY**: `出典：「食品衛生申請等システム」（厚生労働省）（https://i2fas.mhlw.go.jp/）の「食品等営業許可・届出一覧」を加工して作成`,
+  who processed it (the top page linked only); MLIT's credit lines.
+- **MUST NOT**: present it as MHLW's own; use MHLW's logo; claim the list is
+  complete or accurate.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py uji` with its Japan pass, run
+  2026-10-07; the verdict is in `docs/decisions_drafts/worktree-japan-kansai-1.md`
+  ("Hirakata, Suita, Amagasaki and Uji built", 2026-10-07).<!-- /internal -->
 
 
 ## Gaps
