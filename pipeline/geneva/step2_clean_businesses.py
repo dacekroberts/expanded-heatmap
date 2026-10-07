@@ -155,7 +155,8 @@ def main():
     unknown_form = form == ""
     shares = pd.Series([bool(_fold(n) & _fold(lg)) for n, lg in zip(name, legal)], index=est.index)
     shaped = name.map(looks_personal)
-    withhold = (sole & (shares | shaped)) | (unknown_form & shaped) | (name == "")
+    office = est["TYPE_LOCAL"] == config.OFFICE_PREMISES
+    withhold = (sole & (shares | shaped)) | (unknown_form & shaped) | (office & shaped) | (name == "")
     est["address"] = (est["PHYS_RUE"].str.strip() + " " + est["PHYS_NUMRUE"].str.strip()).str.strip()
     est["business_name"] = name.where(~withhold, est["address"])
     print(f"  sole traders: {int(sole.sum()):,}; their names withheld (the address shown): "
@@ -164,6 +165,10 @@ def main():
     print(f"  legal form unknown (no company row in the canton): {int(unknown_form.sum()):,}, "
           f"withheld as person-shaped {int((unknown_form & shaped).sum()):,}; no trade name "
           f"{int((name == '').sum()):,}")
+    print(f"  office-typed: {int(office.sum()):,} kept; person-shaped names there shown as the "
+          f"address, any legal form: {int((office & shaped & ~sole & ~unknown_form).sum()):,} "
+          f"beyond the sole-trader rule")
+    emit("office_person_shaped_withheld", int((office & shaped & ~sole & ~unknown_form).sum()))
     emit("names_withheld", int(withhold.sum()))
     del legal
 

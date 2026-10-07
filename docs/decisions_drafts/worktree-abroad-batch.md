@@ -30,7 +30,12 @@ tradeoff. A parked call stops only what it names.
    info@kommunalverbund.de, delays Bremen and reverses call 13's
    no-outreach. Stops: Bremen's landing only; the build proceeds on the
    branch.
-2. **Geneva: the 326 kept establishments typed Bureau/étude/cabinet** (the
+2. ✅ **Answered (owner, 2026-10-07: "keep as built unless personal info
+   that is not trade name").** Kept; in those premises a person-shaped name
+   now shows the street address whatever the legal form: 37 more names
+   withheld (Sàrl 23, SA 11, SNC 2, a branch 1), 1,311 in all; the 131
+   office-typed sole traders were already withheld. Was: **Geneva: the 326
+   kept establishments typed Bureau/étude/cabinet** (the
    owner's call 3 of 2026-10-04 asked for the count by code at build). In
    the 12 communes, of 5,863 kept: beauty institutes 131, other physical
    well-being 41, hairdressers 25, car dealers 23, computer shops 11,
@@ -107,8 +112,10 @@ tradeoff. A parked call stops only what it names.
   owner's registered name (function words and legal-form tails aside) or is
   person-shaped (`residence.looks_personal`); a name of unknown legal form
   (746 establishments whose firm sits outside the canton) only where it is
-  person-shaped. 1,130 of 1,490 sole traders' names withheld (974 share a
-  word, 372 person-shaped), 144 of unknown form: **1,274 in all**. A
+  person-shaped; and, on the owner's answer to parked call 2 (2026-10-07), a
+  person-shaped name in office-typed premises whatever the legal form (37).
+  1,130 of 1,490 sole traders' names withheld (974 share a word, 372
+  person-shaped), 144 of unknown form, 37 office-typed: **1,311 in all**. A
   trade-word filter was measured and rejected: the most frequent words in
   sole traders' registered names are given names and surnames (marie,
   jean, silva), so a frequency filter would drop the very words the rule

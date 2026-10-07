@@ -1127,7 +1127,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Melbourne | Census coordinates (per property; 1,840 distinct points for 4,959 storefronts) | The City of Melbourne LGA; upper-floor tenancies kept | Parking, non-store retail, organisations, licensed members' clubs, catering, funerals, brothels and other personal services n.e.c. by class; one n.e.c. catch-all kept |
 | **Switzerland** | | | |
 | Zurich | Register coordinates, LV95 (100%) | Retail only where alcohol is licensed; institutional kitchens licensed as restaurants not separated (about 1 in 30 food licences) | Canteens, cabarets, event rooms, food stands and caterers, licence-exempt premises by type; address shown for a person-named trade name (12) |
-| Geneva (Regional) | Register coordinates, LV95 (100%) | Firms with no separate establishment (1,847) | Home-based, itinerant and market-stand premises; vehicle repair, caterers, canteens, the personal-services catch-all; 1,274 sole-trader or person-shaped trade names shown as the street address |
+| Geneva (Regional) | Register coordinates, LV95 (100%) | Firms with no separate establishment (1,847) | Home-based, itinerant and market-stand premises; vehicle repair, caterers, canteens, the personal-services catch-all; 1,311 sole-trader or person-shaped trade names shown as the street address |
 | **Greece** | | | |
 | Thessaloniki | Register coordinates (100%) | General retail is not licensed here; the layer carries no date | Canteens, recreation, wholesale, vending machines, funeral, brothels; no names to withhold |
 | **Belgium** | | | |

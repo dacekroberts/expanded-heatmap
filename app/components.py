@@ -3045,8 +3045,8 @@ _NOTICES = [
      "entreprises du canton de Genève, REG), extrait en date du 04.10.2026. Modified by this "
      "project: establishments filtered to shops, food and drink and personal services in the "
      "12 communes TPG's trams serve, grouped into three categories and mapped by distance to "
-     "tram stops, with a sole trader's trade name replaced by the street address where it is "
-     "the owner's own name; the categories and counts are this project's. Use of the data is "
+     "tram stops, with a trade name replaced by the street address where it is a person's "
+     "own name; the categories and counts are this project's. Use of the data is "
      "subject to the SITG's [conditions of use]"
      "(https://sitg.ge.ch/ressources/conditions-utilisation-donnees). The État de Genève does "
      "not endorse this map.",
@@ -3065,6 +3065,24 @@ _NOTICES = [
      "mapped by distance to metro stations. The City of Thessaloniki has not reviewed or "
      "endorsed this map.",
      False, ("Thessaloniki",)),
+    # Bremen (notice 156, the Abroad batch's number, 2026-10-07): the
+    # Kommunalverbund's survey under "Creative Commons Namensnennung (CC-BY)",
+    # no version (licence-read 2026-10-05 and 2026-10-07). The Quellenvermerk
+    # and the licence title exactly as the record writes them, linked to the
+    # licence URL the record gives (never a versioned CC page, which would
+    # claim a version the publisher never named); the dataset's title and a
+    # link to it; the changes; no endorsement. The English sentences are the
+    # build's draft, a review-time proposal.
+    Notice(156, "Kommunalverbund Niedersachsen/Bremen e.V. (Bremen)",
+     "Quellenvermerk: Kommunalverbund Niedersachsen/Bremen e.V. Bremen's shops are from the "
+     "retail survey [Einzelhandelsbestand in der Region Bremen 2022]"
+     "(https://geoportal.bremen.de/resources/data/Einzelhandelsbestand_reduziert.zip), "
+     "licensed under [Creative Commons Namensnennung (CC-BY)]"
+     "(https://www.opendefinition.org/licenses/cc-by). This map has been changed from the "
+     "source: its points are filtered to the City of Bremen, grouped into one category and "
+     "mapped by distance to tram stops. The Kommunalverbund Niedersachsen/Bremen e.V. has not "
+     "reviewed or endorsed it.",
+     False, ("Bremen",)),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

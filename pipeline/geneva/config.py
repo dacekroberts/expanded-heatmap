@@ -64,6 +64,13 @@ RECORD_TYPE = "Etablissement"
 # mobile-units row).
 DROP_PREMISES = ("Activité à domicile", "Activité itinérante", "Stand ambulant")
 SOLE_TRADER = "Entreprise individuelle"
+# The 326 kept establishments typed as an office stay on the map (owner,
+# 2026-10-07), except that a person-shaped name there shows the street
+# address whatever the legal form: a practice in an office building named for
+# its practitioner is the person's name, not a trade name (the owner's
+# condition). Measured 2026-10-07: 37 such names (Sàrl 23, SA 11, SNC 2, a
+# branch 1); every office-typed sole trader already falls under the rule above.
+OFFICE_PREMISES = "Bureau/étude/cabinet"
 
 # --- OpenStreetMap: one query for the city (osm-rail) ------------------------
 

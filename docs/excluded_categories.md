@@ -2954,10 +2954,11 @@ code but no separate establishment (882 retail, 333 food service, 632 personal s
 The register gives such a firm no premises type, so a shop cannot be told from a seat at
 someone's home, and they are left out (owner, 2026-10-04); the page says so.
 
-**Shown, but not named**: 1,274 storefronts show their street address instead of a trade
+**Shown, but not named**: 1,311 storefronts show their street address instead of a trade
 name: 1,130 sole traders whose trade name is their own name (it shares a word with the
-owner's registered name, or reads as a person's name), and 144 person-shaped names whose
-legal form the register does not give.
+owner's registered name, or reads as a person's name), 144 person-shaped names whose
+legal form the register does not give, and 37 person-shaped names of firms whose premises
+the register types as an office (a practice named for its practitioner).
 
 **Stations.** Every stop of TPG trams 12, 14, 15, 17 and 18 in the 12 communes (81). Tram
 17 runs on into Gaillard, Ambilly and Annemasse, in France: its 4 stops there are drawn

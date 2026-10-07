@@ -90,8 +90,8 @@ st.markdown(
   every establishment of an active business, with its activity. Restaurants, cafés and bars; shops
   of every kind; and hairdressers, beauty institutes, laundries and saunas.
 - Each is placed at the point the register records for it, and each dot shows the trade name and
-  its activity; where a sole trader's trade name is their own name, the dot shows the street
-  address instead.
+  its activity; where a trade name is a person's own name, the dot shows the street address
+  instead.
 - Businesses the register types as run from home, itinerant trades and market stands are left out.
 - About 1,800 firms registered with no separate establishment are left out too: the register gives
   them no premises, so a shop cannot be told from a home address.
