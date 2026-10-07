@@ -426,6 +426,8 @@ downloads (call 147).
 
 ## What the build must still measure
 
+- **Japan foundation (2026-10-07, 521d28fc):** the 八雲村 → 八雲町 fold is a config key, not a shared rule. Matsue's `japan.CITIES` entry carries `"town_aliases": {"八雲村": "八雲町"}`; the laundry row then reaches 八雲町東岩坂 (unplaced 3 → 2). Leave `"rules"` out of the entry (the foundation's raising check).
+
 - ⚠️ **Shared code** (each followed by the Minato control and every city
   screen): `ADDR_COLS` + the two long address labels; `OPERATOR_COLS` +
   営業者の名称又は氏名; `TYPE_COLS` + クリーニング所又は取次所の別; optionally
