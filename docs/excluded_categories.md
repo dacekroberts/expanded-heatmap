@@ -4425,6 +4425,50 @@ line.
   Isesaki and Shibukawa.
 - No Shinkansen station lies in the city.
 
+### Fukushima - the city's food list with its monthly new permits and its barber, beauty, laundry and coin-laundry lists, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food: they notify the city rather than hold a
+  permit, and the list holds permits only.
+- 331 food trucks (自動車), street and festival stalls (露店) and other
+  temporary or mobile permits, and 17 laundry pick-up services with no shop
+  (無店舗取次店).
+- 229 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 161 school, hospital and staff canteens, 7 vending machines, 106 premises
+  inside hotels and inns, 230 caterers (仕出し) and 277 snack bars and
+  cabarets.
+
+**Counted** - every food permit in term on March 31, 2026 in the city's list,
+old-law permits included, plus the new permits the city listed each month
+from April to August 2026, and the city's barber, beauty-salon, laundry and
+coin-laundry lists of March 31, 2026 (coin laundries as Personal services,
+owner 2026-09-28). The monthly lists hold new permits only, and closures are
+not published, so a business that closed after March 2026 is still counted:
+the map is an upper bound. 18 of the 553 bakery, confectioner and deli rows
+(3.3%) have a trade name that reads as a factory; they are kept (owner,
+2026-09-24).
+
+**One pin per premises** - 46 rows de-duplicated within the lists (the same
+address, trade name and permit type listed more than once; the permit ending
+latest kept), and 169 repeat permits shown once.
+
+**Not placed** - 7 rows (0.2%), in 北中川原, 舘ノ前, 北原 and 公事田, whose
+addresses MLIT's files do not hold. Another 305 sit at the center of their
+town (142) or 小字 (163).
+
+**Names not shown** - 2 pins whose trade name is the operator's own name show
+their permit type.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 5 stations beyond it: 3 in Date, 1 in Nihonmatsu and 1 in
+  Yamagata Prefecture.
+- The Tohoku Shinkansen is not drawn (Fukushima appears as a JR station).
+- The JR Ou Line runs about 11 trains a day each way inside the city; it is
+  drawn (owner, 2026-10-06).
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

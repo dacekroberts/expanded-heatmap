@@ -30,6 +30,17 @@ notices 176-186.
    **Resolved 2026-10-07, the same day:** Staging's licence read found Mie's
    lists PERMITTED WITH CONDITIONS (CC BY 4.0 by 第１条; master's staging
    drafts, "Licence reads for the Japan builds"). Tsu is built after it.
+2. **Fukushima (page 233, notice 180; built, not blocked): the registers'
+   2026 monthly files** (`r0808riyou.csv`, `r0804biyou.csv` to
+   `r0807biyou.csv`, 360-709 B each; the same page, publisher and terms;
+   none for laundries; the brief's open call 3, staging's call 153). They
+   are not approved and were not fetched, so the registers stand at
+   2026-03-31 (`SOURCE_AS_OF`) while the food leg reaches 2026-08-31.
+   *Recommend* approving them (Ichinomiya's call 128), then rebuilding the
+   barber and beauty lists to 2026-08-31 in `config.source_rows`.
+   *Tradeoff:* a handful of salons, a re-render and one more approval,
+   against registers five months older than the food leg (stated on the
+   page and in data_age).
 
 ## Proposals for review time (page sentences no template covers)
 
@@ -45,8 +56,115 @@ notices 176-186.
   and the sentence "No list is claimed to be complete or current; the
   ministry's holds only filings whose applicants agreed to publish them."
   (第３条).
+- **Fukushima** (page 233): "From Fukushima City's list of food-business
+  permits (as of March 31, 2026), with the new permits it listed each month
+  to August 31, 2026, and its registers of barbers, beauty salons, laundries
+  and coin laundries (as of March 31, 2026)." (the template's sentence with
+  the months and Sapporo's coin laundries added), and "The JR Ou Line is
+  infrequent inside the city: about 11 trains a day each way stop at
+  Sasakino and Niwasaka." (call 86 asks for the stretch to be named; no
+  approved form yet). In its What Is Excluded section: the Counted
+  paragraph's month and upper-bound sentences (from Higashiōsaka's) and "The
+  JR Ou Line runs about 11 trains a day each way inside the city; it is
+  drawn (owner, 2026-10-06)." The notice (180) adds 新規食品営業許可施設一覧,
+  the monthly files' own title, to the brief's five titles, and the
+  processing sentence "this project added the new permits to the list".
+  Also for review time (open call 4, precedent applied): of the 230 caterers
+  left out, 161 also name a counter form (一般食堂 仕出し屋 …); a sentence
+  saying so is not on the page.
 
 ## Entries
+
+### 2026-10-07 - Fukushima built, the full food list kept whole with five months of new permits, all three buckets from the city's own lists
+
+- **Fukushima built (page 233, notice 180): 3,335 storefronts (Food service
+  1,653, Food shops 621, Personal services 1,061) around 22 stations on 4
+  lines, 60.4% of them in a ring (2,013).** Fukuyama's shape (a city's full
+  food list plus the months since) with Ichinomiya's answered merge. All
+  three buckets come from the city's own CSVs on its 食品営業許可施設、
+  生活衛生関係施設一覧 page (CC BY 2.1 JP by the 福島市オープンデータ利用規約;
+  the uncapped ４ accepted, call 110). No `"rules"` key (`ALL_RULES`).
+  `brief_check.py` 18/18 (2026-10-07). Built by a subagent of the
+  Regional-1 lead, integrated by the lead.
+- **The merge (the brief's open call 1), by precedent: Ichinomiya's call 125
+  and Iwaki's 149.** The list of permits in term on 2026-03-31 is kept whole,
+  and the five monthly lists of new permits (April to August) are added.
+  They are read as two sources, `food` and `food_new` (`SOURCE_KIND`), each
+  through `rebuilt_register`, and each permit's term is read against its own
+  file's date (`TERM_AS_OF` 2026-03-31 and 2026-08-31). One source rebuilt
+  from all six files has only one as-of: 2026-03-31 would hold back the 89
+  new permits as late starters (call 172), and 2026-08-31 would drop the 98
+  permits expiring in May and July (call 161), which the months never
+  republish.
+- **The brief's figures reproduce:** one rebuild of all six files gives
+  3,769 rows, 2,883 restaurant permits (101.3% of e-Stat's 2,846), Food
+  service 1,658 and Retail 772. The two sources give 3,776 rows (3,689 +
+  87); the 7 extra rows are new permits at a premises already in the full
+  list (4 Food service, 1 Retail, 2 snack bars), and one pin per premises
+  folds them. Permits past their term 0; starting after the as-of 0. City
+  config only; the foundation's checklist names Fukushima's kind per file
+  as city-local.
+- **MHLW's file stays a control** (open call 2, staging's call 152), by
+  Iwaki's call 150 and Tsu's precedent: a thin notifications layer stays
+  out. Its 44 permits are all in the city's files, and it has 144 fixed
+  Retail notifications. Not in `SOURCE_FILES`, not on the notice; a
+  "(control)" row in `docs/data_sources/japan.md`.
+- **Caterers (open call 4):** the shared `FORM_RULES` as written
+  (`docs/category_rules.md`; Sasebo's and Kanazawa's 仕出し precedent). 230
+  restaurant permits go out as 仕出し, 161 of them also naming a counter
+  form.
+- **The registers' monthly files** (open call 3, staging's 153) were not
+  fetched; the registers stand at 2026-03-31 (parked call 2, not blocking).
+- **Step 2:** 4,869 rows read (food 3,689, months 87, barbers 278, beauty
+  638, laundries 125, coin laundries 52). Not a premises 162 (145 food
+  permits with no address, the festival stalls among them, and 17 storeless
+  laundry pick-ups). Out by rule 1,196: 277 snack bars and cabarets, 230
+  caterers, 229 manufacturing and other non-counter types, 186 vehicles
+  (種目 自動車による営業, four spellings), 161 canteens, 106 inside
+  accommodation, 7 vending. Join, 3,511 storefront rows: block 3,176,
+  town-chōme 150, 小字 centroid 178 (the foundation's `koaza_centroid`),
+  unplaced 7 (0.2%; the brief's 40 came before the foundation's 字 rules).
+  One pin per premises: 169 repeat rows. On the map: 90.9% block, 4.3%
+  town-chōme, 4.9% 小字. Registers against e-Stat FY2024: barbers 278 of
+  282, beauty salons 638 of 630, laundries 108 of 117, as the brief says.
+- **The 菓子 / そうざい factory share:** 18 of 553 (3.3%), kept (owner,
+  2026-09-24).
+- **Economic Census control:** 1,653 Food service pins against 1,030 飲食店
+  establishments in 07201 (2021, table 9-1A, industry 76): 1.60 per
+  establishment, inside the built cities' 1.56-1.92. The brief's 1,226
+  establishments and its 1.35 estimate do not reproduce from
+  `japan_census_control.py`.
+- **Privacy verdict: publish.** `check_personal_exposure.py fukushima`: the
+  Japan pass prints 0; 4 trade names in the raw files are an operator's own
+  name, 2 pins show their permit type. 営業者氏名 / 営業者氏名漢字 and 開設者氏名
+  are read in memory only; the operators' own addresses and phones are never
+  selected.
+- **Rail:** N02-25, 22 stations: the Iizaka Line 12 of 12, the Abukuma
+  Express 5 of 24, JR Tohoku 5 of 155, JR Ou 3 of 105 (福島 one group on all
+  four, spread 36 m). The Tohoku Shinkansen dropped; the Yamagata
+  Shinkansen stops at neither 笹木野 nor 庭坂. 5 excluded: 伊達市 3, 二本松市
+  1, Yamagata Prefecture 1 (板谷). Gate 3: Fukushima Kotsu's timetable page
+  lists 12 stations, exact. English names: OSM's 32 objects, 3 cited
+  overrides (Bijutsukan-toshokan-mae; Iizaka-onsen, as Hakodate's
+  Yunokawa-onsen; Ioji-mae for OSM's Iohji-mae). Line names follow JR
+  East's 福島 timetable index and ii-den.jp, with no macrons. Colours from
+  `line_colour_search.py` (the Abukuma blue goes teal, Maebashi's; the
+  Tohoku green olive; closest pair 45.4). Median station spacing 862 m:
+  standard rings. No frequency floor (calls 46 and 86): the Ou Line from 福島
+  to 庭坂, about 11 trains a day each way, drawn and named.
+- **A slip:** staging's record did not quote the terms' ２(３) credit form,
+  so the build fetched the terms PDF the brief names
+  (`opendatariyokiyaku_2.pdf`, 133,265 B, HTTP 200, the city's host) into
+  the scratchpad and read the form only; the verdict was not re-read. A
+  terms page, not data, but not named for fetching at the build.
+- **For the next city with a full list plus new-permit months:** under the
+  foundation's term rules (calls 161 and 172) it cannot be one
+  `rebuilt_register` source, since `TERM_AS_OF` takes one date per source;
+  two sources by `SOURCE_KIND` is the shape (Ichinomiya's and Iwaki's too).
+  Proposed for the japan-city skill at review time.
+- **Not done here, by rule:** no region view, label tier or label offset
+  (owner, call 198); `screen_japan_join.py` has no Fukushima entry;
+  `city_master_list.md`'s built counts are Staging's.
 
 ### 2026-10-07 - Maebashi built, two food lists split by date and registers rebuilt to August 2026
 

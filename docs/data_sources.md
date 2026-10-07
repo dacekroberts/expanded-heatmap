@@ -100,7 +100,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
 | South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang, Daejeon, Gwangju, Gimhae |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
-| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki, Maebashi |
+| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki, Maebashi, Fukushima |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional) |
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
@@ -3789,6 +3789,28 @@ batch at review time).
 - **MUST DO:** `check_personal_exposure.py maebashi` with its Japan pass, run
   2026-10-07; the verdict is in
   `docs/decisions_drafts/worktree-japan-regional-1.md` ("Maebashi built",
+  2026-10-07).<!-- /internal -->
+
+**180. Fukushima City and MLIT (Fukushima) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with the Regional-1
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-06; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's lists are
+  **CC BY 2.1 JP** under the 福島市オープンデータ利用規約 ２(２), which the
+  city's open-data list sends every user to; the list page itself carries no
+  licence line. MLIT's 位置参照情報 and N02 (the 2025 edition) are **PDL 1.0**,
+  as in Kobe's (50). N03 (CC BY 4.0) only picks stations and is **never
+  drawn** (the Survey Act).
+- **MUST DISPLAY** (２(３), the form for a modified work): 「この地図は以下の著作物を改変して利用しています。食品営業許可施設一覧、新規食品営業許可施設一覧、理容所一覧、美容所一覧、クリーニング所一覧、コインオペレーションクリーニング一覧、福島市、クリエイティブ・コモンズ・ライセンス 表示 2.1 日本（http://creativecommons.org/licenses/by/2.1/jp/）」;
+  MLIT's credit lines.
+- **MUST NOT**: imply the city's endorsement; say the pins are businesses
+  open now. **Cost**: ４, the city's costs arising from our use, our breach
+  or our infringement reimbursed, uncapped: accepted by the owner
+  (2026-10-06, call 110).<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py fukushima` with its Japan pass,
+  run 2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-regional-1.md` ("Fukushima built",
   2026-10-07).<!-- /internal -->
 
 

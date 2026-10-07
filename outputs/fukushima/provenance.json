@@ -1,0 +1,154 @@
+{
+  "city_barber": {
+    "as_of": "2026-03-31",
+    "bytes": 41499,
+    "dataset_page": "https://www.city.fukushima.fukushima.jp/soshiki/2/1005/1/1/5/1_1/index.html",
+    "file": "r07nendomatsuriyou.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:20:48+00:00",
+    "rows": 278,
+    "sha256": "12b9cad10e01278f35fca724a9a6090f132cc33d132d8438932203d63eecccda",
+    "url": "https://www.city.fukushima.fukushima.jp/material/files/group/7/r07nendomatsuriyou.csv"
+  },
+  "city_beauty": {
+    "as_of": "2026-03-31",
+    "bytes": 115846,
+    "dataset_page": "https://www.city.fukushima.fukushima.jp/soshiki/2/1005/1/1/5/1_1/index.html",
+    "file": "r07nendomatsubiyou.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:20:52+00:00",
+    "rows": 638,
+    "sha256": "03772f5899921460dc4c8d3c9d4f01d1944689bd74e20541832b970bac1df7bf",
+    "url": "https://www.city.fukushima.fukushima.jp/material/files/group/7/r07nendomatsubiyou.csv"
+  },
+  "city_coinlaundry": {
+    "as_of": "2026-03-31",
+    "bytes": 11446,
+    "dataset_page": "https://www.city.fukushima.fukushima.jp/soshiki/2/1005/1/1/5/1_1/index.html",
+    "file": "r07nendomatsucoincleaning.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:21:00+00:00",
+    "rows": 52,
+    "sha256": "31d00131f4c4ca3d2f04f38f6dce064170507b62d1cbf9381bed6af0132922b2",
+    "url": "https://www.city.fukushima.fukushima.jp/material/files/group/7/r07nendomatsucoincleaning.csv"
+  },
+  "city_food_04": {
+    "as_of": "2026-04-30",
+    "bytes": 4539,
+    "dataset_page": "https://www.city.fukushima.fukushima.jp/soshiki/2/1005/1/1/5/1_1/index.html",
+    "file": "r0804syokuhin.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:20:31+00:00",
+    "rows": 21,
+    "sha256": "bd1386daa1b429e4fd55fb8cd47cfa0a56358457e71735a70b85633d36ba2dd0",
+    "url": "https://www.city.fukushima.fukushima.jp/material/files/group/7/r0804syokuhin.csv"
+  },
+  "city_food_05": {
+    "as_of": "2026-05-31",
+    "bytes": 3719,
+    "dataset_page": "https://www.city.fukushima.fukushima.jp/soshiki/2/1005/1/1/5/1_1/index.html",
+    "file": "r0805syokuhin.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:20:34+00:00",
+    "rows": 16,
+    "sha256": "23cd49024c0eaed7001f54238384d1f83f45554aeabcc0982c1c0b6650c64fef",
+    "url": "https://www.city.fukushima.fukushima.jp/material/files/group/7/r0805syokuhin.csv"
+  },
+  "city_food_06": {
+    "as_of": "2026-06-30",
+    "bytes": 6210,
+    "dataset_page": "https://www.city.fukushima.fukushima.jp/soshiki/2/1005/1/1/5/1_1/index.html",
+    "file": "r0806syokuhin.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:20:38+00:00",
+    "rows": 27,
+    "sha256": "9cb4a4b444bfaa6525dae4b4b46c113468497a15589e1c96f0941ece5cae30dd",
+    "url": "https://www.city.fukushima.fukushima.jp/material/files/group/7/r0806syokuhin.csv"
+  },
+  "city_food_07": {
+    "as_of": "2026-07-31",
+    "bytes": 3165,
+    "dataset_page": "https://www.city.fukushima.fukushima.jp/soshiki/2/1005/1/1/5/1_1/index.html",
+    "file": "r0807syokuhin.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:20:41+00:00",
+    "rows": 15,
+    "sha256": "aab0ce86e3f8645fd20d9b4572b0effdd54143be57729ea92aebce08bcbda81d",
+    "url": "https://www.city.fukushima.fukushima.jp/material/files/group/7/r0807syokuhin.csv"
+  },
+  "city_food_08": {
+    "as_of": "2026-08-31",
+    "bytes": 2198,
+    "dataset_page": "https://www.city.fukushima.fukushima.jp/soshiki/2/1005/1/1/5/1_1/index.html",
+    "file": "r0808syokuhin.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:20:44+00:00",
+    "rows": 10,
+    "sha256": "35a5df1e48b17b95e093b65e4ffcc6c36cea99136bedc35736b4cbcb03c51f2c",
+    "url": "https://www.city.fukushima.fukushima.jp/material/files/group/7/r0808syokuhin.csv"
+  },
+  "city_food_list": {
+    "as_of": "2026-03-31",
+    "bytes": 812233,
+    "dataset_page": "https://www.city.fukushima.fukushima.jp/soshiki/2/1005/1/1/5/1_1/index.html",
+    "file": "r07nendomatsusyokuhin.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:20:27+00:00",
+    "rows": 3733,
+    "sha256": "4fb94ae41ed0ec0fa708a4c2c9b0635f933380d865fd4bc6d041cb0d1221af28",
+    "url": "https://www.city.fukushima.fukushima.jp/material/files/group/7/r07nendomatsusyokuhin.csv"
+  },
+  "city_laundry": {
+    "as_of": "2026-03-31",
+    "bytes": 27115,
+    "dataset_page": "https://www.city.fukushima.fukushima.jp/soshiki/2/1005/1/1/5/1_1/index.html",
+    "file": "r07nendomatsucleaning.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:20:56+00:00",
+    "rows": 125,
+    "sha256": "2a379a1cfffa15fad50ab1e8e78764a45e91e1f4e506f8471028318ac8999e61",
+    "url": "https://www.city.fukushima.fukushima.jp/material/files/group/7/r07nendomatsucleaning.csv"
+  },
+  "isj_07201_block": {
+    "bytes": 330866,
+    "file": "07201-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:21:08+00:00",
+    "sha256": "1728d536387b13ccecaaacf2fcae2cbf63e18e502084e58c2bf64f33340f89b9",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/07201-24.0a.zip"
+  },
+  "isj_07201_chome": {
+    "bytes": 7493,
+    "file": "07201-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:21:11+00:00",
+    "sha256": "2ed74b3a8662be1e537ab3d9fde91114095e21347e52d6d4f7374195e1cd7295",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/07201-19.0b.zip"
+  },
+  "n02": {
+    "bytes": 14903774,
+    "file": "data/japan/raw/N02-25_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-30T23:47:52+00:00",
+    "sha256": "aaf76af133b2e771e538fabc4646d2e443dc1d5a67b221382a28d744e706cc9f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip"
+  },
+  "n03": {
+    "bytes": 8514487,
+    "file": "data/japan/raw/N03-20250101_07_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T00:22:47+00:00",
+    "sha256": "05b7bfd46f45a71b72048fa72338e7775ad04d24942d755e58f9f108ff6f9e8f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_07_GML.zip"
+  },
+  "osm_station_names": {
+    "bytes": 12669,
+    "elements": 32,
+    "file": "osm_station_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-10-07T19:33:49Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](37.62,140.22,37.98,140.58);way[\"railway\"=\"station\"](37.62,140.22,37.98,140.58););out tags center;",
+    "retrieved": "2026-10-07T19:35:50+00:00",
+    "sha256": "03e3b45153b6cf986d5fe8569eb7a9da345a3757ce3e29a2d38f6355eb2f4662"
+  }
+}
