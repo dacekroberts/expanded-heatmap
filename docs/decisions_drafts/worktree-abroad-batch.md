@@ -612,6 +612,191 @@ tradeoff. A parked call stops only what it names.
   registry name, notices 1, 30 and 31, macro facts and ring shares, the
   Visuals card's name.
 
+### 2026-10-07 - Abroad batch: the review list of new page and notice sentences (abroad-batch)
+
+Every reader-facing sentence the batch wrote that no approved template
+covers, quoted word for word as it stands in the file (already written, per
+`docs/city_page_format.md` section 6). Template sentences filled with a city's
+own figures are not listed. **Answer "all approved", or name the numbers to
+reword or drop**; nothing else needs doing for an approval.
+
+**Gimpo (page 202)**
+
+- **R1** (follows Gimhae's not-drawn bullet): "Not drawn: Lines 5 and 9, the
+  Airport Railroad and the Seohae Line, which meet the Goldline at Gimpo
+  International Airport in Seoul. None of them has a station in the city."
+
+**Siheung (page 300)**
+
+- **R2** (Ansan's shared-stations bullet): "Line 4 and the Suin–Bundang Line
+  share Oido and Jeongwang, and the Seohae Line runs on its own track through
+  the east of the city. No other rail line has a station in the city."
+- **R3** (Namyangju's wait bullet): "The Suin–Bundang and Seohae lines run
+  about every 15 minutes by day, less often than Line 4."
+
+**Geneva (Regional) (page 301, notice 154)**
+
+- **R4** (the tram template's scope bullet, with a commune list): "The map
+  covers the **12 Swiss communes the trams serve**: the City of Geneva, Lancy,
+  Meyrin, Carouge, Bernex, Vernier, Onex, Plan-les-Ouates, Chêne-Bougeries,
+  Chêne-Bourg, Thônex and Confignon. Tram 17 runs on into Gaillard, Ambilly
+  and Annemasse, in France, so its 4 stops there are left out."
+- **R5** (the register): "Businesses come from the **Canton of Geneva's
+  business register** (Répertoire des entreprises): every establishment of
+  an active business, with its activity. Restaurants, cafés and bars; shops
+  of every kind; and hairdressers, beauty institutes, laundries and saunas."
+- **R6** (premises types): "Businesses the register types as run from home,
+  itinerant trades and market stands are left out."
+- **R7** (firms without premises): "About 1,800 firms registered with no
+  separate establishment are left out too: the register gives them no
+  premises, so a shop cannot be told from a home address."
+- **R8** (your call 2, office-typed rows kept): "It counts each
+  establishment once, by its main activity, and a few establishments typed
+  as offices, such as a beauty practice in an office building, are counted
+  with the rest."
+- **R9** (notice 154, the English after SITG's prescribed French credit):
+  "Modified by this project: establishments filtered to shops, food and drink
+  and personal services in the 12 communes TPG's trams serve, grouped into
+  three categories and mapped by distance to tram stops, with a trade name
+  replaced by the street address where it is a person's own name; the
+  categories and counts are this project's. Use of the data is subject to the
+  SITG's conditions of use. The État de Genève does not endorse this map."
+
+**Thessaloniki (page 302, notice 155)**
+
+- **R10** (color): "The line's color is OpenStreetMap's, not the operator's."
+- **R11** (the branch): "Only the 13 stations inside the Municipality of
+  Thessaloniki get rings, because the business data covers the city alone.
+  The Kalamaria branch is cut at the city line; its five stations, Nomarchia
+  to Mikra, are listed below."
+- **R12** (frequency): "Trains run about every 3 minutes between New Railway
+  Station and 25th Martiou for most of the day, and about every 9 minutes on
+  to Nea Elvetia."
+- **R13** (the license layer): "From the City of Thessaloniki's register of
+  shops holding an active license, retrieved October 4, 2026. The layer
+  publishes no date of its own, so a dot means a license on file, not a
+  business open today."
+- **R14**: "The register licenses food premises, hairdressers and beauty
+  salons, so shops other than food shops (clothing, electronics, pharmacies)
+  do not appear: the Food shops layer is food retail only."
+- **R15**: "Convenience stores, patisseries, and bread shops and coffee
+  roasters selling coffee to go count as Food shops; canteens inside offices,
+  schools and other premises are left out."
+- **R16**: "A dot shows the type of business, never its name: the register
+  carries no names. The licensed activity is shown in Greek as the register
+  records it."
+- **R17** (notice 155): "Thessaloniki's active shop licenses are from the
+  City of Thessaloniki (Δήμος Θεσσαλονίκης), Ενεργές Άδειες Καταστημάτων,
+  licensed under CC BY 4.0, retrieved October 4, 2026. Modified by this
+  project: filtered to food premises, food shops and personal services inside
+  the Municipality of Thessaloniki, grouped into three categories and mapped
+  by distance to metro stations. The City of Thessaloniki has not reviewed or
+  endorsed this map."
+
+**Gelsenkirchen (page 303)**
+
+- **R18** (two operators in the lines bullet): "Four lines are drawn,
+  **BOGESTRA's trams 301 and 302, Ruhrbahn's tram 107 and its Stadtbahn line
+  U11**, each labeled on the map and in the legend, ..."
+- **R19** (the caption's OSM date): "... the tram lines and their stops from
+  OpenStreetMap, as mapped on **{date}**."
+- **R20** (the survey): "Businesses come from the City of Gelsenkirchen's
+  survey of its shops, food service and services, under the name on each
+  sign."
+- **R21**: "A sign that reads as a person's own name shows the business's
+  category instead."
+- **R22**: "**Personal services are thin on this map.** The survey recorded
+  services mainly in the city's designated shopping centers, so hairdressers
+  and other personal services away from them are missing."
+- **R23**: "176 surveyed businesses with no category are left out."
+- **R24**: "**The survey carries no date.** The city publishes it without
+  one, and its earlier files were labeled 2024, so businesses that opened or
+  closed since then may be missing or still shown."
+- **R25**: "**Read the density as a survey, not a register.** The city
+  records premises chiefly in and around its shopping centers."
+
+**Bremen (page 304, notice 156)**
+
+- **R26** (two-figure frequency): "Trams run every 7 to 10 minutes by day on
+  most lines, and every 20 minutes on lines 5 and 8."
+- **R27** (line 8): "Tram 8's route through the city center is drawn as
+  OpenStreetMap still records it, before BSAG's August 2026 change; its stops
+  are the current ones."
+- **R28** (Göteborg's one-bucket sentence, for shops): "**This map shows shops
+  only, not three categories.** The survey counted every shop, from grocers
+  and bakeries to furniture and DIY stores. So **restaurants, cafés,
+  hairdressers and the like are not on this map**."
+- **R29**: "**The survey dates from 2022.** It counted the shops open between
+  March and September 2022, so shops that opened since then are missing, and
+  some that have closed are still shown."
+- **R30**: "**Read the density as a 2022 survey.** It counts each shop once by
+  its main goods group, whatever its size."
+- **R31** (notice 156, after the Quellenvermerk): "Bremen's shops are from
+  the retail survey Einzelhandelsbestand in der Region Bremen 2022, licensed
+  under Creative Commons Namensnennung (CC-BY). This map has been changed from
+  the source: its points are filtered to the City of Bremen, grouped into one
+  category and mapped by distance to tram stops. The Kommunalverbund
+  Niedersachsen/Bremen e.V. has not reviewed or endorsed it."
+
+**Anyang (Regional) (page 87)**
+
+- **R32**: "The map covers **Anyang with its neighbors Gunpo and Uiwang**,
+  which the same two lines serve."
+- **R33**: "The two lines share one station, Geumjeong, in Gunpo. No other
+  rail line has a station in the three cities."
+- **R34**: "Uiwang has one station, at its western edge, so about one of its
+  storefronts in four sits within a ring."
+
+**Mexico City (Regional) (page 15, notice 8)**
+
+- **R35**: "**This is a regional map, not a city one.** Líneas A and B run
+  east and north out of Ciudad de México into the State of México, and Línea
+  2 ends just across the city line at Cuatro Caminos, so the map also covers
+  the four municipios those stations stand in: Ecatepec de Morelos,
+  Nezahualcóyotl, La Paz and Naucalpan de Juárez."
+- **R36**: "Stations and businesses across Ciudad de México and those four
+  municipios are included. The rest of the State of México has no station on
+  these lines and is not covered."
+- **R37**: "**Most storefronts in the four municipios are beyond a station's
+  reach.** Línea B runs along Ecatepec's western edge and Naucalpan's one
+  station, Cuatro Caminos, sits on its border, so the region's share of
+  storefronts within a ring is lower than Ciudad de México's alone."
+- **R38** (your call 3): "398 storefronts that DENUE files under
+  Nezahualcóyotl are left out: they sit just east of the municipio's boundary
+  as OpenStreetMap draws it, more than 5 km from any station."
+
+**Copenhagen (Regional) (page 27, notices 31 and 1)**
+
+- **R39**: "Twelve lines are drawn, **Metro lines M1 to M4, S-tog lines A, B,
+  Bx, C, E, F and H, and Hovedstadens Letbane**, the light rail around the
+  city's western suburbs, ... Two S-tog lines, A and F, and the Letbane are
+  shown a shade lighter so they stay distinct from the Metro lines whose
+  colors they nearly share."
+- **R40**: "The map covers the **municipalities of Copenhagen and
+  Frederiksberg** and the **eight suburban municipalities the Letbane
+  serves**: Lyngby-Taarbæk, Gladsaxe, Herlev, Rødovre, Glostrup, Brøndby,
+  Vallensbæk and Ishøj."
+- **R41**: "Rødovre has one Letbane stop, at its northwest edge, so only about
+  one of its storefronts in four sits within a ring."
+- **R42** (your "state the small losses"): "OpenStreetMap lacks a few of the
+  register's points, so about one storefront in 600 in Copenhagen and
+  Frederiksberg cannot be placed and is missing from the map."
+- **R43**: "**About nine storefronts in ten sit within a station ring**:
+  nineteen in twenty in Copenhagen and Frederiksberg, about two in three in
+  the eight suburban municipalities."
+- **R44** (the caption, Aarhus's shape): "...; address points from
+  OpenStreetMap, fetched **{date}**."
+- **R45** (notice 31's last clause, which named Aarhus and Odense): "...;
+  the points are OpenStreetMap's copies of them."
+
+**Mechanical, listed for completeness:** the city lists of notices 1 (rail
+geometry: each new city's clause in the existing shape), 8 (Mexico City "and
+four neighboring State of México municipios (...)") and 68 (Anyang, Gunpo,
+Uiwang, Gimpo, Siheung); and the nine What Is Excluded sections (Gimpo,
+Siheung, Geneva (Regional), Thessaloniki, Gelsenkirchen, Bremen, Anyang
+(Regional), Mexico City (Regional), Copenhagen (Regional)), written in the
+per-city shape of their siblings.
+
 ### 2026-10-07 - Abroad batch: page proposals, numbers and downstream (abroad-batch)
 
 - **Page sentences outside a template, proposed for review time.** Gimpo:
