@@ -141,10 +141,16 @@ FOOD_AS_OF = SOURCE_AS_OF["food"]
 # notifications carry no term.
 TERM_AS_OF = {"food": "2026-09-01", "mhlw": "2026-08-31"}
 
-# What step 2 reads. "mhlw" is the notifications only.
-SOURCES = {"food": SOURCE_FILES["food"][0], "mhlw": SOURCE_FILES["mhlw"][0],
+# What step 2 reads. The city's own notification list ("notify", a food
+# source by SOURCE_KIND) supplies the Food shops layer the city's permits do
+# not (owner, call 212; Gifu's and Yokkaichi's precedent), so MHLW's opt-in
+# notifications are no longer drawn: its file is a points donor only
+# (Toyama's precedent). 届出者氏名 joined japan_register.OPERATOR_COLS_WAVE5
+# for it (2026-10-07).
+SOURCES = {"food": SOURCE_FILES["food"][0], "notify": SOURCE_FILES["notify"][0],
            "barber": SOURCE_FILES["barber"][0], "beauty": SOURCE_FILES["beauty"][0],
            "laundry": SOURCE_FILES["laundry"][0]}
+SOURCE_KIND = {"notify": "food"}
 # Declared, never inferred: every city file a cp932 CSV without a BOM; MHLW's
 # UTF-8 with a BOM.
 SOURCE_ENCODING = {**{k: "cp932" for k in SOURCE_FILES}, "mhlw": "utf-8-sig"}
@@ -171,20 +177,16 @@ REQUIRED_COLUMNS = {"food": _FOOD, "barber": _REG, "beauty": _REG, "laundry": (*
                     "notify": ("届出管理№", "業種名", "営業所屋号", "営業所住所１", "届出者氏名", "代表者氏名",
                                "届出日"),
                     "mhlw": _MHLW, "mhlw_points": _MHLW}
-# MHLW publishes an address only where the filer agreed to it (802 of its
-# 1,517 notifications carry one).
-ADDRESS_BY_CONSENT = {"mhlw"}
-# MHLW's notification rows the block join misses take MHLW's own point (the
-# brief: a median 40 m from the block point, 94.7% within 250 m).
-OWN_POINT_FALLBACK = {"mhlw"}
-# A city food row the block join misses takes MHLW's point for the same
-# premises (ward, town, trade name), read from the whole file under its own
-# key, never drawn (Ichinomiya's call 127 (c), Matsuyama's and Toyama's
-# mechanism). MHLW's 85 permits are all in the city's list, so few rows take it.
-POINT_DONORS = {"food": "mhlw_points"}
-# A premises in both (a city permit and an MHLW notification of one bucket):
-# MHLW's row stays (Matsuyama's).
-SUPERSEDES = {"mhlw": ("food",)}
+# MHLW is no longer a drawn source (call 212), so nothing is published by
+# consent, no row takes its own point and no list supersedes another.
+ADDRESS_BY_CONSENT = set()
+OWN_POINT_FALLBACK = set()
+SUPERSEDES = {}
+# A city permit or notification row the block join misses takes MHLW's point
+# for the same premises (ward, town, trade name), read from the whole file
+# under its own key, never drawn (Ichinomiya's call 127 (c), Matsuyama's and
+# Toyama's mechanism; 21 rows in the 2026-10-07 measurement).
+POINT_DONORS = {"food": "mhlw_points", "notify": "mhlw_points"}
 
 
 def source_csv(key):
