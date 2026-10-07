@@ -20,7 +20,7 @@ SLUG = "copenhagen"
 # (docs/build_briefs/copenhagen_regional.md; the regional-extension skill).
 # False reproduces the city-alone build byte for byte, which the drift check
 # proved before the switch went on.
-REGIONAL = False
+REGIONAL = True
 NAME = "Copenhagen (Regional)" if REGIONAL else "Copenhagen"
 
 # --- Paths ---------------------------------------------------------------
@@ -202,7 +202,8 @@ SPACING_MIN_M = 400.0
 # REGIONAL: the Letbane's OSM #32ac5c is 11.4 from M1's #008d41, over the
 # floor but under Oslo's ~13 margin, so it moves on the same rule (the newer
 # line, never the Metro): HSL lightness +0.02 -> #34b460, 14.4 from M1, 20.5
-# from S-tog B, 3.6 from OSM's.
+# from S-tog B, 3.6 from OSM's. 16.5 against the Personal services pins,
+# below the preferred 45 and recorded, as M1's 19.0 is.
 LINE_COLOURS = {
     "M1": "#008d41", "M2": "#ffc600", "M3": "#ff0a0a", "M4": "#009cd3",
     "A": "#05b4ff", "B": "#50ae30", "Bx": "#adce6d", "C": "#f68b1f",
@@ -228,6 +229,12 @@ EXPECTED_INSIDE_PER_LINE = {
 # only if their line passes Copenhagen's S-tog test there (spacing and
 # coverage measured by the brief; frequency read from DSB). Station name ->
 # the reason excluded_stations.csv gives; empty when every line passes.
+# Read 2026-10-07 in DSB's S-tog timetable (s-tog-s26.pdf, valid from
+# 2025-12-14), weekday daytime: A every 10 min at Brondby Strand; B every 10
+# min at Brondbyoster, Bagsvaerd, Kildebakke, Skovbrynet and Stengarden; E
+# every 10 min at Sorgenfri and Virum (A stops there in the evening only).
+# Bx fails (every 20 min, peak only), but its one station of the eight,
+# Kildebakke, is on B. So all eight are IN and nothing is listed here.
 STOG_TEST_OUT = {}
 if REGIONAL:
     EXPECTED_INSIDE_PER_LINE = {
