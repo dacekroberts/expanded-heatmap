@@ -1,6 +1,7 @@
 # Handoff: the travel app, a separate project (2026-10-07)
 
-For the first session of a NEW project, in its own folder and repository.
+For the first session of a NEW project, in its own folder and repository:
+`C:\Users\dacek\Documents\Portfolio\transit-globe` (owner, 2026-10-07).
 The owner's decisions and the measurements behind them are in this repo's
 `DECISIONS.md`, entry "Four ideas assessed before the large review" (item 4).
 
