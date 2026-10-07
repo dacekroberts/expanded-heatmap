@@ -3842,8 +3842,9 @@ DISPLAYED** (written into `render_site_notices()` with Bremen, 2026-10-07.)
   versioned `cc-by/4.0`, so the unversioned id was the publisher's choice.
   Every CC BY version permits public display and adapted maps; none adds
   share-alike or non-commercial terms. The owner read it as 4.0 (call 13,
-  2026-10-05: no outreach); the database-right point under an older version
-  is the batch's parked call 1.
+  2026-10-05: no outreach) and, with the database-right point under an
+  older version before them and the Kommunalverbund's 2024 report silent on
+  terms, **accepted the permissive reading** (2026-10-07).
 - **Rights holder: the Kommunalverbund Niedersachsen/Bremen e.V.**; the
   Landesamt GeoInformation Bremen only hosts the file. Rows in
   [`data_sources/germany.md`](data_sources/germany.md).

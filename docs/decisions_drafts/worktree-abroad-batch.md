@@ -23,9 +23,12 @@ tradeoff. A parked call stops only what it names.
   Kommunalverbund is the publisher of the survey guideline (Herausgeber);
   its figures credit the contractor's own drawings. **So the version stays
   open and the call stays parked for the owner** (the owner's instruction:
-  if the PDF names no version or says nothing on reuse, park it). Options
-  unchanged: accept on the permissive reading, or the owner asks the
-  Kommunalverbund. Bremen's landing waits on it.
+  if the PDF names no version or says nothing on reuse, park it).
+  **Answered (owner, 2026-10-07, in the build's chat: "accept the
+  permissive reading"):** the unversioned CC BY is read as permitting the
+  map, on the record's "Freie Nutzung" and opendata declaration and its
+  link to the 4.0 terms; no outreach. Notice 156 stands as built; a
+  removal request is honoured. Bremen lands at review time with the batch.
 - **Call 3 (Nezahualcóyotl):** "continue drop, state on page": the 398 rows
   stay dropped; Mexico City (Regional)'s page now says so (a proposal
   sentence, for review time).
@@ -298,9 +301,8 @@ tradeoff. A parked call stops only what it names.
 - **Downstream:** notice 156, **caption**; a card that travels without its
   caption carries "Quellenvermerk: Kommunalverbund Niedersachsen/Bremen
   e.V." and the licence title on its face, and the survey's date on any card
-  (the currency rule). **Open terms question: the CC BY version** (parked
-  call 1), so Bremen stays off cards and public pieces until the owner
-  rules. New inputs: a city, a taxonomy, the "Retail only" value, notice
+  (the currency rule). **The CC BY version question is closed** (parked
+  call 1, accepted on the permissive reading, owner 2026-10-07). New inputs: a city, a taxonomy, the "Retail only" value, notice
   156, the licence row.
 
 ### 2026-10-07 - Gelsenkirchen built: four tram lines on the City's premises survey (abroad-batch)
