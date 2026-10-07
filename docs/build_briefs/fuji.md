@@ -387,7 +387,14 @@ here); `mode: metro`; the minor tier and Japan East (Chubu after the retag);
 no frequency floor; the portal's §6 (144); a kind that reads thin against a
 census estimate is still built (Ichikawa's call 32, Ichihara's 123).
 
-**Open, with a recommendation:**
+**Answered by the owner on 2026-10-06:** call 186, **both shares stated as
+estimates**: beauty salons "about nine in ten" and laundries "about four in
+five" of what the 2021 Economic Census suggests, the method named and the
+reason not known (the sentence itself a review-time proposal, Ichikawa's and
+Ichihara's precedent extended to beauty). The recommendation below is kept as
+the record.
+
+**Weighed, with a recommendation:**
 
 1. **What the page says about coverage.** No official count exists for Fuji;
    the jurisdiction-wide shares are 97.1%, 99.6% and 93.4%, and the census
