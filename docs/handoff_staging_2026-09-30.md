@@ -100,12 +100,19 @@ section when its item is done.** The older history is in
 
 ## NEXT - pick up here, in this order
 
-**Builds resumed 2026-10-07 (owner):** the plan, its rules and every session's
-prompt are in `docs/build_plan_2026-10-07.md`. Staging's part:
-- relay each batch report and its parked calls to the owner as one numbered list per wave;
-- move landed cities to Built on the master list (build sessions never edit it) and republish the two private pages;
-- keep the plan's table current.
-Usage check-ins at every multiple of ten weekly percent (next 50%) stop every session.
+**Builds resumed 2026-10-07 (owner):** the plan, its rules and every session's prompt are in `docs/build_plan_2026-10-07.md`. State at this handoff:
+- **Phase 0:**
+  - The Japan foundation landed (7ab440f9, plus the address fixes in 521d28fc).
+  - Abroad's nine cities are ready on worktree-abroad-batch, all page text approved, nothing pushed; Copenhagen (Regional) was placed through OSM's osak points, with no key.
+  - **Landing order at review time:** Abroad, then Cleanup's europe-split (call 197's label rule, the Europe West/East split, the Germany and Benelux views), then Cleanup's japan-regions after East-1, Kansai-1 and Regional-1 (call 198, with four prefecture views).
+  - Staging writes the master list's Built rows at each landing.
+- **Phase 1 running:** East-1, Kansai-1, Regional-1.
+- **Licence reads:**
+  - Regional-1's six (staging) and Kansai-1's five (its own) are done and recorded in the drafts entry "Licence reads for the Japan builds".
+  - Still pending for phase 2: Osaka Prefecture's BODIK barber and beauty lists (Ibaraki, Kadoma, Minoh, Moriguchi), Neyagawa, Kawaguchi, Fujisawa, Okazaki, Aomori, Matsumoto, Yamagata. Run them before phase 2 opens.
+- **Usage:** the next check-in is at 60% weekly (the owner pre-approved past 50%).
+- **Band D:** the owner's browser acts follow https://claude.ai/artifact/81fCwtePp1RRxwsF2wRenv, with file lists for Timișoara, Iași and Cluj-Napoca. The Romanian cities go in groups of three, and no files were saved yet at this handoff. Gaziantep went to R.
+- **Open owner question:** Cleanup asked whether macro pills shorten "(Regional)" to "(R)" or drop it.
 
 **Wave 5 ran on 2026-10-06** (owner: "We can start on the next items, i want
 to get a bunch of briefs ready for build time"): the ranked queue and all 73
