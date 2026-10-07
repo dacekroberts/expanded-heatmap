@@ -171,12 +171,18 @@ WAVE2_RULES = frozenset({"oaza", "aza_letter", "kou_bare", "chome_missing", "mac
 #                    town matches (Matsumoto's 里山辺湯原 for 里山辺字湯の原)
 # Matsue's 八雲村 (the village before 2005) is a city's own: japan.CITIES'
 # "town_aliases" ({old: new}, the start of the town).
+# and the name rule across premises (owner, call 205, 2026-10-07):
+#   "name_city"      a trade name the name rule flags on any row withholds every
+#                    row of the city with the same trade-name key (step 2):
+#                    Suita's flagged citywide stall showed its name at another
+#                    premises, which the block-level spread cannot reach
 WAVE5_RULES = frozenset({"type_cols5", "operator_cols5", "form_all", "combined_form", "roten", "kyoka_joken",
                          "asterisk", "misentaku", "city_only", "areawide", "repeat_city", "other_muni", "idou",
                          "past_term", "late_start",
                          "aza_insert", "koaza_word", "spelling5", "machi_bare", "koaza_chome", "koaza_centroid",
                          "koaza_unique", "oaza_cut",
-                         "bracket_aza", "chiwari", "chome_union", "no_dropped"})
+                         "bracket_aza", "chiwari", "chome_union", "no_dropped",
+                         "name_city"})
 ALL_RULES = WAVE2_RULES | WAVE5_RULES
 
 

@@ -181,6 +181,13 @@ done; one that is missing is a parked call, never a city-local fix.**
   village, a config key: `"town_aliases": {"八雲村": "八雲町"}` in its
   `japan.CITIES` entry. A zip of CSVs (Maebashi's, Sagamihara's registers)
   still needs a config `source_rows`: `city_rows` reads XLSX members only.
+- **The name rule crosses premises** (owner, call 205, 2026-10-07; the
+  `name_city` switch, on for new cities): a trade name flagged on any row
+  withholds every row of the city with the same trade-name key. Suita's
+  flagged citywide stall (一円, no block) showed its name at an MHLW premises,
+  which the block-level spread could not reach. Run
+  `check_personal_exposure.py <city>` right after step 3: it matches keys
+  city-wide, as the switch does, and must print 0.
 
 ## The traps Kobe measured
 
