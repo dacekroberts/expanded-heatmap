@@ -150,10 +150,40 @@ WAVE2_RULES = frozenset({"oaza", "aza_letter", "kou_bare", "chome_missing", "mac
 #   "past_term"      call 161: a permit past its term on the as-of is dropped
 #   "late_start"     call 172: a permit starting after the as-of waits
 #                    (both against config.TERM_AS_OF, step 2)
+# and the join's (join_rules5, norm_town, load_city_isj; each would move a
+# built city's tiers):
+#   "aza_insert"     the 字 left out after a 大字 of any length (Uji, Ichinomiya,
+#                    Akita, Mito, Morioka, Matsumoto, Fukushima, Fuji)
+#   "koaza_word"     the word 小字 read as 字 (Takatsuki)
+#   "spelling5"      spelling5()'s pairs, both sides
+#   "machi_bare"     a 町 MLIT does not write, or one it does (Fuji, Ōita)
+#   "koaza_chome"    大字 + 字 + 丁目 (Okazaki's O1)
+#   "koaza_centroid" a 小字's centroid where MLIT lacks the number (Iwaki)
+#   "koaza_unique"   a 小字 written without its only 大字 (Fukushima)
+#   "oaza_cut"       a town cut at its 字, never inside 大字 (Aomori's 浪岡)
 WAVE5_RULES = frozenset({"type_cols5", "operator_cols5", "form_all", "combined_form", "roten", "kyoka_joken",
                          "asterisk", "misentaku", "city_only", "areawide", "repeat_city", "other_muni", "idou",
-                         "past_term", "late_start"})
+                         "past_term", "late_start",
+                         "aza_insert", "koaza_word", "spelling5", "machi_bare", "koaza_chome", "koaza_centroid",
+                         "koaza_unique", "oaza_cut"})
 ALL_RULES = WAVE2_RULES | WAVE5_RULES
+
+
+_KANJI = "一-龥々"
+
+
+def spelling5(s):
+    """The "spelling5" rule's pairs, both sides (the Japan foundation,
+    2026-10-07), each where the lists and MLIT spell one place two ways:
+    ノ / の between kanji (Ichinomiya's 八ノ通り, Yamagata's 上ノ台), small ッ /
+    ツ (Akita's 二ッ屋, Shizuoka's 七ッ新屋), が / ケ (Ōita's 梅が丘), 之 / の
+    (Fuji's 米之宮町), 藏 / 蔵 (Uji's 六地藏: 88.5% to 92.7% at the block), and
+    Matsue's dash written for 一 before 丁目 (浜乃木―丁目)."""
+    s = s.replace("藏", "蔵")
+    s = re.sub(f"(?<=[{_KANJI}])[ノの之](?=[{_KANJI}])", "の", s)
+    s = re.sub(f"(?<=[{_KANJI}])[ッツっつ](?=[{_KANJI}])", "ツ", s)
+    s = re.sub(f"(?<=[{_KANJI}])[ケがヵ](?=[{_KANJI}])", "ケ", s)
+    return re.sub(f"(?<=[{_KANJI}])[―─‐-]丁目", "一丁目", s)
 
 
 def norm_town(s, rules=()):
@@ -163,6 +193,12 @@ def norm_town(s, rules=()):
     八重洲2丁目 where MLIT writes 八重洲二丁目. Applied to BOTH sides, so both
     sides take the same `rules` (WAVE2_RULES)."""
     s = unicodedata.normalize("NFKC", s or "").replace(" ", "").replace("　", "")
+    # Takatsuki's misses (the Japan foundation, 2026-10-07): the hill villages
+    # write the word 小字 (田能小字的谷) where MLIT keys 田能字的谷
+    if "koaza_word" in rules:
+        s = s.replace("小字", "字")
+    if "spelling5" in rules:
+        s = spelling5(s)
     # Yokkaichi's and Shimonoseki's misses (2026-10-03): MLIT writes a 大字 the
     # lists leave out, at the start (大字羽津, 4,304 of Yokkaichi's block keys)
     # or after a merged town's name (豊浦町大字川棚). Dropped on both sides.
@@ -711,6 +747,11 @@ class BlockIndex(dict):
     def __init__(self, *a, **kw):
         super().__init__(*a, **kw)
         self.far = set()
+        # the Japan foundation's 小字 indexes (2026-10-07), filled only for a
+        # city with "koaza_centroid" or "koaza_unique": (ward, 大字字小字) ->
+        # centroid, and (ward, 小字) -> the 大字 it occurs under
+        self.koaza = {}
+        self.koaza_of = collections.defaultdict(set)
 
 
 FAR_M = 500
@@ -739,6 +780,8 @@ def load_city_isj(isj_dir, rules=(), by_municipality=False):
     chome = {k: pts[0] if len(pts) == 1 else None for k, pts in cents.items()}
     twin_of = collections.defaultdict(set)  # a twin town's (ward, town, block) -> which twins it occurs in
     blocks = BlockIndex()
+    koaza_index = bool({"koaza_centroid", "koaza_unique"} & set(rules))
+    koaza_pts = collections.defaultdict(list)
     first = {}
     for z in sorted(Path(isj_dir).glob("*-24.0a.zip")):
         for r in read_zip_csv(z):
@@ -760,9 +803,16 @@ def load_city_isj(isj_dir, rules=(), by_municipality=False):
                 akey = (ward, norm_town(r["大字・丁目名"] + "字" + r["小字・通称名"], rules), key[2])
                 if r.get("代表フラグ") == "1" or akey not in blocks:
                     blocks[akey] = pt
+                if koaza_index:
+                    koaza_pts[akey[:2]].append(pt[:2])
+                    blocks.koaza_of[(ward, norm_town(r["小字・通称名"], rules))].add(key[1])
     for key, which in twin_of.items():
         if len(which) > 1:
             blocks[key] = None
+    # the 小字-centroid tier ("koaza_centroid"): the mean of MLIT's points in a
+    # 小字, means of degrees over a few hundred metres, as the town-chōme
+    # centroids MLIT itself publishes are
+    blocks.koaza = {k: (sum(p[0] for p in v) / len(v), sum(p[1] for p in v) / len(v)) for k, v in koaza_pts.items()}
     return blocks, chome
 
 
@@ -1008,6 +1058,59 @@ def known_town(town, known):
     return None, None
 
 
+def join_rules5(p, w, blocks, chome, block_towns, has_koaza, o1, rules):
+    """The Japan foundation's join rules (2026-10-07), each a WAVE5_RULES
+    switch, tried in order on a row whose town is neither a block nor a
+    town-chōme as written; the first that finds a block wins. A rule that
+    finds the 小字 but not its number leaves the row's town on it, for the
+    小字 centroid ("koaza_centroid") or its 大字's. Changes `p` in place and
+    returns the block hit or None."""
+    t, b = p["town"], p["block"]
+    koaza = getattr(blocks, "koaza", {})
+    # "aza_insert": the 字 left out after a 大字 of any length (Uji's 宇治妙楽 55
+    # for MLIT's 宇治字妙楽: block 55.0% to 88.5%; Ichinomiya's 起東茜屋, Akita's
+    # 手形蛇野, Fukushima's 笹谷西谷地). Rule C tries 3 characters or more and
+    # never inserts the 字. The longest 大字 MLIT also keys with 小字 wins.
+    if "aza_insert" in rules and "字" not in t[1:]:
+        for j in range(len(t) - 1, 0, -1):
+            if (w, t[:j]) in has_koaza:
+                cand = t[:j] + "字" + t[j:]
+                if (w, cand, b) in blocks or (w, cand) in koaza:
+                    p["town"], p["aza_insert"] = cand, True
+                    if blocks.get((w, cand, b)):
+                        return blocks[(w, cand, b)]
+                    return None
+    # "koaza_unique": a 小字 written without its 大字 (Fukushima's 矢倉下, MLIT's
+    # 五十辺字矢倉下), where the ward has that 小字 under one 大字 only
+    if "koaza_unique" in rules and "字" not in t[1:]:
+        under = getattr(blocks, "koaza_of", {}).get((w, t), set())
+        if len(under) == 1:
+            cand = next(iter(under)) + "字" + t
+            p["town"], p["koaza_unique"] = cand, True
+            return blocks.get((w, cand, b))
+    # "machi_bare": a town written with 町 where MLIT names it bare (Fuji's
+    # 比奈町, MLIT's 比奈), or without the 町 MLIT puts before its 丁目 (Ōita's
+    # 明磧1丁目, MLIT's 明磧町1丁目): the reverse of Nara's `machi`
+    if "machi_bare" in rules:
+        m = re.fullmatch(r"(\D+?)(\d+丁目)", t)
+        alt = t[:-1] if t.endswith("町") and len(t) > 2 else (
+            m.group(1) + "町" + m.group(2) if m and not m.group(1).endswith("町") else None)
+        if alt and ((w, alt) in chome or (w, alt) in block_towns):
+            p["town"], p["machi_bare"] = alt, True
+            return blocks.get((w, alt, b))
+    # "koaza_chome": Okazaki's O1 (康生通西4-5-6 for MLIT's 康生通字西4丁目;
+    # 202 rows, 康生通's 90 unplaced among them): the first number is the 丁目
+    if "koaza_chome" in rules and "丁目" not in t:
+        hit = o1.get((w, t.rstrip("字")))
+        nums = re.findall(r"\d+", unicodedata.normalize("NFKC", p.get("rest") or ""))
+        if hit and nums:
+            cand = f"{hit[0]}字{hit[1]}{int(nums[0])}丁目"
+            if (w, cand) in block_towns:
+                p["town"], p["block"], p["koaza_chome"] = cand, (str(int(nums[1])) if len(nums) > 1 else None), True
+                return blocks.get((w, cand, p["block"]))
+    return None
+
+
 def join_city(permits, blocks, chome, rules=()):
     towns = collections.defaultdict(set)
     for w, t in chome:
@@ -1017,6 +1120,15 @@ def join_city(permits, blocks, chome, rules=()):
     has_koaza = {(w, t.rsplit("字", 1)[0]) for w, t, _ in blocks if "字" in t[1:]}
     block_towns = {(w, t) for w, t, _ in blocks}
     far = getattr(blocks, "far", set())
+    # Okazaki's O1 ("koaza_chome"): MLIT keys central towns as 大字 + 字 + a
+    # 丁目 (康生通字西4丁目, 稲熊町字3丁目); (ward, the town as the list writes
+    # it) -> (大字, the part between 字 and the number)
+    o1 = {}
+    if "koaza_chome" in rules:
+        for w, t in block_towns:
+            m = re.fullmatch(r"(.+?)字(\D*?)\d+丁目", t)
+            if m:
+                o1[(w, m.group(1) + m.group(2))] = (m.group(1), m.group(2))
     for p in permits:
         w = p["ward"]
         # the direction suffix (Sapporo) only where that town exists in MLIT's file
@@ -1057,7 +1169,19 @@ def join_city(permits, blocks, chome, rules=()):
             if alt and ((w, alt) in chome or (w, alt) in block_towns):
                 p["town"], p["machi"] = alt, True
                 hit = blocks.get((w, alt, p["block"]))
-        oaza = re.split(r"字", p["town"], maxsplit=1)[0] if "字" in p["town"][1:] else None
+        if not hit and (w, p["town"]) not in chome:
+            hit = join_rules5(p, w, blocks, chome, block_towns, has_koaza, o1, rules) or hit
+        if "oaza_cut" in rules:
+            # Aomori's 浪岡 (28 rows): 浪岡大字浪岡字稲村 - the town cut at the
+            # first 字 that is not part of 大字 or 小字, never inside 大字
+            m = re.search(r"(?<![大小])字", p["town"][1:])
+            oaza = p["town"][:m.start() + 1] if m else None
+            if not hit and oaza and (w, oaza) not in has_koaza and p["block"]:
+                hit = blocks.get((w, oaza, p["block"]))
+                if hit:
+                    p["town"], p["oaza_cut"] = oaza, True
+        else:
+            oaza = re.split(r"字", p["town"], maxsplit=1)[0] if "字" in p["town"][1:] else None
         if not hit and (w, p["town"]) not in chome and not (oaza and (w, oaza) in chome):
             t, how = known_town(p["town"], towns[w])
             if t and how == "prefix" and (w, t) in has_koaza:
@@ -1081,6 +1205,11 @@ def join_city(permits, blocks, chome, rules=()):
             p["tier"], p["pt"] = "block", hit[:2]
         elif (w, p["town"]) in chome:
             p["tier"], p["pt"] = "chome", chome[(w, p["town"])]
+        elif "koaza_centroid" in rules and (w, p["town"]) in getattr(blocks, "koaza", {}):
+            # Iwaki (the Japan foundation): MLIT lists only some 地番 of a 小字
+            # (a median 74% in 平's); its points' mean lies a median 164 m from
+            # MHLW's own point, the 大字 centroid 1,479 m
+            p["tier"], p["pt"] = "koaza", blocks.koaza[(w, p["town"])]
         elif oaza and (w, oaza) in chome:
             p["tier"], p["pt"], p["oaza"] = "chome", chome[(w, oaza)], True
         else:
