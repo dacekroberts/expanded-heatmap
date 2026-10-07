@@ -4429,6 +4429,89 @@ line.
 - Senri-Chuo is one station: the Osaka Monorail's platform and Kita-Osaka
   Kyuko's, 257 m apart, share one ring.
 
+### Itami - Hyōgo Prefecture's food-permit and food-notification lists and its barber, beauty and laundry registers, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Every row of the prefecture's lists addressed outside Itami, and its
+  vehicles and stalls licensed across the prefecture (県下一円), which belong
+  to no town.
+- 5 rows with no fixed place, 16 more marked temporary or mobile, and 1
+  addressed to an area rather than a place.
+- 149 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit and notification types that are not a
+  counter.
+- 203 vending machines, 80 school, hospital and staff canteens, 34 caterers
+  (仕出し), 4 mail-order businesses and 1 restaurant inside a hotel. The list
+  names no hostess venue, so snack bars holding a restaurant permit stay in
+  Food service.
+
+**Counted** - every food permit in term and every food notification on file in
+the prefecture's lists as of August 31, 2026, and its barber, beauty and
+laundry registers of the same date, where the address is in Itami. The
+prefecture publishes no count for Itami alone: the lists hold about 86% of the
+restaurants a prefecture-wide comparison with the 2021 Economic Census
+suggests (an estimate). 10 of the 164 bakery, confectioner and deli rows (6.1%)
+have a trade name that reads as a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 107 repeat rows are shown once, among them premises
+in both the permit and the notification lists.
+
+**Not placed** - 1 row. Another 106 sit at their town's center.
+
+**Names not shown** - 1 pin whose trade name is the operator's own name shows
+its permit type.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 7 stations beyond it: 3 in Amagasaki, 2 in Toyonaka, and 1 each
+  in Takarazuka and Kawanishi.
+- The Osaka Monorail keeps one station inside the city, Osaka-kuko, at the
+  airport; no other line serves it, so the line is drawn cut (owner,
+  2026-10-06).
+- JR's and Hankyu's Itami are separate stations, 740 m apart, each with its own
+  rings.
+
+### Kakogawa - Hyōgo Prefecture's food-permit and food-notification lists and its barber, beauty and laundry registers, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Every row of the prefecture's lists addressed outside Kakogawa, and its
+  vehicles and stalls licensed across the prefecture (県下一円), which belong
+  to no town.
+- 53 rows with no fixed place, 18 more marked temporary or mobile, and 1
+  addressed to an area rather than a place.
+- 274 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit and notification types that are not a
+  counter.
+- 448 vending machines, 123 school, hospital and staff canteens, 71 caterers
+  (仕出し), 11 restaurants inside hotels and inns and 1 mail-order business.
+  The list names no hostess venue, so snack bars holding a restaurant permit
+  stay in Food service.
+
+**Counted** - every food permit in term and every food notification on file in
+the prefecture's lists as of August 31, 2026, and its barber, beauty and
+laundry registers of the same date, where the address is in Kakogawa. The
+prefecture publishes no count for Kakogawa alone: the lists hold about 87% of
+the restaurants a prefecture-wide comparison with the 2021 Economic Census
+suggests (an estimate). 12 of the 267 bakery, confectioner and deli rows (4.5%)
+have a trade name that reads as a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 138 repeat rows are shown once, among them premises
+in both the permit and the notification lists.
+
+**Not placed** - 11 rows (0.3%). Another 458 (11.9%) sit at their town's
+center, because MLIT's file does not hold their block numbers; the owner chose
+to build with these tiers shown (2026-10-06).
+
+**Names not shown** - 2 pins whose trade name is the operator's own name show
+their permit type.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 13 stations beyond it: 5 in Takasago (Hōden among them, 38 m
+  beyond the city line), and 2 each in Himeji, Ono, Harima and Akashi.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

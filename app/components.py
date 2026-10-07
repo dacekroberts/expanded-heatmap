@@ -2358,6 +2358,42 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
      "Toyonaka City, MHLW and MLIT did not make and do not endorse this map.",
      False, ("Toyonaka",)),
+    # Itami (notice 172) and Kakogawa (notice 173): Hyōgo Prefecture's
+    # 生活衛生課 lists, CC BY 4.0 through the catalogue's terms, in their form
+    # for a modified work (3(3)②) with the licence link and the statement of
+    # change; MLIT as in Kobe's, N02 in its 2025 edition. Written from
+    # Yokkaichi's and Sasebo's approved wording under the owner's pre-approval
+    # of template prose (2026-09-30).
+    Notice(172, "Hyōgo Prefecture and MLIT (Itami)",
+     "Itami's businesses: この地図は、以下の著作物を改変して利用しています。"
+     "「食品関係営業施設リスト（許可営業施設、届出営業施設）」「生活衛生関係営業施設リスト（理容師法検査確認施設、"
+     "美容師法検査確認施設、クリーニング業法検査確認施設）」（令和8年8月末時点）、兵庫県、"
+     "クリエイティブ・コモンズ・ライセンス 表示 4.0 国際"
+     "（[https://creativecommons.org/licenses/by/4.0/deed.ja](https://creativecommons.org/licenses/by/4.0/deed.ja)）"
+     "（[https://web.pref.hyogo.lg.jp/kf14/shokuhineigyoushisetsu_list.html](https://web.pref.hyogo.lg.jp/kf14/shokuhineigyoushisetsu_list.html)、"
+     "[https://web.pref.hyogo.lg.jp/kf14/kankyoueigyoushisetsu_list.html](https://web.pref.hyogo.lg.jp/kf14/kankyoueigyoushisetsu_list.html)）. "
+     "Processed by this project, which kept the rows addressed in Itami, selected the storefront types, "
+     "placed each by its address and counted them around stations. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
+     "Hyōgo Prefecture and MLIT did not make and do not endorse this map.",
+     False, ("Itami",)),
+    Notice(173, "Hyōgo Prefecture and MLIT (Kakogawa)",
+     "Kakogawa's businesses: この地図は、以下の著作物を改変して利用しています。"
+     "「食品関係営業施設リスト（許可営業施設、届出営業施設）」「生活衛生関係営業施設リスト（理容師法検査確認施設、"
+     "美容師法検査確認施設、クリーニング業法検査確認施設）」（令和8年8月末時点）、兵庫県、"
+     "クリエイティブ・コモンズ・ライセンス 表示 4.0 国際"
+     "（[https://creativecommons.org/licenses/by/4.0/deed.ja](https://creativecommons.org/licenses/by/4.0/deed.ja)）"
+     "（[https://web.pref.hyogo.lg.jp/kf14/shokuhineigyoushisetsu_list.html](https://web.pref.hyogo.lg.jp/kf14/shokuhineigyoushisetsu_list.html)、"
+     "[https://web.pref.hyogo.lg.jp/kf14/kankyoueigyoushisetsu_list.html](https://web.pref.hyogo.lg.jp/kf14/kankyoueigyoushisetsu_list.html)）. "
+     "Processed by this project, which kept the rows addressed in Kakogawa, selected the storefront types, "
+     "placed each by its address and counted them around stations. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
+     "Hyōgo Prefecture and MLIT did not make and do not endorse this map.",
+     False, ("Kakogawa",)),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no

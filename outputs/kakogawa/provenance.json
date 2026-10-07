@@ -1,0 +1,99 @@
+{
+  "city_barber": {
+    "as_of": "2026-08-31",
+    "bytes": 195680,
+    "dataset_page": "https://web.pref.hyogo.lg.jp/kf14/kankyoueigyoushisetsu_list.html",
+    "file": "000028_barbershop_all.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T19:26:21+00:00",
+    "rows": 1528,
+    "sha256": "d848f42524b05ab261633e7e67dbd53e261022fe958d5d82fcd03f3bcbea8e1b",
+    "url": "https://web.pref.hyogo.lg.jp/kf14/documents/000028_barbershop_all.xlsx"
+  },
+  "city_beauty": {
+    "as_of": "2026-08-31",
+    "bytes": 496756,
+    "dataset_page": "https://web.pref.hyogo.lg.jp/kf14/kankyoueigyoushisetsu_list.html",
+    "file": "000028_beauty_salon_all.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T19:26:24+00:00",
+    "rows": 4127,
+    "sha256": "2c2bd4d6e92d9e3847c632536bbf14a28b147e089596108a97ecbe2043b2d667",
+    "url": "https://web.pref.hyogo.lg.jp/kf14/documents/000028_beauty_salon_all.xlsx"
+  },
+  "city_food": {
+    "as_of": "2026-08-31",
+    "bytes": 4519769,
+    "dataset_page": "https://web.pref.hyogo.lg.jp/kf14/shokuhineigyoushisetsu_list.html",
+    "file": "000028_food_business_lisence_all.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T19:26:15+00:00",
+    "rows": 32433,
+    "sha256": "3dc6a470381cc79bc2f109b6c9b508224436ccbe957eef1e24408eb01e348130",
+    "url": "https://web.pref.hyogo.lg.jp/kf14/documents/000028_food_business_lisence_all.xlsx"
+  },
+  "city_laundry": {
+    "as_of": "2026-08-31",
+    "bytes": 113185,
+    "dataset_page": "https://web.pref.hyogo.lg.jp/kf14/kankyoueigyoushisetsu_list.html",
+    "file": "000028_cleaningbusiness_all.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T19:26:27+00:00",
+    "rows": 792,
+    "sha256": "0a03c32a9da9c5a4bcc1de1788ebd1b153127533e730cae353e7326d4607c153",
+    "url": "https://web.pref.hyogo.lg.jp/kf14/documents/000028_cleaningbusiness_all.xlsx"
+  },
+  "city_notify": {
+    "as_of": "2026-08-31",
+    "bytes": 1861708,
+    "dataset_page": "https://web.pref.hyogo.lg.jp/kf14/shokuhineigyoushisetsu_list.html",
+    "file": "000028_food_business_notification_all.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T19:26:18+00:00",
+    "rows": 13713,
+    "sha256": "a598134c7de609006035d971b42ce4f316a24937f8ed1f5547d1bbfc23ae34a2",
+    "url": "https://web.pref.hyogo.lg.jp/kf14/documents/000028_food_business_notification_all.xlsx"
+  },
+  "isj_28210_block": {
+    "bytes": 246924,
+    "file": "28210-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:16:09+00:00",
+    "sha256": "3428fc2e94d139114522fb563435d90068039e3dd0ba55cdc5879ca318dbfdf2",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/28210-24.0a.zip"
+  },
+  "isj_28210_chome": {
+    "bytes": 7649,
+    "file": "28210-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:16:11+00:00",
+    "sha256": "0f3500757379c5ef672969cc016472decff4c96c7da1fb87b7081b87780656c8",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/28210-19.0b.zip"
+  },
+  "n02": {
+    "bytes": 14903774,
+    "file": "data/japan/raw/N02-25_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-30T23:47:52+00:00",
+    "sha256": "aaf76af133b2e771e538fabc4646d2e443dc1d5a67b221382a28d744e706cc9f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip"
+  },
+  "n03": {
+    "bytes": 8361345,
+    "file": "data/japan/raw/N03-20250101_28_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:52:10+00:00",
+    "sha256": "3ff660682980d4b9f8b938341a6bc7e159c2636a0f1212f14b7c1767fbaf4c72",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_28_GML.zip"
+  },
+  "osm_station_names": {
+    "bytes": 17440,
+    "elements": 32,
+    "file": "osm_station_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-10-07T19:55:10Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](34.69,134.75,34.88,134.95);way[\"railway\"=\"station\"](34.69,134.75,34.88,134.95););out tags center;",
+    "retrieved": "2026-10-07T19:56:26+00:00",
+    "sha256": "eb76aa90dc320eac54759d4810d5f922517358c2a4c6f3376388af5f2f1c3b35"
+  }
+}

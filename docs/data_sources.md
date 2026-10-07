@@ -3788,6 +3788,37 @@ batch at review time).
   2026-10-07; the verdict is in `docs/decisions_drafts/worktree-japan-kansai-1.md`
   ("Toyonaka built", 2026-10-07).<!-- /internal -->
 
+**172. Hyōgo Prefecture and MLIT (Itami) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with the Kansai-1
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-07; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). Hyōgo Prefecture's
+  生活衛生課 lists are **CC BY 4.0** through the catalogue's terms 3(3), which
+  2(1) put above the website's copyright page (the food lists through their
+  page's catalogue entry, on Ōtsu's precedent); MLIT's 位置参照情報 and N02
+  (the 2025 edition) are **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only
+  picks stations and is **never drawn** (the Survey Act).
+- **MUST DISPLAY**: the terms' form for a modified work (3(3)②),
+  「この地図は、以下の著作物を改変して利用しています。[タイトル]、兵庫県」, with
+  the titles, the CC BY 4.0 link and a statement of change; MLIT's credit lines.
+- **MUST NOT**: present the edited data as if the prefecture made it
+  (3(3)②); imply endorsement.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py itami` with its Japan pass, run
+  2026-10-07; the verdict is in `docs/decisions_drafts/worktree-japan-kansai-1.md`
+  ("Itami built", 2026-10-07).<!-- /internal -->
+
+**173. Hyōgo Prefecture and MLIT (Kakogawa) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with the Kansai-1
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS**: the same sources and terms as Itami's (172),
+  with Kakogawa's rows of the same lists.
+- **MUST DISPLAY** and **MUST NOT**: as 172.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py kakogawa` with its Japan pass, run
+  2026-10-07; the verdict is in `docs/decisions_drafts/worktree-japan-kansai-1.md`
+  ("Kakogawa built", 2026-10-07).<!-- /internal -->
+
 
 ## Gaps
 
