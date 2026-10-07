@@ -4682,6 +4682,33 @@ CITIES = [
         "label_offset": ("middle", 0, -22),
     },
     {
+        "name": "Fuchū (Tokyo)",
+        "lat": 35.6689,
+        "lon": 139.4776,
+        "page": "pages/218_Fuchu_Tokyo_Heatmap.py",
+        "coverage": "narrowed",
+        "placement": "Joined to address blocks (96.6%); ministry coordinates where missed",
+        "data_age": "Tama ledgers as of 2026-08-31; ministry filings fetched 2026-10-06",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
+        "blurb": "The Keio and Keio Keibajo lines, JR East's Nambu and Musashino lines and the Seibu Tamagawa Line",
+        "region": "Japan East",
+        "country": "Japan",
+        # metro (the brief: private heavy rail reads as metro, owner 2026-10-02)
+        "mode": "metro",
+        "in_default_view": False,
+        # No label tier and the scaffold's starting offset: Cleanup builds
+        # Japan's region views and their labels (owner, call 198, 2026-10-07).
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
         "name": "Chōfu",
         "lat": 35.6506,
         "lon": 139.5407,
@@ -4693,6 +4720,60 @@ CITIES = [
         "record_kind": "Permit registers",
         "categories": "Retail thin",
         "blurb": "The Keio and Keio Sagamihara lines",
+        "region": "Japan East",
+        "country": "Japan",
+        # metro (the brief: private heavy rail reads as metro, owner 2026-10-02)
+        "mode": "metro",
+        "in_default_view": False,
+        # No label tier and the scaffold's starting offset: Cleanup builds
+        # Japan's region views and their labels (owner, call 198, 2026-10-07).
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Sōka",
+        "lat": 35.8254,
+        "lon": 139.8057,
+        "page": "pages/215_Soka_Heatmap.py",
+        "coverage": "narrowed",
+        "placement": "Joined to address blocks (98.0%); the prefecture's coordinates where missed",
+        "data_age": "Food layers 2026-10-06; old-law list 2026-03-31; registers to 2026-08-31",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
+        "blurb": "The Tobu Skytree Line",
+        "region": "Japan East",
+        "country": "Japan",
+        # metro (the brief: private heavy rail reads as metro, owner 2026-10-02)
+        "mode": "metro",
+        "in_default_view": False,
+        # No label tier and the scaffold's starting offset: Cleanup builds
+        # Japan's region views and their labels (owner, call 198, 2026-10-07).
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Tokorozawa",
+        "lat": 35.7996,
+        "lon": 139.4686,
+        "page": "pages/216_Tokorozawa_Heatmap.py",
+        "coverage": "narrowed",
+        "placement": "Joined to address blocks (99.3%); the prefecture's coordinates where missed",
+        "data_age": "Food layers 2026-10-06; old-law list 2026-03-31; registers to 2026-08-31",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
+        "blurb": "Four Seibu lines and JR East's Musashino Line",
         "region": "Japan East",
         "country": "Japan",
         # metro (the brief: private heavy rail reads as metro, owner 2026-10-02)

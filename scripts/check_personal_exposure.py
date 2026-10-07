@@ -536,7 +536,7 @@ REGISTRIES = {
     # what reached the map.
     **{slug: dict(raw=None, trade=None, owner=None, processed="businesses_clean.csv",
                   address=("address",), japan=True)
-       for slug in ("higashiyamato", "nishitokyo", "tama", "higashimurayama", "chofu", "ageo_regional")},
+       for slug in ("higashiyamato", "nishitokyo", "tama", "higashimurayama", "chofu", "ageo_regional", "fuchu_tokyo", "soka", "tokorozawa")},
     # Ottawa: Ottawa Public Health's LIVES inspection feed. Its businesses.csv
     # has one name column (the premises name) and a phone, never read (step 2
     # names its columns and asserts it). No owner column exists, so no

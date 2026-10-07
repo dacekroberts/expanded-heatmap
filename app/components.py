@@ -595,7 +595,7 @@ _OSM_STATION_NAMES = (
     "Kawasaki", "Yokosuka", "Himeji", "Nishinomiya", "Takamatsu", "Toyota", "Yokkaichi", "Ōtsu", "Nara",
     "Hamamatsu", "Higashiōsaka", "Kurume", "Sasebo", "Shimonoseki",
     # East-1 (2026-10-07)
-    "Higashiyamato", "Nishitōkyō", "Tama", "Higashimurayama", "Chōfu", "Ageo (Regional)",
+    "Higashiyamato", "Nishitōkyō", "Tama", "Higashimurayama", "Chōfu", "Ageo (Regional)", "Sōka", "Tokorozawa", "Fuchū (Tokyo)",
 )
 
 # Verbatim where verbatim is required. Each entry is a Notice, and the sources
@@ -1064,7 +1064,7 @@ _NOTICES = [
      "Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, "
      "Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, "
      "Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, "
-     "Higashiōsaka, Kurume, Sasebo, Shimonoseki, Higashiyamato, Nishitōkyō, Tama, Higashimurayama, Chōfu and Ageo (Regional), and the "
+     "Higashiōsaka, Kurume, Sasebo, Shimonoseki, Higashiyamato, Nishitōkyō, Tama, Higashimurayama, Chōfu, Ageo (Regional), Sōka, Tokorozawa and Fuchū (Tokyo), and the "
      "metro and light-rail lines and stations of Taipei and New Taipei are from OpenStreetMap, "
      "© OpenStreetMap contributors, available "
      "under the Open Database License. The alignments drawn are OSM's own "
@@ -2439,6 +2439,60 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
      "Saitama Prefecture and MLIT did not make and do not endorse this map.",
      False, ("Ageo (Regional)",)),
+    # Sōka (notice 162): Saitama Prefecture's lists, PDL 1.0 through the
+    # prefecture portal's terms (§1.1's processed-use credit, each dataset by
+    # its title); MLIT as in Kobe's, N02 in its 2025 edition. Drafted from the
+    # approved Japanese notices; the credit's titles are a review-time check.
+    Notice(162, "Saitama Prefecture and MLIT (Sōka)",
+     "Sōka's businesses: 出典：「食品営業施設_新法_公開」「食品営業施設_旧法_公開」「kyuho_R080331」"
+     "（埼玉県GISオープンデータカタログ）（[https://portal-pref-saitama.hub.arcgis.com/pages/opendatacatalog](https://portal-pref-saitama.hub.arcgis.com/pages/opendatacatalog)）及び"
+     "「【埼玉県】生活衛生営業施設一覧」（埼玉県オープンデータポータルサイト）（[https://www.pref.saitama.lg.jp/a0706/6hou/ichiran.html](https://www.pref.saitama.lg.jp/a0706/6hou/ichiran.html)）を加工して作成. "
+     "Processed by this project, which cut the prefecture's lists to Sōka by address, kept the "
+     "permits in term, showed a premises once, selected the storefront types, placed each by its address "
+     "or the prefecture's own coordinates, and counted them around stations. The prefecture leaves out "
+     "some premises at their operators' request, and the old-law permits are as of March 31, 2026. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
+     "Saitama Prefecture and MLIT did not make and do not endorse this map.",
+     False, ("Sōka",)),
+    # Tokorozawa (notice 163): Saitama Prefecture's lists, PDL 1.0 through the
+    # prefecture portal's terms (§1.1's processed-use credit, each dataset by
+    # its title); MLIT as in Kobe's, N02 in its 2025 edition. Drafted from the
+    # approved Japanese notices; the credit's titles are a review-time check.
+    Notice(163, "Saitama Prefecture and MLIT (Tokorozawa)",
+     "Tokorozawa's businesses: 出典：「食品営業施設_新法_公開」「食品営業施設_旧法_公開」「kyuho_R080331」"
+     "（埼玉県GISオープンデータカタログ）（[https://portal-pref-saitama.hub.arcgis.com/pages/opendatacatalog](https://portal-pref-saitama.hub.arcgis.com/pages/opendatacatalog)）及び"
+     "「【埼玉県】生活衛生営業施設一覧」（埼玉県オープンデータポータルサイト）（[https://www.pref.saitama.lg.jp/a0706/6hou/ichiran.html](https://www.pref.saitama.lg.jp/a0706/6hou/ichiran.html)）を加工して作成. "
+     "Processed by this project, which cut the prefecture's lists to Tokorozawa by address, kept the "
+     "permits in term, showed a premises once, selected the storefront types, placed each by its address "
+     "or the prefecture's own coordinates, and counted them around stations. The prefecture leaves out "
+     "some premises at their operators' request, and the old-law permits are as of March 31, 2026. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
+     "Saitama Prefecture and MLIT did not make and do not endorse this map.",
+     False, ("Tokorozawa",)),
+    # Fuchū (Tokyo) (notice 165): the same ledgers and MHLW file as Higashiyamato's
+    # (157), the city changed.
+    Notice(165, "Tokyo Metropolitan Government, MHLW and MLIT (Fuchū (Tokyo))",
+     "Fuchū (Tokyo)'s businesses: この地図は、以下の著作物を改変して利用しています。"
+     "食品関係営業台帳（[https://catalog.data.metro.tokyo.lg.jp/dataset/t000055d0000000361](https://catalog.data.metro.tokyo.lg.jp/dataset/t000055d0000000361)）"
+     "及び環境衛生施設台帳（[https://catalog.data.metro.tokyo.lg.jp/dataset/t000055d0000000614](https://catalog.data.metro.tokyo.lg.jp/dataset/t000055d0000000614)）、"
+     "東京都、クリエイティブ・コモンズ・ライセンス 表示4.0国際"
+     "（[https://creativecommons.org/licenses/by/4.0/deed.ja](https://creativecommons.org/licenses/by/4.0/deed.ja)）"
+     "（東京都オープンデータカタログサイト、2026年10月7日利用）; and "
+     "出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一覧」を加工して作成. "
+     "Processed by this project, which cut the Tama ledgers to Fuchū (Tokyo) by address, selected the "
+     "storefront types, showed a premises in both lists once, placed each by its address or the ministry's "
+     "own coordinates, and counted them around stations. The ledgers hold new permits since August 2019 and "
+     "leave out premises whose operators asked not to be published; the ministry's list holds only filings "
+     "whose applicants agreed to publish them. Neither is complete. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
+     "The Tokyo Metropolitan Government, MHLW and MLIT did not make and do not endorse this map.",
+     False, ("Fuchū (Tokyo)",)),
     # Chōfu (notice 166): the same ledgers and MHLW file as Higashiyamato's
     # (157), the city changed.
     Notice(166, "Tokyo Metropolitan Government, MHLW and MLIT (Chōfu)",
