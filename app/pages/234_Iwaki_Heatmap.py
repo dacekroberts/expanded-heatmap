@@ -43,25 +43,52 @@ else:
 # replaces this with its own caption of the sources' dates and credits.
 render_data_age("Iwaki")
 
-# TODO: replace every TODO bullet with prose true for this city, as short
-# bullets under bold headings (app/pages/43_Seoul_Heatmap.py is the model):
-# the lines by name, what is not drawn, the area and the stations left out, the
-# source and its limitations. Detail a reference page carries stays there.
+# From the japan-city skill's template, Kochi's page (the laundry sentence)
+# and Fukushima's page (approved wording, pre-approved for this build,
+# 2026-09-30); the businesses' first bullet and the Ban'etsu East Line's
+# bullet are proposals in docs/decisions_drafts/worktree-japan-regional-1.md.
+# The dates are the lists' own (config.SOURCE_AS_OF); the ring share, 34.7%,
+# is step 3's (1,296 of 3,730, 2026-10-07).
 st.markdown(
     """
 **The lines**
 
-- TODO: the lines drawn, by name (each is labeled on the map and in the legend).
-- TODO: what is not drawn, and why.
-- TODO: the area covered; stations left out are listed below.
+- Two lines are drawn, each labeled on the map and in the legend: JR East's Joban and Ban'etsu East
+  lines.
+- Lines and stations come from MLIT's national railway data (国土数値情報); station names in
+  English are from OpenStreetMap. Line colors are this project's own, not the operators'.
+- Only stations inside Iwaki City get rings, because the business data covers the city alone:
+  lines running on to Hirono, Ono and Ibaraki Prefecture are cut at the city line. The stations
+  left out are listed below.
+- The JR Ban'etsu East Line is infrequent inside the city: 6 to 8 trains a day each way stop at
+  Akai, Ogawago, Eda and Kawamae.
 
 **The businesses**
 
-- TODO: the data source, and any category it is missing.
+- From Iwaki City's list of food-business permits (as of March 31, 2026), with the new permits it
+  listed each month to August 31, 2026, and its register of barbers and beauty salons (as of
+  May 31, 2026), with the new premises it listed each month to September 30, 2026.
+- Iwaki City publishes no list of laundries, so they are not on this map.
+- Japan has no general business license, so shops other than food shops (clothing, electronics,
+  pharmacies) do not appear: the Food shops layer is food retail only (bakeries and confectioners,
+  delis, butchers and fishmongers).
+- Food businesses that only notify the city rather than hold a permit, such as many convenience
+  stores and greengrocers, are not in the list.
+- The lists may include premises that have closed, so a dot means a permit on file, not a
+  business open today.
+
+**Reading the map**
+
+- The lists give an address but no location. Each address is matched to MLIT's address reference
+  data, which places most at their street block; where only the district can be found, the dot
+  sits at the district's center.
+- Where a trade name is its operator's own name, the dot shows its permit type instead.
+- Names and permit types are shown in Japanese, as the lists record them.
+- **About 35% of storefronts sit within a ring.**
 """
 )
 
-render_map_help("three business categories (Retail, Food service and Personal services)")
+render_map_help("three business categories (Food shops, Food service and Personal services)")
 render_excluded_stations("Iwaki")
 render_country_links("Iwaki")
 

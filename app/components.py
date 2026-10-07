@@ -2464,6 +2464,31 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The City of Fukushima and MLIT did not make "
      "and do not endorse this map.",
      False, ("Fukushima",)),
+    # Iwaki (notice 181): the city's two dataset pages (保健所 生活衛生課), CC BY
+    # 4.0 as each states (read 2026-10-07 by staging: the food page's 「表示4.0
+    # 日本」 names a port that does not exist, credited as CC BY 4.0; the city's
+    # general open-data page still says CC BY 2.1 JP; no wording prescribed, no
+    # cost clause), credited with the pages' titles, いわき市, the licence link
+    # and a modification line. MHLW's file was a control only and is not
+    # credited. MLIT as in Kobe's, N02 in its 2025 edition. Written from
+    # Fukushima's, Akita's and Tsu's wording under the owner's pre-approval of
+    # template prose (2026-09-30); the parenthetical is a proposal in
+    # docs/decisions_drafts/worktree-japan-regional-1.md.
+    Notice(181, "Iwaki City and MLIT (Iwaki)",
+     "Iwaki's businesses: 出典：「食品営業許可施設」「理容所・美容所」（いわき市）"
+     "（[https://www.city.iwaki.lg.jp/www/contents/1652661537484/index.html](https://www.city.iwaki.lg.jp/www/contents/1652661537484/index.html)、"
+     "[https://www.city.iwaki.lg.jp/www/contents/1780984436063/index.html](https://www.city.iwaki.lg.jp/www/contents/1780984436063/index.html)）を加工して作成 "
+     "([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.ja)). "
+     "(This map modifies the City of Iwaki's list of food-business permits in term on 31 March 2026, "
+     "its monthly lists of new permits to 31 August 2026, and its list of barbers and beauty salons as of "
+     "31 May 2026 with its monthly lists of new premises to 30 September 2026: this project added the new "
+     "permits and premises to the lists, selected the storefront types, placed each by its address, and "
+     "counted them around stations.) The lists may include premises that have closed. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The City of Iwaki and MLIT did not make "
+     "and do not endorse this map.",
+     False, ("Iwaki",)),
     # Akita (notice 182): the city's own lists, CC BY 4.0 as each dataset page
     # states (catalogue code op_cc_1; read 2026-10-07 by staging: no wording
     # prescribed, no cost clause, the use-report request not a condition),

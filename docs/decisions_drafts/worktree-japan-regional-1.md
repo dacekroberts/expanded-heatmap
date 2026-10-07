@@ -179,6 +179,13 @@ notices 176-186.
   modified work, read 2026-10-07 from the prefecture's terms page since
   staging's record names the form but not its wording: check it against the
   licence-read report.
+- **Iwaki** (page 234): the businesses' first bullet (Fukushima's months
+  sentence extended to the barber and beauty months), "The JR Ban'etsu East
+  Line is infrequent inside the city: 6 to 8 trains a day each way stop at
+  Akai, Ogawago, Eda and Kawamae." (Fukushima's and Akita's form, call 86),
+  and notice 181's parenthetical modification sentence (Fukushima's and
+  Tsu's form, extended to the register months). The notice's titles are the
+  dataset pages' headings as the brief records them, not re-read.
 
 ## Shared-code findings for review time (not changed here)
 
@@ -232,6 +239,64 @@ notices 176-186.
   japan-city skill beside the two-sources note.
 
 ## Entries
+
+### 2026-10-07 - Iwaki built, the full food list kept whole with five months of new permits, and the barber and beauty list with its four months
+
+- **Iwaki built (page 234, notice 181): 3,730 storefronts (Food service
+  1,983, Food shops 607, Personal services 1,140) around 14 stations on 2
+  lines, 34.7% of them in a ring (1,296).** Fukuyama's shape with
+  Ichinomiya's answered merge (call 149). The city's own CSVs on its
+  食品営業許可施設 and 理容所・美容所 pages (CC BY 4.0, read 2026-10-07 by
+  staging); no laundry list (disclosed, Kōchi's and Akita's sentence). Built
+  by a subagent of the Regional-1 lead, integrated by the lead.
+- **The merge (call 149):** the list of permits in term on 2026-03-31 kept
+  whole, and the five monthly lists of new permits added, as two sources by
+  `SOURCE_KIND`, each term against its own file's date. Past term 0, late 0:
+  the full list's earliest expiry is 2026-05-31, and no list carries a start
+  date apart from the grant date.
+- **Read whole, not through `rebuilt_register`, by measurement:** every
+  full-list row is a permit in term on the list's date; the rebuild's fold
+  hid a live permit with another 種目 at 11 premises (5 Food service pins:
+  3,725 storefronts rebuilt, 3,730 read whole). One pin per premises and
+  bucket folds the repeats instead (218 rows). A shared-code finding.
+- **The brief's figures, against the whole read:** restaurant permits 3,393
+  + 110 = 3,503, 102.3% of e-Stat's 3,425 (the brief's 99.5% is after the
+  fold). Storefront rows: Food service 2,021 (brief 1,998), Retail 781 (756),
+  snack bars out 723 (719): the difference is the fold. Registers: 382
+  barbers and 794 beauty salons, the brief exactly. The mobile salon
+  addressed in 福島市 is set aside by `other_muni`, the other by the
+  mobile-salon rule.
+- **MHLW's file stays a control** (call 150): its 164 addressed
+  notifications left out; not on the notice.
+- **The barber and beauty months** (June to September 2026) are named in the
+  brief and fetched at Step 0 (call 106), so they are read; the 24 earlier
+  food months are cached but not read (already in the full list).
+- **Snack bars:** 種目 バー・スナック等 out whole as Tokyo's バー・キャバレー
+  (owner, 2026-09-29): 723 restaurant permits, about a fifth.
+- **Step 2:** 5,675 rows read. Set aside 1 (another municipality). Not a
+  premises 351 (180 vehicles, 171 stalls). Out by rule 1,345: 723 snack bars,
+  257 manufacturing and other non-counter types, 146 canteens, 140 inside
+  accommodation, 62 caterers, 15 vending, 1 temporary, 1 mobile salon. Join
+  of 3,978 storefront rows: block 3,235, 小字 370, town-chōme 343, unplaced 30
+  (0.8%; the brief's 1.6% came before the foundation's 字 rules). On the
+  map: 81.9% block, 9.7% 小字, 8.4% town-chōme.
+- The 菓子 / そうざい factory share: 28 of 451 (6.2%), kept (owner,
+  2026-09-24).
+- **Economic Census control:** 1,983 Food service pins against 1,226 飲食店
+  establishments in 07204: 1.62, inside the built cities' 1.56-1.92.
+- **Privacy verdict: publish.** `check_personal_exposure.py iwaki`: the Japan
+  pass prints 0; 8 trade names in the raw files are an operator's own name,
+  1 pin shows its permit type.
+- **Rail:** N02-25, 14 stations: JR Joban 10 of 81, JR Ban'etsu East 5 of 16
+  (いわき one group). No Shinkansen in the city. 3 excluded: 広野町 1, 小野町 1,
+  Ibaraki Prefecture 1 (大津港). Gate 3 exact from JR East's line timetables
+  (three line-timetable pages and the いわき index read into the scratchpad,
+  counts only). English names: OSM's 23 objects, no override. Colours from
+  `line_colour_search.py` (the pair 95.4 apart). Median station spacing
+  4,181 m: standard rings. The Ban'etsu East Line, 6 to 8 trains a day each
+  way, drawn and named (calls 46 and 86).
+- **Encoding note:** the June 2026 register month is cp932, not UTF-8 with a
+  BOM as the brief says; `city_rows` sniffs both.
 
 ### 2026-10-07 - Gifu built, the city's food permits and notifications of June 2025 and its barber and beauty registers of March 2025, from its CKAN packages
 

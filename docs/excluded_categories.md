@@ -4750,6 +4750,52 @@ line.
 - The Meitetsu Takehana Line keeps one station in the city, Yanaizu; it is
   drawn as cut (owner, 2026-09-27).
 
+### Iwaki - the city's food list with its monthly new permits and its barber and beauty-salon list, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food: they notify the city rather than hold a
+  permit, and the list holds permits only.
+- Laundries: the city publishes no list of them.
+- 351 food trucks (自動車, 180) and street and festival stalls (露店, 171), 1
+  other temporary permit, and 2 mobile salons (移動), one of them addressed in
+  Fukushima City.
+- 257 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 146 school, hospital and staff canteens, 15 vending machines, 140 premises
+  inside hotels and inns, 62 caterers (仕出し) and 723 snack bars and
+  cabarets (the list's 種目 バー・スナック等, about a fifth of its restaurant
+  permits).
+
+**Counted** - every food permit in term on March 31, 2026 in the city's list,
+old-law permits included, plus the new permits the city listed each month
+from April to August 2026, and the city's barber and beauty-salon list of
+May 31, 2026 with the new premises it listed each month to September 30,
+2026. The monthly lists hold new permits and premises only, and closures are
+not published, so a business that closed after the list's date is still
+counted: the map is an upper bound. The list holds 382 barbers and 794 beauty
+salons, against 390 and 797 in the national count a year earlier. 28 of the
+451 bakery, confectioner and deli rows (6.2%) have a trade name that reads as
+a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 218 repeat permits shown once (one premises
+holding several permits of one kind, or listed as both a barber's and a
+beauty salon).
+
+**Not placed** - 30 rows (0.8%), most in 川部町, 山田町, 内郷 and 常磐白鳥町,
+whose addresses MLIT's files do not hold. Another 674 sit at the center of
+their 小字 (a named part of a town; 362) or town (312).
+
+**Names not shown** - 1 pin whose trade name is the operator's own name shows
+its permit type.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 3 stations beyond it: 1 in Hirono, 1 in Ono and 1 in Ibaraki
+  Prefecture.
+- The JR Ban'etsu East Line runs 6 to 8 trains a day each way inside the
+  city; it is drawn (owner, 2026-10-06).
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering
