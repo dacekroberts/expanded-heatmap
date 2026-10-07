@@ -341,6 +341,21 @@ TEXT_WIDTH = {
     "Tokushima": 71.6, "Toyokawa": 67.4, "Toyonaka": 65.1, "Tshwane": 58.9, "Tsu": 23.1,
     "Tsukuba": 56.5, "Uji": 16.7, "Urasoe": 46.8, "Urayasu": 55.2, "Yachiyo": 53.2,
     "Yamato": 49.9, "Ōita": 27.6, "Ōta": 23.9,
+    # The regional cities' labels without " (Regional)" (cities.py `pill`,
+    # owner 2026-10-07), the built-in browser with Space Grotesk 600 loaded
+    # from Google Fonts, canvas measureText; controls Seattle (Regional) 120.5,
+    # Vancouver (Regional) 144.4, Kitchener–Waterloo (Regional) 207.2, Boston,
+    # Buffalo, Copenhagen and Mexico City reproduced. The (Regional) entries
+    # above stay: a label keeps its suffix where its bare name is another
+    # city's (Brussels (Regional)), and a later clash would need them.
+    "Los Angeles": 80.8, "Miami": 39.6, "Vancouver": 71.4, "Guadalajara": 79.7,
+    "Lille": 26.7, "Rio de Janeiro": 95.6, "Belo Horizonte": 98.5, "Fortaleza": 62.9,
+    "Porto Alegre": 83.6, "Recife": 42.9, "Santos": 47.1, "Taipei": 39.5,
+    "Monterrey": 71.0, "Newcastle": 70.1, "Rouen": 42.8, "Bordeaux": 64.9,
+    "Nantes": 47.5, "Grenoble": 60.5, "Valenciennes": 89.4,
+    "Kitchener–Waterloo": 134.2, "Liberec": 49.9, "Most": 34.5, "Manchester": 80.9,
+    "Birmingham": 80.2, "Nottingham": 78.7, "Blackpool": 66.7, "Seattle": 47.5,
+    "Liverpool": 62.0, "Geneva": 49.4,
 }
 
 PILL_H = 18.0             # measured from rendered pixels, 14 px text
@@ -465,9 +480,10 @@ def compete(cities, centre_lat, centre_lon, zoom, storefronts, strict=False,
         cands = TOP_CANDIDATES if is_top or region != "Global" else CANDIDATES
         tries = ([tuple(own)] if own else []) + [o for o in cands if o != (tuple(own) if own else None)]
         dots = won_dots + [d for n, d in top_dots.items() if n != c["name"]]
+        text = c.get("pill", c["name"])     # the label text (cities.py `pill`)
         for off in tries:
             x, y = pos[c["name"]][ref]
-            box = pill_box(c["name"], x, y, off, strict)
+            box = pill_box(text, x, y, off, strict)
             if any(_overlaps(box, p) for p in placed):
                 continue
             if any(box[0] < dx < box[2] and box[1] < dy < box[3] for dx, dy in dots + [(x, y)]):
@@ -475,7 +491,7 @@ def compete(cities, centre_lat, centre_lon, zoom, storefronts, strict=False,
             under = False
             for w in CANVAS.values():
                 cx, cy = pos[c["name"]][w]
-                b = pill_box(c["name"], cx, cy, off, strict)
+                b = pill_box(text, cx, cy, off, strict)
                 # Any part of the pill on screen counts, not just the dot: a
                 # pill can reach the canvas from a dot below it (Santos under
                 # the map credit, 2026-10-01).
