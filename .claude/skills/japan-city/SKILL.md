@@ -46,6 +46,12 @@ the owner reminded Kobe's build that it exists for the cities after it.
 ## The owner's standing calls - do not re-ask
 
 - **The Shinkansen does not count** (2026-09-24); `japan.stations()` drops it.
+- **No frequency floor for JR or private lines** (2026-10-06, calls 46 and
+  86): Maebashi's Jōmō line every 30 minutes and Fukuyama's hourly JR were
+  approved. A stretch with about 11 trains a day or fewer is drawn, not cut,
+  and the city's page names it as low-frequency. Shimonoseki's earlier cut (8
+  to 10 trains a day) predates this and is not reopened. No check can catch
+  it (N02 carries no timetable), so the brief is where the stretch is named.
 - **Lines served only by limited expresses (特急) DO count** (2026-09-28):
   in Japan a limited express is regularly scheduled commuter traffic, not
   intercity service. Draw such a stretch like any other line. This reverses
@@ -122,6 +128,56 @@ the owner reminded Kobe's build that it exists for the cities after it.
   `scripts/stress_overview.py --scenario eight_osaka`; DECISIONS.md,
   2026-10-04, has the numbers. Nagakute and Nisshin, Itami and Toyonaka go
   into `KNOWN_STACKED` (accepted).
+
+## The Japan foundation's rules (2026-10-07) - already in shared code
+
+Every "⚠️ Shared code" item of the 58 wave-4/5 briefs and the owner's calls of
+2026-10-06 landed once, before the A/B builds
+(`docs/decisions_drafts/japan-foundation.md` has the checklist and each
+brief's figure). **A brief that tells you to add one of these is already
+done; one that is missing is a parked call, never a city-local fix.**
+
+- **Leave `"rules"` out of a new `japan.CITIES` entry.** A new city reads
+  `ALL_RULES` (`WAVE2_RULES | WAVE5_RULES`); the briefs' `"rules":
+  WAVE2_RULES` predates the foundation and `japan.py` refuses it at import.
+  Switch one rule off only in `"rules_off": {rule: why}`. The 34 cities in
+  `japan.BUILT_BEFORE_FOUNDATION` keep `WAVE2_RULES` until a review time
+  re-renders them.
+- **Owner's calls, as switches:** 158 combined 業態 cells (`combined_form`),
+  161 past-term permits (`past_term`), 162 the city name alone (`city_only`),
+  172 late starters (`late_start`); 自動車以外 is no vehicle (everywhere); an
+  asterisk-only address is withheld and counted apart (`asterisk`, a masked
+  trade name shows the permit type); 未選択 is no address (`misentaku`); 露天
+  is temporary (`roten`); 自動車 in 許可条件 is a vehicle (`kyoka_joken`).
+- **`config.TERM_AS_OF = {source key: date}`** is required wherever a source
+  carries a permit term (`japan_register.END_COLS` / `START_COLS`): the last
+  day the file covers, never today. Step 2 stops without it.
+- **Step 2 stops a new city** whose source reads no address, no trade name (or
+  names it in `config.NO_TRADE_NAME`), no type on a food list, or carries an
+  operator-like column the name rule does not compare: add the spelling to
+  `OPERATOR_COLS`, or record it in `config.NOT_OPERATOR` with why. Read the
+  message's header list; it is column names only.
+- **Addresses:** area-wide (全域, 周辺, a prefecture-wide address), another
+  municipality's rows (cut by address against N03's names, `other_muni`), the
+  prefecture and city written twice, and 移動 salons are set aside and counted
+  by reason (`set_aside_*` in the baseline). A page of several municipalities
+  names them in `"municipalities": {code: MLIT's 市区町村名}` (Ageo
+  (Regional)); a city's private-use glyphs go in `"gaiji": {code point: char}`
+  (Kawaguchi's U+E4AA 塚, U+F892 蓮, U+F7FE 樋).
+- **The join:** the 字 left out after a short 大字 (`aza_insert`), the word
+  小字 (`koaza_word`), the spelling pairs (`spelling5`), the bare 町
+  (`machi_bare`), 大字 + 字 + 丁目 (`koaza_chome`), the 小字 centroid, tier
+  `koaza` (`koaza_centroid`), the unique 小字 (`koaza_unique`), the 大字 cut
+  (`oaza_cut`). Measured: Uji 55.0% to 92.7% at the block, Ichinomiya's
+  barbers 82.3% to 93.3%, Takatsuki 19 unplaced to 3, Okazaki 86.6% to 91.5%.
+- **Readers:** header circled numerals, LinkData `.txt`, `R8/09/30` and Shōwa
+  dates, the `NN:` and `?` type prefixes, and the briefs' column spellings
+  are read everywhere; `rebuilt_register` takes several expiry spellings
+  (`end_col=("許可満了日", "許可終了日")`) and `keep_undated=True`.
+- Not done (optional in their briefs, each a few rows): Gifu's bracketed 字,
+  Morioka's 地割, Mito's 宮町 / 泉町 without 丁目, Matsue's 八雲村, Matsumoto's
+  湯の原. A zip of CSVs (Maebashi's, Sagamihara's registers) still needs a
+  config `source_rows`: `city_rows` reads XLSX members only.
 
 ## The traps Kobe measured
 

@@ -835,7 +835,12 @@ def in_term(rows, end_cols, as_of):
             yield r
 
 
-def rebuilt_register(paths, as_of, end_col="許可満了日", granted_col="許可年月日", rules=()):
+def _date_of(r, cols):
+    """The first of `cols` (one column name or several spellings) that reads as a date."""
+    return next((d for d in (wareki_date(r.get(c)) for c in ((cols,) if isinstance(cols, str) else cols)) if d), None)
+
+
+def rebuilt_register(paths, as_of, end_col="許可満了日", granted_col="許可年月日", rules=(), keep_undated=False):
     """A register rebuilt from a complete list and the months since, Kyoto's
     method for any list (Higashiōsaka, 2026-10-03: its 全許可 list of
     2026-04-01 plus each month's new permits to 2026-08-31). `paths` oldest
@@ -847,24 +852,35 @@ def rebuilt_register(paths, as_of, end_col="許可満了日", granted_col="許�
 
     Returns premises columns only (address, trade name, type, 業態, the two
     dates, the closure fields), plus the name rule's ANSWER, compared here
-    while the operator columns are in hand; never the operator's name."""
+    while the operator columns are in hand; never the operator's name.
+
+    The Japan foundation (2026-10-07): `end_col` and `granted_col` may each be
+    several spellings, read in order (Fukuyama's monthly files write 許可満了日
+    in one format and 許可終了日 in the other); the record keeps the first
+    spelling's name. `keep_undated`: a row with no readable expiry is kept, as
+    in_term keeps one (Koshigaya's 907 food notifications carry none; without
+    it they rank 1900-01-01 and fall out)."""
+    end_key = end_col if isinstance(end_col, str) else end_col[0]
+    granted_key = granted_col if isinstance(granted_col, str) else granted_col[0]
+    undated = datetime.date(9999, 12, 31) if keep_undated else datetime.date(1900, 1, 1)
     best = {}
     for path in paths:
         for r in city_rows(path):
             addr = next((r[c] for c in ADDR_COLS if (r.get(c) or "").strip()), "")
             name = next((r[c] for c in NAME_COLS if (r.get(c) or "").strip()), "")
             typ = next((r[c] for c in type_cols(rules) if r.get(c)), "")
-            end, granted = wareki_date(r.get(end_col)), wareki_date(r.get(granted_col))
+            end, granted = _date_of(r, end_col), _date_of(r, granted_col)
             key = (re.sub(r"[‐‑‒–—―−ｰー－]", "-", unicodedata.normalize("NFKC", addr).replace(" ", "")
                           .replace("　", "")),
                    _name_key(name), re.sub(r"^\(旧\)", "", unicodedata.normalize("NFKC", typ).replace(" ", "")))
-            rank = (end or datetime.date(1900, 1, 1), granted or datetime.date(1900, 1, 1))
+            rank = (end or undated, granted or datetime.date(1900, 1, 1))
             if key not in best or rank >= best[key][0]:
                 best[key] = (rank, {"所在地": addr, "施設名称": name, "業種": typ,
                                     "業態": next(((r.get(c) or "").strip() for c in FORM_COLS
                                                  if (r.get(c) or "").strip()), ""),
-                                    end_col: end.isoformat() if end else "",
-                                    granted_col: granted.isoformat() if granted else "",
+                                    end_key: end.isoformat() if end else "",
+                                    granted_key: granted.isoformat() if granted else "",
+                                    "許可条件": r.get("許可条件") or "",
                                     "廃業年月日": r.get("廃業年月日") or "", "申請区分": r.get("申請区分") or "",
                                     "name_is_operator": name_is_operator(r, rules)})
     return [rec for (e, _), rec in best.values() if e >= as_of]

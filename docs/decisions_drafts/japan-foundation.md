@@ -4,7 +4,17 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
-## The checklist (working copy, 2026-10-07)
+### 2026-10-07 - The Japan foundation: every shared-code rule of the 58 Japanese briefs landed once, built maps unchanged
+
+- **Landed in `pipeline/countries/japan_register.py`, `japan_step2.py`, `japan.py` and `pipeline/taxonomies/japan_eigyo.py`, in four groups, each followed by the Minato control (98.0 / 0.2 / 1.8 every time) and `drift_check.py` over the 34 built Japanese cities with `--jobs 3` (zero drift every time, about 3.5 min, peak 5.0 GB).** The checklist below names each rule's briefs. Group A's first run drifted Hiroshima's and Toyama's maps with every count unchanged: the circled-numeral strip ran in `_head`, which `xlsx_rows` applies to every CELL, so `㉕ そうざい製造業` lost its number. It moved to header cells only (`_header`), and both cities read zero drift.
+- **Rules that touch no built map run everywhere** (a scan of the 34 built cities' raw rows found each trigger 0 times): 自動車以外 is no vehicle, the header circled numeral, the `NN:` and `?` type prefixes, 米殻類, the LinkData reader, the slash and Shōwa wareki forms, and the briefs' address, name, form and operator column spellings.
+- **Rules that would move a built map are switches, `japan_register.WAVE5_RULES`.** A city outside `japan.BUILT_BEFORE_FOUNDATION` reads `ALL_RULES` by default, and `japan.py` refuses one that switches a rule off without a reason in `"rules_off"`. That includes the briefs' `"rules": WAVE2_RULES`, which predates the foundation. Rejected: one global switch per rule with each built city opted out by hand (34 entries to keep in step as rules are added).
+- **Raising checks for the next city:** step 2 stops a new city whose source reads no address, no trade name, no food type, or an operator-like column `operator_cols()` does not compare (`config.NOT_OPERATOR` records one judged otherwise), and one whose permit term has no `config.TERM_AS_OF`. These are the traps Hirakata, Gifu, Tsu and Neyagawa found by hand.
+- **Call 158, read with the earlier calls (precedent, process change 1):** a combined cell naming a public restaurant form stays Food service unless it names 給食 or 旅館. The vehicle, stall, hostess, entertainment, vending and mail-order exclusions also keep winning, each its own earlier owner call. Only the 仕出し and the deli and shop forms give way. On Fujisawa's cached lists that returns 70 catering and 30 deli rows (the brief: 69 and 27 on a 312-row filter; 316 here).
+- **The owner's no-frequency-floor call (calls 46 and 86) added to the japan-city skill's standing calls** on Cleanup's relay of the owner's word; skill text only, no code (N02 has no timetable to check).
+- **Each brief's figure reproduced on its cached file:** Uji 55.0% to 92.7% at the block (1,406 rows, exactly); Ichinomiya's barbers 82.3% to 93.3% (brief 93.0%); Takatsuki 19 unplaced to 3 (exactly); Okazaki 86.6% to 91.5% with O1 (92.7% in the brief with its city-local O2); Aomori 82.3% to 92.3%; Ōita's 301 withheld addresses and Aomori's 1,284 全域 rows exactly; Kure's 7 late starters (3 restaurants and 4 others); Tottori's four towns cut by address, 640 open rows (the brief: 644).
+
+## The checklist (2026-10-07; every row landed except S30's optional items; the switches are named in `japan_register.WAVE5_RULES`)
 
 Every "⚠️ Shared code" item in the Japanese briefs of `docs/build_plan_2026-10-07.md`'s
 table (58 cities; Tama, Higashimurayama, Kasukabe, Toyonaka, Suita, Amagasaki,
@@ -53,6 +63,46 @@ laundry 種目, Matsue's repeated header row and mobile barber, Fuji's
 monthly-file reading, Ichinomiya's and Fukushima's kind per file (`SOURCE_KIND`
 exists).
 
+S30 landed only Matsue's `―丁目` (in `spelling5`); Gifu's bracketed 字,
+Morioka's 地割, Mito's 宮町 / 泉町 without 丁目, Matsue's 八雲村 and
+Matsumoto's 湯の原 are each a few rows, optional in their briefs, and left
+for a later city that needs them.
+
+## Review-time re-render proposal (built maps, for the owner)
+
+What each built city's step 2 gives with every WAVE5 rule switched on
+(`write=False`, 2026-10-07), against its committed baseline. Nothing here is
+applied: a built city stays on `WAVE2_RULES` until a review time re-renders
+it. **The term rules (calls 161 and 172) are not in these figures:** no built
+config pins a per-source as-of, so each city needs a `TERM_AS_OF` before they
+can be measured.
+
+| City | Storefronts | What moves |
+|---|---|---|
+| Toyota | 4,203 → 4,380 (+177) | unplaced 232 → 35 (the short-大字 字 rule, 145 at a 小字 centroid) |
+| Kyoto | 32,370 → 32,389 (+19) | unplaced 426 → 407 |
+| Nara | 4,801 → 4,820 (+19) | combined cells 79 (Food service +20), area-wide 19, the city name alone 1 |
+| Tokyo | 61,317 → 61,297 (−20) | permit-condition vehicles 414 and area-wide 102 set aside (most already out), Retail −19 |
+| Kobe | 27,259 → 27,277 (+18) | block 27,758 → 27,874, chōme 684 → 556 |
+| Yokkaichi | 4,290 → 4,306 (+16) | combined cells 619 (Food service +8), unplaced 111 → 94 |
+| Matsuyama | 9,329 → 9,337 (+8) | the type columns (クリーニング種別１), unplaced 41 → 33 |
+| Toyama | 6,590 → 6,596 (+6) | unplaced 98 → 91 |
+| Hiroshima | 13,691 → 13,686 (−5) | permit-condition vehicles 297 (most already out), combined cells 41 |
+| Kurume | 3,067 → 3,071 (+4) | block 2,997 → 3,041 |
+| Sakai, Nagasaki | +3 each | combined cells 73 / 8 |
+| Utsunomiya, Takamatsu | −2 each | permit-condition vehicles 291 (Utsunomiya); area-wide 676 (Takamatsu, already out) |
+| Fukui, Fukuoka, Kawasaki, Kitakyushu, Sapporo, Yokohama | ±1 | |
+| Yokosuka | unchanged | names withheld 2 → 4 (the 法人名称 column) |
+| Himeji, Kagoshima, Kumamoto, Nishinomiya, Ōtsu, Sasebo, Shimonoseki | unchanged | tiers only (Ōtsu's 646 area-wide rows were already out) |
+| Hakodate, Hamamatsu, Higashiōsaka, Kōchi, Okayama, Osaka | unchanged | nothing |
+
+*Recommend* re-rendering at the review time that lands the first A/B Japanese
+cities: Toyota first (+177 placed, a real gain), then the rest in one batch,
+each with a pinned `TERM_AS_OF`. Tradeoff: about 34 map re-renders and their
+deploy-verify lane for changes mostly under 0.1% outside Toyota; leaving them
+keeps built maps one rule set behind the new cities.
+
 ## Parked calls
 
-(none yet)
+None. Call 158's reading beside the earlier exclusions is a precedent
+application (above), flagged here for the owner's review.
