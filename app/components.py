@@ -2443,20 +2443,23 @@ _NOTICES = [
      False, ("Tsu",)),
     # Fukushima (notice 180): the city's lists are CC BY 2.1 JP under the
     # 福島市オープンデータ利用規約 ２(２), credited in its ２(３) form for a modified
-    # work, one title per list used (the monthly files' own title,
-    # 新規食品営業許可施設一覧, among them); MLIT as in Kobe's, N02 in its 2025
+    # work, one title per list used (the monthly files' own titles,
+    # 新規食品営業許可施設一覧, 新規開設理容所一覧 and 新規開設美容所一覧, among
+    # them; the register months by call 210); MLIT as in Kobe's, N02 in its 2025
     # edition. MHLW's file was a control only and is not credited. Written from
     # Hamamatsu's and Higashiōsaka's approved wording under the owner's
     # pre-approval of template prose (2026-09-30).
     Notice(180, "Fukushima City and MLIT (Fukushima)",
      "Fukushima's businesses: この地図は以下の著作物を改変して利用しています。"
-     "食品営業許可施設一覧、新規食品営業許可施設一覧、理容所一覧、美容所一覧、クリーニング所一覧、"
+     "食品営業許可施設一覧、新規食品営業許可施設一覧、理容所一覧、新規開設理容所一覧、美容所一覧、"
+     "新規開設美容所一覧、クリーニング所一覧、"
      "コインオペレーションクリーニング一覧、福島市、クリエイティブ・コモンズ・ライセンス 表示 2.1 日本"
      "（[http://creativecommons.org/licenses/by/2.1/jp/](http://creativecommons.org/licenses/by/2.1/jp/)）"
      "（[https://www.city.fukushima.fukushima.jp/soshiki/2/1005/1/1/5/1_1/index.html](https://www.city.fukushima.fukushima.jp/soshiki/2/1005/1/1/5/1_1/index.html)）. "
      "(This map modifies the City of Fukushima's list of food-business permits in term on 31 March 2026, "
-     "its monthly lists of new permits to 31 August 2026 and its lists of barbers, beauty salons, laundries "
-     "and coin laundries as of 31 March 2026: this project added the new permits to the list, selected the "
+     "its monthly lists of new permits to 31 August 2026, its lists of barbers, beauty salons, laundries "
+     "and coin laundries as of 31 March 2026 and its monthly lists of new barbers and beauty salons to "
+     "31 August 2026: this project added the new permits and premises to the lists, selected the "
      "storefront types, placed each by its address, and counted them around stations.) The lists may include "
      "premises that have closed. "
      "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "

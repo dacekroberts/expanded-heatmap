@@ -1,5 +1,6 @@
 """Fukushima step 2: the city's food list of 2026-03-31 with its five months
-of new permits, and its barber, beauty-salon, laundry and coin-laundry lists,
+of new permits, and its barber, beauty-salon, laundry and coin-laundry lists
+(the barber and beauty lists with their 2026 months of new premises),
 classified and joined to MLIT's block file - the shared Japanese step 2
 (pipeline/countries/japan_step2.py).
 

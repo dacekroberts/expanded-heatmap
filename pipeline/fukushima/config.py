@@ -14,8 +14,10 @@ by the city's open-data terms, page 1696). Food: the list of permits in term
 on 2026-03-31 plus the five monthly lists of NEW permits, April to August
 2026 (the months publish no renewals and the city publishes no closures, so
 the food leg is an upper bound, disclosed as Kyoto's is). Personal services:
-the barber, beauty-salon, laundry and coin-laundry lists as of 2026-03-31.
-All placed by a JOIN to MLIT's 位置参照情報 (one municipality, no wards).
+the barber, beauty-salon, laundry and coin-laundry lists as of 2026-03-31,
+with the barber and beauty lists' monthly files of newly opened premises to
+2026-08-31 (owner, call 210; Ichinomiya's call 128). All placed by a JOIN
+to MLIT's 位置参照情報 (one municipality, no wards).
 MHLW's file for 07201 was read at Step 0 as a control only (opt-in filing:
 44 permits, every one already in the city's files); never a source here
 (Iwaki's call 150 and Tsu's precedent: a thin notifications layer stays out).
@@ -67,8 +69,23 @@ _FILES = HOST + "/material/files/group/7/"
 MONTHS = (("04", "2026-04-30"), ("05", "2026-05-31"), ("06", "2026-06-30"), ("07", "2026-07-31"),
           ("08", "2026-08-31"))
 _MONTH_KEYS = {f"food_{m}": f"r08{m}syokuhin.csv" for m, _ in MONTHS}
+# The registers' monthly files of newly opened premises (令和8年N月の新規開設
+# 理容所一覧 / 美容所一覧; owner, call 210, 2026-10-07): the page lists a file
+# only for a month with an opening and says 新規事業者なし for the rest (barbers
+# April to July, beauty salons August, laundries and coin laundries every
+# month), so there is no laundry month file. Each holds openings only: the
+# register's columns, every 検査確認年月日 inside its month, no closure column;
+# the city publishes no closures. key -> (register, file, the last day it
+# covers).
+_REGISTER_MONTH_KEYS = {
+    "barber_08": ("barber", "r0808riyou.csv", "2026-08-31"),
+    **{f"beauty_{m}": ("beauty", f"r08{m}biyou.csv", end) for m, end in MONTHS[:4]},
+}
+REGISTER_MONTHS = {reg: tuple(k for k, (r, _, _) in _REGISTER_MONTH_KEYS.items() if r == reg)
+                   for reg in ("barber", "beauty")}
 # source key -> (file, URL, the page that lists it). One entry per file
-# fetched (Step 0, 2026-10-06, each HTTP 200 from the city's own host).
+# fetched (Step 0, 2026-10-06, and the register months 2026-10-07, each HTTP
+# 200 from the city's own host).
 SOURCE_FILES = {
     "food_list": ("r07nendomatsusyokuhin.csv", _FILES + "r07nendomatsusyokuhin.csv", LIST_PAGE),
     **{k: (name, _FILES + name, LIST_PAGE) for k, name in _MONTH_KEYS.items()},
@@ -76,14 +93,16 @@ SOURCE_FILES = {
     "beauty": ("r07nendomatsubiyou.csv", _FILES + "r07nendomatsubiyou.csv", LIST_PAGE),
     "laundry": ("r07nendomatsucleaning.csv", _FILES + "r07nendomatsucleaning.csv", LIST_PAGE),
     "coinlaundry": ("r07nendomatsucoincleaning.csv", _FILES + "r07nendomatsucoincleaning.csv", LIST_PAGE),
+    **{k: (name, _FILES + name, LIST_PAGE) for k, (_, name, _) in _REGISTER_MONTH_KEYS.items()},
 }
 # Kyoto's rule: the date each list states, never the download's. The full
 # food list and the four registers read 令和8年3月31日現在; each month file
-# names its month (令和8年N月の新規食品営業許可施設一覧).
+# names its month (令和8年N月の新規食品営業許可施設一覧, 令和8年N月の新規開設
+# 理容所一覧 / 美容所一覧).
 REGISTERS_AS_OF = "2026-03-31"
 SOURCE_AS_OF = {"food_list": "2026-03-31", **{f"food_{m}": end for m, end in MONTHS},
                 "barber": REGISTERS_AS_OF, "beauty": REGISTERS_AS_OF, "laundry": REGISTERS_AS_OF,
-                "coinlaundry": REGISTERS_AS_OF}
+                "coinlaundry": REGISTERS_AS_OF, **{k: end for k, (_, _, end) in _REGISTER_MONTH_KEYS.items()}}
 FOOD_AS_OF = "2026-03-31"
 FOOD_NEW_TO = MONTHS[-1][1]
 
@@ -132,7 +151,7 @@ _MONTH_COLUMNS = {
 # (from the town; 施設市町村名 is 福島市 on every row) and 開設者氏名, read in
 # memory by the name rule. Never selected: 施設電話番号, 開設者都道府県名,
 # 開設者市町村名, 開設者住所 and 開設者電話番号 (the operator's own address and
-# phone), 検査確認済証.
+# phone), 検査確認済証. The register months carry the same header.
 _REGISTER = ("施設名称", "施設住所", "施設市町村名", "開設者氏名")
 # The rebuilt food rows (japan_register.rebuilt_register's premises columns):
 # step 2 checks them against REQUIRED_COLUMNS["food"] and ["food_new"].
@@ -146,6 +165,7 @@ REQUIRED_COLUMNS = {
     "beauty": _REGISTER,
     "laundry": ("区分",) + _REGISTER,
     "coinlaundry": ("区分",) + _REGISTER,
+    **{k: _REGISTER for k in _REGISTER_MONTH_KEYS},
 }
 
 
@@ -178,7 +198,10 @@ def source_rows(key):
     where (address, trade name, type without （旧）) repeats, the permit ending
     latest wins (the brief's 44 full-list repeats under another number). Only
     premises columns are carried, plus the name rule's answer; no operator or
-    contact column leaves the file. The registers as they are."""
+    contact column leaves the file. Each register as it stands, then its
+    2026 month files in order (Ichinomiya's shape; openings only, so a
+    premises that moved keeps its old row too: the registers are an upper
+    bound, as the food leg is)."""
     from pipeline.countries import japan
     from pipeline.countries import japan_register as jr
 
@@ -187,7 +210,7 @@ def source_rows(key):
         keys = ["food_list"] if key == "food" else list(_MONTH_KEYS)
         return jr.rebuilt_register(_paths(keys), datetime.date.fromisoformat(FOOD_AS_OF), end_col="許可終期",
                                    granted_col="許可始期", rules=rules)
-    return jr.city_rows(_paths([key])[0])
+    return [r for p in _paths([key, *REGISTER_MONTHS.get(key, ())]) for r in jr.city_rows(p)]
 
 
 # MLIT 位置参照情報, block (24.0a) and town-chōme (19.0b), for 07201.

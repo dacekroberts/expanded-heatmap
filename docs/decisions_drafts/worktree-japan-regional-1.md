@@ -41,6 +41,10 @@ notices 176-186.
    *Tradeoff:* a handful of salons, a re-render and one more approval,
    against registers five months older than the food leg (stated on the
    page and in data_age).
+   **Resolved 2026-10-07, the same day, by call 210** (owner, relayed by
+   Staging): the five files were fetched and the barber and beauty
+   registers rebuilt to 2026-08-31 as recommended (the Fukushima entry
+   below).
 3. **Ōita (page 236, notice 183; built, not blocked): the registers' 2026
    monthly files** (`442011_beauty_salon_new`, five CSVs of 240-713 B, and
    `442011_cleaning_new`; no barber set; the brief's open call 3). Not
@@ -89,16 +93,22 @@ notices 176-186.
 - **Fukushima** (page 233): "From Fukushima City's list of food-business
   permits (as of March 31, 2026), with the new permits it listed each month
   to August 31, 2026, and its registers of barbers, beauty salons, laundries
-  and coin laundries (as of March 31, 2026)." (the template's sentence with
-  the months and Sapporo's coin laundries added), and "The JR Ou Line is
+  and coin laundries (as of March 31, 2026), with the new premises it listed
+  each month to August 31, 2026." (the template's sentence with the months
+  and Sapporo's coin laundries added; the register months in Iwaki's form
+  after call 210), and "The JR Ou Line is
   infrequent inside the city: about 11 trains a day each way stop at
   Sasakino and Niwasaka." (call 86 asks for the stretch to be named; no
   approved form yet). In its What Is Excluded section: the Counted
   paragraph's month and upper-bound sentences (from Higashiōsaka's) and "The
   JR Ou Line runs about 11 trains a day each way inside the city; it is
   drawn (owner, 2026-10-06)." The notice (180) adds 新規食品営業許可施設一覧,
-  the monthly files' own title, to the brief's five titles, and the
-  processing sentence "this project added the new permits to the list".
+  新規開設理容所一覧 and 新規開設美容所一覧, the monthly files' own titles, to
+  the brief's five titles, and the processing sentence "this project added
+  the new permits and premises to the lists" (the two register titles and
+  "and premises" after call 210). The What Is Excluded section's Counted
+  paragraph adds "(it listed no new laundries)", from the list page's
+  新規事業者なし for every laundry month.
   Also for review time (open call 4, precedent applied): of the 230 caterers
   left out, 161 also name a counter form (一般食堂 仕出し屋 …); a sentence
   saying so is not on the page.
@@ -875,6 +885,24 @@ notices 176-186.
   form.
 - **The registers' monthly files** (open call 3, staging's 153) were not
   fetched; the registers stand at 2026-03-31 (parked call 2, not blocking).
+- **2026-10-07, call 210 (owner, relayed by Staging): the barber and beauty
+  months added.** `r0808riyou.csv` (387 B, 1 row) and `r0804biyou.csv` to
+  `r0807biyou.csv` (557, 360, 709 and 658 B; 2, 1, 2 and 2 rows), fetched
+  one at a time from the city's host (HTTP 200 each) and recorded by
+  `fetch_sources.py`; each register read with its months in
+  `config.source_rows` (Ichinomiya's shape). The months hold openings only
+  (令和8年N月の新規開設理容所一覧 / 美容所一覧: the register's columns, every
+  検査確認年月日 inside its month, no closure column), and the page says
+  新規事業者なし for every other month and for both laundry lists. 8 rows,
+  all placed by block, none folded: **3,343 storefronts (Food service
+  1,653, Food shops 621, Personal services 1,069, was 1,061), 60.3% in a
+  ring (2,016; Personal services 566, was 563).** Two are a barber and a
+  beauty salon re-listed at a new address under the same trade name, and
+  one a salon re-listed at its own address under a longer name; the old
+  rows stay, the upper bound the page already states. On the map: 90.9%
+  block, 4.2% town-chōme, 4.9% 小字. Privacy: the Japan pass prints 0 (4
+  own names in the raw files, 2 pins by permit type, unchanged). Census
+  control unchanged, 1.60. Notice 180 adds the months' two titles.
 - **Step 2:** 4,869 rows read (food 3,689, months 87, barbers 278, beauty
   638, laundries 125, coin laundries 52). Not a premises 162 (145 food
   permits with no address, the festival stalls among them, and 17 storeless

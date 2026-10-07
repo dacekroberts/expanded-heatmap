@@ -10,6 +10,17 @@
     "sha256": "12b9cad10e01278f35fca724a9a6090f132cc33d132d8438932203d63eecccda",
     "url": "https://www.city.fukushima.fukushima.jp/material/files/group/7/r07nendomatsuriyou.csv"
   },
+  "city_barber_08": {
+    "as_of": "2026-08-31",
+    "bytes": 387,
+    "dataset_page": "https://www.city.fukushima.fukushima.jp/soshiki/2/1005/1/1/5/1_1/index.html",
+    "file": "r0808riyou.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-07T20:48:29+00:00",
+    "rows": 1,
+    "sha256": "ac4ce2d1c92a929decb32414e3a4ce6da68bf8510e7d2d9c26317ad4083c3d2f",
+    "url": "https://www.city.fukushima.fukushima.jp/material/files/group/7/r0808riyou.csv"
+  },
   "city_beauty": {
     "as_of": "2026-03-31",
     "bytes": 115846,
@@ -20,6 +31,50 @@
     "rows": 638,
     "sha256": "03772f5899921460dc4c8d3c9d4f01d1944689bd74e20541832b970bac1df7bf",
     "url": "https://www.city.fukushima.fukushima.jp/material/files/group/7/r07nendomatsubiyou.csv"
+  },
+  "city_beauty_04": {
+    "as_of": "2026-04-30",
+    "bytes": 557,
+    "dataset_page": "https://www.city.fukushima.fukushima.jp/soshiki/2/1005/1/1/5/1_1/index.html",
+    "file": "r0804biyou.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-07T20:48:37+00:00",
+    "rows": 2,
+    "sha256": "56e32dcbcb91338bd95af8d5a8dbffbd18ef24626bb86bb61c62ae0448b53bed",
+    "url": "https://www.city.fukushima.fukushima.jp/material/files/group/7/r0804biyou.csv"
+  },
+  "city_beauty_05": {
+    "as_of": "2026-05-31",
+    "bytes": 360,
+    "dataset_page": "https://www.city.fukushima.fukushima.jp/soshiki/2/1005/1/1/5/1_1/index.html",
+    "file": "r0805biyou.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-07T20:48:43+00:00",
+    "rows": 1,
+    "sha256": "27a568911aba1ca5e2d1c3ca7542c2919bc41e9123be2090c822a574545e438b",
+    "url": "https://www.city.fukushima.fukushima.jp/material/files/group/7/r0805biyou.csv"
+  },
+  "city_beauty_06": {
+    "as_of": "2026-06-30",
+    "bytes": 709,
+    "dataset_page": "https://www.city.fukushima.fukushima.jp/soshiki/2/1005/1/1/5/1_1/index.html",
+    "file": "r0806biyou.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-07T20:48:49+00:00",
+    "rows": 2,
+    "sha256": "a8fc1e91bfc03170798fd5d15a2ebcb6bcf7ec9f095997d86c79bd60e6ba5175",
+    "url": "https://www.city.fukushima.fukushima.jp/material/files/group/7/r0806biyou.csv"
+  },
+  "city_beauty_07": {
+    "as_of": "2026-07-31",
+    "bytes": 658,
+    "dataset_page": "https://www.city.fukushima.fukushima.jp/soshiki/2/1005/1/1/5/1_1/index.html",
+    "file": "r0807biyou.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-07T20:48:54+00:00",
+    "rows": 2,
+    "sha256": "1ebe42542da6caf37867c8ca06395f4a16d25e319528b5eb7b80690f2889449f",
+    "url": "https://www.city.fukushima.fukushima.jp/material/files/group/7/r0807biyou.csv"
   },
   "city_coinlaundry": {
     "as_of": "2026-03-31",

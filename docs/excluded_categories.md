@@ -4444,9 +4444,11 @@ line.
 old-law permits included, plus the new permits the city listed each month
 from April to August 2026, and the city's barber, beauty-salon, laundry and
 coin-laundry lists of March 31, 2026 (coin laundries as Personal services,
-owner 2026-09-28). The monthly lists hold new permits only, and closures are
-not published, so a business that closed after March 2026 is still counted:
-the map is an upper bound. 18 of the 553 bakery, confectioner and deli rows
+owner 2026-09-28), plus the new barbers and beauty salons the city listed
+each month to August 31, 2026 (it listed no new laundries). The monthly
+lists hold new permits and new premises only, and closures are not
+published, so a business that closed after March 2026 is still counted: the
+map is an upper bound. 18 of the 553 bakery, confectioner and deli rows
 (3.3%) have a trade name that reads as a factory; they are kept (owner,
 2026-09-24).
 

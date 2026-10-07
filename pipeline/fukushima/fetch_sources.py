@@ -5,8 +5,10 @@ never runs this file, and every step exits naming it when its cache is missing.
 
   * city    - the city's 保健所衛生課 lists (CC BY 2.1 JP): the food list of
               permits in term on 2026-03-31, the five monthly lists of new
-              food permits (April to August 2026), and the barber, beauty,
-              laundry and coin-laundry lists as of 2026-03-31;
+              food permits (April to August 2026), the barber, beauty,
+              laundry and coin-laundry lists as of 2026-03-31, and the
+              barber and beauty lists' monthly files of new premises (one
+              barber month, four beauty months; call 210);
   * isj     - MLIT 位置参照情報 for the one municipality (07201), block (24.0a)
               and town-chōme (19.0b) (PDL 1.0);
   * mlit    - MLIT N02-25 railways and N03 Fukushima administrative areas, into
@@ -17,7 +19,7 @@ never runs this file, and every step exits naming it when its cache is missing.
   * control - the Economic Census table for the join control (shared cache).
 
 A file already on disk is kept (every city file and the ISJ files were
-downloaded at Step 0, 2026-10-06) and recorded, dated by its modification
+downloaded at Step 0, 2026-10-06, the register months 2026-10-07) and recorded, dated by its modification
 time; --force re-downloads. Each file is recorded in
 outputs/fukushima/provenance.json (bytes, sha256, when). The work is
 pipeline/countries/japan_fetch.py, shared by every Japanese city.

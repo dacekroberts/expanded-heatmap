@@ -4648,7 +4648,7 @@ CITIES = [
         "page": "pages/233_Fukushima_Heatmap.py",
         "coverage": "narrowed",
         "placement": "Joined to address blocks (90.9%)",
-        "data_age": "Permits as of 2026-03-31 plus new permits to 2026-08-31 (an upper bound); registers 2026-03-31",
+        "data_age": "Permits as of 2026-03-31 plus new permits to 2026-08-31 (an upper bound); registers 2026-03-31 plus new premises to 2026-08-31",
         "rail_extra": "Suburban rail",
         "record_kind": "Permit registers",
         "categories": "Retail thin",

@@ -47,8 +47,8 @@ render_data_age("Fukushima")
 # (approved wording, pre-approved for this build, 2026-09-30); the
 # businesses' first bullet and the Ou Line's bullet are proposals in
 # docs/decisions_drafts/worktree-japan-regional-1.md. The dates are the lists'
-# own (config.SOURCE_AS_OF); the ring share, 60.4%, is step 3's (2,013 of
-# 3,335, 2026-10-07).
+# own (config.SOURCE_AS_OF); the ring share, 60.3%, is step 3's (2,016 of
+# 3,343, 2026-10-07, after the register months of call 210).
 st.markdown(
     """
 **The lines**
@@ -68,7 +68,8 @@ st.markdown(
 
 - From Fukushima City's list of food-business permits (as of March 31, 2026), with the new permits
   it listed each month to August 31, 2026, and its registers of barbers, beauty salons, laundries
-  and coin laundries (as of March 31, 2026).
+  and coin laundries (as of March 31, 2026), with the new premises it listed each month to
+  August 31, 2026.
 - Japan has no general business license, so shops other than food shops (clothing, electronics,
   pharmacies) do not appear: the Food shops layer is food retail only (bakeries and confectioners,
   delis, butchers and fishmongers).
