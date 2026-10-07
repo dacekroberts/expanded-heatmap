@@ -186,6 +186,16 @@ notices 176-186.
   and notice 181's parenthetical modification sentence (Fukushima's and
   Tsu's form, extended to the register months). The notice's titles are the
   dataset pages' headings as the brief records them, not re-read.
+- **Mito** (page 238): "Kairakuen, a seasonal station on the JR Joban Line,
+  has no train in the current timetable and is not shown." (call 156;
+  Kitakyushu's closed-station form), and the clause added to Kurume's source
+  bullet, "so it holds about 91% of the restaurant permits in the official
+  count" (call 157, Ichinomiya's form). In its What Is Excluded section: "80
+  permits the national filings still list after their term ended, and 22
+  that start after August 31, 2026, the last day the filings cover." (calls
+  161 and 172; no built page states it yet), the Kairakuen bullet, and "No
+  Shinkansen station lies in the city." The notice (185) credits "CC-BY, no
+  version given" with © 水戸市役所, as staging's read sets out.
 
 ## Shared-code findings for review time (not changed here)
 
@@ -237,8 +247,70 @@ notices 176-186.
   pins). Where a list is a snapshot of permits in term, read it whole; keep
   the rebuild for lists that carry superseded permits. A line for the
   japan-city skill beside the two-sources note.
+- **The label anchor, a third time** (Mito): all three lines' longest N02
+  sections lie wholly outside the city, so every label landed 3 to 10 km
+  beyond the city line. Gifu's and Mito's step 3 each carry `in_city_first`
+  city-locally; it belongs in `map_common` (order segments by in-city points
+  when `label_focus` is given), after which both copies go and Akita's label
+  is fixed too.
+- **`japan_fetch.current_url`'s `SOURCE_LINKS` matches an href only** (Mito):
+  the register files are attachment ids a refresh renews, so the URLs are
+  pinned and the next refresh edits config. A link-text option would serve.
+- **A 大字 + 小字 whose 小字 MLIT does not hold** (Mito, 12 rows): `oaza_cut`
+  does not fall back to the 大字's centroid there.
+- **`CLOSED_STATIONS`'s docstring says "closed after the N02 edition"**
+  (Mito's seasonal 偕楽園): the mechanism fits; the wording may want widening.
 
 ## Entries
+
+### 2026-10-07 - Mito built, the national food filings and the city's barber, beauty and laundry lists
+
+- **Mito built (page 238, notice 185): 4,040 storefronts (Food service
+  1,690, Food shops 1,175, Personal services 1,175) around 5 stations on 3
+  lines, 24.2% of them in a ring (977).** Food from MHLW's open data alone,
+  the city's food list (its 食品営業許可施設一覧 page holds no file and points
+  to MHLW: Kurume's shape), its notifications a partial Food-shops layer
+  (call 127b); personal services from the city's 生活衛生関係施設一覧, four
+  cp932 CSVs as of 2026-07-02 (Hamamatsu's shape; the two laundry files one
+  kind by `SOURCE_KIND`). CC-BY with no version given, read 2026-10-07 by
+  staging (Bremen's precedent, call 196; no cost clause). Built by a subagent
+  of the Regional-1 lead, integrated by the lead.
+- **偕楽園 left out** (owner, call 156): no train in the October 2026
+  timetable; dropped through `CLOSED_STATIONS` (Kitakyushu's mechanism), so
+  5 station groups. The page says so.
+- **The brief's food figures reproduce exactly under its rules** (`WAVE2_RULES`:
+  Food service 1,714, Retail 1,586); the foundation's rules move them to 1,695
+  and 1,582: past term 80 (14 Food service storefronts), late start 22,
+  combined 業態 cells 67. `TERM_AS_OF` 2026-08-31, the month MHLW's file
+  covers.
+- **The food share (call 157):** 2,892 restaurant permits in term, 90.7% of
+  e-Stat's 3,188; on fixed premises 2,073 of 2,542 publish an address (81.5%,
+  about one in five withheld).
+- **Step 2:** 7,504 rows read. Set aside 62 (59 vehicles by their permit
+  condition, 3 area-wide); closed 7; past term 80, late 22; no address
+  published 1,747 (551 restaurants); not a premises 254; out by rule 859. On
+  the map: 93.2% block, 3.9% MHLW's point, 2.8% town-chōme, 2 at a 小字; 16
+  unplaced (0.4%). MHLW's points a median 65 m from the block point, 87.7%
+  within 250 m (the brief 64 m, 88.3%); 84 rows refused a default point. 55
+  pins at the 内原 shopping center take the 内原2丁目 centroid. 417 repeat rows
+  shown once.
+- The 菓子 / そうざい factory share: 20 of 300 (6.7%), kept (owner,
+  2026-09-24).
+- **Economic Census control: 1.39** (1,690 Food service pins against 1,214
+  establishments), below the built cities' 1.56-1.92, as Kurume's 1.37: the
+  file holds about 91% of permits and a fifth of fixed addresses are
+  withheld.
+- **Privacy verdict: publish.** `check_personal_exposure.py mito`: the Japan
+  pass prints 0; 13 trade names in the raw files are an operator's own name,
+  2 pins show their permit type.
+- **Rail:** N02-25, 5 stations: JR Joban 3, Suigun 1 (水戸, its terminus, a
+  one-station JR stub kept as cut), Kashima Rinkai 3 (水戸 one group on three
+  lines). Gate 3 exact. 7 excluded (Hitachinaka 3, Naka 2, Kasama 1, Oarai
+  1). The thinnest stretch is the Suigun's 26 trains a weekday. OSM's 5 names
+  stand. Median station gap 3,818 m: standard rings. Labels anchored in the
+  city by `in_city_first` (Gifu's).
+- **Register URLs pinned:** attachment ids a refresh renews; `SOURCE_LINKS`
+  matches an href only.
 
 ### 2026-10-07 - Iwaki built, the full food list kept whole with five months of new permits, and the barber and beauty list with its four months
 

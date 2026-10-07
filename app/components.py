@@ -2566,6 +2566,27 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). Gifu City and MLIT did not make "
      "and do not endorse this map.",
      False, ("Gifu",)),
+    # Mito (notice 185): the city's 生活衛生関係施設一覧, CC-BY with no version
+    # given (read 2026-10-07 by staging: accepted on Bremen's precedent, call
+    # 196; credited as the city states it, with the copyright line, the title,
+    # the page link and a modification line; no cost clause); MHLW as in
+    # Kurume's, the city's food list (its food page points to MHLW); MLIT as in
+    # Kobe's, N02 in its 2025 edition. Written from Akita's, Tsu's and Sasebo's
+    # approved wording under the owner's pre-approval of template prose
+    # (2026-09-30).
+    Notice(185, "Mito City, MHLW and MLIT (Mito)",
+     "Mito's businesses: 出典：「生活衛生関係施設一覧」（水戸市）"
+     "（[https://www.city.mito.lg.jp/site/open-data/4496.html](https://www.city.mito.lg.jp/site/open-data/4496.html)）を加工して作成 "
+     "(CC-BY, no version given; © 水戸市役所); and "
+     "出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一覧」を加工して作成. "
+     "Processed by this project, which selected the storefront types, left out permits past their term, "
+     "placed each by its address or the ministry's own coordinates, and counted them around stations. "
+     "The ministry's list holds only filings whose applicants agreed to publish them and is not complete. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
+     "Mito City, MHLW and MLIT did not make and do not endorse this map.",
+     False, ("Mito",)),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no

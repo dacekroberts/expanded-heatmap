@@ -4796,6 +4796,61 @@ line.
 - The JR Ban'etsu East Line runs 6 to 8 trains a day each way inside the
   city; it is drawn (owner, 2026-10-06).
 
+### Mito - the national food filings and the city's barber, beauty and laundry lists, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, except where the national filings
+  include notifications.
+- Restaurant permits granted before June 2021 and still in force, which the
+  national filings do not hold (about one restaurant permit in eleven).
+- 1,747 national filings whose filers did not publish an address (551 of them
+  restaurants, about one restaurant in five).
+- 358 food trucks, street and festival stalls and other temporary or mobile
+  permits and filings (254 addressed to the whole city or prefecture or with
+  no fixed place, 59 whose permit condition names a vehicle, 45 by their form
+  of business), and 3 filings addressed to a whole area.
+- 296 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit or notification types that are not a
+  counter.
+- 199 school, hospital and staff canteens, 144 vending machines, 9 mail-order
+  businesses, 19 entertainment venues, 25 premises inside hotels and inns, 5
+  caterers (仕出し) and 117 snack bars and cabarets.
+- 80 permits the national filings still list after their term ended, and 22
+  that start after August 31, 2026, the last day the filings cover.
+- 7 closed premises, which the national filings keep, marked.
+- Storeless laundry pick-up services (無店舗取次店), which are not premises.
+
+**Counted** - the national filings as downloaded on October 6, 2026, and the
+city's lists of barbers, beauty salons, general laundries and laundry pick-up
+counters of July 2, 2026. The lists hold 258 barbers, 821 beauty salons and
+117 laundries, against 258, 813 and 121 in the national count a year earlier.
+20 of the 300 bakery, confectioner and deli rows (6.7%) have a trade name that
+reads as a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 417 repeat rows are shown once: 399 food-shop
+filings at a premises already shown (a supermarket's several notifications
+and permits, for one), 4 restaurant permits and 14 beauty salons, 13 of them
+premises in the barber list as well.
+
+**Not placed** - 16 rows (0.4%), 9 national filings and 7 barbers and beauty
+salons: 12 at a 小字 MLIT's files do not hold (in 千波町, 堀町, 元吉田町 and
+河和田町), 2 at a festival venue and 2 others. Another 2 sit at the center of
+their 小字 (a named part of a town), 114 at their town's center (55 of them
+at one shopping center in 内原2丁目, where MLIT's files hold only two blocks),
+and 157 at the ministry's own coordinates.
+
+**Names not shown** - 2 pins whose trade name is the operator's own name show
+their permit type.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 7 stations beyond it: 3 in Hitachinaka, 2 in Naka, and 1 each in
+  Kasama and Oarai.
+- Kairakuen, JR's seasonal station on the Joban Line, has no train in the
+  current timetable and is not shown (owner, 2026-10-06).
+- No Shinkansen station lies in the city.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

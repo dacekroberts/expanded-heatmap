@@ -100,7 +100,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
 | South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang, Daejeon, Gwangju, Gimhae |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
-| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki, Maebashi, Fukushima, Fukuyama, Ichinomiya, Tsu, Akita, Ōita, Gifu, Iwaki |
+| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki, Maebashi, Fukushima, Fukuyama, Ichinomiya, Tsu, Akita, Ōita, Gifu, Iwaki, Mito |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional) |
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
@@ -3971,6 +3971,31 @@ batch at review time).
 - **MUST DO:** `check_personal_exposure.py gifu` with its Japan pass, run
   2026-10-07; the verdict is in
   `docs/decisions_drafts/worktree-japan-regional-1.md` ("Gifu built",
+  2026-10-07).<!-- /internal -->
+
+**185. Mito City, MHLW and MLIT (Mito) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with the Regional-1
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-07 by staging; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's barber,
+  beauty-salon and laundry lists are **CC-BY with no version given**, as the
+  dataset page states (「ライセンス CC-BY」, 「コピーライト 水戸市役所」); no
+  open-data 利用規約 exists, and the dataset's own label is the permission
+  (Bremen's precedent, call 196). MHLW's open data, the city's food list, is
+  **PDL 1.0**, as in Kurume's (126); MLIT's 位置参照情報 and N02 (the 2025
+  edition) are **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks
+  stations and is **never drawn** (the Survey Act).
+- **MUST DISPLAY**: the licence as the city states it ("CC-BY, no version
+  given"), the copyright line 水戸市役所, the title 生活衛生関係施設一覧, a link to
+  the dataset page and that the data was modified; MHLW's 出典 line and who
+  processed it; MLIT's credit lines.
+- **MUST NOT**: use the city banner as a logo; imply endorsement; say
+  "currently operating"; use MHLW's logo; claim the ministry's list
+  complete.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py mito` with its Japan pass, run
+  2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-regional-1.md` ("Mito built",
   2026-10-07).<!-- /internal -->
 
 
