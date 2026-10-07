@@ -21,6 +21,7 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
   - **202, own_point_fallback refuses a publisher point** when one premises' address is written several ways (Kasukabe's AEON Mall, 3 rows unplaced): recommended counting towns over joined rows only, then a drift check of the built cities.
   - **203, "JR Chuo Line"** (Tachikawa, Hino) beside Tokyo's "JR Chuo Line (Rapid)": recommended keeping it.
   - **204, East-1 added shared code the briefs assumed existed** (tokyo_tama.py and saitama_pref.py new; the yearbook's Tama rows and table 19-7 in japan_official; SHARE_DATES and REGISTER_SHARES in japan_step2), treating Tokyo's official_shares as precedent rather than parking it. All 34 built Japanese cities' step 2 reproduces byte for byte. Recommended accepting the reading.
+- **Answers to 199 to 203, given by the owner in East-1's own chat** (as East-1 reported them; East-1's drafts file is the record): 199 distinct colours; 200 fix the two-town reason; 201 shown to the owner, kept on their sign-off; 202 "sounds good, we can note if need be"; 203 keep ("rapid is a regional distinction for speed"). East-1 applies them on its branch, the shared fixes each checked read-only against the 34 built cities. Call 204 stays open.
 
 ### 2026-10-07 - Licence reads for the Japan builds (staging, licence-read agents): Morioka, Akita, Tsu, Iwaki, Ōita, Mito
 
