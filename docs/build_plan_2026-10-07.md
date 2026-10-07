@@ -51,6 +51,7 @@ At most three build sessions at once (owner, 2026-10-04).
 | 2 | **Kansai-2** (`japan-kansai-2`) | B: Ibaraki (Osaka), Minoh, Moriguchi, Kadoma, Neyagawa, Yao, Takatsuki; then Naha's measurement if BODIK answers | japan-city |
 | 2 | **Regional-2** (`japan-regional-2`) | B: Shizuoka, Kanazawa, Okazaki, Aomori, Matsue, Fuji, Matsumoto, Tottori, Yamagata, Kure | japan-city |
 
+- **The foundation landed on 2026-10-07 (7ab440f9).** Five one-city address fixes follow from the foundation session: Gifu's bracketed 字, Morioka's 地割, Mito's 宮町/泉町, Matsue's 八雲村 and Matsumoto's 湯の原. Regional-1 merges origin/master before Gifu, Mito and Morioka, and Regional-2 starts after the fixes land.
 - **Phase 1 starts when the foundation lands on master.** Until Abroad finishes, only two Japan sessions run at once.
 - **Each phase 2 session starts** from master after the phase 1 session in the same group has handed off.
 - **BODIK:** the Kansai sessions are the only sessions that call it, at least 20 s apart. They run one after the other.
