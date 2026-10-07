@@ -1,0 +1,15 @@
+{
+  "food_service": 346,
+  "kept_outside_polygon": 1,
+  "median_gap_m": 380,
+  "personal_services": 108,
+  "retail": 1322,
+  "signs_withheld": 22,
+  "stations_collapsed": 133,
+  "stations_excluded": 73,
+  "stations_in_scope": 60,
+  "stop_positions": 271,
+  "storefronts": 1776,
+  "survey_rows": 2314,
+  "uncategorised_out": 176
+}
