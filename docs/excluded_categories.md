@@ -4398,22 +4398,24 @@ line.
 - 51 vending machines, 23 school, hospital and staff canteens and 9 mail-order
   businesses. The city's list names no form of business (業態), so canteens,
   bars and convenience stores holding a restaurant permit stay in Food service.
-- 252 permits the city's monthly lists record as closed, 130 past their expiry
-  date with no closure recorded, and 4 closed premises the national filings
-  keep, marked.
+- 252 food permits the city's monthly lists record as closed, 130 past their
+  expiry date with no closure recorded, 90 premises of the 生活衛生 register
+  its monthly lists record as closed in 2026, and 4 closed premises the
+  national filings keep, marked.
 - 27 national filings addressed to an area rather than a place, and 4 permits
   that begin after August 31, 2026.
 
 **Counted** - every food permit in term on March 31, 2026, plus the permits
 granted each month to August 2026, less the closures, matched by permit
 number, kept while within their term on August 31, 2026; the city's barber,
-beauty and laundry register as of the end of 2025; and the national
+beauty and laundry register of the end of 2025 with the premises opened and
+closed each month to August 31, 2026, matched by number; and the national
 notifications as downloaded on October 6, 2026. The national filings' permits
 are not added: the city's own list holds every permit (99.8% of the official
 restaurant count). 16 of the 418 bakery, confectioner and deli rows (3.8%) have
 a trade name that reads as a factory; they are kept (owner, 2026-09-24).
 
-**One pin per premises** - 204 repeat permits are shown once, and 71 rows of
+**One pin per premises** - 205 repeat permits are shown once, and 71 rows of
 the city's list for a premises already in the national notifications.
 
 **Not placed** - 4 rows (0.1%). Another 77 sit at their town's center, and 89

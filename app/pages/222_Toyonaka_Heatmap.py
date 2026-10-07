@@ -46,7 +46,7 @@ render_data_age("Toyonaka")
 # From the japan-city skill's template and Sakai's and Nara's pages (approved
 # wording, pre-approved for this build); the sentences it does not cover are
 # proposals in docs/decisions_drafts/worktree-japan-kansai-1.md. The ring
-# share, 78.8%, is step 3's (4,156 of 5,277).
+# share, 78.8%, is step 3's (4,100 of 5,205).
 st.markdown(
     """
 **The lines**
@@ -64,7 +64,8 @@ st.markdown(
 - The food businesses are rebuilt from Toyonaka City's list of food-business permits as of March
   31, 2026 and its monthly lists of new permits and closures since, keeping each permit still
   within its term on August 31, 2026, the last date the newest monthly lists cover.
-- Barbers, beauty salons and laundries come from the city's register as of the end of 2025.
+- Barbers, beauty salons and laundries are rebuilt the same way, from the city's register and its
+  monthly lists of new premises and closures, to August 31, 2026.
 - Japan has no general business license, so shops other than food shops (clothing, electronics,
   pharmacies) do not appear: the Food shops layer is food retail only (bakeries and confectioners,
   delis, butchers and fishmongers).

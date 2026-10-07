@@ -10,7 +10,7 @@ Cities, in build order (`docs/build_plan_2026-10-07.md`): Toyonaka (page
 
 ## Parked calls
 
-1. **Suita: one operator's own name shown, because the name rule does not
+1. **ANSWERED (owner, call 205, 2026-10-07; the entry below). Suita: one operator's own name shown, because the name rule does not
    cross premises (a shared-code gap; Suita is parked, committed on the
    branch, nothing pushed).** `check_personal_exposure.py suita` prints 1 (of
    4,012 pins). The city's old-law list flags a street stall (露店, 市内一円, not
@@ -90,6 +90,12 @@ Cities, in build order (`docs/build_plan_2026-10-07.md`): Toyonaka (page
   brief's measured claim is about 宇治市, and the guard now tests that.
 - **Toyonaka:** the June 2026 and later new-permit files drop the empty
   廃業年月日 column; the brief listed it for every month.
+
+### 2026-10-07 - The name rule crosses premises (owner, calls 205 and 209); Toyonaka's register rebuilt to August (call 151)
+
+- **Call 205 ("205 yes", relayed by Staging): `name_city`, a WAVE5_RULES switch in `japan_step2.run`**, after the block spread: a trade name the name rule flags on any row withholds every row of the city with the same trade-name key. On for new cities (ALL_RULES), off for the 34 built (WAVE2_RULES). Minato control unchanged (98.0% block). Suita's privacy check 1 → 0 (1 pin now shows its permit type). The other six Kansai-1 cities move nothing. East-1 and Regional-1 were told before the change; East-1's call 202 switch (`default_joined`) shares the frozenset's closing line, keep both at merge.
+- **Measured read-only on the 34 built cities** (step 2 at `write=False`, the switch forced on): Osaka 6, Utsunomiya 3, Fukuoka 1, Kyoto 1, Sapporo 1, Yokkaichi 1 and Tokyo 1 rows withheld; the other 27 nothing. **`check_personal_exposure.py` prints the same 13 names on the six live maps** (Tokyo 0: its row is not on the map): the gap was already published. Reported to Staging at once; **call 209, owner: "fix now in cleanup"**. The switch alone, on origin/master 7611559f, is commit fe85a793 (local branch `kansai1-name-city`, not pushed) for Cleanup to land and switch on for the six; Kansai-1 left the built cities and master alone.
+- **Call 151 ("151 yes"): Toyonaka's 生活衛生 register rebuilt to 2026-08-31.** The 14 monthly CSVs of 2026 fetched from BODIK (one package_show and 14 downloads, each at least 21 s after the last; no datastore_search_sql), rebuilt by 許可（登録）番号 (Maebashi's): 1,255 + 17 new − 90 closed = 1,182, every closure matching a register number and no new number already in it. Barbers 237 → 231, beauty salons 736 → 722, laundries 231 → 180 (the March closure list alone names 27 pick-up shops). The page now states one date. Storefronts 5,277 → 5,205.
 
 ### 2026-10-07 - Hirakata, Suita, Amagasaki and Uji built (Kansai-1, pages 223, 224, 227, 228; notices 170, 171, 174, 175)
 

@@ -12,8 +12,10 @@ April to August 2026, REBUILT BY PERMIT NUMBER (the city files a renewal as
 a closure of the old number and a new permit under a new number, so the
 closures must be applied by number; Maebashi's and Sakai's method) and kept
 while 許可満了日 is on or after the pinned AS_OF. Personal services: the
-生活衛生営業施設一覧, one file of six trades, split by 業種 into barbers,
-beauty salons and laundries (lodging, public baths and 興行場 out). Food
+生活衛生営業施設一覧, one file of six trades, rebuilt to the same date by
+number with its 2026 monthly new and closed lists (owner, call 151), split by
+業種 into barbers, beauty salons and laundries (lodging, public baths and
+興行場 out). Food
 shops also from MHLW's notifications (partial, opt-in; call 127b's precedent),
 MHLW's own point where the block join misses. All placed by a JOIN to MLIT's
 位置参照情報 for the one municipality (27203, no wards).
@@ -72,6 +74,41 @@ MONTHS = (
 )
 
 
+# The 生活衛生 register's monthly files of 2026 (owner, call 151): (kind, month,
+# file, resource id, last day), from BODIK's package_show (2026-10-07). The
+# publisher names them irregularly; no new-premises file for January or March.
+SAN_MONTHS = (
+    ("closed", "01", "272035_sanitiation_business_closed_202601.csv", "d69158dd-7036-46c3-b6e7-ee7e79cb8b4e",
+     "2026-01-31"),
+    ("new", "02", "272035_sanitiation_business_new_20260201-0228.csv", "8938efa2-4da8-4055-a269-a94e14069b58",
+     "2026-02-28"),
+    ("closed", "02", "272035_sanitiation_business_closed_20260201-0228.csv",
+     "822feacb-21c3-4342-a79c-c4538b9ba810", "2026-02-28"),
+    ("closed", "03", "272035_sanitiation_business_closed_20260301-0331.csv",
+     "69af5c4b-b6b3-449e-9cf7-1b237162d6e4", "2026-03-31"),
+    ("new", "04", "272035_sanitiation_business_new_20260401-0430.csv", "1b79ba85-5c37-4677-beec-84f700e4915d",
+     "2026-04-30"),
+    ("closed", "04", "272035_sanitiation_business_closed_20260401-0430.csv",
+     "ddc1151c-6820-48a5-8dd0-4a77130fa1a9", "2026-04-30"),
+    ("new", "05", "272035_sanitiation_business_new_20260501-0531.csv", "4171ce76-8ef1-4055-bc71-c5c4772ccbbf",
+     "2026-05-31"),
+    ("closed", "05", "272035_sanitiation_business_closed_20260501-0531.csv",
+     "b31a36aa-a6bb-44d3-9f74-9755886ef5e4", "2026-05-31"),
+    ("new", "06", "272035_sanitiation_business_new_20260601-0630.csv", "4bb4c552-235c-406c-8083-1518404aca05",
+     "2026-06-30"),
+    ("closed", "06", "272035_sanitiation_business_closed_20260601-0630.csv",
+     "e6382442-d258-424f-9432-bbe048838a54", "2026-06-30"),
+    ("new", "07", "272035_sanitiation_business_new_20260701-0731.csv", "775b8c4d-9171-4e5f-bea8-551b50e1c575",
+     "2026-07-31"),
+    ("closed", "07", "272035_sanitiation_business_closed_20260701-0731.csv",
+     "b617e0fa-7cec-4cf4-af77-6ded991149ad", "2026-07-31"),
+    ("new", "08", "272035_sanitiation_business_new_20260801-0831.csv", "10df5778-485e-4e01-85c2-83c9a3be585e",
+     "2026-08-31"),
+    ("closed", "08", "272035_sanitiation_business_closed_20260801-0831.csv",
+     "9dd22fd5-7e3a-411f-8333-04d7acb2f667", "2026-08-31"),
+)
+
+
 def _month_file(kind, m, end):
     return f"272035_food_business_{kind}_2026{m}01_2026{m}{end}.csv"
 
@@ -89,6 +126,8 @@ SOURCE_FILES = {
     "sanitation": ("272035_sanitiation_business.csv",
                    _SAN_RES + "849e744a-452b-4230-a783-07e1b8a11240/download/272035_sanitiation_business.csv",
                    SANITATION_DATASET),
+    **{f"san_{kind}_{m}": (name, f"{_SAN_RES}{rid}/download/{name}", SANITATION_DATASET)
+       for kind, m, name, rid, _ in SAN_MONTHS},
     "mhlw": ("27203_food_business_all.csv",
              "https://i2fas.mhlw.go.jp/faspub/page/opendatadownload.jsp?param=27203_food_business_all.csv",
              MHLW_TOP),
@@ -96,12 +135,14 @@ SOURCE_FILES = {
 # The rebuilt register's date, PINNED (Kyoto's rule: the last day the newest
 # file covers, never the download date or today): the August files.
 AS_OF = datetime.date(2026, 8, 31)
-# The sanitation register states no date: uploaded 2026-01-08, its latest
-# 許可（登録）日 2025-12-04, no 2025-12 monthly file (the brief), so it is dated
-# the end of 2025. Its 2026 monthly files are not read (open call 151).
-SANITATION_AS_OF = "2025-12-31"
-SOURCE_AS_OF = {"food": "2026-03-31", "sanitation": SANITATION_AS_OF, "mhlw": None,
+# The sanitation register (uploaded 2026-01-08, its latest 許可（登録）日
+# 2025-12-04, no 2025-12 monthly file) rebuilt to the same date as the food
+# list with its 2026 monthly files (owner, call 151).
+SANITATION_BASE_AS_OF = "2025-12-31"
+SANITATION_AS_OF = AS_OF.isoformat()
+SOURCE_AS_OF = {"food": "2026-03-31", "sanitation": SANITATION_BASE_AS_OF, "mhlw": None,
                 **{k: SANITATION_AS_OF for k in ("barber", "beauty", "laundry")},
+                **{f"san_{kind}_{m}": end for kind, m, _, _, end in SAN_MONTHS},
                 **{f"new_{m}": f"2026-{m}-{end}" for m, end, _, _ in MONTHS},
                 **{f"closed_{m}": f"2026-{m}-{end}" for m, end, _, _ in MONTHS}}
 FOOD_AS_OF = AS_OF.isoformat()
@@ -132,6 +173,9 @@ REQUIRED_COLUMNS = {
     **{f"closed_{m}": ("許可番号", "許可年月日", "廃業年月日") for m, _, _, _ in MONTHS},
     "sanitation": ("業種", "施設名称", "施設住所", "申請者氏名", "法人代表者氏名"),
     **{k: ("業種", "施設名称", "施設住所", "申請者氏名", "法人代表者氏名") for k in ("barber", "beauty", "laundry")},
+    **{f"san_new_{m}": ("業種", "許可（登録）番号", "施設名称", "施設住所", "申請者氏名", "法人代表者氏名")
+       for kind, m, _, _, _ in SAN_MONTHS if kind == "new"},
+    **{f"san_closed_{m}": ("業種", "許可（登録）番号", "廃業日") for kind, m, _, _, _ in SAN_MONTHS if kind == "closed"},
     "mhlw": ("営業施設名称、屋号又は商号", "営業の種類", "業態", "営業施設所在地", "緯度", "経度", "申請区分",
              "廃業年月日", "法人名"),
 }
@@ -219,6 +263,39 @@ def rebuilt_register():
     return kept
 
 
+_SAN_NUMBER = "許可（登録）番号"
+
+
+def sanitation_register():
+    """The 生活衛生 register rebuilt to AS_OF BY NUMBER (owner, call 151;
+    Maebashi's 整理番号 rebuild): the register of the end of 2025, plus each
+    2026 month's new premises, less every premises a monthly closure file names
+    by 許可（登録）番号 (unique, never blank). Measured 2026-10-07: 1,255 + 17
+    new - 90 closed = 1,182 rows, every closure matching a register number and
+    no new number already in it. Only premises columns and the name rule's
+    operator columns (in memory) are carried."""
+    import sys
+
+    from pipeline.baseline import emit
+
+    keep = _KEEP_SAN + (_SAN_NUMBER,)
+    rows = {(r.get(_SAN_NUMBER) or "").strip(): r for r in _read("sanitation", keep)}
+    base = len(rows)
+    new = [r for kind, m, _, _, _ in SAN_MONTHS if kind == "new" for r in _read(f"san_new_{m}", keep)]
+    for r in new:
+        rows[(r.get(_SAN_NUMBER) or "").strip()] = r
+    closed = {(r.get(_SAN_NUMBER) or "").strip() for kind, m, _, _, _ in SAN_MONTHS if kind == "closed"
+              for r in _read(f"san_closed_{m}", (_SAN_NUMBER,))}
+    gone = [n for n in closed if n in rows]
+    for n in gone:
+        del rows[n]
+    print(f"  生活衛生 register on {AS_OF}: {base:,} + new {len(new):,} - closed {len(gone):,} "
+          f"(of {len(closed):,} closure numbers) = {len(rows):,}", file=sys.stdout)
+    emit("san_register_closed", len(gone))
+    emit("san_register_rows", len(rows))
+    return list(rows.values())
+
+
 def _trade(kind, row):
     """The sanitation row as `kind` reads it, or None. A laundry row's type
     is the kind in its brackets (取次のみ, ドライ, ランドリー, リネンサプライ), so
@@ -248,7 +325,7 @@ def source_rows(key):
         yield from rebuilt_register()
         return
     if key in TRADES:
-        for r in _read("sanitation", _KEEP_SAN):
+        for r in sanitation_register():
             t = _trade(key, r)
             if t is not None:
                 yield t

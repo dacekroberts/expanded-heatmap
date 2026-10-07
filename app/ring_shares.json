@@ -850,9 +850,9 @@
   "map_blob": "201b9048c7564cfa355db79d031ee0b5e77b2f2f"
  },
  "toyonaka": {
-  "in_ring": 4156,
-  "all": 5277,
-  "map_blob": "7baaa1d6d289788e3bd166ce68201f884f3cf9a7"
+  "in_ring": 4100,
+  "all": 5205,
+  "map_blob": "7b610f0b653c816ba66b0e14d81967b8a86a810d"
  },
  "hirakata": {
   "in_ring": 2919,
@@ -862,7 +862,7 @@
  "suita": {
   "in_ring": 3197,
   "all": 4012,
-  "map_blob": "e0c590b546c57214c97e33849d924ef5a22a841e"
+  "map_blob": "78924b15f5d8c205ebbc63ea2028784e205b72b3"
  },
  "itami": {
   "in_ring": 1181,

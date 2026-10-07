@@ -4552,7 +4552,7 @@ CITIES = [
         "page": "pages/222_Toyonaka_Heatmap.py",
         "coverage": "narrowed",
         "placement": "Joined to address blocks (96.9%); ministry coordinates where missed",
-        "data_age": "Permits rebuilt to 2026-08-31, register end of 2025; ministry notifications fetched 2026-10-06",
+        "data_age": "Permits and register rebuilt to 2026-08-31; ministry notifications fetched 2026-10-06",
         "rail_extra": "Suburban rail",
         "record_kind": "Permit registers",
         "categories": "Retail thin",
