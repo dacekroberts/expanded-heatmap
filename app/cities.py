@@ -839,18 +839,21 @@ CITIES = [
         "label_offset": ("end", -11, 0),
     },
     {
-        "name": "Copenhagen",
+        # Extended along Hovedstadens Letbane to eight more kommuner, and
+        # placed on OpenStreetMap's copies of DAR's address points (owner,
+        # 2026-10-07): 18,677 of 19,085 storefronts.
+        "name": "Copenhagen (Regional)",
         "lat": 55.6761,
         "lon": 12.5683,
         "page": "pages/27_Copenhagen_Heatmap.py",
         "coverage": "full",
         "mode": "metro",
-        "placement": "Joined by address (98.3%)",
+        "placement": "Joined by address (97.9%)",
         "data_age": "Weekly extract; fetched 2026-09-24",
-        "rail_extra": "Suburban rail",
+        "rail_extra": "Both",
         "record_kind": "National register",
         "categories": "All three",
-        "blurb": "Metro M1–M4 and S-tog A, B, Bx, C, E, F, H",
+        "blurb": "Metro M1–M4, S-tog A, B, Bx, C, E, F, H and the Letbane",
         "region": "Europe West",
         "country": "Denmark",
         "in_default_view": False,
@@ -5213,7 +5216,7 @@ COUNTRY_TOP = {
     "Romania": ("Bucharest", 1.7), "Czechia": ("Prague", 1.3),
     "Georgia": ("Tbilisi", 1.2), "Belgium": ("Brussels", 1.2),
     "Sweden": ("Stockholm", 0.98), "Netherlands": ("Amsterdam", 0.93),
-    "Norway": ("Oslo", 0.71), "Denmark": ("Copenhagen", 0.66),
+    "Norway": ("Oslo", 0.71), "Denmark": ("Copenhagen (Regional)", 0.66),
     "Latvia": ("Riga", 0.60), "Ireland": ("Dublin", 0.59),
     "Switzerland": ("Zurich", 0.42), "Greece": ("Thessaloniki", 0.32),
 }
@@ -5225,7 +5228,7 @@ COUNTRY_TOP = {
 # Amsterdam, Dublin and Thessaloniki). Europe West labels all three.
 # scripts/check_macro_labels.py fails a top missing from the landing view and
 # not listed here, and reports one listed here that has started to fit.
-LANDING_NO_ROOM = ("Brussels", "Copenhagen", "Zurich")
+LANDING_NO_ROOM = ("Brussels", "Copenhagen (Regional)", "Zurich")
 _by_name = {c["name"]: c for c in CITIES}
 _bad_top = sorted({c["country"] for c in CITIES} - set(COUNTRY_TOP)) + [
     f"{k}: {n}" for k, (n, _) in COUNTRY_TOP.items()

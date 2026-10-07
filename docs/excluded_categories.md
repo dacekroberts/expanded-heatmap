@@ -2009,28 +2009,29 @@ OpenStreetMap's route relations leave it out. Hospital Syd opens with the new
 university hospital in 2027 and gets no ring until then. Buses and regional
 trains are not drawn.
 
-### Copenhagen - production units, two municipalities, and a personal owner's name kept off the map
+### Copenhagen (Regional) - production units, ten municipalities, and a personal owner's name kept off the map
 
 **Excluded by the classification itself, anywhere in Denmark** - the same eight
 kinds of work Oslo excludes, read against Denmark's DB25 labels: the four
 intermediation classes new in NACE Rev. 2.1, mobile food stalls, event catering,
 contract catering and canteens, and personal services in the client's home.
 Denmark adds one split of its own, excluding industrial and institutional
-laundries while the dry cleaner on the corner stays. 1,326 rows.
+laundries while the dry cleaner on the corner stays. Funeral services are
+excluded too, as everywhere. 1,806 rows across the ten municipalities, 95 of
+them funeral services.
 
 **Excluded as a catch-all, on Copenhagen's own numbers** - `969900`, *other
-personal services not elsewhere classified*: 613 rows, 84% personally owned and
-half above the ground floor, against 41% and 23% for storefronts overall. A
-sample held coaching, healing, consulting and dog walking. It also held about
-seventy tattoo studios and a few dog groomers, which are lost with it, and the
-map's page says so. The six retail catch-alls and "other eating places" are
-kept.
+personal services not elsewhere classified*: 762 rows across the ten
+municipalities, 83% personally owned and 45% above the ground floor, against
+41% and 22% for storefronts overall. A sample in Copenhagen held coaching,
+healing, consulting and dog walking. It also held about seventy tattoo studios
+and a few dog groomers, which are lost with it, and the map's page says so. The
+six retail catch-alls and "other eating places" are kept.
 
-Funeral services are excluded too, as everywhere: 56 premises.
-
-**Left off because they could not be placed** - 256 premises (under 2%) that
+**Left off because they could not be placed** - 408 premises (about 2%): 372
 carry no address in Denmark's official address register, more of them
-personally owned than the storefronts as a whole.
+personally owned than the storefronts as a whole, and 36 have an address whose
+point OpenStreetMap's copy of the register lacks.
 
 **What cannot be excluded: web shops.** As in Oslo, DB25 follows NACE Rev. 2.1,
 so an online-only seller carries the code of the goods it sells.
@@ -2039,20 +2040,30 @@ so an online-only seller carries the code of the goods it sells.
 proprietorship, a small personally owned business or a partnership shows its
 address instead of its name, as does any name carrying Denmark's sole-trader
 marker "v/" ("by"). So does a supermarket registered under its franchisee's own
-name and a store number (33 premises, owner 2026-09-29). They remain on the map;
-only the name is withheld. Addresses recorded "care of" another person are never
-read.
+name and a store number (50 premises, owner 2026-09-29). They remain on the map;
+only the name is withheld: 7,452 of the 18,677 premises shown. Addresses
+recorded "care of" another person are never read.
 
-**Two municipalities, one map.** The map covers Copenhagen and Frederiksberg,
-which Copenhagen entirely surrounds. Businesses in the surrounding
-municipalities are not counted, although the national register holds them.
+**Ten municipalities, one map.** The map covers Copenhagen and Frederiksberg,
+which Copenhagen entirely surrounds, and the eight suburban municipalities
+Hovedstadens Letbane serves: Lyngby-Taarbæk (851 storefronts), Gladsaxe (759),
+Rødovre (595), Herlev (404), Glostrup (373), Brøndby (367), Ishøj (250) and
+Vallensbæk (181), beside Copenhagen's 12,887 and Frederiksberg's 2,010.
+Businesses in the other surrounding municipalities are not counted, although
+the national register holds them. Albertslund, Gentofte, Ballerup and Rudersdal
+have no Letbane stop and stay out, though the outer rings of a few stations
+near them (Glostrup Nord, Gammelmosevej, Buddinge and Rødovre Nord among them)
+reach across the line; the storefronts there are not counted.
 
-**Fifty-nine stations are excluded for being outside the two municipalities** -
-fifty-seven S-tog stations on the lines' suburban reaches and the Metro's two
-airport stations in Tårnby - and are listed with their municipality on
-Copenhagen's page. **Regional and InterCity trains are
-not drawn, nor the Hovedstadens Letbane**, which has no stop in either
-municipality.
+**Stations.** The Letbane's 29 stops are drawn and ringed, all of them in the
+eight municipalities. So are the eight S-tog stations there that are not
+Letbane interchanges (Brøndby Strand, Brøndbyøster, Bagsværd, Kildebakke,
+Skovbrynet, Stengården, Sorgenfri and Virum): each is served every ten minutes
+by day, the test the rest of the S-tog passed. **Forty-five stations are
+excluded for being outside the ten municipalities** - forty-three S-tog
+stations on the lines' suburban reaches and the Metro's two airport stations in
+Tårnby - and are listed with their municipality on the map's page. **Regional
+and InterCity trains are not drawn.**
 
 ### Prague - establishments rather than companies, and a sole trader's home kept off the map
 
