@@ -100,7 +100,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
 | South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang, Daejeon, Gwangju, Gimhae |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
-| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki, Maebashi, Fukushima, Fukuyama, Ichinomiya, Tsu, Akita |
+| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki, Maebashi, Fukushima, Fukuyama, Ichinomiya, Tsu, Akita, Ōita |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional) |
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
@@ -3903,6 +3903,27 @@ batch at review time).
 - **MUST DO:** `check_personal_exposure.py akita` with its Japan pass, run
   2026-10-07; the verdict is in
   `docs/decisions_drafts/worktree-japan-regional-1.md` ("Akita built",
+  2026-10-07).<!-- /internal -->
+
+**183. Ōita City, MHLW and MLIT (Ōita) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with the Regional-1
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-07 by staging; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). Every list is **CC BY
+  4.0** as its BODIK dataset records (`cc-by-40-intl`), under the
+  大分市オープンデータ利用規約 (令和5年3月15日), which is compatible with it.
+  MHLW's open data is **PDL 1.0**, as in Sasebo's (127); MLIT's 位置参照情報 and
+  N02 (the 2025 edition) are **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0)
+  only picks stations and is **never drawn** (the Survey Act).
+- **MUST DISPLAY**: the terms' §1 credit in its 記載例 form,
+  「○○データ」（大分市）（URL）（利用日）を加工して作成, one per list, with the CC BY
+  4.0 link; MHLW's 出典 line and who processed it; MLIT's credit lines.
+- **MUST NOT**: present the processed lists as the city's; use the city's
+  logos (§3); imply endorsement. No indemnity or cost clause.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py oita` with its Japan pass, run
+  2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-regional-1.md` ("Ōita built",
   2026-10-07).<!-- /internal -->
 
 

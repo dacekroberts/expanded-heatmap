@@ -41,6 +41,23 @@ notices 176-186.
    *Tradeoff:* a handful of salons, a re-render and one more approval,
    against registers five months older than the food leg (stated on the
    page and in data_age).
+3. **Ōita (page 236, notice 183; built, not blocked): the registers' 2026
+   monthly files** (`442011_beauty_salon_new`, five CSVs of 240-713 B, and
+   `442011_cleaning_new`; no barber set; the brief's open call 3). Not
+   approved and not fetched, so the registers stand at 2026-03-31 while the
+   food list is of 2026-09-01. *Recommend* approving them (Ichinomiya's call
+   128), then reading each register plus its months as Ichinomiya's
+   `source_rows`. *Tradeoff:* a few dozen salons (openings only; the city
+   publishes no closures, so an upper bound) and one more approval, against
+   registers five months older than the food leg (stated on the page and in
+   data_age).
+4. **Ōita: the city's own notification list** (`442011_licensed_facility`,
+   すべての営業届出施設一覧 as of 2026-09-01, CSV 287,712 B, same publisher and
+   licence; the brief's open call 2(a)). Not approved and not fetched; MHLW's
+   opt-in notifications stand in by precedent. *Recommend* approving it at
+   review time: the city's complete list would make the Food shops layer
+   complete rather than partial. *Tradeoff:* one approval, a schema read and
+   a re-render, against a Food shops layer the page calls partial.
 
 ## Proposals for review time (page sentences no template covers)
 
@@ -123,6 +140,20 @@ notices 176-186.
   Stations bullet. The notice (182) credits the three edition titles in the
   出典 form, since staging's read found no prescribed wording. Line names
   drop "Main" ("JR Ou Line", as Fukushima's), against the brief's table.
+- **Ōita** (page 236): "About one restaurant in 20 in Ōita City's list has
+  its address withheld by the city, which does not say why, and is not on
+  this map. Where they are is not known." (Fukuoka's approved MHLW sentence
+  with the city in the ministry's place and the reason stated as absent; the
+  foundation's `asterisk` rule). In its What Is Excluded section: the
+  withheld-entries bullet, "1 whose trade name the city masked" under **Names
+  not shown**, and "No Shinkansen line reaches the city." The notice (183)
+  adds "left out the entries whose address the city withholds" to
+  Ichinomiya's processing sentence; the 記載例's 利用日 is the download date.
+  **Line names:** Ōita uses "JR Hohi Main Line" (JR Kyushu's 豊肥本線, as
+  Kurume's and Kagoshima's "Main Line" names), but Kumamoto's built config
+  names the same line "JR Hohi Line": one consistency fix for review time.
+  Akita and Fukushima drop "Main" for JR East's lines; the two conventions
+  follow each operator's signs, which is worth the owner's look.
 
 ## Shared-code findings for review time (not changed here)
 
@@ -157,6 +188,68 @@ notices 176-186.
   row in. One pin; a taxonomy question, not Akita's.
 
 ## Entries
+
+### 2026-10-07 - Ōita built, one complete food list with the city's withheld addresses counted apart, the registers of March 2026 and MHLW's notifications
+
+- **Ōita built (page 236, notice 183), Matsuyama's shape (one complete city
+  food list beside MHLW's file), Hamamatsu's for the registers and
+  Ichinomiya's for MHLW's notifications: 6,219 storefronts (Food service
+  2,902, Food shops 1,508, Personal services 1,809) around 17 stations on 3
+  lines, 52.9% of them in a ring (3,290).** On the Japan foundation's rules.
+  Sources: the city's BODIK food list of every permit in term on 2026-09-01
+  (6,199 rows), its barber, beauty and laundry lists of 2026-03-31 (391,
+  1,308, 186), and MHLW's file (its 1,517 notifications read). Built by a
+  subagent of the Regional-1 lead, integrated by the lead.
+- **The withheld addresses (open call 1), by the foundation's `asterisk`
+  rule:** 301 rows whose address the city masks with asterisks are set aside
+  before any de-duplication and counted (250 restaurants), the brief
+  exactly. The city's pages give no reason (staging's licence read), so the
+  page says so plainly (precedents: Maebashi's laundry share stated with its
+  cause; Fukuoka's `ADDRESS_BY_CONSENT` sentence). Of the 269 masked trade
+  names, 267 are on withheld rows; 1 at a visible address shows its permit
+  type, and 1 more is a citywide vehicle.
+- **MHLW (open call 2), by Ichinomiya's call 127 and the batch's rule that
+  hundreds of rows make a layer (Iwaki's call 150 left 164 out):** its
+  notifications as a partial Food shops layer, 802 addressed of 1,517, 426
+  pins. Its 85 permits are not added (all in the city's list by number).
+  MHLW's point against the block point: median 40 m, 93.2% within 250 m (the
+  brief 40 m, 94.7%). `SUPERSEDES` dropped 92 city rows. The city's own
+  notification list was not approved and not fetched (parked call 4).
+- **Terms (calls 161 and 172):** `TERM_AS_OF` food 2026-09-01 (the file's
+  date), MHLW 2026-08-31. Past term 0, late 0, as the brief measured.
+- **The brief's figures reproduce:** Food service 2,990 and Retail 1,323
+  before the join against the brief's 2,989 and 1,324 (one combined 業態 cell
+  read as its restaurant form, call 158). Restaurants 5,053, 101.6% of
+  e-Stat's 4,971. Hostess venues 968.
+- **Step 2:** 9,601 rows read. Set aside 301 withheld and 2 area-wide (MHLW);
+  no address published 715 (MHLW); not a premises 369 (346 大分市内一円
+  vehicles, stalls and demonstration sales, 4 storeless laundry pick-ups, 19
+  MHLW mobile filings). Out by rule 1,524: 968 snack bars and cabarets, 246
+  manufacturing and other non-counter types, 116 vending, 98 canteens, 40
+  temporary or mobile, 33 inside accommodation, 20 caterers, 3 mail order.
+  Join of 6,690 storefront rows: block 5,888, town-chōme 552, 小字 6, MHLW's
+  point 86, unplaced 158 (2.4%). 221 repeat permits shown once. On the map:
+  90.2% block, 8.7% town-chōme, 1.1% MHLW's point, 0.1% 小字.
+- The 菓子 / そうざい factory share: 25 of 873 (2.9%), kept (owner,
+  2026-09-24).
+- **Economic Census control:** 2,902 Food service pins against 1,723 飲食店
+  establishments in 44201: 1.68 per establishment, the brief's estimate.
+- **Privacy verdict: publish.** `check_personal_exposure.py oita`: the Japan
+  pass prints 0; 8 trade names in the raw files are an operator's own name,
+  4 pins show their permit type (3 by the name rule, 1 masked by the city).
+  No asterisk mask reaches the map.
+- **Rail:** N02-25, 17 stations: JR Kyushu's Nippo Main Line 8 of 113, Hohi
+  Main Line 6 of 37, Kyudai Main Line 5 of 37 (大分 one group on all three).
+  No Shinkansen in the prefecture. Median nearest-station gap 2,209 m:
+  standard rings. 6 excluded: 別府市 2, 由布市 2, 臼杵市 1, 豊後大野市 1. Gate
+  3: JR Kyushu's timetable station index (read once by plain GET,
+  2026-10-07, a page outside the cached files) gives 8, 6 and 5, exact.
+  English names: OSM's 34 objects; 9 cited overrides (macrons dropped;
+  豊後国分 "Bungo-Kokubu" for OSM's misread "Bungo-Kobuku"). Colours with the
+  built Kyushu cities' hues (closest pair 92.3). No frequency floor: the
+  thinnest stretch runs 25 to 26 trains a weekday each way.
+- The licence row cites the 大分市オープンデータ利用規約 by title and date only:
+  staging's record gives no URL.
 
 ### 2026-10-07 - Akita built, the city's full food list of October 2026, its barber and beauty registers and MHLW's notifications
 
