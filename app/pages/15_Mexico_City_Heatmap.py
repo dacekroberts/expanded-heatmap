@@ -79,6 +79,8 @@ st.markdown(
 - **Most storefronts in the four municipios are beyond a station's reach.** Línea B runs along
   Ecatepec's western edge and Naucalpan's one station, Cuatro Caminos, sits on its border, so the
   region's share of storefronts within a ring is lower than Ciudad de México's alone.
+- 398 storefronts that DENUE files under Nezahualcóyotl are left out: they sit just east of the
+  municipio's boundary as OpenStreetMap draws it, more than 5 km from any station.
 """
 )
 

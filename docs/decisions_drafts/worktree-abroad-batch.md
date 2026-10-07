@@ -9,6 +9,24 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
 Numbered for Staging's wave list; each with a recommendation and its
 tradeoff. A parked call stops only what it names.
 
+**The owner's answers (2026-10-07, relayed by Staging as its calls
+191-195):**
+- **Call 1 (Bremen's CC BY version):** "191, download approved": fetch the
+  Kommunalverbund's 2024 report PDF (3,643,392 bytes) from the publisher's
+  own host and read it for the licence terms only. Pending: the build
+  confirms the download with the owner directly before fetching.
+- **Call 3 (Nezahualcóyotl):** "continue drop, state on page": the 398 rows
+  stay dropped; Mexico City (Regional)'s page now says so (a proposal
+  sentence, for review time).
+- **Call 4 (Gelsenkirchen U11):** "keep it tram mode". Done as built.
+- **Call 5 (macro labels):** Europe East is made now, by Cleanup, with
+  Thessaloniki; a Germany view only if Cleanup's measurement shows Europe
+  West still overlapping, then on Czechia's and Belgium's mechanism. Not
+  built here.
+- **Call 6 (Greece):** "yes", in Europe East with the split; Cleanup lands it.
+- **Copenhagen (Regional):** waits for the owner to set the Datafordeler key
+  or fetch the eight Adressepunkt files.
+
 1. **Bremen: the unversioned CC BY and the database right.** The
    licence-read agent (2026-10-07) found the record's "Creative Commons
    Namensnennung (CC-BY)" unresolvable to a version: DCAT-AP.de's
