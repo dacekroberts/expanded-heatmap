@@ -11,13 +11,23 @@ kommuner, the rail scope, the palette and the catch-all verdict.
 
 from pathlib import Path
 
+from pipeline.countries import denmark as DK
+
 SLUG = "copenhagen"
+
+# REGIONAL adds the eight kommuner Hovedstadens Letbane stands in, and the
+# Letbane itself, the owner's call 66 of 2026-10-06
+# (docs/build_briefs/copenhagen_regional.md; the regional-extension skill).
+# False reproduces the city-alone build byte for byte, which the drift check
+# proved before the switch went on.
+REGIONAL = False
+NAME = "Copenhagen (Regional)" if REGIONAL else "Copenhagen"
 
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
 DATA_RAW = ROOT / "data" / "copenhagen" / "raw"
-DATA_PROCESSED = ROOT / "data" / "copenhagen" / "processed"
+DATA_PROCESSED = ROOT / "data" / "copenhagen" / "processed" / ("regional" if REGIONAL else "")
 OUTPUTS = ROOT / "outputs" / "copenhagen"
 
 HEATMAP_HTML = OUTPUTS / "heatmap.html"
@@ -33,6 +43,9 @@ BUSINESSES_CLEAN_CSV = DATA_PROCESSED / "businesses_clean.csv"
 # are Copenhagen's own.
 OSM_ROUTES_JSON = DATA_RAW / "osm_rail.json"
 OSM_KOMMUNER_JSON = DATA_RAW / "osm_kommuner.json"
+# OSM's imported DAR address points (`osak:identifier`) in the ten kommuner,
+# the regional map's placement; see PLACEMENT below.
+OSM_ADDRESS_POINTS_TSV = DATA_RAW / "osm_osak_points.tsv"
 # What was fetched, which generation, and when - committed, and never a URL
 # with the key in it.
 PROVENANCE_JSON = OUTPUTS / "provenance.json"
@@ -56,8 +69,31 @@ PROVENANCE_JSON = OUTPUTS / "provenance.json"
 # ⚠ THE BUSINESS FILTER IS CVR's OWN `CVRAdresse_kommunekode` ON THE LOCATION
 # ADDRESS, never a polygon - it is the register's authoritative field. The
 # polygons below decide only which STATIONS are in scope.
-KOMMUNER = {"101": "Kobenhavn", "147": "Frederiksberg"}   # CVR's unpadded codes
+CITY_KOMMUNER = {"101": "Kobenhavn", "147": "Frederiksberg"}   # CVR's unpadded codes
+# The regional eight, one Letbane stop or more each (call 66 a). NEVER
+# Albertslund (165), call 66 c, nor Gentofte, Ballerup or Rudersdal, whose
+# share of an outer ring is disclosed rather than counted.
+LETBANE_KOMMUNER = {
+    "173": "Lyngby-Taarbaek", "159": "Gladsaxe", "163": "Herlev", "175": "Rodovre",
+    "161": "Glostrup", "153": "Brondby", "187": "Vallensbaek", "183": "Ishoj",
+}
+KOMMUNER = CITY_KOMMUNER | LETBANE_KOMMUNER if REGIONAL else CITY_KOMMUNER
 DAR_KOMMUNER = ("0101", "0147")                           # Datafordeler's padded
+SCOPE_WORDS = "the ten kommuner" if REGIONAL else "Kobenhavn and Frederiksberg"
+
+# --- Placement ------------------------------------------------------------
+#
+# The city alone: DAR's Adressepunkt via Datafordeler (98.3%). The regional
+# map: OSM's DAR address points, Aarhus's and Odense's placement, for all ten
+# kommuner (owner, 2026-10-07). The Datafordeler account was closed after
+# Copenhagen published (2026-09-24), which call 66 d had not allowed for; one
+# keyless source over the whole map was preferred to a split by area.
+# Measured 2026-10-07 against the published map: 14,897 of the 14,922
+# DAR-placed central storefronts placed (25 lost, none gained), half moved
+# 0.03 m or less, 6 between 5 and 10 m, none further; the eight added
+# kommuner 3,780 of 3,907 (96.7%; DAR's ceiling 97.0%). DAR via a reopened
+# account remains a way back (docs/decisions_drafts/worktree-abroad-batch.md).
+PLACEMENT = DK.PLACEMENT_OSM_OSAK if REGIONAL else DK.PLACEMENT_DAR
 
 # --- Coordinate reference systems -----------------------------------------
 
@@ -103,6 +139,9 @@ RING_LABELS = ["0-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi", "0.3-0.6 mi"]
 #   * NOT regional or InterCity trains (`route=train`), Lokaltog 910, or
 #     Hovedstadens Letbane - the last opened in full on 22 August 2026 and has
 #     no stop in either kommune.
+#   * REGIONAL: Hovedstadens Letbane (L) joins, 29 stops in the eight
+#     kommuner (call 66 a); every train serves every stop, every 5-8 minutes
+#     on weekdays 08-17 (dinletbane.dk/da/koereplan/, read 2026-10-06).
 #
 # RAIL FROM OSM, NOT REJSEPLANEN - owner's call 2026-09-24, and the ground
 # the osm-rail skill asks for. Rejseplanen's national GTFS is keyless and
@@ -112,20 +151,26 @@ RING_LABELS = ["0-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi", "0.3-0.6 mi"]
 # so the feed was not downloaded. OSM (ODbL) names and colours every line.
 METRO_REFS = ("M1", "M2", "M3", "M4")
 STOG_REFS = ("A", "B", "Bx", "C", "E", "F", "H")
-# A WHITELIST ON THREE TAGS, never on `network`: every relation in the bbox,
-# Lokaltog and Movia's Letbane included, carries network "Takst Sjaelland" -
-# the fare zone, not the system. Metro is `route=subway` by ref; S-tog is
+# A WHITELIST ON THREE TAGS, never on `network`: the Metro and S-tog relations
+# carry network "Takst Sjaelland" - the fare zone, not the system - and the
+# Letbane carries "Movia". Metro is `route=subway` by ref; S-tog is
 # `route=light_rail` by ref AND operator, which is what keeps out Lokaltog 910
 # (Lokaltog A/S) and the Letbane's "L" (no operator), both also light_rail.
 STOG_OPERATOR = "DSB"
+# The Letbane has no `operator` tag (only `operator:wikidata`), so it is kept
+# on route + ref + the system's wikidata: `ref=L` alone is unique in the bbox
+# today (Gribskovbanen is L41), and wikidata pins the system.
+LETBANE_REFS = ("L",) if REGIONAL else ()
+LETBANE_WIKIDATA = "Q10655459"
 
 # OSM ref -> the name riders use. The mode word distinguishes Metro M1 from
-# a bus and S-tog A from anything else lettered A.
+# a bus and S-tog A from anything else lettered A. One Letbane line, so the
+# system's name, Odense's precedent.
 LINE_NAMES = {
     "M1": "Metro M1", "M2": "Metro M2", "M3": "Metro M3", "M4": "Metro M4",
     "A": "S-tog A", "B": "S-tog B", "Bx": "S-tog Bx", "C": "S-tog C",
     "E": "S-tog E", "F": "S-tog F", "H": "S-tog H",
-}
+} | ({"L": "Hovedstadens Letbane"} if REGIONAL else {})
 
 # One station under two names, merged only where named here. Interchanges
 # that share ONE name across the two modes (Norreport, Kobenhavn H, Osterport,
@@ -153,11 +198,16 @@ SPACING_MIN_M = 400.0
 # Below the preferred 45 against the pins, recorded rather than moved:
 # M1 19.0 and E 21.7 (vs Personal services / Retail), A 29.8, M4 31.7,
 # B 36.3, Bx 38.6.
+#
+# REGIONAL: the Letbane's OSM #32ac5c is 11.4 from M1's #008d41, over the
+# floor but under Oslo's ~13 margin, so it moves on the same rule (the newer
+# line, never the Metro): HSL lightness +0.02 -> #34b460, 14.4 from M1, 20.5
+# from S-tog B, 3.6 from OSM's.
 LINE_COLOURS = {
     "M1": "#008d41", "M2": "#ffc600", "M3": "#ff0a0a", "M4": "#009cd3",
     "A": "#05b4ff", "B": "#50ae30", "Bx": "#adce6d", "C": "#f68b1f",
     "E": "#7670b3", "F": "#fdcb41", "H": "#e63511",
-}
+} | ({"L": "#34b460"} if REGIONAL else {})
 
 # WHAT SURVIVES THE BOUNDARY, PER LINE - asserted in step 1 so the scope
 # decision is CHECKABLE rather than merely written down. Measured 2026-09-24
@@ -174,6 +224,17 @@ EXPECTED_INSIDE_PER_LINE = {
     "A": 11, "B": 12, "Bx": 12, "C": 17, "E": 11, "F": 12, "H": 9,
 }
 
+# CALL 66 b: the eight suburban S-tog stations in the Letbane kommuner are IN
+# only if their line passes Copenhagen's S-tog test there (spacing and
+# coverage measured by the brief; frequency read from DSB). Station name ->
+# the reason excluded_stations.csv gives; empty when every line passes.
+STOG_TEST_OUT = {}
+if REGIONAL:
+    EXPECTED_INSIDE_PER_LINE = {
+        "M1": 15, "M2": 14, "M3": 17, "M4": 13,
+        "A": 17, "B": 19, "Bx": 15, "C": 18, "E": 15, "F": 12, "H": 10, "L": 29,
+    }
+
 # GATE 3, read 2026-09-24 - and neither figure is a clean first-party count.
 #   * Metro: 15 / 16 / 17 / 13, network 44 - English Wikipedia's line table
 #     (a secondary source; Metroselskabet's own pages were not read for it).
@@ -182,13 +243,16 @@ EXPECTED_INSIDE_PER_LINE = {
 #     is the page's first statement and Danish Wikipedia's figure; the other
 #     is recorded rather than hidden. A one-station disagreement is a prompt
 #     to look at the network list, not a pass.
+#   * REGIONAL, Letbane: 29, first-party ("29 stationer", dinletbane.dk's
+#     line page, read 2026-10-06 and by brief_check 2026-10-07).
 OPERATOR_STATION_COUNTS = {
     "Metro M1": 15, "Metro M2": 16, "Metro M3": 17, "Metro M4": 13,
     "Metro (network)": 44, "S-tog (network)": 87,
-}
+} | ({"Letbane (network)": 29} if REGIONAL else {})
 OPERATOR_COUNTS_SOURCE = (
     "Metro per line and 44: en.wikipedia Copenhagen Metro (secondary); S-tog 87: "
-    "dsb.dk/s-tog, which also says 86 on the same page - read 2026-09-24")
+    "dsb.dk/s-tog, which also says 86 on the same page - read 2026-09-24"
+    + ("; Letbane 29: dinletbane.dk line page, read 2026-10-06" if REGIONAL else ""))
 
 # The Overpass bbox: the whole S-tog network, Koge to Hillerod and
 # Frederikssund, so step 1 can name the kommune of every station it drops.
@@ -226,3 +290,7 @@ COPENHAGEN_BBOX = {
     "lon_min": 12.43,
     "lon_max": 12.69,
 }
+# REGIONAL: the ten kommuner's polygons span about 55.59-55.81 N,
+# 12.21-12.69 E (the brief), plus ~0.02 deg; never the rail bbox.
+if REGIONAL:
+    COPENHAGEN_BBOX = {"lat_min": 55.57, "lat_max": 55.83, "lon_min": 12.19, "lon_max": 12.71}

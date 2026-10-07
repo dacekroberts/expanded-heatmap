@@ -1,4 +1,5 @@
-"""Copenhagen step 1: Metro and S-tog stations inside Kobenhavn + Frederiksberg.
+"""Copenhagen step 1: Metro and S-tog stations inside Kobenhavn + Frederiksberg;
+with config.REGIONAL, the Letbane's too, inside the ten kommuner.
 
     python pipeline/copenhagen/step1_stations.py
 
@@ -46,6 +47,9 @@ def stop_rows():
     def kept(t):
         if t.get("route") == "subway":
             return t.get("ref") in config.METRO_REFS
+        if (t.get("route") == "light_rail" and t.get("ref") in config.LETBANE_REFS
+                and t.get("wikidata") == config.LETBANE_WIKIDATA):
+            return True
         return (t.get("route") == "light_rail" and t.get("ref") in config.STOG_REFS
                 and t.get("operator") == config.STOG_OPERATOR)
 
@@ -124,10 +128,10 @@ def main():
         crs_projected=config.CRS_PROJECTED, spacing_min=config.SPACING_MIN_M,
         expected_per_line=config.OPERATOR_STATION_COUNTS or None,
         actual_per_line={config.LINE_NAMES.get(k, k): v for k, v in total_per_line.items()}
-        | {"Metro (network)": int(sum(1 for v in st_rows["lines"]
-                                      if any(x.startswith("M") for x in v.split("/")))),
-           "S-tog (network)": int(sum(1 for v in st_rows["lines"]
-                                      if any(not x.startswith("M") for x in v.split("/"))))})
+        | {f"{net} (network)": int(sum(1 for v in st_rows["lines"]
+                                       if any(x in refs for x in v.split("/"))))
+           for net, refs in (("Metro", config.METRO_REFS), ("S-tog", config.STOG_REFS),
+                             ("Letbane", config.LETBANE_REFS)) if refs})
     if config.OPERATOR_COUNTS_SOURCE:
         print(f"    gate 3 source: {config.OPERATOR_COUNTS_SOURCE}")
 
@@ -142,15 +146,23 @@ def main():
     if len(nowhere):
         sys.exit(f"stations in no kommune polygon (in the sea, or the bbox is too small): "
                  f"{sorted(nowhere['stop_name'])}")
-    inside = hit[hit["ref"].isin(config.KOMMUNER)].copy()
-    outside = hit[~hit["ref"].isin(config.KOMMUNER)].copy()
-    print(f"\n  {len(hit)} stations -> {len(inside)} inside the two kommuner "
+    in_scope = hit["ref"].isin(config.KOMMUNER)
+    # Stations inside the kommuner whose lines fail the S-tog test there
+    # (call 66 b): listed with the test as the reason, never the kommune.
+    failed = hit["stop_name"].isin(config.STOG_TEST_OUT)
+    unknown = sorted(set(config.STOG_TEST_OUT) - set(hit.loc[in_scope & failed, "stop_name"]))
+    if unknown:
+        sys.exit(f"STOG_TEST_OUT names no in-scope station: {unknown}")
+    inside = hit[in_scope & ~failed].copy()
+    outside = hit[~in_scope | failed].copy()
+    print(f"\n  {len(hit)} stations -> {len(inside)} inside {config.SCOPE_WORDS} "
           f"({', '.join(f'{n} {int((inside.ref == r).sum())}' for r, n in config.KOMMUNER.items())}), "
-          f"{len(outside)} outside")
+          f"{len(outside)} outside" + (f" ({int(failed.sum())} by the S-tog test)"
+                                       if failed.any() else ""))
 
     inside_per_line = {ln: int(sum(1 for v in inside["lines"] if ln in v.split("/")))
                        for ln in order}
-    print("\n  per line, inside the two kommuner:")
+    print(f"\n  per line, inside {config.SCOPE_WORDS}:")
     for ln in order:
         exp = config.EXPECTED_INSIDE_PER_LINE.get(ln)
         flag = "" if exp is None or exp == inside_per_line[ln] else f"   <- EXPECTED {exp}"
@@ -171,8 +183,9 @@ def main():
 
     out = pd.DataFrame({
         "station": outside["stop_name"], "lines": outside["lines"],
-        "reason": [f"in {k} ({r.zfill(4)}), outside Kobenhavn and Frederiksberg"
-                   for k, r in zip(outside["kommune"], outside["ref"])],
+        "reason": [config.STOG_TEST_OUT[s] if s in config.STOG_TEST_OUT and r in config.KOMMUNER
+                   else f"in {k} ({r.zfill(4)}), outside {config.SCOPE_WORDS}"
+                   for s, k, r in zip(outside["stop_name"], outside["kommune"], outside["ref"])],
         "latitude": outside["latitude"], "longitude": outside["longitude"]})
     out.sort_values(["reason", "station"]).to_csv(config.EXCLUDED_STATIONS_CSV,
                                                   index=False, encoding="utf-8")
