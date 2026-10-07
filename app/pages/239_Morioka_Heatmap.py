@@ -43,25 +43,61 @@ else:
 # replaces this with its own caption of the sources' dates and credits.
 render_data_age("Morioka")
 
-# TODO: replace every TODO bullet with prose true for this city, as short
-# bullets under bold headings (app/pages/43_Seoul_Heatmap.py is the model):
-# the lines by name, what is not drawn, the area and the stations left out, the
-# source and its limitations. Detail a reference page carries stays there.
+# From the japan-city skill's template, Akita's and Ichinomiya's pages (the
+# ministry's notifications and its points) (approved wording, pre-approved for
+# this build, 2026-09-30); the withheld-entries bullet and the Yamada and
+# Hanawa lines' bullet are proposals in
+# docs/decisions_drafts/worktree-japan-regional-1.md (Ichinomiya's call 125
+# with the city's own reason; call 86 in Fukushima's proposed form). The
+# dates are the lists' own (config.SOURCE_AS_OF); MHLW's file states no date,
+# so it is dated by download. 2,701 is the list's restaurants with an address
+# (of 3,350; 649 withheld), 83.5% of e-Stat's 3,233 in force on 2025-03-31.
+# The ring share, 50.0%, is step 3's (2,303 of 4,609, 2026-10-07).
 st.markdown(
     """
 **The lines**
 
-- TODO: the lines drawn, by name (each is labeled on the map and in the legend).
-- TODO: what is not drawn, and why.
-- TODO: the area covered; stations left out are listed below.
+- Five lines are drawn, each labeled on the map and in the legend: JR East's Tohoku, Tazawako,
+  Yamada and Hanawa lines and the IGR Iwate Galaxy Railway Line.
+- Lines and stations come from MLIT's national railway data (国土数値情報); station names in
+  English are from OpenStreetMap. Line colors are this project's own, not the operators'.
+- Only stations inside Morioka City get rings, because the business data covers the city alone:
+  lines running on to Takizawa, Yahaba, Iwate, Hachimantai and Miyako are cut at the city line.
+  The stations left out are listed below.
+- The Shinkansen is not drawn (Morioka appears as a JR and IGR station).
+- The JR Yamada and Hanawa lines are infrequent: the Yamada Line runs 10 trains a weekday each way
+  between Morioka and Kami-Yonai and 3 each way beyond it, and the Hanawa Line 7 toward Odate and
+  9 toward Morioka.
 
 **The businesses**
 
-- TODO: the data source, and any category it is missing.
+- From Morioka City's list of food-business permits (as of August 31, 2026) and its registers of
+  barbers, beauty salons and laundries (as of September 30, 2026).
+- Morioka City leaves out of its food list the premises whose operators asked not to be listed,
+  about one restaurant in five, so they are not on this map. The 2,701 restaurants it lists with
+  an address are 83.5% of the 3,233 in the national count of March 2025; where the others are is
+  not known.
+- Japan has no general business license, so shops other than food shops (clothing, electronics,
+  pharmacies) do not appear: the Food shops layer is food retail only (bakeries and confectioners,
+  delis, butchers and fishmongers).
+- Shops that only notify rather than hold a permit, such as supermarkets, convenience stores and
+  greengrocers, appear only where they chose to publish in the Ministry of Health, Labour and
+  Welfare's open data (downloaded October 6, 2026), so that part of the Food shops layer is partial.
+- The lists may include premises that have closed, so a dot means a permit on file, not a
+  business open today.
+
+**Reading the map**
+
+- The lists give an address but no location. Each address is matched to MLIT's address reference
+  data, which places most at their street block; where that fails, the dot sits at the ministry's
+  own coordinates for the same premises, or else at its district's center.
+- Where a trade name is its operator's own name, the dot shows its permit type instead.
+- Names and permit types are shown in Japanese, as the lists record them.
+- **About 50% of storefronts sit within a ring.**
 """
 )
 
-render_map_help("three business categories (Retail, Food service and Personal services)")
+render_map_help("three business categories (Food shops, Food service and Personal services)")
 render_excluded_stations("Morioka")
 render_country_links("Morioka")
 

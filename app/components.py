@@ -2587,6 +2587,36 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
      "Mito City, MHLW and MLIT did not make and do not endorse this map.",
      False, ("Mito",)),
+    # Morioka (notice 186): the city's own CSVs, CC BY 4.0 through the
+    # 盛岡市オープンデータ利用規約 (terms PDF; read 2026-10-07 by staging), whose
+    # §2(2) requires a 出典 line and a separate processing line. The terms'
+    # example URL is dead since the city's 2026-10-01 renewal, so the 出典
+    # line cites the open-data index page. §3(2) and §4 are fault-based cost
+    # clauses (accepted for Japan, 2026-09-24). MHLW as in Sasebo's, its
+    # notifications only; MLIT as in Kobe's, N02 in its 2025 edition. Written
+    # from Akita's and Ōita's wording under the owner's pre-approval of
+    # template prose (2026-09-30); the two-line credit (staging's suggested
+    # form) and the withheld-entries clause are proposals in
+    # docs/decisions_drafts/worktree-japan-regional-1.md.
+    Notice(186, "Morioka City, MHLW and MLIT (Morioka)",
+     "Morioka's businesses: 出典：盛岡市オープンデータサイト"
+     "（[https://www.city.morioka.iwate.jp/shisei/johokokai/opendata/index.html](https://www.city.morioka.iwate.jp/shisei/johokokai/opendata/index.html)）"
+     "「食品営業許可施設一覧（令和8年8月末時点）」「理容所一覧」「美容所一覧」「クリーニング所等一覧」（令和8年9月末時点）、"
+     "クリエイティブ・コモンズ・ライセンス表示4.0国際"
+     "（[https://creativecommons.org/licenses/by/4.0/deed.ja](https://creativecommons.org/licenses/by/4.0/deed.ja)）. "
+     "「食品営業許可施設一覧」（[https://www.city.morioka.iwate.jp/kenko_fukushi/hokenjo/shokuhineisei/1017014/1006689.html](https://www.city.morioka.iwate.jp/kenko_fukushi/hokenjo/shokuhineisei/1017014/1006689.html)）、"
+     "「理容所一覧」「美容所一覧」「クリーニング所等一覧」（[https://www.city.morioka.iwate.jp/kenko_fukushi/hokenjo/shokuhineisei/seikatsueisei/1034998.html](https://www.city.morioka.iwate.jp/kenko_fukushi/hokenjo/shokuhineisei/seikatsueisei/1034998.html)）"
+     "（盛岡市ホームページ）を加工して作成; and "
+     "出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一覧」を加工して作成. "
+     "Processed by this project, which selected the storefront types, left out the entries the city lists "
+     "without a name or address, took only the ministry's notifications, showed a premises in both lists "
+     "once, placed each by its address or the ministry's own coordinates, and counted them around stations. "
+     "The ministry's list holds only filings whose applicants agreed to publish them and is not complete. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
+     "Morioka City, MHLW and MLIT did not make and do not endorse this map.",
+     False, ("Morioka",)),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no

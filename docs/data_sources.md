@@ -100,7 +100,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
 | South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang, Daejeon, Gwangju, Gimhae |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
-| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki, Maebashi, Fukushima, Fukuyama, Ichinomiya, Tsu, Akita, Ōita, Gifu, Iwaki, Mito |
+| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki, Maebashi, Fukushima, Fukuyama, Ichinomiya, Tsu, Akita, Ōita, Gifu, Iwaki, Mito, Morioka |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional) |
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
@@ -3997,6 +3997,37 @@ batch at review time).
   2026-10-07; the verdict is in
   `docs/decisions_drafts/worktree-japan-regional-1.md` ("Mito built",
   2026-10-07).<!-- /internal -->
+
+**186. Morioka City, MHLW and MLIT (Morioka) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with the Regional-1
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-07 by staging; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's food list and
+  its barber, beauty and laundry lists are **CC BY 4.0** as both dataset pages
+  state, through the 盛岡市オープンデータ利用規約 (terms PDF, undated), which
+  binds on use; on the registers' page only the CSVs are open, and only the
+  CSVs are read. MHLW's open data is **PDL 1.0**, as in Sasebo's (127);
+  MLIT's 位置参照情報 and N02 (the 2025 edition) are **PDL 1.0**, as in Kobe's
+  (50). N03 (CC BY 4.0) only picks stations and is **never drawn** (the
+  Survey Act).
+- **MUST DISPLAY** (§2(2)ア, イ): a 出典 line (盛岡市オープンデータサイト, cited
+  at `https://www.city.morioka.iwate.jp/shisei/johokokai/opendata/index.html`
+  since the terms' example URL died with the city's 2026-10-01 renewal; the
+  four list titles; the CC BY 4.0 link) and a separate processing line
+  (「…（盛岡市ホームページ）を加工して作成」); MHLW's 出典 line and who processed
+  it; MLIT's credit lines.
+- **MUST NOT**: present the processed lists as the city's (§2(2)イ); imply
+  endorsement; claim the ministry's list complete. §3(2) (own cost) and §4
+  (reimbursement of costs from the user's own breach or infringement) are
+  fault-based, the class accepted for Japan (2026-09-24). The terms change
+  without notice: re-read them before publishing.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py morioka` with its Japan pass, run
+  2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-regional-1.md` ("Morioka built",
+  2026-10-07). Re-read the terms PDF
+  (`/_res/projects/default_project/_page_/001/024/522/opendateriyokiyaku.pdf`)
+  at review time, before publishing.<!-- /internal -->
 
 
 ## Gaps

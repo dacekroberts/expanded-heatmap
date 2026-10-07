@@ -196,6 +196,19 @@ notices 176-186.
   161 and 172; no built page states it yet), the Kairakuen bullet, and "No
   Shinkansen station lies in the city." The notice (185) credits "CC-BY, no
   version given" with © 水戸市役所, as staging's read sets out.
+- **Morioka** (page 239): "Morioka City leaves out of its food list the
+  premises whose operators asked not to be listed, about one restaurant in
+  five, so they are not on this map. The 2,701 restaurants it lists with an
+  address are 83.5% of the 3,233 in the national count of March 2025; where
+  the others are is not known." (the owner's call 125 answer for Morioka, in
+  Ōita's form) and "The JR Yamada and Hanawa lines are infrequent: ..." (call
+  86, Fukushima's form). In its What Is Excluded section: the withheld-entries
+  bullet, the IGR sentence ("leaves the city through Takizawa ... and comes
+  back") and the two lines' Stations bullet. The notice (186) takes staging's
+  two-line credit (§2(2)) and adds "left out the entries the city lists
+  without a name or address". The three register titles come from the
+  brief's table of link texts: check them at the review-time re-read of the
+  terms, which change without notice.
 
 ## Shared-code findings for review time (not changed here)
 
@@ -262,6 +275,58 @@ notices 176-186.
   (Mito's seasonal 偕楽園): the mechanism fits; the wording may want widening.
 
 ## Entries
+
+### 2026-10-07 - Morioka built, the city's food list of August 2026 with the entries its operators withheld counted apart, the registers of September 2026 and MHLW's notifications
+
+- **Morioka built (page 239, notice 186), Akita's shape (one city food list
+  of every permit in term on its date) with Hamamatsu's for the registers:
+  4,609 storefronts (Food service 2,228, Food shops 1,073, Personal services
+  1,308) around 11 stations on 5 lines, 50.0% of them in a ring (2,303).**
+  Sources: the city's 食品営業許可施設一覧 of 2026-08-31 (4,379 rows), its
+  理容所, 美容所 and クリーニング所等 lists of 2026-09-30 (328, 756, 286), all
+  CSVs, CC BY 4.0 through the 盛岡市オープンデータ利用規約 (read 2026-10-07 by
+  staging), and MHLW's notifications. Every city file is renamed monthly;
+  `SOURCE_LINKS` reads each current link at a re-fetch. Built by a subagent
+  of the Regional-1 lead, integrated by the lead.
+- **The withheld entries (call 125's answer for Morioka):** 796 rows carry
+  no name and no address (649 restaurants); counted apart under
+  `ADDRESS_BY_CONSENT`, never placed and never filled from MHLW. The page
+  states 2,701 restaurants with an address, 83.5% of e-Stat's 3,233.
+- **Calls 161 and 162:** `TERM_AS_OF` 2026-08-31 for both sources. Past term
+  18 (the brief's open call 2); late 0. City name alone set aside: 34, the
+  brief exactly.
+- **MHLW (127b, 127c):** its notifications as a partial Food shops layer, 515
+  pins; its permits not added. `OWN_POINT_FALLBACK` places 31 notification
+  rows, `POINT_DONORS` 58 city food rows (keyed on ward, town and trade name,
+  not the brief's permit number: more rows than its expected ~6). The
+  notifications' points sit a median 63 m from the block point, 74.9% within
+  250 m (looser than the brief's 37 m on permits). `SUPERSEDES` dropped 150
+  city rows.
+- **The brief's figures reproduce** with `combined_form` and `past_term` off
+  (3,043 storefront rows); on the foundation's rules 3,096 (call 158 reads
+  156 combined 種目 cells, call 161 drops 18).
+- **Step 2:** 8,259 rows read. Set aside 35; closed 5; past term 18; no
+  address 2,195 (food 790, MHLW 1,405); not a premises 229; out by rule 736
+  (31 snack bars: the list marks スナック apart from バー, which stays in Food
+  service by R3). Join of 5,041 storefront rows: block 4,890, MHLW's point
+  92, town-chōme 35, 小字 12, unplaced 12 (0.2%, all registers). On the map:
+  97.3% block. One food pin at MHLW's point sits 3 m outside the N03 line.
+- The 菓子 / そうざい factory share: 18 of 378 (4.8%), kept (owner,
+  2026-09-24).
+- **Economic Census control: 1.58** (2,227 pins inside the city against 1,406
+  establishments), inside the built cities' range.
+- **Privacy verdict: publish.** `check_personal_exposure.py morioka`: the
+  Japan pass prints 0; 21 trade names in the raw files are an operator's own
+  name, 4 pins show their permit type.
+- **Rail:** N02-25, 11 stations: IGR 5, JR Tohoku 3, Tazawako 2, Yamada 4,
+  Hanawa 1 (盛岡 one group for four lines; 好摩 for IGR and Hanawa). Gate 3
+  exact. 8 excluded: 滝沢市 4, 八幡平市, 宮古市, 岩手町 and 矢巾町 1 each. The
+  Hanawa Line a one-station stub kept as cut. IGR in two pieces around
+  滝沢市, one label, the legend carrying the line. Labels anchored in the city
+  by `in_city_first`. The Yamada and Hanawa stretches drawn and named (calls
+  46 and 86). OSM's names stand. Median gap 2,074 m: standard rings.
+- **For the next Iwate city:** 乙部大字黒川第9地割 (大字 before the 地割) stays
+  unplaced: a possible `chiwari` extension.
 
 ### 2026-10-07 - Mito built, the national food filings and the city's barber, beauty and laundry lists
 

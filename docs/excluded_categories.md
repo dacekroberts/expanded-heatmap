@@ -4851,6 +4851,66 @@ line.
   current timetable and is not shown (owner, 2026-10-06).
 - No Shinkansen station lies in the city.
 
+### Morioka - the city's food list, its barber, beauty and laundry lists and the national notifications, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, except where the national filings
+  include notifications.
+- 796 entries in the city's food list with no name and no address: the city
+  leaves out the premises whose operators asked not to be listed. 649 of them
+  are restaurants, about one in five of the list's 3,350. They cannot be
+  placed.
+- 1,405 national notifications whose filers did not publish an address.
+- 229 food trucks, stalls and other filings for anywhere in the city or on
+  the move (196 permits in the city's list addressed to the whole city, 33
+  national filings); 27 storeless laundry pick-ups, 6 beauty salons and 1
+  barber addressed to the city alone; and 1 national filing addressed to a
+  whole area.
+- 273 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit or notification types that are not a
+  counter.
+- 262 school, hospital and staff canteens, 62 vending machines, 5 mail-order
+  businesses, 41 premises inside hotels and inns, 25 caterers (仕出し), 29
+  other temporary or mobile businesses, 31 snack bars and 8 entertainment
+  venues.
+- 18 permits past their end date (6 of them among the entries above with no
+  name and no address), and 5 closed premises, which the national filings
+  keep, marked.
+
+**Counted** - the permits in the city's food list in term on August 31, 2026
+(3,350 restaurants, 2,701 of them with an address, against 3,233 in the
+national count of March 31, 2025); its barber, beauty and laundry lists of
+September 30, 2026; and the national notifications as downloaded on October
+6, 2026. The lists hold 328 barbers, 756 beauty salons and 286 laundries (27
+of them storeless pick-ups), against 334, 741 and 293 in the national count of
+March 31, 2025. 18 of the 378 bakery, confectioner and deli rows (4.8%) have a
+trade name that reads as a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 270 repeat rows are shown once (among them 16
+premises in both the barber and the beauty list), and 150 rows of the city's
+food list for a premises already in the national notifications.
+
+**Not placed** - 12 rows (0.2%), all barbers, beauty salons and laundries, at
+addresses MLIT's files do not hold or written only with an old village name.
+Another 30 sit at their town's center, 11 at the center of their 小字 (a named
+part of a town), and 84 at the ministry's own coordinates.
+
+**Names not shown** - 4 pins whose trade name is the operator's own name show
+their permit type.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 8 stations beyond it: 4 in Takizawa and 1 each in Yahaba, Iwate,
+  Hachimantai and Miyako.
+- The IGR line leaves the city through Takizawa between Kuriyagawa and
+  Shibutami and comes back; its two stations in Takizawa have no rings.
+- The Tohoku and Akita Shinkansen are not drawn (Morioka appears as a JR and
+  IGR station).
+- The JR Yamada Line runs 10 trains a weekday each way to Kami-Yonai and 3
+  beyond it, and the JR Hanawa Line 7 toward Odate and 9 toward Morioka; both
+  are drawn (owner, 2026-10-06).
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering
