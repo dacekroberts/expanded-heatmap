@@ -131,7 +131,11 @@ OSM_BBOX = (34.85, 135.75, 34.96, 135.89)
 STATION_OSM_JSON = DATA_RAW / "osm_station_names.json"
 OSM_NAME_MATCH_M = 600
 OSM_NAME_ALIASES = {}
-OSM_NAME_EN_TIES = {}
+# 木幡 is two stations (JR, Keihan; separate N02 groups) whose operators read
+# it differently (JR Kohata, Keihan Kowata); step 1 settles one spelling per
+# name, as Kyoto's 西院, and the operator suffix tells the two apart. JR's
+# reading, the city's own romanisation of the town.
+OSM_NAME_EN_TIES = {"木幡": "Kohata"}
 OSM_NAME_EN_MISSING = {}
 # Cited overrides of OSM's name:en ({ja: en}, the OSM spelling replaced in a
 # comment), in Hiroshima's style (2026-09-30): no macrons, 前 as -mae,
@@ -148,13 +152,15 @@ CRS_PROJECTED = "EPSG:32653"
 
 # --- Ring geometry ---------------------------------------------------------
 # The same edges are used for every city (a category-definition choice, not
-# a city-specific measurement). Standard rings by the spacing rule: the
-# brief's median nearest-group gap is 588 m, above the 550 m line for halved
-# rings (docs/ring_rules.md); step 1 re-measures it.
+# a city-specific measurement). HALVED by the spacing rule (docs/ring_rules.md:
+# about 550 m or less): step 1 measured a 505 m median gap among the 12
+# in-city stations (2026-10-07; the brief's 588 m counted by N02 group, which
+# folds JR's and Keihan's 宇治 and 木幡 into one each). Re-measure if a line is
+# added.
 METERS_PER_MILE = 1609.344
-RING_EDGES_MILES = [0.0, 0.1, 0.2, 0.3, 0.6]
+RING_EDGES_MILES = [0.0, 0.05, 0.1, 0.2, 0.3]
 RING_EDGES_METERS = [m * METERS_PER_MILE for m in RING_EDGES_MILES]
-RING_LABELS = ["0-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi", "0.3-0.6 mi"]
+RING_LABELS = ["0-0.05 mi", "0.05-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi"]
 
 # --- Station scope ----------------------------------------------------------
 # Every N02 line with a station inside the city line (stub_test on N02-25, the
@@ -183,7 +189,11 @@ LINES = {
     "KT": {"n02": [(_KT, "京都線")], "name": "Kintetsu Kyoto Line", "name_ja": "近鉄京都線", "short": "Kintetsu",
            "hue": "#E80010"},
 }
-_COLOURS = {}
+# Colours: `python scripts/line_colour_search.py uji` (2026-10-07, defaults:
+# >= 18 within 500 m, >= 10 city-wide) keeps Kyoto's three colours as they
+# stand. Closest pair 65.5 (the JR Nara and Kintetsu Kyoto lines); the
+# dark-mode labels separate, 3 of 3.
+_COLOURS = {"JD": "#A87840", "KU": "#20A800", "KT": "#E80010"}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

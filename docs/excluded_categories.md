@@ -4602,6 +4602,94 @@ line.
 - Left out: 13 stations beyond it: 5 in Takasago (Hōden among them, 38 m
   beyond the city line), and 2 each in Himeji, Ono, Harima and Akashi.
 
+### Amagasaki - the city's food-permit and food-notification lists and its barber, beauty and laundry registers, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- 410 restaurant permits filed as snack bars, lounges and cabarets
+  (スナック・ラウンジ, キャバレー), and 221 filed as karaoke (カラオケ).
+- 865 rows with no fixed place: 445 food trucks, 316 stalls and other permits
+  licensed for anywhere in the city (市内一円), 100 notifications of the same
+  kind, and 4 laundry pick-up services with no shop (無店舗取次店).
+- 347 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit and notification types that are not a
+  counter.
+- 590 school, hospital, care-home and staff canteens; 486 vending machines; 26
+  restaurants inside hotels and inns; 15 street stalls and peddlers (露店,
+  行商) and 2 peddlers addressed to an area; 12 caterers (仕出し); and 7
+  mail-order businesses.
+
+**Counted** - every food permit in term on August 31, 2026 (5,813 restaurant
+permits, 911 of them granted before June 2021 under the old law), every food
+notification on file and every barber, beauty salon and laundry on the city's
+registers of the same date. The food-shop notifications (convenience stores,
+supermarkets, dairies, greengrocers and other food sellers) are Food shops,
+from the city's complete list. 28 of the 510 bakery, confectioner and deli
+rows (5.5%) have a trade name that reads as a factory; they are kept (owner,
+2026-09-24).
+
+**One pin per premises** - 443 repeat rows are shown once, among them 116
+premises in both the permit and the notification lists and 4 salons on both
+the barber and the beauty registers.
+
+**Not placed** - 2 rows. Another 104 sit at their town's center.
+
+**Names not shown** - 2 pins whose trade name is the operator's own name show
+their permit type.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 21 stations beyond it: 8 in Nishinomiya, 5 in Osaka's
+  Nishiyodogawa Ward, and 4 each in Itami and Osaka's Yodogawa Ward.
+- The JR Tōzai Line keeps one station inside the city, Amagasaki (JR), and the
+  Hankyu Itami Line one, Tsukaguchi (Hankyu); each is drawn as cut.
+- Amagasaki and Tsukaguchi are each two separate stations, JR's and Hanshin's
+  or Hankyu's, with their own rings.
+
+### Uji - the national food filings for Kyoto Prefecture, cut to Uji by address and joined to MLIT's address blocks
+
+**Left out**
+- Barbers, beauty salons and laundries: Kyoto Prefecture publishes its lists
+  of them only as documents whose reuse needs its permission, so this map
+  shows food businesses only.
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, except where the national filings
+  include notifications.
+- Filings whose filers did not publish an address: the prefecture's file
+  names no town for them, so how many are in Uji is not known (about one
+  restaurant in seven across the prefecture outside Kyoto City).
+- 685 food trucks, stalls and rows licensed across the prefecture (府内一円)
+  and filed under a base in Uji, 56 more marked by their permit conditions as
+  vehicles, 10 marked temporary or mobile, and 1 addressed to an area.
+- 161 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter (tea
+  makers, 製茶業, among them).
+- 97 school, hospital and staff canteens, 59 vending machines, 8 snack bars
+  and cabarets, 8 entertainment venues, 2 premises inside hotels and inns, 2
+  caterers (仕出し) and 2 mail-order businesses.
+- 1 closed premises, which the national filings keep, marked.
+
+**Counted** - the national filings for Kyoto Prefecture as downloaded on
+October 6, 2026, where the address is in Uji (宇治田原町, a separate town, is
+not). Permits granted before June 2021 and still in force are not in the
+filings (the prefecture's file holds about 92% of its restaurants in force).
+24 of the 175 bakery, confectioner and deli rows (13.7%) have a trade name that
+reads as a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 119 repeat permits are shown once.
+
+**Not placed** - 6 rows (0.4%). 74 sit at the ministry's own coordinates.
+
+**Names not shown** - 2 pins whose trade name is the operator's own name show
+their permit type.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line, except the Kyoto Municipal Subway's Tōzai Line, whose one station in Uji,
+Rokujizo, keeps its rings through the JR Nara Line.
+- Left out: 13 stations beyond it: 9 in Kyoto's Fushimi Ward and 4 in Joyo.
+- Uji and Kohata are each two separate stations, JR's and Keihan's, with their
+  own rings.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

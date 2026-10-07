@@ -22,12 +22,14 @@ Cities, in build order (`docs/build_plan_2026-10-07.md`): Toyonaka (page
    every row whose trade-name key matches any flagged row's key in the same
    city, as a foundation-style switch on for new cities (`name_city`), with a
    raising check that the privacy pass and step 2 agree; built cities stay
-   unchanged (the check prints 0 for all 41 Japanese maps besides this one).
-   Tradeoff: a common trade name that is also some operator's own name
-   elsewhere in the city would be withheld at every premises (measured on the
-   seven Kansai-1 cities: Suita 1 more pin, the other six 0). Without it,
-   Suita cannot publish. The shared change touches `japan_step2`, so East-1
-   and Regional-1 are told first.
+   unchanged until a review time re-renders them. Measured: the privacy
+   check, which already matches by trade-name key across the whole city,
+   prints 0 for the other six Kansai-1 cities, so the change would move only
+   Suita's 1 pin among them; built cities are not re-measured here. Tradeoff:
+   a common trade name that is also some operator's own name elsewhere in the
+   city would be withheld at every premises. Without it, Suita cannot publish.
+   The shared change touches `japan_step2`, so East-1 and Regional-1 are told
+   first.
 
 ## Proposals for review time (sentences no template covers)
 
@@ -54,6 +56,28 @@ Cities, in build order (`docs/build_plan_2026-10-07.md`): Toyonaka (page
   bars holding a restaurant permit stay in Food service."; the estimated share
   in **Counted**.
 
+- **Hirakata, The businesses:** "The city's food list holds fixed premises
+  only, so food trucks, stalls and vending machines are not on this map."
+  (call 154: the exclusion named, no share).
+- **Suita, The lines:** "Osaka Metro's Midosuji Line, which has one station in
+  the city, is not drawn: Esaka keeps its rings through Kita-Osaka Kyuko, whose
+  trains run on along the Midosuji Line." (call 165). **The businesses:** "The
+  food lists hold the permits in term on March 31, 2026: a permit that has run
+  out since is still counted, and one granted since is not." (Kyoto's
+  upper-bound disclosure in words).
+- **Uji:** the Tōzai bullet ("…which ends at Rokujizo, is not drawn: Rokujizo
+  keeps its rings through the JR Nara Line."); the personal-services bullet
+  ("Kyoto Prefecture publishes its lists … only as documents whose reuse needs
+  its permission"); "each is placed in Uji by its address"; and the brief's
+  open call 1 wording, "About one restaurant in seven in Kyoto Prefecture's
+  filings (outside Kyoto City) chose not to publish its address in the
+  national filing system, so some in Uji are not on this map. Where they are
+  is not known." (the brief's recommendation; the share is measured
+  prefecture-wide, never for Uji).
+- **Amagasaki, What Is Excluded:** "The JR Tōzai Line keeps one station inside
+  the city, Amagasaki (JR), and the Hankyu Itami Line one, Tsukaguchi
+  (Hankyu); each is drawn as cut."
+
 ## Brief corrections (a brief to correct, never a check to relax)
 
 - **Kakogawa:** "0 rows in any file contain 加古川市 anywhere else" holds for
@@ -65,6 +89,17 @@ Cities, in build order (`docs/build_plan_2026-10-07.md`): Toyonaka (page
   brief's measured claim is about 宇治市, and the guard now tests that.
 - **Toyonaka:** the June 2026 and later new-permit files drop the empty
   廃業年月日 column; the brief listed it for every month.
+
+### 2026-10-07 - Hirakata, Suita, Amagasaki and Uji built (Kansai-1, pages 223, 224, 227, 228; notices 170, 171, 174, 175)
+
+- **Built by three subagents (Hirakata, Suita, Amagasaki; pipeline only, each in its own `pipeline/<city>/`) and the lead (Uji)**, every shared file edited by the lead, every Overpass query and BODIK call made by the lead one at a time (process change: the plan's "up to three subagents").
+- **Hirakata: 4,607 storefronts, 12 stations.** The March 2026 food list kept whole plus the five monthly new-permit files (call 126), merged by `rebuilt_register` (3,221 permits, 2,560 restaurants, the brief's); `TERM_AS_OF` the list's own 2026-03-31, since the merge keeps the March list whole (a later date would drop the March permits ending April to August without their renewals, the brief's rejected 2,503). The registers with their five monthly files (call 155, 11 new premises, 59,835 B from the city's host). MHLW's notifications as the partial Food-shops layer (127b) with its own point (127c). Block 97.4%; 2 restaurants unplaced (a lot number with no town). Census 2.65, above the built range: no 業態 (konbini chains about 120, supermarkets 56 by trade-name word), and closures unseen between the twice-yearly lists; without the konbini and supermarket rows about 2.47, Toyonaka's and Aomori's level. Names withheld 1.
+- **Suita: 4,012 storefronts, 15 stations; PARKED (call 1 above).** The two food lists of 2026-03-31 (revised and old law) as one food kind, `TERM_AS_OF` their own date (the upper bound disclosed, Kyoto's); the registers of 2026-08-31; MHLW's notifications. Every count is the brief's: 3,330 restaurants, Food service 2,430 rows / 2,301 pins, Retail 630 + 444, Personal services 849; 0 unplaced; census 2.26. Rail: the Midōsuji Line left out (call 165); Osaka's `BRANCHES["UK"]` copied so the Umekita track beyond the city line draws as the Osaka Higashi Line, as on Osaka's map (step 1 walked 3,507 m); JR's and Hankyu's 吹田 apart; gate 3 exact on Hankyu's Senri Line (7).
+- **Amagasaki: 7,385 storefronts, 12 stations.** The permit list and the notification list (call 164) of 2026-08-31 and the three registers: every count is the brief's (Food service 3,946 rows, Retail 893 + 1,295, laundries 368 through the foundation's `type_cols5`, which reads クリーニング種別１); 116 premises in both food lists fold to one pin; 2 unplaced (the brief's 5: the foundation's rules placed 3); census 1.93. The JR Kobe Line needs no branch walk (Nishinomiya's precedent). MHLW a control, not a source (Kawasaki's).
+- **Uji: 1,281 storefronts, 12 stations.** MHLW's Kyoto Prefecture file cut to Uji by address (2,498 rows, the brief's); Food service 782 and Retail 624 rows, the brief's; block 94.3% through the foundation's `aza_insert` and `spelling5` (the brief: 55.0% without them), MHLW's own point for 74, 6 unplaced; census 1.79. **Rings halved** by the spacing rule: step 1 measured a 505 m median gap among the 12 in-city stations (the brief's 588 m counted by N02 group, folding JR's and Keihan's 宇治 and 木幡 into one each); Hiroshima's edges. 木幡 settled as Kohata (Kyoto's 西院 tie; the operators read it Kohata and Kowata) with operator suffixes. The Tōzai Line left out (calls 54 and 92).
+- **Station names, Hiroshima's style:** Hirakata 1 (御殿山), Suita 2 (the Monorail's two), Amagasaki 1 (-mae), Uji none beyond the tie.
+- **Privacy:** Hirakata, Amagasaki and Uji print 0 (1, 2 and 2 pins show their permit type); Suita prints 1 and is parked.
+- **Licences:** each read today (the entry below); Uji's is MHLW's, recorded.
 
 ### 2026-10-07 - Toyonaka, Itami and Kakogawa built (Kansai-1, pages 222, 225, 226; notices 169, 172, 173)
 

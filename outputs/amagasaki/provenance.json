@@ -1,0 +1,99 @@
+{
+  "city_barber": {
+    "as_of": "2026-08-31",
+    "bytes": 47411,
+    "dataset_page": "https://www.city.amagasaki.hyogo.jp/op_data/1000922/1001026.html",
+    "file": "riyouR80831.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T19:26:37+00:00",
+    "rows": 341,
+    "sha256": "23af356412fddad4a2ef9d9e1be1f80e77dcbe8f1d1d7e79f86e4b2ee253949d",
+    "url": "https://www.city.amagasaki.hyogo.jp/_res/projects/default_project/_page_/001/001/026/riyouR80831.csv"
+  },
+  "city_beauty": {
+    "as_of": "2026-08-31",
+    "bytes": 153760,
+    "dataset_page": "https://www.city.amagasaki.hyogo.jp/op_data/1000922/1001027.html",
+    "file": "biyouR80831.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T19:26:39+00:00",
+    "rows": 987,
+    "sha256": "f260ea6a070e127f0c059f9f4b78c425ea3927310936210c5d563a5ab5f24ec1",
+    "url": "https://www.city.amagasaki.hyogo.jp/_res/projects/default_project/_page_/001/001/027/biyouR80831.csv"
+  },
+  "city_food": {
+    "as_of": "2026-08-31",
+    "bytes": 1752694,
+    "dataset_page": "https://www.city.amagasaki.hyogo.jp/op_data/1000922/1001025.html",
+    "file": "kyoka202608.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T19:26:31+00:00",
+    "rows": 6839,
+    "sha256": "df3c548ab3aec174cacf1ff7562ecab6c0d910620069540a73fbe4ce7f3988cd",
+    "url": "https://www.city.amagasaki.hyogo.jp/_res/projects/default_project/_page_/001/001/025/kyoka202608.csv"
+  },
+  "city_laundry": {
+    "as_of": "2026-08-31",
+    "bytes": 75137,
+    "dataset_page": "https://www.city.amagasaki.hyogo.jp/op_data/1000922/1001028.html",
+    "file": "cleaningR80831.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T19:26:42+00:00",
+    "rows": 372,
+    "sha256": "23da4bcc1870ec102c3bd5effd9b38eed4136862645a1e0bc4496d4680d750fe",
+    "url": "https://www.city.amagasaki.hyogo.jp/_res/projects/default_project/_page_/001/001/028/cleaningR80831.csv"
+  },
+  "city_notify": {
+    "as_of": "2026-08-31",
+    "bytes": 467150,
+    "dataset_page": "https://www.city.amagasaki.hyogo.jp/op_data/1000922/1001025.html",
+    "file": "todoke202608.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T19:26:34+00:00",
+    "rows": 2272,
+    "sha256": "568a0566975f231b403be0c86c747e00dbbd257bd2bb162c6934cb8d94307527",
+    "url": "https://www.city.amagasaki.hyogo.jp/_res/projects/default_project/_page_/001/001/025/todoke202608.csv"
+  },
+  "isj_28202_block": {
+    "bytes": 182821,
+    "file": "28202-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:15:54+00:00",
+    "sha256": "ffc30c26bfdc14fd3442e10bad061a54134526fc118c15a05d69a05194270161",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/28202-24.0a.zip"
+  },
+  "isj_28202_chome": {
+    "bytes": 11179,
+    "file": "28202-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:15:57+00:00",
+    "sha256": "fcbcd49740450f1f43d78b5f1f3c3d220f784fc7b9bc652b1ea6c2efb10a900a",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/28202-19.0b.zip"
+  },
+  "n02": {
+    "bytes": 14903774,
+    "file": "data/japan/raw/N02-25_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-30T23:47:52+00:00",
+    "sha256": "aaf76af133b2e771e538fabc4646d2e443dc1d5a67b221382a28d744e706cc9f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip"
+  },
+  "n03": {
+    "bytes": 8361345,
+    "file": "data/japan/raw/N03-20250101_28_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:52:10+00:00",
+    "sha256": "3ff660682980d4b9f8b938341a6bc7e159c2636a0f1212f14b7c1767fbaf4c72",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_28_GML.zip"
+  },
+  "osm_station_names": {
+    "bytes": 30256,
+    "elements": 40,
+    "file": "osm_station_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-10-07T20:07:21Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](34.67,135.36,34.79,135.47);way[\"railway\"=\"station\"](34.67,135.36,34.79,135.47););out tags center;",
+    "retrieved": "2026-10-07T20:09:18+00:00",
+    "sha256": "debb14bedde5851f173c03d77ae3676cb5072b3d412849b7d5bc1465697934b9"
+  }
+}

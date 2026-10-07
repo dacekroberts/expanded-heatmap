@@ -149,7 +149,11 @@ OSM_NAME_EN_MISSING = {}
 # lowercase after a hyphen for a common word. JR's and Hanshin's 尼崎, and
 # JR's and Hankyu's 塚口, are separate N02 groups at least 821 m apart:
 # separate stations, so step 1 appends their operators (Kobe's Mikage).
-OSM_NAME_EN_OVERRIDES = {}
+# 2026-10-07: 40 objects; -mae lowercase (Hiroshima's style). The other 9 are
+# OSM's as they stand.
+OSM_NAME_EN_OVERRIDES = {
+    "尼崎センタープール前": "Amagasaki-Centerpool-mae",  # Amagasaki-Centerpool-Mae
+}
 
 # --- Coordinate reference systems -----------------------------------------
 

@@ -52,7 +52,7 @@ def main():
         ring_edges_meters=config.RING_EDGES_METERS,
         ring_labels=config.RING_LABELS,
         # The city line anchors each label on the in-city stretch of lines that
-        # run on to Kyoto, Joyo and Kumiyama. N03 is used here and
+        # run on to Kyoto and Joyo. N03 is used here and
         # NEVER drawn (the Survey Act; japan.city_boundary).
         label_focus=japan.city_boundary(config.SLUG),
         # Trade names are Japanese; this orders the Japanese faces first
