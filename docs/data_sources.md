@@ -100,7 +100,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
 | South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang, Daejeon, Gwangju, Gimhae |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
-| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki, Maebashi, Fukushima |
+| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki, Maebashi, Fukushima, Fukuyama |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional) |
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
@@ -3789,6 +3789,31 @@ batch at review time).
 - **MUST DO:** `check_personal_exposure.py maebashi` with its Japan pass, run
   2026-10-07; the verdict is in
   `docs/decisions_drafts/worktree-japan-regional-1.md` ("Maebashi built",
+  2026-10-07).<!-- /internal -->
+
+**177. Fukuyama City, MHLW and MLIT (Fukuyama) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with the Regional-1
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-04; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's two lists on
+  its CKAN catalogue declare `cc-by` with no version; the catalogue's terms
+  apply **PDL 1.0**, whose 1.7 allows use under **CC BY 4.0**, so one credit
+  meets both (Kumamoto's, 99). MHLW's open data is **PDL 1.0**, as in Sasebo's
+  (127); MLIT's 位置参照情報 and N02 (the 2025 edition) are **PDL 1.0**, as in
+  Kobe's (50). N03 (CC BY 4.0) only picks stations and is **never drawn** (the
+  Survey Act).
+- **MUST DISPLAY**: the city's 重要情報 1.1 form for a processed work,
+  `「営業許認可等施設一覧（食品衛生関係）」（福山市）（<dataset URL>）を加工して作成`, and
+  likewise for 環境衛生関係, with who processed them and the CC BY 4.0 link;
+  MHLW's 出典 line and who processed it, linking its top page only; MLIT's
+  credit lines.
+- **MUST NOT**: present the processed data as the city's or MHLW's own; use
+  city or ministry logos; claim either list complete or current (both say
+  closed premises may remain).<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py fukuyama` with its Japan pass, run
+  2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-regional-1.md` ("Fukuyama built",
   2026-10-07).<!-- /internal -->
 
 **180. Fukushima City and MLIT (Fukushima) — required, and DISPLAYED**

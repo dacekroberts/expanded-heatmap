@@ -4469,6 +4469,57 @@ line.
 - The JR Ou Line runs about 11 trains a day each way inside the city; it is
   drawn (owner, 2026-10-06).
 
+### Fukuyama - the city's food list rebuilt to August 2026, its barber, beauty and laundry registers and the national filings, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, except where the national filings
+  include notifications.
+- 1,429 national filings whose filers did not publish an address (746 of
+  them food shops; no restaurant).
+- 277 food trucks, street and festival stalls and other rows with no fixed
+  premises (178 of them addressed to the whole prefecture), 74 temporary or
+  mobile permits, 1 row addressed in another municipality and 3 empty rows
+  in the laundry register.
+- 540 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 421 school, hospital and staff canteens, 216 vending machines, 8
+  mail-order businesses, 53 premises inside hotels and inns, 26 caterers
+  (仕出し), 274 snack bars and cabarets and 123 karaoke, mahjong and
+  amusement venues.
+- 145 permits granted since June 2021 that the national filings no longer
+  hold (109 restaurants), as closed; 7 closed national filings, marked; and
+  12 permits that start after August 31, 2026 (2 in the city's list, 10 in
+  the national filings).
+
+**Counted** - the city's food permits in term on March 31, 2026, brought up
+to August 31, 2026 with its monthly lists of new and renewed permits (the
+latest permit for each premises and type, kept while in term on that date; a
+renewal that starts on September 1 waits, and the permit it replaces is
+counted); the city's barber, beauty and laundry registers as of August 31,
+2026; and the national filings as downloaded on October 4, 2026 (their
+notifications, and 44 permits that no city list holds). The registers list
+396 barbers, 1,238 beauty salons and 173 laundries, against 405, 1,209 and
+200 in the national count a year earlier. 52 of the 601 bakery, confectioner
+and deli rows (8.7%) have a trade name that reads as a factory; they are kept
+(owner, 2026-09-24).
+
+**One pin per premises** - 482 repeat permits are shown once, and 395 rows of
+the city's list for a premises already in the national filings.
+
+**Not placed** - 27 rows (0.4%), most in 水呑町三新田, a town MLIT's files do
+not hold. Another 316 sit at their town's or district's center, and 303 at
+the national filings' own coordinates.
+
+**Names not shown** - 6 pins whose trade name is the operator's own name show
+their permit type.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 7 stations beyond it: 4 in Fuchu, 2 in Ibara (Okayama
+  Prefecture) and 1 in Onomichi.
+- The Shinkansen is not drawn (Fukuyama appears as a JR station).
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

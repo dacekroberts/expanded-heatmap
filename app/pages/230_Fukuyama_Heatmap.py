@@ -43,25 +43,53 @@ else:
 # replaces this with its own caption of the sources' dates and credits.
 render_data_age("Fukuyama")
 
-# TODO: replace every TODO bullet with prose true for this city, as short
-# bullets under bold headings (app/pages/43_Seoul_Heatmap.py is the model):
-# the lines by name, what is not drawn, the area and the stations left out, the
-# source and its limitations. Detail a reference page carries stays there.
+# From the japan-city skill's template and Matsuyama's and Maebashi's pages
+# (approved wording, pre-approved for this build, 2026-09-30); the rebuild
+# and closure bullets are proposals in
+# docs/decisions_drafts/worktree-japan-regional-1.md. The dates are the lists'
+# own (config.SOURCE_AS_OF); MHLW's file states no date, so it is dated by
+# download. The ring share, 43.1%, is step 3's.
 st.markdown(
     """
 **The lines**
 
-- TODO: the lines drawn, by name (each is labeled on the map and in the legend).
-- TODO: what is not drawn, and why.
-- TODO: the area covered; stations left out are listed below.
+- Three lines are drawn, each labeled on the map and in the legend: JR West's Sanyo and Fukuen
+  lines and the Ibara Railway's Ibara Line.
+- Lines and stations come from MLIT's national railway data (国土数値情報); station names in
+  English are from OpenStreetMap. Line colors are this project's own, not the operators'.
+- Only stations inside Fukuyama City get rings, because the business data covers the city alone:
+  lines running on to Onomichi, Fuchu and Okayama Prefecture are cut at the city line. The
+  stations left out are listed below.
+- The Shinkansen is not drawn (Fukuyama appears as a JR station).
 
 **The businesses**
 
-- TODO: the data source, and any category it is missing.
+- From Fukuyama City's list of food-business permits, brought up to August 31, 2026 from its
+  March list and its monthly lists of new and renewed permits, and its registers of barbers,
+  beauty salons and laundries (as of August 31, 2026).
+- Japan has no general business license, so shops other than food shops (clothing, electronics,
+  pharmacies) do not appear: the Food shops layer is food retail only (bakeries and confectioners,
+  delis, butchers and fishmongers).
+- Shops that only notify rather than hold a permit, such as supermarkets, convenience stores and
+  greengrocers, appear only where they chose to publish in the Ministry of Health, Labour and
+  Welfare's open data (downloaded October 4, 2026), so that part of the Food shops layer is partial.
+- Permits granted since June 2021 that the ministry's list no longer holds are left out as closed,
+  and a few permits the ministry's list holds and the city's monthly lists do not are added.
+- The lists may include premises that have closed, so a dot means a permit on file, not a
+  business open today.
+
+**Reading the map**
+
+- The lists give an address but no location. Each address is matched to MLIT's address reference
+  data, which places most at their street block; where that fails, the dot sits at the ministry's
+  own coordinates for the same premises, or else at its district's center.
+- Where a trade name is its operator's own name, the dot shows its permit type instead.
+- Names and permit types are shown in Japanese, as the lists record them.
+- **About 43% of storefronts sit within a ring.**
 """
 )
 
-render_map_help("three business categories (Retail, Food service and Personal services)")
+render_map_help("three business categories (Food shops, Food service and Personal services)")
 render_excluded_stations("Fukuyama")
 render_country_links("Fukuyama")
 

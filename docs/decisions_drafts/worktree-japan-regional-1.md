@@ -72,8 +72,123 @@ notices 176-186.
   Also for review time (open call 4, precedent applied): of the 230 caterers
   left out, 161 also name a counter form (一般食堂 仕出し屋 …); a sentence
   saying so is not on the page.
+- **Fukuyama** (page 230): "From Fukuyama City's list of food-business
+  permits, brought up to August 31, 2026 from its March list and its monthly
+  lists of new and renewed permits, and its registers of barbers, beauty
+  salons and laundries (as of August 31, 2026)." (the template's first
+  business bullet with Maebashi's proposed rebuild wording) and "Permits
+  granted since June 2021 that the ministry's list no longer holds are left
+  out as closed, and a few permits the ministry's list holds and the city's
+  monthly lists do not are added." (calls 5c and 6). In its What Is Excluded
+  section, the rebuild and the waiting-renewal wording under **Counted**, the
+  145 permits left out as closed, and "The registers list 396 barbers, 1,238
+  beauty salons and 173 laundries, against 405, 1,209 and 200 in the national
+  count a year earlier." The notice (177) adds "rebuilt the city's food list
+  to 31 August 2026 from its March list and its monthly new and renewed
+  permits, left out permits granted since June 2021 that the ministry's list
+  no longer holds" to Maebashi's processed-by sentence.
+
+## Shared-code findings for review time (not changed here)
+
+- **`japan_register.rebuilt_register` ranks on the latest expiry alone**
+  (Fukuyama): a renewal that starts after the as-of then hides the permit in
+  force, and step 2's call-172 rule drops the premises (17 in Fukuyama, fixed
+  city-locally in `config.rebuilt_food` by ranking only permits started by
+  the as-of). Any city with renewal months is exposed; Higashiōsaka, built
+  on it, is worth re-measuring. It also keeps only the first non-empty
+  `FORM_COLS` value, so under `form_all` a 形態 beside a filled 業態 is lost
+  (harmless in Fukuyama).
+- **`japan_step2.own_coordinates_check`** prints and emits a chōme-tier
+  median of 741,990 m on Fukuyama: 10 rows whose MHLW point lies in
+  Fukushima or Tokyo, refused by `CITY_BBOX` and never used. Cosmetic, but
+  the figure is in the baseline.
+- **A full list kept whole plus new-permit months** cannot be one
+  `rebuilt_register` source under calls 161 and 172 (one `TERM_AS_OF` per
+  source): two sources of one `SOURCE_KIND` is the shape (Fukushima,
+  Ichinomiya, Iwaki). A line for the japan-city skill.
+- **`city_rows` trusts the file extension**: Ichinomiya's July beauty file is
+  an XLSX named .csv, read city-locally by its magic bytes. Checking the
+  bytes first in shared code would cover the next city.
 
 ## Entries
+
+### 2026-10-07 - Fukuyama built, the food list rebuilt to August 2026 and checked for closures against MHLW's live file
+
+- **Fukuyama built (page 230, notice 177), Higashiōsaka's rebuilt food
+  register plus Matsuyama's MHLW beside a complete city list: 6,365
+  storefronts (Food service 2,926, Food shops 1,665, Personal services 1,774)
+  around 18 stations on 3 lines, 43.1% of them in a ring (2,745).** On the
+  Japan foundation's rules (no `"rules"` key). Sources: the city's CKAN food
+  list of 2026-03-31 (5,880 rows) and its five monthly files since (434
+  filled rows), rebuilt to 2026-08-31; the seven earlier months read for
+  their permit numbers only; MHLW's file (8,573 rows); the barber/beauty
+  (1,634) and laundry (173) registers as of 2026-08-31. Built by a subagent
+  of the Regional-1 lead, integrated by the lead.
+- **The rebuild reproduces the brief exactly**: 6,314 rows read, 5,942 after
+  de-duplication, **5,738 in term, 4,238 restaurants**. It is city-local
+  (`config.rebuilt_food`), because `japan_register.rebuilt_register` returns
+  no permit number (the closure filter and MHLW's point key on it) and keeps
+  only the first form column (業態 before 形態); a check stops the build if
+  its in-term set ever differs from the shared function's.
+- **A renewal that starts after the as-of waits; the permit it replaces
+  stands** (call 172, applied to the rebuild). Ranked on the latest expiry
+  alone, 19 renewals in the August file that start on 2026-09-01 won their
+  premises, and step 2's call-172 rule then dropped them, so 17 premises
+  whose permit ran to 2026-08-31 left the map. The rebuild now ranks only
+  permits started by 2026-08-31: in force 5,736 (4,237 restaurants), 17 with
+  a waiting renewal; the 2 with no earlier permit wait. No direct precedent:
+  for review time.
+- **The closure filter (owner, 2026-10-05, call 6)**: 151 new-law permits
+  MHLW no longer holds, the brief exactly (115 restaurants). Read at build: 7
+  premises had been renewed in MHLW's file alone under a new number starting
+  2026-09-01, so the filter would have dropped an open premises whose renewal
+  call 172 then makes wait. A permit MHLW renewed for the same premises and
+  type under a number no city file lists is therefore not a closure (6 after
+  the rebuild; precedent: the waiting renewal above). **145 left out as
+  closed (109 restaurants); the register keeps 4,128 restaurants, 96.0% of
+  e-Stat's 4,302** (the brief 4,123, 95.8%). For review time.
+- **MHLW beside the city's list (owner, 2026-10-05, call 5)**: its 3,282
+  notifications (1,854 addressed) and 7 closed ones, and its 44 open permits
+  in no city file (34 restaurants; 10 start 2026-09-01 and wait, 15 are
+  institutional kitchens) through `config.mhlw_rows`: 836 Food shops pins and
+  6 Food service pins. Its point by permit number rides on 3,468 rebuilt
+  city rows (`OWN_POINT_FALLBACK` = food and MHLW; call 5a says "by permit
+  number", so not Matsuyama's `POINT_DONORS` name match). `SUPERSEDES` drops
+  395 city rows for an MHLW row at the same premises and bucket (mostly
+  supermarkets and konbini holding a city permit and filing a notification).
+- **Step 2:** 7,269 storefront rows; on the map 90.3% block (5,746), 4.8%
+  MHLW's point (303), 5.0% town-chōme or 大字 centre (316); 27 unplaced
+  (0.4%), most in 水呑町三新田 (MLIT's files lack it). MHLW's point against the
+  block point: median 39 m, 95.6% within 250 m (3,559 rows; the brief 38 m /
+  96.2%). Set aside: 178 area-wide addresses (広島県内 vehicles), 1 in another
+  municipality. Not a premises 102; no address published 1,429 (MHLW; no
+  restaurant); closed 7; starting after the as-of 10 (MHLW). Out by rule
+  1,735: 540 manufacturing and other non-counter types, 421 canteens, 274
+  snack bars and cabarets, 216 vending, 123 karaoke and amusement venues, 74
+  temporary or mobile, 53 inside accommodation, 26 caterers, 8 mail order.
+  482 repeat permits shown once.
+- **Registers**: barbers 396, beauty 1,238 (one file split by 種類),
+  laundries 173 (3 empty rows dropped as no premises); shares of e-Stat
+  FY2024 97.8%, 102.4%, 86.5%. No laundry sentence on the page beyond the
+  counts in What Is Excluded: the dataset gives no cause (Maebashi's was the
+  owner's call 14 for its own note).
+- The 菓子 / そうざい factory share: 52 of 601 (8.7%), kept (owner,
+  2026-09-24).
+- **Rail**: N02-25, the brief's stub test reproduced (Sanyo 5 of 131, Fukuen
+  12 of 27, Ibara 3 of 15), 18 stations (福山 and 神辺 shared), median gap
+  1,479 m: standard rings. 7 excluded (Fuchu 4, Ibara 2, Onomichi 1). OSM
+  `name:en` for all 18 (27 objects; one query under the session's Overpass
+  lock, overpass-api.de 504, kumi answered); 1 override (備後本庄
+  Bingo-Honjo, OSM's macron). No gate 3: no line wholly inside (Fukui's
+  form). No frequency floor (calls 46 and 86); JR at least hourly. Colours
+  from `line_colour_search.py` (Sanyo teal, Fukuen red-orange, Ibara green;
+  closest pair 92.7).
+- **Economic Census control:** 2,926 Food service pins against 1,737 飲食店
+  establishments in 34207: 1.68 per establishment, the brief's estimate,
+  inside the built cities' 1.56-1.92.
+- **Privacy verdict: publish.** `check_personal_exposure.py fukuyama`: the
+  Japan pass prints 0; 35 trade names in the raw files are an operator's own
+  name, 6 pins show their permit type.
 
 ### 2026-10-07 - Fukushima built, the full food list kept whole with five months of new permits, all three buckets from the city's own lists
 

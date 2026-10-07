@@ -2365,6 +2365,31 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
      "Maebashi City, MHLW and MLIT did not make and do not endorse this map.",
      False, ("Maebashi",)),
+    # Fukuyama (notice 177): the city's two CKAN lists (license_id cc-by; the
+    # catalogue's /terms apply PDL 1.0, whose 1.7 allows CC BY 4.0), each in the
+    # city's 重要情報 1.1 form for a processed work, one credit for both
+    # (Kumamoto's shape); MHLW as in Sasebo's; MLIT as in Kobe's, N02 in its
+    # 2025 edition. Written from Kumamoto's and Maebashi's approved wording under
+    # the owner's pre-approval of template prose (2026-09-30).
+    Notice(177, "Fukuyama City, MHLW and MLIT (Fukuyama)",
+     "Fukuyama's businesses: 「営業許認可等施設一覧（食品衛生関係）」（福山市）"
+     "（[https://data.city.fukuyama.hiroshima.jp/dataset/licensed_food](https://data.city.fukuyama.hiroshima.jp/dataset/licensed_food)）を加工して作成 and "
+     "「営業許認可等施設一覧（環境衛生関係）」（福山市）"
+     "（[https://data.city.fukuyama.hiroshima.jp/dataset/licensed_env](https://data.city.fukuyama.hiroshima.jp/dataset/licensed_env)）を加工して作成 "
+     "(PDL 1.0 under the catalogue's terms, which allow use under "
+     "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)); and "
+     "出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一覧」を加工して作成. "
+     "Processed by this project, which selected the storefront types, rebuilt the city's food list to "
+     "31 August 2026 from its March list and its monthly new and renewed permits, left out permits granted "
+     "since June 2021 that the ministry's list no longer holds, showed a premises in both food lists once, "
+     "placed each by its address or the ministry's own coordinates, and counted them around stations. "
+     "No list is claimed to be complete or current; the ministry's holds only filings whose applicants "
+     "agreed to publish them. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
+     "Fukuyama City, MHLW and MLIT did not make and do not endorse this map.",
+     False, ("Fukuyama",)),
     # Fukushima (notice 180): the city's lists are CC BY 2.1 JP under the
     # 福島市オープンデータ利用規約 ２(２), credited in its ２(３) form for a modified
     # work, one title per list used (the monthly files' own title,
