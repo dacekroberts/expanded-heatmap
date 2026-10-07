@@ -4,7 +4,7 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
-### 2026-10-07 - Licence reads for the Japan builds (staging, licence-read agents): Morioka and Akita
+### 2026-10-07 - Licence reads for the Japan builds (staging, licence-read agents): Morioka, Akita, Tsu, Iwaki, Ōita, Mito
 
 The A and B briefs left 23 reads pending. Regional-1's six run from staging (Tsu, Iwaki, Akita, Ōita, Mito, Morioka); Kansai-1 runs its own five (Toyonaka, Hirakata, Suita, Hyōgo Prefecture's catalogue for Itami and Kakogawa, Amagasaki) and sends the verdicts here. Each verdict below is the agent's, read 2026-10-07 by plain GET; no data file was downloaded. Build sessions write their own `docs/data_sources/japan.md` rows from these at build.
 
@@ -20,6 +20,29 @@ The A and B briefs left 23 reads pending. Regional-1's six run from staging (Tsu
   - **Clauses:** no indemnity, reimbursement or own-cost clause; the city's 免責事項 limits only its own liability.
   - **A request, not a condition:** the city asks users to report their use, through a form needing the owner's name and email. It does not block publication. Noted for the owner; nothing sent.
   - **Personal data:** the city's policy says data holding personal information is not made open, which sits oddly with the food list's 申請者名 column; the name rule already withholds those names.
+- **Tsu (Mie Prefecture on BODIK): PERMITTED WITH CONDITIONS.** CC BY 4.0 by 三重県オープンデータ利用規約 第１条; no resource sets its own licence. 第４条's own-cost sentence is fault-based (the 2026-09-24 class). The terms are accepted by use and change without notice. BODIK has no user terms of its own.
+  - **Credit:** the proposed form satisfies CC BY. The read suggests linking the three dataset pages, naming 医療保健部食品安全課, and stating the date as 2026年8月末時点, matching the monthly file used.
+  - **Must not:** use the prefecture's logo alone (第３条); imply endorsement; claim completeness.
+  - **Scope note for What Is Excluded:** the list omits vehicles, vending, stalls and temporary businesses, and 四日市市.
+  - **Tsu is unparked.**
+- **Iwaki: PERMITTED WITH CONDITIONS.** Both pages grant free use and modification and link CC BY 4.0. The food page's 「4.0日本」 names a licence that does not exist (4.0 has no ports; the linked deed is 表示 4.0 国際). The city's general open-data page still says CC BY 2.1 JP for its whole list, the food list included.
+  - **Applied:** the dataset page's own, more specific and newer CC BY 4.0, credited as "CC BY 4.0" with the general page's statement noted beside the source entry. Both readings permit the use and differ only in the licence link.
+  - **Clauses and acts:** no indemnity or cost clause. The showcase invitation is not a duty.
+- **Ōita (BODIK): PERMITTED WITH CONDITIONS.** 大分市オープンデータ利用規約 (令和5年3月15日), compatible with CC BY 4.0, which every dataset declares.
+  - **Must display (§1):** a credit in its 記載例 form, 「○○データ」（大分市）（URL）（利用日）, with 「…を加工して作成」 and the CC BY 4.0 link.
+  - **Must not:** present the data as the city's; use logos (§3); imply endorsement.
+  - **Clauses:** no indemnity or cost clause.
+  - **Open for the build:** the city masks 301 rows, and neither page says why.
+- **Mito: PERMITTED WITH CONDITIONS, on Bremen's precedent (call 196).** The dataset page says 「ライセンス CC-BY」 and 「コピーライト 水戸市役所」, with no version and no link; none of the city's 85 open-data pages names a version, and no open-data 利用規約 exists. The site-wide 著作権 section reserves copying of web pages; the dataset's own CC-BY label is the permission (the New York, Fukui and Bremen reading).
+  - **Applied (change 1, precedent decides):** accepted on the permissive reading. Unlike Bremen, nothing points to 4.0, so the credit states the licence as the city does, "CC-BY, no version given". It also gives the copyright line 水戸市役所, the title 生活衛生関係施設一覧, a link to `https://www.city.mito.lg.jp/site/open-data/4496.html`, and a modification statement, which covers every CC BY version.
+  - **Clauses:** no indemnity or cost clause.
+  - **Must not:** use the city banner as a logo; imply endorsement; say "currently operating".
+- **All six of Regional-1's reads are in;** Regional-1 is told.
+- **From Kansai-1's reads (its drafts file holds the detail):**
+  - **Hyōgo Prefecture's registers** (barber, beauty, laundry; Itami and Kakogawa): PERMITTED WITH CONDITIONS. CC BY 4.0 by the catalogue terms 3(3), which 2(1) puts above the site's copyright page; the 2.1 JP icon on the list page looks stale.
+  - **Hyōgo's food permit and notification XLSX:** AMBIGUOUS. The catalogue lists only the HTML page (CC BY), not the files. Kansai-1 applies Ōtsu's precedent (owner, 2026-10-02) and flags it for review.
+  - **Hyōgo's credit** takes the modified-work form 「この地図は、以下の著作物を改変して利用しています。[タイトル]、兵庫県」. No cost clause.
+  - **Amagasaki:** PERMITTED WITH CONDITIONS. CC BY 4.0 on each op_data page (/op_data/1000922/1001025 to 1001028) and 尼崎市オープンデータ利用規約 §2. §3 requires the source and a modification statement; §6 bars presenting the edited data as the city's. §6 and §7 are fault-based cost clauses (the 2026-09-24 class); the use report (§5) is voluntary. The brief's page 1023309 is only an encoding note.
 
 ### 2026-10-07 - Call 197 built on Cleanup's europe-split branch; the macro map's region views are Cleanup's (owner, call 198)
 
