@@ -232,8 +232,8 @@ Measured on the 3,063 premises (counts only; no name read out):
 ## Placement — the OSM address join, measured: 43.9%
 
 **OSM address objects inside relation 1207838**, fetched 2026-10-07 with
-Bucharest's query (`nwr["addr:street"]["addr:housenumber"](area.a); out
-center;`, 291,969 bytes as CSV, overpass-api.de): **4,551 objects, 466
+Bucharest's query (an `nwr` query for `addr:street` plus
+`addr:housenumber` inside the relation's area, `out center`), 291,969 bytes as CSV, overpass-api.de): **4,551 objects, 466
 street keys, 4,367 street + number pairs.** Bucharest's was 145,892, so
 Iași's is about 3% of it.
 
