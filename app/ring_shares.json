@@ -848,5 +848,65 @@
   "in_ring": 6736,
   "all": 17879,
   "map_blob": "201b9048c7564cfa355db79d031ee0b5e77b2f2f"
+ },
+ "higashiyamato": {
+  "in_ring": 548,
+  "all": 835,
+  "map_blob": "41951841d0ff81314348c768b4fe59e0a90887db"
+ },
+ "nishitokyo": {
+  "in_ring": 1619,
+  "all": 1936,
+  "map_blob": "8491c4ed8208cad2e9d973141a80a9d0cddc3a89"
+ },
+ "tama": {
+  "in_ring": 1162,
+  "all": 1419,
+  "map_blob": "18a904b21625d663aefc9ee4965335f21b6dfff2"
+ },
+ "higashimurayama": {
+  "in_ring": 1153,
+  "all": 1432,
+  "map_blob": "e87b753f25d2b7aefa22081b0e1a4581a18a5bdf"
+ },
+ "ageo_regional": {
+  "in_ring": 1367,
+  "all": 2633,
+  "map_blob": "fcf066ad68f92bd35913761ab857471fd7b584be"
+ },
+ "fuchu_tokyo": {
+  "in_ring": 2300,
+  "all": 2586,
+  "map_blob": "3e0dacd2a8193b77c27ec9f56275f2acde28252e"
+ },
+ "chofu": {
+  "in_ring": 2184,
+  "all": 2510,
+  "map_blob": "14568c6f0744e4a82f2a4c3f57423997371f24d3"
+ },
+ "tachikawa": {
+  "in_ring": 2988,
+  "all": 3392,
+  "map_blob": "d2873fac76af85ded20040658bbc937a8d57228c"
+ },
+ "hino": {
+  "in_ring": 1173,
+  "all": 1344,
+  "map_blob": "31c3f02edf180c98172abf7ad83cfbad54e3929f"
+ },
+ "soka": {
+  "in_ring": 1806,
+  "all": 2716,
+  "map_blob": "4b1d0a70463539719fd135afee66c6101e655565"
+ },
+ "tokorozawa": {
+  "in_ring": 2969,
+  "all": 3834,
+  "map_blob": "b6aa388c66c586be4c434cd92cf331732afb1df7"
+ },
+ "kasukabe": {
+  "in_ring": 1983,
+  "all": 2838,
+  "map_blob": "d8571d3690397f72fa414d85ccf93092e7f5d06b"
  }
 }
