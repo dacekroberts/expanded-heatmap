@@ -853,5 +853,55 @@
   "in_ring": 1901,
   "all": 4696,
   "map_blob": "14bc77c09c262a0cc845e6747080bc0ceb93b27b"
+ },
+ "fukuyama": {
+  "in_ring": 2745,
+  "all": 6365,
+  "map_blob": "0f36920dab2e7349e35ab7aa2773a9d387089d63"
+ },
+ "ichinomiya": {
+  "in_ring": 1887,
+  "all": 4025,
+  "map_blob": "9911688ed1610577301133d855ec4ac43a5231e0"
+ },
+ "tsu": {
+  "in_ring": 1472,
+  "all": 3234,
+  "map_blob": "044286cf42d3d853d6f726ebf953d004eb2a4b71"
+ },
+ "fukushima": {
+  "in_ring": 2013,
+  "all": 3335,
+  "map_blob": "2d0f68911d2fbccb6078220ea03ee0e9596c9d73"
+ },
+ "iwaki": {
+  "in_ring": 1296,
+  "all": 3730,
+  "map_blob": "46a520ab1fff58b37f901fe796818ac562e13cf8"
+ },
+ "akita": {
+  "in_ring": 1622,
+  "all": 4961,
+  "map_blob": "c55dcbb12c76fe4a42e7953612adff19a31c7abb"
+ },
+ "oita": {
+  "in_ring": 3290,
+  "all": 6219,
+  "map_blob": "70d92cac97ec7286e30766a390fa6e8c327764a4"
+ },
+ "gifu": {
+  "in_ring": 1844,
+  "all": 6005,
+  "map_blob": "971c59d907740279824f8194ad90c5944362b87b"
+ },
+ "mito": {
+  "in_ring": 977,
+  "all": 4040,
+  "map_blob": "f3b4b712084314990a885982cc2a65c10b46df14"
+ },
+ "morioka": {
+  "in_ring": 2303,
+  "all": 4609,
+  "map_blob": "bc8afdab1f4552623002ec2d5c134020137f8986"
  }
 }

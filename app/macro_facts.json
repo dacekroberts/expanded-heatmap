@@ -1,6 +1,7 @@
 {
   "storefronts": {
     "Aarhus": 5102,
+    "Akita": 4961,
     "Amsterdam": 13238,
     "Angers": 2530,
     "Ansan": 19711,
@@ -44,7 +45,10 @@
     "Fortaleza (Regional)": 63036,
     "Fukui": 4933,
     "Fukuoka": 29938,
+    "Fukushima": 3335,
+    "Fukuyama": 6365,
     "Ghent": 2730,
+    "Gifu": 6005,
     "Gimhae": 17879,
     "Glasgow": 4708,
     "Goyang": 27808,
@@ -59,7 +63,9 @@
     "Hiroshima": 13691,
     "Hong Kong": 21135,
     "Houston": 29912,
+    "Ichinomiya": 4025,
     "Incheon": 82671,
+    "Iwaki": 3730,
     "Kagoshima": 6586,
     "Kansas City": 3561,
     "Kawasaki": 11898,
@@ -90,9 +96,11 @@
     "Miami (Regional)": 29549,
     "Milan": 47540,
     "Minneapolis": 1793,
+    "Mito": 4040,
     "Monterrey (Regional)": 58329,
     "Montpellier": 6276,
     "Montréal": 17162,
+    "Morioka": 4609,
     "Most (Regional)": 1025,
     "Mulhouse": 2155,
     "Nagasaki": 7266,
@@ -159,6 +167,7 @@
     "Tours": 2652,
     "Toyama": 6590,
     "Toyota": 4203,
+    "Tsu": 3234,
     "Tucson": 5243,
     "Uijeongbu": 13103,
     "Utsunomiya": 8045,
@@ -170,6 +179,7 @@
     "Yokosuka": 4543,
     "Yongin": 23481,
     "Zurich": 3363,
+    "Ōita": 6219,
     "Ōtsu": 4509
   }
 }
