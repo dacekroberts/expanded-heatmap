@@ -2501,7 +2501,7 @@ _NOTICES = [
     # policy read as covering its homepage (owner, 2026-09-29, Daegu's reading). Written
     # under the owner's pre-approval of this build's prose. Covers every Korean city on
     # the register (Incheon; the Gyeonggi satellites add their names).
-    Notice(68, "Small Enterprise and Market Service (Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang (Regional), Daejeon, Gwangju, Gimhae, Gimpo, Siheung)",
+    Notice(68, "Small Enterprise and Market Service (Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang, Gunpo, Uiwang, Daejeon, Gwangju, Gimhae, Gimpo, Siheung)",
      "Storefronts for Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang, Gunpo, Uiwang, Daejeon, Gwangju, Gimhae, Gimpo and Siheung are from the Small "
      "Enterprise and "
      "Market Service's "

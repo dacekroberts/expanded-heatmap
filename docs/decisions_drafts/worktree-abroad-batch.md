@@ -80,6 +80,20 @@ tradeoff. A parked call stops only what it names.
    network): U11 has 3 of the city's 60 stops, 1 of them its alone.
    Tradeoff: the macro dot's color understates one short Stadtbahn end.
    Stops: nothing; asks only to confirm the call reaches subway.
+5. **Macro labels: Gelsenkirchen and Bremen do not clear in Europe's
+   view.** The best of ten offsets each (Gelsenkirchen right of its dot,
+   Bremen upper right) leave 4 problems at each width (12):
+   Rotterdam's pill covers Bremen's marker, Den Haag's covers
+   Gelsenkirchen's, and Berlin x Bremen and Den Haag x Gelsenkirchen
+   overlap. Rotterdam's and Den Haag's own offsets made no difference
+   (their Europe positions come from per-region overrides), and a minor
+   tier would not help (their region is Europe itself). **Recommendation: a
+   Germany view on Czechia's and Belgium's mechanism** (Berlin, Gelsenkirchen
+   and Bremen labelled there, dots only in Europe), or fold it into the
+   Europe West/East split the owner approved on 2026-10-04. Tradeoff: a new
+   view in the menu; the alternative, re-placing the Dutch and Berlin labels,
+   moves four built labels for two new ones. Stops: `check_macro_labels.py`
+   (so `check_all.py`) until decided; nothing else.
 
 ### 2026-10-07 - Gimpo built: the Gimpo Goldline on SEMAS's register, its own page (abroad-batch)
 
@@ -203,6 +217,57 @@ tradeoff. A parked call stops only what it names.
   travels without its caption carries the source line on its face. Notice
   1: rail, communes and stop names from OSM. **Open terms question: none.**
   New inputs: a city, a taxonomy, notice 154, the Swiss licence rows.
+
+### 2026-10-07 - Bremen built: BSAG's eight trams on the 2022 regional retail survey (abroad-batch)
+
+- **Privacy verdict: publish.** `check_personal_exposure.py bremen`: the
+  survey's public variant has no name, address or person field (step 2
+  stops on any field beyond its six); 2,148 pins show 19 goods-group labels.
+- **Bremen built, page 304** (pipeline by a subagent from the brief; calls
+  13 and 22-27 applied; its landing waits on parked call 1, the CC BY
+  version). The cached survey zip (sha256 checked), through the new closed
+  list `pipeline/taxonomies/bremen_einzelhandel.py` (19 goods-group codes,
+  all Retail, each with an English pin label; an unknown or relabelled code
+  stops step 2): **3,153 shops** with Gemeinde "Bremen", all inside OSM's
+  city polygon; one Delmenhorst-labelled row inside the city line stays out
+  with its municipality (call 23, the Gemeinde field decides). The catch-all
+  "Sonstige EH-Einrichtungen" 94 (3.0%) kept (call 22). `categories`
+  "Retail only" (call 24), `coverage` one_bucket.
+- **Rail.** One Overpass query (overpass-api.de, osm_base 2026-10-07). 46
+  tram relations: 37 kept on refs 1-6, 8, 10 (with short workings), the
+  night lines N1, N4 and N10 not drawn. Three fixes in Bremen's own files: an
+  untagged stop member on lines 2 and 10 dropped (22 m from Gustavstraße's
+  named node; stale-checked); Am Brill (five nodes across 166 m) and Bahnhof
+  Walle folded from per-platform names to BSAG's one name each; **line 8's
+  five centre-loop stops added by node**, since OSM's line 8 relations
+  predate BSAG's timetable change of 2026-08-17 (all five are stations of
+  other lines, so the rings are unchanged; the drawn route through the
+  centre lags OSM, and the page says so). 352 stop positions -> 164 stops,
+  **gate 3 exact on all eight lines** against BSAG's timetable index (call
+  25; BSAG_S26C: 44/33/29/49/14/25/27/32), **154 in the city**, tram 4's 10
+  in Lilienthal listed outside (call 23). Boundary: relation 62559
+  (Stadtgemeinde, AGS 04011000), 326.0 km², gated 310-340 (call 26), never
+  the Land. **Median gap 351 m: halved rings.** Headways from BSAG's line
+  timetables: lines 1, 4 and 6 every 7-8 minutes, 2, 3 and 10 every 10,
+  5 and 8 every 20 (at call 2's floor, drawn). OSM's colors; line 2 is 14.0
+  from the Retail pins, recorded, not moved (Göteborg's precedent).
+  **2,148 of 3,153 (68.1%) in a ring.** A shared-module fix is noted, not
+  made: `osm_tram` could take a "drop this unnamed member" option.
+- **Notice 156 (the Kommunalverbund, CC BY, no version)**: the Quellenvermerk
+  and the licence title exactly as written, linked to the record's licence
+  URL (no CC version claimed), the dataset's title and a link to the file,
+  the changes, no endorsement; the English sentences a proposal.
+- **Page proposals** (the brief's "The page"): the two-figure frequency
+  bullet, the line 8 bullet, "This map shows shops only, not three
+  categories. ...", "The survey dates from 2022. ..." and "Read the density
+  as a 2022 survey. ...".
+- **Downstream:** notice 156, **caption**; a card that travels without its
+  caption carries "Quellenvermerk: Kommunalverbund Niedersachsen/Bremen
+  e.V." and the licence title on its face, and the survey's date on any card
+  (the currency rule). **Open terms question: the CC BY version** (parked
+  call 1), so Bremen stays off cards and public pieces until the owner
+  rules. New inputs: a city, a taxonomy, the "Retail only" value, notice
+  156, the licence row.
 
 ### 2026-10-07 - Gelsenkirchen built: four tram lines on the City's premises survey (abroad-batch)
 

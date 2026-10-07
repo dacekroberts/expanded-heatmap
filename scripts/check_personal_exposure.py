@@ -649,6 +649,12 @@ REGISTRIES = {
     # category (config.PERSON_NAMED and PERSON_NAMED_BY_EYE, keys).
     "gelsenkirchen": dict(raw=None, trade=None, owner=None,
                           processed="businesses_clean.csv", address=None),
+    # Bremen: the Kommunalverbund's 2022 retail survey, public variant, has NO
+    # name, address or person field (step 2 stops on any field beyond its six),
+    # so a pin's title is the goods group's English label: Berlin's structural
+    # answer. Floor-area class is read to measure and never written out.
+    "bremen": dict(raw=None, trade=None, owner=None,
+                   processed="businesses_clean.csv", address=None),
     # Philadelphia likewise never loads a registrant-name column (its step 2
     # asserts six of them stay absent), and its business_name is never blank,
     # so there is no fallback pair to join against either. What it adds that no

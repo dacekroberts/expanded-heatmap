@@ -1670,6 +1670,34 @@ COLUMNS["gelsenkirchen_gewerbe"] = {
     "mobile_unit": absent(GE_SURVEY + ": it records fixed premises only"),
 }
 
+# Bremen: the Kommunalverbund's 2022 retail survey, 19 main goods groups,
+# all Retail (2026-10-07).
+BR = "a retail survey (Einzelhandelsbestand 2022): shops only, one main goods group each"
+COLUMNS["bremen_einzelhandel"] = {
+    "funeral": absent(BR + "; no funeral homes"),
+    "no_counter_food": absent(BR + "; no food service of any kind"),
+    "personal_catchall": absent(BR + "; no personal services"),
+    "adult_hostess": absent(BR + "; no adult or hostess premises"),
+    "sex_shop": absent(BR + "; no sex-shop group: such a shop is filed under a goods group and stays Retail either way"),
+    "massage_commercial": absent(BR + "; no massage"),
+    "massage_regulated": absent(BR + "; no health professions"),
+    "car_dealer": absent(BR + "; the 19 groups name no vehicle trade (R4 keeps it in any case)"),
+    "petrol_station": absent(BR + "; the 19 groups name no fuel sales (R4 keeps it in any case)"),
+    "vehicle_repair": absent(BR + "; no repairs"),
+    "gambling": absent(BR + "; no betting or gaming"),
+    "pawnbroker": absent(BR + "; no pawnbroker group: one would be filed under a goods group and stays Retail either way"),
+    "nightclub": absent(BR + "; no food service"),
+    "vet": absent(BR + "; no veterinary premises"),
+    "nonstore": absent(BR + "; it surveys retail SITES, so a nonstore seller has none"),
+    "parking": absent(BR + "; no parking"),
+    "repair": absent(BR + "; no repairs"),
+    "lodging": absent(BR + "; no lodging"),
+    "recreation": absent(BR + "; 'Sport/ Freizeit' (group 9) is sporting goods, a shop, not a gym"),
+    "pharmacy": [loc("2", "Apotheken/ Drogerie/ Parfümerie: pharmacies, drugstores, perfumeries")],
+    "optician": [loc("10", "Optik, Hörgeräte, Sanitätswaren: opticians, hearing aids, medical supply")],
+    "mobile_unit": absent(BR + "; no stall or mobile-unit group (the catch-all 19 cannot be read finer and stays Retail, owner 2026-10-05, call 1)"),
+}
+
 BERLIN_CFG = "pipeline/berlin/config.py"
 BERLIN_969 = '"nace_id": ("969",)'
 

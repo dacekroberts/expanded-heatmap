@@ -4658,31 +4658,32 @@ CITIES = [
         "country": "Germany",
         "mode": "tram",
         "in_default_view": False,
-        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
-        # pinned zoom. Run `python scripts/check_macro_labels.py`,
-        # which scores every city in every region at three widths -
-        # and which will first demand this city's label width be
-        # MEASURED in a real browser with Space Grotesk loaded, since
-        # it refuses a guessed one.
-        "label_offset": ("middle", 0, -22),
+        # Right of the dot: the best of ten offsets scored by check_macro_labels.py
+        # (python -B) at 375, 768 and 1200 (width 95.4 px, measured 2026-10-07); the
+        # north-west of Europe's view does not clear with Bremen beside it (the
+        # batch's parked call 5).
+        "label_offset": ("start", 10, 0),
     },
     {
         "name": "Bremen",
         "lat": 53.0793,
         "lon": 8.8017,
         "page": "pages/304_Bremen_Heatmap.py",
-        "blurb": "BSAG trams (TODO: list the lines)",
+        "coverage": "one_bucket",
+        "placement": "Survey coordinates (100%)",
+        "data_age": "Retail survey of March to September 2022",
+        "rail_extra": "Trams",
+        "record_kind": "Street survey or census",
+        "categories": "Retail only",
+        "blurb": "BSAG trams 1, 2, 3, 4, 5, 6, 8 and 10",
         "region": "Europe",
         "country": "Germany",
         "mode": "tram",
         "in_default_view": False,
-        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
-        # pinned zoom. Run `python scripts/check_macro_labels.py`,
-        # which scores every city in every region at three widths -
-        # and which will first demand this city's label width be
-        # MEASURED in a real browser with Space Grotesk loaded, since
-        # it refuses a guessed one.
-        "label_offset": ("middle", 0, -22),
+        # Upper right of the dot: the best of ten offsets scored by
+        # check_macro_labels.py (python -B) at 375, 768 and 1200 (width 51.4 px,
+        # measured 2026-10-07); see Gelsenkirchen's note (parked call 5).
+        "label_offset": ("start", 10, -14),
     },
 ]
 

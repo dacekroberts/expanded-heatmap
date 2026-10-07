@@ -2261,7 +2261,7 @@ into `render_site_notices()`; displayed since Newcastle landed).
 - **Bucharest's rail, boundary, sectors and address points are OpenStreetMap
   data** (ODbL, notice 1).
 
-**68. Small Enterprise and Market Service (Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang (Regional), Daejeon, Gwangju, Gimhae, Gimpo, Siheung) — required, and DISPLAYED**
+**68. Small Enterprise and Market Service (Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang, Gunpo, Uiwang, Daejeon, Gwangju, Gimhae, Gimpo, Siheung) — required, and DISPLAYED**
 (written into `render_site_notices()`; displayed since Incheon landed).
 
 - **PERMITTED WITH CONDITIONS** (<!-- internal -->`licence-read` 2026-09-29; <!-- /internal -->the rows in

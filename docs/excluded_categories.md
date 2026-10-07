@@ -3036,6 +3036,29 @@ category instead.
 302 runs on into Bochum (33 stops) and 107 and U11 into Essen (40): those stops are drawn
 with the lines but not ringed, listed on Gelsenkirchen's page. Buses, the S-Bahn and
 regional trains are not drawn.
+
+### Bremen - the 2022 regional retail survey, shops only
+
+**Only shops are on this map.** The Kommunalverbund Niedersachsen/Bremen e.V.'s 2022
+retail survey counts retail sites and nothing else, so restaurants, cafés, bars,
+hairdressers and other personal services are missing rather than excluded. The survey's
+19 main goods groups name no car dealers or petrol stations.
+
+**Nothing is excluded by type.** All 19 goods groups are shops, in every floor-area class;
+"Sonstige EH-Einrichtungen" (other retail facilities, 94 shops, 3.0%) is kept as retail
+(owner).
+
+**The survey's date.** The fieldwork ran from March to September 2022. Shops opened since
+are missing, and some that have closed are still shown.
+
+**Outside the city.** The 2,420 surveyed shops in the region's other municipalities are
+left out, Lilienthal's 119 among them. One shop the survey files under Delmenhorst, whose
+point lies inside the city line, stays out with its municipality.
+
+**Stations.** Trams 1, 2, 3, 4, 5, 6, 8 and 10, every stop in the City of Bremen (154).
+Tram 4 runs on into Lilienthal: its ten stops there are drawn with the line but not
+ringed, and listed on Bremen's page. Not drawn: BSAG's night lines (N1, N4, N10), buses
+and the Regio-S-Bahn.
 ### Seoul - Korea's permit registers: the trades Korea licenses, not every shop
 
 **Missing, not excluded.** Korea licenses food service, the personal-care trades and a set of
