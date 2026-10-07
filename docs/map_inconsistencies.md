@@ -177,8 +177,7 @@ run on top of a metro network.
   Blackpool Tramway).
 - **Trams not drawn:** Hong Kong Tramways (it runs beside the Island Line), Toronto's 18 streetcar routes, Milan (17 routes), Barcelona,
   Paris (all but T3a and T3b; T2 and T9 are stubs), Prague, Rome (all but tram
-  8), Madrid (Metro Ligero ML2 and ML3, stubs), Copenhagen (the Letbane has no stop in
-  scope), Berlin (BVG's 22 lines, an overlay on the U- and S-Bahn: they would add
+  8), Madrid (Metro Ligero ML2 and ML3, stubs), Berlin (BVG's 22 lines, an overlay on the U- and S-Bahn: they would add
   518 stops for about 7 more points of storefronts in the rings; owner,
   2026-09-28),
   London (Tramlink: about one more point of storefronts in the rings;
@@ -194,6 +193,8 @@ run on top of a metro network.
   OSM tags `route=monorail`) and the Busan–Gimhae LRT (an automated light metro),
   Kobe's Port Liner and Rokkō Liner, Osaka's New Tram, and Tokyo's Yurikamome and
   Nippori-Toneri Liner (automated guideway lines), and the Tokyo Monorail.
+  Copenhagen (Regional)'s Letbane, a light-rail line around the western suburbs, drawn
+  since the map took in the eight municipalities it serves (2026-10-07).
   Kobe's Maya and Rokkō cable cars and Kyoto's Eizan and Kurama cable cars are not
   drawn (funiculars left out in every Japanese city, owner).
 - **Reason:** "is the tram the rapid-transit system, or an overlay on one?", later
@@ -213,10 +214,11 @@ register covers them all, or because the rail network only makes sense that way.
   (Blackpool and Wyre), Seattle (Regional) (11 cities, five
   publishers, each in the places it covers), Geneva (Regional) (the 12 Swiss
   communes its trams serve), Anyang (Regional) (with Gunpo and Uiwang), Mexico City
-  (Regional) (with four State of México municipios).
+  (Regional) (with four State of México municipios), Copenhagen (Regional) (with
+  Frederiksberg and the eight Letbane municipalities).
 - **Cover more than one municipality but are not labelled:** Montréal (the
   agglomeration: 19 boroughs and 15 related municipalities), Dublin (four local
-  authorities), Copenhagen (with Frederiksberg), Tokyo (the 23 special wards, each
+  authorities), Tokyo (the 23 special wards, each
   its own municipality).
 - **Business data for only part of the area drawn:** Tokyo. The rail is drawn
   across all 23 wards, but only 8 publish a usable food-permit list; the 293
@@ -227,8 +229,8 @@ register covers them all, or because the rail network only makes sense that way.
   Recife (Cabo de Santo Agostinho). Guadalajara leaves out Tonalá for having none.
 - **Lose the most stations to the boundary:** Seoul (227), Melbourne (199),
   Sydney (157; both keep to one council's area), Paris (76), Osaka (76),
-  Copenhagen (59), Washington
-  D.C. (58), Tokyo (55), Rotterdam (52), Barcelona (50), Madrid (49), Los Angeles (Regional) (46), Boston (43).
+  Washington
+  D.C. (58), Tokyo (55), Rotterdam (52), Barcelona (50), Madrid (49), Los Angeles (Regional) (46), Copenhagen (Regional) (45), Boston (43).
 - **Reason:** a register covers one jurisdiction, so rings outside it would read as
   empty. The French cities keep to the commune so that they stay comparable with one
   another, although SIRENE covers the neighbouring communes too.
@@ -249,7 +251,7 @@ other cities.
 others most of the city is beyond walking distance of the network. That depends on
 how far the network reaches, not on the data.
 - **90% or more inside the rings:** Barcelona 100%, Paris 98%, Osaka 98%, Tokyo 98%
-  (of the eight wards with data), Melbourne 96%, Amsterdam 96%, Madrid 95%, Copenhagen 94%, Seoul 94%, Rotterdam 93%, Hong Kong 91%.
+  (of the eight wards with data), Melbourne 96%, Amsterdam 96%, Madrid 95%, Seoul 94%, Rotterdam 93%, Hong Kong 91%.
 - **Under 25%:** Houston 7%, Taoyuan 12%, Miami 13%, Brasília 14%, Fortaleza 14%, Belo Horizonte (Regional) 16%,
   Salvador 19%, Taichung 19%, Porto Alegre 20%, Edmonton 22%, São Paulo 23%,
   Recife 23%, Los Angeles (Regional) 24%, San Diego 24%, Birmingham (Regional) 17%.
@@ -611,7 +613,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Stockholm | Tunnelbana: Gröna, Röda and Blå linjen (routes T10–T19), one label per line | Pendeltåg, Roslagsbanan, Saltsjöbanan, trams; the unopened Yellow line | OpenStreetMap route relations (SL's GTFS needs a key); gate 3 exact on 100 | Kommune | 18 / 0 |
 | Göteborg | Göteborgs Spårvägar trams 1–13 | Buses, ferries, commuter trains; Lisebergslinjen (heritage) | OpenStreetMap route relations; gate 3 exact (Västtrafik) | Kommun | 5 / 0 |
 | **Denmark** | | | | | |
-| Copenhagen | Metro M1–M4 + S-tog (7 lines) | Regional/InterCity; Letbane | OpenStreetMap | Copenhagen + Frederiksberg | 59 / 0 |
+| Copenhagen (Regional) | Metro M1–M4 + S-tog (7 lines) + Letbane (light rail) | Regional/InterCity | OpenStreetMap | Copenhagen + Frederiksberg + the 8 Letbane kommuner | 45 / 0 |
 | Aarhus | Letbane L2 on the city tramway (light rail) | Odderbanen and Grenaabanen (under the 15-minute test); L1 not drawn | OpenStreetMap | Kommune | 30 / 0 |
 | Odense | Odense Letbane, one tram line | Buses and regional trains | OpenStreetMap | Kommune | 0 / 0 |
 | **Czechia** | | | | | |
@@ -822,7 +824,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | **Romania** | | | | | |
 | Bucharest | Food hygiene register | DSVSA București's registers of food units (17 category files, active rows only) | The file (the unit category), with the category text for exceptions | 5,250 / 5,994 / — | No Personal services; Retail = food shops only ("Food shops"); a quarter of premises unplaced |
 | **Denmark** | | | | | |
-| Copenhagen | National establishment register | CVR production units | DB25 (NACE Rev. 2.1) | 7,061 / 4,333 / 2,708 | Tattoo studios lost with the catch-all |
+| Copenhagen (Regional) | National establishment register | CVR production units | DB25 (NACE Rev. 2.1) | 8,549 / 4,779 / 3,217 | Tattoo studios lost with the catch-all |
 | Aarhus | National establishment register | CVR production units | DB25 (NACE Rev. 2.1) | 636 / 450 / 214 | Tattoo studios lost with the catch-all |
 | Odense | National establishment register | CVR production units | DB25 (NACE Rev. 2.1) | 603 / 343 / 208 | Tattoo studios lost with the catch-all |
 | **Czechia** | | | | | |
@@ -1030,7 +1032,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Stockholm | Register coordinates (98.4%); 85 not placed | Food only; frozen register; untyped premises before 2024 recovered by name only for 2022-23 (flagged); office canteens under company names not separated | Institutional kitchens (preschools, schools, care), caterers, event firms, food trucks and pharmacies by name; wholesale, production and "Övrigt" by type |
 | Göteborg | Register coordinates (99.0%); 29 at the register's fallback point not placed | Food only; no dates; untyped premises recovered by name only (flagged); gyms, cinemas, bingo halls and general stores registered as food premises are counted; office canteens under company names not separated | Institutional kitchens, staff restaurants, hotel breakfast rooms, caterers, mobile units, ships, vending machines and pharmacies by type or name; wholesale, production and transport by type; address shown for a premises named only as a person |
 | **Denmark** | | | |
-| Copenhagen | Address join to DAR (98.3%) | Tattoo studios lost; web shops | Same 8 kinds + laundries, 969900; personal owners' names withheld |
+| Copenhagen (Regional) | Address join to DAR, points from OpenStreetMap's copy (97.9%) | Tattoo studios lost; web shops | Same 8 kinds + laundries, 969900; personal owners' names withheld |
 | Aarhus | Address join to DAR, points from OpenStreetMap's copy (97.1%) | Tattoo studios lost; web shops | Same 8 kinds + laundries, 969900; personal owners' and franchisees' names withheld |
 | Odense | Address join to DAR, points from OpenStreetMap's copy (98.4%) | Tattoo studios lost; web shops | Same 8 kinds + laundries, 969900; personal owners' and franchisees' names withheld |
 | **Czechia** | | | |
@@ -1233,7 +1235,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Stockholm | Inspections to 2025-10-21, layer edited 2025-10-22 (fetched 2026-09-29) | B | 0.6 mi | Yes | 89% | Premises name |
 | Göteborg | No dates; the premises active on the day fetched (2026-10-01) | B | 0.3 mi | Yes | 75% | Premises name; address for a premises named only as a person |
 | **Denmark** | | | | | | |
-| Copenhagen | Weekly extract (2026-09-24) | B | 0.6 mi | Yes | 94% | Name; address for personal owners |
+| Copenhagen (Regional) | Weekly extract (2026-09-24) | B | 0.6 mi | Yes | 89% | Name; address for personal owners |
 | Aarhus | Weekly extract (2026-09-24) | B | 0.3 mi | Yes | 25% | Name; address for personal owners and franchisees |
 | Odense | Weekly extract (2026-09-24) | B | 0.3 mi | Yes | 41% | Name; address for personal owners and franchisees |
 | **Czechia** | | | | | | |
@@ -1424,7 +1426,7 @@ wording lands at review time.
    no station to a boundary.
 9. **When a map is labelled "(Regional)".** Vancouver's reasoning (DEC around line
    15422: "a map spanning two municipalities cannot honestly be called Vancouver")
-   would also cover Copenhagen (with Frederiksberg), Dublin (four local authorities)
+   would also cover Dublin (four local authorities)
    and Montréal (an agglomeration of 15 municipalities and 19 boroughs), and Tokyo
    (23 special wards, each its own municipality, though read together as the city
    of Tokyo). None is labelled; Santos, with two municipalities, is. Also, DEC (around line 1099) says

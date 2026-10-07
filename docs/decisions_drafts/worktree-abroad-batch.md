@@ -43,8 +43,9 @@ tradeoff. A parked call stops only what it names.
   the 12 `check_macro_labels.py` problems until then and leaves the region
   tables and the Dutch offsets alone.
 - **Call 6 (Greece):** "yes", in Europe East with the split; Cleanup lands it.
-- **Copenhagen (Regional):** waits for the owner to set the Datafordeler key
-  or fetch the eight Adressepunkt files.
+- **Copenhagen (Regional):** unblocked without the key. The account was
+  closed on 2026-09-24, so the owner chose OpenStreetMap's address points
+  for all ten kommuner after a measured test (entry below), and it is built.
 
 1. **Bremen: the unversioned CC BY and the database right.** The
    licence-read agent (2026-10-07) found the record's "Creative Commons
@@ -500,6 +501,116 @@ tradeoff. A parked call stops only what it names.
 - **Downstream:** an extension always counts: `outputs/anyang/`, the
   registry name, notices 68 and 1, macro facts and ring shares. Notice 68:
   caption, and the SEMAS card hold applies as before.
+
+### 2026-10-07 - Copenhagen (Regional) built: the Letbane and its eight kommuner, placed on OpenStreetMap's address points (abroad-batch)
+
+- **Placement: OpenStreetMap's DAR address points for all ten kommuner, not
+  Datafordeler (owner, 2026-10-07).** Brief call 66 d assumed "the owner's
+  existing Datafordeler key"; the account was closed on 2026-09-24
+  (`docs/decisions/2026-09-20.md`, "The Datafordeler account is closed"), so
+  the eight `Adressepunkt` files could not be fetched without reopening it.
+  Three options went to the owner: OSM's points for all ten (Aarhus's and
+  Odense's placement, the owner's standing "OSM unless we need the data
+  account, then let me know", 2026-09-27); reopen the account (one source,
+  the brief as written); or a split by area (DAR's points in the two
+  kommuner, OSM's in the eight). **The precedents for a split, read for the
+  owner:** Seattle (Regional) places one register (the Liquor Board's) on
+  King County's address points in King County and Snohomish's in Snohomish,
+  forced because neither file covers the other county; Vancouver (Regional)
+  places New Westminster by its own address points because its register
+  carries none; the UK maps tier by row (the FSA's point, else the
+  postcode's centroid). No map had split by area for convenience when one
+  source covered the whole area, so a split would have set that precedent.
+  The owner: "i'd rather not break precedent if i can afford but if we've
+  already implemented something similar i'd consider it more valid", then
+  "also want to preserve visual integrity (97% sounds good though)", which
+  led to a measured test before choosing.
+- **The test** (one keyless Overpass query of the ten kommuner's
+  `osak:identifier` points, approved in chat: 182,974 points, 12.7 MB, into
+  `data/copenhagen/raw/osm_osak_points.tsv`; counts only, no names): the
+  published central map's 14,922 DAR-placed storefronts -> **14,897 on OSM's
+  points, 25 lost (about 1 in 600), none gained; half moved 0.03 m or less,
+  6 between 5 and 10 m, none further than 20 m**. The eight kommuner: 3,780
+  of 3,907 (96.7%), against DAR's ceiling of 97.0% (117 carry no address
+  id). The owner: "yes go with option 1, build it, state the small losses
+  from OSM, note datafordeler as a returnable option internally". **The way
+  back:** a new free Datafordeler account, IT system and key (15 minutes'
+  propagation; never delete and re-create on a 401), the eight
+  `Adressepunkt` files through `fetch_sources.py`, `PLACEMENT` back to DAR
+  in `config.py`. Not a pending call; recorded so a later reader knows it
+  exists.
+- **Built** on the regional-extension skill: the switch committed off at
+  zero drift (cc9c324e), then on (fe89fcb7), the baseline re-recorded
+  deliberately and zero drift after. Step 2 on the ten CVR codes, generation
+  505 and DAR 761 (Adresse, Husnummer) from the national cache, nothing
+  refreshed: 21,653 in the divisions, 1,806 structurally excluded, 969900
+  dropped on Copenhagen's verdict (762, personally owned 83% against 41%),
+  19,085 storefronts, **18,677 placed (97.9%)**; 12,356 of 12,383 Husnummer
+  ids found as `osak:identifier`. Address shown on 7,452 (personally owned
+  7,381, the v/ marker 21, a store-number name 50). Step 2 measured 0.72 GB.
+  `fetch_sources.py` in regional mode makes no Datafordeler call and writes
+  Aarhus's provenance shape (OSM files' dates, the registers' generations).
+- **Rail.** The Letbane whitelisted on route + ref + `wikidata=Q10655459`
+  (no `operator` tag); **gate 3 exact**, 29 against the operator's 29.
+  Colour `#32ac5c` -> `#34b460` (HSL lightness +0.02, 14.4 from Metro M1's
+  green against OSM's 11.4; Copenhagen's rule: the newer line moves, Oslo's
+  ~13 margin), 16.5 from the Personal services pins, recorded. Station spread
+  at the six interchanges within 400 m (Lyngby widest, 165 m). **146
+  stations -> 101 inside the ten**, 45 outside; 719 m median nearest-
+  neighbor gap, the standard rings. **16,545 of 18,677 (88.6%) in a ring**:
+  Copenhagen and Frederiksberg 94.5%, the eight 65.2% (Rødovre 25%, its one
+  stop 10 m inside its northwest boundary).
+- **Call 66 b, the eight suburban S-tog stations: all IN.** DSB's S-tog
+  timetable (`s-tog-s26.pdf`, valid from 2025-12-14, read 2026-10-07 by a
+  subagent; dsb.dk's timetable index lists no other S-tog PDF), weekday
+  daytime: A every 10 minutes at Brøndby Strand; B every 10 at Brøndbyøster,
+  Bagsværd, Kildebakke, Skovbrynet and Stengården; E every 10 at Sorgenfri
+  and Virum. A does not stop at Sorgenfri or Virum by day (evening only; DSB's
+  Virum page names E as the line there), and OSM's A relations list them as
+  stops. Bx fails the test (every 20 minutes, peaks only), but Kildebakke,
+  its one station of the eight, is on B. **Flag for review time, not
+  asked:** Copenhagen's config and What Is Excluded's rail section say every
+  S-tog line runs every 10 minutes through the day; Bx does not. No station
+  rests on Bx alone, so nothing changes on the map.
+- **Call 66 c applied to Gentofte, Ballerup and Rudersdal as to Albertslund**
+  (the brief's flag for review time): out of the filter, their outer-ring
+  shares disclosed in What Is Excluded.
+- **Privacy verdict: publish.** `check_personal_exposure.py copenhagen` on
+  the regional map: 16,545 pins, no registrant-name field, 0 contact details;
+  4 person-like names at a residential unit, the same 4 as the published
+  city-alone map (run on its committed render for the comparison), none in
+  the eight. The structural rule (personal forms by address) unchanged.
+- **The rename and page.** "Copenhagen (Regional)" in `app/cities.py`
+  (placement 97.9%, `rail_extra` "Both", the blurb with the Letbane), the
+  page (same file), `_DENMARK`, notice 1's list and text, the reference rows.
+  Notices 30 and 31 keep "Copenhagen" in their titles: a nested "(Regional)"
+  breaks the provenance parser (notice 68). Processed files in
+  `data/copenhagen/processed/regional/`; fold back on landing (the skill).
+- **Macro label: 6 more problems in Europe's view** (18 in all, from 12).
+  The pill, 158.5 px against Copenhagen's 85.5, covers Liepāja's marker and
+  overlaps Newcastle (Regional)'s pill at 375, 768 and 1200. Of the ten
+  offsets tried, the built one, above the dot, scores best (the others 21 to
+  33). The same case as parked call 5: Cleanup's europe-split, landing after
+  this batch, separates Copenhagen from Liepāja and Newcastle, so this
+  branch leaves the region tables alone and keeps the offset.
+- **Page and notice proposals for review time:** the lines bullet with the
+  Letbane ("Twelve lines are drawn, ... and Hovedstadens Letbane, the light
+  rail around the city's western suburbs ..."); the covered area with the
+  eight municipalities named; "Rødovre has one Letbane stop, at its northwest
+  edge, so only about one of its storefronts in four sits within a ring.";
+  **the owner's "state the small losses":** "OpenStreetMap lacks a few of
+  the register's points, so about one storefront in 600 in Copenhagen and
+  Frederiksberg cannot be placed and is missing from the map."; the ring
+  share split ("nineteen in twenty in Copenhagen and Frederiksberg, about
+  two in three in the eight suburban municipalities"); the S-tog bullet
+  without "inside the city"; notice 31's last clause, "the points are
+  OpenStreetMap's copies of them" (it named Aarhus and Odense); notice 1's
+  Copenhagen clause with the Letbane and the address points.
+- **The brief corrected**: call 66 d's premise and the placement rows now
+  say what was built.
+- **Downstream:** an extension always counts: `outputs/copenhagen/`, the
+  registry name, notices 1, 30 and 31, macro facts and ring shares, the
+  Visuals card's name.
 
 ### 2026-10-07 - Abroad batch: page proposals, numbers and downstream (abroad-batch)
 

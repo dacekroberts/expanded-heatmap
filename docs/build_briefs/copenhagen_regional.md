@@ -23,7 +23,7 @@ kommune code (`regional-extension` Step 2, the first shape).
 | **a** | Extend Copenhagen's page with the Letbane, a line the page does not draw today | Draw it as a new line; the eight kommuner its 29 stops stand in join the business filter |
 | **b** | The 8 suburban S-tog stations (Brøndby Strand, Brøndbyøster, Bagsværd, Kildebakke, Skovbrynet, Stengården, Sorgenfri, Virum) are IN only if measured passing the same spacing-and-frequency test Copenhagen's S-tog passed, otherwise OUT | Run the test below; spacing and coverage are measured here, frequency is the build's read |
 | **c** | Albertslund (0165) stays out of the business filter; Glostrup Nord's ring may cross the line, as edge stations do elsewhere | `KOMMUNER` gets the eight, never 165 |
-| **d** | Placement in the added kommuner on the owner's existing Datafordeler key, one DAR `Adressepunkt` file per kommune: one placement source on the page | The build fetches eight files through `fetch_sources.py`; the key stays in the owner's environment |
+| **d** | ~~Placement in the added kommuner on the owner's existing Datafordeler key~~ **Superseded 2026-10-07:** the account was closed on 2026-09-24, so the owner chose OpenStreetMap's DAR address points (`osak:identifier`, Aarhus's and Odense's placement) for **all ten kommuner**, one placement source on the page, after a measured test | One keyless Overpass query (`fetch_sources.py`, regional mode); no Datafordeler call. Reopening the account remains a way back (the abroad-batch drafts entry) |
 
 ---
 
@@ -42,7 +42,7 @@ every kommune polygon are in `data/copenhagen/raw/` since 2026-09-24.
 | Lines | Metro M1-M4, S-tog A, B, Bx, C, E, F, H | **+ Hovedstadens Letbane (L)** |
 | Stations | 64 kept, 59 listed outside | **93** kept (the eight OUT) or **101** (IN); **53** or **45** listed outside |
 | Storefronts | 14,922 placed (`baseline.json`) | **+ 3,907** before placement; 3,790 (97.0%) resolve to a DAR Husnummer |
-| Placement | DAR via Datafordeler (98.3%) | the same, eight more `Adressepunkt` files |
+| Placement | DAR via Datafordeler (98.3%) | **as built: OpenStreetMap's DAR address points for all ten, 18,677 of 19,085 (97.9%)**; the central map loses 25 of 14,922, none moved more than 10 m |
 | Register | CVR generation 505 | the same file, the same generation |
 
 ---
@@ -278,6 +278,12 @@ stay kept, as in Copenhagen: 477800 219, 561190 183, 472700 82, 475590 39,
 (Buckets by DB25 division; the taxonomy's own labels decide at build.)
 
 ### Placement - call (d): DAR, one `Adressepunkt` file per kommune
+
+> **Superseded 2026-10-07 (owner).** This section and "The fetch, and its
+> four traps" below assumed an open Datafordeler account; it was closed on
+> 2026-09-24. Built instead on OpenStreetMap's address points for all ten
+> kommuner (`config.PLACEMENT`); the two sections are kept as the way back
+> if the account is ever reopened.
 
 - **The chain is Copenhagen's:** CVR `Adressering.Adresse` -> DAR `Adresse`
   -> `Husnummer` -> `Adressepunkt` (EPSG:25832, converted on read).
