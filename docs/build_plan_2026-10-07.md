@@ -54,7 +54,8 @@ At most three build sessions at once (owner, 2026-10-04).
 - **The foundation landed on 2026-10-07 (7ab440f9).** The five one-city address fixes landed the same day (521d28fc): Gifu's bracketed 字, Morioka's 地割, Mito's 宮町/泉町 and Matsumoto's 湯の原 as WAVE5_RULES switches, Matsue's 八雲村 as a config key (its brief says how). A session started before 521d28fc merges origin/master before Gifu, Mito and Morioka.
 - **Phase 1 starts when the foundation lands on master.** Until Abroad finishes, only two Japan sessions run at once.
 - **Each phase 2 session starts** from master after the phase 1 session in the same group has handed off.
-- **BODIK:** the Kansai sessions are the only sessions that call it, at least 20 s apart. They run one after the other.
+- **BODIK** rate-limits (Naha was blocked after about 100 rapid calls), so every session keeps its calls at least 20 s apart, one city at a time, and never uses datastore_search_sql. brief_check's metadata calls run anywhere; data pulls come from cached Step 0 files where they exist, and a needed fetch is one file at a time. The Kansai sessions, which pull most from BODIK, run one after the other (clarified 2026-10-07, after Regional-1's brief checks: the earlier "Kansai only" wording was broader than its purpose).
+- **Licence reads** a brief leaves pending are Staging's: it runs a licence-read agent per source and records the verdict and credit in its drafts file and `docs/data_sources/japan.md`. Until then a session may build the city pipeline-only (steps 1-3, privacy and census checks; no notice, page text or data_sources row), and drops it if the read comes back NOT PERMITTED.
 - **Batches are about 12 cities**, the measured size. A session at its batch's end writes its handoff and stops; the next session starts fresh.
 
 ## Page and notice numbers
@@ -144,7 +145,7 @@ Build, in this order, from each city's brief in docs/build_briefs/ and the japan
 
 The briefs' shared-code items are already in shared code (the foundation, 7ab440f9 and 521d28fc; the japan-city skill's foundation section names each rule). If one is missing, it is a parked call, not a city-local fix. Leave "rules" out of each japan.CITIES entry: the new rules are on by default for new cities, and japan.py refuses an entry that names WAVE2_RULES. A zipped register (Maebashi's, Sagamihara's) needs a city source_rows.
 
-<KANSAI ONLY: You are the only session calling BODIK; keep calls at least 20 s apart and never use datastore_search_sql.>
+<KANSAI ONLY: You pull the most from BODIK; keep calls at least 20 s apart, one city at a time, and never use datastore_search_sql.>
 <KANSAI-2 ONLY: After the cities, take Naha's one measurement from its master-list row, if BODIK answers without a block; otherwise record the refusal and stop.>
 
 At the batch's end, report to Staging Session as the plan says, and write a handoff note for the next session in your group.
