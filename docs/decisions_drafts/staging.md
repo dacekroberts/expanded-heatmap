@@ -18,7 +18,7 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
   - a second is labelled only where the competition clears it;
   - check_macro_labels tests that every city is labelled in at least one view and that each country's anchor is labelled on the landing view;
   - many-city countries take the Seoul pattern.
-  Cleanup builds it with the split branch. It is an app/ change, landing at review time.
+  Cleanup builds it with the split branch. It is an app/ change, landing at review time. On the tradeoff, the owner: "the europe concerns are null if the result is the biggest cities people would expect to see are the ones displayed. The competition is still relevant but just at a lower order of magnitude" (mid-sized cities fading below the anchors is accepted).
 
 ### 2026-10-07 - Phase 0: the Japan foundation landed; Abroad's batch ready; calls 191 to 195; Europe East to land with Thessaloniki (owner)
 
