@@ -870,9 +870,9 @@
   "map_blob": "320a71e2971cfb83d4233b8b936b7d175e886000"
  },
  "fukushima": {
-  "in_ring": 2013,
-  "all": 3335,
-  "map_blob": "d8cefcd1a345fd2238e4381e4bd261a4043e81f2"
+  "in_ring": 2016,
+  "all": 3343,
+  "map_blob": "c49a50c6da202c1c09cf10b1a0a2ddd1ed2509e0"
  },
  "iwaki": {
   "in_ring": 1296,
@@ -885,9 +885,9 @@
   "map_blob": "8df159b74ba3a6c6753e9ad072521764d4561173"
  },
  "oita": {
-  "in_ring": 3290,
-  "all": 6219,
-  "map_blob": "e6d0a29e4434595834c2738bce1d84e4c8620f9c"
+  "in_ring": 3372,
+  "all": 6406,
+  "map_blob": "8b7108f665a6b839e2623371b6967415c37760ce"
  },
  "gifu": {
   "in_ring": 1844,
