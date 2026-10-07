@@ -143,7 +143,7 @@ vehicle).
    (fault-based text, accepted as uncapped), Shizuoka Prefecture §6 (read two
    ways), PDL 1.0 §1.6, `docs/licence_positions.md` predating CARTO and
    SanGIS. Ireland's NTA indemnity stays declined (call 148).
-4. **The owner's browser acts, when convenient:** the DSVSA lists, now nine
+4. **The owner's browser acts, when convenient** (step-by-step page, 2026-10-07: https://claude.ai/artifact/81fCwtePp1RRxwsF2wRenv; Gaziantep moved to R the same day, "no email"; Pune's form is an instant download, only usage type, purpose and CAPTCHA required): the DSVSA lists, now nine
    Romanian cities (Timișoara, Iași, Cluj-Napoca, Arad, Galați, Ploiești,
    Craiova, Reșița, Oradea; every county host answers 403 to scripts since
    2026-10-06); one OKNYIR export for Budapest, Debrecen, Szeged and Miskolc;
