@@ -401,7 +401,9 @@ stays low (145); `mode: metro`; the minor tier and Japan East; the three lines
 drawn as cut (standing call, no stub); 中岡崎 and 岡崎公園前 kept apart (Kobe's
 trap 1); the vehicles out as not premises (Kobe's trap 6, Hiroshima's hook).
 
-**Open, each with a recommendation:**
+**Answered by the owner on 2026-10-06:** call 178, **the 47 permits at 舞木町字金森 kept** (MHLW's point for the twins, 127c; the chōme centroid for the rest); call 179, **the new towns south of JR 岡崎 left unplaced and disclosed with the tiers** (MHLW's point for any twin). The recommendations below are kept as the record.
+
+**Weighed, each with a recommendation:**
 
 1. **舞木町字金森: 47 permits at one site** (41 restaurants; two address
    strings; 45 with a unit in 方書; two trade names carry a service-area

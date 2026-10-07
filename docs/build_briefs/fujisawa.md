@@ -513,6 +513,8 @@ every layer.
 
 **Answered by the owner on 2026-10-06:** call 158, **restaurant rows with combined forms stay in Food service unless the cell names 給食 or 旅館** (a shared-code change for the build session: it applies to every Japanese city); call 159, **MHLW's 6 August closures dropped**; call 160, **the city health centre's yearly report approved** for the official restaurant count (read 2026-10-06: no such report on the city host; its equivalent, the 統計年報 2025's health chapter, gives the registers' counts but no food count, "Counts against the official stock"). The recommendations below are kept as the record.
 
+**Answered by the owner on 2026-10-06:** call 175, a further document only if low cost, "otherwise we can leave estimate and state as such". The smaller lead, the health centre's 令和7年度実施結果 (`/documents/9695/r7jissikekka.pdf`, **797,085 B**, HTTP 200, Last-Modified 2026-06-22, into `data/fujisawa/raw/`), was fetched: its Japanese text carries no Unicode mapping (`pdftotext` returns its digits only, 523 characters over 3 pages) and no renderer or OCR is installed, so no count can be attributed to a label. The 令和8年度監視指導計画 (5,403,382 B, same host) was not fetched. **The page states the census estimate as an estimate** ("88% to 101% at the peers' rates", the method named), never as a share. The recommendations below are kept as the record.
+
 **Weighed, each with a recommendation:**
 
 1. **Combined 詳細業種 cells.** Of 312 fixed restaurant rows with several

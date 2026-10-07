@@ -103,11 +103,11 @@ section when its item is done.** The older history is in
 **Wave 5 ran on 2026-10-06** (owner: "We can start on the next items, i want
 to get a bunch of briefs ready for build time"): the ranked queue and all 73
 pre-verdicts now have rows; the master list stands at A 32, B 27, C 7, D 16,
-R 77, 328 discarded, 10 open gaps. Calls 46 to 170 are in
-`docs/decisions_drafts/staging.md` (three wave 5 entries). Rules made: no
+R 77, 328 discarded, 10 open gaps. Calls 46 to 184 are in
+`docs/decisions_drafts/staging.md` (four wave 5 entries). Rules made: no
 frequency floor for JR or private lines in Japan (call 46), low-frequency
 stretches drawn and named (86), the one-station rule applied as written where a
-station keeps its ring through another line (165, 167 pending), shared-code
+station keeps its ring through another line (165, 167), shared-code
 rules for the build (drop expired permits, a city-name-only address is not a
 premises, combined-form restaurants stay in Food service, 自動車以外 is not a
 vehicle).
@@ -119,18 +119,15 @@ vehicle).
    Fukushima, Hirakata, Mito, Fujisawa, Morioka, Amagasaki, Suita, Itami,
    Kakogawa, Ibaraki (Osaka), Minoh, Moriguchi, Kadoma, Tama, Higashimurayama,
    Higashiyamato, Nishitōkyō, Ageo (Regional), Sōka, Tokorozawa, Kasukabe).
-   Running at handoff: Okazaki, Neyagawa, Matsue, Gifu, Koshigaya, Kawaguchi,
-   Matsumoto, Tottori, Yamagata, Yao, Takatsuki, Kure's measurement, and
-   Fujisawa's official count. Not yet briefed: Fuji (its Shizuoka Prefecture
-   lists' download not yet named in an approval). **Build sessions stay held**
+   Also passing: Okazaki, Neyagawa, Matsue, Gifu, Koshigaya, Kawaguchi,
+   Matsumoto, Tottori, Yamagata, Yao and Takatsuki, with the owner's calls
+   to 184 recorded in each. Running at handoff: Fuji (download approved,
+   call 174). Not yet briefed: Kure (call 185). **Build sessions stay held**
    (new builds paused, owner 2026-10-04), three at a time when they resume;
    each brief's open calls and "for the build" shared-code notes go with it.
-2. **Open owner calls at handoff:** 166 (Minoh's floor as "Minoh's page",
-   294), 167 (Kadoma: subway drawn cut, monorail left out), 168 ("Ibaraki
-   (Osaka)"), 169 (MHLW's extra rows for the four Tama cities, Tokyo wards'
-   precedent), 170 (Higashiyamato `metro`), 171-173 (Saitama: add the
-   prefecture's old-law list to the food source; drop post-date permits; no
-   share sentence), and whatever the running briefs return.
+2. **Open owner calls at handoff:** 185 (Kure, 69.4% of fixed premises
+   placeable: B, food only, share stated, recommended), and whatever Fuji's
+   brief returns. Calls 154-184 are in the drafts file's fourth wave 5 entry.
 3. **Liabilities list** (owner asked, 2026-10-06): a private page of every
    indemnity, reimbursement, own-cost and release clause, 67 entries,
    https://claude.ai/artifact/FMZrsssfiCtydpHroo1V16 (source data:

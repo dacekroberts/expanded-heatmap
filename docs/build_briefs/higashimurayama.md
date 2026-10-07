@@ -383,7 +383,9 @@ addresses and phones dropped at read; the snapshot as a cross-check only (call
 Leo Liner left out (calls 54, 92); the Musashino, Kokubunji and Haijima stubs
 drawn as cut (standing call); no frequency floor.
 
-**Open, with a recommendation:**
+**Answered by the owner on 2026-10-06:** call 169, **MHLW's rows the ledgers lack added** for all four Tama cities (Tokyo wards' precedent of 2026-09-24: the ledger's row kept where both hold a premises, `SUPERSEDES`; MHLW's PDL 1.0 notice line added; the share the page states stays without MHLW's rows). The recommendations below are kept as the record.
+
+**Weighed, with a recommendation:**
 
 1. **Read the notification ledger into Retail** (228 bucketed rows). *Recommend
    yes*, decided once for the four Tama cities (Tama's open call 1: the same

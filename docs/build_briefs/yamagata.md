@@ -346,7 +346,9 @@ not premises (Kobe's trap 6); MHLW's extra permits out (126); MHLW's
 notifications as partial food shops (127b); MHLW's point where the join
 misses (127c).
 
-**Open, each with a recommendation:**
+**Answered by the owner on 2026-10-06:** call 182, **MHLW's 法人名 read in memory through the permit match and the 4 matching city trade names withheld** (keys only, `pipeline/name_keys.py`). The recommendations below are kept as the record.
+
+**Weighed, each with a recommendation:**
 
 1. **The name rule through the permit match.** The city's list has no
    operator column, but MHLW's 法人名 (an operator column since 2026-10-05)

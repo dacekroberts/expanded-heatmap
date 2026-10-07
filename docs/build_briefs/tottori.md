@@ -324,7 +324,9 @@ shared-code spelling is the build's); the four towns out (the city line
 only); MHLW's point where the join misses (127c); tiers disclosed (145); the
 Inbi Line's southern piece drawn and named (call 86).
 
-**Open, each with a recommendation:**
+**Answered by the owner on 2026-10-06:** call 180, **the Inbi Line drawn cut in two pieces**, labelled on each; call 181, **the food share stated as "about 8 in 10"**, the missing old-law permits named as the reason, **with a note that the figure may understate** coverage (it is a lower bound: 85% if e-Stat's 1,990 covers the four towns). The recommendations below are kept as the record.
+
+**Weighed, each with a recommendation:**
 
 1. **The Inbi Line in two pieces.** *Recommend drawing it as cut, two
    pieces, the label on each* (standing call 3: the line is cut at the city

@@ -391,7 +391,9 @@ downloads (147); the merge (126); MHLW's extras left out (126-127); the
 Musashino stub kept as cut (standing call 3); `mode: metro`; the minor tier
 and Japan East (Kanto); no frequency floor (46).
 
-**Open, with a recommendation:**
+**Answered by the owner on 2026-10-06:** call 177, **(a), built on the CSV as published**, its date stated as "2026-03-31 with new premises to July 2026", **June's stoppage named on the page**, and the CSV re-read at build. The recommendations below are kept as the record.
+
+**Weighed, with a recommendation:**
 
 1. **June 2026 is missing from the CSV** (its title says "to July"; MHLW
    holds 11 June permits the CSV lacks). (a) **Build on the CSV as

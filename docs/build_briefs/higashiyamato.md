@@ -422,7 +422,9 @@ route and its credit (call 108); the notifications in as partial Retail (call
 stub); the minor tier and Japan East (Kanto after the retag); no frequency
 floor.
 
-**Open, with a recommendation:**
+**Answered by the owner on 2026-10-06:** call 169, **MHLW's rows the ledgers lack added** for all four Tama cities (Tokyo wards' precedent of 2026-09-24: the ledger's row kept where both hold a premises, `SUPERSEDES`; MHLW's PDL 1.0 notice line added; the share the page states stays without MHLW's rows); call 170, **`mode` is `metro`**. The recommendations below are kept as the record.
+
+**Weighed, with a recommendation:**
 
 1. **MHLW's rows the ledgers lack** (12 open permits, 67 open notifications
    here; 45 of them would be Retail). Two precedents point opposite ways:

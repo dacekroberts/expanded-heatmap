@@ -306,6 +306,8 @@ stated food share (125), the layer's own point (127c), MHLW's extra permits
 left out (126-127); notifications in Retail (the module's standing rule); no
 frequency floor.
 
+**Answered by the owner on 2026-10-06:** call 171, **the R8.3.31 old-law list added to the food source** for the four Saitama pages (Ageo (Regional), Sōka, Tokorozawa, Kasukabe), with the live new-law and old-law layers, in term on the as-of, de-duplicated, renewals dropped, **and disclosed** on the page: the old-law rows are an upper bound as of 2026-03-31, closures since unseen (Kyoto's disclosure); the build measures the list's rows for Sōka and restates the counts above. Also call 172, **rows that start after the as-of are dropped** until they are in term (`in_term`'s mirror); call 173, **no food-share sentence**: the publisher's withholding note is disclosed with no number (Matsudo's precedent), with the old-law upper bound; the review-time food-share sentence above is withdrawn by call 173.
+
 **Open, with a recommendation:** none for the owner. **For review time:** the
 page's food-share sentence, an estimate from the census ("about four
 restaurants in five"), with the reason named; *recommend* Ichinomiya's

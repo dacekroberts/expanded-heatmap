@@ -404,7 +404,9 @@ notifications left out as too thin (call 150, applied); `mode: metro`; the
 minor tier and Japan West (Chugoku after the retag); no frequency floor;
 downloads (call 147).
 
-**Open, with a recommendation:**
+**Answered by the owner on 2026-10-06:** call 183, **built with the tiers disclosed** (call 145), the coordinates bullet stating both shares; call 184, **Ichibata's eight timetable PDFs approved for the build's gate 3** (counts only, never reproduced). The recommendations below are kept as the record.
+
+**Weighed, with a recommendation:**
 
 1. **The block share, 81.3%, below Kakogawa's 86.5%** (the lowest a Japanese
    brief has carried to build). Call 145 covers it, but 91 premises (9.6%)

@@ -377,7 +377,9 @@ East (Kanto after the retag); the monorail's one station left out (calls 54,
 92); the Keiō Line's one station drawn as cut (standing call); the 38 m pairs
 kept apart (precedent); no frequency floor.
 
-**Open, with a recommendation:**
+**Answered by the owner on 2026-10-06:** call 169, **MHLW's rows the ledgers lack added** for all four Tama cities (Tokyo wards' precedent of 2026-09-24: the ledger's row kept where both hold a premises, `SUPERSEDES`; MHLW's PDL 1.0 notice line added; the share the page states stays without MHLW's rows). The recommendations below are kept as the record.
+
+**Weighed, with a recommendation:**
 
 1. **Read the notification ledger into Retail** (357 bucketed rows: konbini,
    supermarkets, greengrocers, packaged-food shops). *Recommend yes*: it is

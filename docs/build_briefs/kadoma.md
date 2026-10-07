@@ -291,7 +291,9 @@ extent, rounded out: (34.71, 135.57, 34.75, 135.63).
 `mode: metro`; the minor tier; no frequency floor (call 46); the laundry gap
 disclosed.
 
-**Open, with a recommendation:**
+**Answered by the owner on 2026-10-06:** call 166, the floor is Minoh's page (294), so Kadoma (339) is built; call 167, **the one-station rule applied as written**: the Nagahori Tsurumi-ryokuchi Line's one station (門真南) **drawn cut** (no other line keeps its ring), and the Osaka Monorail at 門真市 **left out** (Keihan keeps the ring), as Moriguchi's 大日. The recommendations below are kept as the record.
+
+**Weighed, with a recommendation:**
 
 1. **The floor.** Kadoma counts **339 premises** (93 barbers, 247 beauty
    salons): under the "roughly 350" the floor was stated in, above **Minoh's

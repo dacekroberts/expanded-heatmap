@@ -273,7 +273,9 @@ Japanese calls; `mode: metro`; the minor tier, Japan West now and Osaka
 Prefecture after the retag; no frequency floor (call 46); the laundry gap
 disclosed.
 
-**Open, with a recommendation:**
+**Answered by the owner on 2026-10-06:** call 166, **Minoh stays in B and the floor reads as "Minoh's page"** (294 measured premises), so Moriguchi (375) and Kadoma (339) clear it. The recommendations below are kept as the record.
+
+**Weighed, with a recommendation:**
 
 1. **Minoh measures 294 premises, not about 350.** The band (call 91) and
    the floor for Moriguchi and Kadoma (call 115) both rested on the

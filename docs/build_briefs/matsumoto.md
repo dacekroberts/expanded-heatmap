@@ -405,7 +405,9 @@ from `docs/session_roles.md`.
 (call 133), with food measured here; `mode: metro`; the minor tier and Japan
 East (Chubu after the retag); no frequency floor; downloads (calls 133, 147).
 
-**Open, with a recommendation:**
+**Answered by the owner on 2026-10-06:** call 176, **Alpico's timetable PDF approved for the build** (one file, the 2026-03-14 timetable; counts only, never reproduced) for gate 3 and the Kamikōchi Line's frequency. The recommendations below are kept as the record.
+
+**Weighed, with a recommendation:**
 
 1. **Call 133's answer: food stays off** (B, personal services only). The
    ledger lifts MHLW's 34.7% of fixed restaurant premises to 42.2% today

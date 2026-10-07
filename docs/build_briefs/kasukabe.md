@@ -328,8 +328,9 @@ positions (call 143); the registers' months merged (call 126); notifications
 in Retail (Tokyo's rule); the publisher's own point where the block join
 misses (call 127c).
 
-**Open, with a recommendation** (the same three as Tokorozawa's; decide them
-once for the four Saitama cities):
+**Answered by the owner on 2026-10-06:** call 171, **the R8.3.31 old-law list added to the food source** for the four Saitama pages (Ageo (Regional), Sōka, Tokorozawa, Kasukabe), with the live new-law and old-law layers, in term on the as-of, de-duplicated, renewals dropped, **and disclosed** on the page: the old-law rows are an upper bound as of 2026-03-31, closures since unseen (Kyoto's disclosure). Also call 172, **rows that start after the as-of are dropped** until they are in term (`in_term`'s mirror); call 173, **no food-share sentence**: the publisher's withholding note is disclosed with no number (Matsudo's precedent), with the old-law upper bound. The recommendations below are kept as the record.
+
+**Weighed, with a recommendation** (the same three as Tokorozawa's; decided once for the four Saitama cities):
 
 1. **Add the R8.3.31 old-law list to the food source.** *Recommend it*:
    1,475 restaurants against 1,265 (+210, about 17%), the old-law rows an

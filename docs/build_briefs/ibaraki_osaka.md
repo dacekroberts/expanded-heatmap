@@ -315,7 +315,9 @@ Japanese calls above; `mode: metro`; the minor tier, Japan West now and
 Osaka Prefecture after the retag; no frequency floor (call 46); the laundry
 gap disclosed.
 
-**Open, with a recommendation:**
+**Answered by the owner on 2026-10-06:** call 168, **the page is named "Ibaraki (Osaka)"**. The recommendations below are kept as the record.
+
+**Weighed, with a recommendation:**
 
 1. **No Food layer from MHLW.** MHLW's prefecture file holds 33 addressed
    restaurants in the city against 830 census establishments (4%), a very
