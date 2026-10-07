@@ -71,11 +71,13 @@ At most three build sessions at once (owner, 2026-10-04).
 
 ## Session prompts
 
-Start each session in the main checkout, not in the app's worktree mode, which gives a random name. Put this line above the pasted prompt: "First, enter a new worktree named <name> (use the EnterWorktree tool), then follow the prompt below." The session then makes `.claude/worktrees/<name>` on branch `worktree-<name>`, as staging and cleanup did.
+Start each session in the main checkout, not in the app's worktree mode, which gives a random name. Each prompt's first line has the session enter its own named worktree, which makes `.claude/worktrees/<name>` on branch `worktree-<name>`, as staging and cleanup did.
 
 ### Japan foundation
 
 ```
+First, enter a new worktree named japan-foundation (use the EnterWorktree tool), then continue.
+
 You are the Japan foundation session for expanded-heatmap (worktree japan-foundation). Read docs/build_plan_2026-10-07.md first: its rules and usage check-ins bind you. No city is built here.
 
 1. Compile the checklist. Take every "⚠️ Shared code" item in the Japanese briefs under docs/build_briefs/ for the cities in the plan's table. Add the owner's rules in docs/decisions_drafts/staging.md:
@@ -96,6 +98,8 @@ You are the Japan foundation session for expanded-heatmap (worktree japan-founda
 ### Abroad
 
 ```
+First, enter a new worktree named abroad-batch (use the EnterWorktree tool), then continue.
+
 You are the Abroad build session for expanded-heatmap (worktree abroad-batch). Read docs/build_plan_2026-10-07.md first: its rules and usage check-ins bind you.
 
 Build, in this order, from each city's brief in docs/build_briefs/:
@@ -114,6 +118,8 @@ At the batch's end, report to Staging Session as the plan says.
 ### Japan build sessions (East-1, Kansai-1, Regional-1, East-2, Kansai-2, Regional-2)
 
 ```
+First, enter a new worktree named <WORKTREE> (use the EnterWorktree tool), then continue.
+
 You are the <NAME> build session for expanded-heatmap (worktree <WORKTREE>). Read docs/build_plan_2026-10-07.md first: its rules and usage check-ins bind you. Start from origin/master, which holds the Japan foundation's shared-code rules.
 
 Build, in this order, from each city's brief in docs/build_briefs/ and the japan-city skill: <CITIES FROM THE PLAN'S TABLE>.
