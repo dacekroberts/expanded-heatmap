@@ -71,9 +71,14 @@ BODIK answers (`docs/build_plan_2026-10-07.md`). Pages 251-257, notices
   doc and row drafts. The lead wrote every shared file.
 - **Usage**: the batch took weekly usage from 51% to about 58%.
 
-## Open owner calls that touch your cities
+## Owner calls answered after the batch (2026-10-07)
 
-- Toyonaka's register months (call 151) are still open with the owner.
-- Parked call 1 (the name rule across premises) is a shared change to
-  `japan_step2`; if the owner approves it, it may land before your cities and
-  change your step 2's withheld count.
+- **Call 205: the name rule crosses premises.** `name_city`, a WAVE5_RULES
+  switch in `japan_step2`, is on for every new city: a trade name flagged
+  anywhere in the city is withheld everywhere in it. Cleanup lands the switch
+  alone (fe85a793, call 209) and switches it on for six built cities whose
+  live maps showed 13 names. Your cities read it by default; the privacy
+  check must still print 0 after step 3.
+- **Call 151:** Toyonaka's register was rebuilt to 2026-08-31 with its 2026
+  monthly files, by number. A city whose register has monthly new and closed
+  lists on BODIK takes them the same way.
