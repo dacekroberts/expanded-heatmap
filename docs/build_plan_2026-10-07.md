@@ -31,7 +31,7 @@ The machine (Ryzen 7 5700X, 16 threads, 32 GB) is not the bottleneck. Approvals,
 4. **Build sessions never edit `docs/city_master_list.md`.** Staging moves a wave's cities to Built in one pass after each landing, and republishes the private pages. A build lands in one push at the end of its batch, after review time; `app/cities.py` conflicts are resolved keep-both.
 
 **Usage check-ins (owner):** "pause and check in with me (here or in cleanup) before continuing when weekly usage hits a multiple of ten."
-- Check `get_usage` between cities. The weekly read 42% on 2026-10-07, so the next stop is 50%, then 60%, and so on.
+- Check `get_usage` between cities. The owner pre-approved continuing past 50% ("we are approaching 50 and I am pre-okaying continuation to 60"; "new check in at 60%, not 50", 2026-10-07), so the next stop is 60%, then 70%, and so on.
 - At a crossing: finish the current step, commit clean, and stop. Tell the owner in your own chat and send one line to Staging Session. Continue only on the owner's word.
 - All sessions share one pool, so one crossing stops every session.
 - The 5-hour window's 90% ceiling still applies.
@@ -75,6 +75,7 @@ A session that runs out asks Staging for more. Unused numbers are released when 
 
 ## Rules every build session follows
 
+- **The macro map's region views are Cleanup's** (owner, call 198, 2026-10-07: "198 yes, cleanup builds them"). Cleanup builds Japan's eight regions plus Osaka Prefecture on its own branch at the phase 1 review time, and Europe West, Europe East, Germany and Benelux are on its europe-split branch (call 197). Build sessions never add or change region views, REGION_LABELS_ALSO, label tiers or macro label offsets. This overrides the japan-city skill's "made by the first wave-4 city to land". A check_macro_labels failure only for new cities labelled in no view goes in the batch report and is left.
 - Read CLAUDE.md, `docs/session_roles.md` and the session's skills.
 - Run `python scripts/brief_check.py <city>` before any code; a failing check is a brief to correct.
 - Apply each brief's "Answered by the owner" calls as written, and log every judgment call in `docs/decisions_drafts/<branch>.md`.
