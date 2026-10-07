@@ -3,10 +3,12 @@ never runs this file, and every step exits naming it when its cache is missing.
 
     python pipeline/oita/fetch_sources.py [city|isj|mlit|osm|control|all] [--force]
 
-  * city    - the city's food-permit list (as of 2026-09-01) and its barber,
-              beauty-salon and laundry lists (as of 2026-03-31), each a CSV on
-              BODIK (CC BY 4.0, the 大分市オープンデータ利用規約); MHLW's open
-              data for Ōita (PDL 1.0);
+  * city    - the city's food-permit list (as of 2026-09-01), its barber,
+              beauty-salon and laundry lists (as of 2026-03-31) with the 2026
+              monthly lists of new beauty salons and laundries (call 211), and
+              its food-notification list (as of 2026-09-01; call 212), each a
+              CSV on BODIK (CC BY 4.0, the 大分市オープンデータ利用規約); MHLW's
+              open data for Ōita (PDL 1.0);
   * isj     - MLIT 位置参照情報 for the one municipality (44201), block (24.0a)
               and town-chōme (19.0b) (PDL 1.0);
   * mlit    - MLIT N02-25 railways and N03 Ōita administrative areas, into
@@ -17,7 +19,9 @@ never runs this file, and every step exits naming it when its cache is missing.
   * control - the Economic Census table for the join control (shared cache).
 
 A file already on disk is kept (every city file and the ISJ files were
-downloaded at Step 0, 2026-10-06) and recorded, dated by its modification
+downloaded at Step 0, 2026-10-06, the month files and the notification list
+on 2026-10-07, one request at a time 20 s apart with their URLs from BODIK's
+package_show) and recorded, dated by its modification
 time; --force re-downloads. Each file is recorded in
 outputs/oita/provenance.json (bytes, sha256, when). The work is
 pipeline/countries/japan_fetch.py, shared by every Japanese city.

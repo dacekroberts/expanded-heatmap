@@ -4720,7 +4720,7 @@ CITIES = [
         "page": "pages/236_Oita_Heatmap.py",
         "coverage": "narrowed",
         "placement": "Joined to address blocks (90.2%); ministry coordinates where missed",
-        "data_age": "City food list as of 2026-09-01, registers as of 2026-03-31; ministry notifications fetched 2026-10-06",
+        "data_age": "City food list as of 2026-09-01, registers as of 2026-03-31 plus new registrations to 2026-08-31; ministry notifications fetched 2026-10-06",
         "rail_extra": "Suburban rail",
         "record_kind": "Permit registers",
         "categories": "Retail thin",

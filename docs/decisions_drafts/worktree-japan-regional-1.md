@@ -55,6 +55,10 @@ notices 176-186.
    publishes no closures, so an upper bound) and one more approval, against
    registers five months older than the food leg (stated on the page and in
    data_age).
+   **Resolved 2026-10-07 by call 211** (owner, relayed by Staging): the
+   five beauty months (26 rows) and the July laundry month (2 rows) were
+   fetched and read with their registers as recommended; they hold new
+   premises only, so an upper bound (the Ōita entry below).
 4. **Ōita: the city's own notification list** (`442011_licensed_facility`,
    すべての営業届出施設一覧 as of 2026-09-01, CSV 287,712 B, same publisher and
    licence; the brief's open call 2(a)). Not approved and not fetched; MHLW's
@@ -62,6 +66,13 @@ notices 176-186.
    review time: the city's complete list would make the Food shops layer
    complete rather than partial. *Tradeoff:* one approval, a schema read and
    a re-render, against a Food shops layer the page calls partial.
+   **Approved 2026-10-07 by call 212** (owner, relayed by Staging),
+   **fetched, not yet wired:** its schema is read (1,424 rows, 26 types,
+   48 addresses masked, 66 大分市内一円), but step 2's column check stops on
+   its notifier column 届出者氏名, which `japan_register.OPERATOR_COLS`
+   does not list (a shared module, outside the city session's scope). With
+   the spelling added in memory: 6,406 storefronts, Food shops 1,668
+   against 1,508 (the Ōita entry below).
 5. **Gifu (page 237, notice 184; built, held for one call): the rings.** The
    median nearest-station gap is 545 m, inside the spacing rule's 540-570 m
    owner band (tram-city skill section 3; Ōtsu's and Uijeongbu's builds
@@ -573,6 +584,21 @@ notices 176-186.
   thinnest stretch runs 25 to 26 trains a weekday each way.
 - The licence row cites the 大分市オープンデータ利用規約 by title and date only:
   staging's record gives no URL.
+- **2026-10-07, calls 211 and 212 (owner, relayed by Staging).** The
+  register months (five beauty CSVs, 26 rows; one laundry CSV, July, 2
+  rows; no barber set) are read with each register, Ichinomiya's
+  `source_rows`. They hold new premises only (the register's columns, no
+  closure column; the city publishes no closures), so an upper bound.
+  Personal services 1,809 to 1,836 (one new row unplaced); 6,246
+  storefronts, 53.0% in a ring (3,308); census 1.68; the Japan pass prints
+  0. The city's notification list is fetched and its header read, not
+  wired: step 2 stops on 届出者氏名, an operator column
+  `japan_register.OPERATOR_COLS` lacks. Measured in memory with it added:
+  6,406 storefronts (Food service 2,902, Food shops 1,668, Personal
+  services 1,836); MHLW's file then a points donor only (Toyama's
+  precedent: 21 points, 15 for permits and 6 for notifications), its
+  notifications no longer drawn. BODIK: 3 `package_show` calls and 7
+  downloads, one at a time, 22 s apart.
 
 ### 2026-10-07 - Akita built, the city's full food list of October 2026, its barber and beauty registers and MHLW's notifications
 

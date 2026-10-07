@@ -21,6 +21,61 @@
     "sha256": "9af60509f3083a038046ea43f9ddb92632657b6b09783c1fefd090230858da6e",
     "url": "https://data.bodik.jp/dataset/38ee3063-3b34-4a32-bff3-2ad92611b7a4/resource/66130b2d-f2d2-4be2-b163-c0e41f5a33d0/download/20260331biyousyo.csv"
   },
+  "city_beauty_04": {
+    "as_of": "2026-05-01",
+    "bytes": 713,
+    "dataset_page": "https://data.bodik.jp/dataset/442011_beauty_salon_new",
+    "file": "202604biyousyo.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-07T20:50:18+00:00",
+    "rows": 6,
+    "sha256": "e19099069220e1e5507251defaf0b80e56828cea4951e89e254d4a1e729c4db5",
+    "url": "https://data.bodik.jp/dataset/8f45b2b8-549e-4ca4-a1e8-bd54439b2052/resource/e1ba96f7-6e10-42b5-abe9-a78bc13b4d8a/download/202604biyousyo.csv"
+  },
+  "city_beauty_05": {
+    "as_of": "2026-06-01",
+    "bytes": 669,
+    "dataset_page": "https://data.bodik.jp/dataset/442011_beauty_salon_new",
+    "file": "202605biyousyo.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-07T20:50:40+00:00",
+    "rows": 7,
+    "sha256": "dcdf71a6143347a33bf23002e225db53b17a0ee32be147d0b50bfc61c736f87c",
+    "url": "https://data.bodik.jp/dataset/8f45b2b8-549e-4ca4-a1e8-bd54439b2052/resource/7d217404-43ac-405d-a9ec-f0ff72ec19ec/download/202605biyousyo.csv"
+  },
+  "city_beauty_06": {
+    "as_of": "2026-07-01",
+    "bytes": 622,
+    "dataset_page": "https://data.bodik.jp/dataset/442011_beauty_salon_new",
+    "file": "202606biyousyo.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-07T20:51:02+00:00",
+    "rows": 6,
+    "sha256": "55e15391c67ecda1c35502e04961f3176307d06e8ffcd3e05ba765b6a03f6f0f",
+    "url": "https://data.bodik.jp/dataset/8f45b2b8-549e-4ca4-a1e8-bd54439b2052/resource/1ed49cbf-4d74-444e-a854-0106fba8f242/download/202606biyousyo.csv"
+  },
+  "city_beauty_07": {
+    "as_of": "2026-08-01",
+    "bytes": 240,
+    "dataset_page": "https://data.bodik.jp/dataset/442011_beauty_salon_new",
+    "file": "202607biyousyo.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-07T20:51:24+00:00",
+    "rows": 2,
+    "sha256": "f6b667069be19247c43311dc3d062196ef9e1bf49381dadca7996c0175585338",
+    "url": "https://data.bodik.jp/dataset/8f45b2b8-549e-4ca4-a1e8-bd54439b2052/resource/3c97cb82-1ee2-481b-9f73-23a344787555/download/202607biyousyo.csv"
+  },
+  "city_beauty_08": {
+    "as_of": "2026-09-01",
+    "bytes": 633,
+    "dataset_page": "https://data.bodik.jp/dataset/442011_beauty_salon_new",
+    "file": "202608biyousyo.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-07T20:51:47+00:00",
+    "rows": 5,
+    "sha256": "bc295425ca26f0eb721afcf71da4f63e53a37aed7b0bdb98fcf5f3d3e721f132",
+    "url": "https://data.bodik.jp/dataset/8f45b2b8-549e-4ca4-a1e8-bd54439b2052/resource/d8c82c36-d606-4fdc-92a8-3e6ce8067ea6/download/202608biyousyo.csv"
+  },
   "city_food": {
     "as_of": "2026-09-01",
     "bytes": 1311758,
@@ -43,6 +98,17 @@
     "sha256": "8c2ddec4690ceebc6616ad4652e29d2471c24fdeffbb90af3fcf5825e80ede7b",
     "url": "https://data.bodik.jp/dataset/1ab16997-d139-4bba-84e9-e819df58675f/resource/a10fb2da-35e7-4e9e-866b-2e19769b7300/download/20260331kuriningu.csv"
   },
+  "city_laundry_07": {
+    "as_of": "2026-08-01",
+    "bytes": 330,
+    "dataset_page": "https://data.bodik.jp/dataset/442011_cleaning_new",
+    "file": "202607kuriningu.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-07T20:52:09+00:00",
+    "rows": 2,
+    "sha256": "a8161ac0c709006da55e48a8648e8997d183c419b64cdf1f65bbb49fa5aa3898",
+    "url": "https://data.bodik.jp/dataset/eb03c13a-dbad-43ab-a5c2-c42c07939fd6/resource/be28d1a9-9fe8-4288-a625-cc183fa43411/download/202607kuriningu.csv"
+  },
   "city_mhlw": {
     "as_of": null,
     "bytes": 515890,
@@ -53,6 +119,17 @@
     "rows": 1602,
     "sha256": "c7510c0b2bd539f7e5d9bdea0f0d4c01dc95b68ed065b7f482cde77242ee6555",
     "url": "https://i2fas.mhlw.go.jp/faspub/page/opendatadownload.jsp?param=44201_food_business_all.csv"
+  },
+  "city_notify": {
+    "as_of": "2026-09-01",
+    "bytes": 287712,
+    "dataset_page": "https://data.bodik.jp/dataset/442011_licensed_facility",
+    "file": "r080901alltodoke.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-07T20:52:32+00:00",
+    "rows": 1424,
+    "sha256": "52369bd5c830fb358896ee33c3491857a622ebeeb56a30a2af1741fbc8564513",
+    "url": "https://data.bodik.jp/dataset/be87ff3e-fb41-4f46-be45-1609d7550887/resource/cfa63aff-dc94-495a-9574-38b4c56a0db7/download/r080901alltodoke.csv"
   },
   "isj_44201_block": {
     "bytes": 656100,

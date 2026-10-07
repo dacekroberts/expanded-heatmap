@@ -4681,18 +4681,19 @@ line.
 
 **Counted** - the permits in the city's food list in term on September 1,
 2026 (5,053 restaurants, against 4,971 in the national count of March 31,
-2025); its barber, beauty and laundry lists of March 31, 2026; and the
-national notifications as downloaded on October 6, 2026. The lists hold 391
-barbers, 1,308 beauty salons and 186 laundries, against 391, 1,262 and 224 in
-the national count a year earlier. 25 of the 873 bakery, confectioner and deli
+2025); its barber, beauty and laundry lists of March 31, 2026, with the 26
+beauty salons and 2 laundries it listed as new each month to August 31,
+2026; and the national notifications as downloaded on October 6, 2026. The
+March lists hold 391 barbers, 1,308 beauty salons and 186 laundries, against
+391, 1,262 and 224 in the national count a year earlier. 25 of the 873 bakery, confectioner and deli
 rows (2.9%) have a trade name that reads as a factory; they are kept (owner,
 2026-09-24).
 
 **One pin per premises** - 221 repeat permits are shown once, and 92 rows of
 the city's food list for a premises already in the national notifications.
 
-**Not placed** - 158 rows (2.4%), 60 of them barbers, beauty salons and
-laundries, at addresses MLIT's files do not hold. Another 539 sit at their
+**Not placed** - 159 rows (2.4%), 61 of them barbers, beauty salons and
+laundries, at addresses MLIT's files do not hold. Another 543 sit at their
 town's center, 6 at the center of their 小字 (a named part of a town), and 66
 at the ministry's own coordinates.
 

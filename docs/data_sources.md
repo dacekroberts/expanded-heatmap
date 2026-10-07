@@ -3935,6 +3935,9 @@ batch at review time).
   [`data_sources/japan.md`](data_sources/japan.md)). Every list is **CC BY
   4.0** as its BODIK dataset records (`cc-by-40-intl`), under the
   大分市オープンデータ利用規約 (令和5年3月15日), which is compatible with it.
+  The monthly lists of new beauty salons and laundries (`442011_beauty_salon_new`,
+  `442011_cleaning_new`; call 211, used 2026-10-07) record the same licence
+  (`package_show`, 2026-10-07).
   MHLW's open data is **PDL 1.0**, as in Sasebo's (127); MLIT's 位置参照情報 and
   N02 (the 2025 edition) are **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0)
   only picks stations and is **never drawn** (the Survey Act).

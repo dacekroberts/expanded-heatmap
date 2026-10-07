@@ -44,13 +44,13 @@ else:
 render_data_age("Ōita")
 
 # From the japan-city skill's template, Ichinomiya's page (the ministry's
-# notifications and its points) and Maebashi's (approved wording,
+# notifications, its points and its register months) and Maebashi's (approved wording,
 # pre-approved for this build, 2026-09-30); the withheld-address bullet is a
 # proposal in docs/decisions_drafts/worktree-japan-regional-1.md (Fukuoka's
 # approved sentence with the city in the ministry's place; the city's pages
 # give no reason). The dates are the lists' own (config.SOURCE_AS_OF); one in
 # 20 is 250 withheld restaurants of the list's 5,053 (4.9%); the ring share,
-# 52.9% (3,290 of 6,219), is step 3's.
+# 53.0% (3,308 of 6,246), is step 3's.
 st.markdown(
     """
 **The lines**
@@ -66,7 +66,8 @@ st.markdown(
 **The businesses**
 
 - From Ōita City's list of food-business permits (as of September 1, 2026) and its registers of
-  barbers, beauty salons and laundries (as of March 31, 2026).
+  barbers, beauty salons and laundries (as of March 31, 2026), with the new registrations it has
+  listed each month since, to August 31, 2026.
 - Japan has no general business license, so shops other than food shops (clothing, electronics,
   pharmacies) do not appear: the Food shops layer is food retail only (bakeries and confectioners,
   delis, butchers and fishmongers).

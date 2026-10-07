@@ -2516,7 +2516,9 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
      "Akita City, MHLW and MLIT did not make and do not endorse this map.",
      False, ("Akita",)),
-    # Ōita (notice 183): the city's four BODIK lists, cc-by-40-intl as each
+    # Ōita (notice 183): the city's six BODIK lists (the monthly lists of new
+    # beauty salons and laundries added on call 211, 2026-10-07, used
+    # 2026-10-07), cc-by-40-intl as each
     # dataset records, credited in the 大分市オープンデータ利用規約's §1 記載例
     # form (「○○データ」（大分市）（URL）（利用日）を加工して作成) with the CC BY
     # 4.0 link (read 2026-10-07 by staging); MHLW as in Sasebo's; MLIT as in
@@ -2529,11 +2531,14 @@ _NOTICES = [
      "「すべての許可施設一覧」（大分市）（[https://data.bodik.jp/dataset/442011_permitted_facility](https://data.bodik.jp/dataset/442011_permitted_facility)）（2026年10月6日利用）、"
      "「理容所届出施設一覧」（大分市）（[https://data.bodik.jp/dataset/442011_barber_shop](https://data.bodik.jp/dataset/442011_barber_shop)）（2026年10月6日利用）、"
      "「美容所届出施設一覧」（大分市）（[https://data.bodik.jp/dataset/442011_beauty_salon](https://data.bodik.jp/dataset/442011_beauty_salon)）（2026年10月6日利用）、"
-     "「クリーニング所届出施設一覧」（大分市）（[https://data.bodik.jp/dataset/442011_cleaning](https://data.bodik.jp/dataset/442011_cleaning)）（2026年10月6日利用）を加工して作成, "
+     "「クリーニング所届出施設一覧」（大分市）（[https://data.bodik.jp/dataset/442011_cleaning](https://data.bodik.jp/dataset/442011_cleaning)）（2026年10月6日利用）、"
+     "「美容所新規施設」（大分市）（[https://data.bodik.jp/dataset/442011_beauty_salon_new](https://data.bodik.jp/dataset/442011_beauty_salon_new)）（2026年10月7日利用）、"
+     "「クリーニング所新規施設」（大分市）（[https://data.bodik.jp/dataset/442011_cleaning_new](https://data.bodik.jp/dataset/442011_cleaning_new)）（2026年10月7日利用）を加工して作成, "
      "クリエイティブ・コモンズ・ライセンス 表示 4.0 国際"
      "（[https://creativecommons.org/licenses/by/4.0/deed.ja](https://creativecommons.org/licenses/by/4.0/deed.ja)）; and "
      "出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一覧」を加工して作成. "
-     "Processed by this project, which selected the storefront types, left out the entries whose address "
+     "Processed by this project, which selected the storefront types, added the city's monthly lists of new "
+     "beauty salons and laundries to its March 2026 registers, left out the entries whose address "
      "the city withholds, took only the ministry's notifications, showed a premises in both lists once, "
      "placed each by its address or the ministry's own coordinates, and counted them around stations. The "
      "ministry's list holds only filings whose applicants agreed to publish them and is not complete. "
