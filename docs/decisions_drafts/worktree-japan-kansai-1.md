@@ -10,7 +10,24 @@ Cities, in build order (`docs/build_plan_2026-10-07.md`): Toyonaka (page
 
 ## Parked calls
 
-None yet.
+1. **Suita: one operator's own name shown, because the name rule does not
+   cross premises (a shared-code gap; Suita is parked, committed on the
+   branch, nothing pushed).** `check_personal_exposure.py suita` prints 1 (of
+   4,012 pins). The city's old-law list flags a street stall (露店, 市内一円, not
+   a premises) whose trade name is its operator's own name; MHLW's
+   notification at a fixed address in 泉町 carries the same trade name, and
+   its 法人名 does not flag it, so the pin shows the name. Step 2 spreads the
+   rule only to rows sharing the flagged row's block (Osaka's 2026-09-27 rule);
+   a citywide stall has no block. *Recommend*: in `japan_step2`, withhold
+   every row whose trade-name key matches any flagged row's key in the same
+   city, as a foundation-style switch on for new cities (`name_city`), with a
+   raising check that the privacy pass and step 2 agree; built cities stay
+   unchanged (the check prints 0 for all 41 Japanese maps besides this one).
+   Tradeoff: a common trade name that is also some operator's own name
+   elsewhere in the city would be withheld at every premises (measured on the
+   seven Kansai-1 cities: Suita 1 more pin, the other six 0). Without it,
+   Suita cannot publish. The shared change touches `japan_step2`, so East-1
+   and Regional-1 are told first.
 
 ## Proposals for review time (sentences no template covers)
 

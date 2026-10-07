@@ -4472,6 +4472,53 @@ line.
 - Left out: 15 stations beyond it: 6 in Katano, 4 in Kyōtanabe, 3 in Neyagawa
   and 2 in Yawata.
 
+### Suita - the city's two food lists, its barber, beauty and laundry registers and the national notifications, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, except where the national filings
+  include notifications.
+- 620 national notifications whose filers did not publish an address, and 11
+  more addressed to an area rather than a place.
+- 853 food trucks, stalls and other rows licensed anywhere in the city
+  (市内一円) or with no fixed place, and 137 more marked temporary or mobile.
+- 100 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 115 vending machines, 35 school, hospital and staff canteens, 3 mail-order
+  businesses and 1 linen-supply laundry that serves businesses. The city's
+  lists name no form of business (業態), so canteens, bars and convenience
+  stores holding a restaurant permit stay in Food service.
+- 1 closed premises the national filings keep, marked.
+
+**Counted** - every food permit in term on March 31, 2026, under the revised
+law and the old law (the city's two lists; an upper bound for any later date:
+a permit that has run out since is still counted, and one granted since is
+not); the city's barber, beauty and laundry registers as of August 31, 2026;
+and the national notifications as downloaded on October 6, 2026. The national
+filings' permits are not added: the city's own lists hold every permit (101.1%
+of the official restaurant count). 16 of the 352 bakery, confectioner and deli
+rows (4.5%) have a trade name that reads as a factory; they are kept (owner,
+2026-09-24).
+
+**One pin per premises** - 247 repeat permits are shown once, and 94 rows of
+the city's lists for a premises already in the national notifications.
+
+**Not placed** - none. 59 sit at their town's center, 24 of them in 岸部新町,
+whose block numbers MLIT's file does not yet hold, and 20 national
+notifications at their own coordinates.
+
+**Names not shown** - none.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line, except Osaka Metro's Midosuji Line, which has one station in the city
+(Esaka) and is not drawn; Esaka keeps its rings through Kita-Osaka Kyuko
+(owner, 2026-10-06).
+- Left out: 27 stations beyond it: 11 in Osaka (7 in Higashiyodogawa Ward, 3
+  in Yodogawa Ward and 1 in Miyakojima Ward), 7 in Ibaraki, 4 in Settsu, 3 in
+  Toyonaka and 2 in Minoh.
+- The JR and Hankyu Suita stations are two separate stations, each with its own
+  rings.
+
 ### Itami - Hyōgo Prefecture's food-permit and food-notification lists and its barber, beauty and laundry registers, joined to MLIT's address blocks
 
 **Left out**

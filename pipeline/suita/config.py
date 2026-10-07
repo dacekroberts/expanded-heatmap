@@ -168,7 +168,12 @@ OSM_NAME_EN_MISSING = {}
 # lowercase after a hyphen for a common word. The two 吹田 (JR 006779, Hankyu
 # 006798, separate stations) take their operators from LINES' "short" where
 # name:en does not tell them apart (Kobe's Mikage, trap 1).
-OSM_NAME_EN_OVERRIDES = {}
+# 2026-10-07: 35 objects; the Monorail's two names hyphenated as its signs,
+# lowercase for the common words. The other 13 are OSM's as they stand.
+OSM_NAME_EN_OVERRIDES = {
+    "万博記念公園": "Bampaku-kinen-koen",            # Bampakukinenkoen
+    "公園東口": "Koen-higashiguchi",                  # Koen-Higashiguchi
+}
 
 # --- Coordinate reference systems -----------------------------------------
 
@@ -248,7 +253,16 @@ LINES = {
 # Colours: the project's own, from `python scripts/line_colour_search.py suita`
 # once step 1 has written lines.geojson (it reads the drawn track); until then
 # each line is drawn in its starting hue.
-_COLOURS = {}
+# Colours: the project's own, from `python scripts/line_colour_search.py
+# suita` (2026-10-07, defaults: >= 18 within 500 m, >= 10 city-wide): each the
+# feasible colour nearest its start (Osaka's colours for the four lines Osaka
+# draws, Toyonaka's for the Monorail and Kita-Osaka Kyuko, the Monorail's hue
+# for the Saito Line) that reads 3:1 on both map pages and clears CIE76 45
+# from every pin; the Monorail moves one step from Toyonaka's to clear the JR
+# Kyoto Line. Closest pair within 500 m 18.9 (the JR Kyoto Line and the
+# Monorail), anywhere 12.7; the dark-mode labels separate, 7 of 7.
+_COLOURS = {"HS": "#B88080", "HY": "#885848", "JY": "#506878", "OH": "#A088A0", "MO": "#108098",
+            "MS": "#708898", "KK": "#E81820"}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)
