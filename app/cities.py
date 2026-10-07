@@ -572,7 +572,7 @@ CITIES = [
         "categories": "All three",
         "blurb": "Metro de Madrid (Líneas 1–12 and the Ramal) and Metro "
                  "Ligero line 1, 200 stations inside the city",
-        "region": "Europe",
+        "region": "Europe West",
         "country": "Spain",
         # Outside the United States frame, like every non-US city - see
         # IN_DEFAULT_VIEW below. The first city in EUROPE.
@@ -615,7 +615,7 @@ CITIES = [
         # float('nan'), and nan is truthy, which is what took the Overview down
         # on 2026-09-22.
         "label_offset": ("start", 14, 6),
-        "region": "Europe",
+        "region": "Europe West",
         "country": "Spain",
     },
     {
@@ -631,7 +631,7 @@ CITIES = [
         "record_kind": "Property register",
         "categories": "All three",
         "blurb": "Luas Red and Green Lines, and the DART",
-        "region": "Europe",
+        "region": "Europe West",
         "country": "Ireland",
         "in_default_view": False,
         # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
@@ -655,7 +655,7 @@ CITIES = [
         "record_kind": "License register",
         "categories": "All three",
         "blurb": "Metro M1-M5 (rossa, verde, gialla, blu, lilla)",
-        "region": "Europe",
+        "region": "Europe West",
         "country": "Italy",
         "in_default_view": False,
         # SCORED, 2026-09-30: a grid search over Milan, Oslo, Prague,
@@ -819,7 +819,7 @@ CITIES = [
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "Ruter T-bane 1–5 and Trikk 12, 13, 15, 17, 18, 19",
-        "region": "Europe",
+        "region": "Europe West",
         "country": "Norway",
         "in_default_view": False,
         # LEFT of the dot since 2026-09-30: below it, Oslo's label met
@@ -845,7 +845,7 @@ CITIES = [
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "Metro M1–M4 and S-tog A, B, Bx, C, E, F, H",
-        "region": "Europe",
+        "region": "Europe West",
         "country": "Denmark",
         "in_default_view": False,
         # Above the dot, SCORED rather than assumed: check_macro_labels.py
@@ -888,7 +888,7 @@ CITIES = [
         "record_kind": "Property register and permits",
         "categories": "Merged",
         "blurb": "Metro 50–54 and 16 tram lines",
-        "region": "Europe",
+        "region": "Europe West",
         "country": "Netherlands",
         "in_default_view": False,
         # Above the dot, SCORED rather than assumed: check_macro_labels.py
@@ -910,7 +910,7 @@ CITIES = [
         "record_kind": "License register",
         "categories": "All three",
         "blurb": "Metro A, B, B1, C, Roma–Viterbo and Tram 8",
-        "region": "Europe",
+        "region": "Europe West",
         "country": "Italy",
         "in_default_view": False,
         # RIGHT OF THE DOT since 2026-09-30, when Florence joined: above the
@@ -1129,7 +1129,7 @@ CITIES = [
         "record_kind": "Property register and permits",
         "categories": "Merged",
         "blurb": "RET metro A–E and 9 tram lines",
-        "region": "Europe",
+        "region": "Europe West",
         "country": "Netherlands",
         "in_default_view": False,
         # UP AND LEFT of the dot, the only placement that scores: Amsterdam's
@@ -1143,7 +1143,7 @@ CITIES = [
         # Europe's re-centred frame put its pill over Birmingham's and
         # Nottingham's markers.
         # Searched with check_macro_labels.py's geometry: PROBLEMS 0 at 375, 768, 1200.
-        "label_offset_by_region": {"Europe": ("start", 10, -12)},
+        "label_offset_by_region": {"Europe West": ("start", 10, -12)},
     },
     {
         "name": "Hong Kong",
@@ -1181,7 +1181,7 @@ CITIES = [
         "record_kind": "Property register and licenses",
         "categories": "Merged",
         "blurb": "Rīgas satiksme's seven tram lines",
-        "region": "Europe",
+        "region": "Europe East",
         "country": "Latvia",
         "in_default_view": False,
         # Above the dot, the default: Riga sits well north-east of every
@@ -1547,7 +1547,7 @@ CITIES = [
         "record_kind": "Chamber of commerce register",
         "categories": "Personal services thin",
         "blurb": "U-Bahn U1–U9 and 16 S-Bahn lines",
-        "region": "Europe",
+        "region": "Germany",
         "country": "Germany",
         "in_default_view": False,
         # Above the dot, SCORED rather than assumed: check_macro_labels.py
@@ -1626,7 +1626,7 @@ CITIES = [
         # BELOW the dot in the United Kingdom and WEST of it in Europe (2026-10-02,
         # the UK region pass): Glasgow's pill covered Edinburgh's marker in both.
         # Searched with check_macro_labels.py's geometry: PROBLEMS 0 at 375, 768, 1200.
-        "label_offset_by_region": {"United Kingdom": ("middle", 0, 22), "Europe": ("end", -10, 0)},
+        "label_offset_by_region": {"United Kingdom": ("middle", 0, 22), "Europe West": ("end", -10, 0)},
     },
     {
         "name": "Newcastle (Regional)",
@@ -1710,7 +1710,7 @@ CITIES = [
         "record_kind": "Food hygiene register",
         "categories": "Food premises only",
         "blurb": "The Tunnelbana's three lines",
-        "region": "Europe",
+        "region": "Europe West",
         "country": "Sweden",
         "in_default_view": False,
         # BELOW the dot since 2026-09-30: Prague's move to Czechia re-centred
@@ -1734,7 +1734,7 @@ CITIES = [
         "record_kind": "Food hygiene register",
         "categories": "Food premises only",
         "blurb": "Metrorex M1–M5",
-        "region": "Europe",
+        "region": "Europe East",
         "country": "Romania",
         "in_default_view": False,
         # Above the dot, SCORED (width 69.8 px). Europe's zoom leaves
@@ -1901,7 +1901,7 @@ CITIES = [
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "Skyss Bybanen lines 1 and 2",
-        "region": "Europe",
+        "region": "Europe West",
         "country": "Norway",
         "in_default_view": False,
         # Above the dot, SCORED (width 48.3 px). Bergen is the Europe frame's
@@ -1924,7 +1924,7 @@ CITIES = [
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "Letbane L2 on the city tramway",
-        "region": "Europe",
+        "region": "Europe West",
         "country": "Denmark",
         "in_default_view": False,
         # LEFT of the dot and a little below, SCORED (width 46.9 px). Above the
@@ -2030,7 +2030,7 @@ CITIES = [
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "Odense Letbane, one tram line",
-        "region": "Europe",
+        "region": "Europe West",
         "country": "Denmark",
         "in_default_view": False,
         # RIGHT of the dot and a little below, SCORED (width 50.6 px). Above
@@ -2055,7 +2055,7 @@ CITIES = [
         "record_kind": "Property register and licenses",
         "categories": "Merged",
         "blurb": "Liepāja's one tram line",
-        "region": "Europe",
+        "region": "Europe East",
         "country": "Latvia",
         "in_default_view": False,
         # BELOW the dot, SCORED (width 48.2 px). Above, it overlapped Riga's
@@ -2079,7 +2079,7 @@ CITIES = [
         "record_kind": "Property register and licenses",
         "categories": "Merged",
         "blurb": "Daugavpils Satiksme's five tram routes",
-        "region": "Europe",
+        "region": "Europe East",
         "country": "Latvia",
         "in_default_view": False,
         # RIGHT of the dot, SCORED (width 73.7 px). Above, its pill covered
@@ -2195,7 +2195,7 @@ CITIES = [
         "record_kind": "Permit registers",
         "categories": "All three",
         "blurb": "Tramvia: T1 Leonardo and T2 Vespucci",
-        "region": "Europe",
+        "region": "Europe West",
         "country": "Italy",
         "in_default_view": False,
         # RIGHT of the dot, a little above, SCORED (width 58.1 px). Inside
@@ -2221,7 +2221,7 @@ CITIES = [
         "record_kind": "Food hygiene register",
         "categories": "Food premises only",
         "blurb": "Göteborgs Spårvägar: trams 1 to 13",
-        "region": "Europe",
+        "region": "Europe West",
         "country": "Sweden",
         "in_default_view": False,
         # WEST OF THE DOT AND 16 px ABOVE IT, SCORED 2026-09-30: a grid search
@@ -2244,7 +2244,7 @@ CITIES = [
         "record_kind": "Property register and permits",
         "categories": "Merged",
         "blurb": "HTM: trams 1-19 and RandstadRail 3, 4 and 34 (14 lines)",
-        "region": "Europe",
+        "region": "Europe West",
         "country": "Netherlands",
         "in_default_view": False,
         # SCORED, 2026-09-30: a grid search over Milan, Oslo, Prague,
@@ -2257,7 +2257,7 @@ CITIES = [
         # Rotterdam's old pill; of 144 offset pairs scored by
         # check_macro_labels.py this is the only one with no problem at
         # 375, 768 and 1200 px. The labels cross (the dots are 3.0 px apart).
-        "label_offset_by_region": {"Europe": ("start", 10, 12)},
+        "label_offset_by_region": {"Europe West": ("start", 10, 12)},
     },
     {
         "name": "Zurich",
@@ -2273,7 +2273,7 @@ CITIES = [
         "record_kind": "License register",
         "categories": "Two",
         "blurb": "VBZ trams 2–11, 13–15, 17, 50 and 51",
-        "region": "Europe",
+        "region": "Europe West",
         "country": "Switzerland",
         "in_default_view": False,
         # SCORED, 2026-09-30: a grid search over Milan, Oslo, Prague,
@@ -2841,7 +2841,7 @@ CITIES = [
         "record_kind": "License register",
         "categories": "Food premises only",
         "blurb": "Metro de Palma: M1",
-        "region": "Europe",
+        "region": "Europe West",
         "country": "Spain",
         "mode": "metro",
         "in_default_view": False,
@@ -4611,7 +4611,7 @@ CITIES = [
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "TPG trams 12, 14, 15, 17 and 18",
-        "region": "Europe",
+        "region": "Europe West",
         "country": "Switzerland",
         "in_default_view": False,
         # Left of the dot, and SCORED: above it the pill covered Zurich's and seven
@@ -4632,7 +4632,7 @@ CITIES = [
         "record_kind": "License register",
         "categories": "Retail thin",
         "blurb": "Thessaloniki Metro Line 1",
-        "region": "Europe",
+        "region": "Europe East",
         "country": "Greece",
         "mode": "metro",
         "in_default_view": False,
@@ -4654,7 +4654,7 @@ CITIES = [
         "record_kind": "Street survey or census",
         "categories": "Personal services thin",
         "blurb": "Trams 301, 302 and 107 and Stadtbahn U11",
-        "region": "Europe",
+        "region": "Germany",
         "country": "Germany",
         "mode": "tram",
         "in_default_view": False,
@@ -4676,7 +4676,7 @@ CITIES = [
         "record_kind": "Street survey or census",
         "categories": "Retail only",
         "blurb": "BSAG trams 1, 2, 3, 4, 5, 6, 8 and 10",
-        "region": "Europe",
+        "region": "Germany",
         "country": "Germany",
         "mode": "tram",
         "in_default_view": False,
@@ -4811,7 +4811,19 @@ REGION_ORDER = [
     # does not. Revisit it when a city appears far enough east or south to
     # force the frame open; that is a measurement (`check_macro_labels.py`
     # scores every city in every region at three widths), not a judgement.
-    "Europe",
+    #
+    # EUROPE WEST AND EUROPE EAST (owner, 2026-10-04, landed with Thessaloniki
+    # on the owner's call of 2026-10-07), by country: Latvia, Romania, Hungary
+    # and Greece are East, every other European city not in a country view is
+    # West. Named "Europe West", not "Western Europe", so the names do not
+    # claim the colloquial regions they only roughly follow (owner). A
+    # meridian cut at 8 to 15 E labelled fewer names than this split (29 to 31
+    # of 34 against 32 of 34, docs/scaling_thresholds.md). Both views compete
+    # for their labels (COMPETING_REGIONS). A new European country is
+    # assigned to one of the two by scripts/stress_overview.py, and gets a
+    # view of its own only on the owner's call.
+    "Europe West",
+    "Europe East",
     # FRANCE NORTH AND FRANCE SOUTH (owner, 2026-09-30, "go with north/south"),
     # split at latitude 46.5. France's 25 cities (5 built, 20 in the tram batch)
     # cannot share one view at ANY zoom: measured on the real label text, at 4.5
@@ -4838,6 +4850,13 @@ REGION_ORDER = [
     # pair at every width (check_macro_labels.py); here every Belgian city is
     # labelled and Europe shows the dots unlabelled, as it does Czechia's.
     "Belgium",
+    # GERMANY (owner, 2026-10-07, Staging's call 194: a view "on Czechia's and
+    # Belgium's mechanism" if the Europe split left labels colliding). Berlin,
+    # Gelsenkirchen and Bremen. With the split alone, Rotterdam's and Den
+    # Haag's pills covered Bremen's and Gelsenkirchen's dots at every width
+    # (13 problems in Europe West), and in competition Europe West dropped both
+    # names. Here all three are labelled; Europe West shows the dots unlabelled.
+    "Germany",
     # THE UNITED KINGDOM (owner, 2026-10-02: "implement the high-density cluster
     # rule to UK, like Japan, France, Czechia"), on Czechia's mechanism: every UK
     # city, London, Glasgow and Newcastle (Regional) included, in a view of its
@@ -4905,7 +4924,7 @@ REGION_ORDER = [
 # region selector, the caption naming the other regions and the city list
 # under the map follow. A new country view (the United Kingdom's and Japan's,
 # 2026-10-02) is added here as well as to REGION_ORDER.
-COUNTRY_VIEWS = ("France North", "France South", "Czechia", "Belgium", "United Kingdom", "Seoul Capital Area", "South Korea", "Japan West", "Japan East")
+COUNTRY_VIEWS = ("France North", "France South", "Czechia", "Belgium", "Germany", "United Kingdom", "Seoul Capital Area", "South Korea", "Japan West", "Japan East")
 MENU_ORDER = ([r for r in REGION_ORDER if r not in COUNTRY_VIEWS]
               + [r for r in REGION_ORDER if r in COUNTRY_VIEWS])
 if set(COUNTRY_VIEWS) - set(REGION_ORDER):
@@ -4952,8 +4971,10 @@ if set(COUNTRY_VIEWS) - set(REGION_ORDER):
 # Thessaloniki (2026-10-07), the region's south-eastern outlier, joins
 # Europe's list on Bucharest's measurement: fitted to it, the zoom dropped and
 # 26 labels from Amsterdam to Liepāja collided at every width.
-REGION_ZOOM_WITHOUT = {"Europe": ("Riga", "Stockholm", "Bucharest", "Liepāja", "Daugavpils",
-                                  "Thessaloniki"),
+# The Europe split (2026-10-07) moves Riga, Bucharest, Liepāja, Daugavpils and
+# Thessaloniki to Europe East, which is fitted to all five; Stockholm stays out
+# of Europe West's fit (measured with scripts/stress_overview.py).
+REGION_ZOOM_WITHOUT = {"Europe West": ("Stockholm",),
                        "South America": ("Mendoza",)}
 
 # A REGION'S ZOOM SET OUTRIGHT, after the fit (owner, 2026-09-30): France North
@@ -5047,7 +5068,7 @@ if _bad_rof:
     raise ValueError(f"cities.py: {_bad_rof} have a label_offset_by_region whose keys are not "
                      "regions in REGION_ORDER or whose values are not (anchor, dx, dy)")
 # Each tuple's order is the order region_caption() names them in.
-REGION_LABELS_ALSO = {"East Asia": ("Japan West", "Japan East", "Seoul Capital Area", "South Korea"), "Europe": ("United Kingdom",)}
+REGION_LABELS_ALSO = {"East Asia": ("Japan West", "Japan East", "Seoul Capital Area", "South Korea"), "Europe West": ("United Kingdom",)}
 
 # A REGION VIEW THAT HAS OUTGROWN HAND PLACEMENT COMPETES FOR ITS LABELS, as
 # Global does (2026-10-04): the cities the view labels enter
@@ -5058,8 +5079,11 @@ REGION_LABELS_ALSO = {"East Asia": ("Japan West", "Japan East", "Seoul Capital A
 # by competition), so a region joins only when its labels no longer clear
 # scripts/check_macro_labels.py by hand. scripts/stress_overview.py measures
 # which regions the staged cities push past it (docs/scaling_thresholds.md).
-# Empty: every region today is hand-placed.
-COMPETING_REGIONS = ()
+# Europe West and Europe East (2026-10-07): by hand, Rotterdam's and Den
+# Haag's pills covered the German dots and Bergen's and Riga's sat under the
+# theme button at 375 px (8 problems); competing, every name each view labels
+# is placed (22 of 22 and 5 of 5), PROBLEMS 0.
+COMPETING_REGIONS = ("Europe West", "Europe East")
 _bad_compete = [r for r in COMPETING_REGIONS if r not in LEAF_REGIONS]
 if _bad_compete:
     raise ValueError(f"cities.py: COMPETING_REGIONS {_bad_compete} are not leaf regions "
@@ -5125,7 +5149,7 @@ if _unmoded:
 # in build order, because page numbers and the macro map follow it.
 #
 # `country` is not `region`: a region is a macro-map VIEW (Canada is two,
-# Europe is one), a country is what a reader groups by.
+# Europe West holds several), a country is what a reader groups by.
 _uncountried = [c["name"] for c in CITIES if not c.get("country")]
 if _uncountried:
     raise ValueError(

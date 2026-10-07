@@ -240,6 +240,11 @@ REGION_GROUP = {
     "Canada West": "North America",
     "Canada East": "North America",
     "Mexico": "North America",
+    # Europe's two halves and the German view (owner, 2026-10-07): the group
+    # keeps the name Europe had as one region.
+    "Europe West": "Europe",
+    "Europe East": "Europe",
+    "Germany": "Europe",
     "France North": "Europe",
     "France South": "Europe",
     "Czechia": "Europe",

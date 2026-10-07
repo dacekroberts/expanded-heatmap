@@ -520,7 +520,9 @@ template goes to the owner as a proposed sentence.
   colour = `mode`, fill = `coverage`, as sections 1 and 5.
   `scaffold_city.py --mode` is required and writes `mode` into the
   `cities.py` entry; `cities.py` raises at import without it.
-- Region: `"Europe"` for the seven European cities. `"United States West"`
+- Region: `"Europe West"` for a European city, `"Europe East"` for a Latvian,
+  Romanian, Hungarian or Greek one, and a German city `"Germany"` (owner,
+  2026-10-07; `add-city`'s European section). `"United States West"`
   for Tucson; `"United States East"` for Kansas City and New Orleans, since
   Houston (−95.4°) is East. `--country` is spelled as `app/cities.py` spells
   it, and `"Switzerland"` is new.

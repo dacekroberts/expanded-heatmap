@@ -764,8 +764,8 @@ docstring; what a new country needs from them:
 3. **A region, which decides its selector group.** The group is the city's
    macro-map `"region"`, folded through `REGION_GROUP` in
    `app/country_sections.py`:
-   - **an existing region** (every European country is `Europe`, per
-     `add-city`; an Australian or New Zealand city `Oceania`; another South
+   - **an existing region** (a European country is `Europe West` or
+     `Europe East`, per `add-city`; an Australian or New Zealand city `Oceania`; another South
      American country `South America`) joins that group with no edit;
    - **a region new to the project** (`scaffold_city.py --new-region`, which
      appends it to `REGION_ORDER`; a macro-map view, so the owner's call)

@@ -82,20 +82,21 @@ JAPAN = [
     ("Nisshin", "日進市", "23", "3-7"), ("Urasoe", "浦添市", "47", "3-7"),
 ]
 
-# (display name, country, rank, region under today's scheme, label tier,
+# (display name, country, rank, region under today's scheme (Europe West or
+#  Europe East by country since 2026-10-07), label tier,
 #  mode, lat, lon). Approximate centres. The Greater Copenhagen Light Rail
 # is not here: it extends Copenhagen's own page (owner, 2026-10-04), so it
 # adds no dot; as a page of its own its dot sat 1.3-1.7 px from Copenhagen's.
 OTHERS = [
-    ("Arad", "Romania", 2, "Europe", "minor", "tram", 46.19, 21.31),
-    ("Brăila", "Romania", 2, "Europe", "minor", "tram", 45.27, 27.96),
-    ("Craiova", "Romania", 2, "Europe", "minor", "tram", 44.32, 23.80),
-    ("Galați", "Romania", 2, "Europe", "minor", "tram", 45.44, 28.01),
-    ("Oradea", "Romania", 2, "Europe", "minor", "tram", 47.07, 21.92),
-    ("Ploiești", "Romania", 2, "Europe", "minor", "tram", 44.95, 26.04),
-    ("Hódmezővásárhely", "Hungary", 2, "Europe", "minor", "tram", 46.42, 20.33),
+    ("Arad", "Romania", 2, "Europe East", "minor", "tram", 46.19, 21.31),
+    ("Brăila", "Romania", 2, "Europe East", "minor", "tram", 45.27, 27.96),
+    ("Craiova", "Romania", 2, "Europe East", "minor", "tram", 44.32, 23.80),
+    ("Galați", "Romania", 2, "Europe East", "minor", "tram", 45.44, 28.01),
+    ("Oradea", "Romania", 2, "Europe East", "minor", "tram", 47.07, 21.92),
+    ("Ploiești", "Romania", 2, "Europe East", "minor", "tram", 44.95, 26.04),
+    ("Hódmezővásárhely", "Hungary", 2, "Europe East", "minor", "tram", 46.42, 20.33),
     ("Adana", "Türkiye", 4, "West Asia", None, "metro", 37.00, 35.32),
-    ("Perugia", "Italy", 4, "Europe", "minor", "light_rail", 43.11, 12.39),
+    ("Perugia", "Italy", 4, "Europe West", "minor", "light_rail", 43.11, 12.39),
     ("Johannesburg", "South Africa", 4, "Africa", None, "metro", -26.20, 28.05),
     ("Tshwane", "South Africa", 4, "Africa", "minor", "metro", -25.75, 28.23),
     ("Ekurhuleni", "South Africa", 4, "Africa", "minor", "metro", -26.17, 28.30),
