@@ -576,6 +576,8 @@ if _basemap_style is None:
 # names, and hand-placing offsets against every neighbour did not scale.
 # A region view in cities.COMPETING_REGIONS competes the same way, its entrants
 # the cities it labels (_members above) rather than Global's static filter.
+# Each country's top city (cities.COUNTRY_TOP, owner 2026-10-07) is placed
+# first in both, whatever its mode; label_competition.py says how.
 _competes = region in getattr(sys.modules.get("cities"), "COMPETING_REGIONS", ())
 if region == DEFAULT_REGION or _competes:
     _won = compete(CITIES, view.latitude, view.longitude, view.zoom,

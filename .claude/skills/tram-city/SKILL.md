@@ -521,8 +521,9 @@ template goes to the owner as a proposed sentence.
   `scaffold_city.py --mode` is required and writes `mode` into the
   `cities.py` entry; `cities.py` raises at import without it.
 - Region: `"Europe West"` for a European city, `"Europe East"` for a Latvian,
-  Romanian, Hungarian or Greek one, and a German city `"Germany"` (owner,
-  2026-10-07; `add-city`'s European section). `"United States West"`
+  Romanian, Hungarian or Greek one, a German city `"Germany"` and a Dutch or
+  Belgian one `"Benelux"`, where a smaller tram city is `"label_tier": "minor"`
+  (owner, 2026-10-07; `add-city`'s European section). `"United States West"`
   for Tucson; `"United States East"` for Kansas City and New Orleans, since
   Houston (−95.4°) is East. `--country` is spelled as `app/cities.py` spells
   it, and `"Switzerland"` is new.

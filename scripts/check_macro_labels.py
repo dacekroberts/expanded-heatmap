@@ -51,8 +51,10 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "app"))
 from cities import (  # noqa: E402
     CITIES,
     COMPETING_REGIONS,
+    COUNTRY_TOP,
     DEFAULT_FRAME,
     DEFAULT_REGION,
+    LANDING_NO_ROOM,
     REGION_MEMBERS,
     REGION_LABELS_ALSO,
     REGION_ZOOM,
@@ -504,6 +506,30 @@ def main():
                         f"{ox:.1f} x {oy:.1f} px"
                         + (f" - GREW past the accepted {ok[0]:.1f} x {ok[1]:.1f}"
                            if ok else ""))
+
+    # THE OWNER'S LABEL GOAL (2026-10-07, Staging's call 197): "all dots
+    # visible in at least one regional view" and "every nation's top 1 ... in
+    # global view". Every city is labelled in at least one view, and each
+    # country's top city (cities.COUNTRY_TOP) is labelled on the landing view
+    # unless cities.LANDING_NO_ROOM names it; one named there that now fits is
+    # reported, so the list does not outlive its reason.
+    named = set(GLOBAL_WON)
+    for region in REGIONS:
+        if region["name"] != DEFAULT_REGION:
+            named |= set(scored_labels(region, *region_view(region)))
+    unnamed = [c["name"] for c in CITIES if c["name"] not in named]
+    if unnamed:
+        problems.append(f"{'(every view)':<20}        {unnamed} labelled in no view - give each "
+                        f"a view that places it (a country view, as Benelux placed Den Haag)")
+    roomy = []
+    for country, (top, _) in COUNTRY_TOP.items():
+        if top not in GLOBAL_WON and top not in LANDING_NO_ROOM:
+            problems.append(f"{DEFAULT_REGION:<20}        {country}'s top city {top} has no label "
+                            f"on the landing view (cities.COUNTRY_TOP)")
+        elif top in GLOBAL_WON and top in LANDING_NO_ROOM:
+            roomy.append(top)
+    if roomy:
+        print(f"Now labelled on the landing view, so drop from cities.LANDING_NO_ROOM: {roomy}\n")
 
     if accepted and args.verbose:
         print(f"Known-accepted overlaps ({len(accepted)}) - see ACCEPTED_OVERLAPS:")

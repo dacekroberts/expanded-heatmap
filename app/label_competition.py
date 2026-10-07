@@ -21,6 +21,16 @@ against every neighbor does not scale. Instead the cities compete:
      own dot already lies under a higher-ranked city's pill (Copenhagen's
      under Berlin's, 2026-10-01: its dot would have drawn over Berlin's name).
 
+EVERY COUNTRY'S TOP CITY GOES FIRST (owner, 2026-10-07; cities.COUNTRY_TOP,
+stamped on the city as `country_top`, its population). Ahead of the ranking,
+largest first, whatever its mode (Dublin, Riga and Zurich are trams), each
+trying TOP_CANDIDATES, and every top's dot is an obstacle from the start so an
+earlier pill cannot sit on a later top's dot. The competition above then
+decides only among the cities below them. A competing region view does the
+same with the tops it labels, then its own cities before the anchors it
+borrows from a country view (REGION_LABELS_ALSO). The tops with no room
+whatever the order are cities.LANDING_NO_ROOM.
+
 A LOWER-RANKED CITY'S DOT MAY SIT UNDER A PILL, because in Global the dots are
 drawn ABOVE the pills (Overview.py): no dot is ever erased or unclickable; at
 worst it sits on a pill's edge. At world zoom Europe is a few dozen pixels
@@ -346,6 +356,12 @@ COVERAGE_RANK = {"full": 3, "narrowed": 2, "one_bucket": 1}
 STATIC_OUT_MODES = ("tram",)
 # Right, left, above, below - tried after the city's own offset.
 CANDIDATES = (("start", 11, 0), ("end", -11, 0), ("middle", 0, -22), ("middle", 0, 22))
+# A country's top city tries these too: the four diagonals and a longer reach
+# on each side. With CANDIDATES alone seven tops found no room on the landing
+# view; with these, three (cities.LANDING_NO_ROOM; measured 2026-10-07).
+TOP_CANDIDATES = CANDIDATES + (("start", 8, -14), ("start", 8, 14), ("end", -8, -14),
+                               ("end", -8, 14), ("middle", 0, -32), ("middle", 0, 32),
+                               ("start", 20, 0), ("end", -20, 0))
 
 
 def project(lat, lon, centre_lat, centre_lon, zoom, w, h):
@@ -424,20 +440,34 @@ def compete(cities, centre_lat, centre_lon, zoom, storefronts, strict=False,
     ref = max(CANVAS.values())
     placed, won, won_dots = [], {}, []
     def enters(c):
-        return eligible(c) if entrants is None else c["name"] in entrants
+        if entrants is not None:
+            return c["name"] in entrants
+        return eligible(c) or c.get("country_top") is not None
 
-    for c in sorted((c for c in cities if enters(c)), key=lambda c: rank_key(c, storefronts)):
+    def order(c):
+        # Country tops first, largest first; then, in a region view, its own
+        # cities before the anchors it borrows; then the ranking.
+        top = c.get("country_top")
+        return (top is None, -(top or 0), region != "Global" and c.get("region") != region,
+                *rank_key(c, storefronts))
+
+    runners = sorted((c for c in cities if enters(c)), key=order)
+    top_dots = {c["name"]: pos[c["name"]][ref] for c in runners if c.get("country_top") is not None}
+    for c in runners:
+        is_top = c["name"] in top_dots
         cx0, cy0 = pos[c["name"]][ref]
-        if any(p[0] < cx0 < p[2] and p[1] < cy0 < p[3] for p in placed):
+        if not is_top and any(p[0] < cx0 < p[2] and p[1] < cy0 < p[3] for p in placed):
             continue
         own = ((c.get("label_offset_by_region") or {}).get(region) or c.get("label_offset"))
-        tries = ([tuple(own)] if own else []) + [o for o in CANDIDATES if o != (tuple(own) if own else None)]
+        cands = TOP_CANDIDATES if is_top else CANDIDATES
+        tries = ([tuple(own)] if own else []) + [o for o in cands if o != (tuple(own) if own else None)]
+        dots = won_dots + [d for n, d in top_dots.items() if n != c["name"]]
         for off in tries:
             x, y = pos[c["name"]][ref]
             box = pill_box(c["name"], x, y, off, strict)
             if any(_overlaps(box, p) for p in placed):
                 continue
-            if any(box[0] < dx < box[2] and box[1] < dy < box[3] for dx, dy in won_dots + [(x, y)]):
+            if any(box[0] < dx < box[2] and box[1] < dy < box[3] for dx, dy in dots + [(x, y)]):
                 continue
             under = False
             for w in CANVAS.values():

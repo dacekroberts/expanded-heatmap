@@ -777,7 +777,12 @@ docstring; what a new country needs from them:
      it after every larger view (owner, 2026-10-02).
 
    The country's place within its group follows `REGION_ORDER` and build
-   order; there is nothing to set.
+   order; there is nothing to set. **The first city also takes the country's
+   row in `COUNTRY_TOP` in `app/cities.py`** (its city population in
+   millions; `cities.py` raises without one): each country's largest city is
+   labelled on the landing view first (owner, 2026-10-07). If the new label
+   cannot fit there, `check_macro_labels.py` fails; `LANDING_NO_ROOM` is the
+   owner's call, with the measurement.
 4. **Headings that name the city.** A section is filed under a country when
    its heading names exactly one country's city (as `app/cities.py` names
    it, less any " (Regional)") or the country itself; a heading naming

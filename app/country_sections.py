@@ -240,15 +240,15 @@ REGION_GROUP = {
     "Canada West": "North America",
     "Canada East": "North America",
     "Mexico": "North America",
-    # Europe's two halves and the German view (owner, 2026-10-07): the group
-    # keeps the name Europe had as one region.
+    # Europe's two halves and the Benelux and German views (owner,
+    # 2026-10-07): the group keeps the name Europe had as one region.
     "Europe West": "Europe",
     "Europe East": "Europe",
+    "Benelux": "Europe",
     "Germany": "Europe",
     "France North": "Europe",
     "France South": "Europe",
     "Czechia": "Europe",
-    "Belgium": "Europe",
     "United Kingdom": "Europe",
     "Seoul Capital Area": "East Asia",
     # Japan's two halves (owner, 2026-10-03). Unfolded, all 34 Japanese cities

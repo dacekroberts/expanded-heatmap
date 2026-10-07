@@ -29,7 +29,7 @@ Staged names without a measured pill width get an estimate from the table's
 own width per character, reported as such; measure them before trusting a
 count near the line.
 
-    python scripts/stress_overview.py [--scenario NAME ...] [--compete REGION ...]
+    python scripts/stress_overview.py [--scenario NAME ...] [--built-only] [--compete REGION ...]
                                       [--country-view COUNTRY ...] [--group NAME=C1,C2 ...]
                                       [--split-meridian LON [--snap-countries]] [--keep DIR]
 
@@ -193,8 +193,11 @@ def build_tree(tmp, scenario, staged, competing=(), country_views=(), groups=Non
     src = replace_once(src, '"East Asia": ("Japan West", "Japan East", ',
                        f'"East Asia": ({jp_tuple}, ', "REGION_LABELS_ALSO")
     if scenario != "now":
-        src = replace_once(src, ', "Japan West": 6.0}', "}", "REGION_ZOOM's Japan West")
+        src = replace_once(src, ', "Japan West": 6.0', "", "REGION_ZOOM's Japan West")
     if meridian is not None:
+        if '\n    "Europe",\n' not in src:
+            raise SystemExit("stress_overview: --split-meridian cuts a single Europe region, and "
+                             "Europe has been Europe West and Europe East since 2026-10-07")
         src = replace_once(src, '\n    "Europe",\n',
                            '\n    "Europe West",\n    "Europe East",\n',
                            "REGION_ORDER's Europe")
@@ -203,8 +206,22 @@ def build_tree(tmp, scenario, staged, competing=(), country_views=(), groups=Non
         src = replace_once(src, '"Europe": ("United Kingdom",)',
                            '"Europe West": ("United Kingdom",)', "REGION_LABELS_ALSO's Europe")
     if competing:
-        src = replace_once(src, "\nCOMPETING_REGIONS = ()\n",
-                           f"\nCOMPETING_REGIONS = {tuple(competing)!r}\n", "COMPETING_REGIONS")
+        m = re.search(r"\nCOMPETING_REGIONS = \((.*?)\)\n", src)
+        if not m:
+            raise SystemExit("stress_overview: cities.py no longer has COMPETING_REGIONS in the "
+                             "expected form; update its pattern")
+        today_c = re.findall(r'"([^"]+)"', m.group(1))
+        both = tuple(dict.fromkeys(today_c + list(competing)))
+        src = src[:m.start()] + f"\nCOMPETING_REGIONS = {both!r}\n" + src[m.end():]
+    # A staged country new to the site needs a COUNTRY_TOP row or cities.py
+    # raises: its first staged row stands in, at no population (placed after
+    # every built top), until its build sets the real one.
+    new_tops = {}
+    for r in rows:
+        if r["country"] not in built.COUNTRY_TOP:
+            new_tops.setdefault(r["country"], (r["name"], 0.0))
+    src = replace_once(src, "\nLANDING_NO_ROOM = ",
+                       f"\nCOUNTRY_TOP.update({new_tops!r})\nLANDING_NO_ROOM = ", "LANDING_NO_ROOM")
     (app / "cities.py").write_text(src, encoding="utf-8")
 
     # Estimated widths for names the table has not measured.
@@ -281,6 +298,8 @@ def main():
                     help="cut Europe into Europe West and Europe East at this longitude")
     ap.add_argument("--snap-countries", action="store_true",
                     help="with --split-meridian, keep each country whole, by its mean longitude")
+    ap.add_argument("--built-only", action="store_true",
+                    help="leave the staged cities out: the map as it would land today")
     ap.add_argument("--keep", help="build the trees here and keep them")
     ap.add_argument("--inner", help=argparse.SUPPRESS)
     args = ap.parse_args()
@@ -289,7 +308,7 @@ def main():
         return inner(Path(args.inner))
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
-    staged = json.loads(STAGED.read_text(encoding="utf-8"))["cities"]
+    staged = [] if args.built_only else json.loads(STAGED.read_text(encoding="utf-8"))["cities"]
     for scenario in args.scenario or SCENARIOS:
         base = Path(args.keep) if args.keep else Path(tempfile.mkdtemp(prefix="stress_"))
         tmp = base / scenario

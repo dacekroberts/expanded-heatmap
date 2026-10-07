@@ -888,7 +888,7 @@ CITIES = [
         "record_kind": "Property register and permits",
         "categories": "Merged",
         "blurb": "Metro 50–54 and 16 tram lines",
-        "region": "Europe West",
+        "region": "Benelux",
         "country": "Netherlands",
         "in_default_view": False,
         # Above the dot, SCORED rather than assumed: check_macro_labels.py
@@ -1129,7 +1129,7 @@ CITIES = [
         "record_kind": "Property register and permits",
         "categories": "Merged",
         "blurb": "RET metro A–E and 9 tram lines",
-        "region": "Europe West",
+        "region": "Benelux",
         "country": "Netherlands",
         "in_default_view": False,
         # UP AND LEFT of the dot, the only placement that scores: Amsterdam's
@@ -2244,7 +2244,10 @@ CITIES = [
         "record_kind": "Property register and permits",
         "categories": "Merged",
         "blurb": "HTM: trams 1-19 and RandstadRail 3, 4 and 34 (14 lines)",
-        "region": "Europe West",
+        "region": "Benelux",
+        # Minor (owner, 2026-10-07, the Seoul pattern): labelled only in its own
+        # view; the parent view labels its country's larger cities.
+        "label_tier": "minor",
         "country": "Netherlands",
         "in_default_view": False,
         # SCORED, 2026-09-30: a grid search over Milan, Oslo, Prague,
@@ -4242,7 +4245,7 @@ CITIES = [
         "lon": 4.352,
         "page": "pages/196_Brussels_Heatmap.py",
         "blurb": "Metro 1, 2, 5 and 6 and 15 tram lines",
-        "region": "Belgium",
+        "region": "Benelux",
         "country": "Belgium",
         "mode": "metro",
         "coverage": "full",
@@ -4266,7 +4269,7 @@ CITIES = [
         "lon": 4.4025,
         "page": "pages/197_Antwerp_Heatmap.py",
         "blurb": "Trams 1, 2, 4, 6, 7, 8, 10, 11, 12, 24, A3, A9",
-        "region": "Belgium",
+        "region": "Benelux",
         "country": "Belgium",
         "mode": "tram",
         "coverage": "one_bucket",
@@ -4290,7 +4293,10 @@ CITIES = [
         "lon": 3.7174,
         "page": "pages/198_Ghent_Heatmap.py",
         "blurb": "Trams T1, T2, T4",
-        "region": "Belgium",
+        "region": "Benelux",
+        # Minor (owner, 2026-10-07, the Seoul pattern): labelled only in its own
+        # view; the parent view labels its country's larger cities.
+        "label_tier": "minor",
         "country": "Belgium",
         "mode": "tram",
         "coverage": "one_bucket",
@@ -4314,7 +4320,10 @@ CITIES = [
         "lon": 4.4446,
         "page": "pages/199_Charleroi_Heatmap.py",
         "blurb": "Light metro M2, M3 and M4",
-        "region": "Belgium",
+        "region": "Benelux",
+        # Minor (owner, 2026-10-07, the Seoul pattern): labelled only in its own
+        # view; the parent view labels its country's larger cities.
+        "label_tier": "minor",
         "country": "Belgium",
         "mode": "light_rail",
         "coverage": "narrowed",
@@ -4338,7 +4347,10 @@ CITIES = [
         "lon": 5.5797,
         "page": "pages/200_Liege_Heatmap.py",
         "blurb": "Tram T1",
-        "region": "Belgium",
+        "region": "Benelux",
+        # Minor (owner, 2026-10-07, the Seoul pattern): labelled only in its own
+        # view; the parent view labels its country's larger cities.
+        "label_tier": "minor",
         "country": "Belgium",
         "mode": "tram",
         "coverage": "narrowed",
@@ -4367,7 +4379,10 @@ CITIES = [
         "lon": 4.3239,
         "page": "pages/201_Brussels_Regional_Heatmap.py",
         "blurb": "Metro 1, 2, 5 and 6 and 18 tram lines",
-        "region": "Belgium",
+        "region": "Benelux",
+        # Minor (owner, 2026-10-07, the Seoul pattern): labelled only in its own
+        # view; the parent view labels its country's larger cities.
+        "label_tier": "minor",
         "country": "Belgium",
         "mode": "metro",
         "coverage": "narrowed",
@@ -4655,6 +4670,9 @@ CITIES = [
         "categories": "Personal services thin",
         "blurb": "Trams 301, 302 and 107 and Stadtbahn U11",
         "region": "Germany",
+        # Minor (owner, 2026-10-07, the Seoul pattern): labelled only in its own
+        # view; the parent view labels its country's larger cities.
+        "label_tier": "minor",
         "country": "Germany",
         "mode": "tram",
         "in_default_view": False,
@@ -4677,6 +4695,9 @@ CITIES = [
         "categories": "Retail only",
         "blurb": "BSAG trams 1, 2, 3, 4, 5, 6, 8 and 10",
         "region": "Germany",
+        # Minor (owner, 2026-10-07, the Seoul pattern): labelled only in its own
+        # view; the parent view labels its country's larger cities.
+        "label_tier": "minor",
         "country": "Germany",
         "mode": "tram",
         "in_default_view": False,
@@ -4849,13 +4870,21 @@ REGION_ORDER = [
     # and Brussels (Regional). In Europe's view their six pills overlapped every
     # pair at every width (check_macro_labels.py); here every Belgian city is
     # labelled and Europe shows the dots unlabelled, as it does Czechia's.
-    "Belgium",
+    # BENELUX REPLACED IT (owner, 2026-10-07: "benelux yes"): the Belgian
+    # cities and the Dutch ones, Amsterdam, Rotterdam and Den Haag. In Europe
+    # West, Den Haag found no room beside Amsterdam, Brussels and London even
+    # placed straight after the countries' top cities, so it was labelled in no
+    # view; here all nine are labelled (zoom 6.2). Rotterdam to Antwerp is
+    # about 75 km, one frame for both countries; a Netherlands view of its own
+    # would have added a menu entry.
+    "Benelux",
     # GERMANY (owner, 2026-10-07, Staging's call 194: a view "on Czechia's and
     # Belgium's mechanism" if the Europe split left labels colliding). Berlin,
     # Gelsenkirchen and Bremen. With the split alone, Rotterdam's and Den
     # Haag's pills covered Bremen's and Gelsenkirchen's dots at every width
     # (13 problems in Europe West), and in competition Europe West dropped both
-    # names. Here all three are labelled; Europe West shows the dots unlabelled.
+    # names. Here all three are labelled; Europe West labels Berlin
+    # (REGION_LABELS_ALSO) and shows the other two dots unlabelled.
     "Germany",
     # THE UNITED KINGDOM (owner, 2026-10-02: "implement the high-density cluster
     # rule to UK, like Japan, France, Czechia"), on Czechia's mechanism: every UK
@@ -4924,7 +4953,7 @@ REGION_ORDER = [
 # region selector, the caption naming the other regions and the city list
 # under the map follow. A new country view (the United Kingdom's and Japan's,
 # 2026-10-02) is added here as well as to REGION_ORDER.
-COUNTRY_VIEWS = ("France North", "France South", "Czechia", "Belgium", "Germany", "United Kingdom", "Seoul Capital Area", "South Korea", "Japan West", "Japan East")
+COUNTRY_VIEWS = ("France North", "France South", "Czechia", "Benelux", "Germany", "United Kingdom", "Seoul Capital Area", "South Korea", "Japan West", "Japan East")
 MENU_ORDER = ([r for r in REGION_ORDER if r not in COUNTRY_VIEWS]
               + [r for r in REGION_ORDER if r in COUNTRY_VIEWS])
 if set(COUNTRY_VIEWS) - set(REGION_ORDER):
@@ -4988,7 +5017,7 @@ REGION_ZOOM_WITHOUT = {"Europe West": ("Stockholm",),
 # Japan West at 6.0 (2026-10-02): fitted, Osaka's and Sakai's dots sit 5.0 px
 # apart, inside one marker radius; at 6.0 they are 6.7 px apart and every label
 # places (check_macro_labels.py, PROBLEMS 0 at 375, 768 and 1200).
-REGION_ZOOM = {"France North": 5.0, "France South": 5.0, "Japan West": 6.0}
+REGION_ZOOM = {"France North": 5.0, "France South": 5.0, "Japan West": 6.0, "Benelux": 6.25}
 
 # Global is every region that is not itself a composite, derived rather than
 # listed so a new region joins it without an edit here.
@@ -5067,8 +5096,13 @@ _bad_rof = [c["name"] for c in CITIES if "label_offset_by_region" in c and not (
 if _bad_rof:
     raise ValueError(f"cities.py: {_bad_rof} have a label_offset_by_region whose keys are not "
                      "regions in REGION_ORDER or whose values are not (anchor, dx, dy)")
+# Europe West (owner, 2026-10-07, "a similar thing to east asia with seoul"):
+# the country views' larger cities stay named in the parent view - Prague,
+# Amsterdam, Rotterdam, Brussels, Antwerp, Berlin - and their smaller cities
+# are minor, named only in their own view.
 # Each tuple's order is the order region_caption() names them in.
-REGION_LABELS_ALSO = {"East Asia": ("Japan West", "Japan East", "Seoul Capital Area", "South Korea"), "Europe West": ("United Kingdom",)}
+REGION_LABELS_ALSO = {"East Asia": ("Japan West", "Japan East", "Seoul Capital Area", "South Korea"),
+                      "Europe West": ("United Kingdom", "Czechia", "Benelux", "Germany")}
 
 # A REGION VIEW THAT HAS OUTGROWN HAND PLACEMENT COMPETES FOR ITS LABELS, as
 # Global does (2026-10-04): the cities the view labels enter
@@ -5083,7 +5117,7 @@ REGION_LABELS_ALSO = {"East Asia": ("Japan West", "Japan East", "Seoul Capital A
 # Haag's pills covered the German dots and Bergen's and Riga's sat under the
 # theme button at 375 px (8 problems); competing, every name each view labels
 # is placed (22 of 22 and 5 of 5), PROBLEMS 0.
-COMPETING_REGIONS = ("Europe West", "Europe East")
+COMPETING_REGIONS = ("Europe West", "Europe East", "Benelux")
 _bad_compete = [r for r in COMPETING_REGIONS if r not in LEAF_REGIONS]
 if _bad_compete:
     raise ValueError(f"cities.py: COMPETING_REGIONS {_bad_compete} are not leaf regions "
@@ -5128,6 +5162,51 @@ if _unmoded:
         f"the highest-order mode the city's map draws and colors its macro "
         f"dot; pandas would otherwise fill a missing one with NaN."
     )
+
+# EVERY COUNTRY'S TOP CITY IS LABELLED (owner, 2026-10-07, Staging's call 197:
+# "feature every nation's top 1, maybe 2 cities at least in global view";
+# "the biggest cities people would expect to see are the ones displayed").
+# Each country's largest built city by population, with that population in
+# millions, approximate and used only for ORDER: app/label_competition.py
+# places these first, largest first, in the landing view and in every
+# competing view that labels them, and the competition decides only among the
+# cities below them (a second city per country where it clears). The owner's
+# calls where the ranking was unclear: Sydney over Melbourne, Brussels over
+# Antwerp, Taipei (Regional) for Taiwan. A first city in a new country adds its
+# row here; cities.py raises without it.
+COUNTRY_TOP = {
+    "Japan": ("Tokyo", 14.0), "Brazil": ("São Paulo", 11.9),
+    "South Korea": ("Seoul", 9.4), "Mexico": ("Mexico City (Regional)", 9.2),
+    "United Kingdom": ("London", 8.9), "United States": ("New York", 8.3),
+    "Hong Kong": ("Hong Kong", 7.5), "Taiwan": ("Taipei (Regional)", 6.5),
+    "Australia": ("Sydney", 5.3), "Germany": ("Berlin", 3.7),
+    "Spain": ("Madrid", 3.3), "Argentina": ("Buenos Aires", 3.1),
+    "Canada": ("Toronto", 2.8), "Italy": ("Rome", 2.8), "France": ("Paris", 2.1),
+    "Romania": ("Bucharest", 1.7), "Czechia": ("Prague", 1.3),
+    "Georgia": ("Tbilisi", 1.2), "Belgium": ("Brussels", 1.2),
+    "Sweden": ("Stockholm", 0.98), "Netherlands": ("Amsterdam", 0.93),
+    "Norway": ("Oslo", 0.71), "Denmark": ("Copenhagen", 0.66),
+    "Latvia": ("Riga", 0.60), "Ireland": ("Dublin", 0.59),
+    "Switzerland": ("Zurich", 0.42), "Greece": ("Thessaloniki", 0.32),
+}
+# The tops with no room on the landing view, whatever the order (measured
+# 2026-10-07, 12 positions each): Western Europe is about 4 px a degree at
+# world zoom, and Brussels, Copenhagen and Zurich sit between London, Paris,
+# Amsterdam, Berlin, Oslo and Stockholm. Placed earlier, each pushes out
+# bigger tops (Brussels first: Paris; all three first: Paris, Prague,
+# Amsterdam, Dublin and Thessaloniki). Europe West labels all three.
+# scripts/check_macro_labels.py fails a top missing from the landing view and
+# not listed here, and reports one listed here that has started to fit.
+LANDING_NO_ROOM = ("Brussels", "Copenhagen", "Zurich")
+_by_name = {c["name"]: c for c in CITIES}
+_bad_top = sorted({c["country"] for c in CITIES} - set(COUNTRY_TOP)) + [
+    f"{k}: {n}" for k, (n, _) in COUNTRY_TOP.items()
+    if n not in _by_name or _by_name[n]["country"] != k]
+if _bad_top:
+    raise ValueError(f"cities.py: COUNTRY_TOP needs a row for, or names no built city of, "
+                     f"{_bad_top}: each country's largest built city by population")
+for _k, (_n, _pop) in COUNTRY_TOP.items():
+    _by_name[_n]["country_top"] = _pop
 
 # --- CITY SWITCHER ORDER -----------------------------------------------------
 #
