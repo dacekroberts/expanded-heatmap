@@ -1,0 +1,12 @@
+{
+  "osm_station_names": {
+    "bytes": 20431,
+    "elements": 29,
+    "file": "osm_station_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-10-07T19:33:49Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](35.63,139.35,35.7,139.45);way[\"railway\"=\"station\"](35.63,139.35,35.7,139.45););out tags center;",
+    "retrieved": "2026-10-07T19:35:23+00:00",
+    "sha256": "a0e498baec18fb8bc5f81402ad57171d061c7a4a1459dfee906eadee7e0148ee"
+  }
+}
