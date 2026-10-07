@@ -4569,6 +4569,186 @@ CITIES = [
         # it refuses a guessed one.
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Fukuyama",
+        "lat": 34.4859,
+        "lon": 133.3624,
+        "page": "pages/230_Fukuyama_Heatmap.py",
+        "blurb": "JR West and the Ibara Railway (TODO: list the lines)",
+        "region": "Japan West",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Ichinomiya",
+        "lat": 35.309,
+        "lon": 136.793,
+        "page": "pages/231_Ichinomiya_Heatmap.py",
+        "blurb": "Meitetsu and JR Central (TODO: list the lines)",
+        "region": "Japan East",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Tsu",
+        "lat": 34.719,
+        "lon": 136.506,
+        "page": "pages/232_Tsu_Heatmap.py",
+        "blurb": "JR Central, Kintetsu and the Ise Railway (TODO: list the lines)",
+        "region": "Japan East",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Fukushima",
+        "lat": 37.786,
+        "lon": 140.389,
+        "page": "pages/233_Fukushima_Heatmap.py",
+        "blurb": "Fukushima Kōtsū, Abukuma Express and JR East (TODO: list the lines)",
+        "region": "Japan East",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Iwaki",
+        "lat": 37.078,
+        "lon": 140.786,
+        "page": "pages/234_Iwaki_Heatmap.py",
+        "blurb": "JR East (TODO: list the lines)",
+        "region": "Japan East",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Akita",
+        "lat": 39.7167,
+        "lon": 140.1297,
+        "page": "pages/235_Akita_Heatmap.py",
+        "blurb": "JR East (TODO: list the lines)",
+        "region": "Japan East",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Ōita",
+        "lat": 33.18,
+        "lon": 131.641,
+        "page": "pages/236_Oita_Heatmap.py",
+        "blurb": "JR Kyushu (TODO: list the lines)",
+        "region": "Japan West",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Gifu",
+        "lat": 35.448,
+        "lon": 136.765,
+        "page": "pages/237_Gifu_Heatmap.py",
+        "blurb": "Meitetsu and JR Central (TODO: list the lines)",
+        "region": "Japan East",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Mito",
+        "lat": 36.3708,
+        "lon": 140.4764,
+        "page": "pages/238_Mito_Heatmap.py",
+        "blurb": "JR East and the Kashima Rinkai Railway (TODO: list the lines)",
+        "region": "Japan East",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Morioka",
+        "lat": 39.7016,
+        "lon": 141.1365,
+        "page": "pages/239_Morioka_Heatmap.py",
+        "blurb": "JR East and IGR Iwate Galaxy Railway (TODO: list the lines)",
+        "region": "Japan East",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
