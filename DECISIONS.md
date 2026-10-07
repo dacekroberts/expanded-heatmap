@@ -20,11 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**48 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**49 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-07**
 
 - [Europe splits West and East with Greece east, Germany and Benelux get views, and every country's top city is labelled first (owner, calls 194, 195 and 197; branch europe-split, held for review time)](#2026-10-07---europe-splits-west-and-east-with-greece-east-germany-and-benelux-get-views-and-every-countrys-top-city-is-labelled-first-owner-calls-194-195-and-197-branch-europe-split-held-for-review-time)
+- [Japan's macro-map views: the eight regions with Osaka, Tokyo, Saitama, Chiba and Hyogo as prefecture views; and a city named in a wider view is named in every narrower one (owner, calls 197 and 198; branch japan-regions, held for review time)](#2026-10-07---japans-macro-map-views-the-eight-regions-with-osaka-tokyo-saitama-chiba-and-hyogo-as-prefecture-views-and-a-city-named-in-a-wider-view-is-named-in-every-narrower-one-owner-calls-197-and-198-branch-japan-regions-held-for-review-time)
 
 **2026-10-06**
 
@@ -1768,4 +1769,49 @@ standard rings. `coverage` full, `categories` "All three", `mode` metro,
   `data/` junction rewrote `app/macro_facts.json` with no storefronts, and
   the first measurements ran on it. Restored on the branch; every number
   here is from the re-run.
+
+### 2026-10-07 - Japan's macro-map views: the eight regions with Osaka, Tokyo, Saitama, Chiba and Hyogo as prefecture views; and a city named in a wider view is named in every narrower one (owner, calls 197 and 198; branch japan-regions, held for review time)
+
+- **Built by Cleanup (Staging's call 198, "198 yes, cleanup builds
+  them")** on branch `japan-regions`, which carries `europe-split` and
+  lands after it, at the phase 1 review time. Measured against the cities
+  that are actually coming: `docs/staged_cities.json` gains the build
+  plan's 16 unrostered Japanese cities and a `plan_phase` per city, and
+  `stress_overview.py --planned 1|2` scores only those.
+- **The nine views of 2026-10-04 did not meet call 197's every-city rule:**
+  with them alone, the phase 1 cities left 13 named in no view and phase 2
+  left 27 (western Tokyo, Saitama, Chiba, Hyogo, Osaka's suburbs). The fit
+  floors a view at half a degree, so a dense prefecture never zooms in far
+  enough. **The owner chose four more prefecture views, named on Osaka's
+  pattern:** Tokyo Metropolis, Saitama, Chiba and Hyogo Prefectures, each
+  at a pinned zoom (9.5; Saitama 10), with Osaka Prefecture at 9.5, Kansai
+  at 7.5 (Uji) and Chugoku at 6.6 (Kitakyushu's and Shimonoseki's dots, 5.7
+  px apart at the fit). A five-view option (Kyoto too, Kansai unpinned)
+  also passed. Tokyo moves into Tokyo Metropolis; Kobe, Himeji and
+  Nishinomiya into Hyogo.
+- **Every Japanese view and East Asia compete,** and every entrant of a
+  region view tries the twelve positions a country's top city tries (the
+  landing view keeps four for the rest). Kanto names the three Kanto
+  prefecture views' anchors, Kansai Osaka's and Hyogo's, East Asia
+  Japan's. The 20 hand offsets keyed to Japan West and Japan East, tuned at
+  the retired zooms, are dropped. A caption names a country split into
+  views once ("Japan", "France").
+- **Result:** PROBLEMS 0 for the built cities (31 menu entries) and for the
+  plan's phase 1 (33) and phase 2 (34) cities; every city named in a view.
+- **The nesting rule (owner: "cities who make it onto the global or
+  regional views should still make it onto country level views"):**
+  `check_macro_labels.py` now fails a city named in a wider view but not in
+  a narrower one that holds it (Tokyo: Global, East Asia, Kanto, Tokyo
+  Metropolis; Paris: Global, Europe West, France North). It holds today and
+  through phase 2 with no change to the competition.
+- **Copenhagen (Regional) (Abroad's tip fc869622) merged into both
+  branches:** its 158.5 px pill caused six hand-placement problems in
+  Abroad's single Europe view (over Liepāja's marker, across Newcastle
+  (Regional)); in the competing Europe West it places, PROBLEMS 0. It
+  replaces Copenhagen as Denmark's top and in `LANDING_NO_ROOM`. The
+  owner's question on shortening "(Regional)" to "(R)" used it as the test
+  case: either a shorter suffix or none clears all six on Abroad's tip, and
+  in Europe West "(R)" places one more name and no suffix two more; on the
+  landing view the suffix changes nothing (Copenhagen has no room even
+  unsuffixed). Open, for the owner.
 

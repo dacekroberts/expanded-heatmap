@@ -39,10 +39,14 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   city labelled first are built on branch `europe-split`** (owner, calls 194,
   195, 197, 2026-10-07; DECISIONS, "Europe splits West and East"), based on
   Abroad's tip: it lands at review time after Abroad's batch, merging master
-  first, with a reboot and a `map-chrome` deploy-verify. Still to come, each
-  made by the first city that needs it: Japan's eight regions plus Osaka
-  Prefecture (wave 4; the `japan-city` skill), with views enough that no
-  city is labelled nowhere (27 staged Japanese cities would be); Brăila and
+  first, with a reboot and a `map-chrome` deploy-verify. **Japan's views are
+  built on branch `japan-regions`** (owner, calls 197-198; DECISIONS,
+  "Japan's macro-map views"), carrying `europe-split` (Copenhagen (Regional)
+  merged into both): the eight regions with Osaka, Tokyo, Saitama, Chiba
+  and Hyogo as prefecture views, and the nesting test. It lands at the phase
+  1 review time after East-1, Kansai-1 and Regional-1, merging master first
+  and re-running `stress_overview.py --planned 2`. **Open for the owner:**
+  "(Regional)" on macro-map pills shortened or dropped. Still to come: Brăila and
   Galați, Nagakute and Nisshin, Itami and Toyonaka into `KNOWN_STACKED`.
 
 - [ ] **Review time: the Japanese pages' name-rule bullet gains the sign rule**
