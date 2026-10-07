@@ -25,7 +25,8 @@ Cities, in build order (`docs/build_plan_2026-10-07.md`): Toyonaka (page
    unchanged until a review time re-renders them. Measured: the privacy
    check, which already matches by trade-name key across the whole city,
    prints 0 for the other six Kansai-1 cities, so the change would move only
-   Suita's 1 pin among them; built cities are not re-measured here. Tradeoff:
+   Suita's 1 pin among them; East-1 reports the same check printing 0 on
+   all twelve of its cities (2026-10-07); built cities are not re-measured here. Tradeoff:
    a common trade name that is also some operator's own name elsewhere in the
    city would be withheld at every premises. Without it, Suita cannot publish.
    The shared change touches `japan_step2`, so East-1 and Regional-1 are told
