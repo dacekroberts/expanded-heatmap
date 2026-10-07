@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**51 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**52 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-07**
 
@@ -28,6 +28,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Japan's macro-map views: the eight regions with Osaka, Tokyo, Saitama, Chiba and Hyogo as prefecture views; and a city named in a wider view is named in every narrower one (owner, calls 197 and 198; branch japan-regions, held for review time)](#2026-10-07---japans-macro-map-views-the-eight-regions-with-osaka-tokyo-saitama-chiba-and-hyogo-as-prefecture-views-and-a-city-named-in-a-wider-view-is-named-in-every-narrower-one-owner-calls-197-and-198-branch-japan-regions-held-for-review-time)
 - [Call 209: the Japanese name rule crosses premises on six live maps, 13 operators' own names withheld (owner, privacy repair)](#2026-10-07---call-209-the-japanese-name-rule-crosses-premises-on-six-live-maps-13-operators-own-names-withheld-owner-privacy-repair)
 - [Map labels drop "(Regional)", and Benelux names the City of Brussels (owner; branches europe-split and japan-regions, held for review time)](#2026-10-07---map-labels-drop-regional-and-benelux-names-the-city-of-brussels-owner-branches-europe-split-and-japan-regions-held-for-review-time)
+- [Four ideas assessed before the large review: back links, one pin colour per meaning, place search, an open offline basemap and a transit-first travel app (owner)](#2026-10-07---four-ideas-assessed-before-the-large-review-back-links-one-pin-colour-per-meaning-place-search-an-open-offline-basemap-and-a-transit-first-travel-app-owner)
 
 **2026-10-06**
 
@@ -1875,4 +1876,62 @@ standard rings. `coverage` full, `categories` "All three", `mode` metro,
   (`pill_by_region`). "Brussels Region" was set aside because the official
   Region includes the City, which that page leaves out. Rendered locally in
   Benelux and Europe West.
+
+### 2026-10-07 - Four ideas assessed before the large review: back links, one pin colour per meaning, place search, an open offline basemap and a transit-first travel app (owner)
+
+- **The owner holds the large-scale review** until these are assessed
+  ("hold until we've addressed the viability of these items"). All four
+  are viable; nothing is built yet.
+- **1. Back links.** "Global View" stays; a second link sits beside it
+  (owner): on a city page, the city's own region view; on the four
+  site-wide pages, the city or region the reader came from (passed in the
+  link, as `?country=` is today). The Overview gains opening on a region
+  named in its link. App-only, about four files, no re-render; built on
+  `japan-regions` because region names change there.
+- **2. One pin colour per meaning (owner: "one fixed color per distinct
+  meaning was my intent").** Measured on all 170 maps: blue means general
+  retail (100), food shops only (49) and shops and services (6). Chosen:
+  Food shops olive #737a00 (49 maps); Shops and services violet #7e57c2 (6
+  maps), which those maps draw instead of blue. The owner asked whether a
+  future map could need both: possible (a second source that separates
+  shops from services), so the renderer will refuse violet beside blue, and
+  the backup is teal #37786e site-wide with an outline ring on that layer
+  (the best of three candidates; its weakest pair is Retail under
+  tritanopia, CIEDE2000 11.0). The 14 layer menus that disagree with their
+  legends are fixed in the same re-render; three line colours (Hiroshima 2,
+  Osaka 1) move a shade from olive; the line-colour check compares only the
+  colours a map draws (Paris and Ostrava would fail on olive they never
+  show). A mostly-food licensed slice that is a city's retail layer
+  (Philadelphia, Boston, New York, Buffalo, Toronto, three Korean cities)
+  stays blue with a legend naming its contents (owner); its wording goes to
+  the owner first. Ottawa's one food layer (no premises-type field):
+  recommended to stay magenta, open for the owner.
+- **3. Place search (owner: as privacy-adherent as possible with genuine
+  benefit).** Places only (streets, intersections, stations, landmarks),
+  never business records; searched in the browser over a per-city index
+  from OpenStreetMap, so no query reaches a server or a log or a URL.
+  Nominatim's public service forbids autocomplete and allows 1 request a
+  second in all; the index is an ODbL derivative database, published under
+  ODbL with the credit already shown. Next: a one-city pilot.
+- **4. Open basemap and a travel app.** CARTO's terms forbid bulk download,
+  redistribution and device caching beyond 30 days; tile.openstreetmap.org
+  (the city maps' basemap) forbids offline use. Building from OpenStreetMap
+  is allowed; Protomaps (code BSD-3, styles CC0) needs only the OSM credit.
+  On the site, a "Standard / Open" basemap switch, the current tiles the
+  default. The app (owner): free, transit-first, a separate front end;
+  everyday places (convenience stores, pharmacies, station exits) from
+  OpenStreetMap, not the registers. Packs refresh every 6 months, a firmer
+  banner at 12; urgent flags per city (rail openings, removal requests,
+  licence dates); timetables expire on their feeds' own dates; one shared
+  manifest so the server never learns which cities a reader holds; local
+  reminders, no push accounts (owner: "sounds good"). Transit terms to
+  check: WMATA, LA Metro, IDFM, CRTM.
+- **Pack sizes, measured (owner: Tokyo, then the smallest).** From the
+  Protomaps planet build of 2026-10-07, reading its PMTiles index only (32
+  MB of index, no tiles): each city's station extent padded 1 km, at zoom
+  15: Tokyo 92 MB, London 113 MB (the largest), Mendoza 1.2 MB (the
+  smallest), median 10.1 MB, all 170 cities 2.70 GB; with 10 km more around
+  each city: Tokyo 164 MB, median 27.8 MB, all 5.94 GB. Zoom 14 is about a
+  third of zoom 15. Protomaps' default content; a style of the project's
+  own can drop layers.
 

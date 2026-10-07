@@ -22,6 +22,15 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
+- [ ] **The large-scale review is held (owner, 2026-10-07)** until four ideas
+  are settled (DECISIONS, "Four ideas assessed before the large review"):
+  back links beside "Global View"; one pin colour per meaning (olive food
+  shops, violet shops and services with a refuse-both check and a teal
+  backup); place search (a one-city pilot); an open basemap switch and a
+  transit-first offline app (pack sizes measured). Open for the owner:
+  Ottawa's food layer colour; the legend wording for the mostly-food retail
+  slices; which sessions to open.
+
 - [x] **Desktop leftovers fixed 2026-10-04** (A and B-lite; DECISIONS, "San
   Diego, San Francisco and Los Angeles state or fix their lean").
 
