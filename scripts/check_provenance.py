@@ -212,6 +212,12 @@ SLUG_OVERRIDES = {
     # Japan wave 2 (2026-10-03), likewise.
     "Ōtsu": "otsu",
     "Higashiōsaka": "higashiosaka",
+    # East-1 (2026-10-07), likewise, and Fuchū's page names its prefecture.
+    "Nishitōkyō": "nishitokyo",
+    "Sōka": "soka",
+    "Fuchū (Tokyo)": "fuchu_tokyo",
+    "Chōfu": "chofu",
+    "Ageo (Regional)": "ageo_regional",
     # Brazil: accents dropped from the package name, and the regional pages'
     # suffix, as for Lille.
     "São Paulo": "sao_paulo",

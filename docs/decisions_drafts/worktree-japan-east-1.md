@@ -35,12 +35,24 @@ calls:
 - **Higashiyamato, the Seibu Haijima Line:** "The Seibu Haijima Line has one
   station of its own in the city, Higashiyamatoshi, and meets the monorail at
   Tamagawa-Josui on the city line."
+- **Nishitōkyō (page 211, notice 158) and each Tama city after it** carry the
+  same sentences with the city's own figures, read from its
+  `official_shares.json`; only the Seibu Haijima sentence is Higashiyamato's
+  alone.
 - **Notice 157's processing sentence:** "The ledgers hold new permits since
   August 2019 and leave out premises whose operators asked not to be
   published; the ministry's list holds only filings whose applicants agreed
   to publish them. Neither is complete." The credit itself follows the Tokyo
   Open Data Terms' §2(1)イ form the brief quotes; staging's record holds the
   verdict but no exact wording, so the wording is flagged for confirmation.
+
+### 2026-10-07 - Nishitōkyō built
+
+- **Nishitōkyō built on the same Tama ledgers and MHLW's Tokyo filings as Higashiyamato, cut by address: 1,936 storefronts (Food service 982, Retail 566, Personal services 388) at 5 stations, 1,619 within a ring (83.6%).** The brief's 17 checks held (2026-10-07). Page 211, notice 158. Rows in the city: food permits 1,446, notifications 511, barbers 80, beauty 236, laundry 75, MHLW 326. Out before the buckets: 8 area-wide addresses; not a storefront 400 (institutional catering 233, no rule 86, vending 30, hostess venues 29, 仕出し 13, temporary or mobile 4, linen supply 3, inside accommodation 2). The join: block 2,264, MHLW's own point 2, unplaced 0; MHLW's points a median 48 m from the block point (221 rows, 94.6% within 250 m). 239 MHLW rows repeat a ledger premises (101 permits, 138 notifications); 134 repeat permits shown once. On the map: block 1,934, own 2 (99.9%). 菓子 / そうざい 194 rows, 5 factory-like (2.6%), kept.
+- **The shares, read by the page, reproduce the brief exactly:** restaurants 1,171 of 1,284 (91.2%), 933 at 2025-03-31 (72.7%); barbers 80 of 84, 78 at the date (92.9%); beauty 236 of 256, 226 (88.3%); laundry 75 of 87, 73 (83.9%).
+- **Rail:** the Seibu Shinjuku Line (3 of 29) and Seibu Ikebukuro Line (2 of 31), N02-25, main lines cut at the city line. Gate 3 exact against Seibu's counts (3, 2). 7 stations beyond the line (練馬区 3, 小平市 2, 東久留米市 1, 清瀬市 1). Median gap 1,223 m, standard rings. Colours: Shinjuku #08A0C0 (45.1 against Retail), Ikebukuro #D08000; pair 104.1. OSM `name:en` for all 5, no override.
+- **Census control 2.23, above the built cities' 1.56-1.92 (the brief: 2.21), and the brief's readings tested:** without the 67 弁当屋 pins it reads 2.09; counting distinct addresses rather than premises, 1.98 (196 pins share an exact address with another restaurant pin: food halls and buildings of several restaurants). Higashiyamato reads 1.62 and 1.59 the same ways. So the excess is mostly takeaway bento counters, which the census files outside 飲食店 and the permit law inside it, and buildings of several premises; recorded, no change made.
+- **Privacy verdict: publish.** The Japan pass prints 0 of 1,936; 0 trade names equal an operator's own name; no pin shows its permit type.
 
 ### 2026-10-07 - Higashiyamato built
 

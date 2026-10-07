@@ -172,6 +172,8 @@ CITIES = {
     # "rules": a city built after the foundation reads ALL_RULES.
     "higashiyamato": {"name": "東大和市", "pref": "13", "epsg": 32654, "n02": "25", "wardless": True,
                       "wards": ["13220"]},
+    "nishitokyo": {"name": "西東京市", "pref": "13", "epsg": 32654, "n02": "25", "wardless": True,
+                   "wards": ["13229"]},
 }
 
 # THE CITIES BUILT BEFORE THE JAPAN FOUNDATION (2026-10-07): they keep
