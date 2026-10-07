@@ -167,6 +167,11 @@ CITIES = {
                "wards": ["42202"]},
     "shimonoseki": {"name": "下関市", "pref": "35", "epsg": 32652, "n02": "25", "rules": WAVE2_RULES, "wardless": True,
                     "wards": ["35201"]},
+    # East-1 (the A and B build plan, 2026-10-07): the Tama cities on the
+    # Tokyo Metropolitan Government's ledgers, each cut by its address. No
+    # "rules": a city built after the foundation reads ALL_RULES.
+    "higashiyamato": {"name": "東大和市", "pref": "13", "epsg": 32654, "n02": "25", "wardless": True,
+                      "wards": ["13220"]},
 }
 
 # THE CITIES BUILT BEFORE THE JAPAN FOUNDATION (2026-10-07): they keep

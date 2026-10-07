@@ -4545,6 +4545,34 @@ CITIES = [
         "label_tier": "minor",
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Higashiyamato",
+        "lat": 35.7454,
+        "lon": 139.4265,
+        "page": "pages/210_Higashiyamato_Heatmap.py",
+        "coverage": "narrowed",
+        "placement": "Joined to address blocks (95.0%)",
+        "data_age": "Tama ledgers as of 2026-08-31; ministry filings fetched 2026-10-06",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
+        "blurb": "The Tama Toshi Monorail and the Seibu Haijima Line",
+        "region": "Japan East",
+        "country": "Japan",
+        # metro (owner, call 170): a monorail on its own viaduct and private
+        # heavy rail, as Kitakyushu's map reads
+        "mode": "metro",
+        "in_default_view": False,
+        # No label tier and the scaffold's starting offset: Cleanup builds
+        # Japan's region views and their labels (owner, call 198, 2026-10-07).
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

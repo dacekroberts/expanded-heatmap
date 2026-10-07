@@ -168,6 +168,8 @@ OSM_RAIL_BY_CITY = {
         "Sakai", "Hakodate", "Kagoshima", "Okayama", "Kōchi", "Kawasaki", "Yokosuka",
         "Himeji", "Nishinomiya", "Takamatsu", "Toyota", "Yokkaichi", "Ōtsu", "Nara",
         "Hamamatsu", "Higashiōsaka", "Kurume", "Sasebo", "Shimonoseki")},
+    # East-1 (2026-10-07)
+    **{c: _japan(c) for c in ("Higashiyamato",)},
 }
 
 

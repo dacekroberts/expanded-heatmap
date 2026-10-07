@@ -530,6 +530,13 @@ REGISTRIES = {
                   address=("address",), japan=True)
        for slug in ("kawasaki", "yokosuka", "himeji", "nishinomiya", "takamatsu", "toyota", "yokkaichi",
                     "otsu", "nara", "hamamatsu", "higashiosaka", "kurume", "sasebo", "shimonoseki")},
+    # East-1 (2026-10-07), on the same shared steps and the same rule: the Tama
+    # ledgers' 営業者氏名 and MHLW's 法人名 are read only by the name rule, in
+    # memory; 法人代表者氏名 is dropped at read (call 109). The Japan pass tests
+    # what reached the map.
+    **{slug: dict(raw=None, trade=None, owner=None, processed="businesses_clean.csv",
+                  address=("address",), japan=True)
+       for slug in ("higashiyamato",)},
     # Ottawa: Ottawa Public Health's LIVES inspection feed. Its businesses.csv
     # has one name column (the premises name) and a phone, never read (step 2
     # names its columns and asserts it). No owner column exists, so no
@@ -1243,7 +1250,7 @@ def check(slug):
         cfg = importlib.import_module(f"pipeline.{slug}.config")
         own = set()
         from pipeline.countries import japan, japan_step2
-        rules = frozenset(japan.CITIES.get(slug, {}).get("rules", ()))
+        rules = japan.city_rules(slug)
         for key in cfg.SOURCES:
             # a rebuilt register (Kyoto's) is read as step 2 reads it
             for r in japan_step2.source_rows(cfg, key):

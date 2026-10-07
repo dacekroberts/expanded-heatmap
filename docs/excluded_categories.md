@@ -4381,6 +4381,47 @@ line.
   the city, Shimonoseki, and is drawn as part of the Sanyo Line.
 - The Shinkansen is not drawn (Shin-Shimonoseki appears as a JR station).
 
+### Higashiyamato - the Tokyo Metropolitan Government's Tama ledgers and the national filings, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Restaurants and food shops the ledgers do not hold. They list new permits
+  only since August 2019 and renewals since April 2017, and leave out
+  premises whose operators asked not to be published and premises that have
+  closed. Against the official count at the end of March 2025, the ledger
+  holds 397 of the city's 528 restaurants (75.2%). The national filings add
+  the premises they hold and the ledgers do not.
+- Shops that sell only packaged food, except where they notified the health
+  centre since June 2021 (the notification ledger) or filed nationally.
+- 79 school, hospital and staff canteens, 15 snack bars and cabarets, 9
+  vending machines, 8 caterers (仕出し), 7 rows marked temporary or mobile, 2
+  premises inside hotels and inns and 2 mail-order businesses.
+- 26 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 2 rows addressed to an area rather than a premises, 1 food truck or stall,
+  and 1 closed premises, which the national filings keep, marked.
+
+**Counted** - the ledgers as of August 31, 2026, and the national filings
+for the city as downloaded on October 6, 2026. 1 of the 70 bakery,
+confectioner and deli rows (1.4%) has a trade name that reads as a factory;
+it is kept (owner, 2026-09-24).
+
+**One pin per premises** - 70 repeat permits are shown once, and 111
+national filings that repeat a ledger's premises are shown as the ledger's.
+
+**Not placed** - none. 42 rows sit at their town's center.
+
+**Names not shown** - none: no trade name is its operator's own name, and
+the ledgers publish an operator's name almost only for companies.
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 7 stations beyond it: 5 in Tachikawa, 1 in Kodaira and 1 in
+  Higashimurayama.
+- The Seibu Haijima Line keeps one station of its own inside the city,
+  Higashiyamatoshi, and is drawn as cut; Tamagawa-Josui, where it meets the
+  monorail at the city line, is one station.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

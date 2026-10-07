@@ -4,7 +4,11 @@ One copy for the build's share check and scripts/japan_ward_table.py
 (2026-09-28):
 
   * **Tokyo's statistical yearbook, table 19-8** (`data/tokyo/raw/tn24qv190800.csv`):
-    飲食店営業 per special ward at the end of the latest fiscal year (FY2024).
+    飲食店営業 per special ward and per Tama city at the end of the latest
+    fiscal year (FY2024, so as of 2025-03-31); **table 19-7**
+    (`tn24qv190700.csv`, the owner's call 189, 2026-10-06): the barbers,
+    beauty salons and laundries of each, the Tama cities' registers measured
+    against it.
   * **MHLW's 衛生行政報告例 on e-Stat**, FY2024 (`data/japan/raw/`): permitted
     facilities at year-end, old law (table 5-2-1) plus revised law (5-4-1), per
     designated city. Their sum for 東京都 equals the yearbook exactly, so every
@@ -24,9 +28,15 @@ from pipeline.countries import japan
 
 _ROOT = Path(__file__).parent.parent.parent
 YEARBOOK = _ROOT / "data" / "tokyo" / "raw" / "tn24qv190800.csv"
+YEARBOOK_REGISTERS = _ROOT / "data" / "tokyo" / "raw" / "tn24qv190700.csv"
+# The yearbook's counts stand at the end of its fiscal year (FY2024): the date
+# a list's rows are cut at for the share "at the yearbook's date" (calls
+# 187-189).
+YEARBOOK_DATE = "2025-03-31"
 ESTAT_OLD = japan.SHARED_RAW / "estat_eisei_r6_food_5-2-1_oldlaw_by_type.csv"
 ESTAT_NEW = japan.SHARED_RAW / "estat_eisei_r6_food_5-4-1_newlaw_by_type.csv"
 YEARBOOK_SOURCE = "Tokyo statistical yearbook, table 19-8 (飲食店営業, FY2024)"
+YEARBOOK_REGISTERS_SOURCE = "Tokyo statistical yearbook, table 19-7 (理容所, 美容所, クリーニング所, FY2024)"
 ESTAT_SOURCE = "MHLW 衛生行政報告例 FY2024 (e-Stat), tables 5-2-1 + 5-4-1"
 
 
@@ -35,15 +45,39 @@ def _decode(b):
     return japan_register.decode(b)
 
 
-def yearbook():
-    """Tokyo ward name -> 飲食店営業 in the yearbook's latest fiscal year; {} if not cached."""
-    if not YEARBOOK.exists():
+def _yearbook_table(path, columns):
+    """{municipality name: {column label start: count}} for one yearbook
+    table's latest fiscal year: the special wards (131xx) and the Tama cities
+    (132xx), never a total (13100 区部, 13200 市部). Columns are found by the
+    start of their label, never by position; "-" reads 0. {} if not cached."""
+    if not path.exists():
         return {}
-    rows = list(csv.reader(io.StringIO(_decode(YEARBOOK.read_bytes()))))
-    col = next(i for i, c in enumerate(rows[0]) if c.startswith("飲食店営業"))
-    wards = [r for r in rows[1:] if len(r) > col and r[3].startswith("131") and r[3] != "13100"]
-    latest = max(r[1] for r in wards)
-    return {r[4]: int(r[col]) for r in wards if r[1] == latest}
+    rows = list(csv.reader(io.StringIO(_decode(path.read_bytes()))))
+    cols = {p: next(i for i, c in enumerate(rows[0]) if c.startswith(p)) for p in columns}
+    munis = [r for r in rows[1:] if len(r) > max(cols.values()) and r[3][:3] in ("131", "132")
+             and not r[3].endswith("00")]
+    latest = max(r[1] for r in munis)
+    num = lambda x: 0 if x.strip() in ("-", "") else int(x.replace(",", ""))  # noqa: E731
+    return {r[4]: {p: num(r[i]) for p, i in cols.items()} for r in munis if r[1] == latest}
+
+
+def yearbook():
+    """Tokyo ward or Tama city name -> 飲食店営業 in the yearbook's latest
+    fiscal year; {} if not cached. The Tama cities since 2026-10-07 (East-1,
+    Higashiyamato first); a ward reads as before."""
+    return {m: v["飲食店営業"] for m, v in _yearbook_table(YEARBOOK, ("飲食店営業",)).items()}
+
+
+# Each register's column in table 19-7, by the start of its label
+REGISTER_COLUMNS = {"barber": "理容所", "beauty": "美容所", "laundry": "クリーニング所"}
+
+
+def registers(municipality):
+    """{"barber": n, "beauty": n, "laundry": n} for a Tokyo ward or Tama city in
+    table 19-7's latest fiscal year (call 189); {} where it is not covered or
+    the table is not cached."""
+    t = _yearbook_table(YEARBOOK_REGISTERS, tuple(REGISTER_COLUMNS.values())).get(municipality)
+    return {k: t[c] for k, c in REGISTER_COLUMNS.items()} if t else {}
 
 
 def estat():
@@ -97,10 +131,12 @@ def census():
 
 def restaurants(prefecture, municipality):
     """(the official 飲食店営業 count, its source) for one municipality: a Tokyo
-    special ward from the yearbook, a designated city from e-Stat; (None, None)
-    where neither covers it or the file is not cached."""
-    if prefecture == "東京都" and municipality.endswith("区"):
+    special ward or Tama city from the yearbook, a designated city from e-Stat;
+    (None, None) where neither covers it or the file is not cached."""
+    if prefecture == "東京都":
+        # a special ward, or a Tama city: its yearbook row, never e-Stat's
         n = yearbook().get(municipality)
-        return (n, YEARBOOK_SOURCE) if n else (None, None)
+        if n or municipality.endswith("区"):
+            return (n, YEARBOOK_SOURCE) if n else (None, None)
     n = estat().get(prefecture + municipality)
     return (n, ESTAT_SOURCE) if n else (None, None)
