@@ -143,17 +143,21 @@ exist ONLY in the worktree that built it. Before removing a worktree
 
 **Page and notice numbers** (`#sr-numbers` has the full paragraph of
 2026-10-04). Notice numbers are claimed
-here, by the session, before one is written; no claims are open;
-133–136, released unused by the four extensions on 2026-10-03, stay
-unassigned; the next free notice is 154. Every earlier block has landed:
+here, by the session, before one is written; open claims (2026-10-07,
+the A and B build plan): Abroad 154–156, East-1 157–168, Kansai-1
+169–175, Regional-1 176–186, East-2 187–197, Kansai-2 198–204,
+Regional-2 205–214; 133–136, released unused by the four extensions on
+2026-10-03, stay unassigned; the next free notice is 215. Every earlier block has landed:
 the coverage sweep's on 2026-10-04 (the Korean three, pages 190–192 and no
 notices; Mendoza, Tacoma and Liverpool (Regional), pages 193–195 and
 notices 141–143 and 153; Belgium, pages 196–201 and notices 144–152);
 Japan wave 2's 115–128, the extensions' 129–132 and lane-app's 137–140 on
-2026-10-03, and everything up to 114 on 2026-10-02. Pages reserved for the ranked
-list (2026-10-04; `docs/staged_cities.json`): the owed-act seven
-203–209, Japan wave 4 210–289, rank 4 290–299; the free pages outside them
-are 202 and 300 on.
+2026-10-03, and everything up to 114 on 2026-10-02. Pages reserved (2026-10-07, the A and B build plan, one page per city in its
+session's build order): Abroad 202 and 300–304 (its own claim), the
+owed-act seven 203–209, East-1 210–221, Kansai-1 222–228, Regional-1
+229–239, East-2 240–250, Kansai-2 251–257, Regional-2 258–267, spare
+268–289, rank 4 290–299; the free pages outside them are 305 on. A
+session releases what it leaves unused when it lands.
 Check D of `check_provenance.py` reads every range in that sentence and lets
 a branch skip exactly those numbers; any other gap still fails. Keep the
 ranges in that one sentence, and delete a batch's range once it lands.

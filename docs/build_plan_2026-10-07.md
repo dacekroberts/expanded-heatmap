@@ -56,6 +56,22 @@ At most three build sessions at once (owner, 2026-10-04).
 - **BODIK:** the Kansai sessions are the only sessions that call it, at least 20 s apart. They run one after the other.
 - **Batches are about 12 cities**, the measured size. A session at its batch's end writes its handoff and stops; the next session starts fresh.
 
+## Page and notice numbers
+
+Each session takes its numbers from its own block, recorded in `docs/session_roles.md` (the numbers paragraph), and scaffolds with `scaffold_city.py ... --page-number <N>`. Pages go one per city in the session's build order; notices are claimed from the block as they are written.
+
+| Session | Pages | Notices |
+|---|---|---|
+| Abroad | 202, 300–304 | 154–156 |
+| East-1 | 210–221 | 157–168 |
+| Kansai-1 | 222–228 | 169–175 |
+| Regional-1 | 229–239 | 176–186 |
+| East-2 | 240–250 | 187–197 |
+| Kansai-2 | 251–257 | 198–204 |
+| Regional-2 | 258–267 | 205–214 |
+
+A session that runs out asks Staging for more. Unused numbers are released when the session lands.
+
 ## Rules every build session follows
 
 - Read CLAUDE.md, `docs/session_roles.md` and the session's skills.
