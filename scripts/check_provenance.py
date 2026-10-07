@@ -212,6 +212,8 @@ SLUG_OVERRIDES = {
     # Japan wave 2 (2026-10-03), likewise.
     "Ōtsu": "otsu",
     "Higashiōsaka": "higashiosaka",
+    # The A/B build plan's Regional-1 batch (2026-10-07), likewise.
+    "Ōita": "oita",
     # Brazil: accents dropped from the package name, and the regional pages'
     # suffix, as for Lille.
     "São Paulo": "sao_paulo",

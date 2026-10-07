@@ -6,7 +6,7 @@ read from the code, so a review lane can divide them up and miss none
 (review lesson 3, `docs/review_lanes_2026-09-30.md`). The lane kit is
 `docs/review_lane_kit.md`.
 
-**170 city pages, 4 fixed pages and the Overview; 28 rendered docs; 2 app data files.**
+**181 city pages, 4 fixed pages and the Overview; 28 rendered docs; 2 app data files.**
 
 ## The Overview (`/`)
 
@@ -207,3 +207,14 @@ Is Excluded, and its in-ring share on Why the Maps Differ.
 | `/Charleroi_Heatmap` | Charleroi | `charleroi` | ✓ |
 | `/Liege_Heatmap` | Liège | `liege` | ✓ |
 | `/Brussels_Regional_Heatmap` | Brussels (Regional) | `brussels` | ✓ |
+| `/Maebashi_Heatmap` | Maebashi | `maebashi` | ✓ |
+| `/Fukuyama_Heatmap` | Fukuyama | `fukuyama` | ✓ |
+| `/Ichinomiya_Heatmap` | Ichinomiya | `ichinomiya` | ✓ |
+| `/Tsu_Heatmap` | Tsu | `tsu` | ✓ |
+| `/Fukushima_Heatmap` | Fukushima | `fukushima` | ✓ |
+| `/Iwaki_Heatmap` | Iwaki | `iwaki` | ✓ |
+| `/Akita_Heatmap` | Akita | `akita` | ✓ |
+| `/Oita_Heatmap` | Ōita | `oita` | ✓ |
+| `/Gifu_Heatmap` | Gifu | `gifu` | ✓ |
+| `/Mito_Heatmap` | Mito | `mito` | ✓ |
+| `/Morioka_Heatmap` | Morioka | `morioka` | ✓ |
