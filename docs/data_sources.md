@@ -3788,6 +3788,27 @@ batch at review time).
   2026-10-07; the verdict is in `docs/decisions_drafts/worktree-japan-kansai-1.md`
   ("Toyonaka built", 2026-10-07).<!-- /internal -->
 
+**170. Hirakata City, MHLW and MLIT (Hirakata) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with the Kansai-1
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-07; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's food list and
+  barber, beauty and laundry lists are **CC BY 2.1 JP** by the 利用条件 on each
+  dataset page; MHLW's open data is **PDL 1.0**, as in Sakai's (104); MLIT's
+  位置参照情報 and N02 (the 2025 edition) are **PDL 1.0**, as in Kobe's (50).
+  N03 (CC BY 4.0) only picks stations and is **never drawn** (the Survey Act).
+- **MUST DISPLAY**: the pages' 表示例 for an adaptation,
+  「この地図は以下の著作物を改変して利用しています。[データのタイトル]、枚方市、クリエイティブ・コモンズ・ライセンス 表示 2.1」,
+  with the licence URI; MHLW's 出典 line and who processed it (the top page
+  linked only); MLIT's credit lines. The city's pages are cited by title, not
+  linked (its linking policy asks for an enquiry before a deep link).
+- **MUST NOT**: claim the ministry's opt-in list is complete; use MHLW's logo.
+  Remove the city's credit if it asks (CC BY 2.1 JP 第5条).<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py hirakata` with its Japan pass, run
+  2026-10-07; the verdict is in `docs/decisions_drafts/worktree-japan-kansai-1.md`
+  ("Hirakata, Suita, Amagasaki and Uji built", 2026-10-07).<!-- /internal -->
+
 **172. Hyōgo Prefecture and MLIT (Itami) — required, and DISPLAYED**
 (written into `render_site_notices()` 2026-10-07; lands with the Kansai-1
 batch at review time).

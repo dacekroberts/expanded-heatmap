@@ -14,7 +14,49 @@ None yet.
 
 ## Proposals for review time (sentences no template covers)
 
-None yet.
+- **Toyonaka, What Is Excluded, Stations:** "Senri-Chuo is one station: the
+  Osaka Monorail's platform and Kita-Osaka Kyuko's, 257 m apart, share one
+  ring."
+- **Itami and Kakogawa, The businesses:** "From Hyōgo Prefecture's lists of
+  … (all as of August 31, 2026), which cover the prefecture's towns and cities
+  outside its five largest; each business is placed in <City> by its
+  address." and the stated share (call 125's precedent, Ichinomiya's shape):
+  "The prefecture publishes no count for <City> alone, so how complete the
+  lists are here can only be estimated: they hold about 86% [Kakogawa 87%] of
+  the restaurants a prefecture-wide comparison suggests." The notification
+  bullet is Yokkaichi's approved sentence with "the prefecture" for "the
+  city".
+- **Itami, The lines:** "…and the Osaka Monorail's main line, which has one
+  station in the city, at the airport."
+- **Kakogawa, Reading the map** (the tiers disclosed, owner call 145): "Each
+  address is matched to MLIT's address reference data: about 88% reach their
+  street block, and about 12%, where only the district can be found, sit at
+  the district's center."
+- **Itami and Kakogawa, What Is Excluded:** the rows addressed outside the
+  city and the 県下一円 permits; "The list names no hostess venue, so snack
+  bars holding a restaurant permit stay in Food service."; the estimated share
+  in **Counted**.
+
+## Brief corrections (a brief to correct, never a check to relax)
+
+- **Kakogawa:** "0 rows in any file contain 加古川市 anywhere else" holds for
+  premises only: 3 vehicle notifications read 「たつの市、高砂市、加古川市内一円」.
+  The cut passes over an area licensed across several towns (it is no premises
+  in any of them) and still stops on any other mid-address mention; Itami's
+  cut does the same.
+- **Uji:** the guard on 宇治 alone stopped on 伊根町's 字本庄宇治 (3 rows); the
+  brief's measured claim is about 宇治市, and the guard now tests that.
+- **Toyonaka:** the June 2026 and later new-permit files drop the empty
+  廃業年月日 column; the brief listed it for every month.
+
+### 2026-10-07 - Toyonaka, Itami and Kakogawa built (Kansai-1, pages 222, 225, 226; notices 169, 172, 173)
+
+- **Toyonaka: 5,277 storefronts, 10 stations.** The food list rebuilt BY PERMIT NUMBER (the brief's method, Maebashi's and Sakai's): the full list of 2026-03-31 (4,369 permits), plus the new permits of April to August 2026 (339; a number seen again replaces the earlier row), less 252 permits the closure files name (of 277 closure numbers; a closure applies only where it falls on or after that permit's grant), kept while 許可満了日 is on or after 2026-08-31 (130 dropped): **4,318, exactly the brief's.** The 生活衛生 register split by 業種 (barbers 237, beauty 736, laundries 231 with the bracketed kind as the type, so linen supply goes out by `japan_eigyo`'s rule; lodging, public baths and 興行場 out). MHLW's notifications as the partial Food-shops layer (1,367 rows; 488 without a published address), its own point where the join misses (89). Food service 2,957, Retail 1,127, Personal services 1,193 pins; block 96.9% of storefront rows, 4 unplaced. Names withheld 2; factory share 16 of 418 (3.8%), kept. Census control 2.27 (the brief's; no 業態, so konbini and canteens holding 飲食店営業 stay in Food service, Kobe's and Osaka's lists' way). Rail: 千里中央 joined (`GROUP_JOIN`, 257 m: staging applied Kawasaki's and Tokyo's precedent, 2026-10-06), 10 stations, 11 excluded beyond the line, median gap 1,102 m: standard rings; 79% of storefronts within a ring.
+- **Itami: 2,383 storefronts, 6 stations; Kakogawa: 3,701 storefronts, 8 stations.** Hyōgo Prefecture's five lists cut BY ADDRESS (Tsu's shape: a row that begins 伊丹市 / 加古川市 once 兵庫県 is cut; an area licensed across several towns passed over; any other mid-address mention stops the build). The notifications are the Food-shops layer (owner, call 164). Itami: Food service 1,333, Retail 704, Personal services 454 rows, the brief's exactly; block 95.7%, 1 unplaced; census 2.17 (the brief's). Kakogawa: 1,970, 1,093, 787 rows, the brief's; block 87.8%, town center 11.9%, 11 unplaced (the tiers disclosed, call 145); census 2.16. The (4) その他 catch-all (40-42% of restaurants) stays in Food service: the list names no hostess venue (R3 applies only where a register names them). Rail: Itami's Osaka Monorail drawn cut at 大阪空港 (owner, call 163; the brief's "left out" predated it), JR and Hankyu 伊丹 kept apart with operator suffixes; Kakogawa's 宝殿 is Takasago's (38 m beyond the line).
+- **Station names, Hiroshima's style:** Toyonaka 4 overrides (macrons; 柴原阪大前 as Shibahara-handai-mae); Itami 2 (新伊丹 hyphenated; 大阪空港, which OSM translates, romanized as Osaka-kuko, Fukuoka's 福岡空港 precedent); Kakogawa 1.
+- **Line colours** from `line_colour_search.py`, starting from Osaka's, Kobe's and Himeji's colours where those maps draw the same line, so neighbouring maps agree.
+- **Privacy:** `check_personal_exposure.py` prints 0 for each (Japan pass): Toyonaka 2 pins show their permit type (5 operator matches in the raw rows), Itami 1 (6), Kakogawa 2 (16, most of them unbucketed notifications).
+- **The privacy check's Japan pass read a new city with no rules** (`frozenset(CITIES[slug].get("rules", ()))`, empty for an ALL_RULES city): fixed to `japan.city_rules(slug)`, the same one-line fix East-1 and Regional-1 made (coordinated, 2026-10-07).
 
 ### 2026-10-07 - Kansai-1's licence reads: five sources, all usable; two precedents applied (licence-read agents)
 

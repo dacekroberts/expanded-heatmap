@@ -4429,6 +4429,49 @@ line.
 - Senri-Chuo is one station: the Osaka Monorail's platform and Kita-Osaka
   Kyuko's, 257 m apart, share one ring.
 
+### Hirakata - the city's food list with its monthly new permits, its barber, beauty and laundry registers and the national notifications, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Food trucks, stalls and vending machines: the city's food list leaves them
+  out by its own note.
+- Shops that sell only packaged food, except where the national filings
+  include notifications.
+- 612 national notifications whose filers did not publish an address, 7
+  addressed to an area rather than a place, and 20 with no fixed place.
+- 106 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other types that are not a counter.
+- 47 vending machines, 23 school, hospital and staff canteens, 9 temporary or
+  mobile filings and 3 mail-order businesses, all national notifications. The
+  city's list names no form of business (業態), so canteens, bars and
+  convenience stores holding a restaurant permit stay in Food service.
+- 1 closed premises the national filings keep, marked.
+
+**Counted** - every food permit in term on March 31, 2026, kept whole, with the
+permits granted each month to August 2026; the city's barber, beauty and
+laundry registers as of March 31, 2026, with the new barbers and beauty salons
+to July 31, 2026; and the national notifications as downloaded on October 6,
+2026. The city publishes no closures between its twice-yearly full lists, so a
+permit that ended after March is still counted. The national filings' permits
+are not added: the city's own list holds the city's permits. 20 of the 330
+bakery, confectioner and deli rows (6.1%) have a trade name that reads as a
+factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 104 repeat rows are shown once, and 56 rows of the
+city's list for a premises already in the national notifications.
+
+**Not placed** - 2 restaurants, whose address in the city's list is a lot
+number with no town. Another 98 sit at their town's center, and 25 national
+notifications at their own coordinates.
+
+**Names not shown** - 1 pin whose trade name is the operator's own name shows
+its permit type.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 15 stations beyond it: 6 in Katano, 4 in Kyōtanabe, 3 in Neyagawa
+  and 2 in Yawata.
+
 ### Itami - Hyōgo Prefecture's food-permit and food-notification lists and its barber, beauty and laundry registers, joined to MLIT's address blocks
 
 **Left out**
