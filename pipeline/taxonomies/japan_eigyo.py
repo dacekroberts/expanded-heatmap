@@ -49,8 +49,10 @@ RULES = [
     # 2026-10-03): ^給食 misses them inside the bracket
     ("institutional catering", None, r"集団給食|^給食|飲食給食|給食施設|給食炊飯"),
     ("vending machine", None, r"自動販売機|自販|コップ式|全自動調理機"),
-    # Kawasaki's 飲食店（短期営業）
-    ("temporary / mobile", None, r"行商|露店|仮設|臨時|期間申請|屋形船|自動車|営業とみなされない|短期営業"),
+    # Kawasaki's 飲食店（短期営業）. 自動車以外 ("other than a vehicle", the Tama
+    # ledgers' 野菜果物販売業(自動車以外): 1,063 rows) is not a vehicle (the Japan
+    # foundation, 2026-10-07; no built city's type carries it)
+    ("temporary / mobile", None, r"行商|露店|仮設|臨時|期間申請|屋形船|自動車(?!以外)|営業とみなされない|短期営業"),
     ("mail order", None, r"通信販売|訪問販売|通信訪問"),
     # Takamatsu's 業態 ラブホ・カプセル (2026-10-03): love and capsule hotels
     ("inside accommodation", None, r"旅館|ホテル|ラブホ|カプセル"),
@@ -80,7 +82,8 @@ RULES = [
     ("fishmonger", "Retail", r"^(魚介類販売|魚販)"),
     ("dairy", "Retail", r"^(乳類販売|乳販)"),
     ("greengrocer", "Retail", r"^野菜果物販売"),
-    ("rice", "Retail", r"^米穀類販売"),
+    # Kawaguchi's list also writes 米殻類販売 (殻 for 穀; 28 rows; no built city)
+    ("rice", "Retail", r"^米[穀殻]類販売"),
     ("department store / supermarket", "Retail", r"百貨店|スーパー"),
     ("bento shop", "Retail", r"^弁当販売"),
     ("other food and drink sales", "Retail", r"その他の食料・飲料販売|^他食販(店舗|包装)"),
@@ -113,8 +116,8 @@ FORM_RULES = [
     # 露店 (a street stall) joined on 2026-09-29: RULES already excluded it as a
     # type, and about 34 restaurant permits carried it as their form (owner,
     # DECISIONS "Category check: the owner's calls"). Fukuoka's ろ店 is not it.
-    ("temporary / mobile", None, r"仮設|臨時|短期|期間限定|季節的|イベント|催事|祭|マルシェ|出店|自動車|キッチンカー|"
-                                 r"移動|行商|列車|屋形船|海の家|露店"),
+    ("temporary / mobile", None, r"仮設|臨時|短期|期間限定|季節的|イベント|催事|祭|マルシェ|出店|自動車(?!以外)|"
+                                 r"キッチンカー|移動|行商|列車|屋形船|海の家|露店"),
     # Fukuoka's 屋台, filed as ろ店 / 定置屋台: stalls at fixed street spots
     # (Nakasu's 清流公園, Tenjin, Nagahama) on permits running to 2032 under
     # the city's 屋台基本条例 - not a festival stall. They COUNT (owner
@@ -148,9 +151,12 @@ def normalise(value):
     """NFKC (full-width, circled numbers), no spaces, no leading number, and no
     leading （旧） (Higashiosaka's national-schema list marks an old-law permit
     so, （旧）菓子製造業: without it the anchored Retail rules dropped 108 rows in
-    term, 2026-10-03)."""
+    term, 2026-10-03). The Japan foundation (2026-10-07), neither on any built
+    city's type: the Saitama layers' `01:` code with its colon (Ageo's Retail
+    read 369 rows with it, 658 without), and the `?` Ōita's cp932 export leaves
+    for a circled number above ⑳ (`? そうざい製造業`: 116 delis fell to no rule)."""
     s = unicodedata.normalize("NFKC", str(value or "")).replace(" ", "").replace("　", "")
-    return re.sub(r"^\(旧\)", "", re.sub(r"^\d+", "", s))
+    return re.sub(r"^\(旧\)", "", re.sub(r"^(?:\d+:?|\?)", "", s))
 
 
 def explain(value, source="food", form=""):
@@ -225,7 +231,11 @@ for _v, _want in (("飲食店営業", "Food service"), ("① 飲食店営業", "
                   ("（旧）菓子製造業", "Retail"), ("（旧）飲食店営業", "Food service"), ("（旧）飲食店営業（自動車）", None),
                   ("⑫ 自動販売機による販売業（…）", None), ("コップ式自動販売機", None), ("食肉処理業", None),
                   ("喫茶店営業（自動販売機）", None), ("他食販自販", None), ("乳販自販", None),
-                  ("飲食店", "Food service"), ("喫茶店", "Food service"), ("飲食店（自動車）", None)):
+                  ("飲食店", "Food service"), ("喫茶店", "Food service"), ("飲食店（自動車）", None),
+                  # the Japan foundation: 自動車以外 is no vehicle; the Saitama code, Ōita's lost number, 殻 for 穀
+                  ("野菜果物販売業(自動車以外)", "Retail"), ("弁当販売業（自動車以外）", "Retail"),
+                  ("01:飲食店営業", "Food service"), ("11：菓子製造業", "Retail"), ("? そうざい製造業", "Retail"),
+                  ("米殻類販売業", "Retail"), ("弁当販売業（自動車）", None)):
     assert classify({VALUE_COLUMN: _v}) == _want, (_v, classify({VALUE_COLUMN: _v}), _want)
 assert classify({VALUE_COLUMN: "取次所", "source": "laundry"}) == "Personal services"
 assert classify({VALUE_COLUMN: "無店舗取次店", "source": "laundry"}) is None
