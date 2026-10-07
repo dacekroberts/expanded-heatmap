@@ -4,6 +4,12 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-07 - Thirteen operators' own names live on six published Japanese maps: fixed at once in Cleanup (owner, call 209)
+
+- **Found by Kansai-1** while building call 205: `check_personal_exposure.py`'s Japan pass on the built cities' current files prints Osaka 6, Utsunomiya 3, Fukuoka 1, Kyoto 1, Sapporo 1, Yokkaichi 1 (Tokyo 0). Each is a trade name the name rule flags on one row that also shows at another premises; step 2 spread the rule only within one block. Staging did not re-run the check, which would print the names.
+- **The fix is call 205's switch** (`name_city`): read-only on all 34 built cities it withholds exactly those 13, plus 1 Tokyo row not on its map; the other 27 move nothing.
+- **"fix now in cleanup"** (owner, staging's chat), over taking the six layers down first: Cleanup takes Kansai-1's switch commit alone, adds `name_city` to the six cities' rules, re-runs steps 2 and 3, checks each at 0, drift-checks the six and Tokyo, records the verdicts and pushes outside review time; a reboot only if the push's app/ diff calls for one.
+
 ### 2026-10-07 - Calls 204, 205 and 151 approved; phase 2 held until the 60% check-in, its licence reads run now (owner)
 
 - **"204 yes, 205 yes, 151 yes, hold on phase 2 do license reads now"** (owner, staging's chat):
