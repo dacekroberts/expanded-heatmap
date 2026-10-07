@@ -4,6 +4,12 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-07 - Oradea's address layer accepted as a join target; Miskolc to R (owner, calls 219, 220)
+
+- **Oradea's licence read:** SILENT. No reuse terms on harta.oradea.ro or oradea.ro; the WFS capabilities' Fees and AccessConstraints "none" are vendor defaults; the GIS portal's About box is the software's licence. Romania's Law 179/2022 (art. 3, 9(1), read through lege5.ro, the official text unreachable) makes public documents reusable, commercially or not, free of charge, short of a licence from the city; data.gov.ro timed out. Precedent: Bucharest's DSVSA (silent, accepted) and the Dallas and Snohomish address joins (join target, nothing displayed).
+- **"219 yes":** the layer is accepted as a join target only, never drawn; credit by choice, e.g. "Address points: Primăria Municipiului Oradea (harta.oradea.ro)". One download of the layer (gmgml:NrAdm) is approved, and the owner's browser fetch of DSVSA Bihor's two lists. The single GetFeature did not finish in 590 s, so the layer is fetched in 36 BBOX tiles, one request at a time, into `data/oradea/raw/adrese_nradm_tiles_2026-10-07/`.
+- **"220 R":** Miskolc to R on Lausanne's precedent (a register readable only through a paged search goes to R). Hungary now holds no candidate.
+
 ### 2026-10-07 - Seven Romanian cities and three Hungarian to Band R; Miskolc kept for one look (owner, calls 215c, 216)
 
 - **RENNS checked in the owner's browser:** `geoportal.ancpi.ro` and `renns.ancpi.ro` answer DNS_PROBE_FINISHED_NXDOMAIN (the names no longer exist), `geoportal.gov.ro` ERR_CONNECTION_TIMED_OUT, as from here. So Timișoara, Iași, Arad, Galați, Ploiești, Craiova and Reșița go to R (215c), reopen condition RENNS reachable or the owner's request to ANCPI.

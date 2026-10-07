@@ -32,8 +32,8 @@ kept as the record of the T tiers and the light-rail test.
 > | | |
 > |---|---|
 > | **Built** | **170** across 26 countries *(each city's build line is in the Built table below)* |
-> | **Candidates** | **69** — A 32 · B 33 · C 2 · D 2 |
-> | **Restricted (Band R)** | **89** *(A band, not candidates (owner, 2026-10-02: "keep it as a Band but exclude it from the candidate counts"): each needs access the project does not use, or a request only the owner sends)* |
+> | **Candidates** | **68** — A 32 · B 33 · C 2 · D 1 |
+> | **Restricted (Band R)** | **90** *(A band, not candidates (owner, 2026-10-02: "keep it as a Band but exclude it from the candidate counts"): each needs access the project does not use, or a request only the owner sends)* |
 > | **Open screening gap** | **10** *(rows whose own city host never answered: neither a finding nor a proven block)* |
 > | **Discarded** | **329**, each naming its evidence |
 >
@@ -80,7 +80,7 @@ different depth in each. Barcelona is also the first source in the project to
 impose an obligation that is **an act rather than a notice**: its terms require
 the City Council to be informed of every derived project.
 
-## Candidates — 69
+## Candidates — 68
 
 Banded by **first blocker** (the owner's rule, "Five rules" below): access
 (D, R), then buckets. A city is in one band only.
@@ -90,10 +90,10 @@ Banded by **first blocker** (the owner's rule, "Five rules" below): access
 | 🟢 **A** | **Ready to build.** A current list, an open licence, coordinates answered, rail answered; what remains is answerable inside the build | **32** |
 | 🔵 **B** | **Narrower pages.** Pass the reduced-bucket bar as measured: one full bucket, or all three with a measured gap; the page says what is missing. The owner's yes to each is pending | **33** |
 | 🟣 **C** | **Closer to a page.** One measurement or one owner call stands between the city and A or B; each row names it | **2** |
-| 🔴 **D** | **Blocked, but the owner can act alone.** A download approval, a CAPTCHA or a free account; each row names the act | **2** |
+| 🔴 **D** | **Blocked, but the owner can act alone.** A download approval, a CAPTCHA or a free account; each row names the act | **1** |
 | 🟤 **T** | **Retired 2026-10-01.** Trams-only maps were approved on 2026-09-29, so a tram city sits in the band of its next blocker; [`docs/tram_city_list.md`](tram_city_list.md) is the record | **0** |
-| | **Candidates** | **69** |
-| ⚫ **R** | **Restricted or request only. A band, NOT counted as candidates (owner, 2026-10-02).** The publisher refuses this machine and a browser, or answers only on request; no VPN, proxy or account | **89** |
+| | **Candidates** | **68** |
+| ⚫ **R** | **Restricted or request only. A band, NOT counted as candidates (owner, 2026-10-02).** The publisher refuses this machine and a browser, or answers only on request; no VPN, proxy or account | **90** |
 | *Open gap* | Unscreened — a row resting on an absence, so not a discard | *10* |
 | *Discarded* | Measured negative, evidence named | *329* |
 
@@ -196,18 +196,17 @@ five one-bucket cities were built and landed at review time the same day.
 
 *Quito (to R) and Cuenca (to the discards) left the band on 2026-10-04 (owner), once ARCSA's national permit file was measured: no address, province, canton, parish or coordinates, only the agency's zone.*
 
-## 🔴 Band D — blocked, but the owner can act alone (2 cities)
+## 🔴 Band D — blocked, but the owner can act alone (1 city)
 
 | City | What there is | The owner's act |
 |---|---|---|
-| **Miskolc** 🇭🇺 | MVK trams 1 and 1A (about every 6 to 10 minutes, ASSERTED). The city's GovCenter register (linked from its official-registers page): licensed shops and notified trade activities as plain HTML, 200 rows a page, total unmeasured. Paging a search is Lausanne's shape, so the OKNYIR export instead | As Debrecen, for Miskolc |
 | **Oradea** 🇷🇴 | Tram lines 2 and 4-9 (frequency ASSERTED: OTL's host never answered). The city's own 2022 files, downloaded and measured 2026-10-06 (`data/oradea/raw/`): 5,668 operating agreements (one premises a row, 99% with a house number) but **no activity column**, so they cannot be split into buckets; 628 catering authorizations (498 addressed); no licence stated (© only). Kept as a noted supplement | As Timișoara, DSVSA Bihor (owner, 2026-10-06, call 120: food only from the owner's browser act) |
 
 *2026-10-06: every county DSVSA host and `ansvsa.ro` now answer 403 "WAF Forbidden" to scripts, where Timiș showed a 503 browser check on 2026-10-04; whether the owner's browser still passes is untested (wave 5).*
 
 *Tempe, the band's earlier row, went to the discards on 2026-10-01 once the owner fetched its list (a 33-page PDF with no addresses).*
 
-## ⚫ Band R — restricted or request only (89 cities; created 2026-09-28)
+## ⚫ Band R — restricted or request only (90 cities; created 2026-09-28)
 
 **▼ 2026-10-03: Daejeon, Gwangju and Gimhae left for Band A (owner).** Their block was the national register's identity wall; SEMAS's keyless national storefront file, which Incheon and the Gyeonggi cities were built on from 2026-09-29, covers all three, and the coverage sweep found the rows had never been re-checked against it.
 
@@ -233,6 +232,7 @@ row says what would. **Renamed "restricted or request only" the same day (owner)
 | **Debrecen** 🇭🇺 | DKV trams 1 and 2 (about every 7 and 10 minutes, ASSERTED). The city's statutory shop register (210/2009 Korm. rendelet), linked from `debrecen.hu` and published daily on Komdat's IPARKER portal: **20,086 shops** counted from its API (2026-10-04), with shop type, catering type, products, opening hours and start and closure dates; no coordinates. Its JSON is scrambled, and the owner ruled the page's own unscramble step out, as Palembang's lifted token | **OKNYIR shows at most 200 rows per search, list and map view alike, with no export** (the owner's browser, 2026-10-07); scripted queries are refused; a probe found no API, open-data page or bulk extract at OKNYIR, Lechner, the national portal (kozadatportal.hu) or the city's own site, and NÉBIH's food register sits behind a CAPTCHA. The register is public by law (Trade Act §6/I(3)) one record at a time | A bulk extract from Lechner (OKNYIR's operator), on the owner's request; or an export added to OKNYIR (owner, call 216, 2026-10-07) |
 | **Szeged** 🇭🇺 | SZKT trams, 5 lines, in SZKT's GTFS. The city's own link to IPARKER is broken (a truncated ID); its other link is to OKNYIR | **OKNYIR shows at most 200 rows per search, list and map view alike, with no export** (the owner's browser, 2026-10-07); scripted queries are refused; a probe found no API, open-data page or bulk extract at OKNYIR, Lechner, the national portal (kozadatportal.hu) or the city's own site, and NÉBIH's food register sits behind a CAPTCHA. The register is public by law (Trade Act §6/I(3)) one record at a time | A bulk extract from Lechner (OKNYIR's operator), on the owner's request; or an export added to OKNYIR (owner, call 216, 2026-10-07) |
 | **Budapest** 🇭🇺 | BKV metro, HÉV and trams (ASSERTED). Its discard said retail and catering were only registered, by county offices, unpublished; but district notaries publish the registers (IPARKER, GovCenter), and OKNYIR now holds them nationally (the Central Europe screen, 2026-10-04). Coverage per district unmeasured | **OKNYIR shows at most 200 rows per search, list and map view alike, with no export** (the owner's browser, 2026-10-07); scripted queries are refused; a probe found no API, open-data page or bulk extract at OKNYIR, Lechner, the national portal (kozadatportal.hu) or the city's own site, and NÉBIH's food register sits behind a CAPTCHA. The register is public by law (Trade Act §6/I(3)) one record at a time | A bulk extract from Lechner (OKNYIR's operator), on the owner's request; or an export added to OKNYIR (owner, call 216, 2026-10-07) |
+| **Miskolc** 🇭🇺 | MVK trams 1 and 1A (about every 6 to 10 minutes, ASSERTED). The city's GovCenter register (linked from its official-registers page): licensed shops and notified trade activities as plain HTML, 200 rows a page, total unmeasured. Paging a search is Lausanne's shape, so the OKNYIR export instead | **A paged search only, Lausanne's shape** (owner, call 220, 2026-10-07): OKNYIR shows 200 rows a search with no export, and the city's GovCenter register is plain HTML at 200 rows a page, no licence stated; no API, open-data release or bulk extract found (the 2026-10-07 probe) | A bulk extract from Lechner or the city on the owner's request, or an export added to OKNYIR |
 | **Warsaw** 🇵🇱 | ⚠️ **NOT screened behind the block — a weaker shape than Kaohsiung's (owner's call 2026-09-24).** Nothing behind the block has been read. The city's own catalogue is the one place a premises register could be; every reachable route is negative (the city's 21 datasets on `dane.gov.pl`; the map portal's layers, markets and café terraces only; CEIDG is company-level; the alcohol-sales-points lead was Gdańsk's) | 🚧 **Geo-blocked to Poland**: `api.um.warszawa.pl` / `dane.um.warszawa.pl` answer only from Poland (2 of 2 probes) and time out from Germany and the US, while `mapa.um.warszawa.pl` answers everywhere; the API is also key-gated. **Not routed around** | **A read from inside Poland first** (the catalogue listing — does a premises dataset exist?), and only then a request to the city for access. An owner action. Nothing sent |
 | **Hyderabad** 🇮🇳 | ⚠️ **NOT screened behind the block — Warsaw's shape (owner's call 2026-09-24).** India's national catalogue was walked in full (288,011 titles: trade-licence counts, never premises); GHMC's archived URL names show trade-licence status and lookup forms, no bulk register named. Nothing behind the block has been read | 🚧 **Geo-blocked to India**: GHMC's own site answers 3 of 3 Globalping probes inside India (Mumbai, Bengaluru, Hyderabad) and returns 403 at its F5 edge to 9 of 9 from the US, Germany and Singapore, and from here; Telangana's portal (`data.telangana.gov.in`) the same. **Not routed around** | **A read from inside India first** (does GHMC publish a trade-licence register as a file?), then a request. An owner action. Nothing sent |
 | **Helsinki** 🇫🇮 | ⚠️ **Reachable hosts all negative for retail and personal services** (2026-09-24): the city catalogue, enumerated through `data.europa.eu`'s copy (373 datasets, 6 Helsinki publishers, nonsense publisher 0); `kartta.hel.fi` WMS (485 layers) and WFS (terraces, parklets); HSY's WFS (397 layers, jobs grid only); `api.hel.fi` servicemap (public services, and its search is inert). Food exists in Oiva (national inspections, current) but only behind a search API, which is not used (above). The city's own food-control CSV is frozen at 2019 | 🚧 **Geo-blocked**: `hri.fi`, `avoindata.fi` and `avoindata.suomi.fi` answer 403 outside Finland and Germany. The bulk files behind them (the city catalogue; Valvira/LVV's alcohol-premises register, CC BY 4.0; any Oiva release) are unread | A read from inside Europe, by a person there (no proxy or VPN), of HRI's catalogue and of whether Oiva or the alcohol register is a bulk file. Then asking Ruokavirasto, the last resort |
@@ -1075,10 +1075,10 @@ which reopen on their own lines' service.
 | 🇩🇿 Algeria | — | **0** | **0** | — | Oran and Mostaganem discarded 2026-10-04 (absence); Constantine, Sétif and Ouargla in the open gap the same day (their hosts refuse or are down). Algiers (2026-09-28) and Sidi Bel Abbès (2026-10-04) discarded |
 | 🇮🇩 Indonesia | — | **0** | **0** | — | Palembang, Bogor and Depok discarded on rail and Bekasi measured (one retail slice) 2026-10-04. Jakarta discarded (no activity column) |
 | 🇦🇲 Armenia | — | **0** | **0** | — | Yerevan discarded 2026-10-04 (no published register; its permit system an application system answering only inside Armenia) |
-| 🇭🇺 Hungary | — | **1** — Miskolc | **3** — Debrecen, Szeged, Budapest | D, R | **2026-10-07 (owner, call 216)**: Debrecen, Szeged and Budapest to R (OKNYIR shows 200 rows a search, no export); Miskolc kept in D for one look at its GovCenter register. **2026-10-04, late (owner)**: the four to D on an OKNYIR export that turned out not to exist |
+| 🇭🇺 Hungary | — | **0** | **4** — Debrecen, Szeged, Budapest, Miskolc | R | **Miskolc to R 2026-10-07 (owner, call 220)**: a paged search only, Lausanne's precedent. **2026-10-07 (owner, call 216)**: Debrecen, Szeged and Budapest to R (OKNYIR shows 200 rows a search, no export); Miskolc kept in D for one look at its GovCenter register. **2026-10-04, late (owner)**: the four to D on an OKNYIR export that turned out not to exist |
 | 🇭🇷 Croatia | — | **0** | **0** | — | **Osijek discarded 2026-10-04, late (owner)** (no register; the national crafts register refuses scripts). Zagreb discarded (a grant list only) |
 | 🇸🇰 Slovakia | — | **0** | **0** | — | **Košice discarded 2026-10-04, late (owner)** (no establishment register reachable: ŽRSR behind a robot check, RPO without establishments). Bratislava discarded |
-| **Total** | **170** | **69** | **89** |  | A 32 · B 33 · C 2 · D 2 · R 89. Checked against the band tables by `scripts/check_master_list_counts.py` |
+| **Total** | **170** | **68** | **90** |  | A 32 · B 33 · C 2 · D 1 · R 90. Checked against the band tables by `scripts/check_master_list_counts.py` |
 
 ## Countries ruled out
 
