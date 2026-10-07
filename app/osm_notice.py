@@ -43,8 +43,9 @@ OSM_RAIL_BY_CITY = {
     "Lille (Regional)": ("the route geometry of Lille's two métro lines", True),
     "Oslo": ("the per-line colors of Oslo's T-bane and tram lines", False),
     "Bergen": ("the color of Bergen's Bybanen line 1", False),
-    "Copenhagen": ("Copenhagen's Metro and S-tog lines and stations and the municipal "
-                   "boundaries used to select them", True),
+    "Copenhagen (Regional)": ("Copenhagen's Metro, S-tog and Letbane lines and stations, the "
+                              "municipal boundaries used to select them and the address "
+                              "points used to place its businesses", True),
     "Aarhus": ("Aarhus's Letbane L2 line and its stops, the municipal boundaries used to "
                "select them and the address points used to place its businesses", True),
     "Kitchener–Waterloo (Regional)": ("Kitchener–Waterloo's ION line and its stops", True),

@@ -63,7 +63,7 @@ Is Excluded, and its in-ring share on Why the Maps Differ.
 | `/Lille_Heatmap` | Lille (Regional) | `lille` | ✓ |
 | `/Rennes_Heatmap` | Rennes | `rennes` | ✓ |
 | `/Oslo_Heatmap` | Oslo | `oslo` | ✓ |
-| `/Copenhagen_Heatmap` | Copenhagen | `copenhagen` | ✓ |
+| `/Copenhagen_Heatmap` | Copenhagen (Regional) | `copenhagen` | ✓ |
 | `/Prague_Heatmap` | Prague | `prague` | ✓ |
 | `/Amsterdam_Heatmap` | Amsterdam | `amsterdam` | ✓ |
 | `/Rome_Heatmap` | Rome | `rome` | ✓ |

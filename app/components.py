@@ -543,7 +543,7 @@ class Notice(NamedTuple):
 # Groups of cities one notice covers, spelled as app/cities.py spells them.
 _MEXICO = ("Mexico City (Regional)", "Guadalajara (Regional)", "Monterrey (Regional)")
 _NORWAY = ("Oslo", "Bergen")
-_DENMARK = ("Copenhagen", "Aarhus", "Odense")
+_DENMARK = ("Copenhagen (Regional)", "Aarhus", "Odense")
 _CZECHIA = ("Prague", "Brno", "Plzeň", "Olomouc", "Ostrava",
             "Liberec (Regional)", "Most (Regional)")
 _BRAZIL = ("São Paulo", "Rio de Janeiro (Regional)", "Belo Horizonte (Regional)", "Brasília",
@@ -567,7 +567,7 @@ _UK_NAPTAN = (*_UK_SIX, "Liverpool (Regional)")
 # a city to that sentence means adding it here, or its page omits the line.
 _OSM_RAIL = (
     "Mexico City (Regional)", "Guadalajara (Regional)", "Monterrey (Regional)",
-    "Barcelona", "Lille (Regional)", "Oslo", "Bergen", "Copenhagen", "Aarhus",
+    "Barcelona", "Lille (Regional)", "Oslo", "Bergen", "Copenhagen (Regional)", "Aarhus",
     "Kitchener–Waterloo (Regional)", "Odense", "Liepāja", "Daugavpils",
     "Buffalo", "Sacramento", "Houston", "Ottawa", "Minneapolis", "Pittsburgh",
     "Dallas", "Kansas City", "Tucson", "Tacoma", "New Orleans", "Florence", "Den Haag",
@@ -1001,8 +1001,9 @@ _NOTICES = [
      "Barcelona, including its FGC lines and both funiculars), and the route "
      "geometry of Lille's two métro lines, the per-line colors of "
      "Oslo's T-bane and tram lines, the color of Bergen's Bybanen line 1, "
-     "and Copenhagen's Metro and S-tog lines "
-     "and stations and the municipal boundaries used to select them, "
+     "and Copenhagen's Metro, S-tog and Letbane lines "
+     "and stations, the municipal boundaries used to select them and the "
+     "address points used to place its businesses, "
      "Aarhus's Letbane L2 line and its stops, the municipal boundaries used to "
      "select them and the address points used to place its businesses, "
      "Kitchener–Waterloo's ION line and its stops, "
@@ -1371,12 +1372,16 @@ _NOTICES = [
     # Husnummer, and takes the point from OSM's copy (osak:identifier).
     # Odense added 2026-09-30 (tram kit), Aarhus's placement; approved by the
     # owner 2026-09-30 (call C1).
+    # Copenhagen (Regional), 2026-10-07: placed on OSM's copies too (owner),
+    # so the last clause names no city; a drafts proposal for review time.
+    # The title keeps "Copenhagen", not "Copenhagen (Regional)": nested
+    # parentheses break the provenance parser (notice 68's lesson).
     Notice(31, "Klimadatastyrelsen (Copenhagen, Aarhus, Odense)",
      "Contains data from Klimadatastyrelsen, Danmarks Adresseregister (DAR), via "
      "Datafordeler under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). "
      "This project joins the register's addresses and address points to the "
-     "business register to place each premises; in Aarhus and Odense the points are "
-     "OpenStreetMap's copies of them.",
+     "business register to place each premises; the points are OpenStreetMap's "
+     "copies of them.",
      False, _DENMARK),
     # ČSÚ - Prague's activity, form and name data (RES). CC BY 4.0 for the web
     # pages, and the DATA paragraph ("Další podmínky použití dat ČSÚ") adds two
