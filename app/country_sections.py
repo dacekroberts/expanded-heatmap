@@ -28,7 +28,7 @@ from urllib.parse import quote
 
 import streamlit as st
 
-from cities import CITIES, COUNTRY_ORDER
+from cities import CITIES, COUNTRY_ORDER, JAPAN_REGIONS
 
 # Publishers and other names a heading or notice title uses instead of a city.
 # Each maps to the country it belongs to. Measured 2026-10-01: without these,
@@ -251,10 +251,10 @@ REGION_GROUP = {
     "Czechia": "Europe",
     "United Kingdom": "Europe",
     "Seoul Capital Area": "East Asia",
-    # Japan's two halves (owner, 2026-10-03). Unfolded, all 34 Japanese cities
+    # Japan's views (owner, 2026-10-03, its two halves then; the eight regions
+    # and Osaka Prefecture since 2026-10-07). Unfolded, all 34 Japanese cities
     # showed as "Japan West (34)", named after the first city's half.
-    "Japan West": "East Asia",
-    "Japan East": "East Asia",
+    **{r: "East Asia" for r in JAPAN_REGIONS},
     # South Korea outside the capital area (owner, 2026-10-04).
     "South Korea": "East Asia",
 }

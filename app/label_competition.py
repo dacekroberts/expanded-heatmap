@@ -359,6 +359,9 @@ CANDIDATES = (("start", 11, 0), ("end", -11, 0), ("middle", 0, -22), ("middle", 
 # A country's top city tries these too: the four diagonals and a longer reach
 # on each side. With CANDIDATES alone seven tops found no room on the landing
 # view; with these, three (cities.LANDING_NO_ROOM; measured 2026-10-07).
+# Every entrant of a competing REGION view tries them as well (2026-10-07, the
+# Japanese views: five fewer cities named nowhere at phase 2); the landing
+# view keeps CANDIDATES for the rest, as the owner saw it.
 TOP_CANDIDATES = CANDIDATES + (("start", 8, -14), ("start", 8, 14), ("end", -8, -14),
                                ("end", -8, 14), ("middle", 0, -32), ("middle", 0, 32),
                                ("start", 20, 0), ("end", -20, 0))
@@ -459,7 +462,7 @@ def compete(cities, centre_lat, centre_lon, zoom, storefronts, strict=False,
         if not is_top and any(p[0] < cx0 < p[2] and p[1] < cy0 < p[3] for p in placed):
             continue
         own = ((c.get("label_offset_by_region") or {}).get(region) or c.get("label_offset"))
-        cands = TOP_CANDIDATES if is_top else CANDIDATES
+        cands = TOP_CANDIDATES if is_top or region != "Global" else CANDIDATES
         tries = ([tuple(own)] if own else []) + [o for o in cands if o != (tuple(own) if own else None)]
         dots = won_dots + [d for n, d in top_dots.items() if n != c["name"]]
         for off in tries:

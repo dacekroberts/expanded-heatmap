@@ -332,9 +332,11 @@ def caption_against_labels(region, vw, placed):
     if not stated or int(stated.group(1)) != len(members):
         bad.append(f"{name:<20} {vw:>4}px  caption {caption!r} does not state "
                    f"the region's {len(members)} cities")
+    # Or its country: a caption names a country split into views once
+    # (cities._CAPTION_NAME, "Japan" for the nine Japanese views).
     unnamed = sorted(c["name"] for c, *_ in placed
                      if c["name"] not in members and c["name"] not in caption
-                     and c.get("region") not in caption)
+                     and c.get("region") not in caption and c.get("country") not in caption)
     if unnamed:
         bad.append(f"{name:<20} {vw:>4}px  caption {caption!r} neither counts "
                    f"nor names {len(unnamed)} labelled cit"
