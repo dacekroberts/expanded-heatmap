@@ -689,6 +689,12 @@ CITIES = [
         # ("end", -12, 4) covered Rennes. Below keeps it clear of both
         # neighbours that crowd it: Lille to the north, Rennes to the west.
         "label_offset": ("middle", 0, 22),
+        # EUROPE WEST, upper left (2026-10-07): Paris is named there as
+        # France's top city. Below its dot it took Geneva (Regional)'s only
+        # room, and Geneva has no other view. Of the 12 positions a top tries,
+        # this and lower right lose only cities their own views name (Antwerp,
+        # Lille (Regional), Newcastle (Regional)); PROBLEMS 0.
+        "label_offset_by_region": {"Europe West": ("end", -8, -14)},
     },
     {
         "name": "Marseille",
@@ -5097,12 +5103,15 @@ if _bad_rof:
     raise ValueError(f"cities.py: {_bad_rof} have a label_offset_by_region whose keys are not "
                      "regions in REGION_ORDER or whose values are not (anchor, dx, dy)")
 # Europe West (owner, 2026-10-07, "a similar thing to east asia with seoul"):
-# the country views' larger cities stay named in the parent view - Prague,
-# Amsterdam, Rotterdam, Brussels, Antwerp, Berlin - and their smaller cities
-# are minor, named only in their own view.
+# the country views' larger cities stay named in the parent view - Paris,
+# Marseille, Toulouse, Rennes, Prague, Amsterdam, Rotterdam, Brussels, Berlin -
+# and their smaller cities are minor, named only in their own view. Europe
+# West competes, so a borrowed anchor without room (Antwerp, Lille (Regional),
+# Newcastle (Regional) on 2026-10-07) keeps a faded dot there and its name in
+# its own view.
 # Each tuple's order is the order region_caption() names them in.
 REGION_LABELS_ALSO = {"East Asia": ("Japan West", "Japan East", "Seoul Capital Area", "South Korea"),
-                      "Europe West": ("United Kingdom", "Czechia", "Benelux", "Germany")}
+                      "Europe West": ("United Kingdom", "France North", "France South", "Czechia", "Benelux", "Germany")}
 
 # A REGION VIEW THAT HAS OUTGROWN HAND PLACEMENT COMPETES FOR ITS LABELS, as
 # Global does (2026-10-04): the cities the view labels enter
