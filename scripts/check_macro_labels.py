@@ -344,6 +344,53 @@ def caption_against_labels(region, vw, placed):
     return bad
 
 
+def nesting_breaks():
+    """A city named in a wider view is named in every narrower view that holds
+    it (owner, 2026-10-07: "cities who make it onto the global or regional
+    views should still make it onto country level views"; Tokyo: Global >
+    East Asia > Kanto > Tokyo Metropolis; Paris: Global > Europe West >
+    France North). A view's depth is one more than the deepest view that
+    borrows its anchors (REGION_LABELS_ALSO); Global is 0. A city's chain is
+    its own region and every view that borrows it, directly or through
+    another. Reads GLOBAL_WON and REGION_WON, so it runs after main() has
+    filled them."""
+    named = {}
+    for region in REGIONS:
+        named[region["name"]] = (set(GLOBAL_WON) if region["name"] == DEFAULT_REGION
+                                 else set(scored_labels(region, *region_view(region))))
+    borrowers = {}
+    for view, lent in REGION_LABELS_ALSO.items():
+        for r in lent:
+            borrowers.setdefault(r, set()).add(view)
+
+    def depth(view, seen=()):
+        if view == DEFAULT_REGION:
+            return 0
+        up = [b for b in borrowers.get(view, ()) if b not in seen]
+        return 1 + max((depth(b, seen + (view,)) for b in up), default=0)
+
+    def chain(region, seen=()):
+        out = {region}
+        for b in borrowers.get(region, ()):
+            if b not in seen:
+                out |= chain(b, seen + (region,))
+        return out
+
+    bad = []
+    for c in CITIES:
+        views = [v for v in chain(c["region"]) | {DEFAULT_REGION} if v in named]
+        shown = [v for v in views if c["name"] in named[v]]
+        if not shown:
+            continue
+        widest = min(depth(v) for v in shown)
+        missing = sorted((v for v in views if depth(v) > widest and c["name"] not in named[v]),
+                         key=depth)
+        if missing:
+            bad.append(f"{'(nesting)':<20}        {c['name']} is named in {', '.join(sorted(shown, key=depth))} "
+                       f"but not in the narrower {', '.join(missing)}")
+    return bad
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--width", type=int, action="append",
@@ -532,6 +579,7 @@ def main():
             roomy.append(top)
     if roomy:
         print(f"Now labelled on the landing view, so drop from cities.LANDING_NO_ROOM: {roomy}\n")
+    problems.extend(nesting_breaks())
 
     if accepted and args.verbose:
         print(f"Known-accepted overlaps ({len(accepted)}) - see ACCEPTED_OVERLAPS:")
