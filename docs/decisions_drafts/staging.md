@@ -4,6 +4,14 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-07 - Calls 204, 205 and 151 approved; phase 2 held until the 60% check-in, its licence reads run now (owner)
+
+- **"204 yes, 205 yes, 151 yes, hold on phase 2 do license reads now"** (owner, staging's chat):
+  - **204:** East-1's shared code (tokyo_tama.py, saitama_pref.py, the yearbook's Tama rows and table 19-7, SHARE_DATES and REGISTER_SHARES) is accepted as precedent from Tokyo's official_shares.
+  - **205:** Kansai-1 adds a japan_step2 switch, on for new cities, withholding every row whose trade-name key matches a flagged row in the same city; built cities unchanged until a re-render. Suita publishes with it.
+  - **151:** Toyonaka's 14 sanitation month files (2026-01 to 2026-08) are approved: 14 BODIK calls, at least 20 s apart, so the registers rebuild to 2026-08-31.
+  - **Phase 2** (East-2, Kansai-2, Regional-2) waits for the 60% weekly check-in. Staging runs the eight pending reads now: Osaka Prefecture's BODIK barber and beauty lists (Ibaraki, Kadoma, Minoh, Moriguchi), Neyagawa, Kawaguchi, Fujisawa, Okazaki, Aomori, Matsumoto, Yamagata.
+
 ### 2026-10-07 - Kansai-1's batch: six cities ready, Suita parked on call 205; call 151 put again (owner)
 
 - **Kansai-1 reported its batch** (branch worktree-japan-kansai-1, tip 8c260435, nothing pushed, zero drift, 92 of 92 brief checks): Toyonaka, Hirakata, Itami, Kakogawa, Amagasaki and Uji ready on pages 222, 223 and 225 to 228 and notices 169, 170 and 172 to 175; Suita (page 224, notice 171) parked.
