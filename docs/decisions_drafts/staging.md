@@ -51,6 +51,7 @@ The A and B briefs left 23 reads pending. Regional-1's six run from staging (Tsu
     - Must display (2(3), prescribed): 「この地図は以下の著作物を改変して利用しています。【タイトル】、吹田市、クリエイティブ・コモンズ・ライセンス表示 4.0（URL）」.
     - Must not (§5): present edited data as the city's; use the logo.
     - Fault-based cost clauses. Links to data pages need no contact (§3).
+  - **Toyonaka (BODIK):** PERMITTED WITH CONDITIONS under CC BY 4.0 (豊中市オープンデータ利用規約, ２(1)); ２(2) gives an example credit only, so CC BY 4.0's change statement applies. No cost or indemnity clause binds the user. That completes Kansai-1's five reads.
 
 ### 2026-10-07 - Call 197 built on Cleanup's europe-split branch; the macro map's region views are Cleanup's (owner, call 198)
 
