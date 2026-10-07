@@ -31,7 +31,7 @@ The machine (Ryzen 7 5700X, 16 threads, 32 GB) is not the bottleneck. Approvals,
 4. **Build sessions never edit `docs/city_master_list.md`.** Staging moves a wave's cities to Built in one pass after each landing, and republishes the private pages. A build lands in one push at the end of its batch, after review time; `app/cities.py` conflicts are resolved keep-both.
 
 **Usage check-ins (owner):** "pause and check in with me (here or in cleanup) before continuing when weekly usage hits a multiple of ten."
-- Check `get_usage` between cities. The weekly read 42% on 2026-10-07, so the next stop is 50%, then 60%, and so on.
+- Check `get_usage` between cities. The owner pre-approved continuing past 50% ("we are approaching 50 and I am pre-okaying continuation to 60"; "new check in at 60%, not 50", 2026-10-07), so the next stop is 60%, then 70%, and so on.
 - At a crossing: finish the current step, commit clean, and stop. Tell the owner in your own chat and send one line to Staging Session. Continue only on the owner's word.
 - All sessions share one pool, so one crossing stops every session.
 - The 5-hour window's 90% ceiling still applies.
