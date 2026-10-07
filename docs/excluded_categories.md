@@ -4765,10 +4765,9 @@ deli rows (9.3%) have a trade name that reads as a factory; they are kept
 
 **One pin per premises** - 198 repeat permits are shown once.
 
-**Not placed** - 11 rows (0.4%): 3 shops in a shopping mall whose point the
-prefecture gives to several of its addresses, 6 register rows written with
-an old town name, and 2 more. Another 15 sit at their town's center, and 68
-at the prefecture's own coordinates.
+**Not placed** - 8 rows (0.3%): 6 register rows written with an old town
+name, and 2 more. Another 15 sit at their town's center, and 70 at the
+prefecture's own coordinates.
 
 **Names not shown** - none: no trade name shown is its operator's own name.
 

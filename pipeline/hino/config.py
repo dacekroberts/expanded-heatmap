@@ -150,11 +150,15 @@ COLLAPSE_MAX_SPREAD_M = 300
 # starts) and the project's colour. Line names without macrons, in Tokyo's
 # signage style. N02 files JR East's line here under its legal name 中央線, the
 # one public service through the city (Tokyo's `route` split is not needed).
+# Keio's two lines take seeds, not read from Keio (its station numbering
+# colour is one magenta for both): the Keio Line a violet, one hue in Chofu,
+# Fuchu, Hino and Tama, and the Dobutsuen Line a teal of its own (the owner,
+# 2026-10-07: distinct colours; from one magenta the two read 19.4 apart).
 LINES = {
     "KO": {"n02": [("京王電鉄", "京王線")], "name": "Keio Line", "name_ja": "京王線",
-           "short": "Keio", "hue": "#DD0077"},
+           "short": "Keio", "hue": "#B030D0"},
     "KD": {"n02": [("京王電鉄", "動物園線")], "name": "Keio Dobutsuen Line", "name_ja": "京王動物園線",
-           "short": "Keio", "hue": "#DD0077"},
+           "short": "Keio", "hue": "#287888"},
     "MONO": {"n02": [("多摩都市モノレール", "多摩都市モノレール線")], "name": "Tama Toshi Monorail",
              "name_ja": "多摩都市モノレール線", "short": "Tama Monorail", "hue": "#F08200"},
     "JC": {"n02": [("東日本旅客鉄道", "中央線")], "name": "JR Chuo Line", "name_ja": "JR中央線",
@@ -162,13 +166,13 @@ LINES = {
 }
 # Colours: the project's own, from `python scripts/line_colour_search.py
 # hino` (2026-10-07, defaults: >= 18 within 500 m, >= 10 city-wide):
-# each the feasible colour nearest its operator's hue that reads 3:1 on both
-# map pages and clears CIE76 45 from every pin (the Keio Line's magenta at
-# 45.2). Closest pair within 500 m 19.4 (the two Keio lines, which share
-# 高幡不動), the monorail and the Chuo Line 23.6; the dark-mode labels, 4 of 4.
-# The Keio pair is Fuchu's (Keio Line #F000B8, its Keibajo branch #E858D0);
-# the monorail is Higashiyamato's #E07800.
-_COLOURS = {"KO": "#F000B8", "KD": "#E858D0", "MONO": "#E07800", "JC": "#F05820"}
+# each the feasible colour nearest its seed that reads 3:1 on both map pages
+# and clears CIE76 45 from every pin (the Dobutsuen Line's teal at 48.1).
+# Closest pair within 500 m and anywhere 23.6 (the monorail and the Chuo
+# Line); the two Keio lines, which share 高幡不動, 98.2. The dark-mode labels,
+# 4 of 4. The Keio Line is Chofu's, Fuchu's and Tama's #B030D0; the monorail
+# is Higashiyamato's #E07800.
+_COLOURS = {"KO": "#B030D0", "KD": "#287888", "MONO": "#E07800", "JC": "#F05820"}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

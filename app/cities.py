@@ -4849,7 +4849,7 @@ CITIES = [
         "lon": 139.7524,
         "page": "pages/217_Kasukabe_Heatmap.py",
         "coverage": "narrowed",
-        "placement": "Joined to address blocks (97.1%); the prefecture's coordinates where missed",
+        "placement": "Joined to address blocks (97.0%); the prefecture's coordinates where missed",
         "data_age": "Food layers 2026-10-06; old-law list 2026-03-31; registers to 2026-08-31",
         "rail_extra": "Suburban rail",
         "record_kind": "Permit registers",

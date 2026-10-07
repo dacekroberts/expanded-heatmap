@@ -283,7 +283,14 @@ def own_point_fallback(config, joined):
     bb = config.CITY_BBOX
     mine = joined["source"].isin(sources)
     datum_guard(config, joined[mine])
-    default = shared_points(zip(joined.loc[mine, "ward"], joined.loc[mine, "town"], joined.loc[mine, "pub"]))
+    # Towns are counted only over rows the join read (owner's call 202,
+    # 2026-10-07): an address the join could not parse keeps its raw tail in
+    # `town`, so one premises written three ways (Kasukabe's AEON Mall, 下柳 and
+    # 下柳イオンモール…) counted as three towns and its own point was refused.
+    # A switch (japan_register's "default_joined"): built cities keep the old
+    # count until a review time re-renders them.
+    read = mine & (joined["tier"] != "none") if "default_joined" in japan_rules(config) else mine
+    default = shared_points(zip(joined.loc[read, "ward"], joined.loc[read, "town"], joined.loc[read, "pub"]))
     inb = joined["pub"].map(lambda p: p is not None and p == p and bb["lat_min"] <= p[0] <= bb["lat_max"]
                             and bb["lon_min"] <= p[1] <= bb["lon_max"] and _pt4(p) not in default)
     refused = mine & (joined["tier"] != "block") & joined["pub"].map(

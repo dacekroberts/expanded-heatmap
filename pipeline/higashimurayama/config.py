@@ -153,30 +153,36 @@ COLLAPSE_MAX_SPREAD_M = 300
 # Japanese), the operator's hue (`hue`, where scripts/line_colour_search.py
 # starts) and the project's colour. Line names without macrons, in Tokyo's
 # signage style; 西武園線 as Seibuen, the station's spelling (OSM name:en).
-# Seibu's lines all start from Seibu's blue, JR East's from its orange for the
-# Musashino Line; the search separates lines that run side by side.
+# The Shinjuku Line starts from Seibu's corporate blue (Nishitokyo's and
+# Tokorozawa's), the Musashino Line from JR East's orange. The other four
+# Seibu hues are seeds, not read from Seibu: each line a distinct hue of its
+# own, so lines of one operator that meet separate (the owner, 2026-10-07:
+# distinct colours; the earlier run started all five from one blue and landed
+# them near-grey, closest pair 18.3).
 LINES = {
     "SS": {"n02": [("西武鉄道", "新宿線")], "name": "Seibu Shinjuku Line", "name_ja": "西武新宿線",
            "short": "Seibu", "hue": "#00A0DE"},
     "SK": {"n02": [("西武鉄道", "国分寺線")], "name": "Seibu Kokubunji Line", "name_ja": "西武国分寺線",
-           "short": "Seibu", "hue": "#00A0DE"},
+           "short": "Seibu", "hue": "#C88800"},
     "SE": {"n02": [("西武鉄道", "西武園線")], "name": "Seibu Seibuen Line", "name_ja": "西武西武園線",
-           "short": "Seibu", "hue": "#00A0DE"},
+           "short": "Seibu", "hue": "#9040C0"},
     "ST": {"n02": [("西武鉄道", "多摩湖線")], "name": "Seibu Tamako Line", "name_ja": "西武多摩湖線",
-           "short": "Seibu", "hue": "#00A0DE"},
+           "short": "Seibu", "hue": "#A06030"},
     "SH": {"n02": [("西武鉄道", "拝島線")], "name": "Seibu Haijima Line", "name_ja": "西武拝島線",
-           "short": "Seibu", "hue": "#00A0DE"},
+           "short": "Seibu", "hue": "#805878"},
     "JM": {"n02": [("東日本旅客鉄道", "武蔵野線")], "name": "JR Musashino Line", "name_ja": "JR武蔵野線",
            "short": "JR", "hue": "#F15A22"},
 }
 # Colours: the project's own, from `python scripts/line_colour_search.py
 # higashimurayama` (2026-10-07, defaults: >= 18 within 500 m, >= 10 city-wide):
-# each the feasible colour nearest its operator's hue that reads 3:1 on both
-# map pages and clears CIE76 45 from every pin (the Shinjuku Line's blue at
-# 45.1). Five lines from one blue: the closest pair within 500 m is 18.3 (the
-# Kokubunji and Shinjuku lines), anywhere 11.2 (the Seibuen and Tamako lines);
-# the dark-mode labels, 6 of 6.
-_COLOURS = {"SS": "#08A0C0", "SK": "#287888", "SE": "#7898A8", "ST": "#788090", "SH": "#506860", "JM": "#F05820"}
+# each the feasible colour nearest its seed that reads 3:1 on both map pages
+# and clears CIE76 45 from every pin (the Shinjuku Line's blue at 45.1, the
+# Seibuen Line's purple at 45.5, the Haijima Line's mauve at 45.7). The
+# Shinjuku and Musashino lines take Nishitokyo's and Tokorozawa's colours. The
+# Haijima Line cannot take Higashiyamato's and Tachikawa's blue here, which is
+# the Shinjuku Line's. Closest pair within 500 m and anywhere 33.2 (the
+# Kokubunji and Tamako lines); the dark-mode labels, 6 of 6.
+_COLOURS = {"SS": "#08A0C0", "SK": "#C88800", "SE": "#9040C0", "ST": "#A06030", "SH": "#805878", "JM": "#F05820"}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

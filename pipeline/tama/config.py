@@ -161,23 +161,27 @@ N03_NEIGHBOR_PREFS = ("14",)
 # key -> the N02 track it is drawn from, its real public name (English, then
 # Japanese), the operator's hue (`hue`, where scripts/line_colour_search.py
 # starts) and the project's colour. Line names without macrons, in Tokyo's
-# signage style.
+# signage style. The Sagamihara Line starts from Keio's magenta (its station
+# numbering colour; Chofu's and Kawasaki's #F000B8). The Keio Line's violet
+# is a seed, not read from Keio: one distinct hue for the Keio Line in Chofu,
+# Fuchu, Hino and Tama (the owner, 2026-10-07: distinct colours; from one
+# magenta the two read 11.1 apart here).
 LINES = {
     "OT": {"n02": [("小田急電鉄", "多摩線")], "name": "Odakyu Tama Line", "name_ja": "小田急多摩線",
            "short": "Odakyu", "hue": "#2288CC"},
     "KS": {"n02": [("京王電鉄", "相模原線")], "name": "Keio Sagamihara Line", "name_ja": "京王相模原線",
            "short": "Keio", "hue": "#DD0077"},
     "KO": {"n02": [("京王電鉄", "京王線")], "name": "Keio Line", "name_ja": "京王線",
-           "short": "Keio", "hue": "#DD0077"},
+           "short": "Keio", "hue": "#B030D0"},
 }
 # Colours: the project's own, from `python scripts/line_colour_search.py
 # tama` (2026-10-07, defaults: >= 18 within 500 m, >= 10 city-wide):
-# each the feasible colour nearest its operator's hue that reads 3:1 on both
-# map pages and clears CIE76 45 from every pin (the Tama Line's blue at 45.1).
-# Closest pair within 500 m 110.1 (Sagamihara / Tama Line), anywhere 11.1 (the
+# each the feasible colour nearest its seed that reads 3:1 on both map pages
+# and clears CIE76 45 from every pin (the Tama Line's blue at 45.1).
+# Closest pair within 500 m 110.1 (Sagamihara / Tama Line), anywhere 31.3 (the
 # two Keio lines, which never come within 500 m here); the dark-mode labels,
 # 3 of 3.
-_COLOURS = {"OT": "#08A0C0", "KS": "#F000B8", "KO": "#F848D0"}
+_COLOURS = {"OT": "#08A0C0", "KS": "#F000B8", "KO": "#B030D0"}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

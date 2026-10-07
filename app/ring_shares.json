@@ -862,12 +862,12 @@
  "tama": {
   "in_ring": 1162,
   "all": 1419,
-  "map_blob": "18a904b21625d663aefc9ee4965335f21b6dfff2"
+  "map_blob": "877781ee98e88a6d3ad6e5a338dd8fe4bd8edbe6"
  },
  "higashimurayama": {
   "in_ring": 1153,
   "all": 1432,
-  "map_blob": "e87b753f25d2b7aefa22081b0e1a4581a18a5bdf"
+  "map_blob": "d93ae324d6e16a76554d87623e287505b12bef02"
  },
  "ageo_regional": {
   "in_ring": 1367,
@@ -877,22 +877,22 @@
  "fuchu_tokyo": {
   "in_ring": 2300,
   "all": 2586,
-  "map_blob": "3e0dacd2a8193b77c27ec9f56275f2acde28252e"
+  "map_blob": "b71808140c37811ce4394bb9909d0488fec2aa35"
  },
  "chofu": {
   "in_ring": 2184,
   "all": 2510,
-  "map_blob": "14568c6f0744e4a82f2a4c3f57423997371f24d3"
+  "map_blob": "d3b1ce88ac4658a3fdc5bc22c330a6a96d099e69"
  },
  "tachikawa": {
   "in_ring": 2988,
   "all": 3392,
-  "map_blob": "d2873fac76af85ded20040658bbc937a8d57228c"
+  "map_blob": "31138d712ac9f0f60dcfdffd2d981b95f0f67d69"
  },
  "hino": {
   "in_ring": 1173,
   "all": 1344,
-  "map_blob": "31c3f02edf180c98172abf7ad83cfbad54e3929f"
+  "map_blob": "7f28eef668daf3e6dae81706b9652a7555e65c66"
  },
  "soka": {
   "in_ring": 1806,
@@ -906,7 +906,7 @@
  },
  "kasukabe": {
   "in_ring": 1983,
-  "all": 2838,
-  "map_blob": "d8571d3690397f72fa414d85ccf93092e7f5d06b"
+  "all": 2840,
+  "map_blob": "8e8118c99c47ccad36413be2b0df8dbe54082289"
  }
 }

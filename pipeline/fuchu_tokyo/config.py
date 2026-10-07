@@ -157,16 +157,18 @@ N03_NEIGHBOR_PREFS = ("14",)
 # key -> the N02 track it is drawn from, its real public name (English, then
 # Japanese), the operator's hue (`hue`, where scripts/line_colour_search.py
 # starts) and the project's colour. Line names without macrons, in Tokyo's
-# signage style. Keio's two lines start from Keio's magenta (its station
-# numbering colour for both, as Tama's Keio lines), the Nambu Line from JR
-# East's yellow (Kawasaki's), the Musashino Line from its orange
-# (Higashimurayama's) and the Tamagawa Line from Seibu's blue (Higashimurayama's
-# and Nishitokyo's Shinjuku Line).
+# signage style. Keio's two lines take seeds, not read from Keio (its station
+# numbering colour is one magenta for both): the Keio Line a violet, one hue
+# in Chofu, Fuchu, Hino and Tama, and the Keibajo Line a brown of its own (the
+# owner, 2026-10-07: distinct colours; from one magenta the two read 19.4
+# apart). The Nambu Line starts from JR East's yellow (Kawasaki's), the
+# Musashino Line from its orange (Higashimurayama's) and the Tamagawa Line
+# from Seibu's blue (Higashimurayama's and Nishitokyo's Shinjuku Line).
 LINES = {
     "KO": {"n02": [("京王電鉄", "京王線")], "name": "Keio Line", "name_ja": "京王線",
-           "short": "Keio", "hue": "#DD0077"},
+           "short": "Keio", "hue": "#B030D0"},
     "KK": {"n02": [("京王電鉄", "競馬場線")], "name": "Keio Keibajo Line", "name_ja": "京王競馬場線",
-           "short": "Keio", "hue": "#DD0077"},
+           "short": "Keio", "hue": "#806040"},
     "JN": {"n02": [("東日本旅客鉄道", "南武線")], "name": "JR Nambu Line", "name_ja": "JR南武線",
            "short": "JR", "hue": "#FFD400"},
     "JM": {"n02": [("東日本旅客鉄道", "武蔵野線")], "name": "JR Musashino Line", "name_ja": "JR武蔵野線",
@@ -176,12 +178,12 @@ LINES = {
 }
 # Colours: the project's own, from `python scripts/line_colour_search.py
 # fuchu_tokyo` (2026-10-07, defaults: >= 18 within 500 m, >= 10 city-wide):
-# each the feasible colour nearest its operator's hue that reads 3:1 on both
-# map pages and clears CIE76 45 from every pin (the Tamagawa Line's blue at
-# 45.1). Closest pair within 500 m and anywhere 19.4 (the two Keio lines, one
-# magenta, meeting at 東府中); next 56.0 (the Nambu and Musashino lines at
-# 府中本町); the dark-mode labels, 5 of 5.
-_COLOURS = {"KO": "#F000B8", "KK": "#E858D0", "JN": "#B09000", "JM": "#F05820", "SW": "#08A0C0"}
+# each the feasible colour nearest its seed that reads 3:1 on both map pages
+# and clears CIE76 45 from every pin (the Tamagawa Line's blue at 45.1).
+# Closest pair within 500 m 56.0 (the Nambu and Musashino lines at 府中本町),
+# anywhere 46.3 (the Keibajo and Nambu lines); the two Keio lines, meeting at
+# 東府中, 101.3. The dark-mode labels, 5 of 5.
+_COLOURS = {"KO": "#B030D0", "KK": "#806040", "JN": "#B09000", "JM": "#F05820", "SW": "#08A0C0"}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

@@ -148,8 +148,10 @@ COLLAPSE_MAX_SPREAD_M = 300
 # signage style. N02 files JR East under legal lines; here each legal line is
 # the public line of the same name (the brief), so no `route` is needed. The
 # monorail and the Haijima Line start from Higashiyamato's hues, the Nambu
-# Line from JR East's yellow (Fuchu's), and the Chuo and Ome lines from JR
-# East's orange, the one colour both lines carry (Tokyo's Chuo Line (Rapid)).
+# Line from JR East's yellow (Fuchu's), and the Chuo Line from JR East's
+# orange (Tokyo's Chuo Line (Rapid)). JR East gives the Ome Line the same
+# orange, so its pink is a seed, not read from JR East (the owner,
+# 2026-10-07: distinct colours; from one orange the two read 18.1 apart).
 LINES = {
     "MONO": {"n02": [("多摩都市モノレール", "多摩都市モノレール線")], "name": "Tama Toshi Monorail",
              "name_ja": "多摩都市モノレール線", "short": "Tama Monorail", "hue": "#F08200"},
@@ -160,18 +162,18 @@ LINES = {
     "JC": {"n02": [("東日本旅客鉄道", "中央線")], "name": "JR Chuo Line", "name_ja": "JR中央線",
            "short": "JR", "hue": "#F15A22"},
     "JO": {"n02": [("東日本旅客鉄道", "青梅線")], "name": "JR Ome Line", "name_ja": "JR青梅線",
-           "short": "JR", "hue": "#F15A22"},
+           "short": "JR", "hue": "#E060D0"},
 }
 # Colours: the project's own, from `python scripts/line_colour_search.py
 # tachikawa` (2026-10-07, defaults: >= 18 within 500 m, >= 10 city-wide):
-# each the feasible colour nearest its operator's hue that reads 3:1 on both
-# map pages and clears CIE76 45 from every pin (the Haijima Line's blue at
-# 45.1). The monorail, the Haijima Line and the Nambu Line keep
+# each the feasible colour nearest its seed that reads 3:1 on both map pages
+# and clears CIE76 45 from every pin (the Haijima Line's blue at 45.1, the Ome
+# Line's pink at 45.8). The monorail, the Haijima Line and the Nambu Line keep
 # Higashiyamato's and Fuchu's colours; the Chuo Line keeps Tokyo's Chuo Line
-# (Rapid) orange. The Ome Line, the same orange, goes dark red. Closest pair
-# within 500 m and anywhere 18.1 (the Chuo and Ome lines, meeting at 立川);
-# next 23.6 (the monorail); the dark-mode labels, 5 of 5.
-_COLOURS = {"MONO": "#E07800", "SH": "#08A0C0", "JN": "#B09000", "JC": "#F05820", "JO": "#C01800"}
+# (Rapid) orange, as Hino's. Closest pair within 500 m and anywhere 23.6 (the
+# monorail and the Chuo Line); the Chuo and Ome lines, meeting at 立川, 94.1.
+# The dark-mode labels, 5 of 5.
+_COLOURS = {"MONO": "#E07800", "SH": "#08A0C0", "JN": "#B09000", "JC": "#F05820", "JO": "#E060D0"}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

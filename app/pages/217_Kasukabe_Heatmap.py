@@ -47,7 +47,7 @@ render_data_age("Kasukabe")
 # pages (approved wording, pre-approved for this build); the sentences no
 # template covers (the old-law upper bound, the
 # prefecture's withholding note with no share, call 173) are proposals in
-# docs/decisions_drafts/worktree-japan-east-1.md. The ring share, 69.9% (1,983 of 2,838), is step 3's.
+# docs/decisions_drafts/worktree-japan-east-1.md. The ring share, 69.8% (1,983 of 2,840), is step 3's.
 st.markdown(
     """
 **The lines**
