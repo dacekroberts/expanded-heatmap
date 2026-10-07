@@ -97,6 +97,16 @@ The A and B briefs left 23 reads pending. Regional-1's six run from staging (Tsu
     - Must display (city §2(2), the city's format): 「出典：松本市の［タイトル］（クリエイティブ・コモンズ・ライセンス表示4.0国際、［URL］、［ダウンロード日］ダウンロード）、松本市を編集・加工して作成」, plus the attribution name and a line that LinkData marks the data CC BY 3.0 (both versions named; owner to confirm, call 207).
     - Must not: imply endorsement by the city or LinkData (CC BY 3.0 §4(b), LinkData Art.14.2); harm the author's honour (14.1); keep the contributor's name if asked to remove it (14.3).
     - Liability: **city §6(5) is not fault-based**: the user settles 「全ての苦情や請求」 arising from use at its own cost, uncapped, no express indemnity. **LinkData Art.18(4) is partly not fault-based**: the user settles claims arising from a breach or from the content, and repays LinkData's 「一切の損害、損失及び費用」, uncapped. Art.21(3) fault-based. Courts: Nagano, Tokyo. Put to the owner as call 207.
+  - **Kawaguchi: PERMITTED WITH CONDITIONS, subject to call 208.** The open-data page (12182.html, updated 2026-10-07, now listing data to R8年8月) grants 「クリエイティブコモンズ「表示」（CC BY）」 and links **CC BY 2.1 JP**, not 4.0; its 第3条 grants reproduction, adaptation and 公衆送信. The site terms (4467.html, 2024-04-02) cover web text and images and route permission to each page's department, whose page this grant is; not incorporated into the data.
+    - The page's 「データ利用者はデータ利用のみ自由です。」 sits beside 「所有権…は放棄しません」: read as use without ownership, the CC BY grant covering redistribution; read narrowly, only use is free. Put to the owner as call 208.
+    - Must display (no prescribed form; 2.1 JP 第5条): the licence URI, 川口市, the title 食品等営業許可・届出一覧, that the data was used and changed, notices intact. The city's credit removed if it asks.
+    - Must not: use that 「人権侵害を行ったり、安全を脅かす」 (the personal-name rule covers it); added terms; accuracy claims.
+    - Liability: the city's exclusions only; 2.1 JP 第6条 fault-based. No indemnity or cost owed by the user.
+  - **Osaka Prefecture's barber and beauty lists (Ibaraki, Kadoma, Minoh, Moriguchi): PERMITTED WITH CONDITIONS.** CC BY 4.0 by 大阪府オープンデータ利用規約 第1条 (https://odcs.bodik.jp/270008/tos/, accepted by use, changes without notice; 第5条 puts it above other sites' terms). Both dataset pages state CC BY 4.0 with no exception. The prefecture's site policy (use.html) covers its web pages only.
+    - Must display (no prescribed form; CC BY 4.0 §3(a)): 大阪府, the titles 「理容所届出施設一覧」「美容所届出施設一覧」, the licence link, a modification statement.
+    - Must do: clear third parties' rights (第2条; trade names are facts, none found); ask before using the logo (第3条). The list page says the lists lag and the full list renews twice a year, so the page never calls them current. Linking prefecture pages asks for a notice to the page's 作成所属: cite titles without hyperlinking them (Hirakata's precedent).
+    - Liability: 第4条 ¶3 breach- or infringement-based, uncapped, settled at the user's cost, not an indemnity; Osaka District Court.
+    - Rate: three bodik.jp requests, all 200; the second came about 30 s after the first, inside the 20 s rule but under the 60 s spacing staging set.
 
 ### 2026-10-07 - Call 197 built on Cleanup's europe-split branch; the macro map's region views are Cleanup's (owner, call 198)
 
