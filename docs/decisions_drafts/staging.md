@@ -4,6 +4,13 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-07 - Seven Romanian cities and three Hungarian to Band R; Miskolc kept for one look (owner, calls 215c, 216)
+
+- **RENNS checked in the owner's browser:** `geoportal.ancpi.ro` and `renns.ancpi.ro` answer DNS_PROBE_FINISHED_NXDOMAIN (the names no longer exist), `geoportal.gov.ro` ERR_CONNECTION_TIMED_OUT, as from here. So Timișoara, Iași, Arad, Galați, Ploiești, Craiova and Reșița go to R (215c), reopen condition RENNS reachable or the owner's request to ANCPI.
+- **Hungary (216, "we can try miskolc, if fail band R. others can go to R now"):** the bulk-route probe found no API, export, open-data release or bulk extract (OKNYIR, Lechner, kozadatportal.hu, the cities' sites; NÉBIH's food search behind a CAPTCHA); Lechner takes requests for public data (the Trade Act §6/I(3) makes the register public). Debrecen, Szeged and Budapest to R, reopen on a Lechner extract or an OKNYIR export. Miskolc stays in D for one look at its GovCenter register (plain HTML, 200 rows a page, no licence stated); if it fails, R.
+- **A precedent to weigh before Miskolc's look:** Lausanne went to R on 2026-10-04 because Vaud's licence register answers only through a paged search ("a bulk extract by request"), and Miskolc's own D row recorded "Paging a search is Lausanne's shape". Put to the owner before any work.
+- **Master list:** candidates 69 (A 32, B 33, C 2, D 2: Oradea, Miskolc), R 89, 329 discarded.
+
 ### 2026-10-07 - Romania's placement settled: Cluj-Napoca to B, Oradea's address layer to a licence read, seven cities to R after the owner's RENNS check; Pune discarded (owner, calls 215, 218)
 
 - **The address-source probe** (curl, catalogue and capabilities pages only): ANCPI's RENNS address points (INSPIRE AD, RO.ANCPI/AD.RENNS, every urban locality) exist in the INSPIRE record but `geoportal.ancpi.ro` and `renns.ancpi.ro` do not resolve and `geoportal.gov.ro` times out from here, as Bucharest's brief found; ANCPI's buildings likewise. Oradea runs an open WFS, `harta.oradea.ro` service "Adrese", layer `gmgml:NrAdm`, 34,237 address points with house numbers, no licence stated (its capabilities' "none" fields are vendor defaults). Nothing reachable for the other eight: Timișoara's catalogue holds no addresses, Cluj-Napoca's GIS lists only a sample service, Arad's sits behind a login, Ploiești, Galați and Reșița answered nothing usable; Overture and OpenAddresses do not cover them.
