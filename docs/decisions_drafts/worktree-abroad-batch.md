@@ -620,6 +620,11 @@ covers, quoted word for word as it stands in the file (already written, per
 own figures are not listed. **Answer "all approved", or name the numbers to
 reword or drop**; nothing else needs doing for an approval.
 
+**Answered (owner, 2026-10-07, in the build's chat): "all approved".** R1 to
+R45 stand as written, with the notice city lists and the nine What Is
+Excluded sections; every "proposal for review time" flag in this file's
+entries above is settled by it.
+
 **Gimpo (page 202)**
 
 - **R1** (follows Gimhae's not-drawn bullet): "Not drawn: Lines 5 and 9, the
