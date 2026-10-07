@@ -102,7 +102,7 @@ section when its item is done.** The older history is in
 
 **Wave 5 ran on 2026-10-06** (owner: "We can start on the next items, i want
 to get a bunch of briefs ready for build time"): the ranked queue and all 73
-pre-verdicts now have rows; the master list stands at A 32, B 28, C 6, D 16,
+pre-verdicts now have rows; the master list stands at A 32, B 32, C 2, D 16,
 R 77, 328 discarded, 10 open gaps. Calls 46 to 184 are in
 `docs/decisions_drafts/staging.md` (four wave 5 entries). Rules made: no
 frequency floor for JR or private lines in Japan (call 46), low-frequency
@@ -121,12 +121,15 @@ vehicle).
    Higashiyamato, Nishitōkyō, Ageo (Regional), Sōka, Tokorozawa, Kasukabe).
    Also passing: Okazaki, Neyagawa, Matsue, Gifu, Koshigaya, Kawaguchi,
    Matsumoto, Tottori, Yamagata, Yao and Takatsuki, with the owner's calls
-   to 184 recorded in each. Running at handoff: Fuji (download approved,
-   call 174) and Kure (B, share stated, call 185). **Build sessions stay held**
+   to 184 recorded in each. Also passing: Fuji, Kure, Fuchū (Tokyo), Chōfu, Tachikawa and Hino, so
+   **every A and B city has a passing brief**; Band C holds only Kurashiki
+   and Naha. **Build sessions stay held**
    (new builds paused, owner 2026-10-04), three at a time when they resume;
    each brief's open calls and "for the build" shared-code notes go with it.
-2. **Open owner calls at handoff:** none beyond what the Fuji and Kure
-   briefs return (Kure to B, call 185). Calls 154-184 are in the drafts file's fourth wave 5 entry.
+2. **Open owner calls at handoff:** 189, Tokyo's yearbook table 19-7
+   (`tn24qv190700.csv`, 6.7 KB, the publisher of table 19-8) for official
+   barber, beauty and laundry counts in the eight Tama cities (Tachikawa's
+   501 salons outrun the census estimate). Calls 154-184 are in the drafts file's fourth wave 5 entry.
 3. **Liabilities list** (owner asked, 2026-10-06): a private page of every
    indemnity, reimbursement, own-cost and release clause, 67 entries,
    https://claude.ai/artifact/FMZrsssfiCtydpHroo1V16 (source data:
@@ -173,8 +176,8 @@ vehicle).
 
 ## The two private pages
 
-- **City master list**, version 16: https://claude.ai/artifact/LTzi7Vj5emzHnb3zAZy4Vn
-- **Country census**, version 16: https://claude.ai/artifact/CKCadsYtUhbWwWKzV9sDeD
+- **City master list**, version 17: https://claude.ai/artifact/LTzi7Vj5emzHnb3zAZy4Vn
+- **Country census**, version 17: https://claude.ai/artifact/CKCadsYtUhbWwWKzV9sDeD
 - How to update both: `scripts/staging_artifacts/README.md`. The published
   page is the source; the master list wins when they disagree. Master-list
   republishes in chat use the banded format (the owner's memory).
