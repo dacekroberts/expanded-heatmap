@@ -4,6 +4,16 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-07 - Band D's first three Romanian briefs: every one under the 70% placement bar; call 215 put to the owner
+
+- **Briefs written** (owner: "write the briefs for those three now"; three agents, one city each, from the owner's saved DSVSA files, OSM by one Overpass query at a time across the session): `docs/build_briefs/timisoara.md`, `iasi.md`, `cluj_napoca.md`.
+  - **Timișoara:** 4,925 kept premises in the city (food service 2,620, food shops 2,160, BUFET 145); OSM's address join places **51.6%** (OSM holds 11,268 address points in the city). Six running tram lines (SMTT: 1, 2, 4, 7, 8, 9), 68 stop names, median gap 336 m (halved rings). The city's CC BY transit dataset (9.3 MB) is a Step 0 download for the owner.
+  - **Iași:** 3,063 premises (food shops 1,634, food service 1,429); placed **43.9%**, 61.0% with Incheon's nearest same-side tier (4,551 OSM addresses). Nine tram lines, 57 stops, median gap 399 m; six Copou stops closed for works. The two old files (2021, 2017) fail currency, at most 6 premises lost.
+  - **Cluj-Napoca:** 5,626 premises (food shops 2,799, food service 2,721); placed **60.2%** with Bucharest's normaliser, 63.4% with three Cluj fixes (22,217 OSM addresses). Trams 100, 101, 102 read from CTP's timetables; 20 stations, median gap 475 m.
+  - Each county numbers its files differently from Bucharest's, so the build maps files to roles per city.
+- **Call 215, the placement bar:** the reduced-bucket bar is 70% placed, and Santa Cruz–La Laguna went to the discards at 57.7% (owner, 2026-09-30). All three fall under it; the Cluj agent proposed B with the gap disclosed, a departure from that precedent. Staging recommends Band C for all three, reopen condition a second address layer that reaches 70%, and an OSM address count for the six remaining Romanian cities before more browser acts.
+- **Slips:** the Timișoara agent printed about 24 registration numbers and dates from a mislabelled column to its console; the Cluj agent printed about 30 premises addresses (street and number, no names) from file 26, whose address and category columns are swapped; the Iași agent printed DSVSA Iași's own letterhead (the office's address and phone). Nothing was stored or written to a brief. Staging ran `brief_check.py timisoara` twice without the session's Overpass lock while two agents held it in turn, so up to two queries may have overlapped theirs; both met a 504 or 500.
+
 ### 2026-10-07 - Calls 206 to 208 accepted; Regional-1's batch ready, calls 210 to 213 put to the owner
 
 - **"206: accept, 207 accept", "208: acept"** (owner, staging's chat):
