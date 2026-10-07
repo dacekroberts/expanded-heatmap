@@ -18,8 +18,10 @@ tradeoff. A parked call stops only what it names.
    adapted maps, no share-alike, no non-commercial term. The gap: CC BY 4.0
    licenses the sui generis database right (§4) and 3.0 is silent on it, so
    under an older reading the survey's German database right (§87a UrhG) is
-   neither licensed nor reserved. The owner's call 13 (2026-10-05, no
-   outreach) was made without this point. **Recommendation: accept, on the
+   neither licensed nor reserved. The owner's call 13 (2026-10-05: "no
+   outreach; the title as written, CC BY 4.0's notice terms met") already
+   reads the licence as 4.0, but was made without the database-right point,
+   so this asks only to confirm it. **Recommendation: accept, on the
    4.0 reading** (opendefinition's overview is 4.0 and it names 4.0 the only
    version for data; the record types the licence "Freie Nutzung"; the map
    publishes aggregated density and a goods group per dot, never the
@@ -162,6 +164,44 @@ tradeoff. A parked call stops only what it names.
   travels without its caption carries the source line on its face. Notice
   1: rail, communes and stop names from OSM. **Open terms question: none.**
   New inputs: a city, a taxonomy, notice 154, the Swiss licence rows.
+
+### 2026-10-07 - Anyang (Regional) built: Gunpo and Uiwang join Anyang's page on SEMAS's codes (abroad-batch)
+
+- **Privacy verdict: publish.** `check_personal_exposure.py`'s own check run
+  on the regional file (`processed/regional/`, its registry entry's path
+  pointed there for the run): PASS, 0 of 23,999 rows show a Korean personal
+  name at a residential address; 42 withheld (Anyang 28, Gunpo 5, Uiwang 9).
+- **Anyang (Regional), the owner's mark of 2026-10-04, built on the
+  regional-extension skill.** A `REGIONAL` switch committed off first and
+  proved at zero drift on the city alone (22a215c9); on, SEMAS keys on
+  시군구코드 41171, 41173 (Anyang's two 구, the prefix's exact rows), 41410
+  (군포시) and 41430 (의왕시): **23,999 storefronts** (Food service 11,331,
+  Retail 8,993, Personal services 3,675; Anyang 15,177, Gunpo 5,868, Uiwang
+  2,954), the brief's figures exactly; out by name: hostess bars 439, staff
+  canteens 89, household fuel dealers 45, dance halls 24. Step 2 measured
+  0.42 GB.
+- **Stations: 7 -> 14**, 106 -> 99 listed outside: Line 1 eight, Line 4
+  seven, Geumjeong shared (Gunpo 6, Uiwang 1), each line's in-scope
+  stations agreeing with its line table (Anyang's stand-in for gate 3).
+  Boundary: one Overpass query for 안양시, 군포시 and 의왕시 into
+  `osm_boundary_regional.json` (relations 2409161, 2409167, 2409184; 59.1,
+  35.9 and 53.8 km2), the union 149 km2 gated 142-156; the city's cache
+  untouched. Median gap 1,443 m, standard rings. **15,799 of 23,999 (65.8%)
+  in a ring**: Anyang 66.1%, Gunpo 86.6%, Uiwang 23.3%.
+- **The rename**: "Anyang (Regional)" in `app/cities.py`, the page (same
+  file, `87_Anyang_Heatmap.py`), notice 68's title and text (Anyang, Gunpo,
+  Uiwang), notice 1, the reference rows. The label widened to 124.6 px and
+  moved right of its dot, the one offset of ten that clears the Seoul
+  Capital Area at 375, 768 and 1200. **Regional processed files are in
+  `data/anyang/processed/regional/`; fold back on landing** (the skill).
+- **Page proposals**: "The map covers Anyang with its neighbors Gunpo and
+  Uiwang, which the same two lines serve."; "The two lines share one
+  station, Geumjeong, in Gunpo."; "Uiwang has one station, at its western
+  edge, so about one of its storefronts in four sits within a ring."; and
+  notice 68's city list with Gunpo and Uiwang.
+- **Downstream:** an extension always counts: `outputs/anyang/`, the
+  registry name, notices 68 and 1, macro facts and ring shares. Notice 68:
+  caption, and the SEMAS card hold applies as before.
 
 ### 2026-10-07 - Abroad batch: page proposals, numbers and downstream (abroad-batch)
 

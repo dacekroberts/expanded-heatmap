@@ -30,10 +30,10 @@ Mapped so far:
 - **Brazil:** São Paulo, Rio de Janeiro (Regional), Belo Horizonte (Regional), Brasília, Salvador, Fortaleza (Regional), Porto Alegre (Regional), Recife (Regional), Santos (Regional)
 - **Hong Kong:** Hong Kong
 - **Latvia:** Riga, Liepāja, Daugavpils
-- **South Korea:** Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang, Daejeon, Gwangju, Gimhae, Gimpo, Siheung
+- **South Korea:** Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang (Regional), Daejeon, Gwangju, Gimhae, Gimpo, Siheung
 - **Taiwan:** Taichung, Taoyuan, Taipei (Regional)
 - **Japan:** Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki
-- **Germany:** Berlin
+- **Germany:** Berlin, Gelsenkirchen, Bremen
 - **United Kingdom:** London, Glasgow, Newcastle (Regional), Manchester (Regional), Birmingham (Regional), Edinburgh, Sheffield, Nottingham (Regional), Blackpool (Regional), Liverpool (Regional)
 - **Argentina:** Buenos Aires, Mendoza
 - **Australia:** Sydney, Melbourne
@@ -42,6 +42,7 @@ Mapped so far:
 - **Switzerland:** Zurich, Geneva (Regional)
 - **Georgia:** Tbilisi
 - **Belgium:** Brussels, Antwerp, Ghent, Charleroi, Liège, Brussels (Regional)
+- **Greece:** Thessaloniki
 <!-- CITIES:END -->
 
 The list the app itself reads is `app/cities.py`.

@@ -5411,24 +5411,25 @@ Line 1 and Line 7, 20 stations. Line 4 and GTX-A, which pass near the city,
 have no station in Uijeongbu and are not drawn; the U Line's two depot-shuttle
 trips are part of the drawn line.
 
-### Anyang - SEMAS's national storefront register, all three buckets
+### Anyang (Regional) - SEMAS's national storefront register, all three buckets
 
 **Incheon's source and rules**, as for Goyang, Seongnam and Yongin (the
-section above).
+section above), over Anyang with its neighbors Gunpo and Uiwang (owner,
+2026-10-04).
 
-**Out by name**: hostess bars 313, dance halls 20, staff canteens 47,
-household fuel dealers 26; and, as in Incheon, offices, education, health,
+**Out by name**: hostess bars 439, dance halls 24, staff canteens 89,
+household fuel dealers 45; and, as in Incheon, offices, education, health,
 estate agents, lodging, recreation, repairs, funeral services, wedding halls
 and matchmaking.
 
-**Names withheld** - 28 storefronts whose registered name is a bare personal
+**Names withheld** - 42 storefronts whose registered name is a bare personal
 name at an address that reads residential.
 
-**Stations**, cut at Anyang's boundary (the lines drawn to their ends;
-stations outside are listed on Anyang's page): Line 1 and Line 4,
-7 stations. Anyang has fewer stations than the other satellite cities had to
-have, and was built for the share of its storefronts within a ring instead
-(owner, 2026-09-29). No other line has a station in the city.
+**Stations**, cut at the three cities' boundary (the lines drawn to their
+ends; stations outside are listed on the page): Line 1 and Line 4, 14
+stations, 7 in Anyang, 6 in Gunpo and 1 in Uiwang (Geumjeong is on both
+lines). Uiwang's one station rings about a quarter of its storefronts. No
+other line has a station in the three cities.
 
 ### Daejeon - SEMAS's national storefront register, all three buckets
 

@@ -76,15 +76,18 @@ FIELDS = {
     # "Food service thin": Kansas City, whose licence register holds about 175
     # restaurants and bars (2026-09-30, on the owner's rule that a thin layer is
     # narrowed).
+    # "Retail only": Bremen, whose regional retail survey holds shops and
+    # nothing else (owner, 2026-10-05, calls 22-27).
     "categories": {"All three", "Two", "Merged", "Retail thin",
                    "Personal services thin", "Food service thin",
-                   "Food premises only", "Personal services only"},
+                   "Food premises only", "Personal services only", "Retail only"},
 }
 # The coverage tier each `categories` value needs (owner, 2026-09-30).
 TIER_OF = {"All three": "full", "Two": "narrowed", "Merged": "narrowed",
            "Retail thin": "narrowed", "Personal services thin": "narrowed",
            "Food service thin": "narrowed",
-           "Food premises only": "one_bucket", "Personal services only": "one_bucket"}
+           "Food premises only": "one_bucket", "Personal services only": "one_bucket",
+           "Retail only": "one_bucket"}
 
 
 def field_problems(cities):

@@ -206,6 +206,8 @@ SLUG_OVERRIDES = {
     "Nottingham (Regional)": "nottingham",
     # The Abroad batch (2026-10-07): the 12 tram communes as one regional page.
     "Geneva (Regional)": "geneva",
+    # Anyang extended to Gunpo and Uiwang (2026-10-07).
+    "Anyang (Regional)": "anyang",
     "Washington D.C.": "washington_dc",
     "Montréal": "montreal",
     "Mexico City": "mexico_city",

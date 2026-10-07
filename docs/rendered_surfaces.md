@@ -6,7 +6,7 @@ read from the code, so a review lane can divide them up and miss none
 (review lesson 3, `docs/review_lanes_2026-09-30.md`). The lane kit is
 `docs/review_lane_kit.md`.
 
-**173 city pages, 4 fixed pages and the Overview; 28 rendered docs; 2 app data files.**
+**176 city pages, 4 fixed pages and the Overview; 28 rendered docs; 2 app data files.**
 
 ## The Overview (`/`)
 
@@ -123,7 +123,7 @@ Is Excluded, and its in-ring share on Why the Maps Differ.
 | `/Ansan_Heatmap` | Ansan | `ansan` | ✓ |
 | `/Uijeongbu_Heatmap` | Uijeongbu | `uijeongbu` | ✓ |
 | `/Dallas_Heatmap` | Dallas | `dallas` | ✓ |
-| `/Anyang_Heatmap` | Anyang | `anyang` | ✓ |
+| `/Anyang_Heatmap` | Anyang (Regional) | `anyang` | ✓ |
 | `/Le_Mans_Heatmap` | Le Mans | `le_mans` | ✓ |
 | `/Besancon_Heatmap` | Besançon | `besancon` | ✓ |
 | `/Avignon_Heatmap` | Avignon | `avignon` | ✓ |
@@ -210,3 +210,6 @@ Is Excluded, and its in-ring share on Why the Maps Differ.
 | `/Gimpo_Heatmap` | Gimpo | `gimpo` | ✓ |
 | `/Siheung_Heatmap` | Siheung | `siheung` | ✓ |
 | `/Geneva_Heatmap` | Geneva (Regional) | `geneva` | ✓ |
+| `/Thessaloniki_Heatmap` | Thessaloniki | `thessaloniki` | ✓ |
+| `/Gelsenkirchen_Heatmap` | Gelsenkirchen | `gelsenkirchen` | ✓ |
+| `/Bremen_Heatmap` | Bremen | `bremen` | ✓ |

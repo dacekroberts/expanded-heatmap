@@ -15,7 +15,7 @@ from pathlib import Path
 # draws, the owner's mark of 2026-10-04 (docs/build_briefs/anyang_regional.md;
 # the regional-extension skill). False reproduces the city-alone build byte
 # for byte, which the drift check proved before the switch went on.
-REGIONAL = False
+REGIONAL = True
 NAME = "Anyang (Regional)" if REGIONAL else "Anyang"
 
 # --- Paths ---------------------------------------------------------------
@@ -66,11 +66,12 @@ BOUNDARY_NAME = "안양시"
 BOUNDARY_AREA_KM2 = (55, 63)
 # The regional scope: 안양시 with 군포시 and 의왕시, each relation taken by id and
 # checked by name, from their own query file so the city's cache stays as it
-# is. Ids and areas measured at the regional fetch.
+# is. Fetched 2026-10-07: 안양시 59.1, 군포시 35.9 and 의왕시 53.8 km2, the union
+# 149 km2.
 REGIONAL_BBOX = (37.28, 126.85, 37.47, 127.05)        # S, W, N, E
 REGIONAL_BOUNDARY_OSM_JSON = DATA_RAW / "osm_boundary_regional.json"
-REGIONAL_RELATIONS = {2409161: "안양시"}
-REGIONAL_AREA_KM2 = (0, 10_000)
+REGIONAL_RELATIONS = {2409161: "안양시", 2409167: "군포시", 2409184: "의왕시"}
+REGIONAL_AREA_KM2 = (142, 156)
 # The word station_scope.py reads is "outside".
 OUTSIDE_REASON = ("outside Anyang, Gunpo and Uiwang" if REGIONAL
                   else "outside Anyang's boundary")
@@ -111,7 +112,9 @@ LINES_ROUTE_TYPES = {"subway", "light_rail", "monorail", "train"}
 # step 1's report 2026-09-30. In place of the gate, each line's in-city stations
 # read against its line table (English Wikipedia, 2026-09-30): Line 1 Seoksu,
 # Gwanak, Anyang and Myeonghak (4); Line 4 Indeogwon, Pyeongchon and Beomgye
-# (3). Step 1's 7 agree, line by line.
+# (3). Step 1's 7 agree, line by line. Anyang (Regional), read against the same
+# tables 2026-10-07: Line 1 adds Geumjeong, Gunpo, Dangjeong and Uiwang (8),
+# Line 4 Geumjeong, Sanbon, Surisan and Daeyami (7); step 1's 14 agree.
 LINE_STATION_COUNTS = {}
 NOT_DRAWN = {"GTX-A": "GTX-A"}
 NOT_DRAWN_BY_NAME = {}

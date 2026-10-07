@@ -2946,15 +2946,17 @@ CITIES = [
         "region": "Seoul Capital Area",
         "country": "South Korea",
         "in_default_view": False,
-        # Above the dot, the default, and SCORED: Ansan lies inside the Seoul Capital
-        # Area frame (no zoom change); check_macro_labels.py
-        # (python -B) passes, PROBLEMS 0 at 375, 768 and 1200, alone and on the
+        # Ansan lies inside the Seoul Capital Area frame (no zoom change). Above
+        # the dot until 2026-10-07, SCORED then: check_macro_labels.py
+        # (python -B) passed, PROBLEMS 0 at 375, 768 and 1200, alone and on the
         # combined tree with Namyangju (width 41.5 px, measured 2026-09-30).
         # MINOR (owner, 2026-09-30): labelled only in the Seoul Capital Area;
         # a dot and tooltip in East Asia and on the landing view, where Seoul
         # is the region's one label.
         "label_tier": "minor",
-        "label_offset": ("middle", 0, -22),
+        # Below the dot since 2026-10-07 (the Abroad batch): above it, Ansan's pill
+        # covered Siheung's new marker at every width, whatever Siheung's offset.
+        "label_offset": ("middle", 0, 22),
     },
     {
         "name": "Uijeongbu",
@@ -2984,7 +2986,7 @@ CITIES = [
         "label_offset": ("middle", 0, -22),
     },
     {
-        "name": "Anyang",
+        "name": "Anyang (Regional)",
         "lat": 37.3943,
         "lon": 126.9568,
         "page": "pages/87_Anyang_Heatmap.py",
@@ -2995,19 +2997,21 @@ CITIES = [
         "rail_extra": "—",
         "record_kind": "National register",
         "categories": "All three",
-        "blurb": "Line 1 and Line 4",
+        "blurb": "Line 1 and Line 4, in Anyang, Gunpo and Uiwang",
         "region": "Seoul Capital Area",
         "country": "South Korea",
         "in_default_view": False,
-        # Above the dot, nudged west: at Namyangju's wider Seoul Capital Area zoom (8.10)
-        # the default pill meets Seongnam's by 5 px. check_macro_labels.py (python -B)
-        # passes middle at dx -8 to -24, PROBLEMS 0 at 375, 768 and 1200, alone and on
-        # the combined tree (width 51.6 px, measured 2026-09-30).
+        # Right of the dot since 2026-10-07, as "Anyang (Regional)" (width 124.6 px,
+        # measured 2026-10-07): above it, the wider pill met Seongnam's and
+        # Incheon's; check_macro_labels.py (python -B) clears the Seoul Capital
+        # Area at 375, 768 and 1200 only at ("start", 10, 0) of the ten scored.
+        # Before: above the dot, nudged west at Namyangju's zoom (8.10), width
+        # 51.6 px as "Anyang" (2026-09-30).
         # MINOR (owner, 2026-09-30): labelled only in the Seoul Capital Area;
         # a dot and tooltip in East Asia and on the landing view, where Seoul
         # is the region's one label.
         "label_tier": "minor",
-        "label_offset": ("middle", -14, -22),
+        "label_offset": ("start", 10, 0),
     },
     {
         "name": "Dallas",
@@ -4561,15 +4565,11 @@ CITIES = [
         "country": "South Korea",
         "mode": "light_rail",
         "in_default_view": False,
-        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
-        # pinned zoom. Run `python scripts/check_macro_labels.py`,
-        # which scores every city in every region at three widths -
-        # and which will first demand this city's label width be
-        # MEASURED in a real browser with Space Grotesk loaded, since
-        # it refuses a guessed one.
         # MINOR, as every Gyeonggi satellite (owner, 2026-09-30): labelled only
         # in the Seoul Capital Area; a dot and tooltip elsewhere.
         "label_tier": "minor",
+        # Above the dot, the default, and SCORED: check_macro_labels.py (python -B)
+        # PROBLEMS 0 at 375, 768 and 1200 (width 42.4 px, measured 2026-10-07).
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -4591,13 +4591,10 @@ CITIES = [
         # MINOR, as every Gyeonggi satellite (owner, 2026-09-30): labelled only
         # in the Seoul Capital Area; a dot and tooltip elsewhere.
         "label_tier": "minor",
-        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
-        # pinned zoom. Run `python scripts/check_macro_labels.py`,
-        # which scores every city in every region at three widths -
-        # and which will first demand this city's label width be
-        # MEASURED in a real browser with Space Grotesk loaded, since
-        # it refuses a guessed one.
-        "label_offset": ("middle", 0, -22),
+        # Right of and below the dot, and SCORED: check_macro_labels.py (python -B)
+        # PROBLEMS 0 at 375, 768 and 1200, with Ansan's label moved below its dot
+        # (width 55.1 px, measured 2026-10-07).
+        "label_offset": ("start", 10, 14),
     },
     {
         "name": "Geneva (Regional)",
@@ -4616,6 +4613,58 @@ CITIES = [
         "blurb": "TPG trams 12, 14, 15, 17 and 18",
         "region": "Europe",
         "country": "Switzerland",
+        "in_default_view": False,
+        # Left of the dot, and SCORED: above it the pill covered Zurich's and seven
+        # French cities' markers; check_macro_labels.py (python -B) PROBLEMS 0 in
+        # Europe at 375, 768 and 1200 with Thessaloniki out of the zoom fit
+        # (width 122.5 px, measured 2026-10-07).
+        "label_offset": ("end", -10, 0),
+    },
+    {
+        "name": "Thessaloniki",
+        "lat": 40.6401,
+        "lon": 22.9444,
+        "page": "pages/302_Thessaloniki_Heatmap.py",
+        "blurb": "Thessaloniki Metro (TODO: list the lines)",
+        "region": "Europe",
+        "country": "Greece",
+        "mode": "metro",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Gelsenkirchen",
+        "lat": 51.5177,
+        "lon": 7.0857,
+        "page": "pages/303_Gelsenkirchen_Heatmap.py",
+        "blurb": "BOGESTRA trams (TODO: list the lines)",
+        "region": "Europe",
+        "country": "Germany",
+        "mode": "tram",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Bremen",
+        "lat": 53.0793,
+        "lon": 8.8017,
+        "page": "pages/304_Bremen_Heatmap.py",
+        "blurb": "BSAG trams (TODO: list the lines)",
+        "region": "Europe",
+        "country": "Germany",
+        "mode": "tram",
         "in_default_view": False,
         # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
         # pinned zoom. Run `python scripts/check_macro_labels.py`,
@@ -4889,7 +4938,11 @@ if set(COUNTRY_VIEWS) - set(REGION_ORDER):
 # offset). Its centre still counts, so the frame sits further west: on a phone
 # (375 px) Rio de Janeiro's pill clips 87 px (42.5 before), Recife's 36,
 # Porto Alegre's 8 and Mendoza's 9; PROBLEMS 0.
-REGION_ZOOM_WITHOUT = {"Europe": ("Riga", "Stockholm", "Bucharest", "Liepāja", "Daugavpils"),
+# Thessaloniki (2026-10-07), the region's south-eastern outlier, joins
+# Europe's list on Bucharest's measurement: fitted to it, the zoom dropped and
+# 26 labels from Amsterdam to Liepāja collided at every width.
+REGION_ZOOM_WITHOUT = {"Europe": ("Riga", "Stockholm", "Bucharest", "Liepāja", "Daugavpils",
+                                  "Thessaloniki"),
                        "South America": ("Mendoza",)}
 
 # A REGION'S ZOOM SET OUTRIGHT, after the fit (owner, 2026-09-30): France North

@@ -161,6 +161,9 @@ TAXONOMY_MODULES = {
     "wallonia_logic": "pipeline.taxonomies.wallonia_logic",
     "belgium_kbo": "pipeline.taxonomies.belgium_kbo",
     "geneva_noga": "pipeline.taxonomies.geneva_noga",
+    "thessaloniki_adeies": "pipeline.taxonomies.thessaloniki_adeies",
+    "gelsenkirchen_gewerbe": "pipeline.taxonomies.gelsenkirchen_gewerbe",
+    "bremen_einzelhandel": "pipeline.taxonomies.bremen_einzelhandel",
 }
 
 

@@ -123,7 +123,8 @@ OSM_RAIL_BY_CITY = {
     "Namyangju": _korea("Namyangju"),
     "Ansan": _korea("Ansan"),
     "Uijeongbu": _korea("Uijeongbu"),
-    "Anyang": _korea("Anyang"),
+    "Anyang (Regional)": ("the subway and Korail lines and stations of Anyang, Gunpo and "
+                          "Uiwang, and their boundaries", True),
     "Daejeon": _korea("Daejeon"),
     "Gwangju": _korea("Gwangju"),
     "Gimhae": _korea("Gimhae"),

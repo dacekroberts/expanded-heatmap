@@ -211,7 +211,8 @@ register covers them all, or because the rail network only makes sense that way.
   Metrolink districts), Birmingham (Regional) (Birmingham, Sandwell and Wolverhampton),
   Nottingham (Regional) (the city, Broxtowe, Rushcliffe and Ashfield), Blackpool (Regional)
   (Blackpool and Wyre), Seattle (Regional) (11 cities, five
-  publishers, each in the places it covers).
+  publishers, each in the places it covers), Geneva (Regional) (the 12 Swiss
+  communes its trams serve), Anyang (Regional) (with Gunpo and Uiwang).
 - **Cover more than one municipality but are not labelled:** Montréal (the
   agglomeration: 19 boroughs and 15 related municipalities), Dublin (four local
   authorities), Copenhagen (with Frederiksberg), Tokyo (the 23 special wards, each
@@ -653,7 +654,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Namyangju | Line 4, Line 8, Gyeongui–Jungang Line, Gyeongchun Line | — | OpenStreetMap (no whole-line gate; each line's in-city stations read against its line table) | City | 105 / 0 |
 | Ansan | Line 4, Suin–Bundang Line, Seohae Line | — | OpenStreetMap (gate 3 on the Suin–Bundang Line; Line 4 and Seohae not gated) | City | 110 / 0 |
 | Uijeongbu | U Line, Line 1, Line 7 | — | OpenStreetMap (gate 3 on the U Line and Line 7; Line 1 not gated) | City | 126 / 0 |
-| Anyang | Line 1, Line 4 | — | OpenStreetMap (no whole-line gate; each line's in-city stations read against its line table) | City | 106 / 0 |
+| Anyang (Regional) | Line 1, Line 4 | — | OpenStreetMap (no whole-line gate; each line's in-scope stations read against its line table) | Regional (Anyang, Gunpo, Uiwang) | 99 / 0 |
 | Daejeon | Daejeon Metro Line 1 | Line 2 (a tram, under construction) | OpenStreetMap (gate 3 exact against the operator's count) | City | 0 / 0 |
 | Gwangju | Gwangju Metro Line 1 | Line 2 (under construction) | OpenStreetMap (gate 3 exact against the operator's count) | City | 0 / 0 |
 | Gimhae | Busan–Gimhae LRT (light rail) | Korail (intercity) | OpenStreetMap (gate 3 exact on the whole line) | City | 9 / 0 |
@@ -860,7 +861,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Namyangju | National register | SEMAS's 상가(상권)정보 | SEMAS's own (소분류) | 4,008 / 4,436 / 1,623 | — |
 | Ansan | National register | SEMAS's 상가(상권)정보 | SEMAS's own (소분류) | 4,833 / 5,760 / 1,982 | — |
 | Uijeongbu | National register | SEMAS's 상가(상권)정보 | SEMAS's own (소분류) | 4,445 / 4,928 / 1,805 | — |
-| Anyang | National register | SEMAS's 상가(상권)정보 | SEMAS's own (소분류) | 3,811 / 4,453 / 1,483 | — |
+| Anyang (Regional) | National register | SEMAS's 상가(상권)정보 | SEMAS's own (소분류) | 5,937 / 7,409 / 2,453 | — |
 | Daejeon | National register | SEMAS's 상가(상권)정보 | SEMAS's own (소분류) | 8,435 / 9,766 / 3,051 | — |
 | Gwangju | National register | SEMAS's 상가(상권)정보 | SEMAS's own (소분류) | 6,400 / 5,823 / 1,854 | — |
 | Gimhae | National register | SEMAS's 상가(상권)정보 | SEMAS's own (소분류) | 2,590 / 3,038 / 1,108 | — |
@@ -1056,7 +1057,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Namyangju | Register coordinates (100%) | None | Incheon's; 37 personal names withheld |
 | Ansan | Register coordinates (100%) | None | Incheon's; 17 personal names withheld |
 | Uijeongbu | Register coordinates (100%) | None | Incheon's; 11 personal names withheld |
-| Anyang | Register coordinates (100%) | None | Incheon's; 28 personal names withheld |
+| Anyang (Regional) | Register coordinates (100%) | None | Incheon's; 42 personal names withheld |
 | Daejeon | Register coordinates (100%) | None | Incheon's; 79 personal names withheld |
 | Gwangju | Register coordinates (100%) | None | Incheon's; 82 personal names withheld |
 | Gimhae | Register coordinates (100%) | None | Incheon's; 12 personal names withheld |
@@ -1263,7 +1264,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Namyangju | SEMAS edition of 2026-06-30 (fetched 2026-09-29) | B | 0.6 mi | Yes | 55% | Trade name in Korean, with the branch |
 | Ansan | SEMAS edition of 2026-06-30 (fetched 2026-09-29) | B | 0.6 mi | Yes | 64% | Trade name in Korean, with the branch |
 | Uijeongbu | SEMAS edition of 2026-06-30 (fetched 2026-09-29) | B | 0.6 mi | Yes | 85% | Trade name in Korean, with the branch |
-| Anyang | SEMAS edition of 2026-06-30 (fetched 2026-09-29) | B | 0.6 mi | Yes | 64% | Trade name in Korean, with the branch |
+| Anyang (Regional) | SEMAS edition of 2026-06-30 (fetched 2026-09-29) | B | 0.6 mi | Yes | 66% | Trade name in Korean, with the branch |
 | Daejeon | SEMAS edition of 2026-06-30 (fetched 2026-09-29) | B | 0.6 mi | Yes | 42% | Trade name in Korean, with the branch |
 | Gwangju | SEMAS edition of 2026-06-30 (fetched 2026-09-29) | B | 0.6 mi | Yes | 30% | Trade name in Korean, with the branch |
 | Gimhae | SEMAS edition of 2026-06-30 (fetched 2026-09-29) | B | 0.6 mi | Yes | 38% | Trade name in Korean, with the branch |

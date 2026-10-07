@@ -24,11 +24,11 @@ from components import (  # noqa: E402
     set_base_font,
 )
 
-st.set_page_config(page_title="Anyang Heatmap", page_icon="\U0001f5fa️", layout="wide")
+st.set_page_config(page_title="Anyang (Regional) Heatmap", page_icon="\U0001f5fa️", layout="wide")
 set_base_font()
 
-render_city_nav("Anyang")
-render_city_title('Anyang')
+render_city_nav("Anyang (Regional)")
+render_city_title("Anyang (Regional)")
 
 # Nothing between the title and the map (owner, 2026-10-01).
 if HEATMAP_HTML.exists():
@@ -53,6 +53,8 @@ if PROVENANCE_JSON.exists():
 
 # Bucheon's text (approved by the owner 2026-09-29), with Anyang's lines; written
 # under the owner's pre-approval of this build's prose (2026-09-30); set as bullets 2026-10-01.
+# Anyang (Regional), 2026-10-07: the scope bullet, the shared-station bullet and
+# Uiwang's share are proposals in docs/decisions_drafts/worktree-abroad-batch.md.
 st.markdown(
     """
 **The lines**
@@ -60,9 +62,13 @@ st.markdown(
 - Two lines are drawn, each labeled on the map and in the legend in the operators' colors:
   **Line 1** and **Line 4**.
 - Routes and stations come from OpenStreetMap.
-- Businesses are counted around stations inside Anyang only; the lines are still drawn to their
-  ends.
-- The two lines share no station in the city. No other rail line has a station in Anyang.
+- The map covers **Anyang with its neighbors Gunpo and Uiwang**, which the same two lines serve.
+- Businesses are counted around stations inside the three cities only; the lines are still drawn
+  to their ends, and the stations outside are listed below.
+- The two lines share one station, Geumjeong, in Gunpo. No other rail line has a station in the
+  three cities.
+- Uiwang has one station, at its western edge, so about one of its storefronts in four sits
+  within a ring.
 
 **The businesses**
 
@@ -72,23 +78,23 @@ st.markdown(
   stores and supermarkets to clothing, phones and pharmacies; and hair, nail and skin-care
   salons, laundries, bathhouses and massage.
 - This national register is a different kind of record from the city license data behind
-  Seoul's, Daegu's and Busan's maps, which count only licensed trades. So **Anyang's Retail
+  Seoul's, Daegu's and Busan's maps, which count only licensed trades. So **this map's Retail
   category is complete where those cities' is thin**, and density is not directly comparable
   between them.
 - Each dot carries the storefront's name, in Korean, with its branch where it has one, and its
   kind in English. Where a registered name is a bare personal name at what reads as a home
   address, the name is withheld.
-- The whole city is included; storefronts beyond walking distance of a station add to the
-  all-city layer and nothing to the rings.
+- All three cities are included whole; storefronts beyond walking distance of a station add to
+  the all-city layer and nothing to the rings.
 """
 )
 
 render_map_help('three business categories (Food service, Retail and Personal services)')
-render_excluded_stations("Anyang")
-render_country_links('Anyang')
+render_excluded_stations("Anyang (Regional)")
+render_country_links("Anyang (Regional)")
 
 # The notices that publishing requires, on EVERY page rather than one -
 # Chicago's terms say "at the site where the software application ... can
 # be accessed". See components._NOTICES. OMITTING THIS IS A LICENCE
 # BREACH, not a cosmetic gap.
-render_site_notices("Anyang")
+render_site_notices("Anyang (Regional)")

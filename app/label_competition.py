@@ -300,6 +300,13 @@ TEXT_WIDTH = {
     # Los Angeles renamed (Regional) by its Long Beach extension; the same
     # 2026-10-03 run and controls.
     "Los Angeles (Regional)": 153.8,
+    # The Abroad batch, 2026-10-07 (local app, lean venv, canvas measureText
+    # after document.fonts.load, top document); controls Gimhae 49.5,
+    # Uijeongbu 68.6 and Paris 32.9 reproduced. The three extensions' renamed
+    # labels are measured ahead of their builds.
+    "Gimpo": 42.4, "Siheung": 55.1, "Geneva (Regional)": 122.5, "Thessaloniki": 83.7,
+    "Gelsenkirchen": 95.4, "Bremen": 51.4, "Anyang (Regional)": 124.6,
+    "Mexico City (Regional)": 153.0, "Copenhagen (Regional)": 158.5,
     # The staged cities of docs/staged_cities.json, measured ahead of their
     # builds (2026-10-04, local app, lean venv, canvas measureText after
     # document.fonts.load); controls Tacoma 51.8, Mendoza 61.8, Paris 32.9,

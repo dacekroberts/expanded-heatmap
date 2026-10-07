@@ -135,7 +135,7 @@ a verdict word; they are `publish`, as published on those numbers.
 | Namyangju | publish | 2026-09-30 | Namyangju built: the sixth Gyeonggi satellite, on SEMAS's register | Personal exposure: PASS. |
 | Ansan | publish | 2026-09-30 | Ansan built: a Gyeonggi satellite on SEMAS's register, the Seohae Line drawn | Personal exposure: PASS. |
 | Uijeongbu | publish | 2026-09-30 | Uijeongbu built: a Gyeonggi satellite on SEMAS's register, the U Line drawn | Personal exposure: PASS. |
-| Anyang | publish | 2026-09-30 | Anyang built: the last Gyeonggi satellite, on its ring share | Personal exposure: PASS. |
+| Anyang (Regional) | publish | 2026-10-07 | Anyang (Regional) built: Gunpo and Uiwang join Anyang's page on SEMAS's codes (abroad-batch) | Personal exposure: PASS on the regional file; 0 of 23,999 rows show a Korean personal name at a residential address, 42 withheld. (supersedes Anyang's verdict of 2026-09-30) |
 | Daejeon | publish | 2026-10-04 | Daejeon built: Daejeon Metro Line 1 on SEMAS's register | Personal exposure: PASS; 0 of 50,939 rows show a Korean personal name at a residential address, 79 withheld. |
 | Gwangju | publish | 2026-10-04 | Gwangju built: Gwangju Metro Line 1 on SEMAS's register, the merged member's codes and a five-district boundary | Personal exposure: PASS; 0 of 47,214 rows show a Korean personal name at a residential address, 82 withheld. |
 | Gimhae | publish | 2026-10-04 | Gimhae built: the Busan–Gimhae LRT on SEMAS's register, its own page | Personal exposure: PASS; 0 of 17,879 rows show a Korean personal name at a residential address, 12 withheld. |
