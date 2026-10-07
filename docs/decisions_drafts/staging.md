@@ -4,6 +4,18 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-07 - Phase 0: the Japan foundation landed; Abroad's batch ready; calls 191 to 195; Europe East to land with Thessaloniki (owner)
+
+- **The Japan foundation landed** (7ab440f9; the five address fixes the owner asked for, "do the address fixes", in 521d28fc). Pipeline and the japan-city skill only, with Minato 98.0 / 0.2 / 1.8 and zero drift on the 34 built Japanese cities after every group. The new rules are on for new cities only. The review-time re-render proposal (Toyota +177 storefronts, other built cities under about 20) is in `docs/decisions_drafts/japan-foundation.md`. Matsue's 八雲村 fold is a config key, now in its brief.
+- **Abroad's batch is ready on its branch**, nothing pushed: Gimpo, Siheung, Geneva (Regional), Thessaloniki, Gelsenkirchen, Bremen, Anyang (Regional), Mexico City (Regional). Pages 202 and 300-304 and notices 154-156 are recorded in `docs/session_roles.md`. Copenhagen (Regional) is not built: it waits for the owner to set the Datafordeler key or fetch the address-point files.
+- **Calls (owner, 2026-10-07):**
+  - 191: Bremen's 2024 report PDF (3,643,392 B), "download approved", for the licence terms only.
+  - 192: Nezahualcóyotl's 398 rows outside OSM's polygon, "continue drop, state on page".
+  - 193: Gelsenkirchen's U11, "keep it tram mode".
+  - 194: a Germany view, approved only "if we are waiting a while longer for europe east/west".
+  - 195: Greece in Europe East, "yes and we should message cleanup to land the europe east region with the greek city".
+- **The trigger for the split moves:** it was to be made by the first Romanian city to land (all in Band D); the owner asks for it now, with Thessaloniki. Staging asked Cleanup to make it and re-run the stress test with Abroad's cities. Gelsenkirchen, Bremen, Rotterdam and Den Haag all fall in Europe West, so the 12 overlaps may stay; if they do, the Germany view follows (194). Abroad holds the Germany view until then.
+
 ### 2026-10-07 - Builds resume: the A and B waves planned, four process changes, weekly check-ins at every ten percent (owner)
 
 - **The owner lifted the build pause** set on 2026-10-04 ("pause lifted, approve 1-4, write the session prompts, we can start phase 0 after that"). Band D waits until the owner can give it attention ("those I will act on when i can devote full attention here"). Seoul, Busan and Daegu (Regional) still wait for SEMAS's social-post scope (call 71).
