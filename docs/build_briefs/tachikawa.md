@@ -457,7 +457,9 @@ Not to be re-opened.
 drawn as cut from 立川 (JR one-station stubs, standing call 3); 立川北, 立川 and
 立川南 kept as three stations (Tama's 38 m pairs precedent).
 
-**Open, with a recommendation:**
+**Answered by the owner on 2026-10-06:** call 189, table 19-7 fetched and measured (section "Personal services against Tokyo's yearbook table 19-7" above). The recommendation below is kept as the record.
+
+**Weighed, with a recommendation:**
 
 1. **Fetch Tokyo's yearbook table 19-7 (環境衛生営業施設数) for the beauty share.**
    `https://www.toukei.metro.tokyo.lg.jp/tnenkan/2024/tn24qv190700.csv`
@@ -470,6 +472,18 @@ drawn as cut from 立川 (JR one-station stubs, standing call 3); 立川北, 立
    of the A-band Tama cities' personal-services shares; without it, Tachikawa's
    page states beauty as a count, 501, with no share, and says the census
    estimate cannot hold it (the default wording if the owner declines).
+
+## Personal services against Tokyo's yearbook table 19-7 (owner, call 189)
+
+**Answered by the owner on 2026-10-06:** call 189, "fetch at once": Tokyo's statistical yearbook table 19-7 (環境衛生営業施設数, `https://www.toukei.metro.tokyo.lg.jp/tnenkan/2024/tn24qv190700.csv`, 6,876 B, HTTP 200, into `data/tokyo/raw/`; the publisher of table 19-8) gives the official count of each register at the end of FY2024 (2025-03-31). **It supersedes the census-scaled estimates above** for these three registers; the estimates are kept as the record.
+
+| Register | Ledger rows (2026-08-31) | Confirmed on or before 2025-03-31 (確認年月日) | Yearbook FY2024 | Share, all rows | Share at the yearbook's date |
+|---|---|---|---|---|---|
+| Barbers (理容所) | 89 | 81 | 91 | 97.8% | **89.0%** |
+| Beauty salons (美容所) | 501 | 448 | 504 | 99.4% | **88.9%** |
+| Laundries (クリーニング所, storeless counters out) | 62 | 60 | 72 | 86.1% | **83.3%** |
+
+The share at the yearbook's date is the one the page states, as the food share is (calls 187-188); it is a lower bound, since 確認年月日 is the confirmation date, which a change of operator renews. Measured by staging's scratch script `t197_measure.py` (counts only; operator, address and phone columns dropped at read); the build re-measures it in step 2.
 
 ## What the build must still measure
 

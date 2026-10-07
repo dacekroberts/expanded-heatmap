@@ -442,6 +442,18 @@ floor.
    the owner's rule (2026-10-02) reads private heavy rail as `metro`. No tram
    or light rail. Tradeoff: none measurable; the macro map's mode key only.
 
+## Personal services against Tokyo's yearbook table 19-7 (owner, call 189)
+
+**Answered by the owner on 2026-10-06:** call 189, "fetch at once": Tokyo's statistical yearbook table 19-7 (環境衛生営業施設数, `https://www.toukei.metro.tokyo.lg.jp/tnenkan/2024/tn24qv190700.csv`, 6,876 B, HTTP 200, into `data/tokyo/raw/`; the publisher of table 19-8) gives the official count of each register at the end of FY2024 (2025-03-31). **It supersedes the census-scaled estimates above** for these three registers; the estimates are kept as the record.
+
+| Register | Ledger rows (2026-08-31) | Confirmed on or before 2025-03-31 (確認年月日) | Yearbook FY2024 | Share, all rows | Share at the yearbook's date |
+|---|---|---|---|---|---|
+| Barbers (理容所) | 44 | 44 | 45 | 97.8% | **97.8%** |
+| Beauty salons (美容所) | 86 | 80 | 88 | 97.7% | **90.9%** |
+| Laundries (クリーニング所, storeless counters out) | 19 | 19 | 21 | 90.5% | **90.5%** |
+
+The share at the yearbook's date is the one the page states, as the food share is (calls 187-188); it is a lower bound, since 確認年月日 is the confirmation date, which a change of operator renews. Measured by staging's scratch script `t197_measure.py` (counts only; operator, address and phone columns dropped at read); the build re-measures it in step 2.
+
 ## What the build must still measure
 
 - ⚠️ **Shared code** (each followed by the Minato control and every city

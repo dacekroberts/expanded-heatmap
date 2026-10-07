@@ -126,10 +126,8 @@ vehicle).
    and Naha. **Build sessions stay held**
    (new builds paused, owner 2026-10-04), three at a time when they resume;
    each brief's open calls and "for the build" shared-code notes go with it.
-2. **Open owner calls at handoff:** 189, Tokyo's yearbook table 19-7
-   (`tn24qv190700.csv`, 6.7 KB, the publisher of table 19-8) for official
-   barber, beauty and laundry counts in the eight Tama cities (Tachikawa's
-   501 salons outrun the census estimate). Calls 154-184 are in the drafts file's fourth wave 5 entry.
+2. **Open owner calls at handoff:** none. Call 189 (Tokyo's yearbook table 19-7)
+   was answered and measured: the official counts are in all eight Tama briefs.
 3. **Liabilities list** (owner asked, 2026-10-06): a private page of every
    indemnity, reimbursement, own-cost and release clause, 67 entries,
    https://claude.ai/artifact/FMZrsssfiCtydpHroo1V16 (source data:

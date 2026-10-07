@@ -391,6 +391,18 @@ kept apart (precedent); no frequency floor.
    is 223 permit shops and no konbini (Toyota's "Retail thin"). Decide it once
    for the four Tama cities.
 
+## Personal services against Tokyo's yearbook table 19-7 (owner, call 189)
+
+**Answered by the owner on 2026-10-06:** call 189, "fetch at once": Tokyo's statistical yearbook table 19-7 (環境衛生営業施設数, `https://www.toukei.metro.tokyo.lg.jp/tnenkan/2024/tn24qv190700.csv`, 6,876 B, HTTP 200, into `data/tokyo/raw/`; the publisher of table 19-8) gives the official count of each register at the end of FY2024 (2025-03-31). **It supersedes the census-scaled estimates above** for these three registers; the estimates are kept as the record.
+
+| Register | Ledger rows (2026-08-31) | Confirmed on or before 2025-03-31 (確認年月日) | Yearbook FY2024 | Share, all rows | Share at the yearbook's date |
+|---|---|---|---|---|---|
+| Barbers (理容所) | 53 | 53 | 56 | 94.6% | **94.6%** |
+| Beauty salons (美容所) | 164 | 154 | 169 | 97.0% | **91.1%** |
+| Laundries (クリーニング所, storeless counters out) | 38 | 36 | 40 | 95.0% | **90.0%** |
+
+The share at the yearbook's date is the one the page states, as the food share is (calls 187-188); it is a lower bound, since 確認年月日 is the confirmation date, which a change of operator renews. Measured by staging's scratch script `t197_measure.py` (counts only; operator, address and phone columns dropped at read); the build re-measures it in step 2.
+
 ## What the build must still measure
 
 - The per-city ISJ directory; `SOURCE_LINKS` for the monthly files and their
