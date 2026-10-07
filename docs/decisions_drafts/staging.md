@@ -4,6 +4,15 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-07 - Call 197 built on Cleanup's europe-split branch; the macro map's region views are Cleanup's (owner, call 198)
+
+- **Call 197 built** (Cleanup, branch europe-split, off Abroad's tip, not pushed; DECISIONS on master 69d32b6d):
+  - the owner's answers in Cleanup's session: Benelux replaces the Belgium view; the top cities are Sydney, Brussels and Taipei (Regional);
+  - the landing view labels 24 of 27 countries' top cities (was 20); Brussels, Copenhagen and Zurich have no room at world zoom and are labelled in Europe West;
+  - every city is labelled in at least one view, and check_macro_labels fails if either goal breaks.
+  It lands at review time after Abroad's batch, with a reboot and a map-chrome deploy-verify. Staging writes the master list's Built rows then (176; Europe 21; Seoul Capital Area 13; Benelux 9; Germany 3).
+- **Japan's region views (call 198, "198 yes, cleanup builds them"):** with call 197's every-city test, about 27 of the planned Japanese cities would be labelled in no view until Japan's eight regions plus Osaka Prefecture (2026-10-04) exist. Three Japan sessions build in parallel, so Cleanup builds the views on its own branch at the phase 1 review time. Build sessions leave region tables alone and report any label-check failure. The plan says so; East-1 and Regional-1 are told.
+
 ### 2026-10-07 - Bremen's licence accepted on the permissive reading; Europe West anchors; every city labelled somewhere, every country's top city on the landing view (owner)
 
 - **Bremen (call 196):** the 2024 report (124 pages; downloaded on the owner's yes in the Abroad session, call 191) names no licence, no CC version and no reuse terms. The owner said yes, in the Abroad session, to accepting the unversioned "CC BY" on the permissive reading. Bremen is credited to CC BY 4.0's terms (the Kommunalverbund Niedersachsen/Bremen as publisher, the survey named, the source linked), the version recorded as unstated and assumed to be 4.0; the publisher uses cc-by/4.0 on its six boundary sets. Outreach stays the last resort.

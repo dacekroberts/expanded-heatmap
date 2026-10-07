@@ -75,6 +75,7 @@ A session that runs out asks Staging for more. Unused numbers are released when 
 
 ## Rules every build session follows
 
+- **The macro map's region views are Cleanup's** (owner, call 198, 2026-10-07: "198 yes, cleanup builds them"). Cleanup builds Japan's eight regions plus Osaka Prefecture on its own branch at the phase 1 review time, and Europe West, Europe East, Germany and Benelux are on its europe-split branch (call 197). Build sessions never add or change region views, REGION_LABELS_ALSO, label tiers or macro label offsets. This overrides the japan-city skill's "made by the first wave-4 city to land". A check_macro_labels failure only for new cities labelled in no view goes in the batch report and is left.
 - Read CLAUDE.md, `docs/session_roles.md` and the session's skills.
 - Run `python scripts/brief_check.py <city>` before any code; a failing check is a brief to correct.
 - Apply each brief's "Answered by the owner" calls as written, and log every judgment call in `docs/decisions_drafts/<branch>.md`.
