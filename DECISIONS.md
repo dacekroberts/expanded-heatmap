@@ -20,7 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**47 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**48 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+
+**2026-10-07**
+
+- [Europe splits West and East with Greece east, Germany and Benelux get views, and every country's top city is labelled first (owner, calls 194, 195 and 197; branch europe-split, held for review time)](#2026-10-07---europe-splits-west-and-east-with-greece-east-germany-and-benelux-get-views-and-every-countrys-top-city-is-labelled-first-owner-calls-194-195-and-197-branch-europe-split-held-for-review-time)
 
 **2026-10-06**
 
@@ -1712,4 +1716,56 @@ standard rings. `coverage` full, `categories` "All three", `mode` metro,
   argument (the shell runs it); a plain `sed` or `grep` with escapes is
   fine. `docs/rule_history.md` (`#no-escapes`) records the change. The hook
   is unchanged.
+
+### 2026-10-07 - Europe splits West and East with Greece east, Germany and Benelux get views, and every country's top city is labelled first (owner, calls 194, 195 and 197; branch europe-split, held for review time)
+
+- **The trigger moved (call 195, owner "yes"):** the split of 2026-10-04 lands
+  with Thessaloniki instead of waiting for the Romanian six; Greece joins
+  Europe East with Latvia, Romania and Hungary. Measured on Abroad's tip, the
+  176 built cities (`stress_overview.py --built-only`, new): the split alone
+  did not help (Europe West 13 problems, East 1), because
+  `REGION_ZOOM_WITHOUT` already fitted Europe without its eastern cities. So
+  call 194's fallback applied, a Germany view on Czechia's mechanism, and
+  both halves compete: PROBLEMS 0, and phone-width clipping in the European
+  views fell from seven labels to one.
+- **The owner's goal (call 197, "197 sounds good"):** "all dots visible in at
+  least one regional view" and "every nation's top 1, maybe 2 cities at
+  least in global view"; then "the europe concerns are null if the result
+  is the biggest cities people would expect to see are the ones displayed".
+  Built as `cities.COUNTRY_TOP` (each country's largest built city, with its
+  population for order); `label_competition.compete()` places the tops
+  first, largest first, with 12 positions each and their dots as obstacles,
+  then the existing competition among the rest. `check_macro_labels.py`
+  fails a city labelled in no view, and a top missing from the landing view
+  unless `LANDING_NO_ROOM` names it. The owner's rankings: Sydney, Brussels,
+  Taipei (Regional).
+- **Landing view:** 24 of 27 countries' tops labelled, against 20 of 27
+  before (gained Amsterdam, Dublin, Hong Kong, Riga, Thessaloniki; lost
+  Barcelona, Milan, Rotterdam, Taichung, Taoyuan, accepted by the owner).
+  Brussels, Copenhagen and Zurich have no room at world zoom whatever the
+  order (placed first, they push out Paris, Prague, Amsterdam, Dublin or
+  Thessaloniki); the owner asked, and they are `LANDING_NO_ROOM`, labelled in
+  Europe West.
+- **East Asia's Seoul pattern in Europe ("berlin, prague, brussels, antwerp
+  etc. should be visible"):** Europe West also labels the anchors of the UK,
+  France North and South, Czechia, Benelux and Germany; Den Haag, Ghent,
+  Charleroi, Liège, Brussels (Regional), Gelsenkirchen and Bremen are minor.
+  Europe West names 27; Antwerp, Lille (Regional) and Newcastle (Regional)
+  have no room there and keep their own views. Paris sits upper left in
+  Europe West: below its dot it took Geneva (Regional)'s only room.
+- **Benelux replaces the Belgium view (owner, "benelux yes"; reverses
+  Belgian build call 3):** Den Haag found no room in Europe West even placed
+  straight after the tops, so it was labelled in no view. Benelux competes
+  at zoom 6.25, where Brussels' and Brussels (Regional)'s dots clear one
+  marker radius (5.9 px at the fitted 6.17); all nine labelled. A
+  Netherlands view also worked; Benelux adds no menu entry. Scandinavia, the
+  owner's other suggestion, was not needed.
+- **Owed by later builds, not this branch:** with all 83 staged cities, 30
+  (27 Japanese, Brăila, Galați, Oradea) would be labelled in no view, and
+  Thessaloniki's and Hódmezővásárhely's landing labels fail; the check now
+  makes each build answer it.
+- **A slip, caught:** `regen_generated.py` in a worktree without the shared
+  `data/` junction rewrote `app/macro_facts.json` with no storefronts, and
+  the first measurements ran on it. Restored on the branch; every number
+  here is from the re-run.
 
