@@ -67,7 +67,7 @@ from cities import (  # noqa: E402
 
 # TEXT_WIDTH, the measured pill widths, lives in app/label_competition.py
 # since 2026-10-01, where the app's Global label competition reads it too.
-from label_competition import TEXT_WIDTH, compete  # noqa: E402
+from label_competition import TEXT_WIDTH, compete, label_text  # noqa: E402
 
 # GLOBAL'S LABELS ARE WON, NOT LISTED (owner, 2026-10-01): the landing view
 # labels the winners of app/label_competition.py's competition at their
@@ -247,8 +247,9 @@ def pill(city, x, y, region_name=None):
     if city["name"] in REGION_WON.get(region_name, {}):
         off = REGION_WON[region_name][city["name"]]
     anchor, dx, dy = tuple(off or city.get("label_offset") or DEFAULT_OFFSET)
-    # The label text, which drops " (Regional)" (cities.py `pill`).
-    text = city.get("pill", city["name"])
+    # The label text in this view (label_competition.label_text): without
+    # " (Regional)", or a view's own name (Benelux's "City of Brussels").
+    text = label_text(city, region_name)
     try:
         w = TEXT_WIDTH[text]
     except KeyError:

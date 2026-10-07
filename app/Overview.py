@@ -37,7 +37,7 @@ from cities import (
     region_caption,
     SWITCHER_ORDER,
 )
-from label_competition import compete
+from label_competition import compete, label_text
 from basemap import SECRET_NAME as BASEMAP_SECRET, carto_positron_style
 from components import (
     SITE_NAME,
@@ -327,6 +327,10 @@ _members = {c["name"] for c in _region_cities[region]
 _also = getattr(sys.modules.get("cities"), "REGION_LABELS_ALSO", {}).get(region, ())
 _members |= {c["name"] for c in CITIES if c.get("region") in _also
              and c.get("label_tier") != "minor"}
+# The label text in this view (label_competition.label_text): a view-specific
+# name where one is set (Benelux's "City of Brussels"), else cities.py `pill`.
+_texts = {c["name"]: label_text(c, region) for c in CITIES}
+cities["pill"] = cities["name"].map(_texts)
 label_cities = cities[cities["name"].isin(_members)]
 
 markers = pdk.Layer(
