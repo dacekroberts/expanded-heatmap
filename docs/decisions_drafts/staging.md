@@ -4,6 +4,17 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-07 - East-1's batch ready: twelve cities, calls 199 to 204 put to the owner
+
+- **East-1 reported its batch done** (branch worktree-japan-east-1, nothing pushed, zero drift): Higashiyamato, Nishitōkyō, Tama, Higashimurayama, Ageo (Regional), Sōka, Tokorozawa, Kasukabe, Fuchū (Tokyo), Chōfu, Tachikawa and Hino, on pages 210 to 221 and notices 157 to 168, the whole block used. Privacy passes are 0 for every city. check_all fails only the master list's built counts (staging's, after landing) and check_macro_labels on the new cities (Cleanup's, call 198).
+- **Calls put to the owner** (East-1's drafts file holds the full text):
+  - **199, line colours where one operator colour covers several lines** (Higashimurayama's five Seibu lines, the New Shuttle, Tobu's Urban Park Line): recommended distinct seeds, or Seibu's per-line colours if read.
+  - **200, Ageo (Regional)'s excluded-station reason** reads "outside 上尾市" though the page covers Ageo and Ina: recommended naming both towns from the config's municipalities in shared japan_step1, before landing; no built city moves.
+  - **201, the Leo Liner's label** "Seibu Yamaguchi Line (Leo Liner)": recommended keeping it.
+  - **202, own_point_fallback refuses a publisher point** when one premises' address is written several ways (Kasukabe's AEON Mall, 3 rows unplaced): recommended counting towns over joined rows only, then a drift check of the built cities.
+  - **203, "JR Chuo Line"** (Tachikawa, Hino) beside Tokyo's "JR Chuo Line (Rapid)": recommended keeping it.
+  - **204, East-1 added shared code the briefs assumed existed** (tokyo_tama.py and saitama_pref.py new; the yearbook's Tama rows and table 19-7 in japan_official; SHARE_DATES and REGISTER_SHARES in japan_step2), treating Tokyo's official_shares as precedent rather than parking it. All 34 built Japanese cities' step 2 reproduces byte for byte. Recommended accepting the reading.
+
 ### 2026-10-07 - Licence reads for the Japan builds (staging, licence-read agents): Morioka, Akita, Tsu, Iwaki, Ōita, Mito
 
 The A and B briefs left 23 reads pending. Regional-1's six run from staging (Tsu, Iwaki, Akita, Ōita, Mito, Morioka); Kansai-1 runs its own five (Toyonaka, Hirakata, Suita, Hyōgo Prefecture's catalogue for Itami and Kakogawa, Amagasaki) and sends the verdicts here. Each verdict below is the agent's, read 2026-10-07 by plain GET; no data file was downloaded. Build sessions write their own `docs/data_sources/japan.md` rows from these at build.
