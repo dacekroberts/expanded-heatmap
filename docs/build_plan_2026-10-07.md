@@ -71,7 +71,7 @@ At most three build sessions at once (owner, 2026-10-04).
 
 ## Session prompts
 
-Paste one as the session's first message, in a fresh session on its own worktree.
+Start each session in the main checkout, not in the app's worktree mode, which gives a random name. Put this line above the pasted prompt: "First, enter a new worktree named <name> (use the EnterWorktree tool), then follow the prompt below." The session then makes `.claude/worktrees/<name>` on branch `worktree-<name>`, as staging and cleanup did.
 
 ### Japan foundation
 
