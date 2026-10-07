@@ -87,6 +87,22 @@ notices 176-186.
   to 31 August 2026 from its March list and its monthly new and renewed
   permits, left out permits granted since June 2021 that the ministry's list
   no longer holds" to Maebashi's processed-by sentence.
+- **Ichinomiya** (page 231): "From Ichinomiya City's list of food-business
+  permits and its registers of barbers, beauty salons and laundries, all as
+  of March 31, 2026, with the new permits and registrations it has listed
+  each month since, to August 31, 2026." and the coverage sentence the
+  owner's call 125 asks for (Toyota's precedent with the reason named): "The
+  city's food list leaves out vending-machine, vehicle, stall and temporary
+  permits, entries containing personal information and operators who asked
+  not to be listed, so it holds about two restaurants in three of the
+  official count." The same facts in its What Is Excluded section, with
+  "Another 124 sit at the center of their 小字 (a named part of a town)" (the
+  foundation's 小字-centroid tier, new on a page). The notice (178) adds "The
+  city's food list leaves some permits out by design, and the ministry's
+  list holds only filings whose applicants agreed to publish them; neither is
+  complete." (Sasebo's sentence with the city's half; the terms' 4(1)). The
+  credit's titles were read from the city's catalogue, since staging's
+  record names none: check them against the licence-read report.
 
 ## Shared-code findings for review time (not changed here)
 
@@ -111,6 +127,83 @@ notices 176-186.
   bytes first in shared code would cover the next city.
 
 ## Entries
+
+### 2026-10-07 - Ichinomiya built, the March food list kept whole with the months since, and the registers with their 2026 months
+
+- **Ichinomiya built (page 231, notice 178), Fukuyama's shape (a city's own
+  full food list plus the months since) with Toyota's precedent for a list
+  that leaves rows out by design and Matsuyama's for MHLW's notifications:
+  4,025 storefronts (Food service 2,001, Food shops 706, Personal services
+  1,318) around 19 stations on 3 lines, 46.9% of them in a ring (1,887).** On
+  the Japan foundation's rules (no `"rules"` key). Sources: the city's food
+  list of permits in term on 2026-03-31 (2,815 rows) and its five monthly
+  lists to 2026-08-31 (193), its barber, beauty and laundry lists of
+  2026-03-31 (300, 819, 242) and the 2026 monthly beauty and laundry lists
+  (13 and 1 rows; approved, call 128, fetched 2026-10-07, 12,264 B), and
+  MHLW's notifications (995 rows). Built by a subagent of the Regional-1
+  lead, integrated by the lead.
+- **Merge (a) (owner, call 126) as two sources, not one rebuilt register.**
+  The brief's `rebuilt_register(as_of=2026-03-31)` predates the term rules: a
+  rebuilt source takes one `TERM_AS_OF`, and at 2026-03-31 call 172 would
+  drop nearly every monthly permit, at 2026-08-31 call 161 would drop the 240
+  old-law permits past their expiry that the owner's merge keeps. So the
+  March list is source `food` (`TERM_AS_OF` 2026-03-31: past term 0) and the
+  months source `food_new` of the same kind (`SOURCE_KIND`; `TERM_AS_OF`
+  2026-08-31), and one pin per premises and bucket shows a renewal once. No
+  shared code changed.
+- **Late starters (call 172):** 62 monthly permits start after 2026-08-31: 29
+  renew a premises the March list already holds (nothing lost), 33 wait.
+  Against the brief's 2,898 permit keys and 2,228 restaurants (67.7%), the
+  build holds 2,867 and 2,207 (67.0%); the 31 keys are those late starters.
+  "About two restaurants in three" stands.
+- **MHLW (call 127):** its 129 permits not added; its notifications as a
+  partial Food-shops layer, 471 addressed of 992 open (the brief exactly),
+  263 pins; its point where the block join misses by the shared
+  `POINT_DONORS` (ward, town and trade name, not the permit number the brief
+  matched on: no shared code keys by number): 9 city rows took it.
+  `OWN_POINT_FALLBACK` placed 37 notification rows; 2 default points refused
+  for 10 rows; MHLW's point against the block point a median 29 m, 94.3%
+  within 250 m (the brief 26 m, 95.3%). 47 city rows dropped for an MHLW row
+  of the same premises and bucket (`SUPERSEDES`, Matsuyama's).
+- **A trap: July's beauty file (`biyou_20260731.csv`) is an XLSX workbook
+  under a .csv name**, read city-locally by its magic bytes
+  (`config.file_rows`). June's file has no 代表者氏名 column, so the months
+  require 施設名称, 施設住所 and 申請者氏名 only.
+- **Step 2:** of 4,302 storefront rows, 4,002 at the block, 131 at a 小字
+  centroid, 68 at a town centre, 46 at MHLW's point, 55 unplaced (1.3%; 43
+  barbers, beauty salons and laundries). On the map: 94.6% block, 3.1% 小字,
+  1.6% chōme, 0.7% MHLW's point. Set aside: 7 area-wide addresses (MHLW), 5
+  addressed in another municipality (the brief's five), 2 mobile salons.
+  Closed 3; past term 0; late 62; no address published 521; not a premises
+  5. Out by rule 471: 130 manufacturing and other non-counter types, 114
+  snack bars and cabarets, 103 canteens, 61 vending, 43 caterers, 10
+  temporary or mobile, 9 inside accommodation, 1 mail order. 175 repeat
+  permits shown once.
+- The 菓子 / そうざい factory share: 30 of 348 (8.6%), kept (owner,
+  2026-09-24).
+- **Economic Census control:** 2,001 Food service pins against 1,434 飲食店
+  establishments in 23203: 1.40 per establishment, below the built cities'
+  1.56-1.92, as expected for a list that holds two restaurants in three (the
+  brief's 1.37; Kurume's 1.37 is the precedent for reporting it with that
+  reason).
+- **Privacy verdict: publish.** `check_personal_exposure.py ichinomiya`: the
+  Japan pass prints 0; 2 trade names in the raw files are an operator's own
+  name, 1 pin shows its permit type (the brief's one beauty salon).
+- **Rail:** N02-25; 19 stations: Meitetsu's Bisai Line 10 of 22, Nagoya Main
+  Line 8 of 60 (名鉄一宮 one group on both), JR Central's Tokaido Line 2 of 89
+  (a main line cut at the line, Kurume's precedent). 名鉄一宮 and 尾張一宮, 38 m
+  apart, are separate N02 groups of different names and stay apart. Median
+  nearest-station gap 935 m: standard rings. 9 excluded: 稲沢市 7, Gifu
+  Prefecture 2 (岐南, 笠松). Gate 3: Meitetsu's station index gives 8 and 10
+  in-city stations, exact. English names: OSM's 38 objects; 2 cited overrides
+  (妙興寺 Myokoji, 奥町 Okucho, macrons dropped). Colours: Meitetsu's red
+  splits into red (Main) and red-orange (Bisai), 18.1 apart (Toyota's split).
+  No frequency floor: the thinnest stretch runs 38 trains a weekday.
+- **The credit's wording:** staging's record names the verdict but not the
+  titles, so the titles were read from the city's own catalogue (2026-10-07)
+  and the form from the terms' 3(2)(イ) (one read of the terms page, no data).
+- **Ring share:** step 3 and the map's layer menu give 1,887; the lead's
+  scratch count 1,884. The page uses the map's.
 
 ### 2026-10-07 - Fukuyama built, the food list rebuilt to August 2026 and checked for closures against MHLW's live file
 

@@ -4520,6 +4520,57 @@ line.
   Prefecture) and 1 in Onomichi.
 - The Shinkansen is not drawn (Fukuyama appears as a JR station).
 
+### Ichinomiya - the city's food list and monthly new permits, its barber, beauty and laundry lists and the national notifications, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, except where the national filings
+  include notifications.
+- What the city's food list leaves out by design: vending-machine, vehicle,
+  stall and temporary permits, entries containing personal information and
+  operators who asked not to be listed. The list holds 2,164 restaurants,
+  against 3,292 in the national count a year earlier (about two in three).
+- 521 national notifications whose filers did not publish an address.
+- 15 food trucks, stalls and other temporary or mobile filings, 7 rows
+  addressed to a whole area, 2 mobile beauty salons, and 5 salons and
+  laundries addressed in another municipality.
+- 130 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 103 school, hospital and staff canteens, 61 vending machines, 1 mail-order
+  business, 9 premises inside hotels and inns, 43 caterers (仕出し) and 114
+  snack bars and cabarets.
+- 3 closed premises, which the national filings keep, marked, and 62 permits
+  in the monthly lists that start after August 31, 2026 (29 of them renewals
+  of a premises already in the March list).
+
+**Counted** - the permits in the city's food list in term on March 31, 2026,
+kept whole, with the new permits of its monthly lists to August 31, 2026; its
+barber, beauty and laundry lists of March 31, 2026, with the beauty and
+laundry registrations it listed for April to August 2026; and the national
+notifications as downloaded on October 6, 2026. The March lists hold 300
+barbers, 819 beauty salons and 242 laundries, against 300, 791 and 243 in the
+national count a year earlier. 30 of the 348 bakery, confectioner and deli
+rows (8.6%) have a trade name that reads as a factory; they are kept (owner,
+2026-09-24).
+
+**One pin per premises** - 175 repeat permits are shown once (renewals under
+a new number among them), and 47 rows of the city's lists for a premises
+already in the national notifications.
+
+**Not placed** - 55 rows (1.3%), 43 of them barbers, beauty salons and
+laundries, at addresses MLIT's files do not hold. Another 124 sit at the
+center of their 小字 (a named part of a town), 65 at their town's center, and
+27 at the ministry's own coordinates.
+
+**Names not shown** - 1 pin whose trade name is the operator's own name shows
+its permit type.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 9 stations beyond it: 7 in Inazawa and 2 in Gifu Prefecture
+  (Ginan and Kasamatsu).
+- The Shinkansen is not drawn.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

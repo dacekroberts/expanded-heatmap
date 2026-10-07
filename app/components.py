@@ -2390,6 +2390,34 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
      "Fukuyama City, MHLW and MLIT did not make and do not endorse this map.",
      False, ("Fukuyama",)),
+    # Ichinomiya (notice 178): the city's own lists, CC BY 4.0 as each dataset
+    # page states, in the 一宮市オープンデータカタログサイト利用規約's form for a
+    # modified work (3(2)(イ)), titles as the catalogue lists them; MHLW as in
+    # Sasebo's; MLIT as in Kobe's, N02 in its 2025 edition. Written from
+    # Sasebo's and Maebashi's approved wording under the owner's pre-approval
+    # of template prose (2026-09-30); the completeness sentence is a proposal
+    # in docs/decisions_drafts/worktree-japan-regional-1.md.
+    Notice(178, "Ichinomiya City, MHLW and MLIT (Ichinomiya)",
+     "Ichinomiya's businesses: この地図は、以下の著作物を改変して利用しています。"
+     "食品営業許可台帳（令和8年3月31日時点）、食品営業許可台帳（令和8年度）、一宮市、クリエイティブ・コモンズ・ライセンス 表示4.0 国際"
+     "（[https://creativecommons.org/licenses/by/4.0/deed.ja](https://creativecommons.org/licenses/by/4.0/deed.ja)）"
+     "（[https://www.city.ichinomiya.aichi.jp/hokenjo/hoken-eisei/1044314/1039899/1040636.html](https://www.city.ichinomiya.aichi.jp/hokenjo/hoken-eisei/1044314/1039899/1040636.html)）; "
+     "理容所営業確認台帳（2026年3月31日時点）、美容所営業確認台帳（2026年3月31日時点）、クリーニング営業確認台帳（2026年3月31日時点）、"
+     "美容所営業確認台帳（2026年度）、クリーニング所営業確認台帳（2026年度）、一宮市、クリエイティブ・コモンズ・ライセンス 表示4.0 国際"
+     "（[https://creativecommons.org/licenses/by/4.0/deed.ja](https://creativecommons.org/licenses/by/4.0/deed.ja)）"
+     "（[https://www.city.ichinomiya.aichi.jp/hokenjo/hokenyobou/1044311/1039814/1075449.html](https://www.city.ichinomiya.aichi.jp/hokenjo/hokenyobou/1044311/1039814/1075449.html)、"
+     "[https://www.city.ichinomiya.aichi.jp/hokenjo/hokenyobou/1044311/1039814/1040689.html](https://www.city.ichinomiya.aichi.jp/hokenjo/hokenyobou/1044311/1039814/1040689.html)）; and "
+     "出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一覧」を加工して作成. "
+     "Processed by this project, which selected the storefront types, added the city's monthly lists of new "
+     "permits and registrations to its March 2026 lists, took only the ministry's notifications, showed a "
+     "premises in both once, placed each by its address or the ministry's own coordinates, and counted them "
+     "around stations. The city's food list leaves some permits out by design, and the ministry's list holds "
+     "only filings whose applicants agreed to publish them; neither is complete. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
+     "Ichinomiya City, MHLW and MLIT did not make and do not endorse this map.",
+     False, ("Ichinomiya",)),
     # Fukushima (notice 180): the city's lists are CC BY 2.1 JP under the
     # 福島市オープンデータ利用規約 ２(２), credited in its ２(３) form for a modified
     # work, one title per list used (the monthly files' own title,

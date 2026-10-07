@@ -43,25 +43,57 @@ else:
 # replaces this with its own caption of the sources' dates and credits.
 render_data_age("Ichinomiya")
 
-# TODO: replace every TODO bullet with prose true for this city, as short
-# bullets under bold headings (app/pages/43_Seoul_Heatmap.py is the model):
-# the lines by name, what is not drawn, the area and the stations left out, the
-# source and its limitations. Detail a reference page carries stays there.
+# From the japan-city skill's template, Matsuyama's page (the ministry's
+# notifications and its points) and Maebashi's (approved wording,
+# pre-approved for this build, 2026-09-30); the dated first bullet and the
+# coverage bullet are proposals in
+# docs/decisions_drafts/worktree-japan-regional-1.md (the owner's call 125:
+# the food share stated on the page). The dates are the lists' own
+# (config.SOURCE_AS_OF); about two in three is the March list's 2,164
+# restaurants of e-Stat's 3,292 in force (65.7%; 67.0% with the months); the
+# ring share, 46.9%, is step 3's.
 st.markdown(
     """
 **The lines**
 
-- TODO: the lines drawn, by name (each is labeled on the map and in the legend).
-- TODO: what is not drawn, and why.
-- TODO: the area covered; stations left out are listed below.
+- Three lines are drawn, each labeled on the map and in the legend: Meitetsu's Nagoya Main and
+  Bisai lines and JR Central's Tokaido Line.
+- Lines and stations come from MLIT's national railway data (国土数値情報); station names in
+  English are from OpenStreetMap. Line colors are this project's own, not the operators'.
+- Only stations inside Ichinomiya City get rings, because the business data covers the city alone:
+  lines running on to Inazawa and Gifu Prefecture are cut at the city line. The stations left out
+  are listed below.
+- The Shinkansen is not drawn.
 
 **The businesses**
 
-- TODO: the data source, and any category it is missing.
+- From Ichinomiya City's list of food-business permits and its registers of barbers, beauty salons
+  and laundries, all as of March 31, 2026, with the new permits and registrations it has listed
+  each month since, to August 31, 2026.
+- The city's food list leaves out vending-machine, vehicle, stall and temporary permits, entries
+  containing personal information and operators who asked not to be listed, so it holds about two
+  restaurants in three of the official count.
+- Japan has no general business license, so shops other than food shops (clothing, electronics,
+  pharmacies) do not appear: the Food shops layer is food retail only (bakeries and confectioners,
+  delis, butchers and fishmongers).
+- Shops that only notify rather than hold a permit, such as supermarkets, convenience stores and
+  greengrocers, appear only where they chose to publish in the Ministry of Health, Labour and
+  Welfare's open data (downloaded October 6, 2026), so that part of the Food shops layer is partial.
+- The lists may include premises that have closed, so a dot means a permit on file, not a
+  business open today.
+
+**Reading the map**
+
+- The lists give an address but no location. Each address is matched to MLIT's address reference
+  data, which places most at their street block; where that fails, the dot sits at the ministry's
+  own coordinates for the same premises, or else at its district's center.
+- Where a trade name is its operator's own name, the dot shows its permit type instead.
+- Names and permit types are shown in Japanese, as the lists record them.
+- **About 47% of storefronts sit within a ring.**
 """
 )
 
-render_map_help("three business categories (Retail, Food service and Personal services)")
+render_map_help("three business categories (Food shops, Food service and Personal services)")
 render_excluded_stations("Ichinomiya")
 render_country_links("Ichinomiya")
 
