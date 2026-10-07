@@ -4,6 +4,23 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-07 - Licence reads for the Japan builds (staging, licence-read agents): Morioka and Akita
+
+The A and B briefs left 23 reads pending. Regional-1's six run from staging (Tsu, Iwaki, Akita, Ōita, Mito, Morioka); Kansai-1 runs its own five (Toyonaka, Hirakata, Suita, Hyōgo Prefecture's catalogue for Itami and Kakogawa, Amagasaki) and sends the verdicts here. Each verdict below is the agent's, read 2026-10-07 by plain GET; no data file was downloaded. Build sessions write their own `docs/data_sources/japan.md` rows from these at build.
+
+- **Morioka: PERMITTED WITH CONDITIONS.** CC BY 4.0 through 盛岡市オープンデータ利用規約 (terms PDF, undated, `/_res/projects/default_project/_page_/001/024/522/opendateriyokiyaku.pdf`), which binds on use.
+  - **Must display** (§2(2)ア, イ): a 出典 line and a separate processing line. The prescribed example's site URL is dead since the city's 2026-10-01 renewal, so the credit cites `https://www.city.morioka.iwate.jp/shisei/johokokai/opendata/index.html`. Suggested: 出典：盛岡市オープンデータサイト（that URL）, the four list titles, クリエイティブ・コモンズ・ライセンス表示 4.0 国際 (linked), and 「…（盛岡市ホームページ）を加工して作成」.
+  - **Must not:** present processed data as the city's (§2(2)イ); imply endorsement.
+  - **Clauses:** §3(2) own cost, and §4 reimbursement for costs from the user's own breach or infringement. Both are fault-based, the class the owner accepted for Japanese sources on 2026-09-24.
+  - **Scope:** on the registers page only the CSVs are open (「データの一部」; the XLSX and PDF fall under the site's copyright page). On the food page every file is open. The build reads CSVs, as its brief says.
+  - **Re-read before publishing:** the terms change without notice.
+- **Akita: PERMITTED WITH CONDITIONS.** CC BY 4.0 on each dataset page (catalogue code op_cc_1). The city's 利用にあたって page allows free use and adaptation and adds nothing more restrictive.
+  - **Must display:** CC BY 4.0's attribution, a modification notice and the licence link. No wording is prescribed; credit the edition titles actually used (the food file is renamed monthly).
+  - **Must not:** imply endorsement.
+  - **Clauses:** no indemnity, reimbursement or own-cost clause; the city's 免責事項 limits only its own liability.
+  - **A request, not a condition:** the city asks users to report their use, through a form needing the owner's name and email. It does not block publication. Noted for the owner; nothing sent.
+  - **Personal data:** the city's policy says data holding personal information is not made open, which sits oddly with the food list's 申請者名 column; the name rule already withholds those names.
+
 ### 2026-10-07 - Call 197 built on Cleanup's europe-split branch; the macro map's region views are Cleanup's (owner, call 198)
 
 - **Call 197 built** (Cleanup, branch europe-split, off Abroad's tip, not pushed; DECISIONS on master 69d32b6d):
