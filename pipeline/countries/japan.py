@@ -78,7 +78,7 @@ ISJ_CHOME_URL_TEMPLATE = "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/{code}-19.
 # pipeline/tokyo/wards.py - the one place a ward is switched on (2026-09-28);
 # the others' stations are drawn hollow (their codes: tokyo_wards.NO_DATA_WARDS).
 from pipeline.tokyo import wards as tokyo_wards  # noqa: E402 - dependency-free, no cycle
-from pipeline.countries.japan_register import WAVE2_RULES  # noqa: E402 - no import back
+from pipeline.countries.japan_register import ALL_RULES, WAVE2_RULES  # noqa: E402 - no import back
 
 CITIES = {
     "tokyo": {"name": "東京都区部", "pref": "13", "epsg": 32654, "rules": WAVE2_RULES,
@@ -168,6 +168,64 @@ CITIES = {
     "shimonoseki": {"name": "下関市", "pref": "35", "epsg": 32652, "n02": "25", "rules": WAVE2_RULES, "wardless": True,
                     "wards": ["35201"]},
 }
+
+# THE CITIES BUILT BEFORE THE JAPAN FOUNDATION (2026-10-07): they keep
+# WAVE2_RULES, so their maps do not move; every city after them reads
+# ALL_RULES (japan_register.WAVE5_RULES too). Leave a new city's "rules" out,
+# or switch one rule off in "rules_off" with its reason ({rule: why}); a
+# brief's `"rules": WAVE2_RULES` predates the foundation and is refused below.
+# A built city moves to ALL_RULES only at a review time that re-renders it
+# (docs/decisions_drafts/japan-foundation.md, the re-render proposal).
+BUILT_BEFORE_FOUNDATION = frozenset({
+    "tokyo", "osaka", "kobe", "sapporo", "fukuoka", "kyoto", "yokohama", "hiroshima", "matsuyama", "toyama",
+    "kumamoto", "fukui", "nagasaki", "utsunomiya", "kitakyushu", "sakai", "hakodate", "kagoshima", "okayama",
+    "kochi", "kawasaki", "yokosuka", "himeji", "nishinomiya", "takamatsu", "toyota", "yokkaichi", "otsu", "nara",
+    "hamamatsu", "higashiosaka", "kurume", "sasebo", "shimonoseki"})
+
+
+def city_rules(slug):
+    """The japan_register rules a city reads: its CITIES "rules", or ALL_RULES
+    less its "rules_off"."""
+    c = CITIES.get(slug, {})
+    return frozenset(c.get("rules", ALL_RULES)) - frozenset(c.get("rules_off", {}))
+
+
+for _slug, _c in CITIES.items():
+    _unknown = set(_c.get("rules", ())) | set(_c.get("rules_off", {}))
+    if _unknown - ALL_RULES:
+        raise ValueError(f"japan.CITIES[{_slug!r}]: unknown rule(s) {sorted(_unknown - ALL_RULES)}")
+    if _slug not in BUILT_BEFORE_FOUNDATION and ALL_RULES - city_rules(_slug) - set(_c.get("rules_off", {})):
+        raise ValueError(
+            f"japan.CITIES[{_slug!r}] reads {sorted(ALL_RULES - city_rules(_slug))} off: a city built after the "
+            f"Japan foundation (2026-10-07) reads every shared rule. Leave out \"rules\" (a brief's "
+            f"\"rules\": WAVE2_RULES predates it), or name each rule off in \"rules_off\" with its reason.")
+
+
+def prefecture_municipalities(pref):
+    """Every municipality of a prefecture as an address may spell it, from N03's
+    attributes (the shared cache, never fetched): a city (上尾市), a designated
+    city whose wards N03 lists apart (札幌市), a town with and without its
+    district (北足立郡伊奈町, 伊奈町). Read for japan_register's "other_muni" rule
+    (the Japan foundation, 2026-10-07)."""
+    import json
+    import zipfile
+
+    z = SHARED_RAW / N03_ZIP_TEMPLATE.format(pref=pref)
+    if not z.exists():
+        raise FileNotFoundError(f"{z} is missing - a city's fetch_sources.py downloads it")
+    with zipfile.ZipFile(z) as zf:
+        feats = json.loads(zf.read(z.name.replace("_GML.zip", ".geojson")))["features"]
+    names = set()
+    for f in feats:
+        p = f["properties"]
+        upper, muni = p.get("N03_003") or "", p.get("N03_004") or ""
+        if upper.endswith("市"):
+            names.add(upper)
+        elif upper.endswith("郡") and muni:
+            names |= {upper + muni, muni}
+        elif muni:
+            names.add(muni)
+    return names
 
 
 def osm_station_query(bbox):

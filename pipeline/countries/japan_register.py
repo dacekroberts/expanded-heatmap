@@ -120,6 +120,41 @@ def kanji_number(s):
 WAVE2_RULES = frozenset({"oaza", "aza_letter", "kou_bare", "chome_missing", "machi", "citywide", "form_cols",
                          "coop"})
 
+# THE JAPAN FOUNDATION'S RULES (2026-10-07; docs/build_plan_2026-10-07.md):
+# every shared-code item of the 58 Japanese briefs, and the owner's calls of
+# 2026-10-06, that would move a BUILT map. Built maps must not change, so the
+# 34 cities built before it keep WAVE2_RULES (japan.BUILT_BEFORE_FOUNDATION)
+# and a new city reads ALL_RULES by default; switching one on for a built
+# city is a review-time re-render (docs/decisions_drafts/japan-foundation.md
+# lists each city and the size of the change). The rules that move no built
+# map are not here: they run everywhere.
+#   "type_cols5"     type_cols(): Chiba's クリーニング種別１ first, five more after
+#   "operator_cols5" operator_cols(): the 法人名称 columns (the owner's 法人名 rule)
+#   "form_all"       every form column read, 一般 skipped (Fukuyama's 業態 + 形態)
+#   "combined_form"  call 158: a combined 業態 cell naming a public restaurant
+#                    stays Food service (japan_eigyo.resolve_combined, step 2)
+#   "roten"          露天 among the temporary words (Kure; japan_eigyo.explain)
+#   "kyoka_joken"    自動車 in the permit condition (許可条件) is a vehicle (Kure)
+#   "asterisk"       an address of asterisks only is withheld by the publisher,
+#                    counted apart (Kawaguchi, Ōita); a masked trade name shows
+#                    the permit type (step 2)
+#   "misentaku"      an address of 未選択 is no address (Kure)
+#   "city_only"      call 162: an address of the city name alone is not a premises
+#   "areawide"       全域, 周辺, a prefecture-wide address, <city>内 (Takatsuki,
+#                    Aomori, Kawaguchi, Tottori)
+#   "repeat_city"    the prefecture and city written twice, read once
+#   "other_muni"     a row addressed in another municipality is cut (Tottori,
+#                    Ichinomiya, Ageo); step 2 passes the prefecture's names
+#   "idou"           移動 in a personal-services address or name is a mobile
+#                    salon (Maebashi; step 2)
+#   "past_term"      call 161: a permit past its term on the as-of is dropped
+#   "late_start"     call 172: a permit starting after the as-of waits
+#                    (both against config.TERM_AS_OF, step 2)
+WAVE5_RULES = frozenset({"type_cols5", "operator_cols5", "form_all", "combined_form", "roten", "kyoka_joken",
+                         "asterisk", "misentaku", "city_only", "areawide", "repeat_city", "other_muni", "idou",
+                         "past_term", "late_start"})
+ALL_RULES = WAVE2_RULES | WAVE5_RULES
+
 
 def norm_town(s, rules=()):
     """町字 as a comparable key: NFKC, no spaces, and the 丁目 number in digits.
@@ -681,8 +716,17 @@ class BlockIndex(dict):
 FAR_M = 500
 
 
-def load_city_isj(isj_dir, rules=()):
+def _isj_ward(r, by_municipality):
+    """An MLIT row's ward key: the ward after the city's 市 (中央区; "" for a
+    city without wards), or, for a page of several municipalities, the whole
+    市区町村名 (上尾市, 北足立郡伊奈町), since two cities would both key as ""
+    and their towns of one name (本町一丁目, both in Ageo and Ina) would merge."""
+    return r["市区町村名"] if by_municipality else r["市区町村名"].split("市")[-1]
+
+
+def load_city_isj(isj_dir, rules=(), by_municipality=False):
     """Every ward's block and town-chōme files, keyed by (ward, town[, block]).
+    `by_municipality`: keyed by municipality instead (_isj_ward).
 
     Kyoto's misses (rule D): one town name can belong to two places in a ward -
     123 names in 上京, 中京 and 下京, the twins a median 1.27 km apart. Such a
@@ -691,14 +735,14 @@ def load_city_isj(isj_dir, rules=()):
     cents = collections.defaultdict(list)
     for z in sorted(Path(isj_dir).glob("*-19.0b.zip")):
         for r in read_zip_csv(z):
-            cents[(r["市区町村名"].split("市")[-1], norm_town(r["大字町丁目名"], rules))].append((float(r["緯度"]), float(r["経度"])))
+            cents[(_isj_ward(r, by_municipality), norm_town(r["大字町丁目名"], rules))].append((float(r["緯度"]), float(r["経度"])))
     chome = {k: pts[0] if len(pts) == 1 else None for k, pts in cents.items()}
     twin_of = collections.defaultdict(set)  # a twin town's (ward, town, block) -> which twins it occurs in
     blocks = BlockIndex()
     first = {}
     for z in sorted(Path(isj_dir).glob("*-24.0a.zip")):
         for r in read_zip_csv(z):
-            ward = r["市区町村名"].split("市")[-1]
+            ward = _isj_ward(r, by_municipality)
             key = (ward, norm_town(r["大字・丁目名"], rules), first_number(r["街区符号・地番"]))
             pt = (float(r["緯度"]), float(r["経度"]), r["住居表示フラグ"])
             if chome.get(key[:2], ()) is None:
@@ -781,16 +825,37 @@ VARIATION_SELECTORS = re.compile("[︀-️\U000e0100-\U000e01ef]")
 # than a vehicle", the Tama ledgers' 野菜果物販売業(自動車以外); the Japan
 # foundation, 2026-10-07; no built city's type carries it).
 VEHICLE = re.compile(r"自動車(?!以外)")
+ASTERISKS = re.compile(r"[*＊]+")
+# What is left of a prefecture-wide address once the prefecture is cut
+# (鳥取県, 鳥取県内, 鳥取県東部)
+PREF_WIDE = re.compile(r"(?:内|全域|一円|全県|[東西南北中]部(?:地区|地域)?)?")
+AREA_WORDS = re.compile(r"全域|周辺")
+# A permit's term, each list's own spelling (the briefs' and the header read of
+# 2026-10-07): MHLW's and the national schema's first, then Hirakata's,
+# Fukushima's, Morioka's, Koshigaya's and Kawaguchi's, Itami's, Akita's, Nara's
+END_COLS = ("許可満了日", "許可終了日", "許可満了年月日", "許可終期", "満了年月日", "終了年月日", "有効期限",
+            "許可期間（満了）", "許可有効期限")
+START_COLS = ("許可開始日", "開始年月日", "許可始期", "許可期間（開始）")
 
 
-def permits_from_rows(rows, pref, city, wardless=False, rules=()):
+def permits_from_rows(rows, pref, city, wardless=False, rules=(), others=(), municipalities=(), gaiji=None):
     """load_city_permits for rows already read - Kyoto's rebuilt register.
 
     `wardless`: a city with no wards (japan.CITIES' "wardless"; the 2026-10-02
     batch). Its address is never split at a 区, because its neighbourhoods end
     in one (Toyama's 太田北区, 五福六区; Fukui's 土地区画整理事業) and MLIT keys
-    every town under an empty ward."""
+    every town under an empty ward.
+
+    The Japan foundation (2026-10-07), each a WAVE5_RULES rule: `others`, the
+    prefecture's other municipalities as addresses spell them, for
+    "other_muni"; `municipalities`, a page of several municipalities (Ageo
+    (Regional)): each row's ward is the municipality its address names, as
+    MLIT's 市区町村名 writes it (load_city_isj's `by_municipality`); `gaiji`, a
+    city's own private-use code points (japan.CITIES' "gaiji", Kawaguchi's).
+    A row set aside by a rule carries `out`, its reason, which step 2 counts."""
     tcols = type_cols(rules)
+    fcols = FORM_COLS if "form_cols" in rules else ("業態",)
+    dates = "past_term" in rules or "late_start" in rules
     out = []
     for r in rows:
         addr = next((r[c] for c in ADDR_COLS if (r.get(c) or "").strip()), "")
@@ -801,20 +866,62 @@ def permits_from_rows(rows, pref, city, wardless=False, rules=()):
         # Kyoto's misses (2026-09-28): an ideographic variation selector after a
         # kanji (高辻 + U+E0100 in 20 rows) picks a glyph, never a different town
         a = VARIATION_SELECTORS.sub("", a)
+        if gaiji:
+            a = a.translate(gaiji)
+        why = ""
+        # Kawaguchi (1,316 rows) and Ōita (301): the publisher masks the
+        # address with asterisks; never parsed as a town, counted apart
+        if "asterisk" in rules and a and ASTERISKS.fullmatch(a):
+            why = "address withheld by the publisher"
+        had_pref = a.startswith(pref)
         a = re.sub("^" + pref, "", a)
-        # Kobe's miss: the city's name can recur INSIDE an address
-        # (灘区六甲山町…神戸市立六甲山牧場), so strip it only where no ward precedes it.
-        i = a.find(city)
-        if i >= 0 and "区" not in a[:i]:
-            a = a[i + len(city):]
+        # Tottori's MHLW rows: 鳥取県内, 県内, 鳥取県東部, 鳥取県 alone - the
+        # prefecture, not a premises
+        if "areawide" in rules and not why and addr.strip() and (a.startswith("県内") or (had_pref and PREF_WIDE.fullmatch(a))):
+            why = "area-wide address"
+        muni = next((m for m in municipalities if a.startswith(m)), None)
+        if muni:
+            a = a[len(muni):]
+        else:
+            # Tottori's health centre lists four other towns (岩美郡岩美町 …),
+            # Ichinomiya's and Ageo's lists rows of their neighbours: cut by the
+            # address, never by CITY_BBOX
+            if "other_muni" in rules and not why and not a.startswith(city) and any(a.startswith(o) for o in others):
+                why = "addressed in another municipality"
+            muni = city
+            # Kobe's miss: the city's name can recur INSIDE an address
+            # (灘区六甲山町…神戸市立六甲山牧場), so strip it only where no ward precedes it.
+            i = a.find(city)
+            if i >= 0 and "区" not in a[:i]:
+                a = a[i + len(city):]
+        # Takatsuki's, Mito's and Tottori's: the prefecture and city written
+        # twice (鳥取県鳥取市鳥取市内)
+        if "repeat_city" in rules:
+            for _ in range(2):
+                b = re.sub("^" + pref, "", a)
+                if b.startswith(muni):
+                    a = b[len(muni):]
         # Kurume's MHLW rows (2026-10-03): an address of only 久留米市内 ("within
         # the city") is a vehicle or stall licensed citywide, as 一円 is; all
         # 1,022 such rows share one point, so the default-point guard sees one
         # town and lets it through
         citywide = "citywide" in rules and a == "内"
+        # Takatsuki's 全域, Aomori's 1,284, Kawaguchi's 周辺 and 全域: an area, not a premises
+        if "areawide" in rules and not why and (a in ("市内", "全域", "一円") or AREA_WORDS.search(a)):
+            why = "area-wide address"
+        # Kure's 未選択, a form's unselected default (MHLW geocodes it to city
+        # hall): no address at all
+        if "misentaku" in rules and a.startswith("未選択"):
+            addr, a = "", ""
+        # call 162 (owner, 2026-10-06): an address of the city name alone
+        # names no premises ("city name alone seems like we can exclude")
+        if "city_only" in rules and not why and addr.strip() and a == "":
+            why = "city name alone"
         if city == "京都市":
             a = a.translate(KYOTO_GAIJI)
-        if wardless:
+        if municipalities:
+            ward, rest = muni, a
+        elif wardless:
             ward, rest = "", a
         elif city.endswith("区"):
             # a Tokyo special ward's own list: the ward IS the municipality, and
@@ -842,26 +949,48 @@ def permits_from_rows(rows, pref, city, wardless=False, rules=()):
         except (ValueError, KeyError):
             pass
         typ = next((r[c] for c in tcols if r.get(c)), "")
-        out.append({"ward": ward, "town": norm_town(town, rules), "block": first_number(tail), "rest": tail,
+        # Kure's MHLW rows: the health centre marks a vehicle in the permit's
+        # condition (自動車(…), the revised law's vehicle classes) while 業態
+        # is blank or free text (owner's rule, 2026-10-06)
+        if "kyoka_joken" in rules and not why and VEHICLE.search(r.get("許可条件") or ""):
+            why = "vehicle (permit condition)"
+        if "form_all" in rules:
+            # Fukuyama's lists keep 業態 AND 形態 (一般, 移動販売車, 露店): every
+            # form column is read, 一般 skipped, joined as one combined cell
+            form = "、".join(dict.fromkeys(v for v in ((r.get(c) or "").strip() for c in FORM_COLS)
+                                          if v and v not in FORM_NOTHING))
+        else:
+            form = next(((r.get(c) or "").strip() for c in fcols if (r.get(c) or "").strip()), "")
+        name = next((r[c] for c in NAME_COLS if r.get(c)), "")
+        if gaiji:
+            name = name.translate(gaiji)
+        rec = {"ward": ward, "town": norm_town(town, rules), "block": first_number(tail), "rest": tail,
                     "dir": (d.group(1), d.group(2)) if d else None,
                     "addr": addr, "type": typ,
                     # Fukuoka's lists (the city's and MHLW's) carry 業態, the
                     # form of business, and only there are vehicles, stalls and
                     # school kitchens marked; japan_eigyo reads it beside the type
-                    "form": next(((r.get(c) or "").strip() for c in (FORM_COLS if "form_cols" in rules else ("業態",))
-                                  if (r.get(c) or "").strip()), ""),
+                    "form": form,
                     # MHLW keeps closed premises, marked 許可(廃業) / 届出(廃業);
                     # Shibuya keeps them with a 廃業日 (22,311 of 39,304 rows)
                     "closed": bool((r.get("廃業年月日") or r.get("廃業日") or "").strip())
                     or "廃業" in (r.get("申請区分") or ""),
-                    "name": next((r[c] for c in NAME_COLS if r.get(c)), ""), "pub": pub,
+                    "name": name, "pub": pub,
                     # not a premises: vehicles, and 市内一円 / 仙台市内一円 ("anywhere in
                     # the city") - Sendai's festival stalls (仮設, 臨時) are written so -
                     # and 無店舗 ("no shop"): Meguro's laundry pick-ups at 目黒区内;
                     # Matsuyama writes "within the health centre's area" (保健所管内
                     # / 保健所管轄内) for its vehicles and stalls (277 food rows)
                     "mobile": not addr.strip() or "一円" in addr or "保健所管" in addr or citywide
-                    or bool(VEHICLE.search(typ)) or "無店舗" in typ})
+                    or bool(VEHICLE.search(typ)) or "無店舗" in typ}
+        if why:
+            rec["out"] = why
+        if dates:
+            # calls 161 and 172 (owner, 2026-10-06): the permit's own term,
+            # read by step 2 against the source's pinned as-of (TERM_AS_OF)
+            rec["end"] = next((d for d in (wareki_date(r.get(c)) for c in END_COLS) if d), None)
+            rec["start"] = next((d for d in (wareki_date(r.get(c)) for c in START_COLS) if d), None)
+        out.append(rec)
     return out
 
 

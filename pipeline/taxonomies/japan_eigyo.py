@@ -146,6 +146,34 @@ FORM_RULES = [
 ]
 _FORM_COMPILED = [(name, bucket, re.compile(pat)) for name, bucket, pat in FORM_RULES]
 
+# CALL 158 (owner, 2026-10-06), a city's "combined_form" rule: a 業態 cell
+# joining several forms (Fujisawa's 詳細業種 飲食店、仕出し屋、弁当屋: 312 fixed
+# restaurant rows, first-match sending 122 away) that names a public
+# restaurant form stays Food service, unless it also names 給食 or 旅館.
+# The other exclusions keep winning, each its own earlier call (vehicles and
+# stalls, hostess venues 2026-09-29, entertainment, vending, mail order):
+# only the 仕出し and deli / shop forms give way to the restaurant. Measured on
+# Fujisawa's cached full lists: 70 catering and 30 deli rows return (the brief:
+# 69 and 27 on its 312-row filter, 316 here).
+_COMBINED_SPLIT = re.compile(r"[、，,／/]")
+_PUBLIC_RESTAURANT = re.compile(r"飲食店|食堂|レストラン|軽飲食|料理店|酒場|居酒屋|すし|寿司|そば|うどん|ラーメン|"
+                                r"焼肉|焼鳥|焼き鳥|お好み焼|喫茶|カフェ|バー")
+_GIVES_WAY = {"event catering (仕出し)", "konbini holding a restaurant permit", "department store / supermarket",
+              "deli (業態; owner: そうざい counts)"}
+
+
+def resolve_combined(form):
+    """A combined form cell under call 158: the first public restaurant part
+    where that part decides it, else the cell unchanged."""
+    if not isinstance(form, str) or not _COMBINED_SPLIT.search(form):
+        return form
+    parts = [p.strip() for p in _COMBINED_SPLIT.split(form) if p.strip()]
+    first_match = [next((name for name, _, pat in _FORM_COMPILED if pat.search(normalise(p))), None) for p in parts]
+    if any(m is not None and m not in _GIVES_WAY for m in first_match):
+        return form  # 給食, 旅館, a vehicle, a hostess venue ... keeps it out
+    eats = [p for p, m in zip(parts, first_match) if m is None and _PUBLIC_RESTAURANT.search(normalise(p))]
+    return eats[0] if eats else form
+
 
 def normalise(value):
     """NFKC (full-width, circled numbers), no spaces, no leading number, and no
@@ -159,11 +187,23 @@ def normalise(value):
     return re.sub(r"^\(旧\)", "", re.sub(r"^(?:\d+:?|\?)", "", s))
 
 
-def explain(value, source="food", form=""):
-    """(bucket or None, the rule that decided it, or 'no rule')."""
+# 露天 (天, not 店: Kure's 露天営業) is a street stall too, but Hiroshima's,
+# Sakai's and Takamatsu's built maps hold 3 such rows, so it is a city's
+# "roten" rule (japan_register.WAVE5_RULES), not a word in the lists above.
+# Not 露天風呂, an open-air bath. An exclusion only, so classify(), which
+# reads only rows step 2 kept, needs no rules.
+_ROTEN = re.compile(r"露天(?!風呂)")
+
+
+def explain(value, source="food", form="", rules=()):
+    """(bucket or None, the rule that decided it, or 'no rule'). `rules`: the
+    city's japan_register rules ("roten")."""
     bucket, rule = _explain_type(value, source)
     # a CSV round trip reads an empty form as NaN
     f = normalise(form) if isinstance(form, str) else ""
+    if ("roten" in rules and bucket is not None and source not in PERSONAL_SOURCES
+            and _ROTEN.search(normalise(value) + f)):
+        return None, "temporary / mobile (露天)"
     if bucket is None or not f or source in PERSONAL_SOURCES:
         return bucket, rule
     for name, b, pat in _FORM_COMPILED:
@@ -273,3 +313,12 @@ for _v, _f, _want in (("飲食店営業（バー・キャバレー）", "", None
                       ("飲食店営業", "自動車による営業(タンク容量80リットル)", None), ("喫茶店営業", "自動販売機", None),
                       ("飲食店営業", "飲食店（客席を設ける営業）", "Food service"), ("飲食店営業", "露店：定置", None)):
     assert classify({VALUE_COLUMN: _v, "form": _f}) == _want, (_v, _f, classify({VALUE_COLUMN: _v, "form": _f}))
+# The Japan foundation (2026-10-07): call 158's combined cells, and 露天 under the "roten" rule
+for _f, _want in (("飲食店、仕出し屋", "飲食店"), ("飲食店、仕出し屋、弁当屋", "飲食店"), ("軽飲食店、弁当屋、そうざい屋", "軽飲食店"),
+                  ("飲食店、給食", "飲食店、給食"), ("弁当屋、そうざい屋", "弁当屋、そうざい屋"),
+                  ("飲食店、旅館の経営を兼ねる飲食店営業", "飲食店、旅館の経営を兼ねる飲食店営業"),
+                  ("一般食堂、移動販売車", "一般食堂、移動販売車"), ("スナック、バー", "スナック、バー"), ("居酒屋", "居酒屋")):
+    assert resolve_combined(_f) == _want, (_f, resolve_combined(_f))
+assert explain("飲食店営業", "food", "露天営業", ("roten",))[0] is None
+assert explain("飲食店営業", "food", "露天営業")[0] == "Food service"
+assert explain("飲食店営業", "food", "露天風呂付き客室", ("roten",))[0] == "Food service"  # an open-air bath is no stall
