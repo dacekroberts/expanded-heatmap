@@ -115,9 +115,13 @@ SHARE_SKIP = ("mhlw", "notify")
 
 
 def _addr(s):
-    """An address as the cut reads it: NFKC, no spaces, 東京都 off the front."""
+    """An address as the cut reads it: NFKC, no spaces, 東京都 off the front,
+    however often it is written (Chōfu's notification 「東京都東京都調布市野水
+    1丁目」, 2026-10-07; permits_from_rows already reads it so)."""
     a = unicodedata.normalize("NFKC", s or "").replace(" ", "").replace("　", "")
-    return a[3:] if a.startswith("東京都") else a
+    while a.startswith("東京都"):
+        a = a[3:]
+    return a
 
 
 def city_rows(path, key, municipality):

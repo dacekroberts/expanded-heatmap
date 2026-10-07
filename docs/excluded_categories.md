@@ -4549,6 +4549,46 @@ line.
 - The Seibu Ikebukuro Line is not drawn: its Akitsu station is just outside
   the city line.
 
+### Chōfu - the Tokyo Metropolitan Government's Tama ledgers and the national filings, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Restaurants and food shops the ledgers do not hold. They list new permits
+  only since August 2019 and renewals since April 2017, and leave out
+  premises whose operators asked not to be published and premises that have
+  closed. Against the official count at the end of March 2025, the ledger
+  holds 1,170 of the city's 1,721 restaurants (68.0%). The national filings
+  add the premises they hold and the ledgers do not.
+- Shops that sell only packaged food, except where they notified the health
+  centre since June 2021 (the notification ledger) or filed nationally.
+- 286 school, hospital and staff canteens, 34 snack bars and cabarets, 32
+  vending machines, 23 caterers (仕出し), 14 rows marked temporary or mobile,
+  2 premises inside hotels and inns, 2 mail-order businesses and 1
+  linen-supply laundry.
+- 156 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 5 rows addressed to an area rather than a premises, 2 addressed to the
+  city alone, 2 permits whose condition names a vehicle, 1 food truck or
+  stall, and 5 closed premises, which the national filings keep, marked.
+
+**Counted** - the ledgers as of August 31, 2026, and the national filings
+for the city as downloaded on October 6, 2026. 3 of the 202 bakery,
+confectioner and deli rows (1.5%) have a trade name that reads as a factory;
+they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 210 repeat permits are shown once, and 348
+national filings that repeat a ledger's premises are shown as the ledger's.
+
+**Not placed** - 1 row. Another 11 sit at their town's center, and 1 at the
+ministry's own coordinates.
+
+**Names not shown** - none: no trade name is its operator's own name.
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 9 stations beyond it: 3 in Fuchū, 2 in Setagaya, 2 in Inagi, 1
+  in Suginami and 1 in Kawasaki (Tama Ward).
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering
