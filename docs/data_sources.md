@@ -100,7 +100,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
 | South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang, Daejeon, Gwangju, Gimhae |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
-| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki, Higashiyamato, Nishitōkyō |
+| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki, Higashiyamato, Nishitōkyō, Tama, Higashimurayama |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional) |
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
@@ -3804,6 +3804,32 @@ time).
 - **MUST DO:** `check_personal_exposure.py nishitokyo` with its Japan pass,
   run 2026-10-07; the verdict is in
   `docs/decisions_drafts/worktree-japan-east-1.md` ("Nishitōkyō built",
+  2026-10-07).<!-- /internal -->
+
+**159. Tokyo Metropolitan Government, MHLW and MLIT (Tama) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with East-1 at review
+time).
+
+- **PERMITTED WITH CONDITIONS**, as Higashiyamato's (157): the same Tama
+  ledgers (CC BY 4.0 through the Tokyo catalogue, call 108), MHLW's Tokyo
+  file (PDL 1.0), MLIT's 位置参照情報 and N02-25 (PDL 1.0); N03 never drawn.
+- **MUST DISPLAY**, **MUST NOT**: as notice 157, the city changed.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py tama` with its Japan pass,
+  run 2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-1.md` ("Tama built",
+  2026-10-07).<!-- /internal -->
+
+**160. Tokyo Metropolitan Government, MHLW and MLIT (Higashimurayama) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with East-1 at review
+time).
+
+- **PERMITTED WITH CONDITIONS**, as Higashiyamato's (157): the same Tama
+  ledgers (CC BY 4.0 through the Tokyo catalogue, call 108), MHLW's Tokyo
+  file (PDL 1.0), MLIT's 位置参照情報 and N02-25 (PDL 1.0); N03 never drawn.
+- **MUST DISPLAY**, **MUST NOT**: as notice 157, the city changed.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py higashimurayama` with its Japan pass,
+  run 2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-1.md` ("Higashimurayama built",
   2026-10-07).<!-- /internal -->
 
 

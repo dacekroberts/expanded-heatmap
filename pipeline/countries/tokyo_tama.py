@@ -135,7 +135,11 @@ def city_rows(path, key, municipality):
         a = _addr(r.get(col))
         if a.startswith(municipality):
             out.append({k: v for k, v in r.items() if k not in drop})
-        elif municipality in a:
+        # An area naming several municipalities is no city's premises: skipped,
+        # not raised (Tama's notification 「稲城市周辺、多摩市周辺、日野市周辺」
+        # and MHLW's 「稲城市、及び、日野市、多摩市内一円」, 2026-10-07), by the
+        # words step 2 reads as area-wide (japan_register.AREA_WORDS, 一円, 市内)
+        elif municipality in a and not (jr.AREA_WORDS.search(a) or "一円" in a or "市内" in a):
             elsewhere.append(a)
     if elsewhere:
         raise ValueError(f"{path.name}: {len(elsewhere)} address(es) name {municipality} after another place "

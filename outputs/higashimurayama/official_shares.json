@@ -1,0 +1,54 @@
+[
+  {
+    "municipality": "東村山市",
+    "code": "13213",
+    "rows": 916,
+    "official": 1023,
+    "share_pct": 89.5,
+    "source": "Tokyo statistical yearbook, table 19-8 (飲食店営業, FY2024)",
+    "kind": "restaurants",
+    "rows_at_date": 705,
+    "share_at_date_pct": 68.9,
+    "date": "2025-03-31",
+    "undated": 0
+  },
+  {
+    "municipality": "東村山市",
+    "code": "13213",
+    "kind": "barber",
+    "rows": 54,
+    "official": 62,
+    "share_pct": 87.1,
+    "source": "Tokyo statistical yearbook, table 19-7 (理容所, 美容所, クリーニング所, FY2024)",
+    "rows_at_date": 54,
+    "share_at_date_pct": 87.1,
+    "date": "2025-03-31",
+    "undated": 0
+  },
+  {
+    "municipality": "東村山市",
+    "code": "13213",
+    "kind": "beauty",
+    "rows": 148,
+    "official": 162,
+    "share_pct": 91.4,
+    "source": "Tokyo statistical yearbook, table 19-7 (理容所, 美容所, クリーニング所, FY2024)",
+    "rows_at_date": 139,
+    "share_at_date_pct": 85.8,
+    "date": "2025-03-31",
+    "undated": 0
+  },
+  {
+    "municipality": "東村山市",
+    "code": "13213",
+    "kind": "laundry",
+    "rows": 50,
+    "official": 54,
+    "share_pct": 92.6,
+    "source": "Tokyo statistical yearbook, table 19-7 (理容所, 美容所, クリーニング所, FY2024)",
+    "rows_at_date": 50,
+    "share_at_date_pct": 92.6,
+    "date": "2025-03-31",
+    "undated": 0
+  }
+]

@@ -174,6 +174,29 @@ CITIES = {
                       "wards": ["13220"]},
     "nishitokyo": {"name": "西東京市", "pref": "13", "epsg": 32654, "n02": "25", "wardless": True,
                    "wards": ["13229"]},
+    "tama": {"name": "多摩市", "pref": "13", "epsg": 32654, "n02": "25", "wardless": True,
+             "wards": ["13224"]},
+    "higashimurayama": {"name": "東村山市", "pref": "13", "epsg": 32654, "n02": "25", "wardless": True,
+                        "wards": ["13213"]},
+    # Ageo City and Ina Town on one page (owner, call 102): each row keyed by
+    # its municipality as MLIT's 市区町村名 writes it (the foundation's S28)
+    "ageo_regional": {"name": "上尾市", "pref": "11", "epsg": 32654, "n02": "25", "wardless": True,
+                      "wards": ["11219", "11301"],
+                      "municipalities": {"11219": "上尾市", "11301": "北足立郡伊奈町"}},
+    "soka": {"name": "草加市", "pref": "11", "epsg": 32654, "n02": "25", "wardless": True,
+             "wards": ["11221"]},
+    "tokorozawa": {"name": "所沢市", "pref": "11", "epsg": 32654, "n02": "25", "wardless": True,
+                   "wards": ["11208"]},
+    "kasukabe": {"name": "春日部市", "pref": "11", "epsg": 32654, "n02": "25", "wardless": True,
+                 "wards": ["11214"]},
+    "fuchu_tokyo": {"name": "府中市", "pref": "13", "epsg": 32654, "n02": "25", "wardless": True,
+                    "wards": ["13206"]},
+    "chofu": {"name": "調布市", "pref": "13", "epsg": 32654, "n02": "25", "wardless": True,
+              "wards": ["13208"]},
+    "tachikawa": {"name": "立川市", "pref": "13", "epsg": 32654, "n02": "25", "wardless": True,
+                  "wards": ["13202"]},
+    "hino": {"name": "日野市", "pref": "13", "epsg": 32654, "n02": "25", "wardless": True,
+             "wards": ["13212"]},
 }
 
 # THE CITIES BUILT BEFORE THE JAPAN FOUNDATION (2026-10-07): they keep

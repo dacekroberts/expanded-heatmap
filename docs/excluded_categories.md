@@ -4459,6 +4459,96 @@ line.
 - Left out: 7 stations beyond it: 3 in Nerima, 2 in Kodaira, 1 in
   Higashikurume and 1 in Kiyose.
 
+### Tama - the Tokyo Metropolitan Government's Tama ledgers and the national filings, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Restaurants and food shops the ledgers do not hold. They list new permits
+  only since August 2019 and renewals since April 2017, and leave out
+  premises whose operators asked not to be published and premises that have
+  closed. Against the official count at the end of March 2025, the ledger
+  holds 667 of the city's 931 restaurants (71.6%). The national filings add
+  the premises they hold and the ledgers do not.
+- Shops that sell only packaged food, except where they notified the health
+  centre since June 2021 (the notification ledger) or filed nationally.
+- 137 school, hospital and staff canteens, 22 vending machines, 21 snack bars
+  and cabarets, 12 rows marked temporary or mobile, 10 caterers (仕出し), 4
+  premises inside hotels and inns, 1 mail-order business and 1 linen-supply
+  laundry.
+- 47 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 8 rows addressed to an area rather than a premises, 2 food trucks or
+  stalls, and 1 permit whose condition names a vehicle.
+
+**Counted** - the ledgers as of August 31, 2026, and the national filings
+for the city as downloaded on October 6, 2026. 23 of the 157 bakery,
+confectioner and deli rows (14.6%) have a trade name that reads as a factory;
+they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 156 repeat permits are shown once, and 267
+national filings that repeat a ledger's premises are shown as the ledger's.
+
+**Not placed** - 1 row (0.1%). Another 46 sit at their town's center, and 2
+at the ministry's own coordinates.
+
+**Names not shown** - none on the map: no trade name shown is its
+operator's own name.
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 15 stations beyond it: 4 in Fuchū, 4 in Kawasaki (Asao Ward),
+  3 in Hino, 2 in Hachiōji, 1 in Machida and 1 in Inagi.
+- The Keio Line keeps one station inside the city, Seiseki-sakuragaoka, and
+  is drawn as cut.
+- The Tama Toshi Monorail is not drawn: its one station in the city, Tama
+  Center, stands beside the Keio and Odakyu stations of that name, which
+  keep the rings (owner, 2026-10-06).
+
+### Higashimurayama - the Tokyo Metropolitan Government's Tama ledgers and the national filings, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Restaurants and food shops the ledgers do not hold. They list new permits
+  only since August 2019 and renewals since April 2017, and leave out
+  premises whose operators asked not to be published and premises that have
+  closed. Against the official count at the end of March 2025, the ledger
+  holds 705 of the city's 1,023 restaurants (68.9%). The national filings
+  add the premises they hold and the ledgers do not.
+- Shops that sell only packaged food, except where they notified the health
+  centre since June 2021 (the notification ledger) or filed nationally.
+- 149 school, hospital and staff canteens, 31 snack bars and cabarets, 12
+  caterers (仕出し), 12 vending machines and 3 premises inside hotels and
+  inns.
+- 82 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 15 rows addressed to an area rather than a premises, and 1 closed
+  premises, which the national filings keep, marked.
+
+**Counted** - the ledgers as of August 31, 2026, and the national filings
+for the city as downloaded on October 6, 2026. 14 of the 128 bakery,
+confectioner and deli rows (10.9%) have a trade name that reads as a
+factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 78 repeat permits are shown once, and 149
+national filings that repeat a ledger's premises are shown as the ledger's.
+
+**Not placed** - none. 1 row sits at the ministry's own coordinates.
+
+**Names not shown** - 1 pin whose trade name is its operator's own name
+shows its permit type.
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 13 stations beyond it: 7 in Kodaira, 3 in Tokorozawa, 1 in
+  Kokubunji, 1 in Higashiyamato and 1 in Tachikawa.
+- The Seibu Kokubunji and Haijima lines and JR East's Musashino Line each
+  keep one station inside the city and are drawn as cut.
+- The Seibu Yamaguchi Line (the Leo Liner) is not drawn: its one station in
+  the city, Tamako, is a station of the Tamako Line, which keeps the ring
+  (owner, 2026-10-06).
+- The Seibu Ikebukuro Line is not drawn: its Akitsu station is just outside
+  the city line.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering
