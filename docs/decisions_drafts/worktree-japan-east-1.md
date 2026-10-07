@@ -10,7 +10,7 @@ plan is `docs/build_plan_2026-10-07.md`; pages 210-221, notices 157-168.
 **Answered by the owner on 2026-10-07 (relayed to Staging as calls 199-203; call 204, the shared-code reading, approved in staging's chat):**
 1. "yes distinct colors": each line of one operator seeded apart; applied to Higashimurayama, the Keio pairs (Tama, Chōfu, Fuchū, Hino) and Tachikawa's Chuo and Ome lines (entry below).
 2. "fix": `japan_step1` names every municipality of a several-municipality page in the excluded-station reason (Ageo (Regional): "outside 上尾市 and 伊奈町 (the permit lists cover them only)"); a one-city page reads as before (no built city has "municipalities").
-3. "display to me, keep if i sign off": rendered and shown; pending the owner's word.
+3. "display to me, keep if i sign off": rendered and shown on Tokorozawa's map; the owner signed off the same day ("keep the Leo Liner label"): "Seibu Yamaguchi Line (Leo Liner)" stays on the map and in the legend.
 4. "sounds good. we can note if need be": a switch, `default_joined` in `japan_register.WAVE5_RULES` (on for new cities): Kasukabe's mall shops placed (unplaced 11 to 8). On the built cities it would add Okayama 13 storefronts, Fukuoka 4, Hiroshima 2, Shimonoseki 2 and Kurume 1: noted for a review-time re-render.
 5. "keep" ("rapid is a regional distinction for speed"): "JR Chuo Line" stays.
 
