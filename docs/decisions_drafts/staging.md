@@ -4,6 +4,18 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-06 - Review-time page-text proposal: the Japan rail exception explained on Why the maps differ (owner, call 190)
+
+- **The gap, found on the owner's question** ("do we have a JR explanation piece anywhere on the site to justify the japan-only distinction?"): the site states the distinction but never justifies it. `app/pages/Why_the_Maps_Differ.py` (the "Suburban trains appear on only a few maps" paragraph) ends "The Japanese maps draw their JR and private railways as well."; What Is Excluded points there; no Japanese city page gives the reason. The rule has also widened since that sentence was written: no frequency floor for JR or private lines (call 46), and stretches with about 11 trains a day or fewer are drawn and named (call 86).
+- **Approved for review time (owner: "190 yes, log it for review time")**: replace that last sentence with:
+
+  > Japan is the exception: its JR and private railways are drawn on every Japanese map, whatever their frequency. Most Japanese cities have no subway, and these railways are their rapid-transit network. Their stations sit close together through built-up areas, and each city's shopping streets grew up around them. Where a line runs only a few trains a day inside the city, the city's page says so.
+
+- **For whoever lands it:**
+  - It is an `app/` change, so it lands at review time, with `check_deploy_imports.py` and a deploy-verify `map-chrome` scope or a quick render of the page. American spelling throughout. The claims are structural, never ridership (out of scope, hard line).
+  - The fourth sentence holds for pages built under call 86. Shimonoseki's earlier page cuts its 8-to-10-trains-a-day stretch instead of naming it. Before landing, check whether any built Japanese page has an undisclosed low-frequency stretch, then either soften the sentence or add a note to that page.
+- Staging changed no `app/` file.
+
 ### 2026-10-06 - Wave 5, the last briefs: calls 154 to 184, the one-station rule applied as written, Saitama's old-law list added (owner)
 
 - **Hirakata, Mito, Fujisawa (calls 154-160):** Hirakata keeps no food-share sentence and stays in A (154), its registers' five monthly XLSX files approved (155); Mito leaves out 偕楽園, a seasonal station (156, the Sagano and Mojikō Retro precedents), and states its food share in two figures together (157); Fujisawa drops MHLW's 6 August closures (159), and the city's yearly report was approved as one file (160; the 統計年報's health chapter holds no food table).
