@@ -14,7 +14,8 @@ The owner's decisions and the measurements behind them are in this repo's
   One licence, the same meaning in every city, no privacy question. The
   website's register data stays on the website.
 - **Offline by city pack**: online the app streams; before a trip the reader
-  downloads a city ("Kyoto, about 30 MB").
+  downloads a city (Kyoto measured 23 MB for its map area, 48 MB with 10 km
+  around it, at street-level zoom).
 - **A separate front end.** Streamlit cannot run offline; a phone-installable
   web app (PWA) first, native later only if it earns it.
 
@@ -63,6 +64,20 @@ The owner's decisions and the measurements behind them are in this repo's
   in the device over a per-city index from OpenStreetMap, an ODbL derivative
   database published under ODbL. The website project's search pilot (Kyoto)
   measures the index size; reuse its index format.
+
+## Inputs still coming from the website project
+
+Two of its sessions, started 2026-10-07, produce what the app builds on.
+Their reports reach the owner; read them before designing the matching part:
+
+- **"Prototype open basemap switch and app groundwork"**: the export
+  contract's schema (the app's data input), the hosting comparison for
+  PMTiles files (Cloudflare R2 and similar, costs), and a measured
+  open-basemap page at phone width. Its drafts file:
+  `docs/decisions_drafts/claude-epic-neumann-5aa0a6.md`.
+- **"Pilot privacy-first place search on one map"** (Kyoto): the search
+  index's format and size, and which queries work. The app's search should
+  read the same index files.
 
 ## Open, the app project's first work
 
