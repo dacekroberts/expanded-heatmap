@@ -4545,6 +4545,30 @@ CITIES = [
         "label_tier": "minor",
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Maebashi",
+        "lat": 36.389,
+        "lon": 139.063,
+        "page": "pages/229_Maebashi_Heatmap.py",
+        "coverage": "narrowed",
+        "placement": "Joined to address blocks (91.7%); ministry coordinates where missed",
+        "data_age": "City food list as of 2026-06-30, registers rebuilt to 2026-08-31; ministry filings fetched 2026-10-04",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
+        "blurb": "The Jomo Line and JR East's Ryomo and Joetsu lines",
+        "region": "Japan East",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

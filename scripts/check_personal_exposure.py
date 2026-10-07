@@ -522,6 +522,14 @@ REGISTRIES = {
                   address=("address",), japan=True)
        for slug in ("toyama", "kumamoto", "fukui", "nagasaki", "utsunomiya", "kitakyushu", "sakai",
                     "hakodate", "kagoshima", "okayama", "kochi")},
+    # The A/B build plan's Regional-1 batch (2026-10-07), on the same shared
+    # steps and rule; MHLW's 法人名 is an operator column since 2026-10-05.
+    # Kept apart from the end of the Japanese blocks, where the other build
+    # sessions append.
+    **{slug: dict(raw=None, trade=None, owner=None, processed="businesses_clean.csv",
+                  address=("address",), japan=True)
+       for slug in ("maebashi", "fukuyama", "ichinomiya", "tsu", "fukushima", "iwaki", "akita", "oita", "gifu",
+                    "mito", "morioka")},
     # Japan wave 2 (2026-10-03), on the same shared steps and the same rule:
     # each list's operator column is read only by the name rule, in memory;
     # MHLW's rows, Hamamatsu's registers and Higashiosaka's national-schema
@@ -1243,7 +1251,11 @@ def check(slug):
         cfg = importlib.import_module(f"pipeline.{slug}.config")
         own = set()
         from pipeline.countries import japan, japan_step2
-        rules = frozenset(japan.CITIES.get(slug, {}).get("rules", ()))
+        # The rules step 2 reads: a city built after the Japan foundation
+        # carries no "rules" key and reads ALL_RULES (the coop rule among
+        # them); reading () instead flagged 7 extra names on Maebashi
+        # (2026-10-07). A built city's "rules" give the same set as before.
+        rules = japan.city_rules(slug)
         for key in cfg.SOURCES:
             # a rebuilt register (Kyoto's) is read as step 2 reads it
             for r in japan_step2.source_rows(cfg, key):

@@ -2336,6 +2336,35 @@ _NOTICES = [
      "not drawn). The list may include premises that have closed. MHLW and MLIT did not make and do not en"
      "dorse this map.",
      False, ("Shimonoseki",)),
+    # The A/B build plan's Regional-1 batch (notices 176-186, 2026-10-07).
+    # Maebashi (notice 176): the city's food file (CC BY 4.0) and 生活衛生
+    # registers (labelled CC BY 2.1 JP against the terms' 4.0: one credit names
+    # both, owner call 29) on BODIK, title and copyright holder per the
+    # 前橋市オープンデータ利用規約 第６条, no completeness claim (第３条); MHLW as in
+    # Sasebo's; MLIT as in Kobe's, N02 in its 2025 edition. Written from
+    # Hamamatsu's and Sasebo's approved wording under the owner's pre-approval
+    # of template prose (2026-09-30).
+    Notice(176, "Maebashi City, MHLW and MLIT (Maebashi)",
+     "Maebashi's businesses: この地図は以下の著作物を改変して利用しています。"
+     "食品等営業許可・届出一覧、前橋市、クリエイティブ・コモンズ・ライセンス 表示 4.0 国際"
+     "（[https://creativecommons.org/licenses/by/4.0/deed.ja](https://creativecommons.org/licenses/by/4.0/deed.ja)）"
+     "（[https://data.bodik.jp/dataset/102016_eiseikensa01](https://data.bodik.jp/dataset/102016_eiseikensa01)）; "
+     "生活衛生営業施設一覧、前橋市、クリエイティブ・コモンズ・ライセンス 表示 2.1 日本"
+     "（[https://creativecommons.org/licenses/by/2.1/jp/](https://creativecommons.org/licenses/by/2.1/jp/)）"
+     "及び 表示 4.0 国際"
+     "（[https://creativecommons.org/licenses/by/4.0/deed.ja](https://creativecommons.org/licenses/by/4.0/deed.ja)）"
+     "（[https://data.bodik.jp/dataset/102016_eiseikensa02](https://data.bodik.jp/dataset/102016_eiseikensa02)）; and "
+     "出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一覧」を加工して作成. "
+     "Processed by this project, which selected the storefront types, rebuilt the city's barber, beauty and "
+     "laundry lists to 31 August 2026 from its March list and its monthly openings and closings, showed a "
+     "premises in both food lists once, placed each by its address or the ministry's own coordinates, and "
+     "counted them around stations. No list is claimed to be complete or current; the ministry's holds "
+     "only filings whose applicants agreed to publish them. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
+     "Maebashi City, MHLW and MLIT did not make and do not endorse this map.",
+     False, ("Maebashi",)),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no

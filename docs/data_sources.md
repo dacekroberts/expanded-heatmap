@@ -100,7 +100,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
 | South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang, Daejeon, Gwangju, Gimhae |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
-| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki |
+| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki, Maebashi |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional) |
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
@@ -3767,6 +3767,29 @@ of 2026-10-03.)
 - **The repository carries the credit too**, as for London: committed
   `outputs/liverpool/` republishes the derived locations (README's credits).
 - Wording: Manchester's Ordnance Survey notice 85, with the city changed.
+
+**176. Maebashi City, MHLW and MLIT (Maebashi) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with the Regional-1
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-05; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's food file is
+  **CC BY 4.0** under the 前橋市オープンデータ利用規約 第１条; its 生活衛生
+  registers are labelled **CC BY 2.1 JP** against the terms' 4.0, so one
+  credit names both (owner, 2026-10-05). MHLW's open data is **PDL 1.0**, as
+  in Sasebo's (127); MLIT's 位置参照情報 and N02 (the 2025 edition) are **PDL
+  1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks stations and is
+  **never drawn** (the Survey Act).
+- **MUST DISPLAY**: each list's title and copyright holder (第６条), the
+  licence links, that the data was modified; MHLW's 出典 line and who
+  processed it; MLIT's credit lines.
+- **MUST NOT**: claim either list complete or current (第３条); imply
+  endorsement; use MHLW's logo. **MUST DO, on notice only**: remove the
+  registers' credit if the city asks (CC BY 2.1 JP 第5条).<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py maebashi` with its Japan pass, run
+  2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-regional-1.md` ("Maebashi built",
+  2026-10-07).<!-- /internal -->
 
 
 ## Gaps

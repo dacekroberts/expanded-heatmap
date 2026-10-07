@@ -133,6 +133,20 @@ CITIES = {
                 "wards": [f"3310{n}" for n in range(1, 5)]},
     "kochi": {"name": "高知市", "pref": "39", "epsg": 32653, "n02": "25", "rules": WAVE2_RULES, "wardless": True,
               "wards": ["39201"]},
+    # The A/B build plan's Regional-1 batch (owner, 2026-10-07), each on N02-25
+    # as its brief measured, every shared rule on (no "rules" key). Kept apart
+    # from the dict's end, where the other build sessions append.
+    "maebashi": {"name": "前橋市", "pref": "10", "epsg": 32654, "n02": "25", "wardless": True, "wards": ["10201"]},
+    "fukuyama": {"name": "福山市", "pref": "34", "epsg": 32653, "n02": "25", "wardless": True, "wards": ["34207"]},
+    "ichinomiya": {"name": "一宮市", "pref": "23", "epsg": 32653, "n02": "25", "wardless": True, "wards": ["23203"]},
+    "tsu": {"name": "津市", "pref": "24", "epsg": 32653, "n02": "25", "wardless": True, "wards": ["24201"]},
+    "fukushima": {"name": "福島市", "pref": "07", "epsg": 32654, "n02": "25", "wardless": True, "wards": ["07201"]},
+    "iwaki": {"name": "いわき市", "pref": "07", "epsg": 32654, "n02": "25", "wardless": True, "wards": ["07204"]},
+    "akita": {"name": "秋田市", "pref": "05", "epsg": 32654, "n02": "25", "wardless": True, "wards": ["05201"]},
+    "oita": {"name": "大分市", "pref": "44", "epsg": 32652, "n02": "25", "wardless": True, "wards": ["44201"]},
+    "gifu": {"name": "岐阜市", "pref": "21", "epsg": 32653, "n02": "25", "wardless": True, "wards": ["21201"]},
+    "mito": {"name": "水戸市", "pref": "08", "epsg": 32654, "n02": "25", "wardless": True, "wards": ["08201"]},
+    "morioka": {"name": "盛岡市", "pref": "03", "epsg": 32654, "n02": "25", "wardless": True, "wards": ["03201"]},
     # Japan wave 2 (owner released 2026-10-02), each on N02-25 as its brief
     # measured. Hamamatsu's three wards are the 2024-01-01 ones (中央区 22138,
     # 浜名区 22139, 天竜区 22140): MLIT's ISJ and N03 key them so, and the old

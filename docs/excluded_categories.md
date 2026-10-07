@@ -4381,6 +4381,50 @@ line.
   the city, Shimonoseki, and is drawn as part of the Sanyo Line.
 - The Shinkansen is not drawn (Shin-Shimonoseki appears as a JR station).
 
+### Maebashi - the city's food list from its former system, its barber, beauty and laundry registers and the national filings, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, except where the national filings
+  include notifications.
+- 635 national filings whose filers did not publish an address (38
+  restaurants, about one in 50).
+- 515 food trucks, street and festival stalls and other temporary or mobile
+  permits, 2 rows addressed to a whole area, and 3 mobile beauty salons.
+- 409 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 299 school, hospital and staff canteens, 78 vending machines, 7 mail-order
+  businesses, 49 premises inside hotels and inns, 30 caterers (仕出し) and 407
+  snack bars and cabarets.
+- 16 closed premises, which the national filings keep, marked, and 1 permit
+  that starts after the filings' date.
+
+**Counted** - the permits in the city's list of June 30, 2026 (granted from
+October 2019 to March 2023, all still in term on that date), the city's
+barber, beauty and laundry registers brought up to August 31, 2026 from its
+March 2026 list and its monthly lists of openings and closings, and the
+national filings as downloaded on October 4, 2026. The laundry register lists
+139 laundries, against 170 in the national count a year earlier; the city
+notes that some premises are left off at their operators' request. 34 of the
+541 bakery, confectioner and deli rows (6.3%) have a trade name that reads as
+a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 231 repeat permits are shown once, and 149 rows of
+the city's list for a premises already in the national filings.
+
+**Not placed** - 2 rows (0.0%), a barber and a laundry in 駒形町, whose
+addresses MLIT's files do not hold. Another 182 sit at their town's center,
+and 207 national filings at their own coordinates.
+
+**Names not shown** - 3 pins whose trade name is the operator's own name show
+their permit type.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 6 stations beyond it: 2 each in Kiryu and Takasaki, and 1 each in
+  Isesaki and Shibukawa.
+- No Shinkansen station lies in the city.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering
