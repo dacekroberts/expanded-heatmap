@@ -14,7 +14,9 @@ Three things are decided here:
      as `pipeline/map_common.render_heatmap` counts "available" (rows with a
      coordinate, less `drop_contact_details`). The check regenerates and
      compares. A city whose processed file is absent (a fresh checkout) is
-     SKIPPED and named, never counted as a pass of its number.
+     SKIPPED and named, never counted as a pass of its number. `--write`
+     REFUSES instead, writing nothing, when data/ is missing or a city in the
+     committed file would lose its count (`refuse_shrunken_write`).
   2. THE TIER (`coverage` in app/cities.py) against the city's row in table B
      of docs/map_inconsistencies.md. "narrowed" needs a structural gap there:
      a bucket missing (a dash), merged or relabelled (the pins cell is not
@@ -134,6 +136,56 @@ def storefronts(city_slug):
     return int(len(drop_contact_details(df)))
 
 
+def committed_counts():
+    """The storefront counts in HEAD's app/macro_facts.json, else the file on
+    disk when git cannot answer. HEAD rather than the disk, so a shrunken file
+    written by an earlier run is not the yardstick for the next one."""
+    import subprocess
+    res = subprocess.run(["git", "show", "HEAD:app/macro_facts.json"], cwd=ROOT,
+                         capture_output=True, encoding="utf-8", errors="replace")
+    text = res.stdout if res.returncode == 0 else (
+        FACTS_JSON.read_text(encoding="utf-8") if FACTS_JSON.exists() else "{}")
+    try:
+        return json.loads(text).get("storefronts", {})
+    except ValueError:
+        return {}
+
+
+def refuse_shrunken_write(counts):
+    """Exit non-zero, writing nothing, when --write would drop a count the
+    committed file holds for a city still in app/cities.py.
+
+    On 2026-10-07 regen_generated.py ran in a worktree with no data/ junction:
+    every city was skipped, `{"storefronts": {}}` was written and committed,
+    and app/label_competition.py ranked the macro map's labels on empty counts
+    (DECISIONS.md, 2026-10-07, the macro_facts.json write guard). A skipped
+    city is right for the check, which names it; for --write it means the
+    inputs are missing, never that the count should go. A city removed from
+    app/cities.py drops its count without tripping this, since it is no
+    longer compared."""
+    import subprocess
+    data = ROOT / "data"
+    common = subprocess.run(["git", "rev-parse", "--path-format=absolute", "--git-common-dir"],
+                            cwd=ROOT, capture_output=True, text=True).stdout.strip()
+    shared = Path(common).parent / "data" if common else Path("<main checkout>") / "data"
+    junction_hint = (f"Every worktree's data/ is a junction to the shared folder {shared} "
+                     f"(docs/session_roles.md). Create it from this checkout's root with "
+                     f"`cmd /c mklink /J data \"{shared}\"`, or run this where data/ exists.")
+    if not data.exists():
+        sys.exit(f"REFUSED: {data} is missing, so no storefront count can be measured and "
+                 f"{FACTS_JSON.relative_to(ROOT)} would be written empty. {junction_hint}")
+    names = {c["name"] for c in CITIES}
+    committed = committed_counts()
+    lost = sorted(n for n in committed if n in names and n not in counts)
+    if lost:
+        shown = ", ".join(lost[:10]) + (f" and {len(lost) - 10} more" if len(lost) > 10 else "")
+        sys.exit(f"REFUSED: {FACTS_JSON.relative_to(ROOT)} would hold {len(counts)} storefront "
+                 f"counts where the committed file holds {len(committed)}; no processed data "
+                 f"here for {len(lost)} of them ({shown}). Nothing written. Check that data/ is "
+                 f"the junction to the shared folder and that each city's processed file exists. "
+                 f"{junction_hint}")
+
+
 def figures_in(text):
     """Dates, years and percentages a phrase states."""
     return set(re.findall(r"\d{4}-\d{2}-\d{2}|\d{4}-\d{2}|\b(?:19|20)\d{2}\b|\d+(?:\.\d+)?%", text))
@@ -202,8 +254,9 @@ def main():
             counts[name] = n
 
     if args.write:
+        refuse_shrunken_write(counts)
         FACTS_JSON.write_text(json.dumps({"storefronts": counts}, indent=2, ensure_ascii=False,
-                                         sort_keys=True) + "\n", encoding="utf-8")
+                                         sort_keys=True) + "\n", encoding="utf-8", newline="\n")
         print(f"wrote {FACTS_JSON.relative_to(ROOT)}: {len(counts)} cities")
     else:
         stored = json.loads(FACTS_JSON.read_text(encoding="utf-8")).get("storefronts", {}) \
