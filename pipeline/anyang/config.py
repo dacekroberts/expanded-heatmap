@@ -9,11 +9,21 @@ one page each; docs/build_briefs/gyeonggi.md, "The next satellites").
 
 from pathlib import Path
 
+# --- Scope: the city, or Anyang (Regional) ---------------------------------
+#
+# REGIONAL adds Gunpo (6 stations) and Uiwang (1) on the lines the map already
+# draws, the owner's mark of 2026-10-04 (docs/build_briefs/anyang_regional.md;
+# the regional-extension skill). False reproduces the city-alone build byte
+# for byte, which the drift check proved before the switch went on.
+REGIONAL = False
+NAME = "Anyang (Regional)" if REGIONAL else "Anyang"
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
 DATA_RAW = ROOT / "data" / "anyang" / "raw"
-DATA_PROCESSED = ROOT / "data" / "anyang" / "processed"
+# Regional outputs in their own folder: data/ is shared by every worktree.
+DATA_PROCESSED = ROOT / "data" / "anyang" / "processed" / ("regional" if REGIONAL else "")
 OUTPUTS = ROOT / "outputs" / "anyang"
 
 HEATMAP_HTML = OUTPUTS / "heatmap.html"
@@ -32,7 +42,12 @@ RAIL_LINES_JSON = DATA_PROCESSED / "rail_lines.json"
 # Korean identity check, and the city's own files are not a register
 # (docs/build_briefs/gyeonggi.md).
 SEMAS_SIDO = "경기도"
-SEMAS_SIGUNGU = ("안양시",)   # 시군구명 prefix: the city and its two 구 (만안구, 동안구; the brief)
+# The city alone keys on its 시군구명 prefix, as built (the city and its two 구,
+# 만안구 and 동안구). The regional page keys on codes, never names (owner,
+# 2026-10-03): 41171 만안구 and 41173 동안구 pick exactly the prefix's rows,
+# 41410 군포시 and 41430 의왕시 join (the brief, measured 2026-10-06).
+SEMAS_SIGUNGU = None if REGIONAL else ("안양시",)
+SEMAS_SIGUNGU_CODES = ("41171", "41173", "41410", "41430") if REGIONAL else None
 
 # --- Rail ------------------------------------------------------------------
 
@@ -49,6 +64,16 @@ BOUNDARY_RELATION = 2409161
 BOUNDARY_NAME = "안양시"
 # 59 km2 measured 2026-09-29 (the brief).
 BOUNDARY_AREA_KM2 = (55, 63)
+# The regional scope: 안양시 with 군포시 and 의왕시, each relation taken by id and
+# checked by name, from their own query file so the city's cache stays as it
+# is. Ids and areas measured at the regional fetch.
+REGIONAL_BBOX = (37.28, 126.85, 37.47, 127.05)        # S, W, N, E
+REGIONAL_BOUNDARY_OSM_JSON = DATA_RAW / "osm_boundary_regional.json"
+REGIONAL_RELATIONS = {2409161: "안양시"}
+REGIONAL_AREA_KM2 = (0, 10_000)
+# The word station_scope.py reads is "outside".
+OUTSIDE_REASON = ("outside Anyang, Gunpo and Uiwang" if REGIONAL
+                  else "outside Anyang's boundary")
 
 # --- Coordinate reference systems -----------------------------------------
 

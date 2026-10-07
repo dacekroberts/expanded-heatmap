@@ -27,8 +27,8 @@ def main():
 
     render_heatmap(
         output_path=config.HEATMAP_HTML,
-        map_title="Anyang Subway Business Density Heatmap",
-        city_name="Anyang",
+        map_title=f"{config.NAME} Subway Business Density Heatmap",
+        city_name=config.NAME,
         system_name="Seoul Metropolitan Subway",
         stations=pd.read_csv(config.STATIONS_CSV),
         businesses=pd.read_csv(config.BUSINESSES_CLEAN_CSV),
