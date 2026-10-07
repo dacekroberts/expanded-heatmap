@@ -167,7 +167,8 @@ OSM_RAIL_BY_CITY = {
         "Matsuyama", "Toyama", "Kumamoto", "Fukui", "Nagasaki", "Utsunomiya", "Kitakyushu",
         "Sakai", "Hakodate", "Kagoshima", "Okayama", "Kōchi", "Kawasaki", "Yokosuka",
         "Himeji", "Nishinomiya", "Takamatsu", "Toyota", "Yokkaichi", "Ōtsu", "Nara",
-        "Hamamatsu", "Higashiōsaka", "Kurume", "Sasebo", "Shimonoseki")},
+        "Hamamatsu", "Higashiōsaka", "Kurume", "Sasebo", "Shimonoseki",
+        "Toyonaka", "Hirakata", "Suita", "Itami", "Kakogawa", "Amagasaki", "Uji")},
 }
 
 

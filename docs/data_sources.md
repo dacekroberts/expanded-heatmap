@@ -100,7 +100,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
 | South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang, Daejeon, Gwangju, Gimhae |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
-| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki |
+| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki, Toyonaka, Hirakata, Suita, Itami, Kakogawa, Amagasaki, Uji |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional) |
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
@@ -3767,6 +3767,26 @@ of 2026-10-03.)
 - **The repository carries the credit too**, as for London: committed
   `outputs/liverpool/` republishes the derived locations (README's credits).
 - Wording: Manchester's Ordnance Survey notice 85, with the city changed.
+
+**169. Toyonaka City, MHLW and MLIT (Toyonaka) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with the Kansai-1
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-07; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's two BODIK
+  datasets are **CC BY 4.0** under 豊中市オープンデータ利用規約 ２(1); MHLW's
+  open data is **PDL 1.0**, as in Sakai's (104); MLIT's 位置参照情報 and N02
+  (the 2025 edition) are **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only
+  picks stations and is **never drawn** (the Survey Act).
+- **MUST DISPLAY**: the dataset titles, 豊中市, the licence by the name the
+  terms' example uses (クリエイティブ・コモンズ ライセンス表示 4.0 国際) with its
+  link, and that the data was modified (CC BY 4.0 §3(a)(1)(B)); MHLW's 出典
+  line and who processed it (the top page linked only); MLIT's credit lines.
+- **MUST NOT**: imply the city's endorsement (CC BY 4.0 §2(a)(6)); claim the
+  ministry's opt-in list is complete; use MHLW's logo.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py toyonaka` with its Japan pass, run
+  2026-10-07; the verdict is in `docs/decisions_drafts/worktree-japan-kansai-1.md`
+  ("Toyonaka built", 2026-10-07).<!-- /internal -->
 
 
 ## Gaps

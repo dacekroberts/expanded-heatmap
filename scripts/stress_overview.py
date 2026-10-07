@@ -80,6 +80,9 @@ BUILT_PREF = {
     "Matsuyama": "38", "Kōchi": "39", "Takamatsu": "37", "Fukuoka": "40",
     "Kitakyushu": "40", "Kurume": "40", "Kumamoto": "43", "Nagasaki": "42",
     "Sasebo": "42", "Kagoshima": "46",
+    # Kansai-1, 2026-10-07
+    "Toyonaka": "27", "Hirakata": "27", "Suita": "27", "Itami": "28", "Kakogawa": "28",
+    "Amagasaki": "28", "Uji": "26",
 }
 SCENARIOS = ("now", "six", "eight", "eight_osaka", "pref")
 
