@@ -252,22 +252,22 @@
  "osaka": {
   "in_ring": 71690,
   "all": 73011,
-  "map_blob": "b449e6d0c2cdd0e6fa79d8e2b52d4c498ca45790"
+  "map_blob": "565b7b302490c7caa5490e0a728890e5b9e2bcab"
  },
  "sapporo": {
   "in_ring": 23009,
   "all": 28687,
-  "map_blob": "22ac798f3b3aa504d22260186832c3f228005543"
+  "map_blob": "4c0e01924070a77694b64e20f6420fbb512594b3"
  },
  "fukuoka": {
   "in_ring": 24603,
   "all": 29938,
-  "map_blob": "bdc99461a469610d0de32de2eb111d05901e1366"
+  "map_blob": "17e89aa09dec13d48baddeae61984335a46f43a5"
  },
  "kyoto": {
   "in_ring": 27990,
   "all": 32370,
-  "map_blob": "725acf89abbd1ed61b9f1cc44c344ca6427549e3"
+  "map_blob": "ff05606301911017fb0648d2e41a46d6f41c4f58"
  },
  "tokyo": {
   "in_ring": 59829,
@@ -677,7 +677,7 @@
  "utsunomiya": {
   "in_ring": 3786,
   "all": 8045,
-  "map_blob": "cedd16466f2be4a06c9991811caec435779dc373"
+  "map_blob": "7dafcd5c76afd0a66c8f3fbf23bffa2eabaafe70"
  },
  "kitakyushu": {
   "in_ring": 10576,
@@ -752,7 +752,7 @@
  "yokkaichi": {
   "in_ring": 3174,
   "all": 4290,
-  "map_blob": "b77fb241d6683d78b693b611c3ad4d610cbe73df"
+  "map_blob": "8d0784d90f5bb1859bf724b83df4f0182bb53dbc"
  },
  "otsu": {
   "in_ring": 3368,
