@@ -4,6 +4,13 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-07 - Kansai-1's batch: six cities ready, Suita parked on call 205; call 151 put again (owner)
+
+- **Kansai-1 reported its batch** (branch worktree-japan-kansai-1, tip 8c260435, nothing pushed, zero drift, 92 of 92 brief checks): Toyonaka, Hirakata, Itami, Kakogawa, Amagasaki and Uji ready on pages 222, 223 and 225 to 228 and notices 169, 170 and 172 to 175; Suita (page 224, notice 171) parked.
+- **Call 205, the name rule across premises (Suita):** the city's old-law list flags a citywide street stall whose trade name is its operator's own name, and MHLW shows the same trade name at a fixed address, so the privacy check prints 1. Step 2 spreads the rule only within one block. Recommended a japan_step2 switch, on for new cities, withholding every row whose trade-name key matches a flagged row in the same city; it moves nothing among the other six. Tradeoff: a common trade name that is someone's own name elsewhere is withheld citywide. Suita cannot publish without it.
+- **Call 151 put again:** Toyonaka's 14 sanitation month files (2026-01 to 2026-08) were never answered, so Kansai-1 built the registers to about 2025-12-31 beside the food list's 2026-08-31, two dates on the page (Fukuoka's precedent). Recommendation unchanged: approve them (14 BODIK calls). Calls 152 and 153 (Fukushima) are Regional-1's and it has not parked them.
+- **Precedents Kansai-1 applied, flagged for review time:** Hyōgo's food XLSX on Ōtsu's precedent; Amagasaki's and Suita's undefined harm and defamation bars raised as Taoyuan's were; Hirakata's credit without hyperlinks; Uji's halved rings (505 m median gap); 木幡 as Kohata (Kyoto's 西院 tie); 大阪空港 as Osaka-kuko (Fukuoka's 福岡空港). About fifteen untemplated sentences wait as proposals in its drafts file.
+
 ### 2026-10-07 - East-1's batch ready: twelve cities, calls 199 to 204 put to the owner
 
 - **East-1 reported its batch done** (branch worktree-japan-east-1, nothing pushed, zero drift): Higashiyamato, Nishitōkyō, Tama, Higashimurayama, Ageo (Regional), Sōka, Tokorozawa, Kasukabe, Fuchū (Tokyo), Chōfu, Tachikawa and Hino, on pages 210 to 221 and notices 157 to 168, the whole block used. Privacy passes are 0 for every city. check_all fails only the master list's built counts (staging's, after landing) and check_macro_labels on the new cities (Cleanup's, call 198).
