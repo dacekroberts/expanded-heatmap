@@ -140,3 +140,9 @@ def legend_label(bucket):
 
 # The layer control names the bucket the way the legend does.
 layer_label = legend_label
+
+
+# The Retail bucket here is shops and services together, so its pins are
+# violet, not retail blue (owner, 2026-10-07: one pin colour per meaning;
+# pipeline/taxonomies MEANING_COLOURS).
+PIN_MEANINGS = {"Retail": "Shops and services"}

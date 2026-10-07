@@ -36,6 +36,66 @@ CATEGORY_BUCKETS = [
     ("Personal services", "#1baf7a"),
 ]
 
+# ONE PIN COLOUR PER MEANING (owner, 2026-10-07: "one fixed color per distinct
+# meaning"). A bucket keeps its name everywhere it is counted; only its PIN
+# COLOUR follows what the bucket holds in a given taxonomy. Until then blue meant
+# general retail on 100 maps, food shops only on 49 and shops and services on 6
+# (of 170; Thessaloniki, built since, is a 50th food-shop map).
+# A taxonomy names its meaning in PIN_MEANINGS ({"Retail": "Food shops"}), and
+# pin_colours() swaps the colour in. Measured with CIE76 against the heat ramp
+# and both basemaps, CIEDE2000 under simulated colour-vision deficiency (the
+# colour agent's evaluate.py, re-run 2026-10-07 on 176 maps; DECISIONS, "Four
+# ideas assessed before the large review"):
+MEANING_COLOURS = {
+    # OLIVE, 50 maps (the Japanese and UK food registers, Thessaloniki,
+    # Antwerp, Ghent, Stockholm, Goteborg, Bucharest, Hong Kong, Minneapolis,
+    # Pittsburgh, Kitchener-Waterloo). Heat ramp 46.7 from its nearest stop;
+    # basemap 70.0 light, 67.3 dark. Nearest pin Personal services at 52.0
+    # (Retail 112.0, Food service 93.9); weakest under CVD Food service,
+    # deuteranopia 14.7. Two lines sit under the hard floor in cities that
+    # never draw olive (Paris #6E6E00 at 6.6, Ostrava #688008 at 8.1), which
+    # is why check_line_colours() reads only the colours a map draws; three
+    # that did (Hiroshima 2, Osaka 1) were darkened (their configs record it).
+    "Food shops": "#737a00",
+    # VIOLET, 6 maps (Amsterdam, Rotterdam, Den Haag, Riga, Liepaja,
+    # Daugavpils: building or zoning registers that cannot split shops from
+    # services). Heat ramp 96.2; basemap 82.5 light, 75.7 dark; Food service,
+    # the only other pin those maps draw, 63.9. Nearest line Zurich's #8A4FA8
+    # at 12.5 (Zurich draws no violet). AGAINST RETAIL BLUE IT FAILS: CIE76
+    # 29.9 but deuteranopia 3.1 and protanopia 7.7, so the renderer refuses a
+    # map that draws both (map_common.REFUSED_TOGETHER). The backup, should a
+    # source ever separate shops from services on such a map: teal #37786e
+    # site-wide for Shops and services, with a dark outline ring on that layer
+    # (MEANING_OUTLINES). Its weakest pair is Retail under tritanopia, 11.0;
+    # Personal services 35.9 CIE76.
+    "Shops and services": "#7e57c2",
+}
+
+# {meaning: (outline colour, outline weight)} for a meaning drawn with a ring
+# around its pins. Empty: the teal backup above is the only planned use, and a
+# meaning absent here renders byte for byte as before.
+MEANING_OUTLINES = {}
+
+
+def pin_colours(taxonomy):
+    """[(bucket, pin colour)] in CATEGORY_BUCKETS order for one taxonomy
+    module: the bucket's own colour, or MEANING_COLOURS[meaning] where the
+    module's PIN_MEANINGS names one."""
+    meanings = getattr(taxonomy, "PIN_MEANINGS", {})
+    unknown = sorted(set(meanings.values()) - set(MEANING_COLOURS))
+    if unknown:
+        raise ValueError(
+            f"{taxonomy.__name__}: PIN_MEANINGS names {unknown}, which have no "
+            f"colour in MEANING_COLOURS ({sorted(MEANING_COLOURS)}). A new meaning "
+            "needs its own measured colour there, never a reused one.")
+    return [(b, MEANING_COLOURS[meanings[b]] if b in meanings else c) for b, c in CATEGORY_BUCKETS]
+
+
+def pin_outline(taxonomy, bucket):
+    """(outline colour, weight) for a bucket whose meaning is drawn with a
+    ring (MEANING_OUTLINES), else None."""
+    return MEANING_OUTLINES.get(getattr(taxonomy, "PIN_MEANINGS", {}).get(bucket))
+
 # Registered lazily (import the taxonomy module by name via this dict) so
 # adding a new taxonomy - a new US city's own license field, or a non-US
 # system like NACE (czech_nace2025) - never requires touching this file's imports.
@@ -57,6 +117,9 @@ CATEGORY_BUCKETS = [
 #   layer_label(bucket: str) -> str
 #       the bucket's name in the layer control, when a taxonomy renames it
 #       (Amsterdam: "Shops and services"). Defaults to the bucket name.
+#   PIN_MEANINGS: {bucket: meaning}
+#       a bucket whose pins mean something other than the bucket's own name,
+#       drawn in MEANING_COLOURS[meaning] (Japan: {"Retail": "Food shops"}).
 TAXONOMY_MODULES = {
     "naics": "pipeline.taxonomies.naics",
     # Montréal: naics.py plus one exemption - its street survey's caterers

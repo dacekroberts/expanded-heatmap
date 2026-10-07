@@ -28,7 +28,8 @@ from folium.plugins import HeatMap, FastMarkerCluster
 from folium.template import Template
 
 from pipeline.linecolour import check_line_colours, dark_label_colours, label_colours
-from pipeline.taxonomies import CATEGORY_BUCKETS, load_taxonomy_module
+from pipeline.taxonomies import (CATEGORY_BUCKETS, MEANING_COLOURS, load_taxonomy_module,
+                                 pin_colours, pin_outline)
 from pipeline.theme import AMBIENT_THEME_JS, DARK, FONT_VAR, LIGHT, css_vars, font_stack, rgba
 
 # Decimal places BUSINESS coordinates are rounded to before reaching the HTML.
@@ -2713,10 +2714,13 @@ def _esc(value):
 
 
 def add_pin_layer(m, rows, group_name, color, tooltip_field_label,
-                  value_column, show=True, display=None, animate=False):
+                  value_column, show=True, display=None, animate=False, outline=None):
     """Add one toggleable, clustered, coloured pin layer for a category bucket.
     Return the number of points (0 = nothing added). `animate`: see
-    render_heatmap's `animate_clusters`."""
+    render_heatmap's `animate_clusters`. `outline`: (colour, weight) for a ring
+    around each pin (pipeline/taxonomies.MEANING_OUTLINES); None draws the
+    pin's edge in its fill colour at weight 1, as every map did before."""
+    stroke, weight = outline or (color, 1)
     # Station name, ring band AND the classification value each repeat once per
     # pin, so each is emitted ONCE in a lookup table and referenced by integer
     # index. Nothing is lost: the callback resolves them before display.
@@ -2772,8 +2776,8 @@ def add_pin_layer(m, rows, group_name, color, tooltip_field_label,
                 // group no longer reaches the map, where Leaflet.markercluster
                 // unspiderfies on any click (desktop; owner, 2026-10-04).
                 var marker = L.circleMarker(new L.LatLng(row[0], row[1]), {{
-                    radius: 5, color: '{color}', fillColor: '{color}',
-                    fillOpacity: 0.85, weight: 1, bubblingMouseEvents: false
+                    radius: 5, color: '{stroke}', fillColor: '{color}',
+                    fillOpacity: 0.85, weight: {weight}, bubblingMouseEvents: false
                 }});
                 var html = '<b>' + row[2] + '</b><br>' +
                     '{tooltip_field_label}: ' + CATEGORIES[row[3]] + '<br>' +
@@ -2964,6 +2968,28 @@ def fingerprint_mark(ident):
     return f"ehm:v1:{ident}:{check}" if check else None
 
 
+# Pin colours one map must never draw together. Shops and services violet sits
+# CIEDE2000 3.1 from Retail blue under deuteranopia and 7.7 under protanopia
+# (pipeline/taxonomies.MEANING_COLOURS), so the two only ever appear on
+# different maps. The pair is measured, not a style preference.
+REFUSED_TOGETHER = [(MEANING_COLOURS["Shops and services"], dict(CATEGORY_BUCKETS)["Retail"])]
+
+
+def _refuse_colours_together(present, city_name):
+    """Raise when a map draws a REFUSED_TOGETHER pair, naming the backup."""
+    drawn = {c.lower(): b for b, c in present}
+    for a, b in REFUSED_TOGETHER:
+        if a.lower() in drawn and b.lower() in drawn:
+            raise ValueError(
+                f"{city_name}: draws {drawn[a.lower()]} ({a}) and {drawn[b.lower()]} ({b}) "
+                "together, which readers with red-green colour blindness cannot tell "
+                "apart (CIEDE2000 3.1 under deuteranopia). The recorded backup: Shops "
+                "and services in teal #37786e SITE-WIDE (all six maps, not this one "
+                "alone) plus a dark outline ring on that layer "
+                "(pipeline/taxonomies.MEANING_OUTLINES). Its weakest pair is Retail "
+                "under tritanopia, 11.0. Bring the switch to the owner first.")
+
+
 def render_heatmap(*, output_path, map_title, city_name, system_name,
                    stations, businesses, taxonomy_system, lines,
                    crs_geographic, crs_projected, ring_edges_meters, ring_labels,
@@ -3023,19 +3049,7 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     rule is a measured lag threshold, and PLAN.md holds that open item.
     """
     taxonomy = load_taxonomy_module(taxonomy_system)
-    bucket_colors = dict(CATEGORY_BUCKETS)
-
-    # A line the reader cannot tell from the pins drawn on top of it is not a
-    # drawn line. Measured here, at render, because Calgary's Blue Line shipped
-    # Delta-E 3.3 from Retail blue (the same colour) and went unnoticed until
-    # another city's build first ran the check. Raises only in
-    # genuine-duplicate range; agency colours below the preferred figure are
-    # reported every render and kept, per the owner's branding decision. See
-    # pipeline/linecolour.py for why there are two thresholds.
     names = legend_names or {}
-    check_line_colours(
-        {names.get(key, label): color for key, (_coords, color, label, _end) in lines.items()},
-        bucket_colors, city=city_name)
 
     businesses = businesses.dropna(subset=["latitude", "longitude"]).copy()
     businesses = drop_contact_details(businesses)
@@ -3185,7 +3199,9 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     # Not legend_label() itself: NAICS's appends its code prefixes.
     layer_label = getattr(taxonomy, "layer_label", lambda bucket: bucket)
     present = []
-    for name, color in CATEGORY_BUCKETS:
+    # The colour follows what the bucket MEANS in this taxonomy (food shops,
+    # shops and services), pipeline/taxonomies.MEANING_COLOURS.
+    for name, color in pin_colours(taxonomy):
         rows = in_rings[in_rings["_bucket"] == name]
         # pins=False draws no business dots at all; the legend then lists only
         # lines. Added for "mobile mode" (2026-09-25), which was retired
@@ -3195,8 +3211,22 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
         if pins and add_pin_layer(m, rows, layer_label(name), color, taxonomy.FIELD_LABEL,
                          taxonomy.VALUE_COLUMN,
                          display=getattr(taxonomy, "display_value", None),
-                         animate=animate_clusters):
+                         animate=animate_clusters, outline=pin_outline(taxonomy, name)):
             present.append((name, color))
+    _refuse_colours_together(present, city_name)
+
+    # A line the reader cannot tell from the pins drawn on top of it is not a
+    # drawn line. Measured here, at render, because Calgary's Blue Line shipped
+    # Delta-E 3.3 from Retail blue (the same colour) and went unnoticed until
+    # another city's build first ran the check. Raises only in
+    # genuine-duplicate range; agency colours below the preferred figure are
+    # reported every render and kept, per the owner's branding decision. See
+    # pipeline/linecolour.py for why there are two thresholds. Only the pin
+    # colours this map DRAWS count: Paris's #6E6E00 sits 6.6 from Food shops
+    # olive, which Paris never shows (2026-10-07).
+    check_line_colours(
+        {names.get(key, label): color for key, (_coords, color, label, _end) in lines.items()},
+        {layer_label(b): c for b, c in present}, city=city_name)
 
     m.get_root().html.add_child(folium.Element(
         build_legend(present, taxonomy.legend_label, lines, no_data_stations=bool(no_data.any()),

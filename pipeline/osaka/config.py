@@ -174,6 +174,13 @@ COLLAPSE_MAX_SPREAD_M = 400
 # room: without the hue pull the best pairwise floor for 34 colours is ~19.7,
 # so several lines left their operator's hue (the Chūō Line olive, JR Kyoto
 # slate). No exception below 45 against the pins; closest line pairs 18.0.
+#
+# FOOD SHOPS OLIVE (#737a00, 2026-10-07) is a fourth pin, after this search.
+# The Uemachi Line's #8A8A24 sat 8.0 from it, under the hard floor; it moved
+# to #9C9830, the nearest colour clearing olive by 12 under rules (a) to (c)
+# (moved 5.9, olive 13.3, nearest line Nankai Koya 18.1). Twelve of 34 lines
+# sit below 45 from olive (the Hankai Line nearest, 12.6), a recorded trade:
+# rule (b) holds against the three pins it was searched for.
 _JR, _M = "西日本旅客鉄道", "大阪市高速電気軌道"
 LINES = {
     # Osaka Metro (大阪市高速電気軌道)
@@ -226,7 +233,7 @@ LINES = {
            "colour": "#7B5D18"},
     # Hankai Tramway (阪堺電気軌道)
     "RH": {"n02": [("阪堺電気軌道", "阪堺線")], "name": "Hankai Line", "name_ja": "阪堺線", "colour": "#516C00"},
-    "RU": {"n02": [("阪堺電気軌道", "上町線")], "name": "Uemachi Line", "name_ja": "上町線", "colour": "#8A8A24"},
+    "RU": {"n02": [("阪堺電気軌道", "上町線")], "name": "Uemachi Line", "name_ja": "上町線", "colour": "#9C9830"},
 }
 # The operator as a station suffix, used only where two stations share an
 # English name (Kobe's Mikage (Hankyu) / Mikage (Hanshin)).

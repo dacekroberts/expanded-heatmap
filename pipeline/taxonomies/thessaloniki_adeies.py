@@ -224,6 +224,12 @@ def legend_label(bucket: str) -> str:
     return {"Retail": "Food retail (no general retail is published)"}.get(bucket, bucket)
 
 
+# The Retail bucket here is food shops only, so its pins are olive, not retail
+# blue (owner, 2026-10-07: one pin colour per meaning; pipeline/taxonomies
+# MEANING_COLOURS).
+PIN_MEANINGS = {"Retail": "Food shops"}
+
+
 def layer_label(bucket: str) -> str:
     return {"Retail": "Food shops"}.get(bucket, bucket)
 

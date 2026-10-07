@@ -62,6 +62,12 @@ def legend_label(bucket: str) -> str:
 layer_label = legend_label
 
 
+# The Retail bucket here is food shops only, so its pins are olive, not retail
+# blue (owner, 2026-10-07: one pin colour per meaning; pipeline/taxonomies
+# MEANING_COLOURS).
+PIN_MEANINGS = {"Retail": "Food shops"}
+
+
 def classify(row: dict):
     """Taxonomy-module interface (see pipeline/taxonomies/__init__.py)."""
     code = str(row.get("licence_code") or "").strip().upper()
