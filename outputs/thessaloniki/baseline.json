@@ -1,0 +1,17 @@
+{
+  "bucket_food_service": 3682,
+  "bucket_personal_services": 1020,
+  "bucket_retail": 2430,
+  "catchall_rows": 15,
+  "lines_drawn": 1,
+  "outside_boundary": 5,
+  "premises": 7132,
+  "relations": 4,
+  "rows_read": 8103,
+  "stations_all": 18,
+  "stations_kept": 13,
+  "stations_outside": 5,
+  "stop_nodes": 36,
+  "storefront_rows": 7137,
+  "track_km_in_city": "9.74"
+}
