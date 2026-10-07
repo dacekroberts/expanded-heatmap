@@ -27,6 +27,9 @@ notices 176-186.
    shops layer) needs no call: Iwaki's call 150 left 164 addressed retail
    rows out as too thin, and Tsu's are 159 (156 pins), so they stay out and
    MHLW's file stays the control.
+   **Resolved 2026-10-07, the same day:** Staging's licence read found Mie's
+   lists PERMITTED WITH CONDITIONS (CC BY 4.0 by 第１条; master's staging
+   drafts, "Licence reads for the Japan builds"). Tsu is built after it.
 
 ## Proposals for review time (page sentences no template covers)
 
