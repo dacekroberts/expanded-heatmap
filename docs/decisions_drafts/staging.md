@@ -43,6 +43,14 @@ The A and B briefs left 23 reads pending. Regional-1's six run from staging (Tsu
   - **Hyōgo's food permit and notification XLSX:** AMBIGUOUS. The catalogue lists only the HTML page (CC BY), not the files. Kansai-1 applies Ōtsu's precedent (owner, 2026-10-02) and flags it for review.
   - **Hyōgo's credit** takes the modified-work form 「この地図は、以下の著作物を改変して利用しています。[タイトル]、兵庫県」. No cost clause.
   - **Amagasaki:** PERMITTED WITH CONDITIONS. CC BY 4.0 on each op_data page (/op_data/1000922/1001025 to 1001028) and 尼崎市オープンデータ利用規約 §2. §3 requires the source and a modification statement; §6 bars presenting the edited data as the city's. §6 and §7 are fault-based cost clauses (the 2026-09-24 class); the use report (§5) is voluntary. The brief's page 1023309 is only an encoding note.
+  - **Hirakata:** PERMITTED WITH CONDITIONS under CC BY 2.1 JP (the 利用条件 on pages 0000023479 and 0000025284).
+    - Must display the prescribed adaptation form 「この[作品名等]は以下の著作物を改変して利用しています。[データのタイトル]、枚方市、クリエイティブ・コモンズ・ライセンス 表示 2.1」 with the licence URI.
+    - The hold-harmless clause is fault-based. The credit must be removed if the city asks (CC 2.1 JP 第5条).
+    - The site's linking policy asks for an enquiry before deep links, so Kansai-1 cites titles without hyperlinking the city's pages (flagged for review).
+  - **Suita:** PERMITTED WITH CONDITIONS under CC BY 4.0 (吹田市オープンデータ利用規約, 2019-03-27, accepted by use).
+    - Must display (2(3), prescribed): 「この地図は以下の著作物を改変して利用しています。【タイトル】、吹田市、クリエイティブ・コモンズ・ライセンス表示 4.0（URL）」.
+    - Must not (§5): present edited data as the city's; use the logo.
+    - Fault-based cost clauses. Links to data pages need no contact (§3).
 
 ### 2026-10-07 - Call 197 built on Cleanup's europe-split branch; the macro map's region views are Cleanup's (owner, call 198)
 
