@@ -103,6 +103,18 @@ notices 176-186.
   complete." (Sasebo's sentence with the city's half; the terms' 4(1)). The
   credit's titles were read from the city's catalogue, since staging's
   record names none: check them against the licence-read report.
+- **Tsu** (page 232): "From Mie Prefecture's list of food-business permits
+  and its registers of barbers and beauty salons (all as of August 31, 2026),
+  which cover the prefecture outside Yokkaichi; the premises addressed in Tsu
+  are shown." (the template's source sentence for a prefecture's lists), and
+  "The JR Meisho Line is infrequent: about 8 trains a day each way stop at its
+  12 stations in the city." (call 86, in Fukushima's form; the figure is from
+  Japanese Wikipedia's account of the timetable, since JR Central's pages load
+  by script: the one soft fact on the page). Two template sentences take the
+  prefecture for the city: Kitakyushu's laundry sentence and the notification
+  sentence. In its What Is Excluded section: the Hisai (久居) clause of
+  Counted, and the Meisho Line's sentence. The notice (179) follows staging's
+  credit form and adds "No list is claimed to be complete or current".
 
 ## Shared-code findings for review time (not changed here)
 
@@ -127,6 +139,67 @@ notices 176-186.
   bytes first in shared code would cover the next city.
 
 ## Entries
+
+### 2026-10-07 - Tsu built, Mie Prefecture's lists cut to the city by address
+
+- **Tsu built (page 232, notice 179), Yokkaichi's shape with Uji's one
+  difference: 3,234 storefronts (Food service 1,760, Food shops 559, Personal
+  services 915) around 33 stations on 5 lines, 45.5% of them in a ring
+  (1,472).** Built after staging's licence read the same day (PERMITTED WITH
+  CONDITIONS, CC BY 4.0 by the 三重県オープンデータ利用規約 第１条), which
+  unparked it (parked call 1). Sources: Mie Prefecture's three BODIK lists as
+  of 2026-08-31 (food 18,680 rows, barbers 1,523, beauty 3,853; the
+  prefecture except Yokkaichi). No laundry list exists: a disclosed gap. Built
+  by a subagent of the Regional-1 lead, integrated by the lead.
+- **The cut by address** (`config.source_rows`): an address beginning 津市
+  once the prefecture is dropped, or 久居; a row naming 津市 elsewhere stops
+  the build (none). Food 2,924 and barbers 251, the brief exactly; beauty 705,
+  the brief's 701 plus 4 rows written under Hisai City (三重県久居市明神町,
+  三重県久居中町 ...), merged wholly into Tsu in 2006, whose towns MLIT keys as
+  Tsu's 久居…町: read as Tsu's on Matsue's 八雲村 precedent (an old place name
+  read as the current one). The shared `other_muni` rule alone is not the
+  cut: it would keep the prefecture's 196 unaddressed food rows, 10 register
+  rows addressed 三重県一円 and 2 rows under old district names (多気郡,
+  志摩郡). MHLW's file is a control, read by no step.
+- **The brief's open call 1 needs no call:** MHLW's 159 Tsu retail
+  notifications stay out as too thin, as Iwaki's 164 did (call 150).
+- **Step 2:** 3,880 Tsu rows; no vehicle, stall or 一円 row; combined 業態
+  cells read as their restaurant form 423 (call 158). Out by rule 440: 144
+  manufacturing and other non-counter types, 119 canteens, 78 caterers, 66
+  snack bars and cabarets, 33 inside accommodation, the brief's figures
+  exactly. Storefront rows 3,440: Food service 1,806 and Retail 678 (the
+  brief exactly), Personal services 956 (the brief's 952 plus the 4 Hisai
+  rows). The join: block 2,708, town-chōme 642, 小字 centre 25, unplaced 65
+  (1.9%); the foundation's 小字 rules lifted the brief's figures. 141 repeat
+  permits shown once. On the map: 80.3% block, 18.9% town-chōme, 0.7% 小字.
+  The brief's digit-space-digit pre-step (9 + 2 rows) is not written, being
+  shared code for a few rows. One Hisai row (久居市明神町) may stay coarse:
+  `"town_aliases": {"久居市": "久居"}` in its `japan.CITIES` entry would place
+  it, for review time.
+- The 菓子 / そうざい factory share: 27 of 449 (6.0%), kept (owner,
+  2026-09-24).
+- **Economic Census control: 2.02** (1,760 Food service pins against 872
+  飲食店 establishments in 24201), above the built cities' 1.56-1.92
+  (Yokkaichi 1.79). The catch-all form 飲食店営業（その他） holds 673 of Tsu's
+  1,815 restaurant and cafe rows (37%, against Yokkaichi's 17%): counters the
+  census files under a shop's main trade, plus five years of openings since
+  2021; closures cannot be read (no status or expiry column). No page
+  sentence proposed.
+- **Privacy verdict: publish.** `check_personal_exposure.py tsu`: the Japan
+  pass prints 0. One beauty row's trade name is its operator's own name; it
+  is not placed, so no pin is withheld.
+- **Rail:** N02-25; 33 stations: Kintetsu Nagoya 10 of 44, Kintetsu Osaka 5
+  of 49, JR Kisei 4 of 41, JR Meisho 12 of 15, Ise Railway 4 of 10 (津 one
+  group on three operators, spread 45 m). Median nearest-station gap 1,432 m:
+  standard rings. 9 excluded: 鈴鹿市 5, 亀山市 2, 伊賀市 1, 松阪市 1. No line
+  wholly inside, so no gate 3. English names: OSM's 67 objects, 1 cited
+  override (伊勢大井 Ise-Oi). 川合高岡 and 一志, 179 m apart, stay separate.
+  Colours from `line_colour_search.py` (the Ise Railway's blue goes purple,
+  as in Yokkaichi). The JR Meisho Line, about 8 trains a day each way, drawn
+  and named (calls 46 and 86).
+- **Resource URLs** use the package name, since the brief truncates the
+  package ids and no BODIK call was made; CKAN resolves names as ids. A
+  future re-fetch should confirm one.
 
 ### 2026-10-07 - Ichinomiya built, the March food list kept whole with the months since, and the registers with their 2026 months
 

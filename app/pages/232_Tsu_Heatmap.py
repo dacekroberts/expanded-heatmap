@@ -43,25 +43,54 @@ else:
 # replaces this with its own caption of the sources' dates and credits.
 render_data_age("Tsu")
 
-# TODO: replace every TODO bullet with prose true for this city, as short
-# bullets under bold headings (app/pages/43_Seoul_Heatmap.py is the model):
-# the lines by name, what is not drawn, the area and the stations left out, the
-# source and its limitations. Detail a reference page carries stays there.
+# From the japan-city skill's template, Kitakyushu's laundry sentence and
+# Fukushima's call-86 sentence (approved or pre-approved wording, 2026-09-30);
+# the sentences no template covers are proposals in
+# docs/decisions_drafts/worktree-japan-regional-1.md: the source bullet (a
+# prefecture's lists cut to the city by address) and the Meisho Line's
+# frequency. The as-of date is the lists' own (config.SOURCE_AS_OF); the ring
+# share, 45.5%, is step 3's.
 st.markdown(
     """
 **The lines**
 
-- TODO: the lines drawn, by name (each is labeled on the map and in the legend).
-- TODO: what is not drawn, and why.
-- TODO: the area covered; stations left out are listed below.
+- Five lines are drawn, each labeled on the map and in the legend: Kintetsu's Nagoya and Osaka
+  lines, JR Central's Kisei and Meisho lines, and the Ise Railway's Ise Line.
+- Lines and stations come from MLIT's national railway data (国土数値情報); station names in
+  English are from OpenStreetMap. Line colors are this project's own, not the operators'.
+- Only stations inside Tsu City get rings, because the business data covers the city alone:
+  lines running on to Suzuka, Kameyama, Matsusaka and Iga are cut at the city line.
+  The stations left out are listed below.
+- The JR Meisho Line is infrequent: about 8 trains a day each way stop at its 12 stations in
+  the city.
 
 **The businesses**
 
-- TODO: the data source, and any category it is missing.
+- From Mie Prefecture's list of food-business permits and its registers of barbers and beauty
+  salons (all as of August 31, 2026), which cover the prefecture outside Yokkaichi; the premises
+  addressed in Tsu are shown.
+- The prefecture publishes no list of laundries, so laundries are not on this map.
+- Japan has no general business license, so shops other than food shops (clothing, electronics,
+  pharmacies) do not appear: the Food shops layer is food retail only (bakeries and confectioners,
+  delis, butchers and fishmongers).
+- Food businesses that only notify the prefecture rather than hold a permit, such as many
+  convenience stores and greengrocers, are not in the list.
+- The lists may include premises that have closed, so a dot means a permit on file, not a
+  business open today.
+
+**Reading the map**
+
+- The lists give an address but no location. Each address is matched to MLIT's address reference
+  data, which places most at their street block; where only the district can be found, the dot
+  sits at the district's center.
+- Where a business's trade name is its operator's own name, the dot shows its permit type
+  instead.
+- Names and permit types are shown in Japanese, as the prefecture records them.
+- **About 46% of storefronts sit within a ring.**
 """
 )
 
-render_map_help("three business categories (Retail, Food service and Personal services)")
+render_map_help("three business categories (Food shops, Food service and Personal services)")
 render_excluded_stations("Tsu")
 render_country_links("Tsu")
 

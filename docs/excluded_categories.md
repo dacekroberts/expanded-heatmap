@@ -4571,6 +4571,44 @@ line.
   (Ginan and Kasamatsu).
 - The Shinkansen is not drawn.
 
+### Tsu - Mie Prefecture's food-permit list and its barber and beauty registers, cut to Tsu by address and joined to MLIT's address blocks
+
+**Left out**
+- Laundries: the prefecture publishes no list of them.
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, which notify rather than hold a permit.
+- Food trucks, vending machines, stalls and temporary businesses: the
+  prefecture's list does not include them.
+- 144 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 119 school, hospital and staff canteens, 33 premises inside hotels and inns,
+  78 caterers (仕出し) and 66 snack bars and cabarets.
+
+**Counted** - the prefecture's food permits and its barber and beauty registers
+as of August 31, 2026, which cover Mie outside Yokkaichi: the rows whose
+address begins with Tsu (津市), or with Hisai (久居), the city merged into Tsu
+in 2006 - 2,924 food permits, 251 barbers and 705 beauty salons. 27 of the 449
+bakery, confectioner and deli rows (6.0%) have a trade name that reads as a
+factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 141 repeat permits are shown once.
+
+**Not placed** - 65 rows (1.9%): 26 restaurants, 3 food shops and 36 barbers
+and beauty salons, whose addresses MLIT's files do not hold. Another 612 sit at
+their town's center (many in the rural towns of the 2006 merger, which MLIT's
+block file does not cover), and 24 at the center of their 小字.
+
+**Names not shown** - none on the map. One beauty salon's trade name is its
+operator's own name; its address is among those not placed.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 9 stations beyond it: 5 in Suzuka, 2 in Kameyama, and 1 each in
+  Matsusaka and Iga.
+- No Shinkansen runs here.
+- The JR Meisho Line runs about 8 trains a day each way inside the city; it is
+  drawn (owner, 2026-10-06).
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering
