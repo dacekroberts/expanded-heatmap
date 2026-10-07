@@ -486,6 +486,18 @@ def run(config, write=True):
     df["name_is_operator"] = df["name_is_operator"] | prem.isin(flagged)
     print(f"  name rule by premises: {int(spread.sum())} more row(s) share a flagged row's block and trade name")
     emit("name_rule_spread_rows", int(spread.sum()))
+    if "name_city" in rules:
+        # ACROSS PREMISES (owner, call 205, 2026-10-07): a trade name the rule
+        # flags anywhere in the city is withheld everywhere in it. A citywide
+        # stall (一円) has no block, so the spread above cannot carry its flag
+        # to a fixed premises of the same name (Suita, 1 pin). The privacy
+        # check matches trade-name keys city-wide the same way.
+        keys = set(df.loc[df["name_is_operator"], "name"].map(jr._name_key)) - {""}
+        across = df["name"].map(jr._name_key).isin(keys) & ~df["name_is_operator"]
+        df["name_is_operator"] = df["name_is_operator"] | across
+        print(f"  name rule across premises (call 205): {int(across.sum())} more row(s) share a flagged trade name")
+        if across.any():
+            emit("name_rule_city_rows", int(across.sum()))
     official_shares(config, df, write)
     df = set_aside(config, df, rules)
     # MHLW's open data keeps closed premises, marked (Fukuoka's second source)

@@ -20,12 +20,13 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**49 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**50 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-07**
 
 - [Europe splits West and East with Greece east, Germany and Benelux get views, and every country's top city is labelled first (owner, calls 194, 195 and 197; branch europe-split, held for review time)](#2026-10-07---europe-splits-west-and-east-with-greece-east-germany-and-benelux-get-views-and-every-countrys-top-city-is-labelled-first-owner-calls-194-195-and-197-branch-europe-split-held-for-review-time)
 - [Japan's macro-map views: the eight regions with Osaka, Tokyo, Saitama, Chiba and Hyogo as prefecture views; and a city named in a wider view is named in every narrower one (owner, calls 197 and 198; branch japan-regions, held for review time)](#2026-10-07---japans-macro-map-views-the-eight-regions-with-osaka-tokyo-saitama-chiba-and-hyogo-as-prefecture-views-and-a-city-named-in-a-wider-view-is-named-in-every-narrower-one-owner-calls-197-and-198-branch-japan-regions-held-for-review-time)
+- [Call 209: the Japanese name rule crosses premises on six live maps, 13 operators' own names withheld (owner, privacy repair)](#2026-10-07---call-209-the-japanese-name-rule-crosses-premises-on-six-live-maps-13-operators-own-names-withheld-owner-privacy-repair)
 
 **2026-10-06**
 
@@ -1814,4 +1815,30 @@ standard rings. `coverage` full, `categories` "All three", `mode` metro,
   in Europe West "(R)" places one more name and no suffix two more; on the
   landing view the suffix changes nothing (Copenhagen has no room even
   unsuffixed). Open, for the owner.
+
+### 2026-10-07 - Call 209: the Japanese name rule crosses premises on six live maps, 13 operators' own names withheld (owner, privacy repair)
+
+- **Found by Kansai-1** with `check_personal_exposure.py`'s Japan pass on
+  the current files: six published Japanese maps showed an operator's own
+  name on 13 pins. A trade name the rule flags on one row also stood at
+  another premises, and step 2 spread the flag only within one block (the
+  gap Suita showed, call 205). **The owner, through Staging: "fix now in
+  cleanup"**, landed outside review time.
+- **The change:** Kansai-1's `name_city` switch (fe85a793, taken alone,
+  none of its cities): a trade name flagged on any row withholds every row
+  of the city with the same trade-name key. On for new cities through
+  ALL_RULES; of the 34 built before the foundation, only the six read it
+  (`japan.CITIES` "rules": `WAVE2_RULES | {"name_city"}`). Kansai-1's
+  read-only run with the switch forced on moved no other built city's map
+  (Tokyo's 1 row is not on it).
+- **Re-run:** steps 2 and 3 for the six. Names withheld, before -> after,
+  every added one on the map: Osaka 29 -> 35, Utsunomiya 5 -> 8, Fukuoka
+  7 -> 8, Kyoto 22 -> 23, Sapporo 4 -> 5, Yokkaichi 6 -> 7.
+- **Checks:** `check_personal_exposure.py` on the six and Tokyo: the Japan
+  pass prints 0 (read as counts only; no name printed). `drift_check.py`
+  on the six and Tokyo, `--jobs 3 --update-baseline` (measured peak 1.76
+  GB): zero drift; only `names_withheld` and the new `name_rule_city_rows`
+  moved, in the six; Tokyo's figures unchanged. The Minato control is
+  unchanged (Kansai-1, the switch commit). Verdicts in `docs/privacy_verdicts.md`: publish, all six.
+- **Reboot:** only `outputs/` maps and pipeline code change, so none.
 
