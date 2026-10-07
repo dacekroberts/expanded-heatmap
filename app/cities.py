@@ -4245,6 +4245,12 @@ CITIES = [
         # MEASURED in a real browser with Space Grotesk loaded, since
         # it refuses a guessed one.
         "label_offset": ("middle", 0, -22),
+        # Benelux labels Brussels (Regional) too, the Region's 18 communes
+        # outside this one, so there the label names the City by its official
+        # name; every wider view shows only this label, "Brussels" (owner,
+        # 2026-10-07). "Brussels Region" was not used: the official Region
+        # includes the City, which that page leaves out.
+        "pill_by_region": {"Benelux": "City of Brussels"},
     },
     {
         "name": "Antwerp",

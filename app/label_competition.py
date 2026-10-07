@@ -356,6 +356,10 @@ TEXT_WIDTH = {
     "Kitchener–Waterloo": 134.2, "Liberec": 49.9, "Most": 34.5, "Manchester": 80.9,
     "Birmingham": 80.2, "Nottingham": 78.7, "Blackpool": 66.7, "Seattle": 47.5,
     "Liverpool": 62.0, "Geneva": 49.4,
+    # Benelux's label for the City of Brussels (cities.py `pill_by_region`),
+    # the same 2026-10-07 run; controls Brussels 57.2, Brussels (Regional)
+    # 130.2 and Paris 32.9 reproduced.
+    "City of Brussels": 106.5,
 }
 
 PILL_H = 18.0             # measured from rendered pixels, 14 px text
@@ -391,6 +395,13 @@ def project(lat, lon, centre_lat, centre_lon, zoom, w, h):
         s = math.sin(math.radians(d))
         return 0.5 - math.log((1 + s) / (1 - s)) / (4 * math.pi)
     return x, h / 2 + (merc(lat) - merc(centre_lat)) * scale
+
+
+def label_text(city, region="Global"):
+    """A city's label text in a view: its `pill_by_region` entry for that view
+    (Benelux names the City of Brussels apart from Brussels (Regional)), else
+    cities.py `pill` (the name without " (Regional)"), else its name."""
+    return (city.get("pill_by_region") or {}).get(region) or city.get("pill") or city["name"]
 
 
 def text_width(name, strict=False):
@@ -480,7 +491,7 @@ def compete(cities, centre_lat, centre_lon, zoom, storefronts, strict=False,
         cands = TOP_CANDIDATES if is_top or region != "Global" else CANDIDATES
         tries = ([tuple(own)] if own else []) + [o for o in cands if o != (tuple(own) if own else None)]
         dots = won_dots + [d for n, d in top_dots.items() if n != c["name"]]
-        text = c.get("pill", c["name"])     # the label text (cities.py `pill`)
+        text = label_text(c, region)
         for off in tries:
             x, y = pos[c["name"]][ref]
             box = pill_box(text, x, y, off, strict)
