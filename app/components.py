@@ -571,7 +571,7 @@ _OSM_RAIL = (
     "Kitchener–Waterloo (Regional)", "Odense", "Liepāja", "Daugavpils",
     "Buffalo", "Sacramento", "Houston", "Ottawa", "Minneapolis", "Pittsburgh",
     "Dallas", "Kansas City", "Tucson", "Tacoma", "New Orleans", "Florence", "Den Haag",
-    "Göteborg", "Zurich", "Geneva (Regional)", "Rome", "Palma", "Brno", "Plzeň", "Olomouc",
+    "Göteborg", "Zurich", "Geneva (Regional)", "Thessaloniki", "Rome", "Palma", "Brno", "Plzeň", "Olomouc",
     "Ostrava", "Liberec (Regional)", "Most (Regional)", *_BRAZIL, "Prague",
     "Amsterdam", "Rotterdam", "Hong Kong", "Seoul", "Taichung", "Taoyuan",
     "Taipei (Regional)", "Daegu", "Busan", *_KOREA_SEMAS, "Sydney", "Melbourne",
@@ -1030,6 +1030,8 @@ _NOTICES = [
      "boundaries used to select them and its businesses, "
      "Geneva's five TPG tram lines and their stops and the commune "
      "boundaries used to select them and its businesses, "
+     "Thessaloniki's metro line and its stations and the municipal "
+     "boundary used to select them and its businesses, "
      "Rome's metro and Roma–Viterbo urban lines and their stations, "
      "Palma's Metro M1 and its stations, and the municipal boundaries used to "
      "select them, "
@@ -3049,6 +3051,20 @@ _NOTICES = [
      "(https://sitg.ge.ch/ressources/conditions-utilisation-donnees). The État de Genève does "
      "not endorse this map.",
      False, ("Geneva (Regional)",)),
+    # Thessaloniki (notice 155, the Abroad batch's number, 2026-10-07): the
+    # City's layer under CC BY 4.0 (read 2026-10-04): credit, title linked,
+    # licence linked, the changes, no endorsement. No wording is prescribed;
+    # this is the build's draft, a review-time proposal.
+    Notice(155, "City of Thessaloniki (Thessaloniki)",
+     "Thessaloniki's active shop licenses are from the City of Thessaloniki (Δήμος "
+     "Θεσσαλονίκης), [Ενεργές Άδειες Καταστημάτων]"
+     "(https://data.gov.gr/dataset/gis-thessaloniki-wms-saloniki-tsp_poi_energes_adeies_katastimaton), "
+     "licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), retrieved October "
+     "4, 2026. Modified by this project: filtered to food premises, food shops and personal "
+     "services inside the Municipality of Thessaloniki, grouped into three categories and "
+     "mapped by distance to metro stations. The City of Thessaloniki has not reviewed or "
+     "endorsed this map.",
+     False, ("Thessaloniki",)),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

@@ -639,6 +639,10 @@ REGISTRIES = {
     "geneva": dict(raw=None, trade=None, owner=None,
                    processed="businesses_clean.csv",
                    address=("address",)),
+    # Thessaloniki's licence layer has no name field: a pin shows its licensed
+    # activity, and step 2 never reads the address fields.
+    "thessaloniki": dict(raw=None, trade=None, owner=None,
+                         processed="businesses_clean.csv", address=None),
     # Philadelphia likewise never loads a registrant-name column (its step 2
     # asserts six of them stay absent), and its business_name is never blank,
     # so there is no fallback pair to join against either. What it adds that no

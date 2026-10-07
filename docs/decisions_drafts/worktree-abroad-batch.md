@@ -165,6 +165,62 @@ tradeoff. A parked call stops only what it names.
   1: rail, communes and stop names from OSM. **Open terms question: none.**
   New inputs: a city, a taxonomy, notice 154, the Swiss licence rows.
 
+### 2026-10-07 - Thessaloniki built: Line 1 on the City's active shop licenses (abroad-batch)
+
+- **Privacy verdict: publish.** `check_personal_exposure.py thessaloniki`:
+  the layer has no name field; 6,292 pins show 51 distinct activity labels,
+  0 contact details, 0 person-like names. Step 2 never reads the address
+  fields.
+- **Thessaloniki built, page 302, Greece's first city** (pipeline by a
+  subagent from the brief; every owner call of 2026-10-04 applied as
+  answered). The City's licence layer from the GeoServer WFS only (cached
+  2026-10-04, 8,103 rows, EPSG:2100 reprojected to UTM 34N, geometry
+  agreeing with the layer's own x/y on all 8,102 rows that carry them),
+  through the new closed list `pipeline/taxonomies/thessaloniki_adeies.py`
+  (all 79 activity values decided; catch-all "ANEY" 14 of 8,103, 0.17%):
+  7,137 kept by activity, **7,132 inside the municipality** (Food service
+  3,682, Food shops 2,430, Personal services 1,020). Out: no-counter food
+  323 (canteens 246, owner call 1), recreation 280, wholesale 106, vending
+  86, funeral 61, non-food retail 39, brothels 30 (R3), workshops 19, no
+  activity 15, bicycle rental 7. **5 rows just past the OSM boundary
+  (median 18 m, at most 60 m) dropped**, Florence's precedent for a city's
+  own layer cut by the OSM polygon. Step 2 measured 0.01 GB.
+- **Rail.** One Overpass query (routes, station objects, admin_level 7 and
+  8). Four relations, all drawn as one line, **"Line 1"**, the operator's
+  (THEMA's) station-list heading (call 4; read with the project's user
+  agent, call 8): the base line and the Kalamaria branch, cut at the city
+  line (a 1.30 km stub of the branch inside the city drawn, no station on
+  it). 36 stop positions -> 18 stations; **gate 3 exact**, 18 on the line
+  and 13 in the city, against Elliniko Metro's station pages (call 5) and
+  THEMA's list; the branch's 5 (Nomarchia, 4 m past the line, to Mikra)
+  listed outside. **Median gap 573 m: standard rings**, the spacing rule
+  over the brief's desk 506 m (Palma's 583 m and Buffalo's 594 m kept
+  standard rings); step 1 stops outside 550-620 m. Headways read from
+  THEMA's FAQ (call 7). Boundary: OSM relation 1770680 (admin_level 7),
+  20.82 km² (19.307 official), gated 17.5-21.5. **6,292 of 7,132 (88.2%)
+  in a ring.**
+- **Line color: OSM's red (#FF0000)**, the colour rule's OSM tag; the
+  operator's own map draws the line navy (#0F0A68), 1.13:1 on the dark page
+  and so unreadable there. CIE76 62.3 from the nearest pin.
+- **Macro map:** Thessaloniki left out of Europe's zoom fit
+  (`REGION_ZOOM_WITHOUT`, Bucharest's measurement), its label the default.
+  `categories` "Retail thin" and `coverage` narrowed, Matsuyama's values.
+- **Notice 155 (City of Thessaloniki, CC BY 4.0)**: the credit, the
+  dataset's title linked to its data.gov.gr record, the licence linked, the
+  retrieval date, the changes and no endorsement; the build's draft, a
+  proposal. New `docs/data_sources/greece.md`.
+- **Page proposals** (Matsuyama's shape; no template covers them): the color
+  clause, the branch bullet, the frequency bullet ("about every 3 minutes
+  between New Railway Station and 25th Martiou ... about every 9 minutes on
+  to Nea Elvetia"), the three license-layer bullets and "A dot shows the
+  type of business, never its name".
+- **Downstream:** notice 155, **caption** (CC BY: credit reasonable to the
+  medium; a card that travels without its caption carries the credit and
+  licence on its face). Notice 1: rail, boundary and station names from
+  OSM. **Open terms question: none** (the owner's reading of the portal
+  splash, 2026-10-04, stands; a removal request takes the page down). New
+  inputs: a city, a country, a taxonomy, notice 155.
+
 ### 2026-10-07 - Anyang (Regional) built: Gunpo and Uiwang join Anyang's page on SEMAS's codes (abroad-batch)
 
 - **Privacy verdict: publish.** `check_personal_exposure.py`'s own check run

@@ -2963,6 +2963,31 @@ legal form the register does not give.
 17 runs on into Gaillard, Ambilly and Annemasse, in France: its 4 stops there are drawn
 with the line but not ringed, listed on Geneva's page. Buses and the Léman Express are not
 drawn.
+
+### Thessaloniki - the City's active shop licenses, and Line 1 inside the city
+
+**Left out of the City's license layer** (8,103 rows): canteens inside offices,
+hospitals, sports grounds and parks (246, owner) and inside schools (66); preparation
+kitchens (10) and a mobile canteen (1); internet cafés (168) and other recreation:
+cinemas, theaters, children's play areas, amusement arcades and games, gyms, swimming
+pools, an amusement park, concert halls and cultural centers (112); food and drink
+wholesale and storage (106); vending machines (86); funeral homes (60) and a coffin
+warehouse (1); licensed brothels (30); pet shops (19) and second-hand goods (20), since
+no general retail is published; food and drink workshops (19); bicycle rental (7); rows
+with no activity (15); and 5 rows whose point falls just outside the city's boundary.
+**Kept**: convenience stores selling packaged ice cream, soft drinks and confectionery
+(376), patisseries (99), and bread shops and coffee roasters selling coffee to go (37),
+as Food shops (owner); nightclubs (57) as Food service; tattoo studios (38).
+
+**Not named**: the layer carries no name; a dot shows its licensed activity.
+
+**What is missing rather than excluded**: general retail is not in this register; the
+layer has no date of its own, so a shop that has closed may still be shown.
+
+**Stations.** Line 1, the 13 stations inside the Municipality of Thessaloniki. The
+Kalamaria branch is cut at the city line: its five stations (Nomarchia, Kalamaria,
+Aretsou, Nea Krini, Mikra), all in the Municipality of Kalamaria, are not ringed, and
+are listed on Thessaloniki's page. Not drawn: buses; the suburban railway.
 ### Seoul - Korea's permit registers: the trades Korea licenses, not every shop
 
 **Missing, not excluded.** Korea licenses food service, the personal-care trades and a set of

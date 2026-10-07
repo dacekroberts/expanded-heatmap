@@ -4625,17 +4625,21 @@ CITIES = [
         "lat": 40.6401,
         "lon": 22.9444,
         "page": "pages/302_Thessaloniki_Heatmap.py",
-        "blurb": "Thessaloniki Metro (TODO: list the lines)",
+        "coverage": "narrowed",
+        "placement": "Register coordinates (100%)",
+        "data_age": "Undated license layer, retrieved 2026-10-04",
+        "rail_extra": "—",
+        "record_kind": "License register",
+        "categories": "Retail thin",
+        "blurb": "Thessaloniki Metro Line 1",
         "region": "Europe",
         "country": "Greece",
         "mode": "metro",
         "in_default_view": False,
-        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
-        # pinned zoom. Run `python scripts/check_macro_labels.py`,
-        # which scores every city in every region at three widths -
-        # and which will first demand this city's label width be
-        # MEASURED in a real browser with Space Grotesk loaded, since
-        # it refuses a guessed one.
+        # Above the dot, the default, and SCORED: check_macro_labels.py
+        # (python -B) PROBLEMS 0 in Europe at 375, 768 and 1200, with
+        # Thessaloniki out of the region's zoom fit (REGION_ZOOM_WITHOUT; width
+        # 83.7 px, measured 2026-10-07).
         "label_offset": ("middle", 0, -22),
     },
     {

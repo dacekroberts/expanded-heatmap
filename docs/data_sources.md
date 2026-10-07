@@ -107,6 +107,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Australia | [`data_sources/australia.md`](data_sources/australia.md) | Sydney, Melbourne |
 | Belgium | [`data_sources/belgium.md`](data_sources/belgium.md) | Brussels, Antwerp, Ghent, Charleroi, Liège, Brussels (Regional) |
 | Switzerland | [`data_sources/switzerland.md`](data_sources/switzerland.md) | Zurich, Geneva (Regional) |
+| Greece | [`data_sources/greece.md`](data_sources/greece.md) | Thessaloniki |
 | Georgia | [`data_sources/georgia.md`](data_sources/georgia.md) | Tbilisi |
 
 ## Business registries
@@ -3811,6 +3812,23 @@ DISPLAYED** (written into `render_site_notices()` with Geneva (Regional),
   notice 1).
 - The English sentences of the displayed notice are the build's draft, a
   review-time proposal.
+
+**155. City of Thessaloniki (Thessaloniki) — required, and DISPLAYED**
+(written into `render_site_notices()` with Thessaloniki, 2026-10-07.)
+
+- **PERMITTED WITH CONDITIONS**<!-- internal --> (`licence-read` 2026-10-04)<!-- /internal -->: CC BY 4.0,
+  set on each resource of the layer's data.gov.gr record. The map portal's
+  no-redistribution splash is read as the web app's terms only (owner,
+  2026-10-04). Rows in [`data_sources/greece.md`](data_sources/greece.md).
+- **MUST DISPLAY** (CC BY 4.0 section 3(a)): the credit to the City of
+  Thessaloniki with the dataset's title linked to its record, the licence
+  linked, the retrieval date and that the data was changed. No wording is
+  prescribed; the notice is this project's.
+- **MUST NOT**: imply the City's endorsement or use its logo; call the layer
+  current, complete or official.
+- **Personal data**: the layer has no name field; a dot shows its licensed
+  activity.
+- **Thessaloniki's rail and boundary are OpenStreetMap data** (ODbL, notice 1).
 
 ## Gaps
 

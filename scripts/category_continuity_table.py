@@ -1582,6 +1582,42 @@ COLUMNS["geneva_noga"] = {
                             "itinerant trades and market stands dropped by premises type in step 2")],
 }
 
+# Thessaloniki: the City's active shop licences, keyed on the licensed
+# activity text (79 values), a closed list (2026-10-07).
+TH = "a licence register of food premises, hairdressers and the venues the same law licenses"
+COLUMNS["thessaloniki_adeies"] = {
+    "funeral": [loc("ΓΡΑΦΕΙΑ ΤΕΛΕΤΩΝ", "funeral homes"),
+                loc("ΑΠΟΘΗΚΗ ΦΕΡΕΤΡΩΝ", "a coffin warehouse (storage; no general retail layer)")],
+    "no_counter_food": [loc("ΚΥΛΙΚΕΙΟ", "canteens inside another premises (owner call 1, 2026-10-04)"),
+                        loc("ΚΥΛΙΚΕΙΟ ΕΝΤΟΣ ΣΧΟΛΕΙΟΥ", "school canteens"),
+                        loc("ΠΑΡΑΣΚΕΥΑΣΤΗΡΙΟ", "preparation kitchens")],
+    "personal_catchall": absent("no catch-all personal service: the register lists hair, nails, "
+                                "beauty, tattoo and dry cleaning by name"),
+    "tattoo": [loc("ΕΡΓΑΣΤΗΡΙΟ ΔΕΡΜΑΤΟΣΤΙΞΙΑΣ", "tattoo studios, their own value")],
+    "adult_hostess": [loc("ΟΙΚΟΣ ΑΝΟΧΗΣ", "licensed brothels, which the register names (R3)")],
+    "sex_shop": absent(TH + "; no sex shops"),
+    "massage_commercial": absent(TH + "; massage is not a licence type here"),
+    "massage_regulated": absent(TH + "; no health professions"),
+    "car_dealer": absent(TH + "; no vehicle trade"),
+    "petrol_station": absent(TH + "; fuel stations are licensed elsewhere"),
+    "vehicle_repair": absent(TH + "; no repairs"),
+    "gambling": absent(TH + "; ΤΕΧΝΙΚΑ ΠΑΙΓΝΙΑ are amusement arcades (recreation), not betting"),
+    "pawnbroker": absent(TH + "; no pawnbrokers"),
+    "nightclub": [loc("ΚΕΝΤΡΟ ΔΙΑΣΚΕΔΑΣΗΣ", "nightclubs"),
+                  loc("ΚΕΝΤΡΟ ΔΙΑΣΚΕΔΑΣΗΣ (ΑΝΩ ΤΩΝ 200 ΘΕΣΕΩΝ)", "nightclubs over 200 seats")],
+    "vet": absent(TH + "; no veterinary clinics"),
+    "nonstore": [loc("ΑΥΤΟΜΑΤΟΣ ΠΩΛΗΤΗΣ", "vending machines")],
+    "parking": absent(TH + "; no parking"),
+    "repair": absent(TH + "; no repairs"),
+    "lodging": absent(TH + "; no lodging"),
+    "recreation": [loc("ΙΝΤΕΡΝΕΤ", "internet cafés"), loc("ΚΙΝΗΜΑΤΟΓΡΑΦΟΣ", "cinemas"),
+                   loc("ΘΕΑΤΡΟ", "theaters"), loc("ΓΥΜΝΑΣΤΗΡΙΟ", "gyms"),
+                   loc("ΤΕΧΝΙΚΑ ΠΑΙΓΝΙΑ", "amusement arcades"), loc("ΛΟΥΝΑ ΠΑΡΚ", "amusement parks")],
+    "pharmacy": absent(TH + ": a food-only retail register, no pharmacies"),
+    "optician": absent(TH + "; no opticians"),
+    "mobile_unit": [loc("ΚΑΝΤΙΝΑ ΣΕ ΙΔΙΩΤΙΚΟ ΧΩΡΟ", "a mobile canteen")],
+}
+
 BERLIN_CFG = "pipeline/berlin/config.py"
 BERLIN_969 = '"nace_id": ("969",)'
 
