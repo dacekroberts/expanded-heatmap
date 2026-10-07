@@ -45,8 +45,9 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   merged into both): the eight regions with Osaka, Tokyo, Saitama, Chiba
   and Hyogo as prefecture views, and the nesting test. It lands at the phase
   1 review time after East-1, Kansai-1 and Regional-1, merging master first
-  and re-running `stress_overview.py --planned 2`. **Open for the owner:**
-  "(Regional)" on macro-map pills shortened or dropped. Still to come: Brăila and
+  and re-running `stress_overview.py --planned 2`. Both branches also drop
+  "(Regional)" from map labels, with Benelux's "City of Brussels" (owner,
+  2026-10-07; DECISIONS, "Map labels drop"). Still to come: Brăila and
   Galați, Nagakute and Nisshin, Itami and Toyonaka into `KNOWN_STACKED`.
 
 - [ ] **Review time: the Japanese pages' name-rule bullet gains the sign rule**

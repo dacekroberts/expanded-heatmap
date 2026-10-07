@@ -20,13 +20,14 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**50 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**51 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-07**
 
 - [Europe splits West and East with Greece east, Germany and Benelux get views, and every country's top city is labelled first (owner, calls 194, 195 and 197; branch europe-split, held for review time)](#2026-10-07---europe-splits-west-and-east-with-greece-east-germany-and-benelux-get-views-and-every-countrys-top-city-is-labelled-first-owner-calls-194-195-and-197-branch-europe-split-held-for-review-time)
 - [Japan's macro-map views: the eight regions with Osaka, Tokyo, Saitama, Chiba and Hyogo as prefecture views; and a city named in a wider view is named in every narrower one (owner, calls 197 and 198; branch japan-regions, held for review time)](#2026-10-07---japans-macro-map-views-the-eight-regions-with-osaka-tokyo-saitama-chiba-and-hyogo-as-prefecture-views-and-a-city-named-in-a-wider-view-is-named-in-every-narrower-one-owner-calls-197-and-198-branch-japan-regions-held-for-review-time)
 - [Call 209: the Japanese name rule crosses premises on six live maps, 13 operators' own names withheld (owner, privacy repair)](#2026-10-07---call-209-the-japanese-name-rule-crosses-premises-on-six-live-maps-13-operators-own-names-withheld-owner-privacy-repair)
+- [Map labels drop "(Regional)", and Benelux names the City of Brussels (owner; branches europe-split and japan-regions, held for review time)](#2026-10-07---map-labels-drop-regional-and-benelux-names-the-city-of-brussels-owner-branches-europe-split-and-japan-regions-held-for-review-time)
 
 **2026-10-06**
 
@@ -1841,4 +1842,37 @@ standard rings. `coverage` full, `categories` "All three", `mode` metro,
   moved, in the six; Tokyo's figures unchanged. The Minato control is
   unchanged (Kansai-1, the switch commit). Verdicts in `docs/privacy_verdicts.md`: publish, all six.
 - **Reboot:** only `outputs/` maps and pipeline code change, so none.
+
+### 2026-10-07 - Map labels drop "(Regional)", and Benelux names the City of Brussels (owner; branches europe-split and japan-regions, held for review time)
+
+- **The owner asked** whether "(Regional)" on macro-map labels could be
+  shortened to "(R)" with a legend key, or the regional view emphasised
+  some other way, and to use Copenhagen (Regional) as the test case.
+  Measured: its 158.5 px label caused six collisions in Abroad's
+  hand-placed Europe view; "(R)" (about 106 px) or no suffix (85.5 px)
+  cleared all six. In the competing Europe West "(R)" placed one more name
+  and no suffix two more. **Cleanup recommended no suffix**: a regional page
+  is its city's only page, so the bare name names the right place; "(R)"
+  leans on a legend most readers skip and reads as "registered"; a styled
+  outline would be a third legend key. **The owner: "Go with no suffix on
+  map labels".**
+- **The change:** `cities.py` stamps each city's label text as `pill`, the
+  name without " (Regional)" unless that bare name is another city's (only
+  Brussels (Regional) today). `label_competition.label_text()` gives a view's
+  label text, and the TextLayer, the competition, `check_macro_labels.py`
+  and `check_deploy_imports.py` read it; `TEXT_WIDTH` is keyed by label
+  text. The tooltip, the city list and the pages keep the full name. 29 bare
+  widths were measured in the browser, controls reproduced.
+- **Result:** PROBLEMS 0 on both branches. Against the full names, the
+  landing view gains Lille, Europe West gains Newcastle, and labels clipped
+  at a canvas edge fall from 40 to 28.
+- **Brussels:** the Brussels page is the City of Brussels (one commune),
+  Brussels (Regional) the Brussels-Capital Region's other 18 communes, and
+  only Benelux labels both. The owner proposed "Brussels proper" and
+  "Brussels region", then a per-view label. **Chosen (owner, "yes"):**
+  "City of Brussels" in Benelux, the official name (106.5 px); "Brussels
+  (Regional)" kept beside it; "Brussels" in every wider view
+  (`pill_by_region`). "Brussels Region" was set aside because the official
+  Region includes the City, which that page leaves out. Rendered locally in
+  Benelux and Europe West.
 
