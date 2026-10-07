@@ -22,7 +22,12 @@ tradeoff. A parked call stops only what it names.
 - **Call 5 (macro labels):** Europe East is made now, by Cleanup, with
   Thessaloniki; a Germany view only if Cleanup's measurement shows Europe
   West still overlapping, then on Czechia's and Belgium's mechanism. Not
-  built here.
+  built here. Cleanup measured it on d278af3a: the split alone leaves the
+  12 problems; the split plus a Germany view (Berlin, Gelsenkirchen,
+  Bremen) with competition in both Europe halves reaches 0. Cleanup builds
+  both on `europe-split`, landing right after this batch; this branch keeps
+  the 12 `check_macro_labels.py` problems until then and leaves the region
+  tables and the Dutch offsets alone.
 - **Call 6 (Greece):** "yes", in Europe East with the split; Cleanup lands it.
 - **Copenhagen (Regional):** waits for the owner to set the Datafordeler key
   or fetch the eight Adressepunkt files.
