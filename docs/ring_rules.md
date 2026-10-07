@@ -6,7 +6,7 @@ Edges come from each city's `pipeline/<slug>/config.py`, shares from
 map carries, read from the committed maps). Regenerate after any city lands
 or re-renders.
 
-**170 built cities: 104 on the standard rings (0.1 / 0.2 / 0.3 / 0.6 mi), 66 on smaller ones.**
+**172 built cities: 106 on the standard rings (0.1 / 0.2 / 0.3 / 0.6 mi), 66 on smaller ones.**
 
 **The rule for smaller rings is station spacing, not coverage**: where the
 median gap between stations is about 550 m or less, a 0.6 mi outer ring
@@ -94,7 +94,7 @@ standard rings.
 | **Over 95%** (5) | Barcelona 99.9, Osaka 98.2, Tokyo 97.6, Melbourne 96.0, Amsterdam 95.5 |
 | **80–95%** (19) | Madrid 94.8, Copenhagen 94.5, Seoul 93.7, Rotterdam 92.8, Hong Kong 91.2, Higashiōsaka 90.3, Stockholm 89.4, Nishinomiya 89.3, Milan 87.3, Kobe 87.3, Kyoto 86.5, Uijeongbu 85.3, Kawasaki 83.5, Sydney 83.4, Yokohama 83.4, Fukuoka 82.2, Berlin 82.0, Bucheon 80.4, Sapporo 80.2 |
 | **60–80%** (31) | Taipei (Regional) 77.8, Yokosuka 77.8, Riga 77.5, Boston 76.2, Seongnam 76.1, Sakai 75.3, Ōtsu 74.7, Yokkaichi 74.0, Washington D.C. 73.9, Busan 73.9, London 73.6, Bucharest 72.1, Takamatsu 71.7, Kitakyushu 71.2, Daegu 71.0, San Francisco 70.8, Prague 69.6, Sasebo 69.3, Nara 68.7, Incheon 68.3, Himeji 67.2, Goyang 66.6, Buenos Aires 66.3, Anyang 64.2, Ansan 63.8, Okayama 63.5, Kurume 63.3, Rome 61.4, Tbilisi 60.9, Montréal 60.5, Fukui 60.5 |
-| **40–60%** (23) | Edinburgh 59.4, Bergen 58.5, Philadelphia 58.4, Dublin 57.7, Chicago 57.0, Yongin 55.4, Namyangju 54.9, Newcastle (Regional) 54.4, Liverpool (Regional) 52.1, Manchester (Regional) 51.8, Toyota 51.5, Mexico City 48.3, Toronto 48.0, Suwon 47.6, Utsunomiya 47.1, Santos (Regional) 45.6, Vancouver (Regional) 45.4, Shimonoseki 42.7, Glasgow 42.3, Daejeon 41.7, Kitchener–Waterloo (Regional) 41.5, Sacramento 41.3, Calgary 40.8 |
+| **40–60%** (25) | Edinburgh 59.4, Bergen 58.5, Philadelphia 58.4, Dublin 57.7, Chicago 57.0, Yongin 55.4, Namyangju 54.9, Newcastle (Regional) 54.4, Gimpo 53.6, Liverpool (Regional) 52.1, Manchester (Regional) 51.8, Toyota 51.5, Mexico City 48.3, Toronto 48.0, Suwon 47.6, Utsunomiya 47.1, Santos (Regional) 45.6, Vancouver (Regional) 45.4, Shimonoseki 42.7, Glasgow 42.3, Daejeon 41.7, Kitchener–Waterloo (Regional) 41.5, Sacramento 41.3, Calgary 40.8, Siheung 40.2 |
 | **Under 40%** (26) | Seattle (Regional) 38.4, Gimhae 37.7, Minneapolis 35.8, Palma 34.6, Hamamatsu 33.9, Ottawa 32.4, Guadalajara (Regional) 31.4, Gwangju 29.8, Dallas 26.4, Rio de Janeiro (Regional) 26.3, Monterrey (Regional) 25.1, San Diego 24.5, Los Angeles (Regional) 24.1, Buffalo 24.0, Recife (Regional) 23.4, São Paulo 23.0, Edmonton 22.2, Porto Alegre (Regional) 20.4, Taichung 19.2, Salvador 19.0, Belo Horizonte (Regional) 16.0, Brasília 13.8, Fortaleza (Regional) 13.5, Miami (Regional) 12.6, Taoyuan 11.7, Houston 7.4 |
 
 ## Every city
@@ -213,6 +213,7 @@ standard rings.
 | Reims | 0.05 / 0.1 / 0.2 / 0.3 mi | 1,457 | 2,662 | 54.7% |
 | Newcastle (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 3,358 | 6,171 | 54.4% |
 | Kumamoto | 0.05 / 0.1 / 0.2 / 0.3 mi | 5,489 | 10,162 | 54.0% |
+| Gimpo | 0.1 / 0.2 / 0.3 / 0.6 mi | 7,187 | 13,398 | 53.6% |
 | Liverpool (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 3,732 | 7,170 | 52.1% |
 | Manchester (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 6,202 | 11,963 | 51.8% |
 | Toyota | 0.1 / 0.2 / 0.3 / 0.6 mi | 2,165 | 4,203 | 51.5% |
@@ -233,6 +234,7 @@ standard rings.
 | Sacramento | 0.1 / 0.2 / 0.3 / 0.6 mi | 1,378 | 3,335 | 41.3% |
 | Calgary | 0.1 / 0.2 / 0.3 / 0.6 mi | 6,156 | 15,072 | 40.8% |
 | Odense | 0.05 / 0.1 / 0.2 / 0.3 mi | 1,154 | 2,834 | 40.7% |
+| Siheung | 0.1 / 0.2 / 0.3 / 0.6 mi | 6,106 | 15,206 | 40.2% |
 | Seattle (Regional) | 0.1 / 0.2 / 0.3 / 0.6 mi | 5,548 | 14,430 | 38.4% |
 | Gimhae | 0.1 / 0.2 / 0.3 / 0.6 mi | 6,736 | 17,879 | 37.7% |
 | Florence | 0.05 / 0.1 / 0.2 / 0.3 mi | 4,435 | 12,052 | 36.8% |

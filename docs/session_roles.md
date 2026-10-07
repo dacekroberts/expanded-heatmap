@@ -143,17 +143,18 @@ exist ONLY in the worktree that built it. Before removing a worktree
 
 **Page and notice numbers** (`#sr-numbers` has the full paragraph of
 2026-10-04). Notice numbers are claimed
-here, by the session, before one is written; no claims are open;
+here, by the session, before one is written; the Abroad batch holds
+154–156 (2026-10-07, Geneva, Thessaloniki and Bremen);
 133–136, released unused by the four extensions on 2026-10-03, stay
-unassigned; the next free notice is 154. Every earlier block has landed:
+unassigned; the next free notice is 157. Every earlier block has landed:
 the coverage sweep's on 2026-10-04 (the Korean three, pages 190–192 and no
 notices; Mendoza, Tacoma and Liverpool (Regional), pages 193–195 and
 notices 141–143 and 153; Belgium, pages 196–201 and notices 144–152);
 Japan wave 2's 115–128, the extensions' 129–132 and lane-app's 137–140 on
 2026-10-03, and everything up to 114 on 2026-10-02. Pages reserved for the ranked
 list (2026-10-04; `docs/staged_cities.json`): the owed-act seven
-203–209, Japan wave 4 210–289, rank 4 290–299; the free pages outside them
-are 202 and 300 on.
+203–209, Japan wave 4 210–289, rank 4 290–299; the Abroad batch holds 202
+and 300–304 (2026-10-07); the free pages outside them are 305 on.
 Check D of `check_provenance.py` reads every range in that sentence and lets
 a branch skip exactly those numbers; any other gap still fails. Keep the
 ranges in that one sentence, and delete a batch's range once it lands.

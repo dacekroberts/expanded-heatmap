@@ -4545,6 +4545,60 @@ CITIES = [
         "label_tier": "minor",
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Gimpo",
+        "lat": 37.615,
+        "lon": 126.716,
+        "page": "pages/202_Gimpo_Heatmap.py",
+        "coverage": "full",
+        "placement": "Register coordinates",
+        "data_age": "SEMAS edition of 2026-06-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "The Gimpo Goldline",
+        "region": "Seoul Capital Area",
+        "country": "South Korea",
+        "mode": "light_rail",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        # MINOR, as every Gyeonggi satellite (owner, 2026-09-30): labelled only
+        # in the Seoul Capital Area; a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Siheung",
+        "lat": 37.38,
+        "lon": 126.803,
+        "page": "pages/300_Siheung_Heatmap.py",
+        "coverage": "full",
+        "placement": "Register coordinates",
+        "data_age": "SEMAS edition of 2026-06-30",
+        "rail_extra": "—",
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "Line 4, the Suin–Bundang Line and the Seohae Line",
+        "region": "Seoul Capital Area",
+        "country": "South Korea",
+        "mode": "metro",
+        "in_default_view": False,
+        # MINOR, as every Gyeonggi satellite (owner, 2026-09-30): labelled only
+        # in the Seoul Capital Area; a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

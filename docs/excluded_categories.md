@@ -5458,6 +5458,44 @@ Gimhae; its other 9 are in Busan and on Busan's map. Busan Lines 2 and 3,
 which pass near the city, have no station in Gimhae and are not drawn, nor is
 Korail's intercity line.
 
+### Gimpo - SEMAS's national storefront register, all three buckets
+
+**Incheon's source and rules**, as for Goyang, Seongnam and Yongin (the
+sections above).
+
+**Out by name**: hostess bars 139, dance halls 4, staff canteens 44,
+household fuel dealers 10; and, as in Incheon, offices, education, health,
+estate agents, lodging, recreation, repairs, funeral services, wedding halls
+and matchmaking.
+
+**Names withheld** - 11 storefronts whose registered name is a bare personal
+name at an address that reads residential.
+
+**Stations**, cut at Gimpo's boundary (the line drawn to its end; the station
+outside is listed on Gimpo's page): the Gimpo Goldline, 9 stations in Gimpo;
+its tenth, Gimpo International Airport, is in Seoul. Lines 5 and 9, the
+Airport Railroad and the Seohae Line meet it there and have no station in
+Gimpo, so none is drawn.
+
+### Siheung - SEMAS's national storefront register, all three buckets
+
+**Incheon's source and rules**, as for Goyang, Seongnam and Yongin (the
+sections above).
+
+**Out by name**: hostess bars 287, dance halls 5, staff canteens 230,
+household fuel dealers 35; and, as in Incheon, offices, education, health,
+estate agents, lodging, recreation, repairs, funeral services, wedding halls
+and matchmaking.
+
+**Names withheld** - 11 storefronts whose registered name is a bare personal
+name at an address that reads residential.
+
+**Stations**, cut at Siheung's boundary (the lines drawn to their ends;
+stations outside are listed on Siheung's page): Line 4, 2 stations in
+Siheung; the Suin–Bundang Line, 4; the Seohae Line, 5 (Oido and Jeongwang
+are shared, so 9 in all). Lines 1, 2 and 7 and Incheon's two lines, which
+reach the area, have no station in Siheung and are not drawn.
+
 ### Tbilisi - a national register of businesses, district centers left off, and a person's business shown by category
 
 **The source** is the National Statistics Office of Georgia's Statistical

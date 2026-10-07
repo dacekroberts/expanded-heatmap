@@ -657,6 +657,8 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Daejeon | Daejeon Metro Line 1 | Line 2 (a tram, under construction) | OpenStreetMap (gate 3 exact against the operator's count) | City | 0 / 0 |
 | Gwangju | Gwangju Metro Line 1 | Line 2 (under construction) | OpenStreetMap (gate 3 exact against the operator's count) | City | 0 / 0 |
 | Gimhae | Busan–Gimhae LRT (light rail) | Korail (intercity) | OpenStreetMap (gate 3 exact on the whole line) | City | 9 / 0 |
+| Gimpo | Gimpo Goldline (light rail) | Lines 5 and 9, AREX, Seohae (no station in Gimpo) | OpenStreetMap (gate 3 exact on the whole line) | City | 1 / 0 |
+| Siheung | Line 4, Suin–Bundang Line, Seohae Line | — | OpenStreetMap (gate 3 on the Suin–Bundang Line; Line 4 and Seohae not gated) | City | 114 / 0 |
 | **Taiwan** | | | | | |
 | Taichung | Taichung Metro Green Line | Taiwan Railway, high-speed rail | Operator's station table + OpenStreetMap route (gate 3 exact) | City | 0 / 0 |
 | Taoyuan | Taoyuan Airport MRT (line A) | Taiwan Railway, high-speed rail | National station layer + OSM route (gate 3 exact, one dated addition) | City | 7 / 0 |
@@ -861,6 +863,8 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Daejeon | National register | SEMAS's 상가(상권)정보 | SEMAS's own (소분류) | 8,435 / 9,766 / 3,051 | — |
 | Gwangju | National register | SEMAS's 상가(상권)정보 | SEMAS's own (소분류) | 6,400 / 5,823 / 1,854 | — |
 | Gimhae | National register | SEMAS's 상가(상권)정보 | SEMAS's own (소분류) | 2,590 / 3,038 / 1,108 | — |
+| Gimpo | National register | SEMAS's 상가(상권)정보 | SEMAS's own (소분류) | 2,566 / 3,363 / 1,258 | — |
+| Siheung | National register | SEMAS's 상가(상권)정보 | SEMAS's own (소분류) | 2,361 / 2,847 / 898 | — |
 | **Taiwan** | | | | | |
 | Taichung | National tax register | FIA business tax register | Industry code division | 6,283 / 3,970 / 1,932 | One line in a large city: 19% of storefronts in a ring |
 | Taoyuan | National tax register | FIA business tax register | Industry code division | 2,455 / 1,813 / 821 | The airport line misses the city's largest centre: 12% in a ring |
@@ -1054,6 +1058,8 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Daejeon | Register coordinates (100%) | None | Incheon's; 79 personal names withheld |
 | Gwangju | Register coordinates (100%) | None | Incheon's; 82 personal names withheld |
 | Gimhae | Register coordinates (100%) | None | Incheon's; 12 personal names withheld |
+| Gimpo | Register coordinates (100%) | None | Incheon's; 11 personal names withheld |
+| Siheung | Register coordinates (100%) | None | Incheon's; 11 personal names withheld |
 | **Taiwan** | | | |
 | Taichung | Address join to the city's door plates (92.2%; 5,599 unplaced) | Stalls unplaced; a department store is one point | Online shopping; office-like head offices; unmarked sole proprietors shown by industry |
 | Taoyuan | Address join to the city's door plates (93.6%; 3,097 unplaced) | Stalls and rural addresses unplaced | Online shopping; office-like head offices; unmarked sole proprietors shown by industry |
@@ -1258,6 +1264,8 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Daejeon | SEMAS edition of 2026-06-30 (fetched 2026-09-29) | B | 0.6 mi | Yes | 42% | Trade name in Korean, with the branch |
 | Gwangju | SEMAS edition of 2026-06-30 (fetched 2026-09-29) | B | 0.6 mi | Yes | 30% | Trade name in Korean, with the branch |
 | Gimhae | SEMAS edition of 2026-06-30 (fetched 2026-09-29) | B | 0.6 mi | Yes | 38% | Trade name in Korean, with the branch |
+| Gimpo | SEMAS edition of 2026-06-30 (fetched 2026-09-29) | B | 0.6 mi | Yes | 54% | Trade name in Korean, with the branch |
+| Siheung | SEMAS edition of 2026-06-30 (fetched 2026-09-29) | B | 0.6 mi | Yes | 40% | Trade name in Korean, with the branch |
 | **Taiwan** | | | | | | |
 | Taichung | Register daily, dated 2026-09-25; door plates August 2026 (fetched 2026-09-25) | Yes (snapshot caption) | 0.6 mi | Yes | 19% | Trade name in Chinese, or the line of business (11,907) |
 | Taoyuan | Register daily, dated 2026-09-25; door plates August 2026 (fetched 2026-09-25) | Yes (snapshot caption) | 0.6 mi | Yes | 12% | Trade name in Chinese, or the line of business (7,230) |

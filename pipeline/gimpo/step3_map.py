@@ -1,0 +1,49 @@
+"""Step 3 - Render Gimpo's heatmap to a standalone HTML file.
+
+All rendering lives in pipeline/map_common.py; this file supplies only what is
+Gimpo-specific. The lines are the ones step 1 wrote to
+processed/rail_lines.json - one relation per drawn line, in the shape
+load_osm_line_shapes reads (Seoul's shape).
+
+Run:  python pipeline/gimpo/step3_map.py
+"""
+
+import sys
+from pathlib import Path
+
+import pandas as pd
+
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline.map_common import load_osm_line_shapes, render_heatmap  # noqa: E402
+from pipeline.gimpo import config  # noqa: E402
+from pipeline.gimpo.step1_stations import boundary_polygon  # noqa: E402
+
+
+def main():
+    sys.stdout.reconfigure(encoding="utf-8")
+    for path in (config.STATIONS_CSV, config.BUSINESSES_CLEAN_CSV, config.RAIL_LINES_JSON):
+        if not path.exists():
+            sys.exit(f"Missing {path}. Run the earlier steps first.")
+
+    render_heatmap(
+        output_path=config.HEATMAP_HTML,
+        map_title="Gimpo Light Rail Business Density Heatmap",
+        city_name="Gimpo",
+        system_name="Gimpo Goldline",
+        stations=pd.read_csv(config.STATIONS_CSV),
+        businesses=pd.read_csv(config.BUSINESSES_CLEAN_CSV),
+        taxonomy_system=config.TAXONOMY_SYSTEM,
+        lines=load_osm_line_shapes(config.RAIL_LINES_JSON, config.LINES, "Gimpo Goldline"),
+        crs_geographic=config.CRS_GEOGRAPHIC,
+        crs_projected=config.CRS_PROJECTED,
+        ring_edges_meters=config.RING_EDGES_METERS,
+        ring_labels=config.RING_LABELS,
+        label_focus=boundary_polygon(),
+        # Trade names are Korean; this orders the Korean faces first
+        # (theme.font_stack) and render_heatmap raises without it.
+        lang="ko",
+    )
+
+
+if __name__ == "__main__":
+    main()

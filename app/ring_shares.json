@@ -848,5 +848,15 @@
   "in_ring": 6736,
   "all": 17879,
   "map_blob": "201b9048c7564cfa355db79d031ee0b5e77b2f2f"
+ },
+ "gimpo": {
+  "in_ring": 7187,
+  "all": 13398,
+  "map_blob": "817cd4e7563365d0bdd65a5354a179743f16297f"
+ },
+ "siheung": {
+  "in_ring": 6106,
+  "all": 15206,
+  "map_blob": "42c0884ebb7cc2a82879a997edc288eb09dc753f"
  }
 }

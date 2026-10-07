@@ -125,6 +125,8 @@ OSM_RAIL_BY_CITY = {
     "Daejeon": _korea("Daejeon"),
     "Gwangju": _korea("Gwangju"),
     "Gimhae": _korea("Gimhae"),
+    "Gimpo": _korea("Gimpo"),
+    "Siheung": _korea("Siheung"),
     "Sydney": ("the train and metro routes of Sydney and its City boundary", True),
     "Melbourne": ("the train and metro routes of Melbourne and its City boundary", True),
     "Buenos Aires": ("Buenos Aires's Subte and Premetro routes and its boundary", True),
