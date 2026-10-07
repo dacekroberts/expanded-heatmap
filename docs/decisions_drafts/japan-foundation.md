@@ -4,6 +4,16 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-07 - The foundation's five optional address fixes landed (owner, "do the address fixes")
+
+- **Four switches added to `japan_register.WAVE5_RULES` (on for new cities, off for the 34 built) and one config key, on the owner's word relayed by Staging.** Each is followed by the Minato control (98.0 / 0.2 / 1.8) and `drift_check.py` over the 34 built Japanese cities (zero drift). Measured on each city's cached files, before and after:
+  - `bracket_aza`, Gifu's `鷺山(向井町)` for MLIT's 鷺山字向井町: its food permits read 8 unplaced → 2, and its notifications 6 → 3, all 鷺山(向井町) rows placed. The rest (鷺山南 and others) are names MLIT's files do not hold.
+  - `chiwari`, Morioka's `川目第1地割` for MLIT's 川目字第一地割: MHLW's rows 8 unplaced → 5, all three 川目 rows at the block (the brief counted 4 on its filter). The barber register's 乙部大字黒川第9地割 is now read as 地割 but MLIT keys it otherwise; it stays unplaced.
+  - `chome_union`, Mito's 宮町 and 泉町 with no number (MLIT keys only their 丁目): unplaced 35 → 29, at the mean of the town's 丁目 centroids, tier chōme.
+  - `no_dropped`, Matsumoto's 里山辺湯原 for MLIT's 里山辺字湯の原, only where one MLIT town reads so without の and 字: the beauty register's unplaced 3 → 2, at the 小字 centroid.
+  - `"town_aliases": {"八雲村": "八雲町"}` in Matsue's `japan.CITIES` entry at build, its old village name: the laundry row reaches 八雲町東岩坂's centroid (unplaced 3 → 2). The key is per city, since an old municipality's name is one city's history.
+- Rejected: a shared old-municipality table (only one row in one city asks for it).
+
 ### 2026-10-07 - The Japan foundation: every shared-code rule of the 58 Japanese briefs landed once, built maps unchanged
 
 - **Landed in `pipeline/countries/japan_register.py`, `japan_step2.py`, `japan.py` and `pipeline/taxonomies/japan_eigyo.py`, in four groups, each followed by the Minato control (98.0 / 0.2 / 1.8 every time) and `drift_check.py` over the 34 built Japanese cities with `--jobs 3` (zero drift every time, about 3.5 min, peak 5.0 GB).** The checklist below names each rule's briefs. Group A's first run drifted Hiroshima's and Toyama's maps with every count unchanged: the circled-numeral strip ran in `_head`, which `xlsx_rows` applies to every CELL, so `㉕ そうざい製造業` lost its number. It moved to header cells only (`_header`), and both cities read zero drift.
@@ -63,10 +73,10 @@ laundry 種目, Matsue's repeated header row and mobile barber, Fuji's
 monthly-file reading, Ichinomiya's and Fukushima's kind per file (`SOURCE_KIND`
 exists).
 
-S30 landed only Matsue's `―丁目` (in `spelling5`); Gifu's bracketed 字,
-Morioka's 地割, Mito's 宮町 / 泉町 without 丁目, Matsue's 八雲村 and
-Matsumoto's 湯の原 are each a few rows, optional in their briefs, and left
-for a later city that needs them.
+S30 landed in two steps: Matsue's `―丁目` (in `spelling5`) with the
+foundation, and Gifu's bracketed 字, Morioka's 地割, Mito's 宮町 / 泉町,
+Matsue's 八雲村 and Matsumoto's 湯の原 on the owner's word the same day
+(the entry above).
 
 ## Review-time re-render proposal (built maps, for the owner)
 

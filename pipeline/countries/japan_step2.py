@@ -322,9 +322,13 @@ def other_municipalities(config):
 
 def read_permits(config, key, rows, rules, others=()):
     """One source's rows through japan_register.permits_from_rows, with the
-    city's municipalities, gaiji and the other municipalities' names."""
+    city's municipalities, gaiji, old place names (japan.CITIES'
+    "town_aliases", Matsue's {"八雲村": "八雲町"}) and the other municipalities'
+    names."""
+    from pipeline.countries import japan
+    aliases = japan.CITIES.get(config.SLUG, {}).get("town_aliases")
     return jr.permits_from_rows(rows, config.PREFECTURE, municipality(config, key), japan_wardless(config), rules,
-                                others, page_municipalities(config), city_gaiji(config))
+                                others, page_municipalities(config), city_gaiji(config), aliases)
 
 
 # The new-city checks (the Japan foundation, 2026-10-07): each trap a brief

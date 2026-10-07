@@ -174,10 +174,13 @@ done; one that is missing is a parked call, never a city-local fix.**
   dates, the `NN:` and `?` type prefixes, and the briefs' column spellings
   are read everywhere; `rebuilt_register` takes several expiry spellings
   (`end_col=("許可満了日", "許可終了日")`) and `keep_undated=True`.
-- Not done (optional in their briefs, each a few rows): Gifu's bracketed 字,
-  Morioka's 地割, Mito's 宮町 / 泉町 without 丁目, Matsue's 八雲村, Matsumoto's
-  湯の原. A zip of CSVs (Maebashi's, Sagamihara's registers) still needs a
-  config `source_rows`: `city_rows` reads XLSX members only.
+- The five small fixes the owner asked for after the landing are in too:
+  a bracketed 字 (`bracket_aza`, Gifu's 鷺山(向井町)), Iwate's 地割 (`chiwari`,
+  Morioka's 川目第1地割), a town without its 丁目 (`chome_union`, Mito's 宮町),
+  a dropped の (`no_dropped`, Matsumoto's 里山辺湯原), and Matsue's old
+  village, a config key: `"town_aliases": {"八雲村": "八雲町"}` in its
+  `japan.CITIES` entry. A zip of CSVs (Maebashi's, Sagamihara's registers)
+  still needs a config `source_rows`: `city_rows` reads XLSX members only.
 
 ## The traps Kobe measured
 

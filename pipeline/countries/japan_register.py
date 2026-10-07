@@ -161,11 +161,22 @@ WAVE2_RULES = frozenset({"oaza", "aza_letter", "kou_bare", "chome_missing", "mac
 #   "koaza_centroid" a 小字's centroid where MLIT lacks the number (Iwaki)
 #   "koaza_unique"   a 小字 written without its only 大字 (Fukushima)
 #   "oaza_cut"       a town cut at its 字, never inside 大字 (Aomori's 浪岡)
+# and the five the owner asked for after the landing ("do the address fixes",
+# 2026-10-07), each a few rows in its brief:
+#   "bracket_aza"    a 字 in brackets, 鷺山(向井町) for 鷺山字向井町 (Gifu)
+#   "chiwari"        Iwate's 地割, 川目第1地割 for 川目字第一地割 (Morioka)
+#   "chome_union"    a town written without the 丁目 MLIT splits it into, at
+#                    the mean of its 丁目 centroids (Mito's 宮町, 泉町)
+#   "no_dropped"     a の (and 字) the list leaves out, where only one MLIT
+#                    town matches (Matsumoto's 里山辺湯原 for 里山辺字湯の原)
+# Matsue's 八雲村 (the village before 2005) is a city's own: japan.CITIES'
+# "town_aliases" ({old: new}, the start of the town).
 WAVE5_RULES = frozenset({"type_cols5", "operator_cols5", "form_all", "combined_form", "roten", "kyoka_joken",
                          "asterisk", "misentaku", "city_only", "areawide", "repeat_city", "other_muni", "idou",
                          "past_term", "late_start",
                          "aza_insert", "koaza_word", "spelling5", "machi_bare", "koaza_chome", "koaza_centroid",
-                         "koaza_unique", "oaza_cut"})
+                         "koaza_unique", "oaza_cut",
+                         "bracket_aza", "chiwari", "chome_union", "no_dropped"})
 ALL_RULES = WAVE2_RULES | WAVE5_RULES
 
 
@@ -232,6 +243,13 @@ def norm_town(s, rules=()):
     # Sapporo's grid (南16条西10丁目) takes the same rule before 条 as before 丁目.
     return re.sub(r"([〇一二三四五六七八九十]+)(丁目|条)",
                   lambda m: f"{kanji_number(m.group(1))}{m.group(2)}" if kanji_number(m.group(1)) else m.group(0), s)
+
+
+def kanji_numeral(n):
+    """1 .. 99 -> 一 .. 九十九, as MLIT writes 地割 numbers (kanji_number's inverse)."""
+    d = "〇一二三四五六七八九"
+    tens, ones = divmod(n, 10)
+    return ((d[tens] if tens > 1 else "") + "十" if tens else "") + (d[ones] if ones else "")
 
 
 def first_number(s):
@@ -904,7 +922,8 @@ END_COLS = ("許可満了日", "許可終了日", "許可満了年月日", "許�
 START_COLS = ("許可開始日", "開始年月日", "許可始期", "許可期間（開始）")
 
 
-def permits_from_rows(rows, pref, city, wardless=False, rules=(), others=(), municipalities=(), gaiji=None):
+def permits_from_rows(rows, pref, city, wardless=False, rules=(), others=(), municipalities=(), gaiji=None,
+                      aliases=None):
     """load_city_permits for rows already read - Kyoto's rebuilt register.
 
     `wardless`: a city with no wards (japan.CITIES' "wardless"; the 2026-10-02
@@ -917,7 +936,9 @@ def permits_from_rows(rows, pref, city, wardless=False, rules=(), others=(), mun
     "other_muni"; `municipalities`, a page of several municipalities (Ageo
     (Regional)): each row's ward is the municipality its address names, as
     MLIT's 市区町村名 writes it (load_city_isj's `by_municipality`); `gaiji`, a
-    city's own private-use code points (japan.CITIES' "gaiji", Kawaguchi's).
+    city's own private-use code points (japan.CITIES' "gaiji", Kawaguchi's);
+    `aliases`, old place names at the start of a town ({old: new},
+    japan.CITIES' "town_aliases", Matsue's 八雲村 for 八雲町).
     A row set aside by a rule carries `out`, its reason, which step 2 counts."""
     tcols = type_cols(rules)
     fcols = FORM_COLS if "form_cols" in rules else ("業態",)
@@ -985,6 +1006,9 @@ def permits_from_rows(rows, pref, city, wardless=False, rules=(), others=(), mun
             why = "city name alone"
         if city == "京都市":
             a = a.translate(KYOTO_GAIJI)
+        for old, new in (aliases or {}).items():
+            if a.startswith(old):
+                a = new + a[len(old):]
         if municipalities:
             ward, rest = muni, a
         elif wardless:
@@ -1003,6 +1027,20 @@ def permits_from_rows(rows, pref, city, wardless=False, rules=(), others=(), mun
         # ...and a building name may follow 丁目 directly (南5条西6丁目ニュー桂和ビル).
         m = re.match(r"^(.+?丁目)(.*)$", rest) or re.match(r"^([^0-9]+?)([0-9].*)?$", rest)
         town, tail = (m.group(1), m.group(2) or "") if m else (rest, "")
+        # Gifu's lists write a 字 in brackets: 鷺山(向井町)1-2 for MLIT's
+        # 鷺山字向井町 (7 permits, 2 notifications). Not a bracket that opens
+        # the address (Morioka's (旧玉山村)).
+        if "bracket_aza" in rules:
+            b = re.fullmatch(r"([^()]+)\(([^()]+)\)", town)
+            if b:
+                town = b.group(1) + "字" + b.group(2)
+        # Iwate's 地割 (Morioka's 川目第1地割10番地, 4 rows): the parse cuts the
+        # town at the number; MLIT keys 川目字第一地割, the number in kanji
+        if "chiwari" in rules and town.endswith("第"):
+            c = re.match(r"(\d+)地割(.*)$", tail)
+            if c:
+                stem = town[:-1] if town[:-1].endswith("字") else town[:-1] + "字"
+                town, tail = f"{stem}第{kanji_numeral(int(c.group(1)))}地割", c.group(2)
         # Sapporo's Shiroishi misses: the town ends in a direction after 丁目
         # (本郷通8丁目南 3-1) - keep it in the town when a number follows.
         d = re.match(r"^([南北東西])(\d.*)$", tail) if town.endswith("丁目") else None
@@ -1096,6 +1134,14 @@ def join_rules5(p, w, blocks, chome, block_towns, has_koaza, o1, rules):
                     if blocks.get((w, cand, b)):
                         return blocks[(w, cand, b)]
                     return None
+    # "no_dropped": Matsumoto's 里山辺湯原 for MLIT's 里山辺字湯の原 (the list
+    # writes 湯の原 too): only where one MLIT town reads so without の and 字
+    if "no_dropped" in rules:
+        only = o1.get("no", {}).get((w, re.sub("[の字]", "", t)), set())
+        if len(only) == 1 and next(iter(only)) != t:
+            cand = next(iter(only))
+            p["town"], p["no_dropped"] = cand, True
+            return blocks.get((w, cand, b))
     # "koaza_unique": a 小字 written without its 大字 (Fukushima's 矢倉下, MLIT's
     # 五十辺字矢倉下), where the ward has that 小字 under one 大字 only
     if "koaza_unique" in rules and "字" not in t[1:]:
@@ -1145,6 +1191,22 @@ def join_city(permits, blocks, chome, rules=()):
             m = re.fullmatch(r"(.+?)字(\D*?)\d+丁目", t)
             if m:
                 o1[(w, m.group(1) + m.group(2))] = (m.group(1), m.group(2))
+    # "chome_union": (ward, a town MLIT splits into 丁目) -> its 丁目 centroids
+    union = collections.defaultdict(list)
+    if "chome_union" in rules:
+        for (w, t), pt in chome.items():
+            m = re.fullmatch(r"(\D+?)\d+丁目", t)
+            if m and pt is not None:
+                union[(w, m.group(1))].append(pt)
+    # "no_dropped": (ward, a town without its の and 字) -> the MLIT towns
+    # that read so; o1 carries it to join_rules5 under the key "no"
+    if "no_dropped" in rules:
+        no = collections.defaultdict(set)
+        for w, t in block_towns | set(chome):
+            s = re.sub("[の字]", "", t)
+            if s != t:
+                no[(w, s)].add(t)
+        o1["no"] = no
     for p in permits:
         w = p["ward"]
         # the direction suffix (Sapporo) only where that town exists in MLIT's file
@@ -1221,6 +1283,12 @@ def join_city(permits, blocks, chome, rules=()):
             p["tier"], p["pt"] = "block", hit[:2]
         elif (w, p["town"]) in chome:
             p["tier"], p["pt"] = "chome", chome[(w, p["town"])]
+        elif "chome_union" in rules and "丁目" not in p["town"] and union.get((w, p["town"])):
+            # Mito's 宮町 and 泉町 with no number at all (MLIT keys 宮町1丁目 to
+            # 3丁目 only): the mean of its 丁目 centroids, a town-chōme point
+            pts = union[(w, p["town"])]
+            p["tier"], p["pt"], p["union"] = "chome", (sum(q[0] for q in pts) / len(pts),
+                                                      sum(q[1] for q in pts) / len(pts)), True
         elif "koaza_centroid" in rules and (w, p["town"]) in getattr(blocks, "koaza", {}):
             # Iwaki (the Japan foundation): MLIT lists only some 地番 of a 小字
             # (a median 74% in 平's); its points' mean lies a median 164 m from
