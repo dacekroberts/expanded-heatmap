@@ -3010,6 +3010,32 @@ layer has no date of its own, so a shop that has closed may still be shown.
 Kalamaria branch is cut at the city line: its five stations (Nomarchia, Kalamaria,
 Aretsou, Nea Krini, Mikra), all in the Municipality of Kalamaria, are not ringed, and
 are listed on Thessaloniki's page. Not drawn: buses; the suburban railway.
+
+### Gelsenkirchen - the City's premises survey, services kept to personal care
+
+**Left out of the City of Gelsenkirchen's premises survey**: 176 surveyed premises with no
+category (54 food, 122 services); 3 hotels and guest houses; and 362 service premises by
+rule: gambling halls and betting shops (50), health and care practices (39), health,
+social and sport facilities (37), insurance offices (36), travel agencies (29), bank
+branches (23), repairs, alterations and key cutting (23), driving, music and other schools
+(23), law offices (16), religious premises (16), other professional offices (14), funeral
+homes (12), estate agents (11), the services catch-alls (10), trades (9), gyms and martial
+arts (5), copy shops (3), post offices (2) and vehicle repair (1). **Kept**: car dealers
+(4), as Retail.
+
+**Missing, not excluded**: personal services are thin. The survey records services
+mainly in the city's designated shopping centres: 83% of the personal-services points lie
+in one, against 52% of the shops and 46% of the food service, so hairdressers and other
+personal services away from the centres are missing. Vacant units sit in separate layers,
+not read.
+
+**Shown, but not named**: 22 signs that read as a person's own name show the business's
+category instead.
+
+**Stations.** Every stop of trams 301, 302 and 107 and Stadtbahn U11 in the city (60).
+302 runs on into Bochum (33 stops) and 107 and U11 into Essen (40): those stops are drawn
+with the lines but not ringed, listed on Gelsenkirchen's page. Buses, the S-Bahn and
+regional trains are not drawn.
 ### Seoul - Korea's permit registers: the trades Korea licenses, not every shop
 
 **Missing, not excluded.** Korea licenses food service, the personal-care trades and a set of

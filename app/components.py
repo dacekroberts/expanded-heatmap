@@ -571,7 +571,7 @@ _OSM_RAIL = (
     "Kitchener–Waterloo (Regional)", "Odense", "Liepāja", "Daugavpils",
     "Buffalo", "Sacramento", "Houston", "Ottawa", "Minneapolis", "Pittsburgh",
     "Dallas", "Kansas City", "Tucson", "Tacoma", "New Orleans", "Florence", "Den Haag",
-    "Göteborg", "Zurich", "Geneva (Regional)", "Thessaloniki", "Rome", "Palma", "Brno", "Plzeň", "Olomouc",
+    "Göteborg", "Zurich", "Geneva (Regional)", "Thessaloniki", "Gelsenkirchen", "Bremen", "Rome", "Palma", "Brno", "Plzeň", "Olomouc",
     "Ostrava", "Liberec (Regional)", "Most (Regional)", *_BRAZIL, "Prague",
     "Amsterdam", "Rotterdam", "Hong Kong", "Seoul", "Taichung", "Taoyuan",
     "Taipei (Regional)", "Daegu", "Busan", *_KOREA_SEMAS, "Sydney", "Melbourne",
@@ -1033,6 +1033,9 @@ _NOTICES = [
      "boundaries used to select them and its businesses, "
      "Thessaloniki's metro line and its stations and the municipal "
      "boundary used to select them and its businesses, "
+     "Gelsenkirchen's four tram and Stadtbahn lines and their stops and its "
+     "city boundary, Bremen's eight BSAG tram lines and their stops and "
+     "its city boundary, "
      "Rome's metro and Roma–Viterbo urban lines and their stations, "
      "Palma's Metro M1 and its stations, and the municipal boundaries used to "
      "select them, "

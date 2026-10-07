@@ -30,6 +30,20 @@ tradeoff. A parked call stops only what it names.
    info@kommunalverbund.de, delays Bremen and reverses call 13's
    no-outreach. Stops: Bremen's landing only; the build proceeds on the
    branch.
+   **Investigated further on the owner's word (2026-10-07, "yes
+   investigate"), pages only:** still unsettled, and the 4.0 reading is
+   weaker. Of the Kommunalverbund's 12 GovData records, its 6 boundary
+   datasets carry versioned `cc-by/4.0` (from 2019 on) and its 6 own
+   planning and survey datasets, this one among them, the unversioned
+   `cc-by` (as late as 2024): the publisher selects 4.0 where it means it.
+   No DCAT-AP.de or GovData text defines the unversioned id as the newest
+   version; Creative Commons' wiki: only 4.0 expressly licenses the sui
+   generis right. MetaVer answered 429 twice. Unread, the publisher's own
+   PDFs: the 2024 report (3,643,392 bytes) and the survey guideline (2,206,720
+   bytes), both on kommunalverbund.de; a download needs the owner's yes.
+   Options put to the owner: accept on the permissive reading; read the 2024
+   report first; or the owner asks the Kommunalverbund (outreach, reversing
+   call 13).
 2. ✅ **Answered (owner, 2026-10-07: "keep as built unless personal info
    that is not trade name").** Kept; in those premises a person-shaped name
    now shows the street address whatever the legal form: 37 more names
@@ -59,6 +73,13 @@ tradeoff. A parked call stops only what it names.
    station (Peñón Viejo); kept, the total gains 398 and the in-ring share
    falls slightly. Stops: nothing; keeping them is a code-scope change to
    step 2 and a re-run.
+4. **Gelsenkirchen's `mode`: U11 is OSM `route=subway`, not light rail.**
+   Call 18 kept `tram` "if OSM types U11 light rail"; OSM types it subway.
+   **Recommendation: keep `tram`** (built so) on the same principle the
+   call rests on (a second mode sets `mode` only where it is the city's main
+   network): U11 has 3 of the city's 60 stops, 1 of them its alone.
+   Tradeoff: the macro dot's color understates one short Stadtbahn end.
+   Stops: nothing; asks only to confirm the call reaches subway.
 
 ### 2026-10-07 - Gimpo built: the Gimpo Goldline on SEMAS's register, its own page (abroad-batch)
 
@@ -182,6 +203,61 @@ tradeoff. A parked call stops only what it names.
   travels without its caption carries the source line on its face. Notice
   1: rail, communes and stop names from OSM. **Open terms question: none.**
   New inputs: a city, a taxonomy, notice 154, the Swiss licence rows.
+
+### 2026-10-07 - Gelsenkirchen built: four tram lines on the City's premises survey (abroad-batch)
+
+- **Privacy verdict: publish.** `check_personal_exposure.py gelsenkirchen`:
+  no owner, contact or address field reaches the map (the reduced fetch,
+  call 19), 0 contact details in a sign. The sign rule (call 15): 22
+  person-shaped signs proposed by the German shape test, 4 of them found at
+  two or more points and kept as brands, 18 withheld; then **read by eye by
+  the lead session** over every displayed services sign (112) and the
+  two-or-three-word letters-only signs at one location in the food (197)
+  and retail (548) layers: 4 more read as a bare personal name with no trade
+  word (one ambiguous, withheld on Zurich's precedent), kept as keys in
+  `config.PERSON_NAMED_BY_EYE`. A trade word beside a name stays (Zurich's
+  kiosk precedent). **22 signs show the category.** The heuristic's 30%
+  "person-like" is its known artifact on German signs.
+- **Gelsenkirchen built, page 303** (pipeline by a subagent from the brief;
+  calls 15-20 applied). The reduced WFS fetch requests only the fields used
+  (the OGC API ignores `properties`); the services layer moved since the
+  brief (593 rows, 122 uncategorised; the brief corrected and its check
+  green), food and retail identical by id to the 2026-10-04 cache, which is
+  kept. **1,776 storefronts** (Retail 1,322 with 4 car dealers, Food
+  service 346, Personal services 108); 176 uncategorised and 362 services by
+  rule left out; a new services value "Sonstiges" (5) out as the R2
+  catch-all, Liège's precedent. New closed list
+  `pipeline/taxonomies/gelsenkirchen_gewerbe.py`: 67 (layer, category)
+  pairs and 47 retail assortments, raising on an unknown; retail catch-all
+  0.6%.
+- **Scope: the survey's own points**, the OSM polygon (relation 62522, AGS
+  05513000, 104.9 km²) as a check within 100 m (Liège's precedent): 2,313 of
+  2,314 inside, one food row 1 m outside kept.
+- **Rail.** One Overpass query; overpass-api.de answered 504 and kumi.systems
+  answered a bbox form with **OSM data of 2026-06-01** (four months old; the
+  caption gives that date; gate 3 still matches the operators' current
+  timetables, so the stops are current). 10 relations kept; 101, 106, 108,
+  306, 316 and U17 not drawn (no stop or track in the city). 271 stop
+  positions -> 133 stops, **60 in the city**, 73 outside, cut at the city
+  line (call 17); 107 alone serves seven city stops, so no stub question
+  arises. **Gate 3 exact on all four lines** (301 34, 302 54, 107 34, U11
+  23), counted on each timetable's line band, which lists every stop (the
+  departure tables list timing points only). **Median gap 380 m: halved
+  rings.** OSM's colors: 301 and 302 are 15.4 apart (both the operators'
+  blues, sharing Hbf to Musiktheater; labels and legend tell them apart),
+  each 31-42 from the nearest pin, recorded. **1,160 of 1,776 (65.3%) in a
+  ring.**
+- **Page proposals**: the two-operator lines bullet, the caption's OSM date,
+  "Businesses come from the City of Gelsenkirchen's survey ...", the thin
+  personal-services bullet, "176 surveyed businesses with no category are
+  left out.", and the survey-date and survey-reading bullets; `data_age`
+  "Undated survey (earlier files 2024), fetched 2026-10-07" (the brief's
+  proposal).
+- **Downstream:** no notice of its own (dl-de/zero-2.0); the caption
+  credits the City as a courtesy. Notice 1: rail, boundary and stop names
+  from OSM. **Open terms question: none.** BOGESTRA's and Ruhrbahn's
+  timetables were read for counts only, their terms unread. New inputs: a
+  city, a taxonomy.
 
 ### 2026-10-07 - Mexico City (Regional) built: four State of México municipios join on DENUE (abroad-batch)
 

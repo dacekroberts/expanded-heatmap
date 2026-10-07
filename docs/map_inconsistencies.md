@@ -702,6 +702,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Shimonoseki | JR Sanyo (JR West's, with JR Kyushu's stub to Moji) and JR San'in to Kogushi (2 lines) | The Shinkansen; the San'in Line beyond Kogushi (11 trains a day each way, owner) | MLIT N02 railway data in its 2025 edition, collapsed on its station-group code; English names from OSM in Hiroshima's style (no line wholly inside, so no gate 3) | City (JR cut at the city line) | 9 / 0 (2 beyond the city line, 7 too infrequent) |
 | **Germany** | | | | | |
 | Berlin | U-Bahn U1–U9 and the S-Bahn's 16 lines (the Ring S41/S42 among them) | Trams, regional trains, ferries; the U6's Tegel branch (closed for works until about August 2027) | VBB GTFS (gate 3 exact: U-Bahn 170 = 175 less 5 closed, S-Bahn 168) | Land of Berlin (lines cut at the Land boundary) | 41 / 0 (36 in Brandenburg, 5 closed for works) |
+| Gelsenkirchen | BOGESTRA trams 301 and 302, Ruhrbahn tram 107 and Stadtbahn U11 | Buses, S-Bahn, regional trains | OpenStreetMap route relations; gate 3 exact (BOGESTRA, Ruhrbahn) | City (lines cut at the city line) | 73 / 0 |
 | **United Kingdom** | | | | | |
 | London | Underground (11 lines), DLR, Elizabeth line and the six London Overground lines (19 lines, short names on the map, full names in the legend) | Tramlink, National Rail, river buses | OpenStreetMap route relations (TfL publishes no GTFS; its API's line strings are straight lines between stations); 8 stations OSM's relations omit added from its station nodes; gate 3 exact on 14 counts | Greater London (lines cut at the boundary) | 32 / 0 |
 | Glasgow | Glasgow Subway (one 15-station loop, its two tunnels drawn as one line) | Suburban and national rail (the Argyle and North Clyde lines and the rest) | OpenStreetMap route relations (SPT publishes no GTFS for the Subway); gate 3 exact on 15 | Glasgow City (the loop lies wholly inside) | 0 / 0 |
@@ -911,6 +912,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Shimonoseki | Permit register | MHLW's filings only | Permit type (営業の種類), read with the form of business (業態) | 333 / 939 / — | No Personal services (no list published); Retail = food retail, and partial; permits from before 2021-06 absent |
 | **Germany** | | | | | |
 | Berlin | Chamber of commerce register | IHK Berlin's Gewerbedaten (members' premises; no names) | WZ 2025 (NACE Rev. 2.1) | 30,800 / 15,472 / 3,121 | No hairdressers or laundries: crafts are not IHK members, so Personal services is thin by construction |
+| Gelsenkirchen | Street survey or census | The City's survey of commercial premises (Datenlizenz Deutschland Zero 2.0), sign names | Its own categories by layer | 862 / 224 / 74 | Personal services thin (recorded mainly in designated centres) |
 | **United Kingdom** | | | | | |
 | London | Food hygiene register | The Food Standards Agency's FHRS files, 33 boroughs | FSA business type | 12,360 / 29,214 / — | No Personal services; Retail = food shops only ("Food shops") |
 | Glasgow | Food hygiene register | Glasgow City Council's entries in Scotland's FHIS (Food Standards Scotland), from the FSA's open-data file | FSA business type | 405 / 1,588 / — | No Personal services; Retail = food shops only ("Food shops") |
@@ -1109,6 +1111,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Shimonoseki | Address join to MLIT's address blocks through the 大字 rule, MHLW's own point where the block join misses (88.1% block, 10.9% MHLW's point, 0.9% town-chōme centre; 3 unplaced) | 290 MHLW filings published without an address (29 restaurants) unplaced; closed premises may remain listed | Food trucks and stalls (一円); school, hospital and staff kitchens; hotel restaurants; snack bars; manufacturing except 菓子 / そうざい; vending; the name rule cannot run (no operator column) |
 | **Germany** | | | |
 | Berlin | Register coordinates (60,313 of 60,314 inside the Land) | Crafts missing; web shops cannot be excluded; registered offices stack at arcade and business-centre addresses | Catering, intermediation, mobile food, household services; "other personal services" (96.99) and general non-food retail (IHK 47122) as catch-alls; employee band and business type read, never shown |
+| Gelsenkirchen | Survey coordinates (100%) | Personal services away from the centres; 176 uncategorised premises | Gambling, health, offices, schools, repairs, funeral; 22 person-named signs shown as their category |
 | **United Kingdom** | | | |
 | London | Register coordinates (91%) and postcode centres (4%, OS postcode centroids for a full postcode with no register point; a median 11 m from the register's own point where both exist); 3,000 not placed | Food only; about one storefront in twenty unplaced, most in outer boroughs; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a private address or a flat address never placed; the name after "trading as" shown |
 | Glasgow | Register coordinates (99%); 55 not placed | Food only; about one storefront in a hundred unplaced; canteens not separated | Home and mobile caterers, institutional kitchens, hotels, manufacturers and distributors by type; a flat address or a childminder never placed; the name after "trading as" shown |
@@ -1318,6 +1321,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Shimonoseki | MHLW's filings downloaded 2026-10-02 | B (in the prose) | 0.6 mi | Yes | 43% | Trade name in Japanese |
 | **Germany** | | | | | | |
 | Berlin | 2026-09-01, monthly (IHK's own commit date; fetched 2026-09-28) | B | 0.6 mi | Yes | 82% | Kind of business (the register has no names) |
+| Gelsenkirchen | Undated survey (earlier files 2024), fetched 2026-10-07 | B | 0.3 mi | Yes | 65% | Sign name; the category where a sign is a person's name |
 | **United Kingdom** | | | | | | |
 | London | Extracts of 2026-09-09 to 2026-09-16, per borough (fetched 2026-09-28) | B | 0.6 mi | Yes | 74% | Registered name; the trade name where registered "trading as" |
 | Glasgow | Extract of 2026-09-14 (fetched 2026-09-28) | B | 0.6 mi | Yes | 42% | Registered name; the trade name where registered "trading as" |

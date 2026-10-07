@@ -79,6 +79,9 @@ OSM_RAIL_BY_CITY = {
                           "boundaries used to select them and its businesses", True),
     "Thessaloniki": ("Thessaloniki's metro line and its stations and the municipal "
                      "boundary used to select them and its businesses", True),
+    "Gelsenkirchen": ("Gelsenkirchen's four tram and Stadtbahn lines and their stops, and "
+                      "its city boundary", True),
+    "Bremen": ("Bremen's eight BSAG tram lines and their stops, and its city boundary", True),
     "Rome": ("Rome's metro and Roma–Viterbo urban lines and their stations, and its city "
              "boundary", True),
     "Palma": ("Palma's Metro M1 and its stations, and the municipal boundaries used to "

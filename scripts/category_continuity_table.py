@@ -1618,6 +1618,58 @@ COLUMNS["thessaloniki_adeies"] = {
     "mobile_unit": [loc("ΚΑΝΤΙΝΑ ΣΕ ΙΔΙΩΤΙΚΟ ΧΩΡΟ", "a mobile canteen")],
 }
 
+def _ge(layer, category, assortment=""):
+    return {"layer": layer, "category": category, "assortment": assortment}
+
+
+# Gelsenkirchen: the City's commercial-premises survey, three themed layers,
+# keyed on (layer, the layer's own category) with retail's core assortment
+# checked beside it.
+GE_SURVEY = "the City's premises survey has no category for this trade"
+COLUMNS["gelsenkirchen_gewerbe"] = {
+    "funeral": [loc(_ge("dienstleistung", "Bestattungsinstitut"), "Bestattungsinstitut")],
+    "no_counter_food": absent(GE_SURVEY + ": its food layer lists restaurants, snack bars, "
+                              "bars, cafés, chain restaurants and lodging only "
+                              "('Elektroinstallateur' is an electrician, not a stall)",
+                              ignore=("Elektroinstallateur",)),
+    "personal_catchall": [loc(_ge("dienstleistung", "Sonstige nicht genannte Dienstleistungen"),
+                              "Sonstige nicht genannte Dienstleistungen"),
+                          loc(_ge("dienstleistung", "Sonstiges"), "Sonstiges (services)")],
+    "tattoo": [loc(_ge("dienstleistung", "Tattoo-/Piercingstudio"), "Tattoo-/Piercingstudio")],
+    "adult_hostess": absent(GE_SURVEY + " (no adult venue is coded)"),
+    "sex_shop": [loc(_ge("einzelhandel", "Sonstiges", "Erotikartikel"), "Erotikartikel")],
+    "massage_commercial": absent(GE_SURVEY + ": no massage code; it may sit in the beauty "
+                                 "code, the health catch-all or the uncategorised rows"),
+    "massage_regulated": [loc(_ge("dienstleistung",
+                                  "Praxis für Physiotherapie (Krankengymnastik u.ä.)"),
+                              "physiotherapy practices")],
+    "car_dealer": [loc(_ge("dienstleistung", "KFZ-Handel / Autohäuser inkl. Krafträder"),
+                       "KFZ-Handel / Autohäuser")],
+    "petrol_station": absent(GE_SURVEY + ": no fuel-station category or assortment"),
+    "vehicle_repair": [loc(_ge("dienstleistung", "KFZ-Reparatur"), "KFZ-Reparatur")],
+    "gambling": [loc(_ge("dienstleistung", "Spielhallen, Casinos"), "Spielhallen, Casinos"),
+                 loc(_ge("dienstleistung", "Wettbüros"), "Wettbüros")],
+    "pawnbroker": absent(GE_SURVEY + " (no pawnshop is coded)"),
+    "nightclub": [loc(_ge("gastronomie", "Bar/Kneipe/Wirtshaus"),
+                      "bars and pubs, where a club would be filed")],
+    "vet": absent(GE_SURVEY + " (no veterinary practice is coded)"),
+    "nonstore": absent(GE_SURVEY + ": it records premises only, no online, mail-order or "
+                       "vending seller"),
+    "parking": absent(GE_SURVEY),
+    "repair": [loc(_ge("dienstleistung", "Änderungsschneiderei"), "Änderungsschneiderei"),
+               loc(_ge("dienstleistung", "Schuster, Schuhreparatur"), "Schuster"),
+               loc(_ge("dienstleistung", "Schlüsseldienst"), "Schlüsseldienst")],
+    "lodging": [loc(_ge("gastronomie", "Hotel/Gasthof/Pension"), "Hotel/Gasthof/Pension")],
+    "recreation": [loc(_ge("dienstleistung", "Fitness-Center"), "Fitness-Center"),
+                   loc(_ge("dienstleistung", "Kampfsport und Selbstverteidigung"), "Kampfsport")],
+    "pharmacy": [loc(_ge("einzelhandel", "Gesundheit und Körperpflege", "pharmazeutische Artikel"),
+                     "pharmazeutische Artikel")],
+    "optician": [loc(_ge("einzelhandel", "medizinische und orthopädische Artikel",
+                         "medizinische und orthopädische Artikel"),
+                     "medical and orthopedic supplies, where opticians are filed")],
+    "mobile_unit": absent(GE_SURVEY + ": it records fixed premises only"),
+}
+
 BERLIN_CFG = "pipeline/berlin/config.py"
 BERLIN_969 = '"nace_id": ("969",)'
 
