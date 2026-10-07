@@ -174,8 +174,8 @@ vehicle).
 
 ## The two private pages
 
-- **City master list**, version 17: https://claude.ai/artifact/LTzi7Vj5emzHnb3zAZy4Vn
-- **Country census**, version 17: https://claude.ai/artifact/CKCadsYtUhbWwWKzV9sDeD
+- **City master list**, version 18: https://claude.ai/artifact/LTzi7Vj5emzHnb3zAZy4Vn
+- **Country census**, version 18: https://claude.ai/artifact/CKCadsYtUhbWwWKzV9sDeD
 - How to update both: `scripts/staging_artifacts/README.md`. The published
   page is the source; the master list wins when they disagree. Master-list
   republishes in chat use the banded format (the owner's memory).
