@@ -852,56 +852,56 @@
  "maebashi": {
   "in_ring": 1901,
   "all": 4696,
-  "map_blob": "14bc77c09c262a0cc845e6747080bc0ceb93b27b"
+  "map_blob": "b2410097d733693a4db51f025739de39d643facd"
  },
  "fukuyama": {
   "in_ring": 2745,
   "all": 6365,
-  "map_blob": "0f36920dab2e7349e35ab7aa2773a9d387089d63"
+  "map_blob": "a6ebfb793d302d0600a4acf51c0485da33fc32f7"
  },
  "ichinomiya": {
   "in_ring": 1887,
   "all": 4025,
-  "map_blob": "9911688ed1610577301133d855ec4ac43a5231e0"
+  "map_blob": "a02e3206ca783a14a3752bc03a9d9b2ba2041908"
  },
  "tsu": {
   "in_ring": 1472,
   "all": 3234,
-  "map_blob": "044286cf42d3d853d6f726ebf953d004eb2a4b71"
+  "map_blob": "320a71e2971cfb83d4233b8b936b7d175e886000"
  },
  "fukushima": {
   "in_ring": 2013,
   "all": 3335,
-  "map_blob": "2d0f68911d2fbccb6078220ea03ee0e9596c9d73"
+  "map_blob": "d8cefcd1a345fd2238e4381e4bd261a4043e81f2"
  },
  "iwaki": {
   "in_ring": 1296,
   "all": 3730,
-  "map_blob": "46a520ab1fff58b37f901fe796818ac562e13cf8"
+  "map_blob": "d1819c505ba5ae781d083082e7f9b988c0b7832a"
  },
  "akita": {
   "in_ring": 1622,
   "all": 4961,
-  "map_blob": "c55dcbb12c76fe4a42e7953612adff19a31c7abb"
+  "map_blob": "8df159b74ba3a6c6753e9ad072521764d4561173"
  },
  "oita": {
   "in_ring": 3290,
   "all": 6219,
-  "map_blob": "70d92cac97ec7286e30766a390fa6e8c327764a4"
+  "map_blob": "e6d0a29e4434595834c2738bce1d84e4c8620f9c"
  },
  "gifu": {
   "in_ring": 1844,
   "all": 6005,
-  "map_blob": "971c59d907740279824f8194ad90c5944362b87b"
+  "map_blob": "2909e9fdf140ea15ca6fc3c81edd18fc1ee2f9fa"
  },
  "mito": {
   "in_ring": 977,
   "all": 4040,
-  "map_blob": "f3b4b712084314990a885982cc2a65c10b46df14"
+  "map_blob": "f0d7f89800870ba0b35195beb4eea860295dafc3"
  },
  "morioka": {
   "in_ring": 2303,
   "all": 4609,
-  "map_blob": "bc8afdab1f4552623002ec2d5c134020137f8986"
+  "map_blob": "cb3a968bc93ecfcfeb2468424976e4a656d68f61"
  }
 }
