@@ -260,8 +260,7 @@ def point_donors(config, joined):
     bb = config.CITY_BBOX
     wardless = japan_wardless(config)
     for recipient, donor in donors.items():
-        ps = jr.permits_from_rows(source_rows(config, donor), config.PREFECTURE, municipality(config, donor),
-                                  wardless, japan_rules(config))
+        ps = read_permits(config, donor, source_rows(config, donor), japan_rules(config))
         default = shared_points((p["ward"], p["town"], p["pub"]) for p in ps)
         pts = collections.defaultdict(set)
         for p in ps:
@@ -288,10 +287,84 @@ def japan_wardless(config):
 
 
 def japan_rules(config):
-    """The join rules a city opts into (japan.CITIES' "rules";
-    japan_register.WAVE2_RULES), the same set on the MLIT side and the list's."""
+    """The rules a city reads (japan.city_rules: a built city's CITIES "rules",
+    WAVE2_RULES; ALL_RULES for every city after the Japan foundation), the
+    same set on the MLIT side and the list's."""
     from pipeline.countries import japan
-    return frozenset(japan.CITIES.get(config.SLUG, {}).get("rules", ()))
+    return japan.city_rules(config.SLUG)
+
+
+def page_municipalities(config):
+    """A page of several municipalities (japan.CITIES' "municipalities",
+    {code: MLIT's 市区町村名}; Ageo (Regional)): their names, else ()."""
+    from pipeline.countries import japan
+    return tuple(japan.CITIES.get(config.SLUG, {}).get("municipalities", {}).values())
+
+
+def city_gaiji(config):
+    """A city's own private-use code points (japan.CITIES' "gaiji",
+    {code point: character}; Kawaguchi's 塚, 蓮, 樋), as a translate table."""
+    from pipeline.countries import japan
+    g = japan.CITIES.get(config.SLUG, {}).get("gaiji")
+    return str.maketrans(g) if g else None
+
+
+def other_municipalities(config):
+    """The prefecture's municipalities other than the page's own, as addresses
+    spell them, for the "other_muni" rule. A name the page's own municipality
+    starts with is left out, so 伊奈町 never cuts an address of 伊奈町's page."""
+    from pipeline.countries import japan
+    own = {config.MUNICIPALITY, *getattr(config, "SOURCE_MUNICIPALITY", {}).values(), *page_municipalities(config)}
+    pref = japan.CITIES[config.SLUG]["pref"]
+    return tuple(sorted((n for n in japan.prefecture_municipalities(pref)
+                         if not any(o.startswith(n) or n.startswith(o) for o in own)), key=len, reverse=True))
+
+
+def read_permits(config, key, rows, rules, others=()):
+    """One source's rows through japan_register.permits_from_rows, with the
+    city's municipalities, gaiji and the other municipalities' names."""
+    return jr.permits_from_rows(rows, config.PREFECTURE, municipality(config, key), japan_wardless(config), rules,
+                                others, page_municipalities(config), city_gaiji(config))
+
+
+# The new-city checks (the Japan foundation, 2026-10-07): each trap a brief
+# found by hand, raised where the next city passes. A city built before the
+# foundation is not checked, since its lists carry columns read the old way.
+OPERATOR_LIKE = re.compile(r"氏名|代表者|営業者|開設者|申請者|法人名|設置者")
+NOT_A_NAME = re.compile(r"住所|所在地|電話|TEL|ＴＥＬ|方書|ビル名|ﾋﾞﾙ名|役職|肩書|都道府県|市町村|フラグ|郵便|番号|"
+                        r"カナ|かな|ﾌﾘｶﾞﾅ|フリガナ|区分|種別")
+
+
+def check_new_city_columns(config, key, rows, ps, rules):
+    """Stop a new city's build where a source's columns are not read: no
+    address (Hirakata's 営業所所在地①, Gifu's 営業所在地: every row read "not a
+    premises"), no trade name (Tsu's 営業所屋号: the name rule compared
+    nothing), no type on a food list (Gifu's 営業種別), an operator-like column
+    the name rule does not compare (Neyagawa's two), or a permit term with no
+    pinned as-of (calls 161 and 172). config.NOT_OPERATOR ({column: why})
+    and config.NO_TRADE_NAME ({source key: why}) record a column read and
+    judged otherwise."""
+    from pipeline.countries import japan
+    if config.SLUG in japan.BUILT_BEFORE_FOUNDATION or not rows:
+        return
+    heads = set().union(*(r.keys() for r in rows[:200])) - {None}
+    where = f"{key}: header {sorted(map(str, heads))}"
+    if not any(p["addr"].strip() for p in ps) and not any(p.get("out") for p in ps):
+        sys.exit(f"{key}: no row has an address in japan_register.ADDR_COLS. Add the list's spelling there.\n{where}")
+    if not any(p["name"].strip() for p in ps) and key not in getattr(config, "NO_TRADE_NAME", {}):
+        sys.exit(f"{key}: no row has a trade name in japan_register.NAME_COLS (the name rule would compare "
+                 f"nothing). Add the list's spelling, or name the source in config.NO_TRADE_NAME.\n{where}")
+    if kind(config, key) not in japan_eigyo.PERSONAL_SOURCES and not any(p["type"].strip() for p in ps):
+        sys.exit(f"{key}: no row has a type in japan_register.TYPE_COLS. Add the list's spelling.\n{where}")
+    unread = sorted(h for h in map(str, heads) if OPERATOR_LIKE.search(h) and not NOT_A_NAME.search(h)
+                    and h not in jr.operator_cols(rules) and h not in getattr(config, "NOT_OPERATOR", {}))
+    if unread:
+        sys.exit(f"{key}: {unread} look like operator columns the name rule does not compare. Add each to "
+                 f"japan_register.OPERATOR_COLS, or record it in config.NOT_OPERATOR with why.\n{where}")
+    if ({"past_term", "late_start"} & rules and any(p.get("end") or p.get("start") for p in ps)
+            and key not in getattr(config, "TERM_AS_OF", {})):
+        sys.exit(f"{key}: its rows carry a permit term (japan_register.END_COLS / START_COLS) but "
+                 f"config.TERM_AS_OF names no pinned as-of for it (calls 161 and 172; never today).")
 
 
 def drop_superseded(config, df):
@@ -316,11 +389,58 @@ def drop_superseded(config, df):
     return df[~drop].copy()
 
 
+def set_aside(config, df, rules):
+    """The rows a WAVE5 rule set aside in japan_register (`out`), and step 2's
+    own mobile-salon rule ("idou": Maebashi's three salons with 移動 in the
+    address and the name, where the type says nothing), counted by reason
+    before the closed rows and before any de-duplication: Ōita's 301 masked
+    rows share seven (address, type) keys and would fold into seven phantom
+    premises. Nothing changes for a built city (no rule, no `out`)."""
+    why = df["out"].fillna("") if "out" in df else pd.Series("", index=df.index)
+    if "idou" in rules:
+        idou = df["kind"].isin(japan_eigyo.PERSONAL_SOURCES) & (
+            df["addr"].fillna("").str.contains("移動") | df["name"].fillna("").str.contains("移動")) & (why == "")
+        why = why.where(~idou, "mobile salon (移動)")
+    if not (why != "").any():
+        return df
+    for reason, n in why[why != ""].value_counts().items():
+        print(f"  set aside, {reason}: {n:,}")
+        emit("set_aside_" + re.sub(r"[^a-z]+", "_", reason.lower()).strip("_"), int(n))
+    return df[why == ""].copy()
+
+
+def out_of_term(config, df, rules):
+    """Calls 161 and 172 (owner, 2026-10-06): a permit past its term on the
+    source's pinned as-of is dropped, and one that starts after it waits
+    (config.TERM_AS_OF = {source key: date}, never today). Kure's three
+    restaurants that start on 2026-09-01 or 10-01; Mito's 80 MHLW permits
+    still listed past their 許可満了日."""
+    if not {"past_term", "late_start"} & rules or "end" not in df:
+        return df
+    asof = {k: jr.wareki_date(str(v)) for k, v in getattr(config, "TERM_AS_OF", {}).items()}
+    on = [asof.get(s) for s in df["source"]]
+
+    def cmp(col, rule, sign):
+        if rule not in rules or col not in df:
+            return pd.Series(False, index=df.index)
+        return pd.Series([bool(d and a and isinstance(d, type(a)) and sign * (d - a).days > 0)
+                          for d, a in zip(df[col], on)], index=df.index)
+    past = cmp("end", "past_term", -1)
+    late = cmp("start", "late_start", 1)
+    for label, m, k in (("past its term (call 161)", past, "past_term"), ("starting after the as-of (call 172)", late,
+                                                                         "late_start")):
+        print(f"  permits {label}: {int(m.sum()):,}")
+        emit(f"permits_{k}", int(m.sum()))
+    return df[~(past | late)].copy()
+
+
 def run(config, write=True):
     sys.stdout.reconfigure(encoding="utf-8")
     need(config.ISJ_DIR, config.SLUG)
-    blocks, chome = jr.load_city_isj(config.ISJ_DIR, japan_rules(config))
+    rules = japan_rules(config)
+    blocks, chome = jr.load_city_isj(config.ISJ_DIR, rules, by_municipality=bool(page_municipalities(config)))
     print(f"  MLIT 位置参照情報: {len(blocks):,} block keys, {len(chome):,} town-chōme keys")
+    others = other_municipalities(config) if "other_muni" in rules else ()
 
     permits = []
     for key in config.SOURCES:
@@ -328,9 +448,9 @@ def run(config, write=True):
         missing = [c for c in config.REQUIRED_COLUMNS[key] if c not in rows[0]]
         if missing:
             sys.exit(f"{key}: header lacks {missing}")
-        flags = [jr.name_is_operator(r, japan_rules(config)) for r in rows]
-        ps = jr.permits_from_rows(rows, config.PREFECTURE, municipality(config, key), japan_wardless(config),
-                                  japan_rules(config))
+        flags = [jr.name_is_operator(r, rules) for r in rows]
+        ps = read_permits(config, key, rows, rules, others)
+        check_new_city_columns(config, key, rows, ps, rules)
         for p, f in zip(ps, flags):
             p["source"], p["name_is_operator"], p["muni"] = key, f, municipality(config, key)
             p["kind"] = kind(config, key)
@@ -340,6 +460,13 @@ def run(config, write=True):
     del rows  # the raw rows carry the operator columns; nothing below may see them
 
     df = pd.DataFrame(permits)
+    if "asterisk" in rules:
+        # Ōita's three trade names masked with asterisks at a visible address:
+        # the pin shows the permit type, never the asterisks
+        masked = df["name"].map(lambda s: bool(jr.ASTERISKS.fullmatch(unicodedata.normalize("NFKC", s or "").strip())))
+        df["name_is_operator"] = df["name_is_operator"] | masked
+        print(f"  trade names masked by the publisher (shown as the permit type): {int(masked.sum())}")
+        emit("names_masked", int(masked.sum()))
     # THE NAME RULE HOLDS PER PREMISES, not per row (Osaka, 2026-09-27): one
     # premises' second permit may record its operator differently, and the
     # one-pin-per-premises step below can keep that unflagged row - Osaka showed
@@ -356,12 +483,14 @@ def run(config, write=True):
     print(f"  name rule by premises: {int(spread.sum())} more row(s) share a flagged row's block and trade name")
     emit("name_rule_spread_rows", int(spread.sum()))
     official_shares(config, df, write)
+    df = set_aside(config, df, rules)
     # MHLW's open data keeps closed premises, marked (Fukuoka's second source)
     closed = df["closed"]
     if closed.any():
         print(f"  closed (廃業): {int(closed.sum()):,}")
         emit("closed", int(closed.sum()))
     df = df[~closed].copy()
+    df = out_of_term(config, df, rules)
     # MHLW publishes an address only where the filer agreed to it (Fukuoka;
     # config.ADDRESS_BY_CONSENT): a row without one cannot be placed, and its
     # count is the page's disclosure. Elsewhere a blank address stays "not a
@@ -375,7 +504,13 @@ def run(config, write=True):
     print(f"  not a premises (vehicle, stall, 一円, storeless): {int((mobile & ~noaddr).sum()):,}")
     emit("not_a_premises", int((mobile & ~noaddr).sum()))
     df = df[~mobile].copy()
-    decided = [japan_eigyo.explain(t, s, f) for t, s, f in zip(df["type"], df["kind"], df["form"])]
+    if "combined_form" in rules:
+        before = df["form"].copy()
+        df["form"] = df["form"].map(japan_eigyo.resolve_combined)
+        n = int((before.fillna("") != df["form"].fillna("")).sum())
+        print(f"  combined 業態 cells read as their restaurant form (call 158): {n:,}")
+        emit("combined_form_restaurant", n)
+    decided = [japan_eigyo.explain(t, s, f, rules) for t, s, f in zip(df["type"], df["kind"], df["form"])]
     df["bucket"] = [b for b, _ in decided]
     df["rule"] = [r for _, r in decided]
     out = df[df["bucket"].isna()]

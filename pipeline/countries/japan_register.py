@@ -120,6 +120,71 @@ def kanji_number(s):
 WAVE2_RULES = frozenset({"oaza", "aza_letter", "kou_bare", "chome_missing", "machi", "citywide", "form_cols",
                          "coop"})
 
+# THE JAPAN FOUNDATION'S RULES (2026-10-07; docs/build_plan_2026-10-07.md):
+# every shared-code item of the 58 Japanese briefs, and the owner's calls of
+# 2026-10-06, that would move a BUILT map. Built maps must not change, so the
+# 34 cities built before it keep WAVE2_RULES (japan.BUILT_BEFORE_FOUNDATION)
+# and a new city reads ALL_RULES by default; switching one on for a built
+# city is a review-time re-render (docs/decisions_drafts/japan-foundation.md
+# lists each city and the size of the change). The rules that move no built
+# map are not here: they run everywhere.
+#   "type_cols5"     type_cols(): Chiba's クリーニング種別１ first, five more after
+#   "operator_cols5" operator_cols(): the 法人名称 columns (the owner's 法人名 rule)
+#   "form_all"       every form column read, 一般 skipped (Fukuyama's 業態 + 形態)
+#   "combined_form"  call 158: a combined 業態 cell naming a public restaurant
+#                    stays Food service (japan_eigyo.resolve_combined, step 2)
+#   "roten"          露天 among the temporary words (Kure; japan_eigyo.explain)
+#   "kyoka_joken"    自動車 in the permit condition (許可条件) is a vehicle (Kure)
+#   "asterisk"       an address of asterisks only is withheld by the publisher,
+#                    counted apart (Kawaguchi, Ōita); a masked trade name shows
+#                    the permit type (step 2)
+#   "misentaku"      an address of 未選択 is no address (Kure)
+#   "city_only"      call 162: an address of the city name alone is not a premises
+#   "areawide"       全域, 周辺, a prefecture-wide address, <city>内 (Takatsuki,
+#                    Aomori, Kawaguchi, Tottori)
+#   "repeat_city"    the prefecture and city written twice, read once
+#   "other_muni"     a row addressed in another municipality is cut (Tottori,
+#                    Ichinomiya, Ageo); step 2 passes the prefecture's names
+#   "idou"           移動 in a personal-services address or name is a mobile
+#                    salon (Maebashi; step 2)
+#   "past_term"      call 161: a permit past its term on the as-of is dropped
+#   "late_start"     call 172: a permit starting after the as-of waits
+#                    (both against config.TERM_AS_OF, step 2)
+# and the join's (join_rules5, norm_town, load_city_isj; each would move a
+# built city's tiers):
+#   "aza_insert"     the 字 left out after a 大字 of any length (Uji, Ichinomiya,
+#                    Akita, Mito, Morioka, Matsumoto, Fukushima, Fuji)
+#   "koaza_word"     the word 小字 read as 字 (Takatsuki)
+#   "spelling5"      spelling5()'s pairs, both sides
+#   "machi_bare"     a 町 MLIT does not write, or one it does (Fuji, Ōita)
+#   "koaza_chome"    大字 + 字 + 丁目 (Okazaki's O1)
+#   "koaza_centroid" a 小字's centroid where MLIT lacks the number (Iwaki)
+#   "koaza_unique"   a 小字 written without its only 大字 (Fukushima)
+#   "oaza_cut"       a town cut at its 字, never inside 大字 (Aomori's 浪岡)
+WAVE5_RULES = frozenset({"type_cols5", "operator_cols5", "form_all", "combined_form", "roten", "kyoka_joken",
+                         "asterisk", "misentaku", "city_only", "areawide", "repeat_city", "other_muni", "idou",
+                         "past_term", "late_start",
+                         "aza_insert", "koaza_word", "spelling5", "machi_bare", "koaza_chome", "koaza_centroid",
+                         "koaza_unique", "oaza_cut"})
+ALL_RULES = WAVE2_RULES | WAVE5_RULES
+
+
+_KANJI = "一-龥々"
+
+
+def spelling5(s):
+    """The "spelling5" rule's pairs, both sides (the Japan foundation,
+    2026-10-07), each where the lists and MLIT spell one place two ways:
+    ノ / の between kanji (Ichinomiya's 八ノ通り, Yamagata's 上ノ台), small ッ /
+    ツ (Akita's 二ッ屋, Shizuoka's 七ッ新屋), が / ケ (Ōita's 梅が丘), 之 / の
+    (Fuji's 米之宮町), 藏 / 蔵 (Uji's 六地藏: 88.5% to 92.7% at the block), and
+    Matsue's dash written for 一 before 丁目 (浜乃木―丁目)."""
+    s = s.replace("藏", "蔵")
+    s = re.sub(f"(?<=[{_KANJI}])[ノの之](?=[{_KANJI}])", "の", s)
+    s = re.sub(f"(?<=[{_KANJI}])[ッツっつ](?=[{_KANJI}])", "ツ", s)
+    s = re.sub(f"(?<=[{_KANJI}])[ケがヵ](?=[{_KANJI}])", "ケ", s)
+    return re.sub(f"(?<=[{_KANJI}])[―─‐-]丁目", "一丁目", s)
+
 
 def norm_town(s, rules=()):
     """町字 as a comparable key: NFKC, no spaces, and the 丁目 number in digits.
@@ -128,6 +193,12 @@ def norm_town(s, rules=()):
     八重洲2丁目 where MLIT writes 八重洲二丁目. Applied to BOTH sides, so both
     sides take the same `rules` (WAVE2_RULES)."""
     s = unicodedata.normalize("NFKC", s or "").replace(" ", "").replace("　", "")
+    # Takatsuki's misses (the Japan foundation, 2026-10-07): the hill villages
+    # write the word 小字 (田能小字的谷) where MLIT keys 田能字的谷
+    if "koaza_word" in rules:
+        s = s.replace("小字", "字")
+    if "spelling5" in rules:
+        s = spelling5(s)
     # Yokkaichi's and Shimonoseki's misses (2026-10-03): MLIT writes a 大字 the
     # lists leave out, at the start (大字羽津, 4,304 of Yokkaichi's block keys)
     # or after a merged town's name (豊浦町大字川棚). Dropped on both sides.
@@ -258,7 +329,7 @@ def load_permits(path, muni_name):
 
 def join(permits, blocks, chome):
     for p in permits:
-        p["mobile"] = p["town"] == "都内一円" or "自動車" in p["type"]
+        p["mobile"] = p["town"] == "都内一円" or bool(VEHICLE.search(p["type"]))
         hit = blocks.get((p["town"], p["block"]))
         if not hit and "丁目" not in p["town"] and p["block"]:
             # hyphen form: 築地5-2-1 is 築地五丁目 2番 1号 - the first number is the
@@ -300,13 +371,36 @@ ADDR_COLS = ("施設所在地", "営業所所在地", "所在地_連結表記", 
              # registers and Sasebo's old-law list (an underscore), Yokkaichi's
              # two food lists (without it xlsx_rows read 0 rows), Nara's old-law
              # list and its three registers
-             "施設_所在地", "営業施設住所", "営業所_住所１", "理容所所在地", "美容所所在地", "クリーニング所在地")
+             "施設_所在地", "営業施設住所", "営業所_住所１", "理容所所在地", "美容所所在地", "クリーニング所在地",
+             # The Japan foundation (2026-10-07), each brief's list in its own
+             # spelling; no built city's file carries one (scanned): Hirakata's
+             # food list (a TRAILING circled digit, which _head keeps; without it
+             # every row read no address), Fukuyama's two formats, Gifu's food
+             # lists, Ōita's, Aomori's, Fuji's laundries and Matsue's barber and
+             # beauty registers (city_rows read 0 rows of each without them)
+             "営業所所在地①", "所在地１", "営業所所在地１", "営業所在地", "営業所住所１", "施設の所在地１",
+             "クリーニング所所在地", "営業所所在地（移動美容所にあっては営業区域及び車両保管場所）",
+             "営業所所在地（移動理容所にあっては営業区域及び車両保管場所）")
+
+
+# A header's ONE leading circled numeral (①営業所名称, ⑩代表者氏名): the
+# Hyōgo prefecture registers Itami and Kakogawa read (city_rows read 0 rows of
+# them without it; the Japan foundation, 2026-10-07). No built city's header
+# carries one. A trailing one (Hirakata's 営業所所在地①) is part of the name.
+CIRCLED_LEAD = re.compile(r"^[①-⑳㉑-㉟㊱-㊿]")
 
 
 # Header cells as one key: Utsunomiya's general-laundry register pads its
 # headers with spaces ( 　名称, 2026-10-02). str.strip takes U+3000 too.
+# xlsx_rows cleans EVERY cell with it, so it never touches a circled numeral:
+# Hiroshima's and Toyama's types begin with one (㉕ そうざい製造業).
 def _head(c):
     return "" if c is None else str(c).replace("\n", "").replace("\r", "").strip()
+
+
+def _header(c):
+    """A header cell's name: _head, and its leading circled numeral dropped."""
+    return CIRCLED_LEAD.sub("", _head(c))
 
 
 TYPE_COLS = ("業種名", "業種分類", "業種情報公開名称", "営業の種類", "業種区分", "営業種類", "施設（種別）", "施設（種別）等", "種別", "業種",
@@ -320,12 +414,35 @@ TYPE_COLS = ("業種名", "業種分類", "業種情報公開名称", "営業の
              # 無店舗取次店 rows are not premises
              "営業種目", "区分")
 
+# The Japan foundation's type spellings (2026-10-07), read only by a city with
+# the "type_cols5" rule (WAVE5_RULES), since Matsuyama's built laundry list
+# carries クリーニング種別１ (245 rows) and its map must not move. Chiba's
+# laundry registers (Matsudo, Ichikawa) keep the kind (取次所, 無店舗取次店) in
+# クリーニング種別１ and write クリーニング所 in 業務種別 on every row, so it is
+# read AHEAD of TYPE_COLS; the rest after them: Fukuyama's registers (種類),
+# Gifu's food lists (営業種別), Shizuoka's monthly registers (業種名称),
+# Aomori's (営業許可業種), Matsue's laundries (クリーニング所又は取次所の別).
+TYPE_COLS_FIRST5 = ("クリーニング種別１",)
+TYPE_COLS_AFTER5 = ("種類", "営業種別", "業種名称", "営業許可業種", "クリーニング所又は取次所の別")
+
+
+def type_cols(rules=()):
+    """The type columns a city reads, in order (TYPE_COLS, widened by "type_cols5")."""
+    return TYPE_COLS_FIRST5 + TYPE_COLS + TYPE_COLS_AFTER5 if "type_cols5" in rules else TYPE_COLS
+
+
 # 業態, the form of business, read beside the type (japan_eigyo.FORM_RULES).
 # Fukuoka's lists and MHLW's name it 業態; Yokosuka's food list 詳細業種
 # (給食, 屋台型臨時営業, 旅館の経営を兼ねる飲食店営業, スナック: without it
 # each read as a restaurant), Sasebo's old-law list 種目 (旅館, 自動販売機,
-# 仕出し屋). Japan wave 2, 2026-10-03.
-FORM_COLS = ("業態", "詳細業種", "種目")
+# 仕出し屋). Japan wave 2, 2026-10-03. The Japan foundation (2026-10-07):
+# Hyōgo's lists' 形態 (Itami, Kakogawa: 15 street stalls read as restaurants
+# without it) and Fukuyama's, Fukushima's two monthly spellings, Akita's 業態名;
+# no built city's file carries one.
+FORM_COLS = ("業態", "詳細業種", "種目", "形態", "種目又は業態", "種目または業態", "業態名")
+# A form cell that says nothing (Fukuyama's 形態 一般 on 5,533 rows), skipped
+# where every form column is read ("form_all").
+FORM_NOTHING = frozenset({"一般", "なし", "無し", "-", "－"})
 
 
 # 名称 last: the Tokyo catalogue's 生活衛生 registers (Taitō's, Shibuya's) name
@@ -338,7 +455,16 @@ NAME_COLS = ("屋号", "施設名称", "営業施設名称、屋号又は商号"
              "営業所の名称、屋号又は商号",
              # Japan wave 2 (2026-10-03): Hamamatsu's registers and Sasebo's
              # old-law list, Yokkaichi's food lists, Nara's three registers
-             "施設_名称", "営業施設屋号", "理容所名称", "美容所名称", "クリーニング名称")
+             "施設_名称", "営業施設屋号", "理容所名称", "美容所名称", "クリーニング名称",
+             # The Japan foundation (2026-10-07), each brief's spelling; no built
+             # city's file carries one (scanned). Without them every row of the
+             # list read no trade name, so the name rule compared nothing and one
+             # pin per premises keyed on the address alone: Maebashi's and
+             # Akita's food lists, Fukuyama's two formats and its registers (店名),
+             # Tsu's, Fukushima's and Ōita's food lists, Morioka's, Fujisawa's,
+             # Aomori's, Fuji's laundries
+             "営業所名", "施設＿名称（屋号・商号）１", "営業所名称１", "店名", "営業所屋号", "営業所屋号名称",
+             "屋号商号", "営業所名1", "施設の名称、屋号", "クリーニング所名称")
 
 
 def xlsx_rows(data, sheet=None, merged_header=False):
@@ -365,8 +491,9 @@ def xlsx_rows(data, sheet=None, merged_header=False):
         for r in ws.iter_rows(values_only=True):
             cells = [_head(c) for c in r]
             if head is None:
-                if any(c in ADDR_COLS for c in cells):
-                    head = cells
+                names = [_header(c) for c in r]
+                if any(c in ADDR_COLS for c in names):
+                    head = names
                 continue
             if not any(cells):
                 continue
@@ -415,6 +542,9 @@ def city_rows(path, sheet=None, merged_header=False):
         return
     text = decode(Path(path).read_bytes())
     head = text.split("\n", 1)[0]
+    if head.startswith("#LINK"):
+        yield from linkdata_rows(text)
+        return
     # Meguro's 生活衛生 registers: each TAB-separated line is wrapped whole in CSV
     # quotes, inner quotes doubled ("No\t""施設名称""\t…"). Unwrap it with the csv
     # reader, then read the TSV inside. A plain quoted TSV has no doubled quotes.
@@ -431,18 +561,18 @@ def city_rows(path, sheet=None, merged_header=False):
     # Hakodate's registers open with one or two title rows, Matsuyama's
     # new-law food list with an empty line. A file with no address column in
     # its first 30 rows keeps its first line, as before.
-    if not any(_head(c) in ADDR_COLS for c in first):
+    if not any(_header(c) in ADDR_COLS for c in first):
         skipped = [first]
         for r in rows:
             skipped.append(r)
-            if any(_head(c) in ADDR_COLS for c in r):
+            if any(_header(c) in ADDR_COLS for c in r):
                 header, hi = r, len(skipped) - 1
                 break
             if len(skipped) >= 30:
                 break
         if hi == 0:
             rows = iter(skipped[1:] + list(rows))
-    head = [_head(c) for c in header]
+    head = [_header(c) for c in header]
     # csv.DictReader's own shape: blank lines skipped, missing cells None,
     # surplus cells under the key None
     for r in rows:
@@ -455,6 +585,25 @@ def city_rows(path, sheet=None, merged_header=False):
             for h in head[len(r):]:
                 d.setdefault(h, None)
         yield d
+
+
+def linkdata_rows(text):
+    """LinkData.org's table format (Matsumoto's registers, the Japan foundation,
+    2026-10-07): tab-separated `#` header lines, the column names in
+    `#property`, then one line per row whose first cell is LinkData's row
+    subject. A first line of `#LINK` marks it; no built city's file is one."""
+    head = None
+    for line in text.splitlines():
+        cells = line.split("\t")
+        if line.startswith("#"):
+            if cells[0] == "#property":
+                head = [_header(c) for c in cells[1:]]
+            continue
+        if not line.strip():
+            continue
+        if head is None:
+            raise ValueError("a LinkData table with no #property line")
+        yield dict(zip(head, [c.strip() for c in cells[1:]]))
 
 
 def _cell(v):
@@ -514,16 +663,23 @@ KYOTO_CORP = re.compile(r"株式会社|有限会社|合同会社|合資会社|�
                         r"公益財団法人|社会福祉法人|医療法人|学校法人|宗教法人|特定非営利活動法人|[(]株[)]|[(]有[)]|㈱|㈲")
 
 
+ERA_BASE = {"S": 1925, "昭和": 1925, "H": 1988, "平成": 1988, "R": 2018, "令和": 2018}
+
+
 def wareki_date(s):
-    """H31.4.30 / 令和3年4月1日 / 2026-03-31 / an Excel serial -> date, else None."""
+    """H31.4.30 / R8/09/30 / S63.9.12 / 令和3年4月1日 / 2026-03-31 / an Excel serial -> date, else None."""
     # Sasebo's old-law list pads the era form with spaces, R 8. 5.31 (0 of 607
     # dates read without this, 2026-10-03)
     s = re.sub(r"\s", "", unicodedata.normalize("NFKC", str(s or "")))
-    if m := re.match(r"([HR])(\d+)[.](\d+)[.](\d+)", s):
-        y, mo, d = int(m.group(2)) + (1988 if m.group(1) == "H" else 2018), int(m.group(3)), int(m.group(4))
-    elif m := re.match(r"(平成|令和)(\d+|元)年(\d+)月(\d+)日", s):
+    # The Japan foundation (2026-10-07): Maebashi's lists write the era letter
+    # with slashes (R8/09/30, H01/08/18: all 2,117 food expiries read None, so
+    # in_term kept every row), and Gifu's, Fuji's and Koshigaya's registers
+    # reach back to Shōwa (S63. 9.12). No built city's end date has either form.
+    if m := re.match(r"([SHR])(\d+)[./](\d+)[./](\d+)", s):
+        y, mo, d = int(m.group(2)) + ERA_BASE[m.group(1)], int(m.group(3)), int(m.group(4))
+    elif m := re.match(r"(昭和|平成|令和)(\d+|元)年(\d+)月(\d+)日", s):
         n = 1 if m.group(2) == "元" else int(m.group(2))
-        y, mo, d = n + (1988 if m.group(1) == "平成" else 2018), int(m.group(3)), int(m.group(4))
+        y, mo, d = n + ERA_BASE[m.group(1)], int(m.group(3)), int(m.group(4))
     elif m := re.match(r"(\d{4})[-/](\d{1,2})[-/](\d{1,2})", s):
         y, mo, d = int(m.group(1)), int(m.group(2)), int(m.group(3))
     elif re.fullmatch(r"\d{5}", s):  # one row: 47177 = 2029-02-28
@@ -591,13 +747,27 @@ class BlockIndex(dict):
     def __init__(self, *a, **kw):
         super().__init__(*a, **kw)
         self.far = set()
+        # the Japan foundation's 小字 indexes (2026-10-07), filled only for a
+        # city with "koaza_centroid" or "koaza_unique": (ward, 大字字小字) ->
+        # centroid, and (ward, 小字) -> the 大字 it occurs under
+        self.koaza = {}
+        self.koaza_of = collections.defaultdict(set)
 
 
 FAR_M = 500
 
 
-def load_city_isj(isj_dir, rules=()):
+def _isj_ward(r, by_municipality):
+    """An MLIT row's ward key: the ward after the city's 市 (中央区; "" for a
+    city without wards), or, for a page of several municipalities, the whole
+    市区町村名 (上尾市, 北足立郡伊奈町), since two cities would both key as ""
+    and their towns of one name (本町一丁目, both in Ageo and Ina) would merge."""
+    return r["市区町村名"] if by_municipality else r["市区町村名"].split("市")[-1]
+
+
+def load_city_isj(isj_dir, rules=(), by_municipality=False):
     """Every ward's block and town-chōme files, keyed by (ward, town[, block]).
+    `by_municipality`: keyed by municipality instead (_isj_ward).
 
     Kyoto's misses (rule D): one town name can belong to two places in a ward -
     123 names in 上京, 中京 and 下京, the twins a median 1.27 km apart. Such a
@@ -606,14 +776,16 @@ def load_city_isj(isj_dir, rules=()):
     cents = collections.defaultdict(list)
     for z in sorted(Path(isj_dir).glob("*-19.0b.zip")):
         for r in read_zip_csv(z):
-            cents[(r["市区町村名"].split("市")[-1], norm_town(r["大字町丁目名"], rules))].append((float(r["緯度"]), float(r["経度"])))
+            cents[(_isj_ward(r, by_municipality), norm_town(r["大字町丁目名"], rules))].append((float(r["緯度"]), float(r["経度"])))
     chome = {k: pts[0] if len(pts) == 1 else None for k, pts in cents.items()}
     twin_of = collections.defaultdict(set)  # a twin town's (ward, town, block) -> which twins it occurs in
     blocks = BlockIndex()
+    koaza_index = bool({"koaza_centroid", "koaza_unique"} & set(rules))
+    koaza_pts = collections.defaultdict(list)
     first = {}
     for z in sorted(Path(isj_dir).glob("*-24.0a.zip")):
         for r in read_zip_csv(z):
-            ward = r["市区町村名"].split("市")[-1]
+            ward = _isj_ward(r, by_municipality)
             key = (ward, norm_town(r["大字・丁目名"], rules), first_number(r["街区符号・地番"]))
             pt = (float(r["緯度"]), float(r["経度"]), r["住居表示フラグ"])
             if chome.get(key[:2], ()) is None:
@@ -631,9 +803,16 @@ def load_city_isj(isj_dir, rules=()):
                 akey = (ward, norm_town(r["大字・丁目名"] + "字" + r["小字・通称名"], rules), key[2])
                 if r.get("代表フラグ") == "1" or akey not in blocks:
                     blocks[akey] = pt
+                if koaza_index:
+                    koaza_pts[akey[:2]].append(pt[:2])
+                    blocks.koaza_of[(ward, norm_town(r["小字・通称名"], rules))].add(key[1])
     for key, which in twin_of.items():
         if len(which) > 1:
             blocks[key] = None
+    # the 小字-centroid tier ("koaza_centroid"): the mean of MLIT's points in a
+    # 小字, means of degrees over a few hundred metres, as the town-chōme
+    # centroids MLIT itself publishes are
+    blocks.koaza = {k: (sum(p[0] for p in v) / len(v), sum(p[1] for p in v) / len(v)) for k, v in koaza_pts.items()}
     return blocks, chome
 
 
@@ -656,7 +835,12 @@ def in_term(rows, end_cols, as_of):
             yield r
 
 
-def rebuilt_register(paths, as_of, end_col="許可満了日", granted_col="許可年月日", rules=()):
+def _date_of(r, cols):
+    """The first of `cols` (one column name or several spellings) that reads as a date."""
+    return next((d for d in (wareki_date(r.get(c)) for c in ((cols,) if isinstance(cols, str) else cols)) if d), None)
+
+
+def rebuilt_register(paths, as_of, end_col="許可満了日", granted_col="許可年月日", rules=(), keep_undated=False):
     """A register rebuilt from a complete list and the months since, Kyoto's
     method for any list (Higashiōsaka, 2026-10-03: its 全許可 list of
     2026-04-01 plus each month's new permits to 2026-08-31). `paths` oldest
@@ -668,39 +852,76 @@ def rebuilt_register(paths, as_of, end_col="許可満了日", granted_col="許�
 
     Returns premises columns only (address, trade name, type, 業態, the two
     dates, the closure fields), plus the name rule's ANSWER, compared here
-    while the operator columns are in hand; never the operator's name."""
+    while the operator columns are in hand; never the operator's name.
+
+    The Japan foundation (2026-10-07): `end_col` and `granted_col` may each be
+    several spellings, read in order (Fukuyama's monthly files write 許可満了日
+    in one format and 許可終了日 in the other); the record keeps the first
+    spelling's name. `keep_undated`: a row with no readable expiry is kept, as
+    in_term keeps one (Koshigaya's 907 food notifications carry none; without
+    it they rank 1900-01-01 and fall out)."""
+    end_key = end_col if isinstance(end_col, str) else end_col[0]
+    granted_key = granted_col if isinstance(granted_col, str) else granted_col[0]
+    undated = datetime.date(9999, 12, 31) if keep_undated else datetime.date(1900, 1, 1)
     best = {}
     for path in paths:
         for r in city_rows(path):
             addr = next((r[c] for c in ADDR_COLS if (r.get(c) or "").strip()), "")
             name = next((r[c] for c in NAME_COLS if (r.get(c) or "").strip()), "")
-            typ = next((r[c] for c in TYPE_COLS if r.get(c)), "")
-            end, granted = wareki_date(r.get(end_col)), wareki_date(r.get(granted_col))
+            typ = next((r[c] for c in type_cols(rules) if r.get(c)), "")
+            end, granted = _date_of(r, end_col), _date_of(r, granted_col)
             key = (re.sub(r"[‐‑‒–—―−ｰー－]", "-", unicodedata.normalize("NFKC", addr).replace(" ", "")
                           .replace("　", "")),
                    _name_key(name), re.sub(r"^\(旧\)", "", unicodedata.normalize("NFKC", typ).replace(" ", "")))
-            rank = (end or datetime.date(1900, 1, 1), granted or datetime.date(1900, 1, 1))
+            rank = (end or undated, granted or datetime.date(1900, 1, 1))
             if key not in best or rank >= best[key][0]:
                 best[key] = (rank, {"所在地": addr, "施設名称": name, "業種": typ,
                                     "業態": next(((r.get(c) or "").strip() for c in FORM_COLS
                                                  if (r.get(c) or "").strip()), ""),
-                                    end_col: end.isoformat() if end else "",
-                                    granted_col: granted.isoformat() if granted else "",
+                                    end_key: end.isoformat() if end else "",
+                                    granted_key: granted.isoformat() if granted else "",
+                                    "許可条件": r.get("許可条件") or "",
                                     "廃業年月日": r.get("廃業年月日") or "", "申請区分": r.get("申請区分") or "",
                                     "name_is_operator": name_is_operator(r, rules)})
     return [rec for (e, _), rec in best.values() if e >= as_of]
 
 
 VARIATION_SELECTORS = re.compile("[︀-️\U000e0100-\U000e01ef]")
+# A vehicle, in a type or a permit condition: 自動車, never 自動車以外 ("other
+# than a vehicle", the Tama ledgers' 野菜果物販売業(自動車以外); the Japan
+# foundation, 2026-10-07; no built city's type carries it).
+VEHICLE = re.compile(r"自動車(?!以外)")
+ASTERISKS = re.compile(r"[*＊]+")
+# What is left of a prefecture-wide address once the prefecture is cut
+# (鳥取県, 鳥取県内, 鳥取県東部)
+PREF_WIDE = re.compile(r"(?:内|全域|一円|全県|[東西南北中]部(?:地区|地域)?)?")
+AREA_WORDS = re.compile(r"全域|周辺")
+# A permit's term, each list's own spelling (the briefs' and the header read of
+# 2026-10-07): MHLW's and the national schema's first, then Hirakata's,
+# Fukushima's, Morioka's, Koshigaya's and Kawaguchi's, Itami's, Akita's, Nara's
+END_COLS = ("許可満了日", "許可終了日", "許可満了年月日", "許可終期", "満了年月日", "終了年月日", "有効期限",
+            "許可期間（満了）", "許可有効期限")
+START_COLS = ("許可開始日", "開始年月日", "許可始期", "許可期間（開始）")
 
 
-def permits_from_rows(rows, pref, city, wardless=False, rules=()):
+def permits_from_rows(rows, pref, city, wardless=False, rules=(), others=(), municipalities=(), gaiji=None):
     """load_city_permits for rows already read - Kyoto's rebuilt register.
 
     `wardless`: a city with no wards (japan.CITIES' "wardless"; the 2026-10-02
     batch). Its address is never split at a 区, because its neighbourhoods end
     in one (Toyama's 太田北区, 五福六区; Fukui's 土地区画整理事業) and MLIT keys
-    every town under an empty ward."""
+    every town under an empty ward.
+
+    The Japan foundation (2026-10-07), each a WAVE5_RULES rule: `others`, the
+    prefecture's other municipalities as addresses spell them, for
+    "other_muni"; `municipalities`, a page of several municipalities (Ageo
+    (Regional)): each row's ward is the municipality its address names, as
+    MLIT's 市区町村名 writes it (load_city_isj's `by_municipality`); `gaiji`, a
+    city's own private-use code points (japan.CITIES' "gaiji", Kawaguchi's).
+    A row set aside by a rule carries `out`, its reason, which step 2 counts."""
+    tcols = type_cols(rules)
+    fcols = FORM_COLS if "form_cols" in rules else ("業態",)
+    dates = "past_term" in rules or "late_start" in rules
     out = []
     for r in rows:
         addr = next((r[c] for c in ADDR_COLS if (r.get(c) or "").strip()), "")
@@ -711,20 +932,62 @@ def permits_from_rows(rows, pref, city, wardless=False, rules=()):
         # Kyoto's misses (2026-09-28): an ideographic variation selector after a
         # kanji (高辻 + U+E0100 in 20 rows) picks a glyph, never a different town
         a = VARIATION_SELECTORS.sub("", a)
+        if gaiji:
+            a = a.translate(gaiji)
+        why = ""
+        # Kawaguchi (1,316 rows) and Ōita (301): the publisher masks the
+        # address with asterisks; never parsed as a town, counted apart
+        if "asterisk" in rules and a and ASTERISKS.fullmatch(a):
+            why = "address withheld by the publisher"
+        had_pref = a.startswith(pref)
         a = re.sub("^" + pref, "", a)
-        # Kobe's miss: the city's name can recur INSIDE an address
-        # (灘区六甲山町…神戸市立六甲山牧場), so strip it only where no ward precedes it.
-        i = a.find(city)
-        if i >= 0 and "区" not in a[:i]:
-            a = a[i + len(city):]
+        # Tottori's MHLW rows: 鳥取県内, 県内, 鳥取県東部, 鳥取県 alone - the
+        # prefecture, not a premises
+        if "areawide" in rules and not why and addr.strip() and (a.startswith("県内") or (had_pref and PREF_WIDE.fullmatch(a))):
+            why = "area-wide address"
+        muni = next((m for m in municipalities if a.startswith(m)), None)
+        if muni:
+            a = a[len(muni):]
+        else:
+            # Tottori's health centre lists four other towns (岩美郡岩美町 …),
+            # Ichinomiya's and Ageo's lists rows of their neighbours: cut by the
+            # address, never by CITY_BBOX
+            if "other_muni" in rules and not why and not a.startswith(city) and any(a.startswith(o) for o in others):
+                why = "addressed in another municipality"
+            muni = city
+            # Kobe's miss: the city's name can recur INSIDE an address
+            # (灘区六甲山町…神戸市立六甲山牧場), so strip it only where no ward precedes it.
+            i = a.find(city)
+            if i >= 0 and "区" not in a[:i]:
+                a = a[i + len(city):]
+        # Takatsuki's, Mito's and Tottori's: the prefecture and city written
+        # twice (鳥取県鳥取市鳥取市内)
+        if "repeat_city" in rules:
+            for _ in range(2):
+                b = re.sub("^" + pref, "", a)
+                if b.startswith(muni):
+                    a = b[len(muni):]
         # Kurume's MHLW rows (2026-10-03): an address of only 久留米市内 ("within
         # the city") is a vehicle or stall licensed citywide, as 一円 is; all
         # 1,022 such rows share one point, so the default-point guard sees one
         # town and lets it through
         citywide = "citywide" in rules and a == "内"
+        # Takatsuki's 全域, Aomori's 1,284, Kawaguchi's 周辺 and 全域: an area, not a premises
+        if "areawide" in rules and not why and (a in ("市内", "全域", "一円") or AREA_WORDS.search(a)):
+            why = "area-wide address"
+        # Kure's 未選択, a form's unselected default (MHLW geocodes it to city
+        # hall): no address at all
+        if "misentaku" in rules and a.startswith("未選択"):
+            addr, a = "", ""
+        # call 162 (owner, 2026-10-06): an address of the city name alone
+        # names no premises ("city name alone seems like we can exclude")
+        if "city_only" in rules and not why and addr.strip() and a == "":
+            why = "city name alone"
         if city == "京都市":
             a = a.translate(KYOTO_GAIJI)
-        if wardless:
+        if municipalities:
+            ward, rest = muni, a
+        elif wardless:
             ward, rest = "", a
         elif city.endswith("区"):
             # a Tokyo special ward's own list: the ward IS the municipality, and
@@ -751,26 +1014,49 @@ def permits_from_rows(rows, pref, city, wardless=False, rules=()):
                 pub = (pub[1], pub[0])
         except (ValueError, KeyError):
             pass
-        out.append({"ward": ward, "town": norm_town(town, rules), "block": first_number(tail), "rest": tail,
+        typ = next((r[c] for c in tcols if r.get(c)), "")
+        # Kure's MHLW rows: the health centre marks a vehicle in the permit's
+        # condition (自動車(…), the revised law's vehicle classes) while 業態
+        # is blank or free text (owner's rule, 2026-10-06)
+        if "kyoka_joken" in rules and not why and VEHICLE.search(r.get("許可条件") or ""):
+            why = "vehicle (permit condition)"
+        if "form_all" in rules:
+            # Fukuyama's lists keep 業態 AND 形態 (一般, 移動販売車, 露店): every
+            # form column is read, 一般 skipped, joined as one combined cell
+            form = "、".join(dict.fromkeys(v for v in ((r.get(c) or "").strip() for c in FORM_COLS)
+                                          if v and v not in FORM_NOTHING))
+        else:
+            form = next(((r.get(c) or "").strip() for c in fcols if (r.get(c) or "").strip()), "")
+        name = next((r[c] for c in NAME_COLS if r.get(c)), "")
+        if gaiji:
+            name = name.translate(gaiji)
+        rec = {"ward": ward, "town": norm_town(town, rules), "block": first_number(tail), "rest": tail,
                     "dir": (d.group(1), d.group(2)) if d else None,
-                    "addr": addr, "type": next((r[c] for c in TYPE_COLS if r.get(c)), ""),
+                    "addr": addr, "type": typ,
                     # Fukuoka's lists (the city's and MHLW's) carry 業態, the
                     # form of business, and only there are vehicles, stalls and
                     # school kitchens marked; japan_eigyo reads it beside the type
-                    "form": next(((r.get(c) or "").strip() for c in (FORM_COLS if "form_cols" in rules else ("業態",))
-                                  if (r.get(c) or "").strip()), ""),
+                    "form": form,
                     # MHLW keeps closed premises, marked 許可(廃業) / 届出(廃業);
                     # Shibuya keeps them with a 廃業日 (22,311 of 39,304 rows)
                     "closed": bool((r.get("廃業年月日") or r.get("廃業日") or "").strip())
                     or "廃業" in (r.get("申請区分") or ""),
-                    "name": next((r[c] for c in NAME_COLS if r.get(c)), ""), "pub": pub,
+                    "name": name, "pub": pub,
                     # not a premises: vehicles, and 市内一円 / 仙台市内一円 ("anywhere in
                     # the city") - Sendai's festival stalls (仮設, 臨時) are written so -
                     # and 無店舗 ("no shop"): Meguro's laundry pick-ups at 目黒区内;
                     # Matsuyama writes "within the health centre's area" (保健所管内
                     # / 保健所管轄内) for its vehicles and stalls (277 food rows)
                     "mobile": not addr.strip() or "一円" in addr or "保健所管" in addr or citywide
-                    or any(w in next((r[c] for c in TYPE_COLS if r.get(c)), "") for w in ("自動車", "無店舗"))})
+                    or bool(VEHICLE.search(typ)) or "無店舗" in typ}
+        if why:
+            rec["out"] = why
+        if dates:
+            # calls 161 and 172 (owner, 2026-10-06): the permit's own term,
+            # read by step 2 against the source's pinned as-of (TERM_AS_OF)
+            rec["end"] = next((d for d in (wareki_date(r.get(c)) for c in END_COLS) if d), None)
+            rec["start"] = next((d for d in (wareki_date(r.get(c)) for c in START_COLS) if d), None)
+        out.append(rec)
     return out
 
 
@@ -788,6 +1074,59 @@ def known_town(town, known):
     return None, None
 
 
+def join_rules5(p, w, blocks, chome, block_towns, has_koaza, o1, rules):
+    """The Japan foundation's join rules (2026-10-07), each a WAVE5_RULES
+    switch, tried in order on a row whose town is neither a block nor a
+    town-chōme as written; the first that finds a block wins. A rule that
+    finds the 小字 but not its number leaves the row's town on it, for the
+    小字 centroid ("koaza_centroid") or its 大字's. Changes `p` in place and
+    returns the block hit or None."""
+    t, b = p["town"], p["block"]
+    koaza = getattr(blocks, "koaza", {})
+    # "aza_insert": the 字 left out after a 大字 of any length (Uji's 宇治妙楽 55
+    # for MLIT's 宇治字妙楽: block 55.0% to 88.5%; Ichinomiya's 起東茜屋, Akita's
+    # 手形蛇野, Fukushima's 笹谷西谷地). Rule C tries 3 characters or more and
+    # never inserts the 字. The longest 大字 MLIT also keys with 小字 wins.
+    if "aza_insert" in rules and "字" not in t[1:]:
+        for j in range(len(t) - 1, 0, -1):
+            if (w, t[:j]) in has_koaza:
+                cand = t[:j] + "字" + t[j:]
+                if (w, cand, b) in blocks or (w, cand) in koaza:
+                    p["town"], p["aza_insert"] = cand, True
+                    if blocks.get((w, cand, b)):
+                        return blocks[(w, cand, b)]
+                    return None
+    # "koaza_unique": a 小字 written without its 大字 (Fukushima's 矢倉下, MLIT's
+    # 五十辺字矢倉下), where the ward has that 小字 under one 大字 only
+    if "koaza_unique" in rules and "字" not in t[1:]:
+        under = getattr(blocks, "koaza_of", {}).get((w, t), set())
+        if len(under) == 1:
+            cand = next(iter(under)) + "字" + t
+            p["town"], p["koaza_unique"] = cand, True
+            return blocks.get((w, cand, b))
+    # "machi_bare": a town written with 町 where MLIT names it bare (Fuji's
+    # 比奈町, MLIT's 比奈), or without the 町 MLIT puts before its 丁目 (Ōita's
+    # 明磧1丁目, MLIT's 明磧町1丁目): the reverse of Nara's `machi`
+    if "machi_bare" in rules:
+        m = re.fullmatch(r"(\D+?)(\d+丁目)", t)
+        alt = t[:-1] if t.endswith("町") and len(t) > 2 else (
+            m.group(1) + "町" + m.group(2) if m and not m.group(1).endswith("町") else None)
+        if alt and ((w, alt) in chome or (w, alt) in block_towns):
+            p["town"], p["machi_bare"] = alt, True
+            return blocks.get((w, alt, b))
+    # "koaza_chome": Okazaki's O1 (康生通西4-5-6 for MLIT's 康生通字西4丁目;
+    # 202 rows, 康生通's 90 unplaced among them): the first number is the 丁目
+    if "koaza_chome" in rules and "丁目" not in t:
+        hit = o1.get((w, t.rstrip("字")))
+        nums = re.findall(r"\d+", unicodedata.normalize("NFKC", p.get("rest") or ""))
+        if hit and nums:
+            cand = f"{hit[0]}字{hit[1]}{int(nums[0])}丁目"
+            if (w, cand) in block_towns:
+                p["town"], p["block"], p["koaza_chome"] = cand, (str(int(nums[1])) if len(nums) > 1 else None), True
+                return blocks.get((w, cand, p["block"]))
+    return None
+
+
 def join_city(permits, blocks, chome, rules=()):
     towns = collections.defaultdict(set)
     for w, t in chome:
@@ -797,6 +1136,15 @@ def join_city(permits, blocks, chome, rules=()):
     has_koaza = {(w, t.rsplit("字", 1)[0]) for w, t, _ in blocks if "字" in t[1:]}
     block_towns = {(w, t) for w, t, _ in blocks}
     far = getattr(blocks, "far", set())
+    # Okazaki's O1 ("koaza_chome"): MLIT keys central towns as 大字 + 字 + a
+    # 丁目 (康生通字西4丁目, 稲熊町字3丁目); (ward, the town as the list writes
+    # it) -> (大字, the part between 字 and the number)
+    o1 = {}
+    if "koaza_chome" in rules:
+        for w, t in block_towns:
+            m = re.fullmatch(r"(.+?)字(\D*?)\d+丁目", t)
+            if m:
+                o1[(w, m.group(1) + m.group(2))] = (m.group(1), m.group(2))
     for p in permits:
         w = p["ward"]
         # the direction suffix (Sapporo) only where that town exists in MLIT's file
@@ -837,7 +1185,19 @@ def join_city(permits, blocks, chome, rules=()):
             if alt and ((w, alt) in chome or (w, alt) in block_towns):
                 p["town"], p["machi"] = alt, True
                 hit = blocks.get((w, alt, p["block"]))
-        oaza = re.split(r"字", p["town"], maxsplit=1)[0] if "字" in p["town"][1:] else None
+        if not hit and (w, p["town"]) not in chome:
+            hit = join_rules5(p, w, blocks, chome, block_towns, has_koaza, o1, rules) or hit
+        if "oaza_cut" in rules:
+            # Aomori's 浪岡 (28 rows): 浪岡大字浪岡字稲村 - the town cut at the
+            # first 字 that is not part of 大字 or 小字, never inside 大字
+            m = re.search(r"(?<![大小])字", p["town"][1:])
+            oaza = p["town"][:m.start() + 1] if m else None
+            if not hit and oaza and (w, oaza) not in has_koaza and p["block"]:
+                hit = blocks.get((w, oaza, p["block"]))
+                if hit:
+                    p["town"], p["oaza_cut"] = oaza, True
+        else:
+            oaza = re.split(r"字", p["town"], maxsplit=1)[0] if "字" in p["town"][1:] else None
         if not hit and (w, p["town"]) not in chome and not (oaza and (w, oaza) in chome):
             t, how = known_town(p["town"], towns[w])
             if t and how == "prefix" and (w, t) in has_koaza:
@@ -861,6 +1221,11 @@ def join_city(permits, blocks, chome, rules=()):
             p["tier"], p["pt"] = "block", hit[:2]
         elif (w, p["town"]) in chome:
             p["tier"], p["pt"] = "chome", chome[(w, p["town"])]
+        elif "koaza_centroid" in rules and (w, p["town"]) in getattr(blocks, "koaza", {}):
+            # Iwaki (the Japan foundation): MLIT lists only some 地番 of a 小字
+            # (a median 74% in 平's); its points' mean lies a median 164 m from
+            # MHLW's own point, the 大字 centroid 1,479 m
+            p["tier"], p["pt"] = "koaza", blocks.koaza[(w, p["town"])]
         elif oaza and (w, oaza) in chome:
             p["tier"], p["pt"], p["oaza"] = "chome", chome[(w, oaza)], True
         else:
@@ -907,7 +1272,32 @@ OPERATOR_COLS = ("営業者名", "開設者名", "申請者名", "代表者名",
                  "法人代表者名", "開設者", "代表者", "代表者氏名", "開設者法人名", "営業者法人名",
                  "営業者氏名（法人のみ）", "営業者氏名・法人名称", "氏名", "開設者申請者名", "開設者代表者名",
                  "営業者申請者名", "営業者代表者名", "申請者_氏名", "申請者代表者名", "開設者氏名（法人）",
-                 "開設者代表者", "法人名")
+                 "開設者代表者", "法人名",
+                 # The Japan foundation (2026-10-07), each brief's list in its own
+                 # spelling (scanned on the built cities: none withholds a row
+                 # there; Yokosuka's registers carry 法人代表者 on 269 rows, 0
+                 # equal to the trade name): Hirakata's registers, Fukuyama's
+                 # 申請者＿代表者 and its registers' bare 営業者 (Morioka's and
+                 # Matsumoto's too), Fukushima's June list, Iwaki's, Koshigaya's, Funabashi's,
+                 # Kawaguchi's, Neyagawa's two, Shizuoka's, Matsue's, and
+                 # Sagamihara's correction sheet (営業者代表者氏名, found by the
+                 # foundation's header read)
+                 "開設者(申請者)", "申請者＿代表者", "営業者", "営業者氏名漢字", "代表者氏名（法人）",
+                 "代表者名（法人）", "代表者_氏名", "営業者名称（法人の場合は代表者氏名）", "法人営業者名称",
+                 "開設者法人", "法人代表者", "営業者の名称又は氏名", "営業者代表者氏名")
+# A company-name column (法人名称), the owner's 法人名 rule (2026-10-05)
+# applied to the lists that spell it so: Itami's and Kakogawa's 営業者法人名称,
+# Fujisawa's 申請者法人名, and on the built maps Yokohama's and Yokosuka's
+# 申請者法人名称 and Nishinomiya's 開設者法人名称, where comparing them would
+# withhold 4 Yokosuka trade names (12-13 characters each, a company's length).
+# Read only with the "operator_cols5" rule (WAVE5_RULES); the 4 are a
+# review-time re-render proposal (docs/decisions_drafts/japan-foundation.md).
+OPERATOR_COLS_WAVE5 = ("営業者法人名称", "申請者法人名称", "開設者法人名称", "申請者法人名")
+
+
+def operator_cols(rules=()):
+    """The operator columns a city's name rule compares (OPERATOR_COLS, widened by "operator_cols5")."""
+    return OPERATOR_COLS + OPERATOR_COLS_WAVE5 if "operator_cols5" in rules else OPERATOR_COLS
 
 
 def _name_key(s):
@@ -925,7 +1315,7 @@ def name_is_operator(row, rules=()):
         return True
     if "name_is_operator" in row:
         return bool(row["name_is_operator"])
-    return same_person(name, (row.get(c) for c in OPERATOR_COLS), "coop" in rules)
+    return same_person(name, (row.get(c) for c in operator_cols(rules)), "coop" in rules)
 
 
 # THE SIGN RULE, the name rule's version 2 (owner, 2026-10-06; v1 2026-09-27,
@@ -978,3 +1368,12 @@ def haversine_m(a, b):
     la1, lo1, la2, lo2 = map(math.radians, (*a, *b))
     h = math.sin((la2 - la1) / 2) ** 2 + math.cos(la1) * math.cos(la2) * math.sin((lo2 - lo1) / 2) ** 2
     return 2 * 6371000 * math.asin(math.sqrt(h))
+
+
+# Import-time checks for the Japan foundation's readers (2026-10-07).
+assert wareki_date("R8/09/30") == datetime.date(2026, 9, 30)
+assert wareki_date("H01/08/18") == datetime.date(1989, 8, 18)
+assert wareki_date("S63. 9.12") == datetime.date(1988, 9, 12)
+assert wareki_date("R 8. 5.31") == datetime.date(2026, 5, 31)
+assert _header("①営業所名称") == "営業所名称" and _header("営業所所在地①") == "営業所所在地①"
+assert not VEHICLE.search("野菜果物販売業(自動車以外)") and VEHICLE.search("飲食店営業（自動車）")
