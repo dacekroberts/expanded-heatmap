@@ -4,6 +4,20 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-07 - Calls 206 to 208 accepted; Regional-1's batch ready, calls 210 to 213 put to the owner
+
+- **"206: accept, 207 accept", "208: acept"** (owner, staging's chat):
+  - **206:** Yamagata §4's reimbursement, triggered by use and uncapped, accepted (Hong Kong's shape).
+  - **207:** Matsumoto's city §6(5) and LinkData Art.18(4), both partly not fault-based and uncapped, accepted; the credit names CC BY 4.0 in the city's format with LinkData's CC BY 3.0 mark and attribution name.
+  - **208:** Kawaguchi's 「データ利用のみ自由です」 read permissively: use without ownership, the page's CC BY 2.1 JP grant covering republication.
+- **Regional-1 reported its batch** (branch worktree-japan-regional-1, head 9c8a7ddd, nothing pushed, zero drift, privacy 0 for all): Maebashi, Fukuyama, Ichinomiya, Tsu, Fukushima, Iwaki, Akita, Ōita, Gifu, Mito and Morioka on pages 229 to 239 and notices 176 to 186, the block used. It ran fingerprint.py table and re-rendered with the marks.
+- **Calls put to the owner:**
+  - **210 (call 153 again): Fukushima's 2026 register months** (r0808riyou.csv, r0804-0807biyou.csv). Recommended approving and rebuilding to 2026-08-31 (Ichinomiya's call 128); without them the registers stand at 2026-03-31 beside food at 2026-08-31.
+  - **211: Ōita's 2026 register months** (442011_beauty_salon_new, five CSVs; 442011_cleaning_new). Same recommendation.
+  - **212: Ōita's own notification list** (442011_licensed_facility, 287,712 B). Recommended approving: a complete Food-shops layer instead of MHLW's partial one; a schema read and a re-render.
+  - **213: Gifu's rings.** The measured median nearest-station gap is 545 m (the brief said 641 m), inside the 540-570 m band. Recommended standard rings: the median rests on three close pairs and every JR and private-rail Japanese city is on standard rings. Tradeoff: the rule's letter and Rennes's 541 m point to halved rings (ring share 30.7% against 15.3%).
+- **For review time:** eight shared-code findings worked around city by city (rebuilt_register's expiry ranking, which may affect Higashiōsaka; wareki_date and YYYYMMDD; city_rows trusting the extension; map_common anchoring line labels outside the city, Akita unfixed; SOURCE_LINKS; an oaza_cut fallback; the yatai FORM_RULES); "JR Hohi Main Line" against Kumamoto's "JR Hohi Line"; Morioka's terms re-read before publishing. Slips disclosed in its drafts: four terms or catalogue pages read for credit wording, one operator's name printed to an agent's console once, a few read-only git commands.
+
 ### 2026-10-07 - Thirteen operators' own names live on six published Japanese maps: fixed at once in Cleanup (owner, call 209)
 
 - **Found by Kansai-1** while building call 205: `check_personal_exposure.py`'s Japan pass on the built cities' current files prints Osaka 6, Utsunomiya 3, Fukuoka 1, Kyoto 1, Sapporo 1, Yokkaichi 1 (Tokyo 0). Each is a trade name the name rule flags on one row that also shows at another premises; step 2 spread the rule only within one block. Staging did not re-run the check, which would print the names.
@@ -113,6 +127,10 @@ The A and B briefs left 23 reads pending. Regional-1's six run from staging (Tsu
     - Must do: clear third parties' rights (第2条; trade names are facts, none found); ask before using the logo (第3条). The list page says the lists lag and the full list renews twice a year, so the page never calls them current. Linking prefecture pages asks for a notice to the page's 作成所属: cite titles without hyperlinking them (Hirakata's precedent).
     - Liability: 第4条 ¶3 breach- or infringement-based, uncapped, settled at the user's cost, not an indemnity; Osaka District Court.
     - Rate: three bodik.jp requests, all 200; the second came about 30 s after the first, inside the 20 s rule but under the 60 s spacing staging set.
+  - **Neyagawa (barbers, beauty salons, laundries: 272159_barber, _hair_dressing, _cleaning): PERMITTED WITH CONDITIONS.** CC BY 4.0 by 寝屋川市オープンデータ利用規約 (page 16048, 2021-07-01, accepted by use; compatible with CC BY 4.0) and BODIK's terms 第1条 (odcs.bodik.jp/272159/tos/); all three packages `cc-by-40-intl`. The site's 著作権・リンク page covers web pages only.
+    - Must display (item 1, the city's 記載例): 「「理容所確認施設一覧」「美容所確認施設一覧」「クリーニング所確認施設一覧」（寝屋川市）（［ページURL］）を加工して作成」, the edit stated apart from the credit.
+    - Must not: present edited data as the city's; claim completeness or accuracy (BODIK 第4条); use the logo alone without asking (第3条).
+    - Liability: BODIK 第4条 ¶3 fault-based, uncapped (the standing Japanese class); Osaka District Court. Three bodik.jp requests, 65 s and 66 s apart.
 
 ### 2026-10-07 - Call 197 built on Cleanup's europe-split branch; the macro map's region views are Cleanup's (owner, call 198)
 
