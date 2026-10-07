@@ -1,0 +1,88 @@
+{
+  "city_barber": {
+    "as_of": "2025-03-31",
+    "bytes": 47980,
+    "dataset_page": "https://gifu-opendata.pref.gifu.lg.jp/dataset/c212016-075",
+    "file": "20250331riyo.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T23:25:38+00:00",
+    "rows": 362,
+    "sha256": "bb63a74c0068636cb3d2779bc4dfde69b452190c48b30db10af2f585046e2c9e",
+    "url": "https://gifu-opendata.pref.gifu.lg.jp/dataset/0e989e17-7093-4cbd-b931-6a24cf93fdb2/resource/fe88c7c1-3bbe-42ed-aa77-525f940ed6fe/download/20250331riyo.xlsx"
+  },
+  "city_beauty": {
+    "as_of": "2025-03-31",
+    "bytes": 89934,
+    "dataset_page": "https://gifu-opendata.pref.gifu.lg.jp/dataset/c212016-075",
+    "file": "20250331biyousho.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T23:25:42+00:00",
+    "rows": 1177,
+    "sha256": "1580b32f8fc52921c9b40f78d1d2c14a18794e7927224eedb8063e7df53b0f97",
+    "url": "https://gifu-opendata.pref.gifu.lg.jp/dataset/0e989e17-7093-4cbd-b931-6a24cf93fdb2/resource/0030e554-51b5-47ca-9bec-5724fb0dc617/download/20250331biyousho.xlsx"
+  },
+  "city_food": {
+    "as_of": "2025-06-01",
+    "bytes": 920447,
+    "dataset_page": "https://gifu-opendata.pref.gifu.lg.jp/dataset/c212016-072",
+    "file": "gifushisyokuhinkyokar7.6.1.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T23:25:30+00:00",
+    "rows": 4453,
+    "sha256": "dc841c87d2a57c385018f8045795ec93b04c71c91a5e4b8cf1b556aa0d302d34",
+    "url": "https://gifu-opendata.pref.gifu.lg.jp/dataset/2f9f1b1c-be25-4a27-96c6-47b597f1a0bd/resource/16ef7794-d2b6-4d7d-8353-f55193432530/download/gifushisyokuhinkyokar7.6.1.csv"
+  },
+  "city_notify": {
+    "as_of": "2025-06-01",
+    "bytes": 229863,
+    "dataset_page": "https://gifu-opendata.pref.gifu.lg.jp/dataset/c212016-072",
+    "file": "gifushisyokuhintodokeder7.6.1.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T23:25:34+00:00",
+    "rows": 1093,
+    "sha256": "1d9d9abdc98864f21c719464bc6fe8e49328c473b1a6de5732552431bdcbfe39",
+    "url": "https://gifu-opendata.pref.gifu.lg.jp/dataset/2f9f1b1c-be25-4a27-96c6-47b597f1a0bd/resource/6c758a77-694e-46bd-8d08-f67530532d5a/download/gifushisyokuhintodokeder7.6.1.csv"
+  },
+  "isj_21201_block": {
+    "bytes": 729522,
+    "file": "21201-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T23:25:50+00:00",
+    "sha256": "b3d1b99d774ffcd79f4738e302822199ab51a0fe135cf64abcb51a5c75221b98",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/21201-24.0a.zip"
+  },
+  "isj_21201_chome": {
+    "bytes": 36931,
+    "file": "21201-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T23:25:54+00:00",
+    "sha256": "d848f8a6e01a76db4175f8c7668c478e49d6cf7b27c84dfd9550d64a8abeb4c9",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/21201-19.0b.zip"
+  },
+  "n02": {
+    "bytes": 14903774,
+    "file": "data/japan/raw/N02-25_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-30T23:47:52+00:00",
+    "sha256": "aaf76af133b2e771e538fabc4646d2e443dc1d5a67b221382a28d744e706cc9f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip"
+  },
+  "n03": {
+    "bytes": 2884941,
+    "file": "data/japan/raw/N03-20250101_21_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T00:23:24+00:00",
+    "sha256": "cc616b3c76059cfa0ccd792b51ff8821457f7ab45c8f52f46fd0ee6b48c39ad5",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_21_GML.zip"
+  },
+  "osm_station_names": {
+    "bytes": 19092,
+    "elements": 30,
+    "file": "osm_station_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-10-07T20:05:21Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](35.35,136.67,35.55,136.89);way[\"railway\"=\"station\"](35.35,136.67,35.55,136.89););out tags center;",
+    "retrieved": "2026-10-07T20:07:29+00:00",
+    "sha256": "d4c05176e397b050ce92bc3a6bbf4f13fde5f94007ff9652b31bfd308269b621"
+  }
+}

@@ -4703,6 +4703,53 @@ line.
   Bungo-Ono.
 - No Shinkansen line reaches the city.
 
+### Gifu - the city's food permits and notifications and its barber and beauty registers, joined to MLIT's address blocks
+
+**Left out**
+- Laundries: the city publishes no list of them.
+- Every shop that is not a food shop: Japan has no general business license.
+- What the city's food lists leave out by design: vending-machine, vehicle,
+  stall and temporary businesses. The permit list holds 3,382 restaurants and
+  cafes, against 5,070 in the national count two months earlier (about two in
+  three).
+- 4 beauty salons registered as a visiting service (一円), not a premises.
+- 286 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other types that are not a counter (184 permits,
+  102 notifications).
+- 201 school, hospital and staff canteens (notified as 集団給食施設) and 3
+  mail-order businesses.
+- 1 permit that starts after June 1, 2025.
+
+**Counted** - the city's food permits and notifications as of June 1, 2025,
+and its barber and beauty registers as of March 31, 2025: 4,453 permits,
+1,093 notifications, 362 barbers and 1,177 beauty salons, against 362 and
+1,177 in the national count on the same date. The food lists have no column
+for the form of business, so convenience stores, supermarkets, canteens,
+hotel restaurants and snack bars that hold a restaurant permit count as Food
+service. 28 of the 556 bakery, confectioner and deli rows (5.0%) have a trade
+name that reads as a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 559 repeat rows are shown once: several permits of
+one kind at one premises, a notified shop that also holds a permit, and
+salons in both registers.
+
+**Not placed** - 26 rows (0.4%): 2 restaurants, 2 food shops and 22 barbers
+and beauty salons, at addresses MLIT's files do not hold. Another 240 sit at
+their town's center and 4 at the center of their 小字 (a named part of a
+town).
+
+**Names not shown** - 2 pins whose trade name is the operator's own name show
+their permit type.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 18 stations beyond it: 7 in Kakamigahara, 4 in Hashima, 3 in
+  Ichinomiya (Aichi Prefecture), 2 in Kasamatsu, and 1 each in Ginan and
+  Mizuho.
+- No Shinkansen runs here.
+- The Meitetsu Takehana Line keeps one station in the city, Yanaizu; it is
+  drawn as cut (owner, 2026-09-27).
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

@@ -100,7 +100,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
 | South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang, Daejeon, Gwangju, Gimhae |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
-| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki, Maebashi, Fukushima, Fukuyama, Ichinomiya, Tsu, Akita, Ōita |
+| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki, Maebashi, Fukushima, Fukuyama, Ichinomiya, Tsu, Akita, Ōita, Gifu |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional) |
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
@@ -3924,6 +3924,31 @@ batch at review time).
 - **MUST DO:** `check_personal_exposure.py oita` with its Japan pass, run
   2026-10-07; the verdict is in
   `docs/decisions_drafts/worktree-japan-regional-1.md` ("Ōita built",
+  2026-10-07).<!-- /internal -->
+
+**184. Gifu City and MLIT (Gifu) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with the Regional-1
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-06 by staging; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). Gifu City's two packages
+  on Gifu Prefecture's CKAN (c212016-072, food permits and notifications;
+  c212016-075, barber and beauty registers) are **CC BY 2.0** as each dataset
+  page declares (`license_id` CC-BY-2.0, author 岐阜市); the
+  岐阜県オープンデータカタログサイト利用規約 prescribes the credit for a modified
+  work (3), binds by use and changes without notice (1). MLIT's 位置参照情報
+  and N02 (the 2025 edition) are **PDL 1.0**, as in Kobe's (50). N03 (CC BY
+  4.0) only picks stations and is **never drawn** (the Survey Act).
+- **MUST DISPLAY**: the terms' form for a modified work, with the two list
+  titles, 岐阜市 and the CC BY 2.0 link; the two dataset pages linked; MLIT's
+  credit lines.
+- **MUST NOT**: imply endorsement; use the city page's newer food list, which
+  needs the food hygiene section's permission. Cost: 5, reimbursement of
+  costs from the user's own breach or infringement, the fault-based class
+  (accepted for Japan, 2026-09-24).<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py gifu` with its Japan pass, run
+  2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-regional-1.md` ("Gifu built",
   2026-10-07).<!-- /internal -->
 
 

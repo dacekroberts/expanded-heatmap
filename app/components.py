@@ -2514,6 +2514,33 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
      "Ōita City, MHLW and MLIT did not make and do not endorse this map.",
      False, ("Ōita",)),
+    # Gifu (notice 184): Gifu City's two packages on Gifu Prefecture's CKAN
+    # (c212016-072 and -075), CC BY 2.0 as each dataset page declares (read
+    # 2026-10-06 by staging), credited in the 岐阜県オープンデータカタログサイト
+    # 利用規約's form for a modified work (3), titles as the packages name
+    # them, both dataset pages linked. MLIT as in Kobe's, N02 in its 2025
+    # edition. MHLW's file is a control only and is not credited (Tsu's).
+    # Written from Tsu's and Ichinomiya's approved wording under the owner's
+    # pre-approval of template prose (2026-09-30); the processing and
+    # completeness sentences are proposals in
+    # docs/decisions_drafts/worktree-japan-regional-1.md.
+    Notice(184, "Gifu City and MLIT (Gifu)",
+     "Gifu's businesses: この地図は以下の著作物を改変して利用しています。"
+     "【岐阜市】食品等営業許可・届出一覧（2025）、【岐阜市】理容所・美容所届出施設一覧表（2024年度）、岐阜市、"
+     "クリエイティブ・コモンズ・ライセンス 表示 2.0"
+     "（[https://creativecommons.org/licenses/by/2.0/deed.ja](https://creativecommons.org/licenses/by/2.0/deed.ja)）"
+     "（[https://gifu-opendata.pref.gifu.lg.jp/dataset/c212016-072](https://gifu-opendata.pref.gifu.lg.jp/dataset/c212016-072)、"
+     "[https://gifu-opendata.pref.gifu.lg.jp/dataset/c212016-075](https://gifu-opendata.pref.gifu.lg.jp/dataset/c212016-075)）. "
+     "(This map modifies Gifu City's lists of food-business permits and notifications as of June 1, 2025 and "
+     "its registers of barbers and beauty salons as of March 31, 2025: this project selected the storefront "
+     "types, showed a premises in both food lists once, placed each by its address, and counted them around "
+     "stations.) The city's food lists leave out vending-machine, vehicle, stall and temporary businesses by "
+     "design; no list is claimed to be complete or current, and the lists may include premises that have closed. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). Gifu City and MLIT did not make "
+     "and do not endorse this map.",
+     False, ("Gifu",)),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no

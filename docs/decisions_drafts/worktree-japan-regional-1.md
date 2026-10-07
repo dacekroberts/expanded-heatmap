@@ -58,6 +58,19 @@ notices 176-186.
    review time: the city's complete list would make the Food shops layer
    complete rather than partial. *Tradeoff:* one approval, a schema read and
    a re-render, against a Food shops layer the page calls partial.
+5. **Gifu (page 237, notice 184; built, held for one call): the rings.** The
+   median nearest-station gap is 545 m, inside the spacing rule's 540-570 m
+   owner band (tram-city skill section 3; Ōtsu's and Uijeongbu's builds
+   applied it). The brief's 641 m is the 7th of 12 gaps, not the median.
+   In-ring share 30.7% on the standard rings (1,844 of 6,005), 15.3% on
+   halved ones (916). *Recommend* the standard rings: the median rests on
+   three close pairs (岐阜 / 名鉄岐阜 418 m, 加納 / 茶所 428 m, 長森 / 手力
+   449 m); the other six stations are 641 m to 4.6 km from their nearest;
+   every JR or private-rail Japanese city is on standard rings. *Tradeoff:*
+   the rule's letter (about 550 m or less) and Rennes's 541 m (halved) point
+   the other way, at half the ring share. The build stands on the standard
+   rings; halved is two lines in `pipeline/gifu/config.py` and a step 3
+   re-run.
 
 ## Proposals for review time (page sentences no template covers)
 
@@ -154,6 +167,18 @@ notices 176-186.
   names the same line "JR Hohi Line": one consistency fix for review time.
   Akita and Fukushima drop "Main" for JR East's lines; the two conventions
   follow each operator's signs, which is worth the owner's look.
+- **Gifu** (page 237): the coverage sentence the owner's call 125 asks for,
+  in Ichinomiya's form with Gifu's reasons only: "The city's food lists leave
+  out vending-machine, vehicle, stall and temporary businesses, so they hold
+  about two restaurants in three of the official count." In its What Is
+  Excluded section: the form-of-business sentence under **Counted** and the
+  Takehana Line's stub sentence. The notice (184) adds the processing
+  sentence and "The city's food lists leave out vending-machine, vehicle,
+  stall and temporary businesses by design; no list is claimed to be
+  complete or current". The credit is the portal terms' own form (3) for a
+  modified work, read 2026-10-07 from the prefecture's terms page since
+  staging's record names the form but not its wording: check it against the
+  licence-read report.
 
 ## Shared-code findings for review time (not changed here)
 
@@ -186,8 +211,94 @@ notices 176-186.
   MHLW ⑬その他の食料・飲料販売業 row with 業態 屋台 becomes Food service through
   the shared yatai `FORM_RULES`, although a form is meant never to bring a
   row in. One pin; a taxonomy question, not Akita's.
+- **`japan_register.wareki_date` reads no YYYYMMDD date** (Gifu): the permit
+  list's 許可開始日 / 許可満了日 (20250620) read as None, so calls 161 and 172
+  compared nothing and the foundation's TERM_AS_OF check (which fires only
+  where a start or end reads) stayed silent. Fixed city-locally in
+  `config.source_rows` (rewritten to YYYY-MM-DD); one late permit now waits.
+  Any later city with 8-digit dates is exposed.
+- **The label anchor's first segment, a second time** (Gifu): both JR lines'
+  longest N02 segments lie wholly outside the city, so their labels landed
+  about 12 km out and pulled the opening view south-east. Gifu's step 3
+  orders each line's segments in-city-first (`in_city_first`) before
+  `render_heatmap` (not a fork of it); all five labels now sit inside.
+  Anchoring on all segments in shared code would cover Akita and the next
+  city.
+- **`rebuilt_register` folds live permits of a different 種目** (Iwaki): it
+  keeps the latest-expiring permit per (address, trade name, type), which at
+  11 Iwaki premises hid a live permit with another form (5 Food service
+  pins). Where a list is a snapshot of permits in term, read it whole; keep
+  the rebuild for lists that carry superseded permits. A line for the
+  japan-city skill beside the two-sources note.
 
 ## Entries
+
+### 2026-10-07 - Gifu built, the city's food permits and notifications of June 2025 and its barber and beauty registers of March 2025, from its CKAN packages
+
+- **Gifu built (page 237, notice 184), Akita's shape (one standing food list
+  of every permit in term on its date, nothing rebuilt) with Toyota's
+  precedent for a list that leaves rows out by design, Yokkaichi's for the
+  city's own notification list and Hamamatsu's for the registers: 6,005
+  storefronts (Food service 3,272, Food shops 1,234, Personal services 1,499)
+  around 12 stations on 5 lines, 30.7% of them in a ring (1,844) on the
+  standard rings, which wait on the owner (parked call 5).** Sources: Gifu
+  City's packages on Gifu Prefecture's CKAN, CC BY 2.0 (read 2026-10-06 by
+  staging): c212016-072, the permit list (4,453 rows) and the notification
+  list (1,093) as of 2025-06-01; c212016-075, the barber (362) and beauty
+  (1,177) registers as of 2025-03-31. The city page's newer food list is not
+  used (owner, 2026-10-06). Built by a subagent of the Regional-1 lead,
+  integrated by the lead.
+- **The brief's open calls, by precedent:** MHLW's 265 unmatched
+  notifications stay out and its file is a control read by no step
+  (Yokkaichi's and Toyama's precedent: the city's own complete notification
+  list supplies the Food shops layer); no laundry list, so Personal services
+  is barbers and beauty salons only, disclosed (Akita's and Tsu's).
+- **The term dates:** the permit list writes 許可開始日 and 許可満了日 as
+  YYYYMMDD, which the shared reader reads as no date; rewritten city-locally
+  in `config.source_rows` (a shared-code finding). Past term 0; 1 菓子製造業
+  permit starting 2025-06-20 waits (call 172), the brief's one.
+- **Step 2:** storefront rows 6,590: Food service 3,382 (the brief exactly),
+  Retail 1,673 (887 permits less the late starter, 787 notifications),
+  Personal services 1,535 (4 beauty rows addressed 一円 are not a premises).
+  Out by rule 490: 286 manufacturing and other non-counter types, 201
+  institutional catering notifications, 3 mail order, the brief's figures
+  exactly. The join: block 6,273, town-chōme 287, 小字 4, unplaced 26 (0.4%),
+  against the brief's about 39: the foundation's `bracket_aza` places the 7
+  鷺山(向井町) rows. 559 repeat rows shown once. On the map: 95.9% block, 4.0%
+  town-chōme, 0.1% 小字. No 業態 column, so konbini, supermarkets, canteens,
+  hotel restaurants and snack bars on a restaurant permit stay in Food
+  service (R3).
+- The 菓子 / そうざい factory share: 28 of 556 (5.0%), kept (owner,
+  2026-09-24).
+- **Food share stated on the page** (call 125, Ichinomiya's precedent): the
+  permit list's 3,382 restaurants and cafes are 66.7% of e-Stat's 5,070 in
+  force on 2025-03-31; the registers are 100.0% of e-Stat's counts.
+- **Economic Census control: 1.51** (3,272 Food service pins against 2,165
+  飲食店 establishments in 21201), the brief's figure, just under the built
+  cities' 1.56-1.92: the list's left-out kinds are not census
+  establishments either.
+- **Privacy verdict: publish.** `check_personal_exposure.py gifu`: the Japan
+  pass prints 0; 4 trade names in the raw files are an operator's own name,
+  2 pins show their permit type.
+- **Rail:** N02-25; 12 stations: Meitetsu Nagoya Main 3 of 60, Kakamigahara
+  6 of 18, Takehana 1 of 9 (柳津, a one-station stub kept as cut, Kobe's
+  standing call), JR Central Tokaido 2 of 89 and Takayama 2 of 36. 名鉄岐阜
+  and 岐阜, 418 m apart, stay apart (Ichinomiya's precedent). Gate 3 exact on
+  all five lines. 18 excluded: 各務原市 7, 羽島市 4, 一宮市 3 (Aichi's N03 through
+  `N03_NEIGHBOR_PREFS`), 笠松町 2, 岐南町 1, 瑞穂市 1. No Shinkansen track
+  crosses the city. The thinnest stretch runs 37 and 40 trains a weekday.
+  **Median nearest-station gap 545 m, not the brief's 641 m**: inside the
+  owner band, parked. English names: OSM's 30 objects; 3 cited overrides
+  (Kano, Kiridoshi, Meitetsu-Gifu). Meitetsu's red split three ways, JR
+  Central's orange two (closest pair within 500 m 18.1).
+- **Labels:** both JR lines' labels landed about 12 km outside the city (the
+  first-segment trap); step 3's `in_city_first` puts all five inside.
+- **Slips:** an early header probe printed one food-list row in full to the
+  agent's own console, including its operator's name; nothing was written
+  anywhere, and later probes printed counts only. The agent read two other
+  builds' commits by `git show` and ran one `git status` (read-only), and
+  read the portal's top page and the prefecture's terms page (no data) for
+  the credit's wording.
 
 ### 2026-10-07 - Ōita built, one complete food list with the city's withheld addresses counted apart, the registers of March 2026 and MHLW's notifications
 
