@@ -226,8 +226,9 @@ def build_tree(tmp, scenario, staged, competing=(), country_views=(), groups=Non
 
     # Estimated widths for names the table has not measured.
     per_char = sum(lc.TEXT_WIDTH.values()) / sum(len(n) for n in lc.TEXT_WIDTH)
-    est = {r["name"]: round(len(r["name"]) * per_char, 1) for r in rows
-           if r["name"] not in lc.TEXT_WIDTH}
+    # Both the full name and the label text without " (Regional)" (cities.py `pill`).
+    texts = {t for r in rows for t in (r["name"], r["name"].replace(" (Regional)", ""))}
+    est = {t: round(len(t) * per_char, 1) for t in sorted(texts) if t not in lc.TEXT_WIDTH}
     lsrc = (app / "label_competition.py").read_text(encoding="utf-8")
     lsrc = replace_once(lsrc, "\nPILL_H = ", f"\nTEXT_WIDTH.update({est!r})\nPILL_H = ",
                         "label_competition.py's PILL_H")

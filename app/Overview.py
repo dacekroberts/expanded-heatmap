@@ -395,7 +395,9 @@ labels = pdk.Layer(
     # Not `cities`: a leaf region labels only its own - see label_cities above.
     data=label_cities,
     get_position="[lon, lat]",
-    get_text="name",
+    # The label text drops " (Regional)" (cities.py `pill`); the tooltip and
+    # the city list keep the full name.
+    get_text="pill",
     get_size=14,
     get_color=DARK,
     # An opaque pill behind each name so it reads on both the light basemap and

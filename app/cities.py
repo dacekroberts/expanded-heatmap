@@ -5220,6 +5220,19 @@ if _bad_top:
 for _k, (_n, _pop) in COUNTRY_TOP.items():
     _by_name[_n]["country_top"] = _pop
 
+# A MAP LABEL DROPS " (Regional)" (owner, 2026-10-07). A regional page is its
+# city's only page, so the bare name names the right place, and the suffix
+# cost labels: Copenhagen (Regional)'s 158.5 px pill caused six collisions in
+# a hand-placed Europe view, and Europe West places two more names without
+# any suffix. The tooltip, the city list and the page keep the full name. A
+# bare name that is another city's name keeps the suffix (Brussels and
+# Brussels (Regional)). `pill` is the label text; label_competition.py's
+# TEXT_WIDTH is keyed by it.
+_REGIONAL = " (Regional)"
+for _c in CITIES:
+    _bare = _c["name"][:-len(_REGIONAL)] if _c["name"].endswith(_REGIONAL) else _c["name"]
+    _c["pill"] = _c["name"] if _bare != _c["name"] and _bare in _by_name else _bare
+
 # --- CITY SWITCHER ORDER -----------------------------------------------------
 #
 # The city pages' switcher (and the map's "Cities" menu, which reads its

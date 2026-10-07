@@ -247,18 +247,20 @@ def pill(city, x, y, region_name=None):
     if city["name"] in REGION_WON.get(region_name, {}):
         off = REGION_WON[region_name][city["name"]]
     anchor, dx, dy = tuple(off or city.get("label_offset") or DEFAULT_OFFSET)
+    # The label text, which drops " (Regional)" (cities.py `pill`).
+    text = city.get("pill", city["name"])
     try:
-        w = TEXT_WIDTH[city["name"]]
+        w = TEXT_WIDTH[text]
     except KeyError:
         # Raising beats guessing: a width estimated from character count would
         # make every number downstream wrong while still printing confidently.
         raise SystemExit(
-            f"no measured text width for {city['name']!r}. Measure it in a real "
+            f"no measured text width for {text!r}. Measure it in a real "
             f"browser with the real font loaded and add it to TEXT_WIDTH:\n"
             f"    await document.fonts.ready;\n"
             f"    const c = document.createElement('canvas').getContext('2d');\n"
             f"    c.font = '600 14px \"Space Grotesk\", sans-serif';\n"
-            f"    c.measureText({city['name']!r}).width\n"
+            f"    c.measureText({text!r}).width\n"
             f"Check a city already in the table at the same time - if its width "
             f"has moved, the font changed and every entry needs re-measuring.")
     a = x + dx
