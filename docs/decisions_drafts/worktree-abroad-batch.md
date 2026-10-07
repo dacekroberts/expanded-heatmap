@@ -13,8 +13,19 @@ tradeoff. A parked call stops only what it names.
 191-195):**
 - **Call 1 (Bremen's CC BY version):** "191, download approved": fetch the
   Kommunalverbund's 2024 report PDF (3,643,392 bytes) from the publisher's
-  own host and read it for the licence terms only. Pending: the build
-  confirms the download with the owner directly before fetching.
+  own host and read it for the licence terms only. Confirmed by the owner in
+  the build's own chat ("yes", 2026-10-07) and read the same day
+  (`pdftotext`; 3,643,667 bytes from kommunalverbund.de, 124 pages, kept
+  in the session scratchpad only): **it names no licence, no CC version and
+  no reuse terms.** Its imprint gives the rights chain: the Kommunalverbund
+  commissioned the 2022 survey (Auftraggeber), Dr. Acocella Stadt- und
+  Regionalentwicklung GmbH carried it out (Auftragnehmer), and the
+  Kommunalverbund is the publisher of the survey guideline (Herausgeber);
+  its figures credit the contractor's own drawings. **So the version stays
+  open and the call stays parked for the owner** (the owner's instruction:
+  if the PDF names no version or says nothing on reuse, park it). Options
+  unchanged: accept on the permissive reading, or the owner asks the
+  Kommunalverbund. Bremen's landing waits on it.
 - **Call 3 (Nezahualcóyotl):** "continue drop, state on page": the 398 rows
   stay dropped; Mexico City (Regional)'s page now says so (a proposal
   sentence, for review time).
