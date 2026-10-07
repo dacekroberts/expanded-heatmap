@@ -848,5 +848,40 @@
   "in_ring": 6736,
   "all": 17879,
   "map_blob": "201b9048c7564cfa355db79d031ee0b5e77b2f2f"
+ },
+ "toyonaka": {
+  "in_ring": 4156,
+  "all": 5277,
+  "map_blob": "7baaa1d6d289788e3bd166ce68201f884f3cf9a7"
+ },
+ "hirakata": {
+  "in_ring": 2919,
+  "all": 4607,
+  "map_blob": "b599d6788932ab1855a0035010f38564b91706fe"
+ },
+ "suita": {
+  "in_ring": 3197,
+  "all": 4012,
+  "map_blob": "e0c590b546c57214c97e33849d924ef5a22a841e"
+ },
+ "itami": {
+  "in_ring": 1181,
+  "all": 2383,
+  "map_blob": "248c56ea8abd833bca4329585355d8dd9422575e"
+ },
+ "kakogawa": {
+  "in_ring": 2113,
+  "all": 3701,
+  "map_blob": "a185a27bd53e47846c61afaa83c7a81500a20ee2"
+ },
+ "amagasaki": {
+  "in_ring": 5838,
+  "all": 7385,
+  "map_blob": "3d1dd982e32a71bb7b551c98da2ecb7c400e37bd"
+ },
+ "uji": {
+  "in_ring": 723,
+  "all": 1281,
+  "map_blob": "6830f4cf1446105058f62160fe777b20dfafcd30"
  }
 }

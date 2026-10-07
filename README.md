@@ -32,7 +32,7 @@ Mapped so far:
 - **Latvia:** Riga, Liepāja, Daugavpils
 - **South Korea:** Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang, Daejeon, Gwangju, Gimhae
 - **Taiwan:** Taichung, Taoyuan, Taipei (Regional)
-- **Japan:** Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki
+- **Japan:** Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki, Toyonaka, Hirakata, Suita, Itami, Kakogawa, Amagasaki, Uji
 - **Germany:** Berlin
 - **United Kingdom:** London, Glasgow, Newcastle (Regional), Manchester (Regional), Birmingham (Regional), Edinburgh, Sheffield, Nottingham (Regional), Blackpool (Regional), Liverpool (Regional)
 - **Argentina:** Buenos Aires, Mendoza

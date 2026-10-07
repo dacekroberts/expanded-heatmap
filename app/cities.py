@@ -4607,7 +4607,7 @@ CITIES = [
         "lon": 135.519,
         "page": "pages/224_Suita_Heatmap.py",
         "coverage": "narrowed",
-        "placement": "Joined to address blocks (98.3%); ministry coordinates where missed",
+        "placement": "Joined to address blocks (98.2%); ministry coordinates where missed",
         "data_age": "Food permits as of 2026-03-31 (an upper bound), registers 2026-08-31; ministry notifications fetched 2026-10-06",
         "rail_extra": "Suburban rail",
         "record_kind": "Permit registers",
