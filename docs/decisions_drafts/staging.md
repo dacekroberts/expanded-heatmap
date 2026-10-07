@@ -4,6 +4,22 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-07 - Bremen's licence accepted on the permissive reading; Europe West anchors; every city labelled somewhere, every country's top city on the landing view (owner)
+
+- **Bremen (call 196):** the 2024 report (124 pages; downloaded on the owner's yes in the Abroad session, call 191) names no licence, no CC version and no reuse terms. The owner said yes, in the Abroad session, to accepting the unversioned "CC BY" on the permissive reading. Bremen is credited to CC BY 4.0's terms (the Kommunalverbund Niedersachsen/Bremen as publisher, the survey named, the source linked), the version recorded as unstated and assumed to be 4.0; the publisher uses cc-by/4.0 on its six boundary sets. Outreach stays the last resort.
+- **The Europe split (call 195) with a Germany view (call 194).** Cleanup measured both on Abroad's tip:
+  - the split alone leaves Europe West's 12 label problems;
+  - the split plus a Germany view (Berlin, Gelsenkirchen, Bremen), with competition in both Europe halves, comes to 0 problems with every name labelled.
+  Cleanup builds both on one branch, landing at review time after Abroad's batch. Abroad leaves the region tables alone.
+- **East Asia's Seoul pattern for Europe West (owner):** "berlin, prague, brussels, antwerp etc. should be visible on global but the remaining smaller cities can be omitted for country-views". REGION_LABELS_ALSO gives Europe West the Czechia, Belgium and Germany anchors; the smaller cities are label_tier "minor". Cleanup measures which anchors fit before building.
+- **A site-wide label rule (owner):** "the goal is to have all dots visible in at least one regional view, and to feature every nation's top 1, maybe 2 cities at least in global view". Call 197, "197 sounds good":
+  - "top" is the largest by city population;
+  - one city per country is guaranteed a label on the landing view, ahead of the competition;
+  - a second is labelled only where the competition clears it;
+  - check_macro_labels tests that every city is labelled in at least one view and that each country's anchor is labelled on the landing view;
+  - many-city countries take the Seoul pattern.
+  Cleanup builds it with the split branch. It is an app/ change, landing at review time.
+
 ### 2026-10-07 - Phase 0: the Japan foundation landed; Abroad's batch ready; calls 191 to 195; Europe East to land with Thessaloniki (owner)
 
 - **The Japan foundation landed** (7ab440f9; the five address fixes the owner asked for, "do the address fixes", in 521d28fc). Pipeline and the japan-city skill only, with Minato 98.0 / 0.2 / 1.8 and zero drift on the 34 built Japanese cities after every group. The new rules are on for new cities only. The review-time re-render proposal (Toyota +177 storefronts, other built cities under about 20) is in `docs/decisions_drafts/japan-foundation.md`. Matsue's 八雲村 fold is a config key, now in its brief.
