@@ -1,5 +1,14 @@
 # Cluj-Napoca — build brief
 
+**Band B, food only (owner, call 215a, 2026-10-07).** Placement is the OSM
+address join with this brief's three repairs PLUS the nearest same-side
+house-number tier (Palma's code, at most 6 numbers away, a tie to the lower
+number, the number's points one site): **3,966 of 5,537 premises, 71.6%**
+(63.4% without the tier; measured by staging, 2026-10-07). A tier point sits
+a median 2 house numbers (47 m) from its own address, 90th percentile 6
+numbers (158 m). The page states the unplaced share. Open call 1 below is
+answered by this.
+
 **Step 0 measured 2026-10-07 (staging), from the owner's saved DSVSA Cluj
 files, OpenStreetMap and CTP Cluj's own timetable pages.** Run
 `python scripts/brief_check.py cluj_napoca` before writing any code. The

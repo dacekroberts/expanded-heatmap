@@ -4,6 +4,17 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-07 - Romania's placement settled: Cluj-Napoca to B, Oradea's address layer to a licence read, seven cities to R after the owner's RENNS check; Pune discarded (owner, calls 215, 218)
+
+- **The address-source probe** (curl, catalogue and capabilities pages only): ANCPI's RENNS address points (INSPIRE AD, RO.ANCPI/AD.RENNS, every urban locality) exist in the INSPIRE record but `geoportal.ancpi.ro` and `renns.ancpi.ro` do not resolve and `geoportal.gov.ro` times out from here, as Bucharest's brief found; ANCPI's buildings likewise. Oradea runs an open WFS, `harta.oradea.ro` service "Adrese", layer `gmgml:NrAdm`, 34,237 address points with house numbers, no licence stated (its capabilities' "none" fields are vendor defaults). Nothing reachable for the other eight: Timișoara's catalogue holds no addresses, Cluj-Napoca's GIS lists only a sample service, Arad's sits behind a login, Ploiești, Galați and Reșița answered nothing usable; Overture and OpenAddresses do not cover them.
+- **"215a yes, b yes, c R after allowing me to check RENNS if only inaccessible for you, 218 yes"** (owner, staging's chat):
+  - **215a:** Cluj-Napoca D to B, food only, the unplaced share stated: OSM's address join plus the nearest same-side number tier (Palma's code, at most 6 numbers away) and the brief's three repairs place 71.6%. A tier point sits a median 2 house numbers (47 m) from its own address.
+  - **215b:** a licence read of Oradea's address layer (running); if it clears, one download of the layer and the owner's browser fetch of DSVSA Bihor's lists go to the owner for approval.
+  - **215c:** Timișoara, Iași, Arad, Galați, Ploiești, Craiova and Reșița go to R, reopen condition RENNS or a request to ANCPI, once the owner has checked whether RENNS opens in their own browser (unreachable from here may not mean unreachable everywhere). Their rows stay in D until then. Craiova's and Reșița's downloads are not needed.
+  - **218:** Pune discarded (absence): dataset #434 "Commercial Establishments", fetched by the owner through the portal's form, is one sheet of 5 category totals, not premises; #409 "Restaurants" is from 2017. India now holds no candidate.
+- **Master list:** candidates 79 (A 32, B 33, C 2, D 12), R 79, 329 discarded; counts by `check_master_list_counts.py --write`, discard evidence checked.
+- **Housekeeping:** all 43 Romanian files still in the owner's Downloads are byte-identical to filed copies; the owner may delete them. A scratchpad script named `numbers.py` shadowed Python's standard library module and broke an import; renamed.
+
 ### 2026-10-07 - Konya to Band R; Hungary's OKNYIR caps every view at 200 rows (owner, call 217; call 216 pending a probe)
 
 - **Konya (call 217, "217 yes"):** the owner's browser passed the portal's Cloudflare challenge and walked `acikveri.konya.bel.tr`: 232 datasets from 20 organizations, most last modified 2022-2023. The only business points are pharmacies (GeoJSON, 2022), banks and ATMs, none in the project's buckets; the Economy category holds tariffs, produce prices and one district's projects; a `ruhsat` search finds only a count of excavation permits. Moved D to R; reopen if the municipality publishes its workplace licences or a food-business list. Türkiye now holds no candidate (five cities in R). Master list: candidates 80 (D 14), R 79.
