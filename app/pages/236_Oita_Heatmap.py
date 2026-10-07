@@ -44,13 +44,15 @@ else:
 render_data_age("Ōita")
 
 # From the japan-city skill's template, Ichinomiya's page (the ministry's
-# notifications, its points and its register months) and Maebashi's (approved wording,
-# pre-approved for this build, 2026-09-30); the withheld-address bullet is a
-# proposal in docs/decisions_drafts/worktree-japan-regional-1.md (Fukuoka's
-# approved sentence with the city in the ministry's place; the city's pages
-# give no reason). The dates are the lists' own (config.SOURCE_AS_OF); one in
-# 20 is 250 withheld restaurants of the list's 5,053 (4.9%); the ring share,
-# 53.0% (3,308 of 6,246), is step 3's.
+# points and its register months), Gifu's notification sentence (call 212)
+# and Maebashi's (approved wording, pre-approved for this build,
+# 2026-09-30); the withheld-address bullet is a proposal in
+# docs/decisions_drafts/worktree-japan-regional-1.md (Fukuoka's approved
+# sentence with the city in the ministry's place; the city's pages give no
+# reason). The dates are the lists' own (config.SOURCE_AS_OF); one in 20 is
+# 250 withheld restaurants of the permit list's 5,053 (4.9%), and the
+# notification list withholds 48 more addresses; the ring share, 52.6%
+# (3,372 of 6,406), is step 3's.
 st.markdown(
     """
 **The lines**
@@ -65,22 +67,22 @@ st.markdown(
 
 **The businesses**
 
-- From Ōita City's list of food-business permits (as of September 1, 2026) and its registers of
-  barbers, beauty salons and laundries (as of March 31, 2026), with the new registrations it has
-  listed each month since, to August 31, 2026.
+- From Ōita City's lists of food-business permits and food-business notifications (as of
+  September 1, 2026) and its registers of barbers, beauty salons and laundries (as of March 31,
+  2026), with the new registrations it has listed each month since, to August 31, 2026.
 - Japan has no general business license, so shops other than food shops (clothing, electronics,
   pharmacies) do not appear: the Food shops layer is food retail only (bakeries and confectioners,
   delis, butchers and fishmongers).
-- Shops that only notify rather than hold a permit, such as supermarkets, convenience stores and
-  greengrocers, appear only where they chose to publish in the Ministry of Health, Labour and
-  Welfare's open data (downloaded October 6, 2026), so that part of the Food shops layer is partial.
+- Food shops that only notify the city rather than hold a permit, such as convenience stores,
+  supermarkets and greengrocers, are included: the city publishes its list of notifications too.
 - The lists may include premises that have closed, so a dot means a permit on file, not a
   business open today.
 
 **Reading the map**
 
-- About one restaurant in 20 in Ōita City's list has its address withheld by the city, which does
-  not say why, and is not on this map. Where they are is not known.
+- About one restaurant in 20 in Ōita City's permit list, and 48 shops in its list of
+  notifications, have their address withheld by the city, which does not say why, and are not on
+  this map. Where they are is not known.
 - The lists give an address but no location. Each address is matched to MLIT's address reference
   data, which places most at their street block; where that fails, the dot sits at the ministry's
   own coordinates for the same premises, or else at its district's center.

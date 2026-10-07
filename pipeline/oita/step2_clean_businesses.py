@@ -1,6 +1,6 @@
 """Ōita step 2: the city's food-permit list and its barber, beauty-salon and
-laundry lists (each register with its 2026 months), with MHLW's
-notifications as a partial food-retail layer,
+laundry lists (each register with its 2026 months) and its notification
+list (call 212), MHLW's file lending only its points,
 classified and joined to MLIT's block file - the shared Japanese step 2
 (pipeline/countries/japan_step2.py).
 

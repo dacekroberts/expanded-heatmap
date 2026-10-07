@@ -17,14 +17,13 @@ reason; the foundation's `asterisk` rule sets them aside and counts them
 apart. Personal services: the barber, beauty-salon and laundry lists as of
 2026-03-31, plus the 2026 monthly lists of new beauty salons (April to
 August) and laundries (July, the one month posted); no barber set (owner,
-call 211, Ichinomiya's call 128). MHLW's 食品衛生申請等システム open data adds
-two things only (Ichinomiya's call 127, Matsuyama's precedent): its
-notifications (届出) as a partial, opt-in food-retail layer, and its own
-point for a city row the block join misses (POINT_DONORS). Its 85 permits
-are not added: every one is in the city's list by number (the brief). The
-city's own notification list (call 212) is fetched but not yet read: see
-SOURCE_FILES["notify"]. All placed by a JOIN to MLIT's 位置参照情報 (one
-municipality, no wards).
+call 211, Ichinomiya's call 128). The city's own notification list
+(すべての営業届出施設一覧, as of 2026-09-01) supplies the Food shops layer the
+permits do not (owner, call 212; Gifu's and Yokkaichi's precedent). MHLW's
+食品衛生申請等システム open data is read only for its own point for a city
+row the block join misses (POINT_DONORS; Toyama's precedent): nothing of it
+is drawn. All placed by a JOIN to MLIT's 位置参照情報 (one municipality, no
+wards).
 
 Rail: MLIT N02-25 (not GTFS, not OSM), stations kept only inside the city line
 (N03). JR Kyushu's Nippo, Hohi and Kyudai main lines. English station names
@@ -109,11 +108,10 @@ SOURCE_FILES = {
        for m, (rid, f) in LAUNDRY_MONTHS.items()},
     # The city's own notification list (すべての営業届出施設一覧,
     # 442011_licensed_facility, データ時点日付 2026-09-01; owner, call 212):
-    # fetched and recorded, NOT read by step 2. Its notifier column 届出者氏名
-    # is an operator column japan_register.OPERATOR_COLS does not list, so
-    # step 2's column check stops on it (2026-10-07); the list joins SOURCES
-    # once that shared tuple carries the spelling. Header read 2026-10-07:
-    # 1,424 rows, 26 types, 48 addresses masked with asterisks, 66 大分市内一円.
+    # read as a food source (SOURCES, SOURCE_KIND). Its notifier column
+    # 届出者氏名 joined japan_register.OPERATOR_COLS_WAVE5 for it (2026-10-07).
+    # Header read 2026-10-07: 1,424 rows, 26 types, 48 addresses masked with
+    # asterisks, 66 大分市内一円.
     "notify": ("r080901alltodoke.csv",
                BODIK + "/be87ff3e-fb41-4f46-be45-1609d7550887/resource/cfa63aff-dc94-495a-9574-38b4c56a0db7/download/"
                "r080901alltodoke.csv", NOTIFY_PAGE),

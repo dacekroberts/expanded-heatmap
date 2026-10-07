@@ -4659,45 +4659,45 @@ line.
 - The JR Uetsu Line runs 3 trains a weekday toward Akita and 4 toward Sakata
   at Katsurane; it is drawn (owner, 2026-10-06).
 
-### Ōita - the city's food list, its barber, beauty and laundry lists and the national notifications, joined to MLIT's address blocks
+### Ōita - the city's food permits and notifications and its barber, beauty and laundry lists, joined to MLIT's address blocks
 
 **Left out**
 - Every shop that is not a food shop: Japan has no general business license.
-- Shops that sell only packaged food, except where the national filings
-  include notifications.
-- 301 entries in the city's food list whose address the city withholds,
-  shown as asterisks; 250 of them are restaurants, about one in 20 of the
-  list's 5,053. The city does not say why. They cannot be placed.
-- 715 national notifications whose filers did not publish an address.
-- 365 food trucks, stalls, demonstration sales and other filings for anywhere
-  in the city or on the move (346 permits in the city's list, 19 national
-  filings), 4 storeless laundry pick-ups, and 2 national filings addressed to
-  a whole area.
-- 246 rows of food manufacturing other than bakeries and confectioners (菓子)
-  and delis (そうざい), and other permit types that are not a counter.
-- 98 school, hospital and staff canteens, 116 vending machines, 3 mail-order
-  businesses, 33 premises inside hotels and inns, 20 caterers (仕出し), 40
-  other temporary or mobile businesses and 968 snack bars and cabarets.
+- 349 entries whose address the city withholds, shown as asterisks: 301 in
+  its food-permit list, 250 of them restaurants (about one in 20 of the
+  list's 5,053), and 48 in its list of notifications. The city does not say
+  why. They cannot be placed.
+- 411 food trucks, stalls, peddlers, demonstration sales and other entries
+  for anywhere in the city or on the move (346 permits, 65 notifications),
+  4 storeless laundry pick-ups, and 1 notification addressed to a whole
+  area.
+- 287 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other types that are not a counter (178 permits,
+  109 notifications).
+- 126 school, hospital and staff canteens (124 notified as 集団給食施設), 73
+  vending machines, 33 premises inside hotels and inns, 20 caterers (仕出し),
+  6 other temporary or mobile businesses and 968 snack bars and cabarets.
 
 **Counted** - the permits in the city's food list in term on September 1,
 2026 (5,053 restaurants, against 4,971 in the national count of March 31,
-2025); its barber, beauty and laundry lists of March 31, 2026, with the 26
-beauty salons and 2 laundries it listed as new each month to August 31,
-2026; and the national notifications as downloaded on October 6, 2026. The
-March lists hold 391 barbers, 1,308 beauty salons and 186 laundries, against
-391, 1,262 and 224 in the national count a year earlier. 25 of the 873 bakery, confectioner and deli
-rows (2.9%) have a trade name that reads as a factory; they are kept (owner,
-2026-09-24).
+2025) and its 1,424 notifications of the same date; its barber, beauty and
+laundry lists of March 31, 2026, with the 26 beauty salons and 2 laundries
+it listed as new each month to August 31, 2026. The March lists hold 391
+barbers, 1,308 beauty salons and 186 laundries, against 391, 1,262 and 224
+in the national count a year earlier. 30 of the 903 bakery, confectioner
+and deli rows (3.3%) have a trade name that reads as a factory; they are
+kept (owner, 2026-09-24).
 
-**One pin per premises** - 221 repeat permits are shown once, and 92 rows of
-the city's food list for a premises already in the national notifications.
+**One pin per premises** - 668 repeat rows are shown once: several permits
+of one kind at one premises, a notified shop that also holds a permit, and
+salons in both registers.
 
-**Not placed** - 159 rows (2.4%), 61 of them barbers, beauty salons and
-laundries, at addresses MLIT's files do not hold. Another 543 sit at their
-town's center, 6 at the center of their 小字 (a named part of a town), and 66
-at the ministry's own coordinates.
+**Not placed** - 184 rows (2.5%), 61 of them barbers, beauty salons and
+laundries, at addresses MLIT's files do not hold. Another 616 sit at their
+town's center, 6 at the center of their 小字 (a named part of a town), and 14
+at the ministry's own coordinates for the same premises.
 
-**Names not shown** - 4 pins show their permit type: 3 whose trade name is
+**Names not shown** - 6 pins show their permit type: 5 whose trade name is
 the operator's own name, and 1 whose trade name the city masked.
 
 **Stations.** Every line with a station in the city is drawn, cut at the city

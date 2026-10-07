@@ -66,13 +66,16 @@ notices 176-186.
    review time: the city's complete list would make the Food shops layer
    complete rather than partial. *Tradeoff:* one approval, a schema read and
    a re-render, against a Food shops layer the page calls partial.
-   **Approved 2026-10-07 by call 212** (owner, relayed by Staging),
-   **fetched, not yet wired:** its schema is read (1,424 rows, 26 types,
-   48 addresses masked, 66 大分市内一円), but step 2's column check stops on
-   its notifier column 届出者氏名, which `japan_register.OPERATOR_COLS`
-   does not list (a shared module, outside the city session's scope). With
-   the spelling added in memory: 6,406 storefronts, Food shops 1,668
-   against 1,508 (the Ōita entry below).
+   **Approved 2026-10-07 by call 212** (owner, relayed by Staging), and
+   **resolved the same day:** fetched and its schema read (1,424 rows, 26
+   types, 48 addresses masked, 66 大分市内一円); step 2's column check first
+   stopped on its notifier column 届出者氏名, which
+   `japan_register.OPERATOR_COLS` did not list, so the spelling joined
+   `japan_register.OPERATOR_COLS_WAVE5` (new cities only; no other
+   Japanese city's raw files carry it). The list now supplies the Food
+   shops layer and MHLW's file is a points donor only (Toyama's
+   precedent): 6,406 storefronts, Food shops 1,668 against 1,508 (the Ōita
+   entry below).
 5. **Gifu (page 237, notice 184; built, held for one call): the rings.** The
    median nearest-station gap is 545 m, inside the spacing rule's 540-570 m
    owner band (tram-city skill section 3; Ōtsu's and Uijeongbu's builds
@@ -183,6 +186,14 @@ notices 176-186.
   not shown**, and "No Shinkansen line reaches the city." The notice (183)
   adds "left out the entries whose address the city withholds" to
   Ichinomiya's processing sentence; the 記載例's 利用日 is the download date.
+  After call 212 the page sentence reads "About one restaurant in 20 in Ōita
+  City's permit list, and 48 shops in its list of notifications, have their
+  address withheld by the city, which does not say why, and are not on this
+  map. Where they are is not known.", and the notice's processing sentence
+  takes Gifu's "showed a premises in both food lists once" (358
+  notifications for a premises that holds a permit are shown once) and
+  Toyama's MHLW clause, "used only for its own coordinates, to place a
+  premises the city's lists also hold".
   **Line names:** Ōita uses "JR Hohi Main Line" (JR Kyushu's 豊肥本線, as
   Kurume's and Kagoshima's "Main Line" names), but Kumamoto's built config
   names the same line "JR Hohi Line": one consistency fix for review time.
@@ -599,6 +610,40 @@ notices 176-186.
   precedent: 21 points, 15 for permits and 6 for notifications), its
   notifications no longer drawn. BODIK: 3 `package_show` calls and 7
   downloads, one at a time, 22 s apart.
+- **2026-10-07, call 212 wired (owner, relayed by Staging).** The city's
+  notification list (すべての営業届出施設一覧, as of 2026-09-01, 1,424 rows, 26
+  types) is read as a food source (`SOURCE_KIND`; Gifu's and Yokkaichi's
+  precedent), and MHLW's file is a points donor only (`POINT_DONORS` for
+  food and notify; Toyama's precedent): its notifications are no longer
+  drawn, so `ADDRESS_BY_CONSENT`, `OWN_POINT_FALLBACK` and `SUPERSEDES` are
+  empty. 届出者氏名 joined `japan_register.OPERATOR_COLS_WAVE5` (new cities
+  only; no other Japanese city's raw files carry it, 44 scanned), so the
+  notifier is compared in memory by the name rule; 届出者カナ氏名, the
+  notifier's own address and phones are never selected. **6,406
+  storefronts (Food service 2,902, Food shops 1,668, Personal services
+  1,836), 52.6% of them in a ring (3,372: 728, 1,736 and 908).** Step 2:
+  set aside 349 withheld (301 permits, 48 notifications; was 301) and 1
+  area-wide notification; not a premises 415 (346 permits, 65
+  notifications, 4 laundry pick-ups); out by rule 1,513 (968 snack bars
+  and cabarets, 287 manufacturing and other non-counter types, 126
+  canteens, 124 of them notified 集団給食施設, 73 vending, 33 inside
+  accommodation, 20 caterers, 6 temporary or mobile). The notification
+  list keeps 1,036 storefront rows (乳類販売業 342, コンビニエンスストア 192,
+  食肉販売業 160, 魚介類販売業 104, 野菜果物販売業 97, その他の食料・飲料販売業
+  81, 百貨店・総合スーパー 27, 米穀類販売業 23, 弁当販売業 10) and 537 pins.
+  One pin per premises drops 668 repeat rows (358 notifications for a
+  premises that holds a permit, 182 repeat food permits, 116 repeat
+  notifications, 12 salons). Join of 7,258 rows: block 6,333, town-chōme
+  710, 小字 10, MHLW's point 21, unplaced 184 (2.5%). On the map: 90.1%
+  block (5,770), 9.6% town-chōme (616), 0.2% MHLW's point (14), 0.1% 小字
+  (6). The 菓子 / そうざい factory share: 30 of 903 (3.3%), kept. Census
+  1.68 (2,902 / 1,723), unchanged. Privacy re-run: the Japan pass prints 0
+  of 6,406 rows; 12 trade names in the raw files are an operator's own
+  name, 6 pins show their permit type (5 by the name rule, 1 masked by the
+  city); the Latin heuristic's 28 is not a finding for Japanese names.
+  Verdict: publish. The page, notice 183, `app/cities.py` and the docs
+  follow; the withheld-address sentence and the notice's MHLW clause are
+  proposals (above).
 
 ### 2026-10-07 - Akita built, the city's full food list of October 2026, its barber and beauty registers and MHLW's notifications
 

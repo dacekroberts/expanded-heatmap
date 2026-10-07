@@ -2516,19 +2516,21 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
      "Akita City, MHLW and MLIT did not make and do not endorse this map.",
      False, ("Akita",)),
-    # Ōita (notice 183): the city's six BODIK lists (the monthly lists of new
-    # beauty salons and laundries added on call 211, 2026-10-07, used
-    # 2026-10-07), cc-by-40-intl as each
+    # Ōita (notice 183): the city's seven BODIK lists (the monthly lists of new
+    # beauty salons and laundries added on call 211 and the notification list
+    # on call 212, 2026-10-07, used 2026-10-07), cc-by-40-intl as each
     # dataset records, credited in the 大分市オープンデータ利用規約's §1 記載例
     # form (「○○データ」（大分市）（URL）（利用日）を加工して作成) with the CC BY
-    # 4.0 link (read 2026-10-07 by staging); MHLW as in Sasebo's; MLIT as in
-    # Kobe's, N02 in its 2025 edition. Written from Sasebo's and Ichinomiya's
-    # wording under the owner's pre-approval of template prose (2026-09-30);
-    # the withheld-address clause of the processing sentence is a proposal in
-    # docs/decisions_drafts/worktree-japan-regional-1.md.
+    # 4.0 link (read 2026-10-07 by staging); MHLW as in Toyama's, its file read
+    # for its own coordinates only since call 212; MLIT as in Kobe's, N02 in
+    # its 2025 edition. Written from Sasebo's, Ichinomiya's, Toyama's and
+    # Gifu's wording under the owner's pre-approval of template prose
+    # (2026-09-30); the withheld-address clause of the processing sentence is a
+    # proposal in docs/decisions_drafts/worktree-japan-regional-1.md.
     Notice(183, "Ōita City, MHLW and MLIT (Ōita)",
      "Ōita's businesses: "
      "「すべての許可施設一覧」（大分市）（[https://data.bodik.jp/dataset/442011_permitted_facility](https://data.bodik.jp/dataset/442011_permitted_facility)）（2026年10月6日利用）、"
+     "「すべての営業届出施設一覧」（大分市）（[https://data.bodik.jp/dataset/442011_licensed_facility](https://data.bodik.jp/dataset/442011_licensed_facility)）（2026年10月7日利用）、"
      "「理容所届出施設一覧」（大分市）（[https://data.bodik.jp/dataset/442011_barber_shop](https://data.bodik.jp/dataset/442011_barber_shop)）（2026年10月6日利用）、"
      "「美容所届出施設一覧」（大分市）（[https://data.bodik.jp/dataset/442011_beauty_salon](https://data.bodik.jp/dataset/442011_beauty_salon)）（2026年10月6日利用）、"
      "「クリーニング所届出施設一覧」（大分市）（[https://data.bodik.jp/dataset/442011_cleaning](https://data.bodik.jp/dataset/442011_cleaning)）（2026年10月6日利用）、"
@@ -2536,11 +2538,12 @@ _NOTICES = [
      "「クリーニング所新規施設」（大分市）（[https://data.bodik.jp/dataset/442011_cleaning_new](https://data.bodik.jp/dataset/442011_cleaning_new)）（2026年10月7日利用）を加工して作成, "
      "クリエイティブ・コモンズ・ライセンス 表示 4.0 国際"
      "（[https://creativecommons.org/licenses/by/4.0/deed.ja](https://creativecommons.org/licenses/by/4.0/deed.ja)）; and "
-     "出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一覧」を加工して作成. "
+     "出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一覧」を加工して作成, "
+     "used only for its own coordinates, to place a premises the city's lists also hold. "
      "Processed by this project, which selected the storefront types, added the city's monthly lists of new "
      "beauty salons and laundries to its March 2026 registers, left out the entries whose address "
-     "the city withholds, took only the ministry's notifications, showed a premises in both lists once, "
-     "placed each by its address or the ministry's own coordinates, and counted them around stations. The "
+     "the city withholds, showed a premises in both food lists once, placed each by its address or the "
+     "ministry's own coordinates for the same premises, and counted them around stations. The "
      "ministry's list holds only filings whose applicants agreed to publish them and is not complete. "
      "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
      "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "

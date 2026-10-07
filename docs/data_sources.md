@@ -3936,9 +3936,12 @@ batch at review time).
   4.0** as its BODIK dataset records (`cc-by-40-intl`), under the
   大分市オープンデータ利用規約 (令和5年3月15日), which is compatible with it.
   The monthly lists of new beauty salons and laundries (`442011_beauty_salon_new`,
-  `442011_cleaning_new`; call 211, used 2026-10-07) record the same licence
-  (`package_show`, 2026-10-07).
-  MHLW's open data is **PDL 1.0**, as in Sasebo's (127); MLIT's 位置参照情報 and
+  `442011_cleaning_new`; call 211) and the notification list
+  (`442011_licensed_facility`, すべての営業届出施設一覧; call 212), all used
+  2026-10-07, record the same licence (`package_show`, 2026-10-07).
+  MHLW's open data is **PDL 1.0**, as in Sasebo's (127); since call 212 its
+  file lends only its own coordinates to a premises the city's lists hold
+  (Toyama's, 98), and nothing of it is drawn. MLIT's 位置参照情報 and
   N02 (the 2025 edition) are **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0)
   only picks stations and is **never drawn** (the Survey Act).
 - **MUST DISPLAY**: the terms' §1 credit in its 記載例 form,
@@ -3947,9 +3950,9 @@ batch at review time).
 - **MUST NOT**: present the processed lists as the city's; use the city's
   logos (§3); imply endorsement. No indemnity or cost clause.<!-- internal -->
 - **MUST DO:** `check_personal_exposure.py oita` with its Japan pass, run
-  2026-10-07; the verdict is in
-  `docs/decisions_drafts/worktree-japan-regional-1.md` ("Ōita built",
-  2026-10-07).<!-- /internal -->
+  2026-10-07 and re-run the same day after call 212 (0 of 6,406 rows); the
+  verdict is in `docs/decisions_drafts/worktree-japan-regional-1.md`
+  ("Ōita built", 2026-10-07).<!-- /internal -->
 
 **184. Gifu City and MLIT (Gifu) — required, and DISPLAYED**
 (written into `render_site_notices()` 2026-10-07; lands with the Regional-1
