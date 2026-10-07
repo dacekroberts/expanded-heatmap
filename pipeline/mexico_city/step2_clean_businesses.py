@@ -297,6 +297,14 @@ def main():
         # rather than a box. Points outside their OWN municipio are counted
         # for the record; a point over a municipio line inside the scope is a
         # real storefront placed a little off, and stays.
+        #
+        # Measured 2026-10-07: 416 of 127,860 entidad 15 storefronts lie
+        # outside the scope and are dropped. 398 are one compact cluster that
+        # DENUE codes Nezahualcóyotl and OSM places 14-823 m east of its
+        # polygon (the Chimalhuacán side), over 5 km from any station, so no
+        # ring count moves with it; Naucalpan has 13, La Paz 4, Ecatepec 1.
+        # 21 Naucalpan rows that fall inside CDMX stay. Re-measure if either
+        # boundary file is re-fetched.
         is15 = df[DENUE_STATE_COLUMN] == REGIONAL_STATE_CODE
         print(f"CDMX rows inside the sanity box: "
               f"{pct(int((inbox & ~is15).sum()), int((~is15).sum()), 'geocoded storefronts')}")

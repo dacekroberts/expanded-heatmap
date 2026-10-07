@@ -465,7 +465,7 @@ CITIES = [
         "label_offset": ("end", 0, -21),
     },
     {
-        "name": "Mexico City",
+        "name": "Mexico City (Regional)",
         "lat": 19.4326,
         "lon": -99.1332,
         "page": "pages/15_Mexico_City_Heatmap.py",
@@ -476,7 +476,7 @@ CITIES = [
         "rail_extra": "Trams",
         "record_kind": "National register",
         "categories": "All three",
-        "blurb": "Metro CDMX (Líneas 1–9, A, B and 12) and the STE Tren Ligero",
+        "blurb": "Metro CDMX (Líneas 1–9, A, B and 12) and the STE Tren Ligero, with four State of México municipios",
         "region": "Mexico",
         "country": "Mexico",
         # Outside the United States frame, like every Canadian city - see

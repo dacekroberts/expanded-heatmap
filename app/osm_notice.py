@@ -31,8 +31,9 @@ def _japan(place):
 
 
 OSM_RAIL_BY_CITY = {
-    "Mexico City": ("the rail route geometry and station locations of Mexico City's Metro CDMX "
-                    "and Tren Ligero", True),
+    "Mexico City (Regional)": ("the rail route geometry and station locations of Mexico City's Metro CDMX "
+                    "and Tren Ligero, and the boundaries of Ciudad de México and four State "
+                    "of México municipios", True),
     "Guadalajara (Regional)": ("the rail route geometry and station locations of "
                                "Guadalajara's Tren Ligero", True),
     "Monterrey (Regional)": ("the rail route geometry and station locations of Monterrey's "

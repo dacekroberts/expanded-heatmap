@@ -212,7 +212,8 @@ register covers them all, or because the rail network only makes sense that way.
   Nottingham (Regional) (the city, Broxtowe, Rushcliffe and Ashfield), Blackpool (Regional)
   (Blackpool and Wyre), Seattle (Regional) (11 cities, five
   publishers, each in the places it covers), Geneva (Regional) (the 12 Swiss
-  communes its trams serve), Anyang (Regional) (with Gunpo and Uiwang).
+  communes its trams serve), Anyang (Regional) (with Gunpo and Uiwang), Mexico City
+  (Regional) (with four State of México municipios).
 - **Cover more than one municipality but are not labelled:** Montréal (the
   agglomeration: 19 boroughs and 15 related municipalities), Dublin (four local
   authorities), Copenhagen (with Frederiksberg), Tokyo (the 23 special wards, each
@@ -561,7 +562,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Toronto | Subway 1, 2, 4 + LRT 5, 6 | 18 streetcar routes; GO | TTC GTFS (City CKAN) | City | 2 / 0 |
 | Ottawa | O-Train Lines 1, 2 and 4 (light rail) | Buses, the Transitway | OpenStreetMap route relations (OC Transpo's GTFS licence unread); gate 3 exact against Wikipedia | City (its own wards) | 0 / 0 |
 | **Mexico** | | | | | |
-| Mexico City | Metro, 12 lines + Tren Ligero | not stated (Tren Suburbano, Cablebús) | OpenStreetMap | CDMX | 10 / 0 |
+| Mexico City (Regional) | Metro, 12 lines + Tren Ligero | not stated (Tren Suburbano, Cablebús) | OpenStreetMap | CDMX and four State of México municipios | 0 / 0 |
 | Guadalajara (Regional) | Tren Ligero L1–L4 | — | OpenStreetMap (only GTFS expired 2023, lacks L4) | 4 municipios; Tonalá out | no CSV (all in scope) / 0 |
 | Monterrey (Regional) | Metrorrey L1–L3 | Líneas 4 and 6 (monorail, under construction) | OpenStreetMap (no agency data published); L3 in the operator's red | 4 municipios, by INEGI code | no CSV (all in scope) / 0 |
 | **Spain** | | | | | |
@@ -770,7 +771,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Toronto | License register | MLS licences | Own MLS category | 328 / 6,471 / 1,950 | Retail = regulated slice only |
 | Ottawa | Food hygiene register | Ottawa Public Health's food-safety inspection data (LIVES), one record per premises | None: a premises kind from the name | — / 1,586 / — | No Personal services; no Retail layer: food shops sit inside the one layer, labelled "Restaurants and food shops" |
 | **Mexico** | | | | | |
-| Mexico City | National statistical register | INEGI DENUE | SCIAN | 94,642 / 24,798 / 12,018 | Street stalls excluded |
+| Mexico City (Regional) | National statistical register | INEGI DENUE | SCIAN | 107,724 / 28,179 / 14,077 | Street stalls excluded |
 | Guadalajara (Regional) | National statistical register | INEGI DENUE | SCIAN | 26,341 / 6,698 / 3,623 | Street stalls excluded |
 | Monterrey (Regional) | National statistical register | INEGI DENUE | SCIAN | 10,164 / 3,057 / 1,343 | Street stalls excluded |
 | **Spain** | | | | | |
@@ -976,7 +977,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Toronto | Address join to One Address Repository (93.8%) | Retail absent; plazas under-counted | Cancelled licences; endorsements; person-held; adult premises (sensitivity) |
 | Ottawa | Feed coordinates (99.6% of kept premises); 14 not placed, 8 outside the City | Food only; no type field, so restaurants and food shops are one layer; current by inspection within two years | Institutional kitchens, event caterers, clubs and arenas, mobile vendors, hotels and funeral homes by name |
 | **Mexico** | | | |
-| Mexico City | Source coordinates (100%) | Street stalls not shown | Semifijo units, SCIAN 469, 812410 |
+| Mexico City (Regional) | Source coordinates (100%) | Street stalls not shown | Semifijo units, SCIAN 469, 812410 |
 | Guadalajara (Regional) | Source coordinates | Street stalls not shown | Same as Mexico City; Tonalá |
 | Monterrey (Regional) | Source coordinates | Street stalls not shown | Same as Mexico City; 22 located outside the four municipios dropped |
 | **Spain** | | | |
@@ -1177,7 +1178,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Toronto | Current licences (2026-09-21) | — | 0.6 mi | Yes | 48% | Operating name |
 | Ottawa | Inspected since 2024-09-29 (feed 2026-09-29) | B | 0.6 mi | Yes | 32% | Premises name |
 | **Mexico** | | | | | | |
-| Mexico City | DENUE 05_2026 (2026-09-22) | — | 0.6 mi | Yes (restored 2026-09-27) | 47% | Shop sign |
+| Mexico City (Regional) | DENUE 05_2026 (2026-09-22; entidad 15 fetched 2026-10-07) | — | 0.6 mi | Yes (restored 2026-09-27) | 37% | Shop sign |
 | Guadalajara (Regional) | DENUE 05_2026 (2026-09-22) | — | 0.6 mi | Yes (restored 2026-09-27) | 31% | Shop sign |
 | Monterrey (Regional) | DENUE 05_2026 (2026-09-27) | — | 0.6 mi | Yes | 25% | Shop sign |
 | **Spain** | | | | | | |

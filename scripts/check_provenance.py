@@ -211,6 +211,8 @@ SLUG_OVERRIDES = {
     "Washington D.C.": "washington_dc",
     "Montréal": "montreal",
     "Mexico City": "mexico_city",
+    # Mexico City extended to four State of México municipios (2026-10-07).
+    "Mexico City (Regional)": "mexico_city",
     # Japan batch (2026-10-02): the macron dropped from the package name.
     "Kōchi": "kochi",
     # Japan wave 2 (2026-10-03), likewise.

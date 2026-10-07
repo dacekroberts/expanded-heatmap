@@ -1472,7 +1472,7 @@ would distort the map: across the wards holding at least 200 storefront rows
 the match rate runs 75.4% to 99.3%, a **1.3x spread** with a standard deviation
 of 5.7 points.
 
-### Mexico City - street stalls, a nonstore twin, and a heuristic that does not speak Spanish
+### Mexico City (Regional) - street stalls, a nonstore twin, four State of México municipios, and a heuristic that does not speak Spanish
 
 **Semifijo premises are excluded — 20,586 of 462,732 economic units (4.45%),
 of which 18,264 would otherwise have classified into a bucket.** DENUE records
@@ -1517,6 +1517,27 @@ convention of trade type plus a given name or brand (`ABARROTES LIZ`,
 nouns — also trips it. The heuristic is tuned for English "SMITH JOHN" forms
 and does not transfer to Spanish ones. Nothing is filtered on that number.
 
+
+**The four State of México municipios** (Ecatepec de Morelos, Nezahualcóyotl, La Paz
+and Naucalpan de Juárez) add the same exclusions from the same register: semifijo
+premises, 6,472 of 199,571 units (3.24%), 5,397 of which would otherwise classify; among
+fixed premises, public toilets and shoe-shine stands (`812130`) 578, the "other personal
+services" catch-all (`812990`) 354, funeral services 241, parking (`812410`) 226, event
+caterers 43, nonstore retail (`469`) 29, food trucks 10 and institutional canteens 8.
+Pawnshops (`522452`) count as retail: 177.
+
+**Storefronts located outside the region are dropped**: 416 of 127,860 (0.33%) from the
+four municipios. 398 are one cluster that DENUE codes Nezahualcóyotl but that falls just
+east of the municipio's boundary as OpenStreetMap draws it, more than 5 km from any station.
+
+**The rest of the State of México is not covered.** Its other 121 municipios have no
+station on these lines; Politécnico's and El Rosario's rings reach under 1% across the city
+line into municipios that are not covered.
+
+**Stations.** Línea B's eight stations in Ecatepec de Morelos and Nezahualcóyotl, Línea A's
+two in La Paz, and Línea 2's terminus, Cuatro Caminos, in Naucalpan de Juárez are drawn and
+ringed. No station on the drawn lines is left out. The Tren Suburbano, El Insurgente and
+Mexicable are not drawn.
 ### Guadalajara (Regional) - a municipio with no station, and the same Spanish-name artifact
 
 **Everything excluded in Mexico City is excluded here, for the same reasons and

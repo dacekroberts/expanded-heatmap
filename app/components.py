@@ -541,7 +541,7 @@ class Notice(NamedTuple):
 
 
 # Groups of cities one notice covers, spelled as app/cities.py spells them.
-_MEXICO = ("Mexico City", "Guadalajara (Regional)", "Monterrey (Regional)")
+_MEXICO = ("Mexico City (Regional)", "Guadalajara (Regional)", "Monterrey (Regional)")
 _NORWAY = ("Oslo", "Bergen")
 _DENMARK = ("Copenhagen", "Aarhus", "Odense")
 _CZECHIA = ("Prague", "Brno", "Plzeň", "Olomouc", "Ostrava",
@@ -566,7 +566,7 @@ _UK_NAPTAN = (*_UK_SIX, "Liverpool (Regional)")
 # Every city the OpenStreetMap rail-geometry entry names, in its order. Adding
 # a city to that sentence means adding it here, or its page omits the line.
 _OSM_RAIL = (
-    "Mexico City", "Guadalajara (Regional)", "Monterrey (Regional)",
+    "Mexico City (Regional)", "Guadalajara (Regional)", "Monterrey (Regional)",
     "Barcelona", "Lille (Regional)", "Oslo", "Bergen", "Copenhagen", "Aarhus",
     "Kitchener–Waterloo (Regional)", "Odense", "Liepāja", "Daugavpils",
     "Buffalo", "Sacramento", "Houston", "Ottawa", "Minneapolis", "Pittsburgh",
@@ -976,8 +976,9 @@ _NOTICES = [
     # many cities - every other source in this list serves exactly one.
     Notice(8, "INEGI",
      "Fuente: INEGI, Directorio Estadístico Nacional de Unidades Económicas "
-     "(DENUE). Business locations for Mexico City, Guadalajara and Monterrey "
-     "are from "
+     "(DENUE). Business locations for Mexico City and four neighboring State of "
+     "México municipios (Ecatepec de Morelos, Nezahualcóyotl, La Paz and "
+     "Naucalpan de Juárez), Guadalajara and Monterrey are from "
      "DENUE, published by "
      "the Instituto Nacional de Estadística y Geografía, used under the "
      "Términos de Libre Uso de la Información del INEGI. The data has been "

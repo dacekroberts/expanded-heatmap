@@ -48,6 +48,17 @@ tradeoff. A parked call stops only what it names.
    administration, an online jeweller); out, the map reads 5,537 and
    Personal services loses 202 of 1,104. Stops: nothing; a "drop" answer
    is a one-line config change and a re-run.
+3. **Mexico City (Regional): 398 Nezahualcóyotl storefronts outside OSM's
+   boundary.** DENUE codes them to Nezahualcóyotl (all locality 0001), but
+   they lie 14-823 m east of the municipio's OSM polygon, toward
+   Chimalhuacán: a boundary disagreement, not misplaced points. Monterrey's
+   polygon test is the precedent, but its 22 dropped rows were genuinely
+   misplaced (some 550 km away). **Recommendation: keep dropping them
+   (built so) and disclose it** (What Is Excluded says so). Tradeoff: no
+   ring changes either way, since the cluster is 5,330 m from the nearest
+   station (Peñón Viejo); kept, the total gains 398 and the in-ring share
+   falls slightly. Stops: nothing; keeping them is a code-scope change to
+   step 2 and a re-run.
 
 ### 2026-10-07 - Gimpo built: the Gimpo Goldline on SEMAS's register, its own page (abroad-batch)
 
@@ -171,6 +182,53 @@ tradeoff. A parked call stops only what it names.
   travels without its caption carries the source line on its face. Notice
   1: rail, communes and stop names from OSM. **Open terms question: none.**
   New inputs: a city, a taxonomy, notice 154, the Swiss licence rows.
+
+### 2026-10-07 - Mexico City (Regional) built: four State of México municipios join on DENUE (abroad-batch)
+
+- **Privacy verdict: publish.** `check_personal_exposure.py mexico_city`
+  over 149,980 pins: 0 e-mails and 0 phone numbers in displayed names, no
+  registrant-name column loaded; the one "c/o" (new) is a shop-sign
+  abbreviation; the flagged sign names read by hand with digits masked:
+  one e-mail shape (a veterinary sign the renderer's contact scrub drops)
+  and 42 phone-length digit runs, every one a LICONSA milk-outlet number.
+  32.6% person-like by the heuristic (32.2% before), the known artifact on
+  Spanish shop signs.
+- **Built on the regional-extension skill, the owner's calls 68-72
+  (2026-10-06): all four municipios, Naucalpan kept, OSM boundaries on
+  INEGI codes, the two entidad 15 files approved.** The pipeline by a
+  subagent: a `REGIONAL` switch committed off at zero drift (950afe3b);
+  `pipeline/countries/mexico.py` reads entidad 15's two parts
+  (`DENUE_PARTS`, `denue_urls()`, `denue_members()`; `denue_url("15")` and
+  `denue_member("15")` raise), with **zero drift on Mexico City, Guadalajara
+  and Monterrey** through the change (heavy_job peak 2.41 GB). The parts'
+  members carry no trailing underscore (`denue_inegi_15_1.csv`), against
+  the brief's guess.
+- **Stations 169 -> 180**, none excluded: Ecatepec 5, Nezahualcóyotl 3, La
+  Paz 2, Naucalpan 1 (Cuatro Caminos), each asserted by point in polygon.
+  Boundaries: one Overpass query, relations 5605754, 5606086, 5605964 and
+  5606080, the union 414.0 km² gated 330-520.
+- **Storefronts 280,185 -> 407,628**; the four add 127,443 (Ecatepec
+  58,410, Nezahualcóyotl 36,073, La Paz 11,161, Naucalpan 22,216, before
+  the polygon test). No storefront SCIAN code is new in entidad 15. **In a
+  ring: 135,284 (48.3%) -> 149,980 (36.8%)**; the four municipios 14,379 of
+  127,443 (Ecatepec 11.0%, Nezahualcóyotl 11.9%, La Paz 27.7%, Naucalpan
+  2.8%). The CDMX side moves exactly as the brief measured: 317 enter a
+  ring, 28 change station. Six CDMX rings that cross the city line gain
+  storefronts (Canal de San Juan 1,133 -> 2,022, Santa Marta 848 -> 1,373,
+  and four more); Politécnico's and El Rosario's (an eighth the brief did
+  not list) cross into uncovered municipios.
+- **Entidad 15 rows are tested against the scope polygon; CDMX rows keep
+  the city-alone sanity box**, so the CDMX side is row for row as before
+  (Monterrey's precedent); 21 Naucalpan-coded rows inside CDMX are kept.
+- **Page proposals**: the regional-map bullet and its scope bullet, the
+  "region's" wording in three places, "Most storefronts in the four
+  municipios are beyond a station's reach ...", and notice 8's city
+  sentence naming the four municipios. The display name is "Mexico City
+  (Regional)"; its label scores clear at 375, 768 and 1200 (153.0 px).
+- **Downstream:** an extension always counts: `outputs/mexico_city/`, the
+  registry name, notices 8 and 1, macro facts and ring shares. Notice 8 is
+  unchanged in kind (every page). Regional processed files are in
+  `data/mexico_city/processed/regional/`; fold back on landing.
 
 ### 2026-10-07 - Thessaloniki built: Line 1 on the City's active shop licenses (abroad-batch)
 

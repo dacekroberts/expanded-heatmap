@@ -70,11 +70,13 @@ from pipeline.mexico_city.config import (
 BOUNDARY_AREA_KM2_MIN = 1_300.0
 BOUNDARY_AREA_KM2_MAX = 1_700.0
 
-# Mexico City (Regional): the four State of México municipios together.
-# INEGI's own areas put them near 400 km2 (Ecatepec and Naucalpan about 150
-# each, Nezahualcóyotl about 63, La Paz about 30); the band is wide enough
-# for OSM edits and narrow enough to catch a ring that did not close or a
-# municipio that went missing.
+# Mexico City (Regional): the four State of México municipios together,
+# measured 414.0 km2 in EPSG:32614 on 2026-10-07 (Ecatepec 156.1, Naucalpan
+# 157.9, Nezahualcóyotl 62.6, La Paz 37.3; relations 5605754, 5606080,
+# 5606086, 5605964). The band is wide enough for OSM edits and narrow enough
+# to catch a ring that did not close or a municipio that went missing (the
+# smallest, La Paz, is 37 km2: losing it leaves 377, inside the band, which
+# is why each MUNID is also required by name below).
 MUNICIPIOS_AREA_KM2_MIN = 330.0
 MUNICIPIOS_AREA_KM2_MAX = 520.0
 

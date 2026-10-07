@@ -84,7 +84,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 |---|---|---|
 | United States | [`data_sources/united-states.md`](data_sources/united-states.md) | San Diego, San Francisco, Los Angeles (Regional), Chicago, New York, Philadelphia, Miami (Regional), Boston, Washington D.C., Buffalo, Sacramento, Houston, Minneapolis, Pittsburgh, Dallas, Kansas City, Tucson, New Orleans, Seattle (Regional) |
 | Canada | [`data_sources/canada.md`](data_sources/canada.md) | Vancouver (Regional), Montréal, Calgary, Edmonton, Toronto, Ottawa, Kitchener–Waterloo (Regional) |
-| Mexico | [`data_sources/mexico.md`](data_sources/mexico.md) | Mexico City, Guadalajara (Regional), Monterrey (Regional) |
+| Mexico | [`data_sources/mexico.md`](data_sources/mexico.md) | Mexico City (Regional), Guadalajara (Regional), Monterrey (Regional) |
 | Spain | [`data_sources/spain.md`](data_sources/spain.md) | Madrid, Barcelona, Palma |
 | Ireland | [`data_sources/ireland.md`](data_sources/ireland.md) | Dublin |
 | Italy | [`data_sources/italy.md`](data_sources/italy.md) | Milan, Rome, Florence |
@@ -3829,6 +3829,35 @@ DISPLAYED** (written into `render_site_notices()` with Geneva (Regional),
 - **Personal data**: the layer has no name field; a dot shows its licensed
   activity.
 - **Thessaloniki's rail and boundary are OpenStreetMap data** (ODbL, notice 1).
+
+**156. Kommunalverbund Niedersachsen/Bremen e.V. (Bremen) — required, and
+DISPLAYED** (written into `render_site_notices()` with Bremen, 2026-10-07.)
+
+- **PERMITTED WITH CONDITIONS, display only**<!-- internal --> (staging's read 2026-10-05; the
+  `licence-read` agent's full read 2026-10-07)<!-- /internal -->: "Creative Commons Namensnennung
+  (CC-BY)", **no version**, in the dataset's ISO record (`otherConstraints`)
+  and GovData's resource (`http://dcat-ap.de/def/licenses/cc-by`, linking
+  `https://www.opendefinition.org/licenses/cc-by`). DCAT-AP.de's unversioned
+  concept maps to no version, and Bremen's own portal records use the
+  versioned `cc-by/4.0`, so the unversioned id was the publisher's choice.
+  Every CC BY version permits public display and adapted maps; none adds
+  share-alike or non-commercial terms. The owner read it as 4.0 (call 13,
+  2026-10-05: no outreach); the database-right point under an older version
+  is the batch's parked call 1.
+- **Rights holder: the Kommunalverbund Niedersachsen/Bremen e.V.**; the
+  Landesamt GeoInformation Bremen only hosts the file. Rows in
+  [`data_sources/germany.md`](data_sources/germany.md).
+- **MUST DISPLAY**: "Quellenvermerk: Kommunalverbund Niedersachsen/Bremen
+  e.V."; the licence title exactly as written, linked to the URL the record
+  gives; the dataset's title, "Einzelhandelsbestand in der Region Bremen
+  2022", with a link to the material; and that the data was changed.
+- **MUST NOT**: imply endorsement. Use only the public "reduziert" file: the
+  protected variant (record 0148391c) is under a restricted licence for the
+  participating municipalities.
+- **Not governing**: geo.bremen.de's CC BY-NC-ND page footer and the
+  Kommunalverbund imprint's private-use clause (both their own web pages).
+- **MUST DO**: nothing standing; a request to remove the attribution or the
+  layer is honoured.
 
 ## Gaps
 

@@ -56,7 +56,7 @@ from pipeline.countries.mexico import (  # noqa: F401
 # docs/build_briefs/mexico_city_regional.md). False reproduces the city-alone
 # build byte for byte, which is how the extension was proved before it was
 # switched on.
-REGIONAL = False
+REGIONAL = True
 NAME = "Mexico City (Regional)" if REGIONAL else "Mexico City"
 
 # The four State of México municipios, keyed on INEGI's code as Monterrey's
