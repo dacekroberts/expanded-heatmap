@@ -95,7 +95,7 @@ Japan session needs that the drafts file does not say.
 
 Also for review time: the label checks the subagents could not render (the
 Haijima stub, the Dobutsuen branch, the Chuo and Ome stubs at Tachikawa,
-Higashi-Tokorozawa's stub), a blank trade name showing a blank pin label (11
+Higashi-Tokorozawa's stub), a blank trade name showing a blank pin label (10
 pins across five Tama cities), and the merge with Kansai-1 and Regional-1:
 keep both at every shared anchor, East-1's block first, then Kansai-1's, then
 Regional-1's (notice-number order); regenerate the JSONs rather than merging
