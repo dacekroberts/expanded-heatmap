@@ -100,6 +100,13 @@ section when its item is done.** The older history is in
 
 ## NEXT - pick up here, in this order
 
+**Builds resumed 2026-10-07 (owner):** the plan, its rules and every session's
+prompt are in `docs/build_plan_2026-10-07.md`. Staging's part:
+- relay each batch report and its parked calls to the owner as one numbered list per wave;
+- move landed cities to Built on the master list (build sessions never edit it) and republish the two private pages;
+- keep the plan's table current.
+Usage check-ins at every multiple of ten weekly percent (next 50%) stop every session.
+
 **Wave 5 ran on 2026-10-06** (owner: "We can start on the next items, i want
 to get a bunch of briefs ready for build time"): the ranked queue and all 73
 pre-verdicts now have rows; the master list stands at A 32, B 32, C 2, D 16,

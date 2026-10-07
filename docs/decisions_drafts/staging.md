@@ -4,6 +4,23 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-07 - Builds resume: the A and B waves planned, four process changes, weekly check-ins at every ten percent (owner)
+
+- **The owner lifted the build pause** set on 2026-10-04 ("pause lifted, approve 1-4, write the session prompts, we can start phase 0 after that"). Band D waits until the owner can give it attention ("those I will act on when i can devote full attention here"). Seoul, Busan and Daegu (Regional) still wait for SEMAS's social-post scope (call 71).
+- **The plan:** `docs/build_plan_2026-10-07.md`, on staging's measurements.
+  - Japanese steps 2-3 take 0.2-1.2 min and under 0.7 GB; the Japan drift check takes 2-3.4 min at 5.3 GB.
+  - The last Japan batches did 12 and 14 cities in about 3 h of active time each, against 4.6 h and 9.3 h of wall time.
+  - 39 of 58 Japanese briefs flag shared-code changes, so a **Japan foundation session lands every shared rule once, before any Japanese city**. A rule that would change a built map is switched per city, default off for built cities, and goes to review time as a re-render proposal.
+  - An Abroad session runs alongside it: Gimpo, Siheung, Geneva, Thessaloniki, Gelsenkirchen, Bremen, and the Anyang, Mexico City and Copenhagen (Regional) extensions.
+  - Then six Japan sessions of about 12 cities each, grouped by shared source (East: the Tama ledgers, the Saitama layers, Chiba; Kansai: BODIK, called by one session only; Regional), three at a time.
+- **The four changes (owner, "approve 1-4"):**
+  1. Precedent decides: a question answered by a brief, a skill, `docs/category_rules.md` or a numbered owner call is applied and logged.
+  2. Unattended mode: parked calls go in the branch's drafts file and reach the owner through Staging as one numbered list per wave.
+  3. One review time per phase.
+  4. Build sessions never edit `docs/city_master_list.md`; Staging moves rows after each landing.
+  For Cleanup to fold into `docs/session_roles.md` and CLAUDE.md as it sees fit.
+- **Usage check-ins (owner):** "pause and check in with me (here or in cleanup) before continuing when weekly usage hits a multiple of ten." The weekly read 42% on 2026-10-07, so the next stop is 50%. Every session checks `get_usage` between cities and stops at a crossing; all sessions share one pool. Cleanup told.
+
 ### 2026-10-06 - Review-time page-text proposal: the Japan rail exception explained on Why the maps differ (owner, call 190)
 
 - **The gap, found on the owner's question** ("do we have a JR explanation piece anywhere on the site to justify the japan-only distinction?"): the site states the distinction but never justifies it. `app/pages/Why_the_Maps_Differ.py` (the "Suburban trains appear on only a few maps" paragraph) ends "The Japanese maps draw their JR and private railways as well."; What Is Excluded points there; no Japanese city page gives the reason. The rule has also widened since that sentence was written: no frequency floor for JR or private lines (call 46), and stretches with about 11 trains a day or fewer are drawn and named (call 86).
