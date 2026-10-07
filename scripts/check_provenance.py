@@ -204,6 +204,8 @@ SLUG_OVERRIDES = {
     "Blackpool (Regional)": "blackpool",
     "Liverpool (Regional)": "liverpool",
     "Nottingham (Regional)": "nottingham",
+    # The Abroad batch (2026-10-07): the 12 tram communes as one regional page.
+    "Geneva (Regional)": "geneva",
     "Washington D.C.": "washington_dc",
     "Montréal": "montreal",
     "Mexico City": "mexico_city",

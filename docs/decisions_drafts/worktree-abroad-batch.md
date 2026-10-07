@@ -28,6 +28,19 @@ tradeoff. A parked call stops only what it names.
    info@kommunalverbund.de, delays Bremen and reverses call 13's
    no-outreach. Stops: Bremen's landing only; the build proceeds on the
    branch.
+2. **Geneva: the 326 kept establishments typed Bureau/étude/cabinet** (the
+   owner's call 3 of 2026-10-04 asked for the count by code at build). In
+   the 12 communes, of 5,863 kept: beauty institutes 131, other physical
+   well-being 41, hairdressers 25, car dealers 23, computer shops 11,
+   watches and jewelry 10, art dealers 9, specialist food 8, and 68 more
+   spread over 26 shop codes (none above 6). **Recommendation: keep them**
+   (built so): every code is a storefront code, and the personal-services
+   ones are mostly a beauty or hair practice in an office building, which
+   takes walk-in clients; the page says a few office-typed establishments
+   are counted. Tradeoff: some are back offices (a car dealer's
+   administration, an online jeweller); out, the map reads 5,537 and
+   Personal services loses 202 of 1,104. Stops: nothing; a "drop" answer
+   is a one-line config change and a re-run.
 
 ### 2026-10-07 - Gimpo built: the Gimpo Goldline on SEMAS's register, its own page (abroad-batch)
 
@@ -81,6 +94,74 @@ tradeoff. A parked call stops only what it names.
   33.6 below the preferred 45, recorded, as in Ansan. Not drawn: Lines 1, 2,
   7 and Incheon Lines 1 and 2, none with a station in Siheung. Step 2
   measured 0.31-0.41 GB.
+
+### 2026-10-07 - Geneva (Regional) built: TPG's five trams on the canton's business register (abroad-batch)
+
+- **Privacy verdict: publish.** `check_personal_exposure.py geneva`: PASS,
+  0 person-like names at a residential unit of 4,839 pins. Home-based
+  premises are out by type. **The owner's sole-trader rule (call 2,
+  2026-10-04) as built:** a sole trader's trade name is withheld, the street
+  address shown, where it shares a word of three letters or more with the
+  owner's registered name (function words and legal-form tails aside) or is
+  person-shaped (`residence.looks_personal`); a name of unknown legal form
+  (746 establishments whose firm sits outside the canton) only where it is
+  person-shaped. 1,130 of 1,490 sole traders' names withheld (974 share a
+  word, 372 person-shaped), 144 of unknown form: **1,274 in all**. A
+  trade-word filter was measured and rejected: the most frequent words in
+  sole traders' registered names are given names and surnames (marie,
+  jean, silva), so a frequency filter would drop the very words the rule
+  needs. The registered name is read in memory only and never written.
+  The 682 person-shaped names left are incorporated firms' trade names
+  (cafés, salons), commercial information (owner, 2026-10-03).
+- **Geneva (Regional) built, page 301, slug `geneva`.** The canton's REG
+  (SITG Level A; the cached zip of 04.10.2026, sha256 `45aff219...`):
+  establishment rows only; 5,828 home-based, itinerant and market-stand
+  rows dropped canton-wide (in the 12 communes, of storefront codes:
+  itinerant 70, home 62, stands 22); NOGA 2008 through the new closed list
+  `pipeline/taxonomies/geneva_noga.py` (71 kept codes, 15 out, each with
+  its rule; Georgia's module applied to NOGA; traiteurs out on R1, owner
+  call 3; car washes out as a vehicle service); scope by the 12 OSM commune
+  polygons, which the register's `PHYS_COMMUNE` matches on every row.
+  **5,863 storefronts** (Food service 1,862, Retail 2,897, Personal
+  services 1,104), the brief's 5,885 less the 22 stands. Left out by code in
+  scope: vehicle repair 212, other food service 192, the catch-all 112,
+  body shops 83, caterers 63, mail order 57, and smaller. **1,847 company
+  rows** with a storefront code and no establishment row left out and
+  disclosed (call 1; the brief's 1,848). Step 2 measured 0.23 GB.
+- **The trams.** One Overpass query (relations, stop nodes, tram stops,
+  admin_level 8 communes). 10 relations, two per line, all kept. **OSM
+  names many stop positions with TPG's platform letter** ("Bel-Air (A)",
+  "(B)"), so the first collapse gave 102 stations and gate 3 failed on
+  every line; osm_tram's aliases need the target spelling present, so
+  step 1 strips a trailing platform letter for 14 listed stops
+  (`config.PLATFORM_LETTER_STOPS`, stale-checked) before the collapse:
+  **85 stops, gate 3 exact on all five lines** against TPG's own pages
+  (25/30/22/26/31), **81 in the 12 communes** (the brief's figure), tram
+  17's 4 in France listed. Median gap **330 m: halved rings.** TPG's colors
+  as OSM tags them: tram 18 (26.5), 17 (33.9) and 14 (43.8) below the
+  preferred 45, recorded (agency colors, owner 2026-09-21). **4,839 of
+  5,863 (83%) in a ring.** No frequency sentence: no operator timetable
+  was read.
+- **Notice 154 (SITG)**: the CU 5.3.1 source line with the zip's date, a
+  derived-use line on CU 5.3.2's example ("Cartographie réalisée sur la
+  base de Données du Portail SITG"), the conditions linked (CU 5.5), and
+  the project's English modification and no-endorsement sentences (a
+  proposal). The indemnity recorded in `docs/data_sources.md` beside Hong
+  Kong's, Sacramento's and the rest. `record_kind` "National register" for
+  a cantonal business register (the kind CVR and Geostat's are).
+- **Page proposals** (no template covers them): the scope bullet's list of
+  12 communes; the register bullet ("every establishment of an active
+  business, with its activity ..."); "Businesses the register types as run
+  from home, itinerant trades and market stands are left out."; "About
+  1,800 firms registered with no separate establishment are left out too:
+  the register gives them no premises, so a shop cannot be told from a
+  home address."; and the density caveat's second clause on office-typed
+  establishments.
+- **Downstream:** notice 154, **caption**, clearly visible with the card
+  (CU: "de manière clairement visible", no place named); a card that
+  travels without its caption carries the source line on its face. Notice
+  1: rail, communes and stop names from OSM. **Open terms question: none.**
+  New inputs: a city, a taxonomy, notice 154, the Swiss licence rows.
 
 ### 2026-10-07 - Abroad batch: page proposals, numbers and downstream (abroad-batch)
 

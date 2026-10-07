@@ -633,6 +633,12 @@ REGISTRIES = {
     "zurich": dict(raw=None, trade=None, owner=None,
                    processed="businesses_clean.csv",
                    address=("address",)),
+    # Geneva's step 2 reads REG's legal name in memory only, to withhold a sole
+    # trader's trade name that is their own (the owner's call 2, 2026-10-04);
+    # it is never written, so processed/ holds no registrant-name column.
+    "geneva": dict(raw=None, trade=None, owner=None,
+                   processed="businesses_clean.csv",
+                   address=("address",)),
     # Philadelphia likewise never loads a registrant-name column (its step 2
     # asserts six of them stay absent), and its business_name is never blank,
     # so there is no fallback pair to join against either. What it adds that no

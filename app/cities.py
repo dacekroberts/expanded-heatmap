@@ -4599,6 +4599,32 @@ CITIES = [
         # it refuses a guessed one.
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Geneva (Regional)",
+        "lat": 46.2044,
+        "lon": 6.1432,
+        "page": "pages/301_Geneva_Heatmap.py",
+        "mode": "tram",
+        "coverage": "full",
+        "placement": "Register coordinates (100%)",
+        "data_age": "Register extract of 2026-10-04 (daily)",
+        "rail_extra": "Trams",
+        # The canton's general business register (REG): every active firm and
+        # establishment, the kind of record CVR and Geostat's register are.
+        "record_kind": "National register",
+        "categories": "All three",
+        "blurb": "TPG trams 12, 14, 15, 17 and 18",
+        "region": "Europe",
+        "country": "Switzerland",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

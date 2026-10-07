@@ -74,6 +74,8 @@ OSM_RAIL_BY_CITY = {
                  "used to select them and its businesses", True),
     "Zurich": ("Zurich's sixteen VBZ tram lines and their stops and the municipal "
                "boundaries used to select them and its businesses", True),
+    "Geneva (Regional)": ("Geneva's five TPG tram lines and their stops and the commune "
+                          "boundaries used to select them and its businesses", True),
     "Rome": ("Rome's metro and Roma–Viterbo urban lines and their stations, and its city "
              "boundary", True),
     "Palma": ("Palma's Metro M1 and its stations, and the municipal boundaries used to "

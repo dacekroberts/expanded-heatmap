@@ -39,7 +39,7 @@ Mapped so far:
 - **Australia:** Sydney, Melbourne
 - **Sweden:** Stockholm, Göteborg
 - **Romania:** Bucharest
-- **Switzerland:** Zurich
+- **Switzerland:** Zurich, Geneva (Regional)
 - **Georgia:** Tbilisi
 - **Belgium:** Brussels, Antwerp, Ghent, Charleroi, Liège, Brussels (Regional)
 <!-- CITIES:END -->

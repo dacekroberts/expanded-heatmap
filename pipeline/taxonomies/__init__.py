@@ -160,6 +160,7 @@ TAXONOMY_MODULES = {
     "belgium_favv": "pipeline.taxonomies.belgium_favv",
     "wallonia_logic": "pipeline.taxonomies.wallonia_logic",
     "belgium_kbo": "pipeline.taxonomies.belgium_kbo",
+    "geneva_noga": "pipeline.taxonomies.geneva_noga",
 }
 
 

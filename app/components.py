@@ -571,7 +571,7 @@ _OSM_RAIL = (
     "Kitchener–Waterloo (Regional)", "Odense", "Liepāja", "Daugavpils",
     "Buffalo", "Sacramento", "Houston", "Ottawa", "Minneapolis", "Pittsburgh",
     "Dallas", "Kansas City", "Tucson", "Tacoma", "New Orleans", "Florence", "Den Haag",
-    "Göteborg", "Zurich", "Rome", "Palma", "Brno", "Plzeň", "Olomouc",
+    "Göteborg", "Zurich", "Geneva (Regional)", "Rome", "Palma", "Brno", "Plzeň", "Olomouc",
     "Ostrava", "Liberec (Regional)", "Most (Regional)", *_BRAZIL, "Prague",
     "Amsterdam", "Rotterdam", "Hong Kong", "Seoul", "Taichung", "Taoyuan",
     "Taipei (Regional)", "Daegu", "Busan", *_KOREA_SEMAS, "Sydney", "Melbourne",
@@ -1027,6 +1027,8 @@ _NOTICES = [
      "Göteborg's tram lines 1 to 13 and their stops and the kommun boundaries "
      "used to select them and its businesses, "
      "Zurich's sixteen VBZ tram lines and their stops and the municipal "
+     "boundaries used to select them and its businesses, "
+     "Geneva's five TPG tram lines and their stops and the commune "
      "boundaries used to select them and its businesses, "
      "Rome's metro and Roma–Viterbo urban lines and their stations, "
      "Palma's Metro M1 and its stations, and the municipal boundaries used to "
@@ -3029,6 +3031,24 @@ _NOTICES = [
      "© Royal Mail copyright and database right 2026. Contains National Statistics data © Crown "
      "copyright and database right 2026. Ordnance Survey does not endorse this map.",
      False, ("Liverpool (Regional)",)),
+    # Geneva (Regional) (notice 154, the Abroad batch's number, 2026-10-07):
+    # SITG's conditions of use (version of 19 May 2026, licence-read
+    # 2026-10-04). The source line in the form CU 5.3.1 prescribes, with the
+    # extract date of the file the map was built from; the derived-use line
+    # on CU 5.3.2's example; the conditions linked (CU 5.5). THE DATE IS THE
+    # REG ZIP'S: re-fetching the register means changing it here. The
+    # English sentences are the build's draft, a review-time proposal.
+    Notice(154, "SITG, Répertoire des entreprises (Geneva (Regional))",
+     "Source : Portail des données SITG (État de Genève), téléchargé et/ou extrait en date du 04.10.2026. Cartographie réalisée sur la base de Données du Portail SITG (Répertoire des "
+     "entreprises du canton de Genève, REG), extrait en date du 04.10.2026. Modified by this "
+     "project: establishments filtered to shops, food and drink and personal services in the "
+     "12 communes TPG's trams serve, grouped into three categories and mapped by distance to "
+     "tram stops, with a sole trader's trade name replaced by the street address where it is "
+     "the owner's own name; the categories and counts are this project's. Use of the data is "
+     "subject to the SITG's [conditions of use]"
+     "(https://sitg.ge.ch/ressources/conditions-utilisation-donnees). The État de Genève does "
+     "not endorse this map.",
+     False, ("Geneva (Regional)",)),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

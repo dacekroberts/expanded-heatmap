@@ -2936,6 +2936,33 @@ Forchbahn S18 (owner), whose four city stops are all tram stops; the S-Bahn;
 buses. Trams 50 and 51 run only until December 12, 2026, while the Bahnhofquai stop is
 rebuilt.
 
+
+### Geneva (Regional) - the canton's business register, all three buckets
+
+**Left out of the Canton of Geneva's business register (REG)**, in the 12 communes
+the trams serve, among establishments with a shop, food or personal-service code:
+- **by premises type**: itinerant trades (70), businesses run from home (62) and market
+  stands (22);
+- **by activity**: vehicle repair (212), body shops (83), car washes (14) and vehicle
+  wholesale and agents (25); other food service, contract catering and canteens (192),
+  caterers (63) and restaurant management offices (11); mail-order and internet sellers
+  (57) and other retail with no shop (12); market stalls (4); heating-fuel dealers (2);
+  the "other personal services" catch-all (112); funeral services (12).
+
+**Missing, not excluded**: 1,847 firms registered with a shop, food or personal-service
+code but no separate establishment (882 retail, 333 food service, 632 personal services).
+The register gives such a firm no premises type, so a shop cannot be told from a seat at
+someone's home, and they are left out (owner, 2026-10-04); the page says so.
+
+**Shown, but not named**: 1,274 storefronts show their street address instead of a trade
+name: 1,130 sole traders whose trade name is their own name (it shares a word with the
+owner's registered name, or reads as a person's name), and 144 person-shaped names whose
+legal form the register does not give.
+
+**Stations.** Every stop of TPG trams 12, 14, 15, 17 and 18 in the 12 communes (81). Tram
+17 runs on into Gaillard, Ambilly and Annemasse, in France: its 4 stops there are drawn
+with the line but not ringed, listed on Geneva's page. Buses and the Léman Express are not
+drawn.
 ### Seoul - Korea's permit registers: the trades Korea licenses, not every shop
 
 **Missing, not excluded.** Korea licenses food service, the personal-care trades and a set of

@@ -1534,6 +1534,54 @@ COLUMNS["georgia_nace"] = {
     "mobile_unit": [loc("47.99.0", "other retail not in stores, stalls or markets")],
 }
 
+# Geneva: NOGA 2008 (Switzerland's NACE Rev. 2 with a sixth digit), keyed at
+# the six-digit leaf, Georgia's module applied to NOGA (2026-10-07). Codes
+# outside the four tracked divisions are out by construction; home-based,
+# itinerant and market-stand premises are dropped in step 2 before classify().
+GENEVA_CFG = "pipeline/geneva/config.py"
+COLUMNS["geneva_noga"] = {
+    "funeral": [loc("960300", "services funéraires")],
+    "no_counter_food": [loc("562900", "autres services de restauration (contract catering, canteens)"),
+                        loc("562100", "services des traiteurs (owner, 2026-10-04: R1, Georgia's precedent)"),
+                        loc("478100", "commerce de détail alimentaire sur éventaires et marchés"),
+                        loc("478900", "autres commerces de détail sur éventaires et marchés")],
+    "personal_catchall": [loc("960900", "autres services personnels n.c.a.")],
+    "tattoo": absent("no code of its own: tattooists sit in the 960900 catch-all"),
+    "adult_hostess": absent("the classification names nothing as adult"),
+    "sex_shop": absent("no code of its own; filed by product, as Retail"),
+    "massage_commercial": [loc("960402", "autres activités visant au bien-être physique")],
+    "massage_regulated": [loc("869002", "physiothérapie"),
+                          loc("869005", "autres activités paramédicales")],
+    "car_dealer": [loc("451102", "commerce de détail de voitures"),
+                   loc("451902", "commerce de détail d'autres véhicules automobiles"),
+                   loc("453200", "commerce de détail d'équipements automobiles"),
+                   loc("454000", "motorcycle sale with repair, one code: R4's merged type goes whole")],
+    "petrol_station": [loc("473000", "commerce de détail de carburants en magasin spécialisé")],
+    "vehicle_repair": [loc("452001", "entretien et réparation de véhicules automobiles"),
+                       loc("452002", "réparation et peinture de carrosserie"),
+                       loc("452030", "lavage, nettoyage et lustrage de véhicules"),
+                       loc("453100", "commerce de gros d'équipements automobiles"),
+                       loc("451101", "intermédiaires et commerce de gros de voitures")],
+    "gambling": [loc("920000", "organisation de jeux de hasard et d'argent")],
+    "pawnbroker": absent(PAWN_MIXED),
+    "nightclub": [loc("563002", "discothèques, dancings, night clubs")],
+    "vet": [loc("750000", "activités vétérinaires")],
+    "nonstore": [loc("479100", "vente par correspondance ou via internet"),
+                 loc("479900", "autres commerces de détail hors magasin"),
+                 loc("477801", "commerce de détail de combustibles (heating fuel dealers)")],
+    "parking": [loc("522100", "services auxiliaires des transports terrestres")],
+    "repair": [loc("951200", "réparation d'équipements de communication"),
+               loc("952300", "réparation de chaussures et d'articles en cuir"),
+               loc("952900", "réparation d'autres biens personnels et domestiques")],
+    "lodging": [loc("551001", "hôtels avec restaurant"), loc("552001", "appartements de vacances")],
+    "recreation": [loc("931300", "centres de gymnastique et de fitness"), loc("591400", "cinémas")],
+    "pharmacy": [loc("477300", "commerce de détail de produits pharmaceutiques")],
+    "optician": [loc("477802", "commerce de détail de lunettes")],
+    "health_food": absent("no code of its own"),
+    "mobile_unit": [outside(GENEVA_CFG, '"Stand ambulant")',
+                            "itinerant trades and market stands dropped by premises type in step 2")],
+}
+
 BERLIN_CFG = "pipeline/berlin/config.py"
 BERLIN_969 = '"nace_id": ("969",)'
 
@@ -2310,6 +2358,7 @@ ROW_KEY = {
     "hong_kong_fehd": "licence_code",
     "anzsic_fes": "ClassificationCode",
     "georgia_nace": "activity_code",
+    "geneva_noga": "activity_code",
     "belgium_favv": "favv_pairs",
     "belgium_kbo": "nace_code",
 }

@@ -106,7 +106,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
 | Australia | [`data_sources/australia.md`](data_sources/australia.md) | Sydney, Melbourne |
 | Belgium | [`data_sources/belgium.md`](data_sources/belgium.md) | Brussels, Antwerp, Ghent, Charleroi, Liège, Brussels (Regional) |
-| Switzerland | [`data_sources/switzerland.md`](data_sources/switzerland.md) | Zurich |
+| Switzerland | [`data_sources/switzerland.md`](data_sources/switzerland.md) | Zurich, Geneva (Regional) |
 | Georgia | [`data_sources/georgia.md`](data_sources/georgia.md) | Tbilisi |
 
 ## Business registries
@@ -374,7 +374,7 @@ source, acknowledging Government ownership of the IP, and proper attribution.
 **The indemnity is not a notice, not a credit, and not a step in a build.** It
 is an open-ended undertaking to cover the Government's costs if a third party
 alleges the data infringed their rights. Hong Kong was the first source in
-this project to ask for one; others have since, among them Sacramento, Palma,
+this project to ask for one; others have since, among them Sacramento, Palma, Geneva,
 Dallas and San Diego's SanGIS layers (below). **It was an owner decision, taken before the register's
 35,808 premises were wired into a page**, not once the city was live.
 
@@ -528,6 +528,23 @@ agreement.<!-- /internal -->
 - **SANDAG's own Data Terms of Use** ("should not be redistributed", plus a
   SANDAG indemnity) defer to a third party's terms where the source is not
   SANDAG. The SanGIS agreement is the one read as governing.
+
+#### Geneva's SITG indemnity - accepted 2026-10-04
+
+SITG's **Conditions d'utilisation des données du Portail SITG** (version of
+19 May 2026; the copy inside the dataset's zip is byte-identical) govern the
+canton's business register (REG) that the Geneva (Regional) build uses.<!-- internal --> They
+were read on 2026-10-04 by the license-read agent.<!-- /internal -->
+
+- **The shape:** narrower than Hong Kong's. CU 7.2 limits the indemnity to
+  third-party claims arising from the user's own infringements, with
+  personality and data-protection rights named.
+- **The owner accepted it on 2026-10-04, for this one source**, with ge.ch's
+  website terms read as the website's only. As with Hong Kong, it is not a
+  notice or a build step.
+- **Unchanged by the acceptance:** no re-identification (CU 5.4.2: REG is
+  never joined to another source to identify a person), no resale, and the
+  source line and derived-use statement displayed (notice 154).
 
 ## Notices this project MUST display when published
 
@@ -3768,6 +3785,32 @@ of 2026-10-03.)
   `outputs/liverpool/` republishes the derived locations (README's credits).
 - Wording: Manchester's Ordnance Survey notice 85, with the city changed.
 
+
+**154. SITG, Répertoire des entreprises (Geneva (Regional)) — required, and
+DISPLAYED** (written into `render_site_notices()` with Geneva (Regional),
+2026-10-07.)
+
+- **PERMITTED WITH CONDITIONS**<!-- internal --> (`licence-read` 2026-10-04)<!-- /internal -->: SITG Level A,
+  "Accès libre", under the Conditions d'utilisation (version of 19 May 2026):
+  reproduce, publish, adapt and combine, commercial use included. Rows in
+  [`data_sources/switzerland.md`](data_sources/switzerland.md).
+- **MUST DISPLAY**, "de manière clairement visible": the source line in the
+  form CU 5.3.1 prescribes, "Source : Portail des données SITG (État de
+  Genève), téléchargé et/ou extrait en date du […].", with the extract date of
+  the file the map was built from (04.10.2026); a statement of the derived use
+  (CU 5.3.2, on its example wording: "Cartographie réalisée sur la base de
+  Données du Portail SITG"); and the conditions of use linked (CU 5.5).
+- **MUST NOT**: re-identify a person (CU 5.4.2: no join of REG to another
+  source); resell the data (RIRT art. 62).
+- **Personal data**: a sole trader's trade name that is the owner's own name
+  shows the street address instead (the owner's call, 2026-10-04); phone,
+  e-mail and legal-name columns are never read into the map.
+- **The indemnity (CU 7.2)**: accepted by the owner, 2026-10-04 (above); not a
+  notice.
+- **Geneva's rail and the commune boundaries are OpenStreetMap data** (ODbL,
+  notice 1).
+- The English sentences of the displayed notice are the build's draft, a
+  review-time proposal.
 
 ## Gaps
 

@@ -6,7 +6,7 @@ Edges come from each city's `pipeline/<slug>/config.py`, shares from
 map carries, read from the committed maps). Regenerate after any city lands
 or re-renders.
 
-**172 built cities: 106 on the standard rings (0.1 / 0.2 / 0.3 / 0.6 mi), 66 on smaller ones.**
+**173 built cities: 106 on the standard rings (0.1 / 0.2 / 0.3 / 0.6 mi), 67 on smaller ones.**
 
 **The rule for smaller rings is station spacing, not coverage**: where the
 median gap between stations is about 550 m or less, a 0.6 mi outer ring
@@ -27,6 +27,7 @@ standard rings.
 | Montpellier | 0.05 / 0.1 / 0.2 / 0.3 mi | 86.7% | reason not recorded here: read its config |
 | Strasbourg | 0.05 / 0.1 / 0.2 / 0.3 mi | 85.1% | reason not recorded here: read its config |
 | Orléans | 0.05 / 0.1 / 0.2 / 0.3 mi | 84.7% | reason not recorded here: read its config |
+| Geneva (Regional) | 0.05 / 0.1 / 0.2 / 0.3 mi | 82.5% | reason not recorded here: read its config |
 | Brno | 0.05 / 0.1 / 0.2 / 0.3 mi | 82.4% | reason not recorded here: read its config |
 | Antwerp | 0.05 / 0.1 / 0.2 / 0.3 mi | 81.4% | reason not recorded here: read its config |
 | Nice | 0.05 / 0.1 / 0.2 / 0.3 mi | 80.4% | reason not recorded here: read its config |
@@ -128,6 +129,7 @@ standard rings.
 | Kawasaki | 0.1 / 0.2 / 0.3 / 0.6 mi | 9,930 | 11,898 | 83.5% |
 | Sydney | 0.1 / 0.2 / 0.3 / 0.6 mi | 5,901 | 7,074 | 83.4% |
 | Yokohama | 0.1 / 0.2 / 0.3 / 0.6 mi | 6,541 | 7,844 | 83.4% |
+| Geneva (Regional) | 0.05 / 0.1 / 0.2 / 0.3 mi | 4,839 | 5,863 | 82.5% |
 | Brno | 0.05 / 0.1 / 0.2 / 0.3 mi | 5,932 | 7,200 | 82.4% |
 | Fukuoka | 0.1 / 0.2 / 0.3 / 0.6 mi | 24,603 | 29,938 | 82.2% |
 | Berlin | 0.1 / 0.2 / 0.3 / 0.6 mi | 49,394 | 60,268 | 82.0% |

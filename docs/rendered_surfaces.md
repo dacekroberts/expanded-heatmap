@@ -6,7 +6,7 @@ read from the code, so a review lane can divide them up and miss none
 (review lesson 3, `docs/review_lanes_2026-09-30.md`). The lane kit is
 `docs/review_lane_kit.md`.
 
-**172 city pages, 4 fixed pages and the Overview; 28 rendered docs; 2 app data files.**
+**173 city pages, 4 fixed pages and the Overview; 28 rendered docs; 2 app data files.**
 
 ## The Overview (`/`)
 
@@ -209,3 +209,4 @@ Is Excluded, and its in-ring share on Why the Maps Differ.
 | `/Brussels_Regional_Heatmap` | Brussels (Regional) | `brussels` | ✓ |
 | `/Gimpo_Heatmap` | Gimpo | `gimpo` | ✓ |
 | `/Siheung_Heatmap` | Siheung | `siheung` | ✓ |
+| `/Geneva_Heatmap` | Geneva (Regional) | `geneva` | ✓ |
