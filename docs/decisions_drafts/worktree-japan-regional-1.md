@@ -10,7 +10,23 @@ notices 176-186.
 
 ## Parked calls
 
-None yet.
+1. **Tsu (page 232, notice 179 held): Mie Prefecture's three BODIK lists
+   (`240001_food_business_all`, `240001_barbar`, `240001_hair_dressing`) have
+   no licence verdict.** The brief records CC BY 4.0 as stated and leaves the
+   read to a `licence-read` agent; no read is recorded in staging's drafts,
+   `docs/data_sources/japan.md` or `DECISIONS.md` (the wave-5 entry's eleven
+   reads do not include Mie). *Recommend:* one licence read of the
+   三重県オープンデータ利用規約 (`https://odcs.bodik.jp/240001/tos/`), one read
+   for all three lists, by a session cleared to call BODIK's hosts; then
+   build. What the brief quotes points to permitted with conditions (CC BY
+   4.0, a resource's own licence prevailing, no logo, a fault-based cost
+   clause, accepted for Japan 2026-09-24). *Tradeoff:* one read and a later
+   build, against a page and notice whose credit and conditions are
+   unverified. The scaffold stands as committed (efeaf016); nothing else was
+   written. The brief's open call 1 (MHLW's notifications as a partial Food
+   shops layer) needs no call: Iwaki's call 150 left 164 addressed retail
+   rows out as too thin, and Tsu's are 159 (156 pins), so they stay out and
+   MHLW's file stays the control.
 
 ## Proposals for review time (page sentences no template covers)
 
