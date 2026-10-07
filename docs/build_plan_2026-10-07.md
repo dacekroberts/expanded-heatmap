@@ -141,7 +141,7 @@ You are the <NAME> build session for expanded-heatmap (worktree <WORKTREE>). Rea
 
 Build, in this order, from each city's brief in docs/build_briefs/ and the japan-city skill: <CITIES FROM THE PLAN'S TABLE>.
 
-The briefs' shared-code items are already in shared code. If one is missing, it is a parked call, not a city-local fix.
+The briefs' shared-code items are already in shared code (the foundation, 7ab440f9 and 521d28fc; the japan-city skill's foundation section names each rule). If one is missing, it is a parked call, not a city-local fix. Leave "rules" out of each japan.CITIES entry: the new rules are on by default for new cities, and japan.py refuses an entry that names WAVE2_RULES. A zipped register (Maebashi's, Sagamihara's) needs a city source_rows.
 
 <KANSAI ONLY: You are the only session calling BODIK; keep calls at least 20 s apart and never use datastore_search_sql.>
 <KANSAI-2 ONLY: After the cities, take Naha's one measurement from its master-list row, if BODIK answers without a block; otherwise record the refusal and stop.>
