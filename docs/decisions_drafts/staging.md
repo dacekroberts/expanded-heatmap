@@ -79,6 +79,24 @@ The A and B briefs left 23 reads pending. Regional-1's six run from staging (Tsu
     - Must not (§5): present edited data as the city's; use the logo.
     - Fault-based cost clauses. Links to data pages need no contact (§3).
   - **Toyonaka (BODIK):** PERMITTED WITH CONDITIONS under CC BY 4.0 (豊中市オープンデータ利用規約, ２(1)); ２(2) gives an example credit only, so CC BY 4.0's change statement applies. No cost or indemnity clause binds the user. That completes Kansai-1's five reads.
+- **Phase 2's reads (staging, licence-read agents, 2026-10-07, plain GET, no data file):**
+  - **Aomori: PERMITTED WITH CONDITIONS.** CC BY 4.0 through 青森市オープンデータ利用規約 (accepted by use, clause 1; terms PDF riyokiyaku.pdf, undated; dataset page /shisei/jouhokoukai/opendata/1006170/1006184.html, updated 2026-09-15). The site policy's reproduction bar covers the city's web pages, not this data.
+    - Must display (3(2), prescribed): 「この地図は以下の著作物を改変して利用しています。［タイトル］、青森市、クリエイティブ・コモンズ・ライセンス表示 4.0 国際（https://creativecommons.org/licenses/by/4.0/deed.ja）、［当該ページの URL］」. The build chooses the title: the page's 食品営業許可施設一覧（オープンデータ） or the portal's 青森市における食品営業許可施設一覧.
+    - Must not (6): present edited data as the city's; act in a way that harms or defames the city or others, or might (undefined, raised the way Taoyuan's was). The usage report (5) is voluntary.
+    - Liability 6, 7(1), 7(2): fault-based, uncapped; Aomori District Court. The standing Japanese class.
+  - **Yamagata: PERMITTED WITH CONDITIONS, subject to call 206.** CC BY 4.0 through 山形市オープンデータ利用規約 §2(2) (terms PDF /_res/common/opendeta/1000082/opendeta_riyou.pdf, Last-Modified 2021-09-29; accepted by use per the dataset page 1012802.html). The site policy's 著作権 clause covers web pages, not this data.
+    - Must display (§2(3), prescribed): 「この地図は以下の著作物を改変して利用しています。［タイトル］、山形市、クリエイティブ・コモンズ・ライセンス 表示 4.0 国際（https://creativecommons.org/licenses/by/4.0/deed.ja）」, the URL as text or a link. The catalogue title changes each month (令和8年8月31日時点で営業中の食品営業許可施設一覧).
+    - Must do: re-read the terms before each refresh (§1, changes without notice). No notification.
+    - Liability: §3 fault-based, uncapped. **§4 is not fault-based**: the user reimburses the city's costs, damages included, arising from 「利用者によるサービスの利用やサービスの接続」 as well as from a breach. Uncapped; Yamagata District Court. The Hong Kong shape (accepted, owner 2026-09-22 and 09-24), put to the owner as call 206.
+  - **Fujisawa: PERMITTED WITH CONDITIONS.** CC BY 4.0 through the open-data terms (riyoukiyaku20250401.pdf, 156,986 B, Last-Modified 2025-04-10, §3(2)). Library page 13230 lists both dataset pages (food 28905, 2026-09-18; barbers, beauty and laundry 32931, 2026-09-29) and binds by use; neither dataset page has a licence line.
+    - The site policy (page 1196, 2023-04-01) bars unauthorised use of 文書・画像等 on the site. Read as covering the city's web pages, the open-data terms governing what the library lists: Koshigaya's and Hiroshima's shape (call 142), applied as precedent; both readings recorded.
+    - Must display (§3(3), prescribed): 「この地図は以下の著作物を改変して利用しています。［タイトル］、藤沢市、クリエイティブ・コモンズ・ライセンス 表示 4.0（http://creativecommons.org/licenses/by/4.0/）」, the URL as text or a link; titles 「食品衛生法に基づく営業許可施設情報」 and 「理容所・美容所・クリーニング所」.
+    - Must do: re-check the terms before each refresh (§1). Page 1196 asks for a notice to the city when a site links its pages, with no channel given; the build cites titles without hyperlinking city pages (Hirakata's precedent).
+    - Liability: §4(3) and §5 breach-based, uncapped (the 2026-09-24 class).
+  - **Matsumoto: PERMITTED WITH CONDITIONS, subject to call 207.** The city's terms (13394.pdf, 2018-10-01, accepted by use §1) grant use 「誰でも自由に利用（複製、加工、商用利用等）」 and cover both LinkData works (rdf1s8757i, rdf1s8748i), which LinkData marks CC BY 3.0 with the attribution name 松本市　DX推進本部; LinkData's terms (in force 2012-03-06) Art.11.2 make that mark binding on its host. No document says which version wins.
+    - Must display (city §2(2), the city's format): 「出典：松本市の［タイトル］（クリエイティブ・コモンズ・ライセンス表示4.0国際、［URL］、［ダウンロード日］ダウンロード）、松本市を編集・加工して作成」, plus the attribution name and a line that LinkData marks the data CC BY 3.0 (both versions named; owner to confirm, call 207).
+    - Must not: imply endorsement by the city or LinkData (CC BY 3.0 §4(b), LinkData Art.14.2); harm the author's honour (14.1); keep the contributor's name if asked to remove it (14.3).
+    - Liability: **city §6(5) is not fault-based**: the user settles 「全ての苦情や請求」 arising from use at its own cost, uncapped, no express indemnity. **LinkData Art.18(4) is partly not fault-based**: the user settles claims arising from a breach or from the content, and repays LinkData's 「一切の損害、損失及び費用」, uncapped. Art.21(3) fault-based. Courts: Nagano, Tokyo. Put to the owner as call 207.
 
 ### 2026-10-07 - Call 197 built on Cleanup's europe-split branch; the macro map's region views are Cleanup's (owner, call 198)
 
