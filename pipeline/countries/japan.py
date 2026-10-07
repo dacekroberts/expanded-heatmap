@@ -85,18 +85,18 @@ CITIES = {
               "wards": tokyo_wards.ACTIVE_CODES},
     # N02-25 since 2026-10-03 (owner): N02-24 lacks the Chūō Line's
     # Yumeshima, opened 2025-01-19.
-    "osaka": {"name": "大阪市", "pref": "27", "epsg": 32653, "n02": "25", "rules": WAVE2_RULES,
+    "osaka": {"name": "大阪市", "pref": "27", "epsg": 32653, "n02": "25", "rules": WAVE2_RULES | {"name_city"},
               "wards": ["27102", "27103", "27104", "27106", "27107", "27108", "27109", "27111", "27113",
                         "27114", "27115", "27116", "27117", "27118", "27119", "27120", "27121", "27122",
                         "27123", "27124", "27125", "27126", "27127", "27128"]},
     "kobe": {"name": "神戸市", "pref": "28", "epsg": 32653, "rules": WAVE2_RULES,
              "wards": ["28101", "28102", "28105", "28106", "28107", "28108", "28109", "28110", "28111"]},
-    "sapporo": {"name": "札幌市", "pref": "01", "epsg": 32654, "rules": WAVE2_RULES,
+    "sapporo": {"name": "札幌市", "pref": "01", "epsg": 32654, "rules": WAVE2_RULES | {"name_city"},
                 "wards": [f"011{n:02d}" for n in range(1, 11)]},
-    "fukuoka": {"name": "福岡市", "pref": "40", "epsg": 32652, "rules": WAVE2_RULES,
+    "fukuoka": {"name": "福岡市", "pref": "40", "epsg": 32652, "rules": WAVE2_RULES | {"name_city"},
                 "wards": [f"4013{n}" for n in range(1, 8)]},
     # Band A 2026-09-24 (owner), on a register rebuilt from its permit stream
-    "kyoto": {"name": "京都市", "pref": "26", "epsg": 32653, "rules": WAVE2_RULES,
+    "kyoto": {"name": "京都市", "pref": "26", "epsg": 32653, "rules": WAVE2_RULES | {"name_city"},
               "wards": [f"261{n:02d}" for n in range(1, 12)]},
     # Band B 2026-09-29 (owner): personal services only, the 18 wards
     "yokohama": {"name": "横浜市", "pref": "14", "epsg": 32654, "rules": WAVE2_RULES,
@@ -119,7 +119,7 @@ CITIES = {
               "wards": ["18201"]},
     "nagasaki": {"name": "長崎市", "pref": "42", "epsg": 32652, "n02": "25", "rules": WAVE2_RULES, "wardless": True,
                  "wards": ["42201"]},
-    "utsunomiya": {"name": "宇都宮市", "pref": "09", "epsg": 32654, "n02": "25", "rules": WAVE2_RULES, "wardless": True,
+    "utsunomiya": {"name": "宇都宮市", "pref": "09", "epsg": 32654, "n02": "25", "rules": WAVE2_RULES | {"name_city"}, "wardless": True,
                    "wards": ["09201"]},
     "kitakyushu": {"name": "北九州市", "pref": "40", "epsg": 32652, "n02": "25", "rules": WAVE2_RULES,
                    "wards": ["40101", "40103", "40105", "40106", "40107", "40108", "40109"]},
@@ -151,7 +151,7 @@ CITIES = {
                   "wards": ["37201"]},
     "toyota": {"name": "豊田市", "pref": "23", "epsg": 32653, "n02": "25", "rules": WAVE2_RULES, "wardless": True,
                "wards": ["23211"]},
-    "yokkaichi": {"name": "四日市市", "pref": "24", "epsg": 32653, "n02": "25", "rules": WAVE2_RULES, "wardless": True,
+    "yokkaichi": {"name": "四日市市", "pref": "24", "epsg": 32653, "n02": "25", "rules": WAVE2_RULES | {"name_city"}, "wardless": True,
                   "wards": ["24202"]},
     "otsu": {"name": "大津市", "pref": "25", "epsg": 32653, "n02": "25", "rules": WAVE2_RULES, "wardless": True,
              "wards": ["25201"]},
@@ -176,6 +176,10 @@ CITIES = {
 # brief's `"rules": WAVE2_RULES` predates the foundation and is refused below.
 # A built city moves to ALL_RULES only at a review time that re-renders it
 # (docs/decisions_drafts/japan-foundation.md, the re-render proposal).
+# Six of them read "name_city" too (owner, call 209, 2026-10-07): it withheld
+# 13 pins of trade names flagged at another premises (Osaka 6, Utsunomiya 3,
+# Fukuoka, Kyoto, Sapporo and Yokkaichi 1 each). Measured read-only with the
+# switch on, no other built city's map moves (Tokyo's 1 row is not on it).
 BUILT_BEFORE_FOUNDATION = frozenset({
     "tokyo", "osaka", "kobe", "sapporo", "fukuoka", "kyoto", "yokohama", "hiroshima", "matsuyama", "toyama",
     "kumamoto", "fukui", "nagasaki", "utsunomiya", "kitakyushu", "sakai", "hakodate", "kagoshima", "okayama",
