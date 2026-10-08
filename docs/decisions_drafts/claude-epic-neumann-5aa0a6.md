@@ -126,9 +126,19 @@ or published; every proposal waits for the owner.
   `[(kind, name)]`, the name in English where OSM has one, else local.
   Re-shot: Florence's legend reads "T1 Leonardo, T2 Vespucci, Arno Boat";
   Avignon's "Tram T1, Bac du Rocher des Doms" (its crossing is too short
-  for the on-map name, so the row carries it). Open for later: a city
-  with many ferry routes (Istanbul, Hong Kong, Sydney) would list each;
-  grouping or a cap is a call for when such a city is piloted.
+  for the on-map name, so the row carries it).
+- **Cities with many ferry routes (Istanbul, Hong Kong, Sydney): a second
+  palette, one colour per named route (owner, 2026-10-08).** The colours
+  may sit close to transit line colours, since the dash already sets a
+  ferry apart from the solid lines, and ferries almost never overlap
+  transit (a ferry passing under a bridge that carries a line is the one
+  case, and the basemap's ferries draw beneath the site's lines). Design:
+  the palette's first colour is today's ferry colour (crimson on the
+  site, blue in the full version), so one-ferry cities stay as they are;
+  each route's legend row takes its route's colour; contrast is measured
+  against the water tint and the other ferry routes, not the transit
+  lines. Built with the first multi-ferry city piloted, so it is tested on
+  real routes.
 - **Station dots sized by zoom (owner agreed, 2026-10-08).** Pilot pages
   (full version and the site's Travel view): one pass on zoom end sets
   every dot (and line width) from a zoom table, interchanges a step
