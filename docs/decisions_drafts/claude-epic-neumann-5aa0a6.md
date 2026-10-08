@@ -183,7 +183,30 @@ or published; every proposal waits for the owner.
   its info page. In the handoff.
 - **The package's server** now runs with no arguments (port 8000, its own
   folder) and prints its links, after the owner's first try on a desktop
-  copy left out the folder argument.
+  copy left out the folder argument. The owner then ran the package
+  offline from a desktop copy: it worked. Added (owner): a double-click
+  `Start (Windows).bat` (checks for Python, starts the server, opens the
+  browser); the server moves to the next free port when 8000 is busy
+  (Python's server allows address reuse, which on Windows let two servers
+  share a port: turned off) and listens on 127.0.0.1 only.
+- **Offline downloads in the app, a logistics overview (owner asked:
+  phones never run commands):** in the handoff. The installed web app
+  stores the pack, libraries, glyphs and export in the browser's storage
+  and reads the pack from there (PMTiles over a blob, or a service worker
+  answering range requests); a native app opens the pack file; download,
+  checksum, update, delete and storage flows to design; persistent
+  storage, and the iPhone Home Screen install against WebKit's seven-day
+  clearing; ODbL for stored packs. Mac and Linux need nothing for the
+  installed web app; only the desktop prototype has a launcher (Windows),
+  with `python3 range_server.py` on the others.
+- **Legend and station-panel behaviours:** the owner tried both on a
+  phone and called the result great; the handoff recommends them and
+  leaves the final call to the app.
+- **Handed to the app (owner, 2026-10-08):** "if there are no more open
+  gaps let's pass this to the app session". Package final: 799 files,
+  22.6 MB (13.6 MB zipped), `data/_basemap_build/prototype_full_2026-10-08/`
+  with `SHA256SUMS`, and the zip beside it; message sent to the
+  transit-globe session.
 - **A line-colour switch in the app (owner, 2026-10-08):** official
   colours by default, or a readability set the owner fleshes out,
   togglable. Approved shape: the readability set is the official set with
