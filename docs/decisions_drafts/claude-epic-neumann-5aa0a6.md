@@ -148,7 +148,11 @@ or published; every proposal waits for the owner.
   tap on the open legend never selects a station dot beneath it (the
   legend is outside the map; taps are caught by the map), so closing the
   legend on a station tap is safe; passed to the app with the long-legend
-  note.
+  note. **On trial (owner, 2026-10-08):** on a phone, a station tap now
+  folds an open legend away (the panel takes the full width); a legend-row
+  tap still picks its line and leaves the legend open; desktop unchanged.
+  Tested on Tokyo at 390 x 844. The owner decides on the phone whether it
+  stays.
 - **The label-language switch, two refinements for the app (owner,
   2026-10-08)**, after Mendoza on a phone showed no visible change (few of
   its features have an English name in OSM, so English falls back to the
