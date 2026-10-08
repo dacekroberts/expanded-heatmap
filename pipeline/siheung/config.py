@@ -8,6 +8,8 @@ gate 3) with Gimhae's register config, keyed on 시군구코드.
 
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -84,10 +86,14 @@ RING_LABELS = ["0-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi", "0.3-0.6 mi"]
 # at midday, borderline, drawn on Ansan's and Bucheon's precedent (owner,
 # 2026-10-04; the page states the wait).
 # key -> (OSM ref, colour, public name, label end).
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
 LINES = {
-    "L4": ("4", "#009BCE", "Line 4", None),
-    "SB": ("수인·분당", "#ECA300", "Suin–Bundang Line", None),
-    "SH": ("서해", "#5EAC41", "Seohae Line", None),
+    "L4": ("4", line_registry.colour("seoul-subway-line-4"), "Line 4", None),
+    "SB": ("수인·분당", line_registry.colour("suin-bundang-line"), "Suin–Bundang Line", None),
+    "SH": ("서해", line_registry.colour("seohae-line"), "Seohae Line", None),
 }
 OSM_COLOUR = {}
 LINES_ROUTE_TYPES = {"subway", "light_rail", "monorail", "train", "tram"}

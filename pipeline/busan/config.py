@@ -15,6 +15,8 @@ Seoul's and Daegu's. No GTFS is published.
 
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -137,6 +139,10 @@ RING_LABELS = ["0-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi", "0.3-0.6 mi"]
 # Matched on the RELATION's route type and ref, NEVER on network: 동해선
 # (Korail-run) is tagged 부산 도시철도 like the city's lines.
 # key -> (OSM ref, colour, public name, label end). Operator colours.
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
 LINES = {
     "L1": ("1", "#F06A00", "Line 1", None),
     "L2": ("2", "#81BF48", "Line 2", None),
@@ -145,7 +151,7 @@ LINES = {
     # Retail's blue (linecolour.py; 10.8 clears the floor of 10 but reads as the
     # same blue - Calgary's lesson). Daegu's Line 2 was settled at 32.3.
     "L4": ("4", "#144B7A", "Line 4", None),
-    "BGL": ("BGL", "#8652A1", "Busan–Gimhae LRT", None),
+    "BGL": ("BGL", line_registry.colour("busan-gimhae-lrt"), "Busan–Gimhae LRT", None),
 }
 # Where the drawn colour differs from the one OSM carries, OSM's (step 1 checks
 # every relation still carries it).

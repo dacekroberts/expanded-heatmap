@@ -27,6 +27,7 @@ line, meeting at 春日部. English station names from OpenStreetMap's name:en.
 
 from pathlib import Path
 
+from pipeline import line_registry
 from pipeline.countries import saitama_pref
 
 # --- Paths ---------------------------------------------------------------
@@ -167,7 +168,13 @@ LINES = {
 # the Urban Park Line a green (45.3 from the nearest pin; 5.82 dark, 3.22
 # light). The pair: 89.7 apart, within 500 m at 春日部; the dark-mode labels,
 # 2 distinct of 2.
-_COLOURS = {"TS": "#08A0C0", "TD": "#60A000"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+_COLOURS = {
+    "TS": line_registry.colour("tobu-skytree-line"), "TD": "#60A000",
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

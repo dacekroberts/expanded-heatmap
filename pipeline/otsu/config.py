@@ -21,6 +21,8 @@ station names from OpenStreetMap's name:en.
 
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -184,7 +186,14 @@ LINES = {
 # Keishin Line's #909040 sat 16.0 from it, under the owner's floor of 20
 # (2026-10-07), and takes Kyoto's new colour for the same line, #949054
 # (olive 25.2, between 20 and 45: an accepted trade). Its start hue follows.
-_COLOURS = {"KI": "#28A800", "KK": "#949054", "JC": "#08A0C0", "JB": "#406878"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+_COLOURS = {
+    "KI": "#28A800", "KK": line_registry.colour("keihan-keishin-line"),
+    "JC": line_registry.colour("jr-west-kosei-line"), "JB": line_registry.colour("jr-west-biwako-line"),
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

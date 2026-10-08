@@ -26,6 +26,8 @@ the city line. English station names from OpenStreetMap's name:en.
 import datetime
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -276,7 +278,14 @@ LINES = {
 # Line from a Keihan green) that reads 3:1 on both map pages and clears CIE76
 # 45 from every pin. Closest pair 70.1 (Keihan's two lines, at 枚方市); the
 # dark-mode labels separate, 3 of 3.
-_COLOURS = {"KM": "#787858", "KK": "#28A800", "JG": "#C000A8"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+_COLOURS = {
+    "KM": line_registry.colour("keihan-main-line"), "KK": "#28A800",
+    "JG": line_registry.colour("jr-west-gakkentoshi-line"),
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

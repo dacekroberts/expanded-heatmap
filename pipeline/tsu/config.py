@@ -27,6 +27,8 @@ name:en.
 import unicodedata
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -227,7 +229,14 @@ LINES = {
 # clears Retail's pin in, goes purple (Yokkaichi's). Closest pair within
 # 500 m 18.3 (Kintetsu's two), anywhere 10.8 (JR's two, never within 500 m);
 # the dark-mode labels separate, 5 of 5.
-_COLOURS = {"KN": "#E00018", "KO": "#F85838", "JK": "#E86810", "JM": "#C85000", "IS": "#9840A0"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+_COLOURS = {
+    "KN": line_registry.colour("kintetsu-nagoya-line"), "KO": line_registry.colour("kintetsu-osaka-line"),
+    "JK": "#E86810", "JM": "#C85000", "IS": line_registry.colour("ise-railway-ise-line"),
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

@@ -25,6 +25,8 @@ Kita-Osaka Kyuko, cut at the city line; the Midosuji Line left out (call
 
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -261,8 +263,17 @@ LINES = {
 # from every pin; the Monorail moves one step from Toyonaka's to clear the JR
 # Kyoto Line. Closest pair within 500 m 18.9 (the JR Kyoto Line and the
 # Monorail), anywhere 12.7; the dark-mode labels separate, 7 of 7.
-_COLOURS = {"HS": "#B88080", "HY": "#885848", "JY": "#506878", "OH": "#A088A0", "MO": "#108098",
-            "MS": "#708898", "KK": "#E81820"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+_COLOURS = {
+    "HS": line_registry.colour("hankyu-senri-line"), "HY": line_registry.colour("hankyu-kyoto-line"),
+    "JY": line_registry.colour("jr-west-kyoto-line"),
+    "OH": line_registry.colour("jr-west-osaka-higashi-line"),
+    "MO": line_registry.colour("osaka-monorail-main-line"), "MS": "#708898",
+    "KK": line_registry.colour("kita-osaka-kyuko-namboku-line"),
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

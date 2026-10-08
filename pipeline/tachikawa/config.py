@@ -24,6 +24,7 @@ English station names from OpenStreetMap's name:en.
 
 from pathlib import Path
 
+from pipeline import line_registry
 from pipeline.countries import tokyo_tama
 
 # --- Paths ---------------------------------------------------------------
@@ -173,7 +174,15 @@ LINES = {
 # (Rapid) orange, as Hino's. Closest pair within 500 m and anywhere 23.6 (the
 # monorail and the Chuo Line); the Chuo and Ome lines, meeting at 立川, 94.1.
 # The dark-mode labels, 5 of 5.
-_COLOURS = {"MONO": "#E07800", "SH": "#08A0C0", "JN": "#B09000", "JC": "#F05820", "JO": "#E060D0"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+_COLOURS = {
+    "MONO": line_registry.colour("tama-toshi-monorail"), "SH": line_registry.colour("seibu-haijima-line"),
+    "JN": line_registry.colour("jr-east-nambu-line"), "JC": line_registry.colour("jr-east-chuo-line"),
+    "JO": "#E060D0",
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

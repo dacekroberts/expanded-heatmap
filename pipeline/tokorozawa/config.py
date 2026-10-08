@@ -28,6 +28,7 @@ name:en.
 
 from pathlib import Path
 
+from pipeline import line_registry
 from pipeline.countries import saitama_pref
 
 # --- Paths ---------------------------------------------------------------
@@ -177,7 +178,14 @@ LINES = {
 # Nishitokyo's two colours. Closest pair within 500 m 33.6 (the Musashino and
 # Ikebukuro lines, at 新秋津 and 秋津 beyond the city line), anywhere 32.3 (the
 # Ikebukuro and Yamaguchi lines); the dark-mode labels, 5 of 5.
-_COLOURS = {"SI": "#D08000", "SS": "#08A0C0", "SA": "#9040C0", "SY": "#A06030", "JM": "#F05820"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+_COLOURS = {
+    "SI": line_registry.colour("seibu-ikebukuro-line"), "SS": line_registry.colour("seibu-shinjuku-line"),
+    "SA": "#9040C0", "SY": "#A06030", "JM": line_registry.colour("jr-east-musashino-line"),
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

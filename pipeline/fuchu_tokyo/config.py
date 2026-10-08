@@ -28,6 +28,7 @@ names from OpenStreetMap's name:en.
 
 from pathlib import Path
 
+from pipeline import line_registry
 from pipeline.countries import tokyo_tama
 
 # --- Paths ---------------------------------------------------------------
@@ -183,7 +184,15 @@ LINES = {
 # Closest pair within 500 m 56.0 (the Nambu and Musashino lines at 府中本町),
 # anywhere 46.3 (the Keibajo and Nambu lines); the two Keio lines, meeting at
 # 東府中, 101.3. The dark-mode labels, 5 of 5.
-_COLOURS = {"KO": "#B030D0", "KK": "#806040", "JN": "#B09000", "JM": "#F05820", "SW": "#08A0C0"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+_COLOURS = {
+    "KO": line_registry.colour("keio-line"), "KK": "#806040",
+    "JN": line_registry.colour("jr-east-nambu-line"), "JM": line_registry.colour("jr-east-musashino-line"),
+    "SW": "#08A0C0",
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

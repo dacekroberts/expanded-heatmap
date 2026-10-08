@@ -25,6 +25,8 @@ from OpenStreetMap's name:en.
 
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -233,7 +235,13 @@ LINES = {
 # colour nearest JR East's #3CB371 that reads 3:1 on both pages and clears 25
 # from every pin (25.2 from Personal services', 38.0 from olive, between 20
 # and 45: an accepted trade). Closest pair now 62.3 (Joban, Suigun).
-_COLOURS = {"JJ": "#08A0C0", "SG": "#007430", "OK": "#F000B8"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+_COLOURS = {
+    "JJ": line_registry.colour("jr-east-joban-line"), "SG": "#007430", "OK": "#F000B8",
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

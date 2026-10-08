@@ -20,6 +20,8 @@ because N02 carries Japanese names only (owner, 2026-09-27).
 
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -195,12 +197,21 @@ COLLAPSE_MAX_SPREAD_M = 400
 # dark-mode labels separate, 34 of 34. DECISIONS, "Lines within 20 of the
 # olive and violet pins recoloured".
 _JR, _M = "西日本旅客鉄道", "大阪市高速電気軌道"
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+# Moved so the shared colours fit (2026-10-07), hue kept as far as they allow:
+# the Yotsubashi Line #00A2C3 to #4898D0 (pins 67.8, nearest line JR Kyoto Line
+# 18.8, nearest beside it 18.8); the Kintetsu Namba Line #FC5D3F to #B83008
+# (pins 45.7, nearest line Kintetsu Osaka Line 18.7, nearest beside it 18.7).
+# docs/decisions_drafts/line-registry.md.
 LINES = {
     # Osaka Metro (大阪市高速電気軌道)
-    "M": {"n02": [(_M, "1号線(御堂筋線)")], "name": "Midōsuji Line", "name_ja": "御堂筋線", "colour": "#E4151E"},
+    "M": {"n02": [(_M, "1号線(御堂筋線)")], "name": "Midōsuji Line", "name_ja": "御堂筋線", "colour": line_registry.colour("osaka-metro-midosuji-line")},
     "T": {"n02": [(_M, "2号線(谷町線)")], "name": "Tanimachi Line", "name_ja": "谷町線", "colour": "#933CA5"},
-    "Y": {"n02": [(_M, "3号線(四つ橋線)")], "name": "Yotsubashi Line", "name_ja": "四つ橋線", "colour": "#00A2C3"},
-    "C": {"n02": [(_M, "4号線(中央線)")], "name": "Osaka Metro Chuo Line", "name_ja": "中央線", "colour": "#5D662A"},
+    "Y": {"n02": [(_M, "3号線(四つ橋線)")], "name": "Yotsubashi Line", "name_ja": "四つ橋線", "colour": "#4898D0"},
+    "C": {"n02": [(_M, "4号線(中央線)")], "name": "Osaka Metro Chuo Line", "name_ja": "中央線", "colour": line_registry.colour("osaka-metro-chuo-line")},
     "S": {"n02": [(_M, "5号線(千日前線)")], "name": "Sennichimae Line", "name_ja": "千日前線", "colour": "#DB69CF"},
     "K": {"n02": [(_M, "6号線(堺筋線)")], "name": "Sakaisuji Line", "name_ja": "堺筋線", "colour": "#90542D"},
     "N": {"n02": [(_M, "7号線(長堀鶴見緑地線)")], "name": "Nagahori Tsurumi-ryokuchi Line",
@@ -209,43 +220,43 @@ LINES = {
     "P": {"n02": [(_M, "南港ポートタウン線")], "name": "New Tram", "name_ja": "ニュートラム", "colour": "#00758A"},
     # JR West (西日本旅客鉄道)
     "JO": {"n02": [(_JR, "大阪環状線")], "name": "Osaka Loop Line", "name_ja": "大阪環状線", "colour": "#FF3C03"},
-    "JY": {"n02": [(_JR, "東海道線")], "name": "JR Kyoto Line", "name_ja": "JR京都線", "colour": "#4E6375"},
-    "JK": {"n02": [(_JR, "東海道線")], "name": "JR Kobe Line", "name_ja": "JR神戸線", "colour": "#755A75"},
-    "JH": {"n02": [(_JR, "JR東西線")], "name": "JR Tōzai Line", "name_ja": "JR東西線", "colour": "#FF21C0"},
-    "JG": {"n02": [(_JR, "片町線")], "name": "JR Gakkentoshi Line", "name_ja": "学研都市線", "colour": "#C303A8"},
+    "JY": {"n02": [(_JR, "東海道線")], "name": "JR Kyoto Line", "name_ja": "JR京都線", "colour": line_registry.colour("jr-west-kyoto-line")},
+    "JK": {"n02": [(_JR, "東海道線")], "name": "JR Kobe Line", "name_ja": "JR神戸線", "colour": line_registry.colour("jr-west-kobe-line")},
+    "JH": {"n02": [(_JR, "JR東西線")], "name": "JR Tōzai Line", "name_ja": "JR東西線", "colour": line_registry.colour("jr-west-tozai-line")},
+    "JG": {"n02": [(_JR, "片町線")], "name": "JR Gakkentoshi Line", "name_ja": "学研都市線", "colour": line_registry.colour("jr-west-gakkentoshi-line")},
     "OH": {"n02": [(_JR, "おおさか東線")], "name": "JR Osaka Higashi Line", "name_ja": "おおさか東線",
-           "colour": "#A28DA8"},
+           "colour": line_registry.colour("jr-west-osaka-higashi-line")},
     "JP": {"n02": [(_JR, "桜島線")], "name": "JR Yumesaki Line", "name_ja": "JRゆめ咲線", "colour": "#7293A5"},
-    "JQ": {"n02": [(_JR, "関西線")], "name": "JR Yamatoji Line", "name_ja": "大和路線", "colour": "#12A500"},
-    "JR": {"n02": [(_JR, "阪和線")], "name": "JR Hanwa Line", "name_ja": "阪和線", "colour": "#CF8400"},
+    "JQ": {"n02": [(_JR, "関西線")], "name": "JR Yamatoji Line", "name_ja": "大和路線", "colour": line_registry.colour("jr-west-yamatoji-line")},
+    "JR": {"n02": [(_JR, "阪和線")], "name": "JR Hanwa Line", "name_ja": "阪和線", "colour": line_registry.colour("jr-west-hanwa-line")},
     # Hankyu (阪急電鉄)
-    "HK": {"n02": [("阪急電鉄", "神戸線")], "name": "Hankyu Kobe Line", "name_ja": "阪急神戸線", "colour": "#C9785D"},
+    "HK": {"n02": [("阪急電鉄", "神戸線")], "name": "Hankyu Kobe Line", "name_ja": "阪急神戸線", "colour": line_registry.colour("hankyu-kobe-line")},
     "HT": {"n02": [("阪急電鉄", "宝塚線")], "name": "Hankyu Takarazuka Line", "name_ja": "阪急宝塚線",
-           "colour": "#B7572D"},
-    "HY": {"n02": [("阪急電鉄", "京都線")], "name": "Hankyu Kyoto Line", "name_ja": "阪急京都線", "colour": "#87544B"},
-    "HS": {"n02": [("阪急電鉄", "千里線")], "name": "Hankyu Senri Line", "name_ja": "阪急千里線", "colour": "#BA7E7B"},
+           "colour": line_registry.colour("hankyu-takarazuka-line")},
+    "HY": {"n02": [("阪急電鉄", "京都線")], "name": "Hankyu Kyoto Line", "name_ja": "阪急京都線", "colour": line_registry.colour("hankyu-kyoto-line")},
+    "HS": {"n02": [("阪急電鉄", "千里線")], "name": "Hankyu Senri Line", "name_ja": "阪急千里線", "colour": line_registry.colour("hankyu-senri-line")},
     # Hanshin (阪神電気鉄道)
-    "SH": {"n02": [("阪神電気鉄道", "本線")], "name": "Hanshin Main Line", "name_ja": "阪神本線", "colour": "#817B7B"},
+    "SH": {"n02": [("阪神電気鉄道", "本線")], "name": "Hanshin Main Line", "name_ja": "阪神本線", "colour": line_registry.colour("hanshin-main-line")},
     "SN": {"n02": [("阪神電気鉄道", "阪神なんば線")], "name": "Hanshin Namba Line", "name_ja": "阪神なんば線",
-           "colour": "#4E665A"},
+           "colour": line_registry.colour("hanshin-namba-line")},
     # Keihan (京阪電気鉄道)
-    "KM": {"n02": [("京阪電気鉄道", "京阪本線")], "name": "Keihan Main Line", "name_ja": "京阪本線", "colour": "#7B7B5A"},
+    "KM": {"n02": [("京阪電気鉄道", "京阪本線")], "name": "Keihan Main Line", "name_ja": "京阪本線", "colour": line_registry.colour("keihan-main-line")},
     "KN": {"n02": [("京阪電気鉄道", "中之島線")], "name": "Keihan Nakanoshima Line", "name_ja": "京阪中之島線",
            "colour": "#969051"},
     # Kintetsu (近畿日本鉄道)
     "KT": {"n02": [("近畿日本鉄道", "難波線")], "name": "Kintetsu Namba Line", "name_ja": "近鉄難波線",
-           "colour": "#FC5D3F"},
+           "colour": "#B83008"},
     "KO": {"n02": [("近畿日本鉄道", "大阪線")], "name": "Kintetsu Osaka Line", "name_ja": "近鉄大阪線",
-           "colour": "#B43009"},
+           "colour": line_registry.colour("kintetsu-osaka-line")},
     "KA": {"n02": [("近畿日本鉄道", "南大阪線")], "name": "Kintetsu Minami-Osaka Line", "name_ja": "近鉄南大阪線",
            "colour": "#CC8142"},
     # Nankai (南海電気鉄道)
-    "NM": {"n02": [("南海電気鉄道", "南海本線")], "name": "Nankai Main Line", "name_ja": "南海本線", "colour": "#9F6900"},
-    "NK": {"n02": [("南海電気鉄道", "高野線")], "name": "Nankai Kōya Line", "name_ja": "南海高野線", "colour": "#B18D06"},
+    "NM": {"n02": [("南海電気鉄道", "南海本線")], "name": "Nankai Main Line", "name_ja": "南海本線", "colour": line_registry.colour("nankai-main-line")},
+    "NK": {"n02": [("南海電気鉄道", "高野線")], "name": "Nankai Kōya Line", "name_ja": "南海高野線", "colour": line_registry.colour("nankai-koya-line")},
     "NS": {"n02": [("南海電気鉄道", "高野線")], "name": "Nankai Shiomibashi Line", "name_ja": "南海汐見橋線",
            "colour": "#7B5D18"},
     # Hankai Tramway (阪堺電気軌道)
-    "RH": {"n02": [("阪堺電気軌道", "阪堺線")], "name": "Hankai Line", "name_ja": "阪堺線", "colour": "#449418"},
+    "RH": {"n02": [("阪堺電気軌道", "阪堺線")], "name": "Hankai Line", "name_ja": "阪堺線", "colour": line_registry.colour("hankai-line")},
     "RU": {"n02": [("阪堺電気軌道", "上町線")], "name": "Uemachi Line", "name_ja": "上町線", "colour": "#7C9C48"},
 }
 # The operator as a station suffix, used only where two stations share an

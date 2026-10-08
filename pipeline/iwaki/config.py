@@ -29,6 +29,8 @@ OpenStreetMap's name:en.
 
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -267,7 +269,13 @@ LINES = {
 # green (Maebashi's Joetsu colour), 45.7 from Personal services' pin; the
 # Ban'etsu East orange darkens to read on white. The pair is 95.4 apart; the
 # dark-mode labels separate, 2 of 2.
-_COLOURS = {"JB": "#20A800", "BE": "#E07800"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+_COLOURS = {
+    "JB": line_registry.colour("jr-east-joban-line"), "BE": "#E07800",
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

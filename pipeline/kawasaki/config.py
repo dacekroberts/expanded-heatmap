@@ -20,6 +20,8 @@ OpenStreetMap's name:en.
 
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -214,9 +216,21 @@ LINES = {
 # 45 from olive (JR Nambu #B09000 23.2, the Branch 27.6, JR Tsurumi 32.5), an
 # accepted trade (owner, 2026-10-07). DECISIONS, "Lines within 20 of the
 # olive and violet pins recoloured".
-_COLOURS = {"JN": "#B09000", "JB": "#B88C3C", "JI": "#C08800", "JK": "#08A0C0", "JT": "#E07800", "JO": "#406878",
-            "SJ": "#805878", "KK": "#E81820", "KD": "#F05830", "TY": "#C80808", "MG": "#0088A0", "DT": "#207078",
-            "OM": "#D87830", "OH": "#588898", "OT": "#686878", "KO": "#F000B8"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+_COLOURS = {
+    "JN": line_registry.colour("jr-east-nambu-line"), "JB": "#B88C3C",
+    "JI": line_registry.colour("jr-east-tsurumi-line"),
+    "JK": line_registry.colour("jr-east-keihin-tohoku-line"),
+    "JT": line_registry.colour("jr-east-tokaido-line"), "JO": line_registry.colour("jr-east-yokosuka-line"),
+    "SJ": line_registry.colour("sotetsu-jr-link-line"), "KK": line_registry.colour("keikyu-main-line"),
+    "KD": "#F05830", "TY": line_registry.colour("tokyu-toyoko-line"),
+    "MG": line_registry.colour("tokyu-meguro-line"), "DT": line_registry.colour("tokyu-den-en-toshi-line"),
+    "OM": line_registry.colour("tokyu-oimachi-line"), "OH": line_registry.colour("odakyu-odawara-line"),
+    "OT": line_registry.colour("odakyu-tama-line"), "KO": line_registry.colour("keio-sagamihara-line"),
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

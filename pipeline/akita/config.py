@@ -26,6 +26,8 @@ OpenStreetMap's name:en.
 
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -235,7 +237,13 @@ LINES = {
 # from the green pin, 38.0 from olive, between 20 and 45: an accepted trade).
 # The JR East green on Fukushima's, Morioka's and Mito's maps is the same.
 # Closest pair now 56.3 (Uetsu, Oga).
-_COLOURS = {"OU": "#E07800", "UE": "#007890", "OG": "#007430"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+_COLOURS = {
+    "OU": line_registry.colour("jr-east-ou-line"), "UE": "#007890", "OG": "#007430",
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

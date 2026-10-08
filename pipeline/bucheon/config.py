@@ -9,6 +9,8 @@ then Suwon and Bucheon; one page each, 2026-09-29). Copied from Yongin's.
 
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -77,10 +79,14 @@ RING_LABELS = ["0-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi", "0.3-0.6 mi"]
 # Samsan Gymnasium (Line 7, operated by Incheon Transit) lies about 50 m inside
 # OSM's Bucheon boundary and is kept (owner, 2026-09-29): Incheon's build left it
 # out on the same boundary, so it is counted once, here.
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
 LINES = {
-    "L1": ("1", "#004A85", "Line 1", None),
-    "L7": ("7", "#6E7E31", "Line 7", None),
-    "SH": ("서해", "#5EAC41", "Seohae Line", None),
+    "L1": ("1", line_registry.colour("seoul-subway-line-1"), "Line 1", None),
+    "L7": ("7", line_registry.colour("seoul-subway-line-7"), "Line 7", None),
+    "SH": ("서해", line_registry.colour("seohae-line"), "Seohae Line", None),
 }
 OSM_COLOUR = {}
 LINES_ROUTE_TYPES = {"subway", "light_rail", "monorail", "train"}

@@ -30,6 +30,8 @@ OpenStreetMap's name:en.
 import re
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -250,7 +252,14 @@ LINES = {
 # Closest pair within 500 m 18.1 (Kakamigahara, Nagoya Main, at 名鉄岐阜);
 # anywhere 15.5 (Kakamigahara, Takehana, which never meet). The dark-mode
 # labels separate, 5 of 5.
-_COLOURS = {"NH": "#E80010", "KG": "#F05030", "TH": "#F85008", "TK": "#E86810", "TY": "#B84008"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+_COLOURS = {
+    "NH": line_registry.colour("meitetsu-nagoya-main-line"), "KG": "#F05030", "TH": "#F85008",
+    "TK": line_registry.colour("jr-central-tokaido-line"), "TY": "#B84008",
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

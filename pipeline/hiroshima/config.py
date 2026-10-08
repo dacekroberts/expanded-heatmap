@@ -20,6 +20,8 @@ English station names from OpenStreetMap's name:en.
 
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -260,8 +262,18 @@ LINES = {
 # Hiroden Main 26.3), an accepted trade (owner, 2026-10-07). Closest pair now
 # 18.0 (Yokogawa / Miyajima); the dark-mode labels separate, 12 of 12.
 # DECISIONS, "Lines within 20 of the olive and violet pins recoloured".
-_COLOURS = {"AS": "#F000B8", "JS": "#E80010", "JB": "#007890", "JG": "#30A800", "JY": "#D08000", "HM": "#68A008",
-            "HU": "#089860", "HE": "#247038", "HY": "#08A850", "HH": "#60A450", "HN": "#787838", "HJ": "#0C7C24"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+# Moved so the shared colours fit (2026-10-07), hue kept as far as they allow:
+# the JR Kabe Line #007890 to #506870 (pins 53.3, nearest line JR Sanyo Line
+# 18.8, nearest beside it 18.8). docs/decisions_drafts/line-registry.md.
+_COLOURS = {
+    "AS": "#F000B8", "JS": line_registry.colour("jr-west-sanyo-line"), "JB": "#506870", "JG": "#30A800",
+    "JY": "#D08000", "HM": "#68A008", "HU": "#089860", "HE": "#247038", "HY": "#08A850", "HH": "#60A450",
+    "HN": "#787838", "HJ": "#0C7C24",
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

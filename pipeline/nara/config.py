@@ -24,6 +24,8 @@ Man-yo Mahoroba lines: 14 stations, built despite thin rail (owner,
 import datetime
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -212,7 +214,14 @@ LINES = {
 # and clears CIE76 45 from every pin. Kintetsu's three reds part into red,
 # coral and orange. Closest pair within 500 m and anywhere 18.2 (the Kyoto and
 # Kashihara lines); the dark-mode labels separate, 5 of 5.
-_COLOURS = {"KN": "#E00018", "KT": "#F85838", "KH": "#F84800", "JY": "#20A800", "JM": "#A85830"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+_COLOURS = {
+    "KN": line_registry.colour("kintetsu-nara-line"), "KT": line_registry.colour("kintetsu-kyoto-line"),
+    "KH": "#F84800", "JY": line_registry.colour("jr-west-yamatoji-line"), "JM": "#A85830",
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

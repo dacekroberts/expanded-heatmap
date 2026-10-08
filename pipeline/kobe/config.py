@@ -18,6 +18,8 @@ OpenStreetMap's name:en, because N02 carries Japanese names only (owner,
 
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -143,30 +145,6 @@ COLLAPSE_MAX_SPREAD_M = 300
 # tunnel Hankyu, Hanshin and Kobe Electric run through (N02 files it under each
 # of the three).
 #
-# COLOURS: the project's own, not the operators' (none is an operator's
-# published value), each HUE-matched to the operator's branding (subway green,
-# Kaigan teal, JR blue, Hankyu maroon, Sanyō red, Kobe Electric orange...),
-# then moved to the nearest colour that (a) reads at 3:1 against BOTH map
-# pages, #0B1220 and #ffffff - a first pass that only cleared the pins pushed
-# JR, the subway and Hankyu so dark they vanished on the dark basemap; (b)
-# clears CIE76 Delta-E 45 against every category pin; (c) clears 18 against
-# every other line (2026-09-27). ONE EXCEPTION: the Hanshin Main Line, whose
-# blue sits beside Retail's - no readable blue clears 45, and #3A6588 (35.3)
-# is the best; recorded by linecolour.py at every render.
-LINES = {
-    ("こうべ未来都市機構", "摩耶ケーブル線"): "sightseeing funicular (owner 2026-09-27)",
-    ("神戸六甲鉄道", "六甲ケーブル線"): "sightseeing funicular (owner 2026-09-27)",
-}
-COLLAPSE_MAX_SPREAD_M = 300
-
-# key -> the N02 (operator, line) pairs it is drawn from, its real public name
-# (English, then Japanese), and its colour. N02 splits one public line into
-# its legal sections: the Seishin-Yamate Line is 山手線 + 西神線 + 西神延伸線.
-# The Wadamisaki Line is N02's 山陽線 branch south of 兵庫 (step 1 splits it off
-# the JR Kobe Line by the track graph). The Kobe Kōsoku Line is the shared
-# tunnel Hankyu, Hanshin and Kobe Electric run through (N02 files it under each
-# of the three).
-#
 # COLOURS: the project's own, not the operators' (none is taken from an
 # operator's published value), each HUE-matched to the operator's branding
 # (subway green, Kaigan blue, JR blue, Hankyu maroon, Sanyō red, Kobe Electric
@@ -187,6 +165,10 @@ COLLAPSE_MAX_SPREAD_M = 300
 # Three of 15 lines sit between 20 and 45 from olive (those two and the
 # Shintetsu Ao Line 29.0), an accepted trade (owner, 2026-10-07). DECISIONS,
 # "Lines within 20 of the olive and violet pins recoloured".
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
 LINES = {
     "SY": {"n02": [("神戸市", "山手線"), ("神戸市", "西神線"), ("神戸市", "西神延伸線")],
            "name": "Seishin-Yamate Line", "name_ja": "西神・山手線", "colour": "#05A904"},
@@ -199,17 +181,17 @@ LINES = {
     "RL": {"n02": [("神戸新交通", "六甲アイランド線")],
            "name": "Rokkō Liner", "name_ja": "六甲ライナー", "colour": "#4198AA"},
     "JK": {"n02": [("西日本旅客鉄道", "東海道線"), ("西日本旅客鉄道", "山陽線")],
-           "name": "JR Kobe Line", "name_ja": "JR神戸線", "colour": "#0D51F2"},
+           "name": "JR Kobe Line", "name_ja": "JR神戸線", "colour": line_registry.colour("jr-west-kobe-line")},
     "JW": {"n02": [("西日本旅客鉄道", "山陽線")],
            "name": "Wadamisaki Line", "name_ja": "和田岬線", "colour": "#737C8C"},
     "JT": {"n02": [("西日本旅客鉄道", "福知山線")],
-           "name": "JR Takarazuka Line", "name_ja": "JR宝塚線", "colour": "#A8903C"},
+           "name": "JR Takarazuka Line", "name_ja": "JR宝塚線", "colour": line_registry.colour("jr-west-takarazuka-line")},
     "HQ": {"n02": [("阪急電鉄", "神戸線")],
-           "name": "Hankyu Kobe Line", "name_ja": "阪急神戸線", "colour": "#A36D66"},
+           "name": "Hankyu Kobe Line", "name_ja": "阪急神戸線", "colour": line_registry.colour("hankyu-kobe-line")},
     "HS": {"n02": [("阪神電気鉄道", "本線")],
-           "name": "Hanshin Main Line", "name_ja": "阪神本線", "colour": "#3A6588"},
+           "name": "Hanshin Main Line", "name_ja": "阪神本線", "colour": line_registry.colour("hanshin-main-line")},
     "SM": {"n02": [("山陽電気鉄道", "本線")],
-           "name": "Sanyo Electric Main Line", "name_ja": "山陽電鉄本線", "colour": "#D01911"},
+           "name": "Sanyo Electric Main Line", "name_ja": "山陽電鉄本線", "colour": line_registry.colour("sanyo-electric-main-line")},
     "KK": {"n02": [("阪急電鉄", "神戸高速線"), ("阪神電気鉄道", "神戸高速線"), ("神戸電鉄", "神戸高速線")],
            "name": "Kobe Kōsoku Line", "name_ja": "神戸高速線", "colour": "#705E5C"},
     "KA": {"n02": [("神戸電鉄", "有馬線")],
