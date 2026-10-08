@@ -33,7 +33,8 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 - [ ] **Review time: the place search pilot** (owner, 2026-10-07; branch
   `claude/charming-lumiere-930853`, nothing pushed; drafts
-  `docs/decisions_drafts/place-search.md`). Kyoto only. To decide or test
+  `docs/decisions_drafts/place-search.md`; handoff
+  `docs/handoff_place_search_2026-10-07.md`). Kyoto only. To decide or test
   there:
   - whether it goes live as is: the suggestions (keyword gate, caps, pills,
     phone folding) are WORK IN PROGRESS, tuned against real search terms;
