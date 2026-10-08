@@ -157,7 +157,9 @@ var travelStyle = (function () {
       }
       if (id === "roads_taxiway") layer.paint["line-opacity"] = 0.5;
       if (/^roads_tunnels_/.test(id) && layer.type === "line") layer.paint["line-opacity"] = 0.5;
-      if (layer["source-layer"] === "roads" && layer.type === "line") {
+      // Lines and labels alike: a hidden road kept its name floating over
+      // nothing (Florence's Viale del Visarno, a service road, 2026-10-08).
+      if (layer["source-layer"] === "roads" && (layer.type === "line" || layer.type === "symbol")) {
         andClause(layer, ["!in", "kind_detail"].concat(DROP_DETAIL),
           ["!", ["in", ["coalesce", ["get", "kind_detail"], ""], ["literal", DROP_DETAIL]]]);
       }
