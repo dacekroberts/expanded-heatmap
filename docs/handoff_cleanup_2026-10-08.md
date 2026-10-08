@@ -47,10 +47,9 @@ items are done or moved into PLAN.
    colour by 45 or more, so the pin colours stay; the pilot's drafts
    (`claude-epic-neumann-5aa0a6.md`) also hold the owner's disputed-borders
    decision.
-5. **Tell Visuals and Analytics what moved** at the next review time:
-   `scripts/downstream_changes.py ecec7536` reports 34 cities' `heatmap.html`,
-   `app/cities.py` and `app/components.py`. Visuals reports itself current
-   at `d121b2cc` (2026-10-08), so its note starts there.
+5. **Downstream: both current** (2026-10-08): Visuals at `d121b2cc`, Analytics
+   rerun at `5507a4cb`; nothing downstream since. "Last noted" moved to
+   `76e6b645`. The next note covers `legend-dot-georgia` once it lands.
 6. **Follow-ups in PLAN's "Next landing"**: Ostrava's 2 px button overlap,
    Osaka's 375 px label overlaps, the UK line-colour search, about 25
    day-first notices, about 30 stale "45 from every pin" config comments, the
