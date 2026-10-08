@@ -112,6 +112,34 @@ or published; every proposal waits for the owner.
   domain comparison (needs the owner's Cloudflare account and the
   Cloudflare terms read first).
 
+### 2026-10-08 - The full version is the app's template: map content only; named route rows; station dots sized by zoom (owner)
+
+- **Rule (owner, 2026-10-08): the full version is a template for the app,
+  so it carries map content only.** No coverage statements, generic
+  explanations or features shoehorned onto the map because this pilot has
+  no surrounding app screens to hold them; those belong to the app's own
+  UI (an info page, say).
+- **Applied to the ferry rows:** the legend names the route itself ("Arno
+  Boat", "Bac du Rocher des Doms") instead of a generic "Ferry"; what a
+  dashed line or a ticked line means is for the app's info page. An
+  unnamed route gets no row. `open_basemap["routes"]` is now
+  `[(kind, name)]`, the name in English where OSM has one, else local.
+  Re-shot: Florence's legend reads "T1 Leonardo, T2 Vespucci, Arno Boat";
+  Avignon's "Tram T1, Bac du Rocher des Doms" (its crossing is too short
+  for the on-map name, so the row carries it). Open for later: a city
+  with many ferry routes (Istanbul, Hong Kong, Sydney) would list each;
+  grouping or a cap is a call for when such a city is piloted.
+- **Station dots sized by zoom (owner agreed, 2026-10-08).** Pilot pages
+  (full version and the site's Travel view): one pass on zoom end sets
+  every dot (and line width) from a zoom table, interchanges a step
+  larger, each dot keeping a fixed invisible touch area of about 44 px so
+  small dots stay tappable; measured on the largest network (Tokyo) before
+  it is settled, and the table set on light and dark screenshots for the
+  owner. The app: dots drawn in MapLibre with a zoom curve, recomputed per
+  frame on the GPU, no pop during a pinch. The site's Business view stays
+  as it is until the pilot proves the table (it is senior, and changing it
+  re-renders 170 maps).
+
 ### 2026-10-08 - Ferries named and in the legend; line labels that follow the screen, station names, and a tap-a-line list (owner)
 
 - **Ferries (owner: crimson stands out, so label it; a legend row under
