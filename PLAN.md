@@ -52,6 +52,20 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     refresh. The map's scope is almost fully built (owner: only some Japanese
     cities and Cluj-Napoca remain), so the city count is near final; the
     refresh cadence is what grows it.
+  - **Reserve rule, if lossless savings are not enough** (owner's
+    boundaries, 2026-10-08): every intersection within a station's outer
+    ring (+300 m) stays searchable, downtowns and important corridors too
+    (search serves people weighing a business location near transit).
+    Outside the rings only, drop footpath crossings and pairs of two side
+    streets. "Main road" = any stretch of the street tagged motorway, trunk,
+    primary, secondary or tertiary, or pedestrian or living_street (52 of 52
+    sampled commercial streets in the five cities qualify; tertiary-and-up
+    alone missed Post Alley, Pitt Street Mall, 錦小路通 and 新京極通). Ring
+    centres are OSM's own rail stations (ODbL: no map data in the index);
+    every drawn station in the five has one within 300 m. Measured saving
+    14 to 16% gzipped in the three grid cities, none in Kyoto or Sydney.
+    Each new country re-tests the definition on its known commercial
+    streets (Japan maps many as unclassified).
 
   To decide or test there:
   - whether it goes live as is: the suggestions (keyword gate, caps, pills,
