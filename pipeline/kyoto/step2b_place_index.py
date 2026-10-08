@@ -1,10 +1,10 @@
 """Step 2b - Build Kyoto's place-search index (pilot, 2026-10-07).
 
-All the work is pipeline/place_index.py; this file supplies only what is
-Kyoto's. Places only, never business records (DECISIONS.md, "Four ideas
-assessed before the large review", item 3).
+All the work is pipeline/place_index.py (run); this file names the city. Places
+only, never business records (DECISIONS.md, "Four ideas assessed before the
+large review", item 3). Runs before step 3, whose map carries the index's hash.
 
-Input:  data/kyoto/raw/osm_places_2026-10-07.json  (pipeline/place_index_fetch.py)
+Input:  data/kyoto/raw/osm_places_v2_2026-10-07.json  (pipeline/place_index_fetch.py)
 Output: app/static/places/kyoto.json  (served by Streamlit's static serving;
         ODbL 1.0, the notice inside the file);
         outputs/kyoto/place_search.json  (the page's summary: the languages
@@ -13,7 +13,6 @@ Output: app/static/places/kyoto.json  (served by Streamlit's static serving;
 Run:  python pipeline/kyoto/step2b_place_index.py
 """
 
-import json
 import sys
 from pathlib import Path
 
@@ -21,26 +20,8 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline import place_index  # noqa: E402
 from pipeline.kyoto import config  # noqa: E402
 
-
-def main():
-    if not config.PLACE_OSM_JSON.exists():
-        sys.exit(f"Missing {config.PLACE_OSM_JSON}.\nRun: python pipeline/place_index_fetch.py kyoto")
-    payload = json.loads(config.PLACE_OSM_JSON.read_text(encoding="utf-8"))
-    # The retrieval date is the cache's own, from its file name: never today.
-    retrieved = config.PLACE_OSM_JSON.stem.rsplit("_", 1)[-1]
-    index, report = place_index.build(payload["elements"], city=config.NAME, retrieved=retrieved,
-                                      local=config.PLACE_LANGUAGES, fold="ja")
-    out = place_index.write(index, config.SLUG)
-    print(f"Wrote {out} ({out.stat().st_size:,} bytes, {len(index['rows']):,} places) and "
-          f"{place_index.summary_path(config.SLUG).name}")
-    print(f"  languages: {index['languages']['coverage']} -> the page names "
-          f"{index['languages']['listed']}")
-    for k in sorted(report):
-        print(f"  {k}: {report[k]:,}")
-
-
 if __name__ == "__main__":
     for stream in (sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):
             stream.reconfigure(encoding="utf-8", errors="replace")
-    main()
+    place_index.run(config)

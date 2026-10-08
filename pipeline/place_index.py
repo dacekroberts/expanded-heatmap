@@ -59,6 +59,39 @@ def write(index, slug):
     return out
 
 
+# Folds the browser applies to Latin text on both sides of a match (the search
+# script's norm()): "ja" folds Japanese long vowels written out, shijou =
+# shijo. A city sets config.PLACE_FOLD to one of these, or None.
+FOLDS = (None, "ja")
+
+
+def run(config):
+    """A city's index step: read the cache place_index_fetch.py wrote, build,
+    write the index and the page's summary, report. Never fetches. A city's
+    step2b_place_index.py calls this and nothing else.
+
+    config needs PLACE_OSM_JSON (dated by its name: osm_places[_vN]_<date>.json),
+    PLACE_LANGUAGES, PLACE_FOLD, NAME and SLUG."""
+    import sys
+    if not config.PLACE_OSM_JSON.exists():
+        sys.exit(f"Missing {config.PLACE_OSM_JSON}.\nRun: python pipeline/place_index_fetch.py {config.SLUG}")
+    fold = config.PLACE_FOLD
+    if fold not in FOLDS:
+        sys.exit(f"config.PLACE_FOLD {fold!r} is not one of {FOLDS}")
+    payload = json.loads(config.PLACE_OSM_JSON.read_text(encoding="utf-8"))
+    # The retrieval date is the cache's own, from its file name: never today.
+    retrieved = config.PLACE_OSM_JSON.stem.rsplit("_", 1)[-1]
+    index, report = build(payload["elements"], city=config.NAME, retrieved=retrieved,
+                          local=config.PLACE_LANGUAGES, fold=fold)
+    out = write(index, config.SLUG)
+    print(f"Wrote {out} ({out.stat().st_size:,} bytes, {len(index['rows']):,} places) and "
+          f"{summary_path(config.SLUG).name}")
+    print(f"  languages: {index['languages']['coverage']} -> the page names {index['languages']['listed']}")
+    for k in sorted(report):
+        print(f"  {k}: {report[k]:,}")
+    return index
+
+
 def index_url(slug):
     """The site path a map fetches its index from, stamped with the file's
     content hash: a browser keeps its copy of a static file, so a rebuilt
@@ -93,6 +126,44 @@ LANGUAGE_NAMES = {
 }
 # Readings a local language's readers type in (kana for Japanese).
 READINGS = {"ja": ("name:ja-Hira", "name:ja_kana")}
+
+
+# LEAK WORDS: strong markers of a business or a home in a place's names.
+# scripts/check_place_search.py (E) fails on any index row carrying one unless
+# the city's config.PLACE_REVIEWED names it, with the reason it is a place (a
+# ruin of a hotel, a museum named after its founding company). A CJK word
+# matches anywhere, a Latin one as a whole word; LEAK_ALLOW lists compounds
+# that hold a word and are places (商店街, a shopping street). Calibrated on
+# Kyoto, 2026-10-07; each new language adds its own words before its first
+# city.
+LEAK_WORDS = {
+    "ja": ("株式会社", "有限会社", "合同会社", "(株)", "（株）", "㈱", "(有)", "（有）", "商店", "本店",
+           "支店", "ホテル", "旅館", "マンション", "ハイツ", "レジデンス", "コーポ", "アパート", "メゾン",
+           "社宅", "駐車場", "駐輪場", "不動産", "クリニック", "医院", "歯科", "薬局", "私有地"),
+    "en": ("inc", "llc", "ltd", "corp", "company", "store", "shop", "restaurant", "cafe", "hotel",
+           "hostel", "motel", "salon", "clinic", "pharmacy", "apartment", "apartments", "apts",
+           "condominium", "condo", "condos", "parking", "private"),
+}
+LEAK_ALLOW = {"ja": ("商店街", "名店街"), "en": ("shopping street",)}
+
+
+def leak_hits(index, local):
+    """[(row name, word)] for every index row whose names carry a LEAK_WORD of
+    English or a local language, after LEAK_ALLOW compounds are removed."""
+    codes = list(dict.fromkeys(["en", *local]))
+    out = []
+    for r in index["rows"]:
+        text = " | ".join([r[3]] + (r[4].split("|") if r[4] else []))
+        low = text.lower()
+        for code in codes:
+            for allow in LEAK_ALLOW.get(code, ()):
+                low = low.replace(allow, " ")
+            latin = set(re.findall(r"[a-z]+", low))
+            for word in LEAK_WORDS.get(code, ()):
+                if (word in latin) if word.isascii() else (word in low):
+                    out.append((r[3], word))
+                    break
+    return sorted(set(out))
 
 
 def _char_class(*pairs):
@@ -151,9 +222,25 @@ def languages(row_langs, local):
     return {"local": list(local), "coverage": coverage, "list_share": LIST_SHARE, "listed": listed}
 
 # Highways that are not streets a reader would search for: platforms, indoor
-# corridors and the like.
+# corridors, parking aisles, driveways, service areas and the like.
 SKIP_HIGHWAY = {"platform", "elevator", "corridor", "bus_stop", "proposed", "construction",
-                "razed", "abandoned", "disused"}
+                "razed", "abandoned", "disused", "services", "rest_area"}
+SKIP_SERVICE = {"parking_aisle", "driveway", "drive-through", "emergency_access"}
+# MINOR WAYS are named after the business they serve as often as after a
+# place: Kyoto's footways and cycleways included "ライフ" (a supermarket chain),
+# its bicycle parking and car park, a hotel's footpath and a mall's exit
+# (2026-10-07). A minor way is kept only when its name reads as a way in one
+# of the city's languages (WAY_WORDS) or it is notable; every class from
+# residential up is a public street and kept as named. A language with no
+# WAY_WORDS entry keeps no minor way until one is added.
+MINOR_HIGHWAYS = {"footway", "path", "steps", "cycleway", "track", "bridleway", "service"}
+WAY_WORDS = {
+    "ja": ("通", "道", "路", "坂", "橋", "小路", "小径", "参道", "筋", "街道", "線", "並木", "広場",
+           "ロード", "ストリート", "トンネル", "はし", "ばし", "みち", "さか", "ざか", "径"),
+    "en": ("street", "road", "avenue", "lane", "way", "walk", "path", "trail", "alley", "bridge",
+           "steps", "stairs", "boulevard", "promenade", "passage", "plaza", "row", "greenway",
+           "tunnel", "footpath", "towpath"),
+}
 # Any landmark with one of these is (also) a business, and stays out.
 COMMERCIAL_KEYS = ("shop", "office", "craft", "brand", "cuisine")
 # operator:type by value: Nishiki Market is run by its shopkeepers' cooperative
@@ -196,6 +283,20 @@ def _names(tags, name_tags):
                 seen.add(v)
                 out.append(v)
     return out
+
+
+def _reads_as_way(names, local):
+    """True when a name reads as a way in English or a local language: a CJK
+    way word anywhere in it (三条小橋), a Latin one as a whole word."""
+    for code in dict.fromkeys(["en", *local]):
+        for word in WAY_WORDS.get(code, ()):
+            for n in names:
+                if word.isascii():
+                    if word in re.findall(r"[a-z]+", n.lower()):
+                        return True
+                elif word in n:
+                    return True
+    return False
 
 
 def _dist_m(a, b):
@@ -260,10 +361,15 @@ def build(elements, *, city, retrieved, local, fold=None):
     node_streets = defaultdict(set)           # node id -> street display names
     for w in ways:
         t = w.get("tags", {})
-        if t.get("highway") in SKIP_HIGHWAY or t.get("area") == "yes":
+        if (t.get("highway") in SKIP_HIGHWAY or t.get("area") == "yes"
+                or t.get("service") in SKIP_SERVICE):
             report["street_way_skipped"] += 1
             continue
         names = _names(t, name_tags)
+        if (t.get("highway") in MINOR_HIGHWAYS and not (t.get("wikidata") or t.get("wikipedia"))
+                and not _reads_as_way(names, local)):
+            report["minor_way_dropped_not_a_way_name"] += 1
+            continue
         if not names:
             continue
         pts = [nodes[n] for n in w["nodes"] if n in nodes]

@@ -126,18 +126,24 @@ on its own before removing the worktree (`docs/session_roles.md`, step 1).
    Overpass rule: one query in flight per session, never parallel, 60 s after
    a 504 or 429 (`pipeline/osm.py` enforces the wait). About 1 GB a day is
    overpass-api.de's guidance, so roll out over several days.
-3. **Index step:** copy `pipeline/kyoto/step2b_place_index.py`. It passes
-   `fold="ja"`, which is Japan's long-vowel folding (shijou = shijo): make it
-   a config value (`PLACE_FOLD`, `None` outside Japan) before the second city.
+3. **Index step:** copy `pipeline/kyoto/step2b_place_index.py`, which calls
+   `place_index.run(config)` and nothing else. Set `PLACE_FOLD` in config:
+   `"ja"` (Japanese long vowels, shijou = shijo) or `None` everywhere else.
+   Before a city in a NEW language, add that language's `WAY_WORDS` (a minor
+   way is kept only when its name reads as a way) and `LEAK_WORDS` (business
+   and home markers) in `place_index.py`; without `WAY_WORDS` no footway or
+   service road of that language is indexed.
 4. **Map step:** `place_index_url=place_index.index_url(config.SLUG)`, after
    the index step has run; re-render.
 5. **Page:** `render_map_help(..., search="<slug>")`.
-6. **Checks:** `python scripts/check_place_search.py` must name the city OK;
-   then read the index for businesses and homes by eye (grep the names for
-   company and apartment words in the local language). Kyoto found a
-   tea-ceremony shop, a private school, a condominium and a garden possibly
-   named after a person, each now a rule in `place_index.py`; the next country
-   will find its own.
+6. **Checks:** `python scripts/check_place_search.py` must name the city OK.
+   Its part E flags every row carrying a business or home word; drop the
+   class by a rule in `place_index.py`, or list a real place in the city's
+   `PLACE_REVIEWED` with why (Kyoto: one hotel ruin). Then still read the
+   index by eye: brand names carry no word. Kyoto found a tea-ceremony shop, a
+   private school, a condominium, a garden possibly named after a person and
+   supermarket-named footways, each now a rule; the next country will find
+   its own.
 7. **Test the searches the city is known for**: its intersection style ("5th
    and Pike" in a US grid), its station names, its landmarks, in each listed
    language.
@@ -160,9 +166,13 @@ on its own before removing the worktree (`docs/session_roles.md`, step 1).
   nothing (no OSM object carries both names); "Kyoto Station" lists the bus
   terminal's alias on the station, which is right but shows the bus
   terminal's Japanese name only on hover.
-- **Not yet wired:** the place cache is not recorded in
-  `outputs/<city>/provenance.json`; `scripts/check_personal_exposure.py` is
-  built for business names and was not adapted to the index.
+- **Wired 2026-10-08:** `place_index_fetch.py` records the cache in
+  `outputs/<city>/provenance.json` as `osm_places` (a cache on disk is
+  recorded without a query); `PLACE_FOLD` is per city; check E scans for
+  business and home words. Still not adapted:
+  `scripts/check_personal_exposure.py`, built for business names.
+- **The sample, one city per region** (owner, 2026-10-08), is build-sized:
+  see the drafts entry of 2026-10-08 for the proposed list.
 
 ---
 

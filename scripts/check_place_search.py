@@ -22,6 +22,12 @@ index step measures each language's share of the places
      declared local language under LOCAL_MIN fails.
   C. The page that embeds the map passes search=<slug> to render_map_help, so
      the bullet is present, and no page writes the bullet itself.
+  E. No business or home slipped through: every index row carrying a
+     place_index.LEAK_WORDS word in English or a local language is named in
+     the city's config.PLACE_REVIEWED with why it is a place, and every
+     reviewed name still occurs (a stale entry is a list nobody reads). Kyoto
+     found a hotel's footpath, a supermarket's car park and "private land"
+     before the minor-way rule; one ruin is reviewed.
   D. ODbL: the index holds only the fields place_index writes (6 per row, the
      known top-level keys), its licence object names ODbL and the OSM credit,
      LICENSE carves app/static/places/ out, and docs/data_sources.md has the
@@ -79,6 +85,23 @@ def check_index(slug, index, summary):
     return problems
 
 
+def check_leaks(slug, index, reviewed=None):
+    """E: leak words, against the city's reviewed list."""
+    if reviewed is None:
+        import importlib
+        try:
+            reviewed = getattr(importlib.import_module(f"pipeline.{slug}.config"), "PLACE_REVIEWED", {})
+        except ImportError:
+            return [f"E: no pipeline/{slug}/config.py to hold PLACE_REVIEWED"]
+    hits = place_index.leak_hits(index, index.get("languages", {}).get("local", []))
+    problems = [f"E: {name!r} carries {word!r}: drop it by a rule in place_index.py, or review it "
+                f"in config.PLACE_REVIEWED with why it is a place" for name, word in hits if name not in reviewed]
+    hit_names = {name for name, _ in hits}
+    problems += [f"E: PLACE_REVIEWED names {name!r}, which no longer carries a leak word: remove it"
+                 for name in reviewed if name not in hit_names]
+    return problems
+
+
 def pages_by_slug():
     out = {}
     for page in sorted((ROOT / "app" / "pages").glob("*.py")):
@@ -122,6 +145,7 @@ def main():
         sp = place_index.summary_path(slug)
         summary = json.loads(sp.read_text(encoding="utf-8")) if sp.exists() else None
         p += check_index(slug, index, summary)
+        p += check_leaks(slug, index)
     for page in sorted((ROOT / "app" / "pages").glob("*.py")):
         if BULLET in page.read_text(encoding="utf-8"):
             problems.setdefault(page.name, []).append(
@@ -168,8 +192,21 @@ def selftest():
     got = len(check_index("x", extra, None))
     ok += got == 1
     print(f"  {'ok ' if got == 1 else 'BAD'} a 7th field from another source: {got} problem(s)")
-    print(f"{ok} of {len(cases) + 1} cases behaved as intended.")
-    return 0 if ok == len(cases) + 1 else 1
+    ja = {"local": ["ja"], "coverage": {"en": 0.7, "ja": 0.99}, "list_share": 0.5, "listed": []}
+    leak_cases = [
+        ("a hotel's footpath", [[0, 1, 2, "リッチモンドホテル", "", 0]], {}, 1),
+        ("a shopping street is a place", [[0, 1, 2, "古川町商店街", "", 0]], {}, 0),
+        ("a reviewed ruin", [[0, 1, 2, "愛宕山ホテル跡", "", 0]], {"愛宕山ホテル跡": "a ruin"}, 0),
+        ("a stale review", [[0, 1, 2, "三条通", "", 0]], {"愛宕山ホテル跡": "a ruin"}, 1),
+        ("an English alias", [[0, 1, 2, "某", "Sunrise Apartments", 0]], {}, 1),
+    ]
+    for label, rows, reviewed, want in leak_cases:
+        got = len(check_leaks("x", dict(base, languages=ja, rows=rows), reviewed))
+        ok += got == want
+        print(f"  {'ok ' if got == want else 'BAD'} {label}: {got} problem(s)")
+    total = len(cases) + 1 + len(leak_cases)
+    print(f"{ok} of {total} cases behaved as intended.")
+    return 0 if ok == total else 1
 
 
 if __name__ == "__main__":
