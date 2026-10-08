@@ -22,25 +22,7 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
-- [x] **The large review LANDED 2026-10-07 (35d43c4a)**: 206 cities (36 new,
-  3 renamed "(Regional)"), the Europe split and Japan's 13 views, one pin
-  colour per meaning, back links and the in-map region button, glitched pin
-  names shown as their classification, every map re-rendered; four lanes
-  reviewed it (`docs/review_lanes_2026-10-07.md`), the app was rebooted and
-  Uji checked live. Drafts to fold when the owner hands them off:
-  worktree-abroad-batch, worktree-japan-east-1, worktree-japan-kansai-1,
-  worktree-japan-regional-1, pin-colours-backlinks, rb-mapconfig, rb-prose,
-  review-batch-2026-10-07. Owner: the iPhone check.
-
-- [x] **The line registry, the two-level region selector and the wave 2 rules
-  LANDED 2026-10-08 (5507a4cb)**: one colour and name per line site-wide
-  (`pipeline/line_registry.py`, `scripts/check_line_identity.py`, the
-  neighbour rule on with two owner exceptions), 34 maps re-rendered; South
-  Korea one view with three closer ones, Canada's and Japan's whole-country
-  views kept; Korea's five non-capital cities' region button reads "South
-  Korea" (owner). App rebooted; Tokorozawa's live map hash-matched, Daegu's
-  button and the Korean second row checked live. Drafts to fold:
-  line-registry, region-selector.
+- [ ] **Owner: the iPhone check of the 2026-10-07 and 2026-10-08 landings.**
 
 - [ ] **Next landing:**
   - Phase 2 Japanese cities (East-2, Kansai-2, Regional-2) and Cluj-Napoca,
@@ -54,6 +36,34 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     from every pin" from before olive and violet; East-1's drafts "ten"
     blank names to correct at the fold; caterers that also name a counter
     form (Fukushima's 161), the shared FORM_RULES question.
+  - From Analytics (2026-10-08, measured at 5507a4cb): `map_common._LETTER`
+    has no full-width Latin, so a "?" between full-width letters still
+    renders (Higashiyamato 6, Tachikawa 4, Ichinomiya 3; one Tachikawa Food
+    service pin labelled "?"); Saitama's new-law food types show their layer
+    code and padding ("01:飲食店営業 ") as the pin category, withheld names
+    too, in Ageo (Regional), Kasukabe, Sōka and Tokorozawa (`japan_eigyo`
+    has no `display_value()`); Ōita's "? そうざい製造業" category (a lost
+    circled numeral?); Ōita's page does not say publisher-masked names (306
+    before set-asides) show the permit type.
+  - Kept from the drafts' notes at the 2026-10-08 fold (the files are in
+    `git show d121b2cc:docs/decisions_drafts/<name>.md`):
+    - **Owner, review time: re-render the 34 built Japanese cities on
+      `WAVE5_RULES`** (with `default_joined`), Toyota first (+177
+      storefronts, the rest about 20 or fewer), each with a pinned
+      `TERM_AS_OF`; call 158's reading goes to the owner with it
+      (japan-foundation, "Review-time re-render proposal").
+    - Japanese shared-code fixes (worktree-japan-regional-1, "Shared-code
+      findings"): line labels anchored on in-city segments in `map_common`
+      (retire Gifu's, Mito's and Morioka's `in_city_first` copies; Akita's
+      Oga label), `wareki_date` YYYYMMDD, `rebuilt_register`'s ranking and
+      種目 folding (re-measure Higashiōsaka), `city_rows` by magic bytes,
+      the `oaza_cut` 大字 fallback, `SOURCE_LINKS` link text, Akita's yatai
+      form, two `japan-city` skill lines, the `CLOSED_STATIONS` docstring.
+    - Confirm five Japanese credits against their licence reads: notices
+      157, 161, 178, 184, 186.
+    - Correct three Kansai-1 briefs: Kakogawa (3 一円 vehicle rows name
+      加古川市), Uji (the guard tests 宇治市), Toyonaka (files from June 2026
+      drop 廃業年月日).
 
 - [ ] **This week (to the 2026-10-11 reset): refinements, not builds** (owner,
   2026-10-08, weekly near its ceiling; the 10% check-ins ended). Place search,
@@ -66,15 +76,6 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   grown since (`pipeline/map_common.py`, `pipeline/line_registry.py`,
   `pipeline/taxonomies/`, the national step modules, `app/`). Scope and lanes
   to be set with the owner before it starts (`docs/review_lane_kit.md`).
-
-- [x] **Desktop leftovers fixed 2026-10-04** (A and B-lite; DECISIONS, "San
-  Diego, San Francisco and Los Angeles state or fix their lean").
-
-- [x] **Japan's carry-overs applied 2026-10-04** (DECISIONS, "Japan's
-  carry-overs"): the deli count to be confirmed by the owner before the push.
-
-- [x] **San Diego, San Francisco and Los Angeles applied 2026-10-04 (owner;
-  DECISIONS).** The swap meet and the parcel refresh followed the same night.
 
 - [ ] **Macro-map regions:** the Europe split and Japan's views landed with
   the review (2026-10-07). Still to come: Brăila and Galați, Nagakute and

@@ -20,10 +20,66 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**52 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**109 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-07**
 
+- [The neighbour rule on: different lines meeting on neighbouring maps differ by at least 10; two Seibu lines moved on Tokorozawa; two pairs excepted (owner)](#2026-10-07---the-neighbour-rule-on-different-lines-meeting-on-neighbouring-maps-differ-by-at-least-10-two-seibu-lines-moved-on-tokorozawa-two-pairs-excepted-owner)
+- [One colour per line on every map: a site-wide line registry, 48 lines made one colour on 34 maps, a check that fails a second colour (owner)](#2026-10-07---one-colour-per-line-on-every-map-a-site-wide-line-registry-48-lines-made-one-colour-on-34-maps-a-check-that-fails-a-second-colour-owner)
+- [South Korea becomes one first-row view, like Japan](#2026-10-07---south-korea-becomes-one-first-row-view-like-japan)
+- [The region menu becomes two rows: broad views, then closer views](#2026-10-07---the-region-menu-becomes-two-rows-broad-views-then-closer-views)
+- [The review batch integrated: four builds, the Europe split and Japan's views on one branch; how the overlaps were merged](#2026-10-07---the-review-batch-integrated-four-builds-the-europe-split-and-japans-views-on-one-branch-how-the-overlaps-were-merged)
+- [The review's owner calls from lanes 3 and 4 (owner)](#2026-10-07---the-reviews-owner-calls-from-lanes-3-and-4-owner)
+- [Review fixes applied: lanes 2 to 4, and the owner's review-time calls](#2026-10-07---review-fixes-applied-lanes-2-to-4-and-the-owners-review-time-calls)
+- [The 36 review proposals applied by the owner's approval](#2026-10-07---the-36-review-proposals-applied-by-the-owners-approval)
+- [One name per line across maps](#2026-10-07---one-name-per-line-across-maps)
+- [Lines within 20 of the olive and violet pins recoloured](#2026-10-07---lines-within-20-of-the-olive-and-violet-pins-recoloured)
+- [The owner's calls on the pin colours and the back links: a region button in every map, eight legends naming their licensed slices, Japan's legend, Ottawa stays magenta (owner)](#2026-10-07---the-owners-calls-on-the-pin-colours-and-the-back-links-a-region-button-in-every-map-eight-legends-naming-their-licensed-slices-japans-legend-ottawa-stays-magenta-owner)
+- [Back links beside "Global View": the reference pages return to the city or region the reader came from; the Overview opens on a region in its link (owner)](#2026-10-07---back-links-beside-global-view-the-reference-pages-return-to-the-city-or-region-the-reader-came-from-the-overview-opens-on-a-region-in-its-link-owner)
+- [One pin colour per meaning: food shops olive, shops and services violet, a refuse-both guard, three line colours moved (owner)](#2026-10-07---one-pin-colour-per-meaning-food-shops-olive-shops-and-services-violet-a-refuse-both-guard-three-line-colours-moved-owner)
+- [The macro_facts.json write guard](#2026-10-07---the-macro_factsjson-write-guard)
+- [The foundation's five optional address fixes landed (owner, "do the address fixes")](#2026-10-07---the-foundations-five-optional-address-fixes-landed-owner-do-the-address-fixes)
+- [The Japan foundation: every shared-code rule of the 58 Japanese briefs landed once, built maps unchanged](#2026-10-07---the-japan-foundation-every-shared-code-rule-of-the-58-japanese-briefs-landed-once-built-maps-unchanged)
+- [Gimpo built: the Gimpo Goldline on SEMAS's register, its own page (abroad-batch)](#2026-10-07---gimpo-built-the-gimpo-goldline-on-semass-register-its-own-page-abroad-batch)
+- [Siheung built: Line 4, the Suin–Bundang and Seohae lines on SEMAS's register, its own page (abroad-batch)](#2026-10-07---siheung-built-line-4-the-suinbundang-and-seohae-lines-on-semass-register-its-own-page-abroad-batch)
+- [Geneva (Regional) built: TPG's five trams on the canton's business register (abroad-batch)](#2026-10-07---geneva-regional-built-tpgs-five-trams-on-the-cantons-business-register-abroad-batch)
+- [Bremen built: BSAG's eight trams on the 2022 regional retail survey (abroad-batch)](#2026-10-07---bremen-built-bsags-eight-trams-on-the-2022-regional-retail-survey-abroad-batch)
+- [Gelsenkirchen built: four tram lines on the City's premises survey (abroad-batch)](#2026-10-07---gelsenkirchen-built-four-tram-lines-on-the-citys-premises-survey-abroad-batch)
+- [Mexico City (Regional) built: four State of México municipios join on DENUE (abroad-batch)](#2026-10-07---mexico-city-regional-built-four-state-of-méxico-municipios-join-on-denue-abroad-batch)
+- [Thessaloniki built: Line 1 on the City's active shop licenses (abroad-batch)](#2026-10-07---thessaloniki-built-line-1-on-the-citys-active-shop-licenses-abroad-batch)
+- [Anyang (Regional) built: Gunpo and Uiwang join Anyang's page on SEMAS's codes (abroad-batch)](#2026-10-07---anyang-regional-built-gunpo-and-uiwang-join-anyangs-page-on-semass-codes-abroad-batch)
+- [Copenhagen (Regional) built: the Letbane and its eight kommuner, placed on OpenStreetMap's address points (abroad-batch)](#2026-10-07---copenhagen-regional-built-the-letbane-and-its-eight-kommuner-placed-on-openstreetmaps-address-points-abroad-batch)
+- [Abroad batch: the review list of new page and notice sentences (abroad-batch)](#2026-10-07---abroad-batch-the-review-list-of-new-page-and-notice-sentences-abroad-batch)
+- [Abroad batch: page proposals, numbers and downstream (abroad-batch)](#2026-10-07---abroad-batch-page-proposals-numbers-and-downstream-abroad-batch)
+- [Distinct line colours where one operator's lines sat close (owner's call 199)](#2026-10-07---distinct-line-colours-where-one-operators-lines-sat-close-owners-call-199)
+- [Hino built](#2026-10-07---hino-built)
+- [Tachikawa built](#2026-10-07---tachikawa-built)
+- [Kasukabe built](#2026-10-07---kasukabe-built)
+- [Fuchū (Tokyo) built](#2026-10-07---fuchū-tokyo-built)
+- [Tokorozawa built](#2026-10-07---tokorozawa-built)
+- [Sōka built](#2026-10-07---sōka-built)
+- [Ageo (Regional) built](#2026-10-07---ageo-regional-built)
+- [Chōfu built](#2026-10-07---chōfu-built)
+- [Higashimurayama built](#2026-10-07---higashimurayama-built)
+- [Tama built](#2026-10-07---tama-built)
+- [Nishitōkyō built](#2026-10-07---nishitōkyō-built)
+- [Higashiyamato built](#2026-10-07---higashiyamato-built)
+- [Shared code for the Tama cities: the yearbook's Tama rows, table 19-7, the share at the yearbook's date, and one Tama module (flagged for review)](#2026-10-07---shared-code-for-the-tama-cities-the-yearbooks-tama-rows-table-19-7-the-share-at-the-yearbooks-date-and-one-tama-module-flagged-for-review)
+- [The name rule crosses premises (owner, calls 205 and 209); Toyonaka's register rebuilt to August (call 151)](#2026-10-07---the-name-rule-crosses-premises-owner-calls-205-and-209-toyonakas-register-rebuilt-to-august-call-151)
+- [Hirakata, Suita, Amagasaki and Uji built (Kansai-1, pages 223, 224, 227, 228; notices 170, 171, 174, 175)](#2026-10-07---hirakata-suita-amagasaki-and-uji-built-kansai-1-pages-223-224-227-228-notices-170-171-174-175)
+- [Toyonaka, Itami and Kakogawa built (Kansai-1, pages 222, 225, 226; notices 169, 172, 173)](#2026-10-07---toyonaka-itami-and-kakogawa-built-kansai-1-pages-222-225-226-notices-169-172-173)
+- [Kansai-1's licence reads: five sources, all usable; two precedents applied (licence-read agents)](#2026-10-07---kansai-1s-licence-reads-five-sources-all-usable-two-precedents-applied-licence-read-agents)
+- [Morioka built, the city's food list of August 2026 with the entries its operators withheld counted apart, the registers of September 2026 and MHLW's notifications](#2026-10-07---morioka-built-the-citys-food-list-of-august-2026-with-the-entries-its-operators-withheld-counted-apart-the-registers-of-september-2026-and-mhlws-notifications)
+- [Mito built, the national food filings and the city's barber, beauty and laundry lists](#2026-10-07---mito-built-the-national-food-filings-and-the-citys-barber-beauty-and-laundry-lists)
+- [Iwaki built, the full food list kept whole with five months of new permits, and the barber and beauty list with its four months](#2026-10-07---iwaki-built-the-full-food-list-kept-whole-with-five-months-of-new-permits-and-the-barber-and-beauty-list-with-its-four-months)
+- [Gifu built, the city's food permits and notifications of June 2025 and its barber and beauty registers of March 2025, from its CKAN packages](#2026-10-07---gifu-built-the-citys-food-permits-and-notifications-of-june-2025-and-its-barber-and-beauty-registers-of-march-2025-from-its-ckan-packages)
+- [Ōita built, one complete food list with the city's withheld addresses counted apart, the registers of March 2026 and MHLW's notifications](#2026-10-07---ōita-built-one-complete-food-list-with-the-citys-withheld-addresses-counted-apart-the-registers-of-march-2026-and-mhlws-notifications)
+- [Akita built, the city's full food list of October 2026, its barber and beauty registers and MHLW's notifications](#2026-10-07---akita-built-the-citys-full-food-list-of-october-2026-its-barber-and-beauty-registers-and-mhlws-notifications)
+- [Tsu built, Mie Prefecture's lists cut to the city by address](#2026-10-07---tsu-built-mie-prefectures-lists-cut-to-the-city-by-address)
+- [Ichinomiya built, the March food list kept whole with the months since, and the registers with their 2026 months](#2026-10-07---ichinomiya-built-the-march-food-list-kept-whole-with-the-months-since-and-the-registers-with-their-2026-months)
+- [Fukuyama built, the food list rebuilt to August 2026 and checked for closures against MHLW's live file](#2026-10-07---fukuyama-built-the-food-list-rebuilt-to-august-2026-and-checked-for-closures-against-mhlws-live-file)
+- [Fukushima built, the full food list kept whole with five months of new permits, all three buckets from the city's own lists](#2026-10-07---fukushima-built-the-full-food-list-kept-whole-with-five-months-of-new-permits-all-three-buckets-from-the-citys-own-lists)
+- [Maebashi built, two food lists split by date and registers rebuilt to August 2026](#2026-10-07---maebashi-built-two-food-lists-split-by-date-and-registers-rebuilt-to-august-2026)
 - [Europe splits West and East with Greece east, Germany and Benelux get views, and every country's top city is labelled first (owner, calls 194, 195 and 197; branch europe-split, held for review time)](#2026-10-07---europe-splits-west-and-east-with-greece-east-germany-and-benelux-get-views-and-every-countrys-top-city-is-labelled-first-owner-calls-194-195-and-197-branch-europe-split-held-for-review-time)
 - [Japan's macro-map views: the eight regions with Osaka, Tokyo, Saitama, Chiba and Hyogo as prefecture views; and a city named in a wider view is named in every narrower one (owner, calls 197 and 198; branch japan-regions, held for review time)](#2026-10-07---japans-macro-map-views-the-eight-regions-with-osaka-tokyo-saitama-chiba-and-hyogo-as-prefecture-views-and-a-city-named-in-a-wider-view-is-named-in-every-narrower-one-owner-calls-197-and-198-branch-japan-regions-held-for-review-time)
 - [Call 209: the Japanese name rule crosses premises on six live maps, 13 operators' own names withheld (owner, privacy repair)](#2026-10-07---call-209-the-japanese-name-rule-crosses-premises-on-six-live-maps-13-operators-own-names-withheld-owner-privacy-repair)
@@ -43,6 +99,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 **2026-10-04**
 
+- [Browser user-agent strings removed from five files; every host serves the project's agent](#2026-10-04---browser-user-agent-strings-removed-from-five-files-every-host-serves-the-projects-agent)
 - [Three heavy jobs at once (owner)](#2026-10-04---three-heavy-jobs-at-once-owner)
 - [Namyangju's Gyeongchun Line stays drawn, its wait stated; Goyang's Gyeongui-Jungang is no defect (owner)](#2026-10-04---namyangjus-gyeongchun-line-stays-drawn-its-wait-stated-goyangs-gyeongui-jungang-is-no-defect-owner)
 - [Belgium: four more owner calls (privacy, the Brussels dots, Rotterdam's label, the broad query)](#2026-10-04---belgium-four-more-owner-calls-privacy-the-brussels-dots-rotterdams-label-the-broad-query)
@@ -95,6 +152,55 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-10-04 - Browser user-agent strings removed from five files; every host serves the project's agent
+
+- **Why:** the owner's user-agent rule of the same day (staging drafts, "The
+  reset wave's calls"): a refusal of curl's own agent is a refusal, a
+  browser string is never sent to get past it, and the project's identified
+  agent (`expanded-heatmap (github.com/dacekroberts/expanded-heatmap)`, the
+  one `brief_check.py` and about sixty fetch scripts already send) is
+  allowed. Five files still sent a browser string: `scripts/probe_geodata.py`,
+  `scripts/screen_rail.py`, `scripts/rank_canada_storefront_density.py`,
+  `pipeline/montreal/fetch_sources.py`, `pipeline/dublin/fetch_sources.py`.
+- **Measured 2026-10-04,** each host once with curl's default agent and once
+  with the project's (ranged GET of one byte, or a small API call):
+  - `donnees.montreal.ca`, both Montréal downloads (business survey,
+    agglomeration boundary): curl's agent **403 `RBAC: access denied`**;
+    project agent **served** (206). Python `requests`' own default agent
+    is also served, so the refusal is aimed at curl's agent. The CKAN API
+    (`package_show`) serves both.
+  - `www.stm.info`, `gtfs.gpmmom.ca` (Montréal's two feeds): both served.
+  - `opendata.tailte.ie`, `services-eu1.arcgis.com`,
+    `www.transportforireland.ie` (Dublin's register, boundary, feed): both
+    served.
+  - `bit.ly` to `storage.googleapis.com` (the Mobility Database catalogue),
+    `files.mobilitydatabase.org` (feeds 2126, 712, 714),
+    `data.calgary.ca`, `data.edmonton.ca`: both served.
+  - `probe_geodata.py` and `screen_rail.py` take their hosts from input; the
+    two docstring examples (`nlftp.mlit.go.jp`, `data.kric.go.kr`) serve
+    both.
+- **No host refuses both,** so nothing is flagged as a refusal under the
+  rule, and neither published city (Montréal, Dublin) is affected. Montréal
+  needed the browser string only because the build never tried the
+  project's own agent.
+- **Changed:** all five send the project's agent. Montréal's
+  `BROWSER_HEADERS`, its `browser=` parameter and
+  `config.BUSINESS_NEEDS_BROWSER_HEADERS` are gone; an RBAC refusal now
+  stops the fetch and says to record it, not to retry. The same for
+  `rank_canada_storefront_density.py`. The literal stays per file, as in
+  every other fetch script; a shared constant would be a sweep of all of
+  them, not of these five.
+- **Internal docs corrected:** Montréal's build brief trap and the
+  `add-country` skill's portal table no longer say browser headers are
+  required.
+- **Not changed, for the owner:** `docs/data_sources/canada.md` (rendered)
+  says twice that the Montréal portal needs browser headers (the business
+  row and the boundary row). Proposed wording is at review time. The licence
+  capture note in `docs/licenses/montreal-licence-donnees-ouvertes.txt` is
+  a dated record and stays.
+- **Published outputs untouched:** fetch scripts are not run by
+  `drift_check.py`, and nothing was re-fetched.
 
 ### 2026-10-04 - Three heavy jobs at once (owner)
 
@@ -1721,6 +1827,2457 @@ standard rings. `coverage` full, `categories` "All three", `mode` metro,
   fine. `docs/rule_history.md` (`#no-escapes`) records the change. The hook
   is unchanged.
 
+### 2026-10-07 - The neighbour rule on: different lines meeting on neighbouring maps differ by at least 10; two Seibu lines moved on Tokorozawa; two pairs excepted (owner)
+
+- **Decided (owner): two DIFFERENT lines that meet on neighbouring maps differ
+  by at least `linecolour.HARD_FLOOR` (CIE76 10).** "Neighbouring" is
+  adjacency measured on the committed polylines: the two drawn lines come
+  within 2 km of each other (`NEIGHBOUR_M`) on two different maps. No shared
+  station or Japan view is required; maps of two countries never come that
+  close. Colours are the configs' (the legend's where no config names the
+  line), so the rule holds before a re-render.
+- **Decided: the two Seibu pairs separated by moving Tokorozawa's two lines,
+  not Higashimurayama's.** Each side's nearest feasible move cost the same
+  (12.4 and 12.6), and both on Tokorozawa means one map changes, already in
+  the re-render list. Hue kept, each the nearest colour reading 3:1 on both
+  pages, 45 from the pins, 12 from every line on its map and on every map
+  within 2 km:
+  - Seibu Yamaguchi Line (Leo Liner) `#A06030` to `#C87848`: pins 46.1,
+    nearest line Seibu Ikebukuro 27.9, 12.4 from Higashimurayama's Seibu
+    Tamako Line; contrast 5.56 dark, 3.37 light.
+  - Seibu Sayama Line `#9040C0` to `#B060E8`: pins 66.0, nearest line Seibu
+    Shinjuku 56.9, 12.6 from Higashimurayama's Seibu Seibuen Line; contrast
+    5.07 dark, 3.69 light.
+  The two are 99.9 apart on their own map; dark-mode labels separate, 5 of 5;
+  the render's `check_line_colours()` and `check_map_markup.py` passed.
+- **Decided (owner): two pairs left alike on purpose, in
+  `line_registry.NEIGHBOUR_EXCEPTIONS` with their reasons:** JR Musashino /
+  JR Chuo (`#F05820`, JR East's own orange for both; 4 map pairs) and
+  Midosuji / Kita-Osaka Kyuko Namboku (`#E4151E` / `#E81820`, CIE76 1.2, one
+  through service; 2 map pairs).
+- **Decided: the rule is part of the gate.** `check_line_identity.py` check N
+  fails any other pair; the `--neighbours` flag is gone. Result on this
+  branch: PROBLEMS 0, 0 pairs, 6 excepted.
+
+### 2026-10-07 - One colour per line on every map: a site-wide line registry, 48 lines made one colour on 34 maps, a check that fails a second colour (owner)
+
+- **Decided (owner, hard line): a line drawn on more than one city's map has
+  one colour on every map, distinct from the lines it meets on each map, even
+  if other lines move to fit.** Before it, each Japanese city chose its colours
+  alone (`scripts/line_colour_search.py`), so the JR Kobe Line was five
+  colours on six maps and the JR Sanyo Line four on six.
+- **Decided: identity is operator plus public line, never a display name.**
+  Japan keys on MLIT N02's operator (`N02_004`, read through each config's
+  `n02`, `route` and `BRANCHES`) and the line's public name; Korea, Taiwan and
+  Brussels on their configs' line keys. Calls inside that rule: the JR
+  Tokaido Line is two identities, JR East's (Kawasaki, Yokohama `#E07800`)
+  and JR Central's (Gifu, Hamamatsu, Ichinomiya `#E86810`); the Tozai Lines of
+  Kyoto, Sapporo and Tokyo, the Namboku Lines of Sapporo and Tokyo and the JR
+  Takayama Lines of Gifu (JR Central) and Toyama (JR West) are different lines;
+  the JR Sanyo Line is ONE identity although JR Kyushu runs Shimonoseki to
+  Moji, because Shimonoseki's map draws both stretches over Kitakyushu's
+  (6.3 km of shared track); through-services a map names differently are the
+  line they run as: Yokohama's "JR Keihin-Tohoku / Negishi Line" is the JR
+  Keihin-Tohoku Line, Tokyo's "JR Yokosuka / Sobu Rapid Line" the JR Yokosuka
+  Line, and Tokyo's "JR Utsunomiya / Takasaki Line" one identity with
+  Utsunomiya's JR Utsunomiya Line and Ageo's JR Takasaki Line (all three
+  already `#E07800`). Rejected: N02's legal line as the key (it joins the JR
+  Kobe and JR Sanyo Lines, which Himeji draws as two), and the display name
+  alone (Tram 1 is fifteen different lines).
+- **Found: 83 shared lines.** 71 Japanese (193 map entries on 57 maps), 11
+  Korean (Seoul and its satellites, Busan with Gimhae; all already one
+  colour), Taiwan's Airport MRT (Taipei, Taoyuan; one colour). Brussels
+  (Regional) imports Brussels' `LINE_COLOURS`, so its 19 shared lines are one
+  value already: an `INHERITED` record, not entries. A name and track scan of
+  all 206 committed maps (same name over 500 m of shared track) found no
+  other pair; every same-named pair elsewhere (Line 1, Tram 1, Linea 1,
+  Metro A) is two networks.
+- **Decided: `pipeline/line_registry.py` holds the 83, one entry each (name,
+  operator, colour, `maps` = {city: config key}), with the colour's basis and
+  margins in a comment.** Every config that draws one reads
+  `line_registry.colour("<id>")` in place of its own value (73 configs); no
+  step file, `map_common.py` or the renderer changed.
+- **Decided: how each colour was chosen.** (1) One colour already on every
+  map: kept (23 Japanese lines and every non-Japanese one). (2) Else the
+  operator's own colour where it clears every constraint on every map and 45
+  from the pins: five lines (JR West's JR Kobe Line `#0072BC`, JR Kyushu's
+  Nippo `#0068B7`, JR East's Yokosuka `#0070B9`, Osaka Monorail `#0067B0`,
+  Tokyu Meguro `#009CD2`). The Japanese maps draw olive, not Retail's blue,
+  which is what lets the operators' blues back on. (3) Else the project
+  colour one of its maps already drew that fits every map with the fewest
+  other lines moved, ties to the colour more maps drew. (4) Else the colour
+  nearest the operator's hue that fits (two: the JR Tsurumi Line `#A05000`,
+  the Odakyu Tama Line `#2890D8`). Shared lines were placed most-crowded maps
+  first. The constraints on every map: CIE76 >= 20 from each pin it draws,
+  3:1 on both map pages, >= 10 from every other line (>= 12 for a pair this
+  change creates; a pair left as it was keeps the old floor), >= 18 from
+  every line within 500 m, and dark-mode labels that `dark_label_colours()`
+  separates.
+- **Why the operators' colours mostly could not be used**, measured: Hankyu
+  maroon `#8C1C2D` reads 2.07:1 on the dark page; JR West's Takarazuka yellow
+  `#F7A800` and Seibu's Ikebukuro yellow `#F5A200` read 1.99 and 2.09:1 on
+  white; Kintetsu red `#E2001A` is CIE76 0.8 from the `#E00018` the Kintetsu
+  Nagoya and Nara Lines already drew, so only one Kintetsu line per map can
+  hold it; Hanshin blue `#0062B3` is 9.0 from the JR Kobe Line's blue it runs
+  beside; the JR Kyoto Line shares the JR Kobe Line's operator blue and
+  meets it at Osaka; Tokyu Toyoko `#DA0442` is 22.6 from Food service, under
+  the 45 a new colour was held to.
+- **Every shared line took one colour.** None had to stay split.
+
+The 48 lines whose colour changed on at least one map (margins over every map
+that draws the line; "lines beside it" = within 500 m):
+
+| Line (identity) | Old colours (maps) | New | Basis | Margins over every map |
+|---|---|---|---|---|
+| Hankyu Itami Line (`hankyu-itami-line`) | `#A04820` amagasaki; `#C06038` itami | `#A04820` | project, kept from a map | pins >= 45.2, lines >= 21.4, lines beside it >= 21.4 |
+| Hankyu Kobe Line (`hankyu-kobe-line`) | `#C87858` amagasaki; `#A36D66` kobe; `#985030` nishinomiya; `#C9785D` osaka | `#C9785D` | project, kept from a map | pins >= 45.0, lines >= 16.4, lines beside it >= 18.0 |
+| Hankyu Kyoto Line (`hankyu-kyoto-line`) | `#905848` kyoto; `#87544B` osaka; `#885848` suita | `#87544B` | project, kept from a map | pins >= 45.9, lines >= 18.0, lines beside it >= 18.0 |
+| Hankyu Senri Line (`hankyu-senri-line`) | `#BA7E7B` osaka; `#B88080` suita | `#BA7E7B` | project, kept from a map | pins >= 45.8, lines >= 18.0, lines beside it >= 18.0 |
+| Hankyu Takarazuka Line (`hankyu-takarazuka-line`) | `#B7572D` osaka; `#C06038` toyonaka | `#B7572D` | project, kept from a map | pins >= 45.4, lines >= 18.1, lines beside it >= 18.2 |
+| Hanshin Main Line (`hanshin-main-line`) | `#807878` amagasaki; `#3A6588` kobe; `#007890` nishinomiya; `#817B7B` osaka | `#3A6588` | project, kept from a map | pins >= 65.0, lines >= 16.8, lines beside it >= 19.6 |
+| Hanshin Namba Line (`hanshin-namba-line`) | `#486860` amagasaki; `#4E665A` osaka | `#4E665A` | project, kept from a map | pins >= 45.7, lines >= 18.3, lines beside it >= 25.3 |
+| JR Fukuhoku Yutaka Line (`jr-kyushu-fukuhoku-yutaka-line`) | `#F86000` fukuoka; `#A04820` kitakyushu | `#A04820` | project, kept from a map | pins >= 45.2, lines >= 18.3, lines beside it >= 18.3 |
+| JR Gakkentoshi Line (`jr-west-gakkentoshi-line`) | `#C000A8` higashiosaka, hirakata; `#C303A8` osaka | `#C000A8` | project, kept from a map | pins >= 46.0, lines >= 19.9, lines beside it >= 19.9 |
+| JR Hakodate Main Line (`jr-hokkaido-hakodate-main-line`) | `#28A800` hakodate; `#70A000` sapporo | `#70A000` | project, kept from a map | pins >= 24.5, lines >= 18.9, lines beside it >= 18.9 |
+| JR Hanwa Line (`jr-west-hanwa-line`) | `#CF8400` osaka; `#B87808` sakai | `#CF8400` | project, kept from a map | pins >= 41.1, lines >= 18.0, lines beside it >= 18.0 |
+| JR Hohi Main Line (`jr-kyushu-hohi-main-line`) | `#F05030` kumamoto; `#E80010` oita | `#F05030` | project, kept from a map | pins >= 46.3, lines >= 18.1, lines beside it >= 18.1 |
+| JR Joban Line (`jr-east-joban-line`) | `#20A800` iwaki, tokyo; `#08A0C0` mito | `#20A800` | project, kept from a map | pins >= 45.7, lines >= 18.8, lines beside it >= 18.8 |
+| JR Kagoshima Main Line (`jr-kyushu-kagoshima-main-line`) | `#E80010` fukuoka, kagoshima, kitakyushu, kumamoto; `#F05030` kurume | `#E80010` | project, kept from a map | pins >= 51.6, lines >= 18.1, lines beside it >= 18.1 |
+| JR Keihin-Tohoku Line (`jr-east-keihin-tohoku-line`) | `#08A0C0` kawasaki, tokyo; `#207888` yokohama | `#08A0C0` | project, kept from a map | pins >= 50.6, lines >= 13.6, lines beside it >= 19.1 |
+| JR Kobe Line (`jr-west-kobe-line`) | `#785870` amagasaki; `#08A0C0` himeji, kakogawa; `#0D51F2` kobe; `#7090A0` nishinomiya; `#755A75` osaka | `#0072BC` | operator | pins >= 82.7, lines >= 19.1, lines beside it >= 19.1 |
+| JR Kosei Line (`jr-west-kosei-line`) | `#7098A8` kyoto; `#08A0C0` otsu | `#7098A8` | project, kept from a map | pins >= 49.6, lines >= 18.8, lines beside it >= 18.8 |
+| JR Kyoto Line (`jr-west-kyoto-line`) | `#08A0C0` kyoto; `#4E6375` osaka; `#506878` suita | `#08A0C0` | project, kept from a map | pins >= 50.6, lines >= 17.5, lines beside it >= 18.8 |
+| JR Nippo Main Line (`jr-kyushu-nippo-main-line`) | `#007890` kagoshima, oita; `#486878` kitakyushu | `#0068B7` | operator | pins >= 82.3, lines >= 37.2, lines beside it >= 40.4 |
+| JR Osaka Higashi Line (`jr-west-osaka-higashi-line`) | `#A088A0` higashiosaka, suita; `#A28DA8` osaka | `#A088A0` | project, kept from a map | pins >= 57.3, lines >= 18.8, lines beside it >= 22.5 |
+| JR Sanyo Line (`jr-west-sanyo-line`) | `#007890` fukuyama, okayama, shimonoseki; `#406878` himeji; `#E80010` hiroshima; `#808080` kitakyushu | `#007890` | project, kept from a map | pins >= 51.4, lines >= 15.8, lines beside it >= 18.8 |
+| JR Takarazuka Line (`jr-west-takarazuka-line`) | `#A8903C` amagasaki, itami, kobe; `#C88800` nishinomiya | `#A8903C` | project, kept from a map | pins >= 20.1, lines >= 19.5, lines beside it >= 35.2 |
+| JR Tsurumi Line (`jr-east-tsurumi-line`) | `#C08800` kawasaki; `#909800` yokohama | `#A05000` | searched near the operator hue | pins >= 45.2, lines >= 15.2, lines beside it >= 24.4 |
+| JR Tōzai Line (`jr-west-tozai-line`) | `#F820C0` amagasaki; `#FF21C0` osaka | `#FF21C0` | project, kept from a map | pins >= 45.1, lines >= 19.9, lines beside it >= 19.9 |
+| JR Yamatoji Line (`jr-west-yamatoji-line`) | `#20A800` nara; `#12A500` osaka | `#12A500` | project, kept from a map | pins >= 45.0, lines >= 18.1, lines beside it >= 18.1 |
+| JR Yokosuka Line (`jr-east-yokosuka-line`) | `#406878` kawasaki; `#9888A0` tokyo; `#586878` yokohama; `#08A0C0` yokosuka | `#0070B9` | operator | pins >= 82.5, lines >= 12.7, lines beside it >= 23.4 |
+| Keihan Main Line (`keihan-main-line`) | `#787858` hirakata; `#506C30` kyoto; `#7B7B5A` osaka | `#7B7B5A` | project, kept from a map | pins >= 37.3, lines >= 16.4, lines beside it >= 18.0 |
+| Keikyu Main Line (`keikyu-main-line`) | `#E81820` kawasaki, yokohama, yokosuka; `#C80008` tokyo | `#E81820` | project, kept from a map | pins >= 45.5, lines >= 13.3, lines beside it >= 18.1 |
+| Keio Line (`keio-line`) | `#B030D0` chofu, fuchu_tokyo, hino, tama; `#E060D0` tokyo | `#B030D0` | project, kept from a map | pins >= 64.6, lines >= 16.6, lines beside it >= 29.8 |
+| Kintetsu Kyoto Line (`kintetsu-kyoto-line`) | `#E80010` kyoto, uji; `#F85838` nara | `#F85838` | project, kept from a map | pins >= 46.4, lines >= 12.2, lines beside it >= 18.2 |
+| Kintetsu Osaka Line (`kintetsu-osaka-line`) | `#B83008` higashiosaka; `#B43009` osaka; `#F85838` tsu | `#F85838` | project, kept from a map | pins >= 46.4, lines >= 16.5, lines beside it >= 18.3 |
+| Midōsuji Line (`osaka-metro-midosuji-line`) | `#E4151E` osaka; `#E81820` sakai | `#E4151E` | project, kept from a map | pins >= 45.1, lines >= 16.5, lines beside it >= 18.0 |
+| Nankai Kōya Line (`nankai-koya-line`) | `#B18D06` osaka; `#B09000` sakai | `#B09000` | project, kept from a map | pins >= 23.2, lines >= 20.5, lines beside it >= 20.5 |
+| Nankai Main Line (`nankai-main-line`) | `#9F6900` osaka; `#E07800` sakai | `#9F6900` | project, kept from a map | pins >= 30.4, lines >= 18.0, lines beside it >= 18.0 |
+| Nishitetsu Tenjin Omuta Line (`nishitetsu-tenjin-omuta-line`) | `#688090` fukuoka; `#E80010` kurume | `#688090` | project, kept from a map | pins >= 54.0, lines >= 18.3, lines beside it >= 83.7 |
+| Odakyu Odawara Line (`odakyu-odawara-line`) | `#588898` kawasaki; `#687888` tokyo | `#687888` | project, kept from a map | pins >= 56.4, lines >= 10.3, lines beside it >= 19.6 |
+| Odakyu Tama Line (`odakyu-tama-line`) | `#686878` kawasaki; `#08A0C0` tama | `#2890D8` | searched near the operator hue | pins >= 77.0, lines >= 12.7, lines beside it >= 35.1 |
+| Osaka Metro Chuo Line (`osaka-metro-chuo-line`) | `#606828` higashiosaka; `#5D662A` osaka | `#5D662A` | project, kept from a map | pins >= 23.3, lines >= 18.5, lines beside it >= 28.3 |
+| Osaka Monorail Main Line (`osaka-monorail-main-line`) | `#007890` itami, toyonaka; `#108098` suita | `#0067B0` | operator | pins >= 81.9, lines >= 37.6, lines beside it >= 37.6 |
+| Sanyo Electric Main Line (`sanyo-electric-main-line`) | `#D01810` himeji, kakogawa; `#D01911` kobe | `#D01810` | project, kept from a map | pins >= 45.4, lines >= 18.9, lines beside it >= 18.9 |
+| Seibu Haijima Line (`seibu-haijima-line`) | `#805878` higashimurayama; `#08A0C0` higashiyamato, tachikawa | `#08A0C0` | project, kept from a map | pins >= 50.6, lines >= 48.5, lines beside it >= 48.5 |
+| Seibu Ikebukuro Line (`seibu-ikebukuro-line`) | `#D08000` nishitokyo, tokorozawa; `#E86800` tokyo | `#D08000` | project, kept from a map | pins >= 43.0, lines >= 11.0, lines beside it >= 22.5 |
+| Seibu Shinjuku Line (`seibu-shinjuku-line`) | `#08A0C0` higashimurayama, nishitokyo, tokorozawa; `#906888` tokyo | `#906888` | project, kept from a map | pins >= 48.3, lines >= 12.1, lines beside it >= 23.7 |
+| Tobu Skytree Line (`tobu-skytree-line`) | `#08A0C0` kasukabe, soka; `#007890` tokyo | `#007890` | project, kept from a map | pins >= 51.4, lines >= 10.2, lines beside it >= 32.1 |
+| Tokyu Den-en-toshi Line (`tokyu-den-en-toshi-line`) | `#207078` kawasaki; `#789090` tokyo; `#486860` yokohama | `#789090` | project, kept from a map | pins >= 45.7, lines >= 10.1, lines beside it >= 18.6 |
+| Tokyu Meguro Line (`tokyu-meguro-line`) | `#0088A0` kawasaki; `#8890A0` tokyo | `#009CD2` | operator | pins >= 64.2, lines >= 13.6, lines beside it >= 23.4 |
+| Tokyu Oimachi Line (`tokyu-oimachi-line`) | `#D87830` kawasaki; `#D07020` tokyo | `#D07020` | project, kept from a map | pins >= 49.2, lines >= 11.8, lines beside it >= 18.3 |
+| Tokyu Toyoko Line (`tokyu-toyoko-line`) | `#C80808` kawasaki; `#E84028` tokyo; `#C03008` yokohama | `#C03008` | project, kept from a map | pins >= 46.7, lines >= 14.6, lines beside it >= 18.3 |
+
+ALREADY ONE COLOUR (23, kept, now registered): Hankai Line `#449418` (osaka, sakai); Ise Railway Ise Line `#9840A0` (tsu, yokkaichi); JR Biwako Line `#406878` (kyoto, otsu); JR Chuo Line `#F05820` (hino, tachikawa, tokyo); JR Kyudai Main Line `#30A800` (kurume, oita); JR Musashino Line `#F05820` (fuchu_tokyo, higashimurayama, tokorozawa); JR Nambu Line `#B09000` (fuchu_tokyo, kawasaki, tachikawa, yokohama); JR Nara Line `#A87840` (kyoto, uji); JR Ou Line `#E07800` (akita, fukushima); JR Tohoku Line `#007430` (fukushima, morioka); JR Tokaido Line `#E07800` (kawasaki, yokohama); JR Tokaido Line `#E86810` (gifu, hamamatsu, ichinomiya); JR Utsunomiya / Takasaki Line `#E07800` (ageo_regional, tokyo, utsunomiya); JR Yosan Line `#08A0C0` (matsuyama, takamatsu); Keihan Keishin Line `#949054` (kyoto, otsu); Keihan Uji Line `#20A800` (kyoto, uji); Keio Sagamihara Line `#F000B8` (chofu, kawasaki, tama); Kintetsu Nagoya Line `#E00018` (tsu, yokkaichi); Kintetsu Nara Line `#E00018` (higashiosaka, nara); Kita-Osaka Kyuko Namboku Line `#E81820` (suita, toyonaka); Meitetsu Nagoya Main Line `#E80010` (gifu, ichinomiya); Sotetsu-JR Link Line `#805878` (kawasaki, yokohama); Tama Toshi Monorail `#E07800` (higashiyamato, hino, tachikawa).
+
+| Map | Unshared line | Old | New | Pins | Nearest line | Nearest beside it |
+|---|---|---|---|---|---|---|
+| hiroshima | JR Kabe Line | `#007890` | `#506870` | 53.3 | JR Sanyo Line 18.8 | 18.8 |
+| kyoto | Tōzai Line | `#E85820` | `#D84810` | 52.3 | Kintetsu Kyoto Line 12.2 | 46.5 |
+| nishinomiya | Hanshin Mukogawa Line | `#586878` | `#788898` | 55.0 | Hanshin Main Line 20.1 | 20.1 |
+| nishinomiya | Hankyu Imazu Line | `#D08068` | `#905848` | 45.7 | Hankyu Kobe Line 19.5 | 19.5 |
+| nishinomiya | Hankyu Koyo Line | `#D06840` | `#D87040` | 49.1 | Hankyu Kobe Line 18.0 | 18.0 |
+| osaka | Yotsubashi Line | `#00A2C3` | `#4898D0` | 67.8 | JR Kyoto Line 18.8 | 18.8 |
+| osaka | Kintetsu Namba Line | `#FC5D3F` | `#B83008` | 45.7 | Kintetsu Osaka Line 18.7 | 18.7 |
+| tokyo | Marunouchi Line | `#E81020` | `#F80008` | 58.4 | Keikyu Main Line 13.3 | 23.5 |
+| tokyo | Tokyu Setagaya Line | `#C08800` | `#D86008` | 60.2 | JR Utsunomiya / Takasaki Line 12.2 | 83.5 |
+| tokyo | Seibu Toshima Line | `#D08000` | `#F86800` | 67.0 | JR Chuo Line (Rapid) 12.5 | 27.1 |
+| tokyo | Keikyu Airport Line | `#F81808` | `#F84800` | 61.9 | JR Chuo Line (Rapid) 12.0 | 19.1 |
+| tokyo | Tsukuba Express | `#B83008` | `#A04820` | 45.2 | Fukutoshin Line 13.7 | 20.2 |
+| yokohama | Blue Line | `#08A0C0` | `#007088` | 53.2 | Tokyu Kodomonokuni Line 13.4 | 19.1 |
+| yokohama | Tokyu Kodomonokuni Line | `#688898` | `#486878` | 55.7 | Blue Line 13.4 | 18.6 |
+
+- **Decided (as the owner allows): 14 unshared lines on 7 maps moved so the
+  shared colours fit, hue kept where it could be.** Each city's config
+  records its own moves with these margins. Tokyo swapped two Seibu oranges
+  (its Ikebukuro Line takes the `#D08000` Nishitokyo and Tokorozawa drew, its
+  Toshima Line moves to `#F86800`) and its Tokyu Setagaya Line left yellow
+  for orange `#D86008`: Tokyo's yellows (Chuo-Sobu `#B09000`, Yurakucho
+  `#A89060`) leave no other room. The Seibu Ikebukuro Line is held at its
+  orange by hand (`FORCE` in the search): the search's alternative was
+  salmon `#D08068` on all three maps, off the operator's hue.
+
+- **Trades, recorded:** eight shared lines sit between 20 and 45 from a pin,
+  each a project colour some map already drew and now drawn on every map of
+  the line: JR Takarazuka `#A8903C` 20.1 (owner-accepted 2026-10-07), Nankai
+  Koya `#B09000` 23.2, Osaka Metro Chuo `#5D662A` 23.3, JR Hakodate Main
+  `#70A000` 24.5 (Sapporo's; Hakodate drew `#28A800`), Nankai Main `#9F6900`
+  30.4, Keihan Main `#7B7B5A` 37.3, JR Hanwa `#CF8400` 41.1, Seibu Ikebukuro
+  `#D08000` 43.0. Pairs this change created under 12.5 (none within 500 m of
+  each other): on Tokyo, JR Utsunomiya / Takasaki and Seibu Ikebukuro 11.0
+  (11.3 before), JR Chuo and Keikyu Airport 12.0, JR Utsunomiya / Takasaki
+  and Tokyu Setagaya 12.2, Tokyu Oimachi and Tokyu Setagaya 12.4; on
+  Kawasaki, JR Tokaido and Tokyu Oimachi 12.0; on Kyoto, Kintetsu Kyoto and
+  Tozai 12.2.
+- **Decided: `scripts/check_line_identity.py`, in `check_all.py`.** It fails
+  when a registered line's config colour differs from its entry, when an
+  inherited page's line differs from its parent's, and when two maps draw what
+  looks like one line (the same name, a line code allowed, over 500 m of
+  shared track; or one Japanese operator's line under one public name in two
+  configs) with no entry joining them or `NOT_SAME` parting them.
+  `--rendered` also compares the committed legends (off in the gate: a config
+  change reaches a map at its next render). `--neighbours` turns on the
+  neighbour rule. Verified: PROBLEMS 0 on this branch (83 lines, 73 maps, 187
+  same-name shared-track pairs, all joined); with the 34 maps re-rendered,
+  `--rendered` PROBLEMS 0, `check_map_markup.py` PROBLEMS 0, every render's
+  `check_line_colours()` passed, `check_all.py` 51 of 51. A negative control
+  (one member dropped from the JR Kobe Line and from Line 4, one colour
+  changed) failed it with 92 problems.
+- **Fixed in passing:** Kobe's config carried a dead duplicate of its
+  station-scope block (a second `LINES = {` holding the two funiculars and a
+  repeated `COLLAPSE_MAX_SPREAD_M`), overwritten at import since 2026-09-27;
+  removed, since the registry edit has to find the real `LINES`.
+
+### 2026-10-07 - South Korea becomes one first-row view, like Japan
+
+**Decision.** The region menu's first row has one "South Korea" view
+covering all 18 Korean cities, a composite of the Seoul Capital Area and the
+five cities outside it. Its second row: "All of South Korea (18)", "Seoul
+Capital Area (13)", "Outside the capital area (5)". The five-city view once
+named "South Korea" is renamed "South Korea outside the capital area", a name
+that stands alone in a caption ("Showing 5 cities in South Korea outside the
+capital area."); the menu drops its parent's name, as "United States West"
+reads "West". Owner, 2026-10-07 ("i agree with your recommendations", on the
+recommendations of the entry below). The same call approves the "Closer
+view" label and the "All of ..." option names, and keeps the whole-country
+Canada and Japan views.
+
+**Why.** It fixes review lane 3's O3: the old name captioned 5 cities as
+"in South Korea" when the site has 18, and one country took two first-row
+choices.
+
+**How it is built.**
+- The five cities' `region` tag, `REGION_ORDER`, `COUNTRY_VIEWS`, East
+  Asia's `REGION_LABELS_ALSO` and `country_sections.REGION_GROUP` take the
+  new name; `_CAPTION_NAME` maps both Korean views to "South Korea", so East
+  Asia's caption reads "with the main cities of Japan and South Korea
+  labeled too" (it named the Seoul Capital Area and South Korea before).
+- The composite competes for labels: by hand, Seoul's pill covered
+  Uijeongbu's dot at every width (3 problems); competing, PROBLEMS 0 over 36
+  regions.
+- Links: `?region=South Korea` from before (a back link's `?from=`, a
+  bookmark) now opens the whole country, which holds the five cities it used
+  to open. The in-map region button reads the app's link, so no map is
+  re-rendered: Daegu's opens `?region=South Korea outside the capital area`.
+- Renamed where the build path reads it too: the `korea-city` skill's
+  region rule, `scripts/stress_overview.py`'s anchor in `COUNTRY_VIEWS`, and
+  the master list's built-table row (`check_provenance.py` keys rows by view
+  name).
+
+**Checked.** One local render, 375 and 1200 px: `?region=South Korea` (both
+rows set, "Showing 18 cities in South Korea.", both Korean list sections
+open; 152 px of dropdowns at 375, 172 px of pills at 1200), the "Outside the
+capital area" pill (the five-city view, its caption and list section), and
+Daegu's in-map region button (back on that view, both rows set).
+`check_macro_labels.py` PROBLEMS 0; `check_all.py` 50 of 50;
+`check_deploy_imports.py` PROBLEMS 0 from the commit.
+
+---
+
+### 2026-10-07 - The region menu becomes two rows: broad views, then closer views
+
+**Decision.** The macro map's region selector is two rows. The first holds
+the broad views, in `REGION_ORDER`'s geographic order: Global, United
+States, Canada, Mexico, Europe West, Europe East, United Kingdom, South
+America, East Asia, Japan, Seoul Capital Area, South Korea, Oceania, West
+Asia (14; 13 since South Korea became one view, the entry above). The
+second shows only when the chosen view has closer views, the
+broad view first as "All of ...": the United States (West, East), Canada
+(West, East), Japan (its 12 views with cities: Hokkaido, Tohoku, Kanto,
+Saitama Prefecture, Tokyo Metropolis, Chubu, Kansai, Osaka Prefecture,
+Hyogo Prefecture, Chugoku, Shikoku, Kyushu-Okinawa; Chiba Prefecture joins
+when it has a city) and Europe West (France North, France South, Benelux,
+Germany, Czechia). `?region=<any view>` opens with both rows set, and either
+row keeps the URL current.
+
+**Why.** The flat list of 33 views measured 665 px tall on a 375 px phone
+(review lane 3), so the map began about 1,378 px down. Owner's decision,
+2026-10-07.
+
+**How it is built.**
+- *Grouping, derived where it can be* (`app/cities.py`, `SUB_VIEWS`,
+  `MENU_TOP`, `MENU_SUB`): a composite's closer views are its members
+  (`REGION_MEMBERS`); Europe West's are written out, its country views less
+  the United Kingdom, which the owner placed in the first row. Every other
+  view is a first-row view, so a new region joins the first row with no
+  edit. `cities.py` raises on a view named under two parents, a parent that
+  is itself a closer view, or a name not in `REGION_ORDER`.
+- *Two new views*, "Canada" (Canada West + Canada East) and "Japan" (every
+  Japanese view), as composites on the United States' pattern, because the
+  broad view stays selectable. By hand their labels failed
+  `check_macro_labels.py` (Edmonton x Kitchener-Waterloo, 3 problems;
+  Japan's anchors over nine neighbours' dots, 27), so both compete for
+  labels (`COMPETING_REGIONS`, whose check now admits a composite other
+  than Global): PROBLEMS 0, 35 regions x 3 widths, no member dot off the
+  canvas in either. Captions: "Showing 7 cities in Canada." and "Showing 64
+  cities in Japan."; the list beneath opens every member region, as the
+  United States' does.
+- *Widget, measured* (one local render, 2026-10-07): `st.pills` on a screen
+  wider than 640 px (Streamlit's column breakpoint), `st.selectbox` at or
+  below it; both are drawn and CSS shows one, each set from the URL before
+  it is drawn. The URL is the state: a widget's callback writes
+  `?region=`, so the page never reads a URL one click behind, and a pill
+  clicked a second time (which clears it) keeps the view shown.
+- *Heights*, the menu itself:
+
+  | width | view | before (one radio) | pills | dropdowns (shipped at 375) |
+  |---|---|---|---|---|
+  | 375 px | Global | 665 px | not measured | 68 px |
+  | 375 px | Japan / Kansai | 665 px | 568 px | 152 px |
+  | 1200 px | Global | not measured | 96 px (shipped) | |
+  | 1200 px | Japan | not measured | 208 px (shipped) | |
+
+  At 375 px the map now starts 781 px down on Global and 865 px with two
+  rows, against about 1,378 px before.
+
+**Checked.** At 375 and 1200 px: choosing Japan then Kansai (URL
+`?region=Japan`, then `?region=Kansai`; Kansai's caption and its one open
+list section unchanged), a direct `/?region=Kansai` link (both rows set),
+Global (the parameter dropped, the landing caption, no section open), and
+Kyoto's in-map region button (back on Kansai with both rows set).
+`check_macro_labels.py` PROBLEMS 0; `check_all.py` 50 of 50.
+
+### 2026-10-07 - The review batch integrated: four builds, the Europe split and Japan's views on one branch; how the overlaps were merged
+
+- **Keep both, in notice order** (the builds' agreed protocol: East-1,
+  Kansai-1, Regional-1): city entries in `app/cities.py`, the notice lists in
+  `app/components.py` and `app/osm_notice.py`, `docs/data_sources.md` notices
+  and source rows, `docs/data_sources/japan.md`, `docs/excluded_categories.md`,
+  `docs/map_inconsistencies.md`, `docs/privacy_verdicts.md`,
+  `scripts/check_personal_exposure.py`, `scripts/check_provenance.py`, and
+  `pipeline/fingerprint_marks.json` (a union of keys; no key held two values).
+- **WAVE5_RULES** keeps `name_city` (master) and `default_joined` (East-1);
+  Regional-1's 届出者氏名 merged cleanly in OPERATOR_COLS_WAVE5.
+- **Lines all three branches edited**, rebuilt rather than picked: the Japan
+  row of the source table (the union of every side's cities); japan.md's
+  "N cities built" sentence, which said "forty-one" on master's side because
+  East-1 never updated it, now "sixty-four" with every city named; the
+  notice-number sentence, every number from both sides in order. Regional-1's
+  commented form of the `city_rules` one-liner, the same code on every side.
+- **`docs/session_roles.md`**: master's paragraph (the A and B build plan's
+  open claims) over `japan-regions`' older one; the claims are released at
+  landing.
+- **The notice blocks** in data_sources.md were reordered by number (Abroad's
+  154-156 had landed after East-1's 157-168; check D of `check_provenance.py`
+  requires number order).
+- **The 30 new Japanese cities retagged** from "Japan West" or "Japan East"
+  to the Japan views, from `docs/staged_cities.json`: 8 Tokyo Metropolis, 4
+  Saitama Prefecture, 3 Osaka Prefecture, 3 Hyogo Prefecture, 2 Kansai (Uji,
+  Tsu), 2 Kanto (Maebashi, Mito), 2 Chubu (Ichinomiya, Gifu), 4 Tohoku
+  (Fukushima, Iwaki, Akita, Morioka), Chugoku (Fukuyama), Kyushu-Okinawa
+  (Ōita).
+- **Labels:** five widths measured in the browser (Fuchū (Tokyo), Fukuyama,
+  Maebashi, Mito, Morioka; controls reproduced). Hino's label sits below its
+  dot in Tokyo Metropolis: above it, the pill covered Tachikawa's dot 31 px
+  away and Tachikawa was labelled in no view. `check_macro_labels.py`:
+  PROBLEMS 0, 33 regions, 206 cities.
+- **Drift on the 30** (`--jobs 3`, measured peak under the 6 GB declared):
+  zero, except where another branch's rule now reaches a city. East-1's
+  `default_joined` (owner, call 202) re-placed Uji (+3 storefronts),
+  Ichinomiya (+1) and Mito (+4); Kansai-1's `name_city` withholds one more
+  row in Tama, not on its map. Baselines updated; the privacy Japan pass
+  prints 0 for all four.
+- **Left for landing:** Staging's master-list rows (Built 170 -> 206, the
+  only `check_provenance.py` failure); Kansai-1's seven maps need
+  fingerprint marks, which only the owner's key makes (`fingerprint.py
+  coverage` names Uji, the one re-rendered; the other six follow when
+  re-rendered); a reboot (app/ changes throughout).
+
+### 2026-10-07 - The review's owner calls from lanes 3 and 4 (owner)
+
+- **Every legend capped at the labels' model width** (lane 3, F1, the one
+  blocker): New York's legend reached 311 px with the batch's long category
+  rows and covered Flushing (7) and Shuttles (S) at 1000 px; the cap applied
+  only to maps with legend_names. Now every legend (95998728); one narrower
+  than 274 px renders the same.
+- **Lines near the new pin colours (owner: "Yes to recommendation")**: every
+  line within CIE76 20 of olive or violet on a map that draws it is
+  recoloured before landing, keeping the operator's hue (30 lines on 19
+  maps near olive, 2 near violet, measured from the committed legends); 20 to
+  45 is recorded as an accepted trade; a full UK search follows after
+  landing. Lines near the long-standing blue, magenta and green (53, mostly
+  operators' own colours) are outside the decision.
+- **One name per line across maps (owner: "Yes ... for consistency, unless
+  shorter name is valid on all maps")**: the operator's full official name
+  everywhere, unless a shorter official name is valid and used on every map
+  involved (label space): Hohi, Hakodate, Osaka Higashi, Chuo and the others
+  lane 4 listed.
+- **Amagasaki 6 and Suita 5, undefined harm and defamation bars**: accepted
+  knowingly (owner: "Yes i agree"), on the Taoyuan (2026-09-25), Fukui 4
+  (2026-10-01) and Maebashi (2026-10-05) precedents; no page wording, since
+  they are prohibitions, not display duties.
+- **Hirakata's credit, unlinked to the city's pages** (its link policy;
+  notice 170 gives the 表示例 form and the CC BY 2.1 JP URI): approved
+  (owner: "Approved and note").
+- **The Abroad items "all approved" did not name** (Mexico City's three
+  rewordings, Copenhagen's placement and S-tog bullet, Gelsenkirchen's
+  data_age and frequency, three adapted Anyang sentences, notice 1's clause,
+  call 66 c on Gentofte, Ballerup and Rudersdal): settled (owner: "Settle").
+- **Dates in notices**: month first, as every page writes them (owner: "Yes
+  match"); Tsu, Fukushima and Iwaki change.
+
+### 2026-10-07 - Review fixes applied: lanes 2 to 4, and the owner's review-time calls
+
+- **Applied through `scripts/prose_proposals.py apply --ids`** (each old
+  text found exactly once at this branch; the log in
+  `data/_review/applied.json`): **lane 2**, 3 (P1-P3, Copenhagen's S-tog Bx:
+  every 20 minutes at peak only, on the page, What Is Excluded and the
+  config comment); **lane 3**, 1 (P11, Why the Maps Differ's two lists that
+  read as complete); **lane 4**, 97: its 80 `fix` items (lane 4's file holds
+  80 fix and 45 proposal, not the 81 and 44 its report gives) and 17 tagged
+  `proposal` that only take a leaked process note off a rendered doc or
+  correct a stale claim, on Cleanup's direction: P205, P214-P217, P233,
+  P246-P254 (japan.md's "staging", "the brief", "flagged for review", "the
+  standing call"), P256 (germany.md's "owner-approved") and P611.
+- **Notable ones.** London's colour sentence now names the Metropolitan
+  (purple) and the Northern (gray) (P2): after rb-mapconfig the Piccadilly
+  is still drawn mauve (#805878), but its TfL blue no longer sits near any
+  dot colour, so the old reason was false; the mauve is now unexplained on
+  the page, for the UK re-search lane 4's call 1 queued. Higashimurayama and
+  Tachikawa name Higashiyamato where they named themselves (P501, P3).
+  Gelsenkirchen's 362 is 359 (P306): measured read-only from the cached
+  reduced fetch (`data/gelsenkirchen/raw/idb_gewerbe_*.geojson`) through the
+  taxonomy, services layer 593 = 359 out by rule + 108 Personal services +
+  122 blank + 4 car dealers; 362 was 359 plus the food layer's 3 hotels,
+  listed apart. The abroad-batch drafts entry still says 362. Tachikawa's
+  national filings count 407 (P316), the siblings' sum: 120 permits + 287
+  notifications in its build entry. The data_sources.md country index
+  (P107-P110) now matches app/cities.py country by country (Copenhagen
+  (Regional), Tacoma, Mendoza, seven UK cities), measured by script.
+  Suita's privacy row reads `publish` (P601); Thessaloniki and Bremen
+  `publish-structural` (P602, P603). "health centre" is "health center" in
+  all eight Tama-ledger sections (P308-P315).
+- **The "Tama template" has no file of its own**: no script, skill or brief
+  carries the packaged-food sentence; each later Tama city copied
+  Higashiyamato's section, and all eight copies are fixed. The japan-city
+  skill's "health centre" (line 542) is internal text, left as written.
+- **Lane 3's F2 (P3-P10), applied with different words:** the eight pages'
+  map help names the layer as the map's menu now names it, in quotation
+  marks, last in a three-item list ("three business categories (Food
+  service, Personal services and “Food, secondhand, electronics, tobacco
+  shops”)"); lane 3 had proposed the count alone. Listed in the owner file
+  for a look.
+- **`country_sections.public()` strips a trailing owner tag** too: "(3.0%,
+  owner)", "(the flat rule, owner 2026-09-28)", "(...; owner, call 165)",
+  "(158 pending out, owner call 24)" keep their fact and lose the tag. Only a
+  date or a call number may follow "owner", so "a sole owner" and "owner's
+  rule" stay. 29 such tags rendered (11 on What Is Excluded, among them nine
+  UK "flat rule" brackets; 18 on About the Data's country files), each read
+  before and after; check_internal_prose finds none of this shape left.
+- **`scripts/check_privacy_verdicts.py` FAILS on `pending`** (was report
+  only): every city in app/cities.py ships, so a pending verdict is a page
+  published without one. The table's definition says so.
+- **Mexico City (Regional)'s data date**: "DENUE May 2026 edition, fetched
+  2026-09-22; State of México 2026-10-07" (entidad 15's ZIPs and mexico.md's
+  row both 2026-10-07), Los Angeles's two-date form.
+- **Lane 3's O4, reference pages open on the reader's country:**
+  `country_sections.origin_country()` reads `?from=` when a link carries no
+  `?country=` (a city's footer, an Overview region): a city gives its own
+  country, a region whose cities share one country gives that country
+  (Canada East, Czechia, the Japanese regions); a region spanning several
+  (Europe West, Benelux, South America) keeps the default. Measured: every
+  one of the 206 cities maps to its own country.
+- **Owner decisions of 2026-10-07 applied.** Notice dates month first: Tsu
+  (179), Fukushima (180) and Iwaki (181) in `_NOTICES` (their ledger entries
+  carry no English date), with Maebashi and Fukuyama (lane 4 P103-P104).
+  About 25 older approved notices (Toyama, Fukui, Nagasaki, Sakai and
+  others) still write day-first, outside this call. Hirakata's unlinked
+  credit approved: one line in its notice comment, ledger entry 170 and its
+  japan.md licence row. Amagasaki §6 and Suita §5, the undefined harm and
+  defamation bars, accepted knowingly on the Taoyuan, Fukui and Maebashi
+  precedents: ledger entries 171 and 174 and both japan.md rows say so.
+  `docs/licence_positions.md` gains Tier 2 rows 2.49 to 2.52 (Amagasaki,
+  Suita, Hirakata, Hyōgo); its counts move to 52 and 146.
+- **Not applied: 36 proposals** for the owner in
+  `data/_review/proposals_for_owner.md` (lane 2 P4 and lane 3 P2 as one
+  item; lane 3's O1 drafted as nine sentences, Busan's "Retail dots" among
+  them; 26 more from lane 4). Lane 4's P201 and P202 were already applied by
+  rb-mapconfig (88f528e8).
+- **Could not confirm or left alone:** the Piccadilly's mauve has no stated
+  reason on London's page now (above). Busan's Line 4 bullet says "the
+  Retail dots" (O1-9, a proposal). The abroad-batch drafts entry's "362
+  services by rule" is a drafts text, left for the fold.
+
+### 2026-10-07 - The 36 review proposals applied by the owner's approval
+
+- **The owner approved all 36 items in `data/_review/proposals_for_owner.md`**
+  ("approve all, disclose Fukushima caterers"), applied on
+  `review-batch-2026-10-07`, each current text found exactly once first; none
+  had changed. 28 lane items through `prose_proposals.py apply --ids`: R1
+  (lane 2 P4 and lane 3 P2, the region button in the map help and the
+  Overview intro) and lane 4's 26 (P101, P102, P106, P111, P257, P265, P268,
+  P269-P272, P318, P322, P403, P502, P503, P505, P506, P507, P604-P610),
+  among them Fukushima's caterers disclosed: "230 caterers (仕出し; 161 of
+  them also name a counter form)". Lane 3's O1 as nine sentences: the eight
+  pages' bullets name the legend's wording once ("the Retail category, shown
+  on the map as ..."), and Busan's lines bullet says "the blue shop dots".
+  This supersedes the "Not applied: 36 proposals" and Busan items above.
+
+### 2026-10-07 - One name per line across maps
+
+- **Six cross-map name splits unified at their config source (owner,
+  2026-10-07: the operator's full official name everywhere, unless a shorter
+  official name is valid and used on every map involved).** Lane 4's survey of
+  the 64 Japanese maps found them. Each changed in `pipeline/<city>/config.py`
+  (`LINES[...]["name"]`), the page bullet, the city card blurb in
+  `app/cities.py`, and the rows of `docs/data_sources/japan.md` and
+  `docs/map_inconsistencies.md` that name the line:
+  - 豊肥本線: Kumamoto "JR Hohi Line" to "JR Hohi Main Line", as Ōita
+    (lane 4's P201 and P202 applied with it: "Kagoshima and Hohi main lines").
+  - 函館本線: Hakodate "JR Hakodate Line" to "JR Hakodate Main Line", as
+    Sapporo (name_ja 函館線 to 函館本線, which does not render).
+  - 山陽電気鉄道 本線: Kobe "Sanyō Main Line" to "Sanyo Electric Main Line",
+    as Himeji and Kakogawa. Checked to be the SAME line: all three draw N02's
+    (山陽電気鉄道, 本線). JR West's Sanyo Main Line (N02 山陽線) is a
+    different line, drawn as "JR Kobe Line" and "Wadamisaki Line" in Kobe and
+    "JR Sanyo Line" in Himeji, and is untouched. The old Kobe name read as
+    JR's line. Kobe's station suffix "Sanyō" stays: no station uses it.
+  - おおさか東線: Osaka and Suita "Osaka Higashi Line" to "JR Osaka Higashi
+    Line", as Higashiōsaka (the full form; the short one was not on every
+    map). Both configs' Umekita branch label follows (step 1 log text only).
+  - Osaka Metro 中央線: Osaka "Chūō Line" to "Osaka Metro Chuo Line", as
+    Higashiōsaka (the full form; the macron by the rule below). Osaka's other
+    Osaka Metro lines keep their unprefixed names, which no other map
+    contradicts.
+  - 天神大牟田線: Fukuoka "Nishitetsu Tenjin Ōmuta Line" to "Nishitetsu Tenjin
+    Omuta Line", as Kurume. Macron rule, measured: 12 of the 298 distinct
+    Japanese line names in the configs carry a macron, so the majority form is
+    without. The same count settles Chuo and Sanyo.
+- **JR Chuo left as it is.** Tachikawa and Hino draw "JR Chuo Line", Tokyo
+  "JR Chuo Line (Rapid)". The owner answered East-1's call 203 "keep" ("rapid
+  is a regional distinction for speed"); the 2026-10-07 rule is not read as
+  overturning an answer given on this exact pair. For the owner to confirm.
+
+### 2026-10-07 - Lines within 20 of the olive and violet pins recoloured
+
+- **Every drawn line within CIE76 20 of Food shops olive (#737a00) or Shops
+  and services violet (#7e57c2) on a map that draws it was recoloured: 32
+  legend rows, 27 distinct line colours, 21 maps (owner, 2026-10-07).** Found
+  by reading each committed map's legend (pin rows and line rows). Each line
+  took the colour nearest its operator's hue (the config's `hue`, else its
+  drawn colour) on a 4-step sRGB cube, holding: 3:1 on both map pages; CIE76
+  >= 20 from every pin its maps draw; >= 18 from every other line those maps
+  draw (stricter than the search's 18-within-500 m, so no spatial read was
+  needed); the LCh hue within 20 degrees of the operator's, or a stated
+  yellow band for the yellow lines. The margin: the highest of 45, 40, 35,
+  30, 25, 20 whose best colour costs at most 7 (pull units) more than the
+  floor's. Lines in one city went in order, each seeing the ones already
+  moved; a line drawn on several maps took one colour clearing all of them.
+  `scripts/line_colour_search.py` was not run: it recolours every line in a
+  city, and the brief was to move only these. Old and new (CIE76 to the
+  nearer of olive / violet, then to any pin where lower):
+  - Bucharest M4 #608000 (11.6) to #247810 (30.0); M1 #989800 (15.7) to
+    #B48C00 (25.8), a dark gold.
+  - Kyoto Karasuma #608000 (11.6) to #387C04 (25.4); Keihan Main #586818
+    (15.8) to #506C30 (25.6); Keihan Keishin #909040 (16.0) to #949054
+    (25.2), Kyoto and Otsu one colour.
+  - Hiroshima, toward Hiroden's #00A650: Yokogawa #889828 (11.8) to #08A850
+    (46.0); Ujina #587808 (12.1) to #089860 (46.8); Miyajima #788430 (12.1)
+    to #0C7C24 (35.4); Eba #586818 (15.8) to #247038 (36.9); Hakushima
+    #989848 (18.1) to #60A450 (30.9).
+  - Hankai Line, Osaka #516C00 (12.6) and Sakai #689000 (17.4), to #449418
+    (30.3), now one colour; Osaka's Uemachi #9C9830 (13.3) to #7C9C48 (20.4);
+    Nagahori Tsurumi-ryokuchi #7E9F1E (18.2) to #7CA014 (20.1).
+  - Kawasaki JR Nambu Branch #909800 (14.9) to #B88C3C (27.6), an ochre in
+    the 80-100 degree band from JR's #FFD400.
+  - Tokyo Toei Shinjuku #889800 (15.0) to #78A03C (20.1); Chiyoda #586818
+    (15.8) to #007034 (olive 39.4, green pin 25.3).
+  - Sheffield Yellow #989800 (15.7) to #B48C00 (25.8), yellow kept: lane 4's
+    whole-city search at 45 gave #28A800, a green, refused.
+  - JR East's green, #586818 (15.8) on Akita's Oga, Fukushima's and
+    Morioka's Tohoku and Mito's Suigun lines, to #007430 on all four (olive
+    38.0, green pin 25.2).
+  - London District #586818 (15.8) to #00A064 (48.0); Nottingham Line 1
+    #586818 (15.8) to #008854 (45.1); Sapporo Streetcar #586818 (15.8) to
+    #506C30 (25.6).
+  - JR Takarazuka, Kobe #9F9504 (16.3), Amagasaki and Itami #A09808 (16.7),
+    to #A8903C (20.1) on all three, a mustard in the 87-111 degree band;
+    Kobe's Hokushin #7A9C1C (17.5) to #6CA424 (25.6).
+  - Riga Tram 8 #9467bd (violet 14.0) to #b480cc (25.0); Rotterdam Tram 1
+    #3f5ebe (violet 19.5) to #306ccc (25.2).
+- **Every moved line clears 20; none fell short.** The four at the floor
+  (Toei Shinjuku 20.1, the Nagahori 20.1, JR Takarazuka 20.1, the Uemachi
+  20.4) sit in crowded yellow-green and ochre families where the 18-line
+  separation leaves no wider colour in their hue. Closest pairs and
+  dark-label separation held in every affected city (Hiroshima's closest
+  pair now 18.0, Yokogawa / Miyajima, was 10.2).
+- **Gaps between 20 and 45 recorded as an accepted trade in each affected
+  config**, with the count and the nearest line, as Hiroshima's and Osaka's
+  were. The UK configs' "every line >= 45 from every pin" is corrected to the
+  truth: London (Circle 23.2, Lioness 43.0, Bakerloo 43.5, Suffragette 44.4),
+  Sheffield (Yellow 25.8), Edinburgh (28.1), Manchester (Yellow 36.3),
+  Newcastle (Yellow 32.5, Green 44.4); Nottingham, Glasgow, Birmingham,
+  Blackpool and Liverpool hold 45. Other configs whose "clears CIE76 45 from
+  every pin" predates the olive and violet pins, with no line under 20, are
+  left as written: the claim describes the search's rule at its run date.
+- **Nishinomiya's JR Takarazuka Line stays #C88800**, a different colour from
+  Kobe's group for the same line, as before this change: #C88800 sits 7.6
+  from Kobe's Shintetsu Ao Line, under the hard floor, so the group cannot
+  take it. For the owner.
+- `docs/data_sources/united-kingdom.md`'s Sheffield row names the new yellow.
+  Maps re-rendered and checked on the branch, then reset: the batch
+  re-renders every map after the merge.
+
+### 2026-10-07 - The owner's calls on the pin colours and the back links: a region button in every map, eight legends naming their licensed slices, Japan's legend, Ottawa stays magenta (owner)
+
+- **Decided (owner): a city page's region link is a button inside the map,
+  beside "Global View".** The rejected option was a Streamlit link above
+  the title, which would have needed no re-render but would not sit beside
+  the button. The map reads the link and its words ("← Kansai") from a
+  hidden link that `components.render_city_nav` renders from the city's
+  `region` in `app/cities.py`, in a container of its own
+  (`map-region-nav`) so the map's Cities menu never lists it. A region
+  renamed or a city regrouped therefore needs no map re-rendered, and an
+  older app or a map opened alone leaves the button hidden. Clicking it
+  opens the Overview on that region (`?region=`). Every map re-renders once,
+  at landing.
+- **Decided: on a phone the button row wraps, rather than truncate a
+  region's name.** Measured in a 343 px frame (a 375 px phone): Cities 78,
+  Global View 94 and Dark mode 94 px already filled 278 of the 287 px
+  available, so any fourth button wraps the row to two lines (72 px tall),
+  even "← Kansai" (65 px); the longest names ("← Seoul Capital Area") are
+  129 px. Labels already avoid the button row's live box. The open legend's
+  cap assumed a fixed 56 px clearance, so it now follows the row: the
+  button's script sets `--hm-actions-clear` to the row's bottom plus the
+  same 16 px gap (98 px wrapped), and the cap falls back to 56 px. At
+  desktop widths the row stays on one line (408 px of 854). Rejected:
+  ellipsizing the region name, and an icon-only theme button, which would
+  change every map's existing control to make room.
+- **Decided (owner): eight Retail legends and menus name what their
+  licensed slice holds; the pins stay retail blue.** Measured on each
+  city's clean file: Philadelphia "Food shops, tire and precious-metal
+  dealers" (food 88.5%, tire 5.3%, precious metal 4.8% of 1,529); Boston
+  "Food, liquor and cannabis shops" (61.8, 33.2, 4.9% of 791); New York
+  "Food, secondhand, electronics, tobacco shops" (50.0, 15.8, 10.3, 10.6%
+  of 22,614; also products for the disabled 6.8% and stoop stands 4.7%),
+  which supersedes the 2026-09-21 call to keep its legend broad; Buffalo
+  "Food stores, used-car and secondhand dealers" (76.5, 15.0, 4.9% of 728);
+  Toronto "Vape, secondhand, precious-metal, pawn shops" (45.6, 30.1, 11.2,
+  6.0% of 814, and NO food: the brief had listed it as a mostly-food slice);
+  Seoul, Daegu and Busan "Food, convenience and tobacco shops" (98-99%). At
+  most 44 characters, the length the Japanese legend already shipped at.
+  `layer_label = legend_label` in each of the six modules.
+- **Decided (owner): the Japanese legend reads "Food shops (no general
+  retail is published)"** (was "Food retail (...)"), so legend and menu
+  ("Food shops") name the same olive meaning; Thessaloniki's module copies
+  it. Ottawa's single food layer stays magenta with its "Restaurants and
+  food shops" legend.
+- **Verified:** Kyoto rendered with the button and shown in the lean app:
+  at desktop one row ("← Kansai" 79 px), the hidden region link absent from
+  the Cities menu and invisible on the page, and a click opened the
+  Overview on Kansai; at 375 px the row wrapped to 72 px and the legend cap
+  measured 528 px (650 - 24 - 98). Liepaja, Birmingham, Hiroshima and Osaka
+  re-rendered with the new chrome. `check_map_markup.py` 0 problems
+  (legends intact); `check_provenance.py`'s invariants and the legend clamp
+  pass.
+
+### 2026-10-07 - Back links beside "Global View": the reference pages return to the city or region the reader came from; the Overview opens on a region in its link (owner)
+
+- **Decided: a reference page learns its reader's origin from `?from=`,**
+  carried in every link into About the Data, What Is Excluded, Why the Maps
+  Differ and Required Notices the way `?country=` already is: from a city
+  page the city (its footer row and its two country links), from the
+  Overview the region shown. Each of the four pages opens with "← Global
+  View", then "← Back to <city or region>", then its links to the others,
+  which forward the same origin; About the Data's in-page country links keep
+  it too. A bookmark, an unknown name, or the Global region shows "← Global
+  View" alone. One key serves cities and regions because no name is both
+  (176 cities, 31 regions, 2026-10-07). Helpers in `app/components.py`
+  (`back_origin`, `from_params`, `render_back_link`,
+  `render_reference_nav`); `render_site_notices()` takes `origin=`.
+  Rejected: `st.session_state` as the carrier, which a reload, a new tab or
+  a shared link loses.
+- **Decided: the Overview opens on `?region=` and writes the region shown
+  back to the URL** (none for Global), so a reload or a shared link returns
+  to it. The link is applied only when it changed since the page last wrote
+  it, or when the radio has no state (Streamlit drops it when the reader
+  leaves the page), the rule `select_country()` already follows: a click
+  updates the radio before the rerun while the URL still holds the old
+  region.
+- **Verified with one local render (lean venv):** `/?region=Kansai` opened
+  on Kansai with its footer links carrying `from=Kansai`; a click on
+  Kyushu-Okinawa moved the URL and held; its "Why the maps differ" link
+  showed "← Back to Kyushu-Okinawa", which reopened the Overview on that
+  region; Kyoto's "Where this data comes from: Japan" opened
+  `?country=Japan&from=Kyoto` with "← Back to Kyoto"; `/Required_Notices`
+  with no origin showed "← Global View" alone. No exceptions.
+  `check_deploy_imports.py` (clean clone at 4ed2137e) and
+  `check_macro_labels.py` (31 regions x 3 widths): 0 problems.
+- **Open: the city pages' link.** A city page shows no Streamlit "Global
+  View" (map-only navigation); its "Global View" is a button inside the map,
+  so a link beside it needs `pipeline/map_common.py` and every map
+  re-rendered, which the assessment had not counted. Brought to the owner,
+  who chose the button in the map (the entry above).
+
+### 2026-10-07 - One pin colour per meaning: food shops olive, shops and services violet, a refuse-both guard, three line colours moved (owner)
+
+- **Decided: a bucket's pin colour follows what it MEANS in its taxonomy,
+  not its name.** Measured on this branch's 176 maps (the colour agent's
+  `evaluate.py`, re-run 2026-10-07): retail blue was drawn for general
+  retail, for food shops only (50 maps: the 30 Japanese food registers,
+  Thessaloniki, the ten UK FSA cities, Antwerp, Ghent, Stockholm,
+  Goteborg, Bucharest, Hong Kong, Minneapolis, Pittsburgh,
+  Kitchener-Waterloo) and for shops and services together (6: Amsterdam,
+  Rotterdam, Den Haag, Riga, Liepaja, Daugavpils). Food shops are now olive
+  #737a00, shops and services violet #7e57c2; Retail blue, Food service
+  magenta and Personal services green are unchanged. The bucket keeps its
+  name in every count; a taxonomy states its meaning in `PIN_MEANINGS`
+  (`{"Retail": "Food shops"}`), and `pipeline/taxonomies/__init__.py`'s
+  `MEANING_COLOURS` and `pin_colours()` swap the colour in. Fourteen
+  modules declare one. Every measured value is in the `MEANING_COLOURS`
+  comment. Rejected: a fourth bucket, which would have changed every
+  count, macro fact and continuity check for a colour.
+- **Decided: the renderer refuses a map that draws violet beside blue.**
+  Violet sits CIEDE2000 3.1 from Retail blue under deuteranopia (7.7
+  under protanopia). `map_common.REFUSED_TOGETHER` and
+  `_refuse_colours_together()` raise, naming the recorded backup: teal
+  #37786e for Shops and services site-wide, with a dark outline ring on
+  that layer (weakest pair Retail under tritanopia, 11.0). The ring is
+  built and unused: `add_pin_layer(outline=...)`, fed by
+  `MEANING_OUTLINES` (empty); with no outline every map's markup is byte
+  for byte as before (tested in the session: the default stroke string is
+  unchanged, a set outline changes only `color` and `weight`).
+- **Decided: `check_line_colours()` compares a map's lines only with the
+  pin colours that map draws**, so it now runs after the pin layers are
+  built. Paris's #6E6E00 (6.6 from olive) and Ostrava's #688008 (8.1)
+  would otherwise fail on a colour neither map shows. The line-against-line
+  half still runs when no pins are drawn. Its printout names a bucket by
+  its layer name ("vs Food shops", not "vs Retail").
+- **Decided: three line colours moved off olive, by the smallest step that
+  clears it by 12** (two points over the hard floor), under each city's own
+  search rules: 3:1 on both map pages, CIE76 45 from the other pins the map
+  draws, 18 from lines within 500 m (Osaka: from every line, its own rule)
+  and 10 from every line. Hiroshima's Ujina Line #607808 (8.6 from olive)
+  to #587808, a shade darker (moved 3.6); its Miyajima Line #788028 (9.6)
+  to #788430 (moved 3.0); Osaka's Uemachi Line #8A8A24 (8.0) to #9C9830
+  (moved 5.9; nearest line Nankai Koya 18.1). Two of the three are a
+  touch LIGHTER, not darker as first proposed: darkening Ujina and
+  Miyajima ran into the Eba Line (#586818) and the 3:1 floor on the dark
+  page, and darkening Uemachi needed a move of 11.9 to clear olive. The
+  Ujina search first returned a move of 18.8, because it held the line 45
+  from Personal services green, which Hiroshima does not draw; measured
+  against the drawn pins only, 3.6. Hiroshima's closest pair is now 10.2
+  (Hakushima / Miyajima; was 10.6, Ujina / Miyajima), within 500 m still
+  19.4. Nine of Hiroshima's twelve lines and twelve of Osaka's 34 sit
+  below 45 from olive, recorded in each config as a trade. Every other
+  food-shop map's lines clear olive's hard floor.
+- **Decided: the layer menus say what the legends say.** `layer_label =
+  legend_label` added to fsa_businesstype (10 cities), romania_dsvsa
+  (Bucharest), minneapolis_inspection, pittsburgh_inspection,
+  kitchener_waterloo_inspection (both its renamed layers), and to
+  ottawa_inspection and palma_restauracio for their food layers. Berlin's
+  "Personal services (partial)" legend beside a "Personal services" menu is
+  left: the qualifier is a coverage note, not a different name. Zurich's
+  "Licensed shops" (petrol stations and shops licensed under its
+  Gastwirtschaft register) stays blue: not food shops only.
+- **Decided: Madrid's map step reads the shared palette.** It carried its
+  own copy of the three colours for its early line check; it now takes
+  `pin_colours()` of its taxonomy, so a palette change cannot leave it
+  behind. `scripts/line_colour_search.py` likewise searches against the
+  city's own pin colours (olive included for a food-shop taxonomy).
+- **Verified on the branch, outputs not landed in full:** render-only for
+  Liepaja (violet), Birmingham (olive, menu "Food shops"), Hiroshima and
+  Osaka (olive, moved lines) and Paris (no drift; its churn reverted).
+  Normalized diffs show only pin colours, the menu name and the moved line
+  colours. `check_map_markup.py`: 176 maps, 1,020 labels, 0 problems.
+  `check_no_em_dashes.py` OK. The full re-render waits for landing.
+
+### 2026-10-07 - The macro_facts.json write guard
+
+- **`scripts/check_macro_facts.py --write` now refuses, exits 1 and writes
+  nothing when `data/` is missing or when a city still in `app/cities.py`
+  would lose the storefront count HEAD's `app/macro_facts.json` holds for it.**
+  On 2026-10-07 `scripts/regen_generated.py` ran in the `europe-split`
+  worktree, which had no `data/` junction: all 170 cities were skipped as
+  "no processed data here", `{"storefronts": {}}` was written (170 counts ->
+  0), regen reported "rewritten app/macro_facts.json" with exit 0, and the
+  empty file was committed. `app/label_competition.py` ranks the macro map's
+  labels by those counts, so it ran on empty counts until the file was
+  restored. A skipped city is correct for the check (a fresh checkout names
+  it and passes the rest); for `--write` it can only mean missing inputs.
+  The refusal names the missing junction, the shared folder's absolute path
+  (from `git rev-parse --git-common-dir`) and the `mklink /J` command, and
+  `regen_generated.py` reports it as `FAILED` and exits 1, which it already
+  did for any generator that exits non-zero. The yardstick is HEAD's file,
+  not the one on disk, so a shrunken file left by an earlier run cannot pass
+  the next one; the disk file is the fallback only when git cannot answer.
+  Rejected: (1) a plain "fewer entries than committed" count test, which
+  would also block a city removed from `app/cities.py` (a removal request,
+  a rename); the guard compares only cities still listed, so a removed
+  city's count drops without tripping it; (2) carrying the committed count
+  over for a skipped city, which would publish a number no one re-measured;
+  (3) a guard in `regen_generated.py` alone, which leaves a direct `--write`
+  unguarded. The check mode (the pre-push hook) is unchanged. The write
+  also passes `newline="\n"`, so a direct `--write` no longer leaves CRLF.
+  Verified: with no `data/`, both `check_macro_facts.py --write` and
+  `regen_generated.py` exit 1 and leave `app/macro_facts.json` unmodified;
+  with an empty `data/` folder, the write refuses (0 of 170, all listed as
+  missing); with the junction in place, `regen_generated.py` reports all
+  seven generated files "current", exit 0. `app/ring_shares.json`'s
+  generator reads the committed maps in `outputs/`, not `data/`, so it has
+  no such hazard.
+
+### 2026-10-07 - The foundation's five optional address fixes landed (owner, "do the address fixes")
+
+- **Four switches added to `japan_register.WAVE5_RULES` (on for new cities, off for the 34 built) and one config key, on the owner's word relayed by Staging.** Each is followed by the Minato control (98.0 / 0.2 / 1.8) and `drift_check.py` over the 34 built Japanese cities (zero drift). Measured on each city's cached files, before and after:
+  - `bracket_aza`, Gifu's `鷺山(向井町)` for MLIT's 鷺山字向井町: its food permits read 8 unplaced → 2, and its notifications 6 → 3, all 鷺山(向井町) rows placed. The rest (鷺山南 and others) are names MLIT's files do not hold.
+  - `chiwari`, Morioka's `川目第1地割` for MLIT's 川目字第一地割: MHLW's rows 8 unplaced → 5, all three 川目 rows at the block (the brief counted 4 on its filter). The barber register's 乙部大字黒川第9地割 is now read as 地割 but MLIT keys it otherwise; it stays unplaced.
+  - `chome_union`, Mito's 宮町 and 泉町 with no number (MLIT keys only their 丁目): unplaced 35 → 29, at the mean of the town's 丁目 centroids, tier chōme.
+  - `no_dropped`, Matsumoto's 里山辺湯原 for MLIT's 里山辺字湯の原, only where one MLIT town reads so without の and 字: the beauty register's unplaced 3 → 2, at the 小字 centroid.
+  - `"town_aliases": {"八雲村": "八雲町"}` in Matsue's `japan.CITIES` entry at build, its old village name: the laundry row reaches 八雲町東岩坂's centroid (unplaced 3 → 2). The key is per city, since an old municipality's name is one city's history.
+- Rejected: a shared old-municipality table (only one row in one city asks for it).
+
+### 2026-10-07 - The Japan foundation: every shared-code rule of the 58 Japanese briefs landed once, built maps unchanged
+
+- **Landed in `pipeline/countries/japan_register.py`, `japan_step2.py`, `japan.py` and `pipeline/taxonomies/japan_eigyo.py`, in four groups, each followed by the Minato control (98.0 / 0.2 / 1.8 every time) and `drift_check.py` over the 34 built Japanese cities with `--jobs 3` (zero drift every time, about 3.5 min, peak 5.0 GB).** The checklist below names each rule's briefs. Group A's first run drifted Hiroshima's and Toyama's maps with every count unchanged: the circled-numeral strip ran in `_head`, which `xlsx_rows` applies to every CELL, so `㉕ そうざい製造業` lost its number. It moved to header cells only (`_header`), and both cities read zero drift.
+- **Rules that touch no built map run everywhere** (a scan of the 34 built cities' raw rows found each trigger 0 times): 自動車以外 is no vehicle, the header circled numeral, the `NN:` and `?` type prefixes, 米殻類, the LinkData reader, the slash and Shōwa wareki forms, and the briefs' address, name, form and operator column spellings.
+- **Rules that would move a built map are switches, `japan_register.WAVE5_RULES`.** A city outside `japan.BUILT_BEFORE_FOUNDATION` reads `ALL_RULES` by default, and `japan.py` refuses one that switches a rule off without a reason in `"rules_off"`. That includes the briefs' `"rules": WAVE2_RULES`, which predates the foundation. Rejected: one global switch per rule with each built city opted out by hand (34 entries to keep in step as rules are added).
+- **Raising checks for the next city:** step 2 stops a new city whose source reads no address, no trade name, no food type, or an operator-like column `operator_cols()` does not compare (`config.NOT_OPERATOR` records one judged otherwise), and one whose permit term has no `config.TERM_AS_OF`. These are the traps Hirakata, Gifu, Tsu and Neyagawa found by hand.
+- **Call 158, read with the earlier calls (precedent, process change 1):** a combined cell naming a public restaurant form stays Food service unless it names 給食 or 旅館. The vehicle, stall, hostess, entertainment, vending and mail-order exclusions also keep winning, each its own earlier owner call. Only the 仕出し and the deli and shop forms give way. On Fujisawa's cached lists that returns 70 catering and 30 deli rows (the brief: 69 and 27 on a 312-row filter; 316 here).
+- **The owner's no-frequency-floor call (calls 46 and 86) added to the japan-city skill's standing calls** on Cleanup's relay of the owner's word; skill text only, no code (N02 has no timetable to check).
+- **Each brief's figure reproduced on its cached file:** Uji 55.0% to 92.7% at the block (1,406 rows, exactly); Ichinomiya's barbers 82.3% to 93.3% (brief 93.0%); Takatsuki 19 unplaced to 3 (exactly); Okazaki 86.6% to 91.5% with O1 (92.7% in the brief with its city-local O2); Aomori 82.3% to 92.3%; Ōita's 301 withheld addresses and Aomori's 1,284 全域 rows exactly; Kure's 7 late starters (3 restaurants and 4 others); Tottori's four towns cut by address, 640 open rows (the brief: 644).
+
+### 2026-10-07 - Gimpo built: the Gimpo Goldline on SEMAS's register, its own page (abroad-batch)
+
+- **Privacy verdict: publish.** `check_personal_exposure.py gimpo`: PASS, 0
+  of 13,398 rows show a Korean personal name at a residential address; 11
+  withheld by step 2's Korean pass (9 of them inside a ring). SEMAS has no
+  owner or phone column.
+- **Gimpo built on SEMAS's register and the Gimpo Goldline, page 202.**
+  Gimhae's pipeline (code-keyed register, one Overpass query) with Gimpo's
+  config: 시군구코드 41570 picked 25,160 rows -> **13,398 storefronts**
+  (Food service 6,112, Retail 5,512, Personal services 1,774), exactly the
+  brief's screen; 11 personal names at a residential address withheld; out
+  by name: hostess bars 139, staff canteens 44, household fuel dealers 10,
+  dance halls 4. OSM boundary relation 2409165 (김포시), **295 km²**, gated
+  285-305 (the brief's 277 is the land figure). The Goldline (ref
+  `김포 골드라인`, light_rail, OSM's #957326, CIE76 62.9 from the nearest
+  pin color) drawn to both ends: **9 stations in Gimpo**, 김포공항 (Seoul)
+  in `excluded_stations.csv`. Gate 3 exact on the whole line, 10, against
+  English Wikipedia's infobox (secondary, as Ansan and Uijeongbu). Median
+  spacing 1,459 m (the brief 1,457), standard rings; the light-rail test
+  passes (own underground track, every 6 minutes at midday per the brief's
+  timetables, spacing above 550 m). **7,187 of 13,398 (53.6%) in a ring**
+  (the brief's 53.4%). Not drawn, each with no station in Gimpo: Lines 3, 5,
+  9 and Incheon Lines 1 and 2 (AREX and the Seohae Line are `route=train`
+  and never queried). The tunnel share was not measured (the drawn geometry
+  carries no tunnel tags); the light-rail test does not need it. Step 2
+  measured 0.33 GB. Files: `pipeline/gimpo/`, `app/pages/202_Gimpo_Heatmap.py`,
+  `app/cities.py`, notices 68 and 1, `docs/data_sources/south-korea.md`
+  (three rows), `docs/excluded_categories.md`, `docs/privacy_verdicts.md`,
+  `scripts/check_personal_exposure.py`.
+
+### 2026-10-07 - Siheung built: Line 4, the Suin–Bundang and Seohae lines on SEMAS's register, its own page (abroad-batch)
+
+- **Privacy verdict: publish.** `check_personal_exposure.py siheung`: PASS,
+  0 of 15,206 rows show a Korean personal name at a residential address; 11
+  withheld by step 2's Korean pass (4 of them inside a ring).
+- **Siheung built on SEMAS's register and Ansan's three lines, page 300.**
+  Ansan's step 1 with Gimhae's one-query fetch (Ansan's train-ref clause
+  added) and code-keyed register: 시군구코드 41390 picked 25,119 rows ->
+  **15,206 storefronts** (7,273 / 5,763 / 2,170), exactly the brief's; 11
+  withheld; out by name: hostess bars 287, staff canteens 230, household
+  fuel dealers 35, dance halls 5. OSM boundary relation 2409181 (시흥시),
+  **166 km²** with its tidal flats, gated 158-174. **9 stations**: Line 4 2,
+  Suin–Bundang 4, Seohae 5, 오이도 and 정왕 shared; 114 stations of the
+  three lines outside, listed. Gate 3 exact on the Suin–Bundang Line, 63
+  (Ansan's source); Line 4 and the Seohae Line not gated whole, as Ansan.
+  English names: all 9 resolved from a station object or `name:en`
+  (시흥능곡 and 달월 included), no override needed. Median spacing 1,332 m,
+  standard rings. **6,106 of 15,206 (40.2%) in a ring** (the brief's 41.2%
+  on the probe's points). Line colors are Ansan's: Seohae 29.9 and Line 4
+  33.6 below the preferred 45, recorded, as in Ansan. Not drawn: Lines 1, 2,
+  7 and Incheon Lines 1 and 2, none with a station in Siheung. Step 2
+  measured 0.31-0.41 GB.
+
+### 2026-10-07 - Geneva (Regional) built: TPG's five trams on the canton's business register (abroad-batch)
+
+- **Privacy verdict: publish.** `check_personal_exposure.py geneva`: PASS,
+  0 person-like names at a residential unit of 4,839 pins. Home-based
+  premises are out by type. **The owner's sole-trader rule (call 2,
+  2026-10-04) as built:** a sole trader's trade name is withheld, the street
+  address shown, where it shares a word of three letters or more with the
+  owner's registered name (function words and legal-form tails aside) or is
+  person-shaped (`residence.looks_personal`); a name of unknown legal form
+  (746 establishments whose firm sits outside the canton) only where it is
+  person-shaped; and, on the owner's answer to parked call 2 (2026-10-07), a
+  person-shaped name in office-typed premises whatever the legal form (37).
+  1,130 of 1,490 sole traders' names withheld (974 share a word, 372
+  person-shaped), 144 of unknown form, 37 office-typed: **1,311 in all**. A
+  trade-word filter was measured and rejected: the most frequent words in
+  sole traders' registered names are given names and surnames (marie,
+  jean, silva), so a frequency filter would drop the very words the rule
+  needs. The registered name is read in memory only and never written.
+  The 682 person-shaped names left are incorporated firms' trade names
+  (cafés, salons), commercial information (owner, 2026-10-03).
+- **Geneva (Regional) built, page 301, slug `geneva`.** The canton's REG
+  (SITG Level A; the cached zip of 04.10.2026, sha256 `45aff219...`):
+  establishment rows only; 5,828 home-based, itinerant and market-stand
+  rows dropped canton-wide (in the 12 communes, of storefront codes:
+  itinerant 70, home 62, stands 22); NOGA 2008 through the new closed list
+  `pipeline/taxonomies/geneva_noga.py` (71 kept codes, 15 out, each with
+  its rule; Georgia's module applied to NOGA; traiteurs out on R1, owner
+  call 3; car washes out as a vehicle service); scope by the 12 OSM commune
+  polygons, which the register's `PHYS_COMMUNE` matches on every row.
+  **5,863 storefronts** (Food service 1,862, Retail 2,897, Personal
+  services 1,104), the brief's 5,885 less the 22 stands. Left out by code in
+  scope: vehicle repair 212, other food service 192, the catch-all 112,
+  body shops 83, caterers 63, mail order 57, and smaller. **1,847 company
+  rows** with a storefront code and no establishment row left out and
+  disclosed (call 1; the brief's 1,848). Step 2 measured 0.23 GB.
+- **The trams.** One Overpass query (relations, stop nodes, tram stops,
+  admin_level 8 communes). 10 relations, two per line, all kept. **OSM
+  names many stop positions with TPG's platform letter** ("Bel-Air (A)",
+  "(B)"), so the first collapse gave 102 stations and gate 3 failed on
+  every line; osm_tram's aliases need the target spelling present, so
+  step 1 strips a trailing platform letter for 14 listed stops
+  (`config.PLATFORM_LETTER_STOPS`, stale-checked) before the collapse:
+  **85 stops, gate 3 exact on all five lines** against TPG's own pages
+  (25/30/22/26/31), **81 in the 12 communes** (the brief's figure), tram
+  17's 4 in France listed. Median gap **330 m: halved rings.** TPG's colors
+  as OSM tags them: tram 18 (26.5), 17 (33.9) and 14 (43.8) below the
+  preferred 45, recorded (agency colors, owner 2026-09-21). **4,839 of
+  5,863 (83%) in a ring.** No frequency sentence: no operator timetable
+  was read.
+- **Notice 154 (SITG)**: the CU 5.3.1 source line with the zip's date, a
+  derived-use line on CU 5.3.2's example ("Cartographie réalisée sur la
+  base de Données du Portail SITG"), the conditions linked (CU 5.5), and
+  the project's English modification and no-endorsement sentences (a
+  proposal). The indemnity recorded in `docs/data_sources.md` beside Hong
+  Kong's, Sacramento's and the rest. `record_kind` "National register" for
+  a cantonal business register (the kind CVR and Geostat's are).
+- **Page proposals** (no template covers them): the scope bullet's list of
+  12 communes; the register bullet ("every establishment of an active
+  business, with its activity ..."); "Businesses the register types as run
+  from home, itinerant trades and market stands are left out."; "About
+  1,800 firms registered with no separate establishment are left out too:
+  the register gives them no premises, so a shop cannot be told from a
+  home address."; and the density caveat's second clause on office-typed
+  establishments.
+- **Downstream:** notice 154, **caption**, clearly visible with the card
+  (CU: "de manière clairement visible", no place named); a card that
+  travels without its caption carries the source line on its face. Notice
+  1: rail, communes and stop names from OSM. **Open terms question: none.**
+  New inputs: a city, a taxonomy, notice 154, the Swiss licence rows.
+
+### 2026-10-07 - Bremen built: BSAG's eight trams on the 2022 regional retail survey (abroad-batch)
+
+- **Privacy verdict: publish.** `check_personal_exposure.py bremen`: the
+  survey's public variant has no name, address or person field (step 2
+  stops on any field beyond its six); 2,148 pins show 19 goods-group labels.
+- **Bremen built, page 304** (pipeline by a subagent from the brief; calls
+  13 and 22-27 applied; its landing waits on parked call 1, the CC BY
+  version). The cached survey zip (sha256 checked), through the new closed
+  list `pipeline/taxonomies/bremen_einzelhandel.py` (19 goods-group codes,
+  all Retail, each with an English pin label; an unknown or relabelled code
+  stops step 2): **3,153 shops** with Gemeinde "Bremen", all inside OSM's
+  city polygon; one Delmenhorst-labelled row inside the city line stays out
+  with its municipality (call 23, the Gemeinde field decides). The catch-all
+  "Sonstige EH-Einrichtungen" 94 (3.0%) kept (call 22). `categories`
+  "Retail only" (call 24), `coverage` one_bucket.
+- **Rail.** One Overpass query (overpass-api.de, osm_base 2026-10-07). 46
+  tram relations: 37 kept on refs 1-6, 8, 10 (with short workings), the
+  night lines N1, N4 and N10 not drawn. Three fixes in Bremen's own files: an
+  untagged stop member on lines 2 and 10 dropped (22 m from Gustavstraße's
+  named node; stale-checked); Am Brill (five nodes across 166 m) and Bahnhof
+  Walle folded from per-platform names to BSAG's one name each; **line 8's
+  five centre-loop stops added by node**, since OSM's line 8 relations
+  predate BSAG's timetable change of 2026-08-17 (all five are stations of
+  other lines, so the rings are unchanged; the drawn route through the
+  centre lags OSM, and the page says so). 352 stop positions -> 164 stops,
+  **gate 3 exact on all eight lines** against BSAG's timetable index (call
+  25; BSAG_S26C: 44/33/29/49/14/25/27/32), **154 in the city**, tram 4's 10
+  in Lilienthal listed outside (call 23). Boundary: relation 62559
+  (Stadtgemeinde, AGS 04011000), 326.0 km², gated 310-340 (call 26), never
+  the Land. **Median gap 351 m: halved rings.** Headways from BSAG's line
+  timetables: lines 1, 4 and 6 every 7-8 minutes, 2, 3 and 10 every 10,
+  5 and 8 every 20 (at call 2's floor, drawn). OSM's colors; line 2 is 14.0
+  from the Retail pins, recorded, not moved (Göteborg's precedent).
+  **2,148 of 3,153 (68.1%) in a ring.** A shared-module fix is noted, not
+  made: `osm_tram` could take a "drop this unnamed member" option.
+- **Notice 156 (the Kommunalverbund, CC BY, no version)**: the Quellenvermerk
+  and the licence title exactly as written, linked to the record's licence
+  URL (no CC version claimed), the dataset's title and a link to the file,
+  the changes, no endorsement; the English sentences a proposal.
+- **Page proposals** (the brief's "The page"): the two-figure frequency
+  bullet, the line 8 bullet, "This map shows shops only, not three
+  categories. ...", "The survey dates from 2022. ..." and "Read the density
+  as a 2022 survey. ...".
+- **Downstream:** notice 156, **caption**; a card that travels without its
+  caption carries "Quellenvermerk: Kommunalverbund Niedersachsen/Bremen
+  e.V." and the licence title on its face, and the survey's date on any card
+  (the currency rule). **The CC BY version question is closed** (parked
+  call 1, accepted on the permissive reading, owner 2026-10-07). New inputs: a city, a taxonomy, the "Retail only" value, notice
+  156, the licence row.
+
+### 2026-10-07 - Gelsenkirchen built: four tram lines on the City's premises survey (abroad-batch)
+
+- **Privacy verdict: publish.** `check_personal_exposure.py gelsenkirchen`:
+  no owner, contact or address field reaches the map (the reduced fetch,
+  call 19), 0 contact details in a sign. The sign rule (call 15): 22
+  person-shaped signs proposed by the German shape test, 4 of them found at
+  two or more points and kept as brands, 18 withheld; then **read by eye by
+  the lead session** over every displayed services sign (112) and the
+  two-or-three-word letters-only signs at one location in the food (197)
+  and retail (548) layers: 4 more read as a bare personal name with no trade
+  word (one ambiguous, withheld on Zurich's precedent), kept as keys in
+  `config.PERSON_NAMED_BY_EYE`. A trade word beside a name stays (Zurich's
+  kiosk precedent). **22 signs show the category.** The heuristic's 30%
+  "person-like" is its known artifact on German signs.
+- **Gelsenkirchen built, page 303** (pipeline by a subagent from the brief;
+  calls 15-20 applied). The reduced WFS fetch requests only the fields used
+  (the OGC API ignores `properties`); the services layer moved since the
+  brief (593 rows, 122 uncategorised; the brief corrected and its check
+  green), food and retail identical by id to the 2026-10-04 cache, which is
+  kept. **1,776 storefronts** (Retail 1,322 with 4 car dealers, Food
+  service 346, Personal services 108); 176 uncategorised and 362 services by
+  rule left out; a new services value "Sonstiges" (5) out as the R2
+  catch-all, Liège's precedent. New closed list
+  `pipeline/taxonomies/gelsenkirchen_gewerbe.py`: 67 (layer, category)
+  pairs and 47 retail assortments, raising on an unknown; retail catch-all
+  0.6%.
+- **Scope: the survey's own points**, the OSM polygon (relation 62522, AGS
+  05513000, 104.9 km²) as a check within 100 m (Liège's precedent): 2,313 of
+  2,314 inside, one food row 1 m outside kept.
+- **Rail.** One Overpass query; overpass-api.de answered 504 and kumi.systems
+  answered a bbox form with **OSM data of 2026-06-01** (four months old; the
+  caption gives that date; gate 3 still matches the operators' current
+  timetables, so the stops are current). 10 relations kept; 101, 106, 108,
+  306, 316 and U17 not drawn (no stop or track in the city). 271 stop
+  positions -> 133 stops, **60 in the city**, 73 outside, cut at the city
+  line (call 17); 107 alone serves seven city stops, so no stub question
+  arises. **Gate 3 exact on all four lines** (301 34, 302 54, 107 34, U11
+  23), counted on each timetable's line band, which lists every stop (the
+  departure tables list timing points only). **Median gap 380 m: halved
+  rings.** OSM's colors: 301 and 302 are 15.4 apart (both the operators'
+  blues, sharing Hbf to Musiktheater; labels and legend tell them apart),
+  each 31-42 from the nearest pin, recorded. **1,160 of 1,776 (65.3%) in a
+  ring.**
+- **Page proposals**: the two-operator lines bullet, the caption's OSM date,
+  "Businesses come from the City of Gelsenkirchen's survey ...", the thin
+  personal-services bullet, "176 surveyed businesses with no category are
+  left out.", and the survey-date and survey-reading bullets; `data_age`
+  "Undated survey (earlier files 2024), fetched 2026-10-07" (the brief's
+  proposal).
+- **Downstream:** no notice of its own (dl-de/zero-2.0); the caption
+  credits the City as a courtesy. Notice 1: rail, boundary and stop names
+  from OSM. **Open terms question: none.** BOGESTRA's and Ruhrbahn's
+  timetables were read for counts only, their terms unread. New inputs: a
+  city, a taxonomy.
+
+### 2026-10-07 - Mexico City (Regional) built: four State of México municipios join on DENUE (abroad-batch)
+
+- **Privacy verdict: publish.** `check_personal_exposure.py mexico_city`
+  over 149,980 pins: 0 e-mails and 0 phone numbers in displayed names, no
+  registrant-name column loaded; the one "c/o" (new) is a shop-sign
+  abbreviation; the flagged sign names read by hand with digits masked:
+  one e-mail shape (a veterinary sign the renderer's contact scrub drops)
+  and 42 phone-length digit runs, every one a LICONSA milk-outlet number.
+  32.6% person-like by the heuristic (32.2% before), the known artifact on
+  Spanish shop signs.
+- **Built on the regional-extension skill, the owner's calls 68-72
+  (2026-10-06): all four municipios, Naucalpan kept, OSM boundaries on
+  INEGI codes, the two entidad 15 files approved.** The pipeline by a
+  subagent: a `REGIONAL` switch committed off at zero drift (950afe3b);
+  `pipeline/countries/mexico.py` reads entidad 15's two parts
+  (`DENUE_PARTS`, `denue_urls()`, `denue_members()`; `denue_url("15")` and
+  `denue_member("15")` raise), with **zero drift on Mexico City, Guadalajara
+  and Monterrey** through the change (heavy_job peak 2.41 GB). The parts'
+  members carry no trailing underscore (`denue_inegi_15_1.csv`), against
+  the brief's guess.
+- **Stations 169 -> 180**, none excluded: Ecatepec 5, Nezahualcóyotl 3, La
+  Paz 2, Naucalpan 1 (Cuatro Caminos), each asserted by point in polygon.
+  Boundaries: one Overpass query, relations 5605754, 5606086, 5605964 and
+  5606080, the union 414.0 km² gated 330-520.
+- **Storefronts 280,185 -> 407,628**; the four add 127,443 (Ecatepec
+  58,410, Nezahualcóyotl 36,073, La Paz 11,161, Naucalpan 22,216, before
+  the polygon test). No storefront SCIAN code is new in entidad 15. **In a
+  ring: 135,284 (48.3%) -> 149,980 (36.8%)**; the four municipios 14,379 of
+  127,443 (Ecatepec 11.0%, Nezahualcóyotl 11.9%, La Paz 27.7%, Naucalpan
+  2.8%). The CDMX side moves exactly as the brief measured: 317 enter a
+  ring, 28 change station. Six CDMX rings that cross the city line gain
+  storefronts (Canal de San Juan 1,133 -> 2,022, Santa Marta 848 -> 1,373,
+  and four more); Politécnico's and El Rosario's (an eighth the brief did
+  not list) cross into uncovered municipios.
+- **Entidad 15 rows are tested against the scope polygon; CDMX rows keep
+  the city-alone sanity box**, so the CDMX side is row for row as before
+  (Monterrey's precedent); 21 Naucalpan-coded rows inside CDMX are kept.
+- **Page proposals**: the regional-map bullet and its scope bullet, the
+  "region's" wording in three places, "Most storefronts in the four
+  municipios are beyond a station's reach ...", and notice 8's city
+  sentence naming the four municipios. The display name is "Mexico City
+  (Regional)"; its label scores clear at 375, 768 and 1200 (153.0 px).
+- **Downstream:** an extension always counts: `outputs/mexico_city/`, the
+  registry name, notices 8 and 1, macro facts and ring shares. Notice 8 is
+  unchanged in kind (every page). Regional processed files are in
+  `data/mexico_city/processed/regional/`; fold back on landing.
+
+### 2026-10-07 - Thessaloniki built: Line 1 on the City's active shop licenses (abroad-batch)
+
+- **Privacy verdict: publish.** `check_personal_exposure.py thessaloniki`:
+  the layer has no name field; 6,292 pins show 51 distinct activity labels,
+  0 contact details, 0 person-like names. Step 2 never reads the address
+  fields.
+- **Thessaloniki built, page 302, Greece's first city** (pipeline by a
+  subagent from the brief; every owner call of 2026-10-04 applied as
+  answered). The City's licence layer from the GeoServer WFS only (cached
+  2026-10-04, 8,103 rows, EPSG:2100 reprojected to UTM 34N, geometry
+  agreeing with the layer's own x/y on all 8,102 rows that carry them),
+  through the new closed list `pipeline/taxonomies/thessaloniki_adeies.py`
+  (all 79 activity values decided; catch-all "ANEY" 14 of 8,103, 0.17%):
+  7,137 kept by activity, **7,132 inside the municipality** (Food service
+  3,682, Food shops 2,430, Personal services 1,020). Out: no-counter food
+  323 (canteens 246, owner call 1), recreation 280, wholesale 106, vending
+  86, funeral 61, non-food retail 39, brothels 30 (R3), workshops 19, no
+  activity 15, bicycle rental 7. **5 rows just past the OSM boundary
+  (median 18 m, at most 60 m) dropped**, Florence's precedent for a city's
+  own layer cut by the OSM polygon. Step 2 measured 0.01 GB.
+- **Rail.** One Overpass query (routes, station objects, admin_level 7 and
+  8). Four relations, all drawn as one line, **"Line 1"**, the operator's
+  (THEMA's) station-list heading (call 4; read with the project's user
+  agent, call 8): the base line and the Kalamaria branch, cut at the city
+  line (a 1.30 km stub of the branch inside the city drawn, no station on
+  it). 36 stop positions -> 18 stations; **gate 3 exact**, 18 on the line
+  and 13 in the city, against Elliniko Metro's station pages (call 5) and
+  THEMA's list; the branch's 5 (Nomarchia, 4 m past the line, to Mikra)
+  listed outside. **Median gap 573 m: standard rings**, the spacing rule
+  over the brief's desk 506 m (Palma's 583 m and Buffalo's 594 m kept
+  standard rings); step 1 stops outside 550-620 m. Headways read from
+  THEMA's FAQ (call 7). Boundary: OSM relation 1770680 (admin_level 7),
+  20.82 km² (19.307 official), gated 17.5-21.5. **6,292 of 7,132 (88.2%)
+  in a ring.**
+- **Line color: OSM's red (#FF0000)**, the colour rule's OSM tag; the
+  operator's own map draws the line navy (#0F0A68), 1.13:1 on the dark page
+  and so unreadable there. CIE76 62.3 from the nearest pin.
+- **Macro map:** Thessaloniki left out of Europe's zoom fit
+  (`REGION_ZOOM_WITHOUT`, Bucharest's measurement), its label the default.
+  `categories` "Retail thin" and `coverage` narrowed, Matsuyama's values.
+- **Notice 155 (City of Thessaloniki, CC BY 4.0)**: the credit, the
+  dataset's title linked to its data.gov.gr record, the licence linked, the
+  retrieval date, the changes and no endorsement; the build's draft, a
+  proposal. New `docs/data_sources/greece.md`.
+- **Page proposals** (Matsuyama's shape; no template covers them): the color
+  clause, the branch bullet, the frequency bullet ("about every 3 minutes
+  between New Railway Station and 25th Martiou ... about every 9 minutes on
+  to Nea Elvetia"), the three license-layer bullets and "A dot shows the
+  type of business, never its name".
+- **Downstream:** notice 155, **caption** (CC BY: credit reasonable to the
+  medium; a card that travels without its caption carries the credit and
+  licence on its face). Notice 1: rail, boundary and station names from
+  OSM. **Open terms question: none** (the owner's reading of the portal
+  splash, 2026-10-04, stands; a removal request takes the page down). New
+  inputs: a city, a country, a taxonomy, notice 155.
+
+### 2026-10-07 - Anyang (Regional) built: Gunpo and Uiwang join Anyang's page on SEMAS's codes (abroad-batch)
+
+- **Privacy verdict: publish.** `check_personal_exposure.py`'s own check run
+  on the regional file (`processed/regional/`, its registry entry's path
+  pointed there for the run): PASS, 0 of 23,999 rows show a Korean personal
+  name at a residential address; 42 withheld (Anyang 28, Gunpo 5, Uiwang 9).
+- **Anyang (Regional), the owner's mark of 2026-10-04, built on the
+  regional-extension skill.** A `REGIONAL` switch committed off first and
+  proved at zero drift on the city alone (22a215c9); on, SEMAS keys on
+  시군구코드 41171, 41173 (Anyang's two 구, the prefix's exact rows), 41410
+  (군포시) and 41430 (의왕시): **23,999 storefronts** (Food service 11,331,
+  Retail 8,993, Personal services 3,675; Anyang 15,177, Gunpo 5,868, Uiwang
+  2,954), the brief's figures exactly; out by name: hostess bars 439, staff
+  canteens 89, household fuel dealers 45, dance halls 24. Step 2 measured
+  0.42 GB.
+- **Stations: 7 -> 14**, 106 -> 99 listed outside: Line 1 eight, Line 4
+  seven, Geumjeong shared (Gunpo 6, Uiwang 1), each line's in-scope
+  stations agreeing with its line table (Anyang's stand-in for gate 3).
+  Boundary: one Overpass query for 안양시, 군포시 and 의왕시 into
+  `osm_boundary_regional.json` (relations 2409161, 2409167, 2409184; 59.1,
+  35.9 and 53.8 km2), the union 149 km2 gated 142-156; the city's cache
+  untouched. Median gap 1,443 m, standard rings. **15,799 of 23,999 (65.8%)
+  in a ring**: Anyang 66.1%, Gunpo 86.6%, Uiwang 23.3%.
+- **The rename**: "Anyang (Regional)" in `app/cities.py`, the page (same
+  file, `87_Anyang_Heatmap.py`), notice 68's title and text (Anyang, Gunpo,
+  Uiwang), notice 1, the reference rows. The label widened to 124.6 px and
+  moved right of its dot, the one offset of ten that clears the Seoul
+  Capital Area at 375, 768 and 1200. **Regional processed files are in
+  `data/anyang/processed/regional/`; fold back on landing** (the skill).
+- **Page proposals**: "The map covers Anyang with its neighbors Gunpo and
+  Uiwang, which the same two lines serve."; "The two lines share one
+  station, Geumjeong, in Gunpo."; "Uiwang has one station, at its western
+  edge, so about one of its storefronts in four sits within a ring."; and
+  notice 68's city list with Gunpo and Uiwang.
+- **Downstream:** an extension always counts: `outputs/anyang/`, the
+  registry name, notices 68 and 1, macro facts and ring shares. Notice 68:
+  caption, and the SEMAS card hold applies as before.
+
+### 2026-10-07 - Copenhagen (Regional) built: the Letbane and its eight kommuner, placed on OpenStreetMap's address points (abroad-batch)
+
+- **Placement: OpenStreetMap's DAR address points for all ten kommuner, not
+  Datafordeler (owner, 2026-10-07).** Brief call 66 d assumed "the owner's
+  existing Datafordeler key"; the account was closed on 2026-09-24
+  (`docs/decisions/2026-09-20.md`, "The Datafordeler account is closed"), so
+  the eight `Adressepunkt` files could not be fetched without reopening it.
+  Three options went to the owner: OSM's points for all ten (Aarhus's and
+  Odense's placement, the owner's standing "OSM unless we need the data
+  account, then let me know", 2026-09-27); reopen the account (one source,
+  the brief as written); or a split by area (DAR's points in the two
+  kommuner, OSM's in the eight). **The precedents for a split, read for the
+  owner:** Seattle (Regional) places one register (the Liquor Board's) on
+  King County's address points in King County and Snohomish's in Snohomish,
+  forced because neither file covers the other county; Vancouver (Regional)
+  places New Westminster by its own address points because its register
+  carries none; the UK maps tier by row (the FSA's point, else the
+  postcode's centroid). No map had split by area for convenience when one
+  source covered the whole area, so a split would have set that precedent.
+  The owner: "i'd rather not break precedent if i can afford but if we've
+  already implemented something similar i'd consider it more valid", then
+  "also want to preserve visual integrity (97% sounds good though)", which
+  led to a measured test before choosing.
+- **The test** (one keyless Overpass query of the ten kommuner's
+  `osak:identifier` points, approved in chat: 182,974 points, 12.7 MB, into
+  `data/copenhagen/raw/osm_osak_points.tsv`; counts only, no names): the
+  published central map's 14,922 DAR-placed storefronts -> **14,897 on OSM's
+  points, 25 lost (about 1 in 600), none gained; half moved 0.03 m or less,
+  6 between 5 and 10 m, none further than 20 m**. The eight kommuner: 3,780
+  of 3,907 (96.7%), against DAR's ceiling of 97.0% (117 carry no address
+  id). The owner: "yes go with option 1, build it, state the small losses
+  from OSM, note datafordeler as a returnable option internally". **The way
+  back:** a new free Datafordeler account, IT system and key (15 minutes'
+  propagation; never delete and re-create on a 401), the eight
+  `Adressepunkt` files through `fetch_sources.py`, `PLACEMENT` back to DAR
+  in `config.py`. Not a pending call; recorded so a later reader knows it
+  exists.
+- **Built** on the regional-extension skill: the switch committed off at
+  zero drift (cc9c324e), then on (fe89fcb7), the baseline re-recorded
+  deliberately and zero drift after. Step 2 on the ten CVR codes, generation
+  505 and DAR 761 (Adresse, Husnummer) from the national cache, nothing
+  refreshed: 21,653 in the divisions, 1,806 structurally excluded, 969900
+  dropped on Copenhagen's verdict (762, personally owned 83% against 41%),
+  19,085 storefronts, **18,677 placed (97.9%)**; 12,356 of 12,383 Husnummer
+  ids found as `osak:identifier`. Address shown on 7,452 (personally owned
+  7,381, the v/ marker 21, a store-number name 50). Step 2 measured 0.72 GB.
+  `fetch_sources.py` in regional mode makes no Datafordeler call and writes
+  Aarhus's provenance shape (OSM files' dates, the registers' generations).
+- **Rail.** The Letbane whitelisted on route + ref + `wikidata=Q10655459`
+  (no `operator` tag); **gate 3 exact**, 29 against the operator's 29.
+  Colour `#32ac5c` -> `#34b460` (HSL lightness +0.02, 14.4 from Metro M1's
+  green against OSM's 11.4; Copenhagen's rule: the newer line moves, Oslo's
+  ~13 margin), 16.5 from the Personal services pins, recorded. Station spread
+  at the six interchanges within 400 m (Lyngby widest, 165 m). **146
+  stations -> 101 inside the ten**, 45 outside; 719 m median nearest-
+  neighbor gap, the standard rings. **16,545 of 18,677 (88.6%) in a ring**:
+  Copenhagen and Frederiksberg 94.5%, the eight 65.2% (Rødovre 25%, its one
+  stop 10 m inside its northwest boundary).
+- **Call 66 b, the eight suburban S-tog stations: all IN.** DSB's S-tog
+  timetable (`s-tog-s26.pdf`, valid from 2025-12-14, read 2026-10-07 by a
+  subagent; dsb.dk's timetable index lists no other S-tog PDF), weekday
+  daytime: A every 10 minutes at Brøndby Strand; B every 10 at Brøndbyøster,
+  Bagsværd, Kildebakke, Skovbrynet and Stengården; E every 10 at Sorgenfri
+  and Virum. A does not stop at Sorgenfri or Virum by day (evening only; DSB's
+  Virum page names E as the line there), and OSM's A relations list them as
+  stops. Bx fails the test (every 20 minutes, peaks only), but Kildebakke,
+  its one station of the eight, is on B. **Flag for review time, not
+  asked:** Copenhagen's config and What Is Excluded's rail section say every
+  S-tog line runs every 10 minutes through the day; Bx does not. No station
+  rests on Bx alone, so nothing changes on the map.
+- **Call 66 c applied to Gentofte, Ballerup and Rudersdal as to Albertslund**
+  (the brief's flag for review time): out of the filter, their outer-ring
+  shares disclosed in What Is Excluded.
+- **Privacy verdict: publish.** `check_personal_exposure.py copenhagen` on
+  the regional map: 16,545 pins, no registrant-name field, 0 contact details;
+  4 person-like names at a residential unit, the same 4 as the published
+  city-alone map (run on its committed render for the comparison), none in
+  the eight. The structural rule (personal forms by address) unchanged.
+- **The rename and page.** "Copenhagen (Regional)" in `app/cities.py`
+  (placement 97.9%, `rail_extra` "Both", the blurb with the Letbane), the
+  page (same file), `_DENMARK`, notice 1's list and text, the reference rows.
+  Notices 30 and 31 keep "Copenhagen" in their titles: a nested "(Regional)"
+  breaks the provenance parser (notice 68). Processed files in
+  `data/copenhagen/processed/regional/`; fold back on landing (the skill).
+- **Macro label: 6 more problems in Europe's view** (18 in all, from 12).
+  The pill, 158.5 px against Copenhagen's 85.5, covers Liepāja's marker and
+  overlaps Newcastle (Regional)'s pill at 375, 768 and 1200. Of the ten
+  offsets tried, the built one, above the dot, scores best (the others 21 to
+  33). The same case as parked call 5: Cleanup's europe-split, landing after
+  this batch, separates Copenhagen from Liepāja and Newcastle, so this
+  branch leaves the region tables alone and keeps the offset.
+- **Page and notice proposals for review time:** the lines bullet with the
+  Letbane ("Twelve lines are drawn, ... and Hovedstadens Letbane, the light
+  rail around the city's western suburbs ..."); the covered area with the
+  eight municipalities named; "Rødovre has one Letbane stop, at its northwest
+  edge, so only about one of its storefronts in four sits within a ring.";
+  **the owner's "state the small losses":** "OpenStreetMap lacks a few of
+  the register's points, so about one storefront in 600 in Copenhagen and
+  Frederiksberg cannot be placed and is missing from the map."; the ring
+  share split ("nineteen in twenty in Copenhagen and Frederiksberg, about
+  two in three in the eight suburban municipalities"); the S-tog bullet
+  without "inside the city"; notice 31's last clause, "the points are
+  OpenStreetMap's copies of them" (it named Aarhus and Odense); notice 1's
+  Copenhagen clause with the Letbane and the address points.
+- **The brief corrected**: call 66 d's premise and the placement rows now
+  say what was built.
+- **Downstream:** an extension always counts: `outputs/copenhagen/`, the
+  registry name, notices 1, 30 and 31, macro facts and ring shares, the
+  Visuals card's name.
+
+### 2026-10-07 - Abroad batch: the review list of new page and notice sentences (abroad-batch)
+
+Every reader-facing sentence the batch wrote that no approved template
+covers, quoted word for word as it stands in the file (already written, per
+`docs/city_page_format.md` section 6). Template sentences filled with a city's
+own figures are not listed. **Answer "all approved", or name the numbers to
+reword or drop**; nothing else needs doing for an approval.
+
+**Answered (owner, 2026-10-07, in the build's chat): "all approved".** R1 to
+R45 stand as written, with the notice city lists and the nine What Is
+Excluded sections; every "proposal for review time" flag in this file's
+entries above is settled by it.
+
+**Gimpo (page 202)**
+
+- **R1** (follows Gimhae's not-drawn bullet): "Not drawn: Lines 5 and 9, the
+  Airport Railroad and the Seohae Line, which meet the Goldline at Gimpo
+  International Airport in Seoul. None of them has a station in the city."
+
+**Siheung (page 300)**
+
+- **R2** (Ansan's shared-stations bullet): "Line 4 and the Suin–Bundang Line
+  share Oido and Jeongwang, and the Seohae Line runs on its own track through
+  the east of the city. No other rail line has a station in the city."
+- **R3** (Namyangju's wait bullet): "The Suin–Bundang and Seohae lines run
+  about every 15 minutes by day, less often than Line 4."
+
+**Geneva (Regional) (page 301, notice 154)**
+
+- **R4** (the tram template's scope bullet, with a commune list): "The map
+  covers the **12 Swiss communes the trams serve**: the City of Geneva, Lancy,
+  Meyrin, Carouge, Bernex, Vernier, Onex, Plan-les-Ouates, Chêne-Bougeries,
+  Chêne-Bourg, Thônex and Confignon. Tram 17 runs on into Gaillard, Ambilly
+  and Annemasse, in France, so its 4 stops there are left out."
+- **R5** (the register): "Businesses come from the **Canton of Geneva's
+  business register** (Répertoire des entreprises): every establishment of
+  an active business, with its activity. Restaurants, cafés and bars; shops
+  of every kind; and hairdressers, beauty institutes, laundries and saunas."
+- **R6** (premises types): "Businesses the register types as run from home,
+  itinerant trades and market stands are left out."
+- **R7** (firms without premises): "About 1,800 firms registered with no
+  separate establishment are left out too: the register gives them no
+  premises, so a shop cannot be told from a home address."
+- **R8** (your call 2, office-typed rows kept): "It counts each
+  establishment once, by its main activity, and a few establishments typed
+  as offices, such as a beauty practice in an office building, are counted
+  with the rest."
+- **R9** (notice 154, the English after SITG's prescribed French credit):
+  "Modified by this project: establishments filtered to shops, food and drink
+  and personal services in the 12 communes TPG's trams serve, grouped into
+  three categories and mapped by distance to tram stops, with a trade name
+  replaced by the street address where it is a person's own name; the
+  categories and counts are this project's. Use of the data is subject to the
+  SITG's conditions of use. The État de Genève does not endorse this map."
+
+**Thessaloniki (page 302, notice 155)**
+
+- **R10** (color): "The line's color is OpenStreetMap's, not the operator's."
+- **R11** (the branch): "Only the 13 stations inside the Municipality of
+  Thessaloniki get rings, because the business data covers the city alone.
+  The Kalamaria branch is cut at the city line; its five stations, Nomarchia
+  to Mikra, are listed below."
+- **R12** (frequency): "Trains run about every 3 minutes between New Railway
+  Station and 25th Martiou for most of the day, and about every 9 minutes on
+  to Nea Elvetia."
+- **R13** (the license layer): "From the City of Thessaloniki's register of
+  shops holding an active license, retrieved October 4, 2026. The layer
+  publishes no date of its own, so a dot means a license on file, not a
+  business open today."
+- **R14**: "The register licenses food premises, hairdressers and beauty
+  salons, so shops other than food shops (clothing, electronics, pharmacies)
+  do not appear: the Food shops layer is food retail only."
+- **R15**: "Convenience stores, patisseries, and bread shops and coffee
+  roasters selling coffee to go count as Food shops; canteens inside offices,
+  schools and other premises are left out."
+- **R16**: "A dot shows the type of business, never its name: the register
+  carries no names. The licensed activity is shown in Greek as the register
+  records it."
+- **R17** (notice 155): "Thessaloniki's active shop licenses are from the
+  City of Thessaloniki (Δήμος Θεσσαλονίκης), Ενεργές Άδειες Καταστημάτων,
+  licensed under CC BY 4.0, retrieved October 4, 2026. Modified by this
+  project: filtered to food premises, food shops and personal services inside
+  the Municipality of Thessaloniki, grouped into three categories and mapped
+  by distance to metro stations. The City of Thessaloniki has not reviewed or
+  endorsed this map."
+
+**Gelsenkirchen (page 303)**
+
+- **R18** (two operators in the lines bullet): "Four lines are drawn,
+  **BOGESTRA's trams 301 and 302, Ruhrbahn's tram 107 and its Stadtbahn line
+  U11**, each labeled on the map and in the legend, ..."
+- **R19** (the caption's OSM date): "... the tram lines and their stops from
+  OpenStreetMap, as mapped on **{date}**."
+- **R20** (the survey): "Businesses come from the City of Gelsenkirchen's
+  survey of its shops, food service and services, under the name on each
+  sign."
+- **R21**: "A sign that reads as a person's own name shows the business's
+  category instead."
+- **R22**: "**Personal services are thin on this map.** The survey recorded
+  services mainly in the city's designated shopping centers, so hairdressers
+  and other personal services away from them are missing."
+- **R23**: "176 surveyed businesses with no category are left out."
+- **R24**: "**The survey carries no date.** The city publishes it without
+  one, and its earlier files were labeled 2024, so businesses that opened or
+  closed since then may be missing or still shown."
+- **R25**: "**Read the density as a survey, not a register.** The city
+  records premises chiefly in and around its shopping centers."
+
+**Bremen (page 304, notice 156)**
+
+- **R26** (two-figure frequency): "Trams run every 7 to 10 minutes by day on
+  most lines, and every 20 minutes on lines 5 and 8."
+- **R27** (line 8): "Tram 8's route through the city center is drawn as
+  OpenStreetMap still records it, before BSAG's August 2026 change; its stops
+  are the current ones."
+- **R28** (Göteborg's one-bucket sentence, for shops): "**This map shows shops
+  only, not three categories.** The survey counted every shop, from grocers
+  and bakeries to furniture and DIY stores. So **restaurants, cafés,
+  hairdressers and the like are not on this map**."
+- **R29**: "**The survey dates from 2022.** It counted the shops open between
+  March and September 2022, so shops that opened since then are missing, and
+  some that have closed are still shown."
+- **R30**: "**Read the density as a 2022 survey.** It counts each shop once by
+  its main goods group, whatever its size."
+- **R31** (notice 156, after the Quellenvermerk): "Bremen's shops are from
+  the retail survey Einzelhandelsbestand in der Region Bremen 2022, licensed
+  under Creative Commons Namensnennung (CC-BY). This map has been changed from
+  the source: its points are filtered to the City of Bremen, grouped into one
+  category and mapped by distance to tram stops. The Kommunalverbund
+  Niedersachsen/Bremen e.V. has not reviewed or endorsed it."
+
+**Anyang (Regional) (page 87)**
+
+- **R32**: "The map covers **Anyang with its neighbors Gunpo and Uiwang**,
+  which the same two lines serve."
+- **R33**: "The two lines share one station, Geumjeong, in Gunpo. No other
+  rail line has a station in the three cities."
+- **R34**: "Uiwang has one station, at its western edge, so about one of its
+  storefronts in four sits within a ring."
+
+**Mexico City (Regional) (page 15, notice 8)**
+
+- **R35**: "**This is a regional map, not a city one.** Líneas A and B run
+  east and north out of Ciudad de México into the State of México, and Línea
+  2 ends just across the city line at Cuatro Caminos, so the map also covers
+  the four municipios those stations stand in: Ecatepec de Morelos,
+  Nezahualcóyotl, La Paz and Naucalpan de Juárez."
+- **R36**: "Stations and businesses across Ciudad de México and those four
+  municipios are included. The rest of the State of México has no station on
+  these lines and is not covered."
+- **R37**: "**Most storefronts in the four municipios are beyond a station's
+  reach.** Línea B runs along Ecatepec's western edge and Naucalpan's one
+  station, Cuatro Caminos, sits on its border, so the region's share of
+  storefronts within a ring is lower than Ciudad de México's alone."
+- **R38** (your call 3): "398 storefronts that DENUE files under
+  Nezahualcóyotl are left out: they sit just east of the municipio's boundary
+  as OpenStreetMap draws it, more than 5 km from any station."
+
+**Copenhagen (Regional) (page 27, notices 31 and 1)**
+
+- **R39**: "Twelve lines are drawn, **Metro lines M1 to M4, S-tog lines A, B,
+  Bx, C, E, F and H, and Hovedstadens Letbane**, the light rail around the
+  city's western suburbs, ... Two S-tog lines, A and F, and the Letbane are
+  shown a shade lighter so they stay distinct from the Metro lines whose
+  colors they nearly share."
+- **R40**: "The map covers the **municipalities of Copenhagen and
+  Frederiksberg** and the **eight suburban municipalities the Letbane
+  serves**: Lyngby-Taarbæk, Gladsaxe, Herlev, Rødovre, Glostrup, Brøndby,
+  Vallensbæk and Ishøj."
+- **R41**: "Rødovre has one Letbane stop, at its northwest edge, so only about
+  one of its storefronts in four sits within a ring."
+- **R42** (your "state the small losses"): "OpenStreetMap lacks a few of the
+  register's points, so about one storefront in 600 in Copenhagen and
+  Frederiksberg cannot be placed and is missing from the map."
+- **R43**: "**About nine storefronts in ten sit within a station ring**:
+  nineteen in twenty in Copenhagen and Frederiksberg, about two in three in
+  the eight suburban municipalities."
+- **R44** (the caption, Aarhus's shape): "...; address points from
+  OpenStreetMap, fetched **{date}**."
+- **R45** (notice 31's last clause, which named Aarhus and Odense): "...;
+  the points are OpenStreetMap's copies of them."
+
+**Mechanical, listed for completeness:** the city lists of notices 1 (rail
+geometry: each new city's clause in the existing shape), 8 (Mexico City "and
+four neighboring State of México municipios (...)") and 68 (Anyang, Gunpo,
+Uiwang, Gimpo, Siheung); and the nine What Is Excluded sections (Gimpo,
+Siheung, Geneva (Regional), Thessaloniki, Gelsenkirchen, Bremen, Anyang
+(Regional), Mexico City (Regional), Copenhagen (Regional)), written in the
+per-city shape of their siblings.
+
+### 2026-10-07 - Abroad batch: page proposals, numbers and downstream (abroad-batch)
+
+- **Page sentences outside a template, proposed for review time.** Gimpo:
+  "Not drawn: Lines 5 and 9, the Airport Railroad and the Seohae Line, which
+  meet the Goldline at Gimpo International Airport in Seoul. None of them
+  has a station in the city." (Gimhae's approved not-drawn bullet with
+  Gimpo's lines.) Siheung: "Line 4 and the Suin–Bundang Line share Oido and
+  Jeongwang, and the Seohae Line runs on its own track through the east of
+  the city." (Ansan's shared-stations bullet, filled) and "The Suin–Bundang
+  and Seohae lines run about every 15 minutes by day, less often than Line
+  4." (Namyangju's approved wait bullet, filled; the brief's disclosure of
+  the borderline lines.)
+- **Page and notice numbers claimed for the batch:** pages 202 (Gimpo), 300
+  (Siheung), 301 (Geneva), 302 (Thessaloniki), 303 (Gelsenkirchen), 304
+  (Bremen); notices 154-156 (Geneva, Thessaloniki, Bremen). Staging recorded
+  the claim on master the same day.
+- **Downstream (`docs/session_roles.md`).** Gimpo and Siheung: notice 68
+  (SEMAS) **caption** (the terms prescribe a source credit with no wording
+  or place); notice 1, rail, boundary and station names from OpenStreetMap.
+  **Open terms question: the SEMAS card hold** (whether SEMAS's permission
+  reaches social posts), inherited, so both stay off cards and public pieces
+  until the owner rules. New inputs: two cities, notice 68's and notice 1's
+  city lists.
+
+### 2026-10-07 - Distinct line colours where one operator's lines sat close (owner's call 199)
+
+- **Each line of one operator re-seeded with its own hue, then the colour search re-run (owner: "yes distinct colors").** Higashimurayama takes set B: Kokubunji #287888 to #C88800, Seibuen #7898A8 to #9040C0, Tamako #788090 to #A06030, Haijima #506860 to #805878 (Shinjuku #08A0C0 and Musashino #F05820 kept); closest pair 18.3 to 33.2. The Keio Line takes one violet, #B030D0, in Tama, Chōfu, Fuchū and Hino; the Keio Sagamihara Line keeps #F000B8 (built Kawasaki's); the Keibajo Line #806040, the Dobutsuen Line #287888; each Keio pair now 31 to 101 apart (was 19.4, Tama's 11.1). Tachikawa's Ome Line #C01800 to #E060D0, 94.1 from the Chuo Line (was 18.1). Keio and JR East publish no per-line colour here (one magenta, one orange), so those seeds are the project's guesses, said in each config. Steps 1 and 3 re-run; stations and counts unchanged.
+- **Same hue, different lines, on neighboring pages:** Higashimurayama's Tamako Line (#A06030) is Tokorozawa's Leo Liner, and its Seibuen Line (#9040C0) Tokorozawa's Sayama Line; none of these is drawn in both cities. The Haijima Line is #805878 in Higashimurayama and #08A0C0 in Higashiyamato and Tachikawa, since #08A0C0 is Higashimurayama's Shinjuku Line. For a look at review time.
+
+### 2026-10-07 - Hino built
+
+- **Hino built on the Tama ledgers and MHLW's Tokyo filings: 1,344 storefronts (Food service 623, Retail 448, Personal services 273) at 10 stations, 1,173 within a ring (87.3%).** The brief's 19 checks held. Page 221, notice 168. Rows in the city: food permits 981, notifications 466, barbers 65, beauty 171, laundry 42, MHLW 285. Out: 6 area-wide; not a storefront 344 (institutional catering 217, no rule 73, temporary or mobile 23, 仕出し 12, vending 10, hostess venues 7, mail order 1, linen supply 1). The join: block 1,612, town-chōme 44, own 3, unplaced 1 (the brief's 高幡3丁目); on the map 97.1% at the block. 176 MHLW rows repeat a ledger premises; MHLW adds 19 pins. 139 repeats. 菓子 / そうざい 150, 3 factory-like (2.0%).
+- **Shares, the brief's exactly:** restaurants 804 of 1,035 (77.7%), **633 at 2025-03-31 (61.2%)**; barbers 65 of 70 (92.9%); beauty 165 of 177 at the date (93.2%); laundry 40 of 41 at the date (97.6%; 42 rows against 41 in all, 102.4%).
+- **Rail: four lines**, the Keio Line (4 inside), the Keio Dobutsuen Line (2, wholly inside), the Tama Toshi Monorail (5) and JR East's Chuo Line (2: 日野, 豊田; name: parked call 5); 高幡不動 one group across three lines, 多摩動物公園 across two. Gate 3 exact. 16 stations beyond (八王子市 7, 立川市 5, 多摩市 2, 府中市 2). Median gap 1,146 m, standard rings. One tie settled: 多摩動物公園 as "Tama-Dobutsukoen" (Tokyo's title-case ties). Colours: Keio #F000B8 and Dobutsuen #E858D0 (Fuchū's pair; 19.4 apart, look at the render), monorail #E07800, Chuo #F05820. The Dobutsuen Line's label on its 2 km branch needs the review-time render.
+- **Census control 1.70.** **Privacy verdict: publish** (the Japan pass prints 0; the brief's 2 food rows with an operator's own name have cooperative operators, not persons under the coop rule).
+
+### 2026-10-07 - Tachikawa built
+
+- **Tachikawa built on the Tama ledgers and MHLW's Tokyo filings: 3,392 storefronts (Food service 1,798, Retail 954, Personal services 640) at 12 stations, 2,988 within a ring (88.1%).** The brief's 20 checks held. Page 220, notice 167. Rows in the city: food permits 2,549, notifications 933, barbers 89, beauty 501, laundry 63, MHLW 532. Out: 11 area-wide, 3 permit-condition vehicles, 1 city name alone, 2 closed, 1 not a premises; not a storefront 660 (institutional catering 203, hostess venues 195, no rule 146, vending 42, inside accommodation 27, temporary or mobile 27, 仕出し 17, linen supply 2, entertainment 1). The join: block 3,849, town-chōme 115, own 25, unplaced 0; on the map block 3,282 (96.8%), town-chōme 108, own 2. MHLW rows dropped for a ledger premises: 120 (permits), 287 (notifications). 215 repeats; 1 name withheld. 菓子 / そうざい 213, 15 factory-like (7.0%).
+- **Shares, the brief's exactly:** restaurants 2,208 of 2,599 (85.0%), **1,652 at 2025-03-31 (63.6%)**; barbers 81 of 91 at the date (89.0%); beauty 448 of 504 (88.9%); laundry 60 of 72 (83.3%).
+- **Rail: five lines**, the Tama Toshi Monorail (7 inside), the Seibu Haijima Line (3), JR East's Nambu (2), Chuo (1) and Ome (1) lines, the last two JR stubs drawn as cut at 立川 (one group across three JR lines; 立川北, 立川 and 立川南 three stations). Gate 3 exact for Seibu and JR; the monorail is left out of GATE3 (step 1 reads 8: 玉川上水's Seibu platform, inside here, collapses with the monorail's, 16 m outside; Higashiyamato's case mirrored). 19 stations beyond (日野市 4, 昭島市 4, 国立市 3, 東大和市 3, 福生市 3, 国分寺市 1, 小平市 1; 拝島 reads 福生市 by its group's centroid). **Median gap 568 m**, 18 m over the spacing rule's "about 550 m": standard rings, as Most's config reads the rule (no city halved above 550 m). Colours keep the siblings' (monorail and Seibu Higashiyamato's, Nambu Fuchū's, Chuo Tokyo's #F05820); the Ome Line moved to #C01800, 18.1 from the Chuo Line at 立川, just over the floor. The short Chuo and Ome stretches' labels need the review-time render.
+- **Census control 2.11** (the brief 2.10); 2.04 without 弁当屋 pins, 1.88 by distinct address (the 緑町 and 泉町 complexes license each counter). **Privacy verdict: publish** (the Japan pass prints 0; 1 name withheld).
+- **A blank trade name shows a blank pin label** (a notification with no 屋号): Hino 1, Tachikawa 1, Chōfu 2, Tama 3, Fuchū 5, twelve pins. For review: the shared step could show the permit type, as the name rule does; not changed here. (Corrected at the fold, 2026-10-08: the draft listed ten, with Higashiyamato 1 and Nishitōkyō 1 in place of Hino and Tama; twelve is the count of empty names in the rendered maps at `925c68c6` and again at `60134a78^`, none on master since `60134a78`, where `map_common.shown_name` shows the permit type instead.)
+
+### 2026-10-07 - Kasukabe built
+
+- **Kasukabe built on Saitama Prefecture's lists, as Ageo (Regional)'s: 2,838 storefronts (Food service 1,471, Retail 664, Personal services 703) at 8 stations, 1,983 within a ring (69.9%).** The brief's 11 checks held. Page 217, notice 164. Health centre 03春日部. New-law layer 2,438 rows (1 past term, 10 late starters). Call 171: layer 204, list 513, one per premises and type 557, in term 399, renewed 2, **kept 397**; the brief's 391 / 8 / 383 differ because the brief keyed old-law permits by (number, type), which merges 8 pairs of different premises sharing a number (指令春保第1-68号 at the AEON Mall and in 薄谷), and counted renewals whose new-law permit has not yet started (call 172 drops those, so the old-law permit in term stays). Food service 1,488 rows against the brief's 1,483. Registers: barbers 188, beauty 448, laundry 79. Not a storefront 491 (vending 183, no rule 160, institutional catering 147, mail order 1). The join: block 2,948, town-chōme 15, own 73, unplaced 11 (3 AEON Mall shops: parked call 4; 6 register rows written 備後東西, as the brief read; 2 more); on the map block 2,755 (97.1%), own 68, town-chōme 15. 198 repeats; 0 names withheld. 菓子 / そうざい 150, 14 factory-like (9.3%).
+- **Rail:** Tobu's 伊勢崎線 as the Tobu Skytree Line (4 inside) and 野田線 as the Tobu Urban Park Line (5), 春日部 one group. Gate 3 exact (4, 5). 9 stations beyond (野田市 3, さいたま市岩槻区 2, 宮代町 2, 越谷市 2); `N03_NEIGHBOR_PREFS = ("12",)` names Chiba's. Median gap 1,802 m, standard rings. Colours: Skytree #08A0C0 (Sōka's), Urban Park #60A000 (parked call 1); pair 89.7.
+- **Census control 2.09** (the brief's), 1.57 by distinct address. **Privacy verdict: publish** (the Japan pass prints 0).
+- **After call 202 (`default_joined`, the same day):** the AEON Mall's own layer point is no longer refused as a default; 3 rows placed (2 pins): **2,840 storefronts (Retail 666)**, unplaced 8, on the map block 2,755 (97.0%), own 70, town-chōme 15; within a ring unchanged at 1,983 (69.8%). The other eleven East-1 cities are unchanged by the switch (step 2 re-run read-only, byte for byte).
+
+### 2026-10-07 - Fuchū (Tokyo) built
+
+- **Fuchū (Tokyo) built on the Tama ledgers and MHLW's Tokyo filings, cut by address: 2,586 storefronts (Food service 1,308, Retail 833, Personal services 445) at 14 stations, 2,300 within a ring (88.9%).** The brief's 20 checks held. Page 218, notice 165. Rows in the city: food permits 1,910, notifications 799, barbers 101, beauty 263, laundry 88, MHLW 462. Out before the buckets: 10 area-wide, 2 permit-condition vehicles, 1 city name alone, 4 closed, 7 not a premises; not a storefront 519 (institutional catering 242, no rule 144, hostess venues 49, vending 43, temporary or mobile 15, inside accommodation 12, 仕出し 8, mail order 6). The join: block 2,954, town-chōme 93, own point 32, unplaced 1 (幸町35丁目, a campus address the brief predicted); MHLW's points a median 34 m from the block point. 292 MHLW rows repeat a ledger premises; MHLW adds 32 pins (10 restaurants, 22 shops), not the brief's pre-join estimate. 201 repeat permits shown once. On the map: block 2,499 (96.6%), town-chōme 84 (70 of them at 宮町1丁目's centroid, 162 m from 府中 station, in the 0.1-0.2 mi ring), own 3. 菓子 / そうざい 236, 18 factory-like (7.6%).
+- **The shares:** restaurants 1,548 of 2,188 (70.7%), **1,262 at 2025-03-31 (57.7%)**, one more row than the brief's 1,547 (57.6%): a restaurant addressed 「東京都東京都府中市…」, which the corrected Tama cut now reads (Chōfu's fix), first permitted before the date. The page reads 57.7% from the build; 0.8 points under Kure's 58.5%. Barbers 100 of 105 at the date (95.2%), beauty 240 of 270 (88.9%), laundry 84 of 96 (87.5%).
+- **Rail: five lines drawn**, the Keio Line (6 stations inside), the Keio Keibajo Line (2, wholly inside), JR East's Nambu (3) and Musashino (2) lines and the Seibu Tamagawa Line (4); 分倍河原, 府中本町 and 東府中 collapse as interchanges. The JR Chuo Line crosses about 262 m of the city with no station and is not drawn (the brief). Gate 3 exact (6, 2, 3, 2, 4). 17 stations beyond the line in ten municipalities. Median gap 784 m, standard rings. The city's western tip (139.4298) lies just outside the fetched OSM box: CITY_BBOX widened to 139.42, no new query. Colours: Keio #F000B8, Keibajo #E858D0 (the pair 19.4, just over the floor: look at the render), Nambu #B09000, Musashino #F05820, Seibu Tamagawa #08A0C0. The Keibajo Line's weekday frequency stays ASSERTED (Keio's timetable renders only in a browser); the line is drawn either way (call 46).
+- **Census control 1.81.** **Privacy verdict: publish** (the Japan pass prints 0; 1 name withheld; two cooperative operators read as not persons under the coop rule).
+
+### 2026-10-07 - Tokorozawa built
+
+- **Tokorozawa built on Saitama Prefecture's lists, as Ageo (Regional)'s: 3,834 storefronts (Food service 2,067, Retail 959, Personal services 808) at 10 stations, 2,969 within a ring (77.4%).** The brief's 17 checks held. Page 216, notice 163. Health centre 08狭山. New-law layer 3,460 rows (19 late starters, 1 past term). Call 171: layer 77, list 698, one per premises and type 694, in term 503, renewed 6, **kept 497** (424 from the list with no point); the brief counted 501 / 21 / 480 because it dropped an old-law row as renewed whenever a new-law twin existed in any term, while all 19 late starters are renewals of old-law permits still in term to October and November 2026: the module drops a row as renewed only where the twin is in term on the as-of, so each of those 19 premises shows once, through its old-law permit (under the brief's method both rows would go). Restaurants 2,081 rows against the brief's 2,066 after call 172. Registers: barbers 179, beauty 539, laundry 98. Not a storefront 674 (vending 280, no rule 204, institutional catering 182, mail order 8). The join: unplaced 0; on the map block 3,808 (99.3%), own 21, town-chōme 5; the layers' points a median 44 m from the block point. 243 repeats; 2 names withheld. 菓子 / そうざい 189, 22 factory-like (11.6%).
+- **Rail: five lines drawn**, the Seibu Ikebukuro (4), Shinjuku (3), Sayama (3) and Yamaguchi (the Leo Liner, 2; drawn cut at the city line, the band row) lines and JR East's Musashino Line (1, 東所沢, a JR stub drawn as cut). Gate 3 exact. 9 stations beyond the line (東村山市 4, 清瀬市 2, 入間市, 新座市, 狭山市 1 each); 多摩湖 is in 東村山市 by N03 (the brief wrote 東大和市). Median gap 1,411 m, standard rings. One cited override, 西武園ゆうえんち as "Seibuen-yuenchi" (no macron). Colours: parked calls 1 and 3. 東所沢's label on its stub is unmeasured; it needs a scratch render at review time.
+- **Census control 2.59**, above the built range: 1.99 by distinct address (station buildings and malls); the prefecture jurisdiction's own licences per establishment read 2.60, so the figure matches the official licence density. **Privacy verdict: publish** (the Japan pass prints 0).
+
+### 2026-10-07 - Sōka built
+
+- **Sōka built on Saitama Prefecture's lists, as Ageo (Regional)'s: 2,716 storefronts (Food service 1,500, Retail 654, Personal services 562) at 4 stations, 1,806 within a ring (66.5%).** The brief's 9 checks held. Page 215, notice 162. Health centre 04草加. New-law layer 2,472 rows, all in term. Call 171: layer 69, list 553, kept 367 (311 from the list alone: Food service 121, Retail 31, institutional catering 137, no rule 22). **Food service 1,515 rows against the brief's 1,395**: the layers alone give the brief's 1,379 pins exactly; the list adds 121 restaurants (the old-law upper bound, disclosed). Registers: barbers 127, beauty 363, laundry 84 (80 with linen supply out). Not a storefront 569 (institutional catering 217, vending 180, no rule 163, mail order 5, linen supply 4). Unplaced 4, all register rows addressed 手代町, a 地番 town name MLIT no longer keys (only 手代一丁目 to 三丁目): left unplaced and disclosed, as the brief read 高砂. On the map: block 2,661 (98.0%), own 48, town-chōme 7. 124 repeats; 1 name withheld. 菓子 / そうざい 177, 16 factory-like (9.0%).
+- **Rail:** one line, Tobu's 伊勢崎線 drawn as the Tobu Skytree Line (Tokyo's public name), 4 stations inside (谷塚, 草加, 獨協大学前, 新田); 4 beyond (越谷市 3, 足立区 1; `N03_NEIGHBOR_PREFS = ("13",)`). Gate 3 the brief's 4. Median gap 1,400 m, standard rings. OSM's 獨協大学前 carries its subtitle 〈草加松原〉: an alias reads it, and the English name drops the subtitle ("Dokkyodaigakumae"), Tokyo's Oshiage and Nijubashimae precedent. Colour #08A0C0 from Tokyo's TS hue. Frequency ASSERTED (about six an hour; no floor applies, call 46).
+- **Census control 2.24**, above the built range; 1.59 by distinct address (643 pins share an address), and 2.06 from the layers alone, so the list's upper bound accounts for the rest. **Privacy verdict: publish** (the Japan pass prints 0; 1 name withheld).
+
+### 2026-10-07 - Ageo (Regional) built
+
+- **Ageo (Regional) built on Saitama Prefecture's lists for Ageo City and Ina Town, cut by address: 2,633 storefronts (Food service 1,304, Retail 699, Personal services 630) at 9 stations, 1,367 within a ring (51.9%).** The brief's checks held. Page 214, notice 161. One page of two municipalities (call 102), each row keyed by its municipality for the join (`japan.CITIES` "municipalities", the foundation's S28). Ageo's pins: Food service 1,128, Retail 571, Personal services 546; Ina's 176, 128, 84.
+- **`pipeline/countries/saitama_pref.py`, new, for the four Saitama pages:** the live GIS layers 食品営業施設_新法_公開 and 食品営業施設_旧法_公開 (read as rows with the layer's point as 緯度 / 経度, so OWN_POINT_FALLBACK works; 有効開始 / 終了年月日 renamed to the term columns the shared step already reads), the R8.3.31 old-law list (call 171), the 生活衛生 FY-end list per health centre plus its months, the cut by address prefix (raising on a municipality's name elsewhere), the phones dropped at read, and its own fetch (paged layer queries, never in a step). No change to japan_register, japan_step2 or japan_eigyo was needed.
+- **Call 171's combination, measured:** the old-law layer (Ageo 46, Ina 4) and the R8.3.31 list (Ageo 495, Ina 87) are one row per premises and type ("same premises": the same trade name and type where one address equals or begins the other, the list adding building names; or the same permit number, trade name and type, never the number alone, which names two premises 26 times); then in term on 2026-10-06 (206 lapsed); then a renewal under the new law dropped (2). 374 old-law rows kept, 327 of them the list's with no point; 177 restaurants (Ageo 155, Ina 22). The R8.3.31 new-law list is a control only: the live layer lacks 3 of its 978 restaurants in term.
+- **Why the counts exceed the brief's:** restaurant rows in term 1,310 against 1,141 (Ageo 949 new law, the brief's 957 less 8 late starters (call 172), plus 185 old law; Ina 151 plus 25), and Retail 839 against 797, both from call 171's list. Personal services are the brief's exactly (barbers 145 + 22, beauty 357 + 56, laundries 51 + 8).
+- **Step 2:** past term 1, late start 8; not a storefront 481 (institutional catering 191, no rule 145, vending 139, linen supply 5, mail order 1). The join: block 2,603, town-chōme 44, the layers' own point 133, unplaced 3 (the brief's three register rows: 上尾市平方領領家, 伊奈町小室新田, 上尾市上堤); the layers' points a median 45 m from the block point (1,797 rows, 96.0% within 250 m). 147 repeat permits shown once; 1 name withheld. On the map: block 2,465 (93.6%), own 124, town-chōme 44 (Ina's beauty salons 80.0% at the block). 菓子 / そうざい 171 rows, 15 factory-like (8.8%), kept.
+- **Rail:** the New Shuttle (7 stations: 原市, 沼南 in Ageo; 丸山, 志久, 伊奈中央, 羽貫, 内宿 in Ina) and JR East's Takasaki Line (上尾, 北上尾). Gate 3 exact (7, 2). 7 stations beyond the line (さいたま市北区 5, さいたま市大宮区 1, 桶川市 1). Median gap 1,045 m, standard rings. Colours: New Shuttle #486860 (parked call 1), Takasaki #E07800; pair 85.1. OSM names unchanged.
+- **Census control 2.05** (Ageo 2.04, Ina 2.09), above the built range, with the old-law list's upper bound in it; the jurisdiction's official-to-census ratio is 2.60. No share is stated (call 173).
+- **Privacy verdict: publish.** The Japan pass prints 0 of 2,633; the one storefront whose trade name equals its operator's own name shows its permit type.
+- **The credit:** staging recorded the verdict but no wording; notice 161 takes the portal terms' §1.1 form (「出典：「<title>」（<site>）（<URL>）を加工して作成」), each dataset by the title its ArcGIS item carries (食品営業施設_新法_公開, 食品営業施設_旧法_公開, kyuho_R080331) and the 生活衛生 list by the portal record's title. Flagged for confirmation at review.
+- **Page proposals:** the two towns in one sentence ("Only stations inside Ageo City and Ina Town get rings ... The New Shuttle's five stations in Ina, its terminus Uchijuku among them, are drawn and ringed."); the old-law upper bound ("The old-law permits are shown while their term runs; closures since March are not seen, so that part of the map is an upper bound."); the withholding note with no number (call 173: "The prefecture leaves out some premises at their operators' request, so the lists are not complete."); notifications named inside the Food shops layer, not as partial (the prefecture's own register).
+
+### 2026-10-07 - Chōfu built
+
+- **Chōfu built on the Tama ledgers and MHLW's Tokyo filings, cut by address: 2,510 storefronts (Food service 1,277, Retail 758, Personal services 475) at 9 stations, 2,184 within a ring (87.0%).** The brief's 16 checks held. Page 219, notice 166 (built ahead of Fuchū, whose page and notice, 218 and 165, keep the build order). Rows in the city: food permits 1,803, notifications 797, barbers 78, beauty 314, laundry 92, MHLW 550. Out before the buckets: 5 area-wide addresses, 2 of the city name alone (call 162), 2 permit-condition vehicles, 5 closed, 1 not a premises; not a storefront 550 (institutional catering 286, no rule 156, hostess venues 34, vending 32, 仕出し 23, temporary or mobile 14, inside accommodation 2, mail order 2, linen supply 1). The join: block 3,052, town-chōme 12, own point 4, unplaced 1 (西町 written in the hyphen form, as the brief read). MHLW's points a median 29 m from the block point. 348 MHLW rows repeat a ledger premises; 210 repeat permits shown once. MHLW adds 37 pins (17 restaurants, 20 shops), not the brief's "about 194": the brief matched by (town, first number), which misses house numbers the two lists spell differently (Higashiyamato's finding). On the map 99.5% at the block. 菓子 / そうざい 202 rows, 3 factory-like (1.5%), kept.
+- **The shares reproduce the brief exactly:** restaurants 1,467 of 1,721 (85.2%), 1,170 at 2025-03-31 (68.0%); barbers 78 of 89, 75 at the date (84.3%); beauty 314 of 322, 286 (88.8%); laundry 90 of 98, 88 (89.8%).
+- **The shared Tama cut corrected again** (`tokyo_tama._addr`): a notification addressed 「東京都東京都調布市野水1丁目」 wrote the prefecture twice; the cut now strips 東京都 however often it leads (permits_from_rows already did). The four Tama cities committed before it re-run at zero drift.
+- **Rail:** the Keio Line (8 stations inside, 仙川 to 飛田給) and the Keio Sagamihara Line (2: 調布, one N02 group for both lines, and 京王多摩川). No line has one station in the city. Gate 3 exact (8, 2; 調布 counts on both lines in Keio's own count too). 9 stations beyond the line (府中市 3, 世田谷区 2, 稲城市 2, 杉並区 1, 川崎市多摩区 1); `N03_NEIGHBOR_PREFS = ("14",)`. Median gap 667 m, standard rings. Colours: Keio Sagamihara #F000B8 (Tama's and Kawasaki's), Keio #E858D0 (moved from Tama's #F848D0, which sits 11.1 from the Sagamihara colour where the lines meet at 調布); closest pair 19.4, just over the floor of 18: worth a look at review. English names from OSM, no override. Frequency ASSERTED, as the brief says.
+- **Census control 1.70**, inside the built range.
+- **Privacy verdict: publish.** The Japan pass prints 0 of 2,510; no trade name equals its operator's own name.
+
+### 2026-10-07 - Higashimurayama built
+
+- **Higashimurayama built on the Tama ledgers and MHLW's Tokyo filings, cut by address: 1,432 storefronts (Food service 772, Retail 409, Personal services 251) at 8 stations, 1,153 within a ring (80.5%).** The brief's 15 checks held. Page 213, notice 160. Rows in the city: food permits 1,113, notifications 371, barbers 54, beauty 148, laundry 50, MHLW 211. Out before the buckets: 15 area-wide addresses, 1 closed MHLW row; not a storefront 289 (institutional catering 149, no rule 82, hostess venues 31, 仕出し 12, vending 12, inside accommodation 3). The join: block 1,641, MHLW's own point 1, unplaced 0; MHLW's points a median 37 m from the block point (156 rows). 149 MHLW rows repeat a ledger premises (56 permits, 93 notifications); 78 repeat permits shown once. On the map 99.9% at the block. 菓子 / そうざい 128 rows, 14 factory-like (10.9%), kept. MHLW adds 24 pins (15 restaurants), so the buckets differ from the brief's ledger-only 771 / 416 / 252.
+- **The shares reproduce the brief exactly:** restaurants 916 of 1,023 (89.5%), 705 at 2025-03-31 (68.9%); barbers 54 of 62 (87.1% at the date too); beauty 148 of 162, 139 at the date (85.8%); laundry 50 of 54 (92.6%).
+- **Rail: six lines drawn**, the Seibu Shinjuku (2 stations inside), Kokubunji (1), Seibuen (2, wholly inside), Tamako (4) and Haijima (1) lines and JR East's Musashino Line (1, 新秋津); the three one-station lines are JR or private stubs, drawn as cut (the standing call). **The Seibu Yamaguchi Line (the Leo Liner, AGT, N02 class 16) is left out** (calls 54 and 92): its one station, 多摩湖, shares an N02 group with the Tamako Line's, which keeps the ring; nothing goes to `excluded_stations.csv`. The Seibu Ikebukuro Line is not drawn: 秋津 is 12 m outside the city line (清瀬市). `N03_NEIGHBOR_PREFS = ("11",)` names 所沢市's stations. Gate 3 exact on all six (Seibu 7, JR East 1). 13 stations beyond the line (小平市 7, 所沢市 3, 国分寺市 1, 東大和市 1, 立川市 1). Median gap 810 m, standard rings. English names from OSM `name:en`, no override. Colours: parked call 1.
+- **Census control 1.91**, inside the built range (772 of 404).
+- **Privacy verdict: publish.** The Japan pass prints 0 of 1,432; the 1 trade name equal to its operator's own name is withheld and its pin shows its permit type.
+- **Page proposal:** "The Seibu Yamaguchi Line (the Leo Liner) is not drawn: its one station in the city, Tamako, is a station of the Tamako Line, which keeps the ring." (Fukuoka's and Toyama's left-out-line bullet, adapted.)
+
+### 2026-10-07 - Tama built
+
+- **Tama built on the Tama ledgers and MHLW's Tokyo filings, cut by address: 1,419 storefronts (Food service 664, Retail 504, Personal services 251) at 6 stations, 1,162 within a ring (81.9%).** The brief's 13 checks held. Page 212, notice 159. Rows in the city: food permits 1,005, notifications 496, barbers 53, beauty 164, laundry 38, MHLW 316. Out before the buckets: 8 area-wide addresses, 1 permit whose condition names a vehicle, 2 not a premises; not a storefront 255 (institutional catering 137, no rule 47, vending 22, hostess venues 21, temporary or mobile 12, 仕出し 10, inside accommodation 4, mail order 1, linen supply 1). The join: block 1,745, town-chōme 48, own point 12, unplaced 1 (落川 2丁目 35, written for 多摩中央公園, which stands in 落合: likely the publisher's slip, left unplaced). MHLW's points a median 34 m from the block point. 267 MHLW rows repeat a ledger premises (82 permits, 185 notifications); 156 repeat permits shown once. On the map: block 1,371, town-chōme 46, own 2 (96.6% at the block). 菓子 / そうざい 157 rows, 23 factory-like (14.6%), kept.
+- **The shares reproduce the brief exactly:** restaurants 839 of 931 (90.1%), 667 at 2025-03-31 (71.6%); barbers 53 of 56 (94.6%); beauty 164 of 169, 154 at the date (91.1%); laundry 38 of 40, 36 at the date (90.0%).
+- **The shared Tama cut corrected** (`tokyo_tama.city_rows`): it raised on two rows naming 多摩市 after other cities, both areas rather than premises (the notification 「稲城市周辺、多摩市周辺、日野市周辺」 and MHLW's 「稲城市、及び、日野市、多摩市内一円」). An address with the area words step 2 already reads (AREA_WORDS, 一円, 市内) is now skipped; any other mention still raises. Higashiyamato's and Nishitōkyō's maps are unchanged: neither holds such a row, and both re-run at zero drift.
+- **Rail: three lines drawn**, the Odakyu Tama Line (3 stations inside), the Keio Sagamihara Line (2) and the Keio Line (1, 聖蹟桜ヶ丘, a private one-station stub drawn as cut). **The Tama Toshi Monorail is left out** (calls 54 and 92): its one station, 多摩センター, is its own N02 group 187-197 m from the Keio and Odakyu stations, which keep the ring. The Keio and Odakyu stations at 永山 and 多摩センター stand 38 m apart and are kept apart, as the brief decided. **Gate 1 then reads a 38 m median**, so `SPACING_MIN_M = 30` is set (Tbilisi's precedent of a floor under real stations close together, both in the operators' counts), and the spacing rule is read by place: the nearest other place is a median 1,856 m away, so standard rings. Gate 3 exact (3, 2, 1). `N03_NEIGHBOR_PREFS = ("14",)` names Kawasaki's stations. 15 stations beyond the line within the drawing window (府中市 4, 川崎市麻生区 4, 日野市 3, 八王子市 2, 町田市 1, 稲城市 1). One cited override: 京王永山 as "Keio-nagayama" (OSM's "Keio-Nagayama"), the style of Keio's own names here and Kawasaki's Keio-inadazutsumi. Colours: Odakyu Tama #08A0C0 (45.1 against Retail), Keio Sagamihara #F000B8, Keio #F848D0; closest pair within 500 m 110.1, anywhere 11.1 (the two Keio lines, which meet only beyond the city).
+- **Census control 1.98**, above the built range; without the 40 弁当屋 pins 1.87, by distinct address 1.72 (141 pins share an address). As Nishitōkyō's: takeaway counters and buildings of several restaurants; recorded.
+- **Privacy verdict: publish.** The Japan pass prints 0 of 1,419; the raw files' 1 trade name equal to an operator's own name is not among the storefronts.
+- **Page proposal:** "The Tama Toshi Monorail is not drawn: its one station in the city, Tama Center, stands beside the Keio and Odakyu stations of the same name, which keep the rings."
+
+### 2026-10-07 - Nishitōkyō built
+
+- **Nishitōkyō built on the same Tama ledgers and MHLW's Tokyo filings as Higashiyamato, cut by address: 1,936 storefronts (Food service 982, Retail 566, Personal services 388) at 5 stations, 1,619 within a ring (83.6%).** The brief's 17 checks held (2026-10-07). Page 211, notice 158. Rows in the city: food permits 1,446, notifications 511, barbers 80, beauty 236, laundry 75, MHLW 326. Out before the buckets: 8 area-wide addresses; not a storefront 400 (institutional catering 233, no rule 86, vending 30, hostess venues 29, 仕出し 13, temporary or mobile 4, linen supply 3, inside accommodation 2). The join: block 2,264, MHLW's own point 2, unplaced 0; MHLW's points a median 48 m from the block point (221 rows, 94.6% within 250 m). 239 MHLW rows repeat a ledger premises (101 permits, 138 notifications); 134 repeat permits shown once. On the map: block 1,934, own 2 (99.9%). 菓子 / そうざい 194 rows, 5 factory-like (2.6%), kept.
+- **The shares, read by the page, reproduce the brief exactly:** restaurants 1,171 of 1,284 (91.2%), 933 at 2025-03-31 (72.7%); barbers 80 of 84, 78 at the date (92.9%); beauty 236 of 256, 226 (88.3%); laundry 75 of 87, 73 (83.9%).
+- **Rail:** the Seibu Shinjuku Line (3 of 29) and Seibu Ikebukuro Line (2 of 31), N02-25, main lines cut at the city line. Gate 3 exact against Seibu's counts (3, 2). 7 stations beyond the line (練馬区 3, 小平市 2, 東久留米市 1, 清瀬市 1). Median gap 1,223 m, standard rings. Colours: Shinjuku #08A0C0 (45.1 against Retail), Ikebukuro #D08000; pair 104.1. OSM `name:en` for all 5, no override.
+- **Census control 2.23, above the built cities' 1.56-1.92 (the brief: 2.21), and the brief's readings tested:** without the 67 弁当屋 pins it reads 2.09; counting distinct addresses rather than premises, 1.98 (196 pins share an exact address with another restaurant pin: food halls and buildings of several restaurants). Higashiyamato reads 1.62 and 1.59 the same ways. So the excess is mostly takeaway bento counters, which the census files outside 飲食店 and the permit law inside it, and buildings of several premises; recorded, no change made.
+- **Privacy verdict: publish.** The Japan pass prints 0 of 1,936; 0 trade names equal an operator's own name; no pin shows its permit type.
+
+### 2026-10-07 - Higashiyamato built
+
+- **Higashiyamato built on the Tokyo Metropolitan Government's five Tama ledgers, cut to the city by address, with MHLW's Tokyo filings the ledgers lack (call 169): 835 storefronts (Food service 410, Retail 276, Personal services 149) at 4 stations, 548 within a ring (65.6%).** The brief's 17 checks held (2026-10-07). Page 210, notice 157. Rows in the city: food permits 603, notifications 269, barbers 44, beauty 86, laundry 19, MHLW 140. Out before the buckets: 2 area-wide addresses, 1 closed MHLW row, 1 vehicle or stall; not a storefront 148 (institutional catering 79, no rule 26, hostess venues 15, vending 9, 仕出し 8, temporary or mobile 7, inside accommodation 2, mail order 2). The join: block 952, town-chōme 44, MHLW's own point 13, unplaced 0; MHLW's points sit a median 48 m from the block point (93 rows, 98.9% within 250 m). 111 MHLW rows repeat a ledger premises (36 permits, 75 notifications) and are shown as the ledger's; 70 repeat permits shown once. On the map: block 793, town-chōme 42 (95.0% at the block). 菓子 / そうざい 70 rows, 1 factory-like (1.4%), kept.
+- **The brief's MHLW match was narrower than step 2's.** The brief matched MHLW to the ledgers by (town, number) and found 24 of 36 open permits and 36 of 103 notifications in both. Step 2's `SUPERSEDES` key (town, block, trade name, bucket) finds 111 of 140 rows in both, since the two lists write the same house number differently (1213-6 against 1213番地の6). After it, MHLW adds 2 premises to the map. Rejected: matching on the full house number, which would show the same shop twice.
+- **The shares, measured by the build and read by the page (calls 109, 187-189):** restaurants 505 of the yearbook's 528 (95.6%), 397 at its date, 2025-03-31 (75.2%; 108 first permitted after it); barbers 44 of 45 (97.8% at the date too); beauty 86 of 88 (97.7%), 80 at the date (90.9%); laundry 19 of 21 (90.5%). Each reproduces the brief exactly. The notification ledger is left out of the restaurant share (`SHARE_SKIP`): its one row typed 飲食 is a stall 営業とみなされない, which the share's 飲食 test would count (506).
+- **Rail:** the Tama Toshi Monorail (3 of 19 stations inside) and the Seibu Haijima Line (1 of 8, 東大和市, a private stub drawn as cut, the standing call), N02-25. 玉川上水's two platforms (107 m) collapse on `N02_005g` to one station inside the city, so step 1 counts it on both lines. Gate 3: the monorail 3 against its own station pages, exact; Seibu's 1 cannot be gated, since the collapsed interchange counts on both lines. 7 stations beyond the line (立川市 5, 小平市 1, 東村山市 1). Median station gap 775 m, so standard rings. Colours from `line_colour_search.py`: monorail #E07800, Seibu #08A0C0 (45.1 against Retail), pair 110.6. English names from OSM `name:en`, no override needed.
+- **Census control 1.71** placed Food-service premises per 2021 Economic Census 飲食店 establishment (410 of 240), inside the built cities' 1.56-1.92.
+- **Privacy verdict: publish.** `check_personal_exposure.py higashiyamato` with step 2's rules (`japan.city_rules`, Regional-1's one-line fix applied identically): the Japan pass prints 0 of 835; 0 trade names equal an operator's own name in the raw files; no pin shows its permit type. 法人代表者氏名, the operator's address and every phone are dropped at read (call 109).
+- **Corrected in the brief's plan, not the brief:** `SOURCE_LINKS` cannot pick the ledgers' CSVs, since the page links each ledger as CSV and Excel and only the link text says which (`shokuhin-todokede-1-7` is the CSV, `shokuhin-kyoka-1-7` the Excel). The five URLs are pinned in `pipeline/countries/tokyo_tama.py`; a new edition is a re-measure.
+- **Per call 198, no label tier, region view or label offset was set**; the entry keeps the scaffold's starting offset and region "Japan East" for Cleanup's Japan regions.
+
+### 2026-10-07 - Shared code for the Tama cities: the yearbook's Tama rows, table 19-7, the share at the yearbook's date, and one Tama module (flagged for review)
+
+- **`japan_official.yearbook()` now reads the Tama cities' rows (132xx) as well as the wards', `restaurants()` answers any Tokyo municipality from the yearbook first, and a new `registers()` reads table 19-7 (call 189).** The brief named `official_shares` as where the share is measured (the yearbook's 528), but the reader took wards only and would have stopped the build. A ward reads exactly as before; Hachiōji, built nowhere, now reads 4,898 from the yearbook rather than e-Stat.
+- **`japan_step2` gained two opt-in measures: `config.SHARE_DATES` (the share at the official count's date, calls 187-189) and `config.REGISTER_SHARES` (each register against table 19-7).** Both write into `official_shares.json` for the page; off unless a config sets them. Rejected: a city-local calculation in each of eight Tama configs, which the japan-city skill rules out ("anything a second city would also need goes into the shared module"); and parking all eight Tama cities, since the prompt's parked-call rule covers a brief's missing "Shared code" item, and this one was not flagged as one. Flagged here for the owner's review rather than parked.
+- **`pipeline/countries/tokyo_tama.py`, new:** the five ledgers and MHLW's Tokyo file, their columns, the call-109 drop, the cut by address prefix that raises on the city's name elsewhere (Itami's and Tsu's rule), the shares' date columns and the catalogue credit, shared by the eight Tama cities.
+- **Zero effect on built cities, proved read-only:** each of the 34 cities in `japan.BUILT_BEFORE_FOUNDATION` ran step 2 with `write=False`, its storefronts compared byte for byte with its processed file in the shared `data/` (master's). Not `drift_check.py`, which would rewrite master's processed files from a branch (the shared-data rule). **Result: all 34 identical** (Tokyo 61,317, Osaka 73,011, Kyoto 32,370 storefronts among them; peak 0.66 GB, through `heavy_job.py`). The Tama-only paths run in Higashiyamato's build, which reproduced its brief's shares exactly.
+
+### 2026-10-07 - The name rule crosses premises (owner, calls 205 and 209); Toyonaka's register rebuilt to August (call 151)
+
+- **Call 205 ("205 yes", relayed by Staging): `name_city`, a WAVE5_RULES switch in `japan_step2.run`**, after the block spread: a trade name the name rule flags on any row withholds every row of the city with the same trade-name key. On for new cities (ALL_RULES), off for the 34 built (WAVE2_RULES). Minato control unchanged (98.0% block). Suita's privacy check 1 → 0 (1 pin now shows its permit type). The other six Kansai-1 cities move nothing. East-1 and Regional-1 were told before the change; East-1's call 202 switch (`default_joined`) shares the frozenset's closing line, keep both at merge.
+- **Measured read-only on the 34 built cities** (step 2 at `write=False`, the switch forced on): Osaka 6, Utsunomiya 3, Fukuoka 1, Kyoto 1, Sapporo 1, Yokkaichi 1 and Tokyo 1 rows withheld; the other 27 nothing. **`check_personal_exposure.py` prints the same 13 names on the six live maps** (Tokyo 0: its row is not on the map): the gap was already published. Reported to Staging at once; **call 209, owner: "fix now in cleanup"**. The switch alone, on origin/master 7611559f, is commit fe85a793 (local branch `kansai1-name-city`, not pushed) for Cleanup to land and switch on for the six; Kansai-1 left the built cities and master alone.
+- **Call 151 ("151 yes"): Toyonaka's 生活衛生 register rebuilt to 2026-08-31.** The 14 monthly CSVs of 2026 fetched from BODIK (one package_show and 14 downloads, each at least 21 s after the last; no datastore_search_sql), rebuilt by 許可（登録）番号 (Maebashi's): 1,255 + 17 new − 90 closed = 1,182, every closure matching a register number and no new number already in it. Barbers 237 → 231, beauty salons 736 → 722, laundries 231 → 180 (the March closure list alone names 27 pick-up shops). The page now states one date. Storefronts 5,277 → 5,205.
+
+### 2026-10-07 - Hirakata, Suita, Amagasaki and Uji built (Kansai-1, pages 223, 224, 227, 228; notices 170, 171, 174, 175)
+
+- **Built by three subagents (Hirakata, Suita, Amagasaki; pipeline only, each in its own `pipeline/<city>/`) and the lead (Uji)**, every shared file edited by the lead, every Overpass query and BODIK call made by the lead one at a time (process change: the plan's "up to three subagents").
+- **Hirakata: 4,607 storefronts, 12 stations.** The March 2026 food list kept whole plus the five monthly new-permit files (call 126), merged by `rebuilt_register` (3,221 permits, 2,560 restaurants, the brief's); `TERM_AS_OF` the list's own 2026-03-31, since the merge keeps the March list whole (a later date would drop the March permits ending April to August without their renewals, the brief's rejected 2,503). The registers with their five monthly files (call 155, 11 new premises, 59,835 B from the city's host). MHLW's notifications as the partial Food-shops layer (127b) with its own point (127c). Block 97.4%; 2 restaurants unplaced (a lot number with no town). Census 2.65, above the built range: no 業態 (konbini chains about 120, supermarkets 56 by trade-name word), and closures unseen between the twice-yearly lists; without the konbini and supermarket rows about 2.47, Toyonaka's and Aomori's level. Names withheld 1.
+- **Suita: 4,012 storefronts, 15 stations; PARKED (call 1 above).** The two food lists of 2026-03-31 (revised and old law) as one food kind, `TERM_AS_OF` their own date (the upper bound disclosed, Kyoto's); the registers of 2026-08-31; MHLW's notifications. Every count is the brief's: 3,330 restaurants, Food service 2,430 rows / 2,301 pins, Retail 630 + 444, Personal services 849; 0 unplaced; census 2.26. Rail: the Midōsuji Line left out (call 165); Osaka's `BRANCHES["UK"]` copied so the Umekita track beyond the city line draws as the Osaka Higashi Line, as on Osaka's map (step 1 walked 3,507 m); JR's and Hankyu's 吹田 apart; gate 3 exact on Hankyu's Senri Line (7).
+- **Amagasaki: 7,385 storefronts, 12 stations.** The permit list and the notification list (call 164) of 2026-08-31 and the three registers: every count is the brief's (Food service 3,946 rows, Retail 893 + 1,295, laundries 368 through the foundation's `type_cols5`, which reads クリーニング種別１); 116 premises in both food lists fold to one pin; 2 unplaced (the brief's 5: the foundation's rules placed 3); census 1.93. The JR Kobe Line needs no branch walk (Nishinomiya's precedent). MHLW a control, not a source (Kawasaki's).
+- **Uji: 1,281 storefronts, 12 stations.** MHLW's Kyoto Prefecture file cut to Uji by address (2,498 rows, the brief's); Food service 782 and Retail 624 rows, the brief's; block 94.3% through the foundation's `aza_insert` and `spelling5` (the brief: 55.0% without them), MHLW's own point for 74, 6 unplaced; census 1.79. **Rings halved** by the spacing rule: step 1 measured a 505 m median gap among the 12 in-city stations (the brief's 588 m counted by N02 group, folding JR's and Keihan's 宇治 and 木幡 into one each); Hiroshima's edges. 木幡 settled as Kohata (Kyoto's 西院 tie; the operators read it Kohata and Kowata) with operator suffixes. The Tōzai Line left out (calls 54 and 92).
+- **Station names, Hiroshima's style:** Hirakata 1 (御殿山), Suita 2 (the Monorail's two), Amagasaki 1 (-mae), Uji none beyond the tie.
+- **Privacy:** Hirakata, Amagasaki and Uji print 0 (1, 2 and 2 pins show their permit type); Suita prints 1 and is parked.
+- **Licences:** each read today (the entry below); Uji's is MHLW's, recorded.
+
+### 2026-10-07 - Toyonaka, Itami and Kakogawa built (Kansai-1, pages 222, 225, 226; notices 169, 172, 173)
+
+- **Toyonaka: 5,277 storefronts, 10 stations.** The food list rebuilt BY PERMIT NUMBER (the brief's method, Maebashi's and Sakai's): the full list of 2026-03-31 (4,369 permits), plus the new permits of April to August 2026 (339; a number seen again replaces the earlier row), less 252 permits the closure files name (of 277 closure numbers; a closure applies only where it falls on or after that permit's grant), kept while 許可満了日 is on or after 2026-08-31 (130 dropped): **4,318, exactly the brief's.** The 生活衛生 register split by 業種 (barbers 237, beauty 736, laundries 231 with the bracketed kind as the type, so linen supply goes out by `japan_eigyo`'s rule; lodging, public baths and 興行場 out). MHLW's notifications as the partial Food-shops layer (1,367 rows; 488 without a published address), its own point where the join misses (89). Food service 2,957, Retail 1,127, Personal services 1,193 pins; block 96.9% of storefront rows, 4 unplaced. Names withheld 2; factory share 16 of 418 (3.8%), kept. Census control 2.27 (the brief's; no 業態, so konbini and canteens holding 飲食店営業 stay in Food service, Kobe's and Osaka's lists' way). Rail: 千里中央 joined (`GROUP_JOIN`, 257 m: staging applied Kawasaki's and Tokyo's precedent, 2026-10-06), 10 stations, 11 excluded beyond the line, median gap 1,102 m: standard rings; 79% of storefronts within a ring.
+- **Itami: 2,383 storefronts, 6 stations; Kakogawa: 3,701 storefronts, 8 stations.** Hyōgo Prefecture's five lists cut BY ADDRESS (Tsu's shape: a row that begins 伊丹市 / 加古川市 once 兵庫県 is cut; an area licensed across several towns passed over; any other mid-address mention stops the build). The notifications are the Food-shops layer (owner, call 164). Itami: Food service 1,333, Retail 704, Personal services 454 rows, the brief's exactly; block 95.7%, 1 unplaced; census 2.17 (the brief's). Kakogawa: 1,970, 1,093, 787 rows, the brief's; block 87.8%, town center 11.9%, 11 unplaced (the tiers disclosed, call 145); census 2.16. The (4) その他 catch-all (40-42% of restaurants) stays in Food service: the list names no hostess venue (R3 applies only where a register names them). Rail: Itami's Osaka Monorail drawn cut at 大阪空港 (owner, call 163; the brief's "left out" predated it), JR and Hankyu 伊丹 kept apart with operator suffixes; Kakogawa's 宝殿 is Takasago's (38 m beyond the line).
+- **Station names, Hiroshima's style:** Toyonaka 4 overrides (macrons; 柴原阪大前 as Shibahara-handai-mae); Itami 2 (新伊丹 hyphenated; 大阪空港, which OSM translates, romanized as Osaka-kuko, Fukuoka's 福岡空港 precedent); Kakogawa 1.
+- **Line colours** from `line_colour_search.py`, starting from Osaka's, Kobe's and Himeji's colours where those maps draw the same line, so neighbouring maps agree.
+- **Privacy:** `check_personal_exposure.py` prints 0 for each (Japan pass): Toyonaka 2 pins show their permit type (5 operator matches in the raw rows), Itami 1 (6), Kakogawa 2 (16, most of them unbucketed notifications).
+- **The privacy check's Japan pass read a new city with no rules** (`frozenset(CITIES[slug].get("rules", ()))`, empty for an ALL_RULES city): fixed to `japan.city_rules(slug)`, the same one-line fix East-1 and Regional-1 made (coordinated, 2026-10-07).
+
+### 2026-10-07 - Kansai-1's licence reads: five sources, all usable; two precedents applied (licence-read agents)
+
+- **Brief checks first:** `brief_check.py` over the seven briefs, every data.bodik.jp request spaced 21 s through a wrapper (Kansai-1 is the only BODIK session): 92 of 92 claims hold.
+- **Hyōgo Prefecture's 生活衛生課 lists (Itami, Kakogawa): the three registers PERMITTED WITH CONDITIONS.** Each XLSX has its own row in the prefecture's catalogue (`web.pref.hyogo.lg.jp/opendata/index.php`) with a CC BY licence; the catalogue terms (`kiyaku_opendata.pdf`) 3(3) license the works 「CCライセンス表示4.0国際」 unless noted, and 2(1) put them above the website's copyright page. The list page's own icon reads CC BY 2.1 JP, which also sits beside the 4.0 terms PDF itself (a stale site-wide icon); both are attribution-only. **MUST DISPLAY** the modified-work form, 「この地図は、以下の著作物を改変して利用しています。[タイトル]、兵庫県」, and CC BY 4.0's licence link and statement of change. **MUST NOT** present the edited data as the prefecture's (3(3)②), imply endorsement. No cost or indemnity clause; Japanese law, Kobe District Court.
+- **Hyōgo's two food XLSX: AMBIGUOUS on the read, accepted on Ōtsu's precedent.** The catalogue lists only the page 食品関係営業施設リストの閲覧 (CC BY, format html, 「食品衛生法に係る営業許可施設及び営業届出施設の一覧です。」), not the files; the page holds nothing but the links to the two lists. Ōtsu's food list was catalogued the same way (the city's page under `cc-by`, its only content the list) and was accepted as CC BY 4.0 (owner, 2026-10-02). Precedent applied (process change 1); flagged for the owner at review time. Rejected: parking Itami and Kakogawa for an e-mail to the publisher (seikatsueiseika@pref.hyogo.lg.jp), which the precedent already answers.
+- **Amagasaki City's food permit and notification lists and its three registers: PERMITTED WITH CONDITIONS.** Each op_data page (`/op_data/1000922/1001025` to `1001028`) states CC BY 4.0, and 尼崎市オープンデータ利用規約 (`/opendata/1000081/1000084.html`) §2 grants it unless a dataset says otherwise; use is acceptance (§1). The page the brief named (`1023309`) is only a character-encoding note. **MUST DISPLAY** (§3) the source and that it was modified; no wording prescribed. **MUST NOT** (§6) present edited data as the city's, or harm or defame the city or others. Cost: §6 and §7, damages and complaint costs from the user's own breach or infringement, the fault-based class accepted for all of Japan (2026-09-24). §5's use report is optional. The site's 著作権 page conflicts on its face; the open-data terms are the specific instrument for the catalogue (New York's specific-over-general shape), applied and flagged at review.
+- **Hirakata City's food list and barber, beauty and laundry lists: PERMITTED WITH CONDITIONS, CC BY 2.1 JP.** The 利用条件 is printed on both dataset pages (`0000023479`, `0000025284`), scoped to 「本ページ」: free use and adaptation, derivative works allowed, a statement that the city's data is used. **MUST DISPLAY** the prescribed adaptation form, 「この地図は以下の著作物を改変して利用しています。[データのタイトル]、枚方市、クリエイティブ・コモンズ・ライセンス 表示 2.1」, and the licence URI (CC BY 2.1 JP 第5条); remove the credit if the city asks. The hold-harmless (caution 2: complaints from the user's breach or infringement settled at the user's cost) is the fault-based class. The site's 著作権 page covers web content and is conditioned on 「無断で」, which the pages' grant answers. **The site's linking policy** (`0000010379`) asks for an enquiry before a deep link and a notice of a top-page link: the credit cites the titles and the licence link and does not hyperlink the city's pages (MHLW's top-page-only precedent, applied more strictly), so neither arises; flagged at review time.
+- **Suita City 衛生管理課's two food lists and its barber, beauty and laundry registers: PERMITTED WITH CONDITIONS, CC BY 4.0.** The dataset page marks both sections CC BY 4.0; 吹田市オープンデータ利用規約 (`opendata_kiyaku.pdf`, in force 2019-03-27) applies by use, and the terms page's scope rule makes a page's CC mark govern over the site's 著作権 page. **MUST DISPLAY** the prescribed modified-use form (2(3)), 「この地図は以下の著作物を改変して利用しています。【タイトル】、吹田市、クリエイティブ・コモンズ・ライセンス表示 4.0（https://creativecommons.org/licenses/by/4.0/deed.ja）」. **MUST NOT** (§5) present edited data as the city's, harm or defame the city or others, use its logo. The damages and claims clauses are fault-based. Links to data pages need no permission or contact (terms §3; the site's link page asks a courtesy notice, which the specific terms answer). The catalogue's own licence field for the five files was not seen (a form search).
+- **Toyonaka City's BODIK datasets (`272035_food_business`, `272035_sanitation_business`): PERMITTED WITH CONDITIONS, CC BY 4.0.** 豊中市オープンデータ利用規約 (`https://odcs.bodik.jp/272035/tos/`, the same text as the city's PDF) １ allows any use, ２(1) applies CC BY 4.0; both packages record `cc-by-40-intl`. **MUST DISPLAY** a credit (２(2) gives an example, not a form: 「豊中市オープンデータ, 豊中市, クリエイティブ・コモンズ ライセンス表示 4.0 国際」 and the licence link) with the dataset titles and CC BY 4.0's statement of change. **MUST NOT** imply endorsement (CC BY 4.0 §2(a)(6)). No cost or indemnity clause; no governing law or precedence clause; the city's 著作権 page covers its web pages, and its open-data page carves the data out under CC. Four BODIK requests, each at least 23 s after the last.
+- **The undefined harm and defamation bars** (Amagasaki §6, Suita §5) are recorded and flagged for the owner at review time (Taoyuan's undefined conditions were raised the same way); the build goes ahead on them, since nothing in a storefront map meets them while no operator's own name is shown.
+
+### 2026-10-07 - Morioka built, the city's food list of August 2026 with the entries its operators withheld counted apart, the registers of September 2026 and MHLW's notifications
+
+- **Morioka built (page 239, notice 186), Akita's shape (one city food list
+  of every permit in term on its date) with Hamamatsu's for the registers:
+  4,609 storefronts (Food service 2,228, Food shops 1,073, Personal services
+  1,308) around 11 stations on 5 lines, 50.0% of them in a ring (2,303).**
+  Sources: the city's 食品営業許可施設一覧 of 2026-08-31 (4,379 rows), its
+  理容所, 美容所 and クリーニング所等 lists of 2026-09-30 (328, 756, 286), all
+  CSVs, CC BY 4.0 through the 盛岡市オープンデータ利用規約 (read 2026-10-07 by
+  staging), and MHLW's notifications. Every city file is renamed monthly;
+  `SOURCE_LINKS` reads each current link at a re-fetch. Built by a subagent
+  of the Regional-1 lead, integrated by the lead.
+- **The withheld entries (call 125's answer for Morioka):** 796 rows carry
+  no name and no address (649 restaurants); counted apart under
+  `ADDRESS_BY_CONSENT`, never placed and never filled from MHLW. The page
+  states 2,701 restaurants with an address, 83.5% of e-Stat's 3,233.
+- **Calls 161 and 162:** `TERM_AS_OF` 2026-08-31 for both sources. Past term
+  18 (the brief's open call 2); late 0. City name alone set aside: 34, the
+  brief exactly.
+- **MHLW (127b, 127c):** its notifications as a partial Food shops layer, 515
+  pins; its permits not added. `OWN_POINT_FALLBACK` places 31 notification
+  rows, `POINT_DONORS` 58 city food rows (keyed on ward, town and trade name,
+  not the brief's permit number: more rows than its expected ~6). The
+  notifications' points sit a median 63 m from the block point, 74.9% within
+  250 m (looser than the brief's 37 m on permits). `SUPERSEDES` dropped 150
+  city rows.
+- **The brief's figures reproduce** with `combined_form` and `past_term` off
+  (3,043 storefront rows); on the foundation's rules 3,096 (call 158 reads
+  156 combined 種目 cells, call 161 drops 18).
+- **Step 2:** 8,259 rows read. Set aside 35; closed 5; past term 18; no
+  address 2,195 (food 790, MHLW 1,405); not a premises 229; out by rule 736
+  (31 snack bars: the list marks スナック apart from バー, which stays in Food
+  service by R3). Join of 5,041 storefront rows: block 4,890, MHLW's point
+  92, town-chōme 35, 小字 12, unplaced 12 (0.2%, all registers). On the map:
+  97.3% block. One food pin at MHLW's point sits 3 m outside the N03 line.
+- The 菓子 / そうざい factory share: 18 of 378 (4.8%), kept (owner,
+  2026-09-24).
+- **Economic Census control: 1.58** (2,227 pins inside the city against 1,406
+  establishments), inside the built cities' range.
+- **Privacy verdict: publish.** `check_personal_exposure.py morioka`: the
+  Japan pass prints 0; 21 trade names in the raw files are an operator's own
+  name, 4 pins show their permit type.
+- **Rail:** N02-25, 11 stations: IGR 5, JR Tohoku 3, Tazawako 2, Yamada 4,
+  Hanawa 1 (盛岡 one group for four lines; 好摩 for IGR and Hanawa). Gate 3
+  exact. 8 excluded: 滝沢市 4, 八幡平市, 宮古市, 岩手町 and 矢巾町 1 each. The
+  Hanawa Line a one-station stub kept as cut. IGR in two pieces around
+  滝沢市, one label, the legend carrying the line. Labels anchored in the city
+  by `in_city_first`. The Yamada and Hanawa stretches drawn and named (calls
+  46 and 86). OSM's names stand. Median gap 2,074 m: standard rings.
+- **For the next Iwate city:** 乙部大字黒川第9地割 (大字 before the 地割) stays
+  unplaced: a possible `chiwari` extension.
+
+### 2026-10-07 - Mito built, the national food filings and the city's barber, beauty and laundry lists
+
+- **Mito built (page 238, notice 185): 4,040 storefronts (Food service
+  1,690, Food shops 1,175, Personal services 1,175) around 5 stations on 3
+  lines, 24.2% of them in a ring (977).** Food from MHLW's open data alone,
+  the city's food list (its 食品営業許可施設一覧 page holds no file and points
+  to MHLW: Kurume's shape), its notifications a partial Food-shops layer
+  (call 127b); personal services from the city's 生活衛生関係施設一覧, four
+  cp932 CSVs as of 2026-07-02 (Hamamatsu's shape; the two laundry files one
+  kind by `SOURCE_KIND`). CC-BY with no version given, read 2026-10-07 by
+  staging (Bremen's precedent, call 196; no cost clause). Built by a subagent
+  of the Regional-1 lead, integrated by the lead.
+- **偕楽園 left out** (owner, call 156): no train in the October 2026
+  timetable; dropped through `CLOSED_STATIONS` (Kitakyushu's mechanism), so
+  5 station groups. The page says so.
+- **The brief's food figures reproduce exactly under its rules** (`WAVE2_RULES`:
+  Food service 1,714, Retail 1,586); the foundation's rules move them to 1,695
+  and 1,582: past term 80 (14 Food service storefronts), late start 22,
+  combined 業態 cells 67. `TERM_AS_OF` 2026-08-31, the month MHLW's file
+  covers.
+- **The food share (call 157):** 2,892 restaurant permits in term, 90.7% of
+  e-Stat's 3,188; on fixed premises 2,073 of 2,542 publish an address (81.5%,
+  about one in five withheld).
+- **Step 2:** 7,504 rows read. Set aside 62 (59 vehicles by their permit
+  condition, 3 area-wide); closed 7; past term 80, late 22; no address
+  published 1,747 (551 restaurants); not a premises 254; out by rule 859. On
+  the map: 93.2% block, 3.9% MHLW's point, 2.8% town-chōme, 2 at a 小字; 16
+  unplaced (0.4%). MHLW's points a median 65 m from the block point, 87.7%
+  within 250 m (the brief 64 m, 88.3%); 84 rows refused a default point. 55
+  pins at the 内原 shopping center take the 内原2丁目 centroid. 417 repeat rows
+  shown once.
+- The 菓子 / そうざい factory share: 20 of 300 (6.7%), kept (owner,
+  2026-09-24).
+- **Economic Census control: 1.39** (1,690 Food service pins against 1,214
+  establishments), below the built cities' 1.56-1.92, as Kurume's 1.37: the
+  file holds about 91% of permits and a fifth of fixed addresses are
+  withheld.
+- **Privacy verdict: publish.** `check_personal_exposure.py mito`: the Japan
+  pass prints 0; 13 trade names in the raw files are an operator's own name,
+  2 pins show their permit type.
+- **Rail:** N02-25, 5 stations: JR Joban 3, Suigun 1 (水戸, its terminus, a
+  one-station JR stub kept as cut), Kashima Rinkai 3 (水戸 one group on three
+  lines). Gate 3 exact. 7 excluded (Hitachinaka 3, Naka 2, Kasama 1, Oarai
+  1). The thinnest stretch is the Suigun's 26 trains a weekday. OSM's 5 names
+  stand. Median station gap 3,818 m: standard rings. Labels anchored in the
+  city by `in_city_first` (Gifu's).
+- **Register URLs pinned:** attachment ids a refresh renews; `SOURCE_LINKS`
+  matches an href only.
+
+### 2026-10-07 - Iwaki built, the full food list kept whole with five months of new permits, and the barber and beauty list with its four months
+
+- **Iwaki built (page 234, notice 181): 3,730 storefronts (Food service
+  1,983, Food shops 607, Personal services 1,140) around 14 stations on 2
+  lines, 34.7% of them in a ring (1,296).** Fukuyama's shape with
+  Ichinomiya's answered merge (call 149). The city's own CSVs on its
+  食品営業許可施設 and 理容所・美容所 pages (CC BY 4.0, read 2026-10-07 by
+  staging); no laundry list (disclosed, Kōchi's and Akita's sentence). Built
+  by a subagent of the Regional-1 lead, integrated by the lead.
+- **The merge (call 149):** the list of permits in term on 2026-03-31 kept
+  whole, and the five monthly lists of new permits added, as two sources by
+  `SOURCE_KIND`, each term against its own file's date. Past term 0, late 0:
+  the full list's earliest expiry is 2026-05-31, and no list carries a start
+  date apart from the grant date.
+- **Read whole, not through `rebuilt_register`, by measurement:** every
+  full-list row is a permit in term on the list's date; the rebuild's fold
+  hid a live permit with another 種目 at 11 premises (5 Food service pins:
+  3,725 storefronts rebuilt, 3,730 read whole). One pin per premises and
+  bucket folds the repeats instead (218 rows). A shared-code finding.
+- **The brief's figures, against the whole read:** restaurant permits 3,393
+  + 110 = 3,503, 102.3% of e-Stat's 3,425 (the brief's 99.5% is after the
+  fold). Storefront rows: Food service 2,021 (brief 1,998), Retail 781 (756),
+  snack bars out 723 (719): the difference is the fold. Registers: 382
+  barbers and 794 beauty salons, the brief exactly. The mobile salon
+  addressed in 福島市 is set aside by `other_muni`, the other by the
+  mobile-salon rule.
+- **MHLW's file stays a control** (call 150): its 164 addressed
+  notifications left out; not on the notice.
+- **The barber and beauty months** (June to September 2026) are named in the
+  brief and fetched at Step 0 (call 106), so they are read; the 24 earlier
+  food months are cached but not read (already in the full list).
+- **Snack bars:** 種目 バー・スナック等 out whole as Tokyo's バー・キャバレー
+  (owner, 2026-09-29): 723 restaurant permits, about a fifth.
+- **Step 2:** 5,675 rows read. Set aside 1 (another municipality). Not a
+  premises 351 (180 vehicles, 171 stalls). Out by rule 1,345: 723 snack bars,
+  257 manufacturing and other non-counter types, 146 canteens, 140 inside
+  accommodation, 62 caterers, 15 vending, 1 temporary, 1 mobile salon. Join
+  of 3,978 storefront rows: block 3,235, 小字 370, town-chōme 343, unplaced 30
+  (0.8%; the brief's 1.6% came before the foundation's 字 rules). On the
+  map: 81.9% block, 9.7% 小字, 8.4% town-chōme.
+- The 菓子 / そうざい factory share: 28 of 451 (6.2%), kept (owner,
+  2026-09-24).
+- **Economic Census control:** 1,983 Food service pins against 1,226 飲食店
+  establishments in 07204: 1.62, inside the built cities' 1.56-1.92.
+- **Privacy verdict: publish.** `check_personal_exposure.py iwaki`: the Japan
+  pass prints 0; 8 trade names in the raw files are an operator's own name,
+  1 pin shows its permit type.
+- **Rail:** N02-25, 14 stations: JR Joban 10 of 81, JR Ban'etsu East 5 of 16
+  (いわき one group). No Shinkansen in the city. 3 excluded: 広野町 1, 小野町 1,
+  Ibaraki Prefecture 1 (大津港). Gate 3 exact from JR East's line timetables
+  (three line-timetable pages and the いわき index read into the scratchpad,
+  counts only). English names: OSM's 23 objects, no override. Colours from
+  `line_colour_search.py` (the pair 95.4 apart). Median station spacing
+  4,181 m: standard rings. The Ban'etsu East Line, 6 to 8 trains a day each
+  way, drawn and named (calls 46 and 86).
+- **Encoding note:** the June 2026 register month is cp932, not UTF-8 with a
+  BOM as the brief says; `city_rows` sniffs both.
+
+### 2026-10-07 - Gifu built, the city's food permits and notifications of June 2025 and its barber and beauty registers of March 2025, from its CKAN packages
+
+- **Gifu built (page 237, notice 184), Akita's shape (one standing food list
+  of every permit in term on its date, nothing rebuilt) with Toyota's
+  precedent for a list that leaves rows out by design, Yokkaichi's for the
+  city's own notification list and Hamamatsu's for the registers: 6,005
+  storefronts (Food service 3,272, Food shops 1,234, Personal services 1,499)
+  around 12 stations on 5 lines, 30.7% of them in a ring (1,844) on the
+  standard rings, which wait on the owner (parked call 5).** Sources: Gifu
+  City's packages on Gifu Prefecture's CKAN, CC BY 2.0 (read 2026-10-06 by
+  staging): c212016-072, the permit list (4,453 rows) and the notification
+  list (1,093) as of 2025-06-01; c212016-075, the barber (362) and beauty
+  (1,177) registers as of 2025-03-31. The city page's newer food list is not
+  used (owner, 2026-10-06). Built by a subagent of the Regional-1 lead,
+  integrated by the lead.
+- **The brief's open calls, by precedent:** MHLW's 265 unmatched
+  notifications stay out and its file is a control read by no step
+  (Yokkaichi's and Toyama's precedent: the city's own complete notification
+  list supplies the Food shops layer); no laundry list, so Personal services
+  is barbers and beauty salons only, disclosed (Akita's and Tsu's).
+- **The term dates:** the permit list writes 許可開始日 and 許可満了日 as
+  YYYYMMDD, which the shared reader reads as no date; rewritten city-locally
+  in `config.source_rows` (a shared-code finding). Past term 0; 1 菓子製造業
+  permit starting 2025-06-20 waits (call 172), the brief's one.
+- **Step 2:** storefront rows 6,590: Food service 3,382 (the brief exactly),
+  Retail 1,673 (887 permits less the late starter, 787 notifications),
+  Personal services 1,535 (4 beauty rows addressed 一円 are not a premises).
+  Out by rule 490: 286 manufacturing and other non-counter types, 201
+  institutional catering notifications, 3 mail order, the brief's figures
+  exactly. The join: block 6,273, town-chōme 287, 小字 4, unplaced 26 (0.4%),
+  against the brief's about 39: the foundation's `bracket_aza` places the 7
+  鷺山(向井町) rows. 559 repeat rows shown once. On the map: 95.9% block, 4.0%
+  town-chōme, 0.1% 小字. No 業態 column, so konbini, supermarkets, canteens,
+  hotel restaurants and snack bars on a restaurant permit stay in Food
+  service (R3).
+- The 菓子 / そうざい factory share: 28 of 556 (5.0%), kept (owner,
+  2026-09-24).
+- **Food share stated on the page** (call 125, Ichinomiya's precedent): the
+  permit list's 3,382 restaurants and cafes are 66.7% of e-Stat's 5,070 in
+  force on 2025-03-31; the registers are 100.0% of e-Stat's counts.
+- **Economic Census control: 1.51** (3,272 Food service pins against 2,165
+  飲食店 establishments in 21201), the brief's figure, just under the built
+  cities' 1.56-1.92: the list's left-out kinds are not census
+  establishments either.
+- **Privacy verdict: publish.** `check_personal_exposure.py gifu`: the Japan
+  pass prints 0; 4 trade names in the raw files are an operator's own name,
+  2 pins show their permit type.
+- **Rail:** N02-25; 12 stations: Meitetsu Nagoya Main 3 of 60, Kakamigahara
+  6 of 18, Takehana 1 of 9 (柳津, a one-station stub kept as cut, Kobe's
+  standing call), JR Central Tokaido 2 of 89 and Takayama 2 of 36. 名鉄岐阜
+  and 岐阜, 418 m apart, stay apart (Ichinomiya's precedent). Gate 3 exact on
+  all five lines. 18 excluded: 各務原市 7, 羽島市 4, 一宮市 3 (Aichi's N03 through
+  `N03_NEIGHBOR_PREFS`), 笠松町 2, 岐南町 1, 瑞穂市 1. No Shinkansen track
+  crosses the city. The thinnest stretch runs 37 and 40 trains a weekday.
+  **Median nearest-station gap 545 m, not the brief's 641 m**: inside the
+  owner band, parked. English names: OSM's 30 objects; 3 cited overrides
+  (Kano, Kiridoshi, Meitetsu-Gifu). Meitetsu's red split three ways, JR
+  Central's orange two (closest pair within 500 m 18.1).
+- **Labels:** both JR lines' labels landed about 12 km outside the city (the
+  first-segment trap); step 3's `in_city_first` puts all five inside.
+- **Slips:** an early header probe printed one food-list row in full to the
+  agent's own console, including its operator's name; nothing was written
+  anywhere, and later probes printed counts only. The agent read two other
+  builds' commits by `git show` and ran one `git status` (read-only), and
+  read the portal's top page and the prefecture's terms page (no data) for
+  the credit's wording.
+
+### 2026-10-07 - Ōita built, one complete food list with the city's withheld addresses counted apart, the registers of March 2026 and MHLW's notifications
+
+- **Ōita built (page 236, notice 183), Matsuyama's shape (one complete city
+  food list beside MHLW's file), Hamamatsu's for the registers and
+  Ichinomiya's for MHLW's notifications: 6,219 storefronts (Food service
+  2,902, Food shops 1,508, Personal services 1,809) around 17 stations on 3
+  lines, 52.9% of them in a ring (3,290).** On the Japan foundation's rules.
+  Sources: the city's BODIK food list of every permit in term on 2026-09-01
+  (6,199 rows), its barber, beauty and laundry lists of 2026-03-31 (391,
+  1,308, 186), and MHLW's file (its 1,517 notifications read). Built by a
+  subagent of the Regional-1 lead, integrated by the lead.
+- **The withheld addresses (open call 1), by the foundation's `asterisk`
+  rule:** 301 rows whose address the city masks with asterisks are set aside
+  before any de-duplication and counted (250 restaurants), the brief
+  exactly. The city's pages give no reason (staging's licence read), so the
+  page says so plainly (precedents: Maebashi's laundry share stated with its
+  cause; Fukuoka's `ADDRESS_BY_CONSENT` sentence). Of the 269 masked trade
+  names, 267 are on withheld rows; 1 at a visible address shows its permit
+  type, and 1 more is a citywide vehicle.
+- **MHLW (open call 2), by Ichinomiya's call 127 and the batch's rule that
+  hundreds of rows make a layer (Iwaki's call 150 left 164 out):** its
+  notifications as a partial Food shops layer, 802 addressed of 1,517, 426
+  pins. Its 85 permits are not added (all in the city's list by number).
+  MHLW's point against the block point: median 40 m, 93.2% within 250 m (the
+  brief 40 m, 94.7%). `SUPERSEDES` dropped 92 city rows. The city's own
+  notification list was not approved and not fetched (parked call 4).
+- **Terms (calls 161 and 172):** `TERM_AS_OF` food 2026-09-01 (the file's
+  date), MHLW 2026-08-31. Past term 0, late 0, as the brief measured.
+- **The brief's figures reproduce:** Food service 2,990 and Retail 1,323
+  before the join against the brief's 2,989 and 1,324 (one combined 業態 cell
+  read as its restaurant form, call 158). Restaurants 5,053, 101.6% of
+  e-Stat's 4,971. Hostess venues 968.
+- **Step 2:** 9,601 rows read. Set aside 301 withheld and 2 area-wide (MHLW);
+  no address published 715 (MHLW); not a premises 369 (346 大分市内一円
+  vehicles, stalls and demonstration sales, 4 storeless laundry pick-ups, 19
+  MHLW mobile filings). Out by rule 1,524: 968 snack bars and cabarets, 246
+  manufacturing and other non-counter types, 116 vending, 98 canteens, 40
+  temporary or mobile, 33 inside accommodation, 20 caterers, 3 mail order.
+  Join of 6,690 storefront rows: block 5,888, town-chōme 552, 小字 6, MHLW's
+  point 86, unplaced 158 (2.4%). 221 repeat permits shown once. On the map:
+  90.2% block, 8.7% town-chōme, 1.1% MHLW's point, 0.1% 小字.
+- The 菓子 / そうざい factory share: 25 of 873 (2.9%), kept (owner,
+  2026-09-24).
+- **Economic Census control:** 2,902 Food service pins against 1,723 飲食店
+  establishments in 44201: 1.68 per establishment, the brief's estimate.
+- **Privacy verdict: publish.** `check_personal_exposure.py oita`: the Japan
+  pass prints 0; 8 trade names in the raw files are an operator's own name,
+  4 pins show their permit type (3 by the name rule, 1 masked by the city).
+  No asterisk mask reaches the map.
+- **Rail:** N02-25, 17 stations: JR Kyushu's Nippo Main Line 8 of 113, Hohi
+  Main Line 6 of 37, Kyudai Main Line 5 of 37 (大分 one group on all three).
+  No Shinkansen in the prefecture. Median nearest-station gap 2,209 m:
+  standard rings. 6 excluded: 別府市 2, 由布市 2, 臼杵市 1, 豊後大野市 1. Gate
+  3: JR Kyushu's timetable station index (read once by plain GET,
+  2026-10-07, a page outside the cached files) gives 8, 6 and 5, exact.
+  English names: OSM's 34 objects; 9 cited overrides (macrons dropped;
+  豊後国分 "Bungo-Kokubu" for OSM's misread "Bungo-Kobuku"). Colours with the
+  built Kyushu cities' hues (closest pair 92.3). No frequency floor: the
+  thinnest stretch runs 25 to 26 trains a weekday each way.
+- The licence row cites the 大分市オープンデータ利用規約 by title and date only:
+  staging's record gives no URL.
+- **2026-10-07, calls 211 and 212 (owner, relayed by Staging).** The
+  register months (five beauty CSVs, 26 rows; one laundry CSV, July, 2
+  rows; no barber set) are read with each register, Ichinomiya's
+  `source_rows`. They hold new premises only (the register's columns, no
+  closure column; the city publishes no closures), so an upper bound.
+  Personal services 1,809 to 1,836 (one new row unplaced); 6,246
+  storefronts, 53.0% in a ring (3,308); census 1.68; the Japan pass prints
+  0. The city's notification list is fetched and its header read, not
+  wired: step 2 stops on 届出者氏名, an operator column
+  `japan_register.OPERATOR_COLS` lacks. Measured in memory with it added:
+  6,406 storefronts (Food service 2,902, Food shops 1,668, Personal
+  services 1,836); MHLW's file then a points donor only (Toyama's
+  precedent: 21 points, 15 for permits and 6 for notifications), its
+  notifications no longer drawn. BODIK: 3 `package_show` calls and 7
+  downloads, one at a time, 22 s apart.
+- **2026-10-07, call 212 wired (owner, relayed by Staging).** The city's
+  notification list (すべての営業届出施設一覧, as of 2026-09-01, 1,424 rows, 26
+  types) is read as a food source (`SOURCE_KIND`; Gifu's and Yokkaichi's
+  precedent), and MHLW's file is a points donor only (`POINT_DONORS` for
+  food and notify; Toyama's precedent): its notifications are no longer
+  drawn, so `ADDRESS_BY_CONSENT`, `OWN_POINT_FALLBACK` and `SUPERSEDES` are
+  empty. 届出者氏名 joined `japan_register.OPERATOR_COLS_WAVE5` (new cities
+  only; no other Japanese city's raw files carry it, 44 scanned), so the
+  notifier is compared in memory by the name rule; 届出者カナ氏名, the
+  notifier's own address and phones are never selected. **6,406
+  storefronts (Food service 2,902, Food shops 1,668, Personal services
+  1,836), 52.6% of them in a ring (3,372: 728, 1,736 and 908).** Step 2:
+  set aside 349 withheld (301 permits, 48 notifications; was 301) and 1
+  area-wide notification; not a premises 415 (346 permits, 65
+  notifications, 4 laundry pick-ups); out by rule 1,513 (968 snack bars
+  and cabarets, 287 manufacturing and other non-counter types, 126
+  canteens, 124 of them notified 集団給食施設, 73 vending, 33 inside
+  accommodation, 20 caterers, 6 temporary or mobile). The notification
+  list keeps 1,036 storefront rows (乳類販売業 342, コンビニエンスストア 192,
+  食肉販売業 160, 魚介類販売業 104, 野菜果物販売業 97, その他の食料・飲料販売業
+  81, 百貨店・総合スーパー 27, 米穀類販売業 23, 弁当販売業 10) and 537 pins.
+  One pin per premises drops 668 repeat rows (358 notifications for a
+  premises that holds a permit, 182 repeat food permits, 116 repeat
+  notifications, 12 salons). Join of 7,258 rows: block 6,333, town-chōme
+  710, 小字 10, MHLW's point 21, unplaced 184 (2.5%). On the map: 90.1%
+  block (5,770), 9.6% town-chōme (616), 0.2% MHLW's point (14), 0.1% 小字
+  (6). The 菓子 / そうざい factory share: 30 of 903 (3.3%), kept. Census
+  1.68 (2,902 / 1,723), unchanged. Privacy re-run: the Japan pass prints 0
+  of 6,406 rows; 12 trade names in the raw files are an operator's own
+  name, 6 pins show their permit type (5 by the name rule, 1 masked by the
+  city); the Latin heuristic's 28 is not a finding for Japanese names.
+  Verdict: publish. The page, notice 183, `app/cities.py` and the docs
+  follow; the withheld-address sentence and the notice's MHLW clause are
+  proposals (above).
+
+### 2026-10-07 - Akita built, the city's full food list of October 2026, its barber and beauty registers and MHLW's notifications
+
+- **Akita built (page 235, notice 182): 4,961 storefronts (Food service
+  2,727, Food shops 997, Personal services 1,237) around 12 stations on 3
+  lines, 32.7% of them in a ring (1,622).** The city's 食品営業許可施設一覧 is
+  one XLSX of every permit in term on 2026-10-01 (4,041 rows), so nothing is
+  rebuilt; the registers are one file per kind (理容所台帳 420, 美容所台帳 850,
+  as of 2026-08-31); no laundry list exists. All CC BY 4.0, read 2026-10-07
+  by staging (no prescribed wording, no cost clause; the use-report request
+  is not a condition). No `"rules"` key. Built by a subagent of the
+  Regional-1 lead, integrated by the lead.
+- **The food file is renamed monthly:** `SOURCE_LINKS` reads the current
+  `r\d{6}.xlsx` link from the page at a re-fetch (Kawasaki's and Ōtsu's
+  precedent). `TERM_AS_OF` is 2026-10-01, the title's date. Past term 0;
+  starting after the as-of 0.
+- **MHLW's notifications in, as a partial Food-shops layer** (the brief's open
+  call 1), by staging's precedent of 2026-10-06 naming Akita and Ichinomiya's
+  shape (call 127): 1,227 届出 rows, 248 without a published address, 429
+  pins (428 Retail, 1 Food service read as a yatai). MHLW's 245 permits not
+  added. `OWN_POINT_FALLBACK` places 34 notification rows the join misses.
+  `SUPERSEDES` keeps the MHLW row and drops 67 city rows.
+- **The brief's food figures reproduce exactly** on the food list alone (not
+  a premises 345, temporary or mobile by 業態 16, 仕出し 16, vending 1, no rule
+  179; Food service 2,764 and Retail 720 storefront rows; 147 repeat permits;
+  2 names withheld). With the foundation's 字 rules the food join rose from
+  95.0% to 95.8% at the block and unplaced food rows fell from about 35 to 7.
+- **Step 2, all sources:** 6,538 rows read. Not a premises 436; set aside 6
+  (4 MHLW area-wide, 1 MHLW city-name-only, 1 mobile salon); closed 2. Out by
+  rule 600. On the map: 95.9% block, 1.9% 小字, 1.7% town-chōme, 0.5% MHLW's
+  point; 10 unplaced (4 in 御所野堤台3丁目, which MLIT's files lack). MHLW's
+  points a median 56 m from the block point, 86.7% within 250 m; one point
+  546 km off refused by the bbox guard.
+- The 菓子 / そうざい factory share: 20 of 455 (4.4%), kept (owner,
+  2026-09-24).
+- **Economic Census control: 2.13** (2,727 Food service pins against 1,283
+  飲食店 establishments in 05201), above the built cities' 1.56-1.92 (the
+  brief predicted 2.11). The city's 業態名 carries no hostess-venue marker, so
+  snack bars stay in Food service (`docs/category_rules.md` R3; Higashiōsaka's
+  precedent). Built cities with a marker drop 14-16% of their restaurant
+  permits that way (Fukushima 277 of 1,930, Maebashi 407 of 2,481); at that
+  share Akita's ratio would be 1.79-1.82.
+- **Privacy verdict: publish.** `check_personal_exposure.py akita`: the Japan
+  pass prints 0; 15 distinct trade names in the raw files are an operator's
+  own name, 2 pins show their permit type. The registers have no operator
+  column, so only the sign test applies there (0 names).
+- **Rail:** N02-25, 12 stations: JR Ou 8, Uetsu 5, Oga 1 (秋田 one group for
+  Ou and Uetsu, 追分 for Ou and Oga). Gate 3 exact against JR East's station
+  timetables. 2 excluded, both in 潟上市. The Akita Shinkansen runs over the Ou
+  Line's track and is not counted. The Oga Line is a one-station JR stub kept
+  as cut (Kobe's JR Takarazuka Line). The Uetsu Line at 桂根 (3 and 4 trains a
+  weekday) is drawn and named (calls 46 and 86). OSM's 12 English names stand
+  with no override. Colours from `line_colour_search.py` (Ou keeps
+  Fukushima's orange; closest pair 61.6). Median station gap 3,093 m:
+  standard rings.
+
+### 2026-10-07 - Tsu built, Mie Prefecture's lists cut to the city by address
+
+- **Tsu built (page 232, notice 179), Yokkaichi's shape with Uji's one
+  difference: 3,234 storefronts (Food service 1,760, Food shops 559, Personal
+  services 915) around 33 stations on 5 lines, 45.5% of them in a ring
+  (1,472).** Built after staging's licence read the same day (PERMITTED WITH
+  CONDITIONS, CC BY 4.0 by the 三重県オープンデータ利用規約 第１条), which
+  unparked it (parked call 1). Sources: Mie Prefecture's three BODIK lists as
+  of 2026-08-31 (food 18,680 rows, barbers 1,523, beauty 3,853; the
+  prefecture except Yokkaichi). No laundry list exists: a disclosed gap. Built
+  by a subagent of the Regional-1 lead, integrated by the lead.
+- **The cut by address** (`config.source_rows`): an address beginning 津市
+  once the prefecture is dropped, or 久居; a row naming 津市 elsewhere stops
+  the build (none). Food 2,924 and barbers 251, the brief exactly; beauty 705,
+  the brief's 701 plus 4 rows written under Hisai City (三重県久居市明神町,
+  三重県久居中町 ...), merged wholly into Tsu in 2006, whose towns MLIT keys as
+  Tsu's 久居…町: read as Tsu's on Matsue's 八雲村 precedent (an old place name
+  read as the current one). The shared `other_muni` rule alone is not the
+  cut: it would keep the prefecture's 196 unaddressed food rows, 10 register
+  rows addressed 三重県一円 and 2 rows under old district names (多気郡,
+  志摩郡). MHLW's file is a control, read by no step.
+- **The brief's open call 1 needs no call:** MHLW's 159 Tsu retail
+  notifications stay out as too thin, as Iwaki's 164 did (call 150).
+- **Step 2:** 3,880 Tsu rows; no vehicle, stall or 一円 row; combined 業態
+  cells read as their restaurant form 423 (call 158). Out by rule 440: 144
+  manufacturing and other non-counter types, 119 canteens, 78 caterers, 66
+  snack bars and cabarets, 33 inside accommodation, the brief's figures
+  exactly. Storefront rows 3,440: Food service 1,806 and Retail 678 (the
+  brief exactly), Personal services 956 (the brief's 952 plus the 4 Hisai
+  rows). The join: block 2,708, town-chōme 642, 小字 centre 25, unplaced 65
+  (1.9%); the foundation's 小字 rules lifted the brief's figures. 141 repeat
+  permits shown once. On the map: 80.3% block, 18.9% town-chōme, 0.7% 小字.
+  The brief's digit-space-digit pre-step (9 + 2 rows) is not written, being
+  shared code for a few rows. One Hisai row (久居市明神町) may stay coarse:
+  `"town_aliases": {"久居市": "久居"}` in its `japan.CITIES` entry would place
+  it, for review time.
+- The 菓子 / そうざい factory share: 27 of 449 (6.0%), kept (owner,
+  2026-09-24).
+- **Economic Census control: 2.02** (1,760 Food service pins against 872
+  飲食店 establishments in 24201), above the built cities' 1.56-1.92
+  (Yokkaichi 1.79). The catch-all form 飲食店営業（その他） holds 673 of Tsu's
+  1,815 restaurant and cafe rows (37%, against Yokkaichi's 17%): counters the
+  census files under a shop's main trade, plus five years of openings since
+  2021; closures cannot be read (no status or expiry column). No page
+  sentence proposed.
+- **Privacy verdict: publish.** `check_personal_exposure.py tsu`: the Japan
+  pass prints 0. One beauty row's trade name is its operator's own name; it
+  is not placed, so no pin is withheld.
+- **Rail:** N02-25; 33 stations: Kintetsu Nagoya 10 of 44, Kintetsu Osaka 5
+  of 49, JR Kisei 4 of 41, JR Meisho 12 of 15, Ise Railway 4 of 10 (津 one
+  group on three operators, spread 45 m). Median nearest-station gap 1,432 m:
+  standard rings. 9 excluded: 鈴鹿市 5, 亀山市 2, 伊賀市 1, 松阪市 1. No line
+  wholly inside, so no gate 3. English names: OSM's 67 objects, 1 cited
+  override (伊勢大井 Ise-Oi). 川合高岡 and 一志, 179 m apart, stay separate.
+  Colours from `line_colour_search.py` (the Ise Railway's blue goes purple,
+  as in Yokkaichi). The JR Meisho Line, about 8 trains a day each way, drawn
+  and named (calls 46 and 86).
+- **Resource URLs** use the package name, since the brief truncates the
+  package ids and no BODIK call was made; CKAN resolves names as ids. A
+  future re-fetch should confirm one.
+
+### 2026-10-07 - Ichinomiya built, the March food list kept whole with the months since, and the registers with their 2026 months
+
+- **Ichinomiya built (page 231, notice 178), Fukuyama's shape (a city's own
+  full food list plus the months since) with Toyota's precedent for a list
+  that leaves rows out by design and Matsuyama's for MHLW's notifications:
+  4,025 storefronts (Food service 2,001, Food shops 706, Personal services
+  1,318) around 19 stations on 3 lines, 46.9% of them in a ring (1,887).** On
+  the Japan foundation's rules (no `"rules"` key). Sources: the city's food
+  list of permits in term on 2026-03-31 (2,815 rows) and its five monthly
+  lists to 2026-08-31 (193), its barber, beauty and laundry lists of
+  2026-03-31 (300, 819, 242) and the 2026 monthly beauty and laundry lists
+  (13 and 1 rows; approved, call 128, fetched 2026-10-07, 12,264 B), and
+  MHLW's notifications (995 rows). Built by a subagent of the Regional-1
+  lead, integrated by the lead.
+- **Merge (a) (owner, call 126) as two sources, not one rebuilt register.**
+  The brief's `rebuilt_register(as_of=2026-03-31)` predates the term rules: a
+  rebuilt source takes one `TERM_AS_OF`, and at 2026-03-31 call 172 would
+  drop nearly every monthly permit, at 2026-08-31 call 161 would drop the 240
+  old-law permits past their expiry that the owner's merge keeps. So the
+  March list is source `food` (`TERM_AS_OF` 2026-03-31: past term 0) and the
+  months source `food_new` of the same kind (`SOURCE_KIND`; `TERM_AS_OF`
+  2026-08-31), and one pin per premises and bucket shows a renewal once. No
+  shared code changed.
+- **Late starters (call 172):** 62 monthly permits start after 2026-08-31: 29
+  renew a premises the March list already holds (nothing lost), 33 wait.
+  Against the brief's 2,898 permit keys and 2,228 restaurants (67.7%), the
+  build holds 2,867 and 2,207 (67.0%); the 31 keys are those late starters.
+  "About two restaurants in three" stands.
+- **MHLW (call 127):** its 129 permits not added; its notifications as a
+  partial Food-shops layer, 471 addressed of 992 open (the brief exactly),
+  263 pins; its point where the block join misses by the shared
+  `POINT_DONORS` (ward, town and trade name, not the permit number the brief
+  matched on: no shared code keys by number): 9 city rows took it.
+  `OWN_POINT_FALLBACK` placed 37 notification rows; 2 default points refused
+  for 10 rows; MHLW's point against the block point a median 29 m, 94.3%
+  within 250 m (the brief 26 m, 95.3%). 47 city rows dropped for an MHLW row
+  of the same premises and bucket (`SUPERSEDES`, Matsuyama's).
+- **A trap: July's beauty file (`biyou_20260731.csv`) is an XLSX workbook
+  under a .csv name**, read city-locally by its magic bytes
+  (`config.file_rows`). June's file has no 代表者氏名 column, so the months
+  require 施設名称, 施設住所 and 申請者氏名 only.
+- **Step 2:** of 4,302 storefront rows, 4,002 at the block, 131 at a 小字
+  centroid, 68 at a town centre, 46 at MHLW's point, 55 unplaced (1.3%; 43
+  barbers, beauty salons and laundries). On the map: 94.6% block, 3.1% 小字,
+  1.6% chōme, 0.7% MHLW's point. Set aside: 7 area-wide addresses (MHLW), 5
+  addressed in another municipality (the brief's five), 2 mobile salons.
+  Closed 3; past term 0; late 62; no address published 521; not a premises
+  5. Out by rule 471: 130 manufacturing and other non-counter types, 114
+  snack bars and cabarets, 103 canteens, 61 vending, 43 caterers, 10
+  temporary or mobile, 9 inside accommodation, 1 mail order. 175 repeat
+  permits shown once.
+- The 菓子 / そうざい factory share: 30 of 348 (8.6%), kept (owner,
+  2026-09-24).
+- **Economic Census control:** 2,001 Food service pins against 1,434 飲食店
+  establishments in 23203: 1.40 per establishment, below the built cities'
+  1.56-1.92, as expected for a list that holds two restaurants in three (the
+  brief's 1.37; Kurume's 1.37 is the precedent for reporting it with that
+  reason).
+- **Privacy verdict: publish.** `check_personal_exposure.py ichinomiya`: the
+  Japan pass prints 0; 2 trade names in the raw files are an operator's own
+  name, 1 pin shows its permit type (the brief's one beauty salon).
+- **Rail:** N02-25; 19 stations: Meitetsu's Bisai Line 10 of 22, Nagoya Main
+  Line 8 of 60 (名鉄一宮 one group on both), JR Central's Tokaido Line 2 of 89
+  (a main line cut at the line, Kurume's precedent). 名鉄一宮 and 尾張一宮, 38 m
+  apart, are separate N02 groups of different names and stay apart. Median
+  nearest-station gap 935 m: standard rings. 9 excluded: 稲沢市 7, Gifu
+  Prefecture 2 (岐南, 笠松). Gate 3: Meitetsu's station index gives 8 and 10
+  in-city stations, exact. English names: OSM's 38 objects; 2 cited overrides
+  (妙興寺 Myokoji, 奥町 Okucho, macrons dropped). Colours: Meitetsu's red
+  splits into red (Main) and red-orange (Bisai), 18.1 apart (Toyota's split).
+  No frequency floor: the thinnest stretch runs 38 trains a weekday.
+- **The credit's wording:** staging's record names the verdict but not the
+  titles, so the titles were read from the city's own catalogue (2026-10-07)
+  and the form from the terms' 3(2)(イ) (one read of the terms page, no data).
+- **Ring share:** step 3 and the map's layer menu give 1,887; the lead's
+  scratch count 1,884. The page uses the map's.
+
+### 2026-10-07 - Fukuyama built, the food list rebuilt to August 2026 and checked for closures against MHLW's live file
+
+- **Fukuyama built (page 230, notice 177), Higashiōsaka's rebuilt food
+  register plus Matsuyama's MHLW beside a complete city list: 6,365
+  storefronts (Food service 2,926, Food shops 1,665, Personal services 1,774)
+  around 18 stations on 3 lines, 43.1% of them in a ring (2,745).** On the
+  Japan foundation's rules (no `"rules"` key). Sources: the city's CKAN food
+  list of 2026-03-31 (5,880 rows) and its five monthly files since (434
+  filled rows), rebuilt to 2026-08-31; the seven earlier months read for
+  their permit numbers only; MHLW's file (8,573 rows); the barber/beauty
+  (1,634) and laundry (173) registers as of 2026-08-31. Built by a subagent
+  of the Regional-1 lead, integrated by the lead.
+- **The rebuild reproduces the brief exactly**: 6,314 rows read, 5,942 after
+  de-duplication, **5,738 in term, 4,238 restaurants**. It is city-local
+  (`config.rebuilt_food`), because `japan_register.rebuilt_register` returns
+  no permit number (the closure filter and MHLW's point key on it) and keeps
+  only the first form column (業態 before 形態); a check stops the build if
+  its in-term set ever differs from the shared function's.
+- **A renewal that starts after the as-of waits; the permit it replaces
+  stands** (call 172, applied to the rebuild). Ranked on the latest expiry
+  alone, 19 renewals in the August file that start on 2026-09-01 won their
+  premises, and step 2's call-172 rule then dropped them, so 17 premises
+  whose permit ran to 2026-08-31 left the map. The rebuild now ranks only
+  permits started by 2026-08-31: in force 5,736 (4,237 restaurants), 17 with
+  a waiting renewal; the 2 with no earlier permit wait. No direct precedent:
+  for review time.
+- **The closure filter (owner, 2026-10-05, call 6)**: 151 new-law permits
+  MHLW no longer holds, the brief exactly (115 restaurants). Read at build: 7
+  premises had been renewed in MHLW's file alone under a new number starting
+  2026-09-01, so the filter would have dropped an open premises whose renewal
+  call 172 then makes wait. A permit MHLW renewed for the same premises and
+  type under a number no city file lists is therefore not a closure (6 after
+  the rebuild; precedent: the waiting renewal above). **145 left out as
+  closed (109 restaurants); the register keeps 4,128 restaurants, 96.0% of
+  e-Stat's 4,302** (the brief 4,123, 95.8%). For review time.
+- **MHLW beside the city's list (owner, 2026-10-05, call 5)**: its 3,282
+  notifications (1,854 addressed) and 7 closed ones, and its 44 open permits
+  in no city file (34 restaurants; 10 start 2026-09-01 and wait, 15 are
+  institutional kitchens) through `config.mhlw_rows`: 836 Food shops pins and
+  6 Food service pins. Its point by permit number rides on 3,468 rebuilt
+  city rows (`OWN_POINT_FALLBACK` = food and MHLW; call 5a says "by permit
+  number", so not Matsuyama's `POINT_DONORS` name match). `SUPERSEDES` drops
+  395 city rows for an MHLW row at the same premises and bucket (mostly
+  supermarkets and konbini holding a city permit and filing a notification).
+- **Step 2:** 7,269 storefront rows; on the map 90.3% block (5,746), 4.8%
+  MHLW's point (303), 5.0% town-chōme or 大字 centre (316); 27 unplaced
+  (0.4%), most in 水呑町三新田 (MLIT's files lack it). MHLW's point against the
+  block point: median 39 m, 95.6% within 250 m (3,559 rows; the brief 38 m /
+  96.2%). Set aside: 178 area-wide addresses (広島県内 vehicles), 1 in another
+  municipality. Not a premises 102; no address published 1,429 (MHLW; no
+  restaurant); closed 7; starting after the as-of 10 (MHLW). Out by rule
+  1,735: 540 manufacturing and other non-counter types, 421 canteens, 274
+  snack bars and cabarets, 216 vending, 123 karaoke and amusement venues, 74
+  temporary or mobile, 53 inside accommodation, 26 caterers, 8 mail order.
+  482 repeat permits shown once.
+- **Registers**: barbers 396, beauty 1,238 (one file split by 種類),
+  laundries 173 (3 empty rows dropped as no premises); shares of e-Stat
+  FY2024 97.8%, 102.4%, 86.5%. No laundry sentence on the page beyond the
+  counts in What Is Excluded: the dataset gives no cause (Maebashi's was the
+  owner's call 14 for its own note).
+- The 菓子 / そうざい factory share: 52 of 601 (8.7%), kept (owner,
+  2026-09-24).
+- **Rail**: N02-25, the brief's stub test reproduced (Sanyo 5 of 131, Fukuen
+  12 of 27, Ibara 3 of 15), 18 stations (福山 and 神辺 shared), median gap
+  1,479 m: standard rings. 7 excluded (Fuchu 4, Ibara 2, Onomichi 1). OSM
+  `name:en` for all 18 (27 objects; one query under the session's Overpass
+  lock, overpass-api.de 504, kumi answered); 1 override (備後本庄
+  Bingo-Honjo, OSM's macron). No gate 3: no line wholly inside (Fukui's
+  form). No frequency floor (calls 46 and 86); JR at least hourly. Colours
+  from `line_colour_search.py` (Sanyo teal, Fukuen red-orange, Ibara green;
+  closest pair 92.7).
+- **Economic Census control:** 2,926 Food service pins against 1,737 飲食店
+  establishments in 34207: 1.68 per establishment, the brief's estimate,
+  inside the built cities' 1.56-1.92.
+- **Privacy verdict: publish.** `check_personal_exposure.py fukuyama`: the
+  Japan pass prints 0; 35 trade names in the raw files are an operator's own
+  name, 6 pins show their permit type.
+
+### 2026-10-07 - Fukushima built, the full food list kept whole with five months of new permits, all three buckets from the city's own lists
+
+- **Fukushima built (page 233, notice 180): 3,335 storefronts (Food service
+  1,653, Food shops 621, Personal services 1,061) around 22 stations on 4
+  lines, 60.4% of them in a ring (2,013).** Fukuyama's shape (a city's full
+  food list plus the months since) with Ichinomiya's answered merge. All
+  three buckets come from the city's own CSVs on its 食品営業許可施設、
+  生活衛生関係施設一覧 page (CC BY 2.1 JP by the 福島市オープンデータ利用規約;
+  the uncapped ４ accepted, call 110). No `"rules"` key (`ALL_RULES`).
+  `brief_check.py` 18/18 (2026-10-07). Built by a subagent of the
+  Regional-1 lead, integrated by the lead.
+- **The merge (the brief's open call 1), by precedent: Ichinomiya's call 125
+  and Iwaki's 149.** The list of permits in term on 2026-03-31 is kept whole,
+  and the five monthly lists of new permits (April to August) are added.
+  They are read as two sources, `food` and `food_new` (`SOURCE_KIND`), each
+  through `rebuilt_register`, and each permit's term is read against its own
+  file's date (`TERM_AS_OF` 2026-03-31 and 2026-08-31). One source rebuilt
+  from all six files has only one as-of: 2026-03-31 would hold back the 89
+  new permits as late starters (call 172), and 2026-08-31 would drop the 98
+  permits expiring in May and July (call 161), which the months never
+  republish.
+- **The brief's figures reproduce:** one rebuild of all six files gives
+  3,769 rows, 2,883 restaurant permits (101.3% of e-Stat's 2,846), Food
+  service 1,658 and Retail 772. The two sources give 3,776 rows (3,689 +
+  87); the 7 extra rows are new permits at a premises already in the full
+  list (4 Food service, 1 Retail, 2 snack bars), and one pin per premises
+  folds them. Permits past their term 0; starting after the as-of 0. City
+  config only; the foundation's checklist names Fukushima's kind per file
+  as city-local.
+- **MHLW's file stays a control** (open call 2, staging's call 152), by
+  Iwaki's call 150 and Tsu's precedent: a thin notifications layer stays
+  out. Its 44 permits are all in the city's files, and it has 144 fixed
+  Retail notifications. Not in `SOURCE_FILES`, not on the notice; a
+  "(control)" row in `docs/data_sources/japan.md`.
+- **Caterers (open call 4):** the shared `FORM_RULES` as written
+  (`docs/category_rules.md`; Sasebo's and Kanazawa's 仕出し precedent). 230
+  restaurant permits go out as 仕出し, 161 of them also naming a counter
+  form.
+- **The registers' monthly files** (open call 3, staging's 153) were not
+  fetched; the registers stand at 2026-03-31 (parked call 2, not blocking).
+- **2026-10-07, call 210 (owner, relayed by Staging): the barber and beauty
+  months added.** `r0808riyou.csv` (387 B, 1 row) and `r0804biyou.csv` to
+  `r0807biyou.csv` (557, 360, 709 and 658 B; 2, 1, 2 and 2 rows), fetched
+  one at a time from the city's host (HTTP 200 each) and recorded by
+  `fetch_sources.py`; each register read with its months in
+  `config.source_rows` (Ichinomiya's shape). The months hold openings only
+  (令和8年N月の新規開設理容所一覧 / 美容所一覧: the register's columns, every
+  検査確認年月日 inside its month, no closure column), and the page says
+  新規事業者なし for every other month and for both laundry lists. 8 rows,
+  all placed by block, none folded: **3,343 storefronts (Food service
+  1,653, Food shops 621, Personal services 1,069, was 1,061), 60.3% in a
+  ring (2,016; Personal services 566, was 563).** Two are a barber and a
+  beauty salon re-listed at a new address under the same trade name, and
+  one a salon re-listed at its own address under a longer name; the old
+  rows stay, the upper bound the page already states. On the map: 90.9%
+  block, 4.2% town-chōme, 4.9% 小字. Privacy: the Japan pass prints 0 (4
+  own names in the raw files, 2 pins by permit type, unchanged). Census
+  control unchanged, 1.60. Notice 180 adds the months' two titles.
+- **Step 2:** 4,869 rows read (food 3,689, months 87, barbers 278, beauty
+  638, laundries 125, coin laundries 52). Not a premises 162 (145 food
+  permits with no address, the festival stalls among them, and 17 storeless
+  laundry pick-ups). Out by rule 1,196: 277 snack bars and cabarets, 230
+  caterers, 229 manufacturing and other non-counter types, 186 vehicles
+  (種目 自動車による営業, four spellings), 161 canteens, 106 inside
+  accommodation, 7 vending. Join, 3,511 storefront rows: block 3,176,
+  town-chōme 150, 小字 centroid 178 (the foundation's `koaza_centroid`),
+  unplaced 7 (0.2%; the brief's 40 came before the foundation's 字 rules).
+  One pin per premises: 169 repeat rows. On the map: 90.9% block, 4.3%
+  town-chōme, 4.9% 小字. Registers against e-Stat FY2024: barbers 278 of
+  282, beauty salons 638 of 630, laundries 108 of 117, as the brief says.
+- **The 菓子 / そうざい factory share:** 18 of 553 (3.3%), kept (owner,
+  2026-09-24).
+- **Economic Census control:** 1,653 Food service pins against 1,030 飲食店
+  establishments in 07201 (2021, table 9-1A, industry 76): 1.60 per
+  establishment, inside the built cities' 1.56-1.92. The brief's 1,226
+  establishments and its 1.35 estimate do not reproduce from
+  `japan_census_control.py`.
+- **Privacy verdict: publish.** `check_personal_exposure.py fukushima`: the
+  Japan pass prints 0; 4 trade names in the raw files are an operator's own
+  name, 2 pins show their permit type. 営業者氏名 / 営業者氏名漢字 and 開設者氏名
+  are read in memory only; the operators' own addresses and phones are never
+  selected.
+- **Rail:** N02-25, 22 stations: the Iizaka Line 12 of 12, the Abukuma
+  Express 5 of 24, JR Tohoku 5 of 155, JR Ou 3 of 105 (福島 one group on all
+  four, spread 36 m). The Tohoku Shinkansen dropped; the Yamagata
+  Shinkansen stops at neither 笹木野 nor 庭坂. 5 excluded: 伊達市 3, 二本松市
+  1, Yamagata Prefecture 1 (板谷). Gate 3: Fukushima Kotsu's timetable page
+  lists 12 stations, exact. English names: OSM's 32 objects, 3 cited
+  overrides (Bijutsukan-toshokan-mae; Iizaka-onsen, as Hakodate's
+  Yunokawa-onsen; Ioji-mae for OSM's Iohji-mae). Line names follow JR
+  East's 福島 timetable index and ii-den.jp, with no macrons. Colours from
+  `line_colour_search.py` (the Abukuma blue goes teal, Maebashi's; the
+  Tohoku green olive; closest pair 45.4). Median station spacing 862 m:
+  standard rings. No frequency floor (calls 46 and 86): the Ou Line from 福島
+  to 庭坂, about 11 trains a day each way, drawn and named.
+- **A slip:** staging's record did not quote the terms' ２(３) credit form,
+  so the build fetched the terms PDF the brief names
+  (`opendatariyokiyaku_2.pdf`, 133,265 B, HTTP 200, the city's host) into
+  the scratchpad and read the form only; the verdict was not re-read. A
+  terms page, not data, but not named for fetching at the build.
+- **For the next city with a full list plus new-permit months:** under the
+  foundation's term rules (calls 161 and 172) it cannot be one
+  `rebuilt_register` source, since `TERM_AS_OF` takes one date per source;
+  two sources by `SOURCE_KIND` is the shape (Ichinomiya's and Iwaki's too).
+  Proposed for the japan-city skill at review time.
+- **Not done here, by rule:** no region view, label tier or label offset
+  (owner, call 198); `screen_japan_join.py` has no Fukushima entry;
+  `city_master_list.md`'s built counts are Staging's.
+
+### 2026-10-07 - Maebashi built, two food lists split by date and registers rebuilt to August 2026
+
+- **Maebashi built (page 229, notice 176), Fukuoka's and Utsunomiya's
+  two-source food shape plus its 生活衛生 registers: 4,696 storefronts (Food
+  service 2,074, Food shops 1,362, Personal services 1,260) around 19
+  stations on 3 lines, 40.5% of them in a ring (1,901).** The first city on
+  the Japan foundation's rules (no `"rules"` key; `japan.city_rules` gives
+  `ALL_RULES`). Sources: MHLW's filings (4,133 rows, every permit first
+  granted from 2023 and the notifications), the city's food file from its
+  former system (2,117 rows, as of 2026-06-30, granted 2019-10 to
+  2023-03-31; the newest edition at build, `brief_check.py` 9/9), and the
+  registers rebuilt by `config.source_rows`: the 2026-03-31 base zip plus
+  five months of new and closed zips, keyed on 整理番号, every closure
+  matched (barbers 310, beauty 830, laundries 139: the brief exactly). The
+  rebuild stops the build on a closure that matches nothing, a repeated or a
+  blank key, so it is exact, never an upper bound. A city `source_rows`, as
+  the build prompt says for a zipped register; no shared code changed for it.
+- **Terms (calls 161 and 172):** `TERM_AS_OF` MHLW 2026-08-31 (the month its
+  file covers; newest permit 2026-08-28), the food file 2026-06-30 (its own
+  date; its 179 rows expiring 2026-09-30 are in term then). Past term 0;
+  starting after the as-of 1.
+- **Step 2:** of 5,078 storefront rows, 4,628 at the block, 237 at MHLW's own
+  point (all from chōme), 211 at a town centre, 2 unplaced (a barber at
+  駒形町東高島 and a laundry at 駒形町増田境, addresses MLIT's files do not
+  hold). On the map: 91.7% block, 4.4% MHLW's point, 3.9% town centre.
+  MHLW's point against the block point: median 42 m, 92.4% within 250 m
+  (2,100 rows), the brief exactly. 149 of the city's rows dropped for an MHLW
+  row (`SUPERSEDES`: the brief's 18 counted restaurant permits only; the key
+  is per premises and bucket, so the co-located Retail rows and konbini
+  permits it lists go too, as the one-pin rule would fold them), 231 repeat
+  permits shown once. Set aside: 3 mobile salons (`idou`, the brief's three),
+  2 area-wide addresses. Closed 16; no address published 635 (MHLW; 38 of
+  1,850 open restaurant permits, "one in 50", the brief's figure); not a
+  premises 328. Out by rule 1,466: 409 manufacturing and other non-counter
+  types (the brief's 299 + 110 exactly), 407 snack bars and cabarets by
+  業態, 299 canteens, 187 temporary or mobile, 78 vending, 49 inside
+  accommodation, 30 caterers, 7 mail order.
+- The 菓子 / そうざい factory share: 34 of 541 (6.3%), kept (owner,
+  2026-09-24).
+- **Economic Census control:** 2,074 Food service pins against 1,299 飲食店
+  establishments in 10201: 1.60 per establishment, inside the built cities'
+  1.56-1.92 (the brief predicted 1.62 before de-duplication).
+- **Privacy verdict: publish.** `check_personal_exposure.py maebashi`: the
+  Japan pass prints 0; 19 trade names in the raw files are an operator's own
+  name, 3 pins show their permit type. The name rule compares MHLW's 法人名,
+  the food file's 営業者名 and the registers' 開設者氏名 / 営業者氏名 and their
+  representatives, in memory only.
+- **The privacy check's Japan pass corrected** (`scripts/check_personal_exposure.py`):
+  it read a city's rules as `CITIES[slug].get("rules", ())`, so a city built
+  after the foundation (no `"rules"` key) was checked with no rules while
+  step 2 reads `ALL_RULES`; on Maebashi it counted 10 names step 2's rules do
+  not flag (26 names against 19). Now `japan.city_rules(slug)`, which returns
+  `WAVE2_RULES` for every built city, so their verdicts stand (Sasebo
+  re-run: 0). East-1 made the identical one-line change on its branch.
+- **Rail:** N02-25; 19 stations: the Jomo Line 14 of 23, JR Ryomo 4 of 19, JR
+  Joetsu 2 of 39 (新前橋 one group on both JR lines). No Shinkansen station
+  in the city; JR's Agatsuma Line has no in-city station of its own and is
+  not drawn. Median nearest-station gap 1,000 m: standard rings. 6 excluded:
+  桐生市 2, 高崎市 2, 伊勢崎市 1, 渋川市 1. Gate 3: the Jomo Electric
+  Railway's timetable index gives 14 in-city stations, exact. English names:
+  OSM's 35 objects, 1 cited override (心臓血管センター, "Shinzo-kekkan
+  Center"). Colours from `line_colour_search.py` (the Jomo blue goes teal,
+  Sasebo's; Ryomo yellow to ochre; closest pair 61.3). No frequency floor
+  (calls 46 and 86): the Jomo Line every 30 minutes, nothing under hourly.
+- **Not done here, by rule:** no region view, label tier or label offset
+  (owner, call 198: Cleanup builds the Japan views), so the scaffold's
+  default offset stands and Maebashi has no `label_tier`; `screen_japan_join.py`
+  has no Maebashi entry (step 2 measures the join); `city_master_list.md`'s
+  built counts are Staging's (the plan's change 4), so `check_provenance.py`
+  fails on them until Staging moves the batch.
+
 ### 2026-10-07 - Europe splits West and East with Greece east, Germany and Benelux get views, and every country's top city is labelled first (owner, calls 194, 195 and 197; branch europe-split, held for review time)
 
 - **The trigger moved (call 195, owner "yes"):** the split of 2026-10-04 lands
@@ -1934,4 +4491,3 @@ standard rings. `coverage` full, `categories` "All three", `mode` metro,
   each city: Tokyo 164 MB, median 27.8 MB, all 5.94 GB. Zoom 14 is about a
   third of zoom 15. Protomaps' default content; a style of the project's
   own can drop layers.
-
