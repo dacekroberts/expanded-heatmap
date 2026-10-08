@@ -139,6 +139,17 @@ or published; every proposal waits for the owner.
   stops at the stations' extent plus 10 km), and per-line station lists in
   both directions (north/southbound or east/westbound), which need their
   own design and data work in the app.
+- **Station tooltips list the lines served (owner, 2026-10-08)**, each with
+  its swatch and legend name; on a phone, the site's fixed bottom-left
+  panel and selection ring, which the full version already carried (the
+  owner's suggestion for mobile). Tested: a tap on Tokyo lists its 7 lines,
+  on Otemachi its 5. The same shot found Tokyo's credit (MLIT's line beside
+  OSM's) wrapping to three lines on a 390 px phone under the collapsed
+  legend tab: the legend and the panel are now held 10 px above the
+  credit's top, whatever its height. Commit f49b92b8.
+- **Download test:** the package zipped (795 files, 21.9 MB; 13.1 MB
+  zipped), unpacked into a fresh folder: no machine path and no outside
+  load in either page.
 - **Offline, measured:** the owner allowed this session to fetch the nine
   small files (Leaflet 1.9.3 js, css and two images, maplibre-gl-leaflet
   0.1.4, four licence texts; about 183 KB, `curl -o`, contents never
