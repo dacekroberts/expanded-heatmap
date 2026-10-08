@@ -26,6 +26,12 @@ from pipeline.tokyo import credits as tokyo_credits  # noqa: E402 - pure data, n
 
 OVERVIEW_PAGE = "Overview.py"
 
+# The view a city's region button opens when its own region's name is too long
+# for the button row: "← South Korea outside the capital area" wrapped the
+# map's buttons onto a third line at 375 px, so those five cities open the
+# whole-country view, whose second row holds the closer one (owner, 2026-10-08).
+_REGION_BUTTON_VIEW = {"South Korea outside the capital area": "South Korea"}
+
 
 def render_city_nav(current: str):
     """A row at the top of a city page: a link back to the macro map, then
@@ -43,6 +49,7 @@ def render_city_nav(current: str):
     region button beside "Global View" clicks it and shows its words, and the
     Cities menu, which lists every link in `map-only-nav`, never sees it."""
     region = _CITY_BY_NAME[current]["region"]
+    region = _REGION_BUTTON_VIEW.get(region, region)
     with st.container(key="map-region-nav"):
         st.page_link(OVERVIEW_PAGE, query_params={"region": region}, label=f"← {region}")
     if MAP_ONLY_NAV:
