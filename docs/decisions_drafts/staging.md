@@ -4,6 +4,12 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-08 - Kurashiki to B and to Regional-2; phase 2 prompts written for a Sunday start (owner, call 226)
+
+- **"brief and licence read allowed those are small items in grand scheme"** (owner, taken as yes to call 226): Kurashiki C to B, food only, from the year-end PDF; candidates 31 (A 3, B 27, C 1); Regional-2's eleventh city on page 306 and notice 216 (claimed in `docs/session_roles.md`; next free page 307, notice 217). Its brief and the PDF page's licence read run now (two agents).
+- **"i want the build sessions fully prepared to start on sunday"** (owner): `docs/build_plan_2026-10-07.md` now ends with the three phase 2 prompts filled in (cities, page and notice blocks, the licence calls each session applies, the wave 2 rules on master, the merge notes), ready to paste on 2026-10-11, the day the weekly pool resets (19:00 UTC).
+- **Relayed through Cleanup, not yet confirmed in staging's chat:** the weekly 10% check-ins are over, and work until the reset moves to place search, the basemap and site infrastructure. Phase 2 stays held either way; the plan's usage-check-in rule is unchanged until the owner confirms.
+
 ### 2026-10-08 - Kurashiki's year-end food PDF holds the old-law permits: 101.6% of restaurants; its personal-services lists left out (owner, calls 224, 225; 226 put)
 
 - **The probe (call 223)** enumerated the city's whole catalogue (kurashiki.dataeye.jp, 150 datasets, only 1446 on food), okayama-opendata.jp and BODIK (nothing for 33202), and found on the city's own site: (1) the food-permit list of permits in force at 2026-03-31 (page 1004977, PDF 8,034,340 bytes, CC BY 4.0 mark); (2) the catalogue's 2022 year-end CSV (resource 11998, 1.5 MB, PDL, old-law rows of 2022, closures since not removed); (3) barber and beauty year-end lists (page 1004934, PDFs) under the site's all-rights-reserved terms. No laundry list.

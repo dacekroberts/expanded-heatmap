@@ -5,10 +5,11 @@ below and the usage check-ins. This file holds the order, the rules every build
 session follows, and one prompt per session. Staging keeps it current; a
 session's prompt is pasted as its first message.
 
-**Scope.** 64 briefed cities (A 32, B 32) and 6 briefed extensions. Kurashiki
-and Naha (Band C) are not built: Kurashiki waits on an owner call, and Naha on
-one measurement (Kansai-2 takes it if BODIK answers). Band D waits for the
-owner. Seoul, Busan and Daegu (Regional) wait for SEMAS's social-post scope
+**Scope.** 64 briefed cities (A 32, B 32) and 6 briefed extensions. Phases 0
+and 1 landed on 2026-10-07. Phase 2 adds Cluj-Napoca to Kansai-2 (owner, call
+222) and Kurashiki, moved to B on its year-end PDF, to Regional-2 (call 226).
+Naha (Band C) is not built: it waits on one measurement (Kansai-2 takes it if
+BODIK answers). Band D is empty. Seoul, Busan and Daegu (Regional) wait for SEMAS's social-post scope
 (call 71).
 
 **What was measured** (staging, 2026-10-06):
@@ -49,7 +50,7 @@ At most three build sessions at once (owner, 2026-10-04).
 | 1 | **Regional-1** (`japan-regional-1`) | A: Maebashi, Fukuyama, Ichinomiya, Tsu, Fukushima, Iwaki, Akita, Ōita, Gifu, Mito, Morioka | japan-city |
 | 2 | **East-2** (`japan-east-2`) | A: Koshigaya, Sagamihara, Fujisawa. B: Kawaguchi, Funabashi, Matsudo, Ichikawa, Urayasu, Sakura, Yachiyo, Ichihara | japan-city |
 | 2 | **Kansai-2** (`japan-kansai-2`) | B: Ibaraki (Osaka), Minoh, Moriguchi, Kadoma, Neyagawa, Yao, Takatsuki; then Cluj-Napoca (B, food only; owner, call 222); then Naha's measurement if BODIK answers | japan-city; for Cluj-Napoca add-city, osm-rail, address-join, then write the romania-city skill |
-| 2 | **Regional-2** (`japan-regional-2`) | B: Shizuoka, Kanazawa, Okazaki, Aomori, Matsue, Fuji, Matsumoto, Tottori, Yamagata, Kure | japan-city |
+| 2 | **Regional-2** (`japan-regional-2`) | B: Shizuoka, Kanazawa, Okazaki, Aomori, Matsue, Fuji, Matsumoto, Tottori, Yamagata, Kure, Kurashiki (owner, call 226) | japan-city |
 
 - **The foundation landed on 2026-10-07 (7ab440f9).** The five one-city address fixes landed the same day (521d28fc): Gifu's bracketed 字, Morioka's 地割, Mito's 宮町/泉町 and Matsumoto's 湯の原 as WAVE5_RULES switches, Matsue's 八雲村 as a config key (its brief says how). A session started before 521d28fc merges origin/master before Gifu, Mito and Morioka.
 - **Phase 1 starts when the foundation lands on master.** Until Abroad finishes, only two Japan sessions run at once.
@@ -70,7 +71,7 @@ Each session takes its numbers from its own block, recorded in `docs/session_rol
 | Regional-1 | 229–239 | 176–186 |
 | East-2 | 240–250 | 187–197 |
 | Kansai-2 | 251–257 and 305 (Cluj-Napoca) | 198–204 and 215 (Cluj-Napoca) |
-| Regional-2 | 258–267 | 205–214 |
+| Regional-2 | 258–267 and 306 (Kurashiki) | 205–214 and 216 (Kurashiki) |
 
 A session that runs out asks Staging for more. Unused numbers are released when the session lands.
 
@@ -147,6 +148,62 @@ The briefs' shared-code items are already in shared code (the foundation, 7ab440
 
 <KANSAI ONLY: You pull the most from BODIK; keep calls at least 20 s apart, one city at a time, and never use datastore_search_sql.>
 <KANSAI-2 ONLY: After the Japanese cities, build Cluj-Napoca (owner, call 222) from docs/build_briefs/cluj_napoca.md with add-city, osm-rail and address-join, on page 305 and notice 215: food only, the unplaced share stated, placement by the OSM address join with the brief's three repairs plus the nearest same-side house-number tier (Palma's code, at most 6 numbers away), the owner's DSVSA files already in data/cluj_napoca/raw/. At that build, write the romania-city skill (each county numbers its files differently, so map files to roles by name; canteens, catering, trailers and stands out; the OSM join plus the tier; the 70% bar). Then take Naha's one measurement from its master-list row, if BODIK answers without a block; otherwise record the refusal and stop.>
+
+At the batch's end, report to Staging Session as the plan says, and write a handoff note for the next session in your group.
+```
+
+## Phase 2 prompts, ready to paste (prepared 2026-10-08 for a start on Sunday 2026-10-11)
+
+The template above, filled in. Start each in the main checkout, one message each, after the owner's go; the weekly pool resets 2026-10-11 19:00 UTC. All three may run at once (at most three build sessions); Kansai-2 is the slowest (BODIK spacing, then Cluj-Napoca and Naha).
+
+### East-2
+
+```
+First, enter a new worktree named japan-east-2 (use the EnterWorktree tool), then bring it up to date: git fetch origin, then git merge --ff-only origin/master. Then continue.
+
+You are the East-2 build session for expanded-heatmap (worktree japan-east-2). Read docs/build_plan_2026-10-07.md first: its rules and usage check-ins bind you. Start from origin/master, which holds the Japan foundation's shared-code rules and the wave 2 rules (the japan-city skill's "After the large review (2026-10-07)" section: one colour per line site-wide from pipeline/line_registry.py, checked by scripts/check_line_identity.py).
+
+Build, in this order, from each city's brief in docs/build_briefs/ and the japan-city skill, on pages 240-250 and notices 187-197 in build order: Koshigaya, Sagamihara, Fujisawa (A); Kawaguchi, Funabashi, Matsudo, Ichikawa, Urayasu, Sakura, Yachiyo, Ichihara (B).
+
+The briefs' shared-code items are already in shared code (the foundation, 7ab440f9 and 521d28fc; the japan-city skill's foundation section names each rule). If one is missing, it is a parked call, not a city-local fix. Leave "rules" out of each japan.CITIES entry: the new rules are on by default for new cities, and japan.py refuses an entry that names WAVE2_RULES. A zipped register (Sagamihara's) needs a city source_rows.
+
+Licence calls already answered (docs/decisions_drafts/staging.md, "Licence reads for the Japan builds"): Kawaguchi's 「データ利用のみ自由です」 is read permissively, its licence CC BY 2.1 JP (call 208); Fujisawa's individual-operator file goes through the name rule. Merge notes: keep both sides at japan_register.OPERATOR_COLS_WAVE5 and at the WAVE5 switches (name_city, default_joined).
+
+At the batch's end, report to Staging Session as the plan says, and write a handoff note for the next session in your group.
+```
+
+### Kansai-2
+
+```
+First, enter a new worktree named japan-kansai-2 (use the EnterWorktree tool), then bring it up to date: git fetch origin, then git merge --ff-only origin/master. Then continue.
+
+You are the Kansai-2 build session for expanded-heatmap (worktree japan-kansai-2). Read docs/build_plan_2026-10-07.md first: its rules and usage check-ins bind you. Start from origin/master, which holds the Japan foundation's shared-code rules and the wave 2 rules (the japan-city skill's "After the large review (2026-10-07)" section: one colour per line site-wide from pipeline/line_registry.py, checked by scripts/check_line_identity.py).
+
+Build, in this order, from each city's brief in docs/build_briefs/ and the japan-city skill, on pages 251-257 and notices 198-204 in build order: Ibaraki (Osaka), Minoh, Moriguchi, Kadoma, Neyagawa, Yao, Takatsuki (B). Moriguchi is counted first at its brief against Settsu's too-thin test.
+
+The briefs' shared-code items are already in shared code (the foundation, 7ab440f9 and 521d28fc; the japan-city skill's foundation section names each rule). If one is missing, it is a parked call, not a city-local fix. Leave "rules" out of each japan.CITIES entry: the new rules are on by default for new cities, and japan.py refuses an entry that names WAVE2_RULES.
+
+You pull the most from BODIK; keep calls at least 20 s apart, one city at a time, and never use datastore_search_sql. Merge notes: keep both sides at japan_register.OPERATOR_COLS_WAVE5 and at the WAVE5 switches (name_city, default_joined).
+
+After the Japanese cities, build Cluj-Napoca (owner, call 222) from docs/build_briefs/cluj_napoca.md with add-city, osm-rail and address-join, on page 305 and notice 215: food only, the unplaced share stated, placement by the OSM address join with the brief's three repairs plus the nearest same-side house-number tier (Palma's code, at most 6 numbers away), the owner's DSVSA files already in data/cluj_napoca/raw/. Overpass: one query in flight. At that build, write the romania-city skill (each county numbers its files differently, so map files to roles by name; canteens, catering, trailers and stands out; the OSM join plus the tier; the 70% bar).
+
+Then take Naha's one measurement from its master-list row, if BODIK answers without a block; otherwise record the refusal and stop.
+
+At the batch's end, report to Staging Session as the plan says, and write a handoff note for the next session in your group.
+```
+
+### Regional-2
+
+```
+First, enter a new worktree named japan-regional-2 (use the EnterWorktree tool), then bring it up to date: git fetch origin, then git merge --ff-only origin/master. Then continue.
+
+You are the Regional-2 build session for expanded-heatmap (worktree japan-regional-2). Read docs/build_plan_2026-10-07.md first: its rules and usage check-ins bind you. Start from origin/master, which holds the Japan foundation's shared-code rules and the wave 2 rules (the japan-city skill's "After the large review (2026-10-07)" section: one colour per line site-wide from pipeline/line_registry.py, checked by scripts/check_line_identity.py).
+
+Build, in this order, from each city's brief in docs/build_briefs/ and the japan-city skill, on pages 258-267 and notices 205-214 in build order: Shizuoka, Kanazawa, Okazaki, Aomori, Matsue, Fuji, Matsumoto, Tottori, Yamagata, Kure (B); then Kurashiki (B, owner call 226) on page 306 and notice 216, from its year-end PDF of permits in force (pdftotext or pypdf, never a hand-written decoder).
+
+The briefs' shared-code items are already in shared code (the foundation, 7ab440f9 and 521d28fc; the japan-city skill's foundation section names each rule). If one is missing, it is a parked call, not a city-local fix. Leave "rules" out of each japan.CITIES entry: the new rules are on by default for new cities, and japan.py refuses an entry that names WAVE2_RULES.
+
+Licence calls already answered (docs/decisions_drafts/staging.md, "Licence reads for the Japan builds" and the 2026-10-08 Kurashiki entries): Yamagata §4, a use-triggered reimbursement, accepted (call 206); Matsumoto's two use-triggered clauses accepted, the credit naming CC BY 4.0 in the city's format plus LinkData's CC BY 3.0 mark (call 207); Okazaki 5(5), use-triggered, accepted (call 214); Kurashiki's barber and beauty lists stay out (call 225). Matsue's 八雲村 is a config key (its brief says how). Keep BODIK calls at least 20 s apart. Merge notes: keep both sides at japan_register.OPERATOR_COLS_WAVE5 and at the WAVE5 switches (name_city, default_joined).
 
 At the batch's end, report to Staging Session as the plan says, and write a handoff note for the next session in your group.
 ```
