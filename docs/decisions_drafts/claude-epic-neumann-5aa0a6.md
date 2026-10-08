@@ -64,6 +64,66 @@ or published; every proposal waits for the owner.
   | `notices[]` **[L]** | `number` (as `docs/data_sources.md` numbers it), `publisher`, `text`, `verbatim` (true where the wording is prescribed), `applies_to` (`lines`, `stations`, `exits`, `basemap`) | verbatim texts must be reproduced unaltered; only the notices for the exported layers, never a register's |
   | `licences[]` **[L]** | `id`, `source` (publisher and dataset), `licence`, `url`, `obligations` [`attribution`, `share-alike`, `no-modification`, `date-display`, `termination-deletion`, `app-terms-unread`] | the list the app project starts its own reading from; `app-terms-unread` marks a feed whose terms for shipping inside an app this repo has not read (WMATA, LA Metro, IDFM and CRTM went to the app project, 2026-10-07) |
 
+- **The full rail network, not the site's cut (owner, 2026-10-07, at the
+  app project's request; relayed by Cleanup).** The export carries every line
+  and station of a city's network, including what the site leaves off or
+  cuts short: stub lines, lines cut at the city boundary, and lines left out
+  by other rules (frequency floor, scenic, trial service). The site's maps
+  keep their scope; only the export gains these. Fields, all in 1.0.0:
+
+  | Field | Contents |
+  |---|---|
+  | `lines[].on_site_map` | true when any part of the line is drawn on the site |
+  | `lines[].segments[]` | the line as stretches: `geometry` (GeoJSON LineString), `on_site_map`, `exclusion`; a line drawn whole is one segment |
+  | `lines[].geometry` | the full network geometry, the union of the segments (as before) |
+  | `lines[].geometry_status` | `"full"`, or `"cut_only"` (only the site's cut survives; a fresh source is pending), never a cut passed off as whole |
+  | `lines[].color_source`, `lines[].name_source` | `"site"` (the site draws it), `"feed"` (the feed's `route_color` and name) or `"osm"` (the relation's `colour` and `name`); a line the site never drew has no site color, and `"none"` is allowed for color only |
+  | `stations[].on_site_map`, `stations[].exclusion` | the same flag and object for stations, from each city's committed `excluded_stations.csv` |
+  | `exclusion` | null when drawn, else `rule`, `detail` (the reason as the city records it, verbatim), `decided` (the `DECISIONS.md` date and title, or the skill or rules section that sets the rule) |
+
+  `exclusion.rule` is one of: `stub`, `city_boundary`, `other_network` (a
+  neighboring town's own line in the same feed, as Aubagne's tram in
+  Marseille's), `frequency_floor` (the 15-minute test or a country's rail
+  test), `scenic` (heritage or tourist service), `trial_service`,
+  `closed_for_works`, `spacing` (stations only: thinned by
+  `pipeline/stations.py`'s `thin()`, the line itself is drawn), `mode` (a
+  mode outside the page's scope, such as a heavy-rail line on a trams-only
+  page), or `other` (with `detail` required). The station rules map one to
+  one onto `app/station_scope.py`'s `classify()` vocabulary (`thinned` ->
+  `spacing`, `infrequent` -> `frequency_floor`, `outside` -> `city_boundary`
+  or `other_network`, `closed` -> `closed_for_works`), and the export
+  imports that function rather than keeping a second vocabulary; a reason it
+  returns `other` for fails `check_export.py` until a rule is named. The 12
+  `excluded_stations.csv` files (of 162) that carry boundary columns instead
+  of a `reason` (`located_in`, `commune`, `distance_outside_m` and the rest,
+  counted 2026-10-07) map to `city_boundary`.
+- **Where full geometry comes from, per line class.** Measured from the
+  committed step 3 files, 2026-10-07: 27 cities draw lines from a GTFS feed
+  (`load_line_shapes`), 48 from OSM route relations
+  (`load_osm_line_shapes`), 56 from a GeoJSON file
+  (`load_geojson_line_shapes`, MLIT N02 among them), the rest through shared
+  modules (`osm_tram`, the Japanese and country steps).
+
+  | Line class | Full geometry from | Held now? |
+  |---|---|---|
+  | Cut at the city boundary, GTFS city | the cached feed's `shapes.txt`, read before the clip | yes where `data/<city>/raw/` holds the zip (274 zips are cached across cities); else a re-download from the publisher's own host |
+  | Cut at the city boundary, OSM city | the cached relation: every OSM query in the pipelines uses plain `out geom`, never `out geom(bbox)`, so member ways come back whole whatever the query's bbox | lines yes; stop nodes only where they were fetched as relation members rather than by bbox, checked per city |
+  | Cut at the city line, Japanese city | MLIT N02, a national file, before `japan_step1`'s cut at the N03 line | yes, while the N02 cache is held |
+  | GeoJSON-fed city | the raw file the GeoJSON was made from | at risk: where the GeoJSON in `data/<city>/processed/` is itself the cut, and no raw file survives, only the cut is held |
+  | Stub, scenic, trial or frequency-floor line left out whole | GTFS: the same cached feed (its other routes), using the route's own shape, never a line joined through its stops; OSM: the cached relations, if the query selected that route type | at risk where the query filtered route types (`OSM_ROUTES` of tram and light_rail leaves out a funicular or heritage line), or a feed omits shapes for the route |
+  | Station thinned by spacing | nothing to fetch: the line is drawn whole and `excluded_stations.csv` keeps the coordinates | yes |
+
+- **Lines needing a fresh source: from Cleanup's list.** Cleanup is
+  compiling every line the site leaves off or cuts short, with whether full
+  geometry is still held, at
+  `data/_app_requests/rail_scope_2026-10-07.md`. When it arrives, each row
+  goes in a table here: city, line, rule, geometry held (OSM relation,
+  cached GTFS, N02, or cut only), and for a cut-only line the fresh source.
+  A fresh source is a new Overpass query in that city's `fetch_sources.py`
+  (one in flight per session, 60 s after a 504 or 429) or a re-download of a
+  feed the brief already names; anything else goes to the owner first. Until
+  then such a line exports with `geometry_status: "cut_only"`, never left
+  out.
 - **`manifest.json`.** One file for all cities, so a reader's device fetches
   the same thing whichever cities it holds: per city `slug`, `schema_version`,
   `sha256` of `city.json`, `generated_utc`, the basemap pack's `build`,
