@@ -360,6 +360,10 @@ TEXT_WIDTH = {
     # the same 2026-10-07 run; controls Brussels 57.2, Brussels (Regional)
     # 130.2 and Paris 32.9 reproduced.
     "City of Brussels": 106.5,
+    # The review batch's Japanese cities not measured ahead of their builds,
+    # 2026-10-07, the same way; controls Paris 32.9, Boston 48.4, Seattle
+    # (Regional) 120.5 and Higashiōsaka 89.1 reproduced.
+    "Fuchū (Tokyo)": 96.2, "Fukuyama": 69.3, "Maebashi": 64.9, "Mito": 30.7, "Morioka": 54.3,
 }
 
 PILL_H = 18.0             # measured from rendered pixels, 14 px text
