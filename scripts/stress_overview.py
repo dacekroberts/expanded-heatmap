@@ -208,7 +208,7 @@ def build_tree(tmp, scenario, staged, competing=(), country_views=(), groups=Non
         if scenario != "now":
             src = replace_once(src, ', "Japan West": 6.0', "", "REGION_ZOOM's Japan West")
     elif views:
-        src = replace_once(src, '"South Korea", *JAPAN_REGIONS)', '"South Korea", *JAPAN_REGIONS' + views + ")",
+        src = replace_once(src, " *JAPAN_REGIONS)\nMENU_ORDER", " *JAPAN_REGIONS" + views + ")\nMENU_ORDER",
                            "COUNTRY_VIEWS")
     if meridian is not None:
         if '\n    "Europe",\n' not in src:

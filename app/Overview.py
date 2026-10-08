@@ -124,13 +124,14 @@ if len(REGIONS) > 1:
         return f"{n} ({len(_region_cities[n])})"
 
     def _sub_label(n):
-        # The broad view as "All of ...", a half without its parent's name
-        # ("United States West" reads "West" under the United States).
+        # The broad view as "All of ...", a part without its parent's name
+        # ("United States West" reads "West" under the United States, "South
+        # Korea outside the capital area" reads "Outside the capital area").
         if n == _group:
             named = getattr(_cm, "running_name", lambda r: r)
             return f"All of {named(n)} ({len(_region_cities[n])})"
         short = n[len(_group) + 1:] if n.startswith(_group + " ") else n
-        return f"{short} ({len(_region_cities[n])})"
+        return f"{short[:1].upper()}{short[1:]} ({len(_region_cities[n])})"
 
     _sub = [_group, *_menu_sub[_group]] if _group in _menu_sub else []
 

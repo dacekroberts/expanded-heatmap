@@ -267,7 +267,7 @@ REGION_GROUP = {
     # showed as "Japan West (34)", named after the first city's half.
     **{r: "East Asia" for r in JAPAN_REGIONS},
     # South Korea outside the capital area (owner, 2026-10-04).
-    "South Korea": "East Asia",
+    "South Korea outside the capital area": "East Asia",
 }
 
 

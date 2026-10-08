@@ -5,42 +5,80 @@ land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
 The branch is cut from master `b24f66a2` and lands at review time; it is not
-pushed before then. It touches `app/` only (`app/Overview.py`,
-`app/cities.py`), so landing it IS deploying, and `app/cities.py` is a
-module the app imports: **reboot the deployed app after the push.**
+pushed before then. It touches `app/` (`app/Overview.py`, `app/cities.py`,
+`app/country_sections.py`), so landing it IS deploying, and `app/cities.py`
+is a module the app imports: **reboot the deployed app after the push.**
 
-**Downstream inputs this branch changes**: `app/cities.py` gains two region
-views, "Canada" and "Japan" (composites), and `REGIONS` grows from 33 to 35
-entries. No map, output or taxonomy changes. Visuals' pieces that list the
-region menu or count its views would need the new two-row shape.
+**Downstream inputs this branch changes**: `app/cities.py` gains three region
+views, "Canada", "Japan" and "South Korea" (composites); the five-city view
+once named "South Korea" is renamed "South Korea outside the capital area";
+`REGIONS` grows from 33 to 36 entries. The tag on the five Korean cities
+outside the capital area changes, so Visuals or Analytics code keyed on the
+old view name needs the new one. No map, output or taxonomy changes.
 
 ## Landing checklist
 
 - deploy-verify `scope: map-chrome` at review time, at 375 and 1200 px: the
   dropdowns at a phone width, the pills on a wide screen, `?region=Kansai`,
-  a city page's region button, the "Canada" and "Japan" views.
+  a city page's region button, the "Canada", "Japan" and "South Korea"
+  views.
 - Reboot the deployed app after the push (`app/cities.py` changed).
-- `python scripts/check_macro_labels.py`: PROBLEMS 0, 35 regions x 3 widths
+- `python scripts/check_macro_labels.py`: PROBLEMS 0, 36 regions x 3 widths
   (measured on this branch).
 
-## Proposals flagged for review time (UI text no template covers)
+## For the owner at review time
 
-- The second row's label, "Closer view", and its first option, "All of
-  Japan (64)" / "All of the United States (20)"; a half drops its parent's
-  name under that parent ("West (7)", "East (13)").
+- **Daegu's region button reads "South Korea outside the capital area"**,
+  the view's full name, as every city's button reads its view's name. At
+  375 px it is 227 px wide and wraps the map's button row onto a third line
+  (108 px tall); the legend's clearance follows the row, as it does for any
+  fourth button. A shorter button label would be a new, per-view name.
 
-## Open for the owner
+---
 
-- **Korea stays two first-row choices**, "Seoul Capital Area (13)" and
-  "South Korea (5)". One "South Korea" choice with the capital area as a
-  closer view would need a composite named for the whole country, and that
-  name is already the leaf view of the five cities outside the capital
-  area; renaming that view changes links, captions and the city list, so it
-  is the owner's call.
-- **The "Canada" view reverses part of 2026-09-22**, when one Canada view
-  was rejected for leaving every city near an edge. It exists because the
-  owner listed Canada in the first row with West and East beneath it; it
-  competes for labels and is never the default.
+### 2026-10-07 - South Korea becomes one first-row view, like Japan
+
+**Decision.** The region menu's first row has one "South Korea" view
+covering all 18 Korean cities, a composite of the Seoul Capital Area and the
+five cities outside it. Its second row: "All of South Korea (18)", "Seoul
+Capital Area (13)", "Outside the capital area (5)". The five-city view once
+named "South Korea" is renamed "South Korea outside the capital area", a name
+that stands alone in a caption ("Showing 5 cities in South Korea outside the
+capital area."); the menu drops its parent's name, as "United States West"
+reads "West". Owner, 2026-10-07 ("i agree with your recommendations", on the
+recommendations of the entry below). The same call approves the "Closer
+view" label and the "All of ..." option names, and keeps the whole-country
+Canada and Japan views.
+
+**Why.** It fixes review lane 3's O3: the old name captioned 5 cities as
+"in South Korea" when the site has 18, and one country took two first-row
+choices.
+
+**How it is built.**
+- The five cities' `region` tag, `REGION_ORDER`, `COUNTRY_VIEWS`, East
+  Asia's `REGION_LABELS_ALSO` and `country_sections.REGION_GROUP` take the
+  new name; `_CAPTION_NAME` maps both Korean views to "South Korea", so East
+  Asia's caption reads "with the main cities of Japan and South Korea
+  labeled too" (it named the Seoul Capital Area and South Korea before).
+- The composite competes for labels: by hand, Seoul's pill covered
+  Uijeongbu's dot at every width (3 problems); competing, PROBLEMS 0 over 36
+  regions.
+- Links: `?region=South Korea` from before (a back link's `?from=`, a
+  bookmark) now opens the whole country, which holds the five cities it used
+  to open. The in-map region button reads the app's link, so no map is
+  re-rendered: Daegu's opens `?region=South Korea outside the capital area`.
+- Renamed where the build path reads it too: the `korea-city` skill's
+  region rule, `scripts/stress_overview.py`'s anchor in `COUNTRY_VIEWS`, and
+  the master list's built-table row (`check_provenance.py` keys rows by view
+  name).
+
+**Checked.** One local render, 375 and 1200 px: `?region=South Korea` (both
+rows set, "Showing 18 cities in South Korea.", both Korean list sections
+open; 152 px of dropdowns at 375, 172 px of pills at 1200), the "Outside the
+capital area" pill (the five-city view, its caption and list section), and
+Daegu's in-map region button (back on that view, both rows set).
+`check_macro_labels.py` PROBLEMS 0; `check_all.py` 50 of 50;
+`check_deploy_imports.py` PROBLEMS 0 from the commit.
 
 ---
 
@@ -50,7 +88,8 @@ region menu or count its views would need the new two-row shape.
 the broad views, in `REGION_ORDER`'s geographic order: Global, United
 States, Canada, Mexico, Europe West, Europe East, United Kingdom, South
 America, East Asia, Japan, Seoul Capital Area, South Korea, Oceania, West
-Asia (14). The second shows only when the chosen view has closer views, the
+Asia (14; 13 since South Korea became one view, the entry above). The
+second shows only when the chosen view has closer views, the
 broad view first as "All of ...": the United States (West, East), Canada
 (West, East), Japan (its 12 views with cities: Hokkaido, Tohoku, Kanto,
 Saitama Prefecture, Tokyo Metropolis, Chubu, Kansai, Osaka Prefecture,
