@@ -108,13 +108,13 @@ Compare patterns within a city rather than totals between cities.
 **Not every map has all three categories.** Most maps sort storefronts into
 Retail, Food service and Personal services. Some can't, because the city
 doesn't license that trade or its records can't tell trades apart.
-Philadelphia and Boston have no Personal services layer. Amsterdam, Rotterdam
-and Riga merge Retail and Personal services into one "Shops and services"
-layer. In Japan, where only food shops need a license, the shop layer holds
+Philadelphia, Boston, the British maps and many others have no Personal
+services layer. The Dutch and Latvian maps merge Retail and Personal services
+into one "Shops and services" layer. In Japan, where only food shops need a license, the shop layer holds
 food shops alone. A missing or thin layer is a gap in the records, not a quiet
 street.
 
-**Suburban trains appear on only a few maps.** Most maps draw metro-type lines
+**Suburban trains appear on some maps, not all.** Most maps draw metro-type lines
 and leave commuter rail off. A commuter line is included where, inside the
 city, it works like a metro: stations close together, frequent trains, and
 neighborhoods no metro reaches. Dublin's DART and Copenhagen's S-tog are drawn

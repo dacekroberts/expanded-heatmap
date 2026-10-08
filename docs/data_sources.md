@@ -82,7 +82,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 
 | Country | File | Cities |
 |---|---|---|
-| United States | [`data_sources/united-states.md`](data_sources/united-states.md) | San Diego, San Francisco, Los Angeles (Regional), Chicago, New York, Philadelphia, Miami (Regional), Boston, Washington D.C., Buffalo, Sacramento, Houston, Minneapolis, Pittsburgh, Dallas, Kansas City, Tucson, New Orleans, Seattle (Regional) |
+| United States | [`data_sources/united-states.md`](data_sources/united-states.md) | San Diego, San Francisco, Los Angeles (Regional), Chicago, New York, Philadelphia, Miami (Regional), Boston, Washington D.C., Buffalo, Sacramento, Houston, Minneapolis, Pittsburgh, Dallas, Kansas City, Tucson, New Orleans, Seattle (Regional), Tacoma |
 | Canada | [`data_sources/canada.md`](data_sources/canada.md) | Vancouver (Regional), Montréal, Calgary, Edmonton, Toronto, Ottawa, Kitchener–Waterloo (Regional) |
 | Mexico | [`data_sources/mexico.md`](data_sources/mexico.md) | Mexico City (Regional), Guadalajara (Regional), Monterrey (Regional) |
 | Spain | [`data_sources/spain.md`](data_sources/spain.md) | Madrid, Barcelona, Palma |
@@ -92,7 +92,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Norway | [`data_sources/norway.md`](data_sources/norway.md) | Oslo, Bergen |
 | Romania | [`data_sources/romania.md`](data_sources/romania.md) | Bucharest |
 | Sweden | [`data_sources/sweden.md`](data_sources/sweden.md) | Stockholm, Göteborg |
-| Denmark | [`data_sources/denmark.md`](data_sources/denmark.md) | Copenhagen, Aarhus, Odense |
+| Denmark | [`data_sources/denmark.md`](data_sources/denmark.md) | Copenhagen (Regional), Aarhus, Odense |
 | Czechia | [`data_sources/czechia.md`](data_sources/czechia.md) | Prague, Brno, Plzeň, Olomouc, Ostrava, Liberec (Regional), Most (Regional) |
 | Netherlands | [`data_sources/netherlands.md`](data_sources/netherlands.md) | Amsterdam, Rotterdam, Den Haag |
 | Latvia | [`data_sources/latvia.md`](data_sources/latvia.md) | Riga, Liepāja, Daugavpils |
@@ -102,8 +102,8 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
 | Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki, Higashiyamato, Nishitōkyō, Tama, Higashimurayama, Ageo (Regional), Sōka, Tokorozawa, Kasukabe, Fuchū (Tokyo), Chōfu, Tachikawa, Hino, Toyonaka, Hirakata, Suita, Itami, Kakogawa, Amagasaki, Uji, Maebashi, Fukushima, Fukuyama, Ichinomiya, Tsu, Akita, Ōita, Gifu, Iwaki, Mito, Morioka |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin, Gelsenkirchen, Bremen |
-| United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional) |
-| Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
+| United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional), Manchester (Regional), Birmingham (Regional), Edinburgh, Sheffield, Nottingham (Regional), Blackpool (Regional), Liverpool (Regional) |
+| Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires, Mendoza |
 | Australia | [`data_sources/australia.md`](data_sources/australia.md) | Sydney, Melbourne |
 | Belgium | [`data_sources/belgium.md`](data_sources/belgium.md) | Brussels, Antwerp, Ghent, Charleroi, Liège, Brussels (Regional) |
 | Switzerland | [`data_sources/switzerland.md`](data_sources/switzerland.md) | Zurich, Geneva (Regional) |
@@ -4094,7 +4094,8 @@ batch at review time).
   「この地図は以下の著作物を改変して利用しています。[データのタイトル]、枚方市、クリエイティブ・コモンズ・ライセンス 表示 2.1」,
   with the licence URI; MHLW's 出典 line and who processed it (the top page
   linked only); MLIT's credit lines. The city's pages are cited by title, not
-  linked (its linking policy asks for an enquiry before a deep link).
+  linked (its linking policy asks for an enquiry before a deep link). The
+  unlinked credit was approved on 2026-10-07 (owner).
 - **MUST NOT**: claim the ministry's opt-in list is complete; use MHLW's logo.
   Remove the city's credit if it asks (CC BY 2.1 JP 第5条).<!-- internal -->
 - **MUST DO:** `check_personal_exposure.py hirakata` with its Japan pass, run
@@ -4117,7 +4118,8 @@ batch at review time).
   MHLW's 出典 line and who processed it; MLIT's credit lines.
 - **MUST NOT** (§5): present the edited data as if the city made it; harm or
   defame the city or others; use its logo; claim the ministry's opt-in list
-  is complete.<!-- internal -->
+  is complete. The undefined harm and defamation bar was accepted knowingly on
+  2026-10-07 (owner), on the Taoyuan, Fukui and Maebashi precedents.<!-- internal -->
 - **MUST DO:** `check_personal_exposure.py suita` with its Japan pass, run
   2026-10-07; the verdict is in `docs/decisions_drafts/worktree-japan-kansai-1.md`
   ("Hirakata, Suita, Amagasaki and Uji built", 2026-10-07).<!-- /internal -->
@@ -4168,7 +4170,9 @@ batch at review time).
   prescribed, so Yokkaichi's 出典 form with the titles, 尼崎市, the date and
   the licence link; MLIT's credit lines.
 - **MUST NOT** (§6): present the edited data as if the city made it; harm or
-  defame the city or others; imply endorsement.<!-- internal -->
+  defame the city or others; imply endorsement. The undefined harm and
+  defamation bar was accepted knowingly on 2026-10-07 (owner), on the Taoyuan,
+  Fukui and Maebashi precedents.<!-- internal -->
 - **MUST DO:** `check_personal_exposure.py amagasaki` with its Japan pass, run
   2026-10-07; the verdict is in `docs/decisions_drafts/worktree-japan-kansai-1.md`
   ("Hirakata, Suita, Amagasaki and Uji built", 2026-10-07).<!-- /internal -->

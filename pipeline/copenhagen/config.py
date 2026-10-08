@@ -132,7 +132,8 @@ RING_LABELS = ["0-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi", "0.3-0.6 mi"]
 #     the published spacing-and-frequency test, Dublin's DART precedent,
 #     NOT as an exception to it. Inside the two kommuner S-tog's median
 #     station spacing is 1,227 m (F: 892 m) against the Metro's 884 m, every
-#     line runs every 10 minutes through the day, and 22 of its 31 stations in
+#     line but Bx (peak hours only, every 20 min; DSB s-tog-s26.pdf) runs
+#     every 10 minutes through the day, and 22 of its 31 stations in
 #     scope have no Metro station within 400 m. Paris's RER was excluded as an
 #     overlay on a Metro that already covers the city; S-tog is the network in
 #     the districts the Metro does not reach.

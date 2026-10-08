@@ -13,7 +13,7 @@ established. They are not a screen of other Greek cities.
 
 | Question | Answer for Greece | Evidence |
 |---|---|---|
-| Where commerce is recorded | **Municipally, by licence.** The City of Thessaloniki publishes the shops holding an active licence (food premises, hairdressers, beauty salons and the venues the same law licenses); no general-retail register was found | the layer's 79 activity values, read in full 2026-10-04 |
+| Where commerce is recorded | **Municipally, by license.** The City of Thessaloniki publishes the shops holding an active license (food premises, hairdressers, beauty salons and the venues the same law licenses); no general-retail register was found | the layer's 79 activity values, read in full 2026-10-04 |
 | Portal | The City's **GeoServer WFS** (`sdi.thessaloniki.gr`), harvested to data.gov.gr. The City's map portal (`maps.thessaloniki.gr`) carries a no-redistribution splash, read as the web app's own terms (owner, 2026-10-04): never read from it | the brief |
 | License | **CC BY 4.0**, set on the layer's data.gov.gr record | the record, read 2026-10-04 |
 | Personal information | **No name field of any kind**; a point, an activity, a municipal community, a shop code and address fields, which the build never reads | DescribeFeatureType |
@@ -35,7 +35,7 @@ established. They are not a screen of other Greek cities.
 - **Not governing:** the map portal's splash ("in no case are modification
   and/or redistribution permitted"), read as the web app's own terms (owner,
   2026-10-04). The build reads the GeoServer WFS only.
-- **MUST DISPLAY:** the credit, the dataset's title linked, the licence
+- **MUST DISPLAY:** the credit, the dataset's title linked, the license
   linked, and that the data was changed (notice 155). **MUST NOT:** imply the
   City's endorsement; call the layer current, complete or official. The layer
   carries no date, so the page gives the retrieval date.

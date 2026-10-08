@@ -168,6 +168,7 @@ def public(text):
     page."""
     text = INTERNAL.sub("", text)
     text = OWNER_TAG.sub(_owner_tag, text)
+    text = TRAILING_OWNER_TAG.sub("", text)
     return re.sub(r"\n{3,}", "\n\n", text)
 
 
@@ -179,6 +180,15 @@ def public(text):
 # goes whole. "a sole owner" and other business owners are not in brackets of
 # this form, so they stay. scripts/check_internal_prose.py reads through this.
 OWNER_TAG = re.compile(r"[ \t]*\((?:the )?owner\b([^()]*)\)", re.I)
+
+# The same tag at the END of a bracket that opens with a fact: "(3.0%, owner)",
+# "(the flat rule, owner 2026-09-28)", "(...; owner, call 165)", "(158 pending
+# out, owner call 24)". The fact stays and the tag goes: "(3.0%)". Only a date
+# or a call number may follow "owner", so "a sole owner", "owner-occupied" and
+# "owner's rule" stay (review lane 4, 2026-10-07: tags of this shape rendered
+# on What Is Excluded and About the Data).
+TRAILING_OWNER_TAG = re.compile(
+    r"[ \t]*[,;][ \t]*(?:the )?owner\b(?:,?[ \t]+(?:calls?[ \t]+)?\d[\d\-, and]*?)?(?=\))", re.I)
 
 
 def _owner_tag(match):
@@ -289,10 +299,28 @@ def _label(name):
     return f"{name} ({n})"
 
 
+def origin_country(origin):
+    """The country a back-link origin (`?from=`, components.BACK LINKS)
+    implies: a city's own, or a region's when every city in it shares one
+    country (Canada East, Czechia, a Japanese region); None for a region
+    spanning several (Europe West, Benelux) or an unknown name. A city's
+    footer and the Overview's region links carry only `?from=`, and the two
+    reference pages opened on the United States from them (review lane 3,
+    O4, 2026-10-07)."""
+    if not origin:
+        return None
+    for c in CITIES:
+        if c["name"] == origin:
+            return c["country"]
+    countries = {c["country"] for c in CITIES if c["region"] == origin}
+    return countries.pop() if len(countries) == 1 else None
+
+
 def select_country(key):
     """The selector: a region, then that region's countries. Set from
-    ?country= and writing its choice back to the URL so the view can be
-    shared. Returns the chosen country.
+    ?country= (or, without one, from the country `?from=` implies) and
+    writing its choice back to the URL so the view can be shared. Returns
+    the chosen country.
 
     Horizontal st.radio rows labeled "<Name> (<n cities>)", the same control
     as the Overview's region selector (cleanup, 2026-10-01). The owner chose the
@@ -309,7 +337,7 @@ def select_country(key):
     region_key = key + "_region"
     wanted = st.query_params.get("country")
     if wanted not in COUNTRY_ORDER:
-        wanted = None
+        wanted = origin_country(st.query_params.get("from"))
     if wanted and wanted != st.session_state.get(applied):
         st.session_state[applied] = wanted
         st.session_state[region_key] = GROUP_OF[wanted]

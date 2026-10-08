@@ -472,7 +472,7 @@ CITIES = [
         "coverage": "full",
         "mode": "metro",
         "placement": "Register coordinates (100%)",
-        "data_age": "DENUE May 2026 edition, fetched 2026-09-22",
+        "data_age": "DENUE May 2026 edition, fetched 2026-09-22; State of México 2026-10-07",
         "rail_extra": "Trams",
         "record_kind": "National register",
         "categories": "All three",
