@@ -43,8 +43,9 @@ or published; every proposal waits for the owner.
   sprites for the offline test; `basemap_baseline_2026-10-07/` the frozen
   baseline given to the travel app; `shots/` the screenshots.
 - **Open items, in order:** the self-build comparison; Avignon and Florence
-  (extracts first); the shared Travel style (the app's rules below) as a
-  style filter, then the full version as a renderer option (no business
+  (extracts first); the shared Travel style (the app's rules below,
+  including the dotted disputed-border layer and the label-free world map)
+  as a style filter, then the full version as a renderer option (no business
   data, the hard line enforced by a check); white line casings and white
   station dots in Travel for the owner's screenshots; Protomaps' dark
   flavor in Travel; the Overview Business/Travel toggle (`app/`, branch
@@ -90,7 +91,10 @@ or published; every proposal waits for the owner.
     and exits; to be tested); aerodrome #d8dae1, runway #c3c6cf, taxiway
     faint; built-up, attractions and `other` plain.
   - boundaries: country and region; wards per city where useful (Tokyo,
-    Seoul first); disputed borders OPEN.
+    Seoul first); disputed borders decided below. In the builder, OSM
+    admin_level 6 becomes kind `county` (from z8) and 7 or 8 `locality`
+    (from z10), so Seoul's gu (level 6) and Tokyo's special wards (level 7)
+    are different kinds and need their own ward settings.
   - roads: fewer, muted colours; service, driveway, parking_aisle, alley,
     track and drive-through dropped; road numbers and shields dropped to
     start; steps, corridor and pedestrian kept; basemap rail hidden to
@@ -120,6 +124,45 @@ or published; every proposal waits for the owner.
   2026-10-08).** The full Travel pilot will not be updated once the app is
   under way; the app may depart from it, recording each departure and its
   reason in its own DECISIONS.md.
+- **Disputed borders and the world map (owner, 2026-10-08, relayed by the
+  app).**
+  - One neutral style everywhere: every disputed segment drawn as a lighter
+    dotted grey (draft #c4c4c4, 1.5 px, round-cap dots about 1.5 on, 3
+    off), distinct from the settled border's dash, on the world map and in
+    every city. No claim is favoured.
+  - "Disputed" is the builder's `disputed` flag (`Boundaries.java`,
+    protomaps/basemaps main): Natural Earth at z0-5 (featurecla "Disputed
+    (please verify)", "Indefinite (please verify)", "Indeterminant
+    frontier", "Line of control (please verify)"); OSM at z6+
+    (boundary=disputed or claim, disputed=yes, disputed_by, claimed_by);
+    plus kind `unrecognized_country` (Unrecognized, Breakaway, Claim
+    boundary).
+  - Confirmed here in @protomaps/basemaps 5.7.2 (the site's Travel view):
+    the `boundaries_country` layer filters on `kind_detail <= 2` alone and
+    never reads `disputed`; every such line is solid below z4 and dashed
+    [2,1] in #adadad from z4. So disputed lines look settled today, in the
+    site's Travel view as well as the app's; the shared style filter has to
+    add the dotted layer before either goes public.
+  - World map label-free: no country or sea names; only land, sea, borders
+    and the city dots. City and country names appear only in the dot's
+    tooltip and the UI, taken from the export, so every surface uses the
+    site's existing naming choices (Taiwan's cities, Hong Kong).
+  - Inside city packs, OSM's names unchanged, English over the local
+    script. The app reports that none of the 170 cities has a disputed land
+    border within its pack extent (Tbilisi is closest; the South Ossetia
+    line lies outside it); not re-measured here.
+  - About statement, following OSMF's wording: borders and names follow
+    OpenStreetMap's on-the-ground practice and imply no position on any
+    dispute. The app reads the OSMF policy PDF
+    (osmfoundation.org/wiki/File:DisputedTerritoriesInformation.pdf) before
+    citing it.
+  - Ruled out: a worldview per reader's country (the server would have to
+    know where the reader is, against the app's privacy rule). A local view
+    per city pack was offered and not chosen.
+  - Open for the owner: the site's Overview stays on CARTO (decided
+    earlier), whose world map carries country and sea names, so the
+    Overview's Travel toggle would not be label-free unless it moves to the
+    open world pack.
 
 ### 2026-10-08 - Decisions for going public (owner, one pass)
 
