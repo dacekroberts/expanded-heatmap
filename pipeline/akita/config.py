@@ -228,7 +228,14 @@ LINES = {
 # teal (Sasebo's and Maebashi's); the Oga green, too near Food service's pin,
 # darkens to olive. Closest pair 61.6 (Uetsu, Oga); the dark-mode labels
 # separate, 3 of 3.
-_COLOURS = {"OU": "#E07800", "UE": "#007890", "OG": "#586818"}
+# FOOD SHOPS OLIVE (#737a00, 2026-10-07) arrived after this search: the Oga
+# Line's olive #586818 sat 15.8 from it, under the owner's floor of 20
+# (2026-10-07). It takes #007430, a dark green: the colour nearest JR East's
+# #3CB371 that reads 3:1 on both pages and clears 25 from every pin (25.2
+# from the green pin, 38.0 from olive, between 20 and 45: an accepted trade).
+# The JR East green on Fukushima's, Morioka's and Mito's maps is the same.
+# Closest pair now 56.3 (Uetsu, Oga).
+_COLOURS = {"OU": "#E07800", "UE": "#007890", "OG": "#007430"}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

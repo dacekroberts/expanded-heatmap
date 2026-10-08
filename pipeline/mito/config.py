@@ -227,7 +227,13 @@ LINES = {
 # Personal services'), the Kashima Rinkai magenta toward violet (45.2 from
 # Food service's). Closest pair 69.6 (Joban, Suigun); the dark-mode labels
 # separate, 3 of 3.
-_COLOURS = {"JJ": "#08A0C0", "SG": "#586818", "OK": "#F000B8"}
+# FOOD SHOPS OLIVE (#737a00, 2026-10-07) arrived after this search: the
+# Suigun Line's olive #586818 sat 15.8 from it, under the owner's floor of 20
+# (2026-10-07). It takes #007430, a dark green, as Akita's Oga Line: the
+# colour nearest JR East's #3CB371 that reads 3:1 on both pages and clears 25
+# from every pin (25.2 from Personal services', 38.0 from olive, between 20
+# and 45: an accepted trade). Closest pair now 62.3 (Joban, Suigun).
+_COLOURS = {"JJ": "#08A0C0", "SG": "#007430", "OK": "#F000B8"}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

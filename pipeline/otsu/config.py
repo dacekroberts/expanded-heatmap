@@ -169,7 +169,7 @@ LINES = {
     "KI": {"n02": [(_KH, "石山坂本線")], "name": "Keihan Ishiyama-Sakamoto Line", "name_ja": "石山坂本線",
            "short": "Keihan", "hue": "#00A040"},
     "KK": {"n02": [(_KH, "京津線")], "name": "Keihan Keishin Line", "name_ja": "京津線",
-           "short": "Keihan", "hue": "#909040"},
+           "short": "Keihan", "hue": "#949054"},
     "JC": {"n02": [(_JR, "湖西線")], "name": "JR Kosei Line", "name_ja": "湖西線", "short": "JR", "hue": "#00B2E5"},
     "JB": {"n02": [(_JR, "東海道線")], "name": "JR Biwako Line", "name_ja": "琵琶湖線", "short": "JR",
            "hue": "#0072BC"},
@@ -180,7 +180,11 @@ LINES = {
 # and clears CIE76 45 from every pin. The Keishin and Biwako lines come out
 # as Kyoto's own colours for them. Closest pair within 500 m and anywhere
 # 26.7 (the Kosei and Biwako lines); the dark-mode labels separate, 4 of 4.
-_COLOURS = {"KI": "#28A800", "KK": "#909040", "JC": "#08A0C0", "JB": "#406878"}
+# FOOD SHOPS OLIVE (#737a00, 2026-10-07) arrived after this search: the
+# Keishin Line's #909040 sat 16.0 from it, under the owner's floor of 20
+# (2026-10-07), and takes Kyoto's new colour for the same line, #949054
+# (olive 25.2, between 20 and 45: an accepted trade). Its start hue follows.
+_COLOURS = {"KI": "#28A800", "KK": "#949054", "JC": "#08A0C0", "JB": "#406878"}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

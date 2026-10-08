@@ -255,7 +255,7 @@ LINES = {
     "JH": {"n02": [(_JR, "香椎線")], "name": "JR Kashii Line", "name_ja": "香椎線", "colour": "#B03800",
            "short": "JR"},
     # Nishitetsu (西日本鉄道)
-    "NT": {"n02": [(_NNR, "天神大牟田線")], "name": "Nishitetsu Tenjin Ōmuta Line", "name_ja": "天神大牟田線",
+    "NT": {"n02": [(_NNR, "天神大牟田線")], "name": "Nishitetsu Tenjin Omuta Line", "name_ja": "天神大牟田線",
            "colour": "#688090", "short": "Nishitetsu"},
     "NK": {"n02": [(_NNR, "貝塚線")], "name": "Nishitetsu Kaizuka Line", "name_ja": "貝塚線", "colour": "#786078",
            "short": "Nishitetsu"},

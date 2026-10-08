@@ -162,7 +162,7 @@ COLLAPSE_MAX_SPREAD_M = 400
 # legal name: 東海道線 is both the JR Kyoto Line (east of Osaka) and the JR Kobe
 # Line (west of it), split in BRANCHES; 片町線 is the JR Gakkentoshi Line, 関西線
 # the JR Yamatoji Line and 桜島線 the JR Yumesaki Line (JR West's names). The
-# Chūō Line arrives in two railway classes (大阪港-コスモスクエア is class 12)
+# Chuo Line arrives in two railway classes (大阪港-コスモスクエア is class 12)
 # and the New Tram in two (16 and 24), each under one line name.
 #
 # COLOURS: the project's own, not the operators' (2026-09-27). Each line took
@@ -172,7 +172,7 @@ COLLAPSE_MAX_SPREAD_M = 400
 # line - a search over the sRGB cube, not an eyeballed palette (Kobe's rules,
 # the japan-city skill's trap 10). 34 lines between three pins leave little
 # room: without the hue pull the best pairwise floor for 34 colours is ~19.7,
-# so several lines left their operator's hue (the Chūō Line olive, JR Kyoto
+# so several lines left their operator's hue (the Chuo Line olive, JR Kyoto
 # slate). No exception below 45 against the pins; closest line pairs 18.0.
 #
 # FOOD SHOPS OLIVE (#737a00, 2026-10-07) is a fourth pin, after this search.
@@ -181,17 +181,30 @@ COLLAPSE_MAX_SPREAD_M = 400
 # (moved 5.9, olive 13.3, nearest line Nankai Koya 18.1). Twelve of 34 lines
 # sit below 45 from olive (the Hankai Line nearest, 12.6), a recorded trade:
 # rule (b) holds against the three pins it was searched for.
+#
+# The owner then set the floor from olive at 20 (2026-10-07). Three lines sat
+# under it and each moved, in this order, to the colour nearest its own that
+# reads 3:1 on both pages, clears 20 from every pin and 18 from every other
+# line, taking a wider margin where it cost little: the Hankai Line #516C00
+# (12.6) to #449418 (olive 30.3), ONE colour with Sakai's, which draws the
+# same line; the Uemachi Line #9C9830 (13.3) to #7C9C48 (20.4); the Nagahori
+# Tsurumi-ryokuchi Line #7E9F1E (18.2) to #7CA014 (20.1). The last two could
+# go no further: the Hankai, the Uemachi, the Nagahori and JR Yamatoji greens
+# hold each other at 18. Twelve of 34 lines sit between 20 and 45 from olive,
+# an accepted trade (owner, 2026-10-07). Closest pair still 18.0; the
+# dark-mode labels separate, 34 of 34. DECISIONS, "Lines within 20 of the
+# olive and violet pins recoloured".
 _JR, _M = "西日本旅客鉄道", "大阪市高速電気軌道"
 LINES = {
     # Osaka Metro (大阪市高速電気軌道)
     "M": {"n02": [(_M, "1号線(御堂筋線)")], "name": "Midōsuji Line", "name_ja": "御堂筋線", "colour": "#E4151E"},
     "T": {"n02": [(_M, "2号線(谷町線)")], "name": "Tanimachi Line", "name_ja": "谷町線", "colour": "#933CA5"},
     "Y": {"n02": [(_M, "3号線(四つ橋線)")], "name": "Yotsubashi Line", "name_ja": "四つ橋線", "colour": "#00A2C3"},
-    "C": {"n02": [(_M, "4号線(中央線)")], "name": "Chūō Line", "name_ja": "中央線", "colour": "#5D662A"},
+    "C": {"n02": [(_M, "4号線(中央線)")], "name": "Osaka Metro Chuo Line", "name_ja": "中央線", "colour": "#5D662A"},
     "S": {"n02": [(_M, "5号線(千日前線)")], "name": "Sennichimae Line", "name_ja": "千日前線", "colour": "#DB69CF"},
     "K": {"n02": [(_M, "6号線(堺筋線)")], "name": "Sakaisuji Line", "name_ja": "堺筋線", "colour": "#90542D"},
     "N": {"n02": [(_M, "7号線(長堀鶴見緑地線)")], "name": "Nagahori Tsurumi-ryokuchi Line",
-          "name_ja": "長堀鶴見緑地線", "colour": "#7E9F1E"},
+          "name_ja": "長堀鶴見緑地線", "colour": "#7CA014"},
     "I": {"n02": [(_M, "8号線(今里筋線)")], "name": "Imazatosuji Line", "name_ja": "今里筋線", "colour": "#E77512"},
     "P": {"n02": [(_M, "南港ポートタウン線")], "name": "New Tram", "name_ja": "ニュートラム", "colour": "#00758A"},
     # JR West (西日本旅客鉄道)
@@ -200,7 +213,7 @@ LINES = {
     "JK": {"n02": [(_JR, "東海道線")], "name": "JR Kobe Line", "name_ja": "JR神戸線", "colour": "#755A75"},
     "JH": {"n02": [(_JR, "JR東西線")], "name": "JR Tōzai Line", "name_ja": "JR東西線", "colour": "#FF21C0"},
     "JG": {"n02": [(_JR, "片町線")], "name": "JR Gakkentoshi Line", "name_ja": "学研都市線", "colour": "#C303A8"},
-    "OH": {"n02": [(_JR, "おおさか東線")], "name": "Osaka Higashi Line", "name_ja": "おおさか東線",
+    "OH": {"n02": [(_JR, "おおさか東線")], "name": "JR Osaka Higashi Line", "name_ja": "おおさか東線",
            "colour": "#A28DA8"},
     "JP": {"n02": [(_JR, "桜島線")], "name": "JR Yumesaki Line", "name_ja": "JRゆめ咲線", "colour": "#7293A5"},
     "JQ": {"n02": [(_JR, "関西線")], "name": "JR Yamatoji Line", "name_ja": "大和路線", "colour": "#12A500"},
@@ -232,8 +245,8 @@ LINES = {
     "NS": {"n02": [("南海電気鉄道", "高野線")], "name": "Nankai Shiomibashi Line", "name_ja": "南海汐見橋線",
            "colour": "#7B5D18"},
     # Hankai Tramway (阪堺電気軌道)
-    "RH": {"n02": [("阪堺電気軌道", "阪堺線")], "name": "Hankai Line", "name_ja": "阪堺線", "colour": "#516C00"},
-    "RU": {"n02": [("阪堺電気軌道", "上町線")], "name": "Uemachi Line", "name_ja": "上町線", "colour": "#9C9830"},
+    "RH": {"n02": [("阪堺電気軌道", "阪堺線")], "name": "Hankai Line", "name_ja": "阪堺線", "colour": "#449418"},
+    "RU": {"n02": [("阪堺電気軌道", "上町線")], "name": "Uemachi Line", "name_ja": "上町線", "colour": "#7C9C48"},
 }
 # The operator as a station suffix, used only where two stations share an
 # English name (Kobe's Mikage (Hankyu) / Mikage (Hanshin)).
@@ -269,7 +282,7 @@ BRANCHES = {
            "label": "Umekita-Fukushima track (limited expresses only)"},
     "UK": {"line": (_JR, "東海道線"), "terminus": "大阪", "terminus_at": _UMEKITA, "junction": "新大阪",
            "junction_at": (34.73403, 135.50151), "junction_m": 400, "stations": (), "shared": ("大阪", "新大阪"),
-           "length_m": (3000, 4500), "draw_as": "OH", "label": "Umekita track (Osaka Higashi Line)"},
+           "length_m": (3000, 4500), "draw_as": "OH", "label": "Umekita track (JR Osaka Higashi Line)"},
     "JK": {"line": (_JR, "東海道線"), "terminus": "塚本", "junction": "大阪", "junction_at": (34.70250, 135.49498),
            "junction_m": 350, "stations": ("塚本",), "length_m": (8000, 13000)},
     "NS": {"line": ("南海電気鉄道", "高野線"), "terminus": "汐見橋", "junction": "岸里玉出",

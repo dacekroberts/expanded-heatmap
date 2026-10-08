@@ -84,8 +84,10 @@ LEGEND_NAMES = {"Tram": "(Airport - Newhaven)"}
 # is drawn, after scripts/line_colour_search.py.
 LINES = {"Tram": {"hue": "#b8860b"}}
 # `python scripts/line_colour_search.py edinburgh`, run 2026-10-02: the hue's
-# nearest feasible colour, 73.6 from every pin, 5.86:1 on the dark page and
-# 3.20:1 on the light; one line, so no pair to separate.
+# nearest feasible colour, 73.6 from the pins of that run, 5.86:1 on the dark
+# page and 3.20:1 on the light; one line, so no pair to separate. FOOD SHOPS
+# OLIVE (#737a00, 2026-10-07) arrived later: the line sits 28.1 from it, above
+# the owner's floor of 20 and below 45, an accepted trade (2026-10-07).
 LINE_COLOURS = {"Tram": "#B88810"}
 
 # GATE 3 - the whole line against the operator's own stop list: the route map

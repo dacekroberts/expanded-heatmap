@@ -284,8 +284,21 @@ LINES = {
 # Kintetsu's red, the Randen's Kyoto purple, Eiden's orange. Result: pins
 # 45.0-74.8, closest line pair 18.0 (Hankyu's two lines). Four greens for
 # Keihan left the Karasuma Line olive.
-COLOURS = {"K": "#608000", "T": "#E85820", "JA": "#08A0C0", "JB": "#406878", "JE": "#C870C8", "JD": "#A87840",
-           "JC": "#7098A8", "KM": "#586818", "KO": "#60A000", "KU": "#20A800", "KK": "#909040", "HY": "#905848",
+#
+# FOOD SHOPS OLIVE (#737a00, 2026-10-07) arrived after this search, and three
+# lines sat under the owner's floor of 20 from it (2026-10-07). Each moved to
+# the colour nearest its own that reads 3:1 on both pages, clears 20 from
+# every pin this map draws and 18 from every other line, taking 25 where that
+# cost little: the Karasuma Line #608000 (11.6) to #387C04, a greener green
+# (olive 25.4); the Keihan Main Line #586818 (15.8) to #506C30 (25.6); the
+# Keihan Keishin Line #909040 (16.0) to #949054 (25.2), ONE colour with
+# Otsu's, which draws the same line. Six of 18 lines sit between 20 and 45
+# from olive (these three, the Keihan Oto 29.1, JR Nara 33.2, Eiden Eizan
+# 43.0), an accepted trade (owner, 2026-10-07). Closest pair still 18.0; the
+# dark-mode labels separate, 18 of 18. DECISIONS, "Lines within 20 of the
+# olive and violet pins recoloured".
+COLOURS = {"K": "#387C04", "T": "#E85820", "JA": "#08A0C0", "JB": "#406878", "JE": "#C870C8", "JD": "#A87840",
+           "JC": "#7098A8", "KM": "#506C30", "KO": "#60A000", "KU": "#20A800", "KK": "#949054", "HY": "#905848",
            "HA": "#C88070", "KT": "#E80010", "RA": "#9840A0", "RK": "#B880A8", "EM": "#D08000", "EK": "#B05800"}
 for _k, _v in LINES.items():
     _v["colour"] = COLOURS[_k]

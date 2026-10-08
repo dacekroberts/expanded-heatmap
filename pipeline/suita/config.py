@@ -241,7 +241,7 @@ LINES = {
            "hue": "#87544B"},
     "JY": {"n02": [(_JR, "東海道線")], "name": "JR Kyoto Line", "name_ja": "JR京都線", "short": "JR",
            "hue": "#4E6375"},
-    "OH": {"n02": [(_JR, "おおさか東線")], "name": "Osaka Higashi Line", "name_ja": "おおさか東線", "short": "JR",
+    "OH": {"n02": [(_JR, "おおさか東線")], "name": "JR Osaka Higashi Line", "name_ja": "おおさか東線", "short": "JR",
            "hue": "#A28DA8"},
     "MO": {"n02": [(_MO, "大阪モノレール線")], "name": "Osaka Monorail Main Line", "name_ja": "大阪モノレール本線",
            "short": "Monorail", "hue": "#007890"},
@@ -280,7 +280,7 @@ LINE_NAMES = {k: v["name"] for k, v in LINES.items()}
 BRANCHES = {
     "UK": {"line": (_JR, "東海道線"), "terminus": "大阪", "terminus_at": (34.70274, 135.49316), "junction": "新大阪",
            "junction_at": (34.73403, 135.50151), "junction_m": 400, "stations": (), "shared": ("大阪", "新大阪"),
-           "length_m": (3000, 4500), "draw_as": "OH", "label": "Umekita track (Osaka Higashi Line)"},
+           "length_m": (3000, 4500), "draw_as": "OH", "label": "Umekita track (JR Osaka Higashi Line)"},
 }
 
 # Gate 3: no line lies wholly inside the city. The one in-city run an operator

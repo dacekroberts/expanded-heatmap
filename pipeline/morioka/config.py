@@ -261,7 +261,12 @@ LINES = {
 # in, goes to a lighter cyan. Closest pair within 500 m 62.5 (Tohoku,
 # Yamada), anywhere 45.4 (Yamada, Hanawa, which meet nowhere); the dark-mode
 # labels separate, 5 of 5.
-_COLOURS = {"IG": "#08A0C0", "TH": "#586818", "TZ": "#9840A0", "YM": "#E07800", "HN": "#E80020"}
+# FOOD SHOPS OLIVE (#737a00, 2026-10-07) arrived after this search: the
+# Tohoku Line's olive #586818 sat 15.8 from it, under the owner's floor of 20
+# (2026-10-07). It takes #007430, a dark green, ONE colour with Fukushima's
+# for the same line (25.2 from the green pin, 38.0 from olive, between 20 and
+# 45: an accepted trade).
+_COLOURS = {"IG": "#08A0C0", "TH": "#007430", "TZ": "#9840A0", "YM": "#E07800", "HN": "#E80020"}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

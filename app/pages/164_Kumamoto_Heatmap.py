@@ -57,7 +57,7 @@ st.markdown(
 **The lines**
 
 - Five lines are drawn, each labeled on the map and in the legend: the Kumamoto City Tram;
-  Kumamoto Electric Railway's Kikuchi and Fujisaki lines; and JR Kyushu's Kagoshima Main and Hohi
+  Kumamoto Electric Railway's Kikuchi and Fujisaki lines; and JR Kyushu's Kagoshima and Hohi main
   lines.
 - The city tram's routes share most of their track, so the tram is drawn as one line.
 - Lines and stations come from MLIT's national railway data (国土数値情報); station names in

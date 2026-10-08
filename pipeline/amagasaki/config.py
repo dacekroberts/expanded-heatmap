@@ -207,7 +207,7 @@ LINES = {
     "JK": {"n02": [(_JR, "東海道線")], "name": "JR Kobe Line", "name_ja": "JR神戸線", "short": "JR",
            "hue": "#755A75"},
     "JT": {"n02": [(_JR, "福知山線")], "name": "JR Takarazuka Line", "name_ja": "JR宝塚線", "short": "JR",
-           "hue": "#9F9504"},
+           "hue": "#A8903C"},
     "JH": {"n02": [(_JR, "JR東西線")], "name": "JR Tōzai Line", "name_ja": "JR東西線", "short": "JR",
            "hue": "#FF21C0"},
     "HK": {"n02": [(_HK, "神戸線")], "name": "Hankyu Kobe Line", "name_ja": "阪急神戸線", "short": "Hankyu",
@@ -223,7 +223,12 @@ LINES = {
 # maroon goes rust (45.2 from the pins, 20.1 from the Hankyu Kobe Line). Closest
 # pair within 500 m and anywhere 19.2 (Hanshin Main / Namba); the dark-mode
 # labels separate, 7 of 7.
-_COLOURS = {"SH": "#807878", "SN": "#486860", "JK": "#785870", "JT": "#A09808", "JH": "#F820C0", "HK": "#C87858",
+# FOOD SHOPS OLIVE (#737a00, 2026-10-07) arrived after this search: the JR
+# Takarazuka Line's #A09808 sat 16.7 from it, under the owner's floor of 20
+# (2026-10-07), and takes Kobe's new colour for the same line, #A8903C (olive
+# 20.1, between 20 and 45: an accepted trade; Kobe's config gives the
+# search). Its start hue follows.
+_COLOURS = {"SH": "#807878", "SN": "#486860", "JK": "#785870", "JT": "#A8903C", "JH": "#F820C0", "HK": "#C87858",
             "HI": "#A04820"}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])

@@ -175,11 +175,23 @@ COLLAPSE_MAX_SPREAD_M = 300
 # 20 against every other line (2026-09-27; closest line pair 20.5, Kaigan /
 # Kobe Kōsoku). With no branding decision behind them, a new city's own
 # colours clear the preferred 45 (pipeline/linecolour.py).
+#
+# FOOD SHOPS OLIVE (#737a00, 2026-10-07) arrived after these, and two lines
+# sat under the owner's floor of 20 from it (2026-10-07). Each moved to the
+# colour nearest its own that reads 3:1 on both pages, clears 20 from every
+# pin and 18 from every other line, on every map that draws it: the JR
+# Takarazuka Line #9F9504 (16.3) to #A8903C, a mustard held to a yellow hue
+# (LCh 87-111 degrees), ONE colour with Amagasaki's and Itami's (olive 20.1,
+# nearest line Shintetsu Ao 19.5: the yellows and ochres of the three maps
+# leave no more room); the Hokushin Line #7A9C1C (17.5) to #6CA424 (25.6).
+# Three of 15 lines sit between 20 and 45 from olive (those two and the
+# Shintetsu Ao Line 29.0), an accepted trade (owner, 2026-10-07). DECISIONS,
+# "Lines within 20 of the olive and violet pins recoloured".
 LINES = {
     "SY": {"n02": [("神戸市", "山手線"), ("神戸市", "西神線"), ("神戸市", "西神延伸線")],
            "name": "Seishin-Yamate Line", "name_ja": "西神・山手線", "colour": "#05A904"},
     "HO": {"n02": [("神戸市", "北神線")],
-           "name": "Hokushin Line", "name_ja": "北神線", "colour": "#7A9C1C"},
+           "name": "Hokushin Line", "name_ja": "北神線", "colour": "#6CA424"},
     "KG": {"n02": [("神戸市", "海岸線")],
            "name": "Kaigan Line", "name_ja": "海岸線", "colour": "#266B73"},
     "PL": {"n02": [("神戸新交通", "ポートアイランド線")],
@@ -191,13 +203,13 @@ LINES = {
     "JW": {"n02": [("西日本旅客鉄道", "山陽線")],
            "name": "Wadamisaki Line", "name_ja": "和田岬線", "colour": "#737C8C"},
     "JT": {"n02": [("西日本旅客鉄道", "福知山線")],
-           "name": "JR Takarazuka Line", "name_ja": "JR宝塚線", "colour": "#9F9504"},
+           "name": "JR Takarazuka Line", "name_ja": "JR宝塚線", "colour": "#A8903C"},
     "HQ": {"n02": [("阪急電鉄", "神戸線")],
            "name": "Hankyu Kobe Line", "name_ja": "阪急神戸線", "colour": "#A36D66"},
     "HS": {"n02": [("阪神電気鉄道", "本線")],
            "name": "Hanshin Main Line", "name_ja": "阪神本線", "colour": "#3A6588"},
     "SM": {"n02": [("山陽電気鉄道", "本線")],
-           "name": "Sanyō Main Line", "name_ja": "山陽電鉄本線", "colour": "#D01911"},
+           "name": "Sanyo Electric Main Line", "name_ja": "山陽電鉄本線", "colour": "#D01911"},
     "KK": {"n02": [("阪急電鉄", "神戸高速線"), ("阪神電気鉄道", "神戸高速線"), ("神戸電鉄", "神戸高速線")],
            "name": "Kobe Kōsoku Line", "name_ja": "神戸高速線", "colour": "#705E5C"},
     "KA": {"n02": [("神戸電鉄", "有馬線")],
