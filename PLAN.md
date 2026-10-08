@@ -36,9 +36,10 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     from every pin" from before olive and violet; East-1's drafts "ten"
     blank names to correct at the fold; caterers that also name a counter
     form (Fukushima's 161), the shared FORM_RULES question.
-  - **Branch `legend-dot-georgia` (51ff8250, Cleanup's, local), lands at
+  - **Branch `legend-dot-georgia` (19551960, Cleanup's, local), lands at
     review time:** legend dots 10 px that never shrink (the owner's iPhone
-    check) and Tbilisi in Europe East (DECISIONS, 2026-10-08, both). All
+    check), Tbilisi in Europe East (DECISIONS, 2026-10-08, both), and the
+    phone's region dropdowns take no typing (`filter_mode=None`, owner). All
     206 maps re-render once at the landing; app reboot (`app/cities.py`).
   - `scripts/stress_overview.py` stops on master: 23 Japanese cities of the
     last batch missing from `BUILT_PREF`.
