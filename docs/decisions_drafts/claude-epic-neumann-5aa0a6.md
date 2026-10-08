@@ -11,106 +11,85 @@ or published; every proposal waits for the owner.
 
 ### 2026-10-08 - RESUME NOTE for the next session (internal; Cleanup drops this entry when folding)
 
-- **The Mendoza build command** (done 2026-10-08; reuse it for the next
-  city with its own `--area` and `--bounds`). Run from
-  `data/_basemap_build/`, since the builder reads `data/sources/`
-  relative to its working directory; `--bounds` keeps the output to the
-  pack extent, `-Xmx` caps the heap; `java.exe` must be an absolute Windows
-  path (`cygpath -w`); the output is `<area>.pmtiles` there, so rename it:
-  `python ../../scripts/heavy_job.py run --label basemap-build-mendoza --session epic-neumann --peak-gb 6 --estimate "planetiler on a 432 MB extract, -Xmx5g" -- <absolute path>/tools/jdk-21.0.12.1+1/bin/java.exe -Xmx5g -jar basemaps-main/tiles/target/protomaps-basemap-HEAD-with-deps.jar --area=argentina --bounds=-68.9700,-32.9960,-68.7260,-32.7670 --maxzoom=15`
-  Measured peak 3.27 GB on a 432 MB extract; scale from it for a new
-  label. Never pass `--download`: every input is already local. Scratch
-  tools for the comparison: `pack_compare.py`, `pack_lowzoom.py`,
-  `pair_shots.mjs`, `pair_sheet.py`.
-- **Where things are.** `data/_basemap_build/` (gitignored, this worktree):
-  `data/sources/` holds argentina.osm.pbf (sha256 d23c0242...c5021f14),
-  water and land polygons, Natural Earth, pgf-encoding, and the two empty
-  stand-ins (qrank.csv.gz, 49 bytes; daylight-landcover.gpkg, an empty
-  `landcover` layer with a `class` column). `tools/` holds the unpacked JDK
-  21.0.12.1 and Maven 3.9.16; `basemaps-main/tiles/target/` the compiled
-  builder (1.6 min compile, 2026-10-08); `m2repo/` Maven's 127 MB library
-  cache. Avignon (PACA, 390 MB) and Florence (Italy centro, 385 MB)
-  extracts are not downloaded yet; the owner downloads by hand.
-- **Scratch tools** (this session's scratchpad,
-  `C:\Users\dacek\AppData\Local\Temp\claude\C--Users-dacek-Documents-Portfolio-expanded-heatmap--claude-worktrees-epic-neumann-5aa0a6\bd1314d5-8fea-459a-81fe-c606b5bfdae5\scratchpad\`):
-  `render_mendoza.py` (today and switch renders into `site/`),
-  `render_open_default.py` (Travel-default variant), `range_server.py`
-  (local HTTP range server; launch entry `basemap-proto-tmp` in the
-  worktree's `.claude/launch.json`, added and removed per run), headless
-  Edge harnesses `measure.mjs` and `measure2.mjs` (phone load, memory,
-  bytes, cold and warm), `interact.mjs` (line highlight and the rest, mouse
-  and touch), `travel_check.mjs` (the half version), `offline.mjs` (no
-  network), `attr_check.mjs` (runs `scripts/check_map_attribution.js`),
-  `shots.mjs`; `site/offline/` holds the local libraries, fonts and
-  sprites for the offline test; `basemap_baseline_2026-10-07/` the frozen
-  baseline given to the travel app; `shots/` the screenshots.
-- **Done 2026-10-08: the self-build comparison** (entry below; 3 min 18 s,
-  peak 3.27 GB measured, same map). The gate needs an absolute `java.exe`
-  path; the output is `<area>.pmtiles` in the working directory.
-- **Done 2026-10-08: the shared Travel style** (`pipeline/travel_style.js`,
-  entry below; five questions for the owner there). The offline test page
-  takes `&travel=1` and `&world=1`; `style_shots.mjs`, `world_probe.mjs`,
-  `style_test.mjs` and `crop_disputed.py` in the scratchpad.
-- **Done 2026-10-08: Avignon and Florence self-built** (entry below;
-  `build_pilot.sh`, `pilot_shots.mjs`, `pack_bounds.py` in the scratchpad;
-  the extracts are copies, the owner's originals stay in Downloads).
-  Master moved since this branch (line registry, 34 maps re-rendered,
-  `map_common.py` about 160 lines): merge it only before this branch's own
-  push, and re-run `check_render_current` after.
-- **Done 2026-10-08: the label pill** (entry below; `lang_check.mjs` in
-  the scratchpad; `render_mendoza.py` now passes `local_lang="es"`).
-- **Done 2026-10-08: the build-time trim** (`--travel_trim`; entry below;
-  `build_trim.sh`, `trim_shots.mjs`, `trim_diff.py`; the compiled builder
-  in `basemaps-main/tiles/target/` now carries the switch, the stock jar
-  is `data/_basemap_build/protomaps-basemap-stock.jar`, the stock sources
-  `data/_basemap_build/_stock_src/`).
-- **Done 2026-10-08: zoom 14 chosen; baselines in
-  `data/_basemap_build/baselines/` (move them with the build before this
-  worktree goes); `scripts/check_travel_style.mjs` (run it whenever the
-  style or the trim lists change).**
-- **Full version, how it differs from the site's Travel view** (laid out
-  for the owner 2026-10-08): no business data at all (a check refuses
-  ring, heat or business layer names); Travel only, no Business switch and
-  no OSM tile server; offline (libraries, fonts, sprites and pack beside
-  the page); style variant "full" (blue ferries); same pack, labels, pill,
-  tooltips, line highlight; legend lines only; OSM credit plus the font
-  and sprite licence files. **Decided (owner): white line casings and
-  white station dots with a dark ring are built into the full version,
-  designed for light and dark mode alike** (they stay a trial on the site).
-  **Decided (owner): the city page first, the world map after it;
-  delivery as a folder plus the small range server** (offline downloads
-  will need their own host anyway for the app stores).
-- **Icons and fonts (recommendation, owner to confirm, 2026-10-08).** The
-  Travel style uses three sprite icons only: the one-way arrow
-  (`roads_oneway`) and the town dot and capital star of `places_locality`
-  below z8. Dropping both leaves no sprite to ship, so no icon licence
-  (Protomaps' sprites are MIT) and one file less. Fonts cannot be dropped:
-  MapLibre GL draws Latin labels from glyph files, never device fonts
-  (CJK can use device fonts, measured 2026-10-07), and every usable font
-  is licensed; the OFL asks only that its text travel with the glyph
-  files. Recommended: keep an OFL file, and move from Noto to a font with
-  no Google tie such as Inter (item 17), after a licence read and the
-  owner's download.
-- **Hosting costs, explained to the owner (2026-10-08; R2 prices as read
-  2026-10-07, to re-check before signing up).** No server to run: the
-  app reads its packs from storage, the full-version folder uses a local
-  script, and the download host is R2 object storage. All 170 packs at
-  z14, trimmed: about 2 GB (scaled from the three pilot cities against
-  the 5.94 GB measured for stock z15 with 10 km), inside the 10 GB free
-  storage; 10 million free reads a month (a download is 1 read, a site
-  Travel view about 5); no egress charge. A domain, about $10 a year, is
-  needed anyway (a TWA proves ownership through
-  `/.well-known/assetlinks.json`; `r2.dev` is development only). A Worker
-  only for Z/X/Y tiles (100,000 requests a day free, then $5 a month).
-  Expected total: the domain alone until traffic is very large.
-- **Open items, in order:** the full version as a renderer option (no business
-  data, the hard line enforced by a check); white line casings and white
-  station dots in Travel for the owner's screenshots; Protomaps' dark
-  flavor in Travel; the Overview Business/Travel toggle (`app/`, branch
-  only); the legend follow-up (re-enabled pins in Travel); a test of a
-  non-Google font (item 17 below); the Free Worker against an R2 custom
-  domain comparison (needs the owner's Cloudflare account and the
-  Cloudflare terms read first).
+- **Next step: the Mendoza full page** (owner said go, city page first,
+  world map after). A renderer option on `render_heatmap`, not a fork:
+  no business data (refuse `businesses`; no heat, rings, pins or business
+  legend; a check refuses ring, heat or business layer names, the hard
+  line); Travel only (no Business switch, no OSM tile server); offline
+  (libraries, glyphs and pack beside the page, no outside request;
+  `offline.mjs`-style test); `travelStyle(..., {variant: "full"})`; the
+  EN/local pill; white line casings and white station dots with a dark
+  ring, designed for light AND dark (owner); station dots sized by zoom
+  (a zoom table applied on zoom end, interchanges a step larger, a fixed
+  ~44 px touch area; measure on Tokyo; table set on light and dark
+  screenshots for the owner); line labels that stay on screen (each
+  line's label follows the part in view, like the macro map's pills,
+  kept apart); a station-names toggle (highlighted line's colour, else
+  neutral); legend lines plus named route rows only. Map content only:
+  no coverage notes or generic explanations (owner's template rule).
+  Delivery: a folder plus `range_server.py`.
+- **Waiting on two background agents** (launched 2026-10-08): the
+  licence read of Inter, and a search for licence-free (public domain or
+  CC0) map-quality fonts. The owner likes Noto (in use now) and wants as
+  few attributions as realistically possible; OFL adds no on-screen
+  credit, only a licence file. Report both results to the owner.
+- **Later, in order:** the world map (label-free, world pack, dots by
+  transit type, the shared tooltips); the multi-route ferry palette with
+  the first multi-ferry city (Hong Kong example); Protomaps' dark flavor
+  in Travel; the Overview Business/Travel toggle (`app/`, branch only);
+  the legend follow-up (re-enabled pins in Travel); the Worker against an
+  R2 custom domain comparison (needs the owner's Cloudflare account and a
+  Cloudflare terms read first); `--keep_wards` when Tokyo or Seoul wards
+  are built.
+- **Before this worktree is removed:** move `data/_basemap_build/`
+  (builder, extracts, packs, and `baselines/zoom14_trim_2026-10-08/` plus
+  `baselines/basemap_baseline_2026-10-07/`) somewhere permanent; the
+  builder patch is `data/_basemap_build/travel_trim.patch`.
+- **Before this branch's push:** merge master in then (it moved: line
+  registry, 34 maps re-rendered, about 160 lines of `map_common.py`) and
+  re-run `check_render_current`; message the new Cleanup session (it asked
+  to be told when the branch is ready for review time).
+- **Build recipe.** From `data/_basemap_build/`:
+  `python ../../scripts/heavy_job.py run --label basemap-build-<city>-z14 --session epic-neumann --peak-gb 4 --estimate "scaled from basemap-build-mendoza" -- <absolute path to tools/jdk-21.0.12.1+1/bin/java.exe> -Xmx5g -jar basemaps-main/tiles/target/protomaps-basemap-HEAD-with-deps.jar --area=<extract name> --bounds=<w,s,e,n> --maxzoom=14 --travel_trim=true`;
+  the output is `<area>.pmtiles` in that folder (rename it). Box: the
+  stations' extent plus 10 km in the city's UTM zone (`pack_bounds.py`).
+  Peaks 3.1 to 3.4 GB, about 2 to 2.5 min a city. Never `--download`.
+  Extracts in `data/sources/`: argentina, provence-alpes-cote-d-azur-261006,
+  centro-261006 (copies; the owner's originals stay in Downloads).
+- **Checks to run:** `node scripts/check_travel_style.mjs <basemaps.js>
+  data/_basemap_build/basemaps-main/tiles/src/main/java/com/protomaps/basemap/TravelTrim.java`
+  (basemaps.js is in the scratchpad's `site/offline/lib/` and the baseline's
+  `offline/lib/`); `check_render_current.py`; `check_no_em_dashes.py`; the
+  pixel gate (trimmed against untrimmed, `trim_shots.mjs`,
+  `trim_diff.py`) whenever the style or the trim changes.
+- **Scratch tools** (session scratchpad, `...\bd1314d5-...\scratchpad\`):
+  `render_travel.py <root> <city> site/travel <pack url> <lang> <pill>
+  ["ferry:Name"]` renders any built city's map step with the Travel switch
+  (reads the main checkout's data, writes nothing under `outputs/`);
+  `range_server.py` (launch entry `basemap-proto-tmp`, added and removed
+  per run); headless Edge harnesses `travel_check.mjs`, `lang_check.mjs`,
+  `view_shots.mjs`, `legend_shots.mjs`, `ferry_shots.mjs`,
+  `zoom_shots.mjs`, `trim_shots.mjs`, `offline.mjs`, `attr_check.mjs`;
+  pack readers `pack_compare.py`, `pack_kinds.py`, `ferry_names.py`,
+  `pack_trim_estimate.py`. The in-app browser pane does not draw while
+  hidden; use the headless harnesses for screenshots.
+
+### 2026-10-08 - No sprite icons in the Travel style; fonts stay Noto for now (owner)
+
+- **Icons dropped (owner, 2026-10-08).** The one-way arrows go (driving
+  detail), and the town dot and capital star of `places_locality` below
+  z8 are stripped, so the Travel style uses no sprite image and the
+  OpenBasemap style carries no `sprite` URL: no icon sheet to ship, no icon
+  licence. `check_travel_style.mjs` now fails on any sprite image; it
+  passes, as do the site Travel view test (desktop and touch, no errors)
+  and `check_render_current` (170 of 170).
+- **Fonts.** Some font licence cannot be avoided for MapLibre's Latin
+  labels, but the OFL (Noto's, and as far as known Inter's) asks for no
+  on-screen credit, only its text beside the glyph files. The owner likes
+  Noto (used in every screenshot so far) and wants as few attributions as
+  realistically possible, with quality control; Noto stays meanwhile.
+  Queued: the licence read of Inter, and a search for licence-free
+  (public domain or CC0) fonts of map quality.
 
 ### 2026-10-08 - The full version is the app's template: map content only; named route rows; station dots sized by zoom (owner)
 
