@@ -48,8 +48,8 @@ from cities import CITIES  # noqa: E402
 from components import (  # noqa: E402
     ABOUT_DATA_PAGE,
     DIFFERENCES_PAGE,
-    OVERVIEW_PAGE,
     SITE_NAME,
+    render_reference_nav,
     render_site_notices,
     scroll_table,
     set_base_font,
@@ -76,10 +76,8 @@ st.set_page_config(page_title=f"What is counted, and what is not — {SITE_NAME}
                    page_icon="\U0001f5fa️", layout="wide")
 set_base_font()
 
-with st.container(horizontal=True, gap="medium", vertical_alignment="center"):
-    st.page_link(OVERVIEW_PAGE, label="← Global View")
-    st.page_link(ABOUT_DATA_PAGE, label="Where this data comes from")
-    st.page_link(DIFFERENCES_PAGE, label="Why the maps differ")
+render_reference_nav([(ABOUT_DATA_PAGE, "Where this data comes from"),
+                      (DIFFERENCES_PAGE, "Why the maps differ")])
 
 st.title("What is counted, and what is not")
 

@@ -20,9 +20,9 @@ from components import (  # noqa: E402
     ABOUT_DATA_PAGE,
     DIFFERENCES_PAGE,
     EXCLUSIONS_PAGE,
-    OVERVIEW_PAGE,
     SITE_NAME,
     render_all_notices,
+    render_reference_nav,
     render_site_notices,
     set_base_font,
 )
@@ -31,11 +31,9 @@ st.set_page_config(page_title=f"Required notices — {SITE_NAME}",
                    page_icon="\U0001f5fa️", layout="wide")
 set_base_font()
 
-with st.container(horizontal=True, gap="medium", vertical_alignment="center"):
-    st.page_link(OVERVIEW_PAGE, label="← Global View")
-    st.page_link(ABOUT_DATA_PAGE, label="Where this data comes from")
-    st.page_link(EXCLUSIONS_PAGE, label="What is counted, and what is not")
-    st.page_link(DIFFERENCES_PAGE, label="Why the maps differ")
+render_reference_nav([(ABOUT_DATA_PAGE, "Where this data comes from"),
+                      (EXCLUSIONS_PAGE, "What is counted, and what is not"),
+                      (DIFFERENCES_PAGE, "Why the maps differ")])
 
 st.title("Required source notices")
 
