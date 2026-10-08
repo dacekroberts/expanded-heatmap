@@ -11,26 +11,20 @@ or published; every proposal waits for the owner.
 
 ### 2026-10-08 - RESUME NOTE for the next session (internal; Cleanup drops this entry when folding)
 
-- **Next step: the Mendoza full page** (owner said go, city page first,
-  world map after). A renderer option on `render_heatmap`, not a fork:
-  no business data (refuse `businesses`; no heat, rings, pins or business
-  legend; a check refuses ring, heat or business layer names, the hard
-  line); Travel only (no Business switch, no OSM tile server); offline
-  (libraries, glyphs and pack beside the page, no outside request;
-  `offline.mjs`-style test); `travelStyle(..., {variant: "full"})`; the
-  EN/local pill; white line casings and white station dots with a dark
-  ring, designed for light AND dark (owner); station dots sized by zoom
-  (a zoom table applied on zoom end, interchanges a step larger, a fixed
-  ~44 px touch area; measure on Tokyo; table set on light and dark
-  screenshots for the owner); line labels that stay on screen (each
-  line's label follows the part in view, like the macro map's pills,
-  kept apart); a station-names toggle (highlighted line's colour, else
-  neutral); legend lines plus named route rows only. Map content only:
-  no coverage notes or generic explanations (owner's template rule).
-  Delivery: a folder plus `range_server.py`.
+- **Done: the full Travel version (Mendoza and Tokyo), reviewed by the
+  owner on a phone and ready for the app.** The package, with
+  `HANDOFF.md` (build process, every decision, measurements, critique,
+  the app-only items and requirements), is
+  `data/_basemap_build/prototype_full_2026-10-08/` (with `SHA256SUMS`)
+  and `data/_basemap_build/full_travel_prototype_2026-10-08.zip`. The app
+  session copies it when the owner says so, as it did the baselines; it
+  is a reference, not code (owner: the app is independent). Rendering it
+  again: scratchpad `render_full.py` with `labels_tokyo.json`,
+  `hues_tokyo.json` and `credits_tokyo.txt` (Tokyo) or the Mendoza pack;
+  `full_shots.mjs` for the headless checks.
 - **Fonts settled (owner):** Noto, with `OFL.txt` and the line "Noto is a
-  trademark of Google LLC" beside every copy of the glyphs; the full
-  page's offline folder ships them.
+  trademark of Google LLC" beside every copy of the glyphs; the package
+  ships them.
 - **Later, in order:** the world map (label-free, world pack, dots by
   transit type, the shared tooltips); the multi-route ferry palette with
   the first multi-ferry city (Hong Kong example); Protomaps' dark flavor
@@ -40,7 +34,8 @@ or published; every proposal waits for the owner.
   Cloudflare terms read first); `--keep_wards` when Tokyo or Seoul wards
   are built.
 - **Before this worktree is removed:** move `data/_basemap_build/`
-  (builder, extracts, packs, and `baselines/zoom14_trim_2026-10-08/` plus
+  (builder, extracts, packs, `prototype_full_2026-10-08/` and its zip, and
+  `baselines/zoom14_trim_2026-10-08/` plus
   `baselines/basemap_baseline_2026-10-07/`) somewhere permanent; the
   builder patch is `data/_basemap_build/travel_trim.patch`.
 - **Before this branch's push:** merge master in then (it moved: line
@@ -180,6 +175,23 @@ or published; every proposal waits for the owner.
   Saikyo and Namboku 0.6, crossing; Toei Mita and the Monorail 2.5; JR
   Yokosuka / Sobu Rapid and Tobu Kameido 2.6, 28 m apart); list in the
   package. The site keeps its colours (and the line-identity hard line).
+- **A line-colour switch in the app (owner, 2026-10-08):** official
+  colours by default, or a readability set the owner fleshes out,
+  togglable. Approved shape: the readability set is the official set with
+  edits to clashing pairs only (a city with no clashes uses the official
+  set in both modes); the switch lives in the app's settings, not on the
+  map, with a one-line legend note ("Readability colours") while it is on.
+- **REQUIREMENT, app-wide, every city (owner, 2026-10-08): a real-world
+  exception list and a colour list**, covering edited codes, colours that
+  differ from the operator's, names that differ from the signs, and every
+  station and line left off the map with its reason, which the owner
+  ranks the most serious for a travel app. The export contract already
+  carries `on_site_map` and `exclusion` per line and station.
+- **Package final (2026-10-08):** 798 files, 22.6 MB (13.6 MB zipped),
+  `data/_basemap_build/prototype_full_2026-10-08/` with `SHA256SUMS`, and
+  the zip beside it. Unzipped into a fresh folder: no machine path, no
+  outside load; both pages offline with every other host blocked, no
+  errors.
 - **The picked line always shows its pill (owner, 2026-10-08):** placed
   first, no minimum length, may cover dots when nothing clear is left.
   Tokyo, all 52 picked in turn: 52 of 52 at the widest view on desktop and
