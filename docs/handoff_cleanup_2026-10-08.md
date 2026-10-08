@@ -31,8 +31,11 @@ items are done or moved into PLAN.
   - `epic-neumann-5aa0a6` (open basemap switch and app groundwork). Its
     `data/` is a REAL folder, not a junction: `data/_basemap_build` (4,969
     files, 4.34 GB) and `data/_heavy_jobs_history.json` existed only there
-    (`check_worktree_data.py`, 2026-10-08); its session was asked to copy
-    them to the main checkout (no-clobber) until the check passes.
+    (`check_worktree_data.py`, 2026-10-08). COPIED the same day (robocopy
+    no-clobber, 4,969 files, 4.341 GB in the main checkout's
+    `data/_basemap_build`; 12 heavy-job entries merged); the check passes,
+    nothing uncommitted, branch at `62b28944`. Ready to move once its
+    session is stopped.
   - **Permanent names (owner, 2026-10-08):** with no session inside and
     everything committed, `git worktree move` the pilots to
     `.claude/worktrees/place-search` (between batch 2b and batch 3) and
