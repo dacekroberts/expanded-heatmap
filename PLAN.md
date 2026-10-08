@@ -31,6 +31,25 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   Ottawa's food layer colour; the legend wording for the mostly-food retail
   slices; which sessions to open.
 
+- [ ] **Review time: the place search pilot** (owner, 2026-10-07; branch
+  `claude/charming-lumiere-930853`, nothing pushed; drafts
+  `docs/decisions_drafts/place-search.md`). Kyoto only. To decide or test
+  there:
+  - whether it goes live as is: the suggestions (keyword gate, caps, pills,
+    phone folding) are WORK IN PROGRESS, tuned against real search terms;
+  - moving the search credit from the box into the map's corner credit
+    ("not essential but we can test there"): under the never-remove rule, so
+    `check_map_attribution.js` at several heights and a 343 px look;
+  - moving the Cities menu out of the map: all 170 maps' chrome, measured at
+    343 px with the search box in place first;
+  - landing it: `app/` changes (`components.py`, the Kyoto page,
+    `.streamlit/config.toml` static serving, `app/static/places/`), so
+    `check_deploy_imports.py`, a `map-chrome` deploy-verify that opens the
+    search on the live site, and a reboot; `LICENSE` gains the ODbL carve-out.
+  - Rollout after: the Japanese cities, then the US and Canadian grid
+    cities, then the rest; one Overpass query per city, each declaring its
+    local languages.
+
 - [x] **Desktop leftovers fixed 2026-10-04** (A and B-lite; DECISIONS, "San
   Diego, San Francisco and Los Angeles state or fix their lean").
 

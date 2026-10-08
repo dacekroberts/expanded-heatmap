@@ -8,6 +8,7 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
 
 - **"yes use short credit everywhere if permissable, we should save space in that search box as much as we can. we could even consider moving it out of the map if allowed"** (owner):
   - **The short credit, adopted:** "Search data © OpenStreetMap contributors (ODbL) · Download this index", the three links kept (the copyright page, the licence, the file). Permissible on the licence read: the Attribution Guideline accepts "© OpenStreetMap contributors" as a form, ODbL is named and linked (4.3), and the download link is the 4.6 offer. It replaces 4.3(a)'s longer example wording; `docs/data_sources.md` updated.
+  - **"log the corner move for review time, not essential but we can test there"** (owner): logged in `PLAN.md`, "Review time: the place search pilot".
   - **Moving it, put to the owner (not built):** off the map onto the page is not recommended (the Geocoding Guideline asks the search itself to credit OSM, a credit in another frame is the weak reading the licence read flagged, and a map opened alone would lose it). Into the map's corner credit is allowed (the Attribution Guideline's "location where customarily attribution would be expected"): on maps with search, "· Search: ODbL · Download index" after "© OpenStreetMap contributors", and no credit in the box. Recommended for review time beside the Cities menu move, since the corner is under the never-remove rule and `check_map_attribution.js`, and may wrap on a phone.
 - **Checks:** `check_all.py` 52 of 52.
 
