@@ -170,8 +170,8 @@ beauty lists (page 1004934, site terms; owner, call 225).
 
 ## The private pages
 
-- City master list, version 19: https://claude.ai/artifact/LTzi7Vj5emzHnb3zAZy4Vn
-- Country census, version 19: https://claude.ai/artifact/CKCadsYtUhbWwWKzV9sDeD
+- City master list, version 20: https://claude.ai/artifact/LTzi7Vj5emzHnb3zAZy4Vn
+- Country census, version 20: https://claude.ai/artifact/CKCadsYtUhbWwWKzV9sDeD
 - Accepted liabilities, version 2: https://claude.ai/artifact/FMZrsssfiCtydpHroo1V16
 - `docs/licence_positions.md`, version 2: https://claude.ai/artifact/JZoMFPgDZvbWEkyffuWWC5
 

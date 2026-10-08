@@ -388,16 +388,16 @@ PDF download (call 224); barber and beauty lists out (call 225); the
 standing Japanese calls; `metro`; Chugoku and the minor tier; page 306 and
 notice 216; tiers disclosed (call 145); no frequency floor (calls 46, 86).
 
-**Open:**
+**Answered 2026-10-08 (owner, staging's chat: "227 yes, 228 leave out, 229 drop pre 2021 and no coverage sentence 230 accept and record ratio"):** each as recommended below.
 
-1. **The monthly new-permit PDFs (令和8年4月 to 8月, 0.5 to 1.0 MB each, more
+1. **Call 227, ANSWERED: the year-end list alone.** **The monthly new-permit PDFs (令和8年4月 to 8月, 0.5 to 1.0 MB each, more
    monthly).** *Recommend: build from the year-end list alone, `as_of`
    2026-03-31*, and refresh when the 令和8年度末 list lands (2027-04-15).
    Tradeoff: the map is six months older than it could be; a rebuild (Shizuoka's
    and Kyoto's shape) adds about five months of openings with closures still
    invisible, so it overstates, and its renewals would need the same-number
    rule below. Nothing was downloaded.
-2. **MHLW's 33202 file as a second source** (Fukuoka's two-source shape: its
+2. **Call 228, ANSWERED: left out.** **MHLW's 33202 file as a second source** (Fukuoka's two-source shape: its
    notifications as a partial Food-shops layer, as Okayama's and Kure's pages
    carry). *Recommend: leave it out at this build.* It adds 14 restaurant
    permits granted after 2026-03-31 and 1,300 opt-in notifications (738
@@ -406,7 +406,7 @@ notice 216; tiers disclosed (call 145); no frequency floor (calls 46, 86).
    Tradeoff: the Food-shops layer stays permits only (bakeries, confectioners,
    fishmongers, butchers, delis, dairies) with no convenience stores or
    supermarkets, unlike Okayama's page next door.
-3. **The 127 old/new pairs and the stated share.** *Recommend: drop the old-law
+3. **Call 229, ANSWERED: the old-law row of a pair dropped; no coverage sentence.** **The 127 old/new pairs and the stated share.** *Recommend: drop the old-law
    row where a new-law row carries its permit number* (step 2 already makes 107
    of them one pin), *and state no share sentence beyond the upper-bound
    bullets*: the list is the register itself (99.3% of permits in force, 85.9%
@@ -414,7 +414,7 @@ notice 216; tiers disclosed (call 145); no frequency floor (calls 46, 86).
    name was respelled (20 pairs) would otherwise show twice; dropping by number
    could hide a genuine second premises under a reused number (none seen: every
    pair is one old and one new row).
-4. **No 業態 on new-law rows; the census reading.** *Recommend: accept, and
+4. **Call 230, ANSWERED: accepted, the ratio recorded.** **No 業態 on new-law rows; the census reading.** *Recommend: accept, and
    record the ratio*: about **3,933 distinct Food-service premises over the 2021
    census's 1,405 飲食店 establishments = 2.80** (built cities 1.56-1.92), with
    **3.31 in-force restaurant permits per establishment** (Kure's brief: the
