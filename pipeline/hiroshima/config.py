@@ -237,8 +237,18 @@ LINES = {
 # green hue and spread over olive and khaki. Closest pair within 500 m 19.4
 # (Hiroden Main / JR Geibi), anywhere 10.6 (Ujina / Miyajima, which never meet);
 # the dark-mode labels separate, 12 of 12.
+#
+# FOOD SHOPS OLIVE (#737a00, 2026-10-07) arrived after this search, and two
+# lines sat under the hard floor from it: Ujina #607808 at 8.6 and Miyajima
+# #788028 at 9.6. Each moved to the nearest colour clearing olive by 12 under
+# the same rules, measured against the pins this map draws (Food service; no
+# Personal services layer): Ujina #587808 (a shade darker, moved 3.6, olive
+# 12.1), Miyajima #788430 (moved 3.0, olive 12.1). Closest pair now 10.2
+# (Hakushima / Miyajima), within 500 m still 19.4. Nine of twelve lines sit
+# below 45 from olive (Yokogawa nearest, 11.8), the Hiroden olive family's
+# known trade. The other seven stay as searched.
 _COLOURS = {"AS": "#F000B8", "JS": "#E80010", "JB": "#007890", "JG": "#30A800", "JY": "#D08000", "HM": "#68A008",
-            "HU": "#607808", "HE": "#586818", "HY": "#889828", "HH": "#989848", "HN": "#787838", "HJ": "#788028"}
+            "HU": "#587808", "HE": "#586818", "HY": "#889828", "HH": "#989848", "HN": "#787838", "HJ": "#788430"}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

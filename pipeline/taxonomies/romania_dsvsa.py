@@ -60,6 +60,17 @@ def legend_label(bucket):
     return {"Retail": "Food shops"}.get(bucket, bucket)
 
 
+# The layer control names each bucket the way the legend does; until
+# 2026-10-07 it said "Retail" beside a legend that says "Food shops".
+layer_label = legend_label
+
+
+# The Retail bucket here is food shops only, so its pins are olive, not retail
+# blue (owner, 2026-10-07: one pin colour per meaning; pipeline/taxonomies
+# MEANING_COLOURS).
+PIN_MEANINGS = {"Retail": "Food shops"}
+
+
 def classify(row):
     """Bucket for a premises, or None if it is not a tracked storefront."""
     files = set(filter(None, str(row.get("source_files") or "").split("|")))

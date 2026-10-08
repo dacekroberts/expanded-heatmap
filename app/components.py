@@ -13,7 +13,7 @@ from typing import NamedTuple
 
 import streamlit as st
 
-from cities import CITIES, MAP_ONLY_NAV, SWITCHER_ORDER
+from cities import CITIES, DEFAULT_REGION, MAP_ONLY_NAV, REGIONS, SWITCHER_ORDER
 from osm_notice import OSM_RAIL_BY_CITY, osm_rail_text
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -36,7 +36,15 @@ def render_city_nav(current: str):
     In the map-only pilot (cities.MAP_ONLY_NAV) there is no visible switcher.
     The links are still rendered, hidden (see set_base_font): one to the Overview
     and one per city, because the city map's own "Global View" button and city
-    menu navigate by clicking them (and read the city names from them)."""
+    menu navigate by clicking them (and read the city names from them).
+
+    The city's region link ("← <region>", the Overview opened on it; owner,
+    2026-10-07) sits in a container of its own, `map-region-nav`: the map's
+    region button beside "Global View" clicks it and shows its words, and the
+    Cities menu, which lists every link in `map-only-nav`, never sees it."""
+    region = _CITY_BY_NAME[current]["region"]
+    with st.container(key="map-region-nav"):
+        st.page_link(OVERVIEW_PAGE, query_params={"region": region}, label=f"← {region}")
     if MAP_ONLY_NAV:
         with st.container(key="map-only-nav"):
             # Keep this text: the maps' JS finds this link, and leaves it out of
@@ -515,6 +523,50 @@ EXCLUSIONS_PAGE = "pages/What_Is_Excluded.py"
 DIFFERENCES_PAGE = "pages/Why_the_Maps_Differ.py"
 REPO_URL = "https://github.com/dacekroberts/expanded-heatmap"
 NOTICES_PAGE = "pages/Required_Notices.py"
+
+# BACK LINKS (owner, 2026-10-07). "Global View" stays on every page; beside it
+# a second link returns the reader to where they came from. The four reference
+# pages learn that from `?from=<city or region name>`, carried in every link
+# into them the way `?country=` already is, and forward it on their own links
+# to each other. A bookmark carries none, so only "Global View" shows. City
+# and region names never coincide (measured 2026-10-07: 176 cities, 31
+# regions), so one key serves both. The Overview opens on `?region=`.
+_CITY_BY_NAME = {c["name"]: c for c in CITIES}
+_REGION_NAMES = {r["name"] for r in REGIONS}
+
+
+def back_origin():
+    """The city or region in this page's `?from=`, or None when absent or
+    not a name in app/cities.py."""
+    origin = st.query_params.get("from")
+    return origin if origin in _CITY_BY_NAME or origin in _REGION_NAMES else None
+
+
+def from_params(origin):
+    """`query_params` for a link into a reference page, carrying `origin`."""
+    return {"from": origin} if origin else None
+
+
+def render_back_link(origin):
+    """"← Back to <city or region>" for a known origin. The default region is
+    the Global View itself, which already has its own link."""
+    if origin in _CITY_BY_NAME:
+        st.page_link(_CITY_BY_NAME[origin]["page"], label=f"← Back to {origin}")
+    elif origin in _REGION_NAMES and origin != DEFAULT_REGION:
+        st.page_link(OVERVIEW_PAGE, query_params={"region": origin},
+                     label=f"← Back to {origin}")
+
+
+def render_reference_nav(links):
+    """The row atop each reference page: "← Global View", the back link when
+    the reader came from a city or region, then `links` ([(page, label)]),
+    each carrying the same origin."""
+    origin = back_origin()
+    with st.container(horizontal=True, gap="medium", vertical_alignment="center"):
+        st.page_link(OVERVIEW_PAGE, label="← Global View")
+        render_back_link(origin)
+        for page, label in links:
+            st.page_link(page, label=label, query_params=from_params(origin))
 
 
 class Notice(NamedTuple):
@@ -3853,7 +3905,7 @@ _NOTICE_STYLE = (
 
 
 def render_site_notices(city=None, show_links: bool = True,
-                        lists_all: bool = False):
+                        lists_all: bool = False, origin=None):
     """The footer every page ends with: the three reference pages, the city's
     own notices in full (with `city`, a name as app/cities.py spells it), then
     the notices every page carries and a link to the page that lists all of
@@ -3861,22 +3913,27 @@ def render_site_notices(city=None, show_links: bool = True,
 
     Called from EVERY page. `lists_all` is for the Required notices page alone,
     which has just shown every notice and so skips the every-page set and the
-    link to itself.
+    link to itself. The links into the reference pages carry where the reader
+    is (`?from=`, see BACK LINKS): the city, else `origin` (the Overview's
+    region), else the origin this page itself was reached with.
     """
     st.divider()
+    params = from_params(city or origin or back_origin())
     # The Required notices link sits in this row with the reference pages
     # (owner, 2026-10-03), above the notices; on a page without the row it
     # stands alone in the same place.
     if show_links:
         with st.container(horizontal=True, gap="medium",
                           vertical_alignment="center"):
-            st.page_link(ABOUT_DATA_PAGE, label="Where this data comes from")
-            st.page_link(EXCLUSIONS_PAGE, label="What is counted, and what is not")
-            st.page_link(DIFFERENCES_PAGE, label="Why the maps differ")
+            st.page_link(ABOUT_DATA_PAGE, label="Where this data comes from", query_params=params)
+            st.page_link(EXCLUSIONS_PAGE, label="What is counted, and what is not",
+                         query_params=params)
+            st.page_link(DIFFERENCES_PAGE, label="Why the maps differ", query_params=params)
             if not lists_all:
-                st.page_link(NOTICES_PAGE, label="All required source notices")
+                st.page_link(NOTICES_PAGE, label="All required source notices",
+                             query_params=params)
     elif not lists_all:
-        st.page_link(NOTICES_PAGE, label="All required source notices")
+        st.page_link(NOTICES_PAGE, label="All required source notices", query_params=params)
     # The public repository, linked from every page. IDFM's Licence Mobilités
     # Art. 5.8 (Paris) and ODbL 4.6 (Tisseo, TaM, TAG, LiA, Angers, STAR) are
     # each met by a public repository carrying the pipeline and the derived
@@ -4012,7 +4069,8 @@ def render_city_title(name):
     st.markdown("<style>[data-testid='stMainBlockContainer'] "
                 "{ padding-top: 3.5rem !important; }"
                 "[data-testid='stElementContainer']:has(style),"
-                "div:has(> .st-key-map-only-nav) { display: none; }"
+                "div:has(> .st-key-map-only-nav), div:has(> .st-key-map-region-nav) "
+                "{ display: none; }"
                 "[data-testid='stElementContainer']:has(> iframe[data-testid='stIFrame']) "
                 f"{{ margin-left: auto; margin-right: auto; {MAP_FRAME_CSS} }}"
                 "iframe[data-testid='stIFrame'] { border-radius: 8px; }</style>",
@@ -4152,10 +4210,11 @@ def render_excluded_stations(name):
 def render_country_links(name):
     """Links to the two reference pages, opened on the city's country. The
     deep-link contract with those pages: ?country=<the city's country value
-    in cities.py>, which Streamlit URL-encodes."""
+    in cities.py>, which Streamlit URL-encodes, and ?from=<the city's name>
+    for the back link (BACK LINKS)."""
     country = city_entry(name)["country"]
     with st.container(horizontal=True, gap="medium", vertical_alignment="center"):
-        st.page_link(EXCLUSIONS_PAGE, query_params={"country": country},
+        st.page_link(EXCLUSIONS_PAGE, query_params={"country": country, "from": name},
                      label=f"What is counted, and what is not: {country}")
-        st.page_link(ABOUT_DATA_PAGE, query_params={"country": country},
+        st.page_link(ABOUT_DATA_PAGE, query_params={"country": country, "from": name},
                      label=f"Where this data comes from: {country}")

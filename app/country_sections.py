@@ -220,9 +220,10 @@ def unmatched_report(parts):
     return [(p["level"], p["title"][:90], p["country"]) for p in parts]
 
 
-def country_link(country):
-    """The ?country= query for a country, URL-encoded (the deep link)."""
-    return "?country=" + quote(country)
+def country_link(country, origin=None):
+    """The ?country= query for a country, URL-encoded (the deep link), with
+    the page's back-link origin kept (?from=, components.BACK LINKS)."""
+    return "?country=" + quote(country) + ("&from=" + quote(origin) if origin else "")
 
 
 def country_slug(country):

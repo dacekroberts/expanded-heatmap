@@ -85,14 +85,34 @@ st.subheader("Covered cities")
 _region_names = [r["name"] for r in REGIONS]
 _region_cities = {r["name"]: r["cities"] for r in REGIONS}
 if len(REGIONS) > 1:
+    # OPENS ON THE REGION IN THE LINK (`?region=`, the back links' target, owner
+    # 2026-10-07) and keeps the URL on the region shown, so a reload or a
+    # shared link returns to it. The URL is applied only when it changed since
+    # this page last wrote it, or when the radio has no state (Streamlit drops
+    # a widget's state when the reader leaves the page): a click updates the
+    # radio before the rerun while the URL still holds the previous region,
+    # and re-applying it then would undo the click (country_sections.py's
+    # select_country, the same rule).
+    _wanted = st.query_params.get("region")
+    if _wanted in _region_names and (
+            _wanted != st.session_state.get("_macro_region_applied")
+            or "macro_region" not in st.session_state):
+        st.session_state["macro_region"] = _wanted
+    st.session_state.setdefault("macro_region", DEFAULT_REGION)
     region = st.radio(
         "Region",
         _region_names,
-        index=_region_names.index(DEFAULT_REGION),
         format_func=lambda n: f"{n} ({len(_region_cities[n])})",
         horizontal=True,
         key="macro_region",
     )
+    st.session_state["_macro_region_applied"] = region
+    # The default region needs no parameter; any other is written out.
+    if region == DEFAULT_REGION:
+        if "region" in st.query_params:
+            del st.query_params["region"]
+    elif st.query_params.get("region") != region:
+        st.query_params["region"] = region
 else:
     region = DEFAULT_REGION
 
@@ -768,5 +788,6 @@ for _leaf in _open + [n for n in _leaves if n not in _open]:
                             f"{_f['storefronts_text']}  \n"
                             f"Data: {_f['data_age']} · Placed by: {_f['placement']}")
 
-# Site-level notices, required on every page - see components._NOTICES.
-render_site_notices()
+# Site-level notices, required on every page - see components._NOTICES. The
+# region rides on the reference-page links, for their back link.
+render_site_notices(origin=region)

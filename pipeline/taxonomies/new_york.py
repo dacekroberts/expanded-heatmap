@@ -245,11 +245,17 @@ VALUE_COLUMN = "business_category"
 EXTRA_COLUMNS = ("source",)
 
 
+# The Retail layer here is a licensed slice, not general retail, so the
+# legend and the layer menu name what it holds (owner, 2026-10-07; measured
+# on the clean file: food 50.0%, secondhand 15.8%, electronics 10.3%, tobacco
+# 10.6% of 22,614). Its pins stay retail blue (owner). Supersedes the
+# 2026-09-21 call to keep it broad; the four registries stay listed in
+# docs/excluded_categories.md.
 def legend_label(bucket: str) -> str:
-    """The legend stays broad: four registries feed these buckets and no short
-    label could name them all honestly. docs/excluded_categories.md carries
-    the detail (decided 2026-09-21)."""
-    return bucket
+    return {"Retail": "Food, secondhand, electronics, tobacco shops"}.get(bucket, bucket)
+
+
+layer_label = legend_label
 
 
 def classify(row: dict):

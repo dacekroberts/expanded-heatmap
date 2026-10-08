@@ -161,8 +161,15 @@ FIELD_LABEL = "License type"
 VALUE_COLUMN = "licensetype"
 
 
+# The Retail layer here is a licensed slice, not general retail, so the
+# legend and the layer menu name what it holds (owner, 2026-10-07; measured
+# on the clean file: food 88.5%, tire dealers 5.3%, precious-metal dealers
+# 4.8% of 1,529). Its pins stay retail blue (owner).
 def legend_label(bucket: str) -> str:
-    return bucket
+    return {"Retail": "Food shops, tire and precious-metal dealers"}.get(bucket, bucket)
+
+
+layer_label = legend_label
 
 
 def is_adjunct(license_type: str) -> bool:
