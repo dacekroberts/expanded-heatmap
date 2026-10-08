@@ -17,7 +17,7 @@
  "chicago": {
   "in_ring": 11685,
   "all": 20492,
-  "map_blob": "a140bb02ad8797f4626a9be8cae97d183a33fe6e"
+  "map_blob": "02cbc3e3b1c20545dc09aacd18d4e2ffa363d58f"
  },
  "new_york": {
   "in_ring": 44360,
@@ -87,7 +87,7 @@
  "barcelona": {
   "in_ring": 35287,
   "all": 35309,
-  "map_blob": "c343b56b3a68e54e240e09480c64ffddddf65eb1"
+  "map_blob": "d8e034c3e4aa21c42b5d16905a800ef66c6aeda6"
  },
  "dublin": {
   "in_ring": 7411,
@@ -137,7 +137,7 @@
  "prague": {
   "in_ring": 17528,
   "all": 25185,
-  "map_blob": "a2b13bdcbef1c1a14762df6488b27581d1f0af3f"
+  "map_blob": "81d1f41de082b18ac9a2300b8f86b9dbc5e6b387"
  },
  "amsterdam": {
   "in_ring": 12648,

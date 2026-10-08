@@ -528,7 +528,14 @@ def _home(tags, names, local=()):
     # tagged historic=manor (batch 2a, 2026-10-08). The house tests by history
     # and name below skip it; the land, building and access tests still apply.
     civic = tags.get("amenity") in CIVIC_AMENITIES
-    return (tags.get("landuse") == "residential" or tags.get("building") in RESIDENTIAL_BUILDINGS
+    # A NOTABLE place of worship on residential land or in a residential
+    # building is a place (owner, 2026-10-08: "yes notable place of worship
+    # back in"): Prague's Hussite churches and Barcelona's parishes in
+    # apartment blocks. A non-notable one stays out, since a house church can
+    # be a home; private access still keeps either out.
+    worship = tags.get("amenity") == "place_of_worship" and bool(tags.get("wikidata") or tags.get("wikipedia"))
+    return ((tags.get("landuse") == "residential" and not worship)
+            or (tags.get("building") in RESIDENTIAL_BUILDINGS and not worship)
             or tags.get("access") == "private" or (tags.get("historic") == "house" and not civic)
             # A manor on a plain building: Montréal's Château Goyer, a manor
             # on building=pavilion in a park, stays.
