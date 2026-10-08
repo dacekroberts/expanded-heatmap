@@ -27,7 +27,7 @@ The machine (Ryzen 7 5700X, 16 threads, 32 GB) is not the bottleneck. Approvals,
 2. **Unattended mode.**
    - Branches only. Downloads named in the brief are pre-approved; anything else is a parked call.
    - At a new judgment call, park that city: leave it committed and clean, write the call into the drafts file under "Parked calls", with a recommendation and its tradeoff, then move to the next city.
-   - Parked calls reach the owner as one numbered list per wave, through Staging.
+   - Parked calls reach the owner as one numbered list per wave, through Staging. **From phase 2 Staging numbers them S1, S2, S3 and on** (owner, 2026-10-08); a plain number ("call 226") is the old series, which ended at 230. A session's drafts file names its parked calls by city and letter; Staging assigns the S number when it relays them.
 3. **One review time per phase.** Landings, re-renders and deploy-verify are batched: after phase 0, after the first Japan trio, and after the second. Only the owner calls review time. App reboots happen once per landing.
 4. **Build sessions never edit `docs/city_master_list.md`.** Staging moves a wave's cities to Built in one pass after each landing, and republishes the private pages. A build lands in one push at the end of its batch, after review time; `app/cities.py` conflicts are resolved keep-both.
 

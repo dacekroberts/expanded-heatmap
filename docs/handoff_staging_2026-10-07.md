@@ -5,7 +5,9 @@ It replaces `docs/handoff_staging_2026-09-30.md` as the place to start; that
 file stays for its history and the pointers other docs make to it. Read once,
 then follow the pointers. **Delete a section when its item is done.** The
 reasoning behind every move below is in `docs/decisions_drafts/staging.md`
-(newest first) until Cleanup folds it into `DECISIONS.md`.
+(newest first) until Cleanup folds it into `DECISIONS.md`. **That file was
+handed off final on 2026-10-08** (owner; Cleanup folds it, then deletes it);
+a new staging entry starts a fresh `docs/decisions_drafts/staging.md`.
 
 ## Before starting
 
@@ -20,10 +22,18 @@ reasoning behind every move below is in `docs/decisions_drafts/staging.md`
 - **Push with `python scripts/push_docs.py`** (docs and staging tooling only;
   it refuses `app/`, `outputs/` and `pipeline/`, and stops when a merge
   rewrites a generated file: that file is its owner's, tell them).
-- **Usage:** weekly check-ins at every multiple of ten; 60% and 70% were
-  passed on the owner's word on 2026-10-07, so **the next stop is 80%**. At a
-  stop every session pauses and continues only on the owner's word (here or in
-  Cleanup). The 5-hour ceiling is 90%.
+- **Usage:** the 10% check-ins ended 2026-10-08 (no 80% stop); until the
+  reset of 2026-10-11 19:00 UTC, work is refinements, not builds. **From the
+  reset, phase 2 stops at 30% and 60% weekly only** (owner, 2026-10-08, "for
+  weekly not 5hr"). At a stop every session pauses and continues only on the
+  owner's word (here or in Cleanup). The 5-hour ceiling is 90%.
+- **Owner calls are numbered S1, S2, S3 and on** (owner, 2026-10-08). The
+  plain-number series **ended at call 230 on 2026-10-08 at 18:37 UTC**
+  (Kurashiki's 227-230, answered at that stop). **The S series begins with
+  phase 2, on Sunday 2026-10-11 after the 19:00 UTC weekly reset; S1 is the
+  first call put after phase 2 starts**: write the timestamp of S1 here when
+  it is put. A plain number ("call 226") always means the old series; a
+  session's parked calls get their S number when staging relays them.
 - **Tools:** the `screen-wave` skill, the `city-probe` and `licence-read`
   agents, `regional-extension`, `japan-city` (with its screening section),
   `scripts/staging_artifacts/` for the private pages, `brief_check.py`,
@@ -34,8 +44,8 @@ reasoning behind every move below is in `docs/decisions_drafts/staging.md`
   build sessions; Overpass one query in flight per session (agents running in
   parallel share a lock: see "Tools left on disk" below); no backslash or
   backtick in a Bash command (script files); page and notice numbers claimed
-  in `docs/session_roles.md` (next free page 305, notice 215; phase 2's blocks
-  are reserved there).
+  in `docs/session_roles.md` (next free page 307, notice 217; phase 2's blocks,
+  Cluj-Napoca's 305 / 215 and Kurashiki's 306 / 216 are reserved there).
 
 ## Where things stand (2026-10-07, after the review landing)
 
