@@ -4708,6 +4708,10 @@ CITIES = [
         "categories": "Retail thin",
         "blurb": "The Tama Toshi Monorail and the Seibu Haijima Line",
         "region": "Tokyo Metropolis",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02), as Kansai-1's
+        # carry it: labelled in its own view, a dot and tooltip elsewhere
+        # (review lane 1, F4: East Asia named it among Japan's main cities).
+        "label_tier": "minor",
         "country": "Japan",
         # metro (owner, call 170): a monorail on its own viaduct and private
         # heavy rail, as Kitakyushu's map reads
@@ -4736,6 +4740,10 @@ CITIES = [
         "categories": "Retail thin",
         "blurb": "The Seibu Shinjuku and Ikebukuro lines",
         "region": "Tokyo Metropolis",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02), as Kansai-1's
+        # carry it: labelled in its own view, a dot and tooltip elsewhere
+        # (review lane 1, F4: East Asia named it among Japan's main cities).
+        "label_tier": "minor",
         "country": "Japan",
         # metro (the brief: private heavy rail reads as metro, owner 2026-10-02)
         "mode": "metro",
@@ -4763,6 +4771,10 @@ CITIES = [
         "categories": "Retail thin",
         "blurb": "The Keio and Keio Sagamihara lines and the Odakyu Tama Line",
         "region": "Tokyo Metropolis",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02), as Kansai-1's
+        # carry it: labelled in its own view, a dot and tooltip elsewhere
+        # (review lane 1, F4: East Asia named it among Japan's main cities).
+        "label_tier": "minor",
         "country": "Japan",
         # metro (the brief: private heavy rail reads as metro, owner 2026-10-02)
         "mode": "metro",
@@ -4790,6 +4802,10 @@ CITIES = [
         "categories": "Retail thin",
         "blurb": "Five Seibu lines and JR East's Musashino Line",
         "region": "Tokyo Metropolis",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02), as Kansai-1's
+        # carry it: labelled in its own view, a dot and tooltip elsewhere
+        # (review lane 1, F4: East Asia named it among Japan's main cities).
+        "label_tier": "minor",
         "country": "Japan",
         # metro (the brief: private heavy rail reads as metro, owner 2026-10-02)
         "mode": "metro",
@@ -4817,6 +4833,10 @@ CITIES = [
         "categories": "Retail thin",
         "blurb": "The New Shuttle and JR East's Takasaki Line, through Ageo and Ina",
         "region": "Saitama Prefecture",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02), as Kansai-1's
+        # carry it: labelled in its own view, a dot and tooltip elsewhere
+        # (review lane 1, F4: East Asia named it among Japan's main cities).
+        "label_tier": "minor",
         "country": "Japan",
         # metro on Sakura's precedent (owner, 2026-10-06, call 121)
         "mode": "metro",
@@ -4844,6 +4864,10 @@ CITIES = [
         "categories": "Retail thin",
         "blurb": "The Keio and Keio Keibajo lines, JR East's Nambu and Musashino lines and the Seibu Tamagawa Line",
         "region": "Tokyo Metropolis",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02), as Kansai-1's
+        # carry it: labelled in its own view, a dot and tooltip elsewhere
+        # (review lane 1, F4: East Asia named it among Japan's main cities).
+        "label_tier": "minor",
         "country": "Japan",
         # metro (the brief: private heavy rail reads as metro, owner 2026-10-02)
         "mode": "metro",
@@ -4871,6 +4895,10 @@ CITIES = [
         "categories": "Retail thin",
         "blurb": "The Keio and Keio Sagamihara lines",
         "region": "Tokyo Metropolis",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02), as Kansai-1's
+        # carry it: labelled in its own view, a dot and tooltip elsewhere
+        # (review lane 1, F4: East Asia named it among Japan's main cities).
+        "label_tier": "minor",
         "country": "Japan",
         # metro (the brief: private heavy rail reads as metro, owner 2026-10-02)
         "mode": "metro",
@@ -4898,6 +4926,10 @@ CITIES = [
         "categories": "Retail thin",
         "blurb": "The Tama Toshi Monorail, the Seibu Haijima Line and JR East's Nambu, Chuo and Ome lines",
         "region": "Tokyo Metropolis",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02), as Kansai-1's
+        # carry it: labelled in its own view, a dot and tooltip elsewhere
+        # (review lane 1, F4: East Asia named it among Japan's main cities).
+        "label_tier": "minor",
         "country": "Japan",
         # metro (the brief: a monorail on its own viaduct and heavy rail, as Higashiyamato's)
         "mode": "metro",
@@ -4925,6 +4957,10 @@ CITIES = [
         "categories": "Retail thin",
         "blurb": "The Keio and Keio Dobutsuen lines, the Tama Toshi Monorail and JR East's Chuo Line",
         "region": "Tokyo Metropolis",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02), as Kansai-1's
+        # carry it: labelled in its own view, a dot and tooltip elsewhere
+        # (review lane 1, F4: East Asia named it among Japan's main cities).
+        "label_tier": "minor",
         "country": "Japan",
         # metro (the brief: a monorail on its own viaduct and heavy rail, as Higashiyamato's)
         "mode": "metro",
@@ -4957,6 +4993,10 @@ CITIES = [
         "categories": "Retail thin",
         "blurb": "The Tobu Skytree Line",
         "region": "Saitama Prefecture",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02), as Kansai-1's
+        # carry it: labelled in its own view, a dot and tooltip elsewhere
+        # (review lane 1, F4: East Asia named it among Japan's main cities).
+        "label_tier": "minor",
         "country": "Japan",
         # metro (the brief: private heavy rail reads as metro, owner 2026-10-02)
         "mode": "metro",
@@ -4984,6 +5024,10 @@ CITIES = [
         "categories": "Retail thin",
         "blurb": "Four Seibu lines and JR East's Musashino Line",
         "region": "Saitama Prefecture",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02), as Kansai-1's
+        # carry it: labelled in its own view, a dot and tooltip elsewhere
+        # (review lane 1, F4: East Asia named it among Japan's main cities).
+        "label_tier": "minor",
         "country": "Japan",
         # metro (the brief: private heavy rail reads as metro, owner 2026-10-02)
         "mode": "metro",
@@ -5011,6 +5055,10 @@ CITIES = [
         "categories": "Retail thin",
         "blurb": "The Tobu Skytree and Urban Park lines",
         "region": "Saitama Prefecture",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02), as Kansai-1's
+        # carry it: labelled in its own view, a dot and tooltip elsewhere
+        # (review lane 1, F4: East Asia named it among Japan's main cities).
+        "label_tier": "minor",
         "country": "Japan",
         # metro (the brief: private heavy rail reads as metro, owner 2026-10-02)
         "mode": "metro",
@@ -5227,6 +5275,10 @@ CITIES = [
         "categories": "Retail thin",
         "blurb": "The Jomo Line and JR East's Ryomo and Joetsu lines",
         "region": "Kanto",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02), as Kansai-1's
+        # carry it: labelled in its own view, a dot and tooltip elsewhere
+        # (review lane 1, F4: East Asia named it among Japan's main cities).
+        "label_tier": "minor",
         "country": "Japan",
         "mode": "metro",
         "in_default_view": False,
@@ -5251,6 +5303,10 @@ CITIES = [
         "categories": "Retail thin",
         "blurb": "JR West's Sanyo and Fukuen lines and the Ibara Railway's Ibara Line",
         "region": "Chugoku",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02), as Kansai-1's
+        # carry it: labelled in its own view, a dot and tooltip elsewhere
+        # (review lane 1, F4: East Asia named it among Japan's main cities).
+        "label_tier": "minor",
         "country": "Japan",
         "mode": "metro",
         "in_default_view": False,
@@ -5275,6 +5331,10 @@ CITIES = [
         "categories": "Retail thin",
         "blurb": "Meitetsu's Nagoya Main and Bisai lines and JR Central's Tokaido Line",
         "region": "Chubu",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02), as Kansai-1's
+        # carry it: labelled in its own view, a dot and tooltip elsewhere
+        # (review lane 1, F4: East Asia named it among Japan's main cities).
+        "label_tier": "minor",
         "country": "Japan",
         "mode": "metro",
         "in_default_view": False,
@@ -5299,6 +5359,10 @@ CITIES = [
         "categories": "Retail thin",
         "blurb": "Kintetsu's Nagoya and Osaka lines, JR Central's Kisei and Meisho lines and the Ise Railway",
         "region": "Kansai",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02), as Kansai-1's
+        # carry it: labelled in its own view, a dot and tooltip elsewhere
+        # (review lane 1, F4: East Asia named it among Japan's main cities).
+        "label_tier": "minor",
         "country": "Japan",
         "mode": "metro",
         "in_default_view": False,
@@ -5323,6 +5387,10 @@ CITIES = [
         "categories": "Retail thin",
         "blurb": "The Iizaka Line, the Abukuma Express Line and JR East's Tohoku and Ou lines",
         "region": "Tohoku",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02), as Kansai-1's
+        # carry it: labelled in its own view, a dot and tooltip elsewhere
+        # (review lane 1, F4: East Asia named it among Japan's main cities).
+        "label_tier": "minor",
         "country": "Japan",
         "mode": "metro",
         "in_default_view": False,
@@ -5347,6 +5415,10 @@ CITIES = [
         "categories": "Retail thin",
         "blurb": "JR East's Joban and Ban'etsu East lines",
         "region": "Tohoku",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02), as Kansai-1's
+        # carry it: labelled in its own view, a dot and tooltip elsewhere
+        # (review lane 1, F4: East Asia named it among Japan's main cities).
+        "label_tier": "minor",
         "country": "Japan",
         "mode": "metro",
         "in_default_view": False,
@@ -5371,6 +5443,10 @@ CITIES = [
         "categories": "Retail thin",
         "blurb": "JR East's Ou, Uetsu and Oga lines",
         "region": "Tohoku",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02), as Kansai-1's
+        # carry it: labelled in its own view, a dot and tooltip elsewhere
+        # (review lane 1, F4: East Asia named it among Japan's main cities).
+        "label_tier": "minor",
         "country": "Japan",
         "mode": "metro",
         "in_default_view": False,
@@ -5395,6 +5471,10 @@ CITIES = [
         "categories": "Retail thin",
         "blurb": "JR Kyushu's Nippo, Hohi and Kyudai main lines",
         "region": "Kyushu-Okinawa",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02), as Kansai-1's
+        # carry it: labelled in its own view, a dot and tooltip elsewhere
+        # (review lane 1, F4: East Asia named it among Japan's main cities).
+        "label_tier": "minor",
         "country": "Japan",
         "mode": "metro",
         "in_default_view": False,
@@ -5419,6 +5499,10 @@ CITIES = [
         "categories": "Retail thin",
         "blurb": "Meitetsu's Nagoya Main, Kakamigahara and Takehana lines and JR Central's Tokaido and Takayama lines",
         "region": "Chubu",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02), as Kansai-1's
+        # carry it: labelled in its own view, a dot and tooltip elsewhere
+        # (review lane 1, F4: East Asia named it among Japan's main cities).
+        "label_tier": "minor",
         "country": "Japan",
         "mode": "metro",
         "in_default_view": False,
@@ -5443,6 +5527,10 @@ CITIES = [
         "categories": "Retail thin",
         "blurb": "JR East's Joban and Suigun lines and Kashima Rinkai's Oarai Kashima Line",
         "region": "Kanto",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02), as Kansai-1's
+        # carry it: labelled in its own view, a dot and tooltip elsewhere
+        # (review lane 1, F4: East Asia named it among Japan's main cities).
+        "label_tier": "minor",
         "country": "Japan",
         "mode": "metro",
         "in_default_view": False,
@@ -5467,6 +5555,10 @@ CITIES = [
         "categories": "Retail thin",
         "blurb": "JR East's Tohoku, Tazawako, Yamada and Hanawa lines and the IGR Iwate Galaxy Railway",
         "region": "Tohoku",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02), as Kansai-1's
+        # carry it: labelled in its own view, a dot and tooltip elsewhere
+        # (review lane 1, F4: East Asia named it among Japan's main cities).
+        "label_tier": "minor",
         "country": "Japan",
         "mode": "metro",
         "in_default_view": False,
@@ -5956,8 +6048,14 @@ def region_caption(region):
     # 2026-10-03), so the count stays the region's own, as the menu states it.
     # A country split into views is named once, as the country (2026-10-07:
     # East Asia borrows from nine Japanese views), and a view with no city yet
-    # is not named.
-    also = list(dict.fromkeys(named(_CAPTION_NAME.get(r, r))
+    # is not named. Inside the same country the view itself is named: Kanto
+    # borrows Saitama Prefecture's and Tokyo Metropolis's labels, not "Japan's"
+    # (review lane 1, F2).
+    def caption_name(r):
+        same_country = _CAPTION_NAME.get(r) is not None and _CAPTION_NAME.get(r) == _CAPTION_NAME.get(region)
+        return r if same_country else _CAPTION_NAME.get(r, r)
+
+    also = list(dict.fromkeys(named(caption_name(r))
                               for r in REGION_LABELS_ALSO.get(region, ()) if cities_in(r)))
     if not also:
         return text + "."
