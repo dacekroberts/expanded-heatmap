@@ -9,6 +9,40 @@ app is its own project, this repo keeps the basemap switch, its hosting and an
 export contract (owner, relayed by Cleanup). Nothing here is landed, pushed
 or published; every proposal waits for the owner.
 
+### 2026-10-08 - Pilot decisions (owner, one pass)
+
+- **Maven compile:** this session runs it, quietly (owner).
+- **Full version:** an option on the shared renderer, not a fork (owner).
+- **Pilot cities:** Mendoza, Avignon, Florence (owner). Each needs its own
+  regional OSM extract, downloaded by the owner: Avignon
+  `europe/france/provence-alpes-cote-d-azur-latest.osm.pbf` (390 MB),
+  Florence `europe/italy/centro-latest.osm.pbf` (385 MB); Mendoza's is in
+  place. Pack sizes (2026-10-07 index read): Avignon 3.7 MB at map extent,
+  17.5 MB with 10 km; Florence 7.2 MB and 20.7 MB.
+- **One Travel basemap style** shared by the full version and the site's
+  Travel view, on the travel app's rules (hierarchy, one tint per category,
+  transit owns lavender, only transit saturated, business kinds dropped);
+  **no land-cover shading** in the site's Travel view either (owner).
+- **Yes to:** white line casings and white station dots tried in the site's
+  Travel view only, with screenshots for the owner; Protomaps' own dark
+  flavor for Travel in place of the invert filter (the app may use it too:
+  BSD-3 style code, CC0 design, MIT sprites, OFL fonts, none from
+  Protomaps' servers when taken from the npm package or the GitHub repo);
+  solid macro dots in Travel; a Business/Travel toggle on the Overview
+  (CARTO stays) passing the choice into city maps; the coverage stat as a
+  plain-words note in the pilot and **exact numbers from the export in the
+  final version** (owner).
+- **The violet clash, measured** (CIE76, `pipeline/linecolour.delta_e`, the
+  project's own measure; PREFERRED 45, HARD_FLOOR 10): against the travel
+  app's draft station-area border #7e6fb0, the planned "Shops and services"
+  violet #7e57c2 is 26.5 and today's Retail blue #2a78d6 is 24.7; the
+  backup teal #37786e is 54.3, olive #737a00 93.8. So changing the violet
+  alone would not separate the pins from Travel's lavender; the border is a
+  draft and is the cheaper lever. Recommended: keep the site's pin colours,
+  ask the app to place its border at least PREFERRED (45) from the site's
+  pin colours, and tell Cleanup before the pin re-render lands (owner's
+  option of a proposal to Cleanup).
+
 ### 2026-10-07 - The pilot adds a self-built pack test (owner)
 
 - **Why.** protomaps.com's Terms of Use forbid "automated means to access
