@@ -67,26 +67,18 @@ Git refuses to check out `master` in two worktrees at once, so each is on its
 own branch and merges back: the merge is an explicit review step instead of an
 implicit race.
 
-**The standing assignments** - current state, so update this when one changes.
-A landed row shrinks to one line; the full rows as of 2026-10-04 are at
-`#sr-registry`. Rows marked "gone" were not in `git worktree list` on
-2026-10-04.
+**The standing assignments** - current state (2026-10-08), so update this
+when one changes. Retired rows move to `docs/rule_history.md`, `#sr-registry`.
 
 | Role | Worktree | Branch |
 |---|---|---|
 | Staging / research | `.claude/worktrees/staging` | `worktree-staging` |
 | Cleanup / audit | `.claude/worktrees/cleanup` | `worktree-cleanup` |
-| France kit, then the France builds; gone | `.claude/worktrees/france-kit` | `worktree-france-kit`; `france-build` |
-| Czech kit; gone | `.claude/worktrees/czech-kit` | `worktree-czech-kit` |
-| UK six builds; gone; claims landed 2026-10-02 | `.claude/worktrees/uk-six` | `uk-six-build` |
-| Japan batch, twelve cities; gone; claims landed 2026-10-02 | `.claude/worktrees/japan-batch` | `japan-batch-build` |
-| Seattle (Regional), then Tbilisi; gone | `.claude/worktrees/seattle-tbilisi` | `seattle-tbilisi-build` |
-| Japan wave 2, fourteen cities: **LANDED 2026-10-03** | `.claude/worktrees/japan-wave2` (removed) | `japan-wave2-build` |
-| Four extensions to built cities: **LANDED 2026-10-03** | `.claude/worktrees/extensions` (removed) | `extensions-build` |
-| Belgium builds, six pages: **LANDED 2026-10-04** | `.claude/worktrees/belgium` (removed) | `belgium-build` (removed) |
-| Liverpool (Regional), Tacoma, Mendoza: **LANDED 2026-10-04** | `.claude/worktrees/new-cities` (removed) | `new-cities-build` (removed) |
-| Korea sweep, Daejeon, Gwangju, Gimhae: **LANDED 2026-10-04** | `.claude/worktrees/korea-sweep` (removed) | `korea-sweep-build` (removed) |
-| Tram kit, the ten other T1 cities; gone | `.claude/worktrees/tram-kit` | `worktree-tram-kit` |
+| Visuals (downstream) | `.claude/worktrees/visual` | `visual-handoff`, never merged |
+| Analytics (downstream) | `.claude/worktrees/analytics` | `analytics-handoff` |
+| Place search pilot; never removed before it lands | `.claude/worktrees/place-search` | `place-search` |
+| Basemap pilot | `.claude/worktrees/basemap` | `basemap` |
+| Cleanup's held landing (legend dot, Georgia) | `.claude/worktrees/review-prep` | `legend-dot-georgia` |
 | Build `<city>` | `.claude/worktrees/<city>` | `<city>-build`; delete the branch when the worktree goes |
 
 A build worktree's `data/` and `.venv-lean` are junctions to the main
@@ -144,18 +136,12 @@ exist ONLY in the worktree that built it. Before removing a worktree
 **Page and notice numbers** (`#sr-numbers` has the full paragraph of
 2026-10-04). Notice numbers are claimed
 here, by the session, before one is written; open claims (2026-10-07,
-the A and B build plan): Abroad 154–156, East-1 157–168, Kansai-1
-169–175, Regional-1 176–186, East-2 187–197, Kansai-2 198–204 and 215–215 (Cluj-Napoca, call 222),
+the A and B build plan): East-2 187–197, Kansai-2 198–204 and 215–215 (Cluj-Napoca, call 222),
 Regional-2 205–214 and 216–216 (Kurashiki, call 226); 133–136, released unused by the four extensions on
-2026-10-03, stay unassigned; the next free notice is 217. Every earlier block has landed:
-the coverage sweep's on 2026-10-04 (the Korean three, pages 190–192 and no
-notices; Mendoza, Tacoma and Liverpool (Regional), pages 193–195 and
-notices 141–143 and 153; Belgium, pages 196–201 and notices 144–152);
-Japan wave 2's 115–128, the extensions' 129–132 and lane-app's 137–140 on
-2026-10-03, and everything up to 114 on 2026-10-02. Pages reserved (2026-10-07, the A and B build plan, one page per city in its
-session's build order): Abroad 202 and 300–304 (its own claim), the
-owed-act seven 203–209, East-1 210–221, Kansai-1 222–228, Regional-1
-229–239, East-2 240–250, Kansai-2 251–257 and 305 (Cluj-Napoca), Regional-2 258–267 and 306 (Kurashiki), spare
+2026-10-03, stay unassigned; the next free notice is 217. Every earlier block, up to 186, has
+landed (2026-10-08). Pages reserved (2026-10-07, the A and B build plan, one
+page per city in its session's build order): the owed-act seven 203–209,
+East-2 240–250, Kansai-2 251–257 and 305 (Cluj-Napoca), Regional-2 258–267 and 306 (Kurashiki), spare
 268–289, rank 4 290–299; the free pages outside them are 307 on. A
 session releases what it leaves unused when it lands.
 Check D of `check_provenance.py` reads every range in that sentence and lets
@@ -188,10 +174,10 @@ for them, or add it after they commit.
 
 ## At most four heavy jobs, each admitted by the gate
 
-Every session shares one machine (32 GB since 2026-10-05, 16 GB before), and
+Every session shares one machine (32 GB), and
 overlapping heavy jobs have run it out of memory and closed the Claude app
-(`#sr-heavy-jobs`, `#memory`). **Since 2026-10-05, four heavy jobs at most
-(owner, after the RAM upgrade), each admitted by `scripts/heavy_job.py`**
+(`#sr-heavy-jobs`, `#memory`). **Four heavy jobs at most, each admitted by
+`scripts/heavy_job.py`**
 against the memory actually available; the memory test, not the count, is
 what usually refuses a job. If refusals or a slow machine become common,
 lower `MAX_JOBS` again.
@@ -214,8 +200,7 @@ lower `MAX_JOBS` again.
   --pid <its pid> ...` before, `end --pid <pid>` after. A dead pid drops off
   on its own, so a crash never blocks anyone.
 - `drift_check.py` enforces its own share: one run per machine, `--jobs 3`
-  at most (2 before 2026-10-05). The Python cap (8 GB a process, 16 GB with
-  its children since 2026-10-05) stays as
+  at most. The Python cap (8 GB a process, 16 GB with its children) stays as
   the backstop: it turns a runaway into a `MemoryError` instead of a crash.
 - Light work needs no gate: greps, git, `check_all.py`, one small city's
   steps.
@@ -277,15 +262,13 @@ unknowns listed has not been audited.
 
 ## At most three build sessions, and no catch-up merges
 
-**At most three build sessions at once** (owner, 2026-10-04, the efficiency
-review's second change), besides Cleanup, Staging and the two downstream
+**At most three build sessions at once** (`#sr-downstream`), besides Cleanup, Staging and the two downstream
 sessions; the same three the heavy-job gate admits. A fourth build waits for
 one to land.
 
 **A branch takes origin/master in only right before its own push**, or when it
-needs something master has; never just to keep up after someone else's push.
-Catch-up merges ran 28 a day in the week of 2026-09-27 and made 103 of 176
-conflicted merges (`docs/efficiency_review_2026-10-04.md`).
+needs something master has; never just to keep up after someone else's push
+(`docs/efficiency_review_2026-10-04.md`).
 
 ## Sync points
 
@@ -299,10 +282,8 @@ worktree than in a tree someone is mid-build in.
 Two sessions build FROM what master holds, without landing anything the site
 renders: **Visuals** (`.claude/worktrees/visual`, city cards, decks, print)
 and **Analytics** (`.claude/worktrees/analytics`, private analysis in
-`data/_analysis/`). Neither sees master move, so Cleanup tells them (owner,
-2026-10-03), **once per review time** rather than after every push (owner,
-2026-10-04, the efficiency review's second change: up to 26 messages a day,
-each waking a session on its full context).
+`data/_analysis/`). Neither sees master move, so Cleanup tells them
+**once per review time**, not after every push (`#sr-downstream`).
 
 - **At the end of each review time**, Cleanup runs
   `python scripts/downstream_changes.py <the last noted master> origin/master`.

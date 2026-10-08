@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**188 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**189 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-08**
 
@@ -35,6 +35,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [The comments map_common ships in every map reworded to the neutral-comment rules (owner; branch legend-dot-georgia, held for review time)](#2026-10-08---the-comments-map_common-ships-in-every-map-reworded-to-the-neutral-comment-rules-owner-branch-legend-dot-georgia-held-for-review-time)
 - [The sign rule reaches the Japanese pages' name bullet, and Ōita's masked-name clause, both approved (owner; branch legend-dot-georgia, held for review time)](#2026-10-08---the-sign-rule-reaches-the-japanese-pages-name-bullet-and-ōitas-masked-name-clause-both-approved-owner-branch-legend-dot-georgia-held-for-review-time)
 - [The sign rule on the eight Japanese pages whose lists name no operator (owner)](#2026-10-08---the-sign-rule-on-the-eight-japanese-pages-whose-lists-name-no-operator-owner)
+- [Feature freeze: no new features after the refinements in flight; CLAUDE.md and session_roles.md trimmed, their headroom kept for what follows (owner)](#2026-10-08---feature-freeze-no-new-features-after-the-refinements-in-flight-claudemd-and-session_rolesmd-trimmed-their-headroom-kept-for-what-follows-owner)
 
 **2026-10-07**
 
@@ -6447,3 +6448,31 @@ per-city shape of their siblings.
   "Names and types"), since the sign rule needs no operator. With the 56
   pages of the entry before, all 64 Japanese pages state it.
   `legend-dot-georgia` `16a68efe`, held for review time.
+
+### 2026-10-08 - Feature freeze: no new features after the refinements in flight; CLAUDE.md and session_roles.md trimmed, their headroom kept for what follows (owner)
+
+- **Freeze (owner):** CLAUDE.md's full word budget is "a good point to stop
+  implementing new features, which i was planning on anyway". The work
+  already in flight continues: place search's rollout (batch 3 next, on
+  branch `place-search`) and the basemap pilot (branch `basemap`). Nothing
+  new is started beyond them.
+- **The headroom serves what comes after** (owner: "the final few lines can
+  serve for whatever comes after"): the final build sessions after the
+  2026-10-11 reset, the PLAN cleanup pass, the site-wide code audit, and the
+  place-search-city pointer when place search lands.
+- **CLAUDE.md, 1,997 to 1,855 of 2,000 words** (`187debd4`, owner approved
+  the edits). Every file, script, skill, agent and anchor it names resolves.
+  Two pairs of overlapping rules merged (the two fetch rules, the two licence
+  rules); dates and asides moved to `docs/rule_history.md` (new anchors
+  `#overpass`, `#ridership`, `#pre-permitted`, and `#trim-2026-10-08` with the
+  removed wording verbatim); the lean venv's build lines moved to
+  `docs/commands.md`.
+- **docs/session_roles.md, 2,968 to 2,723 of 3,000 words.** The standing
+  assignments table now lists the worktrees that exist (it had eleven retired
+  rows and lacked Visuals, Analytics, the two pilots and `review-prep`). The
+  notice claims of Abroad, East-1, Kansai-1 and Regional-1 and their page
+  reservations were dropped: notices 154-186 all exist on master (measured
+  with `check_provenance.py`'s own readers), so check D needs no claim for
+  them. Wave 2's claims, 133-136 and the owed-act seven stay. Dates and
+  rationale moved to `#sr-downstream`, with every removed passage verbatim.
+- PLAN.md is at 2,068 of 5,000 words and needed no trim.
