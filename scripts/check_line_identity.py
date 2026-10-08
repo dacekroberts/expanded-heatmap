@@ -2,8 +2,7 @@
 
     python scripts/check_line_identity.py                # the gate (check_all.py runs it)
     python scripts/check_line_identity.py --rendered     # also the committed maps' legends
-    python scripts/check_line_identity.py --neighbours   # also the neighbour rule (off by default)
-    python scripts/check_line_identity.py --verbose      # list every neighbour pair
+    python scripts/check_line_identity.py --verbose      # list every neighbour pair, excepted ones too
 
 THE RULE (owner, 2026-10-07, a hard line): a line drawn on more than one
 city's map has one colour on every map. pipeline/line_registry.py holds those
@@ -30,11 +29,16 @@ WHAT IT CHECKS
      registry's. Off in the gate, because a config change reaches the map only
      at the next render; drift_check.py catches a stale map. Run it after a
      re-render.
-  --neighbours: THE NEIGHBOUR RULE, OPEN WITH THE OWNER and OFF by default.
-     Two DIFFERENT lines on two different maps, within NEIGHBOUR_M of each
-     other, drawn within linecolour.HARD_FLOOR of one colour (Higashimurayama's
-     Seibu Tamako Line and Tokorozawa's Seibu Yamaguchi Line, both #A06030).
-     Every run prints the count; the flag makes a pair fail.
+  N. THE NEIGHBOUR RULE (owner, 2026-10-07, on). Two DIFFERENT lines on two
+     different maps must differ by at least linecolour.HARD_FLOOR when they
+     meet. "Neighbouring" is ADJACENCY measured on the committed polylines:
+     the two drawn lines come within NEIGHBOUR_M (2 km) of each other, so the
+     maps are adjacent where those lines run. No shared station and no Japan
+     view is needed; two maps of different countries never come that close.
+     Pairs in line_registry.NEIGHBOUR_EXCEPTIONS pass (JR Musashino / JR
+     Chuo, Midosuji / Kita-Osaka Kyuko). Higashimurayama's Seibu Tamako and
+     Tokorozawa's Seibu Yamaguchi Line, both #A06030, were the case that set
+     it.
 
 Colours come from the configs where a config names the line (dict entries'
 `colour`, the Korean tuples' second field, LINE_COLOURS, LINE_COLOUR) and
@@ -175,7 +179,6 @@ def bbox_near(a, b, pad):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--rendered", action="store_true")
-    ap.add_argument("--neighbours", action="store_true")
     ap.add_argument("--verbose", action="store_true")
     args = ap.parse_args()
     problems = []
@@ -269,8 +272,8 @@ def main():
                     problems.append(f"R {city}'s map draws {ln['label']} {ln['colour']}, the registry "
                                     f"{reg.colour(ident)} ({ident}): re-render it")
 
-    # neighbour rule
-    pairs = []
+    # N: the neighbour rule
+    pairs, excepted = [], []
     for i, ca in enumerate(cities):
         for cb in cities[i + 1:]:
             for na, la in enumerate(maps[ca]):
@@ -288,18 +291,20 @@ def main():
                     lon0 = (la["bbox"][1] + la["bbox"][3]) / 2
                     if metres(la["segs"], lat0, lon0).distance(metres(lb["segs"], lat0, lon0)) > NEIGHBOUR_M:
                         continue
-                    pairs.append((ca, la["label"], ra["colour"], cb, lb["label"], rb["colour"], d))
+                    pair = (ca, la["label"], ra["colour"], cb, lb["label"], rb["colour"], d)
+                    why = reg.NEIGHBOUR_EXCEPTIONS.get(frozenset({ra["ident"], rb["ident"]}))
+                    (excepted if why else pairs).append(pair + (why,))
     if args.verbose:
-        for p in pairs:
-            print(f"  neighbours: {p[0]} '{p[1]}' {p[2]} / {p[3]} '{p[4]}' {p[5]} (CIE76 {p[6]:.1f})")
-    if args.neighbours:
-        problems += [f"N {p[0]} '{p[1]}' {p[2]} and {p[3]} '{p[4]}' {p[5]} are different lines within "
-                     f"{NEIGHBOUR_M / 1000:.0f} km at CIE76 {p[6]:.1f}" for p in pairs]
+        for p in excepted + pairs:
+            print(f"  neighbours: {p[0]} '{p[1]}' {p[2]} / {p[3]} '{p[4]}' {p[5]} (CIE76 {p[6]:.1f})"
+                  + (f", excepted: {p[7]}" if p[7] else ""))
+    problems += [f"N {p[0]} '{p[1]}' {p[2]} and {p[3]} '{p[4]}' {p[5]} are different lines within "
+                 f"{NEIGHBOUR_M / 1000:.0f} km of each other at CIE76 {p[6]:.1f}, under {HARD_FLOOR:.0f}"
+                 for p in pairs]
 
     print(f"check_line_identity: {len(reg.REGISTRY)} registered lines on {len({c for _, c, _ in reg.members()})} "
-          f"maps; {found} same-name shared-track pairs; neighbour rule "
-          f"{'ON' if args.neighbours else 'off'}: {len(pairs)} pair(s) of different lines within "
-          f"{NEIGHBOUR_M / 1000:.0f} km under {HARD_FLOOR:.0f}")
+          f"maps; {found} same-name shared-track pairs; neighbour rule: {len(pairs)} pair(s) of different "
+          f"lines within {NEIGHBOUR_M / 1000:.0f} km under {HARD_FLOOR:.0f}, {len(excepted)} excepted")
     if problems:
         print(f"\nPROBLEMS {len(problems)}:")
         for p in problems:

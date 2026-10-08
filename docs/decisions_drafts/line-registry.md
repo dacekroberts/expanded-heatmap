@@ -13,15 +13,19 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
    nishinomiya nishitokyo oita osaka otsu sakai soka suita tama tokorozawa
    tokyo toyonaka uji yokohama yokosuka. On this branch the run took 0.76 GB
    at `--jobs 3`, and every one of the 34 drifted in `heatmap.html` only
-   (baseline, provenance and excluded stations identical).
+   (baseline, provenance and excluded stations identical). The neighbour
+   rule's two Seibu moves fall on Tokorozawa, already in the list, so the
+   full list stays these **34 maps**.
 2. After it: `python scripts/check_line_identity.py --rendered` must print
-   PROBLEMS 0 (it did on this branch before `git checkout -- outputs/`), and
-   `check_map_markup.py` PROBLEMS 0 (it did).
+   PROBLEMS 0 (it did on this branch before `git checkout -- outputs/`, the
+   neighbour rule on), and `check_map_markup.py` PROBLEMS 0 (it did).
 3. No `app/` file changes: the app imports no city config, so no reboot.
 4. Downstream: Visuals hears that 34 Japanese maps changed line colours
    (cards that show a line legend for any of them).
 
-## Open call for the owner: the neighbour rule
+## The neighbour rule: decided (owner, 2026-10-07, "i agree with your recommendations")
+
+See the entry "The neighbour rule on" below. The call as it was put:
 
 Built and OFF (`check_line_identity.py --neighbours`). It would flag two
 DIFFERENT lines on two maps, within 2 km of each other, drawn within CIE76 10
@@ -48,6 +52,38 @@ on two Tama-area maps and Osaka-area red splits; off, a reader comparing
 Higashimurayama with Tokorozawa sees two Seibu branches in one colour.
 
 ## Entries
+
+### 2026-10-07 - The neighbour rule on: different lines meeting on neighbouring maps differ by at least 10; two Seibu lines moved on Tokorozawa; two pairs excepted (owner)
+
+- **Decided (owner): two DIFFERENT lines that meet on neighbouring maps differ
+  by at least `linecolour.HARD_FLOOR` (CIE76 10).** "Neighbouring" is
+  adjacency measured on the committed polylines: the two drawn lines come
+  within 2 km of each other (`NEIGHBOUR_M`) on two different maps. No shared
+  station or Japan view is required; maps of two countries never come that
+  close. Colours are the configs' (the legend's where no config names the
+  line), so the rule holds before a re-render.
+- **Decided: the two Seibu pairs separated by moving Tokorozawa's two lines,
+  not Higashimurayama's.** Each side's nearest feasible move cost the same
+  (12.4 and 12.6), and both on Tokorozawa means one map changes, already in
+  the re-render list. Hue kept, each the nearest colour reading 3:1 on both
+  pages, 45 from the pins, 12 from every line on its map and on every map
+  within 2 km:
+  - Seibu Yamaguchi Line (Leo Liner) `#A06030` to `#C87848`: pins 46.1,
+    nearest line Seibu Ikebukuro 27.9, 12.4 from Higashimurayama's Seibu
+    Tamako Line; contrast 5.56 dark, 3.37 light.
+  - Seibu Sayama Line `#9040C0` to `#B060E8`: pins 66.0, nearest line Seibu
+    Shinjuku 56.9, 12.6 from Higashimurayama's Seibu Seibuen Line; contrast
+    5.07 dark, 3.69 light.
+  The two are 99.9 apart on their own map; dark-mode labels separate, 5 of 5;
+  the render's `check_line_colours()` and `check_map_markup.py` passed.
+- **Decided (owner): two pairs left alike on purpose, in
+  `line_registry.NEIGHBOUR_EXCEPTIONS` with their reasons:** JR Musashino /
+  JR Chuo (`#F05820`, JR East's own orange for both; 4 map pairs) and
+  Midosuji / Kita-Osaka Kyuko Namboku (`#E4151E` / `#E81820`, CIE76 1.2, one
+  through service; 2 map pairs).
+- **Decided: the rule is part of the gate.** `check_line_identity.py` check N
+  fails any other pair; the `--neighbours` flag is gone. Result on this
+  branch: PROBLEMS 0, 0 pairs, 6 excepted.
 
 ### 2026-10-07 - One colour per line on every map: a site-wide line registry, 48 lines made one colour on 34 maps, a check that fails a second colour (owner)
 

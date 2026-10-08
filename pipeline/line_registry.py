@@ -51,6 +51,12 @@ scripts/check_line_identity.py fails when a registered line's colour in any
 config differs from its entry, and when two maps draw what looks like one line
 (the same name over the same track, or a Japanese line of one operator under
 one name) without an entry joining them or a NOT_SAME record parting them.
+
+THE NEIGHBOUR RULE (owner, 2026-10-07, on): two DIFFERENT lines that meet on
+neighbouring maps differ by at least linecolour.HARD_FLOOR, so a reader moving
+from one map to the next never takes one for the other. Neighbouring means
+drawn within 2 km of each other on two different maps (the check's
+NEIGHBOUR_M); NEIGHBOUR_EXCEPTIONS below are the pairs left alike on purpose.
 """
 
 # child page slug -> the page whose colours it imports
@@ -59,6 +65,20 @@ INHERITED = {"brussels_regional": "brussels"}
 # {(city, key), (city, key)} pairs the check would take for one line that are
 # two: none yet.
 NOT_SAME = []
+
+# Registered line pairs the neighbour rule leaves alike, each for a reason the
+# operators give (owner, 2026-10-07, "i agree with your recommendations").
+NEIGHBOUR_EXCEPTIONS = {
+    # JR East colours both orange itself (Chuo Rapid and Musashino, its own
+    # #F15A22); they meet at Nishi-Kokubunji. 4 map pairs, CIE76 0.0.
+    frozenset({"jr-east-musashino-line", "jr-east-chuo-line"}):
+        "JR East's own orange for both lines",
+    # One through service: Kita-Osaka Kyuko trains run on as the Midosuji
+    # Line at Esaka, in one red. 2 map pairs (Suita, Toyonaka against Osaka),
+    # CIE76 1.2.
+    frozenset({"osaka-metro-midosuji-line", "kita-osaka-kyuko-namboku-line"}):
+        "one through service in one red",
+}
 
 REGISTRY = {
     # the project's colour every map already drew (hue-matched to the operator); pins >= 30.3, lines >= 18.1, lines beside it >= 18.1.
