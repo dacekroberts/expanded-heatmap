@@ -40,6 +40,18 @@ what is left into `docs/handoff_place_search_2026-10-07.md`.
 
 ## Where things stand (2026-10-08)
 
+- **2a BUILT, held for the owner** (Montréal, Barcelona, Marseille, Prague,
+  Brussels): the drafts file's newest entry has every call and the three
+  questions put to the owner. What 2b inherits from it:
+  - the matcher's words per language (`map_common`, `LANG_WORDS`), switched on
+    by the index's declared languages: add ko, zh and ka entries if their
+    queries need a connector, a station word or an article;
+  - `place_index`: `historic=manor` is a house; Stolpersteine never go in;
+    a `place=square` is a landmark; `WAY_LEAD` and `WAY_ENDING` for a
+    language whose street names carry no street word;
+  - check a sample intersection really crosses before calling it a failure
+    (two in the 2a section below are parallel streets).
+
 - **Built, on the branch, held for review time:** Kyoto (pilot), and batch 1:
   Seattle, Chicago, Vancouver, Sydney. `scripts/check_place_search.py` names
   all five OK; `check_all.py` 52 of 52.
