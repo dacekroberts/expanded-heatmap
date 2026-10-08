@@ -4,6 +4,14 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-08 - Kurashiki's year-end food PDF holds the old-law permits: 101.6% of restaurants; its personal-services lists left out (owner, calls 224, 225; 226 put)
+
+- **The probe (call 223)** enumerated the city's whole catalogue (kurashiki.dataeye.jp, 150 datasets, only 1446 on food), okayama-opendata.jp and BODIK (nothing for 33202), and found on the city's own site: (1) the food-permit list of permits in force at 2026-03-31 (page 1004977, PDF 8,034,340 bytes, CC BY 4.0 mark); (2) the catalogue's 2022 year-end CSV (resource 11998, 1.5 MB, PDL, old-law rows of 2022, closures since not removed); (3) barber and beauty year-end lists (page 1004934, PDFs) under the site's all-rights-reserved terms. No laundry list.
+- **"i approve the 8mb download"** (call 224): saved as `data/kurashiki/raw/r07nenndinatu_2026-03-31.pdf`, read with pdftotext. Counts: 243 pages; 飲食店営業 **4,727 = 101.6% of the 4,653 in force** (the CSV's 2,446 was 52.6%); old-law-only types present (喫茶店営業 102, 乳類販売業 63); about 2,470 of its dates before 2021-06. Columns: operator name, corporate name, address, type, permit number, permit date, expiry, phone. Counts are by mention, since the layout splits a row's dates from its type; the brief parses rows.
+- **"225: we can leave out", "note as possible with outreach"** (owner): the barber and beauty lists stay out, not requested (Kawaguchi's precedent), and join the requests only the owner can send.
+- **Call 226 put:** Kurashiki C to B, food only, from the PDF (an upper bound, Shizuoka's shape), the MLIT block join measured at the brief, the name rule on 営業者氏名; a brief and a licence read before any build; Regional-2 proposed. Tradeoff: a 243-page PDF table to parse, a year-end snapshot, placement unmeasured.
+- **Staging slip:** a first look at the PDF text printed its first lines, which held four operators' own names, to staging's console. Nothing was stored outside the scratch text file; every count after it printed numbers only.
+
 ### 2026-10-08 - Cluj-Napoca rides with Kansai-2; Kurashiki probed for its pre-2021 list, discarded on coverage if none; phase 2 held for usage (owner, calls 222, 223)
 
 - **A new staging session** (2026-10-07, "Staging Session" kept): both private pages republished at version 19 from master 658ef57c (206 built; candidates 31, A 3, B 26, C 2, D 0; R 91; 329 discarded), Cluj-Napoca's leads note brought current.
