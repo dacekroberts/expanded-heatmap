@@ -135,8 +135,10 @@ the owner reminded Kobe's build that it exists for the cities after it.
 
 Every "⚠️ Shared code" item of the 58 wave-4/5 briefs and the owner's calls of
 2026-10-06 landed once, before the A/B builds
-(`docs/decisions_drafts/japan-foundation.md` has the checklist and each
-brief's figure). **A brief that tells you to add one of these is already
+(DECISIONS.md, "The Japan foundation: every shared-code rule of the 58
+Japanese briefs landed once", has each brief's figure; the checklist is in
+`git show d121b2cc:docs/decisions_drafts/japan-foundation.md`, its switches
+named in `japan_register.WAVE5_RULES`). **A brief that tells you to add one of these is already
 done; one that is missing is a parked call, never a city-local fix.**
 
 - **Leave `"rules"` out of a new `japan.CITIES` entry.** A new city reads
@@ -195,9 +197,9 @@ done; one that is missing is a parked call, never a city-local fix.**
 
 Four review lanes read the 64 Japanese maps of the batch that landed at
 35d43c4a; these are the rules they and the owner set, for the wave 2 builds
-(East-2, Kansai-2, Regional-2) and every city after. DECISIONS.md and
-`docs/decisions_drafts/` (review-batch-2026-10-07, rb-mapconfig, rb-prose,
-line-registry) hold the measurements.
+(East-2, Kansai-2, Regional-2) and every city after. DECISIONS.md's
+2026-10-07 entries (folded 2026-10-08 from the review-batch-2026-10-07,
+rb-mapconfig, rb-prose and line-registry drafts) hold the measurements.
 
 - **ONE COLOUR PER LINE, SITE-WIDE (the owner's hard line).** A line your city
   draws that another map already draws takes its colour from

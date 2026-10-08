@@ -30,17 +30,10 @@ items are done or moved into PLAN.
 
 ## Open, in order
 
-1. **Fold the drafts into `DECISIONS.md`** once the owner hands them off
-   (`decisions-entry` format, `scripts/merge_append_only.py` on a conflict,
-   then `scripts/decisions_index.py`; delete each file once folded).
-   - Final, their sessions retired: `worktree-abroad-batch`,
-     `worktree-japan-east-1`, `worktree-japan-kansai-1`,
-     `worktree-japan-regional-1`, `japan-foundation`, `pin-colours-backlinks`,
-     `rb-mapconfig`, `rb-prose`, `review-batch-2026-10-07`,
-     `macro-facts-guard`, `line-registry`, `region-selector`, `cleanup`.
-   - Empty headers only, delete: `belgium`, `korea-sweep`, `new-cities`.
-   - Live, not yet: `staging`.
-   - At the fold: East-1's "ten" blank names is a count to correct (PLAN).
+1. **Drafts FOLDED 2026-10-08**: 57 entries from 13 files, the three empty
+   files deleted, East-1's blank names corrected to twelve (measured from the
+   rendered maps), the drafts' still-open notes moved into PLAN. Still live:
+   `staging` and the pilots' `place-search` and `claude-epic-neumann-5aa0a6`.
 2. **The owner's iPhone check** of both landings (in progress at handoff).
 3. **Wave 2 Japanese builds** (East-2, Kansai-2, Regional-2) start from
    master on the owner's go; at most three build sessions at once. Staging's
@@ -56,7 +49,8 @@ items are done or moved into PLAN.
    decision.
 5. **Tell Visuals and Analytics what moved** at the next review time:
    `scripts/downstream_changes.py ecec7536` reports 34 cities' `heatmap.html`,
-   `app/cities.py` and `app/components.py`.
+   `app/cities.py` and `app/components.py`. Visuals reports itself current
+   at `d121b2cc` (2026-10-08), so its note starts there.
 6. **Follow-ups in PLAN's "Next landing"**: Ostrava's 2 px button overlap,
    Osaka's 375 px label overlaps, the UK line-colour search, about 25
    day-first notices, about 30 stale "45 from every pin" config comments, the
