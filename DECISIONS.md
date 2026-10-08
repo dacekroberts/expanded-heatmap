@@ -20,12 +20,13 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**111 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**112 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-08**
 
 - [Georgia joins Europe East, and West Asia, a one-city view, is retired (owner; branch legend-dot-georgia, held for review time)](#2026-10-08---georgia-joins-europe-east-and-west-asia-a-one-city-view-is-retired-owner-branch-legend-dot-georgia-held-for-review-time)
 - [Legend dots never shrink, and are 10 px (owner's iPhone check; branch legend-dot-georgia, held for review time)](#2026-10-08---legend-dots-never-shrink-and-are-10-px-owners-iphone-check-branch-legend-dot-georgia-held-for-review-time)
+- [The owner's iPhone check of the 2026-10-07 and 2026-10-08 landings passed](#2026-10-08---the-owners-iphone-check-of-the-2026-10-07-and-2026-10-08-landings-passed)
 
 **2026-10-07**
 
@@ -4552,3 +4553,23 @@ per-city shape of their siblings.
 - **Done in the Cleanup session at the owner's word** ("legend fix can be
   done here because it relates to both versions"), so the basemap pilot
   keeps to its own version.
+
+### 2026-10-08 - The owner's iPhone check of the 2026-10-07 and 2026-10-08 landings passed
+
+- **Passed (owner, on an iPhone): all ten items** of the checklist Cleanup
+  wrote for the two landings (35d43c4a, the large review; 5507a4cb, the line
+  registry and region selector): the two-row region dropdowns and their
+  views, the map's start on the Overview, the Europe West, Europe East,
+  Benelux and Germany labels, Kyoto's wrapped button row and its legend
+  clear of the buttons and the OpenStreetMap credit, the "<- Kansai" and
+  Daegu's "<- South Korea" buttons, the olive and violet pins with no
+  glitched names, Tokorozawa's line labels and legend, Tokyo, New York and
+  a new regional map drawing their pins, and the reference pages' back
+  links. Known items were left out (Osaka's three labels at 375, Ostrava's
+  2 px, the clipped "(Regional)" pills).
+- **Two defects found on the way, both on branch `legend-dot-georgia` for
+  review time:** the olive legend dot drawn as an oval where its label
+  wraps (the entry "Legend dots never shrink, and are 10 px"), and the
+  phone's region dropdowns opening a keyboard on an editable search box
+  (`filter_mode=None` on both `st.selectbox` calls in `app/Overview.py`;
+  typed text no longer filters, a choice still sets `?region=`).

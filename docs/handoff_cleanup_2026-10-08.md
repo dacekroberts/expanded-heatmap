@@ -34,7 +34,8 @@ items are done or moved into PLAN.
    files deleted, East-1's blank names corrected to twelve (measured from the
    rendered maps), the drafts' still-open notes moved into PLAN. Still live:
    `staging` and the pilots' `place-search` and `claude-epic-neumann-5aa0a6`.
-2. **The owner's iPhone check** of both landings (in progress at handoff).
+2. **The owner's iPhone check PASSED** (2026-10-08), all ten items; the oval
+   legend dot and the typable dropdowns it found are on `legend-dot-georgia`.
 3. **Wave 2 Japanese builds** (East-2, Kansai-2, Regional-2) start from
    master on the owner's go; at most three build sessions at once. Staging's
    call 222 placed Cluj-Napoca with Kansai-2. Every new Japanese city is
@@ -47,7 +48,14 @@ items are done or moved into PLAN.
    Wikipedia articles, Seattle's Panama Hotel, index size). Landing order:
    merge it and `legend-dot-georgia`, take master's `outputs/*/heatmap.html`
    on conflict, then ONE full re-render of all 206 maps (the legend dot
-   needs it; it covers the five searched maps). Basemap: the station-area border is dark
+   needs it; it covers the five searched maps). The pilot's four conditions:
+   (a) its committed indexes (`app/static/places/<city>.json`,
+   `outputs/<city>/place_search.json`) land unchanged, and any re-run
+   `step2b_place_index.py` runs BEFORE that city's step 3; (b)
+   `scripts/check_place_search.py` after the re-render (stale index hashes);
+   (c) `.streamlit/config.toml`'s `enableStaticServing = true` lands with
+   it, or the indexes 404 live; (d) deploy-verify (`map-chrome`) opens the
+   search box on one searched map live. Basemap: the station-area border is dark
    plum `#352a4d` in both projects (owner, 2026-10-08), clearing every pin
    colour by 45 or more, so the pin colours stay; the pilot's drafts
    (`claude-epic-neumann-5aa0a6.md`) also hold the owner's disputed-borders

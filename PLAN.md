@@ -22,8 +22,6 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
-- [ ] **Owner: the iPhone check of the 2026-10-07 and 2026-10-08 landings.**
-
 - [ ] **Next landing:**
   - Phase 2 Japanese cities (East-2, Kansai-2, Regional-2) and Cluj-Napoca,
     on the owner's go (Cluj-Napoca waits on call 215, the placement bar).
