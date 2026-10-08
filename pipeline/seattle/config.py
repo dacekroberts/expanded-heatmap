@@ -333,8 +333,9 @@ PLACE_FOLD = None
 PLACE_REVIEWED = {
     "Coal Creek Hotel": "a hotel's ruins, historic=ruins",
     "Grand Pacific Hotel plaque": "a plaque marking a historic building's site (Wikipedia)",
-    "Panama Hotel": "a National Historic Landmark building in the Chinatown-International District "
-                    "(Wikipedia); the building, not its hotel's business",
+    "Panama Hotel": "kept as a historic site (owner, 2026-10-08): a National Historic Landmark "
+                    "building in the Chinatown-International District (Wikipedia); the building, "
+                    "not its hotel's business",
 }
 # OSM objects a reading by eye found to be a business or a home that no rule
 # in place_index.py catches, each with why (place_index.build, `dropped`).
