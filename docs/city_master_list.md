@@ -32,8 +32,8 @@ kept as the record of the T tiers and the light-rail test.
 > | | |
 > |---|---|
 > | **Built** | **206** across 27 countries *(each city's build line is in the Built table below)* |
-> | **Candidates** | **32** — A 3 · B 26 · C 2 · D 1 |
-> | **Restricted (Band R)** | **90** *(A band, not candidates (owner, 2026-10-02: "keep it as a Band but exclude it from the candidate counts"): each needs access the project does not use, or a request only the owner sends)* |
+> | **Candidates** | **31** — A 3 · B 26 · C 2 · D 0 |
+> | **Restricted (Band R)** | **91** *(A band, not candidates (owner, 2026-10-02: "keep it as a Band but exclude it from the candidate counts"): each needs access the project does not use, or a request only the owner sends)* |
 > | **Open screening gap** | **10** *(rows whose own city host never answered: neither a finding nor a proven block)* |
 > | **Discarded** | **329**, each naming its evidence |
 >
@@ -143,7 +143,7 @@ different depth in each. Barcelona is also the first source in the project to
 impose an obligation that is **an act rather than a notice**: its terms require
 the City Council to be informed of every derived project.
 
-## Candidates — 32
+## Candidates — 31
 
 Banded by **first blocker** (the owner's rule, "Five rules" below): access
 (D, R), then buckets. A city is in one band only.
@@ -153,10 +153,10 @@ Banded by **first blocker** (the owner's rule, "Five rules" below): access
 | 🟢 **A** | **Ready to build.** A current list, an open licence, coordinates answered, rail answered; what remains is answerable inside the build | **3** |
 | 🔵 **B** | **Narrower pages.** Pass the reduced-bucket bar as measured: one full bucket, or all three with a measured gap; the page says what is missing. The owner's yes to each is pending | **26** |
 | 🟣 **C** | **Closer to a page.** One measurement or one owner call stands between the city and A or B; each row names it | **2** |
-| 🔴 **D** | **Blocked, but the owner can act alone.** A download approval, a CAPTCHA or a free account; each row names the act | **1** |
+| 🔴 **D** | **Blocked, but the owner can act alone.** A download approval, a CAPTCHA or a free account; each row names the act | **0** |
 | 🟤 **T** | **Retired 2026-10-01.** Trams-only maps were approved on 2026-09-29, so a tram city sits in the band of its next blocker; [`docs/tram_city_list.md`](tram_city_list.md) is the record | **0** |
-| | **Candidates** | **32** |
-| ⚫ **R** | **Restricted or request only. A band, NOT counted as candidates (owner, 2026-10-02).** The publisher refuses this machine and a browser, or answers only on request; no VPN, proxy or account | **90** |
+| | **Candidates** | **31** |
+| ⚫ **R** | **Restricted or request only. A band, NOT counted as candidates (owner, 2026-10-02).** The publisher refuses this machine and a browser, or answers only on request; no VPN, proxy or account | **91** |
 | *Open gap* | Unscreened — a row resting on an absence, so not a discard | *10* |
 | *Discarded* | Measured negative, evidence named | *329* |
 
@@ -223,17 +223,16 @@ five one-bucket cities were built and landed at review time the same day.
 
 *Quito (to R) and Cuenca (to the discards) left the band on 2026-10-04 (owner), once ARCSA's national permit file was measured: no address, province, canton, parish or coordinates, only the agency's zone.*
 
-## 🔴 Band D — blocked, but the owner can act alone (1 city)
+## 🔴 Band D — blocked, but the owner can act alone (0 cities)
 
 | City | What there is | The owner's act |
 |---|---|---|
-| **Oradea** 🇷🇴 | Tram lines 2 and 4-9 (frequency ASSERTED: OTL's host never answered). The city's own 2022 files, downloaded and measured 2026-10-06 (`data/oradea/raw/`): 5,668 operating agreements (one premises a row, 99% with a house number) but **no activity column**, so they cannot be split into buckets; 628 catering authorizations (498 addressed); no licence stated (© only). Kept as a noted supplement | As Timișoara, DSVSA Bihor (owner, 2026-10-06, call 120: food only from the owner's browser act) |
 
 *2026-10-06: every county DSVSA host and `ansvsa.ro` now answer 403 "WAF Forbidden" to scripts, where Timiș showed a 503 browser check on 2026-10-04; whether the owner's browser still passes is untested (wave 5).*
 
 *Tempe, the band's earlier row, went to the discards on 2026-10-01 once the owner fetched its list (a 33-page PDF with no addresses).*
 
-## ⚫ Band R — restricted or request only (90 cities; created 2026-09-28)
+## ⚫ Band R — restricted or request only (91 cities; created 2026-09-28)
 
 **▼ 2026-10-03: Daejeon, Gwangju and Gimhae left for Band A (owner).** Their block was the national register's identity wall; SEMAS's keyless national storefront file, which Incheon and the Gyeonggi cities were built on from 2026-09-29, covers all three, and the coverage sweep found the rows had never been re-checked against it.
 
@@ -256,6 +255,7 @@ row says what would. **Renamed "restricted or request only" the same day (owner)
 | **Ploiești** 🇷🇴 | Trams 101 (every 7-12 minutes) and 102 (7-13) on weekdays by day (READ, RATP's route files, September 2026); about 25 stops (ASSERTED). The city site holds procedures only; DSVSA Prahova answers 403 | **Placement fails on open data** (owner, call 215, 2026-10-07): OSM holds **12,295** address objects (2026-10-07); with Arad's 39.7% from 15,671 the join is not expected near the bar; the owner's DSVSA Prahova files are saved, unmeasured; `gis.ploiesti.ro` fails its certificate, then times out. ANCPI's RENNS address points (INSPIRE AD, every urban locality) exist in the record, but `geoportal.ancpi.ro` and `renns.ancpi.ro` no longer resolve (NXDOMAIN, here and in the owner's browser) and `geoportal.gov.ro` times out for both (2026-10-07) | RENNS reachable again, or the owner's request to ANCPI for its address points; or OSM's house numbers growing past the bar (owner, call 215c, 2026-10-07) |
 | **Craiova** 🇷🇴 | Tram 100, 12 stops, about every 10 minutes (ASSERTED: Moovit; the operator's page leaves 100 and 102 blank); 101 hourly (READ); 22 stop names with 101. The city's open-data page lists no datasets; DSVSA Dolj answers 403 | **Placement fails on open data** (owner, call 215, 2026-10-07): Not measured (OSM's count failed on every mirror, 2026-10-07); the other Romanian joins measured 39.7-63.7% with the tier; the DSVSA Dolj files were not fetched. ANCPI's RENNS address points (INSPIRE AD, every urban locality) exist in the record, but `geoportal.ancpi.ro` and `renns.ancpi.ro` no longer resolve (NXDOMAIN, here and in the owner's browser) and `geoportal.gov.ro` times out for both (2026-10-07) | RENNS reachable again, or the owner's request to ANCPI for its address points; or OSM's house numbers growing past the bar (owner, call 215c, 2026-10-07) |
 | **Reșița** 🇷🇴 | Trams: TUR's Linia 1, 17 stops, every 7-10 minutes on weekdays to 18:50, then 15 (READ, its timetable from 2025-04-14); passed rail at the wave 5 conversion of its pre-verdict. DSVSA Caraș-Severin answers 403. The city's own "Lista Autorizațiilor de funcționare" exists (search index) on a host that never connected from here | **Placement fails on open data** (owner, call 215, 2026-10-07): OSM holds only **136** address objects in the municipality (2026-10-07); the DSVSA Caraș-Severin files were not fetched; the city's own host times out. ANCPI's RENNS address points (INSPIRE AD, every urban locality) exist in the record, but `geoportal.ancpi.ro` and `renns.ancpi.ro` no longer resolve (NXDOMAIN, here and in the owner's browser) and `geoportal.gov.ro` times out for both (2026-10-07) | RENNS reachable again, or the owner's request to ANCPI for its address points; or OSM's house numbers growing past the bar (owner, call 215c, 2026-10-07) |
+| **Oradea** 🇷🇴 | Tram lines 2 and 4-9 (frequency ASSERTED: OTL's host never answered). The city's own 2022 files, downloaded and measured 2026-10-06 (`data/oradea/raw/`): 5,668 operating agreements (one premises a row, 99% with a house number) but **no activity column**, so they cannot be split into buckets; 628 catering authorizations (498 addressed); no licence stated (© only). Kept as a noted supplement | **DSVSA Bihor's lists unreachable** (owner, call 221, 2026-10-07): bihor.dsvsa.ro times out in the owner's browser on repeated tries (every county DSVSA host answers 403 to scripts), and the city's own 2022 files carry no activity column (call 120). The city's address layer (harta.oradea.ro WFS, licence silent, accepted as a join target, call 219) is saved in `data/oradea/raw/adrese_nradm_tiles_2026-10-07/` | DSVSA Bihor's lists loading in the owner's browser; then the join is measured against the saved address layer |
 | **Debrecen** 🇭🇺 | DKV trams 1 and 2 (about every 7 and 10 minutes, ASSERTED). The city's statutory shop register (210/2009 Korm. rendelet), linked from `debrecen.hu` and published daily on Komdat's IPARKER portal: **20,086 shops** counted from its API (2026-10-04), with shop type, catering type, products, opening hours and start and closure dates; no coordinates. Its JSON is scrambled, and the owner ruled the page's own unscramble step out, as Palembang's lifted token | **OKNYIR shows at most 200 rows per search, list and map view alike, with no export** (the owner's browser, 2026-10-07); scripted queries are refused; a probe found no API, open-data page or bulk extract at OKNYIR, Lechner, the national portal (kozadatportal.hu) or the city's own site, and NÉBIH's food register sits behind a CAPTCHA. The register is public by law (Trade Act §6/I(3)) one record at a time | A bulk extract from Lechner (OKNYIR's operator), on the owner's request; or an export added to OKNYIR (owner, call 216, 2026-10-07) |
 | **Szeged** 🇭🇺 | SZKT trams, 5 lines, in SZKT's GTFS. The city's own link to IPARKER is broken (a truncated ID); its other link is to OKNYIR | **OKNYIR shows at most 200 rows per search, list and map view alike, with no export** (the owner's browser, 2026-10-07); scripted queries are refused; a probe found no API, open-data page or bulk extract at OKNYIR, Lechner, the national portal (kozadatportal.hu) or the city's own site, and NÉBIH's food register sits behind a CAPTCHA. The register is public by law (Trade Act §6/I(3)) one record at a time | A bulk extract from Lechner (OKNYIR's operator), on the owner's request; or an export added to OKNYIR (owner, call 216, 2026-10-07) |
 | **Budapest** 🇭🇺 | BKV metro, HÉV and trams (ASSERTED). Its discard said retail and catering were only registered, by county offices, unpublished; but district notaries publish the registers (IPARKER, GovCenter), and OKNYIR now holds them nationally (the Central Europe screen, 2026-10-04). Coverage per district unmeasured | **OKNYIR shows at most 200 rows per search, list and map view alike, with no export** (the owner's browser, 2026-10-07); scripted queries are refused; a probe found no API, open-data page or bulk extract at OKNYIR, Lechner, the national portal (kozadatportal.hu) or the city's own site, and NÉBIH's food register sits behind a CAPTCHA. The register is public by law (Trade Act §6/I(3)) one record at a time | A bulk extract from Lechner (OKNYIR's operator), on the owner's request; or an export added to OKNYIR (owner, call 216, 2026-10-07) |
@@ -1053,7 +1053,7 @@ which reopen on their own lines' service.
 | 🇧🇷 Brazil | **9** | **0** | **0** | — | Built 2026-09-24 as one batch. Wave 2 (2026-09-27) found no new city: six discards on frequency; **Contagem joins Belo Horizonte and Duque de Caxias joins Rio** as regional add-ons (owner; PLAN). Watch Salvador's VLT (trial running) and Teresina's 15-minute service |
 | 🇸🇪 Sweden | **2** | **0** | **2** — Norrköping, Lund | R | **Lund to R 2026-10-04, late** (request only, Norrköping's shape). **Norrköping to R 2026-10-04** (request only). **Göteborg built 2026-09-30** (the tram kit). **Stockholm built 2026-09-29** on its frozen food inspection register. **Göteborg to T1 2026-09-30** (owner): all active food businesses (2,167 food service, 906 food shops as retail), undated rows disclosed |
 | 🇨🇭 Switzerland | **2** | **0** | **1** — Lausanne | R | **The review batch landed 2026-10-07**: Geneva (Regional). **2026-10-04, late (owner)**: Lausanne to R (Vaud's licence register behind a paged search; a bulk extract by request), Bern and Neuchâtel discarded. **Geneva to A 2026-10-04** (the canton's business register); Basel discarded. **Zurich built 2026-09-30** (the tram kit), Switzerland's first. **Zurich to T1 2026-09-30** (owner): 2,325 food premises, plus 1,028 shops licensed to sell alcohol as a partial retail layer |
-| 🇷🇴 Romania | **1** | **2** — Cluj-Napoca (B), Oradea (D) | **7** — Timișoara, Iași, Arad, Galați, Ploiești, Craiova, Reșița | B, D, R | **2026-10-07 (owner, calls 215 and 216)**: Cluj-Napoca to B (71.6% placed with the nearest same-side number tier); seven cities to R, placement failing on OSM (39.7-63.7% where measured) and ANCPI's RENNS unreachable; Oradea in D on its own address layer (a licence read first). **Bucharest built 2026-09-29** |
+| 🇷🇴 Romania | **1** | **1** — Cluj-Napoca (B) | **8** — Timișoara, Iași, Arad, Galați, Ploiești, Craiova, Reșița, Oradea | B, R | **Oradea to R 2026-10-07 (owner, call 221)**: DSVSA Bihor times out. **2026-10-07 (owner, calls 215 and 216)**: Cluj-Napoca to B (71.6% placed with the nearest same-side number tier); seven cities to R, placement failing on OSM (39.7-63.7% where measured) and ANCPI's RENNS unreachable; Oradea in D on its own address layer (a licence read first). **Bucharest built 2026-09-29** |
 | 🇦🇷 Argentina | **2** | **0** | **0** | — | **Mendoza built 2026-10-04** (to A 2026-10-03, owner; the capital alone, CC BY 4.0, every business placed). Buenos Aires built 2026-09-28: the city's land-use survey joined to its parcels (99.8%), CC BY 2.5 AR |
 | 🇦🇺 Australia | **2** | **0** | **0** | — | Parramatta and Newcastle (New South Wales) discarded 2026-10-04 (no register). Brisbane's food permits found 2026-10-01 (the commuter-rail test first); Adelaide, the Gold Coast and Canberra discarded |
 | 🇳🇿 New Zealand | — | **0** | **0** | — | Auckland and Wellington discarded 2026-10-04 on rail; off "Countries ruled out" the same day (owner): food businesses register with their council or MPI, and Hamilton and Marlborough publish food registers but have no urban rail |
@@ -1105,7 +1105,7 @@ which reopen on their own lines' service.
 | 🇭🇺 Hungary | — | **0** | **4** — Debrecen, Szeged, Budapest, Miskolc | R | **Miskolc to R 2026-10-07 (owner, call 220)**: a paged search only, Lausanne's precedent. **2026-10-07 (owner, call 216)**: Debrecen, Szeged and Budapest to R (OKNYIR shows 200 rows a search, no export); Miskolc kept in D for one look at its GovCenter register. **2026-10-04, late (owner)**: the four to D on an OKNYIR export that turned out not to exist |
 | 🇭🇷 Croatia | — | **0** | **0** | — | **Osijek discarded 2026-10-04, late (owner)** (no register; the national crafts register refuses scripts). Zagreb discarded (a grant list only) |
 | 🇸🇰 Slovakia | — | **0** | **0** | — | **Košice discarded 2026-10-04, late (owner)** (no establishment register reachable: ŽRSR behind a robot check, RPO without establishments). Bratislava discarded |
-| **Total** | **206** | **32** | **90** |  | A 3 · B 26 · C 2 · D 1 · R 90. Checked against the band tables by `scripts/check_master_list_counts.py` |
+| **Total** | **206** | **31** | **91** |  | A 3 · B 26 · C 2 · D 0 · R 91. Checked against the band tables by `scripts/check_master_list_counts.py` |
 
 ## Countries ruled out
 
