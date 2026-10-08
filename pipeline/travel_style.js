@@ -37,6 +37,22 @@ var travelStyle = (function () {
     aerodrome: "#d8dae1",
     runway: "#c3c6cf"
   };
+  // Dark: INTERIM, until transit-globe drafts its dark tints. The same
+  // categories as light (scripts/check_travel_style.mjs found gardens,
+  // meadows and platforms undrawn in dark when it kept 5.7.2's own fills),
+  // in 5.7.2's dark flavor colours; platforms take a dark lavender.
+  var TINT_DARK = {
+    earth: null,
+    park: "#192a24",
+    wild: "#202121",
+    cemetery: "#1c2421",
+    sand: "#28282a",
+    natural: "#1c1c1c",
+    institution: "#252424",
+    platform: "#2b2838",
+    aerodrome: "#1e1e1e",
+    runway: null
+  };
   // Land-use kinds as the builder writes them (protomaps/basemaps Landuse.java,
   // surveyed in the Mendoza pack 2026-10-08). Kinds not listed stay plain:
   // built-up, business, attractions, farmland and `other`. Railway land is
@@ -56,12 +72,10 @@ var travelStyle = (function () {
     ["aerodrome", ["aerodrome"]],
     ["platform", ["platform"]]
   ];
-  // 5.7.2's own land-use fills, replaced in the light flavor by LANDUSE and
-  // reduced in the others to the kinds the rules keep.
+  // 5.7.2's own land-use fills, replaced in every flavor by LANDUSE.
   var STOCK_LANDUSE = ["landuse_park", "landuse_urban_green", "landuse_hospital",
                        "landuse_industrial", "landuse_school", "landuse_beach",
                        "landuse_zoo", "landuse_aerodrome"];
-  var STOCK_DROPPED_ANY_FLAVOR = ["landuse_industrial", "landuse_zoo"];
   // Dropped outright: land cover (an empty stand-in in self-built packs),
   // points of interest, road shields and the basemap's own rail (the
   // site's lines are drawn over it).
@@ -70,6 +84,22 @@ var travelStyle = (function () {
   // OSM's service=* there).
   var DROP_DETAIL = ["service", "driveway", "parking_aisle", "alley", "track",
                      "drive-through"];
+  // WHAT THE TRAVEL MAP HIDES, per source layer, applied to EVERY style
+  // layer that reads that source layer (lines, casings, labels, arrows,
+  // fills), so a hidden feature leaves nothing behind: a service road's
+  // name once floated over nothing (Florence's Viale del Visarno,
+  // 2026-10-08; owner asked for a check, scripts/check_travel_style.mjs).
+  // The build-time trim (--travel_trim, TravelTrim.java in the builder
+  // patch) drops the same features from the packs; a Travel render of a
+  // trimmed and an untrimmed pack must match to the pixel.
+  var KEPT_LANDUSE = LANDUSE.reduce(function (all, g) { return all.concat(g[1]); }, [])
+    .concat(["pedestrian", "dam", "pier", "runway", "taxiway"]);
+  var HIDDEN = {
+    dropLayers: ["pois", "landcover"],
+    roads: {kind: ["rail"], kind_detail: DROP_DETAIL},
+    boundaries: {kind: ["county", "locality"]},
+    landuse: {keepOnlyKind: KEPT_LANDUSE}
+  };
   // Disputed lines (owner, 2026-10-08): one neutral style everywhere, lighter
   // than the settled border and dotted where it is dashed. Width 1.5 px;
   // with round caps a [0, 1.5] dash draws 1.5 px dots 2.25 px apart centre
@@ -113,11 +143,32 @@ var travelStyle = (function () {
   function copy(layer) {
     return JSON.parse(JSON.stringify(layer));
   }
+  // The HIDDEN rule for one layer, in its own filter syntax; null when the
+  // layer reads nothing HIDDEN covers.
+  function hideClause(layer) {
+    var sl = layer["source-layer"];
+    var get = function (k) { return ["coalesce", ["get", k], ""]; };
+    if (sl === "roads") {
+      return [["all", ["!in", "kind"].concat(HIDDEN.roads.kind),
+                      ["!in", "kind_detail"].concat(HIDDEN.roads.kind_detail)],
+              ["all", ["!", ["in", get("kind"), ["literal", HIDDEN.roads.kind]]],
+                      ["!", ["in", get("kind_detail"), ["literal", HIDDEN.roads.kind_detail]]]]];
+    }
+    if (sl === "boundaries") {
+      return [["!in", "kind"].concat(HIDDEN.boundaries.kind),
+              ["!", ["in", get("kind"), ["literal", HIDDEN.boundaries.kind]]]];
+    }
+    if (sl === "landuse") {
+      return [["in", "kind"].concat(HIDDEN.landuse.keepOnlyKind),
+              ["in", get("kind"), ["literal", HIDDEN.landuse.keepOnlyKind]]];
+    }
+    return null;
+  }
   function lineWidth(z) {
     return ["interpolate", ["exponential", 1.6], ["zoom"]].concat(z);
   }
 
-  return function (layers, opts) {
+  function style(layers, opts) {
     opts = opts || {};
     var light = (opts.flavor || "light") === "light";
     var variant = opts.variant === "full" ? "full" : "site";
@@ -136,8 +187,6 @@ var travelStyle = (function () {
       }
       if (DROP.indexOf(id) >= 0) return;
       if (STOCK_LANDUSE.indexOf(id) >= 0) {
-        if (STOCK_DROPPED_ANY_FLAVOR.indexOf(id) >= 0) return;
-        if (!light) { out.push(copy(stock)); return; }
         if (landuseDone) return;
         landuseDone = true;
         LANDUSE.forEach(function (group) {
@@ -145,7 +194,7 @@ var travelStyle = (function () {
             id: "travel_landuse_" + group[0], type: "fill", source: src,
             "source-layer": "landuse",
             filter: ["in", "kind"].concat(group[1]),
-            paint: {"fill-color": TINT[group[0]]}
+            paint: {"fill-color": (light ? TINT : TINT_DARK)[group[0]]}
           });
         });
         return;
@@ -157,12 +206,6 @@ var travelStyle = (function () {
       }
       if (id === "roads_taxiway") layer.paint["line-opacity"] = 0.5;
       if (/^roads_tunnels_/.test(id) && layer.type === "line") layer.paint["line-opacity"] = 0.5;
-      // Lines and labels alike: a hidden road kept its name floating over
-      // nothing (Florence's Viale del Visarno, a service road, 2026-10-08).
-      if (layer["source-layer"] === "roads" && (layer.type === "line" || layer.type === "symbol")) {
-        andClause(layer, ["!in", "kind_detail"].concat(DROP_DETAIL),
-          ["!", ["in", ["coalesce", ["get", "kind_detail"], ""], ["literal", DROP_DETAIL]]]);
-      }
       if (id === "boundaries_country") {
         andClause(layer, ["all", ["!has", "disputed"], ["!in", "kind"].concat(UNRECOGNIZED)],
           ["all", ["!", ["has", "disputed"]],
@@ -208,7 +251,15 @@ var travelStyle = (function () {
         });
       }
     });
+    // Last, so no layer added above or by a later edit escapes it.
+    out = out.filter(function (l) { return HIDDEN.dropLayers.indexOf(l["source-layer"]) < 0; });
+    out.forEach(function (l) {
+      var c = hideClause(l);
+      if (c) andClause(l, c[0], c[1]);
+    });
     return out;
-  };
+  }
+  style.HIDDEN = HIDDEN;
+  return style;
 })();
 if (typeof module !== "undefined" && module.exports) module.exports = travelStyle;
