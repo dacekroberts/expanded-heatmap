@@ -4,6 +4,14 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-07 - Place search: suggestions marked work in progress; the map's stations and lines as clickable pills; the languages approved; the Cities menu to review time (owner, branch)
+
+- **"let's mark the autofill section as a WIP ... we can still push it live if it makes sense ... we don't want too many items always popping up cluttering screens (especially mobile)"** (owner): the suggestion rules (the keyword gate, the caps, the pills) are WORK IN PROGRESS, so marked in `map_common.PLACE_SEARCH_SCRIPT`, to be tuned against real search terms in testing; going live in this state is the owner's call at review time. First step against clutter: at most 6 pills and 6 places on a wide map, 4 and 3 under 480 px (5 places when no pill matches).
+- **"language section looks great I approve"** (owner): the measured languages, the bullet and `check_place_search.py` stand as built.
+- **"could we maybe make those clickable, give them pill labeling so they look clickable, and link users to appropriate, respective zoom over the corresponding line/station?"** (owner): the "On this map" suggestions are pill buttons, side by side: a line's with a bar in its map colour, a station's with the station dot; the kind and the other-language name are the pill's title. A line pill frames the whole line and picks it out as its legend row does; a station pill frames the station with its outermost ring (966 m in Kyoto, from `ring_edges_meters`) whether or not the rings are on, with the temporary marker. The list is 260 px wide (230 px input) so two pills share a row on a wide map. Measured in a local render: "Karasuma" gives Karasuma and Karasuma-Oike on one row, the Karasuma Line below; a click on Karasuma framed it at the ring's extent. At 375 px (343 px frame) the list is 190 px wide, the pills one per row, and the open list covers about half the map's width: the first thing for the WIP tuning.
+- **"Cities menu out of the map at review time sounds good"** (owner): for review time; it changes the chrome of all 170 maps (a full re-render and a deploy-verify), so it is measured at 343 px with the search box in place first.
+- **Checks:** `check_all.py` 52 of 52.
+
 ### 2026-10-07 - Place search: notable markets in, the languages measured per city and checked, suggestions held to a full keyword with the map's stations and lines first (owner, branch)
 
 - **"3 notable only, for the scope i like the first line, the second line is good, other than 'in English or Japanese' ... we should put a check for the regional language in place of where Japanese goes. Include multiple foreign languages if we need them"** (owner, this session's chat):

@@ -1998,18 +1998,29 @@ _PLACE_SEARCH_TEMPLATE = r"""
     .hm-search-btn { width: 30px; height: 30px; border: 0; background: transparent;
         color: inherit; cursor: pointer; padding: 0; display: flex;
         align-items: center; justify-content: center; }
-    .hm-search-input { display: none; width: 210px; border: 0; outline: none;
+    .hm-search-input { display: none; width: 230px; border: 0; outline: none;
         background: transparent; color: inherit; font: inherit; font-size: 16px;
         padding: 4px 6px 4px 0; }
     .hm-search.open .hm-search-input { display: block; }
     .hm-search-list { display: none; max-height: 260px; overflow-y: auto;
-        border-top: 1px solid @@LIGHT_BORDER@@; width: 240px; }
+        border-top: 1px solid @@LIGHT_BORDER@@; width: 260px; }
     .hm-search.open .hm-search-list.has { display: block; }
     .hm-search-item { padding: 6px 8px; cursor: pointer; line-height: 1.3; }
     .hm-search-item:hover, .hm-search-item.on { background: rgba(13,148,136,0.14); }
     .hm-search-sub { font-size: 11px; opacity: 0.75; }
     .hm-search-note { padding: 6px 8px; font-size: 12px; opacity: 0.8; }
     .hm-search-head { padding: 5px 8px 1px; font-size: 11px; font-weight: 600; opacity: 0.65; }
+    .hm-search-pills { display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 8px 7px; }
+    .hm-search-pill { display: inline-flex; align-items: center; gap: 5px; padding: 3px 8px;
+        border: 1px solid @@LIGHT_BORDER@@; border-radius: 999px; background: rgba(13,148,136,0.07);
+        color: inherit; font: inherit; font-size: 12px; line-height: 1.4; cursor: pointer; }
+    .hm-search-pill:hover, .hm-search-pill.on, .hm-search-pill:focus-visible {
+        background: rgba(13,148,136,0.2); border-color: @@LIGHT_ACCENT@@; outline: none; }
+    .hm-pill-line { width: 14px; height: 4px; border-radius: 2px; flex: none; }
+    .hm-pill-station { width: 8px; height: 8px; border-radius: 50%; flex: none;
+        background: @@LIGHT_STATION@@; }
+    .dark-base .hm-search-pill { border-color: var(--dm-border); }
+    .dark-base .hm-pill-station { background: var(--dm-station); }
     .hm-search-credit { padding: 4px 8px 6px; font-size: 11px; opacity: 0.8;
         border-top: 1px solid @@LIGHT_BORDER@@; }
     .hm-search-credit a { color: inherit; }
@@ -2024,7 +2035,13 @@ _PLACE_SEARCH_TEMPLATE = r"""
 (function () {
     var NAME = "__MAP_NAME__", URL = "__INDEX_URL__";
     var STATION_COLOR = "@@LIGHT_STATION@@", LINK_M = @@STATION_LINK_M@@, DUP_M = @@STATION_DUP_M@@;
-    var MIN_LATIN = 4, MIN_CJK = 2;
+    var MIN_LATIN = 4, MIN_CJK = 2, RING_M = __RING_M__;
+    // Suggestions at most: the map's own (pills) and other places, fewer on a
+    // phone (under 480 px) to keep the list off most of the map.
+    function caps() {
+        return (document.documentElement.clientWidth || window.innerWidth) < 480
+            ? {own: 4, places: 3, alone: 5} : {own: 6, places: 6, alone: 8};
+    }
     var KIND_LABEL = {line: "Line", mapstation: "Station", station: "Station not on this map",
                       junction: "Intersection", landmark: "Landmark", place: "Neighborhood",
                       street: "Street", crossing: "Intersection"};
@@ -2081,17 +2098,19 @@ _PLACE_SEARCH_TEMPLATE = r"""
             out.push({kind: "mapstation", name: name, names: [name], lat: ll.lat, lon: ll.lng, bbox: null});
         });
         document.querySelectorAll(".map-legend .hm-line-row[data-line]").forEach(function (row) {
-            var n = row.getAttribute("data-line"), name = (row.textContent || "").trim(), bounds = null;
+            var n = row.getAttribute("data-line"), name = (row.textContent || "").trim(), bounds = null,
+                color = null;
             map.eachLayer(function (l) {
                 var cls = " " + ((l.options && l.options.className) || "") + " ";
                 if (l instanceof L.Polyline && cls.indexOf(" hm-line-" + n + " ") >= 0 && l.getBounds) {
+                    color = color || l.options.color;
                     bounds = bounds ? bounds.extend(l.getBounds()) : L.latLngBounds(l.getBounds().getSouthWest(),
                                                                                     l.getBounds().getNorthEast());
                 }
             });
             if (!name || !bounds) return;
             var c = bounds.getCenter();
-            out.push({kind: "line", name: name, names: [name], lat: c.lat, lon: c.lng, row: row,
+            out.push({kind: "line", name: name, names: [name], lat: c.lat, lon: c.lng, row: row, color: color,
                       bbox: [bounds.getSouth(), bounds.getWest(), bounds.getNorth(), bounds.getEast()]});
         });
         return out.map(prep);
@@ -2215,11 +2234,16 @@ _PLACE_SEARCH_TEMPLATE = r"""
         // from the start of a word: an in-word hit put Takaragaike under "kara"
         // and Umekōji-Kyotonishi under "Nish" (Kyoto, 2026-10-07).
         out.sort(function (a, b) { return a._s - b._s; });
-        var mine = out.filter(function (d) { return isOwn(d) && !d._weak; }).slice(0, 5);
-        var rest = out.filter(function (d) { return !isOwn(d); }).slice(0, mine.length ? 6 : 8);
+        var cap = caps();
+        var mine = out.filter(function (d) { return isOwn(d) && !d._weak; }).slice(0, cap.own);
+        var rest = out.filter(function (d) { return !isOwn(d); }).slice(0, mine.length ? cap.places : cap.alone);
         return mine.concat(rest);
     }
     function isOwn(d) { return d.kind === "line" || d.kind === "mapstation"; }
+    // WORK IN PROGRESS (owner, 2026-10-07): the suggestion rules below (the
+    // keyword gate, the caps, the pills) are a first cut, to be tuned against
+    // real search terms in testing; the aim is as few items as do the job,
+    // phones above all. It may go live in this state at the owner's call.
     // Nothing is suggested until a full keyword is typed (owner, 2026-10-07:
     // "North" for Northgate Station, "JR" for a JR line): a whole word of some
     // name ("JR", "Oak", "5th"), at least MIN_LATIN letters of one, at least
@@ -2305,21 +2329,49 @@ _PLACE_SEARCH_TEMPLATE = r"""
             if (!data) { note("Loading places…"); return; }
             shown = search(input.value);
             if (!shown.length) { note("No street, station or place by that name"); credit(); return; }
+            var pills = null;
             shown.forEach(function (d, i) {
-                if (i === 0 && isOwn(d)) head("On this map");
-                if (!isOwn(d) && (i === 0 || isOwn(shown[i - 1])) && isOwn(shown[0])) head("Places");
-                var el = document.createElement("div");
-                el.className = "hm-search-item";
-                el.setAttribute("role", "option");
                 // A map station shows its Japanese (or other) name beside the
                 // map's; an OSM entry its first Latin alias.
                 var other = d.kind === "mapstation" ? d.names[1]
                     : d.names.slice(1).filter(function (n) { return !CJK.test(n); })[0];
+                var label = KIND_LABEL[d.kind] + (other && other !== d.name ? " · " + other : "");
+                if (isOwn(d)) {
+                    // The map's own stations and lines as pills (owner,
+                    // 2026-10-07), side by side so several share a row: a
+                    // line's in its map colour, a station's with the station
+                    // dot. The kind and other name are the pill's title.
+                    if (!pills) {
+                        head("On this map");
+                        pills = document.createElement("div");
+                        pills.className = "hm-search-pills";
+                        list.appendChild(pills);
+                    }
+                    var pill = document.createElement("button");
+                    pill.type = "button";
+                    pill.className = "hm-search-pill";
+                    pill.setAttribute("data-i", i);
+                    pill.title = label;
+                    pill.setAttribute("aria-label", d.name + ", " + label);
+                    var sw = document.createElement("span");
+                    sw.className = d.kind === "line" ? "hm-pill-line" : "hm-pill-station";
+                    if (d.kind === "line" && d.color) sw.style.background = d.color;
+                    pill.appendChild(sw);
+                    pill.appendChild(document.createTextNode(d.name));
+                    pill.addEventListener("click", function () { go(i); });
+                    pills.appendChild(pill);
+                    return;
+                }
+                if (pills && (i === 0 || isOwn(shown[i - 1]))) head("Places");
+                var el = document.createElement("div");
+                el.className = "hm-search-item";
+                el.setAttribute("role", "option");
+                el.setAttribute("data-i", i);
                 var top = document.createElement("div");
                 top.textContent = d.name;
                 var sub = document.createElement("div");
                 sub.className = "hm-search-sub";
-                sub.textContent = KIND_LABEL[d.kind] + (other && other !== d.name ? " · " + other : "");
+                sub.textContent = label;
                 el.appendChild(top);
                 el.appendChild(sub);
                 el.addEventListener("click", function () { go(i); });
@@ -2345,7 +2397,11 @@ _PLACE_SEARCH_TEMPLATE = r"""
                 if (d.row.getAttribute("aria-pressed") !== "true") d.row.click();
                 return;
             }
-            if (d.bbox) {
+            if (d.kind === "mapstation") {
+                // The station with its outermost ring in view, whether or not
+                // the rings are switched on (owner, 2026-10-07).
+                map.fitBounds(L.latLng(d.lat, d.lon).toBounds(2 * RING_M), {padding: [20, 20]});
+            } else if (d.bbox) {
                 map.fitBounds([[d.bbox[0], d.bbox[1]], [d.bbox[2], d.bbox[3]]], {maxZoom: 16, padding: [30, 30]});
             } else {
                 map.setView([d.lat, d.lon], Math.max(map.getZoom(), 16));
@@ -2375,7 +2431,8 @@ _PLACE_SEARCH_TEMPLATE = r"""
         input.addEventListener("input", render);
         input.addEventListener("keydown", function (e) {
             e.stopPropagation();
-            var items = list.querySelectorAll(".hm-search-item");
+            // Pills and rows alike, in the order shown.
+            var items = list.querySelectorAll("[data-i]");
             if (e.key === "ArrowDown" || e.key === "ArrowUp") {
                 e.preventDefault();
                 if (!items.length) return;
@@ -2383,7 +2440,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
                 items.forEach(function (el, k) { el.classList.toggle("on", k === on); });
             } else if (e.key === "Enter") {
                 e.preventDefault();
-                go(on >= 0 ? on : 0);
+                if (items.length) go(Number(items[on >= 0 ? on : 0].getAttribute("data-i")));
             } else if (e.key === "Escape") {
                 input.value = "";
                 render();
@@ -3746,7 +3803,9 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     if place_index_url is not None:
         m.get_root().html.add_child(folium.Element(
             PLACE_SEARCH_SCRIPT.replace("__MAP_NAME__", m.get_name())
-            .replace("__INDEX_URL__", place_index_url)))
+            .replace("__INDEX_URL__", place_index_url)
+            # A station pick frames its outermost ring.
+            .replace("__RING_M__", f"{max(ring_edges_meters):.0f}")))
 
     # A declared language: its font order on --hm-font, which every shared
     # block reads through theme.FONT_VAR, so the shared blocks stay identical.
