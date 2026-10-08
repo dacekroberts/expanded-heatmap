@@ -289,6 +289,27 @@ or published; every proposal waits for the owner.
   | `basemap_pack` **[L]** | `file`, `bytes`, `sha256`, `build` ("20261007"), `osm_replication_utc` (from the pack's metadata: 2026-10-07T04:00:00Z for Mendoza's), `bbox`, `maxzoom`, `credit` ("© OpenStreetMap") | a produced work under ODbL: the credit must be shown wherever the map is |
   | `notices[]` **[L]** | `number` (as `docs/data_sources.md` numbers it), `publisher`, `text`, `verbatim` (true where the wording is prescribed), `applies_to` (`lines`, `stations`, `exits`, `basemap`) | verbatim texts must be reproduced unaltered; only the notices for the exported layers, never a register's |
   | `licences[]` **[L]** | `id`, `source` (publisher and dataset), `licence`, `url`, `obligations` [`attribution`, `share-alike`, `no-modification`, `date-display`, `termination-deletion`, `app-terms-unread`] | the list the app project starts its own reading from; `app-terms-unread` marks a feed whose terms for shipping inside an app this repo has not read (WMATA, LA Metro, IDFM and CRTM went to the app project, 2026-10-07) |
+  | `lines[].redistribution`, `stations[].redistribution`, `exits[].redistribution` **[L]** | `"open"` (the source's terms allow redistributing it as data: ODbL for OSM, CC BY, Licence Ouverte and the like), `"restricted"` (they forbid or limit it: LA Metro's "unauthorized redistribution", WMATA's within-your-Application grant, MTA's no-modification), or `"unread"` (no read has answered the data question); plus `redistribution_basis`, the `docs/data_sources.md` row (file and anchor) the value comes from | per record, so the app can drop or replace a restricted line without re-researching it; the value is the SITE's reading for distribution as data, not a ruling on the app's own use, which the app project reads for itself |
+
+- **Redistribution labels (owner, 2026-10-07).** Every line, station and
+  exit carries `redistribution` and `redistribution_basis` (table above).
+  `check_export.py` refuses a record whose source has no row, and refuses
+  `"open"` where the row says otherwise. Filled first from the existing
+  rows (the US table's "Redistribution" column answers many); a source no
+  row answers is `"unread"` until the licence-read agent reads it, one
+  source per call, when the export is built.
+- **An OSM variant of each city's rail: decided when the export is built
+  (owner, 2026-10-07).** Where a city's rail comes from a feed or an agency
+  layer and an OSM cache exists (about 95 cities, per Cleanup's rail-scope
+  list), the export may also carry an OSM-derived version, so the app can
+  switch a restricted city to OSM without new work.
+- **Discrepancies are disclosed in the app (owner, 2026-10-07).** Wherever
+  the app shows a city's rail from a different source than the site (an OSM
+  variant in place of a restricted feed), or leaves a restricted line out,
+  it says so in the app. To make that possible from the export alone, a line
+  or station drawn from a different source than the site's carries
+  `site_source` (the source the site used) next to `source`, and the city
+  carries `rail_differs_from_site: true`.
 
 - **The full rail network, not the site's cut (owner, 2026-10-07, at the
   app project's request; relayed by Cleanup).** The export carries every line
