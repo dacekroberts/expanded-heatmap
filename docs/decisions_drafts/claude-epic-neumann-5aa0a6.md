@@ -112,6 +112,35 @@ or published; every proposal waits for the owner.
   domain comparison (needs the owner's Cloudflare account and the
   Cloudflare terms read first).
 
+### 2026-10-08 - Ferries named and in the legend; line labels that follow the screen, station names, and a tap-a-line list (owner)
+
+- **Ferries (owner: crimson stands out, so label it; a legend row under
+  the transit lines).** Built, site Travel view and full version alike:
+  each ferry and cable car is named along its route in its own colour
+  (`travel_ferry_label`, `travel_aerialway_label`, from z12, the name in
+  the pill's language), and the legend gains a row under the transit
+  lines for each route kind the city's pack holds, drawn as the map draws
+  it (ferry dashed, cable car a thin line with ticks), shown in Travel
+  only. The kinds come from the build's pack summary
+  (`open_basemap["routes"]`); the swatch colours are read from
+  `travel_style.js`, so they cannot drift. In the pilot packs: Florence
+  "Arno Boat", Avignon "Bac du Rocher des Doms", Mendoza none. Visible
+  wording "Ferry" and "Cable car" is a proposal for review time.
+  `check_travel_style.mjs` passes; `check_render_current` 170 of 170.
+- **Line labels that stay on screen (owner, for the full version, no
+  business data there):** each line's label follows the part of the line
+  in view, like the macro map's pills, placed on pan and zoom and kept
+  apart. To build in the Mendoza full page.
+- **Station names on demand (owner, to consider):** a menu toggle; with a
+  line highlighted its stations' names take the line's colour (a shared
+  station takes the highlighted line's), otherwise a neutral colour. To
+  build in the full page.
+- **Tap a line to list its stations, in both directions (owner: likely
+  the app only, since runs here are pilots):** north- and southbound, or
+  east- and westbound. Passed to transit-globe.
+- **Legend:** the owner asked to see it open in Travel to give feedback;
+  shots sent (lines only, then the ferry row).
+
 ### 2026-10-08 - Packs stop at zoom 14; hidden features hidden in every layer, with a check; baselines kept (owner; built)
 
 - **Zoom 14 chosen (owner, 2026-10-08)**, on the samples of the next
