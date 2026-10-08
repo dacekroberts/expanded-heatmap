@@ -126,12 +126,20 @@ or published; every proposal waits for the owner.
   Mendoza and Tokyo pages, a shared `lib/` (libraries, Noto glyphs,
   licences), `NOTICE.md`, `README.md`, `range_server.py`, screenshot sheets
   and `HANDOFF.md`. The app session copies it, as it did the baselines.
-- **For the owner:** the Tokyo test page's basemap is a 1 km cut of
-  Protomaps' 2026-10-07 build, which carries ESA land cover (CC BY 4.0),
-  so the package NOTICE carries ESA's credit; the alternatives are a page
-  without that patch or a self-built Kanto pack (an owner download).
-  Leaflet 1.9.3, maplibre-gl-leaflet 0.1.4 and four licence texts were
-  requested as owner downloads for the offline folder.
+- **Tokyo's test page has no basemap (owner, 2026-10-08):** the only Tokyo
+  pack to hand was a 1 km cut of Protomaps' 2026-10-07 build carrying ESA
+  land cover (CC BY 4.0, a credit to carry), so the patch was dropped.
+  `full_travel` now takes `pmtiles_url=None` (lines on a plain ground, the
+  OSM credit shown on its own) and `credits` (the lines' own sources in the
+  credit corner): Tokyo's reads MLIT's 「国土数値情報（鉄道データ）」 line
+  and the OSM credit (English station names). Commit 8ea6d8aa.
+- **Offline, measured:** the owner allowed this session to fetch the nine
+  small files (Leaflet 1.9.3 js, css and two images, maplibre-gl-leaflet
+  0.1.4, four licence texts; about 183 KB, `curl -o`, contents never
+  read into the session). Both package pages with every request to another
+  host failed: Mendoza at zoom 12 to 17, desktop and phone, light and dark,
+  Spanish labels, names on; Tokyo fitted and at zoom 15. 4 to 25 local
+  files a view, none attempted elsewhere, no errors.
 
 ### 2026-10-08 - Fonts settled: Noto, with its licence file and the trademark line beside the glyphs (owner)
 
