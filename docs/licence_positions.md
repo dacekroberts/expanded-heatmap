@@ -98,12 +98,12 @@ Next in line: the Kitchener–Waterloo zips ("No License Provided"), SEMAS (10 K
 | Tier | Entries | Of which unrecorded (no licence reading) |
 |---|---|---|
 | 1 Weakest | 28 | 8 rows (D.C. register, NTA, four US boundary layers, geo.api.gouv.fr, CARTO, the boundary group and the minor borrowings) |
-| 2 Conditional | 48 | none |
+| 2 Conditional | 52 | none |
 | 3 Explicit open, notice shown | 44 | none |
 | 4 Public domain | 22 | none |
-| **Total** | **142** | |
+| **Total** | **146** | |
 
-The 142 entries are grouped: one entry per shared source (for example, MHLW across 12 cities, SIRENE across 26), with its city list. OpenStreetMap is a single entry.
+The 146 entries are grouped (rows 2.49 to 2.52 added 2026-10-07 for the owner's review-time calls on the Kansai-1 sources; the cities built since 2026-10-02 are otherwise not ranked here): one entry per shared source (for example, MHLW across 12 cities, SIRENE across 26), with its city list. OpenStreetMap is a single entry.
 
 ---
 
@@ -206,6 +206,10 @@ The 142 entries are grouped: one entry per shared source (for example, MHLW acro
 | 2.46 | Wards on their own terms (Taitō, Setagaya, Meguro) | Tokyo | cost clauses; Taitō's site policy bars copying, but its licence page names the list (japan.md:131-133) | owner 2026-09-24 | Taitō | notice | none |
 | 2.47 | Shibuya food list | Tokyo | terms "may change without notice ... re-read them before each republish" (japan.md:130) | 2026-09-24 | Shibuya | notice | make the re-read a gate item |
 | 2.48 | City lists, CC BY with a fault-based cost clause | Sapporo, Fukuoka, Toyama, Kumamoto, Nagasaki, Kitakyushu, Kagoshima | the country-wide acceptance (japan.md:144-175) | owner 2026-09-24 | a city, after a lapse or a currency claim | notices | none |
+| 2.49 | Amagasaki City lists (尼崎市オープンデータ利用規約) | Amagasaki | CC BY 4.0 with §6's bar on harming or defaming the city or others, the harm undefined (japan.md:370) | owner 2026-10-07, accepted knowingly on the Taoyuan (2026-09-25), Fukui §4 (2026-10-01) and Maebashi (2026-10-05) precedents | the City, reading the map as harm | notice 174; the name rule; removal | none: a prohibition, not a display duty |
+| 2.50 | Suita City lists (吹田市オープンデータ利用規約) | Suita | CC BY 4.0 with §5's bar on harming or defaming the city or others, the harm undefined (japan.md:368) | owner 2026-10-07, as 2.49 | the City, reading the map as harm | notice 171; the name rule; removal | none: a prohibition, not a display duty |
+| 2.51 | Hirakata City lists, CC BY 2.1 JP | Hirakata | the pages' 表示例 credit with the licence URI; the city's pages cited by title and not linked, since its linking policy asks for an enquiry before a deep link (japan.md:367) | owner 2026-10-07 (the unlinked credit approved) | the City, reading an unlinked credit as short of its 表示例 | notice 170; the credit removed if the city asks (CC BY 2.1 JP 第5条) | none |
+| 2.52 | Hyōgo Prefecture 生活衛生課 lists | Itami, Kakogawa | CC BY 4.0 through the catalogue terms 3(3); the two food lists are catalogued as their page, not as files (japan.md:369) | owner 2026-10-02 (Ōtsu's precedent), applied 2026-10-07 | the Prefecture | notices 172 and 173 | none |
 
 ### Tier 3 - explicit open licence, read, notice displayed
 

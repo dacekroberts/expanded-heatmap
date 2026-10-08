@@ -83,8 +83,8 @@ alternative, not as applications of a rule: by the letter of the rule, DART
 would have been dropped.
 Copenhagen's S-tog is the second such case: a suburban network on its own
 tracks, drawn because inside the city its stations sit about a kilometer and
-a quarter apart, every line runs every ten minutes, and most of its stations
-there have no Metro station nearby.
+a quarter apart, every line but the peak-hour Bx runs every ten minutes, and
+most of its stations there have no Metro station nearby.
 Rome's Roma–Viterbo urban service, São Paulo's CPTM Linha 9 and Rio's SuperVia
 Deodoro and Saracuruna lines were decided the same way, and Brazil made the
 third part of the test explicit: how many of a line's stations have no drawn
@@ -104,10 +104,10 @@ page.
   boundaries, and business registers do: one city's register cannot say what is
   around a station in the next city, so a ring drawn there would come out empty
   for a reason that has nothing to do with commerce. Washington D.C.'s
-  Metrorail reaches Maryland and Virginia, Toronto's Line 1 ends past the city
-  limit at Highway 407, and Mexico City's Línea B crosses into the State of
-  México. **Several maps are deliberately regional instead** — among them
-  Miami with its county, Vancouver with four neighbors, Guadalajara with three
+  Metrorail reaches Maryland and Virginia, and Toronto's Line 1 ends past the
+  city limit at Highway 407. **Several maps are deliberately regional instead**
+  — among them Miami with its county, Vancouver with four neighbors, Mexico
+  City with four State of México municipios, Guadalajara with three
   neighboring municipios, and Lille across eleven communes — because there one
   registry covers the whole area. Guadalajara
   goes one step further and leaves out a municipio it could have included:
@@ -1975,7 +1975,7 @@ excluded on Aarhus's own numbers**: 165 rows (3.0%), 78% personally owned
 against 45% overall; tattoo studios are lost with it, as in Copenhagen. **A
 supermarket registered under its franchisee's own name and a store number**
 ("Name, 870 Place") shows its address too: 29 premises (owner, 2026-09-29; the
-same rule now applies to Copenhagen's 33). **Left off because they could not be
+same rule now applies to Copenhagen's 50). **Left off because they could not be
 placed**: 152 premises (2.9%), 131 with no address id and 21 whose address has
 no point in OpenStreetMap.
 
@@ -2040,7 +2040,7 @@ so an online-only seller carries the code of the goods it sells.
 proprietorship, a small personally owned business or a partnership shows its
 address instead of its name, as does any name carrying Denmark's sole-trader
 marker "v/" ("by"). So does a supermarket registered under its franchisee's own
-name and a store number (50 premises, owner 2026-09-29). They remain on the map;
+name and a store number (50 premises). They remain on the map;
 only the name is withheld: 7,452 of the 18,677 premises shown. Addresses
 recorded "care of" another person are never read.
 
@@ -3000,7 +3000,7 @@ drawn.
 ### Thessaloniki - the City's active shop licenses, and Line 1 inside the city
 
 **Left out of the City's license layer** (8,103 rows): canteens inside offices,
-hospitals, sports grounds and parks (246, owner) and inside schools (66); preparation
+hospitals, sports grounds and parks (246) and inside schools (66); preparation
 kitchens (10) and a mobile canteen (1); internet cafés (168) and other recreation:
 cinemas, theaters, children's play areas, amusement arcades and games, gyms, swimming
 pools, an amusement park, concert halls and cultural centers (112); food and drink
@@ -3025,7 +3025,7 @@ are listed on Thessaloniki's page. Not drawn: buses; the suburban railway.
 ### Gelsenkirchen - the City's premises survey, services kept to personal care
 
 **Left out of the City of Gelsenkirchen's premises survey**: 176 surveyed premises with no
-category (54 food, 122 services); 3 hotels and guest houses; and 362 service premises by
+category (54 food, 122 services); 3 hotels and guest houses; and 359 service premises by
 rule: gambling halls and betting shops (50), health and care practices (39), health,
 social and sport facilities (37), insurance offices (36), travel agencies (29), bank
 branches (23), repairs, alterations and key cutting (23), driving, music and other schools
@@ -3035,9 +3035,9 @@ arts (5), copy shops (3), post offices (2) and vehicle repair (1). **Kept**: car
 (4), as Retail.
 
 **Missing, not excluded**: personal services are thin. The survey records services
-mainly in the city's designated shopping centres: 83% of the personal-services points lie
+mainly in the city's designated shopping centers: 83% of the personal-services points lie
 in one, against 52% of the shops and 46% of the food service, so hairdressers and other
-personal services away from the centres are missing. Vacant units sit in separate layers,
+personal services away from the centers are missing. Vacant units sit in separate layers,
 not read.
 
 **Shown, but not named**: 22 signs that read as a person's own name show the business's
@@ -4526,7 +4526,7 @@ line.
   holds 397 of the city's 528 restaurants (75.2%). The national filings add
   the premises they hold and the ledgers do not.
 - Shops that sell only packaged food, except where they notified the health
-  centre since June 2021 (the notification ledger) or filed nationally.
+  center since June 2021 (the notification ledger) or filed nationally.
 - 79 school, hospital and staff canteens, 15 snack bars and cabarets, 9
   vending machines, 8 caterers (仕出し), 7 rows marked temporary or mobile, 2
   premises inside hotels and inns and 2 mail-order businesses.
@@ -4567,7 +4567,7 @@ line.
   holds 933 of the city's 1,284 restaurants (72.7%). The national filings add
   the premises they hold and the ledgers do not.
 - Shops that sell only packaged food, except where they notified the health
-  centre since June 2021 (the notification ledger) or filed nationally.
+  center since June 2021 (the notification ledger) or filed nationally.
 - 233 school, hospital and staff canteens, 30 vending machines, 29 snack bars
   and cabarets, 13 caterers (仕出し), 4 rows marked temporary or mobile, 3
   linen-supply laundries and 2 premises inside hotels and inns.
@@ -4604,7 +4604,7 @@ line.
   holds 667 of the city's 931 restaurants (71.6%). The national filings add
   the premises they hold and the ledgers do not.
 - Shops that sell only packaged food, except where they notified the health
-  centre since June 2021 (the notification ledger) or filed nationally.
+  center since June 2021 (the notification ledger) or filed nationally.
 - 137 school, hospital and staff canteens, 22 vending machines, 21 snack bars
   and cabarets, 12 rows marked temporary or mobile, 10 caterers (仕出し), 4
   premises inside hotels and inns, 1 mail-order business and 1 linen-supply
@@ -4649,7 +4649,7 @@ line.
   holds 705 of the city's 1,023 restaurants (68.9%). The national filings
   add the premises they hold and the ledgers do not.
 - Shops that sell only packaged food, except where they notified the health
-  centre since June 2021 (the notification ledger) or filed nationally.
+  center since June 2021 (the notification ledger) or filed nationally.
 - 149 school, hospital and staff canteens, 31 snack bars and cabarets, 12
   caterers (仕出し), 12 vending machines and 3 premises inside hotels and
   inns.
@@ -4694,7 +4694,7 @@ line.
   holds 1,170 of the city's 1,721 restaurants (68.0%). The national filings
   add the premises they hold and the ledgers do not.
 - Shops that sell only packaged food, except where they notified the health
-  centre since June 2021 (the notification ledger) or filed nationally.
+  center since June 2021 (the notification ledger) or filed nationally.
 - 286 school, hospital and staff canteens, 34 snack bars and cabarets, 32
   vending machines, 23 caterers (仕出し), 14 rows marked temporary or mobile,
   2 premises inside hotels and inns, 2 mail-order businesses and 1
@@ -4843,7 +4843,7 @@ line.
   holds 1,262 of the city's 2,188 restaurants (57.7%). The national filings
   add the premises they hold and the ledgers do not.
 - Shops that sell only packaged food, except where they notified the health
-  centre since June 2021 (the notification ledger) or filed nationally.
+  center since June 2021 (the notification ledger) or filed nationally.
 - 242 school, hospital and staff canteens, 49 snack bars and cabarets, 43
   vending machines, 15 rows marked temporary or mobile, 12 premises inside
   hotels and inns, 8 caterers (仕出し) and 6 mail-order businesses.
@@ -4921,7 +4921,7 @@ line.
   holds 1,652 of the city's 2,599 restaurants (63.6%). The national filings
   add the premises they hold and the ledgers do not.
 - Shops that sell only packaged food, except where they notified the health
-  centre since June 2021 (the notification ledger) or filed nationally.
+  center since June 2021 (the notification ledger) or filed nationally.
 - 203 school, hospital and staff canteens, 195 snack bars and cabarets, 42
   vending machines, 27 premises inside hotels and inns, 27 rows marked
   temporary or mobile, 17 caterers (仕出し), 2 linen-supply laundries and 1
@@ -4937,7 +4937,7 @@ for the city as downloaded on October 6, 2026. 15 of the 213 bakery,
 confectioner and deli rows (7.0%) have a trade name that reads as a factory;
 they are kept (owner, 2026-09-24).
 
-**One pin per premises** - 215 repeat permits are shown once, and the
+**One pin per premises** - 215 repeat permits are shown once, and 407
 national filings that repeat a ledger's premises are shown as the ledger's.
 
 **Not placed** - none. 108 rows sit at their town's center, and 2 at the
@@ -4964,7 +4964,7 @@ line.
   holds 633 of the city's 1,035 restaurants (61.2%). The national filings add
   the premises they hold and the ledgers do not.
 - Shops that sell only packaged food, except where they notified the health
-  centre since June 2021 (the notification ledger) or filed nationally.
+  center since June 2021 (the notification ledger) or filed nationally.
 - 217 school, hospital and staff canteens, 23 rows marked temporary or
   mobile, 12 caterers (仕出し), 10 vending machines, 7 snack bars and
   cabarets, 1 mail-order business and 1 linen-supply laundry.
@@ -5202,8 +5202,7 @@ have a trade name that reads as a factory; they are kept (owner, 2026-09-24).
 in both the permit and the notification lists.
 
 **Not placed** - 11 rows (0.3%). Another 458 (11.9%) sit at their town's
-center, because MLIT's file does not hold their block numbers; the owner chose
-to build with these tiers shown (2026-10-06).
+center, because MLIT's file does not hold their block numbers.
 
 **Names not shown** - 2 pins whose trade name is the operator's own name show
 their permit type.
@@ -5363,8 +5362,8 @@ line.
 **Counted** - every food permit in term on March 31, 2026 in the city's list,
 old-law permits included, plus the new permits the city listed each month
 from April to August 2026, and the city's barber, beauty-salon, laundry and
-coin-laundry lists of March 31, 2026 (coin laundries as Personal services,
-owner 2026-09-28), plus the new barbers and beauty salons the city listed
+coin-laundry lists of March 31, 2026 (coin laundries as Personal services),
+plus the new barbers and beauty salons the city listed
 each month to August 31, 2026 (it listed no new laundries). The monthly
 lists hold new permits and new premises only, and closures are not
 published, so a business that closed after March 2026 is still counted: the
@@ -6915,7 +6914,7 @@ Korail's intercity line.
 ### Gimpo - SEMAS's national storefront register, all three buckets
 
 **Incheon's source and rules**, as for Goyang, Seongnam and Yongin (the
-sections above).
+section above).
 
 **Out by name**: hostess bars 139, dance halls 4, staff canteens 44,
 household fuel dealers 10; and, as in Incheon, offices, education, health,
@@ -6934,7 +6933,7 @@ Gimpo, so none is drawn.
 ### Siheung - SEMAS's national storefront register, all three buckets
 
 **Incheon's source and rules**, as for Goyang, Seongnam and Yongin (the
-sections above).
+section above).
 
 **Out by name**: hostess bars 287, dance halls 5, staff canteens 230,
 household fuel dealers 35; and, as in Incheon, offices, education, health,
