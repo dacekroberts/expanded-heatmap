@@ -164,8 +164,22 @@ or published; every proposal waits for the owner.
   consistency outranks travel on a business-focused site.** For the app
   (owner): a list of every edited code against the official one, so the
   app can show both and a rider reading the station's signs (KK) is not
-  confused by the app's code (KKA); Tokyo's nine are in the package's
-  `tokyo/edited_codes.json` and the handoff.
+  confused by the app's code (KKA); generalised (owner) to a real-world
+  exception list per city (codes, colours, names): Tokyo's is the
+  package's `tokyo/real_world_exceptions.json`. The prototype shows the
+  official code beside the edited one in the legend row and the station
+  details ("(signed KK)") and on the picked line's pill ("KKA · signed
+  KK"), owner's ask. Commit 7c1f8dbe.
+- **Official colours in the full version and the app, as fully as
+  possible (owner, 2026-10-08):** the site moved all 52 Tokyo colours (36
+  by 20+ CIE76) to clear its pins, which the full version does not have.
+  Piloted: `full_travel["colors"]`, Tokyo drawn in its operators' colours,
+  light and dark, no errors. Distinguishing calls later (owner): 19 pairs
+  within 500 m sit under the hard floor of 10, 8 within one operator
+  (Keisei, Keikyu, Seibu, Tobu share a colour), 11 across operators (JR
+  Saikyo and Namboku 0.6, crossing; Toei Mita and the Monorail 2.5; JR
+  Yokosuka / Sobu Rapid and Tobu Kameido 2.6, 28 m apart); list in the
+  package. The site keeps its colours (and the line-identity hard line).
 - **The picked line always shows its pill (owner, 2026-10-08):** placed
   first, no minimum length, may cover dots when nothing clear is left.
   Tokyo, all 52 picked in turn: 52 of 52 at the widest view on desktop and
