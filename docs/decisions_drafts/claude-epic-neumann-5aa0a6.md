@@ -59,9 +59,13 @@ or published; every proposal waits for the owner.
   push, and re-run `check_render_current` after.
 - **Done 2026-10-08: the label pill** (entry below; `lang_check.mjs` in
   the scratchpad; `render_mendoza.py` now passes `local_lang="es"`).
-- **Open items, in order:** pack size (measure each layer's share, then a
-  build-time trim of what the style never draws; owner, a priority); the
-  full version as a renderer option (no business
+- **Done 2026-10-08: the build-time trim** (`--travel_trim`; entry below;
+  `build_trim.sh`, `trim_shots.mjs`, `trim_diff.py`; the compiled builder
+  in `basemaps-main/tiles/target/` now carries the switch, the stock jar
+  is `data/_basemap_build/protomaps-basemap-stock.jar`, the stock sources
+  `data/_basemap_build/_stock_src/`).
+- **Open items, in order:** the z14 against z15 review for the owner
+  (`build_z14.sh` builds trimmed z14 packs); the full version as a renderer option (no business
   data, the hard line enforced by a check); white line casings and white
   station dots in Travel for the owner's screenshots; Protomaps' dark
   flavor in Travel; the Overview Business/Travel toggle (`app/`, branch
@@ -69,6 +73,51 @@ or published; every proposal waits for the owner.
   non-Google font (item 17 below); the Free Worker against an R2 custom
   domain comparison (needs the owner's Cloudflare account and the
   Cloudflare terms read first).
+
+### 2026-10-08 - The build-time trim: packs 27-30% smaller, the Travel map unchanged to the pixel (built and measured)
+
+- **What a pack carries that the Travel style never draws**, measured by
+  re-encoding every tile without each group and re-compressing
+  (`pack_trim_estimate.py`):
+
+  | | Points of interest | Untinted land use | Hidden road details | Rail, county and locality lines | All |
+  |---|---|---|---|---|---|
+  | Mendoza | 12.0% | 9.3% | 3.5% | 2.2% | 26.9% |
+  | Avignon | 6.2% | 14.2% | 8.5% | 1.1% | 29.9% |
+  | Florence | 9.0% | 13.1% | 5.7% | 1.0% | 28.8% |
+
+- **Built as one switch, `--travel_trim`** (owner: one switch or several,
+  either; one chosen, since the rule is single, "keep only what the
+  Travel style draws", and one switch means two outputs to test, not a
+  grid). It skips the points-of-interest and land-cover layers, land-use
+  kinds the style does not tint, roads whose `kind_detail` the style
+  hides, the basemap's own rail, and county and locality lines. A new
+  class `TravelTrim` holds the lists (kept in step with
+  `pipeline/travel_style.js`) and four one-line checks call it, in
+  `Basemap`, `Landuse`, `Roads` and `Boundaries`. Without the switch the
+  builder is unchanged. The patch, 120 lines, is
+  `data/_basemap_build/travel_trim.patch` (this worktree, gitignored; a
+  copy in the scratchpad); where it lives for good is a hosting-time
+  decision. The wards Tokyo and Seoul need later get their own
+  `--keep_wards` override then, not now. The zoom stop is the builder's
+  own `--maxzoom`.
+- **Measured.** Packs: Mendoza 3,893,127 to 2,836,140 bytes (27.2%
+  smaller), Avignon 12,127,090 to 8,431,735 (30.5%), Florence 18,133,238
+  to 12,857,973 (29.1%); builds about a minute faster (about 2 min each),
+  peaks unchanged (3.24 to 3.38 GB). Travel-style screenshots of trimmed
+  and untrimmed packs at z11, z13 and z15 in all three cities: **0.0000%
+  of pixels differ**, no errors. The first run differed at Florence z15
+  by one street name: the style hid service roads but still drew their
+  names, so "Viale del Visarno" floated over nothing on the untrimmed pack.
+  The style now hides the labels of hidden roads too, which the trim had
+  already done.
+- **Caveat: the dark flavor.** It keeps 5.7.2's own land-use fills until
+  the app's dark tints arrive, and some of those (grass, military) are
+  trimmed, so a dark Travel map from a trimmed pack shows fewer green
+  areas than from an untrimmed one. The dark tints should follow the light
+  categories.
+- **Next: the zoom stop** (owner: look at z14 against z15 soon). z15 alone
+  is 51-56% of each untrimmed pack.
 
 ### 2026-10-08 - The label-language pill built; smaller packs made a priority (owner; built and measured)
 
