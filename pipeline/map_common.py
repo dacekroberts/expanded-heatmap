@@ -16,6 +16,7 @@ entry (build_legend). render_heatmap does both for every line passed in.
 
 import html
 import json
+import math
 import re
 import zipfile
 from pathlib import Path
@@ -2801,7 +2802,7 @@ def add_pin_layer(m, rows, group_name, color, tooltip_field_label,
         cat = _esc(_display(getattr(row, value_column)))
         data.append([
             round(row.latitude, COORD_DP), round(row.longitude, COORD_DP),
-            _esc(row.business_name),
+            _esc(shown_name(row.business_name, cat)),
             cats.setdefault(cat, len(cats)),
             stations.setdefault(station, len(stations)),
             bands.setdefault(band, len(bands)),
@@ -2956,6 +2957,52 @@ def _has_contact_details(name) -> bool:
     text = str(name)
     return bool(_CONTACT_EMAIL.search(text)
                 or _CONTACT_PHONE.search(_CONTACT_EMAIL.sub("", text)))
+
+
+# A NAME THAT CANNOT BE SHOWN AS PUBLISHED shows the pin's classification
+# instead, as a withheld name shows its permit type (owner, 2026-10-07: no
+# glitched data live). Three kinds, measured across every built city on
+# 2026-10-07 (review lane 1, F5): a blank name (497 rows in 72 cities, Mexico
+# City's DENUE 118 and Kyoto's lists 63 the most); a spreadsheet error
+# exported as text ("#NAME?" on 6 Japanese rows); and a letter lost in the
+# publisher's own bytes, a "?" inside a word ("P?tisserie", "Caf? ..." in the
+# western-Tokyo lists; checked in Tachikawa's Shift-JIS file, not a decoding
+# fault here). A "?" that ends a word stays ("Why Not?"), except "Caf?".
+# TWO LOSSES ARE CERTAIN AND ARE RESTORED FIRST (sampled 2026-10-07): a lost
+# possessive apostrophe, a "?" between a letter and a closing "s" ("Patel?s",
+# "FINCA?S", "YOUNG?S" in the London, Miami, Los Angeles and Sacramento
+# lists), and "Caf?", which can only be "Café". Every other lost letter would
+# be a guess ("CR?PERIE", Seoul's lost separators "더?헤어", Osaka's lost
+# kanji "立?み"), so the name shows the classification instead.
+_SHEET_ERROR = re.compile(r"^#(NAME\?|VALUE!|REF!|N/A|DIV/0!|NULL!|NUM!)$")
+_LETTER = "A-Za-zÀ-ɏ぀-ヿ一-鿿가-힯"
+_LOST_LETTER = re.compile(f"[{_LETTER}]\\?[{_LETTER}]|\\bCaf\\?")
+_LOST_APOSTROPHE = re.compile(r"(?<=[A-Za-z])\?(?=[sS]\b)")
+_LOST_CAFE = re.compile(r"\b(Caf|CAF)\?")
+
+
+def repaired_name(name):
+    """A published name with its two certain losses restored (see above)."""
+    if not isinstance(name, str):
+        return name
+    name = _LOST_APOSTROPHE.sub("'", name)
+    return _LOST_CAFE.sub(lambda m: "Café" if m.group(1) == "Caf" else "CAFÉ", name)
+
+
+def glitched_name(name):
+    """True when a business name cannot be shown as published (see above)."""
+    if name is None or (isinstance(name, float) and math.isnan(name)):
+        return True
+    text = str(name).strip()
+    return not text or text.lower() == "nan" or bool(_SHEET_ERROR.match(text)) \
+        or bool(_LOST_LETTER.search(text))
+
+
+def shown_name(name, classification):
+    """The name a pin shows: the published name with its certain losses
+    restored, or its classification when the name is still glitched."""
+    name = repaired_name(name)
+    return classification if glitched_name(name) else name
 
 
 def drop_contact_details(businesses):
