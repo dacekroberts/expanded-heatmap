@@ -22,7 +22,7 @@ research for a region when its table runs out, or after a large landing.
 - **Lightly searched:** Edinburgh, Strasbourg's north tram, and the Brno,
   Plzeň and Liberec extensions. Some Europe B rows rest on news reports, and
   say so.
-- **Tbilisi** (built 2026-10-02, West Asia) is in no regional share. Its
+- **Tbilisi** (built 2026-10-02, Europe East) is in no regional share. Its
   Geostat register is updated continuously; no dated event is known.
 
 ## Action list: the next 120 days, and anything already due

@@ -1991,9 +1991,14 @@ TAP_SELECT_SCRIPT = (
     .replace("@@LIGHT_BORDER@@", LIGHT["border"])
 )
 assert "@@" not in TAP_SELECT_SCRIPT, "unresolved placeholder in TAP_SELECT_SCRIPT"
+# The dot never shrinks: a label that wraps on a phone took width from it and
+# drew an oval (olive's 43-character label, the owner's iPhone, 2026-10-08).
+# 10 px, border included (the page's box-sizing), down from 11 at the owner's
+# request; the no-data ring below went from 9 to 8 with it. Measured 10 x 10
+# on Kyoto's three rows at 375 px, the olive one wrapping.
 LEGEND_ROW = """
   <div style="display:flex; align-items:center; margin:3px 0;">
-    <span style="display:inline-block; width:11px; height:11px;
+    <span style="display:inline-block; flex-shrink:0; width:10px; height:10px;
       border-radius:50%; background:{color}; margin-right:7px;
       border:1px solid rgba(0,0,0,0.3);"></span>{label}
   </div>
@@ -2016,7 +2021,7 @@ LEGEND_LINE_ROW = """
 LEGEND_NO_DATA_ROWS = """
   <div style="font-weight: bold; margin: 10px 0 6px;">Stations</div>
   <div style="display:flex; align-items:center; margin:3px 0;">
-    <span style="display:inline-block; width:9px; height:9px;
+    <span style="display:inline-block; flex-shrink:0; width:8px; height:8px;
       border-radius:50%; background:transparent; margin-right:7px;
       border:2px solid {color};"></span>No business data (ward publishes no usable food-permit list)
   </div>
