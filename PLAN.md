@@ -36,6 +36,11 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     from every pin" from before olive and violet; East-1's drafts "ten"
     blank names to correct at the fold; caterers that also name a counter
     form (Fukushima's 161), the shared FORM_RULES question.
+  - Owner's iPhone check (2026-10-08): a legend dot turns oval when its
+    label wraps (`LEGEND_ROW` and the Stations row in `map_common` lack
+    `flex-shrink:0`); seen on olive's 43-character label (61 maps), also
+    the six long Retail labels. Every map's markup changes, so it rides
+    with a full re-render.
   - From Analytics (2026-10-08, measured at 5507a4cb): `map_common._LETTER`
     has no full-width Latin, so a "?" between full-width letters still
     renders (Higashiyamato 6, Tachikawa 4, Ichinomiya 3; one Tachikawa Food
