@@ -4,6 +4,13 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-07 - Place search: the short OSM credit in the search box; moving it to the map's corner credit put to the owner (owner, branch)
+
+- **"yes use short credit everywhere if permissable, we should save space in that search box as much as we can. we could even consider moving it out of the map if allowed"** (owner):
+  - **The short credit, adopted:** "Search data © OpenStreetMap contributors (ODbL) · Download this index", the three links kept (the copyright page, the licence, the file). Permissible on the licence read: the Attribution Guideline accepts "© OpenStreetMap contributors" as a form, ODbL is named and linked (4.3), and the download link is the 4.6 offer. It replaces 4.3(a)'s longer example wording; `docs/data_sources.md` updated.
+  - **Moving it, put to the owner (not built):** off the map onto the page is not recommended (the Geocoding Guideline asks the search itself to credit OSM, a credit in another frame is the weak reading the licence read flagged, and a map opened alone would lose it). Into the map's corner credit is allowed (the Attribution Guideline's "location where customarily attribution would be expected"): on maps with search, "· Search: ODbL · Download index" after "© OpenStreetMap contributors", and no credit in the box. Recommended for review time beside the Cities menu move, since the corner is under the never-remove rule and `check_map_attribution.js`, and may wrap on a phone.
+- **Checks:** `check_all.py` 52 of 52.
+
 ### 2026-10-07 - Place search: the headings and labels approved, the kind on hover only; on phones the two groups fold (owner, branch)
 
 - **"approve all, keep kind on hover only"** (owner, after examples from Kyoto): the headings "On this map" and "Places", the labels "Line", "Station" and "Station not on this map", and the no-index note "Streets and places are searchable on the site's own map pages" are approved; a pill's kind ("Line", "Station · 烏丸") stays in its hover title and its screen-reader label, not on its face.

@@ -2301,12 +2301,15 @@ _PLACE_SEARCH_TEMPLATE = r"""
         function credit() {
             var c = document.createElement("div");
             c.className = "hm-search-credit";
-            // ODbL 4.3(a)'s own wording; the download link is the 4.6 offer
-            // (licence read 2026-10-07; wording approved by the owner the same day).
-            c.innerHTML = 'Contains information from <a href="https://www.openstreetmap.org/copyright" ' +
-                'target="_blank" rel="noopener noreferrer">OpenStreetMap</a>, which is made available here ' +
-                'under the <a href="https://opendatacommons.org/licenses/odbl/1-0/" target="_blank" ' +
-                'rel="noopener noreferrer">Open Database License (ODbL)</a>. ' +
+            // The short credit (owner, 2026-10-07, to save space in the box):
+            // the OSM Attribution Guideline's "© OpenStreetMap contributors"
+            // form, linked to the copyright page, the licence named and linked
+            // (ODbL 4.3), and the download link as the 4.6 offer (licence read
+            // 2026-10-07). It replaced 4.3(a)'s longer example wording.
+            c.innerHTML = 'Search data &copy; <a href="https://www.openstreetmap.org/copyright" ' +
+                'target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a> ' +
+                '(<a href="https://opendatacommons.org/licenses/odbl/1-0/" target="_blank" ' +
+                'rel="noopener noreferrer">ODbL</a>) · ' +
                 '<a href="' + URL + '" target="_blank" rel="noopener" download>Download this index</a>';
             list.appendChild(c);
         }

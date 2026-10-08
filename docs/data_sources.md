@@ -300,9 +300,12 @@ approves it at review time.<!-- /internal -->
   (https://opendatacommons.org/licenses/odbl/1-0/) and under no other license.
 - **Notices:** each file carries "© OpenStreetMap contributors", a link to
   https://www.openstreetmap.org/copyright and the ODbL link (§4.2), in its
-  `license` object. The search box shows "Contains information from
-  OpenStreetMap, which is made available here under the Open Database License
-  (ODbL)." with both links (§4.3), whenever it is open.
+  `license` object. The search box shows, whenever it is open, "Search data
+  © OpenStreetMap contributors (ODbL) · Download this index", "OpenStreetMap
+  contributors" linked to the copyright page, "ODbL" to the licence (§4.3) and
+  "Download this index" to the file (§4.6). This is the OSM Attribution
+  Guideline's "© OpenStreetMap contributors" form, chosen over §4.3(a)'s
+  longer example wording to save space (owner, 2026-10-07).
 - **Access (§4.6):** the file is the complete database and is downloadable
   free of charge from the site (the search box links it); the method that
   builds it is in the public repository. No technical restriction on the file
