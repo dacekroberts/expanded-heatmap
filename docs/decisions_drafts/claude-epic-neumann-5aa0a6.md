@@ -77,8 +77,32 @@ or published; every proposal waits for the owner.
   and sprite licence files. **Decided (owner): white line casings and
   white station dots with a dark ring are built into the full version,
   designed for light and dark mode alike** (they stay a trial on the site).
-  Proposed, owner to confirm: the world map as the next step after the
-  city page; delivery as a folder plus the small range server.
+  **Decided (owner): the city page first, the world map after it;
+  delivery as a folder plus the small range server** (offline downloads
+  will need their own host anyway for the app stores).
+- **Icons and fonts (recommendation, owner to confirm, 2026-10-08).** The
+  Travel style uses three sprite icons only: the one-way arrow
+  (`roads_oneway`) and the town dot and capital star of `places_locality`
+  below z8. Dropping both leaves no sprite to ship, so no icon licence
+  (Protomaps' sprites are MIT) and one file less. Fonts cannot be dropped:
+  MapLibre GL draws Latin labels from glyph files, never device fonts
+  (CJK can use device fonts, measured 2026-10-07), and every usable font
+  is licensed; the OFL asks only that its text travel with the glyph
+  files. Recommended: keep an OFL file, and move from Noto to a font with
+  no Google tie such as Inter (item 17), after a licence read and the
+  owner's download.
+- **Hosting costs, explained to the owner (2026-10-08; R2 prices as read
+  2026-10-07, to re-check before signing up).** No server to run: the
+  app reads its packs from storage, the full-version folder uses a local
+  script, and the download host is R2 object storage. All 170 packs at
+  z14, trimmed: about 2 GB (scaled from the three pilot cities against
+  the 5.94 GB measured for stock z15 with 10 km), inside the 10 GB free
+  storage; 10 million free reads a month (a download is 1 read, a site
+  Travel view about 5); no egress charge. A domain, about $10 a year, is
+  needed anyway (a TWA proves ownership through
+  `/.well-known/assetlinks.json`; `r2.dev` is development only). A Worker
+  only for Z/X/Y tiles (100,000 requests a day free, then $5 a month).
+  Expected total: the domain alone until traffic is very large.
 - **Open items, in order:** the full version as a renderer option (no business
   data, the hard line enforced by a check); white line casings and white
   station dots in Travel for the owner's screenshots; Protomaps' dark
