@@ -104,6 +104,16 @@ CITIES = {
     # Band B 2026-09-29 (owner): food only, the 8 wards
     "hiroshima": {"name": "広島市", "pref": "34", "epsg": 32653, "n02": "25", "rules": WAVE2_RULES,
                   "wards": [f"341{n:02d}" for n in range(1, 9)]},
+    # Kansai-1 (the A/B build plan, 2026-10-07), each on N02-25 as its brief
+    # measured, one municipality each ("wardless"), and the foundation's
+    # ALL_RULES (no "rules" key).
+    "toyonaka": {"name": "豊中市", "pref": "27", "epsg": 32653, "n02": "25", "wardless": True, "wards": ["27203"]},
+    "hirakata": {"name": "枚方市", "pref": "27", "epsg": 32653, "n02": "25", "wardless": True, "wards": ["27210"]},
+    "suita": {"name": "吹田市", "pref": "27", "epsg": 32653, "n02": "25", "wardless": True, "wards": ["27205"]},
+    "itami": {"name": "伊丹市", "pref": "28", "epsg": 32653, "n02": "25", "wardless": True, "wards": ["28207"]},
+    "kakogawa": {"name": "加古川市", "pref": "28", "epsg": 32653, "n02": "25", "wardless": True, "wards": ["28210"]},
+    "amagasaki": {"name": "尼崎市", "pref": "28", "epsg": 32653, "n02": "25", "wardless": True, "wards": ["28202"]},
+    "uji": {"name": "宇治市", "pref": "26", "epsg": 32653, "n02": "25", "wardless": True, "wards": ["26204"]},
     # The 2026-10-01 batch (owner released 2026-10-02), each on N02-25 as its
     # brief measured (Kagoshima's 仙巌園 and Fukui's Hapi-line are not in
     # N02-24; Sakai's Semboku line is under Nankai only in N02-25). "wardless":

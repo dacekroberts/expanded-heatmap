@@ -517,6 +517,13 @@ REGISTRIES = {
     "matsuyama": dict(raw=None, trade=None, owner=None,
                       processed="businesses_clean.csv",
                       address=("address",), japan=True),
+    # Kansai-1 (2026-10-07), on the shared steps and the foundation's rules:
+    # every list's operator column (法人名, 申請者氏名, 営業者氏名, 開設者(申請者),
+    # 法人代表者氏名, 代表者氏名) is read only by the name rule, in memory. The
+    # Japan pass tests what reached the map.
+    **{slug: dict(raw=None, trade=None, owner=None, processed="businesses_clean.csv",
+                  address=("address",), japan=True)
+       for slug in ("toyonaka", "hirakata", "suita", "itami", "kakogawa", "amagasaki", "uji")},
     # The rest of the 2026-10-01 Japanese batch (2026-10-02), each on the shared
     # steps: every list's operator column is read only by the name rule, in
     # memory (japan_register.OPERATOR_COLS); MHLW's rows and BODIK's

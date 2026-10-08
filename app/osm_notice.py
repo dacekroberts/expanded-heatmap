@@ -179,7 +179,8 @@ OSM_RAIL_BY_CITY = {
         "Matsuyama", "Toyama", "Kumamoto", "Fukui", "Nagasaki", "Utsunomiya", "Kitakyushu",
         "Sakai", "Hakodate", "Kagoshima", "Okayama", "Kōchi", "Kawasaki", "Yokosuka",
         "Himeji", "Nishinomiya", "Takamatsu", "Toyota", "Yokkaichi", "Ōtsu", "Nara",
-        "Hamamatsu", "Higashiōsaka", "Kurume", "Sasebo", "Shimonoseki")},
+        "Hamamatsu", "Higashiōsaka", "Kurume", "Sasebo", "Shimonoseki",
+        "Toyonaka", "Hirakata", "Suita", "Itami", "Kakogawa", "Amagasaki", "Uji")},
     # East-1 (2026-10-07)
     **{c: _japan(c) for c in ("Higashiyamato", "Nishitōkyō", "Tama", "Higashimurayama", "Chōfu", "Ageo (Regional)", "Sōka", "Tokorozawa", "Fuchū (Tokyo)", "Kasukabe", "Tachikawa", "Hino")},
 }
