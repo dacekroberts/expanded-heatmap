@@ -28,11 +28,9 @@ or published; every proposal waits for the owner.
   neutral); legend lines plus named route rows only. Map content only:
   no coverage notes or generic explanations (owner's template rule).
   Delivery: a folder plus `range_server.py`.
-- **Waiting on two background agents** (launched 2026-10-08): the
-  licence read of Inter, and a search for licence-free (public domain or
-  CC0) map-quality fonts. The owner likes Noto (in use now) and wants as
-  few attributions as realistically possible; OFL adds no on-screen
-  credit, only a licence file. Report both results to the owner.
+- **Fonts settled (owner):** Noto, with `OFL.txt` and the line "Noto is a
+  trademark of Google LLC" beside every copy of the glyphs; the full
+  page's offline folder ships them.
 - **Later, in order:** the world map (label-free, world pack, dots by
   transit type, the shared tooltips); the multi-route ferry palette with
   the first multi-ferry city (Hong Kong example); Protomaps' dark flavor
@@ -73,6 +71,31 @@ or published; every proposal waits for the owner.
   pack readers `pack_compare.py`, `pack_kinds.py`, `ferry_names.py`,
   `pack_trim_estimate.py`. The in-app browser pane does not draw while
   hidden; use the headless harnesses for screenshots.
+
+### 2026-10-08 - Fonts settled: Noto, with its licence file and the trademark line beside the glyphs (owner)
+
+- **Decision (owner, 2026-10-08): "yes close font question, noto sounds
+  good".** This answers item 17 of "Decisions for going public" ("yes,
+  unless a non-Google font avoids it"): none does. Glyphs stay Noto. Every
+  copy of the glyph files (each offline folder, the hosted glyph folder,
+  the app) ships Noto's `OFL.txt` with its copyright line ("Copyright 2022
+  The Noto Project Authors"), plus the line "Noto is a trademark of Google
+  LLC", which the glyph conversion drops from the font files' name table.
+  In the app, the same text sits on a licences screen. Nothing on the map.
+- **Inter (licence read, 2026-10-08).** SIL OFL 1.1, no on-screen credit,
+  the PBF conversion a Modified Version, no glyph pack sold on its own. Its
+  LICENSE.txt declares no Reserved Font Name, but its README says "Inter"
+  is one, and "Inter is a trademark of Rasmus Andersson (RSMS)" appears in
+  the README, the font metadata and rsms.me. Switching would trade
+  Google's trademark line for another and add a fontstack naming question
+  (rename, accept the risk, or ask the author), so it gains nothing.
+- **Licence-free fonts (search, 2026-10-08).** None clears the bar. Tuffy
+  (public domain, Latin, Greek, Cyrillic) is an unhinted, self-described
+  "a little bit too casual" design; Aileron (CC0, the best drawn) is Latin
+  only, so Greek and Cyrillic cities would need an OFL fallback anyway;
+  Jupiteroid (CC0) has no Greek and unproven text quality; the pre-OFL M+
+  release's licence page is gone. Its successors (Nacelle, current M+) are
+  OFL. CJK labels keep coming from the device's own fonts.
 
 ### 2026-10-08 - No sprite icons in the Travel style; fonts stay Noto for now (owner)
 
