@@ -106,7 +106,7 @@ st.markdown(
 """
 )
 
-render_map_help('three business categories (Food service, Food shops and Bathhouses)')
+render_map_help('three business categories (Food service, Food shops and Bathhouses)', search='hong_kong')
 render_excluded_stations("Hong Kong")
 render_country_links('Hong Kong')
 

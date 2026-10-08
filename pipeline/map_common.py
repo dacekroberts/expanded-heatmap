@@ -2056,6 +2056,10 @@ _PLACE_SEARCH_TEMPLATE = r"""
                      street: 4, crossing: 5};
     var STOP = {"and": 1, "at": 1, "of": 1, "the": 1, "x": 1, "corner": 1, "&": 1, "y": 1};
     var STATION_WORDS = {"station": 1, "sta": 1, "stn": 1, "eki": 1, "駅": 1};
+    // A station word written onto the name with no space (四条駅, 金鐘站,
+    // 강남역): the query less its last character still finds the station
+    // (batch 2b, 2026-10-08, for Chinese and Korean).
+    var STATION_SUFFIX = {"駅": 1, "站": 1, "역": 1};
     var JUNK_Q = /#(n[/]?a|ref|value|div|name|num|null)|!error/i;
     var STREET_WORDS = {"street": 1, "st": 1, "avenue": 1, "ave": 1, "road": 1, "rd": 1,
                         "boulevard": 1, "blvd": 1, "drive": 1, "dr": 1, "way": 1,
@@ -2106,7 +2110,19 @@ _PLACE_SEARCH_TEMPLATE = r"""
              lead: [], station: ["stanice", "nadrazi"], abbr: {}},
         nl: {join: ["en"], stop: ["de", "het"],
              street: ["straat", "laan", "steenweg", "plein", "kaai", "dreef"],
-             lead: [], station: [], abbr: {}}
+             lead: [], station: [], abbr: {}},
+        // Batch 2b (2026-10-08). Chinese and Korean names are one word each
+        // to words(), so no street word is set aside and no connector is
+        // split (和 and 과 sit inside names: 太和街); two streets are typed
+        // with "/" or "&" between them. 站 and 역 are station words through
+        // STATION_SUFFIX above.
+        zh: {join: [], stop: [], street: [], lead: [], station: ["站"], abbr: {}},
+        ko: {join: [], stop: [], street: [], lead: [], station: ["역"], abbr: {}},
+        // Georgian: "და" (and) between two streets; the street word follows
+        // the name ("რუსთაველის გამზირი"); "მეტრო" names a metro station.
+        ka: {join: ["და"], stop: [],
+             street: ["ქუჩა", "გამზირი", "ქ", "გამზ", "მოედანი", "ჩიხი", "შესახვევი"],
+             lead: [], station: ["მეტრო", "სადგური"], abbr: {"ქ": "ქუჩა", "გამზ": "გამზირი"}}
     };
     var PAIR_SPLIT = /\s+(?:and|at|x|y)\s+|\s*[&\/@]\s*/;
     // A language whose city is also searched in another: Barcelona's names are
@@ -2357,7 +2373,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
             if (h) continue;
             if (STATION_WORDS[w] && isStation(d)) continue;
             if (STREET_WORDS[w] && (d.kind === "street" || d.kind === "crossing" || d.kind === "junction")) continue;
-            if (CJK.test(w) && w.length > 1 && w.charAt(w.length - 1) === "駅" && isStation(d)
+            if (CJK.test(w) && w.length > 1 && STATION_SUFFIX[w.charAt(w.length - 1)] && isStation(d)
                 && d.flat.indexOf(w.slice(0, -1)) >= 0) continue;
             return false;
         }

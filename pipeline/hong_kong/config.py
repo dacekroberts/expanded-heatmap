@@ -150,3 +150,58 @@ HONG_KONG_BBOX = {
     "lon_min": OSM_BBOX[1],
     "lon_max": OSM_BBOX[3],
 }
+
+# ---------------------------------------------------------------------------
+# Place search (sample batch 2b, 2026-10-08): pipeline/place_index.py builds
+# app/static/places/hong_kong.json from the caches place_index_fetch.py writes.
+# The search area is the map's: the SAR's own relation 913110 (admin_level 3, ISO3166-1 HK), the
+# map's whole scope, confirmed by id 2026-10-08.
+# Overpass area id = 3600000000 + relation id.
+PLACE_AREA = "(id:3600913110)"
+# NEW file names: data/ is shared by every worktree.
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-08.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-08.json"
+# The local language of OSM's names here: Chinese; OSM's `name` here is usually
+# bilingual ("彌敦道 Nathan Road"), with name:zh and name:en beside it.
+PLACE_LANGUAGES = ("zh",)
+PLACE_FOLD = None
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+PLACE_REVIEWED = {}
+# OSM objects a reading by eye found to be a business or a home that no rule
+# in place_index.py catches, each with why (place_index.build, `dropped`).
+# The read (2026-10-08) covered every landmark and place name without a place
+# word; the precedents are the Panama Hotel (a notable building kept) and
+# Sydney's Meriton park (a business by name, dropped).
+PLACE_DROPPED = {
+    # Businesses tagged as places.
+    "node/13178154315": "TakeOut Comedy Club: a comedy venue in a basement, tagged a theatre",
+    "way/756672170": "大棠有機生態園 Tai Tong Organic EcoPark: a ticketed leisure farm, tagged a park",
+    "way/1490236780": "水邊圍邨羅馬商業平台: a housing estate's shopping podium, tagged a park",
+    # Homes and residents-only facilities.
+    "way/1498122620": "Nan Fung Sun Chuen Ball Court: a private estate's own court",
+    "way/1205369164": "Clubhouse: a private club's clubhouse, named only as one",
+    "way/696405913": "公眾休憩用地A Public Recreational Area A: a lettered open space for a development's residents (park:for=resident)",
+    "way/776910736": "公眾休憩用地B Public Recreational Area B: as A",
+    "way/776910737": "公眾休憩用地C Public Recreational Area C: as A",
+    # Descriptions, not names (the junk rule covers placeholders, not these).
+    "way/1556817980": "open area with bench: a description",
+    "node/11400928912": "Trash station: a description",
+    "way/605637291": "trolley: a railway car, described not named",
+    "node/2454203785": "WWII: an era, not a name",
+    "node/4373121291": "Old graves: a description",
+    "way/693845868": "Barbecue Site: a description",
+    "way/97700147": "燒烤區 Barbeque area: a description",
+    "way/1246597466": "太極區 Tai Chi Area: a description",
+    "way/1193118055": "Pump Track: a type, not a name",
+    "way/1068486732": "Cycle Track-Sam Mun Tsai Extension: infrastructure, described",
+    "way/856787535": "遙控模型車場: a type (a model-car ground), not a name",
+    "node/13187443401": "Inverted Siphon 2: a numbered waterworks ruin",
+    "node/10277275730": "第10區 Area 10: a planning-area number (Hung Shui Kiu), not a name",
+    "node/10277275729": "第8區 Area 8: as above",
+    "node/10277275728": "第24A區 Area 24A: as above",
+    "node/10794673072": "陰影 (shadow): a locality with no other tag, a description",
+    "node/11740216795": "對面 (opposite): as above",
+    "node/10713298995": "阿斯兰聖壇 Aslan's Table: a fictional place of worship (a Narnia reference)",
+    "way/219065033": "北翼 North Wing: a rehabilitation centre's wing, historic=no, named only as a wing",
+}

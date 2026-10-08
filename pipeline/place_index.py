@@ -263,14 +263,19 @@ LEAK_WORDS = {
            "社宅", "駐車場", "駐輪場", "不動産", "クリニック", "医院", "歯科", "薬局", "私有地"),
     "en": ("inc", "llc", "ltd", "corp", "company", "store", "shop", "restaurant", "cafe", "hotel",
            "hostel", "motel", "salon", "clinic", "pharmacy", "apartment", "apartments", "apts",
-           "condominium", "condo", "condos", "parking", "private"),
+           "condominium", "condo", "condos", "parking", "private",
+           # Chicago's "Access food court", a service way (batch 2b, 2026-10-08).
+           "food court"),
     # Batch 2a (2026-10-08): the handoff's proposals, each language checked
     # against its city's own hits (docs/decisions_drafts/place-search.md).
     "fr": ("sarl", "sas", "eurl", "hôtel", "auberge", "résidence", "appartements", "parking",
            "privé", "privée", "magasin", "boutique", "restaurant", "brasserie", "pharmacie",
            "clinique", "agence",
            # Housing estates: a subdivision, a social-housing group (Marseille).
-           "lotissement", "morcellement", "hlm", "h.l.m."),
+           "lotissement", "morcellement", "hlm", "h.l.m.",
+           # A drive-through, in French usage (Marseille's "Mc Drive", a
+           # service way; batch 2b, 2026-10-08).
+           "mc drive", "mcdrive"),
     "ca": ("hotel", "hostal", "aparcament", "pàrquing", "privat", "privada", "botiga", "restaurant",
            "pisos", "farmàcia", "s.l.", "s.a."),
     "es": ("hotel", "hostal", "aparcamiento", "parking", "privado", "privada", "tienda", "restaurante",
@@ -279,10 +284,22 @@ LEAK_WORDS = {
            "bytový dům", "bytové domy", "lékárna", "s.r.o.", "a.s.", "rezidence"),
     "nl": ("hotel", "parking", "privé", "winkel", "restaurant", "appartementen", "residentie",
            "apotheek", "bvba", "nv"),
+    # Batch 2b (2026-10-08): Chinese (Hong Kong), Korean (Seoul, Busan) and
+    # Georgian (Tbilisi), each checked against its city's own hits. A CJK or
+    # Hangul word matches anywhere; a Georgian one as a whole word.
+    "zh": ("有限公司", "公司", "集團", "酒店", "賓館", "旅館", "餐廳", "酒樓", "商場", "商店",
+           "超級市場", "停車場", "診所", "醫務所", "藥房", "寫字樓", "私人", "私家", "屋苑", "住宅"),
+    "ko": ("주식회사", "(주)", "㈜", "호텔", "모텔", "주차장", "마트", "상가", "아파트", "빌라", "맨션",
+           "연립", "주택", "오피스텔", "사유지"),
+    "ka": ("შპს", "სს", "სასტუმრო", "მაღაზია", "ავტოსადგომი", "რესტორანი", "აფთიაქი", "კლინიკა",
+           "კერძო", "ბინა", "საცხოვრებელი"),
 }
 LEAK_ALLOW = {"ja": ("商店街", "名店街"), "en": ("shopping street",),
               # A town hall and a hospital (Paris's Hôtel-Dieu, Marseille's).
-              "fr": ("hôtel de ville", "hôtel-de-ville", "hôtel-dieu", "hôtel des invalides")}
+              "fr": ("hôtel de ville", "hôtel-de-ville", "hôtel-dieu", "hôtel des invalides"),
+              # "스마트" (smart) holds 마트 (mart); 주택가 is a residential
+              # street, a place word (batch 2b, 2026-10-08).
+              "ko": ("스마트",)}
 # The LEAK_WORDS that mark a home (or private land): a landmark carrying one
 # is held to _public_home, where a Wikipedia article is no exemption.
 HOME_WORDS = {
@@ -294,6 +311,9 @@ HOME_WORDS = {
     "es": ("pisos", "privado", "privada"),
     "cs": ("bytový dům", "bytové domy", "soukromé", "soukromá", "rezidence"),
     "nl": ("appartementen", "residentie", "privé"),
+    "zh": ("私人", "私家", "屋苑", "住宅"),
+    "ko": ("아파트", "빌라", "맨션", "연립", "주택", "오피스텔", "사유지"),
+    "ka": ("კერძო", "ბინა", "საცხოვრებელი"),
 }
 
 
@@ -322,11 +342,22 @@ def leak_word(names, local):
 
 
 def leak_hits(index, local):
-    """[(row name, word)] for every index row whose names carry a LEAK_WORD."""
+    """[(row name, word)] for every index row whose names carry a LEAK_WORD,
+    except a street whose names all read as a street (_named_street: Hong
+    Kong's Clinic Road, Marseille's Rue de la Clinique; batch 2b, 2026-10-08)
+    and a signed junction, which is named for what stands at it: Seoul's
+    traffic signals read "X아파트앞사거리" (the crossroads in front of X
+    Apartments) and "르네상스호텔사거리" (40 of them, 2026-10-08), as
+    Prague's tram stop "Hotel Golf" was reviewed by name. The junction is a
+    public road feature wherever its name came from."""
     out = []
+    street, junction = KINDS.index("street"), KINDS.index("junction")
     for r in index["rows"]:
-        word = leak_word([r[3]] + (r[4].split("|") if r[4] else []), local)
-        if word:
+        if r[0] == junction:
+            continue
+        names = [r[3]] + (r[4].split("|") if r[4] else [])
+        word = leak_word(names, local)
+        if word and not (r[0] == street and all(_named_street(n, local) for n in names)):
             out.append((r[3], word))
     return sorted(set(out))
 
@@ -412,7 +443,13 @@ WAY_WORDS = {
            "ロード", "ストリート", "トンネル", "はし", "ばし", "みち", "さか", "ざか", "径"),
     "en": ("street", "road", "avenue", "lane", "way", "walk", "path", "trail", "alley", "bridge",
            "steps", "stairs", "boulevard", "promenade", "passage", "plaza", "row", "greenway",
-           "tunnel", "footpath", "towpath"),
+           "tunnel", "footpath", "towpath",
+           # Hong Kong's terraces and closes showed these missing (batch 2b,
+           # 2026-10-08); measured on every built index first: Seattle gained
+           # 78 named minor ways (courts, drives), Chicago 84, Vancouver 85,
+           # Sydney 23, Montréal 4, Hong Kong 33, each read as a street.
+           "drive", "close", "court", "crescent", "terrace", "parade", "esplanade", "quay",
+           "circuit", "mews", "arcade", "grove"),
     # Batch 2a (2026-10-08), checked against each city's named minor ways.
     "fr": ("rue", "avenue", "boulevard", "place", "quai", "allée", "chemin", "impasse", "passage",
            "pont", "passerelle", "cours", "montée", "escalier", "escaliers", "promenade", "square",
@@ -436,10 +473,31 @@ WAY_WORDS = {
            "náplavka"),
     "nl": ("straat", "laan", "weg", "plein", "steenweg", "kaai", "lei", "dreef", "brug", "pad",
            "gang", "steeg", "dijk", "doorgang", "trap", "wandeling", "promenade", "galerij"),
+    # Batch 2b (2026-10-08), checked against each city's named minor ways.
+    # Hong Kong writes a street's type last, in one word (彌敦道, 西洋菜南街,
+    # 摩羅上街), and a lane, court or terrace as 巷, 里, 坊, 台 or 圍.
+    "zh": ("街", "道", "路", "巷", "里", "徑", "橋", "隧道", "坊", "圍", "台", "臺", "天橋", "梯", "階",
+           "步道", "行人路", "通道", "斜路", "大道", "公路", "繞道", "小路", "古道", "棧道",
+           # Hong Kong's pedestrian squares, roundabouts, interchanges and
+           # prayas, drawn as footways (2026-10-08).
+           "廣場", "迴旋處", "交匯處", "海旁"),
+    # Korean street names end in 로 (a road), 길 (a street), 대로 (a
+    # boulevard) or 교 / 대교 (a bridge), with no space: matched as a word's
+    # ending (SUFFIX_WAY_LANGUAGES). 산책로 and 둘레길 are walking trails.
+    "ko": ("로", "길", "대로", "대교", "교", "다리", "거리", "터널", "고가", "지하도", "육교", "굴다리",
+           "산책로", "둘레길", "보도", "고개",
+           # Seoul's and Busan's named steps (88계단), underpasses and
+           # flyovers, and a transliterated "road" (문텐로드), 2026-10-08.
+           "계단", "지하차도", "고가차도", "로드"),
+    # Georgian: street, avenue, square, lane, alley, bridge, highway, ascent,
+    # descent, road, path, embankment; the word stands alone, after the name
+    # in the genitive (რუსთაველის გამზირი).
+    "ka": ("ქუჩა", "გამზირი", "მოედანი", "ჩიხი", "შესახვევი", "ხიდი", "გზატკეცილი", "აღმართი",
+           "დაღმართი", "გზა", "ბილიკი", "სანაპირო", "გასასვლელი", "ქ."),
 }
 # Languages that write a way word inside a compound ("Nieuwstraat",
-# "Kerkpad"): _reads_as_way matches it as a word's ending there.
-SUFFIX_WAY_LANGUAGES = {"nl"}
+# "Kerkpad"; Korean 세종대로): _reads_as_way matches it as a word's ending there.
+SUFFIX_WAY_LANGUAGES = {"nl", "ko"}
 # Street names that carry no street word at all. Czech names a street with a
 # preposition ("Na Viničce", "U Vizerky", "Pod Havránkou") or an adjective
 # agreeing with the unwritten "ulice" ("Bělohorská", "Goyova"): Prague's
@@ -468,8 +526,14 @@ COMMERCIAL_VALUES = {
 # A public_transport=station tagged with one of OTHER_MODES and neither a
 # railway tag nor one of RAIL_MODES is a bus or ferry terminal. One with no
 # mode at all stays: Kyoto's 鞍馬駅 and Seattle's South Bellevue carry none.
+# Any value but "no" marks the mode: Hong Kong's termini carry bus=private
+# and bus=minibus (batch 2b, 2026-10-08).
 RAIL_MODES = ("train", "subway", "light_rail", "tram", "monorail", "funicular")
-OTHER_MODES = ("bus", "ferry", "trolleybus", "coach")
+OTHER_MODES = ("bus", "ferry", "trolleybus", "coach", "minibus")
+# And by the facility's own tag, where no mode is written: Hong Kong's public
+# transport interchanges (amenity=bus_station), ferry piers and the Ngong
+# Ping cable-car terminal (aerialway=station), 2026-10-08.
+NOT_RAIL = {"amenity": {"bus_station", "ferry_terminal"}, "aerialway": {"station"}}
 # A commercial building is a business unless notable: Sydney's numbered
 # "Bay 0" to "Bay 15", historic=building on building=commercial (2026-10-08).
 # A hotel building likewise (Barcelona's Casa Cambó, building=hotel, batch 2a).
@@ -500,6 +564,13 @@ HOME_NAME = re.compile(r"\b(house|residence|cottage|mansion|farmhouse|homestead)
 # is a civic building.
 HOME_NAME_LEAD = {"fr": ("maison", "manoir"), "ca": ("casa",), "es": ("casa",),
                   "cs": ("dům", "vila"), "nl": ("huis",)}
+# And where the house word CLOSES the name (batch 2b, 2026-10-08): Korean 가옥
+# and 고택 (a traditional house), 옛집 (an old house), 생가 (a birthplace),
+# 저택 and 주택; Chinese 故居 and 舊居 (a former residence), 大宅, 別墅 and
+# 宅; Georgian სახლი (a house), as the last word. A house-museum (tourism=
+# museum, სახლ-მუზეუმი) passes _public_home, as a museum in a 생가 does.
+HOME_NAME_END = {"ko": ("가옥", "고택", "옛집", "생가", "저택", "주택"),
+                 "zh": ("故居", "舊居", "大宅", "別墅", "宅"), "ka": ("სახლი",)}
 
 
 # historic=* values that are a house: a manor is OSM's manor house or country
@@ -514,8 +585,12 @@ CIVIC_AMENITIES = {"townhall", "arts_centre", "community_centre", "library", "th
 def _home_name(name, local):
     if HOME_NAME.search(name):
         return True
-    first = (re.findall(r"\w+", name.lower()) or [""])[0]
-    return any(first in HOME_NAME_LEAD.get(c, ()) for c in local)
+    low = name.lower().strip()
+    ws = re.findall(r"\w+", low) or [""]
+    if any(ws[0] in HOME_NAME_LEAD.get(c, ()) for c in local):
+        return True
+    return any(low.endswith(e) if _CJK_WORD.search(e) else ws[-1] == e
+               for c in local for e in HOME_NAME_END.get(c, ()))
 
 
 def _home(tags, names, local=()):
@@ -563,6 +638,7 @@ def _public_home(tags):
 # apartment building, 2026-10-07).
 PLACE_VALUES = {"city", "borough", "suburb", "quarter", "neighbourhood", "village",
                 "hamlet", "town", "locality"}
+SETTLEMENTS = {"city", "town", "village", "hamlet"}
 # A street-pair crossing seen at several nodes counts as one place unless its
 # nodes lie further apart than this (a long pair of streets crossing twice).
 CROSSING_MERGE_M = 250
@@ -625,6 +701,36 @@ def _names(tags, name_tags):
                 seen.add(v)
                 out.append(v)
     return out
+
+
+def _named_street(name, local):
+    """True for a street name to keep: no business or home word in it, or a
+    business word in a name that still reads as a street, a way word first or
+    last ("Clinic Road", "Car Park Road" and "Hostel Hill Path" in Hong Kong,
+    Brussels' Rue du Magasin and Rue de l'Hôtel des Monnaies, Barcelona's
+    Carrer de l'Hostal d'en Sol, Montréal's Avenue De l'Hotel-de-Ville; batch
+    2b, 2026-10-08, measured on every built index). A home or private word
+    never passes (Seattle's "Private Road"), nor a lowercase description
+    (Vancouver's "to parking garage below plaza")."""
+    word = leak_word([name], local)
+    if word is None:
+        return True
+    if word in {w for c in ("en", *local) for w in HOME_WORDS.get(c, ())} or name[:1].islower():
+        return False
+    # Less the business word itself, whose phrase may hold a way word (a
+    # food court, a McDrive).
+    low = unicodedata.normalize("NFKC", name).lower().strip().replace(word, " ")
+    ws = re.findall(r"\w+", low)
+    if not ws:
+        return False
+    for code in dict.fromkeys(["en", *local]):
+        for w in WAY_WORDS.get(code, ()):
+            if _CJK_WORD.search(w):
+                if low.endswith(w):
+                    return True
+            elif ws[0] == w or ws[-1] == w or (code in SUFFIX_WAY_LANGUAGES and ws[-1].endswith(w)):
+                return True
+    return False
 
 
 def _reads_as_way(names, local):
@@ -776,7 +882,8 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         # A road named for private or parking access, or a business, is no
         # street to search; a name of that kind beside a real one is dropped
         # alone (Vancouver's "26 Avenue", alt_name "Private Access", 2026-10-08).
-        kept = [n for n in names if not leak_word([n], local)]
+        # One that reads as a street keeps its name (_named_street).
+        kept = [n for n in names if _named_street(n, local)]
         if names and not kept:
             report["street_dropped_leak_word"] += 1
             continue
@@ -866,10 +973,21 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         langs = _langs(t, local)
         if (t.get("public_transport") == "station" and not t.get("railway")
                 and not any(t.get(k) == "yes" for k in RAIL_MODES)
-                and any(t.get(k) == "yes" for k in OTHER_MODES)):
+                and (any(t.get(k) not in (None, "no") for k in OTHER_MODES)
+                     or any(t.get(k) in v for k, v in NOT_RAIL.items()))):
             # A bus or ferry terminal, or a tour boat's dock ("Wendella
             # Tours - Michigan Avenue", Chicago, 2026-10-08): no station.
             report["station_skipped_not_rail"] += 1
+            continue
+        if t.get("railway") in ("construction", "proposed", "disused", "abandoned", "razed"):
+            # Busan's seven light-rail stations under construction carry
+            # public_transport=station already (2026-10-08): not yet a station.
+            report["station_skipped_not_open"] += 1
+            continue
+        if t.get("emergency") == "designated" and (t.get("railway") or t.get("public_transport")):
+            # A platform for emergency use only (Hong Kong's Light Rail
+            # "Hung Tin Road Emergency Platform", 2026-10-08): no station.
+            report["station_skipped_emergency"] += 1
             continue
         if t.get("railway") in ("station", "halt", "tram_stop") or t.get("public_transport") == "station":
             add("station", pt, names, langs)
@@ -877,8 +995,12 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             # A place drawn as an area on residential land is an estate, its
             # homes' own name ("Kentbrook Apartments", Seattle: 85 of the
             # place areas, 2026-10-08); a place named for a business or a
-            # home is one, as a landmark is.
-            if e["type"] != "node" and (t.get("landuse") == "residential" or t.get("residential")):
+            # home is one, as a landmark is. A hamlet or village is a
+            # settlement whatever its land use: Hong Kong's New Territories
+            # villages, 22 drawn on residential land (batch 2b, 2026-10-08);
+            # no other built city had one.
+            if (e["type"] != "node" and t.get("place") not in SETTLEMENTS
+                    and (t.get("landuse") == "residential" or t.get("residential"))):
                 report["place_dropped_estate"] += 1
                 continue
             if leak_word(names, local):

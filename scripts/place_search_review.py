@@ -58,6 +58,18 @@ PLACE_WORD = re.compile(
     r"kerk|kapel|kathedraal|basiliek|tuin|fontein|standbeeld|schouwburg|bibliotheek|begraafplaats|"
     r"abdij|wijk|plein)\b",
     re.I)
+# Place words in a script with no word boundary, matched anywhere in the name
+# (batch 2b, 2026-10-08): Chinese (Hong Kong), Korean and Georgian. Only
+# words of two characters or more, or a temple's: a single 山 or 성 sits
+# inside too many estate and district names to shorten the read safely.
+PLACE_WORD_ANY = re.compile(
+    "公園|遊樂場|花園|廟|寺|教堂|聖堂|博物館|廣場|街市|大學|學院|書院|碼頭|海灘|泳灘|墳場|紀念|"
+    "郊野|水塘|石澗|瀑布|海灣|沙灘|球場|運動場|圖書館|劇院|會堂|大會堂|古蹟|遺址|"
+    "공원|교회|성당|사찰|박물관|미술관|광장|시장|대학교|호수|저수지|기념|동상|도서관|극장|"
+    "경기장|운동장|해수욕장|포구|터널|고개|계곡|유적|서원|향교|궁|능|릉|"
+    "პარკი|ეკლესია|ტაძარი|მონასტერი|სინაგოგა|მეჩეთი|მუზეუმი|ბაღი|მოედანი|უნივერსიტეტი|"
+    "ხიდი|მთა|ტბა|მდინარე|სასაფლაო|თეატრი|ბიბლიოთეკა|სტადიონი|ძეგლი|ციხე|კოშკი|"
+    "გალერეა|სკვერი|უბანი|დასახლება|ხეობა")
 
 
 def index(city):
@@ -77,8 +89,9 @@ def odd(city):
     for kind in ("landmark", "place"):
         k = ix["kinds"].index(kind)
         rows = [r for r in ix["rows"] if r[0] == k]
-        names = sorted({r[3] for r in rows if not PLACE_WORD.search(r[3] + " " + r[4])})
-        print(f"== {kind}: {len(rows):,} rows, {len(names):,} without an English place word")
+        names = sorted({r[3] for r in rows if not PLACE_WORD.search(r[3] + " " + r[4])
+                        and not PLACE_WORD_ANY.search(r[3] + " " + r[4])})
+        print(f"== {kind}: {len(rows):,} rows, {len(names):,} without a place word")
         print(" | ".join(names))
 
 
