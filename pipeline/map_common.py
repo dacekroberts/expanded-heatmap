@@ -3662,6 +3662,19 @@ FULL_TRAVEL_SCRIPT = """
             var vh = document.documentElement.clientHeight || window.innerHeight;
             return Math.max(24, Math.ceil(vh - a.getBoundingClientRect().top) + CLEAR);
         }
+        // A station tapped on a phone folds an open legend away, so the
+        // station's panel gets the room (owner, 2026-10-08, on trial). Safe
+        // because taps never pass through the legend: it sits outside the
+        // map, and station taps are caught by the map alone.
+        var coarse = window.matchMedia ? window.matchMedia("(pointer: coarse)") : null;
+        var panelWasShown = false;
+        function foldOnTap(panel) {
+            var shown = panel.classList.contains("hm-shown");
+            if (shown && !panelWasShown && coarse && coarse.matches && legend && legend.open) {
+                legend.open = false;
+            }
+            panelWasShown = shown;
+        }
         // The panel is made by TAP_SELECT_SCRIPT, which may start after this
         // script, so it is watched from the first time it is found.
         var watched = false;
@@ -3683,7 +3696,8 @@ FULL_TRAVEL_SCRIPT = """
             if (!panel) return;
             if (!watched) {
                 watched = true;
-                new MutationObserver(clearCredit).observe(panel, {attributes: true, attributeFilter: ["style", "class"]});
+                new MutationObserver(function () { foldOnTap(panel); clearCredit(); })
+                    .observe(panel, {attributes: true, attributeFilter: ["style", "class"]});
             }
             if (panel.style.bottom && panel.style.bottom !== "auto" &&
                 parseFloat(panel.style.bottom) < creditTop()) panel.style.bottom = b;
