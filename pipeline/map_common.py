@@ -2907,10 +2907,12 @@ def build_legend(bucket_colors, legend_label, lines, no_data_stations=False, leg
     (Tyne and Wear Metro)", owner 2026-10-02).
     travel: wrap the business section in `.hm-biz`, which TRAVEL_MODE_SCRIPT
     folds away in Travel; False leaves the legend byte for byte as before.
-    routes: basemap route kinds the Travel pack holds ("ferry", "aerialway");
-    each gets a row under the transit lines, drawn as on the Travel map and
-    shown in Travel only (owner, 2026-10-08: a crimson dash stands out and
-    needs saying what it is).
+    routes: [(kind, name)] of the NAMED ferry and cable-car routes the Travel
+    pack holds; each gets a row under the transit lines with its own name
+    ("Arno Boat"), drawn as on the Travel map and shown in Travel only. A
+    generic "Ferry" row is deliberately absent and an unnamed route gets no
+    row: what a dashed line means belongs to the app's own info page, and
+    the map carries map content only (owner, 2026-10-08).
     """
     names = legend_names or {}
     line_rows = "".join(
@@ -2921,10 +2923,12 @@ def build_legend(bucket_colors, legend_label, lines, no_data_stations=False, leg
     )
     if no_data_stations:
         line_rows += LEGEND_NO_DATA_ROWS.format(color=LIGHT["station"])
-    if travel and routes:
+    named = [(kind, name) for kind, name in routes if name and kind in TRAVEL_ROUTE_ROWS]
+    if travel and named:
         line_rows += '<div class="hm-travel-only">' + "".join(
-            TRAVEL_ROUTE_ROWS[kind].format(color=TRAVEL_ROUTE_COLOURS["site"][kind])
-            for kind in ("ferry", "aerialway") if kind in routes) + "</div>"
+            TRAVEL_ROUTE_ROWS[kind].format(color=TRAVEL_ROUTE_COLOURS["site"][kind],
+                                           label=html.escape(name))
+            for kind, name in sorted(set(named), key=lambda r: (r[0] != "ferry", r[1]))) + "</div>"
     # _LEGEND_CSS is prepended AFTER formatting, not concatenated into
     # LEGEND_HTML: .format() would otherwise try to read every CSS brace as a
     # replacement field and raise KeyError on the first selector.
@@ -3076,13 +3080,13 @@ TRAVEL_ROUTE_ROWS = {
     "ferry": """
   <div class="hm-route-row" style="display:flex; align-items:center; margin:3px 0;">
     <span style="display:inline-block; width:16px; height:3px; margin-right:7px;
-      background:repeating-linear-gradient(90deg, {color} 0 5px, transparent 5px 8px);"></span>Ferry
+      background:repeating-linear-gradient(90deg, {color} 0 5px, transparent 5px 8px);"></span>{label}
   </div>""",
     "aerialway": """
   <div class="hm-route-row" style="display:flex; align-items:center; margin:3px 0;">
     <span style="display:inline-block; width:16px; height:9px; margin-right:7px;
       background:linear-gradient({color}, {color}) center / 100% 2px no-repeat,
-        repeating-linear-gradient(90deg, {color} 0 1.5px, transparent 1.5px 6px);"></span>Cable car
+        repeating-linear-gradient(90deg, {color} 0 1.5px, transparent 1.5px 6px);"></span>{label}
   </div>""",
 }
 
@@ -3270,9 +3274,9 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     Protomaps pack (see OpenBasemap). Given, the layer menu offers two base
     layers, "Business" (OSM's tiles, still the default) and "Travel". Omitted,
     the map renders exactly as before. A prototype: no city passes it. Its
-    optional routes=("ferry", "aerialway") names the route kinds the pack
-    holds (from the build's pack summary); each gets a legend row under the
-    transit lines, shown in Travel only.
+    optional routes=[(kind, name)] lists the named ferry and cable-car routes
+    the pack holds (from the build's pack summary); each gets a legend row
+    under the transit lines with its own name, shown in Travel only.
 
     legend_names: optional {line key: full public name}, for a city whose
     on-map labels are the operators' LINE CODES (Tokyo's 52 lines, owner
