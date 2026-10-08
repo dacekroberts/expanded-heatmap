@@ -149,7 +149,8 @@ Sendai, Lisbon and Porto (drafted), Lund, Lausanne, Takasaki, Saitama,
 Hachiōji, Macau, Kaohsiung, Richmond (BC), Arlington, Chiba, Machida, Isesaki,
 Ōta, Tsukuba, Kōriyama, Kawagoe, Asahikawa, Kamakura, Yamato, Kōfu, Atsugi;
 2026-10-07 added ANCPI (RENNS, for seven Romanian cities) and Lechner
-(OKNYIR, for four Hungarian cities).
+(OKNYIR, for four Hungarian cities); 2026-10-08 added Kurashiki's barber and
+beauty lists (page 1004934, site terms; owner, call 225).
 
 ## Tools left on disk (the outgoing session's scratchpad)
 
