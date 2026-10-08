@@ -11,15 +11,17 @@ or published; every proposal waits for the owner.
 
 ### 2026-10-08 - RESUME NOTE for the next session (internal; Cleanup drops this entry when folding)
 
-- **Next step: build Mendoza from the owner's inputs** with the compiled
-  builder, through the memory gate, then compare it with the downloaded
-  pack. Suggested command (from the worktree root; `--bounds` keeps the
-  output to Mendoza's pack extent, `-Xmx` caps the heap; the peak is an
-  estimate, no Java build has been measured here):
-  `python scripts/heavy_job.py run --label basemap-build-mendoza --session epic-neumann --peak-gb 6 --estimate "planetiler on a 432 MB extract, -Xmx5g" -- data/_basemap_build/tools/jdk-21.0.12.1+1/bin/java.exe -Xmx5g -jar data/_basemap_build/basemaps-main/tiles/target/protomaps-basemap-HEAD-with-deps.jar --area=argentina --bounds=-68.9700,-32.9960,-68.7260,-32.7670 --maxzoom=15 --output=data/_basemap_build/mendoza_selfbuilt`
-  Run it from `data/_basemap_build/`, since the builder reads
-  `data/sources/` relative to its working directory; adjust paths
-  accordingly. Never pass `--download`: every input is already local.
+- **The Mendoza build command** (done 2026-10-08; reuse it for the next
+  city with its own `--area` and `--bounds`). Run from
+  `data/_basemap_build/`, since the builder reads `data/sources/`
+  relative to its working directory; `--bounds` keeps the output to the
+  pack extent, `-Xmx` caps the heap; `java.exe` must be an absolute Windows
+  path (`cygpath -w`); the output is `<area>.pmtiles` there, so rename it:
+  `python ../../scripts/heavy_job.py run --label basemap-build-mendoza --session epic-neumann --peak-gb 6 --estimate "planetiler on a 432 MB extract, -Xmx5g" -- <absolute path>/tools/jdk-21.0.12.1+1/bin/java.exe -Xmx5g -jar basemaps-main/tiles/target/protomaps-basemap-HEAD-with-deps.jar --area=argentina --bounds=-68.9700,-32.9960,-68.7260,-32.7670 --maxzoom=15`
+  Measured peak 3.27 GB on a 432 MB extract; scale from it for a new
+  label. Never pass `--download`: every input is already local. Scratch
+  tools for the comparison: `pack_compare.py`, `pack_lowzoom.py`,
+  `pair_shots.mjs`, `pair_sheet.py`.
 - **Where things are.** `data/_basemap_build/` (gitignored, this worktree):
   `data/sources/` holds argentina.osm.pbf (sha256 d23c0242...c5021f14),
   water and land polygons, Natural Earth, pgf-encoding, and the two empty
@@ -42,8 +44,11 @@ or published; every proposal waits for the owner.
   `shots.mjs`; `site/offline/` holds the local libraries, fonts and
   sprites for the offline test; `basemap_baseline_2026-10-07/` the frozen
   baseline given to the travel app; `shots/` the screenshots.
-- **Open items, in order:** the self-build comparison; Avignon and Florence
-  (extracts first); the shared Travel style (the app's rules below,
+- **Done 2026-10-08: the self-build comparison** (entry below; 3 min 18 s,
+  peak 3.27 GB measured, same map). The gate needs an absolute `java.exe`
+  path; the output is `<area>.pmtiles` in the working directory.
+- **Open items, in order:** Avignon and Florence (extracts first, owner
+  downloads); the shared Travel style (the app's rules below,
   including the dotted disputed-border layer and the label-free world map)
   as a style filter, then the full version as a renderer option (no business
   data, the hard line enforced by a check); white line casings and white
@@ -53,6 +58,47 @@ or published; every proposal waits for the owner.
   non-Google font (item 17 below); the Free Worker against an R2 custom
   domain comparison (needs the owner's Cloudflare account and the
   Cloudflare terms read first).
+
+### 2026-10-08 - The self-built Mendoza pack draws the same map as the downloaded one (measured)
+
+- **Built** with Protomaps' open-source builder (protomaps/basemaps main,
+  planetiler 0.10.2, basemap 4.15.2) from the owner's local inputs and the
+  two empty stand-ins, through the memory gate: `--area=argentina
+  --bounds=-68.9700,-32.9960,-68.7260,-32.7670 --maxzoom=15`, `-Xmx5g`.
+  **3 min 18 s** (12 min CPU), of which reading Natural Earth was 2 min, a
+  fixed cost a larger build shares; **measured peak 3.27 GB** (gate label
+  `basemap-build-mendoza`). `download=false` throughout: nothing fetched,
+  no Protomaps host touched.
+- **Same map.** Screenshots of both packs in the same offline page and
+  style, at z9, z13 and z15 on a 375 px phone view: **0.00% of pixels
+  differ**; rendered feature and label counts equal at every zoom step
+  except one label at z12; no errors, no outside requests. Tile for tile,
+  z9-15 match within 7 of 79,328 features at z15. The residue has two
+  causes: a slightly older OSM snapshot (Geofabrik 2026-10-06 20:21 against
+  the planet build's 2026-10-07 04:00), and the QRank stand-in, which makes
+  a few points of interest (a university, an aerodrome, a peak) first appear
+  one to three zooms later. The Travel style drops points of interest, so
+  QRank does not matter there.
+- **Size: 3,893,127 bytes against 4,129,904 (-5.7%).** The whole
+  difference is at z0-8: with `--bounds` the builder keeps only features
+  inside the box even in the world-scale tiles (z0: 3 features against 54),
+  and the land-cover stand-in leaves no land cover. Same tile count (867).
+- **Disputed borders.** The downloaded pack carries 39 boundary features
+  flagged `disputed` at z0-3 (its world tile); the self-built one carries
+  none, because of the same bounds clip. So a city pack built this way has
+  no disputed line unless one crosses its own box, which agrees with the
+  app's survey (previous entry), and the world pack must be built or cut
+  from the whole world to carry the flags the dotted style needs.
+- **Practical notes.** The output is named after `--area`
+  (`argentina.pmtiles`, renamed `mendoza_selfbuilt.pmtiles`); `--output`
+  is ignored. On Windows the gate needs an absolute path to `java.exe`.
+  The builder logs 44,082 `osm_boundary_missing_way` errors, expected for a
+  country extract whose boundary relations reach outside it.
+- **What follows.** The self-build reproduces Protomaps' pack without
+  Protomaps' hosts, QRank or the land-cover file, so the site and the app
+  can share one build, and the Terms-of-Use question for scripted extracts
+  falls away. Still to measure: Avignon and Florence (extracts first), and
+  one world pack built whole for the label-free world map.
 
 ### 2026-10-08 - The travel app's basemap rules, shared by the Travel views (owner, via the app project)
 
