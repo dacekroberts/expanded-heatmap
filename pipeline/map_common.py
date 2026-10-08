@@ -3649,6 +3649,38 @@ FULL_TRAVEL_SCRIPT = """
         window.addEventListener("resize", later);
         var legend = document.querySelector("details.map-legend");
         if (legend) legend.addEventListener("toggle", later);
+
+        // THE CREDIT STAYS UNCOVERED. A line source's credit beside OSM's can
+        // wrap to three lines on a phone (Tokyo's, 2026-10-08), so the legend
+        // and the tap panel, both fixed 24 px above the bottom, would cover
+        // it. Both sit CLEAR px above the credit's top instead, whatever its
+        // height; the panel is re-checked whenever its script moves it.
+        var CLEAR = 10;
+        function creditTop() {
+            var a = el.querySelector(".leaflet-control-attribution");
+            if (!a) return 24;
+            var vh = document.documentElement.clientHeight || window.innerHeight;
+            return Math.max(24, Math.ceil(vh - a.getBoundingClientRect().top) + CLEAR);
+        }
+        // The panel is made by TAP_SELECT_SCRIPT, which may start after this
+        // script, so it is watched from the first time it is found.
+        var watched = false;
+        function clearCredit() {
+            var b = creditTop() + "px";
+            if (legend && legend.style.bottom !== b) legend.style.bottom = b;
+            var panel = document.querySelector(".hm-tap-panel");
+            if (!panel) return;
+            if (!watched) {
+                watched = true;
+                new MutationObserver(clearCredit).observe(panel, {attributes: true, attributeFilter: ["style", "class"]});
+            }
+            if (panel.style.bottom && panel.style.bottom !== "auto" &&
+                parseFloat(panel.style.bottom) < creditTop()) panel.style.bottom = b;
+        }
+        window.addEventListener("resize", clearCredit);
+        m.on("moveend", clearCredit);
+        clearCredit();
+        setTimeout(clearCredit, 500);
         // Fitted once the map has a size: a page opened in a hidden tab
         // measures 0 x 0 and would fit to the maximum zoom.
         function fit(n) {
@@ -3741,6 +3773,15 @@ def _render_full_travel(*, output_path, city_name, system_name, stations, lines,
         rail_layer.add_to(m)
 
     on = _station_lines(stations, lines, crs_geographic, crs_projected)
+    # A station's tooltip (and its tap panel) lists the lines it serves, each
+    # with its swatch and its legend name (owner, 2026-10-08).
+    served = []
+    for key, (_segments, color, label, _end) in lines.items():
+        name = (names[key] if key in names and names[key].startswith(label)
+                else f"{label} {names[key]}" if key in names else label)
+        served.append(f'<div style="white-space:nowrap"><span style="display:inline-block;width:14px;'
+                      f'height:3px;margin-right:6px;vertical-align:middle;background:{color}"></span>'
+                      f'{html.escape(name)}</div>')
     station_layer = folium.FeatureGroup(name="Stations", control=False)
     names_layer = folium.FeatureGroup(name="Station names", show=False)
     for i, station in enumerate(stations.itertuples()):
@@ -3752,7 +3793,7 @@ def _render_full_travel(*, output_path, city_name, system_name, stations, lines,
             fill=True, fill_color="#ffffff", fill_opacity=1,
             class_name=" ".join(["hm-stn"] + (["hm-xfer"] if len(ns) > 1 else [])
                                 + [f"hm-on-{n}" for n in ns]),
-            tooltip=folium.Tooltip(f"<b>{text}</b>", sticky=True),
+            tooltip=folium.Tooltip(f"<b>{text}</b>" + "".join(served[n] for n in ns), sticky=True),
         ).add_to(station_layer)
         folium.Marker(
             location=where, interactive=False, keyboard=False,
