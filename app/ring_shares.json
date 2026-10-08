@@ -878,5 +878,155 @@
   "in_ring": 2148,
   "all": 3153,
   "map_blob": "b83e75fb5b692788aab695cc10b69b5596681858"
+ },
+ "higashiyamato": {
+  "in_ring": 548,
+  "all": 835,
+  "map_blob": "41951841d0ff81314348c768b4fe59e0a90887db"
+ },
+ "nishitokyo": {
+  "in_ring": 1619,
+  "all": 1936,
+  "map_blob": "8491c4ed8208cad2e9d973141a80a9d0cddc3a89"
+ },
+ "tama": {
+  "in_ring": 1162,
+  "all": 1419,
+  "map_blob": "877781ee98e88a6d3ad6e5a338dd8fe4bd8edbe6"
+ },
+ "higashimurayama": {
+  "in_ring": 1153,
+  "all": 1432,
+  "map_blob": "d93ae324d6e16a76554d87623e287505b12bef02"
+ },
+ "ageo_regional": {
+  "in_ring": 1367,
+  "all": 2633,
+  "map_blob": "fcf066ad68f92bd35913761ab857471fd7b584be"
+ },
+ "fuchu_tokyo": {
+  "in_ring": 2300,
+  "all": 2586,
+  "map_blob": "b71808140c37811ce4394bb9909d0488fec2aa35"
+ },
+ "chofu": {
+  "in_ring": 2184,
+  "all": 2510,
+  "map_blob": "d3b1ce88ac4658a3fdc5bc22c330a6a96d099e69"
+ },
+ "tachikawa": {
+  "in_ring": 2988,
+  "all": 3392,
+  "map_blob": "31138d712ac9f0f60dcfdffd2d981b95f0f67d69"
+ },
+ "hino": {
+  "in_ring": 1173,
+  "all": 1344,
+  "map_blob": "7f28eef668daf3e6dae81706b9652a7555e65c66"
+ },
+ "soka": {
+  "in_ring": 1806,
+  "all": 2716,
+  "map_blob": "4b1d0a70463539719fd135afee66c6101e655565"
+ },
+ "tokorozawa": {
+  "in_ring": 2969,
+  "all": 3834,
+  "map_blob": "b6aa388c66c586be4c434cd92cf331732afb1df7"
+ },
+ "kasukabe": {
+  "in_ring": 1983,
+  "all": 2840,
+  "map_blob": "8e8118c99c47ccad36413be2b0df8dbe54082289"
+ },
+ "toyonaka": {
+  "in_ring": 4100,
+  "all": 5205,
+  "map_blob": "7b610f0b653c816ba66b0e14d81967b8a86a810d"
+ },
+ "hirakata": {
+  "in_ring": 2919,
+  "all": 4607,
+  "map_blob": "b599d6788932ab1855a0035010f38564b91706fe"
+ },
+ "suita": {
+  "in_ring": 3197,
+  "all": 4012,
+  "map_blob": "78924b15f5d8c205ebbc63ea2028784e205b72b3"
+ },
+ "itami": {
+  "in_ring": 1181,
+  "all": 2383,
+  "map_blob": "248c56ea8abd833bca4329585355d8dd9422575e"
+ },
+ "kakogawa": {
+  "in_ring": 2113,
+  "all": 3701,
+  "map_blob": "a185a27bd53e47846c61afaa83c7a81500a20ee2"
+ },
+ "amagasaki": {
+  "in_ring": 5838,
+  "all": 7385,
+  "map_blob": "3d1dd982e32a71bb7b551c98da2ecb7c400e37bd"
+ },
+ "uji": {
+  "in_ring": 723,
+  "all": 1281,
+  "map_blob": "6830f4cf1446105058f62160fe777b20dfafcd30"
+ },
+ "maebashi": {
+  "in_ring": 1901,
+  "all": 4696,
+  "map_blob": "b2410097d733693a4db51f025739de39d643facd"
+ },
+ "fukuyama": {
+  "in_ring": 2745,
+  "all": 6365,
+  "map_blob": "a6ebfb793d302d0600a4acf51c0485da33fc32f7"
+ },
+ "ichinomiya": {
+  "in_ring": 1887,
+  "all": 4025,
+  "map_blob": "a02e3206ca783a14a3752bc03a9d9b2ba2041908"
+ },
+ "tsu": {
+  "in_ring": 1472,
+  "all": 3234,
+  "map_blob": "320a71e2971cfb83d4233b8b936b7d175e886000"
+ },
+ "fukushima": {
+  "in_ring": 2016,
+  "all": 3343,
+  "map_blob": "c49a50c6da202c1c09cf10b1a0a2ddd1ed2509e0"
+ },
+ "iwaki": {
+  "in_ring": 1296,
+  "all": 3730,
+  "map_blob": "d1819c505ba5ae781d083082e7f9b988c0b7832a"
+ },
+ "akita": {
+  "in_ring": 1622,
+  "all": 4961,
+  "map_blob": "8df159b74ba3a6c6753e9ad072521764d4561173"
+ },
+ "oita": {
+  "in_ring": 3372,
+  "all": 6406,
+  "map_blob": "8b7108f665a6b839e2623371b6967415c37760ce"
+ },
+ "gifu": {
+  "in_ring": 1844,
+  "all": 6005,
+  "map_blob": "2909e9fdf140ea15ca6fc3c81edd18fc1ee2f9fa"
+ },
+ "mito": {
+  "in_ring": 977,
+  "all": 4040,
+  "map_blob": "f0d7f89800870ba0b35195beb4eea860295dafc3"
+ },
+ "morioka": {
+  "in_ring": 2303,
+  "all": 4609,
+  "map_blob": "cb3a968bc93ecfcfeb2468424976e4a656d68f61"
  }
 }

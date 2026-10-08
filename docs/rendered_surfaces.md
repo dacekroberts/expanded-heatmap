@@ -6,7 +6,7 @@ read from the code, so a review lane can divide them up and miss none
 (review lesson 3, `docs/review_lanes_2026-09-30.md`). The lane kit is
 `docs/review_lane_kit.md`.
 
-**176 city pages, 4 fixed pages and the Overview; 29 rendered docs; 2 app data files.**
+**206 city pages, 4 fixed pages and the Overview; 29 rendered docs; 2 app data files.**
 
 ## The Overview (`/`)
 
@@ -208,6 +208,36 @@ Is Excluded, and its in-ring share on Why the Maps Differ.
 | `/Liege_Heatmap` | Liège | `liege` | ✓ |
 | `/Brussels_Regional_Heatmap` | Brussels (Regional) | `brussels` | ✓ |
 | `/Gimpo_Heatmap` | Gimpo | `gimpo` | ✓ |
+| `/Higashiyamato_Heatmap` | Higashiyamato | `higashiyamato` | ✓ |
+| `/Nishitokyo_Heatmap` | Nishitōkyō | `nishitokyo` | ✓ |
+| `/Tama_Heatmap` | Tama | `tama` | ✓ |
+| `/Higashimurayama_Heatmap` | Higashimurayama | `higashimurayama` | ✓ |
+| `/Ageo_Regional_Heatmap` | Ageo (Regional) | `ageo_regional` | ✓ |
+| `/Soka_Heatmap` | Sōka | `soka` | ✓ |
+| `/Tokorozawa_Heatmap` | Tokorozawa | `tokorozawa` | ✓ |
+| `/Kasukabe_Heatmap` | Kasukabe | `kasukabe` | ✓ |
+| `/Fuchu_Tokyo_Heatmap` | Fuchū (Tokyo) | `fuchu_tokyo` | ✓ |
+| `/Chofu_Heatmap` | Chōfu | `chofu` | ✓ |
+| `/Tachikawa_Heatmap` | Tachikawa | `tachikawa` | ✓ |
+| `/Hino_Heatmap` | Hino | `hino` | ✓ |
+| `/Toyonaka_Heatmap` | Toyonaka | `toyonaka` | ✓ |
+| `/Hirakata_Heatmap` | Hirakata | `hirakata` | ✓ |
+| `/Suita_Heatmap` | Suita | `suita` | ✓ |
+| `/Itami_Heatmap` | Itami | `itami` | ✓ |
+| `/Kakogawa_Heatmap` | Kakogawa | `kakogawa` | ✓ |
+| `/Amagasaki_Heatmap` | Amagasaki | `amagasaki` | ✓ |
+| `/Uji_Heatmap` | Uji | `uji` | ✓ |
+| `/Maebashi_Heatmap` | Maebashi | `maebashi` | ✓ |
+| `/Fukuyama_Heatmap` | Fukuyama | `fukuyama` | ✓ |
+| `/Ichinomiya_Heatmap` | Ichinomiya | `ichinomiya` | ✓ |
+| `/Tsu_Heatmap` | Tsu | `tsu` | ✓ |
+| `/Fukushima_Heatmap` | Fukushima | `fukushima` | ✓ |
+| `/Iwaki_Heatmap` | Iwaki | `iwaki` | ✓ |
+| `/Akita_Heatmap` | Akita | `akita` | ✓ |
+| `/Oita_Heatmap` | Ōita | `oita` | ✓ |
+| `/Gifu_Heatmap` | Gifu | `gifu` | ✓ |
+| `/Mito_Heatmap` | Mito | `mito` | ✓ |
+| `/Morioka_Heatmap` | Morioka | `morioka` | ✓ |
 | `/Siheung_Heatmap` | Siheung | `siheung` | ✓ |
 | `/Geneva_Heatmap` | Geneva (Regional) | `geneva` | ✓ |
 | `/Thessaloniki_Heatmap` | Thessaloniki | `thessaloniki` | ✓ |
