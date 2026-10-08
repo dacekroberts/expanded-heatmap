@@ -159,9 +159,13 @@ or published; every proposal waits for the owner.
   lines of a city share a label. Tokyo: KSM, KSO, KSK; KKM, KKA; SI, ST,
   SY; TS, TK, TD (the site keeps the operators' shared codes; the site is
   senior). `full_travel["labels"]` overrides per page, and the renderer
-  refuses a full page with a shared label. Whether the site's Tokyo map
-  should adopt them is a separate review-time question (a Tokyo
-  re-render).
+  refuses a full page with a shared label. **The site keeps the operators'
+  shared codes; no Tokyo re-render (owner, 2026-10-08): operator
+  consistency outranks travel on a business-focused site.** For the app
+  (owner): a list of every edited code against the official one, so the
+  app can show both and a rider reading the station's signs (KK) is not
+  confused by the app's code (KKA); Tokyo's nine are in the package's
+  `tokyo/edited_codes.json` and the handoff.
 - **The picked line always shows its pill (owner, 2026-10-08):** placed
   first, no minimum length, may cover dots when nothing clear is left.
   Tokyo, all 52 picked in turn: 52 of 52 at the widest view on desktop and
