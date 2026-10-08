@@ -117,10 +117,17 @@ not) and start them with `preview_start`, stop with `preview_stop`:
 - `streamlit-app-lean`: `runtimeExecutable` = the venv's python
   (`.venv-lean/Scripts/python.exe`), `runtimeArgs` = `["-m", "streamlit",
   "run", "app/Overview.py", "--server.port", "8812",
-  "--server.headless", "true"]`, `port` 8812.
-- `heatmap-static`: `python -m http.server 8813 --directory outputs`,
-  `port` 8813 - serves every city's standalone `heatmap.html`
-  (`/<city_slug>/heatmap.html`). This one needs no venv; it's just files.
+  "--server.headless", "true", "--server.address", "127.0.0.1"]`, `port` 8812.
+- `heatmap-static`: `python -m http.server 8813 --directory outputs
+  --bind 127.0.0.1`, `port` 8813 - serves every city's standalone
+  `heatmap.html` (`/<city_slug>/heatmap.html`). This one needs no venv; it's
+  just files.
+
+**Every server binds to 127.0.0.1** (owner, 2026-10-08): without the flag
+both listen on every interface, and Python is allowed through the firewall,
+so any device on the network could read them. Never serve a whole tree
+(an `http.server` with no `--directory outputs`). Phone testing uses the one
+`PHONE-LAN-...` entry, started by name and stopped right after.
 
 Clear `__pycache__` under the repo (`app/`, `pipeline/`) first: shared
 modules like `components.py` can serve a stale cached version across a
