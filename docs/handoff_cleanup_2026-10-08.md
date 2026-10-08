@@ -39,8 +39,13 @@ items are done or moved into PLAN.
 
 1. **Drafts FOLDED 2026-10-08**: 57 entries from 13 files, the three empty
    files deleted, East-1's blank names corrected to twelve (measured from the
-   rendered maps), the drafts' still-open notes moved into PLAN. Still live:
-   `staging` and the pilots' `place-search` and `claude-epic-neumann-5aa0a6`.
+   rendered maps), the drafts' still-open notes moved into PLAN. `staging`
+   FOLDED too (owner, 2026-10-08): 87 entries, calls 222-230; the 15 dated
+   2026-10-03 moved to `docs/decisions/2026-09-27.md` by
+   `archive_decisions.py`. The folder `docs/decisions_drafts/` is empty on
+   master (git keeps no empty folder); the next drafts file recreates it.
+   Still live, on their branches: the pilots' `place-search` and
+   `claude-epic-neumann-5aa0a6`.
 2. **The owner's iPhone check PASSED** (2026-10-08), all ten items; the oval
    legend dot and the typable dropdowns it found are on `legend-dot-georgia`.
 3. **Wave 2 Japanese builds** (East-2, Kansai-2, Regional-2) start from
