@@ -14,7 +14,8 @@ city's own boundary (config.PLACE_AREA), cached at config.PLACE_OSM_JSON:
   * place nodes (wards, districts, neighborhoods, the 町 of Kyoto);
   * stations and tram stops;
   * landmarks: attractions, museums, viewpoints, historic sites, places of
-    worship, parks and gardens, universities, peaks, rivers.
+    worship, parks and gardens, universities, peaks, rivers, named markets
+    (kept only when notable, owner 2026-10-07).
 
 Places only, never business records (owner, 2026-10-07): nothing here is
 queried by shop, office, craft or a commercial amenity, and the index step
@@ -49,6 +50,7 @@ out skel qt;
   nwr["amenity"="place_of_worship"]["name"](area.a);
   nwr["leisure"~"^(park|garden)$"]["name"](area.a);
   nwr["amenity"~"^(university|college)$"]["name"](area.a);
+  nwr["amenity"="marketplace"]["name"](area.a);
   node["natural"="peak"]["name"](area.a);
   way["waterway"="river"]["name"](area.a);
 );

@@ -2009,6 +2009,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
     .hm-search-item:hover, .hm-search-item.on { background: rgba(13,148,136,0.14); }
     .hm-search-sub { font-size: 11px; opacity: 0.75; }
     .hm-search-note { padding: 6px 8px; font-size: 12px; opacity: 0.8; }
+    .hm-search-head { padding: 5px 8px 1px; font-size: 11px; font-weight: 600; opacity: 0.65; }
     .hm-search-credit { padding: 4px 8px 6px; font-size: 11px; opacity: 0.8;
         border-top: 1px solid @@LIGHT_BORDER@@; }
     .hm-search-credit a { color: inherit; }
@@ -2023,6 +2024,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
 (function () {
     var NAME = "__MAP_NAME__", URL = "__INDEX_URL__";
     var STATION_COLOR = "@@LIGHT_STATION@@", LINK_M = @@STATION_LINK_M@@, DUP_M = @@STATION_DUP_M@@;
+    var MIN_LATIN = 4, MIN_CJK = 2;
     var KIND_LABEL = {line: "Line", mapstation: "Station", station: "Station not on this map",
                       junction: "Intersection", landmark: "Landmark", place: "Neighborhood",
                       street: "Street", crossing: "Intersection"};
@@ -2209,8 +2211,27 @@ _PLACE_SEARCH_TEMPLATE = r"""
             else if (d.first.indexOf(nq) === 0) s -= 40;
             d._s = s;
         });
+        // The map's own stations and lines first, as their own group, and only
+        // from the start of a word: an in-word hit put Takaragaike under "kara"
+        // and Umekōji-Kyotonishi under "Nish" (Kyoto, 2026-10-07).
         out.sort(function (a, b) { return a._s - b._s; });
-        return out.slice(0, 8);
+        var mine = out.filter(function (d) { return isOwn(d) && !d._weak; }).slice(0, 5);
+        var rest = out.filter(function (d) { return !isOwn(d); }).slice(0, mine.length ? 6 : 8);
+        return mine.concat(rest);
+    }
+    function isOwn(d) { return d.kind === "line" || d.kind === "mapstation"; }
+    // Nothing is suggested until a full keyword is typed (owner, 2026-10-07:
+    // "North" for Northgate Station, "JR" for a JR line): a whole word of some
+    // name ("JR", "Oak", "5th"), at least MIN_LATIN letters of one, at least
+    // MIN_CJK characters of Chinese, Japanese or Korean, or a second word.
+    function ready(q) {
+        var qs = words(q).filter(function (w) { return !STOP[w]; });
+        if (!qs.length) return false;
+        if (qs.length > 1) return true;
+        var w = qs[0];
+        if (CJK.test(w)) return w.length >= MIN_CJK;
+        if (w.length >= MIN_LATIN) return true;
+        return data.some(function (d) { return d.hay.indexOf(" " + w + " ") >= 0; });
     }
 
     function start() {
@@ -2262,13 +2283,22 @@ _PLACE_SEARCH_TEMPLATE = r"""
                 '<a href="' + URL + '" target="_blank" rel="noopener" download>Download this index</a>';
             list.appendChild(c);
         }
+        function head(text) {
+            var h = document.createElement("div");
+            h.className = "hm-search-head";
+            h.textContent = text;
+            list.appendChild(h);
+        }
         function render() {
             list.innerHTML = "";
             on = -1;
-            // The credit shows whenever the box is open, results or not.
-            if (!input.value.trim()) {
+            shown = [];
+            // Empty, or no full keyword yet: what the search is for (owner,
+            // 2026-10-07), and the credit, which shows whenever the box is open.
+            if (!input.value.trim() || (data && !ready(input.value))) {
+                note("Finds streets, intersections, stations, lines, neighborhoods and landmarks. " +
+                     "Businesses are not searchable, and what you type stays in your browser.");
                 credit();
-                list.classList.add("has");
                 input.setAttribute("aria-expanded", "false");
                 return;
             }
@@ -2276,6 +2306,8 @@ _PLACE_SEARCH_TEMPLATE = r"""
             shown = search(input.value);
             if (!shown.length) { note("No street, station or place by that name"); credit(); return; }
             shown.forEach(function (d, i) {
+                if (i === 0 && isOwn(d)) head("On this map");
+                if (!isOwn(d) && (i === 0 || isOwn(shown[i - 1])) && isOwn(shown[0])) head("Places");
                 var el = document.createElement("div");
                 el.className = "hm-search-item";
                 el.setAttribute("role", "option");

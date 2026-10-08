@@ -6,7 +6,9 @@ assessed before the large review", item 3).
 
 Input:  data/kyoto/raw/osm_places_2026-10-07.json  (pipeline/place_index_fetch.py)
 Output: app/static/places/kyoto.json  (served by Streamlit's static serving;
-        ODbL 1.0, the notice inside the file)
+        ODbL 1.0, the notice inside the file);
+        outputs/kyoto/place_search.json  (the page's summary: the languages
+        its search bullet names, measured)
 
 Run:  python pipeline/kyoto/step2b_place_index.py
 """
@@ -19,8 +21,6 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline import place_index  # noqa: E402
 from pipeline.kyoto import config  # noqa: E402
 
-OUT = place_index.index_path(config.SLUG)
-
 
 def main():
     if not config.PLACE_OSM_JSON.exists():
@@ -28,11 +28,13 @@ def main():
     payload = json.loads(config.PLACE_OSM_JSON.read_text(encoding="utf-8"))
     # The retrieval date is the cache's own, from its file name: never today.
     retrieved = config.PLACE_OSM_JSON.stem.rsplit("_", 1)[-1]
-    index, report = place_index.build(payload["elements"], city=config.NAME, retrieved=retrieved, fold="ja")
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    # Bytes, LF only, no BOM: the file is served as-is.
-    OUT.write_bytes(json.dumps(index, ensure_ascii=False, separators=(",", ":")).encode("utf-8"))
-    print(f"Wrote {OUT} ({OUT.stat().st_size:,} bytes, {len(index['rows']):,} places)")
+    index, report = place_index.build(payload["elements"], city=config.NAME, retrieved=retrieved,
+                                      local=config.PLACE_LANGUAGES, fold="ja")
+    out = place_index.write(index, config.SLUG)
+    print(f"Wrote {out} ({out.stat().st_size:,} bytes, {len(index['rows']):,} places) and "
+          f"{place_index.summary_path(config.SLUG).name}")
+    print(f"  languages: {index['languages']['coverage']} -> the page names "
+          f"{index['languages']['listed']}")
     for k in sorted(report):
         print(f"  {k}: {report[k]:,}")
 

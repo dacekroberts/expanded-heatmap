@@ -284,7 +284,8 @@ approves it at review time.<!-- /internal -->
 
 - **Data:** each city's place index (`app/static/places/<city>.json`) lists
   named streets, intersections derived from shared street nodes, named
-  junctions, place names, stations and landmarks, extracted from
+  junctions, place names, stations and landmarks (named markets only when
+  notable), extracted from
   OpenStreetMap through Overpass (`pipeline/place_index_fetch.py`) inside the
   city boundary and built by `pipeline/place_index.py`. It holds no business
   records and no data from any other source.

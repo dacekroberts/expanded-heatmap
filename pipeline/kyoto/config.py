@@ -151,7 +151,11 @@ OSM_NAME_MATCH_M = 600
 # pipeline/place_index_fetch.py, indexed by step2b_place_index.py. A NEW file
 # name: data/ is shared by every worktree.
 PLACE_AREA = '["name"="京都市"]["admin_level"="7"]["boundary"="administrative"]'
-PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-07.json"
+# v2: the query with named markets (owner, 2026-10-07); the first cache,
+# osm_places_2026-10-07.json, is the pilot's first build.
+PLACE_OSM_JSON = DATA_RAW / "osm_places_v2_2026-10-07.json"
+# The local language(s) of OSM's `name` here (place_index.py, LANGUAGES).
+PLACE_LANGUAGES = ("ja",)
 # Where OSM's objects for one station disagree on name:en, the spelling taken.
 # 西院 is one interchange by N02's group code (Hankyu's and the Randen's, 214 m
 # apart), and its operators READ it differently: Hankyu's Saiin, the Randen's

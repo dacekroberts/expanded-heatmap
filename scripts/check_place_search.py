@@ -1,0 +1,176 @@
+"""Place search: every map with a search box is backed by a current index,
+its page names only the languages measured for it, and the index carries
+nothing but OpenStreetMap's places. Run it; it fails on any of these.
+
+    python scripts/check_place_search.py [--selftest]
+
+WHY A CHECK (owner, 2026-10-07)
+-------------------------------
+The page's search bullet says which languages a city's search answers in.
+Written by hand it would say "English or Japanese" on a Brussels page, so the
+index step measures each language's share of the places
+(pipeline/place_index.py, LANGUAGES) and the page reads the result
+(app/components.search_languages). This re-reads both ends:
+
+  A. A map whose HTML carries the search box has its index
+     (app/static/places/<slug>.json) and summary (outputs/<slug>/
+     place_search.json), and the URL baked into the map carries the index's
+     CURRENT hash: a rebuilt index under an old URL is a map left stale, and a
+     browser keeps the old file (the Kyoto pilot showed a removed condominium).
+  B. The summary's languages are the index's, and its list follows the rule:
+     English first, then the local languages, each at LIST_SHARE or more; a
+     declared local language under LOCAL_MIN fails.
+  C. The page that embeds the map passes search=<slug> to render_map_help, so
+     the bullet is present, and no page writes the bullet itself.
+  D. ODbL: the index holds only the fields place_index writes (6 per row, the
+     known top-level keys), its licence object names ODbL and the OSM credit,
+     LICENSE carves app/static/places/ out, and docs/data_sources.md has the
+     row. A field from any other source would bring that source under ODbL
+     (4.4(d)).
+"""
+import hashlib
+import json
+import re
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))
+from pipeline import place_index  # noqa: E402
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
+TOP_KEYS = {"license", "city", "languages", "fold", "kinds", "rows"}
+URL_RE = re.compile(r"/app/static/places/([a-z0-9_]+)[.]json[?]v=([0-9a-f]+)")
+BULLET = "never leaves your browser"
+
+
+def rule(langs):
+    """The page's list, recomputed from the coverage: the rule in one place."""
+    order = list(dict.fromkeys(["en", *langs["local"]]))
+    return [place_index.LANGUAGE_NAMES[c] for c in order
+            if langs["coverage"].get(c, 0) >= place_index.LIST_SHARE]
+
+
+def check_index(slug, index, summary):
+    problems = []
+    if set(index) != TOP_KEYS:
+        problems.append(f"index keys {sorted(index)} are not {sorted(TOP_KEYS)}")
+    lic = index.get("license", {})
+    if "opendatacommons.org/licenses/odbl" not in lic.get("url", "") or \
+            "OpenStreetMap contributors" not in lic.get("attribution", ""):
+        problems.append("licence object lacks the ODbL link or the OSM credit")
+    bad = [r for r in index.get("rows", []) if len(r) != 6]
+    if bad:
+        problems.append(f"{len(bad)} row(s) not of 6 fields, e.g. {bad[0][:7]}")
+    langs = index.get("languages", {})
+    if summary is not None and summary.get("languages") != langs:
+        problems.append("summary languages differ from the index's (re-run the index step)")
+    if langs.get("list_share") != place_index.LIST_SHARE:
+        problems.append(f"built at list_share {langs.get('list_share')}, the rule is {place_index.LIST_SHARE}")
+    short = [c for c in langs.get("local", []) if langs["coverage"].get(c, 0) < place_index.LOCAL_MIN]
+    if short:
+        problems.append(f"local language(s) {short} under {place_index.LOCAL_MIN:.0%}: {langs['coverage']}")
+    if langs and langs.get("listed") != rule(langs):
+        problems.append(f"listed {langs.get('listed')} but the rule gives {rule(langs)}")
+    if langs and not langs.get("listed"):
+        problems.append("no language reaches the bar: the page could name none")
+    return problems
+
+
+def pages_by_slug():
+    out = {}
+    for page in sorted((ROOT / "app" / "pages").glob("*.py")):
+        text = page.read_text(encoding="utf-8")
+        for slug in re.findall(r"from pipeline[.]([a-z0-9_]+)[.]config import", text):
+            out.setdefault(slug, []).append((page, text))
+    return out
+
+
+def main():
+    problems = {}
+    indexes = sorted((ROOT / "app" / "static" / "places").glob("*.json"))
+    pages = pages_by_slug()
+    searched = set()
+    for html in sorted((ROOT / "outputs").glob("*/heatmap.html")):
+        text = html.read_text(encoding="utf-8")
+        if "hm-search-input" not in text:
+            continue
+        slug = html.parent.name
+        searched.add(slug)
+        p = problems.setdefault(slug, [])
+        m = URL_RE.search(text)
+        path = place_index.index_path(slug)
+        if not m or m.group(1) != slug:
+            p.append("A: the map carries a search box but no hashed index URL of its own")
+        elif not path.exists():
+            p.append(f"A: no index at {path.relative_to(ROOT)}")
+        elif hashlib.sha256(path.read_bytes()).hexdigest()[:len(m.group(2))] != m.group(2):
+            p.append("A: the map's index URL is stale (re-render the map after the index step)")
+        if not place_index.summary_path(slug).exists():
+            p.append("A: no outputs/<slug>/place_search.json")
+        page_texts = pages.get(slug, [])
+        if not any(f"search='{slug}'" in t or f'search="{slug}"' in t for _, t in page_texts):
+            p.append("C: the city's page does not pass search=<slug> to render_map_help")
+    for path in indexes:
+        slug = path.stem
+        p = problems.setdefault(slug, [])
+        if slug not in searched:
+            p.append("A: an index no map uses (render the map with place_index_url, or remove it)")
+        index = json.loads(path.read_text(encoding="utf-8"))
+        sp = place_index.summary_path(slug)
+        summary = json.loads(sp.read_text(encoding="utf-8")) if sp.exists() else None
+        p += check_index(slug, index, summary)
+    for page in sorted((ROOT / "app" / "pages").glob("*.py")):
+        if BULLET in page.read_text(encoding="utf-8"):
+            problems.setdefault(page.name, []).append(
+                "C: writes the search bullet itself; it comes from render_map_help")
+    if indexes:
+        if "app/static/places/" not in (ROOT / "LICENSE").read_text(encoding="utf-8"):
+            problems.setdefault("LICENSE", []).append("D: no ODbL carve-out for app/static/places/")
+        if "Place search index" not in (ROOT / "docs" / "data_sources.md").read_text(encoding="utf-8"):
+            problems.setdefault("docs/data_sources.md", []).append("D: no 'Place search index' row")
+
+    failed = {k: v for k, v in problems.items() if v}
+    for slug in sorted(problems):
+        if problems[slug]:
+            for line in problems[slug]:
+                print(f"  FAIL {slug:14} {line}")
+        elif slug in searched:
+            summary = json.loads(place_index.summary_path(slug).read_text(encoding="utf-8"))
+            print(f"  OK   {slug:14} {summary['places']:,} places; the page names "
+                  f"{', '.join(summary['languages']['listed'])} {summary['languages']['coverage']}")
+    if failed:
+        print(f"\n{len(failed)} place-search problem(s).")
+        return 1
+    print(f"\nOK - {len(searched)} map(s) with place search, each current, its languages measured.")
+    return 0
+
+
+def selftest():
+    good = {"local": ["fr", "nl"], "coverage": {"en": 0.2, "fr": 0.95, "nl": 0.93},
+            "list_share": place_index.LIST_SHARE, "listed": ["French", "Dutch"]}
+    cases = [
+        ("bilingual city lists both, not English", good, 0),
+        ("hand-written English slipped in", dict(good, listed=["English", "French", "Dutch"]), 1),
+        ("a local language under the floor", dict(good, coverage={"en": 0.2, "fr": 0.95, "nl": 0.5}), 1),
+    ]
+    base = {"license": {"url": "https://opendatacommons.org/licenses/odbl/1-0/",
+                        "attribution": "© OpenStreetMap contributors"},
+            "city": "X", "fold": None, "kinds": [], "rows": [[0, 1, 2, "a", "", 0]]}
+    ok = 0
+    for label, langs, want in cases:
+        got = len(check_index("x", dict(base, languages=langs), None))
+        ok += got == want
+        print(f"  {'ok ' if got == want else 'BAD'} {label}: {got} problem(s)")
+    extra = dict(base, languages=good, rows=[[0, 1, 2, "a", "", 0, "register"]])
+    got = len(check_index("x", extra, None))
+    ok += got == 1
+    print(f"  {'ok ' if got == 1 else 'BAD'} a 7th field from another source: {got} problem(s)")
+    print(f"{ok} of {len(cases) + 1} cases behaved as intended.")
+    return 0 if ok == len(cases) + 1 else 1
+
+
+if __name__ == "__main__":
+    sys.exit(selftest() if "--selftest" in sys.argv else main())
