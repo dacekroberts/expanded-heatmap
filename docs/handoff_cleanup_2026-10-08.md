@@ -66,7 +66,7 @@ items are done or moved into PLAN.
    also links the intersections file (ODbL 4.6). Landing order:
    merge it and `legend-dot-georgia`, take master's `outputs/*/heatmap.html`
    on conflict, then ONE full re-render of all 206 maps (the legend dot
-   needs it; it covers the five searched maps). `check_render_current.py`
+   needs it; it covers the ten searched maps). `check_render_current.py`
    fails on the branch until that render (the comment rewording changes the
    shipped blocks), so nothing from it is pushed before. The pilot's four conditions:
    (a) its committed indexes (`app/static/places/<city>.json`,
@@ -77,15 +77,19 @@ items are done or moved into PLAN.
    it, or the indexes 404 live; (d) deploy-verify (`map-chrome`) opens the
    search box on one searched map live; (e) at the merge, `place_index.junk_name`
    runs AFTER `map_common.repaired_name`, so "Patel?s" is repaired, not dropped
-   (branch tip 9db1e20a). TRIAL MERGE (2026-10-08, `git merge-tree`, origin/
-   master + legend-dot-georgia `b97c7184` + place search `3d57d9d9`): master
+   (branch tip 9db1e20a). TRIAL MERGE (2026-10-08, `git merge-tree`, re-run on
+   batch 2a's `4fda9817`; origin/master + legend-dot-georgia + place search): master
    and the branch merge clean; place search then conflicts in `PLAN.md`
-   (take master's, add its pointer), the five searched maps' `heatmap.html`
+   (take master's, add its pointer), the ten searched maps' `heatmap.html`
    (take master's; the full re-render replaces them) and ONE hunk of
    `pipeline/map_common.py`: both branches add text just above `LEGEND_ROW`;
    keep both, place search's `_PLACE_SEARCH_TEMPLATE` block first, then the
    legend-dot comment. `app/components.py`, Kyoto's page and the rest merge
-   on their own. Basemap: the station-area border is dark
+   on their own. BATCH 2a (Montreal, Barcelona, Marseille, Prague,
+   Brussels; held for the owner, three questions in its drafts) was
+   committed on a DETACHED HEAD at `4fda9817` while the branch stayed at
+   `3d57d9d9`; its session was asked to reattach (fast-forward). Before
+   merging, confirm the branch ref includes `4fda9817`. Basemap: the station-area border is dark
    plum `#352a4d` in both projects (owner, 2026-10-08), clearing every pin
    colour by 45 or more, so the pin colours stay; the pilot's drafts
    (`claude-epic-neumann-5aa0a6.md`) also hold the owner's disputed-borders
