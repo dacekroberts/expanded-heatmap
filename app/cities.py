@@ -5063,8 +5063,10 @@ CITIES = [
         # metro (the brief: private heavy rail reads as metro, owner 2026-10-02)
         "mode": "metro",
         "in_default_view": False,
-        # No label tier and the scaffold's starting offset: Cleanup builds
-        # Japan's region views and their labels (owner, call 198, 2026-10-07).
+        # Above the dot, the scaffold's default, which its build left out:
+        # check_deploy_imports.py requires every city to carry a label_offset.
+        # Scored with the Japan views by check_macro_labels.py (2026-10-07).
+        "label_offset": ("middle", 0, -22),
     },
     {
         "name": "Toyonaka",
