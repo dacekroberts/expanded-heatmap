@@ -51,3 +51,37 @@ back-links branch joins before the pin.
   fingerprint marks, which only the owner's key makes (`fingerprint.py
   coverage` names Uji, the one re-rendered; the other six follow when
   re-rendered); a reboot (app/ changes throughout).
+
+### 2026-10-07 - The review's owner calls from lanes 3 and 4 (owner)
+
+- **Every legend capped at the labels' model width** (lane 3, F1, the one
+  blocker): New York's legend reached 311 px with the batch's long category
+  rows and covered Flushing (7) and Shuttles (S) at 1000 px; the cap applied
+  only to maps with legend_names. Now every legend (95998728); one narrower
+  than 274 px renders the same.
+- **Lines near the new pin colours (owner: "Yes to recommendation")**: every
+  line within CIE76 20 of olive or violet on a map that draws it is
+  recoloured before landing, keeping the operator's hue (30 lines on 19
+  maps near olive, 2 near violet, measured from the committed legends); 20 to
+  45 is recorded as an accepted trade; a full UK search follows after
+  landing. Lines near the long-standing blue, magenta and green (53, mostly
+  operators' own colours) are outside the decision.
+- **One name per line across maps (owner: "Yes ... for consistency, unless
+  shorter name is valid on all maps")**: the operator's full official name
+  everywhere, unless a shorter official name is valid and used on every map
+  involved (label space): Hohi, Hakodate, Osaka Higashi, Chuo and the others
+  lane 4 listed.
+- **Amagasaki 6 and Suita 5, undefined harm and defamation bars**: accepted
+  knowingly (owner: "Yes i agree"), on the Taoyuan (2026-09-25), Fukui 4
+  (2026-10-01) and Maebashi (2026-10-05) precedents; no page wording, since
+  they are prohibitions, not display duties.
+- **Hirakata's credit, unlinked to the city's pages** (its link policy;
+  notice 170 gives the 表示例 form and the CC BY 2.1 JP URI): approved
+  (owner: "Approved and note").
+- **The Abroad items "all approved" did not name** (Mexico City's three
+  rewordings, Copenhagen's placement and S-tog bullet, Gelsenkirchen's
+  data_age and frequency, three adapted Anyang sentences, notice 1's clause,
+  call 66 c on Gentofte, Ballerup and Rudersdal): settled (owner: "Settle").
+- **Dates in notices**: month first, as every page writes them (owner: "Yes
+  match"); Tsu, Fukushima and Iwaki change.
+
