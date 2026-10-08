@@ -113,17 +113,55 @@ or published; every proposal waits for the owner.
   | Stub, scenic, trial or frequency-floor line left out whole | GTFS: the same cached feed (its other routes), using the route's own shape, never a line joined through its stops; OSM: the cached relations, if the query selected that route type | at risk where the query filtered route types (`OSM_ROUTES` of tram and light_rail leaves out a funicular or heritage line), or a feed omits shapes for the route |
   | Station thinned by spacing | nothing to fetch: the line is drawn whole and `excluded_stations.csv` keeps the coordinates | yes |
 
-- **Lines needing a fresh source: from Cleanup's list.** Cleanup is
-  compiling every line the site leaves off or cuts short, with whether full
-  geometry is still held, at
-  `data/_app_requests/rail_scope_2026-10-07.md`. When it arrives, each row
-  goes in a table here: city, line, rule, geometry held (OSM relation,
-  cached GTFS, N02, or cut only), and for a cut-only line the fresh source.
-  A fresh source is a new Overpass query in that city's `fetch_sources.py`
-  (one in flight per session, 60 s after a 504 or 429) or a re-download of a
-  feed the brief already names; anything else goes to the owner first. Until
-  then such a line exports with `geometry_status: "cut_only"`, never left
-  out.
+- **Cleanup's list (`data/_app_requests/rail_scope_2026-10-07.md`, master
+  at bd0e9a8a) settles most of it.** 16 stub lines in 11 cities, 111 cities
+  with lines cut or stations outside (76 outside Japan, 34 Japanese), 82 rows
+  left out for other reasons. The raw caches hold whole GTFS feeds, whole OSM
+  relations, the whole national N02 file and whole CRTM layers; only
+  `data/<city>/processed/lines.geojson` and the map are cut. So the export
+  reads the raw caches, never `processed/lines.geojson`, and computes each
+  segment's `on_site_map` by overlaying the drawn geometry on the full one
+  (a buffer in the city's own UTM zone). That also closes the list's open
+  gap, "drawn versus cut not traced for most GTFS cities": the export never
+  needs to know how the site cut a line, only what it drew.
+- **Lines needing a fresh source.** Held means the export can be written from
+  caches already on this machine. Fresh means nothing cached has the line.
+
+  | City | Lines | Held? | Fresh source |
+  |---|---|---|---|
+  | Chicago | Metra | no (CTA feed only) | OSM relations (recommended) or Metra's feed |
+  | Los Angeles | Metrolink | no (`gtfs_rail.zip` is Metro rail only) | OSM, or Metrolink's feed |
+  | Montréal | exo commuter trains | no (STM and REM only) | OSM, or exo's feed |
+  | Washington DC | MARC, VRE | no (WMATA only) | OSM, or the two agencies' feeds |
+  | Madrid | Cercanías | no (CRTM M4 and M10 layers only) | OSM, or the CRTM Cercanías layer (same publisher, a new layer) |
+  | Den Haag | RandstadRail E | held under another city: `data/rotterdam/raw/gtfs-openov-nl.zip` (RET metro E); Den Haag's own query is `route=tram` only | none; Den Haag's `fetch_sources.py` names the national file, so its export does not depend on Rotterdam's cache |
+  | Incheon | Seoul Line 1's southern branches | partial: the query returns only relations touching Incheon | OSM, by relation id |
+  | Korean cities | lines leaving the cached bbox | partial (inferred from the bbox query) | OSM, by relation id |
+  | Commuter and regional rail named in the mode-scope row (BART, Caltrain, Coaster, Sprinter, GO, LIRR, Trenord and Passante, SNCB, National Rail, Pendeltåg, Korail, Taiwan Railway and HSR, V/Line, NSW TrainLink, Buenos Aires commuter railways, and the rest) | per city | held where the city cached a whole agency or national feed (Paris RER and Transilien, Berlin S, MBTA, Dublin, Marseille TER, Sounder, Tri-Rail, WCE, NS, Vivi, Prague S); unknown elsewhere | the export's own check decides it, by looking each named line up in the caches, rather than this table guessing; where absent, OSM |
+  | Japan, 34 cities | stations beyond 3 km of the city line | held: N02 is national, and the 3 km cut is `DRAW_BEYOND_M` in `japan_step1`, not the file | none |
+  | Brno, Le Havre, Montpellier, Strasbourg, Plzeň | geometry of undrawn routes (their feeds carry no `shapes.txt`) | held where each city's OSM query matched the route | OSM, by relation id, where it did not |
+
+- **Recommended fresh source: OpenStreetMap, for every gap.** It is a source
+  this project already uses under ODbL with its credit shown, so the gaps
+  need no new licence, only one Overpass query per city in that city's
+  `fetch_sources.py` (one in flight per session, 60 s after a 504 or 429).
+  An agency feed would add a new source (owner first, a licence read, a
+  `docs/data_sources.md` row), and its only gain over OSM would be
+  timetables, which version 1 does not carry. Until fetched, such a line
+  exports with `geometry_status: "cut_only"` if a cut exists, or
+  `"not_held"` with no geometry, never silently left out.
+- **Open for the owner: how far is "in full"?** A Japanese JR line, the
+  Tōkaidō or the Sanyō, runs hundreds of kilometres beyond the city. Proposed:
+  urban lines (metro, light rail, tram, people mover, funicular, monorail)
+  go whole to their termini; mainline, commuter and intercity lines are
+  carried to the edge of the city's basemap pack (its extent plus 10 km,
+  the area the app can draw offline), with the part beyond marked
+  `geometry_status: "clipped_to_export_extent"`. The alternative, every line
+  whole, would make some Japanese exports carry much of the national
+  network.
+- **Out of rail scope altogether:** aerial lifts (Cablebús, the Maokong
+  Gondola) are not rail; whether the app wants them is the app project's
+  question, and the export leaves them out unless the owner says otherwise.
 - **`manifest.json`.** One file for all cities, so a reader's device fetches
   the same thing whichever cities it holds: per city `slug`, `schema_version`,
   `sha256` of `city.json`, `generated_utc`, the basemap pack's `build`,
