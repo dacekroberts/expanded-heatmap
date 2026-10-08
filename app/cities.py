@@ -5235,11 +5235,12 @@ CITIES = [
         # MEASURED in a real browser with Space Grotesk loaded, since
         # it refuses a guessed one.
         "label_offset": ("middle", 0, -22),
-        # ABOVE AND RIGHT of the dot in Hyogo Prefecture (2026-10-07): at the
+        # ABOVE AND LEFT of the dot in Hyogo Prefecture (2026-10-07): at the
         # view's phone-fitting zoom 8.25 the default pill left Itami labelled in no
         # view; two of the twelve positions clear it, scored by
-        # check_macro_labels.py at 375, 768 and 1200.
-        "label_offset_by_region": {"Hyogo Prefecture": ("start", 8, -14)},
+        # check_macro_labels.py at 375, 768 and 1200. Above and right, the other,
+        # ran 84% off a phone's canvas (review lane 1 re-check); this one is whole.
+        "label_offset_by_region": {"Hyogo Prefecture": ("end", -8, -14)},
     },
     {
         "name": "Uji",
@@ -6062,15 +6063,19 @@ def region_caption(region):
     # 2026-10-03), so the count stays the region's own, as the menu states it.
     # A country split into views is named once, as the country (2026-10-07:
     # East Asia borrows from nine Japanese views), and a view with no city yet
-    # is not named. Inside the same country the view itself is named: Kanto
-    # borrows Saitama Prefecture's and Tokyo Metropolis's labels, not "Japan's"
-    # (review lane 1, F2).
+    # is not named, nor one whose cities are all minor, since the view labels
+    # none of them (review lane 1, N1: Saitama Prefecture's four). Inside the
+    # same country the view itself is named: Kanto borrows Tokyo Metropolis's
+    # labels, not "Japan's" (review lane 1, F2).
     def caption_name(r):
         same_country = _CAPTION_NAME.get(r) is not None and _CAPTION_NAME.get(r) == _CAPTION_NAME.get(region)
         return r if same_country else _CAPTION_NAME.get(r, r)
 
+    def lends_anchor(r):
+        return any(c.get("label_tier") != "minor" for c in cities_in(r))
+
     also = list(dict.fromkeys(named(caption_name(r))
-                              for r in REGION_LABELS_ALSO.get(region, ()) if cities_in(r)))
+                              for r in REGION_LABELS_ALSO.get(region, ()) if lends_anchor(r)))
     if not also:
         return text + "."
     named = also[0] if len(also) == 1 else ", ".join(also[:-1]) + " and " + also[-1]
