@@ -4,6 +4,13 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-08 - Kurashiki's brief written and passing; calls 227 to 230 put
+
+- **`docs/build_briefs/kurashiki.md`** (brief agent; `brief_check.py kurashiki` 11/11, re-run by staging): `pdftotext -table` gives one record a line, cut at each page's header offsets, 6,288 rows. 飲食店営業 4,727 rows (867 old-law, 3,860 new); 127 permit numbers appear as one old and one new row (108 restaurants), so **4,619 distinct restaurant permits = 99.3%** of e-Stat's 4,653; no permit expired before 2026-03-31; 667 area-wide rows (vehicles and stalls). The catalogue CSV's 3,172 permit numbers are all in the PDF, so the PDF is the one source. MLIT block join (ALL_RULES, Minato control 98.0 / 0.2 / 1.8): fixed rows 87.6% block, 12.4% town-chōme, 0 unplaced; restaurants at fixed premises 88.6% / 11.4% / 0; **3,998 distinct fixed restaurant permits, 85.9% of the in-force count**; MHLW's points against the blocks a median 67 m. Rail: 21 station groups, 6 lines, the thinnest stretch 13-15 trains a day each way. Downloads (the brief rules' standing list): MLIT's 33202 block and chōme files, MHLW's 33202 food file.
+- **Shared code the build needs (Regional-2):** 自動販売形態 read as vending (75 cup-vending 喫茶店 now in Food service); 特殊形態 as temporary or mobile, its meaning confirmed in the prefecture's old 施行条例 first.
+- **Calls put to the owner:** 227 the monthly new-permit PDFs (recommend the year-end list alone, as of 2026-03-31); 228 MHLW's file as a second source (recommend leaving it out); 229 the 127 old/new pairs (recommend dropping the old-law row of a pair; no share sentence beyond the upper-bound bullets); 230 no 業態 on new-law rows, Food service 2.80 per census establishment against 1.56-1.92 elsewhere (recommend accepting and recording the ratio).
+- **Slip:** an early masking probe let full-width Latin through and printed three trade-name fragments from 営業所名称 to the agent's console (shop names, no operator name, phone or address); the scratch text file was deleted.
+
 ### 2026-10-08 - Kurashiki to B and to Regional-2; phase 2 prompts written for a Sunday start (owner, call 226)
 
 - **"brief and licence read allowed those are small items in grand scheme"** (owner, taken as yes to call 226): Kurashiki C to B, food only, from the year-end PDF; candidates 31 (A 3, B 27, C 1); Regional-2's eleventh city on page 306 and notice 216 (claimed in `docs/session_roles.md`; next free page 307, notice 217). Its brief and the PDF page's licence read run now (two agents).
