@@ -51,8 +51,14 @@ or published; every proposal waits for the owner.
   entry below; five questions for the owner there). The offline test page
   takes `&travel=1` and `&world=1`; `style_shots.mjs`, `world_probe.mjs`,
   `style_test.mjs` and `crop_disputed.py` in the scratchpad.
-- **Open items, in order:** Avignon and Florence (extracts downloading,
-  owner, 2026-10-08); the full version as a renderer option (no business
+- **Done 2026-10-08: Avignon and Florence self-built** (entry below;
+  `build_pilot.sh`, `pilot_shots.mjs`, `pack_bounds.py` in the scratchpad;
+  the extracts are copies, the owner's originals stay in Downloads).
+  Master moved since this branch (line registry, 34 maps re-rendered,
+  `map_common.py` about 160 lines): merge it only before this branch's own
+  push, and re-run `check_render_current` after.
+- **Open items, in order:** the owner's two open style questions (label
+  language, railway land over parks); the full version as a renderer option (no business
   data, the hard line enforced by a check); white line casings and white
   station dots in Travel for the owner's screenshots; Protomaps' dark
   flavor in Travel; the Overview Business/Travel toggle (`app/`, branch
@@ -60,6 +66,79 @@ or published; every proposal waits for the owner.
   non-Google font (item 17 below); the Free Worker against an R2 custom
   domain comparison (needs the owner's Cloudflare account and the
   Cloudflare terms read first).
+
+### 2026-10-08 - Which surface yields in a clash; the Travel style questions answered; Avignon and Florence self-built (owner; measured)
+
+- **Precedence between the surfaces (owner, 2026-10-08).** The site is
+  senior to its Travel view: where they clash (a colour against the
+  business pins, say), the Travel view makes the compromise, never the
+  site. The full version competes with neither; it runs mostly parallel
+  to the site's Travel view, but the compromises that view needs do not
+  carry over. A choice made on its own merit can serve both: the plum
+  station-area border stays in both because it reads better, not only
+  because it clears the pins (owner). Built as `variant: "site"` (the
+  default, used by `OpenBasemap`) and `variant: "full"` in
+  `travelStyle()`.
+- **The questions of the previous entry, answered (owner, relayed by
+  transit-globe, 2026-10-08).**
+  1. `unrecognized_region` and `unrecognized_macroregion`: dotted, the same
+     neutral rule as `unrecognized_country`. Done.
+  2. World map, country lines only: kept.
+  3. Tighter dots, judged on screenshots: `[0, 3]`, `[0, 2]` and
+     `[0, 1.5]` compared on world-zoom crops of Kashmir, Crimea and Cyprus,
+     and the Horn of Africa; only `[0, 1.5]` (1.5 px dots 2.25 px apart
+     centre to centre) keeps short segments reading as a line. Set.
+  4. Aerial lift recoloured: by the same CIE76, the burnt orange #d84315
+     sat 8.3 from the tram city-dot colour #c2410c (under the hard floor
+     of 10) and 19.3 from Tokyo's Marunouchi red (transit-globe's
+     measurement). Lifts are now told apart by pattern, the cartographic
+     thin dark line (#444444) with cross ticks from zoom 13; no pilot pack
+     has a cable car, so the ticks are checked for style errors only, not
+     yet seen on screen. Ferries stay dashed: crimson #b0004f in the site
+     variant (fine by the owner: 42.8 from Marunouchi red, 51.6 from JR red
+     #e60012), and in the full variant, which has no pins, blue #1e88e5,
+     chosen as at least 50 from everything the full version draws (51 from
+     the plum border, 57 from the water tint).
+  5. The site's label language (Spanish first against the app's English
+     over local script) is still open.
+- **New question: railway land over parks.** In Florence, OSM's
+  railway-land polygons along the Pisa line overlap the Cascine park, and
+  the Travel style paints railway land (lavender) over parks, so a
+  racecourse the stock style showed green turns lavender at z15 (5.7.2
+  never draws railway land). Parks over railway land would keep the green;
+  railway land on top keeps the corridor continuous. Screenshot:
+  `shots/pilot/pilot_sheet.png` in the scratchpad.
+- **Avignon and Florence built from the owner's extracts** (Geofabrik
+  `provence-alpes-cote-d-azur-261006`, 390,142,851 bytes, sha256
+  b02b440e...eaa226d; `centro-261006`, 384,646,965 bytes, sha256
+  ff41ffef...9b01a50), each box the stations' extent plus 10 km in the
+  city's UTM zone (the same method gives Mendoza's box within about 1 km):
+
+  | | Box | Time | Peak | Size | Index estimate (planet build, 2026-10-07) |
+  |---|---|---|---|---|---|
+  | Mendoza | -68.9700,-32.9960,-68.7260,-32.7670 | 3 min 18 s | 3.27 GB | 3.89 MB | 4.13 MB (extracted, measured) |
+  | Avignon | 4.6724,43.8408,4.9690,44.0305 | 2 min 41 s | 3.39 GB | 12.1 MB | 17.5 MB |
+  | Florence | 11.0707,43.6765,11.3906,43.8904 | 2 min 17 s | 3.13 GB | 18.1 MB | 20.7 MB |
+
+  The two estimates are for a slightly larger box and include the world's
+  low zooms and land cover, so the sizes compare only roughly. Both packs
+  render offline in stock and Travel style at z13 and z15 with no errors
+  and no outside requests; neither carries a disputed line. Every build
+  so far peaks between 3.1 and 3.4 GB under `-Xmx5g` and takes under
+  3.5 min; Natural Earth's read is about half of each.
+- **Store decisions from transit-globe that touch this repo (owner,
+  2026-10-08; store requirements unverified).** Android first, Apple
+  later, the PWA at the core. (1) Packs are never bundled into an app
+  binary (ODbL 4.7, no technological protection); they stay separate,
+  free downloads, so if a Worker serves Z/X/Y tiles the raw `.pmtiles`
+  stay downloadable from the shared hosting with a plain public offer.
+  (2) A TWA proves site ownership through `/.well-known/assetlinks.json`
+  on the PWA's own domain, which favours an owned domain over
+  `workers.dev` in the hosting choice. (3) An iOS version may need
+  MapLibre Native: `travelStyle()` returns plain style-spec JSON (legacy
+  filters, dash arrays, round caps), all supported there, so a build can
+  write it out as `style.json`. (4) Each project hosts its own privacy
+  page. (5) The export contract is unchanged.
 
 ### 2026-10-08 - The shared Travel style built as one filter; disputed lines dotted, world map label-free (built, owner to review)
 
