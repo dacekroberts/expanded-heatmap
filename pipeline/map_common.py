@@ -2070,6 +2070,57 @@ _PLACE_SEARCH_TEMPLATE = r"""
                 "ln": "lane", "mt": "mount", "ft": "fort", "sq": "square", "fwy": "freeway",
                 "expy": "expressway", "ctr": "center", "jct": "junction", "ne": "northeast",
                 "nw": "northwest", "se": "southeast", "sw": "southwest"};
+    // Street words that LEAD a name in the local language ("Rue Peel", "Carrer
+    // de Balmes"): a query beginning with one asks for a street, as an English
+    // one ending with "St" does.
+    var STREET_LEAD = {};
+    // The local languages' words (batch 2a, 2026-10-08), switched on by the
+    // index's declared languages (languages.local), never for every map: a
+    // Czech "a" as a connector would split "Avenue A and 5th" in an English
+    // city. join: the word between two streets ("Rue Neuve et Boulevard
+    // Adolphe Max"); stop: articles a query may add or leave out; street and
+    // lead: street words, optional on streets, lead ones first in a name;
+    // station: a station word; abbr: abbreviations that are not prefixes
+    // ("St-Denis" for Saint-Denis; "avda" tries "av", which begins both
+    // avinguda and avenida). Words as norm() leaves them, accents stripped.
+    var LANG_WORDS = {
+        fr: {join: ["et"], stop: ["de", "du", "des", "la", "le", "les", "l", "d"],
+             street: ["rue", "avenue", "av", "boulevard", "bd", "chemin", "ch", "place", "quai",
+                      "allee", "impasse", "montee", "square", "promenade"],
+             lead: ["rue", "avenue", "av", "boulevard", "bd", "chemin", "ch", "quai", "allee", "impasse"],
+             station: ["gare"], abbr: {"bd": "boulevard", "st": "saint", "ste": "sainte", "ch": "chemin"}},
+        ca: {join: ["i"], stop: ["de", "del", "dels", "la", "el", "les", "els", "l", "d"],
+             street: ["carrer", "c", "avinguda", "av", "avda", "passeig", "pg", "placa", "rambla",
+                      "rbla", "ronda", "travessera", "via", "passatge"],
+             lead: ["carrer", "c", "avinguda", "av", "avda", "passeig", "pg", "rambla", "rbla",
+                    "ronda", "travessera", "passatge"],
+             station: ["estacio"], abbr: {"pg": "passeig", "rbla": "rambla", "avda": "av"}},
+        es: {join: ["y"], stop: ["de", "del", "la", "el", "los", "las"],
+             street: ["calle", "c", "avenida", "av", "avda", "paseo", "plaza", "ronda", "pasaje"],
+             lead: ["calle", "c", "avenida", "av", "avda", "paseo", "ronda", "pasaje"],
+             station: ["estacion"], abbr: {"avda": "av", "pza": "plaza", "pso": "paseo"}},
+        cs: {join: ["a"], stop: [],
+             street: ["ulice", "ul", "trida", "namesti", "nam", "nabrezi"],
+             lead: [], station: ["stanice", "nadrazi"], abbr: {}},
+        nl: {join: ["en"], stop: ["de", "het"],
+             street: ["straat", "laan", "steenweg", "plein", "kaai", "dreef"],
+             lead: [], station: [], abbr: {}}
+    };
+    var PAIR_SPLIT = /\s+(?:and|at|x|y)\s+|\s*[&\/@]\s*/;
+    function useLanguages(codes) {
+        var joins = ["and", "at", "x", "y"];
+        (codes || []).forEach(function (c) {
+            var w = LANG_WORDS[c];
+            if (!w) return;
+            w.join.forEach(function (x) { if (joins.indexOf(x) < 0) joins.push(x); STOP[x] = 1; });
+            w.stop.forEach(function (x) { STOP[x] = 1; });
+            w.street.forEach(function (x) { STREET_WORDS[x] = 1; });
+            w.lead.forEach(function (x) { STREET_LEAD[x] = 1; });
+            w.station.forEach(function (x) { STATION_WORDS[x] = 1; });
+            Object.keys(w.abbr).forEach(function (k) { ABBR[k] = w.abbr[k]; });
+        });
+        PAIR_SPLIT = new RegExp("\\s+(?:" + joins.join("|") + ")\\s+|\\s*[&\\/@]\\s*");
+    }
     var CJK = /[@@CJK_CLASS@@]/;
     var MARKS = /[@@MARKS_CLASS@@]/g;
     var data = null, own = null, loading = null, fold = null, marker = null, timer = null;
@@ -2200,6 +2251,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
             .then(function (txt) {
                 var ix = JSON.parse(txt);
                 fold = ix.fold || null;
+                useLanguages(ix.languages && ix.languages.local);
                 own = ownItems(map);
                 var rows = ix.rows.map(function (r) {
                     return prep({kind: ix.kinds[r[0]], lat: r[1], lon: r[2], name: r[3],
@@ -2267,8 +2319,9 @@ _PLACE_SEARCH_TEMPLATE = r"""
     // A query in two halves ("Clark and Lake", "5th & Pike", "四条 / 烏丸"):
     // each half's words, street words left out unless that empties it.
     function pairOf(q) {
-        var parts = norm(q).split(/\s+(?:and|at|x|y)\s+|\s*[&\/@]\s*/).map(function (p) {
-            var ws = words(p), core = ws.filter(function (w) { return !STREET_WORDS[w]; });
+        var parts = norm(q).split(PAIR_SPLIT).map(function (p) {
+            // Articles left out too: "Carrer de Aragó" for Carrer d'Aragó.
+            var ws = words(p), core = ws.filter(function (w) { return !STREET_WORDS[w] && !STOP[w]; });
             return core.length ? core : ws;
         }).filter(function (ws) { return ws.length; });
         return parts.length === 2 ? parts : null;
@@ -2316,7 +2369,9 @@ _PLACE_SEARCH_TEMPLATE = r"""
         // A street word last asks for a street ("Lake Shore Dr" before the
         // Lake Shore Drive Synagogue, whose name the query begins); first, it
         // is often Saint or Doctor ("St Mary's", "Dr Martin Luther King").
-        var streetQ = qs.length > 1 && STREET_WORDS[qs[qs.length - 1]];
+        // In French, Catalan or Spanish the street word leads ("Rue Peel").
+        var typeW = STREET_WORDS[qs[qs.length - 1]] ? qs[qs.length - 1] : (STREET_LEAD[qs[0]] ? qs[0] : null);
+        var streetQ = qs.length > 1 && typeW;
         out.forEach(function (d) {
             var s = KIND_RANK[d.kind] * 3 + Math.min(d.name.length, 40) / 10 + d._weak * 20;
             if (d.bares.indexOf(bare) >= 0 || d.names.some(function (n) { return norm(n) === nq; })) s -= 100;
@@ -2327,7 +2382,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
             if (pair && d.kind === "crossing" && pairHit(d, pair)) s -= 60;
             if (streetQ && (d.kind === "street" || d.kind === "crossing" || d.kind === "junction")) s -= 45;
             // And its own type first: "NE 45th St" is the Street, not the Court.
-            if (streetQ && d.hay.indexOf(" " + (STREET_TYPE[qs[qs.length - 1]] || qs[qs.length - 1]) + " ") >= 0) s -= 5;
+            if (streetQ && d.hay.indexOf(" " + (STREET_TYPE[typeW] || ABBR[typeW] || typeW) + " ") >= 0) s -= 5;
             // Whole words before parts: "Art Institute" before "Arturo ...".
             if (qs.every(function (w) { return d.hay.indexOf(" " + w + " ") >= 0; })) s -= 4;
             d._s = s;

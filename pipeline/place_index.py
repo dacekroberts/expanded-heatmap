@@ -345,7 +345,9 @@ WAY_WORDS = {
     # Batch 2a (2026-10-08), checked against each city's named minor ways.
     "fr": ("rue", "avenue", "boulevard", "place", "quai", "allée", "chemin", "impasse", "passage",
            "pont", "passerelle", "cours", "montée", "escalier", "escaliers", "promenade", "square",
-           "sentier", "voie", "piste", "traverse", "ruelle", "esplanade", "parvis", "galerie"),
+           "sentier", "voie", "piste", "traverse", "ruelle", "esplanade", "parvis", "galerie",
+           # Québec street types (Montréal's named footways, 2026-10-08).
+           "terrasse", "croissant", "carré", "côte", "carrefour", "cour", "route", "circuit"),
     "ca": ("carrer", "avinguda", "passeig", "plaça", "rambla", "travessera", "via", "camí",
            "passatge", "pont", "ronda", "baixada", "pujada", "costa", "escales", "placeta",
            "jardins", "corriol", "sender"),
@@ -399,9 +401,23 @@ RESIDENTIAL_BUILDINGS = {"house", "residential", "apartments", "detached", "dorm
 # A historic building named as a home is one ("Faulkner House", "Walker
 # Residence"; Vancouver, 2026-10-08), unless its building tag says otherwise.
 HOME_NAME = re.compile(r"\b(house|residence|cottage|mansion|farmhouse|homestead)$", re.I)
+# The same in a local language, where the house word LEADS the name
+# ("Maison Joseph-Masson", Montréal, 2026-10-08: historic=manor on
+# building=yes, not open to visitors). Leading only: a Dutch "-huis" ending is
+# a town hall (stadhuis) or a hospital (ziekenhuis), and Prague's "Obecní dům"
+# is a civic building.
+HOME_NAME_LEAD = {"fr": ("maison", "manoir"), "ca": ("casa",), "es": ("casa",),
+                  "cs": ("dům", "vila"), "nl": ("huis",)}
 
 
-def _home(tags, names):
+def _home_name(name, local):
+    if HOME_NAME.search(name):
+        return True
+    first = (re.findall(r"\w+", name.lower()) or [""])[0]
+    return any(first in HOME_NAME_LEAD.get(c, ()) for c in local)
+
+
+def _home(tags, names, local=()):
     """True for a home: residential land, a house or an apartment building,
     private access, or a historic house."""
     if tags.get("historic") == "district":
@@ -412,7 +428,7 @@ def _home(tags, names):
             # By name only where the building tag says no more: Kyoto's
             # "Kwasan Observatory Solar House" is building=university.
             or (tags.get("historic") and tags.get("building") in (None, "yes")
-                and any(HOME_NAME.search(n) for n in names)))
+                and any(_home_name(n, local) for n in names)))
 
 
 def _public_home(tags):
@@ -741,7 +757,7 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=()):
             # grounds were tagged leisure=park on landuse=residential
             # (2026-10-07); Vancouver's register of heritage houses carries the
             # names of the families who built them (2026-10-08).
-            if _home(t, names) and not _public_home(t):
+            if _home(t, names, local) and not _public_home(t):
                 report["landmark_dropped_residential"] += 1
                 continue
             # A landmark named as a bare Japanese personal name (the map's sign

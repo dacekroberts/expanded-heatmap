@@ -46,7 +46,17 @@ PLACE_WORD = re.compile(
     r"conservancy|preserve|forest|woods|island|bay|point|ravine|greenway|commons|common|oval|lawn|"
     r"sculpture|mural|fountain|ministries|assembly|tabernacle|congregation|kingdom hall|masjid|"
     r"zoo|aquarium|library|theatre|theater|observatory|lighthouse|cenotaph|marsh|wetland|slough|"
-    r"meadow|meadows|grove|playlot|ballfield|arboretum|conservatory|pier|wharf|dock|harbour|harbor)\b",
+    r"meadow|meadows|grove|playlot|ballfield|arboretum|conservatory|pier|wharf|dock|harbour|harbor|"
+    # French, Catalan, Spanish, Czech and Dutch (batch 2a, 2026-10-08).
+    r"parc|église|eglise|chapelle|basilique|cathédrale|oratoire|musée|jardin|jardins|fontaine|"
+    r"statue|cimetière|île|mont|colline|bibliothèque|théâtre|plage|marché|monument|stade|"
+    r"esplanade|calanque|anse|fort|abbaye|couvent|hôtel de ville|mairie|quartier|"
+    r"església|capella|basílica|catedral|museu|jardí|font|platja|biblioteca|teatre|mercat|castell|"
+    r"monestir|turó|muntanya|barri|parque|iglesia|museo|jardín|playa|mercado|castillo|"
+    r"kostel|kaple|katedrála|bazilika|klášter|muzeum|zahrada|zahrady|sady|hřbitov|vrch|hora|ostrov|"
+    r"socha|pomník|divadlo|knihovna|hrad|zámek|synagoga|rotunda|vyhlídka|"
+    r"kerk|kapel|kathedraal|basiliek|tuin|fontein|standbeeld|schouwburg|bibliotheek|begraafplaats|"
+    r"abdij|wijk|plein)\b",
     re.I)
 
 

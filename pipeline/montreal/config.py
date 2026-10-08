@@ -332,3 +332,26 @@ MONTREAL_BBOX = {
     "lon_min": -74.05,
     "lon_max": -73.40,
 }
+
+# --- Place search (sample batch 2a, 2026-10-08) -------------------------------
+
+# OSM's places inside the five station cities of the agglomeration (the map's stations joined to
+# agglomeration.geojson, 2026-10-08): Montréal 1634158, Mont-Royal 197567,
+# Pointe-Claire 197576, Kirkland 197577, Sainte-Anne-de-Bellevue 197580
+# (admin_level 8, one match each, looked up 2026-10-08),
+# by pipeline/place_index_fetch.py (two queries), indexed by
+# step2b_place_index.py (DECISIONS.md "Four ideas assessed", item 3); an area
+# id is 3600000000 plus the relation's.
+PLACE_AREA = "(id:3601634158,3600197567,3600197576,3600197577,3600197580)"
+# NEW file names: data/ is shared by every worktree.
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-08.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-08.json"
+# The local language(s) of OSM's names here: French; English is measured anyway (place_index.LANGUAGES).
+PLACE_LANGUAGES = ("fr",)
+PLACE_FOLD = None
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+PLACE_REVIEWED = {}
+# OSM objects a reading by eye found to be a business or a home that no rule
+# in place_index.py catches, each with why (place_index.build, `dropped`).
+PLACE_DROPPED = {}
