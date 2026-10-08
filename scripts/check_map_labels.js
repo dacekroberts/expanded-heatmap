@@ -177,7 +177,18 @@ if (!found) {
   else {
     const tr = (doc.getElementById('map-actions') || toggle).getBoundingClientRect();
     if (tr.left < 0 || tr.right > width || tr.top < 0) problems.push('theme toggle out of view');
-    for (const l of labels) if (overlaps(l.r, tr)) problems.push(`under theme toggle: ${l.text}`);
+    // Each VISIBLE button, not the row's box: at phone width the row wraps to
+    // two lines and its box takes in the empty corner beside the shorter line
+    // (review lanes 2 and 4, 2026-10-07: Caen's "Tram T2" and Most flagged
+    // with no button touched).
+    const actions = doc.getElementById('map-actions');
+    const buttons = actions
+      ? Array.from(actions.children).filter(b => !b.hidden && b.getBoundingClientRect().width > 0)
+      : [toggle];
+    for (const b of buttons) {
+      const br = b.getBoundingClientRect();
+      for (const l of labels) if (overlaps(l.r, br)) problems.push(`under ${b.id || 'a map button'}: ${l.text}`);
+    }
     const was = doc.body.classList.contains('dark-base');
     toggle.click();
     const flipped = doc.body.classList.contains('dark-base') !== was;
