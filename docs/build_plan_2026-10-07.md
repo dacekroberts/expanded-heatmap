@@ -79,6 +79,7 @@ A session that runs out asks Staging for more. Unused numbers are released when 
 
 - **The macro map's region views are Cleanup's** (owner, call 198, 2026-10-07: "198 yes, cleanup builds them"). Cleanup builds Japan's eight regions plus Osaka Prefecture on its own branch at the phase 1 review time, and Europe West, Europe East, Germany and Benelux are on its europe-split branch (call 197). Build sessions never add or change region views, REGION_LABELS_ALSO, label tiers or macro label offsets. This overrides the japan-city skill's "made by the first wave-4 city to land". A check_macro_labels failure only for new cities labelled in no view goes in the batch report and is left.
 - Read CLAUDE.md, `docs/session_roles.md` and the session's skills.
+- A brief that cites `docs/decisions_drafts/staging.md` means the entry of that heading now in `DECISIONS.md` (or, for entries dated 2026-10-03 and earlier, `docs/decisions/`): staging's drafts were folded on 2026-10-08 (Cleanup, 9be520f2).
 - Run `python scripts/brief_check.py <city>` before any code; a failing check is a brief to correct.
 - Apply each brief's "Answered by the owner" calls as written, and log every judgment call in `docs/decisions_drafts/<branch>.md`.
 - **Parallel work.** Up to three subagents may build cities in parallel, each in its own `pipeline/<city>/` and data directory.
@@ -167,7 +168,7 @@ Build, in this order, from each city's brief in docs/build_briefs/ and the japan
 
 The briefs' shared-code items are already in shared code (the foundation, 7ab440f9 and 521d28fc; the japan-city skill's foundation section names each rule). If one is missing, it is a parked call, not a city-local fix. Leave "rules" out of each japan.CITIES entry: the new rules are on by default for new cities, and japan.py refuses an entry that names WAVE2_RULES. A zipped register (Sagamihara's) needs a city source_rows.
 
-Licence calls already answered (docs/decisions_drafts/staging.md, "Licence reads for the Japan builds"): Kawaguchi's 「データ利用のみ自由です」 is read permissively, its licence CC BY 2.1 JP (call 208); Fujisawa's individual-operator file goes through the name rule. Merge notes: keep both sides at japan_register.OPERATOR_COLS_WAVE5 and at the WAVE5 switches (name_city, default_joined).
+Licence calls already answered (DECISIONS.md, "Licence reads for the Japan builds"): Kawaguchi's 「データ利用のみ自由です」 is read permissively, its licence CC BY 2.1 JP (call 208); Fujisawa's individual-operator file goes through the name rule. Merge notes: keep both sides at japan_register.OPERATOR_COLS_WAVE5 and at the WAVE5 switches (name_city, default_joined).
 
 At the batch's end, report to Staging Session as the plan says, and write a handoff note for the next session in your group.
 ```
@@ -203,7 +204,7 @@ Build, in this order, from each city's brief in docs/build_briefs/ and the japan
 
 The briefs' shared-code items are already in shared code (the foundation, 7ab440f9 and 521d28fc; the japan-city skill's foundation section names each rule). If one is missing, it is a parked call, not a city-local fix. Leave "rules" out of each japan.CITIES entry: the new rules are on by default for new cities, and japan.py refuses an entry that names WAVE2_RULES.
 
-Licence calls already answered (docs/decisions_drafts/staging.md, "Licence reads for the Japan builds" and the 2026-10-08 Kurashiki entries): Yamagata §4, a use-triggered reimbursement, accepted (call 206); Matsumoto's two use-triggered clauses accepted, the credit naming CC BY 4.0 in the city's format plus LinkData's CC BY 3.0 mark (call 207); Okazaki 5(5), use-triggered, accepted (call 214); Kurashiki's barber and beauty lists stay out (call 225). Matsue's 八雲村 is a config key (its brief says how). Keep BODIK calls at least 20 s apart. Merge notes: keep both sides at japan_register.OPERATOR_COLS_WAVE5 and at the WAVE5 switches (name_city, default_joined).
+Licence calls already answered (DECISIONS.md, "Licence reads for the Japan builds" and the 2026-10-08 Kurashiki entries): Yamagata §4, a use-triggered reimbursement, accepted (call 206); Matsumoto's two use-triggered clauses accepted, the credit naming CC BY 4.0 in the city's format plus LinkData's CC BY 3.0 mark (call 207); Okazaki 5(5), use-triggered, accepted (call 214); Kurashiki's barber and beauty lists stay out (call 225). Matsue's 八雲村 is a config key (its brief says how). Keep BODIK calls at least 20 s apart. Merge notes: keep both sides at japan_register.OPERATOR_COLS_WAVE5 and at the WAVE5 switches (name_city, default_joined).
 
 At the batch's end, report to Staging Session as the plan says, and write a handoff note for the next session in your group.
 ```

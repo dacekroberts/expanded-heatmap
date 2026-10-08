@@ -6,8 +6,10 @@ file stays for its history and the pointers other docs make to it. Read once,
 then follow the pointers. **Delete a section when its item is done.** The
 reasoning behind every move below is in `docs/decisions_drafts/staging.md`
 (newest first) until Cleanup folds it into `DECISIONS.md`. **That file was
-handed off final on 2026-10-08** (owner; Cleanup folds it, then deletes it);
-a new staging entry starts a fresh `docs/decisions_drafts/staging.md`.
+handed off final on 2026-10-08 and folded the same day** (Cleanup, 9be520f2:
+its entries are in `DECISIONS.md` under the same headings, those dated
+2026-10-03 and earlier in `docs/decisions/`); a new staging entry starts a
+fresh `docs/decisions_drafts/staging.md`.
 
 ## Before starting
 
