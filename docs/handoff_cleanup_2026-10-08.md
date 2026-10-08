@@ -23,11 +23,17 @@ items are done or moved into PLAN.
 - **Worktrees left:** cleanup, staging, analytics, visual, two pilots, and
   Cleanup's `review-prep` (branch `legend-dot-georgia`, held for review
   time; its `data` and `.venv-lean` are junctions: unlink each alone first).
-  - **`charming-lumiere-930853` (place search): NEVER remove, prune or
+  - **`place-search` (place search): NEVER remove, prune or
     retire it until place search has landed on master** (owner, 2026-10-08:
     "block attempts to delete the worktree until the changes have landed";
     this covers cleanup-sweep's retire-worktrees scope). After the landing,
-    unlink its `data/` junction alone, then remove it.
+    unlink its `data/` junction alone, then remove it. MOVED 2026-10-08 from
+    `charming-lumiere-930853`; branch renamed `claude/charming-lumiere-930853`
+    to `place-search` (tip `2056d9dc`: batch 2b's `223b1e95` plus the
+    reference updates). The idle 2a and 2b sessions locked the folder, so: the
+    `data` junction unlinked alone, both sessions archived (the app kept the
+    folder and branch), moved, junction recreated, `check_worktree_data.py`
+    passed. Batch 3 starts there.
   - **`basemap`** (open basemap switch and app groundwork), MOVED 2026-10-08
     from `epic-neumann-5aa0a6`; branch renamed `claude/epic-neumann-5aa0a6`
     to `basemap` (tip `eabd02d7`). Its `data/` had been a real folder whose
@@ -47,8 +53,7 @@ items are done or moved into PLAN.
     to `place-search` and `basemap`. Then update every handoff, memory note,
     batch prompt and `docs/session_roles.md`'s table naming the old ones. A
     move keeps the branch, files and junctions; it is not a removal, so the
-    place-search hold still applies to the new path. Batch 2b tells Cleanup
-    when it is ready; the owner starts batch 3 after the move.
+    place-search hold still applies to the new path. Both DONE 2026-10-08.
   - **Do not ARCHIVE a pilot session before its move.** The app's archive
     "by default cleans up its worktree" and archives side sessions sharing
     it. Batch 2a's session (nothing pending) and the basemap session wait
