@@ -82,8 +82,9 @@ st.markdown(
 - The list gives an address but no location. Each address is matched to MLIT's address reference
   data, which places most at their street block; where only the district can be found, the dot
   sits at the district's center.
-- The list names an operator only where it is a company, so a trade name that is its operator's
-  own name cannot be checked here.
+- The list names an operator only where it is a company, so a trade name that is its operator's own
+  name cannot be checked here; where a trade name is written as a bare personal name, the dot shows
+  its permit type instead.
 - Names and permit types are shown in Japanese, as the city records them.
 - **About nine in ten storefronts sit within a ring.**
 """
