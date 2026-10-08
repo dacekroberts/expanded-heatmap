@@ -137,8 +137,11 @@ or published; every proposal waits for the owner.
   site, blue in the full version), so one-ferry cities stay as they are;
   each route's legend row takes its route's colour; contrast is measured
   against the water tint and the other ferry routes, not the transit
-  lines. Built with the first multi-ferry city piloted, so it is tested on
-  real routes.
+  lines. The owner's example: Hong Kong with orange, yellow, green and
+  purple dashed ferry routes (a yellow dash needs a deeper amber to read
+  on the pale ground and the light-blue water; measured when Hong Kong is
+  piloted). Built with the first multi-ferry city piloted, so it is tested
+  on real routes.
 - **Station dots sized by zoom (owner agreed, 2026-10-08).** Pilot pages
   (full version and the site's Travel view): one pass on zoom end sets
   every dot (and line width) from a zoom table, interchanges a step
