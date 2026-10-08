@@ -150,15 +150,14 @@ or published; every proposal waits for the owner.
   timetables, which version 1 does not carry. Until fetched, such a line
   exports with `geometry_status: "cut_only"` if a cut exists, or
   `"not_held"` with no geometry, never silently left out.
-- **Open for the owner: how far is "in full"?** A Japanese JR line, the
-  Tōkaidō or the Sanyō, runs hundreds of kilometres beyond the city. Proposed:
-  urban lines (metro, light rail, tram, people mover, funicular, monorail)
-  go whole to their termini; mainline, commuter and intercity lines are
-  carried to the edge of the city's basemap pack (its extent plus 10 km,
-  the area the app can draw offline), with the part beyond marked
-  `geometry_status: "clipped_to_export_extent"`. The alternative, every line
-  whole, would make some Japanese exports carry much of the national
-  network.
+- **How far is "in full" (owner, 2026-10-07, relayed by Cleanup: yes to
+  the proposal).** Urban lines (metro, tram, light rail) go whole to their
+  termini; mainline and commuter lines are carried to the edge of the city's
+  basemap pack (its extent plus 10 km, the area the app can draw offline),
+  with the part beyond marked `geometry_status: "clipped_to_export_extent"`.
+  The reason: a Japanese JR line, the Tōkaidō or the Sanyō, runs hundreds of
+  kilometres beyond the city, and every line whole would make some Japanese
+  exports carry much of the national network.
 - **Out of rail scope altogether:** aerial lifts (Cablebús, the Maokong
   Gondola) are not rail; whether the app wants them is the app project's
   question, and the export leaves them out unless the owner says otherwise.
@@ -272,6 +271,27 @@ or published; every proposal waits for the owner.
   at 375 x 650, 375 x 812, 1280 x 650 and 1280 x 900: no problems, the credit
   uncovered at all five points, the legend clamp in force, OSM's tiles gone
   from the page.
+- **The line highlight survives the switch (owner, 2026-10-07: it applies
+  to every interactive map, "unless the map is a static copy").** Tested with
+  real input in headless Edge on Mendoza: desktop 1280 x 800 with a mouse
+  (hover and fine pointer), and 375 x 812 with touch emulation (coarse
+  pointer, no hover), on today's map, the switch page on Standard, and the
+  switch page on Open. All three gave identical results in both modes:
+  hovering the line lights it and its legend row, and moving off clears it;
+  a click or tap on the line selects it, and on empty map clears it; a
+  station shows its name (tooltip on hover, the tap panel on touch); the
+  legend opens and a row picks its line; the line label is drawn in the
+  frame; the credit is on top with its link opening a new tab; dragging
+  moves the map. Embedded in a parent page with a Global View link, the map's
+  own Global View button shows and navigates the parent, on both basemaps
+  and both inputs. Why the GL canvas does not intercept: maplibre-gl-leaflet
+  puts it in Leaflet's tile pane (z-index 200), under the overlay pane (400)
+  where the lines are drawn, and its canvas has `pointer-events: none`; at
+  the tested line point the topmost element was the line's own path on
+  every basemap. One behaviour seen on all three and so not new: on desktop,
+  a second click on a legend row unpicks the line, but it stays lit while
+  the mouse is still over the row, because hovering a row previews its line
+  by design.
 - **Not done:** a drift check over all 170 cities (this worktree has no
   `data/` junction; the default path is unchanged by construction and was
   shown equal on Mendoza), a deploy-verify (review time), the switch's
