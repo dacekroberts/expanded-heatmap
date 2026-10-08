@@ -152,7 +152,21 @@ or published; every proposal waits for the owner.
   folds an open legend away (the panel takes the full width); a legend-row
   tap still picks its line and leaves the legend open; desktop unchanged.
   Tested on Tokyo at 390 x 844. The owner decides on the phone whether it
-  stays.
+  stays. And the reverse (owner, on trial): opening the legend closes a
+  station's panel, the side-by-side layout kept as the fallback; tested
+  both ways, no errors.
+- **Unique on-map codes in the full version (owner, 2026-10-08):** no two
+  lines of a city share a label. Tokyo: KSM, KSO, KSK; KKM, KKA; SI, ST,
+  SY; TS, TK, TD (the site keeps the operators' shared codes; the site is
+  senior). `full_travel["labels"]` overrides per page, and the renderer
+  refuses a full page with a shared label. Whether the site's Tokyo map
+  should adopt them is a separate review-time question (a Tokyo
+  re-render).
+- **The picked line always shows its pill (owner, 2026-10-08):** placed
+  first, no minimum length, may cover dots when nothing clear is left.
+  Tokyo, all 52 picked in turn: 52 of 52 at the widest view on desktop and
+  phone; at zoom 12 on a phone 40, the rest at most 16 px on screen except
+  Seibu Shinjuku (90 px, under the buttons or the credit).
 - **The label-language switch, two refinements for the app (owner,
   2026-10-08)**, after Mendoza on a phone showed no visible change (few of
   its features have an English name in OSM, so English falls back to the
