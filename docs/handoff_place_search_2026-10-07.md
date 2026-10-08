@@ -181,7 +181,12 @@ on its own before removing the worktree (`docs/session_roles.md`, step 1).
   gzipped): intersections in a second file loaded only for "X and Y" queries,
   563 to 269 KB at first open; crossings as street references, 501 KB;
   4-decimal coordinates, 504 KB; dropping residential-only pairs, 471 KB (a
-  loss). PLAN.md has the item.
+  loss). PLAN.md has the item. **The three lossless ones are BUILT
+  (2026-10-08):** each index is two files, `<city>.json` and
+  `crossings/<city>.json` (fetched only for an intersection search, rows
+  `[lat, lon, street row, street row]`), coordinates to 4 decimals; Seattle's
+  first open 227 KB gzipped and about 11 MB in the page. The ring-bounded
+  cut is held in reserve with its boundaries (PLAN.md).
 
 - **The WIP suggestions** on a real phone: the open list still covers about
   half the map at 343 px; the pills stack one per row at 190 px.

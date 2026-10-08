@@ -40,6 +40,22 @@ def index_path(slug):
     return STATIC_DIR / f"{slug}.json"
 
 
+def crossings_path(slug):
+    """The street-pair intersections, a file of their own (owner, 2026-10-08:
+    the index's size, a top-line item): fetched only when a search asks for an
+    intersection, so a first search downloads and holds about half as much
+    (Seattle 563 to 269 KB gzipped, measured)."""
+    return STATIC_DIR / "crossings" / f"{slug}.json"
+
+
+def _site_url(path):
+    """The site path of a file under app/static/, stamped with its content
+    hash (index_url's reason)."""
+    import hashlib
+    rel = path.relative_to(STATIC_DIR.parent).as_posix()
+    return f"/app/static/{rel}?v={hashlib.sha256(path.read_bytes()).hexdigest()[:12]}"
+
+
 def summary_path(slug):
     return Path(__file__).parent.parent / "outputs" / slug / "place_search.json"
 
@@ -49,10 +65,19 @@ def write(index, slug):
     summary, outputs/<slug>/place_search.json: the languages the page names,
     the count and the retrieval date. The app reads the summary, never the
     index, so a page load costs no megabyte."""
+    # The crossings first: the index carries their file's hashed path, so a
+    # rebuilt crossings file is never served from a browser's old copy.
+    cross = index.pop("crossing_rows")
+    cpath = crossings_path(slug)
+    cpath.parent.mkdir(parents=True, exist_ok=True)
+    cpath.write_bytes(json.dumps({"license": index["license"], "city": index["city"],
+                                  "part_of": f"{slug}.json", "rows": cross},
+                                 ensure_ascii=False, separators=(",", ":")).encode("utf-8"))
+    index["crossings"] = _site_url(cpath)
     out = index_path(slug)
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_bytes(json.dumps(index, ensure_ascii=False, separators=(",", ":")).encode("utf-8"))
-    summary = {"index": f"app/static/places/{slug}.json", "places": len(index["rows"]),
+    summary = {"index": f"app/static/places/{slug}.json", "places": len(index["rows"]) + len(cross),
                "data_retrieved": index["license"]["data_retrieved"], "languages": index["languages"]}
     summary_path(slug).write_bytes(
         (json.dumps(summary, ensure_ascii=False, indent=2) + "\n").encode("utf-8"))
@@ -110,8 +135,10 @@ def run(config):
     if stale:
         sys.exit(f"config.PLACE_DROPPED names {stale}, not in the cache: remove them")
     out = write(index, slug)
-    print(f"Wrote {out} ({out.stat().st_size:,} bytes, {len(index['rows']):,} places) and "
-          f"{summary_path(slug).name}")
+    cpath = crossings_path(slug)
+    print(f"Wrote {out} ({out.stat().st_size:,} bytes, {len(index['rows']):,} places), "
+          f"{cpath.relative_to(STATIC_DIR).as_posix()} ({cpath.stat().st_size:,} bytes, "
+          f"{report.get('crossing', 0):,} intersections) and {summary_path(slug).name}")
     print(f"  languages: {index['languages']['coverage']} -> the page names {index['languages']['listed']}")
     for k in sorted(report):
         print(f"  {k}: {report[k]:,}")
@@ -389,7 +416,9 @@ def _dist_m(a, b):
 
 
 def _r(x):
-    return round(x, 5)
+    # 4 decimals, about 11 m: the search jumps to zoom 16 and marks the spot
+    # with a 14 px circle (owner, 2026-10-08: index size). Was 5.
+    return round(x, 4)
 
 
 def _commercial(tags):
@@ -527,6 +556,7 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=()):
     # --- Crossings: two street names meeting at a shared node ("5th and
     # Pike"). One row per pair, unless the pair meets again far away.
     pair_pts = defaultdict(list)
+    crossings = []                            # (point, street A, street B, languages)
     for n, names in node_streets.items():
         if len(names) < 2 or n not in nodes:
             continue
@@ -546,12 +576,9 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=()):
         for cl in clusters:
             # The display pairs the local names; the alias pairs the English
             # ones, so "Shijo Karasuma" finds 四条通 / 烏丸通.
-            en_a = [x for x in street_alias.get(a, []) if x != a]
-            en_b = [x for x in street_alias.get(b, []) if x != b]
-            alias = [f"{x} / {y}" for x, y in zip(en_a[:1], en_b[:1])]
-            # In a language only where both streets are.
-            add("crossing", cl[0], [f"{a} / {b}"] + alias,
-                street_lang.get(a, set()) & street_lang.get(b, set()))
+            # Kept by the two street names, each resolved to its row below;
+            # in a language only where both streets are.
+            crossings.append((cl[0], a, b, street_lang.get(a, set()) & street_lang.get(b, set())))
 
     # --- Tagged places.
     rivers = defaultdict(list)
@@ -673,6 +700,39 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=()):
 
     rows.sort(key=lambda r: (r[0], r[3]))
     row_langs = [r.pop() for r in rows]
+    # Each crossing as [lat, lon, row of street A, row of street B]; the
+    # browser builds its name ("5th Avenue / Pike Street") and its English
+    # pair (Kyoto's "Shijo Street / Karasuma Street") from those rows. A name
+    # used by streets far apart (two 一番町) resolves to the row whose extent
+    # holds the crossing, else the nearest.
+    street_rows = defaultdict(list)
+    for i, r in enumerate(rows):
+        if r[0] == KINDS.index("street"):
+            street_rows[r[3]].append(i)
+
+    def street_at(name, pt):
+        def far(i):
+            b = rows[i][5]
+            if b and b[0] <= pt[0] <= b[2] and b[1] <= pt[1] <= b[3]:
+                return 0
+            return _dist_m(pt, (rows[i][1], rows[i][2]))
+        return min(street_rows[name], key=far) if street_rows.get(name) else None
+
+    crossing_rows, seen_cross = [], set()
+    for pt, a, b, langs in crossings:
+        ia, ib = street_at(a, pt), street_at(b, pt)
+        if ia is None or ib is None:
+            report["crossing_without_street"] += 1
+            continue
+        row = [_r(pt[0]), _r(pt[1]), ia, ib]
+        if tuple(row) in seen_cross:
+            report["crossing_duplicate"] += 1
+            continue
+        seen_cross.add(tuple(row))
+        crossing_rows.append(row)
+        row_langs.append(langs)
+        report["crossing"] += 1
+    crossing_rows.sort()
     index = {
         # ODbL 4.2(b)-(d): the licence URI and the notice travel IN the file
         # (licence read 2026-10-07; docs/data_sources.md, "Place search index").
@@ -693,5 +753,7 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=()):
         "fold": fold,
         "kinds": list(KINDS),
         "rows": rows,
+        # write() puts these in crossings_path() and their site path here.
+        "crossing_rows": crossing_rows,
     }
     return index, dict(report)

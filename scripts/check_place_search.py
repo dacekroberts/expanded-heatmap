@@ -33,6 +33,9 @@ index step measures each language's share of the places
      LICENSE carves app/static/places/ out, and docs/data_sources.md has the
      row. A field from any other source would bring that source under ODbL
      (4.4(d)).
+  A and D apply to the intersections file too (app/static/places/crossings/,
+     since 2026-10-08): the index names it under its current hash, and it
+     holds only [lat, lon, street, street] rows and the index's licence.
 """
 import hashlib
 import json
@@ -47,8 +50,10 @@ from pipeline import place_index  # noqa: E402
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-TOP_KEYS = {"license", "city", "languages", "fold", "kinds", "rows"}
+TOP_KEYS = {"license", "city", "languages", "fold", "kinds", "rows", "crossings"}
+CROSS_KEYS = {"license", "city", "part_of", "rows"}
 URL_RE = re.compile(r"/app/static/places/([a-z0-9_]+)[.]json[?]v=([0-9a-f]+)")
+CROSS_RE = re.compile(r"^/app/static/places/crossings/([a-z0-9_]+)[.]json[?]v=([0-9a-f]+)$")
 BULLET = "never leaves your browser"
 
 
@@ -82,6 +87,35 @@ def check_index(slug, index, summary):
         problems.append(f"listed {langs.get('listed')} but the rule gives {rule(langs)}")
     if langs and not langs.get("listed"):
         problems.append("no language reaches the bar: the page could name none")
+    return problems
+
+
+def check_crossings(slug, index):
+    """A and D for the intersections file (owner, 2026-10-08: a second file,
+    fetched only when a search asks for an intersection): the index names it
+    under its current hash, it holds only [lat, lon, street, street] rows
+    whose streets are street rows of the index, and it carries the index's
+    licence object, since it can be downloaded on its own."""
+    m = CROSS_RE.match(str(index.get("crossings", "")))
+    if not m or m.group(1) != slug:
+        return ["A: the index names no crossings file of its own"]
+    path = place_index.crossings_path(slug)
+    if not path.exists():
+        return [f"A: no {path.relative_to(ROOT).as_posix()}"]
+    if hashlib.sha256(path.read_bytes()).hexdigest()[:len(m.group(2))] != m.group(2):
+        return ["A: the index's crossings hash is stale (re-run the index step)"]
+    cx = json.loads(path.read_text(encoding="utf-8"))
+    problems = []
+    if set(cx) != CROSS_KEYS:
+        problems.append(f"D: crossings keys {sorted(cx)} are not {sorted(CROSS_KEYS)}")
+    if cx.get("license") != index.get("license"):
+        problems.append("D: the crossings file's licence object differs from the index's")
+    street = index.get("kinds", []).index("street") if "street" in index.get("kinds", []) else None
+    rows = index.get("rows", [])
+    bad = [r for r in cx.get("rows", []) if len(r) != 4 or not all(
+        isinstance(i, int) and 0 <= i < len(rows) and rows[i][0] == street for i in r[2:4])]
+    if bad:
+        problems.append(f"D: {len(bad)} crossing row(s) not [lat, lon, street, street], e.g. {bad[0]}")
     return problems
 
 
@@ -145,6 +179,7 @@ def main():
         sp = place_index.summary_path(slug)
         summary = json.loads(sp.read_text(encoding="utf-8")) if sp.exists() else None
         p += check_index(slug, index, summary)
+        p += check_crossings(slug, index)
         p += check_leaks(slug, index)
     for page in sorted((ROOT / "app" / "pages").glob("*.py")):
         if BULLET in page.read_text(encoding="utf-8"):
@@ -182,7 +217,8 @@ def selftest():
     ]
     base = {"license": {"url": "https://opendatacommons.org/licenses/odbl/1-0/",
                         "attribution": "© OpenStreetMap contributors"},
-            "city": "X", "fold": None, "kinds": [], "rows": [[0, 1, 2, "a", "", 0]]}
+            "city": "X", "fold": None, "kinds": [], "rows": [[0, 1, 2, "a", "", 0]],
+            "crossings": "/app/static/places/crossings/x.json?v=0"}
     ok = 0
     for label, langs, want in cases:
         got = len(check_index("x", dict(base, languages=langs), None))
@@ -204,7 +240,10 @@ def selftest():
         got = len(check_leaks("x", dict(base, languages=ja, rows=rows), reviewed))
         ok += got == want
         print(f"  {'ok ' if got == want else 'BAD'} {label}: {got} problem(s)")
-    total = len(cases) + 1 + len(leak_cases)
+    got = len(check_crossings("x", dict(base, crossings="/app/static/places/y.json?v=0")))
+    ok += got == 1
+    print(f"  {'ok ' if got == 1 else 'BAD'} an index naming another file as its crossings: {got} problem(s)")
+    total = len(cases) + 1 + len(leak_cases) + 1
     print(f"{ok} of {total} cases behaved as intended.")
     return 0 if ok == total else 1
 

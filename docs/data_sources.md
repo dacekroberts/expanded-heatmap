@@ -308,10 +308,17 @@ published until the owner approves it at review time.<!-- /internal -->
   "Download this index" to the file (§4.6). This is the OSM Attribution
   Guideline's "© OpenStreetMap contributors" form, chosen over §4.3(a)'s
   longer example wording to save space (owner, 2026-10-07).
-- **Access (§4.6):** the file is the complete database and is downloadable
-  free of charge from the site (the search box links it); the method that
-  builds it is in the public repository. No technical restriction on the file
-  (§4.7).
+- **Access (§4.6):** each city's database is two files, both downloadable
+  free of charge from the site: the index (`app/static/places/<city>.json`,
+  which the search box links) and its street-pair intersections
+  (`app/static/places/crossings/<city>.json`, split off 2026-10-08 so a
+  search downloads it only when it asks for an intersection), which the index
+  names by its path in its `crossings` field. Both carry the notice. The
+  method that builds them is in the public repository. No technical
+  restriction on either file (§4.7).<!-- internal --> For review time: whether
+  the box's "Download this index" should also link the intersections file
+  directly (a wording change for the owner), or the index's naming it is
+  offer enough.<!-- /internal -->
 - **Kept separate (§4.4(d)):** no field from a business register, a transit
   feed, MLIT or any other non-OSM source is added to the index, and the
   project's own station list is not used to fill or de-duplicate it. Adding

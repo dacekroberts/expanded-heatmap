@@ -36,36 +36,23 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   `docs/decisions_drafts/place-search.md`; handoff
   `docs/handoff_place_search_2026-10-07.md`). Kyoto, then the regional
   sample's first batch (Seattle, Chicago, Vancouver, Sydney; 2026-10-08), held
-  before batch 2. **Two top-line items, to be refined through optimization
-  (owner, 2026-10-08):**
-  - **iPhone memory.** Seattle's index holds about 35 MB in the page once the
-    search opens (desktop V8, measured; Kyoto 11, Chicago 27), on top of a map
-    page that is already heavy, and the blank iPhone maps were a memory
-    problem. Not measurable without a real phone: test the largest index on
-    one before rollout. First optimizations proposed: intersections in a
-    second file fetched only for an "X and Y" query (Seattle's first open 563
-    to 269 KB gzipped, its crossings' memory only when used), crossings as
-    references to their two streets, coordinates to 4 decimals.
-  - **Repository size.** The five indexes total 8.6 MB; about 200 cities
-    would be roughly 200 to 350 MB raw, and every rebuild of the indexes adds
-    another compressed copy to git history. Fine now, growing with each
-    refresh. The map's scope is almost fully built (owner: only some Japanese
-    cities and Cluj-Napoca remain), so the city count is near final; the
-    refresh cadence is what grows it.
-  - **Reserve rule, if lossless savings are not enough** (owner's
-    boundaries, 2026-10-08): every intersection within a station's outer
-    ring (+300 m) stays searchable, downtowns and important corridors too
-    (search serves people weighing a business location near transit).
-    Outside the rings only, drop footpath crossings and pairs of two side
-    streets. "Main road" = any stretch of the street tagged motorway, trunk,
-    primary, secondary or tertiary, or pedestrian or living_street (52 of 52
-    sampled commercial streets in the five cities qualify; tertiary-and-up
-    alone missed Post Alley, Pitt Street Mall, 錦小路通 and 新京極通). Ring
-    centres are OSM's own rail stations (ODbL: no map data in the index);
-    every drawn station in the five has one within 300 m. Measured saving
-    14 to 16% gzipped in the three grid cities, none in Kyoto or Sydney.
-    Each new country re-tests the definition on its known commercial
-    streets (Japan maps many as unclassified).
+  before batch 2. **Two top-line items, to refine through optimization
+  (owner, 2026-10-08; detail in the drafts):**
+  - **iPhone memory:** test the largest index (Seattle) on a real phone
+    before rollout (the blank iPhone maps were memory). The lossless
+    optimizations are built (intersections in a second file fetched when
+    asked for, as street references; 4-decimal coordinates): Seattle first
+    open 227 KB gzipped, 11 MB in memory (was 563 KB, 35 MB).
+  - **Repository size:** five cities' files 5.4 MB (was 8.6); about 200
+    cities, roughly 130 to 220 MB, plus a copy per index rebuild in git
+    history. The city count is near final (some Japanese cities and
+    Cluj-Napoca remain), so refresh cadence grows it.
+  - **Reserve cut** (if a phone test needs it): everything within a
+    station's outer ring + 300 m stays; outside, footpath crossings and pairs
+    of two side streets may go ("main": any stretch tertiary or above,
+    pedestrian or living_street). Rings from OSM stations.
+  - Wording call: should "Download this index" also link the
+    intersections file (ODbL 4.6)?
 
   To decide or test there:
   - whether it goes live as is: the suggestions (keyword gate, caps, pills,

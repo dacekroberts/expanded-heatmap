@@ -2068,6 +2068,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
     var CJK = /[@@CJK_CLASS@@]/;
     var MARKS = /[@@MARKS_CLASS@@]/g;
     var data = null, own = null, loading = null, fold = null, marker = null, timer = null;
+    var byIndex = [], crossURL = null, crossings = null;
 
     function norm(s) {
         s = String(s).normalize("NFKC").toLowerCase().normalize("NFD")
@@ -2199,6 +2200,10 @@ _PLACE_SEARCH_TEMPLATE = r"""
                     return prep({kind: ix.kinds[r[0]], lat: r[1], lon: r[2], name: r[3],
                                  names: [r[3]].concat(r[4] ? r[4].split("|") : []), bbox: r[5] || null});
                 });
+                // The rows in file order: the crossings file refers to streets
+                // by their place here.
+                byIndex = rows;
+                crossURL = ix.crossings || null;
                 data = own.concat(link(rows));
                 document.querySelector(".hm-search").setAttribute(
                     "data-load-ms", Math.round(performance.now() - t0));
@@ -2206,6 +2211,40 @@ _PLACE_SEARCH_TEMPLATE = r"""
             });
         loading.catch(function () { loading = null; });
         return loading;
+    }
+    // The street-pair intersections, a second file fetched only when a
+    // search asks for one (owner, 2026-10-08: the index's size, iPhone
+    // memory above all): a query in two halves ("5th and Pike"), or one of
+    // several words that finds no place in the first file ("Clark Lake").
+    // Each row is [lat, lon, street A, street B], the streets by their place
+    // in the first file; the name and the English pair are built from them.
+    function needCrossings(q, found) {
+        if (!crossURL || crossings) return false;
+        if (pairOf(q)) return true;
+        var qs = words(q).filter(function (w) { return !STOP[w]; });
+        return qs.length > 1 && !found.some(function (d) { return !isOwn(d); });
+    }
+    function loadCrossings() {
+        if (crossings) return crossings;
+        var t0 = performance.now();
+        crossings = fetch(crossURL, {credentials: "omit", referrerPolicy: "no-referrer"})
+            .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+            .then(function (txt) {
+                function latin(d) { return d.names.slice(1).filter(function (n) { return !CJK.test(n); })[0]; }
+                JSON.parse(txt).rows.forEach(function (r) {
+                    var a = byIndex[r[2]], b = byIndex[r[3]];
+                    if (!a || !b) return;
+                    var names = [a.name + " / " + b.name], ea = latin(a), eb = latin(b);
+                    if (ea && eb) names.push(ea + " / " + eb);
+                    data.push(prep({kind: "crossing", lat: r[0], lon: r[1], name: names[0], names: names,
+                                    bbox: null}));
+                });
+                document.querySelector(".hm-search").setAttribute(
+                    "data-crossings-ms", Math.round(performance.now() - t0));
+            });
+        // A failed fetch leaves the first file's answers, and is not retried.
+        crossings.catch(function () { crossURL = null; });
+        return crossings;
     }
 
     // 2 for a word-start hit, 1 for a Latin word of 4 or more letters inside a
@@ -2401,6 +2440,12 @@ _PLACE_SEARCH_TEMPLATE = r"""
             }
             if (!data) { note("Loading places…"); return; }
             shown = search(input.value);
+            if (needCrossings(input.value, shown)) {
+                // Shown again when the intersections arrive, or as it stands
+                // if they cannot.
+                loadCrossings().then(render, render);
+                if (!shown.length) { note("Loading intersections…"); return; }
+            }
             if (!shown.length) { note("No street, station or place by that name"); credit(); return; }
             var nOwn = shown.filter(isOwn).length, nPlaces = shown.length - nOwn;
             var foldable = nOwn > 0 && nPlaces > 0 && narrow();
