@@ -351,6 +351,10 @@ PLACE_DROPPED = {
     "node/6882372016": "'Lateral', a stand of the Camp Nou mapped as place=locality",
     "node/6882372017": "'Gol Nord', a stand of the Camp Nou mapped as place=locality",
     "node/6882372018": "'Gol Sud', a stand of the Camp Nou mapped as place=locality",
+    # The Gran Logia Simbólica Española, a Masonic lodge OSM tags as a place
+    # of worship, both of its objects (owner, 2026-10-08: "drop gran logia").
+    "way/813703606": "'Gran Logia Simbólica Española', the lodge's seat in an apartment building",
+    "node/7600733729": "'Logia Masonica GLSE', the same lodge as a node",
 }
 
 # Visitable former homes (owner, 2026-10-08: "visitable only hard line. Must

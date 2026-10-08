@@ -40,9 +40,12 @@ what is left into `docs/handoff_place_search_2026-10-07.md`.
 
 ## Where things stand (2026-10-08)
 
-- **2a BUILT, held for the owner** (Montréal, Barcelona, Marseille, Prague,
-  Brussels): the drafts file's newest entry has every call and the three
-  questions put to the owner. What 2b inherits from it:
+- **2a BUILT; the owner answered its questions and called 2b** (Montréal,
+  Barcelona, Marseille, Prague, Brussels): the drafts file's four newest
+  entries hold every call, the answers (a dated keep-list of visitable former
+  homes, `PLACE_VISITABLE` with check G; English never forced; squares as
+  landmarks, duplicates dropped; notable places of worship back in). What 2b
+  inherits:
   - the matcher's words per language (`map_common`, `LANG_WORDS`), switched on
     by the index's declared languages: add ko, zh and ka entries if their
     queries need a connector, a station word or an article;
@@ -252,7 +255,8 @@ owner's word, in a fresh session, from this prompt.
 > `claude/charming-lumiere-930853` (nothing pushed; nothing lands on master;
 > published wording goes to the owner first). Read, in order:
 > `docs/handoff_place_search_batch2.md` (its 2b section, and what 2a changed,
-> in the drafts file's newest entry), `docs/handoff_place_search_2026-10-07.md`
+> in the drafts file's four 2026-10-08 entries from "batch 2a" up),
+> `docs/handoff_place_search_2026-10-07.md`
 > and the newest entries of `docs/decisions_drafts/place-search.md`. Build
 > place search for Hong Kong, Seoul, Busan and Tbilisi as the 2b section
 > says, following 2a's steps, then HOLD for the owner before batch 3. Read

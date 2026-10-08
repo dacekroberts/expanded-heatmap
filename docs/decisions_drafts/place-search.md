@@ -8,6 +8,7 @@ hands the drafts off, then deletes this file (owner, 2026-09-30).
 
 - **"yes notable place of worship back in"** (owner, on the proposal in the entry below): a place of worship with wikidata or wikipedia is no longer a home because its land or building is tagged residential (`place_index._home`). A non-notable one stays out, since a house church can be someone's home, and private access still keeps either out.
 - **Back in:** Chicago's Chicago Baptist Church of Logan Square; Barcelona's Mare de Déu del Carme, Sant Josep i Santa Mònica, the Parròquia de Sant Jeroni de Montbau and the Gran Logia Simbólica Española (a Masonic lodge's seat, which OSM tags as a place of worship, with occasional guided visits); Prague's Bét-El and the Hussite church at Smíchov, and with them the Holešovice Hussite church (a name other rows share). The other seven indexes rebuild byte-identical; Chicago's, Barcelona's and Prague's maps re-rendered.
+- **"drop gran logia"** (owner): the Gran Logia Simbólica Española, both of its objects (the way and the node "Logia Masonica GLSE", which carries the same description), in Barcelona's `PLACE_DROPPED`.
 - **Checks:** `check_all.py` 52 of 52.
 
 ### 2026-10-08 - Place search 2a, the owner's answers: a dated keep-list of visitable former homes; English never forced; squares are landmarks, duplicates dropped (owner, branch)
