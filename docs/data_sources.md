@@ -277,6 +277,43 @@ OpenStreetMap data in the OpenMapTiles schema. The city maps do not use it.
   copyright page, CARTO's attribution page and openmaptiles.org, as CARTO's
   attribution page and the style's license ask.
 
+### Place search index: OpenStreetMap, ODbL 1.0 (pilot, Kyoto first)
+
+<!-- internal -->Pilot on a branch (2026-10-07); nothing here is published until the owner
+approves it at review time.<!-- /internal -->
+
+- **Data:** each city's place index (`app/static/places/<city>.json`) lists
+  named streets, intersections derived from shared street nodes, named
+  junctions, place names, stations and landmarks, extracted from
+  OpenStreetMap through Overpass (`pipeline/place_index_fetch.py`) inside the
+  city boundary and built by `pipeline/place_index.py`. It holds no business
+  records and no data from any other source.
+- **PERMITTED WITH CONDITIONS** (<!-- internal -->`licence-read` 2026-10-07; <!-- /internal -->ODbL 1.0 and the OpenStreetMap
+  Foundation's Geocoding, Substantial, Produced Work and Attribution
+  guidelines, read 2026-10-07). A whole city's index is a Derivative Database:
+  the Geocoding guideline treats a systematic collection of "all or
+  substantially all Primary Features of a given type … within a geographic
+  area city-sized or larger" as substantial. Serving the file to browsers is
+  both Publicly Use and Convey. Each file is therefore published under the
+  Open Database License (ODbL) 1.0
+  (https://opendatacommons.org/licenses/odbl/1-0/) and under no other license.
+- **Notices:** each file carries "© OpenStreetMap contributors", a link to
+  https://www.openstreetmap.org/copyright and the ODbL link (§4.2), in its
+  `license` object. The search box shows "Contains information from
+  OpenStreetMap, which is made available here under the Open Database License
+  (ODbL)." with both links (§4.3), whenever it is open.
+- **Access (§4.6):** the file is the complete database and is downloadable
+  free of charge from the site (the search box links it); the method that
+  builds it is in the public repository. No technical restriction on the file
+  (§4.7).
+- **Kept separate (§4.4(d)):** no field from a business register, a transit
+  feed, MLIT or any other non-OSM source is added to the index, and the
+  project's own station list is not used to fill or de-duplicate it. Adding
+  one would bring that data under ODbL.
+- **Open before publishing:** `LICENSE` must carve the index files out of the
+  MIT and reserved terms, as it already does for Fukui's CC BY-SA files
+  (§4.4(a) forbids dual licensing).
+
 ## Commitment: removal requests are honored, not argued
 
 Every license reviewed here enforces the same way. Chicago's terms say the

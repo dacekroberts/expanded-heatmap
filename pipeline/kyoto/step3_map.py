@@ -63,6 +63,9 @@ def main():
         # Trade names are Japanese; this orders the Japanese faces first
         # (theme.font_stack) and render_heatmap raises without it.
         lang="ja",
+        # Place search pilot (2026-10-07): the index step4_place_index.py
+        # writes, served from the app's static folder.
+        place_index_url="/app/static/places/kyoto.json",
     )
 
 

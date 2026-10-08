@@ -35,3 +35,9 @@ secondaryBackgroundColor = "#131C2E"
 textColor = "#E6EDF7"
 linkColor = "#7CB7FF"
 borderColor = "#23304A"
+
+# Place search pilot (2026-10-07): serves app/static/ at /app/static/, where
+# each city's place index lives (pipeline/place_index.py). The maps fetch it
+# on first use of their search box, so it is never embedded in a map.
+[server]
+enableStaticServing = true

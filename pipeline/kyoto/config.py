@@ -146,6 +146,12 @@ STATION_OSM_JSON = DATA_RAW / "osm_station_names.json"
 # stops OSM may tag railway=tram_stop (Osaka's Hankai lesson).
 TRAM_OSM_JSON = DATA_RAW / "osm_tram_stop_names.json"
 OSM_NAME_MATCH_M = 600
+# Place search (pilot, 2026-10-07; DECISIONS.md "Four ideas assessed", item 3):
+# OSM's places inside the city line, one Overpass query by
+# pipeline/place_index_fetch.py, indexed by step4_place_index.py. A NEW file
+# name: data/ is shared by every worktree.
+PLACE_AREA = '["name"="京都市"]["admin_level"="7"]["boundary"="administrative"]'
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-07.json"
 # Where OSM's objects for one station disagree on name:en, the spelling taken.
 # 西院 is one interchange by N02's group code (Hankyu's and the Randen's, 214 m
 # apart), and its operators READ it differently: Hankyu's Saiin, the Randen's

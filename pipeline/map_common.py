@@ -1218,7 +1218,7 @@ DENSE_LABEL_SCRIPT = """
 # Blocks render_heatmap() injects into SOME maps only. check_render_current.py
 # holds a map that carries one to its current version, and does not ask for it
 # in a map that has none.
-CONDITIONAL_BLOCKS = ("DENSE_LABEL_SCRIPT",)
+CONDITIONAL_BLOCKS = ("DENSE_LABEL_SCRIPT", "PLACE_SEARCH_SCRIPT")
 # Mouse-wheel zoom. Measured 2026-09-23 on Paris and Toulouse (median of three
 # fresh loads; DECISIONS.md has the tables). The wheel lagged behind +/- for a
 # reason other than speed: Leaflet's _tryAnimatedZoom returns early while a
@@ -1944,6 +1944,295 @@ TAP_SELECT_SCRIPT = (
     .replace("@@LIGHT_BORDER@@", LIGHT["border"])
 )
 assert "@@" not in TAP_SELECT_SCRIPT, "unresolved placeholder in TAP_SELECT_SCRIPT"
+
+# PLACE SEARCH (pilot, 2026-10-07; DECISIONS.md "Four ideas assessed before
+# the large review", item 3). Places only: streets, intersections, stations,
+# neighborhoods, landmarks, never a business. The index
+# (pipeline/place_index.py) is fetched ONCE, on first use of the box, from the
+# app's own static folder, and every keystroke is matched in this page: no
+# query reaches a server, a log or the URL. Hence no <form> (a submit would
+# put the text in a GET), spellcheck off (a browser's cloud spellcheck sends
+# typed text away) and no history entry. The index is never embedded: the
+# iPhone literal limit (110,861) is per map.
+#
+# Matching: names NFKC-folded, lowercased, accents stripped (Shijō = Shijo).
+# A Latin query word must begin a word of a name; a CJK or kana word must
+# occur anywhere in one (四条 in 四条烏丸), and a CJK word that matches nothing
+# is retried as two halves (烏丸四条). Every word must match; words such as
+# "and", "at" and "&" are dropped ("5th and Pike"). "station" or 駅 matches
+# any station, and street words (street, dori, 通) are optional on a street
+# or an intersection. With fold "ja" a Latin "ou" or "uu" folds to "o" or "u"
+# on both sides (shijou = shijo).
+_PLACE_SEARCH_TEMPLATE = r"""
+<style>
+    .hm-search { background: @@LIGHT_SURFACE@@; color: @@LIGHT_TEXT@@;
+        border: 2px solid rgba(0,0,0,0.2); border-radius: 4px; font: 13px @@FONT_STACK@@; }
+    .hm-search-row { display: flex; align-items: center; }
+    .hm-search-btn { width: 30px; height: 30px; border: 0; background: transparent;
+        color: inherit; cursor: pointer; padding: 0; display: flex;
+        align-items: center; justify-content: center; }
+    .hm-search-input { display: none; width: 210px; border: 0; outline: none;
+        background: transparent; color: inherit; font: inherit; font-size: 16px;
+        padding: 4px 6px 4px 0; }
+    .hm-search.open .hm-search-input { display: block; }
+    .hm-search-list { display: none; max-height: 260px; overflow-y: auto;
+        border-top: 1px solid @@LIGHT_BORDER@@; width: 240px; }
+    .hm-search.open .hm-search-list.has { display: block; }
+    .hm-search-item { padding: 6px 8px; cursor: pointer; line-height: 1.3; }
+    .hm-search-item:hover, .hm-search-item.on { background: rgba(13,148,136,0.14); }
+    .hm-search-sub { font-size: 11px; opacity: 0.75; }
+    .hm-search-note { padding: 6px 8px; font-size: 12px; opacity: 0.8; }
+    .hm-search-credit { padding: 4px 8px 6px; font-size: 11px; opacity: 0.8;
+        border-top: 1px solid @@LIGHT_BORDER@@; }
+    .hm-search-credit a { color: inherit; }
+    .hm-search-btn:focus-visible, .hm-search-input:focus-visible {
+        outline: 2px solid @@LIGHT_ACCENT@@; outline-offset: 1px; }
+    .dark-base .hm-search { background: var(--dm-surface); color: var(--dm-text);
+        border-color: var(--dm-border); }
+    .dark-base .hm-search-list, .dark-base .hm-search-credit { border-top-color: var(--dm-border); }
+    @media (max-width: 480px) { .hm-search-input { width: 160px; } .hm-search-list { width: 190px; } }
+</style>
+<script>
+(function () {
+    var NAME = "__MAP_NAME__", URL = "__INDEX_URL__";
+    var KIND_LABEL = {station: "Station", junction: "Intersection", landmark: "Landmark",
+                      place: "Neighborhood", street: "Street", crossing: "Intersection"};
+    var KIND_RANK = {station: 0, junction: 1, landmark: 2, place: 3, street: 4, crossing: 5};
+    var STOP = {"and": 1, "at": 1, "of": 1, "the": 1, "x": 1, "corner": 1, "&": 1, "y": 1};
+    var STATION_WORDS = {"station": 1, "sta": 1, "stn": 1, "eki": 1, "駅": 1};
+    var STREET_WORDS = {"street": 1, "st": 1, "avenue": 1, "ave": 1, "road": 1, "rd": 1,
+                        "dori": 1, "通": 1, "通り": 1};
+    var CJK = /[぀-ヿ㐀-䶿一-鿿가-힯豈-﫿]/;
+    var data = null, loading = null, fold = null, marker = null, timer = null;
+
+    function norm(s) {
+        s = String(s).normalize("NFKC").toLowerCase().normalize("NFD")
+            .replace(/[̀-ͯ]/g, "").normalize("NFC");
+        if (fold === "ja") s = s.replace(/ou/g, "o").replace(/uu/g, "u").replace(/oo/g, "o");
+        return s;
+    }
+    function words(s) { return norm(s).split(/[^\p{L}\p{N}]+/u).filter(Boolean); }
+
+    function load() {
+        if (loading) return loading;
+        var t0 = performance.now();
+        loading = fetch(URL, {credentials: "omit", referrerPolicy: "no-referrer"})
+            .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+            .then(function (txt) {
+                var ix = JSON.parse(txt);
+                fold = ix.fold || null;
+                data = ix.rows.map(function (r) {
+                    var names = [r[3]].concat(r[4] ? r[4].split("|") : []);
+                    var toks = [];
+                    names.forEach(function (n) {
+                        var ws = words(n);
+                        toks = toks.concat(ws);
+                        // Joined too, so "Kinkakuji" finds "Kinkaku-ji".
+                        if (ws.length > 1 && !CJK.test(n)) toks.push(ws.join(""));
+                    });
+                    return {kind: ix.kinds[r[0]], lat: r[1], lon: r[2], name: r[3],
+                            names: names, bbox: r[5] || null,
+                            bares: names.map(function (n) { return words(n).join(""); }),
+                            hay: " " + toks.join(" ") + " ", flat: norm(names.join(" | ")),
+                            first: norm(r[3])};
+                });
+                document.querySelector(".hm-search").setAttribute(
+                    "data-load-ms", Math.round(performance.now() - t0));
+                return data;
+            });
+        loading.catch(function () { loading = null; });
+        return loading;
+    }
+
+    // 2 for a word-start hit, 1 for a Latin word of 4 or more letters inside a
+    // romanized compound ("imadegawa" in "Horikawaimadegawa"), 0 for none.
+    function wordHit(d, w) {
+        if (CJK.test(w)) return d.flat.indexOf(w) >= 0 ? 2 : 0;
+        if (d.hay.indexOf(" " + w) >= 0) return 2;
+        return w.length >= 4 && d.hay.indexOf(w) >= 0 ? 1 : 0;
+    }
+    function hits(d, qs) {
+        d._weak = 0;
+        for (var i = 0; i < qs.length; i++) {
+            var w = qs[i], h = wordHit(d, w);
+            if (h === 1) d._weak += 1;
+            if (h) continue;
+            if (STATION_WORDS[w] && d.kind === "station") continue;
+            if (STREET_WORDS[w] && (d.kind === "street" || d.kind === "crossing" || d.kind === "junction")) continue;
+            if (CJK.test(w) && w.length > 1 && w.charAt(w.length - 1) === "駅" && d.kind === "station"
+                && d.flat.indexOf(w.slice(0, -1)) >= 0) continue;
+            return false;
+        }
+        return true;
+    }
+    function search(q) {
+        var qs = words(q).filter(function (w) { return !STOP[w]; });
+        if (!qs.length) return [];
+        var out = data.filter(function (d) { return hits(d, qs); });
+        if (!out.length && qs.length === 1 && CJK.test(qs[0]) && qs[0].length >= 3) {
+            // One CJK word that matches nothing: try it as two (烏丸四条).
+            for (var k = 1; k < qs[0].length && !out.length; k++) {
+                var two = [qs[0].slice(0, k), qs[0].slice(k)];
+                out = data.filter(function (d) { return hits(d, two); });
+            }
+        }
+        var nq = norm(q).trim(), bare = words(q).join("");
+        out.forEach(function (d) {
+            var s = KIND_RANK[d.kind] * 3 + Math.min(d.name.length, 40) / 10 + d._weak * 20;
+            if (d.bares.indexOf(bare) >= 0 || d.names.some(function (n) { return norm(n) === nq; })) s -= 100;
+            else if (d.first.indexOf(nq) === 0) s -= 40;
+            d._s = s;
+        });
+        out.sort(function (a, b) { return a._s - b._s; });
+        return out.slice(0, 8);
+    }
+
+    function start() {
+        var map = window[NAME];
+        if (!map || !window.L) return;
+        var Ctl = L.Control.extend({
+            options: {position: "topleft"},
+            onAdd: function () {
+                var box = L.DomUtil.create("div", "hm-search leaflet-control");
+                box.innerHTML =
+                    '<div class="hm-search-row">' +
+                    '<button type="button" class="hm-search-btn" aria-label="Search places" title="Search places">' +
+                    '<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="6.5" cy="6.5" r="5" ' +
+                    'fill="none" stroke="currentColor" stroke-width="2"/><path d="M10.5 10.5L15 15" stroke="currentColor" ' +
+                    'stroke-width="2" stroke-linecap="round"/></svg></button>' +
+                    '<input class="hm-search-input" type="search" role="combobox" aria-expanded="false" ' +
+                    'aria-label="Search streets, intersections, stations and places" ' +
+                    'placeholder="Street, station, place" autocomplete="off" autocorrect="off" ' +
+                    'autocapitalize="off" spellcheck="false" enterkeyhint="search"></div>' +
+                    '<div class="hm-search-list" role="listbox"></div>';
+                L.DomEvent.disableClickPropagation(box);
+                L.DomEvent.disableScrollPropagation(box);
+                return box;
+            }
+        });
+        map.addControl(new Ctl());
+        var box = document.querySelector(".hm-search");
+        var btn = box.querySelector(".hm-search-btn");
+        var input = box.querySelector(".hm-search-input");
+        var list = box.querySelector(".hm-search-list");
+        var shown = [], on = -1;
+
+        function note(text) {
+            list.innerHTML = '<div class="hm-search-note"></div>';
+            list.firstChild.textContent = text;
+            list.classList.add("has");
+        }
+        function credit() {
+            var c = document.createElement("div");
+            c.className = "hm-search-credit";
+            // ODbL 4.3(a)'s own wording; the download link is the 4.6 offer
+            // (licence read 2026-10-07). Wording held for the owner (pilot).
+            c.innerHTML = 'Contains information from <a href="https://www.openstreetmap.org/copyright" ' +
+                'target="_blank" rel="noopener noreferrer">OpenStreetMap</a>, which is made available here ' +
+                'under the <a href="https://opendatacommons.org/licenses/odbl/1-0/" target="_blank" ' +
+                'rel="noopener noreferrer">Open Database License (ODbL)</a>. ' +
+                '<a href="' + URL + '" target="_blank" rel="noopener" download>Download this index</a>';
+            list.appendChild(c);
+        }
+        function render() {
+            list.innerHTML = "";
+            on = -1;
+            // The credit shows whenever the box is open, results or not.
+            if (!input.value.trim()) {
+                credit();
+                list.classList.add("has");
+                input.setAttribute("aria-expanded", "false");
+                return;
+            }
+            if (!data) { note("Loading places…"); return; }
+            shown = search(input.value);
+            if (!shown.length) { note("No street, station or place by that name"); credit(); return; }
+            shown.forEach(function (d, i) {
+                var el = document.createElement("div");
+                el.className = "hm-search-item";
+                el.setAttribute("role", "option");
+                var other = d.names.slice(1).filter(function (n) { return !CJK.test(n); })[0];
+                var top = document.createElement("div");
+                top.textContent = d.name;
+                var sub = document.createElement("div");
+                sub.className = "hm-search-sub";
+                sub.textContent = KIND_LABEL[d.kind] + (other && other !== d.name ? " · " + other : "");
+                el.appendChild(top);
+                el.appendChild(sub);
+                el.addEventListener("click", function () { go(i); });
+                list.appendChild(el);
+            });
+            credit();
+            list.classList.add("has");
+            input.setAttribute("aria-expanded", "true");
+        }
+        function go(i) {
+            var d = shown[i];
+            if (!d) return;
+            if (d.bbox) {
+                map.fitBounds([[d.bbox[0], d.bbox[1]], [d.bbox[2], d.bbox[3]]], {maxZoom: 16, padding: [30, 30]});
+            } else {
+                map.setView([d.lat, d.lon], Math.max(map.getZoom(), 16));
+            }
+            if (marker) map.removeLayer(marker);
+            clearTimeout(timer);
+            // A temporary marker, not interactive, so a tap still reaches the
+            // dots and rings under it; the rings answer the site's question.
+            marker = L.circleMarker([d.lat, d.lon], {radius: 14, color: "@@LIGHT_ACCENT@@", weight: 3,
+                fillOpacity: 0.12, interactive: false}).addTo(map);
+            marker.bindTooltip(d.name, {permanent: true, direction: "top", offset: [0, -12]}).openTooltip();
+            timer = setTimeout(function () { if (marker) { map.removeLayer(marker); marker = null; } }, 12000);
+            list.classList.remove("has");
+            input.setAttribute("aria-expanded", "false");
+            input.blur();
+        }
+        function open() {
+            box.classList.add("open");
+            input.focus();
+            load().then(render, function () {
+                note("Place search is available on the site's own map pages");
+            });
+        }
+        btn.addEventListener("click", function () {
+            if (box.classList.contains("open") && !input.value) { box.classList.remove("open"); return; }
+            open();
+        });
+        input.addEventListener("input", render);
+        input.addEventListener("keydown", function (e) {
+            e.stopPropagation();
+            var items = list.querySelectorAll(".hm-search-item");
+            if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+                e.preventDefault();
+                if (!items.length) return;
+                on = (on + (e.key === "ArrowDown" ? 1 : items.length - 1)) % items.length;
+                items.forEach(function (el, k) { el.classList.toggle("on", k === on); });
+            } else if (e.key === "Enter") {
+                e.preventDefault();
+                go(on >= 0 ? on : 0);
+            } else if (e.key === "Escape") {
+                input.value = "";
+                render();
+                box.classList.remove("open");
+            }
+        });
+    }
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", start);
+    } else {
+        start();
+    }
+})();
+</script>
+"""
+PLACE_SEARCH_SCRIPT = (
+    _PLACE_SEARCH_TEMPLATE
+    .replace("@@FONT_STACK@@", FONT_VAR)
+    .replace("@@LIGHT_SURFACE@@", LIGHT["surface"])
+    .replace("@@LIGHT_TEXT@@", LIGHT["text"])
+    .replace("@@LIGHT_BORDER@@", LIGHT["border"])
+    .replace("@@LIGHT_ACCENT@@", LIGHT["accent"])
+)
+assert "@@" not in PLACE_SEARCH_SCRIPT, "unresolved placeholder in PLACE_SEARCH_SCRIPT"
 LEGEND_ROW = """
   <div style="display:flex; align-items:center; margin:3px 0;">
     <span style="display:inline-block; width:11px; height:11px;
@@ -2969,8 +3258,13 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
                    crs_geographic, crs_projected, ring_edges_meters, ring_labels,
                    center=None, zoom=None, label_focus=None, rings_shown=False,
                    all_city_heat=True, animate_clusters=False, lang=None, pins=True,
-                   legend_names=None):
+                   legend_names=None, place_index_url=None):
     """Render one city's heatmap to a standalone HTML file.
+
+    place_index_url: the site path of the city's place-search index
+    (pipeline/place_index.py), for example "/app/static/places/kyoto.json".
+    Given, the map gets a search box (PLACE_SEARCH_SCRIPT) that fetches the
+    index on first use; omitted, nothing changes (pilot, 2026-10-07).
 
     legend_names: optional {line key: full public name}, for a city whose
     on-map labels are the operators' LINE CODES (Tokyo's 52 lines, owner
@@ -3269,6 +3563,10 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     # See TAP_SELECT_SCRIPT.
     m.get_root().html.add_child(folium.Element(
         TAP_SELECT_SCRIPT.replace("__MAP_NAME__", m.get_name())))
+    if place_index_url is not None:
+        m.get_root().html.add_child(folium.Element(
+            PLACE_SEARCH_SCRIPT.replace("__MAP_NAME__", m.get_name())
+            .replace("__INDEX_URL__", place_index_url)))
 
     # A declared language: its font order on --hm-font, which every shared
     # block reads through theme.FONT_VAR, so the shared blocks stay identical.
