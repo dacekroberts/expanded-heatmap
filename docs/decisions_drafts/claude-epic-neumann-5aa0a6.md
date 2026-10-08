@@ -18,10 +18,34 @@ or published; every proposal waits for the owner.
   `data/_basemap_build/prototype_full_2026-10-08/` (with `SHA256SUMS`)
   and `data/_basemap_build/full_travel_prototype_2026-10-08.zip`. The app
   session copies it when the owner says so, as it did the baselines; it
-  is a reference, not code (owner: the app is independent). Rendering it
-  again: scratchpad `render_full.py` with `labels_tokyo.json`,
-  `hues_tokyo.json` and `credits_tokyo.txt` (Tokyo) or the Mendoza pack;
-  `full_shots.mjs` for the headless checks.
+  is a reference, not code (owner: the app is independent). Handed to the
+  app session 2026-10-08, with the main-checkout path. Rendering it again:
+  `data/_basemap_build/session_tools_2026-10-08/` (main checkout; the
+  session's scratch tools, README inside): `render_full.py` with
+  `labels_tokyo.json`, a colours file from `hues_tokyo.py` and
+  `credits_tokyo.txt` (Tokyo) or the Mendoza pack; `full_shots.mjs` for
+  the headless checks.
+- **NOT READY: landing the site's partial Travel view.** Five things stand
+  between this branch and a live Travel view (2026-10-08):
+  1. **The owner's go-live call** (decision 19: whether the half version
+     goes live, after the pilot, weighed with the legal findings). Not
+     made.
+  2. **Hosting.** The Travel view range-reads each city's pack from a
+     server; today they are served only on this machine. R2 behind an
+     owned domain against the free Worker, compared live (owner), needs
+     the owner's Cloudflare account and a Cloudflare terms read first;
+     CORS as recorded in the hosting entry.
+  3. **The other 167 packs.** Only Mendoza, Avignon and Florence are built
+     (trimmed, zoom 14). About 2 to 2.5 min each through the gate (roughly
+     six hours), plus each region's Geofabrik extract (owner downloads).
+  4. **Review-time steps on this branch:** merge master, then
+     `check_render_current`; a deploy-verify `scope: map-chrome`; rows in
+     `docs/data_sources.md` for the basemap (Protomaps code BSD-3, styles,
+     tiles an ODbL produced work) and the Noto glyphs (OFL, trademark
+     line); the owner's sign-off on visible wording ("Business",
+     "Travel", the legend's ferry and cable-car rows); Cleanup folds this
+     drafts file.
+  5. **The later items** below.
 - **Fonts settled (owner):** Noto, with `OFL.txt` and the line "Noto is a
   trademark of Google LLC" beside every copy of the glyphs; the package
   ships them.
@@ -56,21 +80,31 @@ or published; every proposal waits for the owner.
   centro-261006 (copies; the owner's originals stay in Downloads).
 - **Checks to run:** `node scripts/check_travel_style.mjs <basemaps.js>
   data/_basemap_build/basemaps-main/tiles/src/main/java/com/protomaps/basemap/TravelTrim.java`
-  (basemaps.js is in the scratchpad's `site/offline/lib/` and the baseline's
-  `offline/lib/`); `check_render_current.py`; `check_no_em_dashes.py`; the
-  pixel gate (trimmed against untrimmed, `trim_shots.mjs`,
+  (basemaps.js is in `data/_basemap_build/prototype_full_2026-10-08/lib/`
+  and the baseline's `offline/lib/`); `check_render_current.py`;
+  `check_no_em_dashes.py`; the pixel gate (trimmed against untrimmed,
+  `trim_shots.mjs`,
   `trim_diff.py`) whenever the style or the trim changes.
-- **Scratch tools** (session scratchpad, `...\bd1314d5-...\scratchpad\`):
-  `render_travel.py <root> <city> site/travel <pack url> <lang> <pill>
-  ["ferry:Name"]` renders any built city's map step with the Travel switch
-  (reads the main checkout's data, writes nothing under `outputs/`);
-  `range_server.py` (launch entry `basemap-proto-tmp`, added and removed
-  per run); headless Edge harnesses `travel_check.mjs`, `lang_check.mjs`,
-  `view_shots.mjs`, `legend_shots.mjs`, `ferry_shots.mjs`,
-  `zoom_shots.mjs`, `trim_shots.mjs`, `offline.mjs`, `attr_check.mjs`;
-  pack readers `pack_compare.py`, `pack_kinds.py`, `ferry_names.py`,
-  `pack_trim_estimate.py`. The in-app browser pane does not draw while
-  hidden; use the headless harnesses for screenshots.
+- **Scratch tools:** the session scratchpad is not visible to a new
+  session. Copies of the 43 that matter are in the main checkout's
+  `data/_basemap_build/session_tools_2026-10-08/` (copied 2026-10-08 by
+  shell, before the worktree guard stopped a README there; the owner to
+  confirm keeping them): `render_full.py` and `render_travel.py <root>
+  <city> <out> <pack url> <lang> <pill> ["ferry:Name"]` render a built
+  city's full page or its site page with the Travel switch (they read the
+  main checkout's data and write nothing under `outputs/`);
+  `full_shots.mjs` + `full_help.js` + `cases_*.json` (headless Edge views,
+  taps, offline runs, measurements); `travel_check.mjs` +
+  `summarize_travel.mjs` (the site Travel view test); `offline.mjs`,
+  `trim_shots.mjs` + `trim_diff.py`, `lang_check.mjs`; pack readers
+  `pack_compare.py`, `pack_kinds.py`, `pack_trim_estimate.py`,
+  `pack_bounds.py`; `make_standins.py`, `make_qrank_standin.py`;
+  `exceptions_tokyo.py`, `hue_pairs.py`, `hues_tokyo.py`, `stn_gap.py`;
+  `guard_test.py`; `range_server.py` (a launch entry `basemap-proto-tmp`,
+  added and removed per run, 127.0.0.1 only; a phone test uses a
+  `PHONE-LAN-` entry, stopped right after), `zip_roundtrip.py`,
+  `grid_sheet.py`. Usage lines at the top of each. The in-app browser
+  pane does not draw while hidden; use the headless harnesses.
 
 ### 2026-10-08 - The full Travel version built on Mendoza and tested on Tokyo; prototypes go to the app with a full handoff (owner; built and measured)
 
