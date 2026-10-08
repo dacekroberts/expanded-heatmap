@@ -58,7 +58,7 @@ or published; every proposal waits for the owner.
   `map_common.py` about 160 lines): merge it only before this branch's own
   push, and re-run `check_render_current` after.
 - **Open items, in order:** the owner's two open style questions (label
-  language, railway land over parks); the full version as a renderer option (no business
+  language, grass); the full version as a renderer option (no business
   data, the hard line enforced by a check); white line casings and white
   station dots in Travel for the owner's screenshots; Protomaps' dark
   flavor in Travel; the Overview Business/Travel toggle (`app/`, branch
@@ -101,13 +101,20 @@ or published; every proposal waits for the owner.
      the plum border, 57 from the water tint).
   5. The site's label language (Spanish first against the app's English
      over local script) is still open.
-- **New question: railway land over parks.** In Florence, OSM's
+- **Railway land is not tinted (owner, 2026-10-08).** In Florence, OSM's
   railway-land polygons along the Pisa line overlap the Cascine park, and
-  the Travel style paints railway land (lavender) over parks, so a
-  racecourse the stock style showed green turns lavender at z15 (5.7.2
-  never draws railway land). Parks over railway land would keep the green;
-  railway land on top keeps the corridor continuous. Screenshot:
-  `shots/pilot/pilot_sheet.png` in the scratchpad.
+  the first draft painted them lavender over the park. The owner: the rail
+  corridor runs the full length of each line, the lines already get their
+  own colour treatment, and the lavender was meant for station areas and
+  their walksheds, so the corridor needs no tint, and with no tint no
+  overlap rule is needed. Railway land is dropped from the tints; lavender
+  is left to platforms (#c3b8de) and, once drawn from the export, station
+  areas; #d6cfe8 is retired. Re-shot: Avignon and Florence at z13 and z15,
+  no errors, no lavender corridors.
+- **Open: grass.** The racecourse under the Pisa line is OSM `grass`, which
+  5.7.2 paints park-green and the Travel style leaves plain, since `grass`
+  also covers verges and lawns (1,175 grass polygons in the Mendoza pack
+  alone, against 2,829 parks). Tint it as parks, or keep it plain?
 - **Avignon and Florence built from the owner's extracts** (Geofabrik
   `provence-alpes-cote-d-azur-261006`, 390,142,851 bytes, sha256
   b02b440e...eaa226d; `centro-261006`, 384,646,965 bytes, sha256

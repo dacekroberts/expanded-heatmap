@@ -23,7 +23,8 @@
 // build can write it out as style.json for MapLibre Native as well.
 var travelStyle = (function () {
   // Light tints, one per category, pale and differing by hue; transit owns
-  // the lavender family (railway land, platforms).
+  // the lavender family (platforms, and station areas once drawn from the
+  // export, in the platform tint with the plum border #352a4d).
   var TINT = {
     earth: "#e2dfda",
     park: "#a8d5b5",
@@ -32,14 +33,17 @@ var travelStyle = (function () {
     sand: "#ece3c6",
     natural: "#d9d5cc",
     institution: "#e7dbd7",
-    railway: "#d6cfe8",
     platform: "#c3b8de",
     aerodrome: "#d8dae1",
     runway: "#c3c6cf"
   };
   // Land-use kinds as the builder writes them (protomaps/basemaps Landuse.java,
   // surveyed in the Mendoza pack 2026-10-08). Kinds not listed stay plain:
-  // built-up, business, attractions, farmland and `other`.
+  // built-up, business, attractions, farmland and `other`. Railway land is
+  // not tinted (owner, 2026-10-08): OSM's railway land runs the full length
+  // of many lines (the Pisa line over Florence's Cascine park), the lines
+  // carry their own colours, and the lavender is meant for station areas
+  // and platforms, so no overlap rule is needed.
   var LANDUSE = [
     ["park", ["park", "garden", "golf_course", "playground", "allotments",
               "village_green", "recreation_ground", "dog_park"]],
@@ -50,7 +54,6 @@ var travelStyle = (function () {
     ["natural", ["bare_rock", "glacier", "scree", "shingle"]],
     ["institution", ["hospital", "school", "university", "college", "kindergarten"]],
     ["aerodrome", ["aerodrome"]],
-    ["railway", ["railway"]],
     ["platform", ["platform"]]
   ];
   // 5.7.2's own land-use fills, replaced in the light flavor by LANDUSE and
