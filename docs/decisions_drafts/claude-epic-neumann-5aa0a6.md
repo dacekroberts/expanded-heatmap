@@ -106,6 +106,20 @@ or published; every proposal waits for the owner.
   station-area border #7e6fb0 is 24.7 from Retail blue and 26.5 from the
   planned violet, below the project's preferred 45; suggested to the app
   that the border sit at least 45 from the site's pin colours.
+- **Border decided (owner, 2026-10-08): dark plum #352a4d in both
+  projects**, replacing #7e6fb0. Re-measured here with
+  `pipeline/linecolour.delta_e`: 46.7 from Retail blue, 47.5 from the
+  violet, 49.5 from teal, 84.8 from olive (all above the preferred 45),
+  24.3 from the station dots' ring #333333, 65.4 from the lavender tint.
+  The owner compared both on mock station scenes with pins off and on. Tint
+  #d6cfe8 and platforms #c3b8de stand; the 3 px border goes on station
+  areas only, never on rail corridors; dark mode gets its own border,
+  drafted by the app with its dark tints. So the site's pin colours stay as
+  decided, and Cleanup's re-render needs no change for this.
+- **The shared style is the app's starting point, not a binding (owner,
+  2026-10-08).** The full Travel pilot will not be updated once the app is
+  under way; the app may depart from it, recording each departure and its
+  reason in its own DECISIONS.md.
 
 ### 2026-10-08 - Decisions for going public (owner, one pass)
 
