@@ -5,6 +5,7 @@
   "join_none": 1,
   "join_own": 12,
   "line_station_rows": 21,
+  "name_rule_city_rows": 1,
   "name_rule_spread_rows": 0,
   "names_masked": 0,
   "names_withheld": 0,
