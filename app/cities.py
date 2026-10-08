@@ -5920,9 +5920,16 @@ REGION_ZOOM_WITHOUT = {"Europe West": ("Stockholm",),
 # places (check_macro_labels.py, PROBLEMS 0 at 375, 768 and 1200).
 # Japan West was retired with the two halves on 2026-10-07; Osaka Prefecture
 # now has a view of its own, fitted.
+# Tokyo Metropolis 9.0, Saitama Prefecture 9.0 and Hyogo Prefecture 8.25
+# (2026-10-07, review lane 1, F3): at 9.5, 10.0 and 9.5 a phone's 343 px canvas
+# held 6 of Tokyo Metropolis's 9 cities (Tokyo itself among those off it), 2
+# of Saitama's 4 and 1 of Hyogo's 6. At these zooms every member is on the
+# phone canvas and check_macro_labels.py reports PROBLEMS 0; Hyogo needs
+# Amagasaki's label above and right of its dot (else Itami is labelled in no
+# view). Osaka Prefecture at 9.5 already holds all 6.
 REGION_ZOOM = {"France North": 5.0, "France South": 5.0, "Benelux": 6.25,
-               "Tokyo Metropolis": 9.5, "Saitama Prefecture": 10.0, "Chiba Prefecture": 9.5,
-               "Hyogo Prefecture": 9.5, "Osaka Prefecture": 9.5, "Kansai": 7.5, "Chugoku": 6.6}
+               "Tokyo Metropolis": 9.0, "Saitama Prefecture": 9.0, "Chiba Prefecture": 9.5,
+               "Hyogo Prefecture": 8.25, "Osaka Prefecture": 9.5, "Kansai": 7.5, "Chugoku": 6.6}
 
 # Global is every region that is not itself a composite, derived rather than
 # listed so a new region joins it without an edit here.
