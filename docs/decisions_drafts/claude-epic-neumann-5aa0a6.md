@@ -64,8 +64,11 @@ or published; every proposal waits for the owner.
   in `basemaps-main/tiles/target/` now carries the switch, the stock jar
   is `data/_basemap_build/protomaps-basemap-stock.jar`, the stock sources
   `data/_basemap_build/_stock_src/`).
-- **Open items, in order:** the z14 against z15 review for the owner
-  (`build_z14.sh` builds trimmed z14 packs); the full version as a renderer option (no business
+- **Done 2026-10-08: zoom 14 chosen; baselines in
+  `data/_basemap_build/baselines/` (move them with the build before this
+  worktree goes); `scripts/check_travel_style.mjs` (run it whenever the
+  style or the trim lists change).**
+- **Open items, in order:** the full version as a renderer option (no business
   data, the hard line enforced by a check); white line casings and white
   station dots in Travel for the owner's screenshots; Protomaps' dark
   flavor in Travel; the Overview Business/Travel toggle (`app/`, branch
@@ -73,6 +76,52 @@ or published; every proposal waits for the owner.
   non-Google font (item 17 below); the Free Worker against an R2 custom
   domain comparison (needs the owner's Cloudflare account and the
   Cloudflare terms read first).
+
+### 2026-10-08 - Packs stop at zoom 14; hidden features hidden in every layer, with a check; baselines kept (owner; built)
+
+- **Zoom 14 chosen (owner, 2026-10-08)**, on the samples of the next
+  entry: every pack is built `--maxzoom=14 --travel_trim=true`. Against the
+  stock zoom-15 build that is 64-72% smaller (Mendoza 3.89 to 1.41 MB,
+  Avignon 12.1 to 3.4 MB, Florence 18.1 to 6.1 MB).
+- **Baselines kept (owner: "save those as baselines if we need to adjust
+  the settings in the future").** `data/_basemap_build/baselines/
+  zoom14_trim_2026-10-08/` (this worktree, gitignored, 119 MB): the nine
+  packs (stock, trimmed, zoom 14, three cities) with SHA256SUMS, every
+  trim and zoom screenshot and sheet, the offline test page with its
+  libraries, fonts and the style as shot, the tools and the builder
+  patch, and `BASELINE.md` (inputs, measurements, how to re-run). The
+  2026-10-07 baseline given to the app was copied beside it from the
+  session scratchpad. **Both must move with the basemap build before this
+  worktree is removed.**
+- **A hidden feature is hidden everywhere (owner, after Viale del Visarno:
+  "ensure we have a check in place to fully hide accompanying
+  graphics/labels for features we are removing").**
+  - Structural: `travelStyle.HIDDEN` names what the Travel map hides per
+    source layer (points of interest and land cover entirely; roads of
+    kind rail or with a hidden `kind_detail`; county and locality lines;
+    land use outside the kept kinds). A final pass applies it to EVERY
+    layer reading that source layer, whatever its type (line, casing,
+    label, one-way arrow, fill), so a layer added later inherits it.
+  - Check: `scripts/check_travel_style.mjs <basemaps.js>
+    [<TravelTrim.java>]` evaluates every layer's filter against 101
+    hidden samples (each hidden kind with bridge, tunnel, one-way, link,
+    shield and name variants) and 87 kept ones, in light and dark, city
+    and world, site and full: every hidden sample must be rejected by every
+    layer, every kept one drawn by some layer; an unknown filter operator
+    fails. With `TravelTrim.java` it also requires the builder's lists to
+    equal the style's. Passes. Run against a copy of the style with labels
+    exempted from the rule, it fails 228 times, the Visarno label among
+    them. The end-to-end gate stays the pixel test (Travel render of a
+    trimmed and an untrimmed pack must match).
+  - Its first run found a gap: dark mode kept 5.7.2's own land-use fills,
+    which leave gardens, meadows, kindergartens and platforms undrawn. Dark
+    now uses the same categories as light, in 5.7.2's dark colours (an
+    INTERIM table until transit-globe's dark tints), which also closes the
+    caveat of the trim entry: trimmed and untrimmed packs draw alike in
+    dark.
+  - Not yet in `scripts/check_all.py`: it needs `basemaps.js`, which the
+    repo does not carry. Hooking it in (with a vendored copy, when the
+    release self-hosts the libraries) is for landing time.
 
 ### 2026-10-08 - Zoom 14 against zoom 15: half the size again, little a rider would miss (measured, owner to decide)
 
