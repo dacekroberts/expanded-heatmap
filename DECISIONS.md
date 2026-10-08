@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**187 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**188 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-08**
 
@@ -34,6 +34,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Analytics' four map issues fixed: lost letters in full-width and at a name's start, Saitama's layer codes, Ōita's lost numeral, and Ōita's masked names stated (owner; branch legend-dot-georgia, held for review time)](#2026-10-08---analytics-four-map-issues-fixed-lost-letters-in-full-width-and-at-a-names-start-saitamas-layer-codes-ōitas-lost-numeral-and-ōitas-masked-names-stated-owner-branch-legend-dot-georgia-held-for-review-time)
 - [The comments map_common ships in every map reworded to the neutral-comment rules (owner; branch legend-dot-georgia, held for review time)](#2026-10-08---the-comments-map_common-ships-in-every-map-reworded-to-the-neutral-comment-rules-owner-branch-legend-dot-georgia-held-for-review-time)
 - [The sign rule reaches the Japanese pages' name bullet, and Ōita's masked-name clause, both approved (owner; branch legend-dot-georgia, held for review time)](#2026-10-08---the-sign-rule-reaches-the-japanese-pages-name-bullet-and-ōitas-masked-name-clause-both-approved-owner-branch-legend-dot-georgia-held-for-review-time)
+- [The sign rule on the eight Japanese pages whose lists name no operator (owner)](#2026-10-08---the-sign-rule-on-the-eight-japanese-pages-whose-lists-name-no-operator-owner)
 
 **2026-10-07**
 
@@ -6435,3 +6436,14 @@ per-city shape of their siblings.
   Higashiosaka): each says only that an operator's own name cannot be
   checked. The sign rule needs no operator, so it applies there too; the
   sentence for them is new wording and goes to the owner.
+
+### 2026-10-08 - The sign rule on the eight Japanese pages whose lists name no operator (owner)
+
+- **Approved (owner, "1 and 2 accepted"):** Nagasaki, Kitakyushu, Okayama,
+  Hamamatsu, Kurume, Sasebo, Shimonoseki and Higashiosaka carry no rule
+  bullet, only one saying an operator's own name cannot be checked; it gains
+  "; where a trade name is written as a bare personal name, the dot shows
+  its permit type instead" ("register type" on Hamamatsu, whose page says
+  "Names and types"), since the sign rule needs no operator. With the 56
+  pages of the entry before, all 64 Japanese pages state it.
+  `legend-dot-georgia` `16a68efe`, held for review time.
