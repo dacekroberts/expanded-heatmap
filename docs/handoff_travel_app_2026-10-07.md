@@ -23,8 +23,9 @@ The owner's decisions and the measurements behind them are in this repo's
 ## Features to keep from the website (owner)
 
 - **Tap or hover on a line highlights it.** The website's maps do this
-  today; the app keeps it, by touch first. On the website's open basemap
-  switch it is a stated requirement too.
+  today; the app keeps it, by touch first, on every interactive map. A
+  static copy (an image, a printed or shared snapshot) is exempt. On the
+  website's open basemap switch it is a stated requirement too.
 
 ## Export scope (owner, 2026-10-07)
 
