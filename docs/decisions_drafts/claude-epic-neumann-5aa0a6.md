@@ -28,11 +28,11 @@ or published; every proposal waits for the owner.
 
   | Input | Host | Size | Licence read |
   |---|---|---|---|
-  | OSM extract (`--area`, Geofabrik name, or a local file) | download.geofabrik.de (Argentina: `south-america/argentina-latest.osm.pbf`) | 432 MB | running |
-  | Water polygons, land polygons | osmdata.openstreetmap.de | 931 MB + 952 MB | running |
-  | Daylight landcover | r2-public.protomaps.com (a Protomaps host) | 36 MB | running; the original publisher's copy is asked for, and dropping the layer also drops ESA's credit |
-  | QRank (POI ranking) | qrank.toolforge.org | 106 MB | running (recorded CC0 from its README) |
-  | pgf-encoding (script names) | wipfli.github.io | 0.8 MB | running |
+  | OSM extract (`--area`, Geofabrik name, or a local file) | download.geofabrik.de (Argentina: `south-america/argentina-latest.osm.pbf`) | 432 MB | **permitted**: ODbL only, nothing beyond the OSM credit; scripted downloads fine with a no-repeat guard ("Download responsibly!", 2025-09-10); "-latest" redirects to a dated file; dated daily files are deleted, so a 4.6 offer names a monthly or yearly file or keeps a copy; never the login-only "internal" extracts |
+  | Water polygons, land polygons | osmdata.openstreetmap.de | 931 MB + 952 MB | **permitted**: ODbL, the OSM credit covers it; automation allowed, conditional requests asked ("we might suspend the service" on abuse); keep the cached zips between builds |
+  | Daylight landcover | r2-public.protomaps.com (a Protomaps host) | 36 MB | **data permitted with ESA's credit** (CC BY 4.0, prescribed wording; plus Daylight's ODbL umbrella, probable); **the Protomaps host carries the Terms-of-Use ambiguity again**; the original publisher's frozen copy is live at `daylight-openstreetmap.s3.us-west-2.amazonaws.com/landcover/low.{shp,dbf,shx,prj}` (34.5 MB, 2023-10-05, Daylight sunset 2024) and would need converting to GeoPackage |
+  | QRank (POI ranking) | qrank.toolforge.org | 106 MB | **data CC0; the host's Wikimedia Cloud Services end-user terms carry an open-ended indemnity**: an owner decision. Used only to set each POI's first zoom; no QRank data in the tiles. Not updated since 2024-03-16 |
+  | pgf-encoding (script names) | wipfli.github.io | 0.8 MB | **permitted**: what reaches the tiles is CC0 (encoded Devanagari names, two metadata keys); the zip's MIT code and OFL fonts are not passed on |
   | Natural Earth | naciscdn.org | 446 MB | done: public domain, no credit needed |
   | Java 21 JDK (Eclipse Temurin 21.0.12.1, portable zip, no install) | github.com/adoptium | 205 MB | a tool, not shipped |
   | Maven 3.9.16 (portable zip) | dlcdn.apache.org | 9 MB | a tool, not shipped |
@@ -40,6 +40,18 @@ or published; every proposal waits for the owner.
   About 3.1 GB in all, into the scratchpad or a gitignored `data/` folder,
   never committed. The Java build runs through `scripts/heavy_job.py` with
   an estimated peak, since no Java run has been measured here.
+- **Downloads by the owner, not this session** (owner, 2026-10-07: "send
+  links to me so as to not draw up usage"). Files go into the gitignored
+  `data/_basemap_build/` of this worktree (created empty). Compiling the
+  builder makes Maven fetch its libraries from Maven Central, the one step
+  that cannot be done by hand: the owner runs it or approves it.
+- **Recommended for the pilot, owner to confirm:** skip QRank and the
+  landcover layer by giving the builder empty stand-in files made locally
+  (no download, no Toolforge or Protomaps terms, no ESA credit). Costs: POI
+  labels appear at slightly different zooms than in Protomaps' build, and
+  low zooms lose their land-cover shading. Either can come back later (the
+  original Daylight shapefile with ESA's credit; QRank with the owner's
+  acceptance of the indemnity).
 - **What the test measures:** that a self-built Mendoza pack draws the same
   map as the downloaded one (same style, same view; screenshot and rendered
   feature counts), its size against 4.13 MB, the build's time and peak
