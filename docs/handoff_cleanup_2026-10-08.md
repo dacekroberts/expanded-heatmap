@@ -40,7 +40,13 @@ items are done or moved into PLAN.
     to `place-search` and `basemap`. Then update every handoff, memory note,
     batch prompt and `docs/session_roles.md`'s table naming the old ones. A
     move keeps the branch, files and junctions; it is not a removal, so the
-    place-search hold still applies to the new path.
+    place-search hold still applies to the new path. Batch 2b tells Cleanup
+    when it is ready; the owner starts batch 3 after the move.
+  - **Do not ARCHIVE a pilot session before its move.** The app's archive
+    "by default cleans up its worktree" and archives side sessions sharing
+    it. Batch 2a's session (nothing pending) and the basemap session wait
+    until their worktree is moved, everything is committed and, for basemap,
+    `data/_basemap_build` is copied.
   - The review lanes and every build worktree were removed on 2026-10-08
     after the owner retired their sessions; `data/_review/lane-1..4/` are
     kept.
