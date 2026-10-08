@@ -80,39 +80,95 @@ st.subheader("Covered cities")
 # The map opens on ONE region and re-centres on the others, rather than fitting
 # every city at once - see cities.py's REGIONS block, and
 # docs/scaling_thresholds.md for why a single fitted world view stops working
-# somewhere around 12-15 cities. The radio is hidden entirely while there is
+# somewhere around 12-15 cities. The selector is hidden entirely while there is
 # only one region, so this costs nothing until a second country exists.
 _region_names = [r["name"] for r in REGIONS]
 _region_cities = {r["name"]: r["cities"] for r in REGIONS}
 if len(REGIONS) > 1:
-    # OPENS ON THE REGION IN THE LINK (`?region=`, the back links' target, owner
-    # 2026-10-07) and keeps the URL on the region shown, so a reload or a
-    # shared link returns to it. The URL is applied only when it changed since
-    # this page last wrote it, or when the radio has no state (Streamlit drops
-    # a widget's state when the reader leaves the page): a click updates the
-    # radio before the rerun while the URL still holds the previous region,
-    # and re-applying it then would undo the click (country_sections.py's
-    # select_country, the same rule).
-    _wanted = st.query_params.get("region")
-    if _wanted in _region_names and (
-            _wanted != st.session_state.get("_macro_region_applied")
-            or "macro_region" not in st.session_state):
-        st.session_state["macro_region"] = _wanted
-    st.session_state.setdefault("macro_region", DEFAULT_REGION)
-    region = st.radio(
-        "Region",
-        _region_names,
-        format_func=lambda n: f"{n} ({len(_region_cities[n])})",
-        horizontal=True,
-        key="macro_region",
+    # TWO ROWS (owner, 2026-10-07; cities.SUB_VIEWS): the broad views, then
+    # the closer views of the chosen one, the broad view first as "All of".
+    # The flat list of 33 views measured 665 px tall at 375 px. Read with
+    # getattr for the reason given at REGION_ZOOM below: a stale cities.py
+    # falls back to one row of every view.
+    _cm = sys.modules.get("cities")
+    _menu_top = getattr(_cm, "MENU_TOP", _region_names)
+    _menu_sub = getattr(_cm, "MENU_SUB", {})
+    _menu_parent = {c: p for p, kids in _menu_sub.items() for c in kids}
+
+    # THE URL IS THE REGION SHOWN (`?region=`, the back links' and the map's
+    # region button's target, owner 2026-10-07): a reload or a shared link
+    # returns to it, and a link to a closer view sets both rows. A widget
+    # writes the URL in its callback, which runs before the page does, so the
+    # page never reads a URL one click behind; the widgets are then set from
+    # the URL. Global needs no parameter, and an unknown one opens Global.
+    region = st.query_params.get("region")
+    if region not in _region_names:
+        region = DEFAULT_REGION
+    _group = _menu_parent.get(region, region)
+    if _group not in _menu_top:
+        _menu_top = [*_menu_top, _group]
+
+    def _go(key):
+        """A menu callback: show the view the widget now holds. A pill clicked
+        again clears to None, which keeps the view shown."""
+        view = st.session_state.get(key)
+        if view is None or view not in _region_names:
+            return
+        if view == DEFAULT_REGION:
+            if "region" in st.query_params:
+                del st.query_params["region"]
+        else:
+            st.query_params["region"] = view
+
+    def _count(n):
+        return f"{n} ({len(_region_cities[n])})"
+
+    def _sub_label(n):
+        # The broad view as "All of ...", a half without its parent's name
+        # ("United States West" reads "West" under the United States).
+        if n == _group:
+            named = getattr(_cm, "running_name", lambda r: r)
+            return f"All of {named(n)} ({len(_region_cities[n])})"
+        short = n[len(_group) + 1:] if n.startswith(_group + " ") else n
+        return f"{short} ({len(_region_cities[n])})"
+
+    _sub = [_group, *_menu_sub[_group]] if _group in _menu_sub else []
+
+    # PILLS ON A WIDE SCREEN, DROPDOWNS ON A PHONE (owner: phone first). Both
+    # are drawn and CSS shows one, at Streamlit's own 640 px column breakpoint.
+    # Measured 2026-10-07 at 375 px with Japan chosen: both rows as pills 568
+    # px, as dropdowns 152 px (68 px for one row); at 1200 px the pills take
+    # 96 px for one row and 208 px for Japan's two. Each widget is set from
+    # the URL before it is drawn, so the two never disagree. The hidden one's
+    # layout wrapper is hidden with it, or it would still take a 16 px gap.
+    st.markdown(
+        "<style>"
+        "@media (min-width: 641px) { div:has(> .st-key-region-menu-narrow) { display: none; } }"
+        "@media (max-width: 640px) { div:has(> .st-key-region-menu-wide) { display: none; } }"
+        "[data-testid='stElementContainer']:has(.region-menu-css) { display: none; }"
+        "</style><span class='region-menu-css'></span>",
+        unsafe_allow_html=True,
     )
-    st.session_state["_macro_region_applied"] = region
-    # The default region needs no parameter; any other is written out.
-    if region == DEFAULT_REGION:
-        if "region" in st.query_params:
-            del st.query_params["region"]
-    elif st.query_params.get("region") != region:
-        st.query_params["region"] = region
+    with st.container(key="region-menu-wide"):
+        st.session_state["region_top_pills"] = _group
+        st.pills("Region", _menu_top, format_func=_count, key="region_top_pills",
+                 on_change=_go, args=("region_top_pills",))
+        if _sub:
+            _k = f"region_sub_pills_{_group}"
+            st.session_state[_k] = region
+            st.pills("Closer view", _sub, format_func=_sub_label, key=_k,
+                     on_change=_go, args=(_k,))
+    with st.container(key="region-menu-narrow"):
+        st.session_state["region_top_select"] = _group
+        st.selectbox("Region", _menu_top, format_func=_count, key="region_top_select",
+                     on_change=_go, args=("region_top_select",))
+        if _sub:
+            _k = f"region_sub_select_{_group}"
+            st.session_state[_k] = region
+            st.selectbox("Closer view", _sub, format_func=_sub_label, key=_k,
+                         on_change=_go, args=(_k,))
+    if region == DEFAULT_REGION and "region" in st.query_params:
+        del st.query_params["region"]
 else:
     region = DEFAULT_REGION
 
