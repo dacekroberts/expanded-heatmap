@@ -47,10 +47,12 @@ or published; every proposal waits for the owner.
 - **Done 2026-10-08: the self-build comparison** (entry below; 3 min 18 s,
   peak 3.27 GB measured, same map). The gate needs an absolute `java.exe`
   path; the output is `<area>.pmtiles` in the working directory.
-- **Open items, in order:** Avignon and Florence (extracts first, owner
-  downloads); the shared Travel style (the app's rules below,
-  including the dotted disputed-border layer and the label-free world map)
-  as a style filter, then the full version as a renderer option (no business
+- **Done 2026-10-08: the shared Travel style** (`pipeline/travel_style.js`,
+  entry below; five questions for the owner there). The offline test page
+  takes `&travel=1` and `&world=1`; `style_shots.mjs`, `world_probe.mjs`,
+  `style_test.mjs` and `crop_disputed.py` in the scratchpad.
+- **Open items, in order:** Avignon and Florence (extracts downloading,
+  owner, 2026-10-08); the full version as a renderer option (no business
   data, the hard line enforced by a check); white line casings and white
   station dots in Travel for the owner's screenshots; Protomaps' dark
   flavor in Travel; the Overview Business/Travel toggle (`app/`, branch
@@ -58,6 +60,74 @@ or published; every proposal waits for the owner.
   non-Google font (item 17 below); the Free Worker against an R2 custom
   domain comparison (needs the owner's Cloudflare account and the
   Cloudflare terms read first).
+
+### 2026-10-08 - The shared Travel style built as one filter; disputed lines dotted, world map label-free (built, owner to review)
+
+- **Built (branch only).** `pipeline/travel_style.js`, one function that
+  turns the layer list of @protomaps/basemaps 5.7.2 into the Travel style:
+  `travelStyle(layers, {flavor, world})`. `pipeline/map_common.py` inlines
+  it into the OpenBasemap layer, so the site's Travel view uses it now; the
+  full version and transit-globe take the same file as their reference.
+  Maps without `open_basemap` are unchanged (`check_render_current`: 170 of
+  170 current; the Business render carries no Travel code).
+- **What it does, per the app's rules** (previous entries):
+  - Drops land cover, points of interest, road shields and the basemap's
+    own rail; drops service roads, driveways, parking aisles, alleys,
+    tracks and drive-throughs (matched on `kind_detail`, in whichever
+    filter syntax each layer already uses, since MapLibre cannot mix the
+    two); fades tunnels and taxiways to half opacity.
+  - Land-use tints in the light flavor: earth #e2dfda; parks #a8d5b5
+    (park, garden, golf course, playground, allotments, village green,
+    recreation ground); wild land #c2d8b0 (national park, nature reserve,
+    protected area, forest, wood, scrub, grassland, meadow, wetland, heath);
+    cemetery #cad3c7; beach and sand #ece3c6; other natural #d9d5cc (bare
+    rock, glacier, scree, shingle); institutions #e7dbd7 (hospital, school,
+    university, college, kindergarten); aerodrome #d8dae1, runways
+    #c3c6cf; railway land #d6cfe8 and platforms #c3b8de. Industrial, zoo,
+    business kinds, pitches, grass, farmland and `other` stay plain.
+  - Boundaries: settled country lines as 5.7.2 draws them; region lines
+    only (county and locality lines, which become wards per city later,
+    are off); **every line the builder flags `disputed`, or of kind
+    `unrecognized_country`, moves to its own layer**: #c4c4c4, 1.5 px,
+    round-cap dots (`[0, 3]`: 1.5 px dots 3 px apart), directly above the
+    country lines, at every zoom.
+  - Ferries (`kind=ferry`) and cable cars (`kind=aerialway`), which 5.7.2
+    does not draw, get their own layers: ferries dashed crimson #b0004f,
+    lifts solid burnt orange #d84315. Measured with `delta_e`: every blue
+    tried sat under 45 from Retail blue or the backup teal; #b0004f is 59
+    from the plum border and 63 from violet, #d84315 72 from olive.
+  - `world: true` keeps only background, earth, water, country lines and
+    the disputed layer: no country, sea or place names (owner, 2026-10-08).
+- **Measured** (headless Edge, 375 px phone, offline page, Mendoza pack):
+  no style errors and no outside requests at any zoom step, stock or
+  Travel, light or dark; the self-built pack draws exactly what the
+  downloaded one does under the Travel style. On the downloaded pack's
+  world tile, the world view draws **29 disputed segments dotted, none left
+  on the settled layer, zero labels**; crops show Kashmir's lines, the
+  Crimea isthmus, Cyprus's Green Line and the Somaliland lines dotted where
+  5.7.2 drew them solid. The half version (re-rendered Mendoza with the
+  style) passes `travel_check.mjs` on desktop and touch unchanged; the
+  attribution check passes at 375x812, 390x844, 360x740, 1280x800 and
+  1440x900 with Travel selected (a 600 px tall viewport cannot hold the
+  650 px map, so it reports unmeasured, not breached). Node checks of the
+  rules: `style_test.mjs` in the scratchpad.
+- **For the owner (and the app) to decide:**
+  1. Kinds `unrecognized_region` and `unrecognized_macroregion` are neither
+     region nor disputed under the decision's wording, so they are not
+     drawn at all. Draw them dotted too?
+  2. The world map keeps country lines only, no region lines. Keep?
+  3. At world zoom a short disputed segment gets only a few dots; `[0, 2]`
+     (dots 3 px apart centre to centre) reads denser. Keep `[0, 3]`?
+  4. Ferry crimson and lift orange are drafts chosen by measurement, not
+     taste.
+  5. The site's Travel view prototype labels in Spanish (`label_lang`
+     "es", local language first, as OSM's tiles do); the app's rule is
+     English over the local script. Same rule on the site?
+- **Not in the tiles:** station-area polygons. The builder writes no
+  station kind, so the plum-bordered station areas need the export's
+  platforms and exits (a footprint) or a builder change; deferred to the
+  full version. The dark flavor gets the structural rules only (drops,
+  filters, disputed layer); its tints wait for the app's dark drafts.
 
 ### 2026-10-08 - The self-built Mendoza pack draws the same map as the downloaded one (measured)
 
