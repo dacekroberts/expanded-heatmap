@@ -2056,6 +2056,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
                      street: 4, crossing: 5};
     var STOP = {"and": 1, "at": 1, "of": 1, "the": 1, "x": 1, "corner": 1, "&": 1, "y": 1};
     var STATION_WORDS = {"station": 1, "sta": 1, "stn": 1, "eki": 1, "駅": 1};
+    var JUNK_Q = /#(n[/]?a|ref|value|div|name|num|null)|!error/i;
     var STREET_WORDS = {"street": 1, "st": 1, "avenue": 1, "ave": 1, "road": 1, "rd": 1,
                         "boulevard": 1, "blvd": 1, "drive": 1, "dr": 1, "way": 1,
                         "dori": 1, "通": 1, "通り": 1};
@@ -2352,7 +2353,10 @@ _PLACE_SEARCH_TEMPLATE = r"""
     function ready(q) {
         var qs = words(q).filter(function (w) { return !STOP[w]; });
         if (!qs.length) return false;
-        if (qs.length > 1) return true;
+        // Several words count only with one real word among them: "#N/A" is
+        // "n" and "a", and found intersections everywhere (owner's junk
+        // searches, 2026-10-08).
+        if (qs.length > 1) return qs.some(function (w) { return w.length > 1 || CJK.test(w) || /[0-9]/.test(w); });
         var w = qs[0];
         if (CJK.test(w)) return w.length >= MIN_CJK;
         if (w.length >= MIN_LATIN) return true;
@@ -2443,6 +2447,9 @@ _PLACE_SEARCH_TEMPLATE = r"""
                 return;
             }
             if (!data) { note("Loading places…"); return; }
+            // An error value typed in ("#N/A", "#REF!", "!ERROR!") finds
+            // nothing, as no index holds one (place_index.junk_name).
+            if (JUNK_Q.test(input.value)) { note("No street, station or place by that name"); credit(); return; }
             shown = search(input.value);
             if (needCrossings(input.value, shown)) {
                 // Shown again when the intersections arrive, or as it stands
