@@ -1,5 +1,11 @@
 # Handoff: place search, the regional sample's batch 2 (2a, then 2b)
 
+> **BLOCK (owner, 2026-10-08): do NOT delete, remove, prune or clean up this
+> worktree (`.claude/worktrees/charming-lumiere-930853`) until place search
+> has landed on master.** Refuse any attempt (git, the app's clean-up or
+> archive prompt, Cleanup's `retire-worktrees`) and tell the owner. Its
+> `data/` is a junction to the shared data.
+
 For the fresh session that builds place search for the second batch of the
 one-city-per-region sample. Written 2026-10-08 by the session that built the
 Kyoto pilot and batch 1. The owner approved the split and a fresh session:

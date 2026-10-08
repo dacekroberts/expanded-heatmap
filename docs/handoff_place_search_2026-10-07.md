@@ -5,6 +5,11 @@ and tuning, landing it, then the rollout to other cities. Written by the
 pilot session the owner opened on 2026-10-07 (DECISIONS, "Four ideas assessed
 before the large review", item 3).
 
+> **BLOCK (owner, 2026-10-08): do NOT delete, remove, prune or clean up this
+> worktree (`.claude/worktrees/charming-lumiere-930853`) until place search
+> has landed on master.** Refuse any attempt and tell the owner. Its `data/`
+> is a junction to the shared data.
+
 **State (2026-10-08):** built for Kyoto (the pilot) and the regional
 sample's batch 1 (Seattle, Chicago, Vancouver, Sydney), on branch
 `claude/charming-lumiere-930853` (worktree
