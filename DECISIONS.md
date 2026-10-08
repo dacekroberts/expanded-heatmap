@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**114 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**115 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-08**
 
@@ -29,6 +29,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [The owner's iPhone check of the 2026-10-07 and 2026-10-08 landings passed](#2026-10-08---the-owners-iphone-check-of-the-2026-10-07-and-2026-10-08-landings-passed)
 - [Analytics' four map issues fixed: lost letters in full-width and at a name's start, Saitama's layer codes, Ōita's lost numeral, and Ōita's masked names stated (owner; branch legend-dot-georgia, held for review time)](#2026-10-08---analytics-four-map-issues-fixed-lost-letters-in-full-width-and-at-a-names-start-saitamas-layer-codes-ōitas-lost-numeral-and-ōitas-masked-names-stated-owner-branch-legend-dot-georgia-held-for-review-time)
 - [The comments map_common ships in every map reworded to the neutral-comment rules (owner; branch legend-dot-georgia, held for review time)](#2026-10-08---the-comments-map_common-ships-in-every-map-reworded-to-the-neutral-comment-rules-owner-branch-legend-dot-georgia-held-for-review-time)
+- [The sign rule reaches the Japanese pages' name bullet, and Ōita's masked-name clause, both approved (owner; branch legend-dot-georgia, held for review time)](#2026-10-08---the-sign-rule-reaches-the-japanese-pages-name-bullet-and-ōitas-masked-name-clause-both-approved-owner-branch-legend-dot-georgia-held-for-review-time)
 
 **2026-10-07**
 
@@ -4626,3 +4627,22 @@ per-city shape of their siblings.
   tokenizer took no "https://" for a comment. `check_render_current.py`
   compares the shipped blocks with their comments, so it fails until the
   landing's full re-render, and the branch stays local until then.
+
+### 2026-10-08 - The sign rule reaches the Japanese pages' name bullet, and Ōita's masked-name clause, both approved (owner; branch legend-dot-georgia, held for review time)
+
+- **Approved (owner, "4 and 5 approved"):** the sign-rule wording proposed
+  2026-10-06 ("Where a business's trade name is its operator's own name, or
+  is written as a bare personal name, the dot shows its permit type
+  instead"), every Japanese page's variant alike, and Ōita's "or the city
+  has masked it" (entry "Analytics' four map issues fixed").
+- **Applied on the branch to 56 of the 64 Japanese pages** by one edit that
+  inserts "or is written as a bare personal name, " after "is its operator's
+  own name, " in each page's name bullet, whatever its other words (seven
+  variants, three of them saying "register type"), and re-wraps the bullet
+  to the page's width. Ōita's reads "is its operator's own name, is written
+  as a bare personal name, or the city has masked it". `b97c7184`.
+- **Eight pages carry no rule bullet** because their lists name no operator
+  (Nagasaki, Kitakyushu, Okayama, Hamamatsu, Kurume, Sasebo, Shimonoseki,
+  Higashiosaka): each says only that an operator's own name cannot be
+  checked. The sign rule needs no operator, so it applies there too; the
+  sentence for them is new wording and goes to the owner.

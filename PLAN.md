@@ -89,8 +89,10 @@ Detail files: [japan](docs/plan_detail/japan.md),
   the review (2026-10-07). Still to come: Brăila and Galați, Nagakute and
   Nisshin, Itami and Toyonaka into `KNOWN_STACKED`.
 
-- [ ] **Review time: the Japanese pages' name-rule bullet gains the sign rule**
-  (owner, 2026-10-06). `docs/plan_detail/japan.md`, "The name-rule bullet's sign rule".
+- [~] **The Japanese pages' name-rule bullet gains the sign rule: APPROVED
+  2026-10-08, on `legend-dot-georgia` (56 of 64 pages).** Eight pages with
+  no rule bullet (their lists name no operator) wait on the owner's wording.
+  `docs/plan_detail/japan.md`, "The name-rule bullet's sign rule".
 
 - [ ] São Paulo's Linha 6-Laranja stays out until full service (sentence
   OK'd); re-check when it leaves trial operation.
