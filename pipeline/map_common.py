@@ -2951,6 +2951,107 @@ OSM_ATTRIBUTION = (
 )
 
 
+# THE OPEN BASEMAP (PROTOTYPE, DECISIONS.md 2026-10-07 "Four ideas assessed",
+# item 4). tile.openstreetmap.org forbids offline use and CARTO's terms forbid
+# caching, so the open choice is Protomaps' OpenStreetMap build (code BSD-3,
+# styles CC0, tiles an ODbL produced work) in one PMTiles file per city, read
+# by HTTP range request and drawn by MapLibre GL (BSD-3) inside Leaflet
+# through maplibre-gl-leaflet (ISC). Its credit is OSM_ATTRIBUTION, carried
+# by the outer layer, so it stays in Leaflet's own control and never doubles:
+# the GL layer is built with attributionControl false, which makes the
+# plugin add nothing. The libraries load only when a reader picks "Open",
+# so the default view costs nothing new. Versions are pinned: maplibre-gl 6
+# ships ES modules only, which the plugin cannot read.
+OPEN_BASEMAP_LIBS = (
+    "https://cdn.jsdelivr.net/npm/maplibre-gl@5.24.0/dist/maplibre-gl.css",
+    "https://cdn.jsdelivr.net/npm/maplibre-gl@5.24.0/dist/maplibre-gl.js",
+    "https://cdn.jsdelivr.net/npm/@maplibre/maplibre-gl-leaflet@0.1.4/leaflet-maplibre-gl.js",
+    "https://cdn.jsdelivr.net/npm/pmtiles@4.5.0/dist/pmtiles.js",
+    "https://cdn.jsdelivr.net/npm/@protomaps/basemaps@5.7.2/dist/basemaps.js",
+)
+# Glyphs and sprites for the Protomaps style. Its own hosted copy for the
+# prototype; a release self-hosts them beside the packs.
+OPEN_BASEMAP_ASSETS = "https://protomaps.github.io/basemaps-assets"
+
+
+class OpenBasemap(folium.map.Layer):
+    """A base layer drawn from one city's PMTiles pack, loaded on first use.
+
+    pmtiles_url: an absolute http(s) URL the browser can range-request.
+    label_lang: the language Protomaps labels prefer, falling back to the
+    feature's own name, as OSM's tiles show it.
+    """
+
+    _template = Template("""
+        {% macro script(this, kwargs) %}
+        var {{ this.get_name() }} = (function () {
+            var LIBS = {{ this.libs|tojson }}, loading = null;
+            function load() {
+                if (loading) return loading;
+                loading = LIBS.reduce(function (p, url) {
+                    return p.then(function () {
+                        return new Promise(function (ok, fail) {
+                            var css = /[.]css$/.test(url);
+                            var el = document.createElement(css ? "link" : "script");
+                            if (css) { el.rel = "stylesheet"; el.href = url; }
+                            else { el.src = url; }
+                            el.onload = ok; el.onerror = fail;
+                            document.head.appendChild(el);
+                        });
+                    });
+                }, Promise.resolve()).then(function () {
+                    var protocol = new pmtiles.Protocol();
+                    maplibregl.addProtocol("pmtiles", protocol.tile);
+                });
+                return loading;
+            }
+            var Layer = L.Layer.extend({
+                options: {attribution: {{ this.attribution|tojson }}},
+                onAdd: function (map) {
+                    var self = this;
+                    self._active = true;
+                    load().then(function () {
+                        if (!self._active) return;
+                        if (!self._gl) {
+                            self._gl = L.maplibreGL({
+                                attributionControl: false,
+                                style: {
+                                    version: 8,
+                                    glyphs: {{ (this.assets ~ "/fonts/{fontstack}/{range}.pbf")|tojson }},
+                                    sprite: {{ (this.assets ~ "/sprites/v4/light")|tojson }},
+                                    sources: {protomaps: {
+                                        type: "vector",
+                                        url: "pmtiles://" + {{ this.pmtiles_url|tojson }}
+                                    }},
+                                    layers: basemaps.layers("protomaps",
+                                        basemaps.namedFlavor("light"),
+                                        {lang: {{ this.label_lang|tojson }}})
+                                }
+                            });
+                        }
+                        self._gl.addTo(map);
+                    });
+                },
+                onRemove: function (map) {
+                    this._active = false;
+                    if (this._gl) map.removeLayer(this._gl);
+                }
+            });
+            return new Layer();
+        })();
+        {% endmacro %}
+    """)
+
+    def __init__(self, pmtiles_url, *, name="Open", label_lang="en", show=False):
+        super().__init__(name=name, overlay=False, control=True, show=show)
+        self._name = "OpenBasemap"
+        self.pmtiles_url = pmtiles_url
+        self.label_lang = label_lang
+        self.libs = list(OPEN_BASEMAP_LIBS)
+        self.assets = OPEN_BASEMAP_ASSETS
+        self.attribution = OSM_ATTRIBUTION
+
+
 _FINGERPRINT_TABLE = Path(__file__).with_name("fingerprint_marks.json")
 _fingerprint_cache = {}
 
@@ -2969,8 +3070,13 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
                    crs_geographic, crs_projected, ring_edges_meters, ring_labels,
                    center=None, zoom=None, label_focus=None, rings_shown=False,
                    all_city_heat=True, animate_clusters=False, lang=None, pins=True,
-                   legend_names=None):
+                   legend_names=None, open_basemap=None):
     """Render one city's heatmap to a standalone HTML file.
+
+    open_basemap: optional dict(pmtiles_url=..., label_lang=...), a city's
+    Protomaps pack (see OpenBasemap). Given, the layer menu offers two base
+    layers, "Standard" (OSM's tiles, still the default) and "Open". Omitted,
+    the map renders exactly as before. A prototype: no city passes it.
 
     legend_names: optional {line key: full public name}, for a city whose
     on-map labels are the operators' LINE CODES (Tokyo's 52 lines, owner
@@ -3087,9 +3193,11 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     # map's frame and showed "refused to connect". check_provenance.py
     # requires the target on every map.
     folium.TileLayer(
-        tiles="OpenStreetMap", name=map_title,
+        tiles="OpenStreetMap", name="Standard" if open_basemap else map_title,
         attr=OSM_ATTRIBUTION,
     ).add_to(m)
+    if open_basemap:
+        OpenBasemap(**open_basemap).add_to(m)
 
     # Two heat layers, same tuning, different universe: within-rings is the
     # default; the whole-city one is an opt-in for context.
