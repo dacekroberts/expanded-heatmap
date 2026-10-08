@@ -942,37 +942,37 @@
  "toyonaka": {
   "in_ring": 4100,
   "all": 5205,
-  "map_blob": "8ed10c179631bbc892ab9606235a469b3e3685dd"
+  "map_blob": "076461551fb9010ffe48b37a3a657b1c855b989a"
  },
  "hirakata": {
   "in_ring": 2919,
   "all": 4607,
-  "map_blob": "f3901457641c8854d03fb053359ac3760ba7c42c"
+  "map_blob": "0ff4601e3f71dffa33ac73b13f4b59952ea893d8"
  },
  "suita": {
   "in_ring": 3197,
   "all": 4012,
-  "map_blob": "7541d45ea97a4b315a8acadd64303f3c70b6e975"
+  "map_blob": "dfdf7106078c7fa6b8a7868e0f0abda7fc5c6e9c"
  },
  "itami": {
   "in_ring": 1181,
   "all": 2383,
-  "map_blob": "71793a2fd047b0bac895cbd81df22a25990de3d5"
+  "map_blob": "064472f7844a962643fcaf7f4c57312ac2c0d84e"
  },
  "kakogawa": {
   "in_ring": 2113,
   "all": 3701,
-  "map_blob": "ce3b8c11db0264825a1423cd614b9f157005d435"
+  "map_blob": "ea648301ed0df855b7f8e3a729991627bbd84ff8"
  },
  "amagasaki": {
   "in_ring": 5838,
   "all": 7385,
-  "map_blob": "cd48dad9bfd99f249d6fac2a4946a9096b1c4010"
+  "map_blob": "f7bc792a956f0a24a0b83b3f5fd346301b508b0d"
  },
  "uji": {
   "in_ring": 724,
   "all": 1284,
-  "map_blob": "a27069ce292ce0de9ca08a3daae109dcb9e66f94"
+  "map_blob": "5b3cbadbbe621582d1eb7c6d65902ae660a6daca"
  },
  "maebashi": {
   "in_ring": 1901,
