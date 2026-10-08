@@ -76,6 +76,11 @@ a rule, not before obeying one.
   module. [#wording]
 - **Every drawn transit line gets a permanent on-map label (its real public
   name) AND a legend entry** - not one or the other.
+- **A line drawn on more than one city's map has ONE colour and ONE name on
+  every map, site-wide** (owner's hard line, 2026-10-07), and different lines
+  meeting on neighbouring maps differ: `pipeline/line_registry.py`, decided by
+  `scripts/check_line_identity.py`. Every line clears every pin colour its
+  map draws by CIE76 20. [#line-identity]
 - **A city's classification need not be NAICS** (`pipeline/taxonomies/`).
   Step 2 filters via `filter_to_storefront()`, never NAICS prefixes. [#wording]
 - **Check the rail system's shape before assuming "keep every station."**
