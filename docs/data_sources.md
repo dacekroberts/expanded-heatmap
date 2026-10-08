@@ -3786,6 +3786,79 @@ of 2026-10-03.)
   `outputs/liverpool/` republishes the derived locations (README's credits).
 - Wording: Manchester's Ordnance Survey notice 85, with the city changed.
 
+**154. SITG, Répertoire des entreprises (Geneva (Regional)) — required, and
+DISPLAYED** (written into `render_site_notices()` with Geneva (Regional),
+2026-10-07.)
+
+- **PERMITTED WITH CONDITIONS**<!-- internal --> (`licence-read` 2026-10-04)<!-- /internal -->: SITG Level A,
+  "Accès libre", under the Conditions d'utilisation (version of 19 May 2026):
+  reproduce, publish, adapt and combine, commercial use included. Rows in
+  [`data_sources/switzerland.md`](data_sources/switzerland.md).
+- **MUST DISPLAY**, "de manière clairement visible": the source line in the
+  form CU 5.3.1 prescribes, "Source : Portail des données SITG (État de
+  Genève), téléchargé et/ou extrait en date du […].", with the extract date of
+  the file the map was built from (04.10.2026); a statement of the derived use
+  (CU 5.3.2, on its example wording: "Cartographie réalisée sur la base de
+  Données du Portail SITG"); and the conditions of use linked (CU 5.5).
+- **MUST NOT**: re-identify a person (CU 5.4.2: no join of REG to another
+  source); resell the data (RIRT art. 62).
+- **Personal data**: a sole trader's trade name that is the owner's own name
+  shows the street address instead (the owner's call, 2026-10-04); phone,
+  e-mail and legal-name columns are never read into the map.
+- **The indemnity (CU 7.2)**: accepted by the owner, 2026-10-04 (above); not a
+  notice.
+- **Geneva's rail and the commune boundaries are OpenStreetMap data** (ODbL,
+  notice 1).
+- The English sentences of the displayed notice are the build's draft, a
+  review-time proposal.
+
+**155. City of Thessaloniki (Thessaloniki) — required, and DISPLAYED**
+(written into `render_site_notices()` with Thessaloniki, 2026-10-07.)
+
+- **PERMITTED WITH CONDITIONS**<!-- internal --> (`licence-read` 2026-10-04)<!-- /internal -->: CC BY 4.0,
+  set on each resource of the layer's data.gov.gr record. The map portal's
+  no-redistribution splash is read as the web app's terms only (owner,
+  2026-10-04). Rows in [`data_sources/greece.md`](data_sources/greece.md).
+- **MUST DISPLAY** (CC BY 4.0 section 3(a)): the credit to the City of
+  Thessaloniki with the dataset's title linked to its record, the licence
+  linked, the retrieval date and that the data was changed. No wording is
+  prescribed; the notice is this project's.
+- **MUST NOT**: imply the City's endorsement or use its logo; call the layer
+  current, complete or official.
+- **Personal data**: the layer has no name field; a dot shows its licensed
+  activity.
+- **Thessaloniki's rail and boundary are OpenStreetMap data** (ODbL, notice 1).
+
+**156. Kommunalverbund Niedersachsen/Bremen e.V. (Bremen) — required, and
+DISPLAYED** (written into `render_site_notices()` with Bremen, 2026-10-07.)
+
+- **PERMITTED WITH CONDITIONS, display only**<!-- internal --> (staging's read 2026-10-05; the
+  `licence-read` agent's full read 2026-10-07)<!-- /internal -->: "Creative Commons Namensnennung
+  (CC-BY)", **no version**, in the dataset's ISO record (`otherConstraints`)
+  and GovData's resource (`http://dcat-ap.de/def/licenses/cc-by`, linking
+  `https://www.opendefinition.org/licenses/cc-by`). DCAT-AP.de's unversioned
+  concept maps to no version, and Bremen's own portal records use the
+  versioned `cc-by/4.0`, so the unversioned id was the publisher's choice.
+  Every CC BY version permits public display and adapted maps; none adds
+  share-alike or non-commercial terms. The owner read it as 4.0 (call 13,
+  2026-10-05: no outreach) and, with the database-right point under an
+  older version before them and the Kommunalverbund's 2024 report silent on
+  terms, **accepted the permissive reading** (2026-10-07).
+- **Rights holder: the Kommunalverbund Niedersachsen/Bremen e.V.**; the
+  Landesamt GeoInformation Bremen only hosts the file. Rows in
+  [`data_sources/germany.md`](data_sources/germany.md).
+- **MUST DISPLAY**: "Quellenvermerk: Kommunalverbund Niedersachsen/Bremen
+  e.V."; the licence title exactly as written, linked to the URL the record
+  gives; the dataset's title, "Einzelhandelsbestand in der Region Bremen
+  2022", with a link to the material; and that the data was changed.
+- **MUST NOT**: imply endorsement. Use only the public "reduziert" file: the
+  protected variant (record 0148391c) is under a restricted licence for the
+  participating municipalities.
+- **Not governing**: geo.bremen.de's CC BY-NC-ND page footer and the
+  Kommunalverbund imprint's private-use clause (both their own web pages).
+- **MUST DO**: nothing standing; a request to remove the attribution or the
+  layer is honoured.
+
 **157. Tokyo Metropolitan Government, MHLW and MLIT (Higashiyamato) — required, and DISPLAYED**
 (written into `render_site_notices()` 2026-10-07; lands with East-1 at review
 time).
@@ -3986,79 +4059,6 @@ time).
   `docs/decisions_drafts/worktree-japan-east-1.md` ("Hino built",
   2026-10-07).<!-- /internal -->
 
-
-**154. SITG, Répertoire des entreprises (Geneva (Regional)) — required, and
-DISPLAYED** (written into `render_site_notices()` with Geneva (Regional),
-2026-10-07.)
-
-- **PERMITTED WITH CONDITIONS**<!-- internal --> (`licence-read` 2026-10-04)<!-- /internal -->: SITG Level A,
-  "Accès libre", under the Conditions d'utilisation (version of 19 May 2026):
-  reproduce, publish, adapt and combine, commercial use included. Rows in
-  [`data_sources/switzerland.md`](data_sources/switzerland.md).
-- **MUST DISPLAY**, "de manière clairement visible": the source line in the
-  form CU 5.3.1 prescribes, "Source : Portail des données SITG (État de
-  Genève), téléchargé et/ou extrait en date du […].", with the extract date of
-  the file the map was built from (04.10.2026); a statement of the derived use
-  (CU 5.3.2, on its example wording: "Cartographie réalisée sur la base de
-  Données du Portail SITG"); and the conditions of use linked (CU 5.5).
-- **MUST NOT**: re-identify a person (CU 5.4.2: no join of REG to another
-  source); resell the data (RIRT art. 62).
-- **Personal data**: a sole trader's trade name that is the owner's own name
-  shows the street address instead (the owner's call, 2026-10-04); phone,
-  e-mail and legal-name columns are never read into the map.
-- **The indemnity (CU 7.2)**: accepted by the owner, 2026-10-04 (above); not a
-  notice.
-- **Geneva's rail and the commune boundaries are OpenStreetMap data** (ODbL,
-  notice 1).
-- The English sentences of the displayed notice are the build's draft, a
-  review-time proposal.
-
-**155. City of Thessaloniki (Thessaloniki) — required, and DISPLAYED**
-(written into `render_site_notices()` with Thessaloniki, 2026-10-07.)
-
-- **PERMITTED WITH CONDITIONS**<!-- internal --> (`licence-read` 2026-10-04)<!-- /internal -->: CC BY 4.0,
-  set on each resource of the layer's data.gov.gr record. The map portal's
-  no-redistribution splash is read as the web app's terms only (owner,
-  2026-10-04). Rows in [`data_sources/greece.md`](data_sources/greece.md).
-- **MUST DISPLAY** (CC BY 4.0 section 3(a)): the credit to the City of
-  Thessaloniki with the dataset's title linked to its record, the licence
-  linked, the retrieval date and that the data was changed. No wording is
-  prescribed; the notice is this project's.
-- **MUST NOT**: imply the City's endorsement or use its logo; call the layer
-  current, complete or official.
-- **Personal data**: the layer has no name field; a dot shows its licensed
-  activity.
-- **Thessaloniki's rail and boundary are OpenStreetMap data** (ODbL, notice 1).
-
-**156. Kommunalverbund Niedersachsen/Bremen e.V. (Bremen) — required, and
-DISPLAYED** (written into `render_site_notices()` with Bremen, 2026-10-07.)
-
-- **PERMITTED WITH CONDITIONS, display only**<!-- internal --> (staging's read 2026-10-05; the
-  `licence-read` agent's full read 2026-10-07)<!-- /internal -->: "Creative Commons Namensnennung
-  (CC-BY)", **no version**, in the dataset's ISO record (`otherConstraints`)
-  and GovData's resource (`http://dcat-ap.de/def/licenses/cc-by`, linking
-  `https://www.opendefinition.org/licenses/cc-by`). DCAT-AP.de's unversioned
-  concept maps to no version, and Bremen's own portal records use the
-  versioned `cc-by/4.0`, so the unversioned id was the publisher's choice.
-  Every CC BY version permits public display and adapted maps; none adds
-  share-alike or non-commercial terms. The owner read it as 4.0 (call 13,
-  2026-10-05: no outreach) and, with the database-right point under an
-  older version before them and the Kommunalverbund's 2024 report silent on
-  terms, **accepted the permissive reading** (2026-10-07).
-- **Rights holder: the Kommunalverbund Niedersachsen/Bremen e.V.**; the
-  Landesamt GeoInformation Bremen only hosts the file. Rows in
-  [`data_sources/germany.md`](data_sources/germany.md).
-- **MUST DISPLAY**: "Quellenvermerk: Kommunalverbund Niedersachsen/Bremen
-  e.V."; the licence title exactly as written, linked to the URL the record
-  gives; the dataset's title, "Einzelhandelsbestand in der Region Bremen
-  2022", with a link to the material; and that the data was changed.
-- **MUST NOT**: imply endorsement. Use only the public "reduziert" file: the
-  protected variant (record 0148391c) is under a restricted licence for the
-  participating municipalities.
-- **Not governing**: geo.bremen.de's CC BY-NC-ND page footer and the
-  Kommunalverbund imprint's private-use clause (both their own web pages).
-- **MUST DO**: nothing standing; a request to remove the attribution or the
-  layer is honoured.
 
 **169. Toyonaka City, MHLW and MLIT (Toyonaka) — required, and DISPLAYED**
 (written into `render_site_notices()` 2026-10-07; lands with the Kansai-1
