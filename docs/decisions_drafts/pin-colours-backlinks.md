@@ -45,6 +45,43 @@ names the colour change.
 - **Ottawa's one food layer**: recommended to stay magenta with its
   "Restaurants and food shops" legend. Not changed.
 
+### 2026-10-07 - Back links beside "Global View": the reference pages return to the city or region the reader came from; the Overview opens on a region in its link (owner)
+
+- **Decided: a reference page learns its reader's origin from `?from=`,**
+  carried in every link into About the Data, What Is Excluded, Why the Maps
+  Differ and Required Notices the way `?country=` already is: from a city
+  page the city (its footer row and its two country links), from the
+  Overview the region shown. Each of the four pages opens with "← Global
+  View", then "← Back to <city or region>", then its links to the others,
+  which forward the same origin; About the Data's in-page country links keep
+  it too. A bookmark, an unknown name, or the Global region shows "← Global
+  View" alone. One key serves cities and regions because no name is both
+  (176 cities, 31 regions, 2026-10-07). Helpers in `app/components.py`
+  (`back_origin`, `from_params`, `render_back_link`,
+  `render_reference_nav`); `render_site_notices()` takes `origin=`.
+  Rejected: `st.session_state` as the carrier, which a reload, a new tab or
+  a shared link loses.
+- **Decided: the Overview opens on `?region=` and writes the region shown
+  back to the URL** (none for Global), so a reload or a shared link returns
+  to it. The link is applied only when it changed since the page last wrote
+  it, or when the radio has no state (Streamlit drops it when the reader
+  leaves the page), the rule `select_country()` already follows: a click
+  updates the radio before the rerun while the URL still holds the old
+  region.
+- **Verified with one local render (lean venv):** `/?region=Kansai` opened
+  on Kansai with its footer links carrying `from=Kansai`; a click on
+  Kyushu-Okinawa moved the URL and held; its "Why the maps differ" link
+  showed "← Back to Kyushu-Okinawa", which reopened the Overview on that
+  region; Kyoto's "Where this data comes from: Japan" opened
+  `?country=Japan&from=Kyoto` with "← Back to Kyoto"; `/Required_Notices`
+  with no origin showed "← Global View" alone. No exceptions.
+  `check_deploy_imports.py` (clean clone at 4ed2137e) and
+  `check_macro_labels.py` (31 regions x 3 widths): 0 problems.
+- **Open: the city pages' link.** A city page shows no Streamlit "Global
+  View" (map-only navigation); its "Global View" is a button inside the map,
+  so a link beside it needs `pipeline/map_common.py` and every map
+  re-rendered, which the assessment had not counted. Brought to the owner.
+
 ### 2026-10-07 - One pin colour per meaning: food shops olive, shops and services violet, a refuse-both guard, three line colours moved (owner)
 
 - **Decided: a bucket's pin colour follows what it MEANS in its taxonomy,
