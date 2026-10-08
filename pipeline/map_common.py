@@ -3057,8 +3057,15 @@ class OpenBasemap(folium.map.Layer):
     """A base layer drawn from one city's PMTiles pack, loaded on first use.
 
     pmtiles_url: an absolute http(s) URL the browser can range-request.
-    label_lang: the language Protomaps labels prefer, falling back to the
-    feature's own name, as OSM's tiles show it.
+    local_lang: the city's language as Protomaps names it ("es", "ja"), or
+    None. Labels are English by default in every city, falling back to the
+    feature's own name where OSM has no English one (owner, 2026-10-08);
+    with local_lang set, a small "EN | local" pill under the layer menu (top left),
+    shown only while this layer is on, switches them to the local language
+    and is remembered. Both come from the same pack, which carries every
+    name a feature has, so switching fetches nothing.
+    local_name: the pill's text for the local language (default the code
+    in capitals).
     """
 
     _template = Template("""
@@ -3085,6 +3092,77 @@ class OpenBasemap(folium.map.Layer):
                 return loading;
             }
             {{ this.travel_style_js }}
+            var LOCAL = {{ this.local_lang|tojson }}, LOCAL_NAME = {{ this.local_name|tojson }};
+            var LANG_KEY = "expanded-heatmap-labels";
+            function savedLang() {
+                try { return localStorage.getItem(LANG_KEY) === "local" && LOCAL ? LOCAL : "en"; }
+                catch (e) { return "en"; }
+            }
+            var lang = savedLang();
+            function styleFor(code) {
+                return {
+                    version: 8,
+                    glyphs: {{ (this.assets ~ "/fonts/{fontstack}/{range}.pbf")|tojson }},
+                    sprite: {{ (this.assets ~ "/sprites/v4/light")|tojson }},
+                    sources: {protomaps: {
+                        type: "vector",
+                        url: "pmtiles://" + {{ this.pmtiles_url|tojson }}
+                    }},
+                    layers: travelStyle(basemaps.layers("protomaps",
+                        basemaps.namedFlavor("light"), {lang: code}),
+                        {flavor: "light", variant: "site"})
+                };
+            }
+            // The label pill: two buttons in a Leaflet bar stacked under the
+            // layer menu (top left; the top right is under the fixed
+            // #map-actions buttons, which hid the pill and took its taps,
+            // measured 2026-10-08), added and removed with this layer, so the
+            // Business view never shows it.
+            var PILL_CSS = ".hm-lang{display:flex;overflow:hidden}" +
+                ".hm-lang button{border:0;margin:0;padding:0 10px;min-width:40px;height:34px;" +
+                "background:#fff;color:#333;font:600 13px/34px var(--hm-font,sans-serif);cursor:pointer}" +
+                ".hm-lang button+button{border-left:1px solid #ccc}" +
+                ".hm-lang button[aria-pressed=true]{background:#333;color:#fff}" +
+                ".dark-base .hm-lang button{background:var(--dm-surface);color:var(--dm-text)}" +
+                ".dark-base .hm-lang button+button{border-left-color:var(--dm-border)}" +
+                ".dark-base .hm-lang button[aria-pressed=true]{background:var(--dm-text);color:var(--dm-surface)}";
+            var Pill = L.Control.extend({
+                options: {position: "topleft"},
+                onAdd: function () {
+                    if (!document.getElementById("hm-lang-css")) {
+                        var css = document.createElement("style");
+                        css.id = "hm-lang-css"; css.textContent = PILL_CSS;
+                        document.head.appendChild(css);
+                    }
+                    var box = L.DomUtil.create("div", "leaflet-bar hm-lang");
+                    box.setAttribute("role", "group");
+                    box.setAttribute("aria-label", "Map label language");
+                    var self = this;
+                    self._buttons = [["en", "EN"], [LOCAL, LOCAL_NAME]].map(function (b) {
+                        var btn = L.DomUtil.create("button", "", box);
+                        btn.type = "button"; btn.textContent = b[1];
+                        btn.setAttribute("data-lang", b[0]);
+                        btn.addEventListener("click", function () { self.choose(b[0]); });
+                        return btn;
+                    });
+                    L.DomEvent.disableClickPropagation(box);
+                    self.mark();
+                    return box;
+                },
+                mark: function () {
+                    (this._buttons || []).forEach(function (btn) {
+                        btn.setAttribute("aria-pressed", btn.getAttribute("data-lang") === lang ? "true" : "false");
+                    });
+                },
+                choose: function (code) {
+                    if (code === lang) return;
+                    lang = code;
+                    try { localStorage.setItem(LANG_KEY, code === "en" ? "en" : "local"); } catch (e) {}
+                    this.mark();
+                    if (layer._gl && layer._gl.getMaplibreMap()) layer._gl.getMaplibreMap().setStyle(styleFor(lang));
+                }
+            });
+            var pill = LOCAL ? new Pill() : null;
             // A zoom range as OSM's tiles give it, registered the way Leaflet's
             // tile layers register theirs (beforeAdd / onRemove): the map takes
             // its maximum zoom only from such layers, and with this one alone
@@ -3099,45 +3177,34 @@ class OpenBasemap(folium.map.Layer):
                 onAdd: function (map) {
                     var self = this;
                     self._active = true;
+                    if (pill) pill.addTo(map);
                     load().then(function () {
                         if (!self._active) return;
                         if (!self._gl) {
-                            self._gl = L.maplibreGL({
-                                attributionControl: false,
-                                style: {
-                                    version: 8,
-                                    glyphs: {{ (this.assets ~ "/fonts/{fontstack}/{range}.pbf")|tojson }},
-                                    sprite: {{ (this.assets ~ "/sprites/v4/light")|tojson }},
-                                    sources: {protomaps: {
-                                        type: "vector",
-                                        url: "pmtiles://" + {{ this.pmtiles_url|tojson }}
-                                    }},
-                                    layers: travelStyle(basemaps.layers("protomaps",
-                                        basemaps.namedFlavor("light"),
-                                        {lang: {{ this.label_lang|tojson }}}),
-                                        {flavor: "light", variant: "site"})
-                                }
-                            });
+                            self._gl = L.maplibreGL({attributionControl: false, style: styleFor(lang)});
                         }
                         self._gl.addTo(map);
                     });
                 },
                 onRemove: function (map) {
                     this._active = false;
+                    if (pill) pill.remove();
                     if (this._gl) map.removeLayer(this._gl);
                     if (map._removeZoomLimit) map._removeZoomLimit(this);
                 }
             });
-            return new Layer();
+            var layer = new Layer();
+            return layer;
         })();
         {% endmacro %}
     """)
 
-    def __init__(self, pmtiles_url, *, name="Travel", label_lang="en", show=False):
+    def __init__(self, pmtiles_url, *, name="Travel", local_lang=None, local_name=None, show=False):
         super().__init__(name=name, overlay=False, control=True, show=show)
         self._name = "OpenBasemap"
         self.pmtiles_url = pmtiles_url
-        self.label_lang = label_lang
+        self.local_lang = local_lang if local_lang and local_lang != "en" else None
+        self.local_name = local_name or (self.local_lang or "").upper()
         self.libs = list(OPEN_BASEMAP_LIBS)
         self.assets = OPEN_BASEMAP_ASSETS
         self.travel_style_js = TRAVEL_STYLE_JS
@@ -3165,7 +3232,7 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
                    legend_names=None, open_basemap=None):
     """Render one city's heatmap to a standalone HTML file.
 
-    open_basemap: optional dict(pmtiles_url=..., label_lang=...), a city's
+    open_basemap: optional dict(pmtiles_url=..., local_lang=..., local_name=...), a city's
     Protomaps pack (see OpenBasemap). Given, the layer menu offers two base
     layers, "Business" (OSM's tiles, still the default) and "Travel". Omitted,
     the map renders exactly as before. A prototype: no city passes it.
