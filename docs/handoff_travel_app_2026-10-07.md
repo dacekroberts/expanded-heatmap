@@ -20,6 +20,22 @@ The owner's decisions and the measurements behind them are in this repo's
 - **A separate front end.** Streamlit cannot run offline; a phone-installable
   web app (PWA) first, native later only if it earns it.
 
+## Features to keep from the website (owner)
+
+- **Tap or hover on a line highlights it.** The website's maps do this
+  today; the app keeps it, by touch first, on every interactive map. A
+  static copy (an image, a printed or shared snapshot) is exempt. On the
+  website's open basemap switch it is a stated requirement too.
+
+## Export scope (owner, 2026-10-07)
+
+- The export carries each city's rail network in full, each line or segment
+  the site leaves off marked `on_site_map: false` with the rule that left it.
+- **Urban lines** (metro, tram, light rail) come whole; **mainline and
+  commuter lines** are clipped to the pack extent and marked
+  `clipped_to_export_extent`, so a city pack does not carry most of a
+  country's mainline network.
+
 ## The interface rule (owner: "would not want to have it constantly competing for files")
 
 - The app project **never edits** the expanded-heatmap repo, and that repo
