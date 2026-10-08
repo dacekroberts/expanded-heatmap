@@ -148,7 +148,7 @@ TRAM_OSM_JSON = DATA_RAW / "osm_tram_stop_names.json"
 OSM_NAME_MATCH_M = 600
 # Place search (pilot, 2026-10-07; DECISIONS.md "Four ideas assessed", item 3):
 # OSM's places inside the city line, one Overpass query by
-# pipeline/place_index_fetch.py, indexed by step4_place_index.py. A NEW file
+# pipeline/place_index_fetch.py, indexed by step2b_place_index.py. A NEW file
 # name: data/ is shared by every worktree.
 PLACE_AREA = '["name"="京都市"]["admin_level"="7"]["boundary"="administrative"]'
 PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-07.json"

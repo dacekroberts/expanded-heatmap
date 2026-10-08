@@ -1947,7 +1947,7 @@ assert "@@" not in TAP_SELECT_SCRIPT, "unresolved placeholder in TAP_SELECT_SCRI
 
 # PLACE SEARCH (pilot, 2026-10-07; DECISIONS.md "Four ideas assessed before
 # the large review", item 3). Places only: streets, intersections, stations,
-# neighborhoods, landmarks, never a business. The index
+# lines, neighborhoods, landmarks, never a business. The index
 # (pipeline/place_index.py) is fetched ONCE, on first use of the box, from the
 # app's own static folder, and every keystroke is matched in this page: no
 # query reaches a server, a log or the URL. Hence no <form> (a submit would
@@ -1955,14 +1955,41 @@ assert "@@" not in TAP_SELECT_SCRIPT, "unresolved placeholder in TAP_SELECT_SCRI
 # typed text away) and no history entry. The index is never embedded: the
 # iPhone literal limit (110,861) is per map.
 #
+# STATIONS AND LINES ARE THE MAP'S OWN (owner, 2026-10-07: searches must match
+# the UI). They are read from the page itself, the station markers' tooltips
+# and the legend's line rows, so a result carries exactly the name the map
+# shows, and a line result picks its line out as its legend row does. OSM's
+# station entries (which carry the Japanese and alternate names) are linked to
+# the nearest map station within STATION_LINK_M sharing a word of its name, in
+# the browser, and add their names to it; an unlinked one is labeled as not on
+# the map. Nothing of the map's own data enters the published index (ODbL
+# 4.4(d)), and the map's stations and lines are searchable even where the
+# index cannot load.
+#
 # Matching: names NFKC-folded, lowercased, accents stripped (Shijō = Shijo).
-# A Latin query word must begin a word of a name; a CJK or kana word must
-# occur anywhere in one (四条 in 四条烏丸), and a CJK word that matches nothing
-# is retried as two halves (烏丸四条). Every word must match; words such as
-# "and", "at" and "&" are dropped ("5th and Pike"). "station" or 駅 matches
-# any station, and street words (street, dori, 通) are optional on a street
-# or an intersection. With fold "ja" a Latin "ou" or "uu" folds to "o" or "u"
-# on both sides (shijou = shijo).
+# A Latin query word must begin a word of a name, or at 4 or more letters sit
+# inside a romanized compound (ranked lower); a CJK or kana word must occur
+# anywhere in one (四条 in 四条烏丸), and a CJK word that matches nothing is
+# retried as two halves (烏丸四条). Every word must match; words such as "and",
+# "at" and "&" are dropped ("5th and Pike"). "station" or 駅 matches any
+# station, and street words (street, dori, 通) are optional on a street or an
+# intersection. With fold "ja" a Latin "ou" or "uu" folds to "o" or "u" on
+# both sides (shijou = shijo).
+#
+# The character classes are built in Python (_JS_CJK_CLASS, _JS_MARKS_CLASS)
+# so the source holds JS escapes, not literal combining marks.
+_BS = chr(92)
+
+
+def _js_ranges(*pairs):
+    return "".join(f"{_BS}u{a:04x}-{_BS}u{b:04x}" for a, b in pairs)
+
+
+_JS_CJK_CLASS = _js_ranges((0x3040, 0x30FF), (0x3400, 0x4DBF), (0x4E00, 0x9FFF),
+                           (0xAC00, 0xD7AF), (0xF900, 0xFAFF))
+_JS_MARKS_CLASS = _js_ranges((0x0300, 0x036F))
+STATION_LINK_M = 300
+STATION_DUP_M = 1500
 _PLACE_SEARCH_TEMPLATE = r"""
 <style>
     .hm-search { background: @@LIGHT_SURFACE@@; color: @@LIGHT_TEXT@@;
@@ -1995,25 +2022,132 @@ _PLACE_SEARCH_TEMPLATE = r"""
 <script>
 (function () {
     var NAME = "__MAP_NAME__", URL = "__INDEX_URL__";
-    var KIND_LABEL = {station: "Station", junction: "Intersection", landmark: "Landmark",
-                      place: "Neighborhood", street: "Street", crossing: "Intersection"};
-    var KIND_RANK = {station: 0, junction: 1, landmark: 2, place: 3, street: 4, crossing: 5};
+    var STATION_COLOR = "@@LIGHT_STATION@@", LINK_M = @@STATION_LINK_M@@, DUP_M = @@STATION_DUP_M@@;
+    var KIND_LABEL = {line: "Line", mapstation: "Station", station: "Station not on this map",
+                      junction: "Intersection", landmark: "Landmark", place: "Neighborhood",
+                      street: "Street", crossing: "Intersection"};
+    var KIND_RANK = {line: 0, mapstation: 0, junction: 1, landmark: 2, station: 3, place: 3,
+                     street: 4, crossing: 5};
     var STOP = {"and": 1, "at": 1, "of": 1, "the": 1, "x": 1, "corner": 1, "&": 1, "y": 1};
     var STATION_WORDS = {"station": 1, "sta": 1, "stn": 1, "eki": 1, "駅": 1};
     var STREET_WORDS = {"street": 1, "st": 1, "avenue": 1, "ave": 1, "road": 1, "rd": 1,
                         "dori": 1, "通": 1, "通り": 1};
-    var CJK = /[぀-ヿ㐀-䶿一-鿿가-힯豈-﫿]/;
-    var data = null, loading = null, fold = null, marker = null, timer = null;
+    var CJK = /[@@CJK_CLASS@@]/;
+    var MARKS = /[@@MARKS_CLASS@@]/g;
+    var data = null, own = null, loading = null, fold = null, marker = null, timer = null;
 
     function norm(s) {
         s = String(s).normalize("NFKC").toLowerCase().normalize("NFD")
-            .replace(/[̀-ͯ]/g, "").normalize("NFC");
+            .replace(MARKS, "").normalize("NFC");
         if (fold === "ja") s = s.replace(/ou/g, "o").replace(/uu/g, "u").replace(/oo/g, "o");
         return s;
     }
     function words(s) { return norm(s).split(/[^\p{L}\p{N}]+/u).filter(Boolean); }
+    // The searchable forms of one entry's names.
+    function prep(d) {
+        var toks = [];
+        d.names.forEach(function (n) {
+            var ws = words(n);
+            toks = toks.concat(ws);
+            // Joined too, so "Kinkakuji" finds "Kinkaku-ji".
+            if (ws.length > 1 && !CJK.test(n)) toks.push(ws.join(""));
+        });
+        d.bares = d.names.map(function (n) { return words(n).join(""); });
+        d.hay = " " + toks.join(" ") + " ";
+        d.flat = norm(d.names.join(" | "));
+        d.first = norm(d.name);
+        return d;
+    }
+    function metres(a, b) {
+        var k = Math.cos((a.lat + b.lat) / 2 * Math.PI / 180);
+        return Math.sqrt(Math.pow((a.lat - b.lat) * 110540, 2) + Math.pow((a.lon - b.lon) * 111320 * k, 2));
+    }
 
-    function load() {
+    // The map's own stations (the station markers and their tooltips) and
+    // lines (the legend's rows, the polylines of each), as the reader sees them.
+    function ownItems(map) {
+        var out = [], seen = {};
+        map.eachLayer(function (l) {
+            if (!(l instanceof L.CircleMarker) || l instanceof L.Circle) return;
+            if (l.options.color !== STATION_COLOR || !l.getTooltip()) return;
+            var c = l.getTooltip().getContent(), tmp = document.createElement("div");
+            tmp.innerHTML = typeof c === "string" ? c : (c && c.innerHTML) || "";
+            var b = tmp.querySelector("b"), name = ((b || tmp).textContent || "").trim();
+            var ll = l.getLatLng(), key = name + "@" + ll.lat + "," + ll.lng;
+            if (!name || seen[key]) return;
+            seen[key] = 1;
+            out.push({kind: "mapstation", name: name, names: [name], lat: ll.lat, lon: ll.lng, bbox: null});
+        });
+        document.querySelectorAll(".map-legend .hm-line-row[data-line]").forEach(function (row) {
+            var n = row.getAttribute("data-line"), name = (row.textContent || "").trim(), bounds = null;
+            map.eachLayer(function (l) {
+                var cls = " " + ((l.options && l.options.className) || "") + " ";
+                if (l instanceof L.Polyline && cls.indexOf(" hm-line-" + n + " ") >= 0 && l.getBounds) {
+                    bounds = bounds ? bounds.extend(l.getBounds()) : L.latLngBounds(l.getBounds().getSouthWest(),
+                                                                                    l.getBounds().getNorthEast());
+                }
+            });
+            if (!name || !bounds) return;
+            var c = bounds.getCenter();
+            out.push({kind: "line", name: name, names: [name], lat: c.lat, lon: c.lng, row: row,
+                      bbox: [bounds.getSouth(), bounds.getWest(), bounds.getNorth(), bounds.getEast()]});
+        });
+        return out.map(prep);
+    }
+
+    // The core of a station name: its words, less a bracketed operator
+    // ("Arashiyama (Hankyu)") and words such as "station" or 駅.
+    function core(name) {
+        return words(String(name).replace(/[(（][^)）]*[)）]/g, " "))
+            .filter(function (w) { return !STATION_WORDS[w]; });
+    }
+    // An OSM station joins the nearest map station within LINK_M whose name it
+    // shares: the same core, or the same first word of 3 or more letters
+    // (Tōjiin and "Tōjiin・Ritsumeikan University"). The FIRST word, never any
+    // word: any word joined the scenic line's "Torokko Saga" to Saga-Arashiyama
+    // and the Eizan Cable's station to Yase-Hieizanguchi (Kyoto, 2026-10-07).
+    // A second pass joins one whose names the map station already holds
+    // (Randen's 西院, read "Sai", joins Saiin through Hankyu's). A joined OSM
+    // station lends the map station its names and is not listed itself; one
+    // that joins none is labeled as not on the map.
+    function link(rows) {
+        var stations = own.filter(function (d) { return d.kind === "mapstation"; });
+        stations.forEach(function (s) { s._core = core(s.name); });
+        function same(d, s) {
+            return d.names.some(function (n) {
+                if (CJK.test(n)) return false;
+                var c = core(n);
+                return c.length && (c.join("") === s._core.join("") || (c[0].length >= 3 && c[0] === s._core[0]));
+            });
+        }
+        function held(d, s) { return d.names.some(function (n) { return s.names.indexOf(n) >= 0; }); }
+        function join(d, test) {
+            var best = null, bestM = LINK_M + 1;
+            stations.forEach(function (s) {
+                var m = metres(d, s);
+                if (m < bestM && test(d, s)) { best = s; bestM = m; }
+            });
+            if (!best) return false;
+            d.names.forEach(function (n) { if (best.names.indexOf(n) < 0) best.names.push(n); });
+            best._linked = true;
+            return true;
+        }
+        var rest = rows.filter(function (d) { return d.kind !== "station" || !join(d, same); });
+        rest = rest.filter(function (d) { return d.kind !== "station" || !join(d, held); });
+        // Same name as a map station but too far to join: a stray duplicate in
+        // OSM (Kyoto's third 山科, 900 m east of the station), dropped rather
+        // than labeled as not on the map.
+        rest = rest.filter(function (d) {
+            return d.kind !== "station" || !stations.some(function (s) {
+                return metres(d, s) <= DUP_M && (same(d, s) || held(d, s));
+            });
+        });
+        stations.forEach(function (s) { if (s._linked) prep(s); });
+        return rest;
+    }
+
+    function load(map) {
+        if (!own) own = ownItems(map);
         if (loading) return loading;
         var t0 = performance.now();
         loading = fetch(URL, {credentials: "omit", referrerPolicy: "no-referrer"})
@@ -2021,21 +2155,12 @@ _PLACE_SEARCH_TEMPLATE = r"""
             .then(function (txt) {
                 var ix = JSON.parse(txt);
                 fold = ix.fold || null;
-                data = ix.rows.map(function (r) {
-                    var names = [r[3]].concat(r[4] ? r[4].split("|") : []);
-                    var toks = [];
-                    names.forEach(function (n) {
-                        var ws = words(n);
-                        toks = toks.concat(ws);
-                        // Joined too, so "Kinkakuji" finds "Kinkaku-ji".
-                        if (ws.length > 1 && !CJK.test(n)) toks.push(ws.join(""));
-                    });
-                    return {kind: ix.kinds[r[0]], lat: r[1], lon: r[2], name: r[3],
-                            names: names, bbox: r[5] || null,
-                            bares: names.map(function (n) { return words(n).join(""); }),
-                            hay: " " + toks.join(" ") + " ", flat: norm(names.join(" | ")),
-                            first: norm(r[3])};
+                own = ownItems(map);
+                var rows = ix.rows.map(function (r) {
+                    return prep({kind: ix.kinds[r[0]], lat: r[1], lon: r[2], name: r[3],
+                                 names: [r[3]].concat(r[4] ? r[4].split("|") : []), bbox: r[5] || null});
                 });
+                data = own.concat(link(rows));
                 document.querySelector(".hm-search").setAttribute(
                     "data-load-ms", Math.round(performance.now() - t0));
                 return data;
@@ -2051,15 +2176,16 @@ _PLACE_SEARCH_TEMPLATE = r"""
         if (d.hay.indexOf(" " + w) >= 0) return 2;
         return w.length >= 4 && d.hay.indexOf(w) >= 0 ? 1 : 0;
     }
+    function isStation(d) { return d.kind === "station" || d.kind === "mapstation"; }
     function hits(d, qs) {
         d._weak = 0;
         for (var i = 0; i < qs.length; i++) {
             var w = qs[i], h = wordHit(d, w);
             if (h === 1) d._weak += 1;
             if (h) continue;
-            if (STATION_WORDS[w] && d.kind === "station") continue;
+            if (STATION_WORDS[w] && isStation(d)) continue;
             if (STREET_WORDS[w] && (d.kind === "street" || d.kind === "crossing" || d.kind === "junction")) continue;
-            if (CJK.test(w) && w.length > 1 && w.charAt(w.length - 1) === "駅" && d.kind === "station"
+            if (CJK.test(w) && w.length > 1 && w.charAt(w.length - 1) === "駅" && isStation(d)
                 && d.flat.indexOf(w.slice(0, -1)) >= 0) continue;
             return false;
         }
@@ -2101,7 +2227,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
                     'fill="none" stroke="currentColor" stroke-width="2"/><path d="M10.5 10.5L15 15" stroke="currentColor" ' +
                     'stroke-width="2" stroke-linecap="round"/></svg></button>' +
                     '<input class="hm-search-input" type="search" role="combobox" aria-expanded="false" ' +
-                    'aria-label="Search streets, intersections, stations and places" ' +
+                    'aria-label="Search streets, intersections, stations, lines and places" ' +
                     'placeholder="Street, station, place" autocomplete="off" autocorrect="off" ' +
                     'autocapitalize="off" spellcheck="false" enterkeyhint="search"></div>' +
                     '<div class="hm-search-list" role="listbox"></div>';
@@ -2118,15 +2244,17 @@ _PLACE_SEARCH_TEMPLATE = r"""
         var shown = [], on = -1;
 
         function note(text) {
-            list.innerHTML = '<div class="hm-search-note"></div>';
-            list.firstChild.textContent = text;
+            var n = document.createElement("div");
+            n.className = "hm-search-note";
+            n.textContent = text;
+            list.appendChild(n);
             list.classList.add("has");
         }
         function credit() {
             var c = document.createElement("div");
             c.className = "hm-search-credit";
             // ODbL 4.3(a)'s own wording; the download link is the 4.6 offer
-            // (licence read 2026-10-07). Wording held for the owner (pilot).
+            // (licence read 2026-10-07; wording approved by the owner the same day).
             c.innerHTML = 'Contains information from <a href="https://www.openstreetmap.org/copyright" ' +
                 'target="_blank" rel="noopener noreferrer">OpenStreetMap</a>, which is made available here ' +
                 'under the <a href="https://opendatacommons.org/licenses/odbl/1-0/" target="_blank" ' +
@@ -2151,7 +2279,10 @@ _PLACE_SEARCH_TEMPLATE = r"""
                 var el = document.createElement("div");
                 el.className = "hm-search-item";
                 el.setAttribute("role", "option");
-                var other = d.names.slice(1).filter(function (n) { return !CJK.test(n); })[0];
+                // A map station shows its Japanese (or other) name beside the
+                // map's; an OSM entry its first Latin alias.
+                var other = d.kind === "mapstation" ? d.names[1]
+                    : d.names.slice(1).filter(function (n) { return !CJK.test(n); })[0];
                 var top = document.createElement("div");
                 top.textContent = d.name;
                 var sub = document.createElement("div");
@@ -2169,28 +2300,40 @@ _PLACE_SEARCH_TEMPLATE = r"""
         function go(i) {
             var d = shown[i];
             if (!d) return;
+            if (marker) map.removeLayer(marker);
+            marker = null;
+            clearTimeout(timer);
+            list.classList.remove("has");
+            input.setAttribute("aria-expanded", "false");
+            input.blur();
+            if (d.kind === "line") {
+                // The whole line in view, picked out as its legend row does
+                // (LINE_HIGHLIGHT_SCRIPT); a row already picked stays picked.
+                map.fitBounds([[d.bbox[0], d.bbox[1]], [d.bbox[2], d.bbox[3]]], {padding: [30, 30]});
+                if (d.row.getAttribute("aria-pressed") !== "true") d.row.click();
+                return;
+            }
             if (d.bbox) {
                 map.fitBounds([[d.bbox[0], d.bbox[1]], [d.bbox[2], d.bbox[3]]], {maxZoom: 16, padding: [30, 30]});
             } else {
                 map.setView([d.lat, d.lon], Math.max(map.getZoom(), 16));
             }
-            if (marker) map.removeLayer(marker);
-            clearTimeout(timer);
             // A temporary marker, not interactive, so a tap still reaches the
-            // dots and rings under it; the rings answer the site's question.
+            // dots and rings under it.
             marker = L.circleMarker([d.lat, d.lon], {radius: 14, color: "@@LIGHT_ACCENT@@", weight: 3,
                 fillOpacity: 0.12, interactive: false}).addTo(map);
             marker.bindTooltip(d.name, {permanent: true, direction: "top", offset: [0, -12]}).openTooltip();
             timer = setTimeout(function () { if (marker) { map.removeLayer(marker); marker = null; } }, 12000);
-            list.classList.remove("has");
-            input.setAttribute("aria-expanded", "false");
-            input.blur();
         }
         function open() {
             box.classList.add("open");
             input.focus();
-            load().then(render, function () {
-                note("Place search is available on the site's own map pages");
+            load(map).then(render, function () {
+                // No index (a map opened outside the site): the map's own
+                // stations and lines still answer.
+                data = own;
+                render();
+                note("Streets and places are searchable on the site's own map pages");
             });
         }
         btn.addEventListener("click", function () {
@@ -2231,6 +2374,11 @@ PLACE_SEARCH_SCRIPT = (
     .replace("@@LIGHT_TEXT@@", LIGHT["text"])
     .replace("@@LIGHT_BORDER@@", LIGHT["border"])
     .replace("@@LIGHT_ACCENT@@", LIGHT["accent"])
+    .replace("@@LIGHT_STATION@@", LIGHT["station"])
+    .replace("@@STATION_LINK_M@@", str(STATION_LINK_M))
+    .replace("@@STATION_DUP_M@@", str(STATION_DUP_M))
+    .replace("@@CJK_CLASS@@", _JS_CJK_CLASS)
+    .replace("@@MARKS_CLASS@@", _JS_MARKS_CLASS)
 )
 assert "@@" not in PLACE_SEARCH_SCRIPT, "unresolved placeholder in PLACE_SEARCH_SCRIPT"
 LEGEND_ROW = """

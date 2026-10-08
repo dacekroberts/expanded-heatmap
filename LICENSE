@@ -79,6 +79,13 @@ licence (https://creativecommons.org/licenses/by-sa/4.0/), with the credits in
 contribution; the other material in the map (MLIT's layers, OpenStreetMap's
 names, the basemap) keeps its own terms.
 
+A SECOND EXCEPTION, REQUIRED BY ITS SOURCE: THE PLACE INDEXES ARE UNDER ODbL.
+The place indexes under `app/static/places/` are databases derived from
+OpenStreetMap, © OpenStreetMap contributors, and are licensed under the Open
+Database License (ODbL) 1.0 only
+(https://opendatacommons.org/licenses/odbl/1-0/), not under the MIT License or
+the reservation above.
+
 ================================================================================
 
 REMOVAL REQUESTS

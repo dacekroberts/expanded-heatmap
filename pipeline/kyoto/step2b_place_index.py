@@ -1,4 +1,4 @@
-"""Step 4 - Build Kyoto's place-search index (pilot, 2026-10-07).
+"""Step 2b - Build Kyoto's place-search index (pilot, 2026-10-07).
 
 All the work is pipeline/place_index.py; this file supplies only what is
 Kyoto's. Places only, never business records (DECISIONS.md, "Four ideas
@@ -8,7 +8,7 @@ Input:  data/kyoto/raw/osm_places_2026-10-07.json  (pipeline/place_index_fetch.p
 Output: app/static/places/kyoto.json  (served by Streamlit's static serving;
         ODbL 1.0, the notice inside the file)
 
-Run:  python pipeline/kyoto/step4_place_index.py
+Run:  python pipeline/kyoto/step2b_place_index.py
 """
 
 import json
@@ -19,7 +19,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline import place_index  # noqa: E402
 from pipeline.kyoto import config  # noqa: E402
 
-OUT = config.ROOT / "app" / "static" / "places" / f"{config.SLUG}.json"
+OUT = place_index.index_path(config.SLUG)
 
 
 def main():

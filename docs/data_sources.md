@@ -309,10 +309,13 @@ approves it at review time.<!-- /internal -->
 - **Kept separate (§4.4(d)):** no field from a business register, a transit
   feed, MLIT or any other non-OSM source is added to the index, and the
   project's own station list is not used to fill or de-duplicate it. Adding
-  one would bring that data under ODbL.
-- **Open before publishing:** `LICENSE` must carve the index files out of the
-  MIT and reserved terms, as it already does for Fukui's CC BY-SA files
-  (§4.4(a) forbids dual licensing).
+  one would bring that data under ODbL. The search box matches the map's own
+  stations and lines by reading them from the page, and joins OSM's station
+  names to them in the visitor's browser; that display is a Produced Work and
+  nothing of it is published as a database.
+- **`LICENSE` carves the index files out** of the MIT and reserved terms, as it
+  does for Fukui's CC BY-SA files (§4.4(a) forbids dual licensing; owner,
+  2026-10-07).
 
 ## Commitment: removal requests are honored, not argued
 

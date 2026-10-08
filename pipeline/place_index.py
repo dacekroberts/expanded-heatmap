@@ -1,6 +1,6 @@
 """Build a city's place-search index from its cached OpenStreetMap places.
 
-Shared by every city's `step4_place_index.py`. Reads the cache that
+Shared by every city's `step2b_place_index.py`. Reads the cache that
 pipeline/place_index_fetch.py wrote (config.PLACE_OSM_JSON) and never fetches.
 
 Places only, never business records (owner, 2026-10-07; DECISIONS.md "Four
@@ -26,9 +26,28 @@ LICENCE: ODbL 1.0. The index is a Derivative Database of OpenStreetMap (OSMF's
 Substantial guideline: a whole city's streets), published under ODbL; the
 notice travels inside the file (`licence`) and the map shows the credit.
 """
+import hashlib
 import json
 import math
 from collections import defaultdict
+from pathlib import Path
+
+STATIC_DIR = Path(__file__).parent.parent / "app" / "static" / "places"
+
+
+def index_path(slug):
+    return STATIC_DIR / f"{slug}.json"
+
+
+def index_url(slug):
+    """The site path a map fetches its index from, stamped with the file's
+    content hash: a browser keeps its copy of a static file, so a rebuilt
+    index under the same URL went unseen in the Kyoto pilot (2026-10-07).
+    The index step therefore runs before the map step (step2b_place_index.py)."""
+    path = index_path(slug)
+    if not path.exists():
+        raise SystemExit(f"Missing {path}.\nRun: python pipeline/{slug}/step2b_place_index.py")
+    return f"/app/static/places/{slug}.json?v={hashlib.sha256(path.read_bytes()).hexdigest()[:12]}"
 
 KINDS = ("station", "junction", "landmark", "place", "street", "crossing")
 
@@ -59,6 +78,8 @@ SKIP_HISTORIC = {"wayside_shrine", "wayside_cross", "boundary_stone", "milestone
 # another name. Places of worship, parks, gardens, peaks, rivers and historic
 # sites need none.
 NOTABLE_ONLY = ("tourism", "amenity")
+RESIDENTIAL_BUILDINGS = {"house", "residential", "apartments", "detached", "dormitory",
+                         "semidetached_house", "terrace", "bungalow"}
 # Never place=isolated_dwelling or farm: a single home (Kyoto's one was an
 # apartment building, 2026-10-07).
 PLACE_VALUES = {"city", "borough", "suburb", "quarter", "neighbourhood", "village",
@@ -236,6 +257,15 @@ def build(elements, *, city, retrieved, fold=None):
             if (any(k in t for k in NOTABLE_ONLY) and t.get("amenity") != "place_of_worship"
                     and not (t.get("wikidata") or t.get("wikipedia"))):
                 report["landmark_dropped_not_notable"] += 1
+                continue
+            # A home is never a landmark: residential land, a house or an
+            # apartment building, or private access, unless notable (a former
+            # residence that is now a museum). Kyoto's condominium grounds were
+            # tagged leisure=park on landuse=residential (2026-10-07).
+            if ((t.get("landuse") == "residential" or t.get("building") in RESIDENTIAL_BUILDINGS
+                    or t.get("access") == "private")
+                    and not (t.get("wikidata") or t.get("wikipedia") or t.get("heritage"))):
+                report["landmark_dropped_residential"] += 1
                 continue
             # A garden is often a private one at a house, and may carry a
             # person's own name ("Aoyama's Garden", Kyoto, 2026-10-07): kept only
