@@ -71,7 +71,7 @@ st.markdown(
 - Lines and stations come from MLIT's national railway data (国土数値情報); station names in
   English are from OpenStreetMap. Line colors are this project's own, not the operators'.
 - Only stations inside Tachikawa City get rings, because the business data covers the city alone:
-  lines running on to Hino, Akishima, Kunitachi, Tachikawa, Fussa, Kokubunji and Kodaira are
+  lines running on to Hino, Akishima, Kunitachi, Higashiyamato, Fussa, Kokubunji and Kodaira are
   cut at the city line. The stations left out are listed below.
 
 **The businesses**

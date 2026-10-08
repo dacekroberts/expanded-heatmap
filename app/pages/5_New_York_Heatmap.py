@@ -84,7 +84,7 @@ st.markdown(
 """
 )
 
-render_map_help('three business categories (Retail, Food service and Personal services)')
+render_map_help('three business categories (Food service, Personal services and “Food, secondhand, electronics, tobacco shops”)')
 render_excluded_stations("New York")
 render_country_links('New York')
 

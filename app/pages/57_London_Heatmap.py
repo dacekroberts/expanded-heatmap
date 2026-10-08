@@ -61,7 +61,8 @@ st.markdown(
   the **six London Overground lines** — each labeled on the map, with its full name in the legend,
   redrawn from OpenStreetMap.
 - The colors are close to TfL's but not the same: some of TfL's colors are too close to the dot
-  colors, so the Piccadilly line appears in mauve and the Northern in gray.
+  colors or vanish on the dark page, so the Metropolitan line appears in purple and the Northern
+  in gray.
 - Tramlink, National Rail services and river buses are not drawn.
 - The map covers **Greater London**. Lines that run on beyond it are cut at the boundary, and their
   32 stations outside it are left out.

@@ -74,7 +74,8 @@ st.markdown(
   distinct from the Metro lines whose colors they nearly share.
 - S-tog is Copenhagen's suburban rail network, and most maps on this site leave that kind of line
   out. It is drawn here because it runs like a metro, every ten minutes on its own tracks, and
-  reaches many districts the Metro does not.
+  reaches many districts the Metro does not. Line Bx is the exception: it runs only at peak
+  hours, every twenty minutes.
 - The map covers the **municipalities of Copenhagen and Frederiksberg** and the **eight suburban
   municipalities the Letbane serves**: Lyngby-Taarbæk, Gladsaxe, Herlev, Rødovre, Glostrup,
   Brøndby, Vallensbæk and Ishøj. Frederiksberg is a separate municipality entirely surrounded by

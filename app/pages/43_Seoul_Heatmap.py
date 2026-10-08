@@ -96,7 +96,7 @@ st.markdown(
 """
 )
 
-render_map_help("three business categories (Food service, Retail and Personal services)")
+render_map_help("three business categories (Food service, “Food, convenience and tobacco shops” and Personal services)")
 render_excluded_stations("Seoul")
 render_country_links("Seoul")
 

@@ -91,7 +91,7 @@ Rail alignment data provided by MassDOT/MBTA.
 """
 )
 
-render_map_help('two business categories (Retail and Food service)')
+render_map_help('two business categories (“Food, liquor and cannabis shops” and Food service)')
 render_excluded_stations("Boston")
 render_country_links('Boston')
 

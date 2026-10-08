@@ -71,7 +71,7 @@ st.markdown(
 - Lines and stations come from MLIT's national railway data (国土数値情報); station names in
   English are from OpenStreetMap. Line colors are this project's own, not the operators'.
 - Only stations inside Higashimurayama City get rings, because the business data covers the city
-  alone: lines running on to Kodaira, Tokorozawa, Kokubunji, Higashimurayama and Tachikawa are cut
+  alone: lines running on to Kodaira, Tokorozawa, Kokubunji, Higashiyamato and Tachikawa are cut
   at the city line. The stations left out are listed below.
 - The Seibu Yamaguchi Line (the Leo Liner) is not drawn: its one station in the city, Tamako, is a
   station of the Tamako Line, which keeps the ring.

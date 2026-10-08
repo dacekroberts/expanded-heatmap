@@ -93,7 +93,7 @@ st.markdown(
 """
 )
 
-render_map_help('three business categories (Retail, Food service and Personal services)')
+render_map_help('three business categories (Food service, Personal services and “Food stores, used-car and secondhand dealers”)')
 render_excluded_stations("Buffalo")
 render_country_links('Buffalo')
 
