@@ -455,11 +455,24 @@ for _k, _h in _HUES.items():
 # 10.1 (Hibiya, Den-en-toshi, 1.1 km apart); all 52 dark-mode labels separate.
 # As in Fukuoka, no blue clears Retail's pin, so the blue lines went slate,
 # grey and mauve (Mita, Yokosuka / Sobu Rapid, the Keisei lines).
+#
+# FOOD SHOPS OLIVE (#737a00, 2026-10-07) arrived after this search, and two
+# lines sat under the owner's floor of 20 from it (2026-10-07). Each moved to
+# the colour nearest its operator's hue that reads 3:1 on both pages, clears
+# 20 from every pin and 18 from every other line, taking 25 where that cost
+# little: the Toei Shinjuku Line #889800 (15.0) to #78A03C (olive 20.1,
+# nearest line JR Yamanote 19.3; the yellow-greens leave no more room), the
+# Chiyoda Line #586818 (15.8) to #007034, Tokyo Metro's green darkened (25.3
+# from the green pin, 39.4 from olive). Nine of 52 lines sit between 20 and
+# 45 from olive (the Shinjuku nearest, then JR Chuo-Sobu #B09000 23.2), an
+# accepted trade (owner, 2026-10-07). Closest pair still 10.1; all 52
+# dark-mode labels separate. DECISIONS, "Lines within 20 of the olive and
+# violet pins recoloured".
 _COLOURS = {
     "JY": "#60A000", "JK": "#08A0C0", "JC": "#F05820", "JB": "#B09000", "JO": "#9888A0", "JE": "#F86040",
     "JJ": "#20A800", "JA": "#207078", "JU": "#E07800", "G": "#B06800", "M": "#E81020", "H": "#909088",
-    "T": "#6890A0", "C": "#586818", "Y": "#A89060", "Z": "#C870C8", "N": "#586858", "F": "#A06030",
-    "A": "#E07850", "I": "#606070", "S": "#889800", "E": "#F000B8", "SA": "#B880A0", "NT": "#E038C0",
+    "T": "#6890A0", "C": "#007034", "Y": "#A89060", "Z": "#C870C8", "N": "#586858", "F": "#A06030",
+    "A": "#E07850", "I": "#606070", "S": "#78A03C", "E": "#F000B8", "SA": "#B880A0", "NT": "#E038C0",
     "TY": "#E84028", "MG": "#8890A0", "DT": "#789090", "OM": "#D07020", "IK": "#B88088", "TM": "#B820A8",
     "SG": "#C08800", "KO": "#E060D0", "IN": "#9840A0", "OH": "#687888", "SI": "#E86800", "SS": "#906888",
     "ST": "#D08000", "SY": "#B05000", "TS": "#007890", "TJ": "#9040C0", "TK": "#C870E8", "TD": "#807080",

@@ -258,7 +258,13 @@ LINES = {
 # and clears CIE76 45 from every pin. Closest pair within 500 m 18.4 (the Kōya
 # Line / JR Hanwa, which meet at 三国ヶ丘); the dark-mode labels separate, 6 of
 # 6.
-_COLOURS = {"RH": "#689000", "M": "#E81820", "NM": "#E07800", "NK": "#B09000", "NB": "#08A0C0", "JR": "#B87808"}
+# FOOD SHOPS OLIVE (#737a00, 2026-10-07) arrived after this search: the Hankai
+# Line's #689000 sat 17.4 from it, under the owner's floor of 20 (2026-10-07),
+# and takes #449418 (olive 30.3), ONE colour with Osaka's for the same line
+# (Osaka's config gives the search). Three of six lines sit between 20 and 45
+# from olive (the Koya Line 23.2, the Hankai 30.3, JR Hanwa 34.7), an accepted
+# trade (owner, 2026-10-07).
+_COLOURS = {"RH": "#449418", "M": "#E81820", "NM": "#E07800", "NK": "#B09000", "NB": "#08A0C0", "JR": "#B87808"}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

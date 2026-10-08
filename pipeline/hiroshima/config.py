@@ -247,8 +247,21 @@ LINES = {
 # (Hakushima / Miyajima), within 500 m still 19.4. Nine of twelve lines sit
 # below 45 from olive (Yokogawa nearest, 11.8), the Hiroden olive family's
 # known trade. The other seven stay as searched.
+#
+# The owner then set the floor from olive at 20 (2026-10-07). Five Hiroden
+# lines sat under it and each moved, in this order, to the colour nearest
+# Hiroden's green #00A650 that reads 3:1 on both pages, clears 20 from both
+# pins and 18 from every other line, taking a wider margin where it cost
+# little: Yokogawa #889828 (11.8) to #08A850 (olive 46.0), Ujina #587808
+# (12.1) to #089860 (46.8), Miyajima #788430 (12.1) to #0C7C24 (35.4), Eba
+# #586818 (15.8) to #247038 (36.9), Hakushima #989848 (18.1) to #60A450
+# (30.9). The family leaves olive for its own green. Seven of twelve lines sit
+# between 20 and 45 from olive (the Minami Line #787838 nearest, 20.3, then
+# Hiroden Main 26.3), an accepted trade (owner, 2026-10-07). Closest pair now
+# 18.0 (Yokogawa / Miyajima); the dark-mode labels separate, 12 of 12.
+# DECISIONS, "Lines within 20 of the olive and violet pins recoloured".
 _COLOURS = {"AS": "#F000B8", "JS": "#E80010", "JB": "#007890", "JG": "#30A800", "JY": "#D08000", "HM": "#68A008",
-            "HU": "#587808", "HE": "#586818", "HY": "#889828", "HH": "#989848", "HN": "#787838", "HJ": "#788430"}
+            "HU": "#089860", "HE": "#247038", "HY": "#08A850", "HH": "#60A450", "HN": "#787838", "HJ": "#0C7C24"}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

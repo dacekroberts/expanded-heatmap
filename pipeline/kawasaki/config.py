@@ -205,7 +205,16 @@ LINES = {
 # pages and clears CIE76 45 from every pin. Closest pair within 500 m 18.1
 # (Keikyu Daishi / Main), anywhere 10.0 (Keihin-Tohoku / Meguro); the
 # dark-mode labels separate, 16 of 16.
-_COLOURS = {"JN": "#B09000", "JB": "#909800", "JI": "#C08800", "JK": "#08A0C0", "JT": "#E07800", "JO": "#406878",
+# FOOD SHOPS OLIVE (#737a00, 2026-10-07) arrived after this search: the Nambu
+# Branch Line's #909800 sat 14.9 from it, under the owner's floor of 20
+# (2026-10-07). It moved to #B88C3C, an ochre: the colour nearest JR's yellow
+# #FFD400, held to a yellow-orange hue (LCh 80-100 degrees), that reads 3:1 on
+# both pages and clears 25 from every pin and 18 from every other line (olive
+# 27.6, nearest line JR Tsurumi 18.5). Three of 16 lines sit between 20 and
+# 45 from olive (JR Nambu #B09000 23.2, the Branch 27.6, JR Tsurumi 32.5), an
+# accepted trade (owner, 2026-10-07). DECISIONS, "Lines within 20 of the
+# olive and violet pins recoloured".
+_COLOURS = {"JN": "#B09000", "JB": "#B88C3C", "JI": "#C08800", "JK": "#08A0C0", "JT": "#E07800", "JO": "#406878",
             "SJ": "#805878", "KK": "#E81820", "KD": "#F05830", "TY": "#C80808", "MG": "#0088A0", "DT": "#207078",
             "OM": "#D87830", "OH": "#588898", "OT": "#686878", "KO": "#F000B8"}
 for _k, _v in LINES.items():

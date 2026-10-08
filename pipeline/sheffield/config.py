@@ -140,7 +140,15 @@ LINES = {k: {"hue": v} for k, v in OSM_COLOURS.items()}
 # labels distinct. Yellow's #FFFF00 fails 3:1 on the light page and is
 # darkened to #989800 (light 3.08), as Tours's and Dijon's were; Blue's
 # #0000FF (about 2.2:1 on the dark page) moves to #8018F8.
-LINE_COLOURS = {"Blue": "#8018F8", "Yellow": "#989800", "Purple": "#A030A0"}
+#
+# FOOD SHOPS OLIVE (#737a00, 2026-10-07) arrived after this search, and
+# #989800 sat 15.7 from it, under the owner's floor of 20 (2026-10-07). Yellow
+# moves to #B48C00, a dark gold: the colour nearest OSM's #FFFF00, held to a
+# yellow hue (LCh 85-103 degrees), that reads 3:1 on both pages (light 3.14)
+# and clears 20 from both pins. Olive 25.8, an accepted trade between 20 and
+# 45 (owner, 2026-10-07); a re-run of the search at 45 turns it green, which
+# is not the line's colour. Blue 97.3 and Purple 45.4 from the pins.
+LINE_COLOURS = {"Blue": "#8018F8", "Yellow": "#B48C00", "Purple": "#A030A0"}
 
 # GATE 3 - NaPTAN only. Supertram's own site (supertram.com) serves a Radware
 # CAPTCHA to a script and Stagecoach's Supertram page returns 403, both

@@ -194,8 +194,15 @@ TRAM_FEED_COLOURS = {"1": "#3651a3", "2": "#f47b20", "3": "#f3aacb", "4": "#165d
 # by the smallest step that clears 13 from every other line - tram 1 lighter to
 # #3f5ebe (L +0.07; 13.9 from its nearest line, 13.1 from the Retail pins),
 # then tram 11 darker to #293e7d (L -0.10; 13.8).
+# SHOPS AND SERVICES VIOLET (#7e57c2, 2026-10-07) arrived later: tram 1's
+# #3f5ebe sat 19.5 from it, under the owner's floor of 20 (2026-10-07), and
+# moved to #306ccc, a bluer blue: the colour nearest its own that reads 3:1 on
+# both pages and clears 25 from both pins and 18 from every other line (violet
+# 25.2, nearest line Metro E 18.9). Four of 14 lines sit between 20 and 45
+# from violet (tram 1, Metro E 26.3, tram 8 30.1, tram 11 33.5), an accepted
+# trade (owner, 2026-10-07).
 LINE_COLOURS = {**METRO_FEED_COLOURS, **TRAM_FEED_COLOURS,
-                "1": "#3f5ebe", "11": "#293e7d"}
+                "1": "#306ccc", "11": "#293e7d"}
 
 RET_SHAPES_ZIP = DATA_PROCESSED / "ret_rail_shapes.zip"
 LINE_SHAPES_JSON = DATA_PROCESSED / "line_shapes.json"

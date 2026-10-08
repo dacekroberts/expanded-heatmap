@@ -121,7 +121,11 @@ LINES = {"1": {"hue": "#00804A"}, "2": {"hue": "#C04020"}}
 # `python scripts/line_colour_search.py nottingham`, run 2026-10-02: each hue's
 # nearest feasible colour, 45.0 (Line 1) and 45.6 (Line 2) from the pins, 3:1
 # on both pages; the pair 70.8 apart; the two dark-mode labels distinct.
-LINE_COLOURS = {"1": "#586818", "2": "#D85028"}
+# FOOD SHOPS OLIVE (#737a00, 2026-10-07) arrived after that run, and Line 1's
+# #586818 sat 15.8 from it (owner's floor 20, 2026-10-07). It moved to
+# #008854, the colour nearest its hue clearing 45 from both pins (45.1); the
+# pair now 100.7 apart. Both lines >= 45 from every pin.
+LINE_COLOURS = {"1": "#008854", "2": "#D85028"}
 
 # Two northbound stop members that are no stop (uk.elements), each beside a
 # real stop the southbound relations carry.

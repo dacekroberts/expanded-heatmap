@@ -199,7 +199,7 @@ LINES = {
     "HI": {"n02": [(_HK, "伊丹線")], "name": "Hankyu Itami Line", "name_ja": "阪急伊丹線", "short": "Hankyu",
            "hue": "#B7572D"},
     "JT": {"n02": [(_JR, "福知山線")], "name": "JR Takarazuka Line", "name_ja": "JR宝塚線", "short": "JR",
-           "hue": "#9F9504"},
+           "hue": "#A8903C"},
     "MO": {"n02": [(_MO, "大阪モノレール線")], "name": "Osaka Monorail Main Line", "name_ja": "大阪モノレール本線",
            "short": "Monorail", "hue": "#0067B0"},
 }
@@ -210,7 +210,12 @@ LINES = {
 # that reads 3:1 on both map pages and clears CIE76 45 from every pin; the
 # Hankyu and Monorail colours are Toyonaka's. Closest pair anywhere 34.9; the
 # dark-mode labels separate, 3 of 3.
-_COLOURS = {"HI": "#C06038", "JT": "#A09808", "MO": "#007890"}
+# FOOD SHOPS OLIVE (#737a00, 2026-10-07) arrived after this search: the JR
+# Takarazuka Line's #A09808 sat 16.7 from it, under the owner's floor of 20
+# (2026-10-07), and takes Kobe's new colour for the same line, #A8903C (olive
+# 20.1, between 20 and 45: an accepted trade; Kobe's config gives the
+# search). Its start hue follows. Closest pair now 38.1.
+_COLOURS = {"HI": "#C06038", "JT": "#A8903C", "MO": "#007890"}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

@@ -297,7 +297,13 @@ LINES = {
 # clears Retail's pin in, goes teal (Sasebo's and Maebashi's); the Tohoku
 # green, too near Food service's pin, darkens to olive. Closest pair 45.4
 # (Iizaka, Ou); the dark-mode labels separate, 4 of 4.
-_COLOURS = {"II": "#E80020", "AB": "#007890", "TH": "#586818", "OU": "#E07800"}
+# FOOD SHOPS OLIVE (#737a00, 2026-10-07) arrived after this search: the
+# Tohoku Line's olive #586818 sat 15.8 from it, under the owner's floor of 20
+# (2026-10-07). It takes #007430, a dark green: the colour nearest JR East's
+# #3CB371 that reads 3:1 on both pages and clears 25 from every pin (25.2
+# from the green pin, 38.0 from olive, between 20 and 45: an accepted trade),
+# ONE colour with Morioka's, which draws the same line.
+_COLOURS = {"II": "#E80020", "AB": "#007890", "TH": "#007430", "OU": "#E07800"}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

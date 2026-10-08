@@ -114,11 +114,20 @@ LINE_NAMES = {k: k for k in LINES}
 # `python scripts/line_colour_search.py london` (500 m, CIE76 18), run
 # 2026-09-28 on step 1's lines.geojson: closest pair within 500 m 18.3
 # (Northern, Waterloo & City), anywhere 10.5 (Jubilee, Liberty); every line
-# >= 45.0 from every pin; 19 distinct dark-mode labels. The Retail pins' blue
-# takes the Piccadilly's, which reads mauve here; the Northern's black is grey
-# so it shows on the dark page.
+# >= 45.0 from the pins of that run; 19 distinct dark-mode labels. The Retail
+# pins' blue takes the Piccadilly's, which reads mauve here; the Northern's
+# black is grey so it shows on the dark page.
+#
+# FOOD SHOPS OLIVE (#737a00, 2026-10-07) arrived after this search. The
+# District's #586818 sat 15.8 from it, under the owner's floor of 20
+# (2026-10-07), and moved to #00A064, the colour nearest TfL's #00A166 that
+# reads 3:1 on both pages and clears 18 from every other line: olive 48.0,
+# nearest line the Suffragette 40.9. Four lines sit between 20 and 45 from
+# olive, an accepted trade (owner, 2026-10-07): the Circle (#B09000) 23.2, the
+# Lioness 43.0, the Bakerloo 43.5 and the Suffragette 44.4. Every other line
+# >= 45.0 from every pin.
 LINE_COLOURS = {
-    "Bakerloo": "#B06018", "Central": "#E02010", "Circle": "#B09000", "District": "#586818",
+    "Bakerloo": "#B06018", "Central": "#E02010", "Circle": "#B09000", "District": "#00A064",
     "Hammersmith & City": "#B88090", "Jubilee": "#909090", "Metropolitan": "#9840A0",
     "Northern": "#686060", "Piccadilly": "#805878", "Victoria": "#08A0C0",
     "Waterloo & City": "#487070", "DLR": "#5098A8", "Elizabeth": "#C068E0",
