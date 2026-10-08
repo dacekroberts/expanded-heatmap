@@ -392,9 +392,25 @@ EXTENT_PAD = 0.005
 # route numbers), Kyoto's landmarks "1080" and "7105". A name like this is
 # dropped and the object keeps its others; with none left, it goes.
 JUNK_NAMES = {"untitled", "unnamed", "unknown", "noname", "no name", "nan", "null", "none",
-              "undefined", "n/a", "na", "error", "test", "tbd", "todo", "fixme", "?"}
+              "undefined", "n/a", "na", "error", "test", "tbd", "todo", "fixme", "?",
+              # Hong Kong's FEHD placeholder (Cleanup's inventory, 2026-10-08).
+              "no record", "no record found"}
+# Contact details in a name: an email or a phone number; the name goes, as
+# map_common._has_contact_details drops the row. NANP 3-3-4 as there, plus a
+# trunk-prefixed Japanese or Korean number (075-123-4567, 02-123-4567), which
+# that rule misses (Cleanup's inventory, 2026-10-08). The junk-name pass is
+# to merge the two.
+_CONTACT = re.compile(r"[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}"
+                      r"|(?:\+?1[ .\-]?)?\(?\d{3}\)?[ .\-]\d{3}[ .\-]\d{4}"
+                      r"|(?<!\d)0\d{1,3}-\d{2,4}-\d{4}(?!\d)")
 JUNK_MARKS = ("#n/a", "#ref", "#value", "#div/0", "#name?", "#num", "#null", "!error",
               chr(0xFFFD))  # the replacement character, a broken decode
+
+
+def _bare_personal(name):
+    # Imported here: japan_register is only needed for a Japanese city.
+    from pipeline.countries.japan_register import bare_personal_name
+    return bare_personal_name(name)
 
 
 def junk_name(name):
@@ -405,8 +421,8 @@ def junk_name(name):
     # letters ("Montr?al"). The two rules are to agree, and merge at landing.
     lost = (low.startswith("?") and not low.startswith("? ")) or any(
         low[i] == "?" and low[i - 1].isalpha() and low[i + 1].isalpha() for i in range(1, len(low) - 1))
-    return (lost or not any(c.isalpha() for c in low) or low.strip("!?.# ") in JUNK_NAMES
-            or any(m in low for m in JUNK_MARKS))
+    return (lost or not any(c.isalpha() for c in low) or low.strip("!?.#() ") in JUNK_NAMES
+            or any(m in low for m in JUNK_MARKS) or bool(_CONTACT.search(name)))
 
 
 def _names(tags, name_tags):
@@ -670,6 +686,14 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=()):
             # names of the families who built them (2026-10-08).
             if _home(t, names) and not _public_home(t):
                 report["landmark_dropped_residential"] += 1
+                continue
+            # A landmark named as a bare Japanese personal name (the map's sign
+            # rule, japan_register.bare_personal_name: a common surname, a space,
+            # a given name) is someone's house or grave, unless public. The
+            # Korean rule (korean_names.looks_like_personal_name) is NOT used:
+            # without its address test it reads 이태원 and 강남역 as people.
+            if "ja" in local and not _public_home(t) and any(_bare_personal(n) for n in names):
+                report["landmark_dropped_personal_name"] += 1
                 continue
             # A garden is often a private one at a house, and may carry a
             # person's own name ("Aoyama's Garden", Kyoto, 2026-10-07): kept only
