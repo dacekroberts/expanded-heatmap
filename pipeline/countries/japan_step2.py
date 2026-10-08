@@ -30,7 +30,8 @@ copy for every Japanese city. A city's step 2 calls run(config).
 Config needs: SOURCES, source_csv(), REQUIRED_COLUMNS, ISJ_DIR, PREFECTURE,
 MUNICIPALITY, CITY_BBOX, TAXONOMY_SYSTEM, BUSINESSES_CLEAN_CSV, SLUG. Optional,
 each named where it is defined: source_rows, SOURCE_MUNICIPALITY, SOURCE_KIND,
-ADDRESS_BY_CONSENT, OWN_POINT_FALLBACK, POINT_DONORS, SUPERSEDES; a city
+ADDRESS_BY_CONSENT, OWN_POINT_FALLBACK, POINT_DONORS, SUPERSEDES, and with
+OFFICIAL_SHARES, SHARE_DATES and REGISTER_SHARES (the Tama cities); a city
 without wards says so in japan.CITIES ("wardless"). Reads the cache and NEVER
 fetches.
 """
@@ -120,6 +121,57 @@ def own_coordinates_check(config, df):
             emit(f"own_coords_{tier}_within_250m_pct", round(100 * (t <= 250).mean(), 1))
 
 
+def _after(d, date):
+    """A row's date (config.SHARE_DATES) falls after the official count's date."""
+    return d is not None and d == d and str(d) > date
+
+
+def at_date(rows, official, key):
+    """The share AT THE OFFICIAL COUNT'S DATE (the owner's calls 187-189,
+    2026-10-06): a list that adds new permits month by month, and keeps few
+    old ones, reads high against a count of a year and a half before. The rows
+    first permitted (or confirmed) after that date are left out of the
+    numerator; config.SHARE_DATES names each source's date column. Tokyo's
+    Tama ledgers (East-1, 2026-10-07): Higashiyamato's 505 restaurant rows
+    against the yearbook's 528 read 95.6%, and 75.2% at the date (the brief).
+    A row with no date is kept and counted."""
+    from pipeline.countries import japan_official
+    date = japan_official.YEARBOOK_DATE
+    after = rows["dated"].map(lambda d: _after(d, date)) if "dated" in rows else pd.Series(False, index=rows.index)
+    undated = int(rows["dated"].map(lambda d: d is None or d != d).sum()) if "dated" in rows else len(rows)
+    n = len(rows) - int(after.sum())
+    share = round(100 * n / official, 1)
+    print(f"      at {date}: {n:>7,} of {official:>7,}  {share:5.1f}%   ({int(after.sum()):,} dated after it, "
+          f"{undated:,} undated)")
+    emit(key, n)
+    return {"kind": "restaurants", "rows_at_date": n, "share_at_date_pct": share, "date": date, "undated": undated}
+
+
+def register_shares(df, muni, code):
+    """Each register's share of the official count (config.REGISTER_SHARES;
+    Tokyo's yearbook table 19-7, the owner's call 189, 2026-10-06): its rows
+    in the municipality, storeless pick-up counters and closed rows out, all
+    rows and at the count's date. Stops where no official count covers it."""
+    from pipeline.countries import japan_official
+    official = japan_official.registers(muni)
+    out = []
+    for kind in japan_official.REGISTER_COLUMNS:
+        rows = df[(df["kind"] == kind) & (df["muni"] == muni) & ~df["mobile"] & ~df["closed"]]
+        if rows.empty:
+            continue
+        if not official.get(kind):
+            sys.exit(f"no official {kind} count for {muni}: is the yearbook's table 19-7 cached?")
+        n, o = len(rows), official[kind]
+        print(f"    {kind:8} {n:>7,} of {o:>7,}  {100 * n / o:5.1f}%   ({japan_official.YEARBOOK_REGISTERS_SOURCE})")
+        emit(f"official_{kind}_rows_{code}", n)
+        emit(f"official_{kind}_count_{code}", o)
+        entry = {"municipality": muni, "code": code, "kind": kind, "rows": n, "official": o,
+                 "share_pct": round(100 * n / o, 1), "source": japan_official.YEARBOOK_REGISTERS_SOURCE}
+        entry.update(at_date(rows, o, f"official_{kind}_rows_at_date_{code}"), kind=kind)
+        out.append(entry)
+    return out
+
+
 def official_shares(config, df, write=True):
     """Each municipality's share of the official restaurant count
     (japan_official: Tokyo's yearbook per ward, e-Stat per city), measured the
@@ -155,6 +207,10 @@ def official_shares(config, df, write=True):
         emit(f"official_count_{code}", official)
         out.append({"municipality": muni, "code": code, "rows": n, "official": official, "share_pct": share,
                     "source": source})
+        if getattr(config, "SHARE_DATES", {}):
+            out[-1].update(at_date(food[food["muni"] == muni], official, f"official_rows_at_date_{code}"))
+        if getattr(config, "REGISTER_SHARES", False):
+            out += register_shares(df, muni, code)
     if not write:
         return
     config.OUTPUTS.mkdir(parents=True, exist_ok=True)
@@ -227,7 +283,14 @@ def own_point_fallback(config, joined):
     bb = config.CITY_BBOX
     mine = joined["source"].isin(sources)
     datum_guard(config, joined[mine])
-    default = shared_points(zip(joined.loc[mine, "ward"], joined.loc[mine, "town"], joined.loc[mine, "pub"]))
+    # Towns are counted only over rows the join read (owner's call 202,
+    # 2026-10-07): an address the join could not parse keeps its raw tail in
+    # `town`, so one premises written three ways (Kasukabe's AEON Mall, 下柳 and
+    # 下柳イオンモール…) counted as three towns and its own point was refused.
+    # A switch (japan_register's "default_joined"): built cities keep the old
+    # count until a review time re-renders them.
+    read = mine & (joined["tier"] != "none") if "default_joined" in japan_rules(config) else mine
+    default = shared_points(zip(joined.loc[read, "ward"], joined.loc[read, "town"], joined.loc[read, "pub"]))
     inb = joined["pub"].map(lambda p: p is not None and p == p and bb["lat_min"] <= p[0] <= bb["lat_max"]
                             and bb["lon_min"] <= p[1] <= bb["lon_max"] and _pt4(p) not in default)
     refused = mine & (joined["tier"] != "block") & joined["pub"].map(
@@ -455,9 +518,14 @@ def run(config, write=True):
         flags = [jr.name_is_operator(r, rules) for r in rows]
         ps = read_permits(config, key, rows, rules, others)
         check_new_city_columns(config, key, rows, ps, rules)
-        for p, f in zip(ps, flags):
+        # the date a row is measured by for the share at the official count's
+        # date (config.SHARE_DATES = {source key: column}; at_date)
+        date_col = getattr(config, "SHARE_DATES", {}).get(key)
+        for p, f, r in zip(ps, flags, rows):
             p["source"], p["name_is_operator"], p["muni"] = key, f, municipality(config, key)
             p["kind"] = kind(config, key)
+            if date_col:
+                p["dated"] = jr.wareki_date(r.get(date_col))
         permits += ps
         emit(f"rows_{key}", len(ps))
         print(f"  {key:8} {len(ps):>7,} rows")

@@ -1,0 +1,54 @@
+[
+  {
+    "municipality": "多摩市",
+    "code": "13224",
+    "rows": 839,
+    "official": 931,
+    "share_pct": 90.1,
+    "source": "Tokyo statistical yearbook, table 19-8 (飲食店営業, FY2024)",
+    "kind": "restaurants",
+    "rows_at_date": 667,
+    "share_at_date_pct": 71.6,
+    "date": "2025-03-31",
+    "undated": 0
+  },
+  {
+    "municipality": "多摩市",
+    "code": "13224",
+    "kind": "barber",
+    "rows": 53,
+    "official": 56,
+    "share_pct": 94.6,
+    "source": "Tokyo statistical yearbook, table 19-7 (理容所, 美容所, クリーニング所, FY2024)",
+    "rows_at_date": 53,
+    "share_at_date_pct": 94.6,
+    "date": "2025-03-31",
+    "undated": 0
+  },
+  {
+    "municipality": "多摩市",
+    "code": "13224",
+    "kind": "beauty",
+    "rows": 164,
+    "official": 169,
+    "share_pct": 97.0,
+    "source": "Tokyo statistical yearbook, table 19-7 (理容所, 美容所, クリーニング所, FY2024)",
+    "rows_at_date": 154,
+    "share_at_date_pct": 91.1,
+    "date": "2025-03-31",
+    "undated": 0
+  },
+  {
+    "municipality": "多摩市",
+    "code": "13224",
+    "kind": "laundry",
+    "rows": 38,
+    "official": 40,
+    "share_pct": 95.0,
+    "source": "Tokyo statistical yearbook, table 19-7 (理容所, 美容所, クリーニング所, FY2024)",
+    "rows_at_date": 36,
+    "share_at_date_pct": 90.0,
+    "date": "2025-03-31",
+    "undated": 0
+  }
+]

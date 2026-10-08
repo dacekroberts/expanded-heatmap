@@ -169,6 +169,12 @@ WAVE2_RULES = frozenset({"oaza", "aza_letter", "kou_bare", "chome_missing", "mac
 #                    the mean of its 丁目 centroids (Mito's 宮町, 泉町)
 #   "no_dropped"     a の (and 字) the list leaves out, where only one MLIT
 #                    town matches (Matsumoto's 里山辺湯原 for 里山辺字湯の原)
+# and East-1's (owner's call 202, 2026-10-07):
+#   "default_joined" a publisher's default point is judged over the rows the
+#                    join read only (step 2's own_point_fallback; Kasukabe's
+#                    AEON Mall, one premises written three ways). On the built
+#                    cities: Okayama +13 storefronts, Fukuoka +4, Hiroshima +2,
+#                    Shimonoseki +2, Kurume +1 (review-time re-render).
 # Matsue's 八雲村 (the village before 2005) is a city's own: japan.CITIES'
 # "town_aliases" ({old: new}, the start of the town).
 # and the name rule across premises (owner, call 205, 2026-10-07):
@@ -182,7 +188,7 @@ WAVE5_RULES = frozenset({"type_cols5", "operator_cols5", "form_all", "combined_f
                          "aza_insert", "koaza_word", "spelling5", "machi_bare", "koaza_chome", "koaza_centroid",
                          "koaza_unique", "oaza_cut",
                          "bracket_aza", "chiwari", "chome_union", "no_dropped",
-                         "name_city"})
+                         "name_city", "default_joined"})
 ALL_RULES = WAVE2_RULES | WAVE5_RULES
 
 

@@ -100,7 +100,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
 | South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang (Regional), Daejeon, Gwangju, Gimhae, Gimpo, Siheung |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
-| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki |
+| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki, Higashiyamato, Nishitōkyō, Tama, Higashimurayama, Ageo (Regional), Sōka, Tokorozawa, Kasukabe, Fuchū (Tokyo), Chōfu, Tachikawa, Hino |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin, Gelsenkirchen, Bremen |
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional) |
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
@@ -3785,6 +3785,206 @@ of 2026-10-03.)
 - **The repository carries the credit too**, as for London: committed
   `outputs/liverpool/` republishes the derived locations (README's credits).
 - Wording: Manchester's Ordnance Survey notice 85, with the city changed.
+
+**157. Tokyo Metropolitan Government, MHLW and MLIT (Higashiyamato) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with East-1 at review
+time).
+
+- **PERMITTED WITH CONDITIONS** (the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The Tama ledgers are
+  **CC BY 4.0 through the Tokyo catalogue's two entries**, relied on (owner,
+  call 108, Taitō's precedent). MHLW's open data is **PDL 1.0**, as in
+  Sasebo's (127). MLIT's 位置参照情報 and N02 (the 2025 edition) are **PDL
+  1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks stations and is
+  **never drawn** (the Survey Act).
+- **MUST DISPLAY**: the Tokyo Open Data Terms' modified-use credit (§2(1)イ),
+  `この地図は、以下の著作物を改変して利用しています。食品関係営業台帳（…t000055d0000000361）及び環境衛生施設台帳（…t000055d0000000614）、東京都、クリエイティブ・コモンズ・ライセンス 表示4.0国際（https://creativecommons.org/licenses/by/4.0/deed.ja）`,
+  with the catalogue's name and the date of use as Tokyo's notice gives them;
+  `出典：「食品衛生申請等システム」（厚生労働省）（https://i2fas.mhlw.go.jp/）の「食品等営業許可・届出一覧」を加工して作成`;
+  who processed both; MLIT's credit lines.
+- **MUST NOT**: present the map as made by Tokyo or a municipality; link the
+  保健医療局 page or files (that site's link policy: the catalogue entries are
+  linked instead); present the lists as MHLW's or Tokyo's own; use a logo;
+  claim either list is complete or accurate.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py higashiyamato` with its Japan pass,
+  run 2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-1.md` ("Higashiyamato built",
+  2026-10-07).<!-- /internal -->
+
+**158. Tokyo Metropolitan Government, MHLW and MLIT (Nishitōkyō) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with East-1 at review
+time).
+
+- **PERMITTED WITH CONDITIONS**, as Higashiyamato's (157): the same Tama
+  ledgers (CC BY 4.0 through the Tokyo catalogue, call 108), MHLW's Tokyo
+  file (PDL 1.0), MLIT's 位置参照情報 and N02-25 (PDL 1.0); N03 never drawn.
+- **MUST DISPLAY**, **MUST NOT**: as notice 157, the city changed.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py nishitokyo` with its Japan pass,
+  run 2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-1.md` ("Nishitōkyō built",
+  2026-10-07).<!-- /internal -->
+
+**159. Tokyo Metropolitan Government, MHLW and MLIT (Tama) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with East-1 at review
+time).
+
+- **PERMITTED WITH CONDITIONS**, as Higashiyamato's (157): the same Tama
+  ledgers (CC BY 4.0 through the Tokyo catalogue, call 108), MHLW's Tokyo
+  file (PDL 1.0), MLIT's 位置参照情報 and N02-25 (PDL 1.0); N03 never drawn.
+- **MUST DISPLAY**, **MUST NOT**: as notice 157, the city changed.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py tama` with its Japan pass,
+  run 2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-1.md` ("Tama built",
+  2026-10-07).<!-- /internal -->
+
+**160. Tokyo Metropolitan Government, MHLW and MLIT (Higashimurayama) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with East-1 at review
+time).
+
+- **PERMITTED WITH CONDITIONS**, as Higashiyamato's (157): the same Tama
+  ledgers (CC BY 4.0 through the Tokyo catalogue, call 108), MHLW's Tokyo
+  file (PDL 1.0), MLIT's 位置参照情報 and N02-25 (PDL 1.0); N03 never drawn.
+- **MUST DISPLAY**, **MUST NOT**: as notice 157, the city changed.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py higashimurayama` with its Japan pass,
+  run 2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-1.md` ("Higashimurayama built",
+  2026-10-07).<!-- /internal -->
+
+**161. Saitama Prefecture and MLIT (Ageo (Regional)) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with East-1 at review
+time).
+
+- **PERMITTED WITH CONDITIONS** (the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)): the food layers and the
+  R8.3.31 list through the GIS catalogue, which applies the prefecture
+  portal's terms (PDL 1.0); the 生活衛生 lists through the portal's 2024 PDL
+  record (owner, call 143). MLIT's 位置参照情報 and N02 (the 2025 edition)
+  are **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks stations
+  and is **never drawn** (the Survey Act). MHLW's file is a control only.
+- **MUST DISPLAY**: the portal terms' §1.1 credit for processed use, each
+  dataset by its own title, `出典：「食品営業施設_新法_公開」「食品営業施設_旧法_公開」「kyuho_R080331」（埼玉県GISオープンデータカタログ）（…）及び「【埼玉県】生活衛生営業施設一覧」（埼玉県オープンデータポータルサイト）（…）を加工して作成`;
+  who processed it; MLIT's credit lines.
+- **MUST NOT**: present the map as made by Saitama Prefecture; claim the
+  lists are complete.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py ageo_regional` with its Japan pass,
+  run 2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-1.md` ("Ageo (Regional) built",
+  2026-10-07).<!-- /internal -->
+
+**162. Saitama Prefecture and MLIT (Sōka) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with East-1 at review
+time).
+
+- **PERMITTED WITH CONDITIONS** (the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)): the food layers and the
+  R8.3.31 list through the GIS catalogue, which applies the prefecture
+  portal's terms (PDL 1.0); the 生活衛生 lists through the portal's 2024 PDL
+  record (owner, call 143). MLIT's 位置参照情報 and N02 (the 2025 edition)
+  are **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks stations
+  and is **never drawn** (the Survey Act). MHLW's file is a control only.
+- **MUST DISPLAY**: the portal terms' §1.1 credit for processed use, each
+  dataset by its own title, `出典：「食品営業施設_新法_公開」「食品営業施設_旧法_公開」「kyuho_R080331」（埼玉県GISオープンデータカタログ）（…）及び「【埼玉県】生活衛生営業施設一覧」（埼玉県オープンデータポータルサイト）（…）を加工して作成`;
+  who processed it; MLIT's credit lines.
+- **MUST NOT**: present the map as made by Saitama Prefecture; claim the
+  lists are complete.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py soka` with its Japan pass,
+  run 2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-1.md` ("Sōka built",
+  2026-10-07).<!-- /internal -->
+
+**163. Saitama Prefecture and MLIT (Tokorozawa) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with East-1 at review
+time).
+
+- **PERMITTED WITH CONDITIONS** (the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)): the food layers and the
+  R8.3.31 list through the GIS catalogue, which applies the prefecture
+  portal's terms (PDL 1.0); the 生活衛生 lists through the portal's 2024 PDL
+  record (owner, call 143). MLIT's 位置参照情報 and N02 (the 2025 edition)
+  are **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks stations
+  and is **never drawn** (the Survey Act). MHLW's file is a control only.
+- **MUST DISPLAY**: the portal terms' §1.1 credit for processed use, each
+  dataset by its own title, `出典：「食品営業施設_新法_公開」「食品営業施設_旧法_公開」「kyuho_R080331」（埼玉県GISオープンデータカタログ）（…）及び「【埼玉県】生活衛生営業施設一覧」（埼玉県オープンデータポータルサイト）（…）を加工して作成`;
+  who processed it; MLIT's credit lines.
+- **MUST NOT**: present the map as made by Saitama Prefecture; claim the
+  lists are complete.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py tokorozawa` with its Japan pass,
+  run 2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-1.md` ("Tokorozawa built",
+  2026-10-07).<!-- /internal -->
+
+**164. Saitama Prefecture and MLIT (Kasukabe) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with East-1 at review
+time).
+
+- **PERMITTED WITH CONDITIONS** (the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)): the food layers and the
+  R8.3.31 list through the GIS catalogue, which applies the prefecture
+  portal's terms (PDL 1.0); the 生活衛生 lists through the portal's 2024 PDL
+  record (owner, call 143). MLIT's 位置参照情報 and N02 (the 2025 edition)
+  are **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks stations
+  and is **never drawn** (the Survey Act). MHLW's file is a control only.
+- **MUST DISPLAY**: the portal terms' §1.1 credit for processed use, each
+  dataset by its own title, `出典：「食品営業施設_新法_公開」「食品営業施設_旧法_公開」「kyuho_R080331」（埼玉県GISオープンデータカタログ）（…）及び「【埼玉県】生活衛生営業施設一覧」（埼玉県オープンデータポータルサイト）（…）を加工して作成`;
+  who processed it; MLIT's credit lines.
+- **MUST NOT**: present the map as made by Saitama Prefecture; claim the
+  lists are complete.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py kasukabe` with its Japan pass,
+  run 2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-1.md` ("Kasukabe built",
+  2026-10-07).<!-- /internal -->
+
+**165. Tokyo Metropolitan Government, MHLW and MLIT (Fuchū (Tokyo)) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with East-1 at review
+time).
+
+- **PERMITTED WITH CONDITIONS**, as Higashiyamato's (157): the same Tama
+  ledgers (CC BY 4.0 through the Tokyo catalogue, call 108), MHLW's Tokyo
+  file (PDL 1.0), MLIT's 位置参照情報 and N02-25 (PDL 1.0); N03 never drawn.
+- **MUST DISPLAY**, **MUST NOT**: as notice 157, the city changed.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py fuchu_tokyo` with its Japan pass,
+  run 2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-1.md` ("Fuchū (Tokyo) built",
+  2026-10-07).<!-- /internal -->
+
+**166. Tokyo Metropolitan Government, MHLW and MLIT (Chōfu) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with East-1 at review
+time).
+
+- **PERMITTED WITH CONDITIONS**, as Higashiyamato's (157): the same Tama
+  ledgers (CC BY 4.0 through the Tokyo catalogue, call 108), MHLW's Tokyo
+  file (PDL 1.0), MLIT's 位置参照情報 and N02-25 (PDL 1.0); N03 never drawn.
+- **MUST DISPLAY**, **MUST NOT**: as notice 157, the city changed.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py chofu` with its Japan pass,
+  run 2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-1.md` ("Chōfu built",
+  2026-10-07).<!-- /internal -->
+
+**167. Tokyo Metropolitan Government, MHLW and MLIT (Tachikawa) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with East-1 at review
+time).
+
+- **PERMITTED WITH CONDITIONS**, as Higashiyamato's (157): the same Tama
+  ledgers (CC BY 4.0 through the Tokyo catalogue, call 108), MHLW's Tokyo
+  file (PDL 1.0), MLIT's 位置参照情報 and N02-25 (PDL 1.0); N03 never drawn.
+- **MUST DISPLAY**, **MUST NOT**: as notice 157, the city changed.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py tachikawa` with its Japan pass,
+  run 2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-1.md` ("Tachikawa built",
+  2026-10-07).<!-- /internal -->
+
+**168. Tokyo Metropolitan Government, MHLW and MLIT (Hino) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with East-1 at review
+time).
+
+- **PERMITTED WITH CONDITIONS**, as Higashiyamato's (157): the same Tama
+  ledgers (CC BY 4.0 through the Tokyo catalogue, call 108), MHLW's Tokyo
+  file (PDL 1.0), MLIT's 位置参照情報 and N02-25 (PDL 1.0); N03 never drawn.
+- **MUST DISPLAY**, **MUST NOT**: as notice 157, the city changed.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py hino` with its Japan pass,
+  run 2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-1.md` ("Hino built",
+  2026-10-07).<!-- /internal -->
 
 
 **154. SITG, Répertoire des entreprises (Geneva (Regional)) — required, and

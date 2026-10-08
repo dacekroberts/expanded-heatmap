@@ -4515,6 +4515,481 @@ line.
   the city, Shimonoseki, and is drawn as part of the Sanyo Line.
 - The Shinkansen is not drawn (Shin-Shimonoseki appears as a JR station).
 
+### Higashiyamato - the Tokyo Metropolitan Government's Tama ledgers and the national filings, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Restaurants and food shops the ledgers do not hold. They list new permits
+  only since August 2019 and renewals since April 2017, and leave out
+  premises whose operators asked not to be published and premises that have
+  closed. Against the official count at the end of March 2025, the ledger
+  holds 397 of the city's 528 restaurants (75.2%). The national filings add
+  the premises they hold and the ledgers do not.
+- Shops that sell only packaged food, except where they notified the health
+  centre since June 2021 (the notification ledger) or filed nationally.
+- 79 school, hospital and staff canteens, 15 snack bars and cabarets, 9
+  vending machines, 8 caterers (仕出し), 7 rows marked temporary or mobile, 2
+  premises inside hotels and inns and 2 mail-order businesses.
+- 26 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 2 rows addressed to an area rather than a premises, 1 food truck or stall,
+  and 1 closed premises, which the national filings keep, marked.
+
+**Counted** - the ledgers as of August 31, 2026, and the national filings
+for the city as downloaded on October 6, 2026. 1 of the 70 bakery,
+confectioner and deli rows (1.4%) has a trade name that reads as a factory;
+it is kept (owner, 2026-09-24).
+
+**One pin per premises** - 70 repeat permits are shown once, and 111
+national filings that repeat a ledger's premises are shown as the ledger's.
+
+**Not placed** - none. 42 rows sit at their town's center.
+
+**Names not shown** - none: no trade name is its operator's own name, and
+the ledgers publish an operator's name almost only for companies.
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 7 stations beyond it: 5 in Tachikawa, 1 in Kodaira and 1 in
+  Higashimurayama.
+- The Seibu Haijima Line keeps one station of its own inside the city,
+  Higashiyamatoshi, and is drawn as cut; Tamagawa-Josui, where it meets the
+  monorail at the city line, is one station.
+
+### Nishitōkyō - the Tokyo Metropolitan Government's Tama ledgers and the national filings, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Restaurants and food shops the ledgers do not hold. They list new permits
+  only since August 2019 and renewals since April 2017, and leave out
+  premises whose operators asked not to be published and premises that have
+  closed. Against the official count at the end of March 2025, the ledger
+  holds 933 of the city's 1,284 restaurants (72.7%). The national filings add
+  the premises they hold and the ledgers do not.
+- Shops that sell only packaged food, except where they notified the health
+  centre since June 2021 (the notification ledger) or filed nationally.
+- 233 school, hospital and staff canteens, 30 vending machines, 29 snack bars
+  and cabarets, 13 caterers (仕出し), 4 rows marked temporary or mobile, 3
+  linen-supply laundries and 2 premises inside hotels and inns.
+- 86 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 8 rows addressed to an area rather than a premises.
+
+**Counted** - the ledgers as of August 31, 2026, and the national filings
+for the city as downloaded on October 6, 2026. 5 of the 194 bakery,
+confectioner and deli rows (2.6%) have a trade name that reads as a factory;
+they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 134 repeat permits are shown once, and 239
+national filings that repeat a ledger's premises are shown as the ledger's.
+
+**Not placed** - none. 2 rows sit at the ministry's own coordinates.
+
+**Names not shown** - none: no trade name is its operator's own name, and
+the ledgers publish an operator's name almost only for companies.
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 7 stations beyond it: 3 in Nerima, 2 in Kodaira, 1 in
+  Higashikurume and 1 in Kiyose.
+
+### Tama - the Tokyo Metropolitan Government's Tama ledgers and the national filings, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Restaurants and food shops the ledgers do not hold. They list new permits
+  only since August 2019 and renewals since April 2017, and leave out
+  premises whose operators asked not to be published and premises that have
+  closed. Against the official count at the end of March 2025, the ledger
+  holds 667 of the city's 931 restaurants (71.6%). The national filings add
+  the premises they hold and the ledgers do not.
+- Shops that sell only packaged food, except where they notified the health
+  centre since June 2021 (the notification ledger) or filed nationally.
+- 137 school, hospital and staff canteens, 22 vending machines, 21 snack bars
+  and cabarets, 12 rows marked temporary or mobile, 10 caterers (仕出し), 4
+  premises inside hotels and inns, 1 mail-order business and 1 linen-supply
+  laundry.
+- 47 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 8 rows addressed to an area rather than a premises, 2 food trucks or
+  stalls, and 1 permit whose condition names a vehicle.
+
+**Counted** - the ledgers as of August 31, 2026, and the national filings
+for the city as downloaded on October 6, 2026. 23 of the 157 bakery,
+confectioner and deli rows (14.6%) have a trade name that reads as a factory;
+they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 156 repeat permits are shown once, and 267
+national filings that repeat a ledger's premises are shown as the ledger's.
+
+**Not placed** - 1 row (0.1%). Another 46 sit at their town's center, and 2
+at the ministry's own coordinates.
+
+**Names not shown** - none on the map: no trade name shown is its
+operator's own name.
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 15 stations beyond it: 4 in Fuchū, 4 in Kawasaki (Asao Ward),
+  3 in Hino, 2 in Hachiōji, 1 in Machida and 1 in Inagi.
+- The Keio Line keeps one station inside the city, Seiseki-sakuragaoka, and
+  is drawn as cut.
+- The Tama Toshi Monorail is not drawn: its one station in the city, Tama
+  Center, stands beside the Keio and Odakyu stations of that name, which
+  keep the rings (owner, 2026-10-06).
+
+### Higashimurayama - the Tokyo Metropolitan Government's Tama ledgers and the national filings, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Restaurants and food shops the ledgers do not hold. They list new permits
+  only since August 2019 and renewals since April 2017, and leave out
+  premises whose operators asked not to be published and premises that have
+  closed. Against the official count at the end of March 2025, the ledger
+  holds 705 of the city's 1,023 restaurants (68.9%). The national filings
+  add the premises they hold and the ledgers do not.
+- Shops that sell only packaged food, except where they notified the health
+  centre since June 2021 (the notification ledger) or filed nationally.
+- 149 school, hospital and staff canteens, 31 snack bars and cabarets, 12
+  caterers (仕出し), 12 vending machines and 3 premises inside hotels and
+  inns.
+- 82 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 15 rows addressed to an area rather than a premises, and 1 closed
+  premises, which the national filings keep, marked.
+
+**Counted** - the ledgers as of August 31, 2026, and the national filings
+for the city as downloaded on October 6, 2026. 14 of the 128 bakery,
+confectioner and deli rows (10.9%) have a trade name that reads as a
+factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 78 repeat permits are shown once, and 149
+national filings that repeat a ledger's premises are shown as the ledger's.
+
+**Not placed** - none. 1 row sits at the ministry's own coordinates.
+
+**Names not shown** - 1 pin whose trade name is its operator's own name
+shows its permit type.
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 13 stations beyond it: 7 in Kodaira, 3 in Tokorozawa, 1 in
+  Kokubunji, 1 in Higashiyamato and 1 in Tachikawa.
+- The Seibu Kokubunji and Haijima lines and JR East's Musashino Line each
+  keep one station inside the city and are drawn as cut.
+- The Seibu Yamaguchi Line (the Leo Liner) is not drawn: its one station in
+  the city, Tamako, is a station of the Tamako Line, which keeps the ring
+  (owner, 2026-10-06).
+- The Seibu Ikebukuro Line is not drawn: its Akitsu station is just outside
+  the city line.
+
+### Chōfu - the Tokyo Metropolitan Government's Tama ledgers and the national filings, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Restaurants and food shops the ledgers do not hold. They list new permits
+  only since August 2019 and renewals since April 2017, and leave out
+  premises whose operators asked not to be published and premises that have
+  closed. Against the official count at the end of March 2025, the ledger
+  holds 1,170 of the city's 1,721 restaurants (68.0%). The national filings
+  add the premises they hold and the ledgers do not.
+- Shops that sell only packaged food, except where they notified the health
+  centre since June 2021 (the notification ledger) or filed nationally.
+- 286 school, hospital and staff canteens, 34 snack bars and cabarets, 32
+  vending machines, 23 caterers (仕出し), 14 rows marked temporary or mobile,
+  2 premises inside hotels and inns, 2 mail-order businesses and 1
+  linen-supply laundry.
+- 156 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 5 rows addressed to an area rather than a premises, 2 addressed to the
+  city alone, 2 permits whose condition names a vehicle, 1 food truck or
+  stall, and 5 closed premises, which the national filings keep, marked.
+
+**Counted** - the ledgers as of August 31, 2026, and the national filings
+for the city as downloaded on October 6, 2026. 3 of the 202 bakery,
+confectioner and deli rows (1.5%) have a trade name that reads as a factory;
+they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 210 repeat permits are shown once, and 348
+national filings that repeat a ledger's premises are shown as the ledger's.
+
+**Not placed** - 1 row. Another 11 sit at their town's center, and 1 at the
+ministry's own coordinates.
+
+**Names not shown** - none: no trade name is its operator's own name.
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 9 stations beyond it: 3 in Fuchū, 2 in Setagaya, 2 in Inagi, 1
+  in Suginami and 1 in Kawasaki (Tama Ward).
+
+### Ageo (Regional) - Saitama Prefecture's lists for Ageo City and Ina Town, joined to MLIT's address blocks
+
+The page covers two municipalities, Ageo City and Ina Town, which the New
+Shuttle runs through; Ina alone is too small for a page of its own (owner,
+2026-10-06).
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Premises the prefecture leaves out at their operators' request.
+- 191 school, hospital and staff canteens, 139 vending machines, 5
+  linen-supply laundries and 1 mail-order business.
+- 145 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 1 permit past its term, and 8 that start after October 6, 2026.
+- Food trucks and stalls cannot be told apart from restaurants in the
+  prefecture's lists, so they stay in Food service.
+
+**Counted** - the prefecture's live food layers as of October 6, 2026, its
+list of permits under the old food law as of March 31, 2026 (shown while
+their term runs, so that part is an upper bound: closures since March are
+not seen), and its barber, beauty and laundry lists as of March 31, 2026
+with new premises to August 31, 2026. 15 of the 171 bakery, confectioner and
+deli rows (8.8%) have a trade name that reads as a factory; they are kept
+(owner, 2026-09-24).
+
+**One pin per premises** - 147 repeat permits are shown once.
+
+**Not placed** - 3 rows (0.1%). Another 44 sit at their town's center, and
+124 at the prefecture's own coordinates.
+
+**Names not shown** - 1 pin whose trade name is its operator's own name
+shows its permit type.
+
+**Stations.** The lines with a station in Ageo or Ina are drawn, cut at the
+two towns' line. The New Shuttle's five stations in Ina, its terminus
+Uchijuku among them, are drawn and ringed.
+- Left out: 7 stations beyond it: 6 in Saitama City (5 in Kita Ward, 1 in
+  Ōmiya Ward) and 1 in Okegawa.
+- The Shinkansen is not drawn.
+
+### Sōka - Saitama Prefecture's lists, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Premises the prefecture leaves out at their operators' request.
+- 217 school, hospital and staff canteens, 180 vending machines, 5
+  mail-order businesses and 4 linen-supply laundries.
+- 163 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- Food trucks and stalls cannot be told apart from restaurants in the
+  prefecture's lists, so they stay in Food service.
+
+**Counted** - the prefecture's live food layers as of October 6, 2026, its
+list of permits under the old food law as of March 31, 2026 (shown while
+their term runs, so that part is an upper bound: closures since March are
+not seen), and its barber, beauty and laundry lists as of March 31, 2026
+with new premises to August 31, 2026. 16 of the 177 bakery, confectioner and
+deli rows (9.0%) have a trade name that reads as a factory; they are kept
+(owner, 2026-09-24).
+
+**One pin per premises** - 124 repeat permits are shown once.
+
+**Not placed** - 4 rows (a barber and 3 beauty salons addressed 手代町, a
+name MLIT's address data no longer holds). Another 7 sit at their town's
+center, and 48 at the prefecture's own coordinates.
+
+**Names not shown** - 1 pin whose trade name is its operator's own name
+shows its permit type.
+
+**Stations.** The line is drawn, cut at the city line.
+- Left out: 4 stations beyond it: 3 in Koshigaya and 1 in Adachi.
+
+### Tokorozawa - Saitama Prefecture's lists, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Premises the prefecture leaves out at their operators' request.
+- 280 vending machines, 182 school, hospital and staff canteens and 8
+  mail-order businesses.
+- 204 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 1 permit past its term, 19 that start after October 6, 2026, and 2 rows
+  addressed to an area rather than a premises.
+- Food trucks and stalls cannot be told apart from restaurants in the
+  prefecture's lists, so they stay in Food service.
+
+**Counted** - the prefecture's live food layers as of October 6, 2026, its
+list of permits under the old food law as of March 31, 2026 (shown while
+their term runs, so that part is an upper bound: closures since March are
+not seen), and its barber, beauty and laundry lists as of March 31, 2026
+with new premises to August 31, 2026. 22 of the 189 bakery, confectioner and
+deli rows (11.6%) have a trade name that reads as a factory; they are kept
+(owner, 2026-09-24).
+
+**One pin per premises** - 243 repeat permits are shown once.
+
+**Not placed** - none. 5 rows sit at their town's center, and 21 at the
+prefecture's own coordinates.
+
+**Names not shown** - 2 pins whose trade name is their operator's own name
+show their permit type.
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 9 stations beyond it: 4 in Higashimurayama, 2 in Kiyose, 1 in
+  Iruma, 1 in Niiza and 1 in Sayama.
+- JR East's Musashino Line keeps one station inside the city,
+  Higashi-Tokorozawa, and is drawn as cut.
+
+### Fuchū (Tokyo) - the Tokyo Metropolitan Government's Tama ledgers and the national filings, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Restaurants and food shops the ledgers do not hold. They list new permits
+  only since August 2019 and renewals since April 2017, and leave out
+  premises whose operators asked not to be published and premises that have
+  closed. Against the official count at the end of March 2025, the ledger
+  holds 1,262 of the city's 2,188 restaurants (57.7%). The national filings
+  add the premises they hold and the ledgers do not.
+- Shops that sell only packaged food, except where they notified the health
+  centre since June 2021 (the notification ledger) or filed nationally.
+- 242 school, hospital and staff canteens, 49 snack bars and cabarets, 43
+  vending machines, 15 rows marked temporary or mobile, 12 premises inside
+  hotels and inns, 8 caterers (仕出し) and 6 mail-order businesses.
+- 144 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 10 rows addressed to an area rather than a premises, 1 to the city alone,
+  2 permits whose condition names a vehicle, 7 food trucks or stalls, and 4
+  closed premises, which the national filings keep, marked.
+
+**Counted** - the ledgers as of August 31, 2026, and the national filings
+for the city as downloaded on October 6, 2026. 18 of the 236 bakery,
+confectioner and deli rows (7.6%) have a trade name that reads as a factory;
+they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 201 repeat permits are shown once, and 292
+national filings that repeat a ledger's premises are shown as the ledger's.
+
+**Not placed** - 1 row. Another 84 sit at their town's center, and 3 at the
+ministry's own coordinates.
+
+**Names not shown** - 1 pin whose trade name is its operator's own name
+shows its permit type.
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 17 stations beyond it: 4 in Chōfu, 3 in Inagi, 2 in Kunitachi,
+  2 in Hino, and 1 each in Kokubunji, Tama, Koganei, Musashino, Tachikawa and
+  Kawasaki (Tama Ward).
+- JR East's Chuo Line crosses a corner of the city with no station and is
+  not drawn.
+
+### Kasukabe - Saitama Prefecture's lists, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Premises the prefecture leaves out at their operators' request.
+- 183 vending machines, 147 school, hospital and staff canteens and 1
+  mail-order business.
+- 160 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 1 permit past its term, 10 that start after October 6, 2026, and 1 row
+  addressed to an area rather than a premises.
+- Food trucks and stalls cannot be told apart from restaurants in the
+  prefecture's lists, so they stay in Food service.
+
+**Counted** - the prefecture's live food layers as of October 6, 2026, its
+list of permits under the old food law as of March 31, 2026 (shown while
+their term runs, so that part is an upper bound: closures since March are
+not seen), and its barber, beauty and laundry lists as of March 31, 2026
+with new premises to August 31, 2026. 14 of the 150 bakery, confectioner and
+deli rows (9.3%) have a trade name that reads as a factory; they are kept
+(owner, 2026-09-24).
+
+**One pin per premises** - 198 repeat permits are shown once.
+
+**Not placed** - 8 rows (0.3%): 6 register rows written with an old town
+name, and 2 more. Another 15 sit at their town's center, and 70 at the
+prefecture's own coordinates.
+
+**Names not shown** - none: no trade name shown is its operator's own name.
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 9 stations beyond it: 3 in Noda (Chiba), 2 in Saitama City
+  (Iwatsuki Ward), 2 in Miyashiro and 2 in Koshigaya.
+
+### Tachikawa - the Tokyo Metropolitan Government's Tama ledgers and the national filings, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Restaurants and food shops the ledgers do not hold. They list new permits
+  only since August 2019 and renewals since April 2017, and leave out
+  premises whose operators asked not to be published and premises that have
+  closed. Against the official count at the end of March 2025, the ledger
+  holds 1,652 of the city's 2,599 restaurants (63.6%). The national filings
+  add the premises they hold and the ledgers do not.
+- Shops that sell only packaged food, except where they notified the health
+  centre since June 2021 (the notification ledger) or filed nationally.
+- 203 school, hospital and staff canteens, 195 snack bars and cabarets, 42
+  vending machines, 27 premises inside hotels and inns, 27 rows marked
+  temporary or mobile, 17 caterers (仕出し), 2 linen-supply laundries and 1
+  entertainment venue.
+- 146 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 11 rows addressed to an area rather than a premises, 1 to the city alone,
+  3 permits whose condition names a vehicle, 1 food truck or stall, and 2
+  closed premises, which the national filings keep, marked.
+
+**Counted** - the ledgers as of August 31, 2026, and the national filings
+for the city as downloaded on October 6, 2026. 15 of the 213 bakery,
+confectioner and deli rows (7.0%) have a trade name that reads as a factory;
+they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 215 repeat permits are shown once, and the
+national filings that repeat a ledger's premises are shown as the ledger's.
+
+**Not placed** - none. 108 rows sit at their town's center, and 2 at the
+ministry's own coordinates.
+
+**Names not shown** - 1 pin whose trade name is its operator's own name
+shows its permit type.
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 19 stations beyond it: 4 in Hino, 4 in Akishima, 3 in
+  Kunitachi, 3 in Higashiyamato, 3 in Fussa, 1 in Kokubunji and 1 in Kodaira.
+- JR East's Chuo and Ome lines each keep one station inside the city,
+  Tachikawa, and are drawn as cut.
+
+### Hino - the Tokyo Metropolitan Government's Tama ledgers and the national filings, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Restaurants and food shops the ledgers do not hold. They list new permits
+  only since August 2019 and renewals since April 2017, and leave out
+  premises whose operators asked not to be published and premises that have
+  closed. Against the official count at the end of March 2025, the ledger
+  holds 633 of the city's 1,035 restaurants (61.2%). The national filings add
+  the premises they hold and the ledgers do not.
+- Shops that sell only packaged food, except where they notified the health
+  centre since June 2021 (the notification ledger) or filed nationally.
+- 217 school, hospital and staff canteens, 23 rows marked temporary or
+  mobile, 12 caterers (仕出し), 10 vending machines, 7 snack bars and
+  cabarets, 1 mail-order business and 1 linen-supply laundry.
+- 73 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 6 rows addressed to an area rather than a premises.
+
+**Counted** - the ledgers as of August 31, 2026, and the national filings
+for the city as downloaded on October 6, 2026. 3 of the 150 bakery,
+confectioner and deli rows (2.0%) have a trade name that reads as a factory;
+they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 139 repeat permits are shown once, and 176
+national filings that repeat a ledger's premises are shown as the ledger's.
+
+**Not placed** - 1 row. Another 37 sit at their town's center, and 2 at the
+ministry's own coordinates.
+
+**Names not shown** - none: no trade name shown is its operator's own name.
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 16 stations beyond it: 7 in Hachiōji, 5 in Tachikawa, 2 in Tama
+  and 2 in Fuchū.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

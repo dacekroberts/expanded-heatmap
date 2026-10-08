@@ -1,0 +1,54 @@
+[
+  {
+    "municipality": "西東京市",
+    "code": "13229",
+    "rows": 1171,
+    "official": 1284,
+    "share_pct": 91.2,
+    "source": "Tokyo statistical yearbook, table 19-8 (飲食店営業, FY2024)",
+    "kind": "restaurants",
+    "rows_at_date": 933,
+    "share_at_date_pct": 72.7,
+    "date": "2025-03-31",
+    "undated": 0
+  },
+  {
+    "municipality": "西東京市",
+    "code": "13229",
+    "kind": "barber",
+    "rows": 80,
+    "official": 84,
+    "share_pct": 95.2,
+    "source": "Tokyo statistical yearbook, table 19-7 (理容所, 美容所, クリーニング所, FY2024)",
+    "rows_at_date": 78,
+    "share_at_date_pct": 92.9,
+    "date": "2025-03-31",
+    "undated": 0
+  },
+  {
+    "municipality": "西東京市",
+    "code": "13229",
+    "kind": "beauty",
+    "rows": 236,
+    "official": 256,
+    "share_pct": 92.2,
+    "source": "Tokyo statistical yearbook, table 19-7 (理容所, 美容所, クリーニング所, FY2024)",
+    "rows_at_date": 226,
+    "share_at_date_pct": 88.3,
+    "date": "2025-03-31",
+    "undated": 0
+  },
+  {
+    "municipality": "西東京市",
+    "code": "13229",
+    "kind": "laundry",
+    "rows": 75,
+    "official": 87,
+    "share_pct": 86.2,
+    "source": "Tokyo statistical yearbook, table 19-7 (理容所, 美容所, クリーニング所, FY2024)",
+    "rows_at_date": 73,
+    "share_at_date_pct": 83.9,
+    "date": "2025-03-31",
+    "undated": 0
+  }
+]
