@@ -65,15 +65,16 @@ reasoning behind every move below is in `docs/decisions_drafts/staging.md`
    the live app; both private pages republished at version 19 from master
    658ef57c, the builders `build_ml_v19.py` and `build_census_v19.py` in that
    session's scratchpad.)*
-3. **Phase 2, when the owner says go** (`docs/build_plan_2026-10-07.md` has
+3. **Phase 2, when the owner says go** (held on usage as well, owner
+   2026-10-08; `docs/build_plan_2026-10-07.md` has
    every prompt; first line of each: enter a new worktree, then `git fetch`
    and `git merge --ff-only origin/master`):
    - **East-2** (pages 240-250, notices 187-197): Koshigaya, Sagamihara,
      Fujisawa (A); Kawaguchi, Funabashi, Matsudo, Ichikawa, Urayasu, Sakura,
      Yachiyo, Ichihara (B).
    - **Kansai-2** (251-257, 198-204): Ibaraki (Osaka), Minoh, Moriguchi,
-     Kadoma, Neyagawa, Yao, Takatsuki; then Naha's measurement if BODIK
-     answers.
+     Kadoma, Neyagawa, Yao, Takatsuki; then Cluj-Napoca (page 305, notice
+     215; call 222); then Naha's measurement if BODIK answers.
    - **Regional-2** (258-267, 205-214): Shizuoka, Kanazawa, Okazaki, Aomori,
      Matsue, Fuji, Matsumoto, Tottori, Yamagata, Kure.
    - **Every licence read is done**, in the drafts entry "Licence reads for
@@ -92,14 +93,17 @@ reasoning behind every move below is in `docs/decisions_drafts/staging.md`
 4. **Cluj-Napoca (Band B, call 215a)**: brief `docs/build_briefs/cluj_napoca.md`
    (passing). Food only, the unplaced share stated; placement is the OSM
    address join with the brief's three repairs plus the nearest same-side
-   house-number tier (Palma's code, at most 6 numbers away): 71.6%. It can ride
-   with a phase 2 session or build alone. **Write the `romania-city` skill at
+   house-number tier (Palma's code, at most 6 numbers away): 71.6%. **It rides
+   with Kansai-2** (owner, call 222), whose prompt carries it. **Write the `romania-city` skill at
    that build** (the owner's per-country rule): DSVSA county lists saved in
    the owner's browser (each county numbers its files differently, so map
    files to roles by name), canteens and catering out, trailers and stands
    out, the OSM join plus the tier, the 70% bar.
-5. **Band C:** Kurashiki (an owner call) and Naha (one measurement, Kansai-2's
-   if BODIK answers without a block).
+5. **Band C:** Kurashiki: a city-probe of its own hosts for a pre-2021 food
+   list or personal-services lists (call 223, running 2026-10-08); found, to
+   B as a two-source build; none, discard on coverage (Tokushima's
+   precedent; 52.6% would be the lowest food share on any page). Naha: one
+   measurement, Kansai-2's if BODIK answers without a block.
 6. **Open owner questions:** Cleanup's "(Regional)" on macro pills: shorten to
    "(R)" or drop it. Cleanup's four viability assessments (above).
 7. **Re-checks** (`docs/recheck_calendar.md`): Tainan 18 Oct, Teresina after

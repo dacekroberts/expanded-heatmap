@@ -48,7 +48,7 @@ At most three build sessions at once (owner, 2026-10-04).
 | 1 | **Kansai-1** (`japan-kansai-1`) | A: Toyonaka, Hirakata, Suita, Itami, Kakogawa, Amagasaki, Uji | japan-city |
 | 1 | **Regional-1** (`japan-regional-1`) | A: Maebashi, Fukuyama, Ichinomiya, Tsu, Fukushima, Iwaki, Akita, Ōita, Gifu, Mito, Morioka | japan-city |
 | 2 | **East-2** (`japan-east-2`) | A: Koshigaya, Sagamihara, Fujisawa. B: Kawaguchi, Funabashi, Matsudo, Ichikawa, Urayasu, Sakura, Yachiyo, Ichihara | japan-city |
-| 2 | **Kansai-2** (`japan-kansai-2`) | B: Ibaraki (Osaka), Minoh, Moriguchi, Kadoma, Neyagawa, Yao, Takatsuki; then Naha's measurement if BODIK answers | japan-city |
+| 2 | **Kansai-2** (`japan-kansai-2`) | B: Ibaraki (Osaka), Minoh, Moriguchi, Kadoma, Neyagawa, Yao, Takatsuki; then Cluj-Napoca (B, food only; owner, call 222); then Naha's measurement if BODIK answers | japan-city; for Cluj-Napoca add-city, osm-rail, address-join, then write the romania-city skill |
 | 2 | **Regional-2** (`japan-regional-2`) | B: Shizuoka, Kanazawa, Okazaki, Aomori, Matsue, Fuji, Matsumoto, Tottori, Yamagata, Kure | japan-city |
 
 - **The foundation landed on 2026-10-07 (7ab440f9).** The five one-city address fixes landed the same day (521d28fc): Gifu's bracketed 字, Morioka's 地割, Mito's 宮町/泉町 and Matsumoto's 湯の原 as WAVE5_RULES switches, Matsue's 八雲村 as a config key (its brief says how). A session started before 521d28fc merges origin/master before Gifu, Mito and Morioka.
@@ -69,7 +69,7 @@ Each session takes its numbers from its own block, recorded in `docs/session_rol
 | Kansai-1 | 222–228 | 169–175 |
 | Regional-1 | 229–239 | 176–186 |
 | East-2 | 240–250 | 187–197 |
-| Kansai-2 | 251–257 | 198–204 |
+| Kansai-2 | 251–257 and 305 (Cluj-Napoca) | 198–204 and 215 (Cluj-Napoca) |
 | Regional-2 | 258–267 | 205–214 |
 
 A session that runs out asks Staging for more. Unused numbers are released when the session lands.
@@ -146,7 +146,7 @@ Build, in this order, from each city's brief in docs/build_briefs/ and the japan
 The briefs' shared-code items are already in shared code (the foundation, 7ab440f9 and 521d28fc; the japan-city skill's foundation section names each rule). If one is missing, it is a parked call, not a city-local fix. Leave "rules" out of each japan.CITIES entry: the new rules are on by default for new cities, and japan.py refuses an entry that names WAVE2_RULES. A zipped register (Maebashi's, Sagamihara's) needs a city source_rows.
 
 <KANSAI ONLY: You pull the most from BODIK; keep calls at least 20 s apart, one city at a time, and never use datastore_search_sql.>
-<KANSAI-2 ONLY: After the cities, take Naha's one measurement from its master-list row, if BODIK answers without a block; otherwise record the refusal and stop.>
+<KANSAI-2 ONLY: After the Japanese cities, build Cluj-Napoca (owner, call 222) from docs/build_briefs/cluj_napoca.md with add-city, osm-rail and address-join, on page 305 and notice 215: food only, the unplaced share stated, placement by the OSM address join with the brief's three repairs plus the nearest same-side house-number tier (Palma's code, at most 6 numbers away), the owner's DSVSA files already in data/cluj_napoca/raw/. At that build, write the romania-city skill (each county numbers its files differently, so map files to roles by name; canteens, catering, trailers and stands out; the OSM join plus the tier; the 70% bar). Then take Naha's one measurement from its master-list row, if BODIK answers without a block; otherwise record the refusal and stop.>
 
 At the batch's end, report to Staging Session as the plan says, and write a handoff note for the next session in your group.
 ```
