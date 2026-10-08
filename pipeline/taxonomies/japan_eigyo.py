@@ -187,6 +187,19 @@ def normalise(value):
     return re.sub(r"^\(旧\)", "", re.sub(r"^(?:\d+:?|\?)", "", s))
 
 
+def display_value(value):
+    """How a permit type reads on a pin: as published, less the two marks
+    normalise() also drops that are not words, the Saitama layers' `01:` code
+    with its padding ("01:飲食店営業 ", 1,127 to 1,780 rows in each of Ageo,
+    Kasukabe, Soka and Tokorozawa) and the `?` Oita's export leaves for a lost
+    circled number ("? そうざい製造業", 100 rows). Measured 2026-10-08 on the
+    processed files; Analytics found both on the maps. Circled numbers that
+    survived ("⑪ 菓子製造業") stay as the city published them."""
+    if not isinstance(value, str):
+        return value
+    return re.sub(r"^(?:\d+:|\?)\s*", "", value.strip())
+
+
 # 露天 (天, not 店: Kure's 露天営業) is a street stall too, but Hiroshima's,
 # Sakai's and Takamatsu's built maps hold 3 such rows, so it is a city's
 # "roten" rule (japan_register.WAVE5_RULES), not a word in the lists above.

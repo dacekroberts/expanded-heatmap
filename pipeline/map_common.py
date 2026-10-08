@@ -2804,10 +2804,15 @@ def add_pin_layer(m, rows, group_name, color, tooltip_field_label,
     for row in rows.itertuples():
         station = _esc(row.nearest_station)
         band = _esc(row.ring_band)
-        cat = _esc(_display(getattr(row, value_column)))
+        raw = getattr(row, value_column)
+        cat = _esc(_display(raw))
+        # A name rule that withholds a name writes the raw classification in
+        # its place, so that name reads as the category does (Saitama's
+        # "01:飲食店営業 " showed its layer code there too, Analytics 2026-10-08).
+        name = _display(raw) if row.business_name == raw else row.business_name
         data.append([
             round(row.latitude, COORD_DP), round(row.longitude, COORD_DP),
-            _esc(shown_name(row.business_name, cat)),
+            _esc(shown_name(name, cat)),
             cats.setdefault(cat, len(cats)),
             stations.setdefault(station, len(stations)),
             bands.setdefault(band, len(bands)),
@@ -2980,8 +2985,15 @@ def _has_contact_details(name) -> bool:
 # be a guess ("CR?PERIE", Seoul's lost separators "더?헤어", Osaka's lost
 # kanji "立?み"), so the name shows the classification instead.
 _SHEET_ERROR = re.compile(r"^#(NAME\?|VALUE!|REF!|N/A|DIV/0!|NULL!|NUM!)$")
-_LETTER = "A-Za-zÀ-ɏ぀-ヿ一-鿿가-힯"
-_LOST_LETTER = re.compile(f"[{_LETTER}]\\?[{_LETTER}]|\\bCaf\\?")
+# Full-width Latin counts as letters (Analytics, 2026-10-08: "Ｐ?ｔｉｓｓｅｒｉｅ"
+# rendered in Higashiyamato 6, Tachikawa 4, Ichinomiya 3), and a name that
+# STARTS with "?" lost its first character ("??野家" is 吉野家, Oita's
+# "?暁雲福祉会", Osaka's "?　ｒｅｃｃａ", Seoul's bare "??"), unless an ASCII
+# space follows: New York's "? TEA (QUESTION MARK TEA)" is the trade name.
+# Measured on every processed file 2026-10-08: at most 548 more names shown
+# as their classification (Osaka 202, Kobe 105, Seoul 96, Tokyo 55).
+_LETTER = "A-Za-zÀ-ɏ぀-ヿ一-鿿가-힯Ａ-Ｚａ-ｚ"
+_LOST_LETTER = re.compile(f"[{_LETTER}]\\?[{_LETTER}]|\\bCaf\\?|^\\?+(?! )")
 _LOST_APOSTROPHE = re.compile(r"(?<=[A-Za-z])\?(?=[sS]\b)")
 _LOST_CAFE = re.compile(r"\b(Caf|CAF)\?")
 
