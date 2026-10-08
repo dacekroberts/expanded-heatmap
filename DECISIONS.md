@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**113 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**114 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-08**
 
@@ -28,6 +28,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Legend dots never shrink, and are 10 px (owner's iPhone check; branch legend-dot-georgia, held for review time)](#2026-10-08---legend-dots-never-shrink-and-are-10-px-owners-iphone-check-branch-legend-dot-georgia-held-for-review-time)
 - [The owner's iPhone check of the 2026-10-07 and 2026-10-08 landings passed](#2026-10-08---the-owners-iphone-check-of-the-2026-10-07-and-2026-10-08-landings-passed)
 - [Analytics' four map issues fixed: lost letters in full-width and at a name's start, Saitama's layer codes, Ōita's lost numeral, and Ōita's masked names stated (owner; branch legend-dot-georgia, held for review time)](#2026-10-08---analytics-four-map-issues-fixed-lost-letters-in-full-width-and-at-a-names-start-saitamas-layer-codes-ōitas-lost-numeral-and-ōitas-masked-names-stated-owner-branch-legend-dot-georgia-held-for-review-time)
+- [The comments map_common ships in every map reworded to the neutral-comment rules (owner; branch legend-dot-georgia, held for review time)](#2026-10-08---the-comments-map_common-ships-in-every-map-reworded-to-the-neutral-comment-rules-owner-branch-legend-dot-georgia-held-for-review-time)
 
 **2026-10-07**
 
@@ -4607,3 +4608,21 @@ per-city shape of their siblings.
   name left in any, "? TEA" kept; `check_personal_exposure.py` 0 on Ageo,
   Ōita and Osaka; `check_all.py` 51 of 51. Samples reset; the landing's one
   full re-render carries the change.
+
+### 2026-10-08 - The comments map_common ships in every map reworded to the neutral-comment rules (owner; branch legend-dot-georgia, held for review time)
+
+- **Done:** the last open part of the neutral-comment pass, the CSS, JS and
+  HTML comments inside `pipeline/map_common.py`'s strings, which PLAN held
+  for a full re-render because rewording one changes every committed map.
+  16 comment blocks changed: five rewrites cut how-it-was-found narration
+  and kept every number, date and owner decision (the phone-fit guard now
+  points to the `map-view` skill for its history); the rest American
+  spelling and one "ours". Left as they were: comments already neutral,
+  the fingerprint mark, Python comments, and `pipeline/theme.py`'s ambient
+  script (outside this file).
+- **Verified:** Kyoto, Tokyo, Osaka (with the dense placer), New York, Riga
+  and Ostrava rendered against a same-code baseline are identical once
+  comments are stripped, every changed line inside a comment; the
+  tokenizer took no "https://" for a comment. `check_render_current.py`
+  compares the shipped blocks with their comments, so it fails until the
+  landing's full re-render, and the branch stays local until then.

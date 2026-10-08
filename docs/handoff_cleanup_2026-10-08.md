@@ -48,7 +48,9 @@ items are done or moved into PLAN.
    Wikipedia articles, Seattle's Panama Hotel, index size). Landing order:
    merge it and `legend-dot-georgia`, take master's `outputs/*/heatmap.html`
    on conflict, then ONE full re-render of all 206 maps (the legend dot
-   needs it; it covers the five searched maps). The pilot's four conditions:
+   needs it; it covers the five searched maps). `check_render_current.py`
+   fails on the branch until that render (the comment rewording changes the
+   shipped blocks), so nothing from it is pushed before. The pilot's four conditions:
    (a) its committed indexes (`app/static/places/<city>.json`,
    `outputs/<city>/place_search.json`) land unchanged, and any re-run
    `step2b_place_index.py` runs BEFORE that city's step 3; (b)

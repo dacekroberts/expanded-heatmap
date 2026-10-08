@@ -48,14 +48,14 @@ Detail files: [japan](docs/plan_detail/japan.md),
     (Regional) re-placed. `docs/plan_detail/labels_and_macro_map.md`, "After the reset, one label batch".
   - Follow-ups: UK line colours, day-first notices, "45 from every pin"
     configs, caterers' counter forms. `docs/plan_detail/process_and_tooling.md`, "Next landing follow-ups".
-  - **Branch `legend-dot-georgia` (53204828, Cleanup's, local; worktree
+  - **Branch `legend-dot-georgia` (1f39cf9a, Cleanup's, local; worktree
     `.claude/worktrees/review-prep`), lands at review time:** legend dots
     10 px that never shrink (the owner's iPhone check), Tbilisi in Europe
     East, the phone's region dropdowns take no typing (`filter_mode=None`),
     Analytics' four map issues with Ōita's masked-name clause as a proposal
     (`docs/plan_detail/japan.md`, "From Analytics (2026-10-08)"; DECISIONS,
     2026-10-08, all), and the neutral wording of the maps'
-    embedded comments (in progress). All 206 maps re-render once at the
+    embedded comments. All 206 maps re-render once at the
     landing, with place search's five; app reboot (`app/cities.py`).
   - `scripts/stress_overview.py` stops on master: 23 Japanese cities of the
     last batch missing from `BUILT_PREF`.
