@@ -33,11 +33,16 @@ or published; every proposal waits for the owner.
   R2 custom domain comparison (needs the owner's Cloudflare account and a
   Cloudflare terms read first); `--keep_wards` when Tokyo or Seoul wards
   are built.
-- **Before this worktree is removed:** move `data/_basemap_build/`
-  (builder, extracts, packs, `prototype_full_2026-10-08/` and its zip, and
-  `baselines/zoom14_trim_2026-10-08/` plus
-  `baselines/basemap_baseline_2026-10-07/`) somewhere permanent; the
-  builder patch is `data/_basemap_build/travel_trim.patch`.
+- **The build folder is safe in the main checkout (owner via Cleanup,
+  2026-10-08):** `data/_basemap_build/` (builder, extracts, packs,
+  `prototype_full_2026-10-08/` and its zip, both baselines; 4,969 files,
+  4.34 GB) was copied no-clobber into the main checkout's
+  `data/_basemap_build/`, and this worktree's 12 heavy-job history entries
+  (the basemap builds) merged into the shared history;
+  `check_worktree_data.py` reports OK. Work from the main checkout's copy
+  from now on. After this session closes, Cleanup moves this worktree to
+  `.claude/worktrees/basemap` and renames the branch `basemap` (owner
+  approved). The builder patch is `data/_basemap_build/travel_trim.patch`.
 - **Before this branch's push:** merge master in then (it moved: line
   registry, 34 maps re-rendered, about 160 lines of `map_common.py`) and
   re-run `check_render_current`; message the new Cleanup session (it asked
