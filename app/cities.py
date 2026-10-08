@@ -5233,6 +5233,11 @@ CITIES = [
         # MEASURED in a real browser with Space Grotesk loaded, since
         # it refuses a guessed one.
         "label_offset": ("middle", 0, -22),
+        # ABOVE AND RIGHT of the dot in Hyogo Prefecture (2026-10-07): at the
+        # view's phone-fitting zoom 8.25 the default pill left Itami labelled in no
+        # view; two of the twelve positions clear it, scored by
+        # check_macro_labels.py at 375, 768 and 1200.
+        "label_offset_by_region": {"Hyogo Prefecture": ("start", 8, -14)},
     },
     {
         "name": "Uji",
