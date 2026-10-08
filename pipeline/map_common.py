@@ -3114,7 +3114,8 @@ class OpenBasemap(folium.map.Layer):
                                     }},
                                     layers: travelStyle(basemaps.layers("protomaps",
                                         basemaps.namedFlavor("light"),
-                                        {lang: {{ this.label_lang|tojson }}}), {flavor: "light"})
+                                        {lang: {{ this.label_lang|tojson }}}),
+                                        {flavor: "light", variant: "site"})
                                 }
                             });
                         }

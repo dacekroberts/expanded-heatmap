@@ -7,11 +7,20 @@
 // OpenBasemap layer; transit-globe reads it as the reference and records
 // its own departures in its own DECISIONS.md.
 //
-//   travelStyle(layers, {flavor: "light", world: false})
+//   travelStyle(layers, {flavor: "light", world: false, variant: "site"})
 //
 // world: the label-free world map (owner, 2026-10-08): land, sea, country
 // borders and disputed lines only; names come from the export, in the
 // dot's tooltip and the UI.
+// variant: "site" (the site's Travel view, the default) or "full" (the
+// offline full version). Precedence (owner, 2026-10-08): the site is senior
+// to its Travel view, so a clash with site-only elements such as the
+// business pins is settled on the Travel view; the full version, which has
+// no business layers, competes with neither and takes only the choices
+// that stand on their own merit (the plum station-area border does).
+// disputedDash: overrides the disputed lines' dash, for screenshot trials.
+// The output is plain style-spec JSON with nothing GL JS-only in it, so a
+// build can write it out as style.json for MapLibre Native as well.
 var travelStyle = (function () {
   // Light tints, one per category, pale and differing by hue; transit owns
   // the lavender family (railway land, platforms).
@@ -60,14 +69,27 @@ var travelStyle = (function () {
                      "drive-through"];
   // Disputed lines (owner, 2026-10-08): one neutral style everywhere, lighter
   // than the settled border and dotted where it is dashed. Width 1.5 px;
-  // with round caps a [0, 3] dash draws 1.5 px dots 3 px apart.
-  var DISPUTED = {color: "#c4c4c4", width: 1.5, dash: [0, 3]};
-  // Saturated transit context. Drafts measured with pipeline/linecolour
-  // (CIE76) on 2026-10-08: every blue tried sat under 45 from Retail blue
-  // or the backup teal, so ferries are crimson (59 from the border, 63
-  // from violet) and aerial lifts burnt orange (72 from olive).
-  var FERRY = {color: "#b0004f", dash: [3, 2]};
-  var AERIALWAY = {color: "#d84315"};
+  // with round caps a [0, 1.5] dash draws 1.5 px dots 2.25 px apart centre
+  // to centre. Owner asked for a tighter dash than [0, 3]; of [0, 3],
+  // [0, 2] and [0, 1.5] compared on world-zoom crops (2026-10-08), only
+  // [0, 1.5] keeps short segments such as Kashmir's reading as a line.
+  // Every unrecognized kind takes the same rule (owner, 2026-10-08).
+  var DISPUTED = {color: "#c4c4c4", width: 1.5, dash: [0, 1.5]};
+  var UNRECOGNIZED = ["unrecognized_country", "unrecognized_region", "unrecognized_macroregion"];
+  // Ferries and aerial lifts are told apart from operators' line colours by
+  // pattern first (transit-globe's suggestion, owner, 2026-10-08). Ferries
+  // are dashed. Colours measured with pipeline/linecolour (CIE76) on
+  // 2026-10-08: on the site, every blue tried sat under 45 from Retail blue
+  // or the backup teal, which pins can bring back, so the site variant's
+  // ferries are crimson (59 from the border, 63 from violet, 42.8 from
+  // Tokyo's Marunouchi red). The full variant has no pins and keeps a
+  // ferry blue, at least 50 from everything it draws (51 from the plum
+  // border, 57 from the water tint #80deea). Aerial lifts take the
+  // cartographic thin dark line with cross ticks: the earlier burnt orange
+  // #d84315 sat 8.3 from the tram city-dot colour #c2410c, under the hard
+  // floor of 10.
+  var FERRY = {site: "#b0004f", full: "#1e88e5", dash: [3, 2]};
+  var AERIALWAY = {color: "#444444", tickWidth: 6, tickDash: [0.15, 2.5]};
   var WORLD_KEEP = ["background", "earth", "water", "boundaries_country"];
 
   // Legacy filters (["==", "kind", "x"]) and expressions (["==", ["get",
@@ -95,6 +117,7 @@ var travelStyle = (function () {
   return function (layers, opts) {
     opts = opts || {};
     var light = (opts.flavor || "light") === "light";
+    var variant = opts.variant === "full" ? "full" : "site";
     var src = (layers[0] && layers[0].source) || (layers[1] && layers[1].source) || "protomaps";
     var out = [];
     var landuseDone = false;
@@ -136,16 +159,17 @@ var travelStyle = (function () {
           ["!", ["in", ["coalesce", ["get", "kind_detail"], ""], ["literal", DROP_DETAIL]]]);
       }
       if (id === "boundaries_country") {
-        andClause(layer, ["all", ["!has", "disputed"], ["!=", "kind", "unrecognized_country"]],
-          ["all", ["!", ["has", "disputed"]], ["!=", ["get", "kind"], "unrecognized_country"]]);
+        andClause(layer, ["all", ["!has", "disputed"], ["!in", "kind"].concat(UNRECOGNIZED)],
+          ["all", ["!", ["has", "disputed"]],
+                  ["!", ["in", ["get", "kind"], ["literal", UNRECOGNIZED]]]]);
         out.push(layer);
         out.push({
           id: "travel_boundaries_disputed", type: "line", source: src,
           "source-layer": "boundaries",
-          filter: ["any", ["has", "disputed"], ["==", "kind", "unrecognized_country"]],
+          filter: ["any", ["has", "disputed"], ["in", "kind"].concat(UNRECOGNIZED)],
           layout: {"line-cap": "round", "line-join": "round"},
           paint: {"line-color": DISPUTED.color, "line-width": DISPUTED.width,
-                  "line-dasharray": DISPUTED.dash}
+                  "line-dasharray": opts.disputedDash || DISPUTED.dash}
         });
         return;
       }
@@ -161,13 +185,21 @@ var travelStyle = (function () {
         out.push({
           id: "travel_ferry", type: "line", source: src, "source-layer": "roads",
           filter: ["==", "kind", "ferry"],
-          paint: {"line-color": FERRY.color, "line-dasharray": FERRY.dash,
+          paint: {"line-color": FERRY[variant], "line-dasharray": FERRY.dash,
                   "line-width": lineWidth([11, 1, 16, 3])}
         });
         out.push({
           id: "travel_aerialway", type: "line", source: src, "source-layer": "roads",
           filter: ["==", "kind", "aerialway"],
-          paint: {"line-color": AERIALWAY.color, "line-width": lineWidth([11, 1, 16, 2.5])}
+          paint: {"line-color": AERIALWAY.color, "line-width": lineWidth([11, 0.8, 16, 1.5])}
+        });
+        // Cross ticks: a wide line whose dashes are much shorter than it is
+        // wide draws short bars across the cable.
+        out.push({
+          id: "travel_aerialway_ticks", type: "line", source: src, "source-layer": "roads",
+          filter: ["==", "kind", "aerialway"], minzoom: 13,
+          paint: {"line-color": AERIALWAY.color, "line-width": AERIALWAY.tickWidth,
+                  "line-dasharray": AERIALWAY.tickDash}
         });
       }
     });
