@@ -506,6 +506,9 @@ HOME_NAME_LEAD = {"fr": ("maison", "manoir"), "ca": ("casa",), "es": ("casa",),
 # house (Marseille's 130-odd bastides and its town mansions, the hôtels
 # particuliers, batch 2a, 2026-10-08), held to _public_home as historic=house is.
 HOME_HISTORIC = {"house", "manor"}
+# Amenities that make a historic house a civic place (_home). Places of
+# worship are not among them: a house church can be someone's home.
+CIVIC_AMENITIES = {"townhall", "arts_centre", "community_centre", "library", "theatre"}
 
 
 def _home_name(name, local):
@@ -520,15 +523,21 @@ def _home(tags, names, local=()):
     private access, or a historic house."""
     if tags.get("historic") == "district":
         return False      # an area of homes is a place (Chicago's Prairie Avenue District)
+    # A civic institution in a historic house is the institution, not a home:
+    # Marseille's district town halls and an arts centre sit in bastides
+    # tagged historic=manor (batch 2a, 2026-10-08). The house tests by history
+    # and name below skip it; the land, building and access tests still apply.
+    civic = tags.get("amenity") in CIVIC_AMENITIES
     return (tags.get("landuse") == "residential" or tags.get("building") in RESIDENTIAL_BUILDINGS
-            or tags.get("access") == "private" or tags.get("historic") == "house"
+            or tags.get("access") == "private" or (tags.get("historic") == "house" and not civic)
             # A manor on a plain building: Montréal's Château Goyer, a manor
             # on building=pavilion in a park, stays.
-            or (tags.get("historic") in HOME_HISTORIC and tags.get("building") in (None, "yes"))
+            or (tags.get("historic") in HOME_HISTORIC and tags.get("building") in (None, "yes")
+                and not civic)
             or tags.get("house") == "yes"
             # By name only where the building tag says no more: Kyoto's
             # "Kwasan Observatory Solar House" is building=university.
-            or (tags.get("historic") and tags.get("building") in (None, "yes")
+            or (tags.get("historic") and tags.get("building") in (None, "yes") and not civic
                 and any(_home_name(n, local) for n in names)))
 
 
