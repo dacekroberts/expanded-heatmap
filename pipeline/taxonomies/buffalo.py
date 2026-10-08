@@ -75,8 +75,15 @@ VALUE_COLUMN = "business_category"
 EXTRA_COLUMNS = ("source",)
 
 
+# The Retail layer here is a licensed slice, not general retail, so the
+# legend and the layer menu name what it holds (owner, 2026-10-07; measured
+# on the clean file: food 76.5%, used cars 15.0%, secondhand 4.9% of 728).
+# Its pins stay retail blue (owner).
 def legend_label(bucket: str) -> str:
-    return bucket
+    return {"Retail": "Food stores, used-car and secondhand dealers"}.get(bucket, bucket)
+
+
+layer_label = legend_label
 
 
 def classify(row: dict):

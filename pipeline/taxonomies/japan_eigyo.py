@@ -197,7 +197,7 @@ def classify(row):
 
 
 def legend_label(bucket):
-    return {"Retail": "Food retail (no general retail is published)"}.get(bucket, bucket)
+    return {"Retail": "Food shops (no general retail is published)"}.get(bucket, bucket)
 
 
 # The Retail bucket here is food shops only, so its pins are olive, not retail
