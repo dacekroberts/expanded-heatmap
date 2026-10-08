@@ -57,9 +57,9 @@ or published; every proposal waits for the owner.
   Master moved since this branch (line registry, 34 maps re-rendered,
   `map_common.py` about 160 lines): merge it only before this branch's own
   push, and re-run `check_render_current` after.
-- **Open items, in order:** grass (a pale tint from z13 proposed, owner to
-  confirm); the English-default label toggle (decided, design to show the
-  owner); the full version as a renderer option (no business
+- **Open items, in order:** the English-default label toggle (decided,
+  design proposed to the owner: a small `EN | local` pill under the layer
+  menu, Travel only, remembered); the full version as a renderer option (no business
   data, the hard line enforced by a check); white line casings and white
   station dots in Travel for the owner's screenshots; Protomaps' dark
   flavor in Travel; the Overview Business/Travel toggle (`app/`, branch
@@ -120,10 +120,23 @@ or published; every proposal waits for the owner.
   is left to platforms (#c3b8de) and, once drawn from the export, station
   areas; #d6cfe8 is retired. Re-shot: Avignon and Florence at z13 and z15,
   no errors, no lavender corridors.
-- **Open: grass.** The racecourse under the Pisa line is OSM `grass`, which
-  5.7.2 paints park-green and the Travel style leaves plain, since `grass`
-  also covers verges and lawns (1,175 grass polygons in the Mendoza pack
-  alone, against 2,829 parks). Tint it as parks, or keep it plain?
+- **Grass stays plain (owner, 2026-10-08).** The racecourse under the Pisa
+  line is OSM `grass`, which 5.7.2 paints park-green. A pale grass tint
+  from z13 was proposed, with road verges dropped as detail past what a
+  transit rider needs; the owner then set the bar: a nice-to-have only if
+  it brings no conflict and no busier basemap. It fails the first test.
+  - Every pale green tried between the earth tone and park green sat 4.7
+    to 8.3 (CIE76) from the cemetery, wild-land or earth tint, under the
+    floor of 10, so it would be one more shade readers cannot tell apart.
+  - Verges cannot be told apart in the tiles (grass carries only `kind`);
+    dropping them needs a builder change. It was written and compiled
+    (grass under 1,000 m2, or a strip under 10,000 m2; grass under 1,000
+    m2 is about three quarters of the pieces and 9-19% of the grass area
+    in Mendoza, Avignon and Florence), then reverted: a modified builder
+    is upkeep for non-transit detail, and an unmodified one keeps the
+    packs identical to Protomaps' open-source output. The patch is kept
+    in the scratchpad (`builder/Landuse_verge_filter.java`).
+  Parks keep their green; grass, like pitches and farmland, stays plain.
 - **Avignon and Florence built from the owner's extracts** (Geofabrik
   `provence-alpes-cote-d-azur-261006`, 390,142,851 bytes, sha256
   b02b440e...eaa226d; `centro-261006`, 384,646,965 bytes, sha256
