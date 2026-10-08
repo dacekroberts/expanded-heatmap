@@ -3634,7 +3634,12 @@ FULL_TRAVEL_SCRIPT = """
             });
             pills.forEach(function (p) {
                 var div = pillEl(p);
-                if (div) div.classList.toggle("hm-dim", h !== null && String(p.ln.n) !== h);
+                if (!div) return;
+                div.classList.toggle("hm-dim", h !== null && String(p.ln.n) !== h);
+                // An edited code shows the official one beside it while picked.
+                if (p.ln.official) {
+                    div.innerHTML = p.ln.html + (String(p.ln.n) === h ? " &middot; signed " + p.ln.official : "");
+                }
             });
             place();
         }
@@ -3771,7 +3776,7 @@ def _station_lines(stations, lines, crs_geographic, crs_projected, reach_m=100.0
 def _render_full_travel(*, output_path, city_name, system_name, stations, lines,
                         crs_geographic, crs_projected, center, zoom, lang, names,
                         pmtiles_url, local_lang=None, local_name=None, routes=(), lib=None,
-                        credits=(), labels=None):
+                        credits=(), labels=None, colors=None):
     """The full Travel version, for render_heatmap(full_travel=...).
 
     lib: a folder (relative to the page) holding every library, the glyphs
@@ -3786,10 +3791,28 @@ def _render_full_travel(*, output_path, city_name, system_name, stations, lines,
     labels: {line key: on-map label} replacing the site's labels here only.
     Every line's label must differ from every other's (owner, 2026-10-08):
     the site gives an operator's lines one code where its station numbering
-    does (Tokyo's KS, KK, SI, TS), which the full version does not."""
+    does (Tokyo's KS, KK, SI, TS), which the full version does not.
+    colors: {line key: hex} replacing the site's drawn colours here only.
+    The site moves operators' colours to clear its business pins; the full
+    version has none, so it can draw the official colours (owner,
+    2026-10-08: as close to official as possible; distinguishing calls
+    between an operator's same-coloured lines come later)."""
+    if colors:
+        lines = {k: (segs, colors.get(k, color), label, end)
+                 for k, (segs, color, label, end) in lines.items()}
+    # Where a label is edited, the site's own label is the official one (the
+    # code on the operator's signs): the legend row and the station details
+    # give it alongside, and the line's pill adds it while the line is
+    # picked (owner, 2026-10-08), so a rider reading "KK" on the signs is
+    # never puzzled by the map's "KKA".
+    official = {}
     if labels:
+        official = {k: label for k, (_s, _c, label, _e) in lines.items()
+                    if labels.get(k, label) != label}
         lines = {k: (segs, color, labels.get(k, label), end)
                  for k, (segs, color, label, end) in lines.items()}
+        names = {k: (f"{names.get(k, lines[k][2])} (signed {official[k]})" if k in official
+                     else names.get(k)) for k in lines if k in official or k in names}
     seen = {}
     for k, (_segs, _color, label, _end) in lines.items():
         seen.setdefault(label, []).append(k)
@@ -3868,7 +3891,8 @@ def _render_full_travel(*, output_path, city_name, system_name, stations, lines,
                                            dark_halo=DARK["page"], dark=dark_labels[key])
         fg = "#ffffff" if contrast_ratio(color, "#ffffff") >= contrast_ratio(color, "#111111") else "#111111"
         pills.append({"n": n, "html": html.escape(label), "bg": color, "fg": fg,
-                      "light": light, "dark": dark})
+                      "light": light, "dark": dark,
+                      "official": html.escape(official[key]) if key in official else None})
 
     m.get_root().html.add_child(folium.Element(
         build_legend((), None, lines, legend_names=names, routes=tuple(routes), full=True)))
