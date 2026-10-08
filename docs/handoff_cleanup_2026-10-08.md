@@ -20,13 +20,20 @@ items are done or moved into PLAN.
     skills. 34 maps re-rendered. App rebooted; Tokorozawa's live map
     hash-matched the commit, Daegu's button and the Korean second row checked
     live.
-- **Worktrees left:** cleanup, staging, analytics, visual, and two pilots:
-  `charming-lumiere-930853` (place search, Kyoto) and `epic-neumann-5aa0a6`
-  (open basemap switch and app groundwork). The review lanes and every build
-  worktree were removed on 2026-10-08 after the owner retired their sessions;
-  `data/_review/lane-1..4/` are kept.
-- **Weekly usage 76% on 2026-10-08** (resets 2026-10-11 19:00 UTC); next
-  check-in at 80%.
+- **Worktrees left:** cleanup, staging, analytics, visual, two pilots, and
+  Cleanup's `review-prep` (branch `legend-dot-georgia`, held for review
+  time; its `data` and `.venv-lean` are junctions: unlink each alone first).
+  - **`charming-lumiere-930853` (place search): NEVER remove, prune or
+    retire it until place search has landed on master** (owner, 2026-10-08:
+    "block attempts to delete the worktree until the changes have landed";
+    this covers cleanup-sweep's retire-worktrees scope). After the landing,
+    unlink its `data/` junction alone, then remove it.
+  - `epic-neumann-5aa0a6` (open basemap switch and app groundwork).
+  - The review lanes and every build worktree were removed on 2026-10-08
+    after the owner retired their sessions; `data/_review/lane-1..4/` are
+    kept.
+- **Weekly usage 82% on 2026-10-08** (resets 2026-10-11 19:00 UTC); the 10%
+  check-ins ended that day (owner).
 
 ## Open, in order
 
