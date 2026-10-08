@@ -65,6 +65,8 @@ python scripts/coverage_sweep/parse_wiki_tram.py [--wiki PATH] [--out PATH]   # 
 python scripts/staged_cities_build.py                    # ranked unbuilt cities -> docs/staged_cities.json (pipeline env, cached N02/N03)
 python scripts/stress_overview.py [--scenario now|six|eight|eight_osaka|pref] [--compete REGION] [--country-view COUNTRY] [--group "NAME=C1,C2"] [--keep DIR]   # the macro map with the staged cities added, in a temporary copy of app/
 python scripts/scaffold_city.py --slug <slug> --name <Name> --system-name <system> --taxonomy <key> --lat <lat> --lon <lon> --region <region> --country <country> --mode <metro|light_rail|tram>   # add --dry-run first
+python -m venv .venv-lean                               # build the lean app venv once per clone, then the next line
+.venv-lean/Scripts/python.exe -m pip install -r requirements.txt   # the lean venv holds requirements.txt only
 .venv-lean/Scripts/python.exe -m streamlit run "app/Overview.py"
 ```
 

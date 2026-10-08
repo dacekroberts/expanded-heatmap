@@ -951,3 +951,66 @@ python scripts/scaffold_city.py --slug <slug> --name <Name> --system-name <syste
 .venv-lean/Scripts/python.exe -m streamlit run "app/Overview.py"
 ```
 
+
+
+<a id="overpass"></a>
+### One Overpass query at a time
+
+- Set by the owner on 2026-09-30 ("stagger osm requests"), when every build
+  was activated at once (`docs/decisions/2026-09-27.md`, "2026-09-30 - New
+  working rules"). The short form in `CLAUDE.md` carried "(owner, 2026-09-30)"
+  until the trim of 2026-10-08.
+
+<a id="ridership"></a>
+### Ridership out of scope; AI-driven analysis private
+
+- Both set by the owner on 2026-10-02. Their original wording, verbatim:
+  "**Ridership is out of scope, a hard line**: no ridership figures,
+  correlations or foot-traffic stand-ins, since the data cannot be had for
+  every city; it changes only for a publishable subset with the owner's
+  approval (2026-10-02)." and "Analyses are private to the owner: never on the
+  site (`app/`, `outputs/`) or in public material unless the owner says so for
+  a piece (2026-10-02)."
+
+<a id="pre-permitted"></a>
+### What a brief and skill cover is pre-permitted
+
+- Set by the owner on 2026-09-30, in the same entry as the Overpass rule
+  above. The short form carried "(owner, 2026-09-30)" until the trim of
+  2026-10-08.
+
+<a id="trim-2026-10-08"></a>
+### The trim of 2026-10-08
+
+`CLAUDE.md` reached 1,999 of its 2,000 words, leaving no room for a new
+pointer. Merged or shortened, with the removed words kept here verbatim:
+
+- Intro: "it is the stable briefing (what's settled, architecture, current
+  state, lessons)".
+- City page: "`docs/city_page_format.md`: the page order, bullets, sections
+  that name the city, process notes kept off rendered docs, American spelling."
+- Two invariants merged into the `outputs/` one: "**Maps are pre-rendered
+  static HTML** embedded with `st.iframe()`, not `streamlit-folium`." Two into
+  the map-rendering one: "**A city's classification need not be NAICS**
+  (`pipeline/taxonomies/`). Step 2 filters via `filter_to_storefront()`, never
+  NAICS prefixes."
+- The fetch rules, once two bullets: "**A step may fetch when a person runs it;
+  a drift check may never fetch.**" ([#offline-guard] still holds the story).
+- The licence rules, once two bullets: "**A source that is not a registry, a
+  feed or a boundary still needs a row** in `docs/data_sources.md` (a naming
+  layer, a parcel layer, a geocoder), with its own licence and any notice it
+  requires." ([#support-sources])
+- The reboot rule: "\"Updated app!\" keeps imported modules cached" (the story
+  is in [#deploy-reboot]).
+- deploy-verify's scopes, listed in its agent description: "(`city-added`,
+  `map-chrome`, `app-deps`, `full`)".
+- The session cap's date: "(owner, 2026-10-04)".
+- The escapes rule: "`.claude/hooks/block_heredoc.py` enforces the heredoc and
+  inline cases."
+- The memory rule: "and `heavy_job.py status` names what holds the memory;
+  peaks and estimates in `docs/session_roles.md`".
+- Code comments: "readable by an outsider but useful to whoever changes the
+  code next".
+- Environments: "Build the lean one with `python -m venv .venv-lean` then
+  `.venv-lean/Scripts/python.exe -m pip install -r requirements.txt`." (now in
+  `docs/commands.md`).

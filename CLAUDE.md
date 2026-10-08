@@ -1,12 +1,10 @@
 # Project conventions
 
 Multi-city map of commercial density around rapid-transit stations. Read
-`docs/project_context.md` first - it is the stable briefing (what's settled,
-architecture, current state, lessons). `PLAN.md` is the open work,
-`DECISIONS.md` the append-only reasoning trail, `docs/city_master_list.md`
-the city list. **How each rule below was learned is in
-`docs/rule_history.md`, at the anchor in brackets** - read it before relaxing
-a rule, not before obeying one.
+`docs/project_context.md` first, the stable briefing. `PLAN.md` is the open
+work, `DECISIONS.md` the append-only reasoning trail, `docs/city_master_list.md`
+the city list. **How each rule was learned is in `docs/rule_history.md`, at
+the bracketed anchor** - read it before relaxing a rule, not before obeying one.
 
 ## Where to start
 
@@ -27,8 +25,7 @@ a rule, not before obeying one.
   share at each level with `brief_check.py`'s `taxonomy_catchall` kind first;
   there is no default level. [#premises-taxonomy]
 - Writing a city's page, or its sections of What Is Excluded and About the
-  Data -> `docs/city_page_format.md`: the page order, bullets, sections that
-  name the city, process notes kept off rendered docs, American spelling.
+  Data -> `docs/city_page_format.md` (American spelling).
 - Keeping or dropping any category, in any city -> `docs/category_rules.md`
   first; recommend the precedent, and bring a departure to the owner with the
   precedent it breaks.
@@ -42,8 +39,7 @@ a rule, not before obeying one.
   city -> `japan-city`; Korean city -> `korea-city`; French city -> `france-tram-city`; a trams-only
   city outside France and Czechia -> `tram-city`. [#country-skills]
 - **Overpass: one query in flight per session, one per city**, never
-  parallel; after a 504 or 429 wait at least 60 s before a retry (owner,
-  2026-09-30).
+  parallel; after a 504 or 429 wait at least 60 s before a retry. [#overpass]
 - Rail from OpenStreetMap, not GTFS -> `osm-rail`. Put a lesson where the next
   city must pass through it - a raising check in shared code, then a skill - not
   in a sibling city's comments. [#osm-rail]
@@ -67,19 +63,16 @@ a rule, not before obeying one.
   installs from it - geopandas/folium there breaks the deploy. Pipeline
   dependencies live in `requirements-pipeline.txt`.
 - **`outputs/<city>/` is committed; `data/<city>/raw/` and `processed/` are
-  not.** The deployed app only reads `outputs/`, never runs the pipeline.
-- **Maps are pre-rendered static HTML** embedded with
-  `st.iframe()`, not `streamlit-folium`.
-- **Map rendering is shared:** city `step3_map.py` files stay thin and never
-  fork `pipeline/map_common.py`'s `render_heatmap()`, which never names a
-  taxonomy - grouping, tooltip label and legend text come from the taxonomy
-  module. [#wording]
+  not.** The deployed app only reads `outputs/`; maps are pre-rendered static
+  HTML in `st.iframe()`, not `streamlit-folium`.
+- **Map rendering is shared and names no taxonomy:** city `step3_map.py` files
+  stay thin and never fork `pipeline/map_common.py`'s `render_heatmap()`;
+  grouping, tooltip label and legend text come from `pipeline/taxonomies/`,
+  and step 2 filters via `filter_to_storefront()`, never NAICS prefixes. [#wording]
 - **Every drawn transit line gets a permanent on-map label (its real public
   name) AND a legend entry**, clears its map's pins by CIE76 20, and keeps
   ONE colour and name on every map site-wide (hard line;
   `pipeline/line_registry.py`, `scripts/check_line_identity.py`). [#line-identity]
-- **A city's classification need not be NAICS** (`pipeline/taxonomies/`).
-  Step 2 filters via `filter_to_storefront()`, never NAICS prefixes. [#wording]
 - **Check the rail system's shape before assuming "keep every station."**
   Central-corridor-plus-surface-offshoot systems need
   `docs/sub_transit_line_filters.md`. [#rail-shape]
@@ -100,43 +93,39 @@ a rule, not before obeying one.
   again if a page's embed height changes. Other required notices:
   `docs/data_sources.md`, "Notices this project MUST display when
   published". [#attribution]
-- **A pipeline step never fetches.** Downloads live in
-  `pipeline/<city>/fetch_sources.py` - deliberately not named `step*.py`, so
-  `drift_check.py` never runs it; a step
-  reads the cache and exits non-zero naming that script.
-  `scripts/check_no_fetch_in_steps.py` decides it, **including through shared
-  `pipeline/*.py` modules.** [#no-fetch]
-- **A step may fetch when a person runs it; a drift check may never fetch.**
-  A step that cannot stop fetching guards it with `pipeline/offline.py`'s
-  `refuse_if_offline()`, not a wider exception list. `HEATMAP_NO_NETWORK=1`
-  tests a fresh checkout. [#offline-guard]
+- **A pipeline step never fetches, and a drift check never does.** Downloads
+  live in `pipeline/<city>/fetch_sources.py` (not `step*.py`, so
+  `drift_check.py` never runs it); a step reads the cache and exits non-zero
+  naming that script. `scripts/check_no_fetch_in_steps.py` decides it,
+  **including through shared `pipeline/*.py` modules.** A step that cannot stop
+  fetching guards it with `pipeline/offline.py`'s `refuse_if_offline()`, not a
+  wider exception list; `HEATMAP_NO_NETWORK=1` tests a fresh checkout.
+  [#no-fetch] [#offline-guard]
 - **Run `python scripts/check_provenance.py` after adding a city, and make it
   name that city OK** - an unrecorded city looks exactly like a checked one.
   A city under `KNOWN_GAPS` is a dated defect, not a pass. [#provenance]
 - **A city is scoped TWICE, and both halves have to reach the reader** - its
   rail network and its excluded businesses, in `docs/excluded_categories.md`.
   `python scripts/check_scope_disclosure.py` decides this. [#scope-twice]
-- **A source that is not a registry, a feed or a boundary still needs a row**
-  in `docs/data_sources.md` (a naming layer, a parcel layer, a geocoder), with
-  its own licence and any notice it requires. [#support-sources]
-- **Record a new data source's licence when you add it**, in
-  `docs/data_sources.md` (per-country sections live in
-  `docs/data_sources/<country>.md`), using the **`read-licence` skill**. A government
-  portal is a reason to expect permissive terms, not evidence; check what a
-  dataset page incorporates by reference. [#licence]
+- **Record every new source's licence when you add it**, a naming layer,
+  parcel layer or geocoder included, with any notice it requires, in
+  `docs/data_sources.md` (per country: `docs/data_sources/<country>.md`), using
+  the **`read-licence` skill**. A government portal is a reason to expect
+  permissive terms, not evidence; check what a dataset page incorporates by
+  reference. [#licence] [#support-sources]
 - **A removal request is honoured, not argued**, from a publisher, a
   business owner or anyone with a privacy concern: take it down first (the
   layer or the city), then record it in `DECISIONS.md`, keeping
   `docs/data_sources.md` and `docs/excluded_categories.md` consistent. Never
   ask for justification. [#removal]
 - **Ridership is out of scope, a hard line**: no ridership figures,
-  correlations or foot-traffic stand-ins, since the data cannot be had for
-  every city; it changes only for a publishable subset with the owner's
-  approval (2026-10-02). Flag scope additions rather than building them.
+  correlations or foot-traffic stand-ins; it changes only for a publishable
+  subset with the owner's approval. Flag scope additions rather than building
+  them. [#ridership]
 - **AI-driven deep analysis is permitted; every analysis carries an
   AI-driven acknowledgement (hard line).** Analyses are private to the owner:
   never on the site (`app/`, `outputs/`) or in public material unless the
-  owner says so for a piece (2026-10-02).
+  owner says so for a piece. [#ridership]
 
 ## Working rules
 
@@ -154,50 +143,45 @@ a rule, not before obeying one.
   drift** (CRLF and Folium's random ids). Never `git add -A`. [#drift-churn]
 - **Run `python scripts/check_deploy_imports.py` before any push that touches
   `app/`**, and **reboot the deployed app after any push that changes a module
-  it imports** (`app/cities.py` changes with every city): "Updated app!" keeps
-  imported modules cached (gate item 9, `docs/data_sources.md`).
-  `deploy-verify` catches neither. [#deploy-reboot]
+  it imports** (`app/cities.py` changes with every city; gate item 9,
+  `docs/data_sources.md`). `deploy-verify` catches neither. [#deploy-reboot]
 - **Publishing a city? Use `publish-city`.** Landing `app/` on master IS
   deploying; compute the reboot question from the WHOLE push's `app/` diff. [#publish-city]
 - **Reading a source's terms? The `licence-read` agent** - one source per call,
   out of the main conversation. [#licence-read]
 - **Verify app changes with the `deploy-verify` agent once per batch, at
-  review time** (`docs/review_time.md`), always with a scope (`city-added`,
-  `map-chrome`, `app-deps`, `full`); during the day, at most one quick browser
-  render of a session's own change. Approvals, `app/` landings and full
+  review time** (`docs/review_time.md`), always with a scope; during the day,
+  at most one quick browser render of a session's own change. Approvals, `app/` landings and full
   re-renders wait for review time, which only the owner calls. Pipeline-only
   and doc work needs no deploy-verify. [#deploy-verify]
 - **Write probe and scratch output to the session scratchpad directory, never
   to the working directory or the home directory** - an explicit path, or a
   gitignored `data/<city>/raw/`. Never commit it; findings go in
   `docs/data_sources.md` and `docs/city_master_list.md`. [#scratch]
-- **What a build's brief and skill cover is pre-permitted** (owner,
-  2026-09-30): fetching the sources they name from the publisher's own host,
+- **What a build's brief and skill cover is pre-permitted**: fetching the sources they name from the publisher's own host,
   with their licence rows and notices, and page text from an approved
   template. A source not in the brief goes to the owner first; a sentence no
   template covers is a proposal in the drafts file, flagged at review time;
-  other interpretive prose is drafted in chat first.
+  other interpretive prose is drafted in chat first. [#pre-permitted]
 - **No backslash or backtick inside a heredoc or an inline interpreter
   string (`python -c`, `perl -e`, `node -e`), and no backtick inside a
   double-quoted argument: write the content to a file with the Write tool
   and run the file.** Escapes, not length, are the test; quoting the
   heredoc delimiter does not help. A plain `sed` or `grep` with escapes is
-  fine. `.claude/hooks/block_heredoc.py` enforces the heredoc and inline
-  cases. [#no-escapes]
+  fine; `.claude/hooks/block_heredoc.py` enforces it. [#no-escapes]
 - **Once per review time, Cleanup tells Visuals and Analytics what moved**
   (`scripts/downstream_changes.py`; `docs/session_roles.md`). At most three
-  build sessions at once; a branch takes master in only before its own push
-  (owner, 2026-10-04).
+  build sessions at once; a branch takes master in only before its own push.
+  [#session-roles]
 - **Re-check `origin/master` in the same breath as the push**: `git fetch`,
   merge if behind, push, nothing slow in between; re-fetch if a gate re-runs
   after that merge. [#fetch-before-push]
 - **Python is capped at 8 GB a process, 16 GB with its children**
   (`scripts/python_memcap.py`). **At most four heavy jobs, each admitted by
   the gate: `python scripts/heavy_job.py run --label <job> --session <you> --
-  <command>`**; a refused job waits (`--wait <min>`), and `heavy_job.py status`
-  names what holds the memory; peaks and estimates in
-  `docs/session_roles.md`. Drift checks
-  `--jobs 3` at most, one per machine. A `MemoryError` is a script to fix,
+  <command>`**; a refused job waits (`--wait <min>`), `status` names what holds
+  the memory; peaks in `docs/session_roles.md`. Drift checks `--jobs 3` at
+  most, one per machine. A `MemoryError` is a script to fix,
   never a cap to raise. PDFs: `pdftotext` or `pypdf`, never a hand-written
   decoder. [#memory]
 - **Resolve a conflicted append-only file with
@@ -207,8 +191,7 @@ a rule, not before obeying one.
 
 ## Code comments
 
-Neutral voice: no "I", "we" or "you"; short statements of what and why,
-readable by an outsider but useful to whoever changes the code next. Keep
+Neutral voice: no "I", "we" or "you"; short statements of what and why. Keep
 every measured value, every "re-measure if X changes" warning and every
 pointer to `DECISIONS.md`, `docs/rule_history.md` or a skill. How something
 was found or verified gets one line at most; the full story belongs in the
@@ -228,7 +211,6 @@ with `git config core.hooksPath .githooks`), `python pipeline/drift_check.py
 [city] [--jobs N]`, `python scripts/regen_generated.py` after any merge, and
 `.venv-lean/Scripts/python.exe -m streamlit run "app/Overview.py"`.
 
-Environments: the full pipeline environment (`requirements-pipeline.txt`)
-for `pipeline/`; `.venv-lean` (`requirements.txt` only, gitignored) for the
-app. Build the lean one with `python -m venv .venv-lean` then
-`.venv-lean/Scripts/python.exe -m pip install -r requirements.txt`.
+Environments: `requirements-pipeline.txt` for `pipeline/`; `.venv-lean`
+(`requirements.txt` only, gitignored) for the app, built as `docs/commands.md`
+shows.
