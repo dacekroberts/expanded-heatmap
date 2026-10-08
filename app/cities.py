@@ -1299,7 +1299,7 @@ CITIES = [
         "blurb": "Daegu Metro Lines 1–3",
         # In the South Korea view since 2026-10-04 (owner); East Asia still
         # labels it (REGION_LABELS_ALSO), at the offset below.
-        "region": "South Korea",
+        "region": "South Korea outside the capital area",
         "country": "South Korea",
         "in_default_view": False,
         # Left of the dot (width 42.9 px, measured 2026-09-27): above it, the
@@ -1326,7 +1326,7 @@ CITIES = [
         "blurb": "Busan Metro Lines 1–4 and the Busan–Gimhae LRT",
         # In the South Korea view since 2026-10-04 (owner); East Asia still
         # labels it (REGION_LABELS_ALSO), at the offset below.
-        "region": "South Korea",
+        "region": "South Korea outside the capital area",
         "country": "South Korea",
         "in_default_view": False,
         # LOWER LEFT since 2026-09-28: below the dot, Busan's pill covered
@@ -4493,7 +4493,7 @@ CITIES = [
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "Daejeon Metro Line 1",
-        "region": "South Korea",
+        "region": "South Korea outside the capital area",
         "country": "South Korea",
         "mode": "metro",
         "in_default_view": False,
@@ -4517,7 +4517,7 @@ CITIES = [
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "Gwangju Metro Line 1",
-        "region": "South Korea",
+        "region": "South Korea outside the capital area",
         "country": "South Korea",
         "mode": "metro",
         "in_default_view": False,
@@ -4541,7 +4541,7 @@ CITIES = [
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "The Busan–Gimhae LRT",
-        "region": "South Korea",
+        "region": "South Korea outside the capital area",
         "country": "South Korea",
         "mode": "light_rail",
         "in_default_view": False,
@@ -5678,6 +5678,18 @@ DEFAULT_FRAME = "United States"
 # doing.
 REGION_MEMBERS = {
     "United States": ("United States West", "United States East"),
+    # CANADA AND JAPAN AS WHOLES (owner, 2026-10-07, the two-row region
+    # menu): each is a first-row choice whose closer views sit in the second
+    # row, and the whole stays selectable ("All of Japan"), so each is a
+    # composite on the United States' pattern. Canada's halves stay the
+    # readable views (the 2026-09-22 split); the whole is the overview the
+    # United States composite already gives its country. Japan's members are
+    # JAPAN_REGIONS, added below where that tuple is defined. Both compete for
+    # their labels (COMPETING_REGIONS).
+    "Canada": ("Canada West", "Canada East"),
+    # SOUTH KOREA AS ONE COUNTRY, like Japan (owner, 2026-10-07): the Seoul
+    # Capital Area and the cities outside it, one first-row choice.
+    "South Korea": ("Seoul Capital Area", "South Korea outside the capital area"),
 }
 
 # Display order in the switcher, parent before its halves so a reader meets the
@@ -5688,6 +5700,7 @@ REGION_ORDER = [
     "United States",
     "United States West",
     "United States East",
+    "Canada",
     "Canada West",
     "Canada East",
     "Mexico",
@@ -5803,6 +5816,8 @@ REGION_ORDER = [
     # each at a pinned zoom (REGION_ZOOM), every planned city through phase 2
     # is named (scripts/stress_overview.py --planned 2; PROBLEMS 0). Kanto and
     # Kansai name their larger cities (REGION_LABELS_ALSO).
+    # "Japan" is the composite of all of them (REGION_MEMBERS, 2026-10-07).
+    "Japan",
     "Hokkaido",
     "Tohoku",
     "Kanto",
@@ -5821,6 +5836,9 @@ REGION_ORDER = [
     # moved out of East Asia. At East Asia's zoom they sit 20-30 px apart and
     # every pair of labels overlapped (check_macro_labels.py); a composite
     # would still label them all at that zoom. Each city keeps its own page.
+    # "South Korea" is the composite of the country's two views (REGION_MEMBERS,
+    # 2026-10-07), so a first-row choice covers every Korean city.
+    "South Korea",
     "Seoul Capital Area",
     # SOUTH KOREA (owner, 2026-10-04): Daegu and Busan, with Daejeon, Gwangju
     # and Gimhae, moved out of East Asia as Japan's cities were. At East Asia's
@@ -5830,7 +5848,13 @@ REGION_ORDER = [
     # cities are minor; East Asia still labels Daegu and Busan
     # (REGION_LABELS_ALSO). Named for the country though Seoul and its
     # satellites keep their own view (owner).
-    "South Korea",
+    # RENAMED "South Korea outside the capital area" (owner, 2026-10-07, the
+    # two-row menu): "South Korea" became the whole country, and the old name
+    # captioned 5 cities as "in South Korea" when the site has 18 (review lane
+    # 3, O3). The menu shows it as "Outside the capital area" under South
+    # Korea; a `?region=South Korea` link from before opens the whole country,
+    # which holds these five.
+    "South Korea outside the capital area",
     # OCEANIA (owner, 2026-09-28): Sydney first, Melbourne next, about 710 km
     # apart - one readable view, far from every other region. Named for the
     # continent rather than the country, as Europe is, so an Australian or New
@@ -5856,8 +5880,10 @@ REGION_ORDER = [
 JAPAN_REGIONS = ("Hokkaido", "Tohoku", "Kanto", "Saitama Prefecture", "Chiba Prefecture",
                  "Tokyo Metropolis", "Chubu", "Kansai", "Osaka Prefecture", "Hyogo Prefecture",
                  "Chugoku", "Shikoku", "Kyushu-Okinawa")
-COUNTRY_VIEWS = ("France North", "France South", "Czechia", "Benelux", "Germany", "United Kingdom",
-                 "Seoul Capital Area", "South Korea", *JAPAN_REGIONS)
+REGION_MEMBERS["Japan"] = JAPAN_REGIONS
+COUNTRY_VIEWS =("France North", "France South", "Czechia", "Benelux", "Germany", "United Kingdom",
+                 "Seoul Capital Area", "South Korea outside the capital area",
+                 *JAPAN_REGIONS)
 MENU_ORDER = ([r for r in REGION_ORDER if r not in COUNTRY_VIEWS]
               + [r for r in REGION_ORDER if r in COUNTRY_VIEWS])
 if set(COUNTRY_VIEWS) - set(REGION_ORDER):
@@ -5961,6 +5987,40 @@ REGIONS = [
     if cities_in(name)
 ]
 
+# THE REGION MENU IS TWO ROWS (owner, 2026-10-07). One flat list of 33 views
+# measured 665 px tall on a 375 px phone (review lane 3), so the map started
+# about 1,378 px down. The first row holds the broad views; the second shows
+# only when the chosen broad view has closer views, and the broad view stays
+# selectable in it ("All of Japan").
+#
+# A composite's closer views are its members (REGION_MEMBERS: the United
+# States, Canada, Japan); any other parent names its closer views here. Europe
+# West's are the country views carved out of it, the United Kingdom excepted:
+# the owner listed the United Kingdom in the first row. Every view not named
+# as a closer view is a first-row view, in REGION_ORDER's geographic order, so
+# a new region joins the first row without an edit here. A closer view with no
+# city yet (Chiba Prefecture) has no entry, as in the one-row menu.
+SUB_VIEWS = {
+    **{p: m for p, m in REGION_MEMBERS.items() if p != DEFAULT_REGION},
+    "Europe West": ("France North", "France South", "Benelux", "Germany", "Czechia"),
+}
+MENU_PARENT = {}
+for _parent, _children in SUB_VIEWS.items():
+    for _child in _children:
+        if _child in MENU_PARENT:
+            raise ValueError(f"cities.py: {_child!r} is a closer view of both "
+                             f"{MENU_PARENT[_child]!r} and {_parent!r} in SUB_VIEWS")
+        MENU_PARENT[_child] = _parent
+_bad_sub = sorted({r for r in MENU_PARENT if r not in REGION_ORDER}
+                  | {p for p in SUB_VIEWS if p not in REGION_ORDER or p in MENU_PARENT})
+if _bad_sub:
+    raise ValueError(f"cities.py: SUB_VIEWS names {_bad_sub}, which are not in REGION_ORDER "
+                     f"or are a parent that is itself a closer view (the menu has two rows)")
+_shown = {r["name"] for r in REGIONS}
+MENU_TOP = [r for r in REGION_ORDER if r in _shown and r not in MENU_PARENT]
+MENU_SUB = {p: [c for c in kids if c in _shown] for p, kids in SUB_VIEWS.items() if p in _shown}
+MENU_SUB = {p: kids for p, kids in MENU_SUB.items() if kids}
+
 
 def elsewhere_counts(region):
     """Return (name, count) for the regions a given region does NOT cover.
@@ -6019,7 +6079,8 @@ if _bad_rof:
 # Newcastle (Regional) on 2026-10-07) keeps a faded dot there and its name in
 # its own view.
 # Each tuple's order is the order region_caption() names them in.
-REGION_LABELS_ALSO = {"East Asia": (*JAPAN_REGIONS, "Seoul Capital Area", "South Korea"),
+REGION_LABELS_ALSO = {"East Asia": (*JAPAN_REGIONS, "Seoul Capital Area",
+                                     "South Korea outside the capital area"),
                       "Kanto": ("Saitama Prefecture", "Chiba Prefecture", "Tokyo Metropolis"),
                       "Kansai": ("Osaka Prefecture", "Hyogo Prefecture"),
                       "Europe West": ("United Kingdom", "France North", "France South", "Czechia", "Benelux", "Germany")}
@@ -6037,11 +6098,17 @@ REGION_LABELS_ALSO = {"East Asia": (*JAPAN_REGIONS, "Seoul Capital Area", "South
 # Haag's pills covered the German dots and Bergen's and Riga's sat under the
 # theme button at 375 px (8 problems); competing, every name each view labels
 # is placed (22 of 22 and 5 of 5), PROBLEMS 0.
-COMPETING_REGIONS = ("Europe West", "Europe East", "Benelux", "East Asia", *JAPAN_REGIONS)
-_bad_compete = [r for r in COMPETING_REGIONS if r not in LEAF_REGIONS]
+# Canada, Japan and South Korea, the composites the two-row menu added
+# (2026-10-07): by hand, Seoul's pill covered Uijeongbu's dot (3 problems),
+# Edmonton's met Kitchener-Waterloo's (3) and Japan's
+# anchors covered nine neighbours' dots at every width (27); competing,
+# PROBLEMS 0. A composite competes like a leaf, its entrants the anchors of
+# its members; Global keeps its own rule (label_competition.py).
+COMPETING_REGIONS = ("Europe West", "Europe East", "Benelux", "East Asia", *JAPAN_REGIONS, "Canada", "Japan", "South Korea")
+_bad_compete = [r for r in COMPETING_REGIONS if r not in REGION_ORDER or r == DEFAULT_REGION]
 if _bad_compete:
-    raise ValueError(f"cities.py: COMPETING_REGIONS {_bad_compete} are not leaf regions "
-                     f"({LEAF_REGIONS}); only a leaf region's view competes")
+    raise ValueError(f"cities.py: COMPETING_REGIONS {_bad_compete} are not regions in "
+                     f"REGION_ORDER, or are the landing view, which competes on its own rule")
 
 
 def region_caption(region):
@@ -6085,9 +6152,21 @@ def region_caption(region):
 # Region names read with "the" in running text.
 _TAKES_THE = {"United States", "United States West", "United States East",
               "United Kingdom", "Seoul Capital Area"}
-# The country a caption names for a view that is one part of it.
+
+
+def running_name(region):
+    """A region's name as running text reads it ("the United States"); the
+    region menu's "All of" choice uses it."""
+    return f"the {region}" if region in _TAKES_THE else region
+
+
+# The country a caption names for a view that is one part of it. The Seoul
+# Capital Area keeps its own name in a caption inside South Korea (caption_name
+# below): East Asia names "South Korea" once for both Korean views.
 _CAPTION_NAME = {"France North": "France", "France South": "France",
-                 **{r: "Japan" for r in JAPAN_REGIONS}}
+                 **{r: "Japan" for r in JAPAN_REGIONS},
+                 "Seoul Capital Area": "South Korea",
+                 "South Korea outside the capital area": "South Korea"}
 
 
 if _bad_tier:
