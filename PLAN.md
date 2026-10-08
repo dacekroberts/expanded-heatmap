@@ -32,18 +32,17 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   worktree-japan-regional-1, pin-colours-backlinks, rb-mapconfig, rb-prose,
   review-batch-2026-10-07. Owner: the iPhone check.
 
-- [ ] **Next landing (owner, 2026-10-07):**
-  - **One colour per line across maps, a HARD LINE** (owner): a site-wide
-    line registry keyed by operator and line (Japan's N02 operator and line
-    ids), every map that draws a line using its one colour, other lines
-    reassigned to fit; a check that fails when a line has two colours. Seen:
-    JR Kobe in 5 colours across Kansai, JR Sanyo 4, Seibu Haijima cyan and
-    mauve, Nishinomiya's JR Takarazuka. Open for the owner: whether
-    different lines on neighbouring maps of one country must differ too
-    (Higashimurayama's Tamako and Tokorozawa's Leo Liner share #A06030).
-  - **The two-level region selector** (owner): broad views in the first row,
-    a view's closer views in a second row only when it has them; `?region=`
-    sets both (lane 3, O2: 33 options, 665 px at 375).
+- [x] **The line registry, the two-level region selector and the wave 2 rules
+  LANDED 2026-10-08 (5507a4cb)**: one colour and name per line site-wide
+  (`pipeline/line_registry.py`, `scripts/check_line_identity.py`, the
+  neighbour rule on with two owner exceptions), 34 maps re-rendered; South
+  Korea one view with three closer ones, Canada's and Japan's whole-country
+  views kept; Korea's five non-capital cities' region button reads "South
+  Korea" (owner). App rebooted; Tokorozawa's live map hash-matched, Daegu's
+  button and the Korean second row checked live. Drafts to fold:
+  line-registry, region-selector.
+
+- [ ] **Next landing:**
   - Phase 2 Japanese cities (East-2, Kansai-2, Regional-2) and Cluj-Napoca,
     on the owner's go (Cluj-Napoca waits on call 215, the placement bar).
   - Place search, if the Kyoto pilot reports well.
