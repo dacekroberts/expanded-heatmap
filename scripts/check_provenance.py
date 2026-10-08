@@ -226,6 +226,8 @@ SLUG_OVERRIDES = {
     "Fuchū (Tokyo)": "fuchu_tokyo",
     "Chōfu": "chofu",
     "Ageo (Regional)": "ageo_regional",
+    # The A/B build plan's Regional-1 batch (2026-10-07), likewise.
+    "Ōita": "oita",
     # Brazil: accents dropped from the package name, and the regional pages'
     # suffix, as for Lille.
     "São Paulo": "sao_paulo",

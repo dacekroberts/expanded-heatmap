@@ -1,0 +1,220 @@
+{
+  "city_barber_beauty": {
+    "as_of": "2026-08-31",
+    "bytes": 231248,
+    "dataset_page": "https://data.city.fukuyama.hiroshima.jp/dataset/licensed_env",
+    "file": "riyoushobiyousho.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-05T06:03:10+00:00",
+    "rows": 1634,
+    "sha256": "d3b946b8810651ac4fe8a19a0074f32eb827ab42a411d6b51732f28928aead1b",
+    "url": "https://data.city.fukuyama.hiroshima.jp/dataset/f6242af5-08f2-458b-a55c-452db7a8c967/resource/2d640e17-3225-4c59-b2f4-cdc2b104748c/download/riyoushobiyousho.csv"
+  },
+  "city_food": {
+    "as_of": "2026-03-31",
+    "bytes": 1640035,
+    "dataset_page": "https://data.city.fukuyama.hiroshima.jp/dataset/licensed_food",
+    "file": "2026_3all.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-05T06:02:01+00:00",
+    "rows": 5880,
+    "sha256": "6f7217e4409ba5cb550da9c220db4d8e86184bb830c2ef86a6fe5eda1026444a",
+    "url": "https://data.city.fukuyama.hiroshima.jp/dataset/61f415c5-88f7-46d0-8ada-4bb8855685a0/resource/21fec913-dc08-4344-94d1-ffb0068ab147/download/2026_3all.csv"
+  },
+  "city_food_2509": {
+    "as_of": "2025-09-30",
+    "bytes": 37104,
+    "dataset_page": "https://data.city.fukuyama.hiroshima.jp/dataset/licensed_food",
+    "file": "20259.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-05T06:02:07+00:00",
+    "rows": 136,
+    "sha256": "4128d77d2c348839f74eda3cc86704693555d2d2eae25e6fe4cdba622b2b7062",
+    "url": "https://data.city.fukuyama.hiroshima.jp/dataset/61f415c5-88f7-46d0-8ada-4bb8855685a0/resource/7ec5a4c1-4c5d-4c9a-a976-9ff41ce6e919/download/20259.csv"
+  },
+  "city_food_2510": {
+    "as_of": "2025-10-31",
+    "bytes": 25609,
+    "dataset_page": "https://data.city.fukuyama.hiroshima.jp/dataset/licensed_food",
+    "file": "202510.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-05T06:02:12+00:00",
+    "rows": 92,
+    "sha256": "ca5253fb3777232de51b995a0a63f2d47a91042013a62689167cb5c8ffae3564",
+    "url": "https://data.city.fukuyama.hiroshima.jp/dataset/61f415c5-88f7-46d0-8ada-4bb8855685a0/resource/547985da-7565-4f15-ad52-fe07a9db4b62/download/202510.csv"
+  },
+  "city_food_2511": {
+    "as_of": "2025-11-30",
+    "bytes": 30259,
+    "dataset_page": "https://data.city.fukuyama.hiroshima.jp/dataset/licensed_food",
+    "file": "202511.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-05T06:02:18+00:00",
+    "rows": 107,
+    "sha256": "78c3bbc30ae927b86a989376e4bd943ebaad6faee9e83538908ef21dfe6d0a44",
+    "url": "https://data.city.fukuyama.hiroshima.jp/dataset/61f415c5-88f7-46d0-8ada-4bb8855685a0/resource/e3b35a8d-ef0a-4a4d-a050-d293b1e965db/download/202511.csv"
+  },
+  "city_food_2512": {
+    "as_of": "2025-12-31",
+    "bytes": 22942,
+    "dataset_page": "https://data.city.fukuyama.hiroshima.jp/dataset/licensed_food",
+    "file": "2025_12_new.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-05T06:02:23+00:00",
+    "rows": 83,
+    "sha256": "a4a707ac9c303e5b7632805610b22918f89be649795f9d1f05c6aa9d23638ed8",
+    "url": "https://data.city.fukuyama.hiroshima.jp/dataset/61f415c5-88f7-46d0-8ada-4bb8855685a0/resource/14247a4a-91f2-4c85-9bfb-13c21b381825/download/2025_12_new.csv"
+  },
+  "city_food_2601": {
+    "as_of": "2026-01-31",
+    "bytes": 32787,
+    "dataset_page": "https://data.city.fukuyama.hiroshima.jp/dataset/licensed_food",
+    "file": "2026_1_new.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-05T06:02:28+00:00",
+    "rows": 113,
+    "sha256": "a61cd7f0106735645b8e37a115b7f932778c7cc505e1ba1329591a81ce6fc352",
+    "url": "https://data.city.fukuyama.hiroshima.jp/dataset/61f415c5-88f7-46d0-8ada-4bb8855685a0/resource/4d31b250-ec7b-4bfc-afdc-37236846101d/download/2026_1_new.csv"
+  },
+  "city_food_2602": {
+    "as_of": "2026-02-28",
+    "bytes": 12455,
+    "dataset_page": "https://data.city.fukuyama.hiroshima.jp/dataset/licensed_food",
+    "file": "2026_2_new.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-05T06:02:33+00:00",
+    "rows": 45,
+    "sha256": "6e8811913dcc8fbe2076fb484ea54e90acf290f4557e01ef1df4b8478ced05e8",
+    "url": "https://data.city.fukuyama.hiroshima.jp/dataset/61f415c5-88f7-46d0-8ada-4bb8855685a0/resource/36e57b96-9fdd-4ec3-a178-9bd3cd7620b8/download/2026_2_new.csv"
+  },
+  "city_food_2603": {
+    "as_of": "2026-03-31",
+    "bytes": 34275,
+    "dataset_page": "https://data.city.fukuyama.hiroshima.jp/dataset/licensed_food",
+    "file": "2026_3_new.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-05T06:02:39+00:00",
+    "rows": 125,
+    "sha256": "e3bc198b9b2b77c8c3c75e46c9f51a8e23c67c6dcfe2bdda7ff167949d01c207",
+    "url": "https://data.city.fukuyama.hiroshima.jp/dataset/61f415c5-88f7-46d0-8ada-4bb8855685a0/resource/f066081c-ff12-4b0b-95e4-a4b5e54463ac/download/2026_3_new.csv"
+  },
+  "city_food_2604": {
+    "as_of": "2026-04-30",
+    "bytes": 30907,
+    "dataset_page": "https://data.city.fukuyama.hiroshima.jp/dataset/licensed_food",
+    "file": "20264.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-05T06:02:46+00:00",
+    "rows": 106,
+    "sha256": "d31b3f00fb3dea924e0b140bb5837ce4f952c1f73231e966756772334d15e622",
+    "url": "https://data.city.fukuyama.hiroshima.jp/dataset/61f415c5-88f7-46d0-8ada-4bb8855685a0/resource/d9030cb6-a843-42e0-8478-30dc47561336/download/20264.csv"
+  },
+  "city_food_2605": {
+    "as_of": "2026-05-31",
+    "bytes": 28552,
+    "dataset_page": "https://data.city.fukuyama.hiroshima.jp/dataset/licensed_food",
+    "file": "20265.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-05T06:02:49+00:00",
+    "rows": 105,
+    "sha256": "4b20be5eaf1f1a195966b69367897a6b8b443e435976f465a4679d8f24a7d16f",
+    "url": "https://data.city.fukuyama.hiroshima.jp/dataset/61f415c5-88f7-46d0-8ada-4bb8855685a0/resource/d5116587-457d-42dc-902e-7ce931057610/download/20265.csv"
+  },
+  "city_food_2606": {
+    "as_of": "2026-06-30",
+    "bytes": 19679,
+    "dataset_page": "https://data.city.fukuyama.hiroshima.jp/dataset/licensed_food",
+    "file": "20266.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-05T06:02:54+00:00",
+    "rows": 68,
+    "sha256": "8147f22e81830aaf48b0a7916c1cac1fccd48b702fc9da9b6babfe857966bdf5",
+    "url": "https://data.city.fukuyama.hiroshima.jp/dataset/61f415c5-88f7-46d0-8ada-4bb8855685a0/resource/8c3eff46-6aa3-4484-acaa-f3901f38f340/download/20266.csv"
+  },
+  "city_food_2607": {
+    "as_of": "2026-07-31",
+    "bytes": 37133,
+    "dataset_page": "https://data.city.fukuyama.hiroshima.jp/dataset/licensed_food",
+    "file": "20267.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-05T06:03:00+00:00",
+    "rows": 122,
+    "sha256": "cc2c8acc1ab7088239ab12f82c34ac2d856694e2749d04a54e7058355875d083",
+    "url": "https://data.city.fukuyama.hiroshima.jp/dataset/61f415c5-88f7-46d0-8ada-4bb8855685a0/resource/1d18f967-dcda-4e47-8d45-66dc9432091e/download/20267.csv"
+  },
+  "city_food_2608": {
+    "as_of": "2026-08-31",
+    "bytes": 12160,
+    "dataset_page": "https://data.city.fukuyama.hiroshima.jp/dataset/licensed_food",
+    "file": "20268.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-05T06:03:07+00:00",
+    "rows": 67,
+    "sha256": "e1261c49f9b0554f92224220683f0f4da0e69ed7e1974807792aab831315d839",
+    "url": "https://data.city.fukuyama.hiroshima.jp/dataset/61f415c5-88f7-46d0-8ada-4bb8855685a0/resource/b0a4c098-d6b3-4a19-b5aa-adee03efd7bc/download/20268.csv"
+  },
+  "city_laundry": {
+    "as_of": "2026-08-31",
+    "bytes": 34962,
+    "dataset_page": "https://data.city.fukuyama.hiroshima.jp/dataset/licensed_env",
+    "file": "kuri-ninngu.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-05T06:03:13+00:00",
+    "rows": 173,
+    "sha256": "54174b0741b532ef8d4c604628ca3ba39d400036597d30875551894165cdcd78",
+    "url": "https://data.city.fukuyama.hiroshima.jp/dataset/f6242af5-08f2-458b-a55c-452db7a8c967/resource/bd8b8871-e656-4450-ac0b-92614eeedb3f/download/kuri-ninngu.csv"
+  },
+  "city_mhlw": {
+    "as_of": null,
+    "bytes": 2981068,
+    "dataset_page": "https://i2fas.mhlw.go.jp/",
+    "file": "34207_food_business_all.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-05T06:03:16+00:00",
+    "rows": 8573,
+    "sha256": "d6740358aeb6ebc2dbc4e34f179d9ad4360644bd30be549e75586033267fd6a4",
+    "url": "https://i2fas.mhlw.go.jp/faspub/page/opendatadownload.jsp?param=34207_food_business_all.csv"
+  },
+  "isj_34207_block": {
+    "bytes": 716683,
+    "file": "34207-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-05T06:03:19+00:00",
+    "sha256": "ae3915865fb5056c244b75789afd05b130aa04faa78ae50d3cc8963f9f4a79be",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/34207-24.0a.zip"
+  },
+  "isj_34207_chome": {
+    "bytes": 11644,
+    "file": "34207-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-05T06:03:22+00:00",
+    "sha256": "465b8db784f0040575ce309d0d2d2afd45ced20a9b2ba86d056117f8876ca581",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/34207-19.0b.zip"
+  },
+  "n02": {
+    "bytes": 14903774,
+    "file": "data/japan/raw/N02-25_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-30T23:47:52+00:00",
+    "sha256": "aaf76af133b2e771e538fabc4646d2e443dc1d5a67b221382a28d744e706cc9f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip"
+  },
+  "n03": {
+    "bytes": 7088421,
+    "file": "data/japan/raw/N03-20250101_34_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-29T07:40:04+00:00",
+    "sha256": "3ca6dd943fc06c150938d6b750c885d44feac787c0d18bb650046c3f222256da",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_34_GML.zip"
+  },
+  "osm_station_names": {
+    "bytes": 16768,
+    "elements": 27,
+    "file": "osm_station_names.json",
+    "host": "overpass.kumi.systems",
+    "osm_base": "2026-05-31T22:37:44Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](34.3,133.2,34.72,133.48);way[\"railway\"=\"station\"](34.3,133.2,34.72,133.48););out tags center;",
+    "retrieved": "2026-10-07T19:35:06+00:00",
+    "sha256": "2315da1647059c73b40c278acfdeedf01efb3d29d82541bb829dcff300815cb5"
+  }
+}
