@@ -636,7 +636,12 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=()):
             # whatever their designation; Kyoto's 愛宕山ホテル跡, a hotel's
             # ruins, stays (2026-10-08).
             # A business word may pass on a Wikipedia article (a landmark
-            # building, reviewed by name); a home word may not.
+            # building, reviewed by name); a home word may not. PRECEDENT
+            # (owner, 2026-10-08, Seattle's Panama Hotel): a notable historic
+            # building that still houses the business its name carries is
+            # kept, as a historic site, the building and not the business; one
+            # tagged as the business itself (amenity=casino, tourism=hotel)
+            # stays out (_commercial). Homes with an article stay out.
             word = leak_word(names, local)
             home_word = word in {w for c in (["en", *local]) for w in HOME_WORDS.get(c, ())}
             if word and not (

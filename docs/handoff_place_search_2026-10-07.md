@@ -155,6 +155,14 @@ on its own before removing the worktree (`docs/session_roles.md`, step 1).
    in `config.PLACE_DROPPED` by OSM id with why (Sydney's "Meriton" park,
    Seattle's "Ride Store"). The read that paid off: every landmark and place
    whose name holds no obvious place word (park, church, museum ...), whole.
+   **Precedents for discard calls (owner, 2026-10-08):** a notable historic
+   building (a Wikipedia article) that still houses the business its name
+   carries is KEPT as a historic site, the building and not the business
+   (Seattle's Panama Hotel, reviewed in `PLACE_REVIEWED` with that note); one
+   OSM tags as the business itself stays out (Sydney's The Star,
+   amenity=casino). A home with a Wikipedia article stays OUT ("homes with
+   wikipedia: skip"; Chicago's Ida B. Wells-Barnett House, Kyoto's
+   木戸孝允旧邸). Recommend from these; bring a departure to the owner.
 7. **Test the searches the city is known for**: its intersection style ("5th
    and Pike" in a US grid), its station names, its landmarks, in each listed
    language.
