@@ -9,6 +9,31 @@ app is its own project, this repo keeps the basemap switch, its hosting and an
 export contract (owner, relayed by Cleanup). Nothing here is landed, pushed
 or published; every proposal waits for the owner.
 
+### 2026-10-07 - Two travel versions for the pilot, "full" and "half"; no business or ring layers in the full one (owner)
+
+- **The owner's split, both piloted off the live site:**
+  - **Full travel version, offline only.** The Travel basemap with stations,
+    lines, labels, the line highlight and the OSM credit, and no business
+    data at all. It is the reference handed to the travel app, and the
+    version that warrants the out-of-scope call for this website.
+  - **Half travel version, website scope.** The basemap changes and the
+    business pins, the heat and the rings default to OFF; all stay in the
+    layer menu.
+- **Hard line (owner): a full travel version on the new basemap never lists
+  concentric rings or a business heat layer as layer-menu items**, and
+  draws no business pins. Messaged to the app project the same day.
+- **Recommended implementation** (for the owner to confirm before code):
+  the full version takes NO business data at all, so the register data
+  cannot reach its HTML by any path: `render_heatmap(businesses=None)` (or
+  a flag that refuses businesses) skips the heat, the rings, the pins and
+  the legend's business section, and a check refuses a full-version file
+  that contains a ring, heat or business layer name. The half version is
+  the switch plus a few lines of map script: picking "Travel" unchecks the
+  pins and heat (rings are already off by default, owner 2026-09-21) and
+  the legend shows lines only; picking "Business" restores the business
+  defaults. The half version's page still carries the register data, so
+  its notices and obligations are unchanged.
+
 ### 2026-10-07 - The open basemap works offline; three licence reads; repeat visits favour it; "Business" and "Travel" (owner)
 
 - **Owner decisions, 2026-10-07.** The switch is B (Standard default), D (Open
