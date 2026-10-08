@@ -139,6 +139,13 @@ or published; every proposal waits for the owner.
   stops at the stations' extent plus 10 km), and per-line station lists in
   both directions (north/southbound or east/westbound), which need their
   own design and data work in the app.
+- **The label-language switch, two refinements for the app (owner,
+  2026-10-08)**, after Mendoza on a phone showed no visible change (few of
+  its features have an English name in OSM, so English falls back to the
+  Spanish name): hide the switch in a city where few labels differ between
+  the two languages (the app measures it per pack and sets the threshold),
+  and let the switch change the station names as well as the basemap's (the
+  export's `stations[].names`). Both in the handoff.
 - **Station tooltips list the lines served (owner, 2026-10-08)**, each with
   its swatch and legend name; on a phone, the site's fixed bottom-left
   panel and selection ring, which the full version already carried (the
