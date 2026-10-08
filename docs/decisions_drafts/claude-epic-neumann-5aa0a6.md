@@ -9,6 +9,43 @@ app is its own project, this repo keeps the basemap switch, its hosting and an
 export contract (owner, relayed by Cleanup). Nothing here is landed, pushed
 or published; every proposal waits for the owner.
 
+### 2026-10-07 - The pilot adds a self-built pack test (owner)
+
+- **Why.** protomaps.com's Terms of Use forbid "automated means to access
+  the Site" without written permission, while Protomaps' guide instructs
+  scripted extracts from build.protomaps.com. The travel app's owner chose
+  to build its packs from OSM with Protomaps' open-source builder. This
+  repo's prototyping so far is a few manual, owner-approved extracts, the
+  use Protomaps documents, and continues on that basis; a SCHEDULED build
+  of 170 cities would be automated. Asking Protomaps is outreach, which
+  comes after the methods this project controls (owner's standing rule), so
+  the pilot tests building the packs here (owner, 2026-10-07). If it works,
+  the site and the app can share one build, which also keeps their figures
+  comparable.
+- **What the builder needs** (read from `tiles/src/main/java/.../Basemap.java`
+  and `pom.xml` in github.com/protomaps/basemaps, 2026-10-07; sizes by HEAD
+  request):
+
+  | Input | Host | Size | Licence read |
+  |---|---|---|---|
+  | OSM extract (`--area`, Geofabrik name, or a local file) | download.geofabrik.de (Argentina: `south-america/argentina-latest.osm.pbf`) | 432 MB | running |
+  | Water polygons, land polygons | osmdata.openstreetmap.de | 931 MB + 952 MB | running |
+  | Daylight landcover | r2-public.protomaps.com (a Protomaps host) | 36 MB | running; the original publisher's copy is asked for, and dropping the layer also drops ESA's credit |
+  | QRank (POI ranking) | qrank.toolforge.org | 106 MB | running (recorded CC0 from its README) |
+  | pgf-encoding (script names) | wipfli.github.io | 0.8 MB | running |
+  | Natural Earth | naciscdn.org | 446 MB | done: public domain, no credit needed |
+  | Java 21 JDK (Eclipse Temurin 21.0.12.1, portable zip, no install) | github.com/adoptium | 205 MB | a tool, not shipped |
+  | Maven 3.9.16 (portable zip) | dlcdn.apache.org | 9 MB | a tool, not shipped |
+
+  About 3.1 GB in all, into the scratchpad or a gitignored `data/` folder,
+  never committed. The Java build runs through `scripts/heavy_job.py` with
+  an estimated peak, since no Java run has been measured here.
+- **What the test measures:** that a self-built Mendoza pack draws the same
+  map as the downloaded one (same style, same view; screenshot and rendered
+  feature counts), its size against 4.13 MB, the build's time and peak
+  memory, and whether the build runs without the Protomaps-hosted landcover
+  file.
+
 ### 2026-10-07 - The half Travel version built and tested on Mendoza; macro-map Travel tooltips (owner)
 
 - **Built (commit cc1a3b04, branch only).** With `open_basemap`, the base
