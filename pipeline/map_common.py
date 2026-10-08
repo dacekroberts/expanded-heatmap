@@ -1992,6 +1992,10 @@ STATION_LINK_M = 300
 STATION_DUP_M = 1500
 _PLACE_SEARCH_TEMPLATE = r"""
 <style>
+    /* The two-finger notice above the open search box (Leaflet's controls
+       sit at 1000): on a phone the box covered half of it (owner's iPhone,
+       2026-10-08). The notice is brief and lets touches through. */
+    .hm-touch-hint { z-index: 1100; }
     .hm-search { background: @@LIGHT_SURFACE@@; color: @@LIGHT_TEXT@@;
         border: 2px solid rgba(0,0,0,0.2); border-radius: 4px; font: 13px @@FONT_STACK@@; }
     .hm-search-row { display: flex; align-items: center; }

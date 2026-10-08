@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/kyoto.json",
-  "places": 11806,
+  "places": 11802,
   "data_retrieved": "2026-10-07",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.74,
+      "en": 0.741,
       "ja": 0.998
     },
     "list_share": 0.5,

@@ -385,12 +385,30 @@ NEAR_DUP_M = {"place": 1500, "landmark": 300}
 EXTENT_PAD = 0.005
 
 
+# Names that are no name: placeholders, error values, a number alone (owner,
+# 2026-10-08: "exclude error search terms like # or !ERROR!"). Found in the
+# sample: Seattle's artwork "Untitled" and street "3816-3852" (an address
+# range), Chicago's streets "47" and "315, 379, 383, 384 & 385" (ramp and
+# route numbers), Kyoto's landmarks "1080" and "7105". A name like this is
+# dropped and the object keeps its others; with none left, it goes.
+JUNK_NAMES = {"untitled", "unnamed", "unknown", "noname", "no name", "nan", "null", "none",
+              "undefined", "n/a", "na", "error", "test", "tbd", "todo", "fixme", "?"}
+JUNK_MARKS = ("#n/a", "#ref", "#value", "#div/0", "#name?", "#num", "#null", "!error",
+              chr(0xFFFD))  # the replacement character, a broken decode
+
+
+def junk_name(name):
+    low = name.strip().lower()
+    return (not any(c.isalpha() for c in low) or low.strip("!?.# ") in JUNK_NAMES
+            or any(m in low for m in JUNK_MARKS))
+
+
 def _names(tags, name_tags):
     seen, out = set(), []
     for k in name_tags:
         for v in (tags.get(k) or "").split(";"):
             v = v.strip()
-            if v and v not in seen:
+            if v and v not in seen and not junk_name(v):
                 seen.add(v)
                 out.append(v)
     return out

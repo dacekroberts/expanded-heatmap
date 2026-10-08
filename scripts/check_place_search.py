@@ -33,6 +33,8 @@ index step measures each language's share of the places
      LICENSE carves app/static/places/ out, and docs/data_sources.md has the
      row. A field from any other source would bring that source under ODbL
      (4.4(d)).
+  F. No name is a placeholder, an error value or a number alone ("Untitled",
+     "#N/A", "47"; place_index.junk_name), so none is ever suggested.
   A and D apply to the intersections file too (app/static/places/crossings/,
      since 2026-10-08): the index names it under its current hash, and it
      holds only [lat, lon, street, street] rows and the index's licence.
@@ -119,6 +121,15 @@ def check_crossings(slug, index):
     return problems
 
 
+def check_junk(index):
+    """F: no name in the index is a placeholder, an error value or a number
+    alone (place_index.junk_name; owner, 2026-10-08), so none can be
+    suggested."""
+    bad = sorted({n for r in index.get("rows", []) for n in [r[3]] + (r[4].split("|") if r[4] else [])
+                  if place_index.junk_name(n)})
+    return [f"F: {len(bad)} junk name(s) in the index, e.g. {bad[:3]}"] if bad else []
+
+
 def check_leaks(slug, index, reviewed=None):
     """E: leak words, against the city's reviewed list."""
     if reviewed is None:
@@ -180,6 +191,7 @@ def main():
         summary = json.loads(sp.read_text(encoding="utf-8")) if sp.exists() else None
         p += check_index(slug, index, summary)
         p += check_crossings(slug, index)
+        p += check_junk(index)
         p += check_leaks(slug, index)
     for page in sorted((ROOT / "app" / "pages").glob("*.py")):
         if BULLET in page.read_text(encoding="utf-8"):
@@ -243,7 +255,13 @@ def selftest():
     got = len(check_crossings("x", dict(base, crossings="/app/static/places/y.json?v=0")))
     ok += got == 1
     print(f"  {'ok ' if got == 1 else 'BAD'} an index naming another file as its crossings: {got} problem(s)")
-    total = len(cases) + 1 + len(leak_cases) + 1
+    junk_cases = [("an error value and a number alone", [[0, 1, 2, "#N/A", "47", 0]], 1),
+                  ("a real name with a number", [[0, 1, 2, "5th Avenue", "", 0]], 0)]
+    for label, rows, want in junk_cases:
+        got = len(check_junk(dict(base, rows=rows)))
+        ok += got == want
+        print(f"  {'ok ' if got == want else 'BAD'} {label}: {got} problem(s)")
+    total = len(cases) + 1 + len(leak_cases) + 1 + len(junk_cases)
     print(f"{ok} of {total} cases behaved as intended.")
     return 0 if ok == total else 1
 
