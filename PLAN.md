@@ -22,14 +22,39 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 
 ## Now
 
-- [ ] **The large-scale review is held (owner, 2026-10-07)** until four ideas
-  are settled (DECISIONS, "Four ideas assessed before the large review"):
-  back links beside "Global View"; one pin colour per meaning (olive food
-  shops, violet shops and services with a refuse-both check and a teal
-  backup); place search (a one-city pilot); an open basemap switch and a
-  transit-first offline app (pack sizes measured). Open for the owner:
-  Ottawa's food layer colour; the legend wording for the mostly-food retail
-  slices; which sessions to open.
+- [x] **The large review LANDED 2026-10-07 (35d43c4a)**: 206 cities (36 new,
+  3 renamed "(Regional)"), the Europe split and Japan's 13 views, one pin
+  colour per meaning, back links and the in-map region button, glitched pin
+  names shown as their classification, every map re-rendered; four lanes
+  reviewed it (`docs/review_lanes_2026-10-07.md`), the app was rebooted and
+  Uji checked live. Drafts to fold when the owner hands them off:
+  worktree-abroad-batch, worktree-japan-east-1, worktree-japan-kansai-1,
+  worktree-japan-regional-1, pin-colours-backlinks, rb-mapconfig, rb-prose,
+  review-batch-2026-10-07. Owner: the iPhone check.
+
+- [ ] **Next landing (owner, 2026-10-07):**
+  - **One colour per line across maps, a HARD LINE** (owner): a site-wide
+    line registry keyed by operator and line (Japan's N02 operator and line
+    ids), every map that draws a line using its one colour, other lines
+    reassigned to fit; a check that fails when a line has two colours. Seen:
+    JR Kobe in 5 colours across Kansai, JR Sanyo 4, Seibu Haijima cyan and
+    mauve, Nishinomiya's JR Takarazuka. Open for the owner: whether
+    different lines on neighbouring maps of one country must differ too
+    (Higashimurayama's Tamako and Tokorozawa's Leo Liner share #A06030).
+  - **The two-level region selector** (owner): broad views in the first row,
+    a view's closer views in a second row only when it has them; `?region=`
+    sets both (lane 3, O2: 33 options, 665 px at 375).
+  - Phase 2 Japanese cities (East-2, Kansai-2, Regional-2) and Cluj-Napoca,
+    on the owner's go (Cluj-Napoca waits on call 215, the placement bar).
+  - Place search, if the Kyoto pilot reports well.
+  - Follow-ups: Ostrava's Tram 14 label 2 px under the button row at 854 (the
+    button row is not an obstacle in `_layout_labels`); Osaka's Nagahori,
+    JR Yumesaki and Nankai Shiomibashi labels overlapping at 375; a full UK
+    line-colour search (Piccadilly can be blue again); about 25 older
+    notices that write the day first; about 30 configs still claiming "45
+    from every pin" from before olive and violet; East-1's drafts "ten"
+    blank names to correct at the fold; caterers that also name a counter
+    form (Fukushima's 161), the shared FORM_RULES question.
 
 - [x] **Desktop leftovers fixed 2026-10-04** (A and B-lite; DECISIONS, "San
   Diego, San Francisco and Los Angeles state or fix their lean").
@@ -40,24 +65,9 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 - [x] **San Diego, San Francisco and Los Angeles applied 2026-10-04 (owner;
   DECISIONS).** The swap meet and the parcel refresh followed the same night.
 
-- [ ] **Macro-map regions for the ranked 93 (owner, 2026-10-04; DECISIONS,
-  "Region views can compete" and "Europe West and Europe East").** The
-  competition (`COMPETING_REGIONS`, empty; the staged names' widths) is on
-  master since 2026-10-05, with no visible change. **Europe West and Europe
-  East (Greece east), the Germany and Benelux views, and every country's top
-  city labelled first are built on branch `europe-split`** (owner, calls 194,
-  195, 197, 2026-10-07; DECISIONS, "Europe splits West and East"), based on
-  Abroad's tip: it lands at review time after Abroad's batch, merging master
-  first, with a reboot and a `map-chrome` deploy-verify. **Japan's views are
-  built on branch `japan-regions`** (owner, calls 197-198; DECISIONS,
-  "Japan's macro-map views"), carrying `europe-split` (Copenhagen (Regional)
-  merged into both): the eight regions with Osaka, Tokyo, Saitama, Chiba
-  and Hyogo as prefecture views, and the nesting test. It lands at the phase
-  1 review time after East-1, Kansai-1 and Regional-1, merging master first
-  and re-running `stress_overview.py --planned 2`. Both branches also drop
-  "(Regional)" from map labels, with Benelux's "City of Brussels" (owner,
-  2026-10-07; DECISIONS, "Map labels drop"). Still to come: Brăila and
-  Galați, Nagakute and Nisshin, Itami and Toyonaka into `KNOWN_STACKED`.
+- [ ] **Macro-map regions:** the Europe split and Japan's views landed with
+  the review (2026-10-07). Still to come: Brăila and Galați, Nagakute and
+  Nisshin, Itami and Toyonaka into `KNOWN_STACKED`.
 
 - [ ] **Review time: the Japanese pages' name-rule bullet gains the sign rule**
   (owner, 2026-10-06; DECISIONS, "the name rule's version 2"). Proposal, every
