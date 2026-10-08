@@ -70,6 +70,13 @@ Detail files: [japan](docs/plan_detail/japan.md),
   possibly the basemap, and the site infrastructure they need. The wave 2
   builds above wait for the reset.
 
+- [ ] **A site-wide junk-name pass once the final batch lands** (owner,
+  2026-10-08, via the place-search pilot): no dot shows an error value or
+  placeholder ("#N/A", "nan", "None", "Untitled", U+FFFD, a name with no
+  letter). Reuse `pipeline/place_index.junk_name` (place-search branch) and
+  keep it as a standing check in `check_all`; `map_common.glitched_name`
+  already hides "?"-only names (legend-dot-georgia).
+
 - [ ] **A site-wide code audit after the reset and the final city builds**
   (owner, 2026-10-08); scope and lanes set with the owner first. `docs/plan_detail/process_and_tooling.md`, "A
   site-wide code audit".
