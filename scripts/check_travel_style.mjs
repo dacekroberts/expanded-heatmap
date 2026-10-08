@@ -122,6 +122,13 @@ for (const flavor of ["light", "dark"]) {
           } catch (e) { fail(`${tag}: ${l.id}: ${e.message}`); }
         }
       }
+      for (const l of layers) {
+        const uses = JSON.stringify([(l.layout || {})["icon-image"], (l.paint || {})["fill-pattern"],
+                                     (l.paint || {})["line-pattern"]]);
+        if (uses !== "[null,null,null]" && uses !== "[]" && !/^\[(null,?)*\]$/.test(uses)) {
+          fail(`${tag}: layer ${l.id} uses a sprite image; the Travel style ships none`);
+        }
+      }
       const kept = world ? keptSamples.filter((s) => s.layer === "boundaries" && s.props.kind === "country") : keptSamples;
       for (const s of kept) {
         if (!layers.some((l) => draws(l, s))) fail(`${tag}: nothing draws kept ${s.layer} ${JSON.stringify(s.props)}`);

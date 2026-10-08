@@ -3141,7 +3141,6 @@ class OpenBasemap(folium.map.Layer):
                 return {
                     version: 8,
                     glyphs: {{ (this.assets ~ "/fonts/{fontstack}/{range}.pbf")|tojson }},
-                    sprite: {{ (this.assets ~ "/sprites/v4/light")|tojson }},
                     sources: {protomaps: {
                         type: "vector",
                         url: "pmtiles://" + {{ this.pmtiles_url|tojson }}

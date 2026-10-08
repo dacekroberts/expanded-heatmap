@@ -79,7 +79,10 @@ var travelStyle = (function () {
   // Dropped outright: land cover (an empty stand-in in self-built packs),
   // points of interest, road shields and the basemap's own rail (the
   // site's lines are drawn over it).
-  var DROP = ["landcover", "pois", "roads_shields", "roads_rail"];
+  // One-way arrows too: driving detail, and with the town dot and capital
+  // star stripped below they were the last sprite icons, so the Travel
+  // style needs no sprite sheet and no icon licence (owner, 2026-10-08).
+  var DROP = ["landcover", "pois", "roads_shields", "roads_rail", "roads_oneway"];
   // Road details the rules drop, matched on kind_detail (Roads.java copies
   // OSM's service=* there).
   var DROP_DETAIL = ["service", "driveway", "parking_aisle", "alley", "track",
@@ -270,6 +273,11 @@ var travelStyle = (function () {
     });
     // Last, so no layer added above or by a later edit escapes it.
     out = out.filter(function (l) { return HIDDEN.dropLayers.indexOf(l["source-layer"]) < 0; });
+    // No sprite images anywhere (places_locality's town dot and capital
+    // star below z8 are the only ones left after DROP).
+    out.forEach(function (l) {
+      if (l.layout) delete l.layout["icon-image"];
+    });
     out.forEach(function (l) {
       var c = hideClause(l);
       if (c) andClause(l, c[0], c[1]);
