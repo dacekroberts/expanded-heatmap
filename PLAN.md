@@ -55,6 +55,18 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     blank names to correct at the fold; caterers that also name a counter
     form (Fukushima's 161), the shared FORM_RULES question.
 
+- [ ] **This week (to the 2026-10-11 reset): refinements, not builds** (owner,
+  2026-10-08, weekly near its ceiling; the 10% check-ins ended). Place search,
+  possibly the basemap, and the site infrastructure they need. The wave 2
+  builds above wait for the reset.
+
+- [ ] **A site-wide code audit after the reset and the final city builds**
+  (owner, 2026-10-08). The last whole-project audit was 2026-09-21 at four
+  cities (`docs/passover_opus5.md`, sections 9 and D); the shared code has
+  grown since (`pipeline/map_common.py`, `pipeline/line_registry.py`,
+  `pipeline/taxonomies/`, the national step modules, `app/`). Scope and lanes
+  to be set with the owner before it starts (`docs/review_lane_kit.md`).
+
 - [x] **Desktop leftovers fixed 2026-10-04** (A and B-lite; DECISIONS, "San
   Diego, San Francisco and Los Angeles state or fix their lean").
 
