@@ -313,3 +313,42 @@ BARCELONA_BBOX = {
 }
 BOUNDARY_AREA_KM2 = 101.4
 BOUNDARY_AREA_TOLERANCE_KM2 = 4.0
+
+# --- Place search (sample batch 2a, 2026-10-08) -------------------------------
+
+# OSM's places inside the municipality of Barcelona (relation 347950, admin_level 8; the
+# province, 349035, shares the name; looked up 2026-10-08),
+# by pipeline/place_index_fetch.py (two queries), indexed by
+# step2b_place_index.py (DECISIONS.md "Four ideas assessed", item 3); an area
+# id is 3600000000 plus the relation's.
+PLACE_AREA = "(id:3600347950)"
+# NEW file names: data/ is shared by every worktree.
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-08.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-08.json"
+# The local language(s) of OSM's names here: Catalan, OSM's `name` here.
+# Spanish was declared too and measured by its own name:es tag: 0.8% of the
+# index's rows (0.5% of all named objects, 0.1% of streets; 2026-10-08), so
+# it is not declared: under the 90% floor it stops the step, and under 50% the
+# page could not name it. The search still takes Spanish street words in a
+# Catalan city (map_common, LANG_WORDS "ca": "Calle Balmes" finds Carrer de
+# Balmes). Batch 2a, docs/decisions_drafts/place-search.md.
+PLACE_LANGUAGES = ("ca",)
+PLACE_FOLD = None
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+PLACE_REVIEWED = {
+    "Porta Gaudí de la Facultat de Farmàcia i Ciències de l'Alimentació":
+        "Gaudí's gate at the university's pharmacy faculty, a monument ('farmàcia' is the faculty)",
+    "Torre de les aigües de l'antiga fàbrica de Catalana de Gas":
+        "the water tower of a former gas works, an attraction (Wikipedia; 'company' is in its English name)",
+}
+# OSM objects a reading by eye found to be a business or a home that no rule
+# in place_index.py catches, each with why (place_index.build, `dropped`).
+# Batch 2a (2026-10-08): the Camp Nou's four stands, mapped as place=locality,
+# would list as neighbourhoods.
+PLACE_DROPPED = {
+    "node/6882372015": "'Tribuna', a stand of the Camp Nou mapped as place=locality",
+    "node/6882372016": "'Lateral', a stand of the Camp Nou mapped as place=locality",
+    "node/6882372017": "'Gol Nord', a stand of the Camp Nou mapped as place=locality",
+    "node/6882372018": "'Gol Sud', a stand of the Camp Nou mapped as place=locality",
+}

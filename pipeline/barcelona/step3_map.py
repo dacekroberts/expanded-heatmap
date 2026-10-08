@@ -21,6 +21,7 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
+from pipeline import place_index  # noqa: E402
 from pipeline.map_common import load_osm_line_shapes, render_heatmap   # noqa: E402
 from pipeline.barcelona.step1_stations import canonical_ref, load_boundary  # noqa: E402
 from pipeline.barcelona.config import (                                # noqa: E402
@@ -94,6 +95,9 @@ def main():
         ring_edges_meters=RING_EDGES_METERS,
         ring_labels=RING_LABELS,
         label_focus=load_boundary(),
+        # Place search (sample batch 2a, 2026-10-08): the index step2b_place_index.py
+        # writes, served from the app's static folder under its content hash.
+        place_index_url=place_index.index_url("barcelona"),
     )
 
 

@@ -2107,9 +2107,16 @@ _PLACE_SEARCH_TEMPLATE = r"""
              lead: [], station: [], abbr: {}}
     };
     var PAIR_SPLIT = /\s+(?:and|at|x|y)\s+|\s*[&\/@]\s*/;
+    // A language whose city is also searched in another: Barcelona's names are
+    // Catalan and carry Spanish on under 1% of rows, but a reader may type
+    // "Calle Balmes" (batch 2a, 2026-10-08).
+    var ALSO = {ca: ["es"]};
     function useLanguages(codes) {
         var joins = ["and", "at", "x", "y"];
-        (codes || []).forEach(function (c) {
+        codes = (codes || []).slice();
+        codes.slice().forEach(function (c) { (ALSO[c] || []).forEach(function (a) {
+            if (codes.indexOf(a) < 0) codes.push(a); }); });
+        codes.forEach(function (c) {
             var w = LANG_WORDS[c];
             if (!w) return;
             w.join.forEach(function (x) { if (joins.indexOf(x) < 0) joins.push(x); STOP[x] = 1; });

@@ -350,7 +350,12 @@ WAY_WORDS = {
            "terrasse", "croissant", "carré", "côte", "carrefour", "cour", "route", "circuit"),
     "ca": ("carrer", "avinguda", "passeig", "plaça", "rambla", "travessera", "via", "camí",
            "passatge", "pont", "ronda", "baixada", "pujada", "costa", "escales", "placeta",
-           "jardins", "corriol", "sender"),
+           "jardins", "corriol", "sender",
+           # Barcelona's named footways (2026-10-08): roads, squares, quays, stream-beds
+           # turned streets, viaducts and shortcuts.
+           "carretera", "pla", "moll", "riera", "torrent", "rotonda", "viaducte", "drecera",
+           "passadís", "carreró", "travessia", "pas", "túnel", "davallada", "passarel·la",
+           "pasarel·la"),
     "es": ("calle", "avenida", "paseo", "plaza", "camino", "pasaje", "puente", "ronda", "vía",
            "escaleras", "sendero"),
     "cs": ("ulice", "třída", "náměstí", "nábřeží", "most", "lávka", "cesta", "stezka", "schody",
@@ -382,7 +387,8 @@ RAIL_MODES = ("train", "subway", "light_rail", "tram", "monorail", "funicular")
 OTHER_MODES = ("bus", "ferry", "trolleybus", "coach")
 # A commercial building is a business unless notable: Sydney's numbered
 # "Bay 0" to "Bay 15", historic=building on building=commercial (2026-10-08).
-COMMERCIAL_BUILDINGS = {"commercial", "retail", "office"}
+# A hotel building likewise (Barcelona's Casa Cambó, building=hotel, batch 2a).
+COMMERCIAL_BUILDINGS = {"commercial", "retail", "office", "hotel"}
 # historic=* values that are clutter at a search box (wayside shrines and
 # stones number in the hundreds and are named after their saint or deity).
 SKIP_HISTORIC = {"wayside_shrine", "wayside_cross", "boundary_stone", "milestone",
@@ -437,7 +443,11 @@ def _public_home(tags):
     Canada's Register of Historic Places reached wikidata in bulk, and
     Chicago's landmark apartment buildings have articles, and each is still
     somebody's home (2026-10-08)."""
-    return bool(tags.get("tourism") or tags.get("museum"))
+    # A bare tourism=yes is no opening: Barcelona's Casa Comalat, an apartment
+    # building, carries it with access=private (batch 2a, 2026-10-08). Private
+    # access alone is not tested here: Brussels' Royal Palace carries it, and
+    # opens to visitors each summer.
+    return bool(tags.get("tourism") not in (None, "yes") or tags.get("museum"))
 # Never place=isolated_dwelling or farm: a single home (Kyoto's one was an
 # apartment building, 2026-10-07).
 PLACE_VALUES = {"city", "borough", "suburb", "quarter", "neighbourhood", "village",
@@ -537,8 +547,11 @@ def _r(x):
 def _commercial(tags):
     if any(k in tags for k in COMMERCIAL_KEYS):
         return True
+    # A ruin is no business, whatever building it was (Seattle's Coal Creek
+    # Hotel ruins, building=hotel, reviewed).
     if tags.get("building") in COMMERCIAL_BUILDINGS and not (
-            tags.get("wikidata") or tags.get("wikipedia") or tags.get("heritage")):
+            tags.get("wikidata") or tags.get("wikipedia") or tags.get("heritage")
+            or tags.get("historic") in ("ruins", "archaeological_site")):
         return True
     return any(tags.get(k) in vals for k, vals in COMMERCIAL_VALUES.items())
 
