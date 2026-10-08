@@ -74,6 +74,33 @@ or published; every proposal waits for the owner.
   domain comparison (needs the owner's Cloudflare account and the
   Cloudflare terms read first).
 
+### 2026-10-08 - Zoom 14 against zoom 15: half the size again, little a rider would miss (measured, owner to decide)
+
+- **Built** trimmed packs to zoom 14 (`--maxzoom=14 --travel_trim=true`,
+  `build_z14.sh`; 2 min 10 s to 2 min 31 s, peaks 3.06 to 3.16 GB) and
+  compared them with the trimmed zoom-15 packs, Travel style, on a 375 px
+  phone at map zooms 14.5, 15.5, 16.5 and 17.5 (past a pack's top zoom
+  MapLibre enlarges the last tiles):
+
+  | | Zoom-15 pack | Zoom-14 pack | Smaller | Pixels differing at 14.5 / 15.5 / 16.5 / 17.5 |
+  |---|---|---|---|---|
+  | Mendoza | 2,836,140 | 1,414,249 | 50.1% | 0.23% / 2.16% / 1.99% / 1.04% |
+  | Avignon | 8,431,735 | 3,418,524 | 59.5% | 0.06% / 2.91% / 1.92% / 1.68% |
+  | Florence | 12,857,973 | 6,078,083 | 52.7% | 0.14% / 1.79% / 1.71% / 1.43% |
+
+  Against the untrimmed zoom-15 packs that is 64-72% smaller in all
+  (Mendoza 3.89 to 1.41 MB, Avignon 12.1 to 3.4 MB, Florence 18.1 to 6.1
+  MB). No errors in 24 views.
+- **What differs, by eye** (sheets `shots/zoom/zoom_sheet_<city>.png`):
+  buildings come as merged blocks rather than single outlines (the app's
+  rules already chose merged blocks); small features drop out (swimming
+  pools, tiny land-use patches); street names sit in slightly different
+  places, a few more of them shown. Roads, parks, water, platforms and
+  every label class stay.
+- **Recommendation: stop the packs at zoom 14.** Download size is the
+  owner's priority, the differences are detail a transit rider does not
+  read, and the app's rules leaned to a z14 stop. Owner to decide.
+
 ### 2026-10-08 - The build-time trim: packs 27-30% smaller, the Travel map unchanged to the pixel (built and measured)
 
 - **What a pack carries that the Travel style never draws**, measured by
