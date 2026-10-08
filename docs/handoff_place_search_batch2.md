@@ -41,7 +41,7 @@ what is left into `docs/handoff_place_search_2026-10-07.md`.
 ## Where things stand (2026-10-08)
 
 - **2a BUILT; the owner answered its questions and called 2b** (Montréal,
-  Barcelona, Marseille, Prague, Brussels): the drafts file's four newest
+  Barcelona, Marseille, Prague, Brussels): the drafts file's three newest
   entries hold every call, the answers (a dated keep-list of visitable former
   homes, `PLACE_VISITABLE` with check G; English never forced; squares as
   landmarks, duplicates dropped; notable places of worship back in). What 2b
@@ -255,7 +255,7 @@ owner's word, in a fresh session, from this prompt.
 > `claude/charming-lumiere-930853` (nothing pushed; nothing lands on master;
 > published wording goes to the owner first). Read, in order:
 > `docs/handoff_place_search_batch2.md` (its 2b section, and what 2a changed,
-> in the drafts file's four 2026-10-08 entries from "batch 2a" up),
+> in the drafts file's three newest entries, from "batch 2a" up),
 > `docs/handoff_place_search_2026-10-07.md`
 > and the newest entries of `docs/decisions_drafts/place-search.md`. Build
 > place search for Hong Kong, Seoul, Busan and Tbilisi as the 2b section
