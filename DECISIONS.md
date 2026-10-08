@@ -20,13 +20,14 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**112 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**113 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-08**
 
 - [Georgia joins Europe East, and West Asia, a one-city view, is retired (owner; branch legend-dot-georgia, held for review time)](#2026-10-08---georgia-joins-europe-east-and-west-asia-a-one-city-view-is-retired-owner-branch-legend-dot-georgia-held-for-review-time)
 - [Legend dots never shrink, and are 10 px (owner's iPhone check; branch legend-dot-georgia, held for review time)](#2026-10-08---legend-dots-never-shrink-and-are-10-px-owners-iphone-check-branch-legend-dot-georgia-held-for-review-time)
 - [The owner's iPhone check of the 2026-10-07 and 2026-10-08 landings passed](#2026-10-08---the-owners-iphone-check-of-the-2026-10-07-and-2026-10-08-landings-passed)
+- [Analytics' four map issues fixed: lost letters in full-width and at a name's start, Saitama's layer codes, Ōita's lost numeral, and Ōita's masked names stated (owner; branch legend-dot-georgia, held for review time)](#2026-10-08---analytics-four-map-issues-fixed-lost-letters-in-full-width-and-at-a-names-start-saitamas-layer-codes-ōitas-lost-numeral-and-ōitas-masked-names-stated-owner-branch-legend-dot-georgia-held-for-review-time)
 
 **2026-10-07**
 
@@ -4573,3 +4574,36 @@ per-city shape of their siblings.
   phone's region dropdowns opening a keyboard on an editable search box
   (`filter_mode=None` on both `st.selectbox` calls in `app/Overview.py`;
   typed text no longer filters, a choice still sets `?region=`).
+
+### 2026-10-08 - Analytics' four map issues fixed: lost letters in full-width and at a name's start, Saitama's layer codes, Ōita's lost numeral, and Ōita's masked names stated (owner; branch legend-dot-georgia, held for review time)
+
+- **Found (Analytics, registering the 206 cities at 5507a4cb):** the
+  lost-letter rule had no full-width Latin, so "Ｐ?ｔｉｓｓｅｒｉｅ" rendered
+  (Higashiyamato 6, Tachikawa 4, Ichinomiya 3; one Tachikawa label was
+  "?"); Saitama's new-law food types showed their layer code and padding as
+  the pin category ("01:飲食店営業 ", 1,127 to 1,780 rows in each of Ageo
+  (Regional), Kasukabe, Sōka and Tokorozawa), withheld names too; Ōita had
+  "? そうざい製造業" (100 rows; a circled number above ⑳ lost in cp932);
+  and Ōita's page did not say that names the city masks show the permit
+  type.
+- **Decided: a name that STARTS with "?" lost its first character too,
+  unless an ASCII space follows.** Found while measuring: "??野家" is
+  吉野家, Ōita's "?暁雲福祉会", Osaka's "?　ｒｅｃｃａ", Seoul's bare "??".
+  The space exception keeps New York's "? TEA (QUESTION MARK TEA)", its
+  real trade name. Measured on every processed file: at most 548 more names
+  show their classification (Osaka 202, Kobe 105, Seoul 96, Tokyo 55; an
+  upper bound, since step 3 draws a subset). This follows the owner's rule
+  of 2026-10-07 that no glitched name is live.
+- **How:** `map_common._LETTER` gains Ａ-Ｚ and ａ-ｚ and `_LOST_LETTER` a
+  leading `^\?+(?! )`; `japan_eigyo.display_value()` drops the `01:` code
+  with its padding and the leading `?`, keeping circled numbers that
+  survived ("⑪ 菓子製造業") as published; a name equal to its raw
+  classification (the name rule's withheld name) reads as the displayed
+  category. Ōita's name bullet gains "or the city has masked it": a
+  proposal for review time (one pin at a visible address; 267 of the 269
+  masked names sit on withheld rows that are not drawn).
+- **Verified on samples:** Ageo (Regional), Ōita, Higashiyamato, Osaka and
+  New York re-rendered on the branch: no coded category and no lost-letter
+  name left in any, "? TEA" kept; `check_personal_exposure.py` 0 on Ageo,
+  Ōita and Osaka; `check_all.py` 51 of 51. Samples reset; the landing's one
+  full re-render carries the change.
