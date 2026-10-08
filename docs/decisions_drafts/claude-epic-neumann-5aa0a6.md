@@ -57,9 +57,11 @@ or published; every proposal waits for the owner.
   Master moved since this branch (line registry, 34 maps re-rendered,
   `map_common.py` about 160 lines): merge it only before this branch's own
   push, and re-run `check_render_current` after.
-- **Open items, in order:** the English-default label toggle (decided,
-  design proposed to the owner: a small `EN | local` pill under the layer
-  menu, Travel only, remembered); the full version as a renderer option (no business
+- **Done 2026-10-08: the label pill** (entry below; `lang_check.mjs` in
+  the scratchpad; `render_mendoza.py` now passes `local_lang="es"`).
+- **Open items, in order:** pack size (measure each layer's share, then a
+  build-time trim of what the style never draws; owner, a priority); the
+  full version as a renderer option (no business
   data, the hard line enforced by a check); white line casings and white
   station dots in Travel for the owner's screenshots; Protomaps' dark
   flavor in Travel; the Overview Business/Travel toggle (`app/`, branch
@@ -67,6 +69,38 @@ or published; every proposal waits for the owner.
   non-Google font (item 17 below); the Free Worker against an R2 custom
   domain comparison (needs the owner's Cloudflare account and the
   Cloudflare terms read first).
+
+### 2026-10-08 - The label-language pill built; smaller packs made a priority (owner; built and measured)
+
+- **The pill (owner approved the design, 2026-10-08).** `OpenBasemap`
+  takes `local_lang` (the city's language as Protomaps names it: "es",
+  "ja") and `local_name` (the pill's text, default the code in capitals);
+  `label_lang` is gone. Labels are English by default; with `local_lang`
+  set, a two-button `EN | ES` pill (a Leaflet bar, 40 by 34 px buttons,
+  the chosen one dark) appears under the layer menu while Travel is on and
+  is removed with it, so the Business view never shows it. The choice is
+  kept in localStorage `expanded-heatmap-labels` ("en" or "local"), and a
+  switch calls MapLibre's `setStyle` on the same pack: nothing is fetched.
+  It sits top left, stacked under the layer menu: in the top-right corner
+  the fixed Dark mode button covered it and took the phone's taps
+  (measured, then moved). Tested on Mendoza (`lang_check.mjs`), desktop
+  mouse and phone touch: absent in Business; English by default; one tap
+  to Spanish (the label fields switch from `name:en` to `name:es`);
+  remembered across a reload; gone in Business; back to English; no
+  errors. Attribution check clear at 375x812 and 1280x800;
+  `check_render_current` 170 of 170. Mendoza's labels read the same either
+  way, since few of its features have an English name in OSM; the Tokyo
+  test of 2026-10-07 shows the switch changing scripts. The owner expects
+  the same toggle in the app.
+- **Download size is a priority (owner, 2026-10-08), and builder changes
+  are acceptable.** A pack still carries what the Travel style never
+  draws (Mendoza's holds about 20,000 points of interest, all of its
+  `residential`, `farmland`, `grass` and other untinted land use, and the
+  road kinds the style drops). The next step measures each layer's share
+  of the bytes, then trims at build time only what the style does not
+  draw. Anything trimmed comes back by rebuilding with it left in (about 3
+  minutes a city; packs are rebuilt on every refresh anyway), so a trim
+  locks nothing in (owner).
 
 ### 2026-10-08 - Which surface yields in a clash; the Travel style questions answered; Avignon and Florence self-built (owner; measured)
 
