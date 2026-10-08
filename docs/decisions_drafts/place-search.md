@@ -4,6 +4,12 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-07 - Place search: the headings and labels approved, the kind on hover only; on phones the two groups fold (owner, branch)
+
+- **"approve all, keep kind on hover only"** (owner, after examples from Kyoto): the headings "On this map" and "Places", the labels "Line", "Station" and "Station not on this map", and the no-index note "Streets and places are searchable on the site's own map pages" are approved; a pill's kind ("Line", "Station · 烏丸") stays in its hover title and its screen-reader label, not on its face.
+- **"for phones ... make the 'on this map' and 'places' groups collapse-able on mobile"** (owner): under 480 px, when both groups are shown, each heading is a button with a chevron and a count ("▾ On this map (4)", "▸ Places (1)"); the map's own group opens and the places fold, and a reader's choice holds while they keep typing; the keyboard skips a folded group's items. Wide maps, and a list with one group, are unchanged. Measured in a local render at 375 px (343 px frame) on "JR": four pills open, one place folded.
+- **Seen in the same render, for the WIP tuning:** on a phone the ODbL credit (approved wording, ODbL 4.3(a)) now takes about a quarter of the open list. The licence read's shorter form, "Search data © OpenStreetMap contributors (ODbL) · Download this index", would halve it; a wording call for the owner.
+
 ### 2026-10-07 - Place search: suggestions marked work in progress; the map's stations and lines as clickable pills; the languages approved; the Cities menu to review time (owner, branch)
 
 - **"let's mark the autofill section as a WIP ... we can still push it live if it makes sense ... we don't want too many items always popping up cluttering screens (especially mobile)"** (owner): the suggestion rules (the keyword gate, the caps, the pills) are WORK IN PROGRESS, so marked in `map_common.PLACE_SEARCH_SCRIPT`, to be tuned against real search terms in testing; going live in this state is the owner's call at review time. First step against clutter: at most 6 pills and 6 places on a wide map, 4 and 3 under 480 px (5 places when no pill matches).

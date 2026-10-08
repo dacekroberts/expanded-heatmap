@@ -2011,6 +2011,11 @@ _PLACE_SEARCH_TEMPLATE = r"""
     .hm-search-note { padding: 6px 8px; font-size: 12px; opacity: 0.8; }
     .hm-search-head { padding: 5px 8px 1px; font-size: 11px; font-weight: 600; opacity: 0.65; }
     .hm-search-pills { display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 8px 7px; }
+    .hm-search-list [hidden] { display: none !important; }
+    .hm-search-fold { display: block; width: 100%; text-align: left; background: none; border: 0;
+        color: inherit; font: inherit; font-size: 11px; font-weight: 600; cursor: pointer;
+        padding: 6px 8px 4px; }
+    .hm-search-fold:focus-visible { outline: 2px solid @@LIGHT_ACCENT@@; outline-offset: -2px; }
     .hm-search-pill { display: inline-flex; align-items: center; gap: 5px; padding: 3px 8px;
         border: 1px solid @@LIGHT_BORDER@@; border-radius: 999px; background: rgba(13,148,136,0.07);
         color: inherit; font: inherit; font-size: 12px; line-height: 1.4; cursor: pointer; }
@@ -2038,10 +2043,8 @@ _PLACE_SEARCH_TEMPLATE = r"""
     var MIN_LATIN = 4, MIN_CJK = 2, RING_M = __RING_M__;
     // Suggestions at most: the map's own (pills) and other places, fewer on a
     // phone (under 480 px) to keep the list off most of the map.
-    function caps() {
-        return (document.documentElement.clientWidth || window.innerWidth) < 480
-            ? {own: 4, places: 3, alone: 5} : {own: 6, places: 6, alone: 8};
-    }
+    function narrow() { return (document.documentElement.clientWidth || window.innerWidth) < 480; }
+    function caps() { return narrow() ? {own: 4, places: 3, alone: 5} : {own: 6, places: 6, alone: 8}; }
     var KIND_LABEL = {line: "Line", mapstation: "Station", station: "Station not on this map",
                       junction: "Intersection", landmark: "Landmark", place: "Neighborhood",
                       street: "Street", crossing: "Intersection"};
@@ -2307,10 +2310,22 @@ _PLACE_SEARCH_TEMPLATE = r"""
                 '<a href="' + URL + '" target="_blank" rel="noopener" download>Download this index</a>';
             list.appendChild(c);
         }
-        function head(text) {
-            var h = document.createElement("div");
+        // On a phone (under 480 px), with both groups shown, each heading folds
+        // its group (owner, 2026-10-07): the map's own open, the places folded,
+        // and a reader's choice kept while they type.
+        var folded = {own: false, places: true};
+        function head(text, group, count, foldable) {
+            var h = document.createElement(foldable ? "button" : "div");
             h.className = "hm-search-head";
-            h.textContent = text;
+            if (foldable) {
+                h.type = "button";
+                h.className += " hm-search-fold";
+                h.setAttribute("aria-expanded", folded[group] ? "false" : "true");
+                h.textContent = (folded[group] ? "▸ " : "▾ ") + text + " (" + count + ")";
+                h.addEventListener("click", function () { folded[group] = !folded[group]; render(); });
+            } else {
+                h.textContent = text;
+            }
             list.appendChild(h);
         }
         function render() {
@@ -2329,7 +2344,9 @@ _PLACE_SEARCH_TEMPLATE = r"""
             if (!data) { note("Loading places…"); return; }
             shown = search(input.value);
             if (!shown.length) { note("No street, station or place by that name"); credit(); return; }
-            var pills = null;
+            var nOwn = shown.filter(isOwn).length, nPlaces = shown.length - nOwn;
+            var foldable = nOwn > 0 && nPlaces > 0 && narrow();
+            var pills = null, rows = null;
             shown.forEach(function (d, i) {
                 // A map station shows its Japanese (or other) name beside the
                 // map's; an OSM entry its first Latin alias.
@@ -2342,9 +2359,10 @@ _PLACE_SEARCH_TEMPLATE = r"""
                     // line's in its map colour, a station's with the station
                     // dot. The kind and other name are the pill's title.
                     if (!pills) {
-                        head("On this map");
+                        head("On this map", "own", nOwn, foldable);
                         pills = document.createElement("div");
                         pills.className = "hm-search-pills";
+                        pills.hidden = foldable && folded.own;
                         list.appendChild(pills);
                     }
                     var pill = document.createElement("button");
@@ -2362,7 +2380,12 @@ _PLACE_SEARCH_TEMPLATE = r"""
                     pills.appendChild(pill);
                     return;
                 }
-                if (pills && (i === 0 || isOwn(shown[i - 1]))) head("Places");
+                if (!rows) {
+                    if (pills) head("Places", "places", nPlaces, foldable);
+                    rows = document.createElement("div");
+                    rows.hidden = foldable && folded.places;
+                    list.appendChild(rows);
+                }
                 var el = document.createElement("div");
                 el.className = "hm-search-item";
                 el.setAttribute("role", "option");
@@ -2375,7 +2398,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
                 el.appendChild(top);
                 el.appendChild(sub);
                 el.addEventListener("click", function () { go(i); });
-                list.appendChild(el);
+                rows.appendChild(el);
             });
             credit();
             list.classList.add("has");
@@ -2432,7 +2455,8 @@ _PLACE_SEARCH_TEMPLATE = r"""
         input.addEventListener("keydown", function (e) {
             e.stopPropagation();
             // Pills and rows alike, in the order shown.
-            var items = list.querySelectorAll("[data-i]");
+            var items = Array.prototype.filter.call(list.querySelectorAll("[data-i]"),
+                function (el) { return !el.closest("[hidden]"); });   // a folded group's are skipped
             if (e.key === "ArrowDown" || e.key === "ArrowUp") {
                 e.preventDefault();
                 if (!items.length) return;
