@@ -88,8 +88,10 @@ or published; every proposal waits for the owner.
 - **Scratch tools:** the session scratchpad is not visible to a new
   session. Copies of the 43 that matter are in the main checkout's
   `data/_basemap_build/session_tools_2026-10-08/` (copied 2026-10-08 by
-  shell, before the worktree guard stopped a README there; the owner to
-  confirm keeping them): `render_full.py` and `render_travel.py <root>
+  shell, before the worktree guard stopped a README there; kept, and the
+  transfer okayed, by the owner the same day, so a later session can
+  re-render and re-check the prototype without this session's
+  scratchpad): `render_full.py` and `render_travel.py <root>
   <city> <out> <pack url> <lang> <pill> ["ferry:Name"]` render a built
   city's full page or its site page with the Travel switch (they read the
   main checkout's data and write nothing under `outputs/`);
