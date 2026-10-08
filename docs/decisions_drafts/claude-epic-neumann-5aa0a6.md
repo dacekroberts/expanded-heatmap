@@ -33,6 +33,16 @@ or published; every proposal waits for the owner.
   the legend shows lines only; picking "Business" restores the business
   defaults. The half version's page still carries the register data, so
   its notices and obligations are unchanged.
+- **Agreed (owner): in Travel the legend shows lines only.**
+- **Required (owner): the macro-map to city-map chain also exists in the new
+  format** (the Global View leads into city maps and back). Measured for it,
+  2026-10-07, dry runs on the 20261007 planet build: a world pack is 6 MB at
+  zoom 0-4, 15 MB at 0-5, 45 MB at 0-6 and 189 MB at 0-7. The landcover
+  layer (ESA, CC BY 4.0) lives at exactly these zooms, so a macro map on the
+  new basemap needs ESA's credit or a style without that layer. The site's
+  Overview is pydeck with CARTO's style, and pydeck cannot register the
+  pmtiles protocol, so a Travel Overview on the site needs ordinary Z/X/Y
+  tile URLs (the Cloudflare Worker route) rather than raw range reads.
 
 ### 2026-10-07 - The open basemap works offline; three licence reads; repeat visits favour it; "Business" and "Travel" (owner)
 
