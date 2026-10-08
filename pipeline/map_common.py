@@ -3326,6 +3326,8 @@ FULL_FORBIDDEN = ("Concentric Ring", "Commercial Density", "Business Category",
 FULL_TRAVEL_SCRIPT = """
 <style>
 .hm-pill-icon { background: none; border: 0; }
+.leaflet-container { background: #f2f1ee; }
+.dark-base .leaflet-container { background: var(--dm-page); }
 .hm-line-pill { position: absolute; left: 0; top: 0; transform: translate(-50%, -50%);
     padding: 1px 8px; border-radius: 999px; border: 1.5px solid #fff;
     font: 700 12px/16px @@FONT@@; white-space: nowrap; cursor: pointer;
@@ -3352,8 +3354,8 @@ FULL_TRAVEL_SCRIPT = """
 (function () {
     var NAME = "__MAP_NAME__", BASE = "__BASE_NAME__", NAMES = "__NAMES_NAME__";
     var LINES = __LINES__, TABLE = __ZOOM_TABLE__, STEP = __STEP__, CASING = __CASING__;
-    var BOUNDS = __BOUNDS__;
-    var MARGIN = 6;         // px kept clear inside the map's edge
+    var BOUNDS = __BOUNDS__, CREDITS = __CREDITS__;
+    var MARGIN = 6;        // px kept clear inside the map's edge
     var MIN_RUN = 40;       // px of a line in view before it earns a label
     var GAP = 3;            // px between any two labels
     var STEP_PX = 16;       // px between the spots a label tries along its line
@@ -3381,12 +3383,15 @@ FULL_TRAVEL_SCRIPT = """
     }
 
     function start() {
-        var m = window[NAME], base = window[BASE], group = window[NAMES];
-        if (!m || !base || !group) {
+        var m = window[NAME], base = BASE ? window[BASE] : null, group = window[NAMES];
+        if (!m || (BASE && !base) || !group) {
             if (tries++ < 60) setTimeout(start, 100);
             return;
         }
-        if (!m.hasLayer(base)) m.addLayer(base);
+        if (base && !m.hasLayer(base)) m.addLayer(base);
+        // Credits the lines and stations need beside the basemap's own
+        // (or in place of it, on a page with no basemap).
+        CREDITS.forEach(function (c) { m.attributionControl.addAttribution(c); });
         var el = m.getContainer();
         var polys = {}, casings = {}, dots = [];
         m.eachLayer(function (l) {
@@ -3690,13 +3695,19 @@ def _station_lines(stations, lines, crs_geographic, crs_projected, reach_m=100.0
 
 def _render_full_travel(*, output_path, city_name, system_name, stations, lines,
                         crs_geographic, crs_projected, center, zoom, lang, names,
-                        pmtiles_url, local_lang=None, local_name=None, routes=(), lib=None):
+                        pmtiles_url, local_lang=None, local_name=None, routes=(), lib=None,
+                        credits=()):
     """The full Travel version, for render_heatmap(full_travel=...).
 
     lib: a folder (relative to the page) holding every library, the glyphs
     (lib/fonts/<fontstack>/<range>.pbf) and nothing else: given, the page
     loads nothing from any other host (checked on the written file).
-    Omitted, the pinned CDN copies (for development only)."""
+    Omitted, the pinned CDN copies (for development only).
+    pmtiles_url None: no basemap at all, the lines on a plain ground (a test
+    page whose city has no pack); the OSM credit is then shown on its own,
+    since the stations' English names, at least, come from OSM.
+    credits: HTML credits the lines and stations need (a feed's or a
+    government layer's), added to the map's credit corner."""
     pts = [(float(r.latitude), float(r.longitude)) for r in stations.itertuples()]
     c, z = _fit_view(pts)
     center = center or c
@@ -3711,7 +3722,8 @@ def _render_full_travel(*, output_path, city_name, system_name, stations, lines,
         pmtiles_url, local_lang=local_lang, local_name=local_name, show=True, control=False,
         variant="full", libs=[f"{lib}/{f}" for f in FULL_TRAVEL_GL_FILES] if lib else None,
         assets=lib or None,
-    ).add_to(m)
+    ).add_to(m) if pmtiles_url else None
+    credits = list(credits) + ([] if base else [OSM_ATTRIBUTION])
 
     # Casings first, so no casing ever covers another line.
     casing_layer = folium.FeatureGroup(name="Casings", control=False)
@@ -3770,7 +3782,8 @@ def _render_full_travel(*, output_path, city_name, system_name, stations, lines,
         FULL_TRAVEL_SCRIPT
         .replace("@@FONT@@", FONT_VAR).replace("@@TEXT@@", LIGHT["text"])
         .replace("__MAP_NAME__", m.get_name())
-        .replace("__BASE_NAME__", base.get_name())
+        .replace("__BASE_NAME__", base.get_name() if base else "")
+        .replace("__CREDITS__", json.dumps(credits))
         .replace("__NAMES_NAME__", names_layer.get_name())
         .replace("__LINES__", json.dumps(pills))
         .replace("__ZOOM_TABLE__", json.dumps(FULL_ZOOM_TABLE))
