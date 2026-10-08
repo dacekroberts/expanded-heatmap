@@ -175,6 +175,15 @@ or published; every proposal waits for the owner.
   Saikyo and Namboku 0.6, crossing; Toei Mita and the Monorail 2.5; JR
   Yokosuka / Sobu Rapid and Tobu Kameido 2.6, 28 m apart); list in the
   package. The site keeps its colours (and the line-identity hard line).
+- **No "(signed XX)" text in the app's legend or on its map (owner,
+  2026-10-08): too cluttered;** the prototype keeps it to cover the bases.
+  The app marks an edited code in a cheap, quiet way instead (a distinct
+  text treatment such as an underline, bold or a text colour, used for
+  nothing else) and gives the official code in a detail view and once on
+  its info page. In the handoff.
+- **The package's server** now runs with no arguments (port 8000, its own
+  folder) and prints its links, after the owner's first try on a desktop
+  copy left out the folder argument.
 - **A line-colour switch in the app (owner, 2026-10-08):** official
   colours by default, or a readability set the owner fleshes out,
   togglable. Approved shape: the readability set is the official set with
