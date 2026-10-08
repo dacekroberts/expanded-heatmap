@@ -57,7 +57,9 @@ items are done or moved into PLAN.
    `scripts/check_place_search.py` after the re-render (stale index hashes);
    (c) `.streamlit/config.toml`'s `enableStaticServing = true` lands with
    it, or the indexes 404 live; (d) deploy-verify (`map-chrome`) opens the
-   search box on one searched map live. Basemap: the station-area border is dark
+   search box on one searched map live; (e) at the merge, `place_index.junk_name`
+   runs AFTER `map_common.repaired_name`, so "Patel?s" is repaired, not dropped
+   (branch tip 9db1e20a). Basemap: the station-area border is dark
    plum `#352a4d` in both projects (owner, 2026-10-08), clearing every pin
    colour by 45 or more, so the pin colours stay; the pilot's drafts
    (`claude-epic-neumann-5aa0a6.md`) also hold the owner's disputed-borders

@@ -78,7 +78,8 @@ Detail files: [japan](docs/plan_detail/japan.md),
   already hides "?"-only names (legend-dot-georgia). Gaps found 2026-10-08:
   U+FFFD is not caught (only the Korean readers strip it, silently); CJK
   Extension A is in `_CJK_RE` but not `_LETTER`; `_has_contact_details`
-  misses non-NANP phone formats.
+  misses non-NANP phone formats (place search's `place_index._CONTACT`
+  already has trunk-prefixed Japanese and Korean numbers: merge it).
 
 - [ ] **A site-wide code audit after the reset and the final city builds**
   (owner, 2026-10-08); scope and lanes set with the owner first. `docs/plan_detail/process_and_tooling.md`, "A
