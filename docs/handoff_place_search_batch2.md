@@ -40,6 +40,11 @@ what is left into `docs/handoff_place_search_2026-10-07.md`.
 
 ## Where things stand (2026-10-08)
 
+- **2b BUILT and HELD for the owner** (Hong Kong, Seoul, Busan, Tbilisi): the drafts
+  file's newest entry holds every call, the audit of the batch's first part and nine
+  questions for the owner. Batch 3 waits for the owner's answers and for Cleanup's
+  worktree move.
+
 - **2a BUILT; the owner answered its questions and called 2b** (Montréal,
   Barcelona, Marseille, Prague, Brussels): the drafts file's three newest
   entries hold every call, the answers (a dated keep-list of visitable former
