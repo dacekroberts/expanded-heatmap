@@ -36,7 +36,15 @@ def render_city_nav(current: str):
     In the map-only pilot (cities.MAP_ONLY_NAV) there is no visible switcher.
     The links are still rendered, hidden (see set_base_font): one to the Overview
     and one per city, because the city map's own "Global View" button and city
-    menu navigate by clicking them (and read the city names from them)."""
+    menu navigate by clicking them (and read the city names from them).
+
+    The city's region link ("← <region>", the Overview opened on it; owner,
+    2026-10-07) sits in a container of its own, `map-region-nav`: the map's
+    region button beside "Global View" clicks it and shows its words, and the
+    Cities menu, which lists every link in `map-only-nav`, never sees it."""
+    region = _CITY_BY_NAME[current]["region"]
+    with st.container(key="map-region-nav"):
+        st.page_link(OVERVIEW_PAGE, query_params={"region": region}, label=f"← {region}")
     if MAP_ONLY_NAV:
         with st.container(key="map-only-nav"):
             # Keep this text: the maps' JS finds this link, and leaves it out of
@@ -3410,7 +3418,8 @@ def render_city_title(name):
     st.markdown("<style>[data-testid='stMainBlockContainer'] "
                 "{ padding-top: 3.5rem !important; }"
                 "[data-testid='stElementContainer']:has(style),"
-                "div:has(> .st-key-map-only-nav) { display: none; }"
+                "div:has(> .st-key-map-only-nav), div:has(> .st-key-map-region-nav) "
+                "{ display: none; }"
                 "[data-testid='stElementContainer']:has(> iframe[data-testid='stIFrame']) "
                 f"{{ margin-left: auto; margin-right: auto; {MAP_FRAME_CSS} }}"
                 "iframe[data-testid='stIFrame'] { border-radius: 8px; }</style>",

@@ -178,6 +178,7 @@ _THEME_TOGGLE_TEMPLATE = """
     </select>
     <button id="back-to-map" class="map-btn" type="button" hidden
         aria-label="Back to the Global View map">&larr; Global View</button>
+    <button id="back-to-region" class="map-btn" type="button" hidden></button>
     <button id="theme-toggle" class="map-btn" type="button" aria-pressed="false">&#9790; Dark mode</button>
 </div>
 <script>
@@ -283,9 +284,42 @@ _THEME_TOGGLE_TEMPLATE = """
         save(document.body.classList.contains('dark-base') ? 'dark' : 'light');
         if (link) link.click();
     }
+    // Region button, beside "Global View" (owner, 2026-10-07): the Overview
+    // opened on this city's region. Its link and its words come from the app
+    // page (components.render_city_nav, from app/cities.py), so a region
+    // renamed or a city regrouped needs no map re-rendered; with no such link
+    // (an older app, or the map opened alone) it stays hidden.
+    var regionBtn = document.getElementById('back-to-region');
+    function regionLink() {
+        var box = window.parent.document.querySelector('.st-key-map-region-nav');
+        return box ? box.querySelector('a[href]') : null;
+    }
+    function fillRegion() {
+        var link = regionLink();
+        if (!link) return;
+        var text = link.textContent.trim();
+        regionBtn.textContent = text;
+        regionBtn.setAttribute('aria-label', 'Back to ' + text.replace(/^\\u2190\\s*/, '') +
+            ' on the Global View map');
+        regionBtn.hidden = false;
+        syncClear();
+    }
+    // A fourth button wraps the row onto a second line in a phone's frame, so
+    // the open legend's cap (.map-legend, --hm-actions-clear) follows the
+    // row's measured bottom plus the 16 px gap the fixed 56 px figure keeps.
+    var actions = document.getElementById('map-actions');
+    function syncClear() {
+        var clear = Math.max(@@LEGEND_TOP_CLEAR@@, Math.ceil(actions.getBoundingClientRect().bottom) + 16);
+        document.documentElement.style.setProperty('--hm-actions-clear', clear + 'px');
+    }
+    window.addEventListener('resize', syncClear);
     if (window.parent !== window) {
         back.hidden = false;
         back.addEventListener('click', function () { goTo(overviewLink()); });
+        fillRegion();
+        setTimeout(fillRegion, 800);            // as fillMenu: the links may render after this frame
+        setTimeout(fillRegion, 2500);
+        regionBtn.addEventListener('click', function () { goTo(regionLink()); });
         fillMenu();
         setTimeout(fillMenu, 800);              // the page's links may render just after this frame
         setTimeout(fillMenu, 2500);
@@ -303,6 +337,12 @@ _THEME_TOGGLE_TEMPLATE = """
 </script>
 """
 
+# How far below the map's top edge the open legend must stop: the button row
+# (#map-actions, top 10px, ~30 px tall) plus a gap. _layout_labels caps its
+# legend obstacle with the same number, so the model and the render agree.
+# A row that wraps raises it in the browser (--hm-actions-clear, below).
+_LEGEND_TOP_CLEAR = 56
+
 # Resolved once, from pipeline/theme.py, so no colour is written twice. The
 # template uses @@NAME@@ placeholders rather than str.format because it is full
 # of literal CSS and JS braces.
@@ -318,6 +358,7 @@ THEME_TOGGLE_HTML = (
     .replace("@@LIGHT_ACCENT@@", LIGHT["accent"])
     .replace("@@LIGHT_RING@@", LIGHT["ring"])
     .replace("@@LIGHT_STATION@@", LIGHT["station"])
+    .replace("@@LEGEND_TOP_CLEAR@@", str(_LEGEND_TOP_CLEAR))
 )
 assert "@@" not in THEME_TOGGLE_HTML, "unresolved placeholder in THEME_TOGGLE_HTML"
 
@@ -327,11 +368,6 @@ assert "@@" not in THEME_TOGGLE_HTML, "unresolved placeholder in THEME_TOGGLE_HT
 # KEPT OUT OF LEGEND_HTML ON PURPOSE: that string goes through .format(), so
 # every CSS brace in it would have to be doubled, and a single missed one is a
 # KeyError at render time rather than a visible mistake. Concatenated instead.
-#
-# How far below the map's top edge the open legend must stop: the button row
-# (#map-actions, top 10px, ~30 px tall) plus a gap. _layout_labels caps its
-# legend obstacle with the same number, so the model and the render agree.
-_LEGEND_TOP_CLEAR = 56
 _LEGEND_CSS = """
 <style>
 /* THE HEADER IS THE CONTROL, AND IT HAS TO SAY SO. A native <summary> does
@@ -374,10 +410,14 @@ _LEGEND_CSS = """
    header sticks, so Hide stays in reach while the rows scroll. Its background
    is set, NOT `inherit`: a <summary> is slotted into the <details> shadow
    root, so it inherits from a transparent slot - measured, the rows showed
-   through the header in dark mode. */
+   through the header in dark mode.
+   The clearance is the button row's, measured: --hm-actions-clear is set by
+   the region button's script when the row wraps to a second line (a phone's
+   343 px frame since 2026-10-07: four buttons where three fitted, 72 px tall),
+   else this fixed figure. */
 .map-legend { box-sizing: border-box; overflow-y: auto;
     overscroll-behavior: contain;
-    max-height: calc(min(100vh, """ + str(_MAP_H) + """px) - """ + str(24 + _LEGEND_TOP_CLEAR) + """px); }
+    max-height: calc(min(100vh, """ + str(_MAP_H) + """px) - 24px - var(--hm-actions-clear, """ + str(_LEGEND_TOP_CLEAR) + """px)); }
 .map-legend > summary { position: sticky; top: -8px; z-index: 1;
     padding-top: 8px; margin-top: -8px; background: white; }
 .dark-base .map-legend > summary { background: var(--dm-surface); }

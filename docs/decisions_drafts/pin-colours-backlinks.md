@@ -19,31 +19,85 @@ names the colour change.
 
 ## Landing checklist
 
-- Re-render on master, in the same sitting as the push, every map whose
-  pins or menus move: 50 food-shop maps (antwerp, birmingham, blackpool,
-  bucharest, edinburgh, fukui, fukuoka, ghent, glasgow, goteborg,
-  higashiosaka, himeji, hiroshima, hong_kong, kagoshima, kawasaki,
-  kitakyushu, kitchener_waterloo, kobe, kumamoto, kurume, kyoto, liverpool,
-  london, manchester, matsuyama, minneapolis, nagasaki, nara, newcastle,
-  nishinomiya, nottingham, okayama, osaka, otsu, pittsburgh, sakai,
-  sapporo, sasebo, sheffield, shimonoseki, stockholm, takamatsu,
-  thessaloniki, tokyo, toyama, toyota, utsunomiya, yokkaichi, yokosuka), 6
-  shops-and-services maps (amsterdam, daugavpils, den_haag, liepaja, riga,
-  rotterdam), ottawa and palma (menus), plus any city whose legend wording
-  the owner approves below. `python pipeline/drift_check.py --render-only
-  <cities>`, never steps 1-2.
-- Downstream note to Visuals and Analytics (pins changed colour).
+- **Re-render EVERY map, render-only** (`python pipeline/drift_check.py
+  --render-only`, never steps 1-2): the region button and the legend's
+  clearance live in `pipeline/map_common.py`'s chrome, so every map
+  changes, not only the 58 whose pins or menus move. Cleanup does this on
+  the integration branch before pinning (206 maps with the 30 new Japanese
+  ones; Cleanup, 2026-10-07). Measured on that branch's committed HTML: none
+  of the 30 has a line within CIE76 10 of a pin it will draw (nearest to
+  olive 15.8, Akita, Fukushima, Mito, Morioka), and none draws violet.
+- deploy-verify `scope: map-chrome` at review time (the button row, both
+  themes, a phone width).
+- Downstream note to Visuals and Analytics: pins changed colour on 56
+  maps, eight legends and fourteen menus changed wording, every map gained
+  the region button.
+- `check_provenance.py` fails on this branch only on
+  `docs/city_master_list.md`'s counts (176 built against the list's 170,
+  the new region rows), which Staging writes at landing.
 
-## Open for the owner
+## The owner's calls (2026-10-07, in this build's chat)
 
-- **Legend wording for the licensed retail slices that stay blue** (owner:
-  they stay blue; wording to the owner before it renders). Drafted in chat
-  2026-10-07; not built.
-- **The Japanese legend/menu pair** (and Thessaloniki's, which copies it):
-  legend "Food retail (no general retail is published)", menu "Food
-  shops". Drafted in chat; not built.
-- **Ottawa's one food layer**: recommended to stay magenta with its
-  "Restaurants and food shops" legend. Not changed.
+- City pages: the region link is a **button in the map**, beside "Global
+  View" (recommended), over a Streamlit link above the title.
+- Japan and Thessaloniki: the legend takes the menu's name, **"Food shops
+  (no general retail is published)"** (recommended); the menu stays "Food
+  shops".
+- The eight wordings for the blue licensed slices: **approved as drafted**.
+- Ottawa's one food layer: **stays magenta** (recommended).
+
+### 2026-10-07 - The owner's calls on the pin colours and the back links: a region button in every map, eight legends naming their licensed slices, Japan's legend, Ottawa stays magenta (owner)
+
+- **Decided (owner): a city page's region link is a button inside the map,
+  beside "Global View".** The rejected option was a Streamlit link above
+  the title, which would have needed no re-render but would not sit beside
+  the button. The map reads the link and its words ("← Kansai") from a
+  hidden link that `components.render_city_nav` renders from the city's
+  `region` in `app/cities.py`, in a container of its own
+  (`map-region-nav`) so the map's Cities menu never lists it. A region
+  renamed or a city regrouped therefore needs no map re-rendered, and an
+  older app or a map opened alone leaves the button hidden. Clicking it
+  opens the Overview on that region (`?region=`). Every map re-renders once,
+  at landing.
+- **Decided: on a phone the button row wraps, rather than truncate a
+  region's name.** Measured in a 343 px frame (a 375 px phone): Cities 78,
+  Global View 94 and Dark mode 94 px already filled 278 of the 287 px
+  available, so any fourth button wraps the row to two lines (72 px tall),
+  even "← Kansai" (65 px); the longest names ("← Seoul Capital Area") are
+  129 px. Labels already avoid the button row's live box. The open legend's
+  cap assumed a fixed 56 px clearance, so it now follows the row: the
+  button's script sets `--hm-actions-clear` to the row's bottom plus the
+  same 16 px gap (98 px wrapped), and the cap falls back to 56 px. At
+  desktop widths the row stays on one line (408 px of 854). Rejected:
+  ellipsizing the region name, and an icon-only theme button, which would
+  change every map's existing control to make room.
+- **Decided (owner): eight Retail legends and menus name what their
+  licensed slice holds; the pins stay retail blue.** Measured on each
+  city's clean file: Philadelphia "Food shops, tire and precious-metal
+  dealers" (food 88.5%, tire 5.3%, precious metal 4.8% of 1,529); Boston
+  "Food, liquor and cannabis shops" (61.8, 33.2, 4.9% of 791); New York
+  "Food, secondhand, electronics, tobacco shops" (50.0, 15.8, 10.3, 10.6%
+  of 22,614; also products for the disabled 6.8% and stoop stands 4.7%),
+  which supersedes the 2026-09-21 call to keep its legend broad; Buffalo
+  "Food stores, used-car and secondhand dealers" (76.5, 15.0, 4.9% of 728);
+  Toronto "Vape, secondhand, precious-metal, pawn shops" (45.6, 30.1, 11.2,
+  6.0% of 814, and NO food: the brief had listed it as a mostly-food slice);
+  Seoul, Daegu and Busan "Food, convenience and tobacco shops" (98-99%). At
+  most 44 characters, the length the Japanese legend already shipped at.
+  `layer_label = legend_label` in each of the six modules.
+- **Decided (owner): the Japanese legend reads "Food shops (no general
+  retail is published)"** (was "Food retail (...)"), so legend and menu
+  ("Food shops") name the same olive meaning; Thessaloniki's module copies
+  it. Ottawa's single food layer stays magenta with its "Restaurants and
+  food shops" legend.
+- **Verified:** Kyoto rendered with the button and shown in the lean app:
+  at desktop one row ("← Kansai" 79 px), the hidden region link absent from
+  the Cities menu and invisible on the page, and a click opened the
+  Overview on Kansai; at 375 px the row wrapped to 72 px and the legend cap
+  measured 528 px (650 - 24 - 98). Liepaja, Birmingham, Hiroshima and Osaka
+  re-rendered with the new chrome. `check_map_markup.py` 0 problems
+  (legends intact); `check_provenance.py`'s invariants and the legend clamp
+  pass.
 
 ### 2026-10-07 - Back links beside "Global View": the reference pages return to the city or region the reader came from; the Overview opens on a region in its link (owner)
 
@@ -80,7 +134,8 @@ names the colour change.
 - **Open: the city pages' link.** A city page shows no Streamlit "Global
   View" (map-only navigation); its "Global View" is a button inside the map,
   so a link beside it needs `pipeline/map_common.py` and every map
-  re-rendered, which the assessment had not counted. Brought to the owner.
+  re-rendered, which the assessment had not counted. Brought to the owner,
+  who chose the button in the map (the entry above).
 
 ### 2026-10-07 - One pin colour per meaning: food shops olive, shops and services violet, a refuse-both guard, three line colours moved (owner)
 
