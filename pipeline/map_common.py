@@ -3668,6 +3668,17 @@ FULL_TRAVEL_SCRIPT = """
         function clearCredit() {
             var b = creditTop() + "px";
             if (legend && legend.style.bottom !== b) legend.style.bottom = b;
+            // Raised, the legend must also stop below the button row: the
+            // shared cap assumes a 24 px bottom, and Tokyo's 52 rows then
+            // ran up under Dark mode on a phone (owner, 2026-10-08).
+            if (legend) {
+                var vh = document.documentElement.clientHeight || window.innerHeight;
+                var top = __TOP_CLEAR__;
+                var actions = document.getElementById("map-actions");
+                if (actions) top = Math.max(top, actions.getBoundingClientRect().bottom + 8);
+                var cap = Math.max(80, Math.floor(vh - creditTop() - top)) + "px";
+                if (legend.style.maxHeight !== cap) legend.style.maxHeight = cap;
+            }
             var panel = document.querySelector(".hm-tap-panel");
             if (!panel) return;
             if (!watched) {
@@ -3825,6 +3836,7 @@ def _render_full_travel(*, output_path, city_name, system_name, stations, lines,
         .replace("__MAP_NAME__", m.get_name())
         .replace("__BASE_NAME__", base.get_name() if base else "")
         .replace("__CREDITS__", json.dumps(credits))
+        .replace("__TOP_CLEAR__", str(_LEGEND_TOP_CLEAR))
         .replace("__NAMES_NAME__", names_layer.get_name())
         .replace("__LINES__", json.dumps(pills))
         .replace("__ZOOM_TABLE__", json.dumps(FULL_ZOOM_TABLE))
