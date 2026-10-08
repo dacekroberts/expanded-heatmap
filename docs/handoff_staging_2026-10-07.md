@@ -61,15 +61,10 @@ reasoning behind every move below is in `docs/decisions_drafts/staging.md`
 
 ## NEXT - pick up here, in this order
 
-1. *(Done at handoff: Oradea to Band R, call 221, and the drafts entries for
-   calls 219-221 and the landing, pushed after the review landed.)* **Remind
-   the owner to reboot the live app** if they have not: the landing changed
-   `app/` throughout.
-2. **Republish the two private pages** (both still at version 18, from before
-   today's moves): master list https://claude.ai/artifact/LTzi7Vj5emzHnb3zAZy4Vn
-   and census https://claude.ai/artifact/CKCadsYtUhbWwWKzV9sDeD, per
-   `scripts/staging_artifacts/README.md`, banded chat format for the master
-   list (the owner's memory).
+1. *(Done 2026-10-07 by the new staging session: the owner reminded to reboot
+   the live app; both private pages republished at version 19 from master
+   658ef57c, the builders `build_ml_v19.py` and `build_census_v19.py` in that
+   session's scratchpad.)*
 3. **Phase 2, when the owner says go** (`docs/build_plan_2026-10-07.md` has
    every prompt; first line of each: enter a new worktree, then `git fetch`
    and `git merge --ff-only origin/master`):
@@ -170,8 +165,8 @@ Hachiōji, Macau, Kaohsiung, Richmond (BC), Arlington, Chiba, Machida, Isesaki,
 
 ## The private pages
 
-- City master list, version 18 (republish: NEXT 2): https://claude.ai/artifact/LTzi7Vj5emzHnb3zAZy4Vn
-- Country census, version 18 (republish: NEXT 2): https://claude.ai/artifact/CKCadsYtUhbWwWKzV9sDeD
+- City master list, version 19: https://claude.ai/artifact/LTzi7Vj5emzHnb3zAZy4Vn
+- Country census, version 19: https://claude.ai/artifact/CKCadsYtUhbWwWKzV9sDeD
 - Accepted liabilities, version 2: https://claude.ai/artifact/FMZrsssfiCtydpHroo1V16
 - `docs/licence_positions.md`, version 2: https://claude.ai/artifact/JZoMFPgDZvbWEkyffuWWC5
 
