@@ -171,6 +171,18 @@ on its own before removing the worktree (`docs/session_roles.md`, step 1).
 
 ## Open, for review time or the next session
 
+- **TOP-LINE, to refine through optimization (owner, 2026-10-08): iPhone
+  memory and repository size.** Seattle's index holds about 35 MB once the
+  search opens (desktop V8; Chicago 27, Vancouver 21, Kyoto 11), on top of an
+  already heavy map page, and the blank iPhone maps were a memory problem;
+  test the largest index on a real phone before rollout. The indexes total
+  8.6 MB for five cities, roughly 200 to 350 MB for about 200, plus a
+  compressed copy in git history per rebuild. Measured options (Seattle,
+  gzipped): intersections in a second file loaded only for "X and Y" queries,
+  563 to 269 KB at first open; crossings as street references, 501 KB;
+  4-decimal coordinates, 504 KB; dropping residential-only pairs, 471 KB (a
+  loss). PLAN.md has the item.
+
 - **The WIP suggestions** on a real phone: the open list still covers about
   half the map at 343 px; the pills stack one per row at 190 px.
 - **The corner credit test** and the **Cities menu move** (both review time).

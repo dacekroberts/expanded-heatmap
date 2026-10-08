@@ -34,8 +34,26 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
 - [ ] **Review time: the place search pilot** (owner, 2026-10-07; branch
   `claude/charming-lumiere-930853`, nothing pushed; drafts
   `docs/decisions_drafts/place-search.md`; handoff
-  `docs/handoff_place_search_2026-10-07.md`). Kyoto only. To decide or test
-  there:
+  `docs/handoff_place_search_2026-10-07.md`). Kyoto, then the regional
+  sample's first batch (Seattle, Chicago, Vancouver, Sydney; 2026-10-08), held
+  before batch 2. **Two top-line items, to be refined through optimization
+  (owner, 2026-10-08):**
+  - **iPhone memory.** Seattle's index holds about 35 MB in the page once the
+    search opens (desktop V8, measured; Kyoto 11, Chicago 27), on top of a map
+    page that is already heavy, and the blank iPhone maps were a memory
+    problem. Not measurable without a real phone: test the largest index on
+    one before rollout. First optimizations proposed: intersections in a
+    second file fetched only for an "X and Y" query (Seattle's first open 563
+    to 269 KB gzipped, its crossings' memory only when used), crossings as
+    references to their two streets, coordinates to 4 decimals.
+  - **Repository size.** The five indexes total 8.6 MB; about 200 cities
+    would be roughly 200 to 350 MB raw, and every rebuild of the indexes adds
+    another compressed copy to git history. Fine now, growing with each
+    refresh. The map's scope is almost fully built (owner: only some Japanese
+    cities and Cluj-Napoca remain), so the city count is near final; the
+    refresh cadence is what grows it.
+
+  To decide or test there:
   - whether it goes live as is: the suggestions (keyword gate, caps, pills,
     phone folding) are WORK IN PROGRESS, tuned against real search terms;
   - moving the search credit from the box into the map's corner credit
@@ -48,8 +66,8 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
     `check_deploy_imports.py`, a `map-chrome` deploy-verify that opens the
     search on the live site, and a reboot; `LICENSE` gains the ODbL carve-out.
   - Rollout after: the Japanese cities, then the US and Canadian grid
-    cities, then the rest; one Overpass query per city, each declaring its
-    local languages.
+    cities, then the rest; two Overpass queries per city in sequence, each
+    city declaring its local languages.
 
 - [x] **Desktop leftovers fixed 2026-10-04** (A and B-lite; DECISIONS, "San
   Diego, San Francisco and Los Angeles state or fix their lean").
