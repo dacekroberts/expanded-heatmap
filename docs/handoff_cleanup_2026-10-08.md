@@ -42,10 +42,16 @@ items are done or moved into PLAN.
    minor tier, takes shared lines' colours and names from the registry, and
    may move only its own lines to make room (`japan-city`, "After the large
    review").
-4. **The two pilots at review time.** Place search: batch 1 parked at
-   `0a766148` (Seattle, Chicago, Vancouver, Sydney, Kyoto re-indexed;
-   check_all 52 of 52); its drafts wait on three owner questions (homes with
-   Wikipedia articles, Seattle's Panama Hotel, index size). Landing order:
+4. **The two pilots at review time.** Place search: tip `079c8dcb` (base
+   `8cf5ed4c`; Kyoto, Seattle, Chicago, Vancouver, Sydney; check_all 52 of
+   52); the owner answered its three questions (homes with Wikipedia: out;
+   Panama Hotel: kept as a historic site, a precedent; size: optimized,
+   iPhone passed). Its session may be archived; its WORKTREE stays (batch 2a
+   and 2b sessions use it, `data/` is a junction). Its drafts
+   (`place-search.md`) fold now or after 2a, the owner's choice. Owner's
+   review-time calls: go live as is (suggestions WIP), the corner-credit
+   test, the Cities menu out of the map, and whether "Download this index"
+   also links the intersections file (ODbL 4.6). Landing order:
    merge it and `legend-dot-georgia`, take master's `outputs/*/heatmap.html`
    on conflict, then ONE full re-render of all 206 maps (the legend dot
    needs it; it covers the five searched maps). `check_render_current.py`
