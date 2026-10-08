@@ -200,7 +200,9 @@ LEAK_WORDS = {
     # against its city's own hits (docs/decisions_drafts/place-search.md).
     "fr": ("sarl", "sas", "eurl", "hôtel", "auberge", "résidence", "appartements", "parking",
            "privé", "privée", "magasin", "boutique", "restaurant", "brasserie", "pharmacie",
-           "clinique", "agence"),
+           "clinique", "agence",
+           # Housing estates: a subdivision, a social-housing group (Marseille).
+           "lotissement", "morcellement", "hlm", "h.l.m."),
     "ca": ("hotel", "hostal", "aparcament", "pàrquing", "privat", "privada", "botiga", "restaurant",
            "pisos", "farmàcia", "s.l.", "s.a."),
     "es": ("hotel", "hostal", "aparcamiento", "parking", "privado", "privada", "tienda", "restaurante",
@@ -218,7 +220,8 @@ LEAK_ALLOW = {"ja": ("商店街", "名店街"), "en": ("shopping street",),
 HOME_WORDS = {
     "ja": ("マンション", "ハイツ", "レジデンス", "コーポ", "アパート", "メゾン", "社宅", "私有地"),
     "en": ("apartment", "apartments", "apts", "condominium", "condo", "condos", "private"),
-    "fr": ("résidence", "appartements", "privé", "privée"),
+    "fr": ("résidence", "appartements", "privé", "privée", "lotissement", "morcellement", "hlm",
+           "h.l.m."),
     "ca": ("pisos", "privat", "privada"),
     "es": ("pisos", "privado", "privada"),
     "cs": ("bytový dům", "bytové domy", "soukromé", "soukromá"),
@@ -347,7 +350,9 @@ WAY_WORDS = {
            "pont", "passerelle", "cours", "montée", "escalier", "escaliers", "promenade", "square",
            "sentier", "voie", "piste", "traverse", "ruelle", "esplanade", "parvis", "galerie",
            # Québec street types (Montréal's named footways, 2026-10-08).
-           "terrasse", "croissant", "carré", "côte", "carrefour", "cour", "route", "circuit"),
+           "terrasse", "croissant", "carré", "côte", "carrefour", "cour", "route", "circuit",
+           # Marseille's (2026-10-08): roundabouts, breakwaters, corniches, valleys.
+           "rond-point", "digue", "corniche", "vallon"),
     "ca": ("carrer", "avinguda", "passeig", "plaça", "rambla", "travessera", "via", "camí",
            "passatge", "pont", "ronda", "baixada", "pujada", "costa", "escales", "placeta",
            "jardins", "corriol", "sender",
@@ -388,7 +393,8 @@ OTHER_MODES = ("bus", "ferry", "trolleybus", "coach")
 # A commercial building is a business unless notable: Sydney's numbered
 # "Bay 0" to "Bay 15", historic=building on building=commercial (2026-10-08).
 # A hotel building likewise (Barcelona's Casa Cambó, building=hotel, batch 2a).
-COMMERCIAL_BUILDINGS = {"commercial", "retail", "office", "hotel"}
+# And a data centre (Marseille's U-boat bunker, building=data_center, batch 2a).
+COMMERCIAL_BUILDINGS = {"commercial", "retail", "office", "hotel", "data_center"}
 # historic=* values that are clutter at a search box (wayside shrines and
 # stones number in the hundreds and are named after their saint or deity).
 SKIP_HISTORIC = {"wayside_shrine", "wayside_cross", "boundary_stone", "milestone",
@@ -416,6 +422,12 @@ HOME_NAME_LEAD = {"fr": ("maison", "manoir"), "ca": ("casa",), "es": ("casa",),
                   "cs": ("dům", "vila"), "nl": ("huis",)}
 
 
+# historic=* values that are a house: a manor is OSM's manor house or country
+# house (Marseille's 130-odd bastides and its town mansions, the hôtels
+# particuliers, batch 2a, 2026-10-08), held to _public_home as historic=house is.
+HOME_HISTORIC = {"house", "manor"}
+
+
 def _home_name(name, local):
     if HOME_NAME.search(name):
         return True
@@ -430,6 +442,9 @@ def _home(tags, names, local=()):
         return False      # an area of homes is a place (Chicago's Prairie Avenue District)
     return (tags.get("landuse") == "residential" or tags.get("building") in RESIDENTIAL_BUILDINGS
             or tags.get("access") == "private" or tags.get("historic") == "house"
+            # A manor on a plain building: Montréal's Château Goyer, a manor
+            # on building=pavilion in a park, stays.
+            or (tags.get("historic") in HOME_HISTORIC and tags.get("building") in (None, "yes"))
             or tags.get("house") == "yes"
             # By name only where the building tag says no more: Kyoto's
             # "Kwasan Observatory Solar House" is building=university.
