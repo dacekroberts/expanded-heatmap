@@ -41,8 +41,13 @@ items are done or moved into PLAN.
    minor tier, takes shared lines' colours and names from the registry, and
    may move only its own lines to make room (`japan-city`, "After the large
    review").
-4. **The two pilots at review time.** Place search: held for review time
-   (memory "Place search pilot"). Basemap: the station-area border is dark
+4. **The two pilots at review time.** Place search: batch 1 parked at
+   `0a766148` (Seattle, Chicago, Vancouver, Sydney, Kyoto re-indexed;
+   check_all 52 of 52); its drafts wait on three owner questions (homes with
+   Wikipedia articles, Seattle's Panama Hotel, index size). Landing order:
+   merge it and `legend-dot-georgia`, take master's `outputs/*/heatmap.html`
+   on conflict, then ONE full re-render of all 206 maps (the legend dot
+   needs it; it covers the five searched maps). Basemap: the station-area border is dark
    plum `#352a4d` in both projects (owner, 2026-10-08), clearing every pin
    colour by 45 or more, so the pin colours stay; the pilot's drafts
    (`claude-epic-neumann-5aa0a6.md`) also hold the owner's disputed-borders
