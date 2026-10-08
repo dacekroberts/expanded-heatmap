@@ -22,6 +22,8 @@ inside the city line (N03). English station names from OpenStreetMap's name:en
 
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -237,6 +239,10 @@ COLLAPSE_MAX_SPREAD_M = 300
 # clears Retail's pin: the Hakozaki Line went teal, Nishitetsu's lines slate
 # and mauve.
 _SUB, _JR, _NNR = "福岡市", "九州旅客鉄道", "西日本鉄道"
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
 LINES = {
     # Fukuoka City Subway (福岡市交通局)
     "K": {"n02": [(_SUB, "1号線(空港線)")], "name": "Kūkō Line", "name_ja": "空港線", "colour": "#E07800",
@@ -246,17 +252,17 @@ LINES = {
     "N": {"n02": [(_SUB, "3号線(七隈線)")], "name": "Nanakuma Line", "name_ja": "七隈線", "colour": "#28A800",
           "short": "Subway"},
     # JR Kyushu (九州旅客鉄道)
-    "JK": {"n02": [(_JR, "鹿児島線")], "name": "JR Kagoshima Main Line", "name_ja": "鹿児島本線", "colour": "#E80010",
+    "JK": {"n02": [(_JR, "鹿児島線")], "name": "JR Kagoshima Main Line", "name_ja": "鹿児島本線", "colour": line_registry.colour("jr-kyushu-kagoshima-main-line"),
            "short": "JR"},
     "JC": {"n02": [(_JR, "筑肥線")], "name": "JR Chikuhi Line", "name_ja": "筑肥線", "colour": "#F05030",
            "short": "JR"},
-    "JS": {"n02": [(_JR, "篠栗線")], "name": "JR Fukuhoku Yutaka Line", "name_ja": "福北ゆたか線", "colour": "#F86000",
+    "JS": {"n02": [(_JR, "篠栗線")], "name": "JR Fukuhoku Yutaka Line", "name_ja": "福北ゆたか線", "colour": line_registry.colour("jr-kyushu-fukuhoku-yutaka-line"),
            "short": "JR"},
     "JH": {"n02": [(_JR, "香椎線")], "name": "JR Kashii Line", "name_ja": "香椎線", "colour": "#B03800",
            "short": "JR"},
     # Nishitetsu (西日本鉄道)
     "NT": {"n02": [(_NNR, "天神大牟田線")], "name": "Nishitetsu Tenjin Omuta Line", "name_ja": "天神大牟田線",
-           "colour": "#688090", "short": "Nishitetsu"},
+           "colour": line_registry.colour("nishitetsu-tenjin-omuta-line"), "short": "Nishitetsu"},
     "NK": {"n02": [(_NNR, "貝塚線")], "name": "Nishitetsu Kaizuka Line", "name_ja": "貝塚線", "colour": "#786078",
            "short": "Nishitetsu"},
 }

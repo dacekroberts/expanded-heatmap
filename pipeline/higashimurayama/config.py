@@ -27,6 +27,7 @@ and 92). English station names from OpenStreetMap's name:en.
 
 from pathlib import Path
 
+from pipeline import line_registry
 from pipeline.countries import tokyo_tama
 
 # --- Paths ---------------------------------------------------------------
@@ -182,7 +183,14 @@ LINES = {
 # Haijima Line cannot take Higashiyamato's and Tachikawa's blue here, which is
 # the Shinjuku Line's. Closest pair within 500 m and anywhere 33.2 (the
 # Kokubunji and Tamako lines); the dark-mode labels, 6 of 6.
-_COLOURS = {"SS": "#08A0C0", "SK": "#C88800", "SE": "#9040C0", "ST": "#A06030", "SH": "#805878", "JM": "#F05820"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+_COLOURS = {
+    "SS": line_registry.colour("seibu-shinjuku-line"), "SK": "#C88800", "SE": "#9040C0", "ST": "#A06030",
+    "SH": line_registry.colour("seibu-haijima-line"), "JM": line_registry.colour("jr-east-musashino-line"),
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

@@ -24,6 +24,7 @@ OpenStreetMap's name:en.
 
 from pathlib import Path
 
+from pipeline import line_registry
 from pipeline.countries import tokyo_tama
 
 # --- Paths ---------------------------------------------------------------
@@ -146,7 +147,13 @@ LINES = {
 # each the feasible colour nearest its operator's hue that reads 3:1 on both
 # map pages and clears CIE76 45 from every pin (the Shinjuku Line's blue at
 # 45.1). The pair separates by 104.1; the dark-mode labels, 2 of 2.
-_COLOURS = {"SS": "#08A0C0", "SI": "#D08000"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+_COLOURS = {
+    "SS": line_registry.colour("seibu-shinjuku-line"), "SI": line_registry.colour("seibu-ikebukuro-line"),
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

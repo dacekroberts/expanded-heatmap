@@ -18,6 +18,8 @@ Taoyuan only (owner 2026-09-25); the line is drawn to its ends.
 
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -102,7 +104,11 @@ ALL_STOP_MARK = "普通車"
 # both carry it. Added BY ID, with its English name, so gate 3 still compares
 # every other station one for one.
 OPERATOR_LIST_ADDITIONS = {"A22": "Laojie River"}
-LINE_COLOUR = "#2C5AA5"
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+LINE_COLOUR = line_registry.colour("taoyuan-airport-mrt")
 
 # --- Business filtering ------------------------------------------------
 

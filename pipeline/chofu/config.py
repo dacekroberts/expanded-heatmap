@@ -24,6 +24,7 @@ names from OpenStreetMap's name:en.
 
 from pathlib import Path
 
+from pipeline import line_registry
 from pipeline.countries import tokyo_tama
 
 # --- Paths ---------------------------------------------------------------
@@ -158,7 +159,13 @@ LINES = {
 # and clears CIE76 45 from every pin (the Sagamihara Line's at 45.2). The one
 # pair, meeting at 調布, separates by 31.3 (re-measure if a line is added); the
 # dark-mode labels, 2 of 2.
-_COLOURS = {"KS": "#F000B8", "KO": "#B030D0"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+_COLOURS = {
+    "KS": line_registry.colour("keio-sagamihara-line"), "KO": line_registry.colour("keio-line"),
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

@@ -24,6 +24,8 @@ OpenStreetMap's name:en.
 import datetime
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -252,8 +254,16 @@ LINES = {
 # stub, which JR Kyushu gives no colour, is gray. Closest pair within 500 m
 # 28.0 (Nippo / Monorail), anywhere 18.4 (Nippo / Sanyo); the dark-mode labels
 # separate, 8 of 8.
-_COLOURS = {"MO": "#08A0C0", "CT": "#F000B8", "JK": "#E80010", "JN": "#486878", "JH": "#30A800", "JW": "#D08000",
-            "JF": "#A04820", "JS": "#808080"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+_COLOURS = {
+    "MO": "#08A0C0", "CT": "#F000B8", "JK": line_registry.colour("jr-kyushu-kagoshima-main-line"),
+    "JN": line_registry.colour("jr-kyushu-nippo-main-line"), "JH": "#30A800", "JW": "#D08000",
+    "JF": line_registry.colour("jr-kyushu-fukuhoku-yutaka-line"),
+    "JS": line_registry.colour("jr-west-sanyo-line"),
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

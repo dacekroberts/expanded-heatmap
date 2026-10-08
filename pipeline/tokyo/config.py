@@ -26,6 +26,7 @@ inside the city line - all 23 wards, the 15 without data drawn hollow
 
 from pathlib import Path
 
+from pipeline import line_registry
 from pipeline.tokyo import wards
 
 # wards.check() runs in the steps and the fetch, NEVER here: the deployed app
@@ -468,16 +469,37 @@ for _k, _h in _HUES.items():
 # accepted trade (owner, 2026-10-07). Closest pair still 10.1; all 52
 # dark-mode labels separate. DECISIONS, "Lines within 20 of the olive and
 # violet pins recoloured".
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+# Moved so the shared colours fit (2026-10-07), hue kept as far as they allow:
+# the Marunouchi Line #E81020 to #F80008 (pins 58.4, nearest line Keikyu Main
+# Line 13.3, nearest beside it 23.5); the Tokyu Setagaya Line #C08800 to
+# #D86008 (pins 60.2, nearest line JR Utsunomiya / Takasaki Line 12.2, nearest
+# beside it 83.5); the Seibu Toshima Line #D08000 to #F86800 (pins 67.0,
+# nearest line JR Chuo Line (Rapid) 12.5, nearest beside it 27.1); the Keikyu
+# Airport Line #F81808 to #F84800 (pins 61.9, nearest line JR Chuo Line (Rapid)
+# 12.0, nearest beside it 19.1); the Tsukuba Express #B83008 to #A04820 (pins
+# 45.2, nearest line Fukutoshin Line 13.7, nearest beside it 20.2).
+# docs/decisions_drafts/line-registry.md.
 _COLOURS = {
-    "JY": "#60A000", "JK": "#08A0C0", "JC": "#F05820", "JB": "#B09000", "JO": "#9888A0", "JE": "#F86040",
-    "JJ": "#20A800", "JA": "#207078", "JU": "#E07800", "G": "#B06800", "M": "#E81020", "H": "#909088",
-    "T": "#6890A0", "C": "#007034", "Y": "#A89060", "Z": "#C870C8", "N": "#586858", "F": "#A06030",
-    "A": "#E07850", "I": "#606070", "S": "#78A03C", "E": "#F000B8", "SA": "#B880A0", "NT": "#E038C0",
-    "TY": "#E84028", "MG": "#8890A0", "DT": "#789090", "OM": "#D07020", "IK": "#B88088", "TM": "#B820A8",
-    "SG": "#C08800", "KO": "#E060D0", "IN": "#9840A0", "OH": "#687888", "SI": "#E86800", "SS": "#906888",
-    "ST": "#D08000", "SY": "#B05000", "TS": "#007890", "TJ": "#9040C0", "TK": "#C870E8", "TD": "#807080",
-    "KS": "#785868", "KSO": "#8048D8", "KSK": "#406878", "KK": "#C80008", "KKA": "#F81808", "HS": "#787878",
-    "TX": "#B83008", "R": "#B858C0", "U": "#B060E8", "MO": "#0050F0",
+    "JY": "#60A000", "JK": line_registry.colour("jr-east-keihin-tohoku-line"),
+    "JC": line_registry.colour("jr-east-chuo-line"), "JB": "#B09000",
+    "JO": line_registry.colour("jr-east-yokosuka-line"), "JE": "#F86040",
+    "JJ": line_registry.colour("jr-east-joban-line"), "JA": "#207078",
+    "JU": line_registry.colour("jr-east-utsunomiya-takasaki-line"), "G": "#B06800", "M": "#F80008",
+    "H": "#909088", "T": "#6890A0", "C": "#007034", "Y": "#A89060", "Z": "#C870C8", "N": "#586858",
+    "F": "#A06030", "A": "#E07850", "I": "#606070", "S": "#78A03C", "E": "#F000B8", "SA": "#B880A0",
+    "NT": "#E038C0", "TY": line_registry.colour("tokyu-toyoko-line"),
+    "MG": line_registry.colour("tokyu-meguro-line"), "DT": line_registry.colour("tokyu-den-en-toshi-line"),
+    "OM": line_registry.colour("tokyu-oimachi-line"), "IK": "#B88088", "TM": "#B820A8", "SG": "#D86008",
+    "KO": line_registry.colour("keio-line"), "IN": "#9840A0",
+    "OH": line_registry.colour("odakyu-odawara-line"), "SI": line_registry.colour("seibu-ikebukuro-line"),
+    "SS": line_registry.colour("seibu-shinjuku-line"), "ST": "#F86800", "SY": "#B05000",
+    "TS": line_registry.colour("tobu-skytree-line"), "TJ": "#9040C0", "TK": "#C870E8", "TD": "#807080",
+    "KS": "#785868", "KSO": "#8048D8", "KSK": "#406878", "KK": line_registry.colour("keikyu-main-line"),
+    "KKA": "#F84800", "HS": "#787878", "TX": "#A04820", "R": "#B858C0", "U": "#B060E8", "MO": "#0050F0",
 }
 for _k, _c in _COLOURS.items():
     LINES[_k]["colour"] = _c

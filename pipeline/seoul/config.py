@@ -16,6 +16,8 @@ published; OSM's subway relations are complete, named and coloured.
 
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -142,24 +144,28 @@ RING_LABELS = ["0-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi", "0.3-0.6 mi"]
 # Matched on the RELATION's ref (osm-rail: relation-level filtering is safe),
 # after printing the table. key -> (OSM ref, colour, public name, label end).
 # The colours are the operators' own, as every relation carries them.
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
 LINES = {
-    "L1": ("1", "#004A85", "Line 1", None),
+    "L1": ("1", line_registry.colour("seoul-subway-line-1"), "Line 1", None),
     "L2": ("2", "#00A23F", "Line 2", None),
-    "L3": ("3", "#ED6C00", "Line 3", None),
-    "L4": ("4", "#009BCE", "Line 4", None),
+    "L3": ("3", line_registry.colour("seoul-subway-line-3"), "Line 3", None),
+    "L4": ("4", line_registry.colour("seoul-subway-line-4"), "Line 4", None),
     "L5": ("5", "#794698", "Line 5", None),
     "L6": ("6", "#7C4932", "Line 6", None),
-    "L7": ("7", "#6E7E31", "Line 7", None),
+    "L7": ("7", line_registry.colour("seoul-subway-line-7"), "Line 7", None),
     # Seoul Metro's #D11D70 darkened, hue kept: Delta-E 9.2 -> 18.0 from Food
     # service's magenta, the nearest colour drawn over it (linecolour.py).
-    "L8": ("8", "#92144E", "Line 8", None),
+    "L8": ("8", line_registry.colour("seoul-subway-line-8"), "Line 8", None),
     "L9": ("9", "#A49D87", "Line 9", None),
-    "SBD": ("신분당", "#B81B30", "Shinbundang Line", None),
+    "SBD": ("신분당", line_registry.colour("shinbundang-line"), "Shinbundang Line", None),
     "UI": ("W", "#BACC50", "Ui LRT", None),
     "SL": ("Silim", "#6789CA", "Sillim Line", None),
-    "GJ": ("경의·중앙", "#6AC2B3", "Gyeongui–Jungang Line", None),
-    "SB": ("수인·분당", "#ECA300", "Suin–Bundang Line", None),
-    "GC": ("경춘", "#007A62", "Gyeongchun Line", None),
+    "GJ": ("경의·중앙", line_registry.colour("gyeongui-jungang-line"), "Gyeongui–Jungang Line", None),
+    "SB": ("수인·분당", line_registry.colour("suin-bundang-line"), "Suin–Bundang Line", None),
+    "GC": ("경춘", line_registry.colour("gyeongchun-line"), "Gyeongchun Line", None),
 }
 # Where the drawn colour differs from the one OSM carries, OSM's (step 1 checks
 # every relation still carries it).

@@ -27,6 +27,7 @@ English station names from OpenStreetMap's name:en.
 
 from pathlib import Path
 
+from pipeline import line_registry
 from pipeline.countries import tokyo_tama
 
 # --- Paths ---------------------------------------------------------------
@@ -172,7 +173,14 @@ LINES = {
 # Line); the two Keio lines, which share 高幡不動, 98.2. The dark-mode labels,
 # 4 of 4. The Keio Line is Chofu's, Fuchu's and Tama's #B030D0; the monorail
 # is Higashiyamato's #E07800.
-_COLOURS = {"KO": "#B030D0", "KD": "#287888", "MONO": "#E07800", "JC": "#F05820"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+_COLOURS = {
+    "KO": line_registry.colour("keio-line"), "KD": "#287888",
+    "MONO": line_registry.colour("tama-toshi-monorail"), "JC": line_registry.colour("jr-east-chuo-line"),
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

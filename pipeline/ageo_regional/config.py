@@ -27,6 +27,7 @@ English station names from OpenStreetMap's name:en.
 
 from pathlib import Path
 
+from pipeline import line_registry
 from pipeline.countries import saitama_pref
 
 # --- Paths ---------------------------------------------------------------
@@ -159,7 +160,13 @@ LINES = {
 # and clears CIE76 45 from every pin. The New Shuttle's green hue sits beside
 # the Food-service pin, so the search muted it (45.0 from the pins; 3.05 on the
 # dark page). The pair separates by 85.1; the dark-mode labels, 2 of 2.
-_COLOURS = {"NS": "#486860", "JT": "#E07800"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+_COLOURS = {
+    "NS": "#486860", "JT": line_registry.colour("jr-east-utsunomiya-takasaki-line"),
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

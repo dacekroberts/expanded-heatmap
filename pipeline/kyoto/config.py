@@ -25,6 +25,8 @@ inside the city line (N03). English station names from OpenStreetMap's name:en
 import datetime
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -297,9 +299,23 @@ LINES = {
 # 43.0), an accepted trade (owner, 2026-10-07). Closest pair still 18.0; the
 # dark-mode labels separate, 18 of 18. DECISIONS, "Lines within 20 of the
 # olive and violet pins recoloured".
-COLOURS = {"K": "#387C04", "T": "#E85820", "JA": "#08A0C0", "JB": "#406878", "JE": "#C870C8", "JD": "#A87840",
-           "JC": "#7098A8", "KM": "#506C30", "KO": "#60A000", "KU": "#20A800", "KK": "#949054", "HY": "#905848",
-           "HA": "#C88070", "KT": "#E80010", "RA": "#9840A0", "RK": "#B880A8", "EM": "#D08000", "EK": "#B05800"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+# Moved so the shared colours fit (2026-10-07), hue kept as far as they allow:
+# the Tōzai Line #E85820 to #D84810 (pins 52.3, nearest line Kintetsu Kyoto
+# Line 12.2, nearest beside it 46.5). docs/decisions_drafts/line-registry.md.
+COLOURS = {
+    "K": "#387C04", "T": "#D84810", "JA": line_registry.colour("jr-west-kyoto-line"),
+    "JB": line_registry.colour("jr-west-biwako-line"), "JE": "#C870C8",
+    "JD": line_registry.colour("jr-west-nara-line"), "JC": line_registry.colour("jr-west-kosei-line"),
+    "KM": line_registry.colour("keihan-main-line"), "KO": "#60A000",
+    "KU": line_registry.colour("keihan-uji-line"), "KK": line_registry.colour("keihan-keishin-line"),
+    "HY": line_registry.colour("hankyu-kyoto-line"), "HA": "#C88070",
+    "KT": line_registry.colour("kintetsu-kyoto-line"), "RA": "#9840A0", "RK": "#B880A8", "EM": "#D08000",
+    "EK": "#B05800",
+}
 for _k, _v in LINES.items():
     _v["colour"] = COLOURS[_k]
 LINE_ORDER = list(LINES)

@@ -21,6 +21,8 @@ English station names from OpenStreetMap's name:en.
 
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -236,7 +238,14 @@ LINES = {
 # pages and clears CIE76 45 from every pin. Iyotetsu's four share one orange
 # and spread over amber and brown. Closest pair within 500 m 18.4 (Gunchu /
 # Yokogawara, which meet only at 松山市); the dark-mode labels separate, 5 of 5.
-_COLOURS = {"TR": "#E07800", "TK": "#C88800", "YK": "#A86000", "GC": "#C05008", "JY": "#08A0C0"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+_COLOURS = {
+    "TR": "#E07800", "TK": "#C88800", "YK": "#A86000", "GC": "#C05008",
+    "JY": line_registry.colour("jr-shikoku-yosan-line"),
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

@@ -21,6 +21,8 @@ names from OpenStreetMap's name:en (owner, 2026-09-27).
 
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -216,6 +218,10 @@ COLLAPSE_MAX_SPREAD_M = 300
 # the streetcar 25.6, Namboku 41.4, JR Chitose 43.0), an accepted trade
 # (owner, 2026-10-07).
 _JR, _SC, _STR = "北海道旅客鉄道", "札幌市", "一般社団法人札幌市交通事業振興公社"
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
 LINES = {
     # Sapporo Municipal Subway (札幌市交通局)
     "N": {"n02": [(_SC, "南北線")], "name": "Namboku Line", "name_ja": "南北線", "colour": "#40A800",
@@ -228,7 +234,7 @@ LINES = {
     "SC": {"n02": [(_STR, "1条線"), (_STR, "都心線"), (_STR, "山鼻西線"), (_STR, "山鼻線")],
            "name": "Sapporo Streetcar", "name_ja": "札幌市電", "colour": "#506C30", "short": "Streetcar"},
     # JR Hokkaido (北海道旅客鉄道)
-    "JH": {"n02": [(_JR, "函館線")], "name": "JR Hakodate Main Line", "name_ja": "函館本線", "colour": "#70A000",
+    "JH": {"n02": [(_JR, "函館線")], "name": "JR Hakodate Main Line", "name_ja": "函館本線", "colour": line_registry.colour("jr-hokkaido-hakodate-main-line"),
            "short": "JR"},
     "JC": {"n02": [(_JR, "千歳線")], "name": "JR Chitose Line", "name_ja": "千歳線", "colour": "#D08000",
            "short": "JR"},

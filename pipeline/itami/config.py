@@ -25,6 +25,8 @@ English station names from OpenStreetMap's name:en.
 import unicodedata
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -215,7 +217,14 @@ LINES = {
 # (2026-10-07), and takes Kobe's new colour for the same line, #A8903C (olive
 # 20.1, between 20 and 45: an accepted trade; Kobe's config gives the
 # search). Its start hue follows. Closest pair now 38.1.
-_COLOURS = {"HI": "#C06038", "JT": "#A8903C", "MO": "#007890"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+_COLOURS = {
+    "HI": line_registry.colour("hankyu-itami-line"), "JT": line_registry.colour("jr-west-takarazuka-line"),
+    "MO": line_registry.colour("osaka-monorail-main-line"),
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

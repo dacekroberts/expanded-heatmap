@@ -24,6 +24,8 @@ line. English station names from OpenStreetMap's name:en.
 
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -201,7 +203,13 @@ LINES = {
 # map pages and clears CIE76 45 from every pin. Closest pair within 500 m and
 # anywhere 31.4 (Enshu / Tokaido, at 浜松 and 新浜松); the dark-mode labels
 # separate, 4 of 4.
-_COLOURS = {"EN": "#E80010", "TH": "#28A800", "JT": "#E86810", "JI": "#08A0C0"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+_COLOURS = {
+    "EN": "#E80010", "TH": "#28A800", "JT": line_registry.colour("jr-central-tokaido-line"), "JI": "#08A0C0",
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

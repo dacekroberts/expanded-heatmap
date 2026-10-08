@@ -26,6 +26,7 @@ names from OpenStreetMap's name:en.
 
 from pathlib import Path
 
+from pipeline import line_registry
 from pipeline.countries import saitama_pref
 
 # --- Paths ---------------------------------------------------------------
@@ -161,7 +162,13 @@ LINES = {
 # clears CIE76 45 from every pin. Tobu's blue sits beside the Retail pin's
 # blue, so the search moved it to a cyan (45.1 from Retail, the nearest pin;
 # 6.06 on the dark page, 3.09 on the light). One line: no pair; the dark-mode label, 1 of 1.
-_COLOURS = {"TS": "#08A0C0"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+_COLOURS = {
+    "TS": line_registry.colour("tobu-skytree-line"),
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

@@ -23,6 +23,8 @@ OpenStreetMap's name:en.
 
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -157,7 +159,13 @@ LINES = {
 # each the feasible colour nearest its operator's hue that reads 3:1 on both
 # map pages and clears CIE76 45 from every pin (the Sanyo Line's teal is
 # Okayama's). The pair separates by 122.7; the dark-mode labels, 2 of 2.
-_COLOURS = {"JS": "#007890", "JN": "#E80010"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+_COLOURS = {
+    "JS": line_registry.colour("jr-west-sanyo-line"), "JN": "#E80010",
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

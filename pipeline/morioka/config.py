@@ -27,6 +27,8 @@ Galaxy Railway. English station names from OpenStreetMap's name:en.
 
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -266,7 +268,14 @@ LINES = {
 # (2026-10-07). It takes #007430, a dark green, ONE colour with Fukushima's
 # for the same line (25.2 from the green pin, 38.0 from olive, between 20 and
 # 45: an accepted trade).
-_COLOURS = {"IG": "#08A0C0", "TH": "#007430", "TZ": "#9840A0", "YM": "#E07800", "HN": "#E80020"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+_COLOURS = {
+    "IG": "#08A0C0", "TH": line_registry.colour("jr-east-tohoku-line"), "TZ": "#9840A0", "YM": "#E07800",
+    "HN": "#E80020",
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

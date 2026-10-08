@@ -9,6 +9,8 @@ one page each; docs/build_briefs/gyeonggi.md, "The next satellites").
 
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Scope: the city, or Anyang (Regional) ---------------------------------
 #
 # REGIONAL adds Gunpo (6 stations) and Uiwang (1) on the lines the map already
@@ -99,9 +101,13 @@ RING_LABELS = ["0-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi", "0.3-0.6 mi"]
 # inside the city only; lines drawn to their ends.
 # key -> (OSM ref, colour, public name, label end).
 # Seoul's colours (the brief). Two lines with no shared station in the city.
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
 LINES = {
-    "L1": ("1", "#004A85", "Line 1", None),
-    "L4": ("4", "#009BCE", "Line 4", None),
+    "L1": ("1", line_registry.colour("seoul-subway-line-1"), "Line 1", None),
+    "L4": ("4", line_registry.colour("seoul-subway-line-4"), "Line 4", None),
 }
 OSM_COLOUR = {}
 LINES_ROUTE_TYPES = {"subway", "light_rail", "monorail", "train"}
