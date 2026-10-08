@@ -72,6 +72,67 @@ or published; every proposal waits for the owner.
   `pack_trim_estimate.py`. The in-app browser pane does not draw while
   hidden; use the headless harnesses for screenshots.
 
+### 2026-10-08 - The full Travel version built on Mendoza and tested on Tokyo; prototypes go to the app with a full handoff (owner; built and measured)
+
+- **Built (commit 83be06a7, branch only):** `render_heatmap(..., businesses=None,
+  full_travel=dict(pmtiles_url, local_lang, local_name, routes, lib))`, an
+  option on the shared renderer (owner: not a fork), handled by
+  `_render_full_travel` in `pipeline/map_common.py` with the shared blocks
+  (theme, legend machinery, wheel zoom, credit, line highlight, tap select,
+  the OpenBasemap layer with `variant="full"`). What differs from the site's
+  Travel view: no Business base layer, heat, rings, pins or business
+  legend; the page fills its window; one finger pans (no cooperative
+  gestures: the page is the map); casings and white ring-dots sized by a
+  zoom table; line-label pills that follow the view; "Station names" in the
+  layer menu; a legend of lines and named routes with no heading.
+- **The hard line, enforced in code:** passing businesses with
+  `full_travel` raises; a written page containing a ring, heat or business
+  layer name is deleted and raises; with `lib` set (offline), a page that
+  loads a script or stylesheet from another host is deleted and raises.
+  All three tested (`guard_test.py`, scratchpad).
+- **Prototype choices, to critique (not yet owner-approved):** zoom table
+  (zoom, dot radius, line width) 10: 2/2, 12: 3/3, 13: 4/3.5, 14: 5/4.5,
+  15: 6/5.5, 17: 8/7, interchanges +1.5, casing +1.5 px a side; casings
+  white in light and the dark page colour in dark; dots white with a
+  #222222 ring in both; pills in the line's colour with white or near-black
+  text by contrast, centred on the line, tried every 16 px along its
+  visible part, middle first, kept clear of other pills, controls, the
+  legend and the dots, none for a line with under 40 px on screen; station
+  names beside the dot, first clear side, interchanges first, faded to 45%
+  for other lines while a line is picked; interchanges from the stations'
+  `lines` column, else lines within 100 m (projected CRS).
+- **Measured.** Tokyo (490 stations, 52 lines), lines with a pill of those
+  with 40+ px on screen, 1000 x 650: zoom 12, 17 of 48; 13, 34 of 38; 14,
+  21 of 21; 15, 16 of 16; 16, 15 of 15; on a 390 px phone 23 of 28 at 13
+  and 16 of 17 at 15. No pill overlaps another; every pill within 3 px of
+  its line. A first version placed pills from Leaflet's `_parts`, which are
+  re-projected only on `viewreset`, after `zoomend` and `moveend`: pills
+  landed up to 607 px off their lines after a zoom; now projected from the
+  lines' coordinates on the next animation frame. Touch on a 390 px phone:
+  a pill tap picks its line and a second clears it; a station tap, and one
+  18 px off, opens the station. No errors in 19 views. The site is
+  unchanged: `check_render_current` 170 of 170, the site Travel view test
+  passes on desktop and touch. Five Tokyo stations (Tokyo, Otemachi,
+  Mitsukoshimae, Nihombashi, Yurakucho) draw 16-33 px off every line at
+  zoom 16: station points are complex centres 30-60 m from any one track
+  (6 of 490 are over 60 m), the same data as the site; left for the app
+  (per-line platform points).
+- **Prototypes go to the app with a full handoff (owner, 2026-10-08):** the
+  app is completely independent of the site, no borrowed code; a prototype
+  goes over as a reference, with a handoff covering the whole build process
+  and every decision the app session could not have seen, and the app
+  critiques it and decides its own changes. Package (scratchpad
+  `site/proto/`, to move to `data/_basemap_build/` with the build): the
+  Mendoza and Tokyo pages, a shared `lib/` (libraries, Noto glyphs,
+  licences), `NOTICE.md`, `README.md`, `range_server.py`, screenshot sheets
+  and `HANDOFF.md`. The app session copies it, as it did the baselines.
+- **For the owner:** the Tokyo test page's basemap is a 1 km cut of
+  Protomaps' 2026-10-07 build, which carries ESA land cover (CC BY 4.0),
+  so the package NOTICE carries ESA's credit; the alternatives are a page
+  without that patch or a self-built Kanto pack (an owner download).
+  Leaflet 1.9.3, maplibre-gl-leaflet 0.1.4 and four licence texts were
+  requested as owner downloads for the offline folder.
+
 ### 2026-10-08 - Fonts settled: Noto, with its licence file and the trademark line beside the glyphs (owner)
 
 - **Decision (owner, 2026-10-08): "yes close font question, noto sounds
