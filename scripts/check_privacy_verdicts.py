@@ -11,7 +11,9 @@ date, and the heading of the DECISIONS entry that records it).
 
 It fails when:
   * a city in `app/cities.py` has no row, or a row names no built city;
-  * a verdict is not one of VERDICTS;
+  * a verdict is not one of VERDICTS, `pending` included: every city in
+    `app/cities.py` ships, so a pending verdict is a built city published
+    without one;
   * the cited heading is not an entry in DECISIONS.md or its archive
     (`docs/decisions/*.md`), or that entry never names the city.
 """
@@ -30,9 +32,12 @@ if hasattr(sys.stdout, "reconfigure"):
 # publish-structural: the source carries no person-name field at all (Dublin's
 # valuation register), so there is nothing to expose.
 VERDICTS = {"publish", "publish-structural"}
-# pending: a known open question for the owner. Reported, not failed (like
-# check_macro_labels' KNOWN_STACKED), and it still has to cite the entry that
-# states the question.
+# pending: a known open question for the owner. It FAILS (review lane 4,
+# 2026-10-07): it used to be reported only, and Suita's row still read pending
+# after the owner's call had answered it and the page had shipped. The row is
+# updated to the verdict once the call is answered, or the city stays off
+# app/cities.py until it is. It still has to cite the entry that states the
+# question.
 PENDING = "pending"
 
 
@@ -95,6 +100,8 @@ def check(root=ROOT):
             problems.append(f"{city}: a row, but no built city by that name in app/cities.py")
         if verdict == PENDING:
             pending.append(city)
+            problems.append(f"{city}: verdict 'pending' on a published city (answer the "
+                            f"call and record the verdict, or take the city off app/cities.py)")
         elif verdict not in VERDICTS:
             problems.append(f"{city}: verdict {verdict!r} is not one of {sorted(VERDICTS)}")
         heading = heading.strip("`* ")
@@ -121,8 +128,7 @@ def main():
             print("  " + p)
         sys.exit(1)
     print(f"OK - all {len(names)} built cities have a privacy verdict, each "
-          f"recorded in a DECISIONS entry that names the city"
-          + (f"; {len(pending)} pending the owner: {', '.join(pending)}" if pending else ""))
+          f"recorded in a DECISIONS entry that names the city")
 
 
 if __name__ == "__main__":
