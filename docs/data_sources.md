@@ -326,6 +326,25 @@ published until the owner approves it at review time.<!-- /internal -->
   stations and lines by reading them from the page, and joins OSM's station
   names to them in the visitor's browser; that display is a Produced Work and
   nothing of it is published as a database.
+<!-- internal -->- **Visiting-status evidence (not data):** a former home is kept against the
+  home rule only when the public can visit it today (`config.PLACE_VISITABLE`;
+  owner, 2026-10-08). Each entry names the page that showed it open, read on
+  the date it records. Nothing from these pages enters the index: they decide
+  whether an OpenStreetMap object stays, the way a reading by eye decides
+  `PLACE_DROPPED`, so no licence or notice of theirs applies to the files.
+  `scripts/check_place_search.py` G holds each entry to a year. Read
+  2026-10-08:
+  - Kyoto: https://ja.kyoto.travel/tourism/article/mitsuike/ (Kyoto City
+    tourism, the former Mitsui villa); https://www.keihan.co.jp/navi/architecture/architecture202606.php
+    (the Komai house); https://www.shimogamo-jinja.or.jp/about/special
+    (Shimogamo Shrine, Shusuisha); https://omuro-kyoto.jp/news/detail.php?id=63
+    (Kyutei Omuro, its own site).
+  - Chicago: https://norwoodparkhistoricalsociety.org/about-us/ (the
+    Noble-Seymour-Crippen House, its society's site).
+  - Vancouver: https://westpointgrey.org/contact/hours-of-operation/
+    (Aberthau, the community centre's site).
+  - Barcelona: https://www.barcelona.cat/barcelonacultura/en/recomanem/corner-greenery-and-freshness-muntaner-street
+    (the Julio Muñoz Ramonet garden, the city's own page).<!-- /internal -->
 - **`LICENSE` carves the index files out** of the MIT and reserved terms, as it
   does for Fukui's CC BY-SA files (§4.4(a) forbids dual licensing; owner,
   2026-10-07).
