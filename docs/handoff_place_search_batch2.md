@@ -40,6 +40,9 @@ what is left into `docs/handoff_place_search_2026-10-07.md`.
 
 ## Where things stand (2026-10-08)
 
+- **The recipe now lives in the `place-search-city` skill**, with the `place-read`
+  agent for the eye read and `scripts/check_place_index_drift.py` for rule
+  changes (owner, 2026-10-08). Batch 3 starts from the skill, not from this file.
 - **2b BUILT and HELD for the owner** (Hong Kong, Seoul, Busan, Tbilisi): the drafts
   file's newest entry holds every call, the audit of the batch's first part and nine
   questions for the owner. Batch 3 waits for the owner's answers and for Cleanup's

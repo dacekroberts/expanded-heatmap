@@ -4,6 +4,17 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-08 - Place search rollout tooling: the place-search-city skill, the place-read agent and an index drift check (owner, branch)
+
+- **"we can build them now"** (owner, on the recommendation at the 2b hold: a skill, a subagent and a drift check, each answering something that went wrong or repeated in 2b; no hook, since the checks cover the rest):
+  - **`place-search-city` skill** (`.claude/skills/place-search-city/`): the per-city recipe from both handoffs, the owner's settled calls, a new language's checklist, the browser test and its harness, closing a batch, the traps, the open owner questions and batch 3's size tests. Its new parts are 2b's lessons: the rule-change protocol (measure a word on every built city before adding it; list every built-index row a rule moves for the owner), never loosening check E, checking every id before `PLACE_DROPPED`, committing only when the index drift check is green. Both handoffs now point to it.
+  - **`place-read` agent** (`.claude/agents/place-read.md`): one city's eye read, read-only, returning candidates by verdict with each id confirmed against its cached name, the repeated classes and an impression; the prompt the three 2b reads used, with what they got wrong (a `tags` hit not in the index, unchecked ids).
+  - **`scripts/check_place_index_drift.py`**: rebuilds every index from its cache in memory and compares the bytes with the files on disk (exit 1 on drift, naming the rows), or with a revision (`--against REV`, the rows a change moved). The 2b commit holding indexes built under older rules would have failed it. Fourteen cities in 78 s, peak 0.56 GB; a city with no cache on disk is skipped and named. Its selftest is in `check_all.py`. `pipeline/drift_check.py` re-runs the index steps too but diffs only `outputs/`.
+  - **`place_index.py`**: `files()` computes the three files an index step writes without writing them, and `build_city()` builds without writing; `run()` and `write()` call them. All fourteen indexes rebuilt byte-identical through the new path.
+  - **`place_search_review.py`**: `ids` prints each OSM id's cached name and whether it is an index row (run before `PLACE_DROPPED`); `ways` lists a city's named minor ways kept and dropped, with private-access counts and leak-word hits (for a new language's word lists); `tags` marks the hits that are index rows.
+- **Not done:** a `CLAUDE.md` pointer. The file is at 1,999 of its 2,000 words (`check_word_budgets.py`); the skill's description lists it for every session.
+- **Checks:** `check_all.py` 53 of 53 (the drift selftest added); `check_place_index_drift.py` 14 of 14 OK; `check_place_search.py` 14 OK.
+
 ### 2026-10-08 - Place search sample, batch 2b: Hong Kong, Seoul, Busan and Tbilisi; Chinese, Korean and Georgian word lists; the batch's first part audited and corrected after a model switch (branch, held for the owner)
 
 - **Built** (owner's split, `docs/handoff_place_search_batch2.md`, 2b): the four cities, each with its config block, index step, map and page bullet; `check_place_search.py` names all fourteen searched maps OK. Held for the owner before batch 3.

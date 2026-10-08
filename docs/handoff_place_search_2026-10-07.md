@@ -23,6 +23,9 @@ changed something (two Overpass queries, two files per city, the home and
 junk rules), the drafts file's 2026-10-08 entry and the batch-2 handoff say
 so.
 
+**The recipe, calls and traps below are now the `place-search-city` skill**
+(2026-10-08), kept current there; this file is the pilot's record.
+
 The judgment trail, every owner quote included, is
 `docs/decisions_drafts/place-search.md` (Cleanup folds it into DECISIONS.md).
 Read it before changing anything below.

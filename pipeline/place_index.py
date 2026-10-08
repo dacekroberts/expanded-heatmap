@@ -50,40 +50,47 @@ def crossings_path(slug):
     return STATIC_DIR / "crossings" / f"{slug}.json"
 
 
-def _site_url(path):
-    """The site path of a file under app/static/, stamped with its content
-    hash (index_url's reason)."""
-    import hashlib
+def _site_url(path, data):
+    """The site path of a file under app/static/, stamped with the hash of its
+    content `data` (index_url's reason)."""
     rel = path.relative_to(STATIC_DIR.parent).as_posix()
-    return f"/app/static/{rel}?v={hashlib.sha256(path.read_bytes()).hexdigest()[:12]}"
+    return f"/app/static/{rel}?v={hashlib.sha256(data).hexdigest()[:12]}"
 
 
 def summary_path(slug):
     return Path(__file__).parent.parent / "outputs" / slug / "place_search.json"
 
 
-def write(index, slug):
-    """Write the index (served as-is: bytes, LF only, no BOM) and the page's
-    summary, outputs/<slug>/place_search.json: the languages the page names,
-    the count and the retrieval date. The app reads the summary, never the
-    index, so a page load costs no megabyte."""
-    # The crossings first: the index carries their file's hashed path, so a
-    # rebuilt crossings file is never served from a browser's old copy.
+def files(index, slug):
+    """{path: bytes} for the three files an index step writes: the
+    intersections file, the index (served as-is: bytes, LF only, no BOM) and
+    the page's summary, outputs/<slug>/place_search.json (the languages the
+    page names, the count and the retrieval date; the app reads the summary,
+    never the index, so a page load costs no megabyte). Computed without
+    writing, so scripts/check_place_index_drift.py can compare them with the
+    files on disk. `index` is build()'s, and is not changed."""
+    index = dict(index)
     cross = index.pop("crossing_rows")
     cpath = crossings_path(slug)
-    cpath.parent.mkdir(parents=True, exist_ok=True)
-    cpath.write_bytes(json.dumps({"license": index["license"], "city": index["city"],
-                                  "part_of": f"{slug}.json", "rows": cross},
-                                 ensure_ascii=False, separators=(",", ":")).encode("utf-8"))
-    index["crossings"] = _site_url(cpath)
-    out = index_path(slug)
-    out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_bytes(json.dumps(index, ensure_ascii=False, separators=(",", ":")).encode("utf-8"))
+    cbytes = json.dumps({"license": index["license"], "city": index["city"],
+                         "part_of": f"{slug}.json", "rows": cross},
+                        ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+    # The index carries the intersections file's hashed path, so a rebuilt
+    # intersections file is never served from a browser's old copy.
+    index["crossings"] = _site_url(cpath, cbytes)
+    ibytes = json.dumps(index, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
     summary = {"index": f"app/static/places/{slug}.json", "places": len(index["rows"]) + len(cross),
                "data_retrieved": index["license"]["data_retrieved"], "languages": index["languages"]}
-    summary_path(slug).write_bytes(
-        (json.dumps(summary, ensure_ascii=False, indent=2) + "\n").encode("utf-8"))
-    return out
+    sbytes = (json.dumps(summary, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+    return {cpath: cbytes, index_path(slug): ibytes, summary_path(slug): sbytes}
+
+
+def write(index, slug):
+    """Write files(index, slug) and return the index's path."""
+    for path, data in files(index, slug).items():
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(data)
+    return index_path(slug)
 
 
 # Folds the browser applies to Latin text on both sides of a match (the search
@@ -110,6 +117,22 @@ def run(config):
     config needs PLACE_OSM_JSON and PLACE_OSM_EXTRA_JSON (each dated by its
     name: osm_places[_vN|_extra]_<date>.json), PLACE_LANGUAGES and
     PLACE_FOLD; the slug and name come from city_of."""
+    slug, _ = city_of(config)
+    index, report = build_city(config)
+    out = write(index, slug)
+    cpath = crossings_path(slug)
+    print(f"Wrote {out} ({out.stat().st_size:,} bytes, {len(index['rows']):,} places), "
+          f"{cpath.relative_to(STATIC_DIR).as_posix()} ({cpath.stat().st_size:,} bytes, "
+          f"{report.get('crossing', 0):,} intersections) and {summary_path(slug).name}")
+    print(f"  languages: {index['languages']['coverage']} -> the page names {index['languages']['listed']}")
+    for k in sorted(report):
+        print(f"  {k}: {report[k]:,}")
+    return index
+
+
+def build_city(config):
+    """(index, report) for a city's config, exactly as run() builds it, writing
+    nothing; it exits naming the fetch script when a cache is missing."""
     import sys
     slug, name = city_of(config)
     if not config.PLACE_OSM_JSON.exists():
@@ -156,15 +179,7 @@ def run(config):
     stale = sorted(set(visitable) - found)
     if stale:
         sys.exit(f"config.PLACE_VISITABLE names {stale}, not in the cache: remove them")
-    out = write(index, slug)
-    cpath = crossings_path(slug)
-    print(f"Wrote {out} ({out.stat().st_size:,} bytes, {len(index['rows']):,} places), "
-          f"{cpath.relative_to(STATIC_DIR).as_posix()} ({cpath.stat().st_size:,} bytes, "
-          f"{report.get('crossing', 0):,} intersections) and {summary_path(slug).name}")
-    print(f"  languages: {index['languages']['coverage']} -> the page names {index['languages']['listed']}")
-    for k in sorted(report):
-        print(f"  {k}: {report[k]:,}")
-    return index
+    return index, report
 
 
 # VISITABLE FORMER HOMES (owner, 2026-10-08: "yes short list, visitable only

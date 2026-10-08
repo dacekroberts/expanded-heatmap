@@ -3,7 +3,9 @@ the sample's first batch did it (2026-10-08). REPORTS only; changes nothing.
 
     python scripts/place_search_review.py odd <city>              # names to read by eye
     python scripts/place_search_review.py tags <city> <text> ...  # OSM tags of named objects
+    python scripts/place_search_review.py ids <city> <type/id> ...  # each id's cached name, before PLACE_DROPPED
     python scripts/place_search_review.py added <city>            # what the extra query brought
+    python scripts/place_search_review.py ways <city>             # named minor ways kept and dropped, leak hits
     python scripts/place_search_review.py sizes [<city> ...]      # bytes, gzip, rows by kind
 
 odd: every landmark and place whose names hold no obvious place word (park,
@@ -14,6 +16,22 @@ whole; a find that no rule in pipeline/place_index.py can catch goes in the
 city's config.PLACE_DROPPED by OSM id, with why.
 
 tags: the cached OSM tags behind a name, for deciding why a row is there.
+Each line says whether that name is an index row ([in index]); the cache
+holds far more than the index, so a hit without it needs no action.
+
+ids: each OSM id ("way/611143901") with its cached name and whether that name
+is an index row. Run it on every id before it goes in a city's
+config.PLACE_DROPPED (batch 2b, 2026-10-08: three agents' reads gave about
+sixty ids; a wrong one would drop the wrong place silently).
+
+ways: for a city in a NEW language, before its word lists are final: the
+named minor ways (footway, path, steps, cycleway, track, bridleway, service)
+the way-word test keeps and drops, how many of each carry access=private or
+no, and every leak word found on a named object, with examples. The dropped
+list is where missing way words show (Hong Kong's terraces 臺, Korean steps
+계단); the kept list is where a word too loose shows (batch 2b: English
+"court" and "drive" kept 155 private driveways in Seattle). Measure every
+built city too before adding a word to a language they share.
 
 added: the names the second query (place_index_fetch.EXTRA_QUERY) put in the
 index: stadiums, artworks, civic buildings, airports, beaches, bays, places
@@ -95,14 +113,69 @@ def odd(city):
         print(" | ".join(names))
 
 
+def index_names(city):
+    return {r[3] for r in index(city)["rows"]}
+
+
 def tags(city, texts):
     cfg = config(city)
+    names = index_names(city)
     skip = ("addr:", "source", "check_date", "survey", "note", "fixme")
     for path in (cfg.PLACE_OSM_JSON, cfg.PLACE_OSM_EXTRA_JSON):
         for e in elements(path):
             t = e.get("tags") or {}
             if any(s in t.get("name", "") for s in texts) and "highway" not in t:
-                print(e["type"], e["id"], {k: v for k, v in t.items() if not k.startswith(skip)})
+                mark = "[in index] " if t.get("name") in names else ""
+                print(mark + e["type"], e["id"], {k: v for k, v in t.items() if not k.startswith(skip)})
+
+
+def ids(city, wanted):
+    cfg = config(city)
+    names = index_names(city)
+    found = {}
+    for path in (cfg.PLACE_OSM_JSON, cfg.PLACE_OSM_EXTRA_JSON):
+        for e in elements(path):
+            key = f"{e['type']}/{e['id']}"
+            if key in wanted:
+                found[key] = (e.get("tags") or {}).get("name")
+    for key in wanted:
+        if key not in found:
+            print(f"{key}  NOT IN THE CACHE")
+        else:
+            n = found[key]
+            print(f"{key}  {n}  {'[in index]' if n in names else '(not an index row name)'}")
+
+
+def ways(city):
+    cfg = config(city)
+    local = cfg.PLACE_LANGUAGES
+    name_tags = place_index._name_tags(local)
+    kept, dropped = collections.defaultdict(int), collections.defaultdict(int)
+    private = collections.Counter()
+    leaks = collections.defaultdict(set)
+    for path in (cfg.PLACE_OSM_JSON, cfg.PLACE_OSM_EXTRA_JSON):
+        for e in elements(path):
+            t = e.get("tags") or {}
+            if not t.get("name"):
+                continue
+            names = place_index._names(t, name_tags)
+            word = place_index.leak_word(names, local)
+            if word:
+                leaks[word].add(t["name"])
+            if (e["type"] != "way" or t.get("highway") not in place_index.MINOR_HIGHWAYS
+                    or t.get("highway") in place_index.SKIP_HIGHWAY or t.get("area") == "yes"
+                    or t.get("service") in place_index.SKIP_SERVICE):
+                continue
+            keep = bool(t.get("wikidata") or t.get("wikipedia") or place_index._reads_as_way(names, local))
+            (kept if keep else dropped)[t["name"]] += 1
+            private[(keep, t.get("access") in ("private", "no"))] += 1
+    print(f"== named minor ways: kept {len(kept):,} names ({private[(True, True)]:,} ways private), "
+          f"dropped {len(dropped):,} names ({private[(False, True)]:,} ways private)")
+    print("KEPT: " + " | ".join(sorted(kept)[:300]))
+    print("DROPPED: " + " | ".join(sorted(dropped)[:300]))
+    print("== leak words on named objects:")
+    for w in sorted(leaks, key=lambda k: -len(leaks[k])):
+        print(f"   {w} ({len(leaks[w])}): " + " | ".join(sorted(leaks[w])[:8]))
 
 
 def added(city):
@@ -133,13 +206,17 @@ def sizes(cities):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2 or sys.argv[1] not in ("odd", "tags", "added", "sizes"):
+    if len(sys.argv) < 2 or sys.argv[1] not in ("odd", "tags", "ids", "ways", "added", "sizes"):
         sys.exit(__doc__)
     cmd, args = sys.argv[1], sys.argv[2:]
     if cmd == "odd":
         odd(args[0])
     elif cmd == "tags":
         tags(args[0], args[1:])
+    elif cmd == "ids":
+        ids(args[0], args[1:])
+    elif cmd == "ways":
+        ways(args[0])
     elif cmd == "added":
         added(args[0])
     else:

@@ -12,7 +12,8 @@ python pipeline/<city_slug>/step3_map.py
 python pipeline/place_index_fetch.py <city_slug> [--force]   # place search: its two Overpass queries, in turn; NOT a step
 python pipeline/<city_slug>/step2b_place_index.py       # place search: the index, before step 3
 python scripts/check_place_search.py [--selftest]       # every searched map current; languages measured; ODbL; junk and leak words
-python scripts/place_search_review.py odd|tags|added|sizes <city_slug>   # REPORTS only: a new index's reading by eye
+python scripts/place_search_review.py odd|tags|ids|ways|added|sizes <city_slug>   # REPORTS only: a new index's reading by eye (skill place-search-city)
+python scripts/check_place_index_drift.py [city] [--against REV] [--selftest]   # every index is what the code builds from its cache; --against lists rows changed since REV
 python pipeline/drift_check.py [city_slug] [--jobs N]   # every city; --jobs 3 at most, one run per machine
 python pipeline/drift_check.py --render-only [--jobs N] # map step only, against data/<city>/processed/ as it stands; never the pre-deploy gate
 python scripts/drift_check_selftest.py                  # touches nothing
