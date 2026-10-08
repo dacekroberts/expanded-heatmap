@@ -137,12 +137,25 @@ def run(config):
     # older of the two): never today.
     retrieved = min(p.stem.rsplit("_", 1)[-1] for p in (config.PLACE_OSM_JSON, extra))
     dropped = getattr(config, "PLACE_DROPPED", {})
+    visitable = getattr(config, "PLACE_VISITABLE", {})
+    bad = visitable_problems(visitable)
+    if bad:
+        sys.exit("config.PLACE_VISITABLE: " + "; ".join(bad))
+    # Dated by the cache, never today, so a rebuild reproduces: an entry
+    # checked more than VISITABLE_MAX_DAYS before the cache was fetched is
+    # ignored (its home goes back out). scripts/check_place_search.py G holds
+    # the calendar line.
+    live = {k for k, v in visitable.items() if _days(v["checked"], retrieved) <= VISITABLE_MAX_DAYS}
     index, report = build(payload["elements"], city=name, retrieved=retrieved,
-                          local=config.PLACE_LANGUAGES, fold=fold, dropped=dropped)
+                          local=config.PLACE_LANGUAGES, fold=fold, dropped=dropped,
+                          visitable=live)
     found = {f"{e['type']}/{e['id']}" for e in payload["elements"]}
     stale = sorted(set(dropped) - found)
     if stale:
         sys.exit(f"config.PLACE_DROPPED names {stale}, not in the cache: remove them")
+    stale = sorted(set(visitable) - found)
+    if stale:
+        sys.exit(f"config.PLACE_VISITABLE names {stale}, not in the cache: remove them")
     out = write(index, slug)
     cpath = crossings_path(slug)
     print(f"Wrote {out} ({out.stat().st_size:,} bytes, {len(index['rows']):,} places), "
@@ -152,6 +165,52 @@ def run(config):
     for k in sorted(report):
         print(f"  {k}: {report[k]:,}")
     return index
+
+
+# VISITABLE FORMER HOMES (owner, 2026-10-08: "yes short list, visitable only
+# hard line. Must make sure info is up-to-date on visitation eligibility. if
+# too much to maintain then can the whole idea"). A city's
+# config.PLACE_VISITABLE names, by OSM id, a home the home rule holds out that
+# the public can visit today, each with its evidence:
+#     "way/515857420": {"name": "旧三井家下鴨別邸", "access": "OPEN_REGULAR",
+#                       "source": "https://...", "checked": "2026-10-08",
+#                       "why": "one sentence"}
+# access is OPEN_REGULAR (a public schedule) or OPEN_SEASONAL (public opening
+# periods each year); by appointment, events or heritage days only is not
+# visitable. An entry lapses VISITABLE_MAX_DAYS after it was checked:
+# check_place_search.py G fails from that day until it is re-checked or
+# removed, and the index step ignores it once the cache is newer.
+VISITABLE_ACCESS = ("OPEN_REGULAR", "OPEN_SEASONAL")
+VISITABLE_MAX_DAYS = 365
+VISITABLE_KEYS = {"name", "access", "source", "checked", "why"}
+
+
+def _days(a, b):
+    """Days from date a to date b (ISO strings)."""
+    import datetime
+    return (datetime.date.fromisoformat(b) - datetime.date.fromisoformat(a)).days
+
+
+def visitable_problems(visitable):
+    """What is wrong with a config.PLACE_VISITABLE, as messages; [] when sound."""
+    import datetime
+    out = []
+    for k, v in visitable.items():
+        if not re.fullmatch(r"(node|way|relation)/[0-9]+", k):
+            out.append(f"{k}: not an OSM id")
+            continue
+        if not isinstance(v, dict) or set(v) != VISITABLE_KEYS:
+            out.append(f"{k}: fields must be {sorted(VISITABLE_KEYS)}")
+            continue
+        if v["access"] not in VISITABLE_ACCESS:
+            out.append(f"{k}: access {v['access']!r} is not one of {VISITABLE_ACCESS}")
+        if not str(v["source"]).startswith("https://"):
+            out.append(f"{k}: source must be an https URL")
+        try:
+            datetime.date.fromisoformat(v["checked"])
+        except (TypeError, ValueError):
+            out.append(f"{k}: checked {v['checked']!r} is not a date")
+    return out
 
 
 def index_url(slug):
@@ -626,11 +685,13 @@ def _point(el):
     return (c["lat"], c["lon"]) if c else None
 
 
-def build(elements, *, city, retrieved, local, fold=None, dropped=()):
+def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=()):
     """Return (index dict, report dict) from one place cache's elements.
     `local`: the city's local language codes (config.PLACE_LANGUAGES).
     `dropped`: OSM objects ("way/504652702") a reading by eye found to be a
-    business or a home that no rule catches (config.PLACE_DROPPED)."""
+    business or a home that no rule catches (config.PLACE_DROPPED).
+    `visitable`: homes the public can visit today, kept against the home rule
+    (config.PLACE_VISITABLE's live entries; VISITABLE FORMER HOMES above)."""
     name_tags = _name_tags(local)
     nodes = {}
     ways = []
@@ -843,11 +904,13 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=()):
                 report["landmark_dropped_not_notable"] += 1
                 continue
             # A home is never a landmark (_home), unless public (_public_home:
-            # a former residence that is now a museum). Kyoto's condominium
+            # a former residence that is now a museum) or listed as visitable
+            # today with a dated source (config.PLACE_VISITABLE). Kyoto's condominium
             # grounds were tagged leisure=park on landuse=residential
             # (2026-10-07); Vancouver's register of heritage houses carries the
             # names of the families who built them (2026-10-08).
-            if _home(t, names, local) and not _public_home(t):
+            oid = f"{e['type']}/{e['id']}"
+            if _home(t, names, local) and not _public_home(t) and oid not in visitable:
                 report["landmark_dropped_residential"] += 1
                 continue
             # A landmark named as a bare Japanese personal name (the map's sign
@@ -855,7 +918,7 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=()):
             # a given name) is someone's house or grave, unless public. The
             # Korean rule (korean_names.looks_like_personal_name) is NOT used:
             # without its address test it reads 이태원 and 강남역 as people.
-            if "ja" in local and not _public_home(t) and any(_bare_personal(n) for n in names):
+            if "ja" in local and not _public_home(t) and oid not in visitable and any(_bare_personal(n) for n in names):
                 report["landmark_dropped_personal_name"] += 1
                 continue
             # A garden is often a private one at a house, and may carry a
@@ -883,7 +946,7 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=()):
             word = leak_word(names, local)
             home_word = word in {w for c in (["en", *local]) for w in HOME_WORDS.get(c, ())}
             if word and not (
-                    _public_home(t) or t.get("historic") in ("ruins", "archaeological_site")
+                    _public_home(t) or oid in visitable or t.get("historic") in ("ruins", "archaeological_site")
                     or (t.get("wikipedia") and not home_word)):
                 report["landmark_dropped_leak_word"] += 1
                 continue

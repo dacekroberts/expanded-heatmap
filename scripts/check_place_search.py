@@ -35,6 +35,11 @@ index step measures each language's share of the places
      (4.4(d)).
   F. No name is a placeholder, an error value or a number alone ("Untitled",
      "#N/A", "47"; place_index.junk_name), so none is ever suggested.
+  G. Every visitable former home kept against the home rule
+     (config.PLACE_VISITABLE) carries its access verdict, an https source
+     and the date it was checked, and was checked within
+     place_index.VISITABLE_MAX_DAYS: a lapsed entry fails until re-checked
+     or removed (owner, 2026-10-08: visitable only, kept up to date).
   A and D apply to the intersections file too (app/static/places/crossings/,
      since 2026-10-08): the index names it under its current hash, and it
      holds only [lat, lon, street, street] rows and the index's licence.
@@ -147,6 +152,32 @@ def check_leaks(slug, index, reviewed=None):
     return problems
 
 
+def check_visitable(slug, visitable=None, today=None):
+    """G: every visitable former home (config.PLACE_VISITABLE) is sound and
+    checked within place_index.VISITABLE_MAX_DAYS of today (owner, 2026-10-08:
+    "Must make sure info is up-to-date on visitation eligibility"). A lapsed
+    entry fails until its visiting status is checked again from its source and
+    the date renewed, or the entry is removed (its home then leaves the index)."""
+    import datetime
+    if visitable is None:
+        import importlib
+        try:
+            visitable = getattr(importlib.import_module(f"pipeline.{slug}.config"), "PLACE_VISITABLE", {})
+        except ImportError:
+            return []
+    today = today or datetime.date.today().isoformat()
+    problems = [f"G: {m}" for m in place_index.visitable_problems(visitable)]
+    for k, v in visitable.items():
+        try:
+            age = place_index._days(v["checked"], today)
+        except (KeyError, TypeError, ValueError):
+            continue
+        if age > place_index.VISITABLE_MAX_DAYS:
+            problems.append(f"G: {k} ({v.get('name')}) last checked {v['checked']}, {age} days ago: check its "
+                            f"visiting status again at its source and renew 'checked', or remove the entry")
+    return problems
+
+
 def pages_by_slug():
     out = {}
     for page in sorted((ROOT / "app" / "pages").glob("*.py")):
@@ -193,6 +224,7 @@ def main():
         p += check_crossings(slug, index)
         p += check_junk(index)
         p += check_leaks(slug, index)
+        p += check_visitable(slug)
     for page in sorted((ROOT / "app" / "pages").glob("*.py")):
         if BULLET in page.read_text(encoding="utf-8"):
             problems.setdefault(page.name, []).append(
@@ -261,7 +293,18 @@ def selftest():
         got = len(check_junk(dict(base, rows=rows)))
         ok += got == want
         print(f"  {'ok ' if got == want else 'BAD'} {label}: {got} problem(s)")
-    total = len(cases) + 1 + len(leak_cases) + 1 + len(junk_cases)
+    entry = {"name": "x", "access": "OPEN_REGULAR", "source": "https://example.org/visit",
+             "checked": "2026-10-08", "why": "open daily"}
+    visit_cases = [("a fresh entry", {"way/1": entry}, "2026-12-01", 0),
+                   ("a lapsed entry", {"way/1": entry}, "2027-10-20", 1),
+                   ("appointment only is not visitable", {"way/1": dict(entry, access="APPOINTMENT")},
+                    "2026-12-01", 1),
+                   ("no source", {"way/1": {k: v for k, v in entry.items() if k != "source"}}, "2026-12-01", 1)]
+    for label, visitable, today, want in visit_cases:
+        got = len(check_visitable("x", visitable, today))
+        ok += got == want
+        print(f"  {'ok ' if got == want else 'BAD'} {label}: {got} problem(s)")
+    total = len(cases) + 1 + len(leak_cases) + 1 + len(junk_cases) + len(visit_cases)
     print(f"{ok} of {total} cases behaved as intended.")
     return 0 if ok == total else 1
 
