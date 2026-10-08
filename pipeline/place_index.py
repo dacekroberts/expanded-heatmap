@@ -30,6 +30,7 @@ import hashlib
 import json
 import math
 import re
+import unicodedata
 from collections import defaultdict
 from pathlib import Path
 
@@ -208,7 +209,7 @@ LEAK_WORDS = {
     "es": ("hotel", "hostal", "aparcamiento", "parking", "privado", "privada", "tienda", "restaurante",
            "pisos", "farmacia", "s.l.", "s.a."),
     "cs": ("hotel", "penzion", "parkoviště", "soukromé", "soukromá", "obchod", "restaurace",
-           "bytový dům", "bytové domy", "lékárna", "s.r.o.", "a.s."),
+           "bytový dům", "bytové domy", "lékárna", "s.r.o.", "a.s.", "rezidence"),
     "nl": ("hotel", "parking", "privé", "winkel", "restaurant", "appartementen", "residentie",
            "apotheek", "bvba", "nv"),
 }
@@ -224,7 +225,7 @@ HOME_WORDS = {
            "h.l.m."),
     "ca": ("pisos", "privat", "privada"),
     "es": ("pisos", "privado", "privada"),
-    "cs": ("bytový dům", "bytové domy", "soukromé", "soukromá"),
+    "cs": ("bytový dům", "bytové domy", "soukromé", "soukromá", "rezidence"),
     "nl": ("appartementen", "residentie", "privé"),
 }
 
@@ -364,13 +365,25 @@ WAY_WORDS = {
     "es": ("calle", "avenida", "paseo", "plaza", "camino", "pasaje", "puente", "ronda", "vía",
            "escaleras", "sendero"),
     "cs": ("ulice", "třída", "náměstí", "nábřeží", "most", "lávka", "cesta", "stezka", "schody",
-           "schodiště", "alej", "sady", "pěšina", "průchod", "pasáž", "nároží", "stoupání"),
+           "schodiště", "alej", "sady", "pěšina", "průchod", "pasáž", "nároží", "stoupání",
+           "náplavka"),
     "nl": ("straat", "laan", "weg", "plein", "steenweg", "kaai", "lei", "dreef", "brug", "pad",
            "gang", "steeg", "dijk", "doorgang", "trap", "wandeling", "promenade", "galerij"),
 }
 # Languages that write a way word inside a compound ("Nieuwstraat",
 # "Kerkpad"): _reads_as_way matches it as a word's ending there.
 SUFFIX_WAY_LANGUAGES = {"nl"}
+# Street names that carry no street word at all. Czech names a street with a
+# preposition ("Na Viničce", "U Vizerky", "Pod Havránkou") or an adjective
+# agreeing with the unwritten "ulice" ("Bělohorská", "Goyova"): Prague's
+# named footways and tracks lost 2,345 ways to the way-word test alone
+# (batch 2a, 2026-10-08). WAY_LEAD is the name's first word, WAY_ENDING the
+# ending of its last.
+WAY_LEAD = {"cs": ("na", "u", "k", "ke", "pod", "nad", "za", "do", "ve", "v", "při", "před",
+                   "mezi", "po", "proti", "přes", "od", "ze", "z")}
+# A trailing Roman numeral ("Herálecká II", "Podnikatelská Ⅰ") is set aside first.
+WAY_ENDING = {"cs": ("á", "ní", "ova", "ého")}
+ROMAN = {"i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x"}
 # Any landmark with one of these is (also) a business, and stays out.
 COMMERCIAL_KEYS = ("shop", "office", "craft", "brand", "cuisine")
 # operator:type by value: Nishiki Market is run by its shopkeepers' cooperative
@@ -537,6 +550,13 @@ def _reads_as_way(names, local):
     language that compounds (SUFFIX_WAY_LANGUAGES), as a word's ending
     ("Nieuwstraat")."""
     for code in dict.fromkeys(["en", *local]):
+        lead, ending = WAY_LEAD.get(code, ()), WAY_ENDING.get(code, ())
+        for n in names:
+            ws = re.findall(r"\w+", unicodedata.normalize("NFKC", n).lower())
+            while len(ws) > 1 and ws[-1] in ROMAN:
+                ws.pop()
+            if ws and ((len(ws) > 1 and ws[0] in lead) or (ending and ws[-1].endswith(ending))):
+                return True
         for word in WAY_WORDS.get(code, ()):
             for n in names:
                 low = n.lower()
@@ -828,6 +848,13 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=()):
             if t.get("waterway"):
                 # A river comes as one row per way; merged by name below.
                 rivers[names[0]].append((pt, names, langs))
+                continue
+            # A Stolperstein names one person at their last home ("Zde bydlela
+            # Irma Kohnová", here lived ...): a private person at a home, never
+            # a place to search, whatever its wikidata item (Prague's came in
+            # bulk from the small-monuments register; batch 2a, 2026-10-08).
+            if t.get("memorial") == "stolperstein":
+                report["landmark_dropped_stolperstein"] += 1
                 continue
             if t.get("historic") in SKIP_HISTORIC and not any(
                     t.get(k) for k in ("tourism", "amenity", "leisure", "wikidata")):

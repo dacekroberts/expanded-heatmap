@@ -1,0 +1,18 @@
+{
+  "index": "app/static/places/prague.json",
+  "places": 26155,
+  "data_retrieved": "2026-10-08",
+  "languages": {
+    "local": [
+      "cs"
+    ],
+    "coverage": {
+      "en": 0.017,
+      "cs": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Czech"
+    ]
+  }
+}
