@@ -9,6 +9,133 @@ app is its own project, this repo keeps the basemap switch, its hosting and an
 export contract (owner, relayed by Cleanup). Nothing here is landed, pushed
 or published; every proposal waits for the owner.
 
+### 2026-10-08 - RESUME NOTE for the next session (internal; Cleanup drops this entry when folding)
+
+- **Next step: build Mendoza from the owner's inputs** with the compiled
+  builder, through the memory gate, then compare it with the downloaded
+  pack. Suggested command (from the worktree root; `--bounds` keeps the
+  output to Mendoza's pack extent, `-Xmx` caps the heap; the peak is an
+  estimate, no Java build has been measured here):
+  `python scripts/heavy_job.py run --label basemap-build-mendoza --session epic-neumann --peak-gb 6 --estimate "planetiler on a 432 MB extract, -Xmx5g" -- data/_basemap_build/tools/jdk-21.0.12.1+1/bin/java.exe -Xmx5g -jar data/_basemap_build/basemaps-main/tiles/target/protomaps-basemap-HEAD-with-deps.jar --area=argentina --bounds=-68.9700,-32.9960,-68.7260,-32.7670 --maxzoom=15 --output=data/_basemap_build/mendoza_selfbuilt`
+  Run it from `data/_basemap_build/`, since the builder reads
+  `data/sources/` relative to its working directory; adjust paths
+  accordingly. Never pass `--download`: every input is already local.
+- **Where things are.** `data/_basemap_build/` (gitignored, this worktree):
+  `data/sources/` holds argentina.osm.pbf (sha256 d23c0242...c5021f14),
+  water and land polygons, Natural Earth, pgf-encoding, and the two empty
+  stand-ins (qrank.csv.gz, 49 bytes; daylight-landcover.gpkg, an empty
+  `landcover` layer with a `class` column). `tools/` holds the unpacked JDK
+  21.0.12.1 and Maven 3.9.16; `basemaps-main/tiles/target/` the compiled
+  builder (1.6 min compile, 2026-10-08); `m2repo/` Maven's 127 MB library
+  cache. Avignon (PACA, 390 MB) and Florence (Italy centro, 385 MB)
+  extracts are not downloaded yet; the owner downloads by hand.
+- **Scratch tools** (this session's scratchpad,
+  `C:\Users\dacek\AppData\Local\Temp\claude\C--Users-dacek-Documents-Portfolio-expanded-heatmap--claude-worktrees-epic-neumann-5aa0a6\bd1314d5-8fea-459a-81fe-c606b5bfdae5\scratchpad\`):
+  `render_mendoza.py` (today and switch renders into `site/`),
+  `render_open_default.py` (Travel-default variant), `range_server.py`
+  (local HTTP range server; launch entry `basemap-proto-tmp` in the
+  worktree's `.claude/launch.json`, added and removed per run), headless
+  Edge harnesses `measure.mjs` and `measure2.mjs` (phone load, memory,
+  bytes, cold and warm), `interact.mjs` (line highlight and the rest, mouse
+  and touch), `travel_check.mjs` (the half version), `offline.mjs` (no
+  network), `attr_check.mjs` (runs `scripts/check_map_attribution.js`),
+  `shots.mjs`; `site/offline/` holds the local libraries, fonts and
+  sprites for the offline test; `basemap_baseline_2026-10-07/` the frozen
+  baseline given to the travel app; `shots/` the screenshots.
+- **Open items, in order:** the self-build comparison; Avignon and Florence
+  (extracts first); the shared Travel style (the app's rules below) as a
+  style filter, then the full version as a renderer option (no business
+  data, the hard line enforced by a check); white line casings and white
+  station dots in Travel for the owner's screenshots; Protomaps' dark
+  flavor in Travel; the Overview Business/Travel toggle (`app/`, branch
+  only); the legend follow-up (re-enabled pins in Travel); a test of a
+  non-Google font (item 17 below); the Free Worker against an R2 custom
+  domain comparison (needs the owner's Cloudflare account and the
+  Cloudflare terms read first).
+
+### 2026-10-08 - The travel app's basemap rules, shared by the Travel views (owner, via the app project)
+
+- **Received from transit-globe, 2026-10-07/08, as the owner's choices for
+  the full Travel version; the owner made one Travel basemap style shared
+  by the full version and the site's Travel view (2026-10-08).** Method:
+  try every change in the style first and make only the kept ones
+  permanent at build time; measure each against the pinned Mendoza
+  baseline; before anything is final, dark versions and a colour-blindness
+  check of every tint, and z14 against z15 screenshots for the owner. Hex
+  values are drafts.
+- **Design rules.** Hierarchy, top to bottom: transit lines (cased) and
+  station dots; station areas and platforms; labels (places, then
+  streets); ferries and aerial lifts; roads (muted, few weights); land-use
+  tints; land and water. "The basemap is context, never content." One tint
+  per category, pale tints differing only by hue; transit owns the
+  lavender family; operators' line colours never reused for areas or dots;
+  the only saturated colours are transit (lines, the station-area border,
+  ferries, lifts). Lines always carry a white casing (Ginza orange 1.6:1
+  and Hibiya grey 1.5:1 against any light ground); station dots white with
+  a dark ring (above 8:1 on every tint), interchanges larger. One look on
+  every surface. Each feature is DECIDED, DEFERRED FOR SCOPE (with why,
+  what would bring it back, and the decision) or EXCLUDED BY RULE. Mobile
+  first: every kept feature justifies its bytes on a phone; the build
+  machine pays, never the reader.
+- **Layer choices.**
+  - pois: dropped (a few landmarks may return later).
+  - landcover: dropped everywhere (empty stand-in); the world map is plain
+    land, sea and borders, so the city dots are the only colour.
+  - landuse: business kinds dropped (cafe, grocery, supermarket, hotel,
+    post_office). Earth #e2dfda. Parks #a8d5b5; wild land #c2d8b0;
+    cemetery #cad3c7; beach and sand #ece3c6; other natural kinds #d9d5cc;
+    institutions #e7dbd7; railway land #d6cfe8 (tint only); platforms
+    #c3b8de; station area the same tint with a 3 px border #7e6fb0 (from
+    OSM station-area polygons or a footprint around the export's platforms
+    and exits; to be tested); aerodrome #d8dae1, runway #c3c6cf, taxiway
+    faint; built-up, attractions and `other` plain.
+  - boundaries: country and region; wards per city where useful (Tokyo,
+    Seoul first); disputed borders OPEN.
+  - roads: fewer, muted colours; service, driveway, parking_aisle, alley,
+    track and drive-through dropped; road numbers and shields dropped to
+    start; steps, corridor and pedestrian kept; basemap rail hidden to
+    start; sidings, yards, crossovers, miniature and preserved dropped
+    (scenic lines drawn from the export's `scenic` exclusions as a marked
+    category); ferries and aerial lifts kept and prominent; tunnels faded.
+  - buildings: merged blocks only (z0-14); favours a z14 stop, for the zoom
+    review.
+  - Excluded by rule in the app: business data, routing beyond the owner's
+    line, land cover, QRank, and any download from Protomaps' hosts
+    (build.protomaps.com, r2-public.protomaps.com).
+- **Measured against the site** (CIE76, see the next entry): the draft
+  station-area border #7e6fb0 is 24.7 from Retail blue and 26.5 from the
+  planned violet, below the project's preferred 45; suggested to the app
+  that the border sit at least 45 from the site's pin colours.
+
+### 2026-10-08 - Decisions for going public (owner, one pass)
+
+- **12. Hosting:** compare the free Worker (workers.dev) with R2 behind a
+  custom domain, live, before choosing (owner). Needs the owner's
+  Cloudflare account and the Cloudflare terms read first.
+- **13. Packs treated as an ODbL database: yes, and it applies to the app
+  too** (the app ships packs to devices: ODbL in the pack metadata and a
+  README, a free download offer, no encryption or restriction, ODbL 4.7).
+- **14. Separate files per source within each city** in the export: yes.
+- **15. Exports as release files in this repo for now; move if needed.**
+  The app builds its own packs; what it reads from here is the export
+  (stations, lines, exits, notices, dates).
+- **16. Notices into a data file: yes, if it conflicts with nothing.** It
+  touches `app/components.py` (a deploy and a reboot) and
+  `scripts/check_provenance.py`, which parses `_NOTICES` from source, so
+  both move together, at review time.
+- **17. The Noto trademark line: yes, unless a non-Google font avoids it,
+  especially for the app.** To test in the pilot: an OFL font from outside
+  Google (Inter for Latin, Greek and Cyrillic is a candidate) turned into
+  glyph files with maplibre/font-maker, with its own licence read; CJK
+  already comes from the device's fonts.
+- **18. Notice 1's privacy text: drafted at review time** (owner: "this is
+  important to get right"). App implication: the app writes its own
+  privacy text for whatever its packs and exports are fetched from.
+- **19. Whether the half version goes live: after the pilot,** weighing
+  the legal findings together.
+- **The stray file** `neutral-comment-style.md` in the main checkout is
+  Cleanup's own, from a code audit; Cleanup to file it.
+
 ### 2026-10-08 - Pilot decisions (owner, one pass)
 
 - **Maven compile:** this session runs it, quietly (owner).
