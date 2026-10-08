@@ -399,7 +399,13 @@ JUNK_MARKS = ("#n/a", "#ref", "#value", "#div/0", "#name?", "#num", "#null", "!e
 
 def junk_name(name):
     low = name.strip().lower()
-    return (not any(c.isalpha() for c in low) or low.strip("!?.# ") in JUNK_NAMES
+    # A "?" where a character was lost in decoding, as map_common's
+    # glitched-name rule reads it (Cleanup, 2026-10-08): leading and not
+    # followed by a space ("??野家"; New York's "? TEA" stays), or between two
+    # letters ("Montr?al"). The two rules are to agree, and merge at landing.
+    lost = (low.startswith("?") and not low.startswith("? ")) or any(
+        low[i] == "?" and low[i - 1].isalpha() and low[i + 1].isalpha() for i in range(1, len(low) - 1))
+    return (lost or not any(c.isalpha() for c in low) or low.strip("!?.# ") in JUNK_NAMES
             or any(m in low for m in JUNK_MARKS))
 
 
