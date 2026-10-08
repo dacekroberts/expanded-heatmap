@@ -3514,7 +3514,12 @@ FULL_TRAVEL_SCRIPT = """
             var placed = [];
             order.forEach(function (p) {
                 var run = runs[p.ln.n];
-                if (run.total < MIN_RUN) { hide(p); return; }
+                // The picked line always gets its pill while any of it is in
+                // view, even zoomed far out (owner, 2026-10-08): it needs no
+                // minimum run, and when no clear spot is left it may cover
+                // station dots (a second pass below).
+                var hot = String(p.ln.n) === shown;
+                if (run.total < (hot ? 1 : MIN_RUN)) { hide(p); return; }
                 if (!p.mk._map) p.mk.addTo(m);
                 var div = pillEl(p);
                 div.classList.remove("hm-off");
@@ -3529,12 +3534,15 @@ FULL_TRAVEL_SCRIPT = """
                 ds.sort(function (a, b) { return Math.abs(a - run.total / 2) - Math.abs(b - run.total / 2); });
                 ds.forEach(function (d) { spots.push(along(run, d)); });
                 var won = null;
-                for (var i = 0; i < spots.length && !won; i++) {
-                    var q = spots[i];
-                    if (!q) continue;
-                    var box = {l: q.x - p.w / 2, t: q.y - p.h / 2, r: q.x + p.w / 2, b: q.y + p.h / 2};
-                    if (!inside(box, s) || hitAny(box, taken) || hitAny(box, placed) || hitAny(box, dotRects)) continue;
-                    won = {q: q, box: box};
+                for (var pass = 0; pass < (hot ? 2 : 1) && !won; pass++) {
+                    for (var i = 0; i < spots.length && !won; i++) {
+                        var q = spots[i];
+                        if (!q) continue;
+                        var box = {l: q.x - p.w / 2, t: q.y - p.h / 2, r: q.x + p.w / 2, b: q.y + p.h / 2};
+                        if (!inside(box, s) || hitAny(box, taken) || hitAny(box, placed)) continue;
+                        if (pass === 0 && hitAny(box, dotRects)) continue;
+                        won = {q: q, box: box};
+                    }
                 }
                 if (!won) { hide(p); return; }
                 p.at = m.containerPointToLatLng(won.q);
@@ -3675,6 +3683,16 @@ FULL_TRAVEL_SCRIPT = """
             }
             panelWasShown = shown;
         }
+        // And the other way round (owner, 2026-10-08, on trial): opening the
+        // legend closes a station's panel, through the panel's own close
+        // button so its ring goes too. The side-by-side layout of an open
+        // legend and panel stays as the fallback for anything unusual.
+        if (legend) legend.addEventListener("toggle", function () {
+            if (!legend.open) return;
+            var panel = document.querySelector(".hm-tap-panel.hm-shown");
+            var close = panel && panel.querySelector(".hm-tap-close");
+            if (close) close.click();
+        });
         // The panel is made by TAP_SELECT_SCRIPT, which may start after this
         // script, so it is watched from the first time it is found.
         var watched = false;
@@ -3753,7 +3771,7 @@ def _station_lines(stations, lines, crs_geographic, crs_projected, reach_m=100.0
 def _render_full_travel(*, output_path, city_name, system_name, stations, lines,
                         crs_geographic, crs_projected, center, zoom, lang, names,
                         pmtiles_url, local_lang=None, local_name=None, routes=(), lib=None,
-                        credits=()):
+                        credits=(), labels=None):
     """The full Travel version, for render_heatmap(full_travel=...).
 
     lib: a folder (relative to the page) holding every library, the glyphs
@@ -3764,7 +3782,21 @@ def _render_full_travel(*, output_path, city_name, system_name, stations, lines,
     page whose city has no pack); the OSM credit is then shown on its own,
     since the stations' English names, at least, come from OSM.
     credits: HTML credits the lines and stations need (a feed's or a
-    government layer's), added to the map's credit corner."""
+    government layer's), added to the map's credit corner.
+    labels: {line key: on-map label} replacing the site's labels here only.
+    Every line's label must differ from every other's (owner, 2026-10-08):
+    the site gives an operator's lines one code where its station numbering
+    does (Tokyo's KS, KK, SI, TS), which the full version does not."""
+    if labels:
+        lines = {k: (segs, color, labels.get(k, label), end)
+                 for k, (segs, color, label, end) in lines.items()}
+    seen = {}
+    for k, (_segs, _color, label, _end) in lines.items():
+        seen.setdefault(label, []).append(k)
+    shared = {label: keys for label, keys in seen.items() if len(keys) > 1}
+    if shared:
+        raise ValueError(f"{city_name}: lines share an on-map label in the full version: {shared}; "
+                         f"give each its own with full_travel['labels']")
     pts = [(float(r.latitude), float(r.longitude)) for r in stations.itertuples()]
     c, z = _fit_view(pts)
     center = center or c
