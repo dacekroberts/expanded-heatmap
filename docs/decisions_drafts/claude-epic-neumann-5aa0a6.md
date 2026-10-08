@@ -139,6 +139,16 @@ or published; every proposal waits for the owner.
   stops at the stations' extent plus 10 km), and per-line station lists in
   both directions (north/southbound or east/westbound), which need their
   own design and data work in the app.
+- **Tokyo on a phone (owner, 2026-10-08): "loads and operates great".** The
+  open legend's 52 rows ran up under the Dark mode button and covered its
+  own Hide control (the shared cap assumed a 24 px bottom, and the legend
+  had been raised above Tokyo's wrapping credit): now capped between the
+  button row and the credit, measured clear at 390 x 664, 390 x 844 and
+  1280 x 800 (commit b03017f0). The owner confirmed on the phone that a
+  tap on the open legend never selects a station dot beneath it (the
+  legend is outside the map; taps are caught by the map), so closing the
+  legend on a station tap is safe; passed to the app with the long-legend
+  note.
 - **The label-language switch, two refinements for the app (owner,
   2026-10-08)**, after Mendoza on a phone showed no visible change (few of
   its features have an English name in OSM, so English falls back to the
