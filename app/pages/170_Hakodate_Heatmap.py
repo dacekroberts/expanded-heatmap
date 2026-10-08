@@ -53,7 +53,7 @@ st.markdown(
 **The lines**
 
 - Three lines are drawn, each labeled on the map and in the legend: the Hakodate City Tram, JR
-  Hokkaido's Hakodate Line and the South Hokkaido Railway.
+  Hokkaido's Hakodate Main Line and the South Hokkaido Railway.
 - The city tram's routes share most of their track, so the tram is drawn as one line.
 - Lines and stations come from MLIT's national railway data (国土数値情報); station names in
   English are from OpenStreetMap. Line colors are this project's own, not the operators'.

@@ -50,7 +50,7 @@ st.markdown(
 
 - Nine lines are drawn, each labeled on the map and in the legend: the Fukuoka City Subway's
   Kūkō, Hakozaki and Nanakuma lines; JR Kyushu's Kagoshima Main, Chikuhi, Fukuhoku Yutaka and
-  Kashii lines; and Nishitetsu's Tenjin Ōmuta and Kaizuka lines.
+  Kashii lines; and Nishitetsu's Tenjin Omuta and Kaizuka lines.
 - Lines and stations come from MLIT's national railway data (国土数値情報); station names in
   English are from OpenStreetMap. Line colors are this project's own, not the operators'.
 - Only stations inside Fukuoka City get rings, because the business data covers the city alone: JR
