@@ -196,14 +196,45 @@ LEAK_WORDS = {
     "en": ("inc", "llc", "ltd", "corp", "company", "store", "shop", "restaurant", "cafe", "hotel",
            "hostel", "motel", "salon", "clinic", "pharmacy", "apartment", "apartments", "apts",
            "condominium", "condo", "condos", "parking", "private"),
+    # Batch 2a (2026-10-08): the handoff's proposals, each language checked
+    # against its city's own hits (docs/decisions_drafts/place-search.md).
+    "fr": ("sarl", "sas", "eurl", "hôtel", "auberge", "résidence", "appartements", "parking",
+           "privé", "privée", "magasin", "boutique", "restaurant", "brasserie", "pharmacie",
+           "clinique", "agence"),
+    "ca": ("hotel", "hostal", "aparcament", "pàrquing", "privat", "privada", "botiga", "restaurant",
+           "pisos", "farmàcia", "s.l.", "s.a."),
+    "es": ("hotel", "hostal", "aparcamiento", "parking", "privado", "privada", "tienda", "restaurante",
+           "pisos", "farmacia", "s.l.", "s.a."),
+    "cs": ("hotel", "penzion", "parkoviště", "soukromé", "soukromá", "obchod", "restaurace",
+           "bytový dům", "bytové domy", "lékárna", "s.r.o.", "a.s."),
+    "nl": ("hotel", "parking", "privé", "winkel", "restaurant", "appartementen", "residentie",
+           "apotheek", "bvba", "nv"),
 }
-LEAK_ALLOW = {"ja": ("商店街", "名店街"), "en": ("shopping street",)}
+LEAK_ALLOW = {"ja": ("商店街", "名店街"), "en": ("shopping street",),
+              # A town hall and a hospital (Paris's Hôtel-Dieu, Marseille's).
+              "fr": ("hôtel de ville", "hôtel-de-ville", "hôtel-dieu", "hôtel des invalides")}
 # The LEAK_WORDS that mark a home (or private land): a landmark carrying one
 # is held to _public_home, where a Wikipedia article is no exemption.
 HOME_WORDS = {
     "ja": ("マンション", "ハイツ", "レジデンス", "コーポ", "アパート", "メゾン", "社宅", "私有地"),
     "en": ("apartment", "apartments", "apts", "condominium", "condo", "condos", "private"),
+    "fr": ("résidence", "appartements", "privé", "privée"),
+    "ca": ("pisos", "privat", "privada"),
+    "es": ("pisos", "privado", "privada"),
+    "cs": ("bytový dům", "bytové domy", "soukromé", "soukromá"),
+    "nl": ("appartementen", "residentie", "privé"),
 }
+
+
+def _has_word(word, low):
+    """True when `word` occurs in the lowercased text `low`: a CJK word
+    anywhere (四条 in 四条烏丸), any other as a whole word or phrase, accents
+    included ("hôtel", "bytový dům", "s.r.o."). Until batch 2a (2026-10-08)
+    Latin words were whole [a-z] runs, which split "hôtel" at its accent; the
+    five built indexes rebuilt byte-identical under this rule."""
+    if _CJK_WORD.search(word):
+        return word in low
+    return re.search(r"(?<!\w)" + re.escape(word) + r"(?!\w)", low) is not None
 
 
 def leak_word(names, local):
@@ -213,9 +244,8 @@ def leak_word(names, local):
     for code in dict.fromkeys(["en", *local]):
         for allow in LEAK_ALLOW.get(code, ()):
             low = low.replace(allow, " ")
-        latin = set(re.findall(r"[a-z]+", low))
         for word in LEAK_WORDS.get(code, ()):
-            if (word in latin) if word.isascii() else (word in low):
+            if _has_word(word, low):
                 return word
     return None
 
@@ -243,6 +273,9 @@ SCRIPTS = {
     "ka": _char_class((0x10A0, 0x10FF)),
     "el": _char_class((0x0370, 0x03FF)),
 }
+# Words matched anywhere rather than whole (_has_word): kana, Han, Hangul.
+_CJK_WORD = _char_class((0x3040, 0x30FF), (0x3400, 0x4DBF), (0x4E00, 0x9FFF),
+                        (0xAC00, 0xD7AF), (0xFF08, 0xFF09), (0x3231, 0x3231))
 
 
 def _name_tags(local):
@@ -260,9 +293,14 @@ def _langs(tags, local):
     """The languages, of English and the local ones, that one object's names are in."""
     out = set()
     name = tags.get("name") or ""
+    # The main name counts for the FIRST declared language written in Latin
+    # letters only: a second one (Barcelona's Spanish beside Catalan,
+    # Brussels' Dutch beside French) is measured by its own name:<code> tag,
+    # never credited from a name in another language (batch 2a, 2026-10-08).
+    first_latin = next((c for c in local if c not in SCRIPTS), None)
     for code in local:
         script = SCRIPTS.get(code)
-        if tags.get(f"name:{code}") or (name and (script is None or script.search(name))):
+        if tags.get(f"name:{code}") or (name and (script.search(name) if script else code == first_latin)):
             out.add(code)
     if any(tags.get(k) for k in ("name:en", "alt_name:en", "official_name:en", "short_name:en")):
         out.add("en")
@@ -304,7 +342,23 @@ WAY_WORDS = {
     "en": ("street", "road", "avenue", "lane", "way", "walk", "path", "trail", "alley", "bridge",
            "steps", "stairs", "boulevard", "promenade", "passage", "plaza", "row", "greenway",
            "tunnel", "footpath", "towpath"),
+    # Batch 2a (2026-10-08), checked against each city's named minor ways.
+    "fr": ("rue", "avenue", "boulevard", "place", "quai", "allée", "chemin", "impasse", "passage",
+           "pont", "passerelle", "cours", "montée", "escalier", "escaliers", "promenade", "square",
+           "sentier", "voie", "piste", "traverse", "ruelle", "esplanade", "parvis", "galerie"),
+    "ca": ("carrer", "avinguda", "passeig", "plaça", "rambla", "travessera", "via", "camí",
+           "passatge", "pont", "ronda", "baixada", "pujada", "costa", "escales", "placeta",
+           "jardins", "corriol", "sender"),
+    "es": ("calle", "avenida", "paseo", "plaza", "camino", "pasaje", "puente", "ronda", "vía",
+           "escaleras", "sendero"),
+    "cs": ("ulice", "třída", "náměstí", "nábřeží", "most", "lávka", "cesta", "stezka", "schody",
+           "schodiště", "alej", "sady", "pěšina", "průchod", "pasáž", "nároží", "stoupání"),
+    "nl": ("straat", "laan", "weg", "plein", "steenweg", "kaai", "lei", "dreef", "brug", "pad",
+           "gang", "steeg", "dijk", "doorgang", "trap", "wandeling", "promenade", "galerij"),
 }
+# Languages that write a way word inside a compound ("Nieuwstraat",
+# "Kerkpad"): _reads_as_way matches it as a word's ending there.
+SUFFIX_WAY_LANGUAGES = {"nl"}
 # Any landmark with one of these is (also) a business, and stays out.
 COMMERCIAL_KEYS = ("shop", "office", "craft", "brand", "cuisine")
 # operator:type by value: Nishiki Market is run by its shopkeepers' cooperative
@@ -438,14 +492,17 @@ def _names(tags, name_tags):
 
 def _reads_as_way(names, local):
     """True when a name reads as a way in English or a local language: a CJK
-    way word anywhere in it (三条小橋), a Latin one as a whole word."""
+    way word anywhere in it (三条小橋), a Latin one as a whole word, or, in a
+    language that compounds (SUFFIX_WAY_LANGUAGES), as a word's ending
+    ("Nieuwstraat")."""
     for code in dict.fromkeys(["en", *local]):
         for word in WAY_WORDS.get(code, ()):
             for n in names:
-                if word.isascii():
-                    if word in re.findall(r"[a-z]+", n.lower()):
+                low = n.lower()
+                if code in SUFFIX_WAY_LANGUAGES:
+                    if any(t.endswith(word) for t in re.findall(r"\w+", low)):
                         return True
-                elif word in n:
+                elif _has_word(word, low):
                     return True
     return False
 
