@@ -159,15 +159,18 @@ if len(REGIONS) > 1:
             st.session_state[_k] = region
             st.pills("Closer view", _sub, format_func=_sub_label, key=_k,
                      on_change=_go, args=(_k,))
+    # filter_mode=None: no typing in the dropdowns. A tap otherwise opened the
+    # phone's keyboard on a search box that let "Japan (64)" be edited
+    # (owner, 2026-10-08); a list this short needs no search.
     with st.container(key="region-menu-narrow"):
         st.session_state["region_top_select"] = _group
         st.selectbox("Region", _menu_top, format_func=_count, key="region_top_select",
-                     on_change=_go, args=("region_top_select",))
+                     on_change=_go, args=("region_top_select",), filter_mode=None)
         if _sub:
             _k = f"region_sub_select_{_group}"
             st.session_state[_k] = region
             st.selectbox("Closer view", _sub, format_func=_sub_label, key=_k,
-                         on_change=_go, args=(_k,))
+                         on_change=_go, args=(_k,), filter_mode=None)
     if region == DEFAULT_REGION and "region" in st.query_params:
         del st.query_params["region"]
 else:
