@@ -20,7 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**109 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**111 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+
+**2026-10-08**
+
+- [Georgia joins Europe East, and West Asia, a one-city view, is retired (owner; branch legend-dot-georgia, held for review time)](#2026-10-08---georgia-joins-europe-east-and-west-asia-a-one-city-view-is-retired-owner-branch-legend-dot-georgia-held-for-review-time)
+- [Legend dots never shrink, and are 10 px (owner's iPhone check; branch legend-dot-georgia, held for review time)](#2026-10-08---legend-dots-never-shrink-and-are-10-px-owners-iphone-check-branch-legend-dot-georgia-held-for-review-time)
 
 **2026-10-07**
 
@@ -4491,3 +4496,59 @@ per-city shape of their siblings.
   each city: Tokyo 164 MB, median 27.8 MB, all 5.94 GB. Zoom 14 is about a
   third of zoom 15. Protomaps' default content; a style of the project's
   own can drop layers.
+
+### 2026-10-08 - Georgia joins Europe East, and West Asia, a one-city view, is retired (owner; branch legend-dot-georgia, held for review time)
+
+- **Decided (owner): Tbilisi's region is Europe East, and the West Asia
+  view goes.** The 2026-10-02 entry "Tbilisi: the metro from OpenStreetMap, 23
+  stations, gate 3 exact; a new West Asia region" (`docs/decisions/2026-09-27.md`) kept Georgia out of a single Europe frame:
+  Dublin to Tbilisi is about 3,700 km, past the 3,300 km at which Canada
+  was split. The Europe West and East split of 2026-10-07 removed that
+  frame: Tbilisi is 1,544 km from Bucharest, Europe East's nearest city,
+  and 2,365 km from Liepāja, its farthest. The UN M49 placement of Georgia
+  in Western Asia remained the only reason for the view, and the owner
+  judged a one-city region beside a thin one a case for a merge. Superseded:
+  "Named for the area ... so a later Baku, Yerevan or Ankara joins it".
+- **Measured with `check_macro_labels.py` on a scratch copy of `app/`:**
+  Europe East's zoom 3.19 to 2.56 (its centre 23.8 E to 32.9 E), PROBLEMS 0
+  over 35 regions at 375, 768 and 1200 px; one new graze reported, not
+  failed (Daugavpils's pill grazes its own marker at 375).
+- **No West Asian city is near a build:** Gaziantep, Konya, Bursa, Kocaeli
+  and Kayseri are Band R or blocked, Jerusalem's business leg is unread
+  behind a block, Dubai and Riyadh are unscreened behind a block, and
+  Israel is held. A Turkish build reopens the question; the staged roster
+  keeps Adana under "West Asia", which `stress_overview.py` treats as a new
+  region.
+- **Changed on the branch:** `app/cities.py` (Tbilisi's region, the
+  reasoning beside "Europe East", West Asia out of `REGION_ORDER`),
+  `scripts/stress_overview.py`'s anchor on the region list's end, the
+  master list's Europe row 21 to 22 with Tbilisi's sentence moved into it,
+  `docs/project_context.md` and `docs/recheck_calendar.md`. Tbilisi's map
+  is not re-rendered: its region button reads the app's link and now
+  reads "Europe East". Rejected: "Eastern Europe and the Caucasus", too
+  long for the menu.
+
+### 2026-10-08 - Legend dots never shrink, and are 10 px (owner's iPhone check; branch legend-dot-georgia, held for review time)
+
+- **Found (owner, iPhone): the olive legend dot drew as an oval.** The
+  legend row is a flex row and its dot had no `flex-shrink:0`, so a label
+  that wraps took width from the dot. Olive's "Food shops (no general
+  retail is published)" (43 characters, 61 maps) wraps on a phone, as do
+  the long Retail labels: Buffalo's, New York's and Toronto's at 44
+  characters, Philadelphia's 43, Seattle's 40, Seoul's, Daegu's and Busan's
+  35 and Boston's 31.
+  Violet's "Shops and services" stays on one line and was round on the
+  owner's phone.
+- **Decided (owner): the dot 10 px, from 11** ("smaller by a tad"; 10 over
+  9, which reads as a bullet). The no-data ring (Tokyo's Stations row) goes
+  9 to 8 with it. The page's box-sizing includes the border, so these are
+  the drawn sizes.
+- **Verified:** Kyoto, Philadelphia, Riga and Tokyo rendered on the branch
+  (`drift_check.py --render-only`, through the gate, peak 0.30 GB) differ
+  from master only in this markup once Folium ids are normalised; in a 375
+  px viewport Kyoto's three dots measured 10 x 10 px, the olive row
+  wrapping. The sample renders were reset: every map's markup changes, so
+  all 206 re-render once at the landing.
+- **Done in the Cleanup session at the owner's word** ("legend fix can be
+  done here because it relates to both versions"), so the basemap pilot
+  keeps to its own version.
