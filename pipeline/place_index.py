@@ -123,8 +123,15 @@ def run(config):
     # The extra query's classes (place_index_fetch.EXTRA_QUERY), merged by
     # OSM id: a place node can come in both.
     seen = {(e["type"], e["id"]) for e in payload["elements"]}
-    payload["elements"] += [e for e in json.loads(extra.read_text(encoding="utf-8"))["elements"]
-                            if (e["type"], e["id"]) not in seen]
+    extra_els = json.loads(extra.read_text(encoding="utf-8"))["elements"]
+    payload["elements"] += [e for e in extra_els if (e["type"], e["id"]) not in seen]
+    # An object in both keeps the extra query's center: Brussels' Grand-Place
+    # is a highway area (the first query, nodes and no center) and a
+    # place=square (the second, with its center); build() needs both.
+    centers = {(e["type"], e["id"]): e["center"] for e in extra_els if "center" in e}
+    for e in payload["elements"]:
+        if "nodes" in e and "center" not in e and (e["type"], e["id"]) in centers:
+            e["center"] = centers[(e["type"], e["id"])]
     # The retrieval date is the caches' own, from their file names (the
     # older of the two): never today.
     retrieved = min(p.stem.rsplit("_", 1)[-1] for p in (config.PLACE_OSM_JSON, extra))
@@ -612,6 +619,11 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=()):
             nodes[e["id"]] = (e["lat"], e["lon"])
         elif e["type"] == "way" and "nodes" in e:
             ways.append(e)
+            # A highway way that is also a place (a square drawn as a pedestrian
+            # area) goes on to the place pass too, with run()'s center.
+            if (e.get("tags") or {}).get("place") and "center" in e \
+                    and f"way/{e['id']}" not in dropped:
+                tagged.append(e)
         else:
             if f"{e['type']}/{e['id']}" in dropped:
                 continue
@@ -791,7 +803,15 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=()):
                 langs = langs | set.intersection(*(street_lang.get(v, set()) for v in via))
             add("junction", pt, names + [a for a in alias if a not in names], langs)
         else:
-            if t.get("place"):
+            # A named square is a landmark when no street carries its name:
+            # Brussels' Grand-Place is a pedestrian AREA (skipped as a street)
+            # tagged place=square (batch 2a, 2026-10-08). Never one indoors or
+            # underground: Kyoto's mall plazas at level -1 (ゼスト御池, コトチカ)
+            # and Vancouver's "Time Out Stage", indoor=room.
+            square = (t.get("place") == "square" and names[0] not in street_alias
+                      and t.get("indoor") in (None, "no") and t.get("location") != "underground"
+                      and not str(t.get("level", "0")).lstrip().startswith("-"))
+            if t.get("place") and not square:
                 continue
             if _commercial(t):
                 report["landmark_dropped_commercial"] += 1

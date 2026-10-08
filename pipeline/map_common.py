@@ -2088,7 +2088,9 @@ _PLACE_SEARCH_TEMPLATE = r"""
              street: ["rue", "avenue", "av", "boulevard", "bd", "chemin", "ch", "place", "quai",
                       "allee", "impasse", "montee", "square", "promenade"],
              lead: ["rue", "avenue", "av", "boulevard", "bd", "chemin", "ch", "quai", "allee", "impasse"],
-             station: ["gare"], abbr: {"bd": "boulevard", "st": "saint", "ste": "sainte", "ch": "chemin"}},
+             // "metro": Marseille's feed names ten stations "Métro Vieux Port".
+             station: ["gare", "metro"],
+             abbr: {"bd": "boulevard", "st": "saint", "ste": "sainte", "ch": "chemin"}},
         ca: {join: ["i"], stop: ["de", "del", "dels", "la", "el", "les", "els", "l", "d"],
              street: ["carrer", "c", "avinguda", "av", "avda", "passeig", "pg", "placa", "rambla",
                       "rbla", "ronda", "travessera", "via", "passatge"],
@@ -2391,7 +2393,10 @@ _PLACE_SEARCH_TEMPLATE = r"""
             // And its own type first: "NE 45th St" is the Street, not the Court.
             if (streetQ && d.hay.indexOf(" " + (STREET_TYPE[typeW] || ABBR[typeW] || typeW) + " ") >= 0) s -= 5;
             // Whole words before parts: "Art Institute" before "Arturo ...".
-            if (qs.every(function (w) { return d.hay.indexOf(" " + w + " ") >= 0; })) s -= 4;
+            // An abbreviation counts as its whole word: "bd St-Laurent" is
+            // Boulevard Saint-Laurent before Boulevard Laurentien (batch 2a).
+            if (qs.every(function (w) { return d.hay.indexOf(" " + w + " ") >= 0
+                    || (ABBR[w] && d.hay.indexOf(" " + ABBR[w] + " ") >= 0); })) s -= 4;
             d._s = s;
         });
         // The map's own stations and lines first, as their own group, and only
