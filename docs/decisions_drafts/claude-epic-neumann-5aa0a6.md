@@ -57,8 +57,9 @@ or published; every proposal waits for the owner.
   Master moved since this branch (line registry, 34 maps re-rendered,
   `map_common.py` about 160 lines): merge it only before this branch's own
   push, and re-run `check_render_current` after.
-- **Open items, in order:** the owner's two open style questions (label
-  language, grass); the full version as a renderer option (no business
+- **Open items, in order:** grass (a pale tint from z13 proposed, owner to
+  confirm); the English-default label toggle (decided, design to show the
+  owner); the full version as a renderer option (no business
   data, the hard line enforced by a check); white line casings and white
   station dots in Travel for the owner's screenshots; Protomaps' dark
   flavor in Travel; the Overview Business/Travel toggle (`app/`, branch
@@ -99,8 +100,16 @@ or published; every proposal waits for the owner.
      #e60012), and in the full variant, which has no pins, blue #1e88e5,
      chosen as at least 50 from everything the full version draws (51 from
      the plum border, 57 from the water tint).
-  5. The site's label language (Spanish first against the app's English
-     over local script) is still open.
+  5. Label language, decided (owner, 2026-10-08): **English by default in
+     every city, with a toggle to the local language**, on the site's
+     Travel view and the full version alike; consistency matters and most
+     readers need English. No extra downloads: a pack carries every name a
+     feature has in OSM (`name` plus `name:en`, `name:es` and the rest),
+     and the style picks one when it draws, as measured on 2026-10-07 (the
+     same Tokyo pack drawn in Japanese and English, the same Mendoza pack
+     in Spanish and English). Where OSM has no English name the label
+     falls back to the local one. So one pack per city serves both, and
+     the toggle restyles labels without fetching anything.
 - **Railway land is not tinted (owner, 2026-10-08).** In Florence, OSM's
   railway-land polygons along the Pisa line overlap the Cascine park, and
   the first draft painted them lavender over the park. The owner: the rail
