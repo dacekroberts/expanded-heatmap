@@ -21,6 +21,16 @@ against every neighbor does not scale. Instead the cities compete:
      own dot already lies under a higher-ranked city's pill (Copenhagen's
      under Berlin's, 2026-10-01: its dot would have drawn over Berlin's name).
 
+EVERY COUNTRY'S TOP CITY GOES FIRST (owner, 2026-10-07; cities.COUNTRY_TOP,
+stamped on the city as `country_top`, its population). Ahead of the ranking,
+largest first, whatever its mode (Dublin, Riga and Zurich are trams), each
+trying TOP_CANDIDATES, and every top's dot is an obstacle from the start so an
+earlier pill cannot sit on a later top's dot. The competition above then
+decides only among the cities below them. A competing region view does the
+same with the tops it labels, then its own cities before the anchors it
+borrows from a country view (REGION_LABELS_ALSO). The tops with no room
+whatever the order are cities.LANDING_NO_ROOM.
+
 A LOWER-RANKED CITY'S DOT MAY SIT UNDER A PILL, because in Global the dots are
 drawn ABOVE the pills (Overview.py): no dot is ever erased or unclickable; at
 worst it sits on a pill's edge. At world zoom Europe is a few dozen pixels
@@ -300,6 +310,13 @@ TEXT_WIDTH = {
     # Los Angeles renamed (Regional) by its Long Beach extension; the same
     # 2026-10-03 run and controls.
     "Los Angeles (Regional)": 153.8,
+    # The Abroad batch, 2026-10-07 (local app, lean venv, canvas measureText
+    # after document.fonts.load, top document); controls Gimhae 49.5,
+    # Uijeongbu 68.6 and Paris 32.9 reproduced. The three extensions' renamed
+    # labels are measured ahead of their builds.
+    "Gimpo": 42.4, "Siheung": 55.1, "Geneva (Regional)": 122.5, "Thessaloniki": 83.7,
+    "Gelsenkirchen": 95.4, "Bremen": 51.4, "Anyang (Regional)": 124.6,
+    "Mexico City (Regional)": 153.0, "Copenhagen (Regional)": 158.5,
     # The staged cities of docs/staged_cities.json, measured ahead of their
     # builds (2026-10-04, local app, lean venv, canvas measureText after
     # document.fonts.load); controls Tacoma 51.8, Mendoza 61.8, Paris 32.9,
@@ -324,6 +341,25 @@ TEXT_WIDTH = {
     "Tokushima": 71.6, "Toyokawa": 67.4, "Toyonaka": 65.1, "Tshwane": 58.9, "Tsu": 23.1,
     "Tsukuba": 56.5, "Uji": 16.7, "Urasoe": 46.8, "Urayasu": 55.2, "Yachiyo": 53.2,
     "Yamato": 49.9, "Ōita": 27.6, "Ōta": 23.9,
+    # The regional cities' labels without " (Regional)" (cities.py `pill`,
+    # owner 2026-10-07), the built-in browser with Space Grotesk 600 loaded
+    # from Google Fonts, canvas measureText; controls Seattle (Regional) 120.5,
+    # Vancouver (Regional) 144.4, Kitchener–Waterloo (Regional) 207.2, Boston,
+    # Buffalo, Copenhagen and Mexico City reproduced. The (Regional) entries
+    # above stay: a label keeps its suffix where its bare name is another
+    # city's (Brussels (Regional)), and a later clash would need them.
+    "Los Angeles": 80.8, "Miami": 39.6, "Vancouver": 71.4, "Guadalajara": 79.7,
+    "Lille": 26.7, "Rio de Janeiro": 95.6, "Belo Horizonte": 98.5, "Fortaleza": 62.9,
+    "Porto Alegre": 83.6, "Recife": 42.9, "Santos": 47.1, "Taipei": 39.5,
+    "Monterrey": 71.0, "Newcastle": 70.1, "Rouen": 42.8, "Bordeaux": 64.9,
+    "Nantes": 47.5, "Grenoble": 60.5, "Valenciennes": 89.4,
+    "Kitchener–Waterloo": 134.2, "Liberec": 49.9, "Most": 34.5, "Manchester": 80.9,
+    "Birmingham": 80.2, "Nottingham": 78.7, "Blackpool": 66.7, "Seattle": 47.5,
+    "Liverpool": 62.0, "Geneva": 49.4,
+    # Benelux's label for the City of Brussels (cities.py `pill_by_region`),
+    # the same 2026-10-07 run; controls Brussels 57.2, Brussels (Regional)
+    # 130.2 and Paris 32.9 reproduced.
+    "City of Brussels": 106.5,
 }
 
 PILL_H = 18.0             # measured from rendered pixels, 14 px text
@@ -339,6 +375,15 @@ COVERAGE_RANK = {"full": 3, "narrowed": 2, "one_bucket": 1}
 STATIC_OUT_MODES = ("tram",)
 # Right, left, above, below - tried after the city's own offset.
 CANDIDATES = (("start", 11, 0), ("end", -11, 0), ("middle", 0, -22), ("middle", 0, 22))
+# A country's top city tries these too: the four diagonals and a longer reach
+# on each side. With CANDIDATES alone seven tops found no room on the landing
+# view; with these, three (cities.LANDING_NO_ROOM; measured 2026-10-07).
+# Every entrant of a competing REGION view tries them as well (2026-10-07, the
+# Japanese views: five fewer cities named nowhere at phase 2); the landing
+# view keeps CANDIDATES for the rest, as the owner saw it.
+TOP_CANDIDATES = CANDIDATES + (("start", 8, -14), ("start", 8, 14), ("end", -8, -14),
+                               ("end", -8, 14), ("middle", 0, -32), ("middle", 0, 32),
+                               ("start", 20, 0), ("end", -20, 0))
 
 
 def project(lat, lon, centre_lat, centre_lon, zoom, w, h):
@@ -350,6 +395,13 @@ def project(lat, lon, centre_lat, centre_lon, zoom, w, h):
         s = math.sin(math.radians(d))
         return 0.5 - math.log((1 + s) / (1 - s)) / (4 * math.pi)
     return x, h / 2 + (merc(lat) - merc(centre_lat)) * scale
+
+
+def label_text(city, region="Global"):
+    """A city's label text in a view: its `pill_by_region` entry for that view
+    (Benelux names the City of Brussels apart from Brussels (Regional)), else
+    cities.py `pill` (the name without " (Regional)"), else its name."""
+    return (city.get("pill_by_region") or {}).get(region) or city.get("pill") or city["name"]
 
 
 def text_width(name, strict=False):
@@ -417,25 +469,40 @@ def compete(cities, centre_lat, centre_lon, zoom, storefronts, strict=False,
     ref = max(CANVAS.values())
     placed, won, won_dots = [], {}, []
     def enters(c):
-        return eligible(c) if entrants is None else c["name"] in entrants
+        if entrants is not None:
+            return c["name"] in entrants
+        return eligible(c) or c.get("country_top") is not None
 
-    for c in sorted((c for c in cities if enters(c)), key=lambda c: rank_key(c, storefronts)):
+    def order(c):
+        # Country tops first, largest first; then, in a region view, its own
+        # cities before the anchors it borrows; then the ranking.
+        top = c.get("country_top")
+        return (top is None, -(top or 0), region != "Global" and c.get("region") != region,
+                *rank_key(c, storefronts))
+
+    runners = sorted((c for c in cities if enters(c)), key=order)
+    top_dots = {c["name"]: pos[c["name"]][ref] for c in runners if c.get("country_top") is not None}
+    for c in runners:
+        is_top = c["name"] in top_dots
         cx0, cy0 = pos[c["name"]][ref]
-        if any(p[0] < cx0 < p[2] and p[1] < cy0 < p[3] for p in placed):
+        if not is_top and any(p[0] < cx0 < p[2] and p[1] < cy0 < p[3] for p in placed):
             continue
         own = ((c.get("label_offset_by_region") or {}).get(region) or c.get("label_offset"))
-        tries = ([tuple(own)] if own else []) + [o for o in CANDIDATES if o != (tuple(own) if own else None)]
+        cands = TOP_CANDIDATES if is_top or region != "Global" else CANDIDATES
+        tries = ([tuple(own)] if own else []) + [o for o in cands if o != (tuple(own) if own else None)]
+        dots = won_dots + [d for n, d in top_dots.items() if n != c["name"]]
+        text = label_text(c, region)
         for off in tries:
             x, y = pos[c["name"]][ref]
-            box = pill_box(c["name"], x, y, off, strict)
+            box = pill_box(text, x, y, off, strict)
             if any(_overlaps(box, p) for p in placed):
                 continue
-            if any(box[0] < dx < box[2] and box[1] < dy < box[3] for dx, dy in won_dots + [(x, y)]):
+            if any(box[0] < dx < box[2] and box[1] < dy < box[3] for dx, dy in dots + [(x, y)]):
                 continue
             under = False
             for w in CANVAS.values():
                 cx, cy = pos[c["name"]][w]
-                b = pill_box(c["name"], cx, cy, off, strict)
+                b = pill_box(text, cx, cy, off, strict)
                 # Any part of the pill on screen counts, not just the dot: a
                 # pill can reach the canvas from a dot below it (Santos under
                 # the map credit, 2026-10-01).

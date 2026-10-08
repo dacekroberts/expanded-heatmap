@@ -90,7 +90,12 @@ the owner reminded Kobe's build that it exists for the cities after it.
   refuses any other reason). The page says so in a bullet under **The lines**.
 - **Fault-based cost clauses** are accepted for all of Japan (2026-09-24).
 - **No page says "currently operating"**: the lists keep closed premises.
-- **Region: East Asia**. Country: "Japan". Projected CRS from
+- **Region: the city's Japanese view, by prefecture** (owner, 2026-10-04
+  and 2026-10-07; `JAPAN_REGIONS` in `app/cities.py`). Tokyo Metropolis (13),
+  Saitama Prefecture (11), Chiba Prefecture (12), Osaka Prefecture (27) and
+  Hyogo Prefecture (28) are views of their own; a city anywhere else tags its
+  traditional region: Hokkaido, Tohoku, Kanto, Chubu, Kansai (Mie included),
+  Chugoku, Shikoku or Kyushu-Okinawa. Country: "Japan". Projected CRS from
   `japan.CITIES[slug]["epsg"]` (Sapporo and Tokyo 54N, Fukuoka 52N).
 - **`mode` for a city without a subway** (owner, 2026-10-02): Dublin's
   precedent, so JR drawn beside a tram or light rail does not make it
@@ -103,31 +108,19 @@ the owner reminded Kobe's build that it exists for the cities after it.
   Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi and
   Takaoka (in R since 2026-10-02, if it leaves) each carry `label_tier: "minor"`: dot and tooltip
   in every view, pill only in its own region. The eight built cities stay
-  eligible. A minor tag alone takes the pill out of Global only; in East Asia
-  it still shows. So follow the whole precedent (DECISIONS.md, 2026-09-30,
-  the label tiers' first and second slices):
-  - Japan gets its own sub-region. Use one region or a split, as France
-    North and South, by `check_macro_labels.py` (PROBLEMS 0 at 375, 768 and
-    1200), never by eye.
-  - Every Japanese city moves into it, built ones included, as Prague moved
-    with Czechia.
-  - `REGION_LABELS_ALSO["East Asia"]` adds the Japan region, so East Asia
-    still names Tokyo, Osaka and the other anchors, as it names Seoul.
-  - The Japan region joins `cities.COUNTRY_VIEWS` as well as `REGION_ORDER`,
-    so it sits after every larger view in the region menu (owner,
-    2026-10-02).
-  - The first city of the batch makes this change, and it lands at review
-    time with that city's `app/` diff.
-- **Wave 4 retags Japan** (owner, 2026-10-04): the first wave-4 city to land
-  replaces Japan West and Japan East with the eight traditional regions,
-  Osaka Prefecture a view of its own (Hokkaido, Tohoku, Kanto, Chubu,
-  Kansai, Osaka Prefecture, Chugoku, Shikoku, Kyushu-Okinawa; Mie is
-  Kansai, so Yokkaichi moves), built cities included. Kanto, Kansai, Osaka
-  Prefecture and Chubu go into `cities.COMPETING_REGIONS` (branch
-  `overview-scale` must have landed). Measure first with
-  `scripts/stress_overview.py --scenario eight_osaka`; DECISIONS.md,
-  2026-10-04, has the numbers. Nagakute and Nisshin, Itami and Toyonaka go
-  into `KNOWN_STACKED` (accepted).
+  eligible.
+- **The Japanese views are built; a city build only tags its view** (Cleanup,
+  2026-10-07, Staging's call 198; DECISIONS.md, "Japan's macro-map views").
+  East Asia names Japan's anchors, Kanto names the three Kanto prefecture
+  views' and Kansai Osaka's and Hyogo's (`REGION_LABELS_ALSO`). Every
+  Japanese view and East Asia compete for their labels
+  (`COMPETING_REGIONS`), so a new city needs its pill width measured
+  (`TEXT_WIDTH`), not an offset tuned. `check_macro_labels.py` fails a city
+  named in no view (owner's call 197). If a new city finds no room, the fix
+  is a closer pinned zoom (`REGION_ZOOM`) or a prefecture view of its own,
+  measured with `scripts/stress_overview.py --planned 2` before and after;
+  a new view is the owner's call. Do not edit the region tables in a build
+  branch.
 
 ## The Japan foundation's rules (2026-10-07) - already in shared code
 

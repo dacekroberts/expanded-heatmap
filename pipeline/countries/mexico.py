@@ -125,14 +125,58 @@ OVERPASS_USER_AGENT = (
 OSM_NEVER_A_STATION = ("subway_entrance", "proposed", "construction", "prpopsed")
 
 
+# ENTIDADES PUBLISHED IN SEVERAL ZIPS. INEGI splits the State of México (15)
+# into two parts, "2026/05 (1 de 2)" and "(2 de 2)" on its download page, and
+# has done so in every edition since 2018/03, so this is a standing layout.
+# The single-ZIP URL for 15 is a SOFT 404: HTTP 200, text/html, 2,263 bytes,
+# "Página no encontrada" (measured 2026-10-06). A magic-byte check would stop
+# it, but nothing should build that URL, so denue_url() and denue_member()
+# refuse a split entidad and name its parts. Each part fills the state_code
+# slot of the URL template.
+DENUE_PARTS = {"15": ("15_1", "15_2")}
+# A PART'S MEMBER HAS NO TRAILING UNDERSCORE, unlike a single ZIP's: read from
+# namelist() on 2026-10-07, denue_15_1_csv.zip holds
+# `conjunto_de_datos/denue_inegi_15_1.csv` (and 15_2 likewise), beside the same
+# dictionary near-miss and `metadatos/metadatos_denue.txt`. The single-ZIP
+# template would name a member that does not exist.
+DENUE_PART_MEMBER_TEMPLATE = "conjunto_de_datos/denue_inegi_{part}.csv"
+
+
+def _refuse_split(state_code, helper):
+    parts = DENUE_PARTS.get(state_code)
+    if parts:
+        raise ValueError(
+            f"DENUE entidad {state_code} is published in {len(parts)} parts "
+            f"({', '.join(parts)}), and the single-ZIP URL is a soft 404. "
+            f"Use {helper}s('{state_code}') instead of {helper}('{state_code}')."
+        )
+
+
 def denue_url(state_code):
-    """Bulk DENUE download URL for an entidad federativa."""
+    """Bulk DENUE download URL for an entidad published as one ZIP."""
+    _refuse_split(state_code, "denue_url")
     return DENUE_URL_TEMPLATE.format(state_code=state_code)
 
 
 def denue_member(state_code):
-    """The data member inside that entidad's ZIP."""
+    """The data member inside that entidad's single ZIP."""
+    _refuse_split(state_code, "denue_member")
     return DENUE_MEMBER_TEMPLATE.format(state_code=state_code)
+
+
+def denue_urls(state_code):
+    """One download URL per published part, in part order (one for an
+    entidad published as a single ZIP)."""
+    parts = DENUE_PARTS.get(state_code, (state_code,))
+    return tuple(DENUE_URL_TEMPLATE.format(state_code=p) for p in parts)
+
+
+def denue_members(state_code):
+    """The data member inside each part's ZIP, in the order of denue_urls()."""
+    parts = DENUE_PARTS.get(state_code)
+    if not parts:
+        return (DENUE_MEMBER_TEMPLATE.format(state_code=state_code),)
+    return tuple(DENUE_PART_MEMBER_TEMPLATE.format(part=p) for p in parts)
 
 
 # --- Required notices, for docs/data_sources.md's gate ----------------------

@@ -29,7 +29,7 @@ Staged names without a measured pill width get an estimate from the table's
 own width per character, reported as such; measure them before trusting a
 count near the line.
 
-    python scripts/stress_overview.py [--scenario NAME ...] [--compete REGION ...]
+    python scripts/stress_overview.py [--scenario NAME ...] [--built-only] [--compete REGION ...]
                                       [--country-view COUNTRY ...] [--group NAME=C1,C2 ...]
                                       [--split-meridian LON [--snap-countries]] [--keep DIR]
 
@@ -119,7 +119,14 @@ def build_tree(tmp, scenario, staged, competing=(), country_views=(), groups=Non
     if unknown:
         raise SystemExit(f"stress_overview: add {unknown} to BUILT_PREF")
     today = {c["name"]: c["region"] for c in built.CITIES}
-    retag = {n: region_for(scenario, BUILT_PREF[n], today[n]) for n in jp_built}
+    # Japan has been in its eight regions and Osaka Prefecture since
+    # 2026-10-07; the scenarios that re-cut it work on a tree from before that.
+    jp_old = "Japan West" in built.REGION_ORDER
+    if not jp_old and scenario != "now":
+        raise SystemExit(f"stress_overview: Japan is already in {built.JAPAN_REGIONS}; "
+                         f"scenario {scenario!r} re-cuts the two halves it replaced, so only 'now' runs")
+    retag = ({n: region_for(scenario, BUILT_PREF[n], today[n]) for n in jp_built}
+             if jp_old else {})
     retag.update({c["name"]: c["country"] for c in built.CITIES if c["country"] in country_views})
     # A region made of whole countries, cut from wherever they sit today.
     group_of = {k: g for g, ks in (groups or {}).items() for k in ks}
@@ -128,7 +135,7 @@ def build_tree(tmp, scenario, staged, competing=(), country_views=(), groups=Non
     for s in staged:
         row = {"name": s["name"], "country": s["country"], "lat": s["lat"], "lon": s["lon"],
                "mode": s["mode"], "coverage": "narrowed", "page": "pages/staged.py",
-               "region": (region_for(scenario, s["pref"], s["region"])
+               "region": ((region_for(scenario, s["pref"], s["region"]) if jp_old else s["region"])
                           if s["country"] == "Japan" else
                           s["country"] if s["country"] in country_views else
                           group_of.get(s["country"], s["region"]))}
@@ -159,7 +166,8 @@ def build_tree(tmp, scenario, staged, competing=(), country_views=(), groups=Non
     for p in list(BUILT_PREF.values()) + [s["pref"] for s in staged if s["country"] == "Japan"]:
         r = region_for(scenario, p, "")
         first[r] = min(first.get(r, p), p)
-    jp_regions = (["Japan West", "Japan East"] if scenario == "now"
+    jp_regions = (list(built.JAPAN_REGIONS) if not jp_old
+                  else ["Japan West", "Japan East"] if scenario == "now"
                   else sorted(first, key=first.get))
     new_regions = list(dict.fromkeys(
         r for r in [row["region"] for row in rows] + list(retag.values())
@@ -183,18 +191,26 @@ def build_tree(tmp, scenario, staged, competing=(), country_views=(), groups=Non
         "CITIES.extend(_STAGE['rows'])\n"
     )
     src = replace_once(src, "\nIN_DEFAULT_VIEW = ", block + "\nIN_DEFAULT_VIEW = ", "IN_DEFAULT_VIEW")
-    jp_lines = "".join(f'    "{r}",\n' for r in jp_regions)
-    src = replace_once(src, '    "Japan West",\n    "Japan East",\n', jp_lines, "REGION_ORDER's Japan rows")
     src = replace_once(src, '    "West Asia",\n]', '    "West Asia",\n'
                        + "".join(f'    "{r}",\n' for r in new_regions) + "]", "REGION_ORDER's end")
-    jp_tuple = ", ".join(f'"{r}"' for r in jp_regions)
     views = "".join(f', "{c}"' for c in country_views)
-    src = replace_once(src, '"Japan West", "Japan East")', jp_tuple + views + ")", "COUNTRY_VIEWS")
-    src = replace_once(src, '"East Asia": ("Japan West", "Japan East", ',
-                       f'"East Asia": ({jp_tuple}, ', "REGION_LABELS_ALSO")
-    if scenario != "now":
-        src = replace_once(src, ', "Japan West": 6.0}', "}", "REGION_ZOOM's Japan West")
+    if jp_old:
+        jp_lines = "".join(f'    "{r}",\n' for r in jp_regions)
+        src = replace_once(src, '    "Japan West",\n    "Japan East",\n', jp_lines,
+                           "REGION_ORDER's Japan rows")
+        jp_tuple = ", ".join(f'"{r}"' for r in jp_regions)
+        src = replace_once(src, '"Japan West", "Japan East")', jp_tuple + views + ")", "COUNTRY_VIEWS")
+        src = replace_once(src, '"East Asia": ("Japan West", "Japan East", ',
+                           f'"East Asia": ({jp_tuple}, ', "REGION_LABELS_ALSO")
+        if scenario != "now":
+            src = replace_once(src, ', "Japan West": 6.0', "", "REGION_ZOOM's Japan West")
+    elif views:
+        src = replace_once(src, '"South Korea", *JAPAN_REGIONS)', '"South Korea", *JAPAN_REGIONS' + views + ")",
+                           "COUNTRY_VIEWS")
     if meridian is not None:
+        if '\n    "Europe",\n' not in src:
+            raise SystemExit("stress_overview: --split-meridian cuts a single Europe region, and "
+                             "Europe has been Europe West and Europe East since 2026-10-07")
         src = replace_once(src, '\n    "Europe",\n',
                            '\n    "Europe West",\n    "Europe East",\n',
                            "REGION_ORDER's Europe")
@@ -203,14 +219,29 @@ def build_tree(tmp, scenario, staged, competing=(), country_views=(), groups=Non
         src = replace_once(src, '"Europe": ("United Kingdom",)',
                            '"Europe West": ("United Kingdom",)', "REGION_LABELS_ALSO's Europe")
     if competing:
-        src = replace_once(src, "\nCOMPETING_REGIONS = ()\n",
-                           f"\nCOMPETING_REGIONS = {tuple(competing)!r}\n", "COMPETING_REGIONS")
+        m = re.search(r"\nCOMPETING_REGIONS = \((.*?)\)\n", src)
+        if not m:
+            raise SystemExit("stress_overview: cities.py no longer has COMPETING_REGIONS in the "
+                             "expected form; update its pattern")
+        today_c = re.findall(r'"([^"]+)"', m.group(1))
+        both = tuple(dict.fromkeys(today_c + list(competing)))
+        src = src[:m.start()] + f"\nCOMPETING_REGIONS = {both!r}\n" + src[m.end():]
+    # A staged country new to the site needs a COUNTRY_TOP row or cities.py
+    # raises: its first staged row stands in, at no population (placed after
+    # every built top), until its build sets the real one.
+    new_tops = {}
+    for r in rows:
+        if r["country"] not in built.COUNTRY_TOP:
+            new_tops.setdefault(r["country"], (r["name"], 0.0))
+    src = replace_once(src, "\nLANDING_NO_ROOM = ",
+                       f"\nCOUNTRY_TOP.update({new_tops!r})\nLANDING_NO_ROOM = ", "LANDING_NO_ROOM")
     (app / "cities.py").write_text(src, encoding="utf-8")
 
     # Estimated widths for names the table has not measured.
     per_char = sum(lc.TEXT_WIDTH.values()) / sum(len(n) for n in lc.TEXT_WIDTH)
-    est = {r["name"]: round(len(r["name"]) * per_char, 1) for r in rows
-           if r["name"] not in lc.TEXT_WIDTH}
+    # Both the full name and the label text without " (Regional)" (cities.py `pill`).
+    texts = {t for r in rows for t in (r["name"], r["name"].replace(" (Regional)", ""))}
+    est = {t: round(len(t) * per_char, 1) for t in sorted(texts) if t not in lc.TEXT_WIDTH}
     lsrc = (app / "label_competition.py").read_text(encoding="utf-8")
     lsrc = replace_once(lsrc, "\nPILL_H = ", f"\nTEXT_WIDTH.update({est!r})\nPILL_H = ",
                         "label_competition.py's PILL_H")
@@ -281,6 +312,10 @@ def main():
                     help="cut Europe into Europe West and Europe East at this longitude")
     ap.add_argument("--snap-countries", action="store_true",
                     help="with --split-meridian, keep each country whole, by its mean longitude")
+    ap.add_argument("--built-only", action="store_true",
+                    help="leave the staged cities out: the map as it would land today")
+    ap.add_argument("--planned", type=int, choices=(1, 2),
+                    help="only the staged cities the build plan builds by this phase")
     ap.add_argument("--keep", help="build the trees here and keep them")
     ap.add_argument("--inner", help=argparse.SUPPRESS)
     args = ap.parse_args()
@@ -289,8 +324,12 @@ def main():
         return inner(Path(args.inner))
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
-    staged = json.loads(STAGED.read_text(encoding="utf-8"))["cities"]
-    for scenario in args.scenario or SCENARIOS:
+    staged = [] if args.built_only else json.loads(STAGED.read_text(encoding="utf-8"))["cities"]
+    if args.planned:
+        staged = [s for s in staged if (s.get("plan_phase") or 9) <= args.planned]
+    # Once Japan is in its own regions, only "now" applies (build_tree says why).
+    jp_old = '\n    "Japan West",\n' in (ROOT / "app" / "cities.py").read_text(encoding="utf-8")
+    for scenario in args.scenario or (SCENARIOS if jp_old else ("now",)):
         base = Path(args.keep) if args.keep else Path(tempfile.mkdtemp(prefix="stress_"))
         tmp = base / scenario
         if tmp.exists():

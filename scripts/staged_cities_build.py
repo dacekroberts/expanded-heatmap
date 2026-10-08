@@ -42,6 +42,11 @@ JP8 = {**{"01": "Hokkaido"},
        **{f"{p:02d}": "Shikoku" for p in range(36, 40)},
        **{f"{p:02d}": "Kyushu-Okinawa" for p in range(40, 48)}}
 
+# The prefectures with a view of their own on the macro map (app/cities.py's
+# JAPAN_REGIONS); every other prefecture's cities sit in their region.
+PREF_VIEWS = {"11": "Saitama Prefecture", "12": "Chiba Prefecture", "13": "Tokyo Metropolis",
+              "27": "Osaka Prefecture", "28": "Hyogo Prefecture"}
+
 # Japan wave 4 in the master list's order: (display name, municipality,
 # prefecture code, station-group tier). Display names are provisional; a
 # build may rename (Ōta and Ina share their names with other places).
@@ -82,20 +87,53 @@ JAPAN = [
     ("Nisshin", "日進市", "23", "3-7"), ("Urasoe", "浦添市", "47", "3-7"),
 ]
 
-# (display name, country, rank, region under today's scheme, label tier,
+# The Japanese cities docs/build_plan_2026-10-07.md builds in phases 1 and 2
+# that are not in the ranked roster above (briefed from earlier waves), so the
+# macro map's Japanese views can be measured against what is actually coming
+# (Staging's call 198, 2026-10-07). Same fields; the tier is not recorded.
+PLANNED_EXTRA = [
+    ("Maebashi", "前橋市", "10", ""), ("Fukuyama", "福山市", "34", ""),
+    ("Mito", "水戸市", "08", ""), ("Morioka", "盛岡市", "03", ""),
+    ("Sagamihara", "相模原市", "14", ""), ("Funabashi", "船橋市", "12", ""),
+    ("Matsudo", "松戸市", "12", ""), ("Ichikawa", "市川市", "12", ""),
+    ("Yao", "八尾市", "27", ""), ("Takatsuki", "高槻市", "27", ""),
+    ("Shizuoka", "静岡市", "22", ""), ("Kanazawa", "金沢市", "17", ""),
+    ("Matsumoto", "松本市", "20", ""), ("Tottori", "鳥取市", "31", ""),
+    ("Yamagata", "山形市", "06", ""), ("Kure", "呉市", "34", ""),
+]
+JAPAN += PLANNED_EXTRA
+
+# The plan's phase for each Japanese city it builds, under the roster's names
+# (Fuchū is Fuchū (Tokyo), Ageo is Ageo (Regional), Ibaraki is Ibaraki
+# (Osaka) in the plan). Absent means not in phases 1 or 2.
+PLAN_PHASE = {
+    **dict.fromkeys(["Higashiyamato", "Nishitōkyō", "Tama", "Higashimurayama", "Ageo",
+                     "Sōka", "Tokorozawa", "Kasukabe", "Fuchū", "Chōfu", "Tachikawa", "Hino",
+                     "Toyonaka", "Hirakata", "Suita", "Itami", "Kakogawa", "Amagasaki", "Uji",
+                     "Maebashi", "Fukuyama", "Ichinomiya", "Tsu", "Fukushima", "Iwaki", "Akita",
+                     "Ōita", "Gifu", "Mito", "Morioka"], 1),
+    **dict.fromkeys(["Koshigaya", "Sagamihara", "Fujisawa", "Kawaguchi", "Funabashi", "Matsudo",
+                     "Ichikawa", "Urayasu", "Sakura", "Yachiyo", "Ichihara", "Ibaraki", "Minoh",
+                     "Moriguchi", "Kadoma", "Neyagawa", "Yao", "Takatsuki", "Shizuoka",
+                     "Kanazawa", "Okazaki", "Aomori", "Matsue", "Fuji", "Matsumoto", "Tottori",
+                     "Yamagata", "Kure"], 2),
+}
+
+# (display name, country, rank, region under today's scheme (Europe West or
+#  Europe East by country since 2026-10-07), label tier,
 #  mode, lat, lon). Approximate centres. The Greater Copenhagen Light Rail
 # is not here: it extends Copenhagen's own page (owner, 2026-10-04), so it
 # adds no dot; as a page of its own its dot sat 1.3-1.7 px from Copenhagen's.
 OTHERS = [
-    ("Arad", "Romania", 2, "Europe", "minor", "tram", 46.19, 21.31),
-    ("Brăila", "Romania", 2, "Europe", "minor", "tram", 45.27, 27.96),
-    ("Craiova", "Romania", 2, "Europe", "minor", "tram", 44.32, 23.80),
-    ("Galați", "Romania", 2, "Europe", "minor", "tram", 45.44, 28.01),
-    ("Oradea", "Romania", 2, "Europe", "minor", "tram", 47.07, 21.92),
-    ("Ploiești", "Romania", 2, "Europe", "minor", "tram", 44.95, 26.04),
-    ("Hódmezővásárhely", "Hungary", 2, "Europe", "minor", "tram", 46.42, 20.33),
+    ("Arad", "Romania", 2, "Europe East", "minor", "tram", 46.19, 21.31),
+    ("Brăila", "Romania", 2, "Europe East", "minor", "tram", 45.27, 27.96),
+    ("Craiova", "Romania", 2, "Europe East", "minor", "tram", 44.32, 23.80),
+    ("Galați", "Romania", 2, "Europe East", "minor", "tram", 45.44, 28.01),
+    ("Oradea", "Romania", 2, "Europe East", "minor", "tram", 47.07, 21.92),
+    ("Ploiești", "Romania", 2, "Europe East", "minor", "tram", 44.95, 26.04),
+    ("Hódmezővásárhely", "Hungary", 2, "Europe East", "minor", "tram", 46.42, 20.33),
     ("Adana", "Türkiye", 4, "West Asia", None, "metro", 37.00, 35.32),
-    ("Perugia", "Italy", 4, "Europe", "minor", "light_rail", 43.11, 12.39),
+    ("Perugia", "Italy", 4, "Europe West", "minor", "light_rail", 43.11, 12.39),
     ("Johannesburg", "South Africa", 4, "Africa", None, "metro", -26.20, 28.05),
     ("Tshwane", "South Africa", 4, "Africa", "minor", "metro", -25.75, 28.23),
     ("Ekurhuleni", "South Africa", 4, "Africa", "minor", "metro", -26.17, 28.30),
@@ -119,6 +157,13 @@ def japan_centres():
     for pref in sorted({c[:2] for c in want}):
         zip_path = SHARED_RAW / f"N03-20250101_{pref}_GML.zip"
         muni = gpd.read_file(f"zip://{zip_path}!N03-20250101_{pref}.geojson").to_crs(6668)
+        # A designated city (Sagamihara, Shizuoka) is in N03 as its wards, each
+        # with its own code; its rows carry the city's name in N03_004 (the
+        # ward's in N03_005) and take the city's code here.
+        by_name = {name: code for code, name in
+                   ((c, n) for (p, n), c in codes.items() if p == pref) if code in want}
+        ward = muni["N03_004"].isin(by_name) & ~muni["N03_007"].isin(want)
+        muni.loc[ward, "N03_007"] = muni.loc[ward, "N03_004"].map(by_name)
         muni = muni[muni["N03_007"].isin(want)].dissolve("N03_007").reset_index()
         hits = gpd.sjoin(stations, muni[["N03_007", "geometry"]], predicate="within")
         for code, poly in zip(muni["N03_007"], muni.geometry):
@@ -143,11 +188,12 @@ def main():
         rows.append({
             "name": name, "country": "Japan", "rank": 3, "municipality": muni,
             "pref": pref, "jp8": jp8,
-            # Today's two-way split: Chubu and Mie sit in Japan East with
-            # Toyama, Hamamatsu and Yokkaichi.
-            "region": "Japan East" if jp8 in ("Hokkaido", "Tohoku", "Kanto", "Chubu")
-            or pref == "24" else "Japan West",
-            "label_tier": "minor", "mode": "light_rail", "station_groups": tier,
+            # The eight traditional regions, with five prefectures as views of
+            # their own (owner, 2026-10-04 and 2026-10-07; app/cities.py's
+            # JAPAN_REGIONS).
+            "region": PREF_VIEWS.get(pref, jp8),
+            "plan_phase": PLAN_PHASE.get(name),
+            "label_tier": "minor", "mode": "light_rail", "station_groups": tier or None,
             "lat": lat, "lon": lon, "centre": how})
     for name, country, rank, region, tier, mode, lat, lon in OTHERS:
         rows.append({"name": name, "country": country, "rank": rank, "region": region,

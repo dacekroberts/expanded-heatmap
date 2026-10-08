@@ -1534,6 +1534,170 @@ COLUMNS["georgia_nace"] = {
     "mobile_unit": [loc("47.99.0", "other retail not in stores, stalls or markets")],
 }
 
+# Geneva: NOGA 2008 (Switzerland's NACE Rev. 2 with a sixth digit), keyed at
+# the six-digit leaf, Georgia's module applied to NOGA (2026-10-07). Codes
+# outside the four tracked divisions are out by construction; home-based,
+# itinerant and market-stand premises are dropped in step 2 before classify().
+GENEVA_CFG = "pipeline/geneva/config.py"
+COLUMNS["geneva_noga"] = {
+    "funeral": [loc("960300", "services funéraires")],
+    "no_counter_food": [loc("562900", "autres services de restauration (contract catering, canteens)"),
+                        loc("562100", "services des traiteurs (owner, 2026-10-04: R1, Georgia's precedent)"),
+                        loc("478100", "commerce de détail alimentaire sur éventaires et marchés"),
+                        loc("478900", "autres commerces de détail sur éventaires et marchés")],
+    "personal_catchall": [loc("960900", "autres services personnels n.c.a.")],
+    "tattoo": absent("no code of its own: tattooists sit in the 960900 catch-all"),
+    "adult_hostess": absent("the classification names nothing as adult"),
+    "sex_shop": absent("no code of its own; filed by product, as Retail"),
+    "massage_commercial": [loc("960402", "autres activités visant au bien-être physique")],
+    "massage_regulated": [loc("869002", "physiothérapie"),
+                          loc("869005", "autres activités paramédicales")],
+    "car_dealer": [loc("451102", "commerce de détail de voitures"),
+                   loc("451902", "commerce de détail d'autres véhicules automobiles"),
+                   loc("453200", "commerce de détail d'équipements automobiles"),
+                   loc("454000", "motorcycle sale with repair, one code: R4's merged type goes whole")],
+    "petrol_station": [loc("473000", "commerce de détail de carburants en magasin spécialisé")],
+    "vehicle_repair": [loc("452001", "entretien et réparation de véhicules automobiles"),
+                       loc("452002", "réparation et peinture de carrosserie"),
+                       loc("452030", "lavage, nettoyage et lustrage de véhicules"),
+                       loc("453100", "commerce de gros d'équipements automobiles"),
+                       loc("451101", "intermédiaires et commerce de gros de voitures")],
+    "gambling": [loc("920000", "organisation de jeux de hasard et d'argent")],
+    "pawnbroker": absent(PAWN_MIXED),
+    "nightclub": [loc("563002", "discothèques, dancings, night clubs")],
+    "vet": [loc("750000", "activités vétérinaires")],
+    "nonstore": [loc("479100", "vente par correspondance ou via internet"),
+                 loc("479900", "autres commerces de détail hors magasin"),
+                 loc("477801", "commerce de détail de combustibles (heating fuel dealers)")],
+    "parking": [loc("522100", "services auxiliaires des transports terrestres")],
+    "repair": [loc("951200", "réparation d'équipements de communication"),
+               loc("952300", "réparation de chaussures et d'articles en cuir"),
+               loc("952900", "réparation d'autres biens personnels et domestiques")],
+    "lodging": [loc("551001", "hôtels avec restaurant"), loc("552001", "appartements de vacances")],
+    "recreation": [loc("931300", "centres de gymnastique et de fitness"), loc("591400", "cinémas")],
+    "pharmacy": [loc("477300", "commerce de détail de produits pharmaceutiques")],
+    "optician": [loc("477802", "commerce de détail de lunettes")],
+    "health_food": absent("no code of its own"),
+    "mobile_unit": [outside(GENEVA_CFG, '"Stand ambulant")',
+                            "itinerant trades and market stands dropped by premises type in step 2")],
+}
+
+# Thessaloniki: the City's active shop licences, keyed on the licensed
+# activity text (79 values), a closed list (2026-10-07).
+TH = "a licence register of food premises, hairdressers and the venues the same law licenses"
+COLUMNS["thessaloniki_adeies"] = {
+    "funeral": [loc("ΓΡΑΦΕΙΑ ΤΕΛΕΤΩΝ", "funeral homes"),
+                loc("ΑΠΟΘΗΚΗ ΦΕΡΕΤΡΩΝ", "a coffin warehouse (storage; no general retail layer)")],
+    "no_counter_food": [loc("ΚΥΛΙΚΕΙΟ", "canteens inside another premises (owner call 1, 2026-10-04)"),
+                        loc("ΚΥΛΙΚΕΙΟ ΕΝΤΟΣ ΣΧΟΛΕΙΟΥ", "school canteens"),
+                        loc("ΠΑΡΑΣΚΕΥΑΣΤΗΡΙΟ", "preparation kitchens")],
+    "personal_catchall": absent("no catch-all personal service: the register lists hair, nails, "
+                                "beauty, tattoo and dry cleaning by name"),
+    "tattoo": [loc("ΕΡΓΑΣΤΗΡΙΟ ΔΕΡΜΑΤΟΣΤΙΞΙΑΣ", "tattoo studios, their own value")],
+    "adult_hostess": [loc("ΟΙΚΟΣ ΑΝΟΧΗΣ", "licensed brothels, which the register names (R3)")],
+    "sex_shop": absent(TH + "; no sex shops"),
+    "massage_commercial": absent(TH + "; massage is not a licence type here"),
+    "massage_regulated": absent(TH + "; no health professions"),
+    "car_dealer": absent(TH + "; no vehicle trade"),
+    "petrol_station": absent(TH + "; fuel stations are licensed elsewhere"),
+    "vehicle_repair": absent(TH + "; no repairs"),
+    "gambling": absent(TH + "; ΤΕΧΝΙΚΑ ΠΑΙΓΝΙΑ are amusement arcades (recreation), not betting"),
+    "pawnbroker": absent(TH + "; no pawnbrokers"),
+    "nightclub": [loc("ΚΕΝΤΡΟ ΔΙΑΣΚΕΔΑΣΗΣ", "nightclubs"),
+                  loc("ΚΕΝΤΡΟ ΔΙΑΣΚΕΔΑΣΗΣ (ΑΝΩ ΤΩΝ 200 ΘΕΣΕΩΝ)", "nightclubs over 200 seats")],
+    "vet": absent(TH + "; no veterinary clinics"),
+    "nonstore": [loc("ΑΥΤΟΜΑΤΟΣ ΠΩΛΗΤΗΣ", "vending machines")],
+    "parking": absent(TH + "; no parking"),
+    "repair": absent(TH + "; no repairs"),
+    "lodging": absent(TH + "; no lodging"),
+    "recreation": [loc("ΙΝΤΕΡΝΕΤ", "internet cafés"), loc("ΚΙΝΗΜΑΤΟΓΡΑΦΟΣ", "cinemas"),
+                   loc("ΘΕΑΤΡΟ", "theaters"), loc("ΓΥΜΝΑΣΤΗΡΙΟ", "gyms"),
+                   loc("ΤΕΧΝΙΚΑ ΠΑΙΓΝΙΑ", "amusement arcades"), loc("ΛΟΥΝΑ ΠΑΡΚ", "amusement parks")],
+    "pharmacy": absent(TH + ": a food-only retail register, no pharmacies"),
+    "optician": absent(TH + "; no opticians"),
+    "mobile_unit": [loc("ΚΑΝΤΙΝΑ ΣΕ ΙΔΙΩΤΙΚΟ ΧΩΡΟ", "a mobile canteen")],
+}
+
+def _ge(layer, category, assortment=""):
+    return {"layer": layer, "category": category, "assortment": assortment}
+
+
+# Gelsenkirchen: the City's commercial-premises survey, three themed layers,
+# keyed on (layer, the layer's own category) with retail's core assortment
+# checked beside it.
+GE_SURVEY = "the City's premises survey has no category for this trade"
+COLUMNS["gelsenkirchen_gewerbe"] = {
+    "funeral": [loc(_ge("dienstleistung", "Bestattungsinstitut"), "Bestattungsinstitut")],
+    "no_counter_food": absent(GE_SURVEY + ": its food layer lists restaurants, snack bars, "
+                              "bars, cafés, chain restaurants and lodging only "
+                              "('Elektroinstallateur' is an electrician, not a stall)",
+                              ignore=("Elektroinstallateur",)),
+    "personal_catchall": [loc(_ge("dienstleistung", "Sonstige nicht genannte Dienstleistungen"),
+                              "Sonstige nicht genannte Dienstleistungen"),
+                          loc(_ge("dienstleistung", "Sonstiges"), "Sonstiges (services)")],
+    "tattoo": [loc(_ge("dienstleistung", "Tattoo-/Piercingstudio"), "Tattoo-/Piercingstudio")],
+    "adult_hostess": absent(GE_SURVEY + " (no adult venue is coded)"),
+    "sex_shop": [loc(_ge("einzelhandel", "Sonstiges", "Erotikartikel"), "Erotikartikel")],
+    "massage_commercial": absent(GE_SURVEY + ": no massage code; it may sit in the beauty "
+                                 "code, the health catch-all or the uncategorised rows"),
+    "massage_regulated": [loc(_ge("dienstleistung",
+                                  "Praxis für Physiotherapie (Krankengymnastik u.ä.)"),
+                              "physiotherapy practices")],
+    "car_dealer": [loc(_ge("dienstleistung", "KFZ-Handel / Autohäuser inkl. Krafträder"),
+                       "KFZ-Handel / Autohäuser")],
+    "petrol_station": absent(GE_SURVEY + ": no fuel-station category or assortment"),
+    "vehicle_repair": [loc(_ge("dienstleistung", "KFZ-Reparatur"), "KFZ-Reparatur")],
+    "gambling": [loc(_ge("dienstleistung", "Spielhallen, Casinos"), "Spielhallen, Casinos"),
+                 loc(_ge("dienstleistung", "Wettbüros"), "Wettbüros")],
+    "pawnbroker": absent(GE_SURVEY + " (no pawnshop is coded)"),
+    "nightclub": [loc(_ge("gastronomie", "Bar/Kneipe/Wirtshaus"),
+                      "bars and pubs, where a club would be filed")],
+    "vet": absent(GE_SURVEY + " (no veterinary practice is coded)"),
+    "nonstore": absent(GE_SURVEY + ": it records premises only, no online, mail-order or "
+                       "vending seller"),
+    "parking": absent(GE_SURVEY),
+    "repair": [loc(_ge("dienstleistung", "Änderungsschneiderei"), "Änderungsschneiderei"),
+               loc(_ge("dienstleistung", "Schuster, Schuhreparatur"), "Schuster"),
+               loc(_ge("dienstleistung", "Schlüsseldienst"), "Schlüsseldienst")],
+    "lodging": [loc(_ge("gastronomie", "Hotel/Gasthof/Pension"), "Hotel/Gasthof/Pension")],
+    "recreation": [loc(_ge("dienstleistung", "Fitness-Center"), "Fitness-Center"),
+                   loc(_ge("dienstleistung", "Kampfsport und Selbstverteidigung"), "Kampfsport")],
+    "pharmacy": [loc(_ge("einzelhandel", "Gesundheit und Körperpflege", "pharmazeutische Artikel"),
+                     "pharmazeutische Artikel")],
+    "optician": [loc(_ge("einzelhandel", "medizinische und orthopädische Artikel",
+                         "medizinische und orthopädische Artikel"),
+                     "medical and orthopedic supplies, where opticians are filed")],
+    "mobile_unit": absent(GE_SURVEY + ": it records fixed premises only"),
+}
+
+# Bremen: the Kommunalverbund's 2022 retail survey, 19 main goods groups,
+# all Retail (2026-10-07).
+BR = "a retail survey (Einzelhandelsbestand 2022): shops only, one main goods group each"
+COLUMNS["bremen_einzelhandel"] = {
+    "funeral": absent(BR + "; no funeral homes"),
+    "no_counter_food": absent(BR + "; no food service of any kind"),
+    "personal_catchall": absent(BR + "; no personal services"),
+    "adult_hostess": absent(BR + "; no adult or hostess premises"),
+    "sex_shop": absent(BR + "; no sex-shop group: such a shop is filed under a goods group and stays Retail either way"),
+    "massage_commercial": absent(BR + "; no massage"),
+    "massage_regulated": absent(BR + "; no health professions"),
+    "car_dealer": absent(BR + "; the 19 groups name no vehicle trade (R4 keeps it in any case)"),
+    "petrol_station": absent(BR + "; the 19 groups name no fuel sales (R4 keeps it in any case)"),
+    "vehicle_repair": absent(BR + "; no repairs"),
+    "gambling": absent(BR + "; no betting or gaming"),
+    "pawnbroker": absent(BR + "; no pawnbroker group: one would be filed under a goods group and stays Retail either way"),
+    "nightclub": absent(BR + "; no food service"),
+    "vet": absent(BR + "; no veterinary premises"),
+    "nonstore": absent(BR + "; it surveys retail SITES, so a nonstore seller has none"),
+    "parking": absent(BR + "; no parking"),
+    "repair": absent(BR + "; no repairs"),
+    "lodging": absent(BR + "; no lodging"),
+    "recreation": absent(BR + "; 'Sport/ Freizeit' (group 9) is sporting goods, a shop, not a gym"),
+    "pharmacy": [loc("2", "Apotheken/ Drogerie/ Parfümerie: pharmacies, drugstores, perfumeries")],
+    "optician": [loc("10", "Optik, Hörgeräte, Sanitätswaren: opticians, hearing aids, medical supply")],
+    "mobile_unit": absent(BR + "; no stall or mobile-unit group (the catch-all 19 cannot be read finer and stays Retail, owner 2026-10-05, call 1)"),
+}
+
 BERLIN_CFG = "pipeline/berlin/config.py"
 BERLIN_969 = '"nace_id": ("969",)'
 
@@ -2310,6 +2474,7 @@ ROW_KEY = {
     "hong_kong_fehd": "licence_code",
     "anzsic_fes": "ClassificationCode",
     "georgia_nace": "activity_code",
+    "geneva_noga": "activity_code",
     "belgium_favv": "favv_pairs",
     "belgium_kbo": "nace_code",
 }

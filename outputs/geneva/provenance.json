@@ -1,0 +1,26 @@
+{
+  "written_utc": "2026-10-07T07:51:51+00:00",
+  "register": {
+    "url": "https://ge.ch/sitg/geodata/SITG/OPENDATA/REG_ENTREPRISE_ETABLISSEMENT-CSV.zip",
+    "page": "https://sitg.ge.ch/donnees/reg-entreprise-etablissement",
+    "file": "REG_ENTREPRISE_ETABLISSEMENT-CSV.zip",
+    "bytes": 11344581,
+    "sha256": "45aff219dfe4bdd1e41eb386df7a25c24ab9cd7989ab5a9c98940b2fcfa3d616",
+    "fetched": "2026-10-04",
+    "zip_created": "04.10.2026 07:32:19.1061949",
+    "conditions": "https://sitg.ge.ch/ressources/conditions-utilisation-donnees"
+  },
+  "osm": {
+    "host": "overpass-api.de",
+    "query": "[out:json][timeout:300];relation[\"type\"=\"route\"][\"route\"~\"^(tram|light_rail)$\"](46.15,6.03,46.25,6.26)->.r;relation[\"boundary\"=\"administrative\"][\"admin_level\"=\"8\"](46.15,6.03,46.25,6.26)->.b;.r out geom;(node(r.r);node[\"railway\"=\"tram_stop\"](46.15,6.03,46.25,6.26););out body;.b out geom;",
+    "bbox": [
+      46.15,
+      6.03,
+      46.25,
+      6.26
+    ],
+    "osm_base": "2026-10-07T07:49:43Z",
+    "sha256": "6e6ce8c2deb158d3e5fc8a797f2e9eb63c12ca22cf0f3963fbd706bbaab8c3e0"
+  },
+  "osm_fetched_utc": "2026-10-07T07:51:51+00:00"
+}

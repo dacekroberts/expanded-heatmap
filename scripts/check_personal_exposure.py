@@ -121,6 +121,10 @@ REGISTRIES = {
                     address=("address",), korean=True, withheld="Name withheld"),
     "gimhae": dict(raw=None, trade=None, owner=None, processed="businesses_clean.csv",
                    address=("address",), korean=True, withheld="Name withheld"),
+    "gimpo": dict(raw=None, trade=None, owner=None, processed="businesses_clean.csv",
+                  address=("address",), korean=True, withheld="Name withheld"),
+    "siheung": dict(raw=None, trade=None, owner=None, processed="businesses_clean.csv",
+                    address=("address",), korean=True, withheld="Name withheld"),
     # Milan is a HYBRID: ~20% of pins carry a real trade name (`insegna`) and
     # the rest carry the street address, because `insegna` is 17.6% populated
     # on the retail register, 23.8% and 9.1% on the two food ones, and ABSENT
@@ -629,6 +633,28 @@ REGISTRIES = {
     "zurich": dict(raw=None, trade=None, owner=None,
                    processed="businesses_clean.csv",
                    address=("address",)),
+    # Geneva's step 2 reads REG's legal name in memory only, to withhold a sole
+    # trader's trade name that is their own (the owner's call 2, 2026-10-04);
+    # it is never written, so processed/ holds no registrant-name column.
+    "geneva": dict(raw=None, trade=None, owner=None,
+                   processed="businesses_clean.csv",
+                   address=("address",)),
+    # Thessaloniki's licence layer has no name field: a pin shows its licensed
+    # activity, and step 2 never reads the address fields.
+    "thessaloniki": dict(raw=None, trade=None, owner=None,
+                         processed="businesses_clean.csv", address=None),
+    # Gelsenkirchen's premises survey names the SHOP SIGN; it carries no owner,
+    # registrant or contact column, and the contact, free-text and address
+    # fields are never fetched. A sign read as a person's own name shows the
+    # category (config.PERSON_NAMED and PERSON_NAMED_BY_EYE, keys).
+    "gelsenkirchen": dict(raw=None, trade=None, owner=None,
+                          processed="businesses_clean.csv", address=None),
+    # Bremen: the Kommunalverbund's 2022 retail survey, public variant, has NO
+    # name, address or person field (step 2 stops on any field beyond its six),
+    # so a pin's title is the goods group's English label: Berlin's structural
+    # answer. Floor-area class is read to measure and never written out.
+    "bremen": dict(raw=None, trade=None, owner=None,
+                   processed="businesses_clean.csv", address=None),
     # Philadelphia likewise never loads a registrant-name column (its step 2
     # asserts six of them stay absent), and its business_name is never blank,
     # so there is no fallback pair to join against either. What it adds that no

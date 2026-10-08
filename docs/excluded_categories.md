@@ -1472,7 +1472,7 @@ would distort the map: across the wards holding at least 200 storefront rows
 the match rate runs 75.4% to 99.3%, a **1.3x spread** with a standard deviation
 of 5.7 points.
 
-### Mexico City - street stalls, a nonstore twin, and a heuristic that does not speak Spanish
+### Mexico City (Regional) - street stalls, a nonstore twin, four State of México municipios, and a heuristic that does not speak Spanish
 
 **Semifijo premises are excluded — 20,586 of 462,732 economic units (4.45%),
 of which 18,264 would otherwise have classified into a bucket.** DENUE records
@@ -1517,6 +1517,27 @@ convention of trade type plus a given name or brand (`ABARROTES LIZ`,
 nouns — also trips it. The heuristic is tuned for English "SMITH JOHN" forms
 and does not transfer to Spanish ones. Nothing is filtered on that number.
 
+
+**The four State of México municipios** (Ecatepec de Morelos, Nezahualcóyotl, La Paz
+and Naucalpan de Juárez) add the same exclusions from the same register: semifijo
+premises, 6,472 of 199,571 units (3.24%), 5,397 of which would otherwise classify; among
+fixed premises, public toilets and shoe-shine stands (`812130`) 578, the "other personal
+services" catch-all (`812990`) 354, funeral services 241, parking (`812410`) 226, event
+caterers 43, nonstore retail (`469`) 29, food trucks 10 and institutional canteens 8.
+Pawnshops (`522452`) count as retail: 177.
+
+**Storefronts located outside the region are dropped**: 416 of 127,860 (0.33%) from the
+four municipios. 398 are one cluster that DENUE codes Nezahualcóyotl but that falls just
+east of the municipio's boundary as OpenStreetMap draws it, more than 5 km from any station.
+
+**The rest of the State of México is not covered.** Its other 121 municipios have no
+station on these lines; Politécnico's and El Rosario's rings reach under 1% across the city
+line into municipios that are not covered.
+
+**Stations.** Línea B's eight stations in Ecatepec de Morelos and Nezahualcóyotl, Línea A's
+two in La Paz, and Línea 2's terminus, Cuatro Caminos, in Naucalpan de Juárez are drawn and
+ringed. No station on the drawn lines is left out. The Tren Suburbano, El Insurgente and
+Mexicable are not drawn.
 ### Guadalajara (Regional) - a municipio with no station, and the same Spanish-name artifact
 
 **Everything excluded in Mexico City is excluded here, for the same reasons and
@@ -1988,28 +2009,29 @@ OpenStreetMap's route relations leave it out. Hospital Syd opens with the new
 university hospital in 2027 and gets no ring until then. Buses and regional
 trains are not drawn.
 
-### Copenhagen - production units, two municipalities, and a personal owner's name kept off the map
+### Copenhagen (Regional) - production units, ten municipalities, and a personal owner's name kept off the map
 
 **Excluded by the classification itself, anywhere in Denmark** - the same eight
 kinds of work Oslo excludes, read against Denmark's DB25 labels: the four
 intermediation classes new in NACE Rev. 2.1, mobile food stalls, event catering,
 contract catering and canteens, and personal services in the client's home.
 Denmark adds one split of its own, excluding industrial and institutional
-laundries while the dry cleaner on the corner stays. 1,326 rows.
+laundries while the dry cleaner on the corner stays. Funeral services are
+excluded too, as everywhere. 1,806 rows across the ten municipalities, 95 of
+them funeral services.
 
 **Excluded as a catch-all, on Copenhagen's own numbers** - `969900`, *other
-personal services not elsewhere classified*: 613 rows, 84% personally owned and
-half above the ground floor, against 41% and 23% for storefronts overall. A
-sample held coaching, healing, consulting and dog walking. It also held about
-seventy tattoo studios and a few dog groomers, which are lost with it, and the
-map's page says so. The six retail catch-alls and "other eating places" are
-kept.
+personal services not elsewhere classified*: 762 rows across the ten
+municipalities, 83% personally owned and 45% above the ground floor, against
+41% and 22% for storefronts overall. A sample in Copenhagen held coaching,
+healing, consulting and dog walking. It also held about seventy tattoo studios
+and a few dog groomers, which are lost with it, and the map's page says so. The
+six retail catch-alls and "other eating places" are kept.
 
-Funeral services are excluded too, as everywhere: 56 premises.
-
-**Left off because they could not be placed** - 256 premises (under 2%) that
+**Left off because they could not be placed** - 408 premises (about 2%): 372
 carry no address in Denmark's official address register, more of them
-personally owned than the storefronts as a whole.
+personally owned than the storefronts as a whole, and 36 have an address whose
+point OpenStreetMap's copy of the register lacks.
 
 **What cannot be excluded: web shops.** As in Oslo, DB25 follows NACE Rev. 2.1,
 so an online-only seller carries the code of the goods it sells.
@@ -2018,20 +2040,30 @@ so an online-only seller carries the code of the goods it sells.
 proprietorship, a small personally owned business or a partnership shows its
 address instead of its name, as does any name carrying Denmark's sole-trader
 marker "v/" ("by"). So does a supermarket registered under its franchisee's own
-name and a store number (33 premises, owner 2026-09-29). They remain on the map;
-only the name is withheld. Addresses recorded "care of" another person are never
-read.
+name and a store number (50 premises, owner 2026-09-29). They remain on the map;
+only the name is withheld: 7,452 of the 18,677 premises shown. Addresses
+recorded "care of" another person are never read.
 
-**Two municipalities, one map.** The map covers Copenhagen and Frederiksberg,
-which Copenhagen entirely surrounds. Businesses in the surrounding
-municipalities are not counted, although the national register holds them.
+**Ten municipalities, one map.** The map covers Copenhagen and Frederiksberg,
+which Copenhagen entirely surrounds, and the eight suburban municipalities
+Hovedstadens Letbane serves: Lyngby-Taarbæk (851 storefronts), Gladsaxe (759),
+Rødovre (595), Herlev (404), Glostrup (373), Brøndby (367), Ishøj (250) and
+Vallensbæk (181), beside Copenhagen's 12,887 and Frederiksberg's 2,010.
+Businesses in the other surrounding municipalities are not counted, although
+the national register holds them. Albertslund, Gentofte, Ballerup and Rudersdal
+have no Letbane stop and stay out, though the outer rings of a few stations
+near them (Glostrup Nord, Gammelmosevej, Buddinge and Rødovre Nord among them)
+reach across the line; the storefronts there are not counted.
 
-**Fifty-nine stations are excluded for being outside the two municipalities** -
-fifty-seven S-tog stations on the lines' suburban reaches and the Metro's two
-airport stations in Tårnby - and are listed with their municipality on
-Copenhagen's page. **Regional and InterCity trains are
-not drawn, nor the Hovedstadens Letbane**, which has no stop in either
-municipality.
+**Stations.** The Letbane's 29 stops are drawn and ringed, all of them in the
+eight municipalities. So are the eight S-tog stations there that are not
+Letbane interchanges (Brøndby Strand, Brøndbyøster, Bagsværd, Kildebakke,
+Skovbrynet, Stengården, Sorgenfri and Virum): each is served every ten minutes
+by day, the test the rest of the S-tog passed. **Forty-five stations are
+excluded for being outside the ten municipalities** - forty-three S-tog
+stations on the lines' suburban reaches and the Metro's two airport stations in
+Tårnby - and are listed with their municipality on the map's page. **Regional
+and InterCity trains are not drawn.**
 
 ### Prague - establishments rather than companies, and a sole trader's home kept off the map
 
@@ -2936,6 +2968,108 @@ Forchbahn S18 (owner), whose four city stops are all tram stops; the S-Bahn;
 buses. Trams 50 and 51 run only until December 12, 2026, while the Bahnhofquai stop is
 rebuilt.
 
+
+### Geneva (Regional) - the canton's business register, all three buckets
+
+**Left out of the Canton of Geneva's business register (REG)**, in the 12 communes
+the trams serve, among establishments with a shop, food or personal-service code:
+- **by premises type**: itinerant trades (70), businesses run from home (62) and market
+  stands (22);
+- **by activity**: vehicle repair (212), body shops (83), car washes (14) and vehicle
+  wholesale and agents (25); other food service, contract catering and canteens (192),
+  caterers (63) and restaurant management offices (11); mail-order and internet sellers
+  (57) and other retail with no shop (12); market stalls (4); heating-fuel dealers (2);
+  the "other personal services" catch-all (112); funeral services (12).
+
+**Missing, not excluded**: 1,847 firms registered with a shop, food or personal-service
+code but no separate establishment (882 retail, 333 food service, 632 personal services).
+The register gives such a firm no premises type, so a shop cannot be told from a seat at
+someone's home, and they are left out (owner, 2026-10-04); the page says so.
+
+**Shown, but not named**: 1,311 storefronts show their street address instead of a trade
+name: 1,130 sole traders whose trade name is their own name (it shares a word with the
+owner's registered name, or reads as a person's name), 144 person-shaped names whose
+legal form the register does not give, and 37 person-shaped names of firms whose premises
+the register types as an office (a practice named for its practitioner).
+
+**Stations.** Every stop of TPG trams 12, 14, 15, 17 and 18 in the 12 communes (81). Tram
+17 runs on into Gaillard, Ambilly and Annemasse, in France: its 4 stops there are drawn
+with the line but not ringed, listed on Geneva's page. Buses and the Léman Express are not
+drawn.
+
+### Thessaloniki - the City's active shop licenses, and Line 1 inside the city
+
+**Left out of the City's license layer** (8,103 rows): canteens inside offices,
+hospitals, sports grounds and parks (246, owner) and inside schools (66); preparation
+kitchens (10) and a mobile canteen (1); internet cafés (168) and other recreation:
+cinemas, theaters, children's play areas, amusement arcades and games, gyms, swimming
+pools, an amusement park, concert halls and cultural centers (112); food and drink
+wholesale and storage (106); vending machines (86); funeral homes (60) and a coffin
+warehouse (1); licensed brothels (30); pet shops (19) and second-hand goods (20), since
+no general retail is published; food and drink workshops (19); bicycle rental (7); rows
+with no activity (15); and 5 rows whose point falls just outside the city's boundary.
+**Kept**: convenience stores selling packaged ice cream, soft drinks and confectionery
+(376), patisseries (99), and bread shops and coffee roasters selling coffee to go (37),
+as Food shops (owner); nightclubs (57) as Food service; tattoo studios (38).
+
+**Not named**: the layer carries no name; a dot shows its licensed activity.
+
+**What is missing rather than excluded**: general retail is not in this register; the
+layer has no date of its own, so a shop that has closed may still be shown.
+
+**Stations.** Line 1, the 13 stations inside the Municipality of Thessaloniki. The
+Kalamaria branch is cut at the city line: its five stations (Nomarchia, Kalamaria,
+Aretsou, Nea Krini, Mikra), all in the Municipality of Kalamaria, are not ringed, and
+are listed on Thessaloniki's page. Not drawn: buses; the suburban railway.
+
+### Gelsenkirchen - the City's premises survey, services kept to personal care
+
+**Left out of the City of Gelsenkirchen's premises survey**: 176 surveyed premises with no
+category (54 food, 122 services); 3 hotels and guest houses; and 362 service premises by
+rule: gambling halls and betting shops (50), health and care practices (39), health,
+social and sport facilities (37), insurance offices (36), travel agencies (29), bank
+branches (23), repairs, alterations and key cutting (23), driving, music and other schools
+(23), law offices (16), religious premises (16), other professional offices (14), funeral
+homes (12), estate agents (11), the services catch-alls (10), trades (9), gyms and martial
+arts (5), copy shops (3), post offices (2) and vehicle repair (1). **Kept**: car dealers
+(4), as Retail.
+
+**Missing, not excluded**: personal services are thin. The survey records services
+mainly in the city's designated shopping centres: 83% of the personal-services points lie
+in one, against 52% of the shops and 46% of the food service, so hairdressers and other
+personal services away from the centres are missing. Vacant units sit in separate layers,
+not read.
+
+**Shown, but not named**: 22 signs that read as a person's own name show the business's
+category instead.
+
+**Stations.** Every stop of trams 301, 302 and 107 and Stadtbahn U11 in the city (60).
+302 runs on into Bochum (33 stops) and 107 and U11 into Essen (40): those stops are drawn
+with the lines but not ringed, listed on Gelsenkirchen's page. Buses, the S-Bahn and
+regional trains are not drawn.
+
+### Bremen - the 2022 regional retail survey, shops only
+
+**Only shops are on this map.** The Kommunalverbund Niedersachsen/Bremen e.V.'s 2022
+retail survey counts retail sites and nothing else, so restaurants, cafés, bars,
+hairdressers and other personal services are missing rather than excluded. The survey's
+19 main goods groups name no car dealers or petrol stations.
+
+**Nothing is excluded by type.** All 19 goods groups are shops, in every floor-area class;
+"Sonstige EH-Einrichtungen" (other retail facilities, 94 shops, 3.0%) is kept as retail
+(owner).
+
+**The survey's date.** The fieldwork ran from March to September 2022. Shops opened since
+are missing, and some that have closed are still shown.
+
+**Outside the city.** The 2,420 surveyed shops in the region's other municipalities are
+left out, Lilienthal's 119 among them. One shop the survey files under Delmenhorst, whose
+point lies inside the city line, stays out with its municipality.
+
+**Stations.** Trams 1, 2, 3, 4, 5, 6, 8 and 10, every stop in the City of Bremen (154).
+Tram 4 runs on into Lilienthal: its ten stops there are drawn with the line but not
+ringed, and listed on Bremen's page. Not drawn: BSAG's night lines (N1, N4, N10), buses
+and the Regio-S-Bahn.
 ### Seoul - Korea's permit registers: the trades Korea licenses, not every shop
 
 **Missing, not excluded.** Korea licenses food service, the personal-care trades and a set of
@@ -5384,24 +5518,25 @@ Line 1 and Line 7, 20 stations. Line 4 and GTX-A, which pass near the city,
 have no station in Uijeongbu and are not drawn; the U Line's two depot-shuttle
 trips are part of the drawn line.
 
-### Anyang - SEMAS's national storefront register, all three buckets
+### Anyang (Regional) - SEMAS's national storefront register, all three buckets
 
 **Incheon's source and rules**, as for Goyang, Seongnam and Yongin (the
-section above).
+section above), over Anyang with its neighbors Gunpo and Uiwang (owner,
+2026-10-04).
 
-**Out by name**: hostess bars 313, dance halls 20, staff canteens 47,
-household fuel dealers 26; and, as in Incheon, offices, education, health,
+**Out by name**: hostess bars 439, dance halls 24, staff canteens 89,
+household fuel dealers 45; and, as in Incheon, offices, education, health,
 estate agents, lodging, recreation, repairs, funeral services, wedding halls
 and matchmaking.
 
-**Names withheld** - 28 storefronts whose registered name is a bare personal
+**Names withheld** - 42 storefronts whose registered name is a bare personal
 name at an address that reads residential.
 
-**Stations**, cut at Anyang's boundary (the lines drawn to their ends;
-stations outside are listed on Anyang's page): Line 1 and Line 4,
-7 stations. Anyang has fewer stations than the other satellite cities had to
-have, and was built for the share of its storefronts within a ring instead
-(owner, 2026-09-29). No other line has a station in the city.
+**Stations**, cut at the three cities' boundary (the lines drawn to their
+ends; stations outside are listed on the page): Line 1 and Line 4, 14
+stations, 7 in Anyang, 6 in Gunpo and 1 in Uiwang (Geumjeong is on both
+lines). Uiwang's one station rings about a quarter of its storefronts. No
+other line has a station in the three cities.
 
 ### Daejeon - SEMAS's national storefront register, all three buckets
 
@@ -5457,6 +5592,44 @@ outside are listed on Gimhae's page): the Busan–Gimhae LRT, 12 stations in
 Gimhae; its other 9 are in Busan and on Busan's map. Busan Lines 2 and 3,
 which pass near the city, have no station in Gimhae and are not drawn, nor is
 Korail's intercity line.
+
+### Gimpo - SEMAS's national storefront register, all three buckets
+
+**Incheon's source and rules**, as for Goyang, Seongnam and Yongin (the
+sections above).
+
+**Out by name**: hostess bars 139, dance halls 4, staff canteens 44,
+household fuel dealers 10; and, as in Incheon, offices, education, health,
+estate agents, lodging, recreation, repairs, funeral services, wedding halls
+and matchmaking.
+
+**Names withheld** - 11 storefronts whose registered name is a bare personal
+name at an address that reads residential.
+
+**Stations**, cut at Gimpo's boundary (the line drawn to its end; the station
+outside is listed on Gimpo's page): the Gimpo Goldline, 9 stations in Gimpo;
+its tenth, Gimpo International Airport, is in Seoul. Lines 5 and 9, the
+Airport Railroad and the Seohae Line meet it there and have no station in
+Gimpo, so none is drawn.
+
+### Siheung - SEMAS's national storefront register, all three buckets
+
+**Incheon's source and rules**, as for Goyang, Seongnam and Yongin (the
+sections above).
+
+**Out by name**: hostess bars 287, dance halls 5, staff canteens 230,
+household fuel dealers 35; and, as in Incheon, offices, education, health,
+estate agents, lodging, recreation, repairs, funeral services, wedding halls
+and matchmaking.
+
+**Names withheld** - 11 storefronts whose registered name is a bare personal
+name at an address that reads residential.
+
+**Stations**, cut at Siheung's boundary (the lines drawn to their ends;
+stations outside are listed on Siheung's page): Line 4, 2 stations in
+Siheung; the Suin–Bundang Line, 4; the Seohae Line, 5 (Oido and Jeongwang
+are shared, so 9 in all). Lines 1, 2 and 7 and Incheon's two lines, which
+reach the area, have no station in Siheung and are not drawn.
 
 ### Tbilisi - a national register of businesses, district centers left off, and a person's business shown by category
 

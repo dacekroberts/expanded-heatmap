@@ -51,8 +51,10 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "app"))
 from cities import (  # noqa: E402
     CITIES,
     COMPETING_REGIONS,
+    COUNTRY_TOP,
     DEFAULT_FRAME,
     DEFAULT_REGION,
+    LANDING_NO_ROOM,
     REGION_MEMBERS,
     REGION_LABELS_ALSO,
     REGION_ZOOM,
@@ -65,7 +67,7 @@ from cities import (  # noqa: E402
 
 # TEXT_WIDTH, the measured pill widths, lives in app/label_competition.py
 # since 2026-10-01, where the app's Global label competition reads it too.
-from label_competition import TEXT_WIDTH, compete  # noqa: E402
+from label_competition import TEXT_WIDTH, compete, label_text  # noqa: E402
 
 # GLOBAL'S LABELS ARE WON, NOT LISTED (owner, 2026-10-01): the landing view
 # labels the winners of app/label_competition.py's competition at their
@@ -245,18 +247,21 @@ def pill(city, x, y, region_name=None):
     if city["name"] in REGION_WON.get(region_name, {}):
         off = REGION_WON[region_name][city["name"]]
     anchor, dx, dy = tuple(off or city.get("label_offset") or DEFAULT_OFFSET)
+    # The label text in this view (label_competition.label_text): without
+    # " (Regional)", or a view's own name (Benelux's "City of Brussels").
+    text = label_text(city, region_name)
     try:
-        w = TEXT_WIDTH[city["name"]]
+        w = TEXT_WIDTH[text]
     except KeyError:
         # Raising beats guessing: a width estimated from character count would
         # make every number downstream wrong while still printing confidently.
         raise SystemExit(
-            f"no measured text width for {city['name']!r}. Measure it in a real "
+            f"no measured text width for {text!r}. Measure it in a real "
             f"browser with the real font loaded and add it to TEXT_WIDTH:\n"
             f"    await document.fonts.ready;\n"
             f"    const c = document.createElement('canvas').getContext('2d');\n"
             f"    c.font = '600 14px \"Space Grotesk\", sans-serif';\n"
-            f"    c.measureText({city['name']!r}).width\n"
+            f"    c.measureText({text!r}).width\n"
             f"Check a city already in the table at the same time - if its width "
             f"has moved, the font changed and every entry needs re-measuring.")
     a = x + dx
@@ -330,13 +335,62 @@ def caption_against_labels(region, vw, placed):
     if not stated or int(stated.group(1)) != len(members):
         bad.append(f"{name:<20} {vw:>4}px  caption {caption!r} does not state "
                    f"the region's {len(members)} cities")
+    # Or its country: a caption names a country split into views once
+    # (cities._CAPTION_NAME, "Japan" for the nine Japanese views).
     unnamed = sorted(c["name"] for c, *_ in placed
                      if c["name"] not in members and c["name"] not in caption
-                     and c.get("region") not in caption)
+                     and c.get("region") not in caption and c.get("country") not in caption)
     if unnamed:
         bad.append(f"{name:<20} {vw:>4}px  caption {caption!r} neither counts "
                    f"nor names {len(unnamed)} labelled cit"
                    f"{'y' if len(unnamed) == 1 else 'ies'}: {', '.join(unnamed)}")
+    return bad
+
+
+def nesting_breaks():
+    """A city named in a wider view is named in every narrower view that holds
+    it (owner, 2026-10-07: "cities who make it onto the global or regional
+    views should still make it onto country level views"; Tokyo: Global >
+    East Asia > Kanto > Tokyo Metropolis; Paris: Global > Europe West >
+    France North). A view's depth is one more than the deepest view that
+    borrows its anchors (REGION_LABELS_ALSO); Global is 0. A city's chain is
+    its own region and every view that borrows it, directly or through
+    another. Reads GLOBAL_WON and REGION_WON, so it runs after main() has
+    filled them."""
+    named = {}
+    for region in REGIONS:
+        named[region["name"]] = (set(GLOBAL_WON) if region["name"] == DEFAULT_REGION
+                                 else set(scored_labels(region, *region_view(region))))
+    borrowers = {}
+    for view, lent in REGION_LABELS_ALSO.items():
+        for r in lent:
+            borrowers.setdefault(r, set()).add(view)
+
+    def depth(view, seen=()):
+        if view == DEFAULT_REGION:
+            return 0
+        up = [b for b in borrowers.get(view, ()) if b not in seen]
+        return 1 + max((depth(b, seen + (view,)) for b in up), default=0)
+
+    def chain(region, seen=()):
+        out = {region}
+        for b in borrowers.get(region, ()):
+            if b not in seen:
+                out |= chain(b, seen + (region,))
+        return out
+
+    bad = []
+    for c in CITIES:
+        views = [v for v in chain(c["region"]) | {DEFAULT_REGION} if v in named]
+        shown = [v for v in views if c["name"] in named[v]]
+        if not shown:
+            continue
+        widest = min(depth(v) for v in shown)
+        missing = sorted((v for v in views if depth(v) > widest and c["name"] not in named[v]),
+                         key=depth)
+        if missing:
+            bad.append(f"{'(nesting)':<20}        {c['name']} is named in {', '.join(sorted(shown, key=depth))} "
+                       f"but not in the narrower {', '.join(missing)}")
     return bad
 
 
@@ -504,6 +558,31 @@ def main():
                         f"{ox:.1f} x {oy:.1f} px"
                         + (f" - GREW past the accepted {ok[0]:.1f} x {ok[1]:.1f}"
                            if ok else ""))
+
+    # THE OWNER'S LABEL GOAL (2026-10-07, Staging's call 197): "all dots
+    # visible in at least one regional view" and "every nation's top 1 ... in
+    # global view". Every city is labelled in at least one view, and each
+    # country's top city (cities.COUNTRY_TOP) is labelled on the landing view
+    # unless cities.LANDING_NO_ROOM names it; one named there that now fits is
+    # reported, so the list does not outlive its reason.
+    named = set(GLOBAL_WON)
+    for region in REGIONS:
+        if region["name"] != DEFAULT_REGION:
+            named |= set(scored_labels(region, *region_view(region)))
+    unnamed = [c["name"] for c in CITIES if c["name"] not in named]
+    if unnamed:
+        problems.append(f"{'(every view)':<20}        {unnamed} labelled in no view - give each "
+                        f"a view that places it (a country view, as Benelux placed Den Haag)")
+    roomy = []
+    for country, (top, _) in COUNTRY_TOP.items():
+        if top not in GLOBAL_WON and top not in LANDING_NO_ROOM:
+            problems.append(f"{DEFAULT_REGION:<20}        {country}'s top city {top} has no label "
+                            f"on the landing view (cities.COUNTRY_TOP)")
+        elif top in GLOBAL_WON and top in LANDING_NO_ROOM:
+            roomy.append(top)
+    if roomy:
+        print(f"Now labelled on the landing view, so drop from cities.LANDING_NO_ROOM: {roomy}\n")
+    problems.extend(nesting_breaks())
 
     if accepted and args.verbose:
         print(f"Known-accepted overlaps ({len(accepted)}) - see ACCEPTED_OVERLAPS:")

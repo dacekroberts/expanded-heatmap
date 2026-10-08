@@ -84,7 +84,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 |---|---|---|
 | United States | [`data_sources/united-states.md`](data_sources/united-states.md) | San Diego, San Francisco, Los Angeles (Regional), Chicago, New York, Philadelphia, Miami (Regional), Boston, Washington D.C., Buffalo, Sacramento, Houston, Minneapolis, Pittsburgh, Dallas, Kansas City, Tucson, New Orleans, Seattle (Regional) |
 | Canada | [`data_sources/canada.md`](data_sources/canada.md) | Vancouver (Regional), Montréal, Calgary, Edmonton, Toronto, Ottawa, Kitchener–Waterloo (Regional) |
-| Mexico | [`data_sources/mexico.md`](data_sources/mexico.md) | Mexico City, Guadalajara (Regional), Monterrey (Regional) |
+| Mexico | [`data_sources/mexico.md`](data_sources/mexico.md) | Mexico City (Regional), Guadalajara (Regional), Monterrey (Regional) |
 | Spain | [`data_sources/spain.md`](data_sources/spain.md) | Madrid, Barcelona, Palma |
 | Ireland | [`data_sources/ireland.md`](data_sources/ireland.md) | Dublin |
 | Italy | [`data_sources/italy.md`](data_sources/italy.md) | Milan, Rome, Florence |
@@ -98,15 +98,16 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Latvia | [`data_sources/latvia.md`](data_sources/latvia.md) | Riga, Liepāja, Daugavpils |
 | Brazil | [`data_sources/brazil.md`](data_sources/brazil.md) | São Paulo, Rio de Janeiro (Regional), Belo Horizonte (Regional), Brasília, Salvador, Fortaleza (Regional), Porto Alegre (Regional), Recife (Regional), Santos (Regional) |
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
-| South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang, Daejeon, Gwangju, Gimhae |
+| South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang (Regional), Daejeon, Gwangju, Gimhae, Gimpo, Siheung |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
 | Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki |
-| Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
+| Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin, Gelsenkirchen, Bremen |
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional) |
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
 | Australia | [`data_sources/australia.md`](data_sources/australia.md) | Sydney, Melbourne |
 | Belgium | [`data_sources/belgium.md`](data_sources/belgium.md) | Brussels, Antwerp, Ghent, Charleroi, Liège, Brussels (Regional) |
-| Switzerland | [`data_sources/switzerland.md`](data_sources/switzerland.md) | Zurich |
+| Switzerland | [`data_sources/switzerland.md`](data_sources/switzerland.md) | Zurich, Geneva (Regional) |
+| Greece | [`data_sources/greece.md`](data_sources/greece.md) | Thessaloniki |
 | Georgia | [`data_sources/georgia.md`](data_sources/georgia.md) | Tbilisi |
 
 ## Business registries
@@ -374,7 +375,7 @@ source, acknowledging Government ownership of the IP, and proper attribution.
 **The indemnity is not a notice, not a credit, and not a step in a build.** It
 is an open-ended undertaking to cover the Government's costs if a third party
 alleges the data infringed their rights. Hong Kong was the first source in
-this project to ask for one; others have since, among them Sacramento, Palma,
+this project to ask for one; others have since, among them Sacramento, Palma, Geneva,
 Dallas and San Diego's SanGIS layers (below). **It was an owner decision, taken before the register's
 35,808 premises were wired into a page**, not once the city was live.
 
@@ -528,6 +529,23 @@ agreement.<!-- /internal -->
 - **SANDAG's own Data Terms of Use** ("should not be redistributed", plus a
   SANDAG indemnity) defer to a third party's terms where the source is not
   SANDAG. The SanGIS agreement is the one read as governing.
+
+#### Geneva's SITG indemnity - accepted 2026-10-04
+
+SITG's **Conditions d'utilisation des données du Portail SITG** (version of
+19 May 2026; the copy inside the dataset's zip is byte-identical) govern the
+canton's business register (REG) that the Geneva (Regional) build uses.<!-- internal --> They
+were read on 2026-10-04 by the license-read agent.<!-- /internal -->
+
+- **The shape:** narrower than Hong Kong's. CU 7.2 limits the indemnity to
+  third-party claims arising from the user's own infringements, with
+  personality and data-protection rights named.
+- **The owner accepted it on 2026-10-04, for this one source**, with ge.ch's
+  website terms read as the website's only. As with Hong Kong, it is not a
+  notice or a build step.
+- **Unchanged by the acceptance:** no re-identification (CU 5.4.2: REG is
+  never joined to another source to identify a person), no resale, and the
+  source line and derived-use statement displayed (notice 154).
 
 ## Notices this project MUST display when published
 
@@ -1584,7 +1602,7 @@ Sporveien's names to endorse anything (NLOD §6), or present the data
 misleadingly. **MUST DO: nothing** - no key for the static file, and Entur asks
 for no more than one download a day.
 
-**30. Det Centrale Virksomhedsregister (Copenhagen, Aarhus, Odense) — required, and DISPLAYED.** Aarhus (2026-09-29) reads the same download (generation 505) and Odense (2026-09-30) reads the register too, so the credit names both; the owner approved each widening, Odense's on 2026-09-30.
+**30. Det Centrale Virksomhedsregister (Copenhagen, Aarhus, Odense) — required, and DISPLAYED.** Aarhus (2026-09-29) reads the same download (generation 505) and Odense (2026-09-30) reads the register too, so the credit names both; the owner approved each widening, Odense's on 2026-09-30. Copenhagen (Regional) (2026-10-07) reads it for eight more kommuner; the title keeps "Copenhagen".
 
 **CC BY 4.0**, from CVR's own terms on Datafordeler
 (`datafordeler.dk/vejledning/brugervilkaar/det-centrale-virksomhedsregister-cvr/`,
@@ -1597,7 +1615,7 @@ DO: nothing** - no notification, no registration of the reuse. The account is
 the owner's and closes after Copenhagen publishes<!-- internal --> (`docs/gated_access.md` item
 3)<!-- /internal -->; closing is licence-safe, since the grant attaches to the data.
 
-**31. Klimadatastyrelsen (Copenhagen, Aarhus, Odense) — required, and DISPLAYED.** Aarhus (2026-09-29) reads DAR's Adresse and Husnummer (generation 761) and takes each point from OpenStreetMap's copy, so the notice also names OpenStreetMap's points for Aarhus, owner-approved. Odense (2026-09-30) is placed the same way and the notice names it, approved by the owner 2026-09-30.
+**31. Klimadatastyrelsen (Copenhagen, Aarhus, Odense) — required, and DISPLAYED.** Aarhus (2026-09-29) reads DAR's Adresse and Husnummer (generation 761) and takes each point from OpenStreetMap's copy, so the notice also names OpenStreetMap's points for Aarhus, owner-approved. Odense (2026-09-30) is placed the same way and the notice names it, approved by the owner 2026-09-30. Copenhagen (Regional) (2026-10-07) is placed the same way too (owner), so the notice's last clause now covers every city it names; the wording is a review-time proposal.
 
 **CC BY 4.0**, from DAR's terms on Datafordeler
 (`datafordeler.dk/vejledning/brugervilkaar/danmarks-adresseregister-dar/`,
@@ -2243,7 +2261,7 @@ into `render_site_notices()`; displayed since Newcastle landed).
 - **Bucharest's rail, boundary, sectors and address points are OpenStreetMap
   data** (ODbL, notice 1).
 
-**68. Small Enterprise and Market Service (Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang, Daejeon, Gwangju, Gimhae) — required, and DISPLAYED**
+**68. Small Enterprise and Market Service (Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang, Gunpo, Uiwang, Daejeon, Gwangju, Gimhae, Gimpo, Siheung) — required, and DISPLAYED**
 (written into `render_site_notices()`; displayed since Incheon landed).
 
 - **PERMITTED WITH CONDITIONS** (<!-- internal -->`licence-read` 2026-09-29; <!-- /internal -->the rows in
@@ -3768,6 +3786,79 @@ of 2026-10-03.)
   `outputs/liverpool/` republishes the derived locations (README's credits).
 - Wording: Manchester's Ordnance Survey notice 85, with the city changed.
 
+
+**154. SITG, Répertoire des entreprises (Geneva (Regional)) — required, and
+DISPLAYED** (written into `render_site_notices()` with Geneva (Regional),
+2026-10-07.)
+
+- **PERMITTED WITH CONDITIONS**<!-- internal --> (`licence-read` 2026-10-04)<!-- /internal -->: SITG Level A,
+  "Accès libre", under the Conditions d'utilisation (version of 19 May 2026):
+  reproduce, publish, adapt and combine, commercial use included. Rows in
+  [`data_sources/switzerland.md`](data_sources/switzerland.md).
+- **MUST DISPLAY**, "de manière clairement visible": the source line in the
+  form CU 5.3.1 prescribes, "Source : Portail des données SITG (État de
+  Genève), téléchargé et/ou extrait en date du […].", with the extract date of
+  the file the map was built from (04.10.2026); a statement of the derived use
+  (CU 5.3.2, on its example wording: "Cartographie réalisée sur la base de
+  Données du Portail SITG"); and the conditions of use linked (CU 5.5).
+- **MUST NOT**: re-identify a person (CU 5.4.2: no join of REG to another
+  source); resell the data (RIRT art. 62).
+- **Personal data**: a sole trader's trade name that is the owner's own name
+  shows the street address instead (the owner's call, 2026-10-04); phone,
+  e-mail and legal-name columns are never read into the map.
+- **The indemnity (CU 7.2)**: accepted by the owner, 2026-10-04 (above); not a
+  notice.
+- **Geneva's rail and the commune boundaries are OpenStreetMap data** (ODbL,
+  notice 1).
+- The English sentences of the displayed notice are the build's draft, a
+  review-time proposal.
+
+**155. City of Thessaloniki (Thessaloniki) — required, and DISPLAYED**
+(written into `render_site_notices()` with Thessaloniki, 2026-10-07.)
+
+- **PERMITTED WITH CONDITIONS**<!-- internal --> (`licence-read` 2026-10-04)<!-- /internal -->: CC BY 4.0,
+  set on each resource of the layer's data.gov.gr record. The map portal's
+  no-redistribution splash is read as the web app's terms only (owner,
+  2026-10-04). Rows in [`data_sources/greece.md`](data_sources/greece.md).
+- **MUST DISPLAY** (CC BY 4.0 section 3(a)): the credit to the City of
+  Thessaloniki with the dataset's title linked to its record, the licence
+  linked, the retrieval date and that the data was changed. No wording is
+  prescribed; the notice is this project's.
+- **MUST NOT**: imply the City's endorsement or use its logo; call the layer
+  current, complete or official.
+- **Personal data**: the layer has no name field; a dot shows its licensed
+  activity.
+- **Thessaloniki's rail and boundary are OpenStreetMap data** (ODbL, notice 1).
+
+**156. Kommunalverbund Niedersachsen/Bremen e.V. (Bremen) — required, and
+DISPLAYED** (written into `render_site_notices()` with Bremen, 2026-10-07.)
+
+- **PERMITTED WITH CONDITIONS, display only**<!-- internal --> (staging's read 2026-10-05; the
+  `licence-read` agent's full read 2026-10-07)<!-- /internal -->: "Creative Commons Namensnennung
+  (CC-BY)", **no version**, in the dataset's ISO record (`otherConstraints`)
+  and GovData's resource (`http://dcat-ap.de/def/licenses/cc-by`, linking
+  `https://www.opendefinition.org/licenses/cc-by`). DCAT-AP.de's unversioned
+  concept maps to no version, and Bremen's own portal records use the
+  versioned `cc-by/4.0`, so the unversioned id was the publisher's choice.
+  Every CC BY version permits public display and adapted maps; none adds
+  share-alike or non-commercial terms. The owner read it as 4.0 (call 13,
+  2026-10-05: no outreach) and, with the database-right point under an
+  older version before them and the Kommunalverbund's 2024 report silent on
+  terms, **accepted the permissive reading** (2026-10-07).
+- **Rights holder: the Kommunalverbund Niedersachsen/Bremen e.V.**; the
+  Landesamt GeoInformation Bremen only hosts the file. Rows in
+  [`data_sources/germany.md`](data_sources/germany.md).
+- **MUST DISPLAY**: "Quellenvermerk: Kommunalverbund Niedersachsen/Bremen
+  e.V."; the licence title exactly as written, linked to the URL the record
+  gives; the dataset's title, "Einzelhandelsbestand in der Region Bremen
+  2022", with a link to the material; and that the data was changed.
+- **MUST NOT**: imply endorsement. Use only the public "reduziert" file: the
+  protected variant (record 0148391c) is under a restricted licence for the
+  participating municipalities.
+- **Not governing**: geo.bremen.de's CC BY-NC-ND page footer and the
+  Kommunalverbund imprint's private-use clause (both their own web pages).
+- **MUST DO**: nothing standing; a request to remove the attribution or the
+  layer is honoured.
 
 ## Gaps
 

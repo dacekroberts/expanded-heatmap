@@ -23,6 +23,8 @@ from pipeline.countries.mexico import (  # noqa: F401
     DENUE_INTERIOR_COLUMN,
     DENUE_MUNICIPIO_COLUMN,
     DENUE_NAME_COLUMN,
+    DENUE_MUNICIPIO_CODE_COLUMN,
+    DENUE_PARTS,
     DENUE_STATE_COLUMN,
     FORBIDDEN_COLUMNS,
     OSM_NEVER_A_STATION,
@@ -34,7 +36,9 @@ from pipeline.countries.mexico import (  # noqa: F401
     SOURCE_ENCODING,
     TAXONOMY_SYSTEM,
     denue_member,
+    denue_members,
     denue_url,
+    denue_urls,
 )
 
 # Re-exported above rather than redefined: every one of those names is a fact
@@ -43,18 +47,54 @@ from pipeline.countries.mexico import (  # noqa: F401
 # is deliberate - these ARE unused here and are imported so that this city's
 # step files keep importing them from this module, unchanged.
 
+# --- Scope ---------------------------------------------------------------
+#
+# Mexico City (Regional): Ecatepec de Morelos, Nezahualcóyotl, La Paz and
+# Naucalpan de Juárez added for the 11 stations of Líneas A, B and 2 that lie
+# in the State of México (marked by the owner 2026-10-04; Naucalpan kept and
+# the downloads approved 2026-10-06, calls 68-72; brief
+# docs/build_briefs/mexico_city_regional.md). False reproduces the city-alone
+# build byte for byte, which is how the extension was proved before it was
+# switched on.
+REGIONAL = True
+NAME = "Mexico City (Regional)" if REGIONAL else "Mexico City"
+
+# The four State of México municipios, keyed on INEGI's code as Monterrey's
+# are (pipeline/monterrey/config.py): OSM's `INEGI:MUNID` equals DENUE's
+# cve_ent + cve_mun, so register and boundaries join on one code. The names
+# exist only to be ASSERTED against DENUE's own `municipio` column, so a wrong
+# code fails loudly. Codes checked 2026-10-06 against INEGI's catalogue
+# (gaia.inegi.org.mx/wscatgeo/mgem/15, 125 municipios).
+REGIONAL_STATE_CODE = "15"
+MUNICIPIOS = {
+    "033": "Ecatepec de Morelos",
+    "058": "Nezahualcóyotl",
+    "070": "La Paz",
+    "057": "Naucalpan de Juárez",
+}
+MUNIDS = tuple(REGIONAL_STATE_CODE + code for code in MUNICIPIOS)
+# The 11 stations of Líneas A, B and 2 in the four, by municipio (staging's
+# probe 2026-10-04, line membership re-measured 2026-10-06). Step 1 asserts
+# them by point in polygon on INEGI:MUNID.
+STATIONS_PER_MUNICIPIO = {"033": 5, "058": 3, "070": 2, "057": 1}
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
 DATA_RAW = ROOT / "data" / "mexico_city" / "raw"
-DATA_PROCESSED = ROOT / "data" / "mexico_city" / "processed"
+# data/ is one junction shared by every worktree, and master's checks read
+# processed/: the regional build writes processed/regional/ until it lands
+# (regional-extension, Step 1). Fold back to processed/ on landing.
+DATA_PROCESSED = (ROOT / "data" / "mexico_city" / "processed"
+                  / ("regional" if REGIONAL else ""))
 OUTPUTS = ROOT / "outputs" / "mexico_city"
 
 HEATMAP_HTML = OUTPUTS / "heatmap.html"
 # Stations outside the city, with where each is (a citable scoping record, as
-# in the other cities). Lines A and B run into Estado de Mexico, where this
-# build has no business data, so their stations there must be cut rather than
-# left to anchor rings over a blank.
+# in the other cities). Lines A, B and 2 run into Estado de Mexico, where the
+# city-alone build has no business data, so their 11 stations there are cut
+# rather than left to anchor rings over a blank. With REGIONAL on, all 11 are
+# kept and the file is written header-only.
 EXCLUDED_STATIONS_CSV = OUTPUTS / "excluded_stations.csv"
 
 STATIONS_CSV = DATA_PROCESSED / "stations.csv"
@@ -82,9 +122,22 @@ DENUE_URL = denue_url(DENUE_STATE_CODE)
 DENUE_MEMBER = denue_member(DENUE_STATE_CODE)
 DENUE_ZIP = DATA_RAW / f"denue_{DENUE_STATE_CODE}_csv.zip"
 
+# 15 = State of México, read only when REGIONAL is on. INEGI publishes it in
+# TWO ZIPs (pipeline/countries/mexico.py, DENUE_PARTS), 50,572,588 and
+# 30,236,017 bytes, both Last-Modified 2026-05-20: the 05/2026 edition, the
+# same as the cached entidad 09 file. New file names in the shared data/, so
+# nothing on master's path is overwritten.
+DENUE_REGIONAL_URLS = denue_urls(REGIONAL_STATE_CODE)
+DENUE_REGIONAL_MEMBERS = denue_members(REGIONAL_STATE_CODE)
+DENUE_REGIONAL_ZIPS = tuple(
+    DATA_RAW / f"denue_{part}_csv.zip" for part in DENUE_PARTS[REGIONAL_STATE_CODE]
+)
+
 OSM_STATIONS_JSON = DATA_RAW / "osm_stations.json"
 OSM_ROUTES_JSON = DATA_RAW / "osm_routes.json"
 OSM_BOUNDARY_JSON = DATA_RAW / "osm_boundary.json"
+# The four municipios' admin_level=6 relations, by INEGI:MUNID (REGIONAL only).
+OSM_MUNICIPIOS_JSON = DATA_RAW / "osm_municipios_15.json"
 
 # --- OpenStreetMap fetch --------------------------------------------------
 

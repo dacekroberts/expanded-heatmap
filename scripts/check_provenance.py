@@ -204,9 +204,17 @@ SLUG_OVERRIDES = {
     "Blackpool (Regional)": "blackpool",
     "Liverpool (Regional)": "liverpool",
     "Nottingham (Regional)": "nottingham",
+    # The Abroad batch (2026-10-07): the 12 tram communes as one regional page.
+    "Geneva (Regional)": "geneva",
+    # Anyang extended to Gunpo and Uiwang (2026-10-07).
+    "Anyang (Regional)": "anyang",
     "Washington D.C.": "washington_dc",
     "Montréal": "montreal",
     "Mexico City": "mexico_city",
+    # Mexico City extended to four State of México municipios (2026-10-07).
+    "Mexico City (Regional)": "mexico_city",
+    # Copenhagen extended along the Letbane to eight kommuner (2026-10-07).
+    "Copenhagen (Regional)": "copenhagen",
     # Japan batch (2026-10-02): the macron dropped from the package name.
     "Kōchi": "kochi",
     # Japan wave 2 (2026-10-03), likewise.

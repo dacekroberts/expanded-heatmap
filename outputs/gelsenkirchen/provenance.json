@@ -1,0 +1,53 @@
+{
+  "survey": {
+    "wfs": "https://maps.gelsenkirchen.de/geoserver/infrastrukturdatenbank/wfs",
+    "licence": "dl-zero-de/2.0",
+    "licence_url": "https://www.govdata.de/dl-de/zero-2-0",
+    "properties": [
+      "id",
+      "Name",
+      "GEWERBETYPUSBEZ",
+      "KAT_GASTRO",
+      "HAUPTWARENGRUPPEBEZ",
+      "KERNSORTIMENTBEZ",
+      "KAT_DL",
+      "LAGEBEZ",
+      "PLZ",
+      "X",
+      "Y",
+      "Shape"
+    ],
+    "fetched_utc": "2026-10-07T08:25:08+00:00",
+    "files": [
+      {
+        "layer": "gewerbe_gastronomie",
+        "file": "idb_gewerbe_gastronomie.geojson",
+        "features": 403,
+        "bytes": 190912,
+        "sha256": "5c4491fb708fdbbf055f033305495dc69c48c7bf2c768cb09f5d5eaa700f5ac4"
+      },
+      {
+        "layer": "gewerbe_einzelhandel",
+        "file": "idb_gewerbe_einzelhandel.geojson",
+        "features": 1318,
+        "bytes": 658677,
+        "sha256": "15f2b7ed3564de4020247824fdc3f262fad9cfa6f169db1e6be26e7d1777e550"
+      },
+      {
+        "layer": "gewerbe_dienstleistung",
+        "file": "idb_gewerbe_dienstleistung.geojson",
+        "features": 593,
+        "bytes": 293298,
+        "sha256": "ea6ddcf673d8195b1bf07d1650042cda71c3710cbe114e9de321bff562430e9f"
+      }
+    ]
+  },
+  "written_utc": "2026-10-07T08:50:57+00:00",
+  "osm": {
+    "host": "overpass.kumi.systems",
+    "query": "[out:json][timeout:180];relation[\"type\"=\"route\"][\"route\"~\"^(tram|light_rail|subway)$\"](51.47,6.97,51.64,7.16)->.r;relation[\"boundary\"=\"administrative\"][\"de:amtlicher_gemeindeschluessel\"~\"^(05513000|05113000|05911000|05512000|05562014|05562016|05916000)$\"]->.b;.r out geom;(node(r.r);node[\"railway\"=\"tram_stop\"](51.47,6.97,51.64,7.16););out body;.b out geom;",
+    "osm_base": "2026-06-01T08:52:28Z",
+    "sha256": "94f4464abbd509504300b990275830a71e90e0457790ac281370b227724f09b9"
+  },
+  "osm_fetched_utc": "2026-10-07T08:50:57+00:00"
+}

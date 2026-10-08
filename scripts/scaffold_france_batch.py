@@ -729,10 +729,13 @@ def scaffold_supports_mode(root):
 
 
 def run_scaffold(root, slug, spec, m, dry_run, force):
+    # France North at latitude 46.5 and up, France South below (owner,
+    # 2026-09-30); "Europe" stopped being a region with the split of 2026-10-07.
+    region = "France North" if m["marker"][0] >= 46.5 else "France South"
     cmd = [sys.executable, str(root / "scripts" / "scaffold_city.py"),
            "--slug", slug, "--name", spec["name"], "--system-name", spec["operator"],
            "--taxonomy", "france_naf", "--lat", str(m["marker"][0]), "--lon", str(m["marker"][1]),
-           "--region", "Europe", "--country", "France", "--root", str(root)]
+           "--region", region, "--country", "France", "--root", str(root)]
     if scaffold_supports_mode(root):
         cmd += ["--mode", spec.get("mode", MODE_DEFAULT)]
     if dry_run:

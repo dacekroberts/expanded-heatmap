@@ -36,7 +36,8 @@ character.
 
 So a region view that outgrows hand placement switches to the competition,
 region by region, rather than the whole map changing at once
-(`COMPETING_REGIONS`, branch `overview-scale`, held for review time).
+(`COMPETING_REGIONS`, on master since 2026-10-05; Europe West and Europe
+East compete from 2026-10-07).
 
 **Re-run with the competition and measured widths** (all 84 names measured
 in the local app the same evening; 125 problems estimated, 122 measured):
@@ -66,6 +67,18 @@ in the local app the same evening; 125 problems estimated, 122 measured):
   32 of 34 for Latvia, Romania and Hungary as the east. The cuts near the area's midpoint (11 E) split
   Denmark and Italy; every cut puts Brăila and Galați closer (2.2-3.3 px,
   against 4.0), since the eastern frame widens.
+- **Landed with Thessaloniki, Gelsenkirchen and Bremen (2026-10-07, owner's
+  call 195; Greece in the east)**, measured on the built 176 cities with
+  `--built-only`. Europe as one region: 12 problems, Rotterdam's and Den
+  Haag's pills over the two German dots. The split alone did not help (West
+  13, East 1): `REGION_ZOOM_WITHOUT` already fitted Europe without its
+  eastern cities, so Europe West opened at the same zoom. Split and
+  competing: 0 problems, but West dropped Bremen and Gelsenkirchen (23 of
+  25). Split with a Germany view (call 194), both halves competing: 0
+  problems, every name placed (West 22 of 22, East 5 of 5, Germany 3 of 3),
+  and the phone-width clipping in the European views fell from seven labels
+  to one (Glasgow, 1.3 px). That is what landed. With all 83 staged cities
+  in: West 23 of 23, East 9 of 12 (Brăila and Galați stacked).
 - **Hand tuning still owed at build time**, as for every city: Kyushu-Okinawa
   (Urasoe pulls the frame south: 52 problems at default offsets), Shikoku,
   Tohoku, South Asia.
@@ -209,6 +222,11 @@ Cosmetic and solvable, and **it does not threaten the architecture** — which
 is the whole reason it sits here rather than in `PLAN.md` as urgent work.
 
 ## EVERY EUROPEAN CITY TAGS ONE REGION: `Europe` — owner's decision, 2026-09-22
+
+**Superseded 2026-10-07:** Europe is now two regions, Europe West and Europe
+East, by country (see the measurements near the top of this file and
+`add-city`'s European section). The section below is kept as the record of
+the earlier rule; its reasoning against a region per country still stands.
 
 **Standing rule for France and every European city after it.** A European city
 is tagged `"region": "Europe"` in `app/cities.py`. **It does not get a country

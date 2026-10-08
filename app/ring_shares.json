@@ -70,9 +70,9 @@
   "map_blob": "bdb9a68eb9cd5dc7498ff69bdbb2f3ca450f8a61"
  },
  "mexico_city": {
-  "in_ring": 135284,
-  "all": 280185,
-  "map_blob": "e3572d8096593c74682654cdc38d80135ea9267e"
+  "in_ring": 149980,
+  "all": 407628,
+  "map_blob": "87cf038a434f10fe9a90a6d131020305a9a6e893"
  },
  "guadalajara": {
   "in_ring": 36729,
@@ -130,9 +130,9 @@
   "map_blob": "02fff5aff3801ff256f47c9f57f1cea05a44c56b"
  },
  "copenhagen": {
-  "in_ring": 14102,
-  "all": 14922,
-  "map_blob": "7c034da83be6be07920d0dc4cb9d3dc92566e033"
+  "in_ring": 16545,
+  "all": 18677,
+  "map_blob": "e31b99f5b89de9455eb545477ce575d38993f64d"
  },
  "prague": {
   "in_ring": 17528,
@@ -575,9 +575,9 @@
   "map_blob": "efdff4d9de409b7bfa2f1dc3966904aecf68f9c5"
  },
  "anyang": {
-  "in_ring": 9747,
-  "all": 15177,
-  "map_blob": "4ebd657918d8b4215ed9f966b50c1641aa2d76d9"
+  "in_ring": 15799,
+  "all": 23999,
+  "map_blob": "55df31b5ff3b8a12661afdda3ff596dbb61e9766"
  },
  "dallas": {
   "in_ring": 4197,
@@ -848,5 +848,35 @@
   "in_ring": 6736,
   "all": 17879,
   "map_blob": "201b9048c7564cfa355db79d031ee0b5e77b2f2f"
+ },
+ "gimpo": {
+  "in_ring": 7187,
+  "all": 13398,
+  "map_blob": "817cd4e7563365d0bdd65a5354a179743f16297f"
+ },
+ "siheung": {
+  "in_ring": 6106,
+  "all": 15206,
+  "map_blob": "42c0884ebb7cc2a82879a997edc288eb09dc753f"
+ },
+ "geneva": {
+  "in_ring": 4839,
+  "all": 5863,
+  "map_blob": "9f354802b9bdfa7fde9e8399f1cd4a829e319da1"
+ },
+ "thessaloniki": {
+  "in_ring": 6292,
+  "all": 7132,
+  "map_blob": "54d9282eae1618e6d592974a2390b861eb5bd4ff"
+ },
+ "gelsenkirchen": {
+  "in_ring": 1160,
+  "all": 1776,
+  "map_blob": "49b43532bc16e436f06d8752a7b27be9babee7b4"
+ },
+ "bremen": {
+  "in_ring": 2148,
+  "all": 3153,
+  "map_blob": "b83e75fb5b692788aab695cc10b69b5596681858"
  }
 }

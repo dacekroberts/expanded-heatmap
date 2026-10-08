@@ -124,7 +124,36 @@ def line_geometry(rels, nodes):
     return chosen, added_branch
 
 
+def regional_polygon():
+    """Anyang (Regional): the union of 안양시, 군포시 and 의왕시, each relation
+    taken by id and checked by name (Gwangju's union), the union area-gated."""
+    els = json.loads(need(config.REGIONAL_BOUNDARY_OSM_JSON, "regional boundaries")
+                     .read_text(encoding="utf-8"))["elements"]
+    rels = {e["id"]: e for e in els if e["type"] == "relation"}
+    parts = []
+    for rid, name in config.REGIONAL_RELATIONS.items():
+        r = rels.get(rid)
+        if r is None or r.get("tags", {}).get("name") != name:
+            sys.exit(f"expected relation {rid} named {name} - re-read the boundary answer")
+        lines = [[(p["lon"], p["lat"]) for p in m["geometry"]] for m in r["members"]
+                 if m["type"] == "way" and m.get("role") == "outer" and m.get("geometry")]
+        part = unary_union(list(polygonize(linemerge(MultiLineString(lines)))))
+        a = gpd.GeoSeries([part], crs=config.CRS_GEOGRAPHIC).to_crs(config.CRS_PROJECTED).area.iloc[0] / 1e6
+        print(f"    {name:<4} relation {rid}: {a:,.1f} km2")
+        parts.append(part)
+    poly = unary_union(parts)
+    area = gpd.GeoSeries([poly], crs=config.CRS_GEOGRAPHIC).to_crs(config.CRS_PROJECTED).area.iloc[0] / 1e6
+    lo, hi = config.REGIONAL_AREA_KM2
+    print(f"  boundary: the union of {len(parts)} relations, {area:,.0f} km2")
+    if not lo <= area <= hi:
+        sys.exit(f"boundary area {area:,.0f} km2 outside {lo}-{hi} - re-read the relations "
+                 f"before changing the gate")
+    return poly
+
+
 def boundary_polygon():
+    if config.REGIONAL:
+        return regional_polygon()
     els = json.loads(need(config.BOUNDARY_OSM_JSON, "Anyang boundary").read_text(encoding="utf-8"))["elements"]
     rels = [e for e in els if e["type"] == "relation" and e["id"] == config.BOUNDARY_RELATION
             and e.get("tags", {}).get("name") == config.BOUNDARY_NAME]
@@ -306,7 +335,7 @@ def main():
     out = st[~st.in_city].copy()
     out["lines"] = [" ".join(config.LINES[k][2] for k in ls) for ls in out.lines]
     # "outside" is the word app/station_scope.py reads.
-    out["reason"] = "outside Anyang's boundary"
+    out["reason"] = config.OUTSIDE_REASON
     out = out[["station", "lines", "reason", "latitude", "longitude"]].sort_values("station")
     out.to_csv(config.EXCLUDED_STATIONS_CSV, index=False, encoding="utf-8")
     print(f"  {len(out)} stations of drawn lines outside Anyang -> {config.EXCLUDED_STATIONS_CSV.name}")

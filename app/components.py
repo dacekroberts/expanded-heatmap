@@ -541,16 +541,17 @@ class Notice(NamedTuple):
 
 
 # Groups of cities one notice covers, spelled as app/cities.py spells them.
-_MEXICO = ("Mexico City", "Guadalajara (Regional)", "Monterrey (Regional)")
+_MEXICO = ("Mexico City (Regional)", "Guadalajara (Regional)", "Monterrey (Regional)")
 _NORWAY = ("Oslo", "Bergen")
-_DENMARK = ("Copenhagen", "Aarhus", "Odense")
+_DENMARK = ("Copenhagen (Regional)", "Aarhus", "Odense")
 _CZECHIA = ("Prague", "Brno", "Plzeň", "Olomouc", "Ostrava",
             "Liberec (Regional)", "Most (Regional)")
 _BRAZIL = ("São Paulo", "Rio de Janeiro (Regional)", "Belo Horizonte (Regional)", "Brasília",
            "Salvador", "Fortaleza (Regional)", "Porto Alegre (Regional)",
            "Recife (Regional)", "Santos (Regional)")
 _KOREA_SEMAS = ("Incheon", "Goyang", "Seongnam", "Yongin", "Suwon", "Bucheon",
-                "Namyangju", "Ansan", "Uijeongbu", "Anyang", "Daejeon", "Gwangju", "Gimhae")
+                "Namyangju", "Ansan", "Uijeongbu", "Anyang (Regional)", "Daejeon", "Gwangju", "Gimhae",
+                "Gimpo", "Siheung")
 _FRANCE = ("Paris", "Marseille", "Toulouse", "Lille (Regional)", "Rennes",
            "Le Mans", "Besançon", "Avignon", "Tours", "Dijon", "Reims", "Orléans",
            "Mulhouse", "Brest", "Saint-Étienne", "Nice", "Montpellier",
@@ -565,12 +566,12 @@ _UK_NAPTAN = (*_UK_SIX, "Liverpool (Regional)")
 # Every city the OpenStreetMap rail-geometry entry names, in its order. Adding
 # a city to that sentence means adding it here, or its page omits the line.
 _OSM_RAIL = (
-    "Mexico City", "Guadalajara (Regional)", "Monterrey (Regional)",
-    "Barcelona", "Lille (Regional)", "Oslo", "Bergen", "Copenhagen", "Aarhus",
+    "Mexico City (Regional)", "Guadalajara (Regional)", "Monterrey (Regional)",
+    "Barcelona", "Lille (Regional)", "Oslo", "Bergen", "Copenhagen (Regional)", "Aarhus",
     "Kitchener–Waterloo (Regional)", "Odense", "Liepāja", "Daugavpils",
     "Buffalo", "Sacramento", "Houston", "Ottawa", "Minneapolis", "Pittsburgh",
     "Dallas", "Kansas City", "Tucson", "Tacoma", "New Orleans", "Florence", "Den Haag",
-    "Göteborg", "Zurich", "Rome", "Palma", "Brno", "Plzeň", "Olomouc",
+    "Göteborg", "Zurich", "Geneva (Regional)", "Thessaloniki", "Gelsenkirchen", "Bremen", "Rome", "Palma", "Brno", "Plzeň", "Olomouc",
     "Ostrava", "Liberec (Regional)", "Most (Regional)", *_BRAZIL, "Prague",
     "Amsterdam", "Rotterdam", "Hong Kong", "Seoul", "Taichung", "Taoyuan",
     "Taipei (Regional)", "Daegu", "Busan", *_KOREA_SEMAS, "Sydney", "Melbourne",
@@ -975,8 +976,9 @@ _NOTICES = [
     # many cities - every other source in this list serves exactly one.
     Notice(8, "INEGI",
      "Fuente: INEGI, Directorio Estadístico Nacional de Unidades Económicas "
-     "(DENUE). Business locations for Mexico City, Guadalajara and Monterrey "
-     "are from "
+     "(DENUE). Business locations for Mexico City and four neighboring State of "
+     "México municipios (Ecatepec de Morelos, Nezahualcóyotl, La Paz and "
+     "Naucalpan de Juárez), Guadalajara and Monterrey are from "
      "DENUE, published by "
      "the Instituto Nacional de Estadística y Geografía, used under the "
      "Términos de Libre Uso de la Información del INEGI. The data has been "
@@ -999,8 +1001,9 @@ _NOTICES = [
      "Barcelona, including its FGC lines and both funiculars), and the route "
      "geometry of Lille's two métro lines, the per-line colors of "
      "Oslo's T-bane and tram lines, the color of Bergen's Bybanen line 1, "
-     "and Copenhagen's Metro and S-tog lines "
-     "and stations and the municipal boundaries used to select them, "
+     "and Copenhagen's Metro, S-tog and Letbane lines "
+     "and stations, the municipal boundaries used to select them and the "
+     "address points used to place its businesses, "
      "Aarhus's Letbane L2 line and its stops, the municipal boundaries used to "
      "select them and the address points used to place its businesses, "
      "Kitchener–Waterloo's ION line and its stops, "
@@ -1027,6 +1030,13 @@ _NOTICES = [
      "used to select them and its businesses, "
      "Zurich's sixteen VBZ tram lines and their stops and the municipal "
      "boundaries used to select them and its businesses, "
+     "Geneva's five TPG tram lines and their stops and the commune "
+     "boundaries used to select them and its businesses, "
+     "Thessaloniki's metro line and its stations and the municipal "
+     "boundary used to select them and its businesses, "
+     "Gelsenkirchen's four tram and Stadtbahn lines and their stops and its "
+     "city boundary, Bremen's eight BSAG tram lines and their stops and "
+     "its city boundary, "
      "Rome's metro and Roma–Viterbo urban lines and their stations, "
      "Palma's Metro M1 and its stations, and the municipal boundaries used to "
      "select them, "
@@ -1042,7 +1052,7 @@ _NOTICES = [
      "Light Rail lines and stations, and its boundary, Seoul's subway lines and stations and "
      "its boundary, the subway, light-rail and Korail lines and stations of Daegu, Busan, "
      "Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, "
-     "Anyang, Daejeon, Gwangju and Gimhae, and those cities' boundaries, the train and metro routes of Sydney and "
+     "Anyang, Gunpo, Uiwang, Daejeon, Gwangju, Gimhae, Gimpo and Siheung, and those cities' boundaries, the train and metro routes of Sydney and "
      "Melbourne and their City boundaries, Buenos Aires's Subte and Premetro routes and "
      "its boundary, Mendoza's Metrotranvía and its stations and the department boundaries "
      "used to select them, Seattle's Link 1 and 2 Lines, "
@@ -1362,12 +1372,16 @@ _NOTICES = [
     # Husnummer, and takes the point from OSM's copy (osak:identifier).
     # Odense added 2026-09-30 (tram kit), Aarhus's placement; approved by the
     # owner 2026-09-30 (call C1).
+    # Copenhagen (Regional), 2026-10-07: placed on OSM's copies too (owner),
+    # so the last clause names no city; a drafts proposal for review time.
+    # The title keeps "Copenhagen", not "Copenhagen (Regional)": nested
+    # parentheses break the provenance parser (notice 68's lesson).
     Notice(31, "Klimadatastyrelsen (Copenhagen, Aarhus, Odense)",
      "Contains data from Klimadatastyrelsen, Danmarks Adresseregister (DAR), via "
      "Datafordeler under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). "
      "This project joins the register's addresses and address points to the "
-     "business register to place each premises; in Aarhus and Odense the points are "
-     "OpenStreetMap's copies of them.",
+     "business register to place each premises; the points are OpenStreetMap's "
+     "copies of them.",
      False, _DENMARK),
     # ČSÚ - Prague's activity, form and name data (RES). CC BY 4.0 for the web
     # pages, and the DATA paragraph ("Další podmínky použití dat ČSÚ") adds two
@@ -2492,8 +2506,8 @@ _NOTICES = [
     # policy read as covering its homepage (owner, 2026-09-29, Daegu's reading). Written
     # under the owner's pre-approval of this build's prose. Covers every Korean city on
     # the register (Incheon; the Gyeonggi satellites add their names).
-    Notice(68, "Small Enterprise and Market Service (Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang, Daejeon, Gwangju, Gimhae)",
-     "Storefronts for Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang, Daejeon, Gwangju and Gimhae are from the Small "
+    Notice(68, "Small Enterprise and Market Service (Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang, Gunpo, Uiwang, Daejeon, Gwangju, Gimhae, Gimpo, Siheung)",
+     "Storefronts for Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang, Gunpo, Uiwang, Daejeon, Gwangju, Gimhae, Gimpo and Siheung are from the Small "
      "Enterprise and "
      "Market Service's "
      "commercial-district register (소상공인시장진흥공단, 상가(상권)정보, via 공공데이터포털 "
@@ -3028,6 +3042,56 @@ _NOTICES = [
      "© Royal Mail copyright and database right 2026. Contains National Statistics data © Crown "
      "copyright and database right 2026. Ordnance Survey does not endorse this map.",
      False, ("Liverpool (Regional)",)),
+    # Geneva (Regional) (notice 154, the Abroad batch's number, 2026-10-07):
+    # SITG's conditions of use (version of 19 May 2026, licence-read
+    # 2026-10-04). The source line in the form CU 5.3.1 prescribes, with the
+    # extract date of the file the map was built from; the derived-use line
+    # on CU 5.3.2's example; the conditions linked (CU 5.5). THE DATE IS THE
+    # REG ZIP'S: re-fetching the register means changing it here. The
+    # English sentences are the build's draft, a review-time proposal.
+    Notice(154, "SITG, Répertoire des entreprises (Geneva (Regional))",
+     "Source : Portail des données SITG (État de Genève), téléchargé et/ou extrait en date du 04.10.2026. Cartographie réalisée sur la base de Données du Portail SITG (Répertoire des "
+     "entreprises du canton de Genève, REG), extrait en date du 04.10.2026. Modified by this "
+     "project: establishments filtered to shops, food and drink and personal services in the "
+     "12 communes TPG's trams serve, grouped into three categories and mapped by distance to "
+     "tram stops, with a trade name replaced by the street address where it is a person's "
+     "own name; the categories and counts are this project's. Use of the data is "
+     "subject to the SITG's [conditions of use]"
+     "(https://sitg.ge.ch/ressources/conditions-utilisation-donnees). The État de Genève does "
+     "not endorse this map.",
+     False, ("Geneva (Regional)",)),
+    # Thessaloniki (notice 155, the Abroad batch's number, 2026-10-07): the
+    # City's layer under CC BY 4.0 (read 2026-10-04): credit, title linked,
+    # licence linked, the changes, no endorsement. No wording is prescribed;
+    # this is the build's draft, a review-time proposal.
+    Notice(155, "City of Thessaloniki (Thessaloniki)",
+     "Thessaloniki's active shop licenses are from the City of Thessaloniki (Δήμος "
+     "Θεσσαλονίκης), [Ενεργές Άδειες Καταστημάτων]"
+     "(https://data.gov.gr/dataset/gis-thessaloniki-wms-saloniki-tsp_poi_energes_adeies_katastimaton), "
+     "licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), retrieved October "
+     "4, 2026. Modified by this project: filtered to food premises, food shops and personal "
+     "services inside the Municipality of Thessaloniki, grouped into three categories and "
+     "mapped by distance to metro stations. The City of Thessaloniki has not reviewed or "
+     "endorsed this map.",
+     False, ("Thessaloniki",)),
+    # Bremen (notice 156, the Abroad batch's number, 2026-10-07): the
+    # Kommunalverbund's survey under "Creative Commons Namensnennung (CC-BY)",
+    # no version (licence-read 2026-10-05 and 2026-10-07). The Quellenvermerk
+    # and the licence title exactly as the record writes them, linked to the
+    # licence URL the record gives (never a versioned CC page, which would
+    # claim a version the publisher never named); the dataset's title and a
+    # link to it; the changes; no endorsement. The English sentences are the
+    # build's draft, a review-time proposal.
+    Notice(156, "Kommunalverbund Niedersachsen/Bremen e.V. (Bremen)",
+     "Quellenvermerk: Kommunalverbund Niedersachsen/Bremen e.V. Bremen's shops are from the "
+     "retail survey [Einzelhandelsbestand in der Region Bremen 2022]"
+     "(https://geoportal.bremen.de/resources/data/Einzelhandelsbestand_reduziert.zip), "
+     "licensed under [Creative Commons Namensnennung (CC-BY)]"
+     "(https://www.opendefinition.org/licenses/cc-by). This map has been changed from the "
+     "source: its points are filtered to the City of Bremen, grouped into one category and "
+     "mapped by distance to tram stops. The Kommunalverbund Niedersachsen/Bremen e.V. has not "
+     "reviewed or endorsed it.",
+     False, ("Bremen",)),
 ]
 
 # The owner's branding decision (2026-09-21): keep each agency's official route

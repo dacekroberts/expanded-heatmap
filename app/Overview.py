@@ -37,7 +37,7 @@ from cities import (
     region_caption,
     SWITCHER_ORDER,
 )
-from label_competition import compete
+from label_competition import compete, label_text
 from basemap import SECRET_NAME as BASEMAP_SECRET, carto_positron_style
 from components import (
     SITE_NAME,
@@ -327,6 +327,10 @@ _members = {c["name"] for c in _region_cities[region]
 _also = getattr(sys.modules.get("cities"), "REGION_LABELS_ALSO", {}).get(region, ())
 _members |= {c["name"] for c in CITIES if c.get("region") in _also
              and c.get("label_tier") != "minor"}
+# The label text in this view (label_competition.label_text): a view-specific
+# name where one is set (Benelux's "City of Brussels"), else cities.py `pill`.
+_texts = {c["name"]: label_text(c, region) for c in CITIES}
+cities["pill"] = cities["name"].map(_texts)
 label_cities = cities[cities["name"].isin(_members)]
 
 markers = pdk.Layer(
@@ -395,7 +399,9 @@ labels = pdk.Layer(
     # Not `cities`: a leaf region labels only its own - see label_cities above.
     data=label_cities,
     get_position="[lon, lat]",
-    get_text="name",
+    # The label text drops " (Regional)" (cities.py `pill`); the tooltip and
+    # the city list keep the full name.
+    get_text="pill",
     get_size=14,
     get_color=DARK,
     # An opaque pill behind each name so it reads on both the light basemap and
@@ -576,6 +582,8 @@ if _basemap_style is None:
 # names, and hand-placing offsets against every neighbour did not scale.
 # A region view in cities.COMPETING_REGIONS competes the same way, its entrants
 # the cities it labels (_members above) rather than Global's static filter.
+# Each country's top city (cities.COUNTRY_TOP, owner 2026-10-07) is placed
+# first in both, whatever its mode; label_competition.py says how.
 _competes = region in getattr(sys.modules.get("cities"), "COMPETING_REGIONS", ())
 if region == DEFAULT_REGION or _competes:
     _won = compete(CITIES, view.latitude, view.longitude, view.zoom,

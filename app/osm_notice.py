@@ -31,8 +31,9 @@ def _japan(place):
 
 
 OSM_RAIL_BY_CITY = {
-    "Mexico City": ("the rail route geometry and station locations of Mexico City's Metro CDMX "
-                    "and Tren Ligero", True),
+    "Mexico City (Regional)": ("the rail route geometry and station locations of Mexico City's Metro CDMX "
+                    "and Tren Ligero, and the boundaries of Ciudad de México and four State "
+                    "of México municipios", True),
     "Guadalajara (Regional)": ("the rail route geometry and station locations of "
                                "Guadalajara's Tren Ligero", True),
     "Monterrey (Regional)": ("the rail route geometry and station locations of Monterrey's "
@@ -42,8 +43,9 @@ OSM_RAIL_BY_CITY = {
     "Lille (Regional)": ("the route geometry of Lille's two métro lines", True),
     "Oslo": ("the per-line colors of Oslo's T-bane and tram lines", False),
     "Bergen": ("the color of Bergen's Bybanen line 1", False),
-    "Copenhagen": ("Copenhagen's Metro and S-tog lines and stations and the municipal "
-                   "boundaries used to select them", True),
+    "Copenhagen (Regional)": ("Copenhagen's Metro, S-tog and Letbane lines and stations, the "
+                              "municipal boundaries used to select them and the address "
+                              "points used to place its businesses", True),
     "Aarhus": ("Aarhus's Letbane L2 line and its stops, the municipal boundaries used to "
                "select them and the address points used to place its businesses", True),
     "Kitchener–Waterloo (Regional)": ("Kitchener–Waterloo's ION line and its stops", True),
@@ -74,6 +76,13 @@ OSM_RAIL_BY_CITY = {
                  "used to select them and its businesses", True),
     "Zurich": ("Zurich's sixteen VBZ tram lines and their stops and the municipal "
                "boundaries used to select them and its businesses", True),
+    "Geneva (Regional)": ("Geneva's five TPG tram lines and their stops and the commune "
+                          "boundaries used to select them and its businesses", True),
+    "Thessaloniki": ("Thessaloniki's metro line and its stations and the municipal "
+                     "boundary used to select them and its businesses", True),
+    "Gelsenkirchen": ("Gelsenkirchen's four tram and Stadtbahn lines and their stops, and "
+                      "its city boundary", True),
+    "Bremen": ("Bremen's eight BSAG tram lines and their stops, and its city boundary", True),
     "Rome": ("Rome's metro and Roma–Viterbo urban lines and their stations, and its city "
              "boundary", True),
     "Palma": ("Palma's Metro M1 and its stations, and the municipal boundaries used to "
@@ -121,10 +130,13 @@ OSM_RAIL_BY_CITY = {
     "Namyangju": _korea("Namyangju"),
     "Ansan": _korea("Ansan"),
     "Uijeongbu": _korea("Uijeongbu"),
-    "Anyang": _korea("Anyang"),
+    "Anyang (Regional)": ("the subway and Korail lines and stations of Anyang, Gunpo and "
+                          "Uiwang, and their boundaries", True),
     "Daejeon": _korea("Daejeon"),
     "Gwangju": _korea("Gwangju"),
     "Gimhae": _korea("Gimhae"),
+    "Gimpo": _korea("Gimpo"),
+    "Siheung": _korea("Siheung"),
     "Sydney": ("the train and metro routes of Sydney and its City boundary", True),
     "Melbourne": ("the train and metro routes of Melbourne and its City boundary", True),
     "Buenos Aires": ("Buenos Aires's Subte and Premetro routes and its boundary", True),

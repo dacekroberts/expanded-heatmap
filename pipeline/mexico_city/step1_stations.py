@@ -45,15 +45,21 @@ from pipeline.mexico_city.config import (
     CRS_PROJECTED,
     EXCLUDED_STATIONS_CSV,
     LINE_NAMES,
+    MUNICIPIOS,
+    MUNIDS,
     OSM_BOUNDARY_JSON,
     OSM_EXCLUDE_RAILWAY,
+    OSM_MUNICIPIOS_JSON,
     OSM_RAILWAY_KEEP,
     OSM_ROUTES_JSON,
     OSM_STATIONS_JSON,
     OSM_STATION_NETWORKS,
+    REGIONAL,
+    REGIONAL_STATE_CODE,
     STATIONS_CSV,
     STATION_COUNT_GATE_3,
     STATION_COUNT_GATE_3_REASON,
+    STATIONS_PER_MUNICIPIO,
 )
 
 # CDMX is 1,495 km2. A boundary that assembles wrong - the usual failure is a
@@ -63,6 +69,16 @@ from pipeline.mexico_city.config import (
 # that matched nothing. An area gate catches both shapes of that error.
 BOUNDARY_AREA_KM2_MIN = 1_300.0
 BOUNDARY_AREA_KM2_MAX = 1_700.0
+
+# Mexico City (Regional): the four State of México municipios together,
+# measured 414.0 km2 in EPSG:32614 on 2026-10-07 (Ecatepec 156.1, Naucalpan
+# 157.9, Nezahualcóyotl 62.6, La Paz 37.3; relations 5605754, 5606080,
+# 5606086, 5605964). The band is wide enough for OSM edits and narrow enough
+# to catch a ring that did not close or a municipio that went missing (the
+# smallest, La Paz, is 37 km2: losing it leaves 377, inside the band, which
+# is why each MUNID is also required by name below).
+MUNICIPIOS_AREA_KM2_MIN = 330.0
+MUNICIPIOS_AREA_KM2_MAX = 520.0
 
 
 def read_cached(path, label):
@@ -120,13 +136,73 @@ def load_boundary():
     return geom
 
 
+def _outer_polygon(rel):
+    lines = [[(p["lon"], p["lat"]) for p in m["geometry"]]
+             for m in rel.get("members", [])
+             if m.get("type") == "way" and m.get("role") == "outer"
+             and m.get("geometry")]
+    if not lines:
+        return None
+    polys = list(polygonize(linemerge(MultiLineString(lines))))
+    return unary_union(polys) if polys else None
+
+
+def load_municipios():
+    """Mexico City (Regional): one polygon per State of México municipio,
+    keyed by INEGI:MUNID (Monterrey's join key, pipeline/monterrey/
+    step1_stations.py), plus their union. Steps 2 and 3 read this too, so all
+    three steps agree on where the region is."""
+    data = read_cached(OSM_MUNICIPIOS_JSON, "municipio boundaries")
+    by_code = {}
+    for rel in (e for e in data["elements"] if e["type"] == "relation"):
+        munid = rel.get("tags", {}).get("INEGI:MUNID")
+        if munid not in MUNIDS:
+            continue
+        if munid in by_code:
+            raise SystemExit(f"Two boundary relations carry INEGI:MUNID {munid}. "
+                             "Inspect them; never pick by size.")
+        geom = _outer_polygon(rel)
+        if geom is None:
+            raise SystemExit(f"INEGI:MUNID {munid} ({rel['tags'].get('name')}) "
+                             "did not assemble into a polygon.")
+        by_code[munid] = geom
+    missing = [m for m in MUNIDS if m not in by_code]
+    if missing:
+        raise SystemExit(f"No boundary for {missing}. All four are required: a "
+                         "missing municipio would silently drop its stations.")
+    areas = (gpd.GeoSeries(list(by_code.values()), index=list(by_code),
+                           crs=CRS_GEOGRAPHIC).to_crs(CRS_PROJECTED).area / 1e6)
+    for munid, a in areas.items():
+        print(f"      {munid} {MUNICIPIOS[munid[len(REGIONAL_STATE_CODE):]]:22s} "
+              f"{a:7,.1f} km2")
+    union = unary_union(list(by_code.values()))
+    area = (gpd.GeoSeries([union], crs=CRS_GEOGRAPHIC)
+            .to_crs(CRS_PROJECTED).area.iloc[0] / 1e6)
+    print(f"  municipios: {len(by_code)}, union {area:,.1f} km2")
+    if not MUNICIPIOS_AREA_KM2_MIN <= area <= MUNICIPIOS_AREA_KM2_MAX:
+        raise SystemExit(f"municipio union {area:,.0f} km2 outside "
+                         f"{MUNICIPIOS_AREA_KM2_MIN:,.0f}-"
+                         f"{MUNICIPIOS_AREA_KM2_MAX:,.0f}.")
+    return by_code, union
+
+
+def load_scope():
+    """The polygon the map covers: CDMX alone, or CDMX plus the four
+    municipios when REGIONAL is on. Returns (scope, cdmx, municipios by code)."""
+    cdmx = load_boundary()
+    if not REGIONAL:
+        return cdmx, cdmx, {}
+    by_code, union = load_municipios()
+    return unary_union([cdmx, union]), cdmx, by_code
+
+
 def main():
     print("=== Step 1: Mexico City stations (OpenStreetMap) ===\n")
 
     print("Reading cached OSM:")
     st_data = read_cached(OSM_STATIONS_JSON, "stations")
     rt_data = read_cached(OSM_ROUTES_JSON, "routes")
-    boundary = load_boundary()
+    boundary, cdmx, municipios = load_scope()
 
     nodes = [e for e in st_data["elements"]
              if e["type"] == "node" and "tags" in e]
@@ -247,10 +323,36 @@ def main():
     inside = gdf.within(boundary)
     kept = gdf[inside].drop(columns="geometry").copy()
     outside = gdf[~inside].copy()
-    print(f"\nInside Ciudad de México: {len(kept):,}")
-    print(f"Outside (Estado de México - Lines 2, A and B): {len(outside):,}")
+    if not REGIONAL:
+        print(f"\nInside Ciudad de México: {len(kept):,}")
+        print(f"Outside (Estado de México - Lines 2, A and B): {len(outside):,}")
+    else:
+        # Each kept station's municipio by point in polygon on INEGI:MUNID,
+        # asserted against the brief's count per municipio, so a boundary
+        # edit that moves a station across a line fails here.
+        in_cdmx = gdf[inside].within(cdmx)
+        print(f"\nInside the scope (CDMX and four municipios): {len(kept):,}"
+              f"   CDMX {int(in_cdmx.sum()):,}   outside: {len(outside):,}")
+        per_muni = {}
+        for _, r in gdf[inside][~in_cdmx].iterrows():
+            hits = [k for k, g in municipios.items() if r.geometry.within(g)]
+            if len(hits) != 1:
+                raise SystemExit(f"{r['name']}: in {len(hits)} municipio "
+                                 "polygons, expected exactly one.")
+            per_muni.setdefault(hits[0], []).append(r["name"])
+        for munid in MUNIDS:
+            names = sorted(per_muni.get(munid, []))
+            code = munid[len(REGIONAL_STATE_CODE):]
+            print(f"    {munid} {MUNICIPIOS[code]:22s} {len(names):2d}  "
+                  f"{', '.join(names)}")
+        got = {m[len(REGIONAL_STATE_CODE):]: len(v) for m, v in per_muni.items()}
+        if got != STATIONS_PER_MUNICIPIO:
+            raise SystemExit(f"stations per municipio {got} != "
+                             f"{STATIONS_PER_MUNICIPIO} (the brief's count).")
 
-    if len(outside):
+    # Written even when empty (header only), so a regional build that keeps
+    # every station never leaves the city-alone list behind.
+    if len(outside) or REGIONAL:
         b_proj = gpd.GeoSeries([boundary], crs=CRS_GEOGRAPHIC).to_crs(CRS_PROJECTED).iloc[0]
         dist = (outside.to_crs(CRS_PROJECTED).geometry
                 .apply(lambda g: g.distance(b_proj)).round(0))

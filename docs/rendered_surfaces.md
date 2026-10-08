@@ -6,7 +6,7 @@ read from the code, so a review lane can divide them up and miss none
 (review lesson 3, `docs/review_lanes_2026-09-30.md`). The lane kit is
 `docs/review_lane_kit.md`.
 
-**170 city pages, 4 fixed pages and the Overview; 28 rendered docs; 2 app data files.**
+**176 city pages, 4 fixed pages and the Overview; 29 rendered docs; 2 app data files.**
 
 ## The Overview (`/`)
 
@@ -19,12 +19,12 @@ Data: `app/macro_facts.json`.
 
 | URL | File | Renders |
 |---|---|---|
-| `/About_the_Data` | `app/pages/About_the_Data.py` | `docs/data_sources.md`, every `docs/data_sources/*.md` (26), site notices |
+| `/About_the_Data` | `app/pages/About_the_Data.py` | `docs/data_sources.md`, every `docs/data_sources/*.md` (27), site notices |
 | `/Required_Notices` | `app/pages/Required_Notices.py` | every required notice (`components._NOTICES`), site notices |
 | `/What_Is_Excluded` | `app/pages/What_Is_Excluded.py` | `docs/excluded_categories.md`, every city's `outputs/<slug>/excluded_stations.csv` (`app/station_scope.py`), site notices |
 | `/Why_the_Maps_Differ` | `app/pages/Why_the_Maps_Differ.py` | `app/ring_shares.json`, site notices |
 
-Rendered docs, all of them reader-facing: `docs/data_sources.md`, `docs/excluded_categories.md`; `docs/data_sources/argentina.md`, `docs/data_sources/australia.md`, `docs/data_sources/belgium.md`, `docs/data_sources/brazil.md`, `docs/data_sources/canada.md`, `docs/data_sources/czechia.md`, `docs/data_sources/denmark.md`, `docs/data_sources/france.md`, `docs/data_sources/georgia.md`, `docs/data_sources/germany.md`, `docs/data_sources/hong-kong.md`, `docs/data_sources/ireland.md`, `docs/data_sources/italy.md`, `docs/data_sources/japan.md`, `docs/data_sources/latvia.md`, `docs/data_sources/mexico.md`, `docs/data_sources/netherlands.md`, `docs/data_sources/norway.md`, `docs/data_sources/romania.md`, `docs/data_sources/south-korea.md`, `docs/data_sources/spain.md`, `docs/data_sources/sweden.md`, `docs/data_sources/switzerland.md`, `docs/data_sources/taiwan.md`, `docs/data_sources/united-kingdom.md`, `docs/data_sources/united-states.md`.
+Rendered docs, all of them reader-facing: `docs/data_sources.md`, `docs/excluded_categories.md`; `docs/data_sources/argentina.md`, `docs/data_sources/australia.md`, `docs/data_sources/belgium.md`, `docs/data_sources/brazil.md`, `docs/data_sources/canada.md`, `docs/data_sources/czechia.md`, `docs/data_sources/denmark.md`, `docs/data_sources/france.md`, `docs/data_sources/georgia.md`, `docs/data_sources/germany.md`, `docs/data_sources/greece.md`, `docs/data_sources/hong-kong.md`, `docs/data_sources/ireland.md`, `docs/data_sources/italy.md`, `docs/data_sources/japan.md`, `docs/data_sources/latvia.md`, `docs/data_sources/mexico.md`, `docs/data_sources/netherlands.md`, `docs/data_sources/norway.md`, `docs/data_sources/romania.md`, `docs/data_sources/south-korea.md`, `docs/data_sources/spain.md`, `docs/data_sources/sweden.md`, `docs/data_sources/switzerland.md`, `docs/data_sources/taiwan.md`, `docs/data_sources/united-kingdom.md`, `docs/data_sources/united-states.md`.
 
 ## City pages
 
@@ -51,7 +51,7 @@ Is Excluded, and its in-ring share on Why the Maps Differ.
 | `/Calgary_Heatmap` | Calgary | `calgary` | ✓ |
 | `/Edmonton_Heatmap` | Edmonton | `edmonton` | ✓ |
 | `/Toronto_Heatmap` | Toronto | `toronto` | ✓ |
-| `/Mexico_City_Heatmap` | Mexico City | `mexico_city` | ✓ |
+| `/Mexico_City_Heatmap` | Mexico City (Regional) | `mexico_city` | ✓ |
 | `/Guadalajara_Heatmap` | Guadalajara (Regional) | `guadalajara` | ✓ |
 | `/Madrid_Heatmap` | Madrid | `madrid` | ✓ |
 | `/Barcelona_Heatmap` | Barcelona | `barcelona` | ✓ |
@@ -63,7 +63,7 @@ Is Excluded, and its in-ring share on Why the Maps Differ.
 | `/Lille_Heatmap` | Lille (Regional) | `lille` | ✓ |
 | `/Rennes_Heatmap` | Rennes | `rennes` | ✓ |
 | `/Oslo_Heatmap` | Oslo | `oslo` | ✓ |
-| `/Copenhagen_Heatmap` | Copenhagen | `copenhagen` | ✓ |
+| `/Copenhagen_Heatmap` | Copenhagen (Regional) | `copenhagen` | ✓ |
 | `/Prague_Heatmap` | Prague | `prague` | ✓ |
 | `/Amsterdam_Heatmap` | Amsterdam | `amsterdam` | ✓ |
 | `/Rome_Heatmap` | Rome | `rome` | ✓ |
@@ -123,7 +123,7 @@ Is Excluded, and its in-ring share on Why the Maps Differ.
 | `/Ansan_Heatmap` | Ansan | `ansan` | ✓ |
 | `/Uijeongbu_Heatmap` | Uijeongbu | `uijeongbu` | ✓ |
 | `/Dallas_Heatmap` | Dallas | `dallas` | ✓ |
-| `/Anyang_Heatmap` | Anyang | `anyang` | ✓ |
+| `/Anyang_Heatmap` | Anyang (Regional) | `anyang` | ✓ |
 | `/Le_Mans_Heatmap` | Le Mans | `le_mans` | ✓ |
 | `/Besancon_Heatmap` | Besançon | `besancon` | ✓ |
 | `/Avignon_Heatmap` | Avignon | `avignon` | ✓ |
@@ -207,3 +207,9 @@ Is Excluded, and its in-ring share on Why the Maps Differ.
 | `/Charleroi_Heatmap` | Charleroi | `charleroi` | ✓ |
 | `/Liege_Heatmap` | Liège | `liege` | ✓ |
 | `/Brussels_Regional_Heatmap` | Brussels (Regional) | `brussels` | ✓ |
+| `/Gimpo_Heatmap` | Gimpo | `gimpo` | ✓ |
+| `/Siheung_Heatmap` | Siheung | `siheung` | ✓ |
+| `/Geneva_Heatmap` | Geneva (Regional) | `geneva` | ✓ |
+| `/Thessaloniki_Heatmap` | Thessaloniki | `thessaloniki` | ✓ |
+| `/Gelsenkirchen_Heatmap` | Gelsenkirchen | `gelsenkirchen` | ✓ |
+| `/Bremen_Heatmap` | Bremen | `bremen` | ✓ |

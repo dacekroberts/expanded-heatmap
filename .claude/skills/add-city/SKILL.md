@@ -14,19 +14,29 @@ either caught a real problem or is a design decision already made (see `docs/pro
 trail is in `DECISIONS.md`). If this is a fresh session, read those, plus
 `docs/city_master_list.md` and `PLAN.md`, first.
 
-## Adding a EUROPEAN city? Its region is `Europe`, and that is not negotiable
+## Adding a EUROPEAN city? Its region is `Europe West` or `Europe East`, by country
 
-Tag `"region": "Europe"` in `app/cities.py`. **Do not create a region for the
-country.** Ten European countries are on the remaining screen and they describe
-one readable view between them; a region per country means ten entries to
-create, order and later merge.
+Tag `"region": "Europe East"` for Latvia, Romania, Hungary and Greece, and
+`"region": "Europe West"` for every other European country without a view of
+its own (owner, 2026-10-04, landed 2026-10-07; the comment at `REGION_ORDER` in
+`app/cities.py`). **Do not create a region for the country.** A European
+country new to the project goes to the half `scripts/stress_overview.py` scores
+better, with the owner's agreement; a view of its own is the owner's call.
 
-`Spain` was a leftover from before this rule and has been retired to `Europe`
-— see `docs/scaling_thresholds.md`, "EVERY EUROPEAN CITY TAGS ONE REGION".
-The two exceptions are the owner's, not a pattern: French cities tag
-`France North` or `France South` and Czech cities `Czechia` (owner,
-2026-09-29/30; the comments at `REGION_ORDER` in `app/cities.py`), because
-their labels could not share Europe's view.
+The country views are the owner's, not a pattern: French cities tag
+`France North` or `France South`; Czech, German and UK cities `Czechia`,
+`Germany` and `United Kingdom`; Dutch and Belgian cities `Benelux` (owner,
+2026-09-29 to 2026-10-07), because their labels could not share Europe's view.
+Europe West still names a country view's larger cities (`REGION_LABELS_ALSO`,
+East Asia's pattern with Seoul); a smaller one there is `"label_tier": "minor"`,
+named only in its own view - the owner's call per city, with the build. Both
+Europe views and Benelux compete for their labels (`COMPETING_REGIONS`), so a
+new city there needs its pill width measured, not an offset tuned.
+
+**Every city must be labelled in at least one view, and every country's
+largest city on the landing view** (owner, 2026-10-07; `COUNTRY_TOP` and
+`LANDING_NO_ROOM` in `app/cities.py`; `check_macro_labels.py` fails either).
+A city larger than its country's current top replaces it in `COUNTRY_TOP`.
 
 This lives here rather than in a sibling city's config because a lesson written
 in the previous city's comments does not reach the next city — the meta-rule
