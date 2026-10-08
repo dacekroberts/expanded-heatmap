@@ -125,9 +125,10 @@ st.markdown(
 - The lists give an address but no location. Each address is matched to MLIT's address reference
   data, which places 99.7% at their street block; where only the town can be found, the dot sits
   at its center, and a national filing that does not match is placed at its own coordinates.
-- Where a trade name is its operator's own name, the dot shows its permit type instead. Most of
-  the lists name only companies, and two wards withhold individual operators' names themselves,
-  so this check covers only the lists that name their operators.
+- Where a trade name is its operator's own name, or is written as a bare personal name, the dot
+  shows its permit type instead. Most of the lists name only companies, and two wards withhold
+  individual operators' names themselves, so this check covers only the lists that name their
+  operators.
 - Names and permit types are shown in Japanese, as the wards record them.
 """
 )

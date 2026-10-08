@@ -84,8 +84,9 @@ st.markdown(
   city's list and is not on this map. Where they are is not known.
 - The rest are matched to MLIT's address reference data, which places most at their street block;
   where only the district can be found, the dot sits at the district's center.
-- Where a trade name is its operator's own name, the dot shows its permit type instead; the food
-  list names an operator only where it is a company, so this cannot be checked for the rest.
+- Where a trade name is its operator's own name, or is written as a bare personal name, the dot
+  shows its permit type instead; the food list names an operator only where it is a company, so
+  this cannot be checked for the rest.
 - Names and permit types are shown in Japanese, as the lists record them.
 - **About 83% of storefronts sit within a ring.**
 """
