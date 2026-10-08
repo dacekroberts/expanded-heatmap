@@ -52,6 +52,20 @@ or published; every proposal waits for the owner.
   low zooms lose their land-cover shading. Either can come back later (the
   original Daylight shapefile with ESA's credit; QRank with the owner's
   acceptance of the indemnity).
+- **QRank: downloaded once in error, never used, deleted; resolved (owner,
+  2026-10-07).** The owner's manual downloads included `qrank.csv.gz`
+  (105,533,721 bytes) by mistake. It was moved out of the build inputs the
+  same evening, never opened, never built from, and deleted by the owner;
+  nothing derived from it exists. The owner's call: no terms were breached
+  and no liability follows from a mistaken, unopened download that is not
+  in the project. The pilot builds with an empty stand-in for QRank, as the
+  travel app does.
+- **The inputs in place** (`data/_basemap_build/data/sources/`, owner's
+  downloads, 2026-10-07): `argentina.osm.pbf` (Geofabrik
+  `argentina-261006.osm.pbf`, the dated file "-latest" redirected to;
+  432,349,104 bytes, sha256 d23c0242...c5021f14), the water and land
+  polygons, Natural Earth and pgf-encoding, sizes matching the publishers'
+  exactly. Land cover and QRank: empty stand-ins, made locally.
 - **What the test measures:** that a self-built Mendoza pack draws the same
   map as the downloaded one (same style, same view; screenshot and rendered
   feature counts), its size against 4.13 MB, the build's time and peak
