@@ -26,6 +26,7 @@ python scripts/check_overpass_hosts.py [--live|--selftest]   # every Overpass mi
 python scripts/check_worktree_data.py <worktree> [--list]   # before removing a worktree
 python scripts/check_render_current.py                  # after merging
 python scripts/check_map_markup.py [--verbose]          # dark-mode label contrast, legend styles
+python scripts/check_line_identity.py [--rendered|--neighbours|--verbose]   # one colour per line across maps (pipeline/line_registry.py)
 python scripts/check_no_em_dashes.py                    # no em dash in any comment or docstring
 python scripts/check_name_keys.py [--selftest]          # withheld-name lists hold keys, not names
 python scripts/check_internal_markers.py [--selftest]   # every <!-- internal --> span closed, contained, clean

@@ -55,6 +55,7 @@ CHECKS = [
     ["scripts/check_inline_arrays.py"],
     ["scripts/check_macro_facts.py"],
     ["scripts/check_macro_labels.py"],
+    ["scripts/check_line_identity.py"],
     ["scripts/check_map_markup.py"],
     ["scripts/check_master_list_counts.py"],
     ["scripts/check_master_list_counts_selftest.py"],
