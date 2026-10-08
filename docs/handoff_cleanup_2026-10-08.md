@@ -87,9 +87,10 @@ items are done or moved into PLAN.
    legend-dot comment. `app/components.py`, Kyoto's page and the rest merge
    on their own. BATCH 2a (Montreal, Barcelona, Marseille, Prague,
    Brussels; held for the owner, three questions in its drafts) was
-   committed on a DETACHED HEAD at `4fda9817` while the branch stayed at
-   `3d57d9d9`; its session was asked to reattach (fast-forward). Before
-   merging, confirm the branch ref includes `4fda9817`. Basemap: the station-area border is dark
+   committed on a detached HEAD at `4fda9817`; REATTACHED the same day (the
+   branch fast-forwarded, now `55f024b8`, worktree on the branch, clean).
+   Before merging, still confirm the branch ref is the tip you expect.
+   Basemap: the station-area border is dark
    plum `#352a4d` in both projects (owner, 2026-10-08), clearing every pin
    colour by 45 or more, so the pin colours stay; the pilot's drafts
    (`claude-epic-neumann-5aa0a6.md`) also hold the owner's disputed-borders
