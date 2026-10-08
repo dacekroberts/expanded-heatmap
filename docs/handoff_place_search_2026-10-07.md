@@ -235,4 +235,11 @@ on its own before removing the worktree (`docs/session_roles.md`, step 1).
   `app/cities.py` and `app/components.py` changed too). When the branch takes
   master in, before its own push only: take master's side of each
   `outputs/<city>/heatmap.html`, then re-render every searched map so it
-  carries both master's chrome and the search box.
+  carries both master's chrome and the search box. Cleanup's landing does
+  one full re-render that covers them (its handoff, item 4, holds this
+  branch's four landing conditions).
+- **PLAN.md at the merge** (Cleanup, 2026-10-08): master's was trimmed to
+  1,902 words (d1b73f73), long detail in `docs/plan_detail/<topic>.md`, done
+  items in `docs/plan_done/`. Take master's PLAN.md whole and add only this
+  item as a two-line pointer to this handoff and the drafts file, with its
+  two top-line one-liners (iPhone memory, repository size).
