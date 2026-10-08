@@ -9,6 +9,49 @@ app is its own project, this repo keeps the basemap switch, its hosting and an
 export contract (owner, relayed by Cleanup). Nothing here is landed, pushed
 or published; every proposal waits for the owner.
 
+### 2026-10-07 - The half Travel version built and tested on Mendoza; macro-map Travel tooltips (owner)
+
+- **Built (commit cc1a3b04, branch only).** With `open_basemap`, the base
+  layers are "Business" and "Travel". `TRAVEL_MODE_SCRIPT`, a conditional
+  block, takes the pins, both heat layers and the rings off the map when
+  Travel is picked, folds the legend to its lines, keeps every layer in the
+  menu, restores the render-time defaults on Business, and remembers the
+  viewer's choice (localStorage). Two defects found and fixed on the way:
+  changes made inside the layer menu's own click were undone or left stale
+  ticks (now deferred until the click is handled), and with the Travel
+  layer alone Leaflet.markercluster threw "Map has no maxZoom specified"
+  when a pin layer was turned back on (the Travel layer now registers its
+  zoom range as tile layers do). A first legend wrap edited LEGEND_HTML's
+  fixed text and `check_render_current.py` caught it; the wrap now sits in
+  the slot only.
+- **Tested** (headless Edge, desktop mouse and 375 x 812 touch, no console
+  errors): Travel clears pins, heat and rings and the legend's business
+  section, with lines kept; the line highlight works by hover and tap in
+  Travel; a business layer turned back on from the menu draws; Business
+  restores pins, in-ring heat and the business legend; a reload reopens in
+  Travel. The full interaction suite (line highlight, station names,
+  legend, line label, credit, drag, Global View) and the credit check at
+  375 x 650, 375 x 812, 1280 x 650 and 1280 x 900 pass on both base layers.
+  Without `open_basemap` Mendoza still renders identical to the committed
+  map, and all 170 committed maps pass `check_render_current.py`.
+- **Small follow-up:** a business layer turned back on in Travel draws, but
+  the legend's business section stays folded until Business is picked.
+- **Macro-map tooltips in Travel (owner, 2026-10-07), the same in the
+  website's Travel view, the full version and the mobile app:** dots keep
+  their transit-type colors (metro, light rail, tram); the tooltip reads the
+  city name, the transit type, a "transit coverage" stat only where the
+  rail data limits coverage, then the number of lines and stations if there
+  is room. No storefront counts. Messaged to the app project.
+- **Measured for the coverage stat** (the committed maps and
+  `excluded_stations.csv`, 2026-10-07): 54 of 170 cities list no station
+  left out; 116 list some: beyond the city limits 111, thinned for spacing
+  10, closed for works 5, under the 15-minute test 3. Those files are not a
+  clean coverage measure: Japanese cities list only stations within 3 km of
+  the city line, and lines left out whole (commuter rail, stubs, scenic
+  lines) are not counted at all. Lowest shares drawn: Anyang 7 of 113,
+  Melbourne 17 of 216, Sydney 16 of 173; Mendoza 7 of 25, Washington 40 of
+  98.
+
 ### 2026-10-07 - Two travel versions for the pilot, "full" and "half"; no business or ring layers in the full one (owner)
 
 - **The owner's split, both piloted off the live site:**
