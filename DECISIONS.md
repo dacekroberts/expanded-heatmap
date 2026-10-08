@@ -20,7 +20,15 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**109 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**114 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+
+**2026-10-08**
+
+- [Georgia joins Europe East, and West Asia, a one-city view, is retired (owner; branch legend-dot-georgia, held for review time)](#2026-10-08---georgia-joins-europe-east-and-west-asia-a-one-city-view-is-retired-owner-branch-legend-dot-georgia-held-for-review-time)
+- [Legend dots never shrink, and are 10 px (owner's iPhone check; branch legend-dot-georgia, held for review time)](#2026-10-08---legend-dots-never-shrink-and-are-10-px-owners-iphone-check-branch-legend-dot-georgia-held-for-review-time)
+- [The owner's iPhone check of the 2026-10-07 and 2026-10-08 landings passed](#2026-10-08---the-owners-iphone-check-of-the-2026-10-07-and-2026-10-08-landings-passed)
+- [Analytics' four map issues fixed: lost letters in full-width and at a name's start, Saitama's layer codes, Ōita's lost numeral, and Ōita's masked names stated (owner; branch legend-dot-georgia, held for review time)](#2026-10-08---analytics-four-map-issues-fixed-lost-letters-in-full-width-and-at-a-names-start-saitamas-layer-codes-ōitas-lost-numeral-and-ōitas-masked-names-stated-owner-branch-legend-dot-georgia-held-for-review-time)
+- [The comments map_common ships in every map reworded to the neutral-comment rules (owner; branch legend-dot-georgia, held for review time)](#2026-10-08---the-comments-map_common-ships-in-every-map-reworded-to-the-neutral-comment-rules-owner-branch-legend-dot-georgia-held-for-review-time)
 
 **2026-10-07**
 
@@ -4491,3 +4499,130 @@ per-city shape of their siblings.
   each city: Tokyo 164 MB, median 27.8 MB, all 5.94 GB. Zoom 14 is about a
   third of zoom 15. Protomaps' default content; a style of the project's
   own can drop layers.
+
+### 2026-10-08 - Georgia joins Europe East, and West Asia, a one-city view, is retired (owner; branch legend-dot-georgia, held for review time)
+
+- **Decided (owner): Tbilisi's region is Europe East, and the West Asia
+  view goes.** The 2026-10-02 entry "Tbilisi: the metro from OpenStreetMap, 23
+  stations, gate 3 exact; a new West Asia region" (`docs/decisions/2026-09-27.md`) kept Georgia out of a single Europe frame:
+  Dublin to Tbilisi is about 3,700 km, past the 3,300 km at which Canada
+  was split. The Europe West and East split of 2026-10-07 removed that
+  frame: Tbilisi is 1,544 km from Bucharest, Europe East's nearest city,
+  and 2,365 km from Liepāja, its farthest. The UN M49 placement of Georgia
+  in Western Asia remained the only reason for the view, and the owner
+  judged a one-city region beside a thin one a case for a merge. Superseded:
+  "Named for the area ... so a later Baku, Yerevan or Ankara joins it".
+- **Measured with `check_macro_labels.py` on a scratch copy of `app/`:**
+  Europe East's zoom 3.19 to 2.56 (its centre 23.8 E to 32.9 E), PROBLEMS 0
+  over 35 regions at 375, 768 and 1200 px; one new graze reported, not
+  failed (Daugavpils's pill grazes its own marker at 375).
+- **No West Asian city is near a build:** Gaziantep, Konya, Bursa, Kocaeli
+  and Kayseri are Band R or blocked, Jerusalem's business leg is unread
+  behind a block, Dubai and Riyadh are unscreened behind a block, and
+  Israel is held. A Turkish build reopens the question; the staged roster
+  keeps Adana under "West Asia", which `stress_overview.py` treats as a new
+  region.
+- **Changed on the branch:** `app/cities.py` (Tbilisi's region, the
+  reasoning beside "Europe East", West Asia out of `REGION_ORDER`),
+  `scripts/stress_overview.py`'s anchor on the region list's end, the
+  master list's Europe row 21 to 22 with Tbilisi's sentence moved into it,
+  `docs/project_context.md` and `docs/recheck_calendar.md`. Tbilisi's map
+  is not re-rendered: its region button reads the app's link and now
+  reads "Europe East". Rejected: "Eastern Europe and the Caucasus", too
+  long for the menu.
+
+### 2026-10-08 - Legend dots never shrink, and are 10 px (owner's iPhone check; branch legend-dot-georgia, held for review time)
+
+- **Found (owner, iPhone): the olive legend dot drew as an oval.** The
+  legend row is a flex row and its dot had no `flex-shrink:0`, so a label
+  that wraps took width from the dot. Olive's "Food shops (no general
+  retail is published)" (43 characters, 61 maps) wraps on a phone, as do
+  the long Retail labels: Buffalo's, New York's and Toronto's at 44
+  characters, Philadelphia's 43, Seattle's 40, Seoul's, Daegu's and Busan's
+  35 and Boston's 31.
+  Violet's "Shops and services" stays on one line and was round on the
+  owner's phone.
+- **Decided (owner): the dot 10 px, from 11** ("smaller by a tad"; 10 over
+  9, which reads as a bullet). The no-data ring (Tokyo's Stations row) goes
+  9 to 8 with it. The page's box-sizing includes the border, so these are
+  the drawn sizes.
+- **Verified:** Kyoto, Philadelphia, Riga and Tokyo rendered on the branch
+  (`drift_check.py --render-only`, through the gate, peak 0.30 GB) differ
+  from master only in this markup once Folium ids are normalised; in a 375
+  px viewport Kyoto's three dots measured 10 x 10 px, the olive row
+  wrapping. The sample renders were reset: every map's markup changes, so
+  all 206 re-render once at the landing.
+- **Done in the Cleanup session at the owner's word** ("legend fix can be
+  done here because it relates to both versions"), so the basemap pilot
+  keeps to its own version.
+
+### 2026-10-08 - The owner's iPhone check of the 2026-10-07 and 2026-10-08 landings passed
+
+- **Passed (owner, on an iPhone): all ten items** of the checklist Cleanup
+  wrote for the two landings (35d43c4a, the large review; 5507a4cb, the line
+  registry and region selector): the two-row region dropdowns and their
+  views, the map's start on the Overview, the Europe West, Europe East,
+  Benelux and Germany labels, Kyoto's wrapped button row and its legend
+  clear of the buttons and the OpenStreetMap credit, the "<- Kansai" and
+  Daegu's "<- South Korea" buttons, the olive and violet pins with no
+  glitched names, Tokorozawa's line labels and legend, Tokyo, New York and
+  a new regional map drawing their pins, and the reference pages' back
+  links. Known items were left out (Osaka's three labels at 375, Ostrava's
+  2 px, the clipped "(Regional)" pills).
+- **Two defects found on the way, both on branch `legend-dot-georgia` for
+  review time:** the olive legend dot drawn as an oval where its label
+  wraps (the entry "Legend dots never shrink, and are 10 px"), and the
+  phone's region dropdowns opening a keyboard on an editable search box
+  (`filter_mode=None` on both `st.selectbox` calls in `app/Overview.py`;
+  typed text no longer filters, a choice still sets `?region=`).
+
+### 2026-10-08 - Analytics' four map issues fixed: lost letters in full-width and at a name's start, Saitama's layer codes, Ōita's lost numeral, and Ōita's masked names stated (owner; branch legend-dot-georgia, held for review time)
+
+- **Found (Analytics, registering the 206 cities at 5507a4cb):** the
+  lost-letter rule had no full-width Latin, so "Ｐ?ｔｉｓｓｅｒｉｅ" rendered
+  (Higashiyamato 6, Tachikawa 4, Ichinomiya 3; one Tachikawa label was
+  "?"); Saitama's new-law food types showed their layer code and padding as
+  the pin category ("01:飲食店営業 ", 1,127 to 1,780 rows in each of Ageo
+  (Regional), Kasukabe, Sōka and Tokorozawa), withheld names too; Ōita had
+  "? そうざい製造業" (100 rows; a circled number above ⑳ lost in cp932);
+  and Ōita's page did not say that names the city masks show the permit
+  type.
+- **Decided: a name that STARTS with "?" lost its first character too,
+  unless an ASCII space follows.** Found while measuring: "??野家" is
+  吉野家, Ōita's "?暁雲福祉会", Osaka's "?　ｒｅｃｃａ", Seoul's bare "??".
+  The space exception keeps New York's "? TEA (QUESTION MARK TEA)", its
+  real trade name. Measured on every processed file: at most 548 more names
+  show their classification (Osaka 202, Kobe 105, Seoul 96, Tokyo 55; an
+  upper bound, since step 3 draws a subset). This follows the owner's rule
+  of 2026-10-07 that no glitched name is live.
+- **How:** `map_common._LETTER` gains Ａ-Ｚ and ａ-ｚ and `_LOST_LETTER` a
+  leading `^\?+(?! )`; `japan_eigyo.display_value()` drops the `01:` code
+  with its padding and the leading `?`, keeping circled numbers that
+  survived ("⑪ 菓子製造業") as published; a name equal to its raw
+  classification (the name rule's withheld name) reads as the displayed
+  category. Ōita's name bullet gains "or the city has masked it": a
+  proposal for review time (one pin at a visible address; 267 of the 269
+  masked names sit on withheld rows that are not drawn).
+- **Verified on samples:** Ageo (Regional), Ōita, Higashiyamato, Osaka and
+  New York re-rendered on the branch: no coded category and no lost-letter
+  name left in any, "? TEA" kept; `check_personal_exposure.py` 0 on Ageo,
+  Ōita and Osaka; `check_all.py` 51 of 51. Samples reset; the landing's one
+  full re-render carries the change.
+
+### 2026-10-08 - The comments map_common ships in every map reworded to the neutral-comment rules (owner; branch legend-dot-georgia, held for review time)
+
+- **Done:** the last open part of the neutral-comment pass, the CSS, JS and
+  HTML comments inside `pipeline/map_common.py`'s strings, which PLAN held
+  for a full re-render because rewording one changes every committed map.
+  16 comment blocks changed: five rewrites cut how-it-was-found narration
+  and kept every number, date and owner decision (the phone-fit guard now
+  points to the `map-view` skill for its history); the rest American
+  spelling and one "ours". Left as they were: comments already neutral,
+  the fingerprint mark, Python comments, and `pipeline/theme.py`'s ambient
+  script (outside this file).
+- **Verified:** Kyoto, Tokyo, Osaka (with the dense placer), New York, Riga
+  and Ostrava rendered against a same-code baseline are identical once
+  comments are stripped, every changed line inside a comment; the
+  tokenizer took no "https://" for a comment. `check_render_current.py`
+  compares the shipped blocks with their comments, so it fails until the
+  landing's full re-render, and the branch stays local until then.

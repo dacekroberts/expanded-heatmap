@@ -20,13 +20,20 @@ items are done or moved into PLAN.
     skills. 34 maps re-rendered. App rebooted; Tokorozawa's live map
     hash-matched the commit, Daegu's button and the Korean second row checked
     live.
-- **Worktrees left:** cleanup, staging, analytics, visual, and two pilots:
-  `charming-lumiere-930853` (place search, Kyoto) and `epic-neumann-5aa0a6`
-  (open basemap switch and app groundwork). The review lanes and every build
-  worktree were removed on 2026-10-08 after the owner retired their sessions;
-  `data/_review/lane-1..4/` are kept.
-- **Weekly usage 76% on 2026-10-08** (resets 2026-10-11 19:00 UTC); next
-  check-in at 80%.
+- **Worktrees left:** cleanup, staging, analytics, visual, two pilots, and
+  Cleanup's `review-prep` (branch `legend-dot-georgia`, held for review
+  time; its `data` and `.venv-lean` are junctions: unlink each alone first).
+  - **`charming-lumiere-930853` (place search): NEVER remove, prune or
+    retire it until place search has landed on master** (owner, 2026-10-08:
+    "block attempts to delete the worktree until the changes have landed";
+    this covers cleanup-sweep's retire-worktrees scope). After the landing,
+    unlink its `data/` junction alone, then remove it.
+  - `epic-neumann-5aa0a6` (open basemap switch and app groundwork).
+  - The review lanes and every build worktree were removed on 2026-10-08
+    after the owner retired their sessions; `data/_review/lane-1..4/` are
+    kept.
+- **Weekly usage 82% on 2026-10-08** (resets 2026-10-11 19:00 UTC); the 10%
+  check-ins ended that day (owner).
 
 ## Open, in order
 
@@ -34,23 +41,45 @@ items are done or moved into PLAN.
    files deleted, East-1's blank names corrected to twelve (measured from the
    rendered maps), the drafts' still-open notes moved into PLAN. Still live:
    `staging` and the pilots' `place-search` and `claude-epic-neumann-5aa0a6`.
-2. **The owner's iPhone check** of both landings (in progress at handoff).
+2. **The owner's iPhone check PASSED** (2026-10-08), all ten items; the oval
+   legend dot and the typable dropdowns it found are on `legend-dot-georgia`.
 3. **Wave 2 Japanese builds** (East-2, Kansai-2, Regional-2) start from
    master on the owner's go; at most three build sessions at once. Staging's
    call 222 placed Cluj-Napoca with Kansai-2. Every new Japanese city is
    minor tier, takes shared lines' colours and names from the registry, and
    may move only its own lines to make room (`japan-city`, "After the large
    review").
-4. **The two pilots at review time.** Place search: held for review time
-   (memory "Place search pilot"). Basemap: the station-area border is dark
+4. **The two pilots at review time.** Place search: tip `079c8dcb` (base
+   `8cf5ed4c`; Kyoto, Seattle, Chicago, Vancouver, Sydney; check_all 52 of
+   52); the owner answered its three questions (homes with Wikipedia: out;
+   Panama Hotel: kept as a historic site, a precedent; size: optimized,
+   iPhone passed). Its session may be archived; its WORKTREE stays (batch 2a
+   and 2b sessions use it, `data/` is a junction). Its drafts
+   (`place-search.md`) fold now or after 2a, the owner's choice. Owner's
+   review-time calls: go live as is (suggestions WIP), the corner-credit
+   test, the Cities menu out of the map, and whether "Download this index"
+   also links the intersections file (ODbL 4.6). Landing order:
+   merge it and `legend-dot-georgia`, take master's `outputs/*/heatmap.html`
+   on conflict, then ONE full re-render of all 206 maps (the legend dot
+   needs it; it covers the five searched maps). `check_render_current.py`
+   fails on the branch until that render (the comment rewording changes the
+   shipped blocks), so nothing from it is pushed before. The pilot's four conditions:
+   (a) its committed indexes (`app/static/places/<city>.json`,
+   `outputs/<city>/place_search.json`) land unchanged, and any re-run
+   `step2b_place_index.py` runs BEFORE that city's step 3; (b)
+   `scripts/check_place_search.py` after the re-render (stale index hashes);
+   (c) `.streamlit/config.toml`'s `enableStaticServing = true` lands with
+   it, or the indexes 404 live; (d) deploy-verify (`map-chrome`) opens the
+   search box on one searched map live; (e) at the merge, `place_index.junk_name`
+   runs AFTER `map_common.repaired_name`, so "Patel?s" is repaired, not dropped
+   (branch tip 9db1e20a). Basemap: the station-area border is dark
    plum `#352a4d` in both projects (owner, 2026-10-08), clearing every pin
    colour by 45 or more, so the pin colours stay; the pilot's drafts
    (`claude-epic-neumann-5aa0a6.md`) also hold the owner's disputed-borders
    decision.
-5. **Tell Visuals and Analytics what moved** at the next review time:
-   `scripts/downstream_changes.py ecec7536` reports 34 cities' `heatmap.html`,
-   `app/cities.py` and `app/components.py`. Visuals reports itself current
-   at `d121b2cc` (2026-10-08), so its note starts there.
+5. **Downstream: both current** (2026-10-08): Visuals at `d121b2cc`, Analytics
+   rerun at `5507a4cb`; nothing downstream since. "Last noted" moved to
+   `76e6b645`. The next note covers `legend-dot-georgia` once it lands.
 6. **Follow-ups in PLAN's "Next landing"**: Ostrava's 2 px button overlap,
    Osaka's 375 px label overlaps, the UK line-colour search, about 25
    day-first notices, about 30 stale "45 from every pin" config comments, the
