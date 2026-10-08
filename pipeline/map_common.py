@@ -27,7 +27,7 @@ import pandas as pd
 from folium.plugins import HeatMap, FastMarkerCluster
 from folium.template import Template
 
-from pipeline.linecolour import check_line_colours, dark_label_colours, label_colours
+from pipeline.linecolour import check_line_colours, contrast_ratio, dark_label_colours, label_colours
 from pipeline.taxonomies import CATEGORY_BUCKETS, load_taxonomy_module
 from pipeline.theme import AMBIENT_THEME_JS, DARK, FONT_VAR, LIGHT, css_vars, font_stack, rgba
 
@@ -450,6 +450,23 @@ LEGEND_HTML = """
   <div style="font-weight: bold; margin: 8px 0 6px;">Business Category</div>
   {category_rows}
   <div style="font-weight: bold; margin: 10px 0 6px;">Transit Lines</div>
+  {line_rows}
+</details>
+"""
+# The full Travel version's legend: the same panel, with the line rows and
+# the named route rows only and no section heading, since nothing else
+# shares it (owner, 2026-10-08: map content only). Its map fills the window,
+# so the bottom is a plain 24 px, which clears the 14 px credit strip at the
+# map's (and window's) bottom edge by 10 px, as the clamp does on a site map.
+LEGEND_FULL_HTML = """
+<details open class="map-legend" style="
+    position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+    background: white; padding: 8px 14px; border: 1px solid #999;
+    border-radius: 4px; font-family: """ + _LEGEND_FONT_STACK + """; font-size: 13px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+">
+  <summary style="font-weight: bold; cursor: pointer; user-select: none;
+    outline: none; margin-bottom: 6px;">Legend</summary>
   {line_rows}
 </details>
 """
@@ -1283,7 +1300,7 @@ TRAVEL_MODE_SCRIPT = """
 # Blocks render_heatmap() injects into SOME maps only. check_render_current.py
 # holds a map that carries one to its current version, and does not ask for it
 # in a map that has none.
-CONDITIONAL_BLOCKS = ("DENSE_LABEL_SCRIPT", "TRAVEL_MODE_SCRIPT")
+CONDITIONAL_BLOCKS = ("DENSE_LABEL_SCRIPT", "TRAVEL_MODE_SCRIPT", "FULL_TRAVEL_SCRIPT", "LEGEND_FULL_HTML")
 # Mouse-wheel zoom. Measured 2026-09-23 on Paris and Toulouse (median of three
 # fresh loads; DECISIONS.md has the tables). The wheel lagged behind +/- for a
 # reason other than speed: Leaflet's _tryAnimatedZoom returns early while a
@@ -2893,7 +2910,7 @@ _LEGEND_CAP_STYLE = f"<style>.map-legend {{ max-width: {LEGEND_MODEL_W}px; }}</s
 
 
 def build_legend(bucket_colors, legend_label, lines, no_data_stations=False, legend_names=None,
-                 travel=False, routes=()):
+                 travel=False, routes=(), full=False):
     """Build the fixed-position legend from the buckets actually present
     and the taxonomy's own legend text; nothing taxonomy-specific here.
 
@@ -2913,8 +2930,13 @@ def build_legend(bucket_colors, legend_label, lines, no_data_stations=False, leg
     generic "Ferry" row is deliberately absent and an unnamed route gets no
     row: what a dashed line means belongs to the app's own info page, and
     the map carries map content only (owner, 2026-10-08).
+    full: the full Travel version's legend (LEGEND_FULL_HTML): the line rows
+    and route rows only, in the full variant's colours; bucket_colors and
+    legend_label are ignored.
     """
     names = legend_names or {}
+    if full:
+        bucket_colors, travel = (), True
     line_rows = "".join(
         LEGEND_LINE_ROW.format(line=n, color=color, label=html.escape(
             names[key] if key in names and names[key].startswith(label)
@@ -2925,10 +2947,15 @@ def build_legend(bucket_colors, legend_label, lines, no_data_stations=False, leg
         line_rows += LEGEND_NO_DATA_ROWS.format(color=LIGHT["station"])
     named = [(kind, name) for kind, name in routes if name and kind in TRAVEL_ROUTE_ROWS]
     if travel and named:
-        line_rows += '<div class="hm-travel-only">' + "".join(
-            TRAVEL_ROUTE_ROWS[kind].format(color=TRAVEL_ROUTE_COLOURS["site"][kind],
+        route_rows = "".join(
+            TRAVEL_ROUTE_ROWS[kind].format(color=TRAVEL_ROUTE_COLOURS["full" if full else "site"][kind],
                                            label=html.escape(name))
-            for kind, name in sorted(set(named), key=lambda r: (r[0] != "ferry", r[1]))) + "</div>"
+            for kind, name in sorted(set(named), key=lambda r: (r[0] != "ferry", r[1])))
+        line_rows += route_rows if full else f'<div class="hm-travel-only">{route_rows}</div>'
+    if full:
+        return (_LEGEND_CSS + (_LEGEND_CAP_STYLE if names else "")
+                + LEGEND_FULL_HTML.format(line_rows=line_rows)
+                + LEGEND_AUTOFIT_SCRIPT.replace("__MAP_W__", str(_MAP_W)))
     # _LEGEND_CSS is prepended AFTER formatting, not concatenated into
     # LEGEND_HTML: .format() would otherwise try to read every CSS brace as a
     # replacement field and raise KeyError on the first selector.
@@ -3104,6 +3131,11 @@ class OpenBasemap(folium.map.Layer):
     name a feature has, so switching fetches nothing.
     local_name: the pill's text for the local language (default the code
     in capitals).
+    variant: "site" (the site's Travel view) or "full" (the full Travel
+    version; travel_style.js gives it its own ferry colour). libs and
+    assets: the library URLs and the glyph folder, relative to the page or
+    absolute; default the pinned CDN copies. pmtiles_url and assets may be
+    relative: the script resolves them against the page.
     """
 
     _template = Template("""
@@ -3140,14 +3172,14 @@ class OpenBasemap(folium.map.Layer):
             function styleFor(code) {
                 return {
                     version: 8,
-                    glyphs: {{ (this.assets ~ "/fonts/{fontstack}/{range}.pbf")|tojson }},
+                    glyphs: new URL({{ this.assets|tojson }}, location.href).href + "/fonts/{fontstack}/{range}.pbf",
                     sources: {protomaps: {
                         type: "vector",
-                        url: "pmtiles://" + {{ this.pmtiles_url|tojson }}
+                        url: "pmtiles://" + new URL({{ this.pmtiles_url|tojson }}, location.href).href
                     }},
                     layers: travelStyle(basemaps.layers("protomaps",
                         basemaps.namedFlavor("light"), {lang: code}),
-                        {flavor: "light", variant: "site", lang: code})
+                        {flavor: "light", variant: {{ this.variant|tojson }}, lang: code})
                 };
             }
             // The label pill: two buttons in a Leaflet bar stacked under the
@@ -3236,16 +3268,539 @@ class OpenBasemap(folium.map.Layer):
         {% endmacro %}
     """)
 
-    def __init__(self, pmtiles_url, *, name="Travel", local_lang=None, local_name=None, show=False):
-        super().__init__(name=name, overlay=False, control=True, show=show)
+    def __init__(self, pmtiles_url, *, name="Travel", local_lang=None, local_name=None, show=False,
+                 variant="site", libs=None, assets=None, control=True):
+        super().__init__(name=name, overlay=False, control=control, show=show)
         self._name = "OpenBasemap"
         self.pmtiles_url = pmtiles_url
         self.local_lang = local_lang if local_lang and local_lang != "en" else None
         self.local_name = local_name or (self.local_lang or "").upper()
-        self.libs = list(OPEN_BASEMAP_LIBS)
-        self.assets = OPEN_BASEMAP_ASSETS
+        if variant not in ("site", "full"):
+            raise ValueError(f"OpenBasemap variant {variant!r}: 'site' or 'full'")
+        self.variant = variant
+        self.libs = list(libs or OPEN_BASEMAP_LIBS)
+        self.assets = assets or OPEN_BASEMAP_ASSETS
         self.travel_style_js = TRAVEL_STYLE_JS
         self.attribution = OSM_ATTRIBUTION
+
+
+# THE FULL TRAVEL VERSION (owner, 2026-10-07/08; the drafts log has the
+# reasoning). The Travel basemap alone, stations, lines, their legend and the
+# OSM credit, with no business data at all; a template for the travel app,
+# so map content only. It differs from the site's Travel view in:
+#   * no Business base layer, no heat, rings or pins, no business legend;
+#   * the page fills its window and loads nothing from outside its own
+#     folder when given `lib` (offline);
+#   * lines carry casings and stations are white dots with a dark ring,
+#     both sized by zoom from FULL_ZOOM_TABLE;
+#   * line labels are pills that follow the part of each line in view;
+#   * a "Station names" item in the layer menu;
+#   * one finger pans the map (no cooperative gestures: the page is the map,
+#     with no page around it to scroll).
+# Leaflet 1.9.3 (folium 0.20's pin) and the Travel view's own libraries.
+FULL_TRAVEL_CDN = {
+    "leaflet.js": "https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js",
+    "leaflet.css": "https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css",
+}
+# OPEN_BASEMAP_LIBS by file name, as they sit in the offline `lib` folder.
+FULL_TRAVEL_GL_FILES = ("maplibre-gl.css", "maplibre-gl.js", "leaflet-maplibre-gl.js",
+                        "pmtiles.js", "basemaps.js")
+# (zoom, station dot radius px, line width px), interpolated between rows; an
+# interchange's dot is FULL_INTERCHANGE_STEP px larger, and a casing adds
+# FULL_CASING_PX each side. A pilot table, set on screenshots of the densest
+# network (Tokyo) in light and dark; the app draws the same idea as a
+# MapLibre zoom curve. Touch reach does not shrink with the dot:
+# TAP_SELECT_SCRIPT's REACH keeps a 44 px target at every size.
+FULL_ZOOM_TABLE = ((10, 2.0, 2.0), (12, 3.0, 3.0), (13, 4.0, 3.5), (14, 5.0, 4.5),
+                   (15, 6.0, 5.5), (17, 8.0, 7.0))
+FULL_INTERCHANGE_STEP = 1.5
+FULL_CASING_PX = 1.5
+# The station ring: dark, and deliberately not LIGHT["station"], which the
+# site's dark-theme rule recolours.
+FULL_DOT_RING = "#222222"
+# Layer names the full version may never carry (the owner's hard line,
+# 2026-10-07): checked on the written file, so no path can slip one in.
+FULL_FORBIDDEN = ("Concentric Ring", "Commercial Density", "Business Category",
+                  "markerClusterGroup", "L.heatLayer", "heatLayer(")
+
+FULL_TRAVEL_SCRIPT = """
+<style>
+.hm-pill-icon { background: none; border: 0; }
+.hm-line-pill { position: absolute; left: 0; top: 0; transform: translate(-50%, -50%);
+    padding: 1px 8px; border-radius: 999px; border: 1.5px solid #fff;
+    font: 700 12px/16px @@FONT@@; white-space: nowrap; cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.35); }
+.dark-base .hm-line-pill { border-color: var(--dm-page); }
+.hm-line-pill.hm-dim { opacity: 0.35; }
+.hm-off { display: none !important; }
+.hm-stn-name { position: absolute; left: 0; top: 0; white-space: nowrap; pointer-events: none;
+    font: 600 12px/14px @@FONT@@; color: @@TEXT@@;
+    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff, 0 0 4px #fff; }
+.dark-base .hm-stn-name { color: var(--dm-text);
+    text-shadow: -1px -1px 0 var(--dm-page), 1px -1px 0 var(--dm-page), -1px 1px 0 var(--dm-page),
+                 1px 1px 0 var(--dm-page), 0 0 4px var(--dm-page); }
+.hm-stn-name.hm-dim { opacity: 0.45; }
+.hm-stn-name.hm-hot { color: var(--hm-c-light); }
+.dark-base .hm-stn-name.hm-hot { color: var(--hm-c-dark); }
+.leaflet-overlay-pane path.hm-casing { stroke: #ffffff; }
+.dark-base .leaflet-overlay-pane path.hm-casing { stroke: var(--dm-page); }
+.leaflet-overlay-pane path.hm-casing.hm-dim { stroke-opacity: 0.25; }
+.dark-base .leaflet-overlay-pane path.hm-line { filter: brightness(1.55) saturate(0.9); }
+.leaflet-overlay-pane path.hm-line.hm-hot { stroke-width: var(--hm-hot-w, 7px); }
+</style>
+<script>
+(function () {
+    var NAME = "__MAP_NAME__", BASE = "__BASE_NAME__", NAMES = "__NAMES_NAME__";
+    var LINES = __LINES__, TABLE = __ZOOM_TABLE__, STEP = __STEP__, CASING = __CASING__;
+    var BOUNDS = __BOUNDS__;
+    var MARGIN = 6;         // px kept clear inside the map's edge
+    var MIN_RUN = 40;       // px of a line in view before it earns a label
+    var GAP = 3;            // px between any two labels
+    var STEP_PX = 16;       // px between the spots a label tries along its line
+    var tries = 0;
+
+    function size(z, col) {
+        if (z <= TABLE[0][0]) return TABLE[0][col];
+        for (var i = 1; i < TABLE.length; i++) {
+            if (z <= TABLE[i][0]) {
+                var a = TABLE[i - 1], b = TABLE[i], t = (z - a[0]) / (b[0] - a[0]);
+                return a[col] + t * (b[col] - a[col]);
+            }
+        }
+        return TABLE[TABLE.length - 1][col];
+    }
+    function classes(l) {
+        var c = l.options && l.options.className;
+        return typeof c === "string" ? c.split(" ") : [];
+    }
+    function suffix(cs, prefix) {
+        for (var i = 0; i < cs.length; i++) {
+            if (cs[i].indexOf(prefix) === 0 && cs[i].length > prefix.length) return cs[i].slice(prefix.length);
+        }
+        return null;
+    }
+
+    function start() {
+        var m = window[NAME], base = window[BASE], group = window[NAMES];
+        if (!m || !base || !group) {
+            if (tries++ < 60) setTimeout(start, 100);
+            return;
+        }
+        if (!m.hasLayer(base)) m.addLayer(base);
+        var el = m.getContainer();
+        var polys = {}, casings = {}, dots = [];
+        m.eachLayer(function (l) {
+            var cs = classes(l), k;
+            if (cs.indexOf("hm-line") >= 0 && (k = suffix(cs, "hm-line-")) !== null) {
+                (polys[k] = polys[k] || []).push(l);
+            } else if ((k = suffix(cs, "hm-casing-")) !== null) {
+                (casings[k] = casings[k] || []).push(l);
+            } else if (cs.indexOf("hm-stn") >= 0) {
+                dots.push({layer: l, xfer: cs.indexOf("hm-xfer") >= 0,
+                           on: cs.filter(function (c) { return c.indexOf("hm-on-") === 0; })
+                                 .map(function (c) { return c.slice(6); })});
+            }
+        });
+        var byLine = {};
+        LINES.forEach(function (ln) { byLine[String(ln.n)] = ln; });
+
+        // One pill per line, moved to the part of its line in view.
+        var pills = LINES.map(function (ln) {
+            var html = '<div class="hm-line-pill" data-line="' + ln.n + '" style="background:' + ln.bg +
+                       ';color:' + ln.fg + '">' + ln.html + '</div>';
+            var mk = L.marker(m.getCenter(), {keyboard: false, zIndexOffset: 1000,
+                icon: L.divIcon({className: "hm-pill-icon", html: html, iconSize: [0, 0], iconAnchor: [0, 0]})});
+            // A pill picks its line, as its legend row does.
+            mk.on("click", function () {
+                var row = document.querySelector('.map-legend .hm-line-row[data-line="' + ln.n + '"]');
+                if (row) row.click();
+            });
+            return {ln: ln, mk: mk, w: 0, h: 0, at: null};
+        });
+        function pillEl(p) { return p.mk._icon ? p.mk._icon.firstChild : null; }
+
+        function rectOf(node) {
+            var a = node.getBoundingClientRect(), c = el.getBoundingClientRect();
+            return {l: a.left - c.left, t: a.top - c.top, r: a.right - c.left, b: a.bottom - c.top};
+        }
+        function hit(a, b) {
+            return a.l < b.r + GAP && a.r > b.l - GAP && a.t < b.b + GAP && a.b > b.t - GAP;
+        }
+        function hitAny(a, list) {
+            for (var i = 0; i < list.length; i++) if (hit(a, list[i])) return true;
+            return false;
+        }
+        function inside(a, s) {
+            return a.l >= MARGIN && a.t >= MARGIN && a.r <= s.x - MARGIN && a.b <= s.y - MARGIN;
+        }
+        function controls() {
+            var out = [], nodes = el.querySelectorAll(".leaflet-control");
+            for (var i = 0; i < nodes.length; i++) out.push(rectOf(nodes[i]));
+            ["map-actions"].forEach(function (id) {
+                var n = document.getElementById(id);
+                if (n) out.push(rectOf(n));
+            });
+            var lg = document.querySelector("details.map-legend"), tp = document.querySelector(".hm-tap-panel.hm-shown");
+            if (lg) out.push(rectOf(lg));
+            if (tp) out.push(rectOf(tp));
+            return out.filter(function (r) { return r.r > r.l && r.b > r.t; });
+        }
+
+        // The part of line k inside the map, in container pixels, as runs
+        // of clipped segments with their distance along the visible part.
+        // Projected from the line's own coordinates, not Leaflet's `_parts`:
+        // those are re-projected only after `zoomend` and `moveend` have
+        // fired (on `viewreset`), so a label placed from them after a zoom
+        // landed up to 600 px off its line (Tokyo, measured 2026-10-08).
+        function visible(k, s) {
+            var box = L.bounds([MARGIN, MARGIN], [s.x - MARGIN, s.y - MARGIN]);
+            var view = m.getBounds().pad(0.05);
+            var segs = [], total = 0;
+            (polys[k] || []).forEach(function (p) {
+                if (!view.intersects(p.getBounds())) return;
+                var ll = p.getLatLngs();
+                (L.LineUtil.isFlat(ll) ? [ll] : ll).forEach(function (run) {
+                    var prev = null;
+                    run.forEach(function (x) {
+                        var b = m.latLngToContainerPoint(x);
+                        if (prev) {
+                            var c = L.LineUtil.clipSegment(prev, b, box, false, false);
+                            var len = c ? c[0].distanceTo(c[1]) : 0;
+                            if (len) {
+                                segs.push({a: c[0], b: c[1], from: total, len: len});
+                                total += len;
+                            }
+                        }
+                        prev = b;
+                    });
+                });
+            });
+            return {segs: segs, total: total};
+        }
+        function along(run, d) {
+            for (var i = 0; i < run.segs.length; i++) {
+                var g = run.segs[i];
+                if (d <= g.from + g.len) {
+                    var t = (d - g.from) / g.len;
+                    return L.point(g.a.x + t * (g.b.x - g.a.x), g.a.y + t * (g.b.y - g.a.y));
+                }
+            }
+            return null;
+        }
+
+        var shown = null;       // the highlighted line, as LINE_HIGHLIGHT_SCRIPT draws it
+        function place() {
+            var s = m.getSize(), taken = controls(), dotRects = [];
+            dots.forEach(function (d) {
+                if (!d.layer._map) return;
+                var q = m.latLngToContainerPoint(d.layer.getLatLng()), r = d.layer.getRadius() + 2;
+                d.q = q; d.r = r;
+                dotRects.push({l: q.x - r, t: q.y - r, r: q.x + r, b: q.y + r, dot: d});
+            });
+            var runs = {};
+            pills.forEach(function (p) { runs[p.ln.n] = visible(String(p.ln.n), s); });
+            var order = pills.slice().sort(function (a, b) {
+                var ha = String(a.ln.n) === shown ? 0 : 1, hb = String(b.ln.n) === shown ? 0 : 1;
+                if (ha !== hb) return ha - hb;
+                var pa = a.at ? 0 : 1, pb = b.at ? 0 : 1;
+                if (pa !== pb) return pa - pb;
+                return runs[b.ln.n].total - runs[a.ln.n].total;
+            });
+            var placed = [];
+            order.forEach(function (p) {
+                var run = runs[p.ln.n];
+                if (run.total < MIN_RUN) { hide(p); return; }
+                if (!p.mk._map) p.mk.addTo(m);
+                var div = pillEl(p);
+                div.classList.remove("hm-off");
+                p.w = div.offsetWidth; p.h = div.offsetHeight;
+                var spots = [];
+                // Keep the last spot while it still works, so a pan does not
+                // make a label jump along its line.
+                if (p.at) spots.push(m.latLngToContainerPoint(p.at));
+                // Then every STEP_PX along the part in view, middle first.
+                var n = Math.max(1, Math.floor(run.total / STEP_PX)), ds = [];
+                for (var j = 0; j <= n; j++) ds.push(j * run.total / n);
+                ds.sort(function (a, b) { return Math.abs(a - run.total / 2) - Math.abs(b - run.total / 2); });
+                ds.forEach(function (d) { spots.push(along(run, d)); });
+                var won = null;
+                for (var i = 0; i < spots.length && !won; i++) {
+                    var q = spots[i];
+                    if (!q) continue;
+                    var box = {l: q.x - p.w / 2, t: q.y - p.h / 2, r: q.x + p.w / 2, b: q.y + p.h / 2};
+                    if (!inside(box, s) || hitAny(box, taken) || hitAny(box, placed) || hitAny(box, dotRects)) continue;
+                    won = {q: q, box: box};
+                }
+                if (!won) { hide(p); return; }
+                p.at = m.containerPointToLatLng(won.q);
+                p.mk.setLatLng(p.at);
+                placed.push(won.box);
+            });
+            names(s, taken.concat(placed), dotRects);
+        }
+        function hide(p) {
+            p.at = null;
+            var div = pillEl(p);
+            if (div) div.classList.add("hm-off");
+        }
+
+        // Station names, when the layer menu has them on: interchanges first,
+        // then the highlighted line's stations, each beside its dot on the
+        // first side clear of every label, control and other dot.
+        function names(s, taken, dotRects) {
+            if (!m.hasLayer(group)) return;
+            var items = [];
+            group.eachLayer(function (mk) {
+                var div = mk._icon && mk._icon.firstChild;
+                if (!div) return;
+                var i = +div.getAttribute("data-stn"), d = dots[i];
+                items.push({div: div, d: d, rank: (d && d.xfer ? 0 : 2) -
+                            (d && shown !== null && d.on.indexOf(shown) >= 0 ? 1 : 0), i: i});
+            });
+            items.sort(function (a, b) { return a.rank - b.rank || a.i - b.i; });
+            var placed = [];
+            items.forEach(function (it) {
+                var div = it.div, d = it.d;
+                if (!d || !d.q) { div.classList.add("hm-off"); return; }
+                div.classList.remove("hm-off");
+                div.style.transform = "none";
+                var w = div.offsetWidth, h = div.offsetHeight, q = d.q, r = d.r + 1;
+                var sides = [
+                    [r, -h / 2], [-w - r, -h / 2], [-w / 2, -h - r], [-w / 2, r]
+                ];
+                var won = null;
+                for (var j = 0; j < sides.length && !won; j++) {
+                    var box = {l: q.x + sides[j][0], t: q.y + sides[j][1]};
+                    box.r = box.l + w; box.b = box.t + h;
+                    if (!inside(box, s) || hitAny(box, taken) || hitAny(box, placed)) continue;
+                    var blocked = false;
+                    for (var k = 0; k < dotRects.length && !blocked; k++) {
+                        if (dotRects[k].dot !== d && hit(box, dotRects[k])) blocked = true;
+                    }
+                    if (!blocked) won = {box: box, dx: sides[j][0], dy: sides[j][1]};
+                }
+                if (!won) { div.classList.add("hm-off"); return; }
+                div.style.transform = "translate(" + won.dx.toFixed(1) + "px," + won.dy.toFixed(1) + "px)";
+                placed.push(won.box);
+                var on = shown !== null && d.on.indexOf(shown) >= 0;
+                div.classList.toggle("hm-hot", on);
+                div.classList.toggle("hm-dim", shown !== null && !on);
+                if (on) {
+                    div.style.setProperty("--hm-c-light", byLine[shown].light);
+                    div.style.setProperty("--hm-c-dark", byLine[shown].dark);
+                }
+            });
+        }
+
+        // Sizes by zoom: dots, lines and casings from the table.
+        function resize() {
+            var z = m.getZoom(), r = size(z, 1), w = size(z, 2);
+            el.style.setProperty("--hm-hot-w", (w + 3).toFixed(1) + "px");
+            Object.keys(polys).forEach(function (k) {
+                polys[k].forEach(function (p) { p.setStyle({weight: w}); });
+            });
+            Object.keys(casings).forEach(function (k) {
+                casings[k].forEach(function (p) { p.setStyle({weight: w + 2 * CASING}); });
+            });
+            dots.forEach(function (d) { d.layer.setRadius(d.xfer ? r + STEP : r); });
+        }
+
+        // The highlight is LINE_HIGHLIGHT_SCRIPT's: it marks the picked
+        // line's paths `hm-hot`. Casings, pills and names follow it.
+        function follow() {
+            var h = null;
+            Object.keys(polys).forEach(function (k) {
+                if (polys[k].some(function (p) { return p._path && p._path.classList.contains("hm-hot"); })) h = k;
+            });
+            if (h === shown) return;
+            shown = h;
+            Object.keys(casings).forEach(function (k) {
+                casings[k].forEach(function (p) {
+                    if (p._path) p._path.classList.toggle("hm-dim", h !== null && k !== h);
+                });
+            });
+            pills.forEach(function (p) {
+                var div = pillEl(p);
+                if (div) div.classList.toggle("hm-dim", h !== null && String(p.ln.n) !== h);
+            });
+            place();
+        }
+        var watch = new MutationObserver(follow);
+        Object.keys(polys).forEach(function (k) {
+            polys[k].forEach(function (p) {
+                if (p._path) watch.observe(p._path, {attributes: true, attributeFilter: ["class"]});
+            });
+        });
+
+        // Placed on the next frame, once every handler of the move (the
+        // renderer's included) has run, and once however many events fired.
+        var frame = null;
+        function later() {
+            if (frame !== null) cancelAnimationFrame(frame);
+            frame = requestAnimationFrame(function () { frame = null; place(); });
+        }
+        m.on("zoomend", function () { resize(); later(); });
+        m.on("moveend viewreset overlayadd overlayremove", later);
+        window.addEventListener("resize", later);
+        var legend = document.querySelector("details.map-legend");
+        if (legend) legend.addEventListener("toggle", later);
+        // Fitted once the map has a size: a page opened in a hidden tab
+        // measures 0 x 0 and would fit to the maximum zoom.
+        function fit(n) {
+            m.invalidateSize(false);
+            var s = m.getSize();
+            if ((!s.x || !s.y) && n < 150) { setTimeout(function () { fit(n + 1); }, 200); return; }
+            m.fitBounds(BOUNDS, {padding: [32, 32], animate: false});
+            resize();
+            later();
+        }
+        fit(0);
+    }
+    start();
+})();
+</script>
+"""
+
+
+def _station_lines(stations, lines, crs_geographic, crs_projected, reach_m=100.0):
+    """{station row position: [line order n, ...]}, for the full version's
+    interchange dots and station-name colours. From the stations' own
+    `lines` column where it names line keys (187 of 206 cities, 2026-10-08),
+    else every line within reach_m of the station, measured in the city's
+    projected CRS (never in degrees)."""
+    from pyproj import Transformer
+    from shapely.geometry import LineString, Point
+
+    order = {key: n for n, key in enumerate(lines)}
+    to_m = Transformer.from_crs(crs_geographic, crs_projected, always_xy=True)
+    shapes = {}
+    for key, (segments, *_rest) in lines.items():
+        shapes[key] = [LineString([to_m.transform(lon, lat) for lat, lon in seg])
+                       for seg in segments if len(seg) > 1]
+    out = {}
+    for i, row in enumerate(stations.itertuples()):
+        named = getattr(row, "lines", None)
+        keys = [k for k in re.split(r"[\s,;|/]+", named) if k in order] if isinstance(named, str) else []
+        if not keys:
+            p = Point(to_m.transform(row.longitude, row.latitude))
+            keys = [k for k, shp in shapes.items() if any(s.distance(p) <= reach_m for s in shp)]
+        out[i] = sorted({order[k] for k in keys})
+    return out
+
+
+def _render_full_travel(*, output_path, city_name, system_name, stations, lines,
+                        crs_geographic, crs_projected, center, zoom, lang, names,
+                        pmtiles_url, local_lang=None, local_name=None, routes=(), lib=None):
+    """The full Travel version, for render_heatmap(full_travel=...).
+
+    lib: a folder (relative to the page) holding every library, the glyphs
+    (lib/fonts/<fontstack>/<range>.pbf) and nothing else: given, the page
+    loads nothing from any other host (checked on the written file).
+    Omitted, the pinned CDN copies (for development only)."""
+    pts = [(float(r.latitude), float(r.longitude)) for r in stations.itertuples()]
+    c, z = _fit_view(pts)
+    center = center or c
+    zoom = z if zoom is None else zoom
+    m = folium.Map(location=center, zoom_start=zoom, tiles=None, width="100%", height="100%",
+                   zoomSnap=0.25)
+    # Leaflet only: folium's jQuery, Bootstrap and icon fonts serve nothing
+    # this page draws, and each would be a request to another host.
+    m.default_js = [("leaflet", f"{lib}/leaflet.js" if lib else FULL_TRAVEL_CDN["leaflet.js"])]
+    m.default_css = [("leaflet_css", f"{lib}/leaflet.css" if lib else FULL_TRAVEL_CDN["leaflet.css"])]
+    base = OpenBasemap(
+        pmtiles_url, local_lang=local_lang, local_name=local_name, show=True, control=False,
+        variant="full", libs=[f"{lib}/{f}" for f in FULL_TRAVEL_GL_FILES] if lib else None,
+        assets=lib or None,
+    ).add_to(m)
+
+    # Casings first, so no casing ever covers another line.
+    casing_layer = folium.FeatureGroup(name="Casings", control=False)
+    for n, (key, (segments, _color, _label, _end)) in enumerate(lines.items()):
+        for segment in segments:
+            folium.PolyLine(segment, color="#ffffff", weight=4 + 2 * FULL_CASING_PX, opacity=1,
+                            interactive=False, class_name=f"hm-casing hm-casing-{n}").add_to(casing_layer)
+    casing_layer.add_to(m)
+    for n, (key, (segments, color, label, _end)) in enumerate(lines.items()):
+        rail_layer = folium.FeatureGroup(name=f"{system_name}: {names.get(key, label)}", show=True,
+                                         control=False)
+        for segment in segments:
+            folium.PolyLine(segment, color=color, weight=4, opacity=1,
+                            class_name=f"hm-line hm-line-{n}").add_to(rail_layer)
+        rail_layer.add_to(m)
+
+    on = _station_lines(stations, lines, crs_geographic, crs_projected)
+    station_layer = folium.FeatureGroup(name="Stations", control=False)
+    names_layer = folium.FeatureGroup(name="Station names", show=False)
+    for i, station in enumerate(stations.itertuples()):
+        ns = on.get(i, [])
+        where = [round(float(station.latitude), COORD_DP), round(float(station.longitude), COORD_DP)]
+        text = html.escape(str(station.station))
+        folium.CircleMarker(
+            location=where, radius=4, color=FULL_DOT_RING, weight=1.5, opacity=1,
+            fill=True, fill_color="#ffffff", fill_opacity=1,
+            class_name=" ".join(["hm-stn"] + (["hm-xfer"] if len(ns) > 1 else [])
+                                + [f"hm-on-{n}" for n in ns]),
+            tooltip=folium.Tooltip(f"<b>{text}</b>", sticky=True),
+        ).add_to(station_layer)
+        folium.Marker(
+            location=where, interactive=False, keyboard=False,
+            icon=folium.DivIcon(icon_size=(0, 0), icon_anchor=(0, 0), class_name="hm-pill-icon",
+                                html=f'<div class="hm-stn-name hm-off" data-stn="{i}">{text}</div>'),
+        ).add_to(names_layer)
+    station_layer.add_to(m)
+    names_layer.add_to(m)
+
+    dark_labels = dark_label_colours({k: v[1] for k, v in lines.items()}, dark_halo=DARK["page"],
+                                     city=city_name)
+    pills = []
+    for n, (key, (_segments, color, label, _end)) in enumerate(lines.items()):
+        light, _halo, dark = label_colours(color, light_halo=LIGHT_LABEL_HALO,
+                                           dark_halo=DARK["page"], dark=dark_labels[key])
+        fg = "#ffffff" if contrast_ratio(color, "#ffffff") >= contrast_ratio(color, "#111111") else "#111111"
+        pills.append({"n": n, "html": html.escape(label), "bg": color, "fg": fg,
+                      "light": light, "dark": dark})
+
+    m.get_root().html.add_child(folium.Element(
+        build_legend((), None, lines, legend_names=names, routes=tuple(routes), full=True)))
+    folium.LayerControl(collapsed=True, position="topleft").add_to(m)
+    m.get_root().html.add_child(folium.Element(THEME_TOGGLE_HTML))
+    for block in (WHEEL_ZOOM_SCRIPT, CREDIT_TAB_SCRIPT, LINE_HIGHLIGHT_SCRIPT, TAP_SELECT_SCRIPT):
+        m.get_root().html.add_child(folium.Element(block.replace("__MAP_NAME__", m.get_name())))
+    m.get_root().html.add_child(folium.Element(
+        FULL_TRAVEL_SCRIPT
+        .replace("@@FONT@@", FONT_VAR).replace("@@TEXT@@", LIGHT["text"])
+        .replace("__MAP_NAME__", m.get_name())
+        .replace("__BASE_NAME__", base.get_name())
+        .replace("__NAMES_NAME__", names_layer.get_name())
+        .replace("__LINES__", json.dumps(pills))
+        .replace("__ZOOM_TABLE__", json.dumps(FULL_ZOOM_TABLE))
+        .replace("__STEP__", str(FULL_INTERCHANGE_STEP))
+        .replace("__CASING__", str(FULL_CASING_PX))
+        .replace("__BOUNDS__", json.dumps([[min(p[0] for p in pts), min(p[1] for p in pts)],
+                                           [max(p[0] for p in pts), max(p[1] for p in pts)]]))))
+    m.get_root().header.add_child(folium.Element(f"<title>{html.escape(city_name)}</title>"))
+    if lang is not None:
+        m.get_root().header.add_child(folium.Element(
+            f"<style>:root {{ --hm-font: {font_stack(lang)}; }}</style>"))
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    m.save(str(output_path))
+    doc = output_path.read_text(encoding="utf-8")
+    if lang is not None:
+        if "<html>" not in doc:
+            raise ValueError(f"{output_path}: no bare <html> tag to give lang={lang!r}")
+        doc = doc.replace("<html>", f'<html lang="{lang}">', 1)
+        output_path.write_text(doc, encoding="utf-8")
+    bad = [w for w in FULL_FORBIDDEN if w in doc]
+    if bad:
+        output_path.unlink()
+        raise ValueError(f"{output_path}: the full version carries {bad}, a business layer (hard line)")
+    if lib:
+        outside = re.findall(r"""<(?:script|link)[^>]+(?:src|href)=["']?(https?://[^"' >]+)""", doc)
+        if outside:
+            output_path.unlink()
+            raise ValueError(f"{output_path}: offline page loads from another host: {outside}")
+    print(f"Wrote {output_path}: full Travel version, {len(stations)} stations, {len(lines)} lines")
 
 
 _FINGERPRINT_TABLE = Path(__file__).with_name("fingerprint_marks.json")
@@ -3266,8 +3821,16 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
                    crs_geographic, crs_projected, ring_edges_meters, ring_labels,
                    center=None, zoom=None, label_focus=None, rings_shown=False,
                    all_city_heat=True, animate_clusters=False, lang=None, pins=True,
-                   legend_names=None, open_basemap=None):
+                   legend_names=None, open_basemap=None, full_travel=None):
     """Render one city's heatmap to a standalone HTML file.
+
+    full_travel: optional dict(pmtiles_url=..., local_lang=..., local_name=...,
+    routes=..., lib=...), the FULL Travel version instead (owner,
+    2026-10-07/08): the Travel basemap alone, stations, lines and their
+    legend, and no business data, so `businesses` must be None and the
+    heat, rings, pins and business legend never exist. Map content only;
+    it is the travel app's template. See _render_full_travel. A pilot: no
+    city's step passes it.
 
     open_basemap: optional dict(pmtiles_url=..., local_lang=..., local_name=...), a city's
     Protomaps pack (see OpenBasemap). Given, the layer menu offers two base
@@ -3327,6 +3890,21 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     per-city switch so a light map can have it back; the owner's suggested
     rule is a measured lag threshold, and PLAN.md holds that open item.
     """
+    full = full_travel is not None
+    names = legend_names or {}
+    if full:
+        # The hard line (owner, 2026-10-07): the full version carries no
+        # business data by any path, so it never reaches this file's HTML.
+        if businesses is not None:
+            raise ValueError("full_travel draws no business data: pass businesses=None")
+        if open_basemap:
+            raise ValueError("full_travel and open_basemap are two versions of a map: pass one")
+        return _render_full_travel(
+            output_path=output_path, city_name=city_name, system_name=system_name,
+            stations=stations, lines=lines, crs_geographic=crs_geographic,
+            crs_projected=crs_projected, center=center, zoom=zoom, lang=lang,
+            names=names, **full_travel)
+
     taxonomy = load_taxonomy_module(taxonomy_system)
     bucket_colors = dict(CATEGORY_BUCKETS)
 
@@ -3337,7 +3915,6 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     # genuine-duplicate range; agency colours below the preferred figure are
     # reported every render and kept, per the owner's branding decision. See
     # pipeline/linecolour.py for why there are two thresholds.
-    names = legend_names or {}
     check_line_colours(
         {names.get(key, label): color for key, (_coords, color, label, _end) in lines.items()},
         bucket_colors, city=city_name)
