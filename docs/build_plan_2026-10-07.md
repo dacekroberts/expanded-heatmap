@@ -31,11 +31,11 @@ The machine (Ryzen 7 5700X, 16 threads, 32 GB) is not the bottleneck. Approvals,
 3. **One review time per phase.** Landings, re-renders and deploy-verify are batched: after phase 0, after the first Japan trio, and after the second. Only the owner calls review time. App reboots happen once per landing.
 4. **Build sessions never edit `docs/city_master_list.md`.** Staging moves a wave's cities to Built in one pass after each landing, and republishes the private pages. A build lands in one push at the end of its batch, after review time; `app/cities.py` conflicts are resolved keep-both.
 
-**Usage check-ins (owner):** "pause and check in with me (here or in cleanup) before continuing when weekly usage hits a multiple of ten."
-- Check `get_usage` between cities. The owner pre-approved continuing past 50% ("we are approaching 50 and I am pre-okaying continuation to 60"; "new check in at 60%, not 50", 2026-10-07), so the next stop is 60%, then 70%, and so on.
+**Usage check-ins for phase 2 (owner, 2026-10-08):** "let's do a 30% and 60% check in to be light". In the week from the reset of 2026-10-11, every session stops at **30% and 60% weekly usage**, and only there; phase 2 is the last build wave. (Phases 0 and 1 stopped at every multiple of ten.)
+- Check `get_usage` between cities.
 - At a crossing: finish the current step, commit clean, and stop. Tell the owner in your own chat and send one line to Staging Session. Continue only on the owner's word.
 - All sessions share one pool, so one crossing stops every session.
-- The 5-hour window's 90% ceiling still applies.
+- The 30% and 60% stops are weekly figures, not the 5-hour window ("for weekly not 5hr"); the 5-hour window keeps only its 90% ceiling.
 
 ## Order and session plan
 
