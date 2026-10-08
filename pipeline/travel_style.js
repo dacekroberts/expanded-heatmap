@@ -7,7 +7,7 @@
 // OpenBasemap layer; transit-globe reads it as the reference and records
 // its own departures in its own DECISIONS.md.
 //
-//   travelStyle(layers, {flavor: "light", world: false, variant: "site"})
+//   travelStyle(layers, {flavor: "light", world: false, variant: "site", lang: "en"})
 //
 // world: the label-free world map (owner, 2026-10-08): land, sea, country
 // borders and disputed lines only; names come from the export, in the
@@ -248,6 +248,23 @@ var travelStyle = (function () {
           filter: ["==", "kind", "aerialway"], minzoom: 13,
           paint: {"line-color": AERIALWAY.color, "line-width": AERIALWAY.tickWidth,
                   "line-dasharray": AERIALWAY.tickDash}
+        });
+      }
+      if (id === "roads_labels_major") {
+        // Ferry and lift routes are named along the line in their own
+        // colour, since a crimson or blue dash stands out and needs saying
+        // what it is (owner, 2026-10-08; "Arno Boat" in Florence, "Bac du
+        // Rocher des Doms" in Avignon). The label language follows the pill.
+        var name = ["coalesce", ["get", "name:" + (opts.lang || "en")], ["get", "name"]];
+        [["ferry", FERRY[variant]], ["aerialway", AERIALWAY.color]].forEach(function (k) {
+          out.push({
+            id: "travel_" + k[0] + "_label", type: "symbol", source: src, "source-layer": "roads",
+            filter: ["==", "kind", k[0]], minzoom: 12,
+            layout: {"symbol-placement": "line", "text-field": name, "text-font": ["Noto Sans Italic"],
+                     "text-size": 12, "text-letter-spacing": 0.05},
+            paint: {"text-color": k[1], "text-halo-color": light ? "#ffffff" : "#1f1f1f",
+                    "text-halo-width": 1.5}
+          });
         });
       }
     });

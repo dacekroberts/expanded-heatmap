@@ -1227,6 +1227,7 @@ DENSE_LABEL_SCRIPT = """
 TRAVEL_MODE_SCRIPT = """
 <style>
 .map-legend.hm-travel .hm-biz { display: none; }
+.map-legend:not(.hm-travel) .hm-travel-only { display: none; }
 </style>
 <script>
 (function () {
@@ -2892,7 +2893,7 @@ _LEGEND_CAP_STYLE = f"<style>.map-legend {{ max-width: {LEGEND_MODEL_W}px; }}</s
 
 
 def build_legend(bucket_colors, legend_label, lines, no_data_stations=False, legend_names=None,
-                 travel=False):
+                 travel=False, routes=()):
     """Build the fixed-position legend from the buckets actually present
     and the taxonomy's own legend text; nothing taxonomy-specific here.
 
@@ -2906,6 +2907,10 @@ def build_legend(bucket_colors, legend_label, lines, no_data_stations=False, leg
     (Tyne and Wear Metro)", owner 2026-10-02).
     travel: wrap the business section in `.hm-biz`, which TRAVEL_MODE_SCRIPT
     folds away in Travel; False leaves the legend byte for byte as before.
+    routes: basemap route kinds the Travel pack holds ("ferry", "aerialway");
+    each gets a row under the transit lines, drawn as on the Travel map and
+    shown in Travel only (owner, 2026-10-08: a crimson dash stands out and
+    needs saying what it is).
     """
     names = legend_names or {}
     line_rows = "".join(
@@ -2916,6 +2921,10 @@ def build_legend(bucket_colors, legend_label, lines, no_data_stations=False, leg
     )
     if no_data_stations:
         line_rows += LEGEND_NO_DATA_ROWS.format(color=LIGHT["station"])
+    if travel and routes:
+        line_rows += '<div class="hm-travel-only">' + "".join(
+            TRAVEL_ROUTE_ROWS[kind].format(color=TRAVEL_ROUTE_COLOURS["site"][kind])
+            for kind in ("ferry", "aerialway") if kind in routes) + "</div>"
     # _LEGEND_CSS is prepended AFTER formatting, not concatenated into
     # LEGEND_HTML: .format() would otherwise try to read every CSS brace as a
     # replacement field and raise KeyError on the first selector.
@@ -3051,6 +3060,31 @@ OPEN_BASEMAP_ASSETS = "https://protomaps.github.io/basemaps-assets"
 # Travel view, the full Travel version and transit-globe's reference, so the
 # three never drift apart. Inlined into each OpenBasemap layer.
 TRAVEL_STYLE_JS = Path(__file__).with_name("travel_style.js").read_text(encoding="utf-8")
+# Ferry and lift colours read from the style itself, so a legend swatch can
+# never drift from the line it explains.
+_FERRY = re.search(r'var FERRY = \{site: "(#[0-9a-f]{6})", full: "(#[0-9a-f]{6})"', TRAVEL_STYLE_JS)
+_AERIAL = re.search(r'var AERIALWAY = \{color: "(#[0-9a-f]{6})"', TRAVEL_STYLE_JS)
+if not (_FERRY and _AERIAL):
+    raise ValueError("pipeline/travel_style.js: FERRY or AERIALWAY colours not found")
+TRAVEL_ROUTE_COLOURS = {"site": {"ferry": _FERRY[1], "aerialway": _AERIAL[1]},
+                        "full": {"ferry": _FERRY[2], "aerialway": _AERIAL[1]}}
+# Legend rows for the routes, drawn as the map draws them: ferries dashed,
+# lifts a thin line with cross ticks. Same row layout as LEGEND_LINE_ROW, but
+# not .hm-line-row: these are basemap features, not lines a reader can
+# highlight, and the label and coverage checks count .hm-line-row as lines.
+TRAVEL_ROUTE_ROWS = {
+    "ferry": """
+  <div class="hm-route-row" style="display:flex; align-items:center; margin:3px 0;">
+    <span style="display:inline-block; width:16px; height:3px; margin-right:7px;
+      background:repeating-linear-gradient(90deg, {color} 0 5px, transparent 5px 8px);"></span>Ferry
+  </div>""",
+    "aerialway": """
+  <div class="hm-route-row" style="display:flex; align-items:center; margin:3px 0;">
+    <span style="display:inline-block; width:16px; height:9px; margin-right:7px;
+      background:linear-gradient({color}, {color}) center / 100% 2px no-repeat,
+        repeating-linear-gradient(90deg, {color} 0 1.5px, transparent 1.5px 6px);"></span>Cable car
+  </div>""",
+}
 
 
 class OpenBasemap(folium.map.Layer):
@@ -3110,7 +3144,7 @@ class OpenBasemap(folium.map.Layer):
                     }},
                     layers: travelStyle(basemaps.layers("protomaps",
                         basemaps.namedFlavor("light"), {lang: code}),
-                        {flavor: "light", variant: "site"})
+                        {flavor: "light", variant: "site", lang: code})
                 };
             }
             // The label pill: two buttons in a Leaflet bar stacked under the
@@ -3235,7 +3269,10 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     open_basemap: optional dict(pmtiles_url=..., local_lang=..., local_name=...), a city's
     Protomaps pack (see OpenBasemap). Given, the layer menu offers two base
     layers, "Business" (OSM's tiles, still the default) and "Travel". Omitted,
-    the map renders exactly as before. A prototype: no city passes it.
+    the map renders exactly as before. A prototype: no city passes it. Its
+    optional routes=("ferry", "aerialway") names the route kinds the pack
+    holds (from the build's pack summary); each gets a legend row under the
+    transit lines, shown in Travel only.
 
     legend_names: optional {line key: full public name}, for a city whose
     on-map labels are the operators' LINE CODES (Tokyo's 52 lines, owner
@@ -3355,7 +3392,9 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
         tiles="OpenStreetMap", name="Business" if open_basemap else map_title,
         attr=OSM_ATTRIBUTION,
     ).add_to(m)
-    open_base = OpenBasemap(**open_basemap).add_to(m) if open_basemap else None
+    basemap_args = dict(open_basemap or {})
+    routes = tuple(basemap_args.pop("routes", ()))
+    open_base = OpenBasemap(**basemap_args).add_to(m) if open_basemap else None
     # (JS variable name, shown at render) of every business layer, for
     # TRAVEL_MODE_SCRIPT: the heat layers, the rings and the pins.
     business_layers = []
@@ -3473,7 +3512,7 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
 
     m.get_root().html.add_child(folium.Element(
         build_legend(present, taxonomy.legend_label, lines, no_data_stations=bool(no_data.any()),
-                     legend_names=names, travel=bool(open_basemap))
+                     legend_names=names, travel=bool(open_basemap), routes=routes)
     ))
 
     # Collapsed by default: many toggleable layers would otherwise cover a
