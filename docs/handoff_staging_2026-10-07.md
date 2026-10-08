@@ -61,11 +61,10 @@ reasoning behind every move below is in `docs/decisions_drafts/staging.md`
 
 ## NEXT - pick up here, in this order
 
-1. **If not yet done at handoff: Oradea to Band R** (owner, call 221: DSVSA
-   Bihor times out in the owner's browser, so no food lists; reopen when it
-   loads). Then `check_master_list_counts.py --write`, the drafts entries for
-   calls 219-221 and the landing, push. *(The outgoing session planned to do
-   this right after the landing; check `git log` for it.)*
+1. *(Done at handoff: Oradea to Band R, call 221, and the drafts entries for
+   calls 219-221 and the landing, pushed after the review landed.)* **Remind
+   the owner to reboot the live app** if they have not: the landing changed
+   `app/` throughout.
 2. **Republish the two private pages** (both still at version 18, from before
    today's moves): master list https://claude.ai/artifact/LTzi7Vj5emzHnb3zAZy4Vn
    and census https://claude.ai/artifact/CKCadsYtUhbWwWKzV9sDeD, per
