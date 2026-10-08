@@ -39,8 +39,9 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   - Owner's iPhone check (2026-10-08): a legend dot turns oval when its
     label wraps (`LEGEND_ROW` and the Stations row in `map_common` lack
     `flex-shrink:0`); seen on olive's 43-character label (61 maps), also
-    the six long Retail labels. Every map's markup changes, so it rides
-    with a full re-render.
+    the six long Retail labels; violet's one-line label renders round.
+    The owner would take the dot "smaller by a tad" (11 px now; 9 or 10 to
+    choose). Every map's markup changes, so both ride with a full re-render.
   - From Analytics (2026-10-08, measured at 5507a4cb): `map_common._LETTER`
     has no full-width Latin, so a "?" between full-width letters still
     renders (Higashiyamato 6, Tachikawa 4, Ichinomiya 3; one Tachikawa Food
