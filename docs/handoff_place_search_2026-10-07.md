@@ -5,12 +5,18 @@ and tuning, landing it, then the rollout to other cities. Written by the
 pilot session the owner opened on 2026-10-07 (DECISIONS, "Four ideas assessed
 before the large review", item 3).
 
-**State:** built and approved for Kyoto ONLY, on branch
+**State (2026-10-08):** built for Kyoto (the pilot) and the regional
+sample's batch 1 (Seattle, Chicago, Vancouver, Sydney), on branch
 `claude/charming-lumiere-930853` (worktree
 `.claude/worktrees/charming-lumiere-930853`), the commits from `b2e4a8a4` on, on top of
 `8cf5ed4c`. **Nothing is pushed and nothing is on
 master.** It lands at review time (PLAN.md, "Review time: the place search
-pilot"), which only the owner calls.
+pilot"), which only the owner calls. **Next: batch 2a, then 2b, each in a
+fresh session from `docs/handoff_place_search_batch2.md`** (its prompts
+inside). The sections below were written for the pilot; where batch 1
+changed something (two Overpass queries, two files per city, the home and
+junk rules), the drafts file's 2026-10-08 entry and the batch-2 handoff say
+so.
 
 The judgment trail, every owner quote included, is
 `docs/decisions_drafts/place-search.md` (Cleanup folds it into DECISIONS.md).
@@ -207,8 +213,11 @@ on its own before removing the worktree (`docs/session_roles.md`, step 1).
   recorded without a query); `PLACE_FOLD` is per city; check E scans for
   business and home words. Still not adapted:
   `scripts/check_personal_exposure.py`, built for business names.
-- **The sample, one city per region** (owner, 2026-10-08), is build-sized:
-  see the drafts entry of 2026-10-08 for the proposed list.
+- **The sample, one city per region** (owner, 2026-10-08): batch 1 built
+  (Seattle, Chicago, Vancouver, Sydney); 2a (Montréal, Barcelona, Marseille,
+  Prague, Brussels) and 2b (Hong Kong, Seoul, Busan, Tbilisi) in
+  `docs/handoff_place_search_batch2.md`; batch 3, the size tests (Tokyo,
+  London, Paris, São Paulo, Mexico City), after.
 
 ---
 
