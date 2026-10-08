@@ -68,6 +68,17 @@ or published; every proposal waits for the owner.
   `data/_basemap_build/baselines/` (move them with the build before this
   worktree goes); `scripts/check_travel_style.mjs` (run it whenever the
   style or the trim lists change).**
+- **Full version, how it differs from the site's Travel view** (laid out
+  for the owner 2026-10-08): no business data at all (a check refuses
+  ring, heat or business layer names); Travel only, no Business switch and
+  no OSM tile server; offline (libraries, fonts, sprites and pack beside
+  the page); style variant "full" (blue ferries); same pack, labels, pill,
+  tooltips, line highlight; legend lines only; OSM credit plus the font
+  and sprite licence files. **Decided (owner): white line casings and
+  white station dots with a dark ring are built into the full version,
+  designed for light and dark mode alike** (they stay a trial on the site).
+  Proposed, owner to confirm: the world map as the next step after the
+  city page; delivery as a folder plus the small range server.
 - **Open items, in order:** the full version as a renderer option (no business
   data, the hard line enforced by a check); white line casings and white
   station dots in Travel for the owner's screenshots; Protomaps' dark
