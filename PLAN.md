@@ -89,6 +89,11 @@ Detail files: [japan](docs/plan_detail/japan.md),
   the review (2026-10-07). Still to come: Brăila and Galați, Nagakute and
   Nisshin, Itami and Toyonaka into `KNOWN_STACKED`.
 
+- [ ] **Review time, two process slips (Staging, 2026-10-08):** Kurashiki's
+  PDF text printed four operators' names to Staging's console (nothing
+  published or committed); a licence-read agent ran `taskkill` on grep.exe
+  by image name, which stops every session's grep: stop a process by PID.
+
 - [~] **The Japanese pages' name-rule bullet gains the sign rule: APPROVED
   2026-10-08, on `legend-dot-georgia` (56 of 64 pages).** Eight pages with
   no rule bullet (their lists name no operator) wait on the owner's wording.
