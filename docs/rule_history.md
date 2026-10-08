@@ -197,6 +197,24 @@ reader had already found and immediately found five more.
   is fine: see `pipeline/taxonomies/`. Step 2 filters via
   `filter_to_storefront()`, never NAICS prefixes directly.
 
+<a id="line-identity"></a>
+### One colour and one name per line, site-wide
+
+**A line drawn on more than one map has one colour and one name everywhere.**
+The large review of 2026-10-07 found the JR Kobe Line in five colours across
+Kansai, the JR Sanyo Line in four, and the Seibu Haijima Line cyan on two maps
+and mauve on a third; a reader moving between neighbouring maps saw one line
+change colour. The owner made it a hard line ("any line represented more than
+once in city maps gets its own distinct color, even if that means reassigning
+other lines' colors to fit"). 48 Japanese lines were unified onto
+`pipeline/line_registry.py`, keyed by operator and line rather than display
+name ("Tram 1" in Amsterdam and Antwerp are different lines), and
+`scripts/check_line_identity.py` fails a line with two colours, and different
+lines that meet on neighbouring maps, except the registry's recorded
+exceptions. The same review unified the names ("JR Hohi Main Line" on
+Kumamoto's map as on Ōita's). The CIE76 20 floor from the pins came with the
+olive and violet pin colours, when 32 lines sat closer than that.
+
 <a id="rail-shape"></a>
 ### Check the rail system's shape
 
