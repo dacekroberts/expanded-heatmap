@@ -556,3 +556,16 @@ PLACE_REVIEWED = {
     "North Pacific Lumber Company Barnet Mill Burner": "a mill burner's ruins in Burnaby, on Heritage "
                                                        "Burnaby",
 }
+
+# Visitable former homes (owner, 2026-10-08: "visitable only hard line. Must
+# make sure info is up-to-date"): homes the home rule holds out that the public
+# can visit today, by OSM id, each checked at its source on the date given
+# (place_index, VISITABLE FORMER HOMES). scripts/check_place_search.py G fails
+# once an entry is a year old: check it again at its source and renew
+# "checked", or remove it.
+PLACE_VISITABLE = {
+    "way/54029332": {"name": "Aberthau", "access": "OPEN_REGULAR",
+        "source": "https://westpointgrey.org/contact/hours-of-operation/",
+        "checked": "2026-10-08",
+        "why": "a heritage mansion run as the West Point Grey community centre, open daily"},
+}

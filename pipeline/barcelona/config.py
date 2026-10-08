@@ -352,3 +352,16 @@ PLACE_DROPPED = {
     "node/6882372017": "'Gol Nord', a stand of the Camp Nou mapped as place=locality",
     "node/6882372018": "'Gol Sud', a stand of the Camp Nou mapped as place=locality",
 }
+
+# Visitable former homes (owner, 2026-10-08: "visitable only hard line. Must
+# make sure info is up-to-date"): homes the home rule holds out that the public
+# can visit today, by OSM id, each checked at its source on the date given
+# (place_index, VISITABLE FORMER HOMES). scripts/check_place_search.py G fails
+# once an entry is a year old: check it again at its source and renew
+# "checked", or remove it.
+PLACE_VISITABLE = {
+    "relation/17271255": {"name": "Jardí de la Fundació Julio Muñoz Ramonet", "access": "OPEN_REGULAR",
+        "source": "https://www.barcelona.cat/barcelonacultura/en/recomanem/corner-greenery-and-freshness-muntaner-street",
+        "checked": "2026-10-08",
+        "why": "a municipal garden at a former mansion, free entry, open daily 10:00-20:00"},
+}

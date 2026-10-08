@@ -189,3 +189,16 @@ PLACE_DROPPED = {
     "way/807330592": "'Lawrence House Patio', a leisure=park named for an apartment building: its grounds",
     "way/1175801225": "'Northern Trust open space', a plaza named for the bank that owns it",
 }
+
+# Visitable former homes (owner, 2026-10-08: "visitable only hard line. Must
+# make sure info is up-to-date"): homes the home rule holds out that the public
+# can visit today, by OSM id, each checked at its source on the date given
+# (place_index, VISITABLE FORMER HOMES). scripts/check_place_search.py G fails
+# once an entry is a year old: check it again at its source and renew
+# "checked", or remove it.
+PLACE_VISITABLE = {
+    "way/163325251": {"name": "Noble-Seymour Crippen House", "access": "OPEN_REGULAR",
+        "source": "https://norwoodparkhistoricalsociety.org/about-us/",
+        "checked": "2026-10-08",
+        "why": "the Norwood Park Historical Society's museum, open Saturdays noon to 4 pm"},
+}

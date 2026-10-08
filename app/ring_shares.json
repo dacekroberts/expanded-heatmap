@@ -17,7 +17,7 @@
  "chicago": {
   "in_ring": 11685,
   "all": 20492,
-  "map_blob": "82af00273e429904a59bd95cf8febeb1cad1d7b8"
+  "map_blob": "a140bb02ad8797f4626a9be8cae97d183a33fe6e"
  },
  "new_york": {
   "in_ring": 44360,
@@ -47,7 +47,7 @@
  "vancouver": {
   "in_ring": 7010,
   "all": 15436,
-  "map_blob": "97e9f0fcee4351b68ebfe041f80fea134933771c"
+  "map_blob": "944c675ca0da8cdda744f710eb83f65b0c89298a"
  },
  "montreal": {
   "in_ring": 10386,
@@ -87,7 +87,7 @@
  "barcelona": {
   "in_ring": 35287,
   "all": 35309,
-  "map_blob": "f7d31ddd6dc96ecf3b16003f7b04083c7305994a"
+  "map_blob": "c343b56b3a68e54e240e09480c64ffddddf65eb1"
  },
  "dublin": {
   "in_ring": 7411,
@@ -267,7 +267,7 @@
  "kyoto": {
   "in_ring": 27990,
   "all": 32370,
-  "map_blob": "8aef108437629a27e4d76bfc9c720db0e0bb5775"
+  "map_blob": "4835f078910deae106a0fdde1b22a6753ef0d8ea"
  },
  "tokyo": {
   "in_ring": 59829,

@@ -348,3 +348,28 @@ KYOTO_BBOX = {
     "lon_max": OSM_BBOX[3],
 }
 CITY_BBOX = KYOTO_BBOX
+
+# Visitable former homes (owner, 2026-10-08: "visitable only hard line. Must
+# make sure info is up-to-date"): homes the home rule holds out that the public
+# can visit today, by OSM id, each checked at its source on the date given
+# (place_index, VISITABLE FORMER HOMES). scripts/check_place_search.py G fails
+# once an entry is a year old: check it again at its source and renew
+# "checked", or remove it.
+PLACE_VISITABLE = {
+    "way/515857420": {"name": "旧三井家下鴨別邸", "access": "OPEN_REGULAR",
+        "source": "https://ja.kyoto.travel/tourism/article/mitsuike/",
+        "checked": "2026-10-08",
+        "why": "the former Mitsui family villa, city-owned, open daily 9:00-17:00 except Wednesdays"},
+    "way/556216450": {"name": "駒井家住宅", "access": "OPEN_REGULAR",
+        "source": "https://www.keihan.co.jp/navi/architecture/architecture202606.php",
+        "checked": "2026-10-08",
+        "why": "the Komai house (National Trust of Japan), open Fridays and Saturdays 10:00-15:00 by advance booking, closed mid-July to August and mid-December to February"},
+    "way/619972478": {"name": "秀穂舎", "access": "OPEN_REGULAR",
+        "source": "https://www.shimogamo-jinja.or.jp/about/special",
+        "checked": "2026-10-08",
+        "why": "Shimogamo Shrine's museum in a former priest family's house, open 10:00-16:00"},
+    "way/640426916": {"name": "旧邸御室", "access": "OPEN_SEASONAL",
+        "source": "https://omuro-kyoto.jp/news/detail.php?id=63",
+        "checked": "2026-10-08",
+        "why": "Kyutei Omuro, open to the public on announced days each year (2026: May 2-5 and May 30-31, booked tours)"},
+}
