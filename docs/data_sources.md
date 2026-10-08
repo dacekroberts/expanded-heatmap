@@ -277,17 +277,19 @@ OpenStreetMap data in the OpenMapTiles schema. The city maps do not use it.
   copyright page, CARTO's attribution page and openmaptiles.org, as CARTO's
   attribution page and the style's license ask.
 
-### Place search index: OpenStreetMap, ODbL 1.0 (pilot, Kyoto first)
+### Place search index: OpenStreetMap, ODbL 1.0 (pilot: Kyoto, then a sample of cities)
 
-<!-- internal -->Pilot on a branch (2026-10-07); nothing here is published until the owner
-approves it at review time.<!-- /internal -->
+<!-- internal -->Pilot on a branch (Kyoto 2026-10-07; Seattle, Chicago, Vancouver and Sydney
+2026-10-08, the first batch of a one-city-per-region sample); nothing here is
+published until the owner approves it at review time.<!-- /internal -->
 
 - **Data:** each city's place index (`app/static/places/<city>.json`) lists
   named streets, intersections derived from shared street nodes, named
   junctions, place names, stations and landmarks (named markets only when
   notable), extracted from
   OpenStreetMap through Overpass (`pipeline/place_index_fetch.py`) inside the
-  city boundary and built by `pipeline/place_index.py`. It holds no business
+  city boundary (on a regional map, the boundaries of its station cities) and
+  built by `pipeline/place_index.py`. It holds no business
   records and no data from any other source.
 - **PERMITTED WITH CONDITIONS** (<!-- internal -->`licence-read` 2026-10-07; <!-- /internal -->ODbL 1.0 and the OpenStreetMap
   Foundation's Geocoding, Substantial, Produced Work and Attribution

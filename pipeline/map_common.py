@@ -2053,7 +2053,18 @@ _PLACE_SEARCH_TEMPLATE = r"""
     var STOP = {"and": 1, "at": 1, "of": 1, "the": 1, "x": 1, "corner": 1, "&": 1, "y": 1};
     var STATION_WORDS = {"station": 1, "sta": 1, "stn": 1, "eki": 1, "駅": 1};
     var STREET_WORDS = {"street": 1, "st": 1, "avenue": 1, "ave": 1, "road": 1, "rd": 1,
+                        "boulevard": 1, "blvd": 1, "drive": 1, "dr": 1, "way": 1,
                         "dori": 1, "通": 1, "通り": 1};
+    // A typed street word's full form, to rank that street type first.
+    var STREET_TYPE = {"st": "street", "ave": "avenue", "rd": "road", "dr": "drive",
+                       "blvd": "boulevard"};
+    // English abbreviations that are not the start of the word they stand for
+    // (prefixes such as "ave" for avenue match as they are): a
+    // typed one also tries the full word (sample cities, 2026-10-08).
+    var ABBR = {"blvd": "boulevard", "ct": "court", "hwy": "highway", "pkwy": "parkway",
+                "ln": "lane", "mt": "mount", "ft": "fort", "sq": "square", "fwy": "freeway",
+                "expy": "expressway", "ctr": "center", "jct": "junction", "ne": "northeast",
+                "nw": "northwest", "se": "southeast", "sw": "southwest"};
     var CJK = /[@@CJK_CLASS@@]/;
     var MARKS = /[@@MARKS_CLASS@@]/g;
     var data = null, own = null, loading = null, fold = null, marker = null, timer = null;
@@ -2067,15 +2078,19 @@ _PLACE_SEARCH_TEMPLATE = r"""
     function words(s) { return norm(s).split(/[^\p{L}\p{N}]+/u).filter(Boolean); }
     // The searchable forms of one entry's names.
     function prep(d) {
-        var toks = [];
+        var toks = [], solo = [];
         d.names.forEach(function (n) {
             var ws = words(n);
             toks = toks.concat(ws);
+            solo = solo.concat(ws);
             // Joined too, so "Kinkakuji" finds "Kinkaku-ji".
             if (ws.length > 1 && !CJK.test(n)) toks.push(ws.join(""));
         });
         d.bares = d.names.map(function (n) { return words(n).join(""); });
         d.hay = " " + toks.join(" ") + " ";
+        // The words alone, for in-word hits: a joined form let "star" match
+        // inside "Rest Area" (Sydney, 2026-10-08).
+        d.solo = " " + solo.join(" ") + " ";
         d.flat = norm(d.names.join(" | "));
         d.first = norm(d.name);
         return d;
@@ -2197,10 +2212,37 @@ _PLACE_SEARCH_TEMPLATE = r"""
     // romanized compound ("imadegawa" in "Horikawaimadegawa"), 0 for none.
     function wordHit(d, w) {
         if (CJK.test(w)) return d.flat.indexOf(w) >= 0 ? 2 : 0;
+        // A number is itself or its ordinal: "1" found 145th (Seattle).
+        if (/^[0-9]+$/.test(w)) return ["", "st", "nd", "rd", "th"].some(function (x) {
+            return d.hay.indexOf(" " + w + x + " ") >= 0; }) ? 2 : 0;
         if (d.hay.indexOf(" " + w) >= 0) return 2;
-        return w.length >= 4 && d.hay.indexOf(w) >= 0 ? 1 : 0;
+        if (ABBR[w] && d.hay.indexOf(" " + ABBR[w]) >= 0) return 2;
+        return w.length >= 4 && d.solo.indexOf(w) >= 0 ? 1 : 0;
     }
     function isStation(d) { return d.kind === "station" || d.kind === "mapstation"; }
+    // A query in two halves ("Clark and Lake", "5th & Pike", "四条 / 烏丸"):
+    // each half's words, street words left out unless that empties it.
+    function pairOf(q) {
+        var parts = norm(q).split(/\s+(?:and|at|x|y)\s+|\s*[&\/@]\s*/).map(function (p) {
+            var ws = words(p), core = ws.filter(function (w) { return !STREET_WORDS[w]; });
+            return core.length ? core : ws;
+        }).filter(function (ws) { return ws.length; });
+        return parts.length === 2 ? parts : null;
+    }
+    function sideHit(side, ws) {
+        var hay = " " + words(side).join(" ") + " ", flat = norm(side);
+        return ws.every(function (w) {
+            if (CJK.test(w)) return flat.indexOf(w) >= 0;
+            return hay.indexOf(" " + w) >= 0 || (ABBR[w] && hay.indexOf(" " + ABBR[w]) >= 0);
+        });
+    }
+    function pairHit(d, pair) {
+        return d.names.some(function (n) {
+            var s = n.split(" / ");
+            return s.length === 2 && ((sideHit(s[0], pair[0]) && sideHit(s[1], pair[1]))
+                                      || (sideHit(s[1], pair[0]) && sideHit(s[0], pair[1])));
+        });
+    }
     function hits(d, qs) {
         d._weak = 0;
         for (var i = 0; i < qs.length; i++) {
@@ -2226,11 +2268,24 @@ _PLACE_SEARCH_TEMPLATE = r"""
                 out = data.filter(function (d) { return hits(d, two); });
             }
         }
-        var nq = norm(q).trim(), bare = words(q).join("");
+        var nq = norm(q).trim(), bare = words(q).join(""), pair = pairOf(q);
+        // A street word last asks for a street ("Lake Shore Dr" before the
+        // Lake Shore Drive Synagogue, whose name the query begins); first, it
+        // is often Saint or Doctor ("St Mary's", "Dr Martin Luther King").
+        var streetQ = qs.length > 1 && STREET_WORDS[qs[qs.length - 1]];
         out.forEach(function (d) {
             var s = KIND_RANK[d.kind] * 3 + Math.min(d.name.length, 40) / 10 + d._weak * 20;
             if (d.bares.indexOf(bare) >= 0 || d.names.some(function (n) { return norm(n) === nq; })) s -= 100;
             else if (d.first.indexOf(nq) === 0) s -= 40;
+            // "Damen and North": the crossing whose two streets take the two
+            // halves, before North Damen Avenue's other crossings (Chicago,
+            // 2026-10-08).
+            if (pair && d.kind === "crossing" && pairHit(d, pair)) s -= 60;
+            if (streetQ && (d.kind === "street" || d.kind === "crossing" || d.kind === "junction")) s -= 45;
+            // And its own type first: "NE 45th St" is the Street, not the Court.
+            if (streetQ && d.hay.indexOf(" " + (STREET_TYPE[qs[qs.length - 1]] || qs[qs.length - 1]) + " ") >= 0) s -= 5;
+            // Whole words before parts: "Art Institute" before "Arturo ...".
+            if (qs.every(function (w) { return d.hay.indexOf(" " + w + " ") >= 0; })) s -= 4;
             d._s = s;
         });
         // The map's own stations and lines first, as their own group, and only

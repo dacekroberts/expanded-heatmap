@@ -4,20 +4,26 @@ when its cache is missing.
 
     python pipeline/place_index_fetch.py <city> [--force]
 
-One Overpass query per city (the owner's rule: one in flight per session,
-none in parallel, 60 s after a 504 or 429, all in pipeline/osm.py), cut by the
-city's own boundary (config.PLACE_AREA), cached at config.PLACE_OSM_JSON and
-recorded in outputs/<slug>/provenance.json as "osm_places" (a cache already on
-disk is recorded without a query):
+Two Overpass queries per city, one after the other (the owner's rule: one in
+flight per session, none in parallel, 60 s after a 504 or 429, all in
+pipeline/osm.py), cut by the city's own boundary (config.PLACE_AREA): QUERY,
+cached at config.PLACE_OSM_JSON, and EXTRA_QUERY, at
+config.PLACE_OSM_EXTRA_JSON; each recorded in outputs/<slug>/provenance.json
+("osm_places", "osm_places_extra"; a cache already on disk is recorded
+without a query). Together:
 
   * every named highway way, with its node ids, and those nodes' positions
     (streets, and the intersections derived from shared nodes);
   * named junction nodes (Japan signs its intersections: 四条烏丸);
-  * place nodes (wards, districts, neighborhoods, the 町 of Kyoto);
+  * places, as nodes or areas (wards, districts, neighborhoods, the 町 of
+    Kyoto; Sydney's Darling Harbour is an area);
   * stations and tram stops;
-  * landmarks: attractions, museums, viewpoints, historic sites, places of
-    worship, parks and gardens, universities, peaks, rivers, named markets
-    (kept only when notable, owner 2026-10-07).
+  * landmarks: attractions, museums, viewpoints, artworks, historic sites,
+    places of worship, parks, gardens and stadiums, universities, town halls,
+    libraries, theaters and arts centres, airports, peaks, beaches, bays,
+    rivers, named markets (kept only when notable, owner 2026-10-07). The
+    sample cities found Wrigley Field, Cloud Gate and the airports missing
+    (2026-10-08).
 
 Places only, never business records (owner, 2026-10-07): nothing here is
 queried by shop, office, craft or a commercial amenity, and the index step
@@ -36,7 +42,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from pipeline import osm  # noqa: E402
+from pipeline import osm, place_index  # noqa: E402
 
 QUERY = """[out:json][timeout:170];
 area{area}->.a;
@@ -61,21 +67,39 @@ out skel qt;
 );
 out tags center qt;
 """
+# The classes the sample cities found missing (2026-10-08: Chicago's Wrigley
+# Field and Cloud Gate, Sydney's Darling Harbour, every airport), in a query
+# of their own: added to QUERY they timed it out at 174 s on Chicago and
+# Vancouver. Places as areas (QUERY has the nodes), stadiums, artworks,
+# civic buildings, airports, beaches and bays.
+EXTRA_QUERY = """[out:json][timeout:170];
+area{area}->.a;
+(
+  way["place"]["name"](area.a);
+  rel["place"]["name"](area.a);
+  nwr["tourism"="artwork"]["name"](area.a);
+  nwr["leisure"="stadium"]["name"](area.a);
+  nwr["amenity"~"^(townhall|library|theatre|arts_centre)$"]["name"](area.a);
+  nwr["aeroway"="aerodrome"]["name"](area.a);
+  nwr["natural"~"^(beach|bay)$"]["name"](area.a);
+);
+out tags center qt;
+"""
 
 
-def record(config, how):
-    """Record the cache in outputs/<slug>/provenance.json under "osm_places",
-    in the shape the city's other OSM downloads use (japan_fetch.record): the
-    file, its bytes and sha256, the element count, the host, OSM's own
-    timestamp (osm_base), the exact query and when it was written. A cache
-    already on disk is recorded as kept, dated by its modification time."""
-    path = config.PLACE_OSM_JSON
+def record(config, path, key, how):
+    """Record one cache in outputs/<slug>/provenance.json under `key`
+    ("osm_places", "osm_places_extra"), in the shape the city's other OSM
+    downloads use (japan_fetch.record): the file, its bytes and sha256, the
+    element count, the host, OSM's own timestamp (osm_base), the exact query
+    and when it was written. A cache already on disk is recorded as kept,
+    dated by its modification time."""
     payload = json.loads(path.read_text(encoding="utf-8"))
     prov_path = getattr(config, "PROVENANCE_JSON", None) or (
-        Path(__file__).parent.parent / "outputs" / config.SLUG / "provenance.json")
+        Path(__file__).parent.parent / "outputs" / place_index.city_of(config)[0] / "provenance.json")
     prov = json.loads(prov_path.read_text(encoding="utf-8")) if prov_path.exists() else {}
     data = path.read_bytes()
-    prov["osm_places"] = {
+    prov[key] = {
         "bytes": len(data),
         "elements": len(payload.get("elements") or []),
         "file": path.name,
@@ -99,15 +123,18 @@ def main():
     ap.add_argument("--force", action="store_true")
     args = ap.parse_args()
     config = importlib.import_module(f"pipeline.{args.city}.config")
-    query = QUERY.format(area=config.PLACE_AREA)
-    kept = config.PLACE_OSM_JSON.exists() and not args.force
-    els, host = osm.fetch(query, config.PLACE_OSM_JSON, force=args.force, timeout=180, deadline=900)
-    kinds = {}
-    for e in els:
-        kinds[e["type"]] = kinds.get(e["type"], 0) + 1
-    print(f"{config.PLACE_OSM_JSON.name}: {len(els):,} elements from {host} {kinds}")
-    prov = record(config, "kept (on disk from an earlier run)" if kept else "fetched")
-    print(f"recorded in {prov.relative_to(Path(__file__).parent.parent)} as osm_places")
+    # One after the other, never in parallel (the owner's Overpass rule).
+    for query, path, key in ((QUERY, config.PLACE_OSM_JSON, "osm_places"),
+                             (EXTRA_QUERY, config.PLACE_OSM_EXTRA_JSON, "osm_places_extra")):
+        kept = path.exists() and not args.force
+        els, host = osm.fetch(query.format(area=config.PLACE_AREA), path, force=args.force,
+                              timeout=180, deadline=900)
+        kinds = {}
+        for e in els:
+            kinds[e["type"]] = kinds.get(e["type"], 0) + 1
+        print(f"{path.name}: {len(els):,} elements from {host} {kinds}")
+        prov = record(config, path, key, "kept (on disk from an earlier run)" if kept else "fetched")
+        print(f"recorded in {prov.relative_to(Path(__file__).parent.parent)} as {key}")
 
 
 if __name__ == "__main__":

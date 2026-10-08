@@ -4,7 +4,8 @@ All the work is pipeline/place_index.py (run); this file names the city. Places
 only, never business records (DECISIONS.md, "Four ideas assessed before the
 large review", item 3). Runs before step 3, whose map carries the index's hash.
 
-Input:  data/kyoto/raw/osm_places_v2_2026-10-07.json  (pipeline/place_index_fetch.py)
+Input:  data/kyoto/raw/osm_places_v2_2026-10-07.json     (pipeline/place_index_fetch.py)
+        data/kyoto/raw/osm_places_extra_2026-10-08.json  (the same, its second query)
 Output: app/static/places/kyoto.json  (served by Streamlit's static serving;
         ODbL 1.0, the notice inside the file);
         outputs/kyoto/place_search.json  (the page's summary: the languages

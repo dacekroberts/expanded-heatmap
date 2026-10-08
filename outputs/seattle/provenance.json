@@ -1,61 +1,83 @@
 {
-  "written_utc": "2026-10-02T22:07:46+00:00",
+  "as_of_date": "2026-10-02",
+  "files_utc": {
+    "bellevue_licences.csv": "2026-10-02T21:17:45+00:00",
+    "kc_address_points.csv": "2026-10-02T21:14:56+00:00",
+    "kc_city_polygons.geojson": "2026-10-02T21:03:25+00:00",
+    "kc_food_inspections.csv": "2026-10-02T21:17:50+00:00",
+    "osm_rail.json": "2026-10-02T21:07:59+00:00",
+    "seattle_licences.csv": "2026-10-02T21:16:37+00:00",
+    "seattle_trade_is_legal.csv": "2026-10-02T21:25:43+00:00",
+    "sno_address_points.csv": "2026-10-02T21:16:16+00:00",
+    "sno_city_polygons_tiger.geojson": "2026-10-02T21:05:01+00:00",
+    "sno_food_establishments.csv": "2026-10-02T21:17:53+00:00"
+  },
   "osm_bbox": [
     47.28,
     -122.42,
     47.84,
     -122.08
   ],
-  "as_of_date": "2026-10-02",
-  "files_utc": {
-    "osm_rail.json": "2026-10-02T21:07:59+00:00",
-    "kc_city_polygons.geojson": "2026-10-02T21:03:25+00:00",
-    "sno_city_polygons_tiger.geojson": "2026-10-02T21:05:01+00:00",
-    "kc_address_points.csv": "2026-10-02T21:14:56+00:00",
-    "sno_address_points.csv": "2026-10-02T21:16:16+00:00",
-    "seattle_licences.csv": "2026-10-02T21:16:37+00:00",
-    "seattle_trade_is_legal.csv": "2026-10-02T21:25:43+00:00",
-    "bellevue_licences.csv": "2026-10-02T21:17:45+00:00",
-    "kc_food_inspections.csv": "2026-10-02T21:17:50+00:00",
-    "sno_food_establishments.csv": "2026-10-02T21:17:53+00:00"
+  "osm_host": "overpass.kumi.systems",
+  "osm_places": {
+    "bytes": 38912053,
+    "elements": 343229,
+    "file": "osm_places_2026-10-08.json",
+    "host": "overpass-api.de",
+    "how": "kept (on disk from an earlier run)",
+    "osm_base": "2026-10-08T07:45:15Z",
+    "query": "[out:json][timeout:170];\narea(id:3600237385,3600237868,3600237376,3600237358,3600237380,3600237875,3600237384,3600237350,3600237360,3600237662,3600237670)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-08T07:49:39+00:00",
+    "sha256": "0b226ba4424057332e513d604004558bf957acbedce68557f9f6a96768674453"
+  },
+  "osm_places_extra": {
+    "bytes": 492285,
+    "elements": 1302,
+    "file": "osm_places_extra_2026-10-08.json",
+    "host": "overpass-api.de",
+    "how": "fetched",
+    "osm_base": "2026-10-08T08:36:40Z",
+    "query": "[out:json][timeout:170];\narea(id:3600237385,3600237868,3600237376,3600237358,3600237380,3600237875,3600237384,3600237350,3600237360,3600237662,3600237670)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-08T08:40:52+00:00",
+    "sha256": "17a844f65a22dab0c6683da73f4651d971c765143c9e82b8195ec0f15b93392f"
   },
   "sources": {
-    "seattle": {
-      "endpoint": "https://services.arcgis.com/ZOyb2t4B0UYuYNYH/arcgis/rest/services/Seattle_Business_License/FeatureServer/0",
-      "query": {
-        "where": "1=1",
-        "outFields": "objectid,BUSLIC_ID,BUSLIC_LOCATION_ID,BUSLIC_BUSINESS_ID,BUSLIC_YEAR_NUM,BUSLIC_EXPIRATION_DATE,BUSLIC_TRADE_NAME,BUSLIC_LOCATION_TYPE,BUSLIC_STATUS_TYPE,BUSLIC_NAICS_CODE,BUSLIC_NAICS_DESC,BUSLIC_LOCATION_ADRS_TEXT,BUSLIC_OPENDATE"
-      }
-    },
-    "seattle_same_name": {
-      "endpoint": "https://services.arcgis.com/ZOyb2t4B0UYuYNYH/arcgis/rest/services/Seattle_Business_License/FeatureServer/0",
-      "query": {
-        "where": "BUSLIC_TRADE_NAME = BUSLIC_LEGAL_NAME",
-        "outFields": "objectid,BUSLIC_LOCATION_ID"
-      }
-    },
     "bellevue": {
       "endpoint": "https://services1.arcgis.com/EYzEZbDhXZjURPbP/arcgis/rest/services/Business_Licenses_(All)/FeatureServer/3",
       "query": {
-        "where": "1=1",
-        "outFields": "OBJECTID,BusinessId,Dba,Naic,LegalEntityType,FirstActivityDate,CancelDate,IssueDate,PhysicalAddressLine1,PhysicalAddressLine2,PhysicalCity,NeighborhoodArea,PlanningZone,Latitude,Longitude"
+        "outFields": "OBJECTID,BusinessId,Dba,Naic,LegalEntityType,FirstActivityDate,CancelDate,IssueDate,PhysicalAddressLine1,PhysicalAddressLine2,PhysicalCity,NeighborhoodArea,PlanningZone,Latitude,Longitude",
+        "where": "1=1"
       }
     },
     "kc_food": {
       "endpoint": "https://data.kingcounty.gov/resource/r878-4sxa.csv",
       "query": {
-        "$select": "business_id,name,program_identifier,classification,seating_range,risk_category,address,city,zip_code,parcel_number,inspection_date,inspection_type,inspection_closed_business,inspection_serial_num",
+        "$limit": "500000",
         "$order": "business_id,inspection_date,inspection_serial_num",
-        "$limit": "500000"
+        "$select": "business_id,name,program_identifier,classification,seating_range,risk_category,address,city,zip_code,parcel_number,inspection_date,inspection_type,inspection_closed_business,inspection_serial_num"
+      }
+    },
+    "seattle": {
+      "endpoint": "https://services.arcgis.com/ZOyb2t4B0UYuYNYH/arcgis/rest/services/Seattle_Business_License/FeatureServer/0",
+      "query": {
+        "outFields": "objectid,BUSLIC_ID,BUSLIC_LOCATION_ID,BUSLIC_BUSINESS_ID,BUSLIC_YEAR_NUM,BUSLIC_EXPIRATION_DATE,BUSLIC_TRADE_NAME,BUSLIC_LOCATION_TYPE,BUSLIC_STATUS_TYPE,BUSLIC_NAICS_CODE,BUSLIC_NAICS_DESC,BUSLIC_LOCATION_ADRS_TEXT,BUSLIC_OPENDATE",
+        "where": "1=1"
+      }
+    },
+    "seattle_same_name": {
+      "endpoint": "https://services.arcgis.com/ZOyb2t4B0UYuYNYH/arcgis/rest/services/Seattle_Business_License/FeatureServer/0",
+      "query": {
+        "outFields": "objectid,BUSLIC_LOCATION_ID",
+        "where": "BUSLIC_TRADE_NAME = BUSLIC_LEGAL_NAME"
       }
     },
     "sno_food": {
       "endpoint": "https://services6.arcgis.com/z6WYi9VRHfgwgtyW/arcgis/rest/services/Food_Service_Establishments/FeatureServer/0",
       "query": {
-        "where": "1=1",
-        "outFields": "OBJECTID,User_Fld,USER_Name,USER_Full_Site_Address,USER_City,USER_Program_Element,USER_Program_Identifier,USER_Facility_ID,USER_Record_ID,Icon"
+        "outFields": "OBJECTID,User_Fld,USER_Name,USER_Full_Site_Address,USER_City,USER_Program_Element,USER_Program_Identifier,USER_Facility_ID,USER_Record_ID,Icon",
+        "where": "1=1"
       }
     }
   },
-  "osm_host": "overpass.kumi.systems"
+  "written_utc": "2026-10-02T22:07:46+00:00"
 }

@@ -118,11 +118,16 @@ on its own before removing the worktree (`docs/session_roles.md`, step 1).
 
 1. **Config:** `PLACE_AREA` (an Overpass area filter that matches exactly the
    city's boundary; admin levels differ by country, so confirm it matches ONE
-   area), `PLACE_OSM_JSON` under a NEW file name dated by the fetch
+   area). Better, as the sample cities do: `"(id:3600000000+relation,...)"`,
+   the boundary relations looked up once by name in a bbox. A regional map
+   lists every station city (Seattle 11, Vancouver 5). `PLACE_OSM_JSON`
+   under a NEW file name dated by the fetch
    (`osm_places_<date>.json`; the retrieval date is read from the name), and
    `PLACE_LANGUAGES` (Brussels would be `("fr", "nl")`; an English-speaking
    city `("en",)`).
-2. **Fetch:** `python pipeline/place_index_fetch.py <city>`. The owner's
+2. **Fetch:** `python pipeline/place_index_fetch.py <city>`, two queries one
+   after the other (`QUERY` into `PLACE_OSM_JSON`, `EXTRA_QUERY` into
+   `PLACE_OSM_EXTRA_JSON`; one query timed out on Chicago). The owner's
    Overpass rule: one query in flight per session, never parallel, 60 s after
    a 504 or 429 (`pipeline/osm.py` enforces the wait). About 1 GB a day is
    overpass-api.de's guidance, so roll out over several days.
@@ -143,7 +148,13 @@ on its own before removing the worktree (`docs/session_roles.md`, step 1).
    index by eye: brand names carry no word. Kyoto found a tea-ceremony shop, a
    private school, a condominium, a garden possibly named after a person and
    supermarket-named footways, each now a rule; the next country will find
-   its own.
+   its own. The sample's first batch (2026-10-08) found registered heritage
+   HOUSES named for their builders (Vancouver, Chicago): a home is kept only
+   when open as a museum or an attraction, whatever its designation, wikidata
+   or Wikipedia article (`_home`, `_public_home`). What no rule catches goes
+   in `config.PLACE_DROPPED` by OSM id with why (Sydney's "Meriton" park,
+   Seattle's "Ride Store"). The read that paid off: every landmark and place
+   whose name holds no obvious place word (park, church, museum ...), whole.
 7. **Test the searches the city is known for**: its intersection style ("5th
    and Pike" in a US grid), its station names, its landmarks, in each listed
    language.
@@ -194,3 +205,9 @@ on its own before removing the worktree (`docs/session_roles.md`, step 1).
   through the page's script before calling a click broken.
 - **Windows writes CRLF:** `sed -i 's/\r$//' outputs/<city>/heatmap.html`
   after every render, before staging.
+- **Master re-rendered maps this branch also renders** (the line registry,
+  2026-10-08, Kyoto among 34 Japanese and Korean maps; `app/Overview.py`,
+  `app/cities.py` and `app/components.py` changed too). When the branch takes
+  master in, before its own push only: take master's side of each
+  `outputs/<city>/heatmap.html`, then re-render every searched map so it
+  carries both master's chrome and the search box.

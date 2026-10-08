@@ -154,6 +154,10 @@ PLACE_AREA = '["name"="京都市"]["admin_level"="7"]["boundary"="administrative
 # v2: the query with named markets (owner, 2026-10-07); the first cache,
 # osm_places_2026-10-07.json, is the pilot's first build.
 PLACE_OSM_JSON = DATA_RAW / "osm_places_v2_2026-10-07.json"
+# place_index_fetch.EXTRA_QUERY's classes (stadiums, artworks, civic
+# buildings, airports, beaches, bays, places as areas), a second query since
+# 2026-10-08.
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-08.json"
 # The local language(s) of OSM's `name` here (place_index.py, LANGUAGES), and
 # the Japanese long-vowel fold the search applies (place_index.FOLDS).
 PLACE_LANGUAGES = ("ja",)

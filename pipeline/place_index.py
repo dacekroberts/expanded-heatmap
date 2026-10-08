@@ -65,27 +65,53 @@ def write(index, slug):
 FOLDS = (None, "ja")
 
 
+def city_of(config):
+    """(slug, name) for a city's config module, pipeline.<slug>.config. The
+    slug comes from the module path, since 78 of 170 configs had no SLUG
+    (2026-10-08); the name, which only the index's "city" field carries, from
+    NAME or CITY_NAME, else the slug in title case."""
+    slug = getattr(config, "SLUG", None) or config.__name__.split(".")[-2]
+    name = getattr(config, "NAME", None) or getattr(config, "CITY_NAME", None)
+    return slug, name if isinstance(name, str) else slug.replace("_", " ").title()
+
+
 def run(config):
     """A city's index step: read the cache place_index_fetch.py wrote, build,
     write the index and the page's summary, report. Never fetches. A city's
     step2b_place_index.py calls this and nothing else.
 
-    config needs PLACE_OSM_JSON (dated by its name: osm_places[_vN]_<date>.json),
-    PLACE_LANGUAGES, PLACE_FOLD, NAME and SLUG."""
+    config needs PLACE_OSM_JSON and PLACE_OSM_EXTRA_JSON (each dated by its
+    name: osm_places[_vN|_extra]_<date>.json), PLACE_LANGUAGES and
+    PLACE_FOLD; the slug and name come from city_of."""
     import sys
+    slug, name = city_of(config)
     if not config.PLACE_OSM_JSON.exists():
-        sys.exit(f"Missing {config.PLACE_OSM_JSON}.\nRun: python pipeline/place_index_fetch.py {config.SLUG}")
+        sys.exit(f"Missing {config.PLACE_OSM_JSON}.\nRun: python pipeline/place_index_fetch.py {slug}")
     fold = config.PLACE_FOLD
     if fold not in FOLDS:
         sys.exit(f"config.PLACE_FOLD {fold!r} is not one of {FOLDS}")
+    extra = config.PLACE_OSM_EXTRA_JSON
+    if not extra.exists():
+        sys.exit(f"Missing {extra}.\nRun: python pipeline/place_index_fetch.py {slug}")
     payload = json.loads(config.PLACE_OSM_JSON.read_text(encoding="utf-8"))
-    # The retrieval date is the cache's own, from its file name: never today.
-    retrieved = config.PLACE_OSM_JSON.stem.rsplit("_", 1)[-1]
-    index, report = build(payload["elements"], city=config.NAME, retrieved=retrieved,
-                          local=config.PLACE_LANGUAGES, fold=fold)
-    out = write(index, config.SLUG)
+    # The extra query's classes (place_index_fetch.EXTRA_QUERY), merged by
+    # OSM id: a place node can come in both.
+    seen = {(e["type"], e["id"]) for e in payload["elements"]}
+    payload["elements"] += [e for e in json.loads(extra.read_text(encoding="utf-8"))["elements"]
+                            if (e["type"], e["id"]) not in seen]
+    # The retrieval date is the caches' own, from their file names (the
+    # older of the two): never today.
+    retrieved = min(p.stem.rsplit("_", 1)[-1] for p in (config.PLACE_OSM_JSON, extra))
+    dropped = getattr(config, "PLACE_DROPPED", {})
+    index, report = build(payload["elements"], city=name, retrieved=retrieved,
+                          local=config.PLACE_LANGUAGES, fold=fold, dropped=dropped)
+    found = {f"{e['type']}/{e['id']}" for e in payload["elements"]}
+    stale = sorted(set(dropped) - found)
+    if stale:
+        sys.exit(f"config.PLACE_DROPPED names {stale}, not in the cache: remove them")
+    out = write(index, slug)
     print(f"Wrote {out} ({out.stat().st_size:,} bytes, {len(index['rows']):,} places) and "
-          f"{summary_path(config.SLUG).name}")
+          f"{summary_path(slug).name}")
     print(f"  languages: {index['languages']['coverage']} -> the page names {index['languages']['listed']}")
     for k in sorted(report):
         print(f"  {k}: {report[k]:,}")
@@ -145,24 +171,35 @@ LEAK_WORDS = {
            "condominium", "condo", "condos", "parking", "private"),
 }
 LEAK_ALLOW = {"ja": ("商店街", "名店街"), "en": ("shopping street",)}
+# The LEAK_WORDS that mark a home (or private land): a landmark carrying one
+# is held to _public_home, where a Wikipedia article is no exemption.
+HOME_WORDS = {
+    "ja": ("マンション", "ハイツ", "レジデンス", "コーポ", "アパート", "メゾン", "社宅", "私有地"),
+    "en": ("apartment", "apartments", "apts", "condominium", "condo", "condos", "private"),
+}
+
+
+def leak_word(names, local):
+    """The first LEAK_WORD of English or a local language in `names`, after
+    LEAK_ALLOW compounds are removed; None when there is none."""
+    low = " | ".join(names).lower()
+    for code in dict.fromkeys(["en", *local]):
+        for allow in LEAK_ALLOW.get(code, ()):
+            low = low.replace(allow, " ")
+        latin = set(re.findall(r"[a-z]+", low))
+        for word in LEAK_WORDS.get(code, ()):
+            if (word in latin) if word.isascii() else (word in low):
+                return word
+    return None
 
 
 def leak_hits(index, local):
-    """[(row name, word)] for every index row whose names carry a LEAK_WORD of
-    English or a local language, after LEAK_ALLOW compounds are removed."""
-    codes = list(dict.fromkeys(["en", *local]))
+    """[(row name, word)] for every index row whose names carry a LEAK_WORD."""
     out = []
     for r in index["rows"]:
-        text = " | ".join([r[3]] + (r[4].split("|") if r[4] else []))
-        low = text.lower()
-        for code in codes:
-            for allow in LEAK_ALLOW.get(code, ()):
-                low = low.replace(allow, " ")
-            latin = set(re.findall(r"[a-z]+", low))
-            for word in LEAK_WORDS.get(code, ()):
-                if (word in latin) if word.isascii() else (word in low):
-                    out.append((r[3], word))
-                    break
+        word = leak_word([r[3]] + (r[4].split("|") if r[4] else []), local)
+        if word:
+            out.append((r[3], word))
     return sorted(set(out))
 
 
@@ -247,10 +284,22 @@ COMMERCIAL_KEYS = ("shop", "office", "craft", "brand", "cuisine")
 # (operator:type=cooperative) and is a place; a private operator is a business.
 COMMERCIAL_VALUES = {
     "operator:type": {"private", "business", "commercial"},
+    # casino and stock_exchange: Sydney's The Star and the ASX, notable but
+    # businesses as a bank is (2026-10-08).
     "amenity": {"restaurant", "cafe", "bar", "pub", "fast_food", "bank", "pharmacy",
-                "fuel", "parking", "car_rental", "food_court"},
+                "fuel", "parking", "car_rental", "food_court", "casino", "stock_exchange"},
     "tourism": {"hotel", "guest_house", "hostel", "motel", "apartment", "chalet"},
+    # A yoga studio also tagged a place of worship (Seattle, 2026-10-08).
+    "leisure": {"fitness_centre"},
 }
+# A public_transport=station tagged with one of OTHER_MODES and neither a
+# railway tag nor one of RAIL_MODES is a bus or ferry terminal. One with no
+# mode at all stays: Kyoto's 鞍馬駅 and Seattle's South Bellevue carry none.
+RAIL_MODES = ("train", "subway", "light_rail", "tram", "monorail", "funicular")
+OTHER_MODES = ("bus", "ferry", "trolleybus", "coach")
+# A commercial building is a business unless notable: Sydney's numbered
+# "Bay 0" to "Bay 15", historic=building on building=commercial (2026-10-08).
+COMMERCIAL_BUILDINGS = {"commercial", "retail", "office"}
 # historic=* values that are clutter at a search box (wayside shrines and
 # stones number in the hundreds and are named after their saint or deity).
 SKIP_HISTORIC = {"wayside_shrine", "wayside_cross", "boundary_stone", "milestone",
@@ -261,10 +310,37 @@ SKIP_HISTORIC = {"wayside_shrine", "wayside_cross", "boundary_stone", "milestone
 # another name. Named markets likewise (amenity=marketplace; owner,
 # 2026-10-07: notable only), since an OSM marketplace can be one company's
 # market hall. Places of worship, parks, gardens, peaks, rivers and historic
-# sites need none.
-NOTABLE_ONLY = ("tourism", "amenity")
+# sites need none. Airports likewise (aeroway), so a private airstrip stays
+# out (2026-10-08).
+NOTABLE_ONLY = ("tourism", "amenity", "aeroway")
 RESIDENTIAL_BUILDINGS = {"house", "residential", "apartments", "detached", "dormitory",
                          "semidetached_house", "terrace", "bungalow"}
+# A historic building named as a home is one ("Faulkner House", "Walker
+# Residence"; Vancouver, 2026-10-08), unless its building tag says otherwise.
+HOME_NAME = re.compile(r"\b(house|residence|cottage|mansion|farmhouse|homestead)$", re.I)
+
+
+def _home(tags, names):
+    """True for a home: residential land, a house or an apartment building,
+    private access, or a historic house."""
+    if tags.get("historic") == "district":
+        return False      # an area of homes is a place (Chicago's Prairie Avenue District)
+    return (tags.get("landuse") == "residential" or tags.get("building") in RESIDENTIAL_BUILDINGS
+            or tags.get("access") == "private" or tags.get("historic") == "house"
+            or tags.get("house") == "yes"
+            # By name only where the building tag says no more: Kyoto's
+            # "Kwasan Observatory Solar House" is building=university.
+            or (tags.get("historic") and tags.get("building") in (None, "yes")
+                and any(HOME_NAME.search(n) for n in names)))
+
+
+def _public_home(tags):
+    """A home a visitor may look for: open as a museum or an attraction. A
+    heritage designation, a wikidata item or a Wikipedia article is not:
+    Canada's Register of Historic Places reached wikidata in bulk, and
+    Chicago's landmark apartment buildings have articles, and each is still
+    somebody's home (2026-10-08)."""
+    return bool(tags.get("tourism") or tags.get("museum"))
 # Never place=isolated_dwelling or farm: a single home (Kyoto's one was an
 # apartment building, 2026-10-07).
 PLACE_VALUES = {"city", "borough", "suburb", "quarter", "neighbourhood", "village",
@@ -272,6 +348,14 @@ PLACE_VALUES = {"city", "borough", "suburb", "quarter", "neighbourhood", "villag
 # A street-pair crossing seen at several nodes counts as one place unless its
 # nodes lie further apart than this (a long pair of streets crossing twice).
 CROSSING_MERGE_M = 250
+# A place or landmark of the same name this near another is the same one
+# when either is an area: a suburb's node and its area's center lie up to a
+# few hundred metres apart (Sydney's Redfern, The Rocks; 2026-10-08). Two
+# nodes are two places: Kyoto has many same-named 町 close together.
+NEAR_DUP_M = {"place": 1500, "landmark": 300}
+# Degrees around the street nodes' extent within which a tagged place counts
+# as the city's (about 500 m).
+EXTENT_PAD = 0.005
 
 
 def _names(tags, name_tags):
@@ -311,6 +395,9 @@ def _r(x):
 def _commercial(tags):
     if any(k in tags for k in COMMERCIAL_KEYS):
         return True
+    if tags.get("building") in COMMERCIAL_BUILDINGS and not (
+            tags.get("wikidata") or tags.get("wikipedia") or tags.get("heritage")):
+        return True
     return any(tags.get(k) in vals for k, vals in COMMERCIAL_VALUES.items())
 
 
@@ -321,9 +408,11 @@ def _point(el):
     return (c["lat"], c["lon"]) if c else None
 
 
-def build(elements, *, city, retrieved, local, fold=None):
+def build(elements, *, city, retrieved, local, fold=None, dropped=()):
     """Return (index dict, report dict) from one place cache's elements.
-    `local`: the city's local language codes (config.PLACE_LANGUAGES)."""
+    `local`: the city's local language codes (config.PLACE_LANGUAGES).
+    `dropped`: OSM objects ("way/504652702") a reading by eye found to be a
+    business or a home that no rule catches (config.PLACE_DROPPED)."""
     name_tags = _name_tags(local)
     nodes = {}
     ways = []
@@ -334,20 +423,33 @@ def build(elements, *, city, retrieved, local, fold=None):
         elif e["type"] == "way" and "nodes" in e:
             ways.append(e)
         else:
+            if f"{e['type']}/{e['id']}" in dropped:
+                continue
             tagged.append(e)
             if e["type"] == "node":
                 nodes.setdefault(e["id"], (e["lat"], e["lon"]))
 
     report = defaultdict(int)
     rows = []
+    # The extent of the city's own street nodes, a little wider: an area that
+    # only touches the city comes with its center outside it (Sydney's
+    # "Sydney" place area at 150.80 E, its "Inner West"; 2026-10-08).
+    lats = [p[0] for p in nodes.values()]
+    lons = [p[1] for p in nodes.values()]
+    extent = (min(lats) - EXTENT_PAD, min(lons) - EXTENT_PAD,
+              max(lats) + EXTENT_PAD, max(lons) + EXTENT_PAD) if lats else None
     seen_key = set()
+    seen_near = defaultdict(list)             # (kind, name) -> (point, is_area)
 
-    def add(kind, pt, names, langs, bbox=0):
+    def add(kind, pt, names, langs, bbox=0, area=False):
         key = (kind, names[0], round(pt[0], 3), round(pt[1], 3))
-        if key in seen_key:
+        near = NEAR_DUP_M.get(kind)
+        if key in seen_key or (near and any(
+                (area or a) and _dist_m(p, pt) <= near for p, a in seen_near[(kind, names[0])])):
             report[f"{kind}_duplicate"] += 1
             return
         seen_key.add(key)
+        seen_near[(kind, names[0])].append((pt, area))
         # The row's languages ride along as a 7th field until coverage is counted.
         rows.append([KINDS.index(kind), _r(pt[0]), _r(pt[1]), names[0], "|".join(names[1:]), bbox,
                      set(langs)])
@@ -370,6 +472,16 @@ def build(elements, *, city, retrieved, local, fold=None):
                 and not _reads_as_way(names, local)):
             report["minor_way_dropped_not_a_way_name"] += 1
             continue
+        # A road named for private or parking access, or a business, is no
+        # street to search; a name of that kind beside a real one is dropped
+        # alone (Vancouver's "26 Avenue", alt_name "Private Access", 2026-10-08).
+        kept = [n for n in names if not leak_word([n], local)]
+        if names and not kept:
+            report["street_dropped_leak_word"] += 1
+            continue
+        if len(kept) < len(names):
+            report["street_name_dropped_leak_word"] += 1
+        names = kept
         if not names:
             continue
         pts = [nodes[n] for n in w["nodes"] if n in nodes]
@@ -449,12 +561,36 @@ def build(elements, *, city, retrieved, local, fold=None):
         pt = _point(e)
         if not names or not pt:
             continue
+        if extent and not (extent[0] <= pt[0] <= extent[2] and extent[1] <= pt[1] <= extent[3]):
+            report["outside_area"] += 1
+            continue
         langs = _langs(t, local)
+        if (t.get("public_transport") == "station" and not t.get("railway")
+                and not any(t.get(k) == "yes" for k in RAIL_MODES)
+                and any(t.get(k) == "yes" for k in OTHER_MODES)):
+            # A bus or ferry terminal, or a tour boat's dock ("Wendella
+            # Tours - Michigan Avenue", Chicago, 2026-10-08): no station.
+            report["station_skipped_not_rail"] += 1
+            continue
         if t.get("railway") in ("station", "halt", "tram_stop") or t.get("public_transport") == "station":
             add("station", pt, names, langs)
         elif t.get("place") in PLACE_VALUES:
-            add("place", pt, names, langs)
+            # A place drawn as an area on residential land is an estate, its
+            # homes' own name ("Kentbrook Apartments", Seattle: 85 of the
+            # place areas, 2026-10-08); a place named for a business or a
+            # home is one, as a landmark is.
+            if e["type"] != "node" and (t.get("landuse") == "residential" or t.get("residential")):
+                report["place_dropped_estate"] += 1
+                continue
+            if leak_word(names, local):
+                report["place_dropped_leak_word"] += 1
+                continue
+            add("place", pt, names, langs, area=e["type"] != "node")
         elif e["type"] == "node" and (t.get("highway") == "traffic_signals" or "junction" in t):
+            # A signal's number is no name (Sydney's "5065", 2026-10-08).
+            if not any(c.isalpha() for c in names[0]):
+                report["junction_numbered"] += 1
+                continue
             # A signed junction (四条烏丸): the streets through it as aliases,
             # and their shared languages with its own.
             via = sorted(node_streets.get(e["id"], ()))
@@ -476,13 +612,12 @@ def build(elements, *, city, retrieved, local, fold=None):
                     and not (t.get("wikidata") or t.get("wikipedia"))):
                 report["landmark_dropped_not_notable"] += 1
                 continue
-            # A home is never a landmark: residential land, a house or an
-            # apartment building, or private access, unless notable (a former
-            # residence that is now a museum). Kyoto's condominium grounds were
-            # tagged leisure=park on landuse=residential (2026-10-07).
-            if ((t.get("landuse") == "residential" or t.get("building") in RESIDENTIAL_BUILDINGS
-                    or t.get("access") == "private")
-                    and not (t.get("wikidata") or t.get("wikipedia") or t.get("heritage"))):
+            # A home is never a landmark (_home), unless public (_public_home:
+            # a former residence that is now a museum). Kyoto's condominium
+            # grounds were tagged leisure=park on landuse=residential
+            # (2026-10-07); Vancouver's register of heritage houses carries the
+            # names of the families who built them (2026-10-08).
+            if _home(t, names) and not _public_home(t):
                 report["landmark_dropped_residential"] += 1
                 continue
             # A garden is often a private one at a house, and may carry a
@@ -494,6 +629,21 @@ def build(elements, *, city, retrieved, local, fold=None):
                     or not (t.get("wikidata") or t.get("wikipedia") or t.get("heritage"))):
                 report["landmark_dropped_garden"] += 1
                 continue
+            # A landmark named for a business or a home is one, unless public
+            # in _public_home's sense or a ruin (then check_place_search.py E
+            # asks for a review): Sydney's "Serviced Apartments Park", a
+            # leisure=park; Chicago's landmark apartment buildings, homes
+            # whatever their designation; Kyoto's 愛宕山ホテル跡, a hotel's
+            # ruins, stays (2026-10-08).
+            # A business word may pass on a Wikipedia article (a landmark
+            # building, reviewed by name); a home word may not.
+            word = leak_word(names, local)
+            home_word = word in {w for c in (["en", *local]) for w in HOME_WORDS.get(c, ())}
+            if word and not (
+                    _public_home(t) or t.get("historic") in ("ruins", "archaeological_site")
+                    or (t.get("wikipedia") and not home_word)):
+                report["landmark_dropped_leak_word"] += 1
+                continue
             if t.get("waterway"):
                 # A river comes as one row per way; merged by name below.
                 rivers[names[0]].append((pt, names, langs))
@@ -502,7 +652,7 @@ def build(elements, *, city, retrieved, local, fold=None):
                     t.get(k) for k in ("tourism", "amenity", "leisure", "wikidata")):
                 report["landmark_dropped_minor_historic"] += 1
                 continue
-            add("landmark", pt, names, langs)
+            add("landmark", pt, names, langs, area=e["type"] != "node")
 
     for segs in rivers.values():
         pts = [p for p, _, _ in segs]
