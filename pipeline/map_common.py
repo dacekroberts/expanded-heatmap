@@ -191,6 +191,11 @@ _THEME_TOGGLE_TEMPLATE = """
         document.body.classList.toggle('dark-base', dark);
         btn.setAttribute('aria-pressed', dark ? 'true' : 'false');
         btn.textContent = dark ? '\\u2600 Light mode' : '\\u263E Dark mode';
+        // The theme button is 30 px tall in light mode and 34 px in dark, so
+        // the open legend's clearance is re-measured on every switch (review
+        // lane 2, L2-1: light to dark left 94 px where 98 was needed). The
+        // first call comes before `actions` is set; the load path measures then.
+        if (actions) syncClear();
     }
 @@AMBIENT_JS@@
     // A remembered click wins; otherwise follow the surrounding page, so a map
