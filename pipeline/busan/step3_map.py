@@ -14,6 +14,7 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline import place_index  # noqa: E402
 from pipeline.map_common import load_osm_line_shapes, render_heatmap  # noqa: E402
 from pipeline.busan import config  # noqa: E402
 from pipeline.busan.step1_stations import boundary_polygon  # noqa: E402
@@ -42,6 +43,9 @@ def main():
         # Trade names are Korean; this orders the Korean faces first
         # (theme.font_stack) and render_heatmap raises without it.
         lang="ko",
+        # Place search (sample batch 2b, 2026-10-08): the index step2b_place_index.py
+        # writes, served from the app's static folder under its content hash.
+        place_index_url=place_index.index_url("busan"),
     )
 
 

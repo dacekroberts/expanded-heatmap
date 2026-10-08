@@ -14,6 +14,7 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline import place_index  # noqa: E402
 from pipeline.map_common import load_osm_line_shapes, render_heatmap  # noqa: E402
 from pipeline.seoul import config  # noqa: E402
 from pipeline.seoul.step1_stations import boundary_polygon  # noqa: E402
@@ -47,6 +48,9 @@ def main():
         # phone, but the cause was WebKit refusing any single literal over
         # ~110k elements, which the station-area layer alone exceeded; the
         # JSON.parse data fixed that, and the full map loads on the phone.
+        # Place search (sample batch 2b, 2026-10-08): the index step2b_place_index.py
+        # writes, served from the app's static folder under its content hash.
+        place_index_url=place_index.index_url("seoul"),
     )
 
 

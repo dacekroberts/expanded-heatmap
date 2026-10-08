@@ -294,6 +294,10 @@ PLACE_FOLD = None
 PLACE_REVIEWED = {
     "Musée Cantini": "a city art museum (tourism=museum) in a 17th-century town mansion; "
                      "its alt_name is the mansion's, 'Hôtel de la Compagnie du Cap Nègre'",
+    "Place de l'Hôtel des Postes": "a public street named for a building or institution on it, not a business (batch 2b, _named_street)",
+    "Rue de Salon": "a public street named for a building or institution on it, not a business (batch 2b, _named_street)",
+    "Rue de l'Hotel-Dieu": "a public street named for a building or institution on it, not a business (batch 2b, _named_street)",
+    "Rue de la Clinique": "a public street named for a building or institution on it, not a business (batch 2b, _named_street)",
 }
 # OSM objects a reading by eye found to be a business or a home that no rule
 # in place_index.py catches, each with why (place_index.build, `dropped`).

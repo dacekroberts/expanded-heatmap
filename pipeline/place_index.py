@@ -342,22 +342,11 @@ def leak_word(names, local):
 
 
 def leak_hits(index, local):
-    """[(row name, word)] for every index row whose names carry a LEAK_WORD,
-    except a street whose names all read as a street (_named_street: Hong
-    Kong's Clinic Road, Marseille's Rue de la Clinique; batch 2b, 2026-10-08)
-    and a signed junction, which is named for what stands at it: Seoul's
-    traffic signals read "X아파트앞사거리" (the crossroads in front of X
-    Apartments) and "르네상스호텔사거리" (40 of them, 2026-10-08), as
-    Prague's tram stop "Hotel Golf" was reviewed by name. The junction is a
-    public road feature wherever its name came from."""
+    """[(row name, word)] for every index row whose names carry a LEAK_WORD."""
     out = []
-    street, junction = KINDS.index("street"), KINDS.index("junction")
     for r in index["rows"]:
-        if r[0] == junction:
-            continue
-        names = [r[3]] + (r[4].split("|") if r[4] else [])
-        word = leak_word(names, local)
-        if word and not (r[0] == street and all(_named_street(n, local) for n in names)):
+        word = leak_word([r[3]] + (r[4].split("|") if r[4] else []), local)
+        if word:
             out.append((r[3], word))
     return sorted(set(out))
 
@@ -443,13 +432,13 @@ WAY_WORDS = {
            "ロード", "ストリート", "トンネル", "はし", "ばし", "みち", "さか", "ざか", "径"),
     "en": ("street", "road", "avenue", "lane", "way", "walk", "path", "trail", "alley", "bridge",
            "steps", "stairs", "boulevard", "promenade", "passage", "plaza", "row", "greenway",
-           "tunnel", "footpath", "towpath",
-           # Hong Kong's terraces and closes showed these missing (batch 2b,
-           # 2026-10-08); measured on every built index first: Seattle gained
-           # 78 named minor ways (courts, drives), Chicago 84, Vancouver 85,
-           # Sydney 23, Montréal 4, Hong Kong 33, each read as a street.
-           "drive", "close", "court", "crescent", "terrace", "parade", "esplanade", "quay",
-           "circuit", "mews", "arcade", "grove"),
+           "tunnel", "footpath", "towpath"),
+    # NOT here (batch 2b audit, 2026-10-08): drive, court, crescent, close,
+    # mews and the like. Added for Hong Kong's terraces, they admitted 155
+    # named minor ways in Seattle and 199 in Vancouver, about 40% of them
+    # access=private driveways of housing complexes ("Chinook Court",
+    # "Marlin Quay"), and Sydney's shopping arcades. Hong Kong's terraces are
+    # found by their Chinese names (臺, 台).
     # Batch 2a (2026-10-08), checked against each city's named minor ways.
     "fr": ("rue", "avenue", "boulevard", "place", "quai", "allée", "chemin", "impasse", "passage",
            "pont", "passerelle", "cours", "montée", "escalier", "escaliers", "promenade", "square",
@@ -493,7 +482,9 @@ WAY_WORDS = {
     # descent, road, path, embankment; the word stands alone, after the name
     # in the genitive (რუსთაველის გამზირი).
     "ka": ("ქუჩა", "გამზირი", "მოედანი", "ჩიხი", "შესახვევი", "ხიდი", "გზატკეცილი", "აღმართი",
-           "დაღმართი", "გზა", "ბილიკი", "სანაპირო", "გასასვლელი", "ქ."),
+           "დაღმართი", "გზა", "ბილიკი", "სანაპირო", "გასასვლელი", "ქ.",
+           # Stairs (Tbilisi's named minor ways, 2026-10-08).
+           "კიბე", "კიბეები"),
 }
 # Languages that write a way word inside a compound ("Nieuwstraat",
 # "Kerkpad"; Korean 세종대로): _reads_as_way matches it as a word's ending there.
@@ -723,14 +714,27 @@ def _named_street(name, local):
     ws = re.findall(r"\w+", low)
     if not ws:
         return False
+    # The way word in the name's own position: last in English and Chinese
+    # ("Clinic Road", 保健路), first where the street word leads (Rue du
+    # Magasin, Carrer de l'Hostal), a whole word in Korean. A Korean ending
+    # alone is too loose: 상가진입로 (a shopping arcade's entry road) ends
+    # in 로; English "Road to 113/114 Parking Lot" leads with it (batch 2b
+    # audit, 2026-10-08).
     for code in dict.fromkeys(["en", *local]):
         for w in WAY_WORDS.get(code, ()):
-            if _CJK_WORD.search(w):
+            if code in SUFFIX_WAY_LANGUAGES:
+                if ws[-1] == w:
+                    return True
+            elif _CJK_WORD.search(w):
                 if low.endswith(w):
                     return True
-            elif ws[0] == w or ws[-1] == w or (code in SUFFIX_WAY_LANGUAGES and ws[-1].endswith(w)):
+            elif ws[-1] == w or (code in WAY_WORD_LEADS and ws[0] == w):
                 return True
     return False
+
+
+# Languages whose street word leads the name (_named_street).
+WAY_WORD_LEADS = {"fr", "ca", "es", "cs"}
 
 
 def _reads_as_way(names, local):
@@ -882,8 +886,13 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         # A road named for private or parking access, or a business, is no
         # street to search; a name of that kind beside a real one is dropped
         # alone (Vancouver's "26 Avenue", alt_name "Private Access", 2026-10-08).
-        # One that reads as a street keeps its name (_named_street).
-        kept = [n for n in names if _named_street(n, local)]
+        # One that reads as a street keeps its name (_named_street), on a
+        # street of residential class or above only: a minor way named for a
+        # business stays out (Seoul's "힐스테이트 상가진입로", a shopping
+        # arcade's entry road, and "Road to 113/114 Parking Lot"; batch 2b
+        # audit, 2026-10-08).
+        minor = t.get("highway") in MINOR_HIGHWAYS
+        kept = [n for n in names if (not leak_word([n], local) if minor else _named_street(n, local))]
         if names and not kept:
             report["street_dropped_leak_word"] += 1
             continue
@@ -979,9 +988,12 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             # Tours - Michigan Avenue", Chicago, 2026-10-08): no station.
             report["station_skipped_not_rail"] += 1
             continue
-        if t.get("railway") in ("construction", "proposed", "disused", "abandoned", "razed"):
+        if (t.get("public_transport") == "station"
+                and t.get("railway") in ("construction", "proposed", "disused", "abandoned", "razed")):
             # Busan's seven light-rail stations under construction carry
-            # public_transport=station already (2026-10-08): not yet a station.
+            # public_transport=station already (2026-10-08): not yet a
+            # station. Stations only: Prague's historic horse railway
+            # (railway=abandoned) is a landmark.
             report["station_skipped_not_open"] += 1
             continue
         if t.get("emergency") == "designated" and (t.get("railway") or t.get("public_transport")):

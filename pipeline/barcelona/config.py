@@ -341,6 +341,8 @@ PLACE_REVIEWED = {
         "Gaudí's gate at the university's pharmacy faculty, a monument ('farmàcia' is the faculty)",
     "Torre de les aigües de l'antiga fàbrica de Catalana de Gas":
         "the water tower of a former gas works, an attraction (Wikipedia; 'company' is in its English name)",
+    "Carrer de l'Hostal d'en Sol": "a public street named for a building or institution on it, not a business (batch 2b, _named_street)",
+    "Carrer de l'Hostal de Sant Antoni": "a public street named for a building or institution on it, not a business (batch 2b, _named_street)",
 }
 # OSM objects a reading by eye found to be a business or a home that no rule
 # in place_index.py catches, each with why (place_index.build, `dropped`).

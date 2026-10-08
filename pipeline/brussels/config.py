@@ -236,6 +236,8 @@ PLACE_REVIEWED = {
                     "museum (tourism=museum, ref:whc 1005)",
     "Hôtel de Roest d'Alkemade": "an 18th-century town mansion, a listed heritage "
                                  "attraction (tourism=attraction, wikidata Q42416686)",
+    "Rue de l'Hôtel des Monnaies - Munthofstraat": "a public street named for a building or institution on it, not a business (batch 2b, _named_street)",
+    "Rue du Magasin - Pakhuisstraat": "a public street named for a building or institution on it, not a business (batch 2b, _named_street)",
 }
 # OSM objects a reading by eye found to be a business or a home that no rule
 # in place_index.py catches, each with why (place_index.build, `dropped`).

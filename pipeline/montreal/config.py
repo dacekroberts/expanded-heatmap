@@ -351,7 +351,9 @@ PLACE_LANGUAGES = ("fr",)
 PLACE_FOLD = None
 # Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
 # places, each with why; scripts/check_place_search.py fails on any other.
-PLACE_REVIEWED = {}
+PLACE_REVIEWED = {
+    "Avenue De l'Hotel-de-Ville": "a public street named for a building or institution on it, not a business (batch 2b, _named_street)",
+}
 # OSM objects a reading by eye found to be a business or a home that no rule
 # in place_index.py catches, each with why (place_index.build, `dropped`).
 PLACE_DROPPED = {}

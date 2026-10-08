@@ -202,3 +202,26 @@ TBILISI_BBOX = {
     "lon_min": 44.55,
     "lon_max": 45.15,
 }
+
+# ---------------------------------------------------------------------------
+# Place search (sample batch 2b, 2026-10-08): pipeline/place_index.py builds
+# app/static/places/tbilisi.json from the caches place_index_fetch.py writes.
+# The search area is the map's: Tbilisi's own relation 1996871 (თბილისი, admin_level 4, ISO3166-2
+# GE-TB; the one step 1 resolves by OSM_BOUNDARY_NAME_EN), confirmed by id 2026-10-08.
+# Overpass area id = 3600000000 + relation id.
+PLACE_AREA = "(id:3601996871)"
+# NEW file names: data/ is shared by every worktree.
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-08.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-08.json"
+# The local language of OSM's names here: Georgian.
+PLACE_LANGUAGES = ("ka",)
+PLACE_FOLD = None
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+PLACE_REVIEWED = {
+    "ტიციან ტაბიძის ბინა-მემორიალი": "the poet Titsian Tabidze's memorial flat, a house museum "
+                                     "(museum=person; name:en Titsian Tabidze House Museum)",
+}
+# OSM objects a reading by eye found to be a business or a home that no rule
+# in place_index.py catches, each with why (place_index.build, `dropped`).
+PLACE_DROPPED = {}
