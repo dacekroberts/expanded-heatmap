@@ -9,6 +9,105 @@ app is its own project, this repo keeps the basemap switch, its hosting and an
 export contract (owner, relayed by Cleanup). Nothing here is landed, pushed
 or published; every proposal waits for the owner.
 
+### 2026-10-07 - The open basemap works offline; three licence reads; repeat visits favour it; "Business" and "Travel" (owner)
+
+- **Owner decisions, 2026-10-07.** The switch is B (Standard default), D (Open
+  only) is out for good, and C (Open default) is a later option for phones
+  if the open basemap earns it. A focused pilot goes ahead (3-5 cities,
+  self-hosted assets, a travel style, pack builds, R2, real-phone figures),
+  kept off the live site. The names are **"Business"** and **"Travel"**.
+  The travel view is meant to HIDE the business layers, so it is a map MODE,
+  not only a basemap; whether that mode belongs on this site at all, or only
+  in the app (with the switch declared out of this site's scope), is open
+  for the owner, and the names on this site wait on it.
+- **Offline, measured.** A MapLibre-only page (as the app would build it)
+  with every library, font, sprite and pack served locally, and every
+  request to any other host failed as "internet disconnected": Mendoza
+  (Spanish labels; English on the dark flavor) and a 1 km Tokyo patch
+  (2.56 MB; Japanese and English labels), each zoomed to 10, 12, 15 and 17
+  and panned. **No request left the machine, no errors, every step drew**,
+  including zoom 17 beyond the pack's 15. Three findings for whoever builds
+  on it:
+  - The three Noto fonts the style uses (11.1 MB in all; sprites 0.15 MB)
+    have no Han or Hangul glyphs (those range files are empty) and only
+    Regular has kana. MapLibre drew the Japanese from the device's own fonts
+    (its `localIdeographFontFamily`), so CJK cities depend on the device;
+    which glyph forms a reader sees then follows the device's fonts (the
+    cjk-text skill's Han-unification problem), untested on real phones.
+  - With `lang: "en"`, the default style already labels **English over the
+    local script** ("MARUNOUCHI 1" over 丸の内一丁目), which is what the app
+    wants.
+  - MapLibre's attribution control showed **nothing**, although the pack's
+    metadata carries `© OpenStreetMap`: the credit must be set explicitly
+    (the site's outer layer already does).
+- **Repeat visits, measured** (headless Edge, 375 x 812, the mobile profile,
+  medians of 3). "Warm" means an earlier city page cached the libraries,
+  fonts and sprites but not this city's map data:
+
+  | | Cold: page loaded / basemap drawn | Warm: page loaded / basemap drawn | Bytes cold / warm | JS heap | Browser memory |
+  |---|---|---|---|---|---|
+  | Standard only (today) | 4.36 / 4.42 s | 3.17 / 3.25 s | 635 / 457 KB | 6.1 MB | 551 MB |
+  | Switch, reader picks Open (B) | 4.38 / 4.49 s, then 5.07 s to Open | 3.17 / 3.24 s, then 1.42 s to Open | 1,237 / 589 KB | 12.7 MB | 643 MB cold |
+  | Open by default (C) | 5.50 / 7.94 s | **1.94 / 3.12 s** | 1,053 / **407 KB** | 10.8 MB | 645 MB |
+
+  On a repeat visit an Open default is drawn sooner (3.12 s against 3.25 s)
+  on fewer bytes (407 against 457 KB) than today's map; on a first visit it
+  costs 3.5 s and 418 KB more, almost all of it the libraries. Its price on
+  every visit is memory: about +4.8 MB of JS heap and +95 MB across the
+  browser. So C on phones is plausible once the libraries are self-hosted
+  with long cache lifetimes, subject to a real-phone memory check.
+- **Licence reads (licence-read agent, one source each), all PERMITTED WITH
+  CONDITIONS for both the site and an offline app:**
+  - **Protomaps basemap, builds and style.** Hosting extracts on our own
+    storage is what Protomaps asks for ("copy the tileset to your own Cloud
+    Storage"), and offline use is supported. Credit `© OpenStreetMap` in the
+    map corner, linked to openstreetmap.org/copyright (met). **Correction to
+    the earlier note "OSM credit only":** the build's `landcover` layer
+    (zooms 0-7, Daylight from ESA WorldCover) is CC BY 4.0 and, if shown,
+    needs ESA's credit, "© ESA WorldCover project 2020 / Contains modified
+    Copernicus Sentinel data (2020) processed by ESA WorldCover
+    consortium"; the site's maps set no minimum zoom, so a reader can reach
+    it. The cheaper fix is a style without the landcover layer (or a minimum
+    zoom of 8 on the Open layer). Builds are kept only a week (plus one per
+    patch version), so packs must be copied to our storage, never pointed at
+    build.protomaps.com. A self-hosted or bundled `basemaps.js` must carry
+    its BSD-3 notice (and the Mapzen MIT notice in the same LICENSE.md). A
+    modified style or tileset may not be called "Protomaps". **Owner
+    decisions:** protomaps.com's Terms of Use forbid "automated means to
+    access the Site" without written permission and carry an open-ended
+    indemnity, while Protomaps' own guide instructs scripted `pmtiles
+    extract` against the build host; a one-line email to
+    support@protomaps.com would settle it before a scheduled pack build.
+    The same Terms forbid using "location data from the Site" for maps
+    that "provide directions", which matters only if the app ever routes.
+  - **Fonts and sprites (basemaps-assets).** Noto fonts under the SIL OFL
+    1.1, no Reserved Font Names; the converted glyph files are a Modified
+    Version, which is allowed. Ship `OFL.txt` (with "Copyright 2022 The Noto
+    Project Authors") beside the fonts, and the MIT notice ("Copyright (c)
+    2017 Mapzen", also given as "Mapzen, Linux Foundation") beside the
+    sprites; in an app, both on a licences screen. Recommended, an owner
+    call: also carry "Noto is a trademark of Google LLC", which the glyph
+    format drops.
+  - **ODbL for packs and the export.** The rendered site map is a Produced
+    Work. OSMF's guidance does not settle whether **vector tile files** are
+    a Produced Work or a database; recommended to treat the downloadable
+    packs as a Derivative Database, which costs little: convey them only
+    under ODbL with the licence named in the pack metadata and a README,
+    keep the existing notices, and make a real, findable free download
+    offer (ODbL 4.6; an unmodified extract offered as itself satisfies it).
+    **The app may not encrypt or restrict the packs** (4.7). The JSON
+    export is a Derivative Database (substantial, repeated) under ODbL; its
+    non-OSM parts stay outside share-alike only while each data TYPE is
+    all-OSM or all-non-OSM, and "regional cut" means at least a country in
+    OSMF's guideline: an owner decision whether per-city purity is enough or
+    each type stays single-source per country. A feed that forbids
+    modification (LA Metro) could not go in a mixed file. Attribution: the
+    site's corner credit already meets the 2021 guideline; an app may use a
+    splash screen or a corner credit, and an info button only after the
+    credit has been shown.
+- **Not done:** the real-iPhone check, self-hosting, the travel style, and
+  the landcover decision; the pilot carries them.
+
 ### 2026-10-07 - The app export contract: one versioned file per city, read-only for the app project (proposal, owner to decide)
 
 - **Proposal, not code.** The travel app is its own project and never edits
