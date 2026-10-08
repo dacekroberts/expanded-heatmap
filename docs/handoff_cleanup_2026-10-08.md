@@ -28,7 +28,19 @@ items are done or moved into PLAN.
     "block attempts to delete the worktree until the changes have landed";
     this covers cleanup-sweep's retire-worktrees scope). After the landing,
     unlink its `data/` junction alone, then remove it.
-  - `epic-neumann-5aa0a6` (open basemap switch and app groundwork).
+  - `epic-neumann-5aa0a6` (open basemap switch and app groundwork). Its
+    `data/` is a REAL folder, not a junction: `data/_basemap_build` (4,969
+    files, 4.34 GB) and `data/_heavy_jobs_history.json` existed only there
+    (`check_worktree_data.py`, 2026-10-08); its session was asked to copy
+    them to the main checkout (no-clobber) until the check passes.
+  - **Permanent names (owner, 2026-10-08):** with no session inside and
+    everything committed, `git worktree move` the pilots to
+    `.claude/worktrees/place-search` (between batch 2b and batch 3) and
+    `.claude/worktrees/basemap` (after the copy passes), and `git branch -m`
+    to `place-search` and `basemap`. Then update every handoff, memory note,
+    batch prompt and `docs/session_roles.md`'s table naming the old ones. A
+    move keeps the branch, files and junctions; it is not a removal, so the
+    place-search hold still applies to the new path.
   - The review lanes and every build worktree were removed on 2026-10-08
     after the owner retired their sessions; `data/_review/lane-1..4/` are
     kept.
