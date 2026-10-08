@@ -26,14 +26,20 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   - Phase 2 Japanese cities (East-2, Kansai-2, Regional-2) and Cluj-Napoca,
     on the owner's go (Cluj-Napoca waits on call 215, the placement bar).
   - Place search, if the Kyoto pilot reports well.
-  - Follow-ups: Ostrava's Tram 14 label 2 px under the button row at 854 (the
-    button row is not an obstacle in `_layout_labels`); Osaka's Nagahori,
-    JR Yumesaki and Nankai Shiomibashi labels overlapping at 375; a full UK
-    line-colour search (Piccadilly can be blue again); about 25 older
-    notices that write the day first; about 30 configs still claiming "45
-    from every pin" from before olive and violet; East-1's drafts "ten"
-    blank names to correct at the fold; caterers that also name a counter
-    form (Fukushima's 161), the shared FORM_RULES question.
+  - **After the reset, one label batch:** Ostrava's Tram 14 label 2.1 px
+    under the button row at 854 (measured 2026-10-08: the line's tip sits at
+    y 37 under the row, bottom 45, boxed in by Tram 1, 2 and 18, so the
+    runtime placer's least-bad spot is under the row; the fix is the row as
+    an obstacle in `_layout_labels`, which moves `_choose_view` on any map
+    with a tip there: measure how many of the 206 reframe first); Osaka's
+    Nagahori, JR Yumesaki and Nankai Shiomibashi labels at 375; the
+    Overview's 343-vs-333 scorer canvas, then Los Angeles (Regional) and
+    Rio de Janeiro (Regional) re-placed.
+  - Follow-ups: a full UK line-colour search (Piccadilly can be blue
+    again); about 25 older notices that write the day first; about 30
+    configs still claiming "45 from every pin" from before olive and
+    violet; caterers that also name a counter form (Fukushima's 161), the
+    shared FORM_RULES question.
   - **Branch `legend-dot-georgia` (19551960, Cleanup's, local), lands at
     review time:** legend dots 10 px that never shrink (the owner's iPhone
     check), Tbilisi in Europe East (DECISIONS, 2026-10-08, both), and the
