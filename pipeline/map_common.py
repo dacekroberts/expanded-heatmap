@@ -3047,6 +3047,10 @@ OPEN_BASEMAP_LIBS = (
 # Glyphs and sprites for the Protomaps style. Its own hosted copy for the
 # prototype; a release self-hosts them beside the packs.
 OPEN_BASEMAP_ASSETS = "https://protomaps.github.io/basemaps-assets"
+# The shared Travel style (pipeline/travel_style.js): one file for the site's
+# Travel view, the full Travel version and transit-globe's reference, so the
+# three never drift apart. Inlined into each OpenBasemap layer.
+TRAVEL_STYLE_JS = Path(__file__).with_name("travel_style.js").read_text(encoding="utf-8")
 
 
 class OpenBasemap(folium.map.Layer):
@@ -3080,6 +3084,7 @@ class OpenBasemap(folium.map.Layer):
                 });
                 return loading;
             }
+            {{ this.travel_style_js }}
             // A zoom range as OSM's tiles give it, registered the way Leaflet's
             // tile layers register theirs (beforeAdd / onRemove): the map takes
             // its maximum zoom only from such layers, and with this one alone
@@ -3107,9 +3112,9 @@ class OpenBasemap(folium.map.Layer):
                                         type: "vector",
                                         url: "pmtiles://" + {{ this.pmtiles_url|tojson }}
                                     }},
-                                    layers: basemaps.layers("protomaps",
+                                    layers: travelStyle(basemaps.layers("protomaps",
                                         basemaps.namedFlavor("light"),
-                                        {lang: {{ this.label_lang|tojson }}})
+                                        {lang: {{ this.label_lang|tojson }}}), {flavor: "light"})
                                 }
                             });
                         }
@@ -3134,6 +3139,7 @@ class OpenBasemap(folium.map.Layer):
         self.label_lang = label_lang
         self.libs = list(OPEN_BASEMAP_LIBS)
         self.assets = OPEN_BASEMAP_ASSETS
+        self.travel_style_js = TRAVEL_STYLE_JS
         self.attribution = OSM_ATTRIBUTION
 
 
