@@ -133,6 +133,12 @@ or published; every proposal waits for the owner.
   OSM credit shown on its own) and `credits` (the lines' own sources in the
   credit corner): Tokyo's reads MLIT's 「国土数値情報（鉄道データ）」 line
   and the OSM credit (English station names). Commit 8ea6d8aa.
+- **Pilots reviewed (owner, 2026-10-08): "the localhost pilots look
+  great."** Two additions are app-only and go in the handoff as such: a cap
+  on how far the map zooms out (the level decided in the app; the pack
+  stops at the stations' extent plus 10 km), and per-line station lists in
+  both directions (north/southbound or east/westbound), which need their
+  own design and data work in the app.
 - **Offline, measured:** the owner allowed this session to fetch the nine
   small files (Leaflet 1.9.3 js, css and two images, maplibre-gl-leaflet
   0.1.4, four licence texts; about 183 KB, `curl -o`, contents never
