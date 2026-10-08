@@ -87,7 +87,7 @@
  "barcelona": {
   "in_ring": 35287,
   "all": 35309,
-  "map_blob": "2c34c6ac813c108e71c5645c332437192bfda89e"
+  "map_blob": "f7d31ddd6dc96ecf3b16003f7b04083c7305994a"
  },
  "dublin": {
   "in_ring": 7411,
@@ -137,7 +137,7 @@
  "prague": {
   "in_ring": 17528,
   "all": 25185,
-  "map_blob": "3c25eb70c5aa63092b0f02273450fd21eb6c88f1"
+  "map_blob": "a2b13bdcbef1c1a14762df6488b27581d1f0af3f"
  },
  "amsterdam": {
   "in_ring": 12648,
@@ -792,7 +792,7 @@
  "brussels": {
   "in_ring": 4762,
   "all": 5069,
-  "map_blob": "2d9e68c77839943df7c87a4768d4e17b2f7669bd"
+  "map_blob": "c386eef83a28e7fa2e49aa6acdef627ff23d31bb"
  },
  "antwerp": {
   "in_ring": 3973,

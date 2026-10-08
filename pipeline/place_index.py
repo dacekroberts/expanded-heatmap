@@ -26,6 +26,7 @@ LICENCE: ODbL 1.0. The index is a Derivative Database of OpenStreetMap (OSMF's
 Substantial guideline: a whole city's streets), published under ODbL; the
 notice travels inside the file (`licence`) and the map shows the credit.
 """
+import difflib
 import hashlib
 import json
 import math
@@ -575,6 +576,26 @@ def _reads_as_way(names, local):
     return False
 
 
+SQUARE_DUP_M = 500
+SQUARE_NEAR_M = 150
+# Abbreviated square words read in full when a square is compared with the
+# streets and squares around it (_square_keys): "nám." is náměstí. The word
+# itself stays: Barcelona's Placeta del Pi and Plaça del Pi are two squares.
+SQUARE_ABBR = {"nam": "namesti"}
+
+
+def _square_keys(names):
+    """Each name folded to its words: accents, case and punctuation gone, a
+    leading abbreviated square word in full."""
+    out = set()
+    for n in names:
+        ws = re.findall(r"[a-z0-9]+", unicodedata.normalize("NFKD", n.lower())
+                        .encode("ascii", "ignore").decode())
+        if ws:
+            out.add(tuple([SQUARE_ABBR.get(ws[0], ws[0])] + ws[1:]))
+    return out
+
+
 def _dist_m(a, b):
     lat = math.radians((a[0] + b[0]) / 2)
     return math.hypot((a[0] - b[0]) * 110540.0, (a[1] - b[1]) * 111320.0 * math.cos(lat))
@@ -633,6 +654,7 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=()):
 
     report = defaultdict(int)
     rows = []
+    square_rows = []                          # place=square landmark rows (the duplicate pass)
     # The extent of the city's own street nodes, a little wider: an area that
     # only touches the city comes with its center outside it (Sydney's
     # "Sydney" place area at 150.80 E, its "Inner West"; 2026-10-08).
@@ -880,7 +902,10 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=()):
                     t.get(k) for k in ("tourism", "amenity", "leisure", "wikidata")):
                 report["landmark_dropped_minor_historic"] += 1
                 continue
+            before = len(rows)
             add("landmark", pt, names, langs, area=e["type"] != "node")
+            if t.get("place") == "square" and len(rows) > before:
+                square_rows.append(rows[-1])
 
     for segs in rivers.values():
         pts = [p for p, _, _ in segs]
@@ -894,6 +919,39 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=()):
             set().union(*(ls for _, _, ls in segs)),
             [_r(s), _r(w_), _r(n_), _r(e)] if len(pts) > 1 else 0)
 
+    # A square already findable under its name is a duplicate (owner,
+    # 2026-10-08: "remove duplicates if we can"): a street or another square
+    # within SQUARE_DUP_M carrying the same name once accents, case and
+    # punctuation are set aside ("nám. Hedviky Vilgusové" is the street
+    # "náměstí Hedviky Vilgusové"), or, within SQUARE_NEAR_M, one spelt almost
+    # alike ("Plaça de Carme Monturiol", "Plaça de Carmen Monturiol"). Only
+    # streets and squares: a statue, station or neighbourhood named like the
+    # square is another thing (Barcelona's statue of Emili Vendrell in his
+    # plaça; Brussels' station Masui by Place Masui).
+    drop = set()
+    street_kind = KINDS.index("street")
+    square_ids = {id(r) for r in square_rows}
+    for sq in square_rows:
+        words = _square_keys([sq[3]] + (sq[4].split("|") if sq[4] else []))
+        keys = {"".join(w) for w in words}
+        for o in rows:
+            if o is sq or id(o) in drop or not (o[0] == street_kind or id(o) in square_ids):
+                continue
+            d = _dist_m((sq[1], sq[2]), (o[1], o[2]))
+            if d > SQUARE_DUP_M:
+                continue
+            owords = _square_keys([o[3]] + (o[4].split("|") if o[4] else []))
+            # Spelt almost alike only under the same first word: Placeta del Pi
+            # and Plaça del Pi are two squares.
+            if keys & {"".join(w) for w in owords} or (d <= SQUARE_NEAR_M and any(
+                    a[0] == b[0] and difflib.SequenceMatcher(None, "".join(a), "".join(b)).ratio() >= 0.9
+                    for a in words for b in owords)):
+                drop.add(id(sq))
+                break
+    if drop:
+        rows[:] = [r for r in rows if id(r) not in drop]
+        report["landmark"] -= len(drop)
+        report["square_dropped_duplicate"] += len(drop)
     rows.sort(key=lambda r: (r[0], r[3]))
     row_langs = [r.pop() for r in rows]
     # Each crossing as [lat, lon, row of street A, row of street B]; the
