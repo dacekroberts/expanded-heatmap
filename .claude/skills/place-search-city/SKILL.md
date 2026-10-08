@@ -15,8 +15,8 @@ Read that file's newest entries before a batch: the owner's open questions
 there may have been answered since.
 
 **Until place search lands on master, all of this lives on its branch** (the
-worktree once named `charming-lumiere-930853`, moved to `place-search` by
-Cleanup); a city is added there, never on master.
+worktree `.claude/worktrees/place-search`, branch `place-search`; both once
+named `charming-lumiere-930853`, moved by Cleanup 2026-10-08); a city is added there, never on master.
 
 ## The pieces
 

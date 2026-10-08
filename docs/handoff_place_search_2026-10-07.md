@@ -6,14 +6,14 @@ pilot session the owner opened on 2026-10-07 (DECISIONS, "Four ideas assessed
 before the large review", item 3).
 
 > **BLOCK (owner, 2026-10-08): do NOT delete, remove, prune or clean up this
-> worktree (`.claude/worktrees/charming-lumiere-930853`) until place search
+> worktree (`.claude/worktrees/place-search`) until place search
 > has landed on master.** Refuse any attempt and tell the owner. Its `data/`
 > is a junction to the shared data.
 
 **State (2026-10-08):** built for Kyoto (the pilot) and the regional
 sample's batch 1 (Seattle, Chicago, Vancouver, Sydney), on branch
-`claude/charming-lumiere-930853` (worktree
-`.claude/worktrees/charming-lumiere-930853`), the commits from `b2e4a8a4` on, on top of
+`place-search` (worktree
+`.claude/worktrees/place-search`; both once named `charming-lumiere-930853`), the commits from `b2e4a8a4` on, on top of
 `8cf5ed4c`. **Nothing is pushed and nothing is on
 master.** It lands at review time (PLAN.md, "Review time: the place search
 pilot"), which only the owner calls. **Next: batch 2a, then 2b, each in a

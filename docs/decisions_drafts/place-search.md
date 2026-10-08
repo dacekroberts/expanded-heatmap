@@ -1,4 +1,4 @@
-# DECISIONS drafts - place search pilot (`claude/charming-lumiere-930853`)
+# DECISIONS drafts - place search pilot (branch `place-search`, once `claude/charming-lumiere-930853`)
 
 Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner

@@ -32,7 +32,7 @@ Legend: `[ ]` open, `[x]` done (a done item stays only until its
   slices; which sessions to open.
 
 - [ ] **Review time: the place search pilot** (owner, 2026-10-07; branch
-  `claude/charming-lumiere-930853`, nothing pushed; drafts
+  `place-search`, nothing pushed; drafts
   `docs/decisions_drafts/place-search.md`; handoff
   `docs/handoff_place_search_2026-10-07.md`). Kyoto, then the regional
   sample's first batch (Seattle, Chicago, Vancouver, Sydney; 2026-10-08), held

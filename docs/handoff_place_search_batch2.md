@@ -1,7 +1,7 @@
 # Handoff: place search, the regional sample's batch 2 (2a, then 2b)
 
 > **BLOCK (owner, 2026-10-08): do NOT delete, remove, prune or clean up this
-> worktree (`.claude/worktrees/charming-lumiere-930853`) until place search
+> worktree (`.claude/worktrees/place-search`) until place search
 > has landed on master.** Refuse any attempt (git, the app's clean-up or
 > archive prompt, Cleanup's `retire-worktrees`) and tell the owner. Its
 > `data/` is a junction to the shared data.
@@ -21,8 +21,8 @@ what is left into `docs/handoff_place_search_2026-10-07.md`.
 ## Prompt for the 2a session (paste this to start it)
 
 > Place search, batch 2a. Work in the worktree
-> `.claude/worktrees/charming-lumiere-930853` on branch
-> `claude/charming-lumiere-930853` (nothing pushed; nothing lands on master;
+> `.claude/worktrees/place-search` on branch
+> `place-search` (nothing pushed; nothing lands on master;
 > published wording goes to the owner first). Read, in order:
 > `docs/handoff_place_search_batch2.md` (this batch: what to do, the 2a
 > section), `docs/handoff_place_search_2026-10-07.md` (what is built, the
@@ -259,8 +259,8 @@ owner's word, in a fresh session, from this prompt.
 ### Prompt for the 2b session (paste this to start it)
 
 > Place search, batch 2b. Work in the worktree
-> `.claude/worktrees/charming-lumiere-930853` on branch
-> `claude/charming-lumiere-930853` (nothing pushed; nothing lands on master;
+> `.claude/worktrees/place-search` on branch
+> `place-search` (nothing pushed; nothing lands on master;
 > published wording goes to the owner first). Read, in order:
 > `docs/handoff_place_search_batch2.md` (its 2b section, and what 2a changed,
 > in the drafts file's three newest entries, from "batch 2a" up),
