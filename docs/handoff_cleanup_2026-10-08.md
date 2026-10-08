@@ -28,14 +28,18 @@ items are done or moved into PLAN.
     "block attempts to delete the worktree until the changes have landed";
     this covers cleanup-sweep's retire-worktrees scope). After the landing,
     unlink its `data/` junction alone, then remove it.
-  - `epic-neumann-5aa0a6` (open basemap switch and app groundwork). Its
-    `data/` is a REAL folder, not a junction: `data/_basemap_build` (4,969
-    files, 4.34 GB) and `data/_heavy_jobs_history.json` existed only there
-    (`check_worktree_data.py`, 2026-10-08). COPIED the same day (robocopy
-    no-clobber, 4,969 files, 4.341 GB in the main checkout's
-    `data/_basemap_build`; 12 heavy-job entries merged); the check passes,
-    nothing uncommitted, branch at `62b28944`. Ready to move once its
-    session is stopped.
+  - **`basemap`** (open basemap switch and app groundwork), MOVED 2026-10-08
+    from `epic-neumann-5aa0a6`; branch renamed `claude/epic-neumann-5aa0a6`
+    to `basemap` (tip `eabd02d7`). Its `data/` had been a real folder whose
+    `_basemap_build` (4,969 files, 4.34 GB) existed only there: copied to
+    the main checkout's `data/_basemap_build` first (check passed), then the
+    folder set aside in `data/_retired_worktree_copies/basemap_data_2026-10-08`
+    (a 4.4 GB duplicate the owner may delete) and replaced by junctions to
+    `data` and `.venv-lean`. Its session is archived (Remote Control had to be
+    off first; the archive detached HEAD but kept the folder). Its drafts
+    file keeps its name, `docs/decisions_drafts/claude-epic-neumann-5aa0a6.md`.
+    Launch entries `streamlit-app-lean-basemap` (8842) and
+    `heatmap-static-basemap` (8843), both 127.0.0.1.
   - **Permanent names (owner, 2026-10-08):** with no session inside and
     everything committed, `git worktree move` the pilots to
     `.claude/worktrees/place-search` (between batch 2b and batch 3) and
