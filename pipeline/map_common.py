@@ -1215,10 +1215,74 @@ DENSE_LABEL_SCRIPT = """
 })();
 </script>
 """
+# TRAVEL MODE, THE HALF VERSION (owner, 2026-10-07; DECISIONS drafts, "Two
+# travel versions"). Only in a map rendered with open_basemap. Picking the
+# "Travel" base layer takes the business layers off the map (pins, both heat
+# layers, the rings) and folds the legend's business section away; they stay
+# in the layer menu, so a reader can turn any back on. Picking "Business"
+# restores each layer's render-time default. The choice is remembered for the
+# viewer (localStorage, wrapped: it can be absent or throw), so a reader who
+# picked Travel opens the next city in Travel. The page still carries the
+# register data either way: its notices and obligations do not change.
+TRAVEL_MODE_SCRIPT = """
+<style>
+.map-legend.hm-travel .hm-biz { display: none; }
+</style>
+<script>
+(function () {
+    var NAME = "__MAP_NAME__", STD = "__STD_NAME__", OPEN = "__OPEN_NAME__";
+    var BUSINESS = __BUSINESS__;
+    var KEY = "expanded-heatmap-basemap";
+    var tries = 0;
+    function saved() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+    function save(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+    function start() {
+        var m = window[NAME], std = window[STD], open = window[OPEN];
+        if (!m || !std || !open) {
+            if (tries++ < 60) setTimeout(start, 100);
+            return;
+        }
+        var legend = document.querySelector("details.map-legend");
+        var rows = legend && legend.querySelector(".hm-biz");
+        if (rows && rows.previousElementSibling) rows.previousElementSibling.classList.add("hm-biz");
+        function business(travel) {
+            if (legend) legend.classList.toggle("hm-travel", travel);
+            BUSINESS.forEach(function (b) {
+                var layer = window[b[0]];
+                if (!layer) return;
+                var want = travel ? false : b[1];
+                try {
+                    if (want && !m.hasLayer(layer)) m.addLayer(layer);
+                    if (!want && m.hasLayer(layer)) m.removeLayer(layer);
+                } catch (err) {}
+            });
+        }
+        // Deferred: the layer menu builds its add and remove lists from its
+        // checkboxes before applying them and refreshes those checkboxes only
+        // once its click is handled, so a change made inside the click is
+        // undone or left showing stale ticks (measured 2026-10-07).
+        m.on("baselayerchange", function (e) {
+            var travel = e.layer === open;
+            save(travel ? "travel" : "business");
+            setTimeout(function () { business(travel); }, 0);
+        });
+        if (saved() === "travel") {
+            m.removeLayer(std);
+            m.addLayer(open);
+        }
+    }
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", start);
+    } else {
+        start();
+    }
+})();
+</script>
+"""
 # Blocks render_heatmap() injects into SOME maps only. check_render_current.py
 # holds a map that carries one to its current version, and does not ask for it
 # in a map that has none.
-CONDITIONAL_BLOCKS = ("DENSE_LABEL_SCRIPT",)
+CONDITIONAL_BLOCKS = ("DENSE_LABEL_SCRIPT", "TRAVEL_MODE_SCRIPT")
 # Mouse-wheel zoom. Measured 2026-09-23 on Paris and Toulouse (median of three
 # fresh loads; DECISIONS.md has the tables). The wheel lagged behind +/- for a
 # reason other than speed: Leaflet's _tryAnimatedZoom returns early while a
@@ -2713,10 +2777,11 @@ def _esc(value):
 
 
 def add_pin_layer(m, rows, group_name, color, tooltip_field_label,
-                  value_column, show=True, display=None, animate=False):
+                  value_column, show=True, display=None, animate=False, registry=None):
     """Add one toggleable, clustered, coloured pin layer for a category bucket.
     Return the number of points (0 = nothing added). `animate`: see
-    render_heatmap's `animate_clusters`."""
+    render_heatmap's `animate_clusters`. `registry`: a list the layer's JS
+    variable name is appended to (TRAVEL_MODE_SCRIPT's business layers)."""
     # Station name, ring band AND the classification value each repeat once per
     # pin, so each is emitted ONCE in a lookup table and referenced by integer
     # index. Nothing is lost: the callback resolves them before display.
@@ -2811,6 +2876,8 @@ def add_pin_layer(m, rows, group_name, color, tooltip_field_label,
     ParsedFastMarkerCluster(data, callback=callback, icon_create_function=icon_create_function,
                             options={"animate": animate}).add_to(fg)
     fg.add_to(m)
+    if registry is not None:
+        registry.append((fg.get_name(), show))
     return len(data)
 
 
@@ -2824,7 +2891,8 @@ LEGEND_MODEL_W = 274
 _LEGEND_CAP_STYLE = f"<style>.map-legend {{ max-width: {LEGEND_MODEL_W}px; }}</style>"
 
 
-def build_legend(bucket_colors, legend_label, lines, no_data_stations=False, legend_names=None):
+def build_legend(bucket_colors, legend_label, lines, no_data_stations=False, legend_names=None,
+                 travel=False):
     """Build the fixed-position legend from the buckets actually present
     and the taxonomy's own legend text; nothing taxonomy-specific here.
 
@@ -2836,6 +2904,8 @@ def build_legend(bucket_colors, legend_label, lines, no_data_stations=False, leg
     (render_heatmap); the row reads "code  full name", or the full name
     alone when it already starts with the label (Newcastle's "Green line
     (Tyne and Wear Metro)", owner 2026-10-02).
+    travel: wrap the business section in `.hm-biz`, which TRAVEL_MODE_SCRIPT
+    folds away in Travel; False leaves the legend byte for byte as before.
     """
     names = legend_names or {}
     line_rows = "".join(
@@ -2849,13 +2919,18 @@ def build_legend(bucket_colors, legend_label, lines, no_data_stations=False, leg
     # _LEGEND_CSS is prepended AFTER formatting, not concatenated into
     # LEGEND_HTML: .format() would otherwise try to read every CSS brace as a
     # replacement field and raise KeyError on the first selector.
-    return _LEGEND_CSS + (_LEGEND_CAP_STYLE if names else "") + LEGEND_HTML.format(
-        category_rows="".join(
-            LEGEND_ROW.format(color=color, label=html.escape(legend_label(name)))
-            for name, color in bucket_colors
-        ),
-        line_rows=line_rows,
-    ) + LEGEND_AUTOFIT_SCRIPT.replace("__MAP_W__", str(_MAP_W))
+    category_rows = "".join(
+        LEGEND_ROW.format(color=color, label=html.escape(legend_label(name)))
+        for name, color in bucket_colors
+    )
+    # Only the slot's own content is wrapped, so LEGEND_HTML's fixed text stays
+    # verbatim for check_render_current.py; TRAVEL_MODE_SCRIPT gives the
+    # heading just before the wrap the same class.
+    if travel:
+        category_rows = f'<div class="hm-biz">{category_rows}</div>'
+    legend = LEGEND_HTML.format(category_rows=category_rows, line_rows=line_rows)
+    return (_LEGEND_CSS + (_LEGEND_CAP_STYLE if names else "") + legend
+            + LEGEND_AUTOFIT_SCRIPT.replace("__MAP_W__", str(_MAP_W)))
 
 
 def _label_anchor_coords(coords, label_focus):
@@ -2959,7 +3034,7 @@ OSM_ATTRIBUTION = (
 # through maplibre-gl-leaflet (ISC). Its credit is OSM_ATTRIBUTION, carried
 # by the outer layer, so it stays in Leaflet's own control and never doubles:
 # the GL layer is built with attributionControl false, which makes the
-# plugin add nothing. The libraries load only when a reader picks "Open",
+# plugin add nothing. The libraries load only when a reader picks "Travel",
 # so the default view costs nothing new. Versions are pinned: maplibre-gl 6
 # ships ES modules only, which the plugin cannot read.
 OPEN_BASEMAP_LIBS = (
@@ -3005,8 +3080,17 @@ class OpenBasemap(folium.map.Layer):
                 });
                 return loading;
             }
+            // A zoom range as OSM's tiles give it, registered the way Leaflet's
+            // tile layers register theirs (beforeAdd / onRemove): the map takes
+            // its maximum zoom only from such layers, and with this one alone
+            // Leaflet.markercluster threw "Map has no maxZoom specified" when a
+            // pin layer was turned back on (measured 2026-10-07). The GL map
+            // overzooms past the pack's own zoom 15.
             var Layer = L.Layer.extend({
-                options: {attribution: {{ this.attribution|tojson }}},
+                options: {attribution: {{ this.attribution|tojson }}, minZoom: 0, maxZoom: 19},
+                beforeAdd: function (map) {
+                    if (map._addZoomLimit) map._addZoomLimit(this);
+                },
                 onAdd: function (map) {
                     var self = this;
                     self._active = true;
@@ -3035,6 +3119,7 @@ class OpenBasemap(folium.map.Layer):
                 onRemove: function (map) {
                     this._active = false;
                     if (this._gl) map.removeLayer(this._gl);
+                    if (map._removeZoomLimit) map._removeZoomLimit(this);
                 }
             });
             return new Layer();
@@ -3042,7 +3127,7 @@ class OpenBasemap(folium.map.Layer):
         {% endmacro %}
     """)
 
-    def __init__(self, pmtiles_url, *, name="Open", label_lang="en", show=False):
+    def __init__(self, pmtiles_url, *, name="Travel", label_lang="en", show=False):
         super().__init__(name=name, overlay=False, control=True, show=show)
         self._name = "OpenBasemap"
         self.pmtiles_url = pmtiles_url
@@ -3075,7 +3160,7 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
 
     open_basemap: optional dict(pmtiles_url=..., label_lang=...), a city's
     Protomaps pack (see OpenBasemap). Given, the layer menu offers two base
-    layers, "Standard" (OSM's tiles, still the default) and "Open". Omitted,
+    layers, "Business" (OSM's tiles, still the default) and "Travel". Omitted,
     the map renders exactly as before. A prototype: no city passes it.
 
     legend_names: optional {line key: full public name}, for a city whose
@@ -3192,19 +3277,22 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     # X-Frame-Options: SAMEORIGIN, so a plain link loaded the page inside the
     # map's frame and showed "refused to connect". check_provenance.py
     # requires the target on every map.
-    folium.TileLayer(
-        tiles="OpenStreetMap", name="Standard" if open_basemap else map_title,
+    std_base = folium.TileLayer(
+        tiles="OpenStreetMap", name="Business" if open_basemap else map_title,
         attr=OSM_ATTRIBUTION,
     ).add_to(m)
-    if open_basemap:
-        OpenBasemap(**open_basemap).add_to(m)
+    open_base = OpenBasemap(**open_basemap).add_to(m) if open_basemap else None
+    # (JS variable name, shown at render) of every business layer, for
+    # TRAVEL_MODE_SCRIPT: the heat layers, the rings and the pins.
+    business_layers = []
 
     # Two heat layers, same tuning, different universe: within-rings is the
     # default; the whole-city one is an opt-in for context.
-    ParsedHeatMap(in_rings[["latitude", "longitude"]].round(COORD_DP).values.tolist(),
-                  radius=HEAT_RADIUS, blur=HEAT_BLUR, min_opacity=HEAT_MIN_OPACITY,
-                  gradient=HEAT_GRADIENT, name="Commercial Density (Within Station Proximity)",
-                  show=True).add_to(m)
+    heat = ParsedHeatMap(in_rings[["latitude", "longitude"]].round(COORD_DP).values.tolist(),
+                         radius=HEAT_RADIUS, blur=HEAT_BLUR, min_opacity=HEAT_MIN_OPACITY,
+                         gradient=HEAT_GRADIENT, name="Commercial Density (Within Station Proximity)",
+                         show=True).add_to(m)
+    business_layers.append((heat.get_name(), True))
     # The whole-city layer is OPT-OUT PER CITY, because it carries one
     # coordinate pair per business in the city and nothing filters it. In most
     # cities that is a modest cost; in Mexico City it is 283,345 pairs against
@@ -3213,10 +3301,12 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     # Passing False drops the layer and says so on the city page: the map's
     # own question is density AROUND stations, and this layer is context.
     if all_city_heat:
-        ParsedHeatMap(businesses[["latitude", "longitude"]].round(COORD_DP).values.tolist(),
-                      radius=HEAT_RADIUS, blur=HEAT_BLUR, min_opacity=HEAT_MIN_OPACITY,
-                      gradient=HEAT_GRADIENT, name=f"Commercial Density (All {city_name} Businesses)",
-                      show=False).add_to(m)
+        heat_all = ParsedHeatMap(businesses[["latitude", "longitude"]].round(COORD_DP).values.tolist(),
+                                 radius=HEAT_RADIUS, blur=HEAT_BLUR, min_opacity=HEAT_MIN_OPACITY,
+                                 gradient=HEAT_GRADIENT,
+                                 name=f"Commercial Density (All {city_name} Businesses)",
+                                 show=False).add_to(m)
+        business_layers.append((heat_all.get_name(), False))
 
     for i, label in enumerate(ring_labels):
         layer = folium.FeatureGroup(name=f"Concentric Ring {i + 1}: {label}",
@@ -3230,6 +3320,7 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
                 color=LIGHT["ring"], weight=1, fill=False, opacity=0.5,
             ).add_to(layer)
         layer.add_to(m)
+        business_layers.append((layer.get_name(), rings_shown))
 
     station_layer = folium.FeatureGroup(name="Stations", control=False)
     for _, station in ringed.iterrows():
@@ -3303,12 +3394,12 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
         if pins and add_pin_layer(m, rows, layer_label(name), color, taxonomy.FIELD_LABEL,
                          taxonomy.VALUE_COLUMN,
                          display=getattr(taxonomy, "display_value", None),
-                         animate=animate_clusters):
+                         animate=animate_clusters, registry=business_layers):
             present.append((name, color))
 
     m.get_root().html.add_child(folium.Element(
         build_legend(present, taxonomy.legend_label, lines, no_data_stations=bool(no_data.any()),
-                     legend_names=names)
+                     legend_names=names, travel=bool(open_basemap))
     ))
 
     # Collapsed by default: many toggleable layers would otherwise cover a
@@ -3368,6 +3459,14 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     # See LINE_HIGHLIGHT_SCRIPT.
     m.get_root().html.add_child(folium.Element(
         LINE_HIGHLIGHT_SCRIPT.replace("__MAP_NAME__", m.get_name())))
+    # The half travel version: Travel takes the business layers off the map.
+    # See TRAVEL_MODE_SCRIPT.
+    if open_base is not None:
+        m.get_root().html.add_child(folium.Element(
+            TRAVEL_MODE_SCRIPT.replace("__MAP_NAME__", m.get_name())
+            .replace("__STD_NAME__", std_base.get_name())
+            .replace("__OPEN_NAME__", open_base.get_name())
+            .replace("__BUSINESS__", json.dumps([[n, bool(s)] for n, s in business_layers]))))
     # On a touch screen one finger scrolls the page and two move the map.
     # See TOUCH_GESTURE_SCRIPT.
     m.get_root().html.add_child(folium.Element(
