@@ -86,3 +86,18 @@ not reported; its items come later.
   reason on London's page now (above). Busan's Line 4 bullet says "the
   Retail dots" (O1-9, a proposal). The abroad-batch drafts entry's "362
   services by rule" is a drafts text, left for the fold.
+
+### 2026-10-07 - The 36 review proposals applied by the owner's approval
+
+- **The owner approved all 36 items in `data/_review/proposals_for_owner.md`**
+  ("approve all, disclose Fukushima caterers"), applied on
+  `review-batch-2026-10-07`, each current text found exactly once first; none
+  had changed. 28 lane items through `prose_proposals.py apply --ids`: R1
+  (lane 2 P4 and lane 3 P2, the region button in the map help and the
+  Overview intro) and lane 4's 26 (P101, P102, P106, P111, P257, P265, P268,
+  P269-P272, P318, P322, P403, P502, P503, P505, P506, P507, P604-P610),
+  among them Fukushima's caterers disclosed: "230 caterers (仕出し; 161 of
+  them also name a counter form)". Lane 3's O1 as nine sentences: the eight
+  pages' bullets name the legend's wording once ("the Retail category, shown
+  on the map as ..."), and Busan's lines bullet says "the blue shop dots".
+  This supersedes the "Not applied: 36 proposals" and Busan items above.

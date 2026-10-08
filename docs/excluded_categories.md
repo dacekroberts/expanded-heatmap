@@ -2059,7 +2059,7 @@ reach across the line; the storefronts there are not counted.
 eight municipalities. So are the eight S-tog stations there that are not
 Letbane interchanges (Brøndby Strand, Brøndbyøster, Bagsværd, Kildebakke,
 Skovbrynet, Stengården, Sorgenfri and Virum): each is served every ten minutes
-by day, the test the rest of the S-tog passed. **Forty-five stations are
+by day, the test the S-tog network passed. **Forty-five stations are
 excluded for being outside the ten municipalities** - forty-three S-tog
 stations on the lines' suburban reaches and the Metro's two airport stations in
 Tårnby - and are listed with their municipality on the map's page. **Regional
@@ -4757,7 +4757,7 @@ deli rows (8.8%) have a trade name that reads as a factory; they are kept
 shows its permit type.
 
 **Stations.** The lines with a station in Ageo or Ina are drawn, cut at the
-two towns' line. The New Shuttle's five stations in Ina, its terminus
+edge of the two. The New Shuttle's five stations in Ina, its terminus
 Uchijuku among them, are drawn and ringed.
 - Left out: 7 stations beyond it: 6 in Saitama City (5 in Kita Ward, 1 in
   Ōmiya Ward) and 1 in Okegawa.
@@ -5331,7 +5331,7 @@ a factory; they are kept (owner, 2026-09-24).
 **One pin per premises** - 231 repeat permits are shown once, and 149 rows of
 the city's list for a premises already in the national filings.
 
-**Not placed** - 2 rows (0.0%), a barber and a laundry in 駒形町, whose
+**Not placed** - 2 rows, a barber and a laundry in 駒形町, whose
 addresses MLIT's files do not hold. Another 182 sit at their town's center,
 and 207 national filings at their own coordinates.
 
@@ -5356,7 +5356,7 @@ line.
 - 229 rows of food manufacturing other than bakeries and confectioners (菓子)
   and delis (そうざい), and other permit types that are not a counter.
 - 161 school, hospital and staff canteens, 7 vending machines, 106 premises
-  inside hotels and inns, 230 caterers (仕出し) and 277 snack bars and
+  inside hotels and inns, 230 caterers (仕出し; 161 of them also name a counter form) and 277 snack bars and
   cabarets.
 
 **Counted** - every food permit in term on March 31, 2026 in the city's list,

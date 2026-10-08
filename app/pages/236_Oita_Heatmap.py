@@ -80,7 +80,7 @@ st.markdown(
 
 **Reading the map**
 
-- About one restaurant in 20 in Ōita City's permit list, and 48 shops in its list of
+- About one restaurant in 20 in Ōita City's permit list, and 48 entries in its list of
   notifications, have their address withheld by the city, which does not say why, and are not on
   this map. Where they are is not known.
 - The lists give an address but no location. Each address is matched to MLIT's address reference

@@ -58,7 +58,7 @@ st.markdown(
 - Lines and stations come from MLIT's national railway data (国土数値情報); station names in
   English are from OpenStreetMap. Line colors are this project's own, not the operators'.
 - Only stations inside Ageo City and Ina Town get rings, because the business data covers the two
-  alone: the lines running on to Saitama City and Okegawa are cut at their line. The New Shuttle's
+  alone: the lines running on to Saitama City and Okegawa are cut where they leave Ageo and Ina. The New Shuttle's
   five stations in Ina, its terminus Uchijuku among them, are drawn and ringed. The stations left
   out are listed below.
 - The Shinkansen is not drawn.

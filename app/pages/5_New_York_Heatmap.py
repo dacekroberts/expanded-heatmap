@@ -71,7 +71,8 @@ st.markdown(
   the Health Department's restaurant permits, grocery and bodega retail from the State's retail food
   store licenses, salons and barbers from the State's appearance-enhancement licenses, and a narrow
   slice of regulated retail from the city's own Consumer and Worker Protection licenses.
-- So **the Retail category here covers less of the trade than in most cities on this site.** A
+- So **the Retail category here, shown on the map as “Food, secondhand, electronics, tobacco
+  shops”, covers less of the trade than in most cities on this site.** A
   clothing shop or a bookshop needs no license from any of these four registries, so it is simply
   absent, while restaurants appear because the city inspects them.
 - Read the balance between categories as a fact about New York's licensing, not about its high

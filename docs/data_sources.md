@@ -375,8 +375,8 @@ source, acknowledging Government ownership of the IP, and proper attribution.
 **The indemnity is not a notice, not a credit, and not a step in a build.** It
 is an open-ended undertaking to cover the Government's costs if a third party
 alleges the data infringed their rights. Hong Kong was the first source in
-this project to ask for one; others have since, among them Sacramento, Palma, Geneva,
-Dallas and San Diego's SanGIS layers (below). **It was an owner decision, taken before the register's
+this project to ask for one; others have since, among them Sacramento, Palma,
+Dallas, San Diego's SanGIS layers and Geneva (below). **It was an owner decision, taken before the register's
 35,808 premises were wired into a page**, not once the city was live.
 
 ### Hong Kong's indemnity — accepted 2026-09-22, and what the first record omitted
@@ -530,7 +530,7 @@ agreement.<!-- /internal -->
   SANDAG indemnity) defer to a third party's terms where the source is not
   SANDAG. The SanGIS agreement is the one read as governing.
 
-#### Geneva's SITG indemnity - accepted 2026-10-04
+#### Geneva's SITG indemnity — accepted 2026-10-04
 
 SITG's **Conditions d'utilisation des données du Portail SITG** (version of
 19 May 2026; the copy inside the dataset's zip is byte-identical) govern the

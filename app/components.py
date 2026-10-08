@@ -2495,7 +2495,7 @@ _NOTICES = [
     # its title); MLIT as in Kobe's, N02 in its 2025 edition. Drafted from the
     # approved Japanese notices; the credit's titles are a review-time check.
     Notice(161, "Saitama Prefecture and MLIT (Ageo (Regional))",
-     "Ageo (Regional)'s businesses: 出典：「食品営業施設_新法_公開」「食品営業施設_旧法_公開」「kyuho_R080331」"
+     "Ageo's and Ina's businesses: 出典：「食品営業施設_新法_公開」「食品営業施設_旧法_公開」「kyuho_R080331」"
      "（埼玉県GISオープンデータカタログ）（[https://portal-pref-saitama.hub.arcgis.com/pages/opendatacatalog](https://portal-pref-saitama.hub.arcgis.com/pages/opendatacatalog)）及び"
      "「【埼玉県】生活衛生営業施設一覧」（埼玉県オープンデータポータルサイト）（[https://www.pref.saitama.lg.jp/a0706/6hou/ichiran.html](https://www.pref.saitama.lg.jp/a0706/6hou/ichiran.html)）を加工して作成. "
      "Processed by this project, which cut the prefecture's lists to Ageo and Ina by address, kept the "
@@ -2673,7 +2673,7 @@ _NOTICES = [
      "（[http://creativecommons.org/licenses/by/2.1/jp/](http://creativecommons.org/licenses/by/2.1/jp/)）; and "
      "出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一覧」を加工して作成. "
      "Processed by this project, which selected the storefront types, added the city's monthly new permits to "
-     "its March list, showed a premises in both food lists once, placed each by its address or the "
+     "its March list and its new barbers and beauty salons to its March registers, showed a premises in both food lists once, placed each by its address or the "
      "ministry's own coordinates, and counted them around stations. The ministry's list holds only filings "
      "whose applicants agreed to publish them and is not complete. "
      "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
@@ -3787,7 +3787,7 @@ _NOTICES = [
     # link to it; the changes; no endorsement. The English sentences are the
     # build's draft, a review-time proposal.
     Notice(156, "Kommunalverbund Niedersachsen/Bremen e.V. (Bremen)",
-     "Quellenvermerk: Kommunalverbund Niedersachsen/Bremen e.V. Bremen's shops are from the "
+     "Quellenvermerk: Kommunalverbund Niedersachsen/Bremen e.V. The shops on Bremen's map are from the "
      "retail survey [Einzelhandelsbestand in der Region Bremen 2022]"
      "(https://geoportal.bremen.de/resources/data/Einzelhandelsbestand_reduziert.zip), "
      "licensed under [Creative Commons Namensnennung (CC-BY)]"
@@ -4143,8 +4143,9 @@ def render_map_help(layers="business categories"):
         "- Zoomed out, a business layer shows numbered circles, each counting "
         "the businesses in its area. Zoom in to see individual dots, and hover "
         "over a dot for its details.\n"
-        "- Top right: a **Cities** menu and a **Global View** button for "
-        "moving between maps, and a light/dark switch. The map opens in "
+        "- Top right: a **Cities** menu and buttons back to the **Global View** "
+        "and to the city's region, for moving between maps, and a light/dark "
+        "switch. The map opens in "
         "whichever mode the page is using; once you pick one, it carries "
         "across the other city maps.\n"
         "- The heat layer is illustrative: a visual blur, not a statistical "

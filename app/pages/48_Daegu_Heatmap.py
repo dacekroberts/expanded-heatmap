@@ -83,9 +83,9 @@ st.markdown(
   retail, bakeries, butchers, food shops, shops licensed to sell tobacco, department stores and
   marts, and health-food shops.
 - Korea licenses these trades rather than retail in general, so a clothes shop, a bookshop or a
-  phone shop needs no such permit and is absent: **the Retail category leans toward food and
-  convenience stores**. Read the balance between categories as a fact about Korea's licensing,
-  not about Daegu's streets.
+  phone shop needs no such permit and is absent: **the Retail category, shown on the map as
+  “Food, convenience and tobacco shops”, leans toward food and convenience stores**. Read the
+  balance between categories as a fact about Korea's licensing, not about Daegu's streets.
 - Convenience stores and confectioners that hold a café permit are counted as shops.
 - **The data is older than its label.** The city publishes these files as its August 2026
   edition, but the newest permits, closures and updates in them date from the end of August

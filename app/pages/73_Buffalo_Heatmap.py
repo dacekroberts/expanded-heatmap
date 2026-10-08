@@ -72,7 +72,8 @@ st.markdown(
   tobacco sellers) come from the City's own business licenses.
 - Grocery, deli and convenience stores come from New York State's retail food store licenses, and
   salons and barbers from the State's appearance-enhancement and barber business licenses.
-- So **the Retail category covers less of the trade than in most cities here**: a clothing shop or
+- So **the Retail category, shown on the map as “Food stores, used-car and secondhand dealers”,
+  covers less of the trade than in most cities here**: a clothing shop or
   a bookshop needs none of these licenses and is simply absent. Read the balance between categories
   as a fact about Buffalo's licensing, not about its high streets.
 - Every license in the City's file is marked active, including many that expired years ago, so **a

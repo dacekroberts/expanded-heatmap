@@ -64,6 +64,8 @@ st.markdown(
   listed below.
 - The Kyoto Municipal Subway's Tōzai Line, which ends at Rokujizo, is not drawn: Rokujizo keeps its
   rings through the JR Nara Line.
+- **Stations sit close together here**, a median of 505 m apart, so the rings are drawn at half
+  the usual size (0.05 to 0.3 mi).
 
 **The businesses**
 

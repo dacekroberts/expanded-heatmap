@@ -80,7 +80,8 @@ st.markdown(
 - **Two categories here, not three: Personal services is missing from the data, not just from the
   map.** Philadelphia licenses activities, not businesses, and has no salon, barber or nail license
   of any kind, so, as in Boston, this category has no source to draw on.
-- Retail is narrow for a related reason. What the city licenses is food retail, so Retail here
+- Retail, shown on the map as “Food shops, tire and precious-metal dealers”, is narrow for a
+  related reason. What the city licenses is food retail, so Retail here
   means bodegas, mini-markets and beer distributors, plus the big-box tier (Target, CVS, Dollar
   Tree, Ross), which appears only because those stores also sell packaged food.
 - A clothing shop, bookshop or hardware store needs no license, so it is simply not here; pavement

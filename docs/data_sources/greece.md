@@ -14,7 +14,7 @@ established. They are not a screen of other Greek cities.
 | Question | Answer for Greece | Evidence |
 |---|---|---|
 | Where commerce is recorded | **Municipally, by license.** The City of Thessaloniki publishes the shops holding an active license (food premises, hairdressers, beauty salons and the venues the same law licenses); no general-retail register was found | the layer's 79 activity values, read in full 2026-10-04 |
-| Portal | The City's **GeoServer WFS** (`sdi.thessaloniki.gr`), harvested to data.gov.gr. The City's map portal (`maps.thessaloniki.gr`) carries a no-redistribution splash, read as the web app's own terms (owner, 2026-10-04): never read from it | the brief |
+| Portal | The City's **GeoServer WFS** (`sdi.thessaloniki.gr`), harvested to data.gov.gr. The City's map portal (`maps.thessaloniki.gr`) carries a no-redistribution splash, read as the web app's own terms (owner, 2026-10-04): never read from it | the City's WFS and map portal, read 2026-10-04 |
 | License | **CC BY 4.0**, set on the layer's data.gov.gr record | the record, read 2026-10-04 |
 | Personal information | **No name field of any kind**; a point, an activity, a municipal community, a shop code and address fields, which the build never reads | DescribeFeatureType |
 | Coordinates | **EPSG:2100** (GGRS87 / Greek Grid), reprojected on read; the build projects in UTM 34N (EPSG:32634) | step 2, 2026-10-07 |

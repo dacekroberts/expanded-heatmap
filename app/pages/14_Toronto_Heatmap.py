@@ -60,7 +60,8 @@ st.markdown(
 - **Toronto licenses food and trades, but not general retail.** There is no grocer, clothing
   shop, pharmacy or hardware store here, because the City requires no license for any of
   them, so none appears in any register to map.
-- What the Retail category holds instead is the *regulated* slice: second-hand shops, pawn
+- What the Retail category, shown on the map as “Vape, secondhand, precious-metal, pawn shops”,
+  holds instead is the *regulated* slice: second-hand shops, pawn
   shops, precious-metal buyers, smoke and vape shops, pet shops and fireworks vendors — the
   trades a city licenses because it wants to watch them.
 - **Canceled licenses are excluded, and most of the register is canceled.** This is a

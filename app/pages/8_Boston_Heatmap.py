@@ -57,7 +57,8 @@ st.markdown(
 
 - **Personal services is absent, not thin.** There is no hairdresser, barber or nail salon on this
   map, and that is not a filter: no such license exists as data at any level of government.
-- **Retail is narrow.** What is here is retail *food* (groceries, convenience stores, bodegas), plus
+- **Retail, shown on the map as “Food, liquor and cannabis shops”, is narrow.** What is here is
+  retail *food* (groceries, convenience stores, bodegas), plus
   package stores and cannabis dispensaries. A clothes shop, a bookshop or a hardware store needs no
   license from any of the three registries behind this map, so it is simply absent. Read the
   balance between the two categories accordingly.
