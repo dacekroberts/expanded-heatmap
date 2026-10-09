@@ -51,8 +51,8 @@ downstream notes once per review time, and word budgets checked by
 7. **The pre-push hook**: `python scripts/check_all.py --list`, and its time.
 8. **Context growth**: `python scripts/context_usage.py --since <date>`:
    re-reads against output, usage by context size, the costliest sessions.
-   Baseline `docs/efficiency_review_2026-10-08_context.md` (re-reads 81%;
-   half the input-side usage past 300k).
+   Baseline `docs/efficiency_review_2026-10-08_context.md` (re-reads 80%;
+   over 60% of the input-side usage past 300k).
 
 What git cannot show (pushes, approval waits, check runs, messages) is
 inferred from commit times and rules; say so in a Limits section.

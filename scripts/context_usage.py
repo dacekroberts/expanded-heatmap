@@ -9,11 +9,11 @@ most; and what clearing a session once its context passed a cap would have saved
 Usage is weighted by API price ratios (input 1, cache write 1.25, cache read 0.1,
 output 5) as a proxy for plan usage, which is not published per token.
 
-Baseline 2026-10-08 (all history): cache reads 81%, cache writes 12%, output 7%;
-half the input-side cost at contexts over 300k; clearing past 120k would have
-saved about 45% before re-reads. See docs/efficiency_review_2026-10-08_context.md.
+Baseline 2026-10-08 (all history): cache reads 80%, cache writes 13%, output 7%;
+over 60% of the input-side cost at contexts over 300k; clearing past 120k would have
+saved about 43% before re-reads. See docs/efficiency_review_2026-10-08_context.md.
 
-    python scripts/context_usage.py [--since YYYY-MM-DD] [--top N]
+    python scripts/context_usage.py [--since YYYY-MM-DD] [--until YYYY-MM-DD] [--top N]
 """
 import argparse
 import collections
@@ -27,9 +27,11 @@ PROJECTS = os.path.join(os.path.expanduser("~"), ".claude", "projects")
 PREFIX = "C--Users-dacek-Documents-Portfolio-expanded-heatmap"
 
 
-def turns(path, since):
-    """Yield (inp, cw, cr, out) once per model turn in one transcript."""
-    seen = set()
+SEEN = set()
+
+
+def turns(path, since, until=None):
+    """Yield (inp, cw, cr, out, date) once per model turn in one transcript."""
     with open(path, encoding="utf-8", errors="replace") as f:
         for line in f:
             if '"usage"' not in line:
@@ -40,24 +42,30 @@ def turns(path, since):
                 continue
             if o.get("type") != "assistant":
                 continue
-            if since and (o.get("timestamp") or "") < since:
+            stamp = o.get("timestamp") or ""
+            if since and stamp < since:
+                continue
+            if until and stamp >= until:
                 continue
             m = o.get("message") or {}
             u = m.get("usage")
             if not u:
                 continue
-            # one turn can span several lines that repeat the same usage
+            # one turn can span several lines, and a resumed or moved session
+            # copies its history into a new file: count each turn once overall
             key = (m.get("id"), o.get("requestId"))
-            if key in seen:
-                continue
-            seen.add(key)
+            if key != (None, None):
+                if key in SEEN:
+                    continue
+                SEEN.add(key)
             yield (u.get("input_tokens") or 0, u.get("cache_creation_input_tokens") or 0,
-                   u.get("cache_read_input_tokens") or 0, u.get("output_tokens") or 0)
+                   u.get("cache_read_input_tokens") or 0, u.get("output_tokens") or 0, stamp[:10])
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--since", help="only turns on or after this date (YYYY-MM-DD)")
+    ap.add_argument("--until", help="only turns before this date (YYYY-MM-DD)")
     ap.add_argument("--top", type=int, default=8)
     args = ap.parse_args()
 
@@ -67,13 +75,15 @@ def main():
     saved = collections.Counter()
     sessions = []
     sub_cost = 0.0
+    days = set()
     for d in glob.glob(os.path.join(PROJECTS, PREFIX + "*")):
         name = os.path.basename(d)[len(PREFIX):].replace("--claude-worktrees-", "") or "main"
         for path in glob.glob(os.path.join(d, "**", "*.jsonl"), recursive=True):
             is_sub = "subagents" in path.replace("\\", "/")
             cost = 0.0
             n = 0
-            for inp, cw, cr, out in turns(path, args.since):
+            for inp, cw, cr, out, day in turns(path, args.since, args.until):
+                days.add(day)
                 ctx = inp + cw + cr
                 for k, v in (("inp", inp), ("cw", cw), ("cr", cr), ("out", out)):
                     tot[k] += v
@@ -98,7 +108,10 @@ def main():
         raise SystemExit("no turns found")
     main_n = sum(1 for s in sessions if not s[2])
     print(f"sessions {main_n}, subagent runs {len(sessions) - main_n}, turns {sum(turns_by_ctx.values()):,}"
-          + (f", since {args.since}" if args.since else ""))
+          + (f", since {args.since}" if args.since else "")
+          + (f", until {args.until}" if args.until else ""))
+    print(f"weighted usage {total / 1e6:,.0f}M input-equivalent over {len(days)} active days"
+          f" ({total / 1e6 / len(days):,.0f}M a day; {min(days)} to {max(days)})")
     print("share of usage:")
     for k, label in (("cr", "re-reading the conversation (cache reads)"),
                      ("cw", "new context (cache writes)"),

@@ -73,5 +73,5 @@ python -m venv .venv-lean                               # build the lean app ven
 New since the move: `python scripts/regen_generated.py [--install]` after a
 merge (generated files), `python scripts/merge_conflict_stats.py --since <date>`
 and `python scripts/check_word_budgets.py [--report]`.
-Session usage by context size: `python scripts/context_usage.py [--since YYYY-MM-DD] [--top N]`.
+Session usage by context size: `python scripts/context_usage.py [--since YYYY-MM-DD] [--until YYYY-MM-DD] [--top N]`.
 Authorship marks: `python scripts/fingerprint.py init|table|coverage|verify <file or URL>` (the key lives in `~/.ehm/`, never in the repo).
