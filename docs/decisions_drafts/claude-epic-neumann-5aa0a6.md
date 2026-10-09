@@ -204,6 +204,15 @@ or published; every proposal waits for the owner.
   three extracts the pilot already holds are fetched again into the clean
   folder (1.2 GB), so every copied file has a dated URL and an MD5. The
   plan folder's README is marked pilot-only.
+- **Downloaded and handed over (owner, 2026-10-08).** 93 of 93 extracts,
+  33.04 GB, every file matched to Geofabrik's MD5 (`verify.py` in the plan
+  folder: OK). The owner copied the folder flat to transit-globe's
+  `data/sources/countries/geofabrik/`, the place its PLAN names, and ran
+  `verify.py --rehash` on that copy; the same check without the rehash
+  also reads OK there. transit-globe's own log asks the handover for a
+  box per city, a cut strategy and a per-city manifest. None of those
+  were sent: they are the pilot's choices, and the app sets its own boxes
+  in `cities.json`.
 - **For the owner, found by the agent:** `scripts/check_stray_downloads.py`
   reports `centro-261006.osm.pbf` and
   `provence-alpes-cote-d-azur-261006.osm.pbf` at the main checkout's root
