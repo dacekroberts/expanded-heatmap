@@ -1,8 +1,8 @@
 // THE SHARED TRAVEL STYLE (draft, branch only). One function that turns the
 // layer list of @protomaps/basemaps 5.7.2 into the Travel basemap shared by
 // the site's Travel view, the full Travel version and transit-globe's
-// starting point (owner, 2026-10-08; rules in branch basemap's drafts file,
-// claude-epic-neumann-5aa0a6.md, "The travel app's basemap rules"). Every hex
+// starting point (owner, 2026-10-08; rules in docs/decisions_drafts/
+// basemap.md, "The travel app's basemap rules"). Every hex
 // value is a draft. pipeline/map_common.py inlines this file into the
 // OpenBasemap layer; transit-globe reads it as the reference and records
 // its own departures in its own DECISIONS.md.

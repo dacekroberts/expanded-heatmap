@@ -1,4 +1,4 @@
-# DECISIONS drafts - open basemap research (`claude/epic-neumann-5aa0a6`)
+# DECISIONS drafts - open basemap research (branch `basemap`; was `claude/epic-neumann-5aa0a6`, this file `claude-epic-neumann-5aa0a6.md` until 2026-10-08)
 
 Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
