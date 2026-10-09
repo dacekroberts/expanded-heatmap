@@ -190,6 +190,20 @@ or published; every proposal waits for the owner.
   which this machine lacks; only the app's optional per-city cut would want
   it. The download script also saves Geofabrik's `.md5` line beside each
   extract, so the app project can check its copy.
+- **No pilot-only rule rides along with the extracts (owner, 2026-10-08:
+  an earlier pass carried pilot-only choices such as the style before the
+  trim into the app).** `download.ps1` now writes to
+  `data/_basemap_build/geofabrik_extracts_2026-10/`, which holds only
+  Geofabrik's files, their `.md5` lines, `downloaded.csv` and a README.
+  The README lists what the pilot chose and left out: the region per city
+  (picked against the pilot's stations-plus-10 km box, so possibly too
+  small for a wider app area), the 20 merges, zoom 14, `--travel_trim`,
+  the style, the land-cover and QRank stand-ins, and the city list. The
+  pilot's `data/sources/` is never the copy source, since it holds those
+  stand-ins. Merged files go to `data/_basemap_build/merged_pilot/`. The
+  three extracts the pilot already holds are fetched again into the clean
+  folder (1.2 GB), so every copied file has a dated URL and an MD5. The
+  plan folder's README is marked pilot-only.
 - **For the owner, found by the agent:** `scripts/check_stray_downloads.py`
   reports `centro-261006.osm.pbf` and
   `provence-alpes-cote-d-azur-261006.osm.pbf` at the main checkout's root
