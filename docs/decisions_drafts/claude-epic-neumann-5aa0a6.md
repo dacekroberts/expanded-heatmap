@@ -107,6 +107,84 @@ or published; every proposal waits for the owner.
   `PHONE-LAN-` entry, stopped right after), `zip_roundtrip.py`,
   `grid_sheet.py`. Usage lines at the top of each. The in-app browser
   pane does not draw while hidden; use the headless harnesses.
+- **UPDATE 2026-10-08 (late session, branch now `basemap`):** item 1 waits
+  for review time (owner); item 2's Cloudflare terms read is done and item
+  4's license rows are written (entry below); item 3 is now 203 packs, not
+  167 (master has 206 cities), with the download plan and the owner's
+  download script in `data/_basemap_build/download_plan_2026-10-08/`; item
+  5: Protomaps' dark flavor in Travel is approved, built after the
+  2026-10-11 reset; the other later items wait until after go-live. The
+  owner paused the branch until Sunday 2026-10-11.
+
+### 2026-10-08 - Go-live at review time; Cloudflare's terms read; 203 packs planned as 93 downloads; license rows; dark Travel approved (owner; measured)
+
+- **Owner's picks from the five open items:** the go-live call (decision
+  19) is made at review time; the Cloudflare terms read now; a download
+  plan for the remaining packs now; the license rows now; of the later
+  items, **Protomaps' dark flavor in Travel is approved in advance** (built
+  after the 2026-10-11 reset), the rest wait until after go-live. The
+  branch then pauses until Sunday 2026-10-11 (owner).
+- **Cloudflare as the pack host (licence-read agent, 2026-10-08).** The
+  Self-Serve Subscription Agreement (2025-09-12) governs R2, Workers and the
+  CDN and incorporates the Service-Specific Terms (2026-09-28) and the
+  developer documentation's limits, so those limits are contractual.
+  - R2 behind an owned domain, and a Worker on workers.dev: **permitted with
+    conditions.** The CDN clause that replaced the old section 2.8 requires
+    large files to be served through a paid Developer Platform product such
+    as R2; whether a $0 free-tier R2 account is a "Paid Service" (defined
+    as one "for which we require a fee") is unsettled. The realistic
+    downside is the CDN limited, not a bill.
+  - **r2.dev: not for the live site** ("not intended for production
+    usage"; 429s above hundreds of requests a second; no cache).
+  - Workers Free stops at 100,000 requests a day with Error 1027 (each tile
+    a request, cache hits included) and is never billed; a workers.dev-only
+    Worker probably fails closed (inferred, not confirmed). R2 beyond its
+    free tier (10 GB-month, 1 M Class A, 10 M Class B) is billed with no
+    cap once a card is on file; whether a card is mandatory with zero usage
+    was not established. workers.dev names can change at Cloudflare's
+    discretion with about a week's notice, which would break committed tile
+    URLs until a re-render: a point for the owned domain.
+  - Owner to accept, as with CARTO: an uncapped indemnity (§10.2, covering
+    disputes with third parties, so an ODbL claim too), California law with
+    AAA arbitration and a class waiver, termination "for any reason or no
+    reason at all", liability capped at fees paid ($0).
+  - No credit or notice required; nothing may imply sponsorship or
+    affiliation; a published host benchmark (decision 12's comparison)
+    must carry what is needed to replicate it (§2.2.2).
+  - Privacy: Cloudflare is a **controller** for visitors' IP addresses and
+    traffic data and puts disclosure on the site. Suggested wording for
+    decision 18 is in the agent's report (internal, review time). Workers
+    invocation logs are on by default (3 days on Free); turn them off for
+    the tile Worker. Keep Bot Fight Mode and challenges off on the tile
+    host, so no Cloudflare cookies are set.
+  - Cache Rule needed for `.pmtiles` (not cached by default; Free plan
+    file ceiling 512 MB, the largest pack about 113 MB).
+- **The remaining packs: 203, not 167** (master has 206 cities since the
+  branch forked; 3 built). Each city's box (stations plus 10 km, UTM) was
+  matched to Geofabrik's region polygons (`index-v1.json`, read
+  2026-10-08). The smallest single region per city gives **91 files,
+  112.9 GB** (Lille and Strasbourg need all of Europe, 35.1 GB; San Diego
+  North America, 19.5 GB; Ottawa Canada, 6.5 GB). **Merging two or three
+  regional extracts for 20 cities gives 93 files, 33.0 GB** (sizes by HEAD
+  request). Box coverage under 99% after merges is sea or lake in the
+  10 km margin only: Le Havre 82%, Chicago 95%, Most, Ostrava, Hakodate
+  and New York 97-99%. **The merge needs a tool not installed** (osmium-tool
+  or pyosmium; the builder reads one `--area`): an owner call before those
+  20 builds. Plan, script and README in
+  `data/_basemap_build/download_plan_2026-10-08/`; `download.ps1` is run
+  by the owner (one file at a time, MD5-checked against Geofabrik's file for
+  the dated extract, resumable, logs each dated URL for the ODbL 4.6 offer).
+- **License rows written** in `docs/data_sources.md`, a new internal block
+  after "The Overview's basemap": the self-built tiles and their inputs,
+  the packs as an ODbL Derivative Database, the Protomaps style (BSD-3 and
+  the Mapzen MIT notice; no sprites), the Noto glyphs (OFL and the
+  trademark line) and Cloudflare. Internal until go-live; its reader-facing
+  wording is drafted at review time. `check_internal_markers.py` OK.
+- **For the owner, found by the agent:** `scripts/check_stray_downloads.py`
+  reports `centro-261006.osm.pbf` and
+  `provence-alpes-cote-d-azur-261006.osm.pbf` at the main checkout's root
+  (dated 2026-10-08 00:48), copies of the pilot extracts already in
+  `data/_basemap_build/data/sources/`. Not touched.
 
 ### 2026-10-08 - The full Travel version built on Mendoza and tested on Tokyo; prototypes go to the app with a full handoff (owner; built and measured)
 
