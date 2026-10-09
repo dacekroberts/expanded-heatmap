@@ -98,11 +98,16 @@ done in it. Compaction only fires near the ceiling, after the expensive turns.
 
 ## The lesson: habits to keep
 
-1. **`/clear` at every task boundary**: once a task is pushed and its handoff
-   note or memory is written. The handoff notes, `PLAN.md` and memory are what
-   make a clear cheap here.
-2. **`/compact` early** when a task cannot be cleared mid-way, at about
-   150-200k, rather than waiting for the automatic one near 970k.
+1. **Small, related tasks can share a session; start a new one at the first
+   task boundary past about 150k of context, or when switching to unrelated
+   work** (owner, 2026-10-09: "one task per session" was too strict, since a
+   fresh session starts at about 74k and sessions that stayed under 200k were
+   0.4% of usage). A task boundary is a task pushed and its handoff note or
+   memory written; those notes, `PLAN.md` and memory are what make a fresh
+   start cheap here. Start a new session rather than `/clear`: the old one
+   stays in the sidebar to scroll.
+2. **`/compact` early** when a task cannot be split mid-way, at about
+   200-250k, rather than waiting for the automatic one near 970k.
 3. **One session per batch, never one session for a week of batches**:
    monterrey shows what a session that never ends costs.
 4. **Subagents for reading, not for chatting**: they keep file dumps out of
