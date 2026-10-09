@@ -180,6 +180,16 @@ or published; every proposal waits for the owner.
   the Mapzen MIT notice; no sprites), the Noto glyphs (OFL and the
   trademark line) and Cloudflare. Internal until go-live; its reader-facing
   wording is drafted at review time. `check_internal_markers.py` OK.
+- **pyosmium 4.3.1 installed for the merges (owner, 2026-10-08).** One
+  `pip install` of PyPI's Windows wheel into the pipeline Python 3.14; it
+  added only `osmium` (its one dependency, `requests`, was present) and
+  carries `MergeInputReader` and `BackReferenceWriter`. Kept out of both
+  requirements files: a basemap build tool, like the JDK. The merges for
+  the 20 cities are written and tested on Sunday, once the extracts are
+  downloaded. The faster osmium-tool command line needs conda on Windows,
+  which this machine lacks; only the app's optional per-city cut would want
+  it. The download script also saves Geofabrik's `.md5` line beside each
+  extract, so the app project can check its copy.
 - **For the owner, found by the agent:** `scripts/check_stray_downloads.py`
   reports `centro-261006.osm.pbf` and
   `provence-alpes-cote-d-azur-261006.osm.pbf` at the main checkout's root
