@@ -1,6 +1,9 @@
 # Context review, 2026-10-08: what /clear would have saved
 
 A lesson for the owner, kept to compare against after the 2026-10-11 reset.
+The live version is the owner's private "Claude usage review" page
+(https://claude.ai/artifact/98TEtjLTvpxutTBcMHq9BU), refreshed from
+`python scripts/usage_report.py`; this file is the dated snapshot.
 The owner had never used `/clear` on this project and asked what it would have
 saved. Measured from every local session transcript with
 `python scripts/context_usage.py` (re-run it with `--since` and `--until` to
