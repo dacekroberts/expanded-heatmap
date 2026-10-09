@@ -21,7 +21,7 @@ Usage is weighted by API price ratios (input 1, cache write 1.25, cache read
 docs/efficiency_review_2026-10-08_context.md, Limits. Any project works:
 --prefix names its transcript folder (~/.claude/projects/<prefix>*).
 
-    python scripts/usage_report.py --out <dir> [--prefix <folder prefix>] [--periods "<date>=<plan>,..."]
+    python scripts/usage_report.py --out <dir> [--prefix <folder prefix>] [--periods "<date>=<plan>,..."] [--baseline YYYY-MM-DD]
 """
 import argparse
 import collections
@@ -191,6 +191,7 @@ def main():
     ap.add_argument("--out", required=True)
     ap.add_argument("--prefix", default=PREFIX)
     ap.add_argument("--periods", default=PERIODS)
+    ap.add_argument("--baseline", default="2026-10-05", help="extra row from this date on (YYYY-MM-DD)")
     args = ap.parse_args()
     os.makedirs(args.out, exist_ok=True)
 
@@ -212,6 +213,8 @@ def main():
     since = last_reset(now)
     week = collections.Counter()
     all_turns, _, _, _ = scan(glob.glob(os.path.join(PROJECTS, "*")))
+    # the previous full week, all projects: the evidence that the meter does not follow these weights
+    prev_week_all = sum(x["cost"] for x in all_turns if x["t"] and since - datetime.timedelta(days=7) <= x["t"] < since)
     for x in all_turns:
         if x["t"] and x["t"] >= since:
             label = "this project" if x["project"].startswith(args.prefix) else x["project"].split("-Portfolio-")[-1].split("--claude-worktrees")[0]
@@ -246,6 +249,9 @@ def main():
         {"metric": "gp_share", "label": "General-purpose subagents", "value": round(sum(s["cost"] for s in gp) / total, 4)},
         {"metric": "idle_rewrite_share", "label": "Resuming a session after an hour idle", "value": round(sum(x["idle_rewrite"] for x in turns) / total, 4)},
         {"metric": "short_reply_share", "label": "Re-reads caused by short replies alone", "value": round(sum(e["ctx"] * WEIGHTS["cr"] for e in exchanges if e["short"]) / total, 4)},
+        {"metric": "this_week_all_m", "label": "This week so far, all projects (M)", "value": round(sum(week.values()) / 1e6)},
+        {"metric": "prev_week_all_m", "label": "The previous full week, all projects (M)", "value": round(prev_week_all / 1e6)},
+        {"metric": "prev_week_ratio", "label": "Previous week against this week so far", "value": round(prev_week_all / sum(week.values()), 1) if week else None},
         {"metric": "project_week_share", "label": "This project's share of the machine this week", "value": round(week["this project"] / week_total, 4)},
         {"metric": "week_whatif_120k", "label": "This week: clearing past 120k would have saved", "value": round(whatif(this_week, 120_000, week_cost), 4) if week_cost else None},
         # assumes the plan meter weighs tokens like the API price ratios (unverified)
@@ -260,18 +266,26 @@ def main():
     write("context_bands", [{"band": b, "order": i, "turns": bands[b][0], "share": round(bands[b][1] / input_side, 4)}
                             for i, b in enumerate(band_label(e, CONTEXT_BANDS) for e in CONTEXT_BANDS)])
 
+    def period_row(plan, sel):
+        cost = sum(x["cost"] for x in sel)
+        days = len({x["t"].strftime("%Y-%m-%d") for x in sel})
+        return {"plan": plan, "from": min(x["t"] for x in sel).strftime("%Y-%m-%d"),
+                "to": max(x["t"] for x in sel).strftime("%Y-%m-%d"), "days": days,
+                "per_day_m": round(cost / days / 1e6), "whatif_120k": round(whatif(sel, 120_000, cost), 4),
+                "subagent_share": round(sum(x["cost"] for x in sel if x["sub"]) / cost, 4)}
+
     periods = [(p.split("=")[0], p.split("=")[1]) for p in args.periods.split(",")]
     rows = []
     for i, (start, plan) in enumerate(periods):
         end = periods[i + 1][0] if i + 1 < len(periods) else "9999"
         sel = [x for x in turns if x["t"] and start <= x["t"].strftime("%Y-%m-%d") < end]
-        if not sel:
-            continue
-        cost = sum(x["cost"] for x in sel)
-        days = len({x["t"].strftime("%Y-%m-%d") for x in sel})
-        rows.append({"plan": plan, "from": min(x["t"] for x in sel).strftime("%Y-%m-%d"),
-                     "to": max(x["t"] for x in sel).strftime("%Y-%m-%d"), "days": days,
-                     "per_day_m": round(cost / days / 1e6), "whatif_120k": round(whatif(sel, 120_000, cost), 4)})
+        if sel:
+            rows.append(period_row(plan, sel))
+    # the baseline the habits of 2026-10-09 are measured against: the stretch after the
+    # 2026-10-04 efficiency review, inside the last plan period
+    sel = [x for x in turns if x["t"] and args.baseline <= x["t"].strftime("%Y-%m-%d")]
+    if sel:
+        rows.append(period_row(f"{periods[-1][1]}, from {args.baseline}", sel))
     write("plan_periods", rows)
 
     peaks = collections.defaultdict(list)
