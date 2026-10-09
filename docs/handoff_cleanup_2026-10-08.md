@@ -33,7 +33,11 @@ items are done or moved into PLAN.
     reference updates). The idle 2a and 2b sessions locked the folder, so: the
     `data` junction unlinked alone, both sessions archived (the app kept the
     folder and branch), moved, junction recreated, `check_worktree_data.py`
-    passed. Batch 3 starts there.
+    passed. Batch 3 (the size tests) starts there on Sunday 2026-10-11,
+    after the weekly reset (owner); its prompt opens with 2b's nine owner
+    questions. A new basemap session started 2026-10-08 in
+    `.claude/worktrees/basemap`, putting the resume note's five blockers to
+    the owner; feature freeze since 2026-10-08 (DECISIONS).
   - **`basemap`** (open basemap switch and app groundwork), MOVED 2026-10-08
     from `epic-neumann-5aa0a6`; branch renamed `claude/epic-neumann-5aa0a6`
     to `basemap` (tip `eabd02d7`). Its `data/` had been a real folder whose
