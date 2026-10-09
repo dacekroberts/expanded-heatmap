@@ -64,6 +64,28 @@ The owner moved from Pro to Max 5x on 2026-09-20 and to Max 20x on
   batch, subagents and handoff notes cut the what-if from 51% to 35%, and
   daily usage fell by about half from 2026-10-05.
 
+## What it means for the allowance
+
+The app's usage card is a share of the owner's own account allowance, not
+shared with anyone: a rolling 5-hour window and a weekly window (Sunday 19:00
+UTC), each counting every project and every surface on the plan, with a
+separate weekly limit for Fable inside the all-models one. There is no daily
+limit. The percentages above are shares of this project's measured tokens,
+not of that allowance.
+
+**Rough guide: clearing at task boundaries would have freed about a quarter
+of the weekly allowance this project's work used.** This project was 73% of
+all usage measured on this machine in the week from 2026-10-04 (the rest:
+hydrowhiplash-elnino26 20%, transit-globe 4%, link-station-commercial 3%);
+a third of 73% is about 24%.
+
+**Assumption (unverified):** that the meter weighs tokens roughly as the API
+price ratios do. Limits shows it does not track them closely, and the meter
+also counts usage outside these transcripts, so the real figure could be
+lower or higher. Re-check against the usage card after the reset: a week of
+the habits below should show the weekly percentage climbing more slowly for
+the same amount of work.
+
 ## Why it costs this much
 
 Every turn re-reads the whole conversation so far. A cache read is cheap per
