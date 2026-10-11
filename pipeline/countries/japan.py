@@ -157,6 +157,22 @@ CITIES = {
     "gifu": {"name": "岐阜市", "pref": "21", "epsg": 32653, "n02": "25", "wardless": True, "wards": ["21201"]},
     "mito": {"name": "水戸市", "pref": "08", "epsg": 32654, "n02": "25", "wardless": True, "wards": ["08201"]},
     "morioka": {"name": "盛岡市", "pref": "03", "epsg": 32654, "n02": "25", "wardless": True, "wards": ["03201"]},
+    # The A/B build plan's Regional-2 batch (phase 2, 2026-10-11), each on
+    # N02-25 as its brief measured, every shared rule on (no "rules" key).
+    # Shizuoka has three wards; Matsue's lists still write the village 八雲村,
+    # which MLIT files as 八雲町 (the foundation's config key).
+    "shizuoka": {"name": "静岡市", "pref": "22", "epsg": 32654, "n02": "25", "wards": ["22101", "22102", "22103"]},
+    "kanazawa": {"name": "金沢市", "pref": "17", "epsg": 32653, "n02": "25", "wardless": True, "wards": ["17201"]},
+    "okazaki": {"name": "岡崎市", "pref": "23", "epsg": 32653, "n02": "25", "wardless": True, "wards": ["23202"]},
+    "aomori": {"name": "青森市", "pref": "02", "epsg": 32654, "n02": "25", "wardless": True, "wards": ["02201"]},
+    "matsue": {"name": "松江市", "pref": "32", "epsg": 32653, "n02": "25", "wardless": True, "wards": ["32201"],
+               "town_aliases": {"八雲村": "八雲町"}},
+    "fuji": {"name": "富士市", "pref": "22", "epsg": 32654, "n02": "25", "wardless": True, "wards": ["22210"]},
+    "matsumoto": {"name": "松本市", "pref": "20", "epsg": 32653, "n02": "25", "wardless": True, "wards": ["20202"]},
+    "tottori": {"name": "鳥取市", "pref": "31", "epsg": 32653, "n02": "25", "wardless": True, "wards": ["31201"]},
+    "yamagata": {"name": "山形市", "pref": "06", "epsg": 32654, "n02": "25", "wardless": True, "wards": ["06201"]},
+    "kure": {"name": "呉市", "pref": "34", "epsg": 32653, "n02": "25", "wardless": True, "wards": ["34202"]},
+    "kurashiki": {"name": "倉敷市", "pref": "33", "epsg": 32653, "n02": "25", "wardless": True, "wards": ["33202"]},
     # Japan wave 2 (owner released 2026-10-02), each on N02-25 as its brief
     # measured. Hamamatsu's three wards are the 2024-01-01 ones (中央区 22138,
     # 浜名区 22139, 天竜区 22140): MLIT's ISJ and N03 key them so, and the old

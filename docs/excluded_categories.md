@@ -5833,6 +5833,40 @@ line.
   beyond it, and the JR Hanawa Line 7 toward Odate and 9 toward Morioka; both
   are drawn (owner, 2026-10-06).
 
+### Shizuoka - the city's barber, beauty-salon and laundry registers only, joined to MLIT's address blocks
+
+**Left out**
+- Every food business and every shop: the national list of food businesses
+  gives an address for only about six in ten of Shizuoka's restaurants, so
+  this map shows barbers, beauty salons and laundries only (owner,
+  2026-10-04).
+- 2 laundry vehicles registered to work across the prefecture (県内全域), with
+  no fixed place.
+- 1 laundry agent with no premises (無店舗).
+
+**Counted** - every barber, beauty salon and laundry on the city's complete
+lists of March 31, 2026 (686, 1,752 and 306 rows; the official count a year
+earlier was 690, 1,731 and 312), plus the 41 new premises listed each month
+since: barbers to August 31, 2026, beauty salons and laundries to September
+30, 2026. Closures since March are not published, so the count is an upper
+bound.
+
+**One pin per premises** - 29 repeat registrations are shown once, most of
+them premises registered as both a barber and a beauty salon.
+
+**Not placed** - 1 beauty salon, at an address MLIT's files do not hold.
+Another 68 sit at their town's center, mostly rural addresses in Shimizu
+Ward.
+
+**Names not shown** - none: no trade name is its operator's own name.
+
+**Stations.** The Shizuoka-Shimizu Line is drawn whole; JR's Tokaido Line is
+cut at the city line.
+- Left out: 2 stations beyond it, both in Fuji.
+- The Shinkansen is not drawn; Shizuoka stays a Tokaido Line station.
+- The Oigawa Railway's Ikawa Line, a sightseeing line with 2 stations in the
+  city's mountain north, is not drawn (owner, 2026-10-04).
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

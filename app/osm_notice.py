@@ -183,6 +183,8 @@ OSM_RAIL_BY_CITY = {
         "Toyonaka", "Hirakata", "Suita", "Itami", "Kakogawa", "Amagasaki", "Uji")},
     # East-1 (2026-10-07)
     **{c: _japan(c) for c in ("Higashiyamato", "Nishitōkyō", "Tama", "Higashimurayama", "Chōfu", "Ageo (Regional)", "Sōka", "Tokorozawa", "Fuchū (Tokyo)", "Kasukabe", "Tachikawa", "Hino")},
+    # Regional-2 (2026-10-11)
+    **{c: _japan(c) for c in ("Shizuoka",)},
 }
 
 

@@ -5578,6 +5578,33 @@ CITIES = [
         # it refuses a guessed one.
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Shizuoka",
+        "lat": 34.972,
+        "lon": 138.389,
+        "page": "pages/258_Shizuoka_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (97.5%)",
+        "data_age": "Lists as of 2026-03-31, openings added to 2026-09-30 (barbers to 2026-08-31; an upper bound)",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "The Shizuoka Railway's Shizuoka-Shimizu Line and JR Central's Tokaido Line",
+        "region": "Chubu",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

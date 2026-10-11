@@ -251,7 +251,7 @@ REGISTRY = {
     # the project's colour every map already drew (hue-matched to the operator); pins >= 62.6, lines >= 16.1, lines beside it >= 19.1.
     "jr-central-tokaido-line": {
         "name": "JR Tokaido Line", "operator": "JR Central", "colour": "#E86810",
-        "maps": {"gifu": "TK", "hamamatsu": "JT", "ichinomiya": "TK"},
+        "maps": {"gifu": "TK", "hamamatsu": "JT", "ichinomiya": "TK", "shizuoka": "JT"},
     },
     # the project's colour osaka already drew; pins >= 45.1, lines >= 19.9, lines beside it >= 19.9.
     "jr-west-tozai-line": {

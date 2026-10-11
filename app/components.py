@@ -658,6 +658,8 @@ _OSM_STATION_NAMES = (
     "Higashiyamato", "Nishitōkyō", "Tama", "Higashimurayama", "Chōfu", "Ageo (Regional)", "Sōka", "Tokorozawa", "Fuchū (Tokyo)", "Kasukabe", "Tachikawa", "Hino",
     # Kansai-1 (2026-10-07)
     "Toyonaka", "Hirakata", "Suita", "Itami", "Kakogawa", "Amagasaki", "Uji",
+    # Regional-2 (2026-10-11)
+    "Shizuoka",
 )
 
 # Verbatim where verbatim is required. Each entry is a Notice, and the sources
@@ -3061,6 +3063,32 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
      "Morioka City, MHLW and MLIT did not make and do not endorse this map.",
      False, ("Morioka",)),
+    # The A/B build plan's Regional-2 batch (notices 205-214 and 216,
+    # 2026-10-11).
+    # Shizuoka (notice 205): the city's three registers on its BODIK catalogue
+    # (organization 221007), CC BY 4.0 under the city's terms (read 2026-10-05
+    # by staging: permitted with conditions, display only), in the form for a
+    # modified work, the three dataset pages linked. Fetched from the city's
+    # copy only, so the prefecture portal's reimbursement clause does not
+    # bind. MLIT as in Kobe's, N02 in its 2025 edition. Written from
+    # Hamamatsu's and Kōchi's approved wording under the owner's pre-approval
+    # of template prose (2026-09-30).
+    Notice(205, "Shizuoka City and MLIT (Shizuoka)",
+     "Shizuoka's businesses: この地図は以下の著作物を改変して利用しています。"
+     "理容所台帳、美容所台帳、クリーニング所台帳、静岡市、クリエイティブ・コモンズ・ライセンス 表示4.0 国際"
+     "（[https://creativecommons.org/licenses/by/4.0/deed.ja](https://creativecommons.org/licenses/by/4.0/deed.ja)）"
+     "（[https://data.bodik.jp/dataset/221007_riyoujo-20160331](https://data.bodik.jp/dataset/221007_riyoujo-20160331)、"
+     "[https://data.bodik.jp/dataset/221007_biyoujo-20160331](https://data.bodik.jp/dataset/221007_biyoujo-20160331)、"
+     "[https://data.bodik.jp/dataset/221007_cleaning-20160331](https://data.bodik.jp/dataset/221007_cleaning-20160331)）. "
+     "(This map modifies Shizuoka City's registers of barbers, beauty salons and laundries as of March 31, "
+     "2026 and its monthly lists of new premises to September 2026: this project selected the premises with "
+     "a fixed place, placed each by its address, and counted them around stations.) The registers may "
+     "include premises that have closed. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). Shizuoka City and MLIT did not make "
+     "and do not endorse this map.",
+     False, ("Shizuoka",)),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no
