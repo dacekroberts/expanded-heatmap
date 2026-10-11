@@ -659,7 +659,7 @@ _OSM_STATION_NAMES = (
     # Kansai-1 (2026-10-07)
     "Toyonaka", "Hirakata", "Suita", "Itami", "Kakogawa", "Amagasaki", "Uji",
     # East-2 (2026-10-11)
-    "Koshigaya",
+    "Koshigaya", "Kawaguchi",
 )
 
 # Verbatim where verbatim is required. Each entry is a Notice, and the sources
@@ -1137,7 +1137,7 @@ _NOTICES = [
      "Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, "
      "Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, "
      "Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, "
-     "Higashiōsaka, Kurume, Sasebo, Shimonoseki, Higashiyamato, Nishitōkyō, Tama, Higashimurayama, Chōfu, Ageo (Regional), Sōka, Tokorozawa, Fuchū (Tokyo), Kasukabe, Tachikawa, Hino and Koshigaya, and the "
+     "Higashiōsaka, Kurume, Sasebo, Shimonoseki, Higashiyamato, Nishitōkyō, Tama, Higashimurayama, Chōfu, Ageo (Regional), Sōka, Tokorozawa, Fuchū (Tokyo), Kasukabe, Tachikawa, Hino, Koshigaya and Kawaguchi, and the "
      "metro and light-rail lines and stations of Taipei and New Taipei are from OpenStreetMap, "
      "© OpenStreetMap contributors, available "
      "under the Open Database License. The alignments drawn are OSM's own "
@@ -2671,6 +2671,28 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
      "Koshigaya City, MHLW and MLIT did not make and do not endorse this map.",
      False, ("Koshigaya",)),
+    # Kawaguchi (notice 190): the city's own list, CC BY 2.1 JP (the page's
+    # 「クリエイティブコモンズ「表示」」 with that licence linked; owner, call
+    # 208), credited with the title, the city, the licence URI and a statement
+    # of change, no form being prescribed; MLIT as in Kobe's, N02 in its 2025
+    # edition. Written from Hiroshima's and Koshigaya's approved wording under
+    # the owner's pre-approval of template prose (2026-09-30). The city's
+    # credit comes out if the city asks (CC BY 2.1 JP 第5条).
+    Notice(190, "Kawaguchi City and MLIT (Kawaguchi)",
+     "Kawaguchi's businesses: この地図は、以下の著作物を改変して利用しています。"
+     "食品等営業許可・届出一覧、川口市、クリエイティブ・コモンズ・ライセンス 表示 2.1 日本"
+     "（[https://creativecommons.org/licenses/by/2.1/jp/](https://creativecommons.org/licenses/by/2.1/jp/)）. "
+     "(This map modifies Kawaguchi City's list of food-business permits and notifications, used under "
+     "CC BY 2.1 JP.) "
+     "Processed by this project, which added the new premises the city listed to July 2026 to its March "
+     "2026 list, showed a premises once, selected the storefront types, placed each by its address, and "
+     "counted them around stations. The city withholds some addresses and trade names, and the list has "
+     "no entries for June 2026; it is not complete. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The list may include premises that have closed. "
+     "Kawaguchi City and MLIT did not make and do not endorse this map.",
+     False, ("Kawaguchi",)),
     # Toyonaka (notice 169): the city's two BODIK datasets, CC BY 4.0 under
     # 豊中市オープンデータ利用規約 ２ (its credit example, the dataset titles,
     # the licence link and the statement of change CC BY 4.0 asks for); MHLW as

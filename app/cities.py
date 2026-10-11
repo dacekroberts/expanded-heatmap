@@ -5643,17 +5643,23 @@ CITIES = [
         "lat": 35.833,
         "lon": 139.733,
         "page": "pages/243_Kawaguchi_Heatmap.py",
-        "blurb": "JR East and the Saitama Railway (TODO: list the lines)",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (99.0%)",
+        "data_age": "Food list as of 2026-03-31 plus new premises to 2026-07-31 (no June entries)",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Food premises only",
+        "blurb": "The Saitama Stadium Line and JR East's Keihin-Tohoku and Musashino lines",
         "region": "Saitama Prefecture",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
         "country": "Japan",
+        # metro (the brief: the backbone is a subway-class private line)
         "mode": "metro",
         "in_default_view": False,
-        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
-        # pinned zoom. Run `python scripts/check_macro_labels.py`,
-        # which scores every city in every region at three widths -
-        # and which will first demand this city's label width be
-        # MEASURED in a real browser with Space Grotesk loaded, since
-        # it refuses a guessed one.
+        # Above the dot, the scaffold's default. The Japan views and their
+        # label scoring are Cleanup's (owner, call 198).
         "label_offset": ("middle", 0, -22),
     },
     {

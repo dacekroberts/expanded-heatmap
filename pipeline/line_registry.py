@@ -174,7 +174,7 @@ REGISTRY = {
     # the project's colour kawasaki, tokyo already drew; pins >= 50.6, lines >= 13.6, lines beside it >= 19.1.
     "jr-east-keihin-tohoku-line": {
         "name": "JR Keihin-Tohoku Line", "operator": "JR East", "colour": "#08A0C0",
-        "maps": {"kawasaki": "JK", "tokyo": "JK", "yokohama": "JK"},
+        "maps": {"kawaguchi": "JK", "kawasaki": "JK", "tokyo": "JK", "yokohama": "JK"},
     },
     # JR West's own line colour; pins >= 82.7, lines >= 19.1, lines beside it >= 19.1.
     "jr-west-kobe-line": {
@@ -200,7 +200,7 @@ REGISTRY = {
     # the project's colour every map already drew (hue-matched to the operator); pins >= 54.7, lines >= 33.6, lines beside it >= 33.6.
     "jr-east-musashino-line": {
         "name": "JR Musashino Line", "operator": "JR East", "colour": "#F05820",
-        "maps": {"fuchu_tokyo": "JM", "higashimurayama": "JM", "koshigaya": "JM", "tokorozawa": "JM"},
+        "maps": {"fuchu_tokyo": "JM", "higashimurayama": "JM", "kawaguchi": "JM", "koshigaya": "JM", "tokorozawa": "JM"},
     },
     # the project's colour every map already drew (hue-matched to the operator); pins >= 23.2, lines >= 19.1, lines beside it >= 19.1.
     "jr-east-nambu-line": {

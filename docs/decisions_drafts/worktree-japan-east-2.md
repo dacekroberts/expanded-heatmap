@@ -19,7 +19,40 @@ Newest entry first. Cleanup folds this file into `DECISIONS.md`.
 
 ## Parked calls
 
-None yet.
+- **Kawaguchi A: late starters that are renewals (call 172 against this
+  list's shape).** The shared `late_start` rule drops 142 rows whose term
+  starts after their list's as-of. All 131 in the March list carry a first
+  permit and a latest grant date on or before 2026-03-31 and a term starting
+  April to June 2026: renewals already granted, 112 of them restaurants at
+  premises the list holds. With the rule off (measured in scratch, nothing
+  written) the map holds 5,312 pins against 5,212 as built: 100 pins, 91 of
+  them Food service. *Recommendation:* a shared rule that a late start whose
+  first-permit date (初回許可（届出）年月日) is on or before the as-of is a
+  renewal and stays (Cleanup's or a foundation change; the saitama_pref
+  module already treats a late new-law permit as the renewal of an old-law
+  twin). *Alternative:* `"rules_off": {"late_start": why}` for Kawaguchi
+  alone, which also keeps the 41 monthly rows that may not be open yet.
+  *Tradeoff of leaving it:* about 90 operating restaurants are missing. Built
+  with the shared rule as it stands.
+- **Kawaguchi B: three trade names carry a private-use glyph the map shows
+  as an empty box** (U+E218, U+F223, U+E315, once each; the fourth, U+E4AA, is
+  read as 塚 by the city's gaiji table). `map_common.glitched_name` does not
+  flag a private-use code point, so the name renders as published; one pin
+  is inside a ring. The owner's line is no glitched pin names live, so
+  **Kawaguchi does not land until this is settled.** *Recommendation:*
+  `glitched_name` treats U+E000-U+F8FF as glitched, so such a pin shows its
+  permit type (a shared renderer change, Cleanup's; other maps change only
+  where they hold such a name, to be measured first). *Alternative:* extend
+  Kawaguchi's gaiji table once each character is read from evidence; a guess
+  today. `businesses_clean.csv`'s address column also keeps the raw address
+  (104 pins with a private-use code point); the map never renders it, noted
+  for place search.
+- **Kawaguchi C: the Saitama Railway's line name.** The brief reads the
+  operator's own public name, "Saitama Stadium Line" (埼玉スタジアム線, the
+  line's adopted name); N02 files it as 埼玉高速鉄道線. Built as "Saitama
+  Stadium Line"; confirm the label. It is new to the site (#3060B8) and not
+  registered: no map in this batch or already built draws it (Tokyo leaves
+  its one station out).
 
 ## Applied by precedent (named for the batch report)
 
@@ -59,6 +92,52 @@ None yet.
   cities are added to all three as East-1's were. Cleanup's to reconcile.
 
 ## Entries
+
+### 2026-10-11 - Kawaguchi built, food only, the March list kept whole with the new premises to July; two parked calls hold its landing
+
+- **Kawaguchi built (page 243, notice 190), food only (Band B; the
+  personal-services PDFs are not open data, call 104), Ichinomiya's merge:
+  5,212 storefronts (Food service 3,299, Food shops 1,913) around 8 stations
+  on 3 lines, 56.4% of them in a ring (2,939).** On the Japan foundation's
+  rules. Built by a subagent of the East-2 lead, integrated by the lead.
+- **Brief check 11/12:** the live CSV now carries an R0808 edition (the page
+  was updated 2026-10-07). Built on the file on disk, the 2026-08-19 edition
+  the brief measured (call 177: the CSV as published, June's gap named);
+  `config.source_rows` stops unless the file holds exactly R0803 8,034, R0804
+  112, R0805 104 and R0807 114 rows, so a re-download cannot be read
+  silently. The newer edition is a refresh for after landing, under a new
+  file name (the shared data/ rule).
+- **One CSV, two sources:** `food` (R0803, `TERM_AS_OF` 2026-03-31) and
+  `food_new` (the months, 2026-07-31), split by Source.Name in a read-only
+  `source_rows`.
+- **Step 2:** address withheld by the city 1,316; area-wide 10; another
+  municipality 9; late start 142 (parked call A); not a premises 436; out by
+  rule 790 (302 institutional catering, 243 vending, 232 manufacturing and
+  other non-counter types, 11 mail order, 2 temporary). Of 5,661 storefront
+  rows: 5,598 block, 57 town centre, 6 unplaced (0.1%). 443 repeat rows
+  dropped. Masked trade names 1,350; names withheld by the name rule 8.
+  Factory share 47 of 350 (13.4%), kept. Against the brief's 5,283 pins: 100
+  fewer from late_start, about 25 more Retail from 米殻類販売業 now classified.
+- **Gaiji:** the three address code points are in `japan.CITIES` (塚, 蓮,
+  樋); 139 raw address rows carry one. Three trade names keep an unread
+  private-use glyph (parked call B).
+- **Economic Census control:** 3,299 pins against 1,384 establishments,
+  2.38, above the built cities' 1.56-1.92; the brief's reading stands (the
+  official count is itself 3.08 per establishment, and the March list is
+  100.5% of e-Stat's 4,259 restaurants).
+- **Privacy verdict: publish, once call B is settled.**
+  `check_personal_exposure.py kawaguchi`: the Japan pass prints 0; 16 raw
+  trade names are an operator's own name, 8 pins show their permit type.
+- **Rail:** N02-25; 8 stations: the Saitama Stadium Line 6 of 8, JR
+  Keihin-Tohoku 2 (a route over 東北線 from 赤羽 to 蕨, Tokyo's and Kawasaki's
+  JK form), JR Musashino 1 (a JR stub kept as cut, standing call 3). 東川口 one
+  group for two lines. `N03_NEIGHBOR_PREFS = ("13",)`. Gate 3 exact. 8
+  excluded. English names from OSM, no override. Colours: JK and JM from the
+  registry, SR #3060B8 from the colour search (77.8 from the nearest pin,
+  49.1 from JK).
+- **Visuals:** notice 190 caption only (CC BY 2.1 JP names no placement).
+  **Open terms question: none**, but the city is held off cards and public
+  pieces until parked call B is settled.
 
 ### 2026-10-11 - Koshigaya built, the March food list kept whole with the months since, and the October registers
 

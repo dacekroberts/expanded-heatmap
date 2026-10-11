@@ -4949,6 +4949,46 @@ line.
 - Left out: 9 stations beyond it: 3 in Soka, 2 in Kasukabe, 2 in Yoshikawa,
   1 in Misato and 1 in Kawaguchi.
 
+### Kawaguchi - the city's food list with its monthly new premises, joined to MLIT's address blocks
+
+**Left out**
+- Barbers, beauty salons and laundries: the city's lists of them are not
+  open data.
+- Every shop that is not a food shop: Japan has no general business license.
+- 1,316 entries whose address the city withholds.
+- New premises of June 2026: the city's list has no entries for that month.
+- 436 food trucks, stalls and other filings with no fixed premises, 10 rows
+  addressed to a whole area and 9 addressed in another municipality.
+- 302 school, hospital and staff canteens, 243 vending machines, 11
+  mail-order businesses and 2 rows marked temporary or mobile.
+- 232 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 142 permits whose term starts after the date their list covers (most are
+  renewals of a premises the list already holds).
+
+**Counted** - the permits and notifications in the city's food list on
+March 31, 2026, kept whole, with the new premises it listed for April, May
+and July 2026. The March list holds 4,281 restaurants, against 4,259 in the
+national count at the end of March 2025. 47 of the 350 bakery, confectioner
+and deli rows (13.4%) have a trade name that reads as a factory; they are
+kept (owner, 2026-09-24).
+
+**One pin per premises** - 443 repeat permits are shown once.
+
+**Not placed** - 6 rows (0.1%): 3 at addresses MLIT's files do not hold and
+3 addressed in Tokyo. Another 53 sit at their town's center.
+
+**Names not shown** - the city masks 1,350 trade names; those on the map
+show their permit type, as do 8 pins whose trade name is the operator's own
+name.
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 8 stations beyond it: 4 in Saitama City (Minami and Midori
+  wards), 2 in Tokyo's Kita Ward, 1 in Warabi and 1 in Koshigaya.
+- JR's Utsunomiya, Takasaki and Shonan-Shinjuku line trains pass through
+  without stopping and are not drawn.
+
 ### Tachikawa - the Tokyo Metropolitan Government's Tama ledgers and the national filings, joined to MLIT's address blocks
 
 **Left out**

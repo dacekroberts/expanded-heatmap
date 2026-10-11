@@ -43,25 +43,57 @@ else:
 # replaces this with its own caption of the sources' dates and credits.
 render_data_age("Kawaguchi")
 
-# TODO: replace every TODO bullet with prose true for this city, as short
-# bullets under bold headings (app/pages/43_Seoul_Heatmap.py is the model):
-# the lines by name, what is not drawn, the area and the stations left out, the
-# source and its limitations. Detail a reference page carries stays there.
+# From the japan-city skill's template and Hiroshima's and Koshigaya's pages
+# (approved wording, pre-approved for this build, 2026-09-30); the sentences
+# no template covers (the dated first bullet with the missing June entries,
+# the withheld addresses, the trains that pass without stopping) are
+# proposals in docs/decisions_drafts/worktree-japan-east-2.md. The dates are
+# the list's own (config.SOURCE_AS_OF); about one in six is the 1,316 entries
+# of 8,364 whose address the city withholds; the ring share, 56.4% (2,939 of
+# 5,212), is step 3's.
 st.markdown(
     """
 **The lines**
 
-- TODO: the lines drawn, by name (each is labeled on the map and in the legend).
-- TODO: what is not drawn, and why.
-- TODO: the area covered; stations left out are listed below.
+- Three lines are drawn, each labeled on the map and in the legend: the Saitama Stadium Line and
+  JR East's Keihin-Tohoku and Musashino lines.
+- Lines and stations come from MLIT's national railway data (国土数値情報); station names in
+  English are from OpenStreetMap. Line colors are this project's own, not the operators'.
+- Only stations inside Kawaguchi City get rings, because the business data covers the city alone:
+  lines running on to Saitama City, Warabi, Koshigaya and Tokyo's Kita Ward are cut at the city
+  line. The stations left out are listed below.
+- JR's Utsunomiya, Takasaki and Shonan-Shinjuku line trains pass through the city without
+  stopping and are not drawn.
 
 **The businesses**
 
-- TODO: the data source, and any category it is missing.
+- **This map shows food businesses only.**
+- Kawaguchi City's lists of barbers, beauty salons and laundries are not open data, so personal
+  services are not on this map.
+- Japan has no general business license, so shops other than food shops (clothing, electronics,
+  pharmacies) do not appear either.
+- From Kawaguchi City's list of food-business permits and notifications (as of March 31, 2026,
+  with the new premises it listed for April, May and July 2026; the list has no entries for June).
+- The Food shops layer is food retail only (bakeries and confectioners, delis, butchers and
+  fishmongers, and the shops that notify the city, such as supermarkets, convenience stores and
+  greengrocers).
+- The list may include premises that have closed, so a dot means a permit on file, not a business
+  open today.
+
+**Reading the map**
+
+- The city withholds the address of about one entry in six in its list, and those are not on this
+  map. Where they are is not known.
+- The rest are matched to MLIT's address reference data, which places most at their street block;
+  where only the district can be found, the dot sits at the district's center.
+- Where the city masks a trade name, or a trade name is its operator's own name, the dot shows its
+  permit type instead.
+- Names and permit types are shown in Japanese, as the list records them.
+- **About 56% of storefronts sit within a ring.**
 """
 )
 
-render_map_help("three business categories (Retail, Food service and Personal services)")
+render_map_help("two business categories (Food shops and Food service)")
 render_excluded_stations("Kawaguchi")
 render_country_links("Kawaguchi")
 
