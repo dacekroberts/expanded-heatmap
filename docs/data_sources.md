@@ -90,7 +90,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Italy | [`data_sources/italy.md`](data_sources/italy.md) | Milan, Rome, Florence |
 | France | [`data_sources/france.md`](data_sources/france.md) | Paris, Marseille, Toulouse, Lille (Regional), Rennes, Le Mans, Besançon, Avignon, Tours, Dijon, Reims, Orléans, Mulhouse, Brest, Saint-Étienne, Nice, Montpellier, Strasbourg, Le Havre, Caen, Rouen (Regional), Bordeaux (Regional), Nantes (Regional), Grenoble (Regional), Valenciennes (Regional), Angers |
 | Norway | [`data_sources/norway.md`](data_sources/norway.md) | Oslo, Bergen |
-| Romania | [`data_sources/romania.md`](data_sources/romania.md) | Bucharest |
+| Romania | [`data_sources/romania.md`](data_sources/romania.md) | Bucharest, Cluj-Napoca |
 | Sweden | [`data_sources/sweden.md`](data_sources/sweden.md) | Stockholm, Göteborg |
 | Denmark | [`data_sources/denmark.md`](data_sources/denmark.md) | Copenhagen (Regional), Aarhus, Odense |
 | Czechia | [`data_sources/czechia.md`](data_sources/czechia.md) | Prague, Brno, Plzeň, Olomouc, Ostrava, Liberec (Regional), Most (Regional) |
@@ -4568,6 +4568,36 @@ batch at review time).
   run 2026-10-11; the verdict is in
   `docs/decisions_drafts/worktree-japan-kansai-2.md` ("Kansai-2: seven
   Japanese cities built", 2026-10-11).<!-- /internal -->
+
+**215. DSVSA Cluj (Cluj-Napoca) — displayed by choice, not required**
+(written into `render_site_notices()` 2026-10-11; lands with the Kansai-2
+batch at review time).
+
+- **SILENT, with the pages named** (read in the browser 2026-10-11; the
+  Cluj-Napoca rows in [`data_sources/romania.md`](data_sources/romania.md)):
+  `cluj.dsvsa.ro` has no terms-of-use, copyright or privacy page, only a
+  cookie policy; its three list pages carry a title, a technical note and
+  the file table, with no attribution wording and no ban on republication.
+  The footer names ANSVSA ("Toate drepturile rezervate"), a website footer,
+  which governs site content, not the data (the reading made for
+  DSVSA București, notice 67).
+  Not confirmed that day: `data.gov.ro` did not answer, so that it carries
+  no DSVSA Cluj dataset rests on the European data portal's empty search;
+  ANSVSA's own site was not read.
+- **MUST DISPLAY**: nothing is prescribed. The notice credits the publisher,
+  says no license is stated, names the changes (the cut to the city, the
+  name rule and the address placement) and disclaims endorsement, in the
+  wording of DSVSA București's notice 67 (approved by the owner 2026-09-29).
+- **MUST NOT**: present the map as the official register, or imply DSVSA or
+  ANSVSA produced or endorses it.
+- **MUST DO**: nothing to the publisher. The owner saved the files in their
+  own browser; the county's hosts refuse scripts, and no script fetches
+  them. <!-- internal -->Privacy: `check_personal_exposure.py cluj_napoca`, run
+  2026-10-11; the verdict is in
+  `docs/decisions_drafts/worktree-japan-kansai-2.md` ("Cluj-Napoca built",
+  2026-10-11).<!-- /internal -->
+- **Cluj-Napoca's tram lines and stops, boundary and address points are
+  OpenStreetMap data** (ODbL, notice 1).
 
 
 ## Gaps

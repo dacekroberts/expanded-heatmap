@@ -609,6 +609,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Bergen | Bybanen 1 and 2 (light rail) | Ferries | Skyss via Entur GTFS | Kommune | 0 / 0 |
 | **Romania** | | | | | |
 | Bucharest | Metrorex M1–M5 | Suburban trains, trams | OpenStreetMap route relations; gate 3 exact on 64 (network) | Municipality (six sectors) | 0 / 0 |
+| Cluj-Napoca | CTP trams 100, 101, 102 | The depot runs numbered 102L; the metro under construction | OpenStreetMap route relations; stops paired by direction into 20 stations; gate 3 exact per direction against CTP's stop maps | Municipality | 0 / 0 |
 | **Sweden** | | | | | |
 | Stockholm | Tunnelbana: Gröna, Röda and Blå linjen (routes T10–T19), one label per line | Pendeltåg, Roslagsbanan, Saltsjöbanan, trams; the unopened Yellow line | OpenStreetMap route relations (SL's GTFS needs a key); gate 3 exact on 100 | Kommune | 18 / 0 |
 | Göteborg | Göteborgs Spårvägar trams 1–13 | Buses, ferries, commuter trains; Lisebergslinjen (heritage) | OpenStreetMap route relations; gate 3 exact (Västtrafik) | Kommun | 5 / 0 |
@@ -860,6 +861,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Göteborg | Food hygiene register | Göteborgs Stad's register of food businesses (Livsmedelsverksamheter, CC0, refreshed daily), one row per premises | Its own local types (`typ`), mapped to the national groups, plus a name test | 609 / 1,646 / — | No Personal services; Retail = food shops only ("Food shops"); the register carries no dates |
 | **Romania** | | | | | |
 | Bucharest | Food hygiene register | DSVSA București's registers of food units (17 category files, active rows only) | The file (the unit category), with the category text for exceptions | 5,250 / 5,994 / — | No Personal services; Retail = food shops only ("Food shops"); a quarter of premises unplaced |
+| Cluj-Napoca | Food hygiene register | DSVSA Cluj's county lists of food units (17 category files), cut to the addresses that name Cluj-Napoca | The file (the unit category, read from its name), with the category text for exceptions | 1,861 / 1,940 / — | No Personal services; Retail = food shops only ("Food shops"); about three premises in ten unplaced |
 | **Denmark** | | | | | |
 | Copenhagen (Regional) | National establishment register | CVR production units | DB25 (NACE Rev. 2.1) | 8,549 / 4,779 / 3,217 | Tattoo studios lost with the catch-all |
 | Aarhus | National establishment register | CVR production units | DB25 (NACE Rev. 2.1) | 636 / 450 / 214 | Tattoo studios lost with the catch-all |
@@ -1102,6 +1104,7 @@ The in-ring pin counts were re-read from each committed map's layer menu on
 | Bergen | Address join to Matrikkelen (96.2%) | Web shops cannot be excluded | Oslo's; 96.990 on Bergen's own numbers; sole-trader names withheld |
 | **Romania** | | | |
 | Bucharest | Address join to OpenStreetMap's address points, in the premises' own sector (74.9%) | About one storefront in four unplaced, even across sectors; fishmongers in markets lowest | Cancelled registrations, mobile units, kiosk carts, vending machines, pastry labs, in-house buffets, catering; sole traders' and person-named companies' names withheld (category shown) |
+| Cluj-Napoca | Address join to OpenStreetMap's address points, with the nearest listed number on the same side where the number is missing (71.3%) | About three storefronts in ten unplaced; the lists mark no closures and are dated April 30 to October 6, 2026 | Rows naming another place or none; catering, canteens, in-house buffets, pastry labs, pharmacies, market stalls, mobile and temporary units, trailers, vending machines; sole traders' and person-named companies' names withheld (category shown) |
 | **Sweden** | | | |
 | Stockholm | Register coordinates (98.4%); 85 not placed | Food only; frozen register; untyped premises before 2024 recovered by name only for 2022-23 (flagged); office canteens under company names not separated | Institutional kitchens (preschools, schools, care), caterers, event firms, food trucks and pharmacies by name; wholesale, production and "Övrigt" by type |
 | Göteborg | Register coordinates (99.0%); 29 at the register's fallback point not placed | Food only; no dates; untyped premises recovered by name only (flagged); gyms, cinemas, bingo halls and general stores registered as food premises are counted; office canteens under company names not separated | Institutional kitchens, staff restaurants, hotel breakfast rooms, caterers, mobile units, ships, vending machines and pharmacies by type or name; wholesale, production and transport by type; address shown for a premises named only as a person |
@@ -1342,6 +1345,7 @@ In-ring share = in-ring heat points ÷ all-storefront heat points.
 | Bergen | Register downloaded 2026-09-24 (Norway's date; 2026-09-23 in Pacific time); transit 2026-09-27 | B | 0.6 mi | Yes | 59% | Name; address for sole traders |
 | **Romania** | | | | | | |
 | Bucharest | Registers of 2026-08-25 (fetched by the owner 2026-09-28) | B | 0.6 mi | Yes | 72% | Company name without its legal form; category for sole traders and person-named companies |
+| Cluj-Napoca | Lists dated 2026-04-30 to 2026-10-06 (saved by the owner 2026-10-07) | B | 0.3 mi | Yes | 33% | Company name without its legal form; category for sole traders and person-named companies |
 | **Sweden** | | | | | | |
 | Stockholm | Inspections to 2025-10-21, layer edited 2025-10-22 (fetched 2026-09-29) | B | 0.6 mi | Yes | 89% | Premises name |
 | Göteborg | No dates; the premises active on the day fetched (2026-10-01) | B | 0.3 mi | Yes | 75% | Premises name; address for a premises named only as a person |

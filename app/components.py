@@ -637,7 +637,7 @@ _OSM_RAIL = (
     "Buenos Aires", "Mendoza", "Seattle (Regional)", "London", "Glasgow",
     "Newcastle (Regional)", "Manchester (Regional)", "Birmingham (Regional)",
     "Edinburgh", "Sheffield", "Nottingham (Regional)", "Blackpool (Regional)",
-    "Liverpool (Regional)", "Stockholm", "Bucharest", "Tbilisi", "Montpellier", "Strasbourg",
+    "Liverpool (Regional)", "Stockholm", "Bucharest", "Cluj-Napoca", "Tbilisi", "Montpellier", "Strasbourg",
     "Le Havre", "Caen", "Rouen (Regional)", "Philadelphia",
     # Belgium (2026-10-04): commune boundaries only; the rail is the operators'.
     "Antwerp", "Ghent", "Charleroi", "Liège",
@@ -1127,7 +1127,8 @@ _NOTICES = [
      "Nottingham Express Transit, the Blackpool Tramway and Merseyrail, and the boundaries "
      "used to select them, Stockholm's Tunnelbana lines and stations and its "
      "kommun boundaries, Bucharest's metro lines and stations and its city and "
-     "sector boundaries, the Tbilisi Metro's lines and stations and the city's "
+     "sector boundaries, Cluj-Napoca's tram lines and their stops, the city boundary us"
+     "ed to select them and the address points used to place its businesses, the Tbilisi Metro's lines and stations and the city's "
      "boundary, the tram and métro line geometry of Montpellier, Strasbourg, "
      "Le Havre, Caen and Rouen, the location of Philadelphia's 11th Street "
      "station, which is closed for works and not drawn, "
@@ -3308,6 +3309,19 @@ _NOTICES = [
      "names are shown without their legal form, and sole traders by category only. This is "
      "not the official register, and it is not produced or endorsed by DSVSA or ANSVSA.",
      False, ("Bucharest",)),
+    # Cluj-Napoca (notice 215): DSVSA Cluj's lists, in notice 67's approved wording
+    # (owner, 2026-09-29) with this city's own changes named. One notice per county
+    # directorate; 67 is untouched.
+    Notice(215, "DSVSA Cluj (Cluj-Napoca)",
+     "Food premises for Cluj-Napoca are from the lists of the Sanitary-Veterinary and "
+     "Food Safety Directorate of Cluj County (DSVSA Cluj), which it publishes with no stated "
+     "licence. Changes: the county lists are cut to the addresses that name Cluj-Napoca; the "
+     "units are filtered to restaurants, cafés, bars and food shops, merged where one premises "
+     "holds several registrations, grouped into two categories, placed by matching their "
+     "addresses to OpenStreetMap's address points, and mapped by distance to tram stops. Company "
+     "names are shown without their legal form, and sole traders by category only. This is "
+     "not the official register, and it is not produced or endorsed by DSVSA or ANSVSA.",
+     False, ("Cluj-Napoca",)),
     # SEMAS's 상가(상권)정보 (notice 68): data.go.kr 15083033, 이용허락범위 제한 없음. licence-read
     # 2026-09-29: PERMITTED WITH CONDITIONS - a source credit, no distortion of the
     # facts (so the categories are stated as this project's), SEMAS's website copyright
@@ -3936,7 +3950,7 @@ _UNSETTLED_TERMS = (
     "nothing and website terms that forbid republication; the City was asked "
     "for its position on September 21, 2026 and has not replied. Sources for "
     "Los Angeles, Miami, Tucson, Dallas, Seattle (King County, Bellevue and "
-    "Snohomish County), Amsterdam, Den Haag, Stockholm, Bucharest and Daegu carry no "
+    "Snohomish County), Amsterdam, Den Haag, Stockholm, Bucharest, Cluj-Napoca and Daegu carry no "
     "license, or terms written for a website rather than its data, and "
     "Brazil's census addresses rest on federal law rather than a license. If "
     "any publisher says this use is not permitted, that city comes off the "

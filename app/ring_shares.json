@@ -1063,5 +1063,10 @@
   "in_ring": 1181,
   "all": 1922,
   "map_blob": "1db544f6b347e6b3be18bb4b5452de05f27ec715"
+ },
+ "cluj_napoca": {
+  "in_ring": 1237,
+  "all": 3801,
+  "map_blob": "3bf15728efc8576f0027b2022858423e5f45e289"
  }
 }

@@ -166,6 +166,8 @@ OSM_RAIL_BY_CITY = {
     "Stockholm": ("Stockholm's Tunnelbana lines and stations and its kommun boundaries", True),
     "Bucharest": ("Bucharest's metro lines and stations and its city and sector boundaries",
                   True),
+    "Cluj-Napoca": ("Cluj-Napoca's tram lines and their stops, the city boundary us"
+                    "ed to select them and the address points used to place its businesses", True),
     "Tbilisi": ("the Tbilisi Metro's lines and stations and the city's boundary", True),
     "Montpellier": ("the tram line geometry of Montpellier", True),
     "Strasbourg": ("the tram line geometry of Strasbourg", True),

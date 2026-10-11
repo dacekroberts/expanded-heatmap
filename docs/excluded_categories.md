@@ -6912,6 +6912,53 @@ inside markets.
 **Stations.** Metrorex M1-M5, 64 stations, every one inside the municipality.
 - Suburban trains and trams are not drawn.
 
+### Cluj-Napoca - the county's sanitary-veterinary lists, food only, cut to the city and placed by address
+
+**Only food is on this map.** DSVSA Cluj registers the units that handle
+food; Romania publishes no open register of other shops or of personal
+services, so clothes shops, hairdressers and the like are missing rather than
+excluded. Food shops (butchers, bakeries, confectioners, food shops,
+supermarkets) are a category of their own.
+
+**Outside the city** - the lists cover all of Cluj County and carry no
+locality column. 6,230 rows whose address names Cluj-Napoca are read; 5,352
+that name another town or village, or no place at all, are not.
+
+**Closed or suspended** - the lists have no canceled section. 5 rows carrying
+a note that the unit is closed, suspended or canceled are left out; the rest
+are read as registered. The lists mark no other closures, and their dates
+run from April 30, 2026 (bars) and June 29, 2026 (restaurants) to October 6,
+2026.
+
+**Excluded by category** - 310 premises: 122 market and street stalls
+("stand"), 74 pharmacies, 42 catering units, 4 canteens, and 68 in-house
+buffets ("bufet de incintă"), pastry labs, vending machines, trailers and
+mobile, itinerant or temporary units. Fixed kiosks ("chioșc") and bakeries
+registered as production units stay.
+
+**Merged** - one premises registered in several files (a supermarket's butcher
+and bakery counters, or a bar on both of the county's bars lists) is shown
+once: 6,230 rows are 5,644 premises.
+
+**Names withheld** - a sole trader (106) and a company named only for a
+person (40) are shown by category, never by name (the owner's rules,
+2026-09-28 and 2026-09-29). Other companies show their name without the legal
+form.
+
+**Not placed** - 1,533 of the 5,334 storefront premises (28.7%): the register
+gives an address but no position, and each is placed by matching its street
+and number to OpenStreetMap's address points. Where OpenStreetMap has the
+street but not the number, the premises sits at the nearest number it lists on
+the same side of the street, at most six numbers away (447 premises, a median
+of two numbers from their own). Left off rather than guessed: the street not
+found among OpenStreetMap's addresses (644), no number given (411), the number
+in two or more places (254), the street without a near number (224).
+
+**Stations.** CTP's tram lines 100, 101 and 102, every stop inside the
+municipality. CTP names each direction's stop separately; the 38 stops are
+paired into 20 stations.
+- The depot runs numbered 102L are not drawn.
+
 ### Incheon - SEMAS's national storefront register, all three buckets
 
 **One national register, every storefront with a point.** The Small Enterprise

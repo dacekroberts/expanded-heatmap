@@ -88,6 +88,10 @@ REGISTRIES = {
     # SOLE_TRADER). No address reaches the map; placement is by OSM address.
     "bucharest": dict(raw=None, trade=None, owner=None,
                       processed="businesses_clean.csv", address=None),
+    # Cluj-Napoca (2026-10-11): DSVSA Cluj's registers, Bucharest's rule and
+    # Bucharest's own display_name(), imported unchanged by its step 2.
+    "cluj_napoca": dict(raw=None, trade=None, owner=None,
+                        processed="businesses_clean.csv", address=None),
     # Incheon: SEMAS's 상가(상권)정보 names STOREFRONTS (상호명, with the branch),
     # with no owner, representative or phone column; the Korean pass (Seoul's rule,
     # pipeline/korean_names.py) withholds a bare personal name at a residential

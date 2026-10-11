@@ -38,7 +38,7 @@ Mapped so far:
 - **Argentina:** Buenos Aires, Mendoza
 - **Australia:** Sydney, Melbourne
 - **Sweden:** Stockholm, Göteborg
-- **Romania:** Bucharest
+- **Romania:** Bucharest, Cluj-Napoca
 - **Switzerland:** Zurich, Geneva (Regional)
 - **Georgia:** Tbilisi
 - **Belgium:** Brussels, Antwerp, Ghent, Charleroi, Liège, Brussels (Regional)

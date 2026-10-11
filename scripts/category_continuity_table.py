@@ -1991,8 +1991,16 @@ COLUMNS["romania_dsvsa"] = {
     **{rid: absent("a food-only register of registered food units") for rid in (
         "funeral", "personal_catchall", "adult_hostess", "sex_shop", "massage_commercial", "massage_regulated",
         "car_dealer", "petrol_station", "vehicle_repair", "gambling", "pawnbroker", "vet", "parking", "repair",
-        "lodging", "recreation", "pharmacy", "optician")},
+        "lodging", "recreation", "optician")},
+    # Cluj-Napoca (2026-10-11): a county's files are role-coded, and the county
+    # rules read the category text for the kinds Bucharest met as whole files.
+    "pharmacy": absent("a food-only register: its pharmacies fall under pharmacy_food_register, which is "
+                       "where the module's pharmacy string is located", ignore=("farmaci",)),
+    "pharmacy_food_register": [loc(_ro("farmacie", "A23:food_shop"),
+                                   "a pharmacy in a county's food-shop file (Cluj-Napoca)")],
     "no_counter_food": [loc(_ro("catering"), "catering"), loc(_ro("bufet incinta"), "in-house buffet"),
+                        loc(_ro("restaurant-cantina", "A17:restaurant"), "canteen, in a county's restaurant file"),
+                        loc(_ro("stand alimentar", "A23:food_shop"), "market stall, in a county's food-shop file"),
                         outside("pipeline/bucharest/config.py", "ANIMAL_FILES",
                                 "the canteen and catering files are not fetched (owner, 2026-09-28)")],
     "nightclub": [loc(_ro("bar", "N36"), "bar")],
@@ -2001,7 +2009,8 @@ COLUMNS["romania_dsvsa"] = {
     "mobile_unit": [loc(_ro("toneta", "A25"), "kiosk cart"), loc(_ro("automat inghetata", "N24"), "vending"),
                     fixed(_ro("fast food (rulota)"), "fast food in a trailer", "Food service", "2026-09-29",
                             "seven A19 units whose category says trailer or mobile unit stay Food service; "
-                            "neither the category rule nor step 2's sector test catches 'rulota'")],
+                            "neither the category rule nor step 2's sector test catches 'rulota'"),
+                    loc(_ro("bufet ambulant", "A17:restaurant"), "itinerant buffet, in a county's file")],
 }
 
 

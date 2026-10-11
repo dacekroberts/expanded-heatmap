@@ -84,7 +84,7 @@ this brief could read (below).
 | A02 | 02.inregistrate-macelarie.xls | 101,376 | `07d5496e889e40fd` | 15.09.2026 (serial) | 21 | 4 | 1 | 3 | 0 | Food shops |
 | A15 | 15.inregistrate-magazin-desfacere-miere.xls | 118,272 | `044d73fad049be25` | 25.09.2026 | 21 | 4 | 3 | 1 | 0 | Food shops |
 | A17 | 17.inregistrate-restaurant-bistro.xls | 704,000 | `3e6a8eb2a8b19454` | **29.06.2026** | 21 | 3,113 | 1,970 | 1,073 | 70 | Food service |
-| A18 | 18.inregistrate-pizzerie.xls | 202,240 | `eb44ad444be94629` | 25.09.2026 | 21 | 405 | 287 | 117 | 1 | Food service |
+| A18 | 18.inregistrate-pizzerie.xls | 202,240 | `eb44ad444be9462e` | 25.09.2026 | 21 | 405 | 287 | 117 | 1 | Food service |
 | A21 | 21.inregistrate-cofetarie_patiserie.xls | 181,760 | `cd08919fc1e38a05` | 25.09.2026 | 19 | 350 | 261 | 82 | 7 | Food shops |
 | A23 | 23.inregistrate-magazin-alimentar.xls | 1,045,504 | `da52efeccf6512fb` | 25.09.2026 | 21 | 4,716 | 2,174 | 2,240 | 302 | Food shops (shop-first) |
 | A24 | 24INREGISTRARE-SUPERMARKET.xls | 147,456 | `f3ac53f85b0fe751` | 28.09.2026 | 21 | 234 | 123 | 101 | 10 | Food shops (shop-first) |

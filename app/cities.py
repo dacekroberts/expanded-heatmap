@@ -5725,6 +5725,27 @@ CITIES = [
         "label_tier": "minor",
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Cluj-Napoca",
+        "lat": 46.77,
+        "lon": 23.59,
+        "page": "pages/305_Cluj_Napoca_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined by address (71.3%)",
+        "data_age": "Registers of 2026-04-30 to 2026-10-06",
+        "rail_extra": "—",
+        "record_kind": "Food hygiene register",
+        "categories": "Food premises only",
+        "blurb": "CTP trams 100, 101 and 102",
+        "region": "Europe East",
+        "country": "Romania",
+        "mode": "tram",
+        "in_default_view": False,
+        # Region views, label tiers and label offsets are Cleanup's (owner,
+        # call 198); the offset is the scaffold's starting value. Width 82.4
+        # px, measured 2026-10-11 (label_competition.TEXT_WIDTH).
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
