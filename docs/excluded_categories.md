@@ -5138,6 +5138,40 @@ line.
   Kamagaya, 4 in Tokyo's Katsushika Ward, 3 in Ichikawa, 1 in Misato
   (Saitama), 1 in Shiroi and 1 in Funabashi.
 
+### Ichikawa - Chiba Prefecture's barber, beauty and laundry registers, joined to MLIT's address blocks
+
+**Left out**
+- Restaurants, cafés and food shops: the national food-permit filings
+  publish too few addresses here to place them.
+- Every other shop: Japan has no general business license.
+- Premises whose operators did not agree to publication: the prefecture
+  lists only those who did.
+- Barbers registered after March 31, 2025: the prefecture's barber file is
+  the list of that date.
+
+**Counted** - the prefecture's registers, cut to Ichikawa by address: 223
+barbers as of March 31, 2025, and 646 beauty salons and 148 laundries as of
+March 31, 2026 with the openings it listed to August 31, 2026. Openings are
+added and closures are not published, so the beauty and laundry layers are an
+upper bound. No official count exists for the city alone; the 148 laundries
+are about four in five of the number the 2021 Economic Census suggests, for a
+reason that is not known.
+
+**One pin per premises** - no premises is listed twice.
+
+**Not placed** - none. 5 pins sit at their town's center.
+
+**Names not shown** - 4 pins whose trade name reads as a person's name alone
+show their register type.
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 26 stations beyond it: 11 in Funabashi, 5 in Matsudo, 5 in
+  Tokyo's Edogawa Ward, 2 in Urayasu, 2 in Tokyo's Katsushika Ward and 1 in
+  Kamagaya.
+- The Toei Shinjuku Line, with only its terminus Moto-Yawata in the city, is
+  not drawn; the station is kept through the JR Chuo-Sobu Line.
+
 ### Tachikawa - the Tokyo Metropolitan Government's Tama ledgers and the national filings, joined to MLIT's address blocks
 
 **Left out**

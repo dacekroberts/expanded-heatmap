@@ -145,6 +145,36 @@ Newest entry first. Cleanup folds this file into `DECISIONS.md`.
 
 ## Entries
 
+### 2026-10-11 - Ichikawa built on the Chiba module, personal services only, seven lines all from the registry
+
+- **Ichikawa built (page 246, notice 193), personal services only (Band B),
+  Matsudo's shape on `chiba_pref.py`: 1,017 storefronts (beauty salons 646,
+  barbers 223, laundries 148) around 15 stations on 7 lines, 78.5% of them in
+  a ring (798).** Brief check 12/12. Built by a subagent of the East-2 lead,
+  integrated by the lead. Sheet 市川, rows 223 / 646 / 148 as the module and
+  the brief agree; no 無店舗 row.
+- **Step 2:** 1,017 storefront rows: 1,012 block, 5 town centre, 0 unplaced;
+  no repeat rows. Names withheld 4 (the sign rule).
+- **The laundry share (owner, call 32):** stated on the page as the brief
+  words it, 148 against about 186 scaled from the 2021 Economic Census, about
+  four in five, the reason not known.
+- **Privacy verdict: publish.** `check_personal_exposure.py ichikawa`: the
+  Japan pass prints 0; 4 pins show their register type.
+- **Rail:** N02-25; 15 stations: Keisei Main 5, JR Chuo-Sobu 2 and Yokosuka /
+  Sobu Rapid 1 (N02's 総武線 as two routes), JR Musashino 1 (a JR stub kept
+  as cut), JR Keiyo 2 (drawn whole, as Funabashi's), Tozai 3 (drawn cut,
+  call 31), Hokuso 2. **The Toei Shinjuku Line is left out** (1 of 21 inside,
+  本八幡; owner, 2026-10-06), its station kept through JR.
+  `N03_NEIGHBOR_PREFS = ("13",)`. Gate 3 exact for the Tozai (3, Tokyo
+  Metro's numbering). Median gap 1,305 m (the brief's "closest pair 216 m" is
+  341 m by step 1). 26 excluded. One tie: 本八幡 reads "Moto-Yawata", JR's
+  spelling, since the pin sits on JR's line and Toei's is left out.
+- **Registry:** every line joins an existing entry (`keisei-main-line`,
+  `jr-east-chuo-sobu-line`, `jr-east-yokosuka-line`, `jr-east-musashino-line`,
+  `jr-east-keiyo-line`, `tokyo-metro-tozai-line`, `hokuso-line`); no colour
+  of its own. The Musashino / Keiyo pair is 11.8 apart here too (Funabashi A).
+- **Visuals:** notice 193 caption only. No open terms question.
+
 ### 2026-10-11 - Chiba Prefecture's shared leg (`chiba_pref.py`) written with Matsudo; Matsudo built, personal services only
 
 - **One module for the six Chiba pages** (Matsudo, Ichikawa, Urayasu, Sakura,

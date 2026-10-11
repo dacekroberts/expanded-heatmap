@@ -5727,17 +5727,23 @@ CITIES = [
         "lat": 35.719,
         "lon": 139.933,
         "page": "pages/246_Ichikawa_Heatmap.py",
-        "blurb": "JR East, Keisei, Tokyo Metro and Hokuso (TODO: list the lines)",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (99.5%)",
+        "data_age": "Barbers as of 2025-03-31; beauty salons and laundries as of 2026-03-31 with openings to 2026-08-31",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "The Keisei Main Line, four JR East lines, the Tozai Line and the Hokuso Line",
         "region": "Chiba Prefecture",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
         "country": "Japan",
+        # metro (the brief's mode call, owner's rule of 2026-10-02)
         "mode": "metro",
         "in_default_view": False,
-        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
-        # pinned zoom. Run `python scripts/check_macro_labels.py`,
-        # which scores every city in every region at three widths -
-        # and which will first demand this city's label width be
-        # MEASURED in a real browser with Space Grotesk loaded, since
-        # it refuses a guessed one.
+        # Above the dot, the scaffold's default. The Japan views and their
+        # label scoring are Cleanup's (owner, call 198).
         "label_offset": ("middle", 0, -22),
     },
     {
