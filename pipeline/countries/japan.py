@@ -120,6 +120,7 @@ CITIES = {
     "minoh": {"name": "箕面市", "pref": "27", "epsg": 32653, "n02": "25", "wardless": True, "wards": ["27220"]},
     "moriguchi": {"name": "守口市", "pref": "27", "epsg": 32653, "n02": "25", "wardless": True, "wards": ["27209"]},
     "kadoma": {"name": "門真市", "pref": "27", "epsg": 32653, "n02": "25", "wardless": True, "wards": ["27223"]},
+    "neyagawa": {"name": "寝屋川市", "pref": "27", "epsg": 32653, "n02": "25", "wardless": True, "wards": ["27215"]},
     # The 2026-10-01 batch (owner released 2026-10-02), each on N02-25 as its
     # brief measured (Kagoshima's 仙巌園 and Fukui's Hapi-line are not in
     # N02-24; Sakai's Semboku line is under Nankai only in N02-25). "wardless":

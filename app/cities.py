@@ -5662,6 +5662,27 @@ CITIES = [
         "label_tier": "minor",
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Neyagawa",
+        "lat": 34.765,
+        "lon": 135.627,
+        "page": "pages/255_Neyagawa_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (99.7%)",
+        "data_age": "Registers as of 2026-08-31",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "The Keihan Main Line and one station of the JR Gakkentoshi Line",
+        "region": "Osaka Prefecture",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): the Japan batch's tier. Region views and label
+        # offsets are Cleanup's (owner, call 198); the offset is the scaffold's.
+        "label_tier": "minor",
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

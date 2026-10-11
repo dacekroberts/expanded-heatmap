@@ -144,7 +144,7 @@ REGISTRY = {
     # the project's colour higashiosaka, hirakata already drew; pins >= 46.0, lines >= 19.9, lines beside it >= 19.9.
     "jr-west-gakkentoshi-line": {
         "name": "JR Gakkentoshi Line", "operator": "JR West", "colour": "#C000A8",
-        "maps": {"higashiosaka": "JG", "hirakata": "JG", "osaka": "JG"},
+        "maps": {"higashiosaka": "JG", "hirakata": "JG", "neyagawa": "JG", "osaka": "JG"},
     },
     # the project's colour sapporo already drew; pins >= 24.5, lines >= 18.9, lines beside it >= 18.9.
     "jr-hokkaido-hakodate-main-line": {
@@ -291,7 +291,8 @@ REGISTRY = {
     # the project's colour osaka already drew; pins >= 37.3, lines >= 16.4, lines beside it >= 18.0.
     "keihan-main-line": {
         "name": "Keihan Main Line", "operator": "Keihan", "colour": "#7B7B5A",
-        "maps": {"hirakata": "KM", "kadoma": "KM", "kyoto": "KM", "moriguchi": "KM", "osaka": "KM"},
+        "maps": {"hirakata": "KM", "kadoma": "KM", "kyoto": "KM", "moriguchi": "KM", "neyagawa": "KM",
+                 "osaka": "KM"},
     },
     # the project's colour every map already drew (hue-matched to the operator); pins >= 45.7, lines >= 18.8, lines beside it >= 70.3.
     "keihan-uji-line": {
