@@ -659,7 +659,7 @@ _OSM_STATION_NAMES = (
     # Kansai-1 (2026-10-07)
     "Toyonaka", "Hirakata", "Suita", "Itami", "Kakogawa", "Amagasaki", "Uji",
     # Regional-2 (2026-10-11)
-    "Shizuoka", "Aomori", "Okazaki", "Kanazawa",
+    "Shizuoka", "Aomori", "Okazaki", "Kanazawa", "Matsue",
 )
 
 # Verbatim where verbatim is required. Each entry is a Notice, and the sources
@@ -3166,6 +3166,28 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). Kanazawa City and MLIT did not make "
      "and do not endorse this map.",
      False, ("Kanazawa",)),
+    # Matsue (notice 209): the city's three registers on Shimane Prefecture's
+    # portal (shimane-opendata.jp, resources 76779, 76780 and 76781), PDL 1.0
+    # as each resource page states (read 2026-10-06 by staging: permitted with
+    # conditions, a fault-based cost clause), credited as the read prescribes:
+    # the creator (松江市), each resource's name and URL, and who processed
+    # it. Every link goes to the portal, never to city.matsue.lg.jp (the
+    # city's site terms ask to be told of links). MLIT as in Kobe's, N02 in
+    # its 2025 edition. Written from Nishinomiya's and Shizuoka's approved
+    # wording under the owner's pre-approval of template prose (2026-09-30).
+    Notice(209, "Matsue City and MLIT (Matsue)",
+     "Matsue's businesses: 出典：「【松江市】理容所一覧_20260831」（松江市）"
+     "（[https://shimane-opendata.jp/resources/76779](https://shimane-opendata.jp/resources/76779)）、"
+     "「【松江市】美容所一覧_20260831」（松江市）（[https://shimane-opendata.jp/resources/76780](https://shimane-opendata.jp/resources/76780)）、"
+     "「【松江市】クリーニング所一覧_20260831」（松江市）（[https://shimane-opendata.jp/resources/76781](https://shimane-opendata.jp/resources/76781)）を加工して作成. "
+     "Processed by this project, which took Matsue City's registers of barbers, beauty salons and laundries "
+     "as of August 31, 2026, showed a premises in two registers once, placed each by its address, and "
+     "counted them around stations. The registers may include premises that have closed. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). Matsue City and MLIT did not make "
+     "and do not endorse this map.",
+     False, ("Matsue",)),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no

@@ -28,7 +28,10 @@ Each city's own parked calls and proposals are under its entry below
   included the owner's email address; every later request used the
   project's own string. It cannot be recalled. The builders' instructions
   now forbid anything personal in a header or URL. For the owner to know;
-  no action recommended.
+  no action recommended. **A second one, the same day:** Matsue's builder,
+  launched before that instruction was added, sent one GET to
+  `railway.ichibata.co.jp/operate/timetable/list/` (the gate 3 station list)
+  with the same kind of user-agent. Two requests in all, to two hosts.
 
 ## Proposals for review time (sentences no template covers)
 
@@ -54,6 +57,178 @@ Each city's own parked calls and proposals are under its entry below
 - `pipeline/line_registry.py`: `jr-central-tokaido-line` gains Shizuoka.
 
 ## Changes
+
+### 2026-10-11 - Matsue built, the city's barber, beauty-salon and laundry registers of August 31, 2026, personal services only
+
+- **Matsue built (page 262, notice 209), Kōchi's page shape (personal
+  services only) on one standing list per register: 919 premises (barbers
+  262, beauty salons 551, laundries 106) around 16 stations on 3 lines, 32.5%
+  of them in a ring (299) on the standard rings.** Source: Matsue City's
+  three registers on Shimane Prefecture's portal, resources 76779, 76780 and
+  76781 as of 2026-08-31, PDL 1.0 (read 2026-10-06 by staging). Built by a
+  Regional-2 subagent; the brief passed 14 of 14 on 2026-10-11.
+- **Step 2 reproduces the brief's rows:** 266 barbers (267 less the mobile
+  barber), 574 beauty salons (575 less the repeated header) and 108
+  laundries (27 クリーニング所, 81 取次所), 948 in all. 15 repeat rows shown
+  once, each a premises in both the barber and the beauty register (the
+  brief's 15). 0 not a premises, 0 set aside by a shared rule.
+- **The join is slightly better than the brief's:** block 776 (81.9%; the
+  brief 771, 81.3%), town or 大字 center 158 (16.7%; 161), unplaced 14 (1.5%;
+  16). The foundation's rules place what the brief listed as one shared rule
+  each (八雲村 through `town_aliases`, the dash written for 一 before 丁目) and
+  three more rows reach a block. On the map: 763 pins at a block, 156 at a
+  center, 90 of those in 鹿島町 23, 八束町 19, 美保関町 18, 島根町 17 and 八雲町
+  13, where MLIT keys almost no block (call 145's disclosure, on the page per
+  call 183). Unplaced by register: 4 barbers, 8 beauty salons, 2 laundries.
+- **GSI cross-check (`gsi_sample.py matsue 150`, block-tier rows):** 150
+  answered, 0 failed; median 1 m; 143 within 100 m, 148 within 250 m, max
+  1,258 m. The script samples block-tier rows only, so the brief's
+  "weighted to the centroid tier" was not done.
+- **Two rows are left out in `config.source_rows`, as the brief prescribes
+  (city-local):** the beauty file's repeated header row, and the one mobile
+  barber (an address naming a service area and a depot in another
+  prefecture; the test is a prefecture other than 島根県 in the address,
+  never 市内). The counts dropped are pinned in `SOURCE_ROWS_DROPPED` and the
+  build stops if a later edition differs. Column selection in `source_rows`
+  is Kōchi's and Shizuoka's; a row filter there is Tsu's (its prefix cut).
+  Shared-code findings: (a) without the header drop the shared `idou` rule
+  would count the repeated header as a mobile salon, because its address
+  cell is the column's own label, which contains 移動; (b) no shared test
+  reads a mobile barber's "service area and depot" address.
+- **No shared-code change was needed.** The brief's three column items (the
+  two long address labels, 営業者の名称又は氏名, クリーニング所又は取次所の別)
+  are in shared code already. No `TERM_AS_OF`: the registers carry no permit
+  term (step 2 did not ask for one).
+- **Food left out** (owner, call 96): no food source is read by any step.
+  No census control (no food leg).
+- **Rail:** step 1 reproduces the brief: San'in Line 7 of 161, Kisuki Line 2
+  of 18, Kita-Matsue Line 8 of 22, 宍道 one group (0 m), 16 stations. 5
+  stations beyond the city line within 3 km are listed (一畑口, 伊野灘 and 荘原
+  in 出雲市, 荒島 in 安来市, 加茂中 in 雲南市). Median nearest-station gap
+  1,718 m (the brief's exactly), minimum 1,197 m: standard rings.
+- **Gate 3 exact on the Kita-Matsue Line (8):** Ichibata's timetable list
+  page numbers the line's stations 01 to 22 (N02 also 22), and 15 津ノ森 to
+  22 松江しんじ湖温泉 are the eight inside. The operator's list does not say
+  where the city line falls; that is N03's. JR has no in-city count (both
+  lines run on); the brief's timetable reads stand.
+- **The Kisuki Line** is drawn as cut (2 stations) and named on the page as
+  infrequent with its counts (call 86): 10 trains a weekday toward Kisuki,
+  11 toward Shinji (the brief's read of JR West's timetables, 2026-10-06;
+  not re-read).
+- **Station names stand as OpenStreetMap writes them:** 41 objects, 40 with
+  `name:en`; 16 names read, none translated, no macron, no 丁目. No
+  override, alias or tie. "Matsue English Garden-Mae" and
+  "Matsue-Shinjiko-Onsen" keep OSM's hyphens and capitals.
+- **Line names:** "JR San'in Line" (as Shimonoseki's map writes the same
+  line; the brief's "San'in Main Line" not used), "JR Kisuki Line",
+  "Ichibata Electric Railway Kita-Matsue Line" (the brief's).
+- **Line colours** (`line_colour_search.py matsue`, 2026-10-11): San'in
+  `#E80010`, Kisuki `#A05000`, Kita-Matsue `#E07800`. Against the pins
+  (CIE76): 51.6, 45.2 and 53.6; closest pair within 500 m 46.3 (San'in,
+  Kisuki); closest anywhere 24.4 (Kisuki, Kita-Matsue, which never meet);
+  dark-mode labels 3 of 3. None between 20 and 45. The Kisuki Line's
+  starting hue was moved from a yellow-orange to a dark gold after the first
+  run put it 10.8 from the Kita-Matsue Line's orange.
+- **The opening view** is baked from the stations' extent (35.380 to 35.481
+  N, 132.909 to 133.149 E, zoom 12.25), not the N03 polygon. Not checked in
+  a browser (`check_map_view.js`), and the Kisuki Line's label on its short
+  stretch was not looked at: both are for the lead's render.
+- **Privacy verdict: publish.** `check_personal_exposure.py matsue`: the
+  Japan pass prints 0 of 919. 0 trade names flagged in the raw files by the
+  name rule or the sign rule (the brief's 0). 営業者の名称又は氏名 is compared
+  in memory only; 代表者の役職及び氏名, 営業者所在地, the phone and the postcode
+  are never selected.
+- **A request that carried the owner's email address.** One GET to
+  `railway.ichibata.co.jp/operate/timetable/list/` (the gate 3 list page,
+  2026-10-11) went out with a hand-typed user-agent that included the
+  owner's email address. It cannot be recalled. Every other hand-made
+  request (three resource pages on `shimane-opendata.jp`) used a string with
+  nothing personal in it; the pipeline's fetches use the project's own.
+- Files: `pipeline/matsue/` (config, fetch_sources, three steps),
+  `outputs/matsue/` (heatmap.html, excluded_stations.csv, provenance.json).
+
+#### Parked calls
+
+1. **Salons inside a hospital or care facility.** The brief asked for the
+   facility-named rows to be read against Sapporo's welfare-facility rule.
+   That rule reads a register TYPE (厚生施設理容所); Matsue's files carry no
+   such type, so nothing is set aside and the rows are on the map: by trade
+   name, 2 barbers and 1 beauty salon inside a hospital and 1 laundry at a
+   disability-support facility (the brief counted 5; a name search finds
+   these 4 clearly, with a sheltered-workshop laundry and a hospital-branch
+   barber as possible others). Recommend keeping them as built. Tradeoff: up
+   to about 5 pins for premises that may not be open to the public, against
+   a name test, which the owner rejected for factories (real shops are
+   called …センター) and which would be a new shared rule.
+2. **The mobile-barber test and the header drop live in the city's config.**
+   Recommend moving both to shared code at the next foundation pass (a
+   repeated header row dropped by `city_rows`; an address naming another
+   prefecture set aside for a register). Tradeoff: a shared change needs the
+   Minato control and every city screen; the config version is pinned by a
+   count check and affects Matsue alone.
+3. **GSI sample weighted to the centroid tier.** The brief asked for it; the
+   scratch script samples block rows only. Recommend accepting the block
+   sample (median 1 m) with the tiers disclosed. Tradeoff: the 156 center
+   pins' distance from their true lot stays unmeasured (it is what call 145
+   discloses).
+4. **Whether a closed premises leaves the monthly list** is unmeasured (one
+   month read; a second month needs the owner's approval, the brief). The
+   page keeps "may include premises that have closed".
+5. **Kyoto's JR Sagano Line is N02's 山陰線 too** (JR West). If the registry
+   treats a line a map names differently as the same line, a San'in entry
+   would reach Kyoto's map (a built map: Cleanup's). Recommend an entry for
+   the JR San'in Line as named (Shimonoseki, Matsue, Tottori) and a
+   `NOT_SAME` or exception record for Kyoto's Sagano Line, 300 km away.
+   Nothing was changed.
+
+#### Proposals
+
+Sentences adapted from an approved bullet of another page, or new:
+
+- "The JR Kisuki Line is infrequent: 10 trains a weekday run toward Kisuki
+  and 11 toward Shinji." (from Aomori's Tsugaru Line bullet)
+- "Restaurants, cafés and shops are not on this map: Matsue City's own list
+  of food businesses is not open data, and the national list holds only
+  about 2% of the city's restaurants." (from Kōchi's and Shizuoka's food
+  bullet; the reason is new)
+- "From Matsue City's registers of barbers, beauty salons and laundries (as
+  of August 31, 2026)." and "The registers may include premises that have
+  closed, so a dot is a premises on the registers, not necessarily one open
+  today." (the template's source and closed-premises bullets, reworded for
+  registers; Kōchi's upper-bound sentence does not fit, since each month's
+  list is complete)
+- "MLIT's data holds almost no street blocks in the rural towns that joined
+  the city in 2005 (Kashima, Shimane, Mihonoseki, Yakumo and Yatsuka), so
+  the 90 premises there sit at the center of a district that can be large."
+  (new; call 145's disclosure made specific. "can be large" rests on the
+  brief's reading, not a measurement of this build.)
+- Notice 209's processing sentence: "Processed by this project, which took
+  Matsue City's registers of barbers, beauty salons and laundries as of
+  August 31, 2026, showed a premises in two registers once, placed each by
+  its address, and counted them around stations. The registers may include
+  premises that have closed." (from Nishinomiya's)
+
+#### Registry
+
+- **New entry needed: JR West's San'in Line** (operator 西日本旅客鉄道, N02
+  山陰線, public name "JR San'in Line"), colour `#E80010`, `maps`:
+  `"shimonoseki": "JN"`, `"matsue": "SN"`, and Tottori's key when it is
+  built. Shimonoseki already draws it in `#E80010`, and Matsue's own colour
+  search chose the same value, so no map changes colour. Matsue's config
+  holds the literal `#E80010` with a comment; switch it to
+  `line_registry.colour(<id>)` when the entry exists.
+- No entry for the JR Kisuki Line or the Ichibata Kita-Matsue Line: no other
+  built map or city of this batch draws them.
+
+#### Downstream
+
+- Notice 209 (Matsue City, PDL 1.0 on Shimane's portal): PDL 1.0 asks for
+  the source to be stated wherever the content is used, and that it was
+  processed, so card face, in the short form Visuals uses for PDL 1.0 city
+  lists (Nishinomiya's), with the MLIT credits as for every Japanese card.
+  Link the portal (`shimane-opendata.jp`), never `city.matsue.lg.jp`. No
+  open terms question beyond the fault-based cost clause (§3), accepted for
+  Japan.
 
 ### 2026-10-11 - Kanazawa built, the city's food-permit snapshot of April 2024 kept whole, food only
 

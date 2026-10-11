@@ -5687,8 +5687,17 @@ CITIES = [
         "lat": 35.464,
         "lon": 133.064,
         "page": "pages/262_Matsue_Heatmap.py",
-        "blurb": "Ichibata Electric Railway and JR West (TODO: list the lines)",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (81.9%)",
+        "data_age": "Registers as of 2026-08-31",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "JR West's San'in and Kisuki lines and the Ichibata Electric Railway's Kita-Matsue Line",
         "region": "Chugoku",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
         "country": "Japan",
         "mode": "metro",
         "in_default_view": False,

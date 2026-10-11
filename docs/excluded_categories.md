@@ -6005,6 +6005,41 @@ line.
   track between them is drawn.
 - The Shinkansen is not drawn; Kanazawa stays an IR Ishikawa Railway station.
 
+### Matsue - the city's barber, beauty-salon and laundry registers only, joined to MLIT's address blocks
+
+**Left out**
+- Every food business and every shop: the city's own list of food
+  businesses is not open data, and the national list holds about 2% of
+  Matsue's restaurants, so this map shows barbers, beauty salons and
+  laundries only (owner, 2026-10-06).
+- 1 mobile barber, registered with a service area and a vehicle depot in
+  place of an address.
+
+**Counted** - every barber, beauty salon and laundry on the city's registers
+of August 31, 2026 (266, 574 and 108 premises, 81 of the laundries being
+pick-up counters; the official count of March 2025 was 271, 564 and 110).
+The registers carry no closure date, so a premises that has closed may still
+be listed.
+
+**One pin per premises** - 15 premises registered as both a barber and a
+beauty salon are shown once.
+
+**Not placed** - 14 premises (4 barbers, 8 beauty salons, 2 laundries), most
+of them at addresses written before their district was renumbered, which
+MLIT's files no longer hold. Another 156 sit at their district's center: 90
+of them in Kashima, Shimane, Mihonoseki, Yakumo and Yatsuka, the rural towns
+that joined the city in 2005, where MLIT's files hold almost no street
+blocks and a district can be large.
+
+**Names not shown** - none: no trade name is its operator's own name.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 5 stations beyond it: 3 in Izumo, 1 in Yasugi and 1 in Unnan.
+- The JR Kisuki Line keeps 2 stations inside the city (Shinji and
+  Minami-Shinji) and is infrequent: 10 trains a weekday run toward Kisuki
+  and 11 toward Shinji.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

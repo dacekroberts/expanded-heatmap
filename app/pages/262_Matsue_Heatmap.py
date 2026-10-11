@@ -43,25 +43,54 @@ else:
 # replaces this with its own caption of the sources' dates and credits.
 render_data_age("Matsue")
 
-# TODO: replace every TODO bullet with prose true for this city, as short
-# bullets under bold headings (app/pages/43_Seoul_Heatmap.py is the model):
-# the lines by name, what is not drawn, the area and the stations left out, the
-# source and its limitations. Detail a reference page carries stays there.
+# From the japan-city skill's template, Yokohama's one-bucket line, Kakogawa's
+# coordinates bullet with both shares (owner's call 183) and Aomori's
+# low-frequency bullet (approved wording, pre-approved for this build,
+# 2026-09-30). Four bullets adapt an approved sentence of another page or are
+# new, and are listed as proposals in
+# docs/decisions_drafts/worktree-japan-regional-2.md: the Kisuki Line's
+# frequency, the food bullet, the source bullet with its closure sentence, and
+# the rural towns' sentence. The date is config.REGISTERS_AS_OF; the tiers are
+# step 2's (776 and 158 of 948 rows); the ring share, 32.5%, is step 3's (299
+# of 919).
 st.markdown(
     """
 **The lines**
 
-- TODO: the lines drawn, by name (each is labeled on the map and in the legend).
-- TODO: what is not drawn, and why.
-- TODO: the area covered; stations left out are listed below.
+- Three lines are drawn, each labeled on the map and in the legend: JR West's San'in and Kisuki
+  lines and the Ichibata Electric Railway's Kita-Matsue Line.
+- Lines and stations come from MLIT's national railway data (国土数値情報); station names in
+  English are from OpenStreetMap. Line colors are this project's own, not the operators'.
+- Only stations inside Matsue City get rings, because the business data covers the city alone:
+  lines running on to Izumo, Yasugi and Unnan are cut at the city line. The stations left out are
+  listed below.
+- The JR Kisuki Line is infrequent: 10 trains a weekday run toward Kisuki and 11 toward Shinji.
 
 **The businesses**
 
-- TODO: the data source, and any category it is missing.
+- **This map shows personal services only: barbers, beauty salons and laundries.**
+- Restaurants, cafés and shops are not on this map: Matsue City's own list of food businesses is
+  not open data, and the national list holds only about 2% of the city's restaurants.
+- From Matsue City's registers of barbers, beauty salons and laundries (as of August 31, 2026).
+- The registers may include premises that have closed, so a dot is a premises on the registers,
+  not necessarily one open today.
+
+**Reading the map**
+
+- The registers give an address but no location. Each address is matched to MLIT's address
+  reference data: about 82% reach their street block, and about 17%, where only the district can
+  be found, sit at the district's center.
+- MLIT's data holds almost no street blocks in the rural towns that joined the city in 2005
+  (Kashima, Shimane, Mihonoseki, Yakumo and Yatsuka), so the 90 premises there sit at the center
+  of a district that can be large.
+- Where a business's trade name is its operator's own name, the dot shows its register type
+  instead.
+- Names and types are shown in Japanese, as the city records them.
+- **About 33% of the premises sit within a ring.**
 """
 )
 
-render_map_help("three business categories (Retail, Food service and Personal services)")
+render_map_help("business layer")
 render_excluded_stations("Matsue")
 render_country_links("Matsue")
 
