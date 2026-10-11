@@ -47,6 +47,15 @@ Newest entry first. Cleanup folds this file into `DECISIONS.md`.
   today. `businesses_clean.csv`'s address column also keeps the raw address
   (104 pins with a private-use code point); the map never renders it, noted
   for place search.
+- **Funabashi A (for Cleanup): the JR Keiyo Line (#F86040, Tokyo's) sits
+  11.8 from the JR Musashino Line (#F05820, registered) where they share
+  track into 西船橋**, under the 18 asked of lines within 500 m and over the
+  hard floor of 10, so the render passes. Both are another map's colour, so
+  neither moved. *Recommendation:* Cleanup re-colours the Keiyo Line toward
+  JR's red (#D01010 fits Funabashi: 45.2 from the Food service pin, 18.8 from
+  Musashino), re-checked against Tokyo's other 51 lines. *Tradeoff:* it moves
+  a built city's line; leaving it keeps two near-identical oranges side by
+  side on Funabashi's and Ichikawa's maps.
 - **Kawaguchi C: the Saitama Railway's line name.** The brief reads the
   operator's own public name, "Saitama Stadium Line" (埼玉スタジアム線, the
   line's adopted name); N02 files it as 埼玉高速鉄道線. Built as "Saitama
@@ -135,6 +144,58 @@ Newest entry first. Cleanup folds this file into `DECISIONS.md`.
   cities are added to all three as East-1's were. Cleanup's to reconcile.
 
 ## Entries
+
+### 2026-10-11 - Funabashi built, personal services only, ten lines; six lines Tokyo and Kasukabe draw registered
+
+- **Funabashi built (page 244, notice 191), personal services only (Band B),
+  Yokohama's and Kōchi's shape: 1,473 storefronts (beauty salons 957, barbers
+  314, laundries 202) around 30 stations on 10 lines, 83.8% of them in a ring
+  (1,234).** On the Japan foundation's rules. Brief check 5/5 (2026-10-11).
+  Built by a subagent of the East-2 lead, integrated by the lead. The three
+  registers were on disk from Step 0; no BODIK data request was made at
+  build. The terms page (odcs.bodik.jp/122041/tos/) was re-read once by the
+  lead, as the brief asks: the modified-use form, CC BY 4.0, the link clause
+  and the no-completeness clause all stand.
+- **Step 2:** 4 rows addressed in another municipality and 1 giving the city
+  name alone set aside by the shared rules (the brief's `source_rows` filter
+  not needed); 1,493 storefront rows, 1,490 block, 3 town centre, 0
+  unplaced; 20 repeat rows dropped. The kind (業態) is copied into the type
+  in `source_rows` (Amagasaki's route). Names withheld 6 (the sign rule; the
+  brief's operator comparison alone found 0).
+- **One laundry address holds 15 rows** under three trade names, each with a
+  company marker; kept as 3 pins (one pin per address and name). Nothing
+  marks them storeless.
+- **Official shares (e-Stat FY2024):** barbers 94.9%, beauty salons 100.5%,
+  laundries 97.3% of rows (202 premises, 91.8%). No census control: no Food
+  service layer.
+- **Privacy verdict: publish.** `check_personal_exposure.py funabashi`: the
+  Japan pass prints 0; 6 raw flags, 6 pins show their register type.
+- **Rail:** N02-25; 30 stations on ten drawn lines: Keisei Main 7, Keisei
+  Matsudo 9, JR Chuo-Sobu 4 and JR Yokosuka / Sobu Rapid 1 (N02's 総武線 as
+  two routes, Tokyo's form), JR Musashino 2, JR Keiyo 2, Tozai 2 (drawn cut,
+  owner's call 41), Toyo Rapid Railway 5, Tobu Urban Park 4, Hokuso 1 (a
+  private stub kept as cut). Gate 3 exact where an operator's count was read
+  (Toyo Rapid 5, Hokuso 1, Tozai 2 from the station numbering; Tokyo Metro's
+  page answered 403); JR East, Keisei and Tobu are cut lines with no
+  independent in-city count read. Median gap 729 m: standard rings. 25
+  excluded: Ichikawa 8, Narashino 7, Kamagaya 5, Yachiyo 2, Shiroi 2, Chiba
+  City (Mihama Ward) 1. No override.
+- **Registry:** joined `jr-east-musashino-line` and `jr-east-yokosuka-line`;
+  **six new entries, each in the colour a built map already draws:**
+  `keisei-main-line` #785868, `jr-east-chuo-sobu-line` #B09000,
+  `jr-east-keiyo-line` #F86040, `tokyo-metro-tozai-line` #6890A0 and
+  `hokuso-line` #787878 (Tokyo's), `tobu-urban-park-line` #60A000
+  (Kasukabe's). Tokyo's and Kasukabe's configs still hold the literals. New
+  on this map: Keisei Matsudo Line #E060D0 (registered with Matsudo) and the
+  Toyo Rapid Railway Line #20A800 (18.8 from the Tobu Urban Park Line within
+  500 m; the same value as the registry's JR Joban, which it never meets).
+- **Line names follow Tokyo's map** ("Tozai Line", "JR Yokosuka / Sobu Rapid
+  Line"), so one line reads the same on every map.
+- **Slips (subagent):** two reads of operators' station pages outside the
+  brief's named URLs, for gate 3 (toyokosoku.co.jp, used; keisei.co.jp, not
+  used), saved to scratch only; the rendered map opened once in the browser
+  pane as a file for a label measurement.
+- **Visuals:** notice 191 caption only. No open terms question.
 
 ### 2026-10-11 - Sagamihara built, the food, barber and beauty lists rebuilt to August 2026 from zipped registers; two lines registered
 

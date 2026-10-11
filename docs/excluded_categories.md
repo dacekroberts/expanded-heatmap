@@ -5078,6 +5078,34 @@ line.
 - JR's Utsunomiya, Takasaki and Shonan-Shinjuku line trains pass through
   without stopping and are not drawn.
 
+### Funabashi - the city's barber, beauty and laundry registers, joined to MLIT's address blocks
+
+**Left out**
+- Restaurants, cafés and food shops: the national food-permit filings
+  publish too few addresses here to place them.
+- Every other shop: Japan has no general business license.
+- 4 rows addressed in another municipality and 1 that gives only the city's
+  name.
+
+**Counted** - the city's registers of barbers and beauty salons as of August
+1, 2026 and of laundries as of July 1, 2026. They hold 314 barbers, 965
+beauty salons and 214 laundries in the city, against 331, 960 and 220 in the
+national count at the end of March 2025. The registers record no closures.
+
+**One pin per premises** - 20 repeat rows are shown once.
+
+**Not placed** - none. 3 pins sit at their town's center.
+
+**Names not shown** - 6 pins whose trade name is the operator's own name, or
+reads as a person's name alone, show their register type.
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 25 stations beyond it: 8 in Ichikawa, 7 in Narashino, 5 in
+  Kamagaya, 2 in Yachiyo, 2 in Shiroi and 1 in Chiba City (Mihama Ward).
+- The Narita Sky Access passes through without a station in the city and is
+  not drawn.
+
 ### Tachikawa - the Tokyo Metropolitan Government's Tama ledgers and the national filings, joined to MLIT's address blocks
 
 **Left out**

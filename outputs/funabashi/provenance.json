@@ -1,0 +1,77 @@
+{
+  "city_barber": {
+    "as_of": "2026-08-01",
+    "bytes": 43498,
+    "dataset_page": "https://data.bodik.jp/dataset/122041_20260401_seikatsueisei-eigyoushisetsu_riyousyo",
+    "file": "riyouroichiranall.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T06:01:17+00:00",
+    "rows": 314,
+    "sha256": "957dd2369d5a8d3e2fe6cf8c0387c78378cfe69199df62545a28f899fc58f23d",
+    "url": "https://data.bodik.jp/dataset/deb35006-3f85-4626-a2ea-c65823dae612/resource/73e5f3c8-4a05-4056-9f00-2b6b249402ce/download/riyouroichiranall.csv"
+  },
+  "city_beauty": {
+    "as_of": "2026-08-01",
+    "bytes": 182360,
+    "dataset_page": "https://data.bodik.jp/dataset/122041_20260401_seikatsueisei-eigyoushisetsu_biyousyo",
+    "file": "biyouroichiranall1.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T06:01:35+00:00",
+    "rows": 969,
+    "sha256": "bccc320d8b39d0c6173c6803c5e10d2fbda17cf8287bc6761d25c6a37d6aea5e",
+    "url": "https://data.bodik.jp/dataset/89b146c9-d7c4-4820-921e-edeee4f396d9/resource/ff85f1bb-95c1-42f4-b176-8c4c5b43f50d/download/biyouroichiranall1.csv"
+  },
+  "city_laundry": {
+    "as_of": "2026-07-01",
+    "bytes": 47069,
+    "dataset_page": "https://data.bodik.jp/dataset/122041_20260401_seikatsueisei-eigyoushisetsu_kuri-ninngu",
+    "file": "kurininngu202607.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T06:01:52+00:00",
+    "rows": 215,
+    "sha256": "6907c78529cdd6dc7532a5254db02ccf7e615e0ebd6dd86037db6089fef795c3",
+    "url": "https://data.bodik.jp/dataset/f75f7b70-0657-4188-9ffa-ccecec143a6b/resource/acc812a0-ba5e-4cf1-bdd2-13d8556d8d75/download/kurininngu202607.csv"
+  },
+  "isj_12204_block": {
+    "bytes": 280138,
+    "file": "12204-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T06:01:53+00:00",
+    "sha256": "599aa7ed6648b737dd143d6b22b6079ead193d7f119f5a60dbb8b3bcf1a6bd6d",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/12204-24.0a.zip"
+  },
+  "isj_12204_chome": {
+    "bytes": 9646,
+    "file": "12204-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T06:01:56+00:00",
+    "sha256": "f33cda7edd4d3b6a59ec0d0f9fdec7f3f8a9640ddf1f1227c135676d101ff2c3",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/12204-19.0b.zip"
+  },
+  "n02": {
+    "bytes": 14903774,
+    "file": "data/japan/raw/N02-25_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-30T23:47:52+00:00",
+    "sha256": "aaf76af133b2e771e538fabc4646d2e443dc1d5a67b221382a28d744e706cc9f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip"
+  },
+  "n03": {
+    "bytes": 7073440,
+    "file": "data/japan/raw/N03-20250101_12_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T00:23:05+00:00",
+    "sha256": "06c8f490bf5062234f9cbbdff078da6f67b405b3ee362ae0481c470f43356147",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_12_GML.zip"
+  },
+  "osm_station_names": {
+    "bytes": 40020,
+    "elements": 71,
+    "file": "osm_station_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-10-11T22:07:56Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](35.65,139.93,35.8,140.09);way[\"railway\"=\"station\"](35.65,139.93,35.8,140.09););out tags center;",
+    "retrieved": "2026-10-11T22:09:35+00:00",
+    "sha256": "41fa88373b9cfa8daf8cd7c8e3a8aebbeac6d03b770c3bc4c0a5ffc594ad6d45"
+  }
+}

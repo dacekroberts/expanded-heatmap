@@ -200,7 +200,7 @@ REGISTRY = {
     # the project's colour every map already drew (hue-matched to the operator); pins >= 54.7, lines >= 33.6, lines beside it >= 33.6.
     "jr-east-musashino-line": {
         "name": "JR Musashino Line", "operator": "JR East", "colour": "#F05820",
-        "maps": {"fuchu_tokyo": "JM", "higashimurayama": "JM", "kawaguchi": "JM", "koshigaya": "JM", "tokorozawa": "JM"},
+        "maps": {"fuchu_tokyo": "JM", "funabashi": "JM", "higashimurayama": "JM", "kawaguchi": "JM", "koshigaya": "JM", "tokorozawa": "JM"},
     },
     # the project's colour every map already drew (hue-matched to the operator); pins >= 23.2, lines >= 19.1, lines beside it >= 19.1.
     "jr-east-nambu-line": {
@@ -253,6 +253,16 @@ REGISTRY = {
         "name": "JR Yokohama Line", "operator": "JR East", "colour": "#68A008",
         "maps": {"sagamihara": "JH", "yokohama": "JH"},
     },
+    # the project's colour tokyo already drew (East-2, 2026-10-11: the Chiba maps draw its eastern end); pins >= 23.2 (olive Food shops, Tokyo's accepted trade), lines beside it >= 42.5 on funabashi.
+    "jr-east-chuo-sobu-line": {
+        "name": "JR Chuo-Sobu Line", "operator": "JR East", "colour": "#B09000",
+        "maps": {"funabashi": "JB", "tokyo": "JB"},
+    },
+    # the project's colour tokyo already drew (East-2, 2026-10-11); pins >= 45.0; 11.8 from the JR Musashino Line where they share track into 西船橋, under the 18 for lines within 500 m: a parked call for Cleanup (East-2's drafts, Funabashi).
+    "jr-east-keiyo-line": {
+        "name": "JR Keiyo Line", "operator": "JR East", "colour": "#F86040",
+        "maps": {"funabashi": "JE", "tokyo": "JE"},
+    },
     # the project's colour every map already drew (hue-matched to the operator); pins >= 62.6, lines >= 16.1, lines beside it >= 19.1.
     "jr-central-tokaido-line": {
         "name": "JR Tokaido Line", "operator": "JR Central", "colour": "#E86810",
@@ -281,7 +291,7 @@ REGISTRY = {
     # JR East's own line colour; pins >= 82.5, lines >= 12.7, lines beside it >= 23.4.
     "jr-east-yokosuka-line": {
         "name": "JR Yokosuka Line", "operator": "JR East", "colour": "#0070B9",
-        "maps": {"kawasaki": "JO", "tokyo": "JO", "yokohama": "JO", "yokosuka": "JO"},
+        "maps": {"funabashi": "JO", "kawasaki": "JO", "tokyo": "JO", "yokohama": "JO", "yokosuka": "JO"},
     },
     # the project's colour every map already drew (hue-matched to the operator); pins >= 50.6, lines >= 70.8, lines beside it >= 70.8.
     "jr-shikoku-yosan-line": {
@@ -432,6 +442,26 @@ REGISTRY = {
     "tobu-skytree-line": {
         "name": "Tobu Skytree Line", "operator": "Tobu", "colour": "#007890",
         "maps": {"kasukabe": "TS", "koshigaya": "TS", "soka": "TS", "tokyo": "TS"},
+    },
+    # the project's colour kasukabe already drew (East-2, 2026-10-11); pins >= 29.1 (olive Food shops; 45.3 from Personal services), lines beside it >= 18.8 on funabashi.
+    "tobu-urban-park-line": {
+        "name": "Tobu Urban Park Line", "operator": "Tobu", "colour": "#60A000",
+        "maps": {"funabashi": "TD", "kasukabe": "TD"},
+    },
+    # the project's colour tokyo already drew (East-2, 2026-10-11: drawn cut at the city line in the Chiba cities, owner's call 41); pins >= 50.0, lines beside it >= 31.6 on funabashi.
+    "tokyo-metro-tozai-line": {
+        "name": "Tozai Line", "operator": "Tokyo Metro", "colour": "#6890A0",
+        "maps": {"funabashi": "T", "tokyo": "T"},
+    },
+    # the project's colour tokyo already drew (East-2, 2026-10-11); pins >= 51.0, lines beside it >= 31.6 on funabashi.
+    "keisei-main-line": {
+        "name": "Keisei Main Line", "operator": "Keisei", "colour": "#785868",
+        "maps": {"funabashi": "KS", "tokyo": "KS"},
+    },
+    # the project's colour tokyo already drew (East-2, 2026-10-11); pins >= 53.7, lines beside it >= 72.8 on funabashi.
+    "hokuso-line": {
+        "name": "Hokuso Line", "operator": "Hokuso", "colour": "#787878",
+        "maps": {"funabashi": "HS", "tokyo": "HS"},
     },
     # the project's colour tokyo already drew; pins >= 45.7, lines >= 10.1, lines beside it >= 18.6.
     "tokyu-den-en-toshi-line": {

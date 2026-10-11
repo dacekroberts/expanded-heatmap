@@ -5679,17 +5679,23 @@ CITIES = [
         "lat": 35.727,
         "lon": 140.019,
         "page": "pages/244_Funabashi_Heatmap.py",
-        "blurb": "Keisei, JR East, Toyo Rapid, Tobu, Tokyo Metro and Hokuso (TODO: list the lines)",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (99.8%)",
+        "data_age": "Barbers and beauty salons as of 2026-08-01; laundries as of 2026-07-01",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "Ten lines of Keisei, JR East, Tokyo Metro, Toyo Rapid, Tobu and Hokuso",
         "region": "Chiba Prefecture",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
         "country": "Japan",
+        # metro (the brief's mode call, owner's rule of 2026-10-02)
         "mode": "metro",
         "in_default_view": False,
-        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
-        # pinned zoom. Run `python scripts/check_macro_labels.py`,
-        # which scores every city in every region at three widths -
-        # and which will first demand this city's label width be
-        # MEASURED in a real browser with Space Grotesk loaded, since
-        # it refuses a guessed one.
+        # Above the dot, the scaffold's default. The Japan views and their
+        # label scoring are Cleanup's (owner, call 198).
         "label_offset": ("middle", 0, -22),
     },
     {

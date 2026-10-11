@@ -43,25 +43,46 @@ else:
 # replaces this with its own caption of the sources' dates and credits.
 render_data_age("Funabashi")
 
-# TODO: replace every TODO bullet with prose true for this city, as short
-# bullets under bold headings (app/pages/43_Seoul_Heatmap.py is the model):
-# the lines by name, what is not drawn, the area and the stations left out, the
-# source and its limitations. Detail a reference page carries stays there.
+# From the japan-city skill's template and Yokohama's page (approved wording,
+# pre-approved for this build, 2026-09-30); the source sentence with its
+# reason for no food layer is the brief's proposal, recorded in
+# docs/decisions_drafts/worktree-japan-east-2.md. The dates are the lists' own
+# (config.SOURCE_AS_OF); the ring share, 83.8% (1,234 of 1,473), is step 3's.
 st.markdown(
     """
 **The lines**
 
-- TODO: the lines drawn, by name (each is labeled on the map and in the legend).
-- TODO: what is not drawn, and why.
-- TODO: the area covered; stations left out are listed below.
+- Ten lines are drawn, each labeled on the map and in the legend: the Keisei Main and Matsudo
+  lines, JR East's Chuo-Sobu, Yokosuka / Sobu Rapid, Musashino and Keiyo lines, the Tozai Line, the
+  Toyo Rapid Railway Line, the Tobu Urban Park Line and the Hokuso Line.
+- Lines and stations come from MLIT's national railway data (国土数値情報); station names in
+  English are from OpenStreetMap. Line colors are this project's own, not the operators'.
+- Only stations inside Funabashi City get rings, because the business data covers the city alone:
+  lines running on to Ichikawa, Narashino, Kamagaya, Yachiyo, Shiroi and Chiba are cut at the city
+  line. The stations left out are listed below.
 
 **The businesses**
 
-- TODO: the data source, and any category it is missing.
+- **This map shows personal services only: barbers, beauty salons and laundries.**
+- From Funabashi City's registers of barbers and beauty salons (as of August 1, 2026) and of
+  laundries (as of July 1, 2026). Restaurants, cafés and shops are not on this map: the national
+  food-permit filings publish too few addresses here to place them.
+- The registers record no closures, so a dot is a premises on the register then, not necessarily
+  one open today.
+
+**Reading the map**
+
+- The registers give an address but no location. Each address is matched to MLIT's address
+  reference data, which places almost all at their street block; where only the district can be
+  found, the dot sits at the district's center.
+- Where a business's trade name is its operator's own name, the dot shows its register type
+  instead.
+- Names and register types are shown in Japanese, as the city records them.
+- **About 84% of storefronts sit within a ring.**
 """
 )
 
-render_map_help("three business categories (Retail, Food service and Personal services)")
+render_map_help("business layer")
 render_excluded_stations("Funabashi")
 render_country_links("Funabashi")
 

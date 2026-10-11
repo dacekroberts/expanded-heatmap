@@ -184,7 +184,7 @@ OSM_RAIL_BY_CITY = {
     # East-1 (2026-10-07)
     **{c: _japan(c) for c in ("Higashiyamato", "Nishitōkyō", "Tama", "Higashimurayama", "Chōfu", "Ageo (Regional)", "Sōka", "Tokorozawa", "Fuchū (Tokyo)", "Kasukabe", "Tachikawa", "Hino")},
     # East-2 (2026-10-11)
-    **{c: _japan(c) for c in ("Koshigaya", "Kawaguchi", "Fujisawa", "Sagamihara")},
+    **{c: _japan(c) for c in ("Koshigaya", "Kawaguchi", "Fujisawa", "Sagamihara", "Funabashi")},
 }
 
 
