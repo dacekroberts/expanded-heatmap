@@ -364,6 +364,11 @@ TEXT_WIDTH = {
     # 2026-10-07, the same way; controls Paris 32.9, Boston 48.4, Seattle
     # (Regional) 120.5 and Higashiōsaka 89.1 reproduced.
     "Fuchū (Tokyo)": 96.2, "Fukuyama": 69.3, "Maebashi": 64.9, "Mito": 30.7, "Morioka": 54.3,
+    # East-2's four cities not measured ahead of their builds, 2026-10-11, the
+    # same way (local app, canvas measureText after document.fonts.load);
+    # controls Kasukabe 65.5, Koshigaya 70.2, Fujisawa 57.8, Kawaguchi 73.7
+    # and Urayasu 55.2 reproduced.
+    "Sagamihara": 79.1, "Funabashi": 69.4, "Matsudo": 59.8, "Ichikawa": 58.9,
 }
 
 PILL_H = 18.0             # measured from rendered pixels, 14 px text
