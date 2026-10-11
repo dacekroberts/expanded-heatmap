@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**194 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**195 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-11**
 
+- [Analytics' requests: a private cross-city chart draft, baseline totals after phase 2, one sharing check folded into the audit (owner)](#2026-10-11---analytics-requests-a-private-cross-city-chart-draft-baseline-totals-after-phase-2-one-sharing-check-folded-into-the-audit-owner)
 - [The Japanese re-render held until every Japanese city is built; the weekly archive waits for phase 2 (owner)](#2026-10-11---the-japanese-re-render-held-until-every-japanese-city-is-built-the-weekly-archive-waits-for-phase-2-owner)
 - [The PLAN cleanup pass: ten pre-review items moved to plan_done, seven narrowed, one not confirmed (owner's hard line of 2026-10-08)](#2026-10-11---the-plan-cleanup-pass-ten-pre-review-items-moved-to-plan_done-seven-narrowed-one-not-confirmed-owners-hard-line-of-2026-10-08)
 - [The portfolio review's handoff answered: the audience line, the commercial-use audit's rules, the PLAN pass alongside the batch (owner)](#2026-10-11---the-portfolio-reviews-handoff-answered-the-audience-line-the-commercial-use-audits-rules-the-plan-pass-alongside-the-batch-owner)
@@ -243,6 +244,33 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-10-11 - Analytics' requests: a private cross-city chart draft, baseline totals after phase 2, one sharing check folded into the audit (owner)
+
+- **Confirmed by the owner in Cleanup's chat, 2026-10-11 ("1, 2, 3
+  yes"), after Analytics relayed them as approved; a peer's relay was
+  not taken as his word.** (1) A PRIVATE draft of the cross-city chart is
+  approved, Analytics', on the measure "share of Food service storefronts
+  within 0.3 mi of a station"; whether any chart goes public stays his
+  call, with the AI acknowledgement. (2) Every city's
+  `outputs/<slug>/baseline.json` gains the city-wide totals per category
+  (`storefronts`, `storefronts_retail`, `storefronts_food_service`,
+  `storefronts_personal_services`), after phase 2 lands and in the same
+  pass as the held Japanese re-render, as an exception to the feature
+  freeze of 2026-10-08. Rejected: doing it now, which rewrites committed
+  outputs for 145 or more landed cities beside three build sessions.
+  Measured at master: 173 of 206 cities have a `baseline.json`, 61 carry
+  the food-service key. (3) The check of which analytics and visuals
+  pieces could go public is folded into the commercial-use audit, one
+  pass over the same licence record.
+- **Found while checking Analytics' note that two cities' totals
+  disagree: no defect.** Rouen's `baseline.json` gives 4,168 storefronts
+  and `app/ring_shares.json` 4,167; Seattle 14,431 and 14,430. In each,
+  one cleaned row's displayed name is caught by
+  `map_common._has_contact_details` and left off the map by
+  `render_heatmap`; the baseline counts step 2's rows, the ring file the
+  points drawn. Measured read-only on each cached `businesses_clean.csv`,
+  counts only. So the new totals are counted after that screen.
 
 ### 2026-10-11 - The Japanese re-render held until every Japanese city is built; the weekly archive waits for phase 2 (owner)
 

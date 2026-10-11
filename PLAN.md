@@ -47,10 +47,24 @@ Detail files: [japan](docs/plan_detail/japan.md),
     source whose read never addressed commercial use is held. From the
     record first, then one `licence-read` per source transit-globe wants.
     A script confirms every `app/cities.py` city appears once. The review
-    session's first draft is the starting point, not a source.
-  - [ ] ⏸ Waiting on the owner: a public cross-city chart (a scope addition;
-    ring sizes and category coverage differ by city, so the measure needs
-    choosing first), home-page utility copy (suggestions only), and the
+    session's first draft is the starting point, not a source. **The same
+    pass answers public sharing** (owner, 2026-10-11): which analytics and
+    visuals pieces could go public, with what notices and which cities
+    removed; Analytics supplies its pieces and the cities each uses.
+  - [ ] **Per-category city totals in every city's
+    `outputs/<slug>/baseline.json`, after phase 2 lands** (owner,
+    2026-10-11, for Analytics; an exception to the freeze), in the same
+    pass as the held Japanese re-render: `storefronts`,
+    `storefronts_retail`, `storefronts_food_service`,
+    `storefronts_personal_services`, as the Japanese cities carry them.
+    Counted AFTER the renderer's contact-detail screen, so they match
+    the map (Rouen and Seattle differ by one row today). 61 cities carry
+    the keys; 33 have no `baseline.json`. Size it first: no one shared
+    writer was found.
+  - [ ] ⏸ Waiting on the owner: whether the cross-city chart goes public
+    (a PRIVATE draft is approved, Analytics', on the measure "share of
+    Food service storefronts within 0.3 mi of a station"; owner,
+    2026-10-11), home-page utility copy (suggestions only), and the
     prose pass against the tone guide (about 2026-11-07; the guide loads
     from the owner's global CLAUDE.md; changes are reported per page, never
     applied).
