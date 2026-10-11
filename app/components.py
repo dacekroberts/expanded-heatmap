@@ -659,7 +659,7 @@ _OSM_STATION_NAMES = (
     # Kansai-1 (2026-10-07)
     "Toyonaka", "Hirakata", "Suita", "Itami", "Kakogawa", "Amagasaki", "Uji",
     # Regional-2 (2026-10-11)
-    "Shizuoka", "Aomori", "Okazaki",
+    "Shizuoka", "Aomori", "Okazaki", "Kanazawa",
 )
 
 # Verbatim where verbatim is required. Each entry is a Notice, and the sources
@@ -3139,6 +3139,33 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
      "Okazaki City, MHLW and MLIT did not make and do not endorse this map.",
      False, ("Okazaki",)),
+    # Kanazawa (notice 206): the city catalogue's 食品衛生関係営業許可施設一覧
+    # (172014-syokuhineisei-kyokashisetsu), cc-by with no version, titled
+    # 「クリエイティブ・コモンズ 表示」 as the city writes it (read 2026-10-05 by
+    # staging: permitted with conditions; clause 5's reimbursement accepted
+    # by the owner the same day), credited in the form the read recorded,
+    # 「「…」（金沢市）（URL）を加工して作成」, the title as the dataset page
+    # heads it. A snapshot of April 2024, so the notice says it is not
+    # claimed complete, accurate or current (the terms' MUST NOT). MLIT as in
+    # Kobe's, N02 in its 2025 edition. MHLW's file is a control only and is
+    # not credited (owner, 2026-10-05). Written from Mito's and Aomori's
+    # approved wording under the owner's pre-approval of template prose
+    # (2026-09-30); the processing and snapshot sentences are proposals in
+    # docs/decisions_drafts/worktree-japan-regional-2.md.
+    Notice(206, "Kanazawa City and MLIT (Kanazawa)",
+     "Kanazawa's businesses: 「食品衛生関係営業許可施設一覧」（金沢市）"
+     "（[https://catalog-data.city.kanazawa.ishikawa.jp/dataset/172014-syokuhineisei-kyokashisetsu](https://catalog-data.city.kanazawa.ishikawa.jp/dataset/172014-syokuhineisei-kyokashisetsu)）を加工して作成 "
+     "(クリエイティブ・コモンズ 表示). "
+     "Processed by this project, which selected the storefront types, left out permits registered for the "
+     "whole city rather than an address, showed a premises with several permits once, placed each by its "
+     "address or the city's own coordinates, and counted them around stations. The list is a snapshot of the "
+     "permits in term in April 2024: it is not claimed to be complete, accurate or current, and it may "
+     "include premises that have closed. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). Kanazawa City and MLIT did not make "
+     "and do not endorse this map.",
+     False, ("Kanazawa",)),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no

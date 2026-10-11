@@ -5959,6 +5959,52 @@ Tokaido Line are each cut at the city line.
 - Naka-Okazaki (Aichi Loop Line) and Okazaki-koen-mae (Meitetsu), 168 m
   apart, are separate stations and each has its own rings.
 
+### Kanazawa - the city's food-permit list of April 2024, joined to MLIT's address blocks
+
+**Left out**
+- Barbers, beauty salons and laundries: the city's lists of them are not
+  open data, so this map shows food businesses only.
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that only notify the city rather than hold a permit, such as many
+  convenience stores and greengrocers: they are not in the list.
+- 393 food trucks, stalls and other permits with no fixed place: 350
+  registered for the whole city (一円, 市内), 42 with no fixed address, and 1
+  whose address is the city's name alone. Another 3 temporary permits.
+- 439 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 75 restaurants inside inns (旅館), 56 vending machines and 32 caterers
+  (仕出し屋; none also names a counter form).
+
+**Counted** - every food permit in term in early April 2024, the date of the
+city's list (8,842 rows; its newest permit is dated April 1, 2024). The list
+holds 6,478 restaurant permits, against 6,420 in the national count on March
+31, 2024. It has not been updated since: 3,360 of the 7,844 rows on this map's
+layers (43%) had reached their expiry date by October 2026, and renewals are
+not in the list, so a premises that renewed and one that closed look the
+same. 54 of the 1,225 bakery, confectioner and deli pins (4.4%) have a trade
+name that reads as a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 455 repeat permits are shown once: several permits
+of one kind at one premises.
+
+**Not placed** - 1 restaurant, at an address MLIT's files do not hold and
+with no usable coordinates of its own. 564 pins sit at the city's own
+coordinates, where MLIT's files hold the town but not the block (mostly
+newer districts and the city's lettered town sections, such as 無量寺町ヲ),
+and 1 at its town's center.
+
+**Names not shown** - 5 pins whose trade name is the operator's own name show
+their permit type. The city's list names an operator almost only where it is
+a company, so the rest cannot be checked against one.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 15 stations beyond it: 8 in Hakusan, 4 in Nonoichi, 2 in Uchinada
+  and 1 in Tsubata. Three of Nonoichi's are on the Hokutetsu Ishikawa Line,
+  which leaves the city after Shin-Nishi-Kanazawa and returns at Magae; its
+  track between them is drawn.
+- The Shinkansen is not drawn; Kanazawa stays an IR Ishikawa Railway station.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

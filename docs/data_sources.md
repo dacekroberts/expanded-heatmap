@@ -100,7 +100,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
 | South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang (Regional), Daejeon, Gwangju, Gimhae, Gimpo, Siheung |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
-| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki, Higashiyamato, Nishitōkyō, Tama, Higashimurayama, Ageo (Regional), Sōka, Tokorozawa, Kasukabe, Fuchū (Tokyo), Chōfu, Tachikawa, Hino, Toyonaka, Hirakata, Suita, Itami, Kakogawa, Amagasaki, Uji, Maebashi, Fukushima, Fukuyama, Ichinomiya, Tsu, Akita, Ōita, Gifu, Iwaki, Mito, Morioka, Shizuoka, Aomori, Okazaki |
+| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki, Higashiyamato, Nishitōkyō, Tama, Higashimurayama, Ageo (Regional), Sōka, Tokorozawa, Kasukabe, Fuchū (Tokyo), Chōfu, Tachikawa, Hino, Toyonaka, Hirakata, Suita, Itami, Kakogawa, Amagasaki, Uji, Maebashi, Fukushima, Fukuyama, Ichinomiya, Tsu, Akita, Ōita, Gifu, Iwaki, Mito, Morioka, Shizuoka, Aomori, Okazaki, Kanazawa |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin, Gelsenkirchen, Bremen |
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional), Manchester (Regional), Birmingham (Regional), Edinburgh, Sheffield, Nottingham (Regional), Blackpool (Regional), Liverpool (Regional) |
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires, Mendoza |
@@ -4538,6 +4538,35 @@ batch at review time).
 - **MUST DO:** `check_personal_exposure.py okazaki` with its Japan pass, run
   2026-10-11; the verdict is in
   `docs/decisions_drafts/worktree-japan-regional-2.md` ("Okazaki built",
+  2026-10-11).<!-- /internal -->
+
+**206. Kanazawa City and MLIT (Kanazawa) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-11; lands with the Regional-2
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-05; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). Kanazawa City's
+  食品衛生関係営業許可施設一覧 on its own catalogue
+  (`172014-syokuhineisei-kyokashisetsu`, author 衛生指導課) is labeled
+  `cc-by`, 「クリエイティブ・コモンズ 表示」 with no version; the
+  金沢市オープンデータ利用規約 (revised 2024-09-17) applies each dataset's
+  label (2(1)) and prescribes the credit (2(2)). The list is a snapshot of
+  the permits in term in early April 2024. MLIT's 位置参照情報 and N02 (the
+  2025 edition) are **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only
+  picks stations and is **never drawn** (the Survey Act). MHLW's open data
+  for the city and e-Stat's 衛生行政報告例 were used as measurements only and
+  are not drawn.
+- **MUST DISPLAY**: 「「食品衛生関係営業許可施設一覧」（金沢市）（https://catalog-data.city.kanazawa.ishikawa.jp/dataset/172014-syokuhineisei-kyokashisetsu）を加工して作成」,
+  with the license title as the city writes it, 「クリエイティブ・コモンズ 表示」;
+  MLIT's credit lines.
+- **MUST NOT**: claim the list complete, accurate or current; imply the
+  city's endorsement; say the pins are businesses open now; read the file's
+  画像 column. Cost: clause 5, reimbursement of the city's costs arising from
+  the user's own breach or infringement, the fault-based class (accepted
+  2026-10-05).<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py kanazawa` with its Japan pass, run
+  2026-10-11; the verdict is in
+  `docs/decisions_drafts/worktree-japan-regional-2.md` ("Kanazawa built",
   2026-10-11).<!-- /internal -->
 
 

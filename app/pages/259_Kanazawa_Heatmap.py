@@ -43,25 +43,61 @@ else:
 # replaces this with its own caption of the sources' dates and credits.
 render_data_age("Kanazawa")
 
-# TODO: replace every TODO bullet with prose true for this city, as short
-# bullets under bold headings (app/pages/43_Seoul_Heatmap.py is the model):
-# the lines by name, what is not drawn, the area and the stations left out, the
-# source and its limitations. Detail a reference page carries stays there.
+# From the japan-city skill's template, Hiroshima's one-bucket line, Toyama's
+# name-rule bullet in the singular and Hamamatsu's own-coordinates sentence
+# (approved wording, pre-approved for this build, 2026-09-30). Four sentences
+# are proposals in docs/decisions_drafts/worktree-japan-regional-2.md: the
+# Ishikawa Line's crossing of Nonoichi, the personal-services reason, the
+# snapshot bullet and the expiry bullet (the owner sent the expiry sentence
+# to review time, 2026-10-05). The date is config.FOOD_AS_OF; about four in
+# ten is 3,360 of the 7,844 storefront rows past their 許可満了日 on
+# 2026-10-11 (42.8%); the ring share, 38.4%, is step 3's (2,837 of 7,388).
 st.markdown(
     """
 **The lines**
 
-- TODO: the lines drawn, by name (each is labeled on the map and in the legend).
-- TODO: what is not drawn, and why.
-- TODO: the area covered; stations left out are listed below.
+- Three lines are drawn, each labeled on the map and in the legend: the Hokuriku Railroad's
+  (Hokutetsu) Asanogawa and Ishikawa lines and the IR Ishikawa Railway Line.
+- Lines and stations come from MLIT's national railway data (国土数値情報); station names in
+  English are from OpenStreetMap. Line colors are this project's own, not the operators'.
+- Only stations inside Kanazawa City get rings, because the business data covers the city alone:
+  lines running on to Uchinada, Nonoichi, Hakusan and Tsubata are cut at the city line. The
+  stations left out are listed below.
+- The Hokutetsu Ishikawa Line leaves the city between Shin-Nishi-Kanazawa and Magae to cross
+  Nonoichi: its track there is drawn, its three stations there have no rings.
+- The Shinkansen is not drawn (Kanazawa appears as an IR Ishikawa Railway station).
 
 **The businesses**
 
-- TODO: the data source, and any category it is missing.
+- **This map shows food businesses only.**
+- Kanazawa City's lists of barbers, beauty salons and laundries are not open data, so personal
+  services are not on this map.
+- From Kanazawa City's list of food-business permits (as of April 2024). The city has not
+  updated its open list since.
+- About four in ten of these permits have reached their expiry date since April 2024; renewals
+  are not in the list.
+- Japan has no general business license, so shops other than food shops (clothing, electronics,
+  pharmacies) do not appear either: the Food shops layer is food retail only (bakeries and
+  confectioners, delis, butchers and fishmongers).
+- Food businesses that only notify the city rather than hold a permit, such as many convenience
+  stores and greengrocers, are not in the list.
+- The list may include premises that have closed, so a dot means a permit on file, not a
+  business open today.
+
+**Reading the map**
+
+- Each address is matched to MLIT's address reference data, which places most at their street
+  block; where only the district can be found, the dot sits at the city's own coordinates for
+  the premises.
+- Where a trade name is its operator's own name, the dot shows its permit type instead; the
+  city's list names an operator only where it is a company, so this cannot be checked for the
+  rest.
+- Names and permit types are shown in Japanese, as the city records them.
+- **About 38% of storefronts sit within a ring.**
 """
 )
 
-render_map_help("three business categories (Retail, Food service and Personal services)")
+render_map_help("two business categories (Food shops and Food service)")
 render_excluded_stations("Kanazawa")
 render_country_links("Kanazawa")
 

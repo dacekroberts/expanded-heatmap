@@ -55,6 +55,201 @@ Each city's own parked calls and proposals are under its entry below
 
 ## Changes
 
+### 2026-10-11 - Kanazawa built, the city's food-permit snapshot of April 2024 kept whole, food only
+
+- **Kanazawa built (page 259, notice 206), Hiroshima's one-bucket page on
+  Toyama's complete-own-list shape with Hamamatsu's own-point fallback: 7,388
+  storefronts (Food service 5,819, Food shops 1,569) around 21 stations on 3
+  lines, 38.4% of them in a ring (2,837) on the standard rings.** One source:
+  the city catalogue's 食品衛生関係営業許可施設一覧
+  (`172014-syokuhineisei-kyokashisetsu`, cc-by with no version, read
+  2026-10-05 by staging: permitted with conditions, clause 5 accepted), the
+  Step 0 file as cached (8,842 rows, 2,756,283 B). Built by a Regional-2
+  subagent; the brief passed 13 of 13 (`brief_check.py kanazawa`, 2026-10-11),
+  so the record's 2024-07-16 date and 8,842 rows stand: no new edition.
+- **The snapshot is kept whole and pinned to 2024-04-01** (owner's calls 36
+  to 38, 2026-10-05): `FOOD_AS_OF` and `TERM_AS_OF` are the newest 許可年月日.
+  Measured at the build: all 8,842 grant, start and expiry dates read; none
+  starts after the as-of, none ends before it (earliest expiry 2024-04-15),
+  so calls 161 and 172 drop 0. By 2026-10-11, 3,360 of the 7,844 storefront
+  rows (42.8%) had passed their 許可満了日 (Food service 2,395 of 5,839,
+  Retail 965 of 2,005), and 2,713 of the 6,478 restaurant permits (41.9%):
+  the brief's figures exactly.
+- **Step 2 against the brief.** Storefront rows 7,844 (Food service 5,839,
+  Retail 2,005), as the brief. The 998 rows out are the brief's 998, split
+  differently by the foundation's rules: 350 area-wide addresses (一円, 市内),
+  1 city name alone and 42 not a premises (the brief: 323 not a premises), and
+  605 out by rule (the brief: 675; 70 of its 73 temporary or mobile rows are
+  now set aside by address): no rule 439, inside accommodation 75, vending
+  56, event catering 32, temporary 3. The 業態 column holds one form a row,
+  so no caterer also names a counter form (call 158 changed 0 cells). 455
+  repeat rows dropped. 菓子 / そうざい pins 1,225, factory-like 54 (4.4%),
+  kept.
+- **The join: block 7,218 (92.0%; the brief 91.8%), the city's own point 624
+  (444 from the town-chōme tier, 114 from the foundation's 小字 tier, 66 from
+  no match), 1 at a town centre, 1 unplaced** (下本多町, an address MLIT does
+  not hold). `OWN_POINT_FALLBACK = {"food"}` on Hamamatsu's and Fukuyama's
+  precedent; the datum guard passes (block-tier rows a median 33 m from
+  MLIT's point, 96.6% within 250 m, 93 over 1 km). `shared_points` found 7
+  default points and refused 2 rows on them (the brief expected 7 refused
+  rows: the foundation's rules placed the other 5 at the block), so the two
+  rows are the town-centre one and the unplaced one. 7,388 pins against the
+  brief's 7,389 (the unplaced row). 4 pins at the city's own point lie 1 to
+  28 m outside the N03 city line (the census control's "2 outside every
+  ward" are the Food service two); they are inside `CITY_BBOX` and kept.
+- **`config.source_rows` keeps the premises and name-rule columns only**
+  (Shizuoka's precedent), so 営業所電話番号, 営業所名称カナ, 備考 and 画像 never
+  reach step 2; the licence read says 画像 is never read (it is empty on all
+  8,842 rows).
+- **`OFFICIAL_SHARES = True`** (the brief lists it): step 2 writes
+  `outputs/kanazawa/official_shares.json`, 6,478 of 6,438, 100.6%, against
+  e-Stat's FY2024 count (2025-03-31), a year after the snapshot. The
+  like-for-like count is FY2023's 6,420 (100.9%), which the shared reader
+  does not hold; the page states neither share.
+- **Census control (`japan_census_control.py kanazawa`): 5,817 Food service
+  pins against 2,664 establishments, 2.18**, above the built cities' 1.56 to
+  1.92 and equal to the brief's prediction. The list is not over-counting:
+  the official permit stock itself is 2.41 per establishment (6,420 over
+  2,664), and the snapshot reproduces it at 100.9%. Kanazawa licenses bars,
+  snack bars and small counters as restaurants (飲食店営業（４） alone is 957
+  pins) that the census counts under other industries or not at all, and R3
+  keeps them in Food service (Akita's 2.13 has the same cause).
+- **Rail:** step 1 reproduces the brief: Asanogawa 10 of 12, Ishikawa 7 of
+  17 in two runs, IR Ishikawa 4 of 19; gate 3 exact on all three (the
+  operators' pages, re-read by `brief_check.py` 2026-10-11); 15 stations
+  beyond the city line listed (白山市 8, 野々市市 4, 内灘町 2, 津幡町 1); the
+  Shinkansen's 金沢 dropped by the shared step. Two close pairs kept apart
+  (北鉄金沢 / 金沢 135 m, 新西金沢 / 西金沢 140 m; trap 1). `mode` metro by the
+  owner's rule (no JR station inside).
+- **Frequency, read at the build from the timetable PDFs the brief names
+  (fetched to the scratchpad from the operators' hosts, 2026-10-11):**
+  Hokutetsu's weekday PDFs dated 2026-04-29 list 36 trains each way on the
+  Asanogawa Line (trains 102 to 172) and 27 on the Ishikawa Line (402 to
+  454), a little under the station pages' 37 and 29. IR Ishikawa's
+  `20260314kanazawa1.pdf` and `kanazawa2.pdf` are connection tables to the
+  Shinkansen, not departure lists: IR's frequency stays ASSERTED (the former
+  JR Hokuriku Main Line, several trains an hour). Nothing is near 11 trains
+  a day, so no stretch is named as low-frequency.
+- **Station names (a judgment call, on precedent):** OSM gave all 21 (39
+  objects, all with `name:en`). Four overrides bring them to one hyphenated
+  style: Hokutetsu-Kanazawa (OSM "Hokutetsu Kanazawa"; the operator's own
+  timetable writes the hyphen; Gifu's Meitetsu-Gifu), Nishi-Kanazawa (OSM
+  "Nishi Kanazawa"; IR Ishikawa's form, beside OSM's own Higashi-Kanazawa),
+  Shin-Nishi-Kanazawa (OSM "Shin Nishi Kanazawa") and Nukajutaku-mae (OSM
+  "Nukajutakumae"; Hokutetsu's timetable writes Nukajūtaku-mae). Hokutetsu's
+  timetable writes "Shin-nishikanazawa"; the map keeps the form that matches
+  Nishi-Kanazawa 140 m away. OSM's Nishi-izumi, Shijima, Kagatsume and
+  Waridashi stand. No translated name, no numeral before 丁目.
+- **Line names and colours:** "Hokutetsu Asanogawa Line", "Hokutetsu
+  Ishikawa Line" (the Hokuriku Railroad's own short name, as Toyama's
+  "Chitetsu") and "IR Ishikawa Railway Line" (Toyama's "Ainokaze Toyama
+  Railway Line"). No other map draws any of the three and no city of this
+  batch is in Ishikawa, so none is in `pipeline/line_registry.py`. Colours
+  from `line_colour_search.py kanazawa` (2026-10-11): `#E07800`, `#E86800`,
+  `#0098E0`; against the pins 53.6, 63.7 and 75.4 (CIE76; none between 20
+  and 45). The two Hokutetsu oranges are 11.3 apart: they never come within
+  500 m, the search's city-wide floor is 10 (Toyama's Main and Kamidaki
+  lines, 10.2).
+- **The credit's title** (the brief left it to the build): the dataset
+  page's heading, 「食品衛生関係営業許可施設一覧」, not `package_show`'s
+  「金沢市 食品衛生関係営業許可施設一覧」: it is what a reader following the URL
+  sees, and the form names 金沢市 next to it. The form is the licence read's,
+  as recorded, with no 出典： prefix; the terms were not re-read at the build.
+- **Privacy verdict: publish.** `check_personal_exposure.py kanazawa`: the
+  Japan pass prints 0 of 7,388; 5 trade names are withheld and 5 pins show
+  their permit type (the brief's 3 flagged rows plus version 2's bare
+  personal names). The name rule compares 法人名 in memory only. No operator
+  name was printed, stored or quoted by the build.
+- **Checks:** `check_no_em_dashes.py` OK; `check_no_fetch_in_steps.py` OK.
+  Not run by the subagent: `drift_check.py`, `check_all.py`,
+  `check_provenance.py`.
+- Files: `pipeline/kanazawa/` (config, fetch_sources, steps 1 to 3),
+  `outputs/kanazawa/` (heatmap.html, excluded_stations.csv, provenance.json,
+  official_shares.json), `data/kanazawa/raw/osm_station_names.json`.
+
+#### Parked calls (Kanazawa)
+
+- **Rings: the median nearest-station gap is 561 m, inside the 540 to 570 m
+  band.** Built on the standard rings (38.4% in a ring). Recommendation:
+  standard, on call 213 (Gifu, 545 m, standard: every JR and private-rail
+  Japanese city is on them) and because 561 m is above the rule's 550 m.
+  Tradeoff: Hokutetsu's stations are close (the Asanogawa Line's ten span
+  about 5 km), so their 0.6 mi rings merge along each line; halved rings
+  would separate them and roughly halve the in-ring share.
+- **`OFFICIAL_SHARES` writes a share the page does not state.** The brief
+  lists the switch; the shared reader compares the 2024 snapshot with the
+  FY2024 count (100.6%), not FY2023's like-for-like 6,420 (100.9%).
+  Recommendation: keep the file as a drift-checked measurement and state no
+  share on the page. Tradeoff: switching it off loses the baseline line that
+  would flag a changed file.
+- **IR Ishikawa's frequency is not measured.** The PDF the brief names is a
+  connection table. Recommendation: leave it; no floor applies and the line
+  is the former JR main line. Tradeoff: one more fetch (a station timetable
+  PDF the brief does not name) would turn ASSERTED into MEASURED.
+
+#### Proposals (Kanazawa)
+
+Sentences no template covers, for review time:
+
+- Page, The lines: "The Hokutetsu Ishikawa Line leaves the city between
+  Shin-Nishi-Kanazawa and Magae to cross Nonoichi: its track there is drawn,
+  its three stations there have no rings."
+- Page, The businesses: "Kanazawa City's lists of barbers, beauty salons and
+  laundries are not open data, so personal services are not on this map."
+  (Hiroshima's sentence with Kanazawa's reason.)
+- Page, The businesses: "From Kanazawa City's list of food-business permits
+  (as of April 2024). The city has not updated its open list since." (the
+  template's source sentence plus one.)
+- Page, The businesses (the owner sent it to review time, 2026-10-05): "About
+  four in ten of these permits have reached their expiry date since April
+  2024; renewals are not in the list." (42.8% on 2026-10-11.)
+- Page, Reading the map: "Each address is matched to MLIT's address reference
+  data, which places most at their street block; where only the district can
+  be found, the dot sits at the city's own coordinates for the premises."
+  (Hamamatsu's sentence without "The registers give an address but no
+  location", which is not true of a list with coordinates on every row.)
+- Notice 206: "Processed by this project, which selected the storefront
+  types, left out permits registered for the whole city rather than an
+  address, showed a premises with several permits once, placed each by its
+  address or the city's own coordinates, and counted them around stations.
+  The list is a snapshot of the permits in term in April 2024: it is not
+  claimed to be complete, accurate or current, and it may include premises
+  that have closed."
+- What Is Excluded, Counted: "It has not been updated since: 3,360 of the
+  7,844 rows on this map's layers (43%) had reached their expiry date by
+  October 2026, and renewals are not in the list, so a premises that renewed
+  and one that closed look the same."
+
+#### Registry (Kanazawa)
+
+- No `line_registry` change: none of the three lines is drawn by another
+  map, built or in this batch. If Hakusan, Nonoichi or a Toyama-side city is
+  ever built, the IR Ishikawa Railway Line (`#0098E0`) and the Hokutetsu
+  Ishikawa Line (`#E86800`) would need entries.
+- `app/components.py`'s `_OSM_STATION_NAMES` needs "Kanazawa" (English
+  station names from OSM), as Shizuoka's.
+
+#### Shared-code findings (Kanazawa)
+
+- None blocking. `scripts/screen_japan_join.py` has no Kanazawa entry (the
+  brief asks for one at the build); it is a shared file, so not added.
+- The brief's `japan.CITIES` line carries `"rules": WAVE2_RULES` and its
+  region "Japan East"; both predate the foundation and the retag (the entry
+  and the scaffold are already right).
+- The master list's Kanazawa row still reads "5,412 restaurants, 84%"; the
+  build confirms 6,478 and 100.9% (staging's edit).
+
+#### Downstream (Kanazawa)
+
+- Notice 206, Kanazawa City: the terms' 2(2) asks for the name, the source,
+  the URL and that it was processed wherever the data is used, so a card
+  that shows the map carries the credit; the licence read records no
+  face-or-caption rule. Recommendation: caption, as the other cc-by Japanese
+  cities' cards. Open terms question: none recorded (clause 5 accepted).
+- MLIT (位置参照情報, N02): as every Japanese card.
+- The map is a 2024 snapshot: any card or count for Kanazawa should carry
+  "as of April 2024".
+
 ### 2026-10-11 - Okazaki built, the city's food-permit list with MHLW's notifications, food only
 
 - **Okazaki built (page 260, notice 207), Hiroshima's page shape (food only)
