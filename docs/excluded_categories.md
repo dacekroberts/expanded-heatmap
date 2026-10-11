@@ -6111,6 +6111,62 @@ Shinonoi and Oito lines are cut at the city line.
   Chikuhoku.
 - No Shinkansen runs through Matsumoto.
 
+### Tottori - the national food filings alone, joined to MLIT's address blocks
+
+**Left out**
+- Barbers, beauty salons and laundries: neither the city nor the prefecture
+  publishes a list of them, so this map shows food businesses only.
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, except where the national filings
+  include notifications.
+- Restaurant permits granted before June 2021 and still in force, which the
+  national filings do not hold (about one restaurant permit in five).
+- 644 filings addressed in the four neighboring towns that Tottori City's
+  health center also licenses: 205 in Iwami, 194 in Yazu, 168 in Chizu and 77
+  in Wakasa.
+- 650 national filings whose filers did not publish an address (34 of them
+  restaurant permits, about one restaurant in 60). They cannot be told apart
+  between the city and the four towns.
+- 355 food trucks, street and festival stalls and other temporary or mobile
+  permits and filings: 237 registered across the prefecture (鳥取県内 and the
+  like), 111 registered for the whole city or with no fixed place (市内一円
+  and the like) and 7 by their type or form of business.
+- 335 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit or notification types that are not a
+  counter.
+- 172 vending machines, 117 school, hospital and staff canteens, 6 mail-order
+  businesses and 2 premises inside hotels and inns.
+- 83 permits that start after August 31, 2026, the last day the filings
+  cover.
+- 1 closed premises, which the national filings keep, marked.
+
+**Counted** - the national filings as downloaded on October 6, 2026, where
+the address is in Tottori City: 2,065 restaurant permits are in term in the
+whole file, 1,573 of them at a fixed address in the city, against 1,990 in
+the national count of March 31, 2025. That is about 8 in 10, and may
+understate the share: the national count may include the four towns. 9 of
+the 233 bakery, confectioner and deli rows (3.9%) have a trade name that
+reads as a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 177 repeat permits are shown once.
+
+**Not placed** - none. 315 pins (14.1%) sit at the ministry's own coordinates
+where the street block could not be found, most of them in the downtown bar
+district (末広温泉町, 弥生町) and in the towns merged into the city in 2004.
+
+**Names not shown** - none on the map: no pin's trade name is its operator's
+own name.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 5 stations beyond it, 3 in Yazu, 1 in Iwami and 1 in Yurihama.
+- The JR Inbi Line leaves the city between Tsunoi and Kunifusa to cross Yazu:
+  its track there is drawn, its three stations there have no rings.
+- The JR Inbi Line is drawn south of Yazu although it is infrequent: about 12
+  trains a day run from Tottori to Kunifusa, Takagari, Mochigase and
+  Inaba-Yashiro.
+- No Shinkansen runs here.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

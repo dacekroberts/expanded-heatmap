@@ -5768,8 +5768,17 @@ CITIES = [
         "lat": 35.494,
         "lon": 134.226,
         "page": "pages/265_Tottori_Heatmap.py",
-        "blurb": "JR West (TODO: list the lines)",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (85.9%); ministry coordinates where missed",
+        "data_age": "Ministry filings fetched 2026-10-06",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Food premises only",
+        "blurb": "JR West's San'in and Inbi lines",
         "region": "Chugoku",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
         "country": "Japan",
         "mode": "metro",
         "in_default_view": False,

@@ -225,7 +225,7 @@ REGISTRY = {
     # the project's colour every map already drew (hue-matched to the operator); pins >= 53.6, lines >= 45.4, lines beside it >= 45.4.
     "jr-east-ou-line": {
         "name": "JR Ou Line", "operator": "JR East", "colour": "#E07800",
-        "maps": {"akita": "OU", "aomori": "OU", "fukushima": "OU"},
+        "maps": {"akita": "OU", "aomori": "OU", "fukushima": "OU", "yamagata": "OU"},
     },
     # the project's colour fukuyama, okayama, shimonoseki already drew; pins >= 51.4, lines >= 15.8, lines beside it >= 18.8.
     "jr-west-sanyo-line": {
@@ -512,7 +512,7 @@ REGISTRY = {
     # name, on a map 250 km away, and keeps its own colour.
     "jr-west-sanin-line": {
         "name": "JR San'in Line", "operator": "JR West", "colour": "#E80010",
-        "maps": {"matsue": "SN", "shimonoseki": "JN"},
+        "maps": {"matsue": "SN", "shimonoseki": "JN", "tottori": "SN"},
     },
 }
 

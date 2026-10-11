@@ -43,25 +43,70 @@ else:
 # replaces this with its own caption of the sources' dates and credits.
 render_data_age("Tottori")
 
-# TODO: replace every TODO bullet with prose true for this city, as short
-# bullets under bold headings (app/pages/43_Seoul_Heatmap.py is the model):
-# the lines by name, what is not drawn, the area and the stations left out, the
-# source and its limitations. Detail a reference page carries stays there.
+# From the japan-city skill's template, Uji's and Mito's pages (the
+# ministry's filings as the food source, the share clause, the withheld
+# addresses, the ministry's coordinates) and Hiroshima's one-bucket line
+# (approved wording, pre-approved for this build, 2026-09-30). Six bullets
+# adapt an approved sentence of another page or are new, and are listed as
+# proposals in docs/decisions_drafts/worktree-japan-regional-2.md: the Inbi
+# Line across Yazu (Kanazawa's Ishikawa Line bullet), its frequency (Aomori's
+# Tsugaru Line bullet), the missing personal-services lists (Aomori's), the
+# share's caveat, the four towns, and the area-wide permits (Aomori's).
+# MHLW's file states no date, so it is dated by download. The food share:
+# 1,573 restaurant permits at a fixed address in the city, 79.0% of e-Stat's
+# 1,990. Withheld addresses: 34 of 2,065 open restaurant permits. The ring
+# share, 50.5%, is step 3's (1,131 of 2,240, 2026-10-11).
 st.markdown(
     """
 **The lines**
 
-- TODO: the lines drawn, by name (each is labeled on the map and in the legend).
-- TODO: what is not drawn, and why.
-- TODO: the area covered; stations left out are listed below.
+- Two lines are drawn, each labeled on the map and in the legend: JR West's San'in and Inbi
+  lines.
+- Lines and stations come from MLIT's national railway data (国土数値情報); station names in
+  English are from OpenStreetMap. Line colors are this project's own, not the operators'.
+- Only stations inside Tottori City get rings, because the business data covers the city alone:
+  lines running on to Iwami, Yurihama, Yazu and Chizu are cut at the city line. The stations left
+  out are listed below.
+- The JR Inbi Line leaves the city between Tsunoi and Kunifusa to cross Yazu: its track there is
+  drawn, its three stations there have no rings.
+- The JR Inbi Line is infrequent south of Yazu: about 12 trains a day run from Tottori to
+  Kunifusa, Takagari, Mochigase and Inaba-Yashiro.
 
 **The businesses**
 
-- TODO: the data source, and any category it is missing.
+- **This map shows food businesses only.**
+- Neither Tottori City nor Tottori Prefecture publishes a list of barbers, beauty salons or
+  laundries, so personal services are not on this map.
+- Japan has no general business license, so shops other than food shops (clothing, electronics,
+  pharmacies) do not appear either.
+- The food businesses come from the Ministry of Health, Labour and Welfare's filing system, whose
+  open data holds the permits and notifications Tottori City's health center has recorded since
+  June 2021 (downloaded October 6, 2026). Permits granted before then and still in force are not
+  in it, so it holds about 8 in 10 of the restaurant permits in the official count. The true
+  share may be higher, because the official count may include four neighboring towns.
+- The health center also licenses those four towns (Iwami, Yazu, Wakasa and Chizu); their filings
+  are left out by address.
+- About 350 permits and filings are registered for the whole city or prefecture rather than an
+  address, which are event stalls and food trucks; they are not on this map.
+- The Food shops layer is food retail only, and it is partial: shops that only notify rather than
+  hold a permit, such as supermarkets, convenience stores and greengrocers, appear only where they
+  chose to publish in the ministry's list.
+- The list may include premises that have closed, so a dot means a permit on file, not a
+  business open today.
+
+**Reading the map**
+
+- About one restaurant in 60 in the health center's filings chose not to publish its address in
+  the national filing system and is not on this map. Where they are is not known.
+- The rest are matched to MLIT's address reference data, which places most at their street block;
+  where that fails, the dot sits at the ministry's own coordinates.
+- Where a business's trade name is its operator's own name, the dot shows its permit type instead.
+- Names and permit types are shown in Japanese, as the list records them.
+- **About 50% of storefronts sit within a ring.**
 """
 )
 
-render_map_help("three business categories (Retail, Food service and Personal services)")
+render_map_help("two business categories (Food shops and Food service)")
 render_excluded_stations("Tottori")
 render_country_links("Tottori")
 

@@ -22,6 +22,18 @@ Each city's own parked calls and proposals are under its entry below
   alternative moves Toyota's Mikawa Line (a built map: Cleanup's, with a
   re-render). Nothing was changed; Okazaki is committed with the check
   failing on this one pair.
+- **Tottori A: a shared rule that misses, worked around in the city's
+  config.** The foundation's area-wide rule tests the prefecture-wide
+  address before the city's name is cut, so Tottori's main spelling
+  (鳥取県鳥取市鳥取県内, 226 rows, and three rarer forms) passes it: without a
+  hook 208 stalls and vehicles land on the map at MHLW's point (2,448
+  storefronts). The builder added a narrow `source_rows` normalisation in
+  `pipeline/tottori/config.py` so the shared rule fires (237 set aside, 2,240
+  storefronts), which is a city-local fix the plan says to park. Kept,
+  because the alternative publishes stalls the owner's rule leaves out.
+  Recommended: move the test in `japan_register.permits_from_rows` after the
+  city cut, re-run the Minato control and every city screen, then delete
+  Tottori's hook. Tradeoff: a shared-code change with a full drift run.
 - **Okazaki B: one BODIK request carried the owner's email address.** The
   Okazaki builder's first `package_show` call (one metadata request to
   `data.bodik.jp`, 2026-10-11) went out with a hand-typed user-agent that
@@ -57,6 +69,188 @@ Each city's own parked calls and proposals are under its entry below
 - `pipeline/line_registry.py`: `jr-central-tokaido-line` gains Shizuoka.
 
 ## Changes
+
+### 2026-10-11 - Tottori built, the national food filings alone, food only
+
+- **Tottori built (page 265, notice 212), Kurume's and Uji's shape (MHLW's
+  open data alone, food only): 2,240 storefronts (Food service 1,500, Food
+  shops 740) around 13 stations on 2 lines, 50.5% of them in a ring (1,131:
+  895 and 236) on the standard rings.** Source: MHLW's
+  `31201_food_business_all.csv`, 4,782 rows (許可 2,845, 届出 1,932,
+  許可(廃業) 5), latest permit 2026-08-26, PDL 1.0 as recorded. Built by a
+  Regional-2 subagent; the brief passed 7 of 7 on 2026-10-11.
+- **Step 2, by rule (4,782 rows to 2,417 storefront rows):** 644 addressed in
+  another municipality (the four towns the health center also licenses: the
+  shared `other_muni` rule, by address, exactly the brief's 205 + 194 + 168 +
+  77), 237 area-wide, 1 closed, 0 past term and 83 late starters against
+  `TERM_AS_OF` 2026-08-31, 650 with no address, 111 not a premises (市内一円
+  and the like), 639 not a storefront (335 no rule, 172 vending, 117
+  institutional catering, 7 temporary or mobile, 6 mail order, 2 inside
+  accommodation). 177 repeat rows shown once.
+- **SHARED-CODE FINDING: the area-wide rule misses Tottori's dominant
+  spelling.** The health center writes the prefecture-wide address AFTER the
+  city's name (鳥取県鳥取市鳥取県内 226 rows, 鳥取県鳥取市鳥取県東部 4,
+  鳥取県鳥取市鳥取県 3, 鳥取県鳥取市県内 3); `permits_from_rows` tests
+  `PREF_WIDE` before the city is cut, so it read none of them. Measured
+  without any city-local code: area-wide 1, 225 rows with no town placed at
+  MHLW's own point, 2,448 storefronts, 208 of them stalls and vehicles (201,
+  1, 3 and 3 by spelling). The owner's call is made (the area-wide rows are
+  not premises; the brief), so the config's `source_rows` cuts the city's
+  name from those four spellings only, which leaves the address the shared
+  rule was written for; the rule and its count stay shared (237). Precedent
+  for an address normalised in a city's own `source_rows`: Okazaki's `_BARA`.
+  An unknown spelling of the kind stops the build. See parked call 1.
+- **Against the brief's storefront rows (2,491: Food service 1,557, Retail
+  934): 2,417 (1,509 and 908).** The difference is call 172: 84 raw rows (50
+  of them 飲食店営業) carry a 許可開始日 in September 2026, after the file's last
+  day, and are set aside (83 after the earlier rules). The brief counted
+  them.
+- **The join:** block 2,067 of 2,417 rows (85.5%; the brief 85.1%), MHLW's
+  own point 350 (349 the join put at a town-chōme center, 1 it could not
+  place), unplaced 0. On the map: block 1,925 (85.9%), MHLW's point 315
+  (14.1%). MHLW's point against the block point: median 39 m, 95.7% within
+  250 m, 8 over 1 km (2,067 rows; the brief 39 m and 96.1%). Every one of
+  the 2,240 pins is inside the N03 city line (point in polygon, measured):
+  no row of the four towns reached the fallback.
+- **The food share (call 181):** the page says "about 8 in 10", with the
+  note that it may understate, on the brief's 1,573 restaurant permits at a
+  fixed address in the city (79.0% of e-Stat's 1,990). A looser regex of
+  this build's own reproduces 2,065 open restaurant permits and splits them
+  1,566 city, 184 towns, 281 area-wide, 34 blank; the brief's split is the
+  one quoted. See parked call 3.
+- **The name rule:** the raw file holds 148 trade names that are an
+  operator's own name; none is among the storefronts (they sit in
+  notifications of types outside every bucket, blank addresses and the four
+  towns), so 0 names are withheld and 0 pins show a permit type. The brief
+  expected 16 in a bucket; not read further (names are never printed). 0
+  blank names on the rendered data.
+- **Factory share:** 9 of 233 菓子 / そうざい rows (3.9%) read as a factory or
+  central kitchen; kept (owner, 2026-09-24). No caterer (仕出し) form among
+  the pins.
+- **Economic Census control (`scripts/japan_census_control.py tottori`):**
+  1,500 Food service pins against 837 establishments (2021), 1.79 per
+  establishment (the brief 1.85 on 1,550 premises), inside the built
+  cities' 1.56-1.92.
+- **Rail:** step 1 reproduces the brief: San'in Line 8 of 161, Inbi Line 6
+  of 19, 鳥取 one group (0 m), 13 stations, no Shinkansen. 5 stations beyond
+  the city line within 3 km are listed (東郡家, 郡家 and 河原 in 八頭町, 大岩 in
+  岩美町, 泊 in 湯梨浜町). Median nearest-station gap 2,924 m, minimum 1,237 m
+  (the brief's): standard rings.
+- **The Inbi Line draws as ONE continuous line, not the two pieces of call
+  180.** Shared step 1 draws every N02 section within 3 km of the city line
+  (`DRAW_BEYOND_M`), and the 八頭町 stretch between 津ノ井 and 国英 is 6.6 km
+  of track never more than 1,671 m outside the line (measured against N03),
+  so all of it is drawn, with its three stations unringed and listed. The
+  brief's "gap of about 10 km" does not exist under the shared rule. Left as
+  the shared step draws it; see parked call 2.
+- **Low frequency (calls 46 and 86):** the Inbi Line's southern four
+  stations see about 12 trains a day out of 鳥取 (the brief's count from JR
+  West's timetable); drawn and named on the page.
+- **Gate 3 has no in-city count (Aomori's and Fukui's shape):** both lines
+  run on past the city line. `GATE3["lines"]` is empty.
+- **Station names:** 26 OSM objects, all with `name:en`; 13 names read. Two
+  overrides in Hiroshima's style (Shimonoseki's and Kurume's precedent):
+  Hogi (OSM Hōgi) and Tottori-daigaku-mae (OSM Tottoridaigaku-Mae). No
+  translation, no 丁目, no tie.
+- **Line names:** "JR San'in Line" (the registry's, as Matsue and
+  Shimonoseki) and "JR Inbi Line" (the brief's spelling; no other map draws
+  the line).
+- **Line colours:** the San'in Line takes `#E80010` from
+  `pipeline/line_registry.py`; the Inbi Line is `#28A800`
+  (`line_colour_search.py tottori`, 2026-10-11, from a green starting hue
+  that is not claimed as the operator's). Against the pins (CIE76): 51.6 and
+  45.6 (45.7 at render); the pair 134.7; the dark-mode labels separate, 2 of
+  2. None between 20 and 45.
+- **Privacy verdict: publish.** `check_personal_exposure.py tottori`: the
+  Japan pass prints 0 of 2,240. The name rule compares 法人名 in memory only;
+  法人番号, 法人住所 and 営業施設電話番号 are never selected.
+- **Checks:** `check_no_em_dashes.py` OK, `check_no_fetch_in_steps.py` OK
+  (2026-10-11). Not run, the lead's: drift, `check_all`, `check_provenance`.
+- Files: `pipeline/tottori/` (config, fetch_sources, three steps),
+  `outputs/tottori/` (heatmap.html, excluded_stations.csv, provenance.json).
+
+#### Parked calls
+
+1. **The area-wide rule and an address written after the city's name
+   (shared code).** Recommend: in `permits_from_rows`, test `PREF_WIDE`
+   again once the city's name is cut (the `repeat_city` step already strips
+   a second 鳥取県 but then only tests for the city), re-run the Minato
+   control and every city screen, then delete Tottori's `source_rows` hook;
+   step 2 must reproduce 237 area-wide and 2,240 storefronts. Tradeoff:
+   until then the rule lives half in a city config, the pattern the
+   foundation was built to end; without either, 208 stalls and vehicles sit
+   on the map at MHLW's point.
+2. **Call 180, the Inbi Line in two pieces.** The shared step draws it
+   continuous across 八頭町 (6.6 km, inside the 3 km draw margin every
+   Japanese map has), with one label. Recommend keeping it as drawn and
+   wording the page as Kanazawa's Ishikawa Line and Sasebo's Matsuura
+   Railway do (the page block does). Tradeoff: the owner answered call 180
+   on the brief's picture of a 10 km gap; a literal two-piece drawing needs
+   a clip at the city line in shared code or in this city's step 3, which no
+   other map has, and would end the line at the city line here while every
+   other line runs 3 km past it.
+3. **"About 8 in 10" against the map's own count.** The approved figure
+   rests on 1,573 restaurant permits; with call 172's September starters
+   out, the map's Food service rows are 1,509 (75.8% of 1,990). Recommend
+   keeping "about 8 in 10" (the permits exist and next month's file starts
+   them). Tradeoff: "about 3 in 4" is the nearer round figure for what is
+   drawn today.
+4. **Chizu on the page.** The "running on to" bullet names Iwami, Yurihama,
+   Yazu and Chizu; `excluded_stations.csv` lists none in Chizu (智頭 is over
+   3 km beyond the line). Recommend keeping it, as Aomori's Hiranai.
+   Tradeoff: the bullet names a town the list below does not.
+5. **Gate 3 against the operator.** Recommend accepting Aomori's shape (no
+   in-city count). Tradeoff: JR West's line pages would confirm N02's 161
+   and 19 whole-line totals, but the brief names no such page.
+6. **"Inbi" or "Imbi".** The config, map and page write "JR Inbi Line", the
+   brief's spelling; the lead's note wrote "Imbi". Recommend "Inbi"
+   (ASSERTED as JR West's own romanization, not read from a JR page in this
+   build). One string in `config.LINES` if the other is wanted.
+
+#### Proposals
+
+Sentences adapted from an approved bullet of another page, or new:
+
+- "The JR Inbi Line leaves the city between Tsunoi and Kunifusa to cross
+  Yazu: its track there is drawn, its three stations there have no rings."
+  (from Kanazawa's Ishikawa Line bullet; stands or falls with parked call 2)
+- "The JR Inbi Line is infrequent south of Yazu: about 12 trains a day run
+  from Tottori to Kunifusa, Takagari, Mochigase and Inaba-Yashiro." (from
+  Aomori's Tsugaru Line bullet)
+- "Neither Tottori City nor Tottori Prefecture publishes a list of barbers,
+  beauty salons or laundries, so personal services are not on this map."
+  (from Aomori's)
+- "... so it holds about 8 in 10 of the restaurant permits in the official
+  count. The true share may be higher, because the official count may
+  include four neighboring towns." (Mito's share clause, then call 181's
+  note; new)
+- "The health center also licenses those four towns (Iwami, Yazu, Wakasa
+  and Chizu); their filings are left out by address." (new)
+- "About 350 permits and filings are registered for the whole city or
+  prefecture rather than an address, which are event stalls and food trucks;
+  they are not on this map." (from Aomori's; 237 + 111 = 348)
+- "About one restaurant in 60 in the health center's filings chose not to
+  publish its address in the national filing system and is not on this map.
+  Where they are is not known." (the template's, "in the health center's
+  filings" for "in Tottori": the 34 cannot be split from the towns)
+
+#### Registry
+
+- `jr-west-sanin-line`: add `"tottori": "SN"` to `maps`.
+- No new entry: the JR Inbi Line is drawn by no other built map and by no
+  other city of this batch. Its `#28A800` is also the Aichi Loop Line's and
+  Aomori's Tsugaru Line's value, on maps far from this one.
+
+#### Downstream
+
+- Notice 212 (MHLW, PDL 1.0; MLIT, PDL 1.0): as Kurume's and Uji's cards.
+  MHLW's terms ask for the 出典 line wherever the processed data is used
+  and a link to the top page only, so the credit goes on the card face in
+  the form Visuals already uses for the MHLW-only cities, with the MLIT
+  credits as for every Japanese card. No open terms question beyond the
+  recorded 免責 2)ウ point (non-commercial use).
+- `jp_licence.md` is empty on purpose: MHLW's row is already in
+  `docs/data_sources/japan.md` and no other publisher is used.
 
 ### 2026-10-11 - Matsumoto built, the city's barber, beauty-salon and laundry registers of October 1, 2026, personal services only
 

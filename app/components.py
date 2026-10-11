@@ -659,7 +659,7 @@ _OSM_STATION_NAMES = (
     # Kansai-1 (2026-10-07)
     "Toyonaka", "Hirakata", "Suita", "Itami", "Kakogawa", "Amagasaki", "Uji",
     # Regional-2 (2026-10-11)
-    "Shizuoka", "Aomori", "Okazaki", "Kanazawa", "Matsue", "Fuji", "Matsumoto",
+    "Shizuoka", "Aomori", "Okazaki", "Kanazawa", "Matsue", "Fuji", "Matsumoto", "Tottori",
 )
 
 # Verbatim where verbatim is required. Each entry is a Notice, and the sources
@@ -3241,6 +3241,22 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). Matsumoto City, LinkData.org and MLIT did not make "
      "and do not endorse this map.",
      False, ("Matsumoto",)),
+    # Tottori (notice 212): MHLW's filings for Tottori City alone, as Kurume's
+    # (126) and Uji's (175); MLIT as in Kobe's, N02 in its 2025 edition.
+    # Written from Uji's approved wording under the owner's pre-approval of
+    # template prose (2026-09-30); "kept the filings addressed in Tottori"
+    # is Uji's clause, true here because the health center's file also holds
+    # four neighboring towns.
+    Notice(212, "MHLW and MLIT (Tottori)",
+     "Tottori's businesses: 出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一覧」を加工して作成. "
+     "Processed by this project, which kept the filings addressed in Tottori, selected the storefront types, "
+     "placed each by its address or the ministry's own coordinates, and counted them around stations. The "
+     "ministry's list holds only filings whose applicants agreed to publish them and is not complete. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The list may include premises that have closed. "
+     "MHLW and MLIT did not make and do not endorse this map.",
+     False, ("Tottori",)),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no
