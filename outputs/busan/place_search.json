@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/busan.json",
-  "places": 22861,
+  "places": 22815,
   "data_retrieved": "2026-10-08",
   "languages": {
     "local": [
       "ko"
     ],
     "coverage": {
-      "en": 0.794,
+      "en": 0.795,
       "ko": 1.0
     },
     "list_share": 0.5,

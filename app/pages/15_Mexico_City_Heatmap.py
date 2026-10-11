@@ -76,7 +76,7 @@ st.markdown(
 """
 )
 
-render_map_help('three business categories (Retail, Food service and Personal services)')
+render_map_help('three business categories (Retail, Food service and Personal services)', search='mexico_city')
 render_excluded_stations("Mexico City")
 render_country_links('Mexico City')
 

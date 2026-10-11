@@ -1,0 +1,18 @@
+{
+  "index": "app/static/places/paris.json",
+  "places": 22682,
+  "data_retrieved": "2026-10-11",
+  "languages": {
+    "local": [
+      "fr"
+    ],
+    "coverage": {
+      "en": 0.008,
+      "fr": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "French"
+    ]
+  }
+}

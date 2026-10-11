@@ -1,0 +1,18 @@
+{
+  "index": "app/static/places/sao_paulo.json",
+  "places": 154193,
+  "data_retrieved": "2026-10-11",
+  "languages": {
+    "local": [
+      "pt"
+    ],
+    "coverage": {
+      "en": 0.0,
+      "pt": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Portuguese"
+    ]
+  }
+}

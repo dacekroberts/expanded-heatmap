@@ -240,3 +240,69 @@ MEXICO_CITY_BBOX = {
     "lon_min": -99.45,
     "lon_max": -98.85,
 }
+
+# ---------------------------------------------------------------------------
+# Place search (batch 3, the size tests, 2026-10-11): pipeline/place_index.py
+# builds app/static/places/mexico_city.json from the caches place_index_fetch.py
+# writes. The search area is the map's: Ciudad de Mexico, relation 1376330 (admin_level 4, ISO3166-2 MX-CMX; the one OSM_BOUNDARY_JSON holds),
+# confirmed by id 2026-10-11. Overpass area id = 3600000000 + relation id.
+PLACE_AREA = "(id:3601376330)"
+# NEW file names: data/ is shared by every worktree.
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-11.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-11.json"
+# The local language of OSM's names here: Spanish.
+PLACE_LANGUAGES = ("es",)
+PLACE_FOLD = None
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+PLACE_REVIEWED = {
+    "Cerrada 1 Estacionamiento Santo Tomás": "a street's own name in a housing unit (a cerrada named for the car park it serves), residential class",
+    "Cerrada 1 Estacionamiento Vista Hermosa": "a street's own name in a housing unit (a cerrada named for the car park it serves), residential class",
+    "Cerrada Estacionamiento": "a street's own name in a housing unit, residential class",
+    "Privada 2 Estacionamiento Manuela Medina": "a street's own name in a housing unit, residential class",
+    "Privada Estacionamiento": "a street's own name in a housing unit, residential class",
+    "Cerrada la Tienda": "a street's own name",
+}
+# OSM objects a reading by eye found to be a business or a home that no rule
+# in place_index.py catches, each with why (place_index.build, `dropped`).
+PLACE_DROPPED = {
+    # From the read of every landmark and place (the place-read agent, batch 3, 2026-10-11), each id checked against its cached name.
+    "way/469208590": "a condominium-tower brand's building tagged a neighbourhood",
+    "way/465106032": "a condominium-tower brand's building tagged a neighbourhood",
+    "way/571475176": "apartment towers tagged a neighbourhood",
+    "way/444091330": "a single residential complex tagged a neighbourhood",
+    "way/873114510": "a gated private lane tagged a neighbourhood",
+    "node/13088254350": "a children's home tagged a locality",
+    "node/11887866827": "a glitched name, on a ranch of seven people",
+    "way/622117221": "a private residential golf club's grounds, its name a description",
+    "way/668743254": "a housing unit's common area tagged a park",
+    "way/737643279": "a housing unit's green tagged a park",
+    "way/487272958": "a military housing unit's playground",
+    "way/560262998": "an inner garden of a building, tagged a park",
+    "way/553147806": "a dessert shop's name on a park",
+    "way/560262110": "a pet shop's patio tagged a park",
+    "way/591368620": "a supermarket's patio tagged a park",
+    "way/591368623": "a business premises' patio tagged a park",
+    "way/591367248": "a shopping mall's central court tagged a park",
+    "way/285910421": "a shopping plaza with cinemas tagged a park",
+    "way/586421201": "an event garden for hire tagged a park",
+    "way/586406006": "a riding business tagged a park",
+    "way/1360287761": "an events area for hire, its name a description",
+    "node/5319186241": "a trade association's seat tagged a place of worship",
+    "node/3974383751": "a company's name tagged a place of worship",
+    "way/262581330": "a parks department works depot tagged a park",
+    "way/1421923326": "a church carrying a metro station's name: a wrong name",
+    "node/5796735366": "a place of worship named for one missionary, a person's own name",
+    "node/5855838180": "a one-person practice tagged a place of worship, apparently under the person's name",
+    "node/12417091168": "a person's own name alone on a sports ground",
+    "node/12417045026": "a person's own name alone on a sports ground",
+    "node/3681551990": "a convent, a religious residence tagged a place of worship, not notable",
+    "node/12150858001": "a convent, a religious residence tagged a place of worship, not notable",
+    "node/10617197905": "a convent, a religious residence tagged a place of worship, not notable",
+    "way/470346783": "a seminary, a religious residence tagged a place of worship, not notable",
+    "way/312387594": "a monastery, a religious residence tagged a place of worship, not notable",
+    "node/11117725705": "a monastery, a religious residence tagged a place of worship, not notable",
+    "way/611243545": "a glitched name: a church's, cut short",
+    "way/608105550": "a description standing in for a name (a playground's equipment)",
+    "node/10003160223": "a chapel that no longer exists (its name says so): a search would move the map to a place where it is not",
+}

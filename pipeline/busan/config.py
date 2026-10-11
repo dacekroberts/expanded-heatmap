@@ -229,4 +229,9 @@ PLACE_DROPPED = {
     "node/5470266349": "the same mall's sculpture",
     "way/556408688": "the same mall's roof garden",
     "node/5470266348": "the same mall's clock tower",
+    # The owner's answers to 2b's questions (2026-10-11): a description standing in for a name, a glitched name, and religious residences held to the worship precedent.
+    "way/470434943": "a description standing in for a name (a small park's benches)",
+    "way/842047734": "a glitched name: one Latin letter before the word for park",
+    "node/10689843449": "a prayer house (기도원), a religious residence tagged a place of worship, not notable",
+    "way/1098390945": "a convent (수녀원), a religious residence tagged a place of worship, not notable",
 }

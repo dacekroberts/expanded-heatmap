@@ -74,7 +74,12 @@ PLACE_WORD = re.compile(
     r"kostel|kaple|katedrála|bazilika|klášter|muzeum|zahrada|zahrady|sady|hřbitov|vrch|hora|ostrov|"
     r"socha|pomník|divadlo|knihovna|hrad|zámek|synagoga|rotunda|vyhlídka|"
     r"kerk|kapel|kathedraal|basiliek|tuin|fontein|standbeeld|schouwburg|bibliotheek|begraafplaats|"
-    r"abdij|wijk|plein)\b",
+    r"abdij|wijk|plein|"
+    # Mexican Spanish and Portuguese (batch 3, 2026-10-11).
+    r"parroquia|templo|capilla|santuario|convento|colonia|pueblo|barrio|deportivo|panteón|monumento|"
+    r"estatua|fuente|glorieta|alameda|bosque|cerro|teatro|estadio|universidad|plaza|unidad|"
+    r"igreja|capela|paróquia|praça|largo|museu|estádio|cemitério|estátua|mirante|jardim|bairro|vila|"
+    r"santuário|mosteiro|catedral|universidade|faculdade|pico|morro|serra|represa|rio|córrego)\b",
     re.I)
 # Place words in a script with no word boundary, matched anywhere in the name
 # (batch 2b, 2026-10-08): Chinese (Hong Kong), Korean and Georgian. Only

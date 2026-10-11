@@ -161,3 +161,98 @@ STATION_NAME_ALIASES = {"São Paulo – Morumbi": "São Paulo-Morumbi",
                         "Morumbi": "Morumbi - Claro"}
 SPACING_MIN_M = 400.0
 COLLAPSE_MAX_SPREAD_M = 400
+
+# ---------------------------------------------------------------------------
+# Place search (batch 3, the size tests, 2026-10-11): pipeline/place_index.py
+# builds app/static/places/sao_paulo.json from the caches place_index_fetch.py
+# writes. The search area is the map's: the municipio of Sao Paulo, relation 298285 (admin_level 8; the one OSM_BOUNDARY_JSON holds),
+# confirmed by id 2026-10-11. Overpass area id = 3600000000 + relation id.
+PLACE_AREA = "(id:3600298285)"
+# The first query in tiles (place_index_fetch.fetch_split): one query for the whole municipio timed out on the server (a remark at 170 s, 2026-10-11).
+# Each tile is still cut by PLACE_AREA; the bbox only has to cover it.
+PLACE_SPLIT = {"bbox": (-24.01, -46.83, -23.35, -46.36), "rows": 3, "cols": 2}
+# NEW file names: data/ is shared by every worktree.
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-11.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-11.json"
+# The local language of OSM's names here: Portuguese.
+PLACE_LANGUAGES = ("pt",)
+PLACE_FOLD = None
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+PLACE_REVIEWED = {
+    "Estrada Chácara do Cafe": "a street's own name (a road named for a farm)",
+    "Rua Erva-cafe": "a street's own name (a plant)",
+    "Rua Pousada de Saramagos": "a street's own name (a parish in Portugal)",
+    "Rua Pousada dos Tucanos": "a street's own name",
+    "Rua do Shopping": "a street's own name, of residential class or above, beside a shopping centre (put to the owner, batch 3)",
+    "Rua do Shopping Interlagos": "a street's own name, of residential class or above, beside the shopping centre (put to the owner, batch 3)",
+    "Mirante do Vale": "a notable office skyscraper (historic=building, tourism=attraction, wikidata Q42258); condomínio is only in its legal name",
+}
+# OSM objects a reading by eye found to be a business or a home that no rule
+# in place_index.py catches, each with why (place_index.build, `dropped`).
+PLACE_DROPPED = {
+    # From the read of every landmark and place (the place-read agent, batch 3, 2026-10-11), each id checked against its cached name.
+    "way/685153537": "a residents' association's private park (its name says privativo)",
+    "way/681465396": "a condominium's grounds (the operator tag names the condominium)",
+    "way/827032246": "a square inside a developer's housing estate",
+    "relation/11035158": "a square inside a developer's housing estate, at one address",
+    "way/827032250": "a garden of the same housing estate",
+    "way/827032252": "a park of the same housing estate",
+    "node/7446805440": "a developer's housing estate tagged a neighbourhood (operator: the developer)",
+    "way/301002873": "a development's grounds at one address, tagged a park",
+    "way/553851235": "one tower's garden",
+    "way/1251131567": "a condominium's square at one address",
+    "way/461683479": "an estate phase's playground",
+    "way/1331967624": "a housing product's name on a park",
+    "way/668179060": "a children's home (building=orphanage) tagged a place of worship",
+    "way/781309842": "an accounting firm's forecourt (the operator tag names the firm)",
+    "way/684199976": "a bare type word with a company's name in brackets",
+    "way/682206426": "a supermarket's fuel station tagged a park",
+    "way/682206428": "a school's grounds tagged a park",
+    "way/682335505": "the same school's courts",
+    "way/682206427": "the same school's exit",
+    "way/158443754": "a railway power substation tagged a park",
+    "way/129147045": "an association's headquarters tagged a park",
+    "way/1299896889": "a glitched name on a park, not a place's",
+    "node/12061886887": "a removals firm tagged a place of worship",
+    "node/11939707486": "a massage shop tagged a place of worship",
+    "node/12061971830": "a fuel station tagged a place of worship",
+    "way/439322549": "a grill restaurant's name on a place of worship",
+    "node/11756568769": "a one-person house of worship under the priest's own name",
+    "node/7844970279": "a joke entry tagged a place of worship",
+    "node/13393198414": "a street's name pasted on a church: a wrong name",
+    "node/4136771673": "an annual festival's name on a church: a wrong name",
+    "node/6397311025": "a priests' house, a religious residence tagged a place of worship",
+    "way/293602254": "a priests' house, a religious residence tagged a place of worship",
+    "way/698329815": "a seminary, a religious residence tagged a place of worship, not notable",
+    "way/633393824": "a seminary, a religious residence tagged a place of worship, not notable",
+    "way/1049343630": "a seminary, a religious residence tagged a place of worship, not notable",
+    "node/7333070062": "a novitiate, a religious residence tagged a place of worship, not notable",
+    "way/618668120": "a contemplative community's house, a religious residence tagged a place of worship, not notable",
+    "way/618936030": "a monastic community's house, a religious residence tagged a place of worship, not notable",
+    "relation/8554180": "a monastery, a religious residence tagged a place of worship, not notable",
+    "way/618936038": "a monastery, a religious residence tagged a place of worship, not notable",
+    "way/618664234": "a monastery, a religious residence tagged a place of worship, not notable",
+    "way/1366005784": "a monastery, a religious residence tagged a place of worship, not notable",
+    "way/618656792": "a missionary institute's house, a religious residence tagged a place of worship, not notable",
+    "way/665729348": "a diocesan office tagged a place of worship",
+    "node/6397301667": "a diocesan office tagged a place of worship",
+    "node/6388924088": "a diocesan office tagged a place of worship",
+    "way/619036718": "a diocesan programme, not a place, tagged a place of worship",
+    "way/619036710": "a diocesan programme, not a place, tagged a place of worship",
+    "way/619044047": "a diocesan sector, not a place, tagged a place of worship",
+    "way/633525666": "a church movement's office tagged a place of worship",
+    "node/13517951001": "opening hours standing in for a name",
+    "node/5282873977": "a glitched name on a monument (an apartment's)",
+    "node/8421490556": "an address standing in for a park's name",
+    "node/11385441419": "an unexplained acronym on a park",
+    "way/770564778": "a glitched name (a pictograph in it)",
+    "way/708392233": "a description standing in for a name",
+    "way/1211605924": "a description standing in for a name",
+    "way/151733977": "a service brand's name on a subprefecture building: a wrong name",
+    "way/519806593": "a retailer's name on a listed building: the row would show the shop, not the building",
+    "way/618644384": "a grocery and bar under its owner's name, tagged a marketplace with the article for groceries in general",
+    "way/636607756": "a clinic carrying the article for clinics in general",
+    "relation/8551850": "a school carrying the education department's article",
+    "way/618659452": "a police post carrying the force's article",
+}

@@ -117,6 +117,57 @@ def record(config, path, key, how):
     return prov_path
 
 
+def tiles(split):
+    """The bbox filters, "(s,w,n,e)", of a config.PLACE_SPLIT: its bbox cut
+    into rows x cols equal tiles, south-west first."""
+    s, w, n, e = split["bbox"]
+    rows, cols = split["rows"], split["cols"]
+    dlat, dlon = (n - s) / rows, (e - w) / cols
+    return [f"({s + r * dlat:.5f},{w + c * dlon:.5f},{s + (r + 1) * dlat:.5f},{w + (c + 1) * dlon:.5f})"
+            for r in range(rows) for c in range(cols)]
+
+
+def fetch_split(config, path, force):
+    """QUERY for a city too large for one answer (batch 3, 2026-10-11: London
+    and the other size tests), asked once per tile of config.PLACE_SPLIT, one
+    after the other, each tile still cut by the city's own area, then merged
+    by OSM id into the one cache the index step reads. A way crossing a tile
+    edge comes whole, with all its nodes, in both tiles. Each tile's answer
+    stays beside the cache (<name>.tile<N>.json), so a refused tile is the
+    only one asked again. The merged cache records every tile's query and
+    host, and the OLDEST osm_base among them."""
+    if path.exists() and not force:
+        return osm.fetch("", path)
+    merged, seen, hosts, queries, bases = [], set(), [], [], []
+    for i, tile in enumerate(tiles(config.PLACE_SPLIT)):
+        query = QUERY.format(area=config.PLACE_AREA).replace("(area.a)", "(area.a)" + tile)
+        part = path.with_name(f"{path.stem}.tile{i}.json")
+        try:
+            els, host = osm.fetch(query, part, force=force, timeout=180, deadline=900)
+        except RuntimeError as exc:
+            # A tile with nothing in it (a corner of the bbox outside the
+            # area) answers empty on every host, which osm.fetch does not
+            # trust; a tile any host refused is a failure, never empty.
+            if "empty 200" in str(exc) and "Error" not in str(exc).split(" - ", 1)[-1] \
+                    and "remark" not in str(exc):
+                print(f"tile {i} {tile}: empty on every host, taken as empty")
+                continue
+            raise
+        print(f"tile {i} {tile}: {len(els):,} elements from {host}")
+        payload = json.loads(part.read_text(encoding="utf-8"))
+        hosts.append(host)
+        queries.append(query)
+        bases.append(payload.get("osm3s", {}).get("timestamp_osm_base"))
+        for e in els:
+            if (e["type"], e["id"]) not in seen:
+                seen.add((e["type"], e["id"]))
+                merged.append(e)
+    out = {"osm3s": {"timestamp_osm_base": min(b for b in bases if b)}, "elements": merged,
+           "_fetched_from": ", ".join(dict.fromkeys(hosts)), "_query": "\n".join(queries)}
+    path.write_text(json.dumps(out, ensure_ascii=False), encoding="utf-8")
+    return merged, out["_fetched_from"]
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("city")
@@ -127,8 +178,11 @@ def main():
     for query, path, key in ((QUERY, config.PLACE_OSM_JSON, "osm_places"),
                              (EXTRA_QUERY, config.PLACE_OSM_EXTRA_JSON, "osm_places_extra")):
         kept = path.exists() and not args.force
-        els, host = osm.fetch(query.format(area=config.PLACE_AREA), path, force=args.force,
-                              timeout=180, deadline=900)
+        if query is QUERY and getattr(config, "PLACE_SPLIT", None):
+            els, host = fetch_split(config, path, args.force)
+        else:
+            els, host = osm.fetch(query.format(area=config.PLACE_AREA), path, force=args.force,
+                                  timeout=180, deadline=900)
         kinds = {}
         for e in els:
             kinds[e["type"]] = kinds.get(e["type"], 0) + 1

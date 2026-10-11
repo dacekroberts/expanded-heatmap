@@ -1,0 +1,28 @@
+"""Step 2b - Build Sao Paulo's place-search index (batch 3, 2026-10-11).
+
+All the work is pipeline/place_index.py (run); this file names the city. Places
+only, never business records (DECISIONS.md, "Four ideas assessed before the
+large review", item 3). Runs before step 3, whose map carries the index's hash.
+
+Input:  data/sao_paulo/raw/osm_places_2026-10-11.json        (pipeline/place_index_fetch.py)
+        data/sao_paulo/raw/osm_places_extra_2026-10-11.json  (the same, its second query)
+Output: app/static/places/sao_paulo.json  (served by Streamlit's static serving;
+        ODbL 1.0, the notice inside the file);
+        outputs/sao_paulo/place_search.json  (the page's summary: the languages
+        its search bullet names, measured)
+
+Run:  python pipeline/sao_paulo/step2b_place_index.py
+"""
+
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline import place_index  # noqa: E402
+from pipeline.sao_paulo import config  # noqa: E402
+
+if __name__ == "__main__":
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")
+    place_index.run(config)

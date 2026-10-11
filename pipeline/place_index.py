@@ -169,9 +169,16 @@ def build_city(config):
     # ignored (its home goes back out). scripts/check_place_search.py G holds
     # the calendar line.
     live = {k for k, v in visitable.items() if _days(v["checked"], retrieved) <= VISITABLE_MAX_DAYS}
+    rebuilt = getattr(config, "PLACE_REBUILT", {})
     index, report = build(payload["elements"], city=name, retrieved=retrieved,
                           local=config.PLACE_LANGUAGES, fold=fold, dropped=dropped,
-                          visitable=live)
+                          visitable=live, rebuilt=rebuilt)
+    if rebuilt and report.get("street_way_kept_rebuilt", 0) == 0 or any(
+            not any((e.get("tags") or {}).get("highway") == "construction"
+                    and n in (e.get("tags") or {}).values() for e in payload["elements"])
+            for n in rebuilt):
+        sys.exit("config.PLACE_REBUILT names a street no highway=construction way in the cache "
+                 "carries: remove it (the street has reopened, or the name is wrong)")
     found = {f"{e['type']}/{e['id']}" for e in payload["elements"]}
     stale = sorted(set(dropped) - found)
     if stale:
@@ -293,8 +300,18 @@ LEAK_WORDS = {
            "mc drive", "mcdrive"),
     "ca": ("hotel", "hostal", "aparcament", "pàrquing", "privat", "privada", "botiga", "restaurant",
            "pisos", "farmàcia", "s.l.", "s.a."),
-    "es": ("hotel", "hostal", "aparcamiento", "parking", "privado", "privada", "tienda", "restaurante",
-           "pisos", "farmacia", "s.l.", "s.a."),
+    # NOT "privada" (batch 3, 2026-10-11): in Mexico a Privada is a street
+    # type ("1a Privada Tula", "Privada de Matamoros"), a public address;
+    # as a leak word it dropped 4,393 of Mexico City's streets. Barcelona,
+    # which also reads these words, has no street they decide.
+    "es": ("hotel", "hostal", "aparcamiento", "parking", "privado", "propiedad privada", "tienda",
+           "restaurante", "pisos", "farmacia", "s.l.", "s.a.", "estacionamiento", "s.a. de c.v.",
+           "condominio", "condominios", "departamentos", "motel"),
+    # Batch 3 (2026-10-11): Portuguese (Sao Paulo), checked against its own
+    # hits. "particular" is Brazil's word for a private lane (Rua Particular).
+    "pt": ("hotel", "pousada", "motel", "estacionamento", "particular", "privado", "privada", "loja",
+           "restaurante", "farmácia", "condomínio", "residencial", "apartamentos", "ltda", "s.a.",
+           "supermercado", "shopping"),
     "cs": ("hotel", "penzion", "parkoviště", "soukromé", "soukromá", "obchod", "restaurace",
            "bytový dům", "bytové domy", "lékárna", "s.r.o.", "a.s.", "rezidence"),
     "nl": ("hotel", "parking", "privé", "winkel", "restaurant", "appartementen", "residentie",
@@ -323,7 +340,8 @@ HOME_WORDS = {
     "fr": ("résidence", "appartements", "privé", "privée", "lotissement", "morcellement", "hlm",
            "h.l.m."),
     "ca": ("pisos", "privat", "privada"),
-    "es": ("pisos", "privado", "privada"),
+    "es": ("pisos", "privado", "propiedad privada", "condominio", "condominios", "departamentos"),
+    "pt": ("particular", "privado", "privada", "condomínio", "residencial", "apartamentos"),
     "cs": ("bytový dům", "bytové domy", "soukromé", "soukromá", "rezidence"),
     "nl": ("appartementen", "residentie", "privé"),
     "zh": ("私人", "私家", "屋苑", "住宅"),
@@ -471,7 +489,18 @@ WAY_WORDS = {
            "passadís", "carreró", "travessia", "pas", "túnel", "davallada", "passarel·la",
            "pasarel·la"),
     "es": ("calle", "avenida", "paseo", "plaza", "camino", "pasaje", "puente", "ronda", "vía",
-           "escaleras", "sendero"),
+           "escaleras", "sendero",
+           # Mexico City's street types (batch 3, 2026-10-11, from its named
+           # minor ways): pedestrian lanes of housing units (andador), dead
+           # ends (cerrada, privada, callejón, retorno), causeways and axes.
+           "andador", "cerrada", "privada", "callejón", "retorno", "calzada", "eje", "circuito",
+           "prolongación", "boulevard", "viaducto", "periférico", "carretera", "brecha", "vereda",
+           "escalinata", "rinconada", "ciclovía", "ciclopista", "túnel", "glorieta", "malecón"),
+    # Batch 3 (2026-10-11): Portuguese, from Sao Paulo's named minor ways.
+    "pt": ("rua", "avenida", "alameda", "travessa", "praça", "largo", "viela", "estrada", "rodovia",
+           "ponte", "viaduto", "passarela", "escadaria", "beco", "caminho", "trilha", "passagem",
+           "ladeira", "túnel", "ciclovia", "calçadão", "marginal", "via", "elevado", "passeio",
+           "escadão", "escada", "ciclopassarela"),
     "cs": ("ulice", "třída", "náměstí", "nábřeží", "most", "lávka", "cesta", "stezka", "schody",
            "schodiště", "alej", "sady", "pěšina", "průchod", "pasáž", "nároží", "stoupání",
            "náplavka"),
@@ -569,6 +598,7 @@ HOME_NAME = re.compile(r"\b(house|residence|cottage|mansion|farmhouse|homestead)
 # a town hall (stadhuis) or a hospital (ziekenhuis), and Prague's "Obecní dům"
 # is a civic building.
 HOME_NAME_LEAD = {"fr": ("maison", "manoir"), "ca": ("casa",), "es": ("casa",),
+                  "pt": ("casa", "residência", "solar", "palacete"),
                   "cs": ("dům", "vila"), "nl": ("huis",)}
 # And where the house word CLOSES the name (batch 2b, 2026-10-08): Korean 가옥
 # and 고택 (a traditional house), 옛집 (an old house), 생가 (a birthplace),
@@ -698,6 +728,177 @@ def junk_name(name):
             or any(m in low for m in JUNK_MARKS) or bool(_CONTACT.search(name)))
 
 
+# BARE TYPE WORDS (owner, 2026-10-11: "proposed list sounds good"): a name
+# that is only its object's type describes and does not name; Seoul carried
+# 19 playgrounds named 놀이터 and 12 rest spots named 쉼터, Hong Kong 14
+# ancestral halls named 祠堂, Kyoto ten 本殿 (a shrine's main hall). Matched
+# as the WHOLE name only, in English and the city's languages, on landmarks
+# and places, never streets, stations or junctions. A number after a CJK or
+# Hangul word is set aside ("놀이터 2"); never after a Latin one, since
+# Chicago's "Park 399" is the Park District's own name for the park. An
+# object whose main name is bare goes whole (its English alias is the same
+# word translated: "Main Hall", "Neighborhood Park"); a bare alias beside a
+# real name goes alone.
+# The cost: a real place whose only name is its type goes too. Measured on
+# the fourteen built indexes before it was added
+# (docs/decisions_drafts/place-search.md, 2026-10-11); measure a new word on
+# every built city of its language first.
+BARE_TYPE_NAMES = {
+    "en": ("monument", "memorial", "sculpture", "statue", "stupa", "park", "playground", "church",
+           "chapel", "temple", "shrine", "fountain", "garden", "viewpoint", "lookout", "pavilion",
+           "gazebo", "clubhouse", "greenbelt", "korean church", "playpark", "prayer room"),
+    "ja": ("本殿", "本堂", "拝殿", "灯籠", "唐門", "山門", "五重塔", "御影堂", "金堂", "鳥居", "鐘楼",
+           "石碑", "公園", "児童公園", "広場", "記念碑",
+           # Tokyo's read (batch 3, 2026-10-11): shrine fixtures, pocket parks
+           # and privately owned public open space under their type alone.
+           "児童遊園", "遊園", "ポケットパーク", "公開空地", "公開空き地", "空地", "電柱", "時計台",
+           "稲荷", "庚申塔", "神楽殿", "合祀殿", "三重塔", "車祓所", "絵馬掛", "社号碑", "力石",
+           "正門", "黒門", "日本庭園", "暗渠", "駐車場", "富士塚"),
+    "ko": ("놀이터", "어린이놀이터", "쉼터", "전망대", "대웅전", "칠성각", "산신각", "근린공원", "쌈지공원",
+           "어린이공원", "소공원", "공원", "녹지", "교회", "성당", "불교", "원불교", "통일교", "정자",
+           "팔각정", "삼각점", "사자상", "분수", "분수대", "약수터", "운동장", "광장", "기념비", "동상",
+           "조형물", "조각상", "연못"),
+    "zh": ("祠堂", "土地", "土地廟", "土地公", "伯公", "社壇", "碉堡", "涼亭", "公園", "遊樂場", "休憩處",
+           "觀景台", "廟"),
+    "fr": ("cuve", "ancienne batterie", "monument", "statue", "fontaine", "parc", "église", "chapelle",
+           "jardin", "square", "calvaire", "croix",
+           # Paris's read (batch 3, 2026-10-11). "Édicule Guimard" is the
+           # type of 57 metro entrances mapped one by one as artworks.
+           "synagogue", "presbytère", "aumônerie", "salle de prière", "crypte", "grande crypte",
+           "gradins", "monument aux morts", "monument du souvenir", "espace canin",
+           "le jardin botanique", "la parcelle", "ancien réservoir", "le square",
+           "centre bouddhiste", "chapelle orthodoxe", "édicule guimard"),
+    "ca": ("capella", "font", "parc", "església", "monument", "jardí", "jardins"),
+    "es": ("capilla", "fuente", "parque", "iglesia", "monumento", "plaza", "jardín", "kiosco",
+           "templo", "parroquia", "jardinera", "área verde", "juegos infantiles",
+           # Mexico City's read (batch 3, 2026-10-11): street shrines, median
+           # strips, courts and a housing unit's common areas, each mapped
+           # with its description in the name field.
+           "altar", "nicho", "virgen", "ermita", "bautisterio", "seminario", "convento", "camellón",
+           "cancha", "canchas", "cancha de futbol", "andador", "sendero", "placita", "triángulo",
+           "el triángulo", "bandera", "asta bandera", "escudo", "áreas verdes", "zona verde",
+           "área común", "áreas comunes", "área infantil", "área de juegos", "juegos",
+           "aparatos de ejercicio", "zona de perros", "parque recreativo", "parque infantil",
+           "centro comunitario", "centro de reuniones", "vecindad", "terreno", "helipuerto",
+           "iglesia católica", "iglesia mormona", "jardín botánico", "casa de retiros"),
+    "pt": ("praça", "parque", "igreja", "capela", "monumento", "estátua", "fonte", "jardim",
+           "playground", "quadra", "mirante", "coreto", "área verde",
+           # Sao Paulo's read (batch 3, 2026-10-11).
+           "pracinha", "praçinha", "parcão", "parklet", "lazer", "bosque", "busto", "capelinha",
+           "casa paroquial", "casa de oração", "centro espírita", "seminário teológico",
+           "mata nativa", "terreno", "pequeno parque", "área arborizada", "área verde livre",
+           "praça pública", "praça da igreja", "nossa praça", "academia ao ar livre",
+           "campo de futebol", "sem denominação"),
+    "cs": ("kaple", "kostel", "park", "pomník", "památník", "socha", "kříž", "zvonice",
+           "hřbitovní kaple", "bývalá kaple", "památník padlých", "pomník padlých"),
+    "nl": ("kapel", "kerk", "park", "fontein", "standbeeld", "monument"),
+    "ka": ("ეკლესია", "პარკი", "სკვერი", "ძეგლი", "შადრევანი", "ბაღი", "სასაფლაო"),
+}
+
+
+def bare_type(name, local):
+    """True when `name` is only a type word of English or a local language."""
+    low = unicodedata.normalize("NFKC", name).lower().strip(" .,;:()")
+    if _CJK_WORD.search(low):
+        low = re.sub(r"[\s#]*\d+$", "", low).strip()
+        return any(low in BARE_TYPE_NAMES.get(c, ()) for c in ("en", *local))
+    # Accents set aside for a Latin word: Mexico City's "jardin" and "Area
+    # verde" are the listed words unaccented (batch 3, 2026-10-11).
+    low = _unaccent(low)
+    return any(low in _BARE_FOLDED.get(c, ()) for c in ("en", *local))
+
+
+def _unaccent(s):
+    return "".join(ch for ch in unicodedata.normalize("NFKD", s) if not unicodedata.combining(ch))
+
+
+_BARE_FOLDED = {c: {_unaccent(w) for w in ws} for c, ws in BARE_TYPE_NAMES.items()
+                if c not in ("ja", "ko", "zh")}
+# A numbered block of a housing estate, mapped as a place: Mexico City's
+# "Grupo 12", "Manzana 82" (batch 3, 2026-10-11). The whole name, places only.
+NUMBERED_BLOCK = {"es": re.compile(r"(grupo|manzana|edificio)\s+\w{1,4}", re.I),
+                  "pt": re.compile(r"(bloco|quadra|edifício|edificio)\s+\w{1,4}", re.I)}
+# A family's grave: Paris's cemeteries are mapped tomb by tomb, each with a
+# wikidata item for the TOMB, and 13 are "Famille Dumur" and the like, private
+# families' names. A tomb so named is never indexed (batch 3, 2026-10-11).
+FAMILY_TOMB = re.compile(r"(famille|familles|familia|família|family)\b", re.I)
+
+
+# A NAME IN A THIRD SCRIPT (owner, 2026-10-11, on the hard line against
+# glitched names live): Seoul's Bukchon Hanok Village carried the `name`
+# "북촌한옥마을 ДЕРЕВНЯ". Where `name` holds a run of two or more letters in a
+# script that is neither Latin nor one of the city's own, and the object has
+# a name in a local language (else in English, where no local language has a
+# script of its own), that name leads and `name` is not read. Without one
+# the object is untouched (a review by eye, then
+# config.PLACE_DROPPED): a rule cannot tell a glitch from a second language.
+# Runs of two: Vancouver's hən̓q̓əmin̓əm̓ street names use single Greek and
+# Cyrillic letters inside Latin words, and are names.
+_SCRIPT_RANGES = {
+    "greek": ((0x0370, 0x03FF),), "cyrillic": ((0x0400, 0x04FF),), "armenian": ((0x0530, 0x058F),),
+    "hebrew": ((0x0590, 0x05FF),), "arabic": ((0x0600, 0x06FF),), "devanagari": ((0x0900, 0x097F),),
+    "gurmukhi": ((0x0A00, 0x0A7F),), "thai": ((0x0E00, 0x0E7F),), "georgian": ((0x10A0, 0x10FF),),
+    "hangul": ((0xAC00, 0xD7AF), (0x1100, 0x11FF)), "kana": ((0x3040, 0x30FF),),
+    "han": ((0x3400, 0x4DBF), (0x4E00, 0x9FFF)),
+}
+# Han in a Korean name is hanja (Seoul's "서십자각 터 西十字閣址"), its own.
+_OWN_SCRIPTS = {"ja": ("kana", "han"), "zh": ("han",), "ko": ("hangul", "han"), "ka": ("georgian",),
+                "el": ("greek",)}
+
+
+def _third_script(name, local):
+    own = {s for c in local for s in _OWN_SCRIPTS.get(c, ())}
+    for script, pairs in _SCRIPT_RANGES.items():
+        if script in own:
+            continue
+        cls = "[" + "".join(chr(a) + "-" + chr(b) for a, b in pairs) + "]"
+        if re.search(cls + "{2}", name):
+            return True
+    return False
+
+
+def _local_first(tags, names, local):
+    """`names` with the local-language name leading, and `name` gone, when
+    `name` carries a third script (above); else `names` unchanged."""
+    name = (tags.get("name") or "").strip()
+    if not names or names[0] != name or not _third_script(name, local):
+        return names
+    for code in (*local, *(() if any(c in _OWN_SCRIPTS for c in local) else ("en",))):
+        lead = (tags.get(f"name:{code}") or "").strip()
+        if lead and lead != name and lead in names and not _third_script(lead, local):
+            return [lead] + [n for n in names if n not in (lead, name)]
+    return names
+
+
+# EXHIBITS (owner, 2026-10-11: "drops okay"): a museum yard's hardware is
+# mapped piece by piece, about 80 landmarks at Seoul's War Memorial and 24 at
+# Kyoto's railway museum. A historic=* of these values is kept only with its
+# own wikidata item. For the mass-produced ones a tourism tag is asked as
+# well: all 28 of Seoul's that carried wikidata carried the MODEL's (M47
+# Patton, Scud), where Hong Kong's Noonday Gun and Vancouver's Nine O'Clock
+# Gun carry tourism=attraction. Ships, wrecks and historic railways are
+# individual things or places and are not in the rule. The cost: a lone tank
+# standing as a memorial with no wikidata goes (Marseille's char Jeanne-d'Arc).
+EXHIBIT_HISTORIC = {"aircraft", "tank", "cannon", "missile", "rocket", "vehicle",
+                    "locomotive", "railway_car"}
+MODEL_EXHIBITS = {"aircraft", "tank", "cannon", "missile", "rocket", "vehicle"}
+
+
+def _exhibit(tags):
+    # A painting hung INDOORS is an exhibit whatever its wikidata: the Museu
+    # Paulista's 73 canvases are mapped one by one as artworks (Sao Paulo,
+    # batch 3, 2026-10-11), as are three of Washington's state art collection
+    # in Seattle. Indoors only: Prague's Lennon Wall is artwork_type=painting
+    # too, on a street, and the unscoped test took it.
+    if (tags.get("tourism") == "artwork" and tags.get("artwork_type") == "painting"
+            and (tags.get("indoor") == "yes" or tags.get("location") == "indoor")):
+        return True
+    h = tags.get("historic")
+    if h not in EXHIBIT_HISTORIC:
+        return False
+    return not (tags.get("wikidata") and (h not in MODEL_EXHIBITS or tags.get("tourism")))
+
+
 def _names(tags, name_tags):
     seen, out = set(), []
     for k in name_tags:
@@ -749,7 +950,7 @@ def _named_street(name, local):
 
 
 # Languages whose street word leads the name (_named_street).
-WAY_WORD_LEADS = {"fr", "ca", "es", "cs"}
+WAY_WORD_LEADS = {"fr", "ca", "es", "cs", "pt"}
 
 
 def _reads_as_way(names, local):
@@ -826,13 +1027,15 @@ def _point(el):
     return (c["lat"], c["lon"]) if c else None
 
 
-def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=()):
+def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=(), rebuilt=()):
     """Return (index dict, report dict) from one place cache's elements.
     `local`: the city's local language codes (config.PLACE_LANGUAGES).
     `dropped`: OSM objects ("way/504652702") a reading by eye found to be a
     business or a home that no rule catches (config.PLACE_DROPPED).
     `visitable`: homes the public can visit today, kept against the home rule
-    (config.PLACE_VISITABLE's live entries; VISITABLE FORMER HOMES above)."""
+    (config.PLACE_VISITABLE's live entries; VISITABLE FORMER HOMES above).
+    `rebuilt`: names of streets closed for rebuilding, kept although OSM
+    draws them highway=construction (config.PLACE_REBUILT)."""
     name_tags = _name_tags(local)
     nodes = {}
     ways = []
@@ -886,14 +1089,30 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
     street_nodes = defaultdict(list)          # (name, cell) -> node ids
     street_names = {}                         # (name, cell) -> all names
     street_langs = defaultdict(set)           # (name, cell) -> languages
+    street_open = defaultdict(bool)           # (name, cell) -> a way the public may use
     node_streets = defaultdict(set)           # node id -> street display names
     for w in ways:
+        # A way a reading by eye found to be a business's or a home's own
+        # road (config.PLACE_DROPPED; London's "Momento Hayes - Parking
+        # Approach Road", a development's drive drawn highway=residential).
+        if f"way/{w['id']}" in dropped:
+            report["street_way_dropped_by_id"] += 1
+            continue
         t = w.get("tags", {})
-        if (t.get("highway") in SKIP_HIGHWAY or t.get("area") == "yes"
+        names = _local_first(t, _names(t, name_tags), local)
+        # STREETS BEING REBUILT (owner, 2026-10-11): highway=construction is
+        # skipped because most such ways are roads not yet open (Hong Kong's
+        # D1 to D7), and no tag tells those from a street closed for
+        # rebuilding (Tbilisi's Rustaveli Avenue, all 22 of its ways). A city
+        # names the second kind in config.PLACE_REBUILT, by name with why and
+        # the date; a name no construction way in the cache carries stops the
+        # step (build_city), so an entry retires when the street reopens.
+        if t.get("highway") == "construction" and any(n in rebuilt for n in names):
+            report["street_way_kept_rebuilt"] += 1
+        elif (t.get("highway") in SKIP_HIGHWAY or t.get("area") == "yes"
                 or t.get("service") in SKIP_SERVICE):
             report["street_way_skipped"] += 1
             continue
-        names = _names(t, name_tags)
         if (t.get("highway") in MINOR_HIGHWAYS and not (t.get("wikidata") or t.get("wikipedia"))
                 and not _reads_as_way(names, local)):
             report["minor_way_dropped_not_a_way_name"] += 1
@@ -926,6 +1145,8 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         prev = street_names.get(cell, [])
         street_names[cell] = prev + [n for n in names if n not in prev]
         street_langs[cell] |= _langs(t, local)
+        street_open[cell] |= not (minor and t.get("access") in ("private", "no")
+                                  and not (t.get("wikidata") or t.get("wikipedia")))
         for n in w["nodes"]:
             node_streets[n].add(names[0])
     # Neighbouring cells of one name are one street: merge cells that share a node.
@@ -939,14 +1160,30 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         for cell in cells:
             ids = set(street_nodes[cell])
             hit = [g for g in groups if g[0] & ids]
-            merged = [ids, list(street_names[cell]), set(street_langs[cell])]
+            merged = [ids, list(street_names[cell]), set(street_langs[cell]), street_open[cell]]
             for g in hit:
                 merged[0] |= g[0]
                 merged[1] += [n for n in g[1] if n not in merged[1]]
                 merged[2] |= g[2]
+                merged[3] |= g[3]
                 groups.remove(g)
             groups.append(merged)
-        for ids, names, langs in groups:
+        # PRIVATE MINOR WAYS (owner, 2026-10-11): a street whose every way is
+        # a footway, path, track or service road with access=private or no,
+        # none of them notable, is no street to search: airport and campus
+        # service roads, military-base streets, gated communities (1 to 3% of
+        # street rows in the 2b cities). Its crossings go with it. access=no
+        # on a trail can also be a CLOSURE (Hong Kong's country-park paths):
+        # noted for the audit after the rollout, not told apart here.
+        shut = [g for g in groups if not g[3]]
+        for g in shut:
+            report["street_dropped_private_minor"] += 1
+            for n in g[0]:
+                node_streets[n].discard(name)
+        groups = [g for g in groups if g[3]]
+        if not groups:
+            continue
+        for ids, names, langs, _open in groups:
             pts = [nodes[n] for n in ids if n in nodes]
             s, w_ = min(p[0] for p in pts), min(p[1] for p in pts)
             n_, e = max(p[0] for p in pts), max(p[1] for p in pts)
@@ -987,7 +1224,7 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
     rivers = defaultdict(list)
     for e in tagged:
         t = e.get("tags", {})
-        names = _names(t, name_tags)
+        names = _local_first(t, _names(t, name_tags), local)
         pt = _point(e)
         if not names or not pt:
             continue
@@ -1030,9 +1267,23 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
                     and (t.get("landuse") == "residential" or t.get("residential"))):
                 report["place_dropped_estate"] += 1
                 continue
+            # A place drawn as an area WITH A HOUSE NUMBER is one address, a
+            # building or a block of them: Mexico City's developer towers
+            # ("TORRE CADU OASIS") and the 26 numbered sections of one estate
+            # (batch 3, 2026-10-11); none in the fourteen built before it.
+            if e["type"] != "node" and t.get("place") not in SETTLEMENTS and t.get("addr:housenumber"):
+                report["place_dropped_estate"] += 1
+                continue
+            if any(NUMBERED_BLOCK[c].fullmatch(names[0].strip()) for c in local if c in NUMBERED_BLOCK):
+                report["place_dropped_estate"] += 1
+                continue
             if leak_word(names, local):
                 report["place_dropped_leak_word"] += 1
                 continue
+            if bare_type(names[0], local):
+                report["place_dropped_bare_type"] += 1
+                continue
+            names = [n for n in names if not bare_type(n, local)]
             add("place", pt, names, langs, area=e["type"] != "node")
         elif e["type"] == "node" and (t.get("highway") == "traffic_signals" or "junction" in t):
             # A signal's number is no name (Sydney's "5065", 2026-10-08).
@@ -1060,6 +1311,13 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
                       and t.get("indoor") in (None, "no") and t.get("location") != "underground"
                       and not str(t.get("level", "0")).lstrip().startswith("-"))
             if t.get("place") and not square:
+                continue
+            if bare_type(names[0], local):
+                report["landmark_dropped_bare_type"] += 1
+                continue
+            names = [n for n in names if not bare_type(n, local)]
+            if _exhibit(t):
+                report["landmark_dropped_exhibit"] += 1
                 continue
             if _commercial(t):
                 report["landmark_dropped_commercial"] += 1
@@ -1125,6 +1383,9 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             # bulk from the small-monuments register; batch 2a, 2026-10-08).
             if t.get("memorial") == "stolperstein":
                 report["landmark_dropped_stolperstein"] += 1
+                continue
+            if t.get("historic") == "tomb" and any(FAMILY_TOMB.match(n.strip()) for n in names):
+                report["landmark_dropped_family_tomb"] += 1
                 continue
             if t.get("historic") in SKIP_HISTORIC and not any(
                     t.get(k) for k in ("tourism", "amenity", "leisure", "wikidata")):

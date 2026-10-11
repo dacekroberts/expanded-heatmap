@@ -1,0 +1,18 @@
+{
+  "index": "app/static/places/mexico_city.json",
+  "places": 129657,
+  "data_retrieved": "2026-10-11",
+  "languages": {
+    "local": [
+      "es"
+    ],
+    "coverage": {
+      "en": 0.0,
+      "es": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Spanish"
+    ]
+  }
+}

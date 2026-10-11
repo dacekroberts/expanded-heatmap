@@ -569,3 +569,9 @@ PLACE_VISITABLE = {
         "checked": "2026-10-08",
         "why": "a heritage mansion run as the West Point Grey community centre, open daily"},
 }
+# OSM objects a reading by eye found to be a business or a home that no rule
+# in place_index.py catches, each with why (place_index.build, `dropped`).
+PLACE_DROPPED = {
+    # A description standing in for a name (owner, 2026-10-11).
+    "node/4390230582": "a description standing in for a name (a church with no name recorded)",
+}

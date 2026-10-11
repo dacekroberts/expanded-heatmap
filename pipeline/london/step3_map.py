@@ -21,6 +21,7 @@ import geopandas as gpd
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline import place_index  # noqa: E402
 from pipeline.map_common import load_geojson_line_shapes, render_heatmap  # noqa: E402
 from pipeline.london import config  # noqa: E402
 
@@ -56,6 +57,9 @@ def main():
         ring_labels=config.RING_LABELS,
         label_focus=city,
         legend_names=config.LEGEND_NAMES,
+        # Place search (batch 3, 2026-10-11): the index step2b_place_index.py
+        # writes, served from the app's static folder under its content hash.
+        place_index_url=place_index.index_url("london"),
     )
 
 

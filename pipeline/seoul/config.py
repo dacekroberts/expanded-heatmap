@@ -332,4 +332,16 @@ PLACE_DROPPED = {
     "node/10124028155": "a shaman's private shrine (불사당), a home business",
     "node/13718472516": "a healing-centre business",
     "node/10598419912": "a book cafe, tagged a locality",
+    # The owner's answers to 2b's questions (2026-10-11): glitched names with no Korean name to lead, dropped rather than repaired (a corrected name would not be OSM's); religious residences held to the worship precedent (a non-notable one where people live is out).
+    "node/9069644353": "a glitched name: Chinese only, with no Korean name (a church)",
+    "way/980863937": "a glitched name: Chinese only, with no Korean name (a park)",
+    "way/465040923": "a glitched name: Chinese only, with no Korean name (a children's park)",
+    "node/10247209041": "a glitched name: a church's, cut before its last syllable",
+    "node/10247209075": "a glitched name: a church's, cut before its last syllable",
+    "node/10735453811": "a glitched name: a church's, cut before its last syllable",
+    "node/4683905420": "a glitched name: four stray letters on a church",
+    "node/1808679388": "a friary (수도회), a religious residence tagged a place of worship, not notable",
+    "node/4640090321": "a convent (수도회), a religious residence tagged a place of worship, not notable",
+    "way/466726989": "a convent (여자수도회), a religious residence tagged a place of worship, not notable",
+    "node/11466734881": "a prayer house (기도원), a religious residence tagged a place of worship, not notable",
 }

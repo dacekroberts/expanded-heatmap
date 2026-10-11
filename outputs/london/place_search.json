@@ -1,0 +1,17 @@
+{
+  "index": "app/static/places/london.json",
+  "places": 151586,
+  "data_retrieved": "2026-10-11",
+  "languages": {
+    "local": [
+      "en"
+    ],
+    "coverage": {
+      "en": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "English"
+    ]
+  }
+}

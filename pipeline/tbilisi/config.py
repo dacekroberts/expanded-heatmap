@@ -225,3 +225,11 @@ PLACE_REVIEWED = {
 # OSM objects a reading by eye found to be a business or a home that no rule
 # in place_index.py catches, each with why (place_index.build, `dropped`).
 PLACE_DROPPED = {}
+# Streets closed for rebuilding, kept although OSM draws them
+# highway=construction (place_index.build, `rebuilt`; owner, 2026-10-11): by
+# name, with why and the date seen. A name no construction way carries stops
+# the step, so an entry retires when the street reopens. Lesser streets under
+# reconstruction are not listed: only one a search test missed.
+PLACE_REBUILT = {
+    "შოთა რუსთაველის გამზირი": "Rustaveli Avenue, the city's main avenue, all 22 of its ways highway=construction with access=no in the cache of 2026-10-08 (under reconstruction); wikidata Q1754726",
+}
