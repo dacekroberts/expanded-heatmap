@@ -1028,5 +1028,40 @@
   "in_ring": 2303,
   "all": 4609,
   "map_blob": "c5b62a592b1c22d0a54af078c37c356f8f8dfe2d"
+ },
+ "ibaraki_osaka": {
+  "in_ring": 506,
+  "all": 621,
+  "map_blob": "23947a7a4631f017d11b67247c837ea905b8e9ac"
+ },
+ "minoh": {
+  "in_ring": 213,
+  "all": 294,
+  "map_blob": "1ccdee8e62e7030cc1342e3f471eab3460dfc378"
+ },
+ "moriguchi": {
+  "in_ring": 176,
+  "all": 375,
+  "map_blob": "f388672d1c5ba8a857daba11eb5da3be9824c33e"
+ },
+ "kadoma": {
+  "in_ring": 259,
+  "all": 334,
+  "map_blob": "9dd28c5d49cc1a911a0a938966407dbf9c4da2fe"
+ },
+ "neyagawa": {
+  "in_ring": 443,
+  "all": 630,
+  "map_blob": "64cd7c244ff4125a7efae78f21c593af22dce9ed"
+ },
+ "yao": {
+  "in_ring": 1544,
+  "all": 1956,
+  "map_blob": "b7d4ba21b4fc1cb6585086a58e38dd43e3f3fc45"
+ },
+ "takatsuki": {
+  "in_ring": 1181,
+  "all": 1922,
+  "map_blob": "1db544f6b347e6b3be18bb4b5452de05f27ec715"
  }
 }

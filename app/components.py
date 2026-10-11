@@ -658,6 +658,8 @@ _OSM_STATION_NAMES = (
     "Higashiyamato", "Nishitōkyō", "Tama", "Higashimurayama", "Chōfu", "Ageo (Regional)", "Sōka", "Tokorozawa", "Fuchū (Tokyo)", "Kasukabe", "Tachikawa", "Hino",
     # Kansai-1 (2026-10-07)
     "Toyonaka", "Hirakata", "Suita", "Itami", "Kakogawa", "Amagasaki", "Uji",
+    # Kansai-2 (2026-10-11)
+    "Ibaraki (Osaka)", "Minoh", "Moriguchi", "Kadoma", "Neyagawa", "Yao", "Takatsuki",
 )
 
 # Verbatim where verbatim is required. Each entry is a Notice, and the sources
@@ -3061,6 +3063,101 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
      "Morioka City, MHLW and MLIT did not make and do not endorse this map.",
      False, ("Morioka",)),
+    # The A/B build plan's Kansai-2 batch (notices 198-204, 2026-10-11).
+    # Ibaraki (Osaka) (198), Minoh (199), Moriguchi (200) and Kadoma (201):
+    # Osaka Prefecture's barber and beauty lists on BODIK, CC BY 4.0 by
+    # 大阪府オープンデータ利用規約 第1条; no form is prescribed, so the credit
+    # names the prefecture, the two titles, the licence and the change. The
+    # titles are not linked (linking a prefecture page asks for a notice to
+    # its office; Hirakata's precedent). MLIT as in Kobe's, N02 in its 2025
+    # edition. Written from Kochi's and Itami's approved wording under the
+    # owner's pre-approval of template prose (2026-09-30).
+    Notice(198, "Osaka Prefecture and MLIT (Ibaraki (Osaka))",
+     "Ibaraki (Osaka)'s businesses: 出典：「理容所届出施設一覧」「美容所届出施設一覧」（大阪府）、"
+     "クリエイティブ・コモンズ・ライセンス 表示 4.0 国際"
+     "（[https://creativecommons.org/licenses/by/4.0/deed.ja](https://creativecommons.org/licenses/by/4.0/deed.ja)）を加工して作成. "
+     "Processed by this project, which kept the rows addressed in Ibaraki (Osaka), added the prefecture's monthly "
+     "lists of new premises (to August 2026) to its lists of March 31, 2026, placed each by its address "
+     "and counted them around stations. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
+     "Osaka Prefecture and MLIT did not make and do not endorse this map.",
+     False, ("Ibaraki (Osaka)",)),
+    Notice(199, "Osaka Prefecture and MLIT (Minoh)",
+     "Minoh's businesses: 出典：「理容所届出施設一覧」「美容所届出施設一覧」（大阪府）、"
+     "クリエイティブ・コモンズ・ライセンス 表示 4.0 国際"
+     "（[https://creativecommons.org/licenses/by/4.0/deed.ja](https://creativecommons.org/licenses/by/4.0/deed.ja)）を加工して作成. "
+     "Processed by this project, which kept the rows addressed in Minoh, added the prefecture's monthly "
+     "lists of new premises (to August 2026) to its lists of March 31, 2026, placed each by its address "
+     "and counted them around stations. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
+     "Osaka Prefecture and MLIT did not make and do not endorse this map.",
+     False, ("Minoh",)),
+    Notice(200, "Osaka Prefecture and MLIT (Moriguchi)",
+     "Moriguchi's businesses: 出典：「理容所届出施設一覧」「美容所届出施設一覧」（大阪府）、"
+     "クリエイティブ・コモンズ・ライセンス 表示 4.0 国際"
+     "（[https://creativecommons.org/licenses/by/4.0/deed.ja](https://creativecommons.org/licenses/by/4.0/deed.ja)）を加工して作成. "
+     "Processed by this project, which kept the rows addressed in Moriguchi, added the prefecture's monthly "
+     "lists of new premises (to August 2026) to its lists of March 31, 2026, placed each by its address "
+     "and counted them around stations. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
+     "Osaka Prefecture and MLIT did not make and do not endorse this map.",
+     False, ("Moriguchi",)),
+    Notice(201, "Osaka Prefecture and MLIT (Kadoma)",
+     "Kadoma's businesses: 出典：「理容所届出施設一覧」「美容所届出施設一覧」（大阪府）、"
+     "クリエイティブ・コモンズ・ライセンス 表示 4.0 国際"
+     "（[https://creativecommons.org/licenses/by/4.0/deed.ja](https://creativecommons.org/licenses/by/4.0/deed.ja)）を加工して作成. "
+     "Processed by this project, which kept the rows addressed in Kadoma, added the prefecture's monthly "
+     "lists of new premises (to August 2026) to its lists of March 31, 2026, placed each by its address "
+     "and counted them around stations. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
+     "Osaka Prefecture and MLIT did not make and do not endorse this map.",
+     False, ("Kadoma",)),
+    # Neyagawa (notice 202): the city's three lists on BODIK, CC BY 4.0, in
+    # the form its terms give (item 1's 記載例), the edit stated apart from
+    # the credit; MLIT as in Kobe's.
+    Notice(202, "Neyagawa City and MLIT (Neyagawa)",
+     "Neyagawa's businesses: 「理容所確認施設一覧」「美容所確認施設一覧」「クリーニング所確認施設一覧」（寝屋川市）"
+     "（[https://data.bodik.jp/dataset/272159_barber](https://data.bodik.jp/dataset/272159_barber)、"
+     "[https://data.bodik.jp/dataset/272159_hair_dressing](https://data.bodik.jp/dataset/272159_hair_dressing)、"
+     "[https://data.bodik.jp/dataset/272159_cleaning](https://data.bodik.jp/dataset/272159_cleaning)）を加工して作成 "
+     "([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.ja)). "
+     "Processed by this project, which took the lists of August 31, 2026, showed a premises in two lists "
+     "once, placed each by its address and counted them around stations. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
+     "Neyagawa City and MLIT did not make and do not endorse this map.",
+     False, ("Neyagawa",)),
+    # Yao (notice 203) and Takatsuki (notice 204): MHLW's filings alone, as
+    # Kurume's (126); MLIT as in Kobe's.
+    Notice(203, "MHLW and MLIT (Yao)",
+     "Yao's businesses: 出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一覧」を加工して作成. "
+     "Processed by this project, which selected the storefront types, placed each by its address or the "
+     "ministry's own coordinates, and counted them around stations. The ministry's list holds only filings "
+     "whose applicants agreed to publish them and is not complete. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The list may include premises that have closed. "
+     "MHLW and MLIT did not make and do not endorse this map.",
+     False, ("Yao",)),
+    Notice(204, "MHLW and MLIT (Takatsuki)",
+     "Takatsuki's businesses: 出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一覧」を加工して作成. "
+     "Processed by this project, which selected the storefront types, placed each by its address or the "
+     "ministry's own coordinates, and counted them around stations. The ministry's list holds only filings "
+     "whose applicants agreed to publish them and is not complete. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The list may include premises that have closed. "
+     "MHLW and MLIT did not make and do not endorse this map.",
+     False, ("Takatsuki",)),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no

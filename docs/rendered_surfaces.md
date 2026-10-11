@@ -6,7 +6,7 @@ read from the code, so a review lane can divide them up and miss none
 (review lesson 3, `docs/review_lanes_2026-09-30.md`). The lane kit is
 `docs/review_lane_kit.md`.
 
-**206 city pages, 4 fixed pages and the Overview; 29 rendered docs; 2 app data files.**
+**213 city pages, 4 fixed pages and the Overview; 29 rendered docs; 2 app data files.**
 
 ## The Overview (`/`)
 
@@ -238,6 +238,13 @@ Is Excluded, and its in-ring share on Why the Maps Differ.
 | `/Gifu_Heatmap` | Gifu | `gifu` | ✓ |
 | `/Mito_Heatmap` | Mito | `mito` | ✓ |
 | `/Morioka_Heatmap` | Morioka | `morioka` | ✓ |
+| `/Ibaraki_Osaka_Heatmap` | Ibaraki (Osaka) | `ibaraki_osaka` | ✓ |
+| `/Minoh_Heatmap` | Minoh | `minoh` | ✓ |
+| `/Moriguchi_Heatmap` | Moriguchi | `moriguchi` | ✓ |
+| `/Kadoma_Heatmap` | Kadoma | `kadoma` | ✓ |
+| `/Neyagawa_Heatmap` | Neyagawa | `neyagawa` | ✓ |
+| `/Yao_Heatmap` | Yao | `yao` | ✓ |
+| `/Takatsuki_Heatmap` | Takatsuki | `takatsuki` | ✓ |
 | `/Siheung_Heatmap` | Siheung | `siheung` | ✓ |
 | `/Geneva_Heatmap` | Geneva (Regional) | `geneva` | ✓ |
 | `/Thessaloniki_Heatmap` | Thessaloniki | `thessaloniki` | ✓ |

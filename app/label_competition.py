@@ -364,6 +364,12 @@ TEXT_WIDTH = {
     # 2026-10-07, the same way; controls Paris 32.9, Boston 48.4, Seattle
     # (Regional) 120.5 and Higashiōsaka 89.1 reproduced.
     "Fuchū (Tokyo)": 96.2, "Fukuyama": 69.3, "Maebashi": 64.9, "Mito": 30.7, "Morioka": 54.3,
+    # Kansai-2's names not measured ahead of their builds, 2026-10-11, the
+    # built-in browser with Google Fonts' Space Grotesk 600 loaded (canvas
+    # measureText after document.fonts.load); controls Tacoma 51.8, Mendoza
+    # 61.8, Paris 32.9, Higashiōsaka 89.1, Liverpool (Regional) 135.0, Fuchū
+    # (Tokyo) 96.2, Ibaraki 45.5 and Kadoma 54.2 reproduced.
+    "Ibaraki (Osaka)": 100.1, "Yao": 24.0, "Takatsuki": 64.2,
 }
 
 PILL_H = 18.0             # measured from rendered pixels, 14 px text
