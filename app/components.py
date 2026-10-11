@@ -659,7 +659,7 @@ _OSM_STATION_NAMES = (
     # Kansai-1 (2026-10-07)
     "Toyonaka", "Hirakata", "Suita", "Itami", "Kakogawa", "Amagasaki", "Uji",
     # Regional-2 (2026-10-11)
-    "Shizuoka", "Aomori", "Okazaki", "Kanazawa", "Matsue", "Fuji",
+    "Shizuoka", "Aomori", "Okazaki", "Kanazawa", "Matsue", "Fuji", "Matsumoto",
 )
 
 # Verbatim where verbatim is required. Each entry is a Notice, and the sources
@@ -3215,6 +3215,32 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). Shizuoka Prefecture and MLIT did not make "
      "and do not endorse this map.",
      False, ("Fuji",)),
+    # Matsumoto (notice 211): the city's 「松本市の生活衛生施設データ」, LinkData.org
+    # work rdf1s8757i (the barber, beauty-salon and laundry tables), CC BY 4.0
+    # under 松本市オープンデータ利用規約 and marked CC BY 3.0 on LinkData.org with
+    # the attribution name 松本市　DX推進本部 (read 2026-10-07 by staging:
+    # permitted with conditions; the owner's call 207 accepted the city's
+    # §6(5) and LinkData's Art.18(4) and set the credit: the city's format
+    # (§2(2)) naming CC BY 4.0, then LinkData's CC BY 3.0 mark and the
+    # attribution name). The download date in the credit is the fetch's,
+    # 2026-10-11; a refresh rewrites it. MLIT as in Kobe's, N02 in its 2025
+    # edition. Written from Shizuoka's and Hamamatsu's approved wording under
+    # the owner's pre-approval of template prose (2026-09-30); the LinkData
+    # sentence and the processing sentence are proposals in
+    # docs/decisions_drafts/worktree-japan-regional-2.md.
+    Notice(211, "Matsumoto City, LinkData.org and MLIT (Matsumoto)",
+     "Matsumoto's businesses: 出典：松本市の「松本市の生活衛生施設データ」（クリエイティブ・コモンズ・ライセンス表示4.0国際、"
+     "[http://linkdata.org/work/rdf1s8757i](http://linkdata.org/work/rdf1s8757i)、2026年10月11日ダウンロード）、"
+     "松本市を編集・加工して作成. Published on LinkData.org by 松本市　DX推進本部, where the data is marked CC BY 3.0 "
+     "([http://creativecommons.org/licenses/by/3.0/deed.ja](http://creativecommons.org/licenses/by/3.0/deed.ja)). "
+     "(This map modifies Matsumoto City's registers of barbers, beauty salons and laundries as of October 1, "
+     "2026: this project selected the premises with a fixed place, placed each by its address, and counted "
+     "them around stations.) The registers may include premises that have closed. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). Matsumoto City, LinkData.org and MLIT did not make "
+     "and do not endorse this map.",
+     False, ("Matsumoto",)),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no

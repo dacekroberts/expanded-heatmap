@@ -43,25 +43,47 @@ else:
 # replaces this with its own caption of the sources' dates and credits.
 render_data_age("Matsumoto")
 
-# TODO: replace every TODO bullet with prose true for this city, as short
-# bullets under bold headings (app/pages/43_Seoul_Heatmap.py is the model):
-# the lines by name, what is not drawn, the area and the stations left out, the
-# source and its limitations. Detail a reference page carries stays there.
+# From the japan-city skill's template, Yokohama's one-bucket line, and
+# Shizuoka's and Hamamatsu's bullets (approved wording, pre-approved for this
+# build, 2026-09-30). The food bullet's "one in three" and the closed-premises
+# bullet are proposals in docs/decisions_drafts/worktree-japan-regional-2.md.
+# The date is config.REGISTERS_AS_OF; the ring share, 46.8%, is step 3's (456
+# of 975). No stretch is low-frequency: the thinnest, the Oito Line, runs 24
+# trains a weekday each way, and the Kamikochi Line 25.
 st.markdown(
     """
 **The lines**
 
-- TODO: the lines drawn, by name (each is labeled on the map and in the legend).
-- TODO: what is not drawn, and why.
-- TODO: the area covered; stations left out are listed below.
+- Three lines are drawn, each labeled on the map and in the legend: Alpico Kotsu's Kamikochi Line
+  and JR East's Shinonoi and Oito lines.
+- Lines and stations come from MLIT's national railway data (国土数値情報); station names in
+  English are from OpenStreetMap. Line colors are this project's own, not the operators'.
+- Only stations inside Matsumoto City get rings, because the business data covers the city alone:
+  lines running on to Shiojiri, Azumino and Chikuhoku are cut at the city line. The stations left
+  out are listed below.
 
 **The businesses**
 
-- TODO: the data source, and any category it is missing.
+- **This map shows personal services only: barbers, beauty salons and laundries.**
+- Restaurants, cafés and shops are not on this map: the national list of food businesses gives
+  an address for only about one in three of Matsumoto's restaurants.
+- From Matsumoto City's registers of barbers, beauty salons and laundries, as of October 1, 2026.
+- The registers may include premises that have closed, so a dot is a premises on a register, not
+  necessarily one open today.
+
+**Reading the map**
+
+- The registers give an address but no location. Each address is matched to MLIT's address
+  reference data, which places most at their street block; where only the district can be found,
+  the dot sits at the district's center.
+- Where a business's trade name is its operator's own name, the dot shows its register type
+  instead.
+- Names and types are shown in Japanese, as the city records them.
+- **About 47% of the premises sit within a ring.**
 """
 )
 
-render_map_help("three business categories (Retail, Food service and Personal services)")
+render_map_help("business layer")
 render_excluded_stations("Matsumoto")
 render_country_links("Matsumoto")
 

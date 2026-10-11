@@ -5741,8 +5741,17 @@ CITIES = [
         "lat": 36.231,
         "lon": 137.964,
         "page": "pages/264_Matsumoto_Heatmap.py",
-        "blurb": "JR East and Alpico Kotsu (TODO: list the lines)",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (94.9%)",
+        "data_age": "Registers as of 2026-10-01",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "Alpico Kotsu's Kamikochi Line and JR East's Shinonoi and Oito lines",
         "region": "Chubu",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
         "country": "Japan",
         "mode": "metro",
         "in_default_view": False,

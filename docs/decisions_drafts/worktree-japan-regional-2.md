@@ -58,6 +58,168 @@ Each city's own parked calls and proposals are under its entry below
 
 ## Changes
 
+### 2026-10-11 - Matsumoto built, the city's barber, beauty-salon and laundry registers of October 1, 2026, personal services only
+
+- **Matsumoto built (page 264, notice 211), Kōchi's page shape (personal
+  services only) on Hamamatsu's source shape (one standing file per trade):
+  975 storefronts (barbers 165, beauty salons 695, laundries 115) around 20
+  stations on 3 lines, 46.8% of them in a ring (456) on the standard rings.**
+  Source: Matsumoto City's 「松本市の生活衛生施設データ」, LinkData.org work
+  `rdf1s8757i`, CC BY 4.0 under the city's terms and marked CC BY 3.0 on
+  LinkData (read 2026-10-07 by staging; owner's call 207). Built by a
+  Regional-2 subagent.
+- **The brief passed 12 of 13; the failure is a brief to correct.** The
+  register work's page no longer reads 「2026年7月1日現在」: LinkData replaced
+  the three tables in place on 2026-10-08 and the page now reads
+  「2026年10月1日現在」 (last update Oct 8, 2026). The brief foresaw it ("a
+  later edition re-measured ... the build pins the work page's date"). **The
+  build reads the 2026-10-01 edition**, fetched 2026-10-11 from the three
+  URLs the brief names and saved under dated names
+  (`matsumoto_barber_20261001.txt`, `..._beauty_...`, `..._cleaning_...`;
+  16,476, 74,822 and 17,264 B) beside the Step 0 files of the 2026-07-01
+  edition, which no step reads. The brief's check string and byte counts
+  need the correction.
+- **What moved between the editions** (by address and trade name): barbers
+  168 to 165 (3 gone, none added), beauty salons 710 to 710 (9 gone, 9
+  added), laundry rows 118 to 117 (2 gone, 1 added; pick-up counters 74 to
+  73). The barber table's 検査確認日 is ISO now, not an Excel serial.
+- **Against e-Stat FY2024 (2025-03-31):** barbers 165 of 172 (95.9%), beauty
+  salons 709 of 686 (103.4%), laundries 116 of 125 (92.8%: general 43 of 43,
+  pick-up counters 73 of 82). The brief's 97.7%, 103.5% and 93.6% were the
+  July edition's.
+- **Step 2:** 992 rows; 1 set aside as addressed in another municipality (the
+  beauty row in 長野市 the brief flagged: the foundation's `other_muni` rule
+  decides it, no city-local choice); 1 not a premises (無店舗取次店); 990
+  storefront rows. Join: block 940 (94.9%), town-chōme center 45, 小字 center
+  3, unplaced 2 (0.2%: 波田宮ノ久保 and 蟻々崎) where the brief left 9: the
+  foundation's `aza_insert` and `no_dropped` rules place the rest. 13 repeat
+  rows shown once (11 premises are in both the barber and the beauty
+  register by address and name).
+- **No shared-code change was needed.** The brief's items (a LinkData reader,
+  営業者 in `OPERATOR_COLS`, the short-大字 rule, 湯の原 / 湯原) are all in
+  shared code; the config has no `source_rows` hook and no `TERM_AS_OF` (the
+  registers carry no permit term).
+- **Food stays off (call 133, as approved).** The ledger and MHLW's file are
+  read by no step and not credited. The Economic Census control
+  (`scripts/japan_census_control.py matsumoto`) has no Food service pins to
+  measure: 0 against 1,400 establishments, by design.
+- **Rail:** step 1 reproduces the brief: Kamikochi Line 14 of 14, Shinonoi
+  Line 4 of 15, Oito Line 4 of 33, 松本 one group (116 m), 20 stations, no
+  Shinkansen. 7 stations beyond the city line within 3 km are listed (安曇野市
+  5, 塩尻市 1, 筑北村 1). Median nearest-station gap 950 m (the brief: 1,021
+  m): standard rings either way; closest pair 417 m.
+- **Gate 3 exact on the Kamikochi Line (14).** Alpico Kotsu's timetable PDF
+  of 2026-03-14 (call 176: counts only) was fetched once on 2026-10-11 with
+  the project's user-agent into `data/matsumoto/raw/` (137,355 B) and read
+  with `pdftotext`: 14 stations, AK01 to AK14, and 25 trains a day each way,
+  so the brief's "about every 40 minutes" holds (it was ASSERTED there). No
+  stretch is at or under about 11 trains a day (JR's thinnest is the Oito
+  Line, 24 each way, the brief's reading; not re-read).
+- **Station names:** 44 OSM objects, 43 with `name:en`; all 20 names read.
+  One override: 北新・松本大学前 reads "Kitanii-Matsumotodaigakumae", the
+  spelling of Alpico's own timetable, where OSM translates half of it
+  ("Kitanii / Matsumoto Univ."). No macron, no 丁目, no tie.
+- **Line names:** "Alpico Kotsu Kamikochi Line", "JR Shinonoi Line", "JR Oito
+  Line". No other config draws any of the three.
+- **Line colours** (`line_colour_search.py matsumoto`, 2026-10-11): `#0090D0`,
+  `#E07800` and `#9050A0`. Against the pin colours (CIE76): 71.6, 53.6 and
+  47.6; closest pair of lines 51.2; the dark-mode labels separate, 3 of 3.
+  None between 20 and 45. The starting hues are the project's own guesses,
+  not read from the operators.
+- **The opening view fits the stations, not the city's 979 km²:** the
+  rendered bounds run 36.174-36.288 N, 137.822-137.970 E. Not checked in a
+  browser (`check_map_view.js` is the lead's, at review time).
+- **Privacy verdict: publish.** `check_personal_exposure.py matsumoto`: the
+  Japan pass prints 0 of 975; 0 names withheld, 0 masked, 0 blank on the
+  rendered data. 営業者 is filled on 277 of 992 rows, every one with a
+  company marker; it is compared in memory only.
+- **The notice's credit** follows call 207: the city's format naming CC BY
+  4.0, then LinkData's CC BY 3.0 mark and the attribution name. The download
+  date in it is 2026-10-11.
+- Files: `pipeline/matsumoto/` (config, fetch_sources, three steps),
+  `outputs/matsumoto/` (heatmap.html, excluded_stations.csv,
+  provenance.json).
+
+#### Parked calls
+
+1. **The newer edition.** Built on the 2026-10-01 tables rather than the
+   Step 0 files. Recommend keeping it: the brief names these URLs and says a
+   later edition is re-measured and pinned to the work page's date, and
+   Shizuoka's build re-fetched newer files the same way. Tradeoff: the
+   licence read (2026-10-07) predates the page's update of 2026-10-08; the
+   licence mark on the work page and in each table's header is unchanged
+   (`brief_check` still finds the CC BY 3.0 link; the headers were read by
+   the fetch), but the terms were not re-read.
+2. **The credit's title and URL.** The city's format reads 松本市の［タイトル］,
+   and the work's title is itself 「松本市の生活衛生施設データ」, so the credit
+   puts the title in 「」 to keep "松本市の" from doubling; the URL is the
+   LinkData work page (where the data is), not the city's open-data page.
+   Recommend both as written. Tradeoff: brackets the format does not show;
+   the alternative URL is `https://www.city.matsumoto.nagano.jp/soshiki/5/4172.html`.
+3. **The Chuo Line's through trains.** N02 files the track as 篠ノ井線 and
+   the map labels it "JR Shinonoi Line"; JR East also files 村井, 平田 and
+   南松本 under 中央本線. The brief left adding the Chuo Line to the legend
+   text to the build "if OSM's route relations carry it"; no route relation
+   was queried (one names query only). Recommend leaving the label as built;
+   tradeoff: a reader who knows the service as the Chuo Line sees only
+   Shinonoi. `jr-east-chuo-line` in the registry is not used here.
+4. **Alpico's PDF sits outside `fetch_sources.py`.** It is a gate 3 read, not
+   a pipeline input, fetched by a scratch script, so `provenance.json` does
+   not record it (sha256 7273992e...6ddfcd, 137,355 B). Recommend leaving it
+   so (Kōchi's and Shizuoka's gate 3 reads are not recorded either);
+   tradeoff: the file is on disk in `data/matsumoto/raw/` with no record but
+   this entry.
+5. **`data_sources.md` row for the timetable.** If a gate 3 read needs a
+   support-source row, the lead adds it; none drafted beyond the transit
+   row's mention.
+
+#### Proposals
+
+Sentences adapted from an approved bullet of another page, none in the
+japan-city template:
+
+- "Restaurants, cafés and shops are not on this map: the national list of
+  food businesses gives an address for only about one in three of
+  Matsumoto's restaurants." (Shizuoka's and Kōchi's bullet; 35.4%)
+- "From Matsumoto City's registers of barbers, beauty salons and laundries,
+  as of October 1, 2026." (the template's source bullet, cut to registers)
+- "The registers may include premises that have closed, so a dot is a
+  premises on a register, not necessarily one open today." (the template's
+  closed-premises bullet with Hamamatsu's ending)
+- Notice 211's LinkData sentence: "Published on LinkData.org by 松本市　DX推進本部,
+  where the data is marked CC BY 3.0 (http://creativecommons.org/licenses/by/3.0/deed.ja)."
+  (new; call 207 sets its content, not its words)
+- Notice 211's processing sentence: "(This map modifies Matsumoto City's
+  registers of barbers, beauty salons and laundries as of October 1, 2026:
+  this project selected the premises with a fixed place, placed each by its
+  address, and counted them around stations.) The registers may include
+  premises that have closed." (from Shizuoka's)
+- In What Is Excluded: "Another 48 sit at their district's center, mostly
+  rural addresses in the villages the city absorbed." The "mostly" is the
+  brief's reading of the July edition's misses, not re-read on this one.
+
+#### Registry
+
+- No `maps` addition and no new entry needed for a built neighbor: no line
+  in `pipeline/line_registry.py` is the Kamikochi, Shinonoi or Oito line,
+  and no other built city or city of this batch draws one of them.
+- JR's Chuo Line is not drawn here (N02 files no 中央線 inside the city), so
+  `jr-east-chuo-line` takes no Matsumoto entry.
+- `#E07800` (JR Shinonoi Line) is the same colour Aomori's JR Ou Line takes
+  from the registry; the two lines are different and their maps do not meet.
+  `check_line_identity.py` is the lead's to run.
+
+#### Downstream
+
+- Notice 211 (Matsumoto City; CC BY 4.0 by the city's terms, CC BY 3.0 as
+  marked on LinkData): the city's terms prescribe the 出典 line wherever the
+  edited data is used, and CC BY requires the credit with the work, so card
+  face, in the prescribed form or the short form Visuals uses for CC BY city
+  lists, naming 松本市 and both licence versions; the MLIT credits as for
+  every Japanese card. Open terms question: no document says which CC BY
+  version prevails (call 207 answered it by naming both); the download date
+  in the credit must follow any refresh.
+
 ### 2026-10-11 - Fuji built, Shizuoka Prefecture's barber, beauty-salon and laundry registers of March 31, 2026 with their monthly new premises, personal services only
 
 - **Fuji built (page 263, notice 210), Kōchi's page shape (personal

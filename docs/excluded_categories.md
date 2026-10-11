@@ -6080,6 +6080,37 @@ Minobu lines are cut at the city line.
 - The Shinkansen is not drawn, so Shin-Fuji, which only the Shinkansen
   serves, has no ring.
 
+### Matsumoto - the city's barber, beauty-salon and laundry registers only, joined to MLIT's address blocks
+
+**Left out**
+- Every food business and every shop: the national list of food businesses
+  gives an address for only about one in three of Matsumoto's restaurants,
+  and the city's own list of older food permits does not close the gap, so
+  this map shows barbers, beauty salons and laundries only.
+- 1 laundry agent with no premises (無店舗取次店).
+- 1 beauty salon whose registered address is in Nagano City.
+
+**Counted** - every barber, beauty salon and laundry on the city's registers
+of October 1, 2026: 165 barbers, 709 beauty salons and 116 laundries (43
+general laundries and 73 pick-up counters, 取次所). The official count of March
+31, 2025 was 172, 686 and 125. The registers do not say which premises have
+closed.
+
+**One pin per premises** - 13 repeat registrations are shown once, most of
+them premises registered as both a barber and a beauty salon.
+
+**Not placed** - 2 premises (1 beauty salon and 1 laundry), at addresses
+MLIT's files do not hold. Another 48 sit at their district's center, mostly
+rural addresses in the villages the city absorbed.
+
+**Names not shown** - none: no trade name is its operator's own name.
+
+**Stations.** Alpico Kotsu's Kamikochi Line is drawn whole; JR East's
+Shinonoi and Oito lines are cut at the city line.
+- Left out: 7 stations beyond it, 5 in Azumino, 1 in Shiojiri and 1 in
+  Chikuhoku.
+- No Shinkansen runs through Matsumoto.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

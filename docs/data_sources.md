@@ -100,7 +100,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
 | South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang (Regional), Daejeon, Gwangju, Gimhae, Gimpo, Siheung |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
-| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki, Higashiyamato, Nishitōkyō, Tama, Higashimurayama, Ageo (Regional), Sōka, Tokorozawa, Kasukabe, Fuchū (Tokyo), Chōfu, Tachikawa, Hino, Toyonaka, Hirakata, Suita, Itami, Kakogawa, Amagasaki, Uji, Maebashi, Fukushima, Fukuyama, Ichinomiya, Tsu, Akita, Ōita, Gifu, Iwaki, Mito, Morioka, Shizuoka, Aomori, Okazaki, Kanazawa, Matsue, Fuji |
+| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki, Higashiyamato, Nishitōkyō, Tama, Higashimurayama, Ageo (Regional), Sōka, Tokorozawa, Kasukabe, Fuchū (Tokyo), Chōfu, Tachikawa, Hino, Toyonaka, Hirakata, Suita, Itami, Kakogawa, Amagasaki, Uji, Maebashi, Fukushima, Fukuyama, Ichinomiya, Tsu, Akita, Ōita, Gifu, Iwaki, Mito, Morioka, Shizuoka, Aomori, Okazaki, Kanazawa, Matsue, Fuji, Matsumoto |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin, Gelsenkirchen, Bremen |
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional), Manchester (Regional), Birmingham (Regional), Edinburgh, Sheffield, Nottingham (Regional), Blackpool (Regional), Liverpool (Regional) |
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires, Mendoza |
@@ -4622,6 +4622,37 @@ batch at review time).
   liabilities review found it read two ways (Cleanup is reconciling). A
   facility may ask 衛生課 to stop publication of its entry; a removal request
   to this project is honored at once.<!-- /internal -->
+
+**211. Matsumoto City, LinkData.org and MLIT (Matsumoto) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-11; lands with the Regional-2
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-07; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). Matsumoto City's
+  「松本市の生活衛生施設データ」 (LinkData.org work `rdf1s8757i`: the barber,
+  beauty-salon and laundry tables) is offered under **CC BY 4.0** by the
+  city's open-data terms (松本市オープンデータ利用規約, 2018-10-01) and marked
+  **CC BY 3.0** on LinkData.org, with the attribution name 松本市　DX推進本部;
+  no document says which version prevails, so the credit names both. MLIT's
+  位置参照情報 and N02 (the 2025 edition) are **PDL 1.0**, as in Kobe's (50).
+  N03 (CC BY 4.0) only picks stations and is **never drawn** (the Survey Act).
+  e-Stat's 衛生行政報告例 was used as a measurement only and is not drawn.
+- **MUST DISPLAY** (the city's terms §2(2), the city's own format): 「出典：松本市の「松本市の生活衛生施設データ」（クリエイティブ・コモンズ・ライセンス表示4.0国際、http://linkdata.org/work/rdf1s8757i、2026年10月11日ダウンロード）、松本市を編集・加工して作成」,
+  then the attribution name 松本市　DX推進本部 and that LinkData.org marks the
+  data CC BY 3.0 (http://creativecommons.org/licenses/by/3.0/deed.ja); MLIT's
+  credit lines.
+- **MUST NOT**: present the map as the city's or LinkData's work; imply
+  either's endorsement (CC BY 3.0 §4(b), LinkData's terms Art.14.2); say the
+  pins are businesses open now. The contributor's name comes off the credit
+  if the city asks (Art.14.3).
+- **MUST DO:** re-read the work page's date before a refresh (LinkData
+  overwrites a table in place) and write the new download date into the
+  credit.<!-- internal --> The city's §6(5) and LinkData's Art.18(4) are partly
+  not fault-based and uncapped; both accepted by the owner (call 207,
+  2026-10-07). `check_personal_exposure.py matsumoto` with its Japan pass,
+  run 2026-10-11; the verdict is in
+  `docs/decisions_drafts/worktree-japan-regional-2.md` ("Matsumoto built",
+  2026-10-11).<!-- /internal -->
 
 
 ## Gaps
