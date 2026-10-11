@@ -4949,6 +4949,48 @@ line.
 - Left out: 9 stations beyond it: 3 in Soka, 2 in Kasukabe, 2 in Yoshikawa,
   1 in Misato and 1 in Kawaguchi.
 
+### Sagamihara - the city's food, barber, beauty and laundry lists, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that only notify the city rather than hold a permit.
+- 611 permits whose operators asked the city not to publish the premises
+  (about one restaurant in nine).
+- 592 food-truck permits, which the city lists apart, 297 stalls and other
+  filings addressed to the whole city, 2 mobile beauty salons and 6 laundry
+  agents with no shop.
+- 197 school, hospital and staff canteens, 173 snack bars and cabarets, 41
+  entertainment venues, 36 premises inside hotels and inns, 28 vending
+  machines, 25 caterers (仕出し; 4 of them also name a counter form), 2 rows
+  marked temporary or mobile and 1 mail-order business.
+- 163 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい).
+- 442 food permits and 8 beauty salons the city's monthly lists record as
+  closed, 19 permits past their term and 1 that starts after August 31,
+  2026.
+
+**Counted** - the city's food, barber and beauty lists of March 31, 2026,
+brought to August 31, 2026 with the openings and closures of its monthly
+lists, and its laundry list of March 31, 2026. They hold 5,150 restaurant
+permits (food trucks included), 470 barbers, 1,085 beauty salons and 237
+laundries, against 5,100, 477, 1,073 and 238 in the national count at the end
+of March 2025. 30 of the 486 bakery, confectioner and deli rows (6.2%) have a
+trade name that reads as a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 220 repeat permits are shown once.
+
+**Not placed** - none. 104 pins sit at their town's center, most of them in
+Midori Ward's mountain districts.
+
+**Names not shown** - 2 pins whose trade name is the operator's own name show
+their permit type. The lists name an operator only where it is a company, so
+for the rest only the form of the trade name can be tested.
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 14 stations beyond it: 5 in Machida, 3 in Yamato, 3 in Zama, 2 in
+  Hachioji and 1 in Uenohara (Yamanashi).
+
 ### Fujisawa - the city's food list and monthly new permits, its barber, beauty and laundry lists and the national notifications, joined to MLIT's address blocks
 
 **Left out**

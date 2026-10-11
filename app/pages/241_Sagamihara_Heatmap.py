@@ -43,25 +43,52 @@ else:
 # replaces this with its own caption of the sources' dates and credits.
 render_data_age("Sagamihara")
 
-# TODO: replace every TODO bullet with prose true for this city, as short
-# bullets under bold headings (app/pages/43_Seoul_Heatmap.py is the model):
-# the lines by name, what is not drawn, the area and the stations left out, the
-# source and its limitations. Detail a reference page carries stays there.
+# From the japan-city skill's template and Kawasaki's, Sakai's and Koshigaya's
+# pages (approved wording, pre-approved for this build, 2026-09-30); the
+# dated first bullet is a proposal in
+# docs/decisions_drafts/worktree-japan-east-2.md. The dates are the lists' own
+# (config.SOURCE_AS_OF); about one in nine is the brief's 3,763 of 4,231 fixed
+# restaurant permits that publish an address (88.9%); the ring share, 60.3%
+# (3,339 of 5,539), is step 3's.
 st.markdown(
     """
 **The lines**
 
-- TODO: the lines drawn, by name (each is labeled on the map and in the legend).
-- TODO: what is not drawn, and why.
-- TODO: the area covered; stations left out are listed below.
+- Six lines are drawn, each labeled on the map and in the legend: JR East's Sagami, Yokohama and
+  Chuo lines, Odakyu's Odawara and Enoshima lines and the Keio Sagamihara Line.
+- Lines and stations come from MLIT's national railway data (国土数値情報); station names in
+  English are from OpenStreetMap. Line colors are this project's own, not the operators'.
+- Only stations inside Sagamihara City get rings, because the business data covers the city alone:
+  lines running on to Machida, Hachioji, Zama, Yamato and Uenohara are cut at the city line. The
+  stations left out are listed below.
 
 **The businesses**
 
-- TODO: the data source, and any category it is missing.
+- From Sagamihara City's lists of food-business permits, barbers and beauty salons (as of March
+  31, 2026, with the openings and closures it listed to August 31, 2026) and of laundries (as of
+  March 31, 2026).
+- Japan has no general business license, so shops other than food shops (clothing, electronics,
+  pharmacies) do not appear: the Food shops layer is food retail only (bakeries and confectioners,
+  delis, butchers and fishmongers).
+- Food businesses that only notify the city rather than hold a permit, such as many convenience
+  stores and greengrocers, are not in the list.
+- The lists may include premises that have closed, so a dot means a permit on file, not a
+  business open today.
+
+**Reading the map**
+
+- About one restaurant in nine in Sagamihara chose not to have its address published in the
+  city's list and is not on this map. Where they are is not known.
+- The rest are matched to MLIT's address reference data, which places most at their street block;
+  where only the district can be found, the dot sits at the district's center.
+- Where a trade name is its operator's own name, the dot shows its permit type instead; the lists
+  name an operator only where it is a company, so this cannot be checked for the rest.
+- Names and permit types are shown in Japanese, as the lists record them.
+- **About 60% of storefronts sit within a ring.**
 """
 )
 
-render_map_help("three business categories (Retail, Food service and Personal services)")
+render_map_help("three business categories (Food shops, Food service and Personal services)")
 render_excluded_stations("Sagamihara")
 render_country_links("Sagamihara")
 

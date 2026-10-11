@@ -117,12 +117,85 @@ Newest entry first. Cleanup folds this file into `DECISIONS.md`.
 
 ## Shared-state findings for review time (not changed here)
 
+- **Two operator-column spellings are not in `japan_register.OPERATOR_COLS`:
+  開設者名称 (Sagamihara's barber and beauty lists) and 営業者名称 (its laundry
+  list).** They hold company names only (496 values, every one with a
+  company marker); Sagamihara records both in `config.NOT_OPERATOR` behind a
+  guard that stops the build if a value ever lacks a marker. Adding them to
+  the shared tuple needs the Minato control and changes nothing measured (0
+  flags either way).
+- Yokohama's config holds literals for three lines East-2 registered
+  (`sotetsu-izumino-line`, `jr-east-yokohama-line`) where a registered line
+  should read `line_registry.colour()`; the values are equal and the check
+  passes. A built city's config, left for Cleanup.
+
 - `app/components.py`'s `_OSM_STATION_NAMES` and notice 1's sentence do not
   name Regional-1's eleven cities, and the sentence does not name Kansai-1's
   seven; `app/osm_notice.py` names Kansai-1's but not Regional-1's. East-2's
   cities are added to all three as East-1's were. Cleanup's to reconcile.
 
 ## Entries
+
+### 2026-10-11 - Sagamihara built, the food, barber and beauty lists rebuilt to August 2026 from zipped registers; two lines registered
+
+- **Sagamihara built (page 241, notice 188), Sakai's shape (a register
+  rebuilt by permit number with the city's own closures): 5,539 storefronts
+  (Food service 2,881, Food shops 894, Personal services 1,764) around 16
+  stations on 6 lines, 60.3% of them in a ring (3,339).** On the Japan
+  foundation's rules; three wards, so not wardless. Brief check 17/17
+  (2026-10-11). Built by a subagent of the East-2 lead, integrated by the
+  lead. Every file was on disk from Step 0 (2026-10-04).
+- **Zipped registers:** each source is a zip of CSVs, read by the config's
+  own `file_rows` (a file-format hook; `city_rows` reads XLSX members only).
+  Food: year-end 5,563 fixed + 447 new - 442 closed (of 461 closure numbers)
+  = 5,568; 19 past term; 5,549 in term on 2026-08-31. Vehicle permits are the
+  city's own list (592 in term), counted for the share and never placed.
+  Barbers 468 + 2 = 470; beauty 1,082 + 11 - 8 = 1,085; laundries 237
+  (2026-03-31, no months).
+- **A closure removes one row, the earliest inspected, not every row of its
+  key:** one beauty salon changed hands (a new registration in June, the old
+  operator's closure in July, same address and name); removing by key would
+  have dropped the live salon. Hence 1,085 against the brief's 1,080.
+- **Withheld premises (`ADDRESS_BY_CONSENT`):** 611 food rows carry no
+  address or name at the operator's request. The page says "about one
+  restaurant in nine", the brief's measure (3,763 of 4,231 fixed restaurant
+  permits publish an address, stalls out of the denominator); with the 36
+  stall-form rows kept in, it is 504 of 4,267 (one in 8.5). Both round to the
+  sentence used.
+- **Step 2:** not a premises 299 (297 一円 food rows, 2 mobile salons); 6
+  無店舗 laundry agents set aside; late start 1; out by rule 665 (197
+  institutional catering, 173 hostess venues, 163 manufacturing types, 41
+  entertainment venues, 36 inside accommodation, 28 vending, 25 caterers of
+  which 4 also name a counter form, 2 temporary, 1 mail order); 37 combined
+  業態 cells read as their restaurant form (call 158). Of 5,759 storefront
+  rows: 5,649 block, 110 town centre, 0 unplaced. 220 repeat rows dropped.
+  Names withheld 2. Factory share 30 of 486 (6.2%), kept.
+- **Official shares:** restaurants 5,150 permits in term (vehicles included)
+  of 5,100, 101.0%; barbers 98.5%; beauty 101.1%; laundries 99.6%.
+- **Economic Census control:** 2,881 pins against 1,850 establishments, 1.56
+  (緑区 1.71, 中央区 1.51, 南区 1.52), the bottom of the built range, as
+  expected with one restaurant in nine withheld.
+- **Privacy verdict: publish.** `check_personal_exposure.py sagamihara`: the
+  Japan pass prints 0; 5 raw flags, 2 pins show their permit type.
+- **Rail:** N02-25; 16 stations: JR Sagami 7, JR Yokohama 5, JR Chuo 2,
+  Odakyu Odawara 2, Odakyu Enoshima 2, Keio Sagamihara 1 (a private stub kept
+  as cut); the Chuo and both Odakyu lines drawn as cut (owner, 2026-10-05).
+  `N03_NEIGHBOR_PREFS = ("13", "19")`. Gate 3 exact on all six. Median gap
+  1,452 m (the brief's 1,542 corrected). 14 excluded: Machida 5, Yamato 3,
+  Zama 3, Hachioji 2, Uenohara 1. No override.
+- **Registry:** joined `jr-east-chuo-line`, `odakyu-odawara-line` and
+  `keio-sagamihara-line`; **new entries** `jr-east-yokohama-line` (#68A008,
+  the colour Yokohama already draws; 26.3 from olive Food shops, an accepted
+  trade recorded in the config, as it is on Yokohama's map) and
+  `odakyu-enoshima-line` (#5080B8, Fujisawa's choice, measured on both maps:
+  pins 72.3, 24.0 from the Odawara Line at 相模大野; Sagamihara's own first
+  choice #1888D0 dropped for it). The JR Sagami Line (#008090) is this map's
+  alone. Yokohama's config still holds its literals for both new entries.
+- **The line name "JR Chuo Line"** follows the registry (Hino's and
+  Tachikawa's); the brief wanted "Chuo Main Line", and East-1's parked call 5
+  covers the name site-wide.
+- **Visuals:** notice 188 caption only (CC BY 4.0 names no placement). No
+  open terms question.
 
 ### 2026-10-11 - Fujisawa built, the June lists kept whole with the months since, MHLW's notifications, five lines
 

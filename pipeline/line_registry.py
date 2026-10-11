@@ -134,7 +134,7 @@ REGISTRY = {
     # the project's colour every map already drew (hue-matched to the operator); pins >= 54.7, lines >= 11.8, lines beside it >= 23.5.
     "jr-east-chuo-line": {
         "name": "JR Chuo Line", "operator": "JR East", "colour": "#F05820",
-        "maps": {"hino": "JC", "tachikawa": "JC", "tokyo": "JC"},
+        "maps": {"hino": "JC", "sagamihara": "JC", "tachikawa": "JC", "tokyo": "JC"},
     },
     # the project's colour kitakyushu already drew; pins >= 45.2, lines >= 18.3, lines beside it >= 18.3.
     "jr-kyushu-fukuhoku-yutaka-line": {
@@ -248,6 +248,11 @@ REGISTRY = {
         "name": "JR Tokaido Line", "operator": "JR East", "colour": "#E07800",
         "maps": {"fujisawa": "JT", "kawasaki": "JT", "yokohama": "JT"},
     },
+    # the project's colour yokohama already drew (East-2, 2026-10-11: Sagamihara draws its western end); pins >= 26.3 (olive Food shops, an accepted trade on both maps), lines beside it >= 80.2 on sagamihara.
+    "jr-east-yokohama-line": {
+        "name": "JR Yokohama Line", "operator": "JR East", "colour": "#68A008",
+        "maps": {"sagamihara": "JH", "yokohama": "JH"},
+    },
     # the project's colour every map already drew (hue-matched to the operator); pins >= 62.6, lines >= 16.1, lines beside it >= 19.1.
     "jr-central-tokaido-line": {
         "name": "JR Tokaido Line", "operator": "JR Central", "colour": "#E86810",
@@ -311,7 +316,7 @@ REGISTRY = {
     # the project's colour every map already drew (hue-matched to the operator); pins >= 45.2, lines >= 31.3, lines beside it >= 31.3.
     "keio-sagamihara-line": {
         "name": "Keio Sagamihara Line", "operator": "Keio", "colour": "#F000B8",
-        "maps": {"chofu": "KS", "kawasaki": "KO", "tama": "KS"},
+        "maps": {"chofu": "KS", "kawasaki": "KO", "sagamihara": "KS", "tama": "KS"},
     },
     # the project's colour nara already drew; pins >= 46.4, lines >= 12.2, lines beside it >= 18.2.
     "kintetsu-kyoto-line": {
@@ -366,7 +371,12 @@ REGISTRY = {
     # the project's colour tokyo already drew; pins >= 56.4, lines >= 10.3, lines beside it >= 19.6.
     "odakyu-odawara-line": {
         "name": "Odakyu Odawara Line", "operator": "Odakyu", "colour": "#687888",
-        "maps": {"kawasaki": "OH", "tokyo": "OH"},
+        "maps": {"kawasaki": "OH", "sagamihara": "OH", "tokyo": "OH"},
+    },
+    # new with East-2 (2026-10-11): the colour nearest Odakyu's blue that fits both maps; pins >= 72.3, lines beside it >= 24.0 (the Odawara Line at 相模大野).
+    "odakyu-enoshima-line": {
+        "name": "Odakyu Enoshima Line", "operator": "Odakyu", "colour": "#5080B8",
+        "maps": {"fujisawa": "OE", "sagamihara": "OE"},
     },
     # the colour nearest the operator's #2288CC that clears every map (none drawn before did); pins >= 77.0, lines >= 12.7, lines beside it >= 35.1.
     "odakyu-tama-line": {

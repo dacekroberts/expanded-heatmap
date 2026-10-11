@@ -659,7 +659,7 @@ _OSM_STATION_NAMES = (
     # Kansai-1 (2026-10-07)
     "Toyonaka", "Hirakata", "Suita", "Itami", "Kakogawa", "Amagasaki", "Uji",
     # East-2 (2026-10-11)
-    "Koshigaya", "Kawaguchi", "Fujisawa",
+    "Koshigaya", "Kawaguchi", "Fujisawa", "Sagamihara",
 )
 
 # Verbatim where verbatim is required. Each entry is a Notice, and the sources
@@ -1137,7 +1137,7 @@ _NOTICES = [
      "Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, "
      "Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, "
      "Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, "
-     "Higashiōsaka, Kurume, Sasebo, Shimonoseki, Higashiyamato, Nishitōkyō, Tama, Higashimurayama, Chōfu, Ageo (Regional), Sōka, Tokorozawa, Fuchū (Tokyo), Kasukabe, Tachikawa, Hino, Koshigaya, Kawaguchi and Fujisawa, and the "
+     "Higashiōsaka, Kurume, Sasebo, Shimonoseki, Higashiyamato, Nishitōkyō, Tama, Higashimurayama, Chōfu, Ageo (Regional), Sōka, Tokorozawa, Fuchū (Tokyo), Kasukabe, Tachikawa, Hino, Koshigaya, Kawaguchi, Fujisawa and Sagamihara, and the "
      "metro and light-rail lines and stations of Taipei and New Taipei are from OpenStreetMap, "
      "© OpenStreetMap contributors, available "
      "under the Open Database License. The alignments drawn are OSM's own "
@@ -2671,6 +2671,28 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
      "Koshigaya City, MHLW and MLIT did not make and do not endorse this map.",
      False, ("Koshigaya",)),
+    # Sagamihara (notice 188): the city's own lists on its CKAN catalogue, CC
+    # BY 4.0 by the 相模原市オープンデータ利用規約 (3(2)), in its form for a
+    # modified work, one title per list; MLIT as in Kobe's, N02 in its 2025
+    # edition. Written from Kawasaki's and Sakai's approved wording under the
+    # owner's pre-approval of template prose (2026-09-30).
+    Notice(188, "Sagamihara City and MLIT (Sagamihara)",
+     "Sagamihara's businesses: この地図は以下の著作物を改変して利用しています。"
+     "食品衛生関係施設一覧（食品衛生法：営業許可）、理容所施設一覧、美容所施設一覧、クリーニング所一覧、相模原市、"
+     "クリエイティブ・コモンズ・ライセンス 表示 4.0"
+     "（[http://creativecommons.org/licenses/by/4.0](http://creativecommons.org/licenses/by/4.0)）"
+     "（[https://opendata.city.sagamihara.kanagawa.jp/](https://opendata.city.sagamihara.kanagawa.jp/)）. "
+     "(This map modifies Sagamihara City's lists of food-business permits, barbers, beauty salons and "
+     "laundries, used under CC BY 4.0.) "
+     "Processed by this project, which rebuilt the food, barber and beauty lists to August 31, 2026 from the "
+     "city's March 2026 lists and its monthly openings and closures, selected the storefront types, showed "
+     "a premises once, placed each by its address, and counted them around stations. The city withholds "
+     "the premises of operators who asked, so the lists are not complete. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
+     "Sagamihara City and MLIT did not make and do not endorse this map.",
+     False, ("Sagamihara",)),
     # Fujisawa (notice 189): the city's own lists, CC BY 4.0 through its
     # open-data terms, in their 3(3) form for a modified work with the two
     # titles the licence read names; the city's pages are cited by title and

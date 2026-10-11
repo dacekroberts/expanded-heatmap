@@ -356,7 +356,7 @@ LINES = {
 # the Odakyu Enoshima Line is new to the site and Sagamihara's map draws it
 # too: both are registry entries to add, never values to change here alone.
 _COLOURS = {
-    "OE": "#5080B8", "EN": "#486860", "JT": line_registry.colour("jr-east-tokaido-line"), "SM": "#F01000",
+    "OE": line_registry.colour("odakyu-enoshima-line"), "EN": "#486860", "JT": line_registry.colour("jr-east-tokaido-line"), "SM": "#F01000",
     "SI": line_registry.colour("sotetsu-izumino-line"),
 }
 for _k, _v in LINES.items():
