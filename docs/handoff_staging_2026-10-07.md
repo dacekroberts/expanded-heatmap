@@ -68,8 +68,12 @@ fresh `docs/decisions_drafts/staging.md`.
   `japan-east-2`, `japan-kansai-2` and `japan-regional-2`, each from master
   33a0e5d8, on the prompts in `docs/build_plan_2026-10-07.md`. No weekly
   usage stop; one check-in when the batch finishes. Their batch reports and
-  parked calls come to staging, which relays the calls as S1 and on. No S
-  call has been put yet.
+  parked calls come to staging, which relays the calls as S1 and on. **S1
+  was put on 2026-10-11 at 23:12 UTC**: S1-S5 are East-2's five parked calls
+  (S1 Kawaguchi B, private-use glyphs; S2 Kawaguchi A, late-start renewals;
+  S3 Funabashi A, the Keiyo colour; S4 two OSM station spellings; S5
+  Kawaguchi C, "Saitama Stadium Line"), from its batch report at tip
+  bd58afa3 (eleven cities built, nothing pushed). Next free: S6.
 - **The live privacy fix (call 209)** landed on 2026-10-07 before the review:
   13 operators' own names withheld on six Japanese maps by the `name_city`
   switch.
