@@ -275,7 +275,7 @@ _COLOURS = {
     "JO": line_registry.colour("jr-east-yokosuka-line"),
     "JM": line_registry.colour("jr-east-musashino-line"),
     "JE": line_registry.colour("jr-east-keiyo-line"),
-    "T": line_registry.colour("tokyo-metro-tozai-line"), "TR": "#20A800",
+    "T": line_registry.colour("tokyo-metro-tozai-line"), "TR": line_registry.colour("toyo-rapid-railway-line"),
     "TD": line_registry.colour("tobu-urban-park-line"),
     "HS": line_registry.colour("hokuso-line"),
 }

@@ -5751,17 +5751,23 @@ CITIES = [
         "lat": 35.643,
         "lon": 139.902,
         "page": "pages/247_Urayasu_Heatmap.py",
-        "blurb": "JR East, the Disney Resort Line and Tokyo Metro (TODO: list the lines)",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (99.1%)",
+        "data_age": "Barbers as of 2025-03-31; beauty salons and laundries as of 2026-03-31 with openings to 2026-08-31",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "The Disney Resort Line, the JR Keiyo Line and the Tozai Line",
         "region": "Chiba Prefecture",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
         "country": "Japan",
+        # metro (the brief's mode call, owner's rule of 2026-10-02)
         "mode": "metro",
         "in_default_view": False,
-        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
-        # pinned zoom. Run `python scripts/check_macro_labels.py`,
-        # which scores every city in every region at three widths -
-        # and which will first demand this city's label width be
-        # MEASURED in a real browser with Space Grotesk loaded, since
-        # it refuses a guessed one.
+        # Above the dot, the scaffold's default. The Japan views and their
+        # label scoring are Cleanup's (owner, call 198).
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -5769,17 +5775,23 @@ CITIES = [
         "lat": 35.706,
         "lon": 140.213,
         "page": "pages/248_Sakura_Heatmap.py",
-        "blurb": "Keisei, Yamaman and JR East (TODO: list the lines)",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (95.5%)",
+        "data_age": "Barbers as of 2025-03-31; beauty salons and laundries as of 2026-03-31 with openings to 2026-08-31",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "The Keisei Main Line, the Yamaman Yukarigaoka Line and JR East's Sobu Main and Narita lines",
         "region": "Chiba Prefecture",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
         "country": "Japan",
+        # metro (owner, call 121: Keisei has a significant presence)
         "mode": "metro",
         "in_default_view": False,
-        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
-        # pinned zoom. Run `python scripts/check_macro_labels.py`,
-        # which scores every city in every region at three widths -
-        # and which will first demand this city's label width be
-        # MEASURED in a real browser with Space Grotesk loaded, since
-        # it refuses a guessed one.
+        # Above the dot, the scaffold's default. The Japan views and their
+        # label scoring are Cleanup's (owner, call 198).
         "label_offset": ("middle", 0, -22),
     },
     {
@@ -5787,17 +5799,23 @@ CITIES = [
         "lat": 35.739,
         "lon": 140.105,
         "page": "pages/249_Yachiyo_Heatmap.py",
-        "blurb": "Toyo Rapid and Keisei (TODO: list the lines)",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (97.8%)",
+        "data_age": "Barbers as of 2025-03-31; beauty salons and laundries as of 2026-03-31 with openings to 2026-08-31",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "The Toyo Rapid Railway Line and the Keisei Main Line",
         "region": "Chiba Prefecture",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
         "country": "Japan",
+        # metro (the brief's mode call, owner's rule of 2026-10-02)
         "mode": "metro",
         "in_default_view": False,
-        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
-        # pinned zoom. Run `python scripts/check_macro_labels.py`,
-        # which scores every city in every region at three widths -
-        # and which will first demand this city's label width be
-        # MEASURED in a real browser with Space Grotesk loaded, since
-        # it refuses a guessed one.
+        # Above the dot, the scaffold's default. The Japan views and their
+        # label scoring are Cleanup's (owner, call 198).
         "label_offset": ("middle", 0, -22),
     },
     {

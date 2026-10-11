@@ -5172,6 +5172,97 @@ line.
 - The Toei Shinjuku Line, with only its terminus Moto-Yawata in the city, is
   not drawn; the station is kept through the JR Chuo-Sobu Line.
 
+### Urayasu - Chiba Prefecture's barber, beauty and laundry registers, joined to MLIT's address blocks
+
+**Left out**
+- Restaurants, cafés and food shops: the national food-permit filings
+  publish too few addresses here to place them.
+- Every other shop: Japan has no general business license.
+- Premises whose operators did not agree to publication: the prefecture
+  lists only those who did.
+- Barbers registered after March 31, 2025: the prefecture's barber file is
+  the list of that date.
+
+**Counted** - the prefecture's registers, cut to Urayasu by address: 76
+barbers as of March 31, 2025, and 195 beauty-salon rows and 58 laundries as of
+March 31, 2026 with the openings it listed to August 31, 2026. Openings are
+added and closures are not published, so the beauty and laundry layers are an
+upper bound. No official count exists for the city alone.
+
+**One pin per premises** - 3 repeat rows are shown once.
+
+**Not placed** - none. 3 pins sit at their town's center.
+
+**Names not shown** - none: no trade name shown is its operator's own name.
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 6 stations beyond it: 3 in Ichikawa and 3 in Tokyo's Edogawa
+  Ward.
+- The Tozai Line has one station in the city, Urayasu, and is drawn there
+  because no other line serves it.
+
+### Sakura - Chiba Prefecture's barber, beauty and laundry registers, joined to MLIT's address blocks
+
+**Left out**
+- Restaurants, cafés and food shops: the national food-permit filings
+  publish too few addresses here to place them.
+- Every other shop: Japan has no general business license.
+- Premises whose operators did not agree to publication: the prefecture
+  lists only those who did.
+- Barbers registered after March 31, 2025: the prefecture's barber file is
+  the list of that date.
+- 1 laundry agent with no shop.
+
+**Counted** - the prefecture's registers, cut to Sakura by address: 117
+barbers as of March 31, 2025, and 256 beauty-salon rows and 79 laundries as of
+March 31, 2026 with the openings it listed to August 31, 2026. Openings are
+added and closures are not published, so the beauty and laundry layers are an
+upper bound. No official count exists for the city alone.
+
+**One pin per premises** - 5 repeat rows are shown once.
+
+**Not placed** - 2 rows (0.4%) at addresses MLIT's files do not hold. Another 20
+sit at their town's center.
+
+**Names not shown** - none: no trade name shown is its operator's own name.
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 9 stations beyond it: 4 in Shisui, 2 in Yachiyo, 2 in Yachimata
+  and 1 in Yotsukaido.
+
+### Yachiyo - Chiba Prefecture's barber, beauty and laundry registers, joined to MLIT's address blocks
+
+**Left out**
+- Restaurants, cafés and food shops: the national food-permit filings
+  publish too few addresses here to place them.
+- Every other shop: Japan has no general business license.
+- Premises whose operators did not agree to publication: the prefecture
+  lists only those who did.
+- Barbers registered after March 31, 2025: the prefecture's barber file is
+  the list of that date.
+- 7 laundry agents with no shop.
+
+**Counted** - the prefecture's registers, cut to Yachiyo by address: 130
+barbers as of March 31, 2025, and 353 beauty-salon rows and 77 laundries as of
+March 31, 2026 with the openings it listed to August 31, 2026. Openings are
+added and closures are not published, so the beauty and laundry layers are an
+upper bound. No official count exists for the city alone.
+
+**One pin per premises** - 2 repeat rows are shown once.
+
+**Not placed** - 2 rows (0.4%) at addresses MLIT's files do not hold. Another 12
+sit at their town's center.
+
+**Names not shown** - 1 pin whose trade name reads as a person's name alone shows
+its register type.
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 6 stations beyond it: 2 in Sakura, 2 in Narashino and 2 in
+  Funabashi.
+
 ### Tachikawa - the Tokyo Metropolitan Government's Tama ledgers and the national filings, joined to MLIT's address blocks
 
 **Left out**

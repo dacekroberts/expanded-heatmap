@@ -1,0 +1,187 @@
+{
+  "city_barber_list": {
+    "as_of": "2025-03-31",
+    "bytes": 328249,
+    "dataset_page": "https://opendata.pref.chiba.lg.jp/datasets/6",
+    "file": "data/chiba_pref/raw/ichiran-riyou202503.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T05:38:42+00:00",
+    "rows": 3168,
+    "sha256": "6effd0073c6821713e230af49b32b7f66756c25ee687725a5ded5b6a065e8a3f",
+    "url": "https://opendata.pref.chiba.lg.jp/resource_download/79"
+  },
+  "city_beauty_2604": {
+    "as_of": "2026-04-30",
+    "bytes": 72493,
+    "dataset_page": "https://opendata.pref.chiba.lg.jp/datasets/6",
+    "file": "data/chiba_pref/raw/shinki-biyou2604.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T07:23:59+00:00",
+    "rows": 28,
+    "sha256": "04c82c9fef41bffca124372959c89773e590126026d28574d1bd33bfeba17986",
+    "url": "https://opendata.pref.chiba.lg.jp/resource_download/103"
+  },
+  "city_beauty_2605": {
+    "as_of": "2026-05-31",
+    "bytes": 71517,
+    "dataset_page": "https://opendata.pref.chiba.lg.jp/datasets/6",
+    "file": "data/chiba_pref/raw/shinki-biyou2605.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T07:23:51+00:00",
+    "rows": 20,
+    "sha256": "8b6ef87eda066b52ba5e28b7ae0e8137454ea28328a124a45870ca8ac48def03",
+    "url": "https://opendata.pref.chiba.lg.jp/resource_download/102"
+  },
+  "city_beauty_2606": {
+    "as_of": "2026-06-30",
+    "bytes": 72316,
+    "dataset_page": "https://opendata.pref.chiba.lg.jp/datasets/6",
+    "file": "data/chiba_pref/raw/shinki-biyou2606.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T07:23:44+00:00",
+    "rows": 24,
+    "sha256": "c6548f8da4ab52b1d830358e76a478ed71fb44f890f8377c13ecea1803a3f2d0",
+    "url": "https://opendata.pref.chiba.lg.jp/resource_download/101"
+  },
+  "city_beauty_2607": {
+    "as_of": "2026-07-31",
+    "bytes": 71818,
+    "dataset_page": "https://opendata.pref.chiba.lg.jp/datasets/6",
+    "file": "data/chiba_pref/raw/shinki-biyou2607.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T07:23:37+00:00",
+    "rows": 19,
+    "sha256": "a6a16d16bd3a3cb54e1c8ad8003efbd38309440c70781495d662f20b7f1323de",
+    "url": "https://opendata.pref.chiba.lg.jp/resource_download/100"
+  },
+  "city_beauty_2608": {
+    "as_of": "2026-08-31",
+    "bytes": 70264,
+    "dataset_page": "https://opendata.pref.chiba.lg.jp/datasets/6",
+    "file": "data/chiba_pref/raw/shinki-biyou2608-2.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T07:23:29+00:00",
+    "rows": 10,
+    "sha256": "e1d42eecbe44e673bac41e789b362a43ecececcc4c50f91d0db1da8bb1bf0fc1",
+    "url": "https://opendata.pref.chiba.lg.jp/resource_download/99"
+  },
+  "city_beauty_list": {
+    "as_of": "2026-03-31",
+    "bytes": 765694,
+    "dataset_page": "https://opendata.pref.chiba.lg.jp/datasets/6",
+    "file": "data/chiba_pref/raw/ichiran-biyou202603.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T05:38:48+00:00",
+    "rows": 7607,
+    "sha256": "502fec7616a322b7b3108e8669ff8b129fcda2a2a7d686e75303a01c41cfd0cd",
+    "url": "https://opendata.pref.chiba.lg.jp/resource_download/80"
+  },
+  "city_laundry_2604": {
+    "as_of": "2026-04-30",
+    "bytes": 46248,
+    "dataset_page": "https://opendata.pref.chiba.lg.jp/datasets/6",
+    "file": "data/chiba_pref/raw/shinki-clean2604.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T07:24:35+00:00",
+    "rows": 1,
+    "sha256": "d7b5457dee9811bf90ccfd86736e6140053734e9483ab2dfb34ddf055cd80b5e",
+    "url": "https://opendata.pref.chiba.lg.jp/resource_download/115"
+  },
+  "city_laundry_2605": {
+    "as_of": "2026-05-31",
+    "bytes": 46093,
+    "dataset_page": "https://opendata.pref.chiba.lg.jp/datasets/6",
+    "file": "data/chiba_pref/raw/shinki-clean2605.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T07:24:28+00:00",
+    "rows": 1,
+    "sha256": "9e1baf8acc97874482bffe6b33b7d2279ad2dbcb2017facc88b30d996219de5f",
+    "url": "https://opendata.pref.chiba.lg.jp/resource_download/114"
+  },
+  "city_laundry_2606": {
+    "as_of": "2026-06-30",
+    "bytes": 45239,
+    "dataset_page": "https://opendata.pref.chiba.lg.jp/datasets/6",
+    "file": "data/chiba_pref/raw/shinki-clean2606.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T07:24:20+00:00",
+    "rows": 0,
+    "sha256": "02620a066d8c33a4e3763fb2f5c1737c456ffd534b2d792567d03dedd30093ff",
+    "url": "https://opendata.pref.chiba.lg.jp/resource_download/113"
+  },
+  "city_laundry_2607": {
+    "as_of": "2026-07-31",
+    "bytes": 46503,
+    "dataset_page": "https://opendata.pref.chiba.lg.jp/datasets/6",
+    "file": "data/chiba_pref/raw/shinki-clean2607.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T07:24:13+00:00",
+    "rows": 2,
+    "sha256": "7e7fb693bf829e87c86aa470c3ad85b9ddb1e52b784baded9ece0d2454066c49",
+    "url": "https://opendata.pref.chiba.lg.jp/resource_download/112"
+  },
+  "city_laundry_2608": {
+    "as_of": "2026-08-31",
+    "bytes": 45519,
+    "dataset_page": "https://opendata.pref.chiba.lg.jp/datasets/6",
+    "file": "data/chiba_pref/raw/shinki-clean2608.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T07:24:06+00:00",
+    "rows": 0,
+    "sha256": "a65a7380f59214234a69b351162419384be74e5487796276c35d9952ecd1dc74",
+    "url": "https://opendata.pref.chiba.lg.jp/resource_download/111"
+  },
+  "city_laundry_list": {
+    "as_of": "2026-03-31",
+    "bytes": 254290,
+    "dataset_page": "https://opendata.pref.chiba.lg.jp/datasets/6",
+    "file": "data/chiba_pref/raw/ichiran-clean202603.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T05:38:55+00:00",
+    "rows": 1531,
+    "sha256": "0a9d233c4704f17e85c07e761b34649c9d3e328ad154a1de4705ad68be72d5bc",
+    "url": "https://opendata.pref.chiba.lg.jp/resource_download/81"
+  },
+  "isj_12227_block": {
+    "bytes": 39441,
+    "file": "12227-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:15:35+00:00",
+    "sha256": "1909b6b215e5288f62983bfb71a287044bd48e2aa4eb94c0e38acb558967dbad",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/12227-24.0a.zip"
+  },
+  "isj_12227_chome": {
+    "bytes": 5882,
+    "file": "12227-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:15:38+00:00",
+    "sha256": "56d0ff25f30324656d6e1b9042552888e7491a95742a481455f0af60379b240e",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/12227-19.0b.zip"
+  },
+  "n02": {
+    "bytes": 14903774,
+    "file": "data/japan/raw/N02-25_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-30T23:47:52+00:00",
+    "sha256": "aaf76af133b2e771e538fabc4646d2e443dc1d5a67b221382a28d744e706cc9f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip"
+  },
+  "n03": {
+    "bytes": 7073440,
+    "file": "data/japan/raw/N03-20250101_12_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T00:23:05+00:00",
+    "sha256": "06c8f490bf5062234f9cbbdff078da6f67b405b3ee362ae0481c470f43356147",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_12_GML.zip"
+  },
+  "osm_station_names": {
+    "bytes": 8271,
+    "elements": 13,
+    "file": "osm_station_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-10-11T22:18:06Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](35.61,139.87,35.68,139.94);way[\"railway\"=\"station\"](35.61,139.87,35.68,139.94););out tags center;",
+    "retrieved": "2026-10-11T22:20:07+00:00",
+    "sha256": "789487c613b9980770177bb1bae1a4e37d65e6a9033956924b7b8ec3b2e0f8c4"
+  }
+}

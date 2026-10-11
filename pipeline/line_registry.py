@@ -261,7 +261,7 @@ REGISTRY = {
     # the project's colour tokyo already drew (East-2, 2026-10-11); pins >= 45.0; 11.8 from the JR Musashino Line where they share track into 西船橋, under the 18 for lines within 500 m: a parked call for Cleanup (East-2's drafts, Funabashi).
     "jr-east-keiyo-line": {
         "name": "JR Keiyo Line", "operator": "JR East", "colour": "#F86040",
-        "maps": {"funabashi": "JE", "ichikawa": "JE", "tokyo": "JE"},
+        "maps": {"funabashi": "JE", "ichikawa": "JE", "tokyo": "JE", "urayasu": "JE"},
     },
     # the project's colour every map already drew (hue-matched to the operator); pins >= 62.6, lines >= 16.1, lines beside it >= 19.1.
     "jr-central-tokaido-line": {
@@ -451,17 +451,22 @@ REGISTRY = {
     # the project's colour tokyo already drew (East-2, 2026-10-11: drawn cut at the city line in the Chiba cities, owner's call 41); pins >= 50.0, lines beside it >= 31.6 on funabashi.
     "tokyo-metro-tozai-line": {
         "name": "Tozai Line", "operator": "Tokyo Metro", "colour": "#6890A0",
-        "maps": {"funabashi": "T", "ichikawa": "T", "tokyo": "T"},
+        "maps": {"funabashi": "T", "ichikawa": "T", "tokyo": "T", "urayasu": "T"},
     },
     # the project's colour tokyo already drew (East-2, 2026-10-11); pins >= 51.0, lines beside it >= 31.6 on funabashi.
     "keisei-main-line": {
         "name": "Keisei Main Line", "operator": "Keisei", "colour": "#785868",
-        "maps": {"funabashi": "KS", "ichikawa": "KS", "tokyo": "KS"},
+        "maps": {"funabashi": "KS", "ichikawa": "KS", "sakura": "KS", "tokyo": "KS", "yachiyo": "KS"},
     },
     # new with East-2 (2026-10-11): the colour nearest Keisei's Matsudo Line pink that fits both maps; pins >= 45.8, lines beside it >= 59.6 on funabashi.
     "keisei-matsudo-line": {
         "name": "Keisei Matsudo Line", "operator": "Keisei", "colour": "#E060D0",
         "maps": {"funabashi": "KM", "matsudo": "KM"},
+    },
+    # new with East-2 (2026-10-11): the colour nearest a green seed that fits both maps (the hue is not read from the operator); pins >= 45.7, lines beside it >= 18.8 (the Tobu Urban Park Line on funabashi). The same value as jr-east-joban-line, which it meets on no map.
+    "toyo-rapid-railway-line": {
+        "name": "Toyo Rapid Railway Line", "operator": "Toyo Rapid", "colour": "#20A800",
+        "maps": {"funabashi": "TR", "yachiyo": "TR"},
     },
     # the project's colour tokyo already drew (East-2, 2026-10-11); pins >= 53.7, lines beside it >= 72.8 on funabashi.
     "hokuso-line": {

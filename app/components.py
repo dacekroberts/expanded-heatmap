@@ -659,7 +659,7 @@ _OSM_STATION_NAMES = (
     # Kansai-1 (2026-10-07)
     "Toyonaka", "Hirakata", "Suita", "Itami", "Kakogawa", "Amagasaki", "Uji",
     # East-2 (2026-10-11)
-    "Koshigaya", "Kawaguchi", "Fujisawa", "Sagamihara", "Funabashi", "Matsudo", "Ichikawa",
+    "Koshigaya", "Kawaguchi", "Fujisawa", "Sagamihara", "Funabashi", "Matsudo", "Ichikawa", "Urayasu", "Sakura", "Yachiyo",
 )
 
 # Verbatim where verbatim is required. Each entry is a Notice, and the sources
@@ -1137,7 +1137,7 @@ _NOTICES = [
      "Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, "
      "Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, "
      "Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, "
-     "Higashiōsaka, Kurume, Sasebo, Shimonoseki, Higashiyamato, Nishitōkyō, Tama, Higashimurayama, Chōfu, Ageo (Regional), Sōka, Tokorozawa, Fuchū (Tokyo), Kasukabe, Tachikawa, Hino, Koshigaya, Kawaguchi, Fujisawa, Sagamihara, Funabashi, Matsudo and Ichikawa, and the "
+     "Higashiōsaka, Kurume, Sasebo, Shimonoseki, Higashiyamato, Nishitōkyō, Tama, Higashimurayama, Chōfu, Ageo (Regional), Sōka, Tokorozawa, Fuchū (Tokyo), Kasukabe, Tachikawa, Hino, Koshigaya, Kawaguchi, Fujisawa, Sagamihara, Funabashi, Matsudo, Ichikawa, Urayasu, Sakura and Yachiyo, and the "
      "metro and light-rail lines and stations of Taipei and New Taipei are from OpenStreetMap, "
      "© OpenStreetMap contributors, available "
      "under the Open Database License. The alignments drawn are OSM's own "
@@ -2792,6 +2792,48 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The registers may include premises that have "
      "closed. Chiba Prefecture and MLIT did not make and do not endorse this map.",
      False, ("Ichikawa",)),
+    # Urayasu (notice 194): Matsudo's notice (192), the city changed.
+    Notice(194, "Chiba Prefecture and MLIT (Urayasu)",
+     "Urayasu's businesses: 出典：「【千葉県】環境衛生関係施設一覧」（千葉県オープンデータサイト）"
+     "（[https://opendata.pref.chiba.lg.jp/datasets/6](https://opendata.pref.chiba.lg.jp/datasets/6)）を加工して作成. "
+     "Processed by this project, which cut the prefecture's registers to Urayasu by address, added the "
+     "openings it listed to August 2026 to its beauty-salon and laundry registers, showed a premises once, "
+     "placed each by its address, and counted them around stations. The prefecture lists only premises "
+     "whose operators agreed to publication and does not publish closures; the barber register is as of "
+     "March 31, 2025. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The registers may include premises that have "
+     "closed. Chiba Prefecture and MLIT did not make and do not endorse this map.",
+     False, ("Urayasu",)),
+    # Sakura (notice 195): Matsudo's notice (192), the city changed.
+    Notice(195, "Chiba Prefecture and MLIT (Sakura)",
+     "Sakura's businesses: 出典：「【千葉県】環境衛生関係施設一覧」（千葉県オープンデータサイト）"
+     "（[https://opendata.pref.chiba.lg.jp/datasets/6](https://opendata.pref.chiba.lg.jp/datasets/6)）を加工して作成. "
+     "Processed by this project, which cut the prefecture's registers to Sakura by address, added the "
+     "openings it listed to August 2026 to its beauty-salon and laundry registers, showed a premises once, "
+     "placed each by its address, and counted them around stations. The prefecture lists only premises "
+     "whose operators agreed to publication and does not publish closures; the barber register is as of "
+     "March 31, 2025. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The registers may include premises that have "
+     "closed. Chiba Prefecture and MLIT did not make and do not endorse this map.",
+     False, ("Sakura",)),
+    # Yachiyo (notice 196): Matsudo's notice (192), the city changed.
+    Notice(196, "Chiba Prefecture and MLIT (Yachiyo)",
+     "Yachiyo's businesses: 出典：「【千葉県】環境衛生関係施設一覧」（千葉県オープンデータサイト）"
+     "（[https://opendata.pref.chiba.lg.jp/datasets/6](https://opendata.pref.chiba.lg.jp/datasets/6)）を加工して作成. "
+     "Processed by this project, which cut the prefecture's registers to Yachiyo by address, added the "
+     "openings it listed to August 2026 to its beauty-salon and laundry registers, showed a premises once, "
+     "placed each by its address, and counted them around stations. The prefecture lists only premises "
+     "whose operators agreed to publication and does not publish closures; the barber register is as of "
+     "March 31, 2025. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The registers may include premises that have "
+     "closed. Chiba Prefecture and MLIT did not make and do not endorse this map.",
+     False, ("Yachiyo",)),
     # Toyonaka (notice 169): the city's two BODIK datasets, CC BY 4.0 under
     # 豊中市オープンデータ利用規約 ２ (its credit example, the dataset titles,
     # the licence link and the statement of change CC BY 4.0 asks for); MHLW as

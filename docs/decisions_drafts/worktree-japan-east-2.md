@@ -56,6 +56,16 @@ Newest entry first. Cleanup folds this file into `DECISIONS.md`.
   Musashino), re-checked against Tokyo's other 51 lines. *Tradeoff:* it moves
   a built city's line; leaving it keeps two near-identical oranges side by
   side on Funabashi's and Ichikawa's maps.
+- **Station names left as OpenStreetMap spells them, where the brief
+  expected another spelling and no operator source is named:** Urayasu's "Bay
+  Side Station" (the brief expected "Bayside Station") and its four monorail
+  names ending in "Station"; Sakura's "Chikucenter" (the brief expected "Chiku
+  Center"; Yamaman's page gives Japanese only). An override needs a cited
+  operator spelling. *Recommendation:* the owner or Cleanup names the source
+  (the operators' English signage) and the two overrides go in at review
+  time; each is one config line and a re-run of steps 1 and 3. *Tradeoff of
+  leaving them:* two labels that read oddly. Hyphen case also varies as OSM
+  has it (Yachiyo-midorigaoka beside Toyo-Katsutadai), as on Tokyo's map.
 - **Kawaguchi C: the Saitama Railway's line name.** The brief reads the
   operator's own public name, "Saitama Stadium Line" (埼玉スタジアム線, the
   line's adopted name); N02 files it as 埼玉高速鉄道線. Built as "Saitama
@@ -144,6 +154,56 @@ Newest entry first. Cleanup folds this file into `DECISIONS.md`.
   cities are added to all three as East-1's were. Cleanup's to reconcile.
 
 ## Entries
+
+### 2026-10-11 - Urayasu, Sakura and Yachiyo built on the Chiba module, personal services only
+
+Each is Matsudo's shape on `chiba_pref.py` (sheet and address cut, barbers of
+2025-03-31, beauty salons and laundries to 2026-08-31), built by a subagent of
+the East-2 lead and integrated by the lead; each brief's checks hold (11/11,
+12/12, 11/11); each privacy pass prints 0; no census control (no Food service
+layer); notices caption only, no open terms question.
+
+- **Urayasu (page 247, notice 194): 326 storefronts (beauty salons 192,
+  barbers 76, laundries 58) around 7 stations on 3 lines, 77.6% in a ring
+  (253).** Sheet 市川, rows 76 / 195 / 58. 329 storefront rows: 326 block, 3
+  town centre, 0 unplaced (the brief, on the wave-2 rules alone, left 2
+  unplaced); 3 repeat rows dropped; no name withheld. Rail: the Disney Resort
+  Line (the monorail loop, 4 of 4; owner's label, call 122; #7850A0, a violet
+  seed, this map's alone), JR Keiyo 2 (`jr-east-keiyo-line`), Tozai 1 at 浦安
+  (`tokyo-metro-tozai-line`), drawn cut because no other line serves the
+  station (calls 54 and 92). `N03_NEIGHBOR_PREFS = ("13",)`. Maihama and
+  Resort Gateway Station, 161 m apart, kept apart. Gate 3: Disney 4, Tozai 1.
+  6 excluded (Ichikawa 3, Edogawa 3). OSM's one object without name:en is a
+  park ride, not a station.
+- **Sakura (page 248, notice 195): 444 storefronts (beauty salons 250,
+  barbers 116, laundries 78) around 11 stations on 4 lines, 72.5% in a ring
+  (322).** Sheet 印旛, rows 117 / 256 / 79 (one April row already listed; 1
+  無店舗 agent not a premises). 451 storefront rows: 429 block, 20 town
+  centre, 2 unplaced (0.4%); 5 repeat rows dropped; no name withheld. `mode`
+  metro (owner, call 121). Rail: Keisei Main 5 (`keisei-main-line`), the
+  Yamaman Yukarigaoka Line (an automated guideway loop, 6 of 6, drawn once;
+  #0068B8), and JR East's Sobu Main Line (#C06808) and Narita Line (#20A800),
+  one station each at 佐倉, JR stubs kept as cut. Gate 3: Yamaman 6, its own
+  station page. 9 excluded (Shisui 4, Yachiyo 2, Yachimata 2, Yotsukaido 1).
+  One tie (ユーカリが丘 without a macron). The three new lines are this map's
+  alone.
+- **Yachiyo (page 249, notice 196): 549 storefronts (beauty salons 350,
+  barbers 129, laundries 70) around 7 stations on 2 lines, 80.3% in a ring
+  (441).** Sheet 習志野, rows 130 / 353 / 77 (7 無店舗 agents not premises).
+  553 storefront rows: 539 block, 12 town centre, 2 unplaced (0.4%); 2 repeat
+  rows dropped; 1 name withheld. Rail: the Toyo Rapid Railway Line 4 and
+  Keisei Main 3; 勝田台 and 東葉勝田台, 149 m apart, kept apart. Gate 3: Toyo
+  Rapid 4. 6 excluded (Sakura 2, Narashino 2, Funabashi 2).
+- **Registry:** Urayasu, Sakura and Yachiyo joined `jr-east-keiyo-line`,
+  `tokyo-metro-tozai-line` and `keisei-main-line`; new
+  `toyo-rapid-railway-line` #20A800 (Funabashi and Yachiyo).
+- **Against the briefs:** each brief's pin count did not subtract unplaced
+  rows, and each join was measured on the wave-2 rules alone; the foundation's
+  rules place a few more at the block (Sakura 4, Yachiyo 5).
+- **Three lines share the value #20A800** (the registry's JR Joban, the Toyo
+  Rapid Railway Line, Sakura's JR Narita Line). None meets another on any
+  map or within 2 km of a neighbouring one, so the checks pass; a later map
+  that draws two of them together would move one.
 
 ### 2026-10-11 - Ichikawa built on the Chiba module, personal services only, seven lines all from the registry
 
