@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**192 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**193 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-11**
 
+- [The PLAN cleanup pass: ten pre-review items moved to plan_done, seven narrowed, one not confirmed (owner's hard line of 2026-10-08)](#2026-10-11---the-plan-cleanup-pass-ten-pre-review-items-moved-to-plan_done-seven-narrowed-one-not-confirmed-owners-hard-line-of-2026-10-08)
 - [The portfolio review's handoff answered: the audience line, the commercial-use audit's rules, the PLAN pass alongside the batch (owner)](#2026-10-11---the-portfolio-reviews-handoff-answered-the-audience-line-the-commercial-use-audits-rules-the-plan-pass-alongside-the-batch-owner)
 - [The build plan's usage paragraph rewritten for the lifted stops (owner: "changes look good")](#2026-10-11---the-build-plans-usage-paragraph-rewritten-for-the-lifted-stops-owner-changes-look-good)
 - [Phase 2's weekly usage stops lifted for the final batch; one check-in when it finishes (owner)](#2026-10-11---phase-2s-weekly-usage-stops-lifted-for-the-final-batch-one-check-in-when-it-finishes-owner)
@@ -241,6 +242,48 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-10-11 - The PLAN cleanup pass: ten pre-review items moved to plan_done, seven narrowed, one not confirmed (owner's hard line of 2026-10-08)
+
+- **Ran the pass the owner made a hard line on 2026-10-08, alongside phase
+  2 as approved, and applied it on the owner's yes.** A report-only agent
+  read every `PLAN.md` item present at the large review (35d43c4a) against
+  master at 6f6addf4; Cleanup checked each "done" verdict against the
+  decision entry or check it cited before moving the item.
+  - **Moved to `docs/plan_done/2026-10-11.md`, each with its evidence
+    line:** the hard-line item itself; the macro-map regions' `KNOWN_STACKED`
+    pairs (`check_macro_labels.py` PROBLEMS 0; four of the six cities named
+    are discarded or Band R); groundwork before the tram batch; the
+    macro-map label tiers pilot; Band T's group decision (retired
+    2026-10-01); the fifteen shallowly screened rail cities
+    (`check_discard_evidence.py` OK, 329 rows); the unticked publish steps
+    for Osaka, Buenos Aires, Sapporo, Fukuoka and Kyoto; Kyoto before
+    publishing; the mega-review's C2 deferrals; the gambling rule
+    (`docs/category_rules.md`, R5).
+  - **Narrowed in place:** Japanese cities onto N02-25 (six left on N02-24);
+    the published-city date fixes ((a), (b) and Milan's part of (c) done);
+    the category fix batch (ready: one approved fix queued, its blocker
+    landed); Buenos Aires (the refetch only); "Not ready for main" (it gave
+    Band C 7 and Band D 7; `check_master_list_counts.py` gives 1 and 0, and
+    the line no longer repeats a count); "This week", rewritten for the
+    week from the reset.
+  - **Not confirmed:** whether Toulouse's and Rennes' step 1 name-level
+    fallback fired. Marked in PLAN; one read-only step 1 run per city
+    settles it.
+  - **The agent's leads, left as written in PLAN because Cleanup did not
+    verify them:** trams left off built maps (REM, Rome 8, Paris T3 and F
+    Market appear built); the licence gaps (rows now exist for five minor
+    borrowings; four credits unchecked); the two prose-pass items (Nice and
+    Bordeaux at 375 px, two "every other city" lines in
+    `docs/excluded_categories.md`); Vancouver's clipped label (the scorer
+    now shows it only in Global at 375 px); "the 34 built Japanese cities"
+    to re-render names no list, with 64 built.
+  - **Left for the owner:** the weekly `archive_decisions.py` run is due
+    today and was not run, because phase 2's prompts cite entries by
+    "DECISIONS.md" and start today.
+  Every other pre-review item was found live, waiting on the owner, or a
+  dated watch still in the future. Rejected: ticking on the agent's word
+  alone.
 
 ### 2026-10-11 - The portfolio review's handoff answered: the audience line, the commercial-use audit's rules, the PLAN pass alongside the batch (owner)
 

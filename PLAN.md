@@ -31,12 +31,6 @@ Detail files: [japan](docs/plan_detail/japan.md),
 
 ## Now
 
-- [ ] **HARD LINE (owner, 2026-10-08): the PLAN cleanup pass, first after
-  the 2026-10-11 reset.** It confirms each item written before the large
-  review (35d43c4a) live or moves it to `docs/plan_done/`; nobody acts on
-  such an item before the pass confirms it. The 2026-10-08 trim moved text
-  and marked "probably done" items, but confirmed none.
-
 - [ ] **From the portfolio review (owner, 2026-10-11; DECISIONS, that day),
   in order:**
   - [~] Phase 2 runs with no weekly usage stop; one usage check-in with the
@@ -89,10 +83,11 @@ Detail files: [japan](docs/plan_detail/japan.md),
     three Kansai-1 briefs. `docs/plan_detail/japan.md`, "Kept from the drafts' notes at the
     2026-10-08 fold".
 
-- [ ] **This week (to the 2026-10-11 reset): refinements, not builds** (owner,
-  2026-10-08, weekly near its ceiling; the 10% check-ins ended). Place search,
-  possibly the basemap, and the site infrastructure they need. The wave 2
-  builds above wait for the reset.
+- [~] **This week (from the 2026-10-11 reset), the final scoped adds (owner,
+  2026-10-11):** phase 2, the last build wave; place search batch 3
+  alongside it; the site's partial Travel view, which waits on the owner's
+  go-live call and hosting (the basemap branch's resume note, five
+  blockers). Nothing else new (the freeze of 2026-10-08).
 
 - [ ] **A site-wide junk-name pass once the final batch lands** (owner,
   2026-10-08, via the place-search pilot): no dot shows an error value or
@@ -108,10 +103,6 @@ Detail files: [japan](docs/plan_detail/japan.md),
 - [ ] **A site-wide code audit after the reset and the final city builds**
   (owner, 2026-10-08); scope and lanes set with the owner first. `docs/plan_detail/process_and_tooling.md`, "A
   site-wide code audit".
-
-- [ ] **Macro-map regions:** the Europe split and Japan's views landed with
-  the review (2026-10-07). Still to come: Brăila and Galați, Nagakute and
-  Nisshin, Itami and Toyonaka into `KNOWN_STACKED`.
 
 - [ ] **Review time, two process slips (Staging, 2026-10-08):** Kurashiki's
   PDF text printed four operators' names to Staging's console (nothing
@@ -147,19 +138,19 @@ Detail files: [japan](docs/plan_detail/japan.md),
   "Per-city restriction disclosures".
   - [ ] ⏸ **Per-city wait times as data: TABLED (owner, 2026-09-30)** until
     the owner is back at a desktop. `docs/plan_detail/data_and_disclosure.md`, "Per-city wait times as data".
-  - [ ] **Japanese cities onto N02-25**, one drift check per city. `docs/plan_detail/japan.md`,
+  - [ ] **Japanese cities onto N02-25**, one drift check per city: six
+    left on N02-24 (Tokyo, Kobe, Sapporo, Fukuoka, Kyoto, Yokohama; the
+    pass of 2026-10-11 read `pipeline/countries/japan.py`). `docs/plan_detail/japan.md`,
     "Japanese cities onto N02-25".
   - [ ] **City-map legend model (2026-09-30):** the obstacle becomes
     max(model, a content-based estimate). `docs/plan_detail/labels_and_macro_map.md`, "City-map legend model".
-  - [ ] **Published-city date fixes (2026-09-29):** (a) to (f), three owner
-    calls; Philadelphia re-read around 2026-10-13. Review time. `docs/plan_detail/data_and_disclosure.md`,
+  - [ ] **Published-city date fixes (2026-09-29):** (a) and (b) done; (c) Milan
+    done, New York State and Surrey open; (d) to (f) open, three owner
+    calls (the pass of 2026-10-11); Philadelphia re-read around 2026-10-13. Review time. `docs/plan_detail/data_and_disclosure.md`,
     "Published-city date fixes".
-  - [ ] **Toulouse and Rennes: did step 1's name-level fallback fire?** `docs/plan_detail/city_watch.md`, "Toulouse and Rennes".
-  - [ ] **Groundwork before the tram batch:** probably done (the batch is
-    on master); confirm and close. `docs/plan_detail/city_watch.md`, "Groundwork before the tram
-    batch".
-  - [ ] **Macro-map label tiers (owner 2026-09-29):** a Seoul Capital Area
-    pilot, review time. `docs/plan_detail/labels_and_macro_map.md`, "Macro-map label tiers".
+  - [ ] **Toulouse and Rennes: did step 1's name-level fallback fire?** NOT
+    confirmed by the 2026-10-11 pass: one read-only step 1 run per city
+    settles it. `docs/plan_detail/city_watch.md`, "Toulouse and Rennes".
 
 - [ ] ⏰ **Prague: Flora reopens** (about the end of February 2027): remove
   the override then. `docs/plan_detail/city_watch.md`, "Prague: Flora reopens".
@@ -176,8 +167,9 @@ Detail files: [japan](docs/plan_detail/japan.md),
   The macro map's marker and label colours come from `pipeline/theme.py`;
   measure them against the dark page (`#0B1220`) numerically.
 
-- [ ] **The category fix batch:** landed with review-batch-2; left,
-  Stockholm's torghandel stall (still `pending` in
+- [ ] **The category fix batch:** landed with review-batch-2; left and
+  READY (stockholm-catering has landed; the continuity check queues one
+  approved fix), Stockholm's torghandel stall (still `pending` in
   `scripts/category_continuity_table.py`). `docs/plan_detail/data_and_disclosure.md`, "The category fix batch".
 - [ ] **Next cross-city discrepancy audits (owner, 2026-09-29):** six,
   read-only, one at a time. `docs/plan_detail/data_and_disclosure.md`, "Next cross-city discrepancy audits".
@@ -186,7 +178,6 @@ Detail files: [japan](docs/plan_detail/japan.md),
 
 - [ ] **Second-city screens (Staging, 2026-09-27).** Waves 1 and 2 are done
   and banded (`docs/city_master_list.md`, DECISIONS). Open:
-  - [ ] ⏸ **Band T's group decision, DEFERRED by the owner 2026-09-27.** `docs/plan_detail/city_watch.md`, "Band T's group decision".
   - [ ] **Wave-2 follow-ups** (run 2026-09-30): owner calls on Richmond and
     on reads from the owner's own browser; group 2's watch list. `docs/plan_detail/city_watch.md`, "Wave-2 follow-ups".
   - **Watch items from group 1:** `docs/plan_detail/city_watch.md`, "Watch items from group 1".
@@ -197,8 +188,6 @@ Detail files: [japan](docs/plan_detail/japan.md),
   key-gated city's raw input is missing (`WMATA_API_KEY`, an expiring feed).
 - [ ] Idea (Miami, ring coverage 12.6%): scope the all-businesses toggle to
   the station municipalities rather than the whole county.
-- [ ] **Fifteen rail cities were screened shallowly; nothing surfacing is NOT
-  a disqualification.** `docs/plan_detail/city_watch.md`, "Fifteen rail cities".
 
 ### 🇯🇵 Japan — the plan (2026-09-24; evidence in `docs/global_country_shortlist.md`)
 
@@ -206,14 +195,12 @@ JR and private railways INCLUDED (owner, 2026-09-24). Measurement:
 `scripts/screen_japan_join.py`. Re-run the census join control
 (`scripts/japan_census_control.py`) with each new Japanese city.
 
-- [ ] **Unticked publish steps** (Osaka, Buenos Aires, Sapporo, Fukuoka,
-  Kyoto): probably done; confirm and tick. `docs/plan_detail/japan.md`, "Unticked publish steps".
 - [ ] **Madrid's 343 px touch:** widen `DENSE_LABEL_SCRIPT`'s trigger and
   re-render Madrid. `docs/plan_detail/labels_and_macro_map.md`, "Madrid's 343 px touch".
 - [ ] **Berlin:** U6 to Alt-Tegel about August 2027; refetch before VBB's
   calendar ends 2026-12-12. `docs/plan_detail/city_watch.md`, "Berlin".
 - [ ] **London:** refetch before the FSA extracts age. `docs/plan_detail/city_watch.md`, "London".
-- [ ] **Buenos Aires:** the inconsistency list's prose; SBASE refetch. `docs/plan_detail/city_watch.md`, "Buenos Aires".
+- [ ] **Buenos Aires:** SBASE refetch (the inconsistency list's rows are in). `docs/plan_detail/city_watch.md`, "Buenos Aires".
 - [ ] **Kyoto:** add the August 2026 list when published. `docs/plan_detail/japan.md`, "Kyoto's
   August 2026 list".
 - [ ] **Osaka's Umekita → 福島 stretch:** a re-render for review time. `docs/plan_detail/japan.md`,
@@ -226,8 +213,6 @@ decisions inside a build are named in its brief.
 
 - [ ] Owner, minor: アイスクリーム類製造業 (692 rows; many gelato counters) is
   OUT for now; the owner's call named 菓子 and そうざい.
-- [ ] **Kyoto before publishing:** probably done (`AS_OF` pinned, the city
-  published); confirm. `docs/plan_detail/japan.md`, "Kyoto before publishing".
 - [ ] **Tokyo: the missing wards** (built 2026-09-28 with 8 of 23). `docs/plan_detail/japan.md`,
   "Tokyo: the missing wards".
   - [ ] ⏸ **PARKED, the last resort (owner, 2026-09-24): four requests**
@@ -238,7 +223,8 @@ decisions inside a build are named in its brief.
   run; owner: the session count and the remaining findings. `docs/plan_detail/process_and_tooling.md`,
   "Efficiency review follow-ups".
 
-**Not ready for main:** Band C (7) and Band D (7), each waiting on the owner.
+**Not ready for main:** Band C, waiting on the owner; Band D is empty
+(counts in `docs/city_master_list.md`, never here).
 `docs/plan_detail/city_watch.md`, "Not ready for main".
 
 **Owner's outside actions**, tracked in `docs/gated_access.md`:
@@ -275,8 +261,6 @@ decisions inside a build are named in its brief.
   "After the prose and UI pass lands".
 - [ ] ⏰ **Zurich: rebuild after 2026-12-12** (owner, 2026-09-30, call C1).
   `docs/plan_detail/city_watch.md`, "Zurich".
-- [ ] **Deferred from the mega-review (owner, 2026-09-30, call C2).** `docs/plan_detail/data_and_disclosure.md`,
-  "Deferred from the mega-review".
 - [ ] **For the site-wide prose and UI pass (owner, 2026-09-30, calls A3,
   A6, A7, B6).** `docs/plan_detail/labels_and_macro_map.md`, "For the site-wide prose and UI pass".
 - [ ] **What Is Excluded's opening claims no longer hold** (review lane 4,
@@ -285,8 +269,6 @@ decisions inside a build are named in its brief.
   "Philadelphia: 11th St".
 - [ ] **Sacramento's Green Line: check from 2026-10-15** (due back by
   mid-October 2026). `docs/plan_detail/city_watch.md`, "Sacramento's Green Line".
-- [ ] **Gambling is bucketed inconsistently** (owner, 2026-09-28): one rule
-  for every taxonomy. `docs/plan_detail/data_and_disclosure.md`, "Gambling".
 
 
 ## Later / maybe
