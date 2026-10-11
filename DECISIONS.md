@@ -20,7 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**189 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**190 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+
+**2026-10-11**
+
+- [Phase 2's weekly usage stops lifted for the final batch; one check-in when it finishes (owner)](#2026-10-11---phase-2s-weekly-usage-stops-lifted-for-the-final-batch-one-check-in-when-it-finishes-owner)
 
 **2026-10-08**
 
@@ -235,6 +239,28 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-10-11 - Phase 2's weekly usage stops lifted for the final batch; one check-in when it finishes (owner)
+
+- **Decided by the owner, 2026-10-11, in the Cleanup session and in the
+  portfolio review notes: the final city batch (phase 2 of
+  `docs/build_plan_2026-10-07.md`: East-2, Kansai-2, Regional-2) runs
+  without stopping on weekly usage, and one usage check-in with the owner
+  follows when the batch finishes.** The owner's words: "drop the stop at
+  every 10% of weekly usage for this batch only. We'll do one usage check-in
+  when it finishes"; the review notes quote "include a stripping of 10%
+  weekly usage since this is the last batch". The rule in force for phase 2
+  was not a stop at every 10% (phases 0 and 1; ended 2026-10-08) but the
+  stops at 30% and 60% (owner, 2026-10-08, the build plan's "Usage check-ins
+  for phase 2"); this call is read as lifting those two stops, which is what
+  it supersedes. Kept: the 5-hour window's 90% ceiling ("The 5-hour-window
+  ceiling stays"), and every other rule of the build plan. Scope: this batch
+  only; it sets no rule for later work. With it, the owner's note that the
+  machine's 32 GB is shared with other projects this week: free memory is
+  read before a heavy job, beside the gate's own admission. Not changed by
+  this entry: the build plan's paragraph and the three phase 2 prompts still
+  name the 30% and 60% stops, and a session reads them as binding, so they
+  are put to the owner for a correction before the sessions start.
 
 ### 2026-10-04 - MHLW's 法人名 holds sole traders' own names: measured across every cached file, put to the owner
 
