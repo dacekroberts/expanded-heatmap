@@ -251,7 +251,7 @@ REGISTRY = {
     # the project's colour every map already drew (hue-matched to the operator); pins >= 62.6, lines >= 16.1, lines beside it >= 19.1.
     "jr-central-tokaido-line": {
         "name": "JR Tokaido Line", "operator": "JR Central", "colour": "#E86810",
-        "maps": {"gifu": "TK", "hamamatsu": "JT", "ichinomiya": "TK", "shizuoka": "JT"},
+        "maps": {"gifu": "TK", "hamamatsu": "JT", "ichinomiya": "TK", "okazaki": "TK", "shizuoka": "JT"},
     },
     # the project's colour osaka already drew; pins >= 45.1, lines >= 19.9, lines beside it >= 19.9.
     "jr-west-tozai-line": {
@@ -341,7 +341,7 @@ REGISTRY = {
     # the project's colour every map already drew (hue-matched to the operator); pins >= 51.6, lines >= 18.1, lines beside it >= 18.1.
     "meitetsu-nagoya-main-line": {
         "name": "Meitetsu Nagoya Main Line", "operator": "Meitetsu", "colour": "#E80010",
-        "maps": {"gifu": "NH", "ichinomiya": "NH"},
+        "maps": {"gifu": "NH", "ichinomiya": "NH", "okazaki": "NH"},
     },
     # the project's colour osaka already drew; pins >= 45.1, lines >= 16.5, lines beside it >= 18.0.
     "osaka-metro-midosuji-line": {
@@ -499,6 +499,12 @@ REGISTRY = {
     "taoyuan-airport-mrt": {
         "name": "Airport MRT", "operator": "Taoyuan Metro", "colour": "#2C5AA5",
         "maps": {"taipei": "A", "taoyuan": "A"},
+    },
+    # the project's colour toyota already drew, registered when okazaki's map
+    # drew the line too (Regional-2, 2026-10-11); pins >= 45.7 on okazaki.
+    "aichi-loop-railway-aichi-loop-line": {
+        "name": "Aichi Loop Line", "operator": "Aichi Loop Railway", "colour": "#28A800",
+        "maps": {"okazaki": "AK", "toyota": "AK"},
     },
 }
 

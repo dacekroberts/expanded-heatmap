@@ -659,7 +659,7 @@ _OSM_STATION_NAMES = (
     # Kansai-1 (2026-10-07)
     "Toyonaka", "Hirakata", "Suita", "Itami", "Kakogawa", "Amagasaki", "Uji",
     # Regional-2 (2026-10-11)
-    "Shizuoka", "Aomori",
+    "Shizuoka", "Aomori", "Okazaki",
 )
 
 # Verbatim where verbatim is required. Each entry is a Notice, and the sources
@@ -3113,6 +3113,32 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). Aomori City and MLIT did not make "
      "and do not endorse this map.",
      False, ("Aomori",)),
+    # Okazaki (notice 207): the city's 食品等営業許可・届出一覧 on its BODIK
+    # catalogue (organization 232025), CC BY 4.0 under the 岡崎市オープンデータ
+    # 利用規約 (read 2026-10-07 by staging: permitted with conditions; clause
+    # 5(5), triggered by use, accepted by the owner, call 214), in the terms'
+    # form for a modified work (4(2)), the dataset page linked. MHLW as in
+    # Sasebo's (its notifications and its own coordinates reach the map);
+    # MLIT as in Kobe's, N02 in its 2025 edition. Written from Ichinomiya's
+    # approved wording under the owner's pre-approval of template prose
+    # (2026-09-30); the completeness sentence is a proposal in
+    # docs/decisions_drafts/worktree-japan-regional-2.md.
+    Notice(207, "Okazaki City, MHLW and MLIT (Okazaki)",
+     "Okazaki's businesses: この地図は、以下の著作物を改変して利用しています。"
+     "食品等営業許可・届出一覧、岡崎市、"
+     "[クリエイティブ・コモンズ・ライセンス 表示４.０国際](http://creativecommons.org/licenses/by/4.0/legalcode.ja)"
+     "（[https://data.bodik.jp/dataset/232025_food_business_all](https://data.bodik.jp/dataset/232025_food_business_all)）; and "
+     "出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一覧」を加工して作成. "
+     "Processed by this project, which selected the storefront types from the city's list of food permits in "
+     "term on August 31, 2026, took only the ministry's notifications, showed a premises in both once, placed "
+     "each by its address or the ministry's own coordinates, and counted them around stations. The city's "
+     "list holds about four restaurant permits in five of the official count, and the ministry's list holds "
+     "only filings whose applicants agreed to publish them; neither is complete. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
+     "Okazaki City, MHLW and MLIT did not make and do not endorse this map.",
+     False, ("Okazaki",)),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no

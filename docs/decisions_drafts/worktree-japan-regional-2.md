@@ -8,7 +8,27 @@ these into `DECISIONS.md`.
 
 ## Parked calls
 
-None yet.
+Each city's own parked calls and proposals are under its entry below
+("Parked calls", "Proposals"). The lead's, by city and letter:
+
+- **Okazaki A: Meitetsu's red on two neighbouring maps.** Okazaki's Meitetsu
+  Nagoya Main Line takes the registry's `#E80010`; Toyota's built map draws
+  the Meitetsu Mikawa Line in the same `#E80010`, and the two lines come
+  within 2 km of each other, so `check_line_identity.py` reports 1 problem
+  (CIE76 0.0, under 10). Recommended: a `NEIGHBOUR_EXCEPTIONS` entry, as JR
+  East's orange for the Musashino and Chuo lines: Meitetsu signs every line
+  in the one red, and the two lines never share a map. Tradeoff: a reader
+  moving from Toyota's map to Okazaki's sees one red for two lines. The
+  alternative moves Toyota's Mikawa Line (a built map: Cleanup's, with a
+  re-render). Nothing was changed; Okazaki is committed with the check
+  failing on this one pair.
+- **Okazaki B: one BODIK request carried the owner's email address.** The
+  Okazaki builder's first `package_show` call (one metadata request to
+  `data.bodik.jp`, 2026-10-11) went out with a hand-typed user-agent that
+  included the owner's email address; every later request used the
+  project's own string. It cannot be recalled. The builders' instructions
+  now forbid anything personal in a header or URL. For the owner to know;
+  no action recommended.
 
 ## Proposals for review time (sentences no template covers)
 
@@ -34,6 +54,154 @@ None yet.
 - `pipeline/line_registry.py`: `jr-central-tokaido-line` gains Shizuoka.
 
 ## Changes
+
+### 2026-10-11 - Okazaki built, the city's food-permit list with MHLW's notifications, food only
+
+- **Okazaki built (page 260, notice 207), Hiroshima's page shape (food only)
+  on Ichinomiya's mechanics (a city list, MHLW's notifications and points):
+  3,614 storefronts (Food service 2,711, Food shops 903) around 16 stations
+  on 3 lines, 50.5% of them in a ring (1,825: Food service 1,456, Food shops
+  369) on the standard rings.** Sources: Okazaki City's
+  食品等営業許可・届出一覧 on BODIK (organization 232025; CC BY 4.0 under the
+  city's terms, read 2026-10-07 by staging, clause 5(5) accepted by the
+  owner, call 214), 4,022 rows in term on 2026-08-31, and MHLW's file for
+  23202 (799 rows: 673 notifications, 126 permits). Built by a Regional-2
+  subagent; the brief passed 6 of 6.
+- **The brief's two hooks, one already shared.** The brief asks for
+  Hiroshima's hook carrying 許可条件 into 業態 to take the 210 kitchen cars
+  out. The foundation's `kyoka_joken` rule already reads 自動車 in 許可条件
+  (step 2: "set aside, vehicle (permit condition): 210"), so no hook was
+  written. O1 (大字 + 小字 + 丁目) is the shared `koaza_chome` rule. O2 is
+  city-local as the brief says: `config.source_rows` reads U+B743 as ばら in
+  戸崎町字<U+B743>山 only (20 addresses; every city row at ばら山, 24, now reaches a block,
+  where the brief counted 17 of the 20 at the district tier and 3 unplaced). Precedent
+  for a cell rewritten in a city's own `source_rows`: Gifu's term dates.
+  The brief's "2 trade names" with the code point were not found in 施設名称
+  (0 of 4,022); none is on the map.
+- **Step 2 against the brief.** Rows 4,022 and 673. Set aside: 210 vehicles,
+  1 area-wide address, 2 not a premises, 29 permits starting 2026-09-01
+  (call 172: 21 restaurants, 4 菓子, 2 食肉販売, 2 魚介類販売), 324 MHLW
+  notifications with no address. Not a storefront 274 (no rule 151, vending
+  105, institutional catering 10, temporary or mobile 6, mail order 2).
+  Storefront rows 3,855: Food service 2,794 (the brief's 2,815 less the 21
+  late restaurants), Retail 1,061 (the brief's 819 less 8 late, plus 250
+  MHLW notifications). 38 city rows dropped for MHLW's row of the same
+  premises; 164 repeat permits shown once. 0 names withheld. 菓子 / そうざい
+  539 rows, 19 factory-like (3.5%), kept.
+- **The join (3,855 rows):** block 3,562 (92.4%; the brief 92.7% on the
+  city's rows alone), 小字 centre 127 (3.3%), town-chōme centre 84 (2.2%),
+  MHLW's own point 43 (1.1%: 30 MHLW rows, 13 city rows through
+  `POINT_DONORS`), unplaced 39 (1.0%). The brief's as-is 87.1% is not where
+  the build ended, so call 145's tier disclosure is met by the excluded
+  section's Not placed paragraph rather than a page bullet.
+- **Call 178 (舞木町字金森) applied:** 51 pins at the site (46 city, 5 MHLW;
+  40 restaurants): 36 at the 小字's centre (the foundation's
+  `koaza_centroid`, finer than the town centre the brief expected) and 15 at
+  MHLW's point; all 51 lie 756 to 797 m from 名電山中, inside its outer ring.
+- **Call 179 (the new towns south of JR 岡崎) applied:** 32 city rows at
+  針崎西 16, 岡崎駅前 11, 若松西 4 and 柱西 1, and 3 at two 土地区画整理 areas,
+  stay unplaced (35 of the 39); 8 rows there take MHLW's point (7 MHLW, 1
+  city). The other 4 unplaced: 鹿勝川町地内 2 and 久右ヱ門町 2.
+- **The share (call 125, Ichinomiya's precedent):** 3,023 restaurant permits
+  of e-Stat's 3,755 in force (80.5%, `japan_official.restaurants`), stated on
+  the page as about four in five.
+- **Census control (`japan_census_control.py okazaki`):** 2,711 Food service
+  pins against 1,257 establishments in the 2021 Economic Census, 2.16 per
+  establishment (the brief estimated 2.10; Akita 2.11, Aomori 2.33). High
+  because the list has no 業態 column: convenience stores (174 by trade-name
+  word in the brief), supermarkets (100), hotels and food-court counters
+  holding 飲食店営業 stay in Food service, each permit holder a pin, and the
+  restaurant stock grew from 3,466 to 3,755 between FY2021 and FY2024.
+- **Rail:** step 1 reproduces the brief: 17 station records, 16 groups
+  (Meitetsu 9, Aichi Loop 6, JR 2; 岡崎 one group), 9 stations beyond the line
+  listed (Toyota 4, Anjō 2, Toyokawa 2, Kōta 1). Median nearest-station gap
+  1,741 m, as the brief: standard rings. 中岡崎 and 岡崎公園前 168 m apart,
+  kept apart. Gate 3 exact on Meitetsu's 9 (its Nagoya Main Line station
+  list, 名電長沢 / 本宿 ... 宇頭 / 新安城) and the Aichi Loop's 6 (its station
+  index), both read 2026-10-11 by plain GET. JR Central's timetable was not
+  read: JR's 2 are not gated and its frequency stays as the brief asserted.
+- **Station names:** 3 overrides in Hiroshima's style (Okazaki-koen-mae for
+  OSM's Okazakikōen-mae, Uto for Utō, Meiden-Yamanaka for Meiden Yamanaka,
+  Toyota's Mikawa-Yatsuhashi precedent); OSM's other 13 stand, Kitanomasuzuka
+  among them (the operator's own sign was not read).
+- **Line colours:** Meitetsu's Nagoya Main Line `#E80010` and JR's Tokaido
+  Line `#E86810` from `line_registry`; the Aichi Loop Line `#28A800`,
+  Toyota's value, repeated as a literal because the registry has no entry.
+  Against the pins (step 3): 51.6, 62.6 and 45.7, all over 45. Between
+  lines: 31.4 (Main, Tokaido), 105.3 and 134.7.
+- **Privacy verdict: publish.** `check_personal_exposure.py okazaki`: the
+  Japan pass prints 0 of 3,614; 2 trade names in the raw files are an
+  operator's own name (MHLW's file, by the brief) and neither is on the map;
+  no pin shows its permit type. Blank or damaged pin names on the rendered
+  map: 0.
+- **Not run:** the GSI sample (the brief does not ask for it), drift, the
+  provenance and scope checks (the lead's). `check_no_em_dashes.py` and
+  `check_no_fetch_in_steps.py` OK.
+- **One request went out with the wrong user-agent.** The `package_show`
+  call for the dataset id (2026-10-11, under the BODIK lock, 20 s held)
+  carried a hand-typed user-agent that included the owner's email address
+  instead of the project's own string. Nothing else was sent; later requests
+  used `osm.OVERPASS_USER_AGENT`.
+- Files: `pipeline/okazaki/` (config, fetch_sources, steps 1 to 3),
+  `outputs/okazaki/` (heatmap.html, excluded_stations.csv, provenance.json).
+
+#### Parked calls
+
+1. **The registry has no Aichi Loop Line.** Toyota draws it (`AK`,
+   `#28A800`) and Okazaki now does. *Recommend* a registry entry
+   `aichi-loop-railway-aichi-loop-line` at `#28A800` with `maps: {"toyota":
+   "AK", "okazaki": "AK"}`, and both configs reading it. Tradeoff: none for
+   the maps (same colour); until then `check_line_identity.py` may flag the
+   literal.
+2. **U+B743 as a `gaiji` entry instead of the city-local rewrite.**
+   `japan.CITIES["okazaki"]["gaiji"] = {0xB743: "ばら"}` would do the same
+   through shared code and reach trade names too. *Recommend* leaving the
+   city-local rewrite (address only, as the brief decided); tradeoff: one
+   more `source_rows` normalisation outside the shared reader.
+3. **久右ヱ門町 / 久右ｪ門町 (2 rows unplaced) and 宮石町字六ﾂ田 (17 rows at the
+   district tier):** half-width and old kana the shared join does not fold
+   for this town. *Recommend* a shared-code look at review time (a
+   half-width kana fold); tradeoff: every city screen re-run for 19 rows.
+4. **JR Central's frequency is still asserted.** The brief asks for a read
+   at build; it needs the station index and PDFs the brief does not name.
+   *Recommend* accepting it unread: the Tokaido main line here is nowhere
+   near 11 trains a day. Tradeoff: one figure in the record rests on common
+   knowledge.
+5. **Kitanomasuzuka** stands as OSM writes it; the Aichi Loop Railway's own
+   sign may hyphenate it. *Recommend* reading the operator's English station
+   page at review time; tradeoff: a possible one-name override and re-render.
+
+#### Proposals
+
+- Page, source bullet: "From Okazaki City's list of food-business permits
+  (as of August 31, 2026)." (the template's sentence with the registers
+  clause removed, as Hiroshima's)
+- Page, coverage bullet: "The city's list holds about four restaurant
+  permits in five of the official count, and kitchen cars, which it lists at
+  a base address, are left out."
+- Notice, completeness sentence: "The city's list holds about four
+  restaurant permits in five of the official count, and the ministry's list
+  holds only filings whose applicants agreed to publish them; neither is
+  complete."
+- Excluded section: "Restaurants the city's list does not hold: it has 3,023
+  restaurant permits, against 3,755 in the national count a year earlier
+  (about four in five). The city does not say why."
+
+#### Registry
+
+- `meitetsu-nagoya-main-line`: add `"okazaki": "NH"` to `maps`.
+- `jr-central-tokaido-line`: add `"okazaki": "TK"` to `maps`.
+- New entry needed (parked call 1): the Aichi Loop Line, `#28A800`, `maps`
+  `{"toyota": "AK", "okazaki": "AK"}`. No other line of this batch's cities
+  was checked against it.
+
+#### Downstream
+
+- Notice 207, Okazaki City: the terms' form (4(2)) is a credit line naming
+  the work, the city and the licence; it does not say where it must sit, so
+  caption only is defensible, card face not required. MHLW (PDL 1.0) and
+  MLIT as on every Japanese card. Open terms question: none beyond clause
+  5(5), accepted (call 214).
 
 ### 2026-10-11 - Aomori built, the city's food-permit list of August 31, 2026, food only
 

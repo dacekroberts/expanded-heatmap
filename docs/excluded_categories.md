@@ -5909,6 +5909,56 @@ line.
 - The JR Tsugaru Line is drawn although it is infrequent: 9 trains a weekday
   run toward Kanita and 8 toward Aomori.
 
+### Okazaki - the city's food-permit list and the national notifications, joined to MLIT's address blocks
+
+**Left out**
+- Barbers, beauty salons and laundries: the city publishes no list of them,
+  so this map shows food businesses only.
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, except where the national filings
+  include notifications.
+- Restaurants the city's list does not hold: it has 3,023 restaurant permits,
+  against 3,755 in the national count a year earlier (about four in five).
+  The city does not say why.
+- 324 national notifications whose filers did not publish an address.
+- 210 kitchen cars, which the city lists at a base address, 6 other
+  temporary or mobile filings, 2 rows with no fixed place and 1 row addressed
+  to a whole area.
+- 151 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 105 vending machines, 10 school, hospital and staff canteens and 2
+  mail-order businesses.
+- 29 permits that start after August 31, 2026.
+
+**Counted** - every food permit in the city's list in term on August 31,
+2026, and the national notifications as downloaded on October 6, 2026. The
+city's list has no form-of-business column, so a convenience store,
+supermarket or hotel that holds a restaurant permit is counted as Food
+service. 19 of the 539 bakery, confectioner and deli rows (3.5%) have a trade
+name that reads as a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 164 repeat permits are shown once, and 38 rows of
+the city's list for a premises already in the national notifications.
+
+**Not placed** - 39 rows (1.0%), 35 of them in the new districts south of
+Okazaki Station (針崎西, 岡崎駅前, 若松西, 柱西 and two land-readjustment areas),
+which MLIT's files do not hold yet. Another 127 sit at the center of their
+小字 (a named part of a town), 84 at their town's center, and 43 at the
+ministry's own coordinates. 51 pins share one site at 舞木町字金森, about 780 m
+from Meiden-Yamanaka: 36 at that 小字's center and 15 at the ministry's
+coordinates.
+
+**Names not shown** - none: no trade name on the map is its operator's own
+name.
+
+**Stations.** Meitetsu's Nagoya Main Line, the Aichi Loop Line and JR's
+Tokaido Line are each cut at the city line.
+- Left out: 9 stations beyond it, 4 in Toyota, 2 in Anjō, 2 in Toyokawa and 1
+  in Kōta.
+- The Shinkansen is not drawn; it has no station in the city.
+- Naka-Okazaki (Aichi Loop Line) and Okazaki-koen-mae (Meitetsu), 168 m
+  apart, are separate stations and each has its own rings.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering
