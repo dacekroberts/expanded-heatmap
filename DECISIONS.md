@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**191 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**192 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-11**
 
+- [The portfolio review's handoff answered: the audience line, the commercial-use audit's rules, the PLAN pass alongside the batch (owner)](#2026-10-11---the-portfolio-reviews-handoff-answered-the-audience-line-the-commercial-use-audits-rules-the-plan-pass-alongside-the-batch-owner)
 - [The build plan's usage paragraph rewritten for the lifted stops (owner: "changes look good")](#2026-10-11---the-build-plans-usage-paragraph-rewritten-for-the-lifted-stops-owner-changes-look-good)
 - [Phase 2's weekly usage stops lifted for the final batch; one check-in when it finishes (owner)](#2026-10-11---phase-2s-weekly-usage-stops-lifted-for-the-final-batch-one-check-in-when-it-finishes-owner)
 
@@ -240,6 +241,41 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-10-11 - The portfolio review's handoff answered: the audience line, the commercial-use audit's rules, the PLAN pass alongside the batch (owner)
+
+- **Decided by the owner, 2026-10-11, on Cleanup's reading of the portfolio
+  review notes and the commercial-use draft (both from the owner's
+  portfolio review session; neither is in the repository).** Six calls:
+  - **Audience:** portfolio viewers, addressed in a utility frame.
+    `docs/project_context.md`'s line rewritten in the owner's approved
+    wording; the building story stays on the About page. The site stays
+    non-commercial.
+  - **The commercial-use audit** runs once, after phase 2 lands, into
+    `docs/commercial_use_positions.md`, for transit-globe's decisions only.
+    The unit is city, layer and source, and **the weakest source in use
+    decides a city's column** (owner: "weakest source deciding is best for
+    safety"), with "allowed if layer X is left out" noted where true
+    (Fukuoka's own list is CC BY; only its MHLW rows are non-commercial).
+    Record first, then one `licence-read` per source transit-globe wants.
+    Rejected: a per-city list with no source table, which put nine Japanese
+    cities in two columns of the draft at once.
+  - **The PLAN cleanup pass** (the hard line of 2026-10-08) runs alongside
+    phase 2 from a fresh context, finishing before the batch's review time.
+    The phase 2 prompts were written after the large review, so the pass
+    does not gate the batch.
+  - **Place search batch 3** runs alongside the three build sessions.
+  - **Found stale in the notes, measured:** "about 170 cities" is 206 in
+    `app/cities.py`, about 236 with phase 2's 30; the MHLW and SEMAS city
+    counts (12 and 13) date from 2026-10-02, with 64 Japanese and 18 Korean
+    entries now; the draft omits Washington D.C., San Diego and Belgium's
+    sources other than KBO, and reads registers only, not the address and
+    parcel sources that place a pin.
+  - **Corrected in `docs/derived_use_licensing.md`:** "No licence in use is
+    non-commercial-only" contradicted `docs/licence_positions.md` rows 1.6,
+    2.7, 2.8 and 2.10; it now names the four sources, and says its counts
+    are as of 170 cities.
+  The open items are in `PLAN.md`, "From the portfolio review".
 
 ### 2026-10-11 - The build plan's usage paragraph rewritten for the lifted stops (owner: "changes look good")
 

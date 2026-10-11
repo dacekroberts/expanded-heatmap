@@ -37,6 +37,30 @@ Detail files: [japan](docs/plan_detail/japan.md),
   such an item before the pass confirms it. The 2026-10-08 trim moved text
   and marked "probably done" items, but confirmed none.
 
+- [ ] **From the portfolio review (owner, 2026-10-11; DECISIONS, that day),
+  in order:**
+  - [~] Phase 2 runs with no weekly usage stop; one usage check-in with the
+    owner when it finishes (`docs/build_plan_2026-10-07.md`).
+  - [ ] When the batch lands: give the owner the city count, read from
+    `app/cities.py`, for every "about N cities" line in his other projects.
+  - [ ] When place search is fully in: remind the owner to write the
+    transit-globe handoff (his to write).
+  - [ ] **The commercial-use audit, after the batch lands:**
+    `docs/commercial_use_positions.md`, for transit-globe's decisions only
+    (this site stays non-commercial). One row per city, layer and source;
+    the weakest source in use decides the city's column (allowed,
+    blacklisted, held), with "allowed if layer X is left out" where true; a
+    source whose read never addressed commercial use is held. From the
+    record first, then one `licence-read` per source transit-globe wants.
+    A script confirms every `app/cities.py` city appears once. The review
+    session's first draft is the starting point, not a source.
+  - [ ] ⏸ Waiting on the owner: a public cross-city chart (a scope addition;
+    ring sizes and category coverage differ by city, so the measure needs
+    choosing first), home-page utility copy (suggestions only), and the
+    prose pass against the tone guide (about 2026-11-07; the guide loads
+    from the owner's global CLAUDE.md; changes are reported per page, never
+    applied).
+
 - [ ] **Next landing:**
   - Phase 2 Japanese cities (East-2, Kansai-2, Regional-2) and Cluj-Napoca,
     on the owner's go (Cluj-Napoca waits on call 215, the placement bar).
