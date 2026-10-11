@@ -5867,6 +5867,48 @@ cut at the city line.
 - The Oigawa Railway's Ikawa Line, a sightseeing line with 2 stations in the
   city's mountain north, is not drawn (owner, 2026-10-04).
 
+### Aomori - the city's food-permit list only, joined to MLIT's address blocks
+
+**Left out**
+- Barbers, beauty salons and laundries: the city publishes no list of them,
+  so this map shows food businesses only.
+- Every shop that is not a food shop: Japan has no general business license.
+- Food businesses that only notify the city rather than hold a permit, such
+  as many convenience stores and greengrocers: they are not in the list.
+- 1,284 permits registered for the whole city (青森市全域) rather than an
+  address, which are event stalls and food trucks: 1,271 restaurant permits,
+  12 fishmongers and 1 confectioner.
+- 9 restaurant permits registered across the prefecture (青森県内一円).
+- 301 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other types that are not a counter.
+
+**Counted** - every food permit in term on August 31, 2026 in the city's
+list: 5,289 permits, 4,217 of them restaurant permits, against 3,969 in the
+national count of March 31, 2025; 2,937 restaurant permits are at a fixed
+address. The list has no column for the form of business, so convenience
+stores, supermarkets, canteens, hotel restaurants and snack bars that hold a
+restaurant permit count as Food service. 37 of the 439 bakery, confectioner
+and deli premises (8.4%) have a trade name that reads as a factory; they are
+kept (owner, 2026-09-24).
+
+**One pin per premises** - 164 repeat rows are shown once: several permits of
+one kind at one premises.
+
+**Not placed** - 3 restaurants (0.1%), at addresses MLIT's files do not hold.
+Another 56 rows sit at their town's center and 121 at the center of their
+小字 (a named part of a town), mostly in Namioka and the older rural parts of
+the city.
+
+**Names not shown** - 1 pin whose trade name is the operator's own name shows
+its permit type.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 2 stations beyond it, 1 in Yomogita and 1 in Fujisaki.
+- The Shinkansen is not drawn; Shin-Aomori stays a JR Ou Line station.
+- The JR Tsugaru Line is drawn although it is infrequent: 9 trains a weekday
+  run toward Kanita and 8 toward Aomori.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

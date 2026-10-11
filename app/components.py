@@ -659,7 +659,7 @@ _OSM_STATION_NAMES = (
     # Kansai-1 (2026-10-07)
     "Toyonaka", "Hirakata", "Suita", "Itami", "Kakogawa", "Amagasaki", "Uji",
     # Regional-2 (2026-10-11)
-    "Shizuoka",
+    "Shizuoka", "Aomori",
 )
 
 # Verbatim where verbatim is required. Each entry is a Notice, and the sources
@@ -3089,6 +3089,30 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). Shizuoka City and MLIT did not make "
      "and do not endorse this map.",
      False, ("Shizuoka",)),
+    # Aomori (notice 208): the city's 食品営業許可施設一覧（オープンデータ）, page
+    # 1006184 on its own site, CC BY 4.0 through 青森市オープンデータ利用規約
+    # (read 2026-10-07 by staging: permitted with conditions, fault-based cost
+    # clauses), credited in the terms' form for a modified work (3(2)): the
+    # title as the dataset page names it, 青森市, the CC BY 4.0 deed, the
+    # page's URL. MHLW's file is a control only and is not credited (Gifu's).
+    # MLIT as in Kobe's, N02 in its 2025 edition. Written from Gifu's and
+    # Shizuoka's approved wording under the owner's pre-approval of template
+    # prose (2026-09-30); the processing sentence is a proposal in
+    # docs/decisions_drafts/worktree-japan-regional-2.md.
+    Notice(208, "Aomori City and MLIT (Aomori)",
+     "Aomori's businesses: この地図は以下の著作物を改変して利用しています。"
+     "食品営業許可施設一覧（オープンデータ）、青森市、クリエイティブ・コモンズ・ライセンス表示 4.0 国際"
+     "（[https://creativecommons.org/licenses/by/4.0/deed.ja](https://creativecommons.org/licenses/by/4.0/deed.ja)）、"
+     "[https://www.city.aomori.aomori.jp/shisei/jouhokoukai/opendata/1006170/1006184.html](https://www.city.aomori.aomori.jp/shisei/jouhokoukai/opendata/1006170/1006184.html). "
+     "(This map modifies Aomori City's list of food-business permits as of August 31, 2026: this project "
+     "selected the storefront types, left out permits registered for the whole city rather than an address, "
+     "showed a premises with several permits once, placed each by its address, and counted them around "
+     "stations.) The list is not claimed to be complete or current, and it may include premises that have closed. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). Aomori City and MLIT did not make "
+     "and do not endorse this map.",
+     False, ("Aomori",)),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no

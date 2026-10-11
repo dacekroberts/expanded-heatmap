@@ -5646,8 +5646,17 @@ CITIES = [
         "lat": 40.829,
         "lon": 140.735,
         "page": "pages/261_Aomori_Heatmap.py",
-        "blurb": "JR East and Aoimori Railway (TODO: list the lines)",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (95.1%)",
+        "data_age": "Food permits as of 2026-08-31",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Food premises only",
+        "blurb": "JR East's Ou and Tsugaru lines and the Aoimori Railway Line",
         "region": "Tohoku",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
         "country": "Japan",
         "mode": "metro",
         "in_default_view": False,
