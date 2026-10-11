@@ -145,6 +145,61 @@ Newest entry first. Cleanup folds this file into `DECISIONS.md`.
 
 ## Entries
 
+### 2026-10-11 - Chiba Prefecture's shared leg (`chiba_pref.py`) written with Matsudo; Matsudo built, personal services only
+
+- **One module for the six Chiba pages** (Matsudo, Ichikawa, Urayasu, Sakura,
+  Yachiyo, Ichihara), on `saitama_pref.py`'s precedent (the japan-city skill:
+  what a second city would also need goes in the shared module):
+  `pipeline/countries/chiba_pref.py` reads Chiba Prefecture's
+  環境衛生関係施設一覧 (dataset 6, PDL 1.0) from a shared cache
+  `data/chiba_pref/raw/` (the thirteen Step 0 workbooks, copied from
+  `data/matsudo/raw/`, byte-identical by SHA-256 to the copies in three other
+  city folders; nothing downloaded) and cuts each page out by health-center
+  sheet and address. A new file; no existing shared file changed, so no
+  Minato control was owed.
+- **What it encodes:** the barber file as published, dated 2025-03-31 (owner,
+  call 33); beauty salons and laundries as the 2026-03-31 lists plus the
+  months' openings to 2026-08-31, an upper bound (call 34); one header
+  spelling per sheet through aliases (the 印旛 barber sheet's own column
+  order, the half-width header of 市原, months writing 施設名称), raising on
+  an unknown header; a 「…新規なし」 sheet read as empty; a month row dropped
+  only where both its number and its address repeat a listed row (Sakura's
+  April case); the beauty workbook's 海匝 sheet, a copy of 印旛, never read;
+  phones, titles and second address and name columns never leave the reader;
+  `fetch` never overwrites a file on disk.
+- **Proved for all six:** the module's row counts equal every brief's, 18 of
+  18 (Ichikawa 223 / 646 / 148, Urayasu 76 / 195 / 58, Sakura 117 / 256 / 79,
+  Yachiyo 130 / 353 / 77, Ichihara 218 / 423 / 76); each city's config
+  asserts its own (`EXPECTED_ROWS`).
+- **Matsudo built (page 245, notice 192), personal services only (Band B):
+  1,253 storefronts (beauty salons 766, barbers 304, laundries 183) around
+  20 stations on 7 lines, 79.8% of them in a ring (1,000).** Brief check
+  13/13. Built by a subagent of the East-2 lead, integrated by the lead.
+- **Step 2:** 2 無店舗 laundry agents not premises (クリーニング種別１, read by
+  the foundation); 1,262 storefront rows: 1,241 block, 19 town centre, 2
+  unplaced (0.2%: a district MLIT's files do not hold); 7 repeat rows
+  dropped. Names withheld 5, all by the sign rule. The brief's "1,255 pins"
+  did not subtract the 2 unplaced rows.
+- **No official count for the city alone** (e-Stat counts the prefecture's
+  jurisdiction as one); prefecture-wide the barber list is 99.6% of the
+  official count on the same date. No census control: no Food service layer.
+- **Privacy verdict: publish.** `check_personal_exposure.py matsudo`: the
+  Japan pass prints 0; 5 pins show their register type.
+- **Rail:** N02-25; 20 stations: Keisei Matsudo 8, JR Joban 5 (one line, as
+  Tokyo's, Mito's and Iwaki's), JR Musashino 3, Hokuso 4, Ryutetsu Nagareyama
+  3, the Keisei Narita Sky Access Line 1 (N02's 成田空港線, its own line over
+  the Hokuso track, a stub kept as cut) and the Tobu Urban Park Line 1 (a
+  stub kept as cut). `N03_NEIGHBOR_PREFS = ("13", "11")`. Two close pairs kept
+  apart as N02 keeps them (Yabashira / Shin-Yahashira 93 m, Koya /
+  Shin-Matsudo 196 m). Gate 3 exact for Ryutetsu (3); the cut lines have no
+  independent in-city count read. 26 excluded. No override.
+- **Registry:** joined `jr-east-joban-line`, `jr-east-musashino-line`,
+  `hokuso-line`, `tobu-urban-park-line`; new `keisei-matsudo-line` #E060D0
+  (Funabashi and Matsudo). This map's alone: Ryutetsu #3060B8, Sky Access
+  #D87800.
+- **Visuals:** notice 192 caption only (PDL 1.0 names no placement). No open
+  terms question. The five Chiba pages after it carry the same notice.
+
 ### 2026-10-11 - Funabashi built, personal services only, ten lines; six lines Tokyo and Kasukabe draw registered
 
 - **Funabashi built (page 244, notice 191), personal services only (Band B),

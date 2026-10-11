@@ -43,25 +43,51 @@ else:
 # replaces this with its own caption of the sources' dates and credits.
 render_data_age("Matsudo")
 
-# TODO: replace every TODO bullet with prose true for this city, as short
-# bullets under bold headings (app/pages/43_Seoul_Heatmap.py is the model):
-# the lines by name, what is not drawn, the area and the stations left out, the
-# source and its limitations. Detail a reference page carries stays there.
+# From the japan-city skill's template and Yokohama's and Kōchi's pages
+# (approved wording, pre-approved for this build, 2026-09-30); the two-date
+# source sentence, the upper-bound sentence and the Sky Access bullet are
+# proposals in docs/decisions_drafts/worktree-japan-east-2.md. The dates are
+# the lists' own (chiba_pref.SOURCE_AS_OF); the ring share, 79.8% (1,000 of
+# 1,253), is step 3's.
 st.markdown(
     """
 **The lines**
 
-- TODO: the lines drawn, by name (each is labeled on the map and in the legend).
-- TODO: what is not drawn, and why.
-- TODO: the area covered; stations left out are listed below.
+- Seven lines are drawn, each labeled on the map and in the legend: the Keisei Matsudo Line, JR
+  East's Joban and Musashino lines, the Hokuso Line, the Ryutetsu Nagareyama Line, the Keisei
+  Narita Sky Access Line and the Tobu Urban Park Line.
+- Lines and stations come from MLIT's national railway data (国土数値情報); station names in
+  English are from OpenStreetMap. Line colors are this project's own, not the operators'.
+- Only stations inside Matsudo City get rings, because the business data is cut to the city alone:
+  lines running on to Kamagaya, Kashiwa, Nagareyama, Ichikawa, Funabashi, Shiroi, Misato and
+  Tokyo's Katsushika Ward are cut at the city line. The stations left out are listed below.
+- The Narita Sky Access Line shares the Hokuso Line's track and stops only at Higashi-Matsudo in
+  the city.
 
 **The businesses**
 
-- TODO: the data source, and any category it is missing.
+- **This map shows personal services only: barbers, beauty salons and laundries.**
+- From Chiba Prefecture's open-data registers of barbers (as of March 31, 2025) and of beauty
+  salons and laundries (as of March 31, 2026, with openings to August 31, 2026), which list only
+  premises whose operators agreed to publication.
+- The prefecture publishes openings but not closures, so a dot is a premises on the register, not
+  necessarily one open today.
+- Restaurants, cafés and shops are not on this map: the national food-permit filings publish too
+  few addresses here to place them.
+
+**Reading the map**
+
+- The registers give an address but no location. Each address is matched to MLIT's address
+  reference data, which places almost all at their street block; where only the district can be
+  found, the dot sits at the district's center.
+- Where a business's trade name is its operator's own name, the dot shows its register type
+  instead.
+- Names and register types are shown in Japanese, as the prefecture records them.
+- **About 80% of storefronts sit within a ring.**
 """
 )
 
-render_map_help("three business categories (Retail, Food service and Personal services)")
+render_map_help("business layer")
 render_excluded_stations("Matsudo")
 render_country_links("Matsudo")
 

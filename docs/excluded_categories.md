@@ -5106,6 +5106,38 @@ line.
 - The Narita Sky Access passes through without a station in the city and is
   not drawn.
 
+### Matsudo - Chiba Prefecture's barber, beauty and laundry registers, joined to MLIT's address blocks
+
+**Left out**
+- Restaurants, cafés and food shops: the national food-permit filings
+  publish too few addresses here to place them.
+- Every other shop: Japan has no general business license.
+- Premises whose operators did not agree to publication: the prefecture
+  lists only those who did.
+- Barbers registered after March 31, 2025: the prefecture's barber file is
+  the list of that date.
+- 2 laundry agents with no shop.
+
+**Counted** - the prefecture's registers, cut to Matsudo by address: 304
+barbers as of March 31, 2025, and 774 beauty-salon rows and 186 laundries as
+of March 31, 2026 with the openings it listed to August 31, 2026. Openings
+are added and closures are not published, so the beauty and laundry layers
+are an upper bound. No official count exists for the city alone.
+
+**One pin per premises** - 7 repeat rows are shown once.
+
+**Not placed** - 2 rows (0.2%) written with a district MLIT's files do not
+hold. Another 17 sit at their town's center.
+
+**Names not shown** - 5 pins whose trade name reads as a person's name alone
+show their register type.
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 26 stations beyond it: 6 in Kashiwa, 5 in Nagareyama, 5 in
+  Kamagaya, 4 in Tokyo's Katsushika Ward, 3 in Ichikawa, 1 in Misato
+  (Saitama), 1 in Shiroi and 1 in Funabashi.
+
 ### Tachikawa - the Tokyo Metropolitan Government's Tama ledgers and the national filings, joined to MLIT's address blocks
 
 **Left out**

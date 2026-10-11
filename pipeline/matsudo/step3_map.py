@@ -5,8 +5,8 @@ Matsudo-specific. Scaffolded by scripts/scaffold_city.py.
 
 Input:  data/matsudo/processed/stations.csv
         data/matsudo/processed/businesses_clean.csv
-        data/matsudo/raw/gtfs.zip                    (for the line overlay)
-        data/matsudo/raw/city_boundary.geojson       (label anchoring)
+        data/matsudo/processed/lines.geojson       (N02 track, from step 1)
+        data/japan/raw/N03-20250101_12_GML.zip    (label anchoring ONLY)
 Output: outputs/matsudo/heatmap.html
 
 Run:  python pipeline/matsudo/step3_map.py
@@ -15,79 +15,59 @@ Run:  python pipeline/matsudo/step3_map.py
 import sys
 from pathlib import Path
 
-import geopandas as gpd
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
-from pipeline.map_common import load_line_shapes, render_heatmap  # noqa: E402
-from pipeline.matsudo.config import (  # noqa: E402
-    STATIONS_CSV,
-    BUSINESSES_CLEAN_CSV,
-    CITY_BOUNDARY_GEOJSON,
-    GTFS_ZIP,
-    HEATMAP_HTML,
-    CRS_GEOGRAPHIC,
-    CRS_PROJECTED,
-    RING_EDGES_METERS,
-    RING_LABELS,
-    LINE_NAMES,
-    TAXONOMY_SYSTEM,
-)
+from pipeline.countries import japan  # noqa: E402
+from pipeline.map_common import load_geojson_line_shapes, render_heatmap  # noqa: E402
+from pipeline.matsudo import config  # noqa: E402
 
-# TODO: route_id -> (shape_id, colour). shape_id is each line's single most-used
-# trip shape (count trips per shape for the route and take the mode; if that
-# shape lies outside the city, pick the one that reaches it and say why).
-# Colours: the agency's own where unambiguous, else your own palette, distinct
-# from the business-category colours.
-LINE_SHAPES = {}
-# Per-line label end override: "start" or "end" forces which end of a line its
-# label goes at; the default (automatic) picks the tail end farthest from the
-# other lines, on the stretch inside the city - override only if a rendered map
-# shows that landing badly.
+SYSTEM_NAME = "Matsudo rail"
+# Per-line label end override ("start" / "end"); automatic unless a rendered
+# map shows a label landing badly.
 LINE_LABEL_ENDS = {}
 
 LINE_SPECS = {
-    key: (shape_id, color, LINE_NAMES[key], LINE_LABEL_ENDS.get(key))
-    for key, (shape_id, color) in LINE_SHAPES.items()
+    key: (key, spec["colour"], spec["name"], LINE_LABEL_ENDS.get(key))
+    for key, spec in config.LINES.items()
 }
 
 
-def city_geometry():
-    """The city's limits, so each line's label goes at the tail of the stretch
-    inside the city (lines that run on past it)."""
-    boundary = gpd.read_file(CITY_BOUNDARY_GEOJSON)
-    boundary = boundary.set_crs(CRS_GEOGRAPHIC) if boundary.crs is None else boundary.to_crs(CRS_GEOGRAPHIC)
-    # TODO: if the layer holds several cities, select this city's record first.
-    return boundary.geometry.union_all()
-
-
 def main():
-    if not LINE_SHAPES:
-        sys.exit("Fill in LINE_SHAPES (and LINE_NAMES in config.py) first: every drawn line needs a label and a legend entry.")
-    for path in (STATIONS_CSV, BUSINESSES_CLEAN_CSV):
+    for path in (config.STATIONS_CSV, config.BUSINESSES_CLEAN_CSV, config.LINES_GEOJSON):
         if not path.exists():
             sys.exit(f"Missing {path}. Run the earlier steps first.")
 
     render_heatmap(
-        output_path=HEATMAP_HTML,
-        map_title="Matsudo Keisei, JR East, Hokuso, Ryutetsu and Tobu Business Density Heatmap",
+        output_path=config.HEATMAP_HTML,
+        map_title="Matsudo Rail Business Density Heatmap",
         city_name="Matsudo",
-        system_name="Keisei, JR East, Hokuso, Ryutetsu and Tobu",
-        stations=pd.read_csv(STATIONS_CSV),
-        businesses=pd.read_csv(BUSINESSES_CLEAN_CSV),
-        taxonomy_system=TAXONOMY_SYSTEM,
-        lines=load_line_shapes(GTFS_ZIP, LINE_SPECS, "Keisei, JR East, Hokuso, Ryutetsu and Tobu"),
-        crs_geographic=CRS_GEOGRAPHIC,
-        crs_projected=CRS_PROJECTED,
-        ring_edges_meters=RING_EDGES_METERS,
-        ring_labels=RING_LABELS,
-        label_focus=city_geometry(),
+        system_name=SYSTEM_NAME,
+        stations=pd.read_csv(config.STATIONS_CSV),
+        businesses=pd.read_csv(config.BUSINESSES_CLEAN_CSV),
+        taxonomy_system=config.TAXONOMY_SYSTEM,
+        lines=load_geojson_line_shapes(config.LINES_GEOJSON, LINE_SPECS, SYSTEM_NAME),
+        crs_geographic=config.CRS_GEOGRAPHIC,
+        crs_projected=config.CRS_PROJECTED,
+        ring_edges_meters=config.RING_EDGES_METERS,
+        ring_labels=config.RING_LABELS,
+        # The city line anchors each label on its line's in-city stretch: the
+        # Keisei Matsudo Line runs on to Kamagaya, the JR Joban Line to
+        # Katsushika (Tokyo) and Kashiwa, the JR Musashino Line to Nagareyama
+        # and Ichikawa, the Hokuso and Narita Sky Access lines to Katsushika,
+        # Ichikawa and Kamagaya, the Ryutetsu to Nagareyama, the Tobu Urban
+        # Park Line to Kashiwa and Kamagaya. N03 is used here and NEVER
+        # drawn (the Survey Act; japan.city_boundary).
+        label_focus=japan.city_boundary(config.SLUG),
+        # Trade names are Japanese; this orders the Japanese faces first
+        # (theme.font_stack) and render_heatmap raises without it.
+        lang="ja",
     )
 
 
 if __name__ == "__main__":
     # A Windows console defaults to cp1252 and raises UnicodeEncodeError on
-    # Hangul, Han and kana, and on Czech and Latvian letters. UTF-8 regardless.
+    # Han and kana. UTF-8 regardless.
     for stream in (sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):
             stream.reconfigure(encoding="utf-8", errors="replace")

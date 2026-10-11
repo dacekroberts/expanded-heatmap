@@ -270,7 +270,7 @@ LINES = {
 # (Tokyo's, owner 2026-10-07) and Tobu Urban Park 29.1 from it (Kasukabe's);
 # the page draws no Food shops pin. The dark-mode labels separate, 10 of 10.
 _COLOURS = {
-    "KS": line_registry.colour("keisei-main-line"), "KM": "#E060D0",
+    "KS": line_registry.colour("keisei-main-line"), "KM": line_registry.colour("keisei-matsudo-line"),
     "JB": line_registry.colour("jr-east-chuo-sobu-line"),
     "JO": line_registry.colour("jr-east-yokosuka-line"),
     "JM": line_registry.colour("jr-east-musashino-line"),

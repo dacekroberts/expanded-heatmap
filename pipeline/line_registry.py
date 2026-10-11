@@ -164,7 +164,7 @@ REGISTRY = {
     # the project's colour iwaki, tokyo already drew; pins >= 45.7, lines >= 18.8, lines beside it >= 18.8.
     "jr-east-joban-line": {
         "name": "JR Joban Line", "operator": "JR East", "colour": "#20A800",
-        "maps": {"iwaki": "JB", "mito": "JJ", "tokyo": "JJ"},
+        "maps": {"iwaki": "JB", "matsudo": "JJ", "mito": "JJ", "tokyo": "JJ"},
     },
     # the project's colour fukuoka, kagoshima, kitakyushu, kumamoto already drew; pins >= 51.6, lines >= 18.1, lines beside it >= 18.1.
     "jr-kyushu-kagoshima-main-line": {
@@ -200,7 +200,7 @@ REGISTRY = {
     # the project's colour every map already drew (hue-matched to the operator); pins >= 54.7, lines >= 33.6, lines beside it >= 33.6.
     "jr-east-musashino-line": {
         "name": "JR Musashino Line", "operator": "JR East", "colour": "#F05820",
-        "maps": {"fuchu_tokyo": "JM", "funabashi": "JM", "higashimurayama": "JM", "kawaguchi": "JM", "koshigaya": "JM", "tokorozawa": "JM"},
+        "maps": {"fuchu_tokyo": "JM", "funabashi": "JM", "higashimurayama": "JM", "kawaguchi": "JM", "koshigaya": "JM", "matsudo": "JM", "tokorozawa": "JM"},
     },
     # the project's colour every map already drew (hue-matched to the operator); pins >= 23.2, lines >= 19.1, lines beside it >= 19.1.
     "jr-east-nambu-line": {
@@ -446,7 +446,7 @@ REGISTRY = {
     # the project's colour kasukabe already drew (East-2, 2026-10-11); pins >= 29.1 (olive Food shops; 45.3 from Personal services), lines beside it >= 18.8 on funabashi.
     "tobu-urban-park-line": {
         "name": "Tobu Urban Park Line", "operator": "Tobu", "colour": "#60A000",
-        "maps": {"funabashi": "TD", "kasukabe": "TD"},
+        "maps": {"funabashi": "TD", "kasukabe": "TD", "matsudo": "TD"},
     },
     # the project's colour tokyo already drew (East-2, 2026-10-11: drawn cut at the city line in the Chiba cities, owner's call 41); pins >= 50.0, lines beside it >= 31.6 on funabashi.
     "tokyo-metro-tozai-line": {
@@ -458,10 +458,15 @@ REGISTRY = {
         "name": "Keisei Main Line", "operator": "Keisei", "colour": "#785868",
         "maps": {"funabashi": "KS", "tokyo": "KS"},
     },
+    # new with East-2 (2026-10-11): the colour nearest Keisei's Matsudo Line pink that fits both maps; pins >= 45.8, lines beside it >= 59.6 on funabashi.
+    "keisei-matsudo-line": {
+        "name": "Keisei Matsudo Line", "operator": "Keisei", "colour": "#E060D0",
+        "maps": {"funabashi": "KM", "matsudo": "KM"},
+    },
     # the project's colour tokyo already drew (East-2, 2026-10-11); pins >= 53.7, lines beside it >= 72.8 on funabashi.
     "hokuso-line": {
         "name": "Hokuso Line", "operator": "Hokuso", "colour": "#787878",
-        "maps": {"funabashi": "HS", "tokyo": "HS"},
+        "maps": {"funabashi": "HS", "matsudo": "HS", "tokyo": "HS"},
     },
     # the project's colour tokyo already drew; pins >= 45.7, lines >= 10.1, lines beside it >= 18.6.
     "tokyu-den-en-toshi-line": {
