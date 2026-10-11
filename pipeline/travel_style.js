@@ -110,7 +110,7 @@ var travelStyle = (function () {
   // [0, 2] and [0, 1.5] compared on world-zoom crops (2026-10-08), only
   // [0, 1.5] keeps short segments such as Kashmir's reading as a line.
   // Every unrecognized kind takes the same rule (owner, 2026-10-08).
-  // Dark (draft, 2026-10-11): as faint against the dark land as the light
+  // Dark (owner approved, 2026-10-11): as faint against the dark land as the light
   // one is against the light land, and below the settled border #5b6374.
   var DISPUTED = {color: "#c4c4c4", colorDark: "#4a4f5a", width: 1.5, dash: [0, 1.5]};
   var UNRECOGNIZED = ["unrecognized_country", "unrecognized_region", "unrecognized_macroregion"];
@@ -126,7 +126,7 @@ var travelStyle = (function () {
   // cartographic thin dark line with cross ticks: the earlier burnt orange
   // #d84315 sat 8.3 from the tram city-dot colour #c2410c, under the hard
   // floor of 10.
-  // Dark flavor (drafts, measured 2026-10-11 against 5.7.2's dark water
+  // Dark flavor (owner approved; measured 2026-10-11 against 5.7.2's dark water
   // #31353f and land #1f1f1f): the light colours read 1.7:1 (crimson) and
   // 1.3:1 (lift grey) on the dark water, so each takes a lighter form of
   // the same hue: pink 4.0:1 on water and 47 from Marunouchi red, blue
