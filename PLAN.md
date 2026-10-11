@@ -77,8 +77,11 @@ Detail files: [japan](docs/plan_detail/japan.md),
     landing, with place search's five; app reboot (`app/cities.py`).
   - `scripts/stress_overview.py` stops on master: 23 Japanese cities of the
     last batch missing from `BUILT_PREF`.
-  - **Owner, review time: re-render the 34 built Japanese cities on
-    `WAVE5_RULES`**, Toyota first, call 158 with it; plus Japanese
+  - ⏸ **HELD until every Japanese city is built (owner, 2026-10-11):
+    the re-render of the built Japanese cities on `WAVE5_RULES`**, once,
+    after phase 2 lands, over the list drawn up then (it read "the 34
+    built" and named no list; 64 are built). Toyota first, call 158 with
+    it. Not held: Japanese
     shared-code fixes, five credits (notices 157, 161, 178, 184, 186) and
     three Kansai-1 briefs. `docs/plan_detail/japan.md`, "Kept from the drafts' notes at the
     2026-10-08 fold".
@@ -220,7 +223,8 @@ decisions inside a build are named in its brief.
 - [ ] ⏸ **Trams left off built maps: PARKED (owner, 2026-09-27); the owner
   decides case by case.** `docs/plan_detail/city_watch.md`, "Trams left off built maps".
 - [ ] **Efficiency review follow-ups:** the weekly `archive_decisions.py`
-  run; owner: the session count and the remaining findings. `docs/plan_detail/process_and_tooling.md`,
+  run, due 2026-10-11 and HELD until phase 2 finishes (owner, that day:
+  the build prompts cite entries in `DECISIONS.md`); owner: the session count and the remaining findings. `docs/plan_detail/process_and_tooling.md`,
   "Efficiency review follow-ups".
 
 **Not ready for main:** Band C, waiting on the owner; Band D is empty

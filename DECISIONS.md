@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**193 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**194 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-11**
 
+- [The Japanese re-render held until every Japanese city is built; the weekly archive waits for phase 2 (owner)](#2026-10-11---the-japanese-re-render-held-until-every-japanese-city-is-built-the-weekly-archive-waits-for-phase-2-owner)
 - [The PLAN cleanup pass: ten pre-review items moved to plan_done, seven narrowed, one not confirmed (owner's hard line of 2026-10-08)](#2026-10-11---the-plan-cleanup-pass-ten-pre-review-items-moved-to-plan_done-seven-narrowed-one-not-confirmed-owners-hard-line-of-2026-10-08)
 - [The portfolio review's handoff answered: the audience line, the commercial-use audit's rules, the PLAN pass alongside the batch (owner)](#2026-10-11---the-portfolio-reviews-handoff-answered-the-audience-line-the-commercial-use-audits-rules-the-plan-pass-alongside-the-batch-owner)
 - [The build plan's usage paragraph rewritten for the lifted stops (owner: "changes look good")](#2026-10-11---the-build-plans-usage-paragraph-rewritten-for-the-lifted-stops-owner-changes-look-good)
@@ -242,6 +243,23 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-10-11 - The Japanese re-render held until every Japanese city is built; the weekly archive waits for phase 2 (owner)
+
+- **Decided by the owner, 2026-10-11, answering the PLAN cleanup pass's
+  two questions:** "run after batch finishes, can the re-render until all
+  japanese cities built". Read as two calls. **The weekly
+  `archive_decisions.py` run, due today, waits until phase 2 finishes**,
+  because the phase 2 prompts cite entries by "DECISIONS.md" and an
+  archive run today would move those entries to `docs/decisions/` under
+  the sessions. **The review-time re-render of the built Japanese cities
+  on `WAVE5_RULES` is held until every Japanese city is built**, so it
+  runs once, after phase 2 lands, over a list drawn up then; PLAN said
+  "the 34 built Japanese cities" and named no list, with 64 built and
+  about 29 more in phase 2. Rejected: re-rendering the 34 at the next
+  review time and the new cities later, which renders the shared lines
+  twice. Not held: the shared-code fixes, the five credits and the three
+  Kansai-1 briefs in the same PLAN item. `PLAN.md` updated.
 
 ### 2026-10-11 - The PLAN cleanup pass: ten pre-review items moved to plan_done, seven narrowed, one not confirmed (owner's hard line of 2026-10-08)
 
