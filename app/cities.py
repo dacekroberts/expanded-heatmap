@@ -5683,6 +5683,27 @@ CITIES = [
         "label_tier": "minor",
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Yao",
+        "lat": 34.62,
+        "lon": 135.616,
+        "page": "pages/256_Yao_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (96.8%); ministry coordinates where missed",
+        "data_age": "Ministry filings fetched 2026-10-06",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Food premises only",
+        "blurb": "Kintetsu's Osaka and Shigi lines, JR's Yamatoji Line and two terminus stations",
+        "region": "Osaka Prefecture",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): the Japan batch's tier. Region views and label
+        # offsets are Cleanup's (owner, call 198); the offset is the scaffold's.
+        "label_tier": "minor",
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

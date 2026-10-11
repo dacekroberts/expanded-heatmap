@@ -220,7 +220,7 @@ REGISTRY = {
     # the project's colour higashiosaka, suita already drew; pins >= 57.3, lines >= 18.8, lines beside it >= 22.5.
     "jr-west-osaka-higashi-line": {
         "name": "JR Osaka Higashi Line", "operator": "JR West", "colour": "#A088A0",
-        "maps": {"higashiosaka": "JH", "osaka": "OH", "suita": "OH"},
+        "maps": {"higashiosaka": "JH", "osaka": "OH", "suita": "OH", "yao": "OH"},
     },
     # the project's colour every map already drew (hue-matched to the operator); pins >= 53.6, lines >= 45.4, lines beside it >= 45.4.
     "jr-east-ou-line": {
@@ -271,7 +271,7 @@ REGISTRY = {
     # the project's colour osaka already drew; pins >= 45.0, lines >= 18.1, lines beside it >= 18.1.
     "jr-west-yamatoji-line": {
         "name": "JR Yamatoji Line", "operator": "JR West", "colour": "#12A500",
-        "maps": {"nara": "JY", "osaka": "JQ"},
+        "maps": {"nara": "JY", "osaka": "JQ", "yao": "JQ"},
     },
     # JR East's own line colour; pins >= 82.5, lines >= 12.7, lines beside it >= 23.4.
     "jr-east-yokosuka-line": {
@@ -332,7 +332,7 @@ REGISTRY = {
     # the project's colour tsu already drew; pins >= 46.4, lines >= 16.5, lines beside it >= 18.3.
     "kintetsu-osaka-line": {
         "name": "Kintetsu Osaka Line", "operator": "Kintetsu", "colour": "#F85838",
-        "maps": {"higashiosaka": "KO", "osaka": "KO", "tsu": "KO"},
+        "maps": {"higashiosaka": "KO", "osaka": "KO", "tsu": "KO", "yao": "KO"},
     },
     # the project's colour every map already drew (hue-matched to the operator); pins >= 45.5, lines >= 38.1, lines beside it >= 120.0.
     "kita-osaka-kyuko-namboku-line": {
@@ -383,7 +383,7 @@ REGISTRY = {
     # maps became the second to draw each).
     "osaka-metro-tanimachi-line": {
         "name": "Osaka Metro Tanimachi Line", "operator": "Osaka Metro", "colour": "#933CA5",
-        "maps": {"moriguchi": "T", "osaka": "T"},
+        "maps": {"moriguchi": "T", "osaka": "T", "yao": "T"},
     },
     "osaka-metro-imazatosuji-line": {
         "name": "Osaka Metro Imazatosuji Line", "operator": "Osaka Metro", "colour": "#E77512",
