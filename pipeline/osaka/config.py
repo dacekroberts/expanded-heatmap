@@ -215,7 +215,7 @@ LINES = {
     "S": {"n02": [(_M, "5号線(千日前線)")], "name": "Sennichimae Line", "name_ja": "千日前線", "colour": "#DB69CF"},
     "K": {"n02": [(_M, "6号線(堺筋線)")], "name": "Sakaisuji Line", "name_ja": "堺筋線", "colour": "#90542D"},
     "N": {"n02": [(_M, "7号線(長堀鶴見緑地線)")], "name": "Nagahori Tsurumi-ryokuchi Line",
-          "name_ja": "長堀鶴見緑地線", "colour": "#7CA014"},
+          "name_ja": "長堀鶴見緑地線", "colour": line_registry.colour("osaka-metro-nagahori-tsurumi-ryokuchi-line")},
     "I": {"n02": [(_M, "8号線(今里筋線)")], "name": "Imazatosuji Line", "name_ja": "今里筋線", "colour": line_registry.colour("osaka-metro-imazatosuji-line")},
     "P": {"n02": [(_M, "南港ポートタウン線")], "name": "New Tram", "name_ja": "ニュートラム", "colour": "#00758A"},
     # JR West (西日本旅客鉄道)

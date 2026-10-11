@@ -291,7 +291,7 @@ REGISTRY = {
     # the project's colour osaka already drew; pins >= 37.3, lines >= 16.4, lines beside it >= 18.0.
     "keihan-main-line": {
         "name": "Keihan Main Line", "operator": "Keihan", "colour": "#7B7B5A",
-        "maps": {"hirakata": "KM", "kyoto": "KM", "moriguchi": "KM", "osaka": "KM"},
+        "maps": {"hirakata": "KM", "kadoma": "KM", "kyoto": "KM", "moriguchi": "KM", "osaka": "KM"},
     },
     # the project's colour every map already drew (hue-matched to the operator); pins >= 45.7, lines >= 18.8, lines beside it >= 70.3.
     "keihan-uji-line": {
@@ -387,6 +387,10 @@ REGISTRY = {
     "osaka-metro-imazatosuji-line": {
         "name": "Osaka Metro Imazatosuji Line", "operator": "Osaka Metro", "colour": "#E77512",
         "maps": {"moriguchi": "I", "osaka": "I"},
+    },
+    "osaka-metro-nagahori-tsurumi-ryokuchi-line": {
+        "name": "Osaka Metro Nagahori Tsurumi-ryokuchi Line", "operator": "Osaka Metro", "colour": "#7CA014",
+        "maps": {"kadoma": "N", "osaka": "N"},
     },
     # Osaka Monorail's own line colour; pins >= 81.9, lines >= 37.6, lines beside it >= 37.6.
     "osaka-monorail-main-line": {
