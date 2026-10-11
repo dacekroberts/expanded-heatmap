@@ -116,6 +116,108 @@ or published; every proposal waits for the owner.
   2026-10-11 reset; the other later items wait until after go-live. The
   owner paused the branch until Sunday 2026-10-11.
 
+### 2026-10-11 - Dark Travel draws Protomaps' dark flavor; the 20 cross-border cities' extracts merged (built and measured)
+
+- **Dark mode in Travel is Protomaps' own dark flavor, in place of the
+  invert filter (owner approved 2026-10-07 and again 2026-10-08).** The
+  `OpenBasemap` layer reads `body.dark-base`: the style is built from
+  `namedFlavor("dark")` and `travelStyle(..., {flavor: "dark"})`, the map
+  container carries `hm-gl-base` while the layer is on, and one injected
+  rule switches the tile pane's filter off for that case, so the Business
+  view's OSM tiles keep the invert filter. A MutationObserver on the body's
+  class restyles the GL map when the Dark mode button is pressed. The
+  shared theme block is untouched, so no committed map changes
+  (`check_render_current` 170 of 170).
+- **A defect found on the way:** maplibre-gl-leaflet 0.1.4 destroys its GL
+  map on every remove and builds a new one from the options it was created
+  with, so a label language picked on the pill would be lost after Business
+  and back (read in the plugin's source; not reproduced before the fix).
+  The style is now set on the options before every add, which the dark
+  flavor needed as well; step 5 and step 8 of the check below cover it.
+- **Dark colours, measured and approved by the owner (2026-10-11)** (`dark_colours.py`; contrast against
+  5.7.2's dark water #31353f and land #1f1f1f, CIE76 with
+  `pipeline/linecolour.delta_e`). The light colours do not carry over:
+  ferry crimson #b0004f reads 1.7:1 on the dark water and lift grey #444444
+  1.3:1.
+
+  | | Light | Dark | On dark water | On dark land |
+  |---|---|---|---|---|
+  | Ferry, site | #b0004f | #f06292 | 4.0:1 | 5.4:1 |
+  | Ferry, full | #1e88e5 | #42a5f5 | 4.6:1 | 6.2:1 |
+  | Aerial lift | #444444 | #c8c8c8 | 7.3:1 | 9.9:1 |
+  | Disputed line | #c4c4c4 | #4a4f5a | 1.5:1 | 2.0:1 |
+
+  The pink is 47 from Marunouchi red and 55 from the tram dot colour; the
+  disputed grey is kept below the settled border #5b6374, as faint against
+  the dark land as the light one is against the light land. The legend's
+  route swatches read a custom property with a `.dark-base` override, so a
+  swatch changes with the line it explains. Land-use tints stay the INTERIM
+  `TINT_DARK` table until transit-globe drafts its own.
+- **Verified in headless Edge on Florence** (`dark_check.mjs`; site view
+  and full version, 1280x800 and 375x812): ten steps on the site view
+  (Travel light, dark, Business dark, Travel again, light chosen while in
+  Business, the IT pill, then dark) and three on the full version. At every
+  step the GL background, land, park, ferry and ferry-label colours and the
+  legend swatch match the flavor, the tile pane's filter is `none` in
+  Travel and the invert filter in dark Business, the credit reads
+  "© OpenStreetMap contributors", and no error is logged. The phone run
+  opened straight into dark Travel from the remembered choices, which also
+  drew correctly. `check_travel_style.mjs` passes (8 style variants, trim
+  lists match). Screenshots in `data/_basemap_build/shots_dark_2026-10-11/`;
+  the tools beside the others in `session_tools_2026-10-08/`.
+- **For the owner:** Protomaps' dark street names are dim by design (#525252 on #1f1f1f, 2.1:1), which
+  suits "context, never content" but may read too faint on a phone
+  outdoors. **Seen while measuring, not changed:** the site's ferry crimson
+  #b0004f is 6 (CIE76) from the Food service pin colour, under the hard
+  floor of 10, and matters only once a reader turns pins back on in Travel
+  (the legend follow-up, a later item); the dark pink is 20 from it.
+  **Owner, 2026-10-11: the crimson stays** (businesses are not on the
+  water, so a ferry dash and a Food service pin do not meet; other colours
+  can be drafted if that ever changes).
+- **The 20 cross-border cities' extracts are merged: 18 files, 15.62 GB**
+  (Lille and Valenciennes share one, Kitakyushu and Shimonoseki another),
+  in `data/_basemap_build/merged_pilot/` with `merged.csv` (inputs, their
+  dated Geofabrik URLs for the ODbL 4.6 offer, counts). Pilot-only: nothing
+  was written into `geofabrik_extracts_2026-10/`.
+  - **Method** (`download_plan_2026-10-08/merge_extracts.py`, pyosmium
+    4.3.1): a streaming merge. Every Geofabrik extract is sorted by type
+    then id, so the inputs are read side by side with one object held per
+    input; an unsorted input stops the run. `MergeInputReader` was not used:
+    it holds whole files in memory. Measured peak 0.27 GB (Strasbourg),
+    against the 8 GB cap.
+  - **Border objects:** an object on a border sits in both neighbours and
+    is written once. The newest-dated extract is read first, so where two
+    extracts carry different versions its copy is the one kept.
+  - **Measured:** 2,104,227,669 objects read, 5,882,917 duplicates dropped
+    (0.28%), 3 objects at differing versions, all in Quebec with Ontario
+    (extracts dated a day apart). In every file, objects read minus
+    duplicates equals nodes plus ways plus relations written. About 190,000
+    objects a second; 13,800 s of merging across three lanes (England with
+    Wales 21 min, New York with Ontario 31 min, the largest).
+- **A merged file builds (Strasbourg, the control).** Alsace with the
+  Freiburg and Karlsruhe districts, built trimmed to zoom 14: 7,809,562
+  bytes, 3 min 46 s, peak 3.64 GB. `pack_sides.py` on the pack: 12,788 road
+  features in the zoom-14 tiles west of 7.80 E and 3,397 east of it, and
+  the places layer names Strasbourg, Kehl and Illkirch-Graffenstaden.
+- **The other packs are building** (owner's go-ahead, 2026-10-11):
+  `download_plan_2026-10-08/build_packs.py`, one java run per city through
+  the gate, into `data/_basemap_build/packs_pilot_2026-10/` with
+  `packs.csv` and a log per city. The builder still reads its other sources
+  from `data/sources/`; `--osm_path`, `--output` and a per-city `--tmpdir`
+  let lanes run side by side. Three lanes at most, so one gate slot stays
+  free: with the merges running as well the four slots were full for half
+  an hour and the place search session waited (it said so; two lanes were
+  stopped, losing one half-built pack). Results are added here when the run
+  ends.
+- **Review-time prep, at the owner's request (2026-10-11): everything made
+  ready, the hosting and go-live call last.** Master merged into the branch
+  (five conflicts in `pipeline/map_common.py`, master's pin colours and
+  outlines against the Travel additions, both kept); `check_all.py` 51 of
+  51; Florence, Mendoza, Kobe and Incheon rendered with the merged code
+  match their committed maps after Folium-id normalization
+  (`render_plain_diff.py`). The branch changes nothing under `app/` or
+  `outputs/`.
+
 ### 2026-10-08 - Go-live at review time; Cloudflare's terms read; 203 packs planned as 93 downloads; license rows; dark Travel approved (owner; measured)
 
 - **Owner's picks from the five open items:** the go-live call (decision
