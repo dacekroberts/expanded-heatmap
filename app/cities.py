@@ -5578,6 +5578,30 @@ CITIES = [
         # it refuses a guessed one.
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Koshigaya",
+        "lat": 35.901,
+        "lon": 139.79,
+        "page": "pages/240_Koshigaya_Heatmap.py",
+        "coverage": "narrowed",
+        "placement": "Joined to address blocks (96.7%); ministry coordinates where missed",
+        "data_age": "Food list as of 2026-03-31 plus new and renewed permits to 2026-08-31 (no July list); registers as of 2026-10-02",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
+        "blurb": "The Tobu Skytree Line and the JR Musashino Line",
+        "region": "Saitama Prefecture",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        # metro (the brief: private heavy rail reads as metro, owner 2026-10-02)
+        "mode": "metro",
+        "in_default_view": False,
+        # Above the dot, the scaffold's default. The Japan views and their
+        # label scoring are Cleanup's (owner, call 198).
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

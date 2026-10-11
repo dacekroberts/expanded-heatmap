@@ -658,6 +658,8 @@ _OSM_STATION_NAMES = (
     "Higashiyamato", "Nishitōkyō", "Tama", "Higashimurayama", "Chōfu", "Ageo (Regional)", "Sōka", "Tokorozawa", "Fuchū (Tokyo)", "Kasukabe", "Tachikawa", "Hino",
     # Kansai-1 (2026-10-07)
     "Toyonaka", "Hirakata", "Suita", "Itami", "Kakogawa", "Amagasaki", "Uji",
+    # East-2 (2026-10-11)
+    "Koshigaya",
 )
 
 # Verbatim where verbatim is required. Each entry is a Notice, and the sources
@@ -1135,7 +1137,7 @@ _NOTICES = [
      "Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, "
      "Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, "
      "Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, "
-     "Higashiōsaka, Kurume, Sasebo, Shimonoseki, Higashiyamato, Nishitōkyō, Tama, Higashimurayama, Chōfu, Ageo (Regional), Sōka, Tokorozawa, Fuchū (Tokyo), Kasukabe, Tachikawa and Hino, and the "
+     "Higashiōsaka, Kurume, Sasebo, Shimonoseki, Higashiyamato, Nishitōkyō, Tama, Higashimurayama, Chōfu, Ageo (Regional), Sōka, Tokorozawa, Fuchū (Tokyo), Kasukabe, Tachikawa, Hino and Koshigaya, and the "
      "metro and light-rail lines and stations of Taipei and New Taipei are from OpenStreetMap, "
      "© OpenStreetMap contributors, available "
      "under the Open Database License. The alignments drawn are OSM's own "
@@ -2645,6 +2647,30 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
      "The Tokyo Metropolitan Government, MHLW and MLIT did not make and do not endorse this map.",
      False, ("Hino",)),
+    # East-2 (notices 187-197, 2026-10-11).
+    # Koshigaya (notice 187): the city's own lists, PDL 1.0 by Saitama
+    # Prefecture's portal records for these exact pages (datasets 530 and
+    # 2004), in the portal's processed-use form naming the creator section;
+    # MHLW as in Toyama's (a point donor only); MLIT as in Kobe's, N02 in its
+    # 2025 edition. Written from Toyama's and Kasukabe's approved wording
+    # under the owner's pre-approval of template prose (2026-09-30); the
+    # credit's titles are a review-time check.
+    Notice(187, "Koshigaya City, MHLW and MLIT (Koshigaya)",
+     "Koshigaya's businesses: 出典：「【越谷市】食品営業許可・届出一覧」「【越谷市】営業施設一覧」"
+     "（越谷市 保健医療部 生活衛生課）（埼玉県オープンデータポータルサイト）"
+     "（[https://opendata.pref.saitama.lg.jp/resources/2715](https://opendata.pref.saitama.lg.jp/resources/2715)、"
+     "[https://opendata.pref.saitama.lg.jp/resources/6312](https://opendata.pref.saitama.lg.jp/resources/6312)）を加工して作成. And "
+     "出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一覧」を加工して作成, "
+     "used only to place a premises the city's list also holds. "
+     "Processed by this project, which added the city's monthly lists of new and renewed permits to its "
+     "March 2026 list, showed a premises once, selected the storefront types, placed each by its address or "
+     "the ministry's own coordinates for the same premises, and counted them around stations. The city "
+     "leaves out some premises at their operators' request, and no list for July 2026 was published. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
+     "Koshigaya City, MHLW and MLIT did not make and do not endorse this map.",
+     False, ("Koshigaya",)),
     # Toyonaka (notice 169): the city's two BODIK datasets, CC BY 4.0 under
     # 豊中市オープンデータ利用規約 ２ (its credit example, the dataset titles,
     # the licence link and the statement of change CC BY 4.0 asks for); MHLW as

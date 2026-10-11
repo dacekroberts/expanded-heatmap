@@ -200,7 +200,7 @@ REGISTRY = {
     # the project's colour every map already drew (hue-matched to the operator); pins >= 54.7, lines >= 33.6, lines beside it >= 33.6.
     "jr-east-musashino-line": {
         "name": "JR Musashino Line", "operator": "JR East", "colour": "#F05820",
-        "maps": {"fuchu_tokyo": "JM", "higashimurayama": "JM", "tokorozawa": "JM"},
+        "maps": {"fuchu_tokyo": "JM", "higashimurayama": "JM", "koshigaya": "JM", "tokorozawa": "JM"},
     },
     # the project's colour every map already drew (hue-matched to the operator); pins >= 23.2, lines >= 19.1, lines beside it >= 19.1.
     "jr-east-nambu-line": {
@@ -416,7 +416,7 @@ REGISTRY = {
     # the project's colour tokyo already drew; pins >= 51.4, lines >= 10.2, lines beside it >= 32.1.
     "tobu-skytree-line": {
         "name": "Tobu Skytree Line", "operator": "Tobu", "colour": "#007890",
-        "maps": {"kasukabe": "TS", "soka": "TS", "tokyo": "TS"},
+        "maps": {"kasukabe": "TS", "koshigaya": "TS", "soka": "TS", "tokyo": "TS"},
     },
     # the project's colour tokyo already drew; pins >= 45.7, lines >= 10.1, lines beside it >= 18.6.
     "tokyu-den-en-toshi-line": {

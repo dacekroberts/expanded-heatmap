@@ -4910,6 +4910,45 @@ line.
 - Left out: 9 stations beyond it: 3 in Noda (Chiba), 2 in Saitama City
   (Iwatsuki Ward), 2 in Miyashiro and 2 in Koshigaya.
 
+### Koshigaya - the city's food list and monthly lists and its barber, beauty and laundry lists, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Premises the city leaves out at their operators' request.
+- New and renewed permits of July 2026: the city published no list for that
+  month.
+- 382 food trucks, stalls and other filings with no fixed premises (most are
+  addressed to the whole city).
+- 291 school, hospital and staff canteens, 254 vending machines, 181 snack
+  bars and cabarets, 60 caterers (仕出し) and 18 premises inside hotels and
+  inns.
+- 215 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 1 permit past its term.
+
+**Counted** - the permits and notifications in the city's food list on
+March 31, 2026, kept whole, with the new and renewed permits of its monthly
+lists for April, May, June and August 2026; and its barber, beauty and
+laundry lists as of October 2, 2026. The lists hold 225 barbers, 645 beauty
+salons and 124 laundries, against 227, 621 and 135 in the national count at
+the end of March 2025. 19 of the 214 bakery, confectioner and deli rows
+(8.9%) have a trade name that reads as a factory; they are kept (owner,
+2026-09-24).
+
+**One pin per premises** - 294 repeat permits are shown once (renewals under
+a new number among them).
+
+**Not placed** - 8 rows (0.2%) at addresses MLIT's files do not hold. Another
+121 sit at their town's center, and 15 at the ministry's own coordinates.
+
+**Names not shown** - 1 pin whose trade name is the operator's own name shows
+its permit type.
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 9 stations beyond it: 3 in Soka, 2 in Kasukabe, 2 in Yoshikawa,
+  1 in Misato and 1 in Kawaguchi.
+
 ### Tachikawa - the Tokyo Metropolitan Government's Tama ledgers and the national filings, joined to MLIT's address blocks
 
 **Left out**

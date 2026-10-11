@@ -221,6 +221,9 @@ CITIES = {
                   "wards": ["13202"]},
     "hino": {"name": "日野市", "pref": "13", "epsg": 32654, "n02": "25", "wardless": True,
              "wards": ["13212"]},
+    # East-2 (2026-10-11), each on N02-25 as its brief measured.
+    "koshigaya": {"name": "越谷市", "pref": "11", "epsg": 32654, "n02": "25", "wardless": True,
+                  "wards": ["11222"]},
 }
 
 # THE CITIES BUILT BEFORE THE JAPAN FOUNDATION (2026-10-07): they keep
