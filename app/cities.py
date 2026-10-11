@@ -5620,6 +5620,27 @@ CITIES = [
         "label_tier": "minor",
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Moriguchi",
+        "lat": 34.742,
+        "lon": 135.576,
+        "page": "pages/253_Moriguchi_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (99.7%)",
+        "data_age": "Lists as of 2026-03-31, openings added to 2026-08-31 (an upper bound)",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "The Keihan Main Line and Osaka Metro's Tanimachi and Imazatosuji lines",
+        "region": "Osaka Prefecture",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): the Japan batch's tier. Region views and label
+        # offsets are Cleanup's (owner, call 198); the offset is the scaffold's.
+        "label_tier": "minor",
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
