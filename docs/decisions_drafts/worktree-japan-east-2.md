@@ -8,14 +8,22 @@ Newest entry first. Cleanup folds this file into `DECISIONS.md`.
 ## Downstream inputs this branch changes
 
 - New cities (each with `outputs/<slug>/`, a `app/cities.py` entry, a notice
-  and rows in `docs/data_sources/japan.md`): Koshigaya (notice 187).
+  and rows in `docs/data_sources/japan.md`): Koshigaya (187), Sagamihara
+  (188), Fujisawa (189), Kawaguchi (190), Funabashi (191), Matsudo (192),
+  Ichikawa (193), Urayasu (194), Sakura (195), Yachiyo (196), Ichihara (197).
 - Station names in English are OpenStreetMap's for every city here; the rail
   is MLIT's N02.
-- `pipeline/line_registry.py`: Koshigaya added to the maps of
-  `tobu-skytree-line` and `jr-east-musashino-line` (no colour changed).
-- Per notice, for Visuals: **187 (Koshigaya): caption only** (PDL 1.0's credit
-  has no placement rule beyond being stated with the work; the same reading
-  as Kasukabe's 164). No open terms question.
+- `pipeline/line_registry.py`: eleven new entries and the new maps joined to
+  existing ones. **No registered colour changed and no built map's output
+  changes**; Tokyo's, Yokohama's and Kasukabe's lines are registered in the
+  colours they already draw.
+- A new shared module, `pipeline/countries/chiba_pref.py`; no existing shared
+  pipeline module changed.
+- Per notice, for Visuals: **all eleven are caption only** (PDL 1.0, CC BY
+  4.0 and CC BY 2.1 JP name no placement beyond being stated with the work;
+  the same reading as Kasukabe's 164). **No open terms question on any.
+  Kawaguchi is held off cards and public pieces until its parked call B (the
+  glyphs) is settled.**
 
 ## Parked calls
 
@@ -154,6 +162,44 @@ Newest entry first. Cleanup folds this file into `DECISIONS.md`.
   cities are added to all three as East-1's were. Cleanup's to reconcile.
 
 ## Entries
+
+### 2026-10-11 - Ichihara built on the Chiba module, personal services only, the Kominato line drawn with its rural stretch named
+
+- **Ichihara built (page 250, notice 197), personal services only (Band B),
+  Matsudo's shape on `chiba_pref.py`: 708 storefronts (beauty salons 416,
+  barbers 216, laundries 76) around 20 stations on 3 lines, 42.2% of them in
+  a ring (299).** Brief check 13/13. Built by a subagent of the East-2 lead,
+  integrated by the lead. Sheet 市原, rows 218 / 423 / 76 (the sheet's
+  half-width header read through the module's alias).
+- **Step 2:** 717 storefront rows: 669 block, 42 town centre, 6 unplaced
+  (0.8%); 3 repeat rows dropped; names withheld 8 (the sign rule). On the map
+  94.1% block, 5.9% at a district's centre, many of them rural 大字 with no
+  block points; a GSI sample only returns the same centroids, so no
+  independent distance exists for that tier. Built and disclosed (the
+  brief's recommendation on its open call 1).
+- **The laundry share (owner, call 123, Ichikawa's shape):** 76 against about
+  94 scaled from the 2021 Economic Census, about four in five, stated on the
+  page.
+- **Privacy verdict: publish.** `check_personal_exposure.py ichihara`: the
+  Japan pass prints 0; 8 pins show their register type.
+- **Rail:** N02-25; 20 stations: the Kominato Railway Line 17 of 18, the JR
+  Uchibo Line 3, the Keisei Chihara Line 1 (a private stub kept as cut). 五井
+  one group for JR and the Kominato. Median gap 1,789 m: standard rings. Gate
+  3: Kominato 17, the railway's own pages. 4 excluded (Chiba City 3, Otaki
+  1). One alias: N02's 姉ヶ崎 is OSM's 姉ケ崎.
+- **The low-frequency stretch (calls 46 and 86):** south of 上総牛久 the
+  Kominato Railway runs 10 trains a weekday each way (9 to 養老渓谷, 1 turning
+  at 里見), counted by train number from the railway's timetable of
+  2026-03-14; the brief's 11 to 12 included specified-day trains. Drawn, and
+  named on the page as "about ten trains a day each way" with the no-floor
+  reason. The count was read by hand from a table with merged cells.
+- **Colours, all this map's alone:** Kominato #F86040, JR Uchibo #00A0D0,
+  Keisei Chihara #2860B0. The Kominato's value equals the registry's JR Keiyo
+  Line; the two are about 20 km apart and never neighbours, so the checks
+  pass. Its hue is a seed, free to move if the owner wants them apart.
+- **The opening view** needs `scripts/check_map_view.js` (a large city whose
+  stations run 30 km north to south): run with the batch's map checks.
+- **Visuals:** notice 197 caption only. No open terms question.
 
 ### 2026-10-11 - Urayasu, Sakura and Yachiyo built on the Chiba module, personal services only
 

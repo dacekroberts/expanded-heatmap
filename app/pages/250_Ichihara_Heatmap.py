@@ -43,25 +43,57 @@ else:
 # replaces this with its own caption of the sources' dates and credits.
 render_data_age("Ichihara")
 
-# TODO: replace every TODO bullet with prose true for this city, as short
-# bullets under bold headings (app/pages/43_Seoul_Heatmap.py is the model):
-# the lines by name, what is not drawn, the area and the stations left out, the
-# source and its limitations. Detail a reference page carries stays there.
+# From the japan-city skill's template and Yokohama's, Kōchi's and Matsudo's
+# pages (approved wording, pre-approved for this build, 2026-09-30); the
+# two-date source sentence, the laundry sentence the owner's call 123 asks
+# for, the low-frequency bullet (calls 46 and 86) and the centroid sentence
+# are proposals in docs/decisions_drafts/worktree-japan-east-2.md. The dates
+# are the lists' own (chiba_pref.SOURCE_AS_OF); about four in five is the
+# brief's 76 laundries against about 94 scaled from the 2021 Economic Census;
+# about ten trains is the weekday count read from the railway's timetable of
+# March 14, 2026; the ring share, 42.2% (299 of 708), is step 3's.
 st.markdown(
     """
 **The lines**
 
-- TODO: the lines drawn, by name (each is labeled on the map and in the legend).
-- TODO: what is not drawn, and why.
-- TODO: the area covered; stations left out are listed below.
+- Three lines are drawn, each labeled on the map and in the legend: the Kominato Railway Line, the
+  JR Uchibo Line and the Keisei Chihara Line.
+- Lines and stations come from MLIT's national railway data (国土数値情報); station names in
+  English are from OpenStreetMap. Line colors are this project's own, not the operators'.
+- Only stations inside Ichihara City get rings, because the business data is cut to the city alone:
+  lines running on to Chiba, Sodegaura and Otaki are cut at the city line. The stations left out
+  are listed below.
+- South of Kazusa-Ushiku the Kominato Railway is a rural line with about ten trains a day each
+  way. It is drawn like any other line: this project sets no minimum frequency for Japan's JR and
+  private railways.
 
 **The businesses**
 
-- TODO: the data source, and any category it is missing.
+- **This map shows personal services only: barbers, beauty salons and laundries.**
+- From Chiba Prefecture's open-data registers of barbers (as of March 31, 2025) and of beauty
+  salons and laundries (as of March 31, 2026, with openings to August 31, 2026), which list only
+  premises whose operators agreed to publication.
+- The register lists 76 laundries in Ichihara, about four in five of the number the 2021 Economic
+  Census suggests; the reason is not known.
+- The prefecture publishes openings but not closures, so a dot is a premises on the register, not
+  necessarily one open today.
+- Restaurants, cafés and shops are not on this map: the national food-permit filings publish too
+  few addresses here to place them.
+
+**Reading the map**
+
+- The registers give an address but no location. Each address is matched to MLIT's address
+  reference data, which places most at their street block; where only the district can be found,
+  the dot sits at the district's center. In the rural south a district is large, so such a dot can
+  be far from the shop.
+- Where a business's trade name is its operator's own name, the dot shows its register type
+  instead.
+- Names and register types are shown in Japanese, as the prefecture records them.
+- **About 42% of storefronts sit within a ring.**
 """
 )
 
-render_map_help("three business categories (Retail, Food service and Personal services)")
+render_map_help("business layer")
 render_excluded_stations("Ichihara")
 render_country_links("Ichihara")
 
