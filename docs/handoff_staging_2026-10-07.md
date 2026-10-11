@@ -63,11 +63,13 @@ fresh `docs/decisions_drafts/staging.md`.
   34"** under the Built table (the owner's ask).
 - **Master list after Oradea's move (call 221): 31 candidates (A 3, B 26, C
   2, D 0), 91 in Band R, 329 discarded, 10 open gaps.** Band D is empty.
-- **Phase 2 is ready and held:** the owner wants it to wait until after this
-  review is on the site and until Cleanup's four viability assessments are
-  with the owner (a back link from site-wide pages, one colour per category
-  meaning, street search on city maps, an offline basemap switcher). Do not
-  open phase 2 sessions without the owner's go.
+- **Phase 2 started on 2026-10-11 at about 21:48 UTC** (owner's go, after the
+  weekly reset): East-2, Kansai-2 and Regional-2 run in worktrees
+  `japan-east-2`, `japan-kansai-2` and `japan-regional-2`, each from master
+  33a0e5d8, on the prompts in `docs/build_plan_2026-10-07.md`. No weekly
+  usage stop; one check-in when the batch finishes. Their batch reports and
+  parked calls come to staging, which relays the calls as S1 and on. No S
+  call has been put yet.
 - **The live privacy fix (call 209)** landed on 2026-10-07 before the review:
   13 operators' own names withheld on six Japanese maps by the `name_city`
   switch.
