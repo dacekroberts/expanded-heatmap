@@ -99,7 +99,7 @@ REGISTRY = {
     # the project's colour osaka already drew; pins >= 45.9, lines >= 18.0, lines beside it >= 18.0.
     "hankyu-kyoto-line": {
         "name": "Hankyu Kyoto Line", "operator": "Hankyu", "colour": "#87544B",
-        "maps": {"ibaraki_osaka": "HY", "kyoto": "HY", "osaka": "HY", "suita": "HY"},
+        "maps": {"ibaraki_osaka": "HY", "kyoto": "HY", "osaka": "HY", "suita": "HY", "takatsuki": "HY"},
     },
     # the project's colour osaka already drew; pins >= 45.8, lines >= 18.0, lines beside it >= 18.0.
     "hankyu-senri-line": {
@@ -190,7 +190,7 @@ REGISTRY = {
     # the project's colour kyoto already drew; pins >= 50.6, lines >= 17.5, lines beside it >= 18.8.
     "jr-west-kyoto-line": {
         "name": "JR Kyoto Line", "operator": "JR West", "colour": "#08A0C0",
-        "maps": {"ibaraki_osaka": "JY", "kyoto": "JA", "osaka": "JY", "suita": "JY"},
+        "maps": {"ibaraki_osaka": "JY", "kyoto": "JA", "osaka": "JY", "suita": "JY", "takatsuki": "JY"},
     },
     # the project's colour every map already drew (hue-matched to the operator); pins >= 44.4, lines >= 81.8, lines beside it >= 90.7.
     "jr-kyushu-kyudai-main-line": {
