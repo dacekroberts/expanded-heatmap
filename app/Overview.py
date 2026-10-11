@@ -37,7 +37,7 @@ from cities import (
     region_caption,
     SWITCHER_ORDER,
 )
-from label_competition import compete
+from label_competition import compete, label_text
 from basemap import SECRET_NAME as BASEMAP_SECRET, carto_positron_style
 from components import (
     SITE_NAME,
@@ -61,7 +61,7 @@ st.caption("Storefront commercial density around rapid-transit stations, "
            "city by city.")
 
 _FOLLOW_UP = (
-    'each city map has a "Global View" button to come back here.'
+    'each city map has a "Global View" button, and one for its region, to come back here.'
     if MAP_ONLY_NAV
     else "each city page also has a switcher to jump straight to another city."
 )
@@ -80,19 +80,96 @@ st.subheader("Covered cities")
 # The map opens on ONE region and re-centres on the others, rather than fitting
 # every city at once - see cities.py's REGIONS block, and
 # docs/scaling_thresholds.md for why a single fitted world view stops working
-# somewhere around 12-15 cities. The radio is hidden entirely while there is
+# somewhere around 12-15 cities. The selector is hidden entirely while there is
 # only one region, so this costs nothing until a second country exists.
 _region_names = [r["name"] for r in REGIONS]
 _region_cities = {r["name"]: r["cities"] for r in REGIONS}
 if len(REGIONS) > 1:
-    region = st.radio(
-        "Region",
-        _region_names,
-        index=_region_names.index(DEFAULT_REGION),
-        format_func=lambda n: f"{n} ({len(_region_cities[n])})",
-        horizontal=True,
-        key="macro_region",
+    # TWO ROWS (owner, 2026-10-07; cities.SUB_VIEWS): the broad views, then
+    # the closer views of the chosen one, the broad view first as "All of".
+    # The flat list of 33 views measured 665 px tall at 375 px. Read with
+    # getattr for the reason given at REGION_ZOOM below: a stale cities.py
+    # falls back to one row of every view.
+    _cm = sys.modules.get("cities")
+    _menu_top = getattr(_cm, "MENU_TOP", _region_names)
+    _menu_sub = getattr(_cm, "MENU_SUB", {})
+    _menu_parent = {c: p for p, kids in _menu_sub.items() for c in kids}
+
+    # THE URL IS THE REGION SHOWN (`?region=`, the back links' and the map's
+    # region button's target, owner 2026-10-07): a reload or a shared link
+    # returns to it, and a link to a closer view sets both rows. A widget
+    # writes the URL in its callback, which runs before the page does, so the
+    # page never reads a URL one click behind; the widgets are then set from
+    # the URL. Global needs no parameter, and an unknown one opens Global.
+    region = st.query_params.get("region")
+    if region not in _region_names:
+        region = DEFAULT_REGION
+    _group = _menu_parent.get(region, region)
+    if _group not in _menu_top:
+        _menu_top = [*_menu_top, _group]
+
+    def _go(key):
+        """A menu callback: show the view the widget now holds. A pill clicked
+        again clears to None, which keeps the view shown."""
+        view = st.session_state.get(key)
+        if view is None or view not in _region_names:
+            return
+        if view == DEFAULT_REGION:
+            if "region" in st.query_params:
+                del st.query_params["region"]
+        else:
+            st.query_params["region"] = view
+
+    def _count(n):
+        return f"{n} ({len(_region_cities[n])})"
+
+    def _sub_label(n):
+        # The broad view as "All of ...", a part without its parent's name
+        # ("United States West" reads "West" under the United States, "South
+        # Korea outside the capital area" reads "Outside the capital area").
+        if n == _group:
+            named = getattr(_cm, "running_name", lambda r: r)
+            return f"All of {named(n)} ({len(_region_cities[n])})"
+        short = n[len(_group) + 1:] if n.startswith(_group + " ") else n
+        return f"{short[:1].upper()}{short[1:]} ({len(_region_cities[n])})"
+
+    _sub = [_group, *_menu_sub[_group]] if _group in _menu_sub else []
+
+    # PILLS ON A WIDE SCREEN, DROPDOWNS ON A PHONE (owner: phone first). Both
+    # are drawn and CSS shows one, at Streamlit's own 640 px column breakpoint.
+    # Measured 2026-10-07 at 375 px with Japan chosen: both rows as pills 568
+    # px, as dropdowns 152 px (68 px for one row); at 1200 px the pills take
+    # 96 px for one row and 208 px for Japan's two. Each widget is set from
+    # the URL before it is drawn, so the two never disagree. The hidden one's
+    # layout wrapper is hidden with it, or it would still take a 16 px gap.
+    st.markdown(
+        "<style>"
+        "@media (min-width: 641px) { div:has(> .st-key-region-menu-narrow) { display: none; } }"
+        "@media (max-width: 640px) { div:has(> .st-key-region-menu-wide) { display: none; } }"
+        "[data-testid='stElementContainer']:has(.region-menu-css) { display: none; }"
+        "</style><span class='region-menu-css'></span>",
+        unsafe_allow_html=True,
     )
+    with st.container(key="region-menu-wide"):
+        st.session_state["region_top_pills"] = _group
+        st.pills("Region", _menu_top, format_func=_count, key="region_top_pills",
+                 on_change=_go, args=("region_top_pills",))
+        if _sub:
+            _k = f"region_sub_pills_{_group}"
+            st.session_state[_k] = region
+            st.pills("Closer view", _sub, format_func=_sub_label, key=_k,
+                     on_change=_go, args=(_k,))
+    with st.container(key="region-menu-narrow"):
+        st.session_state["region_top_select"] = _group
+        st.selectbox("Region", _menu_top, format_func=_count, key="region_top_select",
+                     on_change=_go, args=("region_top_select",))
+        if _sub:
+            _k = f"region_sub_select_{_group}"
+            st.session_state[_k] = region
+            st.selectbox("Closer view", _sub, format_func=_sub_label, key=_k,
+                         on_change=_go, args=(_k,))
+    if region == DEFAULT_REGION and "region" in st.query_params:
+        del st.query_params["region"]
 else:
     region = DEFAULT_REGION
 
@@ -327,6 +404,10 @@ _members = {c["name"] for c in _region_cities[region]
 _also = getattr(sys.modules.get("cities"), "REGION_LABELS_ALSO", {}).get(region, ())
 _members |= {c["name"] for c in CITIES if c.get("region") in _also
              and c.get("label_tier") != "minor"}
+# The label text in this view (label_competition.label_text): a view-specific
+# name where one is set (Benelux's "City of Brussels"), else cities.py `pill`.
+_texts = {c["name"]: label_text(c, region) for c in CITIES}
+cities["pill"] = cities["name"].map(_texts)
 label_cities = cities[cities["name"].isin(_members)]
 
 markers = pdk.Layer(
@@ -395,7 +476,9 @@ labels = pdk.Layer(
     # Not `cities`: a leaf region labels only its own - see label_cities above.
     data=label_cities,
     get_position="[lon, lat]",
-    get_text="name",
+    # The label text drops " (Regional)" (cities.py `pill`); the tooltip and
+    # the city list keep the full name.
+    get_text="pill",
     get_size=14,
     get_color=DARK,
     # An opaque pill behind each name so it reads on both the light basemap and
@@ -576,6 +659,8 @@ if _basemap_style is None:
 # names, and hand-placing offsets against every neighbour did not scale.
 # A region view in cities.COMPETING_REGIONS competes the same way, its entrants
 # the cities it labels (_members above) rather than Global's static filter.
+# Each country's top city (cities.COUNTRY_TOP, owner 2026-10-07) is placed
+# first in both, whatever its mode; label_competition.py says how.
 _competes = region in getattr(sys.modules.get("cities"), "COMPETING_REGIONS", ())
 if region == DEFAULT_REGION or _competes:
     _won = compete(CITIES, view.latitude, view.longitude, view.zoom,
@@ -760,5 +845,6 @@ for _leaf in _open + [n for n in _leaves if n not in _open]:
                             f"{_f['storefronts_text']}  \n"
                             f"Data: {_f['data_age']} · Placed by: {_f['placement']}")
 
-# Site-level notices, required on every page - see components._NOTICES.
-render_site_notices()
+# Site-level notices, required on every page - see components._NOTICES. The
+# region rides on the reference-page links, for their back link.
+render_site_notices(origin=region)

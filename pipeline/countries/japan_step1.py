@@ -575,12 +575,17 @@ def run(config):
     # --- excluded ---------------------------------------------------------------
     munis = n03_municipalities(config)
     excluded = []
+    # A page of several municipalities (japan.CITIES' "municipalities"; Ageo
+    # (Regional), owner's call 200, 2026-10-07) names them all, its district
+    # prefix (北足立郡) dropped; a one-city page reads as before.
+    pages = [re.sub(r"^.+?郡", "", m) for m in japan.CITIES[config.SLUG].get("municipalities", {}).values()]
+    scope = (f"outside {' and '.join(pages)} (the permit lists cover them only)" if len(pages) > 1
+             else f"outside {japan.CITIES[config.SLUG]['name']} (the permit list covers the city only)")
     for _, r in groups[~groups["inside"]].iterrows():
         hit = munis[munis.contains(r.geometry)]
         where = hit.iloc[0]["muni"] if len(hit) == 1 else "another prefecture"
         excluded.append({"station": r["name_ja"], "lines": r["lines"],
-                         "reason": f"in {where}, outside {japan.CITIES[config.SLUG]['name']} "
-                                   "(the permit list covers the city only)",
+                         "reason": f"in {where}, {scope}",
                          "latitude": r["latitude"], "longitude": r["longitude"]})
     # A left-out LINE's stations are not written here: the file records stations
     # cut from a network that IS mapped (app/station_scope.py reads only

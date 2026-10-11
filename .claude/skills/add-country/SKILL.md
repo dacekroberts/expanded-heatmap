@@ -764,8 +764,8 @@ docstring; what a new country needs from them:
 3. **A region, which decides its selector group.** The group is the city's
    macro-map `"region"`, folded through `REGION_GROUP` in
    `app/country_sections.py`:
-   - **an existing region** (every European country is `Europe`, per
-     `add-city`; an Australian or New Zealand city `Oceania`; another South
+   - **an existing region** (a European country is `Europe West` or
+     `Europe East`, per `add-city`; an Australian or New Zealand city `Oceania`; another South
      American country `South America`) joins that group with no edit;
    - **a region new to the project** (`scaffold_city.py --new-region`, which
      appends it to `REGION_ORDER`; a macro-map view, so the owner's call)
@@ -777,7 +777,12 @@ docstring; what a new country needs from them:
      it after every larger view (owner, 2026-10-02).
 
    The country's place within its group follows `REGION_ORDER` and build
-   order; there is nothing to set.
+   order; there is nothing to set. **The first city also takes the country's
+   row in `COUNTRY_TOP` in `app/cities.py`** (its city population in
+   millions; `cities.py` raises without one): each country's largest city is
+   labelled on the landing view first (owner, 2026-10-07). If the new label
+   cannot fit there, `check_macro_labels.py` fails; `LANDING_NO_ROOM` is the
+   owner's call, with the measurement.
 4. **Headings that name the city.** A section is filed under a country when
    its heading names exactly one country's city (as `app/cities.py` names
    it, less any " (Regional)") or the country itself; a heading naming

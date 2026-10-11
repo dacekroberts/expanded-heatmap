@@ -1,0 +1,20 @@
+station,lines,reason,latitude,longitude
+西国分寺,JC,"in 国分寺市, outside 立川市 (the permit list covers the city only)",35.69972876925752,139.46592507754664
+国立,JC,"in 国立市, outside 立川市 (the permit list covers the city only)",35.699195000007684,139.44641499999997
+矢川,JN,"in 国立市, outside 立川市 (the permit list covers the city only)",35.68507500004528,139.43158999999997
+谷保,JN,"in 国立市, outside 立川市 (the permit list covers the city only)",35.68138000045683,139.44678
+小川,SH,"in 小平市, outside 立川市 (the permit list covers the city only)",35.73756500207612,139.46349500000002
+万願寺,MONO,"in 日野市, outside 立川市 (the permit list covers the city only)",35.67131500047372,139.41985999999997
+日野,JC,"in 日野市, outside 立川市 (the permit list covers the city only)",35.6785453753304,139.39342895354372
+甲州街道,MONO,"in 日野市, outside 立川市 (the permit list covers the city only)",35.67825000020301,139.409155
+高幡不動,MONO,"in 日野市, outside 立川市 (the permit list covers the city only)",35.66129000072387,139.415235
+中神,JO,"in 昭島市, outside 立川市 (the permit list covers the city only)",35.709000000683105,139.37571
+昭島,JO,"in 昭島市, outside 立川市 (the permit list covers the city only)",35.713220000905935,139.36163499999998
+東中神,JO,"in 昭島市, outside 立川市 (the permit list covers the city only)",35.70627500015068,139.38459499999996
+西立川,JO,"in 昭島市, outside 立川市 (the permit list covers the city only)",35.70361578344364,139.39315803676314
+上北台,MONO,"in 東大和市, outside 立川市 (the permit list covers the city only)",35.74576000045791,139.41586500000003
+東大和市,SH,"in 東大和市, outside 立川市 (the permit list covers the city only)",35.73290500066315,139.434295
+桜街道,MONO,"in 東大和市, outside 立川市 (the permit list covers the city only)",35.73903500051006,139.416555
+拝島,SH JO,"in 福生市, outside 立川市 (the permit list covers the city only)",35.7211306542049,139.34383601318416
+牛浜,JO,"in 福生市, outside 立川市 (the permit list covers the city only)",35.73433500294609,139.33379
+福生,JO,"in 福生市, outside 立川市 (the permit list covers the city only)",35.74248500647037,139.32774499999996

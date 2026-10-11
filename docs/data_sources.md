@@ -82,9 +82,9 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 
 | Country | File | Cities |
 |---|---|---|
-| United States | [`data_sources/united-states.md`](data_sources/united-states.md) | San Diego, San Francisco, Los Angeles (Regional), Chicago, New York, Philadelphia, Miami (Regional), Boston, Washington D.C., Buffalo, Sacramento, Houston, Minneapolis, Pittsburgh, Dallas, Kansas City, Tucson, New Orleans, Seattle (Regional) |
+| United States | [`data_sources/united-states.md`](data_sources/united-states.md) | San Diego, San Francisco, Los Angeles (Regional), Chicago, New York, Philadelphia, Miami (Regional), Boston, Washington D.C., Buffalo, Sacramento, Houston, Minneapolis, Pittsburgh, Dallas, Kansas City, Tucson, New Orleans, Seattle (Regional), Tacoma |
 | Canada | [`data_sources/canada.md`](data_sources/canada.md) | Vancouver (Regional), Montréal, Calgary, Edmonton, Toronto, Ottawa, Kitchener–Waterloo (Regional) |
-| Mexico | [`data_sources/mexico.md`](data_sources/mexico.md) | Mexico City, Guadalajara (Regional), Monterrey (Regional) |
+| Mexico | [`data_sources/mexico.md`](data_sources/mexico.md) | Mexico City (Regional), Guadalajara (Regional), Monterrey (Regional) |
 | Spain | [`data_sources/spain.md`](data_sources/spain.md) | Madrid, Barcelona, Palma |
 | Ireland | [`data_sources/ireland.md`](data_sources/ireland.md) | Dublin |
 | Italy | [`data_sources/italy.md`](data_sources/italy.md) | Milan, Rome, Florence |
@@ -92,21 +92,22 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Norway | [`data_sources/norway.md`](data_sources/norway.md) | Oslo, Bergen |
 | Romania | [`data_sources/romania.md`](data_sources/romania.md) | Bucharest |
 | Sweden | [`data_sources/sweden.md`](data_sources/sweden.md) | Stockholm, Göteborg |
-| Denmark | [`data_sources/denmark.md`](data_sources/denmark.md) | Copenhagen, Aarhus, Odense |
+| Denmark | [`data_sources/denmark.md`](data_sources/denmark.md) | Copenhagen (Regional), Aarhus, Odense |
 | Czechia | [`data_sources/czechia.md`](data_sources/czechia.md) | Prague, Brno, Plzeň, Olomouc, Ostrava, Liberec (Regional), Most (Regional) |
 | Netherlands | [`data_sources/netherlands.md`](data_sources/netherlands.md) | Amsterdam, Rotterdam, Den Haag |
 | Latvia | [`data_sources/latvia.md`](data_sources/latvia.md) | Riga, Liepāja, Daugavpils |
 | Brazil | [`data_sources/brazil.md`](data_sources/brazil.md) | São Paulo, Rio de Janeiro (Regional), Belo Horizonte (Regional), Brasília, Salvador, Fortaleza (Regional), Porto Alegre (Regional), Recife (Regional), Santos (Regional) |
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
-| South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang, Daejeon, Gwangju, Gimhae |
+| South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang (Regional), Daejeon, Gwangju, Gimhae, Gimpo, Siheung |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
-| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki |
-| Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin |
-| United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional) |
-| Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires |
+| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki, Higashiyamato, Nishitōkyō, Tama, Higashimurayama, Ageo (Regional), Sōka, Tokorozawa, Kasukabe, Fuchū (Tokyo), Chōfu, Tachikawa, Hino, Toyonaka, Hirakata, Suita, Itami, Kakogawa, Amagasaki, Uji, Maebashi, Fukushima, Fukuyama, Ichinomiya, Tsu, Akita, Ōita, Gifu, Iwaki, Mito, Morioka |
+| Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin, Gelsenkirchen, Bremen |
+| United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional), Manchester (Regional), Birmingham (Regional), Edinburgh, Sheffield, Nottingham (Regional), Blackpool (Regional), Liverpool (Regional) |
+| Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires, Mendoza |
 | Australia | [`data_sources/australia.md`](data_sources/australia.md) | Sydney, Melbourne |
 | Belgium | [`data_sources/belgium.md`](data_sources/belgium.md) | Brussels, Antwerp, Ghent, Charleroi, Liège, Brussels (Regional) |
-| Switzerland | [`data_sources/switzerland.md`](data_sources/switzerland.md) | Zurich |
+| Switzerland | [`data_sources/switzerland.md`](data_sources/switzerland.md) | Zurich, Geneva (Regional) |
+| Greece | [`data_sources/greece.md`](data_sources/greece.md) | Thessaloniki |
 | Georgia | [`data_sources/georgia.md`](data_sources/georgia.md) | Tbilisi |
 
 ## Business registries
@@ -437,7 +438,7 @@ source, acknowledging Government ownership of the IP, and proper attribution.
 is an open-ended undertaking to cover the Government's costs if a third party
 alleges the data infringed their rights. Hong Kong was the first source in
 this project to ask for one; others have since, among them Sacramento, Palma,
-Dallas and San Diego's SanGIS layers (below). **It was an owner decision, taken before the register's
+Dallas, San Diego's SanGIS layers and Geneva (below). **It was an owner decision, taken before the register's
 35,808 premises were wired into a page**, not once the city was live.
 
 ### Hong Kong's indemnity — accepted 2026-09-22, and what the first record omitted
@@ -590,6 +591,23 @@ agreement.<!-- /internal -->
 - **SANDAG's own Data Terms of Use** ("should not be redistributed", plus a
   SANDAG indemnity) defer to a third party's terms where the source is not
   SANDAG. The SanGIS agreement is the one read as governing.
+
+#### Geneva's SITG indemnity — accepted 2026-10-04
+
+SITG's **Conditions d'utilisation des données du Portail SITG** (version of
+19 May 2026; the copy inside the dataset's zip is byte-identical) govern the
+canton's business register (REG) that the Geneva (Regional) build uses.<!-- internal --> They
+were read on 2026-10-04 by the license-read agent.<!-- /internal -->
+
+- **The shape:** narrower than Hong Kong's. CU 7.2 limits the indemnity to
+  third-party claims arising from the user's own infringements, with
+  personality and data-protection rights named.
+- **The owner accepted it on 2026-10-04, for this one source**, with ge.ch's
+  website terms read as the website's only. As with Hong Kong, it is not a
+  notice or a build step.
+- **Unchanged by the acceptance:** no re-identification (CU 5.4.2: REG is
+  never joined to another source to identify a person), no resale, and the
+  source line and derived-use statement displayed (notice 154).
 
 ## Notices this project MUST display when published
 
@@ -1646,7 +1664,7 @@ Sporveien's names to endorse anything (NLOD §6), or present the data
 misleadingly. **MUST DO: nothing** - no key for the static file, and Entur asks
 for no more than one download a day.
 
-**30. Det Centrale Virksomhedsregister (Copenhagen, Aarhus, Odense) — required, and DISPLAYED.** Aarhus (2026-09-29) reads the same download (generation 505) and Odense (2026-09-30) reads the register too, so the credit names both; the owner approved each widening, Odense's on 2026-09-30.
+**30. Det Centrale Virksomhedsregister (Copenhagen, Aarhus, Odense) — required, and DISPLAYED.** Aarhus (2026-09-29) reads the same download (generation 505) and Odense (2026-09-30) reads the register too, so the credit names both; the owner approved each widening, Odense's on 2026-09-30. Copenhagen (Regional) (2026-10-07) reads it for eight more kommuner; the title keeps "Copenhagen".
 
 **CC BY 4.0**, from CVR's own terms on Datafordeler
 (`datafordeler.dk/vejledning/brugervilkaar/det-centrale-virksomhedsregister-cvr/`,
@@ -1659,7 +1677,7 @@ DO: nothing** - no notification, no registration of the reuse. The account is
 the owner's and closes after Copenhagen publishes<!-- internal --> (`docs/gated_access.md` item
 3)<!-- /internal -->; closing is licence-safe, since the grant attaches to the data.
 
-**31. Klimadatastyrelsen (Copenhagen, Aarhus, Odense) — required, and DISPLAYED.** Aarhus (2026-09-29) reads DAR's Adresse and Husnummer (generation 761) and takes each point from OpenStreetMap's copy, so the notice also names OpenStreetMap's points for Aarhus, owner-approved. Odense (2026-09-30) is placed the same way and the notice names it, approved by the owner 2026-09-30.
+**31. Klimadatastyrelsen (Copenhagen, Aarhus, Odense) — required, and DISPLAYED.** Aarhus (2026-09-29) reads DAR's Adresse and Husnummer (generation 761) and takes each point from OpenStreetMap's copy, so the notice also names OpenStreetMap's points for Aarhus, owner-approved. Odense (2026-09-30) is placed the same way and the notice names it, approved by the owner 2026-09-30. Copenhagen (Regional) (2026-10-07) is placed the same way too (owner), so the notice's last clause now covers every city it names; the wording is a review-time proposal.
 
 **CC BY 4.0**, from DAR's terms on Datafordeler
 (`datafordeler.dk/vejledning/brugervilkaar/danmarks-adresseregister-dar/`,
@@ -2305,7 +2323,7 @@ into `render_site_notices()`; displayed since Newcastle landed).
 - **Bucharest's rail, boundary, sectors and address points are OpenStreetMap
   data** (ODbL, notice 1).
 
-**68. Small Enterprise and Market Service (Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang, Daejeon, Gwangju, Gimhae) — required, and DISPLAYED**
+**68. Small Enterprise and Market Service (Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang, Gunpo, Uiwang, Daejeon, Gwangju, Gimhae, Gimpo, Siheung) — required, and DISPLAYED**
 (written into `render_site_notices()`; displayed since Incheon landed).
 
 - **PERMITTED WITH CONDITIONS** (<!-- internal -->`licence-read` 2026-09-29; <!-- /internal -->the rows in
@@ -3829,6 +3847,682 @@ of 2026-10-03.)
 - **The repository carries the credit too**, as for London: committed
   `outputs/liverpool/` republishes the derived locations (README's credits).
 - Wording: Manchester's Ordnance Survey notice 85, with the city changed.
+
+**154. SITG, Répertoire des entreprises (Geneva (Regional)) — required, and
+DISPLAYED** (written into `render_site_notices()` with Geneva (Regional),
+2026-10-07.)
+
+- **PERMITTED WITH CONDITIONS**<!-- internal --> (`licence-read` 2026-10-04)<!-- /internal -->: SITG Level A,
+  "Accès libre", under the Conditions d'utilisation (version of 19 May 2026):
+  reproduce, publish, adapt and combine, commercial use included. Rows in
+  [`data_sources/switzerland.md`](data_sources/switzerland.md).
+- **MUST DISPLAY**, "de manière clairement visible": the source line in the
+  form CU 5.3.1 prescribes, "Source : Portail des données SITG (État de
+  Genève), téléchargé et/ou extrait en date du […].", with the extract date of
+  the file the map was built from (04.10.2026); a statement of the derived use
+  (CU 5.3.2, on its example wording: "Cartographie réalisée sur la base de
+  Données du Portail SITG"); and the conditions of use linked (CU 5.5).
+- **MUST NOT**: re-identify a person (CU 5.4.2: no join of REG to another
+  source); resell the data (RIRT art. 62).
+- **Personal data**: a sole trader's trade name that is the owner's own name
+  shows the street address instead (the owner's call, 2026-10-04); phone,
+  e-mail and legal-name columns are never read into the map.
+- **The indemnity (CU 7.2)**: accepted by the owner, 2026-10-04 (above); not a
+  notice.
+- **Geneva's rail and the commune boundaries are OpenStreetMap data** (ODbL,
+  notice 1).
+- The English sentences of the displayed notice are the build's draft, a
+  review-time proposal.
+
+**155. City of Thessaloniki (Thessaloniki) — required, and DISPLAYED**
+(written into `render_site_notices()` with Thessaloniki, 2026-10-07.)
+
+- **PERMITTED WITH CONDITIONS**<!-- internal --> (`licence-read` 2026-10-04)<!-- /internal -->: CC BY 4.0,
+  set on each resource of the layer's data.gov.gr record. The map portal's
+  no-redistribution splash is read as the web app's terms only (owner,
+  2026-10-04). Rows in [`data_sources/greece.md`](data_sources/greece.md).
+- **MUST DISPLAY** (CC BY 4.0 section 3(a)): the credit to the City of
+  Thessaloniki with the dataset's title linked to its record, the licence
+  linked, the retrieval date and that the data was changed. No wording is
+  prescribed; the notice is this project's.
+- **MUST NOT**: imply the City's endorsement or use its logo; call the layer
+  current, complete or official.
+- **Personal data**: the layer has no name field; a dot shows its licensed
+  activity.
+- **Thessaloniki's rail and boundary are OpenStreetMap data** (ODbL, notice 1).
+
+**156. Kommunalverbund Niedersachsen/Bremen e.V. (Bremen) — required, and
+DISPLAYED** (written into `render_site_notices()` with Bremen, 2026-10-07.)
+
+- **PERMITTED WITH CONDITIONS, display only**<!-- internal --> (staging's read 2026-10-05; the
+  `licence-read` agent's full read 2026-10-07)<!-- /internal -->: "Creative Commons Namensnennung
+  (CC-BY)", **no version**, in the dataset's ISO record (`otherConstraints`)
+  and GovData's resource (`http://dcat-ap.de/def/licenses/cc-by`, linking
+  `https://www.opendefinition.org/licenses/cc-by`). DCAT-AP.de's unversioned
+  concept maps to no version, and Bremen's own portal records use the
+  versioned `cc-by/4.0`, so the unversioned id was the publisher's choice.
+  Every CC BY version permits public display and adapted maps; none adds
+  share-alike or non-commercial terms. The owner read it as 4.0 (call 13,
+  2026-10-05: no outreach) and, with the database-right point under an
+  older version before them and the Kommunalverbund's 2024 report silent on
+  terms, **accepted the permissive reading** (2026-10-07).
+- **Rights holder: the Kommunalverbund Niedersachsen/Bremen e.V.**; the
+  Landesamt GeoInformation Bremen only hosts the file. Rows in
+  [`data_sources/germany.md`](data_sources/germany.md).
+- **MUST DISPLAY**: "Quellenvermerk: Kommunalverbund Niedersachsen/Bremen
+  e.V."; the licence title exactly as written, linked to the URL the record
+  gives; the dataset's title, "Einzelhandelsbestand in der Region Bremen
+  2022", with a link to the material; and that the data was changed.
+- **MUST NOT**: imply endorsement. Use only the public "reduziert" file: the
+  protected variant (record 0148391c) is under a restricted licence for the
+  participating municipalities.
+- **Not governing**: geo.bremen.de's CC BY-NC-ND page footer and the
+  Kommunalverbund imprint's private-use clause (both their own web pages).
+- **MUST DO**: nothing standing; a request to remove the attribution or the
+  layer is honoured.
+
+**157. Tokyo Metropolitan Government, MHLW and MLIT (Higashiyamato) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with East-1 at review
+time).
+
+- **PERMITTED WITH CONDITIONS** (the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The Tama ledgers are
+  **CC BY 4.0 through the Tokyo catalogue's two entries**, relied on (owner,
+  call 108, Taitō's precedent). MHLW's open data is **PDL 1.0**, as in
+  Sasebo's (127). MLIT's 位置参照情報 and N02 (the 2025 edition) are **PDL
+  1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks stations and is
+  **never drawn** (the Survey Act).
+- **MUST DISPLAY**: the Tokyo Open Data Terms' modified-use credit (§2(1)イ),
+  `この地図は、以下の著作物を改変して利用しています。食品関係営業台帳（…t000055d0000000361）及び環境衛生施設台帳（…t000055d0000000614）、東京都、クリエイティブ・コモンズ・ライセンス 表示4.0国際（https://creativecommons.org/licenses/by/4.0/deed.ja）`,
+  with the catalogue's name and the date of use as Tokyo's notice gives them;
+  `出典：「食品衛生申請等システム」（厚生労働省）（https://i2fas.mhlw.go.jp/）の「食品等営業許可・届出一覧」を加工して作成`;
+  who processed both; MLIT's credit lines.
+- **MUST NOT**: present the map as made by Tokyo or a municipality; link the
+  保健医療局 page or files (that site's link policy: the catalogue entries are
+  linked instead); present the lists as MHLW's or Tokyo's own; use a logo;
+  claim either list is complete or accurate.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py higashiyamato` with its Japan pass,
+  run 2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-1.md` ("Higashiyamato built",
+  2026-10-07).<!-- /internal -->
+
+**158. Tokyo Metropolitan Government, MHLW and MLIT (Nishitōkyō) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with East-1 at review
+time).
+
+- **PERMITTED WITH CONDITIONS**, as Higashiyamato's (157): the same Tama
+  ledgers (CC BY 4.0 through the Tokyo catalogue, call 108), MHLW's Tokyo
+  file (PDL 1.0), MLIT's 位置参照情報 and N02-25 (PDL 1.0); N03 never drawn.
+- **MUST DISPLAY**, **MUST NOT**: as notice 157, the city changed.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py nishitokyo` with its Japan pass,
+  run 2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-1.md` ("Nishitōkyō built",
+  2026-10-07).<!-- /internal -->
+
+**159. Tokyo Metropolitan Government, MHLW and MLIT (Tama) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with East-1 at review
+time).
+
+- **PERMITTED WITH CONDITIONS**, as Higashiyamato's (157): the same Tama
+  ledgers (CC BY 4.0 through the Tokyo catalogue, call 108), MHLW's Tokyo
+  file (PDL 1.0), MLIT's 位置参照情報 and N02-25 (PDL 1.0); N03 never drawn.
+- **MUST DISPLAY**, **MUST NOT**: as notice 157, the city changed.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py tama` with its Japan pass,
+  run 2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-1.md` ("Tama built",
+  2026-10-07).<!-- /internal -->
+
+**160. Tokyo Metropolitan Government, MHLW and MLIT (Higashimurayama) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with East-1 at review
+time).
+
+- **PERMITTED WITH CONDITIONS**, as Higashiyamato's (157): the same Tama
+  ledgers (CC BY 4.0 through the Tokyo catalogue, call 108), MHLW's Tokyo
+  file (PDL 1.0), MLIT's 位置参照情報 and N02-25 (PDL 1.0); N03 never drawn.
+- **MUST DISPLAY**, **MUST NOT**: as notice 157, the city changed.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py higashimurayama` with its Japan pass,
+  run 2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-1.md` ("Higashimurayama built",
+  2026-10-07).<!-- /internal -->
+
+**161. Saitama Prefecture and MLIT (Ageo (Regional)) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with East-1 at review
+time).
+
+- **PERMITTED WITH CONDITIONS** (the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)): the food layers and the
+  R8.3.31 list through the GIS catalogue, which applies the prefecture
+  portal's terms (PDL 1.0); the 生活衛生 lists through the portal's 2024 PDL
+  record (owner, call 143). MLIT's 位置参照情報 and N02 (the 2025 edition)
+  are **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks stations
+  and is **never drawn** (the Survey Act). MHLW's file is a control only.
+- **MUST DISPLAY**: the portal terms' §1.1 credit for processed use, each
+  dataset by its own title, `出典：「食品営業施設_新法_公開」「食品営業施設_旧法_公開」「kyuho_R080331」（埼玉県GISオープンデータカタログ）（…）及び「【埼玉県】生活衛生営業施設一覧」（埼玉県オープンデータポータルサイト）（…）を加工して作成`;
+  who processed it; MLIT's credit lines.
+- **MUST NOT**: present the map as made by Saitama Prefecture; claim the
+  lists are complete.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py ageo_regional` with its Japan pass,
+  run 2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-1.md` ("Ageo (Regional) built",
+  2026-10-07).<!-- /internal -->
+
+**162. Saitama Prefecture and MLIT (Sōka) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with East-1 at review
+time).
+
+- **PERMITTED WITH CONDITIONS** (the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)): the food layers and the
+  R8.3.31 list through the GIS catalogue, which applies the prefecture
+  portal's terms (PDL 1.0); the 生活衛生 lists through the portal's 2024 PDL
+  record (owner, call 143). MLIT's 位置参照情報 and N02 (the 2025 edition)
+  are **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks stations
+  and is **never drawn** (the Survey Act). MHLW's file is a control only.
+- **MUST DISPLAY**: the portal terms' §1.1 credit for processed use, each
+  dataset by its own title, `出典：「食品営業施設_新法_公開」「食品営業施設_旧法_公開」「kyuho_R080331」（埼玉県GISオープンデータカタログ）（…）及び「【埼玉県】生活衛生営業施設一覧」（埼玉県オープンデータポータルサイト）（…）を加工して作成`;
+  who processed it; MLIT's credit lines.
+- **MUST NOT**: present the map as made by Saitama Prefecture; claim the
+  lists are complete.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py soka` with its Japan pass,
+  run 2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-1.md` ("Sōka built",
+  2026-10-07).<!-- /internal -->
+
+**163. Saitama Prefecture and MLIT (Tokorozawa) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with East-1 at review
+time).
+
+- **PERMITTED WITH CONDITIONS** (the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)): the food layers and the
+  R8.3.31 list through the GIS catalogue, which applies the prefecture
+  portal's terms (PDL 1.0); the 生活衛生 lists through the portal's 2024 PDL
+  record (owner, call 143). MLIT's 位置参照情報 and N02 (the 2025 edition)
+  are **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks stations
+  and is **never drawn** (the Survey Act). MHLW's file is a control only.
+- **MUST DISPLAY**: the portal terms' §1.1 credit for processed use, each
+  dataset by its own title, `出典：「食品営業施設_新法_公開」「食品営業施設_旧法_公開」「kyuho_R080331」（埼玉県GISオープンデータカタログ）（…）及び「【埼玉県】生活衛生営業施設一覧」（埼玉県オープンデータポータルサイト）（…）を加工して作成`;
+  who processed it; MLIT's credit lines.
+- **MUST NOT**: present the map as made by Saitama Prefecture; claim the
+  lists are complete.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py tokorozawa` with its Japan pass,
+  run 2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-1.md` ("Tokorozawa built",
+  2026-10-07).<!-- /internal -->
+
+**164. Saitama Prefecture and MLIT (Kasukabe) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with East-1 at review
+time).
+
+- **PERMITTED WITH CONDITIONS** (the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)): the food layers and the
+  R8.3.31 list through the GIS catalogue, which applies the prefecture
+  portal's terms (PDL 1.0); the 生活衛生 lists through the portal's 2024 PDL
+  record (owner, call 143). MLIT's 位置参照情報 and N02 (the 2025 edition)
+  are **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks stations
+  and is **never drawn** (the Survey Act). MHLW's file is a control only.
+- **MUST DISPLAY**: the portal terms' §1.1 credit for processed use, each
+  dataset by its own title, `出典：「食品営業施設_新法_公開」「食品営業施設_旧法_公開」「kyuho_R080331」（埼玉県GISオープンデータカタログ）（…）及び「【埼玉県】生活衛生営業施設一覧」（埼玉県オープンデータポータルサイト）（…）を加工して作成`;
+  who processed it; MLIT's credit lines.
+- **MUST NOT**: present the map as made by Saitama Prefecture; claim the
+  lists are complete.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py kasukabe` with its Japan pass,
+  run 2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-1.md` ("Kasukabe built",
+  2026-10-07).<!-- /internal -->
+
+**165. Tokyo Metropolitan Government, MHLW and MLIT (Fuchū (Tokyo)) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with East-1 at review
+time).
+
+- **PERMITTED WITH CONDITIONS**, as Higashiyamato's (157): the same Tama
+  ledgers (CC BY 4.0 through the Tokyo catalogue, call 108), MHLW's Tokyo
+  file (PDL 1.0), MLIT's 位置参照情報 and N02-25 (PDL 1.0); N03 never drawn.
+- **MUST DISPLAY**, **MUST NOT**: as notice 157, the city changed.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py fuchu_tokyo` with its Japan pass,
+  run 2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-1.md` ("Fuchū (Tokyo) built",
+  2026-10-07).<!-- /internal -->
+
+**166. Tokyo Metropolitan Government, MHLW and MLIT (Chōfu) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with East-1 at review
+time).
+
+- **PERMITTED WITH CONDITIONS**, as Higashiyamato's (157): the same Tama
+  ledgers (CC BY 4.0 through the Tokyo catalogue, call 108), MHLW's Tokyo
+  file (PDL 1.0), MLIT's 位置参照情報 and N02-25 (PDL 1.0); N03 never drawn.
+- **MUST DISPLAY**, **MUST NOT**: as notice 157, the city changed.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py chofu` with its Japan pass,
+  run 2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-1.md` ("Chōfu built",
+  2026-10-07).<!-- /internal -->
+
+**167. Tokyo Metropolitan Government, MHLW and MLIT (Tachikawa) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with East-1 at review
+time).
+
+- **PERMITTED WITH CONDITIONS**, as Higashiyamato's (157): the same Tama
+  ledgers (CC BY 4.0 through the Tokyo catalogue, call 108), MHLW's Tokyo
+  file (PDL 1.0), MLIT's 位置参照情報 and N02-25 (PDL 1.0); N03 never drawn.
+- **MUST DISPLAY**, **MUST NOT**: as notice 157, the city changed.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py tachikawa` with its Japan pass,
+  run 2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-1.md` ("Tachikawa built",
+  2026-10-07).<!-- /internal -->
+
+**168. Tokyo Metropolitan Government, MHLW and MLIT (Hino) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with East-1 at review
+time).
+
+- **PERMITTED WITH CONDITIONS**, as Higashiyamato's (157): the same Tama
+  ledgers (CC BY 4.0 through the Tokyo catalogue, call 108), MHLW's Tokyo
+  file (PDL 1.0), MLIT's 位置参照情報 and N02-25 (PDL 1.0); N03 never drawn.
+- **MUST DISPLAY**, **MUST NOT**: as notice 157, the city changed.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py hino` with its Japan pass,
+  run 2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-1.md` ("Hino built",
+  2026-10-07).<!-- /internal -->
+
+
+**169. Toyonaka City, MHLW and MLIT (Toyonaka) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with the Kansai-1
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-07; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's two BODIK
+  datasets are **CC BY 4.0** under 豊中市オープンデータ利用規約 ２(1); MHLW's
+  open data is **PDL 1.0**, as in Sakai's (104); MLIT's 位置参照情報 and N02
+  (the 2025 edition) are **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only
+  picks stations and is **never drawn** (the Survey Act).
+- **MUST DISPLAY**: the dataset titles, 豊中市, the licence by the name the
+  terms' example uses (クリエイティブ・コモンズ ライセンス表示 4.0 国際) with its
+  link, and that the data was modified (CC BY 4.0 §3(a)(1)(B)); MHLW's 出典
+  line and who processed it (the top page linked only); MLIT's credit lines.
+- **MUST NOT**: imply the city's endorsement (CC BY 4.0 §2(a)(6)); claim the
+  ministry's opt-in list is complete; use MHLW's logo.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py toyonaka` with its Japan pass, run
+  2026-10-07; the verdict is in `docs/decisions_drafts/worktree-japan-kansai-1.md`
+  ("Toyonaka built", 2026-10-07).<!-- /internal -->
+
+**170. Hirakata City, MHLW and MLIT (Hirakata) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with the Kansai-1
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-07; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's food list and
+  barber, beauty and laundry lists are **CC BY 2.1 JP** by the 利用条件 on each
+  dataset page; MHLW's open data is **PDL 1.0**, as in Sakai's (104); MLIT's
+  位置参照情報 and N02 (the 2025 edition) are **PDL 1.0**, as in Kobe's (50).
+  N03 (CC BY 4.0) only picks stations and is **never drawn** (the Survey Act).
+- **MUST DISPLAY**: the pages' 表示例 for an adaptation,
+  「この地図は以下の著作物を改変して利用しています。[データのタイトル]、枚方市、クリエイティブ・コモンズ・ライセンス 表示 2.1」,
+  with the licence URI; MHLW's 出典 line and who processed it (the top page
+  linked only); MLIT's credit lines. The city's pages are cited by title, not
+  linked (its linking policy asks for an enquiry before a deep link). The
+  unlinked credit was approved on 2026-10-07 (owner).
+- **MUST NOT**: claim the ministry's opt-in list is complete; use MHLW's logo.
+  Remove the city's credit if it asks (CC BY 2.1 JP 第5条).<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py hirakata` with its Japan pass, run
+  2026-10-07; the verdict is in `docs/decisions_drafts/worktree-japan-kansai-1.md`
+  ("Hirakata, Suita, Amagasaki and Uji built", 2026-10-07).<!-- /internal -->
+
+**171. Suita City, MHLW and MLIT (Suita) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with the Kansai-1
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-07; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's two food lists
+  and three registers are **CC BY 4.0** by the 衛生管理課 page and
+  吹田市オープンデータ利用規約; MHLW's open data is **PDL 1.0**, as in Sakai's
+  (104); MLIT's 位置参照情報 and N02 (the 2025 edition) are **PDL 1.0**, as in
+  Kobe's (50). N03 (CC BY 4.0) only picks stations and is **never drawn** (the
+  Survey Act).
+- **MUST DISPLAY**: the terms' form for a modified work (2(3)),
+  「この地図は以下の著作物を改変して利用しています。【タイトル】、吹田市、クリエイティブ・コモンズ・ライセンス表示 4.0（https://creativecommons.org/licenses/by/4.0/deed.ja）」;
+  MHLW's 出典 line and who processed it; MLIT's credit lines.
+- **MUST NOT** (§5): present the edited data as if the city made it; harm or
+  defame the city or others; use its logo; claim the ministry's opt-in list
+  is complete. The undefined harm and defamation bar was accepted knowingly on
+  2026-10-07 (owner), on the Taoyuan, Fukui and Maebashi precedents.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py suita` with its Japan pass, run
+  2026-10-07; the verdict is in `docs/decisions_drafts/worktree-japan-kansai-1.md`
+  ("Hirakata, Suita, Amagasaki and Uji built", 2026-10-07).<!-- /internal -->
+
+**172. Hyōgo Prefecture and MLIT (Itami) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with the Kansai-1
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-07; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). Hyōgo Prefecture's
+  生活衛生課 lists are **CC BY 4.0** through the catalogue's terms 3(3), which
+  2(1) put above the website's copyright page (the food lists through their
+  page's catalogue entry, on Ōtsu's precedent); MLIT's 位置参照情報 and N02
+  (the 2025 edition) are **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only
+  picks stations and is **never drawn** (the Survey Act).
+- **MUST DISPLAY**: the terms' form for a modified work (3(3)②),
+  「この地図は、以下の著作物を改変して利用しています。[タイトル]、兵庫県」, with
+  the titles, the CC BY 4.0 link and a statement of change; MLIT's credit lines.
+- **MUST NOT**: present the edited data as if the prefecture made it
+  (3(3)②); imply endorsement.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py itami` with its Japan pass, run
+  2026-10-07; the verdict is in `docs/decisions_drafts/worktree-japan-kansai-1.md`
+  ("Itami built", 2026-10-07).<!-- /internal -->
+
+**173. Hyōgo Prefecture and MLIT (Kakogawa) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with the Kansai-1
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS**: the same sources and terms as Itami's (172),
+  with Kakogawa's rows of the same lists.
+- **MUST DISPLAY** and **MUST NOT**: as 172.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py kakogawa` with its Japan pass, run
+  2026-10-07; the verdict is in `docs/decisions_drafts/worktree-japan-kansai-1.md`
+  ("Kakogawa built", 2026-10-07).<!-- /internal -->
+
+**174. Amagasaki City and MLIT (Amagasaki) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with the Kansai-1
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-07; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's food permit
+  and notification lists and its barber, beauty and laundry registers are
+  **CC BY 4.0** by each open-data page and 尼崎市オープンデータ利用規約 §2;
+  MLIT's 位置参照情報 and N02 (the 2025 edition) are **PDL 1.0**, as in Kobe's
+  (50). N03 (CC BY 4.0) only picks stations and is **never drawn** (the Survey
+  Act). MHLW's file for the city is a control only and is not credited.
+- **MUST DISPLAY** (§3): the source and that it was modified; no wording is
+  prescribed, so Yokkaichi's 出典 form with the titles, 尼崎市, the date and
+  the licence link; MLIT's credit lines.
+- **MUST NOT** (§6): present the edited data as if the city made it; harm or
+  defame the city or others; imply endorsement. The undefined harm and
+  defamation bar was accepted knowingly on 2026-10-07 (owner), on the Taoyuan,
+  Fukui and Maebashi precedents.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py amagasaki` with its Japan pass, run
+  2026-10-07; the verdict is in `docs/decisions_drafts/worktree-japan-kansai-1.md`
+  ("Hirakata, Suita, Amagasaki and Uji built", 2026-10-07).<!-- /internal -->
+
+**175. MHLW and MLIT (Uji) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with the Kansai-1
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS** (the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). MHLW's open data for Kyoto
+  Prefecture is **PDL 1.0**, as in Kurume's (126); MLIT's 位置参照情報 and N02
+  (the 2025 edition) are **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only
+  picks stations and is **never drawn** (the Survey Act). No city source is
+  used.
+- **MUST DISPLAY**: `出典：「食品衛生申請等システム」（厚生労働省）（https://i2fas.mhlw.go.jp/）の「食品等営業許可・届出一覧」を加工して作成`,
+  who processed it (the top page linked only); MLIT's credit lines.
+- **MUST NOT**: present it as MHLW's own; use MHLW's logo; claim the list is
+  complete or accurate.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py uji` with its Japan pass, run
+  2026-10-07; the verdict is in `docs/decisions_drafts/worktree-japan-kansai-1.md`
+  ("Hirakata, Suita, Amagasaki and Uji built", 2026-10-07).<!-- /internal -->
+
+**176. Maebashi City, MHLW and MLIT (Maebashi) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with the Regional-1
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-05; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's food file is
+  **CC BY 4.0** under the 前橋市オープンデータ利用規約 第１条; its 生活衛生
+  registers are labelled **CC BY 2.1 JP** against the terms' 4.0, so one
+  credit names both (owner, 2026-10-05). MHLW's open data is **PDL 1.0**, as
+  in Sasebo's (127); MLIT's 位置参照情報 and N02 (the 2025 edition) are **PDL
+  1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks stations and is
+  **never drawn** (the Survey Act).
+- **MUST DISPLAY**: each list's title and copyright holder (第６条), the
+  licence links, that the data was modified; MHLW's 出典 line and who
+  processed it; MLIT's credit lines.
+- **MUST NOT**: claim either list complete or current (第３条); imply
+  endorsement; use MHLW's logo. **MUST DO, on notice only**: remove the
+  registers' credit if the city asks (CC BY 2.1 JP 第5条).<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py maebashi` with its Japan pass, run
+  2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-regional-1.md` ("Maebashi built",
+  2026-10-07).<!-- /internal -->
+
+**177. Fukuyama City, MHLW and MLIT (Fukuyama) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with the Regional-1
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-04; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's two lists on
+  its CKAN catalogue declare `cc-by` with no version; the catalogue's terms
+  apply **PDL 1.0**, whose 1.7 allows use under **CC BY 4.0**, so one credit
+  meets both (Kumamoto's, 99). MHLW's open data is **PDL 1.0**, as in Sasebo's
+  (127); MLIT's 位置参照情報 and N02 (the 2025 edition) are **PDL 1.0**, as in
+  Kobe's (50). N03 (CC BY 4.0) only picks stations and is **never drawn** (the
+  Survey Act).
+- **MUST DISPLAY**: the city's 重要情報 1.1 form for a processed work,
+  `「営業許認可等施設一覧（食品衛生関係）」（福山市）（<dataset URL>）を加工して作成`, and
+  likewise for 環境衛生関係, with who processed them and the CC BY 4.0 link;
+  MHLW's 出典 line and who processed it, linking its top page only; MLIT's
+  credit lines.
+- **MUST NOT**: present the processed data as the city's or MHLW's own; use
+  city or ministry logos; claim either list complete or current (both say
+  closed premises may remain).<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py fukuyama` with its Japan pass, run
+  2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-regional-1.md` ("Fukuyama built",
+  2026-10-07).<!-- /internal -->
+
+**178. Ichinomiya City, MHLW and MLIT (Ichinomiya) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with the Regional-1
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-06; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). Every list is **CC BY
+  4.0** as its dataset page states, under the 一宮市オープンデータカタログサイト
+  利用規約 (2024-08-02) 3(2). MHLW's open data is **PDL 1.0**, as in Sasebo's
+  (127); MLIT's 位置参照情報 and N02 (the 2025 edition) are **PDL 1.0**, as in
+  Kobe's (50). N03 (CC BY 4.0) only picks stations and is **never drawn** (the
+  Survey Act).
+- **MUST DISPLAY**: the terms' credit for a modified work (3(2)(イ)): each
+  list's title, 一宮市 and the licence with its link; MHLW's 出典 line and who
+  processed it; MLIT's credit lines.
+- **MUST NOT**: present the processed lists as if the city made them (3(1));
+  claim them complete (4(1)); imply endorsement; use MHLW's logo.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py ichinomiya` with its Japan pass, run
+  2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-regional-1.md` ("Ichinomiya built",
+  2026-10-07).<!-- /internal -->
+
+**179. Mie Prefecture and MLIT (Tsu) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with the Regional-1
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-07 by staging; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). Mie Prefecture's three
+  lists on BODIK are **CC BY 4.0** under the 三重県オープンデータ利用規約
+  第１条 (no resource sets its own licence; accepted by use; the terms change
+  without notice). MLIT's 位置参照情報 and N02 (the 2025 edition) are **PDL
+  1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks stations and is
+  **never drawn** (the Survey Act).
+- **MUST DISPLAY**: the three list titles, 三重県（医療保健部食品安全課）, the
+  date 2026年8月末時点, the three dataset pages linked, the CC BY 4.0 link,
+  that the data was modified; MLIT's credit lines.
+- **MUST NOT**: use the prefecture's logo (第３条); imply endorsement; claim
+  completeness. Cost: 第４条, the fault-based class (accepted for Japan,
+  2026-09-24).<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py tsu` with its Japan pass, run
+  2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-regional-1.md` ("Tsu built",
+  2026-10-07).<!-- /internal -->
+
+**180. Fukushima City and MLIT (Fukushima) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with the Regional-1
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-06; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's lists are
+  **CC BY 2.1 JP** under the 福島市オープンデータ利用規約 ２(２), which the
+  city's open-data list sends every user to; the list page itself carries no
+  licence line. MLIT's 位置参照情報 and N02 (the 2025 edition) are **PDL 1.0**,
+  as in Kobe's (50). N03 (CC BY 4.0) only picks stations and is **never
+  drawn** (the Survey Act).
+- **MUST DISPLAY** (２(３), the form for a modified work): 「この地図は以下の著作物を改変して利用しています。食品営業許可施設一覧、新規食品営業許可施設一覧、理容所一覧、新規開設理容所一覧、美容所一覧、新規開設美容所一覧、クリーニング所一覧、コインオペレーションクリーニング一覧、福島市、クリエイティブ・コモンズ・ライセンス 表示 2.1 日本（http://creativecommons.org/licenses/by/2.1/jp/）」;
+  MLIT's credit lines.
+- **MUST NOT**: imply the city's endorsement; say the pins are businesses
+  open now. **Cost**: ４, the city's costs arising from our use, our breach
+  or our infringement reimbursed, uncapped: accepted by the owner
+  (2026-10-06, call 110).<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py fukushima` with its Japan pass,
+  run 2026-10-07 and again after the register months (call 210); the verdict is in
+  `docs/decisions_drafts/worktree-japan-regional-1.md` ("Fukushima built",
+  2026-10-07).<!-- /internal -->
+
+**181. Iwaki City and MLIT (Iwaki) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with the Regional-1
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-07 by staging; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's food list and
+  its barber and beauty list are **CC BY 4.0** as each dataset page states.
+  The food page's 「表示4.0日本」 names a port that does not exist (the linked
+  deed is 4.0 国際), and the city's general open-data page still says CC BY
+  2.1 JP: credited as CC BY 4.0, the dataset pages' own and newer statement.
+  MLIT's 位置参照情報 and N02 (the 2025 edition) are **PDL 1.0**, as in
+  Kobe's (50). N03 (CC BY 4.0) only picks stations and is **never drawn**
+  (the Survey Act).
+- **MUST DISPLAY**: CC BY 4.0's attribution with the lists' titles, いわき市,
+  the licence link and that the data was modified; MLIT's credit lines.
+- **MUST NOT**: imply endorsement. No indemnity or cost clause; the showcase
+  invitation is not a duty.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py iwaki` with its Japan pass, run
+  2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-regional-1.md` ("Iwaki built",
+  2026-10-07).<!-- /internal -->
+
+**182. Akita City, MHLW and MLIT (Akita) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with the Regional-1
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-07 by staging; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's food list and
+  its barber and beauty registers are **CC BY 4.0** as each dataset page
+  states; the city's 利用にあたって page adds nothing more restrictive and
+  prescribes no wording. MHLW's open data is **PDL 1.0**, as in Sasebo's
+  (127); MLIT's 位置参照情報 and N02 (the 2025 edition) are **PDL 1.0**, as in
+  Kobe's (50). N03 (CC BY 4.0) only picks stations and is **never drawn** (the
+  Survey Act).
+- **MUST DISPLAY**: CC BY 4.0's attribution with the edition titles used
+  (the food file is renamed monthly), 秋田市, the licence link and that the
+  data was modified; MHLW's 出典 line and who processed it; MLIT's credit
+  lines.
+- **MUST NOT**: imply endorsement; use MHLW's logo; claim the ministry's list
+  complete. The city's request that users report their use is not a
+  condition; nothing was sent.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py akita` with its Japan pass, run
+  2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-regional-1.md` ("Akita built",
+  2026-10-07).<!-- /internal -->
+
+**183. Ōita City, MHLW and MLIT (Ōita) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with the Regional-1
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-07 by staging; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). Every list is **CC BY
+  4.0** as its BODIK dataset records (`cc-by-40-intl`), under the
+  大分市オープンデータ利用規約 (令和5年3月15日), which is compatible with it.
+  The monthly lists of new beauty salons and laundries (`442011_beauty_salon_new`,
+  `442011_cleaning_new`; call 211) and the notification list
+  (`442011_licensed_facility`, すべての営業届出施設一覧; call 212), all used
+  2026-10-07, record the same licence (`package_show`, 2026-10-07).
+  MHLW's open data is **PDL 1.0**, as in Sasebo's (127); since call 212 its
+  file lends only its own coordinates to a premises the city's lists hold
+  (Toyama's, 98), and nothing of it is drawn. MLIT's 位置参照情報 and
+  N02 (the 2025 edition) are **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0)
+  only picks stations and is **never drawn** (the Survey Act).
+- **MUST DISPLAY**: the terms' §1 credit in its 記載例 form,
+  「○○データ」（大分市）（URL）（利用日）を加工して作成, one per list, with the CC BY
+  4.0 link; MHLW's 出典 line and who processed it; MLIT's credit lines.
+- **MUST NOT**: present the processed lists as the city's; use the city's
+  logos (§3); imply endorsement. No indemnity or cost clause.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py oita` with its Japan pass, run
+  2026-10-07 and re-run the same day after call 212 (0 of 6,406 rows); the
+  verdict is in `docs/decisions_drafts/worktree-japan-regional-1.md`
+  ("Ōita built", 2026-10-07).<!-- /internal -->
+
+**184. Gifu City and MLIT (Gifu) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with the Regional-1
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-06 by staging; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). Gifu City's two packages
+  on Gifu Prefecture's CKAN (c212016-072, food permits and notifications;
+  c212016-075, barber and beauty registers) are **CC BY 2.0** as each dataset
+  page declares (`license_id` CC-BY-2.0, author 岐阜市); the
+  岐阜県オープンデータカタログサイト利用規約 prescribes the credit for a modified
+  work (3), binds by use and changes without notice (1). MLIT's 位置参照情報
+  and N02 (the 2025 edition) are **PDL 1.0**, as in Kobe's (50). N03 (CC BY
+  4.0) only picks stations and is **never drawn** (the Survey Act).
+- **MUST DISPLAY**: the terms' form for a modified work, with the two list
+  titles, 岐阜市 and the CC BY 2.0 link; the two dataset pages linked; MLIT's
+  credit lines.
+- **MUST NOT**: imply endorsement; use the city page's newer food list, which
+  needs the food hygiene section's permission. Cost: 5, reimbursement of
+  costs from the user's own breach or infringement, the fault-based class
+  (accepted for Japan, 2026-09-24).<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py gifu` with its Japan pass, run
+  2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-regional-1.md` ("Gifu built",
+  2026-10-07).<!-- /internal -->
+
+**185. Mito City, MHLW and MLIT (Mito) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with the Regional-1
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-07 by staging; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's barber,
+  beauty-salon and laundry lists are **CC-BY with no version given**, as the
+  dataset page states (「ライセンス CC-BY」, 「コピーライト 水戸市役所」); no
+  open-data 利用規約 exists, and the dataset's own label is the permission
+  (Bremen's precedent, call 196). MHLW's open data, the city's food list, is
+  **PDL 1.0**, as in Kurume's (126); MLIT's 位置参照情報 and N02 (the 2025
+  edition) are **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks
+  stations and is **never drawn** (the Survey Act).
+- **MUST DISPLAY**: the licence as the city states it ("CC-BY, no version
+  given"), the copyright line 水戸市役所, the title 生活衛生関係施設一覧, a link to
+  the dataset page and that the data was modified; MHLW's 出典 line and who
+  processed it; MLIT's credit lines.
+- **MUST NOT**: use the city banner as a logo; imply endorsement; say
+  "currently operating"; use MHLW's logo; claim the ministry's list
+  complete.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py mito` with its Japan pass, run
+  2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-regional-1.md` ("Mito built",
+  2026-10-07).<!-- /internal -->
+
+**186. Morioka City, MHLW and MLIT (Morioka) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-07; lands with the Regional-1
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-07 by staging; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's food list and
+  its barber, beauty and laundry lists are **CC BY 4.0** as both dataset pages
+  state, through the 盛岡市オープンデータ利用規約 (terms PDF, undated), which
+  binds on use; on the registers' page only the CSVs are open, and only the
+  CSVs are read. MHLW's open data is **PDL 1.0**, as in Sasebo's (127);
+  MLIT's 位置参照情報 and N02 (the 2025 edition) are **PDL 1.0**, as in Kobe's
+  (50). N03 (CC BY 4.0) only picks stations and is **never drawn** (the
+  Survey Act).
+- **MUST DISPLAY** (§2(2)ア, イ): a 出典 line (盛岡市オープンデータサイト, cited
+  at `https://www.city.morioka.iwate.jp/shisei/johokokai/opendata/index.html`
+  since the terms' example URL died with the city's 2026-10-01 renewal; the
+  four list titles; the CC BY 4.0 link) and a separate processing line
+  (「…（盛岡市ホームページ）を加工して作成」); MHLW's 出典 line and who processed
+  it; MLIT's credit lines.
+- **MUST NOT**: present the processed lists as the city's (§2(2)イ); imply
+  endorsement; claim the ministry's list complete. §3(2) (own cost) and §4
+  (reimbursement of costs from the user's own breach or infringement) are
+  fault-based, the class accepted for Japan (2026-09-24). The terms change
+  without notice: re-read them before publishing.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py morioka` with its Japan pass, run
+  2026-10-07; the verdict is in
+  `docs/decisions_drafts/worktree-japan-regional-1.md` ("Morioka built",
+  2026-10-07). Re-read the terms PDF
+  (`/_res/projects/default_project/_page_/001/024/522/opendateriyokiyaku.pdf`)
+  at review time, before publishing.<!-- /internal -->
 
 
 ## Gaps

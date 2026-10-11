@@ -21,6 +21,8 @@ names from OpenStreetMap's name:en (owner, 2026-09-27).
 
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -207,7 +209,19 @@ COLLAPSE_MAX_SPREAD_M = 300
 # (lightness weighted half). Result: pins 45.0-74.8, closest line pair 18.2
 # (the Tozai Line and JR Chitose, both orange). The streetcar left green for
 # olive (#586818) and the Gakuen Toshi Line blue for violet (#8858F0) to fit.
+# FOOD SHOPS OLIVE (#737a00, 2026-10-07) arrived after this search: the
+# streetcar's #586818 sat 15.8 from it, under the owner's floor of 20
+# (2026-10-07), and moved to #506C30, a greener olive: the colour nearest its
+# own that reads 3:1 on both pages and clears 25 from every pin and 18 from
+# every other line (olive 25.6, nearest line JR Hakodate Main 40.0). Four of
+# seven lines sit between 20 and 45 from olive (JR Hakodate Main #70A000 24.5,
+# the streetcar 25.6, Namboku 41.4, JR Chitose 43.0), an accepted trade
+# (owner, 2026-10-07).
 _JR, _SC, _STR = "北海道旅客鉄道", "札幌市", "一般社団法人札幌市交通事業振興公社"
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
 LINES = {
     # Sapporo Municipal Subway (札幌市交通局)
     "N": {"n02": [(_SC, "南北線")], "name": "Namboku Line", "name_ja": "南北線", "colour": "#40A800",
@@ -218,9 +232,9 @@ LINES = {
           "short": "Subway"},
     # The streetcar
     "SC": {"n02": [(_STR, "1条線"), (_STR, "都心線"), (_STR, "山鼻西線"), (_STR, "山鼻線")],
-           "name": "Sapporo Streetcar", "name_ja": "札幌市電", "colour": "#586818", "short": "Streetcar"},
+           "name": "Sapporo Streetcar", "name_ja": "札幌市電", "colour": "#506C30", "short": "Streetcar"},
     # JR Hokkaido (北海道旅客鉄道)
-    "JH": {"n02": [(_JR, "函館線")], "name": "JR Hakodate Main Line", "name_ja": "函館本線", "colour": "#70A000",
+    "JH": {"n02": [(_JR, "函館線")], "name": "JR Hakodate Main Line", "name_ja": "函館本線", "colour": line_registry.colour("jr-hokkaido-hakodate-main-line"),
            "short": "JR"},
     "JC": {"n02": [(_JR, "千歳線")], "name": "JR Chitose Line", "name_ja": "千歳線", "colour": "#D08000",
            "short": "JR"},

@@ -1,0 +1,99 @@
+{
+  "city_barber": {
+    "as_of": "2026-09-30",
+    "bytes": 44638,
+    "dataset_page": "https://www.city.morioka.iwate.jp/kenko_fukushi/hokenjo/shokuhineisei/seikatsueisei/1034998.html",
+    "file": "032018_riyou_202609.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:42:33+00:00",
+    "rows": 328,
+    "sha256": "da356e19d6170037161b6bdedeebd75bed48c0b18989554ad900359dc1693211",
+    "url": "https://www.city.morioka.iwate.jp/_res/projects/default_project/_page_/001/034/998/R8/032018_riyou_202609.csv"
+  },
+  "city_beauty": {
+    "as_of": "2026-09-30",
+    "bytes": 110776,
+    "dataset_page": "https://www.city.morioka.iwate.jp/kenko_fukushi/hokenjo/shokuhineisei/seikatsueisei/1034998.html",
+    "file": "032018_biyou_202609.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:42:37+00:00",
+    "rows": 756,
+    "sha256": "bda7d3ab99289793e9599ead4c750dd316949e86c7012d545fea3da5ccf0e44a",
+    "url": "https://www.city.morioka.iwate.jp/_res/projects/default_project/_page_/001/034/998/R8/032018_biyou_202609.csv"
+  },
+  "city_food": {
+    "as_of": "2026-08-31",
+    "bytes": 802229,
+    "dataset_page": "https://www.city.morioka.iwate.jp/kenko_fukushi/hokenjo/shokuhineisei/1017014/1006689.html",
+    "file": "20260831.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:42:29+00:00",
+    "rows": 4379,
+    "sha256": "602e3a075f9eeceb5491f3aa135fed24aaca01bb5b6cff922baa5006396ba808",
+    "url": "https://www.city.morioka.iwate.jp/_res/projects/default_project/_page_/001/006/689/20260831.csv"
+  },
+  "city_laundry": {
+    "as_of": "2026-09-30",
+    "bytes": 50521,
+    "dataset_page": "https://www.city.morioka.iwate.jp/kenko_fukushi/hokenjo/shokuhineisei/seikatsueisei/1034998.html",
+    "file": "032018_cleaning_202609.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:42:41+00:00",
+    "rows": 286,
+    "sha256": "2e8154869c2691720e2e33619154c34b58882214a90d856566de7655a5eb480a",
+    "url": "https://www.city.morioka.iwate.jp/_res/projects/default_project/_page_/001/034/998/R8/032018_cleaning_202609.csv"
+  },
+  "city_mhlw": {
+    "as_of": null,
+    "bytes": 2395512,
+    "dataset_page": "https://i2fas.mhlw.go.jp/",
+    "file": "03201_food_business_all.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:42:45+00:00",
+    "rows": 6495,
+    "sha256": "635cfbeb9f1ff01c2a140e51d9832529ae0ea0f2e43393d4aebd05de4d62d90d",
+    "url": "https://i2fas.mhlw.go.jp/faspub/page/opendatadownload.jsp?param=03201_food_business_all.csv"
+  },
+  "isj_03201_block": {
+    "bytes": 279750,
+    "file": "03201-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:42:49+00:00",
+    "sha256": "7b4b44e62a2a712a15648e1f88c4a05182907e067810e3abdba41e5f53afec6a",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/03201-24.0a.zip"
+  },
+  "isj_03201_chome": {
+    "bytes": 11368,
+    "file": "03201-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:42:52+00:00",
+    "sha256": "45b3dcc00050132520c98620837824c23baac6730e53a00c3ec3e4fb7c944b5e",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/03201-19.0b.zip"
+  },
+  "n02": {
+    "bytes": 14903774,
+    "file": "data/japan/raw/N02-25_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-30T23:47:52+00:00",
+    "sha256": "aaf76af133b2e771e538fabc4646d2e443dc1d5a67b221382a28d744e706cc9f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip"
+  },
+  "n03": {
+    "bytes": 22171310,
+    "file": "data/japan/raw/N03-20250101_03_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T00:22:27+00:00",
+    "sha256": "6db1628d6af14f04699a8957d576b8fe954cf363ccb8aab0cbe284561c49a588",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_03_GML.zip"
+  },
+  "osm_station_names": {
+    "bytes": 11859,
+    "elements": 25,
+    "file": "osm_station_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-10-07T20:21:36Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](39.56,140.99,39.94,141.53);way[\"railway\"=\"station\"](39.56,140.99,39.94,141.53););out tags center;",
+    "retrieved": "2026-10-07T20:23:39+00:00",
+    "sha256": "b1cd92821c9be9b2f280b565fff6d7826ca67d7a9f5d4f08a25d6aba2f5b0ff4"
+  }
+}

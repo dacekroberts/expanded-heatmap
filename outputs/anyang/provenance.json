@@ -41,5 +41,13 @@
       "relation": 1
     },
     "osm_base": "2026-10-01T01:29:13Z"
+  },
+  "osm_boundary_regional": {
+    "file": "osm_boundary_regional.json",
+    "host": "overpass-api.de",
+    "query": "[out:json][timeout:240];relation[\"boundary\"=\"administrative\"][\"admin_level\"=\"6\"][\"name\"~\"^(안양시|군포시|의왕시)$\"](37.28,126.85,37.47,127.05);out geom;",
+    "bytes": 63715,
+    "sha256": "8c67671de06d857f0a9d735e48cb6c422d3616d148dbb8079196f29377a0e1c3",
+    "osm_base": "2026-10-07T08:22:26Z"
   }
 }

@@ -19,10 +19,12 @@ MHLW's own point (OWN_POINT_FALLBACK).
 
 Rail: MLIT N02-25 (not GTFS, not OSM), stations kept only inside the city line
 (N03). The city tram, Kumamoto Electric Railway's two lines and JR Kyushu's
-Kagoshima and Hohi lines. English station names from OpenStreetMap's name:en.
+Kagoshima and Hohi main lines. English station names from OpenStreetMap's name:en.
 """
 
 from pathlib import Path
+
+from pipeline import line_registry
 
 # --- Paths ---------------------------------------------------------------
 
@@ -183,7 +185,7 @@ SPACING_MIN_M = 200.0
 # 2026-10-02: 9 legal lines, no Shinkansen; 熊本 on the 九州新幹線 is dropped
 # and stays a JR station): the city tram's five sections (all wholly inside),
 # Kumamoto Electric's Fujisaki Line (3 of 3) and Kikuchi Line (9 of 16), and
-# JR Kyushu's Kagoshima Main Line (9 of 99) and Hohi Line (9 of 37), cut at
+# JR Kyushu's Kagoshima Main Line (9 of 99) and Hohi Main Line (9 of 37), cut at
 # the city line (owner 2026-09-24). No line is cut to a stub. 光の森 sits 41 m
 # inside the N03 line: its address is 熊本市北区武蔵ケ丘九丁目 (part of its
 # grounds in 菊陽町), so the cut keeps it rightly (2026-10-02). JR's 三角線 has
@@ -209,14 +211,22 @@ LINES = {
            "hue": "#E4007F"},
     "JK": {"n02": [(_JK, "鹿児島線")], "name": "JR Kagoshima Main Line", "name_ja": "鹿児島本線", "short": "JR",
            "hue": "#E60012"},
-    "JH": {"n02": [(_JK, "豊肥線")], "name": "JR Hohi Line", "name_ja": "豊肥本線", "short": "JR", "hue": "#E60012"},
+    "JH": {"n02": [(_JK, "豊肥線")], "name": "JR Hohi Main Line", "name_ja": "豊肥本線", "short": "JR", "hue": "#E60012"},
 }
 # Colours: the project's own, from `python scripts/line_colour_search.py
 # kumamoto` (2026-10-02, defaults: >= 18 within 500 m, >= 10 city-wide): each
 # the feasible colour nearest its operator's hue that reads 3:1 on both map
 # pages and clears CIE76 45 from every pin. Closest pair 18.1 (JR's two
 # lines, which share 熊本); the dark-mode labels separate, 5 of 5.
-_COLOURS = {"TR": "#28A800", "KK": "#F000B8", "KF": "#E858D0", "JK": "#E80010", "JH": "#F05030"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+_COLOURS = {
+    "TR": "#28A800", "KK": "#F000B8", "KF": "#E858D0",
+    "JK": line_registry.colour("jr-kyushu-kagoshima-main-line"),
+    "JH": line_registry.colour("jr-kyushu-hohi-main-line"),
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

@@ -1,0 +1,55 @@
+{
+  "city_mhlw": {
+    "as_of": null,
+    "bytes": 8824655,
+    "dataset_page": "https://i2fas.mhlw.go.jp/",
+    "file": "26000_food_business_all.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T19:25:48+00:00",
+    "rows": 21125,
+    "sha256": "6a0808e5cdcc295247bb48922f3bc23347c58c7f69fa1e40374ccd9ffaf7e585",
+    "url": "https://i2fas.mhlw.go.jp/faspub/page/opendatadownload.jsp?param=26000_food_business_all.csv"
+  },
+  "isj_26204_block": {
+    "bytes": 122551,
+    "file": "26204-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T19:25:49+00:00",
+    "sha256": "7cd7cf9c9aee8d54db56293d1db1f1ec63cb5f86adbe6642dcb0800cd14027d6",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/26204-24.0a.zip"
+  },
+  "isj_26204_chome": {
+    "bytes": 5568,
+    "file": "26204-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T19:25:50+00:00",
+    "sha256": "cb5445b4ca112d05faa6d3af466f4a89d6e80ed3113205b086a3014f0f3af13c",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/26204-19.0b.zip"
+  },
+  "n02": {
+    "bytes": 14903774,
+    "file": "data/japan/raw/N02-25_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-30T23:47:52+00:00",
+    "sha256": "aaf76af133b2e771e538fabc4646d2e443dc1d5a67b221382a28d744e706cc9f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip"
+  },
+  "n03": {
+    "bytes": 4265154,
+    "file": "data/japan/raw/N03-20250101_26_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:54:03+00:00",
+    "sha256": "93318ba76fbc30bd6ce44b0bd3d0be599d6130cab07b6e734c9f464e40fd6515",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_26_GML.zip"
+  },
+  "osm_station_names": {
+    "bytes": 24633,
+    "elements": 34,
+    "file": "osm_station_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-10-07T20:08:21Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](34.85,135.75,34.96,135.89);way[\"railway\"=\"station\"](34.85,135.75,34.96,135.89););out tags center;",
+    "retrieved": "2026-10-07T20:09:50+00:00",
+    "sha256": "c2f2b5baa5736711002835f158275bc01963a04075d0e2bdb8b7e3a77851a97c"
+  }
+}

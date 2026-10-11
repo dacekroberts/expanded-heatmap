@@ -31,7 +31,9 @@ from pipeline.copenhagen.config import (  # noqa: E402
     HEATMAP_HTML,
     LINE_COLOURS,
     LINE_NAMES,
+    NAME,
     OSM_ROUTES_JSON,
+    REGIONAL,
     RING_EDGES_METERS,
     RING_LABELS,
     STATIONS_CSV,
@@ -40,7 +42,7 @@ from pipeline.copenhagen.config import (  # noqa: E402
 from pipeline.copenhagen.kommuner import scope_geometry  # noqa: E402
 from pipeline.map_common import load_osm_line_shapes, render_heatmap  # noqa: E402
 
-SYSTEM = "Metro and S-tog"
+SYSTEM = "Metro, S-tog and Letbane" if REGIONAL else "Metro and S-tog"
 
 # Per-line label end override: "start" or "end". Default picks the tail
 # farthest from the other lines, on the stretch inside the two kommuner.
@@ -66,8 +68,8 @@ def main():
 
     render_heatmap(
         output_path=HEATMAP_HTML,
-        map_title="Copenhagen Metro and S-tog Business Density Heatmap",
-        city_name="Copenhagen",
+        map_title=f"Copenhagen {SYSTEM} Business Density Heatmap",
+        city_name=NAME,
         system_name=SYSTEM,
         stations=stations,
         businesses=businesses,

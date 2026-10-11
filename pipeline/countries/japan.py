@@ -104,6 +104,16 @@ CITIES = {
     # Band B 2026-09-29 (owner): food only, the 8 wards
     "hiroshima": {"name": "広島市", "pref": "34", "epsg": 32653, "n02": "25", "rules": WAVE2_RULES,
                   "wards": [f"341{n:02d}" for n in range(1, 9)]},
+    # Kansai-1 (the A/B build plan, 2026-10-07), each on N02-25 as its brief
+    # measured, one municipality each ("wardless"), and the foundation's
+    # ALL_RULES (no "rules" key).
+    "toyonaka": {"name": "豊中市", "pref": "27", "epsg": 32653, "n02": "25", "wardless": True, "wards": ["27203"]},
+    "hirakata": {"name": "枚方市", "pref": "27", "epsg": 32653, "n02": "25", "wardless": True, "wards": ["27210"]},
+    "suita": {"name": "吹田市", "pref": "27", "epsg": 32653, "n02": "25", "wardless": True, "wards": ["27205"]},
+    "itami": {"name": "伊丹市", "pref": "28", "epsg": 32653, "n02": "25", "wardless": True, "wards": ["28207"]},
+    "kakogawa": {"name": "加古川市", "pref": "28", "epsg": 32653, "n02": "25", "wardless": True, "wards": ["28210"]},
+    "amagasaki": {"name": "尼崎市", "pref": "28", "epsg": 32653, "n02": "25", "wardless": True, "wards": ["28202"]},
+    "uji": {"name": "宇治市", "pref": "26", "epsg": 32653, "n02": "25", "wardless": True, "wards": ["26204"]},
     # The 2026-10-01 batch (owner released 2026-10-02), each on N02-25 as its
     # brief measured (Kagoshima's 仙巌園 and Fukui's Hapi-line are not in
     # N02-24; Sakai's Semboku line is under Nankai only in N02-25). "wardless":
@@ -133,6 +143,20 @@ CITIES = {
                 "wards": [f"3310{n}" for n in range(1, 5)]},
     "kochi": {"name": "高知市", "pref": "39", "epsg": 32653, "n02": "25", "rules": WAVE2_RULES, "wardless": True,
               "wards": ["39201"]},
+    # The A/B build plan's Regional-1 batch (owner, 2026-10-07), each on N02-25
+    # as its brief measured, every shared rule on (no "rules" key). Kept apart
+    # from the dict's end, where the other build sessions append.
+    "maebashi": {"name": "前橋市", "pref": "10", "epsg": 32654, "n02": "25", "wardless": True, "wards": ["10201"]},
+    "fukuyama": {"name": "福山市", "pref": "34", "epsg": 32653, "n02": "25", "wardless": True, "wards": ["34207"]},
+    "ichinomiya": {"name": "一宮市", "pref": "23", "epsg": 32653, "n02": "25", "wardless": True, "wards": ["23203"]},
+    "tsu": {"name": "津市", "pref": "24", "epsg": 32653, "n02": "25", "wardless": True, "wards": ["24201"]},
+    "fukushima": {"name": "福島市", "pref": "07", "epsg": 32654, "n02": "25", "wardless": True, "wards": ["07201"]},
+    "iwaki": {"name": "いわき市", "pref": "07", "epsg": 32654, "n02": "25", "wardless": True, "wards": ["07204"]},
+    "akita": {"name": "秋田市", "pref": "05", "epsg": 32654, "n02": "25", "wardless": True, "wards": ["05201"]},
+    "oita": {"name": "大分市", "pref": "44", "epsg": 32652, "n02": "25", "wardless": True, "wards": ["44201"]},
+    "gifu": {"name": "岐阜市", "pref": "21", "epsg": 32653, "n02": "25", "wardless": True, "wards": ["21201"]},
+    "mito": {"name": "水戸市", "pref": "08", "epsg": 32654, "n02": "25", "wardless": True, "wards": ["08201"]},
+    "morioka": {"name": "盛岡市", "pref": "03", "epsg": 32654, "n02": "25", "wardless": True, "wards": ["03201"]},
     # Japan wave 2 (owner released 2026-10-02), each on N02-25 as its brief
     # measured. Hamamatsu's three wards are the 2024-01-01 ones (中央区 22138,
     # 浜名区 22139, 天竜区 22140): MLIT's ISJ and N03 key them so, and the old
@@ -167,6 +191,36 @@ CITIES = {
                "wards": ["42202"]},
     "shimonoseki": {"name": "下関市", "pref": "35", "epsg": 32652, "n02": "25", "rules": WAVE2_RULES, "wardless": True,
                     "wards": ["35201"]},
+    # East-1 (the A and B build plan, 2026-10-07): the Tama cities on the
+    # Tokyo Metropolitan Government's ledgers, each cut by its address. No
+    # "rules": a city built after the foundation reads ALL_RULES.
+    "higashiyamato": {"name": "東大和市", "pref": "13", "epsg": 32654, "n02": "25", "wardless": True,
+                      "wards": ["13220"]},
+    "nishitokyo": {"name": "西東京市", "pref": "13", "epsg": 32654, "n02": "25", "wardless": True,
+                   "wards": ["13229"]},
+    "tama": {"name": "多摩市", "pref": "13", "epsg": 32654, "n02": "25", "wardless": True,
+             "wards": ["13224"]},
+    "higashimurayama": {"name": "東村山市", "pref": "13", "epsg": 32654, "n02": "25", "wardless": True,
+                        "wards": ["13213"]},
+    # Ageo City and Ina Town on one page (owner, call 102): each row keyed by
+    # its municipality as MLIT's 市区町村名 writes it (the foundation's S28)
+    "ageo_regional": {"name": "上尾市", "pref": "11", "epsg": 32654, "n02": "25", "wardless": True,
+                      "wards": ["11219", "11301"],
+                      "municipalities": {"11219": "上尾市", "11301": "北足立郡伊奈町"}},
+    "soka": {"name": "草加市", "pref": "11", "epsg": 32654, "n02": "25", "wardless": True,
+             "wards": ["11221"]},
+    "tokorozawa": {"name": "所沢市", "pref": "11", "epsg": 32654, "n02": "25", "wardless": True,
+                   "wards": ["11208"]},
+    "kasukabe": {"name": "春日部市", "pref": "11", "epsg": 32654, "n02": "25", "wardless": True,
+                 "wards": ["11214"]},
+    "fuchu_tokyo": {"name": "府中市", "pref": "13", "epsg": 32654, "n02": "25", "wardless": True,
+                    "wards": ["13206"]},
+    "chofu": {"name": "調布市", "pref": "13", "epsg": 32654, "n02": "25", "wardless": True,
+              "wards": ["13208"]},
+    "tachikawa": {"name": "立川市", "pref": "13", "epsg": 32654, "n02": "25", "wardless": True,
+                  "wards": ["13202"]},
+    "hino": {"name": "日野市", "pref": "13", "epsg": 32654, "n02": "25", "wardless": True,
+             "wards": ["13212"]},
 }
 
 # THE CITIES BUILT BEFORE THE JAPAN FOUNDATION (2026-10-07): they keep

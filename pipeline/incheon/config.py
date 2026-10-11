@@ -8,6 +8,8 @@ the SEMAS register (owner, 2026-09-29).
 
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -71,12 +73,16 @@ RING_LABELS = ["0-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi", "0.3-0.6 mi"]
 # ride), and lines that only touch the bbox. Stations inside Incheon only;
 # lines drawn to their ends.
 # key -> (OSM ref, colour, public name, label end). Operator colours.
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
 LINES = {
     "IC1": ("인천1", "#B4C7E7", "Incheon Line 1", None),
     "IC2": ("I2", "#F4A462", "Incheon Line 2", None),
-    "L1": ("1", "#004A85", "Line 1", None),
-    "L7": ("7", "#6E7E31", "Line 7", None),
-    "SB": ("수인·분당", "#ECA300", "Suin–Bundang Line", None),
+    "L1": ("1", line_registry.colour("seoul-subway-line-1"), "Line 1", None),
+    "L7": ("7", line_registry.colour("seoul-subway-line-7"), "Line 7", None),
+    "SB": ("수인·분당", line_registry.colour("suin-bundang-line"), "Suin–Bundang Line", None),
 }
 OSM_COLOUR = {}
 LINES_ROUTE_TYPES = {"subway", "light_rail", "monorail", "train"}

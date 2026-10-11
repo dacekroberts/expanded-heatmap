@@ -15,11 +15,13 @@ COLUMNS: the rows are complete (1,100 fixed premises against the official
 placed by a JOIN to MLIT's 位置参照情報 for the one municipality (no wards).
 
 Rail: MLIT N02-25 (not GTFS, not OSM), stations kept only inside the city line
-(N03). The Hakodate City Tram, JR's Hakodate Line and the South Hokkaido
+(N03). The Hakodate City Tram, JR's Hakodate Main Line and the South Hokkaido
 Railway. English station names from OpenStreetMap's name:en.
 """
 
 from pathlib import Path
+
+from pipeline import line_registry
 
 # --- Paths ---------------------------------------------------------------
 
@@ -165,7 +167,7 @@ SPACING_MIN_M = 200.0
 # --- Station scope ----------------------------------------------------------
 # Every N02 line with a station inside the city line (stub_test on N02-25,
 # 2026-10-02: 6 legal lines, no Shinkansen station inside): the city tram's
-# four sections (all wholly inside), JR's Hakodate Line (3 of 84: 函館, 五稜郭,
+# four sections (all wholly inside), JR's Hakodate Main Line (3 of 84: 函館, 五稜郭,
 # 桔梗) and the South Hokkaido Railway (1 of 12), cut at the city line (owner
 # 2026-09-24). Every station is in the pre-2004 city; the merged eastern towns
 # have none.
@@ -185,7 +187,7 @@ _HC, _JR, _SH = "函館市", "北海道旅客鉄道", "道南いさりび鉄道"
 LINES = {
     "TR": {"n02": [(_HC, "本線"), (_HC, "湯の川線"), (_HC, "宝来・谷地頭線"), (_HC, "大森線")],
            "name": "Hakodate City Tram", "name_ja": "函館市電", "short": "City Tram", "hue": "#2E8B57"},
-    "JH": {"n02": [(_JR, "函館線")], "name": "JR Hakodate Line", "name_ja": "函館線", "short": "JR", "hue": "#00A651"},
+    "JH": {"n02": [(_JR, "函館線")], "name": "JR Hakodate Main Line", "name_ja": "函館本線", "short": "JR", "hue": "#00A651"},
     "SH": {"n02": [(_SH, "道南いさりび鉄道線")], "name": "South Hokkaido Railway", "name_ja": "道南いさりび鉄道線",
            "short": "Isaribi", "hue": "#00A0E9"},
 }
@@ -194,7 +196,13 @@ LINES = {
 # the feasible colour nearest its operator's hue that reads 3:1 on both map
 # pages and clears CIE76 45 from every pin. Closest pair 50.3 (the tram / JR);
 # the dark-mode labels separate, 3 of 3.
-_COLOURS = {"TR": "#586818", "JH": "#28A800", "SH": "#08A0C0"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+_COLOURS = {
+    "TR": "#586818", "JH": line_registry.colour("jr-hokkaido-hakodate-main-line"), "SH": "#08A0C0",
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

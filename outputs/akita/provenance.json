@@ -1,0 +1,88 @@
+{
+  "city_barber": {
+    "as_of": "2026-08-31",
+    "bytes": 43530,
+    "dataset_page": "https://www.city.akita.lg.jp/kurashi/kenko/1005367/1012953/1027245.html",
+    "file": "riyou260831_2.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:15:31+00:00",
+    "rows": 420,
+    "sha256": "086c4da139478c1b7f132fd0e7586c77ca1fb985331f3e43413a2da076388460",
+    "url": "https://www.city.akita.lg.jp/_res/projects/default_project/_page_/001/027/245/riyou260831_2.xlsx"
+  },
+  "city_beauty": {
+    "as_of": "2026-08-31",
+    "bytes": 370732,
+    "dataset_page": "https://www.city.akita.lg.jp/kurashi/kenko/1005367/1012953/1027245.html",
+    "file": "biyou260831_2.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:15:34+00:00",
+    "rows": 850,
+    "sha256": "fabcf711a98445a70ddf53d93ca6055ad6819c77f69d1e54274acc1a23317a29",
+    "url": "https://www.city.akita.lg.jp/_res/projects/default_project/_page_/001/027/245/biyou260831_2.xlsx"
+  },
+  "city_food": {
+    "as_of": "2026-10-01",
+    "bytes": 357939,
+    "dataset_page": "https://www.city.akita.lg.jp/kurashi/kenko/1005368/1010019/1017339.html",
+    "file": "r081001.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:15:27+00:00",
+    "rows": 4041,
+    "sha256": "673266ed3ccfb9d1256fbf88962f06566cfef4acd02113bcd7908e263caa750a",
+    "url": "https://www.city.akita.lg.jp/_res/projects/default_project/_page_/001/017/339/r081001.xlsx"
+  },
+  "city_mhlw": {
+    "as_of": null,
+    "bytes": 545307,
+    "dataset_page": "https://i2fas.mhlw.go.jp/",
+    "file": "05201_food_business_all.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:15:38+00:00",
+    "rows": 1473,
+    "sha256": "3e0906a62f138e9896e14a4222db6e2f2f5af156afb95d809a30e506a24b4e49",
+    "url": "https://i2fas.mhlw.go.jp/faspub/page/opendatadownload.jsp?param=05201_food_business_all.csv"
+  },
+  "isj_05201_block": {
+    "bytes": 319917,
+    "file": "05201-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:15:42+00:00",
+    "sha256": "f224e9b36f658883ba00b8df4eb398f13a3373bf498c40df96bc525aeecc700d",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/05201-24.0a.zip"
+  },
+  "isj_05201_chome": {
+    "bytes": 13214,
+    "file": "05201-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:15:46+00:00",
+    "sha256": "07e29e493e26f94f7f76e131061905bd87548fe7be91f248606d8d38cf47bed9",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/05201-19.0b.zip"
+  },
+  "n02": {
+    "bytes": 14903774,
+    "file": "data/japan/raw/N02-25_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-30T23:47:52+00:00",
+    "sha256": "aaf76af133b2e771e538fabc4646d2e443dc1d5a67b221382a28d744e706cc9f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip"
+  },
+  "n03": {
+    "bytes": 5642057,
+    "file": "data/japan/raw/N03-20250101_05_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T00:22:38+00:00",
+    "sha256": "ea35001d667d5f5cedee6ef05dbd0913abba7aa08ca403a48c4f0eac21e59b90",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_05_GML.zip"
+  },
+  "osm_station_names": {
+    "bytes": 13270,
+    "elements": 28,
+    "file": "osm_station_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-10-07T19:52:06Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](39.44,140.0,39.87,140.52);way[\"railway\"=\"station\"](39.44,140.0,39.87,140.52););out tags center;",
+    "retrieved": "2026-10-07T19:53:18+00:00",
+    "sha256": "853259a90f7bee4e3d18924d338f282b75a3e2f67e594bbace276d409fa1503d"
+  }
+}

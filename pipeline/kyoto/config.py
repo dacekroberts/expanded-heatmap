@@ -25,6 +25,8 @@ inside the city line (N03). English station names from OpenStreetMap's name:en
 import datetime
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -284,9 +286,36 @@ LINES = {
 # Kintetsu's red, the Randen's Kyoto purple, Eiden's orange. Result: pins
 # 45.0-74.8, closest line pair 18.0 (Hankyu's two lines). Four greens for
 # Keihan left the Karasuma Line olive.
-COLOURS = {"K": "#608000", "T": "#E85820", "JA": "#08A0C0", "JB": "#406878", "JE": "#C870C8", "JD": "#A87840",
-           "JC": "#7098A8", "KM": "#586818", "KO": "#60A000", "KU": "#20A800", "KK": "#909040", "HY": "#905848",
-           "HA": "#C88070", "KT": "#E80010", "RA": "#9840A0", "RK": "#B880A8", "EM": "#D08000", "EK": "#B05800"}
+#
+# FOOD SHOPS OLIVE (#737a00, 2026-10-07) arrived after this search, and three
+# lines sat under the owner's floor of 20 from it (2026-10-07). Each moved to
+# the colour nearest its own that reads 3:1 on both pages, clears 20 from
+# every pin this map draws and 18 from every other line, taking 25 where that
+# cost little: the Karasuma Line #608000 (11.6) to #387C04, a greener green
+# (olive 25.4); the Keihan Main Line #586818 (15.8) to #506C30 (25.6); the
+# Keihan Keishin Line #909040 (16.0) to #949054 (25.2), ONE colour with
+# Otsu's, which draws the same line. Six of 18 lines sit between 20 and 45
+# from olive (these three, the Keihan Oto 29.1, JR Nara 33.2, Eiden Eizan
+# 43.0), an accepted trade (owner, 2026-10-07). Closest pair still 18.0; the
+# dark-mode labels separate, 18 of 18. DECISIONS, "Lines within 20 of the
+# olive and violet pins recoloured".
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+# Moved so the shared colours fit (2026-10-07), hue kept as far as they allow:
+# the Tōzai Line #E85820 to #D84810 (pins 52.3, nearest line Kintetsu Kyoto
+# Line 12.2, nearest beside it 46.5). docs/decisions_drafts/line-registry.md.
+COLOURS = {
+    "K": "#387C04", "T": "#D84810", "JA": line_registry.colour("jr-west-kyoto-line"),
+    "JB": line_registry.colour("jr-west-biwako-line"), "JE": "#C870C8",
+    "JD": line_registry.colour("jr-west-nara-line"), "JC": line_registry.colour("jr-west-kosei-line"),
+    "KM": line_registry.colour("keihan-main-line"), "KO": "#60A000",
+    "KU": line_registry.colour("keihan-uji-line"), "KK": line_registry.colour("keihan-keishin-line"),
+    "HY": line_registry.colour("hankyu-kyoto-line"), "HA": "#C88070",
+    "KT": line_registry.colour("kintetsu-kyoto-line"), "RA": "#9840A0", "RK": "#B880A8", "EM": "#D08000",
+    "EK": "#B05800",
+}
 for _k, _v in LINES.items():
     _v["colour"] = COLOURS[_k]
 LINE_ORDER = list(LINES)

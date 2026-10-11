@@ -90,7 +90,12 @@ the owner reminded Kobe's build that it exists for the cities after it.
   refuses any other reason). The page says so in a bullet under **The lines**.
 - **Fault-based cost clauses** are accepted for all of Japan (2026-09-24).
 - **No page says "currently operating"**: the lists keep closed premises.
-- **Region: East Asia**. Country: "Japan". Projected CRS from
+- **Region: the city's Japanese view, by prefecture** (owner, 2026-10-04
+  and 2026-10-07; `JAPAN_REGIONS` in `app/cities.py`). Tokyo Metropolis (13),
+  Saitama Prefecture (11), Chiba Prefecture (12), Osaka Prefecture (27) and
+  Hyogo Prefecture (28) are views of their own; a city anywhere else tags its
+  traditional region: Hokkaido, Tohoku, Kanto, Chubu, Kansai (Mie included),
+  Chugoku, Shikoku or Kyushu-Okinawa. Country: "Japan". Projected CRS from
   `japan.CITIES[slug]["epsg"]` (Sapporo and Tokyo 54N, Fukuoka 52N).
 - **`mode` for a city without a subway** (owner, 2026-10-02): Dublin's
   precedent, so JR drawn beside a tram or light rail does not make it
@@ -103,38 +108,37 @@ the owner reminded Kobe's build that it exists for the cities after it.
   Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi and
   Takaoka (in R since 2026-10-02, if it leaves) each carry `label_tier: "minor"`: dot and tooltip
   in every view, pill only in its own region. The eight built cities stay
-  eligible. A minor tag alone takes the pill out of Global only; in East Asia
-  it still shows. So follow the whole precedent (DECISIONS.md, 2026-09-30,
-  the label tiers' first and second slices):
-  - Japan gets its own sub-region. Use one region or a split, as France
-    North and South, by `check_macro_labels.py` (PROBLEMS 0 at 375, 768 and
-    1200), never by eye.
-  - Every Japanese city moves into it, built ones included, as Prague moved
-    with Czechia.
-  - `REGION_LABELS_ALSO["East Asia"]` adds the Japan region, so East Asia
-    still names Tokyo, Osaka and the other anchors, as it names Seoul.
-  - The Japan region joins `cities.COUNTRY_VIEWS` as well as `REGION_ORDER`,
-    so it sits after every larger view in the region menu (owner,
-    2026-10-02).
-  - The first city of the batch makes this change, and it lands at review
-    time with that city's `app/` diff.
-- **Wave 4 retags Japan** (owner, 2026-10-04): the first wave-4 city to land
-  replaces Japan West and Japan East with the eight traditional regions,
-  Osaka Prefecture a view of its own (Hokkaido, Tohoku, Kanto, Chubu,
-  Kansai, Osaka Prefecture, Chugoku, Shikoku, Kyushu-Okinawa; Mie is
-  Kansai, so Yokkaichi moves), built cities included. Kanto, Kansai, Osaka
-  Prefecture and Chubu go into `cities.COMPETING_REGIONS` (branch
-  `overview-scale` must have landed). Measure first with
-  `scripts/stress_overview.py --scenario eight_osaka`; DECISIONS.md,
-  2026-10-04, has the numbers. Nagakute and Nisshin, Itami and Toyonaka go
-  into `KNOWN_STACKED` (accepted).
+  eligible. **Every Japanese city built since is minor too** (the review,
+  2026-10-07: East Asia had named Akita among Japan's main cities because
+  East-1's and Regional-1's 23 cities carried no tier; Kansai-1's did). A new
+  Japanese city carries `"label_tier": "minor"`.
+- **The Japanese views are built; a city build only tags its view** (Cleanup,
+  2026-10-07, Staging's call 198; DECISIONS.md, "Japan's macro-map views").
+  East Asia names Japan's anchors, Kanto names the three Kanto prefecture
+  views' and Kansai Osaka's and Hyogo's (`REGION_LABELS_ALSO`). Every
+  Japanese view and East Asia compete for their labels
+  (`COMPETING_REGIONS`), so a new city needs its pill width measured
+  (`TEXT_WIDTH`), not an offset tuned. `check_macro_labels.py` fails a city
+  named in no view (owner's call 197). If a new city finds no room, the fix
+  is a closer pinned zoom (`REGION_ZOOM`) or a prefecture view of its own,
+  measured with `scripts/stress_overview.py --planned 2` before and after;
+  a new view is the owner's call. Do not edit the region tables in a build
+  branch. **A prefecture view must hold every member on a phone** (the
+  review, 2026-10-07): the pinned zooms are Tokyo Metropolis 9.0, Saitama
+  Prefecture 9.0, Hyogo Prefecture 8.25 and Osaka Prefecture 9.5, chosen so
+  every member's dot sits on the 343 px canvas at 375 px; a new city whose dot
+  falls off that canvas, or whose pill is clipped most of the way
+  (`check_macro_labels.py --verbose` lists both), is a parked call for Cleanup,
+  never a zoom changed in a build branch.
 
 ## The Japan foundation's rules (2026-10-07) - already in shared code
 
 Every "⚠️ Shared code" item of the 58 wave-4/5 briefs and the owner's calls of
 2026-10-06 landed once, before the A/B builds
-(`docs/decisions_drafts/japan-foundation.md` has the checklist and each
-brief's figure). **A brief that tells you to add one of these is already
+(DECISIONS.md, "The Japan foundation: every shared-code rule of the 58
+Japanese briefs landed once", has each brief's figure; the checklist is in
+`git show d121b2cc:docs/decisions_drafts/japan-foundation.md`, its switches
+named in `japan_register.WAVE5_RULES`). **A brief that tells you to add one of these is already
 done; one that is missing is a parked call, never a city-local fix.**
 
 - **Leave `"rules"` out of a new `japan.CITIES` entry.** A new city reads
@@ -188,6 +192,64 @@ done; one that is missing is a parked call, never a city-local fix.**
   which the block-level spread could not reach. Run
   `check_personal_exposure.py <city>` right after step 3: it matches keys
   city-wide, as the switch does, and must print 0.
+
+## After the large review (2026-10-07) - every new Japanese city
+
+Four review lanes read the 64 Japanese maps of the batch that landed at
+35d43c4a; these are the rules they and the owner set, for the wave 2 builds
+(East-2, Kansai-2, Regional-2) and every city after. DECISIONS.md's
+2026-10-07 entries (folded 2026-10-08 from the review-batch-2026-10-07,
+rb-mapconfig, rb-prose and line-registry drafts) hold the measurements.
+
+- **ONE COLOUR PER LINE, SITE-WIDE (the owner's hard line).** A line your city
+  draws that another map already draws takes its colour from
+  `pipeline/line_registry.py`, keyed by operator and line (N02's operator and
+  line names), never a colour of your own; a line new to the site that a
+  planned neighbour will also draw gets a registry entry in your branch.
+  Different lines meeting on neighbouring maps differ too, except the
+  registry's recorded exceptions (JR Musashino and JR Chuo, both JR East
+  orange; Midōsuji and Kita-Osaka Kyuko, one through service). Moving one of
+  YOUR city's other lines to make room is allowed; moving a built city's line
+  is a parked call for Cleanup. `scripts/check_line_identity.py` (in
+  `check_all`) decides both.
+- **Line colours clear the pins by CIE76 20, aiming at 45.** A Japanese map
+  draws olive Food shops `#737a00` (the japan_eigyo taxonomy's
+  `PIN_MEANINGS`), magenta Food service and green Personal services; the
+  render check refuses only under `linecolour.HARD_FLOOR` (10), so measure the
+  20 yourself (`linecolour.delta_e`) and record any line between 20 and 45 in
+  the config as an accepted trade, as Hiroshima's and Osaka's are.
+- **Line names: the operator's full official name, the same on every map**
+  ("JR Hohi Main Line", "JR Hakodate Main Line", "JR Osaka Higashi Line",
+  "Osaka Metro Chuo Line"; Kobe's private line is "Sanyo Electric Main Line",
+  JR's "Sanyo Main Line" a different line). A shorter official name only
+  where every map that draws the line uses it. Line names drop macrons ("Chuo",
+  "Omuta"; 12 of 298 had one); station and city names keep them.
+- **Every city entry carries `label_offset`** (the scaffold's `("middle", 0,
+  -22)` is enough; Kasukabe's build left it out and `check_deploy_imports.py`
+  failed), `"label_tier": "minor"` (above), and a measured `TEXT_WIDTH` for its
+  label text (`label_competition.label_text`: the name without " (Regional)").
+- **Pin names are handled by the renderer, but counted honestly.** A blank
+  trade name, "#NAME?" or a letter lost in the publisher's bytes shows the pin's
+  permit type; a lost possessive apostrophe and "Caf?" are restored
+  (`map_common.shown_name`). Count them from the rendered map, not the raw
+  file: East-1's drafts said "ten" blank names where the maps held a
+  different set.
+- **Notices write dates month first**, as every page does (owner; Tsu,
+  Fukushima and Iwaki were changed).
+- **Rendered docs carry no process notes.** Lane 4 found about 35 call numbers,
+  "staging", "the brief" and "owner-approved" in japan.md's new rows; they go
+  in the drafts file. American spelling ("health center", not "centre").
+- **A page that lists neighbouring cities never names itself.**
+  Higashimurayama's and Tachikawa's "lines running on to" bullets named their
+  own city where Higashiyamato belonged; check the list against the city's
+  `excluded_stations.csv`.
+- **Caterers that also name a counter form are disclosed** (owner, Fukushima:
+  "230 caterers (仕出し; 161 of them also name a counter form)"); count yours
+  and say so the same way. Whether the shared form rules should keep them is
+  still open.
+- **A low-frequency stretch is named on the page with its reason** (the
+  standing no-floor call): Fukushima, Tsu, Akita, Iwaki and Morioka drew rare
+  lines with no reason given, which the lanes flagged.
 
 ## The traps Kobe measured
 

@@ -67,8 +67,10 @@ osm-rail's meta-rule would put a shared Korean step 1 in
   "Gwangju built").
 - **One page per satellite**, region **Seoul Capital Area** with
   `in_default_view: False` (2026-09-29). Cities outside the capital area go
-  in the **South Korea** view (DECISIONS.md, "A South Korea view on the macro
-  map", 2026-10-04). **Gimhae is its own page**, not Busan's (2026-10-03).
+  in the **South Korea outside the capital area** view (DECISIONS.md, "A
+  South Korea view on the macro map", 2026-10-04; renamed 2026-10-07, when
+  "South Korea" became the whole-country view over both, which is a
+  composite and never a city's tag). **Gimhae is its own page**, not Busan's (2026-10-03).
 - **The Gyeonggi scope**: "the smaller 시군" (Hanam, Gwangmyeong, Guri,
   Gwacheon, Uiwang, Gunpo) get no standalone page (`docs/build_briefs/gyeonggi.md`
   lines 252-264; `docs/decisions_drafts/staging.md`, "The probe wave's first

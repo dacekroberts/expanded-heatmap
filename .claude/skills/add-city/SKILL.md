@@ -14,19 +14,29 @@ either caught a real problem or is a design decision already made (see `docs/pro
 trail is in `DECISIONS.md`). If this is a fresh session, read those, plus
 `docs/city_master_list.md` and `PLAN.md`, first.
 
-## Adding a EUROPEAN city? Its region is `Europe`, and that is not negotiable
+## Adding a EUROPEAN city? Its region is `Europe West` or `Europe East`, by country
 
-Tag `"region": "Europe"` in `app/cities.py`. **Do not create a region for the
-country.** Ten European countries are on the remaining screen and they describe
-one readable view between them; a region per country means ten entries to
-create, order and later merge.
+Tag `"region": "Europe East"` for Latvia, Romania, Hungary and Greece, and
+`"region": "Europe West"` for every other European country without a view of
+its own (owner, 2026-10-04, landed 2026-10-07; the comment at `REGION_ORDER` in
+`app/cities.py`). **Do not create a region for the country.** A European
+country new to the project goes to the half `scripts/stress_overview.py` scores
+better, with the owner's agreement; a view of its own is the owner's call.
 
-`Spain` was a leftover from before this rule and has been retired to `Europe`
-— see `docs/scaling_thresholds.md`, "EVERY EUROPEAN CITY TAGS ONE REGION".
-The two exceptions are the owner's, not a pattern: French cities tag
-`France North` or `France South` and Czech cities `Czechia` (owner,
-2026-09-29/30; the comments at `REGION_ORDER` in `app/cities.py`), because
-their labels could not share Europe's view.
+The country views are the owner's, not a pattern: French cities tag
+`France North` or `France South`; Czech, German and UK cities `Czechia`,
+`Germany` and `United Kingdom`; Dutch and Belgian cities `Benelux` (owner,
+2026-09-29 to 2026-10-07), because their labels could not share Europe's view.
+Europe West still names a country view's larger cities (`REGION_LABELS_ALSO`,
+East Asia's pattern with Seoul); a smaller one there is `"label_tier": "minor"`,
+named only in its own view - the owner's call per city, with the build. Both
+Europe views and Benelux compete for their labels (`COMPETING_REGIONS`), so a
+new city there needs its pill width measured, not an offset tuned.
+
+**Every city must be labelled in at least one view, and every country's
+largest city on the landing view** (owner, 2026-10-07; `COUNTRY_TOP` and
+`LANDING_NO_ROOM` in `app/cities.py`; `check_macro_labels.py` fails either).
+A city larger than its country's current top replaces it in `COUNTRY_TOP`.
 
 This lives here rather than in a sibling city's config because a lesson written
 in the previous city's comments does not reach the next city — the meta-rule
@@ -610,6 +620,23 @@ per shape for the route and take the mode. **Nothing in `map_common.py` may
 name a taxonomy;** if a city needs behaviour it lacks, extend the module
 rather than forking a per-city copy.
 
+**Line colours and names, the review's rules (owner, 2026-10-07; CLAUDE.md
+[#line-identity]):**
+- A line another built map already draws takes its colour AND its name from
+  `pipeline/line_registry.py` (keyed by operator and line, not display name);
+  a line a planned neighbour will also draw gets a registry entry. Different
+  lines meeting on neighbouring maps differ, except the registry's recorded
+  exceptions. `scripts/check_line_identity.py` decides; moving a built
+  city's line is a parked call for Cleanup.
+- Every line clears every pin colour the map draws by CIE76 20 (aim at 45;
+  record 20 to 45 as a trade in the config). The pins are one colour per
+  meaning: Retail blue, Food service magenta, Personal services green, Food
+  shops olive `#737a00`, Shops and services violet `#7e57c2` (the taxonomy's
+  `PIN_MEANINGS` picks them); the render check enforces only
+  `linecolour.HARD_FLOOR` (10), so measure the 20.
+- A line's name is the operator's full official name, the same as on every
+  other map that draws it.
+
 **Transit lines are a hard requirement:** draw each from real GTFS
 `shapes.txt` geometry, and give every line BOTH a permanent on-map label
 using its real public name (verify it - a GTFS short name is not
@@ -671,6 +698,22 @@ right.
 pages (sections 2 and 3), US spelling (section 4), names (section 5) and who
 approves the words (section 6). Read it before writing any of them, and never
 start a page by copying an older one.
+
+**What the large review of 2026-10-07 caught, so a new city does not repeat
+it:**
+- the `cities.py` entry carries `label_offset` (Kasukabe's left it out and
+  `check_deploy_imports.py` failed) and its label text's measured
+  `TEXT_WIDTH` (`label_competition.label_text`: the name without
+  " (Regional)", or a view's own name);
+- notices write dates month first, as every page does;
+- rendered docs carry no process notes (call numbers, "staging", "the brief",
+  "owner-approved"): those go in the drafts file;
+- a bullet listing neighbouring cities never names the page's own city
+  (check it against `excluded_stations.csv`);
+- glitched business names (blank, "#NAME?", a letter lost in the publisher's
+  bytes) are shown as the pin's classification by the renderer
+  (`map_common.shown_name`); count them from the rendered map if the page or
+  drafts mention them.
 
 - **The page, `app/pages/N_<Slug>_Heatmap.py`, is written by
   `scaffold_city.py` in that format.** In order, with nothing added between

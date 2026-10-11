@@ -27,6 +27,8 @@ and Gakkentoshi lines. English station names from OpenStreetMap's name:en.
 import datetime
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -231,7 +233,16 @@ LINES = {
 # from every pin; Osaka's four come back within one step of the search grid
 # of Osaka's. Closest pair within 500 m and anywhere 20.7 (Kintetsu Nara /
 # Osaka, at 布施); the dark-mode labels separate, 6 of 6.
-_COLOURS = {"KN": "#E00018", "KO": "#B83008", "KH": "#28A800", "C": "#606828", "JH": "#A088A0", "JG": "#C000A8"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+_COLOURS = {
+    "KN": line_registry.colour("kintetsu-nara-line"), "KO": line_registry.colour("kintetsu-osaka-line"),
+    "KH": "#28A800", "C": line_registry.colour("osaka-metro-chuo-line"),
+    "JH": line_registry.colour("jr-west-osaka-higashi-line"),
+    "JG": line_registry.colour("jr-west-gakkentoshi-line"),
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

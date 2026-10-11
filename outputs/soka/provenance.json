@@ -1,0 +1,151 @@
+{
+  "city_env_2604": {
+    "as_of": "2026-04-30",
+    "bytes": 20606,
+    "dataset_page": "https://www.pref.saitama.lg.jp/a0706/6hou/ichiran.html",
+    "file": "data/saitama_pref/raw/r0804.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:44:27+00:00",
+    "rows": 33,
+    "sha256": "af685220b7fbb929849ccfe7dca2c756eded75fea207cbcbd0c4923faa690dcf",
+    "url": "https://www.pref.saitama.lg.jp/documents/232288/r0804.xlsx"
+  },
+  "city_env_2605": {
+    "as_of": "2026-05-31",
+    "bytes": 20583,
+    "dataset_page": "https://www.pref.saitama.lg.jp/a0706/6hou/ichiran.html",
+    "file": "data/saitama_pref/raw/r0805.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:44:29+00:00",
+    "rows": 34,
+    "sha256": "7bdfcc71c1364ecd3b0c2317e5b5d92255de414db8077e70931d028f214d117f",
+    "url": "https://www.pref.saitama.lg.jp/documents/232288/r0805.xlsx"
+  },
+  "city_env_2606": {
+    "as_of": "2026-06-30",
+    "bytes": 17572,
+    "dataset_page": "https://www.pref.saitama.lg.jp/a0706/6hou/ichiran.html",
+    "file": "data/saitama_pref/raw/r0806.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:44:32+00:00",
+    "rows": 21,
+    "sha256": "f7da7035c489f0ea8e8e6074d56f4aa7300660a0234cc614a7beae13c9c5892d",
+    "url": "https://www.pref.saitama.lg.jp/documents/232288/r0806.xlsx"
+  },
+  "city_env_2607": {
+    "as_of": "2026-07-31",
+    "bytes": 16508,
+    "dataset_page": "https://www.pref.saitama.lg.jp/a0706/6hou/ichiran.html",
+    "file": "data/saitama_pref/raw/r0807.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:44:34+00:00",
+    "rows": 27,
+    "sha256": "abd36c562f9e1019981defb2a99927ccbd9885276a88ae1a6e730218cd1d5acd",
+    "url": "https://www.pref.saitama.lg.jp/documents/232288/r0807.xlsx"
+  },
+  "city_env_2608": {
+    "as_of": "2026-08-31",
+    "bytes": 19255,
+    "dataset_page": "https://www.pref.saitama.lg.jp/a0706/6hou/ichiran.html",
+    "file": "data/saitama_pref/raw/r808.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:44:36+00:00",
+    "rows": 20,
+    "sha256": "c6c4fd166ca46840c4af2d1b3509ad9d5201dcc815724cba39793e66600d0e5c",
+    "url": "https://www.pref.saitama.lg.jp/documents/232288/r808.xlsx"
+  },
+  "city_env_list": {
+    "as_of": "2026-03-31",
+    "bytes": 1203694,
+    "dataset_page": "https://www.pref.saitama.lg.jp/a0706/6hou/ichiran.html",
+    "file": "data/saitama_pref/raw/r7nenndo.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:44:10+00:00",
+    "rows": 13417,
+    "sha256": "2cde3450d52cca5051f1cdaa67277a3ebcb67afb370b67a0d22de0453121ca00",
+    "url": "https://www.pref.saitama.lg.jp/documents/232288/r7nenndo.zip"
+  },
+  "city_food_layer_new": {
+    "as_of": "2026-10-06",
+    "bytes": 28581348,
+    "dataset_page": "https://www.pref.saitama.lg.jp/a0708/syokuhini-ichiran/ichiran-top.html",
+    "file": "data/saitama_pref/raw/food_shinpo_layer_20261006.geojson",
+    "how": "kept (on disk; a refresh is a new dated file)",
+    "retrieved": "2026-10-06T22:44:04+00:00",
+    "rows": 52706,
+    "sha256": "eeae4a4aa45346ac265a766549ad324a86575f319052e27704086d2ece77fda1",
+    "url": "https://services9.arcgis.com/n65w8AXGaYPTqFYI/arcgis/rest/services/%E9%A3%9F%E5%93%81%E5%96%B6%E6%A5%AD%E6%96%BD%E8%A8%AD_%E6%96%B0%E6%B3%95_%E5%85%AC%E9%96%8B/FeatureServer/0/query?where=1%3D1&outFields=OBJECTID%2C%E6%96%BD%E8%A8%AD_%E5%90%8D%E7%A7%B0%2C%E6%96%BD%E8%A8%AD%E6%89%80%E5%9C%A8%E5%9C%B0%2C%E6%89%80%E5%9C%A8%E5%9C%B0%E5%BB%BA%E7%89%A9%E5%90%8D%E4%BB%98%2C%E6%A5%AD%E7%A8%AE%E5%90%8D%2C%E7%94%B3%E8%AB%8B%E8%80%85_%E6%B0%8F%E5%90%8D%2C%E6%9C%89%E5%8A%B9%E9%96%8B%E5%A7%8B%E5%B9%B4%E6%9C%88%E6%97%A5%2C%E6%9C%89%E5%8A%B9%E7%B5%82%E4%BA%86%E5%B9%B4%E6%9C%88%E6%97%A5%2C%E8%A8%B1%E5%8F%AF%E7%95%AA%E5%8F%B7&orderByFields=OBJECTID&outSR=4326&f=geojson&resultOffset=0&resultRecordCount=16000"
+  },
+  "city_food_layer_old": {
+    "as_of": "2026-10-06",
+    "bytes": 1418680,
+    "dataset_page": "https://www.pref.saitama.lg.jp/a0708/syokuhini-ichiran/ichiran-top.html",
+    "file": "data/saitama_pref/raw/food_kyuho_layer_20261006.geojson",
+    "how": "kept (on disk; a refresh is a new dated file)",
+    "retrieved": "2026-10-06T22:44:09+00:00",
+    "rows": 2627,
+    "sha256": "4c4cb6f6cc9e29813382f68e6ff35262fac2c71b2f596cbc613a3bef863b6fa4",
+    "url": "https://services9.arcgis.com/n65w8AXGaYPTqFYI/arcgis/rest/services/%E9%A3%9F%E5%93%81%E5%96%B6%E6%A5%AD%E6%96%BD%E8%A8%AD_%E6%97%A7%E6%B3%95_%E5%85%AC%E9%96%8B/FeatureServer/0/query?where=1%3D1&outFields=OBJECTID%2C%E6%96%BD%E8%A8%AD_%E5%90%8D%E7%A7%B0%2C%E6%96%BD%E8%A8%AD%E6%89%80%E5%9C%A8%E5%9C%B0%2C%E6%89%80%E5%9C%A8%E5%9C%B0%E5%BB%BA%E7%89%A9%E5%90%8D%E4%BB%98%2C%E6%A5%AD%E7%A8%AE%E5%90%8D%2C%E7%94%B3%E8%AB%8B%E8%80%85_%E6%B0%8F%E5%90%8D%2C%E6%9C%89%E5%8A%B9%E9%96%8B%E5%A7%8B%E5%B9%B4%E6%9C%88%E6%97%A5%2C%E6%9C%89%E5%8A%B9%E7%B5%82%E4%BA%86%E5%B9%B4%E6%9C%88%E6%97%A5%2C%E8%A8%B1%E5%8F%AF%E7%95%AA%E5%8F%B7&orderByFields=OBJECTID&outSR=4326&f=geojson&resultOffset=0&resultRecordCount=2000"
+  },
+  "city_food_list_old": {
+    "as_of": "2026-03-31",
+    "bytes": 2542080,
+    "dataset_page": "https://portal-pref-saitama.hub.arcgis.com/pages/opendatacatalog",
+    "file": "data/saitama_pref/raw/kyuho_R080331.xls",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T23:01:34+00:00",
+    "rows": 10526,
+    "sha256": "9fc5423c24bdc568eca8573057d7284f1ceb53c18cc8e60b21394b12eb364eb5",
+    "url": "https://pref-saitama.maps.arcgis.com/sharing/rest/content/items/7da15c2811db4a55953345b16299d462/data"
+  },
+  "estat_census": {
+    "bytes": 6421265,
+    "file": "data/japan/raw/estat_census_r3_b1_009_1a.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-28T19:04:30+00:00",
+    "sha256": "666929104448d2430f59694dbe3c7d1d2f86748e6de95da78d16a44a8084f4ec",
+    "url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040067884&fileKind=0"
+  },
+  "isj_11221_block": {
+    "bytes": 140089,
+    "file": "11221-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:43:02+00:00",
+    "sha256": "e3d143c4d8c108c0de1e4f31f639b9e26bd2c2b9d8ca6df17ca273f170800b48",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/11221-24.0a.zip"
+  },
+  "isj_11221_chome": {
+    "bytes": 6391,
+    "file": "11221-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:43:05+00:00",
+    "sha256": "b4ca9e75665afecab9c2b625f6349c94b36a39563cc5ed5737fd7b9f3ec76f0c",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/11221-19.0b.zip"
+  },
+  "n02": {
+    "bytes": 14903774,
+    "file": "data/japan/raw/N02-25_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-30T23:47:52+00:00",
+    "sha256": "aaf76af133b2e771e538fabc4646d2e443dc1d5a67b221382a28d744e706cc9f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip"
+  },
+  "n03": {
+    "bytes": 3125704,
+    "file": "data/japan/raw/N03-20250101_11_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T00:23:01+00:00",
+    "sha256": "6f00c4266e536d884c8cab8cf3c825308063d5655b8e0555c916d38d750424bd",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_11_GML.zip"
+  },
+  "osm_station_names": {
+    "bytes": 7848,
+    "elements": 12,
+    "file": "osm_station_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-10-07T19:39:00Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](35.8,139.76,35.88,139.85);way[\"railway\"=\"station\"](35.8,139.76,35.88,139.85););out tags center;",
+    "retrieved": "2026-10-07T19:41:10+00:00",
+    "sha256": "2f0d5dbd936b63d7d10972d2bfafe0bd4e05575bf1f84a2d00018cc5e2c6014a"
+  }
+}

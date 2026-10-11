@@ -23,6 +23,7 @@ than a measurement that might drift.
 """
 
 import io
+import re
 import sys
 import zipfile
 from pathlib import Path
@@ -35,21 +36,29 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.baseline import emit
 from pipeline.counts import pct
 from pipeline.taxonomies import load_taxonomy_module
+from pipeline.mexico_city.step1_stations import load_scope
 from pipeline.mexico_city.config import (
     BUSINESSES_CLEAN_CSV,
     CRS_GEOGRAPHIC,
     DENUE_ACTIVITY_COLUMN,
     DENUE_CODE_COLUMN,
     DENUE_MEMBER,
+    DENUE_MUNICIPIO_CODE_COLUMN,
     DENUE_MUNICIPIO_COLUMN,
     DENUE_NAME_COLUMN,
+    DENUE_REGIONAL_MEMBERS,
+    DENUE_REGIONAL_ZIPS,
     DENUE_STATE_CODE,
     DENUE_STATE_COLUMN,
     DENUE_ZIP,
     FORBIDDEN_COLUMNS,
     MEXICO_CITY_BBOX,
+    MUNICIPIOS,
+    NAME,
     PREMISES_TYPE_COLUMN,
     PREMISES_TYPE_KEEP,
+    REGIONAL,
+    REGIONAL_STATE_CODE,
     SOURCE_ENCODING,
     TAXONOMY_SYSTEM,
 )
@@ -77,6 +86,73 @@ USECOLS = (
     "longitud",
 )
 
+# Entidad 15 also needs the municipio code: the regional scope is cut on it
+# (Monterrey's pattern), never on the name.
+USECOLS_REGIONAL = USECOLS + (DENUE_MUNICIPIO_CODE_COLUMN,)
+
+# Contact details that could sit inside a SIGN NAME, which is published.
+# Monterrey's patterns (pipeline/monterrey/step2_clean_businesses.py). Only
+# COUNTS are printed here, so a drift log never carries a sign name; the
+# hits are read by hand before publishing and the verdict recorded.
+EMAIL_LIKE = re.compile(r"[^\s@]+@[^\s@]+\.[^\s@]+")
+PHONE_LIKE = re.compile(r"(?<!\d)\d{8,10}(?!\d)|(?<!\d)\d{2,3}[\s.-]\d{3,4}[\s.-]\d{4}(?!\d)")
+
+
+def read_regional():
+    """Mexico City (Regional): the four State of México municipios from
+    DENUE entidad 15, which INEGI publishes in two ZIPs. Each member is named
+    exactly (never the first .csv), the two parts must share no `id`, and
+    every configured code must carry the configured name in DENUE's own
+    `municipio` column, so a wrong code fails loudly. This step never
+    fetches: fetch_sources.py --regional downloads both parts."""
+    frames = []
+    for path, member in zip(DENUE_REGIONAL_ZIPS, DENUE_REGIONAL_MEMBERS):
+        if not path.exists():
+            raise SystemExit(f"Missing {path.name}. Run "
+                             "pipeline/mexico_city/fetch_sources.py --regional first.")
+        zf = zipfile.ZipFile(path)
+        if member not in zf.namelist():
+            raise SystemExit(f"{member} not in {path.name}. Members: "
+                             f"{zf.namelist()}. Never take the first .csv.")
+        raw = zf.read(member).decode(SOURCE_ENCODING)
+        header = pd.read_csv(io.StringIO(raw), nrows=0)
+        present = [c for c in FORBIDDEN_COLUMNS if c in header.columns]
+        part = pd.read_csv(io.StringIO(raw), usecols=list(USECOLS_REGIONAL), dtype=str)
+        for c in FORBIDDEN_COLUMNS:
+            assert c not in part.columns, f"{c} reached the DataFrame"
+        print(f"  {path.name} ({path.stat().st_size:,} bytes): {len(part):,} "
+              f"units; forbidden columns present but NOT loaded: {present}")
+        frames.append(part)
+        del raw
+    shared = set(frames[0]["id"]) & set(frames[1]["id"])
+    if shared:
+        raise SystemExit(f"{len(shared):,} ids appear in both entidad 15 parts; "
+                         "the parts were expected to be disjoint.")
+    df = pd.concat(frames, ignore_index=True)
+    print(f"DENUE state {REGIONAL_STATE_CODE}: {len(df):,} economic units "
+          "(two parts, no shared id)")
+    emit("denue_15_rows", len(df))
+    ents = df[DENUE_STATE_COLUMN].value_counts()
+    if len(ents) != 1 or ents.index[0] != REGIONAL_STATE_CODE:
+        raise SystemExit(f"expected only cve_ent={REGIONAL_STATE_CODE}, got {dict(ents)}")
+
+    code = df[DENUE_MUNICIPIO_CODE_COLUMN].str.zfill(3)
+    names_by_code = (df.assign(_c=code).groupby("_c")[DENUE_MUNICIPIO_COLUMN]
+                     .agg(lambda s: sorted(set(s))))
+    for c, expected in MUNICIPIOS.items():
+        seen = names_by_code.get(c)
+        if seen != [expected]:
+            raise SystemExit(
+                f"cve_mun {c}: DENUE names it {seen}, config expects {expected!r}. "
+                "The code is the join key; a mismatch means the code is wrong.")
+    df = df[code.isin(MUNICIPIOS)].copy()
+    df[DENUE_MUNICIPIO_CODE_COLUMN] = df[DENUE_MUNICIPIO_CODE_COLUMN].str.zfill(3)
+    print(f"Four municipios (by INEGI code): {len(df):,} units")
+    for m, n in df[DENUE_MUNICIPIO_COLUMN].value_counts().items():
+        print(f"    {m:26s} {n:8,}")
+    emit("in_scope_15_rows", len(df))
+    return df
+
 
 def require_denue():
     """The DENUE zip must already be here - this step does NOT download it.
@@ -94,7 +170,7 @@ def require_denue():
 
 
 def main():
-    print("=== Step 2: Mexico City storefronts (INEGI DENUE) ===\n")
+    print(f"=== Step 2: {NAME} storefronts (INEGI DENUE) ===\n")
     tax = load_taxonomy_module(TAXONOMY_SYSTEM)
 
     require_denue()
@@ -130,9 +206,27 @@ def main():
         raise SystemExit(f"expected only cve_ent={DENUE_STATE_CODE}, got {dict(ents)}")
     print(f"  all rows cve_ent={DENUE_STATE_CODE}; "
           f"{df[DENUE_MUNICIPIO_COLUMN].nunique()} alcaldias")
+    del raw
+
+    # --- Mexico City (Regional): entidad 15's four municipios ---------------
+    # One register over two entidades, so no cross-source dedup is needed:
+    # DENUE's `id` is national, and the two sets are asserted disjoint.
+    if REGIONAL:
+        print()
+        df15 = read_regional()
+        shared = set(df["id"]) & set(df15["id"])
+        if shared:
+            raise SystemExit(f"{len(shared):,} ids appear in both entidades 09 and 15.")
+        df = pd.concat([df, df15], ignore_index=True)
+        print(f"{NAME}: {len(df):,} economic units in scope")
 
     # --- FIJO ONLY ---------------------------------------------------------
     before = len(df)
+    if REGIONAL:
+        fijo = df[PREMISES_TYPE_COLUMN] == PREMISES_TYPE_KEEP
+        for m, g in fijo.groupby(df[DENUE_MUNICIPIO_COLUMN].where(
+                df[DENUE_STATE_COLUMN] == REGIONAL_STATE_CODE, "(Ciudad de México)")):
+            print(f"    {m:26s} Fijo {pct(int(g.sum()), len(g), 'units')}")
     df = df[df[PREMISES_TYPE_COLUMN] == PREMISES_TYPE_KEEP].copy()
     print(f"\n{PREMISES_TYPE_COLUMN}={PREMISES_TYPE_KEEP} only: "
           f"{pct(len(df), before, 'economic units')} kept "
@@ -160,6 +254,17 @@ def main():
     blank = int(df["business_name"].isna().sum() + (df["business_name"] == "").sum())
     print(f"\nBlank trade names: {pct(blank, len(df), 'storefronts')} "
           "(no fallback to a legal or personal name exists - see the docstring)")
+    names = df["business_name"].fillna("")
+    for label, rx in (("e-mail-shaped", EMAIL_LIKE), ("phone-length digit run", PHONE_LIKE)):
+        print(f"Sign names with an {label}: {int(names.str.contains(rx).sum()):,}"
+              "  (counts only; read by hand before publishing)")
+    if REGIONAL:
+        is15 = df[DENUE_STATE_COLUMN] == REGIONAL_STATE_CODE
+        print("Per municipio of the four (storefronts by bucket, blank names):")
+        for m, g in df[is15].groupby(DENUE_MUNICIPIO_COLUMN):
+            gb = int(g["business_name"].isna().sum() + (g["business_name"] == "").sum())
+            print(f"    {m:26s} {len(g):7,}  {dict(g['bucket'].value_counts())}  "
+                  f"blank {gb}")
 
     # --- the residence signal, measured here because it is not published ---
     interior = df["numero_int"].fillna("").astype(str).str.strip()
@@ -181,8 +286,48 @@ def main():
     b = MEXICO_CITY_BBOX
     inbox = (df["latitude"].between(b["lat_min"], b["lat_max"])
              & df["longitude"].between(b["lon_min"], b["lon_max"]))
-    print(f"Inside the sanity box: {pct(int(inbox.sum()), len(df), 'geocoded storefronts')}")
-    df = df[inbox].copy()
+    if not REGIONAL:
+        print(f"Inside the sanity box: {pct(int(inbox.sum()), len(df), 'geocoded storefronts')}")
+        df = df[inbox].copy()
+    else:
+        # CDMX's rows keep the city-alone test (the sanity box), so the CDMX
+        # side of the map does not move. Entidad 15's rows are tested against
+        # the SCOPE polygon (CDMX and the four municipios), Monterrey's
+        # pattern of testing a regional register against its own boundaries
+        # rather than a box. Points outside their OWN municipio are counted
+        # for the record; a point over a municipio line inside the scope is a
+        # real storefront placed a little off, and stays.
+        #
+        # Measured 2026-10-07: 416 of 127,860 entidad 15 storefronts lie
+        # outside the scope and are dropped. 398 are one compact cluster that
+        # DENUE codes Nezahualcóyotl and OSM places 14-823 m east of its
+        # polygon (the Chimalhuacán side), over 5 km from any station, so no
+        # ring count moves with it; Naucalpan has 13, La Paz 4, Ecatepec 1.
+        # 21 Naucalpan rows that fall inside CDMX stay. Re-measure if either
+        # boundary file is re-fetched.
+        is15 = df[DENUE_STATE_COLUMN] == REGIONAL_STATE_CODE
+        print(f"CDMX rows inside the sanity box: "
+              f"{pct(int((inbox & ~is15).sum()), int((~is15).sum()), 'geocoded storefronts')}")
+        scope, _cdmx, by_code = load_scope()
+        sub = df[is15]
+        pts = gpd.GeoSeries(gpd.points_from_xy(sub["longitude"], sub["latitude"]),
+                            index=sub.index, crs=CRS_GEOGRAPHIC)
+        in_scope = pts.within(scope)
+        munid = REGIONAL_STATE_CODE + sub[DENUE_MUNICIPIO_CODE_COLUMN]
+        own = pd.Series(False, index=sub.index)
+        for code, geom in by_code.items():
+            mask = munid == code
+            own[mask] = pts[mask].within(geom)
+        print("Entidad 15 storefronts outside their own municipio polygon:")
+        for m, g in own.groupby(sub[DENUE_MUNICIPIO_COLUMN]):
+            print(f"    {m:26s} {int((~g).sum()):5,} of {len(g):,}")
+        print(f"Entidad 15 storefronts inside the scope polygon: "
+              f"{pct(int(in_scope.sum()), len(sub), 'geocoded storefronts')}"
+              f"  (inside the sanity box: {int(inbox[is15].sum()):,})")
+        emit("outside_scope_15_rows", int((~in_scope).sum()))
+        keep = inbox & ~is15
+        keep.loc[sub.index] = in_scope.values
+        df = df[keep].copy()
 
     # --- dedupe on DENUE's own primary key ---------------------------------
     before = len(df)

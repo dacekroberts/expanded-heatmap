@@ -39,8 +39,8 @@ from cities import SWITCHER_ORDER  # noqa: E402
 from components import (  # noqa: E402
     ABOUT_DATA_PAGE,
     EXCLUSIONS_PAGE,
-    OVERVIEW_PAGE,
     SITE_NAME,
+    render_reference_nav,
     render_site_notices,
     scroll_table,
     set_base_font,
@@ -53,10 +53,8 @@ st.set_page_config(page_title=f"Why the maps differ — {SITE_NAME}",
                    page_icon="\U0001f5fa️", layout="wide")
 set_base_font()
 
-with st.container(horizontal=True, gap="medium", vertical_alignment="center"):
-    st.page_link(OVERVIEW_PAGE, label="← Global View")
-    st.page_link(ABOUT_DATA_PAGE, label="Where this data comes from")
-    st.page_link(EXCLUSIONS_PAGE, label="What is counted, and what is not")
+render_reference_nav([(ABOUT_DATA_PAGE, "Where this data comes from"),
+                      (EXCLUSIONS_PAGE, "What is counted, and what is not")])
 
 
 @st.cache_data(show_spinner=False)
@@ -110,13 +108,13 @@ Compare patterns within a city rather than totals between cities.
 **Not every map has all three categories.** Most maps sort storefronts into
 Retail, Food service and Personal services. Some can't, because the city
 doesn't license that trade or its records can't tell trades apart.
-Philadelphia and Boston have no Personal services layer. Amsterdam, Rotterdam
-and Riga merge Retail and Personal services into one "Shops and services"
-layer. In Japan, where only food shops need a license, the shop layer holds
+Philadelphia, Boston, the British maps and many others have no Personal
+services layer. The Dutch and Latvian maps merge Retail and Personal services
+into one "Shops and services" layer. In Japan, where only food shops need a license, the shop layer holds
 food shops alone. A missing or thin layer is a gap in the records, not a quiet
 street.
 
-**Suburban trains appear on only a few maps.** Most maps draw metro-type lines
+**Suburban trains appear on some maps, not all.** Most maps draw metro-type lines
 and leave commuter rail off. A commuter line is included where, inside the
 city, it works like a metro: stations close together, frequent trains, and
 neighborhoods no metro reaches. Dublin's DART and Copenhagen's S-tog are drawn

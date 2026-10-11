@@ -1,0 +1,118 @@
+{
+  "city_barber": {
+    "as_of": "2026-08-31",
+    "bytes": 165277,
+    "dataset_page": "https://www.hokeniryo.metro.tokyo.lg.jp/kenkou/hokenjo_daicho/shokuhineigyokyokadaicho",
+    "file": "kankyo-riyoujo-5.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T19:26:11+00:00",
+    "rows": 1427,
+    "sha256": "fea9bab48e356a0e7236981ad5f673a1f421c4fb8ee9aec4201ebdb1105a4a8b",
+    "url": "https://www.hokeniryo.metro.tokyo.lg.jp/documents/d/hokeniryo/kankyo-riyoujo-5"
+  },
+  "city_beauty": {
+    "as_of": "2026-08-31",
+    "bytes": 608582,
+    "dataset_page": "https://www.hokeniryo.metro.tokyo.lg.jp/kenkou/hokenjo_daicho/shokuhineigyokyokadaicho",
+    "file": "kankyo-biyoujo-5.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T19:26:15+00:00",
+    "rows": 4319,
+    "sha256": "0cc90f464cdb3e9283c16881b8d0ee1b4354233223420942e2b206859d5eab14",
+    "url": "https://www.hokeniryo.metro.tokyo.lg.jp/documents/d/hokeniryo/kankyo-biyoujo-5"
+  },
+  "city_food": {
+    "as_of": "2026-08-31",
+    "bytes": 4486267,
+    "dataset_page": "https://www.hokeniryo.metro.tokyo.lg.jp/kenkou/hokenjo_daicho/shokuhineigyokyokadaicho",
+    "file": "shokuhin-kyoka-7.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T19:26:02+00:00",
+    "rows": 28093,
+    "sha256": "8a58dcfe6acac48d34518b8d452bbaf411f7142c18327d4a45622e1ab5f3c4bd",
+    "url": "https://www.hokeniryo.metro.tokyo.lg.jp/documents/d/hokeniryo/shokuhin-kyoka-7"
+  },
+  "city_laundry": {
+    "as_of": "2026-08-31",
+    "bytes": 173591,
+    "dataset_page": "https://www.hokeniryo.metro.tokyo.lg.jp/kenkou/hokenjo_daicho/shokuhineigyokyokadaicho",
+    "file": "kankyo-cleaning-5.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T19:26:18+00:00",
+    "rows": 1040,
+    "sha256": "d7d9ed94b2d673d5c2b28ceddbc7e17c7a9b70dd5ebe1448aedfa6ac5cb6b305",
+    "url": "https://www.hokeniryo.metro.tokyo.lg.jp/documents/d/hokeniryo/kankyo-cleaning-5"
+  },
+  "city_mhlw": {
+    "as_of": null,
+    "bytes": 3606399,
+    "dataset_page": "https://i2fas.mhlw.go.jp/",
+    "file": "13000_food_business_all.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:43:32+00:00",
+    "rows": 10003,
+    "sha256": "261c8261c0fffadbd59b73cd435279074279b9ae7a0a97af682c2b0fd142f117",
+    "url": "https://i2fas.mhlw.go.jp/faspub/page/opendatadownload.jsp?param=13000_food_business_all.csv"
+  },
+  "city_notify": {
+    "as_of": "2026-08-31",
+    "bytes": 1956304,
+    "dataset_page": "https://www.hokeniryo.metro.tokyo.lg.jp/kenkou/hokenjo_daicho/shokuhineigyokyokadaicho",
+    "file": "shokuhin-todokede-1-7.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T19:26:07+00:00",
+    "rows": 12502,
+    "sha256": "27aa23bdb2a346c1666d23b66527207706a4b1e7deb238fe186754cfe26dc1e4",
+    "url": "https://www.hokeniryo.metro.tokyo.lg.jp/documents/d/hokeniryo/shokuhin-todokede-1-7"
+  },
+  "estat_census": {
+    "bytes": 6421265,
+    "file": "data/japan/raw/estat_census_r3_b1_009_1a.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-28T19:04:30+00:00",
+    "sha256": "666929104448d2430f59694dbe3c7d1d2f86748e6de95da78d16a44a8084f4ec",
+    "url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040067884&fileKind=0"
+  },
+  "isj_13229_block": {
+    "bytes": 58077,
+    "file": "13229-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:16:18+00:00",
+    "sha256": "1752d3fe150b751f0216e767d3767a1c8aa3a07190576ba76940b1830c59c2e4",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/13229-24.0a.zip"
+  },
+  "isj_13229_chome": {
+    "bytes": 6298,
+    "file": "13229-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:16:20+00:00",
+    "sha256": "7a9d0ef3bd3fea7ab429e12d8685cd7a4bf60a93820a5ab7cef592d00a223a3c",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/13229-19.0b.zip"
+  },
+  "n02": {
+    "bytes": 14903774,
+    "file": "data/japan/raw/N02-25_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-30T23:47:52+00:00",
+    "sha256": "aaf76af133b2e771e538fabc4646d2e443dc1d5a67b221382a28d744e706cc9f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip"
+  },
+  "n03": {
+    "bytes": 11595541,
+    "file": "data/japan/raw/N03-20250101_13_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:52:08+00:00",
+    "sha256": "e73a70ca903c5a37daba66158ee5de7c48bb7cd7d45f31f7fa4a178c9456702f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_13_GML.zip"
+  },
+  "osm_station_names": {
+    "bytes": 7915,
+    "elements": 11,
+    "file": "osm_station_names.json",
+    "host": "overpass.kumi.systems",
+    "osm_base": "2026-05-31T22:37:44Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](35.7,139.51,35.77,139.57);way[\"railway\"=\"station\"](35.7,139.51,35.77,139.57););out tags center;",
+    "retrieved": "2026-10-07T19:19:47+00:00",
+    "sha256": "f59fdd3d71f6dd49ac74389ca812291e6640e98e47a58b879ad0d38be1322d21"
+  }
+}

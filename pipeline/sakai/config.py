@@ -22,6 +22,8 @@ lines and JR's Hanwa Line. English station names from OpenStreetMap's name:en.
 import datetime
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -258,7 +260,21 @@ LINES = {
 # and clears CIE76 45 from every pin. Closest pair within 500 m 18.4 (the Kōya
 # Line / JR Hanwa, which meet at 三国ヶ丘); the dark-mode labels separate, 6 of
 # 6.
-_COLOURS = {"RH": "#689000", "M": "#E81820", "NM": "#E07800", "NK": "#B09000", "NB": "#08A0C0", "JR": "#B87808"}
+# FOOD SHOPS OLIVE (#737a00, 2026-10-07) arrived after this search: the Hankai
+# Line's #689000 sat 17.4 from it, under the owner's floor of 20 (2026-10-07),
+# and takes #449418 (olive 30.3), ONE colour with Osaka's for the same line
+# (Osaka's config gives the search). Three of six lines sit between 20 and 45
+# from olive (the Koya Line 23.2, the Hankai 30.3, JR Hanwa 34.7), an accepted
+# trade (owner, 2026-10-07).
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+_COLOURS = {
+    "RH": line_registry.colour("hankai-line"), "M": line_registry.colour("osaka-metro-midosuji-line"),
+    "NM": line_registry.colour("nankai-main-line"), "NK": line_registry.colour("nankai-koya-line"),
+    "NB": "#08A0C0", "JR": line_registry.colour("jr-west-hanwa-line"),
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

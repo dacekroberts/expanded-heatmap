@@ -23,6 +23,8 @@ OpenStreetMap's name:en.
 import datetime
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -235,7 +237,14 @@ LINES = {
 # to ochre; Tobu's blue, which no blue clears Retail's pin in, to teal.
 # Closest pair 28.0 (JR's two lines, which meet at 宇都宮); the dark-mode
 # labels separate, 4 of 4.
-_COLOURS = {"LR": "#B09000", "TU": "#08A0C0", "JU": "#E07800", "JN": "#D06840"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+_COLOURS = {
+    "LR": "#B09000", "TU": "#08A0C0", "JU": line_registry.colour("jr-east-utsunomiya-takasaki-line"),
+    "JN": "#D06840",
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

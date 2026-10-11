@@ -1,0 +1,54 @@
+[
+  {
+    "municipality": "立川市",
+    "code": "13202",
+    "rows": 2208,
+    "official": 2599,
+    "share_pct": 85.0,
+    "source": "Tokyo statistical yearbook, table 19-8 (飲食店営業, FY2024)",
+    "kind": "restaurants",
+    "rows_at_date": 1652,
+    "share_at_date_pct": 63.6,
+    "date": "2025-03-31",
+    "undated": 0
+  },
+  {
+    "municipality": "立川市",
+    "code": "13202",
+    "kind": "barber",
+    "rows": 89,
+    "official": 91,
+    "share_pct": 97.8,
+    "source": "Tokyo statistical yearbook, table 19-7 (理容所, 美容所, クリーニング所, FY2024)",
+    "rows_at_date": 81,
+    "share_at_date_pct": 89.0,
+    "date": "2025-03-31",
+    "undated": 0
+  },
+  {
+    "municipality": "立川市",
+    "code": "13202",
+    "kind": "beauty",
+    "rows": 501,
+    "official": 504,
+    "share_pct": 99.4,
+    "source": "Tokyo statistical yearbook, table 19-7 (理容所, 美容所, クリーニング所, FY2024)",
+    "rows_at_date": 448,
+    "share_at_date_pct": 88.9,
+    "date": "2025-03-31",
+    "undated": 0
+  },
+  {
+    "municipality": "立川市",
+    "code": "13202",
+    "kind": "laundry",
+    "rows": 62,
+    "official": 72,
+    "share_pct": 86.1,
+    "source": "Tokyo statistical yearbook, table 19-7 (理容所, 美容所, クリーニング所, FY2024)",
+    "rows_at_date": 60,
+    "share_at_date_pct": 83.3,
+    "date": "2025-03-31",
+    "undated": 0
+  }
+]

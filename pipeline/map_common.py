@@ -16,6 +16,7 @@ entry (build_legend). render_heatmap does both for every line passed in.
 
 import html
 import json
+import math
 import re
 import zipfile
 from pathlib import Path
@@ -28,7 +29,8 @@ from folium.plugins import HeatMap, FastMarkerCluster
 from folium.template import Template
 
 from pipeline.linecolour import check_line_colours, contrast_ratio, dark_label_colours, label_colours
-from pipeline.taxonomies import CATEGORY_BUCKETS, load_taxonomy_module
+from pipeline.taxonomies import (CATEGORY_BUCKETS, MEANING_COLOURS, load_taxonomy_module,
+                                 pin_colours, pin_outline)
 from pipeline.theme import AMBIENT_THEME_JS, DARK, FONT_VAR, LIGHT, css_vars, font_stack, rgba
 
 # Decimal places BUSINESS coordinates are rounded to before reaching the HTML.
@@ -177,6 +179,7 @@ _THEME_TOGGLE_TEMPLATE = """
     </select>
     <button id="back-to-map" class="map-btn" type="button" hidden
         aria-label="Back to the Global View map">&larr; Global View</button>
+    <button id="back-to-region" class="map-btn" type="button" hidden></button>
     <button id="theme-toggle" class="map-btn" type="button" aria-pressed="false">&#9790; Dark mode</button>
 </div>
 <script>
@@ -189,6 +192,11 @@ _THEME_TOGGLE_TEMPLATE = """
         document.body.classList.toggle('dark-base', dark);
         btn.setAttribute('aria-pressed', dark ? 'true' : 'false');
         btn.textContent = dark ? '\\u2600 Light mode' : '\\u263E Dark mode';
+        // The theme button is 30 px tall in light mode and 34 px in dark, so
+        // the open legend's clearance is re-measured on every switch (review
+        // lane 2, L2-1: light to dark left 94 px where 98 was needed). The
+        // first call comes before `actions` is set; the load path measures then.
+        if (actions) syncClear();
     }
 @@AMBIENT_JS@@
     // A remembered click wins; otherwise follow the surrounding page, so a map
@@ -282,9 +290,42 @@ _THEME_TOGGLE_TEMPLATE = """
         save(document.body.classList.contains('dark-base') ? 'dark' : 'light');
         if (link) link.click();
     }
+    // Region button, beside "Global View" (owner, 2026-10-07): the Overview
+    // opened on this city's region. Its link and its words come from the app
+    // page (components.render_city_nav, from app/cities.py), so a region
+    // renamed or a city regrouped needs no map re-rendered; with no such link
+    // (an older app, or the map opened alone) it stays hidden.
+    var regionBtn = document.getElementById('back-to-region');
+    function regionLink() {
+        var box = window.parent.document.querySelector('.st-key-map-region-nav');
+        return box ? box.querySelector('a[href]') : null;
+    }
+    function fillRegion() {
+        var link = regionLink();
+        if (!link) return;
+        var text = link.textContent.trim();
+        regionBtn.textContent = text;
+        regionBtn.setAttribute('aria-label', 'Back to ' + text.replace(/^\\u2190\\s*/, '') +
+            ' on the Global View map');
+        regionBtn.hidden = false;
+        syncClear();
+    }
+    // A fourth button wraps the row onto a second line in a phone's frame, so
+    // the open legend's cap (.map-legend, --hm-actions-clear) follows the
+    // row's measured bottom plus the 16 px gap the fixed 56 px figure keeps.
+    var actions = document.getElementById('map-actions');
+    function syncClear() {
+        var clear = Math.max(@@LEGEND_TOP_CLEAR@@, Math.ceil(actions.getBoundingClientRect().bottom) + 16);
+        document.documentElement.style.setProperty('--hm-actions-clear', clear + 'px');
+    }
+    window.addEventListener('resize', syncClear);
     if (window.parent !== window) {
         back.hidden = false;
         back.addEventListener('click', function () { goTo(overviewLink()); });
+        fillRegion();
+        setTimeout(fillRegion, 800);            // as fillMenu: the links may render after this frame
+        setTimeout(fillRegion, 2500);
+        regionBtn.addEventListener('click', function () { goTo(regionLink()); });
         fillMenu();
         setTimeout(fillMenu, 800);              // the page's links may render just after this frame
         setTimeout(fillMenu, 2500);
@@ -302,6 +343,12 @@ _THEME_TOGGLE_TEMPLATE = """
 </script>
 """
 
+# How far below the map's top edge the open legend must stop: the button row
+# (#map-actions, top 10px, ~30 px tall) plus a gap. _layout_labels caps its
+# legend obstacle with the same number, so the model and the render agree.
+# A row that wraps raises it in the browser (--hm-actions-clear, below).
+_LEGEND_TOP_CLEAR = 56
+
 # Resolved once, from pipeline/theme.py, so no colour is written twice. The
 # template uses @@NAME@@ placeholders rather than str.format because it is full
 # of literal CSS and JS braces.
@@ -317,6 +364,7 @@ THEME_TOGGLE_HTML = (
     .replace("@@LIGHT_ACCENT@@", LIGHT["accent"])
     .replace("@@LIGHT_RING@@", LIGHT["ring"])
     .replace("@@LIGHT_STATION@@", LIGHT["station"])
+    .replace("@@LEGEND_TOP_CLEAR@@", str(_LEGEND_TOP_CLEAR))
 )
 assert "@@" not in THEME_TOGGLE_HTML, "unresolved placeholder in THEME_TOGGLE_HTML"
 
@@ -326,11 +374,6 @@ assert "@@" not in THEME_TOGGLE_HTML, "unresolved placeholder in THEME_TOGGLE_HT
 # KEPT OUT OF LEGEND_HTML ON PURPOSE: that string goes through .format(), so
 # every CSS brace in it would have to be doubled, and a single missed one is a
 # KeyError at render time rather than a visible mistake. Concatenated instead.
-#
-# How far below the map's top edge the open legend must stop: the button row
-# (#map-actions, top 10px, ~30 px tall) plus a gap. _layout_labels caps its
-# legend obstacle with the same number, so the model and the render agree.
-_LEGEND_TOP_CLEAR = 56
 _LEGEND_CSS = """
 <style>
 /* THE HEADER IS THE CONTROL, AND IT HAS TO SAY SO. A native <summary> does
@@ -373,10 +416,14 @@ _LEGEND_CSS = """
    header sticks, so Hide stays in reach while the rows scroll. Its background
    is set, NOT `inherit`: a <summary> is slotted into the <details> shadow
    root, so it inherits from a transparent slot - measured, the rows showed
-   through the header in dark mode. */
+   through the header in dark mode.
+   The clearance is the button row's, measured: --hm-actions-clear is set by
+   the region button's script when the row wraps to a second line (a phone's
+   343 px frame since 2026-10-07: four buttons where three fitted, 72 px tall),
+   else this fixed figure. */
 .map-legend { box-sizing: border-box; overflow-y: auto;
     overscroll-behavior: contain;
-    max-height: calc(min(100vh, """ + str(_MAP_H) + """px) - """ + str(24 + _LEGEND_TOP_CLEAR) + """px); }
+    max-height: calc(min(100vh, """ + str(_MAP_H) + """px) - 24px - var(--hm-actions-clear, """ + str(_LEGEND_TOP_CLEAR) + """px)); }
 .map-legend > summary { position: sticky; top: -8px; z-index: 1;
     padding-top: 8px; margin-top: -8px; background: white; }
 .dark-base .map-legend > summary { background: var(--dm-surface); }
@@ -2795,11 +2842,16 @@ def _esc(value):
 
 
 def add_pin_layer(m, rows, group_name, color, tooltip_field_label,
-                  value_column, show=True, display=None, animate=False, registry=None):
+                  value_column, show=True, display=None, animate=False, outline=None,
+                  registry=None):
     """Add one toggleable, clustered, coloured pin layer for a category bucket.
     Return the number of points (0 = nothing added). `animate`: see
-    render_heatmap's `animate_clusters`. `registry`: a list the layer's JS
-    variable name is appended to (TRAVEL_MODE_SCRIPT's business layers)."""
+    render_heatmap's `animate_clusters`. `outline`: (colour, weight) for a ring
+    around each pin (pipeline/taxonomies.MEANING_OUTLINES); None draws the
+    pin's edge in its fill colour at weight 1, as every map did before.
+    `registry`: a list the layer's JS variable name is appended to
+    (TRAVEL_MODE_SCRIPT's business layers)."""
+    stroke, weight = outline or (color, 1)
     # Station name, ring band AND the classification value each repeat once per
     # pin, so each is emitted ONCE in a lookup table and referenced by integer
     # index. Nothing is lost: the callback resolves them before display.
@@ -2835,7 +2887,7 @@ def add_pin_layer(m, rows, group_name, color, tooltip_field_label,
         cat = _esc(_display(getattr(row, value_column)))
         data.append([
             round(row.latitude, COORD_DP), round(row.longitude, COORD_DP),
-            _esc(row.business_name),
+            _esc(shown_name(row.business_name, cat)),
             cats.setdefault(cat, len(cats)),
             stations.setdefault(station, len(stations)),
             bands.setdefault(band, len(bands)),
@@ -2855,8 +2907,8 @@ def add_pin_layer(m, rows, group_name, color, tooltip_field_label,
                 // group no longer reaches the map, where Leaflet.markercluster
                 // unspiderfies on any click (desktop; owner, 2026-10-04).
                 var marker = L.circleMarker(new L.LatLng(row[0], row[1]), {{
-                    radius: 5, color: '{color}', fillColor: '{color}',
-                    fillOpacity: 0.85, weight: 1, bubblingMouseEvents: false
+                    radius: 5, color: '{stroke}', fillColor: '{color}',
+                    fillOpacity: 0.85, weight: {weight}, bubblingMouseEvents: false
                 }});
                 var html = '<b>' + row[2] + '</b><br>' +
                     '{tooltip_field_label}: ' + CATEGORIES[row[3]] + '<br>' +
@@ -2903,8 +2955,13 @@ def add_pin_layer(m, rows, group_name, color, tooltip_field_label,
 # label is placed around). A legend sizes to its longest row; every map's rows
 # fitted this until Tokyo's "code + full name" rows ("JO  JR Yokosuka / Sobu
 # Rapid Line") made its legend 409 px wide and it covered 5 labels at the 1000
-# px frame (2026-09-28). A map with legend_names is therefore
-# capped at this width and its long rows wrap, so the model stays true.
+# px frame (2026-09-28). A map with legend_names was therefore capped at this
+# width and its long rows wrap, so the model stays true. EVERY legend is
+# capped since 2026-10-07: the one-colour-per-meaning legends' long category
+# rows ("Food, secondhand, electronics, tobacco shops") made New York's legend
+# 311 px with no legend_names, and it covered Flushing (7) and Shuttles (S) at
+# 1000 px (review lane 3, F1); Philadelphia 299, Buffalo 315 and Toronto 319
+# were past the model too. A legend narrower than the cap renders the same.
 LEGEND_MODEL_W = 274
 _LEGEND_CAP_STYLE = f"<style>.map-legend {{ max-width: {LEGEND_MODEL_W}px; }}</style>"
 
@@ -2972,7 +3029,7 @@ def build_legend(bucket_colors, legend_label, lines, no_data_stations=False, leg
     if travel:
         category_rows = f'<div class="hm-biz">{category_rows}</div>'
     legend = LEGEND_HTML.format(category_rows=category_rows, line_rows=line_rows)
-    return (_LEGEND_CSS + (_LEGEND_CAP_STYLE if names else "") + legend
+    return (_LEGEND_CSS + _LEGEND_CAP_STYLE + legend
             + LEGEND_AUTOFIT_SCRIPT.replace("__MAP_W__", str(_MAP_W)))
 
 
@@ -3020,6 +3077,52 @@ def _has_contact_details(name) -> bool:
     text = str(name)
     return bool(_CONTACT_EMAIL.search(text)
                 or _CONTACT_PHONE.search(_CONTACT_EMAIL.sub("", text)))
+
+
+# A NAME THAT CANNOT BE SHOWN AS PUBLISHED shows the pin's classification
+# instead, as a withheld name shows its permit type (owner, 2026-10-07: no
+# glitched data live). Three kinds, measured across every built city on
+# 2026-10-07 (review lane 1, F5): a blank name (497 rows in 72 cities, Mexico
+# City's DENUE 118 and Kyoto's lists 63 the most); a spreadsheet error
+# exported as text ("#NAME?" on 6 Japanese rows); and a letter lost in the
+# publisher's own bytes, a "?" inside a word ("P?tisserie", "Caf? ..." in the
+# western-Tokyo lists; checked in Tachikawa's Shift-JIS file, not a decoding
+# fault here). A "?" that ends a word stays ("Why Not?"), except "Caf?".
+# TWO LOSSES ARE CERTAIN AND ARE RESTORED FIRST (sampled 2026-10-07): a lost
+# possessive apostrophe, a "?" between a letter and a closing "s" ("Patel?s",
+# "FINCA?S", "YOUNG?S" in the London, Miami, Los Angeles and Sacramento
+# lists), and "Caf?", which can only be "Café". Every other lost letter would
+# be a guess ("CR?PERIE", Seoul's lost separators "더?헤어", Osaka's lost
+# kanji "立?み"), so the name shows the classification instead.
+_SHEET_ERROR = re.compile(r"^#(NAME\?|VALUE!|REF!|N/A|DIV/0!|NULL!|NUM!)$")
+_LETTER = "A-Za-zÀ-ɏ぀-ヿ一-鿿가-힯"
+_LOST_LETTER = re.compile(f"[{_LETTER}]\\?[{_LETTER}]|\\bCaf\\?")
+_LOST_APOSTROPHE = re.compile(r"(?<=[A-Za-z])\?(?=[sS]\b)")
+_LOST_CAFE = re.compile(r"\b(Caf|CAF)\?")
+
+
+def repaired_name(name):
+    """A published name with its two certain losses restored (see above)."""
+    if not isinstance(name, str):
+        return name
+    name = _LOST_APOSTROPHE.sub("'", name)
+    return _LOST_CAFE.sub(lambda m: "Café" if m.group(1) == "Caf" else "CAFÉ", name)
+
+
+def glitched_name(name):
+    """True when a business name cannot be shown as published (see above)."""
+    if name is None or (isinstance(name, float) and math.isnan(name)):
+        return True
+    text = str(name).strip()
+    return not text or text.lower() == "nan" or bool(_SHEET_ERROR.match(text)) \
+        or bool(_LOST_LETTER.search(text))
+
+
+def shown_name(name, classification):
+    """The name a pin shows: the published name with its certain losses
+    restored, or its classification when the name is still glitched."""
+    name = repaired_name(name)
+    return classification if glitched_name(name) else name
 
 
 def drop_contact_details(businesses):
@@ -3993,6 +4096,28 @@ def fingerprint_mark(ident):
     return f"ehm:v1:{ident}:{check}" if check else None
 
 
+# Pin colours one map must never draw together. Shops and services violet sits
+# CIEDE2000 3.1 from Retail blue under deuteranopia and 7.7 under protanopia
+# (pipeline/taxonomies.MEANING_COLOURS), so the two only ever appear on
+# different maps. The pair is measured, not a style preference.
+REFUSED_TOGETHER = [(MEANING_COLOURS["Shops and services"], dict(CATEGORY_BUCKETS)["Retail"])]
+
+
+def _refuse_colours_together(present, city_name):
+    """Raise when a map draws a REFUSED_TOGETHER pair, naming the backup."""
+    drawn = {c.lower(): b for b, c in present}
+    for a, b in REFUSED_TOGETHER:
+        if a.lower() in drawn and b.lower() in drawn:
+            raise ValueError(
+                f"{city_name}: draws {drawn[a.lower()]} ({a}) and {drawn[b.lower()]} ({b}) "
+                "together, which readers with red-green colour blindness cannot tell "
+                "apart (CIEDE2000 3.1 under deuteranopia). The recorded backup: Shops "
+                "and services in teal #37786e SITE-WIDE (all six maps, not this one "
+                "alone) plus a dark outline ring on that layer "
+                "(pipeline/taxonomies.MEANING_OUTLINES). Its weakest pair is Retail "
+                "under tritanopia, 11.0. Bring the switch to the owner first.")
+
+
 def render_heatmap(*, output_path, map_title, city_name, system_name,
                    stations, businesses, taxonomy_system, lines,
                    crs_geographic, crs_projected, ring_edges_meters, ring_labels,
@@ -4083,18 +4208,6 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
             names=names, **full_travel)
 
     taxonomy = load_taxonomy_module(taxonomy_system)
-    bucket_colors = dict(CATEGORY_BUCKETS)
-
-    # A line the reader cannot tell from the pins drawn on top of it is not a
-    # drawn line. Measured here, at render, because Calgary's Blue Line shipped
-    # Delta-E 3.3 from Retail blue (the same colour) and went unnoticed until
-    # another city's build first ran the check. Raises only in
-    # genuine-duplicate range; agency colours below the preferred figure are
-    # reported every render and kept, per the owner's branding decision. See
-    # pipeline/linecolour.py for why there are two thresholds.
-    check_line_colours(
-        {names.get(key, label): color for key, (_coords, color, label, _end) in lines.items()},
-        bucket_colors, city=city_name)
 
     businesses = businesses.dropna(subset=["latitude", "longitude"]).copy()
     businesses = drop_contact_details(businesses)
@@ -4254,7 +4367,9 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     # Not legend_label() itself: NAICS's appends its code prefixes.
     layer_label = getattr(taxonomy, "layer_label", lambda bucket: bucket)
     present = []
-    for name, color in CATEGORY_BUCKETS:
+    # The colour follows what the bucket MEANS in this taxonomy (food shops,
+    # shops and services), pipeline/taxonomies.MEANING_COLOURS.
+    for name, color in pin_colours(taxonomy):
         rows = in_rings[in_rings["_bucket"] == name]
         # pins=False draws no business dots at all; the legend then lists only
         # lines. Added for "mobile mode" (2026-09-25), which was retired
@@ -4264,8 +4379,23 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
         if pins and add_pin_layer(m, rows, layer_label(name), color, taxonomy.FIELD_LABEL,
                          taxonomy.VALUE_COLUMN,
                          display=getattr(taxonomy, "display_value", None),
-                         animate=animate_clusters, registry=business_layers):
+                         animate=animate_clusters, outline=pin_outline(taxonomy, name),
+                         registry=business_layers):
             present.append((name, color))
+    _refuse_colours_together(present, city_name)
+
+    # A line the reader cannot tell from the pins drawn on top of it is not a
+    # drawn line. Measured here, at render, because Calgary's Blue Line shipped
+    # Delta-E 3.3 from Retail blue (the same colour) and went unnoticed until
+    # another city's build first ran the check. Raises only in
+    # genuine-duplicate range; agency colours below the preferred figure are
+    # reported every render and kept, per the owner's branding decision. See
+    # pipeline/linecolour.py for why there are two thresholds. Only the pin
+    # colours this map DRAWS count: Paris's #6E6E00 sits 6.6 from Food shops
+    # olive, which Paris never shows (2026-10-07).
+    check_line_colours(
+        {names.get(key, label): color for key, (_coords, color, label, _end) in lines.items()},
+        {layer_label(b): c for b, c in present}, city=city_name)
 
     m.get_root().html.add_child(folium.Element(
         build_legend(present, taxonomy.legend_label, lines, no_data_stations=bool(no_data.any()),

@@ -237,14 +237,17 @@ def label_colours(colour, *, light_halo, dark_halo, dark=None, minimum=LABEL_MIN
 def check_line_colours(line_colours, category_colours, *, city=""):
     """Measure every transit-line colour against the category pin palette.
 
-    `line_colours`: {label: hex}. `category_colours`: {bucket: hex}.
+    `line_colours`: {label: hex}. `category_colours`: {bucket: hex}, the pin
+    colours the map actually DRAWS (render_heatmap passes only those; a colour
+    the map never shows cannot hide a line).
 
     Prints one line per transit line, RAISES below HARD_FLOOR, and returns the
     list of (label, hex, worst_bucket, delta_e) below PREFERRED so a caller can
     record them. Also checks the lines against EACH OTHER, since two lines a
-    reader cannot tell apart is the same failure one step over.
+    reader cannot tell apart is the same failure one step over; that half runs
+    even when no pins are drawn.
     """
-    if not line_colours or not category_colours:
+    if not line_colours:
         return []
 
     rows, flagged, fatal = [], [], []

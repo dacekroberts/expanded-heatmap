@@ -1,0 +1,187 @@
+{
+  "city_food": {
+    "as_of": "2026-06-30",
+    "bytes": 193851,
+    "dataset_page": "https://data.bodik.jp/dataset/102016_eiseikensa01",
+    "file": "syokuhin20260630.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T04:39:29+00:00",
+    "rows": 2117,
+    "sha256": "5d105ee1a84dbeb76d3f0001493c7376683cde3ed725f64f822052ddc1d3ad67",
+    "url": "https://data.bodik.jp/dataset/be0e8464-4b96-41f6-901d-1aa4bf11bcc0/resource/6808f251-ce78-4c09-a5d8-24a871a5d7e9/download/syokuhin20260630.xlsx"
+  },
+  "city_mhlw": {
+    "as_of": null,
+    "bytes": 1394571,
+    "dataset_page": "https://i2fas.mhlw.go.jp/",
+    "file": "10201_food_business_all.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-05T06:05:15+00:00",
+    "rows": 4133,
+    "sha256": "dc3cea82116c1fe969e47c8ed87b8af534e9a3fb42c1ecbd95582dbc5ddc4637",
+    "url": "https://i2fas.mhlw.go.jp/faspub/page/opendatadownload.jsp?param=10201_food_business_all.csv"
+  },
+  "city_reg_base": {
+    "as_of": "2026-03-31",
+    "bytes": 67038,
+    "dataset_page": "https://data.bodik.jp/dataset/102016_eiseikensa02",
+    "file": "seikatueiseieigyousisetuitiranr8.3.31.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T04:40:05+00:00",
+    "rows": 1454,
+    "sha256": "49a1b72b537fe8d2f78c6c47b97b97d13ab9c5d47c208ef91f5204032d9223ad",
+    "url": "https://data.bodik.jp/dataset/d66b613e-d058-4074-a343-9d86bb20381f/resource/2bd28b54-0e08-497c-9c9a-2b708a84b8aa/download/seikatueiseieigyousisetuitiranr8.3.31.zip"
+  },
+  "city_reg_closed_4": {
+    "as_of": "2026-04",
+    "bytes": 3166,
+    "dataset_page": "https://data.bodik.jp/dataset/102016_eiseikensa02",
+    "file": "haigyouseikatueiseieigyousisetuitiran_r8.4.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T04:40:28+00:00",
+    "rows": 6,
+    "sha256": "45d928d6bc701f29e068ce4bde26877a391acbc904665cec4d1f70b79b38946e",
+    "url": "https://data.bodik.jp/dataset/102016_eiseikensa02"
+  },
+  "city_reg_closed_5": {
+    "as_of": "2026-05",
+    "bytes": 2580,
+    "dataset_page": "https://data.bodik.jp/dataset/102016_eiseikensa02",
+    "file": "haigyouseikatueiseieigyousisetuitiran_r8.5.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T04:40:52+00:00",
+    "rows": 11,
+    "sha256": "8d3c0c9e3ea1538dc57760337bc6001fe2443682eca57e87a19fd170d646e26b",
+    "url": "https://data.bodik.jp/dataset/102016_eiseikensa02"
+  },
+  "city_reg_closed_6": {
+    "as_of": "2026-06",
+    "bytes": 3073,
+    "dataset_page": "https://data.bodik.jp/dataset/102016_eiseikensa02",
+    "file": "haigyouseikatueiseieigyousisetuitiran_r8.6.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T04:41:16+00:00",
+    "rows": 3,
+    "sha256": "6a6befc7582a4511f0343424a51a3d6f5efa7570b8a567a32c131cd20c843999",
+    "url": "https://data.bodik.jp/dataset/102016_eiseikensa02"
+  },
+  "city_reg_closed_7": {
+    "as_of": "2026-07",
+    "bytes": 4385,
+    "dataset_page": "https://data.bodik.jp/dataset/102016_eiseikensa02",
+    "file": "haigyouseikatueiseieigyousisetuitiran_r8.7.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T04:41:40+00:00",
+    "rows": 9,
+    "sha256": "7a4533051352021c54476c8da3c14fa84d1719bd11f02b9df12701fa64a74b7b",
+    "url": "https://data.bodik.jp/dataset/102016_eiseikensa02"
+  },
+  "city_reg_closed_8": {
+    "as_of": "2026-08",
+    "bytes": 1170,
+    "dataset_page": "https://data.bodik.jp/dataset/102016_eiseikensa02",
+    "file": "haigyouseikatueiseieigyousisetuitiran_r8.8.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T04:42:04+00:00",
+    "rows": 3,
+    "sha256": "9f6ac7d6ea977be4707f7bb60fd95d250e0be9bd6abd9d20e30e14d38bac1fea",
+    "url": "https://data.bodik.jp/dataset/102016_eiseikensa02"
+  },
+  "city_reg_new_4": {
+    "as_of": "2026-04",
+    "bytes": 1677,
+    "dataset_page": "https://data.bodik.jp/dataset/102016_eiseikensa02",
+    "file": "sinkiseikatueiseieigyousisetuitiran_r8.4.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T04:40:16+00:00",
+    "rows": 4,
+    "sha256": "5b959e4418acb8684436327f7f457d2a3da3f6f3cd255097e67e8d1b3fb84edc",
+    "url": "https://data.bodik.jp/dataset/102016_eiseikensa02"
+  },
+  "city_reg_new_5": {
+    "as_of": "2026-05",
+    "bytes": 1453,
+    "dataset_page": "https://data.bodik.jp/dataset/102016_eiseikensa02",
+    "file": "sinkiseikatueiseieigyousisetuitiran_r8.5.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T04:40:40+00:00",
+    "rows": 1,
+    "sha256": "77bb5c56dd1fc4ca157a371b589760caa02a98523a25c6cfdc26034a3f76676d",
+    "url": "https://data.bodik.jp/dataset/102016_eiseikensa02"
+  },
+  "city_reg_new_6": {
+    "as_of": "2026-06",
+    "bytes": 1472,
+    "dataset_page": "https://data.bodik.jp/dataset/102016_eiseikensa02",
+    "file": "sinkiseikatueiseieigyousisetuitiran_r8.6.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T04:41:04+00:00",
+    "rows": 2,
+    "sha256": "7a9d050d0509bbe15e5518ebb2a61f6bd7e9149a82988e33e56c6fdc896f432e",
+    "url": "https://data.bodik.jp/dataset/102016_eiseikensa02"
+  },
+  "city_reg_new_7": {
+    "as_of": "2026-07",
+    "bytes": 2813,
+    "dataset_page": "https://data.bodik.jp/dataset/102016_eiseikensa02",
+    "file": "sinkiseikatueiseieigyousisetuitiran_r8.7.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T04:41:28+00:00",
+    "rows": 8,
+    "sha256": "8759a09287e7f332f96482c6c987e5d1ed152b38e453886d88060ad31873713a",
+    "url": "https://data.bodik.jp/dataset/102016_eiseikensa02"
+  },
+  "city_reg_new_8": {
+    "as_of": "2026-08",
+    "bytes": 980,
+    "dataset_page": "https://data.bodik.jp/dataset/102016_eiseikensa02",
+    "file": "sinkiseikatueiseieigyousisetuitiran_r8.8.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T04:41:52+00:00",
+    "rows": 1,
+    "sha256": "a792a7b4085cbde7e0eef4caf5d467ac8c215edbbc78129e84bd1f235ea0eb6b",
+    "url": "https://data.bodik.jp/dataset/102016_eiseikensa02"
+  },
+  "isj_10201_block": {
+    "bytes": 406956,
+    "file": "10201-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-05T06:05:16+00:00",
+    "sha256": "37e6fff7a4d809d26752e5090473adf9bf336d068f341fc4f4c722a8fa1c9e8e",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/10201-24.0a.zip"
+  },
+  "isj_10201_chome": {
+    "bytes": 9199,
+    "file": "10201-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-05T06:05:19+00:00",
+    "sha256": "7e257d71524963e010d6984d7a6adbf7f837e0103a5b9fbb2724b3ac0ebf4e03",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/10201-19.0b.zip"
+  },
+  "n02": {
+    "bytes": 14903774,
+    "file": "data/japan/raw/N02-25_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-30T23:47:52+00:00",
+    "sha256": "aaf76af133b2e771e538fabc4646d2e443dc1d5a67b221382a28d744e706cc9f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip"
+  },
+  "n03": {
+    "bytes": 3144563,
+    "file": "data/japan/raw/N03-20250101_10_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T00:22:55+00:00",
+    "sha256": "1467eaad6106d6e38196b92fc4a1f30f356339d2f6d5d39b08e076057e4a627f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_10_GML.zip"
+  },
+  "osm_station_names": {
+    "bytes": 15744,
+    "elements": 35,
+    "file": "osm_station_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-10-07T19:08:36Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](36.3,138.99,36.58,139.25);way[\"railway\"=\"station\"](36.3,138.99,36.58,139.25););out tags center;",
+    "retrieved": "2026-10-07T19:09:56+00:00",
+    "sha256": "ee88510978cd61cd9431d657ace8d6ff42ab2298686d9af7d464b6c4a5b918a8"
+  }
+}

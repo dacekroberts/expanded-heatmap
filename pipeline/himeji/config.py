@@ -22,6 +22,8 @@ names from OpenStreetMap's name:en.
 
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -189,7 +191,15 @@ LINES = {
 # (Kobe Line) and slate (Sanyo Line); Sanyo's red into red (Main) and
 # red-orange (Aboshi). Closest pair 18.9 (Sanyo's two lines, at 飾磨); the
 # dark-mode labels separate, 6 of 6.
-_COLOURS = {"JA": "#08A0C0", "JS": "#406878", "JJ": "#D06840", "JK": "#E060D0", "SM": "#D01810", "SA": "#F86038"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+_COLOURS = {
+    "JA": line_registry.colour("jr-west-kobe-line"), "JS": line_registry.colour("jr-west-sanyo-line"),
+    "JJ": "#D06840", "JK": "#E060D0", "SM": line_registry.colour("sanyo-electric-main-line"),
+    "SA": "#F86038",
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

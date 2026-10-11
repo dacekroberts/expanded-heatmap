@@ -186,9 +186,12 @@ TFGM_COLOURS = {
 }
 LINES = {k: {"hue": v} for k, v in TFGM_COLOURS.items()}
 # `python scripts/line_colour_search.py manchester`, run 2026-10-02: each
-# TfGM hue's nearest feasible colour, 45.1 or more from every pin, 3:1 on both
-# pages; closest pair within 500 m 18.1 (Burgundy, Purple); the nine dark-mode
-# labels distinct.
+# TfGM hue's nearest feasible colour, 45.1 or more from the pins of that run,
+# 3:1 on both pages; closest pair within 500 m 18.1 (Burgundy, Purple); the
+# nine dark-mode labels distinct. FOOD SHOPS OLIVE (#737a00, 2026-10-07)
+# arrived later: the Yellow line sits 36.3 from it, above the owner's floor of
+# 20 and below 45, an accepted trade (2026-10-07); every other line >= 45.4
+# from every pin.
 LINE_COLOURS = {
     "Green": "#28A800", "Purple": "#9840A0", "Yellow": "#C88800", "Burgundy": "#C870C8",
     "Blue": "#08A0C0", "Pink": "#B880A8", "Anthracite": "#586870", "Red": "#E81020",

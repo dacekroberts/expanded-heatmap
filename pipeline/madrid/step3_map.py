@@ -36,6 +36,7 @@ from pipeline.madrid.config import (  # noqa: E402
     STATIONS_CSV,
     TAXONOMY_SYSTEM,
 )
+from pipeline.taxonomies import load_taxonomy_module, pin_colours  # noqa: E402
 
 # NOT a GTFS shape_id and not an OSM ref: step 1 wrote one feature per line to
 # line_shapes.geojson keyed on `line`, so the source key IS the line key. The
@@ -76,15 +77,13 @@ LINE_SPECS = {
     for key, (source_key, colour) in LINE_SHAPES.items()
 }
 
-# The three business-category colours, which every line colour has to stay
-# distinguishable from. Madrid keeps Metro de Madrid's OWN livery rather than an
-# invented palette - the project only reaches for its own when an agency's
-# colours are ambiguous or shared, and these are neither.
-CATEGORY_COLOURS = {
-    "Retail": "#2a78d6",
-    "Food service": "#C2185B",
-    "Personal services": "#1baf7a",
-}
+# The business-category pin colours, which every line colour has to stay
+# distinguishable from: the shared palette as Madrid's taxonomy draws it, never
+# a copy (a copy kept the old colours when the palette moved, 2026-10-07).
+# Madrid keeps Metro de Madrid's OWN livery rather than an invented palette -
+# the project only reaches for its own when an agency's colours are ambiguous
+# or shared, and these are neither.
+CATEGORY_COLOURS = dict(pin_colours(load_taxonomy_module(TAXONOMY_SYSTEM)))
 
 
 def city_geometry():

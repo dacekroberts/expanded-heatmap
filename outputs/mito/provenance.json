@@ -1,0 +1,99 @@
+{
+  "city_barber": {
+    "as_of": "2026-07-02",
+    "bytes": 23221,
+    "dataset_page": "https://www.city.mito.lg.jp/site/open-data/4496.html",
+    "file": "71286.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:41:20+00:00",
+    "rows": 258,
+    "sha256": "eb01a6c7c82e88f3d6ae6fa3b02329a2d1b7927398f3a3ea3f059de04c1ac08e",
+    "url": "https://www.city.mito.lg.jp/uploaded/attachment/71286.csv"
+  },
+  "city_beauty": {
+    "as_of": "2026-07-02",
+    "bytes": 84749,
+    "dataset_page": "https://www.city.mito.lg.jp/site/open-data/4496.html",
+    "file": "71287.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:41:23+00:00",
+    "rows": 821,
+    "sha256": "802ca31c44b0f8638451e959520272fa221f8a805aa60499c2763f5f4e2f4013",
+    "url": "https://www.city.mito.lg.jp/uploaded/attachment/71287.csv"
+  },
+  "city_laundry": {
+    "as_of": "2026-07-02",
+    "bytes": 4959,
+    "dataset_page": "https://www.city.mito.lg.jp/site/open-data/4496.html",
+    "file": "71288.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:41:26+00:00",
+    "rows": 48,
+    "sha256": "1c4997908b6b96b618055a7cd951c76d9fa8fe62112c25bec56071e052506864",
+    "url": "https://www.city.mito.lg.jp/uploaded/attachment/71288.csv"
+  },
+  "city_laundry_pickup": {
+    "as_of": "2026-07-02",
+    "bytes": 8000,
+    "dataset_page": "https://www.city.mito.lg.jp/site/open-data/4496.html",
+    "file": "71289.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:41:30+00:00",
+    "rows": 69,
+    "sha256": "d269b60740d0b5c1488c8ec3670da3a40b5a781b9a7492bc749d4a533d3b81d3",
+    "url": "https://www.city.mito.lg.jp/uploaded/attachment/71289.csv"
+  },
+  "city_mhlw": {
+    "as_of": null,
+    "bytes": 2138515,
+    "dataset_page": "https://i2fas.mhlw.go.jp/",
+    "file": "08201_food_business_all.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:41:33+00:00",
+    "rows": 6308,
+    "sha256": "e37fb1d1ae4d10c4419aceb6df0bf49a2bfe7d02eb172c2c64f4c27a9ef510ac",
+    "url": "https://i2fas.mhlw.go.jp/faspub/page/opendatadownload.jsp?param=08201_food_business_all.csv"
+  },
+  "isj_08201_block": {
+    "bytes": 494740,
+    "file": "08201-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:41:37+00:00",
+    "sha256": "dc4e4a84bff7a422227d055efbf666ad6c2dbf321e43113e789d4106b6e03e10",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/08201-24.0a.zip"
+  },
+  "isj_08201_chome": {
+    "bytes": 8386,
+    "file": "08201-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:41:41+00:00",
+    "sha256": "bb1e915279f517c2809734b3db35564c4ffc7a861bfeed41a57cc93ce61ce960",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/08201-19.0b.zip"
+  },
+  "n02": {
+    "bytes": 14903774,
+    "file": "data/japan/raw/N02-25_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-30T23:47:52+00:00",
+    "sha256": "aaf76af133b2e771e538fabc4646d2e443dc1d5a67b221382a28d744e706cc9f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip"
+  },
+  "n03": {
+    "bytes": 3143177,
+    "file": "data/japan/raw/N03-20250101_08_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T00:22:51+00:00",
+    "sha256": "cb60c106221b127131df97d32040c498e5c333de929e51e5859f917086fb0fca",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_08_GML.zip"
+  },
+  "osm_station_names": {
+    "bytes": 9647,
+    "elements": 23,
+    "file": "osm_station_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-10-07T20:12:27Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](36.29,140.31,36.47,140.6);way[\"railway\"=\"station\"](36.29,140.31,36.47,140.6););out tags center;",
+    "retrieved": "2026-10-07T20:13:44+00:00",
+    "sha256": "23430a1354d0e2afc9b37bbb943222c35d0062cf265f83de54de278cd6a01f08"
+  }
+}

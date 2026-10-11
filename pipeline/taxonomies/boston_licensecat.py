@@ -160,8 +160,15 @@ EXTRA_COLUMNS = ("source",)
 BUCKET_PRIORITY = ["Food service", "Retail"]
 
 
+# The Retail layer here is a licensed slice, not general retail, so the
+# legend and the layer menu name what it holds (owner, 2026-10-07; measured
+# on the clean file: food 61.8%, liquor 33.2%, cannabis 4.9% of 791). Its
+# pins stay retail blue (owner).
 def legend_label(bucket: str) -> str:
-    return bucket
+    return {"Retail": "Food, liquor and cannabis shops"}.get(bucket, bucket)
+
+
+layer_label = legend_label
 
 
 def classify(row: dict):

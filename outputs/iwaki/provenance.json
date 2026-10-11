@@ -1,0 +1,165 @@
+{
+  "city_food_04": {
+    "as_of": "2026-04-30",
+    "bytes": 4468,
+    "dataset_page": "https://www.city.iwaki.lg.jp/www/contents/1652661537484/index.html",
+    "file": "Shokuhin_itiran_R0804.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:16:51+00:00",
+    "rows": 19,
+    "sha256": "cba2c2d7f1722b5011354794237ce95678bc3905845bf1d14730aa7f3a0cbe43",
+    "url": "https://www.city.iwaki.lg.jp/www/contents/1652661537484/simple/Shokuhin_itiran_R0804.csv"
+  },
+  "city_food_05": {
+    "as_of": "2026-05-31",
+    "bytes": 3369,
+    "dataset_page": "https://www.city.iwaki.lg.jp/www/contents/1652661537484/index.html",
+    "file": "Shokuhin_itiran_R0805.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:16:54+00:00",
+    "rows": 13,
+    "sha256": "fcec8f266e2a3070cf0d506b457c97ae96d468e1213abbaf8d53b6ee39ac20ab",
+    "url": "https://www.city.iwaki.lg.jp/www/contents/1652661537484/simple/Shokuhin_itiran_R0805.csv"
+  },
+  "city_food_06": {
+    "as_of": "2026-06-30",
+    "bytes": 6228,
+    "dataset_page": "https://www.city.iwaki.lg.jp/www/contents/1652661537484/index.html",
+    "file": "Shokuhin_itiran_R0806.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:16:56+00:00",
+    "rows": 25,
+    "sha256": "b15951ac3dcca742ad58fb3909b2f3265cd62f1d20da0b8a0d3ffb0ed94d2d84",
+    "url": "https://www.city.iwaki.lg.jp/www/contents/1652661537484/simple/Shokuhin_itiran_R0806.csv"
+  },
+  "city_food_07": {
+    "as_of": "2026-07-31",
+    "bytes": 8311,
+    "dataset_page": "https://www.city.iwaki.lg.jp/www/contents/1652661537484/index.html",
+    "file": "Shokuhin_itiran_R0807.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:16:59+00:00",
+    "rows": 31,
+    "sha256": "b4539d09c673406290bec30879b68bc80f27c9724119cada135b4495ed9bb82a",
+    "url": "https://www.city.iwaki.lg.jp/www/contents/1652661537484/simple/Shokuhin_itiran_R0807.csv"
+  },
+  "city_food_08": {
+    "as_of": "2026-08-31",
+    "bytes": 6945,
+    "dataset_page": "https://www.city.iwaki.lg.jp/www/contents/1652661537484/index.html",
+    "file": "Shokuhin_itiran_R0808.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:17:01+00:00",
+    "rows": 34,
+    "sha256": "9d2cffadee9744cb8d387a9d30bb08c021a2c126930ce85fbf68c8a643677b85",
+    "url": "https://www.city.iwaki.lg.jp/www/contents/1652661537484/simple/Shokuhin_itiran_R0808.csv"
+  },
+  "city_food_list": {
+    "as_of": "2026-03-31",
+    "bytes": 1032586,
+    "dataset_page": "https://www.city.iwaki.lg.jp/www/contents/1652661537484/index.html",
+    "file": "Shokuhin_itiran_R08.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:15:39+00:00",
+    "rows": 4375,
+    "sha256": "1a9073bf2f390c5367830f5fae521bf9b7b09ebb031cb827223e565c56c48de0",
+    "url": "https://www.city.iwaki.lg.jp/www/contents/1652661537484/simple/Shokuhin_itiran_R08.csv"
+  },
+  "city_life_6": {
+    "as_of": "2026-06-30",
+    "bytes": 1075,
+    "dataset_page": "https://www.city.iwaki.lg.jp/www/contents/1780984436063/index.html",
+    "file": "ribiyoujo_R8.6.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:17:07+00:00",
+    "rows": 7,
+    "sha256": "3e9bbe6f16c5f6fe8301feedc2269bc3c97a47319174913bcba8f327a21cfc1a",
+    "url": "https://www.city.iwaki.lg.jp/www/contents/1780984436063/simple/ribiyoujo_R8.6.csv"
+  },
+  "city_life_7": {
+    "as_of": "2026-07-31",
+    "bytes": 505,
+    "dataset_page": "https://www.city.iwaki.lg.jp/www/contents/1780984436063/index.html",
+    "file": "ribiyoujo_R8.7.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:17:10+00:00",
+    "rows": 2,
+    "sha256": "2c90fca0fbc84020bcec9c36ab203527a1c778e6ad3ec0a92020cb5dc242b3c6",
+    "url": "https://www.city.iwaki.lg.jp/www/contents/1780984436063/simple/ribiyoujo_R8.7.csv"
+  },
+  "city_life_8": {
+    "as_of": "2026-08-31",
+    "bytes": 470,
+    "dataset_page": "https://www.city.iwaki.lg.jp/www/contents/1780984436063/index.html",
+    "file": "ribiyoujo_R8.8.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:17:12+00:00",
+    "rows": 1,
+    "sha256": "74f875d52fb9ae8c71337dbf7c535bce09a326475bc69ea9532bb4e6f3296efe",
+    "url": "https://www.city.iwaki.lg.jp/www/contents/1780984436063/simple/ribiyoujo_R8.8.csv"
+  },
+  "city_life_9": {
+    "as_of": "2026-09-30",
+    "bytes": 759,
+    "dataset_page": "https://www.city.iwaki.lg.jp/www/contents/1780984436063/index.html",
+    "file": "ribiyoujo_R8.9.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:17:14+00:00",
+    "rows": 3,
+    "sha256": "c41750aa9fadfdcd2c8c5a644222f2d3cf4a4a467d98737f4f91df07f43e088e",
+    "url": "https://www.city.iwaki.lg.jp/www/contents/1780984436063/simple/ribiyoujo_R8.9.csv"
+  },
+  "city_life_list": {
+    "as_of": "2026-05-31",
+    "bytes": 150938,
+    "dataset_page": "https://www.city.iwaki.lg.jp/www/contents/1780984436063/index.html",
+    "file": "ribiyoujo_ichiran.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:17:05+00:00",
+    "rows": 1165,
+    "sha256": "1b10a0e865f9e5dd91d7ce5ed7ab416ea1bd59d6a7da332b6bc89efc09d863cd",
+    "url": "https://www.city.iwaki.lg.jp/www/contents/1780984436063/simple/ribiyoujo_ichiran.csv"
+  },
+  "isj_07204_block": {
+    "bytes": 516446,
+    "file": "07204-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:17:20+00:00",
+    "sha256": "fc17675e2d0ba6e8f1dc2108e4590108d8c047a1ced406d68422c9ba3527dac7",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/07204-24.0a.zip"
+  },
+  "isj_07204_chome": {
+    "bytes": 11198,
+    "file": "07204-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:17:22+00:00",
+    "sha256": "f14357217a171a666dffb9e2a730e6421f697aabc595443e24b32171adf90549",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/07204-19.0b.zip"
+  },
+  "n02": {
+    "bytes": 14903774,
+    "file": "data/japan/raw/N02-25_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-30T23:47:52+00:00",
+    "sha256": "aaf76af133b2e771e538fabc4646d2e443dc1d5a67b221382a28d744e706cc9f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip"
+  },
+  "n03": {
+    "bytes": 8514487,
+    "file": "data/japan/raw/N03-20250101_07_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T00:22:47+00:00",
+    "sha256": "05b7bfd46f45a71b72048fa72338e7775ad04d24942d755e58f9f108ff6f9e8f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_07_GML.zip"
+  },
+  "osm_station_names": {
+    "bytes": 10626,
+    "elements": 23,
+    "file": "osm_station_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-10-07T19:51:06Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](36.85,140.56,37.33,141.01);way[\"railway\"=\"station\"](36.85,140.56,37.33,141.01););out tags center;",
+    "retrieved": "2026-10-07T19:52:54+00:00",
+    "sha256": "a289805fddb370ba6dbe2eebb04a6562780af338e1e8077749a010d26f4c0323"
+  }
+}

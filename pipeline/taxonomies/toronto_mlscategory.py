@@ -97,8 +97,15 @@ FOOD = "Food service"
 PERSONAL = "Personal services"
 
 
+# The Retail layer here is a licensed slice, not general retail, so the
+# legend and the layer menu name what it holds (owner, 2026-10-07; measured
+# on the clean file: vape 45.6%, secondhand 30.1%, precious metals 11.2%,
+# pawn 6.0% of 814; no food). Its pins stay retail blue (owner).
 def legend_label(bucket: str) -> str:
-    return bucket
+    return {"Retail": "Vape, secondhand, precious-metal, pawn shops"}.get(bucket, bucket)
+
+
+layer_label = legend_label
 
 
 BUCKETS = {

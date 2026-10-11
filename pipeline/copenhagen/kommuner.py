@@ -20,6 +20,12 @@ from pipeline.copenhagen import config
 # outside these bounds assembled wrong (the usual Overpass boundary failure)
 # or is a different kommune.
 AREA_KM2 = {"101": (80.0, 110.0), "147": (8.0, 10.0)}
+# REGIONAL: the eight Letbane kommuner, measured on the same cache by the
+# brief (2026-10-06), each gated about 10% either side.
+if config.REGIONAL:
+    AREA_KM2 |= {"173": (35.0, 42.5), "183": (24.0, 29.0), "159": (22.5, 27.5),
+                 "153": (19.0, 23.0), "161": (12.0, 14.5), "175": (11.0, 13.5),
+                 "163": (11.0, 13.3), "187": (8.5, 10.5)}
 
 
 def read_cached(path, label):
@@ -72,6 +78,6 @@ def kommune_polygons(verbose=True):
 
 
 def scope_geometry():
-    """Kobenhavn and Frederiksberg as one shape - the map's label focus."""
+    """The kommuner in scope as one shape - the map's label focus."""
     gdf = kommune_polygons(verbose=False)
     return unary_union(list(gdf[gdf["ref"].isin(config.KOMMUNER)].geometry))

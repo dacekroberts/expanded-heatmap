@@ -1,5 +1,7 @@
 # Handoff - staging role: the screen closed, the queue held, the tools built (2026-10-04)
 
+> **Superseded 2026-10-07 by [`handoff_staging_2026-10-07.md`](handoff_staging_2026-10-07.md)** - a fresh staging session starts there. This file is kept for its history.
+
 For a FRESH staging session, started later in the week of 2026-10-04 for the
 mass development of the remaining cities and candidates. The file name keeps
 its first date because other docs point here; the content is rewritten and

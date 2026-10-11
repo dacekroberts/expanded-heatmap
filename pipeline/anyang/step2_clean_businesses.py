@@ -22,7 +22,8 @@ from pipeline.taxonomies import filter_to_storefront  # noqa: E402
 
 def main():
     sys.stdout.reconfigure(encoding="utf-8")
-    out = korea_sbiz.storefronts(config.SEMAS_SIDO, config.SEMAS_SIGUNGU)
+    out = korea_sbiz.storefronts(config.SEMAS_SIDO, config.SEMAS_SIGUNGU,
+                                  sigungu_codes=config.SEMAS_SIGUNGU_CODES)
     kept = filter_to_storefront(out, config.TAXONOMY_SYSTEM)
     if len(kept) != len(out):
         sys.exit("filter_to_storefront dropped rows the buckets already decided")

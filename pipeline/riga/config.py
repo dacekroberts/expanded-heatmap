@@ -80,7 +80,13 @@ LINE_NAMES = {s: f"Tram {s}" for s in LINE_ORDER}
 # give every tram line the same red (#FF000C), and its only tram map is dated
 # 2 September 2013. Chosen apart from each other and from the two business
 # categories; check_line_colours and check_map_markup measure them.
-LINE_COLOURS = {"1": "#d62728", "5": "#ff7f0e", "7": "#8c564b", "8": "#9467bd",
+# SHOPS AND SERVICES VIOLET (#7e57c2, 2026-10-07) arrived later: tram 8's
+# #9467bd sat 14.0 from it, under the owner's floor of 20 (2026-10-07), and
+# moved to #b480cc, a lighter violet: the colour nearest its own that reads
+# 3:1 on both pages and clears 25 from both pins and 18 from every other line
+# (violet 25.0, between 20 and 45: an accepted trade; nearest line tram 7
+# 52.6).
+LINE_COLOURS = {"1": "#d62728", "5": "#ff7f0e", "7": "#8c564b", "8": "#b480cc",
                 "10": "#17becf", "11": "#6b8e23", "14": "#e6ac00"}
 # A stopping pattern counts as regular when it runs this share of a route's
 # trips in one direction; depot runs and one-off diversions fall below it.

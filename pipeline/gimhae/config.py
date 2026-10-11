@@ -8,6 +8,8 @@ OSM rail route, keyed on 시군구코드), with the LRT drawn as Busan draws it.
 
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -74,8 +76,12 @@ RING_LABELS = ["0-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi", "0.3-0.6 mi"]
 # median spacing measured at step 1. NOT drawn: Busan's lines that reach the
 # box with no station in Gimhae, and Korail (never queried).
 # key -> (OSM ref, colour, public name, label end).
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
 LINES = {
-    "BGL": ("BGL", "#8652A1", "Busan–Gimhae LRT", None),
+    "BGL": ("BGL", line_registry.colour("busan-gimhae-lrt"), "Busan–Gimhae LRT", None),
 }
 OSM_COLOUR = {}
 LINES_ROUTE_TYPES = {"subway", "light_rail", "monorail", "train", "tram"}

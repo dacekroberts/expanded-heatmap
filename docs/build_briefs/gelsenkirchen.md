@@ -151,7 +151,7 @@ sentence.**
 | **Publisher** | Stadt Gelsenkirchen (the Ruhr portal's records name it publisher and contact) |
 | **Service** | GeoServer OGC API Features, `https://maps.gelsenkirchen.de/geoserver/infrastrukturdatenbank/ogc/features/v1/collections/<layer>/items`; the same layers by WFS 2.0 at `https://maps.gelsenkirchen.de/geoserver/infrastrukturdatenbank/wfs` (capabilities keyword `ge:constraints_dl_zero_de`, `Fees` NONE) |
 | **Catalogue** | `opendata.ruhr` records `gewerbe-gastronomie-der-stadt-gelsenkirchen`, `gewerbe-einzelhandel-der-stadt-gelsenkirchen`, `gewerbe-dienstleistung-der-stadt-gelsenkirchen` (plus `leerstande-...` and `gewerbestandorte-...`), each `license_id` `dl-zero-de/2.0`; record `issued` 2026-09-16 (publication metadata, not a survey date) |
-| **Cached** | `data/gelsenkirchen/raw/`: `gewerbe_gastronomie.geojson` (403 rows, 531,085 bytes), `gewerbe_einzelhandel.geojson` (1,318, 1,719,483), `gewerbe_dienstleistung.geojson` (591, 751,623), `gewerbe.geojson` (2,787, 3,549,872), `gewerbe-leerstand.geojson` (467, 566,538); sha256 in `gelsenkirchen_gewerbe_meta.json`. Live WFS hit counts on 2026-10-05 match: 403, 1,318, 591 |
+| **Cached** | `data/gelsenkirchen/raw/`: `gewerbe_gastronomie.geojson` (403 rows, 531,085 bytes), `gewerbe_einzelhandel.geojson` (1,318, 1,719,483), `gewerbe_dienstleistung.geojson` (591, 751,623), `gewerbe.geojson` (2,787, 3,549,872), `gewerbe-leerstand.geojson` (467, 566,538); sha256 in `gelsenkirchen_gewerbe_meta.json`. Live WFS hit counts on 2026-10-05 match: 403, 1,318, 591. **Re-read 2026-10-07 (the Abroad build): the services layer holds 594 rows, 122 of them without `KAT_DL`** (134 on 2026-10-05): the city edits the layer, so the build's own reduced fetch (call 5) gives the figures |
 | **Fetch** | `pipeline/gelsenkirchen/fetch_sources.py` takes the **three themed layers only**, paged at 1,000 (`limit`/`startIndex`), from the city's own host (pre-permitted: named here). A step never fetches |
 | **Licence** | **Datenlizenz Deutschland - Zero - Version 2.0** (`https://www.govdata.de/dl-de/zero-2-0`): any use, no condition, no attribution required |
 
@@ -524,10 +524,10 @@ Braces are the build's own measurements. Sentences outside the template are
   },
   {
     "id": "gelsenkirchen-hits-services",
-    "claim": "The services layer holds 591 rows",
+    "claim": "The services layer holds 594 rows (591 on 2026-10-05; re-read 2026-10-07 by the Abroad build, the city edits the layer)",
     "kind": "http_contains",
     "url": "https://maps.gelsenkirchen.de/geoserver/infrastrukturdatenbank/wfs?service=WFS&version=2.0.0&request=GetFeature&typenames=gewerbe_dienstleistung&resultType=hits",
-    "present": ["numberMatched=\"591\""]
+    "present": ["numberMatched=\"594\""]
   },
   {
     "id": "gelsenkirchen-uncategorised-food",
@@ -538,10 +538,10 @@ Braces are the build's own measurements. Sentences outside the template are
   },
   {
     "id": "gelsenkirchen-uncategorised-services",
-    "claim": "134 services rows have no KAT_DL (the uncategorised services rows left out, owner)",
+    "claim": "122 services rows have no KAT_DL (the uncategorised services rows left out, owner; 134 on 2026-10-05, re-read 2026-10-07)",
     "kind": "http_contains",
     "url": "https://maps.gelsenkirchen.de/geoserver/infrastrukturdatenbank/wfs?service=WFS&version=2.0.0&request=GetFeature&typenames=gewerbe_dienstleistung&resultType=hits&CQL_FILTER=KAT_DL%20IS%20NULL",
-    "present": ["numberMatched=\"134\""]
+    "present": ["numberMatched=\"122\""]
   },
   {
     "id": "gelsenkirchen-hairdressers",

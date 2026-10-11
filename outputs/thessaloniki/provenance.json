@@ -1,0 +1,52 @@
+{
+  "licences": {
+    "file": "tsp_poi_energes_adeies_katastimaton.geojson",
+    "url": "https://sdi.thessaloniki.gr/geoserver/wfs?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&TYPENAMES=saloniki:tsp_poi_energes_adeies_katastimaton&OUTPUTFORMAT=application/json&SORTBY=gid",
+    "page": "https://data.gov.gr/dataset/gis-thessaloniki-wms-saloniki-tsp_poi_energes_adeies_katastimaton",
+    "licence": "https://creativecommons.org/licenses/by/4.0/",
+    "bytes": 4274423,
+    "sha256": "ff9a494f6445daf26ca2cebfb9566e28b69999f0bd3adb12006e81c99014252e",
+    "rows": 8103,
+    "retrieved": "2026-10-04",
+    "data_date": null
+  },
+  "osm": {
+    "file": "osm_all.json",
+    "host": "overpass-api.de",
+    "query": "[out:json][timeout:180];relation[\"type\"=\"route\"][\"route\"~\"^(subway|light_rail)$\"](40.54,22.87,40.68,23.02)->.r;(node[\"railway\"=\"station\"](40.54,22.87,40.68,23.02);way[\"railway\"=\"station\"](40.54,22.87,40.68,23.02);)->.s;relation[\"boundary\"=\"administrative\"][\"admin_level\"~\"^(7|8)$\"](40.54,22.87,40.68,23.02)->.b;.r out geom;node(r.r);out body;.s out tags center;.b out geom;",
+    "bytes": 943609,
+    "sha256": "c07dcf83061f5e49f5f60e2b0c373b4862abc7f7bbfcf3cbe443f04a0704ee60",
+    "osm_base": "2026-10-07T08:09:20Z"
+  },
+  "osm_rail": {
+    "file": "osm_rail_routes.json",
+    "split_from": "osm_all.json",
+    "bytes": 31902,
+    "sha256": "5856ce8f4d7ad0fcc14d986c9523b8c1a5d4150b680beef68fcd8d65646108c4",
+    "elements": {
+      "relation": 4,
+      "node": 36
+    },
+    "osm_base": "2026-10-07T08:09:20Z"
+  },
+  "osm_station_names": {
+    "file": "osm_station_names.json",
+    "split_from": "osm_all.json",
+    "bytes": 11121,
+    "sha256": "f6e147a920b15612d968a64e95adbbc769d1b918acdbfceee553b691a5f31dce",
+    "elements": {
+      "node": 19
+    },
+    "osm_base": "2026-10-07T08:09:20Z"
+  },
+  "osm_boundary": {
+    "file": "osm_boundaries.json",
+    "split_from": "osm_all.json",
+    "bytes": 900459,
+    "sha256": "48b60733af8dcfd23c0667c0500832e40f506a44526c56b07f14139b81a76274",
+    "elements": {
+      "relation": 26
+    },
+    "osm_base": "2026-10-07T08:09:20Z"
+  }
+}

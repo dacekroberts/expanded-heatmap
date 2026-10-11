@@ -9,6 +9,8 @@ one page each; docs/build_briefs/gyeonggi.md, "The next satellites").
 
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -75,10 +77,14 @@ RING_LABELS = ["0-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi", "0.3-0.6 mi"]
 # The U Line (Uijeongbu LRT) in OSM's colour, Line 1 and Line 7 in Seoul's.
 # Line 7's one station (Jangam) is drawn by the satellites' rule (every line
 # with a station in the city, to its ends).
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
 LINES = {
     "U": ("U", "#F0831E", "U Line", None),
-    "L1": ("1", "#004A85", "Line 1", None),
-    "L7": ("7", "#6E7E31", "Line 7", None),
+    "L1": ("1", line_registry.colour("seoul-subway-line-1"), "Line 1", None),
+    "L7": ("7", line_registry.colour("seoul-subway-line-7"), "Line 7", None),
 }
 OSM_COLOUR = {}
 LINES_ROUTE_TYPES = {"subway", "light_rail", "monorail", "train"}

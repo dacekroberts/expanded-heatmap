@@ -1,0 +1,51 @@
+{
+  "semas": {
+    "file": "sbiz_15083033.zip",
+    "page": "https://www.data.go.kr/data/15083033/fileData.do",
+    "url": "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003695831&fileDetailSn=1&insertDataPrcus=N",
+    "bytes": 352699739,
+    "sha256": "57aa361544108ff4fc73334f87d2ced61e41fe8638dd70bcd842930f865d2386",
+    "retrieved": "2026-09-29T09:34:52+00:00",
+    "edition": "2026-06-30"
+  },
+  "osm": {
+    "file": "osm_all.json",
+    "host": "overpass-api.de",
+    "query": "[out:json][timeout:600];relation[\"type\"=\"route\"][\"route\"~\"^(subway|light_rail|monorail|tram)$\"](37.54,126.5,37.8,126.83)->.r;(node[\"railway\"=\"station\"](37.54,126.5,37.8,126.83);way[\"railway\"=\"station\"](37.54,126.5,37.8,126.83);)->.s;relation[\"boundary\"=\"administrative\"][\"admin_level\"=\"6\"][\"name\"=\"김포시\"](37.54,126.5,37.8,126.83)->.b;.r out geom;node(r.r);out body;.s out tags center;.b out geom;",
+    "bytes": 574828,
+    "sha256": "97280b92894b60b50b97b0e6f4509c17512ba4a446f4f0fca7aea68940916ec0",
+    "osm_base": "2026-10-07T07:32:33Z"
+  },
+  "osm_rail": {
+    "file": "osm_rail_routes.json",
+    "split_from": "osm_all.json",
+    "bytes": 511461,
+    "sha256": "3c8e84686333049f6c65485cdbc77a6ae37d791f544352732bbd22f731001c78",
+    "elements": {
+      "relation": 18,
+      "node": 420
+    },
+    "osm_base": "2026-10-07T07:32:33Z"
+  },
+  "osm_station_names": {
+    "file": "osm_station_names.json",
+    "split_from": "osm_all.json",
+    "bytes": 38924,
+    "sha256": "b93664b7b941437fac3de14e48576f1f0bbb2bb4acbacd417a0ded774c89ef46",
+    "elements": {
+      "node": 62,
+      "way": 2
+    },
+    "osm_base": "2026-10-07T07:32:33Z"
+  },
+  "osm_boundary": {
+    "file": "osm_boundary.json",
+    "split_from": "osm_all.json",
+    "bytes": 24284,
+    "sha256": "0ed196c7c305ce67e45e4255ec1221f81bea69e2f3b2a741eb270fcfbba3a54f",
+    "elements": {
+      "relation": 1
+    },
+    "osm_base": "2026-10-07T07:32:33Z"
+  }
+}

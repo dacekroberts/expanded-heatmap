@@ -24,6 +24,8 @@ OpenStreetMap's name:en.
 
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -198,7 +200,14 @@ LINES = {
 # map pages and clears CIE76 45 from every pin. JR's Nippo blue, which no blue
 # clears Retail's pin in, goes teal. Closest pair 53.2 (Ibusuki Makurazaki /
 # Kagoshima Main); the dark-mode labels separate, 4 of 4.
-_COLOURS = {"KT": "#30A800", "JI": "#D08000", "JK": "#E80010", "JN": "#007890"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+_COLOURS = {
+    "KT": "#30A800", "JI": "#D08000", "JK": line_registry.colour("jr-kyushu-kagoshima-main-line"),
+    "JN": line_registry.colour("jr-kyushu-nippo-main-line"),
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

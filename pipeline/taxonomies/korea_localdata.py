@@ -144,5 +144,12 @@ def classify(row):
     return MOVE.get((oa, sub), bucket)
 
 
+# The Retail layer here is a licensed slice, not general retail, so the
+# legend and the layer menu name what it holds (owner, 2026-10-07; measured
+# on the clean file: 98% in Seoul (51,663), 99% in Daegu and Busan). Its pins
+# stay retail blue (owner).
 def legend_label(bucket):
-    return bucket
+    return {"Retail": "Food, convenience and tobacco shops"}.get(bucket, bucket)
+
+
+layer_label = legend_label

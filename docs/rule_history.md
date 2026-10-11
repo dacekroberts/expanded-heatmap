@@ -197,6 +197,24 @@ reader had already found and immediately found five more.
   is fine: see `pipeline/taxonomies/`. Step 2 filters via
   `filter_to_storefront()`, never NAICS prefixes directly.
 
+<a id="line-identity"></a>
+### One colour and one name per line, site-wide
+
+**A line drawn on more than one map has one colour and one name everywhere.**
+The large review of 2026-10-07 found the JR Kobe Line in five colours across
+Kansai, the JR Sanyo Line in four, and the Seibu Haijima Line cyan on two maps
+and mauve on a third; a reader moving between neighbouring maps saw one line
+change colour. The owner made it a hard line ("any line represented more than
+once in city maps gets its own distinct color, even if that means reassigning
+other lines' colors to fit"). 48 Japanese lines were unified onto
+`pipeline/line_registry.py`, keyed by operator and line rather than display
+name ("Tram 1" in Amsterdam and Antwerp are different lines), and
+`scripts/check_line_identity.py` fails a line with two colours, and different
+lines that meet on neighbouring maps, except the registry's recorded
+exceptions. The same review unified the names ("JR Hohi Main Line" on
+Kumamoto's map as on Ōita's). The CIE76 20 floor from the pins came with the
+olive and violet pin colours, when 32 lines sat closer than that.
+
 <a id="rail-shape"></a>
 ### Check the rail system's shape
 
@@ -933,3 +951,151 @@ python scripts/scaffold_city.py --slug <slug> --name <Name> --system-name <syste
 .venv-lean/Scripts/python.exe -m streamlit run "app/Overview.py"
 ```
 
+
+
+<a id="overpass"></a>
+### One Overpass query at a time
+
+- Set by the owner on 2026-09-30 ("stagger osm requests"), when every build
+  was activated at once (`docs/decisions/2026-09-27.md`, "2026-09-30 - New
+  working rules"). The short form in `CLAUDE.md` carried "(owner, 2026-09-30)"
+  until the trim of 2026-10-08.
+
+<a id="ridership"></a>
+### Ridership out of scope; AI-driven analysis private
+
+- Both set by the owner on 2026-10-02. Their original wording, verbatim:
+  "**Ridership is out of scope, a hard line**: no ridership figures,
+  correlations or foot-traffic stand-ins, since the data cannot be had for
+  every city; it changes only for a publishable subset with the owner's
+  approval (2026-10-02)." and "Analyses are private to the owner: never on the
+  site (`app/`, `outputs/`) or in public material unless the owner says so for
+  a piece (2026-10-02)."
+
+<a id="pre-permitted"></a>
+### What a brief and skill cover is pre-permitted
+
+- Set by the owner on 2026-09-30, in the same entry as the Overpass rule
+  above. The short form carried "(owner, 2026-09-30)" until the trim of
+  2026-10-08.
+
+<a id="trim-2026-10-08"></a>
+### The trim of 2026-10-08
+
+`CLAUDE.md` reached 1,999 of its 2,000 words, leaving no room for a new
+pointer. Merged or shortened, with the removed words kept here verbatim:
+
+- Intro: "it is the stable briefing (what's settled, architecture, current
+  state, lessons)".
+- City page: "`docs/city_page_format.md`: the page order, bullets, sections
+  that name the city, process notes kept off rendered docs, American spelling."
+- Two invariants merged into the `outputs/` one: "**Maps are pre-rendered
+  static HTML** embedded with `st.iframe()`, not `streamlit-folium`." Two into
+  the map-rendering one: "**A city's classification need not be NAICS**
+  (`pipeline/taxonomies/`). Step 2 filters via `filter_to_storefront()`, never
+  NAICS prefixes."
+- The fetch rules, once two bullets: "**A step may fetch when a person runs it;
+  a drift check may never fetch.**" ([#offline-guard] still holds the story).
+- The licence rules, once two bullets: "**A source that is not a registry, a
+  feed or a boundary still needs a row** in `docs/data_sources.md` (a naming
+  layer, a parcel layer, a geocoder), with its own licence and any notice it
+  requires." ([#support-sources])
+- The reboot rule: "\"Updated app!\" keeps imported modules cached" (the story
+  is in [#deploy-reboot]).
+- deploy-verify's scopes, listed in its agent description: "(`city-added`,
+  `map-chrome`, `app-deps`, `full`)".
+- The session cap's date: "(owner, 2026-10-04)".
+- The escapes rule: "`.claude/hooks/block_heredoc.py` enforces the heredoc and
+  inline cases."
+- The memory rule: "and `heavy_job.py status` names what holds the memory;
+  peaks and estimates in `docs/session_roles.md`".
+- Code comments: "readable by an outsider but useful to whoever changes the
+  code next".
+- Environments: "Build the lean one with `python -m venv .venv-lean` then
+  `.venv-lean/Scripts/python.exe -m pip install -r requirements.txt`." (now in
+  `docs/commands.md`).
+
+
+<a id="sr-downstream"></a>
+### Session roles: the trim of 2026-10-08
+
+`docs/session_roles.md` reached 2,968 of its 3,000 words. The standing
+assignments table was brought to the worktrees that exist on 2026-10-08;
+landed notice and page claims were dropped after measuring that notices
+154-186 all exist on master. Removed or shortened, verbatim:
+
+```text
+**The standing assignments** - current state, so update this when one changes.
+A landed row shrinks to one line; the full rows as of 2026-10-04 are at
+`#sr-registry`. Rows marked "gone" were not in `git worktree list` on
+2026-10-04.
+
+| Role | Worktree | Branch |
+|---|---|---|
+| Staging / research | `.claude/worktrees/staging` | `worktree-staging` |
+| Cleanup / audit | `.claude/worktrees/cleanup` | `worktree-cleanup` |
+| France kit, then the France builds; gone | `.claude/worktrees/france-kit` | `worktree-france-kit`; `france-build` |
+| Czech kit; gone | `.claude/worktrees/czech-kit` | `worktree-czech-kit` |
+| UK six builds; gone; claims landed 2026-10-02 | `.claude/worktrees/uk-six` | `uk-six-build` |
+| Japan batch, twelve cities; gone; claims landed 2026-10-02 | `.claude/worktrees/japan-batch` | `japan-batch-build` |
+| Seattle (Regional), then Tbilisi; gone | `.claude/worktrees/seattle-tbilisi` | `seattle-tbilisi-build` |
+| Japan wave 2, fourteen cities: **LANDED 2026-10-03** | `.claude/worktrees/japan-wave2` (removed) | `japan-wave2-build` |
+| Four extensions to built cities: **LANDED 2026-10-03** | `.claude/worktrees/extensions` (removed) | `extensions-build` |
+| Belgium builds, six pages: **LANDED 2026-10-04** | `.claude/worktrees/belgium` (removed) | `belgium-build` (removed) |
+| Liverpool (Regional), Tacoma, Mendoza: **LANDED 2026-10-04** | `.claude/worktrees/new-cities` (removed) | `new-cities-build` (removed) |
+| Korea sweep, Daejeon, Gwangju, Gimhae: **LANDED 2026-10-04** | `.claude/worktrees/korea-sweep` (removed) | `korea-sweep-build` (removed) |
+| Tram kit, the ten other T1 cities; gone | `.claude/worktrees/tram-kit` | `worktree-tram-kit` |
+| Build `<city>` | `.claude/worktrees/<city>` | `<city>-build`; delete the branch when the worktree goes |
+```
+
+```text
+open claims (2026-10-07,
+the A and B build plan): Abroad 154–156, East-1 157–168, Kansai-1
+169–175, Regional-1 176–186, East-2 187–197,
+```
+
+```text
+Every earlier block has landed:
+the coverage sweep's on 2026-10-04 (the Korean three, pages 190–192 and no
+notices; Mendoza, Tacoma and Liverpool (Regional), pages 193–195 and
+notices 141–143 and 153; Belgium, pages 196–201 and notices 144–152);
+Japan wave 2's 115–128, the extensions' 129–132 and lane-app's 137–140 on
+2026-10-03, and everything up to 114 on 2026-10-02. Pages reserved (2026-10-07, the A and B build plan, one page per city in its
+session's build order): Abroad 202 and 300–304 (its own claim), the
+owed-act seven 203–209, East-1 210–221, Kansai-1 222–228, Regional-1
+229–239, East-2 240–250,
+```
+
+```text
+Every session shares one machine (32 GB since 2026-10-05, 16 GB before), and
+```
+
+```text
+**Since 2026-10-05, four heavy jobs at most
+(owner, after the RAM upgrade), each admitted by `scripts/heavy_job.py`**
+```
+
+```text
+`--jobs 3`
+  at most (2 before 2026-10-05). The Python cap (8 GB a process, 16 GB with
+  its children since 2026-10-05) stays as
+  the backstop:
+```
+
+```text
+Neither sees master move, so Cleanup tells them (owner,
+2026-10-03), **once per review time** rather than after every push (owner,
+2026-10-04, the efficiency review's second change: up to 26 messages a day,
+each waking a session on its full context).
+```
+
+```text
+**At most three build sessions at once** (owner, 2026-10-04, the efficiency
+review's second change), besides
+```
+
+```text
+needs something master has; never just to keep up after someone else's push.
+Catch-up merges ran 28 a day in the week of 2026-09-27 and made 103 of 176
+conflicted merges (`docs/efficiency_review_2026-10-04.md`).
+```

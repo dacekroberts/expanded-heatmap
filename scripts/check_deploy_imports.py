@@ -262,11 +262,13 @@ try:
     _won = _compete(_ALL, CLAT, CLON, ZOOM, _facts)
     if not _won:
         problems.append("macro map: the Global label competition chose no labels")
-    _unmeasured = sorted(n for n in _won if n not in _TW)
+    _by = {c["name"]: c for c in _ALL}
+    # Widths are keyed by the label text, which drops " (Regional)" (cities.py `pill`).
+    _text = {n: _by[n].get("pill", n) for n in _won}
+    _unmeasured = sorted(t for t in _text.values() if t not in _TW)
     if _unmeasured:
         problems.append(f"macro map: no measured text width for {_unmeasured} - "
                         "add each to TEXT_WIDTH in app/label_competition.py")
-    _by = {c["name"]: c for c in _ALL}
 
     def _xy(c, W):
         return ((c["lon"] - CLON) / 360 * SCALE + W / 2,
@@ -274,7 +276,7 @@ try:
 
     seen = set()
     for W in (343, 726, 1030):          # 375 / 768 / 1200 px viewports
-        boxes = {n: _pill(n, *_xy(_by[n], W), off) for n, off in _won.items()}
+        boxes = {n: _pill(_text[n], *_xy(_by[n], W), off) for n, off in _won.items()}
         names = sorted(boxes)
         for i, n1 in enumerate(names):
             a = boxes[n1]

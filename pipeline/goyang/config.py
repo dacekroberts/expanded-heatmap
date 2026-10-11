@@ -9,6 +9,8 @@ page each, 2026-09-29).
 
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -70,9 +72,13 @@ RING_LABELS = ["0-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi", "0.3-0.6 mi"]
 # GTX-A (an express) and lines that never enter the city are not. Stations
 # inside the city only; lines drawn to their ends.
 # key -> (OSM ref, colour, public name, label end).
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
 LINES = {
-    "L3": ("3", "#ED6C00", "Line 3", None),
-    "GJ": ("경의·중앙", "#6AC2B3", "Gyeongui–Jungang Line", None),
+    "L3": ("3", line_registry.colour("seoul-subway-line-3"), "Line 3", None),
+    "GJ": ("경의·중앙", line_registry.colour("gyeongui-jungang-line"), "Gyeongui–Jungang Line", None),
 }
 OSM_COLOUR = {}
 LINES_ROUTE_TYPES = {"subway", "light_rail", "monorail", "train"}

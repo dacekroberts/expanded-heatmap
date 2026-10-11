@@ -378,12 +378,10 @@ LYON_REQUIRES_ACCOUNT = True
 # **Marseille replaces it as the first follower** - `lov2`, no account, no
 # trademark clause, no indemnity, and at 26,940 estimated bucket rows it is the
 # largest follower anyway. Gate items 17-19 in `docs/gated_access.md`.
-# Every French city tags "region": "Europe" in app/cities.py - NOT "France".
-# Owner's decision 2026-09-22: ten European countries are on the remaining
-# screen and they describe one readable view between them, so a region per
-# country means ten entries to create, order and later merge. See
-# docs/scaling_thresholds.md, "EVERY EUROPEAN CITY TAGS ONE REGION".
-MAP_REGION = "Europe"
+# A French city tags "region": "France North" at latitude 46.5 and up and
+# "France South" below in app/cities.py (owner, 2026-09-30), not "Europe",
+# which was one region until 2026-09-30 and was split into Europe West and
+# Europe East on 2026-10-07. scripts/scaffold_france_batch.py picks the half.
 
 BUILD_SEQUENCE = ("paris", "marseille", "toulouse", "lille", "rennes")
 # DISCARDED 2026-09-23 on four independent blockers - see

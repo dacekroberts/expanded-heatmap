@@ -1,0 +1,220 @@
+{
+  "city_barber": {
+    "as_of": "2026-03-31",
+    "bytes": 28270,
+    "dataset_page": "https://www.city.ichinomiya.aichi.jp/hokenjo/hokenyobou/1044311/1039814/1075449.html",
+    "file": "2025riyouitiran.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T19:26:34+00:00",
+    "rows": 300,
+    "sha256": "9077b56ad2300dd3c36cf3d6d2968e32e83e8c5b2435f6cbba4af99804c05014",
+    "url": "https://www.city.ichinomiya.aichi.jp/_res/projects/default_project/_page_/001/075/449/2025riyouitiran.csv"
+  },
+  "city_beauty": {
+    "as_of": "2026-03-31",
+    "bytes": 86155,
+    "dataset_page": "https://www.city.ichinomiya.aichi.jp/hokenjo/hokenyobou/1044311/1039814/1075449.html",
+    "file": "2025biyoushoichirann.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T19:26:38+00:00",
+    "rows": 819,
+    "sha256": "0e89467e655c7d51ec794a58e8d9d456f00444aa80fd87aefaf62f011fb61451",
+    "url": "https://www.city.ichinomiya.aichi.jp/_res/projects/default_project/_page_/001/075/449/2025biyoushoichirann.csv"
+  },
+  "city_beauty_04": {
+    "as_of": "2026-04",
+    "bytes": 542,
+    "dataset_page": "https://www.city.ichinomiya.aichi.jp/hokenjo/hokenyobou/1044311/1039814/1040689.html",
+    "file": "biyou_20260430.csv",
+    "how": "downloaded",
+    "retrieved": "2026-10-07T19:45:03+00:00",
+    "rows": 4,
+    "sha256": "53be1248bc81e7dc4639914bbcb3f72512748a0357673407c9e5a9b1b347d4cc",
+    "url": "https://www.city.ichinomiya.aichi.jp/_res/projects/default_project/_page_/001/040/689/biyou_20260430.csv"
+  },
+  "city_beauty_05": {
+    "as_of": "2026-05",
+    "bytes": 205,
+    "dataset_page": "https://www.city.ichinomiya.aichi.jp/hokenjo/hokenyobou/1044311/1039814/1040689.html",
+    "file": "biyou_20260531a.csv",
+    "how": "downloaded",
+    "retrieved": "2026-10-07T19:45:03+00:00",
+    "rows": 1,
+    "sha256": "3d59edb3cce626c36cb0099f9b7151d8d3ac409f7ab144de8a29b3db762b43c5",
+    "url": "https://www.city.ichinomiya.aichi.jp/_res/projects/default_project/_page_/001/040/689/biyou_20260531a.csv"
+  },
+  "city_beauty_06": {
+    "as_of": "2026-06",
+    "bytes": 328,
+    "dataset_page": "https://www.city.ichinomiya.aichi.jp/hokenjo/hokenyobou/1044311/1039814/1040689.html",
+    "file": "biyou_20260630.csv",
+    "how": "downloaded",
+    "retrieved": "2026-10-07T19:45:03+00:00",
+    "rows": 2,
+    "sha256": "14556e28d8fe1bd5148476fa80a2e7dc4e74c98c5f0ed9498115e92bf4c648e8",
+    "url": "https://www.city.ichinomiya.aichi.jp/_res/projects/default_project/_page_/001/040/689/biyou_20260630.csv"
+  },
+  "city_beauty_07": {
+    "as_of": "2026-07",
+    "bytes": 10385,
+    "dataset_page": "https://www.city.ichinomiya.aichi.jp/hokenjo/hokenyobou/1044311/1039814/1040689.html",
+    "file": "biyou_20260731.csv",
+    "how": "downloaded",
+    "retrieved": "2026-10-07T19:45:04+00:00",
+    "rows": 2,
+    "sha256": "d9fb20449e34e027c988dd7ab6f89b300e36ed603c54496f7bc2a6ac45da2d20",
+    "url": "https://www.city.ichinomiya.aichi.jp/_res/projects/default_project/_page_/001/040/689/biyou_20260731.csv"
+  },
+  "city_beauty_08": {
+    "as_of": "2026-08",
+    "bytes": 599,
+    "dataset_page": "https://www.city.ichinomiya.aichi.jp/hokenjo/hokenyobou/1044311/1039814/1040689.html",
+    "file": "biyou_20260831.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-07T19:33:20+00:00",
+    "rows": 4,
+    "sha256": "42b9c57c78c368843dc215dd2c6f163d3b2e01cf4fb9aa2d36fbfa245c531286",
+    "url": "https://www.city.ichinomiya.aichi.jp/_res/projects/default_project/_page_/001/040/689/biyou_20260831.csv"
+  },
+  "city_food": {
+    "as_of": "2026-03-31",
+    "bytes": 589280,
+    "dataset_page": "https://www.city.ichinomiya.aichi.jp/hokenjo/hoken-eisei/1044314/1039899/1040636.html",
+    "file": "232033_Food_Business_All_20260331.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T19:26:13+00:00",
+    "rows": 2815,
+    "sha256": "50aecb9de9e5d2d1d2e24784437efe9effbb4904483d95797a4d63cd5ae34091",
+    "url": "https://www.city.ichinomiya.aichi.jp/_res/projects/default_project/_page_/001/040/636/232033_Food_Business_All_20260331.csv"
+  },
+  "city_food_04": {
+    "as_of": "2026-04",
+    "bytes": 7351,
+    "dataset_page": "https://www.city.ichinomiya.aichi.jp/hokenjo/hoken-eisei/1044314/1039899/1040636.html",
+    "file": "232033_food_business_new_20260401_20260430.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T19:26:17+00:00",
+    "rows": 34,
+    "sha256": "1981bfaf9df18fec00b40bd671c707fb6605ea1349422fcc47cccab1d093095f",
+    "url": "https://www.city.ichinomiya.aichi.jp/_res/projects/default_project/_page_/001/040/636/232033_food_business_new_20260401_20260430.csv"
+  },
+  "city_food_05": {
+    "as_of": "2026-05",
+    "bytes": 6026,
+    "dataset_page": "https://www.city.ichinomiya.aichi.jp/hokenjo/hoken-eisei/1044314/1039899/1040636.html",
+    "file": "232033_food_business_new_20260501_20260531.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T19:26:20+00:00",
+    "rows": 30,
+    "sha256": "58af196cefddfea0a9e374853e845f2dad3cca60bb3619661728bbd2fda29e25",
+    "url": "https://www.city.ichinomiya.aichi.jp/_res/projects/default_project/_page_/001/040/636/232033_food_business_new_20260501_20260531.csv"
+  },
+  "city_food_06": {
+    "as_of": "2026-06",
+    "bytes": 12672,
+    "dataset_page": "https://www.city.ichinomiya.aichi.jp/hokenjo/hoken-eisei/1044314/1039899/1040636.html",
+    "file": "232033_food_business_new_20260601_20260630.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T19:26:24+00:00",
+    "rows": 55,
+    "sha256": "b9d2f45165350943608c2d2c96fc080346b615a349020c7e8b15441cb1c66a5e",
+    "url": "https://www.city.ichinomiya.aichi.jp/_res/projects/default_project/_page_/001/040/636/232033_food_business_new_20260601_20260630.csv"
+  },
+  "city_food_07": {
+    "as_of": "2026-07",
+    "bytes": 5969,
+    "dataset_page": "https://www.city.ichinomiya.aichi.jp/hokenjo/hoken-eisei/1044314/1039899/1040636.html",
+    "file": "232033_food_business_new_20260701_20260731.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T19:26:27+00:00",
+    "rows": 28,
+    "sha256": "95a1aa04f8e3b12e10e9339532992fbc823eea8dd38631c5e9735463d5ae0352",
+    "url": "https://www.city.ichinomiya.aichi.jp/_res/projects/default_project/_page_/001/040/636/232033_food_business_new_20260701_20260731.csv"
+  },
+  "city_food_08": {
+    "as_of": "2026-08",
+    "bytes": 9388,
+    "dataset_page": "https://www.city.ichinomiya.aichi.jp/hokenjo/hoken-eisei/1044314/1039899/1040636.html",
+    "file": "232033_food_business_new_20260801_20260831.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T19:26:31+00:00",
+    "rows": 46,
+    "sha256": "3f80a4a48b8e4a0f1193765f7da00f6762053d8d1845b7331ed34ee163706923",
+    "url": "https://www.city.ichinomiya.aichi.jp/_res/projects/default_project/_page_/001/040/636/232033_food_business_new_20260801_20260831.csv"
+  },
+  "city_laundry": {
+    "as_of": "2026-03-31",
+    "bytes": 30114,
+    "dataset_page": "https://www.city.ichinomiya.aichi.jp/hokenjo/hokenyobou/1044311/1039814/1075449.html",
+    "file": "2025clearningitiran.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T19:26:41+00:00",
+    "rows": 242,
+    "sha256": "aa05cfadb8de88eca771da2cb29ad64e5f67d306e14f6c45eb251a3453202d1a",
+    "url": "https://www.city.ichinomiya.aichi.jp/_res/projects/default_project/_page_/001/075/449/2025clearningitiran.csv"
+  },
+  "city_laundry_04": {
+    "as_of": "2026-04",
+    "bytes": 205,
+    "dataset_page": "https://www.city.ichinomiya.aichi.jp/hokenjo/hokenyobou/1044311/1039814/1040689.html",
+    "file": "clerning_20260430.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-07T19:33:20+00:00",
+    "rows": 1,
+    "sha256": "8f6b71abf9006511e41613d671d280e0cdb3fceffb6f0b36958dc08649b93339",
+    "url": "https://www.city.ichinomiya.aichi.jp/_res/projects/default_project/_page_/001/040/689/clerning_20260430.csv"
+  },
+  "city_mhlw": {
+    "as_of": null,
+    "bytes": 369670,
+    "dataset_page": "https://i2fas.mhlw.go.jp/",
+    "file": "23203_food_business_all.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T19:26:45+00:00",
+    "rows": 1124,
+    "sha256": "80280a0aab7ef38ee30dd26b6d9bb9ad55fb536d1d9bc86a07431a3e328b72c6",
+    "url": "https://i2fas.mhlw.go.jp/faspub/page/opendatadownload.jsp?param=23203_food_business_all.csv"
+  },
+  "isj_23203_block": {
+    "bytes": 724841,
+    "file": "23203-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T19:26:50+00:00",
+    "sha256": "064d1e65384e82928df66bf82f24d69e681091d8c1a9d11e60e5e42659f63fd9",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/23203-24.0a.zip"
+  },
+  "isj_23203_chome": {
+    "bytes": 11430,
+    "file": "23203-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T19:26:53+00:00",
+    "sha256": "fb82c2dc215cd3341af6f35660b617b0ba5ceffb2dec028b3ec1563e24f8eea5",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/23203-19.0b.zip"
+  },
+  "n02": {
+    "bytes": 14903774,
+    "file": "data/japan/raw/N02-25_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-30T23:47:52+00:00",
+    "sha256": "aaf76af133b2e771e538fabc4646d2e443dc1d5a67b221382a28d744e706cc9f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip"
+  },
+  "n03": {
+    "bytes": 5849982,
+    "file": "data/japan/raw/N03-20250101_23_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T00:23:37+00:00",
+    "sha256": "87fad2d60da73dcf476af61695a73b946e032733dbd1d45c3329d1ba3eb0b0c8",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_23_GML.zip"
+  },
+  "osm_station_names": {
+    "bytes": 25440,
+    "elements": 38,
+    "file": "osm_station_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-10-07T19:40:01Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](35.24,136.7,35.38,136.88);way[\"railway\"=\"station\"](35.24,136.7,35.38,136.88););out tags center;",
+    "retrieved": "2026-10-07T19:41:28+00:00",
+    "sha256": "fb6e27a859762ef048c11666b69ba4c5f084cb9120fe211b45460252bf3a2420"
+  }
+}

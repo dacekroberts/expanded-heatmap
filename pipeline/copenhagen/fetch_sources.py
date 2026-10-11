@@ -344,6 +344,62 @@ def fetch_osm():
     return host
 
 
+def fetch_address_points():
+    """REGIONAL: OSM's DAR address points in the ten kommuner, Aarhus's query
+    on a union of the kommune relations read from the cached boundaries.
+    Overpass CSV, tab-separated with a header: @id, @lat, @lon,
+    osak:identifier. Cached; an answer with too few rows is refused, never
+    written - an empty result is a failed fetch."""
+    import time
+    dest = config.OSM_ADDRESS_POINTS_TSV
+    if dest.exists():
+        print(f"  address points: cached ({dest.stat().st_size:,} bytes)")
+        return "cache"
+    els = json.loads(config.OSM_KOMMUNER_JSON.read_text(encoding="utf-8"))["elements"]
+    rel = {x["tags"]["ref"]: x["id"] for x in els
+           if x.get("type") == "relation" and x.get("tags", {}).get("ref") in config.KOMMUNER
+           and "ref:scb" not in x.get("tags", {})}
+    if set(rel) != set(config.KOMMUNER):
+        sys.exit(f"  no cached boundary for kommuner {sorted(set(config.KOMMUNER) - set(rel))}")
+    areas = "".join(f"area({3600000000 + rel[k]});" for k in sorted(rel))
+    q = ('[out:csv(::id,::lat,::lon,"osak:identifier")][timeout:300];'
+         f'({areas})->.m;nwr["osak:identifier"](area.m);out center;')
+    problems = []
+    for attempt in range(3):
+        for host in osm.OVERPASS_HOSTS:
+            name = host.split("/")[2]
+            try:
+                r = requests.post(host, data={"data": q}, timeout=360,
+                                  headers={"User-Agent": osm.OVERPASS_USER_AGENT})
+            except requests.RequestException as exc:
+                problems.append(f"{name}: {type(exc).__name__}")
+                continue
+            if r.status_code != 200:
+                problems.append(f"{name}: HTTP {r.status_code}")
+                continue
+            rows = r.content.count(b"\n") - 1
+            if rows < 100000:
+                problems.append(f"{name}: {rows} rows - not trusted")
+                continue
+            dest.write_bytes(r.content)   # as served: no CRLF translation
+            print(f"  address points: {rows:,} rows via {name}")
+            return name
+        # At least the owner's 60 s after a 504 or 429 (CLAUDE.md, 2026-09-30).
+        time.sleep(osm.OVERLOAD_WAIT_S * (attempt + 1))
+    sys.exit("  every Overpass mirror failed for the address points: " + "; ".join(problems))
+
+
+def registers_found(man):
+    """REGIONAL: the cached CVR and DAR generations, read and never refreshed
+    (the Datafordeler account is closed; Aarhus's record)."""
+    keep = {p: {k: v[k] for k in ("register", "entity", "filename", "generation",
+                                  "generation_time", "fetched_utc", "csv_sha256") if k in v}
+            for p, v in man["files"].items() if not p.startswith("dar/Adressepunkt_")}
+    gens = {(v["register"], v["generation"]) for v in keep.values()}
+    print("  national caches: " + ", ".join(f"{r} generation {g}" for r, g in sorted(gens)))
+    return keep
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -365,6 +421,29 @@ if __name__ == "__main__":
 
     print("OpenStreetMap (keyless):")
     osm_host = fetch_osm()
+
+    if config.REGIONAL:
+        # Placement on OSM's address points; CVR and DAR from the national
+        # cache. No Datafordeler call and no key (config, "Placement").
+        pts_host = fetch_address_points()
+        print("\nCVR and DAR (cached nationally, not fetched):")
+
+        def stamp(path):
+            return datetime.fromtimestamp(path.stat().st_mtime, timezone.utc).isoformat(
+                timespec="seconds")
+
+        prov = {"written_utc": _now(), "osm_bbox": config.RAIL_BBOX,
+                "osm": {"rail": {"host": osm_host, "file_utc": stamp(config.OSM_ROUTES_JSON)},
+                        "kommuner": {"host": osm_host,
+                                     "file_utc": stamp(config.OSM_KOMMUNER_JSON)},
+                        "address_points": {"host": pts_host,
+                                           "file_utc": stamp(config.OSM_ADDRESS_POINTS_TSV)}},
+                "datafordeler": registers_found(man)}
+        config.PROVENANCE_JSON.write_text(json.dumps(prov, ensure_ascii=False, indent=2),
+                                          encoding="utf-8")
+        print(f"\nprovenance -> {config.PROVENANCE_JSON.name}. The steps read these "
+              f"files and never fetch.")
+        sys.exit(0)
 
     if not args.osm_only:
         import os

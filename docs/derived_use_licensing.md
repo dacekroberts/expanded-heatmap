@@ -41,7 +41,9 @@ DS = docs/data_sources.md; US/JP/TW = docs/data_sources/<country>.md; ARCH = doc
 
 ## a. Restrictions on derived analysis
 
-**No licence in use is non-commercial-only, no-derivatives or view-only.** Barcelona's BY-ND clause "does not apply" (DS:1240).
+**No licence in use is no-derivatives or view-only.** Barcelona's BY-ND clause "does not apply" (DS:1240). **Four sources hold only while the use stays non-commercial** (corrected 2026-10-11; this said none did): the City of Seattle's register, the WA Liquor and Cannabis Board's list, Bellevue's portal terms and MHLW's filings (licence_positions.md rows 2.7, 2.8, 1.6 and 2.10). That does not limit the private or non-commercial derived use this file covers; commercial use is a separate question, to be answered in `docs/commercial_use_positions.md` once the final batch lands (owner, 2026-10-11).
+
+**The counts in this file are as of 170 cities, 2026-10-04.** 206 are built at 2026-10-11 and the final batch adds more; the list of cities kept off public pieces is the Visuals registry's, not this file's.
 
 Terms that bear on it:
 - **INEGI:** must disclose "cualquier análisis o transformación" (DS:694).

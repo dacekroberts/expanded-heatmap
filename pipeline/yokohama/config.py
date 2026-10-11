@@ -20,6 +20,8 @@ import io
 import zipfile
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -223,10 +225,25 @@ LINES = {
 # pages and clears CIE76 45 from every pin. Closest pair within 500 m 18.0
 # (Blue Line / Keihin-Tohoku), anywhere 12.4 (Kodomonokuni / Seaside Line,
 # 17 km apart); the dark-mode labels separate, 20 of 20.
-_COLOURS = {"B": "#08A0C0", "G": "#30A800", "JK": "#207888", "JT": "#E07800", "JO": "#586878", "SJ": "#805878",
-            "JH": "#68A008", "JN": "#B09000", "JI": "#909800", "KK": "#E81820", "KZ": "#F05830", "TY": "#C03008",
-            "DT": "#486860", "KD": "#688898", "SH": "#C870C8", "MM": "#9840A0", "SO": "#9040C0", "SI": "#6048E0",
-            "SS": "#C070F8", "SL": "#9090A0"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+# Moved so the shared colours fit (2026-10-07), hue kept as far as they allow:
+# the Blue Line #08A0C0 to #007088 (pins 53.2, nearest line Tokyu Kodomonokuni
+# Line 13.4, nearest beside it 19.1); the Tokyu Kodomonokuni Line #688898 to
+# #486878 (pins 55.7, nearest line Blue Line 13.4, nearest beside it 18.6).
+# docs/decisions_drafts/line-registry.md.
+_COLOURS = {
+    "B": "#007088", "G": "#30A800", "JK": line_registry.colour("jr-east-keihin-tohoku-line"),
+    "JT": line_registry.colour("jr-east-tokaido-line"), "JO": line_registry.colour("jr-east-yokosuka-line"),
+    "SJ": line_registry.colour("sotetsu-jr-link-line"), "JH": "#68A008",
+    "JN": line_registry.colour("jr-east-nambu-line"), "JI": line_registry.colour("jr-east-tsurumi-line"),
+    "KK": line_registry.colour("keikyu-main-line"), "KZ": "#F05830",
+    "TY": line_registry.colour("tokyu-toyoko-line"), "DT": line_registry.colour("tokyu-den-en-toshi-line"),
+    "KD": "#486878", "SH": "#C870C8", "MM": "#9840A0", "SO": "#9040C0", "SI": "#6048E0", "SS": "#C070F8",
+    "SL": "#9090A0",
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

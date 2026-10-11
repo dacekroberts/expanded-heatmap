@@ -1,0 +1,12 @@
+{
+  "osm_station_names": {
+    "bytes": 15645,
+    "elements": 24,
+    "file": "osm_station_names.json",
+    "host": "overpass.kumi.systems",
+    "osm_base": "2026-07-24T11:04:51Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](35.68,139.35,35.75,139.45);way[\"railway\"=\"station\"](35.68,139.35,35.75,139.45););out tags center;",
+    "retrieved": "2026-10-07T19:34:09+00:00",
+    "sha256": "860af7e049b81823007f5fe6c70587ddd7f783d1eb3488d3b6afb2975f290fbb"
+  }
+}

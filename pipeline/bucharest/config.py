@@ -169,11 +169,21 @@ LEGEND_NAMES = {"M1": "Dristor – Pantelimon", "M2": "Pipera – Tudor Arghezi"
                 "M3": "Preciziei – Anghel Saligny", "M4": "Gara de Nord – Străulești",
                 "M5": "Eroilor – Valea Ialomiței / Râul Doamnei"}
 # `python scripts/line_colour_search.py bucharest`, run 2026-09-29: every line
-# >= 45.0 from every pin, closest pair within 500 m 20.1 (M1's olive-yellow
-# against M4's green, which meet only at Basarab), five distinct dark-mode
-# labels. M1's yellow darkens to read on the light page; M2's blue takes a
-# violet beside the Food shops pins (Stockholm's Blue line precedent).
-LINE_COLOURS = {"M1": "#989800", "M2": "#7840D0", "M3": "#C02008", "M4": "#608000", "M5": "#E87030"}
+# >= 45.0 from the pins of that run, closest pair within 500 m 20.1 (M1's
+# olive-yellow against M4's green, which meet only at Basarab), five distinct
+# dark-mode labels. M1's yellow darkens to read on the light page; M2's blue
+# takes a violet beside the Food shops pins (Stockholm's Blue line precedent).
+#
+# FOOD SHOPS OLIVE (#737a00, 2026-10-07) arrived after this search, and two
+# lines sat under the owner's floor of 20 from it (2026-10-07): M4 #608000 at
+# 11.6 and M1 #989800 at 15.7. Each moved to the colour nearest its OSM hue
+# that reads 3:1 on both pages, clears 20 from both pins and 18 from every
+# other line, taking a wider margin where it cost little: M4 #247810 (olive
+# 30.0), M1 #B48C00, a dark gold held to a yellow hue (olive 25.8). Both sit
+# between 20 and 45 from olive, an accepted trade (owner, 2026-10-07); closest
+# pair now 26.0 (M3, M5), five distinct dark-mode labels. DECISIONS, "Lines
+# within 20 of the olive and violet pins recoloured".
+LINE_COLOURS = {"M1": "#B48C00", "M2": "#7840D0", "M3": "#C02008", "M4": "#247810", "M5": "#E87030"}
 # Five lines, one key each; M5's two branches (to Valea Ialomiței and Râul
 # Doamnei) are one line, as Metrorex presents it.
 LINE_OSM_REFS = {r: (r,) for r in ("M1", "M2", "M3", "M4", "M5")}

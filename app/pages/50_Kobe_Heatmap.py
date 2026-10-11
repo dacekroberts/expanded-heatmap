@@ -47,8 +47,8 @@ st.markdown(
 
 - Fifteen lines are drawn, each labeled on the map and in the legend: Kobe Municipal Subway's
   Seishin-Yamate, Hokushin and Kaigan lines, the Port Liner and Rokkō Liner, JR West's JR Kobe,
-  Wadamisaki and JR Takarazuka lines, the Hankyu Kobe Line, the Hanshin Main Line, the Sanyō Main
-  Line, the Kobe Kōsoku Line, and Kobe Electric Railway's Arima, Sanda and Ao lines.
+  Wadamisaki and JR Takarazuka lines, the Hankyu Kobe Line, the Hanshin Main Line, the Sanyo
+  Electric Main Line, the Kobe Kōsoku Line, and Kobe Electric Railway's Arima, Sanda and Ao lines.
 - Lines and stations come from MLIT's national railway data (国土数値情報); station names in
   English are from OpenStreetMap. Line colors are this project's own, not the operators'.
 - Only stations inside Kobe City get rings, because the business data covers the city alone: lines

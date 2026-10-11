@@ -1,0 +1,54 @@
+[
+  {
+    "municipality": "調布市",
+    "code": "13208",
+    "rows": 1467,
+    "official": 1721,
+    "share_pct": 85.2,
+    "source": "Tokyo statistical yearbook, table 19-8 (飲食店営業, FY2024)",
+    "kind": "restaurants",
+    "rows_at_date": 1170,
+    "share_at_date_pct": 68.0,
+    "date": "2025-03-31",
+    "undated": 0
+  },
+  {
+    "municipality": "調布市",
+    "code": "13208",
+    "kind": "barber",
+    "rows": 78,
+    "official": 89,
+    "share_pct": 87.6,
+    "source": "Tokyo statistical yearbook, table 19-7 (理容所, 美容所, クリーニング所, FY2024)",
+    "rows_at_date": 75,
+    "share_at_date_pct": 84.3,
+    "date": "2025-03-31",
+    "undated": 0
+  },
+  {
+    "municipality": "調布市",
+    "code": "13208",
+    "kind": "beauty",
+    "rows": 314,
+    "official": 322,
+    "share_pct": 97.5,
+    "source": "Tokyo statistical yearbook, table 19-7 (理容所, 美容所, クリーニング所, FY2024)",
+    "rows_at_date": 286,
+    "share_at_date_pct": 88.8,
+    "date": "2025-03-31",
+    "undated": 0
+  },
+  {
+    "municipality": "調布市",
+    "code": "13208",
+    "kind": "laundry",
+    "rows": 90,
+    "official": 98,
+    "share_pct": 91.8,
+    "source": "Tokyo statistical yearbook, table 19-7 (理容所, 美容所, クリーニング所, FY2024)",
+    "rows_at_date": 88,
+    "share_at_date_pct": 89.8,
+    "date": "2025-03-31",
+    "undated": 0
+  }
+]

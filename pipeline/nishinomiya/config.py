@@ -22,6 +22,8 @@ English station names from OpenStreetMap's name:en.
 
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -208,8 +210,22 @@ LINES = {
 # Takarazuka yellow to ochre. Closest pair within 500 m 19.0 (Hanshin Main /
 # JR Kobe), anywhere 15.6 (Hanshin Mukogawa / JR Kobe); the dark-mode labels
 # separate, 7 of 7.
-_COLOURS = {"HS": "#007890", "HM": "#586878", "HQ": "#985030", "HI": "#D08068", "HY": "#D06840", "JK": "#7090A0",
-            "JT": "#C88800"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+# Moved so the shared colours fit (2026-10-07), hue kept as far as they allow:
+# the Hanshin Mukogawa Line #586878 to #788898 (pins 55.0, nearest line Hanshin
+# Main Line 20.1, nearest beside it 20.1); the Hankyu Imazu Line #D08068 to
+# #905848 (pins 45.7, nearest line Hankyu Kobe Line 19.5, nearest beside it
+# 19.5); the Hankyu Koyo Line #D06840 to #D87040 (pins 49.1, nearest line
+# Hankyu Kobe Line 18.0, nearest beside it 18.0).
+# docs/decisions_drafts/line-registry.md.
+_COLOURS = {
+    "HS": line_registry.colour("hanshin-main-line"), "HM": "#788898",
+    "HQ": line_registry.colour("hankyu-kobe-line"), "HI": "#905848", "HY": "#D87040",
+    "JK": line_registry.colour("jr-west-kobe-line"), "JT": line_registry.colour("jr-west-takarazuka-line"),
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

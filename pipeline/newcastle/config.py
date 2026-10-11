@@ -84,8 +84,11 @@ LEGEND_NAMES = {"Green": "Green line (Tyne and Wear Metro)",
 LINES = {"Green": {"hue": "#009933"}, "Yellow": {"hue": "#D39F06"}}
 LINE_ORDER = list(LINES)
 # `python scripts/line_colour_search.py newcastle`, run 2026-09-28: Nexus's
-# hues' nearest feasible colours - Green 45.5 and Yellow 78.5 from every pin,
-# 70.4 apart; both 3:1 or better on either page.
+# hues' nearest feasible colours - Green 45.5 and Yellow 78.5 from the pins of
+# that run, 70.4 apart; both 3:1 or better on either page. FOOD SHOPS OLIVE
+# (#737a00, 2026-10-07) arrived later: Yellow sits 32.5 from it and Green
+# 44.4, above the owner's floor of 20 and below 45, an accepted trade
+# (2026-10-07).
 LINE_COLOURS = {"Green": "#30A800", "Yellow": "#C08800"}
 
 # GATE 3 - the whole network against the operator's count: Nexus's 60

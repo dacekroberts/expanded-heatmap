@@ -67,11 +67,37 @@ def fetch_osm(force=False):
                      "osm_base": payload.get("osm3s", {}).get("timestamp_osm_base")}
 
 
+def fetch_regional_boundary(force=False):
+    """Anyang (Regional): 안양시, 군포시 and 의왕시 (admin_level 6) in ONE query,
+    into their own file, so the city's cached boundary and rail stay as they
+    are. Step 1 checks each relation's id and name and gates the union."""
+    s, w, n, e = config.REGIONAL_BBOX
+    q = (f'[out:json][timeout:240];'
+         f'relation["boundary"="administrative"]["admin_level"="6"]'
+         f'["name"~"^(안양시|군포시|의왕시)$"]({s},{w},{n},{e});out geom;')
+    els, host = osm.fetch(q, config.REGIONAL_BOUNDARY_OSM_JSON, force=force, timeout=300)
+    payload = json.loads(config.REGIONAL_BOUNDARY_OSM_JSON.read_text(encoding="utf-8"))
+    for el in els:
+        print(f"  relation {el['id']} {el.get('tags', {}).get('name')}")
+    PROV["osm_boundary_regional"] = {
+        "file": config.REGIONAL_BOUNDARY_OSM_JSON.name, "host": host, "query": q,
+        "bytes": config.REGIONAL_BOUNDARY_OSM_JSON.stat().st_size,
+        "sha256": sha256(config.REGIONAL_BOUNDARY_OSM_JSON),
+        "osm_base": payload.get("osm3s", {}).get("timestamp_osm_base")}
+
+
 if __name__ == "__main__":
     sys.stdout.reconfigure(encoding="utf-8")
     config.DATA_RAW.mkdir(parents=True, exist_ok=True)
     config.OUTPUTS.mkdir(parents=True, exist_ok=True)
     force = "--force" in sys.argv
+    if "regional" in sys.argv:
+        # The regional boundaries alone, added to the city's provenance.
+        PROV.update(json.loads(config.PROVENANCE_JSON.read_text(encoding="utf-8")))
+        fetch_regional_boundary(force)
+        config.PROVENANCE_JSON.write_text(json.dumps(PROV, ensure_ascii=False, indent=2),
+                                          encoding="utf-8")
+        sys.exit(0)
     fetch_semas(force)
     fetch_osm(force)
     config.PROVENANCE_JSON.write_text(json.dumps(PROV, ensure_ascii=False, indent=2), encoding="utf-8")

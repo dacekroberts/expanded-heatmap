@@ -34,7 +34,7 @@ from shapely.geometry import shape  # noqa: E402
 
 from pipeline import linecolour as lc  # noqa: E402
 from pipeline import theme  # noqa: E402
-from pipeline.taxonomies import CATEGORY_BUCKETS  # noqa: E402
+from pipeline.taxonomies import load_taxonomy_module, pin_colours  # noqa: E402
 
 STEP = 8
 
@@ -52,7 +52,9 @@ def main():
     args = ap.parse_args()
     config = importlib.import_module(f"pipeline.{args.city}.config")
 
-    pins = [c for _, c in CATEGORY_BUCKETS]
+    # The pin colours as this city's taxonomy draws them (food shops olive,
+    # shops and services violet; pipeline/taxonomies.MEANING_COLOURS).
+    pins = [c for _, c in pin_colours(load_taxonomy_module(config.TAXONOMY_SYSTEM))]
     pages = [theme.DARK["page"], theme.LIGHT["page"]]
     feasible = []
     for r in range(0, 256, STEP):

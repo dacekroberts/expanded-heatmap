@@ -144,7 +144,8 @@ What made it work, and what went wrong first:
 
 - **Its own server pair per agent.** Add `streamlit-app-lean-dvN` and
   `heatmap-static-dvN` (ports 8891-8893 and 8894-8896) to the worktree's local
-  `.claude/launch.json`, and tell each agent to use only its pair. The browser
+  `.claude/launch.json`, each bound to 127.0.0.1 as deploy-verify's
+  configurations are, and tell each agent to use only its pair. The browser
   tool allows **at most 5 servers per worktree**, so with three Streamlit
   servers running a lane runs its standalone maps from the page's own
   `srcdoc` rather than a sixth server; with four lanes, run four Streamlit

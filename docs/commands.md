@@ -26,6 +26,7 @@ python scripts/check_overpass_hosts.py [--live|--selftest]   # every Overpass mi
 python scripts/check_worktree_data.py <worktree> [--list]   # before removing a worktree
 python scripts/check_render_current.py                  # after merging
 python scripts/check_map_markup.py [--verbose]          # dark-mode label contrast, legend styles
+python scripts/check_line_identity.py [--rendered|--verbose]   # one colour per line across maps, neighbour rule on (pipeline/line_registry.py)
 python scripts/check_no_em_dashes.py                    # no em dash in any comment or docstring
 python scripts/check_name_keys.py [--selftest]          # withheld-name lists hold keys, not names
 python scripts/check_internal_markers.py [--selftest]   # every <!-- internal --> span closed, contained, clean
@@ -65,10 +66,14 @@ python scripts/coverage_sweep/parse_wiki_tram.py [--wiki PATH] [--out PATH]   # 
 python scripts/staged_cities_build.py                    # ranked unbuilt cities -> docs/staged_cities.json (pipeline env, cached N02/N03)
 python scripts/stress_overview.py [--scenario now|six|eight|eight_osaka|pref] [--compete REGION] [--country-view COUNTRY] [--group "NAME=C1,C2"] [--keep DIR]   # the macro map with the staged cities added, in a temporary copy of app/
 python scripts/scaffold_city.py --slug <slug> --name <Name> --system-name <system> --taxonomy <key> --lat <lat> --lon <lon> --region <region> --country <country> --mode <metro|light_rail|tram>   # add --dry-run first
+python -m venv .venv-lean                               # build the lean app venv once per clone, then the next line
+.venv-lean/Scripts/python.exe -m pip install -r requirements.txt   # the lean venv holds requirements.txt only
 .venv-lean/Scripts/python.exe -m streamlit run "app/Overview.py"
 ```
 
 New since the move: `python scripts/regen_generated.py [--install]` after a
 merge (generated files), `python scripts/merge_conflict_stats.py --since <date>`
 and `python scripts/check_word_budgets.py [--report]`.
+Session usage by context size: `python scripts/context_usage.py [--since YYYY-MM-DD] [--until YYYY-MM-DD] [--top N]`;
+the datasets behind the owner's "Claude usage review" page: `python scripts/usage_report.py --out <dir> [--prefix <folder prefix>]`.
 Authorship marks: `python scripts/fingerprint.py init|table|coverage|verify <file or URL>` (the key lives in `~/.ehm/`, never in the repo).

@@ -41,8 +41,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from components import (  # noqa: E402
     DIFFERENCES_PAGE,
     EXCLUSIONS_PAGE,
-    OVERVIEW_PAGE,
     SITE_NAME,
+    back_origin,
+    render_reference_nav,
     render_site_notices,
     set_base_font,
 )
@@ -80,7 +81,7 @@ COUNTRY_OF_STEM = {country_slug(k): k for k in COUNTRY_ORDER}
 
 def _file_link(match):
     country = COUNTRY_OF_STEM.get(match.group(1))
-    return f"]({country_link(country)})" if country else "](#ds-countries)"
+    return f"]({country_link(country, back_origin())})" if country else "](#ds-countries)"
 
 
 def in_page(text):
@@ -93,10 +94,8 @@ st.set_page_config(page_title=f"Where this data comes from — {SITE_NAME}",
                    page_icon="\U0001f5fa️", layout="wide")
 set_base_font()
 
-with st.container(horizontal=True, gap="medium", vertical_alignment="center"):
-    st.page_link(OVERVIEW_PAGE, label="← Global View")
-    st.page_link(EXCLUSIONS_PAGE, label="What is counted, and what is not")
-    st.page_link(DIFFERENCES_PAGE, label="Why the maps differ")
+render_reference_nav([(EXCLUSIONS_PAGE, "What is counted, and what is not"),
+                      (DIFFERENCES_PAGE, "Why the maps differ")])
 
 st.title("Where this data comes from")
 

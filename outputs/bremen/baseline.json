@@ -1,0 +1,13 @@
+{
+  "catch_all": 94,
+  "lines_drawn": 8,
+  "median_gap_m": 351,
+  "polygon_label_disagree": 1,
+  "retail": 3153,
+  "rows": 5573,
+  "stations_collapsed": 164,
+  "stations_excluded": 10,
+  "stations_in_scope": 154,
+  "stop_positions": 352,
+  "storefronts": 3153
+}

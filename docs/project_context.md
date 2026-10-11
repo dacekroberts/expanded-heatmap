@@ -15,8 +15,11 @@ retail, food-service and personal-service businesses cluster relative to
 the transit lines, with toggleable distance rings, clustered per-business
 pins, and every transit line drawn from real GTFS geometry with a
 permanent label and legend entry. A macro-level area-selector page routes
-into independent per-city maps. The audience is portfolio viewers; the
-priority is map coverage and usable functionality, not written analysis.
+into independent per-city maps. The audience is portfolio viewers, and the
+site speaks to them as a visitor with a question: how storefronts cluster
+around transit in a city they know. The priority is map coverage and usable
+functionality, not written analysis; the story of how it was built stays on
+the About page.
 
 It was generalized from an earlier single-city (Seattle) prototype. Nothing
 in this repo depends on that prototype; where its lessons still apply they

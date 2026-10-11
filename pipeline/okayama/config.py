@@ -23,6 +23,8 @@ English station names from OpenStreetMap's name:en.
 
 from pathlib import Path
 
+from pipeline import line_registry
+
 # --- Paths ---------------------------------------------------------------
 
 ROOT = Path(__file__).parent.parent.parent
@@ -184,8 +186,14 @@ LINES = {
 # pin in, go teal and slate. Closest pair within 500 m 18.1 (the two Okaden
 # lines, which meet at 柳川), anywhere 14.4 (Seikibashi / Momotaro, which never
 # meet); the dark-mode labels separate, 8 of 8.
-_COLOURS = {"OH": "#E80010", "OS": "#F05030", "JS": "#007890", "JA": "#F000B8", "JK": "#C02808", "JT": "#D08000",
-            "JU": "#7098A8", "JB": "#00A0B8"}
+# SHARED LINES: a line another city's map also draws takes its one site-wide
+# colour from pipeline/line_registry.py (owner, 2026-10-07: one colour per
+# line on every map), never a value of this city's own; a colour figure above
+# that names such a line predates the registry.
+_COLOURS = {
+    "OH": "#E80010", "OS": "#F05030", "JS": line_registry.colour("jr-west-sanyo-line"), "JA": "#F000B8",
+    "JK": "#C02808", "JT": "#D08000", "JU": "#7098A8", "JB": "#00A0B8",
+}
 for _k, _v in LINES.items():
     _v["colour"] = _COLOURS.get(_k, _v["hue"])
 LINE_ORDER = list(LINES)

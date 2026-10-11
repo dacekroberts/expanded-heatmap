@@ -1,0 +1,209 @@
+{
+  "city_barber_07": {
+    "as_of": "2026-07-31",
+    "bytes": 11727,
+    "dataset_page": "https://www.city.hirakata.osaka.jp/0000025284.html",
+    "file": "bbjul.xlsx",
+    "how": "downloaded",
+    "retrieved": "2026-10-07T19:49:51+00:00",
+    "rows": 1,
+    "sha256": "bdb1b0f86cef95c5daf5239c98cb6596fc631ec35a5509f039b731a91f54161b",
+    "url": "https://www.city.hirakata.osaka.jp/cmsfiles/contents/0000025/25284/bbjul.xlsx"
+  },
+  "city_barber_all": {
+    "as_of": "2026-03-31",
+    "bytes": 29419,
+    "dataset_page": "https://www.city.hirakata.osaka.jp/0000025284.html",
+    "file": "riyouall.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:42:39+00:00",
+    "rows": 237,
+    "sha256": "a73825519b76287384077999aff395620fb75f2448636f2b89441fd583129b0b",
+    "url": "https://www.city.hirakata.osaka.jp/cmsfiles/contents/0000025/25284/riyouall.xlsx"
+  },
+  "city_beauty_04": {
+    "as_of": "2026-04-30",
+    "bytes": 11906,
+    "dataset_page": "https://www.city.hirakata.osaka.jp/0000025284.html",
+    "file": "biyouapr.xlsx",
+    "how": "downloaded",
+    "retrieved": "2026-10-07T19:49:50+00:00",
+    "rows": 2,
+    "sha256": "12e90091d5c35704fe08d4b0d17f67f4e3234d4da176da93e1d2576a1981ed7d",
+    "url": "https://www.city.hirakata.osaka.jp/cmsfiles/contents/0000025/25284/biyouapr.xlsx"
+  },
+  "city_beauty_05": {
+    "as_of": "2026-05-31",
+    "bytes": 12105,
+    "dataset_page": "https://www.city.hirakata.osaka.jp/0000025284.html",
+    "file": "beautymay.xlsx",
+    "how": "downloaded",
+    "retrieved": "2026-10-07T19:49:51+00:00",
+    "rows": 2,
+    "sha256": "90dfc89ecac7e57535e93581dcf288cc7ba51a169e48bb66e173eb5b321655df",
+    "url": "https://www.city.hirakata.osaka.jp/cmsfiles/contents/0000025/25284/beautymay.xlsx"
+  },
+  "city_beauty_06": {
+    "as_of": "2026-06-30",
+    "bytes": 12159,
+    "dataset_page": "https://www.city.hirakata.osaka.jp/0000025284.html",
+    "file": "beauty6.xlsx",
+    "how": "downloaded",
+    "retrieved": "2026-10-07T19:49:51+00:00",
+    "rows": 3,
+    "sha256": "9c8baf63b74afc7e2b5962a98ed86a07938e1737612ab2c286c2f49be7bb4911",
+    "url": "https://www.city.hirakata.osaka.jp/cmsfiles/contents/0000025/25284/beauty6.xlsx"
+  },
+  "city_beauty_07": {
+    "as_of": "2026-07-31",
+    "bytes": 11938,
+    "dataset_page": "https://www.city.hirakata.osaka.jp/0000025284.html",
+    "file": "btjul.xlsx",
+    "how": "downloaded",
+    "retrieved": "2026-10-07T19:49:51+00:00",
+    "rows": 3,
+    "sha256": "fd84ff4c4ee33e10c03ba30be23fe99d2d56fc574d40a7aad4d894b45f5d4ba4",
+    "url": "https://www.city.hirakata.osaka.jp/cmsfiles/contents/0000025/25284/btjul.xlsx"
+  },
+  "city_beauty_all": {
+    "as_of": "2026-03-31",
+    "bytes": 69664,
+    "dataset_page": "https://www.city.hirakata.osaka.jp/0000025284.html",
+    "file": "biyouall.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:42:42+00:00",
+    "rows": 814,
+    "sha256": "6db4f7ed4c8eb8d87c9cd7a06da6ca8aef30c1cfc18ca66c31555e8e754eb743",
+    "url": "https://www.city.hirakata.osaka.jp/cmsfiles/contents/0000025/25284/biyouall.xlsx"
+  },
+  "city_food": {
+    "as_of": "2026-03-31",
+    "bytes": 409683,
+    "dataset_page": "https://www.city.hirakata.osaka.jp/0000023479.html",
+    "file": "272108_food_business_all_202603_end.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:42:19+00:00",
+    "rows": 3175,
+    "sha256": "d1776465351e4f7d2eee267c8f7fa86311f4f270e30251fce515717f13aac62b",
+    "url": "https://www.city.hirakata.osaka.jp/cmsfiles/contents/0000023/23479/272108_food_business_all_202603_end.csv"
+  },
+  "city_laundry_all": {
+    "as_of": "2026-03-31",
+    "bytes": 26636,
+    "dataset_page": "https://www.city.hirakata.osaka.jp/0000025284.html",
+    "file": "cleaningall.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:42:45+00:00",
+    "rows": 206,
+    "sha256": "fe66b6ac660d9a5158979d36f6a2fb8c75ce5e26784fa39227751b15900db048",
+    "url": "https://www.city.hirakata.osaka.jp/cmsfiles/contents/0000025/25284/cleaningall.xlsx"
+  },
+  "city_mhlw": {
+    "as_of": null,
+    "bytes": 383368,
+    "dataset_page": "https://i2fas.mhlw.go.jp/",
+    "file": "27210_food_business_all.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:42:48+00:00",
+    "rows": 1203,
+    "sha256": "6d405ca1bedee7f2950a8cde3c6c91d486a122bf0e0fdad6eadd74f343ac062a",
+    "url": "https://i2fas.mhlw.go.jp/faspub/page/opendatadownload.jsp?param=27210_food_business_all.csv"
+  },
+  "city_new_04": {
+    "as_of": "2026-04-30",
+    "bytes": 6257,
+    "dataset_page": "https://www.city.hirakata.osaka.jp/0000023479.html",
+    "file": "272108_food_business_new_202604.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:42:23+00:00",
+    "rows": 50,
+    "sha256": "ed596c2a6bdaf93a045167111bc37b91b30ac8915ae6ca1627286c193c92ecf0",
+    "url": "https://www.city.hirakata.osaka.jp/cmsfiles/contents/0000023/23479/272108_food_business_new_202604.csv"
+  },
+  "city_new_05": {
+    "as_of": "2026-05-31",
+    "bytes": 6389,
+    "dataset_page": "https://www.city.hirakata.osaka.jp/0000023479.html",
+    "file": "272108_food_business_new_202605.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:42:26+00:00",
+    "rows": 52,
+    "sha256": "9d308bc2e6f902b97cbbf0c0a540862c9bf30edf72a27174071454823718daee",
+    "url": "https://www.city.hirakata.osaka.jp/cmsfiles/contents/0000023/23479/272108_food_business_new_202605.csv"
+  },
+  "city_new_06": {
+    "as_of": "2026-06-30",
+    "bytes": 6865,
+    "dataset_page": "https://www.city.hirakata.osaka.jp/0000023479.html",
+    "file": "272108_food_business_new_202606.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:42:29+00:00",
+    "rows": 56,
+    "sha256": "a64fbba2fd0edf2dc7b6d5391d9905ca2ef8be8d3ae95682446428fd6ec89319",
+    "url": "https://www.city.hirakata.osaka.jp/cmsfiles/contents/0000023/23479/272108_food_business_new_202606.csv"
+  },
+  "city_new_07": {
+    "as_of": "2026-07-31",
+    "bytes": 6948,
+    "dataset_page": "https://www.city.hirakata.osaka.jp/0000023479.html",
+    "file": "272108_food_business_new_202607.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:42:32+00:00",
+    "rows": 55,
+    "sha256": "73423144560fa10a2b2d62d9122880f345337a435da0060f0e1d4754fc4959e4",
+    "url": "https://www.city.hirakata.osaka.jp/cmsfiles/contents/0000023/23479/272108_food_business_new_202607.csv"
+  },
+  "city_new_08": {
+    "as_of": "2026-08-31",
+    "bytes": 2858,
+    "dataset_page": "https://www.city.hirakata.osaka.jp/0000023479.html",
+    "file": "272108_food_business_new_202608.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:42:36+00:00",
+    "rows": 23,
+    "sha256": "0f8a9aba6c202ae07fe8e76066f474d16239a6e598ab0879fbc5a005db18a22f",
+    "url": "https://www.city.hirakata.osaka.jp/cmsfiles/contents/0000023/23479/272108_food_business_new_202608.csv"
+  },
+  "isj_27210_block": {
+    "bytes": 208806,
+    "file": "27210-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:42:52+00:00",
+    "sha256": "208c039801c924672aa7652404c135eae25bd1aa75ea8803dc5c6406c940848b",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/27210-24.0a.zip"
+  },
+  "isj_27210_chome": {
+    "bytes": 10990,
+    "file": "27210-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:42:56+00:00",
+    "sha256": "48909f901cd4162c7b6af1e3c0dd602e2ce2e90fb82598d07701faffb1d5c464",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/27210-19.0b.zip"
+  },
+  "n02": {
+    "bytes": 14903774,
+    "file": "data/japan/raw/N02-25_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-30T23:47:52+00:00",
+    "sha256": "aaf76af133b2e771e538fabc4646d2e443dc1d5a67b221382a28d744e706cc9f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip"
+  },
+  "n03": {
+    "bytes": 2163158,
+    "file": "data/japan/raw/N03-20250101_27_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:52:09+00:00",
+    "sha256": "7e3f49311a822680ec7fe2d3f0e167a6631e353feac0fda5fb78b454be92eb51",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_27_GML.zip"
+  },
+  "osm_station_names": {
+    "bytes": 15828,
+    "elements": 27,
+    "file": "osm_station_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-10-07T20:02:20Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](34.77,135.61,34.89,135.75);way[\"railway\"=\"station\"](34.77,135.61,34.89,135.75););out tags center;",
+    "retrieved": "2026-10-07T20:03:41+00:00",
+    "sha256": "2f0540ea04938d1da4dee70b093cca7ed11ecd159956432a52df2b8e9482447a"
+  }
+}

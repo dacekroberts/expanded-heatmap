@@ -1,12 +1,12 @@
 {
   "lines_drawn": 2,
-  "names_withheld": 28,
-  "semas_rows": 28205,
+  "names_withheld": 42,
+  "semas_rows": 43692,
   "stations_all": 113,
-  "stations_kept": 7,
+  "stations_kept": 14,
   "stations_off_map": 0,
-  "stations_outside": 106,
+  "stations_outside": 99,
   "stop_nodes": 250,
-  "storefronts": 15177,
-  "storefronts_classified": 15177
+  "storefronts": 23999,
+  "storefronts_classified": 23999
 }

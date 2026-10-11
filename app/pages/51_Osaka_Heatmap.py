@@ -48,9 +48,9 @@ st.markdown(
 **The lines**
 
 - Thirty-four lines are drawn, each labeled on the map and in the legend: Osaka Metro's Midōsuji,
-  Tanimachi, Yotsubashi, Chūō, Sennichimae, Sakaisuji, Nagahori Tsurumi-ryokuchi and Imazatosuji
-  lines and the New Tram; JR West's Osaka Loop, JR Kyoto, JR Kobe, JR Tōzai, JR Gakkentoshi, Osaka
-  Higashi, JR Yumesaki, JR Yamatoji and JR Hanwa lines; Hankyu's Kobe, Takarazuka, Kyoto and Senri
+  Tanimachi, Yotsubashi, Chuo, Sennichimae, Sakaisuji, Nagahori Tsurumi-ryokuchi and Imazatosuji
+  lines and the New Tram; JR West's Osaka Loop, JR Kyoto, JR Kobe, JR Tōzai, JR Gakkentoshi, JR
+  Osaka Higashi, JR Yumesaki, JR Yamatoji and JR Hanwa lines; Hankyu's Kobe, Takarazuka, Kyoto and Senri
   lines; Hanshin's Main and Namba lines; Keihan's Main and Nakanoshima lines; Kintetsu's Namba,
   Osaka and Minami-Osaka lines; Nankai's Main, Kōya and Shiomibashi lines; and the Hankai tram's
   Hankai and Uemachi lines.
