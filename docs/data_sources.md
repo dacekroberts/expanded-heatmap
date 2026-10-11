@@ -100,7 +100,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
 | South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang (Regional), Daejeon, Gwangju, Gimhae, Gimpo, Siheung |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
-| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki, Higashiyamato, Nishitōkyō, Tama, Higashimurayama, Ageo (Regional), Sōka, Tokorozawa, Kasukabe, Fuchū (Tokyo), Chōfu, Tachikawa, Hino, Toyonaka, Hirakata, Suita, Itami, Kakogawa, Amagasaki, Uji, Maebashi, Fukushima, Fukuyama, Ichinomiya, Tsu, Akita, Ōita, Gifu, Iwaki, Mito, Morioka, Shizuoka, Aomori, Okazaki, Kanazawa, Matsue |
+| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki, Higashiyamato, Nishitōkyō, Tama, Higashimurayama, Ageo (Regional), Sōka, Tokorozawa, Kasukabe, Fuchū (Tokyo), Chōfu, Tachikawa, Hino, Toyonaka, Hirakata, Suita, Itami, Kakogawa, Amagasaki, Uji, Maebashi, Fukushima, Fukuyama, Ichinomiya, Tsu, Akita, Ōita, Gifu, Iwaki, Mito, Morioka, Shizuoka, Aomori, Okazaki, Kanazawa, Matsue, Fuji |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin, Gelsenkirchen, Bremen |
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional), Manchester (Regional), Birmingham (Regional), Edinburgh, Sheffield, Nottingham (Regional), Blackpool (Regional), Liverpool (Regional) |
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires, Mendoza |
@@ -4592,6 +4592,36 @@ batch at review time).
   2026-10-11; the verdict is in
   `docs/decisions_drafts/worktree-japan-regional-2.md` ("Matsue built",
   2026-10-11).<!-- /internal -->
+
+**210. Shizuoka Prefecture and MLIT (Fuji) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-11; lands with the Regional-2
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-06; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). Shizuoka Prefecture's
+  three registers on its open-data portal (datasets 11261 理容所台帳, 11262
+  美容所台帳 and 11263 クリーニング所台帳, author 衛生課) are **CC BY 4.0** under
+  the portal's terms (§4), each resource labeled `表示（CC BY）`. MLIT's
+  位置参照情報 and N02 (the 2025 edition) are **PDL 1.0**, as in Kobe's (50).
+  N03 (CC BY 4.0) only picks stations and is **never drawn** (the Survey
+  Act). e-Stat's 衛生行政報告例 and the 2021 Economic Census were used as
+  measurements only and are not drawn.
+- **MUST DISPLAY** (the form for a modified work): 「この地図は以下の著作物を改変して利用しています。理容所台帳、美容所台帳、クリーニング所台帳、静岡県、クリエイティブ・コモンズ・ライセンス 表示4.0 国際（https://creativecommons.org/licenses/by/4.0/deed.ja）」,
+  with the three dataset pages linked; MLIT's credit lines.
+- **MUST NOT**: present the map as the prefecture's work; imply its
+  endorsement; say the pins are businesses open now. The portal's §6 holds a
+  fault-based reimbursement sentence and an own-cost sentence (accepted,
+  2026-10-06).<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py fuji` with its Japan pass, run
+  2026-10-11; the verdict is in
+  `docs/decisions_drafts/worktree-japan-regional-2.md` ("Fuji built",
+  2026-10-11). The credit's exact wording is a parked call there: staging's
+  read records "the prescribed modified-use credit" without quoting it, and
+  the form above is the one Shizuoka City's terms prescribe (notice 205),
+  with 静岡県 as the author. §6 was accepted by the owner's call 144; the
+  liabilities review found it read two ways (Cleanup is reconciling). A
+  facility may ask 衛生課 to stop publication of its entry; a removal request
+  to this project is honored at once.<!-- /internal -->
 
 
 ## Gaps

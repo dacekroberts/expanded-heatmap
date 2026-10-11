@@ -58,6 +58,174 @@ Each city's own parked calls and proposals are under its entry below
 
 ## Changes
 
+### 2026-10-11 - Fuji built, Shizuoka Prefecture's barber, beauty-salon and laundry registers of March 31, 2026 with their monthly new premises, personal services only
+
+- **Fuji built (page 263, notice 210), Kōchi's page shape (personal
+  services only) on Shizuoka's and Ichinomiya's source shape (a full list
+  plus its months, call 126) with Kakogawa's prefecture-list cut by address:
+  831 storefronts (barbers 209, beauty salons 531, laundries 91) around 17
+  stations on 3 lines, 49.6% of them in a ring (412) on the standard
+  rings.** Source: Shizuoka Prefecture's 理容所台帳, 美容所台帳 and
+  クリーニング所台帳 (datasets 11261 to 11263 on `opendata.pref.shizuoka.jp`,
+  author 衛生課), the lists of 2026-03-31 and the fifteen monthly files of
+  April to August 2026, CC BY 4.0 by the portal's §4 (read 2026-10-06 by
+  staging; §6 accepted, call 144). Built by a Regional-2 subagent; the brief
+  passed 9 of 9 on 2026-10-11.
+- **Step 2 reproduces the brief's rows.** Fuji's rows by address: barbers
+  211 + 1 (August), beauty salons 534 + 5 (June 3, July 1, August 1),
+  laundries 93 + 0 (31 general, 61 取次所, 1 無店舗取次所). 1 not a premises
+  (the storeless agent), 0 past term and 0 late starters (no file carries a
+  term, so no `TERM_AS_OF`), 843 storefront rows, 5 repeat rows shown once
+  (the brief's 5 premises registered as barber and beauty salon under one
+  name; 17 addresses hold both registers). `config.FUJI_ROWS` pins each
+  file's Fuji count, so a replaced file stops the build.
+- **The join is better than the brief's.** Block 815 of 843 (96.7%; the
+  brief 809, 96.0%), town-chōme center 19, 小字 center 2, unplaced 7 (0.8%;
+  the brief 11): the foundation's rules (the bare 町, the spelling pairs, the
+  小字 center) place 比奈町, 神谷町 and 米の宮町, the brief's proposals (b)
+  and (c). On the map: block 810, town center 19, 小字 center 2. By register:
+  barbers 208 / 1 / 0, beauty salons 516 / 14 / 1, laundries 86 / 4 / 1. The
+  7 left: 東比奈 2 (a town in neither MLIT file) and 5 written with a 通称
+  after a two-character 大字 (岩渕上町, 厚原西, 大野新町, 伝法桜ヶ丘, 大渕城山),
+  the brief's proposal (a), which is not in shared code (parked call 2).
+- **GSI's address search on 150 block-tier rows** (`gsi_sample.py fuji 150
+  静岡県`, 1 request a second): 150 answered, median 1 m, 146 within 100 m,
+  149 within 250 m, the farthest 556 m.
+- **No shared-code change was needed.** クリーニング所所在地 and
+  クリーニング所名称 are in `ADDR_COLS` and `NAME_COLS` already, the S era in
+  `wareki_date`. City-local, each with its precedent: the months read by
+  header name (`city_rows`), 該当なし rows passed over by the address cut,
+  July's beauty file pinned to resource 857854 (the one the dataset page
+  links; 857848 stays on disk unread), the cut by address and never by
+  富士保健所 (Kakogawa's `source_rows`).
+- **The pinned URLs were not re-downloaded**: all 18 files were on disk from
+  Step 0 (2026-10-06). Each pinned URL is a link on its dataset page as
+  fetched 2026-10-11 (three page requests, 8 s apart), and the brief check
+  fetched the beauty full list by its pinned URL.
+- **Facility-named and factory-named premises are kept** (the brief's item):
+  4 trade names read as a hospital or welfare facility (2 barbers, 1 beauty
+  salon, 1 laundry), 2 general laundries carry リネン and 4 carry 工場 in the
+  name. Sapporo's welfare-facility rule reads a type column, which these
+  registers lack, and Funabashi kept its 工場 names; nothing was dropped by
+  name.
+- **No census control ran**: `japan_census_control.py` measures Food service
+  pins, and this page has none. The brief's coverage figures stand as
+  staging measured them (the jurisdiction's lists hold 97.1%, 99.6% and
+  93.4% of e-Stat's FY2024 counts; the census estimate for Fuji reads about
+  100%, 89% and 78%); not re-measured here.
+- **Rail:** step 1 reproduces the brief: Tokaido Line 4 of 89, Minobu Line 5
+  of 39, Gakunan Railway Line 10 of 10; 19 platform records, 17 stations (富士
+  one group, 0 m; 吉原 one group, 142 m); the Shinkansen's 新富士 dropped. 7
+  stations beyond the city line within 3 km are listed (富士宮市 4, 静岡市清水区
+  2, 沼津市 1). Median nearest-station gap 1,024 m (the brief's exactly):
+  standard rings. No stub, no low-frequency stretch.
+- **Gate 3:** exact on the Gakunan Railway Line (10), from Gakunan's weekday
+  timetable as staging read it (2026-10-06); the timetable page was checked
+  by the brief check, the PDF not re-read. JR is cut at the city line.
+- **Station names stand as OpenStreetMap writes them:** 27 objects, all with
+  `name:en`; 17 names read, none translated, no macron, no 丁目. No
+  override, alias or tie. Jatco-mae and Yoshiwara-honcho keep OSM's
+  lower-case common word (Kakogawa's style).
+- **Line names:** "JR Tokaido Line" (the registry's), "JR Minobu Line",
+  "Gakunan Railway Line" (the brief's; the operator has one line).
+- **Line colours:** the Tokaido Line takes `#E86810` from
+  `pipeline/line_registry.py`. `line_colour_search.py` re-chooses every line,
+  so its rule was run with that colour held fixed (scratch `fuji/colours.py`,
+  2026-10-11): the Minobu Line `#B070B0`, the Gakunan Railway Line `#E83810`.
+  Against the pins (CIE76): 62.6, 45.3 and 53.2 at the least; lines JT/GK
+  21.1 (they share 吉原), JT/MN 89.0, MN/GK 88.8; 3:1 on both basemaps; the
+  dark-mode labels separate, 3 of 3. None between 20 and 45 against a pin.
+  Against Shizuoka's Shizuoka-Shimizu Line (`#0068B8`): 41.1 or more.
+- **The opening view** is the stations' extent (the rendered `BOUNDS`,
+  35.136 to 35.205 N, 138.619 to 138.752 E), not the 245 km² N03 polygon;
+  `check_map_view.js` was not run by the builder.
+- **Pin names:** 0 blank; 1 beauty salon's name carries a `?` where the
+  published file lost a character, and the renderer shows its register type.
+- **Privacy verdict: publish.** `check_personal_exposure.py fuji`: the Japan
+  pass prints 0 of 831; 0 names withheld by the name rule (the brief's 0 and
+  0). The name rule compares 開設者氏名 in memory only; the phone column is
+  never selected.
+- Files: `pipeline/fuji/` (config, fetch_sources, three steps),
+  `outputs/fuji/` (heatmap.html, excluded_stations.csv, provenance.json).
+
+#### Parked calls
+
+1. **The notice's credit wording.** Staging's read records "CC BY 4.0 by the
+   portal's §4, the prescribed modified-use credit" and no record quotes the
+   prescribed text. The notice, the numbered item and the licence row are
+   drafted in the CC BY 4.0 改変 form Shizuoka City's terms prescribe (notice
+   205), with 静岡県 as the author and the three dataset pages linked.
+   Recommend: confirm the wording against staging's read (or one
+   `licence-read` call on the portal's terms) before the page lands.
+   Tradeoff: publishing the drafted form risks a credit that is not the
+   portal's own words; the builder may not read terms.
+2. **A two-character 大字 followed by a 通称** (the brief's proposal (a)): 5
+   of the 7 unplaced rows (岩渕上町, 厚原西, 大野新町, 伝法桜ヶ丘, 大渕城山).
+   `known_town`'s prefix match needs 3 characters. Recommend: leave as built
+   (0.6% of rows) unless another city shows the same shape. Tradeoff: a
+   shared rule allowing 2 characters where the 地番 then hits a block would
+   place about 5 here, and needs the Minato control and every city screen
+   re-run.
+3. **The Tokaido and Gakunan colours are 21.1 apart** (orange and
+   red-orange, sharing 吉原). It clears the search's 18. Recommend: keep.
+   Tradeoff: a Gakunan colour farther from orange leaves the operator's red
+   hue; the Tokaido colour is the registry's and cannot move.
+4. **Facility-named premises (4) kept** on Sapporo's rule reading a type,
+   not a name. Recommend: keep. Tradeoff: a salon inside a hospital or care
+   home may not serve the public; dropping by name is the rule the owner
+   rejected for 工場 / センター.
+5. **The map view and macro label** (`check_map_view.js`,
+   `check_macro_labels.py`, `TEXT_WIDTH` for "Fuji") are the lead's: not run
+   here.
+
+#### Proposals
+
+Sentences adapted from an approved bullet of another page, or new:
+
+- "The Shinkansen is not drawn, so Shin-Fuji, which only the Shinkansen
+  serves, has no ring." (the template's Shinkansen bullet, with a new clause)
+- "Restaurants, cafés and shops are not on this map: the national list of
+  food businesses holds an address for at most about two in three of Fuji's
+  restaurants." (from Shizuoka's and Kōchi's food bullet; the figure is the
+  brief's "at most 67%")
+- "From Shizuoka Prefecture's registers of barbers, beauty salons and
+  laundries: the complete lists as of March 31, 2026 and the new premises
+  listed each month since, to August 31, 2026." and "The prefecture lists
+  new premises each month but not closures, so a premises that closed after
+  March is still counted. The map shows an upper bound, and a dot is a
+  premises on the lists, not necessarily one open today." (Shizuoka's, with
+  the prefecture as publisher)
+- "No official count exists for Fuji alone. The registers list 539 beauty
+  salons and 92 laundries here, about nine in ten and about four in five of
+  what the 2021 Economic Census suggests. Both shares are estimates, and the
+  reason for the gap is not known." (the owner's call 186, the sentence
+  itself for review time)
+- "Names and types are shown in Japanese, as the prefecture records them."
+  (the template's, with the prefecture)
+- Notice 210's processing sentence: "(This map modifies Shizuoka
+  Prefecture's registers of barbers, beauty salons and laundries as of March
+  31, 2026 and its monthly lists of new premises to August 2026: this
+  project selected the premises in Fuji with a fixed place, placed each by
+  its address, and counted them around stations.) The registers may include
+  premises that have closed." (from Shizuoka's)
+
+#### Registry
+
+- `jr-central-tokaido-line`: add `"fuji": "JT"` to `maps`.
+- No new entry needed today: the JR Minobu Line (`#B070B0`) and the Gakunan
+  Railway Line (`#E83810`) are drawn by no built map and by no other city of
+  this batch. The Minobu Line runs on to Fujinomiya and Kōfu (Kōfu is in
+  Band R); if either is built, the line needs an entry with Fuji's colour.
+
+#### Downstream
+
+- Notice 210 (Shizuoka Prefecture, CC BY 4.0 by the portal's terms): CC BY
+  requires the credit wherever the modified work is used, so card face, in
+  the prescribed form or the short form Visuals uses for CC BY 4.0 lists;
+  the MLIT credits as for every Japanese card. Open terms questions: the
+  credit's exact wording (parked call 1), and §6, which the liabilities
+  review found read two ways (with Cleanup).
+
 ### 2026-10-11 - Matsue built, the city's barber, beauty-salon and laundry registers of August 31, 2026, personal services only
 
 - **Matsue built (page 262, notice 209), Kōchi's page shape (personal

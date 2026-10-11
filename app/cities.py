@@ -5714,8 +5714,17 @@ CITIES = [
         "lat": 35.155,
         "lon": 138.68,
         "page": "pages/263_Fuji_Heatmap.py",
-        "blurb": "JR Central and Gakunan Railway (TODO: list the lines)",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (96.7%)",
+        "data_age": "Lists as of 2026-03-31, openings added to 2026-08-31 (an upper bound)",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "JR Central's Tokaido and Minobu lines and the Gakunan Railway Line",
         "region": "Chubu",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
         "country": "Japan",
         "mode": "metro",
         "in_default_view": False,

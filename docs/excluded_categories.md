@@ -6040,6 +6040,46 @@ line.
   Minami-Shinji) and is infrequent: 10 trains a weekday run toward Kisuki
   and 11 toward Shinji.
 
+### Fuji - Shizuoka Prefecture's barber, beauty-salon and laundry registers only, joined to MLIT's address blocks
+
+**Left out**
+- Every food business and every shop: the national list of food businesses
+  holds an address for at most about two in three of Fuji's restaurants, so
+  this map shows barbers, beauty salons and laundries only (owner,
+  2026-10-06).
+- 1 laundry agent with no premises (無店舗取次所).
+
+**Counted** - every barber, beauty salon and laundry with an address in Fuji
+on the prefecture's complete lists of March 31, 2026 (211, 534 and 92
+premises), plus the 6 new premises listed each month since, to August 31,
+2026 (1 barber, 5 beauty salons): 212 barbers, 539 beauty salons and 92
+laundries, 61 of them pick-up counters (取次所). Closures since March are not
+published, so the count is an upper bound. No official count exists for Fuji
+alone: across the area the lists cover (the prefecture outside Shizuoka City
+and Hamamatsu) they hold 97%, nearly 100% and 93% of the national counts of a year
+earlier, and an estimate from the 2021 Economic Census puts Fuji's beauty
+salons at about nine in ten and its laundries at about four in five of what
+the census suggests; the reason is not known.
+
+**One pin per premises** - 5 premises registered as both a barber and a
+beauty salon under one name are shown once.
+
+**Not placed** - 7 premises (3 barbers, 3 beauty salons, 1 laundry) at
+addresses MLIT's files do not hold: 2 in a town the files leave out and 5
+written with a local place name after the district's. Another 21 sit at
+their district's center.
+
+**Names not shown** - no trade name is its operator's own name. 1 beauty
+salon's name lost a character in the published file and shows its register
+type instead.
+
+**Stations.** The Gakunan Railway Line is drawn whole; JR's Tokaido and
+Minobu lines are cut at the city line.
+- Left out: 7 stations beyond it, 4 in Fujinomiya, 2 in Shizuoka and 1 in
+  Numazu.
+- The Shinkansen is not drawn, so Shin-Fuji, which only the Shinkansen
+  serves, has no ring.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

@@ -43,25 +43,53 @@ else:
 # replaces this with its own caption of the sources' dates and credits.
 render_data_age("Fuji")
 
-# TODO: replace every TODO bullet with prose true for this city, as short
-# bullets under bold headings (app/pages/43_Seoul_Heatmap.py is the model):
-# the lines by name, what is not drawn, the area and the stations left out, the
-# source and its limitations. Detail a reference page carries stays there.
+# From the japan-city skill's template, Yokohama's one-bucket line and Kōchi's
+# and Shizuoka's upper-bound sentences (approved wording, pre-approved for
+# this build, 2026-09-30), with "the prefecture" where those pages say "the
+# city". The food bullet, the source bullet, the Shin-Fuji clause and the
+# census-estimate bullet (the owner's call 186) are proposals in
+# docs/decisions_drafts/worktree-japan-regional-2.md. The dates are
+# config.TRADE_AS_OF; the ring share, 49.6%, is step 3's (412 of 831).
 st.markdown(
     """
 **The lines**
 
-- TODO: the lines drawn, by name (each is labeled on the map and in the legend).
-- TODO: what is not drawn, and why.
-- TODO: the area covered; stations left out are listed below.
+- Three lines are drawn, each labeled on the map and in the legend: JR Central's Tokaido and
+  Minobu lines and the Gakunan Railway Line.
+- Lines and stations come from MLIT's national railway data (国土数値情報); station names in
+  English are from OpenStreetMap. Line colors are this project's own, not the operators'.
+- Only stations inside Fuji City get rings, because the business data covers the city alone:
+  lines running on to Numazu, Shizuoka and Fujinomiya are cut at the city line. The stations left
+  out are listed below.
+- The Shinkansen is not drawn, so Shin-Fuji, which only the Shinkansen serves, has no ring.
 
 **The businesses**
 
-- TODO: the data source, and any category it is missing.
+- **This map shows personal services only: barbers, beauty salons and laundries.**
+- Restaurants, cafés and shops are not on this map: the national list of food businesses holds
+  an address for at most about two in three of Fuji's restaurants.
+- From Shizuoka Prefecture's registers of barbers, beauty salons and laundries: the complete
+  lists as of March 31, 2026 and the new premises listed each month since, to August 31, 2026.
+- The prefecture lists new premises each month but not closures, so a premises that closed after
+  March is still counted. The map shows an upper bound, and a dot is a premises on the lists, not
+  necessarily one open today.
+- No official count exists for Fuji alone. The registers list 539 beauty salons and 92 laundries
+  here, about nine in ten and about four in five of what the 2021 Economic Census suggests. Both
+  shares are estimates, and the reason for the gap is not known.
+
+**Reading the map**
+
+- The lists give an address but no location. Each address is matched to MLIT's address reference
+  data, which places most at their street block; where only the district can be found, the dot
+  sits at the district's center.
+- Where a business's trade name is its operator's own name, the dot shows its register type
+  instead.
+- Names and types are shown in Japanese, as the prefecture records them.
+- **About half of the premises sit within a ring.**
 """
 )
 
-render_map_help("three business categories (Retail, Food service and Personal services)")
+render_map_help("business layer")
 render_excluded_stations("Fuji")
 render_country_links("Fuji")
 
