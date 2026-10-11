@@ -110,7 +110,9 @@ var travelStyle = (function () {
   // [0, 2] and [0, 1.5] compared on world-zoom crops (2026-10-08), only
   // [0, 1.5] keeps short segments such as Kashmir's reading as a line.
   // Every unrecognized kind takes the same rule (owner, 2026-10-08).
-  var DISPUTED = {color: "#c4c4c4", width: 1.5, dash: [0, 1.5]};
+  // Dark (draft, 2026-10-11): as faint against the dark land as the light
+  // one is against the light land, and below the settled border #5b6374.
+  var DISPUTED = {color: "#c4c4c4", colorDark: "#4a4f5a", width: 1.5, dash: [0, 1.5]};
   var UNRECOGNIZED = ["unrecognized_country", "unrecognized_region", "unrecognized_macroregion"];
   // Ferries and aerial lifts are told apart from operators' line colours by
   // pattern first (transit-globe's suggestion, owner, 2026-10-08). Ferries
@@ -124,8 +126,15 @@ var travelStyle = (function () {
   // cartographic thin dark line with cross ticks: the earlier burnt orange
   // #d84315 sat 8.3 from the tram city-dot colour #c2410c, under the hard
   // floor of 10.
-  var FERRY = {site: "#b0004f", full: "#1e88e5", dash: [3, 2]};
-  var AERIALWAY = {color: "#444444", tickWidth: 6, tickDash: [0.15, 2.5]};
+  // Dark flavor (drafts, measured 2026-10-11 against 5.7.2's dark water
+  // #31353f and land #1f1f1f): the light colours read 1.7:1 (crimson) and
+  // 1.3:1 (lift grey) on the dark water, so each takes a lighter form of
+  // the same hue: pink 4.0:1 on water and 47 from Marunouchi red, blue
+  // 4.6:1, lift grey 7.3:1. Re-measure if the dark flavor's water or land
+  // colour changes.
+  var FERRY = {site: "#b0004f", full: "#1e88e5", siteDark: "#f06292", fullDark: "#42a5f5",
+               dash: [3, 2]};
+  var AERIALWAY = {color: "#444444", colorDark: "#c8c8c8", tickWidth: 6, tickDash: [0.15, 2.5]};
   var WORLD_KEEP = ["background", "earth", "water", "boundaries_country"];
 
   // Legacy filters (["==", "kind", "x"]) and expressions (["==", ["get",
@@ -175,6 +184,8 @@ var travelStyle = (function () {
     opts = opts || {};
     var light = (opts.flavor || "light") === "light";
     var variant = opts.variant === "full" ? "full" : "site";
+    var ferry = FERRY[variant + (light ? "" : "Dark")];
+    var lift = light ? AERIALWAY.color : AERIALWAY.colorDark;
     var src = (layers[0] && layers[0].source) || (layers[1] && layers[1].source) || "protomaps";
     var out = [];
     var landuseDone = false;
@@ -219,7 +230,7 @@ var travelStyle = (function () {
           "source-layer": "boundaries",
           filter: ["any", ["has", "disputed"], ["in", "kind"].concat(UNRECOGNIZED)],
           layout: {"line-cap": "round", "line-join": "round"},
-          paint: {"line-color": DISPUTED.color, "line-width": DISPUTED.width,
+          paint: {"line-color": light ? DISPUTED.color : DISPUTED.colorDark, "line-width": DISPUTED.width,
                   "line-dasharray": opts.disputedDash || DISPUTED.dash}
         });
         return;
@@ -236,20 +247,20 @@ var travelStyle = (function () {
         out.push({
           id: "travel_ferry", type: "line", source: src, "source-layer": "roads",
           filter: ["==", "kind", "ferry"],
-          paint: {"line-color": FERRY[variant], "line-dasharray": FERRY.dash,
+          paint: {"line-color": ferry, "line-dasharray": FERRY.dash,
                   "line-width": lineWidth([11, 1, 16, 3])}
         });
         out.push({
           id: "travel_aerialway", type: "line", source: src, "source-layer": "roads",
           filter: ["==", "kind", "aerialway"],
-          paint: {"line-color": AERIALWAY.color, "line-width": lineWidth([11, 0.8, 16, 1.5])}
+          paint: {"line-color": lift, "line-width": lineWidth([11, 0.8, 16, 1.5])}
         });
         // Cross ticks: a wide line whose dashes are much shorter than it is
         // wide draws short bars across the cable.
         out.push({
           id: "travel_aerialway_ticks", type: "line", source: src, "source-layer": "roads",
           filter: ["==", "kind", "aerialway"], minzoom: 13,
-          paint: {"line-color": AERIALWAY.color, "line-width": AERIALWAY.tickWidth,
+          paint: {"line-color": lift, "line-width": AERIALWAY.tickWidth,
                   "line-dasharray": AERIALWAY.tickDash}
         });
       }
@@ -259,7 +270,7 @@ var travelStyle = (function () {
         // what it is (owner, 2026-10-08; "Arno Boat" in Florence, "Bac du
         // Rocher des Doms" in Avignon). The label language follows the pill.
         var name = ["coalesce", ["get", "name:" + (opts.lang || "en")], ["get", "name"]];
-        [["ferry", FERRY[variant]], ["aerialway", AERIALWAY.color]].forEach(function (k) {
+        [["ferry", ferry], ["aerialway", lift]].forEach(function (k) {
           out.push({
             id: "travel_" + k[0] + "_label", type: "symbol", source: src, "source-layer": "roads",
             filter: ["==", "kind", k[0]], minzoom: 12,

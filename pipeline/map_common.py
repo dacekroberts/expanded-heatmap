@@ -2947,9 +2947,12 @@ def build_legend(bucket_colors, legend_label, lines, no_data_stations=False, leg
         line_rows += LEGEND_NO_DATA_ROWS.format(color=LIGHT["station"])
     named = [(kind, name) for kind, name in routes if name and kind in TRAVEL_ROUTE_ROWS]
     if travel and named:
+        colours = TRAVEL_ROUTE_COLOURS["full" if full else "site"]
         route_rows = "".join(
-            TRAVEL_ROUTE_ROWS[kind].format(color=TRAVEL_ROUTE_COLOURS["full" if full else "site"][kind],
-                                           label=html.escape(name))
+            TRAVEL_ROUTE_STYLE.format(kind=kind, light=colours[kind][0], dark=colours[kind][1])
+            for kind in sorted({kind for kind, _name in named}))
+        route_rows += "".join(
+            TRAVEL_ROUTE_ROWS[kind].format(label=html.escape(name))
             for kind, name in sorted(set(named), key=lambda r: (r[0] != "ferry", r[1])))
         line_rows += route_rows if full else f'<div class="hm-travel-only">{route_rows}</div>'
     if full:
@@ -3093,29 +3096,36 @@ OPEN_BASEMAP_ASSETS = "https://protomaps.github.io/basemaps-assets"
 TRAVEL_STYLE_JS = Path(__file__).with_name("travel_style.js").read_text(encoding="utf-8")
 # Ferry and lift colours read from the style itself, so a legend swatch can
 # never drift from the line it explains.
-_FERRY = re.search(r'var FERRY = \{site: "(#[0-9a-f]{6})", full: "(#[0-9a-f]{6})"', TRAVEL_STYLE_JS)
-_AERIAL = re.search(r'var AERIALWAY = \{color: "(#[0-9a-f]{6})"', TRAVEL_STYLE_JS)
+_FERRY = re.search(r'var FERRY = \{site: "(#[0-9a-f]{6})", full: "(#[0-9a-f]{6})", '
+                   r'siteDark: "(#[0-9a-f]{6})", fullDark: "(#[0-9a-f]{6})"', TRAVEL_STYLE_JS)
+_AERIAL = re.search(r'var AERIALWAY = \{color: "(#[0-9a-f]{6})", colorDark: "(#[0-9a-f]{6})"',
+                    TRAVEL_STYLE_JS)
 if not (_FERRY and _AERIAL):
     raise ValueError("pipeline/travel_style.js: FERRY or AERIALWAY colours not found")
-TRAVEL_ROUTE_COLOURS = {"site": {"ferry": _FERRY[1], "aerialway": _AERIAL[1]},
-                        "full": {"ferry": _FERRY[2], "aerialway": _AERIAL[1]}}
+# Per variant and kind: (light, dark), the dark one drawn with the dark flavor.
+TRAVEL_ROUTE_COLOURS = {"site": {"ferry": (_FERRY[1], _FERRY[3]), "aerialway": (_AERIAL[1], _AERIAL[2])},
+                        "full": {"ferry": (_FERRY[2], _FERRY[4]), "aerialway": (_AERIAL[1], _AERIAL[2])}}
 # Legend rows for the routes, drawn as the map draws them: ferries dashed,
 # lifts a thin line with cross ticks. Same row layout as LEGEND_LINE_ROW, but
 # not .hm-line-row: these are basemap features, not lines a reader can
 # highlight, and the label and coverage checks count .hm-line-row as lines.
+# The colour is a custom property with a .dark-base override, so a swatch
+# follows the map's flavor as the route does.
 TRAVEL_ROUTE_ROWS = {
     "ferry": """
-  <div class="hm-route-row" style="display:flex; align-items:center; margin:3px 0;">
+  <div class="hm-route-row hm-route-ferry" style="display:flex; align-items:center; margin:3px 0;">
     <span style="display:inline-block; width:16px; height:3px; margin-right:7px;
-      background:repeating-linear-gradient(90deg, {color} 0 5px, transparent 5px 8px);"></span>{label}
+      background:repeating-linear-gradient(90deg, var(--hm-route) 0 5px, transparent 5px 8px);"></span>{label}
   </div>""",
     "aerialway": """
-  <div class="hm-route-row" style="display:flex; align-items:center; margin:3px 0;">
+  <div class="hm-route-row hm-route-aerialway" style="display:flex; align-items:center; margin:3px 0;">
     <span style="display:inline-block; width:16px; height:9px; margin-right:7px;
-      background:linear-gradient({color}, {color}) center / 100% 2px no-repeat,
-        repeating-linear-gradient(90deg, {color} 0 1.5px, transparent 1.5px 6px);"></span>{label}
+      background:linear-gradient(var(--hm-route), var(--hm-route)) center / 100% 2px no-repeat,
+        repeating-linear-gradient(90deg, var(--hm-route) 0 1.5px, transparent 1.5px 6px);"></span>{label}
   </div>""",
 }
+TRAVEL_ROUTE_STYLE = ("<style>.hm-route-{kind} {{ --hm-route: {light}; }} "
+                      ".dark-base .hm-route-{kind} {{ --hm-route: {dark}; }}</style>")
 
 
 class OpenBasemap(folium.map.Layer):
@@ -3169,7 +3179,33 @@ class OpenBasemap(folium.map.Layer):
                 catch (e) { return "en"; }
             }
             var lang = savedLang();
+            // Dark mode draws Protomaps' own dark flavor (owner, 2026-10-07)
+            // in place of the tile pane's invert filter, which the map's
+            // container class switches off while this layer is on. The GL
+            // map restyles when the Dark mode button flips body.dark-base.
+            function flavor() {
+                return document.body.classList.contains("dark-base") ? "dark" : "light";
+            }
+            var shown = null;
+            function restyle() {
+                var gl = layer && layer._gl && layer._gl._glMap;
+                if (!gl || shown === flavor() + lang) return;
+                layer._gl.options.style = styleFor(lang);
+                gl.setStyle(layer._gl.options.style);
+            }
+            if (!document.getElementById("hm-gl-css")) {
+                var glCss = document.createElement("style");
+                glCss.id = "hm-gl-css";
+                glCss.textContent = ".dark-base .hm-gl-base .leaflet-tile-pane{filter:none}";
+                document.head.appendChild(glCss);
+            }
+            if (window.MutationObserver) {
+                new MutationObserver(restyle).observe(document.body,
+                    {attributes: true, attributeFilter: ["class"]});
+            }
             function styleFor(code) {
+                var f = flavor();
+                shown = f + code;
                 return {
                     version: 8,
                     glyphs: new URL({{ this.assets|tojson }}, location.href).href + "/fonts/{fontstack}/{range}.pbf",
@@ -3178,8 +3214,8 @@ class OpenBasemap(folium.map.Layer):
                         url: "pmtiles://" + new URL({{ this.pmtiles_url|tojson }}, location.href).href
                     }},
                     layers: travelStyle(basemaps.layers("protomaps",
-                        basemaps.namedFlavor("light"), {lang: code}),
-                        {flavor: "light", variant: {{ this.variant|tojson }}, lang: code})
+                        basemaps.namedFlavor(f), {lang: code}),
+                        {flavor: f, variant: {{ this.variant|tojson }}, lang: code})
                 };
             }
             // The label pill: two buttons in a Leaflet bar stacked under the
@@ -3228,7 +3264,7 @@ class OpenBasemap(folium.map.Layer):
                     lang = code;
                     try { localStorage.setItem(LANG_KEY, code === "en" ? "en" : "local"); } catch (e) {}
                     this.mark();
-                    if (layer._gl && layer._gl.getMaplibreMap()) layer._gl.getMaplibreMap().setStyle(styleFor(lang));
+                    restyle();
                 }
             });
             var pill = LOCAL ? new Pill() : null;
@@ -3246,17 +3282,22 @@ class OpenBasemap(folium.map.Layer):
                 onAdd: function (map) {
                     var self = this;
                     self._active = true;
+                    map.getContainer().classList.add("hm-gl-base");
                     if (pill) pill.addTo(map);
                     load().then(function () {
                         if (!self._active) return;
-                        if (!self._gl) {
-                            self._gl = L.maplibreGL({attributionControl: false, style: styleFor(lang)});
-                        }
+                        if (!self._gl) self._gl = L.maplibreGL({attributionControl: false});
+                        // The plugin builds a new GL map from its options on
+                        // every add, so the style is set afresh each time: a
+                        // flavor or label language chosen while the layer was
+                        // off is the one drawn.
+                        self._gl.options.style = styleFor(lang);
                         self._gl.addTo(map);
                     });
                 },
                 onRemove: function (map) {
                     this._active = false;
+                    map.getContainer().classList.remove("hm-gl-base");
                     if (pill) pill.remove();
                     if (this._gl) map.removeLayer(this._gl);
                     if (map._removeZoomLimit) map._removeZoomLimit(this);
