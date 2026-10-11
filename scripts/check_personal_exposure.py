@@ -528,7 +528,7 @@ REGISTRIES = {
     # and MHLW's 法人名 are read only by the name rule, in memory.
     **{slug: dict(raw=None, trade=None, owner=None, processed="businesses_clean.csv",
                   address=("address",), japan=True)
-       for slug in ("ibaraki_osaka",)},
+       for slug in ("ibaraki_osaka", "minoh")},
     # The rest of the 2026-10-01 Japanese batch (2026-10-02), each on the shared
     # steps: every list's operator column is read only by the name rule, in
     # memory (japan_register.OPERATOR_COLS); MHLW's rows and BODIK's

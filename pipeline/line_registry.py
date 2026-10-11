@@ -336,7 +336,7 @@ REGISTRY = {
     # the project's colour every map already drew (hue-matched to the operator); pins >= 45.5, lines >= 38.1, lines beside it >= 120.0.
     "kita-osaka-kyuko-namboku-line": {
         "name": "Kita-Osaka Kyuko Namboku Line", "operator": "Kita-Osaka Kyuko", "colour": "#E81820",
-        "maps": {"suita": "KK", "toyonaka": "KK"},
+        "maps": {"minoh": "KK", "suita": "KK", "toyonaka": "KK"},
     },
     # the project's colour every map already drew (hue-matched to the operator); pins >= 51.6, lines >= 18.1, lines beside it >= 18.1.
     "meitetsu-nagoya-main-line": {

@@ -1,0 +1,1987 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <style>:root { --hm-font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", "Hiragino Sans", "Yu Gothic", Meiryo, "Apple SD Gothic Neo", "Malgun Gothic", "PingFang TC", "Microsoft JhengHei", "PingFang SC", "Microsoft YaHei", Arial, sans-serif; }</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_dce5ea9e10accfdfce8985e1ef0e47d5 {
+                    position: relative;
+                    width: 1000.0px;
+                    height: 650.0px;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/gh/python-visualization/folium@main/folium/templates/leaflet_heat.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css"/>
+</head>
+<body>
+    
+    
+<style>
+/* THE HEADER IS THE CONTROL, AND IT HAS TO SAY SO. A native <summary> does
+   render a disclosure triangle - `list-style-type` computes to
+   `disclosure-open` here - but it is a ~6 px glyph in the same colour and
+   weight as the text beside it, and on a dense map it reads as punctuation
+   rather than as something to click. Replaced with an explicit chevron plus a
+   VERB, because the chevron alone is ambiguous: this panel is anchored
+   bottom-right, so its box grows upward while its content flows downward, and
+   no arrow direction is honestly self-explanatory. "Hide"/"Show" is.
+
+   Laid out as a flex row with space-between, which keeps the marker INSIDE the
+   legend's existing width rather than extending it. That matters: the label
+   layout in _layout_labels models the open legend as a hardcoded 274 px
+   obstacle, and a wider panel would start covering line labels it currently
+   clears. Verified after the change that the open width is unchanged.
+
+   No script: the collapse is still the browser's own <details> behaviour, so
+   this is presentation only and scripts/check_map_labels.js keeps working. The
+   colour is `currentColor`, so it follows .dark-base .map-legend's own
+   `color` and needs no dark-mode rule of its own. */
+.map-legend > summary { list-style: none; display: flex;
+    align-items: baseline; justify-content: space-between; gap: 12px; }
+.map-legend > summary::-webkit-details-marker { display: none; }
+.map-legend > summary::after {
+    content: "\25BE\00A0Hide"; font: 600 11px var(--hm-font, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", "Hiragino Sans", "Yu Gothic", Meiryo, "Apple SD Gothic Neo", "Malgun Gothic", "PingFang TC", "Microsoft JhengHei", "PingFang SC", "Microsoft YaHei", Arial, sans-serif);
+    opacity: 0.7; white-space: nowrap; }
+.map-legend:not([open]) > summary::after { content: "\25B8\00A0Show"; }
+.map-legend > summary:hover::after { opacity: 1; text-decoration: underline; }
+.map-legend > summary:focus-visible { outline: 2px solid currentColor;
+    outline-offset: 2px; }
+/* THE OPEN LEGEND IS CAPPED BELOW THE BUTTON ROW, AND SCROLLS. Amsterdam
+   (2026-09-24) was the first map with 21 lines: open, its legend was 634 px
+   tall at the 650 px embed, so its top sat at y = -8 and its header and Hide
+   control were under the "Global View" and theme buttons (#map-actions, fixed
+   at top 10px, ~30 px tall) - found by deploy-verify. Every earlier legend was
+   shorter than the cap (Paris's the tallest, its top at y 84), so none of
+   them changes. min(100vh, MAP_H) is the visible map height whichever way
+   _LEGEND_BOTTOM_CSS resolves; border-box so the cap is the whole panel. The
+   header sticks, so Hide stays in reach while the rows scroll. Its background
+   is set, NOT `inherit`: a <summary> is slotted into the <details> shadow
+   root, so it inherits from a transparent slot - measured, the rows showed
+   through the header in dark mode.
+   The clearance is the button row's, measured: --hm-actions-clear is set by
+   the region button's script when the row wraps to a second line (a phone's
+   343 px frame since 2026-10-07: four buttons where three fitted, 72 px tall),
+   else this fixed figure. */
+.map-legend { box-sizing: border-box; overflow-y: auto;
+    overscroll-behavior: contain;
+    max-height: calc(min(100vh, 650px) - 24px - var(--hm-actions-clear, 56px)); }
+.map-legend > summary { position: sticky; top: -8px; z-index: 1;
+    padding-top: 8px; margin-top: -8px; background: white; }
+.dark-base .map-legend > summary { background: var(--dm-surface); }
+</style>
+<style>.map-legend { max-width: 274px; }</style>
+<details open class="map-legend" style="
+    position: fixed; bottom: max(24px, calc(100vh - 626px)); right: 24px; z-index: 9999;
+    background: white; padding: 8px 14px; border: 1px solid #999;
+    border-radius: 4px; font-family: var(--hm-font, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', 'Hiragino Sans', 'Yu Gothic', Meiryo, 'Apple SD Gothic Neo', 'Malgun Gothic', 'PingFang TC', 'Microsoft JhengHei', 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif); font-size: 13px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+">
+  <summary style="font-weight: bold; cursor: pointer; user-select: none;
+    outline: none;">Legend</summary>
+  <div style="font-weight: bold; margin: 8px 0 6px;">Business Category</div>
+  
+  <div style="display:flex; align-items:center; margin:3px 0;">
+    <span style="display:inline-block; width:11px; height:11px;
+      border-radius:50%; background:#1baf7a; margin-right:7px;
+      border:1px solid rgba(0,0,0,0.3);"></span>Personal services
+  </div>
+
+  <div style="font-weight: bold; margin: 10px 0 6px;">Transit Lines</div>
+  
+  <div class="hm-line-row" data-line="0" role="button" tabindex="0" aria-pressed="false"
+    style="display:flex; align-items:center; margin:3px 0;">
+    <span style="display:inline-block; width:16px; height:3px;
+      background:#905840; margin-right:7px;
+      border-radius:2px;"></span>Hankyu Minoh Line
+  </div>
+
+  <div class="hm-line-row" data-line="1" role="button" tabindex="0" aria-pressed="false"
+    style="display:flex; align-items:center; margin:3px 0;">
+    <span style="display:inline-block; width:16px; height:3px;
+      background:#E81820; margin-right:7px;
+      border-radius:2px;"></span>Kita-Osaka Kyuko Namboku Line
+  </div>
+
+</details>
+
+<script>
+(function () {
+    var MAP_W = 1000;
+    var legend = document.querySelector('details.map-legend');
+    if (!legend) return;
+    var touched = false;
+
+    // Reader ownership is detected from an actual user gesture, NOT from the
+    // `toggle` event. `toggle` also fires for programmatic changes, and Chrome
+    // queues one for a <details open> element that lands AFTER this script
+    // attaches its listener - on a wide load `fit()` returns early, so that
+    // stray event used to set `touched` permanently and kill the breakpoint
+    // for the rest of the page's life (found by deploy-verify, 2026-09-21: the
+    // legend then covered four of New York's labels for anyone who narrowed
+    // their window rather than loading narrow). A click on the <summary> is
+    // unambiguous, and keyboard activation dispatches a click too.
+    var summary = legend.querySelector('summary');
+    if (summary) {
+        summary.addEventListener('click', function () { touched = true; });
+    }
+
+    function fit() {
+        if (touched) return;
+        var narrow = (document.documentElement.clientWidth || window.innerWidth) < MAP_W;
+        if (narrow !== !legend.open) legend.open = !narrow;
+    }
+    fit();
+    // Second pass: the 1000px map forces scrollbars at load, so the first
+    // measurement can read ~15px short; once PHONE_FIT_SCRIPT has resized the
+    // container they are gone and the width is accurate.
+    requestAnimationFrame(fit);
+    window.addEventListener('resize', fit);
+})();
+</script>
+    
+        <style>
+            .leaflet-control-layers-expanded {
+                max-height: 480px;
+                overflow-y: auto;
+            }
+        </style>
+    
+    
+<style>
+    #map-actions { position: fixed; top: 10px; right: 10px; z-index: 10000;
+        display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end;
+        max-width: calc(100% - 56px); }   /* clear of the zoom control on a phone */
+    .map-btn {
+        font: 600 13px var(--hm-font, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", "Hiragino Sans", "Yu Gothic", Meiryo, "Apple SD Gothic Neo", "Malgun Gothic", "PingFang TC", "Microsoft JhengHei", "PingFang SC", "Microsoft YaHei", Arial, sans-serif); padding: 6px 12px; cursor: pointer;
+        background: #ffffff; color: #1c2b2a;
+        border: 1px solid #999999;
+        border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    }
+    .map-btn[hidden] { display: none; }
+    /* THE TOOLTIP IS WHERE BUSINESS NAMES APPEAR, so it needs the font stack
+       more than anything else on the map does. Leaflet's own CSS sets
+       `"Helvetica Neue", Arial, Helvetica, sans-serif` on .leaflet-tooltip,
+       which is Latin-only - so without this rule a Japanese, Korean or Greek
+       shop name would render in whatever the browser substituted, as tofu
+       boxes or at metrics that outgrow the tooltip's own box. Added
+       2026-09-21 alongside pipeline/theme.FONT_STACK, whose own note explains
+       why the fallback ORDER matters (browsers fall through per glyph, not
+       per string). */
+    .leaflet-tooltip { font-family: var(--hm-font, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", "Hiragino Sans", "Yu Gothic", Meiryo, "Apple SD Gothic Neo", "Malgun Gothic", "PingFang TC", "Microsoft JhengHei", "PingFang SC", "Microsoft YaHei", Arial, sans-serif); }
+    .map-btn:focus-visible { outline: 2px solid #0d9488; outline-offset: 2px; }
+    #city-menu { width: 84px; text-overflow: ellipsis; }
+    @media (max-width: 480px) {
+        #map-actions { gap: 6px; }
+        .map-btn { padding: 6px 7px; font-size: 12px; }
+        #city-menu { width: 78px; }
+    }
+    .dark-base { color-scheme: dark; --dm-page: #0B1220; --dm-surface: #131C2E; --dm-surface-hover: #1A2740; --dm-surface-disabled: #0F1626; --dm-border: #23304A; --dm-text: #E6EDF7; --dm-muted: #8B9AB5; --dm-disabled-text: #5A6B8C; --dm-accent: #5eead4; --dm-ring: #C9D6EA; --dm-station: #7cc0ff;
+        background: var(--dm-page); }
+    .dark-base .leaflet-tile-pane {
+        filter: invert(1) hue-rotate(180deg) brightness(0.85) contrast(0.9) saturate(0.7); }
+    .dark-base .map-btn { background: var(--dm-surface); color: var(--dm-text);
+        border-color: var(--dm-border); }
+    .dark-base .map-btn:hover { background: var(--dm-surface-hover); }
+    /* These two selectors match on the LIGHT ring and station colours, which
+       is only safe because each is used nowhere else on the map. Both the
+       selector and the drawing code below read the same LIGHT value, so they
+       cannot drift apart - changing one used to silently break the other. */
+    .dark-base path.leaflet-interactive[stroke="#2c3e50"] { stroke: var(--dm-ring); }
+    .dark-base path.leaflet-interactive[stroke="#1a5490"] {
+        stroke: var(--dm-station); fill: var(--dm-station); }
+    .dark-base .leaflet-overlay-pane path[stroke-width="4"] { filter: brightness(1.55) saturate(0.9); }
+    .dark-base .map-legend span[style*="height:3px"] { filter: brightness(1.55) saturate(0.9); }
+    /* NO FILTER on a line label: a brightness() filter here once lifted the
+       halo with the text, so the dark page colour rendered #132039 and every
+       contrast figure measured a halo nobody saw. Each label carries its own
+       dark-theme colour in --dm-label instead (pipeline/linecolour.py,
+       "LINE LABELS"), read at 4.5:1 against exactly this halo. */
+    .dark-base .leaflet-marker-icon div[style*="text-shadow"] {
+        text-shadow: -1px -1px 0 var(--dm-page), 1px -1px 0 var(--dm-page),
+                     -1px 1px 0 var(--dm-page), 1px 1px 0 var(--dm-page),
+                     0 0 6px var(--dm-page) !important; }
+    .dark-base .hm-line-label { color: var(--dm-label) !important; }
+    .dark-base .map-legend { background: var(--dm-surface) !important;
+        color: var(--dm-text) !important; border-color: var(--dm-border) !important; }
+    .dark-base .leaflet-bar, .dark-base .leaflet-control-layers {
+        border: 1px solid var(--dm-border); box-shadow: none; }
+    .dark-base .leaflet-bar a, .dark-base .leaflet-control-layers {
+        background-color: var(--dm-surface); color: var(--dm-text); }
+    .dark-base .leaflet-bar a { border-bottom-color: var(--dm-border); }
+    .dark-base .leaflet-bar a:hover, .dark-base .leaflet-bar a:focus {
+        background-color: var(--dm-surface-hover); }
+    .dark-base .leaflet-bar a.leaflet-disabled {
+        background-color: var(--dm-surface-disabled); color: var(--dm-disabled-text); }
+    .dark-base .leaflet-control-layers-toggle { filter: invert(1); }
+    .dark-base .leaflet-control-layers-separator { border-top-color: var(--dm-border); }
+    .dark-base .leaflet-control-attribution { background: rgba(11, 18, 32, 0.8); color: var(--dm-muted); }
+    .dark-base .leaflet-control-attribution a { color: var(--dm-accent); }
+    .dark-base .leaflet-tooltip { background: var(--dm-surface); color: var(--dm-text);
+        border-color: var(--dm-border); box-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+    .dark-base .leaflet-tooltip-top:before { border-top-color: var(--dm-border); }
+    .dark-base .leaflet-tooltip-bottom:before { border-bottom-color: var(--dm-border); }
+    .dark-base .leaflet-tooltip-left:before { border-left-color: var(--dm-border); }
+    .dark-base .leaflet-tooltip-right:before { border-right-color: var(--dm-border); }
+</style>
+<div id="map-actions">
+    <select id="city-menu" class="map-btn" hidden aria-label="Go to another city">
+        <option value="" selected disabled>Cities</option>
+    </select>
+    <button id="back-to-map" class="map-btn" type="button" hidden
+        aria-label="Back to the Global View map">&larr; Global View</button>
+    <button id="back-to-region" class="map-btn" type="button" hidden></button>
+    <button id="theme-toggle" class="map-btn" type="button" aria-pressed="false">&#9790; Dark mode</button>
+</div>
+<script>
+(function () {
+    var KEY = 'expanded-heatmap-theme';
+    var btn = document.getElementById('theme-toggle');
+    function saved() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+    function save(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+    function apply(dark) {
+        document.body.classList.toggle('dark-base', dark);
+        btn.setAttribute('aria-pressed', dark ? 'true' : 'false');
+        btn.textContent = dark ? '\u2600 Light mode' : '\u263E Dark mode';
+        // The theme button is 30 px tall in light mode and 34 px in dark, so
+        // the open legend's clearance is re-measured on every switch (review
+        // lane 2, L2-1: light to dark left 94 px where 98 was needed). The
+        // first call comes before `actions` is set; the load path measures then.
+        if (actions) syncClear();
+    }
+
+    function ambientPrefersDark() {
+        try {
+            if (window.parent !== window) {
+                var bg = window.parent.getComputedStyle(
+                    window.parent.document.body).backgroundColor;
+                var n = bg && bg.match(/[\d.]+/g);
+                if (n && n.length >= 3) {
+                    var alpha = n.length > 3 ? parseFloat(n[3]) : 1;
+                    if (alpha > 0.1) {          // transparent tells us nothing
+                        // Perceived brightness, 0-255; a binary decision does
+                        // not need full WCAG gamma expansion.
+                        var b = 0.299 * +n[0] + 0.587 * +n[1] + 0.114 * +n[2];
+                        return b < 128;
+                    }
+                }
+            }
+        } catch (e) { /* cross-origin or no parent: fall through */ }
+        return !!(window.matchMedia
+                  && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    }
+
+    // A remembered click wins; otherwise follow the surrounding page, so a map
+    // embedded in a dark app page does not open as a white rectangle.
+    var choice = saved();
+    apply(choice === 'dark' || choice === 'light'
+          ? choice === 'dark'
+          : ambientPrefersDark());
+    btn.addEventListener('click', function () {
+        var dark = !document.body.classList.contains('dark-base');
+        apply(dark);
+        save(dark ? 'dark' : 'light');
+    });
+    window.addEventListener('storage', function (e) {
+        if (e.key === KEY) apply(e.newValue === 'dark');
+    });
+    // Follow the OS preference while the visitor has made no explicit choice.
+    // NOTE: devtools colour-scheme emulation updates matchMedia().matches
+    // WITHOUT dispatching this event inside an iframe, so this listener can
+    // only be tested with a real OS theme switch (docs/theming.md).
+    if (window.matchMedia) {
+        var mq = window.matchMedia('(prefers-color-scheme: dark)');
+        if (mq.addEventListener) {
+            mq.addEventListener('change', function (e) {
+                if (!saved()) apply(e.matches);
+            });
+        }
+    }
+
+    // "Global View" button: only when this map is embedded in the app (it has a
+    // parent page to go back to); opened on its own it stays hidden. It clicks
+    // the app's own link to the Overview, so Streamlit navigates in place, and
+    // saves the current theme first so the macro map opens in the same mode.
+    var back = document.getElementById('back-to-map');
+    function trimSlash(p) { while (p.length > 1 && p.charAt(p.length - 1) === '/') p = p.slice(0, -1); return p; }
+    function overviewLink() {
+        var doc = window.parent.document, links = doc.querySelectorAll('a[href]');
+        for (var i = 0; i < links.length; i++) {          // the page's own link to the Overview:
+            var t = links[i].textContent;                 // hidden "All cities", switcher "Global View"
+            if (t.indexOf('All cities') !== -1 || t.indexOf('Global View') !== -1) return links[i];
+        }
+        var here = window.parent.location.pathname;      // else the link to the app's root
+        var root = trimSlash(here.substring(0, here.lastIndexOf('/') + 1));
+        for (var j = 0; j < links.length; j++) {
+            if (trimSlash(links[j].pathname) === root) return links[j];
+        }
+        return null;
+    }
+    // City menu: the other cities, read from the hidden links the app page renders
+    // (one per city, from app/cities.py), so a new city appears here without
+    // regenerating any map. The city this page belongs to is left out.
+    var menu = document.getElementById('city-menu');
+    function cityLinks() {
+        var box = window.parent.document.querySelector('.st-key-map-only-nav');
+        var out = [];
+        if (!box) return out;
+        var links = box.querySelectorAll('a');
+        for (var i = 0; i < links.length; i++) {
+            if (links[i].textContent.indexOf('All cities') === -1) out.push(links[i]);
+        }
+        return out;
+    }
+    // Identify "which page is this" by PAGE SLUG, not by display label.
+    //
+    // This used to derive a city name from the URL ("/Miami_Heatmap" -> "Miami")
+    // and compare it to the link's text. That breaks as soon as a city's
+    // display name is not its filename: Miami's label is "Miami (Regional)",
+    // so the comparison never matched and Miami's own map listed Miami in its
+    // "Cities" dropdown. Comparing slug to slug is immune to the label, which
+    // matters because a regional map's name will keep diverging from its
+    // filename (a Seattle build spanning twelve municipalities is the next).
+    function lastSegment(path) {
+        var parts = String(path || '').split('?')[0].split('#')[0]
+            .split('/').filter(Boolean);
+        return decodeURIComponent(parts.length ? parts[parts.length - 1] : '');
+    }
+    function fillMenu() {
+        if (menu.options.length > 1) return;    // already built
+        var here = lastSegment(window.parent.location.pathname);
+        var links = cityLinks();
+        for (var i = 0; i < links.length; i++) {
+            var name = links[i].textContent.trim();
+            if (lastSegment(links[i].getAttribute('href')) === here) continue;
+            var o = document.createElement('option');
+            o.value = name; o.textContent = name;
+            menu.appendChild(o);
+        }
+        menu.hidden = menu.options.length < 2;
+    }
+    function goTo(link) {
+        save(document.body.classList.contains('dark-base') ? 'dark' : 'light');
+        if (link) link.click();
+    }
+    // Region button, beside "Global View" (owner, 2026-10-07): the Overview
+    // opened on this city's region. Its link and its words come from the app
+    // page (components.render_city_nav, from app/cities.py), so a region
+    // renamed or a city regrouped needs no map re-rendered; with no such link
+    // (an older app, or the map opened alone) it stays hidden.
+    var regionBtn = document.getElementById('back-to-region');
+    function regionLink() {
+        var box = window.parent.document.querySelector('.st-key-map-region-nav');
+        return box ? box.querySelector('a[href]') : null;
+    }
+    function fillRegion() {
+        var link = regionLink();
+        if (!link) return;
+        var text = link.textContent.trim();
+        regionBtn.textContent = text;
+        regionBtn.setAttribute('aria-label', 'Back to ' + text.replace(/^\u2190\s*/, '') +
+            ' on the Global View map');
+        regionBtn.hidden = false;
+        syncClear();
+    }
+    // A fourth button wraps the row onto a second line in a phone's frame, so
+    // the open legend's cap (.map-legend, --hm-actions-clear) follows the
+    // row's measured bottom plus the 16 px gap the fixed 56 px figure keeps.
+    var actions = document.getElementById('map-actions');
+    function syncClear() {
+        var clear = Math.max(56, Math.ceil(actions.getBoundingClientRect().bottom) + 16);
+        document.documentElement.style.setProperty('--hm-actions-clear', clear + 'px');
+    }
+    window.addEventListener('resize', syncClear);
+    if (window.parent !== window) {
+        back.hidden = false;
+        back.addEventListener('click', function () { goTo(overviewLink()); });
+        fillRegion();
+        setTimeout(fillRegion, 800);            // as fillMenu: the links may render after this frame
+        setTimeout(fillRegion, 2500);
+        regionBtn.addEventListener('click', function () { goTo(regionLink()); });
+        fillMenu();
+        setTimeout(fillMenu, 800);              // the page's links may render just after this frame
+        setTimeout(fillMenu, 2500);
+        menu.addEventListener('mousedown', fillMenu);
+        menu.addEventListener('change', function () {
+            var links = cityLinks(), want = menu.value, hit = null;
+            for (var i = 0; i < links.length; i++) {
+                if (links[i].textContent.trim() === want) hit = links[i];
+            }
+            menu.selectedIndex = 0;
+            goTo(hit);
+        });
+    }
+})();
+</script>
+    
+<script>
+(function () {
+    var MAP_W = 1000, MAP_H = 650;
+    var BOUNDS = [[34.77529, 135.4489], [34.834277810154205, 135.49532]];            // [[south, west], [north, east]]
+    var NAME = "map_dce5ea9e10accfdfce8985e1ef0e47d5";
+    var tries = 0;
+    // The view Folium baked in, captured before any fit runs. apply() restores
+    // it when the map returns to full width - see the else branch there.
+    var HOME = null;
+    // The width the CURRENT view was fitted for, which is not the same thing as
+    // the container's width. See apply(): a view fitted while the container was
+    // still laying out stays wrong until something notices the mismatch, and
+    // comparing widths alone cannot notice it.
+    var FITTED_AT = null;
+
+    // THE GUARD - owner's decision 2026-09-23, after the same race surfaced a
+    // THIRD way. Edmonton (2026-09-21) and Paris (2026-09-23 morning) were each
+    // fixed at the point where they broke; that afternoon Lille's embedded map
+    // loaded at zoom 8.25 against a baked 11.75 - Edmonton's exact number - and
+    // a reload fixed it. Four further loads would not reproduce it. A race that
+    // cannot be reproduced on demand cannot be fixed one trigger at a time, so
+    // this stops chasing triggers and checks the OUTCOME instead: until the
+    // reader touches the map, the view is compared with what it should be for
+    // the frame's current width, and re-fitted when it is not.
+    //
+    // "What it should be" is exactly what apply() produces - HOME at full
+    // width, fitBounds(BOUNDS, padding 26/18 each side) when narrow - computed
+    // with getBoundsZoom rather than by calling fitBounds, so a correct view is
+    // never touched and the common case stays pixel-identical.
+    //
+    // TOUCHED ends it for good. Any pointer, wheel, touch or key event inside
+    // the map means the reader is steering, and a guard that restored the
+    // view under them would be a new bug. Captured on the container, so the
+    // zoom buttons, the pins and the in-map controls all count. The one
+    // exception is a touch that cannot move the map: see steering() below.
+    //
+    // __HEATMAP_VIEW is read by scripts/check_map_view.js. It exposes the
+    // INPUTS (home, bounds, padding) as well as the guard's own bookkeeping, so
+    // the check can recompute the expected zoom independently instead of
+    // trusting the thing it is checking.
+    var TOUCHED = false;
+    var PAD = [26, 18];
+    var VIEW = window.__HEATMAP_VIEW = {
+        bounds: BOUNDS, mapW: MAP_W, padding: PAD, home: null,
+        expected: null, actual: null, touched: false, corrections: 0};
+
+    function wantedZoom(m, target) {
+        if (target < MAP_W && BOUNDS) {
+            return m.getBoundsZoom(L.latLngBounds(BOUNDS), false,
+                                   L.point(2 * PAD[0], 2 * PAD[1]));
+        }
+        return HOME ? HOME.zoom : null;
+    }
+
+    function guard(m) {
+        if (TOUCHED || !HOME) return;
+        var w = document.documentElement.clientWidth || window.innerWidth;
+        var target = Math.min(w, MAP_W);
+        if (!target) return;
+        var want = wantedZoom(m, target);
+        VIEW.expected = want;
+        VIEW.actual = m.getZoom();
+        if (want === null || Math.abs(m.getZoom() - want) < 0.01) return;
+        VIEW.corrections += 1;
+        FITTED_AT = null;   // make apply() re-fit instead of trusting the width
+        apply(m);
+        VIEW.actual = m.getZoom();
+    }
+
+    // A touch that cannot move the map is not steering. With one-finger
+    // dragging off (TOUCH_GESTURE_SCRIPT, on a touch screen) a single finger
+    // only scrolls the page, so its touchstart and pointerdown leave the guard
+    // running; two fingers, or a tap (which goes on to send mousedown and
+    // click, a scroll sends neither), still end it. With dragging on, every
+    // touch counts, as before.
+    function steering(m, e) {
+        if (e.type === "touchstart") return e.touches.length > 1 || m.dragging.enabled();
+        if (e.type === "pointerdown" && e.pointerType === "touch") return m.dragging.enabled();
+        return true;
+    }
+
+    function armGuard(m) {
+        var el = m.getContainer();
+        ["pointerdown", "mousedown", "click", "touchstart", "wheel", "keydown"].forEach(
+            function (ev) {
+                el.addEventListener(ev, function (e) {
+                    if (!steering(m, e)) return;
+                    TOUCHED = true;
+                    VIEW.touched = true;
+                }, {capture: true, passive: true});
+            });
+        // Bounded polling for the load itself - every earlier variant of the
+        // race resolved or struck inside the first seconds...
+        var ticks = 0;
+        var iv = setInterval(function () {
+            guard(m);
+            if (TOUCHED || ++ticks >= 40) clearInterval(iv);
+        }, 500);
+        // ...and event triggers for everything slower: a page opened in a
+        // background tab (timers throttled, layout late), an embed below the
+        // fold, a bfcache restore.
+        document.addEventListener("visibilitychange", function () {
+            if (!document.hidden) guard(m);
+        });
+        window.addEventListener("pageshow", function () { guard(m); });
+        if (window.IntersectionObserver) {
+            new IntersectionObserver(function (entries) {
+                if (entries.some(function (e) { return e.isIntersecting; })) guard(m);
+            }).observe(el);
+        }
+    }
+
+    // Folium renders body HTML before the figure's script block, so this runs
+    // before the map exists - poll for it rather than assuming.
+    function ready() {
+        var m = window[NAME];
+        if (m && m.invalidateSize) return m;
+        return null;
+    }
+
+    function apply(m) {
+        var el = m.getContainer();
+        var w = document.documentElement.clientWidth || window.innerWidth;
+        var target = Math.min(w, MAP_W);
+        // A ZERO TARGET IS ALWAYS A BAD MEASUREMENT, NEVER A REAL WIDTH.
+        //
+        // Added 2026-09-23 after Paris rendered BLANK on first load, with
+        // `width: 0px` written onto the container and Leaflet.heat throwing
+        // "IndexSizeError: getImageData ... source width is 0". A pass that
+        // runs before the document has laid out reads clientWidth 0, and the
+        // old code wrote that straight through.
+        //
+        // It is the same RACE the else branch below documents for Edmonton -
+        // intermittent, not specific to a city, and the same page reloaded
+        // rendered correctly - but this manifestation is worse: a narrow fit
+        // is a bad view, a zero width is no map at all plus a console error.
+        // Paris is the city that exposed it because it is the heaviest map
+        // here (84,125 points), which widens the window before layout settles.
+        //
+        // Returning leaves the container alone for the later passes - immediate,
+        // rAF, 120 ms, 400 ms, 1200 ms and resize - one of which measures a
+        // laid-out document. Correct renders are untouched, because `target` is
+        // only 0 when the measurement is meaningless.
+        if (!target) return;
+        // THE EARLY RETURN USED TO BE A CORRECTNESS BUG, not just an
+        // optimisation. It read "the width already matches, so there is
+        // nothing to do" - but the VIEW can be wrong while the WIDTH is right.
+        //
+        // Observed on the deployed site 2026-09-23, on Paris: the embedded map
+        // sat at zoom 9 against its baked 12.5, showing the whole Ile-de-France
+        // with every line label flung to the frame edges. Sequence: an early
+        // pass measured the container mid-layout at some narrow width and
+        // fitted BOUNDS for THAT width; a later pass found the container now at
+        // its real 854 px, matched `target`, and returned - so the zoom from
+        // the narrow fit was never undone. Intermittent, and it survived the
+        // 2026-09-21 fix because that one only added an `else` branch AFTER
+        // this return.
+        //
+        // So the state that matters is "what width was the current view fitted
+        // for", not "what width is the container". FITTED_AT records it, and a
+        // mismatch re-fits even when the width needs no change.
+        var atWidth = Math.abs(el.getBoundingClientRect().width - target) < 1;
+        if (atWidth && FITTED_AT === target) return;
+        if (!atWidth) {
+            el.style.width = target + "px";
+            document.body.style.width = target + "px";
+            m.invalidateSize();
+        }
+        FITTED_AT = target;
+        if (target < MAP_W && BOUNDS) {
+            // Generous padding because BOUNDS holds label ANCHORS, and a label's
+            // text box extends past its anchor by up to ~70px.
+            // PAD, not a literal: the guard computes the zoom this call lands
+            // on, and a padding that drifted between the two would make it
+            // "correct" a right view forever.
+            m.fitBounds(L.latLngBounds(BOUNDS), {padding: PAD, animate: false});
+        } else if (HOME) {
+            // BACK AT FULL WIDTH, AND THIS BRANCH IS A BUG FIX, NOT SYMMETRY.
+            //
+            // Until 2026-09-21 there was no else. A pass that ran while the
+            // iframe was still laying out measured a narrow clientWidth,
+            // fitted BOUNDS at that width - which is a much lower zoom - and
+            // then the later full-width pass restored the WIDTH and left the
+            // ZOOM alone, because re-fitting was conditional on being narrow.
+            // Nothing afterwards ever corrected it, so the map sat at the
+            // narrow-width zoom at full width: Edmonton was caught embedded at
+            // zoom 8.25 against its baked 11.5, showing the whole region with
+            // every pin in one cluster. It is a RACE, so it is intermittent and
+            // not specific to a city - the same page reloaded rendered
+            // correctly, and Calgary's rendered correctly alongside the broken
+            // Edmonton.
+            //
+            // Restoring HOME rather than re-fitting BOUNDS is deliberate:
+            // Folium's baked view is what every full-width map has always
+            // shown, and a runtime fitBounds lands a quarter-step tighter
+            // (Edmonton 11.75 against 11.5). So this repairs the broken case
+            // and leaves the normal one pixel-identical.
+            m.setView(HOME.center, HOME.zoom, {animate: false});
+        }
+    }
+
+    function start() {
+        var m = ready();
+        if (!m) {
+            if (tries++ < 60) return setTimeout(start, 100);
+            return;
+        }
+        // Before the first apply(), so this is Folium's own fitted view and not
+        // something a narrow-width pass has already moved.
+        if (!HOME) {
+            HOME = {center: m.getCenter(), zoom: m.getZoom()};
+            VIEW.home = {center: [HOME.center.lat, HOME.center.lng], zoom: HOME.zoom};
+        }
+        // Applied more than once on purpose. At load the 1000px-wide map forces
+        // a horizontal scrollbar, which costs enough height to force a vertical
+        // one, so `clientWidth` reads ~15px short; once the first pass has
+        // shrunk the container both scrollbars go away and the measurement is
+        // right, but no resize event is dispatched to notice that. The later
+        // passes also settle a transient seen on the heaviest map at phone
+        // width, where the pane transform lagged a correct fit. apply() returns
+        // immediately once the width already matches, so the extra passes are
+        // free. (deploy-verify, 2026-09-21)
+        apply(m);
+        requestAnimationFrame(function () { apply(m); });
+        [120, 400, 1200].forEach(function (d) {
+            setTimeout(function () { apply(m); }, d);
+        });
+        var t = null;
+        window.addEventListener("resize", function () {
+            clearTimeout(t);
+            t = setTimeout(function () { apply(m); guard(m); }, 150);
+        });
+        armGuard(m);
+    }
+    start();
+})();
+</script>
+    
+<script>
+(function () {
+    var NAME = "map_dce5ea9e10accfdfce8985e1ef0e47d5";
+    var MARGIN = 6;     // px kept between a label's text and the frame edge
+    var GAP = 4;        // px between a re-placed label and its line's tip
+    var CLEAR = 2;      // px a label keeps from a button, control or legend
+    var PASSES = 4;
+    var tries = 0;
+
+    function box(x0, y0, x1, y1) { return {x0: x0, y0: y0, x1: x1, y1: y1}; }
+    function shift(b, sx, sy) { return box(b.x0 + sx, b.y0 + sy, b.x1 + sx, b.y1 + sy); }
+    function area(a, b) {
+        var w = Math.min(a.x1, b.x1) - Math.max(a.x0, b.x0);
+        var h = Math.min(a.y1, b.y1) - Math.max(a.y0, b.y0);
+        return w > 0 && h > 0 ? w * h : 0;
+    }
+
+    // What a label must stay clear of, in the map container's coordinates:
+    // the fixed "Global View"/theme buttons, Leaflet's own top-left controls,
+    // and the legend while it is COLLAPSED. An open legend is the reader's
+    // choice to cover part of the map; shuffling labels out from under it
+    // would only crowd them elsewhere.
+    function obstacles(m) {
+        var c = m.getContainer(), mr = c.getBoundingClientRect(), out = [];
+        function add(el) {
+            if (!el) return;
+            var r = el.getBoundingClientRect();
+            if (r.width && r.height) {
+                out.push(box(r.left - mr.left, r.top - mr.top,
+                             r.right - mr.left, r.bottom - mr.top));
+            }
+        }
+        add(document.getElementById("map-actions"));
+        var legend = document.querySelector("details.map-legend");
+        if (legend && !legend.open) add(legend);
+        c.querySelectorAll(".leaflet-top.leaflet-left .leaflet-control").forEach(add);
+        return out;
+    }
+
+    function place(m) {
+        var size = m.getSize();
+        if (!size.x || !size.y) return;
+        // Never slide a label ONTO the basemap credit, which must stay
+        // visible (ODbL). The credit is a strip along the bottom edge, so the
+        // bottom limit clears its height as well as MARGIN.
+        var att = m.getContainer().querySelector(".leaflet-control-attribution");
+        var bottom = size.y - MARGIN - (att ? att.getBoundingClientRect().height : 0);
+        function inside(b) {
+            var dx = Math.max(0, MARGIN - b.x0) - Math.max(0, b.x1 - (size.x - MARGIN));
+            var dy = Math.max(0, MARGIN - b.y0) - Math.max(0, b.y1 - bottom);
+            return [dx, dy];
+        }
+
+        // 1. Every label at its baked position, slid inside the frame if it
+        //    would be cut - exactly as before this placer existed.
+        var labels = [];
+        m.eachLayer(function (layer) {
+            if (!layer._icon || !layer.getLatLng) return;
+            var d = layer._icon.querySelector(".hm-line-label");
+            if (!d) return;
+            if (d.dataset.base === undefined) d.dataset.base = d.style.transform;
+            d.style.transform = d.dataset.base;
+            var i = layer._icon.getBoundingClientRect();
+            var r = d.getBoundingClientRect();
+            if (!r.width) return;
+            var p = m.latLngToContainerPoint(layer.getLatLng());
+            if (p.x < 0 || p.y < 0 || p.x > size.x || p.y > size.y) return;
+            var base = box(p.x + (r.left - i.left), p.y + (r.top - i.top),
+                           p.x + (r.right - i.left), p.y + (r.bottom - i.top));
+            var s = inside(base);
+            labels.push({d: d, p: p, base: base, sx: s[0], sy: s[1],
+                         b: shift(base, s[0], s[1])});
+        });
+
+        // 2. Re-place only a label that overlaps another label or an obstacle,
+        //    trying spots around its own line's tip, so it still names that
+        //    line. A label that collides with nothing never moves, so a map
+        //    that was already clean - every desktop view - is unchanged.
+        var obs = obstacles(m);
+        function cost(L, b) {
+            var c = 0;
+            labels.forEach(function (o) {
+                if (o !== L) c += area(b, box(o.b.x0 - 1, o.b.y0 - 1, o.b.x1 + 1, o.b.y1 + 1));
+            });
+            // Obstacles count with CLEAR px of margin: Edmonton's Valley Line
+            // tip sits under the collapsed legend, and the best spot beside it
+            // still overlapped the legend by one pixel - which reads as
+            // touching and which the check rightly refuses.
+            obs.forEach(function (o) {
+                c += area(b, box(o.x0 - CLEAR, o.y0 - CLEAR, o.x1 + CLEAR, o.y1 + CLEAR));
+            });
+            return c;
+        }
+        function candidates(L) {
+            var b = L.base, p = L.p;
+            var w = b.x1 - b.x0, h = b.y1 - b.y0;
+            var cx = (b.x0 + b.x1) / 2, cy = (b.y0 + b.y1) / 2;
+            var at = function (x, y) { return [x - cx, y - cy]; };
+            return [
+                [2 * (p.x - cx), 0],                       // mirrored across the tip
+                [0, 2 * (p.y - cy)],
+                at(p.x, p.y - h / 2 - GAP),                // above the tip
+                at(p.x, p.y + h / 2 + GAP),                // below
+                at(p.x + w / 2 + GAP, p.y),                // right
+                at(p.x - w / 2 - GAP, p.y),                // left
+                [2 * (p.x - cx), 2 * (p.y - cy)],
+                at(p.x, p.y - 1.5 * h - 2 * GAP),          // a step further out
+                at(p.x, p.y + 1.5 * h + 2 * GAP),
+                at(p.x + w / 2 + GAP, p.y - h / 2 - GAP),  // the four diagonals
+                at(p.x - w / 2 - GAP, p.y - h / 2 - GAP),
+                at(p.x + w / 2 + GAP, p.y + h / 2 + GAP),
+                at(p.x - w / 2 - GAP, p.y + h / 2 + GAP),
+                at(p.x, p.y - 2.5 * h - 3 * GAP),          // for a tip buried
+                at(p.x, p.y + 2.5 * h + 3 * GAP)           // under an obstacle
+            ];
+        }
+        for (var pass = 0; pass < PASSES; pass++) {
+            var moved = false;
+            labels.forEach(function (L) {
+                var best = cost(L, L.b);
+                if (!best) return;
+                candidates(L).forEach(function (c) {
+                    if (!best) return;
+                    var b = shift(L.base, c[0], c[1]);
+                    var s = inside(b);
+                    b = shift(b, s[0], s[1]);
+                    var k = cost(L, b);
+                    if (k < best) {
+                        best = k; L.b = b;
+                        L.sx = c[0] + s[0]; L.sy = c[1] + s[1];
+                        moved = true;
+                    }
+                });
+            });
+            if (!moved) break;
+        }
+
+        labels.forEach(function (L) {
+            if (L.sx || L.sy) {
+                L.d.style.transform = L.d.dataset.base + " translate(" +
+                    L.sx.toFixed(1) + "px, " + L.sy.toFixed(1) + "px)";
+            }
+        });
+    }
+
+    function start() {
+        var m = window[NAME];
+        if (!m || !m.getSize) {
+            if (tries++ < 60) setTimeout(start, 100);
+            return;
+        }
+        m.on("moveend zoomend resize viewreset", function () { place(m); });
+        // The collapsed legend is an obstacle and the open one is not, so a
+        // reader opening or closing it re-runs the placement.
+        var legend = document.querySelector("details.map-legend");
+        if (legend) legend.addEventListener("toggle", function () { place(m); });
+        place(m);
+    }
+    start();
+})();
+</script>
+    
+<script>
+(function () {
+    var NAME = "map_dce5ea9e10accfdfce8985e1ef0e47d5";
+    // One event of at least this many normalised units (L.DomEvent.
+    // getWheelDelta) marks a notched wheel: Chrome and Edge on Windows give
+    // 50 per notch, Firefox's line mode 60. Trackpads send many events of a
+    // few units each.
+    var NOTCH = 25;
+
+    function install(m) {
+        var h = m.scrollWheelZoom;
+        if (!h) return;
+        // Re-registering is the only way in: Leaflet bound the listener to the
+        // handler's own _onWheelScroll when it enabled it.
+        var was = h.enabled();
+        h.disable();
+        h._onWheelScroll = function (e) {
+            var delta = L.DomEvent.getWheelDelta(e);
+            this._delta += delta;
+            this._maxEvent = Math.max(this._maxEvent || 0, Math.abs(delta));
+            this._lastMousePos = this._map.mouseEventToContainerPoint(e);
+            if (!this._startTime) this._startTime = +new Date();
+            var left = Math.max(this._map.options.wheelDebounceTime -
+                                (+new Date() - this._startTime), 0);
+            clearTimeout(this._timer);
+            this._timer = setTimeout(L.bind(this._performZoom, this), left);
+            L.DomEvent.stop(e);
+        };
+        h._performZoom = function () {
+            var map = this._map;
+            if (map._animatingZoom) {
+                clearTimeout(this._timer);
+                this._timer = setTimeout(L.bind(this._performZoom, this), 20);
+                return;
+            }
+            var zoom = map.getZoom(), step;
+            map._stop();
+            if (this._maxEvent >= NOTCH) {
+                step = Math.min(Math.max(Math.round(Math.abs(this._delta) / this._maxEvent), 1),
+                                map.options.zoomAnimationThreshold);
+            } else {
+                // Leaflet 1.9's own curve and snap, verbatim.
+                var snap = map.options.zoomSnap || 0,
+                    d2 = this._delta / (map.options.wheelPxPerZoomLevel * 4),
+                    d3 = 4 * Math.log(2 / (1 + Math.exp(-Math.abs(d2)))) / Math.LN2;
+                step = snap ? Math.ceil(d3 / snap) * snap : d3;
+            }
+            var delta = map._limitZoom(zoom + (this._delta > 0 ? step : -step)) - zoom;
+            this._delta = 0;
+            this._maxEvent = 0;
+            this._startTime = null;
+            if (!delta) return;
+            if (map.options.scrollWheelZoom === "center") map.setZoom(zoom + delta);
+            else map.setZoomAround(this._lastMousePos, zoom + delta);
+        };
+        if (was) h.enable();
+    }
+
+    // Folium's map script is inline at the end of the body, so the map exists
+    // once parsing is done.
+    function start() { if (window[NAME]) install(window[NAME]); }
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", start);
+    } else {
+        start();
+    }
+})();
+</script>
+    
+<script>
+(function () {
+    var NAME = "map_dce5ea9e10accfdfce8985e1ef0e47d5";
+    function start() {
+        var m = window[NAME], ac = m && m.attributionControl;
+        if (!ac || typeof ac.options.prefix !== "string") return;
+        var p = ac.options.prefix;
+        if (p.indexOf("target=") === -1) {
+            ac.setPrefix(p.replace(/<a /g, '<a target="_blank" rel="noopener noreferrer" '));
+        }
+    }
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", start);
+    } else {
+        start();
+    }
+})();
+</script>
+    
+<style>
+.map-legend .hm-line-row { cursor: pointer; border-radius: 3px; }
+.map-legend .hm-line-row:focus-visible { outline: none;
+    background: rgba(127,127,127,0.16); box-shadow: 0 0 0 3px rgba(127,127,127,0.16); }
+@media (hover: hover) {
+    .map-legend .hm-line-row:hover { background: rgba(127,127,127,0.16);
+        box-shadow: 0 0 0 3px rgba(127,127,127,0.16); } }
+.map-legend .hm-line-row.hm-on { background: rgba(127,127,127,0.28);
+    box-shadow: 0 0 0 3px rgba(127,127,127,0.28); }
+.map-legend .hm-line-row.hm-on > span { transform: scaleY(2); }
+.map-legend.hm-picking .hm-line-row:not(.hm-on) { opacity: 0.6; }
+.leaflet-overlay-pane path.hm-line.hm-dim { stroke-opacity: 0.25; }
+.leaflet-overlay-pane path.hm-line.hm-hot { stroke-width: 7px; stroke-opacity: 1; }
+</style>
+<script>
+(function () {
+    var NAME = "map_dce5ea9e10accfdfce8985e1ef0e47d5";
+    var tries = 0;
+
+    function start() {
+        var m = window[NAME];
+        if (!m || !m.eachLayer) {
+            if (tries++ < 60) setTimeout(start, 100);
+            return;
+        }
+        var lines = {};
+        function line(k) { return lines[k] || (lines[k] = {polys: [], label: null}); }
+        m.eachLayer(function (layer) {
+            var c = layer.options && layer.options.className;
+            var hit = typeof c === "string" && /\bhm-line-(\d+)\b/.exec(c);
+            if (hit && layer._path) {
+                line(hit[1]).polys.push(layer);
+                layer._path._hmLine = true;
+            } else if (layer._icon) {
+                var d = layer._icon.querySelector(".hm-line-label[data-line]");
+                if (d) line(d.getAttribute("data-line")).label = layer;
+            }
+        });
+        var keys = Object.keys(lines).filter(function (k) {
+            return lines[k].polys.length;
+        }).sort(function (a, b) { return a - b; });
+        if (!keys.length) return;
+        var legend = document.querySelector("details.map-legend");
+        var rows = legend ? legend.querySelectorAll(".hm-line-row[data-line]") : [];
+        var mq = function (q) { return !!(window.matchMedia && window.matchMedia(q).matches); };
+        var HOVER = mq("(hover: hover) and (pointer: fine)");
+        // 22 on a touch screen is TAP_SELECT_SCRIPT's REACH: a 44 px target.
+        var TOL = mq("(pointer: coarse)") ? 22 : 7;
+        var sel = null, hov = null, shown = null, outTimer = null;
+
+        // The picked line's paths go last within the run of line paths, so
+        // above every other line and still under anything drawn after them.
+        function restack(top) {
+            var paths = [];
+            keys.forEach(function (k) {
+                if (k !== top) lines[k].polys.forEach(function (p) { paths.push(p._path); });
+            });
+            if (top !== null) lines[top].polys.forEach(function (p) { paths.push(p._path); });
+            var g = paths[0].parentNode;
+            if (!g) return;
+            var last = g.lastChild;
+            while (last && !last._hmLine) last = last.previousSibling;
+            var ref = last ? last.nextSibling : null;
+            // Already in this order? Then touch nothing: re-inserting the path
+            // under the pointer detaches it, and the browser never sends it
+            // mouseout - which left a hover stuck on (map-refresh check).
+            var run = [], n = last;
+            while (n && run.length < paths.length) {
+                if (n._hmLine) run.unshift(n);
+                n = n.previousSibling;
+            }
+            if (run.length === paths.length && run.every(function (x, i) { return x === paths[i]; })) return;
+            paths.forEach(function (p) { if (p.parentNode === g) g.insertBefore(p, ref); });
+        }
+
+        function show() {
+            var want = hov !== null ? hov : sel;
+            if (want === shown) return;
+            shown = want;
+            keys.forEach(function (k) {
+                var on = k === want, rec = lines[k];
+                rec.polys.forEach(function (p) {
+                    p._path.classList.toggle("hm-hot", on);
+                    p._path.classList.toggle("hm-dim", want !== null && !on);
+                });
+                if (rec.label) rec.label.setZIndexOffset(on ? 1500 : 1000);
+            });
+            for (var i = 0; i < rows.length; i++) {
+                var on = rows[i].getAttribute("data-line") === want;
+                rows[i].classList.toggle("hm-on", on);
+                rows[i].setAttribute("aria-pressed", on ? "true" : "false");
+            }
+            if (legend) legend.classList.toggle("hm-picking", want !== null);
+            restack(want);
+        }
+        function pick(k) { sel = sel === k ? null : k; show(); }
+        // A short delay before a hover ends, so moving from one line onto the
+        // line beside it, or a path being restacked under the pointer, does
+        // not flash the whole map back to normal in between.
+        function hover(k) {
+            clearTimeout(outTimer);
+            if (k !== null) { hov = k; show(); return; }
+            outTimer = setTimeout(function () { hov = null; show(); }, 80);
+        }
+
+        function distance(rec, p) {
+            var d = Infinity;
+            rec.polys.forEach(function (layer) {
+                (layer._parts || []).forEach(function (part) {
+                    for (var i = 1; i < part.length; i++) {
+                        d = Math.min(d, L.LineUtil.pointToSegmentDistance(p, part[i - 1], part[i]));
+                    }
+                });
+            });
+            return d;
+        }
+
+        m.on("click", function (e) {
+            // On a touch screen TAP_SELECT_SCRIPT has already measured this
+            // tap from where the finger lifted and sent it on as a line tap.
+            var tap = window.__HEATMAP_TAP && window.__HEATMAP_TAP.last;
+            var mine = !!(tap && tap.event === e.originalEvent);
+            var at = mine ? m.containerPointToLayerPoint(tap.point) : e.layerPoint;
+            var t = e.originalEvent && e.originalEvent.target;
+            if (!mine && t && t.classList && t.classList.contains("leaflet-interactive") && !t._hmLine) return;
+            var found = [];
+            keys.forEach(function (k, i) {
+                var d = distance(lines[k], at);
+                if (d <= TOL) found.push({k: k, d: d, z: k === shown ? keys.length : i});
+            });
+            if (!found.length) { clearTimeout(outTimer); sel = null; hov = null; show(); return; }
+            var near = Math.min.apply(null, found.map(function (f) { return f.d; }));
+            var best = null;
+            found.forEach(function (f) {
+                if (f.d <= near + 1 && (!best || f.z > best.z)) best = f;
+            });
+            pick(best.k);
+        });
+
+        for (var i = 0; i < rows.length; i++) {
+            (function (row) {
+                var k = row.getAttribute("data-line");
+                if (!lines[k]) return;
+                row.addEventListener("click", function () { pick(k); });
+                row.addEventListener("keydown", function (e) {
+                    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(k); }
+                });
+                if (HOVER) {
+                    row.addEventListener("mouseenter", function () { hover(k); });
+                    row.addEventListener("mouseleave", function () { hover(null); });
+                }
+            })(rows[i]);
+        }
+        if (HOVER) {
+            keys.forEach(function (k) {
+                lines[k].polys.forEach(function (layer) {
+                    layer.on("mouseover", function () { hover(k); });
+                    layer.on("mouseout", function () { hover(null); });
+                });
+            });
+            m.on("mousemove", function (e) {
+                if (hov === null || !lines[hov]) return;
+                var t = e.originalEvent && e.originalEvent.target;
+                if (legend && t && legend.contains(t)) return;
+                if (distance(lines[hov], e.layerPoint) > TOL) hover(null);
+            });
+        }
+        document.addEventListener("keydown", function (e) {
+            if (e.key === "Escape" && (sel !== null || hov !== null)) {
+                clearTimeout(outTimer); sel = null; hov = null; show();
+            }
+        });
+    }
+    start();
+})();
+</script>
+    
+<style>
+.hm-touch-hint { position: absolute; left: 50%; top: 50%; z-index: 900;
+    transform: translate(-50%, -50%); pointer-events: none; opacity: 0;
+    transition: opacity 0.25s; max-width: calc(100% - 48px); box-sizing: border-box;
+    padding: 8px 14px; border-radius: 4px; text-align: center;
+    font: 600 14px var(--hm-font, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", "Hiragino Sans", "Yu Gothic", Meiryo, "Apple SD Gothic Neo", "Malgun Gothic", "PingFang TC", "Microsoft JhengHei", "PingFang SC", "Microsoft YaHei", Arial, sans-serif);
+    background: #ffffff; color: #1c2b2a; border: 1px solid #999999;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.3); }
+.hm-touch-hint:empty { display: none; }
+.hm-touch-hint.hm-shown { opacity: 1; }
+.dark-base .hm-touch-hint { background: var(--dm-surface); color: var(--dm-text);
+    border-color: var(--dm-border); box-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+</style>
+<script>
+(function () {
+    var NAME = "map_dce5ea9e10accfdfce8985e1ef0e47d5";
+    var TEXT = "Use two fingers to move the map";
+    var HINT_MS = 1500;     // shown this long after the last one-finger move
+    var FADE_MS = 300;      // a little over the CSS transition
+    var MOVE_PX = 10;       // a tap's jitter stays under this
+    var tries = 0;
+
+    function start() {
+        var m = window[NAME];
+        if (!m || !m.dragging || !m.getContainer) {
+            if (tries++ < 60) setTimeout(start, 100);
+            return;
+        }
+        var el = m.getContainer();
+        var mq = window.matchMedia ? window.matchMedia("(pointer: coarse)") : null;
+        var coop = false, disabledHere = false;
+
+        function apply() {
+            coop = !!(mq && mq.matches);
+            if (coop && m.dragging.enabled()) { m.dragging.disable(); disabledHere = true; }
+            else if (!coop && disabledHere) { m.dragging.enable(); disabledHere = false; }
+            window.__HEATMAP_TOUCH = {cooperative: coop, dragging: m.dragging.enabled()};
+        }
+        apply();
+        if (mq) {
+            if (mq.addEventListener) mq.addEventListener("change", apply);
+            else if (mq.addListener) mq.addListener(apply);
+        }
+
+        var hint = document.createElement("div");
+        hint.className = "hm-touch-hint";
+        hint.setAttribute("role", "status");
+        hint.setAttribute("aria-live", "polite");
+        el.appendChild(hint);
+        var hideTimer = null, clearTimer = null;
+        function hide() {
+            clearTimeout(hideTimer);
+            hint.classList.remove("hm-shown");
+            clearTimeout(clearTimer);
+            clearTimer = setTimeout(function () { hint.textContent = ""; }, FADE_MS);
+        }
+        function show() {
+            clearTimeout(clearTimer);
+            if (hint.textContent !== TEXT) hint.textContent = TEXT;
+            hint.classList.add("hm-shown");
+            clearTimeout(hideTimer);
+            hideTimer = setTimeout(hide, HINT_MS);
+        }
+
+        function pos(t) {
+            return t.screenX || t.screenY ? [t.screenX, t.screenY] : [t.clientX, t.clientY];
+        }
+        var from = null;
+        el.addEventListener("touchstart", function (e) {
+            from = null;
+            if (!coop) return;
+            if (e.touches.length !== 1) { hide(); return; }
+            var t = e.target;
+            if (t && t.closest && t.closest(".leaflet-control")) return;
+            from = pos(e.touches[0]);
+        }, {passive: true});
+        el.addEventListener("touchmove", function (e) {
+            if (!from) return;
+            if (e.touches.length !== 1) { from = null; hide(); return; }
+            var p = pos(e.touches[0]);
+            if (Math.abs(p[0] - from[0]) + Math.abs(p[1] - from[1]) >= MOVE_PX) show();
+        }, {passive: true});
+        el.addEventListener("touchend", function (e) {
+            if (!e.touches.length) from = null;
+        }, {passive: true});
+        el.addEventListener("touchcancel", function () { from = null; }, {passive: true});
+    }
+    start();
+})();
+</script>
+    
+<style>
+.hm-tap-panel { display: none; position: fixed; z-index: 10000; box-sizing: border-box;
+    left: 10px; bottom: 24px; max-width: 420px; overflow-y: auto;
+    padding: 8px 40px 8px 12px; border-radius: 4px; overflow-wrap: anywhere;
+    font: 13px/1.4 var(--hm-font, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", "Hiragino Sans", "Yu Gothic", Meiryo, "Apple SD Gothic Neo", "Malgun Gothic", "PingFang TC", "Microsoft JhengHei", "PingFang SC", "Microsoft YaHei", Arial, sans-serif);
+    background: #ffffff; color: #1c2b2a; border: 1px solid #999999;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.3); }
+.hm-tap-panel.hm-shown { display: block; }
+.hm-tap-close { position: absolute; top: 0; right: 0; width: 40px; height: 40px;
+    padding: 0; border: 0; background: none; color: inherit; cursor: pointer;
+    font: 22px/40px var(--hm-font, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", "Hiragino Sans", "Yu Gothic", Meiryo, "Apple SD Gothic Neo", "Malgun Gothic", "PingFang TC", "Microsoft JhengHei", "PingFang SC", "Microsoft YaHei", Arial, sans-serif); }
+.dark-base .hm-tap-panel { background: var(--dm-surface); color: var(--dm-text);
+    border-color: var(--dm-border); box-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+.hm-tap-ring { box-sizing: border-box; border-radius: 50%; pointer-events: none;
+    border: 2px solid #fff; box-shadow: 0 0 0 2px #111, 0 0 6px 2px rgba(0,0,0,0.45); }
+@media (pointer: coarse) { .leaflet-tooltip-pane { display: none; } }
+</style>
+<script>
+(function () {
+    var NAME = "map_dce5ea9e10accfdfce8985e1ef0e47d5";
+    var REACH = 22;         // px from a centre or centreline: a 44 px target
+    var TIE_PX = 2;         // edges this close count as a tie, broken by kind
+    var ROOM_PX = 200;      // map height the panel needs above the legend
+    var RING_PX = 26;       // the selection ring's outer diameter
+    var LIFT_MS = 800;      // a click this soon after a touchend is that tap's
+    var tries = 0;
+
+    function start() {
+        var m = window[NAME];
+        if (!m || !m.getContainer || !m.eachLayer) {
+            if (tries++ < 60) setTimeout(start, 100);
+            return;
+        }
+        var el = m.getContainer();
+        var mq = window.matchMedia ? window.matchMedia("(pointer: coarse)") : null;
+        var legend = document.querySelector("details.map-legend");
+        var TAP = window.__HEATMAP_TAP = {reach: REACH, last: null};
+
+        var panel = document.createElement("div");
+        panel.className = "hm-tap-panel";
+        var body = document.createElement("div");
+        body.setAttribute("role", "status");
+        body.setAttribute("aria-live", "polite");
+        var close = document.createElement("button");
+        close.type = "button";
+        close.className = "hm-tap-close";
+        close.setAttribute("aria-label", "Close");
+        close.innerHTML = "&times;";
+        panel.appendChild(body);
+        panel.appendChild(close);
+        document.body.appendChild(panel);
+
+        var ring = null, picked = null, passing = false;
+        function follow() { if (ring && picked) { ring.setLatLng(picked.getLatLng()); place(); } }
+        function clear() {
+            panel.classList.remove("hm-shown");
+            panel.removeAttribute("data-for");
+            body.innerHTML = "";
+            if (ring) { m.removeLayer(ring); ring = null; }
+            if (picked) { picked.off("move", follow); picked = null; }
+        }
+
+        // Pinned bottom-left, clear of the OSM credit and of the legend.
+        function place() {
+            if (!panel.classList.contains("hm-shown")) return;
+            var c = el.getBoundingClientRect();
+            var vw = document.documentElement.clientWidth || window.innerWidth;
+            var vh = document.documentElement.clientHeight || window.innerHeight;
+            var top = Math.max(c.top, 0), bot = Math.min(c.bottom, vh);
+            var left = Math.max(c.left, 0) + 10, right = vw - Math.min(c.right, vw) + 10;
+            var bottom = vh - bot + 24;
+            var lg = legend ? legend.getBoundingClientRect() : null;
+            if (lg && lg.width && lg.left < vw - right && lg.top < bot - 24) {
+                if (lg.top - top >= ROOM_PX) bottom = Math.max(bottom, vh - lg.top + 8);
+                else right = Math.max(right, vw - lg.left + 8);
+            }
+            panel.style.left = left + "px";
+            panel.style.right = right + "px";
+            panel.style.top = "auto";
+            panel.style.bottom = bottom + "px";
+            panel.style.maxHeight = Math.max(80, Math.round(0.45 * (bot - top))) + "px";
+            // Never over the dot it describes: then it goes to the top, under
+            // the zoom and layer controls and the button row.
+            if (ring && ring._icon && overlaps(ring._icon.getBoundingClientRect(), panel.getBoundingClientRect())) {
+                var under = top;
+                [el.querySelector(".leaflet-top.leaflet-left"), document.getElementById("map-actions")]
+                    .forEach(function (n) { if (n) under = Math.max(under, n.getBoundingClientRect().bottom); });
+                panel.style.bottom = "auto";
+                panel.style.top = (under + 8) + "px";
+                if (overlaps(ring._icon.getBoundingClientRect(), panel.getBoundingClientRect())) {
+                    panel.style.top = "auto";
+                    panel.style.bottom = bottom + "px";
+                }
+            }
+        }
+        function overlaps(a, b) {
+            return a.right + 8 > b.left && a.left - 8 < b.right && a.bottom + 8 > b.top && a.top - 8 < b.bottom;
+        }
+        window.addEventListener("resize", place);
+        m.on("moveend", place);
+        if (legend) legend.addEventListener("toggle", place);
+        close.addEventListener("click", clear);
+        document.addEventListener("keydown", function (e) { if (e.key === "Escape") clear(); });
+
+        function select(layer) {
+            var tip = layer.getTooltip(), text = tip.getContent();
+            if (typeof text === "function") text = text(layer);
+            if (picked !== layer) { clear(); }
+            if (typeof text === "string") body.innerHTML = text;
+            else if (text && text.cloneNode) { body.innerHTML = ""; body.appendChild(text.cloneNode(true)); }
+            panel.setAttribute("data-for", String(L.stamp(layer)));
+            panel.classList.add("hm-shown");
+            if (!ring) {
+                ring = L.marker(layer.getLatLng(), {
+                    interactive: false, keyboard: false,
+                    icon: L.divIcon({className: "hm-tap-ring", iconSize: [RING_PX, RING_PX]})
+                }).addTo(m);
+            }
+            if (picked !== layer) { picked = layer; layer.on("move", follow); }
+            place();
+            if (layer.isTooltipOpen()) layer.closeTooltip();
+        }
+
+        function isLine(l) {
+            return (" " + (l.options.className || "") + " ").indexOf(" hm-line ") >= 0;
+        }
+        // Where the finger actually lifted. Chromium's touch adjustment moves
+        // a tap's click onto a nearby target (a spiderfied cluster's badge,
+        // say) and reports the moved point; the touch events keep the real one.
+        var lift = null;
+        el.addEventListener("touchend", function (e) {
+            var t = e.changedTouches && e.changedTouches[0];
+            lift = t ? {x: t.clientX, y: t.clientY, at: Date.now()} : null;
+        }, {capture: true, passive: true});
+        function tapPoint(e) {
+            if (lift && Date.now() - lift.at < LIFT_MS &&
+                Math.abs(lift.x - e.clientX) + Math.abs(lift.y - e.clientY) <= 2 * REACH) {
+                return m.mouseEventToContainerPoint({clientX: lift.x, clientY: lift.y});
+            }
+            return m.mouseEventToContainerPoint(e);
+        }
+
+        // The nearest dot, station, cluster or line within reach of a tap.
+        function nearest(p) {
+            var lp = m.containerPointToLayerPoint(p);
+            var best = null, fanned = null;
+            function consider(kind, layer, d, reach, edge, rank) {
+                if (d > reach) return;
+                // Equal distance and kind: the later layer, drawn on top, is
+                // the one the reader sees (categories cluster separately, so
+                // two badges can share one point).
+                if (!best || edge < best.edge - TIE_PX ||
+                    (edge <= best.edge + TIE_PX && rank < best.rank) ||
+                    (rank === best.rank && Math.abs(edge - best.edge) < 0.5)) {
+                    best = {kind: kind, layer: layer, edge: edge, rank: rank};
+                }
+                // A dot of a spiderfied group the reader has just opened.
+                if (layer._spiderLeg && (!fanned || edge < fanned.edge)) {
+                    fanned = {kind: kind, layer: layer, edge: edge, rank: rank};
+                }
+            }
+            m.eachLayer(function (l) {
+                var q, r, d;
+                if (l instanceof L.CircleMarker) {
+                    // Rings (L.Circle) carry no tooltip and are not targets.
+                    if (l instanceof L.Circle || !l.getTooltip || !l.getTooltip() || !l._point) return;
+                    q = m.latLngToContainerPoint(l.getLatLng());
+                    r = l._radius + (l.options.stroke ? l.options.weight / 2 : 0);
+                    d = q.distanceTo(p);
+                    consider("point", l, d, Math.max(REACH, r), d - r, 0);
+                } else if (L.MarkerCluster && l instanceof L.MarkerCluster && l._icon) {
+                    if (l._group && l._group._spiderfied === l) return;
+                    q = m.latLngToContainerPoint(l.getLatLng());
+                    r = l._icon.offsetWidth / 2;
+                    d = q.distanceTo(p);
+                    consider("cluster", l, d, Math.max(REACH, r), d - r, 1);
+                } else if (l instanceof L.Polyline && l._parts && isLine(l)) {
+                    d = Infinity;
+                    l._parts.forEach(function (part) {
+                        for (var i = 1; i < part.length; i++) {
+                            d = Math.min(d, L.LineUtil.pointToSegmentDistance(lp, part[i - 1], part[i]));
+                        }
+                    });
+                    consider("line", l, d, REACH, d - l.options.weight / 2, 2);
+                }
+            });
+            return fanned || best;
+        }
+
+        el.addEventListener("click", function (e) {
+            if (passing || !(mq && mq.matches)) return;
+            var t = e.target;
+            if (t && t.closest && t.closest(".leaflet-control")) return;
+            var p = tapPoint(e), best = nearest(p);
+            if (!best || best.kind === "line") {
+                // On to Leaflet; LINE_HIGHLIGHT_SCRIPT reads this point.
+                if (best) TAP.last = {event: e, point: p};
+                clear();
+                return;
+            }
+            e.stopPropagation();
+            if (best.kind === "point") { select(best.layer); return; }
+            clear();
+            passing = true;
+            try {
+                best.layer._icon.dispatchEvent(new MouseEvent("click", {
+                    bubbles: true, cancelable: true, view: window,
+                    clientX: e.clientX, clientY: e.clientY}));
+            } finally { passing = false; }
+        }, true);
+    }
+    start();
+})();
+</script>
+    
+            <div class="folium-map" id="map_dce5ea9e10accfdfce8985e1ef0e47d5" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_dce5ea9e10accfdfce8985e1ef0e47d5 = L.map(
+                "map_dce5ea9e10accfdfce8985e1ef0e47d5",
+                {
+                    center: [34.804783905077095, 135.47211],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 13.25,
+  "zoomControl": true,
+  "preferCanvas": false,
+  "zoomSnap": 0.25,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_6f215352c0d311c6a2e4ac2c2f27d87e = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\" rel=\"noopener noreferrer\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_6f215352c0d311c6a2e4ac2c2f27d87e.addTo(map_dce5ea9e10accfdfce8985e1ef0e47d5);
+        
+    
+            var heat_map_d6984d4a06fe81201cb15983792dfaf0 = L.heatLayer(
+                JSON.parse("[[34.834887,135.470053],[34.834607,135.467483],[34.820981,135.472167],[34.835718,135.468292],[34.821396,135.467854],[34.814049,135.459771],[34.817007,135.458761],[34.839302,135.491346],[34.825107,135.467576],[34.819364,135.489407],[34.821709,135.462322],[34.821611,135.45928],[34.824151,135.482862],[34.824705,135.473182],[34.833383,135.472081],[34.835383,135.485528],[34.834438,135.468923],[34.838067,135.487528],[34.825488,135.464528],[34.822756,135.472983],[34.827753,135.474209],[34.834018,135.491137],[34.838173,135.489013],[34.830565,135.473424],[34.830199,135.470734],[34.834219,135.479278],[34.822443,135.494361],[34.8141,135.45583],[34.833397,135.468699],[34.825422,135.466688],[34.830098,135.468508],[34.824077,135.465526],[34.817963,135.462083],[34.818643,135.490812],[34.826,135.471734],[34.831871,135.467889],[34.817007,135.458761],[34.826044,135.467481],[34.836055,135.481597],[34.825488,135.464528],[34.826075,135.466677],[34.817391,135.45986],[34.817391,135.45986],[34.818608,135.484782],[34.834328,135.470858],[34.830909,135.475488],[34.830909,135.475488],[34.833391,135.478245],[34.819663,135.469081],[34.822865,135.466365],[34.823372,135.466363],[34.823034,135.465911],[34.834073,135.47483],[34.814049,135.459771],[34.814717,135.457254],[34.815244,135.457666],[34.826044,135.467481],[34.838356,135.486096],[34.818747,135.463989],[34.831672,135.464518],[34.824929,135.465599],[34.818513,135.489765],[34.817043,135.460128],[34.826,135.471734],[34.833397,135.468699],[34.816632,135.467378],[34.833397,135.468699],[34.819364,135.489407],[34.833246,135.490237],[34.834018,135.491137],[34.827753,135.474209],[34.82894,135.470934],[34.834438,135.468923],[34.833265,135.464897],[34.832855,135.469795],[34.833112,135.471053],[34.817961,135.459515],[34.823435,135.460278],[34.833553,135.492408],[34.82621,135.472808],[34.835829,135.488885],[34.819098,135.487638],[34.832212,135.490576],[34.82621,135.472808],[34.81858,135.46303],[34.820378,135.491275],[34.82237,135.465203],[34.815583,135.461288],[34.81613,135.460448],[34.824335,135.462293],[34.830199,135.470734],[34.824773,135.472047],[34.834964,135.471025],[34.816481,135.459064],[34.834328,135.470858],[34.826269,135.465662],[34.83546,135.484135],[34.828558,135.470335],[34.83474,135.491804],[34.837809,135.48409],[34.822095,135.480401],[34.828714,135.487128],[34.830911,135.468724],[34.822264,135.471857],[34.832855,135.469795],[34.830565,135.473424],[34.833383,135.472081],[34.819644,135.4684],[34.825662,135.45749],[34.826327,135.470569],[34.832013,135.478779],[34.826,135.471734],[34.817562,135.460945],[34.835613,135.490839],[34.832666,135.492048],[34.834328,135.470858],[34.820603,135.45979],[34.832184,135.471231],[34.834607,135.467483],[34.836044,135.468594],[34.835171,135.490531],[34.825107,135.467576],[34.822992,135.484763],[34.826044,135.467481],[34.822607,135.491432],[34.825489,135.468494],[34.825651,135.465447],[34.831871,135.467889],[34.82906,135.467937],[34.827832,135.496676],[34.833082,135.488199],[34.824929,135.465599],[34.821013,135.492225],[34.833397,135.468699],[34.823197,135.465214],[34.825422,135.466688],[34.832855,135.469795],[34.820508,135.47008],[34.81908,135.488418],[34.819364,135.489407],[34.832184,135.471231],[34.833397,135.468699],[34.8141,135.45583],[34.83474,135.491804],[34.838067,135.487528],[34.831465,135.467135],[34.832855,135.469795],[34.819364,135.489407],[34.818608,135.484782],[34.822716,135.486622],[34.833383,135.472081],[34.82347,135.471561],[34.824894,135.469229],[34.81703,135.460921],[34.830909,135.475488],[34.828568,135.497068],[34.82552,135.474626],[34.821553,135.49173],[34.831311,135.470793],[34.81703,135.460921],[34.815244,135.457666],[34.823197,135.465214],[34.826766,135.472696],[34.831311,135.470793],[34.83312,135.489271],[34.815604,135.451933],[34.818345,135.488376],[34.831871,135.467889],[34.834701,135.471561],[34.817961,135.459515],[34.822264,135.471857],[34.829613,135.471255],[34.831465,135.467135],[34.831553,135.486123],[34.826561,135.475205],[34.832422,135.48519],[34.833397,135.468699],[34.829683,135.466803],[34.817963,135.462083],[34.829231,135.466465],[34.829668,135.485188],[34.825107,135.467576],[34.8352,135.46913],[34.81893,135.489592],[34.832666,135.492048],[34.834887,135.470053],[34.830911,135.468724],[34.829507,135.48907],[34.822607,135.491432],[34.816481,135.459064],[34.82974,135.470067],[34.823694,135.489938],[34.823451,135.48263],[34.819098,135.487638],[34.831886,135.493033],[34.815675,135.462235],[34.833112,135.471053],[34.833112,135.471053],[34.82974,135.470067],[34.823348,135.487571],[34.823849,135.493662],[34.833966,135.488195],[34.832855,135.469795],[34.833397,135.468699],[34.81613,135.460448],[34.833966,135.488195],[34.823348,135.487571],[34.827719,135.493925],[34.834219,135.479278],[34.823849,135.493662],[34.823849,135.493662],[34.823849,135.493662],[34.833187,135.497181]]"),
+                {
+  "minOpacity": 0.35,
+  "maxZoom": 18,
+  "radius": 8,
+  "blur": 10,
+  "gradient": {
+  0.3: "#FBB878",
+  0.5: "#F97316",
+  0.7: "#DE6412",
+  0.85: "#C0570F",
+  1.0: "#8F3A05",
+},
+}
+            );
+        
+    
+            heat_map_d6984d4a06fe81201cb15983792dfaf0.addTo(map_dce5ea9e10accfdfce8985e1ef0e47d5);
+        
+    
+            var heat_map_d2412e1294a82c2f6783832a9d777e99 = L.heatLayer(
+                JSON.parse("[[34.834887,135.470053],[34.834607,135.467483],[34.820981,135.472167],[34.835718,135.468292],[34.821396,135.467854],[34.814049,135.459771],[34.817007,135.458761],[34.839302,135.491346],[34.825107,135.467576],[34.819364,135.489407],[34.821709,135.462322],[34.821611,135.45928],[34.843401,135.5088],[34.836975,135.517133],[34.838296,135.504811],[34.838931,135.514812],[34.830833,135.516356],[34.843031,135.501421],[34.824151,135.482862],[34.824705,135.473182],[34.833383,135.472081],[34.840801,135.504258],[34.835383,135.485528],[34.834438,135.468923],[34.838067,135.487528],[34.825488,135.464528],[34.822756,135.472983],[34.830044,135.520211],[34.827753,135.474209],[34.834018,135.491137],[34.836545,135.51478],[34.834239,135.514944],[34.838173,135.489013],[34.830565,135.473424],[34.830199,135.470734],[34.830044,135.520211],[34.834219,135.479278],[34.822443,135.494361],[34.8141,135.45583],[34.833397,135.468699],[34.825422,135.466688],[34.830098,135.468508],[34.824077,135.465526],[34.829154,135.51531],[34.830545,135.517827],[34.817963,135.462083],[34.818643,135.490812],[34.826,135.471734],[34.831871,135.467889],[34.830598,135.520103],[34.823624,135.45294],[34.817007,135.458761],[34.826044,135.467481],[34.836055,135.481597],[34.825488,135.464528],[34.826075,135.466677],[34.817391,135.45986],[34.817391,135.45986],[34.830598,135.520103],[34.848462,135.516029],[34.838053,135.514391],[34.837696,135.504339],[34.84742,135.511195],[34.837657,135.514626],[34.838426,135.496879],[34.826574,135.476066],[34.818608,135.484782],[34.832929,135.515644],[34.834328,135.470858],[34.830909,135.475488],[34.830909,135.475488],[34.833391,135.478245],[34.819663,135.469081],[34.822865,135.466365],[34.823372,135.466363],[34.823034,135.465911],[34.834073,135.47483],[34.814049,135.459771],[34.814717,135.457254],[34.815244,135.457666],[34.826044,135.467481],[34.838356,135.486096],[34.818747,135.463989],[34.831672,135.464518],[34.824929,135.465599],[34.846619,135.512679],[34.818513,135.489765],[34.817043,135.460128],[34.826,135.471734],[34.833397,135.468699],[34.816632,135.467378],[34.833397,135.468699],[34.838128,135.506065],[34.819364,135.489407],[34.829447,135.516269],[34.833246,135.490237],[34.878929,135.459251],[34.834018,135.491137],[34.827753,135.474209],[34.82894,135.470934],[34.845303,135.511006],[34.834438,135.468923],[34.833265,135.464897],[34.832855,135.469795],[34.833112,135.471053],[34.817961,135.459515],[34.823435,135.460278],[34.833553,135.492408],[34.812775,135.451125],[34.82621,135.472808],[34.835829,135.488885],[34.819098,135.487638],[34.832212,135.490576],[34.82621,135.472808],[34.81858,135.46303],[34.820378,135.491275],[34.839734,135.504797],[34.836074,135.50539],[34.82237,135.465203],[34.815583,135.461288],[34.81613,135.460448],[34.83546,135.514545],[34.8454,135.504743],[34.824335,135.462293],[34.830199,135.470734],[34.824773,135.472047],[34.828839,135.517799],[34.828987,135.516854],[34.829036,135.511773],[34.828804,135.510322],[34.834964,135.471025],[34.816481,135.459064],[34.844245,135.500255],[34.823624,135.45294],[34.834328,135.470858],[34.826269,135.465662],[34.83546,135.484135],[34.828558,135.470335],[34.83474,135.491804],[34.851766,135.509865],[34.837809,135.48409],[34.830494,135.513799],[34.830598,135.520103],[34.822095,135.480401],[34.828714,135.487128],[34.830911,135.468724],[34.822264,135.471857],[34.832855,135.469795],[34.827999,135.479192],[34.831199,135.513124],[34.854874,135.513694],[34.885916,135.457023],[34.838932,135.482364],[34.831679,135.521111],[34.830565,135.473424],[34.833383,135.472081],[34.819644,135.4684],[34.825662,135.45749],[34.826327,135.470569],[34.832013,135.478779],[34.826,135.471734],[34.830442,135.512452],[34.843031,135.501421],[34.817562,135.460945],[34.835613,135.490839],[34.832666,135.492048],[34.8439,135.502464],[34.834328,135.470858],[34.820603,135.45979],[34.832184,135.471231],[34.896521,135.460942],[34.828422,135.478522],[34.827409,135.478362],[34.834607,135.467483],[34.836044,135.468594],[34.835171,135.490531],[34.841077,135.496362],[34.825107,135.467576],[34.822992,135.484763],[34.826044,135.467481],[34.894778,135.461728],[34.822607,135.491432],[34.825489,135.468494],[34.830083,135.512571],[34.830688,135.509899],[34.825651,135.465447],[34.831871,135.467889],[34.82906,135.467937],[34.827832,135.496676],[34.833082,135.488199],[34.824929,135.465599],[34.82032,135.479743],[34.830689,135.49964],[34.821013,135.492225],[34.833397,135.468699],[34.823197,135.465214],[34.829154,135.51531],[34.8439,135.502464],[34.825422,135.466688],[34.832855,135.469795],[34.820508,135.47008],[34.841505,135.49765],[34.81908,135.488418],[34.819364,135.489407],[34.832184,135.471231],[34.833397,135.468699],[34.8141,135.45583],[34.83474,135.491804],[34.838067,135.487528],[34.830044,135.520211],[34.831465,135.467135],[34.832855,135.469795],[34.819364,135.489407],[34.818608,135.484782],[34.822716,135.486622],[34.833383,135.472081],[34.82347,135.471561],[34.824894,135.469229],[34.81703,135.460921],[34.830909,135.475488],[34.828568,135.497068],[34.82552,135.474626],[34.810443,135.451034],[34.821553,135.49173],[34.831311,135.470793],[34.81703,135.460921],[34.815244,135.457666],[34.829447,135.516269],[34.823197,135.465214],[34.826766,135.472696],[34.831311,135.470793],[34.830812,135.51184],[34.83312,135.489271],[34.815604,135.451933],[34.818345,135.488376],[34.831871,135.467889],[34.83768,135.480768],[34.834701,135.471561],[34.88856,135.458949],[34.824403,135.453441],[34.817961,135.459515],[34.822264,135.471857],[34.890508,135.463938],[34.831679,135.521111],[34.829613,135.471255],[34.831465,135.467135],[34.831553,135.486123],[34.826561,135.475205],[34.832422,135.48519],[34.833397,135.468699],[34.829683,135.466803],[34.817963,135.462083],[34.829231,135.466465],[34.851827,135.511817],[34.829668,135.485188],[34.825107,135.467576],[34.8352,135.46913],[34.81893,135.489592],[34.832666,135.492048],[34.834887,135.470053],[34.830911,135.468724],[34.829507,135.48907],[34.885468,135.459659],[34.822607,135.491432],[34.816481,135.459064],[34.82974,135.470067],[34.823694,135.489938],[34.810453,135.450103],[34.828987,135.516854],[34.823451,135.48263],[34.819098,135.487638],[34.831886,135.493033],[34.815675,135.462235],[34.833112,135.471053],[34.833112,135.471053],[34.843084,135.502762],[34.82974,135.470067],[34.823348,135.487571],[34.823849,135.493662],[34.82749,135.477209],[34.833966,135.488195],[34.832855,135.469795],[34.833397,135.468699],[34.81613,135.460448],[34.833966,135.488195],[34.823348,135.487571],[34.827719,135.493925],[34.810453,135.450103],[34.834219,135.479278],[34.823849,135.493662],[34.823849,135.493662],[34.840188,135.505105],[34.823849,135.493662],[34.833187,135.497181]]"),
+                {
+  "minOpacity": 0.35,
+  "maxZoom": 18,
+  "radius": 8,
+  "blur": 10,
+  "gradient": {
+  0.3: "#FBB878",
+  0.5: "#F97316",
+  0.7: "#DE6412",
+  0.85: "#C0570F",
+  1.0: "#8F3A05",
+},
+}
+            );
+        
+    
+            var feature_group_9e03de2acf9b4543c8bf41740d7f1a81 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_371f34068df08269c37ece1dd46a1f02 = L.circle(
+                [34.82347, 135.4659],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
+            ).addTo(feature_group_9e03de2acf9b4543c8bf41740d7f1a81);
+        
+    
+            var circle_34163e5145c8ad00d063391e68981e8a = L.circle(
+                [34.834278, 135.468218],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
+            ).addTo(feature_group_9e03de2acf9b4543c8bf41740d7f1a81);
+        
+    
+            var circle_4289135e153f9871e28ff3ec3fe58f33 = L.circle(
+                [34.831523, 135.489038],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
+            ).addTo(feature_group_9e03de2acf9b4543c8bf41740d7f1a81);
+        
+    
+            var circle_9e213689abb511e8d4008dbdd2204460 = L.circle(
+                [34.821701, 135.490289],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
+            ).addTo(feature_group_9e03de2acf9b4543c8bf41740d7f1a81);
+        
+    
+            var circle_f279652427fafa48be47e0d75b171af8 = L.circle(
+                [34.816695, 135.46083],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
+            ).addTo(feature_group_9e03de2acf9b4543c8bf41740d7f1a81);
+        
+    
+            var feature_group_bd82d2629a74a7efb443b51aae609ec0 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_b33952effe54ccd85c3efa678446fd07 = L.circle(
+                [34.82347, 135.4659],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bd82d2629a74a7efb443b51aae609ec0);
+        
+    
+            var circle_5294ee7c4f1210fddd0f9163f5f6e072 = L.circle(
+                [34.834278, 135.468218],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bd82d2629a74a7efb443b51aae609ec0);
+        
+    
+            var circle_fdb334997f2953e9221c18f5032fd202 = L.circle(
+                [34.831523, 135.489038],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bd82d2629a74a7efb443b51aae609ec0);
+        
+    
+            var circle_37bcf09eca397b6e59467fb2f56cde94 = L.circle(
+                [34.821701, 135.490289],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bd82d2629a74a7efb443b51aae609ec0);
+        
+    
+            var circle_319e647a263d1d89d102195f961f661a = L.circle(
+                [34.816695, 135.46083],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
+            ).addTo(feature_group_bd82d2629a74a7efb443b51aae609ec0);
+        
+    
+            var feature_group_d60d62699bf5eb8556ca9dc77fc82b0a = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_0e812d7cfed250c401583e2cbf5dde95 = L.circle(
+                [34.82347, 135.4659],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
+            ).addTo(feature_group_d60d62699bf5eb8556ca9dc77fc82b0a);
+        
+    
+            var circle_0a2e72cb22effce865a9f52073f056d9 = L.circle(
+                [34.834278, 135.468218],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
+            ).addTo(feature_group_d60d62699bf5eb8556ca9dc77fc82b0a);
+        
+    
+            var circle_33daa7b7d1b626f86dda69c19cc6c234 = L.circle(
+                [34.831523, 135.489038],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
+            ).addTo(feature_group_d60d62699bf5eb8556ca9dc77fc82b0a);
+        
+    
+            var circle_092677bec1ac78203bb7fcf9b8152864 = L.circle(
+                [34.821701, 135.490289],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
+            ).addTo(feature_group_d60d62699bf5eb8556ca9dc77fc82b0a);
+        
+    
+            var circle_4431de937a678377391a5922a5a78425 = L.circle(
+                [34.816695, 135.46083],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
+            ).addTo(feature_group_d60d62699bf5eb8556ca9dc77fc82b0a);
+        
+    
+            var feature_group_aa811e9ee45e5a8316801fcee086555d = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_efe6711495384d10e66a213048e4b39e = L.circle(
+                [34.82347, 135.4659],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 965.6064, "stroke": true, "weight": 1}
+            ).addTo(feature_group_aa811e9ee45e5a8316801fcee086555d);
+        
+    
+            var circle_8a03db5e2f8eb0d76ca511c0b6a00adc = L.circle(
+                [34.834278, 135.468218],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 965.6064, "stroke": true, "weight": 1}
+            ).addTo(feature_group_aa811e9ee45e5a8316801fcee086555d);
+        
+    
+            var circle_2f6e582cff38e39e1fc6bc5b39c11f7c = L.circle(
+                [34.831523, 135.489038],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 965.6064, "stroke": true, "weight": 1}
+            ).addTo(feature_group_aa811e9ee45e5a8316801fcee086555d);
+        
+    
+            var circle_0a7b91932c17073a04de059469a6d50b = L.circle(
+                [34.821701, 135.490289],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 965.6064, "stroke": true, "weight": 1}
+            ).addTo(feature_group_aa811e9ee45e5a8316801fcee086555d);
+        
+    
+            var circle_eb0c684234b2a0457b56284c9c41d464 = L.circle(
+                [34.816695, 135.46083],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 965.6064, "stroke": true, "weight": 1}
+            ).addTo(feature_group_aa811e9ee45e5a8316801fcee086555d);
+        
+    
+            var feature_group_39a0f43c780191e53f0004eb698ea3e2 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var poly_line_a4a778e9b6e4183115092e5e3ccf0be6 = L.polyline(
+                [[34.80849, 135.44651], [34.80856, 135.44658], [34.80882, 135.44692], [34.80969, 135.44802], [34.80972, 135.44806], [34.80973, 135.44806], [34.80982, 135.44818], [34.8099, 135.44828], [34.81013, 135.44856], [34.81019, 135.44863], [34.81042, 135.4489], [34.81088, 135.44955], [34.81107, 135.4498], [34.81112, 135.44985], [34.81115, 135.44991], [34.8112, 135.44998], [34.81122, 135.45], [34.81142, 135.45026], [34.81154, 135.45043], [34.81166, 135.45059], [34.81173, 135.45068], [34.81186, 135.45085], [34.81187, 135.45088], [34.81189, 135.45091], [34.81227, 135.45141], [34.81234, 135.4515], [34.81234, 135.45151], [34.81248, 135.45168], [34.81252, 135.45174], [34.81262, 135.45187], [34.81266, 135.45193], [34.81286, 135.45218], [34.81286, 135.4522], [34.81293, 135.45228], [34.81294, 135.45231], [34.81299, 135.45237], [34.81317, 135.4526], [34.81344, 135.45297], [34.81351, 135.45309], [34.81391, 135.45388], [34.81398, 135.45402], [34.81399, 135.45407], [34.81401, 135.45409], [34.81421, 135.45456], [34.81424, 135.45463], [34.81441, 135.45505], [34.81463, 135.45554], [34.81475, 135.45583], [34.81483, 135.45604], [34.81501, 135.45645], [34.81569, 135.45812], [34.81601, 135.45894], [34.81602, 135.45898], [34.81641, 135.46008], [34.8165, 135.4603]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#905840", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#905840", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_39a0f43c780191e53f0004eb698ea3e2);
+        
+    
+            var poly_line_e5afa57db02c48e92cf2738743de4f8a = L.polyline(
+                [[34.8229, 135.4658], [34.82275, 135.46579], [34.82218, 135.4657], [34.82216, 135.46569], [34.82214, 135.4657], [34.82203, 135.46567], [34.82116, 135.46554], [34.82079, 135.46548], [34.82054, 135.46544], [34.82042, 135.46543], [34.82029, 135.4654], [34.82013, 135.46538], [34.8201, 135.46537], [34.81974, 135.46531], [34.81953, 135.46528], [34.81925, 135.46523], [34.81909, 135.4652], [34.81888, 135.46514], [34.81878, 135.4651], [34.81858, 135.46499], [34.81858, 135.46498], [34.81847, 135.4649], [34.81832, 135.46477], [34.8182, 135.46462], [34.81809, 135.46445], [34.818, 135.46425], [34.81793, 135.46412], [34.8178, 135.46379], [34.81765, 135.46343], [34.81764, 135.46337], [34.81743, 135.46277], [34.81734, 135.46257], [34.81717, 135.46211], [34.81704, 135.46176], [34.81698, 135.46157], [34.81689, 135.46136]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#905840", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#905840", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_39a0f43c780191e53f0004eb698ea3e2);
+        
+    
+            var poly_line_43636409f5248f8ec9878e085c056831 = L.polyline(
+                [[34.8335, 135.46818], [34.833, 135.46821], [34.83285, 135.46819], [34.83264, 135.46817], [34.83242, 135.46809], [34.83215, 135.46798], [34.83171, 135.46777], [34.83168, 135.46776], [34.83151, 135.4677], [34.8313, 135.46763], [34.83126, 135.46761], [34.83108, 135.46755], [34.83105, 135.46754], [34.83092, 135.46749], [34.83016, 135.46723], [34.82988, 135.46716], [34.82922, 135.467], [34.82914, 135.46699], [34.82839, 135.46681], [34.82816, 135.46676], [34.82812, 135.46676], [34.82796, 135.46673], [34.82727, 135.46656], [34.8272, 135.46655], [34.82706, 135.46652], [34.82692, 135.46648], [34.82638, 135.46638], [34.82587, 135.4663], [34.82561, 135.46626], [34.82539, 135.46623], [34.82518, 135.46619], [34.82489, 135.46614], [34.82486, 135.46613], [34.82462, 135.46608], [34.82404, 135.466]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#905840", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#905840", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_39a0f43c780191e53f0004eb698ea3e2);
+        
+    
+            var poly_line_de9174e96403d7bf705aa4d28ac5b0c0 = L.polyline(
+                [[34.8335, 135.46818], [34.83375, 135.46815], [34.83396, 135.46816], [34.83415, 135.46817], [34.83436, 135.46821], [34.83459, 135.46825], [34.83485, 135.46831], [34.83505, 135.46836]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#905840", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#905840", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_39a0f43c780191e53f0004eb698ea3e2);
+        
+    
+            var poly_line_8eb16a0d467596a71bd44c93679870e2 = L.polyline(
+                [[34.80776, 135.44596], [34.80806, 135.44615], [34.80824, 135.44628], [34.80849, 135.44651]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#905840", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#905840", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_39a0f43c780191e53f0004eb698ea3e2);
+        
+    
+            var poly_line_036284145c165ed00ff7e5b4774b1d1b = L.polyline(
+                [[34.8229, 135.4658], [34.82404, 135.466]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#905840", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#905840", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_39a0f43c780191e53f0004eb698ea3e2);
+        
+    
+            var poly_line_169ab3468b9635ee9e9f59bed69c620d = L.polyline(
+                [[34.8165, 135.4603], [34.81689, 135.46136]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#905840", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#905840", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_39a0f43c780191e53f0004eb698ea3e2);
+        
+    
+            var marker_75616ac086b82611ab60c138fd54724c = L.marker(
+                [34.81042, 135.4489],
+                {
+  "zIndexOffset": 1000,
+}
+            ).addTo(feature_group_39a0f43c780191e53f0004eb698ea3e2);
+        
+    
+            var div_icon_e42e5bd3900ac77b382654bfeca4d002 = L.divIcon({
+  "html": "\n            \u003cdiv class=\"hm-line-label\" data-line=\"0\" style=\"\n                position: absolute; left: 0; top: 0;\n                transform: translate(-50%, -50%) translate(-17.0px, 15.0px);\n                font-size: 14px; font-weight: bold; color: #905840; --dm-label: #b06b4e;\n                text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff,\n                             -1px 1px 0 #ffffff, 1px 1px 0 #ffffff,\n                             0 0 6px #ffffff;\n                white-space: nowrap; pointer-events: none;\n            \"\u003eHankyu Minoh Line\u003c/div\u003e\n        ",
+  "iconSize": [0, 0],
+  "iconAnchor": [0, 0],
+  "className": "empty",
+});
+        
+    
+                marker_75616ac086b82611ab60c138fd54724c.setIcon(div_icon_e42e5bd3900ac77b382654bfeca4d002);
+            
+    
+            feature_group_39a0f43c780191e53f0004eb698ea3e2.addTo(map_dce5ea9e10accfdfce8985e1ef0e47d5);
+        
+    
+            var feature_group_54f8bd5671fdb77952d1028766445036 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var poly_line_d38ee55eb3702968231e8044dd6932d7 = L.polyline(
+                [[34.79243, 135.49752], [34.791, 135.49752], [34.79024, 135.49753], [34.78982, 135.49752], [34.7897, 135.49752], [34.78904, 135.49752], [34.7876, 135.49751], [34.78678, 135.49754], [34.78673, 135.49754], [34.78671, 135.49753], [34.78278, 135.49753], [34.78231, 135.4975], [34.78174, 135.49742], [34.78144, 135.49736], [34.78103, 135.49724], [34.78083, 135.49719], [34.77976, 135.49684], [34.77955, 135.49678], [34.77855, 135.49645], [34.77809, 135.4963], [34.77766, 135.49616], [34.77755, 135.49612], [34.77717, 135.49598], [34.77662, 135.49578], [34.77648, 135.49573], [34.77641, 135.4957], [34.77591, 135.49552], [34.77529, 135.49532]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#E81820", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#E81820", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_54f8bd5671fdb77952d1028766445036);
+        
+    
+            var poly_line_6d86a18bf76ad7d861a1212b7241e752 = L.polyline(
+                [[34.8089119, 135.49504892], [34.80830205, 135.49505677], [34.8075154, 135.49504297], [34.80707941, 135.49497595], [34.80673736, 135.49482426], [34.80648752, 135.49466067], [34.80626742, 135.49443463], [34.8057374, 135.49378051], [34.80525199, 135.49322729], [34.80499144, 135.49303098], [34.80473802, 135.49290249], [34.80439181, 135.49282397], [34.80401, 135.49285], [34.80386, 135.49288], [34.80375, 135.4929], [34.80328, 135.493], [34.80293, 135.49309], [34.80253, 135.49321], [34.80224, 135.49335], [34.80144, 135.4937], [34.79845, 135.49502], [34.79774, 135.49534], [34.79593, 135.49612], [34.79498, 135.49654], [34.79414, 135.49686]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#E81820", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#E81820", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_54f8bd5671fdb77952d1028766445036);
+        
+    
+            var poly_line_83542ae4fa00809830d8837db3fd88bb = L.polyline(
+                [[34.81063463, 135.49504297], [34.81094563, 135.49499443], [34.81128113, 135.49488022], [34.81152741, 135.49474816], [34.81177368, 135.49455542], [34.8120378, 135.49430915], [34.81229835, 135.49410214], [34.81263088, 135.49386597], [34.8130919, 135.49364587], [34.8137522, 135.49340495], [34.81571724, 135.4927045], [34.81648759, 135.49244871], [34.81886755, 135.4915174], [34.82086249, 135.49065222]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#E81820", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#E81820", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_54f8bd5671fdb77952d1028766445036);
+        
+    
+            var poly_line_958758f100f7ab3a818e632ba5d6b63b = L.polyline(
+                [[34.82253949, 135.48992582], [34.82306729, 135.4897125], [34.82343373, 135.48959829], [34.82374782, 135.48949359], [34.82410474, 135.48942221], [34.82446165, 135.48935083], [34.82525164, 135.48923185], [34.82664973, 135.48906418], [34.82727434, 135.4890035], [34.82819162, 135.48897138], [34.82882337, 135.48897138], [34.82951222, 135.48902254], [34.8302213, 135.48906537], [34.83051159, 135.48907489]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#E81820", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#E81820", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_54f8bd5671fdb77952d1028766445036);
+        
+    
+            var poly_line_f48c874ff569edc95a4c2fd3e920d385 = L.polyline(
+                [[34.79414, 135.49686], [34.7933, 135.49719], [34.79243, 135.49752]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#E81820", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#E81820", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_54f8bd5671fdb77952d1028766445036);
+        
+    
+            var poly_line_644586a0240c6477669045ab27f9fecc = L.polyline(
+                [[34.81063463, 135.49504297], [34.8089119, 135.49504892]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#E81820", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#E81820", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_54f8bd5671fdb77952d1028766445036);
+        
+    
+            var poly_line_a3df759709869bbccea421c88e29819e = L.polyline(
+                [[34.82086249, 135.49065222], [34.82253949, 135.48992582]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#E81820", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#E81820", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_54f8bd5671fdb77952d1028766445036);
+        
+    
+            var poly_line_179fc8e774992e844bc64a1b4a91d6e6 = L.polyline(
+                [[34.83051159, 135.48907489], [34.83253473, 135.48900112]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#E81820", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#E81820", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_54f8bd5671fdb77952d1028766445036);
+        
+    
+            var marker_f6c12de4426e893d2c0601b3db52deef = L.marker(
+                [34.77529, 135.49532],
+                {
+  "zIndexOffset": 1000,
+}
+            ).addTo(feature_group_54f8bd5671fdb77952d1028766445036);
+        
+    
+            var div_icon_536d0312c340905107160abd2f5c81cb = L.divIcon({
+  "html": "\n            \u003cdiv class=\"hm-line-label\" data-line=\"1\" style=\"\n                position: absolute; left: 0; top: 0;\n                transform: translate(-50%, -50%) translate(-105.3px, -11.7px);\n                font-size: 14px; font-weight: bold; color: #E81820; --dm-label: #eb343b;\n                text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff,\n                             -1px 1px 0 #ffffff, 1px 1px 0 #ffffff,\n                             0 0 6px #ffffff;\n                white-space: nowrap; pointer-events: none;\n            \"\u003eKita-Osaka Kyuko Namboku Line\u003c/div\u003e\n        ",
+  "iconSize": [0, 0],
+  "iconAnchor": [0, 0],
+  "className": "empty",
+});
+        
+    
+                marker_f6c12de4426e893d2c0601b3db52deef.setIcon(div_icon_536d0312c340905107160abd2f5c81cb);
+            
+    
+            feature_group_54f8bd5671fdb77952d1028766445036.addTo(map_dce5ea9e10accfdfce8985e1ef0e47d5);
+        
+    
+            var feature_group_14b1c9547047c7cf107544d71f0c813d = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_f890f3e9030cee87ea08f4c57aaf5c5d = L.circleMarker(
+                [34.82347, 135.4659],
+                {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_14b1c9547047c7cf107544d71f0c813d);
+        
+    
+            circle_marker_f890f3e9030cee87ea08f4c57aaf5c5d.bindTooltip(
+                `<div>
+                     <b>Makiochi</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7600848f3634f99cde02e5dce3279d2f = L.circleMarker(
+                [34.834278, 135.468218],
+                {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_14b1c9547047c7cf107544d71f0c813d);
+        
+    
+            circle_marker_7600848f3634f99cde02e5dce3279d2f.bindTooltip(
+                `<div>
+                     <b>Minoh</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_56600ae4b229e76680497a3704749027 = L.circleMarker(
+                [34.831523, 135.489038],
+                {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_14b1c9547047c7cf107544d71f0c813d);
+        
+    
+            circle_marker_56600ae4b229e76680497a3704749027.bindTooltip(
+                `<div>
+                     <b>Minoh-kayano</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6ca6beb44e965837825bd4c8b03b42e7 = L.circleMarker(
+                [34.821701, 135.490289],
+                {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_14b1c9547047c7cf107544d71f0c813d);
+        
+    
+            circle_marker_6ca6beb44e965837825bd4c8b03b42e7.bindTooltip(
+                `<div>
+                     <b>Minoh-semba-handai-mae</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8959678ee58b2fdbff6494c8cb402684 = L.circleMarker(
+                [34.816695, 135.46083],
+                {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_14b1c9547047c7cf107544d71f0c813d);
+        
+    
+            circle_marker_8959678ee58b2fdbff6494c8cb402684.bindTooltip(
+                `<div>
+                     <b>Sakurai</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            feature_group_14b1c9547047c7cf107544d71f0c813d.addTo(map_dce5ea9e10accfdfce8985e1ef0e47d5);
+        
+    
+            var feature_group_0f552af9f3d803bae9e19b05e53a3ef6 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var fast_marker_cluster_0f76eb6641aa19807888317cd05e4cc8 = (function(){
+                var callback = 
+        (function () {
+            var CATEGORIES = ["\u7406\u5bb9\u6240", "\u7f8e\u5bb9\u6240"];
+            var STATIONS = ["Minoh", "Makiochi", "Sakurai", "Minoh-kayano", "Minoh-semba-handai-mae"];
+            var BANDS = ["Ring 2 (0.1-0.2 mi)", "Ring 1 (0-0.1 mi)", "Ring 4 (0.3-0.6 mi)", "Ring 3 (0.2-0.3 mi)"];
+            return function (row) {
+                // bubblingMouseEvents false: a click on a dot of a spiderfied
+                // group no longer reaches the map, where Leaflet.markercluster
+                // unspiderfies on any click (desktop; owner, 2026-10-04).
+                var marker = L.circleMarker(new L.LatLng(row[0], row[1]), {
+                    radius: 5, color: '#1baf7a', fillColor: '#1baf7a',
+                    fillOpacity: 0.85, weight: 1, bubblingMouseEvents: false
+                });
+                var html = '<b>' + row[2] + '</b><br>' +
+                    'Permit type (営業の種類): ' + CATEGORIES[row[3]] + '<br>' +
+                    'Nearest station: ' + STATIONS[row[4]] + '<br>' +
+                    BANDS[row[5]];
+                marker.bindTooltip(html, {sticky: true});
+                return marker;
+            };
+        })()
+    ;
+
+                var data = JSON.parse("[[34.834887,135.470053,\"理容  ヨシオカ\",0,0,0],[34.834607,135.467483,\"とこや  ハットリ\",0,0,1],[34.820981,135.472167,\"ヘアーサロン  都\",0,1,2],[34.835718,135.468292,\"有限会社  ニューグランド\",0,0,1],[34.821396,135.467854,\"沖  理容所\",0,1,0],[34.814049,135.459771,\"理容室  ハヤタ\",0,2,0],[34.817007,135.458761,\"米丸  理容所\",0,2,0],[34.839302,135.491346,\"メンズサロン　のだ\",0,3,2],[34.825107,135.467576,\"ヘアーサロン・ホワイト\",0,1,0],[34.819364,135.489407,\"ヘアールーム  せんば\",0,4,0],[34.821709,135.462322,\"桜  理髪所\",0,1,3],[34.821611,135.45928,\"ヘアーサロン  クリーン\",0,2,2],[34.824151,135.482862,\"箕面市立病院理容室\",0,4,2],[34.824705,135.473182,\"ヘアーサロン男爵 箕面店\",0,1,2],[34.833383,135.472081,\"ヘアーサロン  五味\",0,0,3],[34.835383,135.485528,\"理容フクイ\",0,3,2],[34.834438,135.468923,\"スタイリストクラブ  ゴトウ\",0,0,1],[34.838067,135.487528,\"男爵ＲＴ３０６\",0,3,2],[34.825488,135.464528,\"森下理容\",0,1,0],[34.822756,135.472983,\"ヘアーステージ  １９３\",0,1,2],[34.827753,135.474209,\"ヘアースタジオ  タナベ\",0,1,2],[34.834018,135.491137,\"理容プラージュ  箕面萱野店\",0,3,3],[34.838173,135.489013,\"ＲＥＢＯＲＮ\",0,3,2],[34.830565,135.473424,\"ヘアーサロンせと\",0,0,2],[34.830199,135.470734,\"ｎｅｋｏ\",0,0,2],[34.834219,135.479278,\"ファイブ　カラット\",0,3,2],[34.822443,135.494361,\"髪剪處\",0,4,3],[34.8141,135.45583,\"Ｃｕｔ Ｒｏｏｍ ヨシオカ\",0,2,2],[34.833397,135.468699,\"パパス　箕面店\",0,0,1],[34.825422,135.466688,\"ＺＥＡＫ hair design 箕面牧落店\",0,1,0],[34.830098,135.468508,\"ヘアーショップ 山崎\",0,0,3],[34.824077,135.465526,\"Ｖｉｎｏ　Ｖｉｎｏ　Ｐｏｚｚｏ\",0,1,1],[34.817963,135.462083,\"Ｋａｚ　ｈａｉｒ\",0,2,0],[34.818643,135.490812,\"ＳＴＡＮＤＡＲＤ\",0,4,3],[34.826,135.471734,\"インザバーバー　箕面牧落店\",0,1,2],[34.831871,135.467889,\"ＰＩＬＩＬＡＮＩ　ＣＨＯＰ　ＳＨＯＰ\",0,0,0],[34.817007,135.458761,\"Ｍｅｔｅｏｒ\",0,2,0],[34.826044,135.467481,\"さろんどぶん\",1,1,0],[34.836055,135.481597,\"ハリウッド  美容室\",1,3,2],[34.825488,135.464528,\"カットスタジオ  メモリータイム\",1,1,0],[34.826075,135.466677,\"ル  プラウ\",1,1,0],[34.817391,135.45986,\"フミ  美容室\",1,2,1],[34.817391,135.45986,\"美容室  さざえさん\",1,2,1],[34.818608,135.484782,\"カットクラブ\",1,4,2],[34.834328,135.470858,\"ら・あさひ\",1,0,0],[34.830909,135.475488,\"ビューティサロン  マリ\",1,0,2],[34.830909,135.475488,\"ビューティーアトレ\",1,0,2],[34.833391,135.478245,\"若草  美容室\",1,0,2],[34.819663,135.469081,\"マキ  美容室\",1,1,2],[34.822865,135.466365,\"美容室  フェイバリット\",1,1,1],[34.823372,135.466363,\"カズ  美容室\",1,1,1],[34.823034,135.465911,\"巴亜麻屋\",1,1,1],[34.834073,135.47483,\"ヘアーハウス  シリアス\",1,0,2],[34.814049,135.459771,\"ビューティサロン  ミスミ\",1,2,0],[34.814717,135.457254,\"美容室  ケイズ\",1,2,3],[34.815244,135.457666,\"くるみ  美容室\",1,2,3],[34.826044,135.467481,\"ビューティサロンＫ\",1,1,0],[34.838356,135.486096,\"Ｔｅｅｓ  ｍｅｔｈｏｄ\",1,3,2],[34.818747,135.463989,\"ヘアーサロン  トプハロック\",1,2,3],[34.831672,135.464518,\"ちぐさ美容室\",1,0,3],[34.824929,135.465599,\"ヘア・サロン  ウィッシュ\",1,1,0],[34.818513,135.489765,\"ジェミニ美容室\",1,4,3],[34.817043,135.460128,\"ビューティタナカ\",1,2,1],[34.826,135.471734,\"Ａｉｌｅ  Ｄ’Ｏｒ\",1,1,2],[34.833397,135.468699,\"ＨａｉｒＰｌａｎｎｉｎｇ  Ｌａ  Ｃｅｒｏ\",1,0,1],[34.816632,135.467378,\"美容室  リンカ\",1,2,2],[34.833397,135.468699,\"美容室まろうど\",1,0,1],[34.819364,135.489407,\"匠美容室\",1,4,0],[34.833246,135.490237,\"Ｆ‐ｃｏｌｌｅｃｔｉｏｎ　箕面店\",1,3,0],[34.834018,135.491137,\"美容プラージュ  箕面萱野店\",1,3,3],[34.827753,135.474209,\"樹美容室\",1,1,2],[34.82894,135.470934,\"ＫｗａａｔｓｉＷａｍ\",1,0,2],[34.834438,135.468923,\"ｂｌａｎｃ\",1,0,1],[34.833265,135.464897,\"ＯＮＺＥ\",1,0,3],[34.832855,135.469795,\"樹  美容室\",1,0,0],[34.833112,135.471053,\"ｈａｉｒ  ｃｏｍｆｏｒｔ\",1,0,0],[34.817961,135.459515,\"サロン・ド・コワヒュール  Ｈａｎａｏ\",1,2,0],[34.823435,135.460278,\"リラクゼーションルーム  マリソン\",1,1,2],[34.833553,135.492408,\"ｈ  ＡＩＲ  ＦＬＯＷ\",1,3,3],[34.82621,135.472808,\"ｈａｉｒ  ７ｓ  ｂｅｌｌ\",1,1,2],[34.835829,135.488885,\"HAIR STUDIO BANANA MOON EAST\",1,3,3],[34.819098,135.487638,\"ＪＩＭＡ\",1,4,3],[34.832212,135.490576,\"ヘア＆メイク　ラ・シェンテ\",1,3,1],[34.82621,135.472808,\"Ａｔｅｕ　Ｈａｉｒ\",1,1,2],[34.81858,135.46303,\"アトリエ　ナチュ\",1,2,0],[34.820378,135.491275,\"FURUNE（－風蘭－）\",1,4,0],[34.82237,135.465203,\"さくら美容室\",1,1,1],[34.815583,135.461288,\"ｈａｉｒ　ｍａｋｅ　ａｇｒｅｅ\",1,2,1],[34.81613,135.460448,\"Hair make Prime\",1,2,1],[34.824335,135.462293,\"美容室Ｓｏｒａ\",1,1,3],[34.830199,135.470734,\"Artistic sensibility international\",1,0,2],[34.824773,135.472047,\"ＨＡＩＲ　ＭＡＫＥ　Ａⅰｌａ\",1,1,2],[34.834964,135.471025,\"ＭＥＥＴＳ\",1,0,0],[34.816481,135.459064,\"美容室　Ｃｏｚｙ*\",1,2,0],[34.834328,135.470858,\"ｍｕｓｅ　Ｄａｎａｅ\",1,0,0],[34.826269,135.465662,\"ｆａｍｉｌｌ\",1,1,0],[34.83546,135.484135,\"Ｌ＆Ｄ\",1,3,2],[34.828558,135.470335,\"ＡＩＲ　ＦＬＯＷ　ＡＭＢＩＴＩＯＮ\",1,0,2],[34.83474,135.491804,\"ａｔｅｌｉｅｒ　Ｌ’ｅｃｒｉｎ\",1,3,3],[34.837809,135.48409,\"ＬＯＶＥＥＤ\",1,3,2],[34.822095,135.480401,\"Ｓａｌｏｎ　ｄｅ　Ｌａｚｏ\",1,4,2],[34.828714,135.487128,\"ｍｏｌｅｋ　ｈａｉｒ　ＧＡＲＤＥＮ\",1,3,3],[34.830911,135.468724,\"ＨＡＩＲ　ＡＮＧＥＬ　ＲＩＮＧ\",1,0,3],[34.822264,135.471857,\"ビューティーサロン　クリエート\",1,1,2],[34.832855,135.469795,\"美容室めぞん・ど・ぼーて箕面店\",1,0,0],[34.830565,135.473424,\"ＨＡＩＲ　ＳＴＡＧＥ　ＧＲＯＷ\",1,0,2],[34.833383,135.472081,\"ｃｕｔ　ａ　Ｄａｓｈ\",1,0,3],[34.819644,135.4684,\"サロン　Ｃｉｅｌｏ\",1,1,3],[34.825662,135.45749,\"ｃｕｏｒｅ\",1,1,2],[34.826327,135.470569,\"パンドラ美容室\",1,1,2],[34.832013,135.478779,\"アトリエ リラ\",1,3,2],[34.826,135.471734,\"Ｈａｉｒ　ｃｌｉｎｉｃ　ｇ\u0026#x27;ｎｏｍｅ\",1,1,2],[34.817562,135.460945,\"ｒｏｃｃｏ．\",1,2,1],[34.835613,135.490839,\"ＨＡＩＲ　ＳＡＬＯＮ　ＲＥＤ　ＷＥＬＬ\",1,3,3],[34.832666,135.492048,\"BeautyResort美be\",1,3,0],[34.834328,135.470858,\"Ｒｉｓｅｓｈｕ　箕面店\",1,0,0],[34.820603,135.45979,\"ＨＡＩＲ　ＳＴＵＤＩＯ　ＹＯＵ\",1,2,3],[34.832184,135.471231,\"ラッキーヘアー箕面\",1,0,3],[34.834607,135.467483,\"カットハウスＣＯＣＯ\",1,0,1],[34.836044,135.468594,\"ファインモーグル\",1,0,0],[34.835171,135.490531,\"アイラッシュ＆エステ　Ｗｉｓｈ\",1,3,3],[34.825107,135.467576,\"Ｄａｉｎ\",1,1,0],[34.822992,135.484763,\"美容室ミスミ\",1,4,2],[34.826044,135.467481,\"ＴＨ　Ａｓｐｉｒａｔｉｏｎ\",1,1,0],[34.822607,135.491432,\"ＨａａＬＫ～２ｎｄ～\",1,4,1],[34.825489,135.468494,\"Ｎｅｘｔ．ｈａｉｒ\",1,1,3],[34.825651,135.465447,\"ｕｎａｃａｓａ箕面\",1,1,0],[34.831871,135.467889,\"ＰＬＵＳＴＩＣ\",1,0,0],[34.82906,135.467937,\"Ｅｃｒｉｎ　Ｂｌａｎｃ\",1,0,2],[34.827832,135.496676,\"Organic Hair Salon for you\",1,3,2],[34.833082,135.488199,\"ＱＢハウス　みのおキューズモール店\",1,3,0],[34.824929,135.465599,\"yookihair\",1,1,0],[34.821013,135.492225,\"サロン凛\",1,4,0],[34.833397,135.468699,\"ママス　箕面店\",1,0,1],[34.823197,135.465214,\"Ｈａｉｒ　Ｍｕｋｕｎａ\",1,1,1],[34.825422,135.466688,\"ＭＯＤＥＫ’ｓ　ＳＵＮＮＹ　ＧＲＡＣＥ\",1,1,0],[34.832855,135.469795,\"美容室　響\",1,0,0],[34.820508,135.47008,\"ＥＩＮＥ ＫＬ ＥＩＮＥ\",1,1,2],[34.81908,135.488418,\"ＬＩＢＥＲＴＡ　Ｌ＋\",1,4,3],[34.819364,135.489407,\"ｗｈａｒｆ　ｗｅｓｔ\",1,4,0],[34.832184,135.471231,\"Ｂｌｉｓｓ　ｐｒｏｄｕｃｅｄ　ｂｙ　ＳｙｉＳｙｕ\",1,0,3],[34.833397,135.468699,\"ａｉｒ．\",1,0,1],[34.8141,135.45583,\"natural hair Ribra\",1,2,2],[34.83474,135.491804,\"ＰＵＴＩＣＡ\",1,3,3],[34.838067,135.487528,\"Ｂｒｉｌｌｉａｎｔｌｙ\",1,3,2],[34.831465,135.467135,\"カラーカット工房\",1,0,3],[34.832855,135.469795,\"ＴＡＯ　ＨＡＩＲ\",1,0,0],[34.819364,135.489407,\"ネイル＆アイラッシュサロンＪＯＪＯ\",1,4,0],[34.818608,135.484782,\"４－ｌｅａｆ ｈａｉｒ ｓａｌｏｎ\",1,4,2],[34.822716,135.486622,\"ＡＤＡＮ\",1,4,3],[34.833383,135.472081,\"リアルビューティ－サロン　プリンストン\",1,0,3],[34.82347,135.471561,\"ｅｓｏｒａ\",1,1,2],[34.824894,135.469229,\"ｍｉｎａｔｏ\",1,1,3],[34.81703,135.460921,\"ｓｏｓｏ\",1,2,1],[34.830909,135.475488,\"ＦＡＣＥ ＴＯ ＦＡＣＥ\",1,0,2],[34.828568,135.497068,\"Ｌｅ ｃｏｎｔｅ’箕面船場店\",1,3,2],[34.82552,135.474626,\"Ｐｒｉｖａｔｅ　ｓａｌｏｎ　ｌｉｌａｓ\",1,1,2],[34.821553,135.49173,\"Ｐｒｉｍａｖｅｒａ　ｆｏｒ　ｍｅｎ\",1,4,1],[34.831311,135.470793,\"Ｃａｐｕｌｌｏ.Ｈａｃｃｈｉ．\",1,0,3],[34.81703,135.460921,\"ＨＡＩＲ＆ＳＰＡ　ｅｔｏｉｌｅ\",1,2,1],[34.815244,135.457666,\"Ｐｅｃｏｒａ\",1,2,3],[34.823197,135.465214,\"ＳＨＥＬＬ　ｂｙ　ｋｏｓｏｒａ\",1,1,1],[34.826766,135.472696,\"夢見心地\",1,1,2],[34.831311,135.470793,\"ＫＯＳＯＲＡ\",1,0,3],[34.83312,135.489271,\"ビューティーアイラッシュ　みのおキューズモール店\",1,3,0],[34.815604,135.451933,\"ＥＬＬＥ\",1,2,2],[34.818345,135.488376,\"Ｂｅｌｌｅ　ｆｉｌｌｅ\",1,4,3],[34.831871,135.467889,\"ＬＩＶ\",1,0,0],[34.834701,135.471561,\"ｓａｌｏｎ　ｃｌａｒａ\",1,0,0],[34.817961,135.459515,\"Any eyelashsalon＆hair\",1,2,0],[34.822264,135.471857,\"ｃａｆｉｋａ\",1,1,2],[34.829613,135.471255,\"ｓｉｄａ　ＭＩＮＯＨ\",1,0,2],[34.831465,135.467135,\"Ｌｉｅｎ\",1,0,3],[34.831553,135.486123,\"ｓｕｕ. ｅｙｅｌａｓｈ ｓｐａ\",1,3,0],[34.826561,135.475205,\"ｔｓｕｍｕｇｉ　ｅｙｅｌａｓｈ\",1,1,2],[34.832422,135.48519,\"Ｈａｉｒ Ｃｏｌｏｒ Ｓａｌｏｎ Ｌｅ’ａ\",1,3,3],[34.833397,135.468699,\"こっとん\",1,0,1],[34.829683,135.466803,\"ｈａｉｒ ｍａｋｅ Ｍｅｒｃｉ\",1,0,2],[34.817963,135.462083,\"．ｒｉｔｅ\",1,2,0],[34.829231,135.466465,\"艶髪専門店ｇｌｏｓｓ\",1,0,2],[34.829668,135.485188,\"スタジオコフレ箕面スタジオ\",1,3,3],[34.825107,135.467576,\"Ａｇｕ ｈａｉｒ ｓｏｎａ 箕面店\",1,1,0],[34.8352,135.46913,\"完全個室・デザインカラ―＆髪質改善＆ショートカット salon Labimani 箕面店\",1,0,1],[34.81893,135.489592,\"Ａｏ ｈａｉｒ ｒｏｏｍ\",1,4,0],[34.832666,135.492048,\"Ｔｅｒｒａｃｅ箕面萱野\",1,3,0],[34.834887,135.470053,\"Ｌｅ　ＪＡＲＤＩＮ箕面\",1,0,0],[34.830911,135.468724,\"Ｌｅｋａｌｏｔｔｏ\",1,0,3],[34.829507,135.48907,\"ＬＯＴＵＳ\",1,3,0],[34.822607,135.491432,\"ｌｅ’ａ\",1,4,1],[34.816481,135.459064,\"Ｒｕｕ\",1,2,0],[34.82974,135.470067,\"染の庭\",1,0,2],[34.823694,135.489938,\"ＡＶＡＮＣＥ．箕面\",1,4,0],[34.823451,135.48263,\"パーソナルヘアサロン ＣＨＩＷＳ\",1,4,2],[34.819098,135.487638,\"chan.\",1,4,3],[34.831886,135.493033,\"eyesalon MIRI\",1,3,3],[34.815675,135.462235,\"リッツヘア\",1,2,0],[34.833112,135.471053,\"Ｅｌｉｓｅ\",1,0,0],[34.833112,135.471053,\"Ｔｈｅ Ｅｃｔ Ｌｉｅｎ 箕面店\",1,0,0],[34.82974,135.470067,\"ｂｏｕｌａｒｄ 箕面メイプルホール前店\",1,0,2],[34.823348,135.487571,\"ＲｉＰ－Ｋｕ １８\",1,4,0],[34.823849,135.493662,\"ＢＥＡＵＣＣＡ\",1,4,3],[34.833966,135.488195,\"髪質改善サロンan nui 箕面萱野\",1,3,0],[34.832855,135.469795,\"ＲＡＵＭ\",1,0,0],[34.833397,135.468699,\"Ｂｕｔｌｅｒ’ｓ　Ｇｒａｃｅ\",1,0,1],[34.81613,135.460448,\"Ｅｙｅ　Ｄｅｓｉｇｎ　ｌ’ｏｅｉｌ\",1,2,1],[34.833966,135.488195,\"Ａｎｔｈｕｒｉｕｍ箕面萱野\",1,3,0],[34.823348,135.487571,\"haku.hair箕面店\",1,4,0],[34.827719,135.493925,\"atelier st.face\",1,3,2],[34.834219,135.479278,\"ロレアルサロン  モア箕面店\",1,3,2],[34.823849,135.493662,\"Ｓｕｑ．\",1,4,3],[34.823849,135.493662,\"Ｐｒｉｍａｖｅｒａ　箕面店\",1,4,3],[34.823849,135.493662,\"Sanctuary 箕面店\",1,4,3],[34.833187,135.497181,\"ＬＵＥＡ\",1,3,2]]");
+                var cluster = L.markerClusterGroup({
+  "animate": false,
+});
+                cluster.options.iconCreateFunction =
+                    function (cluster) {
+            var count = cluster.getChildCount();
+            var size = count <= 3 ? 18 : count <= 10 ? 26 : count <= 50 ? 34 : 42;
+            var fontSize = Math.max(9, Math.round(size * 0.42));
+            return new L.DivIcon({
+                html: '<div style="width:100%; height:100%; border-radius:50%; ' +
+                    'background:#1baf7a; opacity:0.85; ' +
+                    'border:1px solid rgba(0,0,0,0.4); display:flex; ' +
+                    'align-items:center; justify-content:center; color:#fff; ' +
+                    'font-size:' + fontSize + 'px; font-weight:600;">' +
+                    count + '</div>',
+                className: 'business-cluster-icon',
+                iconSize: new L.Point(size, size)
+            });
+        };
+
+                for (var i = 0; i < data.length; i++) {
+                    var row = data[i];
+                    var marker = callback(row);
+                    marker.addTo(cluster);
+                }
+
+                cluster.addTo(feature_group_0f552af9f3d803bae9e19b05e53a3ef6);
+                return cluster;
+            })();
+        
+    
+            fast_marker_cluster_0f76eb6641aa19807888317cd05e4cc8.addTo(feature_group_0f552af9f3d803bae9e19b05e53a3ef6);
+        
+    
+            feature_group_0f552af9f3d803bae9e19b05e53a3ef6.addTo(map_dce5ea9e10accfdfce8985e1ef0e47d5);
+        
+    
+            var layer_control_13d7632cfc043dab2f3f6d26b75f3c2d_layers = {
+                base_layers : {
+                    "Minoh Rail Business Density Heatmap" : tile_layer_6f215352c0d311c6a2e4ac2c2f27d87e,
+                },
+                overlays :  {
+                    "Commercial Density (Within Station Proximity)" : heat_map_d6984d4a06fe81201cb15983792dfaf0,
+                    "Commercial Density (All Minoh Businesses)" : heat_map_d2412e1294a82c2f6783832a9d777e99,
+                    "Concentric Ring 1: 0-0.1 mi" : feature_group_9e03de2acf9b4543c8bf41740d7f1a81,
+                    "Concentric Ring 2: 0.1-0.2 mi" : feature_group_bd82d2629a74a7efb443b51aae609ec0,
+                    "Concentric Ring 3: 0.2-0.3 mi" : feature_group_d60d62699bf5eb8556ca9dc77fc82b0a,
+                    "Concentric Ring 4: 0.3-0.6 mi" : feature_group_aa811e9ee45e5a8316801fcee086555d,
+                    "\u003cb\u003eBusinesses: Personal services (213)\u003c/b\u003e" : feature_group_0f552af9f3d803bae9e19b05e53a3ef6,
+                },
+            };
+            let layer_control_13d7632cfc043dab2f3f6d26b75f3c2d = L.control.layers(
+                layer_control_13d7632cfc043dab2f3f6d26b75f3c2d_layers.base_layers,
+                layer_control_13d7632cfc043dab2f3f6d26b75f3c2d_layers.overlays,
+                {
+  "position": "topleft",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_dce5ea9e10accfdfce8985e1ef0e47d5);
+
+        
+</script>
+</html>
