@@ -70,6 +70,234 @@ Each city's own parked calls and proposals are under its entry below
 
 ## Changes
 
+### 2026-10-11 - Yamagata built, the city's food-permit list of August 31, 2026 with MHLW's notifications, food only
+
+- **Yamagata built (page 266, notice 213), Hiroshima's page shape (food
+  only) on Okazaki's mechanics (a complete city list, MHLW's notifications
+  and points): 3,280 storefronts (Food service 2,264, Food shops 1,016)
+  around 11 stations on 3 lines, 34.0% of them in a ring (1,114, step 3) on
+  the standard rings.** Sources: Yamagata City's
+  食品営業許可施設一覧（オープンデータ）, `062014_syokuhin_list_20260831.csv`,
+  3,584 permits in term on 2026-08-31 (CC BY 4.0 through
+  山形市オープンデータ利用規約, read 2026-10-07 by staging; clause 4 accepted
+  by the owner, call 206), and MHLW's file for 06201 (5,287 rows: 1,925
+  notifications read, 3,362 permits not added). Built by a Regional-2
+  subagent.
+- **The brief check passed 5 of 7, and the two failures are the city's
+  monthly refresh.** On 2026-10-10 the city replaced the August list with
+  `062014_syokuhin_list_20260930.csv` (CSV 464.4 KB by the page); the August
+  URL answers 404 and the page no longer links it. The build reads the
+  cached August edition, the one the brief measured and the one that pairs
+  with the cached MHLW file (grants to 2026-08-31). `SOURCE_LINKS` reads the
+  current link from the page on a refresh (Akita's pattern); provenance
+  records the August file's sha256. The brief's two checks need the new file
+  name at the refresh (parked call 1).
+- **Step 2 against the brief.** City rows 3,584, MHLW notifications 1,925.
+  Set aside as area-wide 238 (県内一円: 237 city rows, 235 of them
+  restaurants; 1 notification), not a premises 118 (山形県内一円: 38 city
+  restaurant permits; 80 notifications): the brief's 275 city rows, 273
+  restaurants. No address 782 (city 267, of which 265 carry no name either
+  and 222 are restaurants; MHLW 515); the city's key is in
+  `ADDRESS_BY_CONSENT` because the brief read these rows as the operator's
+  opt-out. 2 closed notifications; 0 past term, 0 late starters. Not a
+  storefront 741 (no rule 324, vending 230, institutional catering 110,
+  temporary or mobile 68, mail order 9). Storefront rows 3,628: Food service
+  2,330 and city Retail 535 (both the brief's exactly), MHLW Retail 763 (the
+  brief's). 130 city rows dropped for MHLW's row of the same premises
+  (`SUPERSEDES`, Okazaki's and Matsuyama's direction); 191 repeat permits
+  shown once (the brief counted 61 inside the city's list; the rest are
+  MHLW's). 菓子 / そうざい 311 rows, 23 factory-like (7.4%), kept.
+- **The join (3,628 rows):** block 3,320 (91.5%; the brief 91.7% on the
+  city's rows), MHLW's own point 222 (6.1%: 96 notifications through
+  `OWN_POINT_FALLBACK`, 126 city rows through `POINT_DONORS`), town-chōme
+  centre 56, 小字 centre 3, unplaced 27 (0.7%, all city rows: 24 Food
+  service, 3 Retail). On the map's 3,280 pins: block 92.4%, MHLW's point
+  5.9% (193), town-chōme 1.6% (54), 小字 0.1% (3). MHLW's notification points
+  sit a median 46 m from the block point (94.5% within 250 m; 667 rows).
+- **The unplaced 27 are the brief's 蔵王温泉 rows, and shared code does not
+  yet place them** (23 of 27: 上ノ台 7, 上ノ代 5, 荒敷 3, 川前 3, 清水坂, 横倉外,
+  大字上宝沢外, 川原, 中森; the other 4: 壇野前 2, 大字菅沢鬼越, 大字中野楯). The
+  brief's "⚠️ Shared code" item (a rule cutting 蔵王温泉 at its 小字, the ノ /
+  の fold) is in `japan_register.spelling5`'s comment for 上ノ台 but those
+  rows still miss. `POINT_DONORS` matches on town and trade name, so it
+  placed 10 of the brief's 40 unplaced where the brief's permit match placed
+  35. Nothing was patched (parked call 2). None of the 27 is near a station:
+  Zaō Onsen is about 12 km from 蔵王 station.
+- **Call 182 (the name rule through the permit match) is built in the
+  config, on Kyoto's mechanism.** The city's file has an empty 法人名 on every
+  row, so the shared rule compares nothing for it. `config.source_rows`
+  reads MHLW's 法人名 in memory for the permit of the same number (digits)
+  and grant date and puts only the rule's ANSWER on the city row
+  (`name_is_operator`, the key `japan_register.name_is_operator` already
+  reads for Kyoto's rebuilt register); no name leaves the function. Matched:
+  3,000 of 3,584 city rows. Flagged: **3** (2 restaurant permits, 1
+  そうざい), where the brief read 4; a looser match (digits and type, or the
+  trade-name key) finds no fourth (scratch `probe3.py`). 1 of the 3 is at a
+  fixed address. MHLW's own rows: 19 flagged in the whole file, 16 of them
+  notifications. On the map: 3 pins show their permit type (1 city row, 2
+  notifications). This is a city-local hook with no exact twin in a built
+  city: a shared-code finding for review time (parked call 3).
+- **No 業態 borrow.** The brief left borrowing MHLW's 業態 through the same
+  permit match to the build ("if the build wants FORM_RULES on the city's
+  rows"). Not built: it changes which rows count, which is a call (parked
+  call 4). The city's rows are classified by permit type alone, as Aomori's
+  and Kobe's.
+- **The share:** 2,770 restaurant permits against e-Stat's 2,789 in force on
+  2025-03-31 (99.3%, the brief's); 2,275 at a fixed address (81.6%). No
+  coverage sentence on the page; the withheld rows are disclosed instead
+  (one restaurant permit in twelve, 222 of 2,770).
+- **Census control (`japan_census_control.py yamagata`):** 2,264 Food
+  service pins against 1,215 establishments in the 2021 Economic Census,
+  1.86 per establishment (the brief's estimate exactly), inside the built
+  cities' 1.56 to 1.92. A list with no 業態 column counts konbini,
+  supermarkets and hotels holding 飲食店営業 as Food service, each permit
+  holder a pin.
+- **Rail:** step 1 reproduces the brief: 13 station records, 11 groups (Ou
+  6, Senzan 5, Aterazawa 2; 北山形 one group, 63 m; 羽前千歳 one group), no
+  Shinkansen record in the city. 7 stations beyond the line within 3 km are
+  listed (上山市 2, 天童市 2, 中山町 2, 山辺町 1); none in Sendai (the Senzan
+  Line's next station is over 3 km beyond the line). Median nearest-station
+  gap 2,221 m (minimum 1,344 m), as the brief: standard rings. Ring counts:
+  山形 813, 北山形 124, 羽前千歳 45, 面白山高原 0.
+- **Gate 3 has no in-city count (Aomori's and Fukui's shape):** no line is
+  wholly inside the city and the brief names no JR East station list, so
+  none was fetched. `GATE3["lines"]` is empty.
+- **Frequency:** nothing at about 11 trains a day or fewer (16 to 19 weekday
+  departures each way on every line, the brief's read of 2026-10-06); no
+  low-frequency bullet. The seven intermediate stations stay asserted.
+- **Station names:** 20 OSM objects, 19 with `name:en` (the one without,
+  天童南, is outside the city). 11 names read: none translated, no numeral.
+  1 override, Omoshiroyama-Kogen for OSM's Omoshiroyama-Kōgen, so the city's
+  names share one style with Zao, which OSM writes without a macron
+  (Okazaki's and Hiroshima's style). The other 10 stand.
+- **Line names:** "JR Ou Line" (the registry's), "JR Senzan Line", "JR
+  Aterazawa Line" (no other config draws the last two).
+- **Line colours:** the Ou Line takes `#E07800` from
+  `pipeline/line_registry.py`; the Senzan Line is `#28A800` and the
+  Aterazawa Line `#0098D8` (`line_colour_search.py yamagata`, 2026-10-11).
+  Against the three pins (CIE76): 53.6, 45.6 and 70.6; closest pair 94.2;
+  the dark-mode labels separate, 3 of 3. None between 20 and 45.
+- **Privacy verdict: publish.** `check_personal_exposure.py yamagata`: the
+  Japan pass prints 0 of 3,280; 19 trade names in the raw files are an
+  operator's own name; 3 pins show their permit type. 0 bare personal names
+  among the city's trade names. On the map's rows 1 published name is
+  damaged and shows its permit type (`map_common.glitched_name`); 0 blank.
+- **The notice's credit** uses the terms' prescribed form (2(3)) with the
+  catalogue title of the edition read, 令和8年8月31日時点で営業中の
+  食品営業許可施設一覧, as the licence read recorded it; the title changes
+  with each month's edition.
+- **Overpass:** the first names query failed on both mirrors (HTTP errors);
+  retried once after more than 60 s under the session lock, 20 elements.
+  Every request used the project's own user-agent (`japan_fetch`, and
+  `osm.OVERPASS_USER_AGENT` for one GET of the dataset page to read its
+  links).
+- **Not run:** the GSI sample (the brief does not ask for it), drift, the
+  provenance and scope checks (the lead's). `check_no_em_dashes.py` and
+  `check_no_fetch_in_steps.py` OK. The ring total by a scratch buffer reads
+  1,113 (Food service 821, Food shops 292) against step 3's 1,114; the
+  bucket split in `map_inconsistencies` is the scratch one.
+- Files: `pipeline/yamagata/` (config, fetch_sources, steps 1 to 3),
+  `outputs/yamagata/` (heatmap.html, excluded_stations.csv,
+  provenance.json).
+
+#### Parked calls
+
+1. **Which edition: August (built) or September (live since 2026-10-10).**
+   *Recommend* landing August as built: it is what the brief measured, it
+   pairs with the cached MHLW file, and every figure is checked against it.
+   Tradeoff: the pinned URL is dead and a fresh checkout cannot re-fetch
+   that edition; the September file (and a matching MHLW download) means a
+   new file name, `FOOD_AS_OF` 2026-09-30, a re-measure of every figure and
+   a corrected brief-checks block.
+2. **蔵王温泉's 小字 addresses (23 unplaced rows) and the permit match for
+   `POINT_DONORS`.** *Recommend* a shared-code look at review time: either
+   the 小字 cut for 蔵王温泉上ノ台 / 上ノ代 / 荒敷 / 川前, or a donor match on the
+   permit number where both files carry it (the brief: 35 of 40 placed).
+   Tradeoff: every city screen and the Minato control re-run for about 25
+   restaurants in a resort 12 km from the nearest station; no ring count
+   moves.
+3. **Call 182's hook lives in the city's config.** `source_rows` carries the
+   name rule's answer from MHLW's 法人名 through the permit match (Kyoto's
+   `name_is_operator` key). *Recommend* keeping it and, if a second city
+   needs it (a city list with no operator column beside MHLW's file), moving
+   it into `japan_step2` as a config key. Tradeoff: one more city-local
+   hook until then; without it the 3 names would show.
+4. **MHLW's 業態 for the city's rows through the same match.** *Recommend*
+   not borrowing (built so): Aomori's, Kobe's and Okazaki's lists also have
+   no 業態 and count konbini and hotels holding a restaurant permit as Food
+   service, and the census ratio (1.86) is inside the built range. Tradeoff:
+   about 2,300 of the 2,770 restaurant permits could be read by form
+   (konbini to Food shops, hotel and school kitchens out), which would make
+   Yamagata stricter than its neighbours.
+5. **Sendai in the "running on to" bullet.** The bullet names Kaminoyama,
+   Tendō, Sendai, Yamanobe and Nakayama; `excluded_stations.csv` has no
+   Sendai station (the Senzan Line's next one is over 3 km beyond the line).
+   *Recommend* keeping Sendai (it is where the line runs on to; Aomori's
+   Hiranai is the same case). Tradeoff: the bullet names a city the list
+   below does not.
+6. **Gate 3 against JR East.** *Recommend* accepting Aomori's shape as
+   built. Tradeoff: JR East's line pages would confirm N02's 105, 18 and 11
+   whole-line totals, but the brief names none, so each is a fetch to
+   approve.
+7. **`coverage` in `cities_fields.txt`.** Written as Okazaki's ("narrowed",
+   "No Personal services; Retail thin"), the same source shape; Aomori's
+   food-only entry reads "one_bucket". *Recommend* the lead pick one for the
+   batch's food-only pages with MHLW's layer.
+
+#### Proposals
+
+Sentences no template covers, each adapted from an approved bullet:
+
+- Page: "Yamagata City's lists of barbers, beauty salons and laundries hold
+  only premises opened since April 2019, so personal services are not on
+  this map." (from Aomori's proposal; the reason is call 138's)
+- Page: "From Yamagata City's list of food-business permits (as of August
+  31, 2026)." (the template's sentence with the registers clause removed,
+  as Hiroshima's and Okazaki's)
+- Page: "About 270 restaurant permits are registered for the whole
+  prefecture rather than an address, which are event stalls and food
+  trucks; they are not on this map." (from Aomori's whole-city bullet)
+- Page: "About one restaurant in twelve in Yamagata chose not to publish its
+  name and address in the city's list and is not on this map. Where they
+  are is not known." (Hiroshima's sentence, "in the national filing system"
+  replaced: here the city's own list withholds them)
+- Page: "The Shinkansen is not drawn (Yamagata appears as a JR Ou Line
+  station)." (the template's form; the Yamagata Shinkansen has no station
+  record of its own in N02)
+- Notice 213, completeness sentence: "The city's list leaves out the name
+  and address of permits whose operators did not agree to publish them, and
+  the ministry's list holds only filings whose applicants agreed to publish
+  them; neither is complete." (from Okazaki's)
+- Notice 213, processing sentence: Okazaki's, with "left out permits
+  registered across the prefecture rather than at an address," added.
+- Excluded section: "267 permits the city's list publishes without an
+  address, 265 of them without a name either, because the operator did not
+  agree to publication: 222 of them are restaurant permits, about one
+  restaurant permit in twelve. Where they are is not known."
+
+#### Registry
+
+- `jr-east-ou-line`: add `"yamagata": "OU"` to `maps`.
+- The JR Senzan Line (`SZ`, `#28A800`) is new to the site. Sendai, the only
+  other city it serves, is not built and not in this batch (it waits on the
+  city's permission), so no entry was needed for `check_line_identity`; if
+  the lead wants it registered ahead of Sendai: `jr-east-senzan-line`,
+  "JR Senzan Line", JR East, `#28A800`, `maps: {"yamagata": "SZ"}`. Note the
+  value equals Aomori's Tsugaru Line and the Aichi Loop Line (different
+  lines on maps that do not meet).
+- The JR Aterazawa Line (`AT`, `#0098D8`): no other built or batch city
+  draws it; no entry.
+
+#### Downstream
+
+- Notice 213, Yamagata City (CC BY 4.0 through the city's terms): 2(3)
+  prescribes a credit line naming the work, the city and the licence for a
+  modified work; it does not say where the line must sit, so caption only
+  is defensible, card face not required. The title in the credit is the
+  August 2026 edition's and changes at a refresh. MHLW (PDL 1.0) and MLIT
+  as on every Japanese card. Open terms question: none beyond clause 4,
+  accepted (call 206); the terms are re-read before each refresh (clause 1).
+
 ### 2026-10-11 - Tottori built, the national food filings alone, food only
 
 - **Tottori built (page 265, notice 212), Kurume's and Uji's shape (MHLW's

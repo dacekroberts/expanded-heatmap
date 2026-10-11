@@ -6167,6 +6167,60 @@ line.
   Inaba-Yashiro.
 - No Shinkansen runs here.
 
+### Yamagata - the city's food-permit list and the national notifications, joined to MLIT's address blocks
+
+**Left out**
+- Barbers, beauty salons and laundries: the city's lists of them hold only
+  premises opened since April 2019, so this map shows food businesses only.
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, except where the national filings
+  include notifications.
+- 275 permits in the city's list registered across the prefecture (県内一円
+  and 山形県内一円) rather than at an address, which are event stalls and food
+  trucks: 273 restaurant permits and 2 others. Another 81 national
+  notifications are addressed the same way.
+- 267 permits the city's list publishes without an address, 265 of them
+  without a name either, because the operator did not agree to publication:
+  222 of them are restaurant permits, about one restaurant permit in twelve.
+  Where they are is not known.
+- 515 national notifications whose filers did not publish an address.
+- 171 rows of the city's list for food manufacturing other than bakeries and
+  confectioners (菓子) and delis (そうざい), such as pickles, noodles, miso
+  and soy sauce, and 153 national notifications of types that are not a
+  counter.
+- 230 vending machines, 110 school, hospital and staff canteens, 68
+  temporary or mobile filings and 9 mail-order businesses.
+- 2 national notifications marked closed.
+
+**Counted** - every food permit in the city's list in term on August 31,
+2026 (3,584 permits, 2,770 of them restaurant permits, against 2,789 in the
+national count of March 31, 2025; 2,275 restaurant permits are at a fixed
+address), and the national notifications as downloaded on October 6, 2026.
+The city's list has no form-of-business column, so a convenience store,
+supermarket or hotel that holds a restaurant permit is counted as Food
+service. 23 of the 311 bakery, confectioner and deli premises (7.4%) have a
+trade name that reads as a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 191 repeat permits are shown once, and 130 rows of
+the city's list for a premises already in the national notifications.
+
+**Not placed** - 27 rows of the city's list (0.7%), 23 of them in the Zaō
+Onsen resort, whose addresses name small localities MLIT's files do not
+hold. Of the 3,280 pins, 193 sit at the ministry's own coordinates, 54 at
+their town's center and 3 at the center of their 小字 (a named part of a
+town).
+
+**Names not shown** - 3 pins whose trade name is the operator's own name
+show their permit type, and 1 pin whose published name is damaged shows its
+permit type.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line: JR East's Ou, Senzan and Aterazawa lines.
+- Left out: 7 stations beyond it, 2 in Kaminoyama, 2 in Tendō, 2 in Nakayama
+  and 1 in Yamanobe.
+- The Shinkansen is not drawn: the Yamagata Shinkansen's trains run over the
+  Ou Line's track, and Yamagata appears as a JR Ou Line station.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

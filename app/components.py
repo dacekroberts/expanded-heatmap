@@ -659,7 +659,7 @@ _OSM_STATION_NAMES = (
     # Kansai-1 (2026-10-07)
     "Toyonaka", "Hirakata", "Suita", "Itami", "Kakogawa", "Amagasaki", "Uji",
     # Regional-2 (2026-10-11)
-    "Shizuoka", "Aomori", "Okazaki", "Kanazawa", "Matsue", "Fuji", "Matsumoto", "Tottori",
+    "Shizuoka", "Aomori", "Okazaki", "Kanazawa", "Matsue", "Fuji", "Matsumoto", "Tottori", "Yamagata",
 )
 
 # Verbatim where verbatim is required. Each entry is a Notice, and the sources
@@ -3257,6 +3257,35 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The list may include premises that have closed. "
      "MHLW and MLIT did not make and do not endorse this map.",
      False, ("Tottori",)),
+    # Yamagata (notice 213): the city's 食品営業許可施設一覧（オープンデータ）,
+    # page 1012802 on its own site, CC BY 4.0 through 山形市オープンデータ
+    # 利用規約 (read 2026-10-07 by staging: permitted with conditions; clause
+    # 4, a reimbursement triggered by use, accepted by the owner, call 206),
+    # credited in the terms' form for a modified work (2(3)): the catalogue
+    # title of the edition read (it changes each month), 山形市, the CC BY 4.0
+    # deed, the dataset page linked. MHLW as in Sasebo's (its notifications
+    # and its own coordinates reach the map); MLIT as in Kobe's, N02 in its
+    # 2025 edition. Written from Okazaki's and Ichinomiya's approved wording
+    # under the owner's pre-approval of template prose (2026-09-30); the
+    # completeness sentence is a proposal in
+    # docs/decisions_drafts/worktree-japan-regional-2.md.
+    Notice(213, "Yamagata City, MHLW and MLIT (Yamagata)",
+     "Yamagata's businesses: この地図は以下の著作物を改変して利用しています。"
+     "令和8年8月31日時点で営業中の食品営業許可施設一覧、山形市、"
+     "[クリエイティブ・コモンズ・ライセンス 表示 4.0 国際](https://creativecommons.org/licenses/by/4.0/deed.ja)"
+     "（[https://www.city.yamagata-yamagata.lg.jp/kenkofukushi/eisei/1006555/1006558/1012802.html](https://www.city.yamagata-yamagata.lg.jp/kenkofukushi/eisei/1006555/1006558/1012802.html)）; and "
+     "出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一覧」を加工して作成. "
+     "Processed by this project, which selected the storefront types from the city's list of food permits in "
+     "term on August 31, 2026, left out permits registered across the prefecture rather than at an address, "
+     "took only the ministry's notifications, showed a premises in both once, placed each by its address or "
+     "the ministry's own coordinates, and counted them around stations. The city's list leaves out the name "
+     "and address of permits whose operators did not agree to publish them, and the ministry's list holds "
+     "only filings whose applicants agreed to publish them; neither is complete. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
+     "Yamagata City, MHLW and MLIT did not make and do not endorse this map.",
+     False, ("Yamagata",)),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no

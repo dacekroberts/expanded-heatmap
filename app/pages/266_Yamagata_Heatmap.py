@@ -43,25 +43,60 @@ else:
 # replaces this with its own caption of the sources' dates and credits.
 render_data_age("Yamagata")
 
-# TODO: replace every TODO bullet with prose true for this city, as short
-# bullets under bold headings (app/pages/43_Seoul_Heatmap.py is the model):
-# the lines by name, what is not drawn, the area and the stations left out, the
-# source and its limitations. Detail a reference page carries stays there.
+# From the japan-city skill's template, Hiroshima's one-bucket line and
+# Okazaki's and Ichinomiya's pages (the ministry's notifications and its
+# points; approved wording, pre-approved for this build, 2026-09-30). Four
+# bullets are proposals in docs/decisions_drafts/worktree-japan-regional-2.md:
+# the dated source bullet (Okazaki's), the personal-services lists (from
+# Aomori's), the prefecture-wide permits (from Aomori's whole-city bullet)
+# and the withheld restaurants (from Hiroshima's). The date is
+# config.FOOD_AS_OF; about 270 is the list's 273 prefecture-wide restaurant
+# permits; one in twelve is 222 of its 2,770 restaurant permits (8.0%); the
+# ring share, 34.0%, is step 3's (1,114 of 3,280).
 st.markdown(
     """
 **The lines**
 
-- TODO: the lines drawn, by name (each is labeled on the map and in the legend).
-- TODO: what is not drawn, and why.
-- TODO: the area covered; stations left out are listed below.
+- Three lines are drawn, each labeled on the map and in the legend: JR East's Ou, Senzan and
+  Aterazawa lines.
+- Lines and stations come from MLIT's national railway data (国土数値情報); station names in
+  English are from OpenStreetMap. Line colors are this project's own, not the operators'.
+- Only stations inside Yamagata City get rings, because the business data covers the city alone:
+  lines running on to Kaminoyama, Tendō, Sendai, Yamanobe and Nakayama are cut at the city line.
+  The stations left out are listed below.
+- The Shinkansen is not drawn (Yamagata appears as a JR Ou Line station).
 
 **The businesses**
 
-- TODO: the data source, and any category it is missing.
+- **This map shows food businesses only.**
+- Yamagata City's lists of barbers, beauty salons and laundries hold only premises opened since
+  April 2019, so personal services are not on this map.
+- From Yamagata City's list of food-business permits (as of August 31, 2026).
+- Japan has no general business license, so shops other than food shops (clothing, electronics,
+  pharmacies) do not appear: the Food shops layer is food retail only (bakeries and confectioners,
+  delis, butchers and fishmongers).
+- Shops that only notify rather than hold a permit, such as supermarkets, convenience stores and
+  greengrocers, appear only where they chose to publish in the Ministry of Health, Labour and
+  Welfare's open data (downloaded October 6, 2026), so that part of the Food shops layer is partial.
+- About 270 restaurant permits are registered for the whole prefecture rather than an address,
+  which are event stalls and food trucks; they are not on this map.
+- The lists may include premises that have closed, so a dot means a permit on file, not a
+  business open today.
+
+**Reading the map**
+
+- The lists give an address but no location. Each address is matched to MLIT's address reference
+  data, which places most at their street block; where that fails, the dot sits at the ministry's
+  own coordinates for the same premises, or else at its district's center.
+- About one restaurant in twelve in Yamagata chose not to publish its name and address in the
+  city's list and is not on this map. Where they are is not known.
+- Where a trade name is its operator's own name, the dot shows its permit type instead.
+- Names and permit types are shown in Japanese, as the lists record them.
+- **About 34% of storefronts sit within a ring.**
 """
 )
 
-render_map_help("three business categories (Retail, Food service and Personal services)")
+render_map_help("two business categories (Food shops and Food service)")
 render_excluded_stations("Yamagata")
 render_country_links("Yamagata")
 
