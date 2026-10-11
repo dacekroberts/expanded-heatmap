@@ -5625,17 +5625,23 @@ CITIES = [
         "lat": 35.3382,
         "lon": 139.4869,
         "page": "pages/242_Fujisawa_Heatmap.py",
-        "blurb": "Odakyu, Enoden, JR East and the Shonan Monorail (TODO: list the lines)",
+        "coverage": "narrowed",
+        "placement": "Joined to address blocks (98.6%); ministry coordinates where missed",
+        "data_age": "City lists as of 2026-06-30 plus new permits to 2026-08-31; ministry notifications fetched 2026-10-06",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
+        "blurb": "The Odakyu Enoshima Line, the Enoden, the JR Tokaido Line, the Shonan Monorail and the Sotetsu Izumino Line",
         "region": "Kanto",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
         "country": "Japan",
+        # metro (the brief: private heavy rail is the backbone, owner 2026-10-02)
         "mode": "metro",
         "in_default_view": False,
-        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
-        # pinned zoom. Run `python scripts/check_macro_labels.py`,
-        # which scores every city in every region at three widths -
-        # and which will first demand this city's label width be
-        # MEASURED in a real browser with Space Grotesk loaded, since
-        # it refuses a guessed one.
+        # Above the dot, the scaffold's default. The Japan views and their
+        # label scoring are Cleanup's (owner, call 198).
         "label_offset": ("middle", 0, -22),
     },
     {

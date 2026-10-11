@@ -659,7 +659,7 @@ _OSM_STATION_NAMES = (
     # Kansai-1 (2026-10-07)
     "Toyonaka", "Hirakata", "Suita", "Itami", "Kakogawa", "Amagasaki", "Uji",
     # East-2 (2026-10-11)
-    "Koshigaya", "Kawaguchi",
+    "Koshigaya", "Kawaguchi", "Fujisawa",
 )
 
 # Verbatim where verbatim is required. Each entry is a Notice, and the sources
@@ -1137,7 +1137,7 @@ _NOTICES = [
      "Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, "
      "Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, "
      "Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, "
-     "Higashiōsaka, Kurume, Sasebo, Shimonoseki, Higashiyamato, Nishitōkyō, Tama, Higashimurayama, Chōfu, Ageo (Regional), Sōka, Tokorozawa, Fuchū (Tokyo), Kasukabe, Tachikawa, Hino, Koshigaya and Kawaguchi, and the "
+     "Higashiōsaka, Kurume, Sasebo, Shimonoseki, Higashiyamato, Nishitōkyō, Tama, Higashimurayama, Chōfu, Ageo (Regional), Sōka, Tokorozawa, Fuchū (Tokyo), Kasukabe, Tachikawa, Hino, Koshigaya, Kawaguchi and Fujisawa, and the "
      "metro and light-rail lines and stations of Taipei and New Taipei are from OpenStreetMap, "
      "© OpenStreetMap contributors, available "
      "under the Open Database License. The alignments drawn are OSM's own "
@@ -2671,6 +2671,29 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
      "Koshigaya City, MHLW and MLIT did not make and do not endorse this map.",
      False, ("Koshigaya",)),
+    # Fujisawa (notice 189): the city's own lists, CC BY 4.0 through its
+    # open-data terms, in their 3(3) form for a modified work with the two
+    # titles the licence read names; the city's pages are cited by title and
+    # not hyperlinked (its site policy asks for notice of links; Hirakata's
+    # precedent). MHLW as in Sasebo's; MLIT as in Kobe's, N02 in its 2025
+    # edition. Written from Ichinomiya's approved wording under the owner's
+    # pre-approval of template prose (2026-09-30).
+    Notice(189, "Fujisawa City, MHLW and MLIT (Fujisawa)",
+     "Fujisawa's businesses: この地図は以下の著作物を改変して利用しています。"
+     "食品衛生法に基づく営業許可施設情報、理容所・美容所・クリーニング所、藤沢市、"
+     "クリエイティブ・コモンズ・ライセンス 表示 4.0"
+     "（[http://creativecommons.org/licenses/by/4.0/](http://creativecommons.org/licenses/by/4.0/)）; and "
+     "出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一覧」を加工して作成. "
+     "Processed by this project, which selected the storefront types, added the city's monthly lists of new "
+     "permits to its June 2026 list, left out permits the ministry's list records as closed, took only the "
+     "ministry's notifications, showed a premises in both once, placed each by its address or the "
+     "ministry's own coordinates, and counted them around stations. The ministry's list holds only "
+     "filings whose applicants agreed to publish them; neither list is complete. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
+     "Fujisawa City, MHLW and MLIT did not make and do not endorse this map.",
+     False, ("Fujisawa",)),
     # Kawaguchi (notice 190): the city's own list, CC BY 2.1 JP (the page's
     # 「クリエイティブコモンズ「表示」」 with that licence linked; owner, call
     # 208), credited with the title, the city, the licence URI and a statement

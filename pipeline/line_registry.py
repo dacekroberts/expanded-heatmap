@@ -246,7 +246,7 @@ REGISTRY = {
     # the project's colour every map already drew (hue-matched to the operator); pins >= 53.6, lines >= 12.0, lines beside it >= 24.4.
     "jr-east-tokaido-line": {
         "name": "JR Tokaido Line", "operator": "JR East", "colour": "#E07800",
-        "maps": {"kawasaki": "JT", "yokohama": "JT"},
+        "maps": {"fujisawa": "JT", "kawasaki": "JT", "yokohama": "JT"},
     },
     # the project's colour every map already drew (hue-matched to the operator); pins >= 62.6, lines >= 16.1, lines beside it >= 19.1.
     "jr-central-tokaido-line": {
@@ -407,6 +407,11 @@ REGISTRY = {
     "sotetsu-jr-link-line": {
         "name": "Sotetsu-JR Link Line", "operator": "JR East", "colour": "#805878",
         "maps": {"kawasaki": "SJ", "yokohama": "SJ"},
+    },
+    # the project's colour yokohama already drew (East-2, 2026-10-11: Fujisawa draws its 湘南台 end); pins >= 83.1 on fujisawa, lines beside it >= 64.6 there.
+    "sotetsu-izumino-line": {
+        "name": "Sotetsu Izumino Line", "operator": "Sotetsu", "colour": "#6048E0",
+        "maps": {"fujisawa": "SI", "yokohama": "SI"},
     },
     # the project's colour every map already drew (hue-matched to the operator); pins >= 53.6, lines >= 23.6, lines beside it >= 23.6.
     "tama-toshi-monorail": {

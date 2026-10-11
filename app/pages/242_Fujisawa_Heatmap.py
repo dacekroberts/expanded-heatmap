@@ -43,25 +43,58 @@ else:
 # replaces this with its own caption of the sources' dates and credits.
 render_data_age("Fujisawa")
 
-# TODO: replace every TODO bullet with prose true for this city, as short
-# bullets under bold headings (app/pages/43_Seoul_Heatmap.py is the model):
-# the lines by name, what is not drawn, the area and the stations left out, the
-# source and its limitations. Detail a reference page carries stays there.
+# From the japan-city skill's template and Ichinomiya's, Kawasaki's and
+# Koshigaya's pages (approved wording, pre-approved for this build,
+# 2026-09-30); the sentences no template covers (the dated first bullet, the
+# estimate the owner's call 175 asks for, the closures) are proposals in
+# docs/decisions_drafts/worktree-japan-east-2.md. The dates are the lists' own
+# (config.SOURCE_AS_OF); 88% to 101% is the brief's estimate (3,790 restaurant
+# permits per 1,495 census establishments, 2.54, against four Kanagawa cities'
+# 2.52 to 2.87); the ring share, 77.2% (3,821 of 4,947), is step 3's.
 st.markdown(
     """
 **The lines**
 
-- TODO: the lines drawn, by name (each is labeled on the map and in the legend).
-- TODO: what is not drawn, and why.
-- TODO: the area covered; stations left out are listed below.
+- Five lines are drawn, each labeled on the map and in the legend: the Odakyu Enoshima Line, the
+  Enoshima Electric Railway (Enoden), the JR Tokaido Line, the Shonan Monorail and the Sotetsu
+  Izumino Line.
+- Lines and stations come from MLIT's national railway data (国土数値情報); station names in
+  English are from OpenStreetMap. Line colors are this project's own, not the operators'.
+- Only stations inside Fujisawa City get rings, because the business data covers the city alone:
+  lines running on to Kamakura, Yokohama, Yamato and Chigasaki are cut at the city line. The
+  stations left out are listed below.
+- Yokohama's Blue Line subway, which has only its terminus, Shonandai, in the city, is not drawn;
+  Shonandai appears as a station of the Odakyu and Sotetsu lines.
 
 **The businesses**
 
-- TODO: the data source, and any category it is missing.
+- From Fujisawa City's lists of food-business permits and of barbers, beauty salons and laundries,
+  all as of June 30, 2026, with the new food permits it listed for July and August 2026.
+- No official count of Fujisawa's restaurants is published. Measured against the 2021 census of
+  restaurants at the rates of four other Kanagawa cities, the list is estimated to hold between
+  88% and 101% of them.
+- Japan has no general business license, so shops other than food shops (clothing, electronics,
+  pharmacies) do not appear: the Food shops layer is food retail only (bakeries and confectioners,
+  delis, butchers and fishmongers).
+- Shops that only notify rather than hold a permit, such as supermarkets, convenience stores and
+  greengrocers, appear only where they chose to publish in the Ministry of Health, Labour and
+  Welfare's open data (downloaded October 6, 2026), so that part of the Food shops layer is partial.
+- The lists may include premises that have closed, so a dot means a permit on file, not a
+  business open today.
+
+**Reading the map**
+
+- The lists give an address but no location. Each address is matched to MLIT's address reference
+  data, which places most at their street block; where that fails, the dot sits at the ministry's
+  own coordinates for the same premises, or else at its district's center.
+- Where a trade name is its operator's own name, the dot shows its permit type instead; the food
+  list names an operator only where it is a company, so this cannot be checked for the rest.
+- Names and permit types are shown in Japanese, as the lists record them.
+- **About 77% of storefronts sit within a ring.**
 """
 )
 
-render_map_help("three business categories (Retail, Food service and Personal services)")
+render_map_help("three business categories (Food shops, Food service and Personal services)")
 render_excluded_stations("Fujisawa")
 render_country_links("Fujisawa")
 

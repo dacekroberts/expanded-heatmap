@@ -66,7 +66,38 @@ Newest entry first. Cleanup folds this file into `DECISIONS.md`.
   notifications left out, since the city's own list publishes notifications
   (127b answered lists that have none).
 
+- **Fujisawa:** one open MHLW permit (a restaurant granted 2026-08-21) is in
+  no city file and is not added (call 127 (a), Ichinomiya's: MHLW's permits
+  are not added; the city's next list should carry it). The Blue Line left
+  out and the Sotetsu stub and Monorail drawn cut (calls 54 and 92, the
+  standing stub call). The census ratio 1.97 is reported as measured.
+- **Kawaguchi:** built on the CSV as published (call 177); MHLW left out
+  whole (calls 126-127); the Musashino stub kept as cut.
+
 ## Proposed wording (no template covers these; for review time)
+
+- **Fujisawa** (page 242): "From Fujisawa City's lists of food-business
+  permits and of barbers, beauty salons and laundries, all as of June 30,
+  2026, with the new food permits it listed for July and August 2026."; the
+  estimate call 175 asks for: "No official count of Fujisawa's restaurants is
+  published. Measured against the 2021 census of restaurants at the rates of
+  four other Kanagawa cities, the list is estimated to hold between 88% and
+  101% of them."; "Yokohama's Blue Line subway, which has only its terminus,
+  Shonandai, in the city, is not drawn; Shonandai appears as a station of the
+  Odakyu and Sotetsu lines." The notice (189) adds "left out permits the
+  ministry's list records as closed". What Is Excluded carries "a caterer
+  that also names a restaurant form is counted as a restaurant" (call 158).
+- **Kawaguchi** (page 243): "From Kawaguchi City's list of food-business
+  permits and notifications (as of March 31, 2026, with the new premises it
+  listed for April, May and July 2026; the list has no entries for June).";
+  "Kawaguchi City's lists of barbers, beauty salons and laundries are not
+  open data, so personal services are not on this map."; "The city withholds
+  the address of about one entry in six in its list, and those are not on
+  this map. Where they are is not known." (Hiroshima's sentence; 1,316 of
+  8,364); "Where the city masks a trade name, or a trade name is its
+  operator's own name, the dot shows its permit type instead."; "JR's
+  Utsunomiya, Takasaki and Shonan-Shinjuku line trains pass through the city
+  without stopping and are not drawn."
 
 - **Koshigaya** (page 240): "From Koshigaya City's list of food-business
   permits and notifications (as of March 31, 2026, with the new and renewed
@@ -92,6 +123,65 @@ Newest entry first. Cleanup folds this file into `DECISIONS.md`.
   cities are added to all three as East-1's were. Cleanup's to reconcile.
 
 ## Entries
+
+### 2026-10-11 - Fujisawa built, the June lists kept whole with the months since, MHLW's notifications, five lines
+
+- **Fujisawa built (page 242, notice 189), Ichinomiya's shape: 4,947
+  storefronts (Food service 2,938, Food shops 866, Personal services 1,143)
+  around 17 stations on 5 lines, 77.2% of them in a ring (3,821).** On the
+  Japan foundation's rules. Brief check 18/18 (2026-10-11). Built by a
+  subagent of the East-2 lead, integrated by the lead. Every file was on disk
+  from Step 0.
+- **Sources:** the city's food list of 2026-06-30 in two files (companies
+  2,629 rows, individual operators 1,897), kept whole less 6 permits MHLW's
+  file records as closed in August 2026 (call 159, a read-only filter in
+  `source_rows`, Fukuyama's shape; 6 of 6 found); the July and August lists
+  (109 rows) as `food_new`; the barber, beauty and laundry lists of
+  2026-06-30 (203, 821, 142); MHLW's notifications only (989 rows read, 387
+  with no published address), `SUPERSEDES` over the city rows (49),
+  `OWN_POINT_FALLBACK` (14) and `POINT_DONORS` (9). June's monthly files are
+  all in the full list by permit number and are not read.
+- **The individual operators' file goes through the name rule** (the owner's
+  answer): it carries no operator column, so only the sign test runs there
+  (0 bare personal names); the page carries Kawasaki's bullet, as the brief
+  prescribes.
+- **Step 2:** not a premises 504 (一円 addresses; 2 無店舗 laundry agents, the
+  laundry 種目 passed as the type); out by rule 711 (308 institutional
+  catering, 158 non-counter types, 103 vending, 55 hostess venues, 40
+  caterers, none of which also names a counter form since call 158 returns
+  those to Food service (242 combined cells read as their restaurant form),
+  32 inside accommodation, 11 temporary, 4 mail order). Of 5,172 storefront
+  rows: 5,099 block, 50 town centre, 23 own point, 0 unplaced. 176 repeat
+  rows dropped. Names withheld 3. Factory share 13 of 411 (3.2%), kept.
+- **Economic Census control:** 2,938 pins against 1,495 establishments,
+  1.97, just above the built cities' 1.56-1.92 (the brief estimated 1.90
+  before call 158 returned about 100 rows). Reported, not tuned.
+- **The food share (call 175):** no official count exists; the page states
+  the brief's census estimate as an estimate (88% to 101% at four Kanagawa
+  cities' rates). Registers against the city's own 2025-03-31 counts: 102.0%,
+  104.3%, 94.7%.
+- **Privacy verdict: publish.** `check_personal_exposure.py fujisawa`: the
+  Japan pass prints 0; 2 raw trade names are an operator's own name, 3 pins
+  show their permit type.
+- **Rail:** N02-25; 17 stations: Odakyu Enoshima Line 9, Enoden 6, JR
+  Tokaido 2, Shonan Monorail 2 (drawn cut, 2 of 8), Sotetsu Izumino 1 (a
+  private stub kept as cut). Yokohama's Blue Line, 1 of 17 inside (湘南台), is
+  left out, its station kept through Odakyu and Sotetsu (calls 54 and 92).
+  `SPACING_MIN_M = 90` under Shonan-Enoshima / Enoshima, 96 m apart, separate
+  N02 groups. Gate 3 exact on all five. 17 excluded: Kamakura 10, Yokohama's
+  Izumi Ward 4, Yamato 2, Chigasaki 1. One cited override (辻堂, Tsujido).
+- **Colours and the registry:** JR Tokaido from `jr-east-tokaido-line`;
+  the Sotetsu Izumino Line registered as `sotetsu-izumino-line` in the colour
+  Yokohama already draws (#6048E0; Yokohama's config still holds the literal,
+  which the check accepts: Cleanup's to switch); the Odakyu Enoshima Line is
+  registered with Sagamihara (below, its entry). Enoden #486860 (45.0 from
+  the Personal services pin) and the Monorail #F01000 are this map's alone.
+- **The fetch pins each edition's URL** rather than following the page's
+  links: the files are renamed each edition and the registers' timestamp
+  names cannot be told apart by href. A refresh edits `SOURCE_FILES`; the
+  brief's first two checks fail when the pages move on.
+- **Visuals:** notice 189 caption only (CC BY 4.0 and PDL 1.0 name no
+  placement). No open terms question.
 
 ### 2026-10-11 - Kawaguchi built, food only, the March list kept whole with the new premises to July; two parked calls hold its landing
 

@@ -4949,6 +4949,53 @@ line.
 - Left out: 9 stations beyond it: 3 in Soka, 2 in Kasukabe, 2 in Yoshikawa,
   1 in Misato and 1 in Kawaguchi.
 
+### Fujisawa - the city's food list and monthly new permits, its barber, beauty and laundry lists and the national notifications, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, except where the national filings
+  include notifications.
+- 387 national notifications whose filers did not publish an address.
+- 504 food trucks, stalls and other filings with no fixed premises (most are
+  addressed to the whole city), 2 of them laundry agents with no shop.
+- 308 school, hospital and staff canteens, 103 vending machines, 55 snack
+  bars and cabarets, 40 caterers (仕出し; a caterer that also names a
+  restaurant form is counted as a restaurant), 32 premises inside hotels and
+  inns, 11 rows marked temporary or mobile and 4 mail-order businesses.
+- 158 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 16 closed premises: 10 the national filings keep, marked, and 6 city
+  permits the national filings record as closed in August 2026. Other
+  closures are not marked.
+
+**Counted** - the permits in the city's food list on June 30, 2026, with the
+new permits of its monthly lists for July and August 2026; its barber, beauty
+and laundry lists of June 30, 2026; and the national notifications as
+downloaded on October 6, 2026. No official count of the city's restaurants is
+published; measured against the 2021 census at the rates of four other
+Kanagawa cities, the list is estimated to hold between 88% and 101% of them.
+The lists hold 203 barbers, 821 beauty salons and 142 laundries, against
+199, 787 and 150 in the city's own count at the end of March 2025. 13 of the
+411 bakery, confectioner and deli rows (3.2%) have a trade name that reads as
+a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 176 repeat permits are shown once, and 49 rows of
+the city's lists for a premises already in the national notifications.
+
+**Not placed** - none. 44 pins sit at their town's center, and 23 at the
+ministry's own coordinates.
+
+**Names not shown** - 3 pins whose trade name is the operator's own name
+show their permit type. The city's list of individual operators names no
+operator, so there only the form of the trade name can be tested.
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 17 stations beyond it: 10 in Kamakura, 4 in Yokohama (Izumi
+  Ward), 2 in Yamato and 1 in Chigasaki.
+- Yokohama's Blue Line, with only its terminus Shonandai in the city, is not
+  drawn; the station is kept through the Odakyu and Sotetsu lines.
+
 ### Kawaguchi - the city's food list with its monthly new premises, joined to MLIT's address blocks
 
 **Left out**
