@@ -271,7 +271,7 @@ _COLOURS = {
     "HS": line_registry.colour("hankyu-senri-line"), "HY": line_registry.colour("hankyu-kyoto-line"),
     "JY": line_registry.colour("jr-west-kyoto-line"),
     "OH": line_registry.colour("jr-west-osaka-higashi-line"),
-    "MO": line_registry.colour("osaka-monorail-main-line"), "MS": "#708898",
+    "MO": line_registry.colour("osaka-monorail-main-line"), "MS": line_registry.colour("osaka-monorail-saito-line"),
     "KK": line_registry.colour("kita-osaka-kyuko-namboku-line"),
 }
 for _k, _v in LINES.items():

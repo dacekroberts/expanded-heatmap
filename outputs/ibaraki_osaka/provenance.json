@@ -1,0 +1,176 @@
+{
+  "city_barber": {
+    "as_of": "2026-03-31",
+    "bytes": 154572,
+    "dataset_page": "https://data.bodik.jp/dataset/270008_riyou-ichiran",
+    "file": "riyou-ichiran-0803.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:41:37+00:00",
+    "rows": 1576,
+    "sha256": "a0d50611c36cee37e328ff891825a7a06b575783854e403a94ff7471cdbd7daf",
+    "url": "https://data.bodik.jp/dataset/7ef31733-3fef-4fae-a163-b91c75f1eac2/resource/96f0f303-c561-4e47-a3a4-da7f1e2a133f/download/riyou-ichiran-0803.xlsx"
+  },
+  "city_barber_0804": {
+    "as_of": "2026-04-30",
+    "bytes": 11690,
+    "dataset_page": "https://data.bodik.jp/dataset/270008_riyou-ichiran",
+    "file": "0804-riyou.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:42:24+00:00",
+    "rows": 1,
+    "sha256": "8ef3d8dbfe22cc4913440b76d9156e187f8996b96f1d839d2b6b4f8e232c2ddf",
+    "url": "https://data.bodik.jp/dataset/7ef31733-3fef-4fae-a163-b91c75f1eac2/resource/938f0717-b717-4171-8396-aeeab88bd06e/download/0804-riyou.xlsx"
+  },
+  "city_barber_0805": {
+    "as_of": "2026-05-31",
+    "bytes": 11661,
+    "dataset_page": "https://data.bodik.jp/dataset/270008_riyou-ichiran",
+    "file": "0805-riyou.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:42:46+00:00",
+    "rows": 1,
+    "sha256": "1a34bd1ff6c0da7c8012d72433659c5ec0eba162b366e469c1d4aadc7aaea5b3",
+    "url": "https://data.bodik.jp/dataset/7ef31733-3fef-4fae-a163-b91c75f1eac2/resource/df2aff84-df0b-4ed2-804a-6419d2468af4/download/0805-riyou.xlsx"
+  },
+  "city_barber_0806": {
+    "as_of": "2026-06-30",
+    "bytes": 12163,
+    "dataset_page": "https://data.bodik.jp/dataset/270008_riyou-ichiran",
+    "file": "0806-riyou-.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:43:09+00:00",
+    "rows": 4,
+    "sha256": "6bc9ed70a5a9a4589942682d6896873eafa35f27d012f73958f787dcf85672f2",
+    "url": "https://data.bodik.jp/dataset/7ef31733-3fef-4fae-a163-b91c75f1eac2/resource/60ff6fd4-6d00-4ff3-a179-8b172b85fd50/download/0806-riyou-.xlsx"
+  },
+  "city_barber_0807": {
+    "as_of": "2026-07-31",
+    "bytes": 11484,
+    "dataset_page": "https://data.bodik.jp/dataset/270008_riyou-ichiran",
+    "file": "0807-riyou-.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:43:32+00:00",
+    "rows": 1,
+    "sha256": "cc10a0f43e56986246e755914eacc7be791d6367ae0c76034347b395eb44a845",
+    "url": "https://data.bodik.jp/dataset/7ef31733-3fef-4fae-a163-b91c75f1eac2/resource/f26306ae-c008-4dec-a8ee-fb105c9a3342/download/0807-riyou-.xlsx"
+  },
+  "city_barber_0808": {
+    "as_of": "2026-08-31",
+    "bytes": 11739,
+    "dataset_page": "https://data.bodik.jp/dataset/270008_riyou-ichiran",
+    "file": "0808-riyou-.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:43:55+00:00",
+    "rows": 3,
+    "sha256": "7dfa41ec7c28673a9291b49cfd7ab575a7ec176914389cb686cf955acb85d9f1",
+    "url": "https://data.bodik.jp/dataset/7ef31733-3fef-4fae-a163-b91c75f1eac2/resource/8e907cf5-77cc-45e4-99bc-2b62f7539a00/download/0808-riyou-.xlsx"
+  },
+  "city_beauty": {
+    "as_of": "2026-03-31",
+    "bytes": 435585,
+    "dataset_page": "https://data.bodik.jp/dataset/270008_biyou-ichiran",
+    "file": "biyou-ichiran-0803.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:42:01+00:00",
+    "rows": 4774,
+    "sha256": "6c4a67996d192c159d62a9cca957ed9c5ca83401cde0df71fa6586d5638466f5",
+    "url": "https://data.bodik.jp/dataset/e8079500-b5cd-497f-84d9-c21999d876a2/resource/1a4a47bb-4431-4f86-b946-c51810645de4/download/biyou-ichiran-0803.xlsx"
+  },
+  "city_beauty_0804": {
+    "as_of": "2026-04-30",
+    "bytes": 14445,
+    "dataset_page": "https://data.bodik.jp/dataset/270008_biyou-ichiran",
+    "file": "0804-biyou.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:44:17+00:00",
+    "rows": 27,
+    "sha256": "8521034b9362fda8098614a2322f2f90eb8a445daa66a941753816bea0a65dd0",
+    "url": "https://data.bodik.jp/dataset/e8079500-b5cd-497f-84d9-c21999d876a2/resource/bbaba29f-6fba-4620-94b6-efb6a3286103/download/0804-biyou.xlsx"
+  },
+  "city_beauty_0805": {
+    "as_of": "2026-05-31",
+    "bytes": 13174,
+    "dataset_page": "https://data.bodik.jp/dataset/270008_biyou-ichiran",
+    "file": "0805-biyou.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:44:40+00:00",
+    "rows": 15,
+    "sha256": "a82ac29ab21a5bf9c40685950c1caaf48f2fd176ea46d8d75386bfed74a9558b",
+    "url": "https://data.bodik.jp/dataset/e8079500-b5cd-497f-84d9-c21999d876a2/resource/07d3a383-61e1-4ac6-981a-2187862f4dc3/download/0805-biyou.xlsx"
+  },
+  "city_beauty_0806": {
+    "as_of": "2026-06-30",
+    "bytes": 14077,
+    "dataset_page": "https://data.bodik.jp/dataset/270008_biyou-ichiran",
+    "file": "0806-biyou.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:45:03+00:00",
+    "rows": 25,
+    "sha256": "2a4ba77322e4ace2a78aea535b48f3ba9489554e698ccd4d11eb1fef77b47cc4",
+    "url": "https://data.bodik.jp/dataset/e8079500-b5cd-497f-84d9-c21999d876a2/resource/fb497d52-5b14-44f2-b35c-b7f573992d3c/download/0806-biyou.xlsx"
+  },
+  "city_beauty_0807": {
+    "as_of": "2026-07-31",
+    "bytes": 13763,
+    "dataset_page": "https://data.bodik.jp/dataset/270008_biyou-ichiran",
+    "file": "0807-biyou.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:45:26+00:00",
+    "rows": 22,
+    "sha256": "5841c787507c0394e3b23db05f354e4be5032c02669cef616f1e7c8e0884d9b9",
+    "url": "https://data.bodik.jp/dataset/e8079500-b5cd-497f-84d9-c21999d876a2/resource/20723676-00d9-4169-91b4-ba6825e569ca/download/0807-biyou.xlsx"
+  },
+  "city_beauty_0808": {
+    "as_of": "2026-08-31",
+    "bytes": 12853,
+    "dataset_page": "https://data.bodik.jp/dataset/270008_biyou-ichiran",
+    "file": "0808-biyou.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:45:49+00:00",
+    "rows": 13,
+    "sha256": "52cbf7620ffd41de8d0d4a23f19715e088e657c1bb6d03c15859d7329bc721c3",
+    "url": "https://data.bodik.jp/dataset/e8079500-b5cd-497f-84d9-c21999d876a2/resource/18d7b97a-adbe-4412-a656-02189c8b1f7d/download/0808-biyou.xlsx"
+  },
+  "isj_27211_block": {
+    "bytes": 143530,
+    "file": "27211-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:49:05+00:00",
+    "sha256": "e85d3bd0d54b609c4784c7ade97b6775fcaaed0749dedd44d41db0ce6f93e83f",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/27211-24.0a.zip"
+  },
+  "isj_27211_chome": {
+    "bytes": 9623,
+    "file": "27211-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:49:09+00:00",
+    "sha256": "03b6f7acb0f537a1c67756f53b35287dcee3991baf938035b2d456e3796accfc",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/27211-19.0b.zip"
+  },
+  "n02": {
+    "bytes": 14903774,
+    "file": "data/japan/raw/N02-25_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-30T23:47:52+00:00",
+    "sha256": "aaf76af133b2e771e538fabc4646d2e443dc1d5a67b221382a28d744e706cc9f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip"
+  },
+  "n03": {
+    "bytes": 2163158,
+    "file": "data/japan/raw/N03-20250101_27_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:52:09+00:00",
+    "sha256": "7e3f49311a822680ec7fe2d3f0e167a6631e353feac0fda5fb78b454be92eb51",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_27_GML.zip"
+  },
+  "osm_station_names": {
+    "bytes": 18494,
+    "elements": 33,
+    "file": "osm_station_names.json",
+    "host": "overpass.kumi.systems",
+    "osm_base": "2026-06-01T08:52:28Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](34.77,135.49,34.93,135.61);way[\"railway\"=\"station\"](34.77,135.49,34.93,135.61););out tags center;",
+    "retrieved": "2026-10-11T21:57:53+00:00",
+    "sha256": "dcdf51b204285f6a3ab1af7aebcd16ea1fc2b668126ef786ea645e0c9eaae8ca"
+  }
+}

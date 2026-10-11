@@ -99,7 +99,7 @@ REGISTRY = {
     # the project's colour osaka already drew; pins >= 45.9, lines >= 18.0, lines beside it >= 18.0.
     "hankyu-kyoto-line": {
         "name": "Hankyu Kyoto Line", "operator": "Hankyu", "colour": "#87544B",
-        "maps": {"kyoto": "HY", "osaka": "HY", "suita": "HY"},
+        "maps": {"ibaraki_osaka": "HY", "kyoto": "HY", "osaka": "HY", "suita": "HY"},
     },
     # the project's colour osaka already drew; pins >= 45.8, lines >= 18.0, lines beside it >= 18.0.
     "hankyu-senri-line": {
@@ -190,7 +190,7 @@ REGISTRY = {
     # the project's colour kyoto already drew; pins >= 50.6, lines >= 17.5, lines beside it >= 18.8.
     "jr-west-kyoto-line": {
         "name": "JR Kyoto Line", "operator": "JR West", "colour": "#08A0C0",
-        "maps": {"kyoto": "JA", "osaka": "JY", "suita": "JY"},
+        "maps": {"ibaraki_osaka": "JY", "kyoto": "JA", "osaka": "JY", "suita": "JY"},
     },
     # the project's colour every map already drew (hue-matched to the operator); pins >= 44.4, lines >= 81.8, lines beside it >= 90.7.
     "jr-kyushu-kyudai-main-line": {
@@ -381,7 +381,12 @@ REGISTRY = {
     # Osaka Monorail's own line colour; pins >= 81.9, lines >= 37.6, lines beside it >= 37.6.
     "osaka-monorail-main-line": {
         "name": "Osaka Monorail Main Line", "operator": "Osaka Monorail", "colour": "#0067B0",
-        "maps": {"itami": "MO", "suita": "MO", "toyonaka": "MO"},
+        "maps": {"ibaraki_osaka": "MO", "itami": "MO", "suita": "MO", "toyonaka": "MO"},
+    },
+    # the project's colour suita already drew (registered 2026-10-11, when Ibaraki's map became the second to draw it).
+    "osaka-monorail-saito-line": {
+        "name": "Osaka Monorail Saito Line", "operator": "Osaka Monorail", "colour": "#708898",
+        "maps": {"ibaraki_osaka": "MS", "suita": "MS"},
     },
     # the project's colour himeji, kakogawa already drew; pins >= 45.4, lines >= 18.9, lines beside it >= 18.9.
     "sanyo-electric-main-line": {
