@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**190 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**191 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-11**
 
+- [The build plan's usage paragraph rewritten for the lifted stops (owner: "changes look good")](#2026-10-11---the-build-plans-usage-paragraph-rewritten-for-the-lifted-stops-owner-changes-look-good)
 - [Phase 2's weekly usage stops lifted for the final batch; one check-in when it finishes (owner)](#2026-10-11---phase-2s-weekly-usage-stops-lifted-for-the-final-batch-one-check-in-when-it-finishes-owner)
 
 **2026-10-08**
@@ -239,6 +240,24 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-10-11 - The build plan's usage paragraph rewritten for the lifted stops (owner: "changes look good")
+
+- **Rewrote "Usage check-ins for phase 2" in
+  `docs/build_plan_2026-10-07.md` and the usage line of
+  `docs/handoff_staging_2026-10-07.md`, on the owner's approval of the
+  proposed order.** The paragraph now says: no weekly stop in phase 2, the
+  5-hour window's 90% ceiling kept, the weekly figure named in each batch
+  report, one usage check-in put to the owner by Staging when the batch
+  finishes, and `heavy_job.py status` read before a heavy job because the
+  32 GB is shared with other projects this week. Correction to the entry
+  below: the three phase 2 prompts name no figure; they say the plan's
+  "usage check-ins bind you", so correcting the plan's paragraph was enough
+  and the prompts are unchanged. Also corrected by the owner the same day: the
+  tone guide the portfolio review notes mention loads from the owner's
+  global CLAUDE.md, not this project's, so `CLAUDE.md` here does not change
+  for it. Rejected: leaving the plan as written and adding a line to each
+  pasted prompt, which a later session reading the plan alone would miss.
 
 ### 2026-10-11 - Phase 2's weekly usage stops lifted for the final batch; one check-in when it finishes (owner)
 

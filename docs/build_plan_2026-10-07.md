@@ -31,11 +31,11 @@ The machine (Ryzen 7 5700X, 16 threads, 32 GB) is not the bottleneck. Approvals,
 3. **One review time per phase.** Landings, re-renders and deploy-verify are batched: after phase 0, after the first Japan trio, and after the second. Only the owner calls review time. App reboots happen once per landing.
 4. **Build sessions never edit `docs/city_master_list.md`.** Staging moves a wave's cities to Built in one pass after each landing, and republishes the private pages. A build lands in one push at the end of its batch, after review time; `app/cities.py` conflicts are resolved keep-both.
 
-**Usage check-ins for phase 2 (owner, 2026-10-08):** "let's do a 30% and 60% check in to be light". In the week from the reset of 2026-10-11, every session stops at **30% and 60% weekly usage**, and only there; phase 2 is the last build wave. (Phases 0 and 1 stopped at every multiple of ten.)
-- Check `get_usage` between cities.
-- At a crossing: finish the current step, commit clean, and stop. Tell the owner in your own chat and send one line to Staging Session. Continue only on the owner's word.
-- All sessions share one pool, so one crossing stops every session.
-- The 30% and 60% stops are weekly figures, not the 5-hour window ("for weekly not 5hr"); the 5-hour window keeps only its 90% ceiling.
+**Usage for phase 2: no weekly stop (owner, 2026-10-11).** "drop the stop at every 10% of weekly usage for this batch only. We'll do one usage check-in when it finishes." Phase 2 is the last build wave and runs through; this lifts the 30% and 60% weekly stops set on 2026-10-08 ("let's do a 30% and 60% check in to be light"), for this batch only (DECISIONS, 2026-10-11). (Phases 0 and 1 stopped at every multiple of ten.)
+- **The 5-hour window keeps its 90% ceiling.** Check `get_usage` between cities. At 90% of the window: finish the current step, commit clean, and stop with the next action named; resume in the next window.
+- No session stops on the weekly figure. All sessions share one pool, so name the weekly figure in the batch report.
+- **One usage check-in when the batch finishes:** Staging puts the weekly figure to the owner with the batch reports.
+- **Memory is 32 GB shared with other projects this week** (owner, 2026-10-11). The `heavy_job.py` gate reads the machine's available memory but cannot see what another project is about to claim, so read `python scripts/heavy_job.py status` before a heavy job and wait if little is free.
 
 ## Order and session plan
 

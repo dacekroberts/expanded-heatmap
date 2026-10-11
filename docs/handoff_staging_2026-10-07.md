@@ -25,10 +25,11 @@ fresh `docs/decisions_drafts/staging.md`.
   it refuses `app/`, `outputs/` and `pipeline/`, and stops when a merge
   rewrites a generated file: that file is its owner's, tell them).
 - **Usage:** the 10% check-ins ended 2026-10-08 (no 80% stop); until the
-  reset of 2026-10-11 19:00 UTC, work is refinements, not builds. **From the
-  reset, phase 2 stops at 30% and 60% weekly only** (owner, 2026-10-08, "for
-  weekly not 5hr"). At a stop every session pauses and continues only on the
-  owner's word (here or in Cleanup). The 5-hour ceiling is 90%.
+  reset of 2026-10-11 19:00 UTC, work is refinements, not builds. **Phase 2
+  has no weekly stop** (owner, 2026-10-11, lifting the 30% and 60% stops of
+  2026-10-08 for this batch only): one usage check-in with the owner when
+  the batch finishes, put by Staging with the batch reports. The 5-hour
+  ceiling is 90%.
 - **Owner calls are numbered S1, S2, S3 and on** (owner, 2026-10-08). The
   plain-number series **ended at call 230 on 2026-10-08 at 18:37 UTC**
   (Kurashiki's 227-230, answered at that stop). **The S series begins with
