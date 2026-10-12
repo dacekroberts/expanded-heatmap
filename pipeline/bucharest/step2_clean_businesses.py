@@ -378,14 +378,20 @@ def main():
     print(f"  {len(df):,} rows merge on name + address to {len(merged):,} premises")
 
     shown = merged.apply(lambda r: display_name(r["name"], r["Categorie"]), axis=1)
-    merged["business_name"] = [s[0] if s[0] else None for s in shown]
-    merged["name_kind"] = [s[1] for s in shown]
+    # The privacy repair of 2026-10-12 (owner, 2026-10-11; DECISIONS): the
+    # verdict above, then romania_dsvsa.name_kind_extended, as Cluj-Napoca's
+    # step 2 calls it. A company named as a given name beside one other word
+    # shows its category: 127 pins, 93 names, measured 2026-10-11. No
+    # exception for a name on two or more premises (owner, 2026-10-12: every
+    # such name stays withheld). Counts only: a withheld name is never printed.
+    kinds = [TAX.name_kind_extended(n, s[0] or "", s[1], GIVEN_NAMES) for n, s in zip(merged["name"], shown)]
+    merged["business_name"] = [s[0] if s[0] and k == "company" else None for s, k in zip(shown, kinds)]
+    merged["name_kind"] = kinds
     merged.loc[merged["business_name"].isna(), "business_name"] = \
         merged.loc[merged["business_name"].isna(), "Categorie"].str.split(" · ").str[0]
     kinds = merged["name_kind"].value_counts()
     print(f"  shown by category only: sole traders {kinds.get('sole trader', 0):,}, "
-          f"companies named as a person {kinds.get('person-named company', 0):,} "
-          f"({'; '.join(merged.loc[merged['name_kind'] == 'person-named company', 'name'].head(12))})")
+          f"companies named as a person {kinds.get('person-named company', 0):,}")
 
     merged = filter_to_storefront(merged, config.TAXONOMY_SYSTEM)
     print(f"  {len(merged):,} storefront premises after filter_to_storefront()")
