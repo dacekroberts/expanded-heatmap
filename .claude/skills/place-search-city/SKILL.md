@@ -12,7 +12,8 @@ Marseille, Prague, Brussels; 2b Hong Kong, Seoul, Busan, Tbilisi), updated
 the owner's answers to 2b's nine questions. It replaces
 the recipe sections of `docs/handoff_place_search_2026-10-07.md` and
 `docs/handoff_place_search_batch2.md`; the judgment trail, with every owner
-quote, is `docs/decisions_drafts/place-search.md` (later `DECISIONS.md`).
+quote, is `DECISIONS.md` and `docs/decisions/2026-10-04.md` (the pilot's
+drafts file, folded 2026-10-12).
 Read that file's newest entries before a batch: the owner's open questions
 there may have been answered since.
 
