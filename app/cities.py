@@ -5578,6 +5578,36 @@ CITIES = [
         # it refuses a guessed one.
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Naha",
+        "lat": 26.2105,
+        "lon": 127.684,
+        "page": "pages/307_Naha_Heatmap.py",
+        "coverage": "narrowed",
+        "placement": "Joined to address blocks (98.5%)",
+        "data_age": "Rebuilt from permits to 2026-08-31 (an upper bound); registers of 2026-09-04",
+        "rail_extra": "—",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
+        "blurb": "The Yui Rail, Okinawa's monorail",
+        "region": "Kyushu-Okinawa",
+        "country": "Japan",
+        # light_rail, not metro (owner, 2026-10-12: "light rail feels more
+        # appropriate due to size"): the city's only line is a monorail.
+        "mode": "light_rail",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): the Japan batch's tier, labelled only in
+        # the Japan view. Region views and label offsets are Cleanup's (owner,
+        # call 198); the offset below is the scaffold's starting value.
+        "label_tier": "minor",
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

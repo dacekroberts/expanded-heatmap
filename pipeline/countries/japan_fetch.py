@@ -183,9 +183,17 @@ def fetch_city(config, force):
     file_rows = getattr(config, "file_rows", None)
     for key, (name, url, page) in config.SOURCE_FILES.items():
         dest = config.source_csv(key)
+        if url is None:
+            # A URL built from pinned resource ids rather than written out
+            # (Naha's 215 BODIK resources: config.source_url)
+            url = config.source_url(key)
         if force or not dest.exists():
             url = current_url(config, key, url, page)
         how = get(url, dest, force)
+        if how == "downloaded" and getattr(config, "FETCH_PAUSE_S", 0):
+            # A host that rate-limits (BODIK blocked a probe after about 100
+            # rapid calls, 2026-10-04): Naha's 215 files, one at a time.
+            time.sleep(config.FETCH_PAUSE_S)
         rows = list(file_rows(key) if file_rows else japan_register.city_rows(dest))
         missing = [c for c in config.REQUIRED_COLUMNS[key] if c not in rows[0]]
         if missing:

@@ -221,6 +221,10 @@ CITIES = {
                   "wards": ["13202"]},
     "hino": {"name": "日野市", "pref": "13", "epsg": 32654, "n02": "25", "wardless": True,
              "wards": ["13212"]},
+    # Okinawa's first city (2026-10-12). UTM 52N from its own longitude
+    # (127.684 E), not copied from Fukuoka's.
+    "naha": {"name": "那覇市", "pref": "47", "epsg": 32652, "n02": "25", "wardless": True,
+             "wards": ["47201"]},
 }
 
 # THE CITIES BUILT BEFORE THE JAPAN FOUNDATION (2026-10-07): they keep

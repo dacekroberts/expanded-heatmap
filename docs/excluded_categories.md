@@ -5833,6 +5833,53 @@ line.
   beyond it, and the JR Hanawa Line 7 toward Odate and 9 toward Morioka; both
   are drawn (owner, 2026-10-06).
 
+### Naha - a food register rebuilt from the city's monthly lists, and its barber and beauty registers, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food: a notification since 2021, not in these
+  lists.
+- Laundries: the city publishes no list of them, so the Personal services
+  layer holds barbers and beauty salons only.
+- 769 stalls licensed for anywhere in the city and 171 vehicles licensed
+  across the prefecture, which have no fixed address.
+- 235 rows of food manufacturing and wholesale other than bakeries and
+  confectioners (菓子) and delis (そうざい), and other permit types that are
+  not a counter.
+- 123 bars with hostess service, 60 vending machines, 10 caterers (仕出し), 2
+  premises inside inns and 1 temporary stall. The permit names its form of
+  business on about one restaurant permit in five, so a hostess bar whose
+  permit does not name it is counted as a restaurant.
+- About 20 restaurants whose permits were renewed in August 2020: that
+  month's file lays out its columns differently from the others, and their
+  permit type is not read.
+
+**Counted** - permits still in their term on August 31, 2026, from every
+monthly list of new permits (April 2015 to August 2026) and of renewals
+(April 2015 to May 2021). Three months are published twice; where an address,
+trade name and permit type repeat, the permit ending latest is kept, so a
+repeat or a renewal counts once. Closures are not published, so this is an
+upper bound: 8,744 restaurant permits against 8,530 in the national count of
+March 31, 2025. A permit under an older trade name at an address where a
+newer one now trades is kept. Also, 36 of the 810 bakery, confectioner and
+deli rows (4.4%) have a trade name that reads as a factory; they are kept
+(owner, 2026-09-24). The barber and beauty registers of September 4, 2026
+are complete lists of open premises: 287 barbers and 1,069 beauty salons,
+against 282 and 1,027 in the national count of March 31, 2025.
+
+**One pin per premises** - 358 repeat permits are shown once.
+
+**Not placed** - 8 rows (0.1%), on reclaimed land by the airport and at lot
+numbers the address data does not hold. Another 153 sit at their district's
+center. A street block is one point, so dense blocks stack many dots on one
+spot: the Sakaemachi market block in Asato holds 250.
+
+**Names not shown** - 4 pins whose trade name is the operator's own name show
+their permit type.
+
+**Stations.** The Yui Rail is drawn, cut at the city line.
+- Left out: 3 stations beyond it, in Urasoe.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

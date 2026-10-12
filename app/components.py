@@ -658,6 +658,8 @@ _OSM_STATION_NAMES = (
     "Higashiyamato", "Nishitōkyō", "Tama", "Higashimurayama", "Chōfu", "Ageo (Regional)", "Sōka", "Tokorozawa", "Fuchū (Tokyo)", "Kasukabe", "Tachikawa", "Hino",
     # Kansai-1 (2026-10-07)
     "Toyonaka", "Hirakata", "Suita", "Itami", "Kakogawa", "Amagasaki", "Uji",
+    # Naha (2026-10-12)
+    "Naha",
 )
 
 # Verbatim where verbatim is required. Each entry is a Notice, and the sources
@@ -3061,6 +3063,31 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
      "Morioka City, MHLW and MLIT did not make and do not endorse this map.",
      False, ("Morioka",)),
+    # Naha (notice 217): the city's three BODIK packages, CC BY 4.0 under the
+    # city's open-data terms (odcs.bodik.jp/472018/tos/), which prescribe no
+    # wording: a credit to the city with the dataset names and source, the
+    # licence link and a statement of modification, in Sasebo's edited-use
+    # form. One notice names all three packages (one publisher, one set of
+    # terms). 第5項, a use-triggered cost clause, accepted by the owner
+    # (2026-10-12). MLIT as in Kobe's, N02 in its 2025 edition. Written from
+    # Sasebo's and Kyoto's wording under the owner's pre-approval of template
+    # prose (2026-09-30); a proposal in
+    # docs/decisions_drafts/worktree-japan-naha.md.
+    Notice(217, "Naha City and MLIT (Naha)",
+     "Naha's businesses: この地図は、以下の著作物を改変して利用しています。"
+     "（新規）食品営業許可施設、（継続）食品営業許可施設、理容所・美容所新規開設施設情報、那覇市、CCライセンス"
+     "（[https://creativecommons.org/licenses/by/4.0/deed.ja](https://creativecommons.org/licenses/by/4.0/deed.ja)）"
+     "（[https://data.bodik.jp/dataset/shinki_syokuhin](https://data.bodik.jp/dataset/shinki_syokuhin)、"
+     "[https://data.bodik.jp/dataset/472018_keizoku_syokuhin](https://data.bodik.jp/dataset/472018_keizoku_syokuhin)、"
+     "[https://data.bodik.jp/dataset/472018_ribiyou](https://data.bodik.jp/dataset/472018_ribiyou)）. "
+     "Processed by this project, which rebuilt the city's food permits from its monthly lists of new and "
+     "renewed permits, kept those still in term at the end of August 2026, selected the storefront types, "
+     "placed each by its address, and counted them around stations. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
+     "Naha City and MLIT did not make and do not endorse this map.",
+     False, ("Naha",)),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no

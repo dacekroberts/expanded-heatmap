@@ -556,6 +556,12 @@ REGISTRIES = {
     **{slug: dict(raw=None, trade=None, owner=None, processed="businesses_clean.csv",
                   address=("address",), japan=True)
        for slug in ("higashiyamato", "nishitokyo", "tama", "higashimurayama", "chofu", "ageo_regional", "fuchu_tokyo", "soka", "tokorozawa", "kasukabe", "tachikawa", "hino")},
+    # Naha (2026-10-12), on the same shared steps and the same rule: 申請者名 and
+    # 代表者名 (the monthly food files) and 開設者氏名 (the two registers) are
+    # read only by the name rule, in memory. The Japan pass tests what reached
+    # the map.
+    "naha": dict(raw=None, trade=None, owner=None, processed="businesses_clean.csv",
+                 address=("address",), japan=True),
     # Ottawa: Ottawa Public Health's LIVES inspection feed. Its businesses.csv
     # has one name column (the premises name) and a phone, never read (step 2
     # names its columns and asserts it). No owner column exists, so no
