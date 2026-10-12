@@ -37,8 +37,16 @@ Detail files: [japan](docs/plan_detail/japan.md),
     owner when it finishes (`docs/build_plan_2026-10-07.md`).
   - [ ] When the batch lands: give the owner the city count, read from
     `app/cities.py`, for every "about N cities" line in his other projects.
-  - [ ] When place search is fully in: remind the owner to write the
-    transit-globe handoff (his to write).
+  - [ ] After the phase 2 landing: draft a handoff file for transit-globe to implement ITS OWN search feature
+    (owner, 2026-10-12, in Cleanup's chat; Cleanup drafts it, which
+    replaces the earlier "his to write"). It names the index files that
+    feature needs (the per-city place index and the intersections file
+    under `app/static/places/`, their format, and the ODbL credit they
+    carry) and lets the app filter out search terms outside its scope.
+    The app stays independent: it reads our export read-only, borrows no
+    code, and the handoff is a full build-and-decisions account for it to
+    critique, with every pilot-only choice named (owner, 2026-10-07 and
+    2026-10-08). A draft for the owner to read before it goes over.
   - [ ] **The commercial-use audit, after the batch lands:**
     `docs/commercial_use_positions.md`, for transit-globe's decisions only
     (this site stays non-commercial). One row per city, layer and source;
@@ -68,6 +76,75 @@ Detail files: [japan](docs/plan_detail/japan.md),
     prose pass against the tone guide (about 2026-11-07; the guide loads
     from the owner's global CLAUDE.md; changes are reported per page, never
     applied).
+
+- [ ] **At the phase 2 landing (owner, 2026-10-11; DECISIONS, that day):**
+  - **Bucharest's name repair, a privacy repair on a published map:**
+    apply Kansai-2's `name_kind_extended()`
+    (`pipeline/taxonomies/romania_dsvsa.py`, arriving with Cluj-Napoca)
+    in Bucharest's step 2, so a company named as a given name beside one
+    other word shows its category: 127 pins, 93 names, measured. Then
+    re-render, `check_personal_exposure.py bucharest`, and the verdict in
+    `docs/privacy_verdicts.md`. The "on two or more premises, so a
+    brand" exception is NOT applied: every such name stays withheld
+    (owner, 2026-10-12).
+  - Osaka's three lines renamed "Osaka Metro ..." at its held re-render,
+    as the line registry has them; drift checks for Suita, Osaka and
+    Bucharest.
+  - After it, at a review time: move Bucharest's address and name
+    functions, which Cluj-Napoca's step 2 imports, to a shared module.
+  - **Branches, nothing pushed:** `worktree-japan-east-2` (11 cities),
+    `worktree-japan-kansai-2` (7 and Cluj-Napoca),
+    `worktree-japan-regional-2` (11); each has its drafts file and a
+    handoff note. The owner's calls below were given in the build
+    sessions' and Staging's chats and are recorded in those drafts
+    (S numbers are Staging's).
+  - **First: Regional-1's eleven cities are missing from
+    `app/osm_notice.py` and `_OSM_STATION_NAMES`** (verified on master,
+    2026-10-11), so their live pages show no OpenStreetMap station-names
+    line; the map's corner credit is in place. Reported and not
+    verified: notice 1's sentence stops at "Tachikawa and Hino". At the
+    landing, first, not alone (owner, 2026-10-12).
+  - **Shared-code changes, Cleanup's (S14):** S1, `glitched_name` treats
+    U+E000 to U+F8FF as glitched (measure the built maps first;
+    Kawaguchi is held on it); S2, a late start whose first-permit date
+    is on or before the list's date stays (Kawaguchi gains about 100
+    pins); S17, 自動販売形態 into `japan_eigyo.FORM_RULES` (83 vending
+    pins; Kurashiki re-runs steps 2-3); S19,
+    `japan_register.permits_from_rows` tests the area-wide rule after
+    the city cut, Tottori's hook deleted (reproduce 237 area-wide, 2,240
+    storefronts); call 182, Yamagata's permit-match name rule moved from
+    its config into `japan_step2` (it flags 3 rows, the brief counted 4).
+    Each with the Minato control and a Japan drift run. S18: read
+    Kurashiki's 8 特殊形態 pins, then a rule only if needed.
+  - **Lines:** JR Keiyo to `#C81000` in the registry (S3), Tokyo's own
+    literal switched to the registry, the dark-mode label check run (it
+    was not; 10.2 from the Keikyu Main Line), then Tokyo, Funabashi,
+    Ichikawa and Urayasu re-rendered; a `NEIGHBOUR_EXCEPTIONS` entry with
+    a note for Okazaki's Meitetsu Nagoya Main Line and Toyota's Mikawa
+    Line (S16).
+  - **Macro map (Cleanup's, call 198):** Minoh, Fuji and Kurashiki are
+    labelled in no view; `TEXT_WIDTH` lacks "Ibaraki (Osaka)", "Yao" and
+    "Takatsuki".
+  - Cluj-Napoca publishes under notice 215, treated as Bucharest (S8).
+    It takes Bucharest's hold off public pieces (owner, 2026-10-12), in
+    the downstream note.
+  - Staging moves the master list's cities to Built after the landing
+    (`check_provenance.py` fails on the branches until then).
+  - **The phone legend (owner, 2026-10-12):** capped at about 40% of the
+    map's height with its own scroll, the lines folded by operator past
+    a measured threshold, names whole (Tokyo's open legend fills half
+    the screen).
+  - OPEN: the Global View button on Seattle (Regional)'s map does
+    nothing on the owner's iPhone (reached from its Overview dot; the
+    button works on Tokyo's map); not reproduced at 375 px by a
+    scripted click.
+  - **The order, and what is not here:**
+    `docs/handoff_cleanup_2026-10-12.md`.
+  - Place search (branch `place-search`, 28b1ecb8 and later): the
+    owner's phone test of São Paulo, then London, before any rollout;
+    the stations OSM draws as not yet open are an internal watch file
+    on the branch with its check, no per-city page text; one general
+    sentence for About the Data is approved (the handoff has it).
 
 - [ ] **Next landing:**
   - Phase 2 Japanese cities (East-2, Kansai-2, Regional-2) and Cluj-Napoca,
@@ -292,5 +369,18 @@ decisions inside a build are named in its brief.
 ## Later / maybe
 
 - [ ] Ridership (out of scope; revisit only if asked).
+- [ ] **An English-language switch for station names**, for cities whose
+  operator publishes English names (owner, 2026-10-12, in the Naha build's
+  chat, relayed: "potential future implementation ... let cleanup know").
+  Recorded, NOT built: the feature freeze of 2026-10-08 stands. A map
+  control would swap the site's romanised style (Naha-kuko, Itami's
+  Osaka-kuko) for the operator's own English (Naha Airport). Half the data
+  exists: each config's `OSM_NAME_EN_OVERRIDES` cites the OSM spelling it
+  replaces. The romanised precedent stands site-wide with no exception:
+  Naha's airport station is Naha-kuko (owner, in that chat, relayed:
+  "naha-kuko okay"). He places the idea with the Travel view or the
+  transit-globe app, not the site's maps ("i will worry about the
+  english wording more for the transit-globe or maybe the partial
+  travel version"): name it in transit-globe's search handoff.
 - [ ] Adopt `safe-rename` (or fold its checklist into `add-city`) once a
   README, deployment or devcontainer exists to keep in sync.

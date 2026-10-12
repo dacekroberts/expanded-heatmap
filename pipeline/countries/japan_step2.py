@@ -71,6 +71,37 @@ def source_rows(config, key):
     return jr.city_rows(need(config.source_csv(key), config.SLUG))
 
 
+def permit_key(row):
+    """A permit as two files number it: the last run of digits in 許可番号 (a
+    city writes R08-1234 or H31-1234, MHLW 1234 or 第1234号) and the grant
+    date. None where either is missing."""
+    runs = re.findall(r"\d+", (row.get("許可番号") or "").strip())
+    day = jr.wareki_date(row.get("許可年月日"))
+    return (runs[-1].lstrip("0"), day) if runs and day else None
+
+
+def operators_by_permit(config, rules):
+    """Call 182 (owner, 2026-10-06; moved here from Yamagata's config on
+    2026-10-12, DECISIONS): config.OPERATOR_BY_PERMIT = {source key: donor
+    key}. A list that publishes no operator column takes the name rule's
+    answer from another file's operator columns for the SAME permit
+    (permit_key), the donor's permits only (申請区分 許可), never its
+    notifications. Yamagata: the city's list has 法人名 empty on all 3,584
+    rows and MHLW's file names the operator of 3,000 of them; 3 trade names
+    are withheld (2026-10-11; the brief of 2026-10-06 read 4). Returns
+    {source key: {permit key: [operator names]}}, read IN MEMORY by run()
+    only: the answer leaves as name_is_operator, never a name."""
+    out = {}
+    for key, donor in getattr(config, "OPERATOR_BY_PERMIT", {}).items():
+        ops = collections.defaultdict(list)
+        for r in source_rows(config, donor):
+            k = permit_key(r)
+            if k and (r.get("申請区分") or "").startswith("許可"):
+                ops[k].extend(r.get(c) for c in jr.operator_cols(rules) if (r.get(c) or "").strip())
+        out[key] = ops
+    return out
+
+
 def municipality(config, key):
     """The municipality a source's addresses are read against: the city's, or
     config.SOURCE_MUNICIPALITY[key] where each source is one municipality of
@@ -494,6 +525,18 @@ def out_of_term(config, df, rules):
                           for d, a in zip(df[col], on)], index=df.index)
     past = cmp("end", "past_term", -1)
     late = cmp("start", "late_start", 1)
+    # S2 (owner, 2026-10-11; DECISIONS): a late start whose FIRST permit is on
+    # or before the as-of is a renewal already granted, at a premises that is
+    # open, and stays (Kawaguchi's March list: 131 such rows, 112 of them
+    # restaurants). Counted only where it keeps a row, so a city it does not
+    # touch gains no baseline figure.
+    if "first" in df and late.any():
+        renewal = late & pd.Series([bool(f and a and isinstance(f, type(a)) and (f - a).days <= 0)
+                                    for f, a in zip(df["first"], on)], index=df.index)
+        if renewal.any():
+            print(f"  late starts kept as renewals, first permit on or before the as-of (S2): {int(renewal.sum()):,}")
+            emit("permits_late_start_renewal", int(renewal.sum()))
+            late = late & ~renewal
     for label, m, k in (("past its term (call 161)", past, "past_term"), ("starting after the as-of (call 172)", late,
                                                                          "late_start")):
         print(f"  permits {label}: {int(m.sum()):,}")
@@ -510,11 +553,23 @@ def run(config, write=True):
     others = other_municipalities(config) if "other_muni" in rules else ()
 
     permits = []
+    by_permit = operators_by_permit(config, rules)
     for key in config.SOURCES:
         rows = list(source_rows(config, key))
         missing = [c for c in config.REQUIRED_COLUMNS[key] if c not in rows[0]]
         if missing:
             sys.exit(f"{key}: header lacks {missing}")
+        if key in by_permit:
+            matched = 0
+            for r in rows:
+                ops = by_permit[key].get(permit_key(r))
+                if ops:
+                    matched += 1
+                    name = next((r[c] for c in jr.NAME_COLS if (r.get(c) or "").strip()), "")
+                    r["name_is_operator"] = jr.same_person(name, ops, "coop" in rules)
+            print(f"  {key}: {matched:,} rows matched to a {config.OPERATOR_BY_PERMIT[key]} permit for the name rule "
+                  f"(call 182)")
+            emit(f"operator_by_permit_{key}", matched)
         flags = [jr.name_is_operator(r, rules) for r in rows]
         ps = read_permits(config, key, rows, rules, others)
         check_new_city_columns(config, key, rows, ps, rules)

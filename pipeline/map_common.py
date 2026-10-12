@@ -2977,6 +2977,16 @@ def _has_contact_details(name) -> bool:
 _SHEET_ERROR = re.compile(r"^#(NAME\?|VALUE!|REF!|N/A|DIV/0!|NULL!|NUM!)$")
 _LETTER = "A-Za-zÀ-ɏ぀-ヿ一-鿿가-힯"
 _LOST_LETTER = re.compile(f"[{_LETTER}]\\?[{_LETTER}]|\\bCaf\\?")
+# S1 (owner, 2026-10-12; DECISIONS): a private-use code point (U+E000 to
+# U+F8FF) is a publisher's own glyph, which no reader's font holds, so it
+# draws as an empty box. Measured that day over every built city's kept rows:
+# 1,797 names in 29 cities (Osaka 787, Kyoto 397, Sapporo 135, Tokyo 125, Kobe
+# 101; Taipei 4), 493 distinct code points, 1,696 of the names with one; 23
+# committed maps showed such a name, the other six cities' being withheld by
+# the name rule already. The pin stays and shows its classification. A repair pass (one publisher, one
+# code point, one known character) is queued in PLAN; re-measure if a
+# publisher's file is refreshed.
+_PRIVATE_USE = re.compile("[\ue000-\uf8ff]")
 _LOST_APOSTROPHE = re.compile(r"(?<=[A-Za-z])\?(?=[sS]\b)")
 _LOST_CAFE = re.compile(r"\b(Caf|CAF)\?")
 
@@ -2995,7 +3005,7 @@ def glitched_name(name):
         return True
     text = str(name).strip()
     return not text or text.lower() == "nan" or bool(_SHEET_ERROR.match(text)) \
-        or bool(_LOST_LETTER.search(text))
+        or bool(_LOST_LETTER.search(text)) or bool(_PRIVATE_USE.search(text))
 
 
 def shown_name(name, classification):

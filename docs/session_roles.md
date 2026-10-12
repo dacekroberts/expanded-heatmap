@@ -137,12 +137,12 @@ exist ONLY in the worktree that built it. Before removing a worktree
 2026-10-04). Notice numbers are claimed
 here, by the session, before one is written; open claims (2026-10-07,
 the A and B build plan): East-2 187–197, Kansai-2 198–204 and 215–215 (Cluj-Napoca, call 222),
-Regional-2 205–214 and 216–216 (Kurashiki, call 226); 133–136, released unused by the four extensions on
-2026-10-03, stay unassigned; the next free notice is 217. Every earlier block, up to 186, has
+Regional-2 205–214 and 216–216 (Kurashiki, call 226), Naha 217–217 (owner, 2026-10-12); 133–136, released unused by the four extensions on
+2026-10-03, stay unassigned; the next free notice is 218. Every earlier block, up to 186, has
 landed (2026-10-08). Pages reserved (2026-10-07, the A and B build plan, one
 page per city in its session's build order): the owed-act seven 203–209,
-East-2 240–250, Kansai-2 251–257 and 305 (Cluj-Napoca), Regional-2 258–267 and 306 (Kurashiki), spare
-268–289, rank 4 290–299; the free pages outside them are 307 on. A
+East-2 240–250, Kansai-2 251–257 and 305 (Cluj-Napoca), Regional-2 258–267 and 306 (Kurashiki), Naha 307 (owner, 2026-10-12), spare
+268–289, rank 4 290–299; the free pages outside them are 308 on. A
 session releases what it leaves unused when it lands.
 Check D of `check_provenance.py` reads every range in that sentence and lets
 a branch skip exactly those numbers; any other gap still fails. Keep the

@@ -51,6 +51,7 @@ At most three build sessions at once (owner, 2026-10-04).
 | 2 | **East-2** (`japan-east-2`) | A: Koshigaya, Sagamihara, Fujisawa. B: Kawaguchi, Funabashi, Matsudo, Ichikawa, Urayasu, Sakura, Yachiyo, Ichihara | japan-city |
 | 2 | **Kansai-2** (`japan-kansai-2`) | B: Ibaraki (Osaka), Minoh, Moriguchi, Kadoma, Neyagawa, Yao, Takatsuki; then Cluj-Napoca (B, food only; owner, call 222); then Naha's measurement if BODIK answers | japan-city; for Cluj-Napoca add-city, osm-rail, address-join, then write the romania-city skill |
 | 2 | **Regional-2** (`japan-regional-2`) | B: Shizuoka, Kanazawa, Okazaki, Aomori, Matsue, Fuji, Matsumoto, Tottori, Yamagata, Kure, Kurashiki (owner, call 226) | japan-city |
+| 2 | **Naha** (`japan-naha`) | B: Naha (owner, 2026-10-12, "naha should get built as part of phase 2"), after Cleanup's reader changes | japan-city |
 
 - **The foundation landed on 2026-10-07 (7ab440f9).** The five one-city address fixes landed the same day (521d28fc): Gifu's bracketed 字, Morioka's 地割, Mito's 宮町/泉町 and Matsumoto's 湯の原 as WAVE5_RULES switches, Matsue's 八雲村 as a config key (its brief says how). A session started before 521d28fc merges origin/master before Gifu, Mito and Morioka.
 - **Phase 1 starts when the foundation lands on master.** Until Abroad finishes, only two Japan sessions run at once.
@@ -72,6 +73,7 @@ Each session takes its numbers from its own block, recorded in `docs/session_rol
 | East-2 | 240–250 | 187–197 |
 | Kansai-2 | 251–257 and 305 (Cluj-Napoca) | 198–204 and 215 (Cluj-Napoca) |
 | Regional-2 | 258–267 and 306 (Kurashiki) | 205–214 and 216 (Kurashiki) |
+| Naha | 307 | 217 |
 
 A session that runs out asks Staging for more. Unused numbers are released when the session lands.
 
@@ -207,4 +209,24 @@ The briefs' shared-code items are already in shared code (the foundation, 7ab440
 Licence calls already answered (DECISIONS.md, "Licence reads for the Japan builds" and the 2026-10-08 Kurashiki entries): Yamagata §4, a use-triggered reimbursement, accepted (call 206); Matsumoto's two use-triggered clauses accepted, the credit naming CC BY 4.0 in the city's format plus LinkData's CC BY 3.0 mark (call 207); Okazaki 5(5), use-triggered, accepted (call 214); Kurashiki's barber and beauty lists stay out (call 225). Matsue's 八雲村 is a config key (its brief says how). Keep BODIK calls at least 20 s apart. Merge notes: keep both sides at japan_register.OPERATOR_COLS_WAVE5 and at the WAVE5 switches (name_city, default_joined).
 
 At the batch's end, report to Staging Session as the plan says, and write a handoff note for the next session in your group.
+```
+
+### Naha (added to phase 2 by the owner, 2026-10-12)
+
+One city, its own session. Cleanup's reader changes for Naha (the brief's shared-code items 1 to 5) landed on master on 2026-10-12 (db0c4e0c, zero drift on the 64 built Japanese pipelines), so the session may start. Page 307, notice 217. The owner's calls S13, S15 and S29 to S38 are in the brief and in `docs/decisions_drafts/staging.md`.
+
+```
+First, enter a new worktree named japan-naha (use the EnterWorktree tool), then bring it up to date: git fetch origin, then git merge --ff-only origin/master. Then continue.
+
+You are the Naha build session for expanded-heatmap (worktree japan-naha). Read docs/build_plan_2026-10-07.md first: its rules and usage check-ins bind you. Start from origin/master, which holds the Japan foundation's shared-code rules, the wave 2 rules (the japan-city skill's "After the large review (2026-10-07)" section: one colour per line site-wide from pipeline/line_registry.py, checked by scripts/check_line_identity.py) and Cleanup's reader changes for Naha (db0c4e0c: rebuilt_register's reader argument, unnamed_after on city_rows / xlsx_rows / workbook_tables, the added NAME_COLS and TYPE_COLS spellings, the 壼 variant). If a shared reader still cannot read a Naha file, that is a parked call for Cleanup, not a city-local fix.
+
+Build Naha from docs/build_briefs/naha.md and the japan-city skill (Kyoto's rebuilt-register sheet), on page 307 and notice 217. Run python scripts/brief_check.py naha first (it makes three BODIK metadata calls: run it once, and keep every other BODIK call at least 20 s apart; every data file is already in data/naha/raw/, so nothing needs fetching from BODIK).
+
+The owner's calls, all in the brief (do not re-ask): Band B, Food plus Personal services (S30, S38): food from the register rebuilt from the monthly new-permit files AND the renewals package (S31), kept while in term on 2026-08-31, published with Kyoto's upper-bound sentence and the measured figure, no trimming (S32); barbers and beauty salons from the two registers of 2026-09-04 (package 472018_ribiyou), no laundries (none is published: the page says so); mode light_rail (S33); region Kyushu-Okinawa, the macro view's fit left to Cleanup (S35: never add or change a region view); the cost-recovery clause accepted (S15); BODIK copies only, never the city site's own files; one notice naming all three packages, with credit and a statement of modification. Applicant, representative and opener name, address and phone columns are never selected; the name rule reads them in memory only.
+
+The reader: config.source_rows and the stitch use the shared readers with unnamed_after for the unnamed 種目 column. The stitch call Cleanup measured is rebuilt_register(paths, as_of, end_col=..., granted_col=..., rules=..., reader=functools.partial(jr.city_rows, unnamed_after={"営業の種類": "種目", "営業所種類": "種目", "業種": "種目", "営業の種目": "種目"})): all four type spellings are needed as keys (3,611 forms read; 3,596 with the first alone). The brief's item 6 is this city's config (end and granted columns, NOT_OPERATOR, TERM_AS_OF). The character variant 壼 is in shared VARIANTS; Naha needs no handling of its own for it. Leave "rules" out of the japan.CITIES entry. A count one row off the brief's (10,000 or 10,001 permits in term, 8,429 or 8,430 restaurants) is known: record the build's own figure.
+
+Still to measure at the build (the brief's last section): gate 3 against the Yui Rail's own station list, OSM name:en (one Overpass query in flight), the frequency if the operator's timetable page is named in the brief (otherwise the master list's read stands), the Economic Census control, the opening view, the line's colour against the pins. The three page sentences the brief lists (S36) and any other sentence no template covers are proposals in your drafts file for review time.
+
+At the batch's end, report to Staging Session as the plan says, and write a handoff note.
 ```
