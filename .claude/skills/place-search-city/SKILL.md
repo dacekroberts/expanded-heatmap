@@ -375,7 +375,9 @@ and the dots, cluster bubbles and heat fade to 28% while it shows; they are
 never switched off. A picked line (search, legend row or tap) fades them
 too, with a casing under the line and a boxed label, until it is unpicked:
 built in the search script, which watches the legend rows, so an unsearched
-map's legend pick is unchanged until the rollout reaches it. With Cleanup
+map's legend pick is unchanged until the rollout reaches it (owner,
+2026-10-11: it lands with the rollout). The outline is black on the light
+map and white on the dark one. With Cleanup
 for review
 time: the WIP suggestion tuning, the corner credit test, the Cities menu
 move, and whether "Download this index" also links the intersections file.

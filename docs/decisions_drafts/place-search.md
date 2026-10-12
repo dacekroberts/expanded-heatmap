@@ -4,6 +4,12 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-11 - Place search: the picked line's outline contrasts with the map; unsearched maps get it with the rollout (owner, branch)
+
+- **"two color swap"** (owner): the casing under a picked line is black on the light map and white on the dark one, and the label's ring is the same black or white (it was the label's own colour). The label's fill stays the map's side (white on light, black on dark) so its text and halo still read.
+- **"for every other map we should land that change with the rollout"** (owner): the picked line's look stays in the search script and reaches each unsearched map when it gets search. Nothing moves into the highlight script and no unsearched map is re-rendered for it.
+- All nineteen searched maps re-rendered.
+
 ### 2026-10-11 - Place search: a picked line is outlined, legend picks included; the search button closes a box with text in it (owner, branch)
 
 - **"line fade looks better"** (owner, at the phone check): the fade that lasts while the line stays picked is confirmed.

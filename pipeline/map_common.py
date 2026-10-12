@@ -2051,11 +2051,11 @@ _PLACE_SEARCH_TEMPLATE = r"""
     path.hm-search-case { stroke: #ffffff; stroke-opacity: 0.95; fill: none; }
     path.hm-search-ring { stroke: @@LIGHT_ACCENT@@; stroke-opacity: 1;
         fill: @@LIGHT_ACCENT@@; fill-opacity: 0.14; }
-    path.hm-search-linecase { stroke: #ffffff; fill: none; }
-    .dark-base path.hm-search-linecase { stroke: #000000; }
+    path.hm-search-linecase { stroke: #000000; fill: none; }
+    .dark-base path.hm-search-linecase { stroke: #ffffff; }
     .hm-line-label.hm-search-label { padding: 1px 6px; border-radius: 4px; background: #ffffff;
-        box-shadow: 0 0 0 2px currentColor; }
-    .dark-base .hm-line-label.hm-search-label { background: #000000; }
+        box-shadow: 0 0 0 2px #000000; }
+    .dark-base .hm-line-label.hm-search-label { background: #000000; box-shadow: 0 0 0 2px #ffffff; }
     .dark-base path.hm-search-case { stroke: @@DARK_PAGE@@; }
     .dark-base path.hm-search-ring { stroke: @@DARK_ACCENT@@; fill: @@DARK_ACCENT@@; fill-opacity: 0.2; }
     /* While the marker shows, the businesses step back: the dots (the only
