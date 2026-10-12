@@ -57,6 +57,12 @@ def main():
         # run on to Kyoto, Kobe, Nara and Wakayama. N03 is used here and NEVER
         # drawn (the Survey Act; japan.city_boundary).
         label_focus=japan.city_boundary(config.SLUG),
+        # Measured 2026-10-12 with the app's buttons shown: at 343 px the
+        # Nagahori Tsurumi-ryokuchi, JR Yumesaki and Nankai Shiomibashi labels
+        # overlapped (three pairs) with every spot within 88 px taken; with
+        # 120 px none of the 34 does, six labels standing 90 to 118 px off.
+        # 375 and 854 px are clear at 88 and do not use it (owner, 2026-10-12).
+        dense_reach=120,
         # Trade names are Japanese; this orders the Japanese faces first
         # (theme.font_stack) and render_heatmap raises without it.
         lang="ja",

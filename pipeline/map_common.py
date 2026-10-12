@@ -1057,6 +1057,11 @@ DENSE_LABEL_SCRIPT = """
     var CLEAR = 2;      // as LABEL_CLAMP_SCRIPT: px from a button, control or legend
     var GAP = 4;        // px between a label and its line's tip
     var REACH = __LABEL_REACH__;   // px: no label box further than this from its own tip
+    // A wider reach, tried from the start only when REACH leaves an overlap
+    // (owner, 2026-10-12): Osaka's three labels at 343 px. Equal to REACH on
+    // a map that asks for none, so nothing there is tried twice.
+    var REACH_MORE = __LABEL_REACH_MORE__;
+    var reachNow = REACH;
     var STEP_X = 8, STEP_Y = 6;
     var PASSES = 8;
     var tries = 0, waits = 0;
@@ -1178,20 +1183,21 @@ DENSE_LABEL_SCRIPT = """
             var w = L.b0.x1 - L.b0.x0, h = L.b0.y1 - L.b0.y0, p = L.p;
             var xs = [], ys = [], out = [], f, d;
             for (f = 0; f <= 8; f++) xs.push(p.x - f / 8 * w);
-            for (d = GAP; d <= REACH; d += STEP_X) xs.push(p.x + d, p.x - w - d);
+            for (d = GAP; d <= reachNow; d += STEP_X) xs.push(p.x + d, p.x - w - d);
             for (f = -2; f <= 2; f++) ys.push(p.y - h / 2 + f / 4 * h);
-            for (d = GAP; d <= REACH; d += STEP_Y) ys.push(p.y + d, p.y - h - d);
+            for (d = GAP; d <= reachNow; d += STEP_Y) ys.push(p.y + d, p.y - h - d);
             xs.forEach(function (x) {
                 ys.forEach(function (y) {
                     var b = inside(box(x, y, x + w, y + h));
                     var r = reach(b, p);
-                    if (r <= REACH) out.push({b: b, r: r});
+                    if (r <= reachNow) out.push({b: b, r: r});
                 });
             });
             out.sort(function (a, b) { return a.r - b.r; });
             return out;
         }
 
+        function solve() {
         // 1. A label that still overlaps something takes the nearest spot that
         //    collides less, the most-crowded label first.
         for (var pass = 0; pass < PASSES; pass++) {
@@ -1242,6 +1248,17 @@ DENSE_LABEL_SCRIPT = """
                     return false;
                 });
             });
+        }
+        solve();
+        if (REACH_MORE > REACH && labels.some(overlapped)) {
+            // Every label back where the clamp left it, then the same two
+            // steps with the wider reach. A layout REACH already clears never
+            // gets here, so it is unchanged.
+            labels.forEach(function (L) { L.b = L.b0; L.spots = null; });
+            reachNow = REACH_MORE;
+            solve();
+            reachNow = REACH;
+        }
 
         labels.forEach(function (L) {
             var sx = L.b.x0 - L.b0.x0, sy = L.b.y0 - L.b0.y0;
@@ -5081,7 +5098,7 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
                    center=None, zoom=None, label_focus=None, rings_shown=False,
                    all_city_heat=True, animate_clusters=False, lang=None, pins=True,
                    legend_names=None, open_basemap=None, full_travel=None,
-                   place_index_url=None, dense_labels=False):
+                   place_index_url=None, dense_labels=False, dense_reach=None):
     """Render one city's heatmap to a standalone HTML file.
 
     full_travel: optional dict(pmtiles_url=..., local_lang=..., local_name=...,
@@ -5417,10 +5434,14 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     # (Ostrava's Tram 14 under the button row at 854 px, Madrid's corner
     # touch at 343 px; 2026-10-12). The view is fitted in the browser, so an
     # obstacle in _layout_labels does not reach such a case: measured on
-    # Ostrava, the row as an obstacle there changed nothing.
+    # Ostrava, the row as an obstacle there changed nothing. `dense_reach`
+    # is a wider stand-off in px, used only where the usual one leaves an
+    # overlap (owner, 2026-10-12: 120 for Osaka, past the 88 px of 2026-09-27
+    # on that map alone).
     if dense_labels or any(_clearance(t) in _LABEL_WIDE_CLEARANCES for t in tips.values()):
         m.get_root().html.add_child(folium.Element(
             DENSE_LABEL_SCRIPT.replace("__MAP_NAME__", m.get_name())
+            .replace("__LABEL_REACH_MORE__", f"{max(dense_reach or 0, max(_LABEL_WIDE_CLEARANCES)):g}")
             .replace("__LABEL_REACH__", f"{max(_LABEL_WIDE_CLEARANCES):g}")))
     # Mouse-wheel zoom that neither drops notches nor moves less than a click.
     # See WHEEL_ZOOM_SCRIPT.
