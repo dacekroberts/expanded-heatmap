@@ -73,7 +73,16 @@ fresh `docs/decisions_drafts/staging.md`.
   (S1 Kawaguchi B, private-use glyphs; S2 Kawaguchi A, late-start renewals;
   S3 Funabashi A, the Keiyo colour; S4 two OSM station spellings; S5
   Kawaguchi C, "Saitama Stadium Line"), from its batch report at tip
-  bd58afa3 (eleven cities built, nothing pushed). Next free: S6.
+  bd58afa3 (eleven cities built, nothing pushed). **S6-S13 were put on 2026-10-12 at
+  00:45 UTC**, from Kansai-2's batch report at tip 62283a64 (seven Japanese
+  cities and Cluj-Napoca built, nothing pushed): S6 Osaka A (three Osaka
+  Metro line names), S7 Batch B (page sentences), S8 Cluj A (DSVSA Cluj's
+  terms; staging owes a re-check of data.gov.ro and a read of ansvsa.ro
+  before review time), S9 Cluj B (page sentences), S10 Cluj C (the extended
+  name rule), S11 Cluj D (Bucharest's functions to a shared module), S12
+  Cluj E (osm_tram name_members), S13 Naha (a brief, two licence reads
+  first). Kansai-2's Batch C (macro label widths for three names) is
+  Cleanup's and has no S number. Next free: S14.
 - **The live privacy fix (call 209)** landed on 2026-10-07 before the review:
   13 operators' own names withheld on six Japanese maps by the `name_city`
   switch.
