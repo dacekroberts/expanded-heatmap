@@ -59,7 +59,7 @@ marked TO BUILD name a script that does not exist yet.
    `scripts/place_search_fetch_queue.py`, over `place_index_fetch.py`): one
    city after another, the wait after a 504 or 429, a log line per city, a
    retry list at the end. **The one-query rule is a LOCK in the fetch
-   script** (TO BUILD), not a hook: a lock guards the queue and anything an
+   script** (`FetchLock`, built 2026-10-12; `--wait MINUTES`), not a hook: a lock guards the queue and anything an
    outside model drives; a hook guards only a Claude session. No session
    needs to be open while it runs.
 4. **Build every index of the wave**, then read the languages lines and

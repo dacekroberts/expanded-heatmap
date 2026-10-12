@@ -2,7 +2,10 @@
 step: drift_check.py never runs this file, and the index step exits naming it
 when its cache is missing.
 
-    python pipeline/place_index_fetch.py <city> [--force]
+    python pipeline/place_index_fetch.py <city> [--force] [--wait MINUTES]
+    python pipeline/place_index_fetch.py --selftest      # the lock's cases
+
+One run of this script at a time on this machine (FetchLock, below).
 
 Two Overpass queries per city, one after the other (the owner's rule: one in
 flight per session, none in parallel, 60 s after a 504 or 429, all in
@@ -38,7 +41,9 @@ import datetime
 import hashlib
 import importlib
 import json
+import os
 import sys
+import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -167,13 +172,138 @@ def fetch_split(config, path, force):
     path.write_text(json.dumps(out, ensure_ascii=False), encoding="utf-8")
     return merged, out["_fetched_from"]
 
+# ONE PLACE FETCH ON THIS MACHINE AT A TIME (owner, 2026-10-12). The Overpass
+# rule is one query in flight; pipeline/osm.py holds it inside one process,
+# and nothing held it between processes. The rollout runs an unattended queue
+# and may be driven by an outside model, which a session hook does not see,
+# so the rule is a lock file here: data/_place_fetch.lock, in the data folder
+# every worktree shares. It names its holder (pid, city, since). A holder
+# whose process is gone is replaced; a live one makes this script exit
+# non-zero naming it, or wait with --wait MINUTES. PLACE_FETCH_LOCK_DIR moves
+# the file (the selftest's).
+LOCK_NAME = "_place_fetch.lock"
+LOCK_POLL_S = 5
+
+
+def lock_path():
+    return Path(os.environ.get("PLACE_FETCH_LOCK_DIR", Path(__file__).parent.parent / "data")) / LOCK_NAME
+
+
+def _pid_alive(pid):
+    import psutil
+    return psutil.pid_exists(pid)
+
+
+class FetchLock:
+    """Held for a whole run of this script. alive and sleep are injected by
+    the selftest."""
+
+    def __init__(self, city, wait_min=0, path=None, alive=_pid_alive, sleep=time.sleep):
+        self.city, self.wait_s = city, wait_min * 60
+        self.path = Path(path) if path else lock_path()
+        self.alive, self.sleep = alive, sleep
+
+    def holder(self):
+        try:
+            return json.loads(self.path.read_text(encoding="utf-8"))
+        except (FileNotFoundError, ValueError):
+            return None
+
+    def __enter__(self):
+        waited = 0
+        while True:
+            try:
+                fd = os.open(self.path, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+            except FileExistsError:
+                held = self.holder()
+                # An unreadable file is a writer caught between create and
+                # write, or a crash there: given one poll, then replaced.
+                if held is None and waited == 0 and self.wait_s == 0:
+                    self.sleep(1)
+                    held = self.holder()
+                if held is None or not self.alive(held.get("pid", -1)):
+                    try:
+                        self.path.unlink()
+                    except FileNotFoundError:
+                        pass
+                    continue
+                if waited >= self.wait_s:
+                    raise SystemExit(
+                        f"Another place fetch is running: {held.get('city')} (pid {held.get('pid')}, "
+                        f"since {held.get('since')}). One Overpass query at a time on this machine: "
+                        f"wait for it, or pass --wait MINUTES.")
+                self.sleep(LOCK_POLL_S)
+                waited += LOCK_POLL_S
+                continue
+            with os.fdopen(fd, "w", encoding="utf-8") as f:
+                json.dump({"pid": os.getpid(), "city": self.city,
+                           "since": datetime.datetime.now().isoformat(timespec="seconds")}, f)
+            return self
+
+    def __exit__(self, *exc):
+        held = self.holder()
+        if held and held.get("pid") == os.getpid():
+            try:
+                self.path.unlink()
+            except FileNotFoundError:
+                pass
+
+
+def selftest():
+    import tempfile
+    cases = []
+    with tempfile.TemporaryDirectory() as d:
+        path = Path(d) / LOCK_NAME
+        with FetchLock("a", path=path):
+            cases.append(("a free lock is taken and names its holder",
+                          (FetchLock("a", path=path).holder() or {}).get("city") == "a"))
+            try:
+                FetchLock("b", path=path, alive=lambda pid: True, sleep=lambda s: None).__enter__()
+                refused = False
+            except SystemExit as exc:
+                refused = "a (pid" in str(exc)
+            cases.append(("a second fetch is refused while the first runs, naming it", refused))
+            slept = []
+            try:
+                FetchLock("b", wait_min=1, path=path, alive=lambda pid: True, sleep=slept.append).__enter__()
+                waited = False
+            except SystemExit:
+                waited = sum(slept) >= 60
+            cases.append(("--wait polls for its minutes before refusing", waited))
+        cases.append(("the lock is released on exit", not path.exists()))
+        path.write_text(json.dumps({"pid": 1, "city": "gone", "since": "x"}), encoding="utf-8")
+        with FetchLock("c", path=path, alive=lambda pid: False):
+            took = (FetchLock("c", path=path).holder() or {}).get("city") == "c"
+        cases.append(("a holder whose process is gone is replaced", took))
+        path.write_text("", encoding="utf-8")
+        with FetchLock("d", path=path, sleep=lambda s: None):
+            took = (FetchLock("d", path=path).holder() or {}).get("city") == "d"
+        cases.append(("an unreadable lock file is replaced", took))
+        other = Path(d) / "other.lock"
+        other.write_text(json.dumps({"pid": -5, "city": "x", "since": "x"}), encoding="utf-8")
+        FetchLock("e", path=other).__exit__()
+        cases.append(("exit never removes another holder's lock", other.exists()))
+    for label, ok in cases:
+        print(f"  {'ok ' if ok else 'BAD'} {label}")
+    good = sum(ok for _, ok in cases)
+    print(f"{good} of {len(cases)} cases behaved as intended.")
+    return 0 if good == len(cases) else 1
+
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("city")
     ap.add_argument("--force", action="store_true")
+    ap.add_argument("--wait", type=int, default=0, metavar="MINUTES",
+                    help="wait this long for another place fetch to finish, then exit non-zero")
     args = ap.parse_args()
     config = importlib.import_module(f"pipeline.{args.city}.config")
+    with FetchLock(args.city, args.wait):
+        fetch_city(config, args.force)
+
+
+def fetch_city(config, force):
+    args = argparse.Namespace(force=force)
     # One after the other, never in parallel (the owner's Overpass rule).
     for query, path, key in ((QUERY, config.PLACE_OSM_JSON, "osm_places"),
                              (EXTRA_QUERY, config.PLACE_OSM_EXTRA_JSON, "osm_places_extra")):
@@ -195,4 +325,4 @@ if __name__ == "__main__":
     for stream in (sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):
             stream.reconfigure(encoding="utf-8", errors="replace")
-    main()
+    sys.exit(selftest() if "--selftest" in sys.argv else main())
