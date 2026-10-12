@@ -11,6 +11,19 @@ or published; every proposal waits for the owner.
 
 ### 2026-10-12 - RESUME NOTE for the next session (internal; Cleanup drops this entry when folding; it replaces the 2026-10-08 note below)
 
+- **FOR THE LANDING SESSION, FIRST (2026-10-12):** the host is live at
+  `https://files.dacekroberts.dev` and the owner's browser test against it
+  PASSED (Seattle, London, Tokyo in the app on port 8501: no CORS error, no
+  failed request, no cookie). The result and **the exact edits for
+  `PACK_HOST`, P4 and P5** are the next entry down, "The live host tested
+  from the app on port 8501", under "THE EXACT EDITS FOR GO-LIVE". Read
+  this file from any worktree with
+  `git show basemap:docs/decisions_drafts/basemap.md` (the branch is local,
+  not pushed). Still the owner's: his yes to the `PACK_HOST` diff (shown to
+  him in the basemap chat, 2026-10-12, answer pending), replacing the
+  host's `README.md` with the public text, and the word before anything
+  reaches the deployed app. The "hosting call" bullet below is otherwise
+  done.
 - **Where the branch stands.** `basemap` has master merged (2026-10-12),
   `check_all.py` 52 of 52, nothing pushed. The site's Travel view is built
   and switched off: `pipeline/travel_packs.py` (`PACK_HOST = None`),
