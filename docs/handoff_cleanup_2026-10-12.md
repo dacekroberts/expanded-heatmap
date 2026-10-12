@@ -166,6 +166,22 @@ branch's drafts file.
    cap. Names stay whole and wrap; nothing is truncated (the line-identity
    rule). Tokyo is the case that prompted it. Re-run
    `scripts/check_map_attribution.js` at more than one height afterwards.
+   **And the map frame's height on phones** (owner, 2026-10-12, in
+   Cleanup's chat, on his iPhone screenshot of São Paulo: "yes add it to
+   the landing handoff"): every city page calls `st.iframe(HEATMAP_HTML,
+   width=1000, height=650)`, and with Streamlit's top bar a phone's
+   visible screen is shorter than that, so the legend and the
+   OpenStreetMap credit sit off screen. One CSS rule in the app's shared
+   styles (`app/components.py`), narrow screens only, caps the map frame
+   at the visible height less the top bar; desktop stays 650. No page
+   file is edited and no map is re-rendered for it. NOT measured: the top
+   bar's height, the breakpoint, and which unit holds on iOS Safari with
+   its collapsing address bar (`svh` against `dvh`); measure before
+   writing. The 40% legend cap is relative to the frame, so check the two
+   together. `check_map_attribution.js` assumes 650 (the comment above
+   `CITY_SUBTITLE`): run it at phone heights too, and the owner looks at
+   it on his iPhone before it lands. Cost stated to him: a shorter map
+   shows less city at once.
 9. **Per-category totals in every city's `baseline.json`** (owner,
    2026-10-11, for Analytics): `storefronts`, `storefronts_retail`,
    `storefronts_food_service`, `storefronts_personal_services`, counted AFTER
