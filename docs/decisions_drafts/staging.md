@@ -8,6 +8,37 @@ series, which ended at 230.
 
 ### 2026-10-12 - Phase 2 built in one evening; the owner's S calls; Naha's two licence reads
 
+- **Naha's brief written (`docs/build_briefs/naha.md`, brief check 5 of 5):
+  a rebuilt food register of 8,450 pins that places 99.9%, with the Yui
+  Rail's 16 stations; the band is still the owner's.** Step 0 was measured
+  on 2026-10-12 by a subagent from the 213 cached workbooks, the rail and
+  boundary files on disk and the two MLIT address files the owner approved
+  that day (S29: `47201-24.0a.zip` 162,904 B, `47201-19.0b.zip` 8,025 B).
+  Kansai-2's control reproduced to one row (8,939 against 8,938; the extra
+  row's expiry is an Excel serial). **One correction to Kansai-2's
+  measurement:** three months are published twice (2025-03, 2025-12,
+  2026-08; 394 repeat rows), so the distinct restaurant permits in term are
+  8,593, 100.7% of the 8,530 in force, not 104.8%; by premises it stays
+  98.8% (8,429). Storefront rows from the new-permit files: Food service
+  7,390, Food shops 1,358; 8,450 pins after one per premises (8,799 with
+  the renewals package). Set aside: 769 citywide stalls, 171 area-wide
+  vehicles, 312 non-storefront rows. The join: 17,689 block keys, block
+  98.9%, town-chōme 1.0%, 9 rows unplaced, no independent check (the files
+  carry no points). Rail: the Yui Rail, 16 of 19 stations inside (3 in
+  Urasoe, the add-on row), median gap 733 m, EPSG:32652. The name rule
+  withholds 4 trade names; 0 bare personal names. The rebuild sits high
+  against the census (2.77 placed restaurant premises per establishment
+  against 1.56 to 1.92 on built cities), closures being invisible. Six
+  shared-code items a build would need are listed in the brief (a reader
+  argument on `rebuilt_register`, unnamed header columns in `xlsx_rows`
+  that lose the 種目 form on 3,405 rows, two missing column names, one
+  character variant, config keys). Seven open calls were put to the owner
+  as S30 to S36 (the band; the renewals package; the excess over the
+  census; `mode` for a monorail-only city; a personal-services probe; the
+  macro view; three page sentences). Not measured: frequency (the master
+  list's read of 2026-10-06 stands), gate 3, OSM names, any
+  personal-services list. The master-list row is unchanged until the owner
+  bands the city.
 - **S22 answered: Kanazawa's page states no share, and IR Ishikawa's
   frequency was read (owner, "s22 no share, yes read the frequency"): 49 to
   58 trains a day each way at its three stations beside Kanazawa.** The
