@@ -86,7 +86,9 @@ good. 5. the relabel sounds good".
   re-renders Tokyo, Funabashi, Ichikawa and Urayasu; if the dark labels do
   not separate, the alternative is to move Keikyu's red instead, a second
   Tokyo line. **Not changed on this branch** (a built city's line; the
-  registry still holds #F86040). Transit-globe is told that Tokyo's Keiyo
+  registry still holds #F86040). **The owner chose #C81000** ("go with
+  #C81000", after seeing both reds beside the Musashino orange on the site's
+  page colours). Transit-globe is told that Tokyo's Keiyo
   colour will change, with the candidate values.
 
 ## Parked calls
