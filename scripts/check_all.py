@@ -99,6 +99,8 @@ CHECKS = [
     ["scripts/proposals_page.py", "--selftest"],
     ["scripts/commercial_use_sources.py", "--selftest"],
     ["scripts/commercial_use_quote_check.py", "--selftest"],
+    ["scripts/licence_renderings.py"],
+    ["scripts/licence_renderings.py", "--selftest"],
     ["scripts/archive_decisions_selftest.py"],
     ["scripts/rule_breaks.py", "--selftest"],
 ]

@@ -88,9 +88,14 @@ sentence quoted in its own language, and the date read.
    means**: MHLW's sentence that "use outside the purpose is forbidden" is
    about personal information, not commercial use. Every VERIFIED row
    prints 60 characters either side and its clause: read them all. **The
-   first pass's prompt says**: copy characters exactly from the stored
-   text (no straightened quotes), quote within one line of an .md or .html
-   file, and give the heading the sentence sits under. No further
+   first pass is given the stored text's RENDERING** (`<file>.pdf.txt`,
+   `<file>.html.txt`; `scripts/licence_renderings.py`, hashed in the
+   README's second table), which is also what the script checks against, so
+   a quote no longer breaks on a tag or depends on pdftotext being
+   installed. An HTML rendering keeps the page's menu and footer: the terms
+   start further down. **Its prompt says**: copy characters exactly (no
+   straightened quotes), quote within one line of an .md file, and give the
+   heading the sentence sits under. No further
    normalisation is added (owner, 2026-10-12); a true quote that voids goes
    to Claude.
 4. **Claude reads** every SILENT and every PERMITTED, CONDITION, and a
