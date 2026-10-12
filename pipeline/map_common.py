@@ -2537,12 +2537,16 @@ _PLACE_SEARCH_TEMPLATE = r"""
             // the OSM Attribution Guideline's "© OpenStreetMap contributors"
             // form, linked to the copyright page, the licence named and linked
             // (ODbL 4.3), and the download link as the 4.6 offer (licence read
-            // 2026-10-07). It replaced 4.3(a)'s longer example wording.
+            // 2026-10-07). It replaced 4.3(a)'s longer example wording. The
+            // offer covers the intersections file as well, which is part of
+            // the same derived database (owner, 2026-10-11); its link shows
+            // once the index has named the file.
             c.innerHTML = 'Search data &copy; <a href="https://www.openstreetmap.org/copyright" ' +
                 'target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a> ' +
                 '(<a href="https://opendatacommons.org/licenses/odbl/1-0/" target="_blank" ' +
                 'rel="noopener noreferrer">ODbL</a>) · ' +
-                '<a href="' + URL + '" target="_blank" rel="noopener" download>Download this index</a>';
+                '<a href="' + URL + '" target="_blank" rel="noopener" download>Download this index</a>' +
+                (crossURL ? ' · <a href="' + crossURL + '" target="_blank" rel="noopener" download>intersections</a>' : '');
             list.appendChild(c);
         }
         // On a phone (under 480 px), with both groups shown, each heading folds

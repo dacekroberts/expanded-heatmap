@@ -4,6 +4,12 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-11 - Place search: the download offer links the intersections file too (owner, branch)
+
+- **"yes, link both and let the landing re-render pick it up"** (owner, on question 5). The search box's credit now reads "Download this index · intersections": the second link is the city's intersections file, part of the same database derived from OpenStreetMap, so the ODbL 4.6 offer covers all of it. The link shows once the index has loaded and named the file.
+- **Re-rendered here after all, against the owner's "let the landing re-render pick it up".** With the script changed and the maps left, `check_all.py` failed (54 of 55: "19 of 170 map(s) were not rendered by the current map_common.py"), and a branch is not committed red. The nineteen were re-rendered (about ten minutes, under 2 GB); the landing's full re-render still runs once, as planned. Told to the owner.
+- **Not seen in a browser.** The landing's deploy-verify should open one searched map's search box and confirm both links download.
+
 ### 2026-10-11 - Place search: the owner's answers to the six remaining questions (owner, branch)
 
 1. **Wave order: "approved after size projection".** The order in `docs/handoff_place_search_rollout.md` stands once the projected whole-site size has been put to the owner; no stage 2 batch before that.
