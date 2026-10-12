@@ -23,7 +23,6 @@ English station names from OpenStreetMap's name:en.
 """
 
 import re
-import unicodedata
 from pathlib import Path
 
 from pipeline import line_registry
@@ -101,44 +100,15 @@ def source_csv(key):
     return DATA_RAW / SOURCES[key]
 
 
-# SHARED-CODE FINDING (2026-10-11), city-local until review time. The health
-# center writes a prefecture-wide permit (a stall or vehicle licensed across
-# the prefecture, Kobe's trap 6; owner call made, the brief) AFTER the city's
-# name: 鳥取県鳥取市鳥取県内 (226 rows), 鳥取県鳥取市鳥取県東部 (4),
+# The health center writes a prefecture-wide permit (a stall or vehicle
+# licensed across the prefecture, Kobe's trap 6) AFTER the city's name:
+# 鳥取県鳥取市鳥取県内 (226 rows), 鳥取県鳥取市鳥取県東部 (4),
 # 鳥取県鳥取市鳥取県 (3) and 鳥取県鳥取市県内 (3). The shared area-wide rule
-# (japan_register.permits_from_rows, PREF_WIDE) tests the address before the
-# city is cut, so it reads none of them: measured without this hook, 208 such
-# rows reached the map at MHLW's own point (201, 1, 3 and 3; 2,448
-# storefronts). The city's name is cut from those four spellings only, which
-# leaves the address the shared rule was written for (鳥取県内, 鳥取県東部,
-# 鳥取県); the rule, and its count, stay shared. An address normalised in a
-# city's own source_rows, as Okazaki's _BARA. Re-measure when the file is
-# refreshed: an unknown spelling of the kind stops the build.
-_PREF_WIDE_AFTER_CITY = re.compile("^鳥取県鳥取市(?:鳥取県|県)(内|東部|)$")
-_PREF_AFTER_CITY = re.compile("^鳥取県鳥取市(?:鳥取県|県内)")
-
-
-def source_rows(key):
-    """A source's rows (japan_step2 reads this hook where a city defines it):
-    MHLW's file as it stands, a prefecture-wide address written after the
-    city's name re-spelled without the city (_PREF_WIDE_AFTER_CITY) so the
-    shared area-wide rule sets it aside."""
-    from pipeline.countries import japan_register as jr
-
-    if key != "mhlw":
-        raise KeyError(key)
-    path = source_csv(key)
-    if not path.exists():
-        raise SystemExit(f"missing {path}\nRun: python pipeline/{SLUG}/fetch_sources.py")
-    for r in jr.city_rows(path):
-        a = unicodedata.normalize("NFKC", r.get("営業施設所在地") or "").replace(" ", "").replace("　", "")
-        m = _PREF_WIDE_AFTER_CITY.match(a)
-        if m:
-            r["営業施設所在地"] = PREFECTURE + m.group(1)
-        elif _PREF_AFTER_CITY.match(a) and "一円" not in a:
-            raise SystemExit(f"{path.name}: a prefecture-wide address of an unknown spelling after the city's name "
-                             "- read it and extend _PREF_WIDE_AFTER_CITY")
-        yield r
+# tests the address again after the city cut and sets them aside (call S19,
+# japan_register.permits_from_rows, 2026-10-12; a city-local hook did it
+# until then). Measured without either, 208 such rows reached the map at
+# MHLW's own point. The shared rule does not stop on an unknown spelling:
+# re-read the addresses naming the prefecture when the file is refreshed.
 
 
 # MLIT 位置参照情報, block (24.0a) and town-chōme (19.0b), for 31201.

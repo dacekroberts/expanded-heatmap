@@ -6290,8 +6290,13 @@ drawn, cut at the city line at both ends.
   trucks and stalls: 608 restaurant permits, 19 fishmongers, 18
   confectioners, 8 cafés, 2 butchers and 2 milk sellers. 4 more are
   registered for a district at large.
-- 87 permits for vending machines that prepare food
-  (調理の機能を有する自動販売機).
+- 178 vending-machine permits: 87 for machines that prepare food
+  (調理の機能を有する自動販売機) and 91 licensed before June 2021 that the
+  list marks only in its form column (自動販売形態: 75 café permits, 13
+  milk-sales permits and 3 restaurant permits).
+- 9 permits from before June 2021 for a facility built to be moved or taken
+  down (特殊形態), such as a stadium's concession stands, left out as
+  temporary businesses.
 - 239 rows of food manufacturing other than bakeries and confectioners (菓子)
   and delis (そうざい), and other types that are not a counter.
 
@@ -6302,23 +6307,21 @@ permits are at a fixed address. The list is published once a year and
 closures after its date are not published, so the count is an upper bound.
 Permits granted since June 2021 carry no form of business, so convenience
 stores, supermarkets, canteens, hotel restaurants and snack bars that hold a
-restaurant permit count as Food service. 83 pins are vending machines
-licensed before June 2021 (自動販売形態: 67 café permits, 13 milk-sales
-permits and 3 restaurant permits), which the list marks only in its form
-column. 27 of the 638 bakery, confectioner and deli premises (4.2%) have a
+restaurant permit count as Food service. 27 of the 637 bakery, confectioner
+and deli premises (4.2%) have a
 trade name that reads as a factory; they are kept (owner, 2026-09-24).
 
 **One pin per premises** - 127 permits from before June 2021 that were
 renewed under the same number are listed twice and shown once, the renewed
-permit kept. 270 more repeat rows are shown once: several permits of one
+permit kept. 259 more repeat rows are shown once: several permits of one
 kind at one premises.
 
-**Not placed** - none. 599 pins (12.2%) sit at their town's center, where
+**Not placed** - none. 589 pins (12.2%) sit at their town's center, where
 the address is a lot number in a large rural district (大字) that MLIT's
 block file does not hold.
 
 **Names not shown** - 4 pins whose trade name is the operator's own name
-show their permit type. So do 24 pins the list itself records without a
+show their permit type. So do 23 pins the list itself records without a
 name (＊＊＊) and 9 with a blank name.
 
 **Stations.** The Mizushima Rinkai Railway's Mizushima Main Line is drawn
@@ -6330,10 +6333,9 @@ Ibara Railway's Ibara Line are cut at the city line.
 - The JR Hakubi Line and the JR Uno Minato Line each have one station inside
   the city (Kurashiki and Chayamachi) and are drawn as cut.
 <!-- internal -->
-The 83 vending-machine pins and 8 pins of the old-law form 特殊形態 wait on a
-shared-code call (the drafts entry, "Parked calls" 1 and 2): if the vending
-form rule lands, the 自動販売形態 sentence moves to **Left out** and the
-counts above are re-measured.
+The two forms are read by shared code since 2026-10-12 (calls S17 and S18,
+japan_eigyo.FORM_RULES); the counts above were re-measured that day: 4,815
+pins, 89 fewer.
 <!-- /internal -->
 
 ### Berlin - the chamber of commerce's members, with no names and no crafts

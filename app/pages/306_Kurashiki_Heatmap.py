@@ -50,7 +50,7 @@ render_data_age("Kurashiki")
 # lists (Okayama's bullet), the area-wide permits (Aomori's), the upper-bound
 # bullet (Kyoto's and Shizuoka's) and the share at a district's center (call
 # 145). No coverage sentence (owner, call 229). The date is
-# config.FOOD_AS_OF; the ring share, 53.2%, is step 3's (2,610 of 4,904).
+# config.FOOD_AS_OF; the ring share, 53.5%, is step 3's (2,574 of 4,815).
 st.markdown(
     """
 **The lines**

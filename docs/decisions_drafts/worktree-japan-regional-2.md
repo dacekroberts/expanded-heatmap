@@ -99,6 +99,41 @@ Each city's own parked calls and proposals are under its entry below
 
 ## Changes
 
+### 2026-10-12 - Master taken in (S17, S18, S19); Kurashiki re-run at 4,815 pins, Tottori's hook removed
+
+- **Why now:** Cleanup's three shared-code changes are on master
+  (`db0c4e0c` readers, `bb01ebd7` S19, `5b24e0db` S17 and S18), and the
+  re-runs they call for need the code. One merge, clean.
+- **Tottori (S19):** the city-local `source_rows` hook is deleted from
+  `pipeline/tottori/config.py`. Step 2 without it: 240 rows set aside as
+  area-wide (237 with the hook; the 3 that moved are 鳥取県鳥取市県内, which
+  the hook's re-spelling left to the not-a-premises count, 111 to 108),
+  2,240 storefronts, the map identical. Cleanup's assertion confirmed. The
+  shared rule does not stop on an unknown spelling as the hook did; the
+  config's comment says to re-read the addresses on a refresh.
+- **Kurashiki (S17, S18):** steps 2 and 3 re-run. 100 addressed rows leave:
+  91 of 自動販売形態 (75 café, 13 milk-sales, 3 restaurant permits) and 9 of
+  特殊形態. **4,904 to 4,815 pins, 89 fewer** (Food service 4,005 to 3,930,
+  Food shops 899 to 885), not the 91 pins that carried the two forms: 11 of
+  the 100 rows were repeats of a pin (270 to 259), and 2 premises keep
+  their pin under a sibling permit of another form (read from the
+  arithmetic, not row by row). Ring share 53.5% (2,574 of 4,815; in a ring
+  2,249 and 325). Town-center pins 589 (12.2%, unchanged as a share).
+  菓子 / そうざい 27 of 637.
+- **Names:** none of the 100 rows is flagged by the name rule (counted in
+  memory, yes or no only); 3 are masked by the list. Pins showing their
+  permit type: 4 by the name rule, 23 masked (24 before), 9 blank.
+  `check_personal_exposure.py kurashiki` prints 0 of 4,815;
+  `tottori` 0 of 2,240. Verdicts unchanged: publish.
+- **Text corrected:** Kurashiki's section of What Is Excluded (the two forms
+  move to **Left out**, counts re-measured), its two
+  `docs/map_inconsistencies.md` rows, its privacy-verdict row and the page's
+  code comment. The page's reader text is unchanged ("About 53%", "about
+  one dot in eight"). Parked calls Kurashiki A and B and Tottori A are
+  closed by this.
+- **Generated files:** `app/ring_shares.json`, `app/macro_facts.json`,
+  `docs/ring_rules.md` rewritten for Kurashiki; both baselines recorded.
+
 ### 2026-10-12 - The same answer numbered S28 by staging
 
 - Staging relayed the owner's words from its own chat, "s28 out as
