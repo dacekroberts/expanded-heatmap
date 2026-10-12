@@ -99,6 +99,20 @@ Each city's own parked calls and proposals are under its entry below
 
 ## Changes
 
+### 2026-10-12 - 特殊形態 is a temporary form (owner, S18); the rule goes to Cleanup
+
+- **"s18 yes treat as temporary, send to cleanup"** (owner, in the
+  Regional-2 chat): Okayama's old-law form 特殊形態 (a facility meant to be
+  moved or taken down: stalls, tents, vehicles other than kitchen cars) is
+  set aside as temporary, as 露天 is. The rule is shared code
+  (`japan_eigyo.FORM_RULES`), so Cleanup writes it with S17's vending form
+  (S14); nothing was changed on this branch. Kurashiki's 8 pins with the
+  form (6 stadium concession stands, 2 rows of one station-plaza market
+  stall) leave its map when Regional-2 re-runs steps 2 and 3 after Cleanup's
+  change. Fukuoka's and Kure's fixed-pitch yatai (屋台) stay as the owner
+  ruled before: a different word, and the owner's call here is for this
+  form.
+
 ### 2026-10-12 - The owner's answers applied on this branch (S16, S23, S24, S27); 特殊形態 read (S18)
 
 - **"yes apply all, fetch approved for s18"** (owner, in the Regional-2
