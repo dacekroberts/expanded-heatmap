@@ -153,6 +153,33 @@ on the owner's word.
 
 All quoted in the drafts file; the short list:
 
+- **The suggestion list, as tuned on the live site (owner, 2026-10-12;
+  `PLACE_SEARCH_SCRIPT`, every searched map, so a change is one re-render of
+  them all):**
+  - *Same-named streets carry their neighborhood in parentheses*, nearest
+    the middle of the view first: "Brick Lane (Mile End New Town)". The
+    neighborhood is the nearest `place` row within 4 km (`NEAR_PLACE_M`), as
+    OpenStreetMap names it; a unique name is unchanged. Most repeats are
+    other streets, not stretches: London has four Brick Lanes and 56 High
+    Streets.
+  - *Stretches of one street within 600 m are one row* (`STRETCH_M`,
+    `oneRowAStreet`), opening on all of them. Measured on the 19 indexes:
+    London 55,283 street rows to 55,003; Chicago 4,643 to 3,689.
+  - *Ranking, best first*: the name itself; a name holding the whole phrase
+    ("Avenida Paseo de la Reforma"); an alternate name that is the phrase;
+    a name the phrase begins. Regression queries to re-run after any change:
+    "Paseo de la Reforma" (Mexico City), "Sanjo Street" and 三条通 (Kyoto),
+    "Damen and North", "Clark and Lake", "Art Institute" (Chicago), "Brick
+    Lane", "Oxford Street" (London).
+  - *Known and left*: Chicago's "Lake Shore Dr" lists the synagogue above
+    the street; the four-letter gate, streets ranked after other kinds, and
+    the places group folded on a phone are the owner's to tune by feel.
+- **Street coverage is measured, not assumed**: distinct street names in the
+  index against named highway ways in the cache run 85 to 99% on 18 built
+  cities and 72% in Tokyo, where 812 of the 1,203 names left out are
+  footways (station entrances, taxi stands, plazas). A new city under 85%
+  gets the same breakdown by highway class before it lands.
+
 - **Places only, never business records; never a home.** A home (residential
   land or building, private access, historic=house or manor on a plain
   building, house=yes, a historic building named as a house in any of the

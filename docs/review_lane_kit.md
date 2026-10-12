@@ -142,6 +142,13 @@ about 41 cities). Four lanes since the 32 GB upgrade (2026-10-05): about 43 of
 170 cities each, so the longest lane, not the city count, sets the time.
 What made it work, and what went wrong first:
 
+- **A local pass says nothing about an address the deployed app serves
+  differently.** Streamlit Community Cloud serves the app under `/~/+/`; a
+  map that asked the host's root for its search index passed every lane and
+  found no street live for a day (2026-10-12). After a landing that touches
+  a searched map, type a street into the DEPLOYED box on a sample of maps;
+  a reachable file is not that test.
+
 - **Its own server pair per agent.** Add `streamlit-app-lean-dvN` and
   `heatmap-static-dvN` (ports 8891-8893 and 8894-8896) to the worktree's local
   `.claude/launch.json`, each bound to 127.0.0.1 as deploy-verify's

@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**78 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**79 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-12**
 
+- [Place search tuned on the live site before the rollout: same-named streets told apart, nearby stretches joined, the name itself first](#2026-10-12---place-search-tuned-on-the-live-site-before-the-rollout-same-named-streets-told-apart-nearby-stretches-joined-the-name-itself-first)
 - [Japanese maps: a name with a lost character shows its permit type; Kurashiki's number-only names; 7 more names from the second read](#2026-10-12---japanese-maps-a-name-with-a-lost-character-shows-its-permit-type-kurashikis-number-only-names-7-more-names-from-the-second-read)
 - [The name sweep of every Japanese city: 15 more trade names withheld by key; check I guards the search index path](#2026-10-12---the-name-sweep-of-every-japanese-city-15-more-trade-names-withheld-by-key-check-i-guards-the-search-index-path)
 - [Place search never loaded its index on the deployed site; four personal names withheld by eye in Kanazawa and Fujisawa](#2026-10-12---place-search-never-loaded-its-index-on-the-deployed-site-four-personal-names-withheld-by-eye-in-kanazawa-and-fujisawa)
@@ -116,6 +117,15 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-10-12 - Place search tuned on the live site before the rollout: same-named streets told apart, nearby stretches joined, the name itself first
+
+- **Why now.** With the index loading live for the first time, a street query on 17 of the 19 deployed maps showed two faults the local lanes had not: one street name filling every slot (Chicago's "North Bell Avenue" five times, London's "Brick Lane" four), and an alternate name outranking the street itself (Mexico City's "Paseo de la Reforma"). The owner asked for both fixed before wave 1 ("yes do the 4 items"), since the search script is shared and a change costs one re-render of 19 maps now against 237 later.
+- **Repeats are mostly other streets, so they are told apart, not collapsed.** Cleanup first proposed one row per street name. Measured on the 19 indexes, joining same-named rows whose extents lie within 600 m takes London's 55,283 street rows to 55,003; its four Brick Lanes and 53 of its 56 High Streets stay apart, and 41 would at 2 km. Grid cities join more (Chicago 4,643 to 3,689, Seattle 11,117 to 9,330). So: stretches within `STRETCH_M` = 600 m are one suggestion that opens on all of them, and each remaining same-named street carries the nearest neighborhood in the index within 4 km, in parentheses, nearest the middle of the view first (owner, mid-turn: "should we have extensions to shared street names with the neighborhood or urban area in parentheses following? you can pilot on london's brick lanes"). Cleanup's first form, the neighborhood after the kind label, gave way to his. The neighborhood is OpenStreetMap's nearest `place` row, so the best-known Brick Lane reads "Mile End New Town"; left as the data has it, nothing repaired. The map's mark keeps the street's own name.
+- **Ranking**: the name itself (-100), a name holding the whole phrase (-80), an alternate name that is the phrase (-70), a name the phrase begins (-40). Checked locally: "Paseo de la Reforma" leads with Avenida Paseo de la Reforma; "Sanjo Street" still leads with 三条通; "Damen and North", "Clark and Lake" and "Art Institute" are unchanged. Left: Chicago's "Lake Shore Dr" lists the synagogue above the street, which the live site did before the change.
+- **Coverage, all 19 indexes**: distinct indexed street names against named highway ways in each cache run 85 to 99% on 18 cities and 72% in Tokyo, where 812 of the 1,203 names left out are footways (station entrances, taxi stands, plazas), then service roads and steps. The rules are working as written; nothing changed.
+- **Phone width (375 px), London, Tokyo and Vancouver, local**: the list is 200 px wide and no row overflows with the neighborhood added. Not changed, the owner's to tune by feel: the four-letter gate, streets after other kinds, the places group folded where the map's own stations also match.
+- **Recorded for the rollout** in the `place-search-city` skill: the tuned behaviours, the regression queries, and the coverage breakdown a city under 85% owes; in `docs/review_lane_kit.md`, the deployed-box test. The `japan-city` skill carries the day's three name rules (the by-eye key list, lost characters, the number-only flag).
 
 ### 2026-10-12 - Japanese maps: a name with a lost character shows its permit type; Kurashiki's number-only names; 7 more names from the second read
 

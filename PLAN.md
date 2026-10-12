@@ -238,6 +238,17 @@ Detail files: [japan](docs/plan_detail/japan.md),
     `processed/regional/stations.csv`). Widen `PLACE_AREA` to the four
     municipios, re-fetch (`place_index_fetch.py`), rebuild, re-render the
     map. Check whether Mixcoac is indexed as the one junction row.
+  - **Search as tuned before wave 1 (2026-10-12, live):** the index path
+    fault is fixed and guarded (check I of `check_place_search.py`);
+    same-named streets carry their neighborhood in parentheses, stretches
+    within 600 m are one row, and the name itself ranks before an
+    alternate name. The behaviours, the regression queries and the
+    coverage figures are in the `place-search-city` skill. **Still the
+    owner's to tune by feel**, each one re-render of the searched maps:
+    the four-letter gate, streets ranked after other kinds, the places
+    group folded on a phone. **Known and left:** Chicago's "Lake Shore
+    Dr" lists the synagogue above the street. **Not yet tested live:**
+    Tokyo and Vancouver.
   - **Idea for the next landing (owner, 2026-10-12): a button that
     returns a map to its starting view.** After a search the map stays
     at the found place and nothing restores the city-wide view (the

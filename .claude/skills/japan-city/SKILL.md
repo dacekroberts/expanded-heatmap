@@ -411,6 +411,27 @@ build (a brief to correct, never a check to relax), in particular:
   name that is a bare personal name (a common surname, a space, 1 to 3 kanji
   or hiragana) is withheld whatever the operator column holds
   (`japan_register.bare_personal_name`); a new city needs nothing extra.
+  **The sign rule's list holds about 190 surnames and misses rarer ones**
+  (owner, 2026-10-12): after step 2, read every shown label of the shape
+  "kanji, space, kanji or hiragana" by eye, and put the KEY of each that is
+  a person's own name, or a shop word followed by a person's full name,
+  borderline readings included, in `config.PERSON_NAMED`
+  (`pipeline/name_keys.py` over `japan_register._name_key()` of the name;
+  never the name). A key matching no row stops the step. The sweep of all 94
+  maps found 26 such names in 13 cities among 2,785 labels of the shape.
+- **A name the publisher's file damaged is shown as its permit type, never
+  repaired** (owner, 2026-10-12): `japan_register.lost_character()`, a
+  half-width question mark touching a character outside ASCII, or U+FFFD
+  (1,028 rows in 30 cities; Osaka 444, Kobe 225, Tokyo 130). Shared code, so
+  a new city needs nothing; read the step's "names with a lost character"
+  count. A real mark is kept three ways: an interrobang is set aside, a
+  full-width mark never matches, and `config.NAME_MARK_REAL` names a trade
+  name read by eye as real.
+- **A number alone stays a name** (530 in 70 cities; many are a bar's sign)
+  unless the city's file fills the name column with a code:
+  `config.NUMERIC_NAME_IS_CODE = True` shows the permit type (Kurashiki: 25
+  rows, runs of consecutive five-digit numbers at institutional kitchens).
+  Bring the evidence to the owner before setting it.
 - Several still list as open what the owner decided on 2026-09-24 (the
   Shinkansen, 菓子/そうざい, the city-line scope). Mark them decided.
 - None has run the **Economic Census join control** (PLAN, "Join control").
