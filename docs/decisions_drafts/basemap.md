@@ -27,19 +27,22 @@ or published; every proposal waits for the owner.
   `python ../session_tools_2026-10-08/stamp_verify.py ../packs_pilot_2026-10
   ../host_upload_2026-10/packs`. Three gate slots at most,
   `heavy_job.py status` first.
-- **Naha** (added to phase 2 by the owner, 2026-10-12): no pack yet, since
-  its box needs its `processed/stations.csv`. When its map is built:
-  `new_cities_poly.py` (the `.poly` files must be fetched again, one per
-  Japanese region, from download.geofabrik.de/asia/japan/; kyushu is
-  expected and is held), `add_plan_rows.py`, `build_packs.py naha`,
-  `make_upload.py`.
+- **Naha** (added to phase 2 by the owner, 2026-10-12; built the same day
+  on `worktree-japan-naha`): its pack is built and in the folder, the 31st
+  of phase 2. Box 127.5535,26.1019,127.8282,26.3220, kyushu 100% (held),
+  3,440,371 bytes, 129 s; the pack names Naha and Urasoe. **The folder now
+  holds 237 packs, 2,360,299,429 bytes; `stamp_verify.py` 237 packs,
+  130,340 tile entries, 0 bad.** A later city: `new_cities_poly.py` (the
+  `.poly` files are fetched per region from
+  download.geofabrik.de/asia/japan/), `add_plan_rows.py`,
+  `build_packs.py <city>`, `make_upload.py`.
 - **Owed at the landing (Cleanup's integration worktree asks for them):**
   the Travel table lines for phase 2: under `"ja"` in `LOCAL_LANG`:
   fujisawa, funabashi, ichihara, ichikawa, kawaguchi, koshigaya, matsudo,
   sagamihara, sakura, urayasu, yachiyo, ibaraki_osaka, kadoma, minoh,
   moriguchi, neyagawa, takatsuki, yao, aomori, fuji, kanazawa, kurashiki,
-  kure, matsue, matsumoto, okazaki, shizuoka, tottori, yamagata, and naha
-  once built; under `"ro"`: cluj_napoca. They cannot go on this branch
+  kure, matsue, matsumoto, okazaki, shizuoka, tottori, yamagata, naha;
+  under `"ro"`: cluj_napoca. They cannot go on this branch
   (the check fails a row with no built map).
 - **Next with the owner: the hosting call.** Which Cloudflare option (R2
   behind an owned domain, recommended, against a free Worker on
