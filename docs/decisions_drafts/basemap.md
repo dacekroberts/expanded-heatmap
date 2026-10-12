@@ -161,7 +161,43 @@ or published; every proposal waits for the owner.
   `MANIFEST.csv` (per pack: bytes, sha256, box, its Geofabrik extracts and
   their dated addresses, for the ODbL 4.6 offer) and a README marked
   internal draft. Nothing is uploaded anywhere.
-- **PROPOSALS for the owner (review time; none applied, none rendered).**
+- **OWNER, 2026-10-11: P1 to P6 approved.** P1, P2 and P3 as written, with
+  the multi-route ferry work noted as later work (which routes beyond the
+  pilot's two earn a legend row, and the palette for a city with several
+  ferries, Hong Kong the example). P4 approved with the instruction to make
+  sure it covers everything necessary (the review is the next bullet). P5
+  approved with its two slot-ins: the address, and the "keeps no record"
+  clause confirmed against the chosen host's log settings; it goes into
+  notice 1 in `app/components.py`, beside CARTO's sentence, at go-live. P6
+  approved. None is applied yet: each waits for the host address.
+- **P4 checked against every license the Travel basemap touches
+  (2026-10-11); two gaps found and closed.**
+
+  | Source | What its license asks | Where it is met |
+  |---|---|---|
+  | OpenStreetMap data, the osmdata.openstreetmap.de polygons (ODbL 1.0) | credit; the license named; the derived database offered under ODbL with its source | the map corner; P4; each pack's metadata; `MANIFEST.csv` |
+  | Natural Earth (public domain), pgf-encoding (CC0 output) | nothing | none owed |
+  | Protomaps builder and style (BSD 3-Clause, Mapzen MIT notice) | the notice kept with copies; no use of the name for a modified work | `lib/licenses/`; P4's last sentence; each pack's metadata |
+  | Noto glyphs (SIL OFL 1.1) | the license with every copy; the trademark line (owner) | `lib/fonts/OFL.txt`, `TRADEMARKS.txt`; P4 |
+  | MapLibre GL, maplibre-gl-leaflet, PMTiles (BSD 3-Clause, ISC) | the notice kept with copies | `lib/licenses/`; P4's added sentence |
+  | Cloudflare | no credit; no implied affiliation; visitors told | P5 |
+
+  - **Gap 1, the packs named themselves "Protomaps Basemap" and named no
+    license.** The builder writes that name and an "© OpenStreetMap" credit
+    into every pack's metadata, while this project's own rule is that a
+    modified tileset is never called Protomaps, and decision 13 wants the
+    license named in the pack. `make_upload.py` now stamps each pack as it
+    enters the upload folder: name "Travel basemap pack (<city>)", a
+    description saying the builder is modified, the credit "© OpenStreetMap
+    contributors", `license: ODbL-1.0` and its address. Only the metadata
+    section and two header fields change. `stamp_verify.py` compared every
+    stamped pack with its build: 192 packs, 110,318 tile entries, identical
+    id for id and byte for byte. The builds themselves are untouched.
+  - **Gap 2, the map software's licenses were not mentioned.** P4 gains one
+    sentence, after the Noto one: "The map is drawn with open-source
+    software (MapLibre GL, maplibre-gl-leaflet and PMTiles); each license
+    is published beside the files, at [address]/lib/licenses/."
+- **PROPOSALS as put to the owner (now approved, above).**
   - **P1, wording already on the branch, for sign-off:** the two base
     layers are named "Business" and "Travel" in the layer menu; the label
     pill reads "EN" and the local code in capitals ("ES", "FR", "JA", "KO"),

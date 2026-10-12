@@ -303,7 +303,10 @@ time, when this block stops being internal.
   license named in each pack's metadata and in a README beside them, a real
   and findable free download offer (ODbL 4.6), never encrypted or
   restricted (4.7). The map corner keeps `© OpenStreetMap contributors`,
-  linked, as on every map (notice 1).
+  linked, as on every map (notice 1). The builder itself names every pack
+  "Protomaps Basemap" and names no license, so each pack is stamped on its
+  way into the upload folder (2026-10-11): its own name, `license:
+  ODbL-1.0`, the credit in full; tiles unchanged, compared pack by pack.
 - **Style: Protomaps' basemap style code** (`basemaps.js`, BSD 3-Clause, with
   the Mapzen MIT notice in the same LICENSE.md; design CC0), self-hosted with
   that LICENSE.md beside it. A modified style or tileset is never called
