@@ -36,7 +36,7 @@ reasoning trail is `docs/decisions_drafts/place-search.md`.
 4. One `deploy-verify` (`scope: map-chrome`) on the merged branch, then land.
    Landing `app/` is deploying: `check_deploy_imports.py`, and the reboot
    question from the whole push.
-5. Repository size: `app/static/places/` is about 45 MB for nineteen cities,
+5. Repository size: `app/static/places/` is 38 MB for nineteen cities,
    of which the five size tests are most. Measure it at the merge and put the
    projected total for the whole site to the owner before stage 2 (it was one
    of the two top-line concerns, with iPhone memory).
