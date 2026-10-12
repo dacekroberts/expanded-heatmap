@@ -107,7 +107,7 @@ fresh `docs/decisions_drafts/staging.md`.
   reserved; applicant columns in both packages; the renewals package ends
   2021-05 and lacks 2019-05). **S15:** Naha's cost-recovery clause (第5項).
   **The ANSVSA read is back:** SILENT on archived and harvested copies only
-  (ansvsa.ro refused curl; data.gov.ro timed out); S8 still open, staging
+  (ansvsa.ro refused curl; data.gov.ro timed out); S8 CLOSED by the owner in Kansai-2.s chat 2026-10-11 ("yes treat cluj as bucharest, publish under notice 215"; Kansai-2 tip 40af664c, after its own browser read of www.ansvsa.ro); staging had
   recommended the owner's own browser look at ansvsa.ro. **Regional-2
   reported 2026-10-12 02:10 UTC** (tip 6269d4f5, eleven cities, nothing
   pushed); its calls are **S16-S26:** S16 Okazaki A (Meitetsu red against
