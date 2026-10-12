@@ -32,8 +32,15 @@ branch's drafts file.
     Toyota's config and map untouched.
   - `legend-dot-georgia` `16a68efe` (worktree `review-prep`), 57 behind
     master: needs the one full re-render.
-  - `place-search` `498853e7` (2026-10-12; far behind master): batches 1
-    to 3, nineteen cities, the watch file and its check. **The owner's
+  - `place-search` `e4b9e9bf` (2026-10-12; far behind master): batches 1
+    to 3, nineteen cities, the watch file and its check. Since `498853e7`
+    (that session's message; its newest drafts entry has the detail): the
+    found place's marker rebuilt site-wide in `map_common` (own pane above
+    the dots; dots, clusters and heat fade to 28% while it shows), all 19
+    searched maps re-rendered, 18 London rows dropped by id. **The owner
+    has not yet seen the new marker on a phone: a fifth call at review
+    time.** That marker change is one more edit to `map_common`: merge
+    it before S1 and the phone legend, as with `basemap`. **The owner's
     phone test of São Paulo PASSED (2026-10-12, his word in that
     session, relayed)**, and it covers London, the second largest (owner,
     2026-10-12, in Cleanup's chat: "sao paulo covers london"), so place
