@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**200 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**201 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-12**
 
+- [Naha's three calls answered: a two-column type rule in the stitch (S39), one old file left unread (S40), a temporary "Naha below" line on the regional view (S41); transit-globe's search handoff queued (owner)](#2026-10-12---nahas-three-calls-answered-a-two-column-type-rule-in-the-stitch-s39-one-old-file-left-unread-s40-a-temporary-naha-below-line-on-the-regional-view-s41-transit-globes-search-handoff-queued-owner)
 - [Place search's rollout plan: stage 0 approved with the phase 2 landing; the wave order waits for a size projection (owner)](#2026-10-12---place-searchs-rollout-plan-stage-0-approved-with-the-phase-2-landing-the-wave-order-waits-for-a-size-projection-owner)
 - [Naha's shared reader changes written, zero drift on 64 Japanese cities; its page is Food plus Personal services (owner)](#2026-10-12---nahas-shared-reader-changes-written-zero-drift-on-64-japanese-cities-its-page-is-food-plus-personal-services-owner)
 - [Naha joins phase 2 (owner); its reader changes to shared code are Cleanup's, ahead of the build](#2026-10-12---naha-joins-phase-2-owner-its-reader-changes-to-shared-code-are-cleanups-ahead-of-the-build)
@@ -252,6 +253,42 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-10-12 - Naha's three calls answered: a two-column type rule in the stitch (S39), one old file left unread (S40), a temporary "Naha below" line on the regional view (S41); transit-globe's search handoff queued (owner)
+
+- **Decided by the owner in Cleanup's chat, 2026-10-12: "yes with
+  conditions for s39, s40 left as is, s41 maybe a small line appears on
+  the kyushu-okinawa regional view stating (naha below) a temporary
+  item".** The calls reached Cleanup by Staging's relay of the Naha
+  build's report (branch `worktree-japan-naha`, `8298ce05`).
+- **S39, changed in `japan_register.rebuilt_register`.** A row that
+  fills both 業種 and 営業の種類 keeps its type in 業種 and its form in
+  営業の種類. The condition was a scan first, the rule made opt-in if a
+  built city's file carried both headers: of 1,406 list files under
+  `data/*/raw` (CSV, XLSX, XLS, every city on the shared folder, phase
+  2's included; ZIP members not opened) one does, Naha's August 2020
+  renewals file, so the rule is unconditional. That file through the
+  changed stitch alone: 55 permits in term, 43 of them 飲食店営業, the
+  form read on each. Drift on the seven built cities that call the
+  stitch (Fukushima, Fukuyama, Higashiōsaka, Hirakata, Iwaki, Sakai,
+  Toyonaka): zero. `permits_from_rows` is unchanged, so no other city
+  was run. Naha's session re-runs its steps 2 and 3 and drops the two
+  disclosure phrases; its figure of 20 missing restaurants is its own.
+- **S40, left as is.** Naha's October 2016 renewals file heads its type
+  種目; all 68 rows expired by 2023 (the build's count) and the city's
+  config stops the build if one is ever in term.
+- **S41.** Naha is held out of the Kyushu-Okinawa view's zoom fit, and
+  the view carries a small line saying Naha is below, as a temporary
+  item. With Naha in the fit, the build measured Kitakyushu's and
+  Shimonoseki's dots 3.3 px apart at all three widths and no label for
+  Sasebo or Oita. The line's wording and place are drafted for the
+  owner at the landing (step 7 of the handoff); what would end
+  "temporary" was not said and is asked then.
+- **Also decided, the same day: after the landing Cleanup drafts a
+  handoff file for transit-globe to implement its own search**, naming
+  the index files it needs and leaving the app free to filter out
+  search terms outside its scope. This replaces the 2026-10-11 line
+  that the handoff was the owner's to write. Queued in PLAN.
 
 ### 2026-10-12 - Place search's rollout plan: stage 0 approved with the phase 2 landing; the wave order waits for a size projection (owner)
 

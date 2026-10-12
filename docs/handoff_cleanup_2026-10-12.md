@@ -337,25 +337,19 @@ construction is not listed until it opens."
   `japan_fetch.py` (`config.FETCH_PAUSE_S`, a None URL through
   `config.source_url`), `japan.py` (+4 lines), `line_registry.py`
   (`okinawa-urban-monorail`, `#E84028`): read the diff and let the Japan
-  drift run decide. **Three calls the owner had NOT answered when this
-  was written; ask before acting on any:**
-  - S39 (shared reader, Cleanup's to write if he says yes): Naha's
-    August 2020 renewals file carries both 業種 and 営業の種類, and the
-    reader takes the form as the type, so 20 in-term restaurants are
-    missing. The session recommends a rule: both present, 業種 is the
-    type and 営業の種類 the form. `TYPE_COLS` puts 営業の種類 ahead of
-    業種, so a blanket swap could move a built city: scan the built
-    cities' headers for files carrying both, make it opt-in if any does,
-    then the Japan drift run; Naha re-runs steps 2 and 3 and drops two
-    disclosure phrases.
-  - S40: the October 2016 renewals file heads its type 種目; all 68
-    rows expired by 2023 and the config stops the build if one is ever
-    in term. Recommended left as is.
-  - S41 (the macro view, Cleanup's by S35): Naha stretches the
-    Kyushu-Okinawa view; Kitakyushu's and Shimonoseki's dots sit 3.3 px
-    apart at all three widths and Sasebo and Oita are labelled in no
-    view. The session recommends holding Naha out of the view's zoom
-    fit; it touched no view. This is step 7's work.
+  drift run decide. **Its three calls are answered (owner, 2026-10-12;
+  DECISIONS, that date):**
+  - S39: DONE on master, in `rebuilt_register` (a row filling both 業種
+    and 営業の種類 keeps its type in 業種). Naha's session re-runs steps
+    2 and 3 on its branch, so confirm its tip before merging.
+  - S40: left as is.
+  - S41, step 7's work: hold Naha out of the Kyushu-Okinawa view's zoom
+    fit and add a small line on that view saying Naha is below, a
+    TEMPORARY item (his word; what ends it was not said: ask). Draft
+    the wording and its place for him before rendering; it is visible
+    text no template covers. With Naha in the fit the build measured
+    Kitakyushu's and Shimonoseki's dots 3.3 px apart and no label for
+    Sasebo or Oita.
   The basemap session builds Naha's pack and sends its table line.
 - **Toulouse and Rennes:** whether step 1's name-level fallback fired; one
   read-only step 1 run per city.
