@@ -91,20 +91,33 @@ def real_runner(city, script=FETCH_SCRIPT, timeout_min=CHILD_TIMEOUT_MIN):
         proc = subprocess.run(child_command(city, script), cwd=ROOT, env=env,
                               capture_output=True, text=True, encoding="utf-8",
                               errors="replace", timeout=timeout_min * 60)
-    except subprocess.TimeoutExpired:
-        return 124, f"stopped after {timeout_min:g} min with no end"
+    except subprocess.TimeoutExpired as exc:
+        # What the child had said so far tells a lock wait from a hung
+        # request; the pipes may hold bytes, text or nothing.
+        def text(part):
+            if isinstance(part, bytes):
+                return part.decode("utf-8", errors="replace")
+            return part or ""
+        said = _last_line(text(exc.stdout), text(exc.stderr))
+        return 124, (f"stopped after {timeout_min:g} min with no end"
+                     + (f"; it last said: {said}" if said else ""))
     return proc.returncode, _last_line(proc.stdout, proc.stderr,
                                        failed=proc.returncode != 0)
 
 
 def read_place_paths(city, importer=importlib.import_module):
     """(json, extra, None) for a city's two place caches, or (None, None, why)
-    when the config cannot be imported or carries no such path. Importing a
-    config module runs no request."""
+    when the config cannot be imported, carries no such path, or carries
+    something that is not a path. Importing a config module runs no request.
+    A config that ends its import with sys.exit is refused like any other
+    failure: only an interrupt from the keyboard passes through."""
     try:
         config = importer(f"pipeline.{city}.config")
-    except Exception as exc:
-        return None, None, f"cannot import pipeline.{city}.config: {exc}"
+    except KeyboardInterrupt:
+        raise
+    except BaseException as exc:
+        return None, None, (f"cannot import pipeline.{city}.config: "
+                            f"{type(exc).__name__}: {exc}")
     json_path = getattr(config, "PLACE_OSM_JSON", None)
     extra_path = getattr(config, "PLACE_OSM_EXTRA_JSON", None)
     missing = [key for key, value in (("PLACE_OSM_JSON", json_path),
@@ -113,16 +126,41 @@ def read_place_paths(city, importer=importlib.import_module):
     if missing:
         return None, None, (f"pipeline.{city}.config carries no "
                             f"{' or '.join(missing)}")
+    not_paths = [key for key, value in (("PLACE_OSM_JSON", json_path),
+                                        ("PLACE_OSM_EXTRA_JSON", extra_path))
+                 if not isinstance(value, Path)]
+    if not_paths:
+        return None, None, (f"pipeline.{city}.config: {' and '.join(not_paths)} "
+                            f"must be a pathlib.Path")
     return json_path, extra_path, None
 
 
+def _cache_state(path):
+    """None when a cache file is there and whole, else what is wrong with it.
+    Whole means not empty and ending as a JSON object or list does: a child
+    stopped in the middle of its write leaves a file that exists and is
+    neither. The file is not parsed (a cache runs to tens of megabytes)."""
+    if not path.exists():
+        return "missing"
+    size = path.stat().st_size
+    if size == 0:
+        return "empty"
+    with open(path, "rb") as handle:
+        handle.seek(max(0, size - 64))
+        tail = handle.read().rstrip()
+    if not tail.endswith((b"}", b"]")):
+        return "cut short (it does not end as JSON does)"
+    return None
+
+
 def real_cached(city, json_path, extra_path):
-    """None when both place caches exist, else which one is missing. The city
-    argument is unused here; the selftest's lookup keys off it instead."""
-    if not json_path.exists():
-        return "PLACE_OSM_JSON missing"
-    if not extra_path.exists():
-        return "PLACE_OSM_EXTRA_JSON missing"
+    """None when both place caches are there and whole, else which one is
+    not and why. The city argument is unused here; the selftest's lookup keys
+    off it instead."""
+    for key, path in (("PLACE_OSM_JSON", json_path), ("PLACE_OSM_EXTRA_JSON", extra_path)):
+        state = _cache_state(path)
+        if state is not None:
+            return f"{key} {state}"
     return None
 
 
@@ -146,41 +184,16 @@ def run_queue(cities, *, runner, config_reader, cached, out=_print, log=None,
             seen.add(city)
             ordered.append(city)
 
-    if dry_run:
-        would_fetch, would_skip, not_queued = [], [], []
-        for city in ordered:
-            json_path, extra_path, why = config_reader(city)
-            if why is not None:
-                not_queued.append(f"{city} ({why})")
-                out(f"{city}: not queued ({why})")
-                continue
-            missing = cached(city, json_path, extra_path)
-            if missing is None:
-                would_skip.append(city)
-                out(f"{city}: skip (both cache files present)")
-            else:
-                would_fetch.append(city)
-                out(f"{city}: fetch ({missing})")
-        out("")
-        out("dry run: no child was started")
-        out(f"  would fetch {len(would_fetch)}" + (f": {', '.join(would_fetch)}" if would_fetch else ""))
-        out(f"  would skip {len(would_skip)}" + (f": {', '.join(would_skip)}" if would_skip else ""))
-        out(f"  not queued {len(not_queued)}" + (f": {', '.join(not_queued)}" if not_queued else ""))
-        return 0 if not not_queued else 1
-
-    fetched, skipped, failed_twice, not_queued, retry = [], [], [], [], []
-    # What a city that never succeeded is called: twice with the one default
-    # retry round, else the number of tries.
-    final = "failed twice" if retries == 1 else f"failed {retries + 1} times"
-
-    def attempt(city, json_path, extra_path):
-        start = time.monotonic()
-        exit_code, last = runner(city)
-        seconds = time.monotonic() - start
-        missing = cached(city, json_path, extra_path)
-        return exit_code, seconds, last, missing
-
-    log_file = open(log, "ab") if log is not None else None
+    # The log is opened before anything runs, so a path that cannot be
+    # written stops the queue with a sentence, not a traceback hours in.
+    log_file = None
+    if log is not None:
+        try:
+            log_file = open(log, "ab")
+        except OSError as exc:
+            out(f"cannot open --log {log}: {exc}. Create its folder or name "
+                f"another file; nothing was run.")
+            return 2
 
     def emit(line):
         out(line)
@@ -188,17 +201,75 @@ def run_queue(cities, *, runner, config_reader, cached, out=_print, log=None,
             log_file.write((line + "\n").encode("utf-8"))
             log_file.flush()
 
+    def finish(code):
+        """Write the end marker, close the log and pass the exit code on. A
+        log with no END line is a run that was killed."""
+        emit(f"{utc_now()} END exit={code}")
+        if log_file is not None:
+            log_file.close()
+        return code
+
+    def read_city(city):
+        """(json, extra, why) from the config reader and the cache test, with
+        any error in either turned into a reason: one city's broken config
+        never ends the queue."""
+        try:
+            json_path, extra_path, why = config_reader(city)
+            if why is not None:
+                return None, None, why, None
+            return json_path, extra_path, None, cached(city, json_path, extra_path)
+        except Exception as exc:
+            return None, None, f"error reading its config or caches: {type(exc).__name__}: {exc}", None
+
+    if dry_run:
+        would_fetch, would_skip, not_queued = [], [], []
+        for city in ordered:
+            json_path, extra_path, why, missing = read_city(city)
+            if why is not None:
+                not_queued.append(f"{city} ({why})")
+                emit(f"{city}: not queued ({why})")
+                continue
+            if missing is None:
+                would_skip.append(city)
+                emit(f"{city}: skip (both cache files present)")
+            else:
+                would_fetch.append(city)
+                emit(f"{city}: fetch ({missing})")
+        emit("")
+        emit("dry run: no child was started")
+        emit(f"  would fetch {len(would_fetch)}" + (f": {', '.join(would_fetch)}" if would_fetch else ""))
+        emit(f"  would skip {len(would_skip)}" + (f": {', '.join(would_skip)}" if would_skip else ""))
+        emit(f"  not queued {len(not_queued)}" + (f": {', '.join(not_queued)}" if not_queued else ""))
+        return finish(0 if not not_queued else 1)
+
+    fetched, skipped, failed_twice, not_queued, retry = [], [], [], [], []
+    not_queued_names = set()
+    # What a city that never succeeded is called: twice with the one default
+    # retry round, else the number of tries.
+    final = "failed twice" if retries == 1 else f"failed {retries + 1} times"
+
+    def attempt(city, json_path, extra_path):
+        """One child and the cache test after it. An error raised by either
+        is that city's failure (exit 125), never the queue's end."""
+        start = time.monotonic()
+        try:
+            exit_code, last = runner(city)
+            missing = cached(city, json_path, extra_path)
+        except Exception as exc:
+            exit_code, last, missing = 125, f"queue error: {type(exc).__name__}: {exc}", "not tested"
+        return exit_code, time.monotonic() - start, last, missing
+
     interrupted = False
     reached, retried = set(), set()
     try:
         for city in ordered:
             reached.add(city)
-            json_path, extra_path, why = config_reader(city)
+            json_path, extra_path, why, missing = read_city(city)
             if why is not None:
                 not_queued.append(f"{city} ({why})")
+                not_queued_names.add(city)
                 emit(f"{utc_now()} {city} not queued: {why}")
                 continue
-            missing = cached(city, json_path, extra_path)
             if missing is None:
                 skipped.append(city)
                 emit(f"{utc_now()} {city} skipped (both cache files present)")
@@ -236,30 +307,28 @@ def run_queue(cities, *, runner, config_reader, cached, out=_print, log=None,
                 failed_twice.append(city)
     except KeyboardInterrupt:
         interrupted = True
-        out("interrupted: stopping after the current child")
-    finally:
-        if log_file is not None:
-            log_file.close()
+        emit("interrupted: stopping after the current child")
 
-    out("")
-    out("Summary:")
-    out(f"  fetched {len(fetched)}" + (f": {', '.join(fetched)}" if fetched else ""))
-    out(f"  skipped {len(skipped)}" + (f": {', '.join(skipped)}" if skipped else ""))
-    out(f"  {final} {len(failed_twice)}" + (f": {', '.join(failed_twice)}" if failed_twice else ""))
-    out(f"  not queued {len(not_queued)}" + (f": {', '.join(not_queued)}" if not_queued else ""))
+    # The summary goes to the log as well as the screen: a log is all that
+    # is left of a run nobody watched.
+    emit("")
+    emit("Summary:")
+    emit(f"  fetched {len(fetched)}" + (f": {', '.join(fetched)}" if fetched else ""))
+    emit(f"  skipped {len(skipped)}" + (f": {', '.join(skipped)}" if skipped else ""))
+    emit(f"  {final} {len(failed_twice)}" + (f": {', '.join(failed_twice)}" if failed_twice else ""))
+    emit(f"  not queued {len(not_queued)}" + (f": {', '.join(not_queued)}" if not_queued else ""))
     if interrupted:
         # An interrupted run says what it left, so no city is lost from view:
         # the one in flight or failed once and not yet retried, and the ones
         # the first round never reached.
-        settled = set(fetched) | set(skipped) | set(failed_twice)
-        unsettled = [c for c in ordered if c in reached and c not in settled
-                     and not any(n.startswith(f"{c} (") for n in not_queued)]
+        settled = set(fetched) | set(skipped) | set(failed_twice) | not_queued_names
+        unsettled = [c for c in ordered if c in reached and c not in settled]
         unreached = [c for c in ordered if c not in reached]
-        out(f"  interrupted, not settled {len(unsettled)}"
-            + (f": {', '.join(unsettled)}" if unsettled else ""))
-        out(f"  interrupted, not reached {len(unreached)}"
-            + (f": {', '.join(unreached)}" if unreached else ""))
-    return 1 if interrupted or failed_twice or not_queued else 0
+        emit(f"  interrupted, not settled {len(unsettled)}"
+             + (f": {', '.join(unsettled)}" if unsettled else ""))
+        emit(f"  interrupted, not reached {len(unreached)}"
+             + (f": {', '.join(unreached)}" if unreached else ""))
+    return finish(1 if interrupted or failed_twice or not_queued else 0)
 
 
 def main(argv=None, *, runner=real_runner, config_reader=read_place_paths,
@@ -416,9 +485,13 @@ def selftest():
         log_path = Path(tmp) / "queue.log"
         rc, text = run(["a", "b"], runner, config_ok, state.cached, log=str(log_path))
         data = log_path.read_bytes()
+        city_lines = [l for l in data.split(b"\n") if b" fetched exit=0" in l]
         report("with --log, the file holds one line per finished city, LF endings",
-               rc == 0 and data.count(b"\n") == 2 and b"\r" not in data
+               rc == 0 and len(city_lines) == 2 and b"\r" not in data
                and b" a fetched exit=0" in data and b" b fetched exit=0" in data)
+        report("the log ends with the summary and an END line carrying the exit code",
+               b"Summary:" in data and b"  fetched 2: a, b" in data
+               and data.rstrip().endswith(b"END exit=0"))
 
     state = State()
     runner = Runner(state)
@@ -533,6 +606,114 @@ def selftest():
            rc != 0 and runner.calls == ["a"]
            and "interrupted, not settled 2: a, b" in text
            and "interrupted, not reached 1: c" in text)
+
+    # Found by an adversarial review (2026-10-12): each is a way an unattended
+    # run could look fine and not be.
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp = Path(tmp)
+        whole, empty, cut = tmp / "whole.json", tmp / "empty.json", tmp / "cut.json"
+        whole.write_bytes(b'{"elements": []}\n')
+        empty.write_bytes(b"")
+        cut.write_bytes(b'{"elements": [{"id": 1')
+        report("a cache that is empty or cut short is not a cache",
+               real_cached("x", whole, whole) is None
+               and real_cached("x", whole, empty) == "PLACE_OSM_EXTRA_JSON empty"
+               and "cut short" in (real_cached("x", cut, whole) or ""))
+
+        class Strings:
+            PLACE_OSM_JSON = "a.json"
+            PLACE_OSM_EXTRA_JSON = whole
+
+        def exiting(name):
+            raise SystemExit(0)
+
+        as_strings = read_place_paths("x", importer=lambda name: Strings)
+        # Caught here, or a config's sys.exit(0) would end this selftest with
+        # exit 0 and hide the very failure the case is for.
+        try:
+            as_exit = read_place_paths("x", importer=exiting)
+        except SystemExit:
+            as_exit = ("escaped", None, "")
+        report("a config whose path is a string, or whose import calls sys.exit, is refused",
+               as_strings[0] is None and "PLACE_OSM_JSON must be a pathlib.Path" in as_strings[2]
+               and as_exit[0] is None and "SystemExit" in as_exit[2])
+
+        def breaking(city):
+            if city == "bad":
+                raise AttributeError("'str' object has no attribute 'exists'")
+            return config_ok(city)
+
+        state = State()
+        runner = Runner(state)
+        rc, text = run(["bad", "a"], runner, breaking, state.cached)
+        report("an error reading one city's config does not end the queue",
+               rc != 0 and runner.calls == ["a"] and "bad not queued: error reading" in text
+               and "a fetched exit=0" in text and "Summary:" in text)
+
+        class Raising(Runner):
+            def __call__(self, city):
+                if city == "a":
+                    self.calls.append(city)
+                    raise OSError("the child could not be started")
+                return super().__call__(city)
+
+        state = State()
+        runner = Raising(state)
+        rc, text = run(["a", "b"], runner, config_ok, state.cached)
+        report("an error starting one child is that city's failure, and the next city runs",
+               rc != 0 and runner.calls == ["a", "b", "a"] and "exit=125" in text
+               and "b fetched exit=0" in text and "failed twice 1: a" in text)
+
+        state = State()
+        runner = Runner(state)
+        rc, text = run(["a"], runner, config_ok, state.cached,
+                       log=str(tmp / "no_such_folder" / "queue.log"))
+        report("a --log that cannot be opened stops the queue with a sentence, before any child",
+               rc == 2 and runner.calls == [] and "cannot open --log" in text)
+
+        state = State(present=("b",))
+        runner = Runner(state)
+        dry_log = tmp / "dry.log"
+        rc, text = run(["a", "b"], runner, config_ok, state.cached, dry_run=True, log=str(dry_log))
+        dry = dry_log.read_bytes()
+        report("a dry run writes its plan to the log too, and still starts no child",
+               runner.calls == [] and b"a: fetch" in dry and b"b: skip" in dry
+               and dry.rstrip().endswith(b"END exit=0"))
+
+        state = State()
+        runner = Interrupting(state, plan={"a": [1]})
+        kill_log = tmp / "kill.log"
+        rc, text = run(["a", "b", "c"], runner, config_ok, state.cached, log=str(kill_log))
+        killed = kill_log.read_bytes()
+        report("an interrupted run's log holds what it left and its END line",
+               b"interrupted: stopping" in killed
+               and b"interrupted, not reached 1: c" in killed
+               and killed.rstrip().endswith(b"END exit=1"))
+
+        def mixed(city):
+            if city == "a (x)":
+                return None, None, "cannot import"
+            return config_ok(city)
+
+        class StopAtA(Runner):
+            def __call__(self, city):
+                if city == "a":
+                    raise KeyboardInterrupt
+                return super().__call__(city)
+
+        state = State()
+        runner = StopAtA(state)
+        rc, text = run(["a (x)", "a"], runner, mixed, state.cached)
+        report("a city whose name begins another's refusal is still named as not settled",
+               "interrupted, not settled 1: a" in text)
+
+        slow = tmp / "slow.py"
+        slow.write_bytes(b"import sys, time\n"
+                         b"print('waiting for the lock', flush=True)\n"
+                         b"time.sleep(30)\n")
+        code, last = real_runner("x", script=str(slow), timeout_min=0.02)
+        report("a child past the time limit is stopped as exit 124 with what it last said",
+               code == 124 and "waiting for the lock" in last)
 
     good = sum(ok for _, ok in cases)
     print(f"{good} of {len(cases)} cases behaved as intended.")

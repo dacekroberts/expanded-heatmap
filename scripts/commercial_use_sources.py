@@ -94,14 +94,40 @@ def _slugify(text):
 
 
 def _url_host(url):
-    host = (urlsplit(url).hostname or "").lower()
+    """The publisher's host: lower case, no leading www., and with its port
+    when the URL names one (two services on one machine are two hosts)."""
+    parts = urlsplit(url)
+    host = (parts.hostname or "").lower()
     if host.startswith("www."):
         host = host[4:]
-    return host
+    try:
+        port = parts.port
+    except ValueError:
+        port = None
+    return f"{host}:{port}" if port else host
 
 
 def _url_path(url):
     return (urlsplit(url).path or "").strip("/")
+
+
+def _page_key(url):
+    """A dataset page's path with its query string: portals that serve every
+    dataset from one address tell them apart only there (Daegu's dataView.do,
+    Kumamoto's detail.aspx), so the query is part of what the page is."""
+    parts = urlsplit(url)
+    path = (parts.path or "").strip("/")
+    return f"{path}?{parts.query}" if parts.query else path
+
+
+def _url_folder(url):
+    """A data URL's path without its last part: the folder a file sits in."""
+    return (urlsplit(url).path or "").rsplit("/", 1)[0].strip("/")
+
+
+def _is_osm_host(host):
+    """True for OpenStreetMap's own hosts and any Overpass mirror."""
+    return "openstreetmap" in host or "overpass" in host
 
 
 def _first_segment(url):
@@ -115,7 +141,18 @@ def _source_id(host, path):
 
 
 def _is_osm_key(key):
-    return key == "osm" or key.startswith("osm_")
+    """True for osm and osm_*, read on the last part of a nested key
+    (sources.osm_places is an osm_ key)."""
+    last = key.rsplit(".", 1)[-1]
+    return last == "osm" or last.startswith("osm_")
+
+
+def _names_another_publisher(value):
+    """True when a dict holds an http URL on a host that is not OpenStreetMap
+    or an Overpass mirror: under an osm_ key that is another publisher's
+    data (a tile provider, a boundary service), not OpenStreetMap's."""
+    return any(_is_http(v) and not _is_osm_host(_url_host(v))
+               for v in value.values())
 
 
 def _osm_bookkeeping(key, value):
@@ -167,10 +204,10 @@ def _is_source_like(value):
     derived artifact (made_from or tool) is not a source."""
     if not isinstance(value, dict):
         return False
-    if "made_from" in value or "tool" in value:
-        return False
     if any(_is_http(v) for v in value.values()):
         return True
+    if "made_from" in value or "tool" in value:
+        return False
     if "url" in value or "dataset_page" in value or "page" in value \
             or "page_url" in value or "portal" in value:
         return True
@@ -180,12 +217,13 @@ def _is_source_like(value):
 
 
 def _register_source(sid, host, dataset_page, city, layers, licence, identity,
-                     state):
+                     state, folder=None):
     if sid not in state["identity_of"]:
         state["identity_of"][sid] = identity
         state["sources"][sid] = {
             "id": sid, "host": host, "dataset_page": dataset_page,
-            "cities": set(), "layers": set(), "licences": set()}
+            "cities": set(), "layers": set(), "licences": set(),
+            "folders": set()}
     elif state["identity_of"][sid] != identity:
         state["collisions"].add(
             f"id '{sid}' would name two sources: "
@@ -196,6 +234,28 @@ def _register_source(sid, host, dataset_page, city, layers, licence, identity,
     src["layers"].update(layers)
     if licence:
         src["licences"].add(licence)
+    if folder is not None:
+        src["folders"].add(folder)
+
+
+def _register_url(name, key, page, data_url, layers, licence, state):
+    """Register one entry by its dataset page, else by its data URL. A URL on
+    an OpenStreetMap or Overpass host is OpenStreetMap under whatever key. An
+    entry with no dataset page is keyed on its host and FIRST path part, and
+    its folder is kept: one such key can cover several datasets (ten on
+    data.gov.lv), and the run lists every key that covers more than one
+    folder for a person to split."""
+    if page:
+        host, path = _url_host(page), _page_key(page)
+        folder = None
+    else:
+        host, path = _url_host(data_url), _first_segment(data_url)
+        folder = _url_folder(data_url)
+    if _is_osm_host(host):
+        _register_source(OSM_SID, OSM_HOST, "", name, {key}, "", OSM_SID, state)
+        return
+    _register_source(_source_id(host, path), host, page, name, layers, licence,
+                     f"{host}/{path}", state, folder=folder)
 
 
 def _set_aside(name, key, value, state):
@@ -215,25 +275,22 @@ def _set_aside(name, key, value, state):
 
 
 def _walk_dict(name, key, value, state):
-    if _is_osm_key(key):
+    if _is_osm_key(key) and not _names_another_publisher(value):
         if _osm_bookkeeping(key, value):
             _set_aside(name, key, value, state)
         else:
             _register_source(OSM_SID, OSM_HOST, "", name, {key}, "", OSM_SID,
                              state)
         return
-    if "made_from" in value or "tool" in value:
+    page, data_url, licence = _entry_urls(value)
+    if ("made_from" in value or "tool" in value) and not (page or data_url):
+        # A derived file names no publisher. One that also carries a URL does,
+        # and is read as a source below.
         _set_aside(name, key, value, state)
         return
-    page, data_url, licence = _entry_urls(value)
     if page or data_url:
-        if page:
-            host, path = _url_host(page), _url_path(page)
-        else:
-            host, path = _url_host(data_url), _first_segment(data_url)
-        _register_source(_source_id(host, path), host, page, name,
-                         _entry_layers(value, key), licence, f"{host}/{path}",
-                         state)
+        _register_url(name, key, page, data_url, _entry_layers(value, key),
+                      licence, state)
         return
     if "url" in value or ("file" in value and "sha256" in value):
         state["unclassified"].append(
@@ -242,9 +299,10 @@ def _walk_dict(name, key, value, state):
     # A map of source entries nested under one key (ruian, sources, layers):
     # recurse only when at least one nested dict is itself a source, so a
     # file-hash map such as register_files stays one bookkeeping entry.
-    if any(isinstance(v, dict) and _is_source_like(v) for v in value.values()):
+    if any(isinstance(v, dict) and (_is_source_like(v) or _is_osm_key(str(k)))
+           for k, v in value.items()):
         for sub, subv in value.items():
-            if isinstance(subv, dict) and _is_source_like(subv):
+            if isinstance(subv, dict) and (_is_source_like(subv) or _is_osm_key(str(sub))):
                 _walk_dict(name, f"{key}.{sub}", subv, state)
             else:
                 _set_aside(name, f"{key}.{sub}", subv, state)
@@ -264,17 +322,13 @@ def _walk_string(name, key, value, state):
         if "licen" in key:
             _set_aside(name, key, value, state)
         elif _is_http(value):
-            host, path = _url_host(value), _first_segment(value)
-            _register_source(_source_id(host, path), host, "", name, {key}, "",
-                             f"{host}/{path}", state)
+            _register_url(name, key, "", value, {key}, "", state)
         else:
             state["unclassified"].append(
                 {"city": name, "key": key, "reason": "a _url key whose value is not a URL"})
         return
     if _is_http(value):
-        host, path = _url_host(value), _first_segment(value)
-        _register_source(_source_id(host, path), host, "", name, {key}, "",
-                         f"{host}/{path}", state)
+        _register_url(name, key, "", value, {key}, "", state)
         return
     _set_aside(name, key, value, state)
 
@@ -310,7 +364,7 @@ def collect(cities, outputs_dir):
     state = {"sources": {}, "identity_of": {}, "collisions": set(),
              "unclassified": [], "bookkeeping": Counter(),
              "objects": [], "licence_notes": [],
-             "missing": [], "errors": []}
+             "missing": [], "errors": [], "no_source": []}
     for entry in cities:
         name, slug = entry["name"], entry["slug"]
         path = outputs_dir / slug / "provenance.json"
@@ -331,7 +385,19 @@ def collect(cities, outputs_dir):
 
 
 def _exit_code(state):
-    return 1 if (state["missing"] or state["errors"] or state["collisions"]) else 0
+    """Non-zero for a city with no provenance file, a file that cannot be
+    parsed, an id shared by two sources, and a city whose file records no
+    source at all (an empty object, or dates and boxes only): a map has
+    sources, so that file is as good as missing."""
+    return 1 if (state["missing"] or state["errors"] or state["collisions"]
+                 or state["no_source"]) else 0
+
+
+def _many_folders(state):
+    """Sources keyed on a host and first path part whose entries sit in more
+    than one URL folder: each may be several datasets counted as one."""
+    return [s for s in sorted(state["sources"].values(), key=lambda x: x["id"])
+            if len(s["folders"]) > 1]
 
 
 def _only_osm(state):
@@ -364,6 +430,9 @@ def _json_payload(state):
             {"key": k, "cities": cities}
             for (k,), cities in _grouped(state["objects"], ("key",)).items()],
         "cities_without_provenance": sorted(m["name"] for m in state["missing"]),
+        "cities_with_no_source": sorted(state["no_source"]),
+        "sources_covering_several_folders": [
+            {"id": s["id"], "folders": sorted(s["folders"])} for s in _many_folders(state)],
         "sources": [
             {"id": s["id"], "host": s["host"], "dataset_page": s["dataset_page"],
              "cities": sorted(s["cities"]), "layers": sorted(s["layers"]),
@@ -397,6 +466,7 @@ def _run(cities, outputs_dir, city=None, json_out=None):
     missing_names = {m["name"] for m in state["missing"]}
     uncovered = sorted(n for n in all_names
                        if n not in covered and n not in missing_names)
+    state["no_source"] = uncovered
 
     if city:
         target = set(_slug_names(cities, city))
@@ -408,6 +478,7 @@ def _run(cities, outputs_dir, city=None, json_out=None):
         state["unclassified"] = [u for u in state["unclassified"]
                                  if u["city"] in target]
         state["missing"] = [m for m in state["missing"] if m["slug"] == city]
+        state["no_source"] = [n for n in uncovered if n in target]
         state["objects"] = [o for o in state["objects"] if o["city"] in target]
         state["licence_notes"] = [n for n in state["licence_notes"]
                                   if n["city"] in target]
@@ -465,6 +536,15 @@ def _run(cities, outputs_dir, city=None, json_out=None):
                   f"may cover a whole host; a person decides")
             for h, n in many:
                 print(f"  {h}  sources={n}")
+    several = _many_folders(state)
+    if several:
+        print(f"\nsources covering more than one URL folder ({len(several)}): "
+              f"keyed on host and first path part for want of a dataset page, "
+              f"each may be several datasets; a person splits them")
+        for s in several:
+            shown = ", ".join(sorted(s["folders"])[:4])
+            more = f", and {len(s['folders']) - 4} more" if len(s["folders"]) > 4 else ""
+            print(f"  {s['id']}  folders={len(s['folders'])}: {shown}{more}")
     notes = _grouped(state["licence_notes"], ("key", "value"))
     if notes:
         print(f"\nlicence fields outside a source entry ({len(notes)}): read, "
@@ -741,6 +821,72 @@ def selftest():
         rc, out = run([city("A", "c20")])
         case("the header counts hosts as well as sources, and names a host with two",
              "2 sources on 1 hosts" in out and "p.example  sources=2" in out)
+
+        # Found by an adversarial review (2026-10-12): each is a way the count
+        # could be wrong and look right.
+
+        # 21. Dataset pages that differ only in the query string are two
+        #     sources (Daegu serves nine registers from one dataView.do).
+        put("c21", {"a": {"dataset_page": "https://portal.example/view.do?id=1"},
+                    "b": {"dataset_page": "https://portal.example/view.do?id=2"}})
+        res = collect([city("A", "c21")], tmp)
+        case("dataset pages differing only in the query string stay two sources",
+             sorted(res["sources"]) == ["portal-example-view-do-id-1",
+                                        "portal-example-view-do-id-2"])
+
+        # 22. With no dataset page two files under one first path part are one
+        #     source still, and the run names it as covering two folders.
+        put("c22", {"register": {"url": "https://files.example/download/reg/business.csv"},
+                    "permits": {"url": "https://files.example/download/permits/all.csv"}})
+        rc, out = run([city("A", "c22")])
+        case("one key covering two URL folders is listed for a person to split",
+             "files-example-download  folders=2: download/permits, download/reg" in out)
+
+        # 23. Another publisher's URL under an osm_ key is that publisher's.
+        put("c23", {"osm_basemap": {"tiles": "https://carto.example/light/z.png"}})
+        res = collect([city("A", "c23")], tmp)
+        case("another publisher's URL under an osm_ key is not OpenStreetMap",
+             list(res["sources"]) == ["carto-example-light"])
+
+        # 24. An Overpass or OpenStreetMap URL under any key is OpenStreetMap.
+        put("c24", {"overpass_url": "https://overpass-api.de/api/interpreter",
+                    "credit": {"url": "https://www.openstreetmap.org/copyright"}})
+        res = collect([city("A", "c24")], tmp)
+        case("an Overpass or OpenStreetMap URL under any key is OpenStreetMap",
+             list(res["sources"]) == [OSM_SID])
+
+        # 25. An osm_ entry nested in a map of sources is OpenStreetMap.
+        put("c25", {"sources": {"osm_places": {"host": "overpass-api.de", "query": "q"},
+                                "reg": {"url": "https://reg.example/data/r.csv"}}})
+        res = collect([city("A", "c25")], tmp)
+        case("an osm_ entry nested under another key is OpenStreetMap",
+             sorted(res["sources"]) == [OSM_SID, "reg-example-data"])
+
+        # 26. A file that records no source is as good as missing: named, in
+        #     the JSON, and the run exits non-zero.
+        put("c26", {"fetched_utc": "2026-01-01T00:00:00+00:00"})
+        j4 = tmp / "r4.json"
+        buf = io.StringIO()
+        with redirect_stdout(buf):
+            rc = _run([city("Hollow", "c26")], tmp, json_out=j4)
+        case("a provenance file with no source fails the run and is named",
+             rc != 0 and "Hollow" in buf.getvalue()
+             and json.loads(j4.read_bytes().decode("utf-8"))["cities_with_no_source"] == ["Hollow"])
+
+        # 27. A derived file that also names a URL is read as a source.
+        put("c27", {"boundary": {"tool": "osmium", "url": "https://gadm.example/data/x.zip"},
+                    "derived": {"tool": "ogr2ogr", "made_from": "x.zip"}})
+        res = collect([city("A", "c27")], tmp)
+        case("a URL beside a tool key is a source; a tool with no URL is set aside",
+             list(res["sources"]) == ["gadm-example-data"]
+             and [o["key"] for o in res["objects"]] == ["derived"])
+
+        # 28. A port is part of the host.
+        put("c28", {"a": {"url": "https://svc.example:8443/api/x.csv"},
+                    "b": {"url": "https://svc.example:9443/api/y.csv"}})
+        res = collect([city("A", "c28")], tmp)
+        case("two ports on one machine are two hosts",
+             sorted(res["sources"]) == ["svc-example-8443-api", "svc-example-9443-api"])
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
 
