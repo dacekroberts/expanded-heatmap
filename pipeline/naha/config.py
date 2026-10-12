@@ -260,7 +260,7 @@ OSM_NAME_EN_MISSING = {}
 # the other 12 are OSM's as they stand. The owner weighed the operator's
 # English for these four and kept the precedent (2026-10-12: "naha-kuko
 # okay"); English wording is a question for the Travel view and the
-# transit-globe app, not this map.
+# travel app, not this map.
 OSM_NAME_EN_OVERRIDES = {
     "那覇空港": "Naha-kuko",                         # Naha Airport
     "奥武山公園": "Onoyama-koen",                    # Onoyama Park
