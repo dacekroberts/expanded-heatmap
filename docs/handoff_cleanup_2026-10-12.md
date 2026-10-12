@@ -32,7 +32,7 @@ branch's drafts file.
     Toyota's config and map untouched.
   - `legend-dot-georgia` `16a68efe` (worktree `review-prep`), 57 behind
     master: needs the one full re-render.
-  - `place-search` `59ebdb96` (2026-10-12, its final state for the landing by its own message; the owner saw the marker and picked-line changes on a phone, relayed: "phone looks great", so the fifth call below is answered; far behind master): batches 1
+  - `place-search` `adeb88bd` (2026-10-12, its final state for the landing by its own message; the owner saw the marker and picked-line changes on a phone, relayed: "phone looks great", so the fifth call below is answered; far behind master): batches 1
     to 3, nineteen cities, the watch file and its check. **Its rollout
     plan for the whole site is `docs/handoff_place_search_rollout.md` on
     the branch. The owner approved STAGE 0 with this landing, one
@@ -251,10 +251,21 @@ the `place-search-city` skill). Not checked by Cleanup.
 - **Nothing was verified on the live site**: local renders and the
   owner's phone over the LAN only. Deploy-verify at the landing is the
   first full pass, so give search its own line in the lanes' scope.
-- **Still open with the owner:** the four calls listed above (suggestion
-  tuning, corner credit, Cities menu, the intersections download), the
-  size projection and wave order, and the post-rollout audits in the
-  rollout plan.
+- **The four calls listed above are ANSWERED** (owner, in that session's
+  chat, relayed 2026-10-12; its drafts entry "the owner's answers to the
+  six remaining questions"), so do not put them to him again: suggestion
+  tuning waits until after the rollout; the corner credit is closed as
+  built; the Cities menu stays where it is; "Download this index" links
+  both files ("yes, link both": the credit reads "Download this index ·
+  intersections", and the nineteen maps are re-rendered with it). Lines
+  search cannot find go on city pages, or in one table on a data page if
+  the list is long. The wave order is approved AFTER the size projection,
+  as he told Cleanup.
+- **For deploy-verify:** the second download link has not been seen in a
+  browser. Open one searched map's search box and confirm both links
+  download.
+- **Still open:** the size projection, then the wave order, and the
+  post-rollout audits in the rollout plan.
 
 ## The basemap (the site's partial Travel view)
 
