@@ -23,9 +23,8 @@ are in docs/data_sources.md, "The Travel basemap".
 PACK_HOST = None
 
 # The local label language of each city, as @protomaps/basemaps 5.7.2 names
-# it (its `lang` option; `name:<code>` in the pack). A city not listed has
-# English labels only and no pill: the English-speaking countries, and
-# Tbilisi and Dublin, whose local-language codes the style does not carry
+# it (its `lang` option; `name:<code>` in the pack). The rest are in
+# ENGLISH_ONLY below: the English-speaking countries, and Tbilisi and Dublin, whose local-language codes the style does not carry
 # (Georgian) or readers would not expect over English (Irish). Where a
 # country has more than one language the city's own is used; Barcelona and
 # Palma take Spanish, since the style has no Catalan.
@@ -64,6 +63,19 @@ LOCAL_LANG = {
            "goyang", "gwangju", "incheon", "namyangju", "seongnam", "seoul", "siheung",
            "suwon", "uijeongbu", "yongin"],
 }
+# English labels only, no pill. Listed, not implied: every built city is in
+# exactly one of the two tables (scripts/check_travel_packs.py), so a city
+# that lands later fails the pre-push check until it is placed here AND its
+# pack is built and on the host (build_packs.py and make_upload.py in
+# data/_basemap_build/download_plan_2026-10-08/).
+ENGLISH_ONLY = [
+    "melbourne", "sydney", "calgary", "edmonton", "kitchener_waterloo", "ottawa", "toronto",
+    "vancouver", "tbilisi", "dublin", "birmingham", "blackpool", "edinburgh", "glasgow",
+    "liverpool", "london", "manchester", "newcastle", "nottingham", "sheffield", "boston",
+    "buffalo", "chicago", "dallas", "houston", "kansas_city", "los_angeles", "miami",
+    "minneapolis", "new_orleans", "new_york", "philadelphia", "pittsburgh", "sacramento",
+    "san_diego", "san_francisco", "seattle", "tacoma", "tucson", "washington_dc",
+]
 # The pill's text where the code in capitals would not do.
 PILL_TEXT = {"zh-Hant": "ZH"}
 

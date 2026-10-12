@@ -141,6 +141,15 @@ or published; every proposal waits for the owner.
     carries, every route kind is known, and the committed maps carry the
     Travel switch exactly when a host is set, so the table and the maps
     cannot drift apart unnoticed.
+  - **Cities that land later (owner, 2026-10-11: batch 2 is landing
+    soon).** English-only cities are an explicit list, `ENGLISH_ONLY`, and
+    the check requires every built map in exactly one of the two tables.
+    A new city therefore fails the pre-push check until someone places it,
+    which is also the reminder that it needs a pack: its box from
+    `pack_bounds.py`, its Geofabrik extract (a new download only if its
+    region is not among the 93 held), `build_packs.py <city>`, then
+    `make_upload.py`. Whichever of this branch and a new city lands second
+    adds the table line.
   - **The libraries come from the pack host too** (`<host>/lib/`), not the
     CDN copies the prototype used: the table passes them, so a release
     loads nothing from jsdelivr or Protomaps' GitHub pages for Travel.

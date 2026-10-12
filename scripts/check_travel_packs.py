@@ -7,8 +7,9 @@ Fails when a city in LOCAL_LANG or ROUTES has no outputs/<city>/heatmap.html
 language is not one @protomaps/basemaps 5.7.2 carries, when a route kind is
 unknown, or when a committed map carries the Travel switch while PACK_HOST is
 None (or lacks it while a host is set): the table and the maps must agree.
-A built city in no language list is reported, not failed: English-only is a
-choice, recorded in the table's comment.
+A built city must be in exactly one of LOCAL_LANG and ENGLISH_ONLY: a city
+that lands later fails here until it is placed, which is also the reminder
+that it needs a pack.
 """
 import sys
 from pathlib import Path
@@ -46,8 +47,16 @@ if wrong:
                     f"PACK_HOST is {'set' if on else 'None'}: {', '.join(wrong[:8])}"
                     + (" ..." if len(wrong) > 8 else ""))
 
-listed = {c for cities in tp.LOCAL_LANG.values() for c in cities}
-english = [c for c in built if c not in listed]
+listed = [c for cities in tp.LOCAL_LANG.values() for c in cities]
+english = list(tp.ENGLISH_ONLY)
+problems += [f"ENGLISH_ONLY: no built map for {c!r}" for c in english if c not in built]
+both = sorted(c for c in set(listed + english) if (listed + english).count(c) > 1)
+if both:
+    problems.append(f"listed more than once: {', '.join(both)}")
+unplaced = [c for c in built if c not in listed and c not in english]
+if unplaced:
+    problems.append(f"{len(unplaced)} built map(s) in neither LOCAL_LANG nor ENGLISH_ONLY "
+                    f"(place each, and build its pack): {', '.join(unplaced)}")
 if problems:
     print("\n".join("FAIL " + p for p in problems))
     sys.exit(1)
