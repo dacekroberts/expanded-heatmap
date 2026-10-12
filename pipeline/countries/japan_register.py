@@ -923,7 +923,15 @@ def rebuilt_register(paths, as_of, end_col="許可満了日", granted_col="許�
     it they rank 1900-01-01 and fall out). `reader`: the function that reads
     one path into row dicts, city_rows unless a city passes its own (Naha,
     2026-10-12: city_rows with `unnamed_after`, so the stitch is never
-    copied into a city)."""
+    copied into a city).
+
+    A row that fills BOTH 業種 and 営業の種類 keeps its type in 業種 and its
+    form in 営業の種類 (owner, S39, 2026-10-12): Naha's August 2020 renewals
+    file, 56 rows, where TYPE_COLS' order read the form (バー) as the type
+    and 20 in-term restaurants fell to "no rule". Unconditional: of 1,406
+    list files under data/*/raw (CSV, XLSX, XLS; ZIP members not opened)
+    it is the only one whose header carries both. Re-scan if a new list
+    is added that does. permits_from_rows does not apply it."""
     end_key = end_col if isinstance(end_col, str) else end_col[0]
     granted_key = granted_col if isinstance(granted_col, str) else granted_col[0]
     undated = datetime.date(9999, 12, 31) if keep_undated else datetime.date(1900, 1, 1)
@@ -933,6 +941,9 @@ def rebuilt_register(paths, as_of, end_col="許可満了日", granted_col="許�
             addr = next((r[c] for c in ADDR_COLS if (r.get(c) or "").strip()), "")
             name = next((r[c] for c in NAME_COLS if (r.get(c) or "").strip()), "")
             typ = next((r[c] for c in type_cols(rules) if r.get(c)), "")
+            form = next(((r.get(c) or "").strip() for c in FORM_COLS if (r.get(c) or "").strip()), "")
+            if (r.get("業種") or "").strip() and (r.get("営業の種類") or "").strip():
+                typ, form = r["業種"], form or r["営業の種類"].strip()
             end, granted = _date_of(r, end_col), _date_of(r, granted_col)
             key = (re.sub(r"[‐‑‒–—―−ｰー－]", "-", unicodedata.normalize("NFKC", addr).replace(" ", "")
                           .replace("　", "")),
@@ -940,8 +951,7 @@ def rebuilt_register(paths, as_of, end_col="許可満了日", granted_col="許�
             rank = (end or undated, granted or datetime.date(1900, 1, 1))
             if key not in best or rank >= best[key][0]:
                 best[key] = (rank, {"所在地": addr, "施設名称": name, "業種": typ,
-                                    "業態": next(((r.get(c) or "").strip() for c in FORM_COLS
-                                                 if (r.get(c) or "").strip()), ""),
+                                    "業態": form,
                                     end_key: end.isoformat() if end else "",
                                     granted_key: granted.isoformat() if granted else "",
                                     "許可条件": r.get("許可条件") or "",
