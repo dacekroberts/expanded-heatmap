@@ -103,6 +103,15 @@ test and any deploy-verify lane on a searched map:**
   index URL returns Streamlit's HTML shell with status 200 and every map
   falls back to stations only. Confirm `/app/static/places/<city>.json`
   returns JSON before any search test.
+- **The deployed app is not at the host's root.** Streamlit Community Cloud
+  serves it under `/~/+/`, so the index is at
+  `/~/+/app/static/places/<city>.json`. From the landing until the owner's
+  London report the map asked the root, the index never loaded, and the live
+  search answered with the map's own stations and lines only, while every
+  local test passed. The search script now takes the prefix from the page's
+  own path (`BASE` in `PLACE_SEARCH_SCRIPT`). **After every push that touches
+  a searched map, type a street name into the deployed box**; a reachable
+  index file proves nothing about the address the map asks.
 - The Travel file host answers only the live app and localhost or 127.0.0.1
   on ports 8501 and 8000. A lane on any other port sees a CORS refusal and a
   blank Travel basemap, which is the port and not a defect.

@@ -2207,6 +2207,32 @@ _PLACE_SEARCH_TEMPLATE = r"""
 <script>
 (function () {
     var NAME = "__MAP_NAME__", URL = "__INDEX_URL__";
+    // THE APP IS NOT ALWAYS AT THE HOST'S ROOT. Streamlit Community Cloud
+    // serves it under /~/+/, so "/app/static/..." asked of the host's root
+    // found nothing there, and the deployed search answered only with the
+    // map's own stations and lines: no street, landmark or neighborhood was
+    // ever found live (the owner's London report, 2026-10-12). Every local
+    // check had passed, the app there being at the root. The page's own path
+    // gives the prefix; the plain path is tried second, for a map opened
+    // outside the app. An answer that is not JSON (a host's HTML shell,
+    // status 200) counts as a failure.
+    var BASE = (function () {
+        try {
+            if (window.parent === window) return "";
+            var here = window.parent.location.pathname;
+            return here.substring(0, here.lastIndexOf("/"));
+        } catch (e) { return ""; }
+    })();
+    function abs(u) { return u && u.charAt(0) === "/" ? BASE + u : u; }
+    function getIndex(u) {
+        var opt = {credentials: "omit", referrerPolicy: "no-referrer"};
+        function text(r) { if (!r.ok) throw new Error(r.status); return r.text(); }
+        function json(txt) { if (txt.charAt(0) !== "{") throw new Error("not an index"); return txt; }
+        return fetch(abs(u), opt).then(text).then(json).catch(function (e) {
+            if (!BASE) throw e;
+            return fetch(u, opt).then(text).then(json);
+        });
+    }
     var STATION_COLOR = "@@LIGHT_STATION@@", LINK_M = @@STATION_LINK_M@@, DUP_M = @@STATION_DUP_M@@;
     var MIN_LATIN = 4, MIN_CJK = 2, RING_M = __RING_M__;
     // Suggestions at most: the map's own (pills) and other places, fewer on a
@@ -2454,8 +2480,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
         if (!own) own = ownItems(map);
         if (loading) return loading;
         var t0 = performance.now();
-        loading = fetch(URL, {credentials: "omit", referrerPolicy: "no-referrer"})
-            .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+        loading = getIndex(URL)
             .then(function (txt) {
                 var ix = JSON.parse(txt);
                 fold = ix.fold || null;
@@ -2492,8 +2517,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
     function loadCrossings() {
         if (crossings) return crossings;
         var t0 = performance.now();
-        crossings = fetch(crossURL, {credentials: "omit", referrerPolicy: "no-referrer"})
-            .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+        crossings = getIndex(crossURL)
             .then(function (txt) {
                 function latin(d) { return d.names.slice(1).filter(function (n) { return !CJK.test(n); })[0]; }
                 JSON.parse(txt).rows.forEach(function (r) {
@@ -2681,8 +2705,8 @@ _PLACE_SEARCH_TEMPLATE = r"""
                 'target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a> ' +
                 '(<a href="https://opendatacommons.org/licenses/odbl/1-0/" target="_blank" ' +
                 'rel="noopener noreferrer">ODbL</a>) · ' +
-                '<a href="' + URL + '" target="_blank" rel="noopener" download>Download this index</a>' +
-                (crossURL ? ' · <a href="' + crossURL + '" target="_blank" rel="noopener" download>intersections</a>' : '');
+                '<a href="' + abs(URL) + '" target="_blank" rel="noopener" download>Download this index</a>' +
+                (crossURL ? ' · <a href="' + abs(crossURL) + '" target="_blank" rel="noopener" download>intersections</a>' : '');
             list.appendChild(c);
         }
         // On a phone (under 480 px), with both groups shown, each heading folds
