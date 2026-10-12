@@ -6069,6 +6069,270 @@ CITIES = [
         # it refuses a guessed one.
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Koshigaya",
+        "lat": 35.901,
+        "lon": 139.79,
+        "page": "pages/240_Koshigaya_Heatmap.py",
+        "coverage": "narrowed",
+        "placement": "Joined to address blocks (96.7%); ministry coordinates where missed",
+        "data_age": "Food list as of 2026-03-31 plus new and renewed permits to 2026-08-31 (no July list); registers as of 2026-10-02",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
+        "blurb": "The Tobu Skytree Line and the JR Musashino Line",
+        "region": "Saitama Prefecture",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        # metro (the brief: private heavy rail reads as metro, owner 2026-10-02)
+        "mode": "metro",
+        "in_default_view": False,
+        # Above the dot, the scaffold's default. The Japan views and their
+        # label scoring are Cleanup's (owner, call 198).
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Sagamihara",
+        "lat": 35.5815,
+        "lon": 139.3706,
+        "page": "pages/241_Sagamihara_Heatmap.py",
+        "coverage": "narrowed",
+        "placement": "Joined to address blocks (98.1%)",
+        "data_age": "Food, barber and beauty lists as of 2026-03-31 with openings and closures to 2026-08-31; laundries as of 2026-03-31",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
+        "blurb": "JR East's Sagami, Yokohama and Chuo lines, Odakyu's Odawara and Enoshima lines and the Keio Sagamihara Line",
+        "region": "Kanto",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        # metro (the brief's mode call, owner's rule of 2026-10-02)
+        "mode": "metro",
+        "in_default_view": False,
+        # Above the dot, the scaffold's default. The Japan views and their
+        # label scoring are Cleanup's (owner, call 198).
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Fujisawa",
+        "lat": 35.3382,
+        "lon": 139.4869,
+        "page": "pages/242_Fujisawa_Heatmap.py",
+        "coverage": "narrowed",
+        "placement": "Joined to address blocks (98.6%); ministry coordinates where missed",
+        "data_age": "City lists as of 2026-06-30 plus new permits to 2026-08-31; ministry notifications fetched 2026-10-06",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
+        "blurb": "The Odakyu Enoshima Line, the Enoden, the JR Tokaido Line, the Shonan Monorail and the Sotetsu Izumino Line",
+        "region": "Kanto",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        # metro (the brief: private heavy rail is the backbone, owner 2026-10-02)
+        "mode": "metro",
+        "in_default_view": False,
+        # Above the dot, the scaffold's default. The Japan views and their
+        # label scoring are Cleanup's (owner, call 198).
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Kawaguchi",
+        "lat": 35.833,
+        "lon": 139.733,
+        "page": "pages/243_Kawaguchi_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (99.0%)",
+        "data_age": "Food list as of 2026-03-31 plus new premises to 2026-07-31 (no June entries)",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Food premises only",
+        "blurb": "The Saitama Rapid Railway Line and JR East's Keihin-Tohoku and Musashino lines",
+        "region": "Saitama Prefecture",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        # metro (the brief: the backbone is a subway-class private line)
+        "mode": "metro",
+        "in_default_view": False,
+        # Above the dot, the scaffold's default. The Japan views and their
+        # label scoring are Cleanup's (owner, call 198).
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Funabashi",
+        "lat": 35.727,
+        "lon": 140.019,
+        "page": "pages/244_Funabashi_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (99.8%)",
+        "data_age": "Barbers and beauty salons as of 2026-08-01; laundries as of 2026-07-01",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "Ten lines of Keisei, JR East, Tokyo Metro, Toyo Rapid, Tobu and Hokuso",
+        "region": "Chiba Prefecture",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        # metro (the brief's mode call, owner's rule of 2026-10-02)
+        "mode": "metro",
+        "in_default_view": False,
+        # Above the dot, the scaffold's default. The Japan views and their
+        # label scoring are Cleanup's (owner, call 198).
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Matsudo",
+        "lat": 35.796,
+        "lon": 139.929,
+        "page": "pages/245_Matsudo_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (98.6%)",
+        "data_age": "Barbers as of 2025-03-31; beauty salons and laundries with openings to 2026-08-31",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "The Keisei Matsudo Line, JR East's Joban and Musashino lines, the Hokuso Line and three more",
+        "region": "Chiba Prefecture",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        # metro (the brief: the backbone is the Keisei Matsudo Line, a railway)
+        "mode": "metro",
+        "in_default_view": False,
+        # Above the dot, the scaffold's default. The Japan views and their
+        # label scoring are Cleanup's (owner, call 198).
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Ichikawa",
+        "lat": 35.719,
+        "lon": 139.933,
+        "page": "pages/246_Ichikawa_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (99.5%)",
+        "data_age": "Barbers as of 2025-03-31; beauty salons and laundries with openings to 2026-08-31",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "The Keisei Main Line, four JR East lines, the Tozai Line and the Hokuso Line",
+        "region": "Chiba Prefecture",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        # metro (the brief's mode call, owner's rule of 2026-10-02)
+        "mode": "metro",
+        "in_default_view": False,
+        # Above the dot, the scaffold's default. The Japan views and their
+        # label scoring are Cleanup's (owner, call 198).
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Urayasu",
+        "lat": 35.643,
+        "lon": 139.902,
+        "page": "pages/247_Urayasu_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (99.1%)",
+        "data_age": "Barbers as of 2025-03-31; beauty salons and laundries with openings to 2026-08-31",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "The Disney Resort Line, the JR Keiyo Line and the Tozai Line",
+        "region": "Chiba Prefecture",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        # metro (the brief's mode call, owner's rule of 2026-10-02)
+        "mode": "metro",
+        "in_default_view": False,
+        # Above the dot, the scaffold's default. The Japan views and their
+        # label scoring are Cleanup's (owner, call 198).
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Sakura",
+        "lat": 35.706,
+        "lon": 140.213,
+        "page": "pages/248_Sakura_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (95.5%)",
+        "data_age": "Barbers as of 2025-03-31; beauty salons and laundries with openings to 2026-08-31",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "The Keisei Main Line, the Yamaman Yukarigaoka Line and JR East's Sobu Main and Narita lines",
+        "region": "Chiba Prefecture",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        # metro (owner, call 121: Keisei has a significant presence)
+        "mode": "metro",
+        "in_default_view": False,
+        # Above the dot, the scaffold's default. The Japan views and their
+        # label scoring are Cleanup's (owner, call 198).
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Yachiyo",
+        "lat": 35.739,
+        "lon": 140.105,
+        "page": "pages/249_Yachiyo_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (97.8%)",
+        "data_age": "Barbers as of 2025-03-31; beauty salons and laundries with openings to 2026-08-31",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "The Toyo Rapid Railway Line and the Keisei Main Line",
+        "region": "Chiba Prefecture",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        # metro (the brief's mode call, owner's rule of 2026-10-02)
+        "mode": "metro",
+        "in_default_view": False,
+        # Above the dot, the scaffold's default. The Japan views and their
+        # label scoring are Cleanup's (owner, call 198).
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Ichihara",
+        "lat": 35.425,
+        "lon": 140.137,
+        "page": "pages/250_Ichihara_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (94.1%)",
+        "data_age": "Barbers as of 2025-03-31; beauty salons and laundries with openings to 2026-08-31",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "The Kominato Railway Line, the JR Uchibo Line and the Keisei Chihara Line",
+        "region": "Chiba Prefecture",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        # metro (the brief's mode call, owner's rule of 2026-10-02)
+        "mode": "metro",
+        "in_default_view": False,
+        # Above the dot, the scaffold's default. The Japan views and their
+        # label scoring are Cleanup's (owner, call 198).
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

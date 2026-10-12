@@ -4910,6 +4910,402 @@ line.
 - Left out: 9 stations beyond it: 3 in Noda (Chiba), 2 in Saitama City
   (Iwatsuki Ward), 2 in Miyashiro and 2 in Koshigaya.
 
+### Koshigaya - the city's food list and monthly lists and its barber, beauty and laundry lists, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Premises the city leaves out at their operators' request.
+- New and renewed permits of July 2026: the city published no list for that
+  month.
+- 382 food trucks, stalls and other filings with no fixed premises (most are
+  addressed to the whole city).
+- 291 school, hospital and staff canteens, 254 vending machines, 181 snack
+  bars and cabarets, 60 caterers (仕出し) and 18 premises inside hotels and
+  inns.
+- 215 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 1 permit past its term.
+
+**Counted** - the permits and notifications in the city's food list on
+March 31, 2026, kept whole, with the new and renewed permits of its monthly
+lists for April, May, June and August 2026; and its barber, beauty and
+laundry lists as of October 2, 2026. The lists hold 225 barbers, 645 beauty
+salons and 124 laundries, against 227, 621 and 135 in the national count at
+the end of March 2025. 19 of the 214 bakery, confectioner and deli rows
+(8.9%) have a trade name that reads as a factory; they are kept (owner,
+2026-09-24).
+
+**One pin per premises** - 294 repeat permits are shown once (renewals under
+a new number among them).
+
+**Not placed** - 8 rows (0.2%) at addresses MLIT's files do not hold. Another
+121 sit at their town's center, and 15 at the ministry's own coordinates.
+
+**Names not shown** - 1 pin whose trade name is the operator's own name shows
+its permit type.
+4 more whose trade names hold a character the publisher's file cannot render
+show their permit type.
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 9 stations beyond it: 3 in Soka, 2 in Kasukabe, 2 in Yoshikawa,
+  1 in Misato and 1 in Kawaguchi.
+
+### Sagamihara - the city's food, barber, beauty and laundry lists, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that only notify the city rather than hold a permit.
+- 611 permits whose operators asked the city not to publish the premises
+  (about one restaurant in nine).
+- 592 food-truck permits, which the city lists apart, 297 stalls and other
+  filings addressed to the whole city, 2 mobile beauty salons and 6 laundry
+  agents with no shop.
+- 197 school, hospital and staff canteens, 173 snack bars and cabarets, 41
+  entertainment venues, 36 premises inside hotels and inns, 28 vending
+  machines, 25 caterers (仕出し; 4 of them also name a counter form), 2 rows
+  marked temporary or mobile and 1 mail-order business.
+- 163 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい).
+- 442 food permits and 8 beauty salons the city's monthly lists record as
+  closed, 19 permits past their term and 1 that starts after August 31,
+  2026.
+
+**Counted** - the city's food, barber and beauty lists of March 31, 2026,
+brought to August 31, 2026 with the openings and closures of its monthly
+lists, and its laundry list of March 31, 2026. They hold 5,150 restaurant
+permits (food trucks included), 470 barbers, 1,085 beauty salons and 237
+laundries, against 5,100, 477, 1,073 and 238 in the national count at the end
+of March 2025. 30 of the 486 bakery, confectioner and deli rows (6.2%) have a
+trade name that reads as a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 220 repeat permits are shown once.
+
+**Not placed** - none. 104 pins sit at their town's center, most of them in
+Midori Ward's mountain districts.
+
+**Names not shown** - 2 pins whose trade name is the operator's own name show
+their permit type. The lists name an operator only where it is a company, so
+for the rest only the form of the trade name can be tested.
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 14 stations beyond it: 5 in Machida, 3 in Yamato, 3 in Zama, 2 in
+  Hachioji and 1 in Uenohara (Yamanashi).
+
+### Fujisawa - the city's food list and monthly new permits, its barber, beauty and laundry lists and the national notifications, joined to MLIT's address blocks
+
+**Left out**
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, except where the national filings
+  include notifications.
+- 387 national notifications whose filers did not publish an address.
+- 504 food trucks, stalls and other filings with no fixed premises (most are
+  addressed to the whole city), 2 of them laundry agents with no shop.
+- 308 school, hospital and staff canteens, 103 vending machines, 55 snack
+  bars and cabarets, 40 caterers (仕出し; a caterer that also names a
+  restaurant form is counted as a restaurant), 32 premises inside hotels and
+  inns, 11 rows marked temporary or mobile and 4 mail-order businesses.
+- 158 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 16 closed premises: 10 the national filings keep, marked, and 6 city
+  permits the national filings record as closed in August 2026. Other
+  closures are not marked.
+
+**Counted** - the permits in the city's food list on June 30, 2026, with the
+new permits of its monthly lists for July and August 2026; its barber, beauty
+and laundry lists of June 30, 2026; and the national notifications as
+downloaded on October 6, 2026. No official count of the city's restaurants is
+published; measured against the 2021 census at the rates of four other
+Kanagawa cities, the list is estimated to hold between 88% and 101% of them.
+The lists hold 203 barbers, 821 beauty salons and 142 laundries, against
+199, 787 and 150 in the city's own count at the end of March 2025. 13 of the
+411 bakery, confectioner and deli rows (3.2%) have a trade name that reads as
+a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 176 repeat permits are shown once, and 49 rows of
+the city's lists for a premises already in the national notifications.
+
+**Not placed** - none. 44 pins sit at their town's center, and 23 at the
+ministry's own coordinates.
+
+**Names not shown** - 3 pins whose trade name is the operator's own name
+show their permit type. The city's list of individual operators names no
+operator, so there only the form of the trade name can be tested.
+6 more whose trade names hold a character the publisher's file cannot render
+show their permit type.
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 17 stations beyond it: 10 in Kamakura, 4 in Yokohama (Izumi
+  Ward), 2 in Yamato and 1 in Chigasaki.
+- Yokohama's Blue Line, with only its terminus Shonandai in the city, is not
+  drawn; the station is kept through the Odakyu and Sotetsu lines.
+
+### Kawaguchi - the city's food list with its monthly new premises, joined to MLIT's address blocks
+
+**Left out**
+- Barbers, beauty salons and laundries: the city's lists of them are not
+  open data.
+- Every shop that is not a food shop: Japan has no general business license.
+- 1,316 entries whose address the city withholds.
+- New premises of June 2026: the city's list has no entries for that month.
+- 437 food trucks, stalls and other filings with no fixed premises, 10 rows
+  addressed to a whole area and 9 addressed in another municipality.
+- 311 school, hospital and staff canteens, 243 vending machines, 11
+  mail-order businesses and 2 rows marked temporary or mobile.
+- 233 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+
+**Counted** - the permits and notifications in the city's food list on
+March 31, 2026, kept whole, with the new premises it listed for April, May
+and July 2026; 142 permits renewed for a term that starts after their
+list's date are kept, each being a premises already open. The March list
+holds 4,281 restaurants, against 4,259 in the national count at the end of
+March 2025. 48 of the 358 bakery, confectioner
+and deli rows (13.4%) have a trade name that reads as a factory; they are
+kept (owner, 2026-09-24).
+
+**One pin per premises** - 474 repeat permits are shown once.
+
+**Not placed** - 6 rows (0.1%): 3 at addresses MLIT's files do not hold and
+3 addressed in Tokyo. Another 55 sit at their town's center.
+
+**Names not shown** - the city masks 1,350 trade names; those on the map
+show their permit type, as do 10 pins whose trade name is the operator's own
+name and 3 whose trade name holds a character the city's file cannot
+render.
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 8 stations beyond it: 4 in Saitama City (Minami and Midori
+  wards), 2 in Tokyo's Kita Ward, 1 in Warabi and 1 in Koshigaya.
+- JR's Utsunomiya, Takasaki and Shonan-Shinjuku line trains pass through
+  without stopping and are not drawn.
+
+### Funabashi - the city's barber, beauty and laundry registers, joined to MLIT's address blocks
+
+**Left out**
+- Restaurants, cafés and food shops: the national food-permit filings
+  publish too few addresses here to place them.
+- Every other shop: Japan has no general business license.
+- 4 rows addressed in another municipality and 1 that gives only the city's
+  name.
+
+**Counted** - the city's registers of barbers and beauty salons as of August
+1, 2026 and of laundries as of July 1, 2026. They hold 314 barbers, 965
+beauty salons and 214 laundries in the city, against 331, 960 and 220 in the
+national count at the end of March 2025. The registers record no closures.
+
+**One pin per premises** - 20 repeat rows are shown once.
+
+**Not placed** - none. 3 pins sit at their town's center.
+
+**Names not shown** - 6 pins whose trade name is the operator's own name, or
+reads as a person's name alone, show their register type.
+1 more whose trade name holds a character the publisher's file cannot render
+shows its register type.
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 25 stations beyond it: 8 in Ichikawa, 7 in Narashino, 5 in
+  Kamagaya, 2 in Yachiyo, 2 in Shiroi and 1 in Chiba City (Mihama Ward).
+- The Narita Sky Access passes through without a station in the city and is
+  not drawn.
+
+### Matsudo - Chiba Prefecture's barber, beauty and laundry registers, joined to MLIT's address blocks
+
+**Left out**
+- Restaurants, cafés and food shops: the national food-permit filings
+  publish too few addresses here to place them.
+- Every other shop: Japan has no general business license.
+- Premises whose operators did not agree to publication: the prefecture
+  lists only those who did.
+- Barbers registered after March 31, 2025: the prefecture's barber file is
+  the list of that date.
+- 2 laundry agents with no shop.
+
+**Counted** - the prefecture's registers, cut to Matsudo by address: 304
+barbers as of March 31, 2025, and 774 beauty-salon rows and 186 laundries as
+of March 31, 2026 with the openings it listed to August 31, 2026. Openings
+are added and closures are not published, so the beauty and laundry layers
+are an upper bound. No official count exists for the city alone.
+
+**One pin per premises** - 7 repeat rows are shown once.
+
+**Not placed** - 2 rows (0.2%) written with a district MLIT's files do not
+hold. Another 17 sit at their town's center.
+
+**Names not shown** - 5 pins whose trade name reads as a person's name alone
+show their register type.
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 26 stations beyond it: 6 in Kashiwa, 5 in Nagareyama, 5 in
+  Kamagaya, 4 in Tokyo's Katsushika Ward, 3 in Ichikawa, 1 in Misato
+  (Saitama), 1 in Shiroi and 1 in Funabashi.
+
+### Ichikawa - Chiba Prefecture's barber, beauty and laundry registers, joined to MLIT's address blocks
+
+**Left out**
+- Restaurants, cafés and food shops: the national food-permit filings
+  publish too few addresses here to place them.
+- Every other shop: Japan has no general business license.
+- Premises whose operators did not agree to publication: the prefecture
+  lists only those who did.
+- Barbers registered after March 31, 2025: the prefecture's barber file is
+  the list of that date.
+
+**Counted** - the prefecture's registers, cut to Ichikawa by address: 223
+barbers as of March 31, 2025, and 646 beauty salons and 148 laundries as of
+March 31, 2026 with the openings it listed to August 31, 2026. Openings are
+added and closures are not published, so the beauty and laundry layers are an
+upper bound. No official count exists for the city alone; the 148 laundries
+are about four in five of the number the 2021 Economic Census suggests, for a
+reason that is not known.
+
+**One pin per premises** - no premises is listed twice.
+
+**Not placed** - none. 5 pins sit at their town's center.
+
+**Names not shown** - 4 pins whose trade name reads as a person's name alone
+show their register type.
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 26 stations beyond it: 11 in Funabashi, 5 in Matsudo, 5 in
+  Tokyo's Edogawa Ward, 2 in Urayasu, 2 in Tokyo's Katsushika Ward and 1 in
+  Kamagaya.
+- The Toei Shinjuku Line, with only its terminus Moto-Yawata in the city, is
+  not drawn; the station is kept through the JR Chuo-Sobu Line.
+
+### Urayasu - Chiba Prefecture's barber, beauty and laundry registers, joined to MLIT's address blocks
+
+**Left out**
+- Restaurants, cafés and food shops: the national food-permit filings
+  publish too few addresses here to place them.
+- Every other shop: Japan has no general business license.
+- Premises whose operators did not agree to publication: the prefecture
+  lists only those who did.
+- Barbers registered after March 31, 2025: the prefecture's barber file is
+  the list of that date.
+
+**Counted** - the prefecture's registers, cut to Urayasu by address: 76
+barbers as of March 31, 2025, and 195 beauty-salon rows and 58 laundries as of
+March 31, 2026 with the openings it listed to August 31, 2026. Openings are
+added and closures are not published, so the beauty and laundry layers are an
+upper bound. No official count exists for the city alone.
+
+**One pin per premises** - 3 repeat rows are shown once.
+
+**Not placed** - none. 3 pins sit at their town's center.
+
+**Names not shown** - none: no trade name shown is its operator's own name.
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 6 stations beyond it: 3 in Ichikawa and 3 in Tokyo's Edogawa
+  Ward.
+- The Tozai Line has one station in the city, Urayasu, and is drawn there
+  because no other line serves it.
+
+### Sakura - Chiba Prefecture's barber, beauty and laundry registers, joined to MLIT's address blocks
+
+**Left out**
+- Restaurants, cafés and food shops: the national food-permit filings
+  publish too few addresses here to place them.
+- Every other shop: Japan has no general business license.
+- Premises whose operators did not agree to publication: the prefecture
+  lists only those who did.
+- Barbers registered after March 31, 2025: the prefecture's barber file is
+  the list of that date.
+- 1 laundry agent with no shop.
+
+**Counted** - the prefecture's registers, cut to Sakura by address: 117
+barbers as of March 31, 2025, and 256 beauty-salon rows and 79 laundries as of
+March 31, 2026 with the openings it listed to August 31, 2026. Openings are
+added and closures are not published, so the beauty and laundry layers are an
+upper bound. No official count exists for the city alone.
+
+**One pin per premises** - 5 repeat rows are shown once.
+
+**Not placed** - 2 rows (0.4%) at addresses MLIT's files do not hold. Another 20
+sit at their town's center.
+
+**Names not shown** - none: no trade name shown is its operator's own name.
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 9 stations beyond it: 4 in Shisui, 2 in Yachiyo, 2 in Yachimata
+  and 1 in Yotsukaido.
+
+### Yachiyo - Chiba Prefecture's barber, beauty and laundry registers, joined to MLIT's address blocks
+
+**Left out**
+- Restaurants, cafés and food shops: the national food-permit filings
+  publish too few addresses here to place them.
+- Every other shop: Japan has no general business license.
+- Premises whose operators did not agree to publication: the prefecture
+  lists only those who did.
+- Barbers registered after March 31, 2025: the prefecture's barber file is
+  the list of that date.
+- 7 laundry agents with no shop.
+
+**Counted** - the prefecture's registers, cut to Yachiyo by address: 130
+barbers as of March 31, 2025, and 353 beauty-salon rows and 77 laundries as of
+March 31, 2026 with the openings it listed to August 31, 2026. Openings are
+added and closures are not published, so the beauty and laundry layers are an
+upper bound. No official count exists for the city alone.
+
+**One pin per premises** - 2 repeat rows are shown once.
+
+**Not placed** - 2 rows (0.4%) at addresses MLIT's files do not hold. Another 12
+sit at their town's center.
+
+**Names not shown** - 1 pin whose trade name reads as a person's name alone shows
+its register type.
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 6 stations beyond it: 2 in Sakura, 2 in Narashino and 2 in
+  Funabashi.
+
+### Ichihara - Chiba Prefecture's barber, beauty and laundry registers, joined to MLIT's address blocks
+
+**Left out**
+- Restaurants, cafés and food shops: the national food-permit filings
+  publish too few addresses here to place them.
+- Every other shop: Japan has no general business license.
+- Premises whose operators did not agree to publication: the prefecture
+  lists only those who did.
+- Barbers registered after March 31, 2025: the prefecture's barber file is
+  the list of that date.
+
+**Counted** - the prefecture's registers, cut to Ichihara by address: 218
+barbers as of March 31, 2025, and 423 beauty-salon rows and 76 laundries as of
+March 31, 2026 with the openings it listed to August 31, 2026. Openings are
+added and closures are not published, so the beauty and laundry layers are an
+upper bound. No official count exists for the city alone. The 76
+laundries are about four in five of the number the 2021 Economic Census
+suggests, for a reason that is not known.
+
+**One pin per premises** - 3 repeat rows are shown once.
+
+**Not placed** - 6 rows (0.8%) at addresses MLIT's files do not hold. Another 42
+(5.9% of the pins) sit at their district's center, which in the rural south
+can be far from the premises.
+
+**Names not shown** - 8 pins whose trade name reads as a person's name alone show
+their register type.
+
+**Stations.** The lines with a station in the city are drawn, cut at the city
+line.
+- Left out: 4 stations beyond it: 3 in Chiba City (Midori and Chuo wards)
+  and 1 in Otaki.
+- The Kominato Railway south of Kazusa-Ushiku runs about ten trains a day
+  each way and is drawn: no frequency floor applies to Japan's JR and
+  private lines.
+
 ### Tachikawa - the Tokyo Metropolitan Government's Tama ledgers and the national filings, joined to MLIT's address blocks
 
 **Left out**

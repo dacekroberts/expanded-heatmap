@@ -250,6 +250,32 @@ CITIES = {
     # (127.684 E), not copied from Fukuoka's.
     "naha": {"name": "那覇市", "pref": "47", "epsg": 32652, "n02": "25", "wardless": True,
              "wards": ["47201"]},
+    # East-2 (2026-10-11), each on N02-25 as its brief measured.
+    "koshigaya": {"name": "越谷市", "pref": "11", "epsg": 32654, "n02": "25", "wardless": True,
+                  "wards": ["11222"]},
+    # Sagamihara's three wards: 緑区, 中央区, 南区.
+    "sagamihara": {"name": "相模原市", "pref": "14", "epsg": 32654, "n02": "25",
+                   "wards": ["14151", "14152", "14153"]},
+    "fujisawa": {"name": "藤沢市", "pref": "14", "epsg": 32654, "n02": "25", "wardless": True,
+                 "wards": ["14205"]},
+    # Kawaguchi's lists write three characters as private-use code points
+    # (its brief: 139 address rows); read as the characters they stand for.
+    "kawaguchi": {"name": "川口市", "pref": "11", "epsg": 32654, "n02": "25", "wardless": True,
+                  "wards": ["11203"], "gaiji": {0xE4AA: "塚", 0xF892: "蓮", 0xF7FE: "樋"}},
+    "funabashi": {"name": "船橋市", "pref": "12", "epsg": 32654, "n02": "25", "wardless": True,
+                  "wards": ["12204"]},
+    "matsudo": {"name": "松戸市", "pref": "12", "epsg": 32654, "n02": "25", "wardless": True,
+                "wards": ["12207"]},
+    "ichikawa": {"name": "市川市", "pref": "12", "epsg": 32654, "n02": "25", "wardless": True,
+                 "wards": ["12203"]},
+    "urayasu": {"name": "浦安市", "pref": "12", "epsg": 32654, "n02": "25", "wardless": True,
+                "wards": ["12227"]},
+    "sakura": {"name": "佐倉市", "pref": "12", "epsg": 32654, "n02": "25", "wardless": True,
+               "wards": ["12212"]},
+    "yachiyo": {"name": "八千代市", "pref": "12", "epsg": 32654, "n02": "25", "wardless": True,
+                "wards": ["12221"]},
+    "ichihara": {"name": "市原市", "pref": "12", "epsg": 32654, "n02": "25", "wardless": True,
+                 "wards": ["12219"]},
 }
 
 # THE CITIES BUILT BEFORE THE JAPAN FOUNDATION (2026-10-07): they keep

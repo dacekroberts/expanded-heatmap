@@ -380,6 +380,11 @@ TEXT_WIDTH = {
     # Morioka 54.3, Okazaki 52.0 and Aomori 47.1 reproduced.
     "Shizuoka": 61.0, "Kanazawa": 67.8, "Matsumoto": 77.3, "Tottori": 44.1, "Yamagata": 66.5,
     "Kure": 30.5, "Kurashiki": 61.6,
+    # East-2's four cities not measured ahead of their builds, 2026-10-11, the
+    # same way (local app, canvas measureText after document.fonts.load);
+    # controls Kasukabe 65.5, Koshigaya 70.2, Fujisawa 57.8, Kawaguchi 73.7
+    # and Urayasu 55.2 reproduced.
+    "Sagamihara": 79.1, "Funabashi": 69.4, "Matsudo": 59.8, "Ichikawa": 58.9,
 }
 
 PILL_H = 18.0             # measured from rendered pixels, 14 px text

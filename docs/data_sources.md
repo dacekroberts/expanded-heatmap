@@ -5053,6 +5053,216 @@ build at review time).
   2026-10-12; the verdict is in `docs/decisions_drafts/worktree-japan-naha.md`
   ("Naha built", 2026-10-12).<!-- /internal -->
 
+**187. Koshigaya City, MHLW and MLIT (Koshigaya) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-11; lands with East-2 at review
+time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-06; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's food list and
+  its barber, beauty and laundry lists are **PDL 1.0** by Saitama Prefecture's
+  portal records for these exact pages (datasets 530 and 2004). MHLW's open
+  data is **PDL 1.0**, as in Toyama's (98), and only places a premises the
+  city's list also holds; MLIT's 位置参照情報 and N02 (the 2025 edition) are
+  **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks stations and is
+  **never drawn** (the Survey Act).
+- **MUST DISPLAY**: the portal's credit for processed use,
+  `出典：「【越谷市】食品営業許可・届出一覧」「【越谷市】営業施設一覧」（越谷市 保健医療部 生活衛生課）（埼玉県オープンデータポータルサイト）（…）を加工して作成`;
+  MHLW's 出典 line; who processed them; MLIT's credit lines.
+- **MUST NOT**: present the map as made by Koshigaya City; claim the lists
+  are complete; use MHLW's logo.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py koshigaya` with its Japan pass,
+  run 2026-10-11; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-2.md` ("Koshigaya built",
+  2026-10-11).<!-- /internal -->
+
+**188. Sagamihara City and MLIT (Sagamihara) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-11; lands with East-2 at review
+time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-04; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's four lists are
+  **CC BY 4.0** by its open-data terms, 3(2). MLIT's 位置参照情報 and N02 (the
+  2025 edition) are **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks
+  stations and is **never drawn** (the Survey Act). MHLW's file is a control
+  only.
+- **MUST DISPLAY**: the terms' credit for a modified work: each list's title,
+  相模原市 and the licence with its link; who processed them; MLIT's credit
+  lines.
+- **MUST NOT**: present the map as made by Sagamihara City; claim the lists
+  complete or accurate; imply endorsement.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py sagamihara` with its Japan pass,
+  run 2026-10-11; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-2.md` ("Sagamihara built",
+  2026-10-11).<!-- /internal -->
+
+**189. Fujisawa City, MHLW and MLIT (Fujisawa) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-11; lands with East-2 at review
+time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-07; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's lists are
+  **CC BY 4.0** through its open-data terms, 3(2). MHLW's open data is **PDL
+  1.0**, as in Sasebo's (127); MLIT's 位置参照情報 and N02 (the 2025 edition)
+  are **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks stations and
+  is **never drawn** (the Survey Act).
+- **MUST DISPLAY**: the terms' credit for a modified work (3(3)): the two
+  lists' titles, 藤沢市 and the licence with its link; MHLW's 出典 line and who
+  processed it; MLIT's credit lines.
+- **MUST NOT**: present the map as made by Fujisawa City; claim the lists
+  complete; imply endorsement; use MHLW's logo; hyperlink the city's pages
+  (cited by title).<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py fujisawa` with its Japan pass,
+  run 2026-10-11; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-2.md` ("Fujisawa built",
+  2026-10-11).<!-- /internal -->
+
+**190. Kawaguchi City and MLIT (Kawaguchi) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-11; lands with East-2 at review
+time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-07; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). The city's food list is
+  **CC BY 2.1 JP** as its open-data page states and links. MLIT's 位置参照情報
+  and N02 (the 2025 edition) are **PDL 1.0**, as in Kobe's (50). N03 (CC BY
+  4.0) only picks stations and is **never drawn** (the Survey Act).
+- **MUST DISPLAY**: the list's title, 川口市, the licence with its URI and
+  that the data was changed; who processed it; MLIT's credit lines.
+- **MUST NOT**: present the map as made by Kawaguchi City; claim the list is
+  complete or accurate.
+- **MUST DO, on notice only**: remove the city's credit if the city asks.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py kawaguchi` with its Japan pass,
+  run 2026-10-11; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-2.md` ("Kawaguchi built",
+  2026-10-11).<!-- /internal -->
+
+**191. Funabashi City and MLIT (Funabashi) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-11; lands with East-2 at review
+time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-05 and 2026-10-11; the Japan
+  rows in [`data_sources/japan.md`](data_sources/japan.md)). The city's three
+  registers are **CC BY 4.0** under its open-data terms. MLIT's 位置参照情報
+  and N02 (the 2025 edition) are **PDL 1.0**, as in Kobe's (50). N03 (CC BY
+  4.0) only picks stations and is **never drawn** (the Survey Act).
+- **MUST DISPLAY**: the terms' credit for a modified work: each register's
+  title, 船橋市 and the licence with its link; the link to the catalogue
+  labeled as such; who processed them; MLIT's credit lines.
+- **MUST NOT**: present the map as made by Funabashi City; claim the
+  registers complete, accurate or current; link the city's own website.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py funabashi` with its Japan pass,
+  run 2026-10-11; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-2.md` ("Funabashi built",
+  2026-10-11).<!-- /internal -->
+
+**192. Chiba Prefecture and MLIT (Matsudo) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-11; lands with East-2 at review
+time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-05; the Japan rows in
+  [`data_sources/japan.md`](data_sources/japan.md)). Chiba Prefecture's
+  registers are **PDL 1.0**. MLIT's 位置参照情報 and N02 (the 2025 edition) are
+  **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks stations and is
+  **never drawn** (the Survey Act).
+- **MUST DISPLAY**: the terms' credit for a processed work,
+  `出典：「【千葉県】環境衛生関係施設一覧」（千葉県オープンデータサイト）（…）を加工して作成`;
+  who processed it; MLIT's credit lines.
+- **MUST NOT**: present the map as made by Chiba Prefecture; claim the
+  registers are complete; use the prefecture's logos.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py matsudo` with its Japan pass,
+  run 2026-10-11; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-2.md` ("Matsudo built",
+  2026-10-11).<!-- /internal -->
+
+**193. Chiba Prefecture and MLIT (Ichikawa) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-11; lands with East-2 at review
+time).
+
+- **PERMITTED WITH CONDITIONS**, as Matsudo's (192): Chiba Prefecture's
+  registers are **PDL 1.0**; MLIT's 位置参照情報 and N02 (the 2025 edition) are
+  **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks stations and is
+  **never drawn** (the Survey Act).
+- **MUST DISPLAY**: the terms' credit for a processed work,
+  `出典：「【千葉県】環境衛生関係施設一覧」（千葉県オープンデータサイト）（…）を加工して作成`;
+  who processed it; MLIT's credit lines.
+- **MUST NOT**: present the map as made by Chiba Prefecture; claim the
+  registers are complete; use the prefecture's logos.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py ichikawa` with its Japan pass,
+  run 2026-10-11; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-2.md` ("Ichikawa built",
+  2026-10-11).<!-- /internal -->
+
+**194. Chiba Prefecture and MLIT (Urayasu) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-11; lands with East-2 at review
+time).
+
+- **PERMITTED WITH CONDITIONS**, as Matsudo's (192): Chiba Prefecture's
+  registers are **PDL 1.0**; MLIT's 位置参照情報 and N02 (the 2025 edition) are
+  **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks stations and is
+  **never drawn** (the Survey Act).
+- **MUST DISPLAY**: the terms' credit for a processed work,
+  `出典：「【千葉県】環境衛生関係施設一覧」（千葉県オープンデータサイト）（…）を加工して作成`;
+  who processed it; MLIT's credit lines.
+- **MUST NOT**: present the map as made by Chiba Prefecture; claim the
+  registers are complete; use the prefecture's logos.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py urayasu` with its Japan pass,
+  run 2026-10-11; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-2.md` ("Urayasu built",
+  2026-10-11).<!-- /internal -->
+
+**195. Chiba Prefecture and MLIT (Sakura) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-11; lands with East-2 at review
+time).
+
+- **PERMITTED WITH CONDITIONS**, as Matsudo's (192): Chiba Prefecture's
+  registers are **PDL 1.0**; MLIT's 位置参照情報 and N02 (the 2025 edition) are
+  **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks stations and is
+  **never drawn** (the Survey Act).
+- **MUST DISPLAY**: the terms' credit for a processed work,
+  `出典：「【千葉県】環境衛生関係施設一覧」（千葉県オープンデータサイト）（…）を加工して作成`;
+  who processed it; MLIT's credit lines.
+- **MUST NOT**: present the map as made by Chiba Prefecture; claim the
+  registers are complete; use the prefecture's logos.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py sakura` with its Japan pass,
+  run 2026-10-11; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-2.md` ("Sakura built",
+  2026-10-11).<!-- /internal -->
+
+**196. Chiba Prefecture and MLIT (Yachiyo) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-11; lands with East-2 at review
+time).
+
+- **PERMITTED WITH CONDITIONS**, as Matsudo's (192): Chiba Prefecture's
+  registers are **PDL 1.0**; MLIT's 位置参照情報 and N02 (the 2025 edition) are
+  **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks stations and is
+  **never drawn** (the Survey Act).
+- **MUST DISPLAY**: the terms' credit for a processed work,
+  `出典：「【千葉県】環境衛生関係施設一覧」（千葉県オープンデータサイト）（…）を加工して作成`;
+  who processed it; MLIT's credit lines.
+- **MUST NOT**: present the map as made by Chiba Prefecture; claim the
+  registers are complete; use the prefecture's logos.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py yachiyo` with its Japan pass,
+  run 2026-10-11; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-2.md` ("Yachiyo built",
+  2026-10-11).<!-- /internal -->
+
+**197. Chiba Prefecture and MLIT (Ichihara) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-11; lands with East-2 at review
+time).
+
+- **PERMITTED WITH CONDITIONS**, as Matsudo's (192): Chiba Prefecture's
+  registers are **PDL 1.0**; MLIT's 位置参照情報 and N02 (the 2025 edition) are
+  **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks stations and is
+  **never drawn** (the Survey Act).
+- **MUST DISPLAY**: the terms' credit for a processed work,
+  `出典：「【千葉県】環境衛生関係施設一覧」（千葉県オープンデータサイト）（…）を加工して作成`;
+  who processed it; MLIT's credit lines.
+- **MUST NOT**: present the map as made by Chiba Prefecture; claim the
+  registers are complete; use the prefecture's logos.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py ichihara` with its Japan pass,
+  run 2026-10-11; the verdict is in
+  `docs/decisions_drafts/worktree-japan-east-2.md` ("Ichihara built",
+  2026-10-11).<!-- /internal -->
+
 ## Gaps
 
 - ~~San Francisco's boundary layer endpoint is not recorded anywhere.~~

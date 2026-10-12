@@ -1,0 +1,183 @@
+{
+  "city_barber": {
+    "as_of": "2026-03-31",
+    "bytes": 400330,
+    "dataset_page": "https://opendata.city.sagamihara.kanagawa.jp/dataset/riyosho",
+    "file": "barber_all_r7end.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-05T06:03:21+00:00",
+    "rows": 468,
+    "sha256": "2434799ca2113f871c7ccb0d77e21ffba4dca3fc59b4b2096fc7abfb3fb453b1",
+    "url": "https://opendata.city.sagamihara.kanagawa.jp/dataset/a8a6040a-dfff-430c-a66c-a345f40d3c9d/resource/a2a1ed31-2e2d-44db-8ddc-d14eb9bdc578/download/09.zip"
+  },
+  "city_barber_closed": {
+    "as_of": "2026-08-31",
+    "bytes": 193688,
+    "dataset_page": "https://opendata.city.sagamihara.kanagawa.jp/dataset/riyosho",
+    "file": "barber_closed_r8.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-05T06:03:29+00:00",
+    "rows": 5,
+    "sha256": "51fa708c27fd34accb6532c3cbec4fab2cb982a275c17267cf7ef4e05ce9baf2",
+    "url": "https://opendata.city.sagamihara.kanagawa.jp/dataset/a8a6040a-dfff-430c-a66c-a345f40d3c9d/resource/99a7afc9-a7a3-4f26-b701-89e72e87aeff/download/.zip"
+  },
+  "city_barber_new": {
+    "as_of": "2026-08-31",
+    "bytes": 204403,
+    "dataset_page": "https://opendata.city.sagamihara.kanagawa.jp/dataset/riyosho",
+    "file": "barber_new_r8.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-05T06:03:25+00:00",
+    "rows": 5,
+    "sha256": "465c1506a00ba4d543e45793457a32747526bc2b2841694087445545fb2a9b7a",
+    "url": "https://opendata.city.sagamihara.kanagawa.jp/dataset/a8a6040a-dfff-430c-a66c-a345f40d3c9d/resource/2cfb7cf7-b129-457d-a8e3-85110761d8cb/download/.zip"
+  },
+  "city_beauty": {
+    "as_of": "2026-03-31",
+    "bytes": 656532,
+    "dataset_page": "https://opendata.city.sagamihara.kanagawa.jp/dataset/biyosho",
+    "file": "beauty_all_r7end.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-05T06:03:33+00:00",
+    "rows": 1082,
+    "sha256": "847cca57396ef465326f99ec018f11709174a58e40166a84ea2f7a8dd2b5a5a8",
+    "url": "https://opendata.city.sagamihara.kanagawa.jp/dataset/7b1f33cd-f485-4065-8eaa-f7df440b09a8/resource/09e7aa6d-483e-4fa8-8e03-9e9a0575829e/download/06.zip"
+  },
+  "city_beauty_closed": {
+    "as_of": "2026-08-31",
+    "bytes": 220900,
+    "dataset_page": "https://opendata.city.sagamihara.kanagawa.jp/dataset/biyosho",
+    "file": "beauty_closed_r8.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-05T06:03:40+00:00",
+    "rows": 9,
+    "sha256": "98fe964800af3b5569629cb5f0928536da2dd5e029c68c8da468a6701786a850",
+    "url": "https://opendata.city.sagamihara.kanagawa.jp/dataset/7b1f33cd-f485-4065-8eaa-f7df440b09a8/resource/58b2d04d-f3f9-4e25-80e3-d9f5f6fe8c91/download/.zip"
+  },
+  "city_beauty_new": {
+    "as_of": "2026-08-31",
+    "bytes": 226811,
+    "dataset_page": "https://opendata.city.sagamihara.kanagawa.jp/dataset/biyosho",
+    "file": "beauty_new_r8.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-05T06:03:37+00:00",
+    "rows": 12,
+    "sha256": "7395a7387fbfd9792c0af4d3df819eb74edf32cc5e7f8762bca10ae044802f87",
+    "url": "https://opendata.city.sagamihara.kanagawa.jp/dataset/7b1f33cd-f485-4065-8eaa-f7df440b09a8/resource/3703be3f-53b9-4824-a103-124834dedf41/download/.zip"
+  },
+  "city_food": {
+    "as_of": "2026-03-31",
+    "bytes": 5182542,
+    "dataset_page": "https://opendata.city.sagamihara.kanagawa.jp/dataset/eigyo_kyoka",
+    "file": "food_all_r7end.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-05T06:03:10+00:00",
+    "rows": 6148,
+    "sha256": "5023d9782265f33b78b00030c65aaae58f0eb93cd122f60b4dcb5267fe5a8553",
+    "url": "https://opendata.city.sagamihara.kanagawa.jp/dataset/3bd39977-a8cd-49d5-8160-48c0620acf11/resource/1be0eb65-0348-4668-a440-0ce10cad1063/download/04.zip"
+  },
+  "city_food_months": {
+    "as_of": "2026-08-31",
+    "bytes": 2106061,
+    "dataset_page": "https://opendata.city.sagamihara.kanagawa.jp/dataset/eigyo_kyoka",
+    "file": "food_newclosed_r8.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-05T06:03:14+00:00",
+    "rows": 989,
+    "sha256": "7857931c47ae1b776511eaa09561598ecaf6e3cb99eee29caebbae374426efbc",
+    "url": "https://opendata.city.sagamihara.kanagawa.jp/dataset/3bd39977-a8cd-49d5-8160-48c0620acf11/resource/007f1def-2b10-4e5d-81de-18a3e78ec51c/download/.zip"
+  },
+  "city_laundry": {
+    "as_of": "2026-03-31",
+    "bytes": 394944,
+    "dataset_page": "https://opendata.city.sagamihara.kanagawa.jp/dataset/cleaning",
+    "file": "laundry_all_r7end.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-05T06:03:44+00:00",
+    "rows": 237,
+    "sha256": "be7c089c7d7ff5d8a97289660dca1c5e99ac65cb5441dafd94d3c3148f244698",
+    "url": "https://opendata.city.sagamihara.kanagawa.jp/dataset/e9b089bf-540a-4337-b5b2-ac3140ee2eb9/resource/ddf60c52-d90c-4996-9dd3-2bd508347bad/download/12.zip"
+  },
+  "estat_census": {
+    "bytes": 6421265,
+    "file": "data/japan/raw/estat_census_r3_b1_009_1a.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-28T19:04:30+00:00",
+    "sha256": "666929104448d2430f59694dbe3c7d1d2f86748e6de95da78d16a44a8084f4ec",
+    "url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040067884&fileKind=0"
+  },
+  "isj_14151_block": {
+    "bytes": 231414,
+    "file": "14151-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-05T06:04:00+00:00",
+    "sha256": "9404157c25ed498a73964ffd51e34e2321f13a1136617be5e953fa734b7ee0e4",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/14151-24.0a.zip"
+  },
+  "isj_14151_chome": {
+    "bytes": 6216,
+    "file": "14151-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-05T06:04:04+00:00",
+    "sha256": "669246d613d767ff0bb5c39493803f31e8aae4dbe0033c3e3f6f69b7bd5378b4",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/14151-19.0b.zip"
+  },
+  "isj_14152_block": {
+    "bytes": 120141,
+    "file": "14152-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-05T06:04:08+00:00",
+    "sha256": "2846c9f45f9d91e2944c08a493e20a96cfc60fb3b5016797d3782736a476884c",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/14152-24.0a.zip"
+  },
+  "isj_14152_chome": {
+    "bytes": 6967,
+    "file": "14152-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-05T06:04:12+00:00",
+    "sha256": "bdfd75091be041e64b2c20e22db071cea9d56a692a5ffe412e60a3bb2e1db99a",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/14152-19.0b.zip"
+  },
+  "isj_14153_block": {
+    "bytes": 118279,
+    "file": "14153-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-05T06:04:16+00:00",
+    "sha256": "9dc780d2aa8ae4f2fce9a3588414828e32df66a762e54b0095aafbeb43e26661",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/14153-24.0a.zip"
+  },
+  "isj_14153_chome": {
+    "bytes": 6546,
+    "file": "14153-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-05T06:04:20+00:00",
+    "sha256": "5b3afb3dd6177288a50e965eaae510d72a3ae4ef960cea8cf8bee99f4b561f86",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/14153-19.0b.zip"
+  },
+  "n02": {
+    "bytes": 14903774,
+    "file": "data/japan/raw/N02-25_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-30T23:47:52+00:00",
+    "sha256": "aaf76af133b2e771e538fabc4646d2e443dc1d5a67b221382a28d744e706cc9f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip"
+  },
+  "n03": {
+    "bytes": 4665116,
+    "file": "data/japan/raw/N03-20250101_14_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-30T22:43:12+00:00",
+    "sha256": "1cf3c1ee08686de1e2685e5f81b9f0eaf6abb94bfffcd0811cc109c84b2e9fb4",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_14_GML.zip"
+  },
+  "osm_station_names": {
+    "bytes": 46519,
+    "elements": 78,
+    "file": "osm_station_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-10-11T21:59:47Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](35.47,139.06,35.68,139.46);way[\"railway\"=\"station\"](35.47,139.06,35.68,139.46););out tags center;",
+    "retrieved": "2026-10-11T22:01:09+00:00",
+    "sha256": "8f9051eb7eb8cd4977b846b61872d7a2607cd6eb696ef104d01ceae7f4d32a8e"
+  }
+}

@@ -193,6 +193,8 @@ OSM_RAIL_BY_CITY = {
     **{c: _japan(c) for c in ("Shizuoka", "Aomori", "Okazaki", "Kanazawa", "Matsue", "Fuji", "Matsumoto", "Tottori", "Yamagata", "Kure", "Kurashiki",)},
     # Naha (2026-10-12)
     "Naha": _japan("Naha"),
+    # East-2 (2026-10-11)
+    **{c: _japan(c) for c in ("Koshigaya", "Kawaguchi", "Fujisawa", "Sagamihara", "Funabashi", "Matsudo", "Ichikawa", "Urayasu", "Sakura", "Yachiyo", "Ichihara")},
 }
 
 

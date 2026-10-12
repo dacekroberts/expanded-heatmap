@@ -577,6 +577,12 @@ REGISTRIES = {
     # the map.
     "naha": dict(raw=None, trade=None, owner=None, processed="businesses_clean.csv",
                  address=("address",), japan=True),
+    # East-2 (2026-10-11), on the same shared steps and the same rule: each
+    # list's operator columns are read only by the name rule, in memory. The
+    # Japan pass tests what reached the map.
+    **{slug: dict(raw=None, trade=None, owner=None, processed="businesses_clean.csv",
+                  address=("address",), japan=True)
+       for slug in ("koshigaya", "kawaguchi", "fujisawa", "sagamihara", "funabashi", "matsudo", "ichikawa", "urayasu", "sakura", "yachiyo", "ichihara")},
     # Ottawa: Ottawa Public Health's LIVES inspection feed. Its businesses.csv
     # has one name column (the premises name) and a phone, never read (step 2
     # names its columns and asserts it). No owner column exists, so no
