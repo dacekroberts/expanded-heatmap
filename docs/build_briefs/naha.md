@@ -1,12 +1,10 @@
 # Naha — build brief
 
-**Band B, food only (Kyoto's rebuilt-register shape), owner-approved
-2026-10-12** (call S30, on this brief's Step 0; C until then). The owner
+**Band B, Food plus Personal services (owner, call S38, 2026-10-12: "food plus personal services for naha", "s38 yes"): food from the rebuilt register (Kyoto's shape), barbers and beauty salons from the city's two registers, no laundries (none published).** Banded B, food only, earlier the same day (call S30, on this brief's Step 0; C until then); wherever a section below still says "food only until O8", O8 is answered yes. **Page 307, notice 217** (reserved in `docs/session_roles.md`). **Naha joins phase 2** (owner, 2026-10-12): Cleanup lands the shared-code items 1 to 5 below on master before the build starts. The owner
 approved **a brief and the two licence reads** on 2026-10-11 (call S13: "yes
 brief and license reads for two packages"), accepted the city's
 cost-recovery clause on 2026-10-12 (call S15) and approved the two MLIT
-address downloads the same day (call S29). **No build session is assigned**:
-phase 2 was the last build wave, so a build waits for the owner's go. The
+address downloads the same day (call S29). The build session's prompt is in `docs/build_plan_2026-10-07.md` ("Naha"). The
 calls this brief first listed as open (O1 to O7 below) were answered the
 same day as S30 to S36; each is marked where it stands. **Step 0 measured
 2026-10-12** (staging), from files already on disk and nothing else:
@@ -521,7 +519,7 @@ extent, rounded out: (26.17, 127.62, 26.26, 127.74).
 **Scaffold** (once a build is approved): `scaffold_city.py --slug naha
 --name Naha --system-name "Yui Rail" --taxonomy japan_eigyo --lat 26.2105
 --lon 127.684 --region "Kyushu-Okinawa" --country Japan --mode light_rail
---page-number <N>` (`--dry-run` first).
+--page-number 307` (`--dry-run` first).
 
 ## Owner calls
 
@@ -589,7 +587,7 @@ with its recommendation and tradeoff:**
 
 **OPEN, put 2026-10-12 after the barber and beauty measurement:**
 
-- **O8. Widen S30's food-only band to Food plus Personal services (barbers
+- **O8 = S38: ANSWERED YES by the owner, 2026-10-12** (the licence read returned PERMITTED WITH CONDITIONS the same day). As first put: **Widen S30's food-only band to Food plus Personal services (barbers
   and beauty salons, no laundries).** *Recommend yes, conditional on the
   package's licence read returning PERMITTED*: the two registers are
   complete (101.8% and 104.1% of the in-force counts), every row places, no
