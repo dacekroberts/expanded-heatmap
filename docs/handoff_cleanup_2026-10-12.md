@@ -289,6 +289,41 @@ entries first. As that file records:
   sentence at go-live, with its "keeps no record" clause confirmed
   against the chosen host's log settings.
 
+**THE HOST IS LIVE (owner, 2026-10-12; DECISIONS, that date):**
+`https://files.dacekroberts.dev`, an R2 bucket behind a custom subdomain
+(no Worker), Cloudflare's terms accepted 2026-10-11, 237 packs and the
+libraries uploaded and checked by the owner, README and manifest public
+at `/README.md` and `/MANIFEST.csv`. So item 1 below is done but for the
+go-live call, and the one re-render carries the Travel switch:
+
+- `PACK_HOST = "https://files.dacekroberts.dev"` in
+  `pipeline/travel_packs.py` (https, no trailing slash: the check
+  refuses otherwise). **Show the owner the diff before committing it**
+  (his instruction), and ask him before anything is pushed to the
+  deployed app.
+- P5 in notice 1 with his added clause: "...keeps no record of those
+  requests. The files are delivered through Cloudflare, which processes
+  requests under its own privacy policy." P4's licence rows name the
+  option and the terms date.
+- **Before the full re-render, a browser test against the live host**
+  (his item 5, not yet run): render a few cities with the host set
+  (Seattle, London, Tokyo), run the app on `127.0.0.1:8501`, switch the
+  Travel layer on, and read the console for CORS errors and the network
+  list for the tiles and glyphs. The host answers only these origins:
+  the live app, and localhost or 127.0.0.1 on ports 8501 and 8000; a
+  test on any other port fails for that reason alone. The basemap
+  session may have run it already: ask.
+- The OpenStreetMap credit must show on both base layers
+  (`check_map_attribution.js`, more than one height).
+- A pack rebuilt after upload (Naha's S39 re-run did not change its
+  stations, but a new city or a rebuilt pack would) is the owner's to
+  re-upload, and the old copy stays cached for up to a month unless he
+  purges it. Tell him which files changed; never hold an upload tool's
+  config or a token.
+- Never add a transit-globe origin or reference to this host; no
+  analytics, no monetization, nothing implying Cloudflare sponsors the
+  project.
+
 **What is left, in order:**
 
 1. **The owner's:** a Cloudflare account and the host (R2 behind an owned

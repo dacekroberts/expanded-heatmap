@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**201 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**202 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-12**
 
+- [The Travel view's file host is live at files.dacekroberts.dev (owner); the notice sentence gains a Cloudflare clause](#2026-10-12---the-travel-views-file-host-is-live-at-filesdacekrobertsdev-owner-the-notice-sentence-gains-a-cloudflare-clause)
 - [Naha's three calls answered: a two-column type rule in the stitch (S39), one old file left unread (S40), a temporary "Naha below" line on the regional view (S41); transit-globe's search handoff queued (owner)](#2026-10-12---nahas-three-calls-answered-a-two-column-type-rule-in-the-stitch-s39-one-old-file-left-unread-s40-a-temporary-naha-below-line-on-the-regional-view-s41-transit-globes-search-handoff-queued-owner)
 - [Place search's rollout plan: stage 0 approved with the phase 2 landing; the wave order waits for a size projection (owner)](#2026-10-12---place-searchs-rollout-plan-stage-0-approved-with-the-phase-2-landing-the-wave-order-waits-for-a-size-projection-owner)
 - [Naha's shared reader changes written, zero drift on 64 Japanese cities; its page is Food plus Personal services (owner)](#2026-10-12---nahas-shared-reader-changes-written-zero-drift-on-64-japanese-cities-its-page-is-food-plus-personal-services-owner)
@@ -253,6 +254,51 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-10-12 - The Travel view's file host is live at files.dacekroberts.dev (owner); the notice sentence gains a Cloudflare clause
+
+- **Set up by the owner, who gave Cleanup the result on 2026-10-12** (a
+  summary file from his Cloudflare setup session, kept out of the
+  repository). Every account, payment, DNS and credential step was
+  his; no session here saw a key.
+  - Address: `https://files.dacekroberts.dev`, serving
+    `/packs/<city>.pmtiles` and `/lib/` (libraries, licences, fonts).
+  - Option chosen: an R2 bucket behind a custom subdomain, no Worker.
+    The free Worker, the other option compared, was not taken.
+  - Cloudflare's terms accepted 2026-10-11, the day the account was
+    made.
+  - Public: `https://files.dacekroberts.dev/README.md` and
+    `https://files.dacekroberts.dev/MANIFEST.csv`.
+  - Uploaded: 237 packs and the libraries, 1,019 files, 2.21 GiB, by
+    his summary (an MD5 check of the folder against the bucket with 0
+    differences; 237 of 237 manifest rows matching). Cleanup counted
+    237 `.pmtiles` in the local upload folder and did not test the
+    host.
+- **The notice sentence (P5) gains a clause, in the owner's request to
+  Cleanup:** "...keeps no record of those requests. The files are
+  delivered through Cloudflare, which processes requests under its own
+  privacy policy." The reason given in his summary: the host sets no
+  cookie (none in any test response), runs no Worker and has no raw
+  request logs on its plan, so "keeps no record" holds for the project,
+  but Cloudflare sees the requests as the provider and the sentence must
+  not imply otherwise. This supersedes P5 as approved on 2026-10-11 for
+  that clause only.
+- **His boundaries, restated with it:** no credential, token or upload
+  tool config in the repository; no transit-globe origin or reference
+  on this host; no analytics or monetization; nothing implying
+  Cloudflare sponsors the project; ask before pushing to the deployed
+  app.
+- **Read on branch `basemap` (`ebec50ae`), not run:** the host is one
+  line, `PACK_HOST` in `pipeline/travel_packs.py`, from which the pack,
+  library and asset addresses are built; the glyph address in
+  `pipeline/map_common.py` uses MapLibre's `{fontstack}` and `{range}`
+  placeholders under `lib/fonts/`, so the spaces in the three Noto Sans
+  folder names are encoded by the library; the upload folder's
+  `lib/fonts/` holds those three folders.
+- **Not done:** nothing is switched on. `PACK_HOST` is still None on
+  every branch, the browser test of the Travel layer against the live
+  host has not been run, and the notice and licence rows are unwritten.
+  They go in with the landing's one re-render.
 
 ### 2026-10-12 - Naha's three calls answered: a two-column type rule in the stitch (S39), one old file left unread (S40), a temporary "Naha below" line on the regional view (S41); transit-globe's search handoff queued (owner)
 
