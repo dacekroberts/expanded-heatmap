@@ -19,10 +19,12 @@ or published; every proposal waits for the owner.
   from the app on port 8501", under "THE EXACT EDITS FOR GO-LIVE". Read
   this file from any worktree with
   `git show basemap:docs/decisions_drafts/basemap.md` (the branch is local,
-  not pushed). Still the owner's: his yes to the `PACK_HOST` diff (shown to
-  him in the basemap chat, 2026-10-12, answer pending), replacing the
-  host's `README.md` with the public text, and the word before anything
-  reaches the deployed app. The "hosting call" bullet below is otherwise
+  not pushed). **The owner approved the `PACK_HOST` diff (basemap chat,
+  2026-10-12: "diff approved").** Still the owner's: replacing the host's
+  `README.md` with the public text (read 2026-10-12 after his "readme
+  re-upload": the host still served the internal draft, MD5
+  29c9395e...fbf6 against the public text's 5a1dc340...f45f; check again
+  before go-live), and the word before anything reaches the deployed app. The "hosting call" bullet below is otherwise
   done.
 - **Where the branch stands.** `basemap` has master merged (2026-10-12),
   `check_all.py` 52 of 52, nothing pushed. The site's Travel view is built
