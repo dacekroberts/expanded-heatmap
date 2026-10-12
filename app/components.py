@@ -2674,7 +2674,7 @@ _NOTICES = [
     # MHLW as in Toyama's (a point donor only); MLIT as in Kobe's, N02 in its
     # 2025 edition. Written from Toyama's and Kasukabe's approved wording
     # under the owner's pre-approval of template prose (2026-09-30); the
-    # credit's titles are a review-time check.
+    # credit's titles were approved at the phase 2 landing (owner, 2026-10-12).
     Notice(187, "Koshigaya City, MHLW and MLIT (Koshigaya)",
      "Koshigaya's businesses: 出典：「【越谷市】食品営業許可・届出一覧」「【越谷市】営業施設一覧」"
      "（越谷市 保健医療部 生活衛生課）（埼玉県オープンデータポータルサイト）"

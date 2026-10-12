@@ -49,7 +49,9 @@ render_data_age("Yao")
 # proposals in docs/decisions_drafts/worktree-japan-kansai-2.md. MHLW's file
 # states no date, so it is dated by download. One fixed restaurant in four
 # withholds its address (505 of 1,883 open permits on fixed premises, 26.8%);
-# 1,378 placed permits are 55.1% of e-Stat's 2,499 in force (2025-03-31). The
+# 1,204 Food service pins are 48.2% of e-Stat's 2,499 in force (2025-03-31);
+# the page's share is on the pin basis, as Kure's (owner, 2026-10-12; the
+# 1,378 placed permits were 55.1%). Re-measure if step 2 changes. The
 # ring share, 78.9%, is step 3's (2026-10-11).
 st.markdown(
     """
@@ -75,7 +77,7 @@ st.markdown(
 - The food businesses come from the Ministry of Health, Labour and Welfare's filing system, whose
   open data holds the permits and notifications Yao City has recorded since June 2021 (downloaded
   October 6, 2026). Permits granted before then and still in force are not in it.
-- The map shows about 55% of the restaurant permits in force in Yao by the national count for
+- The map shows about 48% of the restaurant permits in force in Yao by the national count for
   March 2025.
 - The Food shops layer is food retail only, and it is partial: shops that only notify rather than
   hold a permit, such as supermarkets, convenience stores and greengrocers, appear only where they

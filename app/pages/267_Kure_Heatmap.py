@@ -52,8 +52,8 @@ render_data_age("Kure")
 # the missing personal-services lists (Aomori's), the food share (the owner's
 # call 125, Ichinomiya's sentence shape), the withheld addresses as "three in
 # ten", and the placement tiers (Kakogawa's, the owner's call 145). MHLW's
-# file states no date, so it is dated by download. The food share: 1,022
-# restaurant permits at a fixed, published address, 58.3% of e-Stat's 1,752.
+# file states no date, so it is dated by download. The food share: 805
+# Food service pins, 46% of e-Stat's 1,752 (the pin basis, owner 2026-10-12).
 # Withheld addresses: 487 of 1,543 open restaurant permits (31.6%). Tiers:
 # 1,406 block (88.2%), 167 the ministry's point (10.5%, 134 on the islands),
 # 22 a town center. The ring share, 58.6%, is step 3's (935 of 1,595,

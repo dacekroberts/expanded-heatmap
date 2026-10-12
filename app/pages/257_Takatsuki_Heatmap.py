@@ -49,7 +49,9 @@ render_data_age("Takatsuki")
 # proposals in docs/decisions_drafts/worktree-japan-kansai-2.md. MHLW's file
 # states no date, so it is dated by download. One fixed restaurant in five
 # withholds its address (433 of 2,006 open permits on fixed premises, 21.6%);
-# 1,573 placed permits are 57.3% of e-Stat's 2,747 in force (2025-03-31). The
+# 1,116 Food service pins are 40.6% of e-Stat's 2,747 in force (2025-03-31);
+# the page's share is on the pin basis, as Kure's (owner, 2026-10-12; the
+# 1,573 placed permits were 57.3%). Re-measure if step 2 changes. The
 # ring share, 61.4%, is step 3's (2026-10-11).
 st.markdown(
     """
@@ -74,7 +76,7 @@ st.markdown(
 - The food businesses come from the Ministry of Health, Labour and Welfare's filing system, whose
   open data holds the permits and notifications Takatsuki City has recorded since June 2021
   (downloaded October 6, 2026). Permits granted before then and still in force are not in it.
-- The map shows about 57% of the restaurant permits in force in Takatsuki by the national count
+- The map shows about 41% of the restaurant permits in force in Takatsuki by the national count
   for March 2025.
 - The Food shops layer is food retail only, and it is partial: shops that only notify rather than
   hold a permit, such as supermarkets, convenience stores and greengrocers, appear only where they
