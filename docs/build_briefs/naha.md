@@ -1,12 +1,15 @@
 # Naha — build brief
 
-**NOT yet banded for a build. Band C today** (`docs/city_master_list.md`). The
-owner approved **a brief and the two licence reads** on 2026-10-11 (call S13:
-"yes brief and license reads for two packages"), accepted the city's
+**Band B, food only (Kyoto's rebuilt-register shape), owner-approved
+2026-10-12** (call S30, on this brief's Step 0; C until then). The owner
+approved **a brief and the two licence reads** on 2026-10-11 (call S13: "yes
+brief and license reads for two packages"), accepted the city's
 cost-recovery clause on 2026-10-12 (call S15) and approved the two MLIT
-address downloads the same day (call S29). No build is approved; the band is
-the owner's (Open calls, O1). **Step 0 measured 2026-10-12** (staging), from
-files already on disk and nothing else:
+address downloads the same day (call S29). **No build session is assigned**:
+phase 2 was the last build wave, so a build waits for the owner's go. The
+calls this brief first listed as open (O1 to O7 below) were answered the
+same day as S30 to S36; each is marked where it stands. **Step 0 measured
+2026-10-12** (staging), from files already on disk and nothing else:
 
 - `data/naha/raw/shinki/`: **140** monthly new-permit workbooks (50 `.xls`, 90
   `.xlsx`, 5,675,149 B), 2015-04 to 2026-08, BODIK package `shinki_syokuhin`,
@@ -209,6 +212,8 @@ it. **No barber, beauty or laundry list is on disk or known.** A food-only
 page ("**This map shows food businesses only.**") unless a probe finds one
 (Open calls, O5).
 
+**Update, the probe of 2026-10-12 (owner, call S34; a city-probe agent, 3 BODIK calls 22 to 24 s apart, no rows fetched):** a barber and beauty list EXISTS. BODIK package `472018_ribiyou` (理容所・美容所新規開設施設情報, `https://data.bodik.jp/dataset/472018_ribiyou`), CC BY 4.0 as STATED at package level (not read; the same city terms as the food packages are linked), two XLSX resources named for 2026-09-04, monthly by its stated frequency: 美容所開設施設一覧 (113,145 B, **1,069 rows** in the datastore; fields No, 業種, 確認番号, 確認年月日, 施設名称, 施設住所, 開設者氏名) and 理容所開設施設一覧 (37,114 B, not in the datastore: fields and row count UNREAD). ⚠️ 開設者氏名 is an operator-name column: never selected, read in memory for the name rule only. ⚠️ **Full register or openings only is UNMEASURED**: the title says new openings, but it is one cumulative file per trade and 1,069 beauty salons is register-sized (ASSERTED; the 確認年月日 range would settle it). **No laundry list**: none among the organization's 38 datasets, and the health centre's クリーニング所 pages hold procedure PDFs only. The city's own copies sit under its reserved-rights site terms: BODIK copies only. Until the two files are downloaded, measured and their licence read, the page stays food only; with them it would be Food plus a partial Personal services bucket (no laundries).
+
 ### ⚠️ Shared code
 
 Nothing was edited. What a build needs from shared code, or must do in its
@@ -407,7 +412,7 @@ extent, rounded out: (26.17, 127.62, 26.26, 127.74).
 
 **Scaffold** (once a build is approved): `scaffold_city.py --slug naha
 --name Naha --system-name "Yui Rail" --taxonomy japan_eigyo --lat 26.2105
---lon 127.684 --region "Kyushu-Okinawa" --country Japan --mode <O4>
+--lon 127.684 --region "Kyushu-Okinawa" --country Japan --mode light_rail
 --page-number <N>` (`--dry-run` first).
 
 ## Owner calls
@@ -420,7 +425,23 @@ area-wide rows out (Kobe's trap 6); 菓子 and そうざい in Retail; hostess
 venues out where the form says so (2026-09-29); the name rule, version 2;
 `as_of` the newest list's last day; standard rings by the spacing rule.
 
-**OPEN (each with a recommendation and its tradeoff):**
+**ANSWERED by the owner on 2026-10-12 (calls S30 to S36), each as first put
+with its recommendation and tradeoff:**
+
+- **O1 = S30: Band B** ("s30 b").
+- **O2 = S31: use both packages** ("s31 yes").
+- **O3 = S32: the recommendation** (the upper-bound sentence with the
+  measured figure, no trimming).
+- **O4 = S33: `mode` is `light_rail`, not the recommended `metro`** ("light
+  rail feels more appropriate due to size"). Scaffold with `--mode
+  light_rail`.
+- **O5 = S34: the probe runs** ("yes, do probe"); its finding is recorded in
+  `docs/decisions_drafts/staging.md` and decides one bucket or two.
+- **O6 = S35: the recommendation** (tag Kyushu-Okinawa; the fit is Cleanup's
+  at landing).
+- **O7 = S36: left for review time.**
+
+**As first put:**
 
 - **O1. The band.** *Recommend Band B, food only, on the rebuilt register
   with Kyoto's disclosures.* The one measurement the row waited on is met
