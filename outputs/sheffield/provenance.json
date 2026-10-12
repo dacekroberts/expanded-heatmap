@@ -1,6 +1,6 @@
 {
+  "codepoint_edition": "2026-08",
   "fetched_utc": "2026-10-02T20:26:05+00:00",
-  "fsa_file_url": "https://ratings.food.gov.uk/OpenDataFiles/FHRS{code}en-GB.xml",
   "fsa_authorities": {
     "425": "Sheffield"
   },
@@ -11,10 +11,32 @@
     "2026-10-02",
     "2026-10-02"
   ],
-  "codepoint_edition": "2026-08",
-  "osm_fetched_utc": "2026-10-02T20:26:05+00:00",
-  "naptan_url": "https://naptan.api.dft.gov.uk/v1/access-nodes?dataFormat=csv&atcoAreaCodes={code}",
+  "fsa_file_url": "https://ratings.food.gov.uk/OpenDataFiles/FHRS{code}en-GB.xml",
   "naptan_atco_areas": [
     "940"
-  ]
+  ],
+  "naptan_url": "https://naptan.api.dft.gov.uk/v1/access-nodes?dataFormat=csv&atcoAreaCodes={code}",
+  "osm_fetched_utc": "2026-10-02T20:26:05+00:00",
+  "osm_places": {
+    "bytes": 13357026,
+    "elements": 131346,
+    "file": "osm_places_2026-10-12.json",
+    "host": "overpass-api.de",
+    "how": "fetched",
+    "osm_base": "2026-10-12T22:34:00Z",
+    "query": "[out:json][timeout:170];\narea(id:3600106956)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-12T22:35:40+00:00",
+    "sha256": "ddf1e96a3adcada915572330f07cd4e03f031c630fcd09377673774248ab64c8"
+  },
+  "osm_places_extra": {
+    "bytes": 75714,
+    "elements": 308,
+    "file": "osm_places_extra_2026-10-12.json",
+    "host": "overpass-api.de",
+    "how": "fetched",
+    "osm_base": "2026-10-12T22:35:00Z",
+    "query": "[out:json][timeout:170];\narea(id:3600106956)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-12T22:36:10+00:00",
+    "sha256": "a78bb5298a34927bbbb4295ac4f2ce5e7f28808515060db1ac32b6e31cf26a5c"
+  }
 }

@@ -1,10 +1,50 @@
 {
-  "written_utc": "2026-10-01T00:52:28+00:00",
+  "boundary": {
+    "query": {
+      "f": "geojson",
+      "outFields": "GEOID,NAME,AREALAND,AREAWATER",
+      "outSR": "4326",
+      "where": "GEOID='2938000'"
+    },
+    "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/Places_CouSub_ConCity_SubMCD/MapServer/4/query"
+  },
+  "files_utc": {
+    "business_licenses.csv": "2026-10-01T00:52:02+00:00",
+    "city_boundary_tiger.geojson": "2026-10-01T00:52:03+00:00",
+    "naics_2022_codes.xlsx": "2026-10-01T00:52:02+00:00",
+    "osm_rail.json": "2026-10-01T00:52:28+00:00"
+  },
+  "naics_titles": "https://www.census.gov/naics/2022NAICS/2-6%20digit_2022_Codes.xlsx",
+  "osm_bbox": [
+    39.02,
+    -94.62,
+    39.13,
+    -94.54
+  ],
+  "osm_host": "overpass-api.de",
+  "osm_places": {
+    "bytes": 19220950,
+    "elements": 171289,
+    "file": "osm_places_2026-10-12.json",
+    "host": "overpass-api.de",
+    "how": "fetched",
+    "osm_base": "2026-10-12T22:24:54Z",
+    "query": "[out:json][timeout:170];\narea(id:3600141008)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-12T22:27:29+00:00",
+    "sha256": "27a1b2690ecfa7dabb5e58d3d8ff1b007d36207f9c4049312fe78f97b219b70f"
+  },
+  "osm_places_extra": {
+    "bytes": 57928,
+    "elements": 221,
+    "file": "osm_places_extra_2026-10-12.json",
+    "host": "overpass-api.de",
+    "how": "fetched",
+    "osm_base": "2026-10-12T22:29:01Z",
+    "query": "[out:json][timeout:170];\narea(id:3600141008)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-12T22:31:08+00:00",
+    "sha256": "a478a0d084831e81918db76d61cbc3d7107739f2cf12d37fcebcbd5558694e93"
+  },
   "register": {
-    "url": "https://data.kcmo.org/resource/kkhs-93m4.json",
-    "name": "KCMO Business License Holders",
-    "license": "Public Domain",
-    "rowsUpdatedAt": 1768519845,
     "data_date": "2026-01-15",
     "fields": [
       "id",
@@ -17,29 +57,11 @@
       "dba_name",
       "valid_license_for",
       "location"
-    ]
+    ],
+    "license": "Public Domain",
+    "name": "KCMO Business License Holders",
+    "rowsUpdatedAt": 1768519845,
+    "url": "https://data.kcmo.org/resource/kkhs-93m4.json"
   },
-  "naics_titles": "https://www.census.gov/naics/2022NAICS/2-6%20digit_2022_Codes.xlsx",
-  "boundary": {
-    "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/Places_CouSub_ConCity_SubMCD/MapServer/4/query",
-    "query": {
-      "where": "GEOID='2938000'",
-      "outFields": "GEOID,NAME,AREALAND,AREAWATER",
-      "outSR": "4326",
-      "f": "geojson"
-    }
-  },
-  "osm_host": "overpass-api.de",
-  "osm_bbox": [
-    39.02,
-    -94.62,
-    39.13,
-    -94.54
-  ],
-  "files_utc": {
-    "business_licenses.csv": "2026-10-01T00:52:02+00:00",
-    "naics_2022_codes.xlsx": "2026-10-01T00:52:02+00:00",
-    "city_boundary_tiger.geojson": "2026-10-01T00:52:03+00:00",
-    "osm_rail.json": "2026-10-01T00:52:28+00:00"
-  }
+  "written_utc": "2026-10-01T00:52:28+00:00"
 }

@@ -1,23 +1,34 @@
 {
-  "written_utc": "2026-09-30T19:59:02+00:00",
-  "osm_host": "overpass-api.de",
+  "as_of_date": "2026-09-30",
+  "files_utc": {
+    "city_boundary_tiger.geojson": "2026-09-30T19:55:35+00:00",
+    "county_subdivisions_tiger.geojson": "2026-09-30T19:55:37+00:00",
+    "geocoded_food_facilities.csv": "2026-09-30T19:55:38+00:00",
+    "osm_rail.json": "2026-09-30T19:59:02+00:00"
+  },
   "osm_bbox": [
     40.28,
     -80.15,
     40.5,
     -79.9
   ],
-  "as_of_date": "2026-09-30",
-  "register_date": "2025-08-27",
-  "files_utc": {
-    "geocoded_food_facilities.csv": "2026-09-30T19:55:38+00:00",
-    "city_boundary_tiger.geojson": "2026-09-30T19:55:35+00:00",
-    "county_subdivisions_tiger.geojson": "2026-09-30T19:55:37+00:00",
-    "osm_rail.json": "2026-09-30T19:59:02+00:00"
+  "osm_host": "overpass-api.de",
+  "osm_places": {
+    "bytes": 10091844,
+    "elements": 81414,
+    "file": "osm_places_2026-10-12.json",
+    "host": "overpass-api.de",
+    "how": "fetched",
+    "osm_base": "2026-10-12T22:41:05Z",
+    "query": "[out:json][timeout:170];\narea(id:3600188553)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-12T22:42:51+00:00",
+    "sha256": "25109ae07bc19725933896a393d9665993b15b36ee3b3c681bf8f6a1e0d0f329"
   },
+  "register_date": "2025-08-27",
   "sources": {
     "food_facilities": {
       "endpoint": "https://data.wprdc.org/datastore/dump/112a3821-334d-4f3f-ab40-4de1220b1a0a"
     }
-  }
+  },
+  "written_utc": "2026-09-30T19:59:02+00:00"
 }

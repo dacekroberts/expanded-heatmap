@@ -1,44 +1,55 @@
 {
-  "written_utc": "2026-09-29T21:35:20+00:00",
-  "osm_host": "overpass.kumi.systems",
+  "as_of_date": "2026-09-29",
+  "files_utc": {
+    "city_boundary_tiger.geojson": "2026-09-29T21:35:20+00:00",
+    "city_licences.csv": "2026-09-29T21:15:48+00:00",
+    "nys_appearance_enhancement.csv": "2026-09-29T21:15:49+00:00",
+    "nys_retail_food_stores.csv": "2026-09-29T21:15:48+00:00",
+    "osm_rail.json": "2026-09-29T21:17:20+00:00"
+  },
   "osm_bbox": [
     42.82,
     -78.95,
     42.97,
     -78.79
   ],
-  "as_of_date": "2026-09-29",
-  "files_utc": {
-    "osm_rail.json": "2026-09-29T21:17:20+00:00",
-    "city_boundary_tiger.geojson": "2026-09-29T21:35:20+00:00",
-    "city_licences.csv": "2026-09-29T21:15:48+00:00",
-    "nys_retail_food_stores.csv": "2026-09-29T21:15:48+00:00",
-    "nys_appearance_enhancement.csv": "2026-09-29T21:15:49+00:00"
+  "osm_host": "overpass.kumi.systems",
+  "osm_places": {
+    "bytes": 26323751,
+    "elements": 231598,
+    "file": "osm_places_2026-10-12.json",
+    "host": "overpass-api.de",
+    "how": "fetched",
+    "osm_base": "2026-10-12T23:03:21Z",
+    "query": "[out:json][timeout:170];\narea(id:3600036074)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-12T23:06:40+00:00",
+    "sha256": "48af94b699644b991ddea2e4c45f15309dae5b7deb3d04266da750ff6ed683a3"
   },
   "sources": {
     "city": {
       "endpoint": "https://data.buffalony.gov/resource/qcyy-feh8.csv",
       "query": {
+        "$limit": "50000",
         "$select": "uniqkey,licenseno,businessname,dbaname,code,descript,licstatus,licensedttm,issdttm,expdttm,prclid,address,city,zip,latitude,longitude",
-        "$where": "descript in('Restaurant','Restaurant Take Out','Restaurant / Dance','Bakers and Confectioners','Caterer','Food Store','Meat Fish & Poultry','Used Car Dealer','Second Hand Dealer','Tobacco Hookah Vaping','Pawnbroker','Pet Shop','Self-Srv Laundry / Dry Cleaner','Clothes-Dry Cleaners Permit','Sidewalk Cafe')",
-        "$limit": "50000"
-      }
-    },
-    "nys_store": {
-      "endpoint": "https://data.ny.gov/resource/9a8c-vfzj.csv",
-      "query": {
-        "$select": "license_number,operation_type,estab_type,entity_name,dba_name,street_number,street_name,address_line_2,city,zip_code,county,georeference",
-        "$where": "upper(city)='BUFFALO'",
-        "$limit": "50000"
+        "$where": "descript in('Restaurant','Restaurant Take Out','Restaurant / Dance','Bakers and Confectioners','Caterer','Food Store','Meat Fish & Poultry','Used Car Dealer','Second Hand Dealer','Tobacco Hookah Vaping','Pawnbroker','Pet Shop','Self-Srv Laundry / Dry Cleaner','Clothes-Dry Cleaners Permit','Sidewalk Cafe')"
       }
     },
     "nys_salon": {
       "endpoint": "https://data.ny.gov/resource/y3u4-jbgh.csv",
       "query": {
+        "$limit": "50000",
         "$select": "license_number,license_type,business_name,business_address_1,business_address_2,business_city,business_zip,georeference",
-        "$where": "upper(business_city)='BUFFALO'",
-        "$limit": "50000"
+        "$where": "upper(business_city)='BUFFALO'"
+      }
+    },
+    "nys_store": {
+      "endpoint": "https://data.ny.gov/resource/9a8c-vfzj.csv",
+      "query": {
+        "$limit": "50000",
+        "$select": "license_number,operation_type,estab_type,entity_name,dba_name,street_number,street_name,address_line_2,city,zip_code,county,georeference",
+        "$where": "upper(city)='BUFFALO'"
       }
     }
-  }
+  },
+  "written_utc": "2026-09-29T21:35:20+00:00"
 }
