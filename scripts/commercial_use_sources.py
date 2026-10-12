@@ -121,8 +121,11 @@ def _page_key(url):
 
 
 def _url_folder(url):
-    """A data URL's path without its last part: the folder a file sits in."""
-    return (urlsplit(url).path or "").rsplit("/", 1)[0].strip("/")
+    """A data URL's folder: its path without the file name. A last part with
+    no dot in it is an endpoint, not a file, and stays (v1/bag/straten)."""
+    path = (urlsplit(url).path or "").strip("/")
+    head, _, last = path.rpartition("/")
+    return head if "." in last else path
 
 
 def _is_osm_host(host):
@@ -217,13 +220,13 @@ def _is_source_like(value):
 
 
 def _register_source(sid, host, dataset_page, city, layers, licence, identity,
-                     state, folder=None):
+                     state, coarse=None, short=None):
     if sid not in state["identity_of"]:
         state["identity_of"][sid] = identity
         state["sources"][sid] = {
             "id": sid, "host": host, "dataset_page": dataset_page,
             "cities": set(), "layers": set(), "licences": set(),
-            "folders": set()}
+            "coarse": coarse, "short": short}
     elif state["identity_of"][sid] != identity:
         state["collisions"].add(
             f"id '{sid}' would name two sources: "
@@ -234,28 +237,50 @@ def _register_source(sid, host, dataset_page, city, layers, licence, identity,
     src["layers"].update(layers)
     if licence:
         src["licences"].add(licence)
-    if folder is not None:
-        src["folders"].add(folder)
 
 
 def _register_url(name, key, page, data_url, layers, licence, state):
     """Register one entry by its dataset page, else by its data URL. A URL on
-    an OpenStreetMap or Overpass host is OpenStreetMap under whatever key. An
-    entry with no dataset page is keyed on its host and FIRST path part, and
-    its folder is kept: one such key can cover several datasets (ten on
-    data.gov.lv), and the run lists every key that covers more than one
-    folder for a person to split."""
+    an OpenStreetMap or Overpass host is OpenStreetMap under whatever key.
+
+    A dataset page is keyed with its query string; collect() drops the query
+    from the id again where no other page shares the path, so only the
+    portals that need it carry it. An entry with no dataset page is keyed on
+    its host and FULL folder, since ten datasets can sit under one first
+    path part (data.gov.lv); the host and first path part are kept as the
+    coarser view, printed for the reader asking whether one licence covers a
+    portal."""
     if page:
         host, path = _url_host(page), _page_key(page)
-        folder = None
+        coarse, short = None, (host, _url_path(page))
     else:
-        host, path = _url_host(data_url), _first_segment(data_url)
-        folder = _url_folder(data_url)
+        host, path = _url_host(data_url), _url_folder(data_url)
+        coarse, short = f"{host}/{_first_segment(data_url)}", None
     if _is_osm_host(host):
         _register_source(OSM_SID, OSM_HOST, "", name, {key}, "", OSM_SID, state)
         return
     _register_source(_source_id(host, path), host, page, name, layers, licence,
-                     f"{host}/{path}", state, folder=folder)
+                     f"{host}/{path}", state, coarse=coarse, short=short)
+
+
+def _shorten_ids(state):
+    """Drop the query string from a dataset page's id where no other page
+    shares its host and path, and no other source holds the shorter id. Done
+    after every file is read, so the result does not depend on their order."""
+    by_path = {}
+    for sid, s in state["sources"].items():
+        if s["short"] is not None:
+            by_path.setdefault(s["short"], []).append(sid)
+    for (host, path), sids in sorted(by_path.items()):
+        if len(sids) != 1:
+            continue
+        sid, new = sids[0], _source_id(host, path)
+        if new == sid or new in state["sources"]:
+            continue
+        src = state["sources"].pop(sid)
+        src["id"] = new
+        state["sources"][new] = src
+        state["identity_of"][new] = state["identity_of"].pop(sid)
 
 
 def _set_aside(name, key, value, state):
@@ -381,6 +406,7 @@ def collect(cities, outputs_dir):
             continue
         for key, value in data.items():
             _walk_key(name, key, value, state)
+    _shorten_ids(state)
     return state
 
 
@@ -393,11 +419,14 @@ def _exit_code(state):
                  or state["no_source"]) else 0
 
 
-def _many_folders(state):
-    """Sources keyed on a host and first path part whose entries sit in more
-    than one URL folder: each may be several datasets counted as one."""
-    return [s for s in sorted(state["sources"].values(), key=lambda x: x["id"])
-            if len(s["folders"]) > 1]
+def _portal_groups(state):
+    """{host/first path part: sorted ids} for the sources with no dataset
+    page that share one, where more than one does: the coarser view."""
+    groups = {}
+    for s in state["sources"].values():
+        if s["coarse"] is not None:
+            groups.setdefault(s["coarse"], []).append(s["id"])
+    return {g: sorted(ids) for g, ids in sorted(groups.items()) if len(ids) > 1}
 
 
 def _only_osm(state):
@@ -431,8 +460,8 @@ def _json_payload(state):
             for (k,), cities in _grouped(state["objects"], ("key",)).items()],
         "cities_without_provenance": sorted(m["name"] for m in state["missing"]),
         "cities_with_no_source": sorted(state["no_source"]),
-        "sources_covering_several_folders": [
-            {"id": s["id"], "folders": sorted(s["folders"])} for s in _many_folders(state)],
+        "portal_groups": [
+            {"group": g, "sources": ids} for g, ids in _portal_groups(state).items()],
         "sources": [
             {"id": s["id"], "host": s["host"], "dataset_page": s["dataset_page"],
              "cities": sorted(s["cities"]), "layers": sorted(s["layers"]),
@@ -536,15 +565,13 @@ def _run(cities, outputs_dir, city=None, json_out=None):
                   f"may cover a whole host; a person decides")
             for h, n in many:
                 print(f"  {h}  sources={n}")
-    several = _many_folders(state)
-    if several:
-        print(f"\nsources covering more than one URL folder ({len(several)}): "
-              f"keyed on host and first path part for want of a dataset page, "
-              f"each may be several datasets; a person splits them")
-        for s in several:
-            shown = ", ".join(sorted(s["folders"])[:4])
-            more = f", and {len(s['folders']) - 4} more" if len(s["folders"]) > 4 else ""
-            print(f"  {s['id']}  folders={len(s['folders'])}: {shown}{more}")
+    groups = _portal_groups(state)
+    if groups:
+        print(f"\nportal groups ({len(groups)}): sources with no dataset page "
+              f"that share a host and first path part; one licence may cover a "
+              f"group, a person decides")
+        for g, ids in groups.items():
+            print(f"  {g}  sources={len(ids)}: {', '.join(ids)}")
     notes = _grouped(state["licence_notes"], ("key", "value"))
     if notes:
         print(f"\nlicence fields outside a source entry ({len(notes)}): read, "
@@ -834,13 +861,28 @@ def selftest():
              sorted(res["sources"]) == ["portal-example-view-do-id-1",
                                         "portal-example-view-do-id-2"])
 
-        # 22. With no dataset page two files under one first path part are one
-        #     source still, and the run names it as covering two folders.
+        # 22. With no dataset page, files in two folders under one first path
+        #     part are two sources, and the coarser view groups them; an
+        #     endpoint with no file name keeps its whole path.
         put("c22", {"register": {"url": "https://files.example/download/reg/business.csv"},
-                    "permits": {"url": "https://files.example/download/permits/all.csv"}})
+                    "permits": {"url": "https://files.example/download/permits/all.csv"},
+                    "api": {"url": "https://files.example/v1/bag/straten"}})
         rc, out = run([city("A", "c22")])
-        case("one key covering two URL folders is listed for a person to split",
-             "files-example-download  folders=2: download/permits, download/reg" in out)
+        case("two folders under one path part are two sources, grouped in the portal view",
+             "files.example/download  sources=2: files-example-download-permits, "
+             "files-example-download-reg" in out
+             and "files-example-v1-bag-straten  " in out)
+
+        # 29. A page's query string stays in the id only where another page
+        #     shares the path; whatever order the files are read in.
+        put("c29a", {"a": {"dataset_page": "https://one.example/view.do?id=7"}})
+        put("c29b", {"b": {"dataset_page": "https://two.example/view.do?id=1"}})
+        put("c29c", {"c": {"dataset_page": "https://two.example/view.do?id=2"}})
+        trio = [city("A", "c29a"), city("B", "c29b"), city("C", "c29c")]
+        want = ["one-example-view-do", "two-example-view-do-id-1", "two-example-view-do-id-2"]
+        case("a query string stays in the id only where the path is shared, in any order",
+             sorted(collect(trio, tmp)["sources"]) == want
+             and sorted(collect(trio[::-1], tmp)["sources"]) == want)
 
         # 23. Another publisher's URL under an osm_ key is that publisher's.
         put("c23", {"osm_basemap": {"tiles": "https://carto.example/light/z.png"}})

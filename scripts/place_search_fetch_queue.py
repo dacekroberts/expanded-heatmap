@@ -36,6 +36,7 @@ child is started and waited for to the end, and only then the next.
 import argparse
 import datetime
 import importlib
+import json
 import os
 import subprocess
 import sys
@@ -137,19 +138,20 @@ def read_place_paths(city, importer=importlib.import_module):
 
 def _cache_state(path):
     """None when a cache file is there and whole, else what is wrong with it.
-    Whole means not empty and ending as a JSON object or list does: a child
-    stopped in the middle of its write leaves a file that exists and is
-    neither. The file is not parsed (a cache runs to tens of megabytes)."""
+    Whole means it parses as JSON and holds an "elements" list, as every
+    Overpass answer does: a child stopped in the middle of its write leaves a
+    file that exists and does neither. Parsing a cache of tens of megabytes
+    takes a second or two a city, once, before a fetch of many minutes."""
     if not path.exists():
         return "missing"
-    size = path.stat().st_size
-    if size == 0:
+    if path.stat().st_size == 0:
         return "empty"
-    with open(path, "rb") as handle:
-        handle.seek(max(0, size - 64))
-        tail = handle.read().rstrip()
-    if not tail.endswith((b"}", b"]")):
-        return "cut short (it does not end as JSON does)"
+    try:
+        data = json.loads(path.read_bytes().decode("utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+        return "cut short or not JSON"
+    if not isinstance(data, dict) or not isinstance(data.get("elements"), list):
+        return 'not a place cache (no "elements" list)'
     return None
 
 
@@ -527,9 +529,9 @@ def selftest():
         tmp = Path(tmp)
         a, b = tmp / "a.json", tmp / "b.json"
         none = real_cached("x", a, b)
-        a.write_bytes(b"{}")
+        a.write_bytes(b'{"elements": []}')
         one = real_cached("x", a, b)
-        b.write_bytes(b"{}")
+        b.write_bytes(b'{"elements": []}')
         both = real_cached("x", a, b)
         report("the real cache test names the missing file and passes only with both",
                none == "PLACE_OSM_JSON missing" and one == "PLACE_OSM_EXTRA_JSON missing"
@@ -615,10 +617,13 @@ def selftest():
         whole.write_bytes(b'{"elements": []}\n')
         empty.write_bytes(b"")
         cut.write_bytes(b'{"elements": [{"id": 1')
-        report("a cache that is empty or cut short is not a cache",
+        other = tmp / "other.json"
+        other.write_bytes(b'{"remark": "runtime error: timed out"}')
+        report("a cache that is empty, cut short or not an Overpass answer is not a cache",
                real_cached("x", whole, whole) is None
                and real_cached("x", whole, empty) == "PLACE_OSM_EXTRA_JSON empty"
-               and "cut short" in (real_cached("x", cut, whole) or ""))
+               and "cut short" in (real_cached("x", cut, whole) or "")
+               and "elements" in (real_cached("x", whole, other) or ""))
 
         class Strings:
             PLACE_OSM_JSON = "a.json"
