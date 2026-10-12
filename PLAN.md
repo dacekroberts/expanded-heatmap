@@ -212,6 +212,23 @@ Detail files: [japan](docs/plan_detail/japan.md),
       Japanese and Korean terms is tried on known sources first.
     - Nothing from a business register goes to an outside model; an API
       key never enters the repo.
+    - **The wave order, PROPOSED 2026-10-12, not yet approved** (218
+      cities left by `travel_packs.LOCAL_LANG`; 198 in languages whose
+      word lists are built): 0. Mexico City's rebuild; 1. English 34; 2.
+      Japanese 92, in batches of about ten; 3. French 28 with Dutch 5
+      (Brussels (Regional) needs both); 4. Korean 16 with Taiwan 3; 5.
+      Spanish 6, Portuguese 8, Czech 6; 6. the new languages, 20 cities,
+      one first city each (German 4, Danish 3, Latvian 3, Italian 3,
+      Norwegian 2, Romanian 2, Swedish 2, Greek 1).
+    - **The cheaper model's part, assessed 2026-10-12:** viable for the
+      first pass of the flagged-name review after a trial on the 19 built
+      cities, whose dropped and kept rows are known answers, measured by
+      language (a missed home is the costly error). Open with the owner:
+      names fed from the committed index files only, never read from
+      `data/`; a standing approval for one named overnight batch. No
+      script or prompt for that pass exists yet. In the audit its share is
+      small: about 32 stored licence texts, none Korean; the rest is the
+      standard-licence table and recorded reads.
   - **Search rollout, first wave: Mexico City's index is rebuilt for the
     regional map** (owner, 2026-10-12: "fix in search rollout"). The
     index landed cut to Mexico City proper: the 11 stations in the four
