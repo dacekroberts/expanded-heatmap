@@ -6764,8 +6764,14 @@ REGION_FIT_NOTE = {"Kyushu-Okinawa": "Naha is south of this view; pan down to se
 # phone canvas and check_macro_labels.py reports PROBLEMS 0; Hyogo needs
 # Amagasaki's label above and right of its dot (else Itami is labelled in no
 # view). Osaka Prefecture at 9.5 already holds all 6.
+# Chiba Prefecture 9.25 (2026-10-12, the phase 2 landing's deploy check): at
+# 9.5, pinned before its seven cities were built, Matsudo's dot sat 5 px above
+# the 460 px canvas and Ichihara's 5 px below it at every width. At 9.25 all
+# seven dots and pills are on the canvas at 375, 768 and 1200
+# (check_macro_labels.py --verbose, no note for the region; PROBLEMS 0); at
+# 9.0 Sakura's pill is clipped 4.1 px on a phone.
 REGION_ZOOM = {"France North": 5.0, "France South": 5.0, "Benelux": 6.25,
-               "Tokyo Metropolis": 9.0, "Saitama Prefecture": 9.0, "Chiba Prefecture": 9.5,
+               "Tokyo Metropolis": 9.0, "Saitama Prefecture": 9.0, "Chiba Prefecture": 9.25,
                "Hyogo Prefecture": 8.25, "Osaka Prefecture": 9.5, "Kansai": 7.5, "Chugoku": 6.6}
 
 # Global is every region that is not itself a composite, derived rather than
