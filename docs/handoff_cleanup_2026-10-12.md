@@ -84,13 +84,17 @@ branch's drafts file.
    - Call 182: move Yamagata's permit-match name rule from
      `pipeline/yamagata/config.py` into `japan_step2`, find out why it flags
      3 rows where the brief counted 4, delete the city-local copy.
-   - S18: Regional-2 read Kurashiki's 8 特殊形態 pins (owner approved the
-     fetch): six concession stands at one stadium, two rows of one
-     market stall at a station plaza; Okayama City's page defines the
-     form as a facility meant to be moved or removed. It recommends
-     特殊形態 as a temporary form beside 露天 in `FORM_RULES`. NOT
-     decided: the owner kept fixed-pitch yatai in Fukuoka and Kure, and
-     these stands sit at a fixed address. Put it to him with S17.
+   - S18 (owner, 2026-10-12, in Regional-2's chat: "s18 yes treat as
+     temporary"; relayed, recorded in that branch's drafts): 特殊形態
+     joins `FORM_RULES` as a TEMPORARY form, set aside as 露天 is, in the
+     same edit as S17. Okayama City's page defines it as a facility meant
+     to be moved or removed; the prefecture's ordinance text was not
+     found. Kurashiki loses 8 pins (six stadium concession stands, one
+     market stall in two rows). 屋台 at a fixed pitch stays counted
+     (Fukuoka, Kure). Check whether a form rule is switchable per city or
+     universal before the drift run: no built Japanese city may move
+     unlisted. Then tell Regional-2, which re-runs Kurashiki (83 vending
+     pins and these 8 gone) and corrects its page's sentences.
 5. **Bucharest's name repair** (a privacy repair on a published map): call
    `name_kind_extended()` in Bucharest's step 2 so the 127 pins (93 names) of
    a given name beside one other word show their category. The "two or more
