@@ -2597,7 +2597,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
                 out = data.filter(function (d) { return hits(d, two); });
             }
         }
-        var nq = norm(q).trim(), bare = words(q).join(""), pair = pairOf(q);
+        var nq = norm(q).trim(), bare = words(q).join(""), phrase = words(q).join(" "), pair = pairOf(q);
         // A street word last asks for a street ("Lake Shore Dr" before the
         // Lake Shore Drive Synagogue, whose name the query begins); first, it
         // is often Saint or Doctor ("St Mary's", "Dr Martin Luther King").
@@ -2606,7 +2606,16 @@ _PLACE_SEARCH_TEMPLATE = r"""
         var streetQ = qs.length > 1 && typeW;
         out.forEach(function (d) {
             var s = KIND_RANK[d.kind] * 3 + Math.min(d.name.length, 40) / 10 + d._weak * 20;
-            if (d.bares.indexOf(bare) >= 0 || d.names.some(function (n) { return norm(n) === nq; })) s -= 100;
+            // The name itself before another street's alternate name: "Paseo
+            // de la Reforma" listed two roads carrying it as an old or
+            // alternate name ahead of the avenue (Mexico City, live, 2026-10-12).
+            // So: the name itself, then a name holding the whole phrase
+            // ("Avenida Paseo de la Reforma", "New Oxford Street"), then an
+            // alternate name that is the phrase (which still leads where the
+            // typed name is the English of a local one: "Sanjo Street").
+            if (norm(d.name) === nq || words(d.name).join("") === bare) s -= 100;
+            else if ((" " + words(d.name).join(" ") + " ").indexOf(" " + phrase + " ") >= 0) s -= 80;
+            else if (d.bares.indexOf(bare) >= 0 || d.names.some(function (n) { return norm(n) === nq; })) s -= 70;
             else if (d.first.indexOf(nq) === 0) s -= 40;
             // "Damen and North": the crossing whose two streets take the two
             // halves, before North Damen Avenue's other crossings (Chicago,
@@ -2628,8 +2637,78 @@ _PLACE_SEARCH_TEMPLATE = r"""
         out.sort(function (a, b) { return a._s - b._s; });
         var cap = caps();
         var mine = out.filter(function (d) { return isOwn(d) && !d._weak; }).slice(0, cap.own);
-        var rest = out.filter(function (d) { return !isOwn(d); }).slice(0, mine.length ? cap.places : cap.alone);
+        var rest = oneRowAStreet(out.filter(function (d) { return !isOwn(d); }))
+            .slice(0, mine.length ? cap.places : cap.alone);
         return mine.concat(rest);
+    }
+    // ONE ROW FOR A STREET'S STRETCHES (owner, 2026-10-12). The index joins
+    // the ways of one name only where they share a node, so a street cut by
+    // a railway, a square or a renamed block is several rows: live, "North
+    // Bell Avenue" filled all five of Chicago's slots and "Brick Lane" four
+    // of London's, pushing every other answer out. Street rows of one name
+    // whose extents lie within STRETCH_M of each other are one suggestion:
+    // the stretch nearest the middle of the view, opening on all of them.
+    // A same-named street farther off stays its own row, because most
+    // repeats are other streets: measured on the 19 indexes, joining at
+    // 600 m takes London's 55,283 street rows to 55,003 and leaves its four
+    // Brick Lanes and 53 of 56 High Streets apart (2 km would still leave
+    // 41). Those rows are told apart instead: each carries the nearest
+    // neighborhood in the index within NEAR_PLACE_M, and the nearest to the
+    // middle of the view comes first. Re-measure STRETCH_M if the index's
+    // street grid changes (pipeline/place_index.py, 2 km cells).
+    var STRETCH_M = 600, NEAR_PLACE_M = 4000, hoods = null;
+    function nearHood(d) {
+        if (!hoods) hoods = data.filter(function (x) { return x.kind === "place"; });
+        var best = null, bestM = NEAR_PLACE_M, k = Math.cos(d.lat * Math.PI / 180);
+        for (var i = 0; i < hoods.length; i++) {
+            var h = hoods[i], dy = (h.lat - d.lat) * 111320, dx = (h.lon - d.lon) * 111320 * k;
+            var m = Math.sqrt(dx * dx + dy * dy);
+            if (m < bestM) { bestM = m; best = h; }
+        }
+        return best ? best.name : null;
+    }
+    function boxOf(d) { return d.bbox || [d.lat, d.lon, d.lat, d.lon]; }
+    function gapM(a, b) {
+        var dy = Math.max(0, a[0] - b[2], b[0] - a[2]) * 111320;
+        var dx = Math.max(0, a[1] - b[3], b[1] - a[3]) * 111320 * Math.cos((a[0] + b[0]) / 2 * Math.PI / 180);
+        return Math.sqrt(dx * dx + dy * dy);
+    }
+    function oneRowAStreet(list) {
+        var groups = {}, kept = [], mid = null;
+        try { var c = window[NAME].getCenter(); mid = [c.lat, c.lng]; } catch (e) { mid = null; }
+        function off(d) { return mid ? Math.pow(d.lat - mid[0], 2) + Math.pow(d.lon - mid[1], 2) : 0; }
+        list.forEach(function (d) {
+            d._span = null;
+            d._hood = null;
+            if (d.kind !== "street") { kept.push({d: d}); return; }
+            var key = norm(d.name), gs = groups[key] || (groups[key] = []), box = boxOf(d);
+            for (var i = 0; i < gs.length; i++) {
+                var g = gs[i];
+                if (g.boxes.some(function (b) { return gapM(b, box) <= STRETCH_M; })) {
+                    g.boxes.push(box);
+                    g.span = [Math.min(g.span[0], box[0]), Math.min(g.span[1], box[1]),
+                              Math.max(g.span[2], box[2]), Math.max(g.span[3], box[3])];
+                    if (off(d) < off(g.d)) g.d = d;
+                    return;
+                }
+            }
+            var ng = {d: d, boxes: [box], span: box.slice()};
+            gs.push(ng);
+            kept.push(ng);
+        });
+        var rows = kept.map(function (g) {
+            if (g.boxes && g.boxes.length > 1) g.d._span = g.span;
+            return g.d;
+        });
+        rows.forEach(function (d) {
+            if (d.kind === "street" && groups[norm(d.name)].length > 1) d._hood = nearHood(d);
+        });
+        // Equal answers nearest the view first; the sort is stable, so every
+        // other order stands.
+        return rows.sort(function (a, b) {
+            return a._s - b._s || (a.kind === "street" && b.kind === "street"
+                                   && norm(a.name) === norm(b.name) ? off(a) - off(b) : 0);
+        });
     }
     function isOwn(d) { return d.kind === "line" || d.kind === "mapstation"; }
     // WORK IN PROGRESS (owner, 2026-10-07): the suggestion rules below (the
@@ -2807,7 +2886,11 @@ _PLACE_SEARCH_TEMPLATE = r"""
                 el.setAttribute("role", "option");
                 el.setAttribute("data-i", i);
                 var top = document.createElement("div");
-                top.textContent = d.name;
+                // One of several streets of this name carries its
+                // neighborhood in parentheses (owner, 2026-10-12: "Brick
+                // Lane (Mile End New Town)"; oneRowAStreet). The mark on the
+                // map keeps the street's own name.
+                top.textContent = d.name + (d._hood && d._hood !== d.name ? " (" + d._hood + ")" : "");
                 var sub = document.createElement("div");
                 sub.className = "hm-search-sub";
                 sub.textContent = label;
@@ -2839,8 +2922,10 @@ _PLACE_SEARCH_TEMPLATE = r"""
                 // The station with its outermost ring in view, whether or not
                 // the rings are switched on (owner, 2026-10-07).
                 map.fitBounds(L.latLng(d.lat, d.lon).toBounds(2 * RING_M), {padding: [20, 20]});
-            } else if (d.bbox) {
-                map.fitBounds([[d.bbox[0], d.bbox[1]], [d.bbox[2], d.bbox[3]]], {maxZoom: 16, padding: [30, 30]});
+            } else if (d._span || d.bbox) {
+                // every stretch of the street in view (oneRowAStreet)
+                var bb = d._span || d.bbox;
+                map.fitBounds([[bb[0], bb[1]], [bb[2], bb[3]]], {maxZoom: 16, padding: [30, 30]});
             } else {
                 map.setView([d.lat, d.lon], Math.max(map.getZoom(), 16));
             }
