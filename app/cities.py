@@ -5822,8 +5822,17 @@ CITIES = [
         "lat": 34.257,
         "lon": 132.629,
         "page": "pages/267_Kure_Heatmap.py",
-        "blurb": "JR West (TODO: list the lines)",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (88.2%); ministry coordinates where missed",
+        "data_age": "Ministry filings fetched 2026-10-06",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Food premises only",
+        "blurb": "JR West's Kure Line",
         "region": "Chugoku",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
         "country": "Japan",
         "mode": "metro",
         "in_default_view": False,

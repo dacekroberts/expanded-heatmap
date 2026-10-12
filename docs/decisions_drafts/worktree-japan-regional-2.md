@@ -86,6 +86,205 @@ Each city's own parked calls and proposals are under its entry below
 
 ## Changes
 
+### 2026-10-11 - Kure built, the national food filings alone, food only
+
+- **Kure built (page 267, notice 214), Kurume's and Tottori's shape (MHLW's
+  open data alone, food only, the food share stated: call 185): 1,595
+  storefronts (Food service 805, Food shops 790) around 13 stations on 1
+  line, 58.6% of them in a ring (935: 536 and 399) on the standard rings.**
+  Source: MHLW's `34202_food_business_all.csv`, 3,538 rows (許可 2,246, 届出
+  1,286, 許可(廃業) 3, 届出(廃業) 3), latest permit 2026-08-28, PDL 1.0 as
+  recorded. Built by a Regional-2 subagent; the brief passed 8 of 8 on
+  2026-10-11.
+- **Step 2, by rule (3,538 rows to 1,765 storefront rows):** 6 closed, 0 past
+  term and 7 late starters (3 of them restaurants) against `TERM_AS_OF`
+  2026-08-31; 41 vehicles by permit condition (`kyoka_joken`), 15 area-wide,
+  1,143 with no address, 11 not a premises (一円); 550 not a storefront (228
+  no rule, 145 institutional catering, 36 hostess venues, 36 vending, 30
+  temporary or mobile of which 1 by 露天, 28 entertainment, 27 inside
+  accommodation, 11 mail order, 9 caterers). 55 combined 業態 cells read as
+  their restaurant form (call 158). 170 repeat rows shown once.
+- **Against the brief's storefront rows (1,768: Food service 808, Retail
+  960): 1,765 (806 and 959).** The three rows are the brief's three
+  shared-code proposals, all in the foundation already and none
+  re-implemented: 自動車 in 許可条件 (1 addressed restaurant), 露天 (1
+  restaurant) and 未選択 (1 notification, which would have sat at the
+  city-hall geocode). The brief's "not a premises 1,195" reads 1,210 here
+  (41 + 15 + 1,143 + 11) because the permit-condition rule now sets 13
+  vehicles and stalls aside before the form rules that used to take them
+  (temporary or mobile 42 to 30), with the 自動車 and 未選択 rows. A scratch
+  replay of the brief's order reproduces its figures (2,330 open addressed
+  rows, 796 restaurants, 12 yatai, 562 not a storefront; the brief's list of
+  555 leaves out 4 temporary rows by type and 3 vending rows by 業態).
+- **The brief's restaurant figures reproduce:** 1,543 open restaurant
+  permits in term (88.1% of e-Stat's 1,752), 487 with a blank address
+  (31.6%), 9 一円, 26 一円 rows in all, 1,169 blank addresses in all
+  (`scratchpad/kure/measure.py`). The fixed-premises measure (the brief's
+  1,022 of 1,474, 69.3%; 58.3% of 1,752) was not rebuilt rule for rule: a
+  scratch word list reads 1,015 of 1,465, the same 69.3%. The brief's
+  figures are the ones quoted.
+- **The join, and where the brief's tier table no longer describes the
+  map.** Block 1,561 of 1,765 rows (88.4%; the brief 1,557 of 1,768, 88.1%).
+  The brief's 207 town-chōme rows do not stay at the town's center: the
+  shared `OWN_POINT_FALLBACK` (Fukuoka's call, MHLW's point for chōme-tier
+  rows too) moves 177 of them, 2 小字-tier rows and 2 unplaced rows to
+  MHLW's own point, and refuses it for 22 rows whose point is a default
+  shared by three or more towns (the city-hall geocode among them), which
+  stay at the town's center with 1 more. Unplaced 0. On the map: block 1,406
+  (88.2%), MHLW's point 167 (10.5%; 134 of them on the islands), town center
+  22 (1.4%, all on the islands). Within a ring: 922 block and 13 at MHLW's
+  point, none at a town center. MHLW's point against the block point: median
+  35 m, 95.8% within 250 m, 22 over 1 km (1,561 rows; the brief 34 m and
+  96.1%). The page's placement bullet states these tiers (call 145), not
+  the brief's "one in nine at its town's centroid"; see Proposals.
+- **The food share (calls 125 and 185):** the page says "about three
+  restaurants in five of the official count", the brief's sentence, on 1,022
+  fixed, addressed permits of 1,752 (58.3%). See parked call 1 for what the
+  Food service layer itself holds (806 rows, 46.0%).
+- **The name rule:** the raw file holds 2 trade names that are an operator's
+  own name (the brief measured 0 among storefront rows); neither is among
+  the storefronts, so 0 names are withheld and 0 pins show a permit type for
+  that reason. Call 205's city-wide pass matched 1 more row, not on the map.
+  2 pins have a blank trade name in the filings (1 within a ring) and show
+  their permit type through the renderer.
+- **Factory share:** 24 of 192 菓子 / そうざい rows (12.5%) read as a factory
+  or central kitchen; kept (owner, 2026-09-24). High against the built
+  cities (Tottori 3.9%, Aomori 8.4%); not read further.
+- **Caterers:** 9 rows left out by 業態 (仕出し), 3 of which also name a
+  counter form (客席あり twice, 店頭販売 once); disclosed in What Is Excluded
+  the way Fukushima's are.
+- **Economic Census control (`scripts/japan_census_control.py kure`):** 805
+  Food service pins against 848 establishments (2021), 0.95 per
+  establishment, the brief's expected figure and below every built city
+  (Tottori 1.79). The brief's reading stands and is a coverage reading:
+  e-Stat's 1,752 in-force permits over 848 establishments is 2.07, the
+  lowest of the cities read, the file holds 88% of permits and about three
+  fixed restaurants in ten withhold their address. Not under the brief's
+  0.9 trigger, and the in-force share (88.1%) has not moved, so nothing
+  goes back to staging on that account.
+- **Rail:** step 1 reproduces the brief: the Kure Line 13 of 28, 13 groups,
+  no Shinkansen. 3 stations beyond the city line within 3 km are listed
+  (小屋浦 and 水尻 in 坂町, 風早 in 東広島市). Median nearest-station gap 1,442
+  m, minimum 1,170 m (the brief's): standard rings.
+- **No low-frequency stretch (calls 46 and 86):** the fewest trains the
+  brief read is 20 a day (安浦 toward 三原); nothing is named on the page.
+- **Gate 3 has no in-city count (Aomori's and Tottori's shape):** the line
+  runs on past the city line at both ends. `GATE3["lines"]` is empty.
+- **Station names stand as OpenStreetMap writes them:** 20 objects, all
+  with `name:en`; 13 names read (Kure-Portopia, Tenno, Karugahama, Yoshiura,
+  Kawaraishi, Kure, Aki-Aga, Shin-Hiro, Hiro, Nigata, Aki-Kawajiri, Ato,
+  Yasuura). No macron, no translation, no 丁目; no override, alias or tie.
+- **Line name:** "JR Kure Line", as Hiroshima's map writes the same line.
+- **Line colour:** `#D08000`, Hiroshima's colour for the same line (its key
+  `JY`), written as a literal because `pipeline/line_registry.py` has no
+  entry for the line yet. Against the pins (CIE76, step 3): 43.0 from Food
+  shops olive, between 20 and 45, recorded in the config as an accepted
+  trade (the colour is the line's own site-wide). One line, no pair.
+- **Privacy verdict: publish.** `check_personal_exposure.py kure`: the Japan
+  pass prints 0 of 1,595. The name rule compares 法人名 in memory only;
+  法人番号, 法人住所 and 営業施設電話番号 are never selected.
+- **Checks:** `check_no_em_dashes.py` OK, `check_no_fetch_in_steps.py` OK
+  (2026-10-11). Not run, the lead's: drift, `check_all`,
+  `check_provenance`, `check_scope_disclosure`. Not run at all: the opening
+  view (`scripts/check_map_view.js`; the brief asks for the fit to be read
+  against the station line, since the islands stretch the city south and
+  east) and the Minato control (no shared code changed).
+- **Overpass:** the first two tries failed on both mirrors (HTTP errors, a
+  host problem); the third, after the back-off and with the lock held,
+  returned 20 elements from overpass-api.de.
+- Files: `pipeline/kure/` (config, fetch_sources, three steps),
+  `outputs/kure/` (heatmap.html, excluded_stations.csv, provenance.json).
+
+#### Parked calls
+
+1. **"About three restaurants in five" against the Food service layer.** The
+   sentence (the brief's, call 185) counts restaurant PERMITS at a fixed,
+   published address: 1,022 of 1,752, 58.3%. The Food service layer holds
+   806 of those rows (46.0%), because the form rules class restaurant
+   permits held by convenience stores as Food shops (127 rows by 業態) and
+   leave out canteens, snack bars, entertainment venues, hotel
+   restaurants and caterers. Recommend keeping the brief's sentence (it is
+   the share the owner accepted, and Ichinomiya's and Tottori's shares count
+   permits the same way). Tradeoff: "about half" is the nearer figure for
+   the magenta pins a reader sees.
+2. **The placement bullet (call 145).** The brief had the page say about one
+   premises in nine sits at its town's centroid. As built, those rows sit at
+   MHLW's own coordinates (167 pins, 10.5%) and only 22 at a town center.
+   Recommend the bullet in the page block, which states both. Tradeoff: it
+   is longer than Kurume's and Tottori's approved sentence ("where that
+   fails, the dot sits at the ministry's own coordinates"), which could
+   stand alone if the tiers are judged disclosed by What Is Excluded.
+3. **MHLW's point on the islands.** 134 island pins rest on MHLW's own
+   coordinates, checked only where a block point also exists (median 35 m,
+   mostly mainland). None is within a ring, so no count is affected.
+   Recommend accepting it (call 127c); the GSI sample
+   (`scratchpad/gsi_sample.py kure`) would test it and was not run, since
+   the brief does not ask for it.
+4. **Gate 3 against the operator.** Recommend accepting Aomori's shape (no
+   in-city count). Tradeoff: JR West's line page would confirm N02's 28
+   whole-line records, but the brief names no such page.
+5. **The opening view.** Not measured (above). Recommend the lead runs
+   `scripts/check_map_view.js` on Kure with the batch.
+6. **Mihara and Hiroshima on the page.** The "running on to" bullet names
+   Saka and Higashihiroshima, the municipalities of the three stations in
+   `excluded_stations.csv`; the line's ends (Kaitaichi in Kaita, and Mihara)
+   are not named. Recommend leaving it as the list gives it. Tradeoff: a
+   reader may know the line by its ends.
+
+#### Proposals
+
+Sentences adapted from an approved bullet of another page, or new:
+
+- "Kure City publishes no list of barbers, beauty salons or laundries, so
+  personal services are not on this map." (Aomori's, the city changed)
+- "The ministry's list places about three restaurants in five of the
+  official count: it holds permits granted since June 2021, leaves out
+  vehicles and stalls, and about three fixed restaurants in ten do not
+  publish their address." (the brief's proposed sentence for call 125, with
+  "The ministry's list" for "MHLW's file", as the page's other bullets name
+  it)
+- "About three restaurants in ten in Kure chose not to publish their address
+  in the national filing system and are not on this map. Where they are is
+  not known." (the template's "About one restaurant in <n>", as three in
+  ten: 487 of 1,543, 31.6%)
+- "The rest are matched to MLIT's address reference data: about 88% reach
+  their street block, and about 11%, most of them on the city's islands, sit
+  at the ministry's own coordinates; 22 sit at their district's center."
+  (Kakogawa's tier sentence joined to Kurume's; parked call 2)
+- "One line is drawn, labeled on the map and in the legend: JR West's Kure
+  Line." and "the line running on to Saka and Higashihiroshima is cut at the
+  city line" are Soka's one-line forms, the names changed.
+- What Is Excluded: "Street stalls at a fixed pitch (屋台, 12) count as Food
+  service." (new; Fukuoka's yatai rule, which the brief applies here)
+
+#### Registry
+
+- **New entry needed: JR West's Kure Line** (`西日本旅客鉄道`, `呉線`), colour
+  `#D08000`, `"maps": {"hiroshima": "JY", "kure": "JY"}`, name "JR Kure
+  Line". Hiroshima draws its one in-city station (矢野) in that colour;
+  Kure's config carries the same value as a literal with a comment to
+  replace it by `line_registry.colour(...)` once the entry exists. An
+  identity such as `jr-west-kure-line` fits the registry's naming.
+- For the lead to weigh: Okayama's JR Tsuyama Line (`JT`) is also `#D08000`.
+  The two lines never meet and the maps are not neighbours, but the registry
+  will then hold one colour under two identities.
+- No other city of this batch draws the Kure Line.
+
+#### Downstream
+
+- Notice 214 (MHLW, PDL 1.0; MLIT, PDL 1.0): as Kurume's and Tottori's
+  cards. MHLW's terms ask for the 出典 line wherever the processed data is
+  used and a link to the top page only, so the credit goes on the card face
+  in the form Visuals already uses for the MHLW-only cities, with the MLIT
+  credits as for every Japanese card. No open terms question beyond the
+  recorded 免責 2)ウ point (non-commercial use).
+- `jp_licence.md` is empty on purpose: MHLW's row is already in
+  `docs/data_sources/japan.md` and no other publisher is used.
+- Corrections for staging, from the brief (not owner questions): the master
+  list's row reads 1,546 open (88.2%), 1,025 of 1,477 and "34-57 a day";
+  the build confirms 1,543 (88.1%) and takes the brief's 1,022 of 1,474
+  (69.3%) and 20-57.
+
 ### 2026-10-11 - Yamagata: the owner's three answers (the update list, call 182 to Cleanup, Zao Onsen)
 
 - **"yamagata: let's add to the list of cities scheduled for updates"**

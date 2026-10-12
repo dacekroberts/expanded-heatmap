@@ -6221,6 +6221,57 @@ line: JR East's Ou, Senzan and Aterazawa lines.
 - The Shinkansen is not drawn: the Yamagata Shinkansen's trains run over the
   Ou Line's track, and Yamagata appears as a JR Ou Line station.
 
+### Kure - the national food filings alone, joined to MLIT's address blocks
+
+**Left out**
+- Barbers, beauty salons and laundries: the city publishes no list of them,
+  so this map shows food businesses only.
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, except where the national filings
+  include notifications.
+- Restaurant permits granted before June 2021 and still in force, which the
+  national filings do not hold (about one restaurant permit in eight).
+- 1,143 national filings whose filers did not publish an address. Of the
+  1,543 restaurant permits in term, 487 publish no address (about three in
+  ten).
+- 41 vehicle permits, 26 rows registered for a whole area rather than an
+  address (一円 and the like), and 30 street and festival stalls and other
+  temporary or mobile permits and filings.
+- 228 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit or notification types that are not a
+  counter.
+- 145 school, hospital and staff canteens, 36 vending machines, 11 mail-order
+  businesses, 28 entertainment venues, 27 premises inside hotels and inns, 9
+  caterers (仕出し; 3 of them also name a counter form) and 36 snack bars and
+  cabarets.
+- 7 permits that start after August 31, 2026, the last day the filings
+  cover.
+- 6 closed premises, which the national filings keep, marked.
+
+**Counted** - the national filings as downloaded on October 6, 2026: 1,543
+restaurant permits are in term on August 31, 2026, against 1,752 in the
+national count of March 31, 2025; 1,022 of them are at a fixed, published
+address, about three in five of that count. Street stalls at a fixed pitch
+(屋台, 12) count as Food service. 24 of the 192 bakery, confectioner and deli
+rows (12.5%) have a trade name that reads as a factory; they are kept (owner,
+2026-09-24).
+
+**One pin per premises** - 170 repeat rows are shown once: several permits or
+notifications of one kind at one premises.
+
+**Not placed** - none. 167 pins (10.5%) sit at the ministry's own coordinates
+where the street block could not be found, 134 of them on the islands
+(Kurahashi, Ondo, Kamagari, Shimokamagari, Yutaka and Toyohama), where
+addresses are lot numbers MLIT's block file holds only in part. Another 22
+sit at their town's center, all on the islands.
+
+**Names not shown** - none on the map: no pin's trade name is its operator's
+own name. 2 pins with no trade name in the filings show their permit type.
+
+**Stations.** The one line with a station in the city, the JR Kure Line, is
+drawn, cut at the city line at both ends.
+- Left out: 3 stations beyond it, 2 in Saka and 1 in Higashihiroshima.
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering

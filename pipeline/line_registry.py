@@ -506,6 +506,13 @@ REGISTRY = {
         "name": "Aichi Loop Line", "operator": "Aichi Loop Railway", "colour": "#28A800",
         "maps": {"okazaki": "AK", "toyota": "AK"},
     },
+    # the project's colour hiroshima already drew, registered when kure's map
+    # drew the line too (Regional-2, 2026-10-11); pins >= 43.0 on kure (Food
+    # shops olive), an accepted trade as on hiroshima's map.
+    "jr-west-kure-line": {
+        "name": "JR Kure Line", "operator": "JR West", "colour": "#D08000",
+        "maps": {"hiroshima": "JY", "kure": "JY"},
+    },
     # the project's colour shimonoseki already drew, registered when matsue's
     # map drew the line too (Regional-2, 2026-10-11); pins >= 51.6 on matsue.
     # Kyoto's "JR Sagano Line" is the same N02 line under its own public
