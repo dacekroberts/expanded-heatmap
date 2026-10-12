@@ -37,8 +37,11 @@ branch's drafts file.
     of São Paulo, then London.** Its worktree was found missing on
     2026-10-11 and re-added by the owner; the standing block on removing it
     holds until place search has landed.
-  - `basemap` `82c0379f`: not part of this landing (its five blockers are
-    with the owner in its own session).
+  - `basemap` (tip `16acf351` on 2026-10-12, master merged in): the
+    site's partial Travel view. **The owner wants it finished (2026-10-12),
+    and its go-live call is his, made at review time** (its drafts,
+    2026-10-08). See "The basemap" below; an earlier version of this note
+    wrongly left it out of the landing.
 - **Each build branch has `docs/decisions_drafts/<branch>.md` and a handoff
   note.** Fold the drafts when the owner hands them off. S numbers are
   Staging's.
@@ -149,6 +152,52 @@ branch's drafts file.
       review").
     - At a later review time: Bucharest's address and name functions to a
       shared module.
+
+## The basemap (the site's partial Travel view)
+
+Read `docs/decisions_drafts/basemap.md` on the branch, the 2026-10-11
+entries first. As that file records:
+
+- **Built and switched off.** `pipeline/travel_packs.py` is one table for
+  every city, with `PACK_HOST` None, so every committed map is unchanged
+  (`check_render_current` 206 of 206 on the branch). Go-live is one line
+  and one re-render of the maps. `scripts/check_travel_packs.py` is in
+  `check_all`.
+- **Packs:** 192 `.pmtiles` in the main checkout's
+  `data/_basemap_build/host_upload_2026-10/` (1.9 GB, counted
+  2026-10-12), with `MANIFEST.csv`, the libraries and the glyphs. Nothing
+  is uploaded anywhere.
+- **Wording P1 to P6 approved** (owner, 2026-10-11); none applied: each
+  waits for the host's address. P5 goes into notice 1 beside CARTO's
+  sentence at go-live, with its "keeps no record" clause confirmed
+  against the chosen host's log settings.
+
+**What is left, in order:**
+
+1. **The owner's:** a Cloudflare account and the host (R2 behind an owned
+   domain against the free Worker, compared live); the upload; the
+   go-live call. Claude creates no account and enters no credential.
+2. **The missing packs.** 206 cities and 192 packs: the basemap session
+   names the 14 and why. Phase 2's 30 cities each need a pack and a row in
+   the Travel table or `ENGLISH_ONLY`: **the pre-push check fails on the
+   merged tree until each new city is placed**, by design. A pack build is
+   a heavy job (about 4 GB, 2 to 2.5 min; three lanes at most, one gate
+   slot left free); a new Geofabrik extract is the owner's download.
+3. **Merge order:** `basemap` changes `pipeline/map_common.py` (five
+   conflicts with master resolved on the branch, both sides kept). Merge
+   it into the integration worktree BEFORE writing S1 and the phone
+   legend, which edit the same file.
+4. **One re-render, not two.** If the host is ready before step 10 of the
+   order, set `PACK_HOST` first and the one full re-render carries the
+   Travel switch. If it is not, land with the switch off (maps unchanged)
+   and say plainly to the owner that go-live then costs a second full
+   re-render.
+5. **At go-live:** the license rows in `docs/data_sources.md` (Protomaps
+   BSD-3, the tiles an ODbL produced work, Noto OFL with its trademark
+   line, Cloudflare), the notice wording, deploy-verify `scope:
+   map-chrome` with the Travel switch opened on a phone-width map,
+   `scripts/check_map_attribution.js` at more than one height (a new tile
+   source must show its own attribution), and the drafts fold.
 
 ## Approved wording
 
