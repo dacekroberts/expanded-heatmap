@@ -128,7 +128,7 @@ fresh `docs/decisions_drafts/staging.md`.
   S19 still open); S3 the Keiyo Line goes red, #C81000 chosen by the owner, applied by Cleanup at
   review time (#D01010 does not fit Tokyo; #C81000, #C80808 and #B04010 fit
   all four maps at the floor, dark-label check not run; transit-globe
-  told); S5 "Saitama Rapid Railway Line" stands. Next free: S27.
+  told); S5 "Saitama Rapid Railway Line" stands. **S27, put 2026-10-12:** Yamagata keeps the 10 Zaō Onsen rows the point-donor match placed (Regional-2 recommends keeping them). Next free: S28.
 - **The live privacy fix (call 209)** landed on 2026-10-07 before the review:
   13 operators' own names withheld on six Japanese maps by the `name_city`
   switch.
