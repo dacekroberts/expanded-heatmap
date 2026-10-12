@@ -402,3 +402,13 @@ PLACE_VISITABLE = {
         "checked": "2026-10-08",
         "why": "Kyutei Omuro, open to the public on announced days each year (2026: May 2-5 and May 30-31, booked tours)"},
 }
+
+# Trade names read by eye as a person's own name and nothing else, on
+# surnames the sign rule's list does not hold (owner, 2026-10-12: the
+# sweep of every Japanese city, borderline readings included). KEYS, never
+# names (pipeline/name_keys.py, over japan_register._name_key of the name).
+PERSON_NAMED = (
+    "2db175826891b1a1",
+    "0a80f15323ed4e77",
+    "1de421708aa2bce9",
+)

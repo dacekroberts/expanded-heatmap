@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**76 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**77 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-12**
 
+- [The name sweep of every Japanese city: 15 more trade names withheld by key; check I guards the search index path](#2026-10-12---the-name-sweep-of-every-japanese-city-15-more-trade-names-withheld-by-key-check-i-guards-the-search-index-path)
 - [Place search never loaded its index on the deployed site; four personal names withheld by eye in Kanazawa and Fujisawa](#2026-10-12---place-search-never-loaded-its-index-on-the-deployed-site-four-personal-names-withheld-by-eye-in-kanazawa-and-fujisawa)
 - [After the landing: Mexico City's index rebuilt, the label batch as measured, four delegated scripts reviewed, and the owner's calls of the day](#2026-10-12---after-the-landing-mexico-citys-index-rebuilt-the-label-batch-as-measured-four-delegated-scripts-reviewed-and-the-owners-calls-of-the-day)
 - [The finished master list: Band A's three built rows removed, the kept build notes moved to the evidence file, Lisbon's request never sent (owner)](#2026-10-12---the-finished-master-list-band-as-three-built-rows-removed-the-kept-build-notes-moved-to-the-evidence-file-lisbons-request-never-sent-owner)
@@ -114,6 +115,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-10-12 - The name sweep of every Japanese city: 15 more trade names withheld by key; check I guards the search index path
+
+- **Every Japanese map was read for the shape of the four names withheld in Kanazawa and Fujisawa** (owner: "yes withhold"). Of 1,492 shown labels written kanji, space, kanji across the 94 maps on the shared Japanese step 2, 9 read clearly as a person's full name and 6 were borderline (a surname with a one-character given name, or a place or shop word followed by a given name). The owner took Cleanup's recommendation to withhold all 15, a shop losing its label to its permit type costing less than a person's name left up. By city: Tokyo 4, Kitakyushu 3 (4 rows), Kyoto 3, and one each in Hiroshima, Kobe, Nagasaki, Tachikawa and Okayama. Keys in each `config.PERSON_NAMED`; step 2 and the map re-run for the eight. Not read: about 2,500 labels whose second part is in hiragana (all 19 names found so far are kanji only).
+- **Check I of `check_place_search.py`** (owner: "ensure they will NOT be repeated in the batched rollout"): a searched map must take the app's path prefix for its index and must not fetch the bare root URL. Run against the pre-fix London map it fails on both counts. After the push the deployed London box answered "Brick Lane", "Oxford Street" and "Savile Row" with their streets.
+- **Measured, not changed: lost characters and number-only names.** Cleanup first told the owner of a handful of names with a lost character in four cities and 25 number-only labels in Kurashiki, from Analytics' list of eight cities. Measured across all 94: 1,029 names with a half-width question mark beside a non-ASCII character in 30 cities (Osaka 444, Kobe 225, Tokyo 130), and 530 number-only names in 70. The owner's yes was given on the smaller description, so nothing was changed; the corrected figures and a recommendation went back to him.
 
 ### 2026-10-12 - Place search never loaded its index on the deployed site; four personal names withheld by eye in Kanazawa and Fujisawa
 

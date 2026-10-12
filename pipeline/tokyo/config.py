@@ -633,3 +633,14 @@ PLACE_DROPPED = {
     "way/1384190240": "a garden style's name on a part of a park",
     "way/1384190239": "a garden style's name on a part of a park",
 }
+
+# Trade names read by eye as a person's own name and nothing else, on
+# surnames the sign rule's list does not hold (owner, 2026-10-12: the
+# sweep of every Japanese city, borderline readings included). KEYS, never
+# names (pipeline/name_keys.py, over japan_register._name_key of the name).
+PERSON_NAMED = (
+    "a434164361ca23dd",
+    "32e0a8a81fde2ae4",
+    "69369885b06cb82a",
+    "3f70b7d079cbd22b",
+)
