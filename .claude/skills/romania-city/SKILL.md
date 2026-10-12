@@ -6,8 +6,8 @@ description: Build a Romanian city on what Bucharest and Cluj-Napoca built - the
 # Building a Romanian city
 
 Written 2026-10-11 from **Cluj-Napoca**, Romania's second city
-(`docs/decisions_drafts/worktree-japan-kansai-2.md`, "Cluj-Napoca built";
-`DECISIONS.md` once folded), on what **Bucharest** built first (2026-09-29).
+(`DECISIONS.md`, 2026-10-11, "Cluj-Napoca built", folded from Kansai-2's
+drafts file), on what **Bucharest** built first (2026-09-29).
 Romania is **Spain's shape in its business leg**: one national authority
 (ANSVSA) but one directorate (DSVSA) per county, each publishing its own
 files its own way. The classification, the join and the name rule are

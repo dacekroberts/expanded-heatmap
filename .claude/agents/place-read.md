@@ -24,8 +24,9 @@ console cannot print Hangul, Han or Georgian otherwise.
 
 ## The owner's rules you judge by
 
-Read the newest entries of `docs/decisions_drafts/place-search.md` (or, once
-folded, `DECISIONS.md`'s place-search entries) and the skill's "Owner's calls"
+Read the place-search entries of `DECISIONS.md` and
+`docs/decisions/2026-10-04.md` (the pilot's drafts file was folded there on
+2026-10-12) and the skill's "Owner's calls"
 section first. In short:
 
 - **Places only, never a business record; never a home.** A home is a private
