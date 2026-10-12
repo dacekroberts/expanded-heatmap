@@ -369,5 +369,16 @@ decisions inside a build are named in its brief.
 ## Later / maybe
 
 - [ ] Ridership (out of scope; revisit only if asked).
+- [ ] **An English-language switch for station names**, for cities whose
+  operator publishes English names (owner, 2026-10-12, in the Naha build's
+  chat, relayed: "potential future implementation ... let cleanup know").
+  Recorded, NOT built: the feature freeze of 2026-10-08 stands. A map
+  control would swap the site's romanised style (Naha-kuko, Itami's
+  Osaka-kuko) for the operator's own English (Naha Airport). Half the data
+  exists: each config's `OSM_NAME_EN_OVERRIDES` cites the OSM spelling it
+  replaces. Meanwhile the romanised precedent stands site-wide, with one
+  deliberate exception the Naha session read from the owner's words:
+  Naha's airport station reads "Naha Airport" (confirm that reading with
+  him at the landing; a revert is one line).
 - [ ] Adopt `safe-rename` (or fold its checklist into `add-city`) once a
   README, deployment or devcontainer exists to keep in sync.
