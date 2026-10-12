@@ -19,14 +19,14 @@ or published; every proposal waits for the owner.
   entries of 2026-10-11 and 2026-10-12 below hold every measurement.
 - **Packs.** All 206 built cities have a stamped, verified pack in
   `data/_basemap_build/host_upload_2026-10/` (main checkout's shared data
-  folder). Phase 2's 30 packs were started 2026-10-12 on the owner's word:
-  rows are in `download_plan_2026-10-08/plan_cities.csv`. **To finish or
-  confirm them:** `python status.py` there names what is not built;
-  `python build_packs.py` (no arguments) builds whatever is left and is
-  safe to re-run; then `python make_upload.py` and
+  folder). **Phase 2's 30 packs are built and in the same folder too
+  (2026-10-12, on the owner's word): 236 packs, 2.3 GB, all verified.**
+  To confirm at any time, from `download_plan_2026-10-08/`:
+  `python status.py`; `python build_packs.py` (no arguments) builds
+  whatever is left and is safe to re-run; then `python make_upload.py` and
   `python ../session_tools_2026-10-08/stamp_verify.py ../packs_pilot_2026-10
-  ../host_upload_2026-10/packs` from that folder. Three gate slots at most,
-  `heavy_job.py status` first. Record the phase 2 totals in a new entry.
+  ../host_upload_2026-10/packs`. Three gate slots at most,
+  `heavy_job.py status` first.
 - **Naha** (added to phase 2 by the owner, 2026-10-12): no pack yet, since
   its box needs its `processed/stations.csv`. When its map is built:
   `new_cities_poly.py` (the `.poly` files must be fetched again, one per
@@ -239,6 +239,19 @@ or published; every proposal waits for the owner.
     They cannot be added on this branch: the check also fails a table row
     with no built map, so the rows go in where the cities' maps are, in the
     integration worktree, with the merge that brings them.
+- **Phase 2's 30 packs built the same day, on the owner's word ("you will
+  still need to do the new batch of cities").** 30 of 30, none failed;
+  with them the folder holds 236 packs, 2,356,858,981 bytes, and
+  `stamp_verify.py` reads 236 packs, 130,096 tile entries, 0 bad. Two new
+  merges, no version conflicts: chubu with kanto for Sagamihara
+  (150,079,017 objects, 427,620 duplicates) and chugoku with kansai for
+  Tottori (87,837,936; 117,909); Kurashiki shares Okayama's file. Both
+  sides present in the two-region packs (`pack_sides.py`): Sagamihara's
+  names Uenohara, in Yamanashi, with 780 road features west of 139.13 E;
+  Kurashiki's names Sakaide, across the Inland Sea. The merged files now
+  number 21, for 24 cities. **Naha** (added to phase 2 by the owner the
+  same day) has no pack: its box needs its stations, and its build has not
+  started.
 - **For the landing (answers to Cleanup).**
   - This branch's edits to `pipeline/map_common.py` sit in: the imports;
     `add_pin_layer` (the `registry` argument); `build_legend` (the Travel
