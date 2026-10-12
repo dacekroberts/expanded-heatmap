@@ -116,6 +116,90 @@ or published; every proposal waits for the owner.
   2026-10-11 reset; the other later items wait until after go-live. The
   owner paused the branch until Sunday 2026-10-11.
 
+### 2026-10-12 - All 206 Travel packs built and in the upload folder; Avignon's pilot pack was missing its west bank; what phase 2's 30 cities need (built and measured)
+
+- **206 of 206 packs built, none failed** (`build_packs.py`, three lanes at
+  most through the gate, 2026-10-11 15:33 to 2026-10-12): 2,079,866,035
+  bytes in all, from 1.2 MB (Mendoza) to 47.6 MB (London), median 8.4 MB.
+  A build took 120 to 598 s, median 213 s, 46,759 s of building in total;
+  the 2 to 2.5 min of the pilot held only for extracts under about 500 MB.
+  Every pack is trimmed, zoom 14, over its stations plus 10 km.
+- **The upload folder holds all 206, stamped and verified**
+  (`data/_basemap_build/host_upload_2026-10/`, 2.0 GB with the libraries
+  and glyphs; `MANIFEST.csv` has a row per pack). `stamp_verify.py`: 206
+  packs, 117,599 tile entries, each stamped pack identical to its build id
+  for id and byte for byte. **No built city lacks a pack.** The 192 Cleanup
+  counted on 2026-10-12 was the folder mid-run: the 14 then missing were
+  still queued (Toyama, Tsu, Uji, Vancouver, Yokohama, Yokosuka, Yongin,
+  Zurich), waiting on a merge that finished after their lane had passed
+  them (Geneva, Philadelphia, Yokkaichi), or the pilot's first three held
+  for a rebuild from the clean extracts (Mendoza, Avignon, Florence).
+- **Final check on stamped packs:** Avignon, Geneva, Mendoza and Seoul,
+  rendered with the switch on for that process, against the finished folder
+  on a second local address: every step of `dark_check.mjs` on desktop and
+  phone, no error. The earlier checks had run on unstamped packs.
+- **Avignon's pilot pack was built from one region and its map crosses
+  two.** The plan listed all of France for Avignon, a file never
+  downloaded, which stopped the last pass. Avignon's box crosses the Rhône
+  from Provence-Alpes-Côte d'Azur into Languedoc-Roussillon, so it is a
+  21st cross-border city: both extracts were held, merged (the 19th merged
+  file; 80,045,748 objects, 113,267 duplicates) and the pack rebuilt.
+  Measured with `pack_sides.py` west of 4.79 E: the pilot's pack of
+  2026-10-08 has 951 road features there and names neither
+  Villeneuve-lès-Avignon nor Les Angles; the new one has 3,089 and names
+  both. Nothing published used the old pack. Transit-globe builds its own
+  packs from its own boxes, so it is unaffected, but its copy of the
+  pilot's baseline screenshots for Avignon shows the thin west bank.
+  Totals for the merges are now 19 files, 16.28 GB, 21 cities.
+- **Master taken in again** (doc-only commits since the first merge);
+  `check_all.py` 52 of 52.
+- **PHASE 2: what its 30 cities need (asked by Cleanup; read-only, nothing
+  built).** Boxes from each city's `processed/stations.csv` in the shared
+  data folder; regions measured against Geofabrik's `.poly` outlines for
+  the eight Japanese regions (`new_cities_poly.py`), because
+  `index-v1.json` carried empty polygons for Japan on 2026-10-12. Controls
+  reproduce: Ageo gives kanto, Okayama chugoku with shikoku, as planned on
+  2026-10-08.
+  - **No new download.** Every region needed is among the 93 held,
+    Romania's included (Bucharest's).
+  - **Single region, 26 cities.** kanto: Fujisawa, Funabashi, Ichihara,
+    Ichikawa, Kawaguchi, Koshigaya, Matsudo, Sakura, Urayasu, Yachiyo.
+    kansai: Ibaraki (Osaka), Kadoma, Minoh, Moriguchi, Neyagawa, Takatsuki,
+    Yao. chubu: Fuji, Kanazawa, Matsumoto, Okazaki, Shizuoka. tohoku:
+    Aomori, Yamagata. chugoku: Matsue. romania: Cluj-Napoca.
+  - **Two regions, 4 cities.** Kurashiki: chugoku 89%, shikoku 17% (the
+    merged file Okayama uses is already made). Sagamihara: kanto 92%,
+    chubu 11% (a new merge, about 15 min). Kure: chugoku covers 100% of
+    the box, shikoku's outline overlaps 0.7% of it, so chugoku alone.
+    Tottori: chugoku 99.8%, kansai 0.6%; recommended as a merge with
+    kansai (about 12 min) so no land in the margin is left out, though
+    chugoku alone would pass the 99% line. The outlines overlap, so the
+    shares add to more than 100%.
+  - **Order and cost:** the two merges first (one gate slot each), then 30
+    builds in three lanes, about 40 minutes at the median, each declared
+    4 GB. Then `make_upload.py`.
+  - **Table rows:** 29 cities under `"ja"`, Cluj-Napoca under `"ro"`; the
+    folder names are the branches' own (`ibaraki_osaka`, `cluj_napoca`).
+    They cannot be added on this branch: the check also fails a table row
+    with no built map, so the rows go in where the cities' maps are, in the
+    integration worktree, with the merge that brings them.
+- **For the landing (answers to Cleanup).**
+  - This branch's edits to `pipeline/map_common.py` sit in: the imports;
+    `add_pin_layer` (the `registry` argument); `build_legend` (the Travel
+    wrap around the business rows, the route rows, the `full` variant) and
+    `LEGEND_FULL_HTML`; `TRAVEL_MODE_SCRIPT`; the block from
+    `OPEN_BASEMAP_LIBS` through `OpenBasemap`, `FULL_TRAVEL_SCRIPT` and
+    `_render_full_travel`; and `render_heatmap` (the table lookup, the two
+    base layers, `business_layers`). `_THEME_TOGGLE_TEMPLATE` and its
+    `#map-actions` block are untouched (the label pill was moved to the top
+    left to stay clear of it), and so are `_LEGEND_CSS` and `LEGEND_HTML`.
+    A phone-only legend cap that edits `build_legend` or the legend CSS
+    meets this branch only in `build_legend`.
+  - One re-render or two: no host exists and the owner's hosting call has
+    not been made, so unless that call and the upload happen before the
+    landing's full re-render, the landing ships with the switch off and
+    go-live costs a second full re-render.
+
 ### 2026-10-11 - One Travel table for every city, switched off; an internal upload folder; wording proposals for the owner (built; proposals not applied)
 
 - **The Travel switch for all cities is one table, `pipeline/travel_packs.py`
