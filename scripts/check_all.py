@@ -73,6 +73,7 @@ CHECKS = [
     ["scripts/check_place_search.py"],
     ["scripts/check_place_search.py", "--selftest"],
     ["pipeline/place_index_fetch.py", "--selftest"],
+    ["scripts/place_search_fetch_queue.py", "--selftest"],
     ["scripts/check_place_index_drift.py", "--selftest"],
     ["scripts/check_place_unopened.py"],
     ["scripts/check_place_unopened.py", "--selftest"],

@@ -56,8 +56,8 @@ marked TO BUILD name a script that does not exist yet.
    of a station (Mexico City, 2026-10-12). Languages from
    `pipeline/travel_packs.LOCAL_LANG`, then MEASURED by the step as always.
    The area ids are still confirmed by one light query for the wave.
-3. **Fetch as an unattended queue** (TO BUILD,
-   `scripts/place_search_fetch_queue.py`, over `place_index_fetch.py`): one
+3. **Fetch as an unattended queue** (built 2026-10-12,
+   `scripts/place_search_fetch_queue.py`, over `place_index_fetch.py`; `--dry-run` first, `--retries N` for a wave holding a `PLACE_SPLIT` city, a child stopped after 180 min): one
    city after another, the wait after a 504 or 429, a log line per city, a
    retry list at the end. **The one-query rule is a LOCK in the fetch
    script** (`FetchLock`, built 2026-10-12; `--wait MINUTES`), not a hook: a lock guards the queue and anything an

@@ -27,6 +27,8 @@ data/_*/
 # The heavy-job gate's shared ledger, lock and measured-peak history
 # (scripts/heavy_job.py): machine state, never committed.
 data/_heavy_jobs*
+# The place fetch's machine-wide lock (pipeline/place_index_fetch.py).
+data/_place_fetch.lock
 
 # outputs/<city>/ IS committed - the deployed app only ever reads from
 # there, per the pipeline/app split.
