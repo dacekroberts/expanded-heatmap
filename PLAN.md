@@ -69,6 +69,26 @@ Detail files: [japan](docs/plan_detail/japan.md),
     from the owner's global CLAUDE.md; changes are reported per page, never
     applied).
 
+- [ ] **At the phase 2 landing (owner, 2026-10-11; DECISIONS, that day):**
+  - **Bucharest's name repair, a privacy repair on a published map:**
+    apply Kansai-2's `name_kind_extended()`
+    (`pipeline/taxonomies/romania_dsvsa.py`, arriving with Cluj-Napoca)
+    in Bucharest's step 2, so a company named as a given name beside one
+    other word shows its category: 127 pins, 93 names, measured. Then
+    re-render, `check_personal_exposure.py bucharest`, and the verdict in
+    `docs/privacy_verdicts.md`. The "on two or more premises, so a
+    brand" exception is NOT decided: every such name is withheld.
+  - Osaka's three lines renamed "Osaka Metro ..." at its held re-render,
+    as the line registry has them; drift checks for Suita, Osaka and
+    Bucharest.
+  - After it, at a review time: move Bucharest's address and name
+    functions, which Cluj-Napoca's step 2 imports, to a shared module.
+  - Place search (branch `place-search`, 28b1ecb8 and later): the
+    owner's phone test of São Paulo, then London, before any rollout;
+    the stations OSM draws as not yet open are an internal watch file
+    on the branch, no per-city page text; one general sentence for
+    About the Data is a draft with the owner.
+
 - [ ] **Next landing:**
   - Phase 2 Japanese cities (East-2, Kansai-2, Regional-2) and Cluj-Napoca,
     on the owner's go (Cluj-Napoca waits on call 215, the placement bar).

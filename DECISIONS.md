@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**195 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**196 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-11**
 
+- [Bucharest shows 127 person-named companies by name: measured, repair approved for the phase 2 landing; place search's unopened stations an internal watch file (owner)](#2026-10-11---bucharest-shows-127-person-named-companies-by-name-measured-repair-approved-for-the-phase-2-landing-place-searchs-unopened-stations-an-internal-watch-file-owner)
 - [Analytics' requests: a private cross-city chart draft, baseline totals after phase 2, one sharing check folded into the audit (owner)](#2026-10-11---analytics-requests-a-private-cross-city-chart-draft-baseline-totals-after-phase-2-one-sharing-check-folded-into-the-audit-owner)
 - [The Japanese re-render held until every Japanese city is built; the weekly archive waits for phase 2 (owner)](#2026-10-11---the-japanese-re-render-held-until-every-japanese-city-is-built-the-weekly-archive-waits-for-phase-2-owner)
 - [The PLAN cleanup pass: ten pre-review items moved to plan_done, seven narrowed, one not confirmed (owner's hard line of 2026-10-08)](#2026-10-11---the-plan-cleanup-pass-ten-pre-review-items-moved-to-plan_done-seven-narrowed-one-not-confirmed-owners-hard-line-of-2026-10-08)
@@ -244,6 +245,42 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-10-11 - Bucharest shows 127 person-named companies by name: measured, repair approved for the phase 2 landing; place search's unopened stations an internal watch file (owner)
+
+- **Measured by Cleanup, read-only and counts only, after Kansai-2
+  flagged it from Cluj-Napoca's build:** Kansai-2's extended Romanian
+  name rule (`name_kind_extended()`, branch `worktree-japan-kansai-2`)
+  run over the 15,589 rows of Bucharest's cached `businesses_clean.csv`.
+  Of the 15,373 pins Bucharest's own test calls a company: **0** carry an
+  abbreviated sole-trader form, and **127 (93 distinct names, 9 of them
+  on two or more premises)** are a given name beside exactly one other
+  word that is no business word; all 127 are shown by name on the live
+  map. Bucharest's test found 6 such companies, because it needs a
+  typical Romanian surname ending. The rule was run on the displayed
+  name, not the raw register name, which could only undercount the
+  abbreviated forms. No name was printed or saved.
+- **Decided by the owner: apply the extension to Bucharest, with the
+  phase 2 landing**, so the 127 show their category, under his rule of
+  2026-09-28 and 2026-09-29 (a company named only for a person shows its
+  category). Cleanup recommended a separate landing now; the owner chose
+  the phase 2 landing, where the rule arrives with Cluj-Napoca. The
+  exception "a name on two or more premises is a brand" is not decided;
+  until it is, every such name is withheld. Also approved from Kansai-2:
+  Osaka's three lines take the registry's "Osaka Metro ..." names at its
+  held re-render; the drift checks for Suita, Osaka and Bucharest at the
+  landing; the move of Bucharest's address and name functions to a
+  shared module, scheduled by Cleanup for a review time after it.
+- **Place search batch 3's handoff (branch `place-search`, 28b1ecb8),
+  the owner's answers:** the `place-search-city` skill and the
+  `place-read` agent's brief are updated on the branch now, by the batch
+  3 session, Cleanup reviewing the diff; the stations search cannot find
+  because OpenStreetMap draws them as not yet open are kept as an
+  internal watch file, with no per-city page text; a general sentence
+  for About the Data is drafted in chat for the owner. Rejected: a list
+  on each city's page, which goes stale each time a line opens. Batch
+  3 measured São Paulo's index the largest, 3.2 times Seoul's, the
+  one for the owner's phone test before any rollout.
 
 ### 2026-10-11 - Analytics' requests: a private cross-city chart draft, baseline totals after phase 2, one sharing check folded into the audit (owner)
 
