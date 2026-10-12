@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**199 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**200 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-12**
 
+- [Place search's rollout plan: stage 0 approved with the phase 2 landing; the wave order waits for a size projection (owner)](#2026-10-12---place-searchs-rollout-plan-stage-0-approved-with-the-phase-2-landing-the-wave-order-waits-for-a-size-projection-owner)
 - [Naha's shared reader changes written, zero drift on 64 Japanese cities; its page is Food plus Personal services (owner)](#2026-10-12---nahas-shared-reader-changes-written-zero-drift-on-64-japanese-cities-its-page-is-food-plus-personal-services-owner)
 - [Naha joins phase 2 (owner); its reader changes to shared code are Cleanup's, ahead of the build](#2026-10-12---naha-joins-phase-2-owner-its-reader-changes-to-shared-code-are-cleanups-ahead-of-the-build)
 - [Before the phase 2 landing: seven owner calls, and the landing handoff written](#2026-10-12---before-the-phase-2-landing-seven-owner-calls-and-the-landing-handoff-written)
@@ -251,6 +252,26 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-10-12 - Place search's rollout plan: stage 0 approved with the phase 2 landing; the wave order waits for a size projection (owner)
+
+- **Decided by the owner in Cleanup's chat, 2026-10-12: "approve stage
+  0 with the landing, wave order after size projection. one re render
+  sounds good, size before stage 2 yes".** The plan is
+  `docs/handoff_place_search_rollout.md` on branch `place-search`
+  (read at `1f917fe8`), written by that session at the owner's request.
+- **Approved:** stage 0, landing the nineteen searched cities at the
+  phase 2 landing. Where the plan re-renders the nineteen and runs its
+  own deploy-verify, the landing's one full re-render and its
+  deploy-verify lanes cover both; no second pass.
+- **Not approved yet:** stage 2, the remaining cities in waves by
+  language, and its wave order. Before any stage 2 batch the landing
+  session measures `app/static/places/` at the merge (38 MB for
+  nineteen cities by the place search session's count, not Cleanup's)
+  and puts the projected total for the whole site to the owner.
+- **Rejected:** deciding the wave order now. About 220 cities at ten a
+  batch is over twenty batches, and repository size was one of the two
+  top-line concerns, so the projection comes first.
 
 ### 2026-10-12 - Naha's shared reader changes written, zero drift on 64 Japanese cities; its page is Food plus Personal services (owner)
 

@@ -35,8 +35,11 @@ branch's drafts file.
   - `place-search` `1f917fe8` (2026-10-12; far behind master): batches 1
     to 3, nineteen cities, the watch file and its check. **Its rollout
     plan for the whole site is `docs/handoff_place_search_rollout.md` on
-    the branch: a PROPOSAL the owner has not approved** (that session's
-    message). Its stage 0 is this landing's place search share; where it
+    the branch. The owner approved STAGE 0 with this landing, one
+    re-render, and the size projection before stage 2; the wave order
+    is NOT approved and waits for that projection** (owner, 2026-10-12,
+    in Cleanup's chat; DECISIONS, that date). Its stage 0 is this
+    landing's place search share; where it
     says to re-render the nineteen and run its own deploy-verify, this
     landing's ONE full re-render and its deploy-verify lanes cover both.
     Its stage 0 item 5 is a new duty here: measure `app/static/places/`
