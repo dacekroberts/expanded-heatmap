@@ -315,6 +315,14 @@ out
 - **highway=construction is skipped**: a street being rebuilt goes in
   `config.PLACE_REBUILT` by name (Tbilisi's Rustaveli Avenue); a road not yet
   open stays out. Only a missing famous street shows the need.
+- **The fade picks the business dots out by how they are drawn** (paths with
+  fill-opacity 0.85 and a 1 px stroke), since a class on them would change
+  every map's script and make the unsearched maps stale. If the dots'
+  drawing changes in `map_common`, the selector in the search's styles
+  changes with it.
+- **A CSS transition does not advance in a hidden browser pane**: a test that
+  reads an opacity right after a class change sees the old value. The fade
+  has none.
 - **A static file is cached by the browser**: the map carries the index's
   content hash, so every index rebuild means a re-render (check A).
 - **Windows writes CRLF**: write bytes; `sed -i 's/\r$//'` after renders.
@@ -356,13 +364,16 @@ out
 ## Open owner questions (as of 2026-10-11; check the drafts file)
 
 2b's nine and batch 3's ten are answered (the calls above; the phone test
-passed). Open: **monuments and galleries**: the owner's yes to holding
-historic=monument to the notable rule and to treating a gallery without a
-Wikipedia tag as a dealer was measured and NOT applied (it removed Seoul's
-King Sejong statue and its Museum of Art, among about 420 rows), and is back
-with the owner; until then such rows are dropped by id. **The station
-highlight** on a phone is dwarfed by the dots and the heat layer; a stronger
-marker with the dots faded is proposed, not built. With Cleanup for review
+passed). **Monuments and galleries are handled by id** (owner, 2026-10-11):
+holding historic=monument to the notable rule, or treating a gallery without
+a Wikipedia tag as a dealer, was measured and NOT applied (it removed Seoul's
+King Sejong statue and its Museum of Art, among about 420 rows). A dealer's
+gallery is the business itself whatever its article; a public or charitable
+gallery stays. **The found place's marker** (owner, 2026-10-11) sits in its
+own pane above the dots, with a casing and the dark accent on the dark map,
+and the dots, cluster bubbles and heat fade to 28% while it shows; they are
+never switched off. The owner has not yet seen it on a phone. With Cleanup
+for review
 time: the WIP suggestion tuning, the corner credit test, the Cities menu
 move, and whether "Download this index" also links the intersections file.
 

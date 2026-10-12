@@ -2039,6 +2039,29 @@ _PLACE_SEARCH_TEMPLATE = r"""
         border-color: var(--dm-border); }
     .dark-base .hm-search-list, .dark-base .hm-search-credit { border-top-color: var(--dm-border); }
     @media (max-width: 480px) { .hm-search-input { width: 160px; } .hm-search-list { width: 190px; } }
+    /* THE FOUND PLACE'S MARKER (owner, 2026-10-11, after the phone test: "the
+       highlight feature gets dwarfed by nearby businesses and the heat
+       layer"; and "green highlight ring is too dull on dark mode"). Two rings
+       in a pane of their own above the dots (640: over Leaflet's marker pane
+       at 600, under its tooltips at 650): a casing in the page's colour and
+       the accent over it, the dark accent on the dark map. Colours here, not
+       in the path's own attributes, so the theme button recolours a marker
+       already shown. */
+    .leaflet-hmsearch-pane { pointer-events: none; }
+    path.hm-search-case { stroke: #ffffff; stroke-opacity: 0.95; fill: none; }
+    path.hm-search-ring { stroke: @@LIGHT_ACCENT@@; stroke-opacity: 1;
+        fill: @@LIGHT_ACCENT@@; fill-opacity: 0.14; }
+    .dark-base path.hm-search-case { stroke: @@DARK_PAGE@@; }
+    .dark-base path.hm-search-ring { stroke: @@DARK_ACCENT@@; fill: @@DARK_ACCENT@@; fill-opacity: 0.2; }
+    /* While the marker shows, the businesses step back: the dots (the only
+       paths drawn with fill-opacity 0.85 and a 1 px stroke), their cluster
+       bubbles and the heat. Faded, never switched off: what is around the
+       place is the answer the reader came for, and their layer choices are
+       left as they are. Lines, stations and rings keep their strength. The
+       fade ends with the marker, or at the reader's first touch of the map. */
+    .hm-searching .leaflet-overlay-pane path[fill-opacity="0.85"][stroke-width="1"],
+    .hm-searching .leaflet-marker-pane .business-cluster-icon,
+    .hm-searching .leaflet-heatmap-layer { opacity: 0.28; }
 </style>
 <script>
 (function () {
@@ -2167,6 +2190,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
     var CJK = /[@@CJK_CLASS@@]/;
     var MARKS = /[@@MARKS_CLASS@@]/g;
     var data = null, own = null, loading = null, fold = null, marker = null, timer = null;
+    var renderer = null;
     var byIndex = [], crossURL = null, crossings = null;
 
     function norm(s) {
@@ -2622,9 +2646,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
         function go(i) {
             var d = shown[i];
             if (!d) return;
-            if (marker) map.removeLayer(marker);
-            marker = null;
-            clearTimeout(timer);
+            unmark();
             list.classList.remove("has");
             input.setAttribute("aria-expanded", "false");
             input.blur();
@@ -2645,11 +2667,41 @@ _PLACE_SEARCH_TEMPLATE = r"""
                 map.setView([d.lat, d.lon], Math.max(map.getZoom(), 16));
             }
             // A temporary marker, not interactive, so a tap still reaches the
-            // dots and rings under it.
-            marker = L.circleMarker([d.lat, d.lon], {radius: 14, color: "@@LIGHT_ACCENT@@", weight: 3,
-                fillOpacity: 0.12, interactive: false}).addTo(map);
-            marker.bindTooltip(d.name, {permanent: true, direction: "top", offset: [0, -12]}).openTooltip();
-            timer = setTimeout(function () { if (marker) { map.removeLayer(marker); marker = null; } }, 12000);
+            // dots and rings under it: the casing, then the ring over it.
+            if (!map.getPane("hmsearch")) {
+                map.createPane("hmsearch").style.zIndex = 640;
+                renderer = L.svg({pane: "hmsearch"});
+            }
+            marker = L.featureGroup([
+                L.circleMarker([d.lat, d.lon], {radius: 17, weight: 8, className: "hm-search-case",
+                    pane: "hmsearch", renderer: renderer, interactive: false}),
+                L.circleMarker([d.lat, d.lon], {radius: 17, weight: 4, className: "hm-search-ring",
+                    pane: "hmsearch", renderer: renderer, interactive: false})
+            ]).addTo(map);
+            marker.getLayers()[1].bindTooltip(d.name, {permanent: true, direction: "top",
+                offset: [0, -16]}).openTooltip();
+            map.getContainer().classList.add("hm-searching");
+            // The reader's first touch of the map ends the fade (the marker
+            // stays its 12 seconds). Armed after the move this search makes.
+            setTimeout(function () {
+                if (!marker) return;
+                ["pointerdown", "wheel", "touchstart", "keydown"].forEach(function (ev) {
+                    map.getContainer().addEventListener(ev, unfade, {capture: true, passive: true});
+                });
+            }, 400);
+            timer = setTimeout(unmark, 12000);
+        }
+        function unfade() {
+            map.getContainer().classList.remove("hm-searching");
+            ["pointerdown", "wheel", "touchstart", "keydown"].forEach(function (ev) {
+                map.getContainer().removeEventListener(ev, unfade, {capture: true});
+            });
+        }
+        function unmark() {
+            clearTimeout(timer);
+            if (marker) map.removeLayer(marker);
+            marker = null;
+            unfade();
         }
         function open() {
             box.classList.add("open");
@@ -2702,6 +2754,8 @@ PLACE_SEARCH_SCRIPT = (
     .replace("@@LIGHT_TEXT@@", LIGHT["text"])
     .replace("@@LIGHT_BORDER@@", LIGHT["border"])
     .replace("@@LIGHT_ACCENT@@", LIGHT["accent"])
+    .replace("@@DARK_ACCENT@@", DARK["accent"])
+    .replace("@@DARK_PAGE@@", DARK["page"])
     .replace("@@LIGHT_STATION@@", LIGHT["station"])
     .replace("@@STATION_LINK_M@@", str(STATION_LINK_M))
     .replace("@@STATION_DUP_M@@", str(STATION_DUP_M))
