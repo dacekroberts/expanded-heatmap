@@ -24,7 +24,11 @@ or published; every proposal waits for the owner.
   `README.md` with the public text (read 2026-10-12 after his "readme
   re-upload": the host still served the internal draft, MD5
   29c9395e...fbf6 against the public text's 5a1dc340...f45f; check again
-  before go-live), and the word before anything reaches the deployed app. The "hosting call" bullet below is otherwise
+  before go-live), and the word before anything reaches the deployed app.
+  On go-live he wrote in the basemap chat the same day: "word to go live?
+  ready". Recorded as his readiness, not as the push approval: the push is
+  the landing session's, and his standing instruction is to be asked at
+  that point, with the diff of what goes out. The "hosting call" bullet below is otherwise
   done.
 - **Where the branch stands.** `basemap` has master merged (2026-10-12),
   `check_all.py` 52 of 52, nothing pushed. The site's Travel view is built
