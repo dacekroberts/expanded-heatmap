@@ -223,6 +223,39 @@ branch's drafts file.
     - At a later review time: Bucharest's address and name functions to a
       shared module.
 
+## Place search at the merge
+
+From that session's consolidated note (2026-10-12, branch at `59ebdb96`,
+at the owner's request; the quotes and measurements are in
+`docs/decisions_drafts/place-search.md`, newest first, and the recipe in
+the `place-search-city` skill). Not checked by Cleanup.
+
+- **Files per city:** `app/static/places/<city>.json` (first open),
+  `app/static/places/crossings/<city>.json` (intersections, loaded on
+  demand), `outputs/<city>/place_search.json`. A map carries its index's
+  content hash: an index rebuild re-renders that city, and a change to
+  `PLACE_SEARCH_SCRIPT` in `pipeline/map_common.py` re-renders every
+  searched map.
+- **The picked-line highlight lives in the search script**, not
+  `LINE_HIGHLIGHT_SCRIPT` (owner, relayed): an unsearched map's legend
+  pick is unchanged until that city gets search.
+- **Three things to read at the `map_common.py` merge**, since `basemap`,
+  S1 and the phone legend touch the same file: the fade picks business
+  dots by how they are drawn (paths with fill-opacity 0.85 and a 1 px
+  stroke) and clusters by `.business-cluster-icon`, so a change to how
+  dots are drawn breaks it silently; the search adds panes (`hmsearch`
+  640, `hmsearchtip` 645); it reads the legend rows' `aria-pressed`,
+  which the highlight script sets, and folding the legend by operator on
+  phones changes those rows. After the merge, pick a line and find a
+  place on one searched map in each theme before the full re-render.
+- **Nothing was verified on the live site**: local renders and the
+  owner's phone over the LAN only. Deploy-verify at the landing is the
+  first full pass, so give search its own line in the lanes' scope.
+- **Still open with the owner:** the four calls listed above (suggestion
+  tuning, corner credit, Cities menu, the intersections download), the
+  size projection and wave order, and the post-rollout audits in the
+  rollout plan.
+
 ## The basemap (the site's partial Travel view)
 
 Read `docs/decisions_drafts/basemap.md` on the branch, the 2026-10-11
