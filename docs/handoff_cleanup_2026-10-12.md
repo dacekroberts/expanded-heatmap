@@ -1,0 +1,178 @@
+# Cleanup handoff, 2026-10-12: the phase 2 landing
+
+From the Cleanup session that answered the portfolio review and saw phase 2
+built, to the fresh Cleanup session that runs the landing. Read `CLAUDE.md`,
+`docs/session_roles.md` and `PLAN.md` first ("From the portfolio review" and
+"At the phase 2 landing" hold the queue); this note gives the order and what
+is not in PLAN. It replaces `docs/handoff_cleanup_2026-10-08.md`, whose
+landing order for `legend-dot-georgia` and place search (item 4 there) still
+applies and is not repeated here. Delete both notes once their items are done
+or in PLAN.
+
+**Nothing below starts until the owner calls review time.** Only the owner
+calls it. A peer session's relay is not his word: every call below was given
+by him in a chat and is recorded in DECISIONS (2026-10-11) or in a build
+branch's drafts file.
+
+## Where things stand
+
+- **Master `900c8f69`**, 206 cities. Phase 2 is built and nothing of it is
+  pushed. Weekly usage 12% on 2026-10-12 (3% before the batch); the lifted
+  weekly stops ended with the batch, and the 5-hour 90% ceiling holds.
+- **Branches to land** (tips on 2026-10-12; confirm each ref before merging):
+  - `worktree-japan-east-2` `151e4208`: 11 cities. Kawaguchi is HELD until
+    S1 lands.
+  - `worktree-japan-kansai-2` `40af664c`: 7 cities and Cluj-Napoca, with the
+    `romania-city` skill and `name_kind_extended()`.
+  - `worktree-japan-regional-2` `1e4690b1`: 11 cities. `check_all` 48 of 51
+    there (the master list's counts, two macro labels, the Okazaki and
+    Toyota red): all three are expected and are items below.
+  - `legend-dot-georgia` `16a68efe` (worktree `review-prep`), 57 behind
+    master: needs the one full re-render.
+  - `place-search` `fe16ab93`, 233 behind master: batches 1 to 3, nineteen
+    cities, the watch file and its check. **Waits on the owner's phone test
+    of São Paulo, then London.** Its worktree was found missing on
+    2026-10-11 and re-added by the owner; the standing block on removing it
+    holds until place search has landed.
+  - `basemap` `82c0379f`: not part of this landing (its five blockers are
+    with the owner in its own session).
+- **Each build branch has `docs/decisions_drafts/<branch>.md` and a handoff
+  note.** Fold the drafts when the owner hands them off. S numbers are
+  Staging's.
+
+## Order
+
+1. **The weekly archive first**: `python scripts/archive_decisions.py` (due
+   2026-10-11, held for the batch by the owner), then
+   `python scripts/decisions_index.py`. The branches' drafts cite entries by
+   heading, which the archive keeps.
+2. **An integration worktree** from master (junctions for `data` and
+   `.venv-lean`; the 2026-10-08 note's "Habits" has the commands). Merge the
+   three build branches; `app/cities.py` conflicts are keep-both; the OSM
+   notice lists in `app/osm_notice.py` and `app/components.py` are keep-both
+   beside step 3's edit. Then `python scripts/regen_generated.py`.
+3. **The missing credit line, first inside the landing** (owner,
+   2026-10-12: at the landing, not alone): add Regional-1's eleven cities
+   (Maebashi, Fukuyama, Ichinomiya, Tsu, Fukushima, Iwaki, Akita, Ōita, Gifu,
+   Mito, Morioka) to `OSM_RAIL_BY_CITY` in `app/osm_notice.py` and to
+   `_OSM_STATION_NAMES` in `app/components.py` (it raises at import when the
+   two differ). Then read notice 1's sentence, reported to stop at "Tachikawa
+   and Hino", and bring it up to every Japanese city; that sentence renders,
+   so its wording goes to the owner if no template covers it.
+4. **Shared-code changes, Cleanup's (S14)**, each with the Minato control
+   (`screen_japan_join.py minato`, expect 98.0 / 0.2 / 1.8) and a Japan drift
+   run through the gate (`--jobs 3`, about 5.3 GB; read
+   `heavy_job.py status` first):
+   - S1: `map_common.glitched_name` treats U+E000 to U+F8FF as glitched.
+     Measure how many built maps it moves before changing it.
+   - S2: a late start whose first-permit date is on or before the list's
+     date is a renewal and stays (call 172's rule). Kawaguchi gains about
+     100 pins.
+   - S17: 自動販売形態 into `japan_eigyo.FORM_RULES` (83 vending pins on
+     Kurashiki, which re-runs steps 2-3 before its page lands).
+   - S19: `japan_register.permits_from_rows` tests the area-wide rule after
+     the city cut; delete Tottori's `source_rows` hook; step 2 must reproduce
+     237 area-wide and 2,240 storefronts.
+   - Call 182: move Yamagata's permit-match name rule from
+     `pipeline/yamagata/config.py` into `japan_step2`, find out why it flags
+     3 rows where the brief counted 4, delete the city-local copy.
+   - S18: read Kurashiki's 8 特殊形態 pins and check them; a shared rule
+     only if one is needed, put to the owner.
+5. **Bucharest's name repair** (a privacy repair on a published map): call
+   `name_kind_extended()` in Bucharest's step 2 so the 127 pins (93 names) of
+   a given name beside one other word show their category. The "two or more
+   premises is a brand" exception is NOT applied (owner, 2026-10-12: leave
+   them withheld). Then `check_personal_exposure.py bucharest`, the verdict
+   in DECISIONS and `docs/privacy_verdicts.md`, and Bucharest's drift check.
+6. **Lines:** JR Keiyo to `#C81000` in `pipeline/line_registry.py` (S3) and
+   Tokyo's own JE literal switched to the registry; run the dark-mode label
+   check, which nobody has run on this value (10.2 from the Keikyu Main Line
+   on Tokyo; if the labels do not separate, moving Keikyu's red goes back to
+   the owner). A `NEIGHBOUR_EXCEPTIONS` entry with a note for Okazaki's
+   Meitetsu Nagoya Main Line and Toyota's Mikawa Line (S16). Osaka's three
+   lines renamed "Osaka Metro ..." as the registry has them.
+   `scripts/check_line_identity.py` green.
+7. **Macro map (call 198):** place Minoh, Fuji and Kurashiki in a view; add
+   `TEXT_WIDTH` for "Ibaraki (Osaka)", "Yao" and "Takatsuki"; add the new
+   cities to `scripts/stress_overview.py`'s `BUILT_PREF` (it already lacks 23
+   of the last batch). `scripts/check_macro_labels.py` PROBLEMS 0.
+8. **The phone legend** (owner, 2026-10-12): in `pipeline/map_common.py`, on
+   phones only, cap the open legend at about 40% of the map's height with
+   its own scroll, and fold the transit lines by operator, closed by default,
+   on maps past a line-count threshold set by measuring which maps exceed the
+   cap. Names stay whole and wrap; nothing is truncated (the line-identity
+   rule). Tokyo is the case that prompted it. Re-run
+   `scripts/check_map_attribution.js` at more than one height afterwards.
+9. **Per-category totals in every city's `baseline.json`** (owner,
+   2026-10-11, for Analytics): `storefronts`, `storefronts_retail`,
+   `storefronts_food_service`, `storefronts_personal_services`, counted AFTER
+   the renderer's contact-detail screen. 61 cities carry them; 33 have no
+   `baseline.json`. Size it first: no one shared writer was found.
+10. **ONE full re-render** of every map after steps 3 to 9 and the merge of
+    `legend-dot-georgia` (and place search, if its phone test has passed):
+    `drift_check.py --render-only` through the gate. It covers the held
+    Japanese re-render on `WAVE5_RULES` (every built Japanese city, Toyota
+    first, call 158), Osaka, Tokyo, Funabashi, Ichikawa, Urayasu, Suita and
+    Bucharest. Then `check_render_current.py`, `check_ring_shares.py
+    --write`, `check_all.py`.
+11. **Deploy-verify in lanes** (`docs/review_lane_kit.md` 7b; `scope:
+    city-added` for the 30, `map-chrome` for the legend), then the push
+    (`publish-city`; fetch and merge in the same breath), then **reboot the
+    app** (`app/cities.py` and `app/components.py` both changed). Verify one
+    new city and Bucharest live by hashing the iframe's `srcdoc`.
+12. **After the landing:**
+    - Give the owner the city count read from `app/cities.py` (expected 236:
+      206 and 30), for the "about N cities" lines in his other projects.
+    - Staging moves the master list's cities to Built and republishes.
+    - The downstream note to Visuals and Analytics
+      (`scripts/downstream_changes.py`). **Cluj-Napoca takes Bucharest's hold
+      off public pieces** (owner, 2026-10-12).
+    - The search disclosure sentence on About the Data, once place search
+      lands (approved wording below).
+    - The commercial-use and public-sharing audit (PLAN, "From the portfolio
+      review").
+    - At a later review time: Bucharest's address and name functions to a
+      shared module.
+
+## Approved wording
+
+About the Data, with place search (owner, 2026-10-12): "Search finds stations
+that are open. A station OpenStreetMap still marks as planned or under
+construction is not listed until it opens."
+
+## Open
+
+- **The Global View button on Seattle (Regional)'s map does nothing on the
+  owner's iPhone.** He reached the page from its dot on the Overview, and the
+  same button works on Tokyo's map on the same phone. NOT reproduced: at 375
+  px on the live site (emulated Android, a scripted click) the button was
+  visible, the top element at its centre, and the click reached the
+  Overview. Not tested: a real touch, iOS font metrics. Measured there:
+  Seattle's button row wraps to two rows (`#map-actions` 287 by 72 px in a
+  343 px frame) because its region button reads "← United States West".
+  Unverified lead: on iOS the wrapped row puts the button under another
+  element. Compare `elementFromPoint` across the whole button on Seattle and
+  Tokyo with the touch harness (`data/_tap_harness_2026-10-03/`) and Safari's
+  metrics, and check the other long region names.
+- **Six watch-file stations have no line** (four on Busan's line under
+  construction, Busan's racecourse station, Chicago's 87th Street): stated
+  as null with a reason; a second look only if the owner wants every row
+  filled.
+- **`docs/licence_positions.md` row 2.10 names 12 MHLW cities; at least 28
+  read MHLW's filings** (27 configs name the download, and Tokyo). Left for
+  the audit, which counts every source.
+- **Toulouse and Rennes:** whether step 1's name-level fallback fired; one
+  read-only step 1 run per city.
+- **Five unverified leads** from the PLAN cleanup pass (DECISIONS,
+  2026-10-11, "The PLAN cleanup pass"): confirm one before acting on it.
+
+## Habits that held this week
+
+- `python scripts/push_docs.py` for doc-only pushes; it refuses `app/`,
+  `outputs/` and `pipeline/`.
+- A script file in the scratchpad for any edit with CJK, quotes or escapes;
+  the hook blocks them inline.
+- Counts only when measuring names; never print one.
+- A report-only agent for a wide read, then check each "done" against the
+  entry it cites before acting on it.
+- The permission guard refused `git worktree prune` here; the owner ran it.
