@@ -70,7 +70,12 @@ branch's drafts file.
    deploy), so step 2 above waits for them: Regional-2 re-runs
    Kurashiki's steps 2 and 3 after S17 (and S18 if written) and deletes
    Tottori's hook and re-runs Tottori after S19, on its own branch, and
-   asked for a message as each lands. Each with the Minato control
+   asked for a message as each lands. **The owner's instruction
+   (2026-10-12): message Regional-2 when the changes land on master**: the
+   session titled "Regional-2 build session expanded-heatmap", one message
+   per push, naming the commit and which of S17, S18, S19 and call 182 it
+   carries. East-2 gets the same for S1 and S2 (Kawaguchi is held on S1).
+   Each with the Minato control
    (`screen_japan_join.py minato`, expect 98.0 / 0.2 / 1.8) and a Japan drift
    run through the gate (`--jobs 3`, about 5.3 GB; read
    `heavy_job.py status` first):
