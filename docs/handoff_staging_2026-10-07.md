@@ -63,11 +63,72 @@ fresh `docs/decisions_drafts/staging.md`.
   34"** under the Built table (the owner's ask).
 - **Master list after Oradea's move (call 221): 31 candidates (A 3, B 26, C
   2, D 0), 91 in Band R, 329 discarded, 10 open gaps.** Band D is empty.
-- **Phase 2 is ready and held:** the owner wants it to wait until after this
-  review is on the site and until Cleanup's four viability assessments are
-  with the owner (a back link from site-wide pages, one colour per category
-  meaning, street search on city maps, an offline basemap switcher). Do not
-  open phase 2 sessions without the owner's go.
+- **Phase 2 started on 2026-10-11 at about 21:48 UTC** (owner's go, after the
+  weekly reset): East-2, Kansai-2 and Regional-2 run in worktrees
+  `japan-east-2`, `japan-kansai-2` and `japan-regional-2`, each from master
+  33a0e5d8, on the prompts in `docs/build_plan_2026-10-07.md`. No weekly
+  usage stop; one check-in when the batch finishes. Their batch reports and
+  parked calls come to staging, which relays the calls as S1 and on. **S1
+  was put on 2026-10-11 at 23:12 UTC**: S1-S5 are East-2's five parked calls
+  (S1 Kawaguchi B, private-use glyphs; S2 Kawaguchi A, late-start renewals;
+  S3 Funabashi A, the Keiyo colour; S4 two OSM station spellings; S5
+  Kawaguchi C, "Saitama Stadium Line"), from its batch report at tip
+  bd58afa3 (eleven cities built, nothing pushed). **S6-S13 were put on 2026-10-12 at
+  00:45 UTC**, from Kansai-2's batch report at tip 62283a64 (seven Japanese
+  cities and Cluj-Napoca built, nothing pushed): S6 Osaka A (three Osaka
+  Metro line names), S7 Batch B (page sentences), S8 Cluj A (DSVSA Cluj's
+  terms; staging owes a re-check of data.gov.ro and a read of ansvsa.ro
+  before review time), S9 Cluj B (page sentences), S10 Cluj C (the extended
+  name rule), S11 Cluj D (Bucharest's functions to a shared module), S12
+  Cluj E (osm_tram name_members), S13 Naha (a brief, two licence reads
+  first). Kansai-2's Batch C (macro label widths for three names) is
+  Cleanup's and has no S number. **The owner answered S1-S5
+  in East-2's own chat on 2026-10-11** (East-2's drafts, tip a62db0e7): S1
+  "accepted" (glitched_name treats U+E000-U+F8FF as glitched; not yet
+  implemented, Kawaguchi held until it lands); S2 "shared rule accepted" (a
+  late start with a first permit on or before the as-of stays; not yet
+  implemented, Kawaguchi gains about 100 pins); S3 open ("show me a
+  visual", shown in East-2's chat); S4 "note internally" (the OSM spellings
+  stay); S5 relabelled "Saitama Rapid Railway Line" on East-2's reading of
+  the owner's pointer to the line's Wikipedia entry, to be confirmed.
+  **S14, put 2026-10-12:** who implements S1 and S2. **The owner answered
+  S6-S13 in Kansai-2's own chat on 2026-10-11** (its drafts, tip 149d5486):
+  S6 renamed at Osaka's re-render (Cleanup told); S7 and S9 to review time;
+  S10 kept (Cleanup told of the possible gap on Bucharest's map); S11 and
+  S12 accepted; S13 "yes brief and license reads for two packages"
+  (staging's: `shinki_syokuhin` and `472018_keizoku_syokuhin`, files cached
+  in `data/naha/raw/shinki` and `keizoku`); **S8 open**, the owner asked for
+  the grounds either way. Licence-read agents started 2026-10-12 for
+  `shinki_syokuhin` and for ansvsa.ro with data.gov.ro (S8's grounds); the
+  renewals package's read follows the first (BODIK spacing). **Both Naha reads are
+  back (2026-10-12): PERMITTED WITH CONDITIONS, BODIK copies only** (CC BY
+  4.0 by the city's terms at odcs.bodik.jp/472018/tos/; credit plus a
+  statement of modification; the city site's own copies are all rights
+  reserved; applicant columns in both packages; the renewals package ends
+  2021-05 and lacks 2019-05). **S15:** Naha's cost-recovery clause (第5項).
+  **The ANSVSA read is back:** SILENT on archived and harvested copies only
+  (ansvsa.ro refused curl; data.gov.ro timed out); S8 CLOSED by the owner in Kansai-2's chat 2026-10-11 ("yes treat cluj as bucharest, publish under notice 215"; Kansai-2 tip 40af664c, after its own browser read of www.ansvsa.ro); staging had
+  recommended the owner's own browser look at ansvsa.ro. **Regional-2
+  reported 2026-10-12 02:10 UTC** (tip 6269d4f5, eleven cities, nothing
+  pushed); its calls are **S16-S26:** S16 Okazaki A (Meitetsu red against
+  Toyota's), S17 Kurashiki A (自動販売形態 missing from FORM_RULES, 83
+  pins), S18 Kurashiki B (特殊形態, 8 pins), S19 Tottori A (area-wide rule
+  before the city cut; a config hook stands in), S20 Tottori's Inbi Line
+  against call 180, S21 Matsumoto's 2026-10-01 edition, S22 Kanazawa's
+  notes, S23 Kure's "three in five", S24 gate 3 with no in-city count
+  (Aomori, Tottori, Yamagata, Kure), S25 Aomori's clause 6, S26 the
+  proposals and smaller page notes (review time). Fuji's notice 210 was
+  checked against the portal's §4 on 2026-10-12: it matches the prescribed
+  modified-use form. Cleanup was sent the three sessions' items for its
+  queue on 2026-10-12. Staging owes: Naha's brief, the licence entries in
+  a fresh `docs/decisions_drafts/staging.md`, Matsumoto's and Yamagata's
+  brief figures, the master-list pass after the landing. **The owner settled
+  East-2's rest in East-2's chat** (its drafts, "The owner's follow-up", tip
+  e958ef83): S1 and S2 are Cleanup's (S14 answered for those two; S17 and
+  S19 still open); S3 the Keiyo Line goes red, #C81000 chosen by the owner, applied by Cleanup at
+  review time (#D01010 does not fit Tokyo; #C81000, #C80808 and #B04010 fit
+  all four maps at the floor, dark-label check not run; transit-globe
+  told); S5 "Saitama Rapid Railway Line" stands. **S27, put 2026-10-12:** Yamagata keeps the 10 Zaō Onsen rows the point-donor match placed (Regional-2 recommends keeping them). **The owner answered S14-S27 in Staging's chat on 2026-10-12** (the entry of that date in `docs/decisions_drafts/staging.md`, started fresh that day); S7, S9 and S26 wait for review time. Regional-2, Cleanup and Kansai-2 were sent the answers. **S28, put 2026-10-12:** Kurashiki's 特殊形態 (8 pins: 6 stadium concession stands, 2 rows of one station-plaza market stall) out as a temporary form, or kept. **S29 (the two MLIT address files for Naha) approved and fetched 2026-10-12. Naha's brief is written** (`docs/build_briefs/naha.md`, check 5 of 5); its seven open calls are **S30-S36** (S30 the band, S31 the renewals package, S32 the excess over the census, S33 `mode`, S34 a personal-services probe, S35 the macro view, S36 three page sentences). **The owner answered S28 and S30-S36 on 2026-10-12** (staging's drafts): S28 out as a temporary form; **Naha is Band B, food only** (S30), both packages (S31), no trimming (S32), `mode` light_rail (S33), the personal-services probe running (S34), Kyushu-Okinawa (S35), sentences to review time (S36). Master list: Band B 28, Band C 0. No build session is assigned to Naha. The probe found a barber and beauty list (`472018_ribiyou`), no laundry list; **S37, put 2026-10-12:** download and measure its two files and read its licence. S37 approved; the two files are in `data/naha/raw/ribiyou/` and their measurement and licence read were started. **Naha joins phase 2** (owner in Cleanup's chat, 2026-10-12, DECISIONS on master 9b003a36): Cleanup lands the brief's shared-code items 1 to 5 first; staging pushes the brief, reserves page and notice numbers, writes the prompt into the build plan and gives it to the owner. The two files measured as full registers (beauty 1,069, barbers 287; 1,353 pins, all placed) and the package read PERMITTED WITH CONDITIONS; **S38, put 2026-10-12:** widen Naha's page to Food plus Personal services. Brief pushed to master 2026-10-12 (34df751f). Naha reserved page 307 and notice 217 in `docs/session_roles.md` (next free page 308, notice 218). Owed: Naha's prompt in the build plan once S38 is answered and Cleanup's reader commit is on master. **S38 answered yes: Naha is Food plus Personal services.** Naha's prompt is in `docs/build_plan_2026-10-07.md` (worktree `japan-naha`); the owner starts it once Cleanup's reader commit is on master. Next free: S39.
 - **The live privacy fix (call 209)** landed on 2026-10-07 before the review:
   13 operators' own names withheld on six Japanese maps by the `name_city`
   switch.
