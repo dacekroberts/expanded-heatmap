@@ -35,10 +35,10 @@ Prefecture 6 against 13).
   with recommendations: Osaka A (Osaka's map still labels three Osaka Metro
   lines by their short names), Batch B (page sentences no template covers),
   Batch C (label widths, done), Cluj A to E.
-- **Cluj-Napoca carries an open terms question** (Cluj A): DSVSA Cluj's site
-  reads SILENT, as Bucharest's, but `data.gov.ro` did not answer on
-  2026-10-11 and `ansvsa.ro` was not read. It stays off Visuals' cards until
-  the owner rules.
+- **Cluj-Napoca's terms question is closed** (Cluj A): DSVSA Cluj's site
+  read SILENT, as Bucharest's; the owner ruled on 2026-10-11 to treat it as
+  Bucharest and publish under notice 215 (ANSVSA's site read the same day),
+  so the question is closed.
 - **Shared code this branch changed** (MEASURED controls in the drafts):
   - `pipeline/line_registry.py`: four lines entered in the colours a built
     map already drew (Saito, Tanimachi, Imazatosuji, Nagahori

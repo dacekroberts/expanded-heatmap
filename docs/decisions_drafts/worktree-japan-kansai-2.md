@@ -46,6 +46,13 @@ Named by city and letter; Staging assigns the S numbers when it relays them.
 
 ## Entries
 
+### 2026-10-11 - Cluj-Napoca's terms question closed: treated as Bucharest, published under notice 215 (owner)
+
+- **"yes treat cluj as bucharest, publish under notice 215"** (owner, 2026-10-11), after both licence reads of that day (DSVSA Cluj's own site, then ANSVSA's site and data.gov.ro: SILENT, unchanged). Parked call Cluj A is answered.
+- DSVSA Cluj's lists are used as DSVSA București's are: no license stated, notice 215 displayed by choice in notice 67's approved wording, no endorsement implied, a removal request honoured at once.
+- **Downstream: no open terms question remains on Cluj-Napoca**, so it is no longer held off Visuals' cards and public pieces on that ground (notice 215: caption only). This supersedes the "Open terms question: yes" line in the entry "Cluj-Napoca built" below.
+- What the reads could not establish stays on record in the entry above (data.gov.ro itself, ANSVSA's PDFs, the reuse laws' default), as it does for Bucharest.
+
 ### 2026-10-11 - ANSVSA's own site and data.gov.ro read for Cluj-Napoca and Bucharest: still SILENT (licence-read agent; the owner asked for the read)
 
 - **`www.ansvsa.ro`, read in the browser 2026-10-11** (a script request got 403 from its firewall; the browser's "Verifying your browser" page cleared by itself, nothing clicked or solved): no terms-of-use, reuse or open-data page in the home page's link tree; `/termeni-si-conditii/` and `/date-deschise/` do not exist. Its footer is the bare rights line the county sites carry (© 2016). Its privacy policy (updated 2019-03-07) says ANSVSA and DSVSA staff run the county sites, covers visitors' personal data only, and names Law 544/2001 and Law 233/2002, not the reuse laws. Its national index of registered retail units is a bare list of 42 county links, Cluj's and Bucharest's among them, with no wording about reuse.
