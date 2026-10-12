@@ -100,7 +100,29 @@ fresh `docs/decisions_drafts/staging.md`.
   in `data/naha/raw/shinki` and `keizoku`); **S8 open**, the owner asked for
   the grounds either way. Licence-read agents started 2026-10-12 for
   `shinki_syokuhin` and for ansvsa.ro with data.gov.ro (S8's grounds); the
-  renewals package's read follows the first (BODIK spacing). Next free: S15.
+  renewals package's read follows the first (BODIK spacing). **Both Naha reads are
+  back (2026-10-12): PERMITTED WITH CONDITIONS, BODIK copies only** (CC BY
+  4.0 by the city's terms at odcs.bodik.jp/472018/tos/; credit plus a
+  statement of modification; the city site's own copies are all rights
+  reserved; applicant columns in both packages; the renewals package ends
+  2021-05 and lacks 2019-05). **S15:** Naha's cost-recovery clause (第5項).
+  **The ANSVSA read is back:** SILENT on archived and harvested copies only
+  (ansvsa.ro refused curl; data.gov.ro timed out); S8 still open, staging
+  recommended the owner's own browser look at ansvsa.ro. **Regional-2
+  reported 2026-10-12 02:10 UTC** (tip 6269d4f5, eleven cities, nothing
+  pushed); its calls are **S16-S26:** S16 Okazaki A (Meitetsu red against
+  Toyota's), S17 Kurashiki A (自動販売形態 missing from FORM_RULES, 83
+  pins), S18 Kurashiki B (特殊形態, 8 pins), S19 Tottori A (area-wide rule
+  before the city cut; a config hook stands in), S20 Tottori's Inbi Line
+  against call 180, S21 Matsumoto's 2026-10-01 edition, S22 Kanazawa's
+  notes, S23 Kure's "three in five", S24 gate 3 with no in-city count
+  (Aomori, Tottori, Yamagata, Kure), S25 Aomori's clause 6, S26 the
+  proposals and smaller page notes (review time). Fuji's notice 210 was
+  checked against the portal's §4 on 2026-10-12: it matches the prescribed
+  modified-use form. Cleanup was sent the three sessions' items for its
+  queue on 2026-10-12. Staging owes: Naha's brief, the licence entries in
+  a fresh `docs/decisions_drafts/staging.md`, Matsumoto's and Yamagata's
+  brief figures, the master-list pass after the landing. Next free: S27.
 - **The live privacy fix (call 209)** landed on 2026-10-07 before the review:
   13 operators' own names withheld on six Japanese maps by the `name_city`
   switch.
