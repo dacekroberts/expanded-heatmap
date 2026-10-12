@@ -249,6 +249,19 @@ Detail files: [japan](docs/plan_detail/japan.md),
     group folded on a phone. **Known and left:** Chicago's "Lake Shore
     Dr" lists the synagogue above the street. **Not yet tested live:**
     Tokyo and Vancouver.
+  - **Owner's rulings on the rollout, 2026-10-12 (afternoon):** wave 1
+    (English, 34) runs in its own session on branch `search-wave1`, from
+    `handoff_search_wave1.md`. **A small wave follows it for the travel
+    app's seven unbuilt pilot cities** (New York is in wave 1; Osaka,
+    Amsterdam, Strasbourg, Avignon, Mendoza, Florence), ahead of their
+    language waves; "italian list early is okay", so Italian's word lists
+    are built for Florence then. **The outside model is a second net
+    beside the `place-read` agent, never the first pass, and may be used
+    on every wave** ("second net is okay, we can include net for all
+    waves if we want"): its trial on the 19 built cities flagged 402 of
+    691 removed rows and 4.4% of kept ones, strong in English, Korean,
+    Chinese and Japanese, and kept three named homes it had the rule for.
+    The schema number and the id side file are built at wave 1's landing.
   - **Idea for the next landing (owner, 2026-10-12): a button that
     returns a map to its starting view.** After a search the map stays
     at the found place and nothing restores the city-wide view (the
