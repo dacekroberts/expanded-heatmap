@@ -229,6 +229,42 @@ good. 5. the relabel sounds good".
 
 ## Entries
 
+### 2026-10-12 - East-2 after master's S1 and S2: Kawaguchi re-run to 5,312 storefronts and released; three more maps lose a boxed character
+
+- **Master merged into the branch (c4399b15), clean**: Cleanup's S1 (a name
+  holding a private-use character shows the pin's classification), S2 (a
+  late start whose first permit is on or before the list's date is a renewal
+  and stays), S17 to S19, call 182 and the Naha reader work (db0c4e0c).
+- **Kawaguchi, re-run (steps 2 and 3): 5,312 storefronts (Food service
+  3,390, Food shops 1,922), 56.1% in a ring (2,980).** Exactly the figure
+  measured with the rule off on 2026-10-11. All 142 late starters are kept as
+  renewals (`permits_late_start_renewal=142`, `permits_late_start=0`): the 41
+  monthly rows carry a first permit on or before 2026-07-31 too. Other
+  counters: not a premises 437, out by rule 800 (311 institutional catering,
+  243 vending, 233 non-counter types, 11 mail order, 2 temporary), 5,792
+  storefront rows of which 5,727 block, 59 town centre, 6 unplaced; 474
+  repeat rows dropped; names withheld 10; factory share 48 of 358 (13.4%).
+  On the map 99.0% block, 1.0% town centre.
+- **The glyphs (S1):** Kawaguchi's map holds 0 private-use characters; its
+  three trade names carrying one show their permit type. **Both of
+  Kawaguchi's holds are cleared.** Privacy pass re-run: 0; 10 pins show their
+  permit type.
+- **Three other East-2 maps held such a character and had not been caught at
+  build:** Koshigaya (4 names, 3 characters in the committed map), Fujisawa
+  (6 names, 4) and Funabashi (1, 1). The parked call named Kawaguchi alone
+  because its subagent looked; the other ten were not measured then. All
+  three now render 0. No count changed in any of them.
+- **The ten-city drift check after the merge:** Sagamihara, Matsudo,
+  Ichikawa, Urayasu, Sakura, Yachiyo and Ichihara identical; Koshigaya,
+  Fujisawa and Funabashi differ in `heatmap.html` only (the glyph rule),
+  every baseline figure unchanged. So the 壼 variant, S17 to S19 and call 182
+  move nothing in East-2's cities.
+- **Docs:** Kawaguchi's page comment, exclusions section, table B row and
+  privacy row carry the new figures (the late-start bullet is gone from Left
+  out; Counted says the 142 are kept); the three cities' Names-not-shown
+  paragraphs gain the unreadable-character line. Ring shares, macro facts and
+  rendered surfaces regenerated.
+
 ### 2026-10-11 - Ichihara built on the Chiba module, personal services only, the Kominato line drawn with its rural stretch named
 
 - **Ichihara built (page 250, notice 197), personal services only (Band B),

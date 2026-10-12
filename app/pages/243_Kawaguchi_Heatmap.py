@@ -49,8 +49,8 @@ render_data_age("Kawaguchi")
 # the withheld addresses, the trains that pass without stopping) are
 # proposals in docs/decisions_drafts/worktree-japan-east-2.md. The dates are
 # the list's own (config.SOURCE_AS_OF); about one in six is the 1,316 entries
-# of 8,364 whose address the city withholds; the ring share, 56.4% (2,939 of
-# 5,212), is step 3's.
+# of 8,364 whose address the city withholds; the ring share, 56.1% (2,980 of
+# 5,312), is step 3's.
 st.markdown(
     """
 **The lines**

@@ -4943,6 +4943,8 @@ a new number among them).
 
 **Names not shown** - 1 pin whose trade name is the operator's own name shows
 its permit type.
+4 more whose trade names hold a character the publisher's file cannot render
+show their permit type.
 
 **Stations.** The lines with a station in the city are drawn, cut at the city
 line.
@@ -5030,6 +5032,8 @@ ministry's own coordinates.
 **Names not shown** - 3 pins whose trade name is the operator's own name
 show their permit type. The city's list of individual operators names no
 operator, so there only the form of the trade name can be tested.
+6 more whose trade names hold a character the publisher's file cannot render
+show their permit type.
 
 **Stations.** The lines with a station in the city are drawn, cut at the city
 line.
@@ -5046,30 +5050,31 @@ line.
 - Every shop that is not a food shop: Japan has no general business license.
 - 1,316 entries whose address the city withholds.
 - New premises of June 2026: the city's list has no entries for that month.
-- 436 food trucks, stalls and other filings with no fixed premises, 10 rows
+- 437 food trucks, stalls and other filings with no fixed premises, 10 rows
   addressed to a whole area and 9 addressed in another municipality.
-- 302 school, hospital and staff canteens, 243 vending machines, 11
+- 311 school, hospital and staff canteens, 243 vending machines, 11
   mail-order businesses and 2 rows marked temporary or mobile.
-- 232 rows of food manufacturing other than bakeries and confectioners (菓子)
+- 233 rows of food manufacturing other than bakeries and confectioners (菓子)
   and delis (そうざい), and other permit types that are not a counter.
-- 142 permits whose term starts after the date their list covers (most are
-  renewals of a premises the list already holds).
 
 **Counted** - the permits and notifications in the city's food list on
 March 31, 2026, kept whole, with the new premises it listed for April, May
-and July 2026. The March list holds 4,281 restaurants, against 4,259 in the
-national count at the end of March 2025. 47 of the 350 bakery, confectioner
+and July 2026; 142 permits renewed for a term that starts after their
+list's date are kept, each being a premises already open. The March list
+holds 4,281 restaurants, against 4,259 in the national count at the end of
+March 2025. 48 of the 358 bakery, confectioner
 and deli rows (13.4%) have a trade name that reads as a factory; they are
 kept (owner, 2026-09-24).
 
-**One pin per premises** - 443 repeat permits are shown once.
+**One pin per premises** - 474 repeat permits are shown once.
 
 **Not placed** - 6 rows (0.1%): 3 at addresses MLIT's files do not hold and
-3 addressed in Tokyo. Another 53 sit at their town's center.
+3 addressed in Tokyo. Another 55 sit at their town's center.
 
 **Names not shown** - the city masks 1,350 trade names; those on the map
-show their permit type, as do 8 pins whose trade name is the operator's own
-name.
+show their permit type, as do 10 pins whose trade name is the operator's own
+name and 3 whose trade name holds a character the city's file cannot
+render.
 
 **Stations.** The lines with a station in the city are drawn, cut at the city
 line.
@@ -5098,6 +5103,8 @@ national count at the end of March 2025. The registers record no closures.
 
 **Names not shown** - 6 pins whose trade name is the operator's own name, or
 reads as a person's name alone, show their register type.
+1 more whose trade name holds a character the publisher's file cannot render
+shows its register type.
 
 **Stations.** The lines with a station in the city are drawn, cut at the city
 line.

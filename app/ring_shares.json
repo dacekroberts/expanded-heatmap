@@ -1032,7 +1032,7 @@
  "koshigaya": {
   "in_ring": 2934,
   "all": 4092,
-  "map_blob": "a0b561da102a5cb905804c095f33b136237b201a"
+  "map_blob": "6e4f7b2341cef8a41931c94717f6116b62e19afd"
  },
  "sagamihara": {
   "in_ring": 3339,
@@ -1042,17 +1042,17 @@
  "fujisawa": {
   "in_ring": 3821,
   "all": 4947,
-  "map_blob": "0730d36fe4223851e631000bf2fbec5bbad5011e"
+  "map_blob": "d3e7943fda6f5e11c71c14684bbefabc6adab1a5"
  },
  "kawaguchi": {
-  "in_ring": 2939,
-  "all": 5212,
-  "map_blob": "f1691975c5670a6e802185f5c522acd65681bee7"
+  "in_ring": 2980,
+  "all": 5312,
+  "map_blob": "8d3dcf38c3514c77b14cd82f2076857589e45a93"
  },
  "funabashi": {
   "in_ring": 1234,
   "all": 1473,
-  "map_blob": "ea5a88fa76675aac289da092ce713e2751a54b22"
+  "map_blob": "14d6852a1bbcc03c08693a3941af0e7529a4f019"
  },
  "matsudo": {
   "in_ring": 1000,
