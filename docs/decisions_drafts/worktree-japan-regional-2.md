@@ -6,6 +6,22 @@ Aomori, Matsue, Fuji, Matsumoto, Tottori, Yamagata, Kure and Kurashiki, on
 pages 258-267 and 306 and notices 205-214 and 216. Newest first; Cleanup folds
 these into `DECISIONS.md`.
 
+## For Cleanup, raised by the owner (2026-10-11)
+
+- **Call 182's hook belongs in shared code (owner: "call 182 bring to the
+  surface for cleanup").** Call 182 (owner, 2026-10-06) has the name rule
+  read MHLW's 法人名 through the permit match and withhold the matching city
+  trade names. Shared `japan_step2` has no permit-match mechanism, so
+  Yamagata's builder implemented it in `pipeline/yamagata/config.py`'s
+  `source_rows`: it reads MHLW's 法人名 in memory by permit number and grant
+  date and carries only the yes or no answer on the city's row (Kyoto's
+  `name_is_operator` key). It flags 3 rows where the brief counted 4, and a
+  looser match finds no fourth. No built city has a twin of this hook. For
+  Cleanup: review the hook, move the permit match into `japan_step2` (with
+  the Minato control and a drift run of every Japanese city), say whether
+  the fourth row matters, then delete the city-local copy. Yamagata's
+  privacy pass prints 0 as built.
+
 ## Parked calls
 
 Each city's own parked calls and proposals are under its entry below
@@ -69,6 +85,26 @@ Each city's own parked calls and proposals are under its entry below
 - `pipeline/line_registry.py`: `jr-central-tokaido-line` gains Shizuoka.
 
 ## Changes
+
+### 2026-10-11 - Yamagata: the owner's three answers (the update list, call 182 to Cleanup, Zao Onsen)
+
+- **"yamagata: let's add to the list of cities scheduled for updates"**
+  (owner, in the Regional-2 chat): Yamagata stays built on the August 31,
+  2026 list its brief measured, and the September edition the city published
+  on 2026-10-10 is a scheduled update, not a rebuild now. Added to
+  `docs/plan_detail/city_watch.md` ("Yamagata: the September food list")
+  with a pointer in `PLAN.md`. Yamagata's parked call 1 is answered.
+- **"call 182 bring to the surface for cleanup"** (owner): the config hook
+  that implements call 182 is raised at the top of this file, under "For
+  Cleanup", and goes in the batch report. Yamagata's parked call 3 is
+  answered: Cleanup reviews it and moves it to shared code.
+- **"zao onsen can be removed if buggy"** (owner): the 23 rows at 蔵王温泉
+  whose 小字 addresses the shared join misses stay off the map, as built,
+  and no shared-code change is owed for them; they are counted under Not
+  placed in What Is Excluded. The 10 rows the point-donor match placed there
+  stay: each sits at the ministry's own coordinates for the same premises,
+  not at a guessed point. Yamagata's parked call 2 is answered. Nothing was
+  re-run: the map already matches this answer.
 
 ### 2026-10-11 - Yamagata built, the city's food-permit list of August 31, 2026 with MHLW's notifications, food only
 

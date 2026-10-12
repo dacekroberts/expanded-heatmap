@@ -285,6 +285,8 @@ decisions inside a build are named in its brief.
   2026-09-30). `docs/plan_detail/data_and_disclosure.md`, "What Is Excluded's opening claims".
 - [ ] ⏰ **Philadelphia: 11th St back on 2027-08-30** (SEPTA). `docs/plan_detail/city_watch.md`,
   "Philadelphia: 11th St".
+- [ ] ⏰ **Yamagata: rebuild on the September 2026 food list** (owner, 2026-10-11; the city
+  replaces its file monthly). `docs/plan_detail/city_watch.md`, "Yamagata: the September food list".
 - [ ] **Sacramento's Green Line: check from 2026-10-15** (due back by
   mid-October 2026). `docs/plan_detail/city_watch.md`, "Sacramento's Green Line".
 

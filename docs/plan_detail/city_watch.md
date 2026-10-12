@@ -180,3 +180,17 @@ This is open work, not a record: update an item here as it moves, and send a fin
   page's sentence. OSM cannot signal the reopening, so this date is the
   guard. When OSM catches up, retire `config.ADDED_STATIONS` (Dos Rios) and
   `UNNAMED_STOP_NAMES` (Morrison Creek); step 1 stops on its own then.
+
+## Yamagata: the September food list
+
+- [ ] **Yamagata: rebuild on the city's newer food list (owner, 2026-10-11:
+  "let's add to the list of cities scheduled for updates").** The map is
+  built on the list of 2026-08-31, the edition its brief measured. On
+  2026-10-10 the city replaced it with `062014_syokuhin_list_20260930.csv`
+  and the August URL answers 404; the city renames the file every month. To
+  update: `python pipeline/yamagata/fetch_sources.py city --force` reads the
+  current link from the dataset page (`config.SOURCE_LINKS`), under a new
+  file name; then a new `FOOD_AS_OF` and `TERM_AS_OF`, every figure in the
+  config, page, notice and docs rows re-measured, the privacy check and the
+  drift baseline again. MHLW's file is re-pulled with it, so both lists
+  carry one month.
