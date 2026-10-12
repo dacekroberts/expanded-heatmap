@@ -57,7 +57,8 @@ branch's drafts file.
     built: stricter notability for monuments and galleries (measured to
     remove about 420 rows, two well-known Seoul landmarks among them),
     and a stronger station highlight on phones.
-  - `basemap` (tip `16acf351` on 2026-10-12, master merged in): the
+  - `basemap` (tip `634f0420` on 2026-10-12, master merged in as of
+    `99390a4b`, `check_all` 52 of 52 there by its own report): the
     site's partial Travel view. **The owner wants it finished (2026-10-12),
     and its go-live call is his, made at review time** (its drafts,
     2026-10-08). See "The basemap" below; an earlier version of this note
@@ -189,10 +190,13 @@ entries first. As that file records:
   (`check_render_current` 206 of 206 on the branch). Go-live is one line
   and one re-render of the maps. `scripts/check_travel_packs.py` is in
   `check_all`.
-- **Packs:** 192 `.pmtiles` in the main checkout's
-  `data/_basemap_build/host_upload_2026-10/` (1.9 GB, counted
-  2026-10-12), with `MANIFEST.csv`, the libraries and the glyphs. Nothing
-  is uploaded anywhere.
+- **Packs:** in the main checkout's
+  `data/_basemap_build/host_upload_2026-10/`, with `MANIFEST.csv`, the
+  libraries and the glyphs. Cleanup counted 192 `.pmtiles` (1.9 GB) on
+  2026-10-12, mid-run; the basemap session reports 206 of 206 built
+  cities since (its drafts' top entry, 2026-10-12, names the 14 and
+  why). Count the folder before relying on either. Nothing is uploaded
+  anywhere.
 - **Wording P1 to P6 approved** (owner, 2026-10-11); none applied: each
   waits for the host's address. P5 goes into notice 1 beside CARTO's
   sentence at go-live, with its "keeps no record" clause confirmed
@@ -203,12 +207,24 @@ entries first. As that file records:
 1. **The owner's:** a Cloudflare account and the host (R2 behind an owned
    domain against the free Worker, compared live); the upload; the
    go-live call. Claude creates no account and enters no credential.
-2. **The missing packs.** 206 cities and 192 packs: the basemap session
-   names the 14 and why. Phase 2's 30 cities each need a pack and a row in
-   the Travel table or `ENGLISH_ONLY`: **the pre-push check fails on the
-   merged tree until each new city is placed**, by design. A pack build is
-   a heavy job (about 4 GB, 2 to 2.5 min; three lanes at most, one gate
-   slot left free); a new Geofabrik extract is the owner's download.
+2. **Phase 2's packs and table rows.** The basemap session is building
+   the 30 packs (owner's word in its chat, relayed; started 2026-10-12,
+   no new download). **Naha is the 31st and was not in that list: tell
+   it once Naha's build exists.** The table rows are Cleanup's, written
+   in the integration worktree with the merge that brings the maps
+   (`check_travel_packs.py` also fails a row with no built map, so they
+   cannot sit on the basemap branch): the 29 Japanese folder names under
+   "ja" and `cluj_napoca` under "ro" in `pipeline/travel_packs.py`,
+   plus Naha; the basemap session offered the exact lines. **The
+   pre-push check fails on the merged tree until each new city is
+   placed**, by design. A pack build is a heavy job (about 4 GB, 2 to 10
+   min, median 3.5; three lanes at most, one gate slot left free).
+   Its `map_common.py` edits, for the conflict read: imports,
+   `add_pin_layer`, `build_legend` and `LEGEND_FULL_HTML`,
+   `TRAVEL_MODE_SCRIPT`, the OpenBasemap block, `render_heatmap`;
+   `_THEME_TOGGLE_TEMPLATE`, `_LEGEND_CSS` and `LEGEND_HTML` untouched,
+   so the phone legend cap meets it only inside `build_legend`. It
+   expects the landing to ship with the switch off (no host yet).
 3. **Merge order:** `basemap` changes `pipeline/map_common.py` (five
    conflicts with master resolved on the branch, both sides kept). Merge
    it into the integration worktree BEFORE writing S1 and the phone
