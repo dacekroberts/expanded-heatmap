@@ -47,9 +47,16 @@ marked TO BUILD name a script that does not exist yet.
    39.2 MB raw, about 2 MB a city; 237 at that rate is roughly 475 MB, an
    extrapolation. `place_search_review.py sizes` gives the measured figures;
    the wave order is the owner's, on that number.
-2. **Scaffold the wave in one script** (TO BUILD,
-   `scripts/place_search_scaffold.py <city> ...`): each city's `PLACE_*`
-   block and its step2b, the map step's argument and the page's `search=`.
+2. **Scaffold the wave in one script** (built 2026-10-12,
+   `scripts/place_search_scaffold.py --plan <plan.json> [--write]`): each
+   city's `PLACE_*` block and its step2b, the map step's argument and the
+   page's `search=`. The plan file is a session's: per city its relation
+   ids, languages and fold (the script's docstring has the shape); the
+   script decides nothing and refuses a city that does not fit the pattern.
+   Run it without `--write` first. **A scaffolded city fails
+   `check_place_search.py` until its fetch, index step and render are done,
+   so scaffold a wave on its own branch and push nothing until the wave is
+   built.**
    The area is the relation step 1 already uses; a regional map lists every
    station municipality (`outputs/<city>/station_municipalities.csv`), and
    `scripts/check_place_search.py` H fails the city if the index stops short

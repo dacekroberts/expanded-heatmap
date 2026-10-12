@@ -54,10 +54,17 @@ sentence quoted in its own language, and the date read.
 
 ## The cheap path
 
-1. **Count the distinct sources first** (TO BUILD,
-   `scripts/commercial_use_sources.py`): from `outputs/<city>/provenance.json`
-   and the country files, one line per source with the cities and layers
-   that use it. The audit's size is this count, not the city count: one
+1. **Count the distinct sources first**
+   (`scripts/commercial_use_sources.py`, built 2026-10-12): from
+   `outputs/<city>/provenance.json`, one line per source with the cities and
+   layers that use it. **Its count is a lower bound on cities and an upper
+   bound on licences** (measured 2026-10-12: 285 dataset pages on 148 hosts;
+   17 cities have no provenance file and 17 more record OpenStreetMap alone,
+   so their registers are counted from `docs/licence_positions.md` and the
+   country files by hand; one portal's many dataset pages are usually one
+   licence). The script prints each of those gaps; read them, do not trust
+   the total. Its source ids are the `source` values of the verdicts file.
+   **One first-pass request per stored document, not per source.** The audit's size is this count, not the city count: one
    national register or one portal licence covers every city on it. Report
    the count to the owner before reading anything.
 2. **Settle the standard licences from the table below, with no read.** The
