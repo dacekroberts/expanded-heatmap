@@ -187,6 +187,86 @@ or published; every proposal waits for the owner.
   2026-10-11 reset; the other later items wait until after go-live. The
   owner paused the branch until Sunday 2026-10-11.
 
+### 2026-10-12 - The live host tested from the app on port 8501: Travel loads for Seattle, London and Tokyo with no CORS error; the exact go-live edits (measured; edits not applied)
+
+- **The host** (owner, via Cleanup; `DECISIONS.md` on master, 2026-10-12):
+  `https://files.dacekroberts.dev`, an R2 bucket behind the owner's
+  subdomain, 237 packs uploaded by the owner. It answers only the live app's
+  origin and localhost or 127.0.0.1 on ports 8501 and 8000.
+- **Read from here with curl (2026-10-12):** a range request on a pack
+  returns 206 with `content-range`; with `Origin: http://localhost:8501` or
+  `http://127.0.0.1:8501` it adds `Access-Control-Allow-Origin` for that
+  origin, `Vary: Origin` and exposes `ETag`; with another origin, or none,
+  no CORS header comes back (so a browser on any other site is refused, as
+  the owner set it); the preflight allows GET and HEAD with `range` and
+  `if-match`; no response sets a cookie. `lib/basemaps.js`, a glyph range,
+  a license file, `OFL.txt` and `MANIFEST.csv` all return 200, and the live
+  manifest is byte-identical to the folder's (same MD5).
+- **The owner's browser test** (`app_travel_check.mjs`): Seattle, London
+  and Tokyo rendered with `PACK_HOST` set for that process only, into a
+  scratch copy of the app (the repository's `outputs/` untouched, nothing
+  committed), the lean app on `127.0.0.1:8501`, headless Edge at 1280x900
+  and 375x812. In all six runs the map's frame was found, Travel switched
+  on, and the GL map drew roads and labels in light and in dark, with the
+  Business view's filter back afterwards; Tokyo's JA pill added labels (107
+  to 147 on desktop). **Requests to the host: 5 library files 200, 5 to 7
+  pack range reads 206, 3 or 4 glyph files 200 per run; no failed request,
+  no CORS error, no cookie.** The only console errors are Streamlit's own
+  two 404 probes for `/<page>/_stcore/health` and `host-config`, which
+  every page of the app logs with or without Travel. Screenshots and the
+  result file: `data/_basemap_build/shots_live_host_2026-10-12/`.
+- **The public README was the internal draft.** The file at `/README.md`
+  still read "INTERNAL DRAFT, not published". `make_upload.py` now writes
+  the public text (P6, approved): what the folder holds, the ODbL sentence,
+  the Noto and software lines. The owner replaces that one file on the
+  host.
+- **THE EXACT EDITS FOR GO-LIVE (for the integration tree, with the one
+  full re-render; the owner sees the `PACK_HOST` diff before it is
+  committed and is asked before anything reaches the deployed app).**
+  1. `pipeline/travel_packs.py`: `PACK_HOST = None` becomes
+     `PACK_HOST = "https://files.dacekroberts.dev"`. It must land in the
+     same commit as the re-rendered maps: `check_travel_packs.py` fails a
+     host that is set while the committed maps lack the switch, and the
+     reverse.
+  2. The same file, phase 2's rows: the 30 Japanese folder names under
+     `"ja"`, `cluj_napoca` under `"ro"` (the resume note lists them).
+  3. P5, appended to notice 1 in `app/components.py` after CARTO's
+     sentence: "Choosing Travel on a city map loads that city's map file
+     and the map software from files.dacekroberts.dev. This project sets no
+     cookies there and keeps no record of those requests. The files are
+     delivered through Cloudflare, which processes requests under its own
+     privacy policy. Nothing is loaded from that address until a visitor
+     chooses Travel; the choice is remembered on the visitor's own device,
+     so the next map opens the same way." (The owner's clause replaces the
+     draft's sentence about Cloudflare receiving the IP address; an `app/`
+     change, so the reboot question applies.)
+  4. P4, in `docs/data_sources.md`: the internal block "The Travel
+     basemap (pilot, not published)" loses its internal markers and its
+     first paragraph, and opens with: "**The Travel basemap.** Each city
+     map has a second base layer, Travel. Its map tiles are built by this
+     project from OpenStreetMap data (© OpenStreetMap contributors, Open
+     Database License 1.0) with the open-source Protomaps basemap builder,
+     and stored as one file per city. Those files are offered under the
+     same license: they, and the list of OpenStreetMap extracts each was
+     built from, are at https://files.dacekroberts.dev (README.md and
+     MANIFEST.csv). Map labels are drawn in Noto fonts (SIL Open Font
+     License 1.1); Noto is a trademark of Google LLC. The map is drawn with
+     open-source software (MapLibre GL, maplibre-gl-leaflet and PMTiles);
+     each license is published beside the files, at
+     https://files.dacekroberts.dev/lib/licenses/. The map style is adapted
+     from Protomaps' basemap style (BSD 3-Clause) and is this project's own
+     version, not a Protomaps product." Its Cloudflare bullet becomes: R2
+     behind the owner's subdomain, no Worker, terms accepted 2026-10-11,
+     origins limited to the app and local test ports.
+  5. After the re-render: `check_travel_packs.py`, `check_render_current`,
+     `scripts/check_map_attribution.js` at more than one height, and a
+     `deploy-verify` `scope: map-chrome` with Travel switched on in a few
+     cities, before the push.
+- **The owner's boundaries for this host** (relayed by Cleanup): no
+  credential, token or rclone config in the repository; no transit-globe
+  origin or reference on this host; no analytics or monetization. Nothing
+  on this branch names any of them.
+
 ### 2026-10-12 - All 206 Travel packs built and in the upload folder; Avignon's pilot pack was missing its west bank; what phase 2's 30 cities need (built and measured)
 
 - **206 of 206 packs built, none failed** (`build_packs.py`, three lanes at
