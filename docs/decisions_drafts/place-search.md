@@ -4,6 +4,15 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-11 - Place search: the owner's answers to the six remaining questions (owner, branch)
+
+1. **Wave order: "approved after size projection".** The order in `docs/handoff_place_search_rollout.md` stands once the projected whole-site size has been put to the owner; no stage 2 batch before that.
+2. **Suggestion tuning: "tune after rollout".** The caps and ordering for streets and places stay as they are until the rollout is complete, then are tuned against real search terms. The work-in-progress mark stays on the code until then.
+3. **Corner credit: "acceptable now looks good".** Closed: the OpenStreetMap credit in the search box stands as built.
+4. **Cities menu: "since search is on left below layer control it reads okay, we can keep cities where it is for now".** Closed for now: no move.
+5. **"Download this index" and the intersections file: "what's your take?"** Recommendation put to the owner, not built: link both. The intersections file is part of the same database made from OpenStreetMap, and ODbL's offer of the derived database is cleaner when it covers all of it; the cost is one more short link in the credit. Waiting for a yes.
+6. **Unfindable lines: "city pages sounds good, if the list is numerous we should do a table on one of the data pages (what is here and what isnt for example)".** Each city's page names its lines the search cannot find; if the site-wide list is long, one table on a data page instead. Decided when the rollout shows how many there are. The wording is page text, so it goes through the approved templates or a proposal at review time.
+
 ### 2026-10-11 - Place search: the last phone check passed; the loosened keyword gate confirmed (owner, branch)
 
 - **"loosened oct 7 call okay. phone looks great."** (owner, on a phone, São Paulo, branch tip 528e9c95): the map's own stations and lines answering from the first letter is approved as a change to the call of 2026-10-07, and the found place's name label, the marker, the picked line's fade and outline, and the closing search button are all seen on a phone.
