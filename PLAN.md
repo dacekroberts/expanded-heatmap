@@ -273,6 +273,10 @@ Detail files: [japan](docs/plan_detail/japan.md),
     outside net's finds built", then "A registered code is a name", which
     put back Seattle's 27 buildings and Prague's 14 stations).
     The schema number and the id side file are built at wave 1's landing.
+    **Held for that landing (owner, 2026-10-12): two Surrey parcels still
+    in Vancouver's live index**, "122l Greenbelt" and "15-H - Greenbelt",
+    whose codes the pattern does not match. Drop both by id in
+    `PLACE_DROPPED`, re-render Vancouver once, in the same push.
   - **Idea for the next landing (owner, 2026-10-12): a button that
     returns a map to its starting view.** After a search the map stays
     at the found place and nothing restores the city-wide view (the
