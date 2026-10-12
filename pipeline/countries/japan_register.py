@@ -56,7 +56,10 @@ VARIANTS = str.maketrans({"曾": "曽", "靱": "靭", "﨑": "崎", "ヶ": "ケ"
                           "淵": "渕", "秡": "祓",
                           # Kōchi's misses (2026-10-02): its lists write the town 高埇
                           # (U+57C7, outside JIS X 0208); MLIT's cp932 file writes 高埆
-                          "埇": "埆"})
+                          "埇": "埆",
+                          # Naha's misses (2026-10-12): its lists write 壺屋 with 壼 (U+58FC)
+                          # on 2 rows; no built city's address carries it (drift, that date)
+                          "壼": "壷"})
 # Kōchi's: MHLW writes the same town in kana, 高そね (6 register rows unplaced
 # before; the brief's measurement)
 STRING_VARIANTS = (("鍛治", "鍛冶"), ("廻リ", "廻り"), ("高そね", "高埆"))
@@ -442,7 +445,11 @@ TYPE_COLS = ("業種名", "業種分類", "業種情報公開名称", "営業の
              # 営業種目 (without it every row read type "" and none was
              # bucketed); Yokkaichi's laundry list names its kind 区分, whose
              # 無店舗取次店 rows are not premises
-             "営業種目", "区分")
+             "営業種目", "区分",
+             # Naha's monthly files (2026-10-12): 営業所種類 in 2022-12 (84
+             # in-term rows read no type without it), 営業の種目 in 2018-03 and
+             # 2018-06. Last, so a built city's earlier type column still wins
+             "営業所種類", "営業の種目")
 
 # The Japan foundation's type spellings (2026-10-07), read only by a city with
 # the "type_cols5" rule (WAVE5_RULES), since Matsuyama's built laundry list
@@ -494,10 +501,13 @@ NAME_COLS = ("屋号", "施設名称", "営業施設名称、屋号又は商号"
              # Tsu's, Fukushima's and Ōita's food lists, Morioka's, Fujisawa's,
              # Aomori's, Fuji's laundries
              "営業所名", "施設＿名称（屋号・商号）１", "営業所名称１", "店名", "営業所屋号", "営業所屋号名称",
-             "屋号商号", "営業所名1", "施設の名称、屋号", "クリーニング所名称")
+             "屋号商号", "営業所名1", "施設の名称、屋号", "クリーニング所名称",
+             # Naha's 2020-08 file (2026-10-12), a slip for 営業所名称: 86 rows read
+             # no trade name without it
+             "営業所名所")
 
 
-def xlsx_rows(data, sheet=None, merged_header=False):
+def xlsx_rows(data, sheet=None, merged_header=False, unnamed_after=None):
     """Every sheet that has an address column, header found by that column (a
     sheet may open with title rows). Summary sheets without one are skipped.
 
@@ -507,7 +517,15 @@ def xlsx_rows(data, sheet=None, merged_header=False):
     several columns names only its first, so the unnamed columns after it are
     joined into it - Toyama's food workbook writes 施設住所 over municipality,
     town, number and building (H1:K1), and read cell by cell its address was
-    「富山市」 alone. Opt-in, since a built city's unnamed column is not a merge."""
+    「富山市」 alone. Opt-in, since a built city's unnamed column is not a merge.
+
+    `unnamed_after` ({named header: name to give}): an unnamed header cell
+    directly after the named one takes the given name. Every other unnamed
+    column still lands on the one key "", the last one winning. Naha's
+    2019 to 2025 files keep 種目 in an unnamed column beside 営業の種類
+    (3,405 rows; without it hostess venues, vending machines and caterers
+    read as restaurants, 2026-10-12). Opt-in, and by name, so an unnamed
+    operator column is never given a key."""
     import openpyxl
     wb = openpyxl.load_workbook(io.BytesIO(data), read_only=True, data_only=True)
     sheets = wb.worksheets
@@ -523,7 +541,7 @@ def xlsx_rows(data, sheet=None, merged_header=False):
             if head is None:
                 names = [_header(c) for c in r]
                 if any(c in ADDR_COLS for c in names):
-                    head = names
+                    head = _name_unnamed(names, unnamed_after)
                 continue
             if not any(cells):
                 continue
@@ -540,6 +558,15 @@ def xlsx_rows(data, sheet=None, merged_header=False):
             yield row
 
 
+def _name_unnamed(head, unnamed_after):
+    """`head` with each unnamed cell that directly follows a header in
+    `unnamed_after` given that entry's name (xlsx_rows)."""
+    if not unnamed_after:
+        return head
+    return [unnamed_after[head[k - 1]] if not h and k and head[k - 1] in unnamed_after else h
+            for k, h in enumerate(head)]
+
+
 def zip_member_name(info):
     """Japanese member names without the UTF-8 flag are cp932 read as cp437."""
     if info.flag_bits & 0x800:
@@ -550,25 +577,26 @@ def zip_member_name(info):
         return info.filename
 
 
-def city_rows(path, sheet=None, merged_header=False):
+def city_rows(path, sheet=None, merged_header=False, unnamed_after=None):
     """Rows as dicts from a CSV, an XLSX, an old .xls, or XLSX members of a ZIP
-    ('file.zip::part' keeps only members whose name contains part). `sheet`
-    and `merged_header` are xlsx_rows'."""
+    ('file.zip::part' keeps only members whose name contains part). `sheet`,
+    `merged_header` and `unnamed_after` are xlsx_rows'; `unnamed_after`
+    reaches an old .xls too."""
     path, _, part = str(path).partition("::")
     if path.lower().endswith(".zip"):
         with zipfile.ZipFile(path) as zf:
             for info in zf.infolist():
                 nm = zip_member_name(info)
                 if nm.lower().endswith(".xlsx") and part in nm:
-                    yield from xlsx_rows(zf.read(info), sheet, merged_header)
+                    yield from xlsx_rows(zf.read(info), sheet, merged_header, unnamed_after)
         return
     if path.lower().endswith(".xlsx"):
-        yield from xlsx_rows(Path(path).read_bytes(), sheet, merged_header)
+        yield from xlsx_rows(Path(path).read_bytes(), sheet, merged_header, unnamed_after)
         return
     if path.lower().endswith(".xls"):
         # Matsuyama's registers are the old BIFF format (2026-10-02), which
         # openpyxl cannot open; workbook_tables reads it through xlrd
-        yield from workbook_tables(path)
+        yield from workbook_tables(path, unnamed_after)
         return
     text = decode(Path(path).read_bytes())
     head = text.split("\n", 1)[0]
@@ -646,10 +674,11 @@ def _cell(v):
     return str(v).replace("\n", "").replace("\r", "").strip()
 
 
-def workbook_tables(path):
+def workbook_tables(path, unnamed_after=None):
     """Rows as dicts from every sheet of an .xls or .xlsx that has a 所在地 column
     in its first 30 rows (the header; title rows may sit above it). Kyoto's
-    2021 list is the old .xls format, read with xlrd. Dates come back ISO."""
+    2021 list is the old .xls format, read with xlrd. Dates come back ISO.
+    `unnamed_after` is xlsx_rows'; any other unnamed column is `_colN`."""
     data = Path(path).read_bytes()
     if data[:4] == b"\xd0\xcf\x11\xe0":
         import xlrd
@@ -672,7 +701,8 @@ def workbook_tables(path):
         if hi is None:
             continue
         head, seen = [], collections.Counter()
-        for k, h in enumerate(c.replace(" ", "").replace("　", "") for c in rows[hi]):
+        for k, h in enumerate(_name_unnamed([c.replace(" ", "").replace("　", "") for c in rows[hi]],
+                                            unnamed_after)):
             h = h or f"_col{k}"
             head.append(f"{h}#{seen[h]}" if seen[h] else h)  # a repeated header keeps its first column
             seen[h] += 1
@@ -870,7 +900,8 @@ def _date_of(r, cols):
     return next((d for d in (wareki_date(r.get(c)) for c in ((cols,) if isinstance(cols, str) else cols)) if d), None)
 
 
-def rebuilt_register(paths, as_of, end_col="許可満了日", granted_col="許可年月日", rules=(), keep_undated=False):
+def rebuilt_register(paths, as_of, end_col="許可満了日", granted_col="許可年月日", rules=(), keep_undated=False,
+                     reader=None):
     """A register rebuilt from a complete list and the months since, Kyoto's
     method for any list (Higashiōsaka, 2026-10-03: its 全許可 list of
     2026-04-01 plus each month's new permits to 2026-08-31). `paths` oldest
@@ -889,13 +920,16 @@ def rebuilt_register(paths, as_of, end_col="許可満了日", granted_col="許�
     in one format and 許可終了日 in the other); the record keeps the first
     spelling's name. `keep_undated`: a row with no readable expiry is kept, as
     in_term keeps one (Koshigaya's 907 food notifications carry none; without
-    it they rank 1900-01-01 and fall out)."""
+    it they rank 1900-01-01 and fall out). `reader`: the function that reads
+    one path into row dicts, city_rows unless a city passes its own (Naha,
+    2026-10-12: city_rows with `unnamed_after`, so the stitch is never
+    copied into a city)."""
     end_key = end_col if isinstance(end_col, str) else end_col[0]
     granted_key = granted_col if isinstance(granted_col, str) else granted_col[0]
     undated = datetime.date(9999, 12, 31) if keep_undated else datetime.date(1900, 1, 1)
     best = {}
     for path in paths:
-        for r in city_rows(path):
+        for r in (reader or city_rows)(path):
             addr = next((r[c] for c in ADDR_COLS if (r.get(c) or "").strip()), "")
             name = next((r[c] for c in NAME_COLS if (r.get(c) or "").strip()), "")
             typ = next((r[c] for c in type_cols(rules) if r.get(c)), "")

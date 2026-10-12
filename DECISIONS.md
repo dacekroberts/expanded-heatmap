@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**198 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**199 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-12**
 
+- [Naha's shared reader changes written, zero drift on 64 Japanese cities; its page is Food plus Personal services (owner)](#2026-10-12---nahas-shared-reader-changes-written-zero-drift-on-64-japanese-cities-its-page-is-food-plus-personal-services-owner)
 - [Naha joins phase 2 (owner); its reader changes to shared code are Cleanup's, ahead of the build](#2026-10-12---naha-joins-phase-2-owner-its-reader-changes-to-shared-code-are-cleanups-ahead-of-the-build)
 - [Before the phase 2 landing: seven owner calls, and the landing handoff written](#2026-10-12---before-the-phase-2-landing-seven-owner-calls-and-the-landing-handoff-written)
 
@@ -250,6 +251,46 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-10-12 - Naha's shared reader changes written, zero drift on 64 Japanese cities; its page is Food plus Personal services (owner)
+
+- **Decided by the owner in Cleanup's chat, 2026-10-12: "food plus
+  personal services for naha"** (Staging's S38). Barbers and beauty
+  salons come from BODIK's `472018_ribiyou`; no laundry list is known.
+  Staging reported the two files read through the unchanged readers
+  (beauty 1,069, barbers 287, its count) and their licence read as
+  permitted with conditions; neither was checked by Cleanup.
+- **Changed in `pipeline/countries/japan_register.py`**, the brief's
+  items 1 to 5:
+  - `rebuilt_register` takes `reader`, the function that reads one
+    path, `city_rows` by default, so a city never copies the stitch.
+  - `xlsx_rows`, `workbook_tables` and `city_rows` take
+    `unnamed_after`, a map from a named header to the name given to
+    the unnamed cell directly after it. Chosen over naming every
+    unnamed column by position: an unnamed operator column (the
+    applicant's address continuation in Naha's files) is then never
+    given a key of its own.
+  - `NAME_COLS` gained 営業所名所; `TYPE_COLS` gained 営業所種類 and
+    営業の種目, last in the order; `VARIANTS` maps 壼 to 壷.
+- **Measured on Naha's 140 new-permit files**, the reader given the
+  four type spellings as keys: 17,289 rows, every one with a trade
+  name and a type; the form read on 3,611 rows (206 with the unchanged
+  reader; 3,596 with 営業の種類 as the only key, so the city's config
+  needs all four). The stitch at 2026-08-31 with the brief's end and
+  granted columns: 10,001 permits in term, 8,430 of them restaurants.
+  The brief has 10,000 and 8,429; the one row was not chased, and the
+  build's step 2 count is the one to record.
+- **No built city moved.** No built Japanese city's raw file carries
+  any of the three new column spellings (1,056 files scanned as bytes
+  in three encodings). 壼 does occur in built cities' files (Kyoto 3
+  times, Osaka 5), so the variant was decided by the drift run:
+  `drift_check.py` over the 64 pipelines that read the Japanese shared
+  modules, `--jobs 3`, zero drift, peak 6.49 GB through the gate. The
+  other 142 cities do not import the module and were not run.
+- **Not done here:** the Minato control (`screen_japan_join.py
+  minato`) was not run, since Tokyo is among the 64; item 6 of the
+  brief is the city's own config; `japan_official.registers()` covers
+  Tokyo only (Staging's note, not a blocker).
 
 ### 2026-10-12 - Naha joins phase 2 (owner); its reader changes to shared code are Cleanup's, ahead of the build
 
