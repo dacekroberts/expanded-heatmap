@@ -21,6 +21,9 @@ The rule (owner, 2026-10-11): the weakest source in use decides the city.
                        "Stands without it".
   blacklisted          a blacklisted row has no leave-out route for the city.
   held                 otherwise.
+A source re-read later gets a new row and never an edit: the new row's Id is
+the old Id plus "+1" ("EW-13+1"), and only the highest-numbered row of an Id
+counts.
 A name that is not in app/cities.py, a city with no row beyond the ALL row,
 or a Column outside the three words fails the run and names the row.
 """
@@ -69,6 +72,13 @@ def derive(rows, cities):
     known = set(names)
     on = collections.defaultdict(list)
     problems = []
+    # A re-read is a new row whose Id is the old Id plus "+N"; the old row
+    # stays in the file as written and stops counting.
+    newest = {}
+    for r in rows:
+        base, _, n = r["Id"].partition("+")
+        newest[base] = max(newest.get(base, 0), int(n or 0))
+    rows = [r for r in rows if int(r["Id"].partition("+")[2] or 0) == newest[r["Id"].partition("+")[0]]]
     for r in rows:
         rid = r["Id"]
         if r["Column"] not in COLUMNS:

@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**81 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**82 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-12**
 
@@ -58,6 +58,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [The search rollout's cheap path and the commercial-use audit's method (owner)](#2026-10-12---the-search-rollouts-cheap-path-and-the-commercial-use-audits-method-owner)
 - [The commercial-use audit: read, ruled and written (owner)](#2026-10-12---the-commercial-use-audit-read-ruled-and-written-owner)
 - [The outside name net lands; code-plus-type names go; public sharing follows the Visuals registry (owner)](#2026-10-12---the-outside-name-net-lands-code-plus-type-names-go-public-sharing-follows-the-visuals-registry-owner)
+- [Thessaloniki after its full read: allowed with condition, and lifted for shared pieces (owner)](#2026-10-12---thessaloniki-after-its-full-read-allowed-with-condition-and-lifted-for-shared-pieces-owner)
 
 **2026-10-11**
 
@@ -4662,3 +4663,27 @@ japan-city template:
     Bucharest and Cluj-Napoca stay held. The per-piece counts and notices
     are in `docs/derived_use_licensing.md`, "Update, 2026-10-12". Whether a
     piece goes public stays the owner's call, piece by piece.
+
+### 2026-10-12 - Thessaloniki after its full read: allowed with condition, and lifted for shared pieces (owner)
+
+- **Decided by the owner, 2026-10-12 ("yes lift thessaloniki, allowed with
+  condition"), on the `licence-read` agent's full read of the same day.**
+  - **The read.** The national record governs (the City publishes no page
+    for the layer on its own host): CC BY 4.0 on each resource, and
+    data.gov.gr's terms art. 3.2 allow reuse for any lawful purpose,
+    commercial exploitation included. The clause the audit took for the open
+    data portal's is clause 3 of the City's map application splash, about
+    the Portal's content and source code.
+  - **The doubt, kept in the row**: the CC BY stamp is the harvest source's
+    default across all 131 of the City's layers and does not always match
+    the City's own labels; the layer is not on the City's own portal; the
+    splash's preamble can be read as reaching all the department's geodata.
+    Ministerial Decision 11654 ΕΞ 2026 art. 8(3) was not read.
+  - **Recorded as** row EW-13+1 in `docs/commercial_use_positions.md`. A
+    re-read is a new row whose Id is the old Id plus "+1"; the old row stays
+    as written and `scripts/commercial_use_cities.py` counts only the newest.
+    The table is now 154 allowed, 45 allowed if a layer is left out, 36
+    held, 2 blacklisted.
+  - **For this site**: the same read permits its own use with the notice it
+    already shows; nothing changes on the page. Thessaloniki is lifted for
+    shared pieces, leaving 10 cities held off them.

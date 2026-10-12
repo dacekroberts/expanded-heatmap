@@ -27,6 +27,12 @@ This section governs where it differs from the text below, which is as of
 - **Thessaloniki is held pending a full read** (owner, 2026-10-12): one
   reading of the City portal's terms bars modification and redistribution
   (row EW-13). The same question touches the site's own page.
+  **LIFTED the same day** (owner: "yes lift thessaloniki, allowed with
+  condition"), on the full read (row EW-13+1): the national record's CC BY
+  4.0 governs, and the no-redistribution clause is about the City's map
+  application, not its data. The site's own use is permitted with the notice
+  it already shows. **So 10 cities are held off shared pieces**, the list
+  above without Thessaloniki.
 - **Den Haag, Miami (Regional), Bucharest and Cluj-Napoca stay held**: the
   audit read their registers as silent, which closes nothing.
 - **Analytics' pieces** (its list of 2026-10-12, at commit 9d3a0cea), before

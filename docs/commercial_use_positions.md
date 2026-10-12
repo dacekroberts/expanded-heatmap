@@ -24,17 +24,18 @@ site publishes, and no row is a reason to add or remove a city.
   in `docs/commercial_use_reads_2026-10-12.md`, under the same Id. That file
   also lists what could not be read.
 - A verdict is dated. A source re-read later gets a new row, never an edit
-  to an old one.
+  to an old one: the new row's Id is the old Id plus "+1" (EW-13+1 replaces
+  EW-13), and only the newest row of an Id counts toward the city table.
 
 ## Summary
 
 Derived by `scripts/commercial_use_cities.py`; do not edit between the marks.
 
 <!-- summary:start -->
-237 cities: 2 blacklisted, 37 held, 45 allowed if left out, 153 allowed.
+237 cities: 2 blacklisted, 36 held, 45 allowed if left out, 154 allowed.
 
 - **Blacklisted** (2): Philadelphia, Seattle (Regional).
-- **Held** (37): Chicago, Miami (Regional), São Paulo, Rio de Janeiro (Regional), Belo Horizonte (Regional), Brasília, Salvador, Fortaleza (Regional), Porto Alegre (Regional), Recife (Regional), Santos (Regional), Daegu, Stockholm, Bucharest, Sacramento, Tucson, Dallas, Okayama, Kurume, Shimonoseki, Brussels (Regional), Tacoma, Thessaloniki, Higashiyamato, Nishitōkyō, Tama, Higashimurayama, Fuchū (Tokyo), Chōfu, Tachikawa, Hino, Uji, Yao, Takatsuki, Cluj-Napoca, Tottori, Kure.
+- **Held** (36): Chicago, Miami (Regional), São Paulo, Rio de Janeiro (Regional), Belo Horizonte (Regional), Brasília, Salvador, Fortaleza (Regional), Porto Alegre (Regional), Recife (Regional), Santos (Regional), Daegu, Stockholm, Bucharest, Sacramento, Tucson, Dallas, Okayama, Kurume, Shimonoseki, Brussels (Regional), Tacoma, Higashiyamato, Nishitōkyō, Tama, Higashimurayama, Fuchū (Tokyo), Chōfu, Tachikawa, Hino, Uji, Yao, Takatsuki, Cluj-Napoca, Tottori, Kure.
 - **Allowed if left out** (45): San Diego, San Francisco, Los Angeles (Regional), New York, Boston, Washington D.C., Vancouver (Regional), Paris, Amsterdam, Monterrey (Regional), Fukuoka, Tokyo, Den Haag, Palma, Hiroshima, Matsuyama, Toyama, Kumamoto, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Kagoshima, Takamatsu, Ōtsu, Nara, Sasebo, Ageo (Regional), Sōka, Tokorozawa, Kasukabe, Toyonaka, Hirakata, Suita, Maebashi, Fukuyama, Ichinomiya, Akita, Ōita, Mito, Morioka, Okazaki, Yamagata, Koshigaya, Fujisawa.
 <!-- summary:end -->
 
@@ -64,6 +65,7 @@ and the map does not stand without it).
 | Brussels (Regional): the company register (KBO) | Allowed only under the app's own registration; held as a hand-on from this project | EW-27 |
 | Hong Kong | Permitted, the uncapped indemnity stated prominently. The owner's rider: if an app design would make every user accept that indemnity site-wide, hold Hong Kong instead. As read, the indemnity binds the party that reproduces the data (the app's operator), not the app's users | AN-7, AN-8, AN-9 |
 | New York City's three datasets; the US Census files | Permitted and flagged: no sentence names commercial use | HC-23, HC-25, HC-26, AU-P10, AU-S4 |
+| Thessaloniki, after its full read the same day | Allowed with condition, the harvester-default doubt noted. Replaces the "held, confirmed" in the next line for Thessaloniki only | EW-13+1 |
 | Thessaloniki, Stockholm, Bucharest, Cluj-Napoca, Miami, Chicago, Tucson, Sacramento, Tacoma, Dallas | Held, confirmed | EW-13, AN-25, AN-28, AN-29, HC-45, HC-44a, HC-48, AU-P22, AU-P16, AU-P23, AU-P15 |
 
 Not ruled one by one, and recorded as the reads left them: Seattle
@@ -214,6 +216,7 @@ Kingdom, HC the hand count).
 | EW-11 | CC BY 4.0 on VBB's page, unversioned `cc-by` on Berlin's CKAN | Berlin | PERMITTED, CONDITION | allowed |   | Attribution ("VBB Verkehrsverbund Berlin-Brandenburg GmbH"), licence link, changes stated, VBB's disclaimer kept; no logos or line signets | VBB's own dataset page, `https://unternehmen.vbb.de/digitale-services/datensaetze/` |   |
 | EW-12 | CC BY 4.0 known from the national catalogue | Rome | PERMITTED, CONDITION | allowed |   | Attribution to the Agenzia delle Entrate (and ISTAT), licence link, changes indicated | dati.gov.it's record of the dataset, holder "Agenzia delle Entrate", the Lazio distribution, `https://www.dati.gov.it/opendata/api/3/action/package_show?id=stradari-ed-indirizzari-regionali-e-nazionali-da-anncsu` |   |
 | EW-13 | CC BY 4.0 set by a harvester default | Thessaloniki | NOT ESTABLISHED | held | Held; confirmed by the owner, 2026-10-12. | Reading A: attribution, licence link, changes stated. Reading B: no modification or redistribution at all | data.gov.gr's record, `https://data.gov.gr/dataset/gis-thessaloniki-wms-saloniki-tsp_poi_energes_adeies_katastimaton`; `gr.md:30-41`; `docs/build_briefs/thessaloniki.md:205-217` |   |
+| EW-13+1 | Thessaloniki's Ενεργές Άδειες Καταστημάτων: the national record's CC BY 4.0 (full read, replaces EW-13) | Thessaloniki | PERMITTED, CONDITION | allowed | Allowed with condition (owner, 2026-10-12, on the full read of the same day). The no-redistribution clause is clause 3 of the City's map application splash and is about the Portal's content and source code, not the open-data terms. Doubt noted: the CC BY stamp is the harvest source's default, applied to all 131 of the City's layers and not always matching the City's own labels; the layer is absent from the City's own portal, so the City's CC BY default reaches it by inference; the splash's preamble can be read as covering all the department's geodata. Not read: Ministerial Decision 11654 ΕΞ 2026 art. 8(3); one City PDF whose text does not extract. | Credit to the City, title, licence link, changes stated; no implied endorsement; no misleading alteration (terms art. 3.3); not presented as official or complete | data.gov.gr package record `gis-thessaloniki-wms-saloniki-tsp_poi_energes_adeies_katastimaton`, field `rights`; data.gov.gr Όροι Χρήσης v1.0 (May 2026), art. 3.2; opendata.thessaloniki.gr About; `maps.thessaloniki.gr/public/config.json`, clause 3 |   |
 | EW-14 | CC BY 4.0, level unclear in the record | Brussels | PERMITTED, CONDITION | allowed |   | Attribution to the publisher and hub.brussels with the listed contributors, licence link, changes stated; no City logo or "BXL" mark (portal terms 3.1) | The dataset's own metadata, `https://opendata.brussels.be/api/explore/v2.1/catalog/datasets/commerces-recenses-par-hubbrussels-vbx` |   |
 | EW-15 | FAVV-AFSCA's own open-data terms (recorded as CC BY 4.0) | Antwerp; Ghent | PERMITTED, CONDITION | allowed |   | The source and the date of last update cited; nothing misleading, no implied link or endorsement; the permission is revoked automatically while a condition is unmet; no deep link to the agency's site (record) | The agency's open-data page, `https://favv-afsca.be/nl/open-data` |   |
 | EW-16 | Belgian Mobility Company portal Terms of Use, art. 3: CC BY 4.0 | Brussels; Antwerp; Ghent; Charleroi; Liège; Brussels (Regional) | PERMITTED, CONDITION | allowed |   | "Source: [PTO Name] – Open Data – [Date of dataset update]" (art. 4), re-dated at each refresh; the modified-data line; access is acceptance of the terms; nothing taken from the operators' own websites | The portal's Terms of Use, `https://data.belgianmobility.io/en/terms.html` |   |
@@ -423,7 +426,7 @@ city; `Stands if left out` names what would have to be dropped or replaced.
 | Berlin | Germany | allowed |   |   | 4 |
 | Bremen | Germany | allowed |   |   | 2 |
 | Gelsenkirchen | Germany | allowed |   |   | 2 |
-| Thessaloniki | Greece | held | EW-13 |   | 2 |
+| Thessaloniki | Greece | allowed |   |   | 2 |
 | Hong Kong | Hong Kong | allowed |   |   | 4 |
 | Dublin | Ireland | allowed |   |   | 3 |
 | Florence | Italy | allowed |   |   | 2 |
