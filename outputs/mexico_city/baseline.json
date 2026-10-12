@@ -8,5 +8,9 @@
   "fijo_rows": 635245,
   "in_scope_15_rows": 199571,
   "outside_scope_15_rows": 416,
-  "storefront_rows": 408046
+  "storefront_rows": 408046,
+  "storefronts": 407628,
+  "storefronts_food_service": 69049,
+  "storefronts_personal_services": 42652,
+  "storefronts_retail": 295927
 }

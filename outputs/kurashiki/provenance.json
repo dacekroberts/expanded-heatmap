@@ -1,0 +1,73 @@
+{
+  "city_food": {
+    "as_of": "2026-03-31",
+    "bytes": 8034340,
+    "dataset_page": "https://www.city.kurashiki.okayama.jp/business/health-safety/1004966/1004974/1004977.html",
+    "file": "r07nenndinatu_2026-03-31.pdf",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-08T07:50:47+00:00",
+    "rows": 6288,
+    "sha256": "864b03ac3fce2b7806847e6ef78ee3485b9cda4935007f3373694840bb25af98",
+    "url": "https://www.city.kurashiki.okayama.jp/_res/projects/default_project/_page_/001/004/977/r07nenndinatu.pdf"
+  },
+  "city_food_text": {
+    "bytes": 1713215,
+    "file": "r07nenndinatu_2026-03-31.table.txt",
+    "how": "kept (extracted by an earlier run)",
+    "made_from": "r07nenndinatu_2026-03-31.pdf",
+    "pages": 242,
+    "retrieved": "2026-10-11T22:56:54+00:00",
+    "sha256": "74d43f48f39036b1a4b205dc841c326ce229f291b0fbc3294e6916fc205ff347",
+    "tool": "pdftotext version 4.06 [www.xpdfreader.com] -table -enc UTF-8"
+  },
+  "estat_census": {
+    "bytes": 6421265,
+    "file": "data/japan/raw/estat_census_r3_b1_009_1a.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-28T19:04:30+00:00",
+    "sha256": "666929104448d2430f59694dbe3c7d1d2f86748e6de95da78d16a44a8084f4ec",
+    "url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040067884&fileKind=0"
+  },
+  "isj_33202_block": {
+    "bytes": 518442,
+    "file": "33202-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-08T08:10:35+00:00",
+    "sha256": "7bf08603121aa8d787c58464552860308a742bb0991c6f4f0b06c3de0161d36a",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/33202-24.0a.zip"
+  },
+  "isj_33202_chome": {
+    "bytes": 10875,
+    "file": "33202-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-08T08:10:36+00:00",
+    "sha256": "fde4833753b79025a0762366042f73b5f474097d7213e56648776f0c2b43e8cf",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/33202-19.0b.zip"
+  },
+  "n02": {
+    "bytes": 14903774,
+    "file": "data/japan/raw/N02-25_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-30T23:47:52+00:00",
+    "sha256": "aaf76af133b2e771e538fabc4646d2e443dc1d5a67b221382a28d744e706cc9f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip"
+  },
+  "n03": {
+    "bytes": 4629609,
+    "file": "data/japan/raw/N03-20250101_33_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-02T19:32:02+00:00",
+    "sha256": "7f05f521a159e28814ecc52def90d02eaa4a52fbefd5aecaeb24402a5ba71791",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_33_GML.zip"
+  },
+  "osm_station_names": {
+    "bytes": 23836,
+    "elements": 37,
+    "file": "osm_station_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-10-12T01:41:34Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](34.41,133.6,34.67,133.89);way[\"railway\"=\"station\"](34.41,133.6,34.67,133.89););out tags center;",
+    "retrieved": "2026-10-12T01:43:29+00:00",
+    "sha256": "74332f27b8cb805981667a2ac08052d663e74beedb52f26b2628fafb85394e5b"
+  }
+}

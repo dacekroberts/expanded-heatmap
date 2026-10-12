@@ -1,0 +1,85 @@
+{
+  "city_barber": {
+    "as_of": "2026-08-31",
+    "bytes": 19507,
+    "dataset_page": "https://data.bodik.jp/dataset/272159_barber",
+    "file": "272159_barber_20260831.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T23:25:25+00:00",
+    "rows": 155,
+    "sha256": "5a600ea26da42d47a4f3f85ff9313ff822821d966e31eed902829a8ad1797ccc",
+    "url": "https://data.bodik.jp/dataset/d7f05be4-01d8-4150-8b9b-c5146a906187/resource/1eea6cda-ffbd-4d7a-9b3b-f740ad231aca/download/272159_barber_20260831.csv"
+  },
+  "city_beauty": {
+    "as_of": "2026-08-31",
+    "bytes": 57980,
+    "dataset_page": "https://data.bodik.jp/dataset/272159_hair_dressing",
+    "file": "272159_hair_dressing_20260831.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T23:25:49+00:00",
+    "rows": 419,
+    "sha256": "f4b66acab0a7a643bb000d5f003cd5aecb523f10438b9c8964bf0c7498162c76",
+    "url": "https://data.bodik.jp/dataset/aa79fd70-d439-4bbf-b393-b94e2f7fa385/resource/19110291-e84f-44fe-814f-d26f1cd70cd9/download/272159_hair_dressing_20260831.csv"
+  },
+  "city_laundry": {
+    "as_of": "2026-08-31",
+    "bytes": 10176,
+    "dataset_page": "https://data.bodik.jp/dataset/272159_cleaning",
+    "file": "272159_cleaning_20260831.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T23:26:12+00:00",
+    "rows": 64,
+    "sha256": "3c43c592bbb0ff0e965786d5b9917a28643b3dd887fb5c732a18320cecf83ff0",
+    "url": "https://data.bodik.jp/dataset/71f93e97-3a93-479c-a634-106367c70b85/resource/3824bb1f-7b7b-4fba-9481-cf954a955caf/download/272159_cleaning_20260831.csv"
+  },
+  "estat_census": {
+    "bytes": 6421265,
+    "file": "data/japan/raw/estat_census_r3_b1_009_1a.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-28T19:04:30+00:00",
+    "sha256": "666929104448d2430f59694dbe3c7d1d2f86748e6de95da78d16a44a8084f4ec",
+    "url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040067884&fileKind=0"
+  },
+  "isj_27215_block": {
+    "bytes": 106271,
+    "file": "27215-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T23:26:13+00:00",
+    "sha256": "e3116b7a674613ad148b6e7f4e7176b6c2a867ba785dff19a5bc98dd89e516f1",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/27215-24.0a.zip"
+  },
+  "isj_27215_chome": {
+    "bytes": 7487,
+    "file": "27215-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T23:26:13+00:00",
+    "sha256": "bc390cb3b21483435996f7f6867392b63a0c720e64adf3a7664a3db8b189600f",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/27215-19.0b.zip"
+  },
+  "n02": {
+    "bytes": 14903774,
+    "file": "data/japan/raw/N02-25_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-30T23:47:52+00:00",
+    "sha256": "aaf76af133b2e771e538fabc4646d2e443dc1d5a67b221382a28d744e706cc9f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip"
+  },
+  "n03": {
+    "bytes": 2163158,
+    "file": "data/japan/raw/N03-20250101_27_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-27T19:52:09+00:00",
+    "sha256": "7e3f49311a822680ec7fe2d3f0e167a6631e353feac0fda5fb78b454be92eb51",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_27_GML.zip"
+  },
+  "osm_station_names": {
+    "bytes": 8357,
+    "elements": 13,
+    "file": "osm_station_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-10-11T22:20:06Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](34.72,135.58,34.8,135.67);way[\"railway\"=\"station\"](34.72,135.58,34.8,135.67););out tags center;",
+    "retrieved": "2026-10-11T22:21:52+00:00",
+    "sha256": "db3b7dd93a93834c967c96f33a00b25a0bc635b602c88087dccd2430a34ee39d"
+  }
+}

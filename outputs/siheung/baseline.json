@@ -8,5 +8,8 @@
   "stations_outside": 114,
   "stop_nodes": 267,
   "storefronts": 15206,
-  "storefronts_classified": 15206
+  "storefronts_classified": 15206,
+  "storefronts_food_service": 7273,
+  "storefronts_personal_services": 2170,
+  "storefronts_retail": 5763
 }

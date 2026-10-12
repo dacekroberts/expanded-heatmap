@@ -7,5 +7,9 @@
   "register_rows": 24191,
   "stations_in_scope": 21,
   "stop_positions": 23,
-  "storefront_rows": 7120
+  "storefront_rows": 7120,
+  "storefronts": 5243,
+  "storefronts_food_service": 1239,
+  "storefronts_personal_services": 1161,
+  "storefronts_retail": 2843
 }

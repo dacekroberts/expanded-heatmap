@@ -34,6 +34,11 @@ THE CONTRACT
 * **`accept_members` by node id** for a stop member of a kept relation that
   carries a name but no stop tag (Daugavpils's Stropu ciemats), with the
   same staleness checks.
+* **`name_members` by node id** for a stop member of a kept relation that
+  OSM leaves with NO name and no stop tag, named from the operator's own
+  stop list (Cluj-Napoca's three, tagged only with the operator). The step
+  stops if OSM has since named or tagged the node, or it is no longer a stop
+  member, so the config's name cannot outlive the gap.
 * **Name collapse at the mean, within `max_spread_m`** (Aarhus's): one
   station per name, its lines joined in the city's order.
 * **Scope over a union of polygons** (`split_by_places`): stations outside
@@ -126,7 +131,8 @@ def select_relations(elements, *, routes, refs, operator=None, not_drawn=None,
 
 
 def stop_rows(elements, *, routes, refs, operator=None, not_drawn=None,
-              station_add=None, name_aliases=None, accept_members=None, verbose=True):
+              station_add=None, name_aliases=None, accept_members=None, name_members=None,
+              verbose=True):
     """One row per (line, stop node): line, node, stop_name, latitude,
     longitude, source ("route" or "added").
 
@@ -142,12 +148,18 @@ def stop_rows(elements, *, routes, refs, operator=None, not_drawn=None,
       ciemats, tagged only as a bus-stop platform). Each was looked at; the
       step stops if the node is retagged as a stop (remove the entry), renamed,
       or no longer a stop member.
+    name_members: {node id: name} for a STOP MEMBER of a kept relation that
+      OSM leaves unnamed and untagged as a stop (Cluj-Napoca's three, named
+      from the operator's linear stop maps). The step stops if the node now
+      carries a name or a stop tag (remove the entry), or is no longer a stop
+      member.
     """
     kept = select_relations(elements, routes=routes, refs=refs, operator=operator,
                             not_drawn=not_drawn, verbose=verbose)
     nodes = {e["id"]: e for e in elements if e["type"] == "node"}
     accept = dict(accept_members or {})
-    rows, accepted = [], set()
+    given = dict(name_members or {})
+    rows, accepted, named = [], set(), set()
     for ref, rs in kept.items():
         for r in rs:
             for m in r["members"]:
@@ -163,6 +175,13 @@ def stop_rows(elements, *, routes, refs, operator=None, not_drawn=None,
                         sys.exit(f"accepted member {m['ref']}: OSM now names it "
                                  f"{nt.get('name')!r}, not {accept[m['ref']]!r} - re-read it")
                     accepted.add(m["ref"])
+                elif n and m["ref"] in given:
+                    if nt.get("name") or _is_stop(nt):
+                        sys.exit(f"named member {m['ref']} ({given[m['ref']]}): OSM now has "
+                                 f"{nt.get('name')!r}, tags {nt} - remove it from name_members "
+                                 f"and read OSM's own name")
+                    nt = {**nt, "name": given[m["ref"]]}
+                    named.add(m["ref"])
                 elif not n or not _is_stop(nt) or not nt.get("name"):
                     sys.exit(f"{ref} relation {r['id']}: stop member node {m['ref']} "
                              f"({nt.get('name', 'no name')!r}, tags {nt}) is not a named "
@@ -174,6 +193,10 @@ def stop_rows(elements, *, routes, refs, operator=None, not_drawn=None,
     stale = sorted(set(accept) - accepted)
     if stale:
         sys.exit(f"accept_members names node(s) no longer a stop member of a kept "
+                 f"relation: {stale} - re-read OSM")
+    stale = sorted(set(given) - named)
+    if stale:
+        sys.exit(f"name_members names node(s) no longer a stop member of a kept "
                  f"relation: {stale} - re-read OSM")
     q = pd.DataFrame(rows).drop_duplicates(["line", "node"])
 

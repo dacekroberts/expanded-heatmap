@@ -91,7 +91,8 @@ st.markdown(
   they are is not known.
 - The rest are matched to MLIT's address reference data, which places most at their street block;
   where that fails, the dot sits at the ministry's own coordinates.
-- Where a business's trade name is its operator's own name, the dot shows its permit type instead.
+- Where a business's trade name is its operator's own name, or is written as a bare personal name,
+  the dot shows its permit type instead.
 - Names and permit types are shown in Japanese, as the list records them.
 - **About 56% of storefronts sit within a ring.**
 """

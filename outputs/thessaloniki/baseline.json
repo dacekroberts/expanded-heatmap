@@ -13,5 +13,9 @@
   "stations_outside": 5,
   "stop_nodes": 36,
   "storefront_rows": 7137,
+  "storefronts": 7132,
+  "storefronts_food_service": 3682,
+  "storefronts_personal_services": 1020,
+  "storefronts_retail": 2430,
   "track_km_in_city": "9.74"
 }

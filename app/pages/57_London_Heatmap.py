@@ -92,7 +92,7 @@ st.markdown(
 """
 )
 
-render_map_help('business categories (Food service and Food shops)')
+render_map_help('business categories (Food service and Food shops)', search='london')
 render_excluded_stations("London")
 render_country_links('London')
 

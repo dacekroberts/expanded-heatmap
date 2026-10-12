@@ -70,7 +70,8 @@ st.markdown(
 - The list gives an address but no location. Each address is matched to MLIT's address reference
   data, which places most at their street block; where only the block group (条丁目) can be found,
   the dot sits at its center, which on Sapporo's grid is about one block.
-- Where a business's trade name is its operator's own name, the dot shows its permit type instead.
+- Where a business's trade name is its operator's own name, or is written as a bare personal name,
+  the dot shows its permit type instead.
 - Names and permit types are shown in Japanese, as the city records them.
 """
 )

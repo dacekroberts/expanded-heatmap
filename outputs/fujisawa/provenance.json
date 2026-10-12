@@ -1,0 +1,162 @@
+{
+  "city_barber": {
+    "as_of": "2026-06-30",
+    "bytes": 21889,
+    "dataset_page": "https://www.city.fujisawa.kanagawa.jp/seiei/kankyouopendate.html",
+    "file": "20260713103834.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:42:44+00:00",
+    "rows": 203,
+    "sha256": "ea39bf0d020f0bca52698b1670b167c6ff5a2338d17a7234a73061060db8dc8a",
+    "url": "https://www.city.fujisawa.kanagawa.jp/documents/32931/20260713103834.csv"
+  },
+  "city_beauty": {
+    "as_of": "2026-06-30",
+    "bytes": 101611,
+    "dataset_page": "https://www.city.fujisawa.kanagawa.jp/seiei/kankyouopendate.html",
+    "file": "20260713104008.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:42:46+00:00",
+    "rows": 821,
+    "sha256": "9dc0be8647efa0b6765e584ef817a4c47e599ebcf4db5c5189480b0580a04539",
+    "url": "https://www.city.fujisawa.kanagawa.jp/documents/32931/20260713104008.csv"
+  },
+  "city_food_07_houjin": {
+    "as_of": "2026-07",
+    "bytes": 5980,
+    "dataset_page": "https://www.city.fujisawa.kanagawa.jp/seiei/shokuhineisei/opendatabase.html",
+    "file": "shokuhin202607houjin.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:42:35+00:00",
+    "rows": 27,
+    "sha256": "42e51eb4951c557d93919e87f8d59e8ba02ee5b9d65f6548015685b2717563da",
+    "url": "https://www.city.fujisawa.kanagawa.jp/documents/28905/shokuhin202607houjin.csv"
+  },
+  "city_food_07_kojin": {
+    "as_of": "2026-07",
+    "bytes": 5168,
+    "dataset_page": "https://www.city.fujisawa.kanagawa.jp/seiei/shokuhineisei/opendatabase.html",
+    "file": "shokuhin202607kojin.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:42:37+00:00",
+    "rows": 29,
+    "sha256": "39b49a73a39dcdd221dfad7769ef90a57ed94fa63a4067693d7af78eef95f885",
+    "url": "https://www.city.fujisawa.kanagawa.jp/documents/28905/shokuhin202607kojin.csv"
+  },
+  "city_food_08_houjin": {
+    "as_of": "2026-08",
+    "bytes": 6914,
+    "dataset_page": "https://www.city.fujisawa.kanagawa.jp/seiei/shokuhineisei/opendatabase.html",
+    "file": "shokuhin202608houjin.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:42:40+00:00",
+    "rows": 30,
+    "sha256": "d950e34ba4bcf1186bf02d92077f2ae6b41c4cd7d2be18b5c7a0e56f12ab3b71",
+    "url": "https://www.city.fujisawa.kanagawa.jp/documents/28905/shokuhin202608houjin.csv"
+  },
+  "city_food_08_kojin": {
+    "as_of": "2026-08",
+    "bytes": 4188,
+    "dataset_page": "https://www.city.fujisawa.kanagawa.jp/seiei/shokuhineisei/opendatabase.html",
+    "file": "shokuhin202608kojin.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:42:42+00:00",
+    "rows": 23,
+    "sha256": "4aee7ed2ac93cf32d3fd9b5002029743db0d0c17d0e4fdc919110e9510b5da69",
+    "url": "https://www.city.fujisawa.kanagawa.jp/documents/28905/shokuhin202608kojin.csv"
+  },
+  "city_food_houjin": {
+    "as_of": "2026-06-30",
+    "bytes": 606748,
+    "dataset_page": "https://www.city.fujisawa.kanagawa.jp/seiei/shokuhineisei/opendatabase.html",
+    "file": "zende-ta202606houjin.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:42:26+00:00",
+    "rows": 2629,
+    "sha256": "a20f36f96ef21162cb07d8b7e647f5fea299f0cfb578baa84a6f7effe3dcb430",
+    "url": "https://www.city.fujisawa.kanagawa.jp/documents/28905/zende-ta202606houjin.csv"
+  },
+  "city_food_kojin": {
+    "as_of": "2026-06-30",
+    "bytes": 341236,
+    "dataset_page": "https://www.city.fujisawa.kanagawa.jp/seiei/shokuhineisei/opendatabase.html",
+    "file": "zende-ta202606kojin.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:42:29+00:00",
+    "rows": 1897,
+    "sha256": "5cdebfe47ffee2b0e6799409a46aff50f43f6d2711d4111fe517f227a400a6c1",
+    "url": "https://www.city.fujisawa.kanagawa.jp/documents/28905/zende-ta202606kojin.csv"
+  },
+  "city_laundry": {
+    "as_of": "2026-06-30",
+    "bytes": 18338,
+    "dataset_page": "https://www.city.fujisawa.kanagawa.jp/seiei/kankyouopendate.html",
+    "file": "20260713104127.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:42:48+00:00",
+    "rows": 142,
+    "sha256": "aa8fbeb0f4098d3fa67b59d2ac65990a73efefb30c76031df05e0f626f82dd61",
+    "url": "https://www.city.fujisawa.kanagawa.jp/documents/32931/20260713104127.csv"
+  },
+  "city_mhlw": {
+    "as_of": null,
+    "bytes": 480077,
+    "dataset_page": "https://i2fas.mhlw.go.jp/",
+    "file": "14205_food_business_all.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:42:50+00:00",
+    "rows": 1267,
+    "sha256": "a794d049c9aa704f41dfe0f7d7e15bb0656588cac21ac35a376e6e0e7865b1b6",
+    "url": "https://i2fas.mhlw.go.jp/faspub/page/opendatadownload.jsp?param=14205_food_business_all.csv"
+  },
+  "estat_census": {
+    "bytes": 6421265,
+    "file": "data/japan/raw/estat_census_r3_b1_009_1a.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-28T19:04:30+00:00",
+    "sha256": "666929104448d2430f59694dbe3c7d1d2f86748e6de95da78d16a44a8084f4ec",
+    "url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040067884&fileKind=0"
+  },
+  "isj_14205_block": {
+    "bytes": 174323,
+    "file": "14205-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:42:53+00:00",
+    "sha256": "81ccb01b747b74c662886ed54d44fd0501ed9d6782af157f9801b5ecd4b5e96f",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/14205-24.0a.zip"
+  },
+  "isj_14205_chome": {
+    "bytes": 7896,
+    "file": "14205-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T22:42:56+00:00",
+    "sha256": "7e39b477423d57639246e66c97cfc32b6f3fd0d14d451b2eed2f5fe070da61cc",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/14205-19.0b.zip"
+  },
+  "n02": {
+    "bytes": 14903774,
+    "file": "data/japan/raw/N02-25_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-30T23:47:52+00:00",
+    "sha256": "aaf76af133b2e771e538fabc4646d2e443dc1d5a67b221382a28d744e706cc9f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip"
+  },
+  "n03": {
+    "bytes": 4665116,
+    "file": "data/japan/raw/N03-20250101_14_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-30T22:43:12+00:00",
+    "sha256": "1cf3c1ee08686de1e2685e5f81b9f0eaf6abb94bfffcd0811cc109c84b2e9fb4",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_14_GML.zip"
+  },
+  "osm_station_names": {
+    "bytes": 25433,
+    "elements": 37,
+    "file": "osm_station_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-10-11T21:59:47Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](35.29,139.39,35.43,139.52);way[\"railway\"=\"station\"](35.29,139.39,35.43,139.52););out tags center;",
+    "retrieved": "2026-10-11T22:01:43+00:00",
+    "sha256": "ace284a1c6b90e59d8bad6add52287d525519658d0aef8bb7c5dc3e3609b5da8"
+  }
+}

@@ -8,6 +8,10 @@
   "distinct_premises_all": 66088,
   "multi_bucket_premises": 0,
   "storefront_rows": 35309,
+  "storefronts": 35309,
+  "storefronts_food_service": 9992,
+  "storefronts_personal_services": 5024,
+  "storefronts_retail": 20293,
   "usable_coordinate_rows": 58908,
   "vacant_rows": 7180,
   "zero_coordinate_rows": 0

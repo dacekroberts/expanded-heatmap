@@ -8,5 +8,8 @@
   "stations_in_scope": 22,
   "stations_line_A": 29,
   "stations_network": 29,
-  "storefronts": 2652
+  "storefronts": 2652,
+  "storefronts_food_service": 925,
+  "storefronts_personal_services": 484,
+  "storefronts_retail": 1243
 }

@@ -8,5 +8,9 @@
   "stop_positions": 50,
   "stop_positions_added": 2,
   "storefront_rows": 2987,
-  "storefronts_placed": 2834
+  "storefronts": 2834,
+  "storefronts_food_service": 637,
+  "storefronts_personal_services": 593,
+  "storefronts_placed": 2834,
+  "storefronts_retail": 1604
 }

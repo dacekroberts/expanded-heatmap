@@ -1,4 +1,7 @@
 {
   "name_as_address": 59,
-  "storefronts": 11726
+  "storefronts": 11726,
+  "storefronts_food_service": 4367,
+  "storefronts_personal_services": 2331,
+  "storefronts_retail": 5028
 }

@@ -20,5 +20,7 @@
   "stations_in_scope": 20,
   "stations_outside_city": 31,
   "stop_positions": 102,
-  "storefronts": 1730
+  "storefronts": 1730,
+  "storefronts_food_service": 1335,
+  "storefronts_retail": 395
 }

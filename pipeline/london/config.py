@@ -248,3 +248,126 @@ LONDON_BBOX = {
     "lon_min": -0.54,
     "lon_max": 0.36,
 }
+
+# ---------------------------------------------------------------------------
+# Place search (batch 3, the size tests, 2026-10-11): pipeline/place_index.py
+# builds app/static/places/london.json from the caches place_index_fetch.py
+# writes. The search area is the map's: Greater London, relation 175342 (admin_level 5; step 1's BOUNDARY_OSM_RELATION),
+# confirmed by id 2026-10-11. Overpass area id = 3600000000 + relation id.
+PLACE_AREA = "(id:3600175342)"
+# The first query in tiles (place_index_fetch.fetch_split): Greater London is several times Mexico City's 402,007 elements, which took one query of about 170 s.
+# Each tile is still cut by PLACE_AREA; the bbox only has to cover it.
+PLACE_SPLIT = {"bbox": (51.28, -0.52, 51.7, 0.34), "rows": 3, "cols": 4}
+# NEW file names: data/ is shared by every worktree.
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-11.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-11.json"
+# The local language of OSM's names here: English.
+PLACE_LANGUAGES = ("en",)
+PLACE_FOLD = None
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+PLACE_REVIEWED = {
+    "Bank of England": "a notable historic building (tourism=attraction, Wikipedia): the building, not the business (the Panama Hotel precedent)",
+    "Canal Cafe Theatre": "a theatre with a Wikipedia article",
+    "Honourable Artillery Company Museum": "a museum (tourism=museum, Wikipedia); 'Company' is the regiment's name. Tagged access=private: put to the owner, batch 3",
+    "Store Road": "a street's own name",
+    "Store Street": "a street's own name",
+}
+# OSM objects a reading by eye found to be a business or a home that no rule
+# in place_index.py catches, each with why (place_index.build, `dropped`).
+PLACE_DROPPED = {
+    # From the read of the landmarks and places (the place-read agent, batch 3, 2026-10-11: every place and every landmark that is not a park or a place of worship read with its tags, the rest screened), each id checked against its cached name.
+    "way/1547913134": "a development's private drive (access=no, foot=private) drawn as a residential street and named for its car park",
+    "relation/19960734": "a private country estate (access=private) tagged a locality",
+    "node/709103709": "a single address tagged a locality",
+    "node/10244976882": "a retirement village (operator: a care charity) tagged a neighbourhood",
+    "node/12961342802": "a single block of flats tagged a neighbourhood",
+    "way/1503569413": "an office campus (landuse=commercial) tagged a place",
+    "way/1174879792": "an office complex (landuse=commercial) tagged a place",
+    "node/306691697": "a business park tagged a place",
+    "node/14185522580": "a business park tagged a place",
+    "node/7910239639": "an industrial estate tagged a place",
+    "node/2121765546": "a retail and leisure park tagged a place",
+    "relation/2419635": "a car park carrying the old airport's name, tagged a locality",
+    "node/13073412043": "a bare zone label tagged a place",
+    "node/13073412044": "a bare zone label tagged a place",
+    "node/13073412040": "a bare zone label tagged a place",
+    "node/13073412042": "a bare zone label tagged a place",
+    "node/13073412039": "a bare zone label tagged a place",
+    "node/13073412041": "a bare zone label tagged a place",
+    "node/7935867754": "a description standing in for a name (silt lagoons)",
+    "node/7935867755": "a description standing in for a name (silt lagoons)",
+    "way/603730256": "a residents' communal garden by its own name",
+    "way/647782158": "a residents' park by its own name",
+    "way/583725594": "a residents' communal garden by its own name",
+    "way/551726466": "a residents' communal park by its own name",
+    "way/77260560": "a residents' communal garden by its own name",
+    "way/26987465": "a park closed to the public (access=no); the public park of the same name is another object",
+    "relation/12978771": "a listed terrace of homes whose name is its register address",
+    "relation/18070162": "a listed terrace of homes whose name is its register address",
+    "relation/12978787": "a listed terrace of homes whose name is its register address",
+    "relation/19125929": "a listed terrace of homes whose name is its register address",
+    "relation/19125930": "a listed terrace of homes whose name is its register address",
+    "relation/19125412": "a listed terrace of homes whose name is its register address",
+    "relation/19125931": "a listed terrace of homes whose name is its register address",
+    "way/41421434": "a convent (place_of_worship=convent), a religious residence, not notable",
+    "way/424276002": "a religious order's house, a residence tagged a place of worship, not notable",
+    "way/105702835": "a monastery, a religious residence tagged a place of worship, not notable",
+    "node/245097342": "a convent, a religious residence tagged a place of worship, not notable",
+    "node/1089271228": "a convent, a religious residence tagged a place of worship, not notable",
+    "way/84842549": "a priory (building=convent), a religious residence tagged a place of worship, not notable",
+    "way/1323414980": "a vicarage (building=vicarage), a home",
+    "way/548446976": "a company's premises (building=commercial), its description advertising copy",
+    "way/1081392507": "a trapeze school, a business tagged a park",
+    "node/13849155689": "a private art dealer's gallery, by appointment",
+    "node/5712073478": "an organisation's office tagged a place of worship",
+    "way/13891699": "a rugby club's grounds tagged a park",
+    "way/202827861": "a members' tennis club",
+    "way/970901100": "a ruined shed under a cricket club's name",
+    "node/12453353101": "a wholesale market tagged a monument, not notable",
+    "way/115407414": "a person's own name alone on a place of worship",
+    "node/5294728343": "a private person's grave marker, tagged a monument",
+    "node/5294728348": "a private person's grave marker, tagged a monument",
+    "node/5294728351": "a private person's grave marker, tagged a monument",
+    "node/5294728344": "a private person's grave marker, tagged a monument",
+    "node/5294728352": "a private person's grave marker, tagged a monument",
+    "node/4944095032": "a private person's grave marker, tagged a monument",
+    "node/5294728347": "a family's vault, tagged a monument",
+    "node/5294728346": "a family's grave, tagged a monument",
+    "way/112072560": "a glitched name (a former use's, with a stray comma) on a mosque",
+    "way/1339072172": "room numbers standing in for a name (a campus prayer room)",
+    "node/747006838": "an address pasted into a chapel's name",
+    "way/469218841": "a description standing in for a name",
+    "node/1504407870": "a drinking fountain under a list number",
+    "node/1504408026": "a drinking fountain under a list number",
+    "way/1479921330": "a footpath drawn as a river",
+    "way/1479927404": "a footpath drawn as a river",
+    "way/1479930760": "a footpath drawn as a river",
+    "way/1479670696": "a footpath drawn as a river",
+    "node/2727439498": "a temple's name on a bare monument node: a wrong object",
+    "node/977469702": "a sports hall's name on a monument node: a wrong object",
+    "way/393564724": "a glitched name (an abbreviation) on a college",
+    "way/804315818": "a glitched name (an abbreviation) on a place of worship",
+    "way/5059696": "a glitched name on a customers-only ground tagged a park",
+    "way/78311287": "a council office under a mistyped historic tag",
+    "node/11343117923": "a landmark's name repeated as a locality (the Tower of London is its own row)",
+    # Dealers' galleries and mis-named monument nodes, by id (owner, 2026-10-11: "all right", after the gallery and monument rules were measured and not applied). A dealer's gallery is the business itself, whatever its article, as Paris's Galerie Perrotin is; public and charitable galleries stay.
+    "node/5947730342": "a commercial art dealer's gallery (Imitate Modern)",
+    "node/5749996583": "a commercial art dealer's gallery (Kallos Gallery)",
+    "node/5764879112": "a commercial art dealer's gallery (Maddox Arts)",
+    "node/452238452": "a commercial art dealer's gallery (The Fine Art Society)",
+    "node/5671022803": "a commercial art dealer's gallery (Messum's)",
+    "node/9425465875": "a commercial art dealer's gallery (Unit London)",
+    "node/14204677385": "a commercial art dealer's gallery (Ronchini)",
+    "node/6109669976": "a commercial art dealer's gallery (Alison Jacques)",
+    "node/4542203078": "a commercial art dealer's gallery (Victoria Miro)",
+    "way/689689540": "a commercial art dealer's gallery (Lisson Gallery)",
+    "way/689445497": "a commercial art dealer's gallery (Lisson Gallery, its second building)",
+    "way/553157396": "a commercial art dealer's gallery (Paul Stolper, building=retail)",
+    "way/102403106": "a commercial art dealer's gallery (White Cube)",
+    "way/164599237": "a commercial art dealer's gallery (Howard Griffin Gallery)",
+    "node/12410053303": "a place's name alone on a bare monument node: a wrong object",
+    "node/4336765075": "a street's name alone on a bare monument node: a wrong object",
+    "node/2014156881": "a dock's name alone on a bare monument node: a wrong object",
+    "node/6343767873": "a boundary stone under the name of the common it once marked: a wrong object",
+}

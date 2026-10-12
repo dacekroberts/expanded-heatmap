@@ -78,7 +78,8 @@ st.markdown(
   reference data, which places most at their street block; where only the district can be found,
   the dot sits at the city's own coordinates for the premises.
 - The registers do not say who the operator is, so a trade name that is its operator's own name
-  cannot be checked here.
+  cannot be checked here; where a trade name is written as a bare personal name, the dot shows its
+  register type instead.
 - Names and types are shown in Japanese, as the city records them.
 - **About a third of the premises sit within a ring.**
 """

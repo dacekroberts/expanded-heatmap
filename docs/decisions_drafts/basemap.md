@@ -1,0 +1,2101 @@
+# DECISIONS drafts - open basemap research (branch `basemap`; was `claude/epic-neumann-5aa0a6`, this file `claude-epic-neumann-5aa0a6.md` until 2026-10-08)
+
+Entries for `DECISIONS.md`, newest first, each written exactly as it should
+land (the `decisions-entry` format). Cleanup folds them in when the owner
+hands the drafts off, then deletes this file. The session is the research and
+prototype work the owner approved on 2026-10-07 (`DECISIONS.md`, "Four ideas
+assessed before the large review", item 4), narrowed the same day: the travel
+app is its own project, this repo keeps the basemap switch, its hosting and an
+export contract (owner, relayed by Cleanup). Nothing here is landed, pushed
+or published; every proposal waits for the owner.
+
+### 2026-10-12 - RESUME NOTE for the next session (internal; Cleanup drops this entry when folding; it replaces the 2026-10-08 note below)
+
+- **FOR THE LANDING SESSION, FIRST (2026-10-12):** the host is live at
+  `https://files.dacekroberts.dev` and the owner's browser test against it
+  PASSED (Seattle, London, Tokyo in the app on port 8501: no CORS error, no
+  failed request, no cookie). The result and **the exact edits for
+  `PACK_HOST`, P4 and P5** are the next entry down, "The live host tested
+  from the app on port 8501", under "THE EXACT EDITS FOR GO-LIVE". Read
+  this file from any worktree with
+  `git show basemap:docs/decisions_drafts/basemap.md` (the branch is local,
+  not pushed). **The owner approved the `PACK_HOST` diff (basemap chat,
+  2026-10-12: "diff approved").** Still the owner's: replacing the host's
+  `README.md` with the public text (read 2026-10-12 after his "readme
+  re-upload": the host still served the internal draft, MD5
+  29c9395e...fbf6 against the public text's 5a1dc340...f45f; **replaced by
+  the owner and confirmed the same day: the host's README is the public
+  text, same MD5, modified 06:35:21 GMT**), and the word before anything
+  reaches the deployed app.
+  On go-live he wrote in the basemap chat the same day: "word to go live?
+  ready". Recorded as his readiness, not as the push approval: the push is
+  the landing session's, and his standing instruction is to be asked at
+  that point, with the diff of what goes out. The "hosting call" bullet below is otherwise
+  done.
+- **Where the branch stands.** `basemap` has master merged (2026-10-12),
+  `check_all.py` 52 of 52, nothing pushed. The site's Travel view is built
+  and switched off: `pipeline/travel_packs.py` (`PACK_HOST = None`),
+  dark mode on Protomaps' dark flavor, `docs/travel_packs.md` for the
+  procedure, pointers in `CLAUDE.md`, `add-city` and `publish-city`. The
+  entries of 2026-10-11 and 2026-10-12 below hold every measurement.
+- **Packs.** All 206 built cities have a stamped, verified pack in
+  `data/_basemap_build/host_upload_2026-10/` (main checkout's shared data
+  folder). **Phase 2's 30 packs are built and in the same folder too
+  (2026-10-12, on the owner's word): 236 packs, 2.3 GB, all verified.**
+  To confirm at any time, from `download_plan_2026-10-08/`:
+  `python status.py`; `python build_packs.py` (no arguments) builds
+  whatever is left and is safe to re-run; then `python make_upload.py` and
+  `python ../session_tools_2026-10-08/stamp_verify.py ../packs_pilot_2026-10
+  ../host_upload_2026-10/packs`. Three gate slots at most,
+  `heavy_job.py status` first.
+- **Naha** (added to phase 2 by the owner, 2026-10-12; built the same day
+  on `worktree-japan-naha`): its pack is built and in the folder, the 31st
+  of phase 2. Box 127.5535,26.1019,127.8282,26.3220, kyushu 100% (held),
+  3,440,371 bytes, 129 s; the pack names Naha and Urasoe. **The folder now
+  holds 237 packs, 2,360,299,429 bytes; `stamp_verify.py` 237 packs,
+  130,340 tile entries, 0 bad.** A later city: `new_cities_poly.py` (the
+  `.poly` files are fetched per region from
+  download.geofabrik.de/asia/japan/), `add_plan_rows.py`,
+  `build_packs.py <city>`, `make_upload.py`.
+- **Owed at the landing (Cleanup's integration worktree asks for them):**
+  the Travel table lines for phase 2: under `"ja"` in `LOCAL_LANG`:
+  fujisawa, funabashi, ichihara, ichikawa, kawaguchi, koshigaya, matsudo,
+  sagamihara, sakura, urayasu, yachiyo, ibaraki_osaka, kadoma, minoh,
+  moriguchi, neyagawa, takatsuki, yao, aomori, fuji, kanazawa, kurashiki,
+  kure, matsue, matsumoto, okazaki, shizuoka, tottori, yamagata, naha;
+  under `"ro"`: cluj_napoca. They cannot go on this branch
+  (the check fails a row with no built map).
+- **Next with the owner: the hosting call.** Which Cloudflare option (R2
+  behind an owned domain, recommended, against a free Worker on
+  workers.dev), the owner's own account and acceptance of its terms, and
+  the go-live decision. Claude creates no account and enters no
+  credential. Then: upload the folder; set `PACK_HOST`; fill the address
+  into P4 (`docs/data_sources.md`, the internal block becomes
+  reader-facing) and P5 (notice 1 in `app/components.py`, after confirming
+  the host keeps no request logs); re-render the maps; `deploy-verify`
+  scope `map-chrome`; push with the reboot question answered. If the host
+  is not ready before the landing's full re-render, the landing ships
+  with the switch off and go-live costs a second full re-render (told to
+  the owner and to Cleanup).
+- **OWNER, 2026-10-12: one re-render, and the Cloudflare account is being
+  opened now.** So the host comes before the landing's full re-render and
+  that render carries the Travel switch: the upload, `PACK_HOST`, P4 and P5
+  all have to be in the integration tree before it. **The host is R2
+  behind the owner's own domain (owner, 2026-10-12)**, so decision 12's
+  live comparison with the Worker is not run. Still to hear: the address.
+  Settings given to the owner: a custom domain on the bucket (never
+  `r2.dev`), CORS for any origin with GET and HEAD, `range` and `if-match`
+  allowed and `etag` exposed, a cache rule for `.pmtiles`, Bot Fight Mode
+  and challenges off on that hostname, a billing alert; the folder's
+  `packs/`, `lib/` and `MANIFEST.csv` uploaded by the owner, the README
+  held back until P6 is final.
+- **Approved by the owner and not to be re-asked:** the four dark colours;
+  the ferry crimson stays; P1 to P6 with P4's added software sentence; the
+  shared table; the internal upload folder; multi-route ferry work is
+  later.
+- **Tools.** Temporary launch entries `basemap-proto-tmp` (pages) and
+  `basemap-host-tmp` (the upload folder) are added to this worktree's
+  `.claude/launch.json` per run and removed after; ports 8831 and 8832 were
+  taken by another session on 2026-10-12, 8833 and 8834 were free.
+  `render_switch_on.py`, `render_plain_diff.py`, `dark_check.mjs` with
+  `dark_summary.cjs`, `pack_sides.py`, `pack_metadata.py` are in
+  `data/_basemap_build/session_tools_2026-10-08/`.
+
+### 2026-10-08 - RESUME NOTE for the next session (internal; Cleanup drops this entry when folding)
+
+- **Done: the full Travel version (Mendoza and Tokyo), reviewed by the
+  owner on a phone and ready for the app.** The package, with
+  `HANDOFF.md` (build process, every decision, measurements, critique,
+  the app-only items and requirements), is
+  `data/_basemap_build/prototype_full_2026-10-08/` (with `SHA256SUMS`)
+  and `data/_basemap_build/full_travel_prototype_2026-10-08.zip`. The app
+  session copies it when the owner says so, as it did the baselines; it
+  is a reference, not code (owner: the app is independent). Handed to the
+  app session 2026-10-08, with the main-checkout path. Rendering it again:
+  `data/_basemap_build/session_tools_2026-10-08/` (main checkout; the
+  session's scratch tools, README inside): `render_full.py` with
+  `labels_tokyo.json`, a colours file from `hues_tokyo.py` and
+  `credits_tokyo.txt` (Tokyo) or the Mendoza pack; `full_shots.mjs` for
+  the headless checks.
+- **NOT READY: landing the site's partial Travel view.** Five things stand
+  between this branch and a live Travel view (2026-10-08):
+  1. **The owner's go-live call** (decision 19: whether the half version
+     goes live, after the pilot, weighed with the legal findings). Not
+     made.
+  2. **Hosting.** The Travel view range-reads each city's pack from a
+     server; today they are served only on this machine. R2 behind an
+     owned domain against the free Worker, compared live (owner), needs
+     the owner's Cloudflare account and a Cloudflare terms read first;
+     CORS as recorded in the hosting entry.
+  3. **The other 167 packs.** Only Mendoza, Avignon and Florence are built
+     (trimmed, zoom 14). About 2 to 2.5 min each through the gate (roughly
+     six hours), plus each region's Geofabrik extract (owner downloads).
+  4. **Review-time steps on this branch:** merge master, then
+     `check_render_current`; a deploy-verify `scope: map-chrome`; rows in
+     `docs/data_sources.md` for the basemap (Protomaps code BSD-3, styles,
+     tiles an ODbL produced work) and the Noto glyphs (OFL, trademark
+     line); the owner's sign-off on visible wording ("Business",
+     "Travel", the legend's ferry and cable-car rows); Cleanup folds this
+     drafts file.
+  5. **The later items** below.
+- **Fonts settled (owner):** Noto, with `OFL.txt` and the line "Noto is a
+  trademark of Google LLC" beside every copy of the glyphs; the package
+  ships them.
+- **Later, in order:** the world map (label-free, world pack, dots by
+  transit type, the shared tooltips); the multi-route ferry palette with
+  the first multi-ferry city (Hong Kong example); Protomaps' dark flavor
+  in Travel; the Overview Business/Travel toggle (`app/`, branch only);
+  the legend follow-up (re-enabled pins in Travel); the Worker against an
+  R2 custom domain comparison (needs the owner's Cloudflare account and a
+  Cloudflare terms read first); `--keep_wards` when Tokyo or Seoul wards
+  are built.
+- **The build folder is safe in the main checkout (owner via Cleanup,
+  2026-10-08):** `data/_basemap_build/` (builder, extracts, packs,
+  `prototype_full_2026-10-08/` and its zip, both baselines; 4,969 files,
+  4.34 GB) was copied no-clobber into the main checkout's
+  `data/_basemap_build/`, and this worktree's 12 heavy-job history entries
+  (the basemap builds) merged into the shared history;
+  `check_worktree_data.py` reports OK. Work from the main checkout's copy
+  from now on. After this session closes, Cleanup moves this worktree to
+  `.claude/worktrees/basemap` and renames the branch `basemap` (owner
+  approved). The builder patch is `data/_basemap_build/travel_trim.patch`.
+- **Before this branch's push:** merge master in then (it moved: line
+  registry, 34 maps re-rendered, about 160 lines of `map_common.py`) and
+  re-run `check_render_current`; message the new Cleanup session (it asked
+  to be told when the branch is ready for review time).
+- **Build recipe.** From `data/_basemap_build/`:
+  `python ../../scripts/heavy_job.py run --label basemap-build-<city>-z14 --session epic-neumann --peak-gb 4 --estimate "scaled from basemap-build-mendoza" -- <absolute path to tools/jdk-21.0.12.1+1/bin/java.exe> -Xmx5g -jar basemaps-main/tiles/target/protomaps-basemap-HEAD-with-deps.jar --area=<extract name> --bounds=<w,s,e,n> --maxzoom=14 --travel_trim=true`;
+  the output is `<area>.pmtiles` in that folder (rename it). Box: the
+  stations' extent plus 10 km in the city's UTM zone (`pack_bounds.py`).
+  Peaks 3.1 to 3.4 GB, about 2 to 2.5 min a city. Never `--download`.
+  Extracts in `data/sources/`: argentina, provence-alpes-cote-d-azur-261006,
+  centro-261006 (copies; the owner's originals stay in Downloads).
+- **Checks to run:** `node scripts/check_travel_style.mjs <basemaps.js>
+  data/_basemap_build/basemaps-main/tiles/src/main/java/com/protomaps/basemap/TravelTrim.java`
+  (basemaps.js is in `data/_basemap_build/prototype_full_2026-10-08/lib/`
+  and the baseline's `offline/lib/`); `check_render_current.py`;
+  `check_no_em_dashes.py`; the pixel gate (trimmed against untrimmed,
+  `trim_shots.mjs`,
+  `trim_diff.py`) whenever the style or the trim changes.
+- **Scratch tools:** the session scratchpad is not visible to a new
+  session. Copies of the 43 that matter are in the main checkout's
+  `data/_basemap_build/session_tools_2026-10-08/` (copied 2026-10-08 by
+  shell, before the worktree guard stopped a README there; kept, and the
+  transfer okayed, by the owner the same day, so a later session can
+  re-render and re-check the prototype without this session's
+  scratchpad): `render_full.py` and `render_travel.py <root>
+  <city> <out> <pack url> <lang> <pill> ["ferry:Name"]` render a built
+  city's full page or its site page with the Travel switch (they read the
+  main checkout's data and write nothing under `outputs/`);
+  `full_shots.mjs` + `full_help.js` + `cases_*.json` (headless Edge views,
+  taps, offline runs, measurements); `travel_check.mjs` +
+  `summarize_travel.mjs` (the site Travel view test); `offline.mjs`,
+  `trim_shots.mjs` + `trim_diff.py`, `lang_check.mjs`; pack readers
+  `pack_compare.py`, `pack_kinds.py`, `pack_trim_estimate.py`,
+  `pack_bounds.py`; `make_standins.py`, `make_qrank_standin.py`;
+  `exceptions_tokyo.py`, `hue_pairs.py`, `hues_tokyo.py`, `stn_gap.py`;
+  `guard_test.py`; `range_server.py` (a launch entry `basemap-proto-tmp`,
+  added and removed per run, 127.0.0.1 only; a phone test uses a
+  `PHONE-LAN-` entry, stopped right after), `zip_roundtrip.py`,
+  `grid_sheet.py`. Usage lines at the top of each. The in-app browser
+  pane does not draw while hidden; use the headless harnesses.
+- **UPDATE 2026-10-08 (late session, branch now `basemap`):** item 1 waits
+  for review time (owner); item 2's Cloudflare terms read is done and item
+  4's license rows are written (entry below); item 3 is now 203 packs, not
+  167 (master has 206 cities), with the download plan and the owner's
+  download script in `data/_basemap_build/download_plan_2026-10-08/`; item
+  5: Protomaps' dark flavor in Travel is approved, built after the
+  2026-10-11 reset; the other later items wait until after go-live. The
+  owner paused the branch until Sunday 2026-10-11.
+
+### 2026-10-12 - The live host tested from the app on port 8501: Travel loads for Seattle, London and Tokyo with no CORS error; the exact go-live edits (measured; edits not applied)
+
+- **The host** (owner, via Cleanup; `DECISIONS.md` on master, 2026-10-12):
+  `https://files.dacekroberts.dev`, an R2 bucket behind the owner's
+  subdomain, 237 packs uploaded by the owner. It answers only the live app's
+  origin and localhost or 127.0.0.1 on ports 8501 and 8000.
+- **Read from here with curl (2026-10-12):** a range request on a pack
+  returns 206 with `content-range`; with `Origin: http://localhost:8501` or
+  `http://127.0.0.1:8501` it adds `Access-Control-Allow-Origin` for that
+  origin, `Vary: Origin` and exposes `ETag`; with another origin, or none,
+  no CORS header comes back (so a browser on any other site is refused, as
+  the owner set it); the preflight allows GET and HEAD with `range` and
+  `if-match`; no response sets a cookie. `lib/basemaps.js`, a glyph range,
+  a license file, `OFL.txt` and `MANIFEST.csv` all return 200, and the live
+  manifest is byte-identical to the folder's (same MD5).
+- **The owner's browser test** (`app_travel_check.mjs`): Seattle, London
+  and Tokyo rendered with `PACK_HOST` set for that process only, into a
+  scratch copy of the app (the repository's `outputs/` untouched, nothing
+  committed), the lean app on `127.0.0.1:8501`, headless Edge at 1280x900
+  and 375x812. In all six runs the map's frame was found, Travel switched
+  on, and the GL map drew roads and labels in light and in dark, with the
+  Business view's filter back afterwards; Tokyo's JA pill added labels (107
+  to 147 on desktop). **Requests to the host: 5 library files 200, 5 to 7
+  pack range reads 206, 3 or 4 glyph files 200 per run; no failed request,
+  no CORS error, no cookie.** The only console errors are Streamlit's own
+  two 404 probes for `/<page>/_stcore/health` and `host-config`, which
+  every page of the app logs with or without Travel. Screenshots and the
+  result file: `data/_basemap_build/shots_live_host_2026-10-12/`.
+- **The public README was the internal draft.** The file at `/README.md`
+  still read "INTERNAL DRAFT, not published". `make_upload.py` now writes
+  the public text (P6, approved): what the folder holds, the ODbL sentence,
+  the Noto and software lines. The owner replaces that one file on the
+  host.
+- **THE EXACT EDITS FOR GO-LIVE (for the integration tree, with the one
+  full re-render; the owner sees the `PACK_HOST` diff before it is
+  committed and is asked before anything reaches the deployed app).**
+  1. `pipeline/travel_packs.py`: `PACK_HOST = None` becomes
+     `PACK_HOST = "https://files.dacekroberts.dev"`. It must land in the
+     same commit as the re-rendered maps: `check_travel_packs.py` fails a
+     host that is set while the committed maps lack the switch, and the
+     reverse.
+  2. The same file, phase 2's rows: the 30 Japanese folder names under
+     `"ja"`, `cluj_napoca` under `"ro"` (the resume note lists them).
+  3. P5, appended to notice 1 in `app/components.py` after CARTO's
+     sentence: "Choosing Travel on a city map loads that city's map file
+     and the map software from files.dacekroberts.dev. This project sets no
+     cookies there and keeps no record of those requests. The files are
+     delivered through Cloudflare, which processes requests under its own
+     privacy policy. Nothing is loaded from that address until a visitor
+     chooses Travel; the choice is remembered on the visitor's own device,
+     so the next map opens the same way." (The owner's clause replaces the
+     draft's sentence about Cloudflare receiving the IP address; an `app/`
+     change, so the reboot question applies.)
+  4. P4, in `docs/data_sources.md`: the internal block "The Travel
+     basemap (pilot, not published)" loses its internal markers and its
+     first paragraph, and opens with: "**The Travel basemap.** Each city
+     map has a second base layer, Travel. Its map tiles are built by this
+     project from OpenStreetMap data (© OpenStreetMap contributors, Open
+     Database License 1.0) with the open-source Protomaps basemap builder,
+     and stored as one file per city. Those files are offered under the
+     same license: they, and the list of OpenStreetMap extracts each was
+     built from, are at https://files.dacekroberts.dev (README.md and
+     MANIFEST.csv). Map labels are drawn in Noto fonts (SIL Open Font
+     License 1.1); Noto is a trademark of Google LLC. The map is drawn with
+     open-source software (MapLibre GL, maplibre-gl-leaflet and PMTiles);
+     each license is published beside the files, at
+     https://files.dacekroberts.dev/lib/licenses/. The map style is adapted
+     from Protomaps' basemap style (BSD 3-Clause) and is this project's own
+     version, not a Protomaps product." Its Cloudflare bullet becomes: R2
+     behind the owner's subdomain, no Worker, terms accepted 2026-10-11,
+     origins limited to the app and local test ports.
+  5. After the re-render: `check_travel_packs.py`, `check_render_current`,
+     `scripts/check_map_attribution.js` at more than one height, and a
+     `deploy-verify` `scope: map-chrome` with Travel switched on in a few
+     cities, before the push.
+- **The owner's boundaries for this host** (relayed by Cleanup): no
+  credential, token or rclone config in the repository; no transit-globe
+  origin or reference on this host; no analytics or monetization. Nothing
+  on this branch names any of them.
+
+### 2026-10-12 - All 206 Travel packs built and in the upload folder; Avignon's pilot pack was missing its west bank; what phase 2's 30 cities need (built and measured)
+
+- **206 of 206 packs built, none failed** (`build_packs.py`, three lanes at
+  most through the gate, 2026-10-11 15:33 to 2026-10-12): 2,079,866,035
+  bytes in all, from 1.2 MB (Mendoza) to 47.6 MB (London), median 8.4 MB.
+  A build took 120 to 598 s, median 213 s, 46,759 s of building in total;
+  the 2 to 2.5 min of the pilot held only for extracts under about 500 MB.
+  Every pack is trimmed, zoom 14, over its stations plus 10 km.
+- **The upload folder holds all 206, stamped and verified**
+  (`data/_basemap_build/host_upload_2026-10/`, 2.0 GB with the libraries
+  and glyphs; `MANIFEST.csv` has a row per pack). `stamp_verify.py`: 206
+  packs, 117,599 tile entries, each stamped pack identical to its build id
+  for id and byte for byte. **No built city lacks a pack.** The 192 Cleanup
+  counted on 2026-10-12 was the folder mid-run: the 14 then missing were
+  still queued (Toyama, Tsu, Uji, Vancouver, Yokohama, Yokosuka, Yongin,
+  Zurich), waiting on a merge that finished after their lane had passed
+  them (Geneva, Philadelphia, Yokkaichi), or the pilot's first three held
+  for a rebuild from the clean extracts (Mendoza, Avignon, Florence).
+- **Final check on stamped packs:** Avignon, Geneva, Mendoza and Seoul,
+  rendered with the switch on for that process, against the finished folder
+  on a second local address: every step of `dark_check.mjs` on desktop and
+  phone, no error. The earlier checks had run on unstamped packs.
+- **Avignon's pilot pack was built from one region and its map crosses
+  two.** The plan listed all of France for Avignon, a file never
+  downloaded, which stopped the last pass. Avignon's box crosses the Rhône
+  from Provence-Alpes-Côte d'Azur into Languedoc-Roussillon, so it is a
+  21st cross-border city: both extracts were held, merged (the 19th merged
+  file; 80,045,748 objects, 113,267 duplicates) and the pack rebuilt.
+  Measured with `pack_sides.py` west of 4.79 E: the pilot's pack of
+  2026-10-08 has 951 road features there and names neither
+  Villeneuve-lès-Avignon nor Les Angles; the new one has 3,089 and names
+  both. Nothing published used the old pack. Transit-globe builds its own
+  packs from its own boxes, so it is unaffected, but its copy of the
+  pilot's baseline screenshots for Avignon shows the thin west bank.
+  Totals for the merges are now 19 files, 16.28 GB, 21 cities.
+- **Master taken in again** (doc-only commits since the first merge);
+  `check_all.py` 52 of 52.
+- **PHASE 2: what its 30 cities need (asked by Cleanup; read-only, nothing
+  built).** Boxes from each city's `processed/stations.csv` in the shared
+  data folder; regions measured against Geofabrik's `.poly` outlines for
+  the eight Japanese regions (`new_cities_poly.py`), because
+  `index-v1.json` carried empty polygons for Japan on 2026-10-12. Controls
+  reproduce: Ageo gives kanto, Okayama chugoku with shikoku, as planned on
+  2026-10-08.
+  - **No new download.** Every region needed is among the 93 held,
+    Romania's included (Bucharest's).
+  - **Single region, 26 cities.** kanto: Fujisawa, Funabashi, Ichihara,
+    Ichikawa, Kawaguchi, Koshigaya, Matsudo, Sakura, Urayasu, Yachiyo.
+    kansai: Ibaraki (Osaka), Kadoma, Minoh, Moriguchi, Neyagawa, Takatsuki,
+    Yao. chubu: Fuji, Kanazawa, Matsumoto, Okazaki, Shizuoka. tohoku:
+    Aomori, Yamagata. chugoku: Matsue. romania: Cluj-Napoca.
+  - **Two regions, 4 cities.** Kurashiki: chugoku 89%, shikoku 17% (the
+    merged file Okayama uses is already made). Sagamihara: kanto 92%,
+    chubu 11% (a new merge, about 15 min). Kure: chugoku covers 100% of
+    the box, shikoku's outline overlaps 0.7% of it, so chugoku alone.
+    Tottori: chugoku 99.8%, kansai 0.6%; recommended as a merge with
+    kansai (about 12 min) so no land in the margin is left out, though
+    chugoku alone would pass the 99% line. The outlines overlap, so the
+    shares add to more than 100%.
+  - **Order and cost:** the two merges first (one gate slot each), then 30
+    builds in three lanes, about 40 minutes at the median, each declared
+    4 GB. Then `make_upload.py`.
+  - **Table rows:** 29 cities under `"ja"`, Cluj-Napoca under `"ro"`; the
+    folder names are the branches' own (`ibaraki_osaka`, `cluj_napoca`).
+    They cannot be added on this branch: the check also fails a table row
+    with no built map, so the rows go in where the cities' maps are, in the
+    integration worktree, with the merge that brings them.
+- **Phase 2's 30 packs built the same day, on the owner's word ("you will
+  still need to do the new batch of cities").** 30 of 30, none failed;
+  with them the folder holds 236 packs, 2,356,858,981 bytes, and
+  `stamp_verify.py` reads 236 packs, 130,096 tile entries, 0 bad. Two new
+  merges, no version conflicts: chubu with kanto for Sagamihara
+  (150,079,017 objects, 427,620 duplicates) and chugoku with kansai for
+  Tottori (87,837,936; 117,909); Kurashiki shares Okayama's file. Both
+  sides present in the two-region packs (`pack_sides.py`): Sagamihara's
+  names Uenohara, in Yamanashi, with 780 road features west of 139.13 E;
+  Kurashiki's names Sakaide, across the Inland Sea. The merged files now
+  number 21, for 24 cities. **Naha** (added to phase 2 by the owner the
+  same day) has no pack: its box needs its stations, and its build has not
+  started.
+- **For the landing (answers to Cleanup).**
+  - This branch's edits to `pipeline/map_common.py` sit in: the imports;
+    `add_pin_layer` (the `registry` argument); `build_legend` (the Travel
+    wrap around the business rows, the route rows, the `full` variant) and
+    `LEGEND_FULL_HTML`; `TRAVEL_MODE_SCRIPT`; the block from
+    `OPEN_BASEMAP_LIBS` through `OpenBasemap`, `FULL_TRAVEL_SCRIPT` and
+    `_render_full_travel`; and `render_heatmap` (the table lookup, the two
+    base layers, `business_layers`). `_THEME_TOGGLE_TEMPLATE` and its
+    `#map-actions` block are untouched (the label pill was moved to the top
+    left to stay clear of it), and so are `_LEGEND_CSS` and `LEGEND_HTML`.
+    A phone-only legend cap that edits `build_legend` or the legend CSS
+    meets this branch only in `build_legend`.
+  - One re-render or two: no host exists and the owner's hosting call has
+    not been made, so unless that call and the upload happen before the
+    landing's full re-render, the landing ships with the switch off and
+    go-live costs a second full re-render.
+
+### 2026-10-11 - One Travel table for every city, switched off; an internal upload folder; wording proposals for the owner (built; proposals not applied)
+
+- **The Travel switch for all cities is one table, `pipeline/travel_packs.py`
+  (owner, 2026-10-11: "shared table switched off yes").** It holds the pack
+  host (`PACK_HOST`, None today), each city's local label language and the
+  named ferry and cable-car routes that get a legend row. `render_heatmap`
+  asks it for a city's Travel arguments, by the output folder's name,
+  whenever the city's map step passes none; a city's own `open_basemap`
+  still wins. Go-live is then one line and one re-render of the maps, with
+  no city file touched. The alternative, a line in each of 206 map steps,
+  was set aside as 206 edits that can fall out of step.
+  - **Off means unchanged:** with `PACK_HOST` None, Florence and Kobe render
+    identical to their committed maps (`render_plain_diff.py`), and
+    `check_render_current` reads 206 of 206.
+  - **On, tested against the upload folder** served on a second local
+    address (so the pack, the libraries and the glyphs are cross-origin, as
+    on a real host): Kobe (JA pill), Antwerp (NL), London (no pill) and Hong
+    Kong (ZH), rendered with the switch on for that process only
+    (`render_switch_on.py`), pass every step of `dark_check.mjs` on desktop
+    and phone: Travel and Business, light and dark, the pill, no error.
+  - **`scripts/check_travel_packs.py`, in `check_all.py`:** every city in
+    the table has a built map, every language is one the pinned style
+    carries, every route kind is known, and the committed maps carry the
+    Travel switch exactly when a host is set, so the table and the maps
+    cannot drift apart unnoticed.
+  - **Cities that land later (owner, 2026-10-11: batch 2 is landing
+    soon).** English-only cities are an explicit list, `ENGLISH_ONLY`, and
+    the check requires every built map in exactly one of the two tables.
+    A new city therefore fails the pre-push check until someone places it,
+    which is also the reminder that it needs a pack: its box from
+    `pack_bounds.py`, its Geofabrik extract (a new download only if its
+    region is not among the 93 held), `build_packs.py <city>`, then
+    `make_upload.py`. Whichever of this branch and a new city lands second
+    adds the table line.
+  - **The libraries come from the pack host too** (`<host>/lib/`), not the
+    CDN copies the prototype used: the table passes them, so a release
+    loads nothing from jsdelivr or Protomaps' GitHub pages for Travel.
+- **The upload folder is internal for now (owner, 2026-10-11: branch out
+  once the domain is ready).** `data/_basemap_build/host_upload_2026-10/`,
+  assembled by `download_plan_2026-10-08/make_upload.py` in the layout the
+  table reads: `packs/<city>.pmtiles`, `lib/` (the five GL files, the Noto
+  glyphs with `OFL.txt` and `TRADEMARKS.txt`, each library's license),
+  `MANIFEST.csv` (per pack: bytes, sha256, box, its Geofabrik extracts and
+  their dated addresses, for the ODbL 4.6 offer) and a README marked
+  internal draft. Nothing is uploaded anywhere.
+- **OWNER, 2026-10-11: P1 to P6 approved.** P1, P2 and P3 as written, with
+  the multi-route ferry work noted as later work (which routes beyond the
+  pilot's two earn a legend row, and the palette for a city with several
+  ferries, Hong Kong the example). P4 approved with the instruction to make
+  sure it covers everything necessary (the review is the next bullet). P5
+  approved with its two slot-ins: the address, and the "keeps no record"
+  clause confirmed against the chosen host's log settings; it goes into
+  notice 1 in `app/components.py`, beside CARTO's sentence, at go-live. P6
+  approved. None is applied yet: each waits for the host address.
+- **P4 checked against every license the Travel basemap touches
+  (2026-10-11); two gaps found and closed.**
+
+  | Source | What its license asks | Where it is met |
+  |---|---|---|
+  | OpenStreetMap data, the osmdata.openstreetmap.de polygons (ODbL 1.0) | credit; the license named; the derived database offered under ODbL with its source | the map corner; P4; each pack's metadata; `MANIFEST.csv` |
+  | Natural Earth (public domain), pgf-encoding (CC0 output) | nothing | none owed |
+  | Protomaps builder and style (BSD 3-Clause, Mapzen MIT notice) | the notice kept with copies; no use of the name for a modified work | `lib/licenses/`; P4's last sentence; each pack's metadata |
+  | Noto glyphs (SIL OFL 1.1) | the license with every copy; the trademark line (owner) | `lib/fonts/OFL.txt`, `TRADEMARKS.txt`; P4 |
+  | MapLibre GL, maplibre-gl-leaflet, PMTiles (BSD 3-Clause, ISC) | the notice kept with copies | `lib/licenses/`; P4's added sentence |
+  | Cloudflare | no credit; no implied affiliation; visitors told | P5 |
+
+  - **Gap 1, the packs named themselves "Protomaps Basemap" and named no
+    license.** The builder writes that name and an "© OpenStreetMap" credit
+    into every pack's metadata, while this project's own rule is that a
+    modified tileset is never called Protomaps, and decision 13 wants the
+    license named in the pack. `make_upload.py` now stamps each pack as it
+    enters the upload folder: name "Travel basemap pack (<city>)", a
+    description saying the builder is modified, the credit "© OpenStreetMap
+    contributors", `license: ODbL-1.0` and its address. Only the metadata
+    section and two header fields change. `stamp_verify.py` compared every
+    stamped pack with its build: 192 packs, 110,318 tile entries, identical
+    id for id and byte for byte. The builds themselves are untouched.
+  - **Gap 2, the map software's licenses were not mentioned.** P4 gains one
+    sentence, after the Noto one: "The map is drawn with open-source
+    software (MapLibre GL, maplibre-gl-leaflet and PMTiles); each license
+    is published beside the files, at [address]/lib/licenses/."
+- **PROPOSALS as put to the owner (now approved, above).**
+  - **P1, wording already on the branch, for sign-off:** the two base
+    layers are named "Business" and "Travel" in the layer menu; the label
+    pill reads "EN" and the local code in capitals ("ES", "FR", "JA", "KO"),
+    with the screen-reader name "Map label language"; a named ferry or
+    cable car gets a legend row under "Transit Lines" in Travel only
+    ("Arno Boat", "Bac du Rocher des Doms").
+  - **P2, the label-language table (judgment calls):** 166 cities get a
+    local-language pill, 40 are English only (the English-speaking
+    countries, Tbilisi and Dublin). Brussels, Charleroi, Liège, Montréal
+    and Geneva take French, Antwerp and Ghent Dutch, Zurich German; Ottawa
+    is English only; Barcelona and Palma take Spanish, since the style has
+    no Catalan; Tbilisi has no pill, since the style has no Georgian
+    (labels there fall back to each feature's own name where OSM has no
+    English one); Hong Kong and the Taiwanese cities use traditional
+    Chinese with the pill text "ZH".
+  - **P3, legend rows for routes:** only the pilot's two (Florence,
+    Avignon). Every ferry and lift is drawn and named along its line in
+    every city; which others earn a legend row waits for the multi-route
+    ferry work, a later item.
+  - **P4, the reader-facing data-sources section** (replaces the internal
+    block's heading and note at go-live; the address is filled in then):
+    "**The Travel basemap.** Each city map has a second base layer, Travel.
+    Its map tiles are built by this project from OpenStreetMap data
+    (© OpenStreetMap contributors, Open Database License 1.0) with the
+    open-source Protomaps basemap builder, and stored as one file per city.
+    Those files are offered under the same license: they, and the list of
+    OpenStreetMap extracts each was built from, are at [address]. Map
+    labels are drawn in Noto fonts (SIL Open Font License 1.1); Noto is a
+    trademark of Google LLC. The map style is adapted from Protomaps'
+    basemap style (BSD 3-Clause) and is this project's own version, not a
+    Protomaps product."
+  - **P5, the privacy text (decision 18; depends on the host chosen):**
+    "Choosing Travel loads that city's map file and the map software from
+    [address], storage run by Cloudflare. As with any web request,
+    Cloudflare receives the visitor's IP address and the details of the
+    request, and handles them under its own privacy policy. This project
+    sets no cookies there and keeps no record of those requests. Nothing is
+    loaded from that address until a visitor chooses Travel; the choice is
+    remembered on the visitor's own device, so the next map opens the same
+    way." The "keeps no record" clause holds only with the Worker's
+    invocation logs off (or with R2 and no logging), so it is confirmed
+    against the host's settings before it is published.
+  - **P6, the upload folder's README:** the internal draft in the folder is
+    the starting text; its ODbL sentence is P4's.
+
+### 2026-10-11 - Dark Travel draws Protomaps' dark flavor; the 20 cross-border cities' extracts merged (built and measured)
+
+- **Dark mode in Travel is Protomaps' own dark flavor, in place of the
+  invert filter (owner approved 2026-10-07 and again 2026-10-08).** The
+  `OpenBasemap` layer reads `body.dark-base`: the style is built from
+  `namedFlavor("dark")` and `travelStyle(..., {flavor: "dark"})`, the map
+  container carries `hm-gl-base` while the layer is on, and one injected
+  rule switches the tile pane's filter off for that case, so the Business
+  view's OSM tiles keep the invert filter. A MutationObserver on the body's
+  class restyles the GL map when the Dark mode button is pressed. The
+  shared theme block is untouched, so no committed map changes
+  (`check_render_current` 170 of 170).
+- **A defect found on the way:** maplibre-gl-leaflet 0.1.4 destroys its GL
+  map on every remove and builds a new one from the options it was created
+  with, so a label language picked on the pill would be lost after Business
+  and back (read in the plugin's source; not reproduced before the fix).
+  The style is now set on the options before every add, which the dark
+  flavor needed as well; step 5 and step 8 of the check below cover it.
+- **Dark colours, measured and approved by the owner (2026-10-11)** (`dark_colours.py`; contrast against
+  5.7.2's dark water #31353f and land #1f1f1f, CIE76 with
+  `pipeline/linecolour.delta_e`). The light colours do not carry over:
+  ferry crimson #b0004f reads 1.7:1 on the dark water and lift grey #444444
+  1.3:1.
+
+  | | Light | Dark | On dark water | On dark land |
+  |---|---|---|---|---|
+  | Ferry, site | #b0004f | #f06292 | 4.0:1 | 5.4:1 |
+  | Ferry, full | #1e88e5 | #42a5f5 | 4.6:1 | 6.2:1 |
+  | Aerial lift | #444444 | #c8c8c8 | 7.3:1 | 9.9:1 |
+  | Disputed line | #c4c4c4 | #4a4f5a | 1.5:1 | 2.0:1 |
+
+  The pink is 47 from Marunouchi red and 55 from the tram dot colour; the
+  disputed grey is kept below the settled border #5b6374, as faint against
+  the dark land as the light one is against the light land. The legend's
+  route swatches read a custom property with a `.dark-base` override, so a
+  swatch changes with the line it explains. Land-use tints stay the INTERIM
+  `TINT_DARK` table until transit-globe drafts its own.
+- **Verified in headless Edge on Florence** (`dark_check.mjs`; site view
+  and full version, 1280x800 and 375x812): ten steps on the site view
+  (Travel light, dark, Business dark, Travel again, light chosen while in
+  Business, the IT pill, then dark) and three on the full version. At every
+  step the GL background, land, park, ferry and ferry-label colours and the
+  legend swatch match the flavor, the tile pane's filter is `none` in
+  Travel and the invert filter in dark Business, the credit reads
+  "© OpenStreetMap contributors", and no error is logged. The phone run
+  opened straight into dark Travel from the remembered choices, which also
+  drew correctly. `check_travel_style.mjs` passes (8 style variants, trim
+  lists match). Screenshots in `data/_basemap_build/shots_dark_2026-10-11/`;
+  the tools beside the others in `session_tools_2026-10-08/`.
+- **For the owner:** Protomaps' dark street names are dim by design (#525252 on #1f1f1f, 2.1:1), which
+  suits "context, never content" but may read too faint on a phone
+  outdoors. **Seen while measuring, not changed:** the site's ferry crimson
+  #b0004f is 6 (CIE76) from the Food service pin colour, under the hard
+  floor of 10, and matters only once a reader turns pins back on in Travel
+  (the legend follow-up, a later item); the dark pink is 20 from it.
+  **Owner, 2026-10-11: the crimson stays** (businesses are not on the
+  water, so a ferry dash and a Food service pin do not meet; other colours
+  can be drafted if that ever changes).
+- **The 20 cross-border cities' extracts are merged: 18 files, 15.62 GB**
+  (Lille and Valenciennes share one, Kitakyushu and Shimonoseki another),
+  in `data/_basemap_build/merged_pilot/` with `merged.csv` (inputs, their
+  dated Geofabrik URLs for the ODbL 4.6 offer, counts). Pilot-only: nothing
+  was written into `geofabrik_extracts_2026-10/`.
+  - **Method** (`download_plan_2026-10-08/merge_extracts.py`, pyosmium
+    4.3.1): a streaming merge. Every Geofabrik extract is sorted by type
+    then id, so the inputs are read side by side with one object held per
+    input; an unsorted input stops the run. `MergeInputReader` was not used:
+    it holds whole files in memory. Measured peak 0.27 GB (Strasbourg),
+    against the 8 GB cap.
+  - **Border objects:** an object on a border sits in both neighbours and
+    is written once. The newest-dated extract is read first, so where two
+    extracts carry different versions its copy is the one kept.
+  - **Measured:** 2,104,227,669 objects read, 5,882,917 duplicates dropped
+    (0.28%), 3 objects at differing versions, all in Quebec with Ontario
+    (extracts dated a day apart). In every file, objects read minus
+    duplicates equals nodes plus ways plus relations written. About 190,000
+    objects a second; 13,800 s of merging across three lanes (England with
+    Wales 21 min, New York with Ontario 31 min, the largest).
+- **A merged file builds (Strasbourg, the control).** Alsace with the
+  Freiburg and Karlsruhe districts, built trimmed to zoom 14: 7,809,562
+  bytes, 3 min 46 s, peak 3.64 GB. `pack_sides.py` on the pack: 12,788 road
+  features in the zoom-14 tiles west of 7.80 E and 3,397 east of it, and
+  the places layer names Strasbourg, Kehl and Illkirch-Graffenstaden.
+- **The other packs are building** (owner's go-ahead, 2026-10-11):
+  `download_plan_2026-10-08/build_packs.py`, one java run per city through
+  the gate, into `data/_basemap_build/packs_pilot_2026-10/` with
+  `packs.csv` and a log per city. The builder still reads its other sources
+  from `data/sources/`; `--osm_path`, `--output` and a per-city `--tmpdir`
+  let lanes run side by side. Three lanes at most, so one gate slot stays
+  free: with the merges running as well the four slots were full for half
+  an hour and the place search session waited (it said so; two lanes were
+  stopped, losing one half-built pack). Results are added here when the run
+  ends.
+- **Review-time prep, at the owner's request (2026-10-11): everything made
+  ready, the hosting and go-live call last.** Master merged into the branch
+  (five conflicts in `pipeline/map_common.py`, master's pin colours and
+  outlines against the Travel additions, both kept); `check_all.py` 51 of
+  51; Florence, Mendoza, Kobe and Incheon rendered with the merged code
+  match their committed maps after Folium-id normalization
+  (`render_plain_diff.py`). The branch changes nothing under `app/` or
+  `outputs/`.
+
+### 2026-10-08 - Go-live at review time; Cloudflare's terms read; 203 packs planned as 93 downloads; license rows; dark Travel approved (owner; measured)
+
+- **Owner's picks from the five open items:** the go-live call (decision
+  19) is made at review time; the Cloudflare terms read now; a download
+  plan for the remaining packs now; the license rows now; of the later
+  items, **Protomaps' dark flavor in Travel is approved in advance** (built
+  after the 2026-10-11 reset), the rest wait until after go-live. The
+  branch then pauses until Sunday 2026-10-11 (owner).
+- **Cloudflare as the pack host (licence-read agent, 2026-10-08).** The
+  Self-Serve Subscription Agreement (2025-09-12) governs R2, Workers and the
+  CDN and incorporates the Service-Specific Terms (2026-09-28) and the
+  developer documentation's limits, so those limits are contractual.
+  - R2 behind an owned domain, and a Worker on workers.dev: **permitted with
+    conditions.** The CDN clause that replaced the old section 2.8 requires
+    large files to be served through a paid Developer Platform product such
+    as R2; whether a $0 free-tier R2 account is a "Paid Service" (defined
+    as one "for which we require a fee") is unsettled. The realistic
+    downside is the CDN limited, not a bill.
+  - **r2.dev: not for the live site** ("not intended for production
+    usage"; 429s above hundreds of requests a second; no cache).
+  - Workers Free stops at 100,000 requests a day with Error 1027 (each tile
+    a request, cache hits included) and is never billed; a workers.dev-only
+    Worker probably fails closed (inferred, not confirmed). R2 beyond its
+    free tier (10 GB-month, 1 M Class A, 10 M Class B) is billed with no
+    cap once a card is on file; whether a card is mandatory with zero usage
+    was not established. workers.dev names can change at Cloudflare's
+    discretion with about a week's notice, which would break committed tile
+    URLs until a re-render: a point for the owned domain.
+  - Owner to accept, as with CARTO: an uncapped indemnity (§10.2, covering
+    disputes with third parties, so an ODbL claim too), California law with
+    AAA arbitration and a class waiver, termination "for any reason or no
+    reason at all", liability capped at fees paid ($0).
+  - No credit or notice required; nothing may imply sponsorship or
+    affiliation; a published host benchmark (decision 12's comparison)
+    must carry what is needed to replicate it (§2.2.2).
+  - Privacy: Cloudflare is a **controller** for visitors' IP addresses and
+    traffic data and puts disclosure on the site. Suggested wording for
+    decision 18 is in the agent's report (internal, review time). Workers
+    invocation logs are on by default (3 days on Free); turn them off for
+    the tile Worker. Keep Bot Fight Mode and challenges off on the tile
+    host, so no Cloudflare cookies are set.
+  - Cache Rule needed for `.pmtiles` (not cached by default; Free plan
+    file ceiling 512 MB, the largest pack about 113 MB).
+- **The remaining packs: 203, not 167** (master has 206 cities since the
+  branch forked; 3 built). Each city's box (stations plus 10 km, UTM) was
+  matched to Geofabrik's region polygons (`index-v1.json`, read
+  2026-10-08). The smallest single region per city gives **91 files,
+  112.9 GB** (Lille and Strasbourg need all of Europe, 35.1 GB; San Diego
+  North America, 19.5 GB; Ottawa Canada, 6.5 GB). **Merging two or three
+  regional extracts for 20 cities gives 93 files, 33.0 GB** (sizes by HEAD
+  request). Box coverage under 99% after merges is sea or lake in the
+  10 km margin only: Le Havre 82%, Chicago 95%, Most, Ostrava, Hakodate
+  and New York 97-99%. **The merge needs a tool not installed** (osmium-tool
+  or pyosmium; the builder reads one `--area`): an owner call before those
+  20 builds. Plan, script and README in
+  `data/_basemap_build/download_plan_2026-10-08/`; `download.ps1` is run
+  by the owner (one file at a time, MD5-checked against Geofabrik's file for
+  the dated extract, resumable, logs each dated URL for the ODbL 4.6 offer).
+- **License rows written** in `docs/data_sources.md`, a new internal block
+  after "The Overview's basemap": the self-built tiles and their inputs,
+  the packs as an ODbL Derivative Database, the Protomaps style (BSD-3 and
+  the Mapzen MIT notice; no sprites), the Noto glyphs (OFL and the
+  trademark line) and Cloudflare. Internal until go-live; its reader-facing
+  wording is drafted at review time. `check_internal_markers.py` OK.
+- **pyosmium 4.3.1 installed for the merges (owner, 2026-10-08).** One
+  `pip install` of PyPI's Windows wheel into the pipeline Python 3.14; it
+  added only `osmium` (its one dependency, `requests`, was present) and
+  carries `MergeInputReader` and `BackReferenceWriter`. Kept out of both
+  requirements files: a basemap build tool, like the JDK. The merges for
+  the 20 cities are written and tested on Sunday, once the extracts are
+  downloaded. The faster osmium-tool command line needs conda on Windows,
+  which this machine lacks; only the app's optional per-city cut would want
+  it. The download script also saves Geofabrik's `.md5` line beside each
+  extract, so the app project can check its copy.
+- **No pilot-only rule rides along with the extracts (owner, 2026-10-08:
+  an earlier pass carried pilot-only choices such as the style before the
+  trim into the app).** `download.ps1` now writes to
+  `data/_basemap_build/geofabrik_extracts_2026-10/`, which holds only
+  Geofabrik's files, their `.md5` lines, `downloaded.csv` and a README.
+  The README lists what the pilot chose and left out: the region per city
+  (picked against the pilot's stations-plus-10 km box, so possibly too
+  small for a wider app area), the 20 merges, zoom 14, `--travel_trim`,
+  the style, the land-cover and QRank stand-ins, and the city list. The
+  pilot's `data/sources/` is never the copy source, since it holds those
+  stand-ins. Merged files go to `data/_basemap_build/merged_pilot/`. The
+  three extracts the pilot already holds are fetched again into the clean
+  folder (1.2 GB), so every copied file has a dated URL and an MD5. The
+  plan folder's README is marked pilot-only.
+- **Downloaded and handed over (owner, 2026-10-08).** 93 of 93 extracts,
+  33.04 GB, every file matched to Geofabrik's MD5 (`verify.py` in the plan
+  folder: OK). The owner copied the folder flat to transit-globe's
+  `data/sources/countries/geofabrik/`, the place its PLAN names, and ran
+  `verify.py --rehash` on that copy; the same check without the rehash
+  also reads OK there. transit-globe's own log asks the handover for a
+  box per city, a cut strategy and a per-city manifest. None of those
+  were sent: they are the pilot's choices, and the app sets its own boxes
+  in `cities.json`.
+- **For the owner, found by the agent:** `scripts/check_stray_downloads.py`
+  reports `centro-261006.osm.pbf` and
+  `provence-alpes-cote-d-azur-261006.osm.pbf` at the main checkout's root
+  (dated 2026-10-08 00:48), copies of the pilot extracts already in
+  `data/_basemap_build/data/sources/`. Not touched.
+
+### 2026-10-08 - The full Travel version built on Mendoza and tested on Tokyo; prototypes go to the app with a full handoff (owner; built and measured)
+
+- **Built (commit 83be06a7, branch only):** `render_heatmap(..., businesses=None,
+  full_travel=dict(pmtiles_url, local_lang, local_name, routes, lib))`, an
+  option on the shared renderer (owner: not a fork), handled by
+  `_render_full_travel` in `pipeline/map_common.py` with the shared blocks
+  (theme, legend machinery, wheel zoom, credit, line highlight, tap select,
+  the OpenBasemap layer with `variant="full"`). What differs from the site's
+  Travel view: no Business base layer, heat, rings, pins or business
+  legend; the page fills its window; one finger pans (no cooperative
+  gestures: the page is the map); casings and white ring-dots sized by a
+  zoom table; line-label pills that follow the view; "Station names" in the
+  layer menu; a legend of lines and named routes with no heading.
+- **The hard line, enforced in code:** passing businesses with
+  `full_travel` raises; a written page containing a ring, heat or business
+  layer name is deleted and raises; with `lib` set (offline), a page that
+  loads a script or stylesheet from another host is deleted and raises.
+  All three tested (`guard_test.py`, scratchpad).
+- **Prototype choices, to critique (not yet owner-approved):** zoom table
+  (zoom, dot radius, line width) 10: 2/2, 12: 3/3, 13: 4/3.5, 14: 5/4.5,
+  15: 6/5.5, 17: 8/7, interchanges +1.5, casing +1.5 px a side; casings
+  white in light and the dark page colour in dark; dots white with a
+  #222222 ring in both; pills in the line's colour with white or near-black
+  text by contrast, centred on the line, tried every 16 px along its
+  visible part, middle first, kept clear of other pills, controls, the
+  legend and the dots, none for a line with under 40 px on screen; station
+  names beside the dot, first clear side, interchanges first, faded to 45%
+  for other lines while a line is picked; interchanges from the stations'
+  `lines` column, else lines within 100 m (projected CRS).
+- **Measured.** Tokyo (490 stations, 52 lines), lines with a pill of those
+  with 40+ px on screen, 1000 x 650: zoom 12, 17 of 48; 13, 34 of 38; 14,
+  21 of 21; 15, 16 of 16; 16, 15 of 15; on a 390 px phone 23 of 28 at 13
+  and 16 of 17 at 15. No pill overlaps another; every pill within 3 px of
+  its line. A first version placed pills from Leaflet's `_parts`, which are
+  re-projected only on `viewreset`, after `zoomend` and `moveend`: pills
+  landed up to 607 px off their lines after a zoom; now projected from the
+  lines' coordinates on the next animation frame. Touch on a 390 px phone:
+  a pill tap picks its line and a second clears it; a station tap, and one
+  18 px off, opens the station. No errors in 19 views. The site is
+  unchanged: `check_render_current` 170 of 170, the site Travel view test
+  passes on desktop and touch. Five Tokyo stations (Tokyo, Otemachi,
+  Mitsukoshimae, Nihombashi, Yurakucho) draw 16-33 px off every line at
+  zoom 16: station points are complex centres 30-60 m from any one track
+  (6 of 490 are over 60 m), the same data as the site; left for the app
+  (per-line platform points).
+- **Prototypes go to the app with a full handoff (owner, 2026-10-08):** the
+  app is completely independent of the site, no borrowed code; a prototype
+  goes over as a reference, with a handoff covering the whole build process
+  and every decision the app session could not have seen, and the app
+  critiques it and decides its own changes. Package (scratchpad
+  `site/proto/`, to move to `data/_basemap_build/` with the build): the
+  Mendoza and Tokyo pages, a shared `lib/` (libraries, Noto glyphs,
+  licences), `NOTICE.md`, `README.md`, `range_server.py`, screenshot sheets
+  and `HANDOFF.md`. The app session copies it, as it did the baselines.
+- **Tokyo's test page has no basemap (owner, 2026-10-08):** the only Tokyo
+  pack to hand was a 1 km cut of Protomaps' 2026-10-07 build carrying ESA
+  land cover (CC BY 4.0, a credit to carry), so the patch was dropped.
+  `full_travel` now takes `pmtiles_url=None` (lines on a plain ground, the
+  OSM credit shown on its own) and `credits` (the lines' own sources in the
+  credit corner): Tokyo's reads MLIT's 「国土数値情報（鉄道データ）」 line
+  and the OSM credit (English station names). Commit 8ea6d8aa.
+- **Pilots reviewed (owner, 2026-10-08): "the localhost pilots look
+  great."** Two additions are app-only and go in the handoff as such: a cap
+  on how far the map zooms out (the level decided in the app; the pack
+  stops at the stations' extent plus 10 km), and per-line station lists in
+  both directions (north/southbound or east/westbound), which need their
+  own design and data work in the app.
+- **Tokyo on a phone (owner, 2026-10-08): "loads and operates great".** The
+  open legend's 52 rows ran up under the Dark mode button and covered its
+  own Hide control (the shared cap assumed a 24 px bottom, and the legend
+  had been raised above Tokyo's wrapping credit): now capped between the
+  button row and the credit, measured clear at 390 x 664, 390 x 844 and
+  1280 x 800 (commit b03017f0). The owner confirmed on the phone that a
+  tap on the open legend never selects a station dot beneath it (the
+  legend is outside the map; taps are caught by the map), so closing the
+  legend on a station tap is safe; passed to the app with the long-legend
+  note. **On trial (owner, 2026-10-08):** on a phone, a station tap now
+  folds an open legend away (the panel takes the full width); a legend-row
+  tap still picks its line and leaves the legend open; desktop unchanged.
+  Tested on Tokyo at 390 x 844. The owner decides on the phone whether it
+  stays. And the reverse (owner, on trial): opening the legend closes a
+  station's panel, the side-by-side layout kept as the fallback; tested
+  both ways, no errors.
+- **Unique on-map codes in the full version (owner, 2026-10-08):** no two
+  lines of a city share a label. Tokyo: KSM, KSO, KSK; KKM, KKA; SI, ST,
+  SY; TS, TK, TD (the site keeps the operators' shared codes; the site is
+  senior). `full_travel["labels"]` overrides per page, and the renderer
+  refuses a full page with a shared label. **The site keeps the operators'
+  shared codes; no Tokyo re-render (owner, 2026-10-08): operator
+  consistency outranks travel on a business-focused site.** For the app
+  (owner): a list of every edited code against the official one, so the
+  app can show both and a rider reading the station's signs (KK) is not
+  confused by the app's code (KKA); generalised (owner) to a real-world
+  exception list per city (codes, colours, names): Tokyo's is the
+  package's `tokyo/real_world_exceptions.json`. The prototype shows the
+  official code beside the edited one in the legend row and the station
+  details ("(signed KK)") and on the picked line's pill ("KKA · signed
+  KK"), owner's ask. Commit 7c1f8dbe.
+- **Official colours in the full version and the app, as fully as
+  possible (owner, 2026-10-08):** the site moved all 52 Tokyo colours (36
+  by 20+ CIE76) to clear its pins, which the full version does not have.
+  Piloted: `full_travel["colors"]`, Tokyo drawn in its operators' colours,
+  light and dark, no errors. Distinguishing calls later (owner): 19 pairs
+  within 500 m sit under the hard floor of 10, 8 within one operator
+  (Keisei, Keikyu, Seibu, Tobu share a colour), 11 across operators (JR
+  Saikyo and Namboku 0.6, crossing; Toei Mita and the Monorail 2.5; JR
+  Yokosuka / Sobu Rapid and Tobu Kameido 2.6, 28 m apart); list in the
+  package. The site keeps its colours (and the line-identity hard line).
+- **No "(signed XX)" text in the app's legend or on its map (owner,
+  2026-10-08): too cluttered;** the prototype keeps it to cover the bases.
+  The app marks an edited code in a cheap, quiet way instead (a distinct
+  text treatment such as an underline, bold or a text colour, used for
+  nothing else) and gives the official code in a detail view and once on
+  its info page. In the handoff.
+- **The package's server** now runs with no arguments (port 8000, its own
+  folder) and prints its links, after the owner's first try on a desktop
+  copy left out the folder argument. The owner then ran the package
+  offline from a desktop copy: it worked. Added (owner): a double-click
+  `Start (Windows).bat` (checks for Python, starts the server, opens the
+  browser); the server moves to the next free port when 8000 is busy
+  (Python's server allows address reuse, which on Windows let two servers
+  share a port: turned off) and listens on 127.0.0.1 only.
+- **Offline downloads in the app, a logistics overview (owner asked:
+  phones never run commands):** in the handoff. The installed web app
+  stores the pack, libraries, glyphs and export in the browser's storage
+  and reads the pack from there (PMTiles over a blob, or a service worker
+  answering range requests); a native app opens the pack file; download,
+  checksum, update, delete and storage flows to design; persistent
+  storage, and the iPhone Home Screen install against WebKit's seven-day
+  clearing; ODbL for stored packs. Mac and Linux need nothing for the
+  installed web app; only the desktop prototype has a launcher (Windows),
+  with `python3 range_server.py` on the others.
+- **Legend and station-panel behaviours:** the owner tried both on a
+  phone and called the result great; the handoff recommends them and
+  leaves the final call to the app.
+- **Handed to the app (owner, 2026-10-08):** "if there are no more open
+  gaps let's pass this to the app session". Package final: 799 files,
+  22.6 MB (13.6 MB zipped), `data/_basemap_build/prototype_full_2026-10-08/`
+  with `SHA256SUMS`, and the zip beside it; message sent to the
+  transit-globe session.
+- **A line-colour switch in the app (owner, 2026-10-08):** official
+  colours by default, or a readability set the owner fleshes out,
+  togglable. Approved shape: the readability set is the official set with
+  edits to clashing pairs only (a city with no clashes uses the official
+  set in both modes); the switch lives in the app's settings, not on the
+  map, with a one-line legend note ("Readability colours") while it is on.
+- **REQUIREMENT, app-wide, every city (owner, 2026-10-08): a real-world
+  exception list and a colour list**, covering edited codes, colours that
+  differ from the operator's, names that differ from the signs, and every
+  station and line left off the map with its reason, which the owner
+  ranks the most serious for a travel app. The export contract already
+  carries `on_site_map` and `exclusion` per line and station.
+- **Package final (2026-10-08):** 798 files, 22.6 MB (13.6 MB zipped),
+  `data/_basemap_build/prototype_full_2026-10-08/` with `SHA256SUMS`, and
+  the zip beside it. Unzipped into a fresh folder: no machine path, no
+  outside load; both pages offline with every other host blocked, no
+  errors.
+- **The picked line always shows its pill (owner, 2026-10-08):** placed
+  first, no minimum length, may cover dots when nothing clear is left.
+  Tokyo, all 52 picked in turn: 52 of 52 at the widest view on desktop and
+  phone; at zoom 12 on a phone 40, the rest at most 16 px on screen except
+  Seibu Shinjuku (90 px, under the buttons or the credit).
+- **The label-language switch, two refinements for the app (owner,
+  2026-10-08)**, after Mendoza on a phone showed no visible change (few of
+  its features have an English name in OSM, so English falls back to the
+  Spanish name): hide the switch in a city where few labels differ between
+  the two languages (the app measures it per pack and sets the threshold),
+  and let the switch change the station names as well as the basemap's (the
+  export's `stations[].names`). Both in the handoff.
+- **Station tooltips list the lines served (owner, 2026-10-08)**, each with
+  its swatch and legend name; on a phone, the site's fixed bottom-left
+  panel and selection ring, which the full version already carried (the
+  owner's suggestion for mobile). Tested: a tap on Tokyo lists its 7 lines,
+  on Otemachi its 5. The same shot found Tokyo's credit (MLIT's line beside
+  OSM's) wrapping to three lines on a 390 px phone under the collapsed
+  legend tab: the legend and the panel are now held 10 px above the
+  credit's top, whatever its height. Commit f49b92b8.
+- **Download test:** the package zipped (795 files, 21.9 MB; 13.1 MB
+  zipped), unpacked into a fresh folder: no machine path and no outside
+  load in either page.
+- **Offline, measured:** the owner allowed this session to fetch the nine
+  small files (Leaflet 1.9.3 js, css and two images, maplibre-gl-leaflet
+  0.1.4, four licence texts; about 183 KB, `curl -o`, contents never
+  read into the session). Both package pages with every request to another
+  host failed: Mendoza at zoom 12 to 17, desktop and phone, light and dark,
+  Spanish labels, names on; Tokyo fitted and at zoom 15. 4 to 25 local
+  files a view, none attempted elsewhere, no errors.
+
+### 2026-10-08 - Fonts settled: Noto, with its licence file and the trademark line beside the glyphs (owner)
+
+- **Decision (owner, 2026-10-08): "yes close font question, noto sounds
+  good".** This answers item 17 of "Decisions for going public" ("yes,
+  unless a non-Google font avoids it"): none does. Glyphs stay Noto. Every
+  copy of the glyph files (each offline folder, the hosted glyph folder,
+  the app) ships Noto's `OFL.txt` with its copyright line ("Copyright 2022
+  The Noto Project Authors"), plus the line "Noto is a trademark of Google
+  LLC", which the glyph conversion drops from the font files' name table.
+  In the app, the same text sits on a licences screen. Nothing on the map.
+- **Inter (licence read, 2026-10-08).** SIL OFL 1.1, no on-screen credit,
+  the PBF conversion a Modified Version, no glyph pack sold on its own. Its
+  LICENSE.txt declares no Reserved Font Name, but its README says "Inter"
+  is one, and "Inter is a trademark of Rasmus Andersson (RSMS)" appears in
+  the README, the font metadata and rsms.me. Switching would trade
+  Google's trademark line for another and add a fontstack naming question
+  (rename, accept the risk, or ask the author), so it gains nothing.
+- **Licence-free fonts (search, 2026-10-08).** None clears the bar. Tuffy
+  (public domain, Latin, Greek, Cyrillic) is an unhinted, self-described
+  "a little bit too casual" design; Aileron (CC0, the best drawn) is Latin
+  only, so Greek and Cyrillic cities would need an OFL fallback anyway;
+  Jupiteroid (CC0) has no Greek and unproven text quality; the pre-OFL M+
+  release's licence page is gone. Its successors (Nacelle, current M+) are
+  OFL. CJK labels keep coming from the device's own fonts.
+
+### 2026-10-08 - No sprite icons in the Travel style; fonts stay Noto for now (owner)
+
+- **Icons dropped (owner, 2026-10-08).** The one-way arrows go (driving
+  detail), and the town dot and capital star of `places_locality` below
+  z8 are stripped, so the Travel style uses no sprite image and the
+  OpenBasemap style carries no `sprite` URL: no icon sheet to ship, no icon
+  licence. `check_travel_style.mjs` now fails on any sprite image; it
+  passes, as do the site Travel view test (desktop and touch, no errors)
+  and `check_render_current` (170 of 170).
+- **Fonts.** Some font licence cannot be avoided for MapLibre's Latin
+  labels, but the OFL (Noto's, and as far as known Inter's) asks for no
+  on-screen credit, only its text beside the glyph files. The owner likes
+  Noto (used in every screenshot so far) and wants as few attributions as
+  realistically possible, with quality control; Noto stays meanwhile.
+  Queued: the licence read of Inter, and a search for licence-free
+  (public domain or CC0) fonts of map quality.
+
+### 2026-10-08 - The full version is the app's template: map content only; named route rows; station dots sized by zoom (owner)
+
+- **Rule (owner, 2026-10-08): the full version is a template for the app,
+  so it carries map content only.** No coverage statements, generic
+  explanations or features shoehorned onto the map because this pilot has
+  no surrounding app screens to hold them; those belong to the app's own
+  UI (an info page, say).
+- **Applied to the ferry rows:** the legend names the route itself ("Arno
+  Boat", "Bac du Rocher des Doms") instead of a generic "Ferry"; what a
+  dashed line or a ticked line means is for the app's info page. An
+  unnamed route gets no row. `open_basemap["routes"]` is now
+  `[(kind, name)]`, the name in English where OSM has one, else local.
+  Re-shot: Florence's legend reads "T1 Leonardo, T2 Vespucci, Arno Boat";
+  Avignon's "Tram T1, Bac du Rocher des Doms" (its crossing is too short
+  for the on-map name, so the row carries it).
+- **Cities with many ferry routes (Istanbul, Hong Kong, Sydney): a second
+  palette, one colour per named route (owner, 2026-10-08).** The colours
+  may sit close to transit line colours, since the dash already sets a
+  ferry apart from the solid lines, and ferries almost never overlap
+  transit (a ferry passing under a bridge that carries a line is the one
+  case, and the basemap's ferries draw beneath the site's lines). Design:
+  the palette's first colour is today's ferry colour (crimson on the
+  site, blue in the full version), so one-ferry cities stay as they are;
+  each route's legend row takes its route's colour; contrast is measured
+  against the water tint and the other ferry routes, not the transit
+  lines. The owner's example: Hong Kong with orange, yellow, green and
+  purple dashed ferry routes (a yellow dash needs a deeper amber to read
+  on the pale ground and the light-blue water; measured when Hong Kong is
+  piloted). Built with the first multi-ferry city piloted, so it is tested
+  on real routes.
+- **Station dots sized by zoom (owner agreed, 2026-10-08).** Pilot pages
+  (full version and the site's Travel view): one pass on zoom end sets
+  every dot (and line width) from a zoom table, interchanges a step
+  larger, each dot keeping a fixed invisible touch area of about 44 px so
+  small dots stay tappable; measured on the largest network (Tokyo) before
+  it is settled, and the table set on light and dark screenshots for the
+  owner. The app: dots drawn in MapLibre with a zoom curve, recomputed per
+  frame on the GPU, no pop during a pinch. The site's Business view stays
+  as it is until the pilot proves the table (it is senior, and changing it
+  re-renders 170 maps).
+
+### 2026-10-08 - Ferries named and in the legend; line labels that follow the screen, station names, and a tap-a-line list (owner)
+
+- **Ferries (owner: crimson stands out, so label it; a legend row under
+  the transit lines).** Built, site Travel view and full version alike:
+  each ferry and cable car is named along its route in its own colour
+  (`travel_ferry_label`, `travel_aerialway_label`, from z12, the name in
+  the pill's language), and the legend gains a row under the transit
+  lines for each route kind the city's pack holds, drawn as the map draws
+  it (ferry dashed, cable car a thin line with ticks), shown in Travel
+  only. The kinds come from the build's pack summary
+  (`open_basemap["routes"]`); the swatch colours are read from
+  `travel_style.js`, so they cannot drift. In the pilot packs: Florence
+  "Arno Boat", Avignon "Bac du Rocher des Doms", Mendoza none. Visible
+  wording "Ferry" and "Cable car" is a proposal for review time.
+  `check_travel_style.mjs` passes; `check_render_current` 170 of 170.
+- **Line labels that stay on screen (owner, for the full version, no
+  business data there):** each line's label follows the part of the line
+  in view, like the macro map's pills, placed on pan and zoom and kept
+  apart. To build in the Mendoza full page.
+- **Station names on demand (owner, to consider):** a menu toggle; with a
+  line highlighted its stations' names take the line's colour (a shared
+  station takes the highlighted line's), otherwise a neutral colour. To
+  build in the full page.
+- **Tap a line to list its stations, in both directions (owner: likely
+  the app only, since runs here are pilots):** north- and southbound, or
+  east- and westbound. Passed to transit-globe.
+- **Legend:** the owner asked to see it open in Travel to give feedback;
+  shots sent (lines only, then the ferry row).
+
+### 2026-10-08 - Packs stop at zoom 14; hidden features hidden in every layer, with a check; baselines kept (owner; built)
+
+- **Zoom 14 chosen (owner, 2026-10-08)**, on the samples of the next
+  entry: every pack is built `--maxzoom=14 --travel_trim=true`. Against the
+  stock zoom-15 build that is 64-72% smaller (Mendoza 3.89 to 1.41 MB,
+  Avignon 12.1 to 3.4 MB, Florence 18.1 to 6.1 MB).
+- **Baselines kept (owner: "save those as baselines if we need to adjust
+  the settings in the future").** `data/_basemap_build/baselines/
+  zoom14_trim_2026-10-08/` (this worktree, gitignored, 119 MB): the nine
+  packs (stock, trimmed, zoom 14, three cities) with SHA256SUMS, every
+  trim and zoom screenshot and sheet, the offline test page with its
+  libraries, fonts and the style as shot, the tools and the builder
+  patch, and `BASELINE.md` (inputs, measurements, how to re-run). The
+  2026-10-07 baseline given to the app was copied beside it from the
+  session scratchpad. **Both must move with the basemap build before this
+  worktree is removed.**
+- **A hidden feature is hidden everywhere (owner, after Viale del Visarno:
+  "ensure we have a check in place to fully hide accompanying
+  graphics/labels for features we are removing").**
+  - Structural: `travelStyle.HIDDEN` names what the Travel map hides per
+    source layer (points of interest and land cover entirely; roads of
+    kind rail or with a hidden `kind_detail`; county and locality lines;
+    land use outside the kept kinds). A final pass applies it to EVERY
+    layer reading that source layer, whatever its type (line, casing,
+    label, one-way arrow, fill), so a layer added later inherits it.
+  - Check: `scripts/check_travel_style.mjs <basemaps.js>
+    [<TravelTrim.java>]` evaluates every layer's filter against 101
+    hidden samples (each hidden kind with bridge, tunnel, one-way, link,
+    shield and name variants) and 87 kept ones, in light and dark, city
+    and world, site and full: every hidden sample must be rejected by every
+    layer, every kept one drawn by some layer; an unknown filter operator
+    fails. With `TravelTrim.java` it also requires the builder's lists to
+    equal the style's. Passes. Run against a copy of the style with labels
+    exempted from the rule, it fails 228 times, the Visarno label among
+    them. The end-to-end gate stays the pixel test (Travel render of a
+    trimmed and an untrimmed pack must match).
+  - Its first run found a gap: dark mode kept 5.7.2's own land-use fills,
+    which leave gardens, meadows, kindergartens and platforms undrawn. Dark
+    now uses the same categories as light, in 5.7.2's dark colours (an
+    INTERIM table until transit-globe's dark tints), which also closes the
+    caveat of the trim entry: trimmed and untrimmed packs draw alike in
+    dark.
+  - Not yet in `scripts/check_all.py`: it needs `basemaps.js`, which the
+    repo does not carry. Hooking it in (with a vendored copy, when the
+    release self-hosts the libraries) is for landing time.
+
+### 2026-10-08 - Zoom 14 against zoom 15: half the size again, little a rider would miss (measured, owner to decide)
+
+- **Built** trimmed packs to zoom 14 (`--maxzoom=14 --travel_trim=true`,
+  `build_z14.sh`; 2 min 10 s to 2 min 31 s, peaks 3.06 to 3.16 GB) and
+  compared them with the trimmed zoom-15 packs, Travel style, on a 375 px
+  phone at map zooms 14.5, 15.5, 16.5 and 17.5 (past a pack's top zoom
+  MapLibre enlarges the last tiles):
+
+  | | Zoom-15 pack | Zoom-14 pack | Smaller | Pixels differing at 14.5 / 15.5 / 16.5 / 17.5 |
+  |---|---|---|---|---|
+  | Mendoza | 2,836,140 | 1,414,249 | 50.1% | 0.23% / 2.16% / 1.99% / 1.04% |
+  | Avignon | 8,431,735 | 3,418,524 | 59.5% | 0.06% / 2.91% / 1.92% / 1.68% |
+  | Florence | 12,857,973 | 6,078,083 | 52.7% | 0.14% / 1.79% / 1.71% / 1.43% |
+
+  Against the untrimmed zoom-15 packs that is 64-72% smaller in all
+  (Mendoza 3.89 to 1.41 MB, Avignon 12.1 to 3.4 MB, Florence 18.1 to 6.1
+  MB). No errors in 24 views.
+- **What differs, by eye** (sheets `shots/zoom/zoom_sheet_<city>.png`):
+  buildings come as merged blocks rather than single outlines (the app's
+  rules already chose merged blocks); small features drop out (swimming
+  pools, tiny land-use patches); street names sit in slightly different
+  places, a few more of them shown. Roads, parks, water, platforms and
+  every label class stay.
+- **Recommendation: stop the packs at zoom 14.** Download size is the
+  owner's priority, the differences are detail a transit rider does not
+  read, and the app's rules leaned to a z14 stop. Owner to decide.
+
+### 2026-10-08 - The build-time trim: packs 27-30% smaller, the Travel map unchanged to the pixel (built and measured)
+
+- **What a pack carries that the Travel style never draws**, measured by
+  re-encoding every tile without each group and re-compressing
+  (`pack_trim_estimate.py`):
+
+  | | Points of interest | Untinted land use | Hidden road details | Rail, county and locality lines | All |
+  |---|---|---|---|---|---|
+  | Mendoza | 12.0% | 9.3% | 3.5% | 2.2% | 26.9% |
+  | Avignon | 6.2% | 14.2% | 8.5% | 1.1% | 29.9% |
+  | Florence | 9.0% | 13.1% | 5.7% | 1.0% | 28.8% |
+
+- **Built as one switch, `--travel_trim`** (owner: one switch or several,
+  either; one chosen, since the rule is single, "keep only what the
+  Travel style draws", and one switch means two outputs to test, not a
+  grid). It skips the points-of-interest and land-cover layers, land-use
+  kinds the style does not tint, roads whose `kind_detail` the style
+  hides, the basemap's own rail, and county and locality lines. A new
+  class `TravelTrim` holds the lists (kept in step with
+  `pipeline/travel_style.js`) and four one-line checks call it, in
+  `Basemap`, `Landuse`, `Roads` and `Boundaries`. Without the switch the
+  builder is unchanged. The patch, 120 lines, is
+  `data/_basemap_build/travel_trim.patch` (this worktree, gitignored; a
+  copy in the scratchpad); where it lives for good is a hosting-time
+  decision. The wards Tokyo and Seoul need later get their own
+  `--keep_wards` override then, not now. The zoom stop is the builder's
+  own `--maxzoom`.
+- **Measured.** Packs: Mendoza 3,893,127 to 2,836,140 bytes (27.2%
+  smaller), Avignon 12,127,090 to 8,431,735 (30.5%), Florence 18,133,238
+  to 12,857,973 (29.1%); builds about a minute faster (about 2 min each),
+  peaks unchanged (3.24 to 3.38 GB). Travel-style screenshots of trimmed
+  and untrimmed packs at z11, z13 and z15 in all three cities: **0.0000%
+  of pixels differ**, no errors. The first run differed at Florence z15
+  by one street name: the style hid service roads but still drew their
+  names, so "Viale del Visarno" floated over nothing on the untrimmed pack.
+  The style now hides the labels of hidden roads too, which the trim had
+  already done.
+- **Caveat: the dark flavor.** It keeps 5.7.2's own land-use fills until
+  the app's dark tints arrive, and some of those (grass, military) are
+  trimmed, so a dark Travel map from a trimmed pack shows fewer green
+  areas than from an untrimmed one. The dark tints should follow the light
+  categories.
+- **Next: the zoom stop** (owner: look at z14 against z15 soon). z15 alone
+  is 51-56% of each untrimmed pack.
+
+### 2026-10-08 - The label-language pill built; smaller packs made a priority (owner; built and measured)
+
+- **The pill (owner approved the design, 2026-10-08).** `OpenBasemap`
+  takes `local_lang` (the city's language as Protomaps names it: "es",
+  "ja") and `local_name` (the pill's text, default the code in capitals);
+  `label_lang` is gone. Labels are English by default; with `local_lang`
+  set, a two-button `EN | ES` pill (a Leaflet bar, 40 by 34 px buttons,
+  the chosen one dark) appears under the layer menu while Travel is on and
+  is removed with it, so the Business view never shows it. The choice is
+  kept in localStorage `expanded-heatmap-labels` ("en" or "local"), and a
+  switch calls MapLibre's `setStyle` on the same pack: nothing is fetched.
+  It sits top left, stacked under the layer menu: in the top-right corner
+  the fixed Dark mode button covered it and took the phone's taps
+  (measured, then moved). Tested on Mendoza (`lang_check.mjs`), desktop
+  mouse and phone touch: absent in Business; English by default; one tap
+  to Spanish (the label fields switch from `name:en` to `name:es`);
+  remembered across a reload; gone in Business; back to English; no
+  errors. Attribution check clear at 375x812 and 1280x800;
+  `check_render_current` 170 of 170. Mendoza's labels read the same either
+  way, since few of its features have an English name in OSM; the Tokyo
+  test of 2026-10-07 shows the switch changing scripts. The owner expects
+  the same toggle in the app.
+- **Download size is a priority (owner, 2026-10-08), and builder changes
+  are acceptable.** A pack still carries what the Travel style never
+  draws (Mendoza's holds about 20,000 points of interest, all of its
+  `residential`, `farmland`, `grass` and other untinted land use, and the
+  road kinds the style drops). The next step measures each layer's share
+  of the bytes, then trims at build time only what the style does not
+  draw. Anything trimmed comes back by rebuilding with it left in (about 3
+  minutes a city; packs are rebuilt on every refresh anyway), so a trim
+  locks nothing in (owner).
+
+### 2026-10-08 - Which surface yields in a clash; the Travel style questions answered; Avignon and Florence self-built (owner; measured)
+
+- **Precedence between the surfaces (owner, 2026-10-08).** The site is
+  senior to its Travel view: where they clash (a colour against the
+  business pins, say), the Travel view makes the compromise, never the
+  site. The full version competes with neither; it runs mostly parallel
+  to the site's Travel view, but the compromises that view needs do not
+  carry over. A choice made on its own merit can serve both: the plum
+  station-area border stays in both because it reads better, not only
+  because it clears the pins (owner). Built as `variant: "site"` (the
+  default, used by `OpenBasemap`) and `variant: "full"` in
+  `travelStyle()`.
+- **The questions of the previous entry, answered (owner, relayed by
+  transit-globe, 2026-10-08).**
+  1. `unrecognized_region` and `unrecognized_macroregion`: dotted, the same
+     neutral rule as `unrecognized_country`. Done.
+  2. World map, country lines only: kept.
+  3. Tighter dots, judged on screenshots: `[0, 3]`, `[0, 2]` and
+     `[0, 1.5]` compared on world-zoom crops of Kashmir, Crimea and Cyprus,
+     and the Horn of Africa; only `[0, 1.5]` (1.5 px dots 2.25 px apart
+     centre to centre) keeps short segments reading as a line. Set.
+  4. Aerial lift recoloured: by the same CIE76, the burnt orange #d84315
+     sat 8.3 from the tram city-dot colour #c2410c (under the hard floor
+     of 10) and 19.3 from Tokyo's Marunouchi red (transit-globe's
+     measurement). Lifts are now told apart by pattern, the cartographic
+     thin dark line (#444444) with cross ticks from zoom 13; no pilot pack
+     has a cable car, so the ticks are checked for style errors only, not
+     yet seen on screen. Ferries stay dashed: crimson #b0004f in the site
+     variant (fine by the owner: 42.8 from Marunouchi red, 51.6 from JR red
+     #e60012), and in the full variant, which has no pins, blue #1e88e5,
+     chosen as at least 50 from everything the full version draws (51 from
+     the plum border, 57 from the water tint).
+  5. Label language, decided (owner, 2026-10-08): **English by default in
+     every city, with a toggle to the local language**, on the site's
+     Travel view and the full version alike; consistency matters and most
+     readers need English. No extra downloads: a pack carries every name a
+     feature has in OSM (`name` plus `name:en`, `name:es` and the rest),
+     and the style picks one when it draws, as measured on 2026-10-07 (the
+     same Tokyo pack drawn in Japanese and English, the same Mendoza pack
+     in Spanish and English). Where OSM has no English name the label
+     falls back to the local one. So one pack per city serves both, and
+     the toggle restyles labels without fetching anything.
+- **Railway land is not tinted (owner, 2026-10-08).** In Florence, OSM's
+  railway-land polygons along the Pisa line overlap the Cascine park, and
+  the first draft painted them lavender over the park. The owner: the rail
+  corridor runs the full length of each line, the lines already get their
+  own colour treatment, and the lavender was meant for station areas and
+  their walksheds, so the corridor needs no tint, and with no tint no
+  overlap rule is needed. Railway land is dropped from the tints; lavender
+  is left to platforms (#c3b8de) and, once drawn from the export, station
+  areas; #d6cfe8 is retired. Re-shot: Avignon and Florence at z13 and z15,
+  no errors, no lavender corridors.
+- **Grass stays plain (owner, 2026-10-08).** The racecourse under the Pisa
+  line is OSM `grass`, which 5.7.2 paints park-green. A pale grass tint
+  from z13 was proposed, with road verges dropped as detail past what a
+  transit rider needs; the owner then set the bar: a nice-to-have only if
+  it brings no conflict and no busier basemap. It fails the first test.
+  - Every pale green tried between the earth tone and park green sat 4.7
+    to 8.3 (CIE76) from the cemetery, wild-land or earth tint, under the
+    floor of 10, so it would be one more shade readers cannot tell apart.
+  - Verges cannot be told apart in the tiles (grass carries only `kind`);
+    dropping them needs a builder change. It was written and compiled
+    (grass under 1,000 m2, or a strip under 10,000 m2; grass under 1,000
+    m2 is about three quarters of the pieces and 9-19% of the grass area
+    in Mendoza, Avignon and Florence), then reverted: a modified builder
+    is upkeep for non-transit detail, and an unmodified one keeps the
+    packs identical to Protomaps' open-source output. The patch is kept
+    in the scratchpad (`builder/Landuse_verge_filter.java`).
+  Parks keep their green; grass, like pitches and farmland, stays plain.
+- **Avignon and Florence built from the owner's extracts** (Geofabrik
+  `provence-alpes-cote-d-azur-261006`, 390,142,851 bytes, sha256
+  b02b440e...eaa226d; `centro-261006`, 384,646,965 bytes, sha256
+  ff41ffef...9b01a50), each box the stations' extent plus 10 km in the
+  city's UTM zone (the same method gives Mendoza's box within about 1 km):
+
+  | | Box | Time | Peak | Size | Index estimate (planet build, 2026-10-07) |
+  |---|---|---|---|---|---|
+  | Mendoza | -68.9700,-32.9960,-68.7260,-32.7670 | 3 min 18 s | 3.27 GB | 3.89 MB | 4.13 MB (extracted, measured) |
+  | Avignon | 4.6724,43.8408,4.9690,44.0305 | 2 min 41 s | 3.39 GB | 12.1 MB | 17.5 MB |
+  | Florence | 11.0707,43.6765,11.3906,43.8904 | 2 min 17 s | 3.13 GB | 18.1 MB | 20.7 MB |
+
+  The two estimates are for a slightly larger box and include the world's
+  low zooms and land cover, so the sizes compare only roughly. Both packs
+  render offline in stock and Travel style at z13 and z15 with no errors
+  and no outside requests; neither carries a disputed line. Every build
+  so far peaks between 3.1 and 3.4 GB under `-Xmx5g` and takes under
+  3.5 min; Natural Earth's read is about half of each.
+- **Store decisions from transit-globe that touch this repo (owner,
+  2026-10-08; store requirements unverified).** Android first, Apple
+  later, the PWA at the core. (1) Packs are never bundled into an app
+  binary (ODbL 4.7, no technological protection); they stay separate,
+  free downloads, so if a Worker serves Z/X/Y tiles the raw `.pmtiles`
+  stay downloadable from the shared hosting with a plain public offer.
+  (2) A TWA proves site ownership through `/.well-known/assetlinks.json`
+  on the PWA's own domain, which favours an owned domain over
+  `workers.dev` in the hosting choice. (3) An iOS version may need
+  MapLibre Native: `travelStyle()` returns plain style-spec JSON (legacy
+  filters, dash arrays, round caps), all supported there, so a build can
+  write it out as `style.json`. (4) Each project hosts its own privacy
+  page. (5) The export contract is unchanged.
+
+### 2026-10-08 - The shared Travel style built as one filter; disputed lines dotted, world map label-free (built, owner to review)
+
+- **Built (branch only).** `pipeline/travel_style.js`, one function that
+  turns the layer list of @protomaps/basemaps 5.7.2 into the Travel style:
+  `travelStyle(layers, {flavor, world})`. `pipeline/map_common.py` inlines
+  it into the OpenBasemap layer, so the site's Travel view uses it now; the
+  full version and transit-globe take the same file as their reference.
+  Maps without `open_basemap` are unchanged (`check_render_current`: 170 of
+  170 current; the Business render carries no Travel code).
+- **What it does, per the app's rules** (previous entries):
+  - Drops land cover, points of interest, road shields and the basemap's
+    own rail; drops service roads, driveways, parking aisles, alleys,
+    tracks and drive-throughs (matched on `kind_detail`, in whichever
+    filter syntax each layer already uses, since MapLibre cannot mix the
+    two); fades tunnels and taxiways to half opacity.
+  - Land-use tints in the light flavor: earth #e2dfda; parks #a8d5b5
+    (park, garden, golf course, playground, allotments, village green,
+    recreation ground); wild land #c2d8b0 (national park, nature reserve,
+    protected area, forest, wood, scrub, grassland, meadow, wetland, heath);
+    cemetery #cad3c7; beach and sand #ece3c6; other natural #d9d5cc (bare
+    rock, glacier, scree, shingle); institutions #e7dbd7 (hospital, school,
+    university, college, kindergarten); aerodrome #d8dae1, runways
+    #c3c6cf; railway land #d6cfe8 and platforms #c3b8de. Industrial, zoo,
+    business kinds, pitches, grass, farmland and `other` stay plain.
+  - Boundaries: settled country lines as 5.7.2 draws them; region lines
+    only (county and locality lines, which become wards per city later,
+    are off); **every line the builder flags `disputed`, or of kind
+    `unrecognized_country`, moves to its own layer**: #c4c4c4, 1.5 px,
+    round-cap dots (`[0, 3]`: 1.5 px dots 3 px apart), directly above the
+    country lines, at every zoom.
+  - Ferries (`kind=ferry`) and cable cars (`kind=aerialway`), which 5.7.2
+    does not draw, get their own layers: ferries dashed crimson #b0004f,
+    lifts solid burnt orange #d84315. Measured with `delta_e`: every blue
+    tried sat under 45 from Retail blue or the backup teal; #b0004f is 59
+    from the plum border and 63 from violet, #d84315 72 from olive.
+  - `world: true` keeps only background, earth, water, country lines and
+    the disputed layer: no country, sea or place names (owner, 2026-10-08).
+- **Measured** (headless Edge, 375 px phone, offline page, Mendoza pack):
+  no style errors and no outside requests at any zoom step, stock or
+  Travel, light or dark; the self-built pack draws exactly what the
+  downloaded one does under the Travel style. On the downloaded pack's
+  world tile, the world view draws **29 disputed segments dotted, none left
+  on the settled layer, zero labels**; crops show Kashmir's lines, the
+  Crimea isthmus, Cyprus's Green Line and the Somaliland lines dotted where
+  5.7.2 drew them solid. The half version (re-rendered Mendoza with the
+  style) passes `travel_check.mjs` on desktop and touch unchanged; the
+  attribution check passes at 375x812, 390x844, 360x740, 1280x800 and
+  1440x900 with Travel selected (a 600 px tall viewport cannot hold the
+  650 px map, so it reports unmeasured, not breached). Node checks of the
+  rules: `style_test.mjs` in the scratchpad.
+- **For the owner (and the app) to decide:**
+  1. Kinds `unrecognized_region` and `unrecognized_macroregion` are neither
+     region nor disputed under the decision's wording, so they are not
+     drawn at all. Draw them dotted too?
+  2. The world map keeps country lines only, no region lines. Keep?
+  3. At world zoom a short disputed segment gets only a few dots; `[0, 2]`
+     (dots 3 px apart centre to centre) reads denser. Keep `[0, 3]`?
+  4. Ferry crimson and lift orange are drafts chosen by measurement, not
+     taste.
+  5. The site's Travel view prototype labels in Spanish (`label_lang`
+     "es", local language first, as OSM's tiles do); the app's rule is
+     English over the local script. Same rule on the site?
+- **Not in the tiles:** station-area polygons. The builder writes no
+  station kind, so the plum-bordered station areas need the export's
+  platforms and exits (a footprint) or a builder change; deferred to the
+  full version. The dark flavor gets the structural rules only (drops,
+  filters, disputed layer); its tints wait for the app's dark drafts.
+
+### 2026-10-08 - The self-built Mendoza pack draws the same map as the downloaded one (measured)
+
+- **Built** with Protomaps' open-source builder (protomaps/basemaps main,
+  planetiler 0.10.2, basemap 4.15.2) from the owner's local inputs and the
+  two empty stand-ins, through the memory gate: `--area=argentina
+  --bounds=-68.9700,-32.9960,-68.7260,-32.7670 --maxzoom=15`, `-Xmx5g`.
+  **3 min 18 s** (12 min CPU), of which reading Natural Earth was 2 min, a
+  fixed cost a larger build shares; **measured peak 3.27 GB** (gate label
+  `basemap-build-mendoza`). `download=false` throughout: nothing fetched,
+  no Protomaps host touched.
+- **Same map.** Screenshots of both packs in the same offline page and
+  style, at z9, z13 and z15 on a 375 px phone view: **0.00% of pixels
+  differ**; rendered feature and label counts equal at every zoom step
+  except one label at z12; no errors, no outside requests. Tile for tile,
+  z9-15 match within 7 of 79,328 features at z15. The residue has two
+  causes: a slightly older OSM snapshot (Geofabrik 2026-10-06 20:21 against
+  the planet build's 2026-10-07 04:00), and the QRank stand-in, which makes
+  a few points of interest (a university, an aerodrome, a peak) first appear
+  one to three zooms later. The Travel style drops points of interest, so
+  QRank does not matter there.
+- **Size: 3,893,127 bytes against 4,129,904 (-5.7%).** The whole
+  difference is at z0-8: with `--bounds` the builder keeps only features
+  inside the box even in the world-scale tiles (z0: 3 features against 54),
+  and the land-cover stand-in leaves no land cover. Same tile count (867).
+- **Disputed borders.** The downloaded pack carries 39 boundary features
+  flagged `disputed` at z0-3 (its world tile); the self-built one carries
+  none, because of the same bounds clip. So a city pack built this way has
+  no disputed line unless one crosses its own box, which agrees with the
+  app's survey (previous entry), and the world pack must be built or cut
+  from the whole world to carry the flags the dotted style needs.
+- **Practical notes.** The output is named after `--area`
+  (`argentina.pmtiles`, renamed `mendoza_selfbuilt.pmtiles`); `--output`
+  is ignored. On Windows the gate needs an absolute path to `java.exe`.
+  The builder logs 44,082 `osm_boundary_missing_way` errors, expected for a
+  country extract whose boundary relations reach outside it.
+- **What follows.** The self-build reproduces Protomaps' pack without
+  Protomaps' hosts, QRank or the land-cover file, so the site and the app
+  can share one build, and the Terms-of-Use question for scripted extracts
+  falls away. Still to measure: Avignon and Florence (extracts first), and
+  one world pack built whole for the label-free world map.
+
+### 2026-10-08 - The travel app's basemap rules, shared by the Travel views (owner, via the app project)
+
+- **Received from transit-globe, 2026-10-07/08, as the owner's choices for
+  the full Travel version; the owner made one Travel basemap style shared
+  by the full version and the site's Travel view (2026-10-08).** Method:
+  try every change in the style first and make only the kept ones
+  permanent at build time; measure each against the pinned Mendoza
+  baseline; before anything is final, dark versions and a colour-blindness
+  check of every tint, and z14 against z15 screenshots for the owner. Hex
+  values are drafts.
+- **Design rules.** Hierarchy, top to bottom: transit lines (cased) and
+  station dots; station areas and platforms; labels (places, then
+  streets); ferries and aerial lifts; roads (muted, few weights); land-use
+  tints; land and water. "The basemap is context, never content." One tint
+  per category, pale tints differing only by hue; transit owns the
+  lavender family; operators' line colours never reused for areas or dots;
+  the only saturated colours are transit (lines, the station-area border,
+  ferries, lifts). Lines always carry a white casing (Ginza orange 1.6:1
+  and Hibiya grey 1.5:1 against any light ground); station dots white with
+  a dark ring (above 8:1 on every tint), interchanges larger. One look on
+  every surface. Each feature is DECIDED, DEFERRED FOR SCOPE (with why,
+  what would bring it back, and the decision) or EXCLUDED BY RULE. Mobile
+  first: every kept feature justifies its bytes on a phone; the build
+  machine pays, never the reader.
+- **Layer choices.**
+  - pois: dropped (a few landmarks may return later).
+  - landcover: dropped everywhere (empty stand-in); the world map is plain
+    land, sea and borders, so the city dots are the only colour.
+  - landuse: business kinds dropped (cafe, grocery, supermarket, hotel,
+    post_office). Earth #e2dfda. Parks #a8d5b5; wild land #c2d8b0;
+    cemetery #cad3c7; beach and sand #ece3c6; other natural kinds #d9d5cc;
+    institutions #e7dbd7; railway land #d6cfe8 (tint only); platforms
+    #c3b8de; station area the same tint with a 3 px border #7e6fb0 (from
+    OSM station-area polygons or a footprint around the export's platforms
+    and exits; to be tested); aerodrome #d8dae1, runway #c3c6cf, taxiway
+    faint; built-up, attractions and `other` plain.
+  - boundaries: country and region; wards per city where useful (Tokyo,
+    Seoul first); disputed borders decided below. In the builder, OSM
+    admin_level 6 becomes kind `county` (from z8) and 7 or 8 `locality`
+    (from z10), so Seoul's gu (level 6) and Tokyo's special wards (level 7)
+    are different kinds and need their own ward settings.
+  - roads: fewer, muted colours; service, driveway, parking_aisle, alley,
+    track and drive-through dropped; road numbers and shields dropped to
+    start; steps, corridor and pedestrian kept; basemap rail hidden to
+    start; sidings, yards, crossovers, miniature and preserved dropped
+    (scenic lines drawn from the export's `scenic` exclusions as a marked
+    category); ferries and aerial lifts kept and prominent; tunnels faded.
+  - buildings: merged blocks only (z0-14); favours a z14 stop, for the zoom
+    review.
+  - Excluded by rule in the app: business data, routing beyond the owner's
+    line, land cover, QRank, and any download from Protomaps' hosts
+    (build.protomaps.com, r2-public.protomaps.com).
+- **Measured against the site** (CIE76, see the next entry): the draft
+  station-area border #7e6fb0 is 24.7 from Retail blue and 26.5 from the
+  planned violet, below the project's preferred 45; suggested to the app
+  that the border sit at least 45 from the site's pin colours.
+- **Border decided (owner, 2026-10-08): dark plum #352a4d in both
+  projects**, replacing #7e6fb0. Re-measured here with
+  `pipeline/linecolour.delta_e`: 46.7 from Retail blue, 47.5 from the
+  violet, 49.5 from teal, 84.8 from olive (all above the preferred 45),
+  24.3 from the station dots' ring #333333, 65.4 from the lavender tint.
+  The owner compared both on mock station scenes with pins off and on. Tint
+  #d6cfe8 and platforms #c3b8de stand; the 3 px border goes on station
+  areas only, never on rail corridors; dark mode gets its own border,
+  drafted by the app with its dark tints. So the site's pin colours stay as
+  decided, and Cleanup's re-render needs no change for this.
+- **The shared style is the app's starting point, not a binding (owner,
+  2026-10-08).** The full Travel pilot will not be updated once the app is
+  under way; the app may depart from it, recording each departure and its
+  reason in its own DECISIONS.md.
+- **Disputed borders and the world map (owner, 2026-10-08, relayed by the
+  app).**
+  - One neutral style everywhere: every disputed segment drawn as a lighter
+    dotted grey (draft #c4c4c4, 1.5 px, round-cap dots about 1.5 on, 3
+    off), distinct from the settled border's dash, on the world map and in
+    every city. No claim is favoured.
+  - "Disputed" is the builder's `disputed` flag (`Boundaries.java`,
+    protomaps/basemaps main): Natural Earth at z0-5 (featurecla "Disputed
+    (please verify)", "Indefinite (please verify)", "Indeterminant
+    frontier", "Line of control (please verify)"); OSM at z6+
+    (boundary=disputed or claim, disputed=yes, disputed_by, claimed_by);
+    plus kind `unrecognized_country` (Unrecognized, Breakaway, Claim
+    boundary).
+  - Confirmed here in @protomaps/basemaps 5.7.2 (the site's Travel view):
+    the `boundaries_country` layer filters on `kind_detail <= 2` alone and
+    never reads `disputed`; every such line is solid below z4 and dashed
+    [2,1] in #adadad from z4. So disputed lines look settled today, in the
+    site's Travel view as well as the app's; the shared style filter has to
+    add the dotted layer before either goes public.
+  - World map label-free: no country or sea names; only land, sea, borders
+    and the city dots. City and country names appear only in the dot's
+    tooltip and the UI, taken from the export, so every surface uses the
+    site's existing naming choices (Taiwan's cities, Hong Kong).
+  - Inside city packs, OSM's names unchanged, English over the local
+    script. The app reports that none of the 170 cities has a disputed land
+    border within its pack extent (Tbilisi is closest; the South Ossetia
+    line lies outside it); not re-measured here.
+  - About statement, following OSMF's wording: borders and names follow
+    OpenStreetMap's on-the-ground practice and imply no position on any
+    dispute. The app reads the OSMF policy PDF
+    (osmfoundation.org/wiki/File:DisputedTerritoriesInformation.pdf) before
+    citing it.
+  - Ruled out: a worldview per reader's country (the server would have to
+    know where the reader is, against the app's privacy rule). A local view
+    per city pack was offered and not chosen.
+  - Open for the owner: the site's Overview stays on CARTO (decided
+    earlier), whose world map carries country and sea names, so the
+    Overview's Travel toggle would not be label-free unless it moves to the
+    open world pack.
+
+### 2026-10-08 - Decisions for going public (owner, one pass)
+
+- **12. Hosting:** compare the free Worker (workers.dev) with R2 behind a
+  custom domain, live, before choosing (owner). Needs the owner's
+  Cloudflare account and the Cloudflare terms read first.
+- **13. Packs treated as an ODbL database: yes, and it applies to the app
+  too** (the app ships packs to devices: ODbL in the pack metadata and a
+  README, a free download offer, no encryption or restriction, ODbL 4.7).
+- **14. Separate files per source within each city** in the export: yes.
+- **15. Exports as release files in this repo for now; move if needed.**
+  The app builds its own packs; what it reads from here is the export
+  (stations, lines, exits, notices, dates).
+- **16. Notices into a data file: yes, if it conflicts with nothing.** It
+  touches `app/components.py` (a deploy and a reboot) and
+  `scripts/check_provenance.py`, which parses `_NOTICES` from source, so
+  both move together, at review time.
+- **17. The Noto trademark line: yes, unless a non-Google font avoids it,
+  especially for the app.** To test in the pilot: an OFL font from outside
+  Google (Inter for Latin, Greek and Cyrillic is a candidate) turned into
+  glyph files with maplibre/font-maker, with its own licence read; CJK
+  already comes from the device's fonts.
+- **18. Notice 1's privacy text: drafted at review time** (owner: "this is
+  important to get right"). App implication: the app writes its own
+  privacy text for whatever its packs and exports are fetched from.
+- **19. Whether the half version goes live: after the pilot,** weighing
+  the legal findings together.
+- **The stray file** `neutral-comment-style.md` in the main checkout is
+  Cleanup's own, from a code audit; Cleanup to file it.
+
+### 2026-10-08 - Pilot decisions (owner, one pass)
+
+- **Maven compile:** this session runs it, quietly (owner).
+- **Full version:** an option on the shared renderer, not a fork (owner).
+- **Pilot cities:** Mendoza, Avignon, Florence (owner). Each needs its own
+  regional OSM extract, downloaded by the owner: Avignon
+  `europe/france/provence-alpes-cote-d-azur-latest.osm.pbf` (390 MB),
+  Florence `europe/italy/centro-latest.osm.pbf` (385 MB); Mendoza's is in
+  place. Pack sizes (2026-10-07 index read): Avignon 3.7 MB at map extent,
+  17.5 MB with 10 km; Florence 7.2 MB and 20.7 MB.
+- **One Travel basemap style** shared by the full version and the site's
+  Travel view, on the travel app's rules (hierarchy, one tint per category,
+  transit owns lavender, only transit saturated, business kinds dropped);
+  **no land-cover shading** in the site's Travel view either (owner).
+- **Yes to:** white line casings and white station dots tried in the site's
+  Travel view only, with screenshots for the owner; Protomaps' own dark
+  flavor for Travel in place of the invert filter (the app may use it too:
+  BSD-3 style code, CC0 design, MIT sprites, OFL fonts, none from
+  Protomaps' servers when taken from the npm package or the GitHub repo);
+  solid macro dots in Travel; a Business/Travel toggle on the Overview
+  (CARTO stays) passing the choice into city maps; the coverage stat as a
+  plain-words note in the pilot and **exact numbers from the export in the
+  final version** (owner).
+- **The violet clash, measured** (CIE76, `pipeline/linecolour.delta_e`, the
+  project's own measure; PREFERRED 45, HARD_FLOOR 10): against the travel
+  app's draft station-area border #7e6fb0, the planned "Shops and services"
+  violet #7e57c2 is 26.5 and today's Retail blue #2a78d6 is 24.7; the
+  backup teal #37786e is 54.3, olive #737a00 93.8. So changing the violet
+  alone would not separate the pins from Travel's lavender; the border is a
+  draft and is the cheaper lever. Recommended: keep the site's pin colours,
+  ask the app to place its border at least PREFERRED (45) from the site's
+  pin colours, and tell Cleanup before the pin re-render lands (owner's
+  option of a proposal to Cleanup).
+
+### 2026-10-07 - The pilot adds a self-built pack test (owner)
+
+- **Why.** protomaps.com's Terms of Use forbid "automated means to access
+  the Site" without written permission, while Protomaps' guide instructs
+  scripted extracts from build.protomaps.com. The travel app's owner chose
+  to build its packs from OSM with Protomaps' open-source builder. This
+  repo's prototyping so far is a few manual, owner-approved extracts, the
+  use Protomaps documents, and continues on that basis; a SCHEDULED build
+  of 170 cities would be automated. Asking Protomaps is outreach, which
+  comes after the methods this project controls (owner's standing rule), so
+  the pilot tests building the packs here (owner, 2026-10-07). If it works,
+  the site and the app can share one build, which also keeps their figures
+  comparable.
+- **What the builder needs** (read from `tiles/src/main/java/.../Basemap.java`
+  and `pom.xml` in github.com/protomaps/basemaps, 2026-10-07; sizes by HEAD
+  request):
+
+  | Input | Host | Size | Licence read |
+  |---|---|---|---|
+  | OSM extract (`--area`, Geofabrik name, or a local file) | download.geofabrik.de (Argentina: `south-america/argentina-latest.osm.pbf`) | 432 MB | **permitted**: ODbL only, nothing beyond the OSM credit; scripted downloads fine with a no-repeat guard ("Download responsibly!", 2025-09-10); "-latest" redirects to a dated file; dated daily files are deleted, so a 4.6 offer names a monthly or yearly file or keeps a copy; never the login-only "internal" extracts |
+  | Water polygons, land polygons | osmdata.openstreetmap.de | 931 MB + 952 MB | **permitted**: ODbL, the OSM credit covers it; automation allowed, conditional requests asked ("we might suspend the service" on abuse); keep the cached zips between builds |
+  | Daylight landcover | r2-public.protomaps.com (a Protomaps host) | 36 MB | **data permitted with ESA's credit** (CC BY 4.0, prescribed wording; plus Daylight's ODbL umbrella, probable); **the Protomaps host carries the Terms-of-Use ambiguity again**; the original publisher's frozen copy is live at `daylight-openstreetmap.s3.us-west-2.amazonaws.com/landcover/low.{shp,dbf,shx,prj}` (34.5 MB, 2023-10-05, Daylight sunset 2024) and would need converting to GeoPackage |
+  | QRank (POI ranking) | qrank.toolforge.org | 106 MB | **data CC0; the host's Wikimedia Cloud Services end-user terms carry an open-ended indemnity**: an owner decision. Used only to set each POI's first zoom; no QRank data in the tiles. Not updated since 2024-03-16 |
+  | pgf-encoding (script names) | wipfli.github.io | 0.8 MB | **permitted**: what reaches the tiles is CC0 (encoded Devanagari names, two metadata keys); the zip's MIT code and OFL fonts are not passed on |
+  | Natural Earth | naciscdn.org | 446 MB | done: public domain, no credit needed |
+  | Java 21 JDK (Eclipse Temurin 21.0.12.1, portable zip, no install) | github.com/adoptium | 205 MB | a tool, not shipped |
+  | Maven 3.9.16 (portable zip) | dlcdn.apache.org | 9 MB | a tool, not shipped |
+
+  About 3.1 GB in all, into the scratchpad or a gitignored `data/` folder,
+  never committed. The Java build runs through `scripts/heavy_job.py` with
+  an estimated peak, since no Java run has been measured here.
+- **Downloads by the owner, not this session** (owner, 2026-10-07: "send
+  links to me so as to not draw up usage"). Files go into the gitignored
+  `data/_basemap_build/` of this worktree (created empty). Compiling the
+  builder makes Maven fetch its libraries from Maven Central, the one step
+  that cannot be done by hand: the owner runs it or approves it.
+- **Recommended for the pilot, owner to confirm:** skip QRank and the
+  landcover layer by giving the builder empty stand-in files made locally
+  (no download, no Toolforge or Protomaps terms, no ESA credit). Costs: POI
+  labels appear at slightly different zooms than in Protomaps' build, and
+  low zooms lose their land-cover shading. Either can come back later (the
+  original Daylight shapefile with ESA's credit; QRank with the owner's
+  acceptance of the indemnity).
+- **QRank: downloaded once in error, never used, deleted; resolved (owner,
+  2026-10-07).** The owner's manual downloads included `qrank.csv.gz`
+  (105,533,721 bytes) by mistake. It was moved out of the build inputs the
+  same evening, never opened, never built from, and deleted by the owner;
+  nothing derived from it exists. The owner's call: no terms were breached
+  and no liability follows from a mistaken, unopened download that is not
+  in the project. The pilot builds with an empty stand-in for QRank, as the
+  travel app does.
+- **The inputs in place** (`data/_basemap_build/data/sources/`, owner's
+  downloads, 2026-10-07): `argentina.osm.pbf` (Geofabrik
+  `argentina-261006.osm.pbf`, the dated file "-latest" redirected to;
+  432,349,104 bytes, sha256 d23c0242...c5021f14), the water and land
+  polygons, Natural Earth and pgf-encoding, sizes matching the publishers'
+  exactly. Land cover and QRank: empty stand-ins, made locally.
+- **What the test measures:** that a self-built Mendoza pack draws the same
+  map as the downloaded one (same style, same view; screenshot and rendered
+  feature counts), its size against 4.13 MB, the build's time and peak
+  memory, and whether the build runs without the Protomaps-hosted landcover
+  file.
+
+### 2026-10-07 - The half Travel version built and tested on Mendoza; macro-map Travel tooltips (owner)
+
+- **Built (commit cc1a3b04, branch only).** With `open_basemap`, the base
+  layers are "Business" and "Travel". `TRAVEL_MODE_SCRIPT`, a conditional
+  block, takes the pins, both heat layers and the rings off the map when
+  Travel is picked, folds the legend to its lines, keeps every layer in the
+  menu, restores the render-time defaults on Business, and remembers the
+  viewer's choice (localStorage). Two defects found and fixed on the way:
+  changes made inside the layer menu's own click were undone or left stale
+  ticks (now deferred until the click is handled), and with the Travel
+  layer alone Leaflet.markercluster threw "Map has no maxZoom specified"
+  when a pin layer was turned back on (the Travel layer now registers its
+  zoom range as tile layers do). A first legend wrap edited LEGEND_HTML's
+  fixed text and `check_render_current.py` caught it; the wrap now sits in
+  the slot only.
+- **Tested** (headless Edge, desktop mouse and 375 x 812 touch, no console
+  errors): Travel clears pins, heat and rings and the legend's business
+  section, with lines kept; the line highlight works by hover and tap in
+  Travel; a business layer turned back on from the menu draws; Business
+  restores pins, in-ring heat and the business legend; a reload reopens in
+  Travel. The full interaction suite (line highlight, station names,
+  legend, line label, credit, drag, Global View) and the credit check at
+  375 x 650, 375 x 812, 1280 x 650 and 1280 x 900 pass on both base layers.
+  Without `open_basemap` Mendoza still renders identical to the committed
+  map, and all 170 committed maps pass `check_render_current.py`.
+- **Small follow-up:** a business layer turned back on in Travel draws, but
+  the legend's business section stays folded until Business is picked.
+- **Macro-map tooltips in Travel (owner, 2026-10-07), the same in the
+  website's Travel view, the full version and the mobile app:** dots keep
+  their transit-type colors (metro, light rail, tram); the tooltip reads the
+  city name, the transit type, a "transit coverage" stat only where the
+  rail data limits coverage, then the number of lines and stations if there
+  is room. No storefront counts. Messaged to the app project.
+- **Measured for the coverage stat** (the committed maps and
+  `excluded_stations.csv`, 2026-10-07): 54 of 170 cities list no station
+  left out; 116 list some: beyond the city limits 111, thinned for spacing
+  10, closed for works 5, under the 15-minute test 3. Those files are not a
+  clean coverage measure: Japanese cities list only stations within 3 km of
+  the city line, and lines left out whole (commuter rail, stubs, scenic
+  lines) are not counted at all. Lowest shares drawn: Anyang 7 of 113,
+  Melbourne 17 of 216, Sydney 16 of 173; Mendoza 7 of 25, Washington 40 of
+  98.
+
+### 2026-10-07 - Two travel versions for the pilot, "full" and "half"; no business or ring layers in the full one (owner)
+
+- **The owner's split, both piloted off the live site:**
+  - **Full travel version, offline only.** The Travel basemap with stations,
+    lines, labels, the line highlight and the OSM credit, and no business
+    data at all. It is the reference handed to the travel app, and the
+    version that warrants the out-of-scope call for this website.
+  - **Half travel version, website scope.** The basemap changes and the
+    business pins, the heat and the rings default to OFF; all stay in the
+    layer menu.
+- **Hard line (owner): a full travel version on the new basemap never lists
+  concentric rings or a business heat layer as layer-menu items**, and
+  draws no business pins. Messaged to the app project the same day.
+- **Recommended implementation** (for the owner to confirm before code):
+  the full version takes NO business data at all, so the register data
+  cannot reach its HTML by any path: `render_heatmap(businesses=None)` (or
+  a flag that refuses businesses) skips the heat, the rings, the pins and
+  the legend's business section, and a check refuses a full-version file
+  that contains a ring, heat or business layer name. The half version is
+  the switch plus a few lines of map script: picking "Travel" unchecks the
+  pins and heat (rings are already off by default, owner 2026-09-21) and
+  the legend shows lines only; picking "Business" restores the business
+  defaults. The half version's page still carries the register data, so
+  its notices and obligations are unchanged.
+- **Agreed (owner): in Travel the legend shows lines only.**
+- **Required (owner): the macro-map to city-map chain also exists in the new
+  format** (the Global View leads into city maps and back). Measured for it,
+  2026-10-07, dry runs on the 20261007 planet build: a world pack is 6 MB at
+  zoom 0-4, 15 MB at 0-5, 45 MB at 0-6 and 189 MB at 0-7. The landcover
+  layer (ESA, CC BY 4.0) lives at exactly these zooms, so a macro map on the
+  new basemap needs ESA's credit or a style without that layer. The site's
+  Overview is pydeck with CARTO's style, and pydeck cannot register the
+  pmtiles protocol, so a Travel Overview on the site needs ordinary Z/X/Y
+  tile URLs (the Cloudflare Worker route) rather than raw range reads.
+
+### 2026-10-07 - The open basemap works offline; three licence reads; repeat visits favour it; "Business" and "Travel" (owner)
+
+- **Owner decisions, 2026-10-07.** The switch is B (Standard default), D (Open
+  only) is out for good, and C (Open default) is a later option for phones
+  if the open basemap earns it. A focused pilot goes ahead (3-5 cities,
+  self-hosted assets, a travel style, pack builds, R2, real-phone figures),
+  kept off the live site. The names are **"Business"** and **"Travel"**.
+  The travel view is meant to HIDE the business layers, so it is a map MODE,
+  not only a basemap; whether that mode belongs on this site at all, or only
+  in the app (with the switch declared out of this site's scope), is open
+  for the owner, and the names on this site wait on it.
+- **Offline, measured.** A MapLibre-only page (as the app would build it)
+  with every library, font, sprite and pack served locally, and every
+  request to any other host failed as "internet disconnected": Mendoza
+  (Spanish labels; English on the dark flavor) and a 1 km Tokyo patch
+  (2.56 MB; Japanese and English labels), each zoomed to 10, 12, 15 and 17
+  and panned. **No request left the machine, no errors, every step drew**,
+  including zoom 17 beyond the pack's 15. Three findings for whoever builds
+  on it:
+  - The three Noto fonts the style uses (11.1 MB in all; sprites 0.15 MB)
+    have no Han or Hangul glyphs (those range files are empty) and only
+    Regular has kana. MapLibre drew the Japanese from the device's own fonts
+    (its `localIdeographFontFamily`), so CJK cities depend on the device;
+    which glyph forms a reader sees then follows the device's fonts (the
+    cjk-text skill's Han-unification problem), untested on real phones.
+  - With `lang: "en"`, the default style already labels **English over the
+    local script** ("MARUNOUCHI 1" over 丸の内一丁目), which is what the app
+    wants.
+  - MapLibre's attribution control showed **nothing**, although the pack's
+    metadata carries `© OpenStreetMap`: the credit must be set explicitly
+    (the site's outer layer already does).
+- **Repeat visits, measured** (headless Edge, 375 x 812, the mobile profile,
+  medians of 3). "Warm" means an earlier city page cached the libraries,
+  fonts and sprites but not this city's map data:
+
+  | | Cold: page loaded / basemap drawn | Warm: page loaded / basemap drawn | Bytes cold / warm | JS heap | Browser memory |
+  |---|---|---|---|---|---|
+  | Standard only (today) | 4.36 / 4.42 s | 3.17 / 3.25 s | 635 / 457 KB | 6.1 MB | 551 MB |
+  | Switch, reader picks Open (B) | 4.38 / 4.49 s, then 5.07 s to Open | 3.17 / 3.24 s, then 1.42 s to Open | 1,237 / 589 KB | 12.7 MB | 643 MB cold |
+  | Open by default (C) | 5.50 / 7.94 s | **1.94 / 3.12 s** | 1,053 / **407 KB** | 10.8 MB | 645 MB |
+
+  On a repeat visit an Open default is drawn sooner (3.12 s against 3.25 s)
+  on fewer bytes (407 against 457 KB) than today's map; on a first visit it
+  costs 3.5 s and 418 KB more, almost all of it the libraries. Its price on
+  every visit is memory: about +4.8 MB of JS heap and +95 MB across the
+  browser. So C on phones is plausible once the libraries are self-hosted
+  with long cache lifetimes, subject to a real-phone memory check.
+- **Licence reads (licence-read agent, one source each), all PERMITTED WITH
+  CONDITIONS for both the site and an offline app:**
+  - **Protomaps basemap, builds and style.** Hosting extracts on our own
+    storage is what Protomaps asks for ("copy the tileset to your own Cloud
+    Storage"), and offline use is supported. Credit `© OpenStreetMap` in the
+    map corner, linked to openstreetmap.org/copyright (met). **Correction to
+    the earlier note "OSM credit only":** the build's `landcover` layer
+    (zooms 0-7, Daylight from ESA WorldCover) is CC BY 4.0 and, if shown,
+    needs ESA's credit, "© ESA WorldCover project 2020 / Contains modified
+    Copernicus Sentinel data (2020) processed by ESA WorldCover
+    consortium"; the site's maps set no minimum zoom, so a reader can reach
+    it. The cheaper fix is a style without the landcover layer (or a minimum
+    zoom of 8 on the Open layer). Builds are kept only a week (plus one per
+    patch version), so packs must be copied to our storage, never pointed at
+    build.protomaps.com. A self-hosted or bundled `basemaps.js` must carry
+    its BSD-3 notice (and the Mapzen MIT notice in the same LICENSE.md). A
+    modified style or tileset may not be called "Protomaps". **Owner
+    decisions:** protomaps.com's Terms of Use forbid "automated means to
+    access the Site" without written permission and carry an open-ended
+    indemnity, while Protomaps' own guide instructs scripted `pmtiles
+    extract` against the build host; a one-line email to
+    support@protomaps.com would settle it before a scheduled pack build.
+    The same Terms forbid using "location data from the Site" for maps
+    that "provide directions", which matters only if the app ever routes.
+  - **Fonts and sprites (basemaps-assets).** Noto fonts under the SIL OFL
+    1.1, no Reserved Font Names; the converted glyph files are a Modified
+    Version, which is allowed. Ship `OFL.txt` (with "Copyright 2022 The Noto
+    Project Authors") beside the fonts, and the MIT notice ("Copyright (c)
+    2017 Mapzen", also given as "Mapzen, Linux Foundation") beside the
+    sprites; in an app, both on a licences screen. Recommended, an owner
+    call: also carry "Noto is a trademark of Google LLC", which the glyph
+    format drops.
+  - **ODbL for packs and the export.** The rendered site map is a Produced
+    Work. OSMF's guidance does not settle whether **vector tile files** are
+    a Produced Work or a database; recommended to treat the downloadable
+    packs as a Derivative Database, which costs little: convey them only
+    under ODbL with the licence named in the pack metadata and a README,
+    keep the existing notices, and make a real, findable free download
+    offer (ODbL 4.6; an unmodified extract offered as itself satisfies it).
+    **The app may not encrypt or restrict the packs** (4.7). The JSON
+    export is a Derivative Database (substantial, repeated) under ODbL; its
+    non-OSM parts stay outside share-alike only while each data TYPE is
+    all-OSM or all-non-OSM, and "regional cut" means at least a country in
+    OSMF's guideline: an owner decision whether per-city purity is enough or
+    each type stays single-source per country. A feed that forbids
+    modification (LA Metro) could not go in a mixed file. Attribution: the
+    site's corner credit already meets the 2021 guideline; an app may use a
+    splash screen or a corner credit, and an info button only after the
+    credit has been shown.
+- **Not done:** the real-iPhone check, self-hosting, the travel style, and
+  the landcover decision; the pilot carries them.
+
+### 2026-10-07 - The app export contract: one versioned file per city, read-only for the app project (proposal, owner to decide)
+
+- **Proposal, not code.** The travel app is its own project and never edits
+  this repo; this repo never holds app code (owner, 2026-10-07). The
+  interface is a set of files this repo publishes and the app reads, so the
+  site and the app read one source.
+- **What is written.** A shared module, `pipeline/export_city.py`, called at
+  the end of `render_heatmap()` with the stations and lines it already holds,
+  writes `outputs/<city>/export/city.json` (recommended over a step4 per city:
+  no per-city edits for 170 cities, `step3_map.py` files stay thin, and the
+  export can never disagree with the drawn map because it is written from the
+  same objects). Being under `outputs/`, every export is committed and
+  `drift_check.py` diffs it like the map. A step never fetches: station exits
+  and the basemap pack's metadata are fetched by `fetch_sources.py` (exits,
+  one Overpass query per city, one in flight per session) and by a new
+  `scripts/build_packs.py` (packs, `pmtiles extract`), and the export reads
+  their caches. A city with no exits cache exports `"exits": []` with
+  `"exits_status": "not fetched"`, never a silent empty list.
+- **Published how.** `scripts/publish_export.py` gathers every city's
+  `city.json` plus a `manifest.json` into a GitHub release of this repo
+  tagged `export-v<major>-<YYYYMMDD>`; the app project reads the release
+  assets at build time. Release assets serve range requests but send no CORS
+  headers (measured 2026-10-07: a preflight to a release download returns
+  404), so they suit a build-time read, not a browser. Publishing a release is
+  an outward action and waits for the owner each time.
+- **Versioning.** `schema_version` is semver. Adding an optional field is a
+  minor version; renaming, removing or changing a field's meaning is a major
+  one, and a major version gets a new tag series so the app pins it. The
+  schema itself lives at `docs/export_schema/city-export-1.schema.json`, and
+  a new `scripts/check_export.py` validates every city's file against it,
+  refuses a line without a real public name and a color, refuses a notice
+  that `app/components.py`'s `_NOTICES` assigns to the city but the export
+  lacks, and refuses any field from a business register.
+- **Never in the export: business-register data.** No business records, no
+  counts, no heat. The app's everyday places come from OpenStreetMap (owner),
+  and keeping registers out keeps their licences, their notices and the
+  personal-information invariant out of the contract entirely.
+- **`city.json`, version 1.0.0.** Fields marked **[L]** carry a licence
+  obligation that travels with the data:
+
+  | Field | Contents | Obligation |
+  |---|---|---|
+  | `schema`, `schema_version` | `"expanded-heatmap/city-export"`, `"1.0.0"` | none |
+  | `generated_utc`, `source_commit` | when written, the commit the pipeline ran at | none |
+  | `city` | `slug`, `name` (the page's name), `country`, `lang` (BCP 47, as `render_heatmap` takes it), `bbox` [w, s, e, n] | none |
+  | `systems[]` | `id`, `name` (as the layer names it, "Metrotranvía"), `operator` | none |
+  | `lines[]` **[L]** | `id`, `name` (the real public name, the legend's), `label` (the on-map label, a line code where the map uses codes, as Tokyo's do), `color` (hex, as drawn), `system`, `source` (a `licences[].id`), `geometry` (GeoJSON MultiLineString, one part per alignment, WGS84, 5 dp) | the source's: attribution; for OSM-derived lines ODbL share-alike on the database; for a feed, whatever its row in `docs/data_sources.md` says |
+  | `stations[]` **[L]** | `id` (stable: the feed's stop id or the OSM node id), `name`, `names` {lang: name} where the source has them, `lines` [line ids], `lat`, `lon`, `no_data` (Tokyo's hollow stations), `source` | as for lines |
+  | `exits[]` **[L]** | `id` (OSM node id), `station_id` (nearest station within 300 m, measured in the city's own UTM zone, never EPSG:4326), `name`, `ref` (exit number or letter), `wheelchair`, `level`, `lat`, `lon` | ODbL: attribution, share-alike on the database |
+  | `exits_status` | `"fetched"`, `"none in OSM"` or `"not fetched"` | none |
+  | `data_dates` **[L]** | per source: `retrieved_utc`, `valid_from`/`valid_to` where a feed declares them, `update_interval` where a licence requires one shown; `osm_retrieved_utc` | Licence Mobilités Art. 5.7 (Paris) requires the data's date and update interval displayed; CRTM requires the update-date metadata kept unaltered; so these fields are required, not optional, for those sources |
+  | `basemap_pack` **[L]** | `file`, `bytes`, `sha256`, `build` ("20261007"), `osm_replication_utc` (from the pack's metadata: 2026-10-07T04:00:00Z for Mendoza's), `bbox`, `maxzoom`, `credit` ("© OpenStreetMap") | a produced work under ODbL: the credit must be shown wherever the map is |
+  | `notices[]` **[L]** | `number` (as `docs/data_sources.md` numbers it), `publisher`, `text`, `verbatim` (true where the wording is prescribed), `applies_to` (`lines`, `stations`, `exits`, `basemap`) | verbatim texts must be reproduced unaltered; only the notices for the exported layers, never a register's |
+  | `licences[]` **[L]** | `id`, `source` (publisher and dataset), `licence`, `url`, `obligations` [`attribution`, `share-alike`, `no-modification`, `date-display`, `termination-deletion`, `app-terms-unread`] | the list the app project starts its own reading from; `app-terms-unread` marks a feed whose terms for shipping inside an app this repo has not read (WMATA, LA Metro, IDFM and CRTM went to the app project, 2026-10-07) |
+  | `lines[].redistribution`, `stations[].redistribution`, `exits[].redistribution` **[L]** | `"open"` (the source's terms allow redistributing it as data: ODbL for OSM, CC BY, Licence Ouverte and the like), `"restricted"` (they forbid or limit it: LA Metro's "unauthorized redistribution", WMATA's within-your-Application grant, MTA's no-modification), or `"unread"` (no read has answered the data question); plus `redistribution_basis`, the `docs/data_sources.md` row (file and anchor) the value comes from | per record, so the app can drop or replace a restricted line without re-researching it; the value is the SITE's reading for distribution as data, not a ruling on the app's own use, which the app project reads for itself |
+
+- **Redistribution labels (owner, 2026-10-07).** Every line, station and
+  exit carries `redistribution` and `redistribution_basis` (table above).
+  `check_export.py` refuses a record whose source has no row, and refuses
+  `"open"` where the row says otherwise. Filled first from the existing
+  rows (the US table's "Redistribution" column answers many); a source no
+  row answers is `"unread"` until the licence-read agent reads it, one
+  source per call, when the export is built.
+- **An OSM variant of each city's rail: decided when the export is built
+  (owner, 2026-10-07).** Where a city's rail comes from a feed or an agency
+  layer and an OSM cache exists (about 95 cities, per Cleanup's rail-scope
+  list), the export may also carry an OSM-derived version, so the app can
+  switch a restricted city to OSM without new work.
+- **Discrepancies are disclosed in the app (owner, 2026-10-07).** Wherever
+  the app shows a city's rail from a different source than the site (an OSM
+  variant in place of a restricted feed), or leaves a restricted line out,
+  it says so in the app. To make that possible from the export alone, a line
+  or station drawn from a different source than the site's carries
+  `site_source` (the source the site used) next to `source`, and the city
+  carries `rail_differs_from_site: true`.
+
+- **The full rail network, not the site's cut (owner, 2026-10-07, at the
+  app project's request; relayed by Cleanup).** The export carries every line
+  and station of a city's network, including what the site leaves off or
+  cuts short: stub lines, lines cut at the city boundary, and lines left out
+  by other rules (frequency floor, scenic, trial service). The site's maps
+  keep their scope; only the export gains these. Fields, all in 1.0.0:
+
+  | Field | Contents |
+  |---|---|
+  | `lines[].on_site_map` | true when any part of the line is drawn on the site |
+  | `lines[].segments[]` | the line as stretches: `geometry` (GeoJSON LineString), `on_site_map`, `exclusion`; a line drawn whole is one segment |
+  | `lines[].geometry` | the full network geometry, the union of the segments (as before) |
+  | `lines[].geometry_status` | `"full"`, or `"cut_only"` (only the site's cut survives; a fresh source is pending), never a cut passed off as whole |
+  | `lines[].color_source`, `lines[].name_source` | `"site"` (the site draws it), `"feed"` (the feed's `route_color` and name) or `"osm"` (the relation's `colour` and `name`); a line the site never drew has no site color, and `"none"` is allowed for color only |
+  | `stations[].on_site_map`, `stations[].exclusion` | the same flag and object for stations, from each city's committed `excluded_stations.csv` |
+  | `exclusion` | null when drawn, else `rule`, `detail` (the reason as the city records it, verbatim), `decided` (the `DECISIONS.md` date and title, or the skill or rules section that sets the rule) |
+
+  `exclusion.rule` is one of: `stub`, `city_boundary`, `other_network` (a
+  neighboring town's own line in the same feed, as Aubagne's tram in
+  Marseille's), `frequency_floor` (the 15-minute test or a country's rail
+  test), `scenic` (heritage or tourist service), `trial_service`,
+  `closed_for_works`, `spacing` (stations only: thinned by
+  `pipeline/stations.py`'s `thin()`, the line itself is drawn), `mode` (a
+  mode outside the page's scope, such as a heavy-rail line on a trams-only
+  page), or `other` (with `detail` required). The station rules map one to
+  one onto `app/station_scope.py`'s `classify()` vocabulary (`thinned` ->
+  `spacing`, `infrequent` -> `frequency_floor`, `outside` -> `city_boundary`
+  or `other_network`, `closed` -> `closed_for_works`), and the export
+  imports that function rather than keeping a second vocabulary; a reason it
+  returns `other` for fails `check_export.py` until a rule is named. The 12
+  `excluded_stations.csv` files (of 162) that carry boundary columns instead
+  of a `reason` (`located_in`, `commune`, `distance_outside_m` and the rest,
+  counted 2026-10-07) map to `city_boundary`.
+- **Where full geometry comes from, per line class.** Measured from the
+  committed step 3 files, 2026-10-07: 27 cities draw lines from a GTFS feed
+  (`load_line_shapes`), 48 from OSM route relations
+  (`load_osm_line_shapes`), 56 from a GeoJSON file
+  (`load_geojson_line_shapes`, MLIT N02 among them), the rest through shared
+  modules (`osm_tram`, the Japanese and country steps).
+
+  | Line class | Full geometry from | Held now? |
+  |---|---|---|
+  | Cut at the city boundary, GTFS city | the cached feed's `shapes.txt`, read before the clip | yes where `data/<city>/raw/` holds the zip (274 zips are cached across cities); else a re-download from the publisher's own host |
+  | Cut at the city boundary, OSM city | the cached relation: every OSM query in the pipelines uses plain `out geom`, never `out geom(bbox)`, so member ways come back whole whatever the query's bbox | lines yes; stop nodes only where they were fetched as relation members rather than by bbox, checked per city |
+  | Cut at the city line, Japanese city | MLIT N02, a national file, before `japan_step1`'s cut at the N03 line | yes, while the N02 cache is held |
+  | GeoJSON-fed city | the raw file the GeoJSON was made from | at risk: where the GeoJSON in `data/<city>/processed/` is itself the cut, and no raw file survives, only the cut is held |
+  | Stub, scenic, trial or frequency-floor line left out whole | GTFS: the same cached feed (its other routes), using the route's own shape, never a line joined through its stops; OSM: the cached relations, if the query selected that route type | at risk where the query filtered route types (`OSM_ROUTES` of tram and light_rail leaves out a funicular or heritage line), or a feed omits shapes for the route |
+  | Station thinned by spacing | nothing to fetch: the line is drawn whole and `excluded_stations.csv` keeps the coordinates | yes |
+
+- **Cleanup's list (`data/_app_requests/rail_scope_2026-10-07.md`, master
+  at bd0e9a8a) settles most of it.** 16 stub lines in 11 cities, 111 cities
+  with lines cut or stations outside (76 outside Japan, 34 Japanese), 82 rows
+  left out for other reasons. The raw caches hold whole GTFS feeds, whole OSM
+  relations, the whole national N02 file and whole CRTM layers; only
+  `data/<city>/processed/lines.geojson` and the map are cut. So the export
+  reads the raw caches, never `processed/lines.geojson`, and computes each
+  segment's `on_site_map` by overlaying the drawn geometry on the full one
+  (a buffer in the city's own UTM zone). That also closes the list's open
+  gap, "drawn versus cut not traced for most GTFS cities": the export never
+  needs to know how the site cut a line, only what it drew.
+- **Lines needing a fresh source.** Held means the export can be written from
+  caches already on this machine. Fresh means nothing cached has the line.
+
+  | City | Lines | Held? | Fresh source |
+  |---|---|---|---|
+  | Chicago | Metra | no (CTA feed only) | OSM relations (recommended) or Metra's feed |
+  | Los Angeles | Metrolink | no (`gtfs_rail.zip` is Metro rail only) | OSM, or Metrolink's feed |
+  | Montréal | exo commuter trains | no (STM and REM only) | OSM, or exo's feed |
+  | Washington DC | MARC, VRE | no (WMATA only) | OSM, or the two agencies' feeds |
+  | Madrid | Cercanías | no (CRTM M4 and M10 layers only) | OSM, or the CRTM Cercanías layer (same publisher, a new layer) |
+  | Den Haag | RandstadRail E | held under another city: `data/rotterdam/raw/gtfs-openov-nl.zip` (RET metro E); Den Haag's own query is `route=tram` only | none; Den Haag's `fetch_sources.py` names the national file, so its export does not depend on Rotterdam's cache |
+  | Incheon | Seoul Line 1's southern branches | partial: the query returns only relations touching Incheon | OSM, by relation id |
+  | Korean cities | lines leaving the cached bbox | partial (inferred from the bbox query) | OSM, by relation id |
+  | Commuter and regional rail named in the mode-scope row (BART, Caltrain, Coaster, Sprinter, GO, LIRR, Trenord and Passante, SNCB, National Rail, Pendeltåg, Korail, Taiwan Railway and HSR, V/Line, NSW TrainLink, Buenos Aires commuter railways, and the rest) | per city | held where the city cached a whole agency or national feed (Paris RER and Transilien, Berlin S, MBTA, Dublin, Marseille TER, Sounder, Tri-Rail, WCE, NS, Vivi, Prague S); unknown elsewhere | the export's own check decides it, by looking each named line up in the caches, rather than this table guessing; where absent, OSM |
+  | Japan, 34 cities | stations beyond 3 km of the city line | held: N02 is national, and the 3 km cut is `DRAW_BEYOND_M` in `japan_step1`, not the file | none |
+  | Brno, Le Havre, Montpellier, Strasbourg, Plzeň | geometry of undrawn routes (their feeds carry no `shapes.txt`) | held where each city's OSM query matched the route | OSM, by relation id, where it did not |
+
+- **Recommended fresh source: OpenStreetMap, for every gap.** It is a source
+  this project already uses under ODbL with its credit shown, so the gaps
+  need no new licence, only one Overpass query per city in that city's
+  `fetch_sources.py` (one in flight per session, 60 s after a 504 or 429).
+  An agency feed would add a new source (owner first, a licence read, a
+  `docs/data_sources.md` row), and its only gain over OSM would be
+  timetables, which version 1 does not carry. Until fetched, such a line
+  exports with `geometry_status: "cut_only"` if a cut exists, or
+  `"not_held"` with no geometry, never silently left out.
+- **How far is "in full" (owner, 2026-10-07, relayed by Cleanup: yes to
+  the proposal).** Urban lines (metro, tram, light rail) go whole to their
+  termini; mainline and commuter lines are carried to the edge of the city's
+  basemap pack (its extent plus 10 km, the area the app can draw offline),
+  with the part beyond marked `geometry_status: "clipped_to_export_extent"`.
+  The reason: a Japanese JR line, the Tōkaidō or the Sanyō, runs hundreds of
+  kilometres beyond the city, and every line whole would make some Japanese
+  exports carry much of the national network.
+- **Out of rail scope altogether:** aerial lifts (Cablebús, the Maokong
+  Gondola) are not rail; whether the app wants them is the app project's
+  question, and the export leaves them out unless the owner says otherwise.
+- **`manifest.json`.** One file for all cities, so a reader's device fetches
+  the same thing whichever cities it holds: per city `slug`, `schema_version`,
+  `sha256` of `city.json`, `generated_utc`, the basemap pack's `build`,
+  `bytes` and `sha256`, and `flags` [`removed` (a removal request honored:
+  the app deletes its copy), `rail_changed` (a line opened or closed since
+  the last release), `licence_review_by` (a date a licence must be re-read
+  by)]. The flags carry the "urgent flags per city" item 4 named.
+- **Not in version 1.** Timetables (stations and lines only; a timetable's
+  expiry dates and its feed's terms belong to the app project), everyday
+  places from OSM (the app project's own extract), the Overview's data.
+- **Open for the owner:** (a) the release route versus a separate public
+  repository for the exports; (b) whether `city.json` is ODbL as a whole
+  (it is, wherever OSM data is in it: the simplest statement is that the
+  export is published under ODbL with each feed's own terms noted per
+  source); (c) whether `_NOTICES` moves from `app/components.py` into a data
+  file both the app and the export read, rather than the export parsing app
+  source as `check_provenance.py` does.
+
+### 2026-10-07 - Hosting the open basemap: Cloudflare R2, about nothing a month for 3-6 GB (recommendation, owner to decide)
+
+- **Recommended: Cloudflare R2**, behind a custom domain if the owner has or
+  buys one (about $10 a year), else behind a Cloudflare Worker on
+  `workers.dev`. R2 charges no egress, $0.015/GB-month beyond 10 GB free,
+  and $0.36 a million reads beyond 10 million free a month
+  (developers.cloudflare.com/r2/pricing, read 2026-10-07). All 170 packs
+  are 2.70 GB at the map extent and 5.94 GB with 10 km more (measured
+  2026-10-07), so both fit the free storage; the measured Mendoza view read
+  5 ranges, so 10 million free reads is of the order of a million views a
+  month. Protomaps names R2 its recommended store "because it does not have
+  bandwidth fees" (docs.protomaps.com/pmtiles/cloud-storage).
+- **The domain question is the real choice.** R2's `r2.dev` address is
+  "rate-limited and should only be used for development purposes", and
+  Cloudflare's cache needs a custom domain that is a zone in the same
+  account (developers.cloudflare.com/r2/buckets/public-buckets). Without a
+  domain, Protomaps' Worker serves the tiles from R2 (100,000 requests a
+  day free, or $5 a month for 10 million; developers.cloudflare.com/workers/
+  platform/pricing), though its cache "must be assigned a zone on your own
+  domain, not workers.dev" (docs.protomaps.com/deploy/cloudflare). A
+  Worker also turns ranges into ordinary tile URLs, so the browser needs no
+  pmtiles library. Protomaps warns that R2's latency can be 500 ms or more.
+- **Compared, for 3 GB and 6 GB stored and an assumed 50 GB a month read:**
+
+  | Host | Storage | Reads and egress | A month |
+  |---|---|---|---|
+  | Cloudflare R2 | free to 10 GB, then $0.015/GB | egress free; reads free to 10 M | $0 (domain optional, ~$10 a year) |
+  | Backblaze B2 | free to 10 GB, then $6.95/TB | egress free to 3x storage (9 or 18 GB), then $0.01/GB; free through Cloudflare and others; reads free | $0.32-0.41; HTTP/1.1 only (Protomaps) |
+  | AWS S3 | $0.023/GB ($0.07-0.14) | 100 GB/month free across AWS, then $0.09/GB; GETs $0.0004 per 1,000 | about $0.10-0.55; about $81 at 1 TB |
+  | GitHub Pages | site capped at 1 GB | soft 100 GB/month; not a file host | unsuitable |
+
+  Sources: backblaze.com/cloud-storage/pricing, aws.amazon.com/s3/pricing,
+  docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits,
+  all read 2026-10-07. GitHub is out three ways: the packs exceed Pages' 1 GB,
+  git refuses London's 113 MB pack (over 100 MB), and release assets send no
+  CORS headers, so a browser cannot range-read them.
+- **One alternative for the site alone:** the whole planet build is 138.7 GB
+  (2026-10-07), about $1.93 a month on R2, and pans seamlessly anywhere,
+  where a city pack goes blank beyond its extent. Per-city packs are what an
+  offline reader needs, and they cost nothing, so they are recommended for
+  both.
+- **CORS:** allow any origin (the maps are embedded in Streamlit iframes),
+  allow the `range` and `if-match` headers, expose `etag`
+  (docs.protomaps.com/pmtiles/cloud-storage).
+- **Before release, a licence read for the style assets** (fonts and sprites
+  from protomaps.github.io/basemaps-assets), with the read-licence skill,
+  and a `docs/data_sources.md` row for the basemap itself (Protomaps' code
+  BSD-3, styles CC0, tiles ODbL produced work). Neither is done.
+
+### 2026-10-07 - Basemap switch prototype on Mendoza: works, default unchanged, Open costs about 5 s and 7 MB on a phone (measured)
+
+- **Built on the shared renderer.** `pipeline/map_common.py` gains an
+  `OpenBasemap` layer and an optional `open_basemap=` argument to
+  `render_heatmap()`; omitted, a map renders exactly as before (Mendoza's
+  scratch render matched the committed `outputs/mendoza/heatmap.html` once
+  Folium's random ids were normalized). Given, the layer menu offers two base
+  layers, "Standard" (OSM's tiles, still the default) and "Open". A city
+  passes it from its config in one line, so `step3_map.py` files stay thin.
+  The prototype rendered from a scratch script; no city file and nothing
+  under `outputs/` changed.
+- **The pack.** go-pmtiles v1.31.2 from github.com/protomaps/go-pmtiles
+  releases (zip sha256 a658baa4...785a1), `pmtiles extract` of the
+  2026-10-07 planet build over Mendoza's extent plus 10 km, zoom 0-15:
+  4,129,904 bytes, 845 tile entries, 7.8 s, 52 requests, matching the
+  index-only estimate (4.1 MB). OSM data as of 2026-10-07T04:00Z.
+- **How it loads.** MapLibre GL 5.24.0 (version 6 ships ES modules only,
+  which maplibre-gl-leaflet 0.1.4 cannot read), pmtiles 4.5.0 and
+  @protomaps/basemaps 5.7.2 load only when a reader picks Open, so the
+  default view pays only 3.3 KB of page. The GL canvas sits in Leaflet's tile
+  pane, so the dark theme's existing invert filter applies to it unchanged.
+  The credit is the existing `OSM_ATTRIBUTION`, carried by the outer layer;
+  the GL layer adds none, so it never doubles.
+- **Measured** in headless Edge at 375 x 812, Lighthouse's mobile profile (4x
+  CPU slowdown, 150 ms, 1.6 Mbps), cold cache, three runs each, medians:
+
+  | | Today's map | Switch page, Standard | After picking Open |
+  |---|---|---|---|
+  | Load event | 4.33 s | 4.41 s | |
+  | Basemap ready | 4.41 s | 4.49 s | 5.18 s after the click |
+  | JS heap after GC | 6.1 MB | 6.1 MB | 12.7 MB |
+  | Browser, all processes | 537 MB | 537 MB | 634 MB |
+  | Bytes for the basemap | 182 KB (6 PNG tiles) | same | 297 KB libraries, 170 KB glyphs and sprites, 129 KB of pack in 5 ranges |
+
+  Of the 5.18 s, 2.7 s is the libraries arriving. Self-hosting them beside
+  the packs, or preloading on the layer menu's first opening, is the obvious
+  saving; making Open the default would add the same bytes to every load.
+  The GPU was a desktop one (the headless run used the machine's own); a
+  phone's GPU memory is not in these figures.
+- **Credit check.** `scripts/check_map_attribution.js`, with Open selected,
+  at 375 x 650, 375 x 812, 1280 x 650 and 1280 x 900: no problems, the credit
+  uncovered at all five points, the legend clamp in force, OSM's tiles gone
+  from the page.
+- **The line highlight survives the switch (owner, 2026-10-07: it applies
+  to every interactive map, "unless the map is a static copy").** Tested with
+  real input in headless Edge on Mendoza: desktop 1280 x 800 with a mouse
+  (hover and fine pointer), and 375 x 812 with touch emulation (coarse
+  pointer, no hover), on today's map, the switch page on Standard, and the
+  switch page on Open. All three gave identical results in both modes:
+  hovering the line lights it and its legend row, and moving off clears it;
+  a click or tap on the line selects it, and on empty map clears it; a
+  station shows its name (tooltip on hover, the tap panel on touch); the
+  legend opens and a row picks its line; the line label is drawn in the
+  frame; the credit is on top with its link opening a new tab; dragging
+  moves the map. Embedded in a parent page with a Global View link, the map's
+  own Global View button shows and navigates the parent, on both basemaps
+  and both inputs. Why the GL canvas does not intercept: maplibre-gl-leaflet
+  puts it in Leaflet's tile pane (z-index 200), under the overlay pane (400)
+  where the lines are drawn, and its canvas has `pointer-events: none`; at
+  the tested line point the topmost element was the line's own path on
+  every basemap. One behaviour seen on all three and so not new: on desktop,
+  a second click on a legend row unpicks the line, but it stays lit while
+  the mouse is still over the row, because hovering a row previews its line
+  by design.
+- **Not done:** a drift check over all 170 cities (this worktree has no
+  `data/` junction; the default path is unchanged by construction and was
+  shown equal on Mendoza), a deploy-verify (review time), the switch's
+  wording on the published pages (to the owner), and the style-asset licence
+  read above.

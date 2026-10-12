@@ -1,0 +1,45 @@
+{
+  "index": "app/static/places/prague.json",
+  "places": 26145,
+  "data_retrieved": "2026-10-08",
+  "languages": {
+    "local": [
+      "cs"
+    ],
+    "coverage": {
+      "en": 0.017,
+      "cs": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Czech"
+    ]
+  },
+  "stations_not_open": [
+    {
+      "osm": "node/14202143413",
+      "name": "Nádraží Krč",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/7070517627",
+      "name": "Náměstí Míru",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/7070517634",
+      "name": "Nemocnice Krč",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/7070517660",
+      "name": "Nové Dvory",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/9324423119",
+      "name": "Ryšánka",
+      "tag": "railway=construction"
+    }
+  ]
+}

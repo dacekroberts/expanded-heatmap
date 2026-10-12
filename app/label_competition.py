@@ -341,6 +341,10 @@ TEXT_WIDTH = {
     "Tokushima": 71.6, "Toyokawa": 67.4, "Toyonaka": 65.1, "Tshwane": 58.9, "Tsu": 23.1,
     "Tsukuba": 56.5, "Uji": 16.7, "Urasoe": 46.8, "Urayasu": 55.2, "Yachiyo": 53.2,
     "Yamato": 49.9, "Ōita": 27.6, "Ōta": 23.9,
+    # Naha, 2026-10-12: local app, canvas measureText after
+    # document.fonts.load; controls Hino 30.0, Hirakata 55.9, Nara 30.8 and
+    # Tama 35.1 reproduced.
+    "Naha": 34.1,
     # The regional cities' labels without " (Regional)" (cities.py `pill`,
     # owner 2026-10-07), the built-in browser with Space Grotesk 600 loaded
     # from Google Fonts, canvas measureText; controls Seattle (Regional) 120.5,
@@ -364,6 +368,23 @@ TEXT_WIDTH = {
     # 2026-10-07, the same way; controls Paris 32.9, Boston 48.4, Seattle
     # (Regional) 120.5 and Higashiōsaka 89.1 reproduced.
     "Fuchū (Tokyo)": 96.2, "Fukuyama": 69.3, "Maebashi": 64.9, "Mito": 30.7, "Morioka": 54.3,
+    # Kansai-2's names not measured ahead of their builds, 2026-10-11, the
+    # built-in browser with Google Fonts' Space Grotesk 600 loaded (canvas
+    # measureText after document.fonts.load); controls Tacoma 51.8, Mendoza
+    # 61.8, Paris 32.9, Higashiōsaka 89.1, Liverpool (Regional) 135.0, Fuchū
+    # (Tokyo) 96.2, Ibaraki 45.5 and Kadoma 54.2 reproduced.
+    "Ibaraki (Osaka)": 100.1, "Yao": 24.0, "Takatsuki": 64.2, "Cluj-Napoca": 82.4,
+    # Regional-2's cities not measured ahead of their builds, 2026-10-11, the
+    # built-in browser with Google Fonts' Space Grotesk 600 loaded (canvas
+    # measureText after document.fonts.load); controls Paris 32.9, Gifu 27.6,
+    # Morioka 54.3, Okazaki 52.0 and Aomori 47.1 reproduced.
+    "Shizuoka": 61.0, "Kanazawa": 67.8, "Matsumoto": 77.3, "Tottori": 44.1, "Yamagata": 66.5,
+    "Kure": 30.5, "Kurashiki": 61.6,
+    # East-2's four cities not measured ahead of their builds, 2026-10-11, the
+    # same way (local app, canvas measureText after document.fonts.load);
+    # controls Kasukabe 65.5, Koshigaya 70.2, Fujisawa 57.8, Kawaguchi 73.7
+    # and Urayasu 55.2 reproduced.
+    "Sagamihara": 79.1, "Funabashi": 69.4, "Matsudo": 59.8, "Ichikawa": 58.9,
 }
 
 PILL_H = 18.0             # measured from rendered pixels, 14 px text

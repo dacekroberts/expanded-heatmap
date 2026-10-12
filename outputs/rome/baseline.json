@@ -7,5 +7,8 @@
   "stop_positions": 212,
   "storefront_establishments": 103375,
   "storefronts": 98897,
+  "storefronts_food_service": 24551,
+  "storefronts_personal_services": 13711,
+  "storefronts_retail": 60635,
   "suap_rows": 168255
 }

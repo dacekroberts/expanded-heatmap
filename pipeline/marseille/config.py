@@ -274,3 +274,37 @@ MARSEILLE_BBOX = {
     "lon_min": 5.21,
     "lon_max": 5.55,
 }
+
+# --- Place search (sample batch 2a, 2026-10-08) -------------------------------
+
+# OSM's places inside the commune of Marseille (relation 76469, admin_level 8, INSEE 13055;
+# looked up 2026-10-08),
+# by pipeline/place_index_fetch.py (two queries), indexed by
+# step2b_place_index.py (DECISIONS.md "Four ideas assessed", item 3); an area
+# id is 3600000000 plus the relation's.
+PLACE_AREA = "(id:3600076469)"
+# NEW file names: data/ is shared by every worktree.
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-08.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-08.json"
+# The local language(s) of OSM's names here: French.
+PLACE_LANGUAGES = ("fr",)
+PLACE_FOLD = None
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+PLACE_REVIEWED = {
+    "Musée Cantini": "a city art museum (tourism=museum) in a 17th-century town mansion; "
+                     "its alt_name is the mansion's, 'Hôtel de la Compagnie du Cap Nègre'",
+    "Place de l'Hôtel des Postes": "a public street named for a building or institution on it, not a business (batch 2b, _named_street)",
+    "Rue de Salon": "a public street named for a building or institution on it, not a business (batch 2b, _named_street)",
+    "Rue de l'Hotel-Dieu": "a public street named for a building or institution on it, not a business (batch 2b, _named_street)",
+    "Rue de la Clinique": "a public street named for a building or institution on it, not a business (batch 2b, _named_street)",
+}
+# OSM objects a reading by eye found to be a business or a home that no rule
+# in place_index.py catches, each with why (place_index.build, `dropped`).
+PLACE_DROPPED = {
+    "way/67713530": "'Hôtel de Cabre', a 16th-century town house (historic=yes, building=yes, "
+                    "Wikipedia), privately owned and not open: the home precedent (owner, "
+                    "2026-10-08, 'homes with wikipedia: skip'); batch 2a",
+    # A house kept on tourism=attraction alone and found not open to the public at a source (owner, 2026-10-11: "drop by id (all)"; checked 2026-10-11).
+    "way/70064669": "Villa Valmer: only the park around it is open to the public; the villa is being converted to a hotel (https://www.marseille-tourisme.com/decouvrez-marseille/culture-et-patrimoine/villa-valmer-marseille-7eme-fr-2799628/)",
+}

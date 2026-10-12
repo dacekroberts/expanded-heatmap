@@ -159,15 +159,18 @@ if len(REGIONS) > 1:
             st.session_state[_k] = region
             st.pills("Closer view", _sub, format_func=_sub_label, key=_k,
                      on_change=_go, args=(_k,))
+    # filter_mode=None: no typing in the dropdowns. A tap otherwise opened the
+    # phone's keyboard on a search box that let "Japan (64)" be edited
+    # (owner, 2026-10-08); a list this short needs no search.
     with st.container(key="region-menu-narrow"):
         st.session_state["region_top_select"] = _group
         st.selectbox("Region", _menu_top, format_func=_count, key="region_top_select",
-                     on_change=_go, args=("region_top_select",))
+                     on_change=_go, args=("region_top_select",), filter_mode=None)
         if _sub:
             _k = f"region_sub_select_{_group}"
             st.session_state[_k] = region
             st.selectbox("Closer view", _sub, format_func=_sub_label, key=_k,
-                         on_change=_go, args=(_k,))
+                         on_change=_go, args=(_k,), filter_mode=None)
     if region == DEFAULT_REGION and "region" in st.query_params:
         del st.query_params["region"]
 else:
@@ -584,6 +587,18 @@ _here = _here + [c for c in CITIES if c.get("region") in _frame_also
 # centre below still takes every city in the region.
 _skip = REGION_ZOOM_WITHOUT.get(_frame_region, ())
 _zoom_set = [c for c in _here if c["name"] not in _skip] or _here
+# BOTH SETS COME FROM cities.frame_cities() WHERE THE MODULE HAS IT, the one
+# function scripts/check_macro_labels.py frames its views from, so the check
+# scores the view opened here. It also drops a city held out of the frame
+# altogether, zoom and centre (cities.REGION_FIT_WITHOUT: Naha in
+# Kyushu-Okinawa, owner's call S41, 2026-10-12), which the re-centre
+# below then leaves out as well. Read with getattr for the reason given at
+# REGION_ZOOM below: under a stale cities.py the lines above stand.
+# The caption under the map says so (cities.REGION_FIT_NOTE, read by
+# region_caption).
+_frame_cities = getattr(sys.modules.get("cities"), "frame_cities", None)
+if _frame_cities is not None:
+    _zoom_set, _here = _frame_cities(_frame_region)
 view = fit_view([c["lat"] for c in _zoom_set], [c["lon"] for c in _zoom_set])
 # A zoom set outright (cities.REGION_ZOOM: France North and South at 5.0). Read
 # with getattr, NOT imported by name: Streamlit Cloud can serve a cached

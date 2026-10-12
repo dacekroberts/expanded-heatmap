@@ -9,5 +9,7 @@
   "regular_stop_names": 207,
   "stations_inside": 155,
   "stations_kept": 132,
-  "storefronts": 7520
+  "storefronts": 7520,
+  "storefronts_food_service": 1939,
+  "storefronts_retail": 5581
 }

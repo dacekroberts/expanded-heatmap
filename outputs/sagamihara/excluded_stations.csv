@@ -1,0 +1,15 @@
+station,lines,reason,latitude,longitude
+上野原,JC,"in 上野原市, outside 相模原市 (the permit list covers the city only)",35.61844500185698,139.115405
+八王子みなみ野,JH,"in 八王子市, outside 相模原市 (the permit list covers the city only)",35.631290431786844,139.33097853055108
+南大沢,KS,"in 八王子市, outside 相模原市 (the permit list covers the city only)",35.61408489511329,139.37983167393512
+中央林間,OE,"in 大和市, outside 相模原市 (the permit list covers the city only)",35.50800500243223,139.44410000000002
+南林間,OE,"in 大和市, outside 相模原市 (the permit list covers the city only)",35.495600002315825,139.44800499999997
+鶴間,OE,"in 大和市, outside 相模原市 (the permit list covers the city only)",35.490570002710506,139.45063999999996
+入谷,JS,"in 座間市, outside 相模原市 (the permit list covers the city only)",35.47838000067732,139.39186999999998
+座間,OH,"in 座間市, outside 相模原市 (the permit list covers the city only)",35.48099000340623,139.39988499999998
+相武台前,OH,"in 座間市, outside 相模原市 (the permit list covers the city only)",35.499360002166746,139.40854499999998
+多摩境,KS,"in 町田市, outside 相模原市 (the permit list covers the city only)",35.60173826811781,139.36692873085082
+成瀬,JH,"in 町田市, outside 相模原市 (the permit list covers the city only)",35.53541598852281,139.4729103462271
+玉川学園前,OH,"in 町田市, outside 相模原市 (the permit list covers the city only)",35.563510003699264,139.46344
+町田,JH OH,"in 町田市, outside 相模原市 (the permit list covers the city only)",35.542734987585845,139.44582837876067
+相原,JH,"in 町田市, outside 相模原市 (the permit list covers the city only)",35.606930002102246,139.33167999999998

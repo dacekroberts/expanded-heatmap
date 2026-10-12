@@ -12,8 +12,9 @@
   "stations_in_scope": 23,
   "stations_saburtalo_line": 7,
   "stop_positions": 46,
-  "storefronts_food_service": 1343,
-  "storefronts_personal_services": 1269,
+  "storefronts": 13211,
+  "storefronts_food_service": 1064,
+  "storefronts_personal_services": 1062,
   "storefronts_placed": 13211,
-  "storefronts_retail": 13744
+  "storefronts_retail": 11085
 }

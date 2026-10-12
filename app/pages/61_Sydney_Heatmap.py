@@ -86,7 +86,7 @@ st.markdown(
 """
 )
 
-render_map_help('business categories (Retail, Food service and Personal services)')
+render_map_help('business categories (Retail, Food service and Personal services)', search='sydney')
 render_excluded_stations("Sydney")
 render_country_links('Sydney')
 

@@ -32,7 +32,7 @@ branch's drafts file.
     Toyota's config and map untouched.
   - `legend-dot-georgia` `16a68efe` (worktree `review-prep`), 57 behind
     master: needs the one full re-render.
-  - `place-search` `59ebdb96` (2026-10-12, its final state for the landing by its own message; the owner saw the marker and picked-line changes on a phone, relayed: "phone looks great", so the fifth call below is answered; far behind master): batches 1
+  - `place-search` `adeb88bd` (2026-10-12, its final state for the landing by its own message; the owner saw the marker and picked-line changes on a phone, relayed: "phone looks great", so the fifth call below is answered; far behind master): batches 1
     to 3, nineteen cities, the watch file and its check. **Its rollout
     plan for the whole site is `docs/handoff_place_search_rollout.md` on
     the branch. The owner approved STAGE 0 with this landing, one
@@ -85,6 +85,20 @@ branch's drafts file.
   Staging's.
 
 ## Order
+
+**State when the fresh session starts (the earlier Cleanup session,
+2026-10-12, paused by the owner so the landing runs in a new one):**
+step 1 is DONE and pushed (189 entries moved to
+`docs/decisions/2026-10-04.md`, 13 left in `DECISIONS.md`); start at
+step 4. Nothing else was begun: no shared code changed, no worktree
+made. Tips read that day, three of them newer than the list above:
+`worktree-japan-east-2` `8558c489`, `worktree-japan-kansai-2`
+`40af664c`, `worktree-japan-regional-2` `d1df4ae9`,
+`worktree-japan-naha` `ceb9f767`, `legend-dot-georgia` `16a68efe`,
+`place-search` `adeb88bd`, `basemap` `d509d525`. Confirm each again
+before merging. For S17 and S18: `japan_eigyo.FORM_RULES` is one list
+of patterns for every city, with no per-city switch, so count the two
+form words in the built cities' files before adding them.
 
 1. **The weekly archive first**: `python scripts/archive_decisions.py` (due
    2026-10-11, held for the batch by the owner), then
@@ -251,10 +265,21 @@ the `place-search-city` skill). Not checked by Cleanup.
 - **Nothing was verified on the live site**: local renders and the
   owner's phone over the LAN only. Deploy-verify at the landing is the
   first full pass, so give search its own line in the lanes' scope.
-- **Still open with the owner:** the four calls listed above (suggestion
-  tuning, corner credit, Cities menu, the intersections download), the
-  size projection and wave order, and the post-rollout audits in the
-  rollout plan.
+- **The four calls listed above are ANSWERED** (owner, in that session's
+  chat, relayed 2026-10-12; its drafts entry "the owner's answers to the
+  six remaining questions"), so do not put them to him again: suggestion
+  tuning waits until after the rollout; the corner credit is closed as
+  built; the Cities menu stays where it is; "Download this index" links
+  both files ("yes, link both": the credit reads "Download this index ·
+  intersections", and the nineteen maps are re-rendered with it). Lines
+  search cannot find go on city pages, or in one table on a data page if
+  the list is long. The wave order is approved AFTER the size projection,
+  as he told Cleanup.
+- **For deploy-verify:** the second download link has not been seen in a
+  browser. Open one searched map's search box and confirm both links
+  download.
+- **Still open:** the size projection, then the wave order, and the
+  post-rollout audits in the rollout plan.
 
 ## The basemap (the site's partial Travel view)
 
@@ -277,6 +302,60 @@ entries first. As that file records:
   waits for the host's address. P5 goes into notice 1 beside CARTO's
   sentence at go-live, with its "keeps no record" clause confirmed
   against the chosen host's log settings.
+
+**THE HOST IS LIVE (owner, 2026-10-12; DECISIONS, that date):**
+`https://files.dacekroberts.dev`, an R2 bucket behind a custom subdomain
+(no Worker), Cloudflare's terms accepted 2026-10-11, 237 packs and the
+libraries uploaded and checked by the owner, README and manifest public
+at `/README.md` and `/MANIFEST.csv`. So item 1 below is done but for the
+go-live call, and the one re-render carries the Travel switch:
+
+- `PACK_HOST = "https://files.dacekroberts.dev"` in
+  `pipeline/travel_packs.py` (https, no trailing slash: the check
+  refuses otherwise). **Show the owner the diff before committing it**
+  (his instruction), and ask him before anything is pushed to the
+  deployed app.
+- P5 in notice 1 with his added clause: "...keeps no record of those
+  requests. The files are delivered through Cloudflare, which processes
+  requests under its own privacy policy." P4's licence rows name the
+  option and the terms date.
+- **The browser test against the live host PASSED** (the basemap
+  session's report, 2026-10-12; not run by Cleanup). Seattle, London and
+  Tokyo, rendered with the host set for that process only into a scratch
+  copy of the app, on `127.0.0.1:8501`, headless Edge at desktop and
+  phone widths: the Travel layer switched on in all six runs, roads and
+  labels in both themes, every library, pack range and glyph request
+  answered, no CORS error, no cookie. The only console errors were
+  Streamlit's own two 404 probes, present without Travel too.
+  Screenshots in `data/_basemap_build/shots_live_host_2026-10-12/`.
+  The host answers only the live app and localhost or 127.0.0.1 on
+  ports 8501 and 8000; a test on another port fails for that alone.
+- **The exact go-live edits** are in the top entry of
+  `docs/decisions_drafts/basemap.md` on branch `basemap` (`3f52775b`
+  or later), under "THE EXACT EDITS FOR GO-LIVE": the `PACK_HOST` line,
+  **committed in the SAME commit as the re-rendered maps**
+  (`check_travel_packs.py` fails a host set while committed maps lack
+  the switch, and the reverse); phase 2's table rows (30 folder names
+  under "ja", Naha among them, and `cluj_napoca` under "ro"); P5's
+  full sentence with the Cloudflare clause; P4's paragraph for
+  `docs/data_sources.md`; the checks after the re-render. That session
+  was showing the owner the `PACK_HOST` diff in its chat: ask him
+  whether he has seen it, and show it again if not.
+- **One file for the owner to replace on the host:** the README live
+  at `/README.md` is an internal draft; the approved public text (P6) is
+  in `host_upload_2026-10/README.md`. REPLACED: fetched 2026-10-12, the
+  live file is byte for byte the local one (1,385 bytes, same MD5, no
+  draft marking). The live manifest matches the local one.
+- The OpenStreetMap credit must show on both base layers
+  (`check_map_attribution.js`, more than one height).
+- A pack rebuilt after upload (Naha's S39 re-run did not change its
+  stations, but a new city or a rebuilt pack would) is the owner's to
+  re-upload, and the old copy stays cached for up to a month unless he
+  purges it. Tell him which files changed; never hold an upload tool's
+  config or a token.
+- Never add a transit-globe origin or reference to this host; no
+  analytics, no monetization, nothing implying Cloudflare sponsors the
+  project.
 
 **What is left, in order:**
 

@@ -5,6 +5,7 @@ Seattle (Regional)-specific.
 
 Input:  data/seattle/processed/stations.csv
         data/seattle/processed/businesses_clean.csv
+        app/static/places/seattle.json  (its hash only, for the URL)
         data/seattle/processed/lines.geojson          (1 and 2 Lines, step 1, OSM)
         data/seattle/processed/business_scope.geojson (label anchoring)
 Output: outputs/seattle/heatmap.html
@@ -22,6 +23,7 @@ import geopandas as gpd
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline import place_index  # noqa: E402
 from pipeline.map_common import load_geojson_line_shapes, render_heatmap  # noqa: E402
 from pipeline.seattle.config import (  # noqa: E402
     BUSINESSES_CLEAN_CSV,
@@ -71,6 +73,9 @@ def main():
         ring_edges_meters=RING_EDGES_METERS,
         ring_labels=RING_LABELS,
         label_focus=scope,
+        # Place search (sample, 2026-10-08): the index step2b_place_index.py
+        # writes, served from the app's static folder under its content hash.
+        place_index_url=place_index.index_url("seattle"),
     )
 
 

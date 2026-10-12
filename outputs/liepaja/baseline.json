@@ -11,5 +11,7 @@
   "stop_positions": 31,
   "stop_positions_added": 5,
   "storefronts": 702,
+  "storefronts_food_service": 123,
+  "storefronts_retail": 579,
   "trade_premise_groups": 771
 }

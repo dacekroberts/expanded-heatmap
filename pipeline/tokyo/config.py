@@ -486,7 +486,7 @@ for _k, _h in _HUES.items():
 _COLOURS = {
     "JY": "#60A000", "JK": line_registry.colour("jr-east-keihin-tohoku-line"),
     "JC": line_registry.colour("jr-east-chuo-line"), "JB": "#B09000",
-    "JO": line_registry.colour("jr-east-yokosuka-line"), "JE": "#F86040",
+    "JO": line_registry.colour("jr-east-yokosuka-line"), "JE": line_registry.colour("jr-east-keiyo-line"),
     "JJ": line_registry.colour("jr-east-joban-line"), "JA": "#207078",
     "JU": line_registry.colour("jr-east-utsunomiya-takasaki-line"), "G": "#B06800", "M": "#F80008",
     "H": "#909088", "T": "#6890A0", "C": "#007034", "Y": "#A89060", "Z": "#C870C8", "N": "#586858",
@@ -539,4 +539,97 @@ CITY_BBOX = {
     "lat_max": OSM_BBOX[2],
     "lon_min": OSM_BBOX[1],
     "lon_max": OSM_BBOX[3],
+}
+
+# ---------------------------------------------------------------------------
+# Place search (batch 3, the size tests, 2026-10-11): pipeline/place_index.py
+# builds app/static/places/tokyo.json from the caches place_index_fetch.py
+# writes. The search area is the map's: the 23 special wards, each by its own relation (admin_level 7, names ending 区,
+# inside ISO3166-2 JP-13; every ward's stations are drawn, the inactive ones hollow),
+# confirmed by id 2026-10-11. Overpass area id = 3600000000 + relation id.
+PLACE_AREA = "(id:3601543055,3601543056,3601758858,3601758878,3601758888,3601758891,3601758897,3601758936,3601758947,3601759474,3601759477,3601759506,3601760038,3601760040,3601760078,3601760119,3601760124,3601761717,3601761718,3601761742,3601761743,3603554015,3603554304)"
+# The first query in tiles (place_index_fetch.fetch_split): the 23 wards, asked in four tiles rather than risk the server's 170 s.
+# Each tile is still cut by PLACE_AREA; the bbox only has to cover it.
+PLACE_SPLIT = {"bbox": (35.5, 139.54, 35.84, 139.94), "rows": 2, "cols": 2}
+# NEW file names: data/ is shared by every worktree.
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-11.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-11.json"
+# The local language of OSM's names here: Japanese.
+PLACE_LANGUAGES = ("ja",)
+PLACE_FOLD = "ja"
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+PLACE_REVIEWED = {
+    "下町風俗資料館付設展示場": "a public museum's annex (tourism=museum, wikidata); its English name holds 'store'",
+    "伊勢半本店 紅ミュージアム": "a museum with its own article (tourism=museum, wikidata, wikipedia); 本店 is part of the museum's name",
+    "日本歯科大学 （歯学部）": "a university; 歯科 is its faculty, not a clinic",
+    "日本歯科大学東京短期大学": "a college; 歯科 is its field, not a clinic",
+    "東京歯科大学": "a university; 歯科 is its field, not a clinic",
+}
+# OSM objects a reading by eye found to be a business or a home that no rule
+# in place_index.py catches, each with why (place_index.build, `dropped`).
+PLACE_DROPPED = {
+    # From the read of the landmarks and places (the place-read agent, batch 3, 2026-10-11: every name without a standard place suffix read with its tags, the rest screened by filters), each id checked against its cached name.
+    "node/9706383884": "a slope-car halt whose only name is the word for a car park",
+    "node/8973688424": "an architecture firm's studio name on a park node",
+    "way/1332592363": "a shopping mall's roof terrace, named by floor",
+    "way/1332592364": "a shopping mall's roof terrace, named by floor",
+    "way/1332592365": "a shopping mall's roof terrace, named by floor",
+    "node/2105668441": "a shopping mall tagged a marketplace (operator: the mall company)",
+    "way/783195575": "a paid barbecue operation tagged a park",
+    "way/783195576": "a commercial dog run tagged a park",
+    "node/6038466291": "a funeral hall by its name, tagged a place of worship with no religion",
+    "node/4741061021": "a company's name alone, tagged a place of worship with no religion",
+    "node/4258668863": "a vocational school run by a stock company (the operator tag)",
+    "way/843543147": "a bicycle garage (access=customers) tagged a park",
+    "way/621785254": "a condominium's self-managed park",
+    "way/735047342": "a condominium's plaza",
+    "way/635844537": "a tower block's plaza",
+    "way/735047340": "a tower block's plaza",
+    "way/1002175139": "a park named for the apartment block it belongs to",
+    "way/544467335": "a housing estate's park",
+    "way/577170566": "a housing estate's park",
+    "way/1104095558": "a housing estate's grounds (operator: the housing agency)",
+    "way/1104090201": "the same estate's play area",
+    "way/1104090202": "the same estate's play area",
+    "way/547443460": "a residential complex's ground, named in Latin letters only",
+    "way/145115283": "a prince's residence in use (access=no), tagged historic=castle",
+    "relation/1964562": "a prince's residence in use (access=no), tagged historic=castle",
+    "way/145108372": "a prince's residence in use (access=no), tagged historic=castle",
+    "way/145115287": "a prince's residence in use (access=no), tagged historic=castle",
+    "way/585644242": "a residence inside the palace grounds, tagged historic=castle",
+    "way/778975131": "a residence inside the palace grounds, tagged historic=castle",
+    "node/988905251": "a convent (修道女会), a religious residence tagged a place of worship, not notable",
+    "node/4408519495": "a convent (修道会), a religious residence tagged a place of worship, not notable",
+    "node/12111649067": "a convent (修道会), a religious residence tagged a place of worship, not notable",
+    "node/14052475171": "a novitiate (修練院), a religious residence tagged a place of worship, not notable",
+    "node/1229353544": "monks' quarters (僧房), a religious residence tagged a place of worship, not notable",
+    "way/100616894": "a religious house (修道院), a residence tagged a place of worship, not notable",
+    "node/971472752": "a religious house (修道院), a residence tagged a place of worship, not notable",
+    "way/1333185075": "a glitched name (a test word)",
+    "way/81610535": "a glitched name (a company's, overwriting the park's)",
+    "way/208656517": "a glitched name, cut short",
+    "way/567856519": "a glitched name, cut short",
+    "node/6564060185": "a glitched name (wrong characters in a historic figure's title)",
+    "node/12866504533": "a glitched name, cut or mistyped",
+    "way/1297460706": "a glitched name: Cyrillic words before the shrine's own, with no Japanese name tag to lead",
+    "node/4896447603": "an embassy's name and address pasted on a plaque",
+    "way/956455398": "a school's name on a park: a wrong name",
+    "node/9579839523": "a French description standing in for a name",
+    "way/1040432578": "a French description standing in for a name",
+    "node/6155692904": "two names joined in one tag, the first a monument honouring a private person",
+    "node/5689780703": "two names joined in one tag, the first cut short",
+    "node/7927556960": "a fixture (a drinking fountain) tagged a park",
+    "node/8637744495": "a description standing in for a name",
+    "way/685558132": "a description standing in for a name (a bench)",
+    "way/685558133": "a description standing in for a name (a planting)",
+    "way/674069603": "a description standing in for a name, of what reads as private land",
+    "node/8878990181": "a piece of play equipment tagged a park",
+    "node/12887057921": "a school-group meeting point tagged a square",
+    "node/6126581834": "an inscription standing in for a name",
+    "node/12866536485": "a description standing in for a name",
+    "node/3485961890": "a retaining wall tagged a historic building",
+    "node/3485961864": "a protected-tree register entry standing in for a name",
+    "way/1384190240": "a garden style's name on a part of a park",
+    "way/1384190239": "a garden style's name on a part of a park",
 }

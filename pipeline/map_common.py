@@ -28,7 +28,9 @@ import pandas as pd
 from folium.plugins import HeatMap, FastMarkerCluster
 from folium.template import Template
 
-from pipeline.linecolour import check_line_colours, dark_label_colours, label_colours
+from pipeline import travel_packs
+from pipeline.baseline import emit
+from pipeline.linecolour import check_line_colours, contrast_ratio, dark_label_colours, label_colours
 from pipeline.taxonomies import (CATEGORY_BUCKETS, MEANING_COLOURS, load_taxonomy_module,
                                  pin_colours, pin_outline)
 from pipeline.theme import AMBIENT_THEME_JS, DARK, FONT_VAR, LIGHT, css_vars, font_stack, rgba
@@ -113,10 +115,9 @@ _THEME_TOGGLE_TEMPLATE = """
        `"Helvetica Neue", Arial, Helvetica, sans-serif` on .leaflet-tooltip,
        which is Latin-only - so without this rule a Japanese, Korean or Greek
        shop name would render in whatever the browser substituted, as tofu
-       boxes or at metrics that outgrow the tooltip's own box. Added
-       2026-09-21 alongside pipeline/theme.FONT_STACK, whose own note explains
-       why the fallback ORDER matters (browsers fall through per glyph, not
-       per string). */
+       boxes or at metrics that outgrow the tooltip's own box. The note on
+       pipeline/theme.FONT_STACK explains why the fallback ORDER matters
+       (browsers fall through per glyph, not per string). */
     .leaflet-tooltip { font-family: @@FONT_STACK@@; }
     .map-btn:focus-visible { outline: 2px solid @@LIGHT_ACCENT@@; outline-offset: 2px; }
     #city-menu { width: 84px; text-overflow: ellipsis; }
@@ -132,7 +133,7 @@ _THEME_TOGGLE_TEMPLATE = """
     .dark-base .map-btn { background: var(--dm-surface); color: var(--dm-text);
         border-color: var(--dm-border); }
     .dark-base .map-btn:hover { background: var(--dm-surface-hover); }
-    /* These two selectors match on the LIGHT ring and station colours, which
+    /* These two selectors match on the LIGHT ring and station colors, which
        is only safe because each is used nowhere else on the map. Both the
        selector and the drawing code below read the same LIGHT value, so they
        cannot drift apart - changing one used to silently break the other. */
@@ -142,9 +143,9 @@ _THEME_TOGGLE_TEMPLATE = """
     .dark-base .leaflet-overlay-pane path[stroke-width="4"] { filter: brightness(1.55) saturate(0.9); }
     .dark-base .map-legend span[style*="height:3px"] { filter: brightness(1.55) saturate(0.9); }
     /* NO FILTER on a line label: a brightness() filter here once lifted the
-       halo with the text, so the dark page colour rendered #132039 and every
+       halo with the text, so the dark page color rendered #132039 and every
        contrast figure measured a halo nobody saw. Each label carries its own
-       dark-theme colour in --dm-label instead (pipeline/linecolour.py,
+       dark-theme color in --dm-label instead (pipeline/linecolour.py,
        "LINE LABELS"), read at 4.5:1 against exactly this halo. */
     .dark-base .leaflet-marker-icon div[style*="text-shadow"] {
         text-shadow: -1px -1px 0 var(--dm-page), 1px -1px 0 var(--dm-page),
@@ -214,7 +215,7 @@ _THEME_TOGGLE_TEMPLATE = """
         if (e.key === KEY) apply(e.newValue === 'dark');
     });
     // Follow the OS preference while the visitor has made no explicit choice.
-    // NOTE: devtools colour-scheme emulation updates matchMedia().matches
+    // NOTE: devtools color-scheme emulation updates matchMedia().matches
     // WITHOUT dispatching this event inside an iframe, so this listener can
     // only be tested with a real OS theme switch (docs/theming.md).
     if (window.matchMedia) {
@@ -261,13 +262,11 @@ _THEME_TOGGLE_TEMPLATE = """
     }
     // Identify "which page is this" by PAGE SLUG, not by display label.
     //
-    // This used to derive a city name from the URL ("/Miami_Heatmap" -> "Miami")
-    // and compare it to the link's text. That breaks as soon as a city's
+    // A name derived from the URL ("/Miami_Heatmap" -> "Miami") fails when a
     // display name is not its filename: Miami's label is "Miami (Regional)",
-    // so the comparison never matched and Miami's own map listed Miami in its
-    // "Cities" dropdown. Comparing slug to slug is immune to the label, which
-    // matters because a regional map's name will keep diverging from its
-    // filename (a Seattle build spanning twelve municipalities is the next).
+    // so Miami's own map listed Miami in its "Cities" dropdown. Slug against
+    // slug is immune to the label, and regional names keep diverging from
+    // their filenames.
     function lastSegment(path) {
         var parts = String(path || '').split('?')[0].split('#')[0]
             .split('/').filter(Boolean);
@@ -378,7 +377,7 @@ _LEGEND_CSS = """
 <style>
 /* THE HEADER IS THE CONTROL, AND IT HAS TO SAY SO. A native <summary> does
    render a disclosure triangle - `list-style-type` computes to
-   `disclosure-open` here - but it is a ~6 px glyph in the same colour and
+   `disclosure-open` here - but it is a ~6 px glyph in the same color and
    weight as the text beside it, and on a dense map it reads as punctuation
    rather than as something to click. Replaced with an explicit chevron plus a
    VERB, because the chevron alone is ambiguous: this panel is anchored
@@ -389,11 +388,11 @@ _LEGEND_CSS = """
    legend's existing width rather than extending it. That matters: the label
    layout in _layout_labels models the open legend as a hardcoded 274 px
    obstacle, and a wider panel would start covering line labels it currently
-   clears. Verified after the change that the open width is unchanged.
+   clears. The open width is unchanged by it.
 
-   No script: the collapse is still the browser's own <details> behaviour, so
+   No script: the collapse is still the browser's own <details> behavior, so
    this is presentation only and scripts/check_map_labels.js keeps working. The
-   colour is `currentColor`, so it follows .dark-base .map-legend's own
+   color is `currentColor`, so it follows .dark-base .map-legend's own
    `color` and needs no dark-mode rule of its own. */
 .map-legend > summary { list-style: none; display: flex;
     align-items: baseline; justify-content: space-between; gap: 12px; }
@@ -409,14 +408,14 @@ _LEGEND_CSS = """
    (2026-09-24) was the first map with 21 lines: open, its legend was 634 px
    tall at the 650 px embed, so its top sat at y = -8 and its header and Hide
    control were under the "Global View" and theme buttons (#map-actions, fixed
-   at top 10px, ~30 px tall) - found by deploy-verify. Every earlier legend was
+   at top 10px, ~30 px tall). Every earlier legend was
    shorter than the cap (Paris's the tallest, its top at y 84), so none of
    them changes. min(100vh, MAP_H) is the visible map height whichever way
    _LEGEND_BOTTOM_CSS resolves; border-box so the cap is the whole panel. The
    header sticks, so Hide stays in reach while the rows scroll. Its background
    is set, NOT `inherit`: a <summary> is slotted into the <details> shadow
-   root, so it inherits from a transparent slot - measured, the rows showed
-   through the header in dark mode.
+   root, so it inherits from a transparent slot and the rows showed through
+   the header in dark mode.
    The clearance is the button row's, measured: --hm-actions-clear is set by
    the region button's script when the row wraps to a second line (a phone's
    343 px frame since 2026-10-07: four buttons where three fitted, 72 px tall),
@@ -500,6 +499,23 @@ LEGEND_HTML = """
   {line_rows}
 </details>
 """
+# The full Travel version's legend: the same panel, with the line rows and
+# the named route rows only and no section heading, since nothing else
+# shares it (owner, 2026-10-08: map content only). Its map fills the window,
+# so the bottom is a plain 24 px, which clears the 14 px credit strip at the
+# map's (and window's) bottom edge by 10 px, as the clamp does on a site map.
+LEGEND_FULL_HTML = """
+<details open class="map-legend" style="
+    position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+    background: white; padding: 8px 14px; border: 1px solid #999;
+    border-radius: 4px; font-family: """ + _LEGEND_FONT_STACK + """; font-size: 13px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+">
+  <summary style="font-weight: bold; cursor: pointer; user-select: none;
+    outline: none; margin-bottom: 6px;">Legend</summary>
+  {line_rows}
+</details>
+"""
 # The legend is position:fixed so it stays put while the map scrolls inside its
 # iframe (the map lays out at _MAP_W, which is wider than the app's column).
 # That has a cost: "fixed" anchors to the frame's VISIBLE width, so when the
@@ -523,14 +539,13 @@ LEGEND_AUTOFIT_SCRIPT = """
     if (!legend) return;
     var touched = false;
 
-    // Reader ownership is detected from an actual user gesture, NOT from the
+    // Reader ownership is detected from an actual gesture, NOT from the
     // `toggle` event. `toggle` also fires for programmatic changes, and Chrome
     // queues one for a <details open> element that lands AFTER this script
-    // attaches its listener - on a wide load `fit()` returns early, so that
-    // stray event used to set `touched` permanently and kill the breakpoint
-    // for the rest of the page's life (found by deploy-verify, 2026-09-21: the
-    // legend then covered four of New York's labels for anyone who narrowed
-    // their window rather than loading narrow). A click on the <summary> is
+    // attaches its listener; on a wide load `fit()` returns early, so that
+    // stray event set `touched` for good and disabled the breakpoint
+    // (2026-09-21: the legend then covered four of New York's labels in a
+    // window narrowed after loading). A click on the <summary> is
     // unambiguous, and keyboard activation dispatches a click too.
     var summary = legend.querySelector('summary');
     if (summary) {
@@ -586,15 +601,15 @@ PHONE_FIT_SCRIPT = """
     // comparing widths alone cannot notice it.
     var FITTED_AT = null;
 
-    // THE GUARD - owner's decision 2026-09-23, after the same race surfaced a
-    // THIRD way. Edmonton (2026-09-21) and Paris (2026-09-23 morning) were each
-    // fixed at the point where they broke; that afternoon Lille's embedded map
-    // loaded at zoom 8.25 against a baked 11.75 - Edmonton's exact number - and
-    // a reload fixed it. Four further loads would not reproduce it. A race that
-    // cannot be reproduced on demand cannot be fixed one trigger at a time, so
-    // this stops chasing triggers and checks the OUTCOME instead: until the
-    // reader touches the map, the view is compared with what it should be for
-    // the frame's current width, and re-fitted when it is not.
+    // THE GUARD (owner's decision 2026-09-23), after the same race surfaced a
+    // THIRD way: Edmonton (2026-09-21) and Paris (2026-09-23) were each fixed
+    // where they broke, then Lille's embedded map loaded at zoom 8.25 against
+    // a baked 11.75 (Edmonton's exact number), and four further loads would
+    // not reproduce it. A race that cannot be reproduced on demand cannot be
+    // fixed one trigger at a time, so this checks the OUTCOME instead: until
+    // the reader touches the map, the view is compared with what it should be
+    // for the frame's current width, and re-fitted when it is not. The full
+    // history is in the map-view skill.
     //
     // "What it should be" is exactly what apply() produces - HOME at full
     // width, fitBounds(BOUNDS, padding 26/18 each side) when narrow - computed
@@ -697,18 +712,16 @@ PHONE_FIT_SCRIPT = """
         var target = Math.min(w, MAP_W);
         // A ZERO TARGET IS ALWAYS A BAD MEASUREMENT, NEVER A REAL WIDTH.
         //
-        // Added 2026-09-23 after Paris rendered BLANK on first load, with
-        // `width: 0px` written onto the container and Leaflet.heat throwing
-        // "IndexSizeError: getImageData ... source width is 0". A pass that
-        // runs before the document has laid out reads clientWidth 0, and the
-        // old code wrote that straight through.
+        // A pass that runs before the document has laid out reads clientWidth
+        // 0; written through, it left Paris BLANK on first load (2026-09-23:
+        // `width: 0px` on the container and Leaflet.heat throwing
+        // "IndexSizeError: getImageData ... source width is 0").
         //
-        // It is the same RACE the else branch below documents for Edmonton -
-        // intermittent, not specific to a city, and the same page reloaded
-        // rendered correctly - but this manifestation is worse: a narrow fit
-        // is a bad view, a zero width is no map at all plus a console error.
-        // Paris is the city that exposed it because it is the heaviest map
-        // here (84,125 points), which widens the window before layout settles.
+        // It is the same RACE the else branch below documents for Edmonton
+        // (intermittent, not specific to a city, fixed by a reload), but
+        // worse: a narrow fit is a bad view, a zero width is no map at all plus
+        // a console error. Paris exposed it as the heaviest map here (84,125
+        // points), which widens the window before layout settles.
         //
         // Returning leaves the container alone for the later passes - immediate,
         // rAF, 120 ms, 400 ms, 1200 ms and resize - one of which measures a
@@ -716,18 +729,15 @@ PHONE_FIT_SCRIPT = """
         // only 0 when the measurement is meaningless.
         if (!target) return;
         // THE EARLY RETURN USED TO BE A CORRECTNESS BUG, not just an
-        // optimisation. It read "the width already matches, so there is
+        // optimization. It read "the width already matches, so there is
         // nothing to do" - but the VIEW can be wrong while the WIDTH is right.
         //
-        // Observed on the deployed site 2026-09-23, on Paris: the embedded map
-        // sat at zoom 9 against its baked 12.5, showing the whole Ile-de-France
-        // with every line label flung to the frame edges. Sequence: an early
-        // pass measured the container mid-layout at some narrow width and
-        // fitted BOUNDS for THAT width; a later pass found the container now at
-        // its real 854 px, matched `target`, and returned - so the zoom from
-        // the narrow fit was never undone. Intermittent, and it survived the
-        // 2026-09-21 fix because that one only added an `else` branch AFTER
-        // this return.
+        // Paris, deployed, 2026-09-23: the embedded map sat at zoom 9 against
+        // its baked 12.5, every line label flung to the frame edges. An early
+        // pass fitted BOUNDS at a mid-layout narrow width; a later pass found
+        // the container at its real 854 px, matched `target` and returned, so
+        // the narrow zoom was never undone. The 2026-09-21 fix missed it
+        // because its `else` branch sits AFTER this return.
         //
         // So the state that matters is "what width was the current view fitted
         // for", not "what width is the container". FITTED_AT records it, and a
@@ -750,18 +760,14 @@ PHONE_FIT_SCRIPT = """
         } else if (HOME) {
             // BACK AT FULL WIDTH, AND THIS BRANCH IS A BUG FIX, NOT SYMMETRY.
             //
-            // Until 2026-09-21 there was no else. A pass that ran while the
-            // iframe was still laying out measured a narrow clientWidth,
-            // fitted BOUNDS at that width - which is a much lower zoom - and
-            // then the later full-width pass restored the WIDTH and left the
-            // ZOOM alone, because re-fitting was conditional on being narrow.
-            // Nothing afterwards ever corrected it, so the map sat at the
-            // narrow-width zoom at full width: Edmonton was caught embedded at
-            // zoom 8.25 against its baked 11.5, showing the whole region with
-            // every pin in one cluster. It is a RACE, so it is intermittent and
-            // not specific to a city - the same page reloaded rendered
-            // correctly, and Calgary's rendered correctly alongside the broken
-            // Edmonton.
+            // Without it (before 2026-09-21), a pass during the iframe's
+            // layout measured a narrow clientWidth and fitted BOUNDS at that
+            // width (a much lower zoom); the later full-width pass restored the
+            // WIDTH but left the ZOOM, since re-fitting was conditional on being
+            // narrow. Edmonton sat embedded at zoom 8.25 against its baked
+            // 11.5, the whole region in one cluster. It is a RACE: intermittent
+            // and not specific to a city (a reload rendered correctly, as did
+            // Calgary alongside the broken Edmonton).
             //
             // Restoring HOME rather than re-fitting BOUNDS is deliberate:
             // Folium's baked view is what every full-width map has always
@@ -1097,7 +1103,7 @@ DENSE_LABEL_SCRIPT = """
 
         // Every label where LABEL_CLAMP_SCRIPT left it. Undo this script's own
         // last move first if the clamp has not re-run since (its handler
-        // resets every label to its baked transform, ours then appends).
+        // resets every label to its baked transform; this one then appends).
         var labels = [], early = false;
         m.eachLayer(function (layer) {
             if (!layer._icon || !layer.getLatLng) return;
@@ -1154,7 +1160,7 @@ DENSE_LABEL_SCRIPT = """
         }
         // Whether a label really overlaps something, with no margin. Only such
         // a label moves: the margins in hits() choose between spots, but a
-        // label 1 px clear of its neighbour is readable and stays put (a
+        // label 1 px clear of its neighbor is readable and stays put (a
         // desktop Osaka label did move, before this).
         function overlapped(L) {
             return labels.some(function (o) { return o !== L && area(L.b, o.b); }) ||
@@ -1262,10 +1268,76 @@ DENSE_LABEL_SCRIPT = """
 })();
 </script>
 """
+# TRAVEL MODE, THE HALF VERSION (owner, 2026-10-07; DECISIONS drafts, "Two
+# travel versions"). Only in a map rendered with open_basemap. Picking the
+# "Travel" base layer takes the business layers off the map (pins, both heat
+# layers, the rings) and folds the legend's business section away; they stay
+# in the layer menu, so a reader can turn any back on. Picking "Business"
+# restores each layer's render-time default. The choice is remembered for the
+# viewer (localStorage, wrapped: it can be absent or throw), so a reader who
+# picked Travel opens the next city in Travel. The page still carries the
+# register data either way: its notices and obligations do not change.
+TRAVEL_MODE_SCRIPT = """
+<style>
+.map-legend.hm-travel .hm-biz { display: none; }
+.map-legend:not(.hm-travel) .hm-travel-only { display: none; }
+</style>
+<script>
+(function () {
+    var NAME = "__MAP_NAME__", STD = "__STD_NAME__", OPEN = "__OPEN_NAME__";
+    var BUSINESS = __BUSINESS__;
+    var KEY = "expanded-heatmap-basemap";
+    var tries = 0;
+    function saved() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+    function save(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+    function start() {
+        var m = window[NAME], std = window[STD], open = window[OPEN];
+        if (!m || !std || !open) {
+            if (tries++ < 60) setTimeout(start, 100);
+            return;
+        }
+        var legend = document.querySelector("details.map-legend");
+        var rows = legend && legend.querySelector(".hm-biz");
+        if (rows && rows.previousElementSibling) rows.previousElementSibling.classList.add("hm-biz");
+        function business(travel) {
+            if (legend) legend.classList.toggle("hm-travel", travel);
+            BUSINESS.forEach(function (b) {
+                var layer = window[b[0]];
+                if (!layer) return;
+                var want = travel ? false : b[1];
+                try {
+                    if (want && !m.hasLayer(layer)) m.addLayer(layer);
+                    if (!want && m.hasLayer(layer)) m.removeLayer(layer);
+                } catch (err) {}
+            });
+        }
+        // Deferred: the layer menu builds its add and remove lists from its
+        // checkboxes before applying them and refreshes those checkboxes only
+        // once its click is handled, so a change made inside the click is
+        // undone or left showing stale ticks (measured 2026-10-07).
+        m.on("baselayerchange", function (e) {
+            var travel = e.layer === open;
+            save(travel ? "travel" : "business");
+            setTimeout(function () { business(travel); }, 0);
+        });
+        if (saved() === "travel") {
+            m.removeLayer(std);
+            m.addLayer(open);
+        }
+    }
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", start);
+    } else {
+        start();
+    }
+})();
+</script>
+"""
 # Blocks render_heatmap() injects into SOME maps only. check_render_current.py
 # holds a map that carries one to its current version, and does not ask for it
 # in a map that has none.
-CONDITIONAL_BLOCKS = ("DENSE_LABEL_SCRIPT",)
+CONDITIONAL_BLOCKS = ("DENSE_LABEL_SCRIPT", "TRAVEL_MODE_SCRIPT", "FULL_TRAVEL_SCRIPT", "LEGEND_FULL_HTML",
+                      "PLACE_SEARCH_SCRIPT")
 # Mouse-wheel zoom. Measured 2026-09-23 on Paris and Toulouse (median of three
 # fresh loads; DECISIONS.md has the tables). The wheel lagged behind +/- for a
 # reason other than speed: Leaflet's _tryAnimatedZoom returns early while a
@@ -1296,7 +1368,7 @@ WHEEL_ZOOM_SCRIPT = """
 <script>
 (function () {
     var NAME = "__MAP_NAME__";
-    // One event of at least this many normalised units (L.DomEvent.
+    // One event of at least this many normalized units (L.DomEvent.
     // getWheelDelta) marks a notched wheel: Chrome and Edge on Windows give
     // 50 per notch, Firefox's line mode 60. Trackpads send many events of a
     // few units each.
@@ -1788,7 +1860,7 @@ _TAP_SELECT_TEMPLATE = """
 <script>
 (function () {
     var NAME = "__MAP_NAME__";
-    var REACH = 22;         // px from a centre or centreline: a 44 px target
+    var REACH = 22;         // px from a center or centerline: a 44 px target
     var TIE_PX = 2;         // edges this close count as a tie, broken by kind
     var ROOM_PX = 200;      // map height the panel needs above the legend
     var RING_PX = 26;       // the selection ring's outer diameter
@@ -1991,9 +2063,919 @@ TAP_SELECT_SCRIPT = (
     .replace("@@LIGHT_BORDER@@", LIGHT["border"])
 )
 assert "@@" not in TAP_SELECT_SCRIPT, "unresolved placeholder in TAP_SELECT_SCRIPT"
+
+# PLACE SEARCH (pilot, 2026-10-07; DECISIONS.md "Four ideas assessed before
+# the large review", item 3). Places only: streets, intersections, stations,
+# lines, neighborhoods, landmarks, never a business. The index
+# (pipeline/place_index.py) is fetched ONCE, on first use of the box, from the
+# app's own static folder, and every keystroke is matched in this page: no
+# query reaches a server, a log or the URL. Hence no <form> (a submit would
+# put the text in a GET), spellcheck off (a browser's cloud spellcheck sends
+# typed text away) and no history entry. The index is never embedded: the
+# iPhone literal limit (110,861) is per map.
+#
+# STATIONS AND LINES ARE THE MAP'S OWN (owner, 2026-10-07: searches must match
+# the UI). They are read from the page itself, the station markers' tooltips
+# and the legend's line rows, so a result carries exactly the name the map
+# shows, and a line result picks its line out as its legend row does. OSM's
+# station entries (which carry the Japanese and alternate names) are linked to
+# the nearest map station within STATION_LINK_M sharing a word of its name, in
+# the browser, and add their names to it; an unlinked one is labeled as not on
+# the map. Nothing of the map's own data enters the published index (ODbL
+# 4.4(d)), and the map's stations and lines are searchable even where the
+# index cannot load.
+#
+# Matching: names NFKC-folded, lowercased, accents stripped (Shijō = Shijo).
+# A Latin query word must begin a word of a name, or at 4 or more letters sit
+# inside a romanized compound (ranked lower); a CJK or kana word must occur
+# anywhere in one (四条 in 四条烏丸), and a CJK word that matches nothing is
+# retried as two halves (烏丸四条). Every word must match; words such as "and",
+# "at" and "&" are dropped ("5th and Pike"). "station" or 駅 matches any
+# station, and street words (street, dori, 通) are optional on a street or an
+# intersection. With fold "ja" a Latin "ou" or "uu" folds to "o" or "u" on
+# both sides (shijou = shijo).
+#
+# The character classes are built in Python (_JS_CJK_CLASS, _JS_MARKS_CLASS)
+# so the source holds JS escapes, not literal combining marks.
+_BS = chr(92)
+
+
+def _js_ranges(*pairs):
+    return "".join(f"{_BS}u{a:04x}-{_BS}u{b:04x}" for a, b in pairs)
+
+
+_JS_CJK_CLASS = _js_ranges((0x3040, 0x30FF), (0x3400, 0x4DBF), (0x4E00, 0x9FFF),
+                           (0xAC00, 0xD7AF), (0xF900, 0xFAFF))
+_JS_MARKS_CLASS = _js_ranges((0x0300, 0x036F))
+STATION_LINK_M = 300
+STATION_DUP_M = 1500
+_PLACE_SEARCH_TEMPLATE = r"""
+<style>
+    /* The two-finger notice above the open search box (Leaflet's controls
+       sit at 1000): on a phone the box covered half of it (owner's iPhone,
+       2026-10-08). The notice is brief and lets touches through. */
+    .hm-touch-hint { z-index: 1100; }
+    .hm-search { background: @@LIGHT_SURFACE@@; color: @@LIGHT_TEXT@@;
+        border: 2px solid rgba(0,0,0,0.2); border-radius: 4px; font: 13px @@FONT_STACK@@; }
+    .hm-search-row { display: flex; align-items: center; }
+    .hm-search-btn { width: 30px; height: 30px; border: 0; background: transparent;
+        color: inherit; cursor: pointer; padding: 0; display: flex;
+        align-items: center; justify-content: center; }
+    .hm-search-input { display: none; width: 230px; border: 0; outline: none;
+        background: transparent; color: inherit; font: inherit; font-size: 16px;
+        padding: 4px 6px 4px 0; }
+    .hm-search.open .hm-search-input { display: block; }
+    .hm-search-list { display: none; max-height: 260px; overflow-y: auto;
+        border-top: 1px solid @@LIGHT_BORDER@@; width: 260px; }
+    .hm-search.open .hm-search-list.has { display: block; }
+    .hm-search-item { padding: 6px 8px; cursor: pointer; line-height: 1.3; }
+    .hm-search-item:hover, .hm-search-item.on { background: rgba(13,148,136,0.14); }
+    .hm-search-sub { font-size: 11px; opacity: 0.75; }
+    .hm-search-note { padding: 6px 8px; font-size: 12px; opacity: 0.8; }
+    .hm-search-head { padding: 5px 8px 1px; font-size: 11px; font-weight: 600; opacity: 0.65; }
+    .hm-search-pills { display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 8px 7px; }
+    .hm-search-list [hidden] { display: none !important; }
+    .hm-search-fold { display: block; width: 100%; text-align: left; background: none; border: 0;
+        color: inherit; font: inherit; font-size: 11px; font-weight: 600; cursor: pointer;
+        padding: 6px 8px 4px; }
+    .hm-search-fold:focus-visible { outline: 2px solid @@LIGHT_ACCENT@@; outline-offset: -2px; }
+    .hm-search-pill { display: inline-flex; align-items: center; gap: 5px; padding: 3px 8px;
+        border: 1px solid @@LIGHT_BORDER@@; border-radius: 999px; background: rgba(13,148,136,0.07);
+        color: inherit; font: inherit; font-size: 12px; line-height: 1.4; cursor: pointer; }
+    .hm-search-pill:hover, .hm-search-pill.on, .hm-search-pill:focus-visible {
+        background: rgba(13,148,136,0.2); border-color: @@LIGHT_ACCENT@@; outline: none; }
+    .hm-pill-line { width: 14px; height: 4px; border-radius: 2px; flex: none; }
+    .hm-pill-station { width: 8px; height: 8px; border-radius: 50%; flex: none;
+        background: @@LIGHT_STATION@@; }
+    .dark-base .hm-search-pill { border-color: var(--dm-border); }
+    .dark-base .hm-pill-station { background: var(--dm-station); }
+    .hm-search-credit { padding: 4px 8px 6px; font-size: 11px; opacity: 0.8;
+        border-top: 1px solid @@LIGHT_BORDER@@; }
+    .hm-search-credit a { color: inherit; }
+    .hm-search-btn:focus-visible, .hm-search-input:focus-visible {
+        outline: 2px solid @@LIGHT_ACCENT@@; outline-offset: 1px; }
+    .dark-base .hm-search { background: var(--dm-surface); color: var(--dm-text);
+        border-color: var(--dm-border); }
+    .dark-base .hm-search-list, .dark-base .hm-search-credit { border-top-color: var(--dm-border); }
+    @media (max-width: 480px) { .hm-search-input { width: 160px; } .hm-search-list { width: 190px; } }
+    /* THE FOUND PLACE'S MARKER (owner, 2026-10-11, after the phone test: "the
+       highlight feature gets dwarfed by nearby businesses and the heat
+       layer"; and "green highlight ring is too dull on dark mode"). Two rings
+       in a pane of their own above the dots (640: over Leaflet's marker pane
+       at 600, under its tooltips at 650): a casing in the page's colour and
+       the accent over it, the dark accent on the dark map. Colours here, not
+       in the path's own attributes, so the theme button recolours a marker
+       already shown. */
+    .leaflet-hmsearch-pane, .leaflet-hmsearchtip-pane { pointer-events: none; }
+    path.hm-search-case { stroke: #ffffff; stroke-opacity: 0.95; fill: none; }
+    path.hm-search-ring { stroke: @@LIGHT_ACCENT@@; stroke-opacity: 1;
+        fill: @@LIGHT_ACCENT@@; fill-opacity: 0.14; }
+    path.hm-search-linecase { stroke: #000000; fill: none; }
+    .dark-base path.hm-search-linecase { stroke: #ffffff; }
+    .hm-line-label.hm-search-label { padding: 1px 6px; border-radius: 4px; background: #ffffff;
+        box-shadow: 0 0 0 2px #000000; }
+    .dark-base .hm-line-label.hm-search-label { background: #000000; box-shadow: 0 0 0 2px #ffffff; }
+    .dark-base path.hm-search-case { stroke: @@DARK_PAGE@@; }
+    .dark-base path.hm-search-ring { stroke: @@DARK_ACCENT@@; fill: @@DARK_ACCENT@@; fill-opacity: 0.2; }
+    /* While the marker shows, the businesses step back: the dots (the only
+       paths drawn with fill-opacity 0.85 and a 1 px stroke), their cluster
+       bubbles and the heat. Faded, never switched off: what is around the
+       place is the answer the reader came for, and their layer choices are
+       left as they are. Lines, stations and rings keep their strength. The
+       fade ends with the marker, or at the reader's first touch of the map. */
+    .hm-searching .leaflet-overlay-pane path[fill-opacity="0.85"][stroke-width="1"],
+    .hm-searching .leaflet-marker-pane .business-cluster-icon,
+    .hm-searching .leaflet-heatmap-layer { opacity: 0.28; }
+</style>
+<script>
+(function () {
+    var NAME = "__MAP_NAME__", URL = "__INDEX_URL__";
+    var STATION_COLOR = "@@LIGHT_STATION@@", LINK_M = @@STATION_LINK_M@@, DUP_M = @@STATION_DUP_M@@;
+    var MIN_LATIN = 4, MIN_CJK = 2, RING_M = __RING_M__;
+    // Suggestions at most: the map's own (pills) and other places, fewer on a
+    // phone (under 480 px) to keep the list off most of the map.
+    function narrow() { return (document.documentElement.clientWidth || window.innerWidth) < 480; }
+    function caps() { return narrow() ? {own: 4, places: 3, alone: 5} : {own: 6, places: 6, alone: 8}; }
+    var KIND_LABEL = {line: "Line", mapstation: "Station", station: "Station not on this map",
+                      junction: "Intersection", landmark: "Landmark", place: "Neighborhood",
+                      street: "Street", crossing: "Intersection"};
+    var KIND_RANK = {line: 0, mapstation: 0, junction: 1, landmark: 2, station: 3, place: 3,
+                     street: 4, crossing: 5};
+    var STOP = {"and": 1, "at": 1, "of": 1, "the": 1, "x": 1, "corner": 1, "&": 1, "y": 1};
+    var STATION_WORDS = {"station": 1, "sta": 1, "stn": 1, "eki": 1, "駅": 1};
+    // A station word written onto the name with no space (四条駅, 金鐘站,
+    // 강남역): the query less its last character still finds the station
+    // (batch 2b, 2026-10-08, for Chinese and Korean).
+    var STATION_SUFFIX = {"駅": 1, "站": 1, "역": 1};
+    var JUNK_Q = /#(n[/]?a|ref|value|div|name|num|null)|!error/i;
+    var STREET_WORDS = {"street": 1, "st": 1, "avenue": 1, "ave": 1, "road": 1, "rd": 1,
+                        "boulevard": 1, "blvd": 1, "drive": 1, "dr": 1, "way": 1,
+                        "dori": 1, "通": 1, "通り": 1};
+    // A typed street word's full form, to rank that street type first.
+    var STREET_TYPE = {"st": "street", "ave": "avenue", "rd": "road", "dr": "drive",
+                       "blvd": "boulevard"};
+    // English abbreviations that are not the start of the word they stand for
+    // (prefixes such as "ave" for avenue match as they are): a
+    // typed one also tries the full word (sample cities, 2026-10-08).
+    var ABBR = {"blvd": "boulevard", "ct": "court", "hwy": "highway", "pkwy": "parkway",
+                "ln": "lane", "mt": "mount", "ft": "fort", "sq": "square", "fwy": "freeway",
+                "expy": "expressway", "ctr": "center", "jct": "junction", "ne": "northeast",
+                "nw": "northwest", "se": "southeast", "sw": "southwest"};
+    // Street words that LEAD a name in the local language ("Rue Peel", "Carrer
+    // de Balmes"): a query beginning with one asks for a street, as an English
+    // one ending with "St" does.
+    var STREET_LEAD = {};
+    // The local languages' words (batch 2a, 2026-10-08), switched on by the
+    // index's declared languages (languages.local), never for every map: a
+    // Czech "a" as a connector would split "Avenue A and 5th" in an English
+    // city. join: the word between two streets ("Rue Neuve et Boulevard
+    // Adolphe Max"); stop: articles a query may add or leave out; street and
+    // lead: street words, optional on streets, lead ones first in a name;
+    // station: a station word; abbr: abbreviations that are not prefixes
+    // ("St-Denis" for Saint-Denis; "avda" tries "av", which begins both
+    // avinguda and avenida). Words as norm() leaves them, accents stripped.
+    var LANG_WORDS = {
+        fr: {join: ["et"], stop: ["de", "du", "des", "la", "le", "les", "l", "d"],
+             street: ["rue", "avenue", "av", "boulevard", "bd", "chemin", "ch", "place", "quai",
+                      "allee", "impasse", "montee", "square", "promenade"],
+             lead: ["rue", "avenue", "av", "boulevard", "bd", "chemin", "ch", "quai", "allee", "impasse"],
+             // "metro": Marseille's feed names ten stations "Métro Vieux Port".
+             station: ["gare", "metro"],
+             abbr: {"bd": "boulevard", "st": "saint", "ste": "sainte", "ch": "chemin"}},
+        ca: {join: ["i"], stop: ["de", "del", "dels", "la", "el", "les", "els", "l", "d"],
+             street: ["carrer", "c", "avinguda", "av", "avda", "passeig", "pg", "placa", "rambla",
+                      "rbla", "ronda", "travessera", "via", "passatge"],
+             lead: ["carrer", "c", "avinguda", "av", "avda", "passeig", "pg", "rambla", "rbla",
+                    "ronda", "travessera", "passatge"],
+             station: ["estacio"], abbr: {"pg": "passeig", "rbla": "rambla", "avda": "av"}},
+        // Mexico City's street types and their abbreviations (batch 3,
+        // 2026-10-11): calzada, eje, cerrada, privada, andador, callejon.
+        es: {join: ["y"], stop: ["de", "del", "la", "el", "los", "las"],
+             street: ["calle", "c", "avenida", "av", "avda", "paseo", "plaza", "ronda", "pasaje",
+                      "calzada", "calz", "eje", "cerrada", "cda", "privada", "priv", "andador",
+                      "callejon", "retorno", "circuito", "prolongacion", "prol", "boulevard", "blvd"],
+             lead: ["calle", "c", "avenida", "av", "avda", "paseo", "ronda", "pasaje", "calzada",
+                    "calz", "cerrada", "cda", "privada", "priv", "andador", "callejon", "retorno",
+                    "circuito", "prolongacion", "prol", "boulevard", "blvd"],
+             station: ["estacion", "metro"],
+             abbr: {"avda": "av", "pza": "plaza", "pso": "paseo", "calz": "calzada", "cda": "cerrada",
+                    "priv": "privada", "prol": "prolongacion", "blvd": "boulevard"}},
+        // Portuguese (Sao Paulo, batch 3, 2026-10-11): "e" between two
+        // streets; titles a street name is typed with (Dr., Prof., Eng.).
+        pt: {join: ["e"], stop: ["de", "do", "da", "dos", "das"],
+             street: ["rua", "r", "avenida", "av", "alameda", "al", "travessa", "tv", "praca", "pca",
+                      "largo", "estrada", "rodovia", "viela", "viaduto", "ladeira"],
+             lead: ["rua", "r", "avenida", "av", "alameda", "al", "travessa", "tv", "largo",
+                    "estrada", "rodovia", "viela", "viaduto", "ladeira"],
+             station: ["estacao", "metro"],
+             abbr: {"al": "alameda", "tv": "travessa", "pca": "praca", "dr": "doutor",
+                    "prof": "professor", "eng": "engenheiro", "sta": "santa", "sto": "santo"}},
+        cs: {join: ["a"], stop: [],
+             street: ["ulice", "ul", "trida", "namesti", "nam", "nabrezi"],
+             lead: [], station: ["stanice", "nadrazi"], abbr: {}},
+        nl: {join: ["en"], stop: ["de", "het"],
+             street: ["straat", "laan", "steenweg", "plein", "kaai", "dreef"],
+             lead: [], station: [], abbr: {}},
+        // Batch 2b (2026-10-08). Chinese and Korean names are one word each
+        // to words(), so no street word is set aside and no connector is
+        // split (和 and 과 sit inside names: 太和街); two streets are typed
+        // with "/" or "&" between them. 站 and 역 are station words through
+        // STATION_SUFFIX above.
+        zh: {join: [], stop: [], street: [], lead: [], station: ["站"], abbr: {}},
+        ko: {join: [], stop: [], street: [], lead: [], station: ["역"], abbr: {}},
+        // Georgian: "და" (and) between two streets; the street word follows
+        // the name ("რუსთაველის გამზირი"); "მეტრო" names a metro station.
+        ka: {join: ["და"], stop: [],
+             street: ["ქუჩა", "გამზირი", "ქ", "გამზ", "მოედანი", "ჩიხი", "შესახვევი"],
+             lead: [], station: ["მეტრო", "სადგური"], abbr: {"ქ": "ქუჩა", "გამზ": "გამზირი"}}
+    };
+    var PAIR_SPLIT = /\s+(?:and|at|x|y)\s+|\s*[&\/@]\s*/;
+    // A language whose city is also searched in another: Barcelona's names are
+    // Catalan and carry Spanish on under 1% of rows, but a reader may type
+    // "Calle Balmes" (batch 2a, 2026-10-08).
+    var ALSO = {ca: ["es"]};
+    function useLanguages(codes) {
+        var joins = ["and", "at", "x", "y"];
+        codes = (codes || []).slice();
+        codes.slice().forEach(function (c) { (ALSO[c] || []).forEach(function (a) {
+            if (codes.indexOf(a) < 0) codes.push(a); }); });
+        codes.forEach(function (c) {
+            var w = LANG_WORDS[c];
+            if (!w) return;
+            w.join.forEach(function (x) { if (joins.indexOf(x) < 0) joins.push(x); STOP[x] = 1; });
+            w.stop.forEach(function (x) { STOP[x] = 1; });
+            w.street.forEach(function (x) { STREET_WORDS[x] = 1; });
+            w.lead.forEach(function (x) { STREET_LEAD[x] = 1; });
+            w.station.forEach(function (x) { STATION_WORDS[x] = 1; });
+            Object.keys(w.abbr).forEach(function (k) { ABBR[k] = w.abbr[k]; });
+        });
+        PAIR_SPLIT = new RegExp("\\s+(?:" + joins.join("|") + ")\\s+|\\s*[&\\/@]\\s*");
+    }
+    var CJK = /[@@CJK_CLASS@@]/;
+    var MARKS = /[@@MARKS_CLASS@@]/g;
+    var data = null, own = null, loading = null, fold = null, marker = null, timer = null;
+    var renderer = null, lineRow = null, casing = null, cased = null;
+    var byIndex = [], crossURL = null, crossings = null;
+
+    function norm(s) {
+        s = String(s).normalize("NFKC").toLowerCase().normalize("NFD")
+            .replace(MARKS, "").normalize("NFC");
+        if (fold === "ja") s = s.replace(/ou/g, "o").replace(/uu/g, "u").replace(/oo/g, "o");
+        return s;
+    }
+    function words(s) { return norm(s).split(/[^\p{L}\p{N}]+/u).filter(Boolean); }
+    // The searchable forms of one entry's names.
+    function prep(d) {
+        var toks = [], solo = [];
+        d.names.forEach(function (n) {
+            var ws = words(n);
+            toks = toks.concat(ws);
+            solo = solo.concat(ws);
+            // Joined too, so "Kinkakuji" finds "Kinkaku-ji".
+            if (ws.length > 1 && !CJK.test(n)) toks.push(ws.join(""));
+        });
+        d.bares = d.names.map(function (n) { return words(n).join(""); });
+        d.hay = " " + toks.join(" ") + " ";
+        // The words alone, for in-word hits: a joined form let "star" match
+        // inside "Rest Area" (Sydney, 2026-10-08).
+        d.solo = " " + solo.join(" ") + " ";
+        d.flat = norm(d.names.join(" | "));
+        d.first = norm(d.name);
+        return d;
+    }
+    function metres(a, b) {
+        var k = Math.cos((a.lat + b.lat) / 2 * Math.PI / 180);
+        return Math.sqrt(Math.pow((a.lat - b.lat) * 110540, 2) + Math.pow((a.lon - b.lon) * 111320 * k, 2));
+    }
+
+    // The map's own stations (the station markers and their tooltips) and
+    // lines (the legend's rows, the polylines of each), as the reader sees them.
+    function ownItems(map) {
+        var out = [], seen = {};
+        map.eachLayer(function (l) {
+            if (!(l instanceof L.CircleMarker) || l instanceof L.Circle) return;
+            if (l.options.color !== STATION_COLOR || !l.getTooltip()) return;
+            var c = l.getTooltip().getContent(), tmp = document.createElement("div");
+            tmp.innerHTML = typeof c === "string" ? c : (c && c.innerHTML) || "";
+            var b = tmp.querySelector("b"), name = ((b || tmp).textContent || "").trim();
+            var ll = l.getLatLng(), key = name + "@" + ll.lat + "," + ll.lng;
+            if (!name || seen[key]) return;
+            seen[key] = 1;
+            out.push({kind: "mapstation", name: name, names: [name], lat: ll.lat, lon: ll.lng, bbox: null});
+        });
+        document.querySelectorAll(".map-legend .hm-line-row[data-line]").forEach(function (row) {
+            var n = row.getAttribute("data-line"), name = (row.textContent || "").trim(), bounds = null,
+                color = null;
+            map.eachLayer(function (l) {
+                var cls = " " + ((l.options && l.options.className) || "") + " ";
+                if (l instanceof L.Polyline && cls.indexOf(" hm-line-" + n + " ") >= 0 && l.getBounds) {
+                    color = color || l.options.color;
+                    bounds = bounds ? bounds.extend(l.getBounds()) : L.latLngBounds(l.getBounds().getSouthWest(),
+                                                                                    l.getBounds().getNorthEast());
+                }
+            });
+            if (!name || !bounds) return;
+            var c = bounds.getCenter();
+            out.push({kind: "line", name: name, names: [name], lat: c.lat, lon: c.lng, row: row, color: color,
+                      bbox: [bounds.getSouth(), bounds.getWest(), bounds.getNorth(), bounds.getEast()]});
+        });
+        return out.map(prep);
+    }
+
+    // The core of a station name: its words, less a bracketed operator
+    // ("Arashiyama (Hankyu)") and words such as "station" or 駅.
+    function core(name) {
+        return words(String(name).replace(/[(（][^)）]*[)）]/g, " "))
+            .filter(function (w) { return !STATION_WORDS[w]; });
+    }
+    // An OSM station joins the nearest map station within LINK_M whose name it
+    // shares: the same core, or the same first word of 3 or more letters
+    // (Tōjiin and "Tōjiin・Ritsumeikan University"). The FIRST word, never any
+    // word: any word joined the scenic line's "Torokko Saga" to Saga-Arashiyama
+    // and the Eizan Cable's station to Yase-Hieizanguchi (Kyoto, 2026-10-07).
+    // A second pass joins one whose names the map station already holds
+    // (Randen's 西院, read "Sai", joins Saiin through Hankyu's). A joined OSM
+    // station lends the map station its names and is not listed itself; one
+    // that joins none is labeled as not on the map.
+    function link(rows) {
+        var stations = own.filter(function (d) { return d.kind === "mapstation"; });
+        stations.forEach(function (s) { s._core = core(s.name); });
+        function same(d, s) {
+            return d.names.some(function (n) {
+                if (CJK.test(n)) return false;
+                var c = core(n);
+                return c.length && (c.join("") === s._core.join("") || (c[0].length >= 3 && c[0] === s._core[0]));
+            });
+        }
+        function held(d, s) { return d.names.some(function (n) { return s.names.indexOf(n) >= 0; }); }
+        function join(d, test) {
+            var best = null, bestM = LINK_M + 1;
+            stations.forEach(function (s) {
+                var m = metres(d, s);
+                if (m < bestM && test(d, s)) { best = s; bestM = m; }
+            });
+            if (!best) return false;
+            d.names.forEach(function (n) { if (best.names.indexOf(n) < 0) best.names.push(n); });
+            best._linked = true;
+            return true;
+        }
+        var rest = rows.filter(function (d) { return d.kind !== "station" || !join(d, same); });
+        rest = rest.filter(function (d) { return d.kind !== "station" || !join(d, held); });
+        // Same name as a map station but too far to join: a stray duplicate in
+        // OSM (Kyoto's third 山科, 900 m east of the station), dropped rather
+        // than labeled as not on the map.
+        rest = rest.filter(function (d) {
+            return d.kind !== "station" || !stations.some(function (s) {
+                return metres(d, s) <= DUP_M && (same(d, s) || held(d, s));
+            });
+        });
+        stations.forEach(function (s) { if (s._linked) prep(s); });
+        return rest;
+    }
+
+    function load(map) {
+        if (!own) own = ownItems(map);
+        if (loading) return loading;
+        var t0 = performance.now();
+        loading = fetch(URL, {credentials: "omit", referrerPolicy: "no-referrer"})
+            .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+            .then(function (txt) {
+                var ix = JSON.parse(txt);
+                fold = ix.fold || null;
+                useLanguages(ix.languages && ix.languages.local);
+                own = ownItems(map);
+                var rows = ix.rows.map(function (r) {
+                    return prep({kind: ix.kinds[r[0]], lat: r[1], lon: r[2], name: r[3],
+                                 names: [r[3]].concat(r[4] ? r[4].split("|") : []), bbox: r[5] || null});
+                });
+                // The rows in file order: the crossings file refers to streets
+                // by their place here.
+                byIndex = rows;
+                crossURL = ix.crossings || null;
+                data = own.concat(link(rows));
+                document.querySelector(".hm-search").setAttribute(
+                    "data-load-ms", Math.round(performance.now() - t0));
+                return data;
+            });
+        loading.catch(function () { loading = null; });
+        return loading;
+    }
+    // The street-pair intersections, a second file fetched only when a
+    // search asks for one (owner, 2026-10-08: the index's size, iPhone
+    // memory above all): a query in two halves ("5th and Pike"), or one of
+    // several words that finds no place in the first file ("Clark Lake").
+    // Each row is [lat, lon, street A, street B], the streets by their place
+    // in the first file; the name and the English pair are built from them.
+    function needCrossings(q, found) {
+        if (!crossURL || crossings) return false;
+        if (pairOf(q)) return true;
+        var qs = words(q).filter(function (w) { return !STOP[w]; });
+        return qs.length > 1 && !found.some(function (d) { return !isOwn(d); });
+    }
+    function loadCrossings() {
+        if (crossings) return crossings;
+        var t0 = performance.now();
+        crossings = fetch(crossURL, {credentials: "omit", referrerPolicy: "no-referrer"})
+            .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+            .then(function (txt) {
+                function latin(d) { return d.names.slice(1).filter(function (n) { return !CJK.test(n); })[0]; }
+                JSON.parse(txt).rows.forEach(function (r) {
+                    var a = byIndex[r[2]], b = byIndex[r[3]];
+                    if (!a || !b) return;
+                    var names = [a.name + " / " + b.name], ea = latin(a), eb = latin(b);
+                    if (ea && eb) names.push(ea + " / " + eb);
+                    data.push(prep({kind: "crossing", lat: r[0], lon: r[1], name: names[0], names: names,
+                                    bbox: null}));
+                });
+                document.querySelector(".hm-search").setAttribute(
+                    "data-crossings-ms", Math.round(performance.now() - t0));
+            });
+        // A failed fetch leaves the first file's answers, and is not retried.
+        crossings.catch(function () { crossURL = null; });
+        return crossings;
+    }
+
+    // 2 for a word-start hit, 1 for a Latin word of 4 or more letters inside a
+    // romanized compound ("imadegawa" in "Horikawaimadegawa"), 0 for none.
+    function wordHit(d, w) {
+        if (CJK.test(w)) return d.flat.indexOf(w) >= 0 ? 2 : 0;
+        // A number is itself or its ordinal: "1" found 145th (Seattle).
+        if (/^[0-9]+$/.test(w)) return ["", "st", "nd", "rd", "th"].some(function (x) {
+            return d.hay.indexOf(" " + w + x + " ") >= 0; }) ? 2 : 0;
+        if (d.hay.indexOf(" " + w) >= 0) return 2;
+        if (ABBR[w] && d.hay.indexOf(" " + ABBR[w]) >= 0) return 2;
+        return w.length >= 4 && d.solo.indexOf(w) >= 0 ? 1 : 0;
+    }
+    function isStation(d) { return d.kind === "station" || d.kind === "mapstation"; }
+    // A query in two halves ("Clark and Lake", "5th & Pike", "四条 / 烏丸"):
+    // each half's words, street words left out unless that empties it.
+    function pairOf(q) {
+        var parts = norm(q).split(PAIR_SPLIT).map(function (p) {
+            // Articles left out too: "Carrer de Aragó" for Carrer d'Aragó.
+            var ws = words(p), core = ws.filter(function (w) { return !STREET_WORDS[w] && !STOP[w]; });
+            return core.length ? core : ws;
+        }).filter(function (ws) { return ws.length; });
+        return parts.length === 2 ? parts : null;
+    }
+    function sideHit(side, ws) {
+        var hay = " " + words(side).join(" ") + " ", flat = norm(side);
+        return ws.every(function (w) {
+            if (CJK.test(w)) return flat.indexOf(w) >= 0;
+            return hay.indexOf(" " + w) >= 0 || (ABBR[w] && hay.indexOf(" " + ABBR[w]) >= 0);
+        });
+    }
+    function pairHit(d, pair) {
+        return d.names.some(function (n) {
+            var s = n.split(" / ");
+            return s.length === 2 && ((sideHit(s[0], pair[0]) && sideHit(s[1], pair[1]))
+                                      || (sideHit(s[1], pair[0]) && sideHit(s[0], pair[1])));
+        });
+    }
+    function hits(d, qs) {
+        d._weak = 0;
+        for (var i = 0; i < qs.length; i++) {
+            var w = qs[i], h = wordHit(d, w);
+            if (h === 1) d._weak += 1;
+            if (h) continue;
+            if (STATION_WORDS[w] && isStation(d)) continue;
+            if (STREET_WORDS[w] && (d.kind === "street" || d.kind === "crossing" || d.kind === "junction")) continue;
+            if (CJK.test(w) && w.length > 1 && STATION_SUFFIX[w.charAt(w.length - 1)] && isStation(d)
+                && d.flat.indexOf(w.slice(0, -1)) >= 0) continue;
+            return false;
+        }
+        return true;
+    }
+    function search(q) {
+        var qs = words(q).filter(function (w) { return !STOP[w]; });
+        if (!qs.length) return [];
+        var out = data.filter(function (d) { return hits(d, qs); });
+        if (!out.length && qs.length === 1 && CJK.test(qs[0]) && qs[0].length >= 3) {
+            // One CJK word that matches nothing: try it as two (烏丸四条).
+            for (var k = 1; k < qs[0].length && !out.length; k++) {
+                var two = [qs[0].slice(0, k), qs[0].slice(k)];
+                out = data.filter(function (d) { return hits(d, two); });
+            }
+        }
+        var nq = norm(q).trim(), bare = words(q).join(""), pair = pairOf(q);
+        // A street word last asks for a street ("Lake Shore Dr" before the
+        // Lake Shore Drive Synagogue, whose name the query begins); first, it
+        // is often Saint or Doctor ("St Mary's", "Dr Martin Luther King").
+        // In French, Catalan or Spanish the street word leads ("Rue Peel").
+        var typeW = STREET_WORDS[qs[qs.length - 1]] ? qs[qs.length - 1] : (STREET_LEAD[qs[0]] ? qs[0] : null);
+        var streetQ = qs.length > 1 && typeW;
+        out.forEach(function (d) {
+            var s = KIND_RANK[d.kind] * 3 + Math.min(d.name.length, 40) / 10 + d._weak * 20;
+            if (d.bares.indexOf(bare) >= 0 || d.names.some(function (n) { return norm(n) === nq; })) s -= 100;
+            else if (d.first.indexOf(nq) === 0) s -= 40;
+            // "Damen and North": the crossing whose two streets take the two
+            // halves, before North Damen Avenue's other crossings (Chicago,
+            // 2026-10-08).
+            if (pair && d.kind === "crossing" && pairHit(d, pair)) s -= 60;
+            if (streetQ && (d.kind === "street" || d.kind === "crossing" || d.kind === "junction")) s -= 45;
+            // And its own type first: "NE 45th St" is the Street, not the Court.
+            if (streetQ && d.hay.indexOf(" " + (STREET_TYPE[typeW] || ABBR[typeW] || typeW) + " ") >= 0) s -= 5;
+            // Whole words before parts: "Art Institute" before "Arturo ...".
+            // An abbreviation counts as its whole word: "bd St-Laurent" is
+            // Boulevard Saint-Laurent before Boulevard Laurentien (batch 2a).
+            if (qs.every(function (w) { return d.hay.indexOf(" " + w + " ") >= 0
+                    || (ABBR[w] && d.hay.indexOf(" " + ABBR[w] + " ") >= 0); })) s -= 4;
+            d._s = s;
+        });
+        // The map's own stations and lines first, as their own group, and only
+        // from the start of a word: an in-word hit put Takaragaike under "kara"
+        // and Umekōji-Kyotonishi under "Nish" (Kyoto, 2026-10-07).
+        out.sort(function (a, b) { return a._s - b._s; });
+        var cap = caps();
+        var mine = out.filter(function (d) { return isOwn(d) && !d._weak; }).slice(0, cap.own);
+        var rest = out.filter(function (d) { return !isOwn(d); }).slice(0, mine.length ? cap.places : cap.alone);
+        return mine.concat(rest);
+    }
+    function isOwn(d) { return d.kind === "line" || d.kind === "mapstation"; }
+    // WORK IN PROGRESS (owner, 2026-10-07): the suggestion rules below (the
+    // keyword gate, the caps, the pills) are a first cut, to be tuned against
+    // real search terms in testing; the aim is as few items as do the job,
+    // phones above all. It may go live in this state at the owner's call.
+    // Nothing is suggested until a full keyword is typed (owner, 2026-10-07:
+    // "North" for Northgate Station, "JR" for a JR line): a whole word of some
+    // name ("JR", "Oak", "5th"), at least MIN_LATIN letters of one, at least
+    // MIN_CJK characters of Chinese, Japanese or Korean, or a second word.
+    function ready(q) {
+        var qs = words(q).filter(function (w) { return !STOP[w]; });
+        if (!qs.length) return false;
+        // Several words count only with one real word among them: "#N/A" is
+        // "n" and "a", and found intersections everywhere (owner's junk
+        // searches, 2026-10-08).
+        if (qs.length > 1) return qs.some(function (w) { return w.length > 1 || CJK.test(w) || /[0-9]/.test(w); });
+        var w = qs[0];
+        if (CJK.test(w)) return w.length >= MIN_CJK;
+        if (w.length >= MIN_LATIN) return true;
+        return data.some(function (d) { return d.hay.indexOf(" " + w + " ") >= 0; });
+    }
+
+    function start() {
+        var map = window[NAME];
+        if (!map || !window.L) return;
+        var Ctl = L.Control.extend({
+            options: {position: "topleft"},
+            onAdd: function () {
+                var box = L.DomUtil.create("div", "hm-search leaflet-control");
+                box.innerHTML =
+                    '<div class="hm-search-row">' +
+                    '<button type="button" class="hm-search-btn" aria-label="Search places" title="Search places">' +
+                    '<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="6.5" cy="6.5" r="5" ' +
+                    'fill="none" stroke="currentColor" stroke-width="2"/><path d="M10.5 10.5L15 15" stroke="currentColor" ' +
+                    'stroke-width="2" stroke-linecap="round"/></svg></button>' +
+                    '<input class="hm-search-input" type="search" role="combobox" aria-expanded="false" ' +
+                    'aria-label="Search streets, intersections, stations, lines and places" ' +
+                    'placeholder="Street, station, place" autocomplete="off" autocorrect="off" ' +
+                    'autocapitalize="off" spellcheck="false" enterkeyhint="search"></div>' +
+                    '<div class="hm-search-list" role="listbox"></div>';
+                L.DomEvent.disableClickPropagation(box);
+                L.DomEvent.disableScrollPropagation(box);
+                return box;
+            }
+        });
+        map.addControl(new Ctl());
+        var box = document.querySelector(".hm-search");
+        var btn = box.querySelector(".hm-search-btn");
+        var input = box.querySelector(".hm-search-input");
+        var list = box.querySelector(".hm-search-list");
+        var shown = [], on = -1;
+
+        function note(text) {
+            var n = document.createElement("div");
+            n.className = "hm-search-note";
+            n.textContent = text;
+            list.appendChild(n);
+            list.classList.add("has");
+        }
+        function credit() {
+            var c = document.createElement("div");
+            c.className = "hm-search-credit";
+            // The short credit (owner, 2026-10-07, to save space in the box):
+            // the OSM Attribution Guideline's "© OpenStreetMap contributors"
+            // form, linked to the copyright page, the licence named and linked
+            // (ODbL 4.3), and the download link as the 4.6 offer (licence read
+            // 2026-10-07). It replaced 4.3(a)'s longer example wording. The
+            // offer covers the intersections file as well, which is part of
+            // the same derived database (owner, 2026-10-11); its link shows
+            // once the index has named the file.
+            c.innerHTML = 'Search data &copy; <a href="https://www.openstreetmap.org/copyright" ' +
+                'target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a> ' +
+                '(<a href="https://opendatacommons.org/licenses/odbl/1-0/" target="_blank" ' +
+                'rel="noopener noreferrer">ODbL</a>) · ' +
+                '<a href="' + URL + '" target="_blank" rel="noopener" download>Download this index</a>' +
+                (crossURL ? ' · <a href="' + crossURL + '" target="_blank" rel="noopener" download>intersections</a>' : '');
+            list.appendChild(c);
+        }
+        // On a phone (under 480 px), with both groups shown, each heading folds
+        // its group (owner, 2026-10-07): the map's own open, the places folded,
+        // and a reader's choice kept while they type.
+        var folded = {own: false, places: true};
+        function head(text, group, count, foldable) {
+            var h = document.createElement(foldable ? "button" : "div");
+            h.className = "hm-search-head";
+            if (foldable) {
+                h.type = "button";
+                h.className += " hm-search-fold";
+                h.setAttribute("aria-expanded", folded[group] ? "false" : "true");
+                h.textContent = (folded[group] ? "▸ " : "▾ ") + text + " (" + count + ")";
+                h.addEventListener("click", function () { folded[group] = !folded[group]; render(); });
+            } else {
+                h.textContent = text;
+            }
+            list.appendChild(h);
+        }
+        function render() {
+            list.innerHTML = "";
+            on = -1;
+            shown = [];
+            // Empty, or no full keyword yet: what the search is for (owner,
+            // 2026-10-07), and the credit, which shows whenever the box is open.
+            // Before a full keyword, the map's own stations and lines still
+            // answer, from the start of a word (owner, 2026-10-11: "l" showed
+            // the Linhas through a place with a word L, "lin" showed nothing,
+            // "linh" showed them again). The index's places wait for the
+            // keyword, as before.
+            var gated = !!data && !ready(input.value);
+            var early = gated && input.value.trim() && !JUNK_Q.test(input.value)
+                ? search(input.value).filter(isOwn) : [];
+            if (!input.value.trim() || (gated && !early.length)) {
+                note("Finds streets, intersections, stations, lines, neighborhoods and landmarks. " +
+                     "Businesses are not searchable, and what you type stays in your browser.");
+                credit();
+                input.setAttribute("aria-expanded", "false");
+                return;
+            }
+            if (!data) { note("Loading places…"); return; }
+            // An error value typed in ("#N/A", "#REF!", "!ERROR!") finds
+            // nothing, as no index holds one (place_index.junk_name).
+            if (JUNK_Q.test(input.value)) { note("No street, station or place by that name"); credit(); return; }
+            shown = gated ? early : search(input.value);
+            if (!gated && needCrossings(input.value, shown)) {
+                // Shown again when the intersections arrive, or as it stands
+                // if they cannot.
+                loadCrossings().then(render, render);
+                if (!shown.length) { note("Loading intersections…"); return; }
+            }
+            if (!shown.length) { note("No street, station or place by that name"); credit(); return; }
+            var nOwn = shown.filter(isOwn).length, nPlaces = shown.length - nOwn;
+            var foldable = nOwn > 0 && nPlaces > 0 && narrow();
+            var pills = null, rows = null;
+            shown.forEach(function (d, i) {
+                // A map station shows its Japanese (or other) name beside the
+                // map's; an OSM entry its first Latin alias.
+                var other = d.kind === "mapstation" ? d.names[1]
+                    : d.names.slice(1).filter(function (n) { return !CJK.test(n); })[0];
+                var label = KIND_LABEL[d.kind] + (other && other !== d.name ? " · " + other : "");
+                if (isOwn(d)) {
+                    // The map's own stations and lines as pills (owner,
+                    // 2026-10-07), side by side so several share a row: a
+                    // line's in its map colour, a station's with the station
+                    // dot. The kind and other name are the pill's title.
+                    if (!pills) {
+                        head("On this map", "own", nOwn, foldable);
+                        pills = document.createElement("div");
+                        pills.className = "hm-search-pills";
+                        pills.hidden = foldable && folded.own;
+                        list.appendChild(pills);
+                    }
+                    var pill = document.createElement("button");
+                    pill.type = "button";
+                    pill.className = "hm-search-pill";
+                    pill.setAttribute("data-i", i);
+                    pill.title = label;
+                    pill.setAttribute("aria-label", d.name + ", " + label);
+                    var sw = document.createElement("span");
+                    sw.className = d.kind === "line" ? "hm-pill-line" : "hm-pill-station";
+                    if (d.kind === "line" && d.color) sw.style.background = d.color;
+                    pill.appendChild(sw);
+                    pill.appendChild(document.createTextNode(d.name));
+                    pill.addEventListener("click", function () { go(i); });
+                    pills.appendChild(pill);
+                    return;
+                }
+                if (!rows) {
+                    if (pills) head("Places", "places", nPlaces, foldable);
+                    rows = document.createElement("div");
+                    rows.hidden = foldable && folded.places;
+                    list.appendChild(rows);
+                }
+                var el = document.createElement("div");
+                el.className = "hm-search-item";
+                el.setAttribute("role", "option");
+                el.setAttribute("data-i", i);
+                var top = document.createElement("div");
+                top.textContent = d.name;
+                var sub = document.createElement("div");
+                sub.className = "hm-search-sub";
+                sub.textContent = label;
+                el.appendChild(top);
+                el.appendChild(sub);
+                el.addEventListener("click", function () { go(i); });
+                rows.appendChild(el);
+            });
+            credit();
+            list.classList.add("has");
+            input.setAttribute("aria-expanded", "true");
+        }
+        function go(i) {
+            var d = shown[i];
+            if (!d) return;
+            unmark();
+            list.classList.remove("has");
+            input.setAttribute("aria-expanded", "false");
+            input.blur();
+            if (d.kind === "line") {
+                // The whole line in view, picked out as its legend row does
+                // (LINE_HIGHLIGHT_SCRIPT); a row already picked stays picked.
+                map.fitBounds([[d.bbox[0], d.bbox[1]], [d.bbox[2], d.bbox[3]]], {padding: [30, 30]});
+                if (d.row.getAttribute("aria-pressed") !== "true") d.row.click();
+                samplePick();
+                return;
+            }
+            if (d.kind === "mapstation") {
+                // The station with its outermost ring in view, whether or not
+                // the rings are switched on (owner, 2026-10-07).
+                map.fitBounds(L.latLng(d.lat, d.lon).toBounds(2 * RING_M), {padding: [20, 20]});
+            } else if (d.bbox) {
+                map.fitBounds([[d.bbox[0], d.bbox[1]], [d.bbox[2], d.bbox[3]]], {maxZoom: 16, padding: [30, 30]});
+            } else {
+                map.setView([d.lat, d.lon], Math.max(map.getZoom(), 16));
+            }
+            // A temporary marker, not interactive, so a tap still reaches the
+            // dots and rings under it: the casing, then the ring over it.
+            if (!map.getPane("hmsearch")) {
+                map.createPane("hmsearch").style.zIndex = 640;
+                // The name label has a pane of its own: TAP_SELECT_SCRIPT
+                // hides Leaflet's tooltip pane on a touch screen, where a
+                // hover label has no use, and this one is the search's answer.
+                map.createPane("hmsearchtip").style.zIndex = 645;
+                renderer = L.svg({pane: "hmsearch"});
+            }
+            marker = L.featureGroup([
+                L.circleMarker([d.lat, d.lon], {radius: 17, weight: 8, className: "hm-search-case",
+                    pane: "hmsearch", renderer: renderer, interactive: false}),
+                L.circleMarker([d.lat, d.lon], {radius: 17, weight: 4, className: "hm-search-ring",
+                    pane: "hmsearch", renderer: renderer, interactive: false})
+            ]).addTo(map);
+            marker.getLayers()[1].bindTooltip(d.name, {permanent: true, direction: "top", pane: "hmsearchtip",
+                offset: [0, -16]}).openTooltip();
+            map.getContainer().classList.add("hm-searching");
+            // The reader's first touch of the map ends the fade (the marker
+            // stays its 12 seconds). Armed after the move this search makes.
+            setTimeout(function () {
+                if (!marker) return;
+                ["pointerdown", "wheel", "touchstart", "keydown"].forEach(function (ev) {
+                    map.getContainer().addEventListener(ev, unfade, {capture: true, passive: true});
+                });
+            }, 400);
+            timer = setTimeout(unmark, 12000);
+        }
+        // A picked line's look, whether picked from the search, its legend
+        // row or the map: the businesses step back, a casing is drawn under
+        // the line and its label is boxed, until it is unpicked. The picked
+        // state is the legend row's aria-pressed, which LINE_HIGHLIGHT_SCRIPT
+        // sets in one place; that script also presses a row for a mouse
+        // hover, so the pick is read only after a click or a key, and a line
+        // merely hovered gets none of this. While the pointer hovers another
+        // line the look is off, and it returns with the pick. The casing is
+        // a copy of the line's own polylines in the same renderer, moved
+        // under the line's first path, which the highlight script has
+        // already put last among the lines.
+        function pressedRow() {
+            return document.querySelector('.hm-line-row[data-line][aria-pressed="true"]');
+        }
+        function lineState() {
+            var cur = pressedRow();
+            if (!cur) lineRow = null;
+            var want = lineRow && cur === lineRow ? lineRow.getAttribute("data-line") : null;
+            if (want === cased) return;
+            var label;
+            if (cased !== null) {
+                label = document.querySelector('.hm-line-label[data-line="' + cased + '"]');
+                if (label) label.classList.remove("hm-search-label");
+                if (casing) map.removeLayer(casing);
+                casing = null;
+            }
+            cased = want;
+            if (want === null) {
+                if (!marker) map.getContainer().classList.remove("hm-searching");
+                return;
+            }
+            map.getContainer().classList.add("hm-searching");
+            label = document.querySelector('.hm-line-label[data-line="' + want + '"]');
+            if (label) label.classList.add("hm-search-label");
+            var polys = [];
+            map.eachLayer(function (l) {
+                var c = l.options && l.options.className;
+                if (typeof c === "string" && l._path && (" " + c + " ").indexOf(" hm-line-" + want + " ") !== -1) polys.push(l);
+            });
+            if (!polys.length) return;
+            casing = L.featureGroup(polys.map(function (q) {
+                return L.polyline(q.getLatLngs(), {weight: 13, opacity: 1, className: "hm-search-linecase",
+                    interactive: false, renderer: q._renderer});
+            })).addTo(map);
+            var first = polys[0]._path;
+            casing.eachLayer(function (c) {
+                if (c._path && first.parentNode) first.parentNode.insertBefore(c._path, first);
+            });
+        }
+        function samplePick() { lineRow = pressedRow(); lineState(); }
+        Array.prototype.forEach.call(document.querySelectorAll(".hm-line-row[data-line]"), function (row) {
+            new MutationObserver(lineState).observe(row, {attributes: true, attributeFilter: ["aria-pressed"]});
+        });
+        ["click", "keyup"].forEach(function (ev) {
+            document.addEventListener(ev, function () { setTimeout(samplePick, 0); }, true);
+        });
+        function unfade() {
+            // A picked line keeps its fade.
+            if (cased === null) map.getContainer().classList.remove("hm-searching");
+            ["pointerdown", "wheel", "touchstart", "keydown"].forEach(function (ev) {
+                map.getContainer().removeEventListener(ev, unfade, {capture: true});
+            });
+        }
+        function unmark() {
+            clearTimeout(timer);
+            if (marker) map.removeLayer(marker);
+            marker = null;
+            unfade();
+        }
+        function open() {
+            box.classList.add("open");
+            input.focus();
+            load(map).then(render, function () {
+                // No index (a map opened outside the site): the map's own
+                // stations and lines still answer.
+                data = own;
+                render();
+                note("Streets and places are searchable on the site's own map pages");
+            });
+        }
+        btn.addEventListener("click", function () {
+            // The button closes an open box, typed text or not (a phone has
+            // no Escape key); the text is cleared, as Escape clears it.
+            if (box.classList.contains("open")) {
+                input.value = "";
+                render();
+                box.classList.remove("open");
+                return;
+            }
+            open();
+        });
+        input.addEventListener("input", render);
+        input.addEventListener("keydown", function (e) {
+            e.stopPropagation();
+            // Pills and rows alike, in the order shown.
+            var items = Array.prototype.filter.call(list.querySelectorAll("[data-i]"),
+                function (el) { return !el.closest("[hidden]"); });   // a folded group's are skipped
+            if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+                e.preventDefault();
+                if (!items.length) return;
+                on = (on + (e.key === "ArrowDown" ? 1 : items.length - 1)) % items.length;
+                items.forEach(function (el, k) { el.classList.toggle("on", k === on); });
+            } else if (e.key === "Enter") {
+                e.preventDefault();
+                if (items.length) go(Number(items[on >= 0 ? on : 0].getAttribute("data-i")));
+            } else if (e.key === "Escape") {
+                input.value = "";
+                render();
+                box.classList.remove("open");
+            }
+        });
+    }
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", start);
+    } else {
+        start();
+    }
+})();
+</script>
+"""
+PLACE_SEARCH_SCRIPT = (
+    _PLACE_SEARCH_TEMPLATE
+    .replace("@@FONT_STACK@@", FONT_VAR)
+    .replace("@@LIGHT_SURFACE@@", LIGHT["surface"])
+    .replace("@@LIGHT_TEXT@@", LIGHT["text"])
+    .replace("@@LIGHT_BORDER@@", LIGHT["border"])
+    .replace("@@LIGHT_ACCENT@@", LIGHT["accent"])
+    .replace("@@DARK_ACCENT@@", DARK["accent"])
+    .replace("@@DARK_PAGE@@", DARK["page"])
+    .replace("@@LIGHT_STATION@@", LIGHT["station"])
+    .replace("@@STATION_LINK_M@@", str(STATION_LINK_M))
+    .replace("@@STATION_DUP_M@@", str(STATION_DUP_M))
+    .replace("@@CJK_CLASS@@", _JS_CJK_CLASS)
+    .replace("@@MARKS_CLASS@@", _JS_MARKS_CLASS)
+)
+assert "@@" not in PLACE_SEARCH_SCRIPT, "unresolved placeholder in PLACE_SEARCH_SCRIPT"
+# The dot never shrinks: a label that wraps on a phone took width from it and
+# drew an oval (olive's 43-character label, the owner's iPhone, 2026-10-08).
+# 10 px, border included (the page's box-sizing), down from 11 at the owner's
+# request; the no-data ring below went from 9 to 8 with it. Measured 10 x 10
+# on Kyoto's three rows at 375 px, the olive one wrapping.
 LEGEND_ROW = """
   <div style="display:flex; align-items:center; margin:3px 0;">
-    <span style="display:inline-block; width:11px; height:11px;
+    <span style="display:inline-block; flex-shrink:0; width:10px; height:10px;
       border-radius:50%; background:{color}; margin-right:7px;
       border:1px solid rgba(0,0,0,0.3);"></span>{label}
   </div>
@@ -2016,7 +2998,7 @@ LEGEND_LINE_ROW = """
 LEGEND_NO_DATA_ROWS = """
   <div style="font-weight: bold; margin: 10px 0 6px;">Stations</div>
   <div style="display:flex; align-items:center; margin:3px 0;">
-    <span style="display:inline-block; width:9px; height:9px;
+    <span style="display:inline-block; flex-shrink:0; width:8px; height:8px;
       border-radius:50%; background:transparent; margin-right:7px;
       border:2px solid {color};"></span>No business data (ward publishes no usable food-permit list)
   </div>
@@ -2760,12 +3742,15 @@ def _esc(value):
 
 
 def add_pin_layer(m, rows, group_name, color, tooltip_field_label,
-                  value_column, show=True, display=None, animate=False, outline=None):
+                  value_column, show=True, display=None, animate=False, outline=None,
+                  registry=None):
     """Add one toggleable, clustered, coloured pin layer for a category bucket.
     Return the number of points (0 = nothing added). `animate`: see
     render_heatmap's `animate_clusters`. `outline`: (colour, weight) for a ring
     around each pin (pipeline/taxonomies.MEANING_OUTLINES); None draws the
-    pin's edge in its fill colour at weight 1, as every map did before."""
+    pin's edge in its fill colour at weight 1, as every map did before.
+    `registry`: a list the layer's JS variable name is appended to
+    (TRAVEL_MODE_SCRIPT's business layers)."""
     stroke, weight = outline or (color, 1)
     # Station name, ring band AND the classification value each repeat once per
     # pin, so each is emitted ONCE in a lookup table and referenced by integer
@@ -2799,10 +3784,15 @@ def add_pin_layer(m, rows, group_name, color, tooltip_field_label,
     for row in rows.itertuples():
         station = _esc(row.nearest_station)
         band = _esc(row.ring_band)
-        cat = _esc(_display(getattr(row, value_column)))
+        raw = getattr(row, value_column)
+        cat = _esc(_display(raw))
+        # A name rule that withholds a name writes the raw classification in
+        # its place, so that name reads as the category does (Saitama's
+        # "01:飲食店営業 " showed its layer code there too, Analytics 2026-10-08).
+        name = _display(raw) if row.business_name == raw else row.business_name
         data.append([
             round(row.latitude, COORD_DP), round(row.longitude, COORD_DP),
-            _esc(shown_name(row.business_name, cat)),
+            _esc(shown_name(name, cat)),
             cats.setdefault(cat, len(cats)),
             stations.setdefault(station, len(stations)),
             bands.setdefault(band, len(bands)),
@@ -2861,6 +3851,8 @@ def add_pin_layer(m, rows, group_name, color, tooltip_field_label,
     ParsedFastMarkerCluster(data, callback=callback, icon_create_function=icon_create_function,
                             options={"animate": animate}).add_to(fg)
     fg.add_to(m)
+    if registry is not None:
+        registry.append((fg.get_name(), show))
     return len(data)
 
 
@@ -2876,10 +3868,26 @@ def add_pin_layer(m, rows, group_name, color, tooltip_field_label,
 # 1000 px (review lane 3, F1); Philadelphia 299, Buffalo 315 and Toronto 319
 # were past the model too. A legend narrower than the cap renders the same.
 LEGEND_MODEL_W = 274
-_LEGEND_CAP_STYLE = f"<style>.map-legend {{ max-width: {LEGEND_MODEL_W}px; }}</style>"
+# ON A PHONE the open legend is also capped in HEIGHT, with its own scroll
+# (owner, 2026-10-12: Tokyo's open legend, 52 lines, filled half the screen
+# and ran under the map's edge). 40vh is 40% of the map FRAME's height, since
+# the map is its own document; LEGEND_PHONE_W is the frame width under which
+# it applies (a 375 px phone's frame is 343 px; a tablet's 768 is left alone).
+# Names stay whole and wrap, nothing is truncated (the line-identity rule).
+# overscroll-behavior keeps a scroll that reaches the legend's end from
+# moving the page behind the frame. The legend opens closed on a phone
+# (LEGEND_AUTOFIT_SCRIPT), so the label layout's legend obstacle is unchanged.
+LEGEND_PHONE_W = 600
+LEGEND_PHONE_MAX_VH = 40
+_LEGEND_CAP_STYLE = (
+    f"<style>.map-legend {{ max-width: {LEGEND_MODEL_W}px; }} "
+    f"@media (max-width: {LEGEND_PHONE_W}px) {{ details.map-legend[open] {{ "
+    f"max-height: {LEGEND_PHONE_MAX_VH}vh; overflow-y: auto; overscroll-behavior: contain; "
+    f"-webkit-overflow-scrolling: touch; }} }}</style>")
 
 
-def build_legend(bucket_colors, legend_label, lines, no_data_stations=False, legend_names=None):
+def build_legend(bucket_colors, legend_label, lines, no_data_stations=False, legend_names=None,
+                 travel=False, routes=(), full=False):
     """Build the fixed-position legend from the buckets actually present
     and the taxonomy's own legend text; nothing taxonomy-specific here.
 
@@ -2891,8 +3899,21 @@ def build_legend(bucket_colors, legend_label, lines, no_data_stations=False, leg
     (render_heatmap); the row reads "code  full name", or the full name
     alone when it already starts with the label (Newcastle's "Green line
     (Tyne and Wear Metro)", owner 2026-10-02).
+    travel: wrap the business section in `.hm-biz`, which TRAVEL_MODE_SCRIPT
+    folds away in Travel; False leaves the legend byte for byte as before.
+    routes: [(kind, name)] of the NAMED ferry and cable-car routes the Travel
+    pack holds; each gets a row under the transit lines with its own name
+    ("Arno Boat"), drawn as on the Travel map and shown in Travel only. A
+    generic "Ferry" row is deliberately absent and an unnamed route gets no
+    row: what a dashed line means belongs to the app's own info page, and
+    the map carries map content only (owner, 2026-10-08).
+    full: the full Travel version's legend (LEGEND_FULL_HTML): the line rows
+    and route rows only, in the full variant's colours; bucket_colors and
+    legend_label are ignored.
     """
     names = legend_names or {}
+    if full:
+        bucket_colors, travel = (), True
     line_rows = "".join(
         LEGEND_LINE_ROW.format(line=n, color=color, label=html.escape(
             names[key] if key in names and names[key].startswith(label)
@@ -2901,16 +3922,35 @@ def build_legend(bucket_colors, legend_label, lines, no_data_stations=False, leg
     )
     if no_data_stations:
         line_rows += LEGEND_NO_DATA_ROWS.format(color=LIGHT["station"])
+    named = [(kind, name) for kind, name in routes if name and kind in TRAVEL_ROUTE_ROWS]
+    if travel and named:
+        colours = TRAVEL_ROUTE_COLOURS["full" if full else "site"]
+        route_rows = "".join(
+            TRAVEL_ROUTE_STYLE.format(kind=kind, light=colours[kind][0], dark=colours[kind][1])
+            for kind in sorted({kind for kind, _name in named}))
+        route_rows += "".join(
+            TRAVEL_ROUTE_ROWS[kind].format(label=html.escape(name))
+            for kind, name in sorted(set(named), key=lambda r: (r[0] != "ferry", r[1])))
+        line_rows += route_rows if full else f'<div class="hm-travel-only">{route_rows}</div>'
+    if full:
+        return (_LEGEND_CSS + (_LEGEND_CAP_STYLE if names else "")
+                + LEGEND_FULL_HTML.format(line_rows=line_rows)
+                + LEGEND_AUTOFIT_SCRIPT.replace("__MAP_W__", str(_MAP_W)))
     # _LEGEND_CSS is prepended AFTER formatting, not concatenated into
     # LEGEND_HTML: .format() would otherwise try to read every CSS brace as a
     # replacement field and raise KeyError on the first selector.
-    return _LEGEND_CSS + _LEGEND_CAP_STYLE + LEGEND_HTML.format(
-        category_rows="".join(
-            LEGEND_ROW.format(color=color, label=html.escape(legend_label(name)))
-            for name, color in bucket_colors
-        ),
-        line_rows=line_rows,
-    ) + LEGEND_AUTOFIT_SCRIPT.replace("__MAP_W__", str(_MAP_W))
+    category_rows = "".join(
+        LEGEND_ROW.format(color=color, label=html.escape(legend_label(name)))
+        for name, color in bucket_colors
+    )
+    # Only the slot's own content is wrapped, so LEGEND_HTML's fixed text stays
+    # verbatim for check_render_current.py; TRAVEL_MODE_SCRIPT gives the
+    # heading just before the wrap the same class.
+    if travel:
+        category_rows = f'<div class="hm-biz">{category_rows}</div>'
+    legend = LEGEND_HTML.format(category_rows=category_rows, line_rows=line_rows)
+    return (_LEGEND_CSS + _LEGEND_CAP_STYLE + legend
+            + LEGEND_AUTOFIT_SCRIPT.replace("__MAP_W__", str(_MAP_W)))
 
 
 def _label_anchor_coords(coords, label_focus):
@@ -2975,8 +4015,25 @@ def _has_contact_details(name) -> bool:
 # be a guess ("CR?PERIE", Seoul's lost separators "더?헤어", Osaka's lost
 # kanji "立?み"), so the name shows the classification instead.
 _SHEET_ERROR = re.compile(r"^#(NAME\?|VALUE!|REF!|N/A|DIV/0!|NULL!|NUM!)$")
-_LETTER = "A-Za-zÀ-ɏ぀-ヿ一-鿿가-힯"
-_LOST_LETTER = re.compile(f"[{_LETTER}]\\?[{_LETTER}]|\\bCaf\\?")
+# Full-width Latin counts as letters (Analytics, 2026-10-08: "Ｐ?ｔｉｓｓｅｒｉｅ"
+# rendered in Higashiyamato 6, Tachikawa 4, Ichinomiya 3), and a name that
+# STARTS with "?" lost its first character ("??野家" is 吉野家, Oita's
+# "?暁雲福祉会", Osaka's "?　ｒｅｃｃａ", Seoul's bare "??"), unless an ASCII
+# space follows: New York's "? TEA (QUESTION MARK TEA)" is the trade name.
+# Measured on every processed file 2026-10-08: at most 548 more names shown
+# as their classification (Osaka 202, Kobe 105, Seoul 96, Tokyo 55).
+_LETTER = "A-Za-zÀ-ɏ぀-ヿ一-鿿가-힯Ａ-Ｚａ-ｚ"
+_LOST_LETTER = re.compile(f"[{_LETTER}]\\?[{_LETTER}]|\\bCaf\\?|^\\?+(?! )")
+# S1 (owner, 2026-10-12; DECISIONS): a private-use code point (U+E000 to
+# U+F8FF) is a publisher's own glyph, which no reader's font holds, so it
+# draws as an empty box. Measured that day over every built city's kept rows:
+# 1,797 names in 29 cities (Osaka 787, Kyoto 397, Sapporo 135, Tokyo 125, Kobe
+# 101; Taipei 4), 493 distinct code points, 1,696 of the names with one; 23
+# committed maps showed such a name, the other six cities' being withheld by
+# the name rule already. The pin stays and shows its classification. A repair pass (one publisher, one
+# code point, one known character) is queued in PLAN; re-measure if a
+# publisher's file is refreshed.
+_PRIVATE_USE = re.compile("[\ue000-\uf8ff]")
 _LOST_APOSTROPHE = re.compile(r"(?<=[A-Za-z])\?(?=[sS]\b)")
 _LOST_CAFE = re.compile(r"\b(Caf|CAF)\?")
 
@@ -2995,7 +4052,7 @@ def glitched_name(name):
         return True
     text = str(name).strip()
     return not text or text.lower() == "nan" or bool(_SHEET_ERROR.match(text)) \
-        or bool(_LOST_LETTER.search(text))
+        or bool(_LOST_LETTER.search(text)) or bool(_PRIVATE_USE.search(text))
 
 
 def shown_name(name, classification):
@@ -3003,6 +4060,25 @@ def shown_name(name, classification):
     restored, or its classification when the name is still glitched."""
     name = repaired_name(name)
     return classification if glitched_name(name) else name
+
+
+def emit_storefront_totals(businesses, taxonomy):
+    """The map's own totals, as baseline figures (owner, 2026-10-11, for
+    Analytics): `storefronts`, and `storefronts_<category>` for each of
+    CATEGORY_BUCKETS the city has (retail, food_service, personal_services).
+    Counted HERE, on the rows the map can show - placed, and past the
+    contact-detail screen - so they match the map; a step 2 count is taken
+    before that screen (Rouen and Seattle differed by one row). A city whose
+    step 2 emits the same key is overridden by this later figure. A row no
+    bucket takes counts in `storefronts` only."""
+    class_cols = [taxonomy.VALUE_COLUMN, *getattr(taxonomy, "EXTRA_COLUMNS", ())]
+    buckets = pd.Series([taxonomy.classify(dict(zip(class_cols, values)))
+                         for values in zip(*(businesses[c] for c in class_cols))], dtype="object")
+    counts = buckets.value_counts()
+    emit("storefronts", int(len(businesses)))
+    for bucket, _colour in CATEGORY_BUCKETS:
+        if counts.get(bucket, 0):
+            emit("storefronts_" + re.sub(r"[^a-z]+", "_", bucket.lower()).strip("_"), int(counts[bucket]))
 
 
 def drop_contact_details(businesses):
@@ -3052,6 +4128,918 @@ OSM_ATTRIBUTION = (
 )
 
 
+# THE OPEN BASEMAP (PROTOTYPE, DECISIONS.md 2026-10-07 "Four ideas assessed",
+# item 4). tile.openstreetmap.org forbids offline use and CARTO's terms forbid
+# caching, so the open choice is Protomaps' OpenStreetMap build (code BSD-3,
+# styles CC0, tiles an ODbL produced work) in one PMTiles file per city, read
+# by HTTP range request and drawn by MapLibre GL (BSD-3) inside Leaflet
+# through maplibre-gl-leaflet (ISC). Its credit is OSM_ATTRIBUTION, carried
+# by the outer layer, so it stays in Leaflet's own control and never doubles:
+# the GL layer is built with attributionControl false, which makes the
+# plugin add nothing. The libraries load only when a reader picks "Travel",
+# so the default view costs nothing new. Versions are pinned: maplibre-gl 6
+# ships ES modules only, which the plugin cannot read.
+OPEN_BASEMAP_LIBS = (
+    "https://cdn.jsdelivr.net/npm/maplibre-gl@5.24.0/dist/maplibre-gl.css",
+    "https://cdn.jsdelivr.net/npm/maplibre-gl@5.24.0/dist/maplibre-gl.js",
+    "https://cdn.jsdelivr.net/npm/@maplibre/maplibre-gl-leaflet@0.1.4/leaflet-maplibre-gl.js",
+    "https://cdn.jsdelivr.net/npm/pmtiles@4.5.0/dist/pmtiles.js",
+    "https://cdn.jsdelivr.net/npm/@protomaps/basemaps@5.7.2/dist/basemaps.js",
+)
+# Glyphs and sprites for the Protomaps style. Its own hosted copy for the
+# prototype; a release self-hosts them beside the packs.
+OPEN_BASEMAP_ASSETS = "https://protomaps.github.io/basemaps-assets"
+# The shared Travel style (pipeline/travel_style.js): one file for the site's
+# Travel view and the full Travel version, so the two never drift apart.
+# Inlined into each OpenBasemap layer, comments included: it names no other
+# project (owner, 2026-10-12).
+TRAVEL_STYLE_JS = Path(__file__).with_name("travel_style.js").read_text(encoding="utf-8")
+# Ferry and lift colours read from the style itself, so a legend swatch can
+# never drift from the line it explains.
+_FERRY = re.search(r'var FERRY = \{site: "(#[0-9a-f]{6})", full: "(#[0-9a-f]{6})", '
+                   r'siteDark: "(#[0-9a-f]{6})", fullDark: "(#[0-9a-f]{6})"', TRAVEL_STYLE_JS)
+_AERIAL = re.search(r'var AERIALWAY = \{color: "(#[0-9a-f]{6})", colorDark: "(#[0-9a-f]{6})"',
+                    TRAVEL_STYLE_JS)
+if not (_FERRY and _AERIAL):
+    raise ValueError("pipeline/travel_style.js: FERRY or AERIALWAY colours not found")
+# Per variant and kind: (light, dark), the dark one drawn with the dark flavor.
+TRAVEL_ROUTE_COLOURS = {"site": {"ferry": (_FERRY[1], _FERRY[3]), "aerialway": (_AERIAL[1], _AERIAL[2])},
+                        "full": {"ferry": (_FERRY[2], _FERRY[4]), "aerialway": (_AERIAL[1], _AERIAL[2])}}
+# Legend rows for the routes, drawn as the map draws them: ferries dashed,
+# lifts a thin line with cross ticks. Same row layout as LEGEND_LINE_ROW, but
+# not .hm-line-row: these are basemap features, not lines a reader can
+# highlight, and the label and coverage checks count .hm-line-row as lines.
+# The colour is a custom property with a .dark-base override, so a swatch
+# follows the map's flavor as the route does.
+TRAVEL_ROUTE_ROWS = {
+    "ferry": """
+  <div class="hm-route-row hm-route-ferry" style="display:flex; align-items:center; margin:3px 0;">
+    <span style="display:inline-block; width:16px; height:3px; margin-right:7px;
+      background:repeating-linear-gradient(90deg, var(--hm-route) 0 5px, transparent 5px 8px);"></span>{label}
+  </div>""",
+    "aerialway": """
+  <div class="hm-route-row hm-route-aerialway" style="display:flex; align-items:center; margin:3px 0;">
+    <span style="display:inline-block; width:16px; height:9px; margin-right:7px;
+      background:linear-gradient(var(--hm-route), var(--hm-route)) center / 100% 2px no-repeat,
+        repeating-linear-gradient(90deg, var(--hm-route) 0 1.5px, transparent 1.5px 6px);"></span>{label}
+  </div>""",
+}
+TRAVEL_ROUTE_STYLE = ("<style>.hm-route-{kind} {{ --hm-route: {light}; }} "
+                      ".dark-base .hm-route-{kind} {{ --hm-route: {dark}; }}</style>")
+
+
+class OpenBasemap(folium.map.Layer):
+    """A base layer drawn from one city's PMTiles pack, loaded on first use.
+
+    pmtiles_url: an absolute http(s) URL the browser can range-request.
+    local_lang: the city's language as Protomaps names it ("es", "ja"), or
+    None. Labels are English by default in every city, falling back to the
+    feature's own name where OSM has no English one (owner, 2026-10-08);
+    with local_lang set, a small "EN | local" pill under the layer menu (top left),
+    shown only while this layer is on, switches them to the local language
+    and is remembered. Both come from the same pack, which carries every
+    name a feature has, so switching fetches nothing.
+    local_name: the pill's text for the local language (default the code
+    in capitals).
+    variant: "site" (the site's Travel view) or "full" (the full Travel
+    version; travel_style.js gives it its own ferry colour). libs and
+    assets: the library URLs and the glyph folder, relative to the page or
+    absolute; default the pinned CDN copies. pmtiles_url and assets may be
+    relative: the script resolves them against the page.
+    """
+
+    _template = Template("""
+        {% macro script(this, kwargs) %}
+        var {{ this.get_name() }} = (function () {
+            var LIBS = {{ this.libs|tojson }}, loading = null;
+            function load() {
+                if (loading) return loading;
+                loading = LIBS.reduce(function (p, url) {
+                    return p.then(function () {
+                        return new Promise(function (ok, fail) {
+                            var css = /[.]css$/.test(url);
+                            var el = document.createElement(css ? "link" : "script");
+                            if (css) { el.rel = "stylesheet"; el.href = url; }
+                            else { el.src = url; }
+                            el.onload = ok; el.onerror = fail;
+                            document.head.appendChild(el);
+                        });
+                    });
+                }, Promise.resolve()).then(function () {
+                    var protocol = new pmtiles.Protocol();
+                    maplibregl.addProtocol("pmtiles", protocol.tile);
+                });
+                return loading;
+            }
+            {{ this.travel_style_js }}
+            var LOCAL = {{ this.local_lang|tojson }}, LOCAL_NAME = {{ this.local_name|tojson }};
+            var LANG_KEY = "expanded-heatmap-labels";
+            function savedLang() {
+                try { return localStorage.getItem(LANG_KEY) === "local" && LOCAL ? LOCAL : "en"; }
+                catch (e) { return "en"; }
+            }
+            var lang = savedLang();
+            // Dark mode draws Protomaps' own dark flavor (owner, 2026-10-07)
+            // in place of the tile pane's invert filter, which the map's
+            // container class switches off while this layer is on. The GL
+            // map restyles when the Dark mode button flips body.dark-base.
+            function flavor() {
+                return document.body.classList.contains("dark-base") ? "dark" : "light";
+            }
+            var shown = null;
+            function restyle() {
+                var gl = layer && layer._gl && layer._gl._glMap;
+                if (!gl || shown === flavor() + lang) return;
+                layer._gl.options.style = styleFor(lang);
+                gl.setStyle(layer._gl.options.style);
+            }
+            if (!document.getElementById("hm-gl-css")) {
+                var glCss = document.createElement("style");
+                glCss.id = "hm-gl-css";
+                glCss.textContent = ".dark-base .hm-gl-base .leaflet-tile-pane{filter:none}";
+                document.head.appendChild(glCss);
+            }
+            if (window.MutationObserver) {
+                new MutationObserver(restyle).observe(document.body,
+                    {attributes: true, attributeFilter: ["class"]});
+            }
+            function styleFor(code) {
+                var f = flavor();
+                shown = f + code;
+                return {
+                    version: 8,
+                    glyphs: new URL({{ this.assets|tojson }}, location.href).href + "/fonts/{fontstack}/{range}.pbf",
+                    sources: {protomaps: {
+                        type: "vector",
+                        url: "pmtiles://" + new URL({{ this.pmtiles_url|tojson }}, location.href).href
+                    }},
+                    layers: travelStyle(basemaps.layers("protomaps",
+                        basemaps.namedFlavor(f), {lang: code}),
+                        {flavor: f, variant: {{ this.variant|tojson }}, lang: code})
+                };
+            }
+            // The label pill: two buttons in a Leaflet bar stacked under the
+            // layer menu (top left; the top right is under the fixed
+            // #map-actions buttons, which hid the pill and took its taps,
+            // measured 2026-10-08), added and removed with this layer, so the
+            // Business view never shows it.
+            var PILL_CSS = ".hm-lang{display:flex;overflow:hidden}" +
+                ".hm-lang button{border:0;margin:0;padding:0 10px;min-width:40px;height:34px;" +
+                "background:#fff;color:#333;font:600 13px/34px var(--hm-font,sans-serif);cursor:pointer}" +
+                ".hm-lang button+button{border-left:1px solid #ccc}" +
+                ".hm-lang button[aria-pressed=true]{background:#333;color:#fff}" +
+                ".dark-base .hm-lang button{background:var(--dm-surface);color:var(--dm-text)}" +
+                ".dark-base .hm-lang button+button{border-left-color:var(--dm-border)}" +
+                ".dark-base .hm-lang button[aria-pressed=true]{background:var(--dm-text);color:var(--dm-surface)}";
+            var Pill = L.Control.extend({
+                options: {position: "topleft"},
+                onAdd: function () {
+                    if (!document.getElementById("hm-lang-css")) {
+                        var css = document.createElement("style");
+                        css.id = "hm-lang-css"; css.textContent = PILL_CSS;
+                        document.head.appendChild(css);
+                    }
+                    var box = L.DomUtil.create("div", "leaflet-bar hm-lang");
+                    box.setAttribute("role", "group");
+                    box.setAttribute("aria-label", "Map label language");
+                    var self = this;
+                    self._buttons = [["en", "EN"], [LOCAL, LOCAL_NAME]].map(function (b) {
+                        var btn = L.DomUtil.create("button", "", box);
+                        btn.type = "button"; btn.textContent = b[1];
+                        btn.setAttribute("data-lang", b[0]);
+                        btn.addEventListener("click", function () { self.choose(b[0]); });
+                        return btn;
+                    });
+                    L.DomEvent.disableClickPropagation(box);
+                    self.mark();
+                    return box;
+                },
+                mark: function () {
+                    (this._buttons || []).forEach(function (btn) {
+                        btn.setAttribute("aria-pressed", btn.getAttribute("data-lang") === lang ? "true" : "false");
+                    });
+                },
+                choose: function (code) {
+                    if (code === lang) return;
+                    lang = code;
+                    try { localStorage.setItem(LANG_KEY, code === "en" ? "en" : "local"); } catch (e) {}
+                    this.mark();
+                    restyle();
+                }
+            });
+            var pill = LOCAL ? new Pill() : null;
+            // A zoom range as OSM's tiles give it, registered the way Leaflet's
+            // tile layers register theirs (beforeAdd / onRemove): the map takes
+            // its maximum zoom only from such layers, and with this one alone
+            // Leaflet.markercluster threw "Map has no maxZoom specified" when a
+            // pin layer was turned back on (measured 2026-10-07). The GL map
+            // overzooms past the pack's own zoom 15.
+            var Layer = L.Layer.extend({
+                options: {attribution: {{ this.attribution|tojson }}, minZoom: 0, maxZoom: 19},
+                beforeAdd: function (map) {
+                    if (map._addZoomLimit) map._addZoomLimit(this);
+                },
+                onAdd: function (map) {
+                    var self = this;
+                    self._active = true;
+                    map.getContainer().classList.add("hm-gl-base");
+                    if (pill) pill.addTo(map);
+                    load().then(function () {
+                        if (!self._active) return;
+                        if (!self._gl) self._gl = L.maplibreGL({attributionControl: false});
+                        // The plugin builds a new GL map from its options on
+                        // every add, so the style is set afresh each time: a
+                        // flavor or label language chosen while the layer was
+                        // off is the one drawn.
+                        self._gl.options.style = styleFor(lang);
+                        self._gl.addTo(map);
+                    });
+                },
+                onRemove: function (map) {
+                    this._active = false;
+                    map.getContainer().classList.remove("hm-gl-base");
+                    if (pill) pill.remove();
+                    if (this._gl) map.removeLayer(this._gl);
+                    if (map._removeZoomLimit) map._removeZoomLimit(this);
+                }
+            });
+            var layer = new Layer();
+            return layer;
+        })();
+        {% endmacro %}
+    """)
+
+    def __init__(self, pmtiles_url, *, name="Travel", local_lang=None, local_name=None, show=False,
+                 variant="site", libs=None, assets=None, control=True):
+        super().__init__(name=name, overlay=False, control=control, show=show)
+        self._name = "OpenBasemap"
+        self.pmtiles_url = pmtiles_url
+        self.local_lang = local_lang if local_lang and local_lang != "en" else None
+        self.local_name = local_name or (self.local_lang or "").upper()
+        if variant not in ("site", "full"):
+            raise ValueError(f"OpenBasemap variant {variant!r}: 'site' or 'full'")
+        self.variant = variant
+        self.libs = list(libs or OPEN_BASEMAP_LIBS)
+        self.assets = assets or OPEN_BASEMAP_ASSETS
+        self.travel_style_js = TRAVEL_STYLE_JS
+        self.attribution = OSM_ATTRIBUTION
+
+
+# THE FULL TRAVEL VERSION (owner, 2026-10-07/08; the drafts log has the
+# reasoning). The Travel basemap alone, stations, lines, their legend and the
+# OSM credit, with no business data at all; a template for the travel app,
+# so map content only. It differs from the site's Travel view in:
+#   * no Business base layer, no heat, rings or pins, no business legend;
+#   * the page fills its window and loads nothing from outside its own
+#     folder when given `lib` (offline);
+#   * lines carry casings and stations are white dots with a dark ring,
+#     both sized by zoom from FULL_ZOOM_TABLE;
+#   * line labels are pills that follow the part of each line in view;
+#   * a "Station names" item in the layer menu;
+#   * one finger pans the map (no cooperative gestures: the page is the map,
+#     with no page around it to scroll).
+# Leaflet 1.9.3 (folium 0.20's pin) and the Travel view's own libraries.
+FULL_TRAVEL_CDN = {
+    "leaflet.js": "https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js",
+    "leaflet.css": "https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css",
+}
+# OPEN_BASEMAP_LIBS by file name, as they sit in the offline `lib` folder.
+FULL_TRAVEL_GL_FILES = ("maplibre-gl.css", "maplibre-gl.js", "leaflet-maplibre-gl.js",
+                        "pmtiles.js", "basemaps.js")
+# (zoom, station dot radius px, line width px), interpolated between rows; an
+# interchange's dot is FULL_INTERCHANGE_STEP px larger, and a casing adds
+# FULL_CASING_PX each side. A pilot table, set on screenshots of the densest
+# network (Tokyo) in light and dark; the app draws the same idea as a
+# MapLibre zoom curve. Touch reach does not shrink with the dot:
+# TAP_SELECT_SCRIPT's REACH keeps a 44 px target at every size.
+FULL_ZOOM_TABLE = ((10, 2.0, 2.0), (12, 3.0, 3.0), (13, 4.0, 3.5), (14, 5.0, 4.5),
+                   (15, 6.0, 5.5), (17, 8.0, 7.0))
+FULL_INTERCHANGE_STEP = 1.5
+FULL_CASING_PX = 1.5
+# The station ring: dark, and deliberately not LIGHT["station"], which the
+# site's dark-theme rule recolours.
+FULL_DOT_RING = "#222222"
+# Layer names the full version may never carry (the owner's hard line,
+# 2026-10-07): checked on the written file, so no path can slip one in.
+FULL_FORBIDDEN = ("Concentric Ring", "Commercial Density", "Business Category",
+                  "markerClusterGroup", "L.heatLayer", "heatLayer(")
+
+FULL_TRAVEL_SCRIPT = """
+<style>
+.hm-pill-icon { background: none; border: 0; }
+.leaflet-container { background: #f2f1ee; }
+.dark-base .leaflet-container { background: var(--dm-page); }
+.hm-line-pill { position: absolute; left: 0; top: 0; transform: translate(-50%, -50%);
+    padding: 1px 8px; border-radius: 999px; border: 1.5px solid #fff;
+    font: 700 12px/16px @@FONT@@; white-space: nowrap; cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.35); }
+.dark-base .hm-line-pill { border-color: var(--dm-page); }
+.hm-line-pill.hm-dim { opacity: 0.35; }
+.hm-off { display: none !important; }
+.hm-stn-name { position: absolute; left: 0; top: 0; white-space: nowrap; pointer-events: none;
+    font: 600 12px/14px @@FONT@@; color: @@TEXT@@;
+    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff, 0 0 4px #fff; }
+.dark-base .hm-stn-name { color: var(--dm-text);
+    text-shadow: -1px -1px 0 var(--dm-page), 1px -1px 0 var(--dm-page), -1px 1px 0 var(--dm-page),
+                 1px 1px 0 var(--dm-page), 0 0 4px var(--dm-page); }
+.hm-stn-name.hm-dim { opacity: 0.45; }
+.hm-stn-name.hm-hot { color: var(--hm-c-light); }
+.dark-base .hm-stn-name.hm-hot { color: var(--hm-c-dark); }
+.leaflet-overlay-pane path.hm-casing { stroke: #ffffff; }
+.dark-base .leaflet-overlay-pane path.hm-casing { stroke: var(--dm-page); }
+.leaflet-overlay-pane path.hm-casing.hm-dim { stroke-opacity: 0.25; }
+.dark-base .leaflet-overlay-pane path.hm-line { filter: brightness(1.55) saturate(0.9); }
+.leaflet-overlay-pane path.hm-line.hm-hot { stroke-width: var(--hm-hot-w, 7px); }
+</style>
+<script>
+(function () {
+    var NAME = "__MAP_NAME__", BASE = "__BASE_NAME__", NAMES = "__NAMES_NAME__";
+    var LINES = __LINES__, TABLE = __ZOOM_TABLE__, STEP = __STEP__, CASING = __CASING__;
+    var BOUNDS = __BOUNDS__, CREDITS = __CREDITS__;
+    var MARGIN = 6;        // px kept clear inside the map's edge
+    var MIN_RUN = 40;       // px of a line in view before it earns a label
+    var GAP = 3;            // px between any two labels
+    var STEP_PX = 16;       // px between the spots a label tries along its line
+    var tries = 0;
+
+    function size(z, col) {
+        if (z <= TABLE[0][0]) return TABLE[0][col];
+        for (var i = 1; i < TABLE.length; i++) {
+            if (z <= TABLE[i][0]) {
+                var a = TABLE[i - 1], b = TABLE[i], t = (z - a[0]) / (b[0] - a[0]);
+                return a[col] + t * (b[col] - a[col]);
+            }
+        }
+        return TABLE[TABLE.length - 1][col];
+    }
+    function classes(l) {
+        var c = l.options && l.options.className;
+        return typeof c === "string" ? c.split(" ") : [];
+    }
+    function suffix(cs, prefix) {
+        for (var i = 0; i < cs.length; i++) {
+            if (cs[i].indexOf(prefix) === 0 && cs[i].length > prefix.length) return cs[i].slice(prefix.length);
+        }
+        return null;
+    }
+
+    function start() {
+        var m = window[NAME], base = BASE ? window[BASE] : null, group = window[NAMES];
+        if (!m || (BASE && !base) || !group) {
+            if (tries++ < 60) setTimeout(start, 100);
+            return;
+        }
+        if (base && !m.hasLayer(base)) m.addLayer(base);
+        // Credits the lines and stations need beside the basemap's own
+        // (or in place of it, on a page with no basemap).
+        CREDITS.forEach(function (c) { m.attributionControl.addAttribution(c); });
+        var el = m.getContainer();
+        var polys = {}, casings = {}, dots = [];
+        m.eachLayer(function (l) {
+            var cs = classes(l), k;
+            if (cs.indexOf("hm-line") >= 0 && (k = suffix(cs, "hm-line-")) !== null) {
+                (polys[k] = polys[k] || []).push(l);
+            } else if ((k = suffix(cs, "hm-casing-")) !== null) {
+                (casings[k] = casings[k] || []).push(l);
+            } else if (cs.indexOf("hm-stn") >= 0) {
+                dots.push({layer: l, xfer: cs.indexOf("hm-xfer") >= 0,
+                           on: cs.filter(function (c) { return c.indexOf("hm-on-") === 0; })
+                                 .map(function (c) { return c.slice(6); })});
+            }
+        });
+        var byLine = {};
+        LINES.forEach(function (ln) { byLine[String(ln.n)] = ln; });
+
+        // One pill per line, moved to the part of its line in view.
+        var pills = LINES.map(function (ln) {
+            var html = '<div class="hm-line-pill" data-line="' + ln.n + '" style="background:' + ln.bg +
+                       ';color:' + ln.fg + '">' + ln.html + '</div>';
+            var mk = L.marker(m.getCenter(), {keyboard: false, zIndexOffset: 1000,
+                icon: L.divIcon({className: "hm-pill-icon", html: html, iconSize: [0, 0], iconAnchor: [0, 0]})});
+            // A pill picks its line, as its legend row does.
+            mk.on("click", function () {
+                var row = document.querySelector('.map-legend .hm-line-row[data-line="' + ln.n + '"]');
+                if (row) row.click();
+            });
+            return {ln: ln, mk: mk, w: 0, h: 0, at: null};
+        });
+        function pillEl(p) { return p.mk._icon ? p.mk._icon.firstChild : null; }
+
+        function rectOf(node) {
+            var a = node.getBoundingClientRect(), c = el.getBoundingClientRect();
+            return {l: a.left - c.left, t: a.top - c.top, r: a.right - c.left, b: a.bottom - c.top};
+        }
+        function hit(a, b) {
+            return a.l < b.r + GAP && a.r > b.l - GAP && a.t < b.b + GAP && a.b > b.t - GAP;
+        }
+        function hitAny(a, list) {
+            for (var i = 0; i < list.length; i++) if (hit(a, list[i])) return true;
+            return false;
+        }
+        function inside(a, s) {
+            return a.l >= MARGIN && a.t >= MARGIN && a.r <= s.x - MARGIN && a.b <= s.y - MARGIN;
+        }
+        function controls() {
+            var out = [], nodes = el.querySelectorAll(".leaflet-control");
+            for (var i = 0; i < nodes.length; i++) out.push(rectOf(nodes[i]));
+            ["map-actions"].forEach(function (id) {
+                var n = document.getElementById(id);
+                if (n) out.push(rectOf(n));
+            });
+            var lg = document.querySelector("details.map-legend"), tp = document.querySelector(".hm-tap-panel.hm-shown");
+            if (lg) out.push(rectOf(lg));
+            if (tp) out.push(rectOf(tp));
+            return out.filter(function (r) { return r.r > r.l && r.b > r.t; });
+        }
+
+        // The part of line k inside the map, in container pixels, as runs
+        // of clipped segments with their distance along the visible part.
+        // Projected from the line's own coordinates, not Leaflet's `_parts`:
+        // those are re-projected only after `zoomend` and `moveend` have
+        // fired (on `viewreset`), so a label placed from them after a zoom
+        // landed up to 600 px off its line (Tokyo, measured 2026-10-08).
+        function visible(k, s) {
+            var box = L.bounds([MARGIN, MARGIN], [s.x - MARGIN, s.y - MARGIN]);
+            var view = m.getBounds().pad(0.05);
+            var segs = [], total = 0;
+            (polys[k] || []).forEach(function (p) {
+                if (!view.intersects(p.getBounds())) return;
+                var ll = p.getLatLngs();
+                (L.LineUtil.isFlat(ll) ? [ll] : ll).forEach(function (run) {
+                    var prev = null;
+                    run.forEach(function (x) {
+                        var b = m.latLngToContainerPoint(x);
+                        if (prev) {
+                            var c = L.LineUtil.clipSegment(prev, b, box, false, false);
+                            var len = c ? c[0].distanceTo(c[1]) : 0;
+                            if (len) {
+                                segs.push({a: c[0], b: c[1], from: total, len: len});
+                                total += len;
+                            }
+                        }
+                        prev = b;
+                    });
+                });
+            });
+            return {segs: segs, total: total};
+        }
+        function along(run, d) {
+            for (var i = 0; i < run.segs.length; i++) {
+                var g = run.segs[i];
+                if (d <= g.from + g.len) {
+                    var t = (d - g.from) / g.len;
+                    return L.point(g.a.x + t * (g.b.x - g.a.x), g.a.y + t * (g.b.y - g.a.y));
+                }
+            }
+            return null;
+        }
+
+        var shown = null;       // the highlighted line, as LINE_HIGHLIGHT_SCRIPT draws it
+        function place() {
+            var s = m.getSize(), taken = controls(), dotRects = [];
+            dots.forEach(function (d) {
+                if (!d.layer._map) return;
+                var q = m.latLngToContainerPoint(d.layer.getLatLng()), r = d.layer.getRadius() + 2;
+                d.q = q; d.r = r;
+                dotRects.push({l: q.x - r, t: q.y - r, r: q.x + r, b: q.y + r, dot: d});
+            });
+            var runs = {};
+            pills.forEach(function (p) { runs[p.ln.n] = visible(String(p.ln.n), s); });
+            var order = pills.slice().sort(function (a, b) {
+                var ha = String(a.ln.n) === shown ? 0 : 1, hb = String(b.ln.n) === shown ? 0 : 1;
+                if (ha !== hb) return ha - hb;
+                var pa = a.at ? 0 : 1, pb = b.at ? 0 : 1;
+                if (pa !== pb) return pa - pb;
+                return runs[b.ln.n].total - runs[a.ln.n].total;
+            });
+            var placed = [];
+            order.forEach(function (p) {
+                var run = runs[p.ln.n];
+                // The picked line always gets its pill while any of it is in
+                // view, even zoomed far out (owner, 2026-10-08): it needs no
+                // minimum run, and when no clear spot is left it may cover
+                // station dots (a second pass below).
+                var hot = String(p.ln.n) === shown;
+                if (run.total < (hot ? 1 : MIN_RUN)) { hide(p); return; }
+                if (!p.mk._map) p.mk.addTo(m);
+                var div = pillEl(p);
+                div.classList.remove("hm-off");
+                p.w = div.offsetWidth; p.h = div.offsetHeight;
+                var spots = [];
+                // Keep the last spot while it still works, so a pan does not
+                // make a label jump along its line.
+                if (p.at) spots.push(m.latLngToContainerPoint(p.at));
+                // Then every STEP_PX along the part in view, middle first.
+                var n = Math.max(1, Math.floor(run.total / STEP_PX)), ds = [];
+                for (var j = 0; j <= n; j++) ds.push(j * run.total / n);
+                ds.sort(function (a, b) { return Math.abs(a - run.total / 2) - Math.abs(b - run.total / 2); });
+                ds.forEach(function (d) { spots.push(along(run, d)); });
+                var won = null;
+                for (var pass = 0; pass < (hot ? 2 : 1) && !won; pass++) {
+                    for (var i = 0; i < spots.length && !won; i++) {
+                        var q = spots[i];
+                        if (!q) continue;
+                        var box = {l: q.x - p.w / 2, t: q.y - p.h / 2, r: q.x + p.w / 2, b: q.y + p.h / 2};
+                        if (!inside(box, s) || hitAny(box, taken) || hitAny(box, placed)) continue;
+                        if (pass === 0 && hitAny(box, dotRects)) continue;
+                        won = {q: q, box: box};
+                    }
+                }
+                if (!won) { hide(p); return; }
+                p.at = m.containerPointToLatLng(won.q);
+                p.mk.setLatLng(p.at);
+                placed.push(won.box);
+            });
+            names(s, taken.concat(placed), dotRects);
+        }
+        function hide(p) {
+            p.at = null;
+            var div = pillEl(p);
+            if (div) div.classList.add("hm-off");
+        }
+
+        // Station names, when the layer menu has them on: interchanges first,
+        // then the highlighted line's stations, each beside its dot on the
+        // first side clear of every label, control and other dot.
+        function names(s, taken, dotRects) {
+            if (!m.hasLayer(group)) return;
+            var items = [];
+            group.eachLayer(function (mk) {
+                var div = mk._icon && mk._icon.firstChild;
+                if (!div) return;
+                var i = +div.getAttribute("data-stn"), d = dots[i];
+                items.push({div: div, d: d, rank: (d && d.xfer ? 0 : 2) -
+                            (d && shown !== null && d.on.indexOf(shown) >= 0 ? 1 : 0), i: i});
+            });
+            items.sort(function (a, b) { return a.rank - b.rank || a.i - b.i; });
+            var placed = [];
+            items.forEach(function (it) {
+                var div = it.div, d = it.d;
+                if (!d || !d.q) { div.classList.add("hm-off"); return; }
+                div.classList.remove("hm-off");
+                div.style.transform = "none";
+                var w = div.offsetWidth, h = div.offsetHeight, q = d.q, r = d.r + 1;
+                var sides = [
+                    [r, -h / 2], [-w - r, -h / 2], [-w / 2, -h - r], [-w / 2, r]
+                ];
+                var won = null;
+                for (var j = 0; j < sides.length && !won; j++) {
+                    var box = {l: q.x + sides[j][0], t: q.y + sides[j][1]};
+                    box.r = box.l + w; box.b = box.t + h;
+                    if (!inside(box, s) || hitAny(box, taken) || hitAny(box, placed)) continue;
+                    var blocked = false;
+                    for (var k = 0; k < dotRects.length && !blocked; k++) {
+                        if (dotRects[k].dot !== d && hit(box, dotRects[k])) blocked = true;
+                    }
+                    if (!blocked) won = {box: box, dx: sides[j][0], dy: sides[j][1]};
+                }
+                if (!won) { div.classList.add("hm-off"); return; }
+                div.style.transform = "translate(" + won.dx.toFixed(1) + "px," + won.dy.toFixed(1) + "px)";
+                placed.push(won.box);
+                var on = shown !== null && d.on.indexOf(shown) >= 0;
+                div.classList.toggle("hm-hot", on);
+                div.classList.toggle("hm-dim", shown !== null && !on);
+                if (on) {
+                    div.style.setProperty("--hm-c-light", byLine[shown].light);
+                    div.style.setProperty("--hm-c-dark", byLine[shown].dark);
+                }
+            });
+        }
+
+        // Sizes by zoom: dots, lines and casings from the table.
+        function resize() {
+            var z = m.getZoom(), r = size(z, 1), w = size(z, 2);
+            el.style.setProperty("--hm-hot-w", (w + 3).toFixed(1) + "px");
+            Object.keys(polys).forEach(function (k) {
+                polys[k].forEach(function (p) { p.setStyle({weight: w}); });
+            });
+            Object.keys(casings).forEach(function (k) {
+                casings[k].forEach(function (p) { p.setStyle({weight: w + 2 * CASING}); });
+            });
+            dots.forEach(function (d) { d.layer.setRadius(d.xfer ? r + STEP : r); });
+        }
+
+        // The highlight is LINE_HIGHLIGHT_SCRIPT's: it marks the picked
+        // line's paths `hm-hot`. Casings, pills and names follow it.
+        function follow() {
+            var h = null;
+            Object.keys(polys).forEach(function (k) {
+                if (polys[k].some(function (p) { return p._path && p._path.classList.contains("hm-hot"); })) h = k;
+            });
+            if (h === shown) return;
+            shown = h;
+            Object.keys(casings).forEach(function (k) {
+                casings[k].forEach(function (p) {
+                    if (p._path) p._path.classList.toggle("hm-dim", h !== null && k !== h);
+                });
+            });
+            pills.forEach(function (p) {
+                var div = pillEl(p);
+                if (!div) return;
+                div.classList.toggle("hm-dim", h !== null && String(p.ln.n) !== h);
+                // An edited code shows the official one beside it while picked.
+                if (p.ln.official) {
+                    div.innerHTML = p.ln.html + (String(p.ln.n) === h ? " &middot; signed " + p.ln.official : "");
+                }
+            });
+            place();
+        }
+        var watch = new MutationObserver(follow);
+        Object.keys(polys).forEach(function (k) {
+            polys[k].forEach(function (p) {
+                if (p._path) watch.observe(p._path, {attributes: true, attributeFilter: ["class"]});
+            });
+        });
+
+        // Placed on the next frame, once every handler of the move (the
+        // renderer's included) has run, and once however many events fired.
+        var frame = null;
+        function later() {
+            if (frame !== null) cancelAnimationFrame(frame);
+            frame = requestAnimationFrame(function () { frame = null; place(); });
+        }
+        m.on("zoomend", function () { resize(); later(); });
+        m.on("moveend viewreset overlayadd overlayremove", later);
+        window.addEventListener("resize", later);
+        var legend = document.querySelector("details.map-legend");
+        if (legend) legend.addEventListener("toggle", later);
+
+        // THE CREDIT STAYS UNCOVERED. A line source's credit beside OSM's can
+        // wrap to three lines on a phone (Tokyo's, 2026-10-08), so the legend
+        // and the tap panel, both fixed 24 px above the bottom, would cover
+        // it. Both sit CLEAR px above the credit's top instead, whatever its
+        // height; the panel is re-checked whenever its script moves it.
+        var CLEAR = 10;
+        function creditTop() {
+            var a = el.querySelector(".leaflet-control-attribution");
+            if (!a) return 24;
+            var vh = document.documentElement.clientHeight || window.innerHeight;
+            return Math.max(24, Math.ceil(vh - a.getBoundingClientRect().top) + CLEAR);
+        }
+        // A station tapped on a phone folds an open legend away, so the
+        // station's panel gets the room (owner, 2026-10-08, on trial). Safe
+        // because taps never pass through the legend: it sits outside the
+        // map, and station taps are caught by the map alone.
+        var coarse = window.matchMedia ? window.matchMedia("(pointer: coarse)") : null;
+        var panelWasShown = false;
+        function foldOnTap(panel) {
+            var shown = panel.classList.contains("hm-shown");
+            if (shown && !panelWasShown && coarse && coarse.matches && legend && legend.open) {
+                legend.open = false;
+            }
+            panelWasShown = shown;
+        }
+        // And the other way round (owner, 2026-10-08, on trial): opening the
+        // legend closes a station's panel, through the panel's own close
+        // button so its ring goes too. The side-by-side layout of an open
+        // legend and panel stays as the fallback for anything unusual.
+        if (legend) legend.addEventListener("toggle", function () {
+            if (!legend.open) return;
+            var panel = document.querySelector(".hm-tap-panel.hm-shown");
+            var close = panel && panel.querySelector(".hm-tap-close");
+            if (close) close.click();
+        });
+        // The panel is made by TAP_SELECT_SCRIPT, which may start after this
+        // script, so it is watched from the first time it is found.
+        var watched = false;
+        function clearCredit() {
+            var b = creditTop() + "px";
+            if (legend && legend.style.bottom !== b) legend.style.bottom = b;
+            // Raised, the legend must also stop below the button row: the
+            // shared cap assumes a 24 px bottom, and Tokyo's 52 rows then
+            // ran up under Dark mode on a phone (owner, 2026-10-08).
+            if (legend) {
+                var vh = document.documentElement.clientHeight || window.innerHeight;
+                var top = __TOP_CLEAR__;
+                var actions = document.getElementById("map-actions");
+                if (actions) top = Math.max(top, actions.getBoundingClientRect().bottom + 8);
+                var cap = Math.max(80, Math.floor(vh - creditTop() - top)) + "px";
+                if (legend.style.maxHeight !== cap) legend.style.maxHeight = cap;
+            }
+            var panel = document.querySelector(".hm-tap-panel");
+            if (!panel) return;
+            if (!watched) {
+                watched = true;
+                new MutationObserver(function () { foldOnTap(panel); clearCredit(); })
+                    .observe(panel, {attributes: true, attributeFilter: ["style", "class"]});
+            }
+            if (panel.style.bottom && panel.style.bottom !== "auto" &&
+                parseFloat(panel.style.bottom) < creditTop()) panel.style.bottom = b;
+        }
+        window.addEventListener("resize", clearCredit);
+        m.on("moveend", clearCredit);
+        clearCredit();
+        setTimeout(clearCredit, 500);
+        // Fitted once the map has a size: a page opened in a hidden tab
+        // measures 0 x 0 and would fit to the maximum zoom.
+        function fit(n) {
+            m.invalidateSize(false);
+            var s = m.getSize();
+            if ((!s.x || !s.y) && n < 150) { setTimeout(function () { fit(n + 1); }, 200); return; }
+            m.fitBounds(BOUNDS, {padding: [32, 32], animate: false});
+            resize();
+            later();
+        }
+        fit(0);
+    }
+    start();
+})();
+</script>
+"""
+
+
+def _station_lines(stations, lines, crs_geographic, crs_projected, reach_m=100.0):
+    """{station row position: [line order n, ...]}, for the full version's
+    interchange dots and station-name colours. From the stations' own
+    `lines` column where it names line keys (187 of 206 cities, 2026-10-08),
+    else every line within reach_m of the station, measured in the city's
+    projected CRS (never in degrees)."""
+    from pyproj import Transformer
+    from shapely.geometry import LineString, Point
+
+    order = {key: n for n, key in enumerate(lines)}
+    to_m = Transformer.from_crs(crs_geographic, crs_projected, always_xy=True)
+    shapes = {}
+    for key, (segments, *_rest) in lines.items():
+        shapes[key] = [LineString([to_m.transform(lon, lat) for lat, lon in seg])
+                       for seg in segments if len(seg) > 1]
+    out = {}
+    for i, row in enumerate(stations.itertuples()):
+        named = getattr(row, "lines", None)
+        keys = [k for k in re.split(r"[\s,;|/]+", named) if k in order] if isinstance(named, str) else []
+        if not keys:
+            p = Point(to_m.transform(row.longitude, row.latitude))
+            keys = [k for k, shp in shapes.items() if any(s.distance(p) <= reach_m for s in shp)]
+        out[i] = sorted({order[k] for k in keys})
+    return out
+
+
+def _render_full_travel(*, output_path, city_name, system_name, stations, lines,
+                        crs_geographic, crs_projected, center, zoom, lang, names,
+                        pmtiles_url, local_lang=None, local_name=None, routes=(), lib=None,
+                        credits=(), labels=None, colors=None):
+    """The full Travel version, for render_heatmap(full_travel=...).
+
+    lib: a folder (relative to the page) holding every library, the glyphs
+    (lib/fonts/<fontstack>/<range>.pbf) and nothing else: given, the page
+    loads nothing from any other host (checked on the written file).
+    Omitted, the pinned CDN copies (for development only).
+    pmtiles_url None: no basemap at all, the lines on a plain ground (a test
+    page whose city has no pack); the OSM credit is then shown on its own,
+    since the stations' English names, at least, come from OSM.
+    credits: HTML credits the lines and stations need (a feed's or a
+    government layer's), added to the map's credit corner.
+    labels: {line key: on-map label} replacing the site's labels here only.
+    Every line's label must differ from every other's (owner, 2026-10-08):
+    the site gives an operator's lines one code where its station numbering
+    does (Tokyo's KS, KK, SI, TS), which the full version does not.
+    colors: {line key: hex} replacing the site's drawn colours here only.
+    The site moves operators' colours to clear its business pins; the full
+    version has none, so it can draw the official colours (owner,
+    2026-10-08: as close to official as possible; distinguishing calls
+    between an operator's same-coloured lines come later)."""
+    if colors:
+        lines = {k: (segs, colors.get(k, color), label, end)
+                 for k, (segs, color, label, end) in lines.items()}
+    # Where a label is edited, the site's own label is the official one (the
+    # code on the operator's signs): the legend row and the station details
+    # give it alongside, and the line's pill adds it while the line is
+    # picked (owner, 2026-10-08), so a rider reading "KK" on the signs is
+    # never puzzled by the map's "KKA".
+    official = {}
+    if labels:
+        official = {k: label for k, (_s, _c, label, _e) in lines.items()
+                    if labels.get(k, label) != label}
+        lines = {k: (segs, color, labels.get(k, label), end)
+                 for k, (segs, color, label, end) in lines.items()}
+        names = {k: (f"{names.get(k, lines[k][2])} (signed {official[k]})" if k in official
+                     else names.get(k)) for k in lines if k in official or k in names}
+    seen = {}
+    for k, (_segs, _color, label, _end) in lines.items():
+        seen.setdefault(label, []).append(k)
+    shared = {label: keys for label, keys in seen.items() if len(keys) > 1}
+    if shared:
+        raise ValueError(f"{city_name}: lines share an on-map label in the full version: {shared}; "
+                         f"give each its own with full_travel['labels']")
+    pts = [(float(r.latitude), float(r.longitude)) for r in stations.itertuples()]
+    c, z = _fit_view(pts)
+    center = center or c
+    zoom = z if zoom is None else zoom
+    m = folium.Map(location=center, zoom_start=zoom, tiles=None, width="100%", height="100%",
+                   zoomSnap=0.25)
+    # Leaflet only: folium's jQuery, Bootstrap and icon fonts serve nothing
+    # this page draws, and each would be a request to another host.
+    m.default_js = [("leaflet", f"{lib}/leaflet.js" if lib else FULL_TRAVEL_CDN["leaflet.js"])]
+    m.default_css = [("leaflet_css", f"{lib}/leaflet.css" if lib else FULL_TRAVEL_CDN["leaflet.css"])]
+    base = OpenBasemap(
+        pmtiles_url, local_lang=local_lang, local_name=local_name, show=True, control=False,
+        variant="full", libs=[f"{lib}/{f}" for f in FULL_TRAVEL_GL_FILES] if lib else None,
+        assets=lib or None,
+    ).add_to(m) if pmtiles_url else None
+    credits = list(credits) + ([] if base else [OSM_ATTRIBUTION])
+
+    # Casings first, so no casing ever covers another line.
+    casing_layer = folium.FeatureGroup(name="Casings", control=False)
+    for n, (key, (segments, _color, _label, _end)) in enumerate(lines.items()):
+        for segment in segments:
+            folium.PolyLine(segment, color="#ffffff", weight=4 + 2 * FULL_CASING_PX, opacity=1,
+                            interactive=False, class_name=f"hm-casing hm-casing-{n}").add_to(casing_layer)
+    casing_layer.add_to(m)
+    for n, (key, (segments, color, label, _end)) in enumerate(lines.items()):
+        rail_layer = folium.FeatureGroup(name=f"{system_name}: {names.get(key, label)}", show=True,
+                                         control=False)
+        for segment in segments:
+            folium.PolyLine(segment, color=color, weight=4, opacity=1,
+                            class_name=f"hm-line hm-line-{n}").add_to(rail_layer)
+        rail_layer.add_to(m)
+
+    on = _station_lines(stations, lines, crs_geographic, crs_projected)
+    # A station's tooltip (and its tap panel) lists the lines it serves, each
+    # with its swatch and its legend name (owner, 2026-10-08).
+    served = []
+    for key, (_segments, color, label, _end) in lines.items():
+        name = (names[key] if key in names and names[key].startswith(label)
+                else f"{label} {names[key]}" if key in names else label)
+        served.append(f'<div style="white-space:nowrap"><span style="display:inline-block;width:14px;'
+                      f'height:3px;margin-right:6px;vertical-align:middle;background:{color}"></span>'
+                      f'{html.escape(name)}</div>')
+    station_layer = folium.FeatureGroup(name="Stations", control=False)
+    names_layer = folium.FeatureGroup(name="Station names", show=False)
+    for i, station in enumerate(stations.itertuples()):
+        ns = on.get(i, [])
+        where = [round(float(station.latitude), COORD_DP), round(float(station.longitude), COORD_DP)]
+        text = html.escape(str(station.station))
+        folium.CircleMarker(
+            location=where, radius=4, color=FULL_DOT_RING, weight=1.5, opacity=1,
+            fill=True, fill_color="#ffffff", fill_opacity=1,
+            class_name=" ".join(["hm-stn"] + (["hm-xfer"] if len(ns) > 1 else [])
+                                + [f"hm-on-{n}" for n in ns]),
+            tooltip=folium.Tooltip(f"<b>{text}</b>" + "".join(served[n] for n in ns), sticky=True),
+        ).add_to(station_layer)
+        folium.Marker(
+            location=where, interactive=False, keyboard=False,
+            icon=folium.DivIcon(icon_size=(0, 0), icon_anchor=(0, 0), class_name="hm-pill-icon",
+                                html=f'<div class="hm-stn-name hm-off" data-stn="{i}">{text}</div>'),
+        ).add_to(names_layer)
+    station_layer.add_to(m)
+    names_layer.add_to(m)
+
+    dark_labels = dark_label_colours({k: v[1] for k, v in lines.items()}, dark_halo=DARK["page"],
+                                     city=city_name)
+    pills = []
+    for n, (key, (_segments, color, label, _end)) in enumerate(lines.items()):
+        light, _halo, dark = label_colours(color, light_halo=LIGHT_LABEL_HALO,
+                                           dark_halo=DARK["page"], dark=dark_labels[key])
+        fg = "#ffffff" if contrast_ratio(color, "#ffffff") >= contrast_ratio(color, "#111111") else "#111111"
+        pills.append({"n": n, "html": html.escape(label), "bg": color, "fg": fg,
+                      "light": light, "dark": dark,
+                      "official": html.escape(official[key]) if key in official else None})
+
+    m.get_root().html.add_child(folium.Element(
+        build_legend((), None, lines, legend_names=names, routes=tuple(routes), full=True)))
+    folium.LayerControl(collapsed=True, position="topleft").add_to(m)
+    m.get_root().html.add_child(folium.Element(THEME_TOGGLE_HTML))
+    for block in (WHEEL_ZOOM_SCRIPT, CREDIT_TAB_SCRIPT, LINE_HIGHLIGHT_SCRIPT, TAP_SELECT_SCRIPT):
+        m.get_root().html.add_child(folium.Element(block.replace("__MAP_NAME__", m.get_name())))
+    m.get_root().html.add_child(folium.Element(
+        FULL_TRAVEL_SCRIPT
+        .replace("@@FONT@@", FONT_VAR).replace("@@TEXT@@", LIGHT["text"])
+        .replace("__MAP_NAME__", m.get_name())
+        .replace("__BASE_NAME__", base.get_name() if base else "")
+        .replace("__CREDITS__", json.dumps(credits))
+        .replace("__TOP_CLEAR__", str(_LEGEND_TOP_CLEAR))
+        .replace("__NAMES_NAME__", names_layer.get_name())
+        .replace("__LINES__", json.dumps(pills))
+        .replace("__ZOOM_TABLE__", json.dumps(FULL_ZOOM_TABLE))
+        .replace("__STEP__", str(FULL_INTERCHANGE_STEP))
+        .replace("__CASING__", str(FULL_CASING_PX))
+        .replace("__BOUNDS__", json.dumps([[min(p[0] for p in pts), min(p[1] for p in pts)],
+                                           [max(p[0] for p in pts), max(p[1] for p in pts)]]))))
+    m.get_root().header.add_child(folium.Element(f"<title>{html.escape(city_name)}</title>"))
+    if lang is not None:
+        m.get_root().header.add_child(folium.Element(
+            f"<style>:root {{ --hm-font: {font_stack(lang)}; }}</style>"))
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    m.save(str(output_path))
+    doc = output_path.read_text(encoding="utf-8")
+    if lang is not None:
+        if "<html>" not in doc:
+            raise ValueError(f"{output_path}: no bare <html> tag to give lang={lang!r}")
+        doc = doc.replace("<html>", f'<html lang="{lang}">', 1)
+        output_path.write_text(doc, encoding="utf-8")
+    bad = [w for w in FULL_FORBIDDEN if w in doc]
+    if bad:
+        output_path.unlink()
+        raise ValueError(f"{output_path}: the full version carries {bad}, a business layer (hard line)")
+    if lib:
+        outside = re.findall(r"""<(?:script|link)[^>]+(?:src|href)=["']?(https?://[^"' >]+)""", doc)
+        if outside:
+            output_path.unlink()
+            raise ValueError(f"{output_path}: offline page loads from another host: {outside}")
+    print(f"Wrote {output_path}: full Travel version, {len(stations)} stations, {len(lines)} lines")
+
+
 _FINGERPRINT_TABLE = Path(__file__).with_name("fingerprint_marks.json")
 _fingerprint_cache = {}
 
@@ -3092,8 +5080,30 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
                    crs_geographic, crs_projected, ring_edges_meters, ring_labels,
                    center=None, zoom=None, label_focus=None, rings_shown=False,
                    all_city_heat=True, animate_clusters=False, lang=None, pins=True,
-                   legend_names=None):
+                   legend_names=None, open_basemap=None, full_travel=None,
+                   place_index_url=None):
     """Render one city's heatmap to a standalone HTML file.
+
+    full_travel: optional dict(pmtiles_url=..., local_lang=..., local_name=...,
+    routes=..., lib=...), the FULL Travel version instead (owner,
+    2026-10-07/08): the Travel basemap alone, stations, lines and their
+    legend, and no business data, so `businesses` must be None and the
+    heat, rings, pins and business legend never exist. Map content only;
+    it is the travel app's template. See _render_full_travel. A pilot: no
+    city's step passes it.
+
+    open_basemap: optional dict(pmtiles_url=..., local_lang=..., local_name=...), a city's
+    Protomaps pack (see OpenBasemap). Given, the layer menu offers two base
+    layers, "Business" (OSM's tiles, still the default) and "Travel". Omitted,
+    the map renders exactly as before. A prototype: no city passes it. Its
+    optional routes=[(kind, name)] lists the named ferry and cable-car routes
+    the pack holds (from the build's pack summary); each gets a legend row
+    under the transit lines with its own name, shown in Travel only.
+
+    place_index_url: the site path of the city's place-search index
+    (pipeline/place_index.py), for example "/app/static/places/kyoto.json".
+    Given, the map gets a search box (PLACE_SEARCH_SCRIPT) that fetches the
+    index on first use; omitted, nothing changes (pilot, 2026-10-07).
 
     legend_names: optional {line key: full public name}, for a city whose
     on-map labels are the operators' LINE CODES (Tokyo's 52 lines, owner
@@ -3145,11 +5155,31 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     per-city switch so a light map can have it back; the owner's suggested
     rule is a measured lag threshold, and PLAN.md holds that open item.
     """
-    taxonomy = load_taxonomy_module(taxonomy_system)
+    full = full_travel is not None
     names = legend_names or {}
+    if full:
+        # The hard line (owner, 2026-10-07): the full version carries no
+        # business data by any path, so it never reaches this file's HTML.
+        if businesses is not None:
+            raise ValueError("full_travel draws no business data: pass businesses=None")
+        if open_basemap:
+            raise ValueError("full_travel and open_basemap are two versions of a map: pass one")
+        return _render_full_travel(
+            output_path=output_path, city_name=city_name, system_name=system_name,
+            stations=stations, lines=lines, crs_geographic=crs_geographic,
+            crs_projected=crs_projected, center=center, zoom=zoom, lang=lang,
+            names=names, **full_travel)
+
+    # The Travel switch for every city comes from one table, switched off
+    # (None) until a pack host is set there; a city's own open_basemap wins.
+    if open_basemap is None:
+        open_basemap = travel_packs.for_city(Path(output_path).parent.name)
+
+    taxonomy = load_taxonomy_module(taxonomy_system)
 
     businesses = businesses.dropna(subset=["latitude", "longitude"]).copy()
     businesses = drop_contact_details(businesses)
+    emit_storefront_totals(businesses, taxonomy)
     _require_lang_for_cjk(businesses, lang, city_name)
     # Stations in a ward with NO business data (a `no_data` column; Tokyo's,
     # owner 2026-09-28) are drawn hollow and get no rings, and no business is
@@ -3197,17 +5227,24 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     # X-Frame-Options: SAMEORIGIN, so a plain link loaded the page inside the
     # map's frame and showed "refused to connect". check_provenance.py
     # requires the target on every map.
-    folium.TileLayer(
-        tiles="OpenStreetMap", name=map_title,
+    std_base = folium.TileLayer(
+        tiles="OpenStreetMap", name="Business" if open_basemap else map_title,
         attr=OSM_ATTRIBUTION,
     ).add_to(m)
+    basemap_args = dict(open_basemap or {})
+    routes = tuple(basemap_args.pop("routes", ()))
+    open_base = OpenBasemap(**basemap_args).add_to(m) if open_basemap else None
+    # (JS variable name, shown at render) of every business layer, for
+    # TRAVEL_MODE_SCRIPT: the heat layers, the rings and the pins.
+    business_layers = []
 
     # Two heat layers, same tuning, different universe: within-rings is the
     # default; the whole-city one is an opt-in for context.
-    ParsedHeatMap(in_rings[["latitude", "longitude"]].round(COORD_DP).values.tolist(),
-                  radius=HEAT_RADIUS, blur=HEAT_BLUR, min_opacity=HEAT_MIN_OPACITY,
-                  gradient=HEAT_GRADIENT, name="Commercial Density (Within Station Proximity)",
-                  show=True).add_to(m)
+    heat = ParsedHeatMap(in_rings[["latitude", "longitude"]].round(COORD_DP).values.tolist(),
+                         radius=HEAT_RADIUS, blur=HEAT_BLUR, min_opacity=HEAT_MIN_OPACITY,
+                         gradient=HEAT_GRADIENT, name="Commercial Density (Within Station Proximity)",
+                         show=True).add_to(m)
+    business_layers.append((heat.get_name(), True))
     # The whole-city layer is OPT-OUT PER CITY, because it carries one
     # coordinate pair per business in the city and nothing filters it. In most
     # cities that is a modest cost; in Mexico City it is 283,345 pairs against
@@ -3216,10 +5253,12 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     # Passing False drops the layer and says so on the city page: the map's
     # own question is density AROUND stations, and this layer is context.
     if all_city_heat:
-        ParsedHeatMap(businesses[["latitude", "longitude"]].round(COORD_DP).values.tolist(),
-                      radius=HEAT_RADIUS, blur=HEAT_BLUR, min_opacity=HEAT_MIN_OPACITY,
-                      gradient=HEAT_GRADIENT, name=f"Commercial Density (All {city_name} Businesses)",
-                      show=False).add_to(m)
+        heat_all = ParsedHeatMap(businesses[["latitude", "longitude"]].round(COORD_DP).values.tolist(),
+                                 radius=HEAT_RADIUS, blur=HEAT_BLUR, min_opacity=HEAT_MIN_OPACITY,
+                                 gradient=HEAT_GRADIENT,
+                                 name=f"Commercial Density (All {city_name} Businesses)",
+                                 show=False).add_to(m)
+        business_layers.append((heat_all.get_name(), False))
 
     for i, label in enumerate(ring_labels):
         layer = folium.FeatureGroup(name=f"Concentric Ring {i + 1}: {label}",
@@ -3233,6 +5272,7 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
                 color=LIGHT["ring"], weight=1, fill=False, opacity=0.5,
             ).add_to(layer)
         layer.add_to(m)
+        business_layers.append((layer.get_name(), rings_shown))
 
     station_layer = folium.FeatureGroup(name="Stations", control=False)
     for _, station in ringed.iterrows():
@@ -3308,7 +5348,8 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
         if pins and add_pin_layer(m, rows, layer_label(name), color, taxonomy.FIELD_LABEL,
                          taxonomy.VALUE_COLUMN,
                          display=getattr(taxonomy, "display_value", None),
-                         animate=animate_clusters, outline=pin_outline(taxonomy, name)):
+                         animate=animate_clusters, outline=pin_outline(taxonomy, name),
+                         registry=business_layers):
             present.append((name, color))
     _refuse_colours_together(present, city_name)
 
@@ -3327,7 +5368,7 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
 
     m.get_root().html.add_child(folium.Element(
         build_legend(present, taxonomy.legend_label, lines, no_data_stations=bool(no_data.any()),
-                     legend_names=names)
+                     legend_names=names, travel=bool(open_basemap), routes=routes)
     ))
 
     # Collapsed by default: many toggleable layers would otherwise cover a
@@ -3387,6 +5428,14 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     # See LINE_HIGHLIGHT_SCRIPT.
     m.get_root().html.add_child(folium.Element(
         LINE_HIGHLIGHT_SCRIPT.replace("__MAP_NAME__", m.get_name())))
+    # The half travel version: Travel takes the business layers off the map.
+    # See TRAVEL_MODE_SCRIPT.
+    if open_base is not None:
+        m.get_root().html.add_child(folium.Element(
+            TRAVEL_MODE_SCRIPT.replace("__MAP_NAME__", m.get_name())
+            .replace("__STD_NAME__", std_base.get_name())
+            .replace("__OPEN_NAME__", open_base.get_name())
+            .replace("__BUSINESS__", json.dumps([[n, bool(s)] for n, s in business_layers]))))
     # On a touch screen one finger scrolls the page and two move the map.
     # See TOUCH_GESTURE_SCRIPT.
     m.get_root().html.add_child(folium.Element(
@@ -3396,6 +5445,12 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     # See TAP_SELECT_SCRIPT.
     m.get_root().html.add_child(folium.Element(
         TAP_SELECT_SCRIPT.replace("__MAP_NAME__", m.get_name())))
+    if place_index_url is not None:
+        m.get_root().html.add_child(folium.Element(
+            PLACE_SEARCH_SCRIPT.replace("__MAP_NAME__", m.get_name())
+            .replace("__INDEX_URL__", place_index_url)
+            # A station pick frames its outermost ring.
+            .replace("__RING_M__", f"{max(ring_edges_meters):.0f}")))
 
     # A declared language: its font order on --hm-font, which every shared
     # block reads through theme.FONT_VAR, so the shared blocks stay identical.

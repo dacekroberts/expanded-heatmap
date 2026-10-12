@@ -1,0 +1,20 @@
+{
+  "index": "app/static/places/tbilisi.json",
+  "places": 14156,
+  "data_retrieved": "2026-10-08",
+  "languages": {
+    "local": [
+      "ka"
+    ],
+    "coverage": {
+      "en": 0.974,
+      "ka": 0.999
+    },
+    "list_share": 0.5,
+    "listed": [
+      "English",
+      "Georgian"
+    ]
+  },
+  "stations_not_open": []
+}

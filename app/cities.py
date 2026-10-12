@@ -1742,6 +1742,12 @@ CITIES = [
         # Bucharest out (REGION_ZOOM_WITHOUT); check_macro_labels.py then
         # passes every region at 375, 768 and 1200 with PROBLEMS 0.
         "label_offset": ("middle", 0, -22),
+        # RIGHT of the dot in Europe East (2026-10-12): above, the pill covered
+        # Cluj-Napoca's dot, 21.1 px west and 28.1 px north at the view's zoom
+        # 2.5643, so Cluj-Napoca was labelled in no view. Right, Cluj-Napoca
+        # takes its default above: 7 of 7 named, check_macro_labels.py PROBLEMS 0
+        # at 375, 768 and 1200. The landing view keeps the offset above.
+        "label_offset_by_region": {"Europe East": ("start", 11, 0)},
     },
     {
         "name": "Incheon",
@@ -3736,6 +3742,12 @@ CITIES = [
         # JAPAN WEST / EAST (2026-10-02): offsets from a search with check_macro_labels.py's own
         # scorer, PROBLEMS 0 at 375, 768 and 1200 with Japan West at zoom 6.0.
         "label_offset": ('middle', 0, 22),
+        # ABOVE the dot in Chugoku (2026-10-12): below, the 61.7 px pill covered
+        # Kurashiki's dot, 24.2 px west and 17.9 px south at the view's zoom 6.6,
+        # so Kurashiki was labelled in no view. With Fukuyama's below and
+        # Kurashiki's above and left: 8 of 8 named, check_macro_labels.py
+        # PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset_by_region": {"Chugoku": ("middle", 0, -22)},
     },
     {
         "name": "Kōchi",
@@ -3809,7 +3821,7 @@ CITIES = [
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "Tbilisi Metro (Akhmeteli-Varketili and Saburtalo Lines, 23 stations)",
-        "region": "West Asia",
+        "region": "Europe East",
         "country": "Georgia",
         "mode": "metro",
         "in_default_view": False,
@@ -5325,6 +5337,11 @@ CITIES = [
         # MEASURED in a real browser with Space Grotesk loaded, since
         # it refuses a guessed one.
         "label_offset": ("middle", 0, -22),
+        # BELOW the dot in Chugoku (2026-10-12): above, the 69.3 px pill took the
+        # one place Kurashiki's has whole on a phone's canvas, above and left of
+        # its dot 52.7 px east. Scored with Okayama's and Kurashiki's,
+        # check_macro_labels.py PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset_by_region": {"Chugoku": ("middle", 0, 22)},
     },
     {
         "name": "Ichinomiya",
@@ -5578,6 +5595,778 @@ CITIES = [
         # it refuses a guessed one.
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Ibaraki (Osaka)",
+        "lat": 34.856,
+        "lon": 135.55,
+        "page": "pages/251_Ibaraki_Osaka_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (99.8%)",
+        "data_age": "Lists as of 2026-03-31, openings added to 2026-08-31 (an upper bound)",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "The Osaka Monorail's two lines, Hankyu's Kyoto Line and the JR Kyoto Line",
+        "region": "Osaka Prefecture",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): the Japan batch's tier. Region views and label
+        # offsets are Cleanup's (owner, call 198); the offset is the scaffold's.
+        "label_tier": "minor",
+        "label_offset": ("middle", 0, -22),
+        # BELOW the dot in Osaka Prefecture (2026-10-12): above, the pill sits
+        # under the theme button on a phone (18.2 x 18.0 px), and the
+        # competition's next try, left of the dot, covered Minoh's dot 73.1 px
+        # west, so Minoh was labelled in no view. Below, Minoh takes its default
+        # above: 13 of 13 named, check_macro_labels.py PROBLEMS 0 at 375, 768
+        # and 1200. Width 100.1 px.
+        "label_offset_by_region": {"Osaka Prefecture": ("middle", 0, 22)},
+    },
+    {
+        "name": "Minoh",
+        "lat": 34.856,
+        "lon": 135.479,
+        "page": "pages/252_Minoh_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (100%)",
+        "data_age": "Lists as of 2026-03-31, openings added to 2026-08-31 (an upper bound)",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "Hankyu's Minoh Line and the Kita-Osaka Kyuko Namboku Line",
+        "region": "Osaka Prefecture",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): the Japan batch's tier. Region views and label
+        # offsets are Cleanup's (owner, call 198); the offset is the scaffold's.
+        "label_tier": "minor",
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Moriguchi",
+        "lat": 34.742,
+        "lon": 135.576,
+        "page": "pages/253_Moriguchi_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (99.7%)",
+        "data_age": "Lists as of 2026-03-31, openings added to 2026-08-31 (an upper bound)",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "The Keihan Main Line and Osaka Metro's Tanimachi and Imazatosuji lines",
+        "region": "Osaka Prefecture",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): the Japan batch's tier. Region views and label
+        # offsets are Cleanup's (owner, call 198); the offset is the scaffold's.
+        "label_tier": "minor",
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Kadoma",
+        "lat": 34.732,
+        "lon": 135.599,
+        "page": "pages/254_Kadoma_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (95.9%); 5 unplaced",
+        "data_age": "Lists as of 2026-03-31, openings added to 2026-08-31 (an upper bound)",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "The Keihan Main Line and Osaka Metro's Nagahori Tsurumi-ryokuchi Line",
+        "region": "Osaka Prefecture",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): the Japan batch's tier. Region views and label
+        # offsets are Cleanup's (owner, call 198); the offset is the scaffold's.
+        "label_tier": "minor",
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Neyagawa",
+        "lat": 34.765,
+        "lon": 135.627,
+        "page": "pages/255_Neyagawa_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (99.7%)",
+        "data_age": "Registers as of 2026-08-31",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "The Keihan Main Line and one station of the JR Gakkentoshi Line",
+        "region": "Osaka Prefecture",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): the Japan batch's tier. Region views and label
+        # offsets are Cleanup's (owner, call 198); the offset is the scaffold's.
+        "label_tier": "minor",
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Yao",
+        "lat": 34.62,
+        "lon": 135.616,
+        "page": "pages/256_Yao_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (96.8%); ministry coordinates where missed",
+        "data_age": "Ministry filings fetched 2026-10-06",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Food premises only",
+        "blurb": "Kintetsu's Osaka and Shigi lines, JR's Yamatoji Line and two terminus stations",
+        "region": "Osaka Prefecture",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): the Japan batch's tier. Region views and label
+        # offsets are Cleanup's (owner, call 198); the offset is the scaffold's.
+        "label_tier": "minor",
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Takatsuki",
+        "lat": 34.851,
+        "lon": 135.618,
+        "page": "pages/257_Takatsuki_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (98.2%); ministry coordinates where missed",
+        "data_age": "Ministry filings fetched 2026-10-06",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Food premises only",
+        "blurb": "The JR Kyoto Line and Hankyu's Kyoto Line",
+        "region": "Osaka Prefecture",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): the Japan batch's tier. Region views and label
+        # offsets are Cleanup's (owner, call 198); the offset is the scaffold's.
+        "label_tier": "minor",
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Cluj-Napoca",
+        "lat": 46.77,
+        "lon": 23.59,
+        "page": "pages/305_Cluj_Napoca_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined by address (71.3%)",
+        "data_age": "Registers of 2026-04-30 to 2026-10-06",
+        "rail_extra": "—",
+        "record_kind": "Food hygiene register",
+        "categories": "Food premises only",
+        "blurb": "CTP trams 100, 101 and 102",
+        "region": "Europe East",
+        "country": "Romania",
+        "mode": "tram",
+        "in_default_view": False,
+        # Region views, label tiers and label offsets are Cleanup's (owner,
+        # call 198); the offset is the scaffold's starting value. Width 82.4
+        # px, measured 2026-10-11 (label_competition.TEXT_WIDTH).
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Shizuoka",
+        "lat": 34.972,
+        "lon": 138.389,
+        "page": "pages/258_Shizuoka_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (97.5%)",
+        "data_age": "Lists as of 2026-03-31, openings added to 2026-09-30 (barbers to 2026-08-31; an upper bound)",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "The Shizuoka Railway's Shizuoka-Shimizu Line and JR Central's Tokaido Line",
+        "region": "Chubu",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+        # RIGHT of the dot in Chubu (2026-10-12): above, the 61.0 px pill covered
+        # Fuji's dot, 23.7 px east and 18.2 px north at the view's zoom, so Fuji
+        # was labelled in no view. Right, Fuji takes its default above: 11 of 11
+        # named, check_macro_labels.py PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset_by_region": {"Chubu": ("start", 11, 0)},
+    },
+    {
+        "name": "Kanazawa",
+        "lat": 36.561,
+        "lon": 136.656,
+        "page": "pages/259_Kanazawa_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (92.0%); the city's own coordinates where missed",
+        "data_age": "Food permits in term as of 2024-04-01 (a dated snapshot, not updated since)",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Food premises only",
+        "blurb": "The Hokuriku Railroad's Asanogawa and Ishikawa lines and the IR Ishikawa Railway Line",
+        "region": "Chubu",
+        "label_tier": "minor",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Okazaki",
+        "lat": 34.952,
+        "lon": 137.166,
+        "page": "pages/260_Okazaki_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (92.4%); ministry coordinates where missed",
+        "data_age": "City food list in term 2026-08-31; ministry notifications fetched 2026-10-06",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Food premises only",
+        "blurb": "Meitetsu's Nagoya Main Line, the Aichi Loop Line and JR Central's Tokaido Line",
+        "label_tier": "minor",
+        "region": "Chubu",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Aomori",
+        "lat": 40.829,
+        "lon": 140.735,
+        "page": "pages/261_Aomori_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (95.1%)",
+        "data_age": "Food permits as of 2026-08-31",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Food premises only",
+        "blurb": "JR East's Ou and Tsugaru lines and the Aoimori Railway Line",
+        "region": "Tohoku",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Matsue",
+        "lat": 35.464,
+        "lon": 133.064,
+        "page": "pages/262_Matsue_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (81.9%)",
+        "data_age": "Registers as of 2026-08-31",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "JR West's San'in and Kisuki lines and the Ichibata Electric Railway's Kita-Matsue Line",
+        "region": "Chugoku",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Fuji",
+        "lat": 35.155,
+        "lon": 138.68,
+        "page": "pages/263_Fuji_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (96.7%)",
+        "data_age": "Lists as of 2026-03-31, openings added to 2026-08-31 (an upper bound)",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "JR Central's Tokaido and Minobu lines and the Gakunan Railway Line",
+        "region": "Chubu",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Matsumoto",
+        "lat": 36.231,
+        "lon": 137.964,
+        "page": "pages/264_Matsumoto_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (94.9%)",
+        "data_age": "Registers as of 2026-10-01",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "Alpico Kotsu's Kamikochi Line and JR East's Shinonoi and Oito lines",
+        "region": "Chubu",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Tottori",
+        "lat": 35.494,
+        "lon": 134.226,
+        "page": "pages/265_Tottori_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (85.9%); ministry coordinates where missed",
+        "data_age": "Ministry filings fetched 2026-10-06",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Food premises only",
+        "blurb": "JR West's San'in and Inbi lines",
+        "region": "Chugoku",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Yamagata",
+        "lat": 38.249,
+        "lon": 140.328,
+        "page": "pages/266_Yamagata_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (92.4%); ministry coordinates where missed",
+        "data_age": "City food list in term 2026-08-31; ministry notifications fetched 2026-10-06",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Food premises only",
+        "blurb": "JR East's Ou, Senzan and Aterazawa lines",
+        "region": "Tohoku",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Kure",
+        "lat": 34.257,
+        "lon": 132.629,
+        "page": "pages/267_Kure_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (88.2%); ministry coordinates where missed",
+        "data_age": "Ministry filings fetched 2026-10-06",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Food premises only",
+        "blurb": "JR West's Kure Line",
+        "region": "Chugoku",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Kurashiki",
+        "lat": 34.548,
+        "lon": 133.744,
+        "page": "pages/306_Kurashiki_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (87.8%)",
+        "data_age": "Food permits as of 2026-03-31",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Food premises only",
+        "blurb": "The Mizushima Rinkai Railway, four JR West lines and the Ibara Railway",
+        "region": "Chugoku",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+        # ABOVE AND LEFT of the dot in Chugoku (2026-10-12): above, the pill
+        # covers Okayama's dot, 24.2 px east; right or below it runs off a
+        # phone's 343 px canvas (the dot sits at x 333.0). This one is whole at
+        # 375, 768 and 1200, check_macro_labels.py PROBLEMS 0. Width 61.6 px.
+        "label_offset_by_region": {"Chugoku": ("end", -8, -14)},
+    },
+    {
+        "name": "Naha",
+        "lat": 26.2105,
+        "lon": 127.684,
+        "page": "pages/307_Naha_Heatmap.py",
+        "coverage": "narrowed",
+        "placement": "Joined to address blocks (98.5%)",
+        "data_age": "Rebuilt from permits to 2026-08-31 (an upper bound); registers of 2026-09-04",
+        "rail_extra": "—",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
+        "blurb": "The Yui Rail, Okinawa's monorail",
+        "region": "Kyushu-Okinawa",
+        "country": "Japan",
+        # light_rail, not metro (owner, 2026-10-12: "light rail feels more
+        # appropriate due to size"): the city's only line is a monorail.
+        "mode": "light_rail",
+        "in_default_view": False,
+        # MINOR (owner, 2026-10-02): the Japan batch's tier, labelled only in
+        # the Japan view. Region views and label offsets are Cleanup's (owner,
+        # call 198); the offset below is the scaffold's starting value.
+        "label_tier": "minor",
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Koshigaya",
+        "lat": 35.901,
+        "lon": 139.79,
+        "page": "pages/240_Koshigaya_Heatmap.py",
+        "coverage": "narrowed",
+        "placement": "Joined to address blocks (96.7%); ministry coordinates where missed",
+        "data_age": "Food list as of 2026-03-31 plus new and renewed permits to 2026-08-31 (no July list); registers as of 2026-10-02",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
+        "blurb": "The Tobu Skytree Line and the JR Musashino Line",
+        "region": "Saitama Prefecture",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        # metro (the brief: private heavy rail reads as metro, owner 2026-10-02)
+        "mode": "metro",
+        "in_default_view": False,
+        # Above the dot, the scaffold's default. The Japan views and their
+        # label scoring are Cleanup's (owner, call 198).
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Sagamihara",
+        "lat": 35.5815,
+        "lon": 139.3706,
+        "page": "pages/241_Sagamihara_Heatmap.py",
+        "coverage": "narrowed",
+        "placement": "Joined to address blocks (98.1%)",
+        "data_age": "Food, barber and beauty lists as of 2026-03-31 with openings and closures to 2026-08-31; laundries as of 2026-03-31",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
+        "blurb": "JR East's Sagami, Yokohama and Chuo lines, Odakyu's Odawara and Enoshima lines and the Keio Sagamihara Line",
+        "region": "Kanto",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        # metro (the brief's mode call, owner's rule of 2026-10-02)
+        "mode": "metro",
+        "in_default_view": False,
+        # Above the dot, the scaffold's default. The Japan views and their
+        # label scoring are Cleanup's (owner, call 198).
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Fujisawa",
+        "lat": 35.3382,
+        "lon": 139.4869,
+        "page": "pages/242_Fujisawa_Heatmap.py",
+        "coverage": "narrowed",
+        "placement": "Joined to address blocks (98.6%); ministry coordinates where missed",
+        "data_age": "City lists as of 2026-06-30 plus new permits to 2026-08-31; ministry notifications fetched 2026-10-06",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Retail thin",
+        "blurb": "The Odakyu Enoshima Line, the Enoden, the JR Tokaido Line, the Shonan Monorail and the Sotetsu Izumino Line",
+        "region": "Kanto",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        # metro (the brief: private heavy rail is the backbone, owner 2026-10-02)
+        "mode": "metro",
+        "in_default_view": False,
+        # Above the dot, the scaffold's default. The Japan views and their
+        # label scoring are Cleanup's (owner, call 198).
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Kawaguchi",
+        "lat": 35.833,
+        "lon": 139.733,
+        "page": "pages/243_Kawaguchi_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (99.0%)",
+        "data_age": "Food list as of 2026-03-31 plus new premises to 2026-07-31 (no June entries)",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Food premises only",
+        "blurb": "The Saitama Rapid Railway Line and JR East's Keihin-Tohoku and Musashino lines",
+        "region": "Saitama Prefecture",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        # metro (the brief: the backbone is a subway-class private line)
+        "mode": "metro",
+        "in_default_view": False,
+        # Above the dot, the scaffold's default. The Japan views and their
+        # label scoring are Cleanup's (owner, call 198).
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Funabashi",
+        "lat": 35.727,
+        "lon": 140.019,
+        "page": "pages/244_Funabashi_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (99.8%)",
+        "data_age": "Barbers and beauty salons as of 2026-08-01; laundries as of 2026-07-01",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "Ten lines of Keisei, JR East, Tokyo Metro, Toyo Rapid, Tobu and Hokuso",
+        "region": "Chiba Prefecture",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        # metro (the brief's mode call, owner's rule of 2026-10-02)
+        "mode": "metro",
+        "in_default_view": False,
+        # Above the dot, the scaffold's default. The Japan views and their
+        # label scoring are Cleanup's (owner, call 198).
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Matsudo",
+        "lat": 35.796,
+        "lon": 139.929,
+        "page": "pages/245_Matsudo_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (98.6%)",
+        "data_age": "Barbers as of 2025-03-31; beauty salons and laundries with openings to 2026-08-31",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "The Keisei Matsudo Line, JR East's Joban and Musashino lines, the Hokuso Line and three more",
+        "region": "Chiba Prefecture",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        # metro (the brief: the backbone is the Keisei Matsudo Line, a railway)
+        "mode": "metro",
+        "in_default_view": False,
+        # Above the dot, the scaffold's default. The Japan views and their
+        # label scoring are Cleanup's (owner, call 198).
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Ichikawa",
+        "lat": 35.719,
+        "lon": 139.933,
+        "page": "pages/246_Ichikawa_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (99.5%)",
+        "data_age": "Barbers as of 2025-03-31; beauty salons and laundries with openings to 2026-08-31",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "The Keisei Main Line, four JR East lines, the Tozai Line and the Hokuso Line",
+        "region": "Chiba Prefecture",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        # metro (the brief's mode call, owner's rule of 2026-10-02)
+        "mode": "metro",
+        "in_default_view": False,
+        # Above the dot, the scaffold's default. The Japan views and their
+        # label scoring are Cleanup's (owner, call 198).
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Urayasu",
+        "lat": 35.643,
+        "lon": 139.902,
+        "page": "pages/247_Urayasu_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (99.1%)",
+        "data_age": "Barbers as of 2025-03-31; beauty salons and laundries with openings to 2026-08-31",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "The Disney Resort Line, the JR Keiyo Line and the Tozai Line",
+        "region": "Chiba Prefecture",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        # metro (the brief's mode call, owner's rule of 2026-10-02)
+        "mode": "metro",
+        "in_default_view": False,
+        # Above the dot, the scaffold's default. The Japan views and their
+        # label scoring are Cleanup's (owner, call 198).
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Sakura",
+        "lat": 35.706,
+        "lon": 140.213,
+        "page": "pages/248_Sakura_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (95.5%)",
+        "data_age": "Barbers as of 2025-03-31; beauty salons and laundries with openings to 2026-08-31",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "The Keisei Main Line, the Yamaman Yukarigaoka Line and JR East's Sobu Main and Narita lines",
+        "region": "Chiba Prefecture",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        # metro (owner, call 121: Keisei has a significant presence)
+        "mode": "metro",
+        "in_default_view": False,
+        # Above the dot, the scaffold's default. The Japan views and their
+        # label scoring are Cleanup's (owner, call 198).
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Yachiyo",
+        "lat": 35.739,
+        "lon": 140.105,
+        "page": "pages/249_Yachiyo_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (97.8%)",
+        "data_age": "Barbers as of 2025-03-31; beauty salons and laundries with openings to 2026-08-31",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "The Toyo Rapid Railway Line and the Keisei Main Line",
+        "region": "Chiba Prefecture",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        # metro (the brief's mode call, owner's rule of 2026-10-02)
+        "mode": "metro",
+        "in_default_view": False,
+        # Above the dot, the scaffold's default. The Japan views and their
+        # label scoring are Cleanup's (owner, call 198).
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Ichihara",
+        "lat": 35.425,
+        "lon": 140.137,
+        "page": "pages/250_Ichihara_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (94.1%)",
+        "data_age": "Barbers as of 2025-03-31; beauty salons and laundries with openings to 2026-08-31",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "The Kominato Railway Line, the JR Uchibo Line and the Keisei Chihara Line",
+        "region": "Chiba Prefecture",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        # metro (the brief's mode call, owner's rule of 2026-10-02)
+        "mode": "metro",
+        "in_default_view": False,
+        # Above the dot, the scaffold's default. The Japan views and their
+        # label scoring are Cleanup's (owner, call 198).
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.
@@ -5728,6 +6517,12 @@ REGION_ORDER = [
     # for their labels (COMPETING_REGIONS). A new European country is
     # assigned to one of the two by scripts/stress_overview.py, and gets a
     # view of its own only on the owner's call.
+    # GEORGIA JOINS EUROPE EAST (owner, 2026-10-08), ending West Asia, a
+    # one-city view. West Asia was made (2026-10-02) because Dublin to Tbilisi,
+    # about 3,700 km, was too wide for one Europe; after the split Tbilisi is
+    # 1,544 km from Bucharest and 2,365 km from Liepaja. Measured with
+    # check_macro_labels.py: Europe East's zoom 3.19 to 2.56, PROBLEMS 0. A
+    # Turkish city reopens the question (DECISIONS, "Georgia joins Europe East").
     "Europe West",
     "Europe East",
     # FRANCE NORTH AND FRANCE SOUTH (owner, 2026-09-30, "go with north/south"),
@@ -5861,13 +6656,6 @@ REGION_ORDER = [
     # Zealand city joins it; Perth is about 3,300 km from Sydney, past the
     # distance at which Canada was split, so re-score it if it ever arrives.
     "Oceania",
-    # WEST ASIA (owner, 2026-10-02): Tbilisi first. Dublin to Tbilisi is about
-    # 3,700 km, past the 3,300 at which Canada was split, and the UN M49
-    # geoscheme files Georgia in Western Asia, so Europe's frame is left as it
-    # was rather than stretched east. Named for the area, as East Asia and
-    # Oceania are, so a later Baku, Yerevan or Ankara joins it. A view of its
-    # own, NOT a sub-view, so it is not in COUNTRY_VIEWS.
-    "West Asia",
 ]
 
 # THE COUNTRY VIEWS GO LAST IN THE REGION MENU (owner, 2026-10-02): the small
@@ -5936,6 +6724,26 @@ if set(COUNTRY_VIEWS) - set(REGION_ORDER):
 REGION_ZOOM_WITHOUT = {"Europe West": ("Stockholm",),
                        "South America": ("Mendoza",)}
 
+# A CITY HELD OUT OF ITS REGION'S FRAME ALTOGETHER: out of the zoom fit AND the
+# centre, so the view opens on the rest and the city sits a pan away. Its dot,
+# its row in the list beneath the map and its place in the caption's count stay.
+# REGION_ZOOM_WITHOUT does not serve where the outlier is far off: the centre
+# would still take it and the rest of the region would leave the canvas.
+# Naha (owner, call S41, 2026-10-12): 7.7 degrees of latitude south
+# of Kagoshima. Fitted to it, Kyushu-Okinawa's zoom fell to 4.6748, Kitakyushu's
+# and Shimonoseki's dots sat 3.3 px apart and Sasebo and Ōita found no room for
+# a label. Held out, the view is the one Kyushu's own cities fit and Naha lies
+# off the bottom of the canvas at every width (check_macro_labels.py --verbose
+# lists it under "dot off the canvas"). frame_cities() below applies it;
+# Overview.py and check_macro_labels.py both read that one function.
+REGION_FIT_WITHOUT = {"Kyushu-Okinawa": ("Naha",)}
+# What the view's caption says about a city held out of its frame, after its
+# count: the city is one of the cities counted and cannot be seen without
+# panning. Wording chosen by the owner (2026-10-12, of three drafts).
+# The open item of call S41 is closed by this sentence (owner, 2026-10-12: the
+# wording was the fix asked for); the frame hold stays.
+REGION_FIT_NOTE = {"Kyushu-Okinawa": "Naha is south of this view; pan down to see it."}
+
 # A REGION'S ZOOM SET OUTRIGHT, after the fit (owner, 2026-09-30): France North
 # and France South at 5.0, where every French label places. Fitted, each would
 # open further out and its labels would collide; fit_view sizes for a 320 px
@@ -5956,9 +6764,22 @@ REGION_ZOOM_WITHOUT = {"Europe West": ("Stockholm",),
 # phone canvas and check_macro_labels.py reports PROBLEMS 0; Hyogo needs
 # Amagasaki's label above and right of its dot (else Itami is labelled in no
 # view). Osaka Prefecture at 9.5 already holds all 6.
+# Chugoku 6.0 (owner, 2026-10-12, the phase 2 landing's deploy check): at 6.6
+# a phone's canvas held 6 of the 8 cities, Tottori (new) and Shimonoseki off
+# it. At 6.0 all eight dots are on it; Shimonoseki's pill is clipped 26.6 px
+# and Tottori's 5.9 px at 375, nothing at 768 or 1200, PROBLEMS 0. At 5.8
+# Kure's pill grazes Hiroshima's marker. The three label offsets set for
+# Chugoku at 6.6 (Okayama, Fukuyama, Kurashiki) still place at 6.0;
+# re-measure them if this zoom changes.
+# Chiba Prefecture 9.25 (2026-10-12, the phase 2 landing's deploy check): at
+# 9.5, pinned before its seven cities were built, Matsudo's dot sat 5 px above
+# the 460 px canvas and Ichihara's 5 px below it at every width. At 9.25 all
+# seven dots and pills are on the canvas at 375, 768 and 1200
+# (check_macro_labels.py --verbose, no note for the region; PROBLEMS 0); at
+# 9.0 Sakura's pill is clipped 4.1 px on a phone.
 REGION_ZOOM = {"France North": 5.0, "France South": 5.0, "Benelux": 6.25,
-               "Tokyo Metropolis": 9.0, "Saitama Prefecture": 9.0, "Chiba Prefecture": 9.5,
-               "Hyogo Prefecture": 8.25, "Osaka Prefecture": 9.5, "Kansai": 7.5, "Chugoku": 6.6}
+               "Tokyo Metropolis": 9.0, "Saitama Prefecture": 9.0, "Chiba Prefecture": 9.25,
+               "Hyogo Prefecture": 8.25, "Osaka Prefecture": 9.5, "Kansai": 7.5, "Chugoku": 6.0}
 
 # Global is every region that is not itself a composite, derived rather than
 # listed so a new region joins it without an edit here.
@@ -6111,6 +6932,36 @@ if _bad_compete:
                      f"REGION_ORDER, or are the landing view, which competes on its own rule")
 
 
+def frame_cities(frame):
+    """(zoom_set, centre_set): the cities a region's view is framed on.
+
+    The centre takes the region's own cities and the anchors it borrows
+    (REGION_LABELS_ALSO), less any city REGION_FIT_WITHOUT holds out of the
+    frame; the zoom fit takes those less REGION_ZOOM_WITHOUT's outliers. A
+    list that would empty a set is ignored. Overview.py and
+    scripts/check_macro_labels.py both frame a view from this, so the check
+    scores the view the app opens.
+    """
+    here = cities_in(frame) + [c for c in CITIES
+                               if c.get("region") in REGION_LABELS_ALSO.get(frame, ())
+                               and c.get("label_tier") != "minor"]
+    held = REGION_FIT_WITHOUT.get(frame, ())
+    centre = [c for c in here if c["name"] not in held] or here
+    skip = REGION_ZOOM_WITHOUT.get(frame, ())
+    zoom = [c for c in centre if c["name"] not in skip] or centre
+    return zoom, centre
+
+
+if set(REGION_FIT_NOTE) != set(REGION_FIT_WITHOUT):
+    raise ValueError("cities.py: REGION_FIT_NOTE and REGION_FIT_WITHOUT name different regions: a city held "
+                     "out of a frame needs its caption sentence, and a sentence needs a held city")
+_bad_fit = [(r, n) for r, names in REGION_FIT_WITHOUT.items() for n in names
+            if r not in REGION_ORDER or n not in [c["name"] for c in cities_in(r)]]
+if _bad_fit:
+    raise ValueError(f"cities.py: REGION_FIT_WITHOUT {_bad_fit} name a region not in "
+                     f"REGION_ORDER or a city that is not in that region")
+
+
 def region_caption(region):
     """The caption under a region view of the macro map (not Global's).
 
@@ -6143,10 +6994,11 @@ def region_caption(region):
 
     also = list(dict.fromkeys(named(caption_name(r))
                               for r in REGION_LABELS_ALSO.get(region, ()) if lends_anchor(r)))
+    note = f" {REGION_FIT_NOTE[region]}" if region in REGION_FIT_NOTE else ""
     if not also:
-        return text + "."
+        return text + "." + note
     named = also[0] if len(also) == 1 else ", ".join(also[:-1]) + " and " + also[-1]
-    return f"{text}, with the main cities of {named} labeled too."
+    return f"{text}, with the main cities of {named} labeled too.{note}"
 
 
 # Region names read with "the" in running text.

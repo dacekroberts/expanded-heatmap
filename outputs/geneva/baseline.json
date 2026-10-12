@@ -13,5 +13,8 @@
   "stations_excluded": 4,
   "stations_in_scope": 81,
   "stop_positions": 181,
-  "storefronts": 5863
+  "storefronts": 5863,
+  "storefronts_food_service": 1862,
+  "storefronts_personal_services": 1104,
+  "storefronts_retail": 2897
 }

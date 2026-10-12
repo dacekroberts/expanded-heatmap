@@ -58,10 +58,10 @@ from cities import (  # noqa: E402
     REGION_MEMBERS,
     REGION_LABELS_ALSO,
     REGION_ZOOM,
-    REGION_ZOOM_WITHOUT,
     REGIONS,
     cities_in,
     elsewhere_counts,
+    frame_cities,
     region_caption,
 )
 
@@ -180,15 +180,14 @@ def region_view(region):
     region borrows DEFAULT_FRAME's frame, and every frame but that one is
     re-centred."""
     frame = DEFAULT_FRAME if region["name"] == DEFAULT_REGION else region["name"]
-    # The frame takes the REGION_LABELS_ALSO anchors too, as Overview.py does
-    # (owner, 2026-10-04: East Asia had fitted Hong Kong and Taiwan alone).
-    here = cities_in(frame) + [c for c in CITIES if c.get("region") in REGION_LABELS_ALSO.get(frame, ())
-                               and c.get("label_tier") != "minor"]
+    # cities.frame_cities() gives both sets, to this check and to Overview.py:
+    # the frame takes the REGION_LABELS_ALSO anchors too (owner, 2026-10-04:
+    # East Asia had fitted Hong Kong and Taiwan alone), the zoom may leave out
+    # a region's outlier (REGION_ZOOM_WITHOUT, Stockholm in Europe West) while
+    # the centre still takes it, and a city held out of the frame altogether
+    # (REGION_FIT_WITHOUT, Naha in Kyushu-Okinawa) is in neither.
+    zs, here = frame_cities(frame)
     lats, lons = [c["lat"] for c in here], [c["lon"] for c in here]
-    # The zoom may leave out a region's outlier (cities.REGION_ZOOM_WITHOUT,
-    # Riga in Europe); the centre below still takes every city, as Overview does.
-    skip = REGION_ZOOM_WITHOUT.get(frame, ())
-    zs = [c for c in here if c["name"] not in skip] or here
     centre_lat, centre_lon, zoom = fit_view([c["lat"] for c in zs], [c["lon"] for c in zs])
     # A zoom set outright (cities.REGION_ZOOM, France North and South at 5.0),
     # applied after the fit exactly as Overview.py applies it.

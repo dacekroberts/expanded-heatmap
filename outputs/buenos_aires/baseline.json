@@ -17,6 +17,10 @@
   "stations": 89,
   "stations_outside_caba": 0,
   "storefront_rows": 62768,
+  "storefronts": 62765,
+  "storefronts_food_service": 10124,
+  "storefronts_personal_services": 5896,
+  "storefronts_retail": 46745,
   "survey_rows": 417764,
   "unicomercial_active": 87294,
   "unplaced": 3

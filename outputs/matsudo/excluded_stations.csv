@@ -1,0 +1,27 @@
+station,lines,reason,latitude,longitude
+三郷,JM,"in 三郷市, outside 松戸市 (the permit list covers the city only)",35.84483500003545,139.886835
+北国分,HS,"in 市川市, outside 松戸市 (the permit list covers the city only)",35.7628600001609,139.91422
+大町,HS,"in 市川市, outside 松戸市 (the permit list covers the city only)",35.775152057773916,139.973404697053
+市川大野,JM,"in 市川市, outside 松戸市 (the permit list covers the city only)",35.75540500229993,139.95128
+南柏,JJ,"in 柏市, outside 松戸市 (the permit list covers the city only)",35.84469150137479,139.9542827697476
+増尾,TD,"in 柏市, outside 松戸市 (the permit list covers the city only)",35.829820000425926,139.976325
+新柏,TD,"in 柏市, outside 松戸市 (the permit list covers the city only)",35.83810000170424,139.96704
+豊四季,TD,"in 柏市, outside 松戸市 (the permit list covers the city only)",35.866535000378704,139.93928000000002
+逆井,TD,"in 柏市, outside 松戸市 (the permit list covers the city only)",35.82327616269222,139.98370967415792
+高柳,TD,"in 柏市, outside 松戸市 (the permit list covers the city only)",35.80830500070654,139.99897999999996
+南流山,JM,"in 流山市, outside 松戸市 (the permit list covers the city only)",35.83784500103377,139.90422999999996
+平和台,RN,"in 流山市, outside 松戸市 (the permit list covers the city only)",35.85112000068668,139.901225
+流山,RN,"in 流山市, outside 松戸市 (the permit list covers the city only)",35.8558000021216,139.90183
+流山おおたかの森,TD,"in 流山市, outside 松戸市 (the permit list covers the city only)",35.87208500009861,139.92576
+鰭ヶ崎,RN,"in 流山市, outside 松戸市 (the permit list covers the city only)",35.84097000036306,139.911115
+西白井,HS,"in 白井市, outside 松戸市 (the permit list covers the city only)",35.78444000000251,140.03174500000003
+船橋法典,JM,"in 船橋市, outside 松戸市 (the permit list covers the city only)",35.73046291957808,139.96671751745112
+亀有,JJ,"in 葛飾区, outside 松戸市 (the permit list covers the city only)",35.7665417968921,139.8475524275748
+京成高砂,HS KA,"in 葛飾区, outside 松戸市 (the permit list covers the city only)",35.75087000001005,139.86659
+新柴又,HS,"in 葛飾区, outside 松戸市 (the permit list covers the city only)",35.7513500009072,139.87981999999997
+金町,JJ,"in 葛飾区, outside 松戸市 (the permit list covers the city only)",35.76951000006288,139.87039
+くぬぎ山,KM,"in 鎌ケ谷市, outside 松戸市 (the permit list covers the city only)",35.78233000133091,139.97567500000002
+初富,KM,"in 鎌ケ谷市, outside 松戸市 (the permit list covers the city only)",35.77197500154056,140.00045999999998
+北初富,KM,"in 鎌ケ谷市, outside 松戸市 (the permit list covers the city only)",35.77655500017119,139.989805
+新鎌ヶ谷,KM HS KA TD,"in 鎌ケ谷市, outside 松戸市 (the permit list covers the city only)",35.77987667273526,139.99882912086215
+鎌ヶ谷,TD,"in 鎌ケ谷市, outside 松戸市 (the permit list covers the city only)",35.763785000705376,139.99730999999997

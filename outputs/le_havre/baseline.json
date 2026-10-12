@@ -9,5 +9,8 @@
   "stations_line_A": 15,
   "stations_line_B": 15,
   "stations_network": 23,
-  "storefronts": 2433
+  "storefronts": 2433,
+  "storefronts_food_service": 880,
+  "storefronts_personal_services": 527,
+  "storefronts_retail": 1026
 }

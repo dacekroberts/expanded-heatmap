@@ -311,8 +311,8 @@ Cities built and running end to end (pipeline, map, app page):
   cafeterias, vending, hotel kitchens and clubs are left out by name, as in
   Minneapolis.
 - **Tbilisi** - the Tbilisi Metro's two lines, every station; held for the
-  batch review. **Georgia's first city and the first in the West Asia
-  region**, a view of its own (Europe's frame was not stretched east).
+  batch review. **Georgia's first city**, in Europe East since 2026-10-08
+  (owner; West Asia, its one-city view of 2026-10-02, retired).
   Businesses from one national source, Geostat's Statistical Business
   Register, filtered to the FACTUAL address in the city: one row per entity,
   not per premises, so chains are undercounted (owner, disclosed). The API

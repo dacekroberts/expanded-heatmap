@@ -9,6 +9,11 @@ reference; `python scripts/check_all.py --list` lists the pass/fail checks.
 python pipeline/<city_slug>/step1_stations.py
 python pipeline/<city_slug>/step2_clean_businesses.py
 python pipeline/<city_slug>/step3_map.py
+python pipeline/place_index_fetch.py <city_slug> [--force]   # place search: its two Overpass queries, in turn; NOT a step
+python pipeline/<city_slug>/step2b_place_index.py       # place search: the index, before step 3
+python scripts/check_place_search.py [--selftest]       # every searched map current; languages measured; ODbL; junk and leak words
+python scripts/place_search_review.py odd|tags|ids|ways|added|sizes <city_slug>   # REPORTS only: a new index's reading by eye (skill place-search-city)
+python scripts/check_place_index_drift.py [city] [--against REV] [--selftest]   # every index is what the code builds from its cache; --against lists rows changed since REV
 python pipeline/drift_check.py [city_slug] [--jobs N]   # every city; --jobs 3 at most, one run per machine
 python pipeline/drift_check.py --render-only [--jobs N] # map step only, against data/<city>/processed/ as it stands; never the pre-deploy gate
 python scripts/drift_check_selftest.py                  # touches nothing
@@ -46,6 +51,9 @@ python scripts/measure_rail_backbone.py --osm <json> --relation <id> --municipio
 python scripts/check_deploy_imports.py [--ref REF]      # before ANY push touching app/
 node scripts/profile_zoom.mjs <baseUrl> <city,city> [reps]   # zoom lag
 node scripts/check_macro_attribution.mjs [baseUrl] [375,768,1200]   # front page OSM credit; live: <app>/~/+
+node scripts/check_travel_style.mjs <basemaps.js> [<TravelTrim.java>]   # Travel style hides removed features in every layer; trim lists match
+python scripts/check_travel_packs.py                    # the Travel table (pipeline/travel_packs.py) agrees with the built maps
+python scripts/verify_manifest.py <upload folder> [--remote]  # the Travel packs match MANIFEST.csv; --remote also hashes what the file host serves
 python scripts/decisions_index.py [--check]
 python scripts/rendered_surfaces.py [--write|--check]   # every surface the app renders -> docs/rendered_surfaces.md
 python scripts/downstream_changes.py <old> [<new>]       # after every push: what to tell Visuals and Analytics

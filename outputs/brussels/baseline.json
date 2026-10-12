@@ -9,6 +9,9 @@
   "stations_inside": 73,
   "stations_kept": 66,
   "storefronts": 5069,
+  "storefronts_food_service": 1930,
+  "storefronts_personal_services": 516,
+  "storefronts_retail": 2623,
   "units_multi_type": 1786,
   "units_two_buckets": 175,
   "vacant": 1068

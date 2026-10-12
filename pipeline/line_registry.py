@@ -78,6 +78,12 @@ NEIGHBOUR_EXCEPTIONS = {
     # CIE76 1.2.
     frozenset({"osaka-metro-midosuji-line", "kita-osaka-kyuko-namboku-line"}):
         "one through service in one red",
+    # Meitetsu signs every line in its one red: Okazaki's map draws the
+    # Nagoya Main Line and Toyota's the Mikawa Line, both #E80010, within
+    # 2 km of each other and never on one map (owner, 2026-10-12, call S16:
+    # "exception and note"). 1 map pair, CIE76 0.0.
+    frozenset({"meitetsu-nagoya-main-line", "meitetsu-mikawa-line"}):
+        "Meitetsu's own red for both lines",
 }
 
 REGISTRY = {
@@ -99,7 +105,7 @@ REGISTRY = {
     # the project's colour osaka already drew; pins >= 45.9, lines >= 18.0, lines beside it >= 18.0.
     "hankyu-kyoto-line": {
         "name": "Hankyu Kyoto Line", "operator": "Hankyu", "colour": "#87544B",
-        "maps": {"kyoto": "HY", "osaka": "HY", "suita": "HY"},
+        "maps": {"ibaraki_osaka": "HY", "kyoto": "HY", "osaka": "HY", "suita": "HY", "takatsuki": "HY"},
     },
     # the project's colour osaka already drew; pins >= 45.8, lines >= 18.0, lines beside it >= 18.0.
     "hankyu-senri-line": {
@@ -134,7 +140,7 @@ REGISTRY = {
     # the project's colour every map already drew (hue-matched to the operator); pins >= 54.7, lines >= 11.8, lines beside it >= 23.5.
     "jr-east-chuo-line": {
         "name": "JR Chuo Line", "operator": "JR East", "colour": "#F05820",
-        "maps": {"hino": "JC", "tachikawa": "JC", "tokyo": "JC"},
+        "maps": {"hino": "JC", "sagamihara": "JC", "tachikawa": "JC", "tokyo": "JC"},
     },
     # the project's colour kitakyushu already drew; pins >= 45.2, lines >= 18.3, lines beside it >= 18.3.
     "jr-kyushu-fukuhoku-yutaka-line": {
@@ -144,7 +150,7 @@ REGISTRY = {
     # the project's colour higashiosaka, hirakata already drew; pins >= 46.0, lines >= 19.9, lines beside it >= 19.9.
     "jr-west-gakkentoshi-line": {
         "name": "JR Gakkentoshi Line", "operator": "JR West", "colour": "#C000A8",
-        "maps": {"higashiosaka": "JG", "hirakata": "JG", "osaka": "JG"},
+        "maps": {"higashiosaka": "JG", "hirakata": "JG", "neyagawa": "JG", "osaka": "JG"},
     },
     # the project's colour sapporo already drew; pins >= 24.5, lines >= 18.9, lines beside it >= 18.9.
     "jr-hokkaido-hakodate-main-line": {
@@ -164,7 +170,7 @@ REGISTRY = {
     # the project's colour iwaki, tokyo already drew; pins >= 45.7, lines >= 18.8, lines beside it >= 18.8.
     "jr-east-joban-line": {
         "name": "JR Joban Line", "operator": "JR East", "colour": "#20A800",
-        "maps": {"iwaki": "JB", "mito": "JJ", "tokyo": "JJ"},
+        "maps": {"iwaki": "JB", "matsudo": "JJ", "mito": "JJ", "tokyo": "JJ"},
     },
     # the project's colour fukuoka, kagoshima, kitakyushu, kumamoto already drew; pins >= 51.6, lines >= 18.1, lines beside it >= 18.1.
     "jr-kyushu-kagoshima-main-line": {
@@ -174,7 +180,7 @@ REGISTRY = {
     # the project's colour kawasaki, tokyo already drew; pins >= 50.6, lines >= 13.6, lines beside it >= 19.1.
     "jr-east-keihin-tohoku-line": {
         "name": "JR Keihin-Tohoku Line", "operator": "JR East", "colour": "#08A0C0",
-        "maps": {"kawasaki": "JK", "tokyo": "JK", "yokohama": "JK"},
+        "maps": {"kawaguchi": "JK", "kawasaki": "JK", "tokyo": "JK", "yokohama": "JK"},
     },
     # JR West's own line colour; pins >= 82.7, lines >= 19.1, lines beside it >= 19.1.
     "jr-west-kobe-line": {
@@ -190,7 +196,7 @@ REGISTRY = {
     # the project's colour kyoto already drew; pins >= 50.6, lines >= 17.5, lines beside it >= 18.8.
     "jr-west-kyoto-line": {
         "name": "JR Kyoto Line", "operator": "JR West", "colour": "#08A0C0",
-        "maps": {"kyoto": "JA", "osaka": "JY", "suita": "JY"},
+        "maps": {"ibaraki_osaka": "JY", "kyoto": "JA", "osaka": "JY", "suita": "JY", "takatsuki": "JY"},
     },
     # the project's colour every map already drew (hue-matched to the operator); pins >= 44.4, lines >= 81.8, lines beside it >= 90.7.
     "jr-kyushu-kyudai-main-line": {
@@ -200,7 +206,7 @@ REGISTRY = {
     # the project's colour every map already drew (hue-matched to the operator); pins >= 54.7, lines >= 33.6, lines beside it >= 33.6.
     "jr-east-musashino-line": {
         "name": "JR Musashino Line", "operator": "JR East", "colour": "#F05820",
-        "maps": {"fuchu_tokyo": "JM", "higashimurayama": "JM", "tokorozawa": "JM"},
+        "maps": {"fuchu_tokyo": "JM", "funabashi": "JM", "higashimurayama": "JM", "ichikawa": "JM", "kawaguchi": "JM", "koshigaya": "JM", "matsudo": "JM", "tokorozawa": "JM"},
     },
     # the project's colour every map already drew (hue-matched to the operator); pins >= 23.2, lines >= 19.1, lines beside it >= 19.1.
     "jr-east-nambu-line": {
@@ -220,18 +226,18 @@ REGISTRY = {
     # the project's colour higashiosaka, suita already drew; pins >= 57.3, lines >= 18.8, lines beside it >= 22.5.
     "jr-west-osaka-higashi-line": {
         "name": "JR Osaka Higashi Line", "operator": "JR West", "colour": "#A088A0",
-        "maps": {"higashiosaka": "JH", "osaka": "OH", "suita": "OH"},
+        "maps": {"higashiosaka": "JH", "osaka": "OH", "suita": "OH", "yao": "OH"},
     },
     # the project's colour every map already drew (hue-matched to the operator); pins >= 53.6, lines >= 45.4, lines beside it >= 45.4.
     "jr-east-ou-line": {
         "name": "JR Ou Line", "operator": "JR East", "colour": "#E07800",
-        "maps": {"akita": "OU", "fukushima": "OU"},
+        "maps": {"akita": "OU", "aomori": "OU", "fukushima": "OU", "yamagata": "OU"},
     },
     # the project's colour fukuyama, okayama, shimonoseki already drew; pins >= 51.4, lines >= 15.8, lines beside it >= 18.8.
     "jr-west-sanyo-line": {
         "name": "JR Sanyo Line", "operator": "JR West and JR Kyushu", "colour": "#007890",
-        "maps": {"fukuyama": "JS", "himeji": "JS", "hiroshima": "JS", "kitakyushu": "JS", "okayama": "JS",
-                 "shimonoseki": "JS"},
+        "maps": {"fukuyama": "JS", "himeji": "JS", "hiroshima": "JS", "kitakyushu": "JS", "kurashiki": "JS",
+                 "okayama": "JS", "shimonoseki": "JS"},
     },
     # the project's colour amagasaki, itami, kobe already drew; pins >= 20.1, lines >= 19.5, lines beside it >= 35.2.
     "jr-west-takarazuka-line": {
@@ -246,12 +252,27 @@ REGISTRY = {
     # the project's colour every map already drew (hue-matched to the operator); pins >= 53.6, lines >= 12.0, lines beside it >= 24.4.
     "jr-east-tokaido-line": {
         "name": "JR Tokaido Line", "operator": "JR East", "colour": "#E07800",
-        "maps": {"kawasaki": "JT", "yokohama": "JT"},
+        "maps": {"fujisawa": "JT", "kawasaki": "JT", "yokohama": "JT"},
+    },
+    # the project's colour yokohama already drew (East-2, 2026-10-11: Sagamihara draws its western end); pins >= 26.3 (olive Food shops, an accepted trade on both maps), lines beside it >= 80.2 on sagamihara.
+    "jr-east-yokohama-line": {
+        "name": "JR Yokohama Line", "operator": "JR East", "colour": "#68A008",
+        "maps": {"sagamihara": "JH", "yokohama": "JH"},
+    },
+    # the project's colour tokyo already drew (East-2, 2026-10-11: the Chiba maps draw its eastern end); pins >= 23.2 (olive Food shops, Tokyo's accepted trade), lines beside it >= 42.5 on funabashi.
+    "jr-east-chuo-sobu-line": {
+        "name": "JR Chuo-Sobu Line", "operator": "JR East", "colour": "#B09000",
+        "maps": {"funabashi": "JB", "ichikawa": "JB", "tokyo": "JB"},
+    },
+    # the project's colour tokyo already drew (East-2, 2026-10-11); pins >= 45.0; 11.8 from the JR Musashino Line where they share track into 西船橋, under the 18 for lines within 500 m: a parked call for Cleanup (East-2's drafts, Funabashi).
+    "jr-east-keiyo-line": {
+        "name": "JR Keiyo Line", "operator": "JR East", "colour": "#C81000",
+        "maps": {"funabashi": "JE", "ichikawa": "JE", "tokyo": "JE", "urayasu": "JE"},
     },
     # the project's colour every map already drew (hue-matched to the operator); pins >= 62.6, lines >= 16.1, lines beside it >= 19.1.
     "jr-central-tokaido-line": {
         "name": "JR Tokaido Line", "operator": "JR Central", "colour": "#E86810",
-        "maps": {"gifu": "TK", "hamamatsu": "JT", "ichinomiya": "TK"},
+        "maps": {"fuji": "JT", "gifu": "TK", "hamamatsu": "JT", "ichinomiya": "TK", "okazaki": "TK", "shizuoka": "JT"},
     },
     # the project's colour osaka already drew; pins >= 45.1, lines >= 19.9, lines beside it >= 19.9.
     "jr-west-tozai-line": {
@@ -271,12 +292,12 @@ REGISTRY = {
     # the project's colour osaka already drew; pins >= 45.0, lines >= 18.1, lines beside it >= 18.1.
     "jr-west-yamatoji-line": {
         "name": "JR Yamatoji Line", "operator": "JR West", "colour": "#12A500",
-        "maps": {"nara": "JY", "osaka": "JQ"},
+        "maps": {"nara": "JY", "osaka": "JQ", "yao": "JQ"},
     },
     # JR East's own line colour; pins >= 82.5, lines >= 12.7, lines beside it >= 23.4.
     "jr-east-yokosuka-line": {
         "name": "JR Yokosuka Line", "operator": "JR East", "colour": "#0070B9",
-        "maps": {"kawasaki": "JO", "tokyo": "JO", "yokohama": "JO", "yokosuka": "JO"},
+        "maps": {"funabashi": "JO", "ichikawa": "JO", "kawasaki": "JO", "tokyo": "JO", "yokohama": "JO", "yokosuka": "JO"},
     },
     # the project's colour every map already drew (hue-matched to the operator); pins >= 50.6, lines >= 70.8, lines beside it >= 70.8.
     "jr-shikoku-yosan-line": {
@@ -291,7 +312,8 @@ REGISTRY = {
     # the project's colour osaka already drew; pins >= 37.3, lines >= 16.4, lines beside it >= 18.0.
     "keihan-main-line": {
         "name": "Keihan Main Line", "operator": "Keihan", "colour": "#7B7B5A",
-        "maps": {"hirakata": "KM", "kyoto": "KM", "osaka": "KM"},
+        "maps": {"hirakata": "KM", "kadoma": "KM", "kyoto": "KM", "moriguchi": "KM", "neyagawa": "KM",
+                 "osaka": "KM"},
     },
     # the project's colour every map already drew (hue-matched to the operator); pins >= 45.7, lines >= 18.8, lines beside it >= 70.3.
     "keihan-uji-line": {
@@ -311,7 +333,7 @@ REGISTRY = {
     # the project's colour every map already drew (hue-matched to the operator); pins >= 45.2, lines >= 31.3, lines beside it >= 31.3.
     "keio-sagamihara-line": {
         "name": "Keio Sagamihara Line", "operator": "Keio", "colour": "#F000B8",
-        "maps": {"chofu": "KS", "kawasaki": "KO", "tama": "KS"},
+        "maps": {"chofu": "KS", "kawasaki": "KO", "sagamihara": "KS", "tama": "KS"},
     },
     # the project's colour nara already drew; pins >= 46.4, lines >= 12.2, lines beside it >= 18.2.
     "kintetsu-kyoto-line": {
@@ -331,17 +353,17 @@ REGISTRY = {
     # the project's colour tsu already drew; pins >= 46.4, lines >= 16.5, lines beside it >= 18.3.
     "kintetsu-osaka-line": {
         "name": "Kintetsu Osaka Line", "operator": "Kintetsu", "colour": "#F85838",
-        "maps": {"higashiosaka": "KO", "osaka": "KO", "tsu": "KO"},
+        "maps": {"higashiosaka": "KO", "osaka": "KO", "tsu": "KO", "yao": "KO"},
     },
     # the project's colour every map already drew (hue-matched to the operator); pins >= 45.5, lines >= 38.1, lines beside it >= 120.0.
     "kita-osaka-kyuko-namboku-line": {
         "name": "Kita-Osaka Kyuko Namboku Line", "operator": "Kita-Osaka Kyuko", "colour": "#E81820",
-        "maps": {"suita": "KK", "toyonaka": "KK"},
+        "maps": {"minoh": "KK", "suita": "KK", "toyonaka": "KK"},
     },
     # the project's colour every map already drew (hue-matched to the operator); pins >= 51.6, lines >= 18.1, lines beside it >= 18.1.
     "meitetsu-nagoya-main-line": {
         "name": "Meitetsu Nagoya Main Line", "operator": "Meitetsu", "colour": "#E80010",
-        "maps": {"gifu": "NH", "ichinomiya": "NH"},
+        "maps": {"gifu": "NH", "ichinomiya": "NH", "okazaki": "NH"},
     },
     # the project's colour osaka already drew; pins >= 45.1, lines >= 16.5, lines beside it >= 18.0.
     "osaka-metro-midosuji-line": {
@@ -366,22 +388,52 @@ REGISTRY = {
     # the project's colour tokyo already drew; pins >= 56.4, lines >= 10.3, lines beside it >= 19.6.
     "odakyu-odawara-line": {
         "name": "Odakyu Odawara Line", "operator": "Odakyu", "colour": "#687888",
-        "maps": {"kawasaki": "OH", "tokyo": "OH"},
+        "maps": {"kawasaki": "OH", "sagamihara": "OH", "tokyo": "OH"},
+    },
+    # new with East-2 (2026-10-11): the colour nearest Odakyu's blue that fits both maps; pins >= 72.3, lines beside it >= 24.0 (the Odawara Line at 相模大野).
+    "odakyu-enoshima-line": {
+        "name": "Odakyu Enoshima Line", "operator": "Odakyu", "colour": "#5080B8",
+        "maps": {"fujisawa": "OE", "sagamihara": "OE"},
     },
     # the colour nearest the operator's #2288CC that clears every map (none drawn before did); pins >= 77.0, lines >= 12.7, lines beside it >= 35.1.
     "odakyu-tama-line": {
         "name": "Odakyu Tama Line", "operator": "Odakyu", "colour": "#2890D8",
         "maps": {"kawasaki": "OT", "tama": "OT"},
     },
+    # new to the site with Naha (2026-10-12), registered because the Urasoe add-on will draw it too: the colour
+    # nearest the trains' red stripe (#C8102E) that reads 3:1 on both pages; pins >= 45.0, no other line on the map.
+    "okinawa-urban-monorail": {
+        "name": "Yui Rail", "operator": "Okinawa Urban Monorail", "colour": "#E84028",
+        "maps": {"naha": "YR"},
+    },
     # the project's colour osaka already drew; pins >= 23.3, lines >= 18.5, lines beside it >= 28.3.
     "osaka-metro-chuo-line": {
         "name": "Osaka Metro Chuo Line", "operator": "Osaka Metro", "colour": "#5D662A",
         "maps": {"higashiosaka": "C", "osaka": "C"},
     },
+    # the project's colours osaka already drew (registered 2026-10-11, when Moriguchi's, Kadoma's and Yao's
+    # maps became the second to draw each).
+    "osaka-metro-tanimachi-line": {
+        "name": "Tanimachi Line", "operator": "Osaka Metro", "colour": "#933CA5",
+        "maps": {"moriguchi": "T", "osaka": "T", "yao": "T"},
+    },
+    "osaka-metro-imazatosuji-line": {
+        "name": "Imazatosuji Line", "operator": "Osaka Metro", "colour": "#E77512",
+        "maps": {"moriguchi": "I", "osaka": "I"},
+    },
+    "osaka-metro-nagahori-tsurumi-ryokuchi-line": {
+        "name": "Nagahori Tsurumi-ryokuchi Line", "operator": "Osaka Metro", "colour": "#7CA014",
+        "maps": {"kadoma": "N", "osaka": "N"},
+    },
     # Osaka Monorail's own line colour; pins >= 81.9, lines >= 37.6, lines beside it >= 37.6.
     "osaka-monorail-main-line": {
         "name": "Osaka Monorail Main Line", "operator": "Osaka Monorail", "colour": "#0067B0",
-        "maps": {"itami": "MO", "suita": "MO", "toyonaka": "MO"},
+        "maps": {"ibaraki_osaka": "MO", "itami": "MO", "suita": "MO", "toyonaka": "MO"},
+    },
+    # the project's colour suita already drew (registered 2026-10-11, when Ibaraki's map became the second to draw it).
+    "osaka-monorail-saito-line": {
+        "name": "Osaka Monorail Saito Line", "operator": "Osaka Monorail", "colour": "#708898",
+        "maps": {"ibaraki_osaka": "MS", "suita": "MS"},
     },
     # the project's colour himeji, kakogawa already drew; pins >= 45.4, lines >= 18.9, lines beside it >= 18.9.
     "sanyo-electric-main-line": {
@@ -408,6 +460,11 @@ REGISTRY = {
         "name": "Sotetsu-JR Link Line", "operator": "JR East", "colour": "#805878",
         "maps": {"kawasaki": "SJ", "yokohama": "SJ"},
     },
+    # the project's colour yokohama already drew (East-2, 2026-10-11: Fujisawa draws its 湘南台 end); pins >= 83.1 on fujisawa, lines beside it >= 64.6 there.
+    "sotetsu-izumino-line": {
+        "name": "Sotetsu Izumino Line", "operator": "Sotetsu", "colour": "#6048E0",
+        "maps": {"fujisawa": "SI", "yokohama": "SI"},
+    },
     # the project's colour every map already drew (hue-matched to the operator); pins >= 53.6, lines >= 23.6, lines beside it >= 23.6.
     "tama-toshi-monorail": {
         "name": "Tama Toshi Monorail", "operator": "Tama Toshi Monorail", "colour": "#E07800",
@@ -416,7 +473,37 @@ REGISTRY = {
     # the project's colour tokyo already drew; pins >= 51.4, lines >= 10.2, lines beside it >= 32.1.
     "tobu-skytree-line": {
         "name": "Tobu Skytree Line", "operator": "Tobu", "colour": "#007890",
-        "maps": {"kasukabe": "TS", "soka": "TS", "tokyo": "TS"},
+        "maps": {"kasukabe": "TS", "koshigaya": "TS", "soka": "TS", "tokyo": "TS"},
+    },
+    # the project's colour kasukabe already drew (East-2, 2026-10-11); pins >= 29.1 (olive Food shops; 45.3 from Personal services), lines beside it >= 18.8 on funabashi.
+    "tobu-urban-park-line": {
+        "name": "Tobu Urban Park Line", "operator": "Tobu", "colour": "#60A000",
+        "maps": {"funabashi": "TD", "kasukabe": "TD", "matsudo": "TD"},
+    },
+    # the project's colour tokyo already drew (East-2, 2026-10-11: drawn cut at the city line in the Chiba cities, owner's call 41); pins >= 50.0, lines beside it >= 31.6 on funabashi.
+    "tokyo-metro-tozai-line": {
+        "name": "Tozai Line", "operator": "Tokyo Metro", "colour": "#6890A0",
+        "maps": {"funabashi": "T", "ichikawa": "T", "tokyo": "T", "urayasu": "T"},
+    },
+    # the project's colour tokyo already drew (East-2, 2026-10-11); pins >= 51.0, lines beside it >= 31.6 on funabashi.
+    "keisei-main-line": {
+        "name": "Keisei Main Line", "operator": "Keisei", "colour": "#785868",
+        "maps": {"funabashi": "KS", "ichikawa": "KS", "sakura": "KS", "tokyo": "KS", "yachiyo": "KS"},
+    },
+    # new with East-2 (2026-10-11): the colour nearest Keisei's Matsudo Line pink that fits both maps; pins >= 45.8, lines beside it >= 59.6 on funabashi.
+    "keisei-matsudo-line": {
+        "name": "Keisei Matsudo Line", "operator": "Keisei", "colour": "#E060D0",
+        "maps": {"funabashi": "KM", "matsudo": "KM"},
+    },
+    # new with East-2 (2026-10-11): the colour nearest a green seed that fits both maps (the hue is not read from the operator); pins >= 45.7, lines beside it >= 18.8 (the Tobu Urban Park Line on funabashi). The same value as jr-east-joban-line, which it meets on no map.
+    "toyo-rapid-railway-line": {
+        "name": "Toyo Rapid Railway Line", "operator": "Toyo Rapid", "colour": "#20A800",
+        "maps": {"funabashi": "TR", "yachiyo": "TR"},
+    },
+    # the project's colour tokyo already drew (East-2, 2026-10-11); pins >= 53.7, lines beside it >= 72.8 on funabashi.
+    "hokuso-line": {
+        "name": "Hokuso Line", "operator": "Hokuso", "colour": "#787878",
+        "maps": {"funabashi": "HS", "ichikawa": "HS", "matsudo": "HS", "tokyo": "HS"},
     },
     # the project's colour tokyo already drew; pins >= 45.7, lines >= 10.1, lines beside it >= 18.6.
     "tokyu-den-en-toshi-line": {
@@ -499,6 +586,49 @@ REGISTRY = {
     "taoyuan-airport-mrt": {
         "name": "Airport MRT", "operator": "Taoyuan Metro", "colour": "#2C5AA5",
         "maps": {"taipei": "A", "taoyuan": "A"},
+    },
+    # the project's colour toyota already drew, registered when okazaki's map
+    # drew the line too (Regional-2, 2026-10-11); pins >= 45.7 on okazaki.
+    "aichi-loop-railway-aichi-loop-line": {
+        "name": "Aichi Loop Line", "operator": "Aichi Loop Railway", "colour": "#28A800",
+        "maps": {"okazaki": "AK", "toyota": "AK"},
+    },
+    # the project's colour toyota already drew. One map draws the line, and
+    # it is registered only so NEIGHBOUR_EXCEPTIONS can name it beside
+    # okazaki's Meitetsu Nagoya Main Line (owner, 2026-10-12, call S16).
+    "meitetsu-mikawa-line": {
+        "name": "Meitetsu Mikawa Line", "operator": "Meitetsu", "colour": "#E80010",
+        "maps": {"toyota": "MM"},
+    },
+    # the project's colours okayama and fukuyama already drew, registered when
+    # kurashiki's map drew the lines too (Regional-2, 2026-10-11); pins >= 45.1
+    # on kurashiki.
+    "jr-west-seto-ohashi-line": {
+        "name": "JR Seto-Ohashi Line", "operator": "JR West", "colour": "#00A0B8",
+        "maps": {"kurashiki": "JB", "okayama": "JB"},
+    },
+    "jr-west-uno-minato-line": {
+        "name": "JR Uno Minato Line", "operator": "JR West", "colour": "#7098A8",
+        "maps": {"kurashiki": "JU", "okayama": "JU"},
+    },
+    "ibara-railway-ibara-line": {
+        "name": "Ibara Railway Ibara Line", "operator": "Ibara Railway", "colour": "#28A800",
+        "maps": {"fukuyama": "IB", "kurashiki": "IB"},
+    },
+    # the project's colour hiroshima already drew, registered when kure's map
+    # drew the line too (Regional-2, 2026-10-11); pins >= 43.0 on kure (Food
+    # shops olive), an accepted trade as on hiroshima's map.
+    "jr-west-kure-line": {
+        "name": "JR Kure Line", "operator": "JR West", "colour": "#D08000",
+        "maps": {"hiroshima": "JY", "kure": "JY"},
+    },
+    # the project's colour shimonoseki already drew, registered when matsue's
+    # map drew the line too (Regional-2, 2026-10-11); pins >= 51.6 on matsue.
+    # Kyoto's "JR Sagano Line" is the same N02 line under its own public
+    # name, on a map 250 km away, and keeps its own colour.
+    "jr-west-sanin-line": {
+        "name": "JR San'in Line", "operator": "JR West", "colour": "#E80010",
+        "maps": {"matsue": "SN", "shimonoseki": "JN", "tottori": "SN"},
     },
 }
 

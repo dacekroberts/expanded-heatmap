@@ -130,10 +130,28 @@ Detail files: [japan](docs/plan_detail/japan.md),
     the downstream note.
   - Staging moves the master list's cities to Built after the landing
     (`check_provenance.py` fails on the branches until then).
-  - **The phone legend (owner, 2026-10-12):** capped at about 40% of the
-    map's height with its own scroll, the lines folded by operator past
-    a measured threshold, names whole (Tokyo's open legend fills half
-    the screen).
+  - **Deferred from the phone legend (owner, 2026-10-12: "defer both"),
+    for a tested change that rides a later re-render** (the search
+    rollout's waves re-render every city). The 40% cap with its own
+    scroll LANDED with phase 2 (measured 224 px of a 560 px frame on
+    Tokyo). Not built:
+    - folding the lines by operator past a measured threshold. Place
+      search reads the legend's line rows (`aria-pressed`), so the fold
+      changes what search sees: test the two together.
+    - the map frame's height on phones. One CSS rule in the app is NOT
+      enough: the map is a fixed 650 px inside its frame (only its width
+      follows the frame), so a 560 px frame puts the OpenStreetMap credit
+      at 636 to 650 px, out of view (measured 2026-10-12). The map's
+      height has to follow the frame inside the phone-fit script
+      (`pipeline/map_common.py`, the one with the load-race history),
+      then `check_map_view.js`, `check_map_labels.js` and
+      `check_map_attribution.js` at phone heights, and the owner's iPhone.
+  - **A repair pass for names holding a private-use character** (owner,
+    2026-10-12, with S1): 1,797 names in 29 cities show their category
+    since S1. Where one publisher uses one code point for one known
+    character (two code points cover 228 of Osaka's 787), restore the
+    character, as "Caf?" is restored; verify each mapping against the
+    publisher's file first.
   - OPEN: the Global View button on Seattle (Regional)'s map does
     nothing on the owner's iPhone (reached from its Overview dot; the
     button works on Tokyo's map); not reproduced at 375 px by a
@@ -145,6 +163,64 @@ Detail files: [japan](docs/plan_detail/japan.md),
     the stations OSM draws as not yet open are an internal watch file
     on the branch with its check, no per-city page text; one general
     sentence for About the Data is approved (the handoff has it).
+  - **FIRST after the phase 2 landing, before the rollout or the audit
+    starts: the skills that make both cheap** (owner, 2026-10-12). **The
+    order after the landing (owner): 1. these skills; 2. the DeepSeek
+    integration (the owner's own handoff, read and started in a new
+    session); 3. everything else** (the search rollout, the
+    commercial-use audit, the label batch).
+    - **`search-city` skill**, with what it rests on: one script that
+      scaffolds every remaining city's search config and thin index step
+      (area from the boundary already in the repo, languages from
+      `travel_packs.LOCAL_LANG`); an unattended fetch queue over
+      `place_index_fetch.py` with a LOCK in the fetch script for the
+      one-query rule (a lock guards a queue and any outside model, a hook
+      only a Claude session); the flagged-name review as one request per
+      city (names and a fixed rubric in, a verdict per name out as JSON),
+      the step a cheaper model can take overnight, sampled afterwards;
+      visitable former homes left out of the rollout; one re-render and
+      one sampled deploy-verify per wave. The lane lessons of this
+      landing go in it: a lane server needs `--server.enableStaticServing
+      true` or the index never loads, Travel draws only on ports 8501 and
+      8000, the hidden pane needs the frame and timer method
+      (`docs/review_lane_kit.md` 7b).
+    - **Before any wave: the size projection.** 19 indexes are 38 MB,
+      about 2 MB a city, so roughly 475 MB at 237 by extrapolation; the
+      wave order waits on the measured figure.
+    - **`commercial-use-audit` skill**: the question and the verdict
+      shapes (permitted, permitted with a condition, forbidden, silent)
+      under the owner's rules of 2026-10-11; each DISTINCT source audited
+      once and fanned out to its cities, counted first; a table that
+      settles the standard licences (CC BY 4.0, ODbL, the government open
+      licences) with no read; a first pass by a cheaper model over the
+      STORED licence texts that returns a verdict and the sentence it
+      rests on, with a script confirming the sentence is in the stored
+      text; Claude reads the silent and conditional ones and a sample of
+      the permitted; the owner decides the forbidden and unclear. A wrong
+      "permitted" is the costly error: the cheaper model finds and
+      quotes, it does not give the final verdict, and its reading of
+      Japanese and Korean terms is tried on known sources first.
+    - Nothing from a business register goes to an outside model; an API
+      key never enters the repo.
+  - **Search rollout, first wave: Mexico City's index is rebuilt for the
+    regional map** (owner, 2026-10-12: "fix in search rollout"). The
+    index landed cut to Mexico City proper: the 11 stations in the four
+    State of México municipios are not in it, and it holds 0 or 1 places
+    within 1 km of each (median 145 for the other stations; measured on
+    `app/static/places/mexico_city.json` against
+    `processed/regional/stations.csv`). Widen `PLACE_AREA` to the four
+    municipios, re-fetch (`place_index_fetch.py`), rebuild, re-render the
+    map. Check whether Mixcoac is indexed as the one junction row.
+  - **Idea for the next landing (owner, 2026-10-12): a button that
+    returns a map to its starting view.** After a search the map stays
+    at the found place and nothing restores the city-wide view (the
+    marker and the fade end after 12 s on their own; clearing the box
+    does not end them early). The button is an ICON, no words, in the
+    family of the layer control and the search button. If the button row
+    gets crowded, this may be the reason to move the Cities menu out of
+    it. Not decided: whether clearing a search should also end the fade
+    at once. Shared map code, so it rides a re-render (the search
+    rollout's waves); measure the button row at 343 px first.
 
 - [ ] **Next landing:**
   - Phase 2 Japanese cities (East-2, Kansai-2, Regional-2) and Cluj-Napoca,
@@ -362,6 +438,8 @@ decisions inside a build are named in its brief.
   2026-09-30). `docs/plan_detail/data_and_disclosure.md`, "What Is Excluded's opening claims".
 - [ ] ⏰ **Philadelphia: 11th St back on 2027-08-30** (SEPTA). `docs/plan_detail/city_watch.md`,
   "Philadelphia: 11th St".
+- [ ] ⏰ **Yamagata: rebuild on the September 2026 food list** (owner, 2026-10-11; the city
+  replaces its file monthly). `docs/plan_detail/city_watch.md`, "Yamagata: the September food list".
 - [ ] **Sacramento's Green Line: check from 2026-10-15** (due back by
   mid-October 2026). `docs/plan_detail/city_watch.md`, "Sacramento's Green Line".
 

@@ -88,6 +88,10 @@ REGISTRIES = {
     # SOLE_TRADER). No address reaches the map; placement is by OSM address.
     "bucharest": dict(raw=None, trade=None, owner=None,
                       processed="businesses_clean.csv", address=None),
+    # Cluj-Napoca (2026-10-11): DSVSA Cluj's registers, Bucharest's rule and
+    # Bucharest's own display_name(), imported unchanged by its step 2.
+    "cluj_napoca": dict(raw=None, trade=None, owner=None,
+                        processed="businesses_clean.csv", address=None),
     # Incheon: SEMAS's 상가(상권)정보 names STOREFRONTS (상호명, with the branch),
     # with no owner, representative or phone column; the Korean pass (Seoul's rule,
     # pipeline/korean_names.py) withholds a bare personal name at a residential
@@ -524,6 +528,11 @@ REGISTRIES = {
     **{slug: dict(raw=None, trade=None, owner=None, processed="businesses_clean.csv",
                   address=("address",), japan=True)
        for slug in ("toyonaka", "hirakata", "suita", "itami", "kakogawa", "amagasaki", "uji")},
+    # Kansai-2 (2026-10-11), the same: Osaka Prefecture's and Neyagawa's 開設者
+    # and MHLW's 法人名 are read only by the name rule, in memory.
+    **{slug: dict(raw=None, trade=None, owner=None, processed="businesses_clean.csv",
+                  address=("address",), japan=True)
+       for slug in ("ibaraki_osaka", "minoh", "moriguchi", "kadoma", "neyagawa", "yao", "takatsuki")},
     # The rest of the 2026-10-01 Japanese batch (2026-10-02), each on the shared
     # steps: every list's operator column is read only by the name rule, in
     # memory (japan_register.OPERATOR_COLS); MHLW's rows and BODIK's
@@ -541,6 +550,12 @@ REGISTRIES = {
                   address=("address",), japan=True)
        for slug in ("maebashi", "fukuyama", "ichinomiya", "tsu", "fukushima", "iwaki", "akita", "oita", "gifu",
                     "mito", "morioka")},
+    # The Regional-2 batch (phase 2, 2026-10-11), on the same shared steps
+    # and rule, every operator column read only by the name rule, in memory.
+    **{slug: dict(raw=None, trade=None, owner=None, processed="businesses_clean.csv",
+                  address=("address",), japan=True)
+       for slug in ("shizuoka", "kanazawa", "okazaki", "aomori", "matsue", "fuji", "matsumoto", "tottori",
+                    "yamagata", "kure", "kurashiki")},
     # Japan wave 2 (2026-10-03), on the same shared steps and the same rule:
     # each list's operator column is read only by the name rule, in memory;
     # MHLW's rows, Hamamatsu's registers and Higashiosaka's national-schema
@@ -556,6 +571,18 @@ REGISTRIES = {
     **{slug: dict(raw=None, trade=None, owner=None, processed="businesses_clean.csv",
                   address=("address",), japan=True)
        for slug in ("higashiyamato", "nishitokyo", "tama", "higashimurayama", "chofu", "ageo_regional", "fuchu_tokyo", "soka", "tokorozawa", "kasukabe", "tachikawa", "hino")},
+    # Naha (2026-10-12), on the same shared steps and the same rule: 申請者名 and
+    # 代表者名 (the monthly food files) and 開設者氏名 (the two registers) are
+    # read only by the name rule, in memory. The Japan pass tests what reached
+    # the map.
+    "naha": dict(raw=None, trade=None, owner=None, processed="businesses_clean.csv",
+                 address=("address",), japan=True),
+    # East-2 (2026-10-11), on the same shared steps and the same rule: each
+    # list's operator columns are read only by the name rule, in memory. The
+    # Japan pass tests what reached the map.
+    **{slug: dict(raw=None, trade=None, owner=None, processed="businesses_clean.csv",
+                  address=("address",), japan=True)
+       for slug in ("koshigaya", "kawaguchi", "fujisawa", "sagamihara", "funabashi", "matsudo", "ichikawa", "urayasu", "sakura", "yachiyo", "ichihara")},
     # Ottawa: Ottawa Public Health's LIVES inspection feed. Its businesses.csv
     # has one name column (the premises name) and a phone, never read (step 2
     # names its columns and asserts it). No owner column exists, so no

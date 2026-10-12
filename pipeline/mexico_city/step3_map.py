@@ -19,6 +19,7 @@ from shapely.ops import linemerge, polygonize, unary_union
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
+from pipeline import place_index  # noqa: E402
 from pipeline.map_common import load_osm_line_shapes, render_heatmap  # noqa: E402
 from pipeline.mexico_city.step1_stations import load_municipios  # noqa: E402
 from pipeline.mexico_city.config import (  # noqa: E402
@@ -99,6 +100,9 @@ def main():
         # The whole-city layer (283,345 points) is back (owner, 2026-09-27). It
         # was dropped 2026-09-22 for file size; once the data shipped as
         # JSON.parse, Seoul's heavier map loaded on the owner's iPhone.
+        # Place search (batch 3, 2026-10-11): the index step2b_place_index.py
+        # writes, served from the app's static folder under its content hash.
+        place_index_url=place_index.index_url("mexico_city"),
     )
 
 

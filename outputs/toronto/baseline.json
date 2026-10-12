@@ -6,5 +6,9 @@
   "platforms": 234,
   "stations_collapsed": 110,
   "stations_in_city": 108,
-  "storefront_rows": 19414
+  "storefront_rows": 19414,
+  "storefronts": 18215,
+  "storefronts_food_service": 13414,
+  "storefronts_personal_services": 4042,
+  "storefronts_retail": 759
 }

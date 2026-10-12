@@ -7,5 +7,8 @@
   "stations": 109,
   "stop_positions": 242,
   "storefronts": 219667,
+  "storefronts_food_service": 67665,
+  "storefronts_personal_services": 42170,
+  "storefronts_retail": 109832,
   "unclassified_placed": 108095
 }

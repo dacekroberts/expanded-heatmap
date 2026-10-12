@@ -12,5 +12,8 @@
   "out_of_bounds": 0,
   "stations_kept": 18,
   "storefront_rows": 70446,
-  "storefronts": 63780
+  "storefronts": 63780,
+  "storefronts_food_service": 20684,
+  "storefronts_personal_services": 7959,
+  "storefronts_retail": 35137
 }

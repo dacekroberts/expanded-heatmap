@@ -166,6 +166,8 @@ OSM_RAIL_BY_CITY = {
     "Stockholm": ("Stockholm's Tunnelbana lines and stations and its kommun boundaries", True),
     "Bucharest": ("Bucharest's metro lines and stations and its city and sector boundaries",
                   True),
+    "Cluj-Napoca": ("Cluj-Napoca's tram lines and their stops, the city boundary us"
+                    "ed to select them and the address points used to place its businesses", True),
     "Tbilisi": ("the Tbilisi Metro's lines and stations and the city's boundary", True),
     "Montpellier": ("the tram line geometry of Montpellier", True),
     "Strasbourg": ("the tram line geometry of Strasbourg", True),
@@ -183,6 +185,16 @@ OSM_RAIL_BY_CITY = {
         "Toyonaka", "Hirakata", "Suita", "Itami", "Kakogawa", "Amagasaki", "Uji")},
     # East-1 (2026-10-07)
     **{c: _japan(c) for c in ("Higashiyamato", "Nishitōkyō", "Tama", "Higashimurayama", "Chōfu", "Ageo (Regional)", "Sōka", "Tokorozawa", "Fuchū (Tokyo)", "Kasukabe", "Tachikawa", "Hino")},
+    # Regional-1 (built 2026-10-07; missing here until the phase 2 landing, 2026-10-12)
+    **{c: _japan(c) for c in ("Maebashi", "Fukuyama", "Ichinomiya", "Tsu", "Fukushima", "Iwaki", "Akita", "Ōita", "Gifu", "Mito", "Morioka")},
+    # Kansai-2 (2026-10-11)
+    **{c: _japan(c) for c in ("Ibaraki (Osaka)", "Minoh", "Moriguchi", "Kadoma", "Neyagawa", "Yao", "Takatsuki")},
+    # Regional-2 (2026-10-11)
+    **{c: _japan(c) for c in ("Shizuoka", "Aomori", "Okazaki", "Kanazawa", "Matsue", "Fuji", "Matsumoto", "Tottori", "Yamagata", "Kure", "Kurashiki",)},
+    # Naha (2026-10-12)
+    "Naha": _japan("Naha"),
+    # East-2 (2026-10-11)
+    **{c: _japan(c) for c in ("Koshigaya", "Kawaguchi", "Fujisawa", "Sagamihara", "Funabashi", "Matsudo", "Ichikawa", "Urayasu", "Sakura", "Yachiyo", "Ichihara")},
 }
 
 

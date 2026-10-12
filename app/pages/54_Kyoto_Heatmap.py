@@ -81,12 +81,13 @@ st.markdown(
   at its center.
 - Kyoto's central addresses name the street corner before the town (河原町通三条上る下丸屋町),
   and the match reads past the corner to the town.
-- Where a business's trade name is its operator's own name, the dot shows its permit type instead.
+- Where a business's trade name is its operator's own name, or is written as a bare personal name,
+  the dot shows its permit type instead.
 - Names and permit types are shown in Japanese, as the city records them.
 """
 )
 
-render_map_help('three business categories (Food shops, Food service and Personal services)')
+render_map_help('three business categories (Food shops, Food service and Personal services)', search='kyoto')
 render_excluded_stations("Kyoto")
 render_country_links('Kyoto')
 

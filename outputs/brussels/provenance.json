@@ -1,27 +1,49 @@
 {
-  "written_utc": "2026-10-04T07:30:56+00:00",
-  "hub": {
-    "url": "https://opendata.brussels.be/api/explore/v2.1/catalog/datasets/commerces-recenses-par-hubbrussels-vbx/exports/json?select=objectid%2Ccategory_fr%2Ccategory_nl%2Ccategory_en%2Ctype_fr%2Ctype_nl%2Ctype_en%2Cname_fr%2Cname_nl%2Cname_en%2Caddress_fr%2Cpostalcode%2Cmunicipality_fr%2Cgeo_point_2d%2Csource%2Clast_update",
-    "page": "https://opendata.brussels.be/explore/dataset/commerces-recenses-par-hubbrussels-vbx/",
-    "records": 6880,
-    "bytes": 3878580,
-    "sha256": "e1365e23d96c99689c3f5c07a114e10c003777677562a93c72bf881576a5ea00",
-    "retrieved": "2026-10-04T07:30:50+00:00"
-  },
   "communes": {
-    "url": "https://opendata.brussels.be/api/explore/v2.1/catalog/datasets/limites-administratives-des-communes-en-region-de-bruxelles-capitale/exports/geojson",
-    "page": "https://opendata.brussels.be/explore/dataset/limites-administratives-des-communes-en-region-de-bruxelles-capitale/",
-    "features": 19,
     "bytes": 777024,
+    "features": 19,
+    "page": "https://opendata.brussels.be/explore/dataset/limites-administratives-des-communes-en-region-de-bruxelles-capitale/",
+    "retrieved": "2026-10-04T07:30:52+00:00",
     "sha256": "98b3288e66dc21e4ed71014b6ae83d897267a58dce73fb2bc0e26be0eebeef8b",
-    "retrieved": "2026-10-04T07:30:52+00:00"
+    "url": "https://opendata.brussels.be/api/explore/v2.1/catalog/datasets/limites-administratives-des-communes-en-region-de-bruxelles-capitale/exports/geojson"
   },
   "gtfs": {
-    "url": "https://api-management-discovery-production.azure-api.net/api/gtfs/feed/stibmivb/static",
-    "portal": "https://data.belgianmobility.io/",
-    "terms_text_sha256": "dc5be008d111bf2398d35c46358ca38ce4fc5d958f62653245314b36f3a4e55e",
     "bytes": 19837741,
+    "file_utc": "2026-10-04T07:30:56+00:00",
+    "portal": "https://data.belgianmobility.io/",
     "sha256": "a79592efdf259783125ff84aa7ef4f0cea1b35557d3a4b321e3064af3c5769b6",
-    "file_utc": "2026-10-04T07:30:56+00:00"
-  }
+    "terms_text_sha256": "dc5be008d111bf2398d35c46358ca38ce4fc5d958f62653245314b36f3a4e55e",
+    "url": "https://api-management-discovery-production.azure-api.net/api/gtfs/feed/stibmivb/static"
+  },
+  "hub": {
+    "bytes": 3878580,
+    "page": "https://opendata.brussels.be/explore/dataset/commerces-recenses-par-hubbrussels-vbx/",
+    "records": 6880,
+    "retrieved": "2026-10-04T07:30:50+00:00",
+    "sha256": "e1365e23d96c99689c3f5c07a114e10c003777677562a93c72bf881576a5ea00",
+    "url": "https://opendata.brussels.be/api/explore/v2.1/catalog/datasets/commerces-recenses-par-hubbrussels-vbx/exports/json?select=objectid%2Ccategory_fr%2Ccategory_nl%2Ccategory_en%2Ctype_fr%2Ctype_nl%2Ctype_en%2Cname_fr%2Cname_nl%2Cname_en%2Caddress_fr%2Cpostalcode%2Cmunicipality_fr%2Cgeo_point_2d%2Csource%2Clast_update"
+  },
+  "osm_places": {
+    "bytes": 4930901,
+    "elements": 34884,
+    "file": "osm_places_2026-10-08.json",
+    "host": "overpass-api.de",
+    "how": "fetched",
+    "osm_base": "2026-10-08T18:44:36Z",
+    "query": "[out:json][timeout:170];\narea(id:3600058274)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-08T18:46:38+00:00",
+    "sha256": "bedcd2e26e9652c7e7600cd8af9a3354d0c78101edb207334621a4dcf0ddfb6a"
+  },
+  "osm_places_extra": {
+    "bytes": 205091,
+    "elements": 549,
+    "file": "osm_places_extra_2026-10-08.json",
+    "host": "overpass-api.de",
+    "how": "fetched",
+    "osm_base": "2026-10-08T18:45:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3600058274)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-08T18:46:54+00:00",
+    "sha256": "35d78ef7965ae52699e543e38f411b4f30a8a4b2ac0bb58319cbfcdbdeb1a10d"
+  },
+  "written_utc": "2026-10-04T07:30:56+00:00"
 }
