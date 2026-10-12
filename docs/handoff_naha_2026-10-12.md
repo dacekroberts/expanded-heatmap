@@ -16,8 +16,7 @@ for whoever builds the Urasoe add-on. Nothing is pushed. The reasoning is in
   `check_map_attribution.js` at 1024 and 375 px.
 - **Failing on purpose in `check_all.py`** (two checks):
   `check_provenance.py` on the master list's counts only (Staging's);
-  `check_macro_labels.py` on the Kyushu-Okinawa view (parked call C,
-  Cleanup's).
+  `check_macro_labels.py` on the Kyushu-Okinawa view (S41, Cleanup's).
 
 ## At the landing
 
@@ -26,23 +25,20 @@ for whoever builds the Urasoe add-on. Nothing is pushed. The reasoning is in
    `pipeline/countries/japan.py` and `app/label_competition.py` will conflict
    with the other phase 2 branches where each appends: keep both sides.
 2. Run `python scripts/regen_generated.py` after the merge.
-3. The Kyushu-Okinawa view needs its fit decided before `check_macro_labels.py`
-   passes (parked call C).
+3. The Kyushu-Okinawa view: S41 (Naha out of the zoom fit, the temporary line),
+   before `check_macro_labels.py` passes.
 4. `app/` changes, so the deployed app needs a reboot after the push.
 5. A full `deploy-verify` has not run; one local render of the page was looked
    at (scope `city-added` at review time).
 
-## Parked calls (five, in the drafts file)
+## Calls
 
-A. One renewal file (August 2020) carries both 業種 and 営業の種類 and reads
-its form as its type: 20 in-term restaurants are missing until a shared rule
-reads it. After the fix, re-run steps 2 and 3 and remove the two disclosure
-phrases named in the call.
-B. One renewal file (October 2016) heads its type 種目; no effect today, and
-the config stops the build if that changes.
-C. The Kyushu-Okinawa view.
-D. The page, What Is Excluded and notice sentences no template covers.
-E. The line's name ("Yui Rail") and four romanised station names.
+Answered by the owner: A (S39, the shared two-column type rule, merged and
+re-run here), B (S40, left as is), C (S41, Cleanup's at the landing: Naha out
+of the Kyushu-Okinawa zoom fit and a temporary "Naha below" line), E (station
+names on the romanised precedent, Naha Airport kept in English). Open for
+review time: D, the page, What Is Excluded and notice sentences no template
+covers. Recorded, not built: F, an English-language switch for station names.
 
 ## For the Urasoe add-on
 

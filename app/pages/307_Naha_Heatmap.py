@@ -46,9 +46,9 @@ render_data_age("Naha")
 # From the japan-city skill's template and Kyoto's page (the rebuilt register
 # and its upper-bound sentences; approved wording, pre-approved for this
 # build); the sentences neither covers are proposals in
-# docs/decisions_drafts/worktree-japan-naha.md. The restaurant figure, 8,744
+# docs/decisions_drafts/worktree-japan-naha.md. The restaurant figure, 8,785
 # against 8,530, is step 2's (outputs/naha/official_shares.json); the ring
-# share, 84.7%, is step 3's (8,581 of 10,135).
+# share, 84.7%, is step 3's (8,598 of 10,153).
 st.markdown(
     """
 **The lines**
@@ -66,7 +66,7 @@ st.markdown(
   monthly list from April 2015 to August 2026, keeping each permit still within its term on
   August 31, 2026, the last date the newest monthly list covers.
 - The city does not publish closures, so a business that closed before its permit ran out is still
-  counted. The map shows an upper bound: the rebuilt list holds 8,744 restaurant permits, against
+  counted. The map shows an upper bound: the rebuilt list holds 8,785 restaurant permits, against
   8,530 in force in the national count of March 2025. A dot means a permit on file, not a business
   open today.
 - Barbers and beauty salons come from the city's registers as of September 4, 2026. The city

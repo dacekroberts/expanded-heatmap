@@ -7,43 +7,21 @@ Cleanup folds this file into `DECISIONS.md` when the owner hands it off.
 
 Named by city and letter; Staging assigns the S numbers when it relays them.
 
-- **Naha A: one renewal file reads its type column as the form (Cleanup's
-  shared reader).** `1aa3d6d3_r02.8_keizoku.xls` (the renewals of August
-  2020, 56 rows, 55 in term) carries BOTH 業種 and 営業の種類, in that order:
-  there 業種 holds the permit type (飲食店営業) and 営業の種類 the form (バー,
-  食堂). `TYPE_COLS` reads 営業の種類 first, so 43 rows take a form word as
-  their type and none reads a form. Measured: 20 of the 55 classify as
-  storefronts as read, 40 with 業種 read as the type, so **20 in-term
-  restaurants are missing from the map** (0.2% of its pins; 12 hostess bars
-  fall out either way). It is also the whole of the gap between this build's
-  8,744 restaurant permits and the brief's 8,786 (42 rows). *Recommend a
-  shared rule: where a row carries both 業種 and 営業の種類, 業種 is the type
-  and 営業の種類 the form*, then a re-run of Naha's steps 2 and 3 and the
-  removal of the "About 20 restaurants" bullet from its What Is Excluded
-  section and of "about 20 restaurants renewed in August 2020 unread" from
-  table C. Tradeoff: a rule in `rebuilt_register` or the readers that every
-  rebuilt city passes through (zero drift expected, to be shown); leaving it
-  keeps a small, disclosed shortfall. Not fixed in the city, as the prompt
-  rules.
-- **Naha B: one renewal file heads its type column 種目 (Cleanup's shared
-  reader; no effect today).** `b655ef39_h28.10_keizoku.xls` (October 2016, 68
-  rows) has no 営業の種類 column: its types (飲食店（食堂）, 菓子製造業) sit
-  under 種目, which the shared lists read as the form. Every row expired by
-  2023, so nothing reaches the stitch's output. `config.TYPE_UNREAD` names
-  the file and `_monthly_rows` stops the build if a row of it is ever in
-  term. *Recommend leaving it* unless A's rule covers it for free.
-- **Naha C: the Kyushu-Okinawa view (Cleanup's, as S35 left it).**
-  `check_macro_labels.py` reports PROBLEMS 4 with Naha tagged
-  Kyushu-Okinawa: Kitakyushu and Shimonoseki's dots 3.3 px apart at 375, 768
-  and 1200, and Sasebo and Ōita labelled in no view. Naha stretches the
-  view's fit, as the brief expected. No region view, offset or
-  `REGION_ZOOM_WITHOUT` entry was touched. *Recommend holding Naha out of the
-  view's zoom fit* (`REGION_ZOOM_WITHOUT`), measured with
-  `scripts/stress_overview.py --planned 2`. Tradeoff: Naha's dot sits off the
-  pinned canvas in that view until a view of its own exists.
+- **Naha A, B, C: ANSWERED by the owner in Cleanup's chat, 2026-10-12 (S39,
+  S40, S41; relayed by Staging, logged in DECISIONS on master): "yes with
+  conditions for s39, s40 left as is, s41 maybe a small line appears on the
+  kyushu-okinawa regional view stating (naha below) a temporary item".**
+  S39: `rebuilt_register` reads a row filling both 業種 and 営業の種類 by 業種
+  as the type (b9ad4096, zero drift on the seven built cities that call the
+  stitch); this branch merged master and re-ran steps 2 and 3 (the entry
+  below, "after S39"). S40: the October 2016 file is left as is;
+  `config.TYPE_UNREAD` still guards it. S41: Cleanup's at the landing (Naha
+  held out of the Kyushu-Okinawa view's zoom fit, a temporary "Naha below"
+  line worded for the owner first); no view was touched here, so
+  `check_macro_labels.py` still reports PROBLEMS 4 on this branch.
 - **Naha D: page and notice sentences no template covers (proposals, flagged
   for review time; S36).** On the page: (1) "The map shows an upper bound:
-  the rebuilt list holds 8,744 restaurant permits, against 8,530 in force in
+  the rebuilt list holds 8,785 restaurant permits, against 8,530 in force in
   the national count of March 2025." (S32's measured figure, inside Kyoto's
   sentence); (2) "The city publishes no list of laundries, so the Personal
   services layer has none."; (3) "Stalls licensed for the whole city (769)
@@ -56,7 +34,7 @@ Named by city and letter; Staging assigns the S numbers when it relays them.
   the legend: the Yui Rail, Okinawa's monorail." In What Is Excluded: "Three
   months are published twice; where an address, trade name and permit type
   repeat, the permit ending latest is kept, so a repeat or a renewal counts
-  once.", and the "About 20 restaurants" bullet of call A. Notice 217's
+  once." Notice 217's
   wording (no wording is prescribed by the city's terms): Sasebo's edited-use
   form naming the three datasets, with the three package links and "rebuilt
   the city's food permits from its monthly lists of new and renewed permits,
@@ -84,6 +62,32 @@ Named by city and letter; Staging assigns the S numbers when it relays them.
   feature freeze of 2026-10-08 it is recorded, not started.
 
 ## Entries
+
+### 2026-10-12 - Naha after S39: the August 2020 renewals read by the shared rule; 10,153 pins and 8,785 restaurant permits, the brief's figure to one row
+
+- **Decided by the owner (S39, in Cleanup's chat, relayed by Staging).**
+  Master's b9ad4096 merged into this branch; steps 2 and 3 re-run, the
+  baseline recorded, and the two disclosure phrases dropped (the "About 20
+  restaurants" bullet of What Is Excluded and the "unread" clause of table
+  C).
+- **Counts, replacing the build entry's.** 10,514 permits in term (two keys
+  that differed only by the misread type now fold); 8,785 of type 飲食店
+  against 8,530 (103.0%; the brief's 8,786). Set aside: 769 and 171 as
+  before; 410 not storefronts (215 no rule, 122 hostess venues, 60 vending,
+  10 caterers, 2 inside inns, 1 temporary). Storefront rows 10,520 (Food
+  service 7,657, Food shops 1,507, Personal services 1,356); 359 repeats
+  folded; **10,153 pins** (Food service 7,650, Food shops 1,150, barbers 287,
+  beauty salons 1,066), 18 more than before, all Food service. This build's
+  earlier estimate of 20 missing rows was before the one-pin-per-premises
+  step.
+- **Unchanged or re-measured.** Join: block 10,359 (98.5%), town-chōme 153,
+  unplaced 8. In a ring: 8,598 of 10,153 (84.7%). Census control 2.87 per
+  establishment. Privacy: the Japan pass prints 0 of 10,153 rows, 4 pins
+  show their permit type; verdict publish. The densest block still holds
+  250. Station names as call E left them.
+- **Checks.** Drift zero against the new commit; `check_all.py` as before,
+  failing only on the master list's counts (Staging's) and the
+  Kyushu-Okinawa view (S41, Cleanup's).
 
 ### 2026-10-12 - Naha built, a food register rebuilt from the city's monthly new-permit and renewal lists, with its barber and beauty registers (page 307, notice 217)
 
