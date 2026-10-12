@@ -117,7 +117,13 @@ FORM_RULES = [
     # type, and about 34 restaurant permits carried it as their form (owner,
     # DECISIONS "Category check: the owner's calls"). Fukuoka's ろ店 is not it.
     ("temporary / mobile", None, r"仮設|臨時|短期|期間限定|季節的|イベント|催事|祭|マルシェ|出店|自動車(?!以外)|"
-                                 r"キッチンカー|移動|行商|列車|屋形船|海の家|露店"),
+                                 r"キッチンカー|移動|行商|列車|屋形船|海の家|露店|"
+                                 # S18 (owner, 2026-10-12; DECISIONS): 特殊形態, a facility meant to
+                                 # be moved or removed (Okayama City's definition), is a temporary
+                                 # form in every city: Kurashiki 8 pins, Okayama 6 (two spelled
+                                 # 特殊第1種 and 特殊1種, each with a tank size), Oita 1. It runs
+                                 # before the yatai rule, so Okayama's one 特殊形態 屋台 goes too.
+                                 r"特殊形態|特殊第?1種"),
     # Fukuoka's 屋台, filed as ろ店 / 定置屋台: stalls at fixed street spots
     # (Nakasu's 清流公園, Tenjin, Nagahama) on permits running to 2032 under
     # the city's 屋台基本条例 - not a festival stall. They COUNT (owner
@@ -134,7 +140,10 @@ FORM_RULES = [
     # Tokyo's バー・キャバレー / 一般・スナック, Fukuoka's スナック、バー.
     ("hostess venue: cabaret / snack bar", None, _HOSTESS),
     ("event catering (仕出し)", None, _CATERING),
-    ("vending machine", None, r"自動販売機|自販機|置き菓子"),
+    # S17 (owner, 2026-10-12): Kurashiki's 自動販売形態, the vending form (83
+    # pins there; on no other built city's kept rows, measured that day).
+    # Mito's 冷凍品の自動販売 (1) and Yao's 自動販売業 (34) are other words, unread.
+    ("vending machine", None, r"自動販売機|自販機|置き菓子|自動販売形態"),
     ("mail order", None, r"通信販売|訪問販売|ネット販売|インターネット販売|ネットショップ|オンラインショップ"),
     # Kobe's konbini rule, as a form: a konbini or supermarket holding a
     # restaurant permit is a shop
@@ -300,7 +309,12 @@ for _v, _f, _want in (("① 飲食店営業", "自動車200L", None), ("① 飲�
                       ("飲食店営業", "旅館", None), ("① 飲食店営業", "コンビニエンスストア", "Retail"),
                       ("① 飲食店営業", "居酒屋", "Food service"), ("① 飲食店営業", float("nan"), "Food service"),
                       ("⑪ 百貨店、総合スーパー", "ドラッグストア", "Retail"), ("食肉処理業", "スーパー", None),
-                      ("⑤ コップ式自動販売機（自動洗浄・屋内設置）", "カフェ", None)):
+                      ("⑤ コップ式自動販売機（自動洗浄・屋内設置）", "カフェ", None),
+                      # S17 and S18: the vending and special forms; a fixed yatai still counts
+                      ("① 飲食店営業", "自動販売形態", None), ("① 飲食店営業", "特殊形態", None),
+                      ("① 飲食店営業", "特殊形態第１種　水４０L", None), ("① 飲食店営業", "特殊第１種（４０ℓ）", None),
+                      ("① 飲食店営業", "特殊１種（８０ℓ）", None), ("① 飲食店営業", "特殊形態第1種80L　屋台", None),
+                      ("① 飲食店営業", "定置屋台", "Food service"), ("① 飲食店営業", "冷凍品の自動販売", "Food service")):
     assert classify({VALUE_COLUMN: _v, "form": _f}) == _want, (_v, _f, classify({VALUE_COLUMN: _v, "form": _f}))
 # (owner, 2026-09-29) hostess venues and 仕出し catering go, by type or by 業態;
 # a plain bar, a wine bar and a snack-food confectioner stay.
