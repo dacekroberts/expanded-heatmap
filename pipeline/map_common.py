@@ -3868,7 +3868,22 @@ def add_pin_layer(m, rows, group_name, color, tooltip_field_label,
 # 1000 px (review lane 3, F1); Philadelphia 299, Buffalo 315 and Toronto 319
 # were past the model too. A legend narrower than the cap renders the same.
 LEGEND_MODEL_W = 274
-_LEGEND_CAP_STYLE = f"<style>.map-legend {{ max-width: {LEGEND_MODEL_W}px; }}</style>"
+# ON A PHONE the open legend is also capped in HEIGHT, with its own scroll
+# (owner, 2026-10-12: Tokyo's open legend, 52 lines, filled half the screen
+# and ran under the map's edge). 40vh is 40% of the map FRAME's height, since
+# the map is its own document; LEGEND_PHONE_W is the frame width under which
+# it applies (a 375 px phone's frame is 343 px; a tablet's 768 is left alone).
+# Names stay whole and wrap, nothing is truncated (the line-identity rule).
+# overscroll-behavior keeps a scroll that reaches the legend's end from
+# moving the page behind the frame. The legend opens closed on a phone
+# (LEGEND_AUTOFIT_SCRIPT), so the label layout's legend obstacle is unchanged.
+LEGEND_PHONE_W = 600
+LEGEND_PHONE_MAX_VH = 40
+_LEGEND_CAP_STYLE = (
+    f"<style>.map-legend {{ max-width: {LEGEND_MODEL_W}px; }} "
+    f"@media (max-width: {LEGEND_PHONE_W}px) {{ details.map-legend[open] {{ "
+    f"max-height: {LEGEND_PHONE_MAX_VH}vh; overflow-y: auto; overscroll-behavior: contain; "
+    f"-webkit-overflow-scrolling: touch; }} }}</style>")
 
 
 def build_legend(bucket_colors, legend_label, lines, no_data_stations=False, legend_names=None,
