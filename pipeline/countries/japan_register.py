@@ -976,6 +976,11 @@ AREA_WORDS = re.compile(r"全域|周辺")
 END_COLS = ("許可満了日", "許可終了日", "許可満了年月日", "許可終期", "満了年月日", "終了年月日", "有効期限",
             "許可期間（満了）", "許可有効期限")
 START_COLS = ("許可開始日", "開始年月日", "許可始期", "許可期間（開始）")
+# A premises' FIRST permit, each list's own spelling (93 header columns across
+# the raw files on disk, 2026-10-12: 初回許可年月日 77, 初回許可日 11, the other
+# three once each; Kawaguchi's list carries two, its 届出 one first). Read by
+# step 2's out_of_term for S2. 初回申請, an application's date, is not read.
+FIRST_COLS = ("初回許可（届出）年月日", "初回許可年月日", "初回許可日", "初回許可開始年月日", "初回許可開始日")
 
 
 def permits_from_rows(rows, pref, city, wardless=False, rules=(), others=(), municipalities=(), gaiji=None,
@@ -1162,6 +1167,7 @@ def permits_from_rows(rows, pref, city, wardless=False, rules=(), others=(), mun
             # read by step 2 against the source's pinned as-of (TERM_AS_OF)
             rec["end"] = next((d for d in (wareki_date(r.get(c)) for c in END_COLS) if d), None)
             rec["start"] = next((d for d in (wareki_date(r.get(c)) for c in START_COLS) if d), None)
+            rec["first"] = next((d for d in (wareki_date(r.get(c)) for c in FIRST_COLS) if d), None)
         out.append(rec)
     return out
 

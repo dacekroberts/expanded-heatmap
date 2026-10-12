@@ -525,6 +525,18 @@ def out_of_term(config, df, rules):
                           for d, a in zip(df[col], on)], index=df.index)
     past = cmp("end", "past_term", -1)
     late = cmp("start", "late_start", 1)
+    # S2 (owner, 2026-10-11; DECISIONS): a late start whose FIRST permit is on
+    # or before the as-of is a renewal already granted, at a premises that is
+    # open, and stays (Kawaguchi's March list: 131 such rows, 112 of them
+    # restaurants). Counted only where it keeps a row, so a city it does not
+    # touch gains no baseline figure.
+    if "first" in df and late.any():
+        renewal = late & pd.Series([bool(f and a and isinstance(f, type(a)) and (f - a).days <= 0)
+                                    for f, a in zip(df["first"], on)], index=df.index)
+        if renewal.any():
+            print(f"  late starts kept as renewals, first permit on or before the as-of (S2): {int(renewal.sum()):,}")
+            emit("permits_late_start_renewal", int(renewal.sum()))
+            late = late & ~renewal
     for label, m, k in (("past its term (call 161)", past, "past_term"), ("starting after the as-of (call 172)", late,
                                                                          "late_start")):
         print(f"  permits {label}: {int(m.sum()):,}")
