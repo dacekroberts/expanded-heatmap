@@ -85,10 +85,20 @@ All quoted in the drafts file; the short list:
   corrected name would not be OSM's. Where `name` carries a third script and
   a local-language name exists, that name leads (`_local_first`); every other
   glitch (cut short, stray characters, a wrong object's name) is dropped by
-  id.
+  id. A name that states the same thing in two languages either side of a
+  separator, each part one of the object's own name:<language> values, is no
+  glitch and stays whole.
 - **Private minor ways are no streets** (owner, 2026-10-11): a street whose
   every way is a footway, path, track or service road with access=private or
-  no, none notable, goes with its crossings.
+  no, none notable, goes with its crossings. **Except a private street named
+  as a residential street** ("keep those streets"): `PRIVATE_STREET_LEAD`,
+  French so far (villa, cité, square, impasse, hameau). A new language's
+  words are measured on its built cities first, and never include an access
+  or service road's word.
+- **A housing estate named as one needs wikidata or an article**
+  (`ESTATE_NAME`, English "X Estate"; owner, 2026-10-11), and **a hamlet
+  whose population tag is under 50 goes** unless notable
+  (`HAMLET_MIN_POPULATION`, site-wide; one with no population tag stays).
 - **Streets closed for rebuilding** are kept by name in `config.PLACE_REBUILT`
   (owner, 2026-10-11; Tbilisi's Rustaveli Avenue); a name no construction way
   carries stops the step.
@@ -110,9 +120,9 @@ All quoted in the drafts file; the short list:
 - **Suggestions are work in progress**: few items, phones first.
 - **Any search inside a station's rings must keep working** (the boundary of
   the reserve intersection cut, unused so far).
-- **Top-line, still open:** iPhone memory and repository size. **The owner
-  tests São Paulo's map on a phone (then London's) before any rollout**; no
-  city is added until that test has passed.
+- **Top-line:** repository size is still open. iPhone memory: the owner's
+  phone test of São Paulo, the largest index (1,229 KB first open), passed
+  on 2026-10-11; a city much larger than that is tested again first.
 
 ## Before a batch
 
@@ -345,15 +355,16 @@ out
 
 ## Open owner questions (as of 2026-10-11; check the drafts file)
 
-2b's nine are answered (the calls above). Batch 3's ten, in its drafts entry:
-the phone test; private gated streets (Paris lost 351 rows); houses found
-not open at source; a second language in its own script beside the name;
-wikidata that is not the object's own (tombs, dealer galleries, historic=
-monument); housing estates as districts; Mexico City's census hamlets;
-denomination-only names on places of worship; English bare type words from
-London; smaller calls by name. Earlier and still open: the WIP suggestion
-tuning, the corner credit test, the Cities menu move, and whether "Download
-this index" also links the intersections file.
+2b's nine and batch 3's ten are answered (the calls above; the phone test
+passed). Open: **monuments and galleries**: the owner's yes to holding
+historic=monument to the notable rule and to treating a gallery without a
+Wikipedia tag as a dealer was measured and NOT applied (it removed Seoul's
+King Sejong statue and its Museum of Art, among about 420 rows), and is back
+with the owner; until then such rows are dropped by id. **The station
+highlight** on a phone is dwarfed by the dots and the heat layer; a stronger
+marker with the dots faded is proposed, not built. With Cleanup for review
+time: the WIP suggestion tuning, the corner credit test, the Cities menu
+move, and whether "Download this index" also links the intersections file.
 
 ## Batch 3, the size tests: the result (2026-10-11)
 
@@ -361,8 +372,7 @@ First open and intersections file, gzipped, against Seoul's 383 KB and 247 KB:
 São Paulo 1,229 and 785 KB (3.2 times Seoul on both, the largest); London
 1,199 and 709; Mexico City 877 and 643; Tokyo 325 and 35 (most of its
 streets carry no name); Paris 181 and 94. The nineteen cities' files are
-39.2 MB raw. **Held for the owner's phone test of São Paulo, then London.**
-The reserve intersection cut (rings plus main roads, `PLAN.md`) is not built;
-it is the fallback if the test fails, and its saving on São Paulo is not
-measured. Tokyo's 23 wards are their own relations (admin_level 7, names
+39.2 MB raw. **The owner's phone test of São Paulo passed (2026-10-11).**
+The reserve intersection cut (rings plus main roads, `PLAN.md`) stays
+unbuilt and unused. Tokyo's 23 wards are their own relations (admin_level 7, names
 ending 区, inside ISO3166-2 JP-13), listed in `pipeline/tokyo/config.py`.

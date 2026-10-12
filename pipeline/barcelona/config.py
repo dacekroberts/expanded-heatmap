@@ -357,6 +357,10 @@ PLACE_DROPPED = {
     # of worship, both of its objects (owner, 2026-10-08: "drop gran logia").
     "way/813703606": "'Gran Logia Simbólica Española', the lodge's seat in an apartment building",
     "node/7600733729": "'Logia Masonica GLSE', the same lodge as a node",
+    # Houses kept on tourism=attraction or artwork alone and found not open to the public at a source (owner, 2026-10-11: "drop by id (all)"; checked 2026-10-11).
+    "way/614574610": "Casa Calvet: apartments, not open to visitors, only the ground-floor restaurant is public (https://patrimoni.gencat.cat/en/node/33069)",
+    "way/385187741": "Casa Bruno Cuadros: the interior cannot be visited (https://thisisbarcelona.com/architecture/houses-and-emblematic-buildings/casa-bruno-cuadros)",
+    "way/679019157": "Casa Lleó Morera: closed to the public for about ten years; a reopening as a museum was approved 2026-06-26 with no date (https://en.ara.cat/society/barcelona-will-reopen-to-the-public-one-of-the-modernist-treasures-of-passeig-gracia_1_5780887.html). Re-check when it reopens",
 }
 
 # Visitable former homes (owner, 2026-10-08: "visitable only hard line. Must

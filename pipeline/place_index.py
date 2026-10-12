@@ -536,6 +536,27 @@ WAY_WORDS = {
            # Stairs (Tbilisi's named minor ways, 2026-10-08).
            "კიბე", "კიბეები"),
 }
+# PRIVATE STREETS NAMED AS STREETS (owner, 2026-10-11): the private-minor-way
+# rule took 351 street rows in Paris, among them the Villas, Cités, Hameaux,
+# private Squares and Impasses, which are addressed residential streets
+# behind a gate. A private minor way whose name LEADS with one of these words
+# is kept, and reads as a way (villa, cité and hameau are not in WAY_WORDS,
+# where they would also admit a housing estate's footpaths by name). French
+# only so far: measure a word on every built city of its language before
+# adding it, and never a word for an access or service road.
+PRIVATE_STREET_LEAD = {"fr": ("villa", "cité", "square", "impasse", "hameau")}
+
+
+def _private_street(names, local):
+    for code in local:
+        lead = PRIVATE_STREET_LEAD.get(code, ())
+        for n in names:
+            ws = re.findall(r"\w+", n.lower())
+            if ws and ws[0] in lead:
+                return True
+    return False
+
+
 # Languages that write a way word inside a compound ("Nieuwstraat",
 # "Kerkpad"; Korean 세종대로): _reads_as_way matches it as a word's ending there.
 SUFFIX_WAY_LANGUAGES = {"nl", "ko"}
@@ -582,6 +603,13 @@ NOT_RAIL = {"amenity": {"bus_station", "ferry_terminal"}, "aerialway": {"station
 COMMERCIAL_BUILDINGS = {"commercial", "retail", "office", "hotel", "data_center"}
 # historic=* values that are clutter at a search box (wayside shrines and
 # stones number in the hundreds and are named after their saint or deity).
+# NOT "monument" (measured 2026-10-11, after the owner's yes to holding it to
+# the rule memorials follow): across the nineteen indexes it removed about
+# 420 rows, among them Seoul's statue of King Sejong and its March 1st
+# monument, Montréal's Canadiens statues, Chicago's Marquette Monument,
+# Mexico City's Monumento a Morelos and Sydney's Queen Victoria Building,
+# none of which carries wikidata in OSM. London's graves and mis-named nodes
+# under historic=monument are dropped by id instead. Put back to the owner.
 SKIP_HISTORIC = {"wayside_shrine", "wayside_cross", "boundary_stone", "milestone",
                  "memorial", "tomb", "yes"}
 # Tourism and education landmarks need a wikidata or wikipedia tag: without
@@ -752,7 +780,35 @@ def junk_name(name):
 BARE_TYPE_NAMES = {
     "en": ("monument", "memorial", "sculpture", "statue", "stupa", "park", "playground", "church",
            "chapel", "temple", "shrine", "fountain", "garden", "viewpoint", "lookout", "pavilion",
-           "gazebo", "clubhouse", "greenbelt", "korean church", "playpark", "prayer room"),
+           "gazebo", "clubhouse", "greenbelt", "korean church", "playpark", "prayer room",
+           # London's read (batch 3; owner, 2026-10-11: "measure and add"),
+           # measured on Seattle, Chicago, Vancouver and Sydney first: street
+           # furniture, garden and estate structures, earthworks and prayer
+           # rooms under their type alone. NOT here, since each is also a
+           # place's real name somewhere: The Green, The Glade, Village
+           # Green, The Terrace, Memorial Park, Memorial Gardens, Italian
+           # Gardens, Japanese Garden, Old Town Hall, Pagoda, Amphitheatre,
+           # Totem Pole, Spa, Lion.
+           "war memorial", "first world war memorial", "second world war memorial",
+           "world war 1 memorial", "boer war memorial", "civilian memorial",
+           "police public callbox", "police call box", "police phone post",
+           "police telephone callbox", "coal tax post", "lamp post", "lamp standard",
+           "ventilation shaft cover", "anglican chapel", "nonconformist chapel",
+           "multi-faith prayer room", "multi faith prayer room", "multifaith prayer room",
+           "multi-faith room", "multifaith centre", "prayer hall", "prayer rooms",
+           "chaplaincy centre", "alcove", "gate lodge", "icehouse", "ice well", "summerhouse",
+           "stable block", "the stables", "columbarium", "church porch", "lych gate", "lime kiln",
+           "conduit head", "gothic arch", "gothic ruins", "ruined arch", "gateway tower",
+           "the folly", "the grotto", "cattle trough", "double cattle trough",
+           "victorian cattle trough", "drinking fountain", "victorian drinking fountain",
+           "obelisk", "the obelisk", "clocktower", "sundial", "tumulus", "mill ruins",
+           "waterwheel pit", "water treatment", "bomb crater", "blast mound", "tank traps",
+           "type 22 pillbox", "fossil pit", "fossilised tree", "the earthworks",
+           "community garden", "bandstand", "the bandstand", "the band stand", "paddocks",
+           "the meadow", "the walled garden", "outdoor learning area", "tree space",
+           "athletics stadium", "piazza", "the plaza", "the main square", "main quad",
+           "south quad", "figurehead", "waterfall", "rope circle", "ravine",
+           "common watercourse", "pocket park", "play area"),
     "ja": ("本殿", "本堂", "拝殿", "灯籠", "唐門", "山門", "五重塔", "御影堂", "金堂", "鳥居", "鐘楼",
            "石碑", "公園", "児童公園", "広場", "記念碑",
            # Tokyo's read (batch 3, 2026-10-11): shrine fixtures, pocket parks
@@ -824,6 +880,30 @@ _BARE_FOLDED = {c: {_unaccent(w) for w in ws} for c, ws in BARE_TYPE_NAMES.items
 # "Grupo 12", "Manzana 82" (batch 3, 2026-10-11). The whole name, places only.
 NUMBERED_BLOCK = {"es": re.compile(r"(grupo|manzana|edificio)\s+\w{1,4}", re.I),
                   "pt": re.compile(r"(bloco|quadra|edifício|edificio)\s+\w{1,4}", re.I)}
+# A HOUSING ESTATE NAMED AS ONE (owner, 2026-10-11: "yes, state reasoning ...
+# for lack of wikidata"): London maps its council estates as place nodes, so
+# the residential-area test cannot see them; 53 places were named "X Estate",
+# 11 with wikidata. An estate with a wikidata item or an article is a known
+# district of the city (Aylesbury, White City, Pullens) and stays; one with
+# neither is people's homes under the landlord's name for them, with nothing
+# public to say it is used as a district's name, and goes. The lack of
+# wikidata is the whole reason: no estate was judged one by one.
+ESTATE_NAME = {"en": re.compile(r"\bestate$", re.I)}
+# A HAMLET UNDER THE FLOOR (owner, 2026-10-11, a site-wide rule: "population
+# floor: 50 or higher"): Mexico City's census import maps 609 localities as
+# place=hamlet, 91 of them with ten people or fewer and some under a family's
+# name ("Los Aguilar", "Rancho Tres Hermanos"): one household, a home. A
+# hamlet whose OSM population tag is under the floor goes unless notable. One
+# with no population tag stays: nothing says how small it is (Hong Kong's
+# villages carry none).
+HAMLET_MIN_POPULATION = 50
+
+
+def _population(tags):
+    digits = re.sub(r"[\s,.]", "", str(tags.get("population") or ""))
+    return int(digits) if digits.isdigit() else None
+
+
 # A family's grave: Paris's cemeteries are mapped tomb by tomb, each with a
 # wikidata item for the TOMB, and 13 are "Famille Dumur" and the like, private
 # families' names. A tomb so named is never indexed (batch 3, 2026-10-11).
@@ -852,6 +932,11 @@ _OWN_SCRIPTS = {"ja": ("kana", "han"), "zh": ("han",), "ko": ("hangul", "han"), 
                 "el": ("greek",)}
 
 
+# What sits between the two halves of a bilingual name: a bar, a slash or a
+# dash with a space either side.
+_NAME_SEPARATOR = re.compile(r"\s+[|/\-\u2013\u2014]\s+")
+
+
 def _third_script(name, local):
     own = {s for c in local for s in _OWN_SCRIPTS.get(c, ())}
     for script, pairs in _SCRIPT_RANGES.items():
@@ -868,6 +953,16 @@ def _local_first(tags, names, local):
     `name` carries a third script (above); else `names` unchanged."""
     name = (tags.get("name") or "").strip()
     if not names or names[0] != name or not _third_script(name, local):
+        return names
+    # THE SAME NAME IN TWO LANGUAGES is no glitch (owner, 2026-10-11: "exempt
+    # separator that states the same thing in two languages"): New
+    # Westminster's "Sukh Sagar Park | ਸੁਖ ਸਾਗਰ ਪਾਰਕ" is its name:en and its
+    # name:pa either side of a separator. Only where EVERY part is one of the
+    # object's own name:<language> values: a separator alone proves nothing,
+    # since a stray word can sit behind one too.
+    parts = [p.strip() for p in _NAME_SEPARATOR.split(name)]
+    own = {(v or "").strip() for k, v in tags.items() if k.startswith("name:")}
+    if len(parts) > 1 and all(p and p in own for p in parts):
         return names
     for code in (*local, *(() if any(c in _OWN_SCRIPTS for c in local) else ("en",))):
         lead = (tags.get(f"name:{code}") or "").strip()
@@ -1121,7 +1216,8 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             report["street_way_skipped"] += 1
             continue
         if (t.get("highway") in MINOR_HIGHWAYS and not (t.get("wikidata") or t.get("wikipedia"))
-                and not _reads_as_way(names, local)):
+                and not _reads_as_way(names, local)
+                and not (t.get("access") in ("private", "no") and _private_street(names, local))):
             report["minor_way_dropped_not_a_way_name"] += 1
             continue
         # A road named for private or parking access, or a business, is no
@@ -1153,7 +1249,8 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         street_names[cell] = prev + [n for n in names if n not in prev]
         street_langs[cell] |= _langs(t, local)
         street_open[cell] |= not (minor and t.get("access") in ("private", "no")
-                                  and not (t.get("wikidata") or t.get("wikipedia")))
+                                  and not (t.get("wikidata") or t.get("wikipedia"))
+                                  and not _private_street(names, local))
         for n in w["nodes"]:
             node_streets[n].add(names[0])
     # Neighbouring cells of one name are one street: merge cells that share a node.
@@ -1175,6 +1272,11 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
                 merged[3] |= g[3]
                 groups.remove(g)
             groups.append(merged)
+        # KEPT all the same (owner, 2026-10-11, on what the rule took in
+        # Paris, Marseille and Brussels: "keep those streets"): a private
+        # street NAMED as a residential street (PRIVATE_STREET_LEAD: Villa
+        # Mozart, Cité Bergère, Impasse des Éperonniers), an address a
+        # visitor can stand at the gate of.
         # PRIVATE MINOR WAYS (owner, 2026-10-11): a street whose every way is
         # a footway, path, track or service road with access=private or no,
         # none of them notable, is no street to search: airport and campus
@@ -1286,6 +1388,15 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             if any(NUMBERED_BLOCK[c].fullmatch(names[0].strip()) for c in local if c in NUMBERED_BLOCK):
                 report["place_dropped_estate"] += 1
                 continue
+            notable = bool(t.get("wikidata") or t.get("wikipedia"))
+            if not notable and any(ESTATE_NAME[c].search(names[0].strip()) for c in ("en", *local)
+                                   if c in ESTATE_NAME):
+                report["place_dropped_estate"] += 1
+                continue
+            if t.get("place") == "hamlet" and not notable and _population(t) is not None \
+                    and _population(t) < HAMLET_MIN_POPULATION:
+                report["place_dropped_small_hamlet"] += 1
+                continue
             if leak_word(names, local):
                 report["place_dropped_leak_word"] += 1
                 continue
@@ -1335,6 +1446,14 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
                     and not (t.get("wikidata") or t.get("wikipedia"))):
                 report["landmark_dropped_not_notable"] += 1
                 continue
+            # NOT a rule that a tourism=gallery needs a Wikipedia TAG (measured
+            # 2026-10-11, after the owner's yes): it removed the Seoul Museum
+            # of Art, Busan's city art museum, Vancouver's Bill Reid Gallery,
+            # Sydney's S.H. Ervin Gallery, Kew's Marianne North Gallery and
+            # the Grand Palais's national galleries, public galleries whose
+            # OSM objects carry wikidata and no wikipedia tag. Dealers'
+            # galleries are dropped by id (config.PLACE_DROPPED). Put back to
+            # the owner.
             # A home is never a landmark (_home), unless public (_public_home:
             # a former residence that is now a museum) or listed as visitable
             # today with a dated source (config.PLACE_VISITABLE). Kyoto's condominium

@@ -224,7 +224,14 @@ PLACE_REVIEWED = {
 }
 # OSM objects a reading by eye found to be a business or a home that no rule
 # in place_index.py catches, each with why (place_index.build, `dropped`).
-PLACE_DROPPED = {}
+PLACE_DROPPED = {
+    # Heritage houses kept on tourism=attraction alone (owner, 2026-10-11: "drop by id (all)"). No operator's or agency's page says they are open; the pages found (checked 2026-10-11) describe private flats seen from outside, so they are held out as homes.
+    "way/555209477": "Ana Madatova's house: described as lived in, its entry closed (https://scantbilisi.ge/en/objects/250/satesto); not established at an official source",
+    "way/496798210": "the Bozarjiants house: an exterior stop on walking tours, described as private; not established at an official source",
+    "way/555200462": "the Seilanov house: a former mansion described as divided into flats; not established at an official source",
+    "way/1105505029": "the Gabashvili house: shown from its yard on tours, no public interior stated; not established at an official source",
+    "relation/2139317": "the Kalantarov house: its entry marked closed, described as flats (https://scantbilisi.ge/en/objects/335/satesto); not established at an official source",
+}
 # Streets closed for rebuilding, kept although OSM draws them
 # highway=construction (place_index.build, `rebuilt`; owner, 2026-10-11): by
 # name, with why and the date seen. A name no construction way carries stops

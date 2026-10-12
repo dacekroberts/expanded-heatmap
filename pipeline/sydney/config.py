@@ -178,4 +178,6 @@ PLACE_REVIEWED = {
 PLACE_DROPPED = {
     "way/504652702": "'Meriton', a leisure=park named for the apartment developer, mapped "
                      "beside 'Serviced Apartments Park' (way 504652778)",
+    # A house kept on tourism=attraction alone and found not open to the public at a source (owner, 2026-10-11: "drop by id (all)"; checked 2026-10-11).
+    "way/232448864": "Cadman's Cottage: closed for conservation works, its future use undecided (https://therocks.com/see-do-stay/cadmans-cottage). Re-check when it reopens",
 }

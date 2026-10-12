@@ -305,4 +305,6 @@ PLACE_DROPPED = {
     "way/67713530": "'Hôtel de Cabre', a 16th-century town house (historic=yes, building=yes, "
                     "Wikipedia), privately owned and not open: the home precedent (owner, "
                     "2026-10-08, 'homes with wikipedia: skip'); batch 2a",
+    # A house kept on tourism=attraction alone and found not open to the public at a source (owner, 2026-10-11: "drop by id (all)"; checked 2026-10-11).
+    "way/70064669": "Villa Valmer: only the park around it is open to the public; the villa is being converted to a hotel (https://www.marseille-tourisme.com/decouvrez-marseille/culture-et-patrimoine/villa-valmer-marseille-7eme-fr-2799628/)",
 }
