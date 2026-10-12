@@ -8,6 +8,39 @@ Read from the repository's own licence records only, 2026-10-04; nothing here
 changes a city's status until the owner rules on it. Update it when a position
 changes, and say so in DECISIONS.
 
+## Update, 2026-10-12 (237 cities; owner's rulings after the commercial-use audit)
+
+This section governs where it differs from the text below, which is as of
+170 cities.
+
+- **A publicly shared piece is the same kind of use as the site**: public
+  and non-commercial. The columns of `docs/commercial_use_positions.md`
+  (commercial use by a third party) do not decide it. The cities left out of
+  a shared piece are the ones the Visuals registry
+  (`visuals/data/restrictions.json`, kept locally) holds off public pieces.
+- **Held off shared pieces today (11 of 237):** Barcelona, Bucharest,
+  Cluj-Napoca, Daegu, Den Haag, Los Angeles (Regional), Miami (Regional),
+  Philadelphia, Seattle (Regional), Thessaloniki, Washington D.C.
+- **Lifted by the owner, 2026-10-12:** the 15 SEMAS cities and Busan (audit
+  rows AN-5 and AN-3: permitted with condition); Dublin and Milan (their
+  sources read as CC BY 4.0, rows HC-6, HC-7, HC-32, HC-34, HC-35).
+- **Thessaloniki is held pending a full read** (owner, 2026-10-12): one
+  reading of the City portal's terms bars modification and redistribution
+  (row EW-13). The same question touches the site's own page.
+- **Den Haag, Miami (Regional), Bucharest and Cluj-Napoca stay held**: the
+  audit read their registers as silent, which closes nothing.
+- **Analytics' pieces** (its list of 2026-10-12, at commit 9d3a0cea), before
+  Thessaloniki's hold: the dashboard's overview and per-city views, 237
+  cities, 225 shareable; its chain tables, 170 cities, 161 shareable; the four
+  pilot pages (Paris, San Diego, Tokyo, Toronto), all shareable once rebuilt,
+  Paris with its IDFM notice; the cross-city Food service share, 167 cities,
+  155 shareable. With Dublin and Milan lifted and Thessaloniki held, recount
+  from the registry before sharing. **Whether any piece goes public is still
+  the owner's call, piece by piece.**
+- **Notices a shared piece owes**: unchanged from the list below, with
+  Japanese credits saying the data was processed, and counts never presented
+  as a publisher's own figures.
+
 ## In short
 
 - **Private use is fine for all 170 cities.** No recorded licence limits derived

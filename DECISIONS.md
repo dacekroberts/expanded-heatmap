@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**80 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**81 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-12**
 
@@ -57,6 +57,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [The phase 2 landing: Bucharest's step 2 calls `name_kind_extended()`, so a company named as a given name beside one other word shows its category; no exception for a name on two or more premises (owner, 2026-10-12)](#2026-10-12---the-phase-2-landing-bucharests-step-2-calls-name_kind_extended-so-a-company-named-as-a-given-name-beside-one-other-word-shows-its-category-no-exception-for-a-name-on-two-or-more-premises-owner-2026-10-12)
 - [The search rollout's cheap path and the commercial-use audit's method (owner)](#2026-10-12---the-search-rollouts-cheap-path-and-the-commercial-use-audits-method-owner)
 - [The commercial-use audit: read, ruled and written (owner)](#2026-10-12---the-commercial-use-audit-read-ruled-and-written-owner)
+- [The outside name net lands; code-plus-type names go; public sharing follows the Visuals registry (owner)](#2026-10-12---the-outside-name-net-lands-code-plus-type-names-go-public-sharing-follows-the-visuals-registry-owner)
 
 **2026-10-11**
 
@@ -4631,3 +4632,33 @@ japan-city template:
     in `docs/data_sources.md`; two rows of `docs/data_sources/japan.md`
     carry a dated re-read note. Still owed: the public-sharing question for
     analytics and visuals pieces, which waits on Analytics' list of pieces.
+
+### 2026-10-12 - The outside name net lands; code-plus-type names go; public sharing follows the Visuals registry (owner)
+
+- **Decided by the owner, 2026-10-12, on Cleanup's review and
+  recommendations ("1. retry landing from here. 2. yes drop. 3. change per
+  your recommendations here, we can do a thessaloniki full read now").**
+  - **The second net's script is in the repository**:
+    `scripts/place_name_net.py` and its prompt, written by the DeepSeek
+    session and reviewed by Cleanup (selftest in `check_all.py`; 24 of 24
+    rule breaks caught). It sends nothing: it stages index names from a
+    resolved commit, refuses any path outside `app/static/places/`, and
+    collects replies. Each outside call still needs the owner's yes.
+  - **What the net's 248 flags on live rows came to.** Checked against
+    cached OpenStreetMap tags, nearly all are correct keeps under rules
+    already made (estates mapped as neighbourhoods, houses that are museums,
+    notable theatres, notable artworks). Real finds: about 35 bare type
+    words missing from the list, five glitched names, one house to check
+    (Barcelona's "Can Valent"), and a new class.
+  - **The new class: a code plus a type is no name** ("54F - Greenbelt",
+    "Building 30", "10. zastavení"); dropped, as a description. Built with
+    the missing words and the glitches at the wave 1 landing, so the built
+    cities' index bytes change once and transit-globe is told once.
+  - **Public sharing of analytics and visuals pieces** is the same kind of
+    use as the site, so the Visuals registry decides which cities are left
+    out, not the commercial-use columns. Lifted: Dublin and Milan (sources
+    read as CC BY 4.0), after the SEMAS cities and Busan earlier the same
+    day. Held pending a full read: Thessaloniki. Den Haag, Miami (Regional),
+    Bucharest and Cluj-Napoca stay held. The per-piece counts and notices
+    are in `docs/derived_use_licensing.md`, "Update, 2026-10-12". Whether a
+    piece goes public stays the owner's call, piece by piece.

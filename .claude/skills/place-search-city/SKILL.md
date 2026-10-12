@@ -212,6 +212,21 @@ All quoted in the drafts file; the short list:
   places (놀이터, 祠堂, 本殿, "Monument", "Édicule Guimard"). An object whose
   main name is bare goes whole. A description longer than a type word ("open
   area with bench") goes in `PLACE_DROPPED` by id.
+- **A code plus a type is no name either** (owner, 2026-10-12: "yes drop"):
+  a parcel or building code beside a type word ("54F - Greenbelt", "103D -
+  Utility ROW", "Building 30", "10. zastavení"). NOT BUILT YET: the rule, the
+  type words the outside net found missing (about 35, among them Vodopád,
+  Rozhledna, Toilettes, Lawn, Meadow, 비석, 배수로, 화단, 法堂, 仁王門, 炮台)
+  and five live glitched names go in at the wave 1 landing, so the built
+  cities' index bytes change once. Measure each word on its built cities
+  first, as for any bare type word.
+- **The outside name review is a second net, never the first pass** (owner,
+  2026-10-12): `scripts/place_name_net.py` stages a commit's index names and
+  collects the replies; the prompt is `scripts/place_name_net_prompt.md`.
+  It sees names only, so every flag is checked against the object's tags
+  before anything is dropped: on the 19 built cities nearly every flagged
+  estate, house and venue was a correct keep (a neighbourhood node, a museum
+  with wikidata, a notable theatre). Each call needs the owner's yes.
 - **Museum exhibits are not landmarks** (owner, 2026-10-11):
   `EXHIBIT_HISTORIC` (aircraft, tank, cannon, missile, rocket, vehicle,
   locomotive, railway_car) needs the object's own wikidata, and the

@@ -266,6 +266,10 @@ Detail files: [japan](docs/plan_detail/japan.md),
     waves if we want"): its trial on the 19 built cities flagged 402 of
     691 removed rows and 4.4% of kept ones, strong in English, Korean,
     Chinese and Japanese, and kept three named homes it had the rule for.
+    Its script landed 2026-10-12 (`scripts/place_name_net.py`). **Owed at
+    the wave 1 landing** (owner, 2026-10-12): the code-plus-type rule, the
+    missing bare type words and five glitched names the net found live
+    (`place-search-city`), and a check of Barcelona's "Can Valent".
     The schema number and the id side file are built at wave 1's landing.
   - **Idea for the next landing (owner, 2026-10-12): a button that
     returns a map to its starting view.** After a search the map stays
