@@ -573,6 +573,50 @@ def _spec_errors(folder, spec, language_names, folds):
     return None
 
 
+def _count_calls(text, name):
+    """How many calls of name the file holds, by parsing; 0 when it does not
+    parse. A mention in a docstring or a comment is no call."""
+    try:
+        tree = ast.parse(text)
+    except SyntaxError:
+        return 0
+    return sum(1 for n in ast.walk(tree) if isinstance(n, ast.Call) and (
+        (isinstance(n.func, ast.Name) and n.func.id == name)
+        or (isinstance(n.func, ast.Attribute) and n.func.attr == name)))
+
+
+def _wired_by(root, map_text):
+    """The pipeline/countries/ module that already wires this map step's
+    search, as "pipeline/countries/<module>.py", or None. A map step may
+    render through a shared country module (render(config, name), uk.step3)
+    and hold no render_heatmap call of its own. Such a module is wired when
+    its source calls index_url_for(, which gives a city its index URL once
+    its config declares PLACE_AREA. The module is READ, never looked up in a
+    list of names, so a fourth shared module counts from the day it gains
+    the call and not before."""
+    try:
+        tree = ast.parse(map_text)
+    except SyntaxError:
+        return None
+    modules = []
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.ImportFrom) or not node.module:
+            continue
+        if node.module.startswith("pipeline.countries."):
+            modules.append(node.module.split(".")[2])
+        elif node.module == "pipeline.countries":
+            modules.extend(a.name for a in node.names)
+    for module in modules:
+        path = root / "pipeline" / "countries" / f"{module}.py"
+        try:
+            source = _read(path)
+        except (OSError, UnicodeDecodeError):
+            continue
+        if _count_calls(source, "index_url_for") > 0:
+            return f"pipeline/countries/{module}.py"
+    return None
+
+
 def scaffold_city(root, folder, spec, date, write, pages, language_names, folds,
                   write_file=None):
     """Scaffold one city. Returns (status, reason, lines) where status is
@@ -611,13 +655,27 @@ def scaffold_city(root, folder, spec, date, write, pages, language_names, folds,
         return "refused", "map step already contains place_index_url", []
     if _PLACE_IMPORT in map_text:
         return "refused", "map step already imports place_index", []
-    try:
-        new_map_text = _insert_place_index_import(map_text)
-        new_map_text = _add_call_argument(
-            new_map_text, "render_heatmap",
-            f'place_index_url=place_index.index_url("{folder}")')
-    except ValueError as exc:
-        return "refused", f"map step: {exc}", []
+    # Two patterns. A map step that calls render_heatmap( itself gets the
+    # import and the argument. One that renders through a shared module of
+    # pipeline/countries/ holds no such call: when that module passes
+    # place_index.index_url_for( to render_heatmap, the city's config block is
+    # all the wiring it needs and the map step is left as it is.
+    wired = None
+    if _count_calls(map_text, "render_heatmap") == 0:
+        wired = _wired_by(root, map_text)
+        if wired is None:
+            return "refused", ("map step: render_heatmap( is not exactly one call in "
+                               "the file, and no pipeline.countries module it imports "
+                               "calls index_url_for("), []
+        new_map_text = map_text
+    else:
+        try:
+            new_map_text = _insert_place_index_import(map_text)
+            new_map_text = _add_call_argument(
+                new_map_text, "render_heatmap",
+                f'place_index_url=place_index.index_url("{folder}")')
+        except ValueError as exc:
+            return "refused", f"map step: {exc}", []
 
     page_path, page_text, why = _find_page(root, folder, pages)
     if page_path is None:
@@ -661,6 +719,8 @@ def scaffold_city(root, folder, spec, date, write, pages, language_names, folds,
             f"{folder}: {map_path.name} would get the place_index import and place_index_url",
             f"{folder}: {page_path.name} would get search='{folder}'",
         ]
+    if wired is not None:
+        lines[2] = f"{folder}: {map_path.name} is wired by {wired}, no edit"
     if fell_back:
         lines.append(f'{folder}: no NAME or CITY_NAME in config; used "{name}" '
                      f"from {name_from} as the name")
@@ -676,6 +736,8 @@ def scaffold_city(root, folder, spec, date, write, pages, language_names, folds,
                                (step2b_path, new_step2b_text),
                                (map_path, new_map_text),
                                (page_path, new_page_text)):
+                if path == map_path and wired is not None:
+                    continue        # wired by its country module: not touched
                 written.append(path)
                 write_file(path, text)
         except OSError as exc:
@@ -1441,6 +1503,72 @@ def selftest():
         before = snap()
         rc, out = run(["--plan", str(path), "--write"])
         report("a map step with no render_heatmap call of its own is refused, docstring untouched",
+               rc != 0 and snap() == before and "is not exactly one call" in out, f"exit {rc}")
+
+        # The second pattern: the country module the map step renders through
+        # passes index_url_for( itself, so the map step needs no edit and the
+        # other three pieces are the whole scaffold.
+        shared_map = (
+            '"""Step 3 - all rendering is map_common\'s render_heatmap(); nothing forks it."""\n'
+            "import sys\nfrom pathlib import Path\n\n"
+            "sys.path.insert(0, str(Path(__file__).parent.parent.parent))\n\n"
+            "{imp}\n"
+            "from pipeline.{folder} import config\n\n"
+            'if __name__ == "__main__":\n    {call}\n')
+        wired_module = ('"""a country\'s shared map step."""\n'
+                        "from pipeline import place_index\n"
+                        "from pipeline.map_common import render_heatmap\n\n\n"
+                        "def render(cfg, name):\n"
+                        "    render_heatmap(output_path=cfg.HEATMAP_HTML,\n"
+                        "                   place_index_url=place_index.index_url_for(cfg))\n")
+        for folder, imp, call in (
+                ("wired", "from pipeline.countries.some_country import render", 'render(config, "Wired")'),
+                ("wiredtwo", "from pipeline.countries import some_country  # noqa: E402",
+                 "some_country.render(config, 'W')")):
+            page_rel = f"pages/3_{folder}_Heatmap.py"
+            path = scaffolded(folder, folder.title(), page_rel,
+                              map_src=shared_map.format(imp=imp, folder=folder, call=call))
+            w("pipeline/countries/some_country.py", wired_module)
+            map_before = (tmp / f"pipeline/{folder}/step3_map.py").read_bytes()
+            rc, out = run(["--plan", str(path), "--write"])
+            report(f"a map step wired by its country module ({imp.split(' import')[0][5:]}) "
+                   f"is left alone and the other three pieces are written",
+                   rc == 0
+                   and (tmp / f"pipeline/{folder}/step3_map.py").read_bytes() == map_before
+                   and (tmp / f"pipeline/{folder}/step2b_place_index.py").is_file()
+                   and b"PLACE_AREA" in (tmp / f"pipeline/{folder}/config.py").read_bytes()
+                   and f"search='{folder}'".encode() in (tmp / "app" / page_rel).read_bytes()
+                   and "is wired by pipeline/countries/some_country.py, no edit" in out,
+                   f"exit {rc}")
+
+        # A country module that only MENTIONS index_url_for does not wire it.
+        path = scaffolded("unwired", "Unwired", "pages/4_Unwired_Heatmap.py",
+                          map_src=shared_map.format(
+                              imp="from pipeline.countries.some_country import render",
+                              folder="unwired", call='render(config, "Unwired")'))
+        w("pipeline/countries/some_country.py",
+          '"""a country\'s shared map step. Not yet passing index_url_for(cfg)."""\n'
+          "from pipeline.map_common import render_heatmap\n\n\n"
+          "def render(cfg, name):\n"
+          "    # place_index.index_url_for(cfg) goes here later\n"
+          "    render_heatmap(output_path=cfg.HEATMAP_HTML)\n")
+        before = snap()
+        rc, out = run(["--plan", str(path), "--write"])
+        report("a country module that only mentions index_url_for wires nothing: refused",
+               rc != 0 and snap() == before and "calls index_url_for(" in out, f"exit {rc}")
+
+        # Two calls of its own are two calls, whatever else the step imports:
+        # refused, never passed off as wired.
+        path = scaffolded("both", "Both", "pages/5_Both_Heatmap.py", map_src=fit_map("both").replace(
+            "    render_heatmap(\n        output_path=HEATMAP_HTML,\n        label_focus=None,\n    )",
+            "    render_heatmap(output_path=HEATMAP_HTML)\n    render_heatmap(output_path=HEATMAP_HTML)"
+        ).replace("from pipeline.map_common import render_heatmap  # noqa: E402",
+                  "from pipeline.map_common import render_heatmap  # noqa: E402\n"
+                  "from pipeline.countries import some_country  # noqa: E402"))
+        w("pipeline/countries/some_country.py", wired_module)
+        before = snap()
+        rc, out = run(["--plan", str(path), "--write"])
+        report("a map step with two calls of its own is refused though it imports a wired module",
                rc != 0 and snap() == before and "is not exactly one call" in out, f"exit {rc}")
 
         # Two calls: refused, neither chosen.
