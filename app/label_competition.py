@@ -341,6 +341,10 @@ TEXT_WIDTH = {
     "Tokushima": 71.6, "Toyokawa": 67.4, "Toyonaka": 65.1, "Tshwane": 58.9, "Tsu": 23.1,
     "Tsukuba": 56.5, "Uji": 16.7, "Urasoe": 46.8, "Urayasu": 55.2, "Yachiyo": 53.2,
     "Yamato": 49.9, "Ōita": 27.6, "Ōta": 23.9,
+    # Naha, 2026-10-12: local app, canvas measureText after
+    # document.fonts.load; controls Hino 30.0, Hirakata 55.9, Nara 30.8 and
+    # Tama 35.1 reproduced.
+    "Naha": 34.1,
     # The regional cities' labels without " (Regional)" (cities.py `pill`,
     # owner 2026-10-07), the built-in browser with Space Grotesk 600 loaded
     # from Google Fonts, canvas measureText; controls Seattle (Regional) 120.5,

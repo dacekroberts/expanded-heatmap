@@ -5031,6 +5031,28 @@ batch at review time).
   the name rule decides.<!-- /internal -->
 
 
+**217. Naha City and MLIT (Naha) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-12; lands with the Naha
+build at review time).
+
+- **PERMITTED WITH CONDITIONS** (read 2026-10-11 and 2026-10-12; the Japan
+  rows in [`data_sources/japan.md`](data_sources/japan.md)). The city's
+  three BODIK packages (new food permits, renewals, and the barber and
+  beauty-salon registers) are **CC BY 4.0** under the city's open-data
+  terms; MLIT's 位置参照情報 and N02 (the 2025 edition) are **PDL 1.0**, as
+  in Kobe's (50). N03 (CC BY 4.0) only picks stations and is **never
+  drawn** (the Survey Act).
+- **MUST DISPLAY**: a credit to 那覇市 naming the three datasets and their
+  source, the CC BY 4.0 link, and that the data was modified (one notice
+  for the three packages: one publisher, one set of terms); MLIT's credit
+  lines.
+- **MUST NOT**: present the rebuilt register as the city's own list; imply
+  endorsement; say "currently operating". Only BODIK's copies are used,
+  never the city site's own files.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py naha` with its Japan pass, run
+  2026-10-12; the verdict is in `docs/decisions_drafts/worktree-japan-naha.md`
+  ("Naha built", 2026-10-12).<!-- /internal -->
+
 ## Gaps
 
 - ~~San Francisco's boundary layer endpoint is not recorded anywhere.~~

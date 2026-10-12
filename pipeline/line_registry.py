@@ -380,6 +380,12 @@ REGISTRY = {
         "name": "Odakyu Tama Line", "operator": "Odakyu", "colour": "#2890D8",
         "maps": {"kawasaki": "OT", "tama": "OT"},
     },
+    # new to the site with Naha (2026-10-12), registered because the Urasoe add-on will draw it too: the colour
+    # nearest the trains' red stripe (#C8102E) that reads 3:1 on both pages; pins >= 45.0, no other line on the map.
+    "okinawa-urban-monorail": {
+        "name": "Yui Rail", "operator": "Okinawa Urban Monorail", "colour": "#E84028",
+        "maps": {"naha": "YR"},
+    },
     # the project's colour osaka already drew; pins >= 23.3, lines >= 18.5, lines beside it >= 28.3.
     "osaka-metro-chuo-line": {
         "name": "Osaka Metro Chuo Line", "operator": "Osaka Metro", "colour": "#5D662A",
