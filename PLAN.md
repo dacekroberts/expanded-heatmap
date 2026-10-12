@@ -163,6 +163,15 @@ Detail files: [japan](docs/plan_detail/japan.md),
     the stations OSM draws as not yet open are an internal watch file
     on the branch with its check, no per-city page text; one general
     sentence for About the Data is approved (the handoff has it).
+  - **Search rollout, first wave: Mexico City's index is rebuilt for the
+    regional map** (owner, 2026-10-12: "fix in search rollout"). The
+    index landed cut to Mexico City proper: the 11 stations in the four
+    State of México municipios are not in it, and it holds 0 or 1 places
+    within 1 km of each (median 145 for the other stations; measured on
+    `app/static/places/mexico_city.json` against
+    `processed/regional/stations.csv`). Widen `PLACE_AREA` to the four
+    municipios, re-fetch (`place_index_fetch.py`), rebuild, re-render the
+    map. Check whether Mixcoac is indexed as the one junction row.
 
 - [ ] **Next landing:**
   - Phase 2 Japanese cities (East-2, Kansai-2, Regional-2) and Cluj-Napoca,
