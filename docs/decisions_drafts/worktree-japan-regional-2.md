@@ -99,6 +99,30 @@ Each city's own parked calls and proposals are under its entry below
 
 ## Changes
 
+### 2026-10-12 - The owner's answers to S14 to S27, as staging relayed them (not yet applied on this branch)
+
+- **Relayed by staging from its own chat, 2026-10-12; the owner's words:**
+  "s14 cleanup, s15 accept, s16 exception and note, s17 yes, s19 yes, s20
+  yes, s23 we can say about half(46%) if that's more accurate, s27 keep the
+  10 and note the oddity. s18 read and check then write rule if needed. s21
+  correct and keep. s22 should we state share and read quickly? s24 accept
+  and note. s25 accept." Staging's record is the source; this entry is a
+  copy of its relay, and nothing below was changed on this branch on the
+  relay alone (the owner confirms in the Regional-2 chat first).
+- **What each means for this branch:** S14, S17 and S19: the shared-code
+  changes (自動販売形態 in `FORM_RULES`; the area-wide test after the city cut)
+  are Cleanup's, then Kurashiki's steps 2 and 3 and baseline are re-run and
+  Tottori's hook deleted, before those pages land. S16: a
+  `NEIGHBOUR_EXCEPTIONS` entry for Meitetsu's Nagoya Main and Mikawa lines,
+  with a note. S18: read what 特殊形態 means and check Kurashiki's 8 pins,
+  then a rule if one is needed. S20: Tottori's Inbi Line accepted as drawn.
+  S21: Matsumoto's 2026-10-01 edition kept. S22 (Kanazawa): open, the owner
+  asked a question back. S23: Kure's "about three restaurants in five" may
+  become "about half (46%)", the share of the Food service pins a reader
+  sees (806 of 1,752). S24: gate 3 with no in-city count accepted for
+  Aomori, Tottori, Yamagata and Kure, with a note. S25: Aomori's clause 6
+  accepted. S27: Yamagata's 10 placed Zao Onsen rows kept, the oddity noted.
+
 ### 2026-10-12 - Fuji's notice credit checked by staging; the parked calls numbered
 
 - **Fuji's parked call 1 is closed: notice 210 follows the portal's
