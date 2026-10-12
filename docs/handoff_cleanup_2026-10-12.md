@@ -35,9 +35,9 @@ branch's drafts file.
   - `place-search` `498853e7` (2026-10-12; far behind master): batches 1
     to 3, nineteen cities, the watch file and its check. **The owner's
     phone test of São Paulo PASSED (2026-10-12, his word in that
-    session, relayed)**; London, the second largest, was not reported
-    tested: ask him whether São Paulo's pass covers it before the
-    rollout. Its worktree was found missing on 2026-10-11 and re-added
+    session, relayed)**, and it covers London, the second largest (owner,
+    2026-10-12, in Cleanup's chat: "sao paulo covers london"), so place
+    search joins this landing. Its worktree was found missing on 2026-10-11 and re-added
     by the owner; the standing block on removing it holds until place
     search has landed. **Four owner calls to put at review time**
     (owner: "open from earlier stuff goes to cleanup"; the branch's
