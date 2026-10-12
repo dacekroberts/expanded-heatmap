@@ -57,6 +57,38 @@ Asked as five numbered calls in the batch report; the owner's words in quotes.
    re-run (East-2's reading of the answer, to be corrected if the owner meant
    the nickname).
 
+**The owner's follow-up, the same day:** "leave 1 and 2 to cleanup, red is
+good for keiyo. if tokyo check requires retooling colors, send a message to
+transit-globe so it knows to alter its tokyo colors in advance. 4. sounds
+good. 5. the relabel sounds good".
+
+- **1 and 2 are Cleanup's.** Nothing of either is on this branch.
+- **5 stands:** "Saitama Rapid Railway Line".
+- **3, the JR Keiyo Line goes red (owner). The Tokyo check, measured
+  2026-10-11 from the four maps' drawn geometry (Tokyo, Funabashi, Ichikawa,
+  Urayasu; a scratch read, nothing written):** the red shown to the owner,
+  #D01010, does NOT fit Tokyo: 7.6 from the Keikyu Main Line (under the hard
+  floor of 10, so Tokyo's render would refuse it) and 17.6 from the
+  Marunouchi Line, which runs within 500 m of the Keiyo track. Searching the
+  reds on the project's 8-step grid with every other line left where it is
+  (>= 10 from every line on each map, >= 18 from every line within 500 m of
+  the Keiyo track, >= 45 from every pin, 3:1 on both pages), three colours
+  fit:
+  - **#C81000**: 18.1 from JR Musashino, 48.6 from the nearest pin, 10.2 from
+    the nearest line anywhere, 18.1 from the nearest within 500 m;
+  - **#C80808**: 19.5, 45.8, 10.0, 19.0;
+  - #B04010 (a rust, not a red): 22.1, 46.7, 10.6, 22.0.
+  So **no other Tokyo line has to move**, but the fit is at the floor (10.0
+  to 10.2 from Keikyu's red), and the dark-mode label separation
+  (`linecolour.dark_label_colours`) was not run. *Recommendation:* Cleanup
+  sets `jr-east-keiyo-line` to #C81000 or #C80808 at review time, switches
+  Tokyo's JE literal to the registry, runs the dark-label check and
+  re-renders Tokyo, Funabashi, Ichikawa and Urayasu; if the dark labels do
+  not separate, the alternative is to move Keikyu's red instead, a second
+  Tokyo line. **Not changed on this branch** (a built city's line; the
+  registry still holds #F86040). Transit-globe is told that Tokyo's Keiyo
+  colour will change, with the candidate values.
+
 ## Parked calls
 
 - **Kawaguchi A: late starters that are renewals (call 172 against this
