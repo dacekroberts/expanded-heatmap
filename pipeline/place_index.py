@@ -918,9 +918,9 @@ BARE_TYPE_NAMES = {
 # class live: Surrey's park parcels in the Vancouver index ("54F - Greenbelt",
 # "103D - Utility ROW", "122L Greenbelt", 20 rows), Sand Point's and the
 # Ballard Locks' numbered buildings in Seattle ("Building 30", "Operating
-# House No. 1"; each heritage-listed under that label), the numbered Stations
-# of the Cross on Petrin in Prague ("10. zastavení") and a numbered park lot
-# in Busan ("921호 공원"). Matched as the WHOLE name, case as written, in
+# House No. 1"), the numbered Stations of the Cross on Petrin in Prague
+# ("10. zastavení"), both kept after all by REGISTERED_KEYS below, and a
+# numbered park lot in Busan ("921호 공원"). Matched as the WHOLE name, case as written, in
 # English and the city's languages. Deliberately narrow: a leading parcel
 # code needs its spaced dash or one of Surrey's four type words, so "5th
 # Avenue Theatre" and Chicago's "Park 399" (the Park District's own name,
@@ -941,11 +941,22 @@ def coded_type(name, local):
     return any(CODED_TYPE[c].fullmatch(text) for c in ("en", *local) if c in CODED_TYPE)
 
 
-def bare_type(name, local):
+# A REGISTERED CODE IS A NAME (owner, 2026-10-12, on the first measurement of
+# CODED_TYPE): a landmark that carries wikidata, wikipedia or a heritage
+# registration keeps its coded name, since the register knows it by that
+# label. Measured on the 19 built cities: 27 of Seattle's numbered buildings
+# (National Register, `ref:nrhp`) and all 14 of Petrin's Stations of the Cross
+# (wikidata) stay; none of Surrey's 82 parcels and not Busan's park lot carry
+# any of the four. A bare type word is dropped whatever the object carries.
+REGISTERED_KEYS = ("wikidata", "wikipedia", "heritage", "ref:nrhp")
+
+
+def bare_type(name, local, tags=None):
     """True when `name` is only a type word of English or a local language,
-    or a code beside one."""
+    or a code beside one. `tags` is the object's tags: a registered object
+    (REGISTERED_KEYS) keeps a coded name."""
     if coded_type(name, local):
-        return True
+        return not (tags and any(tags.get(k) for k in REGISTERED_KEYS))
     low = unicodedata.normalize("NFKC", name).lower().strip(" .,;:()")
     if _CJK_WORD.search(low):
         low = re.sub(r"[\s#]*\d+$", "", low).strip()
@@ -1586,10 +1597,10 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
                       and not str(t.get("level", "0")).lstrip().startswith("-"))
             if t.get("place") and not square:
                 continue
-            if bare_type(names[0], local):
+            if bare_type(names[0], local, t):
                 report["landmark_dropped_bare_type"] += 1
                 continue
-            names = [n for n in names if not bare_type(n, local)]
+            names = [n for n in names if not bare_type(n, local, t)]
             if _exhibit(t):
                 report["landmark_dropped_exhibit"] += 1
                 continue

@@ -225,12 +225,15 @@ All quoted in the drafts file; the short list:
   Utility ROW", "Building 30", "10. zastavení"). `CODED_TYPE` in
   `place_index.py`, built 2026-10-12, matched as the whole name and kept
   narrow on purpose: a leading parcel code needs its spaced dash or a listed
-  type word, so "5th Avenue Theatre" and Chicago's "Park 399" stay. It took
-  83 rows from Vancouver (Surrey's park parcels), 32 from Seattle (numbered
-  heritage buildings at Sand Point and the Locks) and 14 from Prague (the
-  Stations of the Cross on Petřín). The same change added 41 bare type words
+  type word, so "5th Avenue Theatre" and Chicago's "Park 399" stay. **A
+  registered code is a name** (owner, the same day): a landmark carrying
+  wikidata, wikipedia, `heritage` or `ref:nrhp` keeps its coded name
+  (`REGISTERED_KEYS`), so Seattle's 27 National Register buildings at Sand
+  Point and the Locks and Prague's 14 Stations of the Cross on Petřín stay;
+  the rule takes Surrey's park parcels from Vancouver (83 rows with the type
+  words) and a park lot from Busan. The same change added 41 bare type words
   the outside net found and dropped 23 objects by id (five glitched names,
-  one house, descriptions); 190 rows left 16 of the 19 built indexes, none
+  one house, descriptions); 149 rows left 16 of the 19 built indexes, none
   were added. **A title is not a type**: "Crossing", "Rectangle", "Vodopád"
   and "Rozhledna" are notable artworks' titles and stay, so a viewpoint
   under the word "Rozhledna" went by id, not by the word. Measure each new

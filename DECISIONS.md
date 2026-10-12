@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**84 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**85 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-12**
 
@@ -61,6 +61,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Thessaloniki after its full read: allowed with condition, and lifted for shared pieces (owner)](#2026-10-12---thessaloniki-after-its-full-read-allowed-with-condition-and-lifted-for-shared-pieces-owner)
 - [Overpass: one query in flight per mirror, each fetch pinned to its mirror (owner)](#2026-10-12---overpass-one-query-in-flight-per-mirror-each-fetch-pinned-to-its-mirror-owner)
 - [The outside net's finds built on the 19 searched cities: a code plus a type is no name, 41 type words, 23 drops by id (owner)](#2026-10-12---the-outside-nets-finds-built-on-the-19-searched-cities-a-code-plus-a-type-is-no-name-41-type-words-23-drops-by-id-owner)
+- [A registered code is a name: Seattle's 27 buildings and Prague's 14 stations go back (owner)](#2026-10-12---a-registered-code-is-a-name-seattles-27-buildings-and-pragues-14-stations-go-back-owner)
 
 **2026-10-11**
 
@@ -4760,3 +4761,24 @@ japan-city template:
     visiting), and descriptions longer than a type word.
   - **The 16 maps were re-rendered once**, since each carries its index's
     hash. No other index or map changed.
+
+### 2026-10-12 - A registered code is a name: Seattle's 27 buildings and Prague's 14 stations go back (owner)
+
+- **Decided by the owner, 2026-10-12** ("yes push as built ... you can fix
+  the seattle/prague issues here"), after Cleanup reported that the
+  code-plus-type rule had taken 83 and 32 rows where it had said "about 20"
+  and "six". The rule landed as built at `f7867f86`; this entry is the fix.
+  - **A landmark that carries wikidata, wikipedia, `heritage` or `ref:nrhp`
+    keeps a coded name** (`REGISTERED_KEYS`, `pipeline/place_index.py`). The
+    register knows the object by that label, so it is a name there. A bare
+    type word still goes whatever the object carries.
+  - **Measured against `f7867f86` on all 19 indexes: 41 rows back, none
+    removed, 17 indexes unchanged.** Seattle 27 (the Naval Air Station and
+    Fort Lawton buildings and the Locks' four operating houses, each with a
+    National Register number), Prague 14 (each station has its own wikidata
+    item). None of Surrey's 82 parcels and not Busan's park lot carry any of
+    the four keys, so they stay out.
+  - **Net of both entries: 149 rows out of 16 indexes.** Seattle's and
+    Prague's maps were re-rendered a second time.
+  - **Cleanup's reading, not the owner's words:** "fix" was taken to mean
+    putting these two sets back, the only issue raised about them.

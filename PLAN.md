@@ -268,9 +268,10 @@ Detail files: [japan](docs/plan_detail/japan.md),
     Chinese and Japanese, and kept three named homes it had the rule for.
     Its script landed 2026-10-12 (`scripts/place_name_net.py`). What it
     found live was built the same day on the owner's word ("yes build now"):
-    the code-plus-type rule, 41 bare type words, 23 drops by id; 190 rows
+    the code-plus-type rule, 41 bare type words, 23 drops by id; 149 rows
     out of 16 built indexes, their maps re-rendered (`DECISIONS.md`, "The
-    outside net's finds built").
+    outside net's finds built", then "A registered code is a name", which
+    put back Seattle's 27 buildings and Prague's 14 stations).
     The schema number and the id side file are built at wave 1's landing.
   - **Idea for the next landing (owner, 2026-10-12): a button that
     returns a map to its starting view.** After a search the map stays
