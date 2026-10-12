@@ -29,7 +29,7 @@ municipality, no wards), the city's three private-use glyphs mapped first
 (japan.CITIES' "gaiji").
 
 Rail: MLIT N02-25 (not GTFS, not OSM), stations kept only inside the city line
-(N03): the Saitama Stadium Line (6 of N02's 8 埼玉高速鉄道線 stations), JR
+(N03): the Saitama Rapid Railway Line (6 of N02's 8 埼玉高速鉄道線 stations), JR
 East's Keihin-Tohoku Line (2 stations on N02's 東北線) and JR East's Musashino
 Line (1 of 27, a stub kept as cut). English station names from OpenStreetMap's
 name:en.
@@ -202,7 +202,7 @@ RING_LABELS = ["0-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi", "0.3-0.6 mi"]
 # 2026-10-06).
 LEFT_OUT_LINES = {}
 COLLAPSE_MAX_SPREAD_M = 300
-# The Saitama Stadium Line and the Keihin-Tohoku Line run on into Tokyo (13):
+# The Saitama Rapid Railway Line and the Keihin-Tohoku Line run on into Tokyo (13):
 # 赤羽岩淵 and 赤羽, both in Kita Ward, are named by Tokyo's N03.
 N03_NEIGHBOR_PREFS = ("13",)
 
@@ -212,12 +212,14 @@ N03_NEIGHBOR_PREFS = ("13",)
 # JR's legal 東北線: drawn as a `route` over it between the next station
 # outside the city each way (赤羽 in Tokyo's Kita Ward, 蕨 in Warabi), as
 # Tokyo's and Kawasaki's JK is. N02 files Saitama Railway's line as
-# 埼玉高速鉄道線; the operator signs it 埼玉スタジアム線, the Saitama Stadium
-# Line (its own timetable pages, read 2026-10-06). Line names without macrons.
+# 埼玉高速鉄道線, the Saitama Rapid Railway Line, its formal name and the label
+# here (owner, 2026-10-11); 埼玉スタジアム線, the Saitama Stadium Line, is the
+# nickname the operator adopted on 2015-11-27 and signs on its timetable pages
+# (read 2026-10-06). Line names without macrons.
 _JR = "東日本旅客鉄道"
 LINES = {
-    "SR": {"n02": [("埼玉高速鉄道", "埼玉高速鉄道線")], "name": "Saitama Stadium Line",
-           "name_ja": "埼玉スタジアム線", "short": "Saitama Railway", "hue": "#1E50A2"},
+    "SR": {"n02": [("埼玉高速鉄道", "埼玉高速鉄道線")], "name": "Saitama Rapid Railway Line",
+           "name_ja": "埼玉高速鉄道線", "short": "Saitama Railway", "hue": "#1E50A2"},
     "JK": {"route": [(_JR, "東北線", ["赤羽", "川口", "西川口", "蕨"])],
            "name": "JR Keihin-Tohoku Line", "name_ja": "京浜東北線", "short": "JR", "hue": "#00B2E5"},
     "JM": {"n02": [(_JR, "武蔵野線")], "name": "JR Musashino Line", "name_ja": "武蔵野線",
@@ -226,7 +228,7 @@ LINES = {
 # SHARED LINES: the two JR lines are drawn on other maps and take their one
 # site-wide colour from pipeline/line_registry.py (owner, 2026-10-07: one
 # colour per line on every map), never a value of this city's own. The
-# Saitama Stadium Line is new to the site (Tokyo leaves its one station out)
+# Saitama Rapid Railway Line is new to the site (Tokyo leaves its one station out)
 # and takes scripts/line_colour_search.py's colour (2026-10-11): 3:1 on both
 # pages (dark 3.11, light 6.02), CIE76 77.8 from the nearest pin (Food
 # service), 49.1 from the Keihin-Tohoku Line's registry colour and 119.2 from
@@ -249,7 +251,7 @@ BRANCHES = {}
 # Musashino 1, read 2026-10-06).
 GATE3 = {"source": "Saitama Railway's own station list and JR East's own station timetables "
                    "(s-rail.ekitan.com, timetables.jreast.co.jp), read against the city line: "
-                   "Saitama Stadium Line 6, Keihin-Tohoku Line 2, Musashino Line 1",
+                   "Saitama Rapid Railway Line 6, Keihin-Tohoku Line 2, Musashino Line 1",
          "lines": {"SR": 6, "JK": 2, "JM": 1}}
 
 # --- Business filtering ------------------------------------------------

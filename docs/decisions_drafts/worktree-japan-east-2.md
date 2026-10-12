@@ -25,6 +25,38 @@ Newest entry first. Cleanup folds this file into `DECISIONS.md`.
   Kawaguchi is held off cards and public pieces until its parked call B (the
   glyphs) is settled.**
 
+## The owner's answers to the parked calls (2026-10-11, in the East-2 session)
+
+Asked as five numbered calls in the batch report; the owner's words in quotes.
+
+1. **Kawaguchi B, the private-use glyphs: "accepted."** The recommendation
+   stands: `map_common.glitched_name` treats a private-use code point
+   (U+E000-U+F8FF) as glitched, so such a pin shows its permit type. A shared
+   renderer change, not made on this branch (the recommendation named it
+   Cleanup's, with other maps measured first); Kawaguchi stays held until it
+   lands and its map is re-rendered.
+2. **Kawaguchi A, late starters that are renewals: "shared rule accepted."**
+   A late start whose first-permit date is on or before the list's as-of is a
+   renewal and stays. A shared `japan_step2` / `japan_register` change with
+   the Minato control and a drift check over the Japanese cities, not made on
+   this branch; Kawaguchi's counts rise by about 100 pins when it lands (5,212
+   as built, 5,312 measured with the rule off), and its page, notice and docs
+   figures are re-read then.
+3. **Funabashi A, Keiyo against Musashino: "show me a visual."** Shown in
+   chat (today's #F86040 beside the recommended #D01010, each next to the
+   Musashino Line's #F05820, on the light and dark pages). No decision yet.
+4. **The two station names: "note internally."** Urayasu's "Bay Side Station"
+   and Sakura's "Chikucenter" stay as OpenStreetMap spells them; noted here,
+   nothing on a page.
+5. **Kawaguchi C, the line's name: "check image"**, with a screenshot of the
+   line's Wikipedia entry: the line is the Saitama Rapid Railway Line
+   (埼玉高速鉄道線), and "Saitama Stadium Line" (埼玉スタジアム線) the nickname
+   adopted on 2015-11-27. Read as: label it by its formal name, which is also
+   the project's line-name rule and N02's. **Renamed "Saitama Rapid Railway
+   Line"** in the config, the page, the blurb and the docs rows; steps 1 and 3
+   re-run (East-2's reading of the answer, to be corrected if the owner meant
+   the nickname).
+
 ## Parked calls
 
 - **Kawaguchi A: late starters that are renewals (call 172 against this

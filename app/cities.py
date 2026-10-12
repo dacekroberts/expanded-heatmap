@@ -5661,7 +5661,7 @@ CITIES = [
         "rail_extra": "Suburban rail",
         "record_kind": "Permit registers",
         "categories": "Food premises only",
-        "blurb": "The Saitama Stadium Line and JR East's Keihin-Tohoku and Musashino lines",
+        "blurb": "The Saitama Rapid Railway Line and JR East's Keihin-Tohoku and Musashino lines",
         "region": "Saitama Prefecture",
         # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
         # own view, a dot and tooltip elsewhere.

@@ -52,7 +52,7 @@ def main():
         ring_edges_meters=config.RING_EDGES_METERS,
         ring_labels=config.RING_LABELS,
         # The city line anchors each label on its line's in-city stretch: the
-        # Saitama Stadium Line runs on to Tokyo's Kita Ward and Saitama City,
+        # Saitama Rapid Railway Line runs on to Tokyo's Kita Ward and Saitama City,
         # the JR Keihin-Tohoku Line to Kita Ward and Warabi, the JR Musashino
         # Line to Saitama City and Koshigaya. N03 is used here and NEVER
         # drawn (the Survey Act; japan.city_boundary).

@@ -55,8 +55,8 @@ st.markdown(
     """
 **The lines**
 
-- Three lines are drawn, each labeled on the map and in the legend: the Saitama Stadium Line and
-  JR East's Keihin-Tohoku and Musashino lines.
+- Three lines are drawn, each labeled on the map and in the legend: the Saitama Rapid Railway Line
+  and JR East's Keihin-Tohoku and Musashino lines.
 - Lines and stations come from MLIT's national railway data (国土数値情報); station names in
   English are from OpenStreetMap. Line colors are this project's own, not the operators'.
 - Only stations inside Kawaguchi City get rings, because the business data covers the city alone:
