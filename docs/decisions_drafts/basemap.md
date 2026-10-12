@@ -56,9 +56,15 @@ or published; every proposal waits for the owner.
 - **OWNER, 2026-10-12: one re-render, and the Cloudflare account is being
   opened now.** So the host comes before the landing's full re-render and
   that render carries the Travel switch: the upload, `PACK_HOST`, P4 and P5
-  all have to be in the integration tree before it. Still to hear from the
-  owner: which option (R2 behind an owned domain, or the Worker) and the
-  address.
+  all have to be in the integration tree before it. **The host is R2
+  behind the owner's own domain (owner, 2026-10-12)**, so decision 12's
+  live comparison with the Worker is not run. Still to hear: the address.
+  Settings given to the owner: a custom domain on the bucket (never
+  `r2.dev`), CORS for any origin with GET and HEAD, `range` and `if-match`
+  allowed and `etag` exposed, a cache rule for `.pmtiles`, Bot Fight Mode
+  and challenges off on that hostname, a billing alert; the folder's
+  `packs/`, `lib/` and `MANIFEST.csv` uploaded by the owner, the README
+  held back until P6 is final.
 - **Approved by the owner and not to be re-asked:** the four dark colours;
   the ferry crimson stays; P1 to P6 with P4's added software sentence; the
   shared table; the internal upload folder; multi-route ferry work is
