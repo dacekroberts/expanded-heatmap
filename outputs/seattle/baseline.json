@@ -38,5 +38,8 @@
   "stations_2_line": 26,
   "stations_in_scope": 39,
   "stop_positions": 76,
-  "storefronts": 14431
+  "storefronts": 14430,
+  "storefronts_food_service": 5880,
+  "storefronts_personal_services": 2533,
+  "storefronts_retail": 6017
 }

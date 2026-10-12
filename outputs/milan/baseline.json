@@ -8,5 +8,9 @@
   "stations_collapsed": 125,
   "stations_excluded": 21,
   "stations_in_comune": 104,
-  "storefront_rows": 47540
+  "storefront_rows": 47540,
+  "storefronts": 47540,
+  "storefronts_food_service": 13559,
+  "storefronts_personal_services": 5661,
+  "storefronts_retail": 28320
 }

@@ -5,5 +5,7 @@
   "metro_stations_network": 60,
   "stations_inside": 217,
   "stations_kept": 145,
-  "storefronts": 13680
+  "storefronts": 13680,
+  "storefronts_food_service": 4972,
+  "storefronts_retail": 8708
 }

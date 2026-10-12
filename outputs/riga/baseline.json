@@ -14,5 +14,7 @@
   "stations_kept": 108,
   "stations_thinned": 15,
   "storefronts": 6725,
+  "storefronts_food_service": 1469,
+  "storefronts_retail": 5256,
   "trade_premise_groups": 7169
 }

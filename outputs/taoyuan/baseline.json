@@ -14,5 +14,8 @@
   "stations_on_line": 22,
   "stations_outside": 7,
   "storefront_rows": 47498,
-  "storefronts": 43532
+  "storefronts": 43532,
+  "storefronts_food_service": 13870,
+  "storefronts_personal_services": 5359,
+  "storefronts_retail": 24303
 }

@@ -11,5 +11,8 @@
   "stations_off_map": 4,
   "stop_nodes": 371,
   "storefront_licences": 21165,
-  "storefronts": 21135
+  "storefronts": 21135,
+  "storefronts_food_service": 17254,
+  "storefronts_personal_services": 35,
+  "storefronts_retail": 3846
 }

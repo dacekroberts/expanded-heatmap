@@ -20,7 +20,7 @@ are in docs/data_sources.md, "The Travel basemap".
 """
 
 # The host's address, with no trailing slash, or None: the Travel view off.
-PACK_HOST = None
+PACK_HOST = "https://files.dacekroberts.dev"
 
 # The local label language of each city, as @protomaps/basemaps 5.7.2 names
 # it (its `lang` option; `name:<code>` in the pack). The rest are in

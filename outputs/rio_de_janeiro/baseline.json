@@ -9,5 +9,8 @@
   "stations_in_scope": 98,
   "stop_points": 161,
   "storefronts": 125440,
+  "storefronts_food_service": 42058,
+  "storefronts_personal_services": 23387,
+  "storefronts_retail": 59995,
   "unclassified_placed": 61316
 }

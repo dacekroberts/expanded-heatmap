@@ -34,5 +34,8 @@
   "stations_off_map": 10,
   "stations_outside": 17,
   "stop_nodes": 252,
-  "storefronts": 89798
+  "storefronts": 89798,
+  "storefronts_food_service": 53152,
+  "storefronts_personal_services": 16506,
+  "storefronts_retail": 20140
 }

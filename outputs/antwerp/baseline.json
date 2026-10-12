@@ -20,5 +20,7 @@
   "stops_line_8": 22,
   "stops_line_A3": 37,
   "stops_line_A9": 26,
-  "storefronts": 4881
+  "storefronts": 4881,
+  "storefronts_food_service": 3097,
+  "storefronts_retail": 1784
 }

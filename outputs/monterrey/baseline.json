@@ -6,5 +6,9 @@
   "denue_rows": 211349,
   "fijo_rows": 114007,
   "in_scope_rows": 117276,
-  "storefront_rows": 58353
+  "storefront_rows": 58353,
+  "storefronts": 58329,
+  "storefronts_food_service": 12474,
+  "storefronts_personal_services": 7723,
+  "storefronts_retail": 38132
 }

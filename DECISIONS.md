@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**13 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**14 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-12**
 
@@ -30,6 +30,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Naha's shared reader changes written, zero drift on 64 Japanese cities; its page is Food plus Personal services (owner)](#2026-10-12---nahas-shared-reader-changes-written-zero-drift-on-64-japanese-cities-its-page-is-food-plus-personal-services-owner)
 - [Naha joins phase 2 (owner); its reader changes to shared code are Cleanup's, ahead of the build](#2026-10-12---naha-joins-phase-2-owner-its-reader-changes-to-shared-code-are-cleanups-ahead-of-the-build)
 - [Before the phase 2 landing: seven owner calls, and the landing handoff written](#2026-10-12---before-the-phase-2-landing-seven-owner-calls-and-the-landing-handoff-written)
+- [The phase 2 landing: Bucharest's step 2 calls `name_kind_extended()`, so a company named as a given name beside one other word shows its category; no exception for a name on two or more premises (owner, 2026-10-12)](#2026-10-12---the-phase-2-landing-bucharests-step-2-calls-name_kind_extended-so-a-company-named-as-a-given-name-beside-one-other-word-shows-its-category-no-exception-for-a-name-on-two-or-more-premises-owner-2026-10-12)
 
 **2026-10-11**
 
@@ -458,3 +459,22 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   name the 30% and 60% stops, and a session reads them as binding, so they
   are put to the owner for a correction before the sessions start.
 
+### 2026-10-12 - The phase 2 landing: Bucharest's step 2 calls `name_kind_extended()`, so a company named as a given name beside one other word shows its category; no exception for a name on two or more premises (owner, 2026-10-12)
+
+- **Decided by the owner, 2026-10-12, at the phase 2 landing ("replace with
+  a class"): Bucharest's step 2 reads a company's name through the shared
+  `name_kind_extended()` that Cluj-Napoca was built with, and a name is
+  shown only when its kind is "company".** Before, Bucharest's own test
+  caught a person-named company only in its narrow forms, so a company
+  registered as a given name beside one other word kept that name on its
+  pin. Now such a pin shows its category. No exception is made for a name
+  that sits on two or more premises: a repeated name is not evidence of a
+  trade name here. Measured on the re-run: 133 kept premises are
+  person-named companies (6 before), so 127 more pins show their category;
+  210 sole traders unchanged; 15,589 storefronts unchanged, since the rule
+  changes what a pin is called and never whether it is drawn. The step no
+  longer prints a withheld name to its log. Exposure
+  (`check_personal_exposure.py bucharest`): no registrant-name column is
+  loaded; 0 emails, 0 phone numbers, 0 c/o markers in a displayed name.
+  Verdict unchanged: publish (`docs/privacy_verdicts.md`). Rejected: a list
+  of the names to keep, which would hold names where the rule is keys only.
