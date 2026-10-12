@@ -20,6 +20,98 @@ there may have been answered since.
 worktree `.claude/worktrees/place-search`, branch `place-search`; both once
 named `charming-lumiere-930853`, moved by Cleanup 2026-10-08); a city is added there, never on master.
 
+## The rollout: the cheap path (the owner's ruling, 2026-10-12)
+
+Written by Cleanup at the phase 2 landing, when place search reached master
+with 19 cities and 218 were left, and made the ruling for the rollout by the
+owner the same day (`DECISIONS.md`, 2026-10-12, "The search rollout's cheap
+path"). Where it differs from the sections below, THIS section wins for the
+rollout; the owner's calls on what an index may hold are unchanged. Lines
+marked TO BUILD name a script that does not exist yet.
+
+**Where a city's cost sits.** Measured by kind, not yet by tokens:
+
+| Step | Needs a model |
+|---|---|
+| Search area, languages, fold in the config; the thin step2b | No |
+| The two Overpass queries | No (slow by the one-query rule, no tokens) |
+| Index build, languages, summary, page bullet | No |
+| The eye read and what it turns into (drops, reviews, questions) | Yes |
+| Visitable former homes | Yes, with web checks |
+| Re-render and browser test | Once per wave |
+
+**The path, per wave:**
+
+1. **The size projection comes before the first wave.** 19 indexes are
+   39.2 MB raw, about 2 MB a city; 237 at that rate is roughly 475 MB, an
+   extrapolation. `place_search_review.py sizes` gives the measured figures;
+   the wave order is the owner's, on that number.
+2. **Scaffold the wave in one script** (TO BUILD,
+   `scripts/place_search_scaffold.py <city> ...`): each city's `PLACE_*`
+   block and its step2b, the map step's argument and the page's `search=`.
+   The area is the relation step 1 already uses; a regional map lists every
+   station municipality (`outputs/<city>/station_municipalities.csv`), and
+   `scripts/check_place_search.py` H fails the city if the index stops short
+   of a station (Mexico City, 2026-10-12). Languages from
+   `pipeline/travel_packs.LOCAL_LANG`, then MEASURED by the step as always.
+   The area ids are still confirmed by one light query for the wave.
+3. **Fetch as an unattended queue** (TO BUILD,
+   `scripts/place_search_fetch_queue.py`, over `place_index_fetch.py`): one
+   city after another, the wait after a 504 or 429, a log line per city, a
+   retry list at the end. **The one-query rule is a LOCK in the fetch
+   script** (TO BUILD), not a hook: a lock guards the queue and anything an
+   outside model drives; a hook guards only a Claude session. No session
+   needs to be open while it runs.
+4. **Build every index of the wave**, then read the languages lines and
+   `street_dropped_leak_word` for any language's first city in a country.
+5. **The eye read stays; a cheaper model reads first.** "The eye read is
+   not optional" (Traps) holds. After the DeepSeek integration: a first
+   pass by the cheaper model, one request per city, given the rows
+   `place_search_review.py odd` and `tags` already select and a fixed rubric
+   (home, business, description for a name, glitched name, exhibit, real
+   place), returning JSON: id, name as cached, class, the tag it rests on.
+   Then `ids` confirms every id against its cached name, as for any agent's
+   claims. The `place-read` agent reads only a city whose first pass
+   returns a class no rule or precedent covers, and a sample of the rest.
+   Try it on three built cities whose reads are on record (Kyoto, Seoul,
+   Paris) and compare before any new city relies on it. Place names from
+   OpenStreetMap may go to an outside model; nothing from a business
+   register may, and no key enters the repository.
+6. **Visitable former homes are left out of the rollout**: the home rule
+   already keeps homes out, and `PLACE_VISITABLE` is added later for the
+   cities the owner names.
+7. **A new language is still done first and by hand** ("A new language"
+   below), and the rule-change protocol still applies in full: a word added
+   for a new city is measured on every built city of that language.
+8. **One re-render and one browser test per wave.** The render is every map
+   (the matcher is shared), through the heavy-job gate. The browser test
+   samples a few cities of the wave, not all.
+
+**What the phase 2 landing's lanes learned (2026-10-12), for the browser
+test and any deploy-verify lane on a searched map:**
+
+- A lane server started from another worktree does not read the tree's
+  `.streamlit/config.toml`: without `--server.enableStaticServing true` the
+  index URL returns Streamlit's HTML shell with status 200 and every map
+  falls back to stations only. Confirm `/app/static/places/<city>.json`
+  returns JSON before any search test.
+- The Travel file host answers only the live app and localhost or 127.0.0.1
+  on ports 8501 and 8000. A lane on any other port sees a CORS refusal and a
+  blank Travel basemap, which is the port and not a defect.
+- In a hidden browser pane `requestAnimationFrame` never fires: Leaflet's
+  animated moves stall and the Travel map never loads its style. Prepend a
+  16 ms timer stand-in to the map's `srcdoc`, load it in a frame of exact
+  size, and scroll with `behavior: "instant"` (the map document sets smooth
+  scrolling).
+- Closing the search box leaves the map at the found place; the mark and the
+  fade end on the 12 s timer or the next search. The owner accepted this
+  (2026-10-12); a return-to-start button is an idea in `PLAN.md`.
+
+**Stale below once the landing is on master:** "Until place search lands on
+master, all of this lives on its branch". After the landing, a wave gets a
+branch of its own from master; the `place-search` worktree is retired only
+on the owner's word.
+
 ## The pieces
 
 | Piece | File |

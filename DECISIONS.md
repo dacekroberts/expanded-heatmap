@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**14 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**15 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-12**
 
@@ -31,6 +31,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Naha joins phase 2 (owner); its reader changes to shared code are Cleanup's, ahead of the build](#2026-10-12---naha-joins-phase-2-owner-its-reader-changes-to-shared-code-are-cleanups-ahead-of-the-build)
 - [Before the phase 2 landing: seven owner calls, and the landing handoff written](#2026-10-12---before-the-phase-2-landing-seven-owner-calls-and-the-landing-handoff-written)
 - [The phase 2 landing: Bucharest's step 2 calls `name_kind_extended()`, so a company named as a given name beside one other word shows its category; no exception for a name on two or more premises (owner, 2026-10-12)](#2026-10-12---the-phase-2-landing-bucharests-step-2-calls-name_kind_extended-so-a-company-named-as-a-given-name-beside-one-other-word-shows-its-category-no-exception-for-a-name-on-two-or-more-premises-owner-2026-10-12)
+- [The search rollout's cheap path and the commercial-use audit's method (owner)](#2026-10-12---the-search-rollouts-cheap-path-and-the-commercial-use-audits-method-owner)
 
 **2026-10-11**
 
@@ -478,3 +479,46 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
   loaded; 0 emails, 0 phone numbers, 0 c/o markers in a displayed name.
   Verdict unchanged: publish (`docs/privacy_verdicts.md`). Rejected: a list
   of the names to keep, which would hold names where the rule is keys only.
+
+### 2026-10-12 - The search rollout's cheap path and the commercial-use audit's method (owner)
+
+- **Decided by the owner, 2026-10-12, at the phase 2 landing, on Cleanup's
+  list of what it would change ("should be saved as ruling for the
+  rollout"; "anything you would change about license audit works too").**
+  The reason: the rollout is 218 cities and the audit 237, and only one
+  step of each needs a model.
+  - **The order after the landing:** the skills, then the DeepSeek
+    integration (the owner's own handoff, a new session), then everything
+    else.
+  - **The search rollout** (`place-search-city`, "The rollout: the cheap
+    path"): every remaining city scaffolded by one script; the fetches an
+    unattended queue, the one-query rule a lock in the fetch script and not
+    a hook; the flagged-name review one request per city to the cheaper
+    model, a verdict per name as JSON, every id confirmed against its
+    cached name and the result sampled, the `place-read` agent only where a
+    class has no rule or precedent; visitable former homes left out of the
+    rollout; one re-render and one sampled browser test per wave. The size
+    projection comes before the first wave: 19 indexes are 39.2 MB, about
+    2 MB a city, roughly 475 MB at 237 by extrapolation. Unchanged: every
+    owner call on what an index may hold, the new-language work, the
+    rule-change protocol, and that the eye read is not optional.
+  - **The commercial-use audit** (`commercial-use-audit`): the distinct
+    sources counted first and each audited once; the standard licences
+    settled from a table with no read, which settles what a licence says
+    and never whether a source is under it; a first pass over the stored
+    licence texts by the cheaper model, each verdict with its quoted
+    sentence, a script confirming the sentence is in the stored text;
+    Claude reads the silent and conditional verdicts and a sample of the
+    permitted; the owner decides the forbidden and the unclear. The rules
+    of 2026-10-11 stand (city, layer and source; the weakest source
+    decides; unaddressed means held).
+  - **Guards:** OpenStreetMap place names and stored licence texts may go
+    to an outside model; nothing from a business register may; no API key
+    enters the repository. The cheaper model finds and quotes and gives no
+    final licence verdict, a wrong "permitted" being the costly error; it
+    is tried on sources and cities whose answers are on record before it
+    is relied on.
+  Not built yet: the scaffold, the fetch queue and its lock, the source
+  count and the quote check (each marked TO BUILD in its skill). Rejected:
+  a second search skill beside `place-search-city`, which already holds
+  the recipe and the owner's calls.
