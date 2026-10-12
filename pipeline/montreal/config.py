@@ -356,4 +356,6 @@ PLACE_REVIEWED = {
 }
 # OSM objects a reading by eye found to be a business or a home that no rule
 # in place_index.py catches, each with why (place_index.build, `dropped`).
-PLACE_DROPPED = {}
+PLACE_DROPPED = {
+    "way/976661915": "'Futur parc', a placeholder for a park not yet built",
+}

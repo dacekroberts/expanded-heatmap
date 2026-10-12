@@ -231,6 +231,7 @@ PLACE_DROPPED = {
     "way/555200462": "the Seilanov house: a former mansion described as divided into flats; not established at an official source",
     "way/1105505029": "the Gabashvili house: shown from its yard on tours, no public interior stated; not established at an official source",
     "relation/2139317": "the Kalantarov house: its entry marked closed, described as flats (https://scantbilisi.ge/en/objects/335/satesto); not established at an official source",
+    "node/12475777017": "a church's name cut short before the word for church (glitched; the outside name net, 2026-10-12)",
 }
 # Streets closed for rebuilding, kept although OSM draws them
 # highway=construction (place_index.build, `rebuilt`; owner, 2026-10-11): by

@@ -222,12 +222,22 @@ All quoted in the drafts file; the short list:
   area with bench") goes in `PLACE_DROPPED` by id.
 - **A code plus a type is no name either** (owner, 2026-10-12: "yes drop"):
   a parcel or building code beside a type word ("54F - Greenbelt", "103D -
-  Utility ROW", "Building 30", "10. zastavení"). NOT BUILT YET: the rule, the
-  type words the outside net found missing (about 35, among them Vodopád,
-  Rozhledna, Toilettes, Lawn, Meadow, 비석, 배수로, 화단, 法堂, 仁王門, 炮台)
-  and five live glitched names go in at the wave 1 landing, so the built
-  cities' index bytes change once. Measure each word on its built cities
-  first, as for any bare type word.
+  Utility ROW", "Building 30", "10. zastavení"). `CODED_TYPE` in
+  `place_index.py`, built 2026-10-12, matched as the whole name and kept
+  narrow on purpose: a leading parcel code needs its spaced dash or a listed
+  type word, so "5th Avenue Theatre" and Chicago's "Park 399" stay. **A
+  registered code is a name** (owner, the same day): a landmark carrying
+  wikidata, wikipedia, `heritage` or `ref:nrhp` keeps its coded name
+  (`REGISTERED_KEYS`), so Seattle's 27 National Register buildings at Sand
+  Point and the Locks and Prague's 14 Stations of the Cross on Petřín stay;
+  the rule takes Surrey's park parcels from Vancouver (83 rows with the type
+  words) and a park lot from Busan. The same change added 41 bare type words
+  the outside net found and dropped 23 objects by id (five glitched names,
+  one house, descriptions); 149 rows left 16 of the 19 built indexes, none
+  were added. **A title is not a type**: "Crossing", "Rectangle", "Vodopád"
+  and "Rozhledna" are notable artworks' titles and stay, so a viewpoint
+  under the word "Rozhledna" went by id, not by the word. Measure each new
+  word or pattern on its built cities first.
 - **The outside name review is a second net, never the first pass** (owner,
   2026-10-12): `scripts/place_name_net.py` stages a commit's index names and
   collects the replies; the prompt is `scripts/place_name_net_prompt.md`.

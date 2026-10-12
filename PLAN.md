@@ -266,11 +266,22 @@ Detail files: [japan](docs/plan_detail/japan.md),
     waves if we want"): its trial on the 19 built cities flagged 402 of
     691 removed rows and 4.4% of kept ones, strong in English, Korean,
     Chinese and Japanese, and kept three named homes it had the rule for.
-    Its script landed 2026-10-12 (`scripts/place_name_net.py`). **Owed at
-    the wave 1 landing** (owner, 2026-10-12): the code-plus-type rule, the
-    missing bare type words and five glitched names the net found live
-    (`place-search-city`), and a check of Barcelona's "Can Valent".
+    Its script landed 2026-10-12 (`scripts/place_name_net.py`). What it
+    found live was built the same day on the owner's word ("yes build now"):
+    the code-plus-type rule, 41 bare type words, 23 drops by id; 149 rows
+    out of 16 built indexes, their maps re-rendered (`DECISIONS.md`, "The
+    outside net's finds built", then "A registered code is a name", which
+    put back Seattle's 27 buildings and Prague's 14 stations).
     The schema number and the id side file are built at wave 1's landing.
+    **Held for that landing (owner, 2026-10-12): two Surrey parcels still
+    in Vancouver's live index**, "122l Greenbelt" and "15-H - Greenbelt",
+    whose codes the pattern does not match. Drop both by id in
+    `PLACE_DROPPED`, re-render Vancouver once, in the same push.
+    **Also held for it: the Chicago ranking fix**, on local branch
+    `chicago-rank-fix` (`ad7aec79`, `pipeline/map_common.py` only): the
+    street-type bonus goes to streets only, so "Lake Shore Dr" lists the
+    Drive, not the synagogue. Cherry-pick it, re-render the 19 searched
+    maps, and take the "Known and left" line out of the skill.
   - **Idea for the next landing (owner, 2026-10-12): a button that
     returns a map to its starting view.** After a search the map stays
     at the found place and nothing restores the city-wide view (the

@@ -833,20 +833,30 @@ BARE_TYPE_NAMES = {
            "the meadow", "the walled garden", "outdoor learning area", "tree space",
            "athletics stadium", "piazza", "the plaza", "the main square", "main quad",
            "south quad", "figurehead", "waterfall", "rope circle", "ravine",
-           "common watercourse", "pocket park", "play area"),
+           "common watercourse", "pocket park", "play area",
+           # The outside name net's read of the 19 built cities (owner, 2026-10-12).
+           "detention pond", "meadow", "lawn", "showring", "gatehouse", "control tower",
+           "perennial border", "mooring anchors", "solarium"),
     "ja": ("本殿", "本堂", "拝殿", "灯籠", "唐門", "山門", "五重塔", "御影堂", "金堂", "鳥居", "鐘楼",
            "石碑", "公園", "児童公園", "広場", "記念碑",
            # Tokyo's read (batch 3, 2026-10-11): shrine fixtures, pocket parks
            # and privately owned public open space under their type alone.
            "児童遊園", "遊園", "ポケットパーク", "公開空地", "公開空き地", "空地", "電柱", "時計台",
            "稲荷", "庚申塔", "神楽殿", "合祀殿", "三重塔", "車祓所", "絵馬掛", "社号碑", "力石",
-           "正門", "黒門", "日本庭園", "暗渠", "駐車場", "富士塚"),
+           "正門", "黒門", "日本庭園", "暗渠", "駐車場", "富士塚",
+           # The outside name net's read of the 19 built cities (owner, 2026-10-12).
+           "法堂", "仁王門", "百度石"),
     "ko": ("놀이터", "어린이놀이터", "쉼터", "전망대", "대웅전", "칠성각", "산신각", "근린공원", "쌈지공원",
            "어린이공원", "소공원", "공원", "녹지", "교회", "성당", "불교", "원불교", "통일교", "정자",
            "팔각정", "삼각점", "사자상", "분수", "분수대", "약수터", "운동장", "광장", "기념비", "동상",
-           "조형물", "조각상", "연못"),
+           "조형물", "조각상", "연못",
+           # The outside name net's read of the 19 built cities (owner, 2026-10-12).
+           "비석", "배수로", "화단", "대운동장", "산책공원", "분수공원", "강변 공원", "가마터",
+           "유아숲체험장", "가족조각상", "호상비문", "강학공간"),
     "zh": ("祠堂", "土地", "土地廟", "土地公", "伯公", "社壇", "碉堡", "涼亭", "公園", "遊樂場", "休憩處",
-           "觀景台", "廟"),
+           "觀景台", "廟",
+           # The outside name net's read of the 19 built cities (owner, 2026-10-12).
+           "炮台"),
     "fr": ("cuve", "ancienne batterie", "monument", "statue", "fontaine", "parc", "église", "chapelle",
            "jardin", "square", "calvaire", "croix",
            # Paris's read (batch 3, 2026-10-11). "Édicule Guimard" is the
@@ -854,8 +864,17 @@ BARE_TYPE_NAMES = {
            "synagogue", "presbytère", "aumônerie", "salle de prière", "crypte", "grande crypte",
            "gradins", "monument aux morts", "monument du souvenir", "espace canin",
            "le jardin botanique", "la parcelle", "ancien réservoir", "le square",
-           "centre bouddhiste", "chapelle orthodoxe", "édicule guimard"),
-    "ca": ("capella", "font", "parc", "església", "monument", "jardí", "jardins"),
+           "centre bouddhiste", "chapelle orthodoxe", "édicule guimard",
+           # The outside name net's read of the 19 built cities (owner, 2026-10-12).
+           # Marseille's ruins on the Frioul islands, each mapped with its
+           # description in the name field.
+           "toilettes", "pont aqueduc", "ancien socle", "ancienne vigie", "tour penchée",
+           "niche à chien", "terrasse funéraire", "anciens fours à chaux",
+           "ruines du vieux moulin", "édicule des eaux", "ancienne cuve pour canon",
+           "ruines d'un jaç"),
+    "ca": ("capella", "font", "parc", "església", "monument", "jardí", "jardins",
+           # The outside name net's read of the 19 built cities (owner, 2026-10-12).
+           "església evangèlica", "centre ecumènic", "umbracle", "testimoni de jehova"),
     "es": ("capilla", "fuente", "parque", "iglesia", "monumento", "plaza", "jardín", "kiosco",
            "templo", "parroquia", "jardinera", "área verde", "juegos infantiles",
            # The wider Mexico City area's read (owner, 2026-10-12): 46 rows in
@@ -894,8 +913,50 @@ BARE_TYPE_NAMES = {
 }
 
 
-def bare_type(name, local):
-    """True when `name` is only a type word of English or a local language."""
+# A CODE PLUS A TYPE IS NO NAME EITHER (owner, 2026-10-12: "yes drop"): a
+# parcel or building code beside a type word. The outside name net found the
+# class live: Surrey's park parcels in the Vancouver index ("54F - Greenbelt",
+# "103D - Utility ROW", "122L Greenbelt", 20 rows), Sand Point's and the
+# Ballard Locks' numbered buildings in Seattle ("Building 30", "Operating
+# House No. 1"), the numbered Stations of the Cross on Petrin in Prague
+# ("10. zastavení"), both kept after all by REGISTERED_KEYS below, and a
+# numbered park lot in Busan ("921호 공원"). Matched as the WHOLE name, case as written, in
+# English and the city's languages. Deliberately narrow: a leading parcel
+# code needs its spaced dash or one of Surrey's four type words, so "5th
+# Avenue Theatre" and Chicago's "Park 399" (the Park District's own name,
+# see below) are untouched. Measure a new pattern on every built city first.
+CODED_TYPE = {
+    "en": re.compile(r"\d{1,3}[A-Z]{1,2}\s+-\s+\S.*"
+                     r"|\d{1,3}[A-Z]{1,2}\s+(?:Greenbelts?|Detention Pond|Utility ROW|Neighbourhood Park)"
+                     r"|Building \d+(?: ?[A-Z])?"
+                     r"|Operating House No\.? ?\d+"),
+    "cs": re.compile(r"\d+\. zastavení"),
+    "ko": re.compile(r"\d+호 공원"),
+}
+
+
+def coded_type(name, local):
+    """True when `name` is a code beside a type word (CODED_TYPE)."""
+    text = unicodedata.normalize("NFKC", name).strip()
+    return any(CODED_TYPE[c].fullmatch(text) for c in ("en", *local) if c in CODED_TYPE)
+
+
+# A REGISTERED CODE IS A NAME (owner, 2026-10-12, on the first measurement of
+# CODED_TYPE): a landmark that carries wikidata, wikipedia or a heritage
+# registration keeps its coded name, since the register knows it by that
+# label. Measured on the 19 built cities: 27 of Seattle's numbered buildings
+# (National Register, `ref:nrhp`) and all 14 of Petrin's Stations of the Cross
+# (wikidata) stay; none of Surrey's 82 parcels and not Busan's park lot carry
+# any of the four. A bare type word is dropped whatever the object carries.
+REGISTERED_KEYS = ("wikidata", "wikipedia", "heritage", "ref:nrhp")
+
+
+def bare_type(name, local, tags=None):
+    """True when `name` is only a type word of English or a local language,
+    or a code beside one. `tags` is the object's tags: a registered object
+    (REGISTERED_KEYS) keeps a coded name."""
+    if coded_type(name, local):
+        return not (tags and any(tags.get(k) for k in REGISTERED_KEYS))
     low = unicodedata.normalize("NFKC", name).lower().strip(" .,;:()")
     if _CJK_WORD.search(low):
         low = re.sub(r"[\s#]*\d+$", "", low).strip()
@@ -1536,10 +1597,10 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
                       and not str(t.get("level", "0")).lstrip().startswith("-"))
             if t.get("place") and not square:
                 continue
-            if bare_type(names[0], local):
+            if bare_type(names[0], local, t):
                 report["landmark_dropped_bare_type"] += 1
                 continue
-            names = [n for n in names if not bare_type(n, local)]
+            names = [n for n in names if not bare_type(n, local, t)]
             if _exhibit(t):
                 report["landmark_dropped_exhibit"] += 1
                 continue

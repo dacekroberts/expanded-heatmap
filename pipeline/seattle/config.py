@@ -343,4 +343,6 @@ PLACE_DROPPED = {
     "way/533706524": "'Ride Store', Community Transit's fare-sales office, tagged as a station",
     "way/221903524": "'Quarters A', a lighthouse keepers' residence (historic=lighthouse, building=yes)",
     "way/221903453": "'Quarters B', a lighthouse keepers' residence (historic=lighthouse, building=yes)",
+    "node/430982177": "a library branch whose name repeats its last word (glitched; the outside name net, 2026-10-12)",
+    "way/727155292": "'Lake Hills Nursery Operations', a parks department works yard",
 }

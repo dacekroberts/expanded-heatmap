@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**83 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**86 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-12**
 
@@ -60,6 +60,9 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [The outside name net lands; code-plus-type names go; public sharing follows the Visuals registry (owner)](#2026-10-12---the-outside-name-net-lands-code-plus-type-names-go-public-sharing-follows-the-visuals-registry-owner)
 - [Thessaloniki after its full read: allowed with condition, and lifted for shared pieces (owner)](#2026-10-12---thessaloniki-after-its-full-read-allowed-with-condition-and-lifted-for-shared-pieces-owner)
 - [Overpass: one query in flight per mirror, each fetch pinned to its mirror (owner)](#2026-10-12---overpass-one-query-in-flight-per-mirror-each-fetch-pinned-to-its-mirror-owner)
+- [The outside net's finds built on the 19 searched cities: a code plus a type is no name, 41 type words, 23 drops by id (owner)](#2026-10-12---the-outside-nets-finds-built-on-the-19-searched-cities-a-code-plus-a-type-is-no-name-41-type-words-23-drops-by-id-owner)
+- [A registered code is a name: Seattle's 27 buildings and Prague's 14 stations go back (owner)](#2026-10-12---a-registered-code-is-a-name-seattles-27-buildings-and-pragues-14-stations-go-back-owner)
+- [Korean brand names may appear in public chain tables; the Chicago ranking fix and small open items (owner)](#2026-10-12---korean-brand-names-may-appear-in-public-chain-tables-the-chicago-ranking-fix-and-small-open-items-owner)
 
 **2026-10-11**
 
@@ -4721,3 +4724,90 @@ japan-city template:
     full system is in `docs/rule_history.md`, #overpass; `CLAUDE.md`, the
     `place-search-city`, `osm-rail`, `korea-city` and `screen-wave` skills
     carry the new wording.
+
+### 2026-10-12 - The outside net's finds built on the 19 searched cities: a code plus a type is no name, 41 type words, 23 drops by id (owner)
+
+- **Decided by the owner, 2026-10-12 ("2. yes drop"; then "2 yes build
+  now"), on Cleanup's read of the outside name net's 248 flags on live
+  rows.** The rule-change protocol was followed: last commit before the
+  change `c34ea7de`; every index rebuilt and compared.
+  - **Measured: 190 rows out of 16 of the 19 indexes, none added**; Chicago,
+    Paris and São Paulo unchanged. Vancouver 83, Seattle 32, Prague 15,
+    Busan 14, Marseille 14, Seoul 8, Sydney 7, Barcelona 6, Kyoto 2, Mexico
+    City 2, Tokyo 2, and one each in Brussels, Hong Kong, London, Montréal
+    and Tbilisi. Every removed row was read; the full list is in the commit's
+    index diffs.
+  - **A code plus a type is no name** (`CODED_TYPE`, whole name, English and
+    the city's languages): Surrey's park parcels in Vancouver's index ("54F -
+    Greenbelt", 80 rows), numbered buildings in Seattle ("Building 30",
+    "Operating House No. 1", 27 rows), the Stations of the Cross on Petřín
+    ("10. zastavení", 14 rows), one numbered park lot in Busan. **Cleanup
+    told the owner "about 20" for Vancouver and "six" for Seattle before
+    measuring; the rule's real reach is 83 and 32 with the type words.**
+    Seattle's are heritage-listed buildings whose register label is the
+    number, and Prague's each carry wikidata: they go on the owner's ruling
+    that such a label is a description, and are the rows to restore first if
+    the owner reverses it.
+  - **41 bare type words** in six languages (English 9, Japanese 3, Korean
+    12, Chinese 1, French 12, Catalan 4, and the lists they join). Left out
+    on purpose: a word that is also a notable artwork's title in a built
+    city ("Crossing", "Rectangle", "Vodopád", "Rozhledna"), a name the
+    record already keeps ("The Glade", "The Gardens"), "요트경기장" (Busan's
+    yachting centre is known by it) and "Zámecký park".
+  - **23 objects dropped by id**: five glitched names (a stray accent mark
+    in Mexico City, a suburb's name in lower case on a Sydney monument, a
+    church's name cut short in Tbilisi, a non-name on a Busan place of
+    worship, a doubled word on a Seattle library), Barcelona's "Can Valent"
+    (a historic building named as a house, no wikidata, no sign of
+    visiting), and descriptions longer than a type word.
+  - **The 16 maps were re-rendered once**, since each carries its index's
+    hash. No other index or map changed.
+
+### 2026-10-12 - A registered code is a name: Seattle's 27 buildings and Prague's 14 stations go back (owner)
+
+- **Decided by the owner, 2026-10-12** ("yes push as built ... you can fix
+  the seattle/prague issues here"), after Cleanup reported that the
+  code-plus-type rule had taken 83 and 32 rows where it had said "about 20"
+  and "six". The rule landed as built at `f7867f86`; this entry is the fix.
+  - **A landmark that carries wikidata, wikipedia, `heritage` or `ref:nrhp`
+    keeps a coded name** (`REGISTERED_KEYS`, `pipeline/place_index.py`). The
+    register knows the object by that label, so it is a name there. A bare
+    type word still goes whatever the object carries.
+  - **Measured against `f7867f86` on all 19 indexes: 41 rows back, none
+    removed, 17 indexes unchanged.** Seattle 27 (the Naval Air Station and
+    Fort Lawton buildings and the Locks' four operating houses, each with a
+    National Register number), Prague 14 (each station has its own wikidata
+    item). None of Surrey's 82 parcels and not Busan's park lot carry any of
+    the four keys, so they stay out.
+  - **Net of both entries: 149 rows out of 16 indexes.** Seattle's and
+    Prague's maps were re-rendered a second time.
+  - **Cleanup's reading, not the owner's words:** "fix" was taken to mean
+    putting these two sets back, the only issue raised about them.
+
+### 2026-10-12 - Korean brand names may appear in public chain tables; the Chicago ranking fix and small open items (owner)
+
+- **Korean brand names (owner: "yes tell analytics", on Cleanup's
+  recommendation).** A brand name from the Korean small-business register
+  may appear in a public piece when (1) it is a chain, recurring across
+  several premises by the chain table's own threshold, since a one-shop
+  trade name there can be the owner's own name, and (2) the piece carries
+  the register's credit and distorts no fact (row AN-5,
+  `docs/commercial_use_positions.md`). Each public piece still needs the
+  owner's go-ahead; Daegu stays out. Analytics was told.
+- **Chicago's "Lake Shore Dr" (owner: "fix"; then "fold chicago into wave
+  1's landing").** Cause, measured by running the rendered map's own search
+  script on the index: the 5-point bonus for the typed street type went to
+  every kind, so the Lake Shore Drive Synagogue scored -36.4 against the
+  Drive's -35.9. The bonus now goes to streets, crossings and junctions
+  only; the eight Drives lead and "Art Institute", "Damen and North", "Clark
+  and Lake" and Seattle's "NE 45th St" rank as before. Held on local branch
+  `chicago-rank-fix` until wave 1's landing re-renders the 19 searched maps.
+- **Osaka's labels, checked on the deployed page**: 34 labels at a 343 px
+  map, no overlapping pair, measured from the label boxes.
+- **Two stray extracts deleted from the main checkout's root** on the
+  owner's word, each byte-identical to its copy in
+  `data/_basemap_build/data/sources/`.
+- **Search behaviour** (the four-letter gate, streets after other kinds,
+  the folded places group): "good for now" (owner).
+- **The outside net's rule changes on Vancouver**: two Surrey parcels the
+  pattern misses are held for wave 1's landing (`PLAN.md`).

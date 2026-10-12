@@ -193,4 +193,7 @@ PLACE_REVIEWED = {
 }
 # OSM objects a reading by eye found to be a business or a home that no rule
 # in place_index.py catches, each with why (place_index.build, `dropped`).
-PLACE_DROPPED = {}
+PLACE_DROPPED = {
+    "node/3475173927": "'Rozhledna', a viewpoint under its type word (dropped by id: an artwork of the same title, with wikidata, keeps its name)",
+    "node/11652593441": "'daněk bílý', an animal enclosure named for the animal",
+}

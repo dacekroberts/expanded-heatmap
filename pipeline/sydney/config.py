@@ -180,4 +180,8 @@ PLACE_DROPPED = {
                      "beside 'Serviced Apartments Park' (way 504652778)",
     # A house kept on tourism=attraction alone and found not open to the public at a source (owner, 2026-10-11: "drop by id (all)"; checked 2026-10-11).
     "way/232448864": "Cadman's Cottage: closed for conservation works, its future use undecided (https://therocks.com/see-do-stay/cadmans-cottage). Re-check when it reopens",
+    "node/4195097611": "a monument named for its suburb in lower case (another object's name; the outside name net, 2026-10-12)",
+    "relation/9507794": "'Catholic church catechists centre', a description in the name field",
+    "way/554124866": "'Scott Street Plaza Bank Area', a description in the name field",
+    "way/1240347972": "'SPS 12', a pump station's code",
 }
