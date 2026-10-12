@@ -24,9 +24,12 @@ branch's drafts file.
     S1 lands.
   - `worktree-japan-kansai-2` `40af664c`: 7 cities and Cluj-Napoca, with the
     `romania-city` skill and `name_kind_extended()`.
-  - `worktree-japan-regional-2` `1e4690b1`: 11 cities. `check_all` 48 of 51
-    there (the master list's counts, two macro labels, the Okazaki and
-    Toyota red): all three are expected and are items below.
+  - `worktree-japan-regional-2` `75fa42ac`: 11 cities. `check_all` 49 of 51
+    there (the master list's counts, two macro labels): both expected,
+    both items below. S16 is DONE on this branch: a
+    `NEIGHBOUR_EXCEPTIONS` entry, with the Mikawa Line registered as
+    `meitetsu-mikawa-line` at the red Toyota's map already draws;
+    Toyota's config and map untouched.
   - `legend-dot-georgia` `16a68efe` (worktree `review-prep`), 57 behind
     master: needs the one full re-render.
   - `place-search` `fe16ab93`, 233 behind master: batches 1 to 3, nineteen
@@ -59,7 +62,12 @@ branch's drafts file.
    two differ). Then read notice 1's sentence, reported to stop at "Tachikawa
    and Hino", and bring it up to every Japanese city; that sentence renders,
    so its wording goes to the owner if no template covers it.
-4. **Shared-code changes, Cleanup's (S14)**, each with the Minato control
+4. **Shared-code changes, Cleanup's (S14). These go to master BEFORE the
+   build branches merge** (a pipeline-only push, no `app/` file, no
+   deploy), so step 2 above waits for them: Regional-2 re-runs
+   Kurashiki's steps 2 and 3 after S17 (and S18 if written) and deletes
+   Tottori's hook and re-runs Tottori after S19, on its own branch, and
+   asked for a message as each lands. Each with the Minato control
    (`screen_japan_join.py minato`, expect 98.0 / 0.2 / 1.8) and a Japan drift
    run through the gate (`--jobs 3`, about 5.3 GB; read
    `heavy_job.py status` first):
@@ -76,8 +84,13 @@ branch's drafts file.
    - Call 182: move Yamagata's permit-match name rule from
      `pipeline/yamagata/config.py` into `japan_step2`, find out why it flags
      3 rows where the brief counted 4, delete the city-local copy.
-   - S18: read Kurashiki's 8 特殊形態 pins and check them; a shared rule
-     only if one is needed, put to the owner.
+   - S18: Regional-2 read Kurashiki's 8 特殊形態 pins (owner approved the
+     fetch): six concession stands at one stadium, two rows of one
+     market stall at a station plaza; Okayama City's page defines the
+     form as a facility meant to be moved or removed. It recommends
+     特殊形態 as a temporary form beside 露天 in `FORM_RULES`. NOT
+     decided: the owner kept fixed-pitch yatai in Fukuoka and Kure, and
+     these stands sit at a fixed address. Put it to him with S17.
 5. **Bucharest's name repair** (a privacy repair on a published map): call
    `name_kind_extended()` in Bucharest's step 2 so the 127 pins (93 names) of
    a given name beside one other word show their category. The "two or more
@@ -88,8 +101,7 @@ branch's drafts file.
    Tokyo's own JE literal switched to the registry; run the dark-mode label
    check, which nobody has run on this value (10.2 from the Keikyu Main Line
    on Tokyo; if the labels do not separate, moving Keikyu's red goes back to
-   the owner). A `NEIGHBOUR_EXCEPTIONS` entry with a note for Okazaki's
-   Meitetsu Nagoya Main Line and Toyota's Mikawa Line (S16). Osaka's three
+   the owner). S16's exception arrives with Regional-2's branch. Osaka's three
    lines renamed "Osaka Metro ..." as the registry has them.
    `scripts/check_line_identity.py` green.
 7. **Macro map (call 198):** place Minoh, Fuji and Kurashiki in a view; add
