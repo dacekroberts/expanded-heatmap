@@ -46,6 +46,14 @@ Named by city and letter; Staging assigns the S numbers when it relays them.
 
 ## Entries
 
+### 2026-10-11 - ANSVSA's own site and data.gov.ro read for Cluj-Napoca and Bucharest: still SILENT (licence-read agent; the owner asked for the read)
+
+- **`www.ansvsa.ro`, read in the browser 2026-10-11** (a script request got 403 from its firewall; the browser's "Verifying your browser" page cleared by itself, nothing clicked or solved): no terms-of-use, reuse or open-data page in the home page's link tree; `/termeni-si-conditii/` and `/date-deschise/` do not exist. Its footer is the bare rights line the county sites carry (© 2016). Its privacy policy (updated 2019-03-07) says ANSVSA and DSVSA staff run the county sites, covers visitors' personal data only, and names Law 544/2001 and Law 233/2002, not the reuse laws. Its national index of registered retail units is a bare list of 42 county links, Cluj's and Bucharest's among them, with no wording about reuse.
+- **`data.gov.ro` still did not answer** (a timeout by script and in the browser). The European data portal's harvested copy of its catalogue (5,252 datasets, 136 publishers): one publisher is ANSVSA, with 2 datasets, both livestock counts (2013 and 2017); no county DSVSA publishes there; no dataset of registered food units.
+- **Verdict for the pair: SILENT, unchanged.** Nothing must be displayed or done; notices 67 and 215 need no change. Notice 215's text in `docs/data_sources.md` now says what was read.
+- **Not established**: `data.gov.ro` itself (the answer rests on the EU copy); an ANSVSA terms page under an unlinked address (the site search is a form and was not used); ANSVSA's PDFs, Order 111/2008 among them; whether Romania's reuse laws (109/2007, 179/2022) give a default right where a body states no conditions, which is a legal question for the owner.
+- **Cluj A stays the owner's to rule.** The two gaps the first read left are now read as far as this machine can reach.
+
 ### 2026-10-11 - Kansai-2's parked calls answered (owner); the first-name-plus-word names re-checked
 
 - **Osaka A: rename Osaka's three Osaka Metro lines at its re-render** (owner: "rename osaka at re render"). Cleanup's, with the held WAVE5 re-render.

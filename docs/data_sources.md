@@ -4581,9 +4581,13 @@ batch at review time).
   The footer names ANSVSA ("Toate drepturile rezervate"), a website footer,
   which governs site content, not the data (the reading made for
   DSVSA București, notice 67).
-  Not confirmed that day: `data.gov.ro` did not answer, so that it carries
-  no DSVSA Cluj dataset rests on the European data portal's empty search;
-  ANSVSA's own site was not read.
+  ANSVSA's own site (`www.ansvsa.ro`, read in the browser the same day) has
+  no terms-of-use, reuse or open-data page either: a privacy policy, which
+  says ANSVSA and DSVSA staff run the county sites and speaks only of
+  visitors' personal data, a cookie policy, and a bare index linking each
+  county's lists. `data.gov.ro` did not answer that day; the European data
+  portal's copy of its catalogue holds two ANSVSA datasets, both livestock
+  counts, and none from a county DSVSA.
 - **MUST DISPLAY**: nothing is prescribed. The notice credits the publisher,
   says no license is stated, names the changes (the cut to the city, the
   name rule and the address placement) and disclaims endorsement, in the
