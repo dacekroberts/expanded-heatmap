@@ -125,7 +125,7 @@ fresh `docs/decisions_drafts/staging.md`.
   brief figures, the master-list pass after the landing. **The owner settled
   East-2's rest in East-2's chat** (its drafts, "The owner's follow-up", tip
   e958ef83): S1 and S2 are Cleanup's (S14 answered for those two; S17 and
-  S19 still open); S3 the Keiyo Line goes red, the value Cleanup's at
+  S19 still open); S3 the Keiyo Line goes red, #C81000 chosen by the owner, applied by Cleanup at
   review time (#D01010 does not fit Tokyo; #C81000, #C80808 and #B04010 fit
   all four maps at the floor, dark-label check not run; transit-globe
   told); S5 "Saitama Rapid Railway Line" stands. Next free: S27.
