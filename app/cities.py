@@ -6737,6 +6737,11 @@ REGION_ZOOM_WITHOUT = {"Europe West": ("Stockholm",),
 # lists it under "dot off the canvas"). frame_cities() below applies it;
 # Overview.py and check_macro_labels.py both read that one function.
 REGION_FIT_WITHOUT = {"Kyushu-Okinawa": ("Naha",)}
+# What the view's caption says about a city held out of its frame, after its
+# count: the city is one of the cities counted and cannot be seen without
+# panning. Wording chosen by the owner (2026-10-12, of three drafts).
+# TEMPORARY with REGION_FIT_WITHOUT; the owner has not said what ends it.
+REGION_FIT_NOTE = {"Kyushu-Okinawa": "Naha is south of this view; pan down to see it."}
 
 # A REGION'S ZOOM SET OUTRIGHT, after the fit (owner, 2026-09-30): France North
 # and France South at 5.0, where every French label places. Fitted, each would
@@ -6933,6 +6938,9 @@ def frame_cities(frame):
     return zoom, centre
 
 
+if set(REGION_FIT_NOTE) != set(REGION_FIT_WITHOUT):
+    raise ValueError("cities.py: REGION_FIT_NOTE and REGION_FIT_WITHOUT name different regions: a city held "
+                     "out of a frame needs its caption sentence, and a sentence needs a held city")
 _bad_fit = [(r, n) for r, names in REGION_FIT_WITHOUT.items() for n in names
             if r not in REGION_ORDER or n not in [c["name"] for c in cities_in(r)]]
 if _bad_fit:
@@ -6972,10 +6980,11 @@ def region_caption(region):
 
     also = list(dict.fromkeys(named(caption_name(r))
                               for r in REGION_LABELS_ALSO.get(region, ()) if lends_anchor(r)))
+    note = f" {REGION_FIT_NOTE[region]}" if region in REGION_FIT_NOTE else ""
     if not also:
-        return text + "."
+        return text + "." + note
     named = also[0] if len(also) == 1 else ", ".join(also[:-1]) + " and " + also[-1]
-    return f"{text}, with the main cities of {named} labeled too."
+    return f"{text}, with the main cities of {named} labeled too.{note}"
 
 
 # Region names read with "the" in running text.

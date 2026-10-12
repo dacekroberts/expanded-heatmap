@@ -594,9 +594,8 @@ _zoom_set = [c for c in _here if c["name"] not in _skip] or _here
 # Kyushu-Okinawa, owner's call S41, 2026-10-12, temporary), which the re-centre
 # below then leaves out as well. Read with getattr for the reason given at
 # REGION_ZOOM below: under a stale cities.py the lines above stand.
-# TODO(owner wording, call S41): the note that Naha lies below this view is
-# not written. It belongs in the caption under the map, beside
-# region_caption(region) near the end of this file. Nothing renders for it yet.
+# The caption under the map says so (cities.REGION_FIT_NOTE, read by
+# region_caption).
 _frame_cities = getattr(sys.modules.get("cities"), "frame_cities", None)
 if _frame_cities is not None:
     _zoom_set, _here = _frame_cities(_frame_region)
