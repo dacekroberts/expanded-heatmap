@@ -277,6 +277,11 @@ Detail files: [japan](docs/plan_detail/japan.md),
     in Vancouver's live index**, "122l Greenbelt" and "15-H - Greenbelt",
     whose codes the pattern does not match. Drop both by id in
     `PLACE_DROPPED`, re-render Vancouver once, in the same push.
+    **Also held for it: the Chicago ranking fix**, on local branch
+    `chicago-rank-fix` (`ad7aec79`, `pipeline/map_common.py` only): the
+    street-type bonus goes to streets only, so "Lake Shore Dr" lists the
+    Drive, not the synagogue. Cherry-pick it, re-render the 19 searched
+    maps, and take the "Known and left" line out of the skill.
   - **Idea for the next landing (owner, 2026-10-12): a button that
     returns a map to its starting view.** After a search the map stays
     at the found place and nothing restores the city-wide view (the

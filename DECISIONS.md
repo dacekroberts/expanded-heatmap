@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**85 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**86 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-12**
 
@@ -62,6 +62,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Overpass: one query in flight per mirror, each fetch pinned to its mirror (owner)](#2026-10-12---overpass-one-query-in-flight-per-mirror-each-fetch-pinned-to-its-mirror-owner)
 - [The outside net's finds built on the 19 searched cities: a code plus a type is no name, 41 type words, 23 drops by id (owner)](#2026-10-12---the-outside-nets-finds-built-on-the-19-searched-cities-a-code-plus-a-type-is-no-name-41-type-words-23-drops-by-id-owner)
 - [A registered code is a name: Seattle's 27 buildings and Prague's 14 stations go back (owner)](#2026-10-12---a-registered-code-is-a-name-seattles-27-buildings-and-pragues-14-stations-go-back-owner)
+- [Korean brand names may appear in public chain tables; the Chicago ranking fix and small open items (owner)](#2026-10-12---korean-brand-names-may-appear-in-public-chain-tables-the-chicago-ranking-fix-and-small-open-items-owner)
 
 **2026-10-11**
 
@@ -4782,3 +4783,31 @@ japan-city template:
     Prague's maps were re-rendered a second time.
   - **Cleanup's reading, not the owner's words:** "fix" was taken to mean
     putting these two sets back, the only issue raised about them.
+
+### 2026-10-12 - Korean brand names may appear in public chain tables; the Chicago ranking fix and small open items (owner)
+
+- **Korean brand names (owner: "yes tell analytics", on Cleanup's
+  recommendation).** A brand name from the Korean small-business register
+  may appear in a public piece when (1) it is a chain, recurring across
+  several premises by the chain table's own threshold, since a one-shop
+  trade name there can be the owner's own name, and (2) the piece carries
+  the register's credit and distorts no fact (row AN-5,
+  `docs/commercial_use_positions.md`). Each public piece still needs the
+  owner's go-ahead; Daegu stays out. Analytics was told.
+- **Chicago's "Lake Shore Dr" (owner: "fix"; then "fold chicago into wave
+  1's landing").** Cause, measured by running the rendered map's own search
+  script on the index: the 5-point bonus for the typed street type went to
+  every kind, so the Lake Shore Drive Synagogue scored -36.4 against the
+  Drive's -35.9. The bonus now goes to streets, crossings and junctions
+  only; the eight Drives lead and "Art Institute", "Damen and North", "Clark
+  and Lake" and Seattle's "NE 45th St" rank as before. Held on local branch
+  `chicago-rank-fix` until wave 1's landing re-renders the 19 searched maps.
+- **Osaka's labels, checked on the deployed page**: 34 labels at a 343 px
+  map, no overlapping pair, measured from the label boxes.
+- **Two stray extracts deleted from the main checkout's root** on the
+  owner's word, each byte-identical to its copy in
+  `data/_basemap_build/data/sources/`.
+- **Search behaviour** (the four-letter gate, streets after other kinds,
+  the folded places group): "good for now" (owner).
+- **The outside net's rule changes on Vancouver**: two Surrey parcels the
+  pattern misses are held for wave 1's landing (`PLAN.md`).
