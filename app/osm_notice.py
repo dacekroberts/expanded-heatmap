@@ -185,6 +185,8 @@ OSM_RAIL_BY_CITY = {
         "Toyonaka", "Hirakata", "Suita", "Itami", "Kakogawa", "Amagasaki", "Uji")},
     # East-1 (2026-10-07)
     **{c: _japan(c) for c in ("Higashiyamato", "Nishitōkyō", "Tama", "Higashimurayama", "Chōfu", "Ageo (Regional)", "Sōka", "Tokorozawa", "Fuchū (Tokyo)", "Kasukabe", "Tachikawa", "Hino")},
+    # Regional-1 (built 2026-10-07; missing here until the phase 2 landing, 2026-10-12)
+    **{c: _japan(c) for c in ("Maebashi", "Fukuyama", "Ichinomiya", "Tsu", "Fukushima", "Iwaki", "Akita", "Ōita", "Gifu", "Mito", "Morioka")},
     # Kansai-2 (2026-10-11)
     **{c: _japan(c) for c in ("Ibaraki (Osaka)", "Minoh", "Moriguchi", "Kadoma", "Neyagawa", "Yao", "Takatsuki")},
     # Regional-2 (2026-10-11)

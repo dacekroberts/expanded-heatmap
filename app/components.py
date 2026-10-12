@@ -658,6 +658,8 @@ _OSM_STATION_NAMES = (
     "Higashiyamato", "Nishitōkyō", "Tama", "Higashimurayama", "Chōfu", "Ageo (Regional)", "Sōka", "Tokorozawa", "Fuchū (Tokyo)", "Kasukabe", "Tachikawa", "Hino",
     # Kansai-1 (2026-10-07)
     "Toyonaka", "Hirakata", "Suita", "Itami", "Kakogawa", "Amagasaki", "Uji",
+    # Regional-1 (built 2026-10-07; missing here until the phase 2 landing, 2026-10-12)
+    "Maebashi", "Fukuyama", "Ichinomiya", "Tsu", "Fukushima", "Iwaki", "Akita", "Ōita", "Gifu", "Mito", "Morioka",
     # Kansai-2 (2026-10-11)
     "Ibaraki (Osaka)", "Minoh", "Moriguchi", "Kadoma", "Neyagawa", "Yao", "Takatsuki",
     # Regional-2 (2026-10-11)
