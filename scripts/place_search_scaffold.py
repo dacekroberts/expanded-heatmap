@@ -1,12 +1,24 @@
 """Write the place-search boilerplate a built city needs, from a plan file.
 
     python scripts/place_search_scaffold.py --plan PLAN_JSON [--write]
+    python scripts/place_search_scaffold.py --draft-plan OUT_JSON --date DATE [CITY ...]
     python scripts/place_search_scaffold.py --selftest
 
 The script decides nothing about a city. It copies one fixed pattern: a
 PLACE_* block at the end of the config, a step2b_place_index.py, one argument
 in the map step and one in the page. Whatever does not fit is refused, city by
 city, and a plan that is not the shape below is refused whole.
+
+--draft-plan writes a DRAFT plan from what the repository already knows about
+each city: the boundary relation its config names, and its local language from
+pipeline/travel_packs.py's LOCAL_LANG. A draft decides nothing. It carries a
+top-level "draft": true, which --write refuses whole; a session reads the
+draft, corrects the relations it could not fill, removes the draft line, and
+only then scaffolds from it. With CITY names only those cities are drafted; a
+named city with no config.py or an existing PLACE_AREA is reported, left out,
+and makes the run exit non-zero. With no CITY, every folder under pipeline/
+whose config.py has no PLACE_AREA is drafted, in sorted order. --date is
+required with --draft-plan and must be an ISO date (YYYY-MM-DD).
 
 PLAN_JSON is a JSON file a session prepares by hand:
 
@@ -46,6 +58,7 @@ _FOLDER_RE = re.compile(r"[A-Za-z0-9_]+")
 _SYSPATH_LINE = "sys.path.insert(0, str(Path(__file__).parent.parent.parent))"
 _PLACE_IMPORT = "from pipeline import place_index  # noqa: E402"
 _PAGE_RE = re.compile(r'"page"\s*:\s*"([^"]+)"')
+_PLACE_AREA_RE = re.compile(r"(?m)^PLACE_AREA\s*=")
 
 
 def _read(path):
@@ -96,6 +109,216 @@ def _place_index_constants(root):
     return names["LANGUAGE_NAMES"], names["FOLDS"]
 
 
+def _local_lang(root):
+    """LOCAL_LANG read from pipeline/travel_packs.py, or None."""
+    path = root / "pipeline" / "travel_packs.py"
+    try:
+        text = _read(path)
+    except OSError:
+        return None
+    try:
+        tree = ast.parse(text)
+    except SyntaxError:
+        return None
+    for node in tree.body:
+        if (isinstance(node, ast.Assign) and len(node.targets) == 1
+                and isinstance(node.targets[0], ast.Name)
+                and node.targets[0].id == "LOCAL_LANG"):
+            try:
+                value = ast.literal_eval(node.value)
+            except (ValueError, TypeError, SyntaxError):
+                return None
+            return value if isinstance(value, dict) else None
+    return None
+
+
+def _qualifies(name, folder):
+    """True when a top-level assignment name is a boundary relation: it holds
+    RELATION and one of BOUNDARY, CITY or KOMMUNE, or it is the folder name in
+    upper case plus _RELATION. A name holding LINE or SKIPPED never counts."""
+    upper = name.upper()
+    if "LINE" in upper or "SKIPPED" in upper or "RELATION" not in upper:
+        return False
+    if name == folder.upper() + "_RELATION":
+        return True
+    return "BOUNDARY" in upper or "CITY" in upper or "KOMMUNE" in upper
+
+
+def _boundary_assignments(config_text, folder):
+    """{name: value} for the config's qualifying boundary-relation
+    assignments, each value read as a literal (None when it is not one)."""
+    try:
+        tree = ast.parse(config_text)
+    except SyntaxError:
+        return {}
+    found = {}
+    for node in tree.body:
+        if not (isinstance(node, ast.Assign) and len(node.targets) == 1
+                and isinstance(node.targets[0], ast.Name)):
+            continue
+        name = node.targets[0].id
+        if not _qualifies(name, folder):
+            continue
+        try:
+            value = ast.literal_eval(node.value)
+        except (ValueError, TypeError, SyntaxError):
+            value = None
+        found[name] = value
+    return found
+
+
+def _relation_value(value, name):
+    """(relations, why) for one qualifying assignment's value: relation ids
+    in order, and why a reason the value was not a recognised shape (None
+    when it was)."""
+    if value is None:
+        return [], f"{name} is not a literal value"
+    if isinstance(value, bool):
+        return [], f"{name} is a bool, not a relation shape"
+    if isinstance(value, int):
+        return [value], None
+    if isinstance(value, (list, tuple)):
+        if value and all(isinstance(r, int) and not isinstance(r, bool) for r in value):
+            return list(value), None
+        kind = type(value).__name__
+        return [], (f"{name} is an empty {kind}" if not value
+                    else f"{name} is a {kind} whose items are not all integers")
+    if isinstance(value, dict):
+        keys = [k for k in value if isinstance(k, int) and not isinstance(k, bool)]
+        if keys:
+            return keys, None
+        # The Czech configs map a municipality code to its relation:
+        # {"582786": 438171}. Every value an integer, no key one.
+        values = list(value.values())
+        if values and all(isinstance(v, int) and not isinstance(v, bool) for v in values):
+            return values, None
+        return [], f"{name} is a dict with integers as neither its keys nor its values"
+    return [], f"{name} is {type(value).__name__}, not a recognised relation shape"
+
+
+def _config_relations(config_text, folder):
+    """(relations, note) from one config's source: the boundary relation ids
+    when exactly one qualifying assignment holds a recognised shape, else an
+    empty list and a note that says why."""
+    assigns = _boundary_assignments(config_text, folder)
+    if not assigns:
+        return [], "no boundary relation in the config: look it up"
+    if len(assigns) > 1:
+        names = ", ".join(sorted(assigns))
+        return [], f"{len(assigns)} boundary names ({names}): none chosen, look it up"
+    (name, value), = assigns.items()
+    relations, why = _relation_value(value, name)
+    if why is not None:
+        return [], f"{why}, look it up"
+    return relations, (f"relation from {name}: confirm it is the boundary the "
+                       f"map draws, not a district or a line")
+
+
+def _draft_cities(root):
+    """Sorted folder names under pipeline/ whose config.py exists and does
+    not already contain PLACE_AREA."""
+    out = []
+    for path in sorted((root / "pipeline").iterdir()):
+        if not path.is_dir():
+            continue
+        config = path / "config.py"
+        if not config.is_file():
+            continue
+        try:
+            scaffolded = _PLACE_AREA_RE.search(_read(config))
+        except (OSError, UnicodeDecodeError):
+            scaffolded = None
+        if scaffolded:
+            continue
+        out.append(path.name)
+    return out
+
+
+def _city_entry(folder, config_text, code, language_names, folds):
+    """One city's draft entry. code is the city's LOCAL_LANG code, or None
+    for the English default."""
+    relations, relation_note = _config_relations(config_text, folder)
+    languages = [code] if code is not None else ["en"]
+    fold = "ja" if code == "ja" and "ja" in folds else None
+    clauses = [relation_note]
+    if code is None:
+        clauses.append("language is the default (English), not a listing")
+    elif code not in language_names:
+        clauses.append(f"language {code!r} is not built yet")
+    else:
+        clauses.append("language from LOCAL_LANG")
+    if fold == "ja":
+        clauses.append("fold ja, as every Japanese city")
+    return {"relations": relations, "languages": languages, "fold": fold,
+            "note": "; ".join(clauses)}
+
+
+def draft_plan(root, date, city_names):
+    """(ok, lines, plan) for a --draft-plan run. city_names names the cities
+    to draft, or [] to draft every pipeline folder with a config.py and no
+    PLACE_AREA. plan is the draft object, or None when a required file cannot
+    be read."""
+    constants = _place_index_constants(root)
+    if constants is None:
+        return False, ["cannot read LANGUAGE_NAMES and FOLDS from pipeline/place_index.py"], None
+    language_names, folds = constants
+    lang_map = _local_lang(root)
+    if lang_map is None:
+        return False, ["cannot read LOCAL_LANG from pipeline/travel_packs.py"], None
+    lang_of, twice = {}, {}
+    for code, listed in lang_map.items():
+        for name in listed:
+            if name in lang_of and lang_of[name] != code:
+                twice.setdefault(name, [lang_of[name]]).append(code)
+            lang_of.setdefault(name, code)
+    folders = sorted(set(city_names)) if city_names else _draft_cities(root)
+    ok = True
+    lines = []
+    cities = {}
+    filled = empty = default = not_built = 0
+    for folder in folders:
+        config_path = root / "pipeline" / folder / "config.py"
+        if not config_path.is_file():
+            if city_names:
+                lines.append(f"{folder}: left out (no config.py)")
+                ok = False
+            continue
+        try:
+            config_text = _read(config_path)
+        except (OSError, UnicodeDecodeError):
+            if city_names:
+                lines.append(f"{folder}: left out (config.py cannot be read)")
+                ok = False
+            continue
+        if _PLACE_AREA_RE.search(config_text):
+            if city_names:
+                lines.append(f"{folder}: left out (config already contains PLACE_AREA)")
+                ok = False
+            continue
+        code = lang_of.get(folder)
+        entry = _city_entry(folder, config_text, code, language_names, folds)
+        if folder in twice:
+            entry["languages"] = twice[folder]
+            entry["note"] += ("; LOCAL_LANG lists this city under "
+                              f"{' and '.join(twice[folder])}: choose")
+        cities[folder] = entry
+        if entry["relations"]:
+            filled += 1
+        else:
+            empty += 1
+        if code is None:
+            default += 1
+        elif code not in language_names:
+            not_built += 1
+    lines.append("")
+    lines.append(f"Drafted {len(cities)} cities.")
+    lines.append(f"  relations filled: {filled}")
+    lines.append(f"  relations empty: {empty}")
+    lines.append(f"  language default (English): {default}")
+    lines.append(f"  language not built yet: {not_built}")
+    return ok, lines, {"draft": True, "date": date, "cities": cities}
+
+
 def _config_name(text, folder, listed_name=None):
     """(display name, where it came from): the config's NAME, then CITY_NAME,
     then the name app/cities.py gives the city's page (it keeps accents the
@@ -142,148 +365,119 @@ def _cities_pages(root):
 
 
 def _find_page(root, folder, pages):
-    """(path, text) for the city's page file among those app/cities.py lists,
-    matched by the page's import of pipeline.<folder>.config; (None, None)
-    when no listed page is that city's."""
+    """(path, text, None) for the city's page among those app/cities.py
+    lists: the ONE page that imports pipeline.<folder>.config as a module
+    (found by parsing, so a mention in a comment is no import). (None,
+    None, why) when no listed page does, or more than one: a regional page
+    that also reads the city's config must not get the city's search."""
+    wanted = f"pipeline.{folder}.config"
+    found = []
     for rel in pages:
         path = root / "app" / rel
         if not path.is_file():
             continue
         try:
             text = _read(path)
-        except OSError:
+            tree = ast.parse(text)
+        except (OSError, UnicodeDecodeError, SyntaxError):
             continue
-        if f"pipeline.{folder}.config" in text:
-            return path, text
-    return None, None
+        modules = set()
+        for node in ast.walk(tree):
+            if isinstance(node, ast.ImportFrom) and node.module:
+                modules.add(node.module)
+                modules.update(f"{node.module}.{a.name}" for a in node.names)
+            elif isinstance(node, ast.Import):
+                modules.update(a.name for a in node.names)
+        if wanted in modules:
+            found.append((path, text))
+    if not found:
+        return None, None, "page file cannot be found from app/cities.py"
+    if len(found) > 1:
+        names = ", ".join(sorted(p.name for p, _ in found))
+        return None, None, f"more than one listed page imports {wanted} ({names})"
+    return found[0][0], found[0][1], None
 
 
-def _match_close(text, open_i):
-    """The index of the closing parenthesis of the call opened at open_i,
-    skipping string literals and comments; -1 when it never closes."""
-    depth = 0
-    i = open_i
-    n = len(text)
-    while i < n:
-        ch = text[i]
-        if ch == "#":
-            end = text.find("\n", i)
-            i = n if end == -1 else end
-            continue
-        if ch in ("'", '"'):
-            if text.startswith(ch * 3, i):
-                end = text.find(ch * 3, i + 3)
-                i = n if end == -1 else end + 3
-            else:
-                j = i + 1
-                while j < n:
-                    if text[j] == "\\":
-                        j += 2
-                        continue
-                    if text[j] == ch:
-                        j += 1
-                        break
-                    j += 1
-                i = j
-            continue
-        if ch == "(":
-            depth += 1
-        elif ch == ")":
-            depth -= 1
-            if depth == 0:
-                return i
-        i += 1
-    return -1
+def _offset(text, lineno, col_bytes):
+    """The index in text of an ast position: a 1-based line and a column
+    counted in UTF-8 bytes, as ast gives it."""
+    starts = [0]
+    for i, ch in enumerate(text):
+        if ch == "\n":
+            starts.append(i + 1)
+    start = starts[lineno - 1]
+    end = text.find("\n", start)
+    line = text[start:] if end == -1 else text[start:end]
+    return start + len(line.encode("utf-8")[:col_bytes].decode("utf-8"))
 
 
 def _find_call(text, name):
-    """(open_i, close_i) for the one call of name( in text, or None."""
-    matches = list(re.finditer(re.escape(name) + r"\s*\(", text))
-    if len(matches) != 1:
+    """Where the one call of name sits in text, found by parsing: a mention in
+    a docstring, a comment, an import or a def is not a call. Returns a dict
+    with the index of its opening and closing parenthesis, the start of its
+    first argument and the end of its last (None when it has none), or None
+    when the file does not parse or holds no such call or more than one."""
+    try:
+        tree = ast.parse(text)
+    except SyntaxError:
         return None
-    m = matches[0]
-    open_i = m.end() - 1
-    close_i = _match_close(text, open_i)
-    if close_i == -1:
+    calls = [n for n in ast.walk(tree) if isinstance(n, ast.Call) and (
+        (isinstance(n.func, ast.Name) and n.func.id == name)
+        or (isinstance(n.func, ast.Attribute) and n.func.attr == name))]
+    if len(calls) != 1:
         return None
-    return open_i, close_i
+    call = calls[0]
+    func_end = _offset(text, call.func.end_lineno, call.func.end_col_offset)
+    open_i = text.find("(", func_end)
+    close_i = _offset(text, call.end_lineno, call.end_col_offset) - 1
+    if open_i == -1 or close_i <= open_i or text[close_i] != ")":
+        return None
+    parts = list(call.args) + list(call.keywords)
+    first = last = None
+    if parts:
+        first = min(_offset(text, p.lineno, p.col_offset) for p in parts)
+        last = max(_offset(text, p.end_lineno, p.end_col_offset) for p in parts)
+    return {"open": open_i, "close": close_i, "first": first, "last": last}
 
 
-def _content_lines(text, start, nl):
-    """[(line_start, line_end)] for the non-empty, non-comment lines in
-    text[start:nl]."""
-    out = []
-    i = start
-    while i < nl:
-        end = text.find("\n", i)
-        if end == -1 or end > nl:
-            end = nl
-        stripped = text[i:end].strip()
-        if stripped and not stripped.startswith("#"):
-            out.append((i, end))
-        i = end + 1
-    return out
-
-
-def _code_end(text, line_start, line_end):
-    """The index just after the last code character of one argument line,
-    trailing whitespace and a trailing comment set aside."""
-    j = line_start
-    while j < line_end:
-        ch = text[j]
-        if ch == "#":
-            break
-        if ch in ("'", '"'):
-            if text.startswith(ch * 3, j):
-                k = text.find(ch * 3, j + 3)
-                j = line_end if k == -1 or k > line_end else k + 3
-            else:
-                k = j + 1
-                while k < line_end:
-                    if text[k] == "\\":
-                        k += 2
-                        continue
-                    if text[k] == ch:
-                        k += 1
-                        break
-                    k += 1
-                j = k
-            continue
-        j += 1
-    end = j
-    while end > line_start and text[end - 1] in " \t":
-        end -= 1
-    return end
+def _has_comma(tail):
+    """True when the text between a call's last argument and its closing
+    parenthesis holds a comma outside a comment. No string can sit there."""
+    return any("," in line.split("#", 1)[0] for line in tail.split("\n"))
 
 
 def _add_call_argument(text, name, arg_text):
     """text with arg_text added as the last argument of the one name( call.
     Handles a call on one line and one spread over several lines, with or
-    without a trailing comma, keeping the file's own indentation."""
+    without a trailing comma, keeping the file's own indentation. The last
+    argument's end comes from the parse, so a comment, a nested call or a
+    string of several lines inside the call cannot move the edit."""
     loc = _find_call(text, name)
     if loc is None:
         raise ValueError(f"{name}( is not exactly one call in the file")
-    open_i, close_i = loc
+    open_i, close_i, first, last = loc["open"], loc["close"], loc["first"], loc["last"]
     inner = text[open_i + 1:close_i]
+    comma = last is not None and _has_comma(text[last:close_i])
     if "\n" not in inner:
-        insert = arg_text if inner.strip() == "" else ", " + arg_text
-        return text[:close_i] + insert + text[close_i:]
+        if last is None:
+            return text[:close_i] + arg_text + text[close_i:]
+        if comma:
+            gap = "" if text[close_i - 1] in " \t" else " "
+            return text[:close_i] + gap + arg_text + text[close_i:]
+        return text[:last] + ", " + arg_text + text[last:]
     nl = text.rfind("\n", open_i + 1, close_i)
     indent = text[nl + 1:close_i]
     if indent.strip():
         raise ValueError(f"the closing parenthesis of {name}( is not on its own line")
-    lines = _content_lines(text, open_i + 1, nl)
-    if lines:
-        first = text[lines[0][0]:lines[0][1]]
-        arg_indent = first[:len(first) - len(first.lstrip(" \t"))]
-        last_start, last_end = lines[-1]
-        last_code_end = _code_end(text, last_start, last_end)
-    else:
-        arg_indent = indent + "    "
-        last_code_end = None
+    arg_indent = indent + "    "
+    if first is not None and "\n" in text[open_i:first]:
+        line_start = text.rfind("\n", 0, first) + 1
+        arg_indent = text[line_start:first]
+        if arg_indent.strip():
+            arg_indent = indent + "    "
     head = text[:nl + 1]
-    if last_code_end is not None and last_code_end > last_start and text[last_code_end - 1] != ",":
-        head = head[:last_code_end] + "," + head[last_code_end:]
+    if last is not None and not comma:
+        head = text[:last] + "," + text[last:nl + 1]
     return head + arg_indent + arg_text + ",\n" + indent + text[close_i:]
 
 
@@ -379,10 +573,12 @@ def _spec_errors(folder, spec, language_names, folds):
     return None
 
 
-def scaffold_city(root, folder, spec, date, write, pages, language_names, folds):
+def scaffold_city(root, folder, spec, date, write, pages, language_names, folds,
+                  write_file=None):
     """Scaffold one city. Returns (status, reason, lines) where status is
     "done", "would do" or "refused". A refused city writes nothing; a fitting
     city is checked on all four files before any of them is written."""
+    write_file = write_file or _write
     reason = _spec_errors(folder, spec, language_names, folds)
     if reason is not None:
         return "refused", reason, []
@@ -390,8 +586,11 @@ def scaffold_city(root, folder, spec, date, write, pages, language_names, folds)
     config_path = root / "pipeline" / folder / "config.py"
     if not config_path.is_file():
         return "refused", "no config.py", []
-    config_text = _read(config_path)
-    if "PLACE_AREA" in config_text:
+    try:
+        config_text = _read(config_path)
+    except (OSError, UnicodeDecodeError) as exc:
+        return "refused", f"config.py cannot be read: {exc}", []
+    if _PLACE_AREA_RE.search(config_text):
         return "refused", "config already contains PLACE_AREA", []
     if not re.search(r"(?m)^DATA_RAW\s*=", config_text):
         return "refused", "config has no DATA_RAW", []
@@ -404,7 +603,10 @@ def scaffold_city(root, folder, spec, date, write, pages, language_names, folds)
     if len(map_paths) != 1:
         return "refused", "not exactly one step*_map.py", []
     map_path = map_paths[0]
-    map_text = _read(map_path)
+    try:
+        map_text = _read(map_path)
+    except (OSError, UnicodeDecodeError) as exc:
+        return "refused", f"{map_path.name} cannot be read: {exc}", []
     if "place_index_url" in map_text:
         return "refused", "map step already contains place_index_url", []
     if _PLACE_IMPORT in map_text:
@@ -417,9 +619,9 @@ def scaffold_city(root, folder, spec, date, write, pages, language_names, folds)
     except ValueError as exc:
         return "refused", f"map step: {exc}", []
 
-    page_path, page_text = _find_page(root, folder, pages)
+    page_path, page_text, why = _find_page(root, folder, pages)
     if page_path is None:
-        return "refused", "page file cannot be found from app/cities.py", []
+        return "refused", why, []
     if "search=" in page_text:
         return "refused", "page already contains search=", []
     try:
@@ -464,10 +666,34 @@ def scaffold_city(root, folder, spec, date, write, pages, language_names, folds)
                      f"from {name_from} as the name")
 
     if write:
-        _write(config_path, new_config_text)
-        _write(step2b_path, new_step2b_text)
-        _write(map_path, new_map_text)
-        _write(page_path, new_page_text)
+        # All four or none: a write that fails part-way puts back every
+        # file already written, so a city is never left half scaffolded
+        # (and then refused next time for the wrong reason).
+        before = {config_path: config_text, map_path: map_text, page_path: page_text}
+        written = []
+        try:
+            for path, text in ((config_path, new_config_text),
+                               (step2b_path, new_step2b_text),
+                               (map_path, new_map_text),
+                               (page_path, new_page_text)):
+                written.append(path)
+                write_file(path, text)
+        except OSError as exc:
+            failed = written[-1].name
+            left = []
+            for path in written:
+                try:
+                    if path in before:
+                        _write(path, before[path])
+                    elif path.exists():
+                        path.unlink()
+                except OSError:
+                    left.append(path.name)
+            reason = f"writing {failed} failed ({exc}); every file was put back"
+            if left:
+                reason = (f"writing {failed} failed ({exc}); could NOT put back "
+                          f"{', '.join(left)}: restore by hand before running again")
+            return "refused", reason, []
 
     return ("done" if write else "would do"), None, lines
 
@@ -476,6 +702,9 @@ def run_plan(root, plan, write, plan_label="plan.json"):
     """Validate a plan and scaffold each city. Returns (ok, lines)."""
     if not isinstance(plan, dict):
         return False, [f"{plan_label}: the plan must be a JSON object with date and cities"]
+    if write and plan.get("draft") not in (None, False):
+        return False, [f'{plan_label}: the plan is a draft ("draft": true); a session must '
+                       f"read and correct it, then remove the draft line before --write"]
     date = plan.get("date")
     if not _iso_date(date):
         return False, [f"{plan_label}: the plan's date must be an ISO date (YYYY-MM-DD)"]
@@ -533,6 +762,9 @@ def selftest():
         w("pipeline/place_index.py",
           'LANGUAGE_NAMES = {"en": "English", "de": "German", "fr": "French", "ja": "Japanese"}\n'
           'FOLDS = (None, "ja")\n')
+        w("pipeline/travel_packs.py",
+          'LOCAL_LANG = {"de": ["zurich"], "fr": ["angers"], "ja": ["kobe", "osaka"],\n'
+          '             "zh-Hant": ["taipei"]}\n')
 
     def city(folder, name, page_rel, config=None, map_src=None, page_src=None):
         if config is not None:
@@ -878,6 +1110,363 @@ def selftest():
         good = good and rc2 != 0 and "plan_bad_date.json" in out2 and "ISO date" in out2
         report("a plan that is not an object or has a bad date is refused whole",
                good, f"exit {rc}/{rc2}")
+
+        # --- --draft-plan cases ----------------------------------------------
+
+        # A single integer boundary relation is drafted as a one-item list,
+        # the language from LOCAL_LANG and fold null.
+        fresh()
+        w("pipeline/zurich/config.py", '"""c."""\nBOUNDARY_RELATION = 1682248\n')
+        out_path = tmp / "draft.json"
+        rc, out = run(["--draft-plan", str(out_path), "--date", "2026-10-13", "zurich"])
+        entry = json.loads(out_path.read_bytes().decode("utf-8"))["cities"]["zurich"]
+        report("an integer BOUNDARY_RELATION drafts as a one-item list with its language",
+               rc == 0 and entry == {
+                   "relations": [1682248], "languages": ["de"], "fold": None,
+                   "note": "relation from BOUNDARY_RELATION: confirm it is the boundary "
+                           "the map draws, not a district or a line; language from LOCAL_LANG"},
+               f"exit {rc}")
+
+        # A dict drafts its integer keys in order, a tuple its items, and the
+        # cities file is in sorted order.
+        fresh()
+        w("pipeline/liverpool/config.py",
+          '"""c."""\nBOUNDARY_OSM_RELATIONS = {172987: "Liverpool", 173023: "Sefton"}\n')
+        w("pipeline/sydney/config.py", '"""c."""\nBOUNDARY_OSM_RELATION = (1251066, 777)\n')
+        out_path = tmp / "draft.json"
+        rc, out = run(["--draft-plan", str(out_path), "--date", "2026-10-13"])
+        data = json.loads(out_path.read_bytes().decode("utf-8"))["cities"]
+        report("a dict drafts its integer keys in order and a tuple its items, cities sorted",
+               rc == 0 and data["liverpool"]["relations"] == [172987, 173023]
+               and data["sydney"]["relations"] == [1251066, 777]
+               and list(data) == ["liverpool", "sydney"], f"exit {rc}")
+
+        # No boundary relation gives an empty list and a note that says so.
+        fresh()
+        w("pipeline/angers/config.py", '"""c."""\nNAME = "Angers"\n')
+        out_path = tmp / "draft.json"
+        rc, out = run(["--draft-plan", str(out_path), "--date", "2026-10-13", "angers"])
+        entry = json.loads(out_path.read_bytes().decode("utf-8"))["cities"]["angers"]
+        report("a config with no boundary relation drafts an empty list and says to look it up",
+               rc == 0 and entry["relations"] == []
+               and "no boundary relation in the config: look it up" in entry["note"],
+               f"exit {rc}")
+
+        # Two qualifying names are never chosen between.
+        fresh()
+        w("pipeline/duo/config.py", '"""c."""\nBOUNDARY_RELATION = 1\nOSM_BOUNDARY_RELATION = 2\n')
+        out_path = tmp / "draft.json"
+        rc, out = run(["--draft-plan", str(out_path), "--date", "2026-10-13", "duo"])
+        entry = json.loads(out_path.read_bytes().decode("utf-8"))["cities"]["duo"]
+        report("two qualifying names are not chosen between: empty list, note names both",
+               rc == 0 and entry["relations"] == []
+               and "BOUNDARY_RELATION" in entry["note"] and "OSM_BOUNDARY_RELATION" in entry["note"],
+               f"exit {rc}")
+
+        # LINE_RELATIONS alone is not a boundary.
+        fresh()
+        w("pipeline/liner/config.py", '"""c."""\nLINE_RELATIONS = {1: "x"}\n')
+        out_path = tmp / "draft.json"
+        rc, out = run(["--draft-plan", str(out_path), "--date", "2026-10-13", "liner"])
+        entry = json.loads(out_path.read_bytes().decode("utf-8"))["cities"]["liner"]
+        report("LINE_RELATIONS alone is not a boundary: empty list",
+               rc == 0 and entry["relations"] == []
+               and "no boundary relation in the config: look it up" in entry["note"],
+               f"exit {rc}")
+
+        # The language comes from LOCAL_LANG; a city in no list gets the
+        # default (English) and a note that says it is the default.
+        fresh()
+        w("pipeline/zurich/config.py", '"""c."""\nBOUNDARY_RELATION = 1\n')
+        w("pipeline/boston/config.py", '"""c."""\nBOUNDARY_RELATION = 2\n')
+        out_path = tmp / "draft.json"
+        rc, out = run(["--draft-plan", str(out_path), "--date", "2026-10-13"])
+        data = json.loads(out_path.read_bytes().decode("utf-8"))["cities"]
+        report("the language comes from LOCAL_LANG, else the English default with a note",
+               rc == 0 and data["zurich"]["languages"] == ["de"]
+               and "language from LOCAL_LANG" in data["zurich"]["note"]
+               and data["boston"]["languages"] == ["en"]
+               and "the default (English), not a listing" in data["boston"]["note"], f"exit {rc}")
+
+        # A language in LOCAL_LANG but not in LANGUAGE_NAMES is still written,
+        # the note says it is not built yet, and the summary counts it.
+        fresh()
+        w("pipeline/taipei/config.py", '"""c."""\nBOUNDARY_RELATION = 3\n')
+        out_path = tmp / "draft.json"
+        rc, out = run(["--draft-plan", str(out_path), "--date", "2026-10-13", "taipei"])
+        entry = json.loads(out_path.read_bytes().decode("utf-8"))["cities"]["taipei"]
+        report("a language not in LANGUAGE_NAMES is still written and the note says so",
+               rc == 0 and entry["languages"] == ["zh-Hant"]
+               and "not built yet" in entry["note"]
+               and "language not built yet: 1" in out, f"exit {rc}")
+
+        # A Japanese city gets fold ja, a German one null.
+        fresh()
+        w("pipeline/kobe/config.py", '"""c."""\nBOUNDARY_RELATION = 1\n')
+        w("pipeline/zurich/config.py", '"""c."""\nBOUNDARY_RELATION = 2\n')
+        out_path = tmp / "draft.json"
+        rc, out = run(["--draft-plan", str(out_path), "--date", "2026-10-13"])
+        data = json.loads(out_path.read_bytes().decode("utf-8"))["cities"]
+        report("a Japanese city gets fold ja and a German one null",
+               rc == 0 and data["kobe"]["fold"] == "ja" and "fold ja" in data["kobe"]["note"]
+               and data["zurich"]["fold"] is None, f"exit {rc}")
+
+        # A city with PLACE_AREA is left out of a full draft, and naming it
+        # makes the run exit non-zero.
+        fresh()
+        w("pipeline/kept/config.py", '"""c."""\nBOUNDARY_RELATION = 1\n')
+        w("pipeline/held/config.py",
+          '"""c."""\nPLACE_AREA = "(id:3609999999)"\nBOUNDARY_RELATION = 2\n')
+        out_path = tmp / "draft.json"
+        rc, out = run(["--draft-plan", str(out_path), "--date", "2026-10-13"])
+        data = json.loads(out_path.read_bytes().decode("utf-8"))["cities"]
+        good = rc == 0 and "kept" in data and "held" not in data
+        out_path2 = tmp / "draft2.json"
+        rc2, out2 = run(["--draft-plan", str(out_path2), "--date", "2026-10-13", "held"])
+        data2 = json.loads(out_path2.read_bytes().decode("utf-8"))["cities"]
+        report("a city with PLACE_AREA is left out of a full draft, and a named one fails the run",
+               good and rc2 != 0 and "left out" in out2 and "PLACE_AREA" in out2 and data2 == {},
+               f"exit {rc}/{rc2}")
+
+        # An existing OUT_JSON is not overwritten.
+        fresh()
+        w("pipeline/zurich/config.py", '"""c."""\nBOUNDARY_RELATION = 1\n')
+        out_path = tmp / "draft.json"
+        out_path.write_bytes(b'{"keep": true}')
+        before = out_path.read_bytes()
+        rc, out = run(["--draft-plan", str(out_path), "--date", "2026-10-13", "zurich"])
+        report("an existing OUT_JSON is not overwritten and the run exits non-zero",
+               rc != 0 and out_path.read_bytes() == before and "already exists" in out,
+               f"exit {rc}")
+
+        # Two runs to two files give identical bytes, with no carriage return.
+        fresh()
+        w("pipeline/zurich/config.py", '"""c."""\nBOUNDARY_RELATION = 1682248\n')
+        w("pipeline/angers/config.py", '"""c."""\nNAME = "Angers"\n')
+        p1 = tmp / "d1.json"
+        p2 = tmp / "d2.json"
+        rc1, _ = run(["--draft-plan", str(p1), "--date", "2026-10-13"])
+        rc2, _ = run(["--draft-plan", str(p2), "--date", "2026-10-13"])
+        b1 = p1.read_bytes()
+        report("two runs give identical bytes with no carriage return",
+               rc1 == 0 and rc2 == 0 and b1 == p2.read_bytes() and b"\r" not in b1,
+               f"exit {rc1}/{rc2}")
+
+        # --write on a plan with "draft": true is refused whole.
+        fresh()
+        city("alpha", "Alpha", "pages/1_Alpha_Heatmap.py",
+             config=fit_config("alpha", "Alpha"), map_src=fit_map("alpha"),
+             page_src=fit_page("alpha"))
+        cities([("Alpha", "pages/1_Alpha_Heatmap.py")])
+        draft_path = tmp / "draft_plan.json"
+        draft_path.write_bytes(json.dumps({
+            "draft": True, "date": "2026-10-13",
+            "cities": {"alpha": {"relations": [], "languages": ["de"], "fold": None,
+                                 "note": "no boundary relation in the config: look it up"}}}).encode("utf-8"))
+        before = snap()
+        rc, out = run(["--plan", str(draft_path), "--write"])
+        report('--write on a plan with "draft": true is refused whole and names the draft line',
+               rc != 0 and snap() == before and '"draft": true' in out, f"exit {rc}")
+
+        # The same draft without --write runs as a dry run, not a draft refusal.
+        rc, out = run(["--plan", str(draft_path)])
+        report("the same draft without --write dry-runs, its empty-relations city refused",
+               rc != 0 and '"draft": true' not in out and "Nothing was written." in out
+               and "relations must be a non-empty list" in out, f"exit {rc}")
+
+        # The corrected plan (draft line gone, relations filled) writes.
+        fixed_path = tmp / "fixed_plan.json"
+        fixed_path.write_bytes(json.dumps({
+            "date": "2026-10-13",
+            "cities": {"alpha": {"relations": [7], "languages": ["de"], "fold": None}}}).encode("utf-8"))
+        rc, out = run(["--plan", str(fixed_path), "--write"])
+        cfg = (tmp / "pipeline/alpha/config.py").read_text(encoding="utf-8")
+        report("the corrected plan (draft line gone, relations filled) writes",
+               rc == 0 and 'PLACE_AREA = "(id:3600000007)"' in cfg, f"exit {rc}")
+
+        # --draft-plan without --date, and with a non-ISO date, both fail.
+        fresh()
+        w("pipeline/zurich/config.py", '"""c."""\nBOUNDARY_RELATION = 1\n')
+        out_path = tmp / "draft.json"
+        rc1, out1 = run(["--draft-plan", str(out_path)])
+        rc2, out2 = run(["--draft-plan", str(out_path), "--date", "13-10-2026"])
+        report("--draft-plan without --date or with a non-ISO date exits non-zero with a sentence",
+               rc1 != 0 and "date" in out1 and rc2 != 0 and "ISO" in out2,
+               f"exit {rc1}/{rc2}")
+
+        # The Czech shape, a municipality code mapped to its relation, drafts
+        # the VALUES; a dict with integers on neither side stays empty.
+        fresh()
+        w("pipeline/brno/config.py", '"""c."""\nOSM_BOUNDARY_RELATIONS = {"582786": 438171}\n')
+        w("pipeline/words/config.py", '"""c."""\nOSM_BOUNDARY_RELATIONS = {"a": "b"}\n')
+        ok_draft, lines_draft, plan_draft = draft_plan(tmp, "2026-10-13", ["brno", "words"])
+        report("a dict of code to relation drafts its values; one with no integers stays empty",
+               ok_draft and plan_draft["cities"]["brno"]["relations"] == [438171]
+               and plan_draft["cities"]["words"]["relations"] == []
+               and "neither" in plan_draft["cities"]["words"]["note"], "")
+
+        # Found by an adversarial review (2026-10-12): each is a way a city's
+        # files could be left wrong and look right.
+        one = {"relations": [1], "languages": ["de"], "fold": None}
+
+        def scaffolded(folder, name, page_rel, map_src=None, page_src=None, config=None):
+            fresh()
+            city(folder, name, page_rel,
+                 config=config or fit_config(folder, name),
+                 map_src=map_src or fit_map(folder), page_src=page_src or fit_page(folder))
+            cities([(name, page_rel)])
+            return plan("2026-10-13", {folder: one})
+
+        # A call named in the docstring is not the call.
+        path = scaffolded("doc", "Doc", "pages/1_Doc_Heatmap.py", map_src=fit_map("doc").replace(
+            '"""Step 3 - render doc."""',
+            '"""Step 3 - render doc with the shared render_heatmap (pipeline/map_common.py)."""'))
+        rc, out = run(["--plan", str(path), "--write"])
+        m = (tmp / "pipeline/doc/step3_map.py").read_bytes().decode("utf-8")
+        report("a call named in a docstring is left alone; the real call gets the argument",
+               rc == 0 and "(pipeline/map_common.py)." in m
+               and '        place_index_url=place_index.index_url("doc"),\n    )' in m, f"exit {rc}")
+
+        # A string of several lines as the last argument keeps its text.
+        text_arg = ('    render_heatmap(\n        output_path=HEATMAP_HTML,\n'
+                    '        map_title="""Line one\n# and line two""",\n    )')
+        path = scaffolded("multi", "Multi", "pages/2_Multi_Heatmap.py", map_src=fit_map("multi").replace(
+            "    render_heatmap(\n        output_path=HEATMAP_HTML,\n        label_focus=None,\n    )",
+            text_arg))
+        rc, out = run(["--plan", str(path), "--write"])
+        m = (tmp / "pipeline/multi/step3_map.py").read_bytes().decode("utf-8")
+        report("a comma never lands inside a string of several lines",
+               rc == 0 and '"""Line one\n# and line two""",\n        place_index_url=' in m,
+               f"exit {rc}")
+
+        # A page that mentions another city's config in a comment is not its page.
+        fresh()
+        city("solo", "Solo", "pages/3_Solo_Heatmap.py", config=fit_config("solo", "Solo"),
+             map_src=fit_map("solo"), page_src=fit_page("solo"))
+        w("app/pages/1_Other_Heatmap.py",
+          '"""page other."""\n# reads the same register as pipeline.solo.config\n'
+          "from pipeline.other.config import HEATMAP_HTML\n"
+          "from components import render_map_help\n\n\nrender_map_help('other')\n")
+        cities([("Other", "pages/1_Other_Heatmap.py"), ("Solo", "pages/3_Solo_Heatmap.py")])
+        path = plan("2026-10-13", {"solo": one})
+        rc, out = run(["--plan", str(path), "--write"])
+        report("a page that only mentions the city's config in a comment is not edited",
+               rc == 0
+               and "search=" not in (tmp / "app/pages/1_Other_Heatmap.py").read_bytes().decode("utf-8")
+               and "search='solo'" in (tmp / "app/pages/3_Solo_Heatmap.py").read_bytes().decode("utf-8"),
+               f"exit {rc}")
+
+        # Two listed pages importing one config: refused, nothing chosen.
+        fresh()
+        city("pair", "Pair", "pages/4_Pair_Heatmap.py", config=fit_config("pair", "Pair"),
+             map_src=fit_map("pair"), page_src=fit_page("pair"))
+        w("app/pages/5_Pair_Regional_Heatmap.py", fit_page("pair"))
+        cities([("Pair", "pages/4_Pair_Heatmap.py"), ("Pair (Regional)", "pages/5_Pair_Regional_Heatmap.py")])
+        path = plan("2026-10-13", {"pair": one})
+        before = snap()
+        rc, out = run(["--plan", str(path), "--write"])
+        report("two listed pages importing one config refuse the city and change nothing",
+               rc != 0 and snap() == before and "more than one listed page" in out, f"exit {rc}")
+
+        # A write that fails on the third file puts the first two back.
+        path = scaffolded("half", "Half", "pages/6_Half_Heatmap.py")
+        before = snap()
+
+        def failing(target, text):
+            if target.name == "step3_map.py":
+                raise OSError("the file is locked")
+            _write(target, text)
+
+        status, reason, _ = scaffold_city(
+            tmp, "half", one, "2026-10-13", True, _cities_pages(tmp),
+            {"de": "German"}, (None, "ja"), write_file=failing)
+        report("a write that fails part-way puts every file back and says so",
+               status == "refused" and snap() == before and "every file was put back" in reason,
+               reason)
+
+        # PLACE_AREA named only in a comment is not a scaffolded city.
+        path = scaffolded("noted", "Noted", "pages/7_Noted_Heatmap.py",
+                          config=fit_config("noted", "Noted") + "# PLACE_AREA goes here later\n")
+        rc, out = run(["--plan", str(path), "--write"])
+        report("PLACE_AREA in a comment does not refuse the city", rc == 0, f"exit {rc}")
+        fresh()
+        w("pipeline/noted/config.py", '"""c."""\n# PLACE_AREA goes here later\n')
+        out_path = tmp / "draft_noted.json"
+        rc, out = run(["--draft-plan", str(out_path), "--date", "2026-10-13"])
+        report("a full draft keeps a city whose config only mentions PLACE_AREA",
+               rc == 0 and "noted" in json.loads(out_path.read_bytes().decode("utf-8"))["cities"],
+               f"exit {rc}")
+
+        # A draft flag that is not exactly true still stops --write.
+        path = scaffolded("flag", "Flag", "pages/8_Flag_Heatmap.py")
+        outcomes = []
+        for flag in ("true", 1):
+            path.write_bytes(json.dumps({"draft": flag, "date": "2026-10-13",
+                                         "cities": {"flag": one}}).encode("utf-8"))
+            before = snap()
+            rc, out = run(["--plan", str(path), "--write"])
+            outcomes.append(rc != 0 and snap() == before and "draft" in out)
+        report('a draft flag written as "true" or 1 stops --write as true does', all(outcomes), "")
+
+        # A draft is not written into the source tree, nor into a new folder.
+        fresh()
+        w("pipeline/zurich/config.py", '"""c."""\nBOUNDARY_RELATION = 1682248\n')
+        rc, out = run(["--draft-plan", str(tmp / "pipeline" / "draft.json"), "--date", "2026-10-13"])
+        rc2, out2 = run(["--draft-plan", str(tmp / "no_such" / "draft.json"), "--date", "2026-10-13"])
+        report("a draft is refused inside pipeline/ and in a folder that does not exist",
+               rc != 0 and not (tmp / "pipeline" / "draft.json").exists() and "inside pipeline/" in out
+               and rc2 != 0 and not (tmp / "no_such").exists(), f"exit {rc}/{rc2}")
+
+        # A city listed under two languages is not settled by the last read.
+        fresh()
+        w("pipeline/travel_packs.py", 'LOCAL_LANG = {"fr": ["twin"], "nl": ["twin"]}\n')
+        w("pipeline/twin/config.py", '"""c."""\nBOUNDARY_RELATION = 5\n')
+        ok_draft, _, plan_draft = draft_plan(tmp, "2026-10-13", ["twin"])
+        report("a city listed under two languages drafts both and says to choose",
+               plan_draft["cities"]["twin"]["languages"] == ["fr", "nl"]
+               and "choose" in plan_draft["cities"]["twin"]["note"]
+               and plan_draft.get("draft") is True, "")
+
+        # A map step that renders through a shared country module holds no
+        # render_heatmap call, only a mention in its docstring: 33 of the 218
+        # unsearched cities (the French, British and other batches). Refused,
+        # with every file unchanged; the docstring is never edited.
+        path = scaffolded("shared", "Shared", "pages/9_Shared_Heatmap.py", map_src=(
+            '"""Step 3 - all rendering is map_common\'s render_heatmap(); nothing forks it."""\n'
+            "import sys\nfrom pathlib import Path\n\n"
+            "sys.path.insert(0, str(Path(__file__).parent.parent.parent))\n\n"
+            "from pipeline.countries.some_country import render\n"
+            "from pipeline.shared import config\n\n"
+            'if __name__ == "__main__":\n    render(config, "Shared")\n'))
+        before = snap()
+        rc, out = run(["--plan", str(path), "--write"])
+        report("a map step with no render_heatmap call of its own is refused, docstring untouched",
+               rc != 0 and snap() == before and "is not exactly one call" in out, f"exit {rc}")
+
+        # Two calls: refused, neither chosen.
+        path = scaffolded("twice", "Twice", "pages/1_Twice_Heatmap.py", map_src=fit_map("twice").replace(
+            "    render_heatmap(\n        output_path=HEATMAP_HTML,\n        label_focus=None,\n    )",
+            "    render_heatmap(output_path=HEATMAP_HTML)\n    render_heatmap(output_path=HEATMAP_HTML)"))
+        before = snap()
+        rc, out = run(["--plan", str(path), "--write"])
+        report("a map step with two render_heatmap calls is refused",
+               rc != 0 and snap() == before and "is not exactly one call" in out, f"exit {rc}")
+
+        # A closing parenthesis that shares its line with the last argument.
+        path = scaffolded("tight", "Tight", "pages/2_Tight_Heatmap.py", map_src=fit_map("tight").replace(
+            "    render_heatmap(\n        output_path=HEATMAP_HTML,\n        label_focus=None,\n    )",
+            "    render_heatmap(\n        output_path=HEATMAP_HTML,\n        label_focus=None)"))
+        before = snap()
+        rc, out = run(["--plan", str(path), "--write"])
+        report("a closing parenthesis on the last argument's line is refused, not reformatted",
+               rc != 0 and snap() == before and "not on its own line" in out, f"exit {rc}")
+
+        # A rail line's relations are never a boundary, whatever else the name holds.
+        fresh()
+        w("pipeline/liner2/config.py", '"""c."""\nCITY_LINE_RELATIONS = [11, 12]\n')
+        ok_draft, _, plan_draft = draft_plan(tmp, "2026-10-13", ["liner2"])
+        report("a name holding LINE is never a boundary relation",
+               plan_draft["cities"]["liner2"]["relations"] == [], "")
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
 
@@ -889,10 +1478,43 @@ def main(argv=None, root=ROOT):
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--plan", help="path to the plan JSON file")
     ap.add_argument("--write", action="store_true", help="write the scaffolded files")
+    ap.add_argument("--draft-plan", help="path to write the draft plan JSON file to")
+    ap.add_argument("--date", help="ISO date (YYYY-MM-DD), required with --draft-plan")
+    ap.add_argument("cities", nargs="*", help="city folder names to draft (default: all)")
     ap.add_argument("--selftest", action="store_true", help="run the self tests")
     args = ap.parse_args(argv)
     if args.selftest:
         return selftest()
+    if args.draft_plan:
+        if not args.date:
+            print("--draft-plan needs --date, an ISO date (YYYY-MM-DD)")
+            return 2
+        if not _iso_date(args.date):
+            print(f"--draft-plan needs --date as an ISO date (YYYY-MM-DD), not {args.date!r}")
+            return 1
+        ok, lines, plan = draft_plan(root, args.date, args.cities)
+        for line in lines:
+            print(line)
+        if plan is None:
+            return 1
+        out_path = Path(args.draft_plan)
+        if out_path.exists():
+            print(f"not overwriting {args.draft_plan}: the file already exists")
+            return 1
+        resolved = out_path.resolve()
+        for tree in ("pipeline", "app", "outputs"):
+            inside = (root / tree).resolve()
+            if inside == resolved or inside in resolved.parents:
+                print(f"not writing a draft inside {tree}/: name a file outside "
+                      f"the source tree, {args.draft_plan} is not one")
+                return 1
+        if not out_path.parent.is_dir():
+            print(f"the folder of {args.draft_plan} does not exist: create it or "
+                  f"name another file")
+            return 1
+        _write(out_path, json.dumps(plan, ensure_ascii=False, indent=2))
+        print(f"Wrote {args.draft_plan}")
+        return 0 if ok else 1
     if not args.plan:
         print(__doc__)
         return 2
