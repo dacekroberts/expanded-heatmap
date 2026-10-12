@@ -305,14 +305,32 @@ go-live call, and the one re-render carries the Travel switch:
   requests. The files are delivered through Cloudflare, which processes
   requests under its own privacy policy." P4's licence rows name the
   option and the terms date.
-- **Before the full re-render, a browser test against the live host**
-  (his item 5, not yet run): render a few cities with the host set
-  (Seattle, London, Tokyo), run the app on `127.0.0.1:8501`, switch the
-  Travel layer on, and read the console for CORS errors and the network
-  list for the tiles and glyphs. The host answers only these origins:
-  the live app, and localhost or 127.0.0.1 on ports 8501 and 8000; a
-  test on any other port fails for that reason alone. The basemap
-  session may have run it already: ask.
+- **The browser test against the live host PASSED** (the basemap
+  session's report, 2026-10-12; not run by Cleanup). Seattle, London and
+  Tokyo, rendered with the host set for that process only into a scratch
+  copy of the app, on `127.0.0.1:8501`, headless Edge at desktop and
+  phone widths: the Travel layer switched on in all six runs, roads and
+  labels in both themes, every library, pack range and glyph request
+  answered, no CORS error, no cookie. The only console errors were
+  Streamlit's own two 404 probes, present without Travel too.
+  Screenshots in `data/_basemap_build/shots_live_host_2026-10-12/`.
+  The host answers only the live app and localhost or 127.0.0.1 on
+  ports 8501 and 8000; a test on another port fails for that alone.
+- **The exact go-live edits** are in the top entry of
+  `docs/decisions_drafts/basemap.md` on branch `basemap` (`3f52775b`
+  or later), under "THE EXACT EDITS FOR GO-LIVE": the `PACK_HOST` line,
+  **committed in the SAME commit as the re-rendered maps**
+  (`check_travel_packs.py` fails a host set while committed maps lack
+  the switch, and the reverse); phase 2's table rows (30 folder names
+  under "ja", Naha among them, and `cluj_napoca` under "ro"); P5's
+  full sentence with the Cloudflare clause; P4's paragraph for
+  `docs/data_sources.md`; the checks after the re-render. That session
+  was showing the owner the `PACK_HOST` diff in its chat: ask him
+  whether he has seen it, and show it again if not.
+- **One file for the owner to replace on the host:** the README live
+  at `/README.md` is an internal draft; the approved public text (P6) is
+  in `host_upload_2026-10/README.md`. Confirm with him that it is
+  replaced before go-live. The live manifest matches the local one.
 - The OpenStreetMap credit must show on both base layers
   (`check_map_attribution.js`, more than one height).
 - A pack rebuilt after upload (Naha's S39 re-run did not change its
