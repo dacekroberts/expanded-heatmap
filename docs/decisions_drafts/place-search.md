@@ -4,6 +4,19 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-11 - Place search: a picked line is outlined, legend picks included; the search button closes a box with text in it (owner, branch)
+
+- **"line fade looks better"** (owner, at the phone check): the fade that lasts while the line stays picked is confirmed.
+- **"can we temporarily draw white/black (depending on lighting mode) outlines around the label and drawn line to further identify when highlighted? (goes away after click off)"**, then **"then apply the same to picking on the legend"** (owner):
+  - **The line** gets a casing under it while picked: a 13 px copy of its own polylines under the 7 px picked line, white on the light map and black on the dark one (read from the owner's order of words; the other way round is a two-colour swap in the search's styles). **The label** is boxed: a fill in the same white or black, with a 2 px ring in the label's own colour.
+  - **Any pick, not only a search:** the legend row, a tap on the line, or the search. All three end when the line is unpicked.
+  - **Call, mine: built in the search script, not in the highlight script.** The highlight script is in every map, searched or not, and changing it makes every committed map stale; the search script is in the nineteen searched maps and reaches the rest with the rollout. So an unsearched map's legend pick is unchanged until that city gets search. Put to the owner.
+  - **A mouse hover gets none of it.** The highlight script presses a legend row for a hover as well as a pick, so the pick is read only after a click or a key. While the pointer hovers another line the outline and fade are off, and they return with the pick.
+  - A place search while a line is picked leaves the line's fade on when the place marker's fade ends.
+- **"the search box isn't closable when you have text typed into the box"** (owner): the search button now closes an open box whatever it holds and clears the text, as Escape does (a phone has no Escape key). It had closed only an empty box.
+- **Measured in a local render** (São Paulo, 127.0.0.1, both themes): a legend pick of Linha 2-Verde, a switch to Linha 3-Vermelha and a search for Linha 1-Azul each gave the fade, the casings before the picked line's paths in the drawing order, and the boxed label; unpicking removed all three; the button closed the box with "Linha 1" typed and reopened it empty.
+- All nineteen searched maps re-rendered.
+
 ### 2026-10-11 - Place search: a searched line fades the businesses too, for as long as it stays picked (owner, branch)
 
 - **"for line lookup, layer control should also thin/faint for those. otherwise the business data does no good overlapping the highlighted line. site-wide change"** (owner, at the phone check of the new marker). Read as: the business layers fade on a line search as they do on a place search.

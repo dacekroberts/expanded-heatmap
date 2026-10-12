@@ -2051,6 +2051,11 @@ _PLACE_SEARCH_TEMPLATE = r"""
     path.hm-search-case { stroke: #ffffff; stroke-opacity: 0.95; fill: none; }
     path.hm-search-ring { stroke: @@LIGHT_ACCENT@@; stroke-opacity: 1;
         fill: @@LIGHT_ACCENT@@; fill-opacity: 0.14; }
+    path.hm-search-linecase { stroke: #ffffff; fill: none; }
+    .dark-base path.hm-search-linecase { stroke: #000000; }
+    .hm-line-label.hm-search-label { padding: 1px 6px; border-radius: 4px; background: #ffffff;
+        box-shadow: 0 0 0 2px currentColor; }
+    .dark-base .hm-line-label.hm-search-label { background: #000000; }
     .dark-base path.hm-search-case { stroke: @@DARK_PAGE@@; }
     .dark-base path.hm-search-ring { stroke: @@DARK_ACCENT@@; fill: @@DARK_ACCENT@@; fill-opacity: 0.2; }
     /* While the marker shows, the businesses step back: the dots (the only
@@ -2190,7 +2195,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
     var CJK = /[@@CJK_CLASS@@]/;
     var MARKS = /[@@MARKS_CLASS@@]/g;
     var data = null, own = null, loading = null, fold = null, marker = null, timer = null;
-    var renderer = null, lineWatch = null;
+    var renderer = null, lineRow = null, casing = null, cased = null;
     var byIndex = [], crossURL = null, crossings = null;
 
     function norm(s) {
@@ -2655,14 +2660,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
                 // (LINE_HIGHLIGHT_SCRIPT); a row already picked stays picked.
                 map.fitBounds([[d.bbox[0], d.bbox[1]], [d.bbox[2], d.bbox[3]]], {padding: [30, 30]});
                 if (d.row.getAttribute("aria-pressed") !== "true") d.row.click();
-                // The businesses step back for as long as the searched line
-                // stays picked: unpicking it, by its legend row or any other
-                // way, ends the fade, as does the next search.
-                map.getContainer().classList.add("hm-searching");
-                lineWatch = new MutationObserver(function () {
-                    if (d.row.getAttribute("aria-pressed") !== "true") unmark();
-                });
-                lineWatch.observe(d.row, {attributes: true, attributeFilter: ["aria-pressed"]});
+                samplePick();
                 return;
             }
             if (d.kind === "mapstation") {
@@ -2699,16 +2697,71 @@ _PLACE_SEARCH_TEMPLATE = r"""
             }, 400);
             timer = setTimeout(unmark, 12000);
         }
+        // A picked line's look, whether picked from the search, its legend
+        // row or the map: the businesses step back, a casing is drawn under
+        // the line and its label is boxed, until it is unpicked. The picked
+        // state is the legend row's aria-pressed, which LINE_HIGHLIGHT_SCRIPT
+        // sets in one place; that script also presses a row for a mouse
+        // hover, so the pick is read only after a click or a key, and a line
+        // merely hovered gets none of this. While the pointer hovers another
+        // line the look is off, and it returns with the pick. The casing is
+        // a copy of the line's own polylines in the same renderer, moved
+        // under the line's first path, which the highlight script has
+        // already put last among the lines.
+        function pressedRow() {
+            return document.querySelector('.hm-line-row[data-line][aria-pressed="true"]');
+        }
+        function lineState() {
+            var cur = pressedRow();
+            if (!cur) lineRow = null;
+            var want = lineRow && cur === lineRow ? lineRow.getAttribute("data-line") : null;
+            if (want === cased) return;
+            var label;
+            if (cased !== null) {
+                label = document.querySelector('.hm-line-label[data-line="' + cased + '"]');
+                if (label) label.classList.remove("hm-search-label");
+                if (casing) map.removeLayer(casing);
+                casing = null;
+            }
+            cased = want;
+            if (want === null) {
+                if (!marker) map.getContainer().classList.remove("hm-searching");
+                return;
+            }
+            map.getContainer().classList.add("hm-searching");
+            label = document.querySelector('.hm-line-label[data-line="' + want + '"]');
+            if (label) label.classList.add("hm-search-label");
+            var polys = [];
+            map.eachLayer(function (l) {
+                var c = l.options && l.options.className;
+                if (typeof c === "string" && l._path && (" " + c + " ").indexOf(" hm-line-" + want + " ") !== -1) polys.push(l);
+            });
+            if (!polys.length) return;
+            casing = L.featureGroup(polys.map(function (q) {
+                return L.polyline(q.getLatLngs(), {weight: 13, opacity: 1, className: "hm-search-linecase",
+                    interactive: false, renderer: q._renderer});
+            })).addTo(map);
+            var first = polys[0]._path;
+            casing.eachLayer(function (c) {
+                if (c._path && first.parentNode) first.parentNode.insertBefore(c._path, first);
+            });
+        }
+        function samplePick() { lineRow = pressedRow(); lineState(); }
+        Array.prototype.forEach.call(document.querySelectorAll(".hm-line-row[data-line]"), function (row) {
+            new MutationObserver(lineState).observe(row, {attributes: true, attributeFilter: ["aria-pressed"]});
+        });
+        ["click", "keyup"].forEach(function (ev) {
+            document.addEventListener(ev, function () { setTimeout(samplePick, 0); }, true);
+        });
         function unfade() {
-            map.getContainer().classList.remove("hm-searching");
+            // A picked line keeps its fade.
+            if (cased === null) map.getContainer().classList.remove("hm-searching");
             ["pointerdown", "wheel", "touchstart", "keydown"].forEach(function (ev) {
                 map.getContainer().removeEventListener(ev, unfade, {capture: true});
             });
         }
         function unmark() {
             clearTimeout(timer);
-            if (lineWatch) lineWatch.disconnect();
-            lineWatch = null;
             if (marker) map.removeLayer(marker);
             marker = null;
             unfade();
@@ -2725,7 +2778,14 @@ _PLACE_SEARCH_TEMPLATE = r"""
             });
         }
         btn.addEventListener("click", function () {
-            if (box.classList.contains("open") && !input.value) { box.classList.remove("open"); return; }
+            // The button closes an open box, typed text or not (a phone has
+            // no Escape key); the text is cleared, as Escape clears it.
+            if (box.classList.contains("open")) {
+                input.value = "";
+                render();
+                box.classList.remove("open");
+                return;
+            }
             open();
         });
         input.addEventListener("input", render);
