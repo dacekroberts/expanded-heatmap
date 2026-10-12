@@ -1,0 +1,817 @@
+Skip to Main Content
+
+Accessibility Icon
+
+Search Icon
+
+Hamburger Icon
+
+Left Arrow Icon
+
+CTA Logo Small
+
+Right Arrow
+
+Train
+
+Circle
+
+Info Icon
+
+Info Icon
+
+Bus Icon
+
+Alert Icon
+
+Alert Icon
+
+Alert Icon
+
+cta
+
+Twitter
+
+Facebook
+
+Facebook
+
+Mail
+
+Print
+
+Youtube
+
+Instagram
+
+Facebook
+
+Twitter
+
+Youtube
+
+Instagram
+
+Flickr
+
+Arrow pointing down
+
+Arrow pointing up
+
+Arrow pointing right
+
+Arrow pointing left
+
+Earth
+
+Alert Icon
+
+Alert Icon
+
+Owl
+
+Accessibility Icon
+
+Wifi Icon
+
+Train with wifi symbol
+
+Pick a stop
+
+Heart
+
+Pointy
+
+Magnifying glass
+
+Map
+
+External link
+
+Checkmark
+
+Checkmark
+
+Clock
+
+Clock
+
+Gear
+
+Chired Star
+
+Emergency
+
+Special note
+
+Share Icon
+
+Get Location Icon
+
+Get Location Disabled Icon
+
+Bug Icon
+
+Alert Icon
+
+BlueSky
+
+Accessibility
+
+Contact Us
+
+Search Chicago Transit Authority
+
+Click to submit search
+
+Click to open menu
+
+Click to go to the Chicago Transit Authority homepage
+
+Click to open search
+
+Search Chicago Transit Authority
+
+Click to search Chicago Transit Authority
+
+Live Well • Work Well
+
+Promoting a healthier lifestyle
+
+through total wellness.
+
+Click to open menu
+
+Click to go to the Chicago Transit Authority homepage
+
+Quick links
+
+Schedules
+
+Fares
+
+Maps
+
+Alerts
+
+Trackers
+
+Ventra
+
+Main Menu
+
+Live Well • Work Well
+
+Promoting a healthier lifestyle
+
+through total wellness.
+
+The following navigation utilizes arrow, enter, escape, and space bar key commands. Left and right arrows move through main tier links and expand / close menus in sub tiers. Up and Down arrows will open main tier menus and toggle through sub tier links. Enter and space open menus and escape closes them as well. Tab will move on to the next part of the site rather than go through menu items.
+
+The following navigation utilizes arrow, enter, escape, and space bar key commands. Left and right arrows move through main tier links and expand / close menus in sub tiers. Up and Down arrows will open main tier menus and toggle through sub tier links. Enter and space open menus and escape closes them as well. Tab will move on to the next part of the site rather than go through menu items.
+
+Plan a trip
+
+Travel info
+
+Getting around
+
+Accessibility
+
+Airport transit
+
+Brochures
+
+Destinations
+
+How-to guides
+
+Maps
+
+Schedules & routes
+
+Visiting Chicago
+
+Service updates
+
+Alerts & system status
+
+CTA Bus Tracker
+
+CTA Train Tracker
+
+Get updates (subscribe)
+
+Planned weekday changes
+
+Planned weekend changes
+
+More travel info
+
+Bike & ride
+
+Lost & found
+
+Park & ride
+
+Policies & practices
+
+Rules of conduct
+
+Safety & security
+
+Fares
+
+Fare information
+
+Fare chart
+
+Military service pass
+
+Passes
+
+Reduced/free ride programs
+
+Student fares
+
+Transit benefits
+
+U-Pass
+
+Ventra (farecards/tickets)
+
+What's Ventra?
+
+How to use Ventra
+
+Find a retail location
+
+Get a card
+
+Manage account
+
+Get the app
+
+Quick rides w/contactless bankcards
+
+Quick rides w/Pay app on your phone
+
+Riding with passes
+
+News/projects
+
+News
+
+Newsletter
+
+Podcast
+
+Press room
+
+Public notices
+
+Videos (YouTube)
+
+Social media
+
+Agency initiatives
+
+Campaigns
+
+Charter an 'L' train
+
+Developer Center
+
+Environment
+
+How we manage delays
+
+Heritage Fleet
+
+Innovation Studio
+
+Open Data
+
+Planning/expansion
+
+Public art
+
+Rider Lab
+
+Safe Ride Specialists
+
+Security
+
+Transit-oriented development
+
+Improvement projects
+
+All Stations Accessibility Program
+
+Bus Priority Corridor Study
+
+Forest Park Branch Rebuild
+
+Frequent Network
+
+Red & Purple modernization
+
+Red Line Extension
+
+All projects
+
+More
+
+Business
+
+Advertising
+
+Bond sales
+
+Bus/Train Tracker for business
+
+Buying Plan
+
+Construction near us
+
+Contract opportunities portal
+
+Corporate partnerships
+
+Diversity programs
+
+Info for school reduced fare admins
+
+Filming & photography
+
+Procurement info
+
+Real estate leasing/sales
+
+Vendor registration
+
+Administration
+
+ADA Advisory Committee
+
+Chicago Transit Board
+
+Citizens Advisory Board
+
+Governance & administration
+
+Employee portal
+
+Equal employment opportunity
+
+Finance & budget
+
+Freedom of information (FOIA)
+
+Meetings, Agendas & Minutes
+
+Office of Exec. Inspector General
+
+Ordinances
+
+Public notices
+
+Title VI info
+
+About us & more
+
+Agency overview
+
+Careers
+
+Contact us
+
+Documents
+
+Facts at a glance
+
+Gift shop
+
+Historical calendars
+
+Performance metrics
+
+Ridership reports
+
+Send feedback
+
+Get the Ventra app
+
+Getting help
+
+E-mail us
+
+Accessibility
+
+Home
+
+News/projects
+
+Developer Center
+
+Developer Terms
+
+Share on Facebook
+
+Share via email
+
+Click to print
+
+Developer License Agreement & Terms of Use
+
+This Developer License Agreement and Terms of Use (“Agreement”) governs the use by developers and third parties (“you”) of electronic data owned and maintained by Chicago Transit Authority (“CTA,” “we” or “us”), including, but not limited to, CTA Bus Tracker data, CTA Train Tracker data, transitchicago.com Alerts data, General Transit Feed Specification (“GTFS”) and Scheduled Service data (collectively, “CTA Data"). CTA can change this Agreement at any time by posting a revised Agreement as CTA deems necessary. Your continued use of any CTA Data constitutes acceptance of those changes.
+
+I. Limited License
+
+Subject to your compliance with this Agreement, CTA grants you a limited, non-exclusive, non-assignable, non-transferable and revocable license to use, reproduce, distribute, display, process and create derivative works of CTA Data as provided by CTA through the application programming interfaces (“APIs”), data feeds or otherwise for the sole purpose of assisting mass transportation (i.e., bus or rail) riders or in furtherance of promoting public transportation. Except as expressly provided in this Agreement, CTA Data may not be used, in whole or in part, for any other purpose, without the express permission of CTA.
+
+By using the CTA Data, you agree to be bound by this Agreement. IF YOU DO NOT AGREE TO BE BOUND BY THIS AGREEMENT, YOU MAY NOT USE CTA DATA.
+
+II. Ownership of CTA Data
+
+All right, title and interest in and to patents, copyrights, trademarks, and other intellectual property and ownership rights embodied in the original CTA Data, including, but not limited to, any new or useful art, discovery, improvement, technical development or invention, whether or not patentable, and all related know-how, designs, mask works, formulae, processes, trade secrets, ideas, artwork, software, hardware, graphics, layout, and modules, are CTA’s sole and exclusive property and are protected from unauthorized use, copying and distribution by U.S. and international laws, regulations and international treaties.
+
+You acknowledge that CTA owns all rights in the CTA Data and you do not acquire any rights in the CTA Data by virtue of your use of the CTA Data under this Agreement or otherwise.
+
+All uses of the CTA Data by you inure to the sole benefit of CTA to the extent they relate to intellectual property and other proprietary rights owned by CTA. Your use of the CTA Data does not in any way grant you the right to sell the CTA Data by itself as a stand-alone product.
+
+You agree not to challenge, directly or indirectly, CTA’s rights in the CTA Data or assert any right, title or interest in or to the CTA Data or assist any third party in doing so.
+
+Subject to the license to use the CTA Data and CTA Brand Assets (defined below), you retain ownership of your application, technology, website, feature, product, service, or derivative work, etc. that incorporates the CTA Data (collectively and each, an “application”) (including any code therein) and you are solely responsible for claims made in connection with or related to your application, and you agree to defend, indemnify and hold CTA harmless for any claims with respect thereto.
+
+III. Limitations on Use of CTA Data and Guidelines for Use of the CTA Brand Assets
+
+Your use of CTA Data is subject to the following limitations and restrictions:
+
+You and your application must not express or imply any affiliation or relationship with or sponsorship or endorsement by CTA.
+
+You may cache CTA Data you receive from CTA in order to improve your application’s user experience, but you agree to take reasonable efforts to keep the CTA Data up to date.
+
+You will not sell, auction or barter any CTA Data separate from your application. If you are acquired by or merge with a third party, you can continue to use CTA Data within your application subject to the terms of this Agreement, but you may not transfer the CTA Data outside your application.
+
+Subject to you abiding by this agreement and the CTA Trademark Guidelines for Developers (incorporated herein by reference), CTA grants you a limited, non-exclusive, non-assignable, non-transferable and revocable license and right to use the names, logos, trademarks, title treatments and art (the “CTA Brand Assets”) as provided by CTA that relate to the CTA Data, including the CTA, CTA BUS TRACKER, and CTA TRAIN TRACKER word marks and the CTA Bus Tracker Logo and CTA Train Tracker Logo, for your use solely in connection with offering your application.
+
+You may not use the CTA Brand Assets or any trademarks or terms confusingly similar to CTA’s trademarks in the name of your application or in any way that may suggest that CTA is affiliated with, endorses, or sponsors you or your application or that is likely to tarnish or dilute the CTA Brand Assets. You must comply with the CTA Trademark Guidelines for Developers which contain important restrictions, as well as examples of uses that are and are not acceptable.
+
+When using the CTA Data, you have the option, but not the obligation, to credit CTA. If you elect to include a credit line, it should read as follows: “Data provided by Chicago Transit Authority,” "Data provided by CTA" or “Powered by CTA data” or similar, descriptive language.
+
+Solely for purposes of a credit line accompanying a use of CTA Bus Tracker data, you have the option, but not the obligation, to use the logo icon shown below as more fully described in the appendices of this document, provided that such use otherwise comports with this Agreement. If you elect to include a credit line, it should read: “CTA Bus Tracker data provided by Chicago Transit Authority. The CTA Bus Tracker logo is a trademark of Chicago Transit Authority” or similar, descriptive language.
+
+See Branding Guide for larger version
+
+Solely for purposes of a credit line accompanying a use of CTA Train Tracker data, you have the option, but not the obligation, to use the CTA Train Tracker logo shown below as more fully described in the appendices of this document, provided that such use otherwise comports with this Agreement. If you elect to include a credit line, it should read: “CTA Train Tracker data provided by Chicago Transit Authority. The CTA Train Tracker logo is a trademark of Chicago Transit Authority” or similar descriptive language.
+
+See Branding Guide for larger version
+
+IV. Quality Control
+
+You acknowledge that the CTA Brand Assets have acquired a most valuable goodwill and that it is of great importance to CTA that you, in the offering of any products or services in connection with the CTA Brand Assets, maintain the high standards and reputation CTA has established such that the goodwill associated with the CTA Brand Assets is protected at all times. You agree to maintain the same high standards of quality for any applications bearing the CTA Brand Assets.
+
+You acknowledge that CTA owns all rights in the CTA Brand Assets and you do not acquire any rights in the CTA Brand Assets by virtue of its use pursuant to this Agreement.
+
+All uses of the CTA Brand Assets by you inure to the sole benefit of CTA.
+
+You agree not to challenge, directly or indirectly, CTA’s rights in the CTA Brand Assets or assert any right, title or interest in or to the CTA Brand Assets or assist any third party in doing so.
+
+You agree to cooperate with CTA and provide CTA with specimens of use of the CTA Brand Assets promptly upon CTA’s request.
+
+You are solely responsible for your application and its code and content and all uses you make of the CTA Data and CTA Brand Assets. This includes ensuring your use and your application‘s use of the CTA Data and CTA Brand Assets meets the requirements of this Agreement.
+
+V. Termination
+
+Notwithstanding any other provision in this Agreement, if you are in breach of your obligations under this Agreement, including, without limitation, the CTA Trademark Guidelines for Developers, CTA has the right to terminate this Agreement immediately.
+
+CTA can take enforcement action against you and any or all of your applications if CTA determines, in our sole judgment, that you or your application violates this Agreement. Enforcement actions can include disabling your application, restricting you and your application's access to the CTA Data, terminating our agreements with you, or any other action as we in our sole discretion deem appropriate.
+
+Upon any termination or expiration of this Agreement, you will promptly delete all CTA Data from your application, computer systems or other storage devices and discontinue all use of the CTA Brand Assets. You agree to certify in writing that it has performed its obligations under this Section V if CTA requests a certification.
+
+VI. No Guarantee or Warranty of Availability of CTA Data
+
+CTA reserves the right at any time and from time to time to discontinue posting the CTA Data (or any part thereof), temporarily or permanently, with or without notice to you.
+
+You agree that CTA will not be liable to you for any modification, suspension or discontinuance of the availability of the CTA Data.
+
+CTA reserves the right to alter, correct and modify CTA Data at any time without prior notice to you.
+
+VII. Disclaimer of Warranties
+
+YOU AGREE THAT CTA DATA IS PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS. TO THE FULLEST EXTENT PERMITTED BY LAW, CTA, ITS EMPLOYEES, OFFICERS, DIRECTORS AND AGENTS (COLLECTIVELY, THE “CTA PARTIES”) MAKE NO REPRESENTATIONS OR WARRANTIES, EXPRESS OR IMPLIED, AS TO THE CTA DATA, ITS ACCURACY, COMPLETENESS, USEFULNESS, TIMELINESS, RELIABILITY OR FUNCTIONALITY, OR THAT ANY PRODUCTS OR SERVICES MADE AVAILABLE BY THE CTA OR THIRD PARTIES INCORPORATING THE CTA DATA, AND/OR THE SECURITY ASSOCIATED WITH THE TRANSMISSION OF CTA DATA. THE CTA PARTIES HEREBY DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, ACCURACY, AND NON-INFRINGEMENT. YOU AGREE THAT USE OF CTA DATA IS AT YOUR SOLE RISK. SOME JURISDICTIONS DO NOT ALLOW THE DISCLAIMER OF IMPLIED OR OTHER WARRANTIES, SO THE ABOVE DISCLAIMER MAY NOT APPLY TO YOU.
+
+THE CTA PARTIES ARE NOT RESPONSIBLE FOR, AND DO NOT ENDORSE, THIRD PARTY CONTENT, APPLICATIONS AND/OR MATERIALS INCORPORATING CTA DATA THAT MAY BE MADE AVAILABLE FROM TIME TO TIME ON CHICAGOTRANSITAUTHORITY.COM OR ELSWHERE (COLLECTIVELY, THE “CTA WEB SITE”) (EVEN IF THE CTA WEB SITE PROVIDES A LINK TO OR OTHERWISE ADVERTISES SUCH THIRD PARTY CONTENT, APPLICATIONS AND/OR MATERIALS) AND SPECIFICALLY DISCLAIMS ANY RESPONSIBILITY OR LIABILITY TO ANY PERSON OR ENTITY, INCLUDING, WITHOUT LIMITATION, ANY PERSON OR ENTITY THAT MAY USE OR RELY ON SUCH THIRD PARTY CONTENT, APPLICATIONS AND/OR MATERIALS, EVEN IF THEY INCORPORATE CTA DATA, FOR ANY LOSS, DAMAGE (WHETHER ACTUAL, CONSEQUENTIAL OR OTHERWISE), INJURY, CLAIM, LIABILITY OR OTHER CLAIM OF ANY KIND BASED UPON OR RESULTING FROM SUCH THIRD PARTY CONTENT, APPLICATIONS AND/OR MATERIALS.
+
+VIII. Limitation of Liability
+
+YOU AGREE THAT THE CTA PARTIES WILL NOT BE LIABLE FOR LOSSES OR DAMAGES OF ANY KIND ARISING FROM THE USE OF CTA DATA, INCLUDING, BUT NOT LIMITED TO, DIRECT, INDIRECT, INCIDENTAL, PUNITIVE AND CONSEQUENTIAL LOSSES OR DAMAGES, REGARDLESS OF WHETHER SUCH LOSSES OR DAMAGES ARISE BASED UPON CONTRACT, NEGLIGENCE, STRICT LIABILITY IN TORT, WARRANTY OR OTHER LEGAL THEORY AND REGARDLESS OF WHETHER SUCH LOSS OR DAMAGES WERE FORESEEABLE, EVEN IF THE CTA PARTIES WERE ADVISED OF OR SHOULD HAVE KNOWN OF THE POSSIBILITY OF SUCH DAMAGES. IN NO EVENT WILL THE CTA PARTIES’ TOTAL LIABILITY TO YOU FOR LOSS OR DAMAGES EXCEED TEN U.S. DOLLARS. SOME STATES DO NOT ALLOW THE EXCLUSION OR LIMITATION OF INCIDENTAL OR CONSEQUENTIAL DAMAGES, SO THE ABOVE LIMITATION OR EXCLUSION MAY NOT APPLY TO YOU.
+
+IX. Indemnification
+
+You agree to indemnify, defend and hold the CTA Parties harmless from and against any and all fines, suits, proceedings, claims, causes of action, demands, or liabilities (including reasonable attorney’s fees) of any kind or of any nature arising out of or in connection with: (i) your use of CTA Data; (ii) a breach or alleged breach of your representations, warranties, agreements or obligations in this Agreement; (iii) any actual or alleged infringement, misappropriation, or violation of any third party’s intellectual property or other rights, including, without limitation, patents, copyrights, trademarks, service marks, or trade secrets by you or your application; and (iv) the development, marketing, distribution, licensing, sale and/or use of any applications, technology, products or services sold, licensed or otherwise distributed by you.
+
+You agree not to settle any claim, action or lawsuit subject to this Section IX without the prior written consent of CTA.
+
+You agree that CTA will have the right, but not the obligation, to participate in any claim, action or lawsuit for which you have an indemnification obligation under this Agreement.
+
+X. Binding Effect; No Assignability without Express Consent
+
+The terms of this Agreement are binding upon both you and CTA and inure to the benefit of the successors and assigns of the parties as if they were parties to this Agreement.
+
+None of the rights, duties or obligations under this Agreement may be assigned by you without the express written consent of an authorized CTA representative.
+
+XI. Severability
+
+To the extent a court of competent jurisdiction determines that any part or provision of this Agreement is unenforceable as a matter of law, such part or provision of this Agreement will be deemed severable and the remainder of this Agreement will survive and remain enforceable.
+
+XII. Applicable Law and Forum; Compliance with Laws
+
+The laws of the State of Illinois govern all rights and obligations under this Agreement, without giving effect to any principles of conflicts of laws.
+
+Any use of the CTA Data or CTA Brand Assets will be deemed made in the State of Illinois, USA, regardless of your location. You agree that any dispute with CTA arising out of any use of the CTA Data, the CTA Brand Assets or this Agreement must be brought by you exclusively in the state or federal courts situated in Cook County, State of Illinois. You agree that such venue is appropriate.
+
+You agree to at all times observe and comply with all applicable laws, ordinances, rules, regulations and executive orders of Federal, state and local government entities, now existing or hereinafter in effect, which may in any manner affect the performance of this Agreement. Provision(s) required by law, ordinances, rules, regulations or executive orders to be inserted herein will be deemed inserted herein whether or not they appear in this Agreement or, upon application by either party, this Agreement will forthwith be amended to literally make such insertion; however, in no event will failure to insert such provision(s) prevent the enforcement of this Agreement.
+
+XIII. Entire Agreement
+
+This Agreement constitutes the complete and exclusive agreement between CTA and you with respect to the subject matter hereof and supersedes all prior oral or written understandings, communications, or agreements not specifically incorporated herein. CTA reserves the right to modify or revoke this Agreement at any time.
+
+XIV. No Waiver
+
+Waiver by CTA of strict performances of any provision of this Agreement will not be a waiver of or prejudice CTA’s right to require strict performance of the same provision in the future or of any other provision of this Agreement.
+
+XV. No Agency, Joint Venture or Affiliation
+
+No provision of this Agreement, nor any act by you or CTA, will be deemed or construed by either of the parties or by third parties, to create any relationship of third party beneficiary, or of principal or agent, or of limited or general partnership, or of joint venture, or of any association or relationship involving you and CTA.
+
+Quick links
+
+Schedules
+
+Fares
+
+Maps
+
+Alerts
+
+Trackers
+
+Ventra
+
+System status snapshot
+
+Systemwide
+
+New Schedules in Effect (All Bus Routes)
+
+‘L’ route status
+
+Red Line
+
+Normal Service
+
+Blue Line
+
+Service Change
+
+Brown Line
+
+Normal Service
+
+Green Line
+
+Normal Service
+
+Orange Line
+
+Normal Service
+
+Pink Line
+
+Normal Service
+
+Purple Line
+
+Added Service
+
+Yellow Line
+
+Added Service
+
+All ‘L’ alerts: Current ‘L’ alerts or Upcoming ‘L’ alerts
+
+Bus routes w/alerts
+
+2
+
+3
+
+4
+
+N5
+
+6
+
+7
+
+10
+
+11
+
+12
+
+J14
+
+15
+
+20
+
+22
+
+29
+
+36
+
+37
+
+44
+
+47
+
+49
+
+49B
+
+X49
+
+50
+
+53
+
+60
+
+62
+
+66
+
+67
+
+70
+
+73
+
+76
+
+78
+
+82
+
+91
+
+92
+
+93
+
+96
+
+112
+
+115
+
+120
+
+121
+
+124
+
+125
+
+146
+
+148
+
+151
+
+157
+
+192
+
+All bus alerts: Current bus alerts or Upcoming bus alerts
+
+Elevator alerts
+
+Red Line
+
+Addison, Clark/Division, Lake
+
+Brown Line
+
+Quincy
+
+Green Line
+
+Kedzie
+
+Orange Line
+
+Quincy
+
+Purple Line
+
+Quincy
+
+Pink Line
+
+Quincy
+
+All elevator alerts: Current elevator alerts or Upcoming elevator alerts
+
+See also: complete system status
+
+Chicago Transit Authority
+
+Instagram Facebook Bluesky Youtube linkedin tiktok
+
+More Information
+
+Getting help
+
+Send us an e-mail
+
+Sign up for service updates
+
+Ventra Cards/accounts
+
+Governance & admin
+
+Gift shop
+
+Ventra app
+
+Facts, at a glance
+
+Code of conduct
+
+Public notices
+
+Meetings
+
+Freedom of information
+
+Inspector General
+
+Press releases
+
+Employee portal
+
+Info for...
+
+Job seekers
+
+People with disabilities
+
+Grade/high school students
+
+College students
+
+Parents with children
+
+App developers
+
+Suppliers/vendors
+
+Construction near us
+
+Advertisers
+
+Peer agencies
+
+Northern Illinois Transit Authority
+
+Metra (commuter rail)
+
+Pace (suburban bus)
+
+©2026 Chicago Transit Authority
+
+Phone: 1-888-YOUR-CTA
+
+TTY: 1-888-CTA-TTY1 or 711 (relay)
+
+Email: [email protected]
+
+Terms of use
+
+Privacy
+
+Unsubscribe
+
+Website feedback
+
+Contact us
+
+Languages
+
+Close

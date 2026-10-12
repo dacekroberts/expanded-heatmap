@@ -9,18 +9,22 @@ VERDICTS_JSON is a JSON list, one object per source, with keys source,
 document (a file under docs/licenses/), verdict, quote and clause. A verdict
 of SILENT or NOT_READ carries no quote and is reported HELD, never checked.
 PERMITTED, PERMITTED_CONDITION and FORBIDDEN need a quote of at least
-MIN_QUOTE characters other than whitespace and a clause heading; a shorter or
-missing quote, or a missing clause, is VOID, since one word such as "License"
-occurs in every text and proves nothing. The source values are the ids that
-scripts/commercial_use_sources.py prints: each row needs one, and two rows on
-one source are VOID, both of them.
+MIN_QUOTE letters or digits and a clause heading; a shorter or missing quote,
+or a missing clause, is VOID, since one word such as "License" occurs in
+every text and a rule of hyphens in most, and neither proves anything. The
+source values are the ids that scripts/commercial_use_sources.py prints: each
+row needs one, and two rows on one source are VOID, both of them (case and
+the amount of white space do not make a second source). A row of the wrong
+shape is VOID with its reason; it never ends the run.
 
 WHAT IS PROVED, AND WHAT IS NOT. The script proves that the quoted passage is
 in the file. It does not read what the passage means: "the data be used for
 commercial purposes" is in a sentence that begins "Under no circumstances
-may". So every VERIFIED row prints CONTEXT characters of the document either
-side of the quote and the clause heading the first pass gave, and a person
-reads them. No list of negation words is kept: the reader decides.
+may". So every VERIFIED row prints the quote inside its whole sentence, back
+to where the sentence starts and on to where it ends (at most CONTEXT_CAP
+characters a side, and a side cut there says so), with the file that was read
+and the clause heading the first pass gave, and a person reads them. No list
+of negation words is kept: the reader decides.
 
 Normalisation, and nothing else: Unicode NFC, then each run of whitespace
 collapses to one space; failing that, and only for a quote holding Han, kana
@@ -28,11 +32,20 @@ or Hangul, NFC with all whitespace removed from both sides, because pdftotext
 puts a space where a PDF wraps a line inside a Japanese or Chinese sentence.
 The exact quote is tried first, so a row is VERIFIED as "exact", "normalised"
 or "spaceless"; no case folding, no punctuation stripping, no fuzzy matching.
-A "spaceless" match is read by a person before it is relied on. An .html file
-is matched against its text as stored, tags included, so a quote that spans a
-tag is VOID; a quote across a wrapped line of a markdown blockquote is VOID
-for the same reason (the marker sits inside it). The first pass is told to
-copy characters exactly and to quote within one line of such a file.
+A "spaceless" match is read by a person before it is relied on: its context
+is cut from the text as stored, so the break the match stepped over shows,
+and the totals count such rows on their own line.
+
+Text renderings: a stored PDF or HTML file is read through its rendering,
+<name>.txt beside it, when docs/licenses/README.md lists one in its second
+block (scripts/licence_renderings.py makes and hashes them), and the row says
+so. A rendering holds the same characters on every machine and is what the
+first pass is given, so a quote no longer fails on an HTML tag or entity or
+on another pdftotext's line breaks. With no rendering listed, an .html file
+is matched against its text as stored, tags included, and a .pdf through
+pdftotext or pypdf. A quote across a wrapped line of a markdown blockquote
+is still VOID (the marker sits inside it): the first pass copies characters
+exactly and quotes within one line of such a file.
 
 Word boundaries: where a quote begins or ends with a letter or digit of a
 script written with spaces, the character directly outside it must not be a
@@ -43,7 +56,8 @@ is not in "Misuse is permitted", and "commercial use is permitted" is not in
 Documents: only a stored text listed in the SHA-256 block of
 docs/licenses/README.md (the files scripts/check_provenance.py hashes) can
 carry a quote. A file in the folder that is off that list, a project note
-among them, is VOID. A document under docs/data_sources/ is a recorded read,
+among them, is VOID; so is a name off the list that links to a listed file,
+and a rendering named as the document. A document under docs/data_sources/ is a recorded read,
 not a stored text: NOT CHECKED, for a person to confirm.
 
 Outcomes, one line per source: VERIFIED (exact, normalised or spaceless),
@@ -83,12 +97,21 @@ VERDICTS = {"PERMITTED", "PERMITTED_CONDITION", "FORBIDDEN", "SILENT", "NOT_READ
 HELD = {"SILENT", "NOT_READ"}
 OUTCOMES = ("VERIFIED", "VOID", "HELD", "NOT CHECKED")
 _WS_RE = re.compile(r"\s+")
-# Characters other than whitespace. Twelve is a short clause in Japanese or
+# Letters and digits, in any script. Twelve is a short clause in Japanese or
 # Korean and two or three words in a Latin script: enough that a match is a
-# passage of the text, not a word of it.
+# passage of the text, not a word of it. Punctuation does not count: a rule
+# of twelve hyphens is in many texts and proves nothing.
 MIN_QUOTE = 12
-# Characters of the document printed either side of a verified quote.
+# The context of a verified quote runs back to the start of its sentence
+# and on to its end, never less than CONTEXT characters a side and never
+# more than CONTEXT_CAP; a side cut at the cap says so.
 CONTEXT = 60
+CONTEXT_CAP = 400
+RENDERINGS_HEAD = "## SHA-256 of the text renderings"
+# Where a sentence ends: a full stop, question or exclamation mark (with
+# any closing quote or bracket) before white space, their CJK forms, or a
+# blank line.
+_SENTENCE_END = re.compile(r"[.!?][\"')\]\u201d\u2019]*\s|[\u3002\uff01\uff1f]|\n\s*\n")
 # Files in docs/licenses/ written by the project, never a publisher's terms.
 # None is in the hash list today; named so that listing one changes nothing.
 PROJECT_NOTES = {"README.md", "canada-privacy-regimes-note.md",
@@ -145,10 +168,33 @@ def _find(quote, text):
 
 
 def _context(text, start, length):
-    before = _WS_RE.sub(" ", text[max(0, start - CONTEXT):start])
-    after = _WS_RE.sub(" ", text[start + length:start + length + CONTEXT])
-    middle = _WS_RE.sub(" ", text[start:start + length])
-    return f"...{before}[[{middle}]]{after}..."
+    """The quote in double square brackets inside its whole sentence. A
+    negation can open a sentence a long way before the words quoted, so the
+    context runs back to where the sentence starts and on to where it ends:
+    at least CONTEXT characters a side (a full stop after an abbreviation is
+    no sentence end), at most CONTEXT_CAP, and a side cut at the cap is
+    marked so the reader knows to open the document."""
+    end = start + length
+    window = text[max(0, start - CONTEXT_CAP):start]
+    ends = [m.end() for m in _SENTENCE_END.finditer(window)]
+    if ends:
+        cut = min(ends[-1], max(0, len(window) - CONTEXT))
+        before, lead = window[cut:], "..."
+    elif start > CONTEXT_CAP:
+        before, lead = window, f"[sentence starts more than {CONTEXT_CAP} characters back] ..."
+    else:
+        before, lead = window, ""
+    ahead = text[end:end + CONTEXT_CAP]
+    m = _SENTENCE_END.search(ahead)
+    if m:
+        after, tail = ahead[:max(m.end(), min(CONTEXT, len(ahead)))], "..."
+    elif len(text) - end > CONTEXT_CAP:
+        after, tail = ahead, f"... [sentence runs on more than {CONTEXT_CAP} characters]"
+    else:
+        after, tail = ahead, ""
+    squeeze = lambda part: _WS_RE.sub(" ", part)
+    return (f"{lead}{squeeze(before).lstrip()}[[{squeeze(text[start:end])}]]"
+            f"{squeeze(after).rstrip()}{tail}")
 
 
 def match_quote(quote, text):
@@ -156,9 +202,6 @@ def match_quote(quote, text):
     (None, why) when the quote is absent or sits only inside longer words."""
     tiers = [("exact", quote, text),
              ("normalised", normalise(quote), normalise(text))]
-    if any(_unspaced(ch) for ch in quote):
-        tiers.append(("spaceless", normalise(quote).replace(" ", ""),
-                      normalise(text).replace(" ", "")))
     inside_word = False
     for kind, needle, haystack in tiers:
         if not needle:
@@ -166,6 +209,19 @@ def match_quote(quote, text):
         start, found = _find(needle, haystack)
         if start is not None:
             return kind, _context(haystack, start, len(needle))
+        inside_word = inside_word or found
+    if any(_unspaced(ch) for ch in quote):
+        # Matched with whitespace removed, shown with it: the context is cut
+        # from the text as stored, so the break the match stepped over (a
+        # line wrap, a page end) is there for the reader to see.
+        stored = unicodedata.normalize("NFC", text)
+        kept = [i for i, ch in enumerate(stored) if not ch.isspace()]
+        needle = "".join(ch for ch in unicodedata.normalize("NFC", quote)
+                         if not ch.isspace())
+        start, found = _find(needle, "".join(stored[i] for i in kept))
+        if start is not None:
+            first, last = kept[start], kept[start + len(needle) - 1]
+            return "spaceless", _context(stored, first, last - first + 1)
         inside_word = inside_word or found
     if inside_word:
         return None, "the quote occurs only as part of longer words, not on word boundaries"
@@ -199,6 +255,21 @@ def allowed_documents(licences_dir):
         if len(parts) == 2:
             names.add(parts[1])
     return names - PROJECT_NOTES, None
+
+
+def renderings(licences_dir):
+    """Names of the text renderings the README's second block lists
+    (scripts/licence_renderings.py): <file>.txt beside a stored PDF or HTML
+    file. Empty when the block is not there."""
+    try:
+        text = (licences_dir / "README.md").read_bytes().decode("utf-8").replace("\r\n", "\n")
+    except (OSError, UnicodeDecodeError):
+        return set()
+    m = re.search(re.escape(RENDERINGS_HEAD) + r".*?```\n(.*?)```", text, re.S)
+    if not m:
+        return set()
+    return {parts[1] for parts in (line.split() for line in m.group(1).strip().split("\n"))
+            if len(parts) == 2}
 
 
 def resolve_document(document, licences_dir, root):
@@ -280,46 +351,65 @@ def read_document(path, pdf_reader=read_pdf):
 
 
 def check_row(row, licences_dir=LICENCES, root=ROOT, allowed=None, pdf_reader=read_pdf):
-    """One row to (outcome, detail, context): VERIFIED with exact, normalised
-    or spaceless and the document either side of the quote; VOID with why;
-    HELD; or NOT CHECKED with why. context is empty unless VERIFIED."""
+    """One row to (outcome, detail, context, read): VERIFIED with exact,
+    normalised or spaceless, the quote's sentence, and the file that was
+    read; VOID with why; HELD; or NOT CHECKED with why. context and read
+    are empty unless VERIFIED."""
     verdict = row.get("verdict")
-    if verdict not in VERDICTS:
-        return "VOID", f"unknown verdict {verdict!r} (expected one of {sorted(VERDICTS)})", ""
+    if not isinstance(verdict, str) or verdict not in VERDICTS:
+        return "VOID", f"unknown verdict {verdict!r} (expected one of {sorted(VERDICTS)})", "", ""
     if verdict in HELD:
-        return "HELD", "", ""
+        return "HELD", "", "", ""
     quote = row.get("quote")
     if not isinstance(quote, str) or not quote.strip():
-        return "VOID", f"{verdict} needs a non-empty quote", ""
-    if len(_WS_RE.sub("", quote)) < MIN_QUOTE:
-        return "VOID", f"the quote is under {MIN_QUOTE} characters, too short to prove a passage", ""
+        return "VOID", f"{verdict} needs a non-empty quote", "", ""
+    if sum(ch.isalnum() for ch in quote) < MIN_QUOTE:
+        return "VOID", (f"the quote holds under {MIN_QUOTE} letters or digits, "
+                        f"too short to prove a passage"), "", ""
     clause = row.get("clause")
     if not isinstance(clause, str) or not clause.strip():
-        return "VOID", f"{verdict} needs the heading of the clause the quote sits under", ""
+        return "VOID", f"{verdict} needs the heading of the clause the quote sits under", "", ""
     document = row.get("document")
     if not isinstance(document, str) or not document.strip():
-        return "VOID", "no document", ""
+        return "VOID", "no document", "", ""
     if _recorded_read(document, root):
-        return "NOT CHECKED", "a recorded read, not a stored text", ""
+        return "NOT CHECKED", "a recorded read, not a stored text", "", ""
     path, why = resolve_document(document, licences_dir, root)
     if path is None:
-        return "VOID", why, ""
+        return "VOID", why, "", ""
     if allowed is None:
         allowed, why = allowed_documents(licences_dir)
         if allowed is None:
-            return "VOID", why, ""
-    if path.name not in allowed or path.parent != licences_dir.resolve():
+            return "VOID", why, "", ""
+    # The name the row gives must itself be on the list, as well as the file
+    # it resolves to: a link named alias.txt to a listed file is not a
+    # stored text, whatever it points at.
+    own_name = Path(document).name
+    if (own_name not in allowed or path.name not in allowed
+            or path.parent != licences_dir.resolve()):
         return "VOID", (f"{document} is not a stored licence text (not in the "
-                        f"SHA-256 list of the licence folder's README.md)"), ""
-    text, why = read_document(path, pdf_reader)
+                        f"SHA-256 list of the licence folder's README.md)"), "", ""
+    # A stored PDF or HTML file is read through its text rendering when the
+    # README lists one: the same characters on every machine, and the ones
+    # the first pass was given.
+    rendering = licences_dir / (path.name + ".txt")
+    read = path.name
+    if rendering.name in renderings(licences_dir) and rendering.is_file():
+        try:
+            text, why = rendering.read_bytes().decode("utf-8"), None
+        except (OSError, UnicodeDecodeError) as exc:
+            text, why = None, f"cannot read the rendering {rendering.name}: {exc}"
+        read = f"{path.name}, read as its text rendering {rendering.name}"
+    else:
+        text, why = read_document(path, pdf_reader)
     if text is None:
-        return "NOT CHECKED", why, ""
+        return "NOT CHECKED", why, "", ""
     if not text.strip():
-        return "NOT CHECKED", "the document yields no text (a scan with no text layer?)", ""
+        return "NOT CHECKED", "the document yields no text (a scan with no text layer?)", "", ""
     kind, detail = match_quote(quote.strip(), text)
     if kind is None:
-        return "VOID", detail, ""
-    return "VERIFIED", kind, detail
+        return "VOID", detail, "", ""
+    return "VERIFIED", kind, detail, read
 
 
 def main(argv=None, licences_dir=LICENCES, root=ROOT, pdf_reader=read_pdf):
@@ -345,32 +435,51 @@ def main(argv=None, licences_dir=LICENCES, root=ROOT, pdf_reader=read_pdf):
     if allowed is None:
         print(why)
         return 1
-    seen = Counter(row["source"].strip() for row in rows
+    def fold(source):
+        """A source's name for telling two rows apart: case and the amount
+        of white space do not make a second source."""
+        return " ".join(source.split()).casefold()
+
+    seen = Counter(fold(row["source"]) for row in rows
                    if isinstance(row, dict) and isinstance(row.get("source"), str))
     counts = {k: 0 for k in OUTCOMES}
+    spaceless = 0
     for i, row in enumerate(rows):
-        context = ""
+        context = read = ""
         if not isinstance(row, dict):
             label, outcome, detail = f"row {i + 1}", "VOID", "not a JSON object"
         else:
             source = row.get("source")
             if not isinstance(source, str) or not source.strip():
                 label, outcome, detail = f"row {i + 1}", "VOID", "no source"
-            elif seen[source.strip()] > 1:
+            elif seen[fold(source)] > 1:
                 label, outcome = source.strip(), "VOID"
-                detail = (f"the source has {seen[source.strip()]} rows in the "
+                detail = (f"the source has {seen[fold(source)]} rows in the "
                           f"file; one row per source")
             else:
                 label = source.strip()
-                outcome, detail, context = check_row(row, licences_dir, root,
-                                                     allowed, pdf_reader)
+                try:
+                    outcome, detail, context, read = check_row(
+                        row, licences_dir, root, allowed, pdf_reader)
+                except Exception as exc:
+                    # A row of the wrong shape voids itself; it never ends
+                    # the run and takes the other rows' verdicts with it.
+                    outcome, detail = "VOID", f"malformed row: {type(exc).__name__}: {exc}"
         counts[outcome] += 1
         print(f"{outcome:<11} {label}" + (f": {detail}" if detail else ""))
         if outcome == "VERIFIED":
+            spaceless += detail == "spaceless"
+            print(f"{'':<11} document: {read}")
             print(f"{'':<11} clause: {_WS_RE.sub(' ', row['clause'].strip())}")
             print(f"{'':<11} context: {context}")
     print(f"\n{counts['VERIFIED']} VERIFIED, {counts['VOID']} VOID, "
           f"{counts['HELD']} HELD, {counts['NOT CHECKED']} NOT CHECKED")
+    if spaceless:
+        print(f"{spaceless} of the VERIFIED matched only with white space removed "
+              f"(spaceless): read each one's context before relying on it")
+    compared = counts["VERIFIED"] + counts["VOID"]
+    print(f"{compared} of {len(rows)} rows were checked: a quote was looked for, "
+          f"or the row was refused; the rest were held or could not be read")
     if counts["VOID"]:
         return 1
     if counts["NOT CHECKED"] and not counts["VERIFIED"] and not counts["HELD"]:
@@ -398,7 +507,15 @@ def selftest():
             "a.txt": b"The terms allow commercial use outright.",
             "split.txt": b"the sentence\nsplit across lines",
             "ja.txt": "営業許可の取得が必要です。".encode("utf-8"),
-            "ko.txt": "영업허가를 받아야 합니다.".encode("utf-8"),
+            "ko.txt": "영업허가를 반드시 받아야 합니다.".encode("utf-8"),
+            "far.txt": (b"Under no circumstances may a licensee, its officers, employees, "
+                        b"agents, contractors or any third party acting directly or indirectly "
+                        b"on its behalf, whether or not authorised in writing, the data be "
+                        b"used for commercial purposes. A second sentence follows it."),
+            "rule.txt": b"Terms of use\n------------------------\nThe body of the terms.",
+            "page.html": (b"<p>You may use the data for <b>commercial</b> purposes&nbsp;&amp; "
+                          b"must give credit.</p>"),
+            "pages.txt": ("第三条 個人情報の目\n\n的外利用や外部提供は禁止されている。".encode("utf-8")),
             "case.txt": b"Mixed Case Sentence",
             "notutf8.txt": b"\xff\xfe\x00\x01",
             "weird.bin": b"anything",
@@ -414,8 +531,12 @@ def selftest():
         for name, data in stored.items():
             (lic / name).write_bytes(data)
         listing = "\n".join(f"{'0' * 64}  {name}" for name in sorted(stored))
-        readme = f"# Stored texts\n\n## SHA-256, as retrieved\n\n```\n{listing}\n```\n"
+        readme = (f"# Stored texts\n\n## SHA-256, as retrieved\n\n```\n{listing}\n```\n\n"
+                  f"{RENDERINGS_HEAD}\n\n```\n{'0' * 64}  page.html.txt\n```\n")
         (lic / "README.md").write_bytes(readme.encode("utf-8"))
+        # The rendering of page.html, as scripts/licence_renderings.py makes it.
+        (lic / "page.html.txt").write_bytes(
+            b"You may use the data for commercial purposes & must give credit.\n")
         # Real files holding the quote, so only the rule named can decide.
         (tmp / "docs" / "outside.txt").write_bytes(b"outside the folder")
         (lic / "unlisted.txt").write_bytes(b"The terms allow commercial use outright.")
@@ -438,7 +559,7 @@ def selftest():
             ("a Japanese quote verifies", row("d", "docs/licenses/ja.txt", "PERMITTED",
                                               "営業許可の取得が必要です。"), "VERIFIED", "exact"),
             ("a Korean quote verifies", row("e", "docs/licenses/ko.txt", "PERMITTED",
-                                            "영업허가를 받아야 합니다."), "VERIFIED", "exact"),
+                                            "영업허가를 반드시 받아야 합니다."), "VERIFIED", "exact"),
             ("a quote of one word voids, though it occurs", row("p", "docs/licenses/a.txt",
                                                                 "PERMITTED", "commercial"),
              "VOID", None),
@@ -495,12 +616,12 @@ def selftest():
              "NOT CHECKED", None),
         ]
         for label, r, want, want_kind in cases:
-            outcome, detail, _ = check_row(r, licences_dir=lic, root=tmp)
+            outcome, detail, _, _ = check_row(r, licences_dir=lic, root=tmp)
             good = outcome == want and (want_kind is None or detail == want_kind)
             report(label, good, f"{outcome}" + (f" ({detail})" if detail else ""))
 
         # The context shows what the quote leaves out.
-        outcome, _, context = check_row(
+        outcome, _, context, _ = check_row(
             row("y", "docs/licenses/never.txt", "PERMITTED",
                 "the data be used for commercial purposes"), licences_dir=lic, root=tmp)
         report("a verified row prints the words before the quote",
@@ -547,6 +668,108 @@ def selftest():
                       pdf_reader=lambda p: (None, "PDF: no reader"))
         report("main: a NOT CHECKED row beside a HELD one exits 0",
                rc == 0 and "1 HELD, 1 NOT CHECKED" in out, f"exit {rc}")
+        # Found by an adversarial review (2026-10-12): each is a way a wrong
+        # verdict could verify, or a run could look finer than it was.
+        outcome, _, context, _ = check_row(
+            row("far", "docs/licenses/far.txt", "PERMITTED",
+                "the data be used for commercial purposes"), licences_dir=lic, root=tmp)
+        report("the context runs back to the start of the sentence, however far",
+               outcome == "VERIFIED" and context.startswith("Under no circumstances may"),
+               context[:60])
+        long_text = "word " * 200 + "the data be used for commercial purposes " + "word " * 200
+        (lic / "a.txt").write_bytes(long_text.encode("utf-8"))
+        outcome, _, context, _ = check_row(
+            row("cap", "docs/licenses/a.txt", "PERMITTED",
+                "the data be used for commercial purposes"), licences_dir=lic, root=tmp)
+        report("a sentence longer than the cap is cut and says so on both sides",
+               outcome == "VERIFIED"
+               and context.startswith(f"[sentence starts more than {CONTEXT_CAP} characters back]")
+               and context.endswith(f"[sentence runs on more than {CONTEXT_CAP} characters]"),
+               f"{len(context)} characters")
+        (lic / "a.txt").write_bytes(stored["a.txt"])
+        outcome, detail, context, _ = check_row(
+            row("pages", "docs/licenses/pages.txt", "FORBIDDEN", "個人情報の目的外利用や外部提供は禁止"),
+            licences_dir=lic, root=tmp)
+        report("a spaceless match shows the break it stepped over, from the text as stored",
+               (outcome, detail) == ("VERIFIED", "spaceless") and "目 的外利用" in context
+               and context.startswith("第三条"), context)
+        outcome, detail, _, _ = check_row(
+            row("rule", "docs/licenses/rule.txt", "PERMITTED", "------------"),
+            licences_dir=lic, root=tmp)
+        report("twelve hyphens are not a quote", outcome == "VOID" and "letters or digits" in detail,
+               detail)
+        outcome, detail, _, read = check_row(
+            row("page", "docs/licenses/page.html", "PERMITTED_CONDITION",
+                "use the data for commercial purposes & must give credit"),
+            licences_dir=lic, root=tmp)
+        report("an HTML file is read through its listed rendering, across its tags and entities",
+               (outcome, detail) == ("VERIFIED", "exact")
+               and read == "page.html, read as its text rendering page.html.txt", read)
+        outcome, detail, _, _ = check_row(
+            row("page2", "docs/licenses/page.html.txt", "PERMITTED", "use the data for commercial"),
+            licences_dir=lic, root=tmp)
+        report("a rendering named as the document itself is not a stored text",
+               outcome == "VOID" and "not a stored licence text" in detail, detail)
+        # A .txt that happens to sit beside a stored file is no rendering
+        # unless the README lists it: the stored file itself is read.
+        (lic / "case.txt.txt").write_bytes(b"an unlisted neighbour says something else entirely")
+        outcome, detail, _, _ = check_row(
+            row("near", "docs/licenses/case.txt", "PERMITTED", "says something else entirely"),
+            licences_dir=lic, root=tmp)
+        report("an unlisted .txt beside a stored file is not read as its rendering",
+               outcome == "VOID" and "does not occur" in detail, detail)
+        (lic / "case.txt.txt").unlink()
+        try:
+            got = check_row(dict(good_row, verdict=["PERMITTED"]), licences_dir=lic, root=tmp)
+        except Exception as exc:
+            got = ("RAISED", type(exc).__name__)
+        report("a verdict that is not a string is VOID, not an error",
+               got[0] == "VOID" and "unknown verdict" in got[1], str(got[:2]))
+        alias = lic / "alias.txt"
+        try:
+            os.symlink(lic / "a.txt", alias)
+            linked = True
+        except (OSError, NotImplementedError):
+            linked = False       # no right to make links here: the name test still runs
+            alias.write_bytes(stored["a.txt"])
+        outcome, detail, _, _ = check_row(
+            row("alias", "docs/licenses/alias.txt", "PERMITTED", "allow commercial use"),
+            licences_dir=lic, root=tmp)
+        report("a name off the list is refused, a link to a listed file included",
+               outcome == "VOID" and "not a stored licence text" in detail,
+               "a real link" if linked else "a plain file (links not permitted here)")
+        alias.unlink()
+
+        rc, out = run([row("TransLink GTFS", "docs/licenses/a.txt", "PERMITTED", "allow commercial use"),
+                       row("translink  gtfs", "docs/licenses/a.txt", "PERMITTED", "allow commercial use")])
+        report("main: sources that differ only in case and spacing are one source, both VOID",
+               rc != 0 and "0 VERIFIED, 2 VOID" in out, f"exit {rc}")
+        rc, out = run([dict(good_row, verdict=["PERMITTED"]), dict(good_row, source="ok2")])
+        report("main: a verdict of the wrong type voids its row and the next row is still read",
+               rc != 0 and "1 VERIFIED, 1 VOID" in out, f"exit {rc}")
+        # An error raised while one row is checked (here a PDF reader that
+        # breaks) voids that row; the next row is still read.
+        def broken_reader(path):
+            raise RuntimeError("the reader broke")
+
+        try:
+            rc, out = run([pdf_row, dict(good_row, source="ok3")], pdf_reader=broken_reader)
+        except Exception as exc:
+            rc, out = "raised", type(exc).__name__
+        report("main: a row whose check raises voids itself and never ends the run",
+               "1 VERIFIED, 1 VOID" in out and "malformed row" in out, f"exit {rc}")
+        rc, out = run([good_row])
+        report("main: a verified row names the document it was read from",
+               "document: a.txt" in out, f"exit {rc}")
+        rc, out = run([row("pages", "docs/licenses/pages.txt", "FORBIDDEN",
+                           "個人情報の目的外利用や外部提供は禁止"), good_row])
+        report("main: spaceless rows are counted on their own line",
+               "1 of the VERIFIED matched only with white space removed" in out, f"exit {rc}")
+        rc, out = run([good_row, row("held", "", "SILENT", ""), pdf_row],
+                      pdf_reader=lambda p: (None, "PDF: no reader"))
+        report("main: the totals say how many rows were checked",
+               "1 of 3 rows were checked" in out, f"exit {rc}")
+
         (lic / "README.md").write_bytes(b"# Stored texts\n\nno hash block here\n")
         rc, out = run([good_row])
         report("main: a README with no hash block fails and names the block",

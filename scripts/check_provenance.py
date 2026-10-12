@@ -1069,7 +1069,31 @@ def check_licence_hashes():
                 f"{actual[:16]}... ({normalised[:16]}... with CRLF normalised) "
                 f"- recompute from the COMMITTED file, not the one you just "
                 f"fetched (.gitattributes normalises CRLF)")
-    for name in sorted(set(on_disk) - set(listed)):
+    # The text renderings (<file>.txt beside a stored PDF or HTML file,
+    # scripts/licence_renderings.py) have their own block, so the first
+    # block and the files it lists stay exactly as retrieved. Each is
+    # hashed the same way; a rendering in neither block is unlisted.
+    m2 = re.search(r"## SHA-256 of the text renderings.*?```\n(.*?)```",
+                   read(readme), re.S)
+    renderings = {}
+    for line in (m2.group(1).strip().split("\n") if m2 else []):
+        parts = line.split()
+        if len(parts) == 2:
+            renderings[parts[1]] = parts[0]
+    for name, digest in sorted(renderings.items()):
+        q = on_disk.get(name)
+        if q is None:
+            problems.append(f"{name}: rendering hash listed but the file is gone")
+            continue
+        if name[:-4] not in listed:
+            problems.append(f"{name}: a rendering of no stored file in the first block")
+        actual = hashlib.sha256(q.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+        if actual != digest:
+            problems.append(
+                f"{name}: rendering listed {digest[:16]}... but the file hashes to "
+                f"{actual[:16]}... - restore it from git, or delete it and run "
+                f"scripts/licence_renderings.py --write")
+    for name in sorted(set(on_disk) - set(listed) - set(renderings)):
         problems.append(f"{name}: stored licence with NO hash listed")
     return problems
 

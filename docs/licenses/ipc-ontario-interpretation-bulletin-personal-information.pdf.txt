@@ -1,0 +1,82 @@
+SEPTEMBER 2023 UPDATED JULY 2025
+
+Personal Information
+
+INTERPRETATION
+BULLETIN
+
+This interpretation bulletin outlines how personal information is defined, as set out in section 2(1) of the Freedom of Information and Protection of Privacy Act (FIPPA) and section 2(1) of the Municipal Freedom of Information and Protection of Privacy Act (MFIPPA), (together, the Acts).
+Section 2(1) of the Acts:
+“personal information” means recorded information about an identifiable individual, including,
+(a) information relating to the race, national or ethnic origin, colour, religion, age, sex, sexual orientation or marital or family status of the individual,
+(b) information relating to the education or the medical, psychiatric, psychological, criminal or employment history of the individual or information relating to financial transactions in which the individual has been involved,
+(c) any identifying number, symbol or other particular assigned to the individual,
+(d) the address, telephone number, fingerprints or blood type of the individual,
+(e) the personal opinions or views of the individual except where they relate to another individual,
+(f) correspondence sent to an institution by the individual that is implicitly or explicitly of a private or confidential nature, and replies to
+
+that correspondence that would reveal the contents of the original correspondence, (g) the views or opinions of another individual about the individual, and (h) the individual’s name where it appears with other personal information relating to the individual or where the disclosure of the name would reveal other personal information about the individual.
+WHAT IS “PERSONAL INFORMATION”?
+Section 2(1) of the Acts defines “personal information” as “recorded information about an identifiable individual.”
+Recorded information “Recorded information” is information recorded in any format, whether printed or electronic format, including correspondence, memoranda, books, plans, maps, drawings, diagrams, pictorial or graphic work, photographs, film, audio or video recordings, machine readable records, or any other documentary material, regardless of physical form or characteristics.1
+Exceptions to recorded information While the definition of personal information in section 2(1) states that personal information is recorded information about an identifiable individual, there are exceptions under which personal information includes information that is not recorded. For example, section 38(1) of FIPPA and section 28(1) of MFIPPA do not require personal information to be “recorded” in order to be “collected”,2 and for the requirements around collection of personal information to apply. As of July 1, 2025, obligations to conduct Privacy Impact Assessments (PIAs) under s. 38(3) of FIPPA and to safeguard personal information under s. 40(5) of FIPPA cover unrecorded personal information as well.
+About Information is “about” the individual when it refers to them in their personal capacity, which means that it reveals something of a personal nature about the individual. Generally, information about an individual in their professional, official or business capacity is not considered to be “about” the individual.3
+1 See the definition of “record” in section 2(1) of the Acts. 2 Privacy Complaint PX24-00001. 3 Orders P-257, P-427, P-1412, P-1621, R-980015, MO-1550-F and PO-2225.
+INTERPRETTEACTHIONNOLBOUGLYLEFATICNT: SPHEREESTO:NPARLOITNEFCOTRINMGATAIGOANINST RANSOMWARE
+
+2
+
+2
+
+Identifiable
+Information is about an “identifiable” individual if it is reasonable to expect, on a balance of probabilities, that an individual can be identified from the information either by itself or if combined with other information.4
+The assessment of identifiability will be a contextual one depending on the particular circumstances of each case. Factors such as small cell count5, availability of other information that exists outside the institution6, familiarity with the person in question7 or notoriety of the situation8 could affect the assessment of identifiability.
+Individual
+The term “individual” in the Acts refers only to natural persons. Had the legislature intended to include a sole proprietorship, partnership, association or corporation, it could and would have used the appropriate language to make that clear.9
+WHAT ARE SOME EXAMPLES OF “PERSONAL INFORMATION”?
+Section 2(1) of the Acts gives a list of examples of personal information, including:
+(a) information relating to the race, national or ethnic origin, colour, religion, age, sex, sexual orientation or marital or family status of the individual,
+(b) information relating to the education or the medical, psychiatric, psychological, criminal or employment history of the individual or information relating to financial transactions in which the individual has been involved,
+(c) any identifying number, symbol or other particular assigned to the individual,
+(d) the address, telephone number, fingerprints or blood type of the individual,
+(e) the personal opinions or views of the individual except if they relate to another individual,
+(f) correspondence sent to an institution by the individual that is implicitly or explicitly of a private or confidential nature, and replies to
+4 Order PO-1880, upheld on judicial review in Ontario (Attorney General) v. Pascoe, [2002] O.J. No. 4300 (C.A.).
+5 Orders P-644, MO-1415, PO-3097, PO-2518. 6 Order PO-2918. 7 Order P-722. 8 Order MO-2291. 9 Orders P-16 and PO-1893.
+INTERPRETTEACTHIONNOLBOUGLYLEFATICNT: SPHEREESTO:NPARLOITNEFCOTRINMGATAIGOANINST RANSOMWARE
+
+3
+
+3
+
+that correspondence that would reveal the contents of the original correspondence, (g) the views or opinions of another individual about the individual, and (h) the individual’s name if it appears with other personal information relating to the individual or where the disclosure of the name would reveal other personal information about the individual. The list of examples of personal information under section 2(1) of the Acts is not exhaustive. This means that the above list is not complete and other kinds of information could also be “personal information.”10
+WHAT IS EXCLUDED FROM THE DEFINITION OF “PERSONAL INFORMATION”?
+The Acts expressly exclude certain information from the scope of the definition of personal information.
+Professional information FIPPA and MFIPPA exclude certain professional information from the definition of personal information. Sections 2(3) and 2(4) of FIPPA state:
+2(3) Personal information does not include the name, title, contact information or designation of an individual that identifies the individual in a business, professional or official capacity. 2(4) For greater certainty, subsection (3) applies even if an individual carries out business, professional or official responsibilities from their dwelling and the contact information for the individual relates to that dwelling. MFIPPA contains similar provisions at sections 2(2.1) and 2(2.2), respectively. In assessing whether information should be considered “personal” or “professional,” the IPC has set out a two-step analysis: 1. In what context do the names of the individuals
+appear? Is it a context that is inherently personal, or is it one such as a business, professional or official government context that is removed from the personal sphere? 2. Is there something about the particular information at issue that, if disclosed, would
+10 Order P-11.
+INTERPRETTEACTHIONNOLBOUGLYLEFATICNT: SPHEREESTO:NPARLOITNEFCOTRINMGATAIGOANINST RANSOMWARE
+
+4
+
+4
+
+reveal something of a personal nature about the individual?11
+In some situations, even if information relates to an individual in a professional, official or business capacity, it may still be “personal information” if it reveals something of a personal nature about the individual.12 For example, information relating to an examination or assessment of an employee’s performance or behavior at work, or an investigation into his or her conduct may constitute their personal information.13
+Personal information about deceased individuals
+Section 2(2) of the Acts state that personal information does not include information about an individual who has been dead for more than thirty years.
+Where the date of death is unknown, probable date of death can only be made on the basis of reasonably applied assumptions; these assumptions should be conservative.14
+WHAT’S IN A NAME?
+A name alone will not be considered “personal information,” unless “…it appears with other personal information relating to the individual or where disclosure of the name would reveal other personal information about the individual.”15
+Conversely, removing a name by itself from other associated information about a specific individual does not necessarily render the information non-identifiable if the individual’s identity can still be inferred from the remaining information.16
+WHOSE PERSONAL INFORMATION IS IN THE RECORD?
+It is important to know whose personal information is in the record. If the requester is seeking access to their own personal information, any exemptions from that right are discretionary, meaning that the institution can still choose to disclose the information even if the exemption applies.17 Also, if the record contains the personal information of other individuals, one of the personal privacy exemptions might apply.18
+By contrast, when a requester is seeking access to general records, the mandatory personal privacy exemption will apply to any personal information in the records.
+11 Order PO-2225; Order MO-3886 (2020); Ontario Medical Association v. Ontario (Information and Privacy Commissioner), 2018 ONCA 673 (CanLII).
+12 Orders P-1409, R-980015, PO-2225 and MO-2344. 13 Orders P-1180; PO-2570; PO-2572; PO-3802; MO-2188; MO-2189; and MO-2309. 14 Order PO-1886. 15 See section 2(1)(h) of the Acts, and Order P-27. 16 See for example, MO-2291. 17 Sections 47(1) FIPPA /36(1) MFIPPA and section 49 FIPPA /38 MFIPPA. 18 See sections 21(1) FIPPA /14(1) MFIPPA and sections 49(b) FIPPA /38(b) MFIPPA.
+INTERPRETTEACTHIONNOLBOUGLYLEFATICNT: SPHEREESTO:NPARLOITNEFCOTRINMGATAIGOANINST RANSOMWARE
+
+5
+
+5

@@ -239,3 +239,34 @@ describes will drift — the file headers are what a reader should trust.
 - **MTA's landing page is not its terms.** `mta.info/developers` carries the
   "Our data feeds are free to use" line; the actual obligations are at
   `/developers/terms-and-conditions`, and they are substantive.
+
+## SHA-256 of the text renderings
+
+A rendering is the plain text of a stored PDF or HTML file, `<name>.txt`
+beside `<name>`, made by `scripts/licence_renderings.py`. The stored files
+above are unaltered and their hashes unchanged; a rendering is a second
+file, here so that a quoted sentence can be checked against the same
+characters on every machine (`scripts/commercial_use_quote_check.py`).
+PDFs: `pdftotext version 4.06 [www.xpdfreader.com]`, `-enc UTF-8`. HTML: Python's `html.parser`, tags removed,
+entities decoded, script and style dropped. Recompute from the COMMITTED
+file, as above. `python scripts/check_provenance.py` and
+`python scripts/licence_renderings.py` verify every hash here.
+
+```
+113df4a3bc300afee9b06e1e1359a92ac555ed469b631136a6003dc87186f97d  cta-developer-license-agreement.html.txt
+89265334e708c1bf216f7d3e79c0ab70772f1bb30efaf65f80d3aa4e46bdce6e  edmonton-open-data-terms-of-use.pdf.txt
+cfe933c66b0d638b5a755011acad30daeb78338391816e023742264c43b72cbf  geostat-terms-of-use-ka.html.txt
+69aff57d17d5dc470cbd5141d54c1b8c885b24fba30b84db50bbe2e34ddc9ff6  geostat-terms-of-use.html.txt
+fe9cf44dcd331541be77c69eebcea7f773f5839b59bec7e689f1a10c3465c37c  inegi-terminos-libre-uso-informacion.pdf.txt
+754f867a02a5042cd0228e2d47e5c8cd298f6ba07190705244e51f996b020a22  inegi-terminos-sitio.pdf.txt
+23f0d62f14f0e2c5ca3f86fbbff3bb405eef4e68f6bed84b6c5201db4e98b9f8  ipc-ontario-interpretation-bulletin-personal-information.pdf.txt
+ba7c2c0a027bd5a2023600bb2cb7e91da8abfc614e827dd3768f7e6580c90a29  la-metro-terms-conditions.html.txt
+7e9eeafdeaa3c6661751bbcdf97655d57d538fa494ce3db5548229df391dd6a1  mbta-massdot-develop-license-agreement.pdf.txt
+eb1441ac855ceab560fa0501934144ad5aa72051588fa6815c8e9a0489d89a4d  mhlw-food-sanitation-system-terms-2020.pdf.txt
+48515aba147dfa83c2a8ac06911c686e8315068d47e07fa7de5de4e017b9668f  mhlw-food-sanitation-system-terms-amendment-2026.pdf.txt
+ee8528350c5f94463d228a2ace0dbd5b477ab14c24424d613d6474b8234e2b2c  rio-decreto-38879-siurb.pdf.txt
+318db537a906a92d848c06a1e316f2f1481b4f9a4375e8bc7bc5f12dcbfaf069  septa-license-agreement.html.txt
+f6c0f9b44d0c55a0903d1055ca6e645c356ad663bca572724d3db360fc1e06a7  sfmta-transit-data-license-agreement.html.txt
+3b459162dd31dfddeac42a0a61795035c4c84cedfae601a4d52f88531b2f41d9  taito-opendata-guideline.pdf.txt
+e2d89109d5635202e39ea896ad547be969caa8a76b46e0545e6049d0cc47c6ae  wmata-transit-data-terms-of-use.html.txt
+```

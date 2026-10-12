@@ -1,0 +1,62 @@
+Protocolo: 174590 Data: 03/07/2014 Título: DECRETO RIO Nº 38.879 Página(s): 3 e 4
+DECRETO RIO Nº 38.879 DE 2 DE JULHO DE 2014
+Dispõe sobre o Sistema Municipal de Informações Urbanas de que trata a Lei Complementar nº 111, de 01 de fevereiro de 2011.
+O PREFEITO DA CIDADE DO RIO DE JANEIRO, no uso das atribuições que lhe são conferidas pela legislação em vigor,
+CONSIDERANDO o disposto nos artigos 315 e 316 do Plano Diretor da Cidade do Rio de Janeiro que institui o Sistema Municipal de Informações Urbanas e determina que o Poder Executivo defina sua constituição;
+CONSIDERANDO que o Sistema Municipal de Informações Urbanas, consiste em um instrumento da articulação intersetorial entre políticas públicas relacionadas à Política Municipal de Desenvolvimento Urbano e Ambiental.
+CONSIDERANDO que nos termos do inciso II do artigo 2º da Lei Municipal nº 2.689 de 01 de dezembro de 1998, compete ao IPP prover e integrar as atividades do Sistema de Informações Geográficas, Cartográficas, Monográficas e Dados Estatísticos da Cidade,
+CONSIDERANDO que a regulamentação do Sistema Municipal de Informações Urbanas apresenta-se como uma oportunidade para que se construa um sistema integrado de dados municipais de natureza física, e forma alfanumérica e gráfica, de maneira a dar suporte às ações de planejamento, tributação, assim como às demais políticas setoriais (educação, transporte, obras, saúde, saneamento, cultura, turismo etc.), capazes de consolidar o maior controle do planejamento e de aprimorar a qualidade da gestão urbana com bases científicas;
+CONSIDERANDO a necessidade de sistematização das informações geradas no âmbito das políticas públicas setoriais, visando à atualização, manutenção e disseminação permanentes das mesmas;
+CONSIDERANDO o grande volume de informações coletadas e produzidas de forma dispersa em diferentes setores da administração municipal;
+CONSIDERANDO o risco de duplicidade e/ou da não compatibilidade dos dados no processo de produção de informações;
+CONSIDERANDO a possibilidade de refinamento do ponto de vista analítico-reflexivo e conclusivo das informações disponíveis;
+CONSIDERANDO a necessidade de suporte às ações desenvolvidas no âmbito do Sistema Integrado de Planejamento e Gestão Urbana, do Sistema de Planejamento e Gestão Ambiental, do Sistema de Controle do Uso e Ocupação do Solo e do Sistema de Defesa da Cidade;
+DECRETA:
+Art. 1º O Sistema Municipal de Informações Urbanas, instituído pelo Plano Diretor da Cidade do Rio de Janeiro, será constituído na forma do presente Decreto.
+Parágrafo único. O Sistema Municipal de Informações Urbanas tem como finalidade reunir, gerir, integrar e atualizar o conjunto de informações sobre a Cidade do Rio de Janeiro, estabelecendo um canal de comunicação eficiente entre os órgãos de forma a subsidiar políticas públicas da Administração Municipal.
+Art. 2º A atuação do Sistema Municipal de Informações Urbanas se pauta pelos seguintes princípios, ressalvadas as situações de sigilo previstas em lei:
+I - Transparência por intermédio do respeito ao direito de acesso público às informações urbanas municipais;
+II - Autonomia pela independência dos órgãos setoriais e do Sistema na produção das informações, análises e diagnósticos;
+
+III - Isenção e neutralidade na utilização dos dados e na disseminação das informações urbanas municipais; Parágrafo único. Além dos princípios acima descritos o Sistema Municipal de Informações Urbanas deve pautarse: I - Na cooperação entre os órgãos setoriais, e; II - Na garantia de segurança, preservação e fidelidade aos dados e informações registradas, assim como da agilidade necessária ao seu manuseio e recuperação, por intermédio da aplicação de recursos técnicos adequados. Art. 3º Integram o Sistema Municipal de Informações Urbanas, os órgãos diretamente responsáveis pela implementação da Política de Desenvolvimento Urbano e Ambiental do município, nos termos do Plano Diretor de Desenvolvimento Urbano Sustentável da Cidade: I - Instituto Municipal de Urbanismo Pereira Passos - IPP; II - Secretaria Municipal de Urbanismo - SMU; III - Secretaria Municipal de Meio Ambiente - SMAC; IV - Secretaria Municipal de Habitação - SMH; V - Secretaria Municipal de Transportes - SMTR; VI - Secretaria Municipal de Obras – SMO; VII - Secretaria Municipal de Conservação e Serviços Públicos - SECONSERVA; VIII - Secretaria Municipal de Desenvolvimento Social - SMDS IX - Secretaria Municipal de Fazenda - SMF; X - Secretaria Municipal da Casa Civil – CVL. XI - Secretaria Municipal de Ordem Pública – SEOP; XII - Secretaria Municipal de Saúde – SMS; XIII - Secretaria Municipal de Educação – SME; XIV - Secretaria Municipal de Cultura - SMC XV - Fundação Instituto das Águas do Município do Rio de Janeiro – RIOÁGUAS; XVI - Fundação Instituto de Geotécnica do Município do Rio de Janeiro – GEORIO; XVII - Fundação Parques e Jardins do Município do Rio de Janeiro – FPJ; XVIII - Companhia de Engenharia de Tráfego do Rio de Janeiro – CETRIO; XIX - Companhia Municipal de Energia e Iluminação – RIOLUZ;
+XX - Companhia Municipal de Limpeza Urbana - COMLURB; XXI - Instituto Rio Patrimônio da Humanidade – IRPH; XXII - Empresa Municipal de Informática – IPLANRIO. Art. 4º Caberá ao IPP coordenar o Sistema Municipal de Informações Urbanas do Município do Rio de Janeiro, responsabilizando-se pelo suporte técnico-administrativo necessário ao seu funcionamento. Parágrafo único. O Poder Executivo Municipal dotará o Órgão Coordenador do Sistema Municipal de Informações Urbanas de recursos orçamentários anuais para a constituição e manutenção do Sistema Municipal de Informações Urbanas.
+
+Art. 5º Compete ao Coordenador do Sistema Municipal de Informações Urbanas:
+I - Gerir o Sistema Municipal de Informações Urbanas, segundo diretrizes do Plano Diretor de Desenvolvimento Urbano Sustentável, atendendo suas estratégias de implementação;
+II - Promover a manipulação, tratamento, integração, atualização, organização manutenção e disseminação dos acervos de dados e informações de caráter estatístico, de editoração e de informações gerenciais de interesse para a Cidade;
+III - Garantir a segurança dos dados e informações no Sistema;
+IV - Responsabilizar-se pela incorporação dos conteúdos dos projetos setoriais de informação sobre a Cidade já existentes e se articular com setores externos a ela que detenham ou produzam dados e informações de interesse da Cidade do Rio de Janeiro, no que diz respeito ao desenvolvimento urbano, ambiental e social;
+V - Articular a obtenção de dados e informações com as demais instâncias produtoras em todas as esferas públicas e/ou privadas, tais como concessionárias de serviços públicos, universidades, instituições de pesquisa, organizações não governamentais e outras;
+VI - Estabelecer um canal de comunicação eficiente entre os órgãos municipais de forma a subsidiar políticas públicas;
+VII - Promover parcerias e convênios para intercâmbio de informações com órgãos, entidades e setores externos;
+VIII - Promover a ampla divulgação dos dados e informações de interesse público, incluindo a produção de relatórios temáticos periódicos.
+Art. 6º O Comitê Gestor do Sistema Municipal de Informações Urbanas será integrado pelos seguintes órgãos:
+I - Instituto Municipal de Urbanismo Pereira Passos - IPP;
+II - Secretaria Municipal de Urbanismo - SMU;
+III - Secretaria Municipal de Meio Ambiente - SMAC;
+IV - Secretaria Municipal de Habitação - SMH;
+V - Secretaria Municipal de Transportes - SMTR;
+VI - Secretaria Municipal de Obras – SMO;
+Parágrafo único. O Comitê Gestor do Sistema Municipal de Informações Urbanas poderá convocar outros órgão públicos e/ou privados gestores de informações a respeito do Município do Rio de Janeiro.
+Art. 7º Compete ao Comitê Gestor do Sistema Municipal de Informações Urbanas: I - Dar subsídio ao desenvolvimento das atividades dos demais Sistemas de que trata o Título V, da Lei Complementar nº 111 de 13 de abril de 2011;
+II - Estabelecer diretrizes gerais para a produção e coleta, aquisição e montagem de acervos, bases de dados e cadastros, de responsabilidade dos órgãos gestores setoriais, com vistas à harmonização e compatibilização dos dados ao sistema;
+III - Formular e executar programas e projetos de interesse para implementação de sistemas, serviços e produtos de informação no âmbito do desenvolvimento urbano e ambiental;
+IV - Propiciar a implementação e acesso às informações do Cadastro Multifinalitário do Município do Rio de Janeiro - CADTEC;
+V - Definir critérios gerais para dar publicidade de informações do Sistema à sociedade.
+Art. 8º A Empresa Municipal de Informática – IPLANRIO, sempre que necessário, dará o suporte técnico para o funcionamento do Sistema Municipal de Informações Urbanas apoiando o seu Comitê Gestor e o órgão Coordenador.
+
+Art. 9º Os órgão que integram o Sistema Municipal de Informações Urbanas deverão se reunir trimestralmente em caráter ordinário.
+Parágrafo único. O Órgão Coordenador poderá convocar reuniões em caráter extraordinário integradas por membros do Sistema Municipal de Informações Urbanas ou por apenas membros do Comitê Gestor.
+Art. 10. Deverão ser redigidas atas de todas as reuniões ordinárias e extraordinárias do Sistema Municipal de Informações Urbanas e de seu Comitê Gestor.
+Art. 11. Fica estabelecido o prazo de 30 (trinta) dias, contados da publicação do presente Decreto, para a nomeação dos representantes do Comitê Gestor do Sistema Municipal de Informações Urbanas.
+Art. 12. Todos os órgãos municipais deverão, no prazo máximo de 60 (sessenta) dias, contados da publicação do presente Decreto, fornecer ao Órgão Coordenador do Sistema Municipal de Informações Urbanas todas as informações referentes aos seus programas e projetos concluídos, em curso ou programados, devendo a cada 45 (quarenta e cinco ) dias atualizar tais informações.
+Parágrafo único. As autoridades superiores de cada Pasta Municipal deverão no prazo de 30 (trinta) dias contados da publicação do presente Decreto informar ao Órgão Coordenador do Sistema Municipal de Informações Urbanas seus principais projetos concluídos ou em curso.
+Art. 13. No prazo de 45 dias (quarenta e cinco), contados da publicação do presente Decreto, deverá ser marcada a primeira reunião do Comitê Gestor.
+Art. 14. Caberá aos membros do Comitê Gestor a elaboração de um Plano de Trabalho no prazo de 90 (noventa) dias, a partir da primeira reunião, com seu respectivo cronograma, de modo a cumprir as atribuições estabelecidas nos artigos 4º e 6º deste Decreto.
+Parágrafo único. O Plano de Trabalho previsto no caput deste artigo deverá ser elaborado anualmente, estabelecendo objetivamente as atividades a serem desenvolvidas pelo Comitê Gestor e pelo Sistema Municipal de Informações Urbanas.
+Art. 15. Este Decreto entra em vigor na data de sua publicação.
+Rio de Janeiro, 2 de julho de 2014; 450º ano da fundação da Cidade.
+EDUARDO PAES
+
+Diário publicado em: 03/07/2014 - Edição 73 - Pág. 3
+=>https://doweb.rio.rj.gov.br/portal/visualizacoes/pdf/2468#/p:3/e:2468?find=Decreto%20No.%2038.879

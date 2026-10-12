@@ -1,0 +1,60 @@
+Massachusetts Department of Transportation Developers License Agreement
+
+The Developer’s License Agreement sets out the terms and conditions “the Terms” governing Your use of the information and real-time and static transportation data made available by the Massachusetts Department of Transportation on the “Developers Page.”
+
+1.
+
+Definitions
+
+1.1 “MassDOT” means the Massachusetts Department of Transportation and its divisions, and the agencies and authorities within the jurisdiction of MassDOT, including the Massachusetts Bay Transportation Authority (MBTA) and the Massachusetts Regional Transit Authorities (RTAs). MassDOT also includes the Massachusetts Port Authority (MassPort), or its successor, as well as any third-parties with which MassDOT may partner to provide data on or through the Developers Page.
+
+1.2 “Data” means the information and resources made available on the Developers Page and the information and resources linked to from the Developers Page and hosted by third parties with which MassDOT has partnered.
+
+1.3 “Developers Page” means the websites hosted by MassDOT which provides information, data, and resources on transportation services.
+
+2. Acceptance of this License Agreement
+
+2.1 You (Licensee) must agree to all the Terms provided in this License Agreement in order to use the Data.
+
+2.2 Your use of the Data constitutes full acceptance of the Terms of the Licensing Agreement from that point onwards.
+
+2.3 If you are agreeing to be bound by this License Agreement on behalf of your employer or other entity, you represent and warrant that you have full legal authority to bind your employer or such entity to this License Agreement.
+
+3. License
+
+3.1 MassDOT, subject to your acceptance of the Terms of this License Agreement, hereby grants You (Licensee) non-exclusive, limited, and revocable rights to use, reproduce, and redistribute the Data.
+
+4. Your (Licensee) Obligations
+
+4.1 You shall:
+
+• Clearly acknowledge MassDOT as the provider of the Data.
+
+• Comply with all applicable laws, rules, and regulations in relation to Your receipt and use of the Data.
+• Not represent Yourself as MassDOT or any of its agencies and authorities, as an agent or partner of the MassDOT or its agencies and authorities, or make any representations, warranties, or guarantees to Third Parties with respect to the Data.
+• Not reproduce or use MassDOT or any of its agencies or authorities logos or trademarks in connection with the Data.
+• Not misrepresent the Data. • Not claim ownership of the Data in any manner, including but not limited to, on
+Your website, web application, or any other digital product.
+4.2 You may:
+• Combine the Data with other data, provided such combination does not infringe any third party Intellectual Property Rights.
+5. MassDOT’s (Licensor) Rights
+5.1 MassDOT reserves the right to alter the Terms of this License Agreement at any time without notice.
+5.2 MassDOT reserves the right to make changes, modifications, or alterations to the Data without notice, and such changes, modifications, or alterations may affect Your use of the Data, all without any liability or responsibility of the MassDOT.
+5.3 MassDOT reserves the right to suspend or terminate the Data at any time without prior notice.
+5.4 MassDOT shall at all times maintain title, ownership, rights, and interest in and to the Data.
+6. DISCLAIMER AND LIABILITY
+6.1 The MassDOT does not guarantee or represent that the Data will always be accurate, complete, or current, or that access to the Data will be continuous and uninterrupted.
+6.2 You (Licensee) acknowledge and agree that neither MassDOT nor any of its employees, officers, or agents makes any warranty, express or implied, with respect to the Data nor with respect to its accuracy, sufficiency, or completeness thereof, nor with respect to any of the software or other systems provided by MassDOT under this License Agreement. The Data is provided on an “as is” and “with all faults” basis, with You (Licensee) bearing the entire risk as to quality and performance of the Data.
+6.3 MassDOT makes no representations or warranties that the Data will perform
+
+based on Your equipment. You will be solely responsible for any resulting damage to Your software or computer systems and/or any resulting loss of data, from Your use of the Data pursuant to this Agreement and/or any reliance which You may place upon the Data.
+6.4 MASSDOT MAKES NO REPRESENTATIONS OR WARRANTIES THAT THE DATA WILL BE SUITABLE FOR THE PURPOSES FOR WHICH IT IS PERMITTED TO BE USED UNDER THE TERMS OF THIS AGREEMENT. THE IMPLIED WARRANTIES OF MERCHANTABILITY AND OF FITNESS FOR A PARTICULAR PURPOSE ARE EXPRESSLY WAIVED.
+6.5 MassDOT expressly disclaims all liability (whether incurred directly or indirectly) for all loss and/or damage occasioned from the use and/or inability to use the Data or any part of it.
+6.6 You (Licensee) acknowledge and agree that in no event shall MassDOT or its employees, officers, or agents be liable for any damages, claim or loss incurred by You (including without limitation, compensatory, incidental, indirect, special, consequential, or exemplary damages, lost profits, lost sales or business, expenditures, investments or commitments in connection with any business, or loss of goodwill) resulting from loss of the Data or inability to use the Data irrespective of whether MassDOT had been informed of, knew of, or should have known of the likelihood of such damages, claim, or loss. This limitation applies to all causes of action in the aggregate, including, without limitation, breach of contract, breach of warranty, negligence, strict liability, misrepresentation, and other torts.
+6.7 MassDOT shall under no circumstances, be liable for special, incidental, exemplary or consequential damages suffered by Your use of the Data; including, but not limited to, loss of profits, anticipated revenue, interest, loss of use, or other such claims arising from any causes whatsoever, whether or not such loss or damage is based on contract, warranty, tort including negligence, indemnity, or otherwise.
+7. Waiver, Severability, and Applicable Law
+7.1 Failure by MassDOT to insist upon strict performance of any part of these Terms, or delay in, or failure to exercise any rights or remedies to which it is entitled shall not constitute a waiver of such right or remedies, nor shall termination of these Terms by MassDOT operate as a waiver of any of its Terms. Any express waiver of any breach of these Terms by MassDOT does not constitute a waiver of any subsequent breach of these Terms. Waivers shall only be valid if recorded in writing and signed by the waiver.
+7.2 If any provision of these Terms is held invalid, illegal, or unenforceable, for any reason by any court of competent jurisdiction, such provision shall be severed from these Terms and the remaining provisions shall continue in full force and effect as if these Terms had been executed without the invalid, illegal, or unenforceable provision.
+
+7.3 The provisions of the Disclaimer and Liability sections above and any other paragraphs that are necessary to give effect to those paragraphs shall survive termination of these Terms. 7.4 This Agreement shall be interpreted and enforced under the laws of the Commonwealth of Massachusetts and venue and jurisdiction in any dispute shall be in the superior court for Suffolk County. 8. Entire Agreement: These Terms constitute the entire License Agreement between You (Licensee) and MassDOT and governs Your use of the Data, superseding any prior Agreements between You and MassDOT. MassDOT reserves the right to modify or revoke this Agreement at any time. If modifications are made to this Agreement, MassDOT will notify You on the Developers Page.
+Updated: November 13, 2009

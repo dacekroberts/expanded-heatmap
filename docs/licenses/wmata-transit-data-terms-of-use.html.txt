@@ -1,0 +1,163 @@
+Home
+
+APIs
+
+Products
+
+Sign in
+
+Sign up
+
+✕
+
+Washington Metropolitan Area Transit Authority API
+
+Home
+
+APIs
+
+Products
+
+Sign in
+
+Sign up
+
+☰
+
+WMATA Transit Data Terms of Use
+
+Last Revised on November 19, 2019
+
+1. Scope and Intent
+
+Pursuant to these Transit Data Terms of Use (the Terms) the Washington Metropolitan Area Transit Authority (WMATA) makes certain data regarding its transit services available as a public service. The WMATA transit information may include, but is not necessarily limited to, (a) bus/train locations; (b) bus routes; (c) bus schedules; (d) bus stops; (e) Metrorail Lines; (f) Rail Elevator/Escalator Incidents; (g) Train Arrivals; Rail Incidents, etc. (each separately or taken together, Transit Data).
+
+2. API and GTFS
+
+WMATA makes Transit Data available to certain users and developers via an Application Programming Interface (API) and a General Transit Feed Specification (GTFS), each described in more detail below.
+
+API. The WMATA API allows users and developers to receive Transit Data and use it for testing purposes or in the developer’s own software application, website, product or service (each an Application). For the sake of clarity, an Application explicitly does not include a user’s or developer’s application programming interface. Re-use of the API Transit Data in a user’s or developer’s application programming interface is strictly prohibited subject to the exceptions provided for in Section 8 below.
+
+GTFS. The GTFS provides users and developers certain Transit Data either statically through a series of text files collected in a downloadable .Zip file or through a real-time GTFS feed. The static GTFS provides the same schedule data that supports WMATA’s online trip planner. The real-time GTFS contains arrival predictions, vehicle positions and service advisories. GTFS is an open data specification format that allows the incorporation of transit information into Applications, like Google Maps, that include geographic data.
+
+3. Binding Agreement
+
+By obtaining, using or otherwise developing Applications that utilize WMATA's Transit Data through GTFS and/or the API, you acknowledge that you are entering into a legally binding agreement with WMATA and that these Terms govern your use of the Transit Data, the GTFS and the API. If you are a developer and developing on behalf of a company or other entity, you represent and warrant that you have full legal authority to do so on behalf of that entity and bind it to these Terms. If you are not authorized, you may not accept these Terms or create a developer account on behalf of someone else.
+
+4. Test Users
+
+Users who would like access to the WMATA API for limited testing purposes only may utilize WMATA’s public use key.
+
+5. Developer Account
+
+For all other uses, You must create a developer account with WMATA and subscribe to one or more Transit Data service tiers. Each subscription will generate two security keys (Keys) that will enable you to access the service tier to which you are subscribed. The Keys enable WMATA to associate your API activity with your Application. All activities that occur using the Keys issued to you are your responsibility. You are responsible for maintaining the secrecy and security of the Keys issued to you. The Keys, while issued to you as part of your subscription, remain WMATA’s property and may be revoked or otherwise limited at any time and at WMATA’s sole discretion. You cannot sell, transfer, or sublicense them. Do not try to circumvent them and do not require your users to obtain their own keys from WMATA to use your Application (for example, in an attempt to circumvent call limits). WMATA reserves the right to limit the number of Keys and service tiers to which you may subscribe in its sole discretion.
+
+You are responsible for maintaining your Application’s compatibility with WMATA's API and GTFS, as applicable and as updated from time to time, in order to continue to receive WMATA's Transit Data.
+
+You agree to use the API, GTFS and Transit Data only for purposes that are legal and in accordance with these Terms, any other applicable policies or guidance that WMATA may issue from time to time, and applicable law.
+
+6. Prohibited Activites/Conduct
+
+You and/or your end users or agents are prohibited from using the API, GTFS or Transit Data in the following ways:
+
+To interfere with or disrupt WMATA services or servers.
+
+To circumvent or modify any Keys or security mechanisms employed by WMATA or the API, including without limitation any authentication technologies.
+
+To request, collect, solicit or otherwise obtain access to sign-in names, passwords, API Keys, or other authentication credentials for WMATA other than what WMATA provides to you for your own account.
+
+To impersonate or obtain access to WMATA's Transit Data, API, GTFS or other WMATA services without authorization.
+
+To create user accounts by automated means or under false or fraudulent pretenses.
+
+To distribute or allow access to the WMATA API to any third party, or create an application programming interface that enables access to the Transit Data outside of the WMATA API.
+
+To enable any other person to personally identify any user of your Application that uses WMATA's Transit Data without the user's express consent.
+
+To state or imply affiliation, sponsorship or endorsement of your Application by WMATA.
+
+To state or imply that you own or have created the WMATA Transit Data, API, or GTFS.
+
+To state or imply that the data you provide through your Application is accurate, complete, or timely, or that it is more accurate, more complete or more timely with respect to the underlying Transit Data provided through the API or GTFS.
+
+To promote or provide instructional information about illegal activities or promote physical harm or injury against any group or individual.
+
+To defame, abuse, stalk, harass, threaten or otherwise violate the legal rights (such as the right to privacy) of others.
+
+To upload, post, email or transmit or otherwise make available with, in or in connection with your Application, any infringing, obscene or unlawful content.
+
+To upload, post, email or transmit or otherwise make available with, in or in connection with your Application, any content that infringes any patent, trademark, service mark, copyright, trade secret or any other intellectual property or proprietary right of any party, unless you are the owner of the content or have the permission of the owner to post such content.
+
+To transmit any viruses, worms, defects, Trojan horses, or any items of a destructive nature.
+
+7. Ownership
+
+WMATA Property As between you and WMATA, WMATA maintains all ownership, rights, title, and interest, including all intellectual property rights, in and to, the (1) Transit Data, API, and all elements, components, and executables of the API; (2) any other WMATA-provided content; (3) the WMATA website; and (4) WMATA trademarks and copyrighted materials (Intellectual Property). Except for the express licenses granted in these Terms, WMATA does not grant you any right, title, or interest in WMATA property. You agree to take such actions as WMATA may reasonably request to perfect WMATA’s rights to all WMATA property. You are prohibited from using WMATA Intellectual Property, including any confusingly similar variants, in association with the Transit Data or API unless you have entered into a separate, written license agreement with WMATA for use of such Intellectual Property. Please contact WMATA for further details.
+
+Transit Data License Subject to your compliance with these Terms, WMATA grants you a limited, non-exclusive, non-assignable, non-transferrable, non-sublicensable, revocable license to download, use, reproduce, and redistribute WMATA's Transit Data within your Application.
+
+API License Subject to your compliance with these Terms, WMATA grants you a limited, non-exclusive, non-assignable, non-transferrable, non-sublicensable, revocable license to access and use WMATA's API to develop, test, and support your Application, and to let your end users use your integration of the API within your Application.
+
+GTFS License The static GTFS and real-time GTFS extension are open and freely available data specification formats created and shared by Google under the Creative Commons Attribution 4.0 License. Source code samples are licensed under the Apache 2.0 License.
+
+Contributions to WMATA By submitting suggestions or other feedback regarding the WMATA Transit Data, API, or other WMATA provided materials to WMATA (Contributions) regardless of the medium in which such Contributions may be provided, you acknowledge and agree that: (1) WMATA is not under any obligation of confidentiality with respect to the Contributions; (2) WMATA may use or disclose (or choose not to use or disclose) such Contributions for any purpose, in any way, in any media worldwide; (3) you irrevocably, non-exclusively license to WMATA rights to exploit your Contributions; and (4) you are not entitled to any compensation or reimbursement of any kind from WMATA under any circumstances for your Contributions.
+
+8. Re-use of Transit Data
+
+(a) Except as expressly provided in sub-section (b) of this provision, you are prohibited from:
+
+sharing (except with your Application's users), transferring, sublicensing, selling or leasing any Transit Data, directly or indirectly (e.g., through multiple tiers of distribution or your own application programming interface), to any other person; or
+
+distributing or allowing access to the stand-alone API to anyone other than the company on whose behalf you agreed to these Terms, or creating an application programming interface that enables access to Transit Data. Anyone who wants to access WMATA API and Transit Data must agree to be bound by the applicable terms of use.
+
+(b) In the event you desire to re-use the Transit Data for the purpose of providing that data to third parties through your own application programming interface, you must:
+
+receive prior written authorization from WMATA to do so;
+
+only use the Key provided to you by WMATA to access the API and Transit Data, not the Key of any other person;
+
+not provide WMATA Transit Data to third parties unless the Transit Data has been inseparably commingled with or supplemented by additional data that you have provided (for example, by crowd sourcing or your own predictive algorithms);
+
+be able to identify and block third parties using your application programming interface upon WMATA’s request;
+
+make your user data available to WMATA, upon request, for purposes of statistical research; and
+
+abide by any additional requirements WMATA may impose (hereinafter, referred to as Supplemental API Terms).
+
+9. Term and Termination
+
+The term of these Terms will commence on the date upon which you agree to these Terms and will continue until terminated as set forth below. You may terminate these Terms by discontinuing use of WMATA Transit Data, API, and GTFS. WMATA reserves the right to terminate your access to, alter and/or no longer provide the Transit Data, API, and/or GTFS, either temporarily or permanently, at any time without prior notice. WMATA reserves the right to terminate these Terms if WMATA determines, in its sole discretion, that you are engaged in unauthorized use of the API, GTFS or Transit Data as outlined in these Terms or that you are using WMATA's API or Transit Data in any activity that threatens/compromises the safety and/or security of the Metrorail/bus system or WMATA's networks. For avoidance of doubt, nothing herein obligates WMATA to make its API, GTFS or Transit Data available to you, and you agree and acknowledge that any access to the API, GTFS or Transit Data is within the sole and absolute discretion of WMATA. All of WMATA’s rights in these Terms may be exercised without prior notice or liability to you.
+
+Upon termination of these Terms (i) all rights and licenses granted to you will terminate immediately; (ii) you will promptly destroy WMATA confidential information in your possession or control; (iii) neither party is liable to the other party just because these Terms have been terminated; and (iv) unless WMATA agrees otherwise in writing or as stated in these Terms, you must permanently delete all Transit Data or other data which you stored pursuant to your use of the API or GTFS. WMATA may request that you certify in writing your compliance with this section.
+
+10. General Terms
+
+Support and Modifications: WMATA may provide you with support or modifications for the API and GTFS feed in its sole discretion and WMATA may stop providing support or modifications to you in its sole discretion at any time without notice or liability to you. WMATA may release subsequent versions of the API or make structural modifications to the GTFS feed and require that you use those subsequent versions. Your continued use of the API or GTFS feed following a subsequent modification will be deemed your acceptance of such modifications.
+
+Publicity: You may promote your Application, including talking to traditional and online media and your users about your Application, so long as you do so truthfully and without implying that your Application is created or endorsed by WMATA (or otherwise embellishing your relationship with WMATA). Additionally, you may not issue any formal press release via traditional or online media referring to WMATA without WMATA’s prior consent. WMATA may publicly refer to you, orally or in writing, as a licensee or unaffiliated third-party developer that utilizes WMATA Transit Data, the API or the GTFS, without additional consent from you.
+
+Monitoring: You agree to assist WMATA in verifying your compliance with these Terms by providing WMATA with information about your Application, which may also include access to your Application and other materials related to your use of the Transit Data, API and GTFS, upon request. If you do not demonstrate full compliance with these Terms, WMATA may restrict or terminate your access to the Transit Data, API and GTFS.
+
+Severability and Waiver: The invalidity of any term or provision of these Terms will not affect the validity of any other provision. Waiver by WMATA of strict performances of any provision of these Terms will not be a waiver of or prejudice WMATA's right to require strict performance of the same provision in the future or of any other provision of these Terms.
+
+License Fee: WMATA currently provides the Transit Data, API and GTFS for free, but WMATA reserves the right to charge for the Transit Data, API and/or GTFS in the future. If WMATA does charge a fee for use of the Transit Data, API, GTFS, or any developer tools and features, you do not have any obligation to continue to use WMATA’s developer resources.
+
+WMATA Independent Development: You understand and acknowledge that WMATA may independently create Applications, content, and other products or services that may be similar to or competitive with your Application. Nothing in these Terms will be construed as restricting or preventing WMATA from creating and fully exploiting any Applications, content, and other items, without any obligation to you.
+
+Sovereign Immunity: You acknowledge that WMATA is an interstate compact agency of the District of Columbia, the State of Maryland and the Commonwealth of Virginia; that WMATA has sovereign immunity; and that by entering into these Terms, WMATA does not waive such sovereign immunity. You understand and agree that you may not assert for your own benefit any immunity from claims available to WMATA under the WMATA Compact.
+
+DISCLAIMER OF WARRANTY: THE TRANSIT DATA, API, GTFS, AND ANY OTHER MATERIAL IS PROVIDED BY WMATA ON AN "AS IS" AND "AS AVAILABLE" BASIS AND YOUR USE OF THE SAME IS AT YOUR OWN RISK. WMATA MAKES NO REPRESENTATIONS OR WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED. WMATA DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. WMATA AND ITS EMPLOYEES, OFFICERS, DIRECTORS AND AGENTS WILL NOT BE LIABLE FOR DAMAGES OF ANY KIND ARISING FROM THE USE OF THE TRANSIT DATA INCLUDING BUT NOT LIMITED TO DIRECT, INDIRECT, INCIDENTAL, PUNITIVE AND CONSEQUENTIAL DAMAGES.
+
+Limitation of Liability: WITHOUT LIMITING WMATA’S SOVEREIGN IMMUNITY IN ANY WAY, NEITHER WMATA NOR ANY OF ITS AFFILIATES, DIRECTORS, OFFICERS, EMPLOYEES, AGENTS, LICENSEES, OR CONTRACTORS, SHALL BE LIABLE FOR ANY SPECIAL, INCIDENTAL, INDIRECT, PUNITIVE, OR CONSEQUENTIAL DAMAGES OR LOSS OF USE, PROFIT, REVENUE OR DATA TO YOU OR ANY THIRD PERSON ARISING FROM YOUR USE OF WMATA TRANSIT DATA, API, GTFS OR ANY OTHER MATERIAL ACCESSED THROUGH OR DOWNLOADED FROM WMATA. THIS LIMITATION OF LIABILITY SHALL APPLY REGARDLESS OF WHETHER (A) YOU BASE YOUR CLAIM ON CONTRACT, TORT, STATUTE, OR ANY OTHER LEGAL THEORY, (B) WMATA KNEW OR SHOULD HAVE KNOWN ABOUT THE POSSIBILITY OF SUCH DAMAGES, OR (C) THE LIMITED REMEDIES PROVIDED IN THIS SECTION FAIL OF THEIR ESSENTIAL PURPOSE. IN NO EVENT SHALL WMATA’S TOTAL LIABILITY TO YOU IN CONNECTION WITH THE TRANSIT DATA, API, GTFS OR ANY OTHER MATERIAL ACCESSED THROUGH OR DOWNLOADED FROM WMATA FOR ALL DAMAGES, LOSSES, AND CAUSES OF ACTION EXCEED $100.
+
+Indemnification: You will defend, hold harmless, and indemnify WMATA and its affiliates, directors, officers, employees, agents, licensees, or contractors from any claim or action brought by a third party, including all damages, liabilities, costs and expenses, including reasonable attorneys’ fees, to the extent resulting from, alleged to have resulted from, or in connection with: (1) your breach of your obligations herein; or (2) the violation of any copyright, trademark, service mark, trade secret or United States patent by the Application, Contributions or your development activities.
+
+Assignment and Delegation: You may not assign or delegate any rights or obligations under these Terms, including in connection with a change of control. Any purported assignment and delegation shall be ineffective. In the event a third party acquires you, your Application(s), or any authorized application programming interface(s) developed by you, the acquiring entity must agree to be bound by these Terms and any Supplemental API Terms, if applicable, in order to have access to or use WMATA’s Transit Data, API or GTFS. WMATA may freely assign or delegate all rights and obligations under these Terms, fully or partially without notice to you.
+
+Applicable Law: The laws of the District of Columbia shall govern all rights and obligations under these Terms, without giving effect to any principles of conflicts of laws, unless such laws conflict with the WMATA Compact, in which case the WMATA Compact shall govern.
+
+Entire Agreement: These Terms, along with any Supplemental API terms, if applicable, constitute the complete and exclusive agreement between WMATA and you with respect to the subject matter hereof and supersede all prior oral or written understandings, communications, or agreements not specifically incorporated herein. WMATA reserves the right to modify or revoke these Terms or any Supplemental API Terms, if applicable, at any time.
+
+Subscribe to our news feed or contact us at api-support@wmata.com
+Developer License Agreement
+© 2026 WMATA. All rights reserved.
