@@ -32,7 +32,7 @@ branch's drafts file.
     Toyota's config and map untouched.
   - `legend-dot-georgia` `16a68efe` (worktree `review-prep`), 57 behind
     master: needs the one full re-render.
-  - `place-search` `1f917fe8` (2026-10-12; far behind master): batches 1
+  - `place-search` `59ebdb96` (2026-10-12, its final state for the landing by its own message; the owner saw the marker and picked-line changes on a phone, relayed: "phone looks great", so the fifth call below is answered; far behind master): batches 1
     to 3, nineteen cities, the watch file and its check. **Its rollout
     plan for the whole site is `docs/handoff_place_search_rollout.md` on
     the branch. The owner approved STAGE 0 with this landing, one
