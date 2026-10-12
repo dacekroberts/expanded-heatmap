@@ -20,10 +20,16 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**195 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**198 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+
+**2026-10-12**
+
+- [Naha joins phase 2 (owner); its reader changes to shared code are Cleanup's, ahead of the build](#2026-10-12---naha-joins-phase-2-owner-its-reader-changes-to-shared-code-are-cleanups-ahead-of-the-build)
+- [Before the phase 2 landing: seven owner calls, and the landing handoff written](#2026-10-12---before-the-phase-2-landing-seven-owner-calls-and-the-landing-handoff-written)
 
 **2026-10-11**
 
+- [Bucharest shows 127 person-named companies by name: measured, repair approved for the phase 2 landing; place search's unopened stations an internal watch file (owner)](#2026-10-11---bucharest-shows-127-person-named-companies-by-name-measured-repair-approved-for-the-phase-2-landing-place-searchs-unopened-stations-an-internal-watch-file-owner)
 - [Analytics' requests: a private cross-city chart draft, baseline totals after phase 2, one sharing check folded into the audit (owner)](#2026-10-11---analytics-requests-a-private-cross-city-chart-draft-baseline-totals-after-phase-2-one-sharing-check-folded-into-the-audit-owner)
 - [The Japanese re-render held until every Japanese city is built; the weekly archive waits for phase 2 (owner)](#2026-10-11---the-japanese-re-render-held-until-every-japanese-city-is-built-the-weekly-archive-waits-for-phase-2-owner)
 - [The PLAN cleanup pass: ten pre-review items moved to plan_done, seven narrowed, one not confirmed (owner's hard line of 2026-10-08)](#2026-10-11---the-plan-cleanup-pass-ten-pre-review-items-moved-to-plan_done-seven-narrowed-one-not-confirmed-owners-hard-line-of-2026-10-08)
@@ -244,6 +250,110 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-10-12 - Naha joins phase 2 (owner); its reader changes to shared code are Cleanup's, ahead of the build
+
+- **Decided by the owner in Cleanup's chat, 2026-10-12: "naha should
+  get built as part of phase 2".** Until then Naha had a brief and no
+  build session: Staging's relay the same day gave it as Band B, food
+  only (S30), mode `light_rail` (S33), region Kyushu-Okinawa with the
+  macro view's fit left to Cleanup (S35), and the brief
+  (`docs/build_briefs/naha.md` on `worktree-staging`, not pushed) said
+  a build waited for the owner's go. Those three answers were given in
+  Staging's chat and are recorded here as relayed.
+- **What follows.** Phase 2 becomes 31 cities and the expected count
+  after the landing 237, to be read from `app/cities.py` and not from
+  this entry. Which session builds it, and when, is Staging's plan and
+  the owner's go; three build sessions is still the ceiling.
+- **Shared code.** The brief (read on the branch, its section "Shared
+  code") lists five changes a build needs and measured each on the
+  unchanged readers: a reader or rows argument on
+  `japan_register.rebuilt_register`; unnamed header columns in
+  `xlsx_rows` (3,405 rows whose form column has no header); `NAME_COLS`
+  without 営業所名所 (86 rows); `TYPE_COLS` without 営業所種類 and
+  営業の種目 (84 in-term rows); `VARIANTS` without 壼 for 壺 (2 rows).
+  The sixth item is the city's own config. Shared code is Cleanup's
+  (S14), so these are written by Cleanup and go to master before the
+  build starts, with the Japan drift run showing no built city moved.
+- **Not measured by Cleanup:** every figure above is the brief's.
+
+### 2026-10-12 - Before the phase 2 landing: seven owner calls, and the landing handoff written
+
+- **Decided by the owner in Cleanup's chat, 2026-10-12 ("yes to all
+  seven, write the landing handoff"), on Cleanup's list of seven.** Two
+  of the seven were put as either-or questions, and the yes is read as
+  the recommendation given with each.
+  - Cluj-Napoca takes Bucharest's hold off public pieces: it publishes
+    on the site under notice 215 and stays off cards and shared pieces
+    until the owner rules on both cities, because both rest on silent
+    terms. Kansai-2's note "carries no hold" is superseded by this.
+  - The missing OpenStreetMap station-names line on Regional-1's eleven
+    pages (verified on master: the cities are in neither
+    `app/osm_notice.py` nor `_OSM_STATION_NAMES`) is fixed first inside
+    the landing, not as its own deploy (read from the recommendation).
+    The map's corner credit is in place on all eleven.
+  - Okazaki's Meitetsu Nagoya Main Line and Toyota's Mikawa Line share
+    their red under a `NEIGHBOUR_EXCEPTIONS` entry with a note (also S16
+    in Staging's chat).
+  - On phones the open legend is capped at about 40% of the map's height
+    with its own scroll, and the lines fold by operator past a measured
+    threshold; names stay whole. Raised by the owner: Tokyo's open
+    legend fills half the screen. Rejected: shortening the entries, which
+    hides a line's real public name.
+  - A Romanian name on two or more premises stays withheld; no brand
+    exception (read from the recommendation). The register holds one
+    name per entity, so it cannot tell a brand from an owner with two
+    shops.
+  - About the Data, with place search: "Search finds stations that are
+    open. A station OpenStreetMap still marks as planned or under
+    construction is not listed until it opens."
+  - The landing runs from a fresh Cleanup session:
+    `docs/handoff_cleanup_2026-10-12.md` gives the order.
+- **Also recorded.** Place search's watch file gained line names (23 of
+  29 rows, 17 of them from published pages, each source in its row) and a
+  check, `scripts/check_place_unopened.py`, on branch `place-search`
+  (07da7bda), at the owner's word; no served index or map changed. JR
+  Keiyo goes to `#C81000` (owner, in East-2's chat), its dark-mode label
+  check not yet run. **Open:** the Global View button on Seattle
+  (Regional)'s map does nothing on the owner's iPhone, reached from the
+  Overview dot, while Tokyo's works; a scripted click at 375 px on the
+  live site reached the Overview, so it is not reproduced.
+
+### 2026-10-11 - Bucharest shows 127 person-named companies by name: measured, repair approved for the phase 2 landing; place search's unopened stations an internal watch file (owner)
+
+- **Measured by Cleanup, read-only and counts only, after Kansai-2
+  flagged it from Cluj-Napoca's build:** Kansai-2's extended Romanian
+  name rule (`name_kind_extended()`, branch `worktree-japan-kansai-2`)
+  run over the 15,589 rows of Bucharest's cached `businesses_clean.csv`.
+  Of the 15,373 pins Bucharest's own test calls a company: **0** carry an
+  abbreviated sole-trader form, and **127 (93 distinct names, 9 of them
+  on two or more premises)** are a given name beside exactly one other
+  word that is no business word; all 127 are shown by name on the live
+  map. Bucharest's test found 6 such companies, because it needs a
+  typical Romanian surname ending. The rule was run on the displayed
+  name, not the raw register name, which could only undercount the
+  abbreviated forms. No name was printed or saved.
+- **Decided by the owner: apply the extension to Bucharest, with the
+  phase 2 landing**, so the 127 show their category, under his rule of
+  2026-09-28 and 2026-09-29 (a company named only for a person shows its
+  category). Cleanup recommended a separate landing now; the owner chose
+  the phase 2 landing, where the rule arrives with Cluj-Napoca. The
+  exception "a name on two or more premises is a brand" is not decided;
+  until it is, every such name is withheld. Also approved from Kansai-2:
+  Osaka's three lines take the registry's "Osaka Metro ..." names at its
+  held re-render; the drift checks for Suita, Osaka and Bucharest at the
+  landing; the move of Bucharest's address and name functions to a
+  shared module, scheduled by Cleanup for a review time after it.
+- **Place search batch 3's handoff (branch `place-search`, 28b1ecb8),
+  the owner's answers:** the `place-search-city` skill and the
+  `place-read` agent's brief are updated on the branch now, by the batch
+  3 session, Cleanup reviewing the diff; the stations search cannot find
+  because OpenStreetMap draws them as not yet open are kept as an
+  internal watch file, with no per-city page text; a general sentence
+  for About the Data is drafted in chat for the owner. Rejected: a list
+  on each city's page, which goes stale each time a line opens. Batch
+  3 measured São Paulo's index the largest, 3.2 times Seoul's, the
+  one for the owner's phone test before any rollout.
 
 ### 2026-10-11 - Analytics' requests: a private cross-city chart draft, baseline totals after phase 2, one sharing check folded into the audit (owner)
 
