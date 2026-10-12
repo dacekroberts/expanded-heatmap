@@ -858,6 +858,17 @@ BARE_TYPE_NAMES = {
     "ca": ("capella", "font", "parc", "església", "monument", "jardí", "jardins"),
     "es": ("capilla", "fuente", "parque", "iglesia", "monumento", "plaza", "jardín", "kiosco",
            "templo", "parroquia", "jardinera", "área verde", "juegos infantiles",
+           # The wider Mexico City area's read (owner, 2026-10-12): 46 rows in
+           # Ecatepec and Naucalpan, none in Barcelona. "catedral" (Ecatepec's
+           # cathedral under its type word) and "parque hundido" (a known
+           # park's own name in Ciudad de Mexico) are left out on purpose.
+           "área verde comunitaria", "circuito para bicicletas", "andador para bicicletas",
+           "arboleda", "arbolera", "jardín comunal", "corredor del camellon", "zona de juegos",
+           "cancha de football", "campo fut7", "parque deportivo", "parque canino",
+           "parque escolar", "parque de la iglesia", "parque de la glorieta",
+           "parque de la colonia", "parque del pueblo", "parque del mercado", "plaza civica",
+           "patio iglesia", "ciclopista", "centro religioso", "iglesia cristiana",
+           "templo adventista", "iglesia antigua", "estatua moderna", "reloj", "virgen monumental",
            # Mexico City's read (batch 3, 2026-10-11): street shrines, median
            # strips, courts and a housing unit's common areas, each mapped
            # with its description in the name field.

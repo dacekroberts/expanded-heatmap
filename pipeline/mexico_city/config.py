@@ -330,6 +330,22 @@ PLACE_REVIEWED = {
 # OSM objects a reading by eye found to be a business or a home that no rule
 # in place_index.py catches, each with why (place_index.build, `dropped`).
 PLACE_DROPPED = {
+    # The owner's calls on the wider area's rows (2026-10-12, "yes to all four"): the shrines, one quarter, one station.
+    "node/5446790098": "a street-corner shrine named for where it stands, not notable",
+    "node/5355453611": "a street-corner shrine named for where it stands, not notable",
+    "node/5355267123": "a street-corner shrine named for where it stands, not notable",
+    "node/5355263240": "a street-corner shrine named for where it stands, not notable",
+    "node/5391051564": "a street-corner shrine named for where it stands, not notable",
+    "node/5350125302": "a street-corner shrine named for where it stands, not notable",
+    "node/5350125301": "a street-corner shrine named for where it stands, not notable",
+    "node/5348411342": "a street-corner shrine named for where it stands, not notable",
+    "node/5328663321": "a street-corner shrine named for where it stands, not notable",
+    "way/1279544941": "a street-corner shrine named for where it stands, not notable",
+    "way/1281890912": "a street-corner shrine named for where it stands, not notable",
+    "way/1282652979": "a street-corner shrine named for where it stands, not notable",
+    "way/1296215374": "a street-corner shrine named for where it stands, not notable",
+    "node/13115201961": "a quarter node under the name of the famous park 10 km away, not confirmed as a colonia",
+    "node/11477212878": "a station with no operator, network or line, on no line the map draws",
     # From the read of the 1,240 rows the wider area added (the place-read agent, 2026-10-12): every id
     # printed its cached name first. Each under a settled call (the skill's "owner's calls").
     "way/558121084": "residents-only parks of a housing complex, by the mapper's own description",
