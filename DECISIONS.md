@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**79 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**80 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-12**
 
@@ -56,6 +56,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Before the phase 2 landing: seven owner calls, and the landing handoff written](#2026-10-12---before-the-phase-2-landing-seven-owner-calls-and-the-landing-handoff-written)
 - [The phase 2 landing: Bucharest's step 2 calls `name_kind_extended()`, so a company named as a given name beside one other word shows its category; no exception for a name on two or more premises (owner, 2026-10-12)](#2026-10-12---the-phase-2-landing-bucharests-step-2-calls-name_kind_extended-so-a-company-named-as-a-given-name-beside-one-other-word-shows-its-category-no-exception-for-a-name-on-two-or-more-premises-owner-2026-10-12)
 - [The search rollout's cheap path and the commercial-use audit's method (owner)](#2026-10-12---the-search-rollouts-cheap-path-and-the-commercial-use-audits-method-owner)
+- [The commercial-use audit: read, ruled and written (owner)](#2026-10-12---the-commercial-use-audit-read-ruled-and-written-owner)
 
 **2026-10-11**
 
@@ -4576,3 +4577,57 @@ japan-city template:
   count and the quote check (each marked TO BUILD in its skill). Rejected:
   a second search skill beside `place-search-city`, which already holds
   the recipe and the owner's calls.
+
+### 2026-10-12 - The commercial-use audit: read, ruled and written (owner)
+
+- **Decided by the owner, 2026-10-12, on Cleanup's verdict report, in two
+  rounds ("1. hold. 2. yes, 3 yes"; then twelve numbered answers).** A
+  reading of licence terms and of this project's record, not legal advice;
+  for transit-globe's decisions only. Nothing here changes what this site
+  publishes.
+  - **What was read.** 383 script-counted sources and 105 counted by hand
+    for the 34 cities with no usable provenance, joined to the recorded
+    licence by five agents, then one verdict per licence position by six
+    agents (211 positions after merging the shared ones), with ten
+    single-source reads by the `licence-read` agent. The agents fetched
+    publishers' own terms pages only, on the owner's word ("2 yes fetch").
+    The cheaper model's first pass over the stored texts, as the skill
+    describes it, was not used: the agents read the record and the pages.
+  - **The result.** 237 cities: 153 allowed, 45 allowed if one layer is
+    left out or replaced, 37 held, 2 blacklisted (Philadelphia, Seattle
+    (Regional)). `docs/commercial_use_positions.md` holds the source table
+    and the city table; `docs/commercial_use_reads_2026-10-12.md` the quoted
+    sentences, reasons and what could not be read.
+  - **The owner's rulings.** Held: MHLW's food list, Tokyo's Tama ledgers
+    ("held and state"), Daegu's own datasets (national route noted),
+    IBGE's address file, the Paris timetable feed, the cadastre's addresses
+    for Palma, and the ten cities whose only register is silent or not
+    established. Blacklisted: Philadelphia. Permitted with condition: the
+    French boundary API under the stricter ODbL, Busan, SEMAS, Geneva's
+    register (no resale), Palma's Balearic register, Hong Kong with the
+    uncapped indemnity stated prominently. Permitted and flagged: New York
+    City's three datasets and the US Census files, whose sentences never
+    name commercial use. Brussels (Regional): allowed only under the app's
+    own KBO registration.
+  - **The owner's rider on Hong Kong**: "if this forces users to sitewide
+    accept an indemnity for a city they don't care about, hold instead." As
+    read, the indemnity binds the party that reproduces the data (the app's
+    operator, once), not the app's users, so the row is recorded permitted
+    with the rider beside it.
+  - **Cleanup's calls inside the merge (interpretation, for the owner to
+    overturn).** Seattle (Regional) is in the blacklisted column by the
+    weakest-source rule, two of its layers forbidding commercial use and
+    the rest held; the report had listed it as held. The eight cities on
+    the Tama ledgers are held outright, the ledgers and MHLW being their
+    only registers. Two passes disagreed on Saitama's 生活衛生 page; the
+    weaker reading (not established) stands for Sōka, Tokorozawa, Ageo
+    (Regional) and Kasukabe, each allowed without that list. Rows not ruled
+    one by one stand as read.
+  - **The city table is derived**, never written by hand:
+    `scripts/commercial_use_cities.py` rebuilds it from the source table and
+    fails on a city missing, a name not in `app/cities.py`, or a stale
+    table. It is not in `check_all.py`.
+  - Record corrections the reads found are listed in the positions file and
+    in `docs/data_sources.md`; two rows of `docs/data_sources/japan.md`
+    carry a dated re-read note. Still owed: the public-sharing question for
+    analytics and visuals pieces, which waits on Analytics' list of pieces.

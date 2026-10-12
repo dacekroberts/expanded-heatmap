@@ -47,7 +47,12 @@ Detail files: [japan](docs/plan_detail/japan.md),
     code, and the handoff is a full build-and-decisions account for it to
     critique, with every pilot-only choice named (owner, 2026-10-07 and
     2026-10-08). A draft for the owner to read before it goes over.
-  - [ ] **The commercial-use audit, after the batch lands:**
+  - [ ] **The commercial-use audit, after the batch lands:** READ, RULED
+    AND WRITTEN 2026-10-12 (153 allowed, 45 allowed if a layer is left out,
+    37 held, 2 blacklisted; `DECISIONS.md`, "The commercial-use audit: read,
+    ruled and written"). Still open: the public-sharing answer below, which
+    waits on Analytics' list of pieces, and the stale pointers listed in
+    `docs/data_sources.md`.
     `docs/commercial_use_positions.md`, for transit-globe's decisions only
     (this site stays non-commercial). One row per city, layer and source;
     the weakest source in use decides the city's column (allowed,
