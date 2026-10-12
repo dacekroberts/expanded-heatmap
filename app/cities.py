@@ -6729,7 +6729,7 @@ REGION_ZOOM_WITHOUT = {"Europe West": ("Stockholm",),
 # its row in the list beneath the map and its place in the caption's count stay.
 # REGION_ZOOM_WITHOUT does not serve where the outlier is far off: the centre
 # would still take it and the rest of the region would leave the canvas.
-# Naha (owner, call S41, 2026-10-12; TEMPORARY): 7.7 degrees of latitude south
+# Naha (owner, call S41, 2026-10-12): 7.7 degrees of latitude south
 # of Kagoshima. Fitted to it, Kyushu-Okinawa's zoom fell to 4.6748, Kitakyushu's
 # and Shimonoseki's dots sat 3.3 px apart and Sasebo and Ōita found no room for
 # a label. Held out, the view is the one Kyushu's own cities fit and Naha lies
@@ -6740,7 +6740,8 @@ REGION_FIT_WITHOUT = {"Kyushu-Okinawa": ("Naha",)}
 # What the view's caption says about a city held out of its frame, after its
 # count: the city is one of the cities counted and cannot be seen without
 # panning. Wording chosen by the owner (2026-10-12, of three drafts).
-# TEMPORARY with REGION_FIT_WITHOUT; the owner has not said what ends it.
+# The open item of call S41 is closed by this sentence (owner, 2026-10-12: the
+# wording was the fix asked for); the frame hold stays.
 REGION_FIT_NOTE = {"Kyushu-Okinawa": "Naha is south of this view; pan down to see it."}
 
 # A REGION'S ZOOM SET OUTRIGHT, after the fit (owner, 2026-09-30): France North

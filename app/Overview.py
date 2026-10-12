@@ -591,7 +591,7 @@ _zoom_set = [c for c in _here if c["name"] not in _skip] or _here
 # function scripts/check_macro_labels.py frames its views from, so the check
 # scores the view opened here. It also drops a city held out of the frame
 # altogether, zoom and centre (cities.REGION_FIT_WITHOUT: Naha in
-# Kyushu-Okinawa, owner's call S41, 2026-10-12, temporary), which the re-centre
+# Kyushu-Okinawa, owner's call S41, 2026-10-12), which the re-centre
 # below then leaves out as well. Read with getattr for the reason given at
 # REGION_ZOOM below: under a stale cities.py the lines above stand.
 # The caption under the map says so (cities.REGION_FIT_NOTE, read by
