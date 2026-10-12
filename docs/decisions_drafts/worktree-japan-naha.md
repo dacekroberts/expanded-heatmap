@@ -61,17 +61,20 @@ Named by city and letter; Staging assigns the S numbers when it relays them.
   form naming the three datasets, with the three package links and "rebuilt
   the city's food permits from its monthly lists of new and renewed permits,
   kept those still in term at the end of August 2026".
-- **Naha E: the line's name and the station names (precedent applied; say if
-  another reading is wanted).** The line is labeled "Yui Rail" (ゆいレール),
-  the name the operator signs in both languages, not N02's 沖縄都市モノレール線;
-  the registry entry is `okinawa-urban-monorail`, operator "Okinawa Urban
-  Monorail". Four station names OSM translates are romanised in Hiroshima's
-  style, on Itami's and Matsuyama's precedent: Naha-kuko (OSM "Naha
-  Airport"), Onoyama-koen ("Onoyama Park"), Kencho-mae ("Prefectural
-  Office"), Shiritsu-byoin-mae ("Naha City Hospital"). The operator's own
-  English reads Naha Airport, Kenchomae and Shiritsubyouin-mae. Tradeoff: a
-  visitor knows "Naha Airport"; the romanised form matches every other
-  Japanese map on the site.
+- **Naha E: ANSWERED by the owner, 2026-10-12 ("operator's english for E").**
+  The station names are the operator's own English. Read from the operator's
+  English site (www.yui-rail.co.jp/en/, the timetable menu's text): Naha
+  Airport, Akamine, Oroku, Onoyama Park, Tsubogawa, Asahibashi, Prefectural
+  Office, Miebashi, Makishi, Asato, Omoromachi, Furujima, Naha City Hospital,
+  Gibo, Shuri, Ishimine. OSM's `name:en` is the same on all 16, so the four
+  romanised overrides (Naha-kuko, Onoyama-koen, Kencho-mae,
+  Shiritsu-byoin-mae) were removed and `OSM_NAME_EN_OVERRIDES` is empty.
+  **A correction to this call as first put**: it gave the operator's English
+  as "Kenchomae" and "Shiritsubyouin-mae", which were the site's URL slugs,
+  not its printed names. The line stays "Yui Rail", the operator's own name
+  for it. This is a departure from Hiroshima's romanised style, made by the
+  owner for this city; whether Itami's Osaka-kuko and the like follow is not
+  decided here.
 
 ## Entries
 
@@ -122,7 +125,7 @@ Named by city and letter; Staging assigns the S numbers when it relays them.
   written to `excluded_stations.csv` under 浦添市. **Gate 3**: the operator's
   home page (www.yui-rail.co.jp, 駅情報) lists 19 stations, the same names in
   N02's order. OSM `name:en`: one Overpass query (the first attempt met 504s
-  on both mirrors; retried after more than 60 s), 20 objects, 4 overrides.
+  on both mirrors; retried after more than 60 s), 20 objects, no override (call E).
   Frequency: not re-read; the operator's timetable page is not named in the
   brief, so the master list's read (every 7 to 9 minutes) stands.
 - **Colour.** `line_colour_search.py naha`: #E84028 from the red of the

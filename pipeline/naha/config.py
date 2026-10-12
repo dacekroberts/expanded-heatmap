@@ -252,17 +252,12 @@ OSM_NAME_MATCH_M = 600
 OSM_NAME_ALIASES = {}
 OSM_NAME_EN_TIES = {}
 OSM_NAME_EN_MISSING = {}
-# Cited overrides of OSM's name:en ({ja: en}, the OSM spelling replaced in a
-# comment), in Hiroshima's style (2026-09-30): no macrons, 前 as -mae, a
-# romanised name rather than a translation (Itami's Osaka-kuko, Matsuyama's
-# Kencho-mae and Sekijuji-byoin-mae). OSM translates four of the 16
-# (osm_station_names.json, 2026-10-12); the other 12 are OSM's as they stand.
-OSM_NAME_EN_OVERRIDES = {
-    "那覇空港": "Naha-kuko",                         # Naha Airport
-    "奥武山公園": "Onoyama-koen",                    # Onoyama Park
-    "県庁前": "Kencho-mae",                          # Prefectural Office
-    "市立病院前": "Shiritsu-byoin-mae",              # Naha City Hospital
-}
+# No override: the owner chose the operator's own English (2026-10-12), and
+# OSM's name:en for all 16 stations is the operator's, word for word
+# (www.yui-rail.co.jp/en/, read 2026-10-12: Naha Airport, Onoyama Park,
+# Prefectural Office, Naha City Hospital and twelve romanised names). This
+# departs from Hiroshima's romanised style (Itami's Osaka-kuko) on purpose.
+OSM_NAME_EN_OVERRIDES = {}
 
 # --- Coordinate reference systems -----------------------------------------
 
