@@ -19,6 +19,7 @@ import geopandas as gpd
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline import place_index  # noqa: E402
 from pipeline.map_common import load_line_shapes, render_heatmap  # noqa: E402
 from pipeline.boston.config import (  # noqa: E402
     BOUNDARY_TOWN_FIELD,
@@ -90,6 +91,7 @@ def main():
         # rail plus a thinned Green Line, so they are well enough separated to
         # read individually - which is the point of having thinned the Green
         # Line rather than reaching for New York's rings-off lever.
+        place_index_url=place_index.index_url("boston"),
     )
 
 

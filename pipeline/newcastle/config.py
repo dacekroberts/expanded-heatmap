@@ -154,3 +154,13 @@ NEWCASTLE_BBOX = {
     "lon_min": -1.88,
     "lon_max": -1.32,
 }
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-12) ---
+
+PLACE_AREA = "(id:3600116279,3600140390,3600140462,3600142245,3600142282)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
+PLACE_LANGUAGES = ("en",)
+PLACE_FOLD = None
+PLACE_REVIEWED = {}
+PLACE_DROPPED = {}

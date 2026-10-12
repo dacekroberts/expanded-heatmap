@@ -87,7 +87,7 @@ st.markdown(
 """
 )
 
-render_map_help('business layer')
+render_map_help('business layer', search='ottawa')
 render_excluded_stations("Ottawa")
 render_country_links('Ottawa')
 

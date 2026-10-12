@@ -154,3 +154,13 @@ BUSINESS_BBOX = {"lat_min": 55.8, "lat_max": 56.02, "lon_min": -3.48, "lon_max":
 # (hues), LINE_COLOURS, OPERATOR_STATION_COUNTS, OPERATOR_COUNTS_SOURCE,
 # SPACING_MIN_M, MEDIAN_GAP_BOUNDS_M, NAPTAN_EXPLAINED, the ring edges.
 # ===========================================================================
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-12) ---
+
+PLACE_AREA = "(id:3601920901)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
+PLACE_LANGUAGES = ("en",)
+PLACE_FOLD = None
+PLACE_REVIEWED = {}
+PLACE_DROPPED = {}

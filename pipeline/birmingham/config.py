@@ -184,3 +184,13 @@ RAW_CLASSIFICATION_COLUMN = "BusinessType"
 # Sanity bounds: the scope's extent plus a margin. The polygon does the
 # filtering; this catches a CRS or axis error.
 BUSINESS_BBOX = {"lat_min": 52.36, "lat_max": 52.66, "lon_min": -2.23, "lon_max": -1.7}
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-12) ---
+
+PLACE_AREA = "(id:3600162378,3600162485,3600173722)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
+PLACE_LANGUAGES = ("en",)
+PLACE_FOLD = None
+PLACE_REVIEWED = {}
+PLACE_DROPPED = {}

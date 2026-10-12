@@ -94,7 +94,7 @@ st.markdown(
 """
 )
 
-render_map_help('two business categories (“Food shops, tire and precious-metal dealers” and Food service)')
+render_map_help('two business categories (“Food shops, tire and precious-metal dealers” and Food service)', search='philadelphia')
 render_excluded_stations("Philadelphia")
 render_country_links('Philadelphia')
 

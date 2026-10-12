@@ -301,3 +301,13 @@ PARCEL_RESIDENTIAL = frozenset({"Single Family Residential"})
 # Nearest-parcel tolerance for the spatial join. At 40 m the match rate is
 # 93.4% with a median distance of 1.4 m.
 PARCEL_TOLERANCE_M = 40.0
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-12) ---
+
+PLACE_AREA = "(id:3600111968)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
+PLACE_LANGUAGES = ("en",)
+PLACE_FOLD = None
+PLACE_REVIEWED = {}
+PLACE_DROPPED = {}

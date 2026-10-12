@@ -93,7 +93,7 @@ Rail alignment data from WMATA's Metrorail GTFS feed.
 """
 )
 
-render_map_help('three business categories (Retail, Food service and Personal services)')
+render_map_help('three business categories (Retail, Food service and Personal services)', search='washington_dc')
 render_excluded_stations("Washington D.C.")
 render_country_links('Washington D.C.')
 

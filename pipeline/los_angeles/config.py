@@ -254,3 +254,13 @@ LONG_BEACH_FIELDS = ("OBJECTID", "LICENSENO", "LICCATDESC", "CLASSDESC", "LICSTA
 LONG_BEACH_FORBIDDEN = ("FULLNAME",)
 LONG_BEACH_CSV = DATA_RAW / "long_beach_business_licenses.csv"
 LONG_BEACH_BOUNDARY_NAME = "LONG BEACH"
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-12) ---
+
+PLACE_AREA = "(id:3600112100,3600207359)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
+PLACE_LANGUAGES = ("en",)
+PLACE_FOLD = None
+PLACE_REVIEWED = {}
+PLACE_DROPPED = {}

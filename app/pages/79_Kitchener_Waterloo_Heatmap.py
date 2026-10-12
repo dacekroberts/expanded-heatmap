@@ -98,7 +98,7 @@ st.markdown(
 """
 )
 
-render_map_help('three business layers (Restaurants and bars, Food shops and Personal services)')
+render_map_help('three business layers (Restaurants and bars, Food shops and Personal services)', search='kitchener_waterloo')
 render_excluded_stations("Kitchener–Waterloo (Regional)")
 render_country_links('Kitchener–Waterloo (Regional)')
 

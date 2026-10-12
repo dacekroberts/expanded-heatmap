@@ -24,6 +24,7 @@ import geopandas as gpd
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline import place_index  # noqa: E402
 from pipeline.map_common import load_line_shapes, render_heatmap  # noqa: E402
 from pipeline.washington_dc.config import (  # noqa: E402
     BUSINESSES_GEOCODED_CSV,
@@ -89,6 +90,7 @@ def main():
         ring_edges_meters=RING_EDGES_METERS,
         ring_labels=RING_LABELS,
         label_focus=district_boundary(),
+        place_index_url=place_index.index_url("washington_dc"),
     )
 
 

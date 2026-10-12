@@ -172,3 +172,13 @@ METERS_PER_MILE = 1609.344
 RING_EDGES_MILES = [0.0, 0.05, 0.1, 0.2, 0.3]
 RING_EDGES_METERS = [m * METERS_PER_MILE for m in RING_EDGES_MILES]
 RING_LABELS = ["0-0.05 mi", "0.05-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi"]
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-12) ---
+
+PLACE_AREA = "(id:3600077311,3600123292,3600154043,3600154058)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
+PLACE_LANGUAGES = ("en",)
+PLACE_FOLD = None
+PLACE_REVIEWED = {}
+PLACE_DROPPED = {}

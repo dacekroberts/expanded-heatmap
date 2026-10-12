@@ -101,7 +101,7 @@ st.markdown(
 """
 )
 
-render_map_help('business categories (Food service and Food shops)')
+render_map_help('business categories (Food service and Food shops)', search='edinburgh')
 render_excluded_stations("Edinburgh")
 render_country_links("Edinburgh")
 

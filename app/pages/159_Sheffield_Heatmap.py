@@ -104,7 +104,7 @@ st.markdown(
 """
 )
 
-render_map_help('business categories (Food service and Food shops)')
+render_map_help('business categories (Food service and Food shops)', search='sheffield')
 render_excluded_stations("Sheffield")
 render_country_links("Sheffield")
 

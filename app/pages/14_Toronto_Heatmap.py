@@ -84,7 +84,7 @@ st.markdown(
 """
 )
 
-render_map_help('three business categories (Food service, Personal services and “Vape, secondhand, precious-metal, pawn shops”)')
+render_map_help('three business categories (Food service, Personal services and “Vape, secondhand, precious-metal, pawn shops”)', search='toronto')
 render_excluded_stations("Toronto")
 render_country_links('Toronto')
 

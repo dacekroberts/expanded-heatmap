@@ -94,7 +94,7 @@ st.markdown(
 """
 )
 
-render_map_help("three business categories (Retail, Food service and Personal services)")
+render_map_help("three business categories (Retail, Food service and Personal services)", search='tacoma')
 render_excluded_stations("Tacoma")
 render_country_links("Tacoma")
 

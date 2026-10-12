@@ -22,6 +22,7 @@ import geopandas as gpd
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline import place_index  # noqa: E402
 from pipeline.buffalo.config import (  # noqa: E402
     BUSINESSES_CLEAN_CSV,
     CITY_BOUNDARY_GEOJSON,
@@ -71,6 +72,7 @@ def main():
         ring_edges_meters=RING_EDGES_METERS,
         ring_labels=RING_LABELS,
         label_focus=city,
+        place_index_url=place_index.index_url("buffalo"),
     )
 
 

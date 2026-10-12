@@ -66,7 +66,7 @@ st.markdown(
 """
 )
 
-render_map_help('three business categories (Retail, Food service and Personal services)')
+render_map_help('three business categories (Retail, Food service and Personal services)', search='los_angeles')
 render_excluded_stations("Los Angeles (Regional)")
 render_country_links('Los Angeles (Regional)')
 
