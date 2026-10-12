@@ -166,7 +166,7 @@ LINES = {
            "hue": "#12A500"},
     "OH": {"n02": [(_JR, "おおさか東線")], "name": "JR Osaka Higashi Line", "name_ja": "おおさか東線", "short": "JR",
            "hue": "#A088A0"},
-    "T": {"n02": [(_OM, "2号線(谷町線)")], "name": "Osaka Metro Tanimachi Line", "name_ja": "谷町線",
+    "T": {"n02": [(_OM, "2号線(谷町線)")], "name": "Tanimachi Line", "name_ja": "谷町線",
           "short": "Osaka Metro", "hue": "#933CA5"},
 }
 # Colours: four of the five lines are drawn on another city's map too, so each

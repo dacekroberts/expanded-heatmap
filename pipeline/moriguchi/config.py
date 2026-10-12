@@ -209,9 +209,9 @@ _KH, _OM = "京阪電気鉄道", "大阪市高速電気軌道"
 LINES = {
     "KM": {"n02": [(_KH, "京阪本線")], "name": "Keihan Main Line", "name_ja": "京阪本線", "short": "Keihan",
            "hue": "#7B7B5A"},
-    "T": {"n02": [(_OM, "2号線(谷町線)")], "name": "Osaka Metro Tanimachi Line", "name_ja": "谷町線",
+    "T": {"n02": [(_OM, "2号線(谷町線)")], "name": "Tanimachi Line", "name_ja": "谷町線",
           "short": "Osaka Metro", "hue": "#933CA5"},
-    "I": {"n02": [(_OM, "8号線(今里筋線)")], "name": "Osaka Metro Imazatosuji Line", "name_ja": "今里筋線",
+    "I": {"n02": [(_OM, "8号線(今里筋線)")], "name": "Imazatosuji Line", "name_ja": "今里筋線",
           "short": "Osaka Metro", "hue": "#E77512"},
 }
 # Colours: every line here is drawn on another city's map too, so each takes

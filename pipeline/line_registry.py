@@ -414,15 +414,15 @@ REGISTRY = {
     # the project's colours osaka already drew (registered 2026-10-11, when Moriguchi's, Kadoma's and Yao's
     # maps became the second to draw each).
     "osaka-metro-tanimachi-line": {
-        "name": "Osaka Metro Tanimachi Line", "operator": "Osaka Metro", "colour": "#933CA5",
+        "name": "Tanimachi Line", "operator": "Osaka Metro", "colour": "#933CA5",
         "maps": {"moriguchi": "T", "osaka": "T", "yao": "T"},
     },
     "osaka-metro-imazatosuji-line": {
-        "name": "Osaka Metro Imazatosuji Line", "operator": "Osaka Metro", "colour": "#E77512",
+        "name": "Imazatosuji Line", "operator": "Osaka Metro", "colour": "#E77512",
         "maps": {"moriguchi": "I", "osaka": "I"},
     },
     "osaka-metro-nagahori-tsurumi-ryokuchi-line": {
-        "name": "Osaka Metro Nagahori Tsurumi-ryokuchi Line", "operator": "Osaka Metro", "colour": "#7CA014",
+        "name": "Nagahori Tsurumi-ryokuchi Line", "operator": "Osaka Metro", "colour": "#7CA014",
         "maps": {"kadoma": "N", "osaka": "N"},
     },
     # Osaka Monorail's own line colour; pins >= 81.9, lines >= 37.6, lines beside it >= 37.6.
