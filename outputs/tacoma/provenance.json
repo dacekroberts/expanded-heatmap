@@ -1,8 +1,49 @@
 {
-  "written_utc": "2026-10-04T07:29:48+00:00",
+  "boundary": {
+    "query": {
+      "f": "geojson",
+      "outFields": "GEOID,NAME,AREALAND,AREAWATER",
+      "outSR": "4326",
+      "where": "GEOID='5370000'"
+    },
+    "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/Places_CouSub_ConCity_SubMCD/MapServer/4/query"
+  },
+  "files_utc": {
+    "business_licenses.csv": "2026-10-04T07:29:39+00:00",
+    "city_boundary_tiger.geojson": "2026-10-04T07:29:40+00:00",
+    "osm_rail.json": "2026-10-04T07:29:48+00:00"
+  },
+  "osm_bbox": [
+    47.22,
+    -122.48,
+    47.28,
+    -122.41
+  ],
+  "osm_host": "overpass-api.de",
+  "osm_places": {
+    "bytes": 5294259,
+    "elements": 48346,
+    "file": "osm_places_2026-10-12.json",
+    "host": "overpass-api.de",
+    "how": "fetched",
+    "osm_base": "2026-10-12T21:54:06Z",
+    "query": "[out:json][timeout:170];\narea(id:3608348295)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-12T21:56:09+00:00",
+    "sha256": "02e2f7bdb6223677697d60734c856a2b230ea352de33bc04add54b4a4f74e7cc"
+  },
+  "osm_places_extra": {
+    "bytes": 25066,
+    "elements": 90,
+    "file": "osm_places_extra_2026-10-12.json",
+    "host": "overpass-api.de",
+    "how": "fetched",
+    "osm_base": "2026-10-12T21:55:06Z",
+    "query": "[out:json][timeout:170];\narea(id:3608348295)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-12T21:56:15+00:00",
+    "sha256": "5e7ff65afe46530d62fd01d7e9bb1fe47e741d85e630a8ff23eac3f49a031c4d"
+  },
   "register": {
-    "url": "https://services3.arcgis.com/SCwJH1pD8WSn5T5y/arcgis/rest/services/BusinessLicenses_Map/FeatureServer/0",
-    "item": "2fa3b14b4de44c16b44893fee2cadefd",
+    "data_last_edit": "2026-10-02",
     "fields": [
       "objectid",
       "license_number",
@@ -21,29 +62,10 @@
       "x",
       "y"
     ],
-    "name": "Tacoma Business Licenses",
+    "item": "2fa3b14b4de44c16b44893fee2cadefd",
     "max_record_count": 1000,
-    "data_last_edit": "2026-10-02"
+    "name": "Tacoma Business Licenses",
+    "url": "https://services3.arcgis.com/SCwJH1pD8WSn5T5y/arcgis/rest/services/BusinessLicenses_Map/FeatureServer/0"
   },
-  "boundary": {
-    "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/Places_CouSub_ConCity_SubMCD/MapServer/4/query",
-    "query": {
-      "where": "GEOID='5370000'",
-      "outFields": "GEOID,NAME,AREALAND,AREAWATER",
-      "outSR": "4326",
-      "f": "geojson"
-    }
-  },
-  "osm_host": "overpass-api.de",
-  "osm_bbox": [
-    47.22,
-    -122.48,
-    47.28,
-    -122.41
-  ],
-  "files_utc": {
-    "business_licenses.csv": "2026-10-04T07:29:39+00:00",
-    "city_boundary_tiger.geojson": "2026-10-04T07:29:40+00:00",
-    "osm_rail.json": "2026-10-04T07:29:48+00:00"
-  }
+  "written_utc": "2026-10-04T07:29:48+00:00"
 }

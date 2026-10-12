@@ -1,8 +1,48 @@
 {
-  "written_utc": "2026-10-01T01:19:55+00:00",
+  "boundary": {
+    "query": {
+      "f": "geojson",
+      "outFields": "GEOID,NAME,AREALAND,AREAWATER",
+      "outSR": "4326",
+      "where": "GEOID='0477000'"
+    },
+    "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/Places_CouSub_ConCity_SubMCD/MapServer/4/query"
+  },
+  "files_utc": {
+    "buslic_active.csv": "2026-10-01T01:15:47+00:00",
+    "city_boundary_tiger.geojson": "2026-10-01T01:15:48+00:00",
+    "osm_rail.json": "2026-10-01T01:19:55+00:00"
+  },
+  "osm_bbox": [
+    32.2,
+    -110.99,
+    32.25,
+    -110.93
+  ],
+  "osm_host": "overpass-api.de",
+  "osm_places": {
+    "bytes": 16427301,
+    "elements": 154562,
+    "file": "osm_places_2026-10-12.json",
+    "host": "overpass-api.de",
+    "how": "fetched",
+    "osm_base": "2026-10-12T21:55:06Z",
+    "query": "[out:json][timeout:170];\narea(id:3600253824)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-12T21:57:56+00:00",
+    "sha256": "bc3fdc278dd3b41275212ba2a8c5b86c354f0ef2385cb171eb198081aa852d65"
+  },
+  "osm_places_extra": {
+    "bytes": 29319,
+    "elements": 114,
+    "file": "osm_places_extra_2026-10-12.json",
+    "host": "overpass-api.de",
+    "how": "fetched",
+    "osm_base": "2026-10-12T21:56:04Z",
+    "query": "[out:json][timeout:170];\narea(id:3600253824)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-12T21:59:06+00:00",
+    "sha256": "c22a4045a401313ca0de6b27e88502510517e83eb9e8c2b6e9a07475c609fbdc"
+  },
   "register": {
-    "layer": "https://gis.tucsonaz.gov/arcgis/rest/services/PublicMaps/OpenData_EconomicDevelopment/MapServer/3",
-    "where": "LIC_STATUS = 'Active' AND HOME_OCCUPATION = 'F'",
     "fields": [
       "OBJECTID",
       "ACC_NUM",
@@ -18,27 +58,9 @@
       "APT",
       "CITY",
       "ZIP_CODE"
-    ]
+    ],
+    "layer": "https://gis.tucsonaz.gov/arcgis/rest/services/PublicMaps/OpenData_EconomicDevelopment/MapServer/3",
+    "where": "LIC_STATUS = 'Active' AND HOME_OCCUPATION = 'F'"
   },
-  "boundary": {
-    "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/Places_CouSub_ConCity_SubMCD/MapServer/4/query",
-    "query": {
-      "where": "GEOID='0477000'",
-      "outFields": "GEOID,NAME,AREALAND,AREAWATER",
-      "outSR": "4326",
-      "f": "geojson"
-    }
-  },
-  "osm_host": "overpass-api.de",
-  "osm_bbox": [
-    32.2,
-    -110.99,
-    32.25,
-    -110.93
-  ],
-  "files_utc": {
-    "buslic_active.csv": "2026-10-01T01:15:47+00:00",
-    "city_boundary_tiger.geojson": "2026-10-01T01:15:48+00:00",
-    "osm_rail.json": "2026-10-01T01:19:55+00:00"
-  }
+  "written_utc": "2026-10-01T01:19:55+00:00"
 }
