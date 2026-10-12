@@ -1028,5 +1028,60 @@
   "in_ring": 2303,
   "all": 4609,
   "map_blob": "c5b62a592b1c22d0a54af078c37c356f8f8dfe2d"
+ },
+ "shizuoka": {
+  "in_ring": 1216,
+  "all": 2752,
+  "map_blob": "ca7a91a957f2e842fd4b9569d9d36a0a18d0ba53"
+ },
+ "kanazawa": {
+  "in_ring": 2837,
+  "all": 7388,
+  "map_blob": "ce2aa76e4476137bb24f665741b915463af21614"
+ },
+ "okazaki": {
+  "in_ring": 1825,
+  "all": 3614,
+  "map_blob": "2149724654d39aae6de5dda25956b1a71adc1e64"
+ },
+ "aomori": {
+  "in_ring": 1231,
+  "all": 3528,
+  "map_blob": "553373138d9cca3a3bb8bac173e4df5a04cd8de9"
+ },
+ "matsue": {
+  "in_ring": 299,
+  "all": 919,
+  "map_blob": "9a4afc0d9a38f6c1dad60ad17116d9848f069ec7"
+ },
+ "fuji": {
+  "in_ring": 412,
+  "all": 831,
+  "map_blob": "e12ee487d740ba35452ebd100134e390ae6206b3"
+ },
+ "matsumoto": {
+  "in_ring": 456,
+  "all": 975,
+  "map_blob": "be91b3a0c42c4953ab8f80a881f2cd19e97b81c9"
+ },
+ "tottori": {
+  "in_ring": 1131,
+  "all": 2240,
+  "map_blob": "63d6abbf2dcc7a2ee7924d698b634e289c15d12f"
+ },
+ "yamagata": {
+  "in_ring": 1114,
+  "all": 3280,
+  "map_blob": "447be5dcdf907a8d1e6e10c331e5e63fd1e956ec"
+ },
+ "kure": {
+  "in_ring": 935,
+  "all": 1595,
+  "map_blob": "64dc2df7e5c900ae114640ac203c96c7d27d19fe"
+ },
+ "kurashiki": {
+  "in_ring": 2610,
+  "all": 4904,
+  "map_blob": "ea8d19b8c61bb70116dcdf55ffe76ec132742830"
  }
 }
