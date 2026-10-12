@@ -1,8 +1,27 @@
 # Global city master list — CURRENT STATE
 
-**This is the operative list: which cities this project could build next, and
-what is stopping each one.** It is rewritten as things change, like
-`docs/project_context.md` and unlike `DECISIONS.md`.
+**Final as of 2026-10-12.** Phase 2, the last build wave, landed on master
+that day: 237 cities are built in 27 countries, and no candidate city is left
+in Bands A to D. City building is finished (owner), so this is a record now,
+not a work list.
+
+**What this document is:** the record of every city the project built, every
+city it found restricted (Band R), the cities left in the open screening gap,
+and every city it discarded, each with the evidence for where it sits. The
+bands that held candidates are kept as empty headings, with dated notes saying
+where their cities went.
+
+**What would reopen it:**
+
+- a hold lifting (the countries held under "Countries ruled out", and Petah
+  Tikva on the watch items);
+- a publisher answering a request, or a block lifting, for a Band R or
+  open-gap row (each row names what would settle it);
+- a commuter-rail overhaul, which is what the commuter-rail revisit group
+  waits on;
+- a new line opening (the watch items);
+- the dated re-checks in [`docs/recheck_calendar.md`](recheck_calendar.md),
+  the global re-probe calendared for about 2027-10 among them.
 
 **The evidence lives in [`docs/global_country_shortlist.md`](global_country_shortlist.md)**
 (87 countries screened, every probe logged) and
@@ -12,22 +31,23 @@ trail wins when they disagree. **How the list reached its state** is in
 
 **Rebuilt fresh 2026-10-01 (owner).** The review of 2026-09-30 built every
 candidate the earlier screens had passed, leaving Bands A, B, C, D and T
-empty. This list starts again from the screens run after it (staging,
+empty. The list was started again from the screens run after it (staging,
 2026-10-01): the Seattle regional screen, the UK tram cities, Japan's tram
 and designated cities, the countries once ruled out on "no urban rail", the
 cities a country pattern had kept unscreened, and the portals that had
-refused scripts. **Band R and the discards are carried over unchanged**
+refused scripts. **Band R and the discards were carried over unchanged**
 (owner), each with its new rows dated. The list as it stood before the
 rebuild, with every dated move since 2026-09-22, is archived at
 [`docs/city_master_list_2026-09-30.md`](city_master_list_2026-09-30.md).
 
-**Band T is retired.** Trams-only maps were approved on 2026-09-29, so a tram
-city now sits in the band of its next blocker. `docs/tram_city_list.md` is
-kept as the record of the T tiers and the light-rail test.
+**Band T is retired.** Trams-only maps were approved on 2026-09-29, so from
+then on a tram city sat in the band of its next blocker.
+`docs/tram_city_list.md` is kept as the record of the T tiers and the
+light-rail test.
 
 ---
 
-> ## Current state — 2026-10-03
+> ## Final state — 2026-10-12
 >
 > | | |
 > |---|---|
@@ -145,13 +165,15 @@ the City Council to be informed of every derived project.
 
 ## Candidates — 0
 
-Banded by **first blocker** (the owner's rule, "Five rules" below): access
-(D, R), then buckets. A city is in one band only.
+Cities were banded by **first blocker** (the owner's rule, "Five rules"
+below): access (D, R), then buckets, one band a city. **Every candidate band
+is empty as of 2026-10-12**: each city that sat in one was built, moved to
+Band R or discarded, and the notes under each heading say which.
 
 | Band | What these cities ARE | Cities |
 |---|---|---|
 | 🟢 **A** | **Ready to build.** A current list, an open licence, coordinates answered, rail answered; what remains is answerable inside the build | **0** |
-| 🔵 **B** | **Narrower pages.** Pass the reduced-bucket bar as measured: one full bucket, or all three with a measured gap; the page says what is missing. The owner's yes to each is pending | **0** |
+| 🔵 **B** | **Narrower pages.** Pass the reduced-bucket bar as measured: one full bucket, or all three with a measured gap; the page says what is missing. Empty since 2026-10-12, every city in it built | **0** |
 | 🟣 **C** | **Closer to a page.** One measurement or one owner call stands between the city and A or B; each row names it | **0** |
 | 🔴 **D** | **Blocked, but the owner can act alone.** A download approval, a CAPTCHA or a free account; each row names the act | **0** |
 | 🟤 **T** | **Retired 2026-10-01.** Trams-only maps were approved on 2026-09-29, so a tram city sits in the band of its next blocker; [`docs/tram_city_list.md`](tram_city_list.md) is the record | **0** |
@@ -162,10 +184,18 @@ Banded by **first blocker** (the owner's rule, "Five rules" below): access
 
 ## 🟢 Band A — ready to build (0 ready + 3 ✅ BUILT)
 
-**From the coverage sweep of 2026-10-03** (every metro, light-rail and tram
-city checked against this list; the owner approved the first group's screens
-and bands the same evening). Japan wave 2's nine Band-A cities were built
-and landed at review time on 2026-10-03. **Japan's third wave (2026-10-04):** Maebashi and Fukuyama to A (owner). **Sagamihara from C to A 2026-10-04, late** (owner), on its licence read.
+**Empty since 2026-10-12: every city that reached this band was built.** The
+three rows below are kept as the record of what screening promised for cities
+since built, the one overlap with the Built table that
+`scripts/check_master_list_counts.py` allows.
+
+The band was last filled from the coverage sweep of 2026-10-03 (every metro,
+light-rail and tram city checked against this list; the owner approved the
+first group's screens and bands the same evening), from Japan's third wave
+(2026-10-04: Maebashi and Fukuyama, owner), from Sagamihara's move from C on
+its licence read (2026-10-04, late, owner) and from Japan wave 4 (2026-10-06).
+Japan wave 2's nine Band-A cities were built and landed at review time on
+2026-10-03, and every city banded after them was built by 2026-10-12.
 
 | City | Business lists | Licence | Rail | Open at build |
 |---|---|---|---|---|
@@ -177,7 +207,8 @@ and landed at review time on 2026-10-03. **Japan's third wave (2026-10-04):** Ma
 
 ## 🔵 Band B — narrower pages (0 cities)
 
-From the coverage sweep, banded by the owner on 2026-10-03. Japan wave 2's
+**Empty since 2026-10-12.** The band was filled from the coverage sweep,
+banded by the owner on 2026-10-03, and from the waves after it. Japan wave 2's
 five one-bucket cities were built and landed at review time the same day.
 
 | City | The page | Source | Rail | Owner calls |
@@ -187,6 +218,8 @@ five one-bucket cities were built and landed at review time the same day.
 
 ## 🟣 Band C — closer to a page (0 cities)
 
+**Empty since 2026-10-12**, when Naha, its last city, went to B and was built the same day.
+
 | City | What there is | What stands between it and a band |
 |---|---|---|
 
@@ -194,7 +227,7 @@ five one-bucket cities were built and landed at review time the same day.
 
 *Kurashiki left the band for B on 2026-10-08 (owner, call 226): the city's year-end PDF of permits in force holds the old-law permits, 101.6% of restaurants.*
 
-*Yangsan and Gyeongsan left the band for the add-ons on 2026-10-06 (owner): Busan (Regional) and Daegu (Regional), briefed (`docs/build_briefs/busan_regional.md`, `daegu_regional.md`).*
+*Yangsan and Gyeongsan left the band for the add-ons on 2026-10-06 (owner): Busan (Regional) and Daegu (Regional), briefed (`docs/build_briefs/busan_regional.md`, `daegu_regional.md`) and not built (the add-ons section below).*
 
 *Sagamihara left the band for A on 2026-10-04, late (owner), on its licence read.*
 
@@ -202,10 +235,14 @@ five one-bucket cities were built and landed at review time the same day.
 
 ## 🔴 Band D — blocked, but the owner can act alone (0 cities)
 
+**Empty since 2026-10-07.**
+
 | City | What there is | The owner's act |
 |---|---|---|
 
-*2026-10-06: every county DSVSA host and `ansvsa.ro` now answer 403 "WAF Forbidden" to scripts, where Timiș showed a 503 browser check on 2026-10-04; whether the owner's browser still passes is untested (wave 5).*
+*The band's last cities left on 2026-10-07 (owner; calls 215 to 221): the seven Romanian tram cities and Oradea, Hungary's four, Konya and Gaziantep to Band R, Cluj-Napoca to B (built 2026-10-12) and Pune to the discards.*
+
+*2026-10-06: every county DSVSA host and `ansvsa.ro` answered 403 "WAF Forbidden" to scripts, where Timiș had shown a 503 browser check on 2026-10-04 (wave 5).*
 
 *Tempe, the band's earlier row, went to the discards on 2026-10-01 once the owner fetched its list (a 33-page PDF with no addresses).*
 
@@ -325,34 +362,40 @@ The tiers, the light-rail test and the currency audit stay on the tram list,
 
 ## Add-ons to built cities and watch items (not candidates)
 
-**Add-ons extend a built city**; they are builds for main, in `PLAN.md`, and
-not counted here.
+**An add-on extends a built city's page** to the neighboring municipalities its lines reach. It is not a city of its own and is not counted here. A built add-on is in the Built table under its page's "(Regional)" name; one that was marked and never built is listed below as not built.
 
-- **Potential Korean regional expansions** (marked by the owner 2026-10-04; none scheduled):
-  - **Busan (Regional) + Yangsan** (Busan Line 2, 5 stations): an extension, not a page (owner, 2026-10-06); brief `docs/build_briefs/busan_regional.md`. Gimhae is its own page (owner, 2026-10-03).
-  - **Daegu (Regional) + Gyeongsan** (Daegu Lines 1 and 2, 5 stations): an extension (owner, 2026-10-06); brief `docs/build_briefs/daegu_regional.md`.
-  - **Seoul (Regional) + Gwacheon (Line 4, 5 stations), Gwangmyeong (Line 7, 2), Hanam (Line 5, 4) and Guri (Line 8, 4)**: left out as standalone pages on the owner's Gyeonggi scope ("the smaller 시군").
-  - **Anyang (Regional) + Gunpo (Lines 4 and 1, 6 stations) and Uiwang (1)**: the same scope.
-  - **How each would build:** Seoul, Busan and Daegu read the national LOCALDATA permit registers (`pipeline/countries/korea.py`), the suburbs SEMAS, so a Seoul, Busan or Daegu regional page joins two sources (Los Angeles + Long Beach's shape, `multi-source-city`); Anyang is SEMAS already, so its regional page is a district-code list once the Korea build's `korea_sbiz` code filter lands. Each proves the city alone at zero drift first, as the 2026-10-03 extensions did.
+**Built:**
 
-- **Potential: Mexico City (Regional) + Ecatepec (Línea B, 5 stations), Nezahualcóyotl (Línea B, 3), La Paz (Línea A, 2) and Naucalpan (Línea 2's Cuatro Caminos, 1)** (marked by the owner 2026-10-04, all four; not scheduled). One register, INEGI's DENUE, over entidades 09 and 15, cut to the four municipios by INEGI code on Monterrey's `MUNIDS` pattern (codes checked at build); entidad 15 ships as two ZIPs (`denue_15_1_csv.zip` 50.6 MB, `denue_15_2_csv.zip` 30.2 MB, 2026-05-20), a download deferred until a brief names it (owner), and the country module assumes one ZIP per entidad. Rail stays the page's own lines; the Tren Suburbano, El Insurgente and Mexicable stay out (owner). **First, the city alone:** its step 1 drops eight Metro stations OSM tags `railway=stop`, keeps Consulado twice and loses Cuatro Caminos (staging's probe, 2026-10-04); the repair lands at review time and proves zero drift before any extension (owner).
-- **Vancouver (Regional) + Burnaby, New Westminster and Coquitlam: built 2026-10-03** on `extensions-build` (44 stations, 15,436 storefronts), in the Built row; held for the owner's review.
+- **Vancouver (Regional) + Burnaby, New Westminster and Coquitlam: built 2026-10-03** on `extensions-build` (44 stations, 15,436 storefronts), in the Built row and on the site as Vancouver (Regional).
   - Burnaby's "Business Licences" layer opens in a browser: 19,959 approved
     licences, current to 2027-08-31, under Open Government Licence –
     Burnaby. **The download was approved by the owner on 2026-10-01**: the
     Hub export, or paged queries of layer 17.
   - New Westminster joins at 99.8%.
   - Richmond is NOT PERMITTED as it stands: Band R since 2026-10-01 (owner).
+- **Los Angeles + Long Beach: built 2026-10-03** on `extensions-build`, in the Built row as Los Angeles (Regional).
+- **Rio + Duque de Caxias and Belo Horizonte + Contagem: built 2026-10-03** on `extensions-build`, in the Built row as Rio de Janeiro (Regional) and Belo Horizonte (Regional).
+- **Mexico City (Regional) + Ecatepec (Línea B, 5 stations), Nezahualcóyotl (Línea B, 3), La Paz (Línea A, 2) and Naucalpan (Línea 2's Cuatro Caminos, 1): built 2026-10-07** (marked by the owner 2026-10-04, all four; calls 68 to 72). One register, INEGI's DENUE, over entidades 09 and 15, cut to the four municipios by INEGI code on Monterrey's `MUNIDS` pattern, with boundaries from OpenStreetMap matched on INEGI codes; entidad 15 ships as two ZIPs (`denue_15_1_csv.zip` 50.6 MB, `denue_15_2_csv.zip` 30.2 MB, 2026-05-20), both approved by the owner. Rail stays the page's own lines; the Tren Suburbano, El Insurgente and Mexicable stay out (owner). The city alone was repaired first (branch `fix/mexico-city-stations`, 2026-10-04): its step 1 had dropped eight Metro stations OSM tags `railway=stop`, kept Consulado twice and lost Cuatro Caminos (staging's probe, 2026-10-04).
+- **Anyang (Regional) + Gunpo (Lines 4 and 1, 6 stations) and Uiwang (1): built 2026-10-07** (marked by the owner 2026-10-04), on SEMAS's district codes. The two were left out as standalone pages on the owner's Gyeonggi scope ("the smaller 시군").
+
+**Marked, not built:**
+
+- **Potential Korean regional expansions** (marked by the owner 2026-10-04; never built). All three wait on one owner call, whether SEMAS's permission reaches social posts (call 71):
+  - **Busan (Regional) + Yangsan** (Busan Line 2, 5 stations): an extension, not a page (owner, 2026-10-06); brief `docs/build_briefs/busan_regional.md`. Gimhae is its own page (owner, 2026-10-03).
+  - **Daegu (Regional) + Gyeongsan** (Daegu Lines 1 and 2, 5 stations): an extension (owner, 2026-10-06); brief `docs/build_briefs/daegu_regional.md`.
+  - **Seoul (Regional) + Gwacheon (Line 4, 5 stations), Gwangmyeong (Line 7, 2), Hanam (Line 5, 4) and Guri (Line 8, 4)**: left out as standalone pages on the owner's Gyeonggi scope ("the smaller 시군").
+  - **How each would build:** Seoul, Busan and Daegu read the national LOCALDATA permit registers (`pipeline/countries/korea.py`), the suburbs SEMAS, so each regional page joins two sources (Los Angeles + Long Beach's shape, `multi-source-city`) and proves the city alone at zero drift first, as the 2026-10-03 extensions did.
+- **Naha (Regional) + Urasoe** (owner, 2026-10-06; an add-on row, not a candidate; not built: Naha was built on 2026-10-12 as the city alone): the Yui Rail's 3 stations in Urasoe, every 7-9 minutes (READ, about 150 a day each way); Okinawa Prefecture's BODIK food list (2026-03-31, CC BY 4.0) holds 1,495 Urasoe rows, **583** restaurant permits against 628 census establishments, addresses only. On its own, 3 stations is a discard (Brossard's and Berkeley's precedent).
+
+**Out:**
+
 - **Washington D.C. + Arlington: OUT, to Band R (owner, 2026-10-02, "like richmond")**; the licence read found the County's only live terms restrictive. Arlington's current business licence
   list (12,212 records, weekly, 2026-09-25) has addresses and section codes
   but no coordinates. It needs an address join and a licence read. **The
   379 KB download was approved by the owner on 2026-10-01.**
-- **Los Angeles + Long Beach: built 2026-10-03** on `extensions-build`, in the Built row as Los Angeles (Regional).
-- **Rio + Duque de Caxias and Belo Horizonte + Contagem: built 2026-10-03** on `extensions-build`, in the Built row as Rio de Janeiro (Regional) and Belo Horizonte (Regional).
 
-- **Naha (Regional) + Urasoe** (owner, 2026-10-06; an add-on row, not a candidate, and only once Naha leaves Band C and is built): the Yui Rail's 3 stations in Urasoe, every 7-9 minutes (READ, about 150 a day each way); Okinawa Prefecture's BODIK food list (2026-03-31, CC BY 4.0) holds 1,495 Urasoe rows, **583** restaurant permits against 628 census establishments, addresses only. On its own, 3 stations is a discard (Brossard's and Berkeley's precedent).
-- **Potentials, not now** (owner, 2026-10-06; not candidates, not scheduled):
-  - **Amsterdam + Amstelveen**: no horeca list, but 296 Gemeenteblad horeca notices since 2021, most with a point, could be rebuilt into premises on Rotterdam's shape (notices placed through BAG; Utrecht's 1,218 notices rebuilt to 822 premises). Mixing a rebuilt food layer into Amsterdam's register-built page is the call to make when it is revisited (owner: "let's revisit").
+- **Potentials, not now** (owner, 2026-10-06; not candidates, never scheduled):
+  - **Amsterdam + Amstelveen**: no horeca list, but 296 Gemeenteblad horeca notices since 2021, most with a point, could be rebuilt into premises on Rotterdam's shape (notices placed through BAG; Utrecht's 1,218 notices rebuilt to 822 premises). Mixing a rebuilt food layer into Amsterdam's register-built page is the call to make if it is revisited (owner: "let's revisit").
   - **Strausberg, Woltersdorf and Schöneiche**: discarded on rail (trams every 20 minutes), marked to be let through later, not now (owner). Their business leg is absence as screened (IHK Berlin's register stops at Land Berlin).
 
 **Watch items**, each a dated re-check:
@@ -371,13 +414,16 @@ not counted here.
 | Auckland's City Rail Link | Re-check frequencies once it opens (opening date not verified); Auckland was discarded on rail 2026-10-04 |
 | Petah Tikva 🇮🇱 (held: Israel, wartime concerns, owner 2026-10-04) | A possible build when the hold lifts. The city's ArcGIS Online layer of businesses needing a licence: **2,835 points** in EPSG:2039, last edited 2026-09-16, with type, status, dates and address (food 1,229, barbers 145, beauty 123, laundries 13; retail only where a licence is needed, a measured gap). The Red Line, **8 stations** (Hebrew Wikipedia; the operator refuses scripts). **No licence stated** on the layer, the service or the city's hub: a licence read comes first, then C or B. About a quarter of Tel Aviv's count per resident, so completeness is a question; the name field goes to the privacy check |
 
-## Open screening gap (7 cities; reopened 2026-10-04)
+## Open screening gap (10 cities; reopened 2026-10-04)
 
 **Reopened by the owner on 2026-10-04** for five cities whose own hosts refuse
-or are down from every country tried. None is a finding, and none is a proven
-geo-block (Globalping has no probe in Algeria; Antalya's portal is down and
-Eskişehir's refuses from inside Türkiye too), so none can be a discard or a
-Band R row.
+or are down from every country tried (Constantine, Sétif, Ouargla, Antalya and
+Eskişehir), and grown to ten by 2026-10-06: Noida / Greater Noida and
+Stuttgart on 2026-10-04, then Perugia, Faridabad and Howrah from wave 5. None
+is a finding, and none is a proven geo-block (Globalping has no probe in
+Algeria; Antalya's portal is down and Eskişehir's refuses from inside Türkiye
+too), so none can be a discard or a Band R row. Each row names what would
+settle it.
 
 | City | What was tried | What would settle it |
 |---|---|---|
@@ -394,23 +440,20 @@ Band R row.
 
 ## Pre-verdicts — precedent, not probed (not counted; owner, 2026-10-04)
 
-**The listing is closed as of 2026-10-04 (owner).** Every city with a metro, light rail or tram (and Japan's cities on JR or private rail) has a verdict, a pre-verdict below or a ranked slot; do not restart the coverage sweep. A city with no coverage can come back only four ways: a commuter-rail overhaul (commuter-only cities outside Japan were never listed), a line opening after 2026-10-03, a miss in the coarse name re-match (the batch probe re-reads each group), or a hold lifting (Russia, Ukraine, Belarus, Iran, North Korea, Myanmar, China). A global re-probe for new entries, openings, Band R blockers and lifted holds is calendared for about 2027-10 (`docs/recheck_calendar.md`, "The screen itself").
+**No pre-verdict is left: every one was converted to a row by 2026-10-06 (wave 5, owner).** The section is kept as the record of how the listing closed and of what can reopen it.
 
-**Approved by the owner on 2026-10-04** with the remainder count: the rail
-cities the 2026-10-03 coverage sweep found with no verdict, re-matched
-against this list on 2026-10-04. **These rows are pointers, not verdicts.** A
-discard needs its own host asked and two evidence methods (rule 5), and none
-of these has that yet; a batch probe turns them into discard or Band R rows
-when builds resume. Until then they count in no band and in no discard total.
+**The listing closed on 2026-10-04 (owner).** Every city with a metro, light rail or tram (and Japan's cities on JR or private rail) has a verdict, and the coverage sweep is not to be restarted. A city with no coverage can come back only four ways: a commuter-rail overhaul (commuter-only cities outside Japan were never listed), a line opening after 2026-10-03, a miss in the coarse name re-match (the batch probe re-read each group), or a hold lifting (Russia, Ukraine, Belarus, Iran, North Korea, Myanmar, China). A global re-probe for new entries, openings, Band R blockers and lifted holds is calendared for about 2027-10 (`docs/recheck_calendar.md`, "The screen itself").
 
-**Converted 2026-10-06 (wave 5, owner):** every non-Japanese pre-verdict was probed on its own host and became a row. The twelve Band R followers gave ten Band R rows (Espoo, Tampere, Almada, Seixal, Vila Nova de Gaia, Matosinhos, Maia, Pavlodar, Oskemen, Samarkand) and two rail discards (Vantaa, Temirtau). The 27 sibling pre-discards gave 24 discards, two open gaps (Faridabad, Howrah) and one potential (Amstelveen, an Amsterdam add-on). The 20 rail pre-discards gave 19 discards and Reșița, which passed rail and went to Band D. Botoșani's reason was wrong (it has no tram) and El Insurgente fails on spacing, not frequency.
+**What the pre-verdicts were** (approved by the owner on 2026-10-04 with the remainder count): the rail cities the 2026-10-03 coverage sweep found with no verdict, re-matched against this list on 2026-10-04. They were pointers, not verdicts. A discard needs its own host asked and two evidence methods (the discard rule under "Five rules"), so each counted in no band and in no discard total until a probe made it a row.
+
+**Converted 2026-10-06 (wave 5, owner):** every non-Japanese pre-verdict was probed on its own host and became a row. The twelve Band R followers gave ten Band R rows (Espoo, Tampere, Almada, Seixal, Vila Nova de Gaia, Matosinhos, Maia, Pavlodar, Oskemen, Samarkand) and two rail discards (Vantaa, Temirtau). The 27 sibling pre-discards gave 24 discards, two open gaps (Faridabad, Howrah) and one potential (Amstelveen, an Amsterdam add-on). The 20 rail pre-discards gave 19 discards and Reșița, which passed rail and went to Band D (Band R since 2026-10-07). Botoșani's reason was wrong (it has no tram) and El Insurgente fails on spacing, not frequency.
 
 **Pre-discards in Japan: converted 2026-10-06** (wave 5, owner): with no frequency floor in Japan (call 46), each was judged on its business data and station count. Morioka and Mito to A; Matsumoto, Tottori, Yamagata, Yao and Takatsuki to B; Kure to C, then to B on its measurement (call 185); Kōfu and Atsugi to R; Chigasaki, Wakō and Hiratsuka discarded on too few stations; Miyazaki on coverage.
 
-**Unscreened, ranked: released by the owner on 2026-10-06 (wave 5).** Where each item stands:
-1. **The Greater Copenhagen Light Rail**: screened 2026-10-06. Open in full since 2026-08-22, every 5-8 minutes on weekdays, 29 stops in 8 municipalities (Lyngby-Taarbæk 7, Gladsaxe 6, Herlev 4, Glostrup 4, Vallensbæk 3, Ishøj 2, Brøndby 2, Rødovre 1). The four owner calls made (call 66, a to d: the extension, the suburban S-tog stations, Albertslund, placement); Copenhagen (Regional)'s brief passes.
-2. **Riding an act the owner already owes**: done 2026-10-06. Arad, Galați, Ploiești, Craiova and Reșița to D; Oradea to D as well (its own 2022 files carry no activity column; owner, call 120); Brăila and Hódmezővásárhely discarded on rail.
-3. **Japan wave 4** (66). **Banded 2026-10-06:** A Ichinomiya, Tsu, Uji, Fukushima, Iwaki, Akita, Toyonaka, Ōita, Gifu, Tokorozawa, Kasukabe, Ageo (Regional, with Ina), Sōka, Koshigaya, Higashiyamato, Nishitōkyō, Tama, Higashimurayama, Hirakata, Fujisawa, Amagasaki, Suita, Itami, Kakogawa, Mito, Morioka; B Okazaki, Aomori, Urayasu, Sakura, Yachiyo, Ichihara, Ibaraki, Minoh, Matsue, Kawaguchi, Neyagawa, Moriguchi, Kadoma, Fuji, Matsumoto, Tottori, Yamagata, Yao, Takatsuki, Kure (from C, call 185), Fuchū, Tachikawa, Hino, Chōfu (from C, calls 187-188); R Imizu, Isesaki, Ōta, Tsukuba, Toyokawa, Kōriyama, Machida, Kawagoe, Asahikawa, Kamakura, Yamato, Kōfu, Atsugi, Kasugai, Nagakute, Nisshin; discarded Ino, Nankoku, Hachinohe, Nagaoka, Akashi, Settsu, Tokushima, Saga, Chigasaki, Wakō, Hiratsuka, Miyazaki. Urasoe an add-on row for Naha (Regional). Kasugai, Nagakute and Nisshin went to R and the 14 Japanese pre-discards were converted (above). Fuchū, Tachikawa, Hino and Chōfu measured from cached files and moved to B (owner, calls 187-188).
+**Unscreened, ranked: released by the owner on 2026-10-06 (wave 5), every item done.** What became of each:
+1. **The Greater Copenhagen Light Rail**: screened 2026-10-06. Open in full since 2026-08-22, every 5-8 minutes on weekdays, 29 stops in 8 municipalities (Lyngby-Taarbæk 7, Gladsaxe 6, Herlev 4, Glostrup 4, Vallensbæk 3, Ishøj 2, Brøndby 2, Rødovre 1). The four owner calls made (call 66, a to d: the extension, the suburban S-tog stations, Albertslund, placement); Copenhagen (Regional)'s brief passes. Built as Copenhagen (Regional) and landed 2026-10-07.
+2. **Riding an act the owner already owes**: done 2026-10-06. Arad, Galați, Ploiești, Craiova and Reșița to D; Oradea to D as well (its own 2022 files carry no activity column; owner, call 120); Brăila and Hódmezővásárhely discarded on rail. The six that went to D are in Band R since 2026-10-07.
+3. **Japan wave 4** (66). **Banded 2026-10-06:** A Ichinomiya, Tsu, Uji, Fukushima, Iwaki, Akita, Toyonaka, Ōita, Gifu, Tokorozawa, Kasukabe, Ageo (Regional, with Ina), Sōka, Koshigaya, Higashiyamato, Nishitōkyō, Tama, Higashimurayama, Hirakata, Fujisawa, Amagasaki, Suita, Itami, Kakogawa, Mito, Morioka; B Okazaki, Aomori, Urayasu, Sakura, Yachiyo, Ichihara, Ibaraki, Minoh, Matsue, Kawaguchi, Neyagawa, Moriguchi, Kadoma, Fuji, Matsumoto, Tottori, Yamagata, Yao, Takatsuki, Kure (from C, call 185), Fuchū, Tachikawa, Hino, Chōfu (from C, calls 187-188); R Imizu, Isesaki, Ōta, Tsukuba, Toyokawa, Kōriyama, Machida, Kawagoe, Asahikawa, Kamakura, Yamato, Kōfu, Atsugi, Kasugai, Nagakute, Nisshin; discarded Ino, Nankoku, Hachinohe, Nagaoka, Akashi, Settsu, Tokushima, Saga, Chigasaki, Wakō, Hiratsuka, Miyazaki. Urasoe an add-on row for Naha (Regional). Kasugai, Nagakute and Nisshin went to R and the 14 Japanese pre-discards were converted (above). Fuchū, Tachikawa, Hino and Chōfu measured from cached files and moved to B (owner, calls 187-188). Every A and B city named here has since been built (landed 2026-10-07 or 2026-10-12).
 4. **Low odds**: done 2026-10-06. Adana, Memphis, Thane, Mira-Bhayandar, Ghaziabad and Gauteng's three discarded; Perugia an open gap; Navi Mumbai had been discarded on 2026-10-04.
 
 ## DISCARDED — 329 cities, each naming its evidence
@@ -531,10 +574,11 @@ when builds resume. Until then they count in no band and in no discard total.
 against the probe log and sorted by the kind of evidence behind it. **Twelve
 rested on ONE method** — a national portal only, the city's own host never
 asked, or the top hits of one search — which `add-country` says is an
-ASSERTED negative, not a finding; they are in the open screening gap as a
-re-probe queue (owner's call). **Amsterdam** went further: its own API
-carries a current hospitality register, and it is in Band C. The 21 left
-each rest on two methods, a measured register, or its terms.
+ASSERTED negative, not a finding; they went to the open screening gap for a
+re-probe (owner's call), and the notes above record where the re-probes sent
+them. **Amsterdam** went further: its own API carried a current hospitality
+register, and it went to Band C (built 2026-09-24). The 21 left each rested on
+two methods, a measured register, or its terms.
 
 ▼ **Five of those 21 left the same night** (owner's call), when the columns
 below were added and the check read them: Hyderabad, Naples, Santiago, Lima
@@ -561,7 +605,7 @@ row has to survive being read against the probe log; that one did not.**
 2026-09-24** with ten other single-method rows: see the note above the
 open screening gap's table.
 
-▼ **2026-10-04 (late): Budapest left this table for Band D** (owner). Its row read that retail and catering are only *registered*, by county offices, unpublished; the Central Europe screen found that district notaries publish the 210/2009 shop register (IPARKER, GovCenter) and that OKNYIR, Hungary's national shop register, now holds the registers nationally. Its act is Debrecen's: the owner's OKNYIR export.
+▼ **2026-10-04 (late): Budapest left this table for Band D** (owner). Its row read that retail and catering are only *registered*, by county offices, unpublished; the Central Europe screen found that district notaries publish the 210/2009 shop register (IPARKER, GovCenter) and that OKNYIR, Hungary's national shop register, now holds the registers nationally. Its act is Debrecen's: the owner's OKNYIR export. Budapest is in Band R since 2026-10-07 (call 216): the export turned out not to exist.
 
 | City | Kind | Methods | City host asked? | Why |
 |---|---|---|---|---|
@@ -693,10 +737,13 @@ Mississauga, ~30 single-feed countries) and access-not-data
 for wartime concerns; Israel held the same way 2026-10-04, owner, with its
 screens kept).
 
-**Not reached (wave 2, 2026-09-28; owner's call: no row).** Each city's own
-host refused or never answered, so a discard row would rest on no city-host
-evidence, and the check above refuses one. Each waits on a read from the
-owner's own browser: **Brescia** 🇮🇹 and **Catania** 🇮🇹 (both METRO;
+**Not reached at wave 2 (2026-09-28; owner's call then: no row), all since
+settled.** Each city's own host had refused or never answered, so a discard
+row would have rested on no city-host evidence, and the check above refuses
+one. Brescia, Catania and Alicante are in Band R since 2026-10-01, Cagliari,
+Alcobendas and Tempe have discard rows in the table added that day, and St.
+Louis has one in the United States table. As recorded on 2026-09-28, when each
+waited on a read from the owner's own browser: **Brescia** 🇮🇹 and **Catania** 🇮🇹 (both METRO;
 `dati.comune.brescia.it` refused or timed out, `opendata.comune.catania.it`
 timed out and `etnaopen` answered 403), **Cagliari** 🇮🇹 (a JavaScript portal
 with no API), **Alicante** 🇪🇸 (refused; search shows only 2017–2021 IAE tax
@@ -721,17 +768,18 @@ comune (Pantano) needs no row.
 ⚠️ **Ottawa is NOT a no-rail city** (corrected 2026-09-27): it has 6 light-rail
 routes (O-Train) and was ruled out on DATA on 2026-09-21. 697 catalogue
 entries were scanned, and the only address-level commercial data is
-food-safety inspections (`docs/canada_retrospective.md`). **That is Band C's
-shape today (food only, like Stockholm), not a discard.** The owner placed it
-in Band C on 2026-09-27; its row is there, not here.
+food-safety inspections (`docs/canada_retrospective.md`). **That was Band C's
+shape (food only, like Stockholm), not a discard.** The owner placed it in
+Band C on 2026-09-27, and it was built on 2026-09-29.
 
 ~~**Houston** was ruled out beside Dallas "for the same structural reason (zero
 results)" on 2026-09-21. That is one search, which cannot carry a row here, so
-it sits with the search-level screen-outs.~~ ▼ **In Band T since 2026-09-28**,
+it sits with the search-level screen-outs.~~ ▼ **To Band T on 2026-09-28**,
 on the Texas Comptroller's statewide sales-tax permit file, which the earlier
-searches never found. **The same file bears on Dallas, Fort Worth and Austin**
-(their rows above): a re-screen on it is queued (owner, 2026-09-28; PLAN).
-Oklahoma City and El Paso now have measured rows above. There is also the 2026-09-18 US
+searches never found; Houston is built. **The same file was re-screened for
+Dallas, Fort Worth and Austin** (owner, 2026-09-28): Dallas was built on it,
+and Fort Worth and Austin stay discarded, now on rail (their rows above).
+Oklahoma City and El Paso have measured rows above. There is also the 2026-09-18 US
 screen's rail set, which was **search-level and never live-verified**: San
 Antonio and Columbus (no
 rail), Oklahoma City and El Paso (a streetcar only, so trams-only in shape
@@ -743,7 +791,7 @@ Vegas (a short private monorail).
 at two different portal hosts.~~ ▼ **Not any more (2026-09-24)**: Hamburg's row
 rested on one search term and is back in the open gap; Berlin's stands.
 ▼ **Berlin's did not stand (2026-09-28)**: enumerating its catalogue found IHK
-Berlin's per-premises register, and Berlin is in Band B (owner).
+Berlin's per-premises register, and Berlin went to Band B (owner) and was built the same day.
 ▼ **Hamburg returned the same day (morning), owner's call**: re-probed on two
 methods, and discarded on currency, not on one search.
 
@@ -754,9 +802,6 @@ premises-shaped table to be unusable, and **not one of them is visible from a
 dataset title**.
 
 ---
-
----
-
 
 **Added 2026-10-01** (the post-review screens; confirmed by the owner the same day; Tempe added later the same day).
 
@@ -1000,20 +1045,21 @@ was read, or with the city's host blocked.
 
 **Landed 2026-10-06 (wave 5, owner):** the rail pre-verdicts' commuter rows above (Toluca's four, Trenton, Oceanside, Escondido, Vicente López, San Isidro, Tigre, Cádiz, Chiclana, San Fernando, Dakar), and Thane from the low-odds group.
 
-**Left out of this tier:** Wellington and Bogor, and Johannesburg, Tshwane and Ekurhuleni (owner, 2026-10-06)
-hosts hold no premises list); trams, light rail and metros that fail on
+**Left out of this tier:** Wellington and Bogor (commuter rail, but their own
+hosts hold no premises list), and Johannesburg, Tshwane and Ekurhuleni (owner,
+2026-10-06); trams, light rail and metros that fail on
 frequency or station count (Cincinnati, Palembang, Bhopal, Patna, Uiwang),
 which reopen on their own lines' service.
 
-## ✅ Current by country — 2026-10-01
+## ✅ Current by country — 2026-10-12
 
-**A view of the bands, rebuilt with the list on 2026-10-01.** When they disagree, the bands win and this table is stale.
+**A view of the bands by country, as of 2026-10-12** (first built with the list on 2026-10-01). The last column is each country's dated record of moves and, where one exists, what would bring another of its cities onto the list. Where this table and the band sections disagree, the bands win.
 
 | Country | Built | Candidates | Restricted (R) | Bands | What stands between it and the next city |
 | ---|---|---|---|--- | --- |
 | 🇺🇸 United States | **20** | **0** | **1** — Arlington (VA) | R | **Tacoma built 2026-10-04** (to A 2026-10-03). San Juan (Puerto Rico) discarded 2026-10-04. **Tacoma to A 2026-10-03** (the coverage sweep; T Line, the City's licences under Chicago's disclaimer template). **Seattle (Regional) built 2026-10-02** (Link's 11 cities, five publishers). Arlington (VA), D.C.'s add-on, to R 2026-10-02 (its County terms; owner, Richmond's precedent). Tempe discarded 2026-10-01. Built: 20 |
-| 🇨🇦 Canada | **7** | **0** | **1** — Richmond (BC) | R | **Both light rail, out of T to C 2026-09-29 (owner)**, each on a bucket gap: Ottawa food only (built 2026-09-29), **Kitchener–Waterloo (Regional)** food and personal, no retail (built 2026-09-30). Vancouver's four SkyTrain suburbs are a rescope in PLAN, probes first. Brampton waits on the Hurontario LRT (revisit mid-2027; no opening date, construction to early 2028) |
-| 🇲🇽 Mexico | **3** | **0** | **0** | — | Complete on the current screen: Monterrey (Regional) built 2026-09-27 and published with Daegu and Busan |
+| 🇨🇦 Canada | **7** | **0** | **1** — Richmond (BC) | R | **Both light rail, out of T to C 2026-09-29 (owner)**, each on a bucket gap: Ottawa food only (built 2026-09-29), **Kitchener–Waterloo (Regional)** food and personal, no retail (built 2026-09-30). Vancouver's SkyTrain suburbs (Surrey, Burnaby, New Westminster and Coquitlam) joined Vancouver (Regional) on 2026-10-03; Richmond is in Band R. Brampton waits on the Hurontario LRT (revisit mid-2027; no opening date, construction to early 2028) |
+| 🇲🇽 Mexico | **3** | **0** | **0** | — | Complete on the current screen: Monterrey (Regional) built 2026-09-27 and published with Daegu and Busan; Mexico City (Regional) took in four State of México municipios on 2026-10-07 |
 | 🇪🇸 Spain | **3** | **0** | **1** — Alicante | R | Alicante's portal refuses the browser too (2026-10-01); Alcobendas discarded |
 | 🇮🇪 Ireland | **1** | **0** | **0** | — | Complete: wave 2 (2026-09-27) found no second city. Dublin's map already covers all four Dublin councils; Cork, Limerick, Galway and Waterford have no urban rail. Re-screen Cork when Luas Cork opens |
 | 🇮🇹 Italy | **3** | **0** | **2** — Brescia, Catania | R | Both portals refuse the browser as well as scripts (2026-10-01); Cagliari discarded |
@@ -1024,10 +1070,10 @@ which reopen on their own lines' service.
 | 🇱🇻 Latvia | **3** | **0** | **0** | — | **Daugavpils and Liepāja built 2026-09-30** (the tram kit), on Riga's two layers |
 | 🇳🇱 Netherlands | **3** | **0** | **1** — Utrecht | R | **Den Haag built 2026-09-30** (the tram kit). **T2's verdicts 2026-09-30 (owner)**: Den Haag to T1 on the city's own horeca permit layer (2,352 food premises) and the BAG, Rotterdam's shape; Utrecht to R (its portal answers 403 to this machine and a browser); Rijswijk and Delft to the discards (no food source) |
 | 🇭🇰 Hong Kong | **1** | **0** | **0** | — | Built; the East Asia region |
-| 🇰🇷 South Korea | **18** | **0** | **0** | — | **The review batch landed 2026-10-07**: Gimpo and Siheung. **Yangsan and Gyeongsan from C to the add-ons 2026-10-06 (owner)**: Busan (Regional) and Daegu (Regional), briefed with Seoul (Regional) and Anyang (Regional). **Daejeon, Gwangju and Gimhae built and landed 2026-10-04.** **Gimpo and Siheung to A, Yangsan and Gyeongsan to C 2026-10-04** (owner; SEMAS, the probe wave); fifteen more discarded on rail and five with no urban rail. **Daejeon, Gwangju and Gimhae from R to A 2026-10-03** (owner): SEMAS's keyless file covers them. **Namyangju, Ansan, Uijeongbu and Anyang built 2026-09-30**, the last of the Gyeonggi satellites, which closes their row. **Goyang, Seongnam and Yongin built 2026-09-29** on SEMAS's register, Incheon's module, **Suwon and Bucheon the same day**. **Daegu and Busan built 2026-09-27** on the shared Korean module; **Incheon built 2026-09-29** on SEMAS's national storefront register, which the Gyeonggi satellites also use (the LOCALDATA API needs a Korean identity check); the other three have no city portal |
+| 🇰🇷 South Korea | **18** | **0** | **0** | — | **The review batch landed 2026-10-07**: Gimpo and Siheung. **Yangsan and Gyeongsan from C to the add-ons 2026-10-06 (owner)**: Busan (Regional) and Daegu (Regional), briefed with Seoul (Regional) and not built (the three wait on SEMAS's social-post scope, call 71); Anyang (Regional) took in Gunpo and Uiwang on 2026-10-07. **Daejeon, Gwangju and Gimhae built and landed 2026-10-04.** **Gimpo and Siheung to A, Yangsan and Gyeongsan to C 2026-10-04** (owner; SEMAS, the probe wave); fifteen more discarded on rail and five with no urban rail. **Daejeon, Gwangju and Gimhae from R to A 2026-10-03** (owner): SEMAS's keyless file covers them. **Namyangju, Ansan, Uijeongbu and Anyang built 2026-09-30**, the last of the Gyeonggi satellites, which closes their row. **Goyang, Seongnam and Yongin built 2026-09-29** on SEMAS's register, Incheon's module, **Suwon and Bucheon the same day**. **Daegu and Busan built 2026-09-27** on the shared Korean module; **Incheon built 2026-09-29** on SEMAS's national storefront register, which the Gyeonggi satellites also use (the LOCALDATA API needs a Korean identity check); the other three have no city portal |
 | 🇹🇼 Taiwan | **3** | **0** | **1** — Kaohsiung | R | Its door-plate file is geo-blocked to Taiwan |
-| 🇯🇵 Japan | **94** | **0** | **22** — Chiba, Takaoka, Sendai, Takasaki, Hachiōji, Saitama, Imizu, Isesaki, Ōta, Tsukuba, Toyokawa, Kōriyama, Machida, Kawagoe, Asahikawa, Kamakura, Yamato, Kōfu, Atsugi, Kasugai, Nagakute, Nisshin | R | **Phase 2 landed 2026-10-12**: 30 cities (East-2's eleven, Kansai-2's seven, Regional-2's eleven and Naha), counted in the Japan view rows; no Japanese candidate is left in a band. Naha was banded B and built the same day (owner, calls S30 and S38). **The review batch landed 2026-10-07**: 30 cities (East-1, Kansai-1, Regional-1), counted in the twelve Japan view rows. **Japan wave 4 banded 2026-10-06 (owner)**, with no frequency floor for JR or private lines (call 46): twenty-six to A (Ina joining Ageo), nineteen to B, five to C (all five then to B, calls 185, 187-188), sixteen to R, Ino, Nankoku, Hachinohe, Nagaoka, Akashi, Settsu, Tokushima, Saga, Chigasaki, Wakō, Hiratsuka and Miyazaki discarded, Urasoe an add-on; more groups probing. **Sagamihara from C to A 2026-10-04, late (owner)**, on its licence read (CC BY 4.0 by the city's open-data terms). **Japan's third wave banded 2026-10-04 (owner)**: Maebashi and Fukuyama to A, Shizuoka, Funabashi, Matsudo, Ichikawa and Kanazawa to B, Sagamihara, Kurashiki and Naha to C, Takasaki, Hachiōji and Saitama to R, Niigata discarded. **Wave 2's fourteen built 2026-10-03** (one build session; they land at the owner's review time; Wakayama discarded at screening). The first batch's twelve built 2026-10-02. Toyohashi and Wakayama discarded. Sendai still needs the city's permission; Takaoka to R 2026-10-02 (CC BY 4.0, but the prefecture's new platform refuses this machine) |
-| 🇧🇷 Brazil | **9** | **0** | **0** | — | Built 2026-09-24 as one batch. Wave 2 (2026-09-27) found no new city: six discards on frequency; **Contagem joins Belo Horizonte and Duque de Caxias joins Rio** as regional add-ons (owner; PLAN). Watch Salvador's VLT (trial running) and Teresina's 15-minute service |
+| 🇯🇵 Japan | **94** | **0** | **22** — Chiba, Takaoka, Sendai, Takasaki, Hachiōji, Saitama, Imizu, Isesaki, Ōta, Tsukuba, Toyokawa, Kōriyama, Machida, Kawagoe, Asahikawa, Kamakura, Yamato, Kōfu, Atsugi, Kasugai, Nagakute, Nisshin | R | **Phase 2 landed 2026-10-12**: 30 cities (East-2's eleven, Kansai-2's seven, Regional-2's eleven and Naha), counted in the Japan view rows; no Japanese candidate is left in a band. Naha was banded B and built the same day (owner, calls S30 and S38). **The review batch landed 2026-10-07**: 30 cities (East-1, Kansai-1, Regional-1), counted in the twelve Japan view rows. **Japan wave 4 banded 2026-10-06 (owner)**, with no frequency floor for JR or private lines (call 46): twenty-six to A (Ina joining Ageo), nineteen to B, five to C (all five then to B, calls 185, 187-188), sixteen to R, Ino, Nankoku, Hachinohe, Nagaoka, Akashi, Settsu, Tokushima, Saga, Chigasaki, Wakō, Hiratsuka and Miyazaki discarded, Urasoe an add-on (not built). **Sagamihara from C to A 2026-10-04, late (owner)**, on its licence read (CC BY 4.0 by the city's open-data terms). **Japan's third wave banded 2026-10-04 (owner)**: Maebashi and Fukuyama to A, Shizuoka, Funabashi, Matsudo, Ichikawa and Kanazawa to B, Sagamihara, Kurashiki and Naha to C, Takasaki, Hachiōji and Saitama to R, Niigata discarded. **Wave 2's fourteen built 2026-10-03** (one build session, landed at review time the same day; Wakayama discarded at screening). The first batch's twelve built 2026-10-02. Toyohashi and Wakayama discarded. Sendai still needs the city's permission; Takaoka to R 2026-10-02 (CC BY 4.0, but the prefecture's new platform refuses this machine) |
+| 🇧🇷 Brazil | **9** | **0** | **0** | — | Built 2026-09-24 as one batch. Wave 2 (2026-09-27) found no new city: six discards on frequency; **Contagem joins Belo Horizonte and Duque de Caxias joins Rio** as regional add-ons, built 2026-10-03 (owner). Watch Salvador's VLT (trial running) and Teresina's 15-minute service |
 | 🇸🇪 Sweden | **2** | **0** | **2** — Norrköping, Lund | R | **Lund to R 2026-10-04, late** (request only, Norrköping's shape). **Norrköping to R 2026-10-04** (request only). **Göteborg built 2026-09-30** (the tram kit). **Stockholm built 2026-09-29** on its frozen food inspection register. **Göteborg to T1 2026-09-30** (owner): all active food businesses (2,167 food service, 906 food shops as retail), undated rows disclosed |
 | 🇨🇭 Switzerland | **2** | **0** | **1** — Lausanne | R | **The review batch landed 2026-10-07**: Geneva (Regional). **2026-10-04, late (owner)**: Lausanne to R (Vaud's licence register behind a paged search; a bulk extract by request), Bern and Neuchâtel discarded. **Geneva to A 2026-10-04** (the canton's business register); Basel discarded. **Zurich built 2026-09-30** (the tram kit), Switzerland's first. **Zurich to T1 2026-09-30** (owner): 2,325 food premises, plus 1,028 shops licensed to sell alcohol as a partial retail layer |
 | 🇷🇴 Romania | **2** | **0** | **8** — Timișoara, Iași, Arad, Galați, Ploiești, Craiova, Reșița, Oradea | R | **Cluj-Napoca built, landed 2026-10-12 (phase 2; Kansai-2)**: food only, treated as Bucharest under notice 215 (owner, call S8). **Oradea to R 2026-10-07 (owner, call 221)**: DSVSA Bihor times out. **2026-10-07 (owner, calls 215 and 216)**: Cluj-Napoca to B (71.6% placed with the nearest same-side number tier); seven cities to R, placement failing on OSM (39.7-63.7% where measured) and ANCPI's RENNS unreachable; Oradea in D on its own address layer (a licence read first). **Bucharest built 2026-09-29** |
@@ -1066,7 +1112,7 @@ which reopen on their own lines' service.
 | 🇹🇳 Tunisia | — | **0** | **0** | — | Tunis discarded 2026-10-01 |
 | 🇳🇬 Nigeria | — | **0** | **0** | — | Lagos discarded 2026-10-01 |
 | 🇪🇹 Ethiopia | — | **0** | **0** | — | Addis Ababa discarded 2026-10-01 |
-| 🇧🇪 Belgium | **6** | **0** | **0** | — | **Built 2026-10-04** on `belgium-build`, for the owner's review: Brussels, Antwerp, Ghent, Charleroi, Liège and Brussels (Regional). **Off "Countries ruled out" 2026-10-03** (owner): the ruling rested on one national method. The City of Brussels to A (hub.brussels, CC BY 4.0); Antwerp and Ghent to B (FAVV food on VKBO points); Charleroi and Liège to B (LoGIC 2024, gap disclosed); the rest of the Region to B (the owner's KBO file, filtered, on BeST-Address) |
+| 🇧🇪 Belgium | **6** | **0** | **0** | — | **Built 2026-10-04** on `belgium-build`, since landed: Brussels, Antwerp, Ghent, Charleroi, Liège and Brussels (Regional). **Off "Countries ruled out" 2026-10-03** (owner): the ruling rested on one national method. The City of Brussels to A (hub.brussels, CC BY 4.0); Antwerp and Ghent to B (FAVV food on VKBO points); Charleroi and Liège to B (LoGIC 2024, gap disclosed); the rest of the Region to B (the owner's KBO file, filtered, on BeST-Address) |
 | 🇬🇷 Greece | **1** | **0** | **0** | — | **The review batch landed 2026-10-07**: Thessaloniki, Greece's first. **Thessaloniki to B 2026-10-04** (the city's active-shop-licence layer; a licence read first). Athens discarded |
 | 🇲🇴 Macau | — | **0** | **1** — Macau | R | **To C 2026-10-04, then R the same day (owner)**: OSM places IAM's food lists at 15.1% exactly, about 70% at best, and 8% of placed rows lie near a station; the government GIS's points need the bureau's permission |
 | 🇪🇨 Ecuador | — | **0** | **1** — Quito | R | **Quito to R and Cuenca discarded 2026-10-04** (owner): ARCSA's national file holds no address or canton. To C earlier the same day |
@@ -1088,9 +1134,9 @@ which reopen on their own lines' service.
 
 *▼ **2026-09-24 — eight countries left this list** with the discard audit:
 Germany, Austria, the Netherlands, Greece, Portugal, Poland, Latvia and
-Slovakia each rested on one national-level method, and their cities are in
-the open gap (the Netherlands' Amsterdam now in Band A). A country is not ruled
-out by its national portal's first page.*
+Slovakia each rested on one national-level method, and their cities went to
+the open gap for re-probes (the Netherlands' Amsterdam to a band, and built
+the same day). A country is not ruled out by its national portal's first page.*
 
 🇨🇳 **China** *(accounts, terms and
 mapping law; 2026-09-28, owner)*
@@ -1122,18 +1168,22 @@ address or coordinate file exists to place it. **The legal barriers stay high
 for any Chinese city**: publishing map data of China is regulated (map review,
 GCJ-02 coordinates), and the geocoders' terms forbid this use.*
 
-*🇦🇪 **Dubai left this list on 2026-09-28** for Band D: "no agency feed" is
-obsolete now rail comes from OpenStreetMap, and its register's hosts refuse
-this machine.*
+*🇦🇪 **Dubai left this list on 2026-09-28** for Band D: "no agency feed" was
+obsolete once rail came from OpenStreetMap, and its register's hosts refuse
+this machine. Dubai is in Band R.*
 
-*🇬🇧 **The UK left this list on 2026-09-28** with London (Band B, food
-only): its reason, "NNDR is a tax register with no category", was wrong - the
-rating list has a description and is ruled out by its terms instead.*
+*🇬🇧 **The UK left this list on 2026-09-28** with London (to Band B, food
+only, and built the same day): its reason, "NNDR is a tax register with no
+category", was wrong - the rating list has a description and is ruled out by
+its terms instead.*
 
 *🇪🇬 **Egypt left this list on 2026-09-23** with Cairo: one probe of CAPMAS is
-not a country ruling. See the open screening gap.*
+not a country ruling. Cairo went to the open screening gap and was discarded
+on 2026-09-24, measured by two methods.*
 
 ## Five rules this list is maintained by
+
+*The list is closed. These are the rules its rows were written under, and the rules a reopened list would follow.*
 
 **A row reading "not reached", "unprobed" or a regional pattern is not a
 discard.** Eleven cities were once sitting in the discard list on exactly those
@@ -1142,9 +1192,10 @@ the finding that disqualified it, so a contradiction is visible rather than
 inferable.
 
 **A country ruling needs two cities measured, not one asserted onto a region.**
-Germany no longer qualifies (2026-09-24): Hamburg's row rested on one search
-term and is back in the open gap, leaving Berlin alone. Italy does not fail
-merely because Naples did — Milan is built and Rome is in Band A.
+Germany stopped qualifying on 2026-09-24: Hamburg's row rested on one search
+term and went back to the open gap, leaving Berlin alone (Berlin was later
+built, and Hamburg discarded on currency). Italy does not fail merely because
+Naples did — Milan and Rome are built.
 
 **A discard states its kind, its methods and whether the city's own host was
 asked, as columns — and `python scripts/check_discard_evidence.py` decides
@@ -1153,18 +1204,19 @@ failing row moves to the open gap; the rule is not relaxed to keep it.
 
 **A city sits in the band of its FIRST blocker, with every other blocker
 noted beside it (owner, 2026-09-27; universal across every master list).**
-Blockers are taken in this order (**amended by the owner 2026-09-27 evening**,
-when Band T became "Contingent on trams": trams now come before buckets):
+Blockers were taken in this order (**amended by the owner 2026-09-27 evening**,
+when Band T became "Contingent on trams": trams then came before buckets):
 1. **Access (D or R)**: can the data be reached at all?
-2. **Trams (T)**: does the build need a yes on trams-only maps?
+2. **Trams (T)**: does the build need a yes on trams-only maps? (Retired
+   2026-10-01: trams-only maps were approved on 2026-09-29.)
 3. **Buckets (C)**: does it yield two or more, without a measured gap?
 
 So:
 - Tallinn sits in R, tagged "trams only".
-- A trams-only city sits in T whatever its buckets, on the tram list
-  (`docs/tram_city_list.md`), with any gap noted beside it: tier T2 holds
-  Zurich, Göteborg, Utrecht and Den Haag, and Rijswijk and Delft as Den Haag
-  add-ons.
+- Until Band T was retired, a trams-only city sat in T whatever its buckets,
+  on the tram list (`docs/tram_city_list.md`), with any gap noted beside it.
+  Its tier T2 closed on 2026-09-30 with Zurich, Göteborg and Den Haag built,
+  Utrecht to R, and Rijswijk and Delft discarded.
 - **Light rail is not a trams question** (owner, 2026-09-29): a city that
   passes the tram list's three-part light-rail test goes to the band of its
   next blocker, as Buffalo went to A and Ottawa to C.
@@ -1204,29 +1256,28 @@ without the owner's call.
 
 ## Before building any city on this list
 
+*No city on this list is waiting to be built. These are the checks a build
+off this list started with, kept for a reopened list.*
+
 **Check `docs/commuter_rail_list.md`** — which cities have commuter rail, the
-two built maps that draw it (Dublin's DART, Copenhagen's S-tog), and the
-candidates whose build must decide it (Japan, Seoul, Hong Kong, São Paulo).
+built maps that draw it (Dublin's DART and Copenhagen's S-tog the first two),
+and the cities whose builds had to decide it (Japan's, Seoul, Hong Kong,
+São Paulo).
 
 - `docs/build_briefs/<city>.md` if one exists, then
   `python scripts/brief_check.py <city>` — a brief caches Step 0's mistakes as
   confidently as its findings.
 - **A city outside every existing region needs one added.** `app/cities.py`
-  raises on a city whose region is not a leaf of `REGION_ORDER`. **Europe is
-  already ONE region**, so a new European country (Czechia, Denmark, Norway,
-  Sweden, Switzerland, Romania) does not add one; **Seoul, Hong Kong, Brazil,
-  Taiwan, Japan and Singapore each would**, and `check_macro_labels.py` is the
-  measurement for whether a region frames its cities. *(This bullet said
-  `REGION_ORDER` was still `["United States", "Canada"]` until 2026-09-23 — it
-  now holds seven entries.)*
+  raises on a city whose region is not a leaf of `REGION_ORDER`, and
+  `check_macro_labels.py` is the measurement for whether a region frames its
+  cities. The Built table's rows are the views as they stand.
 - **The UK six are the minor label tier, in a UK region of their own** (owner,
   2026-10-02, "the high-density cluster rule"). London, Glasgow and Newcastle
-  move with them and stay eligible. The recipe is in
+  moved with them and stay eligible. The recipe is in
   `docs/handoff_uk_six_2026-10-01.md`.
-- **The Japan batch (Band A's seven, Band B's five, Takaoka if it leaves R) is the minor
-  label tier, as France and Czechia are** (owner, 2026-10-02): each new city
-  loses its pill in the macro views. That means a Japan sub-region, every
-  Japanese city moved into it and East Asia still naming the anchors. The
-  `japan-city` skill's standing calls give the whole recipe.
-- `add-country` first for any country this project has never built in — every
-  candidate country except France.
+- **The Japanese cities after the first eight are the minor label tier, as
+  France and Czechia are** (owner, 2026-10-02): each lost its pill in the
+  macro views, every Japanese city moved into Japan's own views, and East Asia
+  still names the eight anchors. The `japan-city` skill's standing calls give
+  the whole recipe.
+- `add-country` first for any country this project has never built in.
