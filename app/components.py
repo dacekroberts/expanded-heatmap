@@ -3192,16 +3192,15 @@ _NOTICES = [
     # open-data portal (datasets 11261 to 11263, author 衛生課), CC BY 4.0 by
     # the portal's terms (read 2026-10-06 by staging: permitted with
     # conditions; its cost clause accepted by the owner, call 144), in the
-    # form for a modified work, the three dataset pages linked. The credit's
-    # exact wording is a parked call in
-    # docs/decisions_drafts/worktree-japan-regional-2.md: staging's record
-    # names a prescribed modified-use credit without quoting it, and this is
-    # Shizuoka's (205) form with 静岡県 as the author. MLIT as in Kobe's, N02
+    # terms' form for a modified work (§4), the three dataset pages linked.
+    # The wording was checked against the terms page by staging on
+    # 2026-10-12 (opendata.pref.shizuoka.jp/privacy.html): the licence name
+    # is written 表示 4.0 国際, as the terms write it. MLIT as in Kobe's, N02
     # in its 2025 edition. Written from Shizuoka's approved wording under the
     # owner's pre-approval of template prose (2026-09-30).
     Notice(210, "Shizuoka Prefecture and MLIT (Fuji)",
      "Fuji's businesses: この地図は以下の著作物を改変して利用しています。"
-     "理容所台帳、美容所台帳、クリーニング所台帳、静岡県、クリエイティブ・コモンズ・ライセンス 表示4.0 国際"
+     "理容所台帳、美容所台帳、クリーニング所台帳、静岡県、クリエイティブ・コモンズ・ライセンス 表示 4.0 国際"
      "（[https://creativecommons.org/licenses/by/4.0/deed.ja](https://creativecommons.org/licenses/by/4.0/deed.ja)）"
      "（[https://opendata.pref.shizuoka.jp/dataset/11261.html](https://opendata.pref.shizuoka.jp/dataset/11261.html)、"
      "[https://opendata.pref.shizuoka.jp/dataset/11262.html](https://opendata.pref.shizuoka.jp/dataset/11262.html)、"

@@ -4606,7 +4606,7 @@ batch at review time).
   N03 (CC BY 4.0) only picks stations and is **never drawn** (the Survey
   Act). e-Stat's 衛生行政報告例 and the 2021 Economic Census were used as
   measurements only and are not drawn.
-- **MUST DISPLAY** (the form for a modified work): 「この地図は以下の著作物を改変して利用しています。理容所台帳、美容所台帳、クリーニング所台帳、静岡県、クリエイティブ・コモンズ・ライセンス 表示4.0 国際（https://creativecommons.org/licenses/by/4.0/deed.ja）」,
+- **MUST DISPLAY** (the form for a modified work): 「この地図は以下の著作物を改変して利用しています。理容所台帳、美容所台帳、クリーニング所台帳、静岡県、クリエイティブ・コモンズ・ライセンス 表示 4.0 国際（https://creativecommons.org/licenses/by/4.0/deed.ja）」,
   with the three dataset pages linked; MLIT's credit lines.
 - **MUST NOT**: present the map as the prefecture's work; imply its
   endorsement; say the pins are businesses open now. The portal's §6 holds a

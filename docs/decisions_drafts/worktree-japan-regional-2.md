@@ -99,6 +99,26 @@ Each city's own parked calls and proposals are under its entry below
 
 ## Changes
 
+### 2026-10-12 - Fuji's notice credit checked by staging; the parked calls numbered
+
+- **Fuji's parked call 1 is closed: notice 210 follows the portal's
+  prescribed form.** Staging read Shizuoka Prefecture's terms page
+  (`opendata.pref.shizuoka.jp/privacy.html`, §4) on 2026-10-12: the
+  modified-use form is the one the notice was drafted in, and the terms
+  allow the URL as a link on the licence name. One difference was corrected:
+  the terms write 表示 4.0 国際 with a space after 表示, so the notice in
+  `app/components.py`, item 210 in `docs/data_sources.md` and the licence row
+  in `docs/data_sources/japan.md` now do too. Shizuoka City's notice 205 is
+  under the city's own terms and was not changed. No map re-rendered (a
+  notice is page text).
+- **Staging's numbers for this batch's parked calls** (with the owner, none
+  answered): Okazaki A S16; Kurashiki A S17 and B S18; Tottori A S19;
+  Tottori's Inbi Line against call 180 S20; Matsumoto's edition S21;
+  Kanazawa's notes S22; Kure's "three in five" S23; gate 3 with no in-city
+  count S24; Aomori's clause 6 S25; the proposals S26 (review time);
+  Yamagata's 10 placed Zao Onsen rows S27. Who makes the shared-code changes
+  in S17 and S19 is S14 (staging recommended Cleanup).
+
 ### 2026-10-11 - Kurashiki built, the city's year-end food-permit list of March 31, 2026, food only
 
 - **Kurashiki built (page 306, notice 216), Hiroshima's page shape (food
