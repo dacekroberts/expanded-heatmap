@@ -359,11 +359,11 @@ Recorded 2026-10-08 on branch `basemap`; live with the phase 2 landing
     so the site's privacy text (decision 18) names it; Workers invocation
     logs are on by default and are turned off for the tile Worker.
 <!-- /internal -->
-### Place search index: OpenStreetMap, ODbL 1.0 (pilot: Kyoto, then a sample of cities)
+### Place search index: OpenStreetMap, ODbL 1.0 (every map with a search button)
 
-<!-- internal -->Pilot on a branch (Kyoto 2026-10-07; Seattle, Chicago, Vancouver and Sydney
-2026-10-08, the first batch of a one-city-per-region sample); nothing here is
-published until the owner approves it at review time.<!-- /internal -->
+<!-- internal -->Published with the phase 2 landing, 2026-10-12, on the maps that have an
+index under `app/static/places/` (the Kyoto pilot of 2026-10-07 and the
+sample batches after it); the other maps follow in the rollout's waves.<!-- /internal -->
 
 - **Data:** each city's place index (`app/static/places/<city>.json`) lists
   named streets, intersections derived from shared street nodes, named
