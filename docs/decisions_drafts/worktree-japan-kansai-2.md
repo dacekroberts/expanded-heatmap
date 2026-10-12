@@ -46,6 +46,22 @@ Named by city and letter; Staging assigns the S numbers when it relays them.
 
 ## Entries
 
+### 2026-10-11 - Naha's one measurement: a rebuild from the monthly files reaches the permits in force (104.8% by permit, 98.8% by premises); no renewal trap
+
+- **BODIK answered without a block.** One `package_search` call, then 213 file GETs, one every 21 s (about 75 minutes), every one HTTP 200, no 403 or 429; no `datastore_search_sql`. The files are in `data/naha/raw/shinki/` (140) and `data/naha/raw/keizoku/` (73), gitignored, each named with its resource id's first eight characters (two August 2026 resources share a file name).
+- **Naha publishes renewals too, which the master-list row did not know.** Beside `shinki_syokuhin` (（新規）食品営業許可施設, 140 monthly files, April 2015 to August 2026, CC BY 4.0 as stated) the city's organization holds `472018_keizoku_syokuhin` (（継続）食品営業許可施設, 73 monthly files, April 2015 to May 2021, CC BY 4.0 as stated). Neither licence has been read by an agent.
+- **The measurement** (a scratch script, counts only; every file read, 21,626 rows, an end date on 21,615; as-of 2026-08-31, a permit in term when its 有効期限 or 有効期間 ends on or after it):
+
+  | Rebuilt from | 飲食店営業 permits in term | Distinct (address, name) | Against 8,530 in force |
+  |---|---|---|---|
+  | The new-permit files alone | **8,938** | 8,429 | **104.8%** by permit, 98.8% by premises |
+  | New permits and renewals | 9,313 | 8,784 | 109.2%, 103.0% |
+
+  All food permits in term: 10,580 from the new-permit files (10,000 distinct by address, name and type), 11,116 with the renewals.
+- **Nagoya's renewal trap does not apply.** The restaurant permits in term from the new-permit files run about 1,200 to 1,650 a grant year from 2021 to 2025 (2021 1,198, 2022 1,506, 2023 1,645, 2024 1,438, 2025 1,619; 2026 to August 1,166): a steady flow the size of a five-to-six-year renewal cycle on about 8,500 permits, so since the 2021 law the "new" files carry the re-permitted premises as well. The renewal files stop in May 2021 and add only 375 permits still in term.
+- **What it is not**: closures are invisible (Kyoto's shape), so the rebuild is an upper bound, which is why it passes 100%; the 8,530 is the master-list row's figure, taken as restaurant permits in force and not re-derived here; nothing was classified (簡易営業 and vehicle permits are still in the counts), joined or placed. The files carry 申請者名, 代表者名, 申請者住所 and phones: none was read into the measurement or printed.
+- **For Staging and the owner**: the one measurement Naha waited on is met. *Recommend moving Naha from C to a brief* (Kyoto's rebuilt-register shape, `japan_register.rebuilt_register`, food only unless the personal-services lists turn up), with two licence reads first (the two Naha packages). Tradeoff: an upper bound with closures invisible, as Kyoto's page says of its own.
+
 ### 2026-10-11 - Cluj-Napoca built: DSVSA Cluj's county lists read by role, placed by the OSM address join with the nearest-number tier (page 305; notice 215)
 
 - **Built on the owner's calls 215a and 222**: Band B, food only, the unplaced share stated. `python scripts/brief_check.py cluj_napoca`: 7 of 8 claims hold; the eighth (the OSM tram relations) failed three times on Overpass timeouts, a host failure, and the build's own fetch then read the 8 relations the claim describes.
