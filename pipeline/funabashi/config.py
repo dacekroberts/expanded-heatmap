@@ -249,7 +249,7 @@ LINES = {
 #     Yokosuka / Sobu Rapid Line (the registry's jr-east-yokosuka-line);
 #   * Tokyo's values, not yet registry entries because only Tokyo drew them:
 #     Keisei Main Line #785868 (KS), JR Chuo-Sobu Line #B09000 (JB), JR Keiyo
-#     Line #F86040 (JE), Tozai Line #6890A0 (T), Hokuso Line #787878 (HS);
+#     Line #C81000 (JE; #F86040 until 2026-10-12, owner, S3), Tozai Line #6890A0 (T), Hokuso Line #787878 (HS);
 #   * Kasukabe's value for the Tobu Urban Park Line, #60A000 (TD).
 # Each of those six needs a registry entry naming this map; until one exists
 # the literal here must equal the other map's.

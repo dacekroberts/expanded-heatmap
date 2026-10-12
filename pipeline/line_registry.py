@@ -266,7 +266,7 @@ REGISTRY = {
     },
     # the project's colour tokyo already drew (East-2, 2026-10-11); pins >= 45.0; 11.8 from the JR Musashino Line where they share track into 西船橋, under the 18 for lines within 500 m: a parked call for Cleanup (East-2's drafts, Funabashi).
     "jr-east-keiyo-line": {
-        "name": "JR Keiyo Line", "operator": "JR East", "colour": "#F86040",
+        "name": "JR Keiyo Line", "operator": "JR East", "colour": "#C81000",
         "maps": {"funabashi": "JE", "ichikawa": "JE", "tokyo": "JE", "urayasu": "JE"},
     },
     # the project's colour every map already drew (hue-matched to the operator); pins >= 62.6, lines >= 16.1, lines beside it >= 19.1.

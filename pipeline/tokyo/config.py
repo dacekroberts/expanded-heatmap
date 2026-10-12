@@ -486,7 +486,7 @@ for _k, _h in _HUES.items():
 _COLOURS = {
     "JY": "#60A000", "JK": line_registry.colour("jr-east-keihin-tohoku-line"),
     "JC": line_registry.colour("jr-east-chuo-line"), "JB": "#B09000",
-    "JO": line_registry.colour("jr-east-yokosuka-line"), "JE": "#F86040",
+    "JO": line_registry.colour("jr-east-yokosuka-line"), "JE": line_registry.colour("jr-east-keiyo-line"),
     "JJ": line_registry.colour("jr-east-joban-line"), "JA": "#207078",
     "JU": line_registry.colour("jr-east-utsunomiya-takasaki-line"), "G": "#B06800", "M": "#F80008",
     "H": "#909088", "T": "#6890A0", "C": "#007034", "Y": "#A89060", "Z": "#C870C8", "N": "#586858",
