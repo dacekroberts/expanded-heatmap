@@ -24,6 +24,7 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline import place_index  # noqa: E402
 from pipeline.map_common import load_osm_line_shapes, render_heatmap  # noqa: E402
 from pipeline.sao_paulo.boundary import city_polygon  # noqa: E402
 from pipeline.sao_paulo.config import (  # noqa: E402
@@ -89,6 +90,9 @@ def main():
         ring_edges_meters=RING_EDGES_METERS,
         ring_labels=RING_LABELS,
         label_focus=city_polygon(verbose=False),
+        # Place search (batch 3, 2026-10-11): the index step2b_place_index.py
+        # writes, served from the app's static folder under its content hash.
+        place_index_url=place_index.index_url("sao_paulo"),
     )
 
 

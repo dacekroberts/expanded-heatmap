@@ -313,3 +313,65 @@ BARCELONA_BBOX = {
 }
 BOUNDARY_AREA_KM2 = 101.4
 BOUNDARY_AREA_TOLERANCE_KM2 = 4.0
+
+# --- Place search (sample batch 2a, 2026-10-08) -------------------------------
+
+# OSM's places inside the municipality of Barcelona (relation 347950, admin_level 8; the
+# province, 349035, shares the name; looked up 2026-10-08),
+# by pipeline/place_index_fetch.py (two queries), indexed by
+# step2b_place_index.py (DECISIONS.md "Four ideas assessed", item 3); an area
+# id is 3600000000 plus the relation's.
+PLACE_AREA = "(id:3600347950)"
+# NEW file names: data/ is shared by every worktree.
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-08.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-08.json"
+# The local language(s) of OSM's names here: Catalan, OSM's `name` here.
+# Spanish was declared too and measured by its own name:es tag: 0.8% of the
+# index's rows (0.5% of all named objects, 0.1% of streets; 2026-10-08), so
+# it is not declared: under the 90% floor it stops the step, and under 50% the
+# page could not name it. The search still takes Spanish street words in a
+# Catalan city (map_common, LANG_WORDS "ca": "Calle Balmes" finds Carrer de
+# Balmes). Batch 2a, docs/decisions_drafts/place-search.md.
+PLACE_LANGUAGES = ("ca",)
+PLACE_FOLD = None
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+PLACE_REVIEWED = {
+    "Porta Gaudí de la Facultat de Farmàcia i Ciències de l'Alimentació":
+        "Gaudí's gate at the university's pharmacy faculty, a monument ('farmàcia' is the faculty)",
+    "Torre de les aigües de l'antiga fàbrica de Catalana de Gas":
+        "the water tower of a former gas works, an attraction (Wikipedia; 'company' is in its English name)",
+    "Carrer de l'Hostal d'en Sol": "a public street named for a building or institution on it, not a business (batch 2b, _named_street)",
+    "Carrer de l'Hostal de Sant Antoni": "a public street named for a building or institution on it, not a business (batch 2b, _named_street)",
+}
+# OSM objects a reading by eye found to be a business or a home that no rule
+# in place_index.py catches, each with why (place_index.build, `dropped`).
+# Batch 2a (2026-10-08): the Camp Nou's four stands, mapped as place=locality,
+# would list as neighbourhoods.
+PLACE_DROPPED = {
+    "node/6882372015": "'Tribuna', a stand of the Camp Nou mapped as place=locality",
+    "node/6882372016": "'Lateral', a stand of the Camp Nou mapped as place=locality",
+    "node/6882372017": "'Gol Nord', a stand of the Camp Nou mapped as place=locality",
+    "node/6882372018": "'Gol Sud', a stand of the Camp Nou mapped as place=locality",
+    # The Gran Logia Simbólica Española, a Masonic lodge OSM tags as a place
+    # of worship, both of its objects (owner, 2026-10-08: "drop gran logia").
+    "way/813703606": "'Gran Logia Simbólica Española', the lodge's seat in an apartment building",
+    "node/7600733729": "'Logia Masonica GLSE', the same lodge as a node",
+    # Houses kept on tourism=attraction or artwork alone and found not open to the public at a source (owner, 2026-10-11: "drop by id (all)"; checked 2026-10-11).
+    "way/614574610": "Casa Calvet: apartments, not open to visitors, only the ground-floor restaurant is public (https://patrimoni.gencat.cat/en/node/33069)",
+    "way/385187741": "Casa Bruno Cuadros: the interior cannot be visited (https://thisisbarcelona.com/architecture/houses-and-emblematic-buildings/casa-bruno-cuadros)",
+    "way/679019157": "Casa Lleó Morera: closed to the public for about ten years; a reopening as a museum was approved 2026-06-26 with no date (https://en.ara.cat/society/barcelona-will-reopen-to-the-public-one-of-the-modernist-treasures-of-passeig-gracia_1_5780887.html). Re-check when it reopens",
+}
+
+# Visitable former homes (owner, 2026-10-08: "visitable only hard line. Must
+# make sure info is up-to-date"): homes the home rule holds out that the public
+# can visit today, by OSM id, each checked at its source on the date given
+# (place_index, VISITABLE FORMER HOMES). scripts/check_place_search.py G fails
+# once an entry is a year old: check it again at its source and renew
+# "checked", or remove it.
+PLACE_VISITABLE = {
+    "relation/17271255": {"name": "Jardí de la Fundació Julio Muñoz Ramonet", "access": "OPEN_REGULAR",
+        "source": "https://www.barcelona.cat/barcelonacultura/en/recomanem/corner-greenery-and-freshness-muntaner-street",
+        "checked": "2026-10-08",
+        "why": "a municipal garden at a former mansion, free entry, open daily 10:00-20:00"},
+}

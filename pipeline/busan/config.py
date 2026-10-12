@@ -194,3 +194,50 @@ BUSAN_BBOX = {
     "lon_min": OSM_BBOX[1],
     "lon_max": OSM_BBOX[3],
 }
+
+# ---------------------------------------------------------------------------
+# Place search (sample batch 2b, 2026-10-08): pipeline/place_index.py builds
+# app/static/places/busan.json from the caches place_index_fetch.py writes.
+# The search area is the map's: Busan's own relation 2396450 (부산광역시, admin_level 4; step 1's
+# BOUNDARY_RELATION), confirmed by id 2026-10-08.
+# Overpass area id = 3600000000 + relation id.
+PLACE_AREA = "(id:3602396450)"
+# NEW file names: data/ is shared by every worktree.
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-08.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-08.json"
+# The local language of OSM's names here: Korean.
+PLACE_LANGUAGES = ("ko",)
+PLACE_FOLD = None
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+PLACE_REVIEWED = {
+    "반여1동": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+    "유창맨션앞교차로": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+}
+# OSM objects a reading by eye found to be a business or a home that no rule
+# in place_index.py catches, each with why (place_index.build, `dropped`).
+# From the read of every landmark and place name without a place word
+# (batch 2b, 2026-10-08), each id checked against its cached name.
+PLACE_DROPPED = {
+    "node/4837746325": "an apartment complex (부영벽산파라빌), tagged historic=castle",
+    "node/4837746323": "a power plant's workers' dormitory, tagged historic=castle",
+    "way/469326055": "a pond inside the Central Park Heights apartment complex",
+    "way/866978407": "an apartment estate's badminton court (operator 송정 휴먼시아)",
+    "way/469843112": "an apartment complex's playground (대우)",
+    "way/474770032": "a rest space beside an apartment block (11동)",
+    "way/606768272": "the central plaza of the Lotte Castle Kaiser apartment complex",
+    "node/5811147183": "the same apartment complex's sculpture",
+    "node/9796467317": "a shopping outlet's viewing deck, tagged a locality",
+    "node/14205464758": "a dumpling shop, tagged a locality",
+    "node/14205464760": "a daycare, tagged a locality",
+    "node/14205464759": "a shop at the same spot by the same mapper, tagged a locality",
+    "way/742377543": "a shopping mall's plaza (Art Mall-ing)",
+    "node/5470266349": "the same mall's sculpture",
+    "way/556408688": "the same mall's roof garden",
+    "node/5470266348": "the same mall's clock tower",
+    # The owner's answers to 2b's questions (2026-10-11): a description standing in for a name, a glitched name, and religious residences held to the worship precedent.
+    "way/470434943": "a description standing in for a name (a small park's benches)",
+    "way/842047734": "a glitched name: one Latin letter before the word for park",
+    "node/10689843449": "a prayer house (기도원), a religious residence tagged a place of worship, not notable",
+    "way/1098390945": "a convent (수녀원), a religious residence tagged a place of worship, not notable",
+}

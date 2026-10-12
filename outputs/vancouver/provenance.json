@@ -1,0 +1,24 @@
+{
+  "osm_places": {
+    "bytes": 33326549,
+    "elements": 280535,
+    "file": "osm_places_2026-10-08.json",
+    "host": "overpass-api.de",
+    "how": "kept (on disk from an earlier run)",
+    "osm_base": "2026-10-08T07:40:09Z",
+    "query": "[out:json][timeout:170];\narea(id:3601852574,3602221119,3601377803,3602221139,3601384967)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-08T07:44:18+00:00",
+    "sha256": "e59bea5f2cf63b08d3ba81da6b0fae35728a8bdb1635996c26299c8d9732bd87"
+  },
+  "osm_places_extra": {
+    "bytes": 188825,
+    "elements": 538,
+    "file": "osm_places_extra_2026-10-08.json",
+    "host": "overpass-api.de",
+    "how": "fetched",
+    "osm_base": "2026-10-08T08:32:56Z",
+    "query": "[out:json][timeout:170];\narea(id:3601852574,3602221119,3601377803,3602221139,3601384967)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-08T08:36:37+00:00",
+    "sha256": "ce25e9bb0cef2a26ede8379a7bbcc56cf853d59b2c1585dc2a9f07a14468951d"
+  }
+}

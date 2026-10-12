@@ -4138,15 +4138,50 @@ _LAYERS_ICON = (
 )
 
 
-def render_map_help(layers="business categories"):
+def search_languages(slug):
+    """The languages a city's place search answers in, as its index step
+    measured them (outputs/<slug>/place_search.json; pipeline/place_index.py,
+    LANGUAGES), or None for a city without search. Never written by hand: a
+    page naming a language its index does not carry would mislead (owner,
+    2026-10-07; scripts/check_place_search.py)."""
+    import json
+    path = Path(__file__).parent.parent / "outputs" / slug / "place_search.json"
+    if not path.exists():
+        return None
+    return json.loads(path.read_text(encoding="utf-8"))["languages"]["listed"]
+
+
+def or_list(items):
+    """"English", "English or Japanese", "English, French or Dutch"."""
+    items = list(items)
+    return items[0] if len(items) == 1 else ", ".join(items[:-1]) + " or " + items[-1]
+
+
+assert or_list(["English", "French", "Dutch"]) == "English, French or Dutch"
+
+
+def render_map_help(layers="business categories", search=None):
     """How to use the map, the same on every city page: pipeline/map_common.py
     draws every map with the same controls. `layers` is the page's own name
     for its business layers ("business layer" on a one-bucket map, "three
-    business categories (Retail, Food service and Personal services)")."""
+    business categories (Retail, Food service and Personal services)").
+    `search`: the city's slug on a map with place search (pilot, 2026-10-07),
+    whose bullet names the languages measured for it (search_languages)."""
+    search_line = ""
+    languages = search_languages(search) if search else None
+    if languages:
+        # Wording approved by the owner, 2026-10-07; the languages are measured.
+        search_line = (
+            "- The search button (top left) finds streets, intersections, stations, "
+            f"lines, neighborhoods and landmarks, in {or_list(languages)}, and moves the "
+            "map there. It does not search the businesses on the map. The list of places "
+            "loads once when you open the search, and what you type never leaves your "
+            "browser.\n")
     st.markdown(
         "**Using the map**\n\n"
         f"- The layer control {_LAYERS_ICON} in the top left turns the rings "
         f"around each station and the {layers} on and off.\n"
+        f"{search_line}"
         "- Zoomed out, a business layer shows numbered circles, each counting "
         "the businesses in its area. Zoom in to see individual dots, and hover "
         "over a dot for its details.\n"

@@ -5,6 +5,7 @@ Chicago-specific.
 
 Input:  data/chicago/processed/stations.csv
         data/chicago/processed/businesses_clean.csv
+        app/static/places/chicago.json  (its hash only, for the URL)
         data/chicago/raw/gtfs.zip                    (for the line overlay)
         data/chicago/raw/city_boundary.geojson       (label anchoring)
 Output: outputs/chicago/heatmap.html
@@ -19,6 +20,7 @@ import geopandas as gpd
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline import place_index  # noqa: E402
 from pipeline.map_common import load_line_shapes, render_heatmap  # noqa: E402
 from pipeline.chicago.config import (  # noqa: E402
     STATIONS_CSV,
@@ -90,6 +92,9 @@ def main():
         ring_edges_meters=RING_EDGES_METERS,
         ring_labels=RING_LABELS,
         label_focus=city_geometry(),
+        # Place search (sample, 2026-10-08): the index step2b_place_index.py
+        # writes, served from the app's static folder under its content hash.
+        place_index_url=place_index.index_url("chicago"),
     )
 
 

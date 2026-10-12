@@ -1,0 +1,18 @@
+{
+  "index": "app/static/places/seattle.json",
+  "places": 41132,
+  "data_retrieved": "2026-10-08",
+  "languages": {
+    "local": [
+      "en"
+    ],
+    "coverage": {
+      "en": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "English"
+    ]
+  },
+  "stations_not_open": []
+}

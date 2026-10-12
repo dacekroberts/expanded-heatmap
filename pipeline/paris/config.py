@@ -359,3 +359,80 @@ PARIS_BBOX = {
     "lon_min": 2.20,
     "lon_max": 2.49,
 }
+
+# ---------------------------------------------------------------------------
+# Place search (batch 3, the size tests, 2026-10-11): pipeline/place_index.py
+# builds app/static/places/paris.json from the caches place_index_fetch.py
+# writes. The search area is the map's: the commune of Paris, relation 7444 (admin_level 8, ref:INSEE 75056, the
+# BOUNDARY_COMMUNE_CODE; the departement 71525 shares the name),
+# confirmed by id 2026-10-11. Overpass area id = 3600000000 + relation id.
+PLACE_AREA = "(id:3600007444)"
+# NEW file names: data/ is shared by every worktree.
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-11.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-11.json"
+# The local language of OSM's names here: French.
+PLACE_LANGUAGES = ("fr",)
+PLACE_FOLD = None
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+PLACE_REVIEWED = {
+    "BIU Santé Pharmacie": "a university library, the pharmacy faculty's",
+    "Faculté de Pharmacie de Paris": "a university faculty",
+    "Cabinet d'Histoire (Hôtel de Magny)": "a museum pavilion of the Jardin des Plantes in a hôtel particulier",
+    "Conservatoire Hector Berlioz": "a municipal conservatory; its other name is the hôtel particulier it occupies",
+    "Fragment de la façade de l'ancien hôtel de Nouvion": "a fragment of a demolished mansion's front (historic=ruins)",
+    "Hôtel Crozat": "a Place Vendôme hôtel particulier (historic=manor, Wikipedia): the building's historic name, not the hotel business in it (the Panama Hotel precedent)",
+    "Hôtel de Gramont": "a Place Vendôme hôtel particulier (historic=manor, Wikipedia): the building's historic name, not the hotel business in it (the Panama Hotel precedent)",
+    "Hôtel Fieubet": "a hôtel particulier, a historic mansion that houses a school",
+    "Hôtel Gaillard": "a hôtel particulier, the Banque de France's museum building",
+    "Hôtel Lebrun — Le Grand Hôtel des Rêves": "a listed hôtel particulier tagged an attraction; a second name is joined to it by a dash (put to the owner, batch 3)",
+    "Hôtel Mezzara": "a state-owned hôtel particulier by Guimard",
+    "Hôtel Saint-Florentin": "a hôtel particulier used as diplomatic offices, not a residence",
+    "Hôtel Titon": "a listed hôtel particulier used as offices",
+    "Hôtel d'Évreux": "a listed hôtel particulier on Place Vendôme used as offices",
+    "Hôtel d'Heidelbach": "a hôtel particulier, an annex of the Musée Guimet",
+    "Hôtel de Broglie": "a government-owned hôtel particulier",
+    "Hôtel de Cassini": "a government-owned hôtel particulier",
+    "Hôtel de Clermont": "a government-owned hôtel particulier",
+    "Hôtel de Choiseul-Praslin": "a listed hôtel particulier in institutional use",
+    "Hôtel de Lassay": "a hôtel particulier (historic=castle, Wikipedia), the official residence of the National Assembly's president: an institution's building, as Brussels' Royal Palace is (put to the owner, batch 3)",
+    "Hôtel de Lauzun": "a hôtel particulier owned by the city, a public monument",
+    "Hôtel de Rosambo": "a listed hôtel particulier with a Wikipedia article (its present use not confirmed; put to the owner, batch 3)",
+    "Hôtel de Sens": "a medieval hôtel particulier, a public library",
+    "Hôtel de Soubise": "a hôtel particulier, the National Archives' museum",
+    "Hôtel de Sully": "a hôtel particulier, the national monuments centre's seat, its courtyard public",
+    "Hôtel de la Marine": "a public monument and museum on Place de la Concorde",
+    "Hôtel de la Monnaie": "the Paris Mint, a public monument and museum",
+    "Hôtel du ministre des Affaires étrangères": "the foreign ministry's building on the Quai d'Orsay",
+    "Hôtel Élysée Palace": "a former hotel's building, now offices: the building, not a business",
+    "Jardin de l'hôtel-Lamoignon - Mark-Ashton": "a public garden named for the hôtel particulier beside it",
+    "Jardin de l’Hôtel Salomon de Rothschild": "a public garden named for the hôtel particulier beside it",
+    "Musée Cognacq-Jay": "a museum; its other name is the hôtel particulier it occupies",
+    "Musée de Cluny": "a museum; its other name is the hôtel particulier it occupies",
+    "Musée de la Vie Romantique": "a museum; its other name is the hôtel particulier it occupies",
+    "Musée national Picasso-Paris": "a museum; its other name is the hôtel particulier it occupies",
+    "Noviciat des Dominicains": "a historic monastery, now a university site; its other name is a hôtel",
+    "Rue de l'Hôtel Colbert": "a street's own name",
+    "Rue de l'Hôtel Saint-Paul": "a street's own name",
+}
+# OSM objects a reading by eye found to be a business or a home that no rule
+# in place_index.py catches, each with why (place_index.build, `dropped`).
+PLACE_DROPPED = {
+    # From the read of every landmark and place (the place-read agent, batch 3, 2026-10-11), each id checked against its cached name.
+    "node/3209234481": "a commercial art dealer's gallery (tourism=gallery), a business",
+    "node/9556381826": "a commercial art gallery, a business",
+    "node/10121564617": "a commercial art gallery, a business",
+    "node/10289834511": "a commercial art gallery, a business",
+    "node/10929529774": "a commercial design gallery, a business",
+    "node/13574532262": "a commercial gallery whose name is a placeholder",
+    "node/11241976146": "a plaque whose text, used as its name, names two people at the building they lived in",
+    "node/9850455219": "a gated private residential enclave tagged a neighbourhood",
+    "node/12851237173": "a housing estate tagged a neighbourhood",
+    "node/11451816569": "a congregation's house, a religious residence tagged a place of worship, not notable",
+    "node/12097151763": "a congregation's house, a religious residence tagged a place of worship, not notable",
+    "node/9439245513": "a community house, a religious residence tagged a place of worship, not notable",
+    "node/7297114086": "a community house tagged a place of worship, not notable; its name a description",
+    "node/12189660891": "a masonic body's seat tagged a place of worship (the Gran Logia precedent, Barcelona)",
+    "node/13843651727": "a glitched name (not a word)",
+    "relation/3839946": "a glitched name (a garbled Villa des Arts), and artists' studio housing",
+}

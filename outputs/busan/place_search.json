@@ -1,0 +1,61 @@
+{
+  "index": "app/static/places/busan.json",
+  "places": 22815,
+  "data_retrieved": "2026-10-08",
+  "languages": {
+    "local": [
+      "ko"
+    ],
+    "coverage": {
+      "en": 0.795,
+      "ko": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "English",
+      "Korean"
+    ]
+  },
+  "stations_not_open": [
+    {
+      "osm": "node/10566822378",
+      "name": "엄궁",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/10566822379",
+      "name": "학장",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/10566822380",
+      "name": "사상스마트시티",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/10566822381",
+      "name": "새벽시장",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/10566822382",
+      "name": "사상",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/10566861520",
+      "name": "부경경마공원",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/14081390783",
+      "name": "하단",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/5942137553",
+      "name": "동아대",
+      "tag": "railway=construction"
+    }
+  ]
+}

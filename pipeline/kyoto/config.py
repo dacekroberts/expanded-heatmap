@@ -148,6 +148,27 @@ STATION_OSM_JSON = DATA_RAW / "osm_station_names.json"
 # stops OSM may tag railway=tram_stop (Osaka's Hankai lesson).
 TRAM_OSM_JSON = DATA_RAW / "osm_tram_stop_names.json"
 OSM_NAME_MATCH_M = 600
+# Place search (pilot, 2026-10-07; DECISIONS.md "Four ideas assessed", item 3):
+# OSM's places inside the city line, one Overpass query by
+# pipeline/place_index_fetch.py, indexed by step2b_place_index.py. A NEW file
+# name: data/ is shared by every worktree.
+PLACE_AREA = '["name"="京都市"]["admin_level"="7"]["boundary"="administrative"]'
+# v2: the query with named markets (owner, 2026-10-07); the first cache,
+# osm_places_2026-10-07.json, is the pilot's first build.
+PLACE_OSM_JSON = DATA_RAW / "osm_places_v2_2026-10-07.json"
+# place_index_fetch.EXTRA_QUERY's classes (stadiums, artworks, civic
+# buildings, airports, beaches, bays, places as areas), a second query since
+# 2026-10-08.
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-08.json"
+# The local language(s) of OSM's `name` here (place_index.py, LANGUAGES), and
+# the Japanese long-vowel fold the search applies (place_index.FOLDS).
+PLACE_LANGUAGES = ("ja",)
+PLACE_FOLD = "ja"
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+PLACE_REVIEWED = {
+    "愛宕山ホテル跡": "the ruins of the Atagoyama Hotel (closed 1944), a historic site on Mt. Atago",
+}
 # Where OSM's objects for one station disagree on name:en, the spelling taken.
 # 西院 is one interchange by N02's group code (Hankyu's and the Randen's, 214 m
 # apart), and its operators READ it differently: Hankyu's Saiin, the Randen's
@@ -356,3 +377,28 @@ KYOTO_BBOX = {
     "lon_max": OSM_BBOX[3],
 }
 CITY_BBOX = KYOTO_BBOX
+
+# Visitable former homes (owner, 2026-10-08: "visitable only hard line. Must
+# make sure info is up-to-date"): homes the home rule holds out that the public
+# can visit today, by OSM id, each checked at its source on the date given
+# (place_index, VISITABLE FORMER HOMES). scripts/check_place_search.py G fails
+# once an entry is a year old: check it again at its source and renew
+# "checked", or remove it.
+PLACE_VISITABLE = {
+    "way/515857420": {"name": "旧三井家下鴨別邸", "access": "OPEN_REGULAR",
+        "source": "https://ja.kyoto.travel/tourism/article/mitsuike/",
+        "checked": "2026-10-08",
+        "why": "the former Mitsui family villa, city-owned, open daily 9:00-17:00 except Wednesdays"},
+    "way/556216450": {"name": "駒井家住宅", "access": "OPEN_REGULAR",
+        "source": "https://www.keihan.co.jp/navi/architecture/architecture202606.php",
+        "checked": "2026-10-08",
+        "why": "the Komai house (National Trust of Japan), open Fridays and Saturdays 10:00-15:00 by advance booking, closed mid-July to August and mid-December to February"},
+    "way/619972478": {"name": "秀穂舎", "access": "OPEN_REGULAR",
+        "source": "https://www.shimogamo-jinja.or.jp/about/special",
+        "checked": "2026-10-08",
+        "why": "Shimogamo Shrine's museum in a former priest family's house, open 10:00-16:00"},
+    "way/640426916": {"name": "旧邸御室", "access": "OPEN_SEASONAL",
+        "source": "https://omuro-kyoto.jp/news/detail.php?id=63",
+        "checked": "2026-10-08",
+        "why": "Kyutei Omuro, open to the public on announced days each year (2026: May 2-5 and May 30-31, booked tours)"},
+}

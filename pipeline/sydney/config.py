@@ -148,3 +148,36 @@ SYDNEY_BBOX = {
     "lon_min": 151.15,
     "lon_max": 151.25,
 }
+
+# --- Place search (sample, 2026-10-08) ----------------------------------------
+
+# OSM's places inside the City of Sydney LGA, one Overpass query by
+# pipeline/place_index_fetch.py, indexed by step2b_place_index.py (the Kyoto
+# pilot, DECISIONS.md "Four ideas assessed", item 3). The area is
+# BOUNDARY_OSM_RELATION's (1251066, admin_level 6); an area id is 3600000000
+# plus the relation's.
+PLACE_AREA = "(id:3601251066)"
+# A NEW file name: data/ is shared by every worktree.
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-08.json"
+# place_index_fetch.EXTRA_QUERY's classes (stadiums, artworks, civic
+# buildings, airports, beaches, bays, places as areas), a second query since
+# 2026-10-08.
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-08.json"
+# The local language(s) of OSM's `name` here (place_index.py, LANGUAGES); no
+# long-vowel fold (place_index.FOLDS).
+PLACE_LANGUAGES = ("en",)
+PLACE_FOLD = None
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+PLACE_REVIEWED = {
+    "Dalgety's Bond Store A": "a heritage-listed 1875 bond warehouse in Millers Point (wikidata Q59872378)",
+    "Dalgety's Bond Store C": "a heritage-listed 1908 bond warehouse in Millers Point (wikidata Q59872378)",
+}
+# OSM objects a reading by eye found to be a business or a home that no rule
+# in place_index.py catches, each with why (place_index.build, `dropped`).
+PLACE_DROPPED = {
+    "way/504652702": "'Meriton', a leisure=park named for the apartment developer, mapped "
+                     "beside 'Serviced Apartments Park' (way 504652778)",
+    # A house kept on tourism=attraction alone and found not open to the public at a source (owner, 2026-10-11: "drop by id (all)"; checked 2026-10-11).
+    "way/232448864": "Cadman's Cottage: closed for conservation works, its future use undecided (https://therocks.com/see-do-stay/cadmans-cottage). Re-check when it reopens",
+}

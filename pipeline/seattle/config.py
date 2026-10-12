@@ -306,3 +306,41 @@ SEATTLE_BBOX = {
     "lon_min": -122.45,
     "lon_max": -122.06,
 }
+
+# --- Place search (sample, 2026-10-08) ----------------------------------------
+
+# OSM's places inside the eleven station cities (STATION_CITIES), one Overpass
+# query by pipeline/place_index_fetch.py, indexed by step2b_place_index.py (the
+# Kyoto pilot, DECISIONS.md "Four ideas assessed", item 3). The areas are the
+# cities' OSM boundary relations (admin_level 8, one match each, looked up
+# 2026-10-08): Seattle 237385, Bellevue 237868, Redmond 237376, Shoreline
+# 237358, SeaTac 237380, Kent 237875, Tukwila 237384, Federal Way 237350,
+# Mercer Island 237360, Lynnwood 237662, Mountlake Terrace 237670; an area id
+# is 3600000000 plus the relation's.
+PLACE_AREA = "(id:3600237385,3600237868,3600237376,3600237358,3600237380,3600237875,3600237384,3600237350,3600237360,3600237662,3600237670)"
+# A NEW file name: data/ is shared by every worktree.
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-08.json"
+# place_index_fetch.EXTRA_QUERY's classes (stadiums, artworks, civic
+# buildings, airports, beaches, bays, places as areas), a second query since
+# 2026-10-08.
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-08.json"
+# The local language(s) of OSM's `name` here (place_index.py, LANGUAGES); no
+# long-vowel fold (place_index.FOLDS).
+PLACE_LANGUAGES = ("en",)
+PLACE_FOLD = None
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+PLACE_REVIEWED = {
+    "Coal Creek Hotel": "a hotel's ruins, historic=ruins",
+    "Grand Pacific Hotel plaque": "a plaque marking a historic building's site (Wikipedia)",
+    "Panama Hotel": "kept as a historic site (owner, 2026-10-08): a National Historic Landmark "
+                    "building in the Chinatown-International District (Wikipedia); the building, "
+                    "not its hotel's business",
+}
+# OSM objects a reading by eye found to be a business or a home that no rule
+# in place_index.py catches, each with why (place_index.build, `dropped`).
+PLACE_DROPPED = {
+    "way/533706524": "'Ride Store', Community Transit's fare-sales office, tagged as a station",
+    "way/221903524": "'Quarters A', a lighthouse keepers' residence (historic=lighthouse, building=yes)",
+    "way/221903453": "'Quarters B', a lighthouse keepers' residence (historic=lighthouse, building=yes)",
+}

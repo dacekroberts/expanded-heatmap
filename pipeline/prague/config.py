@@ -171,3 +171,26 @@ PRAGUE_BBOX = {
     "lon_min": 14.24,
     "lon_max": 14.71,
 }
+
+# --- Place search (sample batch 2a, 2026-10-08) -------------------------------
+
+# OSM's places inside the capital city of Prague (OSM_BOUNDARY_RELATION, 435514; looked up
+# again 2026-10-08, one match),
+# by pipeline/place_index_fetch.py (two queries), indexed by
+# step2b_place_index.py (DECISIONS.md "Four ideas assessed", item 3); an area
+# id is 3600000000 plus the relation's.
+PLACE_AREA = "(id:3600435514)"
+# NEW file names: data/ is shared by every worktree.
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-08.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-08.json"
+# The local language(s) of OSM's names here: Czech.
+PLACE_LANGUAGES = ("cs",)
+PLACE_FOLD = None
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+PLACE_REVIEWED = {
+    "Hotel Golf": "a tram stop (railway=tram_stop, PID U567), named for a nearby hotel",
+}
+# OSM objects a reading by eye found to be a business or a home that no rule
+# in place_index.py catches, each with why (place_index.build, `dropped`).
+PLACE_DROPPED = {}

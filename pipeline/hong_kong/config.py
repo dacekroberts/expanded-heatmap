@@ -150,3 +150,59 @@ HONG_KONG_BBOX = {
     "lon_min": OSM_BBOX[1],
     "lon_max": OSM_BBOX[3],
 }
+
+# ---------------------------------------------------------------------------
+# Place search (sample batch 2b, 2026-10-08): pipeline/place_index.py builds
+# app/static/places/hong_kong.json from the caches place_index_fetch.py writes.
+# The search area is the map's: the SAR's own relation 913110 (admin_level 3, ISO3166-1 HK), the
+# map's whole scope, confirmed by id 2026-10-08.
+# Overpass area id = 3600000000 + relation id.
+PLACE_AREA = "(id:3600913110)"
+# NEW file names: data/ is shared by every worktree.
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-08.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-08.json"
+# The local language of OSM's names here: Chinese; OSM's `name` here is usually
+# bilingual ("彌敦道 Nathan Road"), with name:zh and name:en beside it.
+PLACE_LANGUAGES = ("zh",)
+PLACE_FOLD = None
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+PLACE_REVIEWED = {
+    "保健路 Clinic Road": "a public street named for a building or institution on it, not a business (batch 2b, _named_street)",
+}
+# OSM objects a reading by eye found to be a business or a home that no rule
+# in place_index.py catches, each with why (place_index.build, `dropped`).
+# The read (2026-10-08) covered every landmark and place name without a place
+# word; the precedents are the Panama Hotel (a notable building kept) and
+# Sydney's Meriton park (a business by name, dropped). Names that describe
+# rather than name ("open area with bench") are an owner question, not here.
+PLACE_DROPPED = {
+    # Businesses tagged as places.
+    "node/13178154315": "TakeOut Comedy Club: a comedy venue in a basement, tagged a theatre",
+    "way/756672170": "大棠有機生態園 Tai Tong Organic EcoPark: a ticketed leisure farm, tagged a park",
+    "way/1490236780": "水邊圍邨羅馬商業平台: a housing estate's shopping podium, tagged a park",
+    # Homes and residents-only facilities.
+    "way/1498122620": "Nan Fung Sun Chuen Ball Court: a private estate's own court",
+    "way/696405913": "公眾休憩用地A Public Recreational Area A: a lettered open space for a development's residents (park:for=resident)",
+    "way/776910736": "公眾休憩用地B Public Recreational Area B: as A",
+    "way/776910737": "公眾休憩用地C Public Recreational Area C: as A",
+    # The owner's answers to 2b's questions (2026-10-11): the Pillar of Shame ("drop by id"), descriptions standing in for names, and religious residences held to the worship precedent (a non-notable one where people live is out; the notable 般若精舍, 清涼法苑 and Chi Lin Nunnery stay).
+    "node/1925188564": "a sculpture removed in December 2021 (OSM keeps it as historic=ruins with demolished:end_date): a search would move the map to a place where it is not",
+    "way/1556817980": "a description standing in for a name (a sitting-out area)",
+    "node/11400928912": "a description standing in for a name (a refuse point tagged a park)",
+    "node/10264155125": "a 精舍 (a small hall where its nuns or devotees live), tagged a place of worship, not notable",
+    "way/702596982": "a 精舍 (a small hall where its nuns or devotees live), tagged a place of worship, not notable",
+    "way/510509951": "a 精舍 (a small hall where its nuns or devotees live), tagged a place of worship, not notable",
+    "way/1421939813": "a 精舍 (a small hall where its nuns or devotees live), tagged a place of worship, not notable",
+    "way/1421939815": "a 精舍 (a small hall where its nuns or devotees live), tagged a place of worship, not notable",
+    "way/429896216": "a 精舍 (a small hall where its nuns or devotees live), tagged a place of worship, not notable",
+    "way/859463025": "a 精舍 (a small hall where its nuns or devotees live), tagged a place of worship, not notable",
+    "way/191365083": "a 精舍 (a small hall where its nuns or devotees live), tagged a place of worship, not notable",
+    "way/467768817": "a 精舍 (a small hall where its nuns or devotees live), tagged a place of worship, not notable",
+    "way/787051818": "a 精舍 (a small hall where its nuns or devotees live), tagged a place of worship, not notable",
+    "way/787051819": "the same 精舍, a second building",
+    "way/781756943": "a 精舍 (a small hall where its nuns or devotees live), tagged a place of worship, not notable",
+    "way/429685657": "a friary (方濟會院), a religious residence tagged a place of worship, not notable",
+    "way/1493422051": "a nunnery (萬佛堂), a religious residence tagged a place of worship, not notable",
+    "way/763924400": "a retreat house (靜修院), a religious residence tagged a place of worship, not notable",
+}

@@ -244,3 +244,110 @@ SEOUL_BBOX = {
     "lon_min": OSM_BBOX[1],
     "lon_max": OSM_BBOX[3],
 }
+
+# ---------------------------------------------------------------------------
+# Place search (sample batch 2b, 2026-10-08): pipeline/place_index.py builds
+# app/static/places/seoul.json from the caches place_index_fetch.py writes.
+# The search area is the map's: Seoul's own relation 2297418 (서울특별시, admin_level 4; step 1's
+# BOUNDARY_RELATION), confirmed by id 2026-10-08.
+# Overpass area id = 3600000000 + relation id.
+PLACE_AREA = "(id:3602297418)"
+# NEW file names: data/ is shared by every worktree.
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-08.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-08.json"
+# The local language of OSM's names here: Korean.
+PLACE_LANGUAGES = ("ko",)
+PLACE_FOLD = None
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+PLACE_REVIEWED = {
+    "종로 시전행랑 유구": "the excavated remains of the Joseon market arcade on Jongno (historic=ruins), "
+                     "whose English name holds 'shop'",
+    "개나리아파트": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+    "건영아파트앞사거리": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+    "경복아파트사거리": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+    "고덕자이아파트": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+    "금호동벽산아파트3거리": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+    "대아동신아파트앞": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+    "대치우성아파트": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+    "대치은마아파트입구": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+    "동성아파트앞": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+    "르네상스호텔사거리": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+    "면목한신아파트": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+    "목동시영아파트1단지": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+    "목동시영아파트2단지": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+    "무지개아파트": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+    "문정동현대아파트": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+    "방배삼호아파트앞삼거리": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+    "봉화환승주차장": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+    "삼성아파트입구": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+    "서초삼호아파트": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+    "성원아파트": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+    "시범아파트앞": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+    "영등포경남아파트앞": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+    "영등포유통상가": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+    "용마한신아파트": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+    "용산전자상가": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+    "우성아파트앞사거리": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+    "유수지주차장": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+    "전자상가입구": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+    "제각말아파트교차로": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+    "진로아파트": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+    "진흥아파트사거리": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+    "청한빌라앞": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+    "한신청구아파트앞": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+    "한양아파트앞": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+    "현대원효로센터앞": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+    "화곡제1복지아파트": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
+}
+# OSM objects a reading by eye found to be a business or a home that no rule
+# in place_index.py catches, each with why (place_index.build, `dropped`).
+# From the read of every landmark and place name without a place word
+# (batch 2b, 2026-10-08), each id checked against its cached name.
+PLACE_DROPPED = {
+    "way/611143901": "a registered folk-heritage house still lived in, listed as not open to the public",
+    "way/1200714717": "the same house's garden",
+    "way/237615586": "Yun Po-sun's house (Historic Site 438), still the family's private home, closed",
+    "way/560045913": "the same house, a second object",
+    "node/13715588484": "the archbishop's official residence (공관), tagged a place of worship",
+    "node/4605601494": "an apartment complex (단지), tagged historic=castle",
+    "node/5862659485": "a villa apartment building, tagged historic=castle",
+    "node/4640067150": "a villa building's name (-빌), a house church at best",
+    "way/1079152802": "an apartment block's playground, named by block number",
+    "way/1079152801": "an apartment block's playground, named by block number",
+    "way/473191249": "an apartment block's playground, named by block number",
+    "way/473245990": "an apartment block's playground, named by block number",
+    "way/469774875": "an apartment complex's playground (8단지)",
+    "way/474153998": "an apartment complex's playground (한신청구)",
+    "way/469680384": "an apartment complex's playground (푸르뫼마을아파트)",
+    "way/689572153": "landscaped grounds inside the Helio City apartment complex",
+    "node/7325015152": "a working restaurant (Wooraeok), its heritage plaque tagged a monument; not a notable building",
+    "node/4633961754": "Dahn World, a yoga and meditation chain",
+    "node/14202356256": "a music academy",
+    "node/4674989280": "a wedding hall",
+    "node/11549488566": "a fortune-telling shop (철학관)",
+    "node/10176257817": "a fortune-telling shop (철학관)",
+    "node/10215050211": "a fortune-telling shop (철학원)",
+    "node/10168216623": "a divination shop (신점)",
+    "node/11549488560": "a shaman's business under the practitioner's own name",
+    "node/10241833784": "a shaman fortune-teller's shop (보살)",
+    "node/12350486353": "a shaman fortune-teller's shop (보살)",
+    "node/10178109056": "a shaman's shrine-shop",
+    "node/10241834143": "a shaman's shrine-shop",
+    "node/10221915093": "a shaman's shrine-shop",
+    "node/10124028155": "a shaman's private shrine (불사당), a home business",
+    "node/13718472516": "a healing-centre business",
+    "node/10598419912": "a book cafe, tagged a locality",
+    # The owner's answers to 2b's questions (2026-10-11): glitched names with no Korean name to lead, dropped rather than repaired (a corrected name would not be OSM's); religious residences held to the worship precedent (a non-notable one where people live is out).
+    "node/9069644353": "a glitched name: Chinese only, with no Korean name (a church)",
+    "way/980863937": "a glitched name: Chinese only, with no Korean name (a park)",
+    "way/465040923": "a glitched name: Chinese only, with no Korean name (a children's park)",
+    "node/10247209041": "a glitched name: a church's, cut before its last syllable",
+    "node/10247209075": "a glitched name: a church's, cut before its last syllable",
+    "node/10735453811": "a glitched name: a church's, cut before its last syllable",
+    "node/4683905420": "a glitched name: four stray letters on a church",
+    "node/1808679388": "a friary (수도회), a religious residence tagged a place of worship, not notable",
+    "node/4640090321": "a convent (수도회), a religious residence tagged a place of worship, not notable",
+    "way/466726989": "a convent (여자수도회), a religious residence tagged a place of worship, not notable",
+    "node/11466734881": "a prayer house (기도원), a religious residence tagged a place of worship, not notable",
+}

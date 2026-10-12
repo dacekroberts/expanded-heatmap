@@ -87,7 +87,7 @@ st.markdown(
 """
 )
 
-render_map_help('three business categories (Retail, Food service and Personal services)')
+render_map_help('three business categories (Retail, Food service and Personal services)', search='vancouver')
 render_excluded_stations("Vancouver (Regional)")
 render_country_links('Vancouver (Regional)')
 

@@ -1,0 +1,20 @@
+{
+  "index": "app/static/places/hong_kong.json",
+  "places": 20956,
+  "data_retrieved": "2026-10-08",
+  "languages": {
+    "local": [
+      "zh"
+    ],
+    "coverage": {
+      "en": 0.928,
+      "zh": 0.989
+    },
+    "list_share": 0.5,
+    "listed": [
+      "English",
+      "Chinese"
+    ]
+  },
+  "stations_not_open": []
+}

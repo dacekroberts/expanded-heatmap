@@ -1,0 +1,20 @@
+{
+  "index": "app/static/places/kyoto.json",
+  "places": 11739,
+  "data_retrieved": "2026-10-07",
+  "languages": {
+    "local": [
+      "ja"
+    ],
+    "coverage": {
+      "en": 0.742,
+      "ja": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "English",
+      "Japanese"
+    ]
+  },
+  "stations_not_open": []
+}

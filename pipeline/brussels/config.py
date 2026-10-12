@@ -208,3 +208,37 @@ PERSON_NAMED = frozenset()
 
 # The commune's own extent (about 4.29-4.44 E, 50.79-50.92 N), padded.
 BRUSSELS_BBOX = {"lat_min": 50.78, "lat_max": 50.93, "lon_min": 4.28, "lon_max": 4.45}
+
+# --- Place search (sample batch 2a, 2026-10-08) -------------------------------
+
+# OSM's places inside the commune of Bruxelles / Brussel (relation 58274, admin_level 8,
+# wikidata Q239; COMMUNE_CODE 21004), the map's own scope, not the
+# Region (54094), which waits for brussels_regional (looked up 2026-10-08),
+# by pipeline/place_index_fetch.py (two queries), indexed by
+# step2b_place_index.py (DECISIONS.md "Four ideas assessed", item 3); an area
+# id is 3600000000 plus the relation's.
+PLACE_AREA = "(id:3600058274)"
+# NEW file names: data/ is shared by every worktree.
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-08.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-08.json"
+# The local language(s) of OSM's names here: French and Dutch; OSM's `name` here is often both ("Rue Neuve -
+# Nieuwstraat"), so each is measured by its own name:<code> tag after the
+# first.
+PLACE_LANGUAGES = ("fr", "nl")
+PLACE_FOLD = None
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+PLACE_REVIEWED = {
+    # "Hôtel" in French is also a town mansion (hôtel particulier) or a public
+    # building; each of these is a place (batch 2a, 2026-10-08).
+    "Hôtel des Monnaies - Munthof": "a metro station, named for the old mint",
+    "Hôtel Solvay": "Victor Horta's town mansion, a UNESCO World Heritage site open as a "
+                    "museum (tourism=museum, ref:whc 1005)",
+    "Hôtel de Roest d'Alkemade": "an 18th-century town mansion, a listed heritage "
+                                 "attraction (tourism=attraction, wikidata Q42416686)",
+    "Rue de l'Hôtel des Monnaies - Munthofstraat": "a public street named for a building or institution on it, not a business (batch 2b, _named_street)",
+    "Rue du Magasin - Pakhuisstraat": "a public street named for a building or institution on it, not a business (batch 2b, _named_street)",
+}
+# OSM objects a reading by eye found to be a business or a home that no rule
+# in place_index.py catches, each with why (place_index.build, `dropped`).
+PLACE_DROPPED = {}

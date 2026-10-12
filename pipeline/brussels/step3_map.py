@@ -24,6 +24,7 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline import place_index  # noqa: E402
 from pipeline.brussels.config import (  # noqa: E402
     BUSINESSES_CLEAN_CSV,
     COMMUNE_CODE,
@@ -89,6 +90,9 @@ def main():
         ring_edges_meters=RING_EDGES_METERS,
         ring_labels=RING_LABELS,
         label_focus=city,
+        # Place search (sample batch 2a, 2026-10-08): the index step2b_place_index.py
+        # writes, served from the app's static folder under its content hash.
+        place_index_url=place_index.index_url("brussels"),
     )
 
 

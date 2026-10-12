@@ -1,14 +1,36 @@
 {
+  "boundary_url": "https://geo.api.gouv.fr/communes/75056?geometry=contour&format=geojson",
   "fetched_utc": "2026-09-23T17:36:24+00:00",
   "gtfs_url": "https://eu.ftp.opendatasoft.com/stif/GTFS/IDFM-gtfs.zip",
-  "boundary_url": "https://geo.api.gouv.fr/communes/75056?geometry=contour&format=geojson",
   "nap": {
-    "dataset_title": "Réseaux urbains et interurbains d'Île-de-France Mobilités (IDFM)",
     "dataset_id": "6449c52caeceb71273a42dd3",
-    "page_url": "https://transport.data.gouv.fr/datasets/reseau-urbain-et-interurbain-dile-de-france-mobilites",
+    "dataset_title": "Réseaux urbains et interurbains d'Île-de-France Mobilités (IDFM)",
+    "end_date": "2026-10-22",
     "licence": "mobility-licence",
-    "updated": "2026-09-23T01:03:05.837234Z",
+    "page_url": "https://transport.data.gouv.fr/datasets/reseau-urbain-et-interurbain-dile-de-france-mobilites",
     "start_date": "2026-09-20",
-    "end_date": "2026-10-22"
+    "updated": "2026-09-23T01:03:05.837234Z"
+  },
+  "osm_places": {
+    "bytes": 23278101,
+    "elements": 150548,
+    "file": "osm_places_2026-10-11.json",
+    "host": "overpass-api.de",
+    "how": "kept (on disk from an earlier run)",
+    "osm_base": "2026-10-11T21:39:20Z",
+    "query": "[out:json][timeout:170];\narea(id:3600007444)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-11T21:41:13+00:00",
+    "sha256": "ed88d0bf70bdfa662534d433242cfd861eb251bdba0372db7d64b373e52b937e"
+  },
+  "osm_places_extra": {
+    "bytes": 707441,
+    "elements": 1946,
+    "file": "osm_places_extra_2026-10-11.json",
+    "host": "overpass-api.de",
+    "how": "fetched",
+    "osm_base": "2026-10-11T21:42:17Z",
+    "query": "[out:json][timeout:170];\narea(id:3600007444)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-11T21:43:49+00:00",
+    "sha256": "12234402288b1aa27ef1250726a62cd0897760345e5fe12c23b490107bddcdc1"
   }
 }

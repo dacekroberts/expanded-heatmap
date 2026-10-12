@@ -113,7 +113,7 @@ st.markdown(
 """
 )
 
-render_map_help('three business categories (Retail, Food service and Personal services)')
+render_map_help('three business categories (Retail, Food service and Personal services)', search='marseille')
 render_excluded_stations("Marseille")
 render_country_links('Marseille')
 

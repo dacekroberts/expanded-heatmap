@@ -1,0 +1,24 @@
+{
+  "osm_places": {
+    "bytes": 43270246,
+    "elements": 402007,
+    "file": "osm_places_2026-10-11.json",
+    "host": "overpass-api.de",
+    "how": "fetched",
+    "osm_base": "2026-10-11T21:43:07Z",
+    "query": "[out:json][timeout:170];\narea(id:3601376330)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-11T21:47:19+00:00",
+    "sha256": "301679d53c7e33168f0b2537d2cf18232f485a2a853fcf79b48ab8bc1551fb82"
+  },
+  "osm_places_extra": {
+    "bytes": 257486,
+    "elements": 1086,
+    "file": "osm_places_extra_2026-10-11.json",
+    "host": "overpass-api.de",
+    "how": "fetched",
+    "osm_base": "2026-10-11T21:45:26Z",
+    "query": "[out:json][timeout:170];\narea(id:3601376330)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-11T21:49:05+00:00",
+    "sha256": "b9d8cb578c52cd7b4ccc406a6daa6e4fab02a2207c4e577b1f6eb3fa7db86af7"
+  }
+}

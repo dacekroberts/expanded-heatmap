@@ -202,3 +202,41 @@ TBILISI_BBOX = {
     "lon_min": 44.55,
     "lon_max": 45.15,
 }
+
+# ---------------------------------------------------------------------------
+# Place search (sample batch 2b, 2026-10-08): pipeline/place_index.py builds
+# app/static/places/tbilisi.json from the caches place_index_fetch.py writes.
+# The search area is the map's: Tbilisi's own relation 1996871 (თბილისი, admin_level 4, ISO3166-2
+# GE-TB; the one step 1 resolves by OSM_BOUNDARY_NAME_EN), confirmed by id 2026-10-08.
+# Overpass area id = 3600000000 + relation id.
+PLACE_AREA = "(id:3601996871)"
+# NEW file names: data/ is shared by every worktree.
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-08.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-08.json"
+# The local language of OSM's names here: Georgian.
+PLACE_LANGUAGES = ("ka",)
+PLACE_FOLD = None
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+PLACE_REVIEWED = {
+    "ტიციან ტაბიძის ბინა-მემორიალი": "the poet Titsian Tabidze's memorial flat, a house museum "
+                                     "(museum=person; name:en Titsian Tabidze House Museum)",
+}
+# OSM objects a reading by eye found to be a business or a home that no rule
+# in place_index.py catches, each with why (place_index.build, `dropped`).
+PLACE_DROPPED = {
+    # Heritage houses kept on tourism=attraction alone (owner, 2026-10-11: "drop by id (all)"). No operator's or agency's page says they are open; the pages found (checked 2026-10-11) describe private flats seen from outside, so they are held out as homes.
+    "way/555209477": "Ana Madatova's house: described as lived in, its entry closed (https://scantbilisi.ge/en/objects/250/satesto); not established at an official source",
+    "way/496798210": "the Bozarjiants house: an exterior stop on walking tours, described as private; not established at an official source",
+    "way/555200462": "the Seilanov house: a former mansion described as divided into flats; not established at an official source",
+    "way/1105505029": "the Gabashvili house: shown from its yard on tours, no public interior stated; not established at an official source",
+    "relation/2139317": "the Kalantarov house: its entry marked closed, described as flats (https://scantbilisi.ge/en/objects/335/satesto); not established at an official source",
+}
+# Streets closed for rebuilding, kept although OSM draws them
+# highway=construction (place_index.build, `rebuilt`; owner, 2026-10-11): by
+# name, with why and the date seen. A name no construction way carries stops
+# the step, so an entry retires when the street reopens. Lesser streets under
+# reconstruction are not listed: only one a search test missed.
+PLACE_REBUILT = {
+    "შოთა რუსთაველის გამზირი": "Rustaveli Avenue, the city's main avenue, all 22 of its ways highway=construction with access=no in the cache of 2026-10-08 (under reconstruction); wikidata Q1754726",
+}

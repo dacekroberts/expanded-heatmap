@@ -342,6 +342,77 @@ time, when this block stops being internal.
     so the site's privacy text (decision 18) names it; Workers invocation
     logs are on by default and are turned off for the tile Worker.
 <!-- /internal -->
+### Place search index: OpenStreetMap, ODbL 1.0 (pilot: Kyoto, then a sample of cities)
+
+<!-- internal -->Pilot on a branch (Kyoto 2026-10-07; Seattle, Chicago, Vancouver and Sydney
+2026-10-08, the first batch of a one-city-per-region sample); nothing here is
+published until the owner approves it at review time.<!-- /internal -->
+
+- **Data:** each city's place index (`app/static/places/<city>.json`) lists
+  named streets, intersections derived from shared street nodes, named
+  junctions, place names, stations and landmarks (named markets only when
+  notable), extracted from
+  OpenStreetMap through Overpass (`pipeline/place_index_fetch.py`) inside the
+  city boundary (on a regional map, the boundaries of its station cities) and
+  built by `pipeline/place_index.py`. It holds no business
+  records and no data from any other source.
+- **PERMITTED WITH CONDITIONS** (<!-- internal -->`licence-read` 2026-10-07; <!-- /internal -->ODbL 1.0 and the OpenStreetMap
+  Foundation's Geocoding, Substantial, Produced Work and Attribution
+  guidelines, read 2026-10-07). A whole city's index is a Derivative Database:
+  the Geocoding guideline treats a systematic collection of "all or
+  substantially all Primary Features of a given type … within a geographic
+  area city-sized or larger" as substantial. Serving the file to browsers is
+  both Publicly Use and Convey. Each file is therefore published under the
+  Open Database License (ODbL) 1.0
+  (https://opendatacommons.org/licenses/odbl/1-0/) and under no other license.
+- **Notices:** each file carries "© OpenStreetMap contributors", a link to
+  https://www.openstreetmap.org/copyright and the ODbL link (§4.2), in its
+  `license` object. The search box shows, whenever it is open, "Search data
+  © OpenStreetMap contributors (ODbL) · Download this index", "OpenStreetMap
+  contributors" linked to the copyright page, "ODbL" to the licence (§4.3) and
+  "Download this index" to the file (§4.6). This is the OSM Attribution
+  Guideline's "© OpenStreetMap contributors" form, chosen over §4.3(a)'s
+  longer example wording to save space (owner, 2026-10-07).
+- **Access (§4.6):** each city's database is two files, both downloadable
+  free of charge from the site: the index (`app/static/places/<city>.json`,
+  which the search box links) and its street-pair intersections
+  (`app/static/places/crossings/<city>.json`, split off 2026-10-08 so a
+  search downloads it only when it asks for an intersection), which the index
+  names by its path in its `crossings` field. Both carry the notice. The
+  method that builds them is in the public repository. No technical
+  restriction on either file (§4.7).<!-- internal --> For review time: whether
+  the box's "Download this index" should also link the intersections file
+  directly (a wording change for the owner), or the index's naming it is
+  offer enough.<!-- /internal -->
+- **Kept separate (§4.4(d)):** no field from a business register, a transit
+  feed, MLIT or any other non-OSM source is added to the index, and the
+  project's own station list is not used to fill or de-duplicate it. Adding
+  one would bring that data under ODbL. The search box matches the map's own
+  stations and lines by reading them from the page, and joins OSM's station
+  names to them in the visitor's browser; that display is a Produced Work and
+  nothing of it is published as a database.
+<!-- internal -->- **Visiting-status evidence (not data):** a former home is kept against the
+  home rule only when the public can visit it today (`config.PLACE_VISITABLE`;
+  owner, 2026-10-08). Each entry names the page that showed it open, read on
+  the date it records. Nothing from these pages enters the index: they decide
+  whether an OpenStreetMap object stays, the way a reading by eye decides
+  `PLACE_DROPPED`, so no licence or notice of theirs applies to the files.
+  `scripts/check_place_search.py` G holds each entry to a year. Read
+  2026-10-08:
+  - Kyoto: https://ja.kyoto.travel/tourism/article/mitsuike/ (Kyoto City
+    tourism, the former Mitsui villa); https://www.keihan.co.jp/navi/architecture/architecture202606.php
+    (the Komai house); https://www.shimogamo-jinja.or.jp/about/special
+    (Shimogamo Shrine, Shusuisha); https://omuro-kyoto.jp/news/detail.php?id=63
+    (Kyutei Omuro, its own site).
+  - Chicago: https://norwoodparkhistoricalsociety.org/about-us/ (the
+    Noble-Seymour-Crippen House, its society's site).
+  - Vancouver: https://westpointgrey.org/contact/hours-of-operation/
+    (Aberthau, the community centre's site).
+  - Barcelona: https://www.barcelona.cat/barcelonacultura/en/recomanem/corner-greenery-and-freshness-muntaner-street
+    (the Julio Muñoz Ramonet garden, the city's own page).<!-- /internal -->
+- **`LICENSE` carves the index files out** of the MIT and reserved terms, as it
+  does for Fukui's CC BY-SA files (§4.4(a) forbids dual licensing; owner,
+  2026-10-07).
 
 ## Commitment: removal requests are honored, not argued
 

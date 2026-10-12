@@ -8,6 +8,7 @@ survey publishes none).
 
 Input:  data/sydney/processed/stations.csv
         data/sydney/processed/businesses_clean.csv
+        app/static/places/sydney.json  (its hash only, for the URL)
         data/sydney/processed/lines.geojson         (from step 1)
         data/sydney/raw/city_boundary.geojson       (label anchoring)
 Output: outputs/sydney/heatmap.html
@@ -22,6 +23,7 @@ import geopandas as gpd
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline import place_index  # noqa: E402
 from pipeline.map_common import load_geojson_line_shapes, render_heatmap  # noqa: E402
 from pipeline.sydney import config  # noqa: E402
 
@@ -57,6 +59,9 @@ def main():
         ring_labels=config.RING_LABELS,
         label_focus=area,
         legend_names=config.LEGEND_NAMES,
+        # Place search (sample, 2026-10-08): the index step2b_place_index.py
+        # writes, served from the app's static folder under its content hash.
+        place_index_url=place_index.index_url("sydney"),
     )
 
 

@@ -528,3 +528,50 @@ NEW_WESTMINSTER_POINTS = {
     "geometry": True, "page": 2000,
     "file": _EXT_RAW / "new_westminster" / "raw" / "new_westminster_address_points.csv",
 }
+
+# --- Place search (sample, 2026-10-08) ----------------------------------------
+
+# OSM's places inside the five station cities (Vancouver, Surrey and the
+# extension's), one Overpass query by pipeline/place_index_fetch.py, indexed by
+# step2b_place_index.py (the Kyoto pilot, DECISIONS.md "Four ideas assessed",
+# item 3). The areas are the cities' OSM boundary relations (admin_level 8, one
+# match each, looked up 2026-10-08): Vancouver 1852574, Burnaby 2221119, New
+# Westminster 1377803, Coquitlam 2221139, Surrey 1384967; an area id is
+# 3600000000 plus the relation's.
+PLACE_AREA = "(id:3601852574,3602221119,3601377803,3602221139,3601384967)"
+# A NEW file name: data/ is shared by every worktree.
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-08.json"
+# place_index_fetch.EXTRA_QUERY's classes (stadiums, artworks, civic
+# buildings, airports, beaches, bays, places as areas), a second query since
+# 2026-10-08.
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-08.json"
+# The local language(s) of OSM's `name` here (place_index.py, LANGUAGES); no
+# long-vowel fold (place_index.FOLDS).
+PLACE_LANGUAGES = ("en",)
+PLACE_FOLD = None
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+PLACE_REVIEWED = {
+    "Campbell River Lumber Company ruins": "the ruins of a lumber mill, historic=ruins",
+    "North Pacific Lumber Company Barnet Mill Burner": "a mill burner's ruins in Burnaby, on Heritage "
+                                                       "Burnaby",
+}
+
+# Visitable former homes (owner, 2026-10-08: "visitable only hard line. Must
+# make sure info is up-to-date"): homes the home rule holds out that the public
+# can visit today, by OSM id, each checked at its source on the date given
+# (place_index, VISITABLE FORMER HOMES). scripts/check_place_search.py G fails
+# once an entry is a year old: check it again at its source and renew
+# "checked", or remove it.
+PLACE_VISITABLE = {
+    "way/54029332": {"name": "Aberthau", "access": "OPEN_REGULAR",
+        "source": "https://westpointgrey.org/contact/hours-of-operation/",
+        "checked": "2026-10-08",
+        "why": "a heritage mansion run as the West Point Grey community centre, open daily"},
+}
+# OSM objects a reading by eye found to be a business or a home that no rule
+# in place_index.py catches, each with why (place_index.build, `dropped`).
+PLACE_DROPPED = {
+    # A description standing in for a name (owner, 2026-10-11).
+    "node/4390230582": "a description standing in for a name (a church with no name recorded)",
+}

@@ -88,7 +88,7 @@ st.markdown(
 """
 )
 
-render_map_help('three business categories (Retail, Food service and Personal services)')
+render_map_help('three business categories (Retail, Food service and Personal services)', search='montreal')
 render_excluded_stations("Montréal")
 render_country_links('Montréal')
 
