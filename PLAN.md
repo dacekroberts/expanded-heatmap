@@ -172,6 +172,16 @@ Detail files: [japan](docs/plan_detail/japan.md),
     `processed/regional/stations.csv`). Widen `PLACE_AREA` to the four
     municipios, re-fetch (`place_index_fetch.py`), rebuild, re-render the
     map. Check whether Mixcoac is indexed as the one junction row.
+  - **Idea for the next landing (owner, 2026-10-12): a button that
+    returns a map to its starting view.** After a search the map stays
+    at the found place and nothing restores the city-wide view (the
+    marker and the fade end after 12 s on their own; clearing the box
+    does not end them early). The button is an ICON, no words, in the
+    family of the layer control and the search button. If the button row
+    gets crowded, this may be the reason to move the Cities menu out of
+    it. Not decided: whether clearing a search should also end the fade
+    at once. Shared map code, so it rides a re-render (the search
+    rollout's waves); measure the button row at 343 px first.
 
 - [ ] **Next landing:**
   - Phase 2 Japanese cities (East-2, Kansai-2, Regional-2) and Cluj-Napoca,
