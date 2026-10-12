@@ -99,6 +99,14 @@ Each city's own parked calls and proposals are under its entry below
 
 ## Changes
 
+### 2026-10-12 - The same answer numbered S28 by staging
+
+- Staging relayed the owner's words from its own chat, "s28 out as
+  temporary form": the same question and the same answer as the entry below
+  (S18 here, S28 in `docs/decisions_drafts/staging.md`). Nothing changes on
+  this branch; the 8 Kurashiki pins leave when Cleanup's shared rule lands
+  and steps 2-3 are re-run.
+
 ### 2026-10-12 - 特殊形態 is a temporary form (owner, S18); the rule goes to Cleanup
 
 - **"s18 yes treat as temporary, send to cleanup"** (owner, in the
