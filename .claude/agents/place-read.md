@@ -48,13 +48,35 @@ section first. In short:
 - **A person's own name** at a home or on a one-person business goes, always
   (a shaman's shop named for the shaman). A statue or memorial of a named
   public figure is a place.
-- **Descriptions standing in for names** (playground, rest area, viewpoint,
-  toilet, a bare temple-hall word) and **museum exhibits** (tanks, aircraft)
-  are open owner questions as of 2026-10-08: report them as a CLASS with a
-  count and examples, not one by one, unless the owner has since ruled.
-- **Glitched names** (a third script glued on, a truncated word, a typo,
-  trailing punctuation): report them; the owner's hard line is that no
-  glitched name goes live.
+- **Descriptions standing in for names** (owner, 2026-10-11): a landmark or
+  place whose WHOLE name is a type word of English or a city language is
+  already dropped by rule (`place_index.BARE_TYPE_NAMES`: 놀이터, 祠堂, 本殿,
+  "Monument"). Report what the rule missed: the type words still in the
+  index, each with a count, so the caller can measure them on the built
+  cities; and longer descriptions ("open area with bench", an address, an
+  opening time) one by one, since those are dropped by id.
+- **Museum exhibits** (owner, 2026-10-11) are already dropped by rule unless
+  they carry their own wikidata (historic=aircraft, tank, cannon, missile,
+  rocket, vehicle, locomotive, railway_car; indoor paintings always). Report
+  what is left of the class, and any object whose wikidata is its model's or
+  its kind's and not its own (a tank with the article for its type, a clinic
+  with the article for clinics).
+- **Religious residences** (owner, 2026-10-11): a convent, monastery,
+  seminary, novitiate, priests' house, vicarage or 精舍 tagged a place of
+  worship is OUT unless notable (wikidata or wikipedia). **There is no rule
+  for this and there will not be one**: the caller drops each BY ID. So list
+  every one with its id and tags; do not report "the rule is not firing".
+- **A removed or vanished object** (a demolished sculpture, a chapel marked
+  as gone) is dropped by id: report it.
+- **Glitched names** (a third script glued on, a truncated word, stray
+  characters, a wrong object's name): report the clear ones one by one with
+  ids; they are dropped, never repaired. Where `name` carries a third script
+  and a local-language name exists, the index already leads with that name.
+  For plain typos and all-caps names give a count and five examples.
+- **Say what you read and what you only screened.** In a large city (Tokyo,
+  London) the names carrying a standard place word run to thousands; state
+  plainly which rows were read line by line with their tags and which were
+  filtered by pattern only.
 
 ## Procedure
 

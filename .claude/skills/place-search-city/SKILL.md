@@ -1,13 +1,15 @@
 ---
 name: place-search-city
-description: Add place search (the in-map box that finds streets, intersections, stations, lines, neighborhoods and landmarks from an OpenStreetMap index) to a built city's map - the search area, the two Overpass queries, the index step, a new language's word lists and matcher words, the eye read by the place-read agent, review and drop entries, the one re-render, the page bullet, the browser test and the checks - plus the owner's settled calls, the protocol for a rule change that touches built indexes, and the traps the Kyoto pilot and the sample's batches 1, 2a and 2b hit. Use for every city that gets place search (batch 3's size tests, then the site-wide rollout) and for any change to pipeline/place_index.py or the search script. Not for building a city's map (add-city) and not for business registers.
+description: Add place search (the in-map box that finds streets, intersections, stations, lines, neighborhoods and landmarks from an OpenStreetMap index) to a built city's map - the search area, the two Overpass queries, the index step, a new language's word lists and matcher words, the eye read by the place-read agent, review and drop entries, the one re-render, the page bullet, the browser test and the checks - plus the owner's settled calls, the protocol for a rule change that touches built indexes, and the traps the Kyoto pilot and the sample's batches 1, 2a, 2b and 3 hit. Use for every city that gets place search (the site-wide rollout, once the owner's phone test of the largest index has passed) and for any change to pipeline/place_index.py or the search script. Not for building a city's map (add-city) and not for business registers.
 ---
 
 # Adding place search to a city
 
 Written 2026-10-08 at the end of the one-city-per-region sample (Kyoto pilot;
 batch 1 Seattle, Chicago, Vancouver, Sydney; 2a Montréal, Barcelona,
-Marseille, Prague, Brussels; 2b Hong Kong, Seoul, Busan, Tbilisi). It replaces
+Marseille, Prague, Brussels; 2b Hong Kong, Seoul, Busan, Tbilisi), updated
+2026-10-11 after batch 3 (Tokyo, London, Paris, São Paulo, Mexico City) and
+the owner's answers to 2b's nine questions. It replaces
 the recipe sections of `docs/handoff_place_search_2026-10-07.md` and
 `docs/handoff_place_search_batch2.md`; the judgment trail, with every owner
 quote, is `docs/decisions_drafts/place-search.md` (later `DECISIONS.md`).
@@ -34,6 +36,7 @@ named `charming-lumiere-930853`, moved by Cleanup 2026-10-08); a city is added t
 | Every searched map current, languages, ODbL, leaks, junk | `scripts/check_place_search.py` (in `check_all.py`) |
 | Every index is what the code builds from its cache | `scripts/check_place_index_drift.py [--against REV]` |
 | Reading tools (reports only) | `scripts/place_search_review.py odd / tags / ids / ways / added / sizes` |
+| Stations OSM draws as not yet open (an internal watch file) | `docs/place_search_unopened_stations.json` |
 | The eye read, one city per call, read-only | the `place-read` agent |
 
 ## The owner's calls every city inherits
@@ -64,12 +67,47 @@ All quoted in the drafts file; the short list:
 - **Squares are landmarks**; a square already findable by a street of its
   name is a duplicate and dropped.
 - **Junk names never indexed** (`junk_name`, check F).
-- **Stolpersteine never indexed** (a person at their last home).
+- **Stolpersteine never indexed** (a person at their last home), nor a tomb
+  named for a family (`FAMILY_TOMB`: Paris's cemeteries are mapped tomb by
+  tomb, 43 of them under private families' names).
+- **A name that is only its object's type is no name** (owner, 2026-10-11):
+  `BARE_TYPE_NAMES`, per language, matched as the whole name on landmarks and
+  places (놀이터, 祠堂, 本殿, "Monument", "Édicule Guimard"). An object whose
+  main name is bare goes whole. A description longer than a type word ("open
+  area with bench") goes in `PLACE_DROPPED` by id.
+- **Museum exhibits are not landmarks** (owner, 2026-10-11):
+  `EXHIBIT_HISTORIC` (aircraft, tank, cannon, missile, rocket, vehicle,
+  locomotive, railway_car) needs the object's own wikidata, and the
+  mass-produced ones a tourism tag as well; a painting hung indoors is an
+  exhibit whatever its wikidata. Ships, wrecks and historic railways stay.
+- **No glitched name goes live, and none is repaired** (owner, 2026-10-11): a
+  corrected name would not be OSM's. Where `name` carries a third script and
+  a local-language name exists, that name leads (`_local_first`); every other
+  glitch (cut short, stray characters, a wrong object's name) is dropped by
+  id.
+- **Private minor ways are no streets** (owner, 2026-10-11): a street whose
+  every way is a footway, path, track or service road with access=private or
+  no, none notable, goes with its crossings.
+- **Streets closed for rebuilding** are kept by name in `config.PLACE_REBUILT`
+  (owner, 2026-10-11; Tbilisi's Rustaveli Avenue); a name no construction way
+  carries stops the step.
+- **Religious residences are held to the worship precedent, BY ID, never by a
+  rule** (owner, 2026-10-11): a convent, monastery, seminary, priests' house
+  or 精舍 tagged a place of worship is dropped in `PLACE_DROPPED` unless
+  notable. No rule can tell a monastery that is a residence from a temple.
+- **A removed object is dropped by id** (owner, 2026-10-11, Hong Kong's
+  Pillar of Shame): a search must not move the map to a place where the
+  thing is not.
+- **A station OSM draws as not yet open is no station**, and is recorded in
+  `docs/place_search_unopened_stations.json` (owner, 2026-10-11: an internal
+  watch file, never page text). A station leaves the file when OSM marks it
+  open and its city's index is rebuilt from a new cache.
 - **Suggestions are work in progress**: few items, phones first.
 - **Any search inside a station's rings must keep working** (the boundary of
   the reserve intersection cut, unused so far).
-- **Top-line, still open:** iPhone memory and repository size. Test the
-  largest index on a real phone before a big rollout.
+- **Top-line, still open:** iPhone memory and repository size. **The owner
+  tests São Paulo's map on a phone (then London's) before any rollout**; no
+  city is added until that test has passed.
 
 ## Before a batch
 
@@ -97,7 +135,14 @@ All quoted in the drafts file; the short list:
    in turn; records provenance). Chain cities one after another in one
    background command; never two at once. Most first attempts are refused
    and answer after the wait; a city whose run fails both rounds is retried
-   alone afterwards.
+   alone afterwards. **A city too large for one answer** (the server's own
+   timeout, a "remark" in the log: São Paulo's 724,666 elements, London's
+   1,066,979; Mexico City's 402,007 answered whole in about 170 s) gets
+   `PLACE_SPLIT = {"bbox": (s, w, n, e), "rows": R, "cols": C}` in its
+   config: `fetch_split` asks the first query once per tile, each still cut
+   by `PLACE_AREA`, keeps each tile's answer beside the cache so only a
+   refused tile is asked again, and merges by OSM id. Re-run the script
+   until every tile is in.
 4. **A new language first** (see "A new language" below), then copy
    `pipeline/sydney/step2b_place_index.py`, rename, run it. Read the
    languages line before anything else.
@@ -177,9 +222,12 @@ city's own data (`ways`, `odd`, `tags`):
 - `place_search_review.py`'s place words (`PLACE_WORD`, or `PLACE_WORD_ANY`
   for scripts with no word boundary), so `odd` stays readable.
 
+- `BARE_TYPE_NAMES` (the type words that stand in for names; measure each on
+  every built city of the language first) and, where estates are mapped as
+  places, `NUMBERED_BLOCK`.
+
 Built so far: ja, en, fr, ca (es searched as well in Barcelona), cs, nl, zh,
-ko, ka. Batch 3 needs pt (São Paulo) and es (Mexico City) at full strength;
-es has words but has never been a declared language.
+ko, ka, es (declared since Mexico City) and pt (São Paulo).
 
 ## The browser test, once per batch
 
@@ -249,8 +297,9 @@ out
   credited from the script and name:en, nothing parsed from the string.
 - **A Korean way-word ending is loose** (상가진입로, a shopping arcade's entry
   road, ends in 로): the named-street rule takes a whole word in Korean.
-- **highway=construction is skipped**, which loses streets being rebuilt
-  (Tbilisi's Rustaveli Avenue) as well as roads not yet open (owner question).
+- **highway=construction is skipped**: a street being rebuilt goes in
+  `config.PLACE_REBUILT` by name (Tbilisi's Rustaveli Avenue); a road not yet
+  open stays out. Only a missing famous street shows the need.
 - **A static file is cached by the browser**: the map carries the index's
   content hash, so every index rebuild means a re-render (check A).
 - **Windows writes CRLF**: write bytes; `sed -i 's/\r$//'` after renders.
@@ -259,19 +308,56 @@ out
 - **Map station names come from the map**, joined to OSM's in the browser,
   never in the file (ODbL 4.4(d)): nothing non-OSM enters an index.
 
-## Open owner questions (as of 2026-10-08; check the drafts file)
+- **A leak word in one country is a street type in another**: "privada" as a
+  Spanish leak word dropped 4,393 of Mexico City's streets (a Privada is a
+  cul-de-sac there). Read `street_dropped_leak_word` after the first build
+  of a language's first city in a new country.
+- **A rule on a tag value takes whatever carries it**: "a painting is an
+  exhibit" took Prague's Lennon Wall (artwork_type=painting, on a street)
+  until it was scoped to indoor ones. The moved-rows check
+  (`check_place_index_drift.py --against`) is what caught it: read it after
+  every rule, not only at the end.
+- **Wikidata is not always the object's own**: Seoul's tanks carry their
+  MODEL's item, São Paulo's clinic the article for clinics, Paris's tombs an
+  item for the tomb. "Notable" by wikidata alone lets these in.
+- **`PLACE_LANGUAGES = ()` names no language on the page**: an English city
+  declares `("en",)`, as Seattle and Sydney do.
+- **`PLACE_DROPPED` reaches ways too** (since batch 3): a business's or a
+  development's own road drawn as a street can be dropped by its way id.
+- **The reads screen, they do not read everything**, in a large city: Tokyo's
+  6,300 names ending 公園, 神社 and 寺 and London's 1,640 parks were filtered,
+  not read line by line. Say so in the drafts entry.
 
-The 2b entry's nine: built indexes the 2b rules changed; descriptions
-standing in for names; museum exhibits; glitched names; private minor ways;
-streets under reconstruction; religious residences; Hong Kong's Pillar of
-Shame; homes public on tourism=attraction alone. Earlier and still open: the
-WIP suggestion tuning, the corner credit test, the Cities menu move, and
-whether "Download this index" also links the intersections file.
+## For the audit after the rollout (owner, 2026-10-11)
 
-## Batch 3, the size tests
+- Names cut short or mistyped: only an eye read finds them, and batch 3's
+  reads listed about 150 plain typos they did not drop.
+- access=no on a trail can be a closure, not private land (Hong Kong's
+  country-park paths went with the private minor ways).
+- Lesser streets under reconstruction are in no keep-list.
+- Tokyo's 今戸神社 is out (Cyrillic words before its name in OSM, no Japanese
+  name tag to lead) until OSM is fixed.
 
-Tokyo, London, Paris, São Paulo, Mexico City. Measure each first open and
-intersections file (`sizes`) against Seoul's 387 KB and 247 KB gzipped, and
-test the largest on a real phone before the rollout. The reserve intersection
-cut (rings plus main roads, `PLAN.md`) is the fallback if one is too heavy.
-Tokyo's 23 wards need the ward relations (`rel(area.東京都)["admin_level"="7"]["name"~"区$"]`).
+## Open owner questions (as of 2026-10-11; check the drafts file)
+
+2b's nine are answered (the calls above). Batch 3's ten, in its drafts entry:
+the phone test; private gated streets (Paris lost 351 rows); houses found
+not open at source; a second language in its own script beside the name;
+wikidata that is not the object's own (tombs, dealer galleries, historic=
+monument); housing estates as districts; Mexico City's census hamlets;
+denomination-only names on places of worship; English bare type words from
+London; smaller calls by name. Earlier and still open: the WIP suggestion
+tuning, the corner credit test, the Cities menu move, and whether "Download
+this index" also links the intersections file.
+
+## Batch 3, the size tests: the result (2026-10-11)
+
+First open and intersections file, gzipped, against Seoul's 383 KB and 247 KB:
+São Paulo 1,229 and 785 KB (3.2 times Seoul on both, the largest); London
+1,199 and 709; Mexico City 877 and 643; Tokyo 325 and 35 (most of its
+streets carry no name); Paris 181 and 94. The nineteen cities' files are
+39.2 MB raw. **Held for the owner's phone test of São Paulo, then London.**
+The reserve intersection cut (rings plus main roads, `PLAN.md`) is not built;
+it is the fallback if the test fails, and its saving on São Paulo is not
+measured. Tokyo's 23 wards are their own relations (admin_level 7, names
+ending 区, inside ISO3166-2 JP-13), listed in `pipeline/tokyo/config.py`.

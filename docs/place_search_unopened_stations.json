@@ -1,0 +1,295 @@
+{
+ "about": "Stations the place search does not find because OpenStreetMap draws them as not open (pipeline/place_index.py, station_skipped_not_open). An internal watch file (owner, 2026-10-11), never page text. A row leaves when OSM marks the station open and the city's index is rebuilt from a new cache. 'open_namesake_in_index' is true where an open station of the same name is findable. The line is OSM's line, network or operator tag, null where it carries none.",
+ "rows": [
+  {
+   "city": "barcelona",
+   "line": null,
+   "name": "Camp Nou",
+   "osm": "node/13410497373",
+   "tag": "railway=construction",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-08",
+   "noted": "2026-10-11"
+  },
+  {
+   "city": "barcelona",
+   "line": null,
+   "name": "Campus Nord",
+   "osm": "node/13410497366",
+   "tag": "railway=construction",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-08",
+   "noted": "2026-10-11"
+  },
+  {
+   "city": "barcelona",
+   "line": null,
+   "name": "Francesc Macià",
+   "osm": "node/13198195265",
+   "tag": "railway=construction",
+   "open_namesake_in_index": true,
+   "cache": "2026-10-08",
+   "noted": "2026-10-11"
+  },
+  {
+   "city": "barcelona",
+   "line": null,
+   "name": "Gràcia",
+   "osm": "node/13482086622",
+   "tag": "railway=construction",
+   "open_namesake_in_index": true,
+   "cache": "2026-10-08",
+   "noted": "2026-10-11"
+  },
+  {
+   "city": "barcelona",
+   "line": null,
+   "name": "Guinardó | Hospital de Sant Pau (L9/L10)",
+   "osm": "node/13410497387",
+   "tag": "railway=construction",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-08",
+   "noted": "2026-10-11"
+  },
+  {
+   "city": "barcelona",
+   "line": null,
+   "name": "Hospital Clínic",
+   "osm": "node/13198195266",
+   "tag": "railway=construction",
+   "open_namesake_in_index": true,
+   "cache": "2026-10-08",
+   "noted": "2026-10-11"
+  },
+  {
+   "city": "barcelona",
+   "line": null,
+   "name": "Mandri",
+   "osm": "node/10793638263",
+   "tag": "railway=construction",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-08",
+   "noted": "2026-10-11"
+  },
+  {
+   "city": "barcelona",
+   "line": null,
+   "name": "Manuel Girona",
+   "osm": "node/13410497359",
+   "tag": "railway=construction",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-08",
+   "noted": "2026-10-11"
+  },
+  {
+   "city": "barcelona",
+   "line": null,
+   "name": "Plaça de Maragall",
+   "osm": "node/13410497390",
+   "tag": "railway=construction",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-08",
+   "noted": "2026-10-11"
+  },
+  {
+   "city": "barcelona",
+   "line": "Metro de Barcelona",
+   "name": "Sarrià",
+   "osm": "node/13410497345",
+   "tag": "railway=construction",
+   "open_namesake_in_index": true,
+   "cache": "2026-10-08",
+   "noted": "2026-10-11"
+  },
+  {
+   "city": "barcelona",
+   "line": "Metro de Barcelona",
+   "name": "Santander",
+   "osm": "node/13410497394",
+   "tag": "railway=proposed",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-08",
+   "noted": "2026-10-11"
+  },
+  {
+   "city": "busan",
+   "line": "동남권 전철",
+   "name": "동아대",
+   "osm": "node/5942137553",
+   "tag": "railway=construction",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-08",
+   "noted": "2026-10-11"
+  },
+  {
+   "city": "busan",
+   "line": null,
+   "name": "부경경마공원",
+   "osm": "node/10566861520",
+   "tag": "railway=construction",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-08",
+   "noted": "2026-10-11"
+  },
+  {
+   "city": "busan",
+   "line": "동남권 전철",
+   "name": "사상",
+   "osm": "node/10566822382",
+   "tag": "railway=construction",
+   "open_namesake_in_index": true,
+   "cache": "2026-10-08",
+   "noted": "2026-10-11"
+  },
+  {
+   "city": "busan",
+   "line": "동남권 전철",
+   "name": "사상스마트시티",
+   "osm": "node/10566822380",
+   "tag": "railway=construction",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-08",
+   "noted": "2026-10-11"
+  },
+  {
+   "city": "busan",
+   "line": "동남권 전철",
+   "name": "새벽시장",
+   "osm": "node/10566822381",
+   "tag": "railway=construction",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-08",
+   "noted": "2026-10-11"
+  },
+  {
+   "city": "busan",
+   "line": "동남권 전철",
+   "name": "엄궁",
+   "osm": "node/10566822378",
+   "tag": "railway=construction",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-08",
+   "noted": "2026-10-11"
+  },
+  {
+   "city": "busan",
+   "line": "동남권 전철",
+   "name": "하단",
+   "osm": "node/14081390783",
+   "tag": "railway=construction",
+   "open_namesake_in_index": true,
+   "cache": "2026-10-08",
+   "noted": "2026-10-11"
+  },
+  {
+   "city": "busan",
+   "line": "동남권 전철",
+   "name": "학장",
+   "osm": "node/10566822379",
+   "tag": "railway=construction",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-08",
+   "noted": "2026-10-11"
+  },
+  {
+   "city": "chicago",
+   "line": "Metra",
+   "name": "87th Street (Woodruff)",
+   "osm": "node/1325605366",
+   "tag": "railway=construction",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-08",
+   "noted": "2026-10-11"
+  },
+  {
+   "city": "chicago",
+   "line": "CTA",
+   "name": "103rd",
+   "osm": "node/10291088825",
+   "tag": "railway=proposed",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-08",
+   "noted": "2026-10-11"
+  },
+  {
+   "city": "chicago",
+   "line": "CTA",
+   "name": "111th",
+   "osm": "node/10291088815",
+   "tag": "railway=proposed",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-08",
+   "noted": "2026-10-11"
+  },
+  {
+   "city": "chicago",
+   "line": "CTA",
+   "name": "130th",
+   "osm": "node/13886166036",
+   "tag": "railway=proposed",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-08",
+   "noted": "2026-10-11"
+  },
+  {
+   "city": "chicago",
+   "line": "CTA",
+   "name": "Michigan",
+   "osm": "node/13886166035",
+   "tag": "railway=proposed",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-08",
+   "noted": "2026-10-11"
+  },
+  {
+   "city": "prague",
+   "line": "Pražské metro",
+   "name": "Ryšánka",
+   "osm": "node/9324423119",
+   "tag": "railway=construction",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-08",
+   "noted": "2026-10-11"
+  },
+  {
+   "city": "prague",
+   "line": null,
+   "name": "Nemocnice Krč",
+   "osm": "node/7070517634",
+   "tag": "railway=proposed",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-08",
+   "noted": "2026-10-11"
+  },
+  {
+   "city": "prague",
+   "line": null,
+   "name": "Nové Dvory",
+   "osm": "node/7070517660",
+   "tag": "railway=proposed",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-08",
+   "noted": "2026-10-11"
+  },
+  {
+   "city": "prague",
+   "line": null,
+   "name": "Nádraží Krč",
+   "osm": "node/14202143413",
+   "tag": "railway=proposed",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-08",
+   "noted": "2026-10-11"
+  },
+  {
+   "city": "prague",
+   "line": null,
+   "name": "Náměstí Míru",
+   "osm": "node/7070517627",
+   "tag": "railway=proposed",
+   "open_namesake_in_index": true,
+   "cache": "2026-10-08",
+   "noted": "2026-10-11"
+  }
+ ]
+}
