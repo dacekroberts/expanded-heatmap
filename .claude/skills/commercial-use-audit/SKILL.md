@@ -73,12 +73,19 @@ sentence quoted in its own language, and the date read.
    (`scripts/commercial_use_quote_check.py`, built 2026-10-12): exact, or
    after Unicode NFC and whitespace collapsing, or with whitespace removed
    (a PDF's line wraps inside a Japanese sentence), each reported as such; a
-   quote that is not there, or under 12 characters, voids the verdict. **The
-   script proves the sentence is in the file, not what it means**: the
-   Licence Ouverte file quotes another publisher's non-commercial terms as a
-   contrast, and that sentence verifies as a FORBIDDEN quote. Read every
-   "spaceless" match and every quote whose clause heading is not the
-   licence's own grant.
+   quote that is not there, is under 12 characters, is cut out of a longer
+   word, has no clause heading, or names a document off the hashed list in
+   `docs/licenses/README.md` voids the verdict; so do two rows on one
+   source. A recorded read under `docs/data_sources/` is NOT CHECKED, for a
+   person. **The script proves the passage is in the file, not what it
+   means**: MHLW's sentence that "use outside the purpose is forbidden" is
+   about personal information, not commercial use. Every VERIFIED row
+   prints 60 characters either side and its clause: read them all. **The
+   first pass's prompt says**: copy characters exactly from the stored
+   text (no straightened quotes), quote within one line of an .md or .html
+   file, and give the heading the sentence sits under. No further
+   normalisation is added (owner, 2026-10-12); a true quote that voids goes
+   to Claude.
 4. **Claude reads** every SILENT and every PERMITTED, CONDITION, and a
    sample of the PERMITTED (say one in five, and all of a language the model
    was not tried on).
