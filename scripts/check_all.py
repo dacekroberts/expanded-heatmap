@@ -72,6 +72,7 @@ CHECKS = [
     ["scripts/check_overpass_hosts.py"],
     ["scripts/check_place_search.py"],
     ["scripts/check_place_search.py", "--selftest"],
+    ["pipeline/place_index_fetch.py", "--selftest"],
     ["scripts/check_place_index_drift.py", "--selftest"],
     ["scripts/check_place_unopened.py"],
     ["scripts/check_place_unopened.py", "--selftest"],
