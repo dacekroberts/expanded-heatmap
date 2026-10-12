@@ -130,10 +130,28 @@ Detail files: [japan](docs/plan_detail/japan.md),
     the downstream note.
   - Staging moves the master list's cities to Built after the landing
     (`check_provenance.py` fails on the branches until then).
-  - **The phone legend (owner, 2026-10-12):** capped at about 40% of the
-    map's height with its own scroll, the lines folded by operator past
-    a measured threshold, names whole (Tokyo's open legend fills half
-    the screen).
+  - **Deferred from the phone legend (owner, 2026-10-12: "defer both"),
+    for a tested change that rides a later re-render** (the search
+    rollout's waves re-render every city). The 40% cap with its own
+    scroll LANDED with phase 2 (measured 224 px of a 560 px frame on
+    Tokyo). Not built:
+    - folding the lines by operator past a measured threshold. Place
+      search reads the legend's line rows (`aria-pressed`), so the fold
+      changes what search sees: test the two together.
+    - the map frame's height on phones. One CSS rule in the app is NOT
+      enough: the map is a fixed 650 px inside its frame (only its width
+      follows the frame), so a 560 px frame puts the OpenStreetMap credit
+      at 636 to 650 px, out of view (measured 2026-10-12). The map's
+      height has to follow the frame inside the phone-fit script
+      (`pipeline/map_common.py`, the one with the load-race history),
+      then `check_map_view.js`, `check_map_labels.js` and
+      `check_map_attribution.js` at phone heights, and the owner's iPhone.
+  - **A repair pass for names holding a private-use character** (owner,
+    2026-10-12, with S1): 1,797 names in 29 cities show their category
+    since S1. Where one publisher uses one code point for one known
+    character (two code points cover 228 of Osaka's 787), restore the
+    character, as "Caf?" is restored; verify each mapping against the
+    publisher's file first.
   - OPEN: the Global View button on Seattle (Regional)'s map does
     nothing on the owner's iPhone (reached from its Overview dot; the
     button works on Tokyo's map); not reproduced at 375 px by a
