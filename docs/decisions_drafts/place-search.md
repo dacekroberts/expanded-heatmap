@@ -4,6 +4,11 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-11 - Place search: the last phone check passed; the loosened keyword gate confirmed (owner, branch)
+
+- **"loosened oct 7 call okay. phone looks great."** (owner, on a phone, São Paulo, branch tip 528e9c95): the map's own stations and lines answering from the first letter is approved as a change to the call of 2026-10-07, and the found place's name label, the marker, the picked line's fade and outline, and the closing search button are all seen on a phone.
+- The phone-test server is stopped and its launch entry removed.
+
 ### 2026-10-11 - Place search: the map's own stations and lines answer from the first letter (owner, branch)
 
 - **"searching "l" shows linhas, then "lin" shows nothing, followed by "linh" showing linhas once more. can we fix this discontinuity site wide"** (owner, on a phone, São Paulo). Cause: the keyword gate (four Latin letters, or a whole word of some name) let "l" through because a place carries the word L, and the results then included every line beginning with l; "li" and "lin" are neither.
