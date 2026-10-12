@@ -83,6 +83,48 @@ Detail files: [japan](docs/plan_detail/japan.md),
     Bucharest.
   - After it, at a review time: move Bucharest's address and name
     functions, which Cluj-Napoca's step 2 imports, to a shared module.
+  - **Branches, nothing pushed:** `worktree-japan-east-2` (11 cities),
+    `worktree-japan-kansai-2` (7 and Cluj-Napoca),
+    `worktree-japan-regional-2` (11); each has its drafts file and a
+    handoff note. The owner's calls below were given in the build
+    sessions' and Staging's chats and are recorded in those drafts
+    (S numbers are Staging's).
+  - **First: Regional-1's eleven cities are missing from
+    `app/osm_notice.py` and `_OSM_STATION_NAMES`** (verified on master,
+    2026-10-11), so their live pages show no OpenStreetMap station-names
+    line; the map's corner credit is in place. Reported and not
+    verified: notice 1's sentence stops at "Tachikawa and Hino". Owner
+    to say whether this lands alone sooner.
+  - **Shared-code changes, Cleanup's (S14):** S1, `glitched_name` treats
+    U+E000 to U+F8FF as glitched (measure the built maps first;
+    Kawaguchi is held on it); S2, a late start whose first-permit date
+    is on or before the list's date stays (Kawaguchi gains about 100
+    pins); S17, 自動販売形態 into `japan_eigyo.FORM_RULES` (83 vending
+    pins; Kurashiki re-runs steps 2-3); S19,
+    `japan_register.permits_from_rows` tests the area-wide rule after
+    the city cut, Tottori's hook deleted (reproduce 237 area-wide, 2,240
+    storefronts); call 182, Yamagata's permit-match name rule moved from
+    its config into `japan_step2` (it flags 3 rows, the brief counted 4).
+    Each with the Minato control and a Japan drift run. S18: read
+    Kurashiki's 8 特殊形態 pins, then a rule only if needed.
+  - **Lines:** JR Keiyo to `#C81000` in the registry (S3), Tokyo's own
+    literal switched to the registry, the dark-mode label check run (it
+    was not; 10.2 from the Keikyu Main Line), then Tokyo, Funabashi,
+    Ichikawa and Urayasu re-rendered; a `NEIGHBOUR_EXCEPTIONS` entry with
+    a note for Okazaki's Meitetsu Nagoya Main Line and Toyota's Mikawa
+    Line (S16).
+  - **Macro map (Cleanup's, call 198):** Minoh, Fuji and Kurashiki are
+    labelled in no view; `TEXT_WIDTH` lacks "Ibaraki (Osaka)", "Yao" and
+    "Takatsuki".
+  - Cluj-Napoca publishes under notice 215, treated as Bucharest (S8).
+    Open with the owner: whether it takes Bucharest's hold off public
+    pieces, for the downstream note.
+  - Staging moves the master list's cities to Built after the landing
+    (`check_provenance.py` fails on the branches until then).
+  - Open with the owner, from Cleanup's chat: a phone-only legend cap
+    with operator folding (Tokyo's open legend fills half the screen);
+    the Global View button on Seattle's map on his phone (not
+    reproduced at 375 px by a scripted click).
   - Place search (branch `place-search`, 28b1ecb8 and later): the
     owner's phone test of São Paulo, then London, before any rollout;
     the stations OSM draws as not yet open are an internal watch file
