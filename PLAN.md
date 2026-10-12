@@ -77,7 +77,8 @@ Detail files: [japan](docs/plan_detail/japan.md),
     other word shows its category: 127 pins, 93 names, measured. Then
     re-render, `check_personal_exposure.py bucharest`, and the verdict in
     `docs/privacy_verdicts.md`. The "on two or more premises, so a
-    brand" exception is NOT decided: every such name is withheld.
+    brand" exception is NOT applied: every such name stays withheld
+    (owner, 2026-10-12).
   - Osaka's three lines renamed "Osaka Metro ..." at its held re-render,
     as the line registry has them; drift checks for Suita, Osaka and
     Bucharest.
@@ -93,8 +94,8 @@ Detail files: [japan](docs/plan_detail/japan.md),
     `app/osm_notice.py` and `_OSM_STATION_NAMES`** (verified on master,
     2026-10-11), so their live pages show no OpenStreetMap station-names
     line; the map's corner credit is in place. Reported and not
-    verified: notice 1's sentence stops at "Tachikawa and Hino". Owner
-    to say whether this lands alone sooner.
+    verified: notice 1's sentence stops at "Tachikawa and Hino". At the
+    landing, first, not alone (owner, 2026-10-12).
   - **Shared-code changes, Cleanup's (S14):** S1, `glitched_name` treats
     U+E000 to U+F8FF as glitched (measure the built maps first;
     Kawaguchi is held on it); S2, a late start whose first-permit date
@@ -117,19 +118,25 @@ Detail files: [japan](docs/plan_detail/japan.md),
     labelled in no view; `TEXT_WIDTH` lacks "Ibaraki (Osaka)", "Yao" and
     "Takatsuki".
   - Cluj-Napoca publishes under notice 215, treated as Bucharest (S8).
-    Open with the owner: whether it takes Bucharest's hold off public
-    pieces, for the downstream note.
+    It takes Bucharest's hold off public pieces (owner, 2026-10-12), in
+    the downstream note.
   - Staging moves the master list's cities to Built after the landing
     (`check_provenance.py` fails on the branches until then).
-  - Open with the owner, from Cleanup's chat: a phone-only legend cap
-    with operator folding (Tokyo's open legend fills half the screen);
-    the Global View button on Seattle's map on his phone (not
-    reproduced at 375 px by a scripted click).
+  - **The phone legend (owner, 2026-10-12):** capped at about 40% of the
+    map's height with its own scroll, the lines folded by operator past
+    a measured threshold, names whole (Tokyo's open legend fills half
+    the screen).
+  - OPEN: the Global View button on Seattle (Regional)'s map does
+    nothing on the owner's iPhone (reached from its Overview dot; the
+    button works on Tokyo's map); not reproduced at 375 px by a
+    scripted click.
+  - **The order, and what is not here:**
+    `docs/handoff_cleanup_2026-10-12.md`.
   - Place search (branch `place-search`, 28b1ecb8 and later): the
     owner's phone test of São Paulo, then London, before any rollout;
     the stations OSM draws as not yet open are an internal watch file
-    on the branch, no per-city page text; one general sentence for
-    About the Data is a draft with the owner.
+    on the branch with its check, no per-city page text; one general
+    sentence for About the Data is approved (the handoff has it).
 
 - [ ] **Next landing:**
   - Phase 2 Japanese cities (East-2, Kansai-2, Regional-2) and Cluj-Napoca,

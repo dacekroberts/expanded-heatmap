@@ -20,7 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**196 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**197 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+
+**2026-10-12**
+
+- [Before the phase 2 landing: seven owner calls, and the landing handoff written](#2026-10-12---before-the-phase-2-landing-seven-owner-calls-and-the-landing-handoff-written)
 
 **2026-10-11**
 
@@ -245,6 +249,48 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-10-12 - Before the phase 2 landing: seven owner calls, and the landing handoff written
+
+- **Decided by the owner in Cleanup's chat, 2026-10-12 ("yes to all
+  seven, write the landing handoff"), on Cleanup's list of seven.** Two
+  of the seven were put as either-or questions, and the yes is read as
+  the recommendation given with each.
+  - Cluj-Napoca takes Bucharest's hold off public pieces: it publishes
+    on the site under notice 215 and stays off cards and shared pieces
+    until the owner rules on both cities, because both rest on silent
+    terms. Kansai-2's note "carries no hold" is superseded by this.
+  - The missing OpenStreetMap station-names line on Regional-1's eleven
+    pages (verified on master: the cities are in neither
+    `app/osm_notice.py` nor `_OSM_STATION_NAMES`) is fixed first inside
+    the landing, not as its own deploy (read from the recommendation).
+    The map's corner credit is in place on all eleven.
+  - Okazaki's Meitetsu Nagoya Main Line and Toyota's Mikawa Line share
+    their red under a `NEIGHBOUR_EXCEPTIONS` entry with a note (also S16
+    in Staging's chat).
+  - On phones the open legend is capped at about 40% of the map's height
+    with its own scroll, and the lines fold by operator past a measured
+    threshold; names stay whole. Raised by the owner: Tokyo's open
+    legend fills half the screen. Rejected: shortening the entries, which
+    hides a line's real public name.
+  - A Romanian name on two or more premises stays withheld; no brand
+    exception (read from the recommendation). The register holds one
+    name per entity, so it cannot tell a brand from an owner with two
+    shops.
+  - About the Data, with place search: "Search finds stations that are
+    open. A station OpenStreetMap still marks as planned or under
+    construction is not listed until it opens."
+  - The landing runs from a fresh Cleanup session:
+    `docs/handoff_cleanup_2026-10-12.md` gives the order.
+- **Also recorded.** Place search's watch file gained line names (23 of
+  29 rows, 17 of them from published pages, each source in its row) and a
+  check, `scripts/check_place_unopened.py`, on branch `place-search`
+  (07da7bda), at the owner's word; no served index or map changed. JR
+  Keiyo goes to `#C81000` (owner, in East-2's chat), its dark-mode label
+  check not yet run. **Open:** the Global View button on Seattle
+  (Regional)'s map does nothing on the owner's iPhone, reached from the
+  Overview dot, while Tokyo's works; a scripted click at 375 px on the
+  live site reached the Overview, so it is not reproduced.
 
 ### 2026-10-11 - Bucharest shows 127 person-named companies by name: measured, repair approved for the phase 2 landing; place search's unopened stations an internal watch file (owner)
 
