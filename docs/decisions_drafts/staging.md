@@ -8,6 +8,26 @@ series, which ended at 230.
 
 ### 2026-10-12 - Phase 2 built in one evening; the owner's S calls; Naha's two licence reads
 
+- **S22 answered: Kanazawa's page states no share, and IR Ishikawa's
+  frequency was read (owner, "s22 no share, yes read the frequency"): 49 to
+  58 trains a day each way at its three stations beside Kanazawa.** The
+  share is left off because the 2024 snapshot holds 6,478 permits against an
+  official 6,438 (100.6%; 100.9% against the like-for-like FY2023 count), a
+  figure over 100% that would inform no reader. The frequency was counted by
+  staging on 2026-10-12 from the operator's whole-line timetable of
+  2026-03-14 (`ishikawa-railway.jp/timetable/pdf/20260314.pdf`, linked from
+  the timetable index the brief names; the two PDFs the brief names are
+  Shinkansen connection tables), as printed departure times on each station's
+  row in `pdftotext -table` output: 東金沢 58 toward Tsubata and 57 toward
+  Kanazawa; 森本 57 toward Kanazawa (its other direction's afternoon row did
+  not extract, the morning half holds 28, the same as 東金沢's); 西金沢 49
+  toward Kanazawa and 53 away. The counts take every printed time, so trains
+  marked for certain days only are included, and trains of other operators
+  running through on the line are counted where they stop. About three
+  trains an hour each way, far from the 11 a day of a low-frequency stretch:
+  the line's frequency moves from ASSERTED to MEASURED with that caveat. The
+  count was not checked against a rendered page (no PDF renderer on this
+  machine).
 - **Phase 2 started on 2026-10-11 at about 21:48 UTC and all three sessions
   reported by 02:10 UTC on 2026-10-12: 29 Japanese cities and Cluj-Napoca
   built, nothing pushed.** East-2 (`worktree-japan-east-2`, 11 cities, pages
@@ -47,7 +67,7 @@ series, which ended at 230.
   Kure may say "about half (46%)" where that is the more accurate figure;
   S24 gate 3 with no in-city count accepted for Aomori, Tottori, Yamagata
   and Kure, with a note; S25 Aomori's clause 6 accepted; S27 Yamagata keeps
-  the 10 placed Zaō Onsen rows, the oddity noted. S22 (Kanazawa's share and
+  the 10 placed Zaō Onsen rows, the oddity noted. S22 (answered the same day, the bullet above; Kanazawa.s share and
   IR Ishikawa's frequency) was answered with a question and is open; S26
   (Regional-2's page sentences) waits for review time.
 - **Naha's two BODIK packages read PERMITTED WITH CONDITIONS, from the
