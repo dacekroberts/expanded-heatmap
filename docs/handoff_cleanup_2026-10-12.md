@@ -356,12 +356,12 @@ construction is not listed until it opens."
 - **`docs/licence_positions.md` row 2.10 names 12 MHLW cities; at least 28
   read MHLW's filings** (27 configs name the download, and Tokyo). Left for
   the audit, which counts every source.
-- **Naha is built, on `worktree-japan-naha` `8298ce05`** (2 commits over
-  master, nothing pushed; a FOURTH build branch to merge in step 2). The
+- **Naha is built, on `worktree-japan-naha` `ceb9f767`** (re-run after
+  S39 with master's `b9ad4096` merged in; by its own report 10,153 pins,
+  8,785 restaurant permits, zero drift; nothing pushed; a FOURTH build branch to merge in step 2). The
   owner added it to phase 2 on 2026-10-12 and made it Food plus Personal
   services (DECISIONS, that date, two entries). By Staging's relay, not
-  checked by Cleanup: page 307, notice 217, 10,135 storefronts, zero
-  drift, `check_all` 49 of 51 (the master list's counts;
+  checked by Cleanup: page 307, notice 217, `check_all` 49 of 51 (the master list's counts;
   `check_macro_labels`). Its text: `docs/decisions_drafts/worktree-japan-naha.md`
   and `docs/handoff_naha_2026-10-12.md` on the branch. Expect 31 cities
   from phase 2 and 237 on the site, wherever this note says 30 and 236.
@@ -373,8 +373,9 @@ construction is not listed until it opens."
   drift run decide. **Its three calls are answered (owner, 2026-10-12;
   DECISIONS, that date):**
   - S39: DONE on master, in `rebuilt_register` (a row filling both 業種
-    and 営業の種類 keeps its type in 業種). Naha's session re-runs steps
-    2 and 3 on its branch, so confirm its tip before merging.
+    and 営業の種類 keeps its type in 業種), and Naha's re-run is in the
+    tip above. Its four station names are on the romanised precedent
+    (owner, relayed: "naha-kuko okay"); nothing to confirm.
   - S40: left as is.
   - S41, step 7's work: hold Naha out of the Kyushu-Okinawa view's zoom
     fit and add a small line on that view saying Naha is below, a
