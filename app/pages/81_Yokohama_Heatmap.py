@@ -73,8 +73,8 @@ st.markdown(
 - The registers give an address but no location. Each address is matched to MLIT's address
   reference data, which places almost all at their street block; where only the district can be
   found, the dot sits at the district's center.
-- Where a business's trade name is its operator's own name, the dot shows its register type
-  instead.
+- Where a business's trade name is its operator's own name, or is written as a bare personal name,
+  the dot shows its register type instead.
 - Names and types are shown in Japanese, as the city records them.
 - Most of the premises sit within a station ring: Yokohama's rail network reaches most of the
   city.

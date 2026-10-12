@@ -114,10 +114,9 @@ _THEME_TOGGLE_TEMPLATE = """
        `"Helvetica Neue", Arial, Helvetica, sans-serif` on .leaflet-tooltip,
        which is Latin-only - so without this rule a Japanese, Korean or Greek
        shop name would render in whatever the browser substituted, as tofu
-       boxes or at metrics that outgrow the tooltip's own box. Added
-       2026-09-21 alongside pipeline/theme.FONT_STACK, whose own note explains
-       why the fallback ORDER matters (browsers fall through per glyph, not
-       per string). */
+       boxes or at metrics that outgrow the tooltip's own box. The note on
+       pipeline/theme.FONT_STACK explains why the fallback ORDER matters
+       (browsers fall through per glyph, not per string). */
     .leaflet-tooltip { font-family: @@FONT_STACK@@; }
     .map-btn:focus-visible { outline: 2px solid @@LIGHT_ACCENT@@; outline-offset: 2px; }
     #city-menu { width: 84px; text-overflow: ellipsis; }
@@ -133,7 +132,7 @@ _THEME_TOGGLE_TEMPLATE = """
     .dark-base .map-btn { background: var(--dm-surface); color: var(--dm-text);
         border-color: var(--dm-border); }
     .dark-base .map-btn:hover { background: var(--dm-surface-hover); }
-    /* These two selectors match on the LIGHT ring and station colours, which
+    /* These two selectors match on the LIGHT ring and station colors, which
        is only safe because each is used nowhere else on the map. Both the
        selector and the drawing code below read the same LIGHT value, so they
        cannot drift apart - changing one used to silently break the other. */
@@ -143,9 +142,9 @@ _THEME_TOGGLE_TEMPLATE = """
     .dark-base .leaflet-overlay-pane path[stroke-width="4"] { filter: brightness(1.55) saturate(0.9); }
     .dark-base .map-legend span[style*="height:3px"] { filter: brightness(1.55) saturate(0.9); }
     /* NO FILTER on a line label: a brightness() filter here once lifted the
-       halo with the text, so the dark page colour rendered #132039 and every
+       halo with the text, so the dark page color rendered #132039 and every
        contrast figure measured a halo nobody saw. Each label carries its own
-       dark-theme colour in --dm-label instead (pipeline/linecolour.py,
+       dark-theme color in --dm-label instead (pipeline/linecolour.py,
        "LINE LABELS"), read at 4.5:1 against exactly this halo. */
     .dark-base .leaflet-marker-icon div[style*="text-shadow"] {
         text-shadow: -1px -1px 0 var(--dm-page), 1px -1px 0 var(--dm-page),
@@ -215,7 +214,7 @@ _THEME_TOGGLE_TEMPLATE = """
         if (e.key === KEY) apply(e.newValue === 'dark');
     });
     // Follow the OS preference while the visitor has made no explicit choice.
-    // NOTE: devtools colour-scheme emulation updates matchMedia().matches
+    // NOTE: devtools color-scheme emulation updates matchMedia().matches
     // WITHOUT dispatching this event inside an iframe, so this listener can
     // only be tested with a real OS theme switch (docs/theming.md).
     if (window.matchMedia) {
@@ -262,13 +261,11 @@ _THEME_TOGGLE_TEMPLATE = """
     }
     // Identify "which page is this" by PAGE SLUG, not by display label.
     //
-    // This used to derive a city name from the URL ("/Miami_Heatmap" -> "Miami")
-    // and compare it to the link's text. That breaks as soon as a city's
+    // A name derived from the URL ("/Miami_Heatmap" -> "Miami") fails when a
     // display name is not its filename: Miami's label is "Miami (Regional)",
-    // so the comparison never matched and Miami's own map listed Miami in its
-    // "Cities" dropdown. Comparing slug to slug is immune to the label, which
-    // matters because a regional map's name will keep diverging from its
-    // filename (a Seattle build spanning twelve municipalities is the next).
+    // so Miami's own map listed Miami in its "Cities" dropdown. Slug against
+    // slug is immune to the label, and regional names keep diverging from
+    // their filenames.
     function lastSegment(path) {
         var parts = String(path || '').split('?')[0].split('#')[0]
             .split('/').filter(Boolean);
@@ -379,7 +376,7 @@ _LEGEND_CSS = """
 <style>
 /* THE HEADER IS THE CONTROL, AND IT HAS TO SAY SO. A native <summary> does
    render a disclosure triangle - `list-style-type` computes to
-   `disclosure-open` here - but it is a ~6 px glyph in the same colour and
+   `disclosure-open` here - but it is a ~6 px glyph in the same color and
    weight as the text beside it, and on a dense map it reads as punctuation
    rather than as something to click. Replaced with an explicit chevron plus a
    VERB, because the chevron alone is ambiguous: this panel is anchored
@@ -390,11 +387,11 @@ _LEGEND_CSS = """
    legend's existing width rather than extending it. That matters: the label
    layout in _layout_labels models the open legend as a hardcoded 274 px
    obstacle, and a wider panel would start covering line labels it currently
-   clears. Verified after the change that the open width is unchanged.
+   clears. The open width is unchanged by it.
 
-   No script: the collapse is still the browser's own <details> behaviour, so
+   No script: the collapse is still the browser's own <details> behavior, so
    this is presentation only and scripts/check_map_labels.js keeps working. The
-   colour is `currentColor`, so it follows .dark-base .map-legend's own
+   color is `currentColor`, so it follows .dark-base .map-legend's own
    `color` and needs no dark-mode rule of its own. */
 .map-legend > summary { list-style: none; display: flex;
     align-items: baseline; justify-content: space-between; gap: 12px; }
@@ -410,14 +407,14 @@ _LEGEND_CSS = """
    (2026-09-24) was the first map with 21 lines: open, its legend was 634 px
    tall at the 650 px embed, so its top sat at y = -8 and its header and Hide
    control were under the "Global View" and theme buttons (#map-actions, fixed
-   at top 10px, ~30 px tall) - found by deploy-verify. Every earlier legend was
+   at top 10px, ~30 px tall). Every earlier legend was
    shorter than the cap (Paris's the tallest, its top at y 84), so none of
    them changes. min(100vh, MAP_H) is the visible map height whichever way
    _LEGEND_BOTTOM_CSS resolves; border-box so the cap is the whole panel. The
    header sticks, so Hide stays in reach while the rows scroll. Its background
    is set, NOT `inherit`: a <summary> is slotted into the <details> shadow
-   root, so it inherits from a transparent slot - measured, the rows showed
-   through the header in dark mode.
+   root, so it inherits from a transparent slot and the rows showed through
+   the header in dark mode.
    The clearance is the button row's, measured: --hm-actions-clear is set by
    the region button's script when the row wraps to a second line (a phone's
    343 px frame since 2026-10-07: four buttons where three fitted, 72 px tall),
@@ -541,14 +538,13 @@ LEGEND_AUTOFIT_SCRIPT = """
     if (!legend) return;
     var touched = false;
 
-    // Reader ownership is detected from an actual user gesture, NOT from the
+    // Reader ownership is detected from an actual gesture, NOT from the
     // `toggle` event. `toggle` also fires for programmatic changes, and Chrome
     // queues one for a <details open> element that lands AFTER this script
-    // attaches its listener - on a wide load `fit()` returns early, so that
-    // stray event used to set `touched` permanently and kill the breakpoint
-    // for the rest of the page's life (found by deploy-verify, 2026-09-21: the
-    // legend then covered four of New York's labels for anyone who narrowed
-    // their window rather than loading narrow). A click on the <summary> is
+    // attaches its listener; on a wide load `fit()` returns early, so that
+    // stray event set `touched` for good and disabled the breakpoint
+    // (2026-09-21: the legend then covered four of New York's labels in a
+    // window narrowed after loading). A click on the <summary> is
     // unambiguous, and keyboard activation dispatches a click too.
     var summary = legend.querySelector('summary');
     if (summary) {
@@ -604,15 +600,15 @@ PHONE_FIT_SCRIPT = """
     // comparing widths alone cannot notice it.
     var FITTED_AT = null;
 
-    // THE GUARD - owner's decision 2026-09-23, after the same race surfaced a
-    // THIRD way. Edmonton (2026-09-21) and Paris (2026-09-23 morning) were each
-    // fixed at the point where they broke; that afternoon Lille's embedded map
-    // loaded at zoom 8.25 against a baked 11.75 - Edmonton's exact number - and
-    // a reload fixed it. Four further loads would not reproduce it. A race that
-    // cannot be reproduced on demand cannot be fixed one trigger at a time, so
-    // this stops chasing triggers and checks the OUTCOME instead: until the
-    // reader touches the map, the view is compared with what it should be for
-    // the frame's current width, and re-fitted when it is not.
+    // THE GUARD (owner's decision 2026-09-23), after the same race surfaced a
+    // THIRD way: Edmonton (2026-09-21) and Paris (2026-09-23) were each fixed
+    // where they broke, then Lille's embedded map loaded at zoom 8.25 against
+    // a baked 11.75 (Edmonton's exact number), and four further loads would
+    // not reproduce it. A race that cannot be reproduced on demand cannot be
+    // fixed one trigger at a time, so this checks the OUTCOME instead: until
+    // the reader touches the map, the view is compared with what it should be
+    // for the frame's current width, and re-fitted when it is not. The full
+    // history is in the map-view skill.
     //
     // "What it should be" is exactly what apply() produces - HOME at full
     // width, fitBounds(BOUNDS, padding 26/18 each side) when narrow - computed
@@ -715,18 +711,16 @@ PHONE_FIT_SCRIPT = """
         var target = Math.min(w, MAP_W);
         // A ZERO TARGET IS ALWAYS A BAD MEASUREMENT, NEVER A REAL WIDTH.
         //
-        // Added 2026-09-23 after Paris rendered BLANK on first load, with
-        // `width: 0px` written onto the container and Leaflet.heat throwing
-        // "IndexSizeError: getImageData ... source width is 0". A pass that
-        // runs before the document has laid out reads clientWidth 0, and the
-        // old code wrote that straight through.
+        // A pass that runs before the document has laid out reads clientWidth
+        // 0; written through, it left Paris BLANK on first load (2026-09-23:
+        // `width: 0px` on the container and Leaflet.heat throwing
+        // "IndexSizeError: getImageData ... source width is 0").
         //
-        // It is the same RACE the else branch below documents for Edmonton -
-        // intermittent, not specific to a city, and the same page reloaded
-        // rendered correctly - but this manifestation is worse: a narrow fit
-        // is a bad view, a zero width is no map at all plus a console error.
-        // Paris is the city that exposed it because it is the heaviest map
-        // here (84,125 points), which widens the window before layout settles.
+        // It is the same RACE the else branch below documents for Edmonton
+        // (intermittent, not specific to a city, fixed by a reload), but
+        // worse: a narrow fit is a bad view, a zero width is no map at all plus
+        // a console error. Paris exposed it as the heaviest map here (84,125
+        // points), which widens the window before layout settles.
         //
         // Returning leaves the container alone for the later passes - immediate,
         // rAF, 120 ms, 400 ms, 1200 ms and resize - one of which measures a
@@ -734,18 +728,15 @@ PHONE_FIT_SCRIPT = """
         // only 0 when the measurement is meaningless.
         if (!target) return;
         // THE EARLY RETURN USED TO BE A CORRECTNESS BUG, not just an
-        // optimisation. It read "the width already matches, so there is
+        // optimization. It read "the width already matches, so there is
         // nothing to do" - but the VIEW can be wrong while the WIDTH is right.
         //
-        // Observed on the deployed site 2026-09-23, on Paris: the embedded map
-        // sat at zoom 9 against its baked 12.5, showing the whole Ile-de-France
-        // with every line label flung to the frame edges. Sequence: an early
-        // pass measured the container mid-layout at some narrow width and
-        // fitted BOUNDS for THAT width; a later pass found the container now at
-        // its real 854 px, matched `target`, and returned - so the zoom from
-        // the narrow fit was never undone. Intermittent, and it survived the
-        // 2026-09-21 fix because that one only added an `else` branch AFTER
-        // this return.
+        // Paris, deployed, 2026-09-23: the embedded map sat at zoom 9 against
+        // its baked 12.5, every line label flung to the frame edges. An early
+        // pass fitted BOUNDS at a mid-layout narrow width; a later pass found
+        // the container at its real 854 px, matched `target` and returned, so
+        // the narrow zoom was never undone. The 2026-09-21 fix missed it
+        // because its `else` branch sits AFTER this return.
         //
         // So the state that matters is "what width was the current view fitted
         // for", not "what width is the container". FITTED_AT records it, and a
@@ -768,18 +759,14 @@ PHONE_FIT_SCRIPT = """
         } else if (HOME) {
             // BACK AT FULL WIDTH, AND THIS BRANCH IS A BUG FIX, NOT SYMMETRY.
             //
-            // Until 2026-09-21 there was no else. A pass that ran while the
-            // iframe was still laying out measured a narrow clientWidth,
-            // fitted BOUNDS at that width - which is a much lower zoom - and
-            // then the later full-width pass restored the WIDTH and left the
-            // ZOOM alone, because re-fitting was conditional on being narrow.
-            // Nothing afterwards ever corrected it, so the map sat at the
-            // narrow-width zoom at full width: Edmonton was caught embedded at
-            // zoom 8.25 against its baked 11.5, showing the whole region with
-            // every pin in one cluster. It is a RACE, so it is intermittent and
-            // not specific to a city - the same page reloaded rendered
-            // correctly, and Calgary's rendered correctly alongside the broken
-            // Edmonton.
+            // Without it (before 2026-09-21), a pass during the iframe's
+            // layout measured a narrow clientWidth and fitted BOUNDS at that
+            // width (a much lower zoom); the later full-width pass restored the
+            // WIDTH but left the ZOOM, since re-fitting was conditional on being
+            // narrow. Edmonton sat embedded at zoom 8.25 against its baked
+            // 11.5, the whole region in one cluster. It is a RACE: intermittent
+            // and not specific to a city (a reload rendered correctly, as did
+            // Calgary alongside the broken Edmonton).
             //
             // Restoring HOME rather than re-fitting BOUNDS is deliberate:
             // Folium's baked view is what every full-width map has always
@@ -1115,7 +1102,7 @@ DENSE_LABEL_SCRIPT = """
 
         // Every label where LABEL_CLAMP_SCRIPT left it. Undo this script's own
         // last move first if the clamp has not re-run since (its handler
-        // resets every label to its baked transform, ours then appends).
+        // resets every label to its baked transform; this one then appends).
         var labels = [], early = false;
         m.eachLayer(function (layer) {
             if (!layer._icon || !layer.getLatLng) return;
@@ -1172,7 +1159,7 @@ DENSE_LABEL_SCRIPT = """
         }
         // Whether a label really overlaps something, with no margin. Only such
         // a label moves: the margins in hits() choose between spots, but a
-        // label 1 px clear of its neighbour is readable and stays put (a
+        // label 1 px clear of its neighbor is readable and stays put (a
         // desktop Osaka label did move, before this).
         function overlapped(L) {
             return labels.some(function (o) { return o !== L && area(L.b, o.b); }) ||
@@ -1380,7 +1367,7 @@ WHEEL_ZOOM_SCRIPT = """
 <script>
 (function () {
     var NAME = "__MAP_NAME__";
-    // One event of at least this many normalised units (L.DomEvent.
+    // One event of at least this many normalized units (L.DomEvent.
     // getWheelDelta) marks a notched wheel: Chrome and Edge on Windows give
     // 50 per notch, Firefox's line mode 60. Trackpads send many events of a
     // few units each.
@@ -1872,7 +1859,7 @@ _TAP_SELECT_TEMPLATE = """
 <script>
 (function () {
     var NAME = "__MAP_NAME__";
-    var REACH = 22;         // px from a centre or centreline: a 44 px target
+    var REACH = 22;         // px from a center or centerline: a 44 px target
     var TIE_PX = 2;         // edges this close count as a tie, broken by kind
     var ROOM_PX = 200;      // map height the panel needs above the legend
     var RING_PX = 26;       // the selection ring's outer diameter
@@ -2980,9 +2967,14 @@ PLACE_SEARCH_SCRIPT = (
     .replace("@@MARKS_CLASS@@", _JS_MARKS_CLASS)
 )
 assert "@@" not in PLACE_SEARCH_SCRIPT, "unresolved placeholder in PLACE_SEARCH_SCRIPT"
+# The dot never shrinks: a label that wraps on a phone took width from it and
+# drew an oval (olive's 43-character label, the owner's iPhone, 2026-10-08).
+# 10 px, border included (the page's box-sizing), down from 11 at the owner's
+# request; the no-data ring below went from 9 to 8 with it. Measured 10 x 10
+# on Kyoto's three rows at 375 px, the olive one wrapping.
 LEGEND_ROW = """
   <div style="display:flex; align-items:center; margin:3px 0;">
-    <span style="display:inline-block; width:11px; height:11px;
+    <span style="display:inline-block; flex-shrink:0; width:10px; height:10px;
       border-radius:50%; background:{color}; margin-right:7px;
       border:1px solid rgba(0,0,0,0.3);"></span>{label}
   </div>
@@ -3005,7 +2997,7 @@ LEGEND_LINE_ROW = """
 LEGEND_NO_DATA_ROWS = """
   <div style="font-weight: bold; margin: 10px 0 6px;">Stations</div>
   <div style="display:flex; align-items:center; margin:3px 0;">
-    <span style="display:inline-block; width:9px; height:9px;
+    <span style="display:inline-block; flex-shrink:0; width:8px; height:8px;
       border-radius:50%; background:transparent; margin-right:7px;
       border:2px solid {color};"></span>No business data (ward publishes no usable food-permit list)
   </div>
@@ -3791,10 +3783,15 @@ def add_pin_layer(m, rows, group_name, color, tooltip_field_label,
     for row in rows.itertuples():
         station = _esc(row.nearest_station)
         band = _esc(row.ring_band)
-        cat = _esc(_display(getattr(row, value_column)))
+        raw = getattr(row, value_column)
+        cat = _esc(_display(raw))
+        # A name rule that withholds a name writes the raw classification in
+        # its place, so that name reads as the category does (Saitama's
+        # "01:飲食店営業 " showed its layer code there too, Analytics 2026-10-08).
+        name = _display(raw) if row.business_name == raw else row.business_name
         data.append([
             round(row.latitude, COORD_DP), round(row.longitude, COORD_DP),
-            _esc(shown_name(row.business_name, cat)),
+            _esc(shown_name(name, cat)),
             cats.setdefault(cat, len(cats)),
             stations.setdefault(station, len(stations)),
             bands.setdefault(band, len(bands)),
@@ -4002,8 +3999,15 @@ def _has_contact_details(name) -> bool:
 # be a guess ("CR?PERIE", Seoul's lost separators "더?헤어", Osaka's lost
 # kanji "立?み"), so the name shows the classification instead.
 _SHEET_ERROR = re.compile(r"^#(NAME\?|VALUE!|REF!|N/A|DIV/0!|NULL!|NUM!)$")
-_LETTER = "A-Za-zÀ-ɏ぀-ヿ一-鿿가-힯"
-_LOST_LETTER = re.compile(f"[{_LETTER}]\\?[{_LETTER}]|\\bCaf\\?")
+# Full-width Latin counts as letters (Analytics, 2026-10-08: "Ｐ?ｔｉｓｓｅｒｉｅ"
+# rendered in Higashiyamato 6, Tachikawa 4, Ichinomiya 3), and a name that
+# STARTS with "?" lost its first character ("??野家" is 吉野家, Oita's
+# "?暁雲福祉会", Osaka's "?　ｒｅｃｃａ", Seoul's bare "??"), unless an ASCII
+# space follows: New York's "? TEA (QUESTION MARK TEA)" is the trade name.
+# Measured on every processed file 2026-10-08: at most 548 more names shown
+# as their classification (Osaka 202, Kobe 105, Seoul 96, Tokyo 55).
+_LETTER = "A-Za-zÀ-ɏ぀-ヿ一-鿿가-힯Ａ-Ｚａ-ｚ"
+_LOST_LETTER = re.compile(f"[{_LETTER}]\\?[{_LETTER}]|\\bCaf\\?|^\\?+(?! )")
 _LOST_APOSTROPHE = re.compile(r"(?<=[A-Za-z])\?(?=[sS]\b)")
 _LOST_CAFE = re.compile(r"\b(Caf|CAF)\?")
 

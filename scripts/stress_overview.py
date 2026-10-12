@@ -194,7 +194,7 @@ def build_tree(tmp, scenario, staged, competing=(), country_views=(), groups=Non
         "CITIES.extend(_STAGE['rows'])\n"
     )
     src = replace_once(src, "\nIN_DEFAULT_VIEW = ", block + "\nIN_DEFAULT_VIEW = ", "IN_DEFAULT_VIEW")
-    src = replace_once(src, '    "West Asia",\n]', '    "West Asia",\n'
+    src = replace_once(src, '    "Oceania",\n]', '    "Oceania",\n'
                        + "".join(f'    "{r}",\n' for r in new_regions) + "]", "REGION_ORDER's end")
     views = "".join(f', "{c}"' for c in country_views)
     if jp_old:

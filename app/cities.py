@@ -3809,7 +3809,7 @@ CITIES = [
         "record_kind": "National register",
         "categories": "All three",
         "blurb": "Tbilisi Metro (Akhmeteli-Varketili and Saburtalo Lines, 23 stations)",
-        "region": "West Asia",
+        "region": "Europe East",
         "country": "Georgia",
         "mode": "metro",
         "in_default_view": False,
@@ -5728,6 +5728,12 @@ REGION_ORDER = [
     # for their labels (COMPETING_REGIONS). A new European country is
     # assigned to one of the two by scripts/stress_overview.py, and gets a
     # view of its own only on the owner's call.
+    # GEORGIA JOINS EUROPE EAST (owner, 2026-10-08), ending West Asia, a
+    # one-city view. West Asia was made (2026-10-02) because Dublin to Tbilisi,
+    # about 3,700 km, was too wide for one Europe; after the split Tbilisi is
+    # 1,544 km from Bucharest and 2,365 km from Liepaja. Measured with
+    # check_macro_labels.py: Europe East's zoom 3.19 to 2.56, PROBLEMS 0. A
+    # Turkish city reopens the question (DECISIONS, "Georgia joins Europe East").
     "Europe West",
     "Europe East",
     # FRANCE NORTH AND FRANCE SOUTH (owner, 2026-09-30, "go with north/south"),
@@ -5861,13 +5867,6 @@ REGION_ORDER = [
     # Zealand city joins it; Perth is about 3,300 km from Sydney, past the
     # distance at which Canada was split, so re-score it if it ever arrives.
     "Oceania",
-    # WEST ASIA (owner, 2026-10-02): Tbilisi first. Dublin to Tbilisi is about
-    # 3,700 km, past the 3,300 at which Canada was split, and the UN M49
-    # geoscheme files Georgia in Western Asia, so Europe's frame is left as it
-    # was rather than stretched east. Named for the area, as East Asia and
-    # Oceania are, so a later Baku, Yerevan or Ankara joins it. A view of its
-    # own, NOT a sub-view, so it is not in COUNTRY_VIEWS.
-    "West Asia",
 ]
 
 # THE COUNTRY VIEWS GO LAST IN THE REGION MENU (owner, 2026-10-02): the small

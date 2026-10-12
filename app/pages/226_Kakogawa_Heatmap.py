@@ -82,8 +82,8 @@ st.markdown(
 - The lists give an address but no location. Each address is matched to MLIT's address reference
   data: about 88% reach their street block, and about 12%, where only the district can be found,
   sit at the district's center.
-- Where a business's trade name is its operator's own name, the dot shows its permit type
-  instead.
+- Where a business's trade name is its operator's own name, or is written as a bare personal name,
+  the dot shows its permit type instead.
 - Names and permit types are shown in Japanese, as the prefecture records them.
 - **About 57% of storefronts sit within a ring.**
 """
