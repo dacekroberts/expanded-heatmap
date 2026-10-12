@@ -36,7 +36,7 @@ for whoever builds the Urasoe add-on. Nothing is pushed. The reasoning is in
 Answered by the owner: A (S39, the shared two-column type rule, merged and
 re-run here), B (S40, left as is), C (S41, Cleanup's at the landing: Naha out
 of the Kyushu-Okinawa zoom fit and a temporary "Naha below" line), E (station
-names on the romanised precedent, Naha Airport kept in English). Open for
+names on the romanised precedent in full, Naha-kuko included). Open for
 review time: D, the page, What Is Excluded and notice sentences no template
 covers. Recorded, not built: F, an English-language switch for station names.
 

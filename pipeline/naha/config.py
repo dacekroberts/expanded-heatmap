@@ -254,14 +254,15 @@ OSM_NAME_EN_TIES = {}
 OSM_NAME_EN_MISSING = {}
 # Cited overrides of OSM's name:en ({ja: en}, the OSM spelling replaced in a
 # comment), in Hiroshima's style (2026-09-30): no macrons, 前 as -mae, a
-# romanised name rather than a translation (Matsuyama's Kencho-mae and
-# Sekijuji-byoin-mae, Kumamoto's Suizenji-koen). OSM translates four of the
-# 16 (osm_station_names.json, 2026-10-12), as the operator's English site
-# does; three are romanised here and the other 12 are OSM's as they stand.
-# 那覇空港 KEEPS OSM's and the operator's "Naha Airport" (owner, 2026-10-12:
-# the one name wanted in English), a departure from Itami's Osaka-kuko made
-# for this station alone.
+# romanised name rather than a translation (Itami's Osaka-kuko, Matsuyama's
+# Kencho-mae and Sekijuji-byoin-mae). OSM translates four of the 16
+# (osm_station_names.json, 2026-10-12), as the operator's English site does;
+# the other 12 are OSM's as they stand. The owner weighed the operator's
+# English for these four and kept the precedent (2026-10-12: "naha-kuko
+# okay"); English wording is a question for the Travel view and the
+# transit-globe app, not this map.
 OSM_NAME_EN_OVERRIDES = {
+    "那覇空港": "Naha-kuko",                         # Naha Airport
     "奥武山公園": "Onoyama-koen",                    # Onoyama Park
     "県庁前": "Kencho-mae",                          # Prefectural Office
     "市立病院前": "Shiritsu-byoin-mae",              # Naha City Hospital

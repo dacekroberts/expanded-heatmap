@@ -39,27 +39,29 @@ Named by city and letter; Staging assigns the S numbers when it relays them.
   form naming the three datasets, with the three package links and "rebuilt
   the city's food permits from its monthly lists of new and renewed permits,
   kept those still in term at the end of August 2026".
-- **Naha E: ANSWERED by the owner, twice, 2026-10-12.** First "operator's
-  english for E": the four overrides were removed, since OSM's `name:en`
-  matches the operator's English site (www.yui-rail.co.jp/en/, the timetable
-  menu's text) on all 16 stations. Then "i mainly wanted the change for
-  naha's airport, we can revert to precedent since it covers city-wide":
-  **the precedent stands for station names, except 那覇空港, which is "Naha
-  Airport".** Onoyama-koen, Kencho-mae and Shiritsu-byoin-mae are romanised
-  again in Hiroshima's style (three cited overrides); the airport keeps OSM's
-  and the operator's English, a departure from Itami's Osaka-kuko for this
-  station alone (this session's reading of the owner's sentence; a full
-  revert to Naha-kuko is one line in `OSM_NAME_EN_OVERRIDES`). The line
-  stays "Yui Rail". **A correction to this call as first put**: it gave the
-  operator's English as "Kenchomae" and "Shiritsubyouin-mae", which were the
-  site's URL slugs, not its printed names (Prefectural Office, Naha City
-  Hospital).
+- **Naha E: ANSWERED by the owner, 2026-10-12, in three steps; the
+  romanised precedent stands in full.** (1) "operator's english for E": the
+  four overrides were removed, since OSM's `name:en` matches the operator's
+  English site (www.yui-rail.co.jp/en/, the timetable menu's text) on all 16
+  stations. (2) "i mainly wanted the change for naha's airport, we can
+  revert to precedent since it covers city-wide": three were romanised again
+  and the airport kept as "Naha Airport", this session's reading. (3)
+  "naha-kuko okay" and "i will worry about the english wording more for the
+  transit-globe or maybe the partial travel version": **all four are
+  romanised in Hiroshima's style (Naha-kuko, Onoyama-koen, Kencho-mae,
+  Shiritsu-byoin-mae), as first built.** No other city changed at any step.
+  The line stays "Yui Rail". **A correction to this call as first put**: it
+  gave the operator's English as "Kenchomae" and "Shiritsubyouin-mae", which
+  were the site's URL slugs, not its printed names (Prefectural Office, Naha
+  City Hospital).
 - **Naha F: an idea for later, not built (owner, 2026-10-12; passed to
   Cleanup).** "potential future implementation would be an english-language
   switch for cities that have the option": a map control that swaps station
   names between the romanised form and the operator's own English where an
   operator publishes one (Naha's four, Itami's Osaka Airport). Under the
-  feature freeze of 2026-10-08 it is recorded, not started.
+  feature freeze of 2026-10-08 it is recorded, not started; the owner places
+  English wording with the transit-globe app or the Travel view rather than
+  the site's maps.
 
 ## Entries
 
@@ -136,7 +138,7 @@ Named by city and letter; Staging assigns the S numbers when it relays them.
   written to `excluded_stations.csv` under 浦添市. **Gate 3**: the operator's
   home page (www.yui-rail.co.jp, 駅情報) lists 19 stations, the same names in
   N02's order. OSM `name:en`: one Overpass query (the first attempt met 504s
-  on both mirrors; retried after more than 60 s), 20 objects, 3 overrides (call E).
+  on both mirrors; retried after more than 60 s), 20 objects, 4 overrides (call E).
   Frequency: not re-read; the operator's timetable page is not named in the
   brief, so the master list's read (every 7 to 9 minutes) stands.
 - **Colour.** `line_colour_search.py naha`: #E84028 from the red of the
