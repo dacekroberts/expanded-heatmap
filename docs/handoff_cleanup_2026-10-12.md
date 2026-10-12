@@ -313,18 +313,40 @@ construction is not listed until it opens."
 - **`docs/licence_positions.md` row 2.10 names 12 MHLW cities; at least 28
   read MHLW's filings** (27 configs name the download, and Tokyo). Left for
   the audit, which counts every source.
-- **Naha is in phase 2** (owner, 2026-10-12, in Cleanup's chat: "naha
-  should get built as part of phase 2"; DECISIONS, that date). Band B,
-  food only, mode `light_rail`, region Kyushu-Okinawa, the macro view's
-  fit Cleanup's at the landing (Staging's relay of S30, S33, S35). Brief
-  `docs/build_briefs/naha.md` on `worktree-staging`. Expect 31 cities
+- **Naha is built, on `worktree-japan-naha` `8298ce05`** (2 commits over
+  master, nothing pushed; a FOURTH build branch to merge in step 2). The
+  owner added it to phase 2 on 2026-10-12 and made it Food plus Personal
+  services (DECISIONS, that date, two entries). By Staging's relay, not
+  checked by Cleanup: page 307, notice 217, 10,135 storefronts, zero
+  drift, `check_all` 49 of 51 (the master list's counts;
+  `check_macro_labels`). Its text: `docs/decisions_drafts/worktree-japan-naha.md`
+  and `docs/handoff_naha_2026-10-12.md` on the branch. Expect 31 cities
   from phase 2 and 237 on the site, wherever this note says 30 and 236.
-  Its five shared-code items (a reader argument on `rebuilt_register`;
-  unnamed header columns in `xlsx_rows`; `NAME_COLS` 営業所名所;
-  `TYPE_COLS` 営業所種類 and 営業の種目; `VARIANTS` 壼) are Cleanup's
-  and go to master before its build starts: check `git log` for them
-  before assuming either way. The build session and its timing are
-  Staging's plan.
+  The reader changes it needed are on master (`db0c4e0c`). It changed
+  shared code itself, reported opt-in and inert for built cities:
+  `japan_fetch.py` (`config.FETCH_PAUSE_S`, a None URL through
+  `config.source_url`), `japan.py` (+4 lines), `line_registry.py`
+  (`okinawa-urban-monorail`, `#E84028`): read the diff and let the Japan
+  drift run decide. **Three calls the owner had NOT answered when this
+  was written; ask before acting on any:**
+  - S39 (shared reader, Cleanup's to write if he says yes): Naha's
+    August 2020 renewals file carries both 業種 and 営業の種類, and the
+    reader takes the form as the type, so 20 in-term restaurants are
+    missing. The session recommends a rule: both present, 業種 is the
+    type and 営業の種類 the form. `TYPE_COLS` puts 営業の種類 ahead of
+    業種, so a blanket swap could move a built city: scan the built
+    cities' headers for files carrying both, make it opt-in if any does,
+    then the Japan drift run; Naha re-runs steps 2 and 3 and drops two
+    disclosure phrases.
+  - S40: the October 2016 renewals file heads its type 種目; all 68
+    rows expired by 2023 and the config stops the build if one is ever
+    in term. Recommended left as is.
+  - S41 (the macro view, Cleanup's by S35): Naha stretches the
+    Kyushu-Okinawa view; Kitakyushu's and Shimonoseki's dots sit 3.3 px
+    apart at all three widths and Sasebo and Oita are labelled in no
+    view. The session recommends holding Naha out of the view's zoom
+    fit; it touched no view. This is step 7's work.
+  The basemap session builds Naha's pack and sends its table line.
 - **Toulouse and Rennes:** whether step 1's name-level fallback fired; one
   read-only step 1 run per city.
 - **Five unverified leads** from the PLAN cleanup pass (DECISIONS,
