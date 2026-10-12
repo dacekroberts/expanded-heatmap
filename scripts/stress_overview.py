@@ -86,6 +86,23 @@ BUILT_PREF = {
     # Kansai-2, 2026-10-11
     "Ibaraki (Osaka)": "27", "Minoh": "27", "Moriguchi": "27", "Kadoma": "27",
     "Neyagawa": "27", "Yao": "27", "Takatsuki": "27",
+    # The 46 built since and not listed, 2026-10-12. Each code is the city's
+    # `pref` in docs/staged_cities.json (Ageo (Regional) is its Ageo, Fuchū
+    # (Tokyo) its Fuchū), except Kurashiki (33202) and Naha (47201), from the
+    # municipality codes in their pipeline configs.
+    "Higashiyamato": "13", "Nishitōkyō": "13", "Tama": "13", "Higashimurayama": "13",
+    "Fuchū (Tokyo)": "13", "Chōfu": "13", "Tachikawa": "13", "Hino": "13",
+    "Ageo (Regional)": "11", "Sōka": "11", "Tokorozawa": "11", "Kasukabe": "11",
+    "Koshigaya": "11", "Kawaguchi": "11",
+    "Funabashi": "12", "Matsudo": "12", "Ichikawa": "12", "Urayasu": "12", "Sakura": "12",
+    "Yachiyo": "12", "Ichihara": "12",
+    "Sagamihara": "14", "Fujisawa": "14", "Maebashi": "10", "Mito": "08",
+    "Aomori": "02", "Morioka": "03", "Akita": "05", "Yamagata": "06", "Fukushima": "07",
+    "Iwaki": "07",
+    "Kanazawa": "17", "Matsumoto": "20", "Gifu": "21", "Shizuoka": "22", "Fuji": "22",
+    "Ichinomiya": "23", "Okazaki": "23", "Tsu": "24",
+    "Tottori": "31", "Matsue": "32", "Kurashiki": "33", "Fukuyama": "34", "Kure": "34",
+    "Ōita": "44", "Naha": "47",
 }
 SCENARIOS = ("now", "six", "eight", "eight_osaka", "pref")
 

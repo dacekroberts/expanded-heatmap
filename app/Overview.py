@@ -587,6 +587,19 @@ _here = _here + [c for c in CITIES if c.get("region") in _frame_also
 # centre below still takes every city in the region.
 _skip = REGION_ZOOM_WITHOUT.get(_frame_region, ())
 _zoom_set = [c for c in _here if c["name"] not in _skip] or _here
+# BOTH SETS COME FROM cities.frame_cities() WHERE THE MODULE HAS IT, the one
+# function scripts/check_macro_labels.py frames its views from, so the check
+# scores the view opened here. It also drops a city held out of the frame
+# altogether, zoom and centre (cities.REGION_FIT_WITHOUT: Naha in
+# Kyushu-Okinawa, owner's call S41, 2026-10-12, temporary), which the re-centre
+# below then leaves out as well. Read with getattr for the reason given at
+# REGION_ZOOM below: under a stale cities.py the lines above stand.
+# TODO(owner wording, call S41): the note that Naha lies below this view is
+# not written. It belongs in the caption under the map, beside
+# region_caption(region) near the end of this file. Nothing renders for it yet.
+_frame_cities = getattr(sys.modules.get("cities"), "frame_cities", None)
+if _frame_cities is not None:
+    _zoom_set, _here = _frame_cities(_frame_region)
 view = fit_view([c["lat"] for c in _zoom_set], [c["lon"] for c in _zoom_set])
 # A zoom set outright (cities.REGION_ZOOM: France North and South at 5.0). Read
 # with getattr, NOT imported by name: Streamlit Cloud can serve a cached

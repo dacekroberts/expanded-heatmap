@@ -1742,6 +1742,12 @@ CITIES = [
         # Bucharest out (REGION_ZOOM_WITHOUT); check_macro_labels.py then
         # passes every region at 375, 768 and 1200 with PROBLEMS 0.
         "label_offset": ("middle", 0, -22),
+        # RIGHT of the dot in Europe East (2026-10-12): above, the pill covered
+        # Cluj-Napoca's dot, 21.1 px west and 28.1 px north at the view's zoom
+        # 2.5643, so Cluj-Napoca was labelled in no view. Right, Cluj-Napoca
+        # takes its default above: 7 of 7 named, check_macro_labels.py PROBLEMS 0
+        # at 375, 768 and 1200. The landing view keeps the offset above.
+        "label_offset_by_region": {"Europe East": ("start", 11, 0)},
     },
     {
         "name": "Incheon",
@@ -3736,6 +3742,12 @@ CITIES = [
         # JAPAN WEST / EAST (2026-10-02): offsets from a search with check_macro_labels.py's own
         # scorer, PROBLEMS 0 at 375, 768 and 1200 with Japan West at zoom 6.0.
         "label_offset": ('middle', 0, 22),
+        # ABOVE the dot in Chugoku (2026-10-12): below, the 61.7 px pill covered
+        # Kurashiki's dot, 24.2 px west and 17.9 px south at the view's zoom 6.6,
+        # so Kurashiki was labelled in no view. With Fukuyama's below and
+        # Kurashiki's above and left: 8 of 8 named, check_macro_labels.py
+        # PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset_by_region": {"Chugoku": ("middle", 0, -22)},
     },
     {
         "name": "Kōchi",
@@ -5325,6 +5337,11 @@ CITIES = [
         # MEASURED in a real browser with Space Grotesk loaded, since
         # it refuses a guessed one.
         "label_offset": ("middle", 0, -22),
+        # BELOW the dot in Chugoku (2026-10-12): above, the 69.3 px pill took the
+        # one place Kurashiki's has whole on a phone's canvas, above and left of
+        # its dot 52.7 px east. Scored with Okayama's and Kurashiki's,
+        # check_macro_labels.py PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset_by_region": {"Chugoku": ("middle", 0, 22)},
     },
     {
         "name": "Ichinomiya",
@@ -5598,6 +5615,13 @@ CITIES = [
         # offsets are Cleanup's (owner, call 198); the offset is the scaffold's.
         "label_tier": "minor",
         "label_offset": ("middle", 0, -22),
+        # BELOW the dot in Osaka Prefecture (2026-10-12): above, the pill sits
+        # under the theme button on a phone (18.2 x 18.0 px), and the
+        # competition's next try, left of the dot, covered Minoh's dot 73.1 px
+        # west, so Minoh was labelled in no view. Below, Minoh takes its default
+        # above: 13 of 13 named, check_macro_labels.py PROBLEMS 0 at 375, 768
+        # and 1200. Width 100.1 px.
+        "label_offset_by_region": {"Osaka Prefecture": ("middle", 0, 22)},
     },
     {
         "name": "Minoh",
@@ -5772,6 +5796,11 @@ CITIES = [
         # MEASURED in a real browser with Space Grotesk loaded, since
         # it refuses a guessed one.
         "label_offset": ("middle", 0, -22),
+        # RIGHT of the dot in Chubu (2026-10-12): above, the 61.0 px pill covered
+        # Fuji's dot, 23.7 px east and 18.2 px north at the view's zoom, so Fuji
+        # was labelled in no view. Right, Fuji takes its default above: 11 of 11
+        # named, check_macro_labels.py PROBLEMS 0 at 375, 768 and 1200.
+        "label_offset_by_region": {"Chubu": ("start", 11, 0)},
     },
     {
         "name": "Kanazawa",
@@ -6038,6 +6067,11 @@ CITIES = [
         # MEASURED in a real browser with Space Grotesk loaded, since
         # it refuses a guessed one.
         "label_offset": ("middle", 0, -22),
+        # ABOVE AND LEFT of the dot in Chugoku (2026-10-12): above, the pill
+        # covers Okayama's dot, 24.2 px east; right or below it runs off a
+        # phone's 343 px canvas (the dot sits at x 333.0). This one is whole at
+        # 375, 768 and 1200, check_macro_labels.py PROBLEMS 0. Width 61.6 px.
+        "label_offset_by_region": {"Chugoku": ("end", -8, -14)},
     },
     {
         "name": "Naha",
@@ -6690,6 +6724,20 @@ if set(COUNTRY_VIEWS) - set(REGION_ORDER):
 REGION_ZOOM_WITHOUT = {"Europe West": ("Stockholm",),
                        "South America": ("Mendoza",)}
 
+# A CITY HELD OUT OF ITS REGION'S FRAME ALTOGETHER: out of the zoom fit AND the
+# centre, so the view opens on the rest and the city sits a pan away. Its dot,
+# its row in the list beneath the map and its place in the caption's count stay.
+# REGION_ZOOM_WITHOUT does not serve where the outlier is far off: the centre
+# would still take it and the rest of the region would leave the canvas.
+# Naha (owner, call S41, 2026-10-12; TEMPORARY): 7.7 degrees of latitude south
+# of Kagoshima. Fitted to it, Kyushu-Okinawa's zoom fell to 4.6748, Kitakyushu's
+# and Shimonoseki's dots sat 3.3 px apart and Sasebo and Ōita found no room for
+# a label. Held out, the view is the one Kyushu's own cities fit and Naha lies
+# off the bottom of the canvas at every width (check_macro_labels.py --verbose
+# lists it under "dot off the canvas"). frame_cities() below applies it;
+# Overview.py and check_macro_labels.py both read that one function.
+REGION_FIT_WITHOUT = {"Kyushu-Okinawa": ("Naha",)}
+
 # A REGION'S ZOOM SET OUTRIGHT, after the fit (owner, 2026-09-30): France North
 # and France South at 5.0, where every French label places. Fitted, each would
 # open further out and its labels would collide; fit_view sizes for a 320 px
@@ -6863,6 +6911,33 @@ _bad_compete = [r for r in COMPETING_REGIONS if r not in REGION_ORDER or r == DE
 if _bad_compete:
     raise ValueError(f"cities.py: COMPETING_REGIONS {_bad_compete} are not regions in "
                      f"REGION_ORDER, or are the landing view, which competes on its own rule")
+
+
+def frame_cities(frame):
+    """(zoom_set, centre_set): the cities a region's view is framed on.
+
+    The centre takes the region's own cities and the anchors it borrows
+    (REGION_LABELS_ALSO), less any city REGION_FIT_WITHOUT holds out of the
+    frame; the zoom fit takes those less REGION_ZOOM_WITHOUT's outliers. A
+    list that would empty a set is ignored. Overview.py and
+    scripts/check_macro_labels.py both frame a view from this, so the check
+    scores the view the app opens.
+    """
+    here = cities_in(frame) + [c for c in CITIES
+                               if c.get("region") in REGION_LABELS_ALSO.get(frame, ())
+                               and c.get("label_tier") != "minor"]
+    held = REGION_FIT_WITHOUT.get(frame, ())
+    centre = [c for c in here if c["name"] not in held] or here
+    skip = REGION_ZOOM_WITHOUT.get(frame, ())
+    zoom = [c for c in centre if c["name"] not in skip] or centre
+    return zoom, centre
+
+
+_bad_fit = [(r, n) for r, names in REGION_FIT_WITHOUT.items() for n in names
+            if r not in REGION_ORDER or n not in [c["name"] for c in cities_in(r)]]
+if _bad_fit:
+    raise ValueError(f"cities.py: REGION_FIT_WITHOUT {_bad_fit} name a region not in "
+                     f"REGION_ORDER or a city that is not in that region")
 
 
 def region_caption(region):
