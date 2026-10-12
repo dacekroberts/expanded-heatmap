@@ -116,6 +116,88 @@ or published; every proposal waits for the owner.
   2026-10-11 reset; the other later items wait until after go-live. The
   owner paused the branch until Sunday 2026-10-11.
 
+### 2026-10-11 - One Travel table for every city, switched off; an internal upload folder; wording proposals for the owner (built; proposals not applied)
+
+- **The Travel switch for all cities is one table, `pipeline/travel_packs.py`
+  (owner, 2026-10-11: "shared table switched off yes").** It holds the pack
+  host (`PACK_HOST`, None today), each city's local label language and the
+  named ferry and cable-car routes that get a legend row. `render_heatmap`
+  asks it for a city's Travel arguments, by the output folder's name,
+  whenever the city's map step passes none; a city's own `open_basemap`
+  still wins. Go-live is then one line and one re-render of the maps, with
+  no city file touched. The alternative, a line in each of 206 map steps,
+  was set aside as 206 edits that can fall out of step.
+  - **Off means unchanged:** with `PACK_HOST` None, Florence and Kobe render
+    identical to their committed maps (`render_plain_diff.py`), and
+    `check_render_current` reads 206 of 206.
+  - **On, tested against the upload folder** served on a second local
+    address (so the pack, the libraries and the glyphs are cross-origin, as
+    on a real host): Kobe (JA pill), Antwerp (NL), London (no pill) and Hong
+    Kong (ZH), rendered with the switch on for that process only
+    (`render_switch_on.py`), pass every step of `dark_check.mjs` on desktop
+    and phone: Travel and Business, light and dark, the pill, no error.
+  - **`scripts/check_travel_packs.py`, in `check_all.py`:** every city in
+    the table has a built map, every language is one the pinned style
+    carries, every route kind is known, and the committed maps carry the
+    Travel switch exactly when a host is set, so the table and the maps
+    cannot drift apart unnoticed.
+  - **The libraries come from the pack host too** (`<host>/lib/`), not the
+    CDN copies the prototype used: the table passes them, so a release
+    loads nothing from jsdelivr or Protomaps' GitHub pages for Travel.
+- **The upload folder is internal for now (owner, 2026-10-11: branch out
+  once the domain is ready).** `data/_basemap_build/host_upload_2026-10/`,
+  assembled by `download_plan_2026-10-08/make_upload.py` in the layout the
+  table reads: `packs/<city>.pmtiles`, `lib/` (the five GL files, the Noto
+  glyphs with `OFL.txt` and `TRADEMARKS.txt`, each library's license),
+  `MANIFEST.csv` (per pack: bytes, sha256, box, its Geofabrik extracts and
+  their dated addresses, for the ODbL 4.6 offer) and a README marked
+  internal draft. Nothing is uploaded anywhere.
+- **PROPOSALS for the owner (review time; none applied, none rendered).**
+  - **P1, wording already on the branch, for sign-off:** the two base
+    layers are named "Business" and "Travel" in the layer menu; the label
+    pill reads "EN" and the local code in capitals ("ES", "FR", "JA", "KO"),
+    with the screen-reader name "Map label language"; a named ferry or
+    cable car gets a legend row under "Transit Lines" in Travel only
+    ("Arno Boat", "Bac du Rocher des Doms").
+  - **P2, the label-language table (judgment calls):** 166 cities get a
+    local-language pill, 40 are English only (the English-speaking
+    countries, Tbilisi and Dublin). Brussels, Charleroi, Liège, Montréal
+    and Geneva take French, Antwerp and Ghent Dutch, Zurich German; Ottawa
+    is English only; Barcelona and Palma take Spanish, since the style has
+    no Catalan; Tbilisi has no pill, since the style has no Georgian
+    (labels there fall back to each feature's own name where OSM has no
+    English one); Hong Kong and the Taiwanese cities use traditional
+    Chinese with the pill text "ZH".
+  - **P3, legend rows for routes:** only the pilot's two (Florence,
+    Avignon). Every ferry and lift is drawn and named along its line in
+    every city; which others earn a legend row waits for the multi-route
+    ferry work, a later item.
+  - **P4, the reader-facing data-sources section** (replaces the internal
+    block's heading and note at go-live; the address is filled in then):
+    "**The Travel basemap.** Each city map has a second base layer, Travel.
+    Its map tiles are built by this project from OpenStreetMap data
+    (© OpenStreetMap contributors, Open Database License 1.0) with the
+    open-source Protomaps basemap builder, and stored as one file per city.
+    Those files are offered under the same license: they, and the list of
+    OpenStreetMap extracts each was built from, are at [address]. Map
+    labels are drawn in Noto fonts (SIL Open Font License 1.1); Noto is a
+    trademark of Google LLC. The map style is adapted from Protomaps'
+    basemap style (BSD 3-Clause) and is this project's own version, not a
+    Protomaps product."
+  - **P5, the privacy text (decision 18; depends on the host chosen):**
+    "Choosing Travel loads that city's map file and the map software from
+    [address], storage run by Cloudflare. As with any web request,
+    Cloudflare receives the visitor's IP address and the details of the
+    request, and handles them under its own privacy policy. This project
+    sets no cookies there and keeps no record of those requests. Nothing is
+    loaded from that address until a visitor chooses Travel; the choice is
+    remembered on the visitor's own device, so the next map opens the same
+    way." The "keeps no record" clause holds only with the Worker's
+    invocation logs off (or with R2 and no logging), so it is confirmed
+    against the host's settings before it is published.
+  - **P6, the upload folder's README:** the internal draft in the folder is
+    the starting text; its ODbL sentence is P4's.
+
 ### 2026-10-11 - Dark Travel draws Protomaps' dark flavor; the 20 cross-border cities' extracts merged (built and measured)
 
 - **Dark mode in Travel is Protomaps' own dark flavor, in place of the
