@@ -2190,7 +2190,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
     var CJK = /[@@CJK_CLASS@@]/;
     var MARKS = /[@@MARKS_CLASS@@]/g;
     var data = null, own = null, loading = null, fold = null, marker = null, timer = null;
-    var renderer = null;
+    var renderer = null, lineWatch = null;
     var byIndex = [], crossURL = null, crossings = null;
 
     function norm(s) {
@@ -2655,6 +2655,14 @@ _PLACE_SEARCH_TEMPLATE = r"""
                 // (LINE_HIGHLIGHT_SCRIPT); a row already picked stays picked.
                 map.fitBounds([[d.bbox[0], d.bbox[1]], [d.bbox[2], d.bbox[3]]], {padding: [30, 30]});
                 if (d.row.getAttribute("aria-pressed") !== "true") d.row.click();
+                // The businesses step back for as long as the searched line
+                // stays picked: unpicking it, by its legend row or any other
+                // way, ends the fade, as does the next search.
+                map.getContainer().classList.add("hm-searching");
+                lineWatch = new MutationObserver(function () {
+                    if (d.row.getAttribute("aria-pressed") !== "true") unmark();
+                });
+                lineWatch.observe(d.row, {attributes: true, attributeFilter: ["aria-pressed"]});
                 return;
             }
             if (d.kind === "mapstation") {
@@ -2699,6 +2707,8 @@ _PLACE_SEARCH_TEMPLATE = r"""
         }
         function unmark() {
             clearTimeout(timer);
+            if (lineWatch) lineWatch.disconnect();
+            lineWatch = null;
             if (marker) map.removeLayer(marker);
             marker = null;
             unfade();

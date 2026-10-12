@@ -4,6 +4,14 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-11 - Place search: a searched line fades the businesses too, for as long as it stays picked (owner, branch)
+
+- **"for line lookup, layer control should also thin/faint for those. otherwise the business data does no good overlapping the highlighted line. site-wide change"** (owner, at the phone check of the new marker). Read as: the business layers fade on a line search as they do on a place search.
+- **Built:** choosing a line from the search adds the same fade (dots, cluster bubbles and heat at 28%; lines, stations, rings and labels at full strength).
+- **Call, mine, for the owner to confirm: the fade lasts as long as the searched line stays picked**, not 12 seconds and not until the first touch. A line is followed by panning along it, so a fade that ended at the first touch would end before it was any use. It ends when the line is unpicked (its legend row, another line's row, or any other way the highlight clears: the script watches the row's picked state, set in one place by the highlight script) and at the next search. A line picked from the legend, not the search, fades nothing: that script is in every map, searched or not, and is unchanged.
+- **Measured in a local render** (São Paulo, 127.0.0.1): after "Linha 1-Azul", heat and cluster bubbles at 0.28 with the row picked; a pointer touch on the map left the fade on; unpicking the row put the heat back to 1.
+- All nineteen searched maps re-rendered.
+
 ### 2026-10-11 - Place search: the found place's marker in its own layer, with the businesses and heat faded while it shows; London's dealers and mis-named monuments by id (owner, branch)
 
 - **"yes do. not just for mobile though, site wide on either mode of access"** (owner, on the recommendation to strengthen the marker and fade the businesses rather than switch them off; raised at the phone test: "the highlight feature gets dwarfed by nearby businesses and the heat layer"), and **"green highlight ring is too dull on dark mode"**:

@@ -372,7 +372,8 @@ gallery is the business itself whatever its article; a public or charitable
 gallery stays. **The found place's marker** (owner, 2026-10-11) sits in its
 own pane above the dots, with a casing and the dark accent on the dark map,
 and the dots, cluster bubbles and heat fade to 28% while it shows; they are
-never switched off. The owner has not yet seen it on a phone. With Cleanup
+never switched off. A searched line fades them too, for as long as it stays
+picked (the script watches its legend row). With Cleanup
 for review
 time: the WIP suggestion tuning, the corner credit test, the Cities menu
 move, and whether "Download this index" also links the intersections file.
