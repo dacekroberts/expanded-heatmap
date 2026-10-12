@@ -46,6 +46,12 @@ index step measures each language's share of the places
      stations on the map could not be found. Read from the city's processed
      stations, so on a machine without data/ it is reported as not checked,
      never as passed. KNOWN_GAPS holds a dated defect and may only shrink.
+  I. The map asks for its index under the app's own path (owner's London
+     report, 2026-10-12): the deployed app is served under /~/+/, and a map
+     asking the host's root never loaded its index, so the live search
+     answered with stations and lines only while every local test passed.
+     The map's script must take the prefix from the page (getIndex) and must
+     not fetch the bare URL. A wave rendered from an older map_common fails.
   A and D apply to the intersections file too (app/static/places/crossings/,
      since 2026-10-08): the index names it under its current hash, and it
      holds only [lat, lon, street, street] rows and the index's licence.
@@ -204,6 +210,18 @@ def check_visitable(slug, visitable=None, today=None):
     return problems
 
 
+def check_fetch_path(text):
+    """I: the search script reads the app's path prefix and never fetches the
+    index or the intersections file by its bare root URL."""
+    out = []
+    if "function getIndex" not in text or "window.parent.location.pathname" not in text:
+        out.append("I: the map does not take the app's path prefix for its index (re-render from "
+                   "the current pipeline/map_common.py)")
+    if "fetch(URL," in text or "fetch(crossURL," in text:
+        out.append("I: the map fetches its index at the host's root, which the deployed app is not at")
+    return out
+
+
 def pages_by_slug():
     out = {}
     for page in sorted((ROOT / "app" / "pages").glob("*.py")):
@@ -236,6 +254,7 @@ def main():
             p.append("A: the map's index URL is stale (re-render the map after the index step)")
         if not place_index.summary_path(slug).exists():
             p.append("A: no outputs/<slug>/place_search.json")
+        p += check_fetch_path(text)
         page_texts = pages.get(slug, [])
         if not any(f"search='{slug}'" in t or f'search="{slug}"' in t for _, t in page_texts):
             p.append("C: the city's page does not pass search=<slug> to render_map_help")
@@ -353,8 +372,18 @@ def selftest():
         got = len(check_coverage("x", dict(base, rows=rows), stations, known))
         ok += got == want
         print(f"  {'ok ' if got == want else 'BAD'} {label}: {got} problem(s)")
+    current = "function getIndex(u) { window.parent.location.pathname; fetch(abs(u), opt) }"
+    path_cases = [
+        ("a map that takes the app's prefix", current, 0),
+        ("a map rendered before the fix", 'loading = fetch(URL, {credentials: "omit"})', 2),
+        ("the prefix read but the bare URL still fetched", current + " fetch(crossURL, opt)", 1),
+    ]
+    for label, text, want in path_cases:
+        got = len(check_fetch_path(text))
+        ok += got == want
+        print(f"  {'ok ' if got == want else 'BAD'} {label}: {got} problem(s)")
     total = (len(cases) + 1 + len(leak_cases) + 1 + len(junk_cases) + len(visit_cases)
-             + len(cover_cases))
+             + len(cover_cases) + len(path_cases))
     print(f"{ok} of {total} cases behaved as intended.")
     return 0 if ok == total else 1
 
