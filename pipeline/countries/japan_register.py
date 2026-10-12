@@ -1023,6 +1023,7 @@ def permits_from_rows(rows, pref, city, wardless=False, rules=(), others=(), mun
         if "areawide" in rules and not why and addr.strip() and (a.startswith("県内") or (had_pref and PREF_WIDE.fullmatch(a))):
             why = "area-wide address"
         muni = next((m for m in municipalities if a.startswith(m)), None)
+        cut = bool(muni)
         if muni:
             a = a[len(muni):]
         else:
@@ -1037,6 +1038,7 @@ def permits_from_rows(rows, pref, city, wardless=False, rules=(), others=(), mun
             i = a.find(city)
             if i >= 0 and "区" not in a[:i]:
                 a = a[i + len(city):]
+                cut = True
         # Takatsuki's, Mito's and Tottori's: the prefecture and city written
         # twice (鳥取県鳥取市鳥取市内)
         if "repeat_city" in rules:
@@ -1044,6 +1046,16 @@ def permits_from_rows(rows, pref, city, wardless=False, rules=(), others=(), mun
                 b = re.sub("^" + pref, "", a)
                 if b.startswith(muni):
                     a = b[len(muni):]
+        # Tottori's health centre writes a prefecture-wide permit AFTER the
+        # city's name (鳥取県鳥取市鳥取県内 226 rows, 鳥取県鳥取市鳥取県東部 4,
+        # 鳥取県鳥取市鳥取県 3, 鳥取県鳥取市県内 3; 2026-10-11), which the test
+        # above, made before the city is cut, never reads: 208 such rows
+        # reached the map at MHLW's own point. The same test on what the cut
+        # leaves (S19, 2026-10-12; DECISIONS). Re-measure if PREF_WIDE changes.
+        if "areawide" in rules and not why and cut:
+            b = re.sub("^" + pref, "", a)
+            if (b != a or a.startswith("県")) and PREF_WIDE.fullmatch(b if b != a else a[1:]):
+                why = "area-wide address"
         # Kurume's MHLW rows (2026-10-03): an address of only 久留米市内 ("within
         # the city") is a vehicle or stall licensed citywide, as 一円 is; all
         # 1,022 such rows share one point, so the default-point guard sees one
