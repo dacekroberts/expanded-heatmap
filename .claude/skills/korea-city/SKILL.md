@@ -140,7 +140,8 @@ filter landed with the Korea sweep: commit 8f0471c9 is on `origin/master`
 - **OSM, because no Korean agency publishes GTFS** and the national station
   dataset has no geometry (`south-korea.md` lines 36-51). One Overpass query
   per city for routes, station names and boundary, split by
-  `fetch_sources.py`; one query in flight per session.
+  `fetch_sources.py`; this fetch is unpinned (it may reach either mirror), so
+  it is the only Overpass query in flight while it runs (CLAUDE.md).
 - **Match on route type and `ref`, never `network`**; every relation in the
   answer is drawn or named in `NOT_DRAWN`, or step 1 stops. Stations by route
   membership, collapsed by Korean name (trailing 역 and parenthesized

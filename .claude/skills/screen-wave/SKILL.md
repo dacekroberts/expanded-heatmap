@@ -35,8 +35,8 @@ times that day.
 - **Run them in the background, several at once**, with disjoint shares
   (owner, 2026-10-02: split slow or large jobs across parallel agents). The
   built-in browser is shared: no probe uses it anyway.
-- **Overpass is never used by a probe.** One query in flight per session, and
-  the probes are curl-only (CLAUDE.md).
+- **Overpass is never used by a probe.** One query in flight per mirror, and
+  only for fetches pinned to one; the probes are curl-only (CLAUDE.md).
 - After each agent reports, stop any process it left (an orphaned grep once
   held 4.7 GB).
 

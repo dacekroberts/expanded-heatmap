@@ -70,6 +70,14 @@ marked TO BUILD name a script that does not exist yet.
    script** (`FetchLock`, built 2026-10-12; `--wait MINUTES`), not a hook: a lock guards the queue and anything an
    outside model drives; a hook guards only a Claude session. No session
    needs to be open while it runs.
+   **Two queues, one per Overpass mirror** (owner, 2026-10-12;
+   `docs/rule_history.md`, #overpass): `--host overpass-api.de` and
+   `--host overpass.kumi.systems`, each its own heavy job with its OWN city
+   list. Never the same city in both. The large cities and every
+   `PLACE_SPLIT` city go to `overpass-api.de` (kumi has timed out on heavy
+   queries); the small and middle ones to kumi. A pinned child asks its one
+   mirror for the whole city and holds only that mirror's lock; a queue with
+   no `--host` holds both and runs alone.
 4. **Build every index of the wave**, then read the languages lines and
    `street_dropped_leak_word` for any language's first city in a country.
 5. **The eye read stays; a cheaper model reads first.** "The eye read is
@@ -280,8 +288,10 @@ All quoted in the drafts file; the short list:
 1. `get_usage`: write down the weekly percentage; report it again at the end.
 2. Read the drafts file's newest entries, this skill's "Open owner questions"
    below, and `cjk-text` for any Han, kana or Hangul city.
-3. **Overpass: one query in flight per session, never parallel; 60 s after a
-   504 or 429** (`pipeline/osm.py` enforces the wait per host).
+3. **Overpass: one query in flight per mirror, each pinned to its mirror
+   (`--host`); an unpinned fetch runs alone; 60 s after a 504 or 429**
+   (`pipeline/osm.py` enforces the wait per host; the fetch script's lock per
+   mirror enforces the rest).
 
 ## Each city
 

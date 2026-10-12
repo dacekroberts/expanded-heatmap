@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**82 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**83 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-12**
 
@@ -59,6 +59,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [The commercial-use audit: read, ruled and written (owner)](#2026-10-12---the-commercial-use-audit-read-ruled-and-written-owner)
 - [The outside name net lands; code-plus-type names go; public sharing follows the Visuals registry (owner)](#2026-10-12---the-outside-name-net-lands-code-plus-type-names-go-public-sharing-follows-the-visuals-registry-owner)
 - [Thessaloniki after its full read: allowed with condition, and lifted for shared pieces (owner)](#2026-10-12---thessaloniki-after-its-full-read-allowed-with-condition-and-lifted-for-shared-pieces-owner)
+- [Overpass: one query in flight per mirror, each fetch pinned to its mirror (owner)](#2026-10-12---overpass-one-query-in-flight-per-mirror-each-fetch-pinned-to-its-mirror-owner)
 
 **2026-10-11**
 
@@ -4687,3 +4688,36 @@ japan-city template:
   - **For this site**: the same read permits its own use with the notice it
     already shows; nothing changes on the page. Thessaloniki is lifted for
     shared pieces, leaving 10 cities held off them.
+
+### 2026-10-12 - Overpass: one query in flight per mirror, each fetch pinned to its mirror (owner)
+
+- **Decided by the owner, 2026-10-12 ("3 yes go ahead"; "make sure the
+  relevant overpass skills are re-written"; "tell wave 1 to pilot the change
+  once it is built"), on the wave 1 search session's idea, relayed and then
+  confirmed first hand.** The rule of 2026-09-30 was one query in flight,
+  ever.
+  - **What changed.** `pipeline/osm.py`: `fetch(..., hosts=)` and
+    `pinned(name)`, a fetch that asks one mirror and never fails over.
+    `pipeline/place_index_fetch.py --host MIRROR`: the whole city on that
+    mirror, under a lock per mirror in the shared data folder; with no
+    `--host` it takes both locks. `scripts/place_search_fetch_queue.py
+    --host MIRROR` passes it to every child, so two queues run side by side.
+  - **What did not.** A plain `osm.fetch()` can reach both mirrors, so it
+    still runs alone: every rail, boundary and address fetch in a build. One
+    query per city. The 60 s wait after a 504 or 429, per mirror.
+  - **The split.** A city never crosses mirrors (they return different data
+    for one area on one day). The large cities and every tiled one go to
+    `overpass-api.de`; the small and middle ones to `overpass.kumi.systems`,
+    which has read-timed out on heavy queries. Two queues never share a
+    city: nothing enforces that but the lists.
+  - **Weaker in one place, on purpose**: a tile that answers empty is taken
+    as empty on the one pinned mirror's word, where two mirrors used to
+    agree. Tile corners outside a city's area are the usual cause.
+  - **Not measured yet**: that two queues finish a wave in about half the
+    time, and that kumi carries the middle cities. Wave 1 pilots it; a
+    refusal pattern on either mirror goes back to one queue.
+  - Selftests: the fetch script's 13 cases (a lock per mirror, the old lock
+    still honoured, an unknown mirror refused), the queue's 34. The rule's
+    full system is in `docs/rule_history.md`, #overpass; `CLAUDE.md`, the
+    `place-search-city`, `osm-rail`, `korea-city` and `screen-wave` skills
+    carry the new wording.

@@ -152,9 +152,30 @@ def overload_wait_left(name):
     return max(0.0, OVERLOAD_WAIT_S - (time.monotonic() - at))
 
 
+def host_names():
+    """The mirrors' host names, in OVERPASS_HOSTS order."""
+    return [h.split("/")[2] for h in OVERPASS_HOSTS]
+
+
+def pinned(name):
+    """The one-host tuple for mirror `name` ("overpass-api.de"), for a fetch
+    that must not fail over: the rollout runs one query per mirror (owner,
+    2026-10-12), and a fetch that wandered to the other mirror would be a
+    second query in flight there. An unknown name raises."""
+    for host in OVERPASS_HOSTS:
+        if host.split("/")[2] == name:
+            return (host,)
+    raise ValueError(f"{name!r} is not an Overpass mirror of this repository: "
+                     + ", ".join(host_names()))
+
+
 def fetch(query, cache_path, *, force=False, timeout=180, retries=2,
-          deadline=900, verbose=True):
+          deadline=900, verbose=True, hosts=None):
     """Return the Overpass elements for `query`, cached at `cache_path`.
+
+    `hosts` is the mirrors to ask, in order; None is every mirror. A pinned
+    fetch (`hosts=pinned(name)`) asks one mirror only and, when it refuses,
+    waits the owner's minute for that same mirror instead of failing over.
 
     The cache is not an optimisation. A rebuild has to produce the same map as
     the commit it is compared against, and the live answer does not: two
@@ -187,7 +208,7 @@ def fetch(query, cache_path, *, force=False, timeout=180, retries=2,
     problems = []
     for attempt in range(retries):
         overloaded = False
-        for host in OVERPASS_HOSTS:
+        for host in (hosts or OVERPASS_HOSTS):
             name = host.split("/")[2]
             left = _left()
             if left is not None and left <= 0:
@@ -286,6 +307,7 @@ def fetch(query, cache_path, *, force=False, timeout=180, retries=2,
             time.sleep(nap)
 
     raise RuntimeError(
-        "every Overpass mirror failed, which is a HOST problem or an "
+        ("the pinned Overpass mirror failed" if hosts and len(hosts) == 1
+         else "every Overpass mirror failed") + ", which is a HOST problem or an "
         "over-expensive QUERY and not a fact about this city - "
         + "; ".join(problems))

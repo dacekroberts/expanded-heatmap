@@ -217,6 +217,12 @@ the State of México found it. Two shared checks now raise on both:
   on Bucharest's brief-check and a 10-minute Seoul probe the same day.
   Rewritten as one query per city it finished **five cities in five minutes**.
   `scripts/screen_stop_spacing.py` is the worked example.
+- **How many queries may run at once** (owner, 2026-10-12): one per mirror,
+  and only when each fetch is pinned to its mirror
+  (`osm.fetch(..., hosts=osm.pinned(name))`). A plain `osm.fetch()`, which
+  is what every rail fetch here uses, can reach both mirrors, so it runs
+  alone. A city's queries all go to one mirror: the two disagree. The whole
+  system is in `docs/rule_history.md`, #overpass.
 
 - **Resolve a boundary BY NAME and then LOOK at what came back.** Searching
   `name=Stockholm` at `admin_level=7` matches **nothing** - the Swedish
