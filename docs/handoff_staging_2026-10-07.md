@@ -247,6 +247,7 @@ beauty lists (page 1004934, site terms; owner, call 225).
 - City master list, version 20: https://claude.ai/artifact/LTzi7Vj5emzHnb3zAZy4Vn
 - Country census, version 20: https://claude.ai/artifact/CKCadsYtUhbWwWKzV9sDeD
 - Accepted liabilities, version 2: https://claude.ai/artifact/FMZrsssfiCtydpHroo1V16
+- Build retrospective (first city to 237, every city ranked by difficulty), version 1, 2026-10-12: https://claude.ai/artifact/Cm77BkcwEPmzHHFNwYo6Cs (built from `scratchpad/retro/` of session 53fbc644: `difficulty.py`, `build_data.py`, `template.html`, `assemble.py`)
 - `docs/licence_positions.md`, version 2: https://claude.ai/artifact/JZoMFPgDZvbWEkyffuWWC5
 
 ## Standing rules (the owner's)
