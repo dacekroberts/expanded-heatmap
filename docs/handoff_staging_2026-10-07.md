@@ -122,7 +122,13 @@ fresh `docs/decisions_drafts/staging.md`.
   modified-use form. Cleanup was sent the three sessions' items for its
   queue on 2026-10-12. Staging owes: Naha's brief, the licence entries in
   a fresh `docs/decisions_drafts/staging.md`, Matsumoto's and Yamagata's
-  brief figures, the master-list pass after the landing. Next free: S27.
+  brief figures, the master-list pass after the landing. **The owner settled
+  East-2's rest in East-2's chat** (its drafts, "The owner's follow-up", tip
+  e958ef83): S1 and S2 are Cleanup's (S14 answered for those two; S17 and
+  S19 still open); S3 the Keiyo Line goes red, the value Cleanup's at
+  review time (#D01010 does not fit Tokyo; #C81000, #C80808 and #B04010 fit
+  all four maps at the floor, dark-label check not run; transit-globe
+  told); S5 "Saitama Rapid Railway Line" stands. Next free: S27.
 - **The live privacy fix (call 209)** landed on 2026-10-07 before the review:
   13 operators' own names withheld on six Japanese maps by the `name_city`
   switch.
