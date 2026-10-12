@@ -1128,5 +1128,60 @@
   "in_ring": 8598,
   "all": 10153,
   "map_blob": "cdd12eb6bf43cfa31246365dd57b1bc4415e48e4"
+ },
+ "koshigaya": {
+  "in_ring": 2934,
+  "all": 4092,
+  "map_blob": "6e4f7b2341cef8a41931c94717f6116b62e19afd"
+ },
+ "sagamihara": {
+  "in_ring": 3339,
+  "all": 5539,
+  "map_blob": "e1b7548e326131530466d3e0e0dcbf72423cf59e"
+ },
+ "fujisawa": {
+  "in_ring": 3821,
+  "all": 4947,
+  "map_blob": "d3e7943fda6f5e11c71c14684bbefabc6adab1a5"
+ },
+ "kawaguchi": {
+  "in_ring": 2980,
+  "all": 5312,
+  "map_blob": "8d3dcf38c3514c77b14cd82f2076857589e45a93"
+ },
+ "funabashi": {
+  "in_ring": 1234,
+  "all": 1473,
+  "map_blob": "14d6852a1bbcc03c08693a3941af0e7529a4f019"
+ },
+ "matsudo": {
+  "in_ring": 1000,
+  "all": 1253,
+  "map_blob": "a5dd78e06f153d42b7b39037ee12c3508da45a33"
+ },
+ "ichikawa": {
+  "in_ring": 798,
+  "all": 1017,
+  "map_blob": "c14af269632c774c1177e7a33a3266f50cfbf21c"
+ },
+ "urayasu": {
+  "in_ring": 253,
+  "all": 326,
+  "map_blob": "f9fc5809d311891854f9e6e7f8d08fd7fe1473c0"
+ },
+ "sakura": {
+  "in_ring": 322,
+  "all": 444,
+  "map_blob": "bc18638e71c32519f3dd6ad88313d85941e53743"
+ },
+ "yachiyo": {
+  "in_ring": 441,
+  "all": 549,
+  "map_blob": "b6b7230e74468b49edef481f5f1741f72523cf6b"
+ },
+ "ichihara": {
+  "in_ring": 299,
+  "all": 708,
+  "map_blob": "693f8177022d153378a06ff37a0c9558188eebe9"
  }
 }
