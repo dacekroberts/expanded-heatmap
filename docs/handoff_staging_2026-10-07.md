@@ -91,7 +91,16 @@ fresh `docs/decisions_drafts/staging.md`.
   visual", shown in East-2's chat); S4 "note internally" (the OSM spellings
   stay); S5 relabelled "Saitama Rapid Railway Line" on East-2's reading of
   the owner's pointer to the line's Wikipedia entry, to be confirmed.
-  **S14, put 2026-10-12:** who implements S1 and S2. Next free: S15.
+  **S14, put 2026-10-12:** who implements S1 and S2. **The owner answered
+  S6-S13 in Kansai-2's own chat on 2026-10-11** (its drafts, tip 149d5486):
+  S6 renamed at Osaka's re-render (Cleanup told); S7 and S9 to review time;
+  S10 kept (Cleanup told of the possible gap on Bucharest's map); S11 and
+  S12 accepted; S13 "yes brief and license reads for two packages"
+  (staging's: `shinki_syokuhin` and `472018_keizoku_syokuhin`, files cached
+  in `data/naha/raw/shinki` and `keizoku`); **S8 open**, the owner asked for
+  the grounds either way. Licence-read agents started 2026-10-12 for
+  `shinki_syokuhin` and for ansvsa.ro with data.gov.ro (S8's grounds); the
+  renewals package's read follows the first (BODIK spacing). Next free: S15.
 - **The live privacy fix (call 209)** landed on 2026-10-07 before the review:
   13 operators' own names withheld on six Japanese maps by the `name_city`
   switch.
