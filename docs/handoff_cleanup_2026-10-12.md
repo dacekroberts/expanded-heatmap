@@ -32,8 +32,25 @@ branch's drafts file.
     Toyota's config and map untouched.
   - `legend-dot-georgia` `16a68efe` (worktree `review-prep`), 57 behind
     master: needs the one full re-render.
-  - `place-search` `e4b9e9bf` (2026-10-12; far behind master): batches 1
-    to 3, nineteen cities, the watch file and its check. Since `498853e7`
+  - `place-search` `59ebdb96` (2026-10-12, its final state for the landing by its own message; the owner saw the marker and picked-line changes on a phone, relayed: "phone looks great", so the fifth call below is answered; far behind master): batches 1
+    to 3, nineteen cities, the watch file and its check. **Its rollout
+    plan for the whole site is `docs/handoff_place_search_rollout.md` on
+    the branch. The owner approved STAGE 0 with this landing, one
+    re-render, and the size projection before stage 2; the wave order
+    is NOT approved and waits for that projection** (owner, 2026-10-12,
+    in Cleanup's chat; DECISIONS, that date). Its stage 0 is this
+    landing's place search share; where it
+    says to re-render the nineteen and run its own deploy-verify, this
+    landing's ONE full re-render and its deploy-verify lanes cover both.
+    Its stage 0 item 5 is a new duty here: measure `app/static/places/`
+    at the merge (38 MB for nineteen cities by its count) and put the
+    projected total for the whole site to the owner before any stage 2
+    batch. Stages 1 and 2 (the other cities, in waves by language, about
+    ten a batch) are after the landing and need the owner's yes. New on
+    the branch since `e4b9e9bf`: a picked line fades the businesses and
+    takes a casing and a boxed label, built in the search script, so an
+    unsearched map gets it only when its own search lands (owner, relayed).
+    Since `498853e7`
     (that session's message; its newest drafts entry has the detail): the
     found place's marker rebuilt site-wide in `map_common` (own pane above
     the dots; dots, clusters and heat fade to 28% while it shows), all 19
@@ -149,6 +166,22 @@ branch's drafts file.
    cap. Names stay whole and wrap; nothing is truncated (the line-identity
    rule). Tokyo is the case that prompted it. Re-run
    `scripts/check_map_attribution.js` at more than one height afterwards.
+   **And the map frame's height on phones** (owner, 2026-10-12, in
+   Cleanup's chat, on his iPhone screenshot of São Paulo: "yes add it to
+   the landing handoff"): every city page calls `st.iframe(HEATMAP_HTML,
+   width=1000, height=650)`, and with Streamlit's top bar a phone's
+   visible screen is shorter than that, so the legend and the
+   OpenStreetMap credit sit off screen. One CSS rule in the app's shared
+   styles (`app/components.py`), narrow screens only, caps the map frame
+   at the visible height less the top bar; desktop stays 650. No page
+   file is edited and no map is re-rendered for it. NOT measured: the top
+   bar's height, the breakpoint, and which unit holds on iOS Safari with
+   its collapsing address bar (`svh` against `dvh`); measure before
+   writing. The 40% legend cap is relative to the frame, so check the two
+   together. `check_map_attribution.js` assumes 650 (the comment above
+   `CITY_SUBTITLE`): run it at phone heights too, and the owner looks at
+   it on his iPhone before it lands. Cost stated to him: a shorter map
+   shows less city at once.
 9. **Per-category totals in every city's `baseline.json`** (owner,
    2026-10-11, for Analytics): `storefronts`, `storefronts_retail`,
    `storefronts_food_service`, `storefronts_personal_services`, counted AFTER
@@ -177,6 +210,16 @@ branch's drafts file.
       lands (approved wording below).
     - The commercial-use and public-sharing audit (PLAN, "From the portfolio
       review").
+    - Draft a handoff file for transit-globe to implement ITS OWN search feature
+      (owner, 2026-10-12, in Cleanup's chat; Cleanup drafts it, which
+      replaces the earlier "his to write"). It names the index files that
+      feature needs (the per-city place index and the intersections file
+      under `app/static/places/`, their format, and the ODbL credit they
+      carry) and lets the app filter out search terms outside its scope.
+      The app stays independent: it reads our export read-only, borrows no
+      code, and the handoff is a full build-and-decisions account for it to
+      critique, with every pilot-only choice named (owner, 2026-10-07 and
+      2026-10-08). A draft for the owner to read before it goes over.
     - At a later review time: Bucharest's address and name functions to a
       shared module.
 
@@ -233,7 +276,19 @@ entries first. As that file records:
    order, set `PACK_HOST` first and the one full re-render carries the
    Travel switch. If it is not, land with the switch off (maps unchanged)
    and say plainly to the owner that go-live then costs a second full
-   re-render.
+   re-render. **The owner chose ONE re-render** (2026-10-12, in the
+   basemap session's chat, relayed: "one re render decided, making
+   cloudflare right now"; he told Cleanup the same day he was working on
+   Cloudflare while Naha builds). So before step 10, **ask the owner
+   whether the host address is in**: `PACK_HOST`, P4
+   (`docs/data_sources.md`) and P5 (notice 1 in `app/components.py`) go
+   into the integration tree first, and the basemap session sends the
+   address and the exact edits when he gives them. Do not start the full
+   re-render on the assumption either way; if the host is not ready when
+   everything else is, the choice between waiting and a second re-render
+   is his. Packs: 236 in `host_upload_2026-10` (2.3 GB) by that session's
+   report, Naha's still to build once its stations exist; branch at
+   `09fd1c17` or later.
 5. **At go-live:** the license rows in `docs/data_sources.md` (Protomaps
    BSD-3, the tiles an ODbL produced work, Noto OFL with its trademark
    line, Cloudflare), the notice wording, deploy-verify `scope:
@@ -268,18 +323,34 @@ construction is not listed until it opens."
 - **`docs/licence_positions.md` row 2.10 names 12 MHLW cities; at least 28
   read MHLW's filings** (27 configs name the download, and Tokyo). Left for
   the audit, which counts every source.
-- **Naha is in phase 2** (owner, 2026-10-12, in Cleanup's chat: "naha
-  should get built as part of phase 2"; DECISIONS, that date). Band B,
-  food only, mode `light_rail`, region Kyushu-Okinawa, the macro view's
-  fit Cleanup's at the landing (Staging's relay of S30, S33, S35). Brief
-  `docs/build_briefs/naha.md` on `worktree-staging`. Expect 31 cities
+- **Naha is built, on `worktree-japan-naha` `8298ce05`** (2 commits over
+  master, nothing pushed; a FOURTH build branch to merge in step 2). The
+  owner added it to phase 2 on 2026-10-12 and made it Food plus Personal
+  services (DECISIONS, that date, two entries). By Staging's relay, not
+  checked by Cleanup: page 307, notice 217, 10,135 storefronts, zero
+  drift, `check_all` 49 of 51 (the master list's counts;
+  `check_macro_labels`). Its text: `docs/decisions_drafts/worktree-japan-naha.md`
+  and `docs/handoff_naha_2026-10-12.md` on the branch. Expect 31 cities
   from phase 2 and 237 on the site, wherever this note says 30 and 236.
-  Its five shared-code items (a reader argument on `rebuilt_register`;
-  unnamed header columns in `xlsx_rows`; `NAME_COLS` 営業所名所;
-  `TYPE_COLS` 営業所種類 and 営業の種目; `VARIANTS` 壼) are Cleanup's
-  and go to master before its build starts: check `git log` for them
-  before assuming either way. The build session and its timing are
-  Staging's plan.
+  The reader changes it needed are on master (`db0c4e0c`). It changed
+  shared code itself, reported opt-in and inert for built cities:
+  `japan_fetch.py` (`config.FETCH_PAUSE_S`, a None URL through
+  `config.source_url`), `japan.py` (+4 lines), `line_registry.py`
+  (`okinawa-urban-monorail`, `#E84028`): read the diff and let the Japan
+  drift run decide. **Its three calls are answered (owner, 2026-10-12;
+  DECISIONS, that date):**
+  - S39: DONE on master, in `rebuilt_register` (a row filling both 業種
+    and 営業の種類 keeps its type in 業種). Naha's session re-runs steps
+    2 and 3 on its branch, so confirm its tip before merging.
+  - S40: left as is.
+  - S41, step 7's work: hold Naha out of the Kyushu-Okinawa view's zoom
+    fit and add a small line on that view saying Naha is below, a
+    TEMPORARY item (his word; what ends it was not said: ask). Draft
+    the wording and its place for him before rendering; it is visible
+    text no template covers. With Naha in the fit the build measured
+    Kitakyushu's and Shimonoseki's dots 3.3 px apart and no label for
+    Sasebo or Oita.
+  The basemap session builds Naha's pack and sends its table line.
 - **Toulouse and Rennes:** whether step 1's name-level fallback fired; one
   read-only step 1 run per city.
 - **Five unverified leads** from the PLAN cleanup pass (DECISIONS,

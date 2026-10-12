@@ -37,8 +37,16 @@ Detail files: [japan](docs/plan_detail/japan.md),
     owner when it finishes (`docs/build_plan_2026-10-07.md`).
   - [ ] When the batch lands: give the owner the city count, read from
     `app/cities.py`, for every "about N cities" line in his other projects.
-  - [ ] When place search is fully in: remind the owner to write the
-    transit-globe handoff (his to write).
+  - [ ] After the phase 2 landing: draft a handoff file for transit-globe to implement ITS OWN search feature
+    (owner, 2026-10-12, in Cleanup's chat; Cleanup drafts it, which
+    replaces the earlier "his to write"). It names the index files that
+    feature needs (the per-city place index and the intersections file
+    under `app/static/places/`, their format, and the ODbL credit they
+    carry) and lets the app filter out search terms outside its scope.
+    The app stays independent: it reads our export read-only, borrows no
+    code, and the handoff is a full build-and-decisions account for it to
+    critique, with every pilot-only choice named (owner, 2026-10-07 and
+    2026-10-08). A draft for the owner to read before it goes over.
   - [ ] **The commercial-use audit, after the batch lands:**
     `docs/commercial_use_positions.md`, for transit-globe's decisions only
     (this site stays non-commercial). One row per city, layer and source;
