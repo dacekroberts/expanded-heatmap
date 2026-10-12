@@ -259,6 +259,7 @@ def step3(cfg, system_name):
         businesses=businesses,
         taxonomy_system=cfg.TAXONOMY_SYSTEM,
         lines=lines,
+        dense_labels=getattr(cfg, "DENSE_LABELS", False),
         crs_geographic=cfg.CRS_GEOGRAPHIC,
         crs_projected=cfg.CRS_PROJECTED,
         ring_edges_meters=cfg.RING_EDGES_METERS,

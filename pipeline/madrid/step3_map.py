@@ -129,6 +129,10 @@ def main():
         ring_edges_meters=RING_EDGES_METERS,
         ring_labels=RING_LABELS,
         label_focus=city_geometry(),
+        # "Linea 5" and "Ramal Opera-Principe Pio" touch by about 0.5 px at one
+        # corner at 343 px; the wider placer clears it (measured by injection,
+        # docs/plan_detail/labels_and_macro_map.md).
+        dense_labels=True,
     )
 
 

@@ -152,3 +152,11 @@ OSTRAVA_BBOX = {
 # --- The macro map ---------------------------------------------------------
 MAP_MODE = "tram"
 MAP_COVERAGE = "full"
+
+# The wider phone placer (map_common.DENSE_LABEL_SCRIPT), asked for by name.
+# Measured live 2026-10-12 at 854 px: Tram 14's tip sits at y 37, under the
+# button row (bottom 45), boxed in by Tram 1, 2 and 18, and the clamp's best
+# spot left the label 2.1 px under the row. With this placer the label sits
+# at y 47 to 68 and none of the 14 overlaps anything. Re-measure if a line is
+# added or the button row changes.
+DENSE_LABELS = True

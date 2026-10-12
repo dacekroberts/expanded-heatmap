@@ -5081,7 +5081,7 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
                    center=None, zoom=None, label_focus=None, rings_shown=False,
                    all_city_heat=True, animate_clusters=False, lang=None, pins=True,
                    legend_names=None, open_basemap=None, full_travel=None,
-                   place_index_url=None):
+                   place_index_url=None, dense_labels=False):
     """Render one city's heatmap to a standalone HTML file.
 
     full_travel: optional dict(pmtiles_url=..., local_lang=..., local_name=...,
@@ -5412,8 +5412,13 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
         LABEL_CLAMP_SCRIPT.replace("__MAP_NAME__", m.get_name())))
     # A map that needed labels standing in the wide tier on the desktop gets
     # the wider phone placer too, and only such a map, so no other changes.
-    # See DENSE_LABEL_SCRIPT.
-    if any(_clearance(t) in _LABEL_WIDE_CLEARANCES for t in tips.values()):
+    # See DENSE_LABEL_SCRIPT. `dense_labels=True` asks for it by name, for a
+    # map the clamp's 15 spots leave with a measured overlap at some width
+    # (Ostrava's Tram 14 under the button row at 854 px, Madrid's corner
+    # touch at 343 px; 2026-10-12). The view is fitted in the browser, so an
+    # obstacle in _layout_labels does not reach such a case: measured on
+    # Ostrava, the row as an obstacle there changed nothing.
+    if dense_labels or any(_clearance(t) in _LABEL_WIDE_CLEARANCES for t in tips.values()):
         m.get_root().html.add_child(folium.Element(
             DENSE_LABEL_SCRIPT.replace("__MAP_NAME__", m.get_name())
             .replace("__LABEL_REACH__", f"{max(_LABEL_WIDE_CLEARANCES):g}")))
