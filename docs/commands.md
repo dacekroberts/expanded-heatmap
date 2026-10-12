@@ -16,6 +16,7 @@ python pipeline/place_index_fetch.py <city> [--force] [--wait <min>]   # a city'
 python scripts/place_search_fetch_queue.py <city> [<city> ...] [--log <file>] [--dry-run] [--retries <n>]   # a wave's place fetches, one city after another, no session attending; `--selftest` runs the queue's cases
 python scripts/place_search_review.py odd|tags|ids|ways|added|sizes <city_slug>   # REPORTS only: a new index's reading by eye (skill place-search-city)
 python scripts/check_place_index_drift.py [city] [--against REV] [--selftest]   # every index is what the code builds from its cache; --against lists rows changed since REV
+python scripts/commercial_use_sources.py [--json OUT] [--city SLUG] [--selftest]   # how many distinct sources the commercial-use audit must read: one line per source, grouped from provenance
 python scripts/commercial_use_quote_check.py VERDICTS_JSON [--selftest]   # every first-pass licence verdict rests on a quote the stored text really contains; a missing quote voids it
 python pipeline/drift_check.py [city_slug] [--jobs N]   # every city; --jobs 3 at most, one run per machine
 python pipeline/drift_check.py --render-only [--jobs N] # map step only, against data/<city>/processed/ as it stands; never the pre-deploy gate
