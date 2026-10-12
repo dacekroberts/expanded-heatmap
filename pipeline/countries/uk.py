@@ -596,6 +596,7 @@ def step2(config, tax_module):
 
 
 def step3(config, *, system_name, map_title, label_ends=None):
+    from pipeline import place_index
     from pipeline.map_common import load_geojson_line_shapes, render_heatmap
 
     for path in (config.STATIONS_CSV, config.BUSINESSES_CLEAN_CSV, config.LINES_GEOJSON):
@@ -619,4 +620,5 @@ def step3(config, *, system_name, map_title, label_ends=None):
         ring_labels=config.RING_LABELS,
         label_focus=boundary(config).union_all(),
         legend_names=config.LEGEND_NAMES,
+        place_index_url=place_index.index_url_for(config),
     )

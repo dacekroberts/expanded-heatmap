@@ -419,6 +419,7 @@ def _osm_line_shapes(cfg):
 
 
 def render(cfg, name):
+    from pipeline import place_index
     from pipeline.map_common import render_heatmap
     for path in (cfg.STATIONS_CSV, cfg.BUSINESSES_CLEAN_CSV, cfg.GTFS_ZIP,
                  cfg.CITY_BOUNDARY_GEOJSON):
@@ -450,4 +451,5 @@ def render(cfg, name):
         ring_edges_meters=cfg.RING_EDGES_METERS,
         ring_labels=cfg.RING_LABELS,
         label_focus=focus,
+        place_index_url=place_index.index_url_for(cfg),
     )

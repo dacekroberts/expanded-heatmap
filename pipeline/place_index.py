@@ -262,6 +262,20 @@ def index_url(slug):
         raise SystemExit(f"Missing {path}.\nRun: python pipeline/{slug}/step2b_place_index.py")
     return f"/app/static/places/{slug}.json?v={hashlib.sha256(path.read_bytes()).hexdigest()[:12]}"
 
+
+def index_url_for(config):
+    """index_url() for a city whose config declares place search (PLACE_AREA),
+    else None. For a map step shared by a country (pipeline/countries/
+    france_tram, czechia_osm_tram, uk): 33 cities' own step3 files hold no
+    render_heatmap() call to give the argument to, so the shared call asks
+    here and a city gains search by its config alone
+    (scripts/place_search_scaffold.py reads this function's name in a module
+    to know the map step needs no edit)."""
+    if getattr(config, "PLACE_AREA", None) is None:
+        return None
+    return index_url(city_of(config)[0])
+
+
 KINDS = ("station", "junction", "landmark", "place", "street", "crossing")
 
 # LANGUAGES (owner, 2026-10-07: the page names the languages a city's search

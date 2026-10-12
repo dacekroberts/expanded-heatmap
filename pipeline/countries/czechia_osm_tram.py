@@ -230,6 +230,7 @@ def step1(cfg):
 
 
 def step3(cfg, system_name):
+    from pipeline import place_index
     from pipeline.map_common import load_geojson_line_shapes, render_heatmap
 
     for path in (cfg.STATIONS_CSV, cfg.BUSINESSES_CLEAN_CSV, cfg.LINES_GEOJSON):
@@ -265,4 +266,5 @@ def step3(cfg, system_name):
         ring_edges_meters=cfg.RING_EDGES_METERS,
         ring_labels=cfg.RING_LABELS,
         label_focus=city_polygon(cfg, verbose=False),
+        place_index_url=place_index.index_url_for(cfg),
     )
