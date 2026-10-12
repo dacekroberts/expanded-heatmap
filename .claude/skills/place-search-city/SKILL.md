@@ -323,6 +323,9 @@ out
 - **A CSS transition does not advance in a hidden browser pane**: a test that
   reads an opacity right after a class change sees the old value. The fade
   has none.
+- **Leaflet's tooltip pane is hidden on a touch screen** (the tap script):
+  anything the search must show on a phone goes in a pane of its own, as the
+  found place's name label does. A desktop test does not see the difference.
 - **A static file is cached by the browser**: the map carries the index's
   content hash, so every index rebuild means a re-render (check A).
 - **Windows writes CRLF**: write bytes; `sed -i 's/\r$//'` after renders.

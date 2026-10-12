@@ -4,6 +4,19 @@ Entries for `DECISIONS.md`, newest first, each written exactly as it should
 land (the `decisions-entry` format). Cleanup folds them in when the owner
 hands the drafts off, then deletes this file (owner, 2026-09-30).
 
+### 2026-10-11 - Place search: the map's own stations and lines answer from the first letter (owner, branch)
+
+- **"searching "l" shows linhas, then "lin" shows nothing, followed by "linh" showing linhas once more. can we fix this discontinuity site wide"** (owner, on a phone, São Paulo). Cause: the keyword gate (four Latin letters, or a whole word of some name) let "l" through because a place carries the word L, and the results then included every line beginning with l; "li" and "lin" are neither.
+- **Built:** before a full keyword, the map's own stations and lines answer from the start of a word, under their usual cap (4 on a phone, 6 otherwise). The index's streets and places still wait for the keyword. So "l", "li", "lin" and "linh" all show the Linhas.
+- **This changes the call of 2026-10-07** ("nothing is suggested until a full keyword is typed": "North" for Northgate Station, "JR" for a JR line) for the map's own stations and lines only: "N" now shows up to four stations beginning with N. Put to the owner as such. An error value ("#N/A") still finds nothing.
+- All nineteen searched maps re-rendered.
+
+### 2026-10-11 - Place search: the found place's name label shows on a phone (owner, branch)
+
+- **"yes the new outline feature looks great and holds during pan, edits go away after tapping empty map"** (owner, final phone check): the picked line's look is confirmed on a phone.
+- **"we should add the tooltip confirming highlighted station name after search is entered"** (owner). The label was already bound to the marker and showed on a desktop; **on a touch screen it was hidden with every other tooltip** (the tap script's `@media (pointer: coarse) { .leaflet-tooltip-pane { display: none; } }`). It now sits in a pane of its own (z-index 645, over the marker's pane, under Leaflet's tooltips), which that rule does not reach. Every found place gets it, not only a station.
+- All nineteen searched maps re-rendered.
+
 ### 2026-10-11 - Place search: the picked line's outline contrasts with the map; unsearched maps get it with the rollout (owner, branch)
 
 - **"two color swap"** (owner): the casing under a picked line is black on the light map and white on the dark one, and the label's ring is the same black or white (it was the label's own colour). The label's fill stays the map's side (white on light, black on dark) so its text and halo still read.

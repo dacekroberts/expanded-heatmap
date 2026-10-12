@@ -2047,7 +2047,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
        the accent over it, the dark accent on the dark map. Colours here, not
        in the path's own attributes, so the theme button recolours a marker
        already shown. */
-    .leaflet-hmsearch-pane { pointer-events: none; }
+    .leaflet-hmsearch-pane, .leaflet-hmsearchtip-pane { pointer-events: none; }
     path.hm-search-case { stroke: #ffffff; stroke-opacity: 0.95; fill: none; }
     path.hm-search-ring { stroke: @@LIGHT_ACCENT@@; stroke-opacity: 1;
         fill: @@LIGHT_ACCENT@@; fill-opacity: 0.14; }
@@ -2569,7 +2569,15 @@ _PLACE_SEARCH_TEMPLATE = r"""
             shown = [];
             // Empty, or no full keyword yet: what the search is for (owner,
             // 2026-10-07), and the credit, which shows whenever the box is open.
-            if (!input.value.trim() || (data && !ready(input.value))) {
+            // Before a full keyword, the map's own stations and lines still
+            // answer, from the start of a word (owner, 2026-10-11: "l" showed
+            // the Linhas through a place with a word L, "lin" showed nothing,
+            // "linh" showed them again). The index's places wait for the
+            // keyword, as before.
+            var gated = !!data && !ready(input.value);
+            var early = gated && input.value.trim() && !JUNK_Q.test(input.value)
+                ? search(input.value).filter(isOwn) : [];
+            if (!input.value.trim() || (gated && !early.length)) {
                 note("Finds streets, intersections, stations, lines, neighborhoods and landmarks. " +
                      "Businesses are not searchable, and what you type stays in your browser.");
                 credit();
@@ -2580,8 +2588,8 @@ _PLACE_SEARCH_TEMPLATE = r"""
             // An error value typed in ("#N/A", "#REF!", "!ERROR!") finds
             // nothing, as no index holds one (place_index.junk_name).
             if (JUNK_Q.test(input.value)) { note("No street, station or place by that name"); credit(); return; }
-            shown = search(input.value);
-            if (needCrossings(input.value, shown)) {
+            shown = gated ? early : search(input.value);
+            if (!gated && needCrossings(input.value, shown)) {
                 // Shown again when the intersections arrive, or as it stands
                 // if they cannot.
                 loadCrossings().then(render, render);
@@ -2676,6 +2684,10 @@ _PLACE_SEARCH_TEMPLATE = r"""
             // dots and rings under it: the casing, then the ring over it.
             if (!map.getPane("hmsearch")) {
                 map.createPane("hmsearch").style.zIndex = 640;
+                // The name label has a pane of its own: TAP_SELECT_SCRIPT
+                // hides Leaflet's tooltip pane on a touch screen, where a
+                // hover label has no use, and this one is the search's answer.
+                map.createPane("hmsearchtip").style.zIndex = 645;
                 renderer = L.svg({pane: "hmsearch"});
             }
             marker = L.featureGroup([
@@ -2684,7 +2696,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
                 L.circleMarker([d.lat, d.lon], {radius: 17, weight: 4, className: "hm-search-ring",
                     pane: "hmsearch", renderer: renderer, interactive: false})
             ]).addTo(map);
-            marker.getLayers()[1].bindTooltip(d.name, {permanent: true, direction: "top",
+            marker.getLayers()[1].bindTooltip(d.name, {permanent: true, direction: "top", pane: "hmsearchtip",
                 offset: [0, -16]}).openTooltip();
             map.getContainer().classList.add("hm-searching");
             // The reader's first touch of the map ends the fade (the marker
