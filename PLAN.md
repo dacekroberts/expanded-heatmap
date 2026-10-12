@@ -376,9 +376,11 @@ decisions inside a build are named in its brief.
   control would swap the site's romanised style (Naha-kuko, Itami's
   Osaka-kuko) for the operator's own English (Naha Airport). Half the data
   exists: each config's `OSM_NAME_EN_OVERRIDES` cites the OSM spelling it
-  replaces. Meanwhile the romanised precedent stands site-wide, with one
-  deliberate exception the Naha session read from the owner's words:
-  Naha's airport station reads "Naha Airport" (confirm that reading with
-  him at the landing; a revert is one line).
+  replaces. The romanised precedent stands site-wide with no exception:
+  Naha's airport station is Naha-kuko (owner, in that chat, relayed:
+  "naha-kuko okay"). He places the idea with the Travel view or the
+  transit-globe app, not the site's maps ("i will worry about the
+  english wording more for the transit-globe or maybe the partial
+  travel version"): name it in transit-globe's search handoff.
 - [ ] Adopt `safe-rename` (or fold its checklist into `add-city`) once a
   README, deployment or devcontainer exists to keep in sync.
