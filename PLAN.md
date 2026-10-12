@@ -163,6 +163,43 @@ Detail files: [japan](docs/plan_detail/japan.md),
     the stations OSM draws as not yet open are an internal watch file
     on the branch with its check, no per-city page text; one general
     sentence for About the Data is approved (the handoff has it).
+  - **FIRST after the phase 2 landing, before the rollout or the audit
+    starts: the skills that make both cheap** (owner, 2026-10-12). The
+    DeepSeek integration (the owner's own handoff, a new session) comes
+    before the work these skills serve.
+    - **`search-city` skill**, with what it rests on: one script that
+      scaffolds every remaining city's search config and thin index step
+      (area from the boundary already in the repo, languages from
+      `travel_packs.LOCAL_LANG`); an unattended fetch queue over
+      `place_index_fetch.py` with a LOCK in the fetch script for the
+      one-query rule (a lock guards a queue and any outside model, a hook
+      only a Claude session); the flagged-name review as one request per
+      city (names and a fixed rubric in, a verdict per name out as JSON),
+      the step a cheaper model can take overnight, sampled afterwards;
+      visitable former homes left out of the rollout; one re-render and
+      one sampled deploy-verify per wave. The lane lessons of this
+      landing go in it: a lane server needs `--server.enableStaticServing
+      true` or the index never loads, Travel draws only on ports 8501 and
+      8000, the hidden pane needs the frame and timer method
+      (`docs/review_lane_kit.md` 7b).
+    - **Before any wave: the size projection.** 19 indexes are 38 MB,
+      about 2 MB a city, so roughly 475 MB at 237 by extrapolation; the
+      wave order waits on the measured figure.
+    - **`commercial-use-audit` skill**: the question and the verdict
+      shapes (permitted, permitted with a condition, forbidden, silent)
+      under the owner's rules of 2026-10-11; each DISTINCT source audited
+      once and fanned out to its cities, counted first; a table that
+      settles the standard licences (CC BY 4.0, ODbL, the government open
+      licences) with no read; a first pass by a cheaper model over the
+      STORED licence texts that returns a verdict and the sentence it
+      rests on, with a script confirming the sentence is in the stored
+      text; Claude reads the silent and conditional ones and a sample of
+      the permitted; the owner decides the forbidden and unclear. A wrong
+      "permitted" is the costly error: the cheaper model finds and
+      quotes, it does not give the final verdict, and its reading of
+      Japanese and Korean terms is tried on known sources first.
+    - Nothing from a business register goes to an outside model; an API
+      key never enters the repo.
   - **Search rollout, first wave: Mexico City's index is rebuilt for the
     regional map** (owner, 2026-10-12: "fix in search rollout"). The
     index landed cut to Mexico City proper: the 11 stations in the four
