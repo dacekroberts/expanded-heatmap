@@ -373,6 +373,8 @@ published until the owner approves it at review time.<!-- /internal -->
   city boundary (on a regional map, the boundaries of its station cities) and
   built by `pipeline/place_index.py`. It holds no business
   records and no data from any other source.
+- **Stations:** Search finds stations that are open. A station OpenStreetMap
+  still marks as planned or under construction is not listed until it opens.
 - **PERMITTED WITH CONDITIONS** (<!-- internal -->`licence-read` 2026-10-07; <!-- /internal -->ODbL 1.0 and the OpenStreetMap
   Foundation's Geocoding, Substantial, Produced Work and Attribution
   guidelines, read 2026-10-07). A whole city's index is a Derivative Database:
