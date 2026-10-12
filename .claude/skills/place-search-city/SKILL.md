@@ -37,6 +37,7 @@ named `charming-lumiere-930853`, moved by Cleanup 2026-10-08); a city is added t
 | Every index is what the code builds from its cache | `scripts/check_place_index_drift.py [--against REV]` |
 | Reading tools (reports only) | `scripts/place_search_review.py odd / tags / ids / ways / added / sizes` |
 | Stations OSM draws as not yet open (an internal watch file) | `docs/place_search_unopened_stations.json` |
+| The watch file says what the last index builds skipped (in `check_all.py`) | `scripts/check_place_unopened.py` |
 | The eye read, one city per call, read-only | the `place-read` agent |
 
 ## The owner's calls every city inherits
@@ -102,6 +103,10 @@ All quoted in the drafts file; the short list:
   `docs/place_search_unopened_stations.json` (owner, 2026-10-11: an internal
   watch file, never page text). A station leaves the file when OSM marks it
   open and its city's index is rebuilt from a new cache.
+  `scripts/check_place_unopened.py` fails until the file matches what each
+  index step skipped (`stations_not_open` in `outputs/<city>/place_search.json`):
+  add a row for a new one, with its line and where the line came from
+  (relation, tag or a published source; null with a reason, never a guess).
 - **Suggestions are work in progress**: few items, phones first.
 - **Any search inside a station's rings must keep working** (the boundary of
   the reserve intersection cut, unused so far).

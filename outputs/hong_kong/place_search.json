@@ -15,5 +15,6 @@
       "English",
       "Chinese"
     ]
-  }
+  },
+  "stations_not_open": []
 }

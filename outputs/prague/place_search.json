@@ -14,5 +14,32 @@
     "listed": [
       "Czech"
     ]
-  }
+  },
+  "stations_not_open": [
+    {
+      "osm": "node/14202143413",
+      "name": "Nádraží Krč",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/7070517627",
+      "name": "Náměstí Míru",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/7070517634",
+      "name": "Nemocnice Krč",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/7070517660",
+      "name": "Nové Dvory",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/9324423119",
+      "name": "Ryšánka",
+      "tag": "railway=construction"
+    }
+  ]
 }

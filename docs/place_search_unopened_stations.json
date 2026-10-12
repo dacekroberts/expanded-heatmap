@@ -1,9 +1,10 @@
 {
- "about": "Stations the place search does not find because OpenStreetMap draws them as not open (pipeline/place_index.py, station_skipped_not_open). An internal watch file (owner, 2026-10-11), never page text. A row leaves when OSM marks the station open and the city's index is rebuilt from a new cache. 'open_namesake_in_index' is true where an open station of the same name is findable. The line is OSM's line, network or operator tag, null where it carries none.",
+ "about": "Stations the place search does not find because OpenStreetMap draws them as not open (pipeline/place_index.py, station_skipped_not_open). An internal watch file (owner, 2026-10-11), never page text. A row leaves when OSM marks the station open and the city's index is rebuilt from a new cache. 'open_namesake_in_index' is true where an open station of the same name is findable. 'line' comes with 'line_source' (relation: a route relation the station is a member of; tag: a tag on the station or its track; source: a published page, read on the date noted, where OSM cannot say); a null line carries 'line_reason' and is never a guess. scripts/check_place_unopened.py holds the rows to each city's last index build.",
  "rows": [
   {
    "city": "barcelona",
-   "line": null,
+   "line": "L9/L10",
+   "line_source": "source: https://www.3cat.cat/3catinfo/la-tuneladora-de-ll9-arriba-a-sarria-i-a-finals-del-2024-tot-el-tunel-estara-acabat/noticia/3240966/ (the central section's stations; in no route relation, with no line tag and on no track way in OSM (two Overpass queries by id, 2026-10-11))",
    "name": "Camp Nou",
    "osm": "node/13410497373",
    "tag": "railway=construction",
@@ -13,7 +14,8 @@
   },
   {
    "city": "barcelona",
-   "line": null,
+   "line": "L9/L10",
+   "line_source": "source: https://www.3cat.cat/3catinfo/la-tuneladora-de-ll9-arriba-a-sarria-i-a-finals-del-2024-tot-el-tunel-estara-acabat/noticia/3240966/ (the central section's stations; in no route relation, with no line tag and on no track way in OSM (two Overpass queries by id, 2026-10-11))",
    "name": "Campus Nord",
    "osm": "node/13410497366",
    "tag": "railway=construction",
@@ -23,7 +25,8 @@
   },
   {
    "city": "barcelona",
-   "line": null,
+   "line": "L8 (FGC)",
+   "line_source": "source: https://terra.bibliotecadigital.gencat.cat/handle/20.500.13045/1071 (Generalitat: the FGC extension from Plaça d'Espanya to Gràcia; in no route relation, with no line tag and on no track way in OSM (two Overpass queries by id, 2026-10-11))",
    "name": "Francesc Macià",
    "osm": "node/13198195265",
    "tag": "railway=construction",
@@ -33,7 +36,8 @@
   },
   {
    "city": "barcelona",
-   "line": null,
+   "line": "L8 (FGC)",
+   "line_source": "source: https://terra.bibliotecadigital.gencat.cat/handle/20.500.13045/1071 (Generalitat: the FGC extension from Plaça d'Espanya to Gràcia; in no route relation, with no line tag and on no track way in OSM (two Overpass queries by id, 2026-10-11))",
    "name": "Gràcia",
    "osm": "node/13482086622",
    "tag": "railway=construction",
@@ -43,7 +47,8 @@
   },
   {
    "city": "barcelona",
-   "line": null,
+   "line": "L9/L10",
+   "line_source": "tag: the station's own name carries the lines",
    "name": "Guinardó | Hospital de Sant Pau (L9/L10)",
    "osm": "node/13410497387",
    "tag": "railway=construction",
@@ -53,7 +58,8 @@
   },
   {
    "city": "barcelona",
-   "line": null,
+   "line": "L8 (FGC)",
+   "line_source": "source: https://terra.bibliotecadigital.gencat.cat/handle/20.500.13045/1071 (Generalitat: the FGC extension from Plaça d'Espanya to Gràcia; in no route relation, with no line tag and on no track way in OSM (two Overpass queries by id, 2026-10-11))",
    "name": "Hospital Clínic",
    "osm": "node/13198195266",
    "tag": "railway=construction",
@@ -63,7 +69,8 @@
   },
   {
    "city": "barcelona",
-   "line": null,
+   "line": "L9/L10",
+   "line_source": "source: https://www.3cat.cat/3catinfo/la-tuneladora-de-ll9-arriba-a-sarria-i-a-finals-del-2024-tot-el-tunel-estara-acabat/noticia/3240966/ (the central section's stations; in no route relation, with no line tag and on no track way in OSM (two Overpass queries by id, 2026-10-11))",
    "name": "Mandri",
    "osm": "node/10793638263",
    "tag": "railway=construction",
@@ -73,7 +80,8 @@
   },
   {
    "city": "barcelona",
-   "line": null,
+   "line": "L9/L10",
+   "line_source": "source: https://www.3cat.cat/3catinfo/la-tuneladora-de-ll9-arriba-a-sarria-i-a-finals-del-2024-tot-el-tunel-estara-acabat/noticia/3240966/ (the central section's stations; in no route relation, with no line tag and on no track way in OSM (two Overpass queries by id, 2026-10-11))",
    "name": "Manuel Girona",
    "osm": "node/13410497359",
    "tag": "railway=construction",
@@ -83,7 +91,8 @@
   },
   {
    "city": "barcelona",
-   "line": null,
+   "line": "L9/L10",
+   "line_source": "source: https://www.3cat.cat/3catinfo/la-tuneladora-de-ll9-arriba-a-sarria-i-a-finals-del-2024-tot-el-tunel-estara-acabat/noticia/3240966/ (the central section's stations; in no route relation, with no line tag and on no track way in OSM (two Overpass queries by id, 2026-10-11))",
    "name": "Plaça de Maragall",
    "osm": "node/13410497390",
    "tag": "railway=construction",
@@ -93,7 +102,8 @@
   },
   {
    "city": "barcelona",
-   "line": "Metro de Barcelona",
+   "line": "L9/L10",
+   "line_source": "tag: route_ref=L9;L10",
    "name": "Sarrià",
    "osm": "node/13410497345",
    "tag": "railway=construction",
@@ -103,7 +113,8 @@
   },
   {
    "city": "barcelona",
-   "line": "Metro de Barcelona",
+   "line": "L4",
+   "line_source": "tag: route_ref=L4",
    "name": "Santander",
    "osm": "node/13410497394",
    "tag": "railway=proposed",
@@ -113,7 +124,8 @@
   },
   {
    "city": "busan",
-   "line": "동남권 전철",
+   "line": null,
+   "line_reason": "OSM carries the network 동남권 전철 and station number 505, no line; not confirmed on the Sasang-Hadan line at a source read 2026-10-11",
    "name": "동아대",
    "osm": "node/5942137553",
    "tag": "railway=construction",
@@ -124,6 +136,7 @@
   {
    "city": "busan",
    "line": null,
+   "line_reason": "OSM tags a train station with no network, line or relation; not looked up further",
    "name": "부경경마공원",
    "osm": "node/10566861520",
    "tag": "railway=construction",
@@ -133,7 +146,8 @@
   },
   {
    "city": "busan",
-   "line": "동남권 전철",
+   "line": "사상하단선",
+   "line_source": "source: https://magazine.hankyung.com/business/article/202603064100b (the Sasang-Hadan line, Sasang to Hadan, with Eomgung on it; OSM carries the network 동남권 전철 and a station number only)",
    "name": "사상",
    "osm": "node/10566822382",
    "tag": "railway=construction",
@@ -143,7 +157,8 @@
   },
   {
    "city": "busan",
-   "line": "동남권 전철",
+   "line": null,
+   "line_reason": "OSM carries the network 동남권 전철 and station number 502-1, no line; not confirmed on the Sasang-Hadan line at a source read 2026-10-11",
    "name": "사상스마트시티",
    "osm": "node/10566822380",
    "tag": "railway=construction",
@@ -153,7 +168,8 @@
   },
   {
    "city": "busan",
-   "line": "동남권 전철",
+   "line": null,
+   "line_reason": "OSM carries the network 동남권 전철 and station number 502, no line; the station was not confirmed on the Sasang-Hadan line at a source read 2026-10-11, though its number sits between that line's",
    "name": "새벽시장",
    "osm": "node/10566822381",
    "tag": "railway=construction",
@@ -163,7 +179,8 @@
   },
   {
    "city": "busan",
-   "line": "동남권 전철",
+   "line": "사상하단선",
+   "line_source": "source: https://magazine.hankyung.com/business/article/202603064100b (the Sasang-Hadan line, Sasang to Hadan, with Eomgung on it; OSM carries the network 동남권 전철 and a station number only)",
    "name": "엄궁",
    "osm": "node/10566822378",
    "tag": "railway=construction",
@@ -173,7 +190,8 @@
   },
   {
    "city": "busan",
-   "line": "동남권 전철",
+   "line": "사상하단선",
+   "line_source": "source: https://magazine.hankyung.com/business/article/202603064100b (the Sasang-Hadan line, Sasang to Hadan, with Eomgung on it; OSM carries the network 동남권 전철 and a station number only)",
    "name": "하단",
    "osm": "node/14081390783",
    "tag": "railway=construction",
@@ -183,7 +201,8 @@
   },
   {
    "city": "busan",
-   "line": "동남권 전철",
+   "line": null,
+   "line_reason": "OSM carries the network 동남권 전철 and station number 503, no line; not confirmed on the Sasang-Hadan line at a source read 2026-10-11",
    "name": "학장",
    "osm": "node/10566822379",
    "tag": "railway=construction",
@@ -193,7 +212,8 @@
   },
   {
    "city": "chicago",
-   "line": "Metra",
+   "line": null,
+   "line_reason": "OSM names the network (Metra) and a stop area, no line; not looked up further",
    "name": "87th Street (Woodruff)",
    "osm": "node/1325605366",
    "tag": "railway=construction",
@@ -203,7 +223,8 @@
   },
   {
    "city": "chicago",
-   "line": "CTA",
+   "line": "Red Line (Red Line Extension)",
+   "line_source": "source: https://www.transitchicago.com/cta-celebrates-start-of-the-historic-red-line-extension-project-by-breaking-ground-at-the-future-michigan-avenue-station/ (CTA names the four stations; OSM carries the network only)",
    "name": "103rd",
    "osm": "node/10291088825",
    "tag": "railway=proposed",
@@ -213,7 +234,8 @@
   },
   {
    "city": "chicago",
-   "line": "CTA",
+   "line": "Red Line (Red Line Extension)",
+   "line_source": "source: https://www.transitchicago.com/cta-celebrates-start-of-the-historic-red-line-extension-project-by-breaking-ground-at-the-future-michigan-avenue-station/ (CTA names the four stations; OSM carries the network only)",
    "name": "111th",
    "osm": "node/10291088815",
    "tag": "railway=proposed",
@@ -223,7 +245,8 @@
   },
   {
    "city": "chicago",
-   "line": "CTA",
+   "line": "Red Line (Red Line Extension)",
+   "line_source": "source: https://www.transitchicago.com/cta-celebrates-start-of-the-historic-red-line-extension-project-by-breaking-ground-at-the-future-michigan-avenue-station/ (CTA names the four stations; OSM carries the network only)",
    "name": "130th",
    "osm": "node/13886166036",
    "tag": "railway=proposed",
@@ -233,7 +256,8 @@
   },
   {
    "city": "chicago",
-   "line": "CTA",
+   "line": "Red Line (Red Line Extension)",
+   "line_source": "source: https://www.transitchicago.com/cta-celebrates-start-of-the-historic-red-line-extension-project-by-breaking-ground-at-the-future-michigan-avenue-station/ (CTA names the four stations; OSM carries the network only)",
    "name": "Michigan",
    "osm": "node/13886166035",
    "tag": "railway=proposed",
@@ -243,7 +267,8 @@
   },
   {
    "city": "prague",
-   "line": "Pražské metro",
+   "line": "Metro D",
+   "line_source": "source: https://www.echo24.cz/a/HVkKn/zpravy-domov-radni-schvalili-nazvy-stanic-metra-d (the council's naming of Metro D's stations; in no route relation, with no line tag and on no track way in OSM (two Overpass queries by id, 2026-10-11))",
    "name": "Ryšánka",
    "osm": "node/9324423119",
    "tag": "railway=construction",
@@ -253,7 +278,8 @@
   },
   {
    "city": "prague",
-   "line": null,
+   "line": "Metro D",
+   "line_source": "tag: name=Metro D on the proposed track the station sits on (way 757080466)",
    "name": "Nemocnice Krč",
    "osm": "node/7070517634",
    "tag": "railway=proposed",
@@ -263,7 +289,8 @@
   },
   {
    "city": "prague",
-   "line": null,
+   "line": "Metro D",
+   "line_source": "tag: name=Metro D on the proposed track the station sits on (way 757080466)",
    "name": "Nové Dvory",
    "osm": "node/7070517660",
    "tag": "railway=proposed",
@@ -273,7 +300,8 @@
   },
   {
    "city": "prague",
-   "line": null,
+   "line": "Metro D",
+   "line_source": "source: https://www.echo24.cz/a/HVkKn/zpravy-domov-radni-schvalili-nazvy-stanic-metra-d (the council's naming of Metro D's stations; in no route relation, with no line tag and on no track way in OSM (two Overpass queries by id, 2026-10-11))",
    "name": "Nádraží Krč",
    "osm": "node/14202143413",
    "tag": "railway=proposed",
@@ -283,7 +311,8 @@
   },
   {
    "city": "prague",
-   "line": null,
+   "line": "Metro D",
+   "line_source": "tag: name=Metro D on the proposed track the station sits on (way 759875073)",
    "name": "Náměstí Míru",
    "osm": "node/7070517627",
    "tag": "railway=proposed",

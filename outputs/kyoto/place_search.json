@@ -15,5 +15,6 @@
       "English",
       "Japanese"
     ]
-  }
+  },
+  "stations_not_open": []
 }

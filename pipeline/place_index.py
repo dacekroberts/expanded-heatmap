@@ -71,6 +71,8 @@ def files(index, slug):
     files on disk. `index` is build()'s, and is not changed."""
     index = dict(index)
     cross = index.pop("crossing_rows")
+    # Never in the served index: the summary alone carries them.
+    not_open = index.pop("stations_not_open", [])
     cpath = crossings_path(slug)
     cbytes = json.dumps({"license": index["license"], "city": index["city"],
                          "part_of": f"{slug}.json", "rows": cross},
@@ -80,7 +82,11 @@ def files(index, slug):
     index["crossings"] = _site_url(cpath, cbytes)
     ibytes = json.dumps(index, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
     summary = {"index": f"app/static/places/{slug}.json", "places": len(index["rows"]) + len(cross),
-               "data_retrieved": index["license"]["data_retrieved"], "languages": index["languages"]}
+               "data_retrieved": index["license"]["data_retrieved"], "languages": index["languages"],
+               # The stations skipped as not yet open at this build (OSM id,
+               # name, tag): scripts/check_place_unopened.py holds
+               # docs/place_search_unopened_stations.json to this list.
+               "stations_not_open": not_open}
     sbytes = (json.dumps(summary, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
     return {cpath: cbytes, index_path(slug): ibytes, summary_path(slug): sbytes}
 
@@ -1058,6 +1064,7 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
                 nodes.setdefault(e["id"], (e["lat"], e["lon"]))
 
     report = defaultdict(int)
+    not_open = []                             # stations skipped as not yet open
     rows = []
     square_rows = []                          # place=square landmark rows (the duplicate pass)
     # The extent of the city's own street nodes, a little wider: an area that
@@ -1247,6 +1254,8 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             # station. Stations only: Prague's historic horse railway
             # (railway=abandoned) is a landmark.
             report["station_skipped_not_open"] += 1
+            not_open.append({"osm": f"{e['type']}/{e['id']}", "name": names[0],
+                             "tag": f"railway={t['railway']}"})
             continue
         if t.get("emergency") == "designated" and (t.get("railway") or t.get("public_transport")):
             # A platform for emergency use only (Hong Kong's Light Rail
@@ -1498,5 +1507,7 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         "rows": rows,
         # write() puts these in crossings_path() and their site path here.
         "crossing_rows": crossing_rows,
+        # write() puts these in the page's summary, never in the served file.
+        "stations_not_open": sorted(not_open, key=lambda r: r["osm"]),
     }
     return index, dict(report)

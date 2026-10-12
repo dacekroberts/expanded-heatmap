@@ -14,5 +14,62 @@
     "listed": [
       "Catalan"
     ]
-  }
+  },
+  "stations_not_open": [
+    {
+      "osm": "node/10793638263",
+      "name": "Mandri",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/13198195265",
+      "name": "Francesc Macià",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/13198195266",
+      "name": "Hospital Clínic",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/13410497345",
+      "name": "Sarrià",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/13410497359",
+      "name": "Manuel Girona",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/13410497366",
+      "name": "Campus Nord",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/13410497373",
+      "name": "Camp Nou",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/13410497387",
+      "name": "Guinardó | Hospital de Sant Pau (L9/L10)",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/13410497390",
+      "name": "Plaça de Maragall",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/13410497394",
+      "name": "Santander",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/13482086622",
+      "name": "Gràcia",
+      "tag": "railway=construction"
+    }
+  ]
 }

@@ -13,5 +13,32 @@
     "listed": [
       "English"
     ]
-  }
+  },
+  "stations_not_open": [
+    {
+      "osm": "node/10291088815",
+      "name": "111th",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/10291088825",
+      "name": "103rd",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/1325605366",
+      "name": "87th Street (Woodruff)",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/13886166035",
+      "name": "Michigan",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/13886166036",
+      "name": "130th",
+      "tag": "railway=proposed"
+    }
+  ]
 }
