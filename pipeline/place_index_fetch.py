@@ -93,6 +93,19 @@ area{area}->.a;
 );
 out tags center qt;
 """
+# THE SEARCHED AREA'S OUTLINE (owner, 2026-10-12): the boundaries
+# config.PLACE_AREA names, with their geometry, so the map can draw where
+# search stops and the index step can say which municipalities it covers
+# (place_index.outline). `pivot` gives the relation or way each area was made
+# from. A light query: one object per municipality.
+OUTLINE_QUERY = """[out:json][timeout:60];
+area{area}->.a;
+(
+  rel(pivot.a);
+  way(pivot.a);
+);
+out tags geom;
+"""
 
 
 def record(config, path, key, how):
@@ -390,7 +403,8 @@ def fetch_city(config, force, hosts=None):
     # One after the other, never in parallel (the owner's Overpass rule), and
     # both of the one mirror when pinned.
     for query, path, key in ((QUERY, config.PLACE_OSM_JSON, "osm_places"),
-                             (EXTRA_QUERY, config.PLACE_OSM_EXTRA_JSON, "osm_places_extra")):
+                             (EXTRA_QUERY, config.PLACE_OSM_EXTRA_JSON, "osm_places_extra"),
+                             (OUTLINE_QUERY, place_index.outline_cache(config), "osm_place_outline")):
         kept = path.exists() and not args.force
         if query is QUERY and getattr(config, "PLACE_SPLIT", None):
             els, host = fetch_split(config, path, args.force, hosts)

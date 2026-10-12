@@ -17,6 +17,7 @@ entry (build_legend). render_heatmap does both for every line passed in.
 import html
 import json
 import math
+import os
 import re
 import zipfile
 from pathlib import Path
@@ -2169,6 +2170,8 @@ _PLACE_SEARCH_TEMPLATE = r"""
     .hm-search-credit { padding: 4px 8px 6px; font-size: 11px; opacity: 0.8;
         border-top: 1px solid @@LIGHT_BORDER@@; }
     .hm-search-credit a { color: inherit; }
+    .hm-search-area { stroke: @@LIGHT_ACCENT@@; }
+    .dark-base .hm-search-area { stroke: @@DARK_ACCENT@@; }
     .hm-search-btn:focus-visible, .hm-search-input:focus-visible {
         outline: 2px solid @@LIGHT_ACCENT@@; outline-offset: 1px; }
     .dark-base .hm-search { background: var(--dm-surface); color: var(--dm-text);
@@ -2359,6 +2362,32 @@ _PLACE_SEARCH_TEMPLATE = r"""
     var data = null, own = null, loading = null, fold = null, marker = null, timer = null;
     var renderer = null, lineRow = null, casing = null, cased = null;
     var byIndex = [], crossURL = null, crossings = null;
+    // THE SEARCHED AREA (owner, 2026-10-12): the index names the
+    // municipalities it covers and carries their merged outline
+    // (place_index.outline). The outline is drawn only while the search box
+    // is open, so the map is not given a standing border; a search that finds
+    // nothing says where search stops.
+    var area = null, areaLayer = null;
+    var CREDIT_BELOW = @@CREDIT_BELOW@@;
+    function showArea(map, on) {
+        if (areaLayer) { map.removeLayer(areaLayer); areaLayer = null; }
+        if (!on || !area || !area.outline || !area.outline.length) return;
+        var polys = area.outline.map(function (r) {
+            var ring = [];
+            for (var i = 0; i + 1 < r.length; i += 2) ring.push([r[i], r[i + 1]]);
+            return [ring];
+        });
+        areaLayer = L.polygon(polys, {fill: false, weight: 2, dashArray: "6 5", opacity: 0.9,
+                                      interactive: false, className: "hm-search-area"}).addTo(map);
+    }
+    // "Seattle", "Seattle and Bellevue", "Seattle and 10 more".
+    function areaName() {
+        var n = (area && area.names || []).filter(Boolean);
+        if (!n.length) return "";
+        if (n.length === 1) return n[0];
+        if (n.length === 2) return n[0] + " and " + n[1];
+        return (area.lead || n[0]) + " and " + (n.length - 1) + " more";
+    }
 
     function norm(s) {
         s = String(s).normalize("NFKC").toLowerCase().normalize("NFD")
@@ -2494,6 +2523,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
                 // by their place here.
                 byIndex = rows;
                 crossURL = ix.crossings || null;
+                area = ix.area || null;
                 data = own.concat(link(rows));
                 document.querySelector(".hm-search").setAttribute(
                     "data-load-ms", Math.round(performance.now() - t0));
@@ -2769,9 +2799,24 @@ _PLACE_SEARCH_TEMPLATE = r"""
             list.appendChild(n);
             list.classList.add("has");
         }
+        var creditBelow = false;
         function credit() {
             var c = document.createElement("div");
             c.className = "hm-search-credit";
+            if (CREDIT_BELOW && map.attributionControl) {
+                if (!creditBelow) {
+                    creditBelow = true;
+                    map.attributionControl.addAttribution(
+                        'Search index <a href="https://opendatacommons.org/licenses/odbl/1-0/" ' +
+                        'target="_blank" rel="noopener noreferrer">ODbL</a> (<a href="' + abs(URL) +
+                        '" target="_blank" rel="noopener" download>download</a>' +
+                        (crossURL ? ', <a href="' + abs(crossURL) + '" target="_blank" rel="noopener" download>intersections</a>' : '') + ')');
+                }
+                if (!areaName()) return;
+                c.textContent = "Search covers " + areaName() + ", outlined on the map.";
+                list.appendChild(c);
+                return;
+            }
             // The short credit (owner, 2026-10-07, to save space in the box):
             // the OSM Attribution Guideline's "© OpenStreetMap contributors"
             // form, linked to the copyright page, the licence named and linked
@@ -2838,7 +2883,13 @@ _PLACE_SEARCH_TEMPLATE = r"""
                 loadCrossings().then(render, render);
                 if (!shown.length) { note("Loading intersections…"); return; }
             }
-            if (!shown.length) { note("No street, station or place by that name"); credit(); return; }
+            if (!shown.length) {
+                note("No street, station or place by that name");
+                // The owner's wording (2026-10-12).
+                if (area) note("Search covers the outlined area only. Zoom out to see it.");
+                credit();
+                return;
+            }
             var nOwn = shown.filter(isOwn).length, nPlaces = shown.length - nOwn;
             var foldable = nOwn > 0 && nPlaces > 0 && narrow();
             var pills = null, rows = null;
@@ -3030,7 +3081,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
         function open() {
             box.classList.add("open");
             input.focus();
-            load(map).then(render, function () {
+            load(map).then(function () { showArea(map, true); render(); }, function () {
                 // No index (a map opened outside the site): the map's own
                 // stations and lines still answer.
                 data = own;
@@ -3045,6 +3096,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
                 input.value = "";
                 render();
                 box.classList.remove("open");
+                showArea(map, false);
                 return;
             }
             open();
@@ -3067,6 +3119,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
                 input.value = "";
                 render();
                 box.classList.remove("open");
+                showArea(map, false);
             }
         });
     }
@@ -3078,6 +3131,11 @@ _PLACE_SEARCH_TEMPLATE = r"""
 })();
 </script>
 """
+# Where the search data's ODbL notice and download offer sit: False, in the
+# search box (as landed 2026-10-12); True, in the map's bottom attribution
+# line, the box's line then naming the searched area. The owner's to choose
+# on a local render of both (2026-10-12); a required notice either way.
+PLACE_CREDIT_BELOW = os.environ.get("HEATMAP_CREDIT_BELOW") == "1"
 PLACE_SEARCH_SCRIPT = (
     _PLACE_SEARCH_TEMPLATE
     .replace("@@FONT_STACK@@", FONT_VAR)
@@ -3092,6 +3150,7 @@ PLACE_SEARCH_SCRIPT = (
     .replace("@@STATION_DUP_M@@", str(STATION_DUP_M))
     .replace("@@CJK_CLASS@@", _JS_CJK_CLASS)
     .replace("@@MARKS_CLASS@@", _JS_MARKS_CLASS)
+    .replace("@@CREDIT_BELOW@@", "true" if PLACE_CREDIT_BELOW else "false")
 )
 assert "@@" not in PLACE_SEARCH_SCRIPT, "unresolved placeholder in PLACE_SEARCH_SCRIPT"
 # The dot never shrinks: a label that wraps on a phone took width from it and

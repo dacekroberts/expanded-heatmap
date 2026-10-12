@@ -73,6 +73,7 @@ def files(index, slug):
     cross = index.pop("crossing_rows")
     # Never in the served index: the summary alone carries them.
     not_open = index.pop("stations_not_open", [])
+    munis = index.pop("area_municipalities", [])
     cpath = crossings_path(slug)
     cbytes = json.dumps({"license": index["license"], "city": index["city"],
                          "part_of": f"{slug}.json", "rows": cross},
@@ -86,7 +87,11 @@ def files(index, slug):
                # The stations skipped as not yet open at this build (OSM id,
                # name, tag): scripts/check_place_unopened.py holds
                # docs/place_search_unopened_stations.json to this list.
-               "stations_not_open": not_open}
+               "stations_not_open": not_open,
+               # The municipalities the index covers, each with the number of
+               # the map's stations inside it: scripts/check_place_scope.py
+               # fails one with none and no entry in config.PLACE_AREA_KEPT.
+               "area": munis}
     sbytes = (json.dumps(summary, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
     return {cpath: cbytes, index_path(slug): ibytes, summary_path(slug): sbytes}
 
@@ -103,6 +108,92 @@ def write(index, slug):
 # script's norm()): "ja" folds Japanese long vowels written out, shijou =
 # shijo. A city sets config.PLACE_FOLD to one of these, or None.
 FOLDS = (None, "ja")
+
+
+# THE SEARCHED AREA (owner, 2026-10-12: "a defined rule ... for what is
+# included in search indexers vs what isn't", and a border drawn on the map
+# "where search is no longer usable"). An index covers exactly the
+# municipalities config.PLACE_AREA names: the boundary the map's businesses
+# are cut to and, on a regional map, every municipality a drawn station sits
+# in. Nothing wider without the owner's word, recorded per municipality in
+# config.PLACE_AREA_KEPT ({"relation/123": "why"}). The index carries the
+# area as {"names": [...], "outline": [ring, ...]}: the municipalities' names
+# and their merged outline, each ring a flat [lat, lon, lat, lon, ...].
+# OUTLINE_SIMPLIFY_M is measured in the city's own projected CRS, never in
+# degrees. Re-measure the index sizes if either constant changes.
+OUTLINE_SIMPLIFY_M = 40
+# A part under this share of the whole area is left undrawn (islets, slivers).
+OUTLINE_MIN_SHARE = 0.002
+
+
+OUTLINE_CACHE_NAME = "osm_place_outline_v1.json"
+
+
+def outline_cache(config):
+    """The cache place_index_fetch.py writes the area's boundaries to:
+    OUTLINE_CACHE_NAME beside the place cache. One name for every city, so
+    scripts/place_search_fetch_queue.py finds it from the place cache's path;
+    a re-pull takes a new name here."""
+    return Path(config.PLACE_OSM_JSON).parent / OUTLINE_CACHE_NAME
+
+
+def municipalities(elements):
+    """[(osm id "relation/123", name, shapely geometry in EPSG:4326)] for the
+    boundaries an OUTLINE_QUERY answer holds. A relation's outer ways are
+    polygonized; its inner rings are ignored, so an enclave reads as covered.
+    The name is the English one when OSM has it."""
+    from shapely.geometry import LineString, Polygon
+    from shapely.ops import polygonize, unary_union
+    out = []
+    for e in elements:
+        tags = e.get("tags") or {}
+        if e["type"] == "relation":
+            lines = [LineString([(g["lon"], g["lat"]) for g in m["geometry"]])
+                     for m in e.get("members", [])
+                     if m["type"] == "way" and m.get("role") in ("outer", "", None)
+                     and len(m.get("geometry") or []) >= 2]
+            geom = unary_union(list(polygonize(unary_union(lines)))) if lines else None
+        elif e["type"] == "way" and len(e.get("geometry") or []) >= 4:
+            geom = Polygon([(g["lon"], g["lat"]) for g in e["geometry"]])
+        else:
+            continue
+        if geom is None or geom.is_empty:
+            raise ValueError(f"{e['type']}/{e['id']} ({tags.get('name')}): no closed outline in the cache")
+        out.append((f"{e['type']}/{e['id']}", tags.get("name:en") or tags.get("name") or "", geom))
+    return sorted(out, key=lambda m: m[1])
+
+
+def outline(munis, crs_projected):
+    """The index's "area" for municipalities() of a city: names in order and
+    the merged outline's rings, simplified by OUTLINE_SIMPLIFY_M in
+    `crs_projected` (the city's own) and rounded to 5 decimals."""
+    from pyproj import Transformer
+    from shapely.ops import transform, unary_union
+    to_m = Transformer.from_crs("EPSG:4326", crs_projected, always_xy=True).transform
+    to_deg = Transformer.from_crs(crs_projected, "EPSG:4326", always_xy=True).transform
+    merged = unary_union([transform(to_m, g).buffer(0) for _, _, g in munis])
+    merged = merged.simplify(OUTLINE_SIMPLIFY_M, preserve_topology=True)
+    parts = list(getattr(merged, "geoms", [merged]))
+    parts = [g for g in parts if g.area >= OUTLINE_MIN_SHARE * merged.area]
+    rings = []
+    for g in sorted(parts, key=lambda g: -g.area):
+        ring = []
+        for x, y in transform(to_deg, g.exterior).coords:
+            ring += [round(y, 5), round(x, 5)]
+        rings.append(ring)
+    return {"names": [n for _, n, _ in munis], "outline": rings}
+
+
+def stations_per_municipality(munis, stations):
+    """{osm id: number of the map's stations inside}, for the ceiling check
+    (scripts/check_place_scope.py)."""
+    from shapely.geometry import Point
+    from shapely.prepared import prep as _prep
+    counts = {}
+    for osm_id, _, geom in munis:
+        inside = _prep(geom).contains
+        counts[osm_id] = sum(1 for _, lat, lon in stations if inside(Point(lon, lat)))
+    return counts
 
 
 def city_of(config):
@@ -196,6 +287,24 @@ def build_city(config):
             for n in rebuilt):
         sys.exit("config.PLACE_REBUILT names a street no highway=construction way in the cache "
                  "carries: remove it (the street has reopened, or the name is wrong)")
+    ocache = outline_cache(config)
+    if not ocache.exists():
+        sys.exit(f"Missing {ocache}.\nRun: python pipeline/place_index_fetch.py {slug}")
+    munis = municipalities(json.loads(ocache.read_text(encoding="utf-8"))["elements"])
+    if not munis:
+        sys.exit(f"{ocache}: no boundary in it; config.PLACE_AREA names none")
+    index["area"] = outline(munis, config.CRS_PROJECTED)
+    stations = map_stations(config)
+    counts = stations_per_municipality(munis, stations) if stations is not None else {}
+    kept = getattr(config, "PLACE_AREA_KEPT", {})
+    stale = sorted(set(kept) - {m[0] for m in munis})
+    if stale:
+        sys.exit(f"config.PLACE_AREA_KEPT names {stale}, not in config.PLACE_AREA: remove them")
+    # Never in the served index: the summary alone carries it.
+    index["area_municipalities"] = [
+        {"osm": osm_id, "name": name, "stations": counts.get(osm_id),
+         **({"kept": kept[osm_id]} if osm_id in kept else {})}
+        for osm_id, name, _ in munis]
     found = {f"{e['type']}/{e['id']}" for e in payload["elements"]}
     stale = sorted(set(dropped) - found)
     if stale:
