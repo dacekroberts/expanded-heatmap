@@ -184,9 +184,19 @@ Detail files: [japan](docs/plan_detail/japan.md),
       true` or the index never loads, Travel draws only on ports 8501 and
       8000, the hidden pane needs the frame and timer method
       (`docs/review_lane_kit.md` 7b).
-    - **Before any wave: the size projection.** 19 indexes are 38 MB,
-      about 2 MB a city, so roughly 475 MB at 237 by extrapolation; the
-      wave order waits on the measured figure.
+    - **The size projection, measured 2026-10-12: about 190 MB at 237
+      cities (models range 180 to 280 MB), about 50 MB gzipped, not the
+      475 MB of the flat extrapolation.** The 19 built indexes are 39.2
+      MB (10.0 MB gzipped) and are the large cities: their median station
+      box is 638 km2 against 138 km2 for the 218 left. Fitted log-log on
+      stations drawn, the stations' bounding box and storefronts
+      (leave-one-out: median miss a factor of 1.26, total 8% low); the
+      median city left projects at 0.43 MB, 117 under 0.5 MB, four over 3
+      MB (Los Angeles, Taipei, Guadalajara, Rio de Janeiro). Limits: 30
+      cities are smaller than any built index, the index covers a boundary
+      and the predictors only stations, and Mexico City's rebuild adds to
+      its 6.1 MB. Re-measure after the first wave. The wave order is the
+      owner's, now that the figure is in.
     - **`commercial-use-audit` skill**: the question and the verdict
       shapes (permitted, permitted with a condition, forbidden, silent)
       under the owner's rules of 2026-10-11; each DISTINCT source audited
