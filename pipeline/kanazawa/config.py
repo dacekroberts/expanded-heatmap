@@ -259,3 +259,13 @@ KANAZAWA_BBOX = {
     "lon_max": OSM_BBOX[3],
 }
 CITY_BBOX = KANAZAWA_BBOX
+
+# Trade names read by eye as a person's own name and nothing else, on
+# surnames the sign rule's list does not hold (owner, 2026-10-12; found by
+# the name-shape count after the phase 2 landing). KEYS, never names
+# (pipeline/name_keys.py, over japan_register._name_key of the name).
+PERSON_NAMED = (
+    "dc16cdc98af79547",
+    "cd38bc2d7449b4ec",
+    "a6cdcf4ffec1157e",
+)

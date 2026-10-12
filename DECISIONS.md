@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**75 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**76 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-12**
 
+- [Place search never loaded its index on the deployed site; four personal names withheld by eye in Kanazawa and Fujisawa](#2026-10-12---place-search-never-loaded-its-index-on-the-deployed-site-four-personal-names-withheld-by-eye-in-kanazawa-and-fujisawa)
 - [After the landing: Mexico City's index rebuilt, the label batch as measured, four delegated scripts reviewed, and the owner's calls of the day](#2026-10-12---after-the-landing-mexico-citys-index-rebuilt-the-label-batch-as-measured-four-delegated-scripts-reviewed-and-the-owners-calls-of-the-day)
 - [The finished master list: Band A's three built rows removed, the kept build notes moved to the evidence file, Lisbon's request never sent (owner)](#2026-10-12---the-finished-master-list-band-as-three-built-rows-removed-the-kept-build-notes-moved-to-the-evidence-file-lisbons-request-never-sent-owner)
 - [Phase 2 landed: the master list and the two private pages brought to a final state; a build retrospective published](#2026-10-12---phase-2-landed-the-master-list-and-the-two-private-pages-brought-to-a-final-state-a-build-retrospective-published)
@@ -113,6 +114,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-10-12 - Place search never loaded its index on the deployed site; four personal names withheld by eye in Kanazawa and Fujisawa
+
+- **The deployed search answered with stations and lines only, from the landing until the owner's London report.** He typed street names he could see on the London map and nothing was suggested. London's index was not the cause: it holds 55,283 street rows under 40,365 distinct names, of 44,100 named ways in the extract (the 3,735 left out are service roads 2,253, footways 1,023, then pedestrian ways, cycleways and paths), and all 35 well-known streets tried are in it. The cause: Streamlit Community Cloud serves the app under `/~/+/`, and the map asked `/app/static/places/<city>.json` of the host's root, where nothing is. Measured on the live London page: that request fails, the same path under `/~/+/` returns the 4.4 MB index. All 19 searched maps were affected. Every local lane passed because a local app is at the root; Cleanup's live check after the landing confirmed the file was reachable and never typed a street into the deployed box. `PLACE_SEARCH_SCRIPT` now takes the prefix from the page's own path, falls back to the plain path for a map opened outside the app, and treats an answer that is not JSON as a failure; the two download links follow. 19 maps re-rendered. The `place-search-city` skill now requires a street typed into the deployed box after any push that touches a searched map.
+- **Four trade names withheld as a person's own name, by key (owner: "1. yes").** Analytics counted labels of the shape "kanji, space, kanji" in the new Japanese cities (Kanazawa 143, Kawaguchi 104, Fujisawa 91). Read one by one, nearly all are a genre word and a shop name; four read as a person's full name and nothing else (three in Kanazawa, one in Fujisawa, none in Kawaguchi), on surnames the sign rule's list of about 190 does not hold. `japan_step2.run()` now reads `config.PERSON_NAMED`, keys over `japan_register._name_key()` of the trade name (`pipeline/name_keys.py`), and stops when a key matches no row. Kanazawa: 4 rows; Fujisawa: 1 row and 1 more by the same name at another premises. Both maps re-rendered; `check_personal_exposure.py` prints 0 for both. Rejected: widening the surname list, which is a rule change across 66 Japanese cities and waits for the sweep of the other 62 for the same shape.
 
 ### 2026-10-12 - After the landing: Mexico City's index rebuilt, the label batch as measured, four delegated scripts reviewed, and the owner's calls of the day
 

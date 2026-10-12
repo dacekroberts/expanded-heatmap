@@ -388,3 +388,11 @@ FUJISAWA_BBOX = {
     "lon_max": OSM_BBOX[3],
 }
 CITY_BBOX = FUJISAWA_BBOX
+
+# A trade name read by eye as a person's own name and nothing else, on a
+# surname the sign rule's list does not hold (owner, 2026-10-12; found by
+# the name-shape count after the phase 2 landing). KEYS, never names
+# (pipeline/name_keys.py, over japan_register._name_key of the name).
+PERSON_NAMED = (
+    "67f041db50324623",
+)

@@ -44,6 +44,7 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline import name_keys  # noqa: E402
 from pipeline.baseline import emit  # noqa: E402
 from pipeline.countries import japan_register as jr  # noqa: E402
 from pipeline.taxonomies import filter_to_storefront  # noqa: E402
@@ -594,6 +595,22 @@ def run(config, write=True):
         df["name_is_operator"] = df["name_is_operator"] | masked
         print(f"  trade names masked by the publisher (shown as the permit type): {int(masked.sum())}")
         emit("names_masked", int(masked.sum()))
+    # A NAME READ BY EYE AS A PERSON'S OWN (owner, 2026-10-12): a rarer surname
+    # the sign rule's list does not hold, with a given name and nothing else.
+    # config.PERSON_NAMED holds KEYS (pipeline/name_keys.py) of the trade name
+    # as jr._name_key() writes it, never the names. A key matching no row
+    # stops the step: the register changed and the list is to be re-read.
+    withheld = set(getattr(config, "PERSON_NAMED", ()))
+    if withheld:
+        keys = name_keys.keys_of(df["name"].map(jr._name_key))
+        gone = withheld - set(keys)
+        if gone:
+            sys.exit(f"{len(gone)} PERSON_NAMED key(s) match no trade name: re-read the list "
+                     f"(count only; never print the names)")
+        by_eye = keys.isin(withheld) & ~df["name_is_operator"]
+        df["name_is_operator"] = df["name_is_operator"] | keys.isin(withheld)
+        print(f"  names read by eye as a person's own (config.PERSON_NAMED, keys): {int(by_eye.sum())} row(s)")
+        emit("names_by_eye_rows", int(by_eye.sum()))
     # THE NAME RULE HOLDS PER PREMISES, not per row (Osaka, 2026-09-27): one
     # premises' second permit may record its operator differently, and the
     # one-pin-per-premises step below can keep that unflagged row - Osaka showed
