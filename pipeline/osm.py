@@ -206,9 +206,15 @@ def fetch(query, cache_path, *, force=False, timeout=180, retries=2,
             print(f"    overpass {msg}", flush=True)
 
     problems = []
-    for attempt in range(retries):
+    asked = tuple(hosts or OVERPASS_HOSTS)
+    # A pinned fetch has no second mirror to fail over to, so it gets twice
+    # the attempts on its one mirror, inside the same deadline. Measured
+    # 2026-10-12: two attempts failed 4 of 4 pinned cities on loaded mirrors
+    # (docs/rule_history.md, #overpass).
+    attempts = retries * 2 if len(asked) == 1 else retries
+    for attempt in range(attempts):
         overloaded = False
-        for host in (hosts or OVERPASS_HOSTS):
+        for host in asked:
             name = host.split("/")[2]
             left = _left()
             if left is not None and left <= 0:
@@ -246,8 +252,11 @@ def fetch(query, cache_path, *, force=False, timeout=180, retries=2,
                     overloaded = True
                     _overloaded_at[name] = time.monotonic()
                     hint = " (504/429/timeout - try nodes-only, drop `out center`)"
-                problems.append(f"{name}: {type(exc).__name__}{hint}")
-                _say(f"[{attempt}] {name} -> {type(exc).__name__}{hint}")
+                what = type(exc).__name__
+                if isinstance(exc, urllib.error.HTTPError):
+                    what += f" {exc.code}"
+                problems.append(f"{name}: {what}{hint}")
+                _say(f"[{attempt}] {name} -> {what}{hint}")
                 continue
             if payload.get("remark"):
                 # "Query timed out" in a remark is the server's own timeout,
@@ -286,7 +295,7 @@ def fetch(query, cache_path, *, force=False, timeout=180, retries=2,
         left = _left()
         if left is not None and left <= 0:
             break
-        if attempt + 1 < retries:
+        if attempt + 1 < attempts:
             # Escalating rather than flat: a throttling host that refused a
             # moment ago is unlikely to have changed its mind in 5 seconds.
             nap = 5 * (attempt + 1) ** 2

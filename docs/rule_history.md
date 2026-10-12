@@ -990,6 +990,15 @@ python scripts/scaffold_city.py --slug <slug> --name <Name> --system-name <syste
     from fetching one city twice.
   - **The 60 s wait is per mirror and unchanged**; a pinned fetch that is
     refused waits for its own mirror instead of asking the other.
+  - **The first pilot carried 0 of 4 cities (wave 1 search, 2026-10-12,
+    22:09Z to 22:24Z)**: three on `overpass-api.de` failed with an HTTP
+    error twice each, New Orleans on `kumi` read-timed out twice, while the
+    status page showed four free slots. The same queue unpinned had carried
+    five cities in 171 to 296 s each just before. A pinned fetch made two
+    attempts on one mirror where an unpinned one makes two on each, so it
+    now makes twice the attempts inside the same deadline, and the message
+    carries the HTTP code. **Not yet shown to work on a loaded mirror:
+    re-measure before a second queue is relied on.**
 
 <a id="ridership"></a>
 ### Ridership out of scope; AI-driven analysis private
