@@ -95,6 +95,7 @@ CHECKS = [
     ["scripts/rendered_surfaces.py", "--check"],
     ["scripts/prose_proposals.py", "--selftest"],
     ["scripts/proposals_page.py", "--selftest"],
+    ["scripts/commercial_use_quote_check.py", "--selftest"],
     ["scripts/archive_decisions_selftest.py"],
 ]
 

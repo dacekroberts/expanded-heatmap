@@ -69,9 +69,16 @@ sentence quoted in its own language, and the date read.
    it rests on. After the DeepSeek integration the cheaper model
    takes this pass, one request per source, the stored text in and JSON out
    (verdict, quoted sentence, the clause's heading). **A script confirms each
-   quoted sentence occurs in the stored text, byte for byte** (TO BUILD,
-   `scripts/commercial_use_quote_check.py`); a quote that is not there voids
-   the verdict.
+   quoted sentence occurs in the stored text**
+   (`scripts/commercial_use_quote_check.py`, built 2026-10-12): exact, or
+   after Unicode NFC and whitespace collapsing, or with whitespace removed
+   (a PDF's line wraps inside a Japanese sentence), each reported as such; a
+   quote that is not there, or under 12 characters, voids the verdict. **The
+   script proves the sentence is in the file, not what it means**: the
+   Licence Ouverte file quotes another publisher's non-commercial terms as a
+   contrast, and that sentence verifies as a FORBIDDEN quote. Read every
+   "spaceless" match and every quote whose clause heading is not the
+   licence's own grant.
 4. **Claude reads** every SILENT and every PERMITTED, CONDITION, and a
    sample of the PERMITTED (say one in five, and all of a language the model
    was not tried on).

@@ -15,6 +15,7 @@ python scripts/check_place_search.py [--selftest]       # every searched map cur
 python pipeline/place_index_fetch.py <city> [--force] [--wait <min>]   # a city's two place queries; one run at a time on this machine (a lock); `--selftest` runs the lock's cases
 python scripts/place_search_review.py odd|tags|ids|ways|added|sizes <city_slug>   # REPORTS only: a new index's reading by eye (skill place-search-city)
 python scripts/check_place_index_drift.py [city] [--against REV] [--selftest]   # every index is what the code builds from its cache; --against lists rows changed since REV
+python scripts/commercial_use_quote_check.py VERDICTS_JSON [--selftest]   # every first-pass licence verdict rests on a quote the stored text really contains; a missing quote voids it
 python pipeline/drift_check.py [city_slug] [--jobs N]   # every city; --jobs 3 at most, one run per machine
 python pipeline/drift_check.py --render-only [--jobs N] # map step only, against data/<city>/processed/ as it stands; never the pre-deploy gate
 python scripts/drift_check_selftest.py                  # touches nothing
