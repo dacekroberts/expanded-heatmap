@@ -19,18 +19,24 @@ same day as S30 to S36; each is marked where it stands. **Step 0 measured
 - `data/naha/raw/isj/47201-24.0a.zip` (**162,904 B**, block level) and
   `47201-19.0b.zip` (**8,025 B**, town-chōme), from `nlftp.mlit.go.jp` with
   the project user-agent, each HTTP 200 (staging, call S29).
+- `data/naha/raw/ribiyou/r080904biyou.xlsx` (**113,145 B**, beauty salons)
+  and `r080904riyou.xlsx` (**37,114 B**, barbers), BODIK package
+  `472018_ribiyou`, fetched by staging from `data.bodik.jp` on 2026-10-12
+  (owner call S37). Measured the same day; the package's licence was read the
+  same day (PERMITTED WITH CONDITIONS, the Licences section).
 - The shared cache: `data/japan/raw/N02-25_GML.zip`,
   `N03-20250101_47_GML.zip`, e-Stat's 衛生行政報告例 tables and the 2021
-  Economic Census table.
+  Economic Census table; e-Stat's barber and beauty table (第10表) in
+  `data/hamamatsu/raw/estat_eisei_r6_riyo_biyo_by_city.csv`.
 
 **Measured**: the rebuilt register (Kansai-2's control reproduced to one
 row), the storefront counts through `japan_eigyo`, the MLIT join, the name
-rule, the rail cut, the official counts. **Not measured, and why**: train
-frequency (not re-read; the master list's READ of 2026-10-06 stands), gate 3
-against the operator, OSM `name:en`, any personal-services list (BODIK's Naha
-catalogue is unread; no network in this Step 0), and an independent check of
-the join (the files carry no coordinates). **Nothing was fetched for this
-brief.**
+rule, the rail cut, the official counts, and the barber and beauty registers
+(shape, dates, official shares, join, name rule). **Not measured, and why**:
+train frequency (not re-read; the master list's READ of 2026-10-06 stands),
+gate 3 against the operator, OSM `name:en`, and an independent check of the
+join (the files carry no coordinates). **Nothing was fetched by the Step 0
+scripts**; staging fetched the files named above on the owner's calls.
 
 **Run `python scripts/brief_check.py naha` before writing any code.** Then
 the `japan-city` skill, **Kyoto's shape** (`docs/build_briefs/kyoto.md`: a
@@ -83,7 +89,13 @@ against 1.56 to 1.92 on the built cities. **Storefront rows: Food service
 join places 99.9%** (block 98.9%, town-chōme 1.0%, 9 rows unplaced), far over
 the 70% bar. **Rail: the Yui Rail, 16 of its 19 stations inside the city**
 (3 in Urasoe, the separate add-on row), median gap 733 m, standard rings.
-Food only: no personal-services list is known.
+**Personal services: the city's barber and beauty registers, complete lists
+as of 2026-09-04: 287 barbers and 1,069 beauty salons (101.8% and 104.1% of
+e-Stat's 282 and 1,027 in force at 2025-03-31), 1,353 pins, every row placed
+(block 95.1%, town-chōme 4.9%), no name withheld.** No laundry list is
+published. So the page would be **Food plus Personal services (barbers and
+beauty salons, no laundries)** once the package's licence is read and the
+owner widens S30's food-only band (Open calls, O8); food only until then.
 
 ---
 
@@ -204,15 +216,81 @@ map's pins for a tidier ratio (98.8% against 103.0%).
   40 乳類 still in term). Packaged-only sale has been a notification since
   2021-06 and is in neither package.
 
-### Personal services: none known
+### Personal services: the city's barber and beauty registers (no laundries)
 
-The master-list row says the lists are unread: BODIK answered 403 to the
-wave-3 probe before the Naha catalogue was read, and nothing since has read
-it. **No barber, beauty or laundry list is on disk or known.** A food-only
-page ("**This map shows food businesses only.**") unless a probe finds one
-(Open calls, O5).
+Found by the probe of 2026-10-12 (owner call S34: a city-probe agent, 3 BODIK
+calls 22 to 24 s apart), downloaded on call S37 and **MEASURED 2026-10-12**.
+BODIK package `472018_ribiyou` (理容所・美容所新規開設施設情報,
+`https://data.bodik.jp/dataset/472018_ribiyou`), CC BY 4.0 as STATED at
+package level, monthly by its stated frequency.
 
-**Update, the probe of 2026-10-12 (owner, call S34; a city-probe agent, 3 BODIK calls 22 to 24 s apart, no rows fetched):** a barber and beauty list EXISTS. BODIK package `472018_ribiyou` (理容所・美容所新規開設施設情報, `https://data.bodik.jp/dataset/472018_ribiyou`), CC BY 4.0 as STATED at package level (not read; the same city terms as the food packages are linked), two XLSX resources named for 2026-09-04, monthly by its stated frequency: 美容所開設施設一覧 (113,145 B, **1,069 rows** in the datastore; fields No, 業種, 確認番号, 確認年月日, 施設名称, 施設住所, 開設者氏名) and 理容所開設施設一覧 (37,114 B, not in the datastore: fields and row count UNREAD). ⚠️ 開設者氏名 is an operator-name column: never selected, read in memory for the name rule only. ⚠️ **Full register or openings only is UNMEASURED**: the title says new openings, but it is one cumulative file per trade and 1,069 beauty salons is register-sized (ASSERTED; the 確認年月日 range would settle it). **No laundry list**: none among the organization's 38 datasets, and the health centre's クリーニング所 pages hold procedure PDFs only. The city's own copies sit under its reserved-rights site terms: BODIK copies only. Until the two files are downloaded, measured and their licence read, the page stays food only; with them it would be Food plus a partial Personal services bucket (no laundries).
+| | Beauty salons | Barbers |
+|---|---|---|
+| File | `r080904biyou.xlsx`, 113,145 B | `r080904riyou.xlsx`, 37,114 B |
+| Sheet and title | one sheet (`Sheet1`); row 1 reads `美容所開設施設一覧（令和8年9月4日時点）` | one sheet; row 1 reads `理容所開設施設一覧（令和8年9月4日時点）` |
+| Header (row 2) | No, 業種, 確認番号, 確認年月日, 施設名称, 施設住所, 開設者氏名 | the same seven |
+| Rows | **1,069**, every cell filled, 業種 美容所 on all | **287**, every cell filled, 業種 理容所 on all |
+| 確認年月日 | **1958-08-08 to 2026-09-04**, every row a readable wareki date, listed oldest first | **1958-08-12 to 2026-05-28**, likewise |
+| By decade confirmed | 1950s 1 · 1960s 11 · 1970s 66 · 1980s 95 · 1990s 101 · 2000s 195 · 2010s 283 · 2020s 317 | 1 · 6 · 29 · 46 · 53 · 68 · 38 · 46 |
+| e-Stat in force (READ 2026-10-12: 衛生行政報告例 FY2024, 生活衛生 第10表, row 沖縄県那覇市, at 2025-03-31) | **1,027**: the list is **104.1%** | **282**: the list is **101.8%** |
+
+- **A full register of open premises, not a list of openings** (settled by
+  the data, despite the package title's 新規開設): the files are titled "as
+  of 2026-09-04", reach back to 1958, and match the official in-force counts
+  within the 17 months between the two dates (e-Stat counts 37 beauty and 2
+  barber confirmations in FY2024; the lists hold 86 beauty and 12 barber
+  rows confirmed in 2025 and 2026). **Closed premises are removed**: No runs
+  1 to 1,069 and 1 to 287 with no gap (a row number, renumbered each
+  edition), while 確認番号 does not run continuously (three formats: 中S…,
+  中H… and, from 2013, 第…号 with a yearly prefix; 26 to 56 beauty rows
+  survive from each year since 2012 against far wider number ranges), and
+  the older decades thin out as a pruned register's would. Not an upper
+  bound of the food rebuild's kind.
+- No note, licence or consent wording in any cell, comment or page header;
+  the title row is the only text outside the table.
+- **Through `japan_eigyo` and `filter_to_storefront()`** (step 2's order,
+  `kind` barber and beauty): **1,356 storefront rows, all Personal services**
+  (barber 287, beauty 1,069). Nothing is set aside: no blank or area-wide
+  address, no 移動 or 出張 salon, no welfare-facility salon, no storeless
+  row. One pin per (address, name, bucket) drops 3 (two beauty repeats and
+  **1 premises in both files**, the one 重複開設 e-Stat counts): **1,353
+  pins** (beauty 1,067, barber 286). Fifteen addresses appear in both files
+  under different names (neighbors in one building). Possible successors
+  (one address, two names): 10 beauty rows, 2 barber rows.
+- **The join** (the two MLIT files above, `ALL_RULES`, wardless):
+
+  | Tier | All (1,356) | Beauty (1,069) | Barbers (287) |
+  |---|---|---|---|
+  | Block | **95.1%** (1,290) | 95.6% (1,022) | 93.4% (268) |
+  | Town-chōme | 4.9% (66) | 4.4% (47) | 6.6% (19) |
+  | Unplaced | **0** | 0 | 0 |
+
+  Every address starts 那覇市 and carries a number (丁目 written out in 302,
+  番地 in 61, 字 in 28). Town tier, by town: 字安里 11, 字古島 7, 真嘉比 7,
+  古波蔵 5, 字宇栄原 4, 壷川 4, 字小禄 4, 字松川 4, 字高良 2, 字与儀 2, and
+  sixteen towns with one each (地番 MLIT's block file does not key). No
+  independent check: the files carry no coordinates.
+- **No laundry list is published**: none among the organization's 38
+  datasets, and the health center's クリーニング所 pages hold procedure PDFs
+  only (the probe, READ 2026-10-12).
+- ⛔ **BODIK copies only**, as for the food packages: the city's own copies
+  sit under its reserved-rights site terms.
+- **No shared-code change is needed for these two files.** `city_rows` finds
+  the header under the title row; 施設住所, 施設名称 and 業種 are in
+  `ADDR_COLS`, `NAME_COLS` and `TYPE_COLS`; 開設者氏名 is in `OPERATOR_COLS`;
+  there is no term column, so no `TERM_AS_OF` entry. Config only: two
+  `SOURCES` keys (`barber`, `beauty`) reading the files as they are, and
+  `SHARE_DATES = {"barber": "確認年月日", "beauty": "確認年月日"}` if the
+  page states a share at e-Stat's date. One gap, not a blocker:
+  `japan_official.registers()` reads Tokyo's yearbook only, so the e-Stat
+  shares above come from the cached 第10表 by hand (Hakodate's and
+  Hamamatsu's configs name that file).
+
+**So the page would be Food plus Personal services (barbers and beauty
+salons, no laundries)**, a reduced Personal services bucket disclosed as
+such, once the package's licence read returns and the owner widens the band
+(Open calls, O8). Until then it stays food only ("**This map shows food
+businesses only.**").
 
 ### ⚠️ Shared code
 
@@ -367,6 +445,24 @@ Okinawa Prefecture's own BODIK food list, by the `regional-extension` skill.
     lone-cell row or cell comment; the page headers and footers of the
     `.xlsx` files hold the month's date range and a page number only. Still
     not established: the page setup of the 102 old `.xls` files (not read).
+- **The barber and beauty package (`472018_ribiyou`) — PERMITTED WITH
+  CONDITIONS, READ 2026-10-12** (staging's licence-read agent; two BODIK
+  calls 29 s apart, no data file opened): `cc-by-40-intl` at package level,
+  no licence, rights or description on either resource, the same city terms
+  linked (`odcs.bodik.jp/472018/tos/`) and nothing that annotates them, so
+  the conditions are the food packages' (credit, a statement of
+  modification, not presented as the city's, 第5項 accepted by call S15).
+  No wording is prescribed; **one notice can name all three packages**
+  (one publisher, one set of terms), the build claiming one notice number.
+  The city's own page for the lists (page 1006638) states no terms, sits
+  under the reserved-rights site terms and carries files named
+  `r080914...` against BODIK's `r080904...`: **BODIK copies only**. The
+  package note calls the lists new openings tallied monthly; the files'
+  own title rows and dates show full registers as of 2026-09-04 (the
+  Personal services section). Checked here, 2026-10-12: neither workbook carries a note,
+  licence or consent wording (the title row gives the as-of date only).
+  開設者氏名 is a person's name on about five rows in six: not licensed by
+  CC BY (s.2(b)(1)) and never selected.
 - **MLIT 位置参照情報 and N02**: PDL 1.0, the shared credits. **N03**: CC BY
   4.0, picks stations, ⛔ never drawn. **e-Stat** and the census:
   measurement sources.
@@ -392,6 +488,18 @@ Okinawa Prefecture's own BODIK food list, by the `regional-extension` skill.
   not looked at further). The winning row of each stitched key carries the
   yes wherever any row of that key says it (4 of 4). With the renewals the
   counts are the same.
+- **The barber and beauty registers carry 開設者氏名**, the operator's name
+  (an individual on 1,139 of 1,356 rows; a company marker on 217: beauty 200,
+  barbers 17): never selected, read IN MEMORY for the name rule only
+  (already in `OPERATOR_COLS`). **Measured in memory, answers only
+  (MEASURED 2026-10-12, 1,356 rows): 0 rows whose 施設名称 equals the
+  operator's name, 0 that contain the whole name, 0 bare personal names: the
+  withheld share is 0%**, in both trades, before and after the premises and
+  city-wide spread. Naha's salons trade under shop names. A surname alone
+  inside a longer shop name: 2 rows where the operator cell separates
+  surname and given name (530 of the 1,139 do), and at most 14 more by a
+  first-two-characters test on the rest (an upper reading); these are shown,
+  by the owner's rule (a name plus a business word). No trade name is blank.
 - Run `check_personal_exposure.py naha` (`japan=True`) after step 3; it must
   print 0. Record the verdict in the drafts file and
   `docs/privacy_verdicts.md`.
@@ -479,6 +587,18 @@ with its recommendation and tradeoff:**
   twice-published months and the stitch; "stalls licensed citywide (769) and
   vehicles (171) are left out"; the dense-block note for 字安里.
 
+**OPEN, put 2026-10-12 after the barber and beauty measurement:**
+
+- **O8. Widen S30's food-only band to Food plus Personal services (barbers
+  and beauty salons, no laundries).** *Recommend yes, conditional on the
+  package's licence read returning PERMITTED*: the two registers are
+  complete (101.8% and 104.1% of the in-force counts), every row places, no
+  name is withheld, and no shared code changes. Tradeoff: a Personal
+  services bucket without laundries, disclosed as reduced (Kōchi's page is
+  personal services only; a bucket missing one trade needs its own sentence
+  at review time), and a second notice or a longer one. Not open: register
+  or openings, which the data settles (a pruned register as of 2026-09-04).
+
 ## What the build must still measure
 
 - The reader (⚠️ Shared code 1 to 4) landed first, by Cleanup or as the
@@ -497,6 +617,13 @@ with its recommendation and tradeoff:**
   magenta and green pins; the opening view (`map-view`);
   `check_provenance.py`; `check_scope_disclosure.py` (Urasoe's three
   stations; food only; the exclusions above).
+- **If O8 is a yes and the licence read permits**: the two registers as
+  `barber` and `beauty` sources, read as they are. Expect 1,356 rows and
+  about 1,353 pins (beauty 1,067, barbers 286), block 95.1%, none unplaced,
+  0 names withheld. A newer monthly edition replaces both files whole
+  (re-measure the counts and the as-of in the title row; 2026-09-04 here).
+  The shares against e-Stat's 第10表 (282 and 1,027) restated at its date
+  with `SHARE_DATES`; the page's sentence that laundries are not published.
 - The frequency, re-read from the operator's timetable (counts only).
 - The page's businesses bullet and What Is Excluded: a rebuilt register,
   closures not published, an upper bound; food only; food retail by permit
@@ -518,6 +645,13 @@ with its recommendation and tradeoff:**
     "kind": "http_ok",
     "url": "https://data.bodik.jp/api/3/action/package_show?id=472018_keizoku_syokuhin",
     "min_bytes": 2000
+  },
+  {
+    "id": "naha-bodik-ribiyou-package",
+    "claim": "BODIK's record for Naha's barber and beauty package (472018_ribiyou; two XLSX resources named for 2026-09-04, CC BY 4.0 as stated on 2026-10-12) answers a plain GET - metadata only; BODIK wants calls about 20 seconds apart",
+    "kind": "http_ok",
+    "url": "https://data.bodik.jp/api/3/action/package_show?id=472018_ribiyou",
+    "min_bytes": 1000
   },
   {
     "id": "naha-isj-block-live",
