@@ -27,7 +27,6 @@ Rail: MLIT N02-25 (not GTFS, not OSM), stations kept only inside the city line
 OpenStreetMap's name:en.
 """
 
-import re
 from pathlib import Path
 
 from pipeline import line_registry
@@ -139,6 +138,14 @@ POINT_DONORS = {"food": "mhlw_points"}
 # A premises in both (a city permit and an MHLW notification of one bucket):
 # MHLW's row stays (Matsuyama's, Okazaki's).
 SUPERSEDES = {"mhlw": ("food",)}
+# The city's file publishes no operator column (法人名 empty on all 3,584
+# rows), so the name rule's answer comes from MHLW's 法人名 for the SAME
+# permit (the owner's call 182, 2026-10-06; japan_step2.operators_by_permit,
+# shared since 2026-10-12, a city-local hook until then). Read IN MEMORY;
+# only the answer is kept. Measured 2026-10-12: 2,739 city rows match an
+# MHLW permit that names an operator, 3 trade names are withheld (the brief
+# read 4), one of them at a fixed address.
+OPERATOR_BY_PERMIT = {"food": "mhlw_points"}
 
 
 def source_csv(key):
@@ -147,60 +154,22 @@ def source_csv(key):
     return DATA_RAW / SOURCE_FILES[key][0]
 
 
-def _permit_key(row):
-    """A permit as both files number it: the digits of 許可番号 (the city
-    writes R08-1234 and H31-1234, MHLW 1234 or 第1234号) and the grant date."""
-    from pipeline.countries import japan_register as jr
-
-    runs = re.findall(r"\d+", (row.get("許可番号") or "").strip())
-    day = jr.wareki_date(row.get("許可年月日"))
-    return (runs[-1].lstrip("0"), day) if runs and day else None
-
-
-def _operator_answers():
-    """{permit key: True/False}: whether a city trade name is its operator's
-    own name, answered from MHLW's 法人名 for the same permit. The city's file
-    publishes no operator column (法人名 empty on all 3,584 rows), while MHLW's
-    file names the operator of 3,000 of them (measured 2026-10-11; the brief
-    counted 3,006 of MHLW's permits in the list). The owner's call 182
-    (2026-10-06): MHLW's 法人名 is read IN MEMORY through the permit match and
-    the matching trade names are withheld: 3 rows on 2026-10-11 (the brief
-    read 4), one of them at a fixed address. Only the answer leaves this function, never a name (Kyoto's
-    precedent: a source's rows carry name_is_operator, which
-    japan_register.name_is_operator reads in place of a column)."""
-    from pipeline.countries import japan, japan_register as jr
-
-    coop = "coop" in japan.city_rules(SLUG)
-    operators = {}
-    for r in jr.city_rows(source_csv("mhlw")):
-        k = _permit_key(r)
-        if k and (r.get("申請区分") or "").startswith("許可"):
-            operators.setdefault(k, []).append(r.get("法人名"))
-    return lambda row: (jr.same_person(row.get("施設名称") or "", operators[k], coop)
-                        if (k := _permit_key(row)) in operators else None)
-
-
 def source_rows(key):
     """A source's rows (japan_step2 reads this hook where a city defines it).
-    "food" is the city's list as it stands, each row that matches an MHLW
-    permit carrying the name rule's answer (_operator_answers; call 182).
+    "food" is the city's list as it stands.
     "mhlw" yields only MHLW's notifications (申請区分 届出 / 届出(廃業)): its
     permits are not added, the city's list being complete (the owner's calls
     126 and 128, Ichinomiya's precedent). "mhlw_points" is the whole file,
-    read by POINT_DONORS for its coordinates only."""
+    read by POINT_DONORS for its coordinates and by OPERATOR_BY_PERMIT for the
+    name rule's answer, never drawn."""
     from pipeline.countries import japan_register as jr
 
     path = source_csv(key)
     if not path.exists():
         raise SystemExit(f"missing {path}\nRun: python pipeline/{SLUG}/fetch_sources.py")
-    answer = _operator_answers() if key == "food" else None
     for r in jr.city_rows(path):
         if key == "mhlw" and not (r.get("申請区分") or "").startswith("届出"):
             continue
-        if answer:
-            a = answer(r)
-            if a is not None:
-                r["name_is_operator"] = a
         yield r
 
 

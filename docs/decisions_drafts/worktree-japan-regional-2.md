@@ -99,6 +99,26 @@ Each city's own parked calls and proposals are under its entry below
 
 ## Changes
 
+### 2026-10-12 - Yamagata's permit match moved to shared code (call 182); map identical
+
+- **Why now:** Cleanup put call 182 on master (`b71f8040`,
+  `japan_step2.operators_by_permit`), the last of this batch's four
+  shared-code changes. Master merged in, clean.
+- **Yamagata's config:** `_permit_key` and `_operator_answers` and the
+  answer lines of `source_rows` are deleted; `OPERATOR_BY_PERMIT =
+  {"food": "mhlw_points"}` switches the shared match on.
+- **Measured:** zero drift, the map identical, 3,280 storefronts, 3 pins
+  showing their permit type as before; the baseline gains
+  `operator_by_permit_food` 2,739 (the hook matched 3,000: the shared
+  match skips the 261 MHLW permits whose 法人名 is empty, which get the
+  same answer from the ordinary rule). Cleanup's assertion confirmed.
+- **Privacy:** `check_personal_exposure.py yamagata` prints 0 of 3,280.
+  Its raw-file count reads 16, not 19: the 3 city rows are answered
+  inside step 2 now, which that count does not see. Verdict unchanged:
+  publish.
+- **No city-local workaround is left on this branch**: Tottori's (S19),
+  Kurashiki's two forms (S17, S18) and this one are all shared code.
+
 ### 2026-10-12 - Master taken in (S17, S18, S19); Kurashiki re-run at 4,815 pins, Tottori's hook removed
 
 - **Why now:** Cleanup's three shared-code changes are on master
