@@ -210,6 +210,16 @@ branch's drafts file.
       lands (approved wording below).
     - The commercial-use and public-sharing audit (PLAN, "From the portfolio
       review").
+    - Draft a handoff file for transit-globe to implement ITS OWN search feature
+      (owner, 2026-10-12, in Cleanup's chat; Cleanup drafts it, which
+      replaces the earlier "his to write"). It names the index files that
+      feature needs (the per-city place index and the intersections file
+      under `app/static/places/`, their format, and the ODbL credit they
+      carry) and lets the app filter out search terms outside its scope.
+      The app stays independent: it reads our export read-only, borrows no
+      code, and the handoff is a full build-and-decisions account for it to
+      critique, with every pilot-only choice named (owner, 2026-10-07 and
+      2026-10-08). A draft for the owner to read before it goes over.
     - At a later review time: Bucharest's address and name functions to a
       shared module.
 
