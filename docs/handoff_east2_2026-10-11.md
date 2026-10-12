@@ -98,6 +98,15 @@ owner's answers to the parked calls" and the follow-up under it):
 - **Left as they are:** the station names OpenStreetMap spells its own way
   (Bay Side Station, Chikucenter).
 
+**At the merge of master before this branch's push** (Cleanup's note,
+2026-10-11): master's db0c4e0c changed `japan_register.py` (Naha's reader
+work: new optional reader arguments, two more name and type column
+spellings, and the variant 壼 to 壷). Defaults are unchanged and the 64 built
+Japanese pipelines showed zero drift, but an East-2 city whose addresses
+carry 壼 could gain a joined row. Run the drift check over the eleven cities
+after that merge and read any count that moves; not checked on this branch,
+which has not taken master in.
+
 Still for review time: the proposed page sentences listed in the drafts file,
 the credit titles of notices 187 and 188, the browser map checks (Ichihara's
 opening view, the ten-line Funabashi map's labels at 343 px), and the master
