@@ -79,9 +79,9 @@ st.markdown(
 - The food businesses come from the Ministry of Health, Labour and Welfare's filing system, whose
   open data holds the permits and notifications Kure City has recorded since June 2021
   (downloaded October 6, 2026). Permits granted before then and still in force are not in it.
-- The ministry's list places about three restaurants in five of the official count: it holds
-  permits granted since June 2021, leaves out vehicles and stalls, and about three fixed
-  restaurants in ten do not publish their address.
+- The map shows about half (46%) of the restaurants in the official count: the ministry's list
+  holds permits granted since June 2021, vehicles and stalls are left out, and about three
+  fixed restaurants in ten do not publish their address.
 - The Food shops layer is food retail only, and it is partial: shops that only notify rather than
   hold a permit, such as supermarkets, convenience stores and greengrocers, appear only where they
   chose to publish in the ministry's list.

@@ -99,6 +99,64 @@ Each city's own parked calls and proposals are under its entry below
 
 ## Changes
 
+### 2026-10-12 - The owner's answers applied on this branch (S16, S23, S24, S27); 特殊形態 read (S18)
+
+- **"yes apply all, fetch approved for s18"** (owner, in the Regional-2
+  chat, confirming staging's relay below).
+- **S16, the Meitetsu exception:** `pipeline/line_registry.py` gains
+  `NEIGHBOUR_EXCEPTIONS[{meitetsu-nagoya-main-line, meitetsu-mikawa-line}]`
+  ("Meitetsu's own red for both lines") with its note. The check keys an
+  exception on registry identities, so the Mikawa Line was registered as
+  `meitetsu-mikawa-line` at the colour Toyota's map already draws
+  (`#E80010`, `maps: {"toyota": "MM"}`); Toyota's config and map are
+  untouched. `check_line_identity.py`: PROBLEMS 0, 7 pairs excepted.
+- **S23, Kure's share:** "about three restaurants in five" became "about
+  half (46%)", the Food service rows a reader sees (806 of e-Stat's 1,752
+  restaurant permits, 46.0%), on the page, in What Is Excluded and in table
+  B of `docs/map_inconsistencies.md`. The page sentence, for review time:
+  "The map shows about half (46%) of the restaurants in the official count:
+  the ministry's list holds permits granted since June 2021, vehicles and
+  stalls are left out, and about three fixed restaurants in ten do not
+  publish their address." The earlier 58.3% (1,022 addressed fixed permits)
+  was the brief's figure and is no longer stated.
+- **S24, gate 3 with no in-city count:** accepted for Aomori, Tottori,
+  Yamagata and Kure. The note was already in each city's row of table A
+  ("no line wholly inside: gate 3 has no in-city count"); nothing more was
+  written.
+- **S27, Yamagata's Zao Onsen rows:** the 10 placed rows stay, and What Is
+  Excluded now says so: 23 premises there are unplaced while 10 others sit
+  at the ministry's own coordinates, because the ministry's list holds the
+  same premises.
+- **S18, what 特殊形態 means (read 2026-10-12, one page):** Okayama City's
+  page 「自動車や屋台等で調理を行う場合の営業許可について」
+  (`https://www.city.okayama.jp/kurashi/0000038347.html`, dated 2024-05-23),
+  which applies the prefecture's ordinance, describes 飲食店営業（特殊形態第1種）
+  as 「自動車（キッチンカーを除く）、屋台等移動又は撤去を前提とする施設」, with
+  tents as its example and 岡山県内一円 as its area: a facility meant to be
+  moved or taken down. The prefecture's own ordinance text was not found
+  (one attachment URL answered 404), so the old-law form is read from the
+  current page's use of the same name: ASSERTED for the pre-2021 rows.
+- **The 8 pins checked** (trade names and addresses, from the clean file):
+  6 are concession stands at the Muscat Stadium (中庄 3250-1, floors 1 to 3)
+  and 2 are one market stall on the plaza in front of 吉備真備 station, on a
+  restaurant and a confectionery permit. None is an everyday shopfront.
+- **A rule is needed, and it is Cleanup's to write (S14):** recommended that
+  特殊形態 join `japan_eigyo.FORM_RULES` as a temporary form, beside 露天 and
+  the vending form of S17, in the same change. It would take these 8 pins
+  off Kurashiki's map (63 of the 71 old-law restaurant rows with the form
+  are already out as area-wide). Tradeoff: stadium stands at a fixed address
+  go with it, where the owner kept fixed-pitch yatai (屋台) in Fukuoka and
+  Kure; the difference is that these open on event days only. Nothing was
+  changed on the map; Kurashiki is re-run once after Cleanup's change.
+- **S22, Kanazawa (relayed by staging, 2026-10-12; the owner: "s22 no
+  share, yes read the frequency"):** the page states no share, as built.
+  Staging read IR Ishikawa's whole-line timetable of 2026-03-14 and counted
+  about three trains an hour each way (its record is in staging's drafts):
+  no low-frequency stretch, nothing to change on Kanazawa's page.
+- `check_all.py` after these changes: 49 of 51. The two left are the master
+  list's built counts (staging, after landing) and Fuji's and Kurashiki's
+  macro labels (Cleanup, call 198).
+
 ### 2026-10-12 - The owner's answers to S14 to S27, as staging relayed them (not yet applied on this branch)
 
 - **Relayed by staging from its own chat, 2026-10-12; the owner's words:**

@@ -78,6 +78,12 @@ NEIGHBOUR_EXCEPTIONS = {
     # CIE76 1.2.
     frozenset({"osaka-metro-midosuji-line", "kita-osaka-kyuko-namboku-line"}):
         "one through service in one red",
+    # Meitetsu signs every line in its one red: Okazaki's map draws the
+    # Nagoya Main Line and Toyota's the Mikawa Line, both #E80010, within
+    # 2 km of each other and never on one map (owner, 2026-10-12, call S16:
+    # "exception and note"). 1 map pair, CIE76 0.0.
+    frozenset({"meitetsu-nagoya-main-line", "meitetsu-mikawa-line"}):
+        "Meitetsu's own red for both lines",
 }
 
 REGISTRY = {
@@ -505,6 +511,13 @@ REGISTRY = {
     "aichi-loop-railway-aichi-loop-line": {
         "name": "Aichi Loop Line", "operator": "Aichi Loop Railway", "colour": "#28A800",
         "maps": {"okazaki": "AK", "toyota": "AK"},
+    },
+    # the project's colour toyota already drew. One map draws the line, and
+    # it is registered only so NEIGHBOUR_EXCEPTIONS can name it beside
+    # okazaki's Meitetsu Nagoya Main Line (owner, 2026-10-12, call S16).
+    "meitetsu-mikawa-line": {
+        "name": "Meitetsu Mikawa Line", "operator": "Meitetsu", "colour": "#E80010",
+        "maps": {"toyota": "MM"},
     },
     # the project's colours okayama and fukuyama already drew, registered when
     # kurashiki's map drew the lines too (Regional-2, 2026-10-11); pins >= 45.1

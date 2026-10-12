@@ -6206,7 +6206,10 @@ the city's list for a premises already in the national notifications.
 
 **Not placed** - 27 rows of the city's list (0.7%), 23 of them in the Zaō
 Onsen resort, whose addresses name small localities MLIT's files do not
-hold. Of the 3,280 pins, 193 sit at the ministry's own coordinates, 54 at
+hold. Another 10 premises there are on the map all the same, at the
+ministry's own coordinates: the ministry's list holds the same premises,
+so they are placed while their neighbors are not (owner, 2026-10-12).
+Of the 3,280 pins, 193 sit at the ministry's own coordinates, 54 at
 their town's center and 3 at the center of their 小字 (a named part of a
 town).
 
@@ -6250,8 +6253,9 @@ line: JR East's Ou, Senzan and Aterazawa lines.
 
 **Counted** - the national filings as downloaded on October 6, 2026: 1,543
 restaurant permits are in term on August 31, 2026, against 1,752 in the
-national count of March 31, 2025; 1,022 of them are at a fixed, published
-address, about three in five of that count. Street stalls at a fixed pitch
+national count of March 31, 2025; 806 of them are restaurants at a fixed,
+published address and reach the Food service layer, about half (46%) of
+that count. Street stalls at a fixed pitch
 (屋台, 12) count as Food service. 24 of the 192 bakery, confectioner and deli
 rows (12.5%) have a trade name that reads as a factory; they are kept (owner,
 2026-09-24).
