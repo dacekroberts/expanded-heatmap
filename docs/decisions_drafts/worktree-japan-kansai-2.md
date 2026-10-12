@@ -46,6 +46,15 @@ Named by city and letter; Staging assigns the S numbers when it relays them.
 
 ## Entries
 
+### 2026-10-11 - Kansai-2's parked calls answered (owner); the first-name-plus-word names re-checked
+
+- **Osaka A: rename Osaka's three Osaka Metro lines at its re-render** (owner: "rename osaka at re render"). Cleanup's, with the held WAVE5 re-render.
+- **Batch B and Cluj B: the page sentences go to review time for approval** (owner: "yes for approval at review time").
+- **Naha: a brief, and licence reads of its two packages** (owner: "yes brief and license reads for two packages"). Staging's.
+- **Cluj D and Cluj E (shared code): accepted** (owner: "sounds good").
+- **Cluj C, the name rule's extensions: kept** (owner: "sounds good"), with a question back: "maybe we should re-check or add a rule to check first name plus word brands as trade names intentionally published". Re-checked, counts only: the 40 withheld premises are **30 distinct names**; 6 of them sit on two or more premises; 9 pair the given name with a word of 3 or 4 letters; 17 put the other word first and 13 the given name first. **DSVSA's lists carry one name per unit, the registered entity's, and no separate sign or trade name**, so the source cannot say which of the 30 a business chose to publish as its brand; no signal measured separates a brand from a person cleanly. A candidate rule, NOT applied: show a person-named company's name where it is on two or more premises (6 names; a chain is a name in public use). It waits for the owner's yes, since a two-shop family firm is still a person's name.
+- **Cluj A (the terms question)** is still open: the grounds for and against were put to the owner in chat.
+
 ### 2026-10-11 - Naha's one measurement: a rebuild from the monthly files reaches the permits in force (104.8% by permit, 98.8% by premises); no renewal trap
 
 - **BODIK answered without a block.** One `package_search` call, then 213 file GETs, one every 21 s (about 75 minutes), every one HTTP 200, no 403 or 429; no `datastore_search_sql`. The files are in `data/naha/raw/shinki/` (140) and `data/naha/raw/keizoku/` (73), gitignored, each named with its resource id's first eight characters (two August 2026 resources share a file name).
