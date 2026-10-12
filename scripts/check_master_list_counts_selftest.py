@@ -429,7 +429,10 @@ WRITE_MAIN = [
     _b(r"^## 🟤 Band T —[^\n]*?\((\d+) cit"),
     by_country_bump(1, ""),
     multi_row_country_drop,
-    _b(r"^\|[^|\n]+\|[^|\n]+\| \*\*(\d+)\*\* — "),                 # a Candidates cell naming cities
+    # No mutation aims at a Candidates cell naming cities: no country has a
+    # candidate since the phase 2 landing (2026-10-12), so there is no such
+    # cell to bump. Restore that mutation from git history (this file before
+    # the landing) if a city is banded A to D again.
     _b(r"^\|[^|\n]+\|[^|\n]+\|[^|\n]+\| \*\*(\d+)\*\* — "),        # a Restricted cell naming cities
     _b(r"^\| \*\*Total\*\* \| \*\*(\d+)\*\*"),
     _b(r"^\| \*\*Total\*\* \| \*\*\d+\*\* \| \*\*(\d+)\*\*"),
