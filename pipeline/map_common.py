@@ -29,6 +29,7 @@ from folium.plugins import HeatMap, FastMarkerCluster
 from folium.template import Template
 
 from pipeline import travel_packs
+from pipeline.baseline import emit
 from pipeline.linecolour import check_line_colours, contrast_ratio, dark_label_colours, label_colours
 from pipeline.taxonomies import (CATEGORY_BUCKETS, MEANING_COLOURS, load_taxonomy_module,
                                  pin_colours, pin_outline)
@@ -4046,6 +4047,25 @@ def shown_name(name, classification):
     return classification if glitched_name(name) else name
 
 
+def emit_storefront_totals(businesses, taxonomy):
+    """The map's own totals, as baseline figures (owner, 2026-10-11, for
+    Analytics): `storefronts`, and `storefronts_<category>` for each of
+    CATEGORY_BUCKETS the city has (retail, food_service, personal_services).
+    Counted HERE, on the rows the map can show - placed, and past the
+    contact-detail screen - so they match the map; a step 2 count is taken
+    before that screen (Rouen and Seattle differed by one row). A city whose
+    step 2 emits the same key is overridden by this later figure. A row no
+    bucket takes counts in `storefronts` only."""
+    class_cols = [taxonomy.VALUE_COLUMN, *getattr(taxonomy, "EXTRA_COLUMNS", ())]
+    buckets = pd.Series([taxonomy.classify(dict(zip(class_cols, values)))
+                         for values in zip(*(businesses[c] for c in class_cols))], dtype="object")
+    counts = buckets.value_counts()
+    emit("storefronts", int(len(businesses)))
+    for bucket, _colour in CATEGORY_BUCKETS:
+        if counts.get(bucket, 0):
+            emit("storefronts_" + re.sub(r"[^a-z]+", "_", bucket.lower()).strip("_"), int(counts[bucket]))
+
+
 def drop_contact_details(businesses):
     """Remove rows whose displayed name carries an email address or phone
     number. Such a row has no usable public trade name, so it is dropped the
@@ -5144,6 +5164,7 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
 
     businesses = businesses.dropna(subset=["latitude", "longitude"]).copy()
     businesses = drop_contact_details(businesses)
+    emit_storefront_totals(businesses, taxonomy)
     _require_lang_for_cjk(businesses, lang, city_name)
     # Stations in a ward with NO business data (a `no_data` column; Tokyo's,
     # owner 2026-09-28) are drawn hollow and get no rings, and no business is

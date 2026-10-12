@@ -113,8 +113,9 @@ def main():
     script = str(ROOT / "pipeline" / "drift_check.py")
     proc = subprocess.run([sys.executable, script, "--render-only", "--update-baseline", "--list"],
                           cwd=ROOT, capture_output=True, text=True)
-    expect("--render-only with --update-baseline is refused",
-           proc.returncode != 0 and "cannot be used with --render-only" in proc.stderr, proc.stderr)
+    # Accepted since 2026-10-12: it merges the map step's figures only.
+    expect("--render-only with --update-baseline is accepted",
+           proc.returncode == 0 and len(proc.stdout.split()) > 100, proc.stderr)
     proc = subprocess.run([sys.executable, script, "--render-only", "--list"],
                           cwd=ROOT, capture_output=True, text=True)
     listed = proc.stdout.split()

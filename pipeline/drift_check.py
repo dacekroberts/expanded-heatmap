@@ -38,8 +38,11 @@ run of steps 1-2 (on any branch) left there; the city header prints how many
 processed files there are and when the newest was written, so a reader can
 see it. A city with no processed inputs at all is REFUSED (counted as a
 failure) rather than reported clean; a city with no map step, or more than
-one, is refused too. The baseline counts are not checked, since no map step
-emits any. `--update-baseline` with `--render-only` is refused.
+one, is refused too. Only the figures the MAP step emits are checked (the
+renderer's storefront totals, since 2026-10-12): a figure from steps 1-2 is
+neither compared nor called missing. `--update-baseline` with `--render-only`
+MERGES the map step's figures into the city's baseline and leaves every other
+figure as recorded.
 
 --changed exists because the full sweep is O(number of cities) on a gate
 that is supposed to run after every pipeline change, and the project keeps
@@ -199,6 +202,35 @@ def check_baseline(city: str, measured: dict, *, update: bool = False) -> bool:
     return ok
 
 
+def check_map_step_baseline(city: str, measured: dict, *, update: bool = False) -> bool:
+    """A render-only run's share of the baseline: the figures the map step
+    emits, against the same keys of outputs/<city>/baseline.json. Figures of
+    steps 1-2 are left alone, since render-only did not run them. With
+    `update`, the map step's figures are merged into the file."""
+    if not measured:
+        print("\n  baseline: not checked (the map step emitted no figure)")
+        return True
+    stored = baseline.load(city) or {}
+    if update:
+        path = baseline.save(city, {**stored, **measured})
+        print(f"\n  baseline: merged {len(measured)} map-step figure(s) into "
+              f"{path.relative_to(ROOT).as_posix()}")
+        return True
+    moved = {k: (stored[k], v) for k, v in measured.items() if k in stored and stored[k] != v}
+    new = sorted(set(measured) - set(stored))
+    print()
+    for k, (was, now) in sorted(moved.items()):
+        print(f"     {k}: {was:,} -> {now:,}  ({now - was:+,})" if isinstance(was, int) and isinstance(now, int)
+              else f"     {k}: {was} -> {now}")
+    if moved:
+        print(f"  BASELINE MOVED ({len(moved)} of {len(measured)} map-step figures)")
+    if new:
+        print(f"  baseline: {len(new)} map-step figure(s) not yet recorded: {', '.join(new)}")
+    if not moved and not new:
+        print(f"  baseline: {len(measured)} map-step figure(s) unchanged")
+    return not moved
+
+
 def map_steps(city: str) -> list:
     """A city's map-rendering step(s): `step*_map.py`. Exactly one is valid."""
     return sorted((ROOT / "pipeline" / city).glob("step*_map.py"))
@@ -237,9 +269,9 @@ def check_city(city: str, *, render_only: bool, update_baseline: bool) -> bool:
             print(f"  REFUSED: {refusal}")
             return False
         show_processed_inputs(city)
-        ran, _ = run_steps(city, only=map_steps(city))
+        ran, measured = run_steps(city, only=map_steps(city))
         ok = ran and compare_outputs(city)
-        print("\n  baseline: not checked (render-only runs no step that emits counts)")
+        ok = check_map_step_baseline(city, measured, update=update_baseline) and ok
         print(f"  render-only: {city} took {time.monotonic() - started:.1f} s")
         return ok
     show_raw_inputs(city)
@@ -399,9 +431,6 @@ def main():
     render_only = "--render-only" in args
     if render_only:
         args = [a for a in args if a != "--render-only"]
-        if update_baseline:
-            sys.exit("--update-baseline cannot be used with --render-only: the counts "
-                     "come from steps 1-2, which render-only does not run.")
     jobs = 1
     if "--jobs" in args:
         i = args.index("--jobs")
