@@ -1,0 +1,250 @@
+{
+  "city_barber": {
+    "as_of": "2026-03-31",
+    "bytes": 179680,
+    "dataset_page": "https://opendata.pref.shizuoka.jp/dataset/11261.html",
+    "file": "11261_855060_理容所施設一覧（令和８年３月31日時点）.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-07T00:20:51+00:00",
+    "rows": 2009,
+    "sha256": "408135e28ef044587b0debfd0f3116202df3496bb4375055ae48682e0f2ebf4f",
+    "url": "https://opendata.pref.shizuoka.jp/fs/8/5/5/0/6/0/_/__________8_3_31____.csv"
+  },
+  "city_barber_04": {
+    "as_of": "2026-04-30",
+    "bytes": 133,
+    "dataset_page": "https://opendata.pref.shizuoka.jp/dataset/11261.html",
+    "file": "11261_854471_令和８年４月新規開設理容所施設一覧.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-07T00:20:53+00:00",
+    "rows": 1,
+    "sha256": "c524fddce81b19368ba2426be6d241937739e3a0ae734177c54a4dc3a181beb5",
+    "url": "https://opendata.pref.shizuoka.jp/fs/8/5/4/4/7/1/_/__8_4__________.csv"
+  },
+  "city_barber_05": {
+    "as_of": "2026-05-31",
+    "bytes": 209,
+    "dataset_page": "https://opendata.pref.shizuoka.jp/dataset/11261.html",
+    "file": "11261_855027_令和８年５月新規開設理容所施設一覧.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-07T00:20:56+00:00",
+    "rows": 1,
+    "sha256": "953da8197892babc5f2ac723df88f9d21e59dda496497e88f775f2d8b773b32f",
+    "url": "https://opendata.pref.shizuoka.jp/fs/8/5/5/0/2/7/_/__8_5__________.csv"
+  },
+  "city_barber_06": {
+    "as_of": "2026-06-30",
+    "bytes": 7818,
+    "dataset_page": "https://opendata.pref.shizuoka.jp/dataset/11261.html",
+    "file": "11261_857430_令和８年６月新規理容所施設一覧.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-07T00:20:58+00:00",
+    "rows": 28,
+    "sha256": "6364f673a46b53e8690aac5be8ff6c66764bbfef6b1dcd21a48a31adcf7f2d87",
+    "url": "https://opendata.pref.shizuoka.jp/fs/8/5/7/4/3/0/_/__8_6__________.csv"
+  },
+  "city_barber_07": {
+    "as_of": "2026-07-31",
+    "bytes": 7849,
+    "dataset_page": "https://opendata.pref.shizuoka.jp/dataset/11261.html",
+    "file": "11261_857849_令和８年７月新規理容所施設一覧.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-07T00:21:01+00:00",
+    "rows": 28,
+    "sha256": "8da8806632dfee82d81043da7d1504a5938dce1013dc16a07c49a46a070247ae",
+    "url": "https://opendata.pref.shizuoka.jp/fs/8/5/7/8/4/9/_/__8_7__________.csv"
+  },
+  "city_barber_08": {
+    "as_of": "2026-08-31",
+    "bytes": 309,
+    "dataset_page": "https://opendata.pref.shizuoka.jp/dataset/11261.html",
+    "file": "11261_859043_令和８年８月新規理容所施設一覧.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-07T00:21:03+00:00",
+    "rows": 2,
+    "sha256": "86ce4b40583fa885f87600ab4dc66592572394a97413e912f4fb08517c245f3b",
+    "url": "https://opendata.pref.shizuoka.jp/fs/8/5/9/0/4/3/_/__8_8__________.csv"
+  },
+  "city_beauty": {
+    "as_of": "2026-03-31",
+    "bytes": 506468,
+    "dataset_page": "https://opendata.pref.shizuoka.jp/dataset/11262.html",
+    "file": "11262_855063_美容所施設一覧（令和８年３月31日時点）.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-07T00:21:06+00:00",
+    "rows": 5244,
+    "sha256": "7c198e8ee8687c0ce123d8664b005119eeecac90d6d8f4b175d59a036c677c3b",
+    "url": "https://opendata.pref.shizuoka.jp/fs/8/5/5/0/6/3/_/__________8_3_31____.csv"
+  },
+  "city_beauty_04": {
+    "as_of": "2026-04-30",
+    "bytes": 1668,
+    "dataset_page": "https://opendata.pref.shizuoka.jp/dataset/11262.html",
+    "file": "11262_855979_令和８年４月新規美容所施設一覧（0702差替え版）.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-07T00:21:09+00:00",
+    "rows": 17,
+    "sha256": "6a5ff43e8470166552a40ec48e0791db9374a6e96961228172d98e8b1bdb9345",
+    "url": "https://opendata.pref.shizuoka.jp/fs/8/5/5/9/7/9/_/__8_4___________0702_____.csv"
+  },
+  "city_beauty_05": {
+    "as_of": "2026-05-31",
+    "bytes": 1471,
+    "dataset_page": "https://opendata.pref.shizuoka.jp/dataset/11262.html",
+    "file": "11262_855036_令和８年５月新規美容所施設一覧.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-07T00:21:11+00:00",
+    "rows": 13,
+    "sha256": "5123645c15a0f7091c9c125263f86656c7fb144ca1e02c775791f11aa2faae3f",
+    "url": "https://opendata.pref.shizuoka.jp/fs/8/5/5/0/3/6/_/__8_5__________.csv"
+  },
+  "city_beauty_06": {
+    "as_of": "2026-06-30",
+    "bytes": 1790,
+    "dataset_page": "https://opendata.pref.shizuoka.jp/dataset/11262.html",
+    "file": "11262_857434_令和８年６月新規美容所施設一覧.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-07T00:21:14+00:00",
+    "rows": 16,
+    "sha256": "332f9d189b75de4810209bcec05718972a059858bd5cb1cfbffd6c04dabc51cb",
+    "url": "https://opendata.pref.shizuoka.jp/fs/8/5/7/4/3/4/_/__8_6__________.csv"
+  },
+  "city_beauty_07": {
+    "as_of": "2026-07-31",
+    "bytes": 1417,
+    "dataset_page": "https://opendata.pref.shizuoka.jp/dataset/11262.html",
+    "file": "11262_857854_令和８年７月新規美容所施設一覧.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-07T00:21:20+00:00",
+    "rows": 11,
+    "sha256": "30fc2c3be434f46f859c9b57c5594c9b85d24e9e31626a944a3e89bc4980338c",
+    "url": "https://opendata.pref.shizuoka.jp/fs/8/5/7/8/5/4/_/__8_7__________.csv"
+  },
+  "city_beauty_08": {
+    "as_of": "2026-08-31",
+    "bytes": 1387,
+    "dataset_page": "https://opendata.pref.shizuoka.jp/dataset/11262.html",
+    "file": "11262_859045_令和８年８月新規美容所施設一覧.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-07T00:21:22+00:00",
+    "rows": 11,
+    "sha256": "8fe0f1d1b6c39c801e514970d7eb453822334f2978f8dd6e83439d26959de3ac",
+    "url": "https://opendata.pref.shizuoka.jp/fs/8/5/9/0/4/5/_/__8_8__________.csv"
+  },
+  "city_laundry": {
+    "as_of": "2026-03-31",
+    "bytes": 126395,
+    "dataset_page": "https://opendata.pref.shizuoka.jp/dataset/11263.html",
+    "file": "11263_855059_クリーニング所施設一覧（令和８年３月31日時点）.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-07T00:21:25+00:00",
+    "rows": 1200,
+    "sha256": "233da464f964e4023cb3c5b009d0199a4c96d4b136ef531f266e6ba276929320",
+    "url": "https://opendata.pref.shizuoka.jp/fs/8/5/5/0/5/9/_/______________8_3_31____.csv"
+  },
+  "city_laundry_04": {
+    "as_of": "2026-04-30",
+    "bytes": 165,
+    "dataset_page": "https://opendata.pref.shizuoka.jp/dataset/11263.html",
+    "file": "11263_854473_令和８年４月新規クリーニング所施設一覧.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-07T00:21:28+00:00",
+    "rows": 1,
+    "sha256": "91bff7f99e9d1008f6da1704e848539387555bb7c8046f09ae932a96077a4976",
+    "url": "https://opendata.pref.shizuoka.jp/fs/8/5/4/4/7/3/_/__8_4______________.csv"
+  },
+  "city_laundry_05": {
+    "as_of": "2026-05-31",
+    "bytes": 253,
+    "dataset_page": "https://opendata.pref.shizuoka.jp/dataset/11263.html",
+    "file": "11263_855025_令和８年５月新規クリーニング所施設一覧.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-07T00:21:30+00:00",
+    "rows": 10,
+    "sha256": "b2bd6fa68d43521beb1084b4f4d5918f887eb0e7862ab4541eb6e7d54219f82e",
+    "url": "https://opendata.pref.shizuoka.jp/fs/8/5/5/0/2/5/_/__8_5______________.csv"
+  },
+  "city_laundry_06": {
+    "as_of": "2026-06-30",
+    "bytes": 7850,
+    "dataset_page": "https://opendata.pref.shizuoka.jp/dataset/11263.html",
+    "file": "11263_857432_令和８年６月新規クリーニング所施設一覧.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-07T00:21:33+00:00",
+    "rows": 28,
+    "sha256": "1d46a9967b06ab5be3c99e2358cd4ec3a77a53da525104203cfcced37457fccd",
+    "url": "https://opendata.pref.shizuoka.jp/fs/8/5/7/4/3/2/_/__8_6______________.csv"
+  },
+  "city_laundry_07": {
+    "as_of": "2026-07-31",
+    "bytes": 7908,
+    "dataset_page": "https://opendata.pref.shizuoka.jp/dataset/11263.html",
+    "file": "11263_857850_令和８年７月新規クリーニング所施設一覧.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-07T00:21:35+00:00",
+    "rows": 28,
+    "sha256": "1d2498e84c730e3c572e01546685f5d36d8be888b55be4fe20e1ecf5bab7a05b",
+    "url": "https://opendata.pref.shizuoka.jp/fs/8/5/7/8/5/0/_/__8_7______________.csv"
+  },
+  "city_laundry_08": {
+    "as_of": "2026-08-31",
+    "bytes": 8316,
+    "dataset_page": "https://opendata.pref.shizuoka.jp/dataset/11263.html",
+    "file": "11263_859042_令和８年８月新規クリーニング所施設一覧.csv",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-07T00:22:14+00:00",
+    "rows": 29,
+    "sha256": "bfcda7330d8071adf15362127baa49960abf4fcc04879bd703294fab1911c075",
+    "url": "https://opendata.pref.shizuoka.jp/fs/8/5/9/0/4/2/_/__8_8______________.csv"
+  },
+  "estat_census": {
+    "bytes": 6421265,
+    "file": "data/japan/raw/estat_census_r3_b1_009_1a.xlsx",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-28T19:04:30+00:00",
+    "sha256": "666929104448d2430f59694dbe3c7d1d2f86748e6de95da78d16a44a8084f4ec",
+    "url": "https://www.e-stat.go.jp/stat-search/file-download?statInfId=000040067884&fileKind=0"
+  },
+  "isj_22210_block": {
+    "bytes": 370149,
+    "file": "22210-24.0a.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T19:26:05+00:00",
+    "sha256": "7cbdd4a9434e455e4c1e84a892341754f0b34cb8967f9bebc9376168b833f575",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/24.0a/22210-24.0a.zip"
+  },
+  "isj_22210_chome": {
+    "bytes": 7711,
+    "file": "22210-19.0b.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-06T19:26:06+00:00",
+    "sha256": "317a0eca50dcf8bd367ef395c938817524da8d50bf4b9ad16da1f14b9d0be4f1",
+    "url": "https://nlftp.mlit.go.jp/isj/dls/data/19.0b/22210-19.0b.zip"
+  },
+  "n02": {
+    "bytes": 14903774,
+    "file": "data/japan/raw/N02-25_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-09-30T23:47:52+00:00",
+    "sha256": "aaf76af133b2e771e538fabc4646d2e443dc1d5a67b221382a28d744e706cc9f",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N02/N02-25/N02-25_GML.zip"
+  },
+  "n03": {
+    "bytes": 11897351,
+    "file": "data/japan/raw/N03-20250101_22_GML.zip",
+    "how": "kept (on disk from an earlier run or the 2026-09-24 screen)",
+    "retrieved": "2026-10-03T00:23:31+00:00",
+    "sha256": "abf0672d126c44923e1d69e99cf0d6688707db3ddf55a08e09ccbff32b806ed4",
+    "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_22_GML.zip"
+  },
+  "osm_station_names": {
+    "bytes": 10482,
+    "elements": 27,
+    "file": "osm_station_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-10-11T22:26:06Z",
+    "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](35.11,138.55,35.36,138.82);way[\"railway\"=\"station\"](35.11,138.55,35.36,138.82););out tags center;",
+    "retrieved": "2026-10-11T22:27:36+00:00",
+    "sha256": "67c87b499f70957824024cd221774b0cb46e6c4d2a71c7af6311a4a04ffdbb02"
+  }
+}

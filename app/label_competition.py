@@ -370,6 +370,12 @@ TEXT_WIDTH = {
     # 61.8, Paris 32.9, Higashiōsaka 89.1, Liverpool (Regional) 135.0, Fuchū
     # (Tokyo) 96.2, Ibaraki 45.5 and Kadoma 54.2 reproduced.
     "Ibaraki (Osaka)": 100.1, "Yao": 24.0, "Takatsuki": 64.2, "Cluj-Napoca": 82.4,
+    # Regional-2's cities not measured ahead of their builds, 2026-10-11, the
+    # built-in browser with Google Fonts' Space Grotesk 600 loaded (canvas
+    # measureText after document.fonts.load); controls Paris 32.9, Gifu 27.6,
+    # Morioka 54.3, Okazaki 52.0 and Aomori 47.1 reproduced.
+    "Shizuoka": 61.0, "Kanazawa": 67.8, "Matsumoto": 77.3, "Tottori": 44.1, "Yamagata": 66.5,
+    "Kure": 30.5, "Kurashiki": 61.6,
 }
 
 PILL_H = 18.0             # measured from rendered pixels, 14 px text

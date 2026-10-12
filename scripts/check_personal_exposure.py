@@ -550,6 +550,12 @@ REGISTRIES = {
                   address=("address",), japan=True)
        for slug in ("maebashi", "fukuyama", "ichinomiya", "tsu", "fukushima", "iwaki", "akita", "oita", "gifu",
                     "mito", "morioka")},
+    # The Regional-2 batch (phase 2, 2026-10-11), on the same shared steps
+    # and rule, every operator column read only by the name rule, in memory.
+    **{slug: dict(raw=None, trade=None, owner=None, processed="businesses_clean.csv",
+                  address=("address",), japan=True)
+       for slug in ("shizuoka", "kanazawa", "okazaki", "aomori", "matsue", "fuji", "matsumoto", "tottori",
+                    "yamagata", "kure", "kurashiki")},
     # Japan wave 2 (2026-10-03), on the same shared steps and the same rule:
     # each list's operator column is read only by the name rule, in memory;
     # MHLW's rows, Hamamatsu's registers and Higashiosaka's national-schema

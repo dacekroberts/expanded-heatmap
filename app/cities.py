@@ -5746,6 +5746,299 @@ CITIES = [
         # px, measured 2026-10-11 (label_competition.TEXT_WIDTH).
         "label_offset": ("middle", 0, -22),
     },
+    {
+        "name": "Shizuoka",
+        "lat": 34.972,
+        "lon": 138.389,
+        "page": "pages/258_Shizuoka_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (97.5%)",
+        "data_age": "Lists as of 2026-03-31, openings added to 2026-09-30 (barbers to 2026-08-31; an upper bound)",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "The Shizuoka Railway's Shizuoka-Shimizu Line and JR Central's Tokaido Line",
+        "region": "Chubu",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Kanazawa",
+        "lat": 36.561,
+        "lon": 136.656,
+        "page": "pages/259_Kanazawa_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (92.0%); the city's own coordinates where missed",
+        "data_age": "Food permits in term as of 2024-04-01 (a dated snapshot, not updated since)",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Food premises only",
+        "blurb": "The Hokuriku Railroad's Asanogawa and Ishikawa lines and the IR Ishikawa Railway Line",
+        "region": "Chubu",
+        "label_tier": "minor",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Okazaki",
+        "lat": 34.952,
+        "lon": 137.166,
+        "page": "pages/260_Okazaki_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (92.4%); ministry coordinates where missed",
+        "data_age": "City food list in term 2026-08-31; ministry notifications fetched 2026-10-06",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Food premises only",
+        "blurb": "Meitetsu's Nagoya Main Line, the Aichi Loop Line and JR Central's Tokaido Line",
+        "label_tier": "minor",
+        "region": "Chubu",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Aomori",
+        "lat": 40.829,
+        "lon": 140.735,
+        "page": "pages/261_Aomori_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (95.1%)",
+        "data_age": "Food permits as of 2026-08-31",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Food premises only",
+        "blurb": "JR East's Ou and Tsugaru lines and the Aoimori Railway Line",
+        "region": "Tohoku",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Matsue",
+        "lat": 35.464,
+        "lon": 133.064,
+        "page": "pages/262_Matsue_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (81.9%)",
+        "data_age": "Registers as of 2026-08-31",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "JR West's San'in and Kisuki lines and the Ichibata Electric Railway's Kita-Matsue Line",
+        "region": "Chugoku",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Fuji",
+        "lat": 35.155,
+        "lon": 138.68,
+        "page": "pages/263_Fuji_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (96.7%)",
+        "data_age": "Lists as of 2026-03-31, openings added to 2026-08-31 (an upper bound)",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "JR Central's Tokaido and Minobu lines and the Gakunan Railway Line",
+        "region": "Chubu",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Matsumoto",
+        "lat": 36.231,
+        "lon": 137.964,
+        "page": "pages/264_Matsumoto_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (94.9%)",
+        "data_age": "Registers as of 2026-10-01",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Personal services only",
+        "blurb": "Alpico Kotsu's Kamikochi Line and JR East's Shinonoi and Oito lines",
+        "region": "Chubu",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Tottori",
+        "lat": 35.494,
+        "lon": 134.226,
+        "page": "pages/265_Tottori_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (85.9%); ministry coordinates where missed",
+        "data_age": "Ministry filings fetched 2026-10-06",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Food premises only",
+        "blurb": "JR West's San'in and Inbi lines",
+        "region": "Chugoku",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Yamagata",
+        "lat": 38.249,
+        "lon": 140.328,
+        "page": "pages/266_Yamagata_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (92.4%); ministry coordinates where missed",
+        "data_age": "City food list in term 2026-08-31; ministry notifications fetched 2026-10-06",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Food premises only",
+        "blurb": "JR East's Ou, Senzan and Aterazawa lines",
+        "region": "Tohoku",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Kure",
+        "lat": 34.257,
+        "lon": 132.629,
+        "page": "pages/267_Kure_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (88.2%); ministry coordinates where missed",
+        "data_age": "Ministry filings fetched 2026-10-06",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Food premises only",
+        "blurb": "JR West's Kure Line",
+        "region": "Chugoku",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
+    {
+        "name": "Kurashiki",
+        "lat": 34.548,
+        "lon": 133.744,
+        "page": "pages/306_Kurashiki_Heatmap.py",
+        "coverage": "one_bucket",
+        "placement": "Joined to address blocks (87.8%)",
+        "data_age": "Food permits as of 2026-03-31",
+        "rail_extra": "Suburban rail",
+        "record_kind": "Permit registers",
+        "categories": "Food premises only",
+        "blurb": "The Mizushima Rinkai Railway, four JR West lines and the Ibara Railway",
+        "region": "Chugoku",
+        # MINOR, the Japan batch's tier (owner, 2026-10-02): labelled in its
+        # own view, a dot and tooltip elsewhere.
+        "label_tier": "minor",
+        "country": "Japan",
+        "mode": "metro",
+        "in_default_view": False,
+        # STARTING VALUE, NOT A MEASURED ONE. Offsets are PIXELS at a
+        # pinned zoom. Run `python scripts/check_macro_labels.py`,
+        # which scores every city in every region at three widths -
+        # and which will first demand this city's label width be
+        # MEASURED in a real browser with Space Grotesk loaded, since
+        # it refuses a guessed one.
+        "label_offset": ("middle", 0, -22),
+    },
 ]
 
 # THE INITIAL VIEW FRAMES ONLY THE CITIES FLAGGED FOR IT, NOT ALL OF THEM.

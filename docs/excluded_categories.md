@@ -6060,6 +6060,511 @@ line.
   beyond it, and the JR Hanawa Line 7 toward Odate and 9 toward Morioka; both
   are drawn (owner, 2026-10-06).
 
+### Shizuoka - the city's barber, beauty-salon and laundry registers only, joined to MLIT's address blocks
+
+**Left out**
+- Every food business and every shop: the national list of food businesses
+  gives an address for only about six in ten of Shizuoka's restaurants, so
+  this map shows barbers, beauty salons and laundries only (owner,
+  2026-10-04).
+- 2 laundry vehicles registered to work across the prefecture (県内全域), with
+  no fixed place.
+- 1 laundry agent with no premises (無店舗).
+
+**Counted** - every barber, beauty salon and laundry on the city's complete
+lists of March 31, 2026 (686, 1,752 and 306 rows; the official count a year
+earlier was 690, 1,731 and 312), plus the 41 new premises listed each month
+since: barbers to August 31, 2026, beauty salons and laundries to September
+30, 2026. Closures since March are not published, so the count is an upper
+bound.
+
+**One pin per premises** - 29 repeat registrations are shown once, most of
+them premises registered as both a barber and a beauty salon.
+
+**Not placed** - 1 beauty salon, at an address MLIT's files do not hold.
+Another 68 sit at their town's center, mostly rural addresses in Shimizu
+Ward.
+
+**Names not shown** - none: no trade name is its operator's own name.
+
+**Stations.** The Shizuoka-Shimizu Line is drawn whole; JR's Tokaido Line is
+cut at the city line.
+- Left out: 2 stations beyond it, both in Fuji.
+- The Shinkansen is not drawn; Shizuoka stays a Tokaido Line station.
+- The Oigawa Railway's Ikawa Line, a sightseeing line with 2 stations in the
+  city's mountain north, is not drawn (owner, 2026-10-04).
+
+### Aomori - the city's food-permit list only, joined to MLIT's address blocks
+
+**Left out**
+- Barbers, beauty salons and laundries: the city publishes no list of them,
+  so this map shows food businesses only.
+- Every shop that is not a food shop: Japan has no general business license.
+- Food businesses that only notify the city rather than hold a permit, such
+  as many convenience stores and greengrocers: they are not in the list.
+- 1,284 permits registered for the whole city (青森市全域) rather than an
+  address, which are event stalls and food trucks: 1,271 restaurant permits,
+  12 fishmongers and 1 confectioner.
+- 9 restaurant permits registered across the prefecture (青森県内一円).
+- 301 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other types that are not a counter.
+
+**Counted** - every food permit in term on August 31, 2026 in the city's
+list: 5,289 permits, 4,217 of them restaurant permits, against 3,969 in the
+national count of March 31, 2025; 2,937 restaurant permits are at a fixed
+address. The list has no column for the form of business, so convenience
+stores, supermarkets, canteens, hotel restaurants and snack bars that hold a
+restaurant permit count as Food service. 37 of the 439 bakery, confectioner
+and deli premises (8.4%) have a trade name that reads as a factory; they are
+kept (owner, 2026-09-24).
+
+**One pin per premises** - 164 repeat rows are shown once: several permits of
+one kind at one premises.
+
+**Not placed** - 3 restaurants (0.1%), at addresses MLIT's files do not hold.
+Another 56 rows sit at their town's center and 121 at the center of their
+小字 (a named part of a town), mostly in Namioka and the older rural parts of
+the city.
+
+**Names not shown** - 1 pin whose trade name is the operator's own name shows
+its permit type.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 2 stations beyond it, 1 in Yomogita and 1 in Fujisaki.
+- The Shinkansen is not drawn; Shin-Aomori stays a JR Ou Line station.
+- The JR Tsugaru Line is drawn although it is infrequent: 9 trains a weekday
+  run toward Kanita and 8 toward Aomori.
+
+### Okazaki - the city's food-permit list and the national notifications, joined to MLIT's address blocks
+
+**Left out**
+- Barbers, beauty salons and laundries: the city publishes no list of them,
+  so this map shows food businesses only.
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, except where the national filings
+  include notifications.
+- Restaurants the city's list does not hold: it has 3,023 restaurant permits,
+  against 3,755 in the national count a year earlier (about four in five).
+  The city does not say why.
+- 324 national notifications whose filers did not publish an address.
+- 210 kitchen cars, which the city lists at a base address, 6 other
+  temporary or mobile filings, 2 rows with no fixed place and 1 row addressed
+  to a whole area.
+- 151 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 105 vending machines, 10 school, hospital and staff canteens and 2
+  mail-order businesses.
+- 29 permits that start after August 31, 2026.
+
+**Counted** - every food permit in the city's list in term on August 31,
+2026, and the national notifications as downloaded on October 6, 2026. The
+city's list has no form-of-business column, so a convenience store,
+supermarket or hotel that holds a restaurant permit is counted as Food
+service. 19 of the 539 bakery, confectioner and deli rows (3.5%) have a trade
+name that reads as a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 164 repeat permits are shown once, and 38 rows of
+the city's list for a premises already in the national notifications.
+
+**Not placed** - 39 rows (1.0%), 35 of them in the new districts south of
+Okazaki Station (針崎西, 岡崎駅前, 若松西, 柱西 and two land-readjustment areas),
+which MLIT's files do not hold yet. Another 127 sit at the center of their
+小字 (a named part of a town), 84 at their town's center, and 43 at the
+ministry's own coordinates. 51 pins share one site at 舞木町字金森, about 780 m
+from Meiden-Yamanaka: 36 at that 小字's center and 15 at the ministry's
+coordinates.
+
+**Names not shown** - none: no trade name on the map is its operator's own
+name.
+
+**Stations.** Meitetsu's Nagoya Main Line, the Aichi Loop Line and JR's
+Tokaido Line are each cut at the city line.
+- Left out: 9 stations beyond it, 4 in Toyota, 2 in Anjō, 2 in Toyokawa and 1
+  in Kōta.
+- The Shinkansen is not drawn; it has no station in the city.
+- Naka-Okazaki (Aichi Loop Line) and Okazaki-koen-mae (Meitetsu), 168 m
+  apart, are separate stations and each has its own rings.
+
+### Kanazawa - the city's food-permit list of April 2024, joined to MLIT's address blocks
+
+**Left out**
+- Barbers, beauty salons and laundries: the city's lists of them are not
+  open data, so this map shows food businesses only.
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that only notify the city rather than hold a permit, such as many
+  convenience stores and greengrocers: they are not in the list.
+- 393 food trucks, stalls and other permits with no fixed place: 350
+  registered for the whole city (一円, 市内), 42 with no fixed address, and 1
+  whose address is the city's name alone. Another 3 temporary permits.
+- 439 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit types that are not a counter.
+- 75 restaurants inside inns (旅館), 56 vending machines and 32 caterers
+  (仕出し屋; none also names a counter form).
+
+**Counted** - every food permit in term in early April 2024, the date of the
+city's list (8,842 rows; its newest permit is dated April 1, 2024). The list
+holds 6,478 restaurant permits, against 6,420 in the national count on March
+31, 2024. It has not been updated since: 3,360 of the 7,844 rows on this map's
+layers (43%) had reached their expiry date by October 2026, and renewals are
+not in the list, so a premises that renewed and one that closed look the
+same. 54 of the 1,225 bakery, confectioner and deli pins (4.4%) have a trade
+name that reads as a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 455 repeat permits are shown once: several permits
+of one kind at one premises.
+
+**Not placed** - 1 restaurant, at an address MLIT's files do not hold and
+with no usable coordinates of its own. 564 pins sit at the city's own
+coordinates, where MLIT's files hold the town but not the block (mostly
+newer districts and the city's lettered town sections, such as 無量寺町ヲ),
+and 1 at its town's center.
+
+**Names not shown** - 5 pins whose trade name is the operator's own name show
+their permit type. The city's list names an operator almost only where it is
+a company, so the rest cannot be checked against one.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 15 stations beyond it: 8 in Hakusan, 4 in Nonoichi, 2 in Uchinada
+  and 1 in Tsubata. Three of Nonoichi's are on the Hokutetsu Ishikawa Line,
+  which leaves the city after Shin-Nishi-Kanazawa and returns at Magae; its
+  track between them is drawn.
+- The Shinkansen is not drawn; Kanazawa stays an IR Ishikawa Railway station.
+
+### Matsue - the city's barber, beauty-salon and laundry registers only, joined to MLIT's address blocks
+
+**Left out**
+- Every food business and every shop: the city's own list of food
+  businesses is not open data, and the national list holds about 2% of
+  Matsue's restaurants, so this map shows barbers, beauty salons and
+  laundries only (owner, 2026-10-06).
+- 1 mobile barber, registered with a service area and a vehicle depot in
+  place of an address.
+
+**Counted** - every barber, beauty salon and laundry on the city's registers
+of August 31, 2026 (266, 574 and 108 premises, 81 of the laundries being
+pick-up counters; the official count of March 2025 was 271, 564 and 110).
+The registers carry no closure date, so a premises that has closed may still
+be listed.
+
+**One pin per premises** - 15 premises registered as both a barber and a
+beauty salon are shown once.
+
+**Not placed** - 14 premises (4 barbers, 8 beauty salons, 2 laundries), most
+of them at addresses written before their district was renumbered, which
+MLIT's files no longer hold. Another 156 sit at their district's center: 90
+of them in Kashima, Shimane, Mihonoseki, Yakumo and Yatsuka, the rural towns
+that joined the city in 2005, where MLIT's files hold almost no street
+blocks and a district can be large.
+
+**Names not shown** - none: no trade name is its operator's own name.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 5 stations beyond it: 3 in Izumo, 1 in Yasugi and 1 in Unnan.
+- The JR Kisuki Line keeps 2 stations inside the city (Shinji and
+  Minami-Shinji) and is infrequent: 10 trains a weekday run toward Kisuki
+  and 11 toward Shinji.
+
+### Fuji - Shizuoka Prefecture's barber, beauty-salon and laundry registers only, joined to MLIT's address blocks
+
+**Left out**
+- Every food business and every shop: the national list of food businesses
+  holds an address for at most about two in three of Fuji's restaurants, so
+  this map shows barbers, beauty salons and laundries only (owner,
+  2026-10-06).
+- 1 laundry agent with no premises (無店舗取次所).
+
+**Counted** - every barber, beauty salon and laundry with an address in Fuji
+on the prefecture's complete lists of March 31, 2026 (211, 534 and 92
+premises), plus the 6 new premises listed each month since, to August 31,
+2026 (1 barber, 5 beauty salons): 212 barbers, 539 beauty salons and 92
+laundries, 61 of them pick-up counters (取次所). Closures since March are not
+published, so the count is an upper bound. No official count exists for Fuji
+alone: across the area the lists cover (the prefecture outside Shizuoka City
+and Hamamatsu) they hold 97%, nearly 100% and 93% of the national counts of a year
+earlier, and an estimate from the 2021 Economic Census puts Fuji's beauty
+salons at about nine in ten and its laundries at about four in five of what
+the census suggests; the reason is not known.
+
+**One pin per premises** - 5 premises registered as both a barber and a
+beauty salon under one name are shown once.
+
+**Not placed** - 7 premises (3 barbers, 3 beauty salons, 1 laundry) at
+addresses MLIT's files do not hold: 2 in a town the files leave out and 5
+written with a local place name after the district's. Another 21 sit at
+their district's center.
+
+**Names not shown** - no trade name is its operator's own name. 1 beauty
+salon's name lost a character in the published file and shows its register
+type instead.
+
+**Stations.** The Gakunan Railway Line is drawn whole; JR's Tokaido and
+Minobu lines are cut at the city line.
+- Left out: 7 stations beyond it, 4 in Fujinomiya, 2 in Shizuoka and 1 in
+  Numazu.
+- The Shinkansen is not drawn, so Shin-Fuji, which only the Shinkansen
+  serves, has no ring.
+
+### Matsumoto - the city's barber, beauty-salon and laundry registers only, joined to MLIT's address blocks
+
+**Left out**
+- Every food business and every shop: the national list of food businesses
+  gives an address for only about one in three of Matsumoto's restaurants,
+  and the city's own list of older food permits does not close the gap, so
+  this map shows barbers, beauty salons and laundries only.
+- 1 laundry agent with no premises (無店舗取次店).
+- 1 beauty salon whose registered address is in Nagano City.
+
+**Counted** - every barber, beauty salon and laundry on the city's registers
+of October 1, 2026: 165 barbers, 709 beauty salons and 116 laundries (43
+general laundries and 73 pick-up counters, 取次所). The official count of March
+31, 2025 was 172, 686 and 125. The registers do not say which premises have
+closed.
+
+**One pin per premises** - 13 repeat registrations are shown once, most of
+them premises registered as both a barber and a beauty salon.
+
+**Not placed** - 2 premises (1 beauty salon and 1 laundry), at addresses
+MLIT's files do not hold. Another 48 sit at their district's center, mostly
+rural addresses in the villages the city absorbed.
+
+**Names not shown** - none: no trade name is its operator's own name.
+
+**Stations.** Alpico Kotsu's Kamikochi Line is drawn whole; JR East's
+Shinonoi and Oito lines are cut at the city line.
+- Left out: 7 stations beyond it, 5 in Azumino, 1 in Shiojiri and 1 in
+  Chikuhoku.
+- No Shinkansen runs through Matsumoto.
+
+### Tottori - the national food filings alone, joined to MLIT's address blocks
+
+**Left out**
+- Barbers, beauty salons and laundries: neither the city nor the prefecture
+  publishes a list of them, so this map shows food businesses only.
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, except where the national filings
+  include notifications.
+- Restaurant permits granted before June 2021 and still in force, which the
+  national filings do not hold (about one restaurant permit in five).
+- 644 filings addressed in the four neighboring towns that Tottori City's
+  health center also licenses: 205 in Iwami, 194 in Yazu, 168 in Chizu and 77
+  in Wakasa.
+- 650 national filings whose filers did not publish an address (34 of them
+  restaurant permits, about one restaurant in 60). They cannot be told apart
+  between the city and the four towns.
+- 355 food trucks, street and festival stalls and other temporary or mobile
+  permits and filings: 237 registered across the prefecture (鳥取県内 and the
+  like), 111 registered for the whole city or with no fixed place (市内一円
+  and the like) and 7 by their type or form of business.
+- 335 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit or notification types that are not a
+  counter.
+- 172 vending machines, 117 school, hospital and staff canteens, 6 mail-order
+  businesses and 2 premises inside hotels and inns.
+- 83 permits that start after August 31, 2026, the last day the filings
+  cover.
+- 1 closed premises, which the national filings keep, marked.
+
+**Counted** - the national filings as downloaded on October 6, 2026, where
+the address is in Tottori City: 2,065 restaurant permits are in term in the
+whole file, 1,573 of them at a fixed address in the city, against 1,990 in
+the national count of March 31, 2025. That is about 8 in 10, and may
+understate the share: the national count may include the four towns. 9 of
+the 233 bakery, confectioner and deli rows (3.9%) have a trade name that
+reads as a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 177 repeat permits are shown once.
+
+**Not placed** - none. 315 pins (14.1%) sit at the ministry's own coordinates
+where the street block could not be found, most of them in the downtown bar
+district (末広温泉町, 弥生町) and in the towns merged into the city in 2004.
+
+**Names not shown** - none on the map: no pin's trade name is its operator's
+own name.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line.
+- Left out: 5 stations beyond it, 3 in Yazu, 1 in Iwami and 1 in Yurihama.
+- The JR Inbi Line leaves the city between Tsunoi and Kunifusa to cross Yazu:
+  its track there is drawn, its three stations there have no rings.
+- The JR Inbi Line is drawn south of Yazu although it is infrequent: about 12
+  trains a day run from Tottori to Kunifusa, Takagari, Mochigase and
+  Inaba-Yashiro.
+- No Shinkansen runs here.
+
+### Yamagata - the city's food-permit list and the national notifications, joined to MLIT's address blocks
+
+**Left out**
+- Barbers, beauty salons and laundries: the city's lists of them hold only
+  premises opened since April 2019, so this map shows food businesses only.
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, except where the national filings
+  include notifications.
+- 275 permits in the city's list registered across the prefecture (県内一円
+  and 山形県内一円) rather than at an address, which are event stalls and food
+  trucks: 273 restaurant permits and 2 others. Another 81 national
+  notifications are addressed the same way.
+- 267 permits the city's list publishes without an address, 265 of them
+  without a name either, because the operator did not agree to publication:
+  222 of them are restaurant permits, about one restaurant permit in twelve.
+  Where they are is not known.
+- 515 national notifications whose filers did not publish an address.
+- 171 rows of the city's list for food manufacturing other than bakeries and
+  confectioners (菓子) and delis (そうざい), such as pickles, noodles, miso
+  and soy sauce, and 153 national notifications of types that are not a
+  counter.
+- 230 vending machines, 110 school, hospital and staff canteens, 68
+  temporary or mobile filings and 9 mail-order businesses.
+- 2 national notifications marked closed.
+
+**Counted** - every food permit in the city's list in term on August 31,
+2026 (3,584 permits, 2,770 of them restaurant permits, against 2,789 in the
+national count of March 31, 2025; 2,275 restaurant permits are at a fixed
+address), and the national notifications as downloaded on October 6, 2026.
+The city's list has no form-of-business column, so a convenience store,
+supermarket or hotel that holds a restaurant permit is counted as Food
+service. 23 of the 311 bakery, confectioner and deli premises (7.4%) have a
+trade name that reads as a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 191 repeat permits are shown once, and 130 rows of
+the city's list for a premises already in the national notifications.
+
+**Not placed** - 27 rows of the city's list (0.7%), 23 of them in the Zaō
+Onsen resort, whose addresses name small localities MLIT's files do not
+hold. Another 10 premises there are on the map all the same, at the
+ministry's own coordinates: the ministry's list holds the same premises,
+so they are placed while their neighbors are not (owner, 2026-10-12).
+Of the 3,280 pins, 193 sit at the ministry's own coordinates, 54 at
+their town's center and 3 at the center of their 小字 (a named part of a
+town).
+
+**Names not shown** - 3 pins whose trade name is the operator's own name
+show their permit type, and 1 pin whose published name is damaged shows its
+permit type.
+
+**Stations.** Every line with a station in the city is drawn, cut at the city
+line: JR East's Ou, Senzan and Aterazawa lines.
+- Left out: 7 stations beyond it, 2 in Kaminoyama, 2 in Tendō, 2 in Nakayama
+  and 1 in Yamanobe.
+- The Shinkansen is not drawn: the Yamagata Shinkansen's trains run over the
+  Ou Line's track, and Yamagata appears as a JR Ou Line station.
+
+### Kure - the national food filings alone, joined to MLIT's address blocks
+
+**Left out**
+- Barbers, beauty salons and laundries: the city publishes no list of them,
+  so this map shows food businesses only.
+- Every shop that is not a food shop: Japan has no general business license.
+- Shops that sell only packaged food, except where the national filings
+  include notifications.
+- Restaurant permits granted before June 2021 and still in force, which the
+  national filings do not hold (about one restaurant permit in eight).
+- 1,143 national filings whose filers did not publish an address. Of the
+  1,543 restaurant permits in term, 487 publish no address (about three in
+  ten).
+- 41 vehicle permits, 26 rows registered for a whole area rather than an
+  address (一円 and the like), and 30 street and festival stalls and other
+  temporary or mobile permits and filings.
+- 228 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other permit or notification types that are not a
+  counter.
+- 145 school, hospital and staff canteens, 36 vending machines, 11 mail-order
+  businesses, 28 entertainment venues, 27 premises inside hotels and inns, 9
+  caterers (仕出し; 3 of them also name a counter form) and 36 snack bars and
+  cabarets.
+- 7 permits that start after August 31, 2026, the last day the filings
+  cover.
+- 6 closed premises, which the national filings keep, marked.
+
+**Counted** - the national filings as downloaded on October 6, 2026: 1,543
+restaurant permits are in term on August 31, 2026, against 1,752 in the
+national count of March 31, 2025; 806 of them are restaurants at a fixed,
+published address and reach the Food service layer, about half (46%) of
+that count. Street stalls at a fixed pitch
+(屋台, 12) count as Food service. 24 of the 192 bakery, confectioner and deli
+rows (12.5%) have a trade name that reads as a factory; they are kept (owner,
+2026-09-24).
+
+**One pin per premises** - 170 repeat rows are shown once: several permits or
+notifications of one kind at one premises.
+
+**Not placed** - none. 167 pins (10.5%) sit at the ministry's own coordinates
+where the street block could not be found, 134 of them on the islands
+(Kurahashi, Ondo, Kamagari, Shimokamagari, Yutaka and Toyohama), where
+addresses are lot numbers MLIT's block file holds only in part. Another 22
+sit at their town's center, all on the islands.
+
+**Names not shown** - none on the map: no pin's trade name is its operator's
+own name. 2 pins with no trade name in the filings show their permit type.
+
+**Stations.** The one line with a station in the city, the JR Kure Line, is
+drawn, cut at the city line at both ends.
+- Left out: 3 stations beyond it, 2 in Saka and 1 in Higashihiroshima.
+
+### Kurashiki - the city's year-end food-permit list only, joined to MLIT's address blocks
+
+**Left out**
+- Barbers, beauty salons and laundries: the city publishes its barber and
+  beauty-salon lists under terms that do not allow reuse and no laundry
+  list, so this map shows food businesses only.
+- Every shop that is not a food shop: Japan has no general business license.
+- Food businesses that only notify the city rather than hold a permit, such
+  as many convenience stores and greengrocers: they are not in the list.
+- 657 permits registered for an area rather than an address (県内一円, across
+  the prefecture, or 倉敷市内一円, anywhere in the city), which are food
+  trucks and stalls: 608 restaurant permits, 19 fishmongers, 18
+  confectioners, 8 cafés, 2 butchers and 2 milk sellers. 4 more are
+  registered for a district at large.
+- 178 vending-machine permits: 87 for machines that prepare food
+  (調理の機能を有する自動販売機) and 91 licensed before June 2021 that the
+  list marks only in its form column (自動販売形態: 75 café permits, 13
+  milk-sales permits and 3 restaurant permits).
+- 9 permits from before June 2021 for a facility built to be moved or taken
+  down (特殊形態), such as a stadium's concession stands, left out as
+  temporary businesses.
+- 239 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other types that are not a counter.
+
+**Counted** - every food permit in force on March 31, 2026 in the city's
+year-end list: 6,288 rows, 6,161 permits, 4,619 of them restaurant permits,
+against 4,653 in the national count of March 31, 2025; 4,008 restaurant
+permits are at a fixed address. The list is published once a year and
+closures after its date are not published, so the count is an upper bound.
+Permits granted since June 2021 carry no form of business, so convenience
+stores, supermarkets, canteens, hotel restaurants and snack bars that hold a
+restaurant permit count as Food service. 27 of the 637 bakery, confectioner
+and deli premises (4.2%) have a
+trade name that reads as a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 127 permits from before June 2021 that were
+renewed under the same number are listed twice and shown once, the renewed
+permit kept. 259 more repeat rows are shown once: several permits of one
+kind at one premises.
+
+**Not placed** - none. 589 pins (12.2%) sit at their town's center, where
+the address is a lot number in a large rural district (大字) that MLIT's
+block file does not hold.
+
+**Names not shown** - 4 pins whose trade name is the operator's own name
+show their permit type. So do 23 pins the list itself records without a
+name (＊＊＊) and 9 with a blank name.
+
+**Stations.** The Mizushima Rinkai Railway's Mizushima Main Line is drawn
+whole; JR West's Sanyo, Seto-Ohashi, Hakubi and Uno Minato lines and the
+Ibara Railway's Ibara Line are cut at the city line.
+- Left out: 14 stations beyond it, 6 in Okayama, 2 in Hayashima, 2 in
+  Asakuchi, 2 in Soja, 1 in Tamano and 1 in Yakage.
+- The Shinkansen is not drawn; Shin-Kurashiki stays a JR Sanyo Line station.
+- The JR Hakubi Line and the JR Uno Minato Line each have one station inside
+  the city (Kurashiki and Chayamachi) and are drawn as cut.
+<!-- internal -->
+The two forms are read by shared code since 2026-10-12 (calls S17 and S18,
+japan_eigyo.FORM_RULES); the counts above were re-measured that day: 4,815
+pins, 89 fewer.
+<!-- /internal -->
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering
