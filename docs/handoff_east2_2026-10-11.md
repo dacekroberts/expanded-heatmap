@@ -81,11 +81,24 @@ unless marked ASSERTED.
   Narita). Nothing collides today; the next map that draws two of them
   together moves one.
 
-## Open for the owner and Cleanup
+## Settled by the owner, and what is left for Cleanup
 
-The parked calls in the drafts file, in order of weight: Kawaguchi B (glyphs,
-holds its landing), Kawaguchi A (late-start renewals), Funabashi A (Keiyo
-against Musashino, a built city's line), the station-name spellings,
-Kawaguchi C (the Saitama Stadium Line's name). Also for review time: the
-proposed page sentences listed there, the credit titles of notices 187 and
-188, and the label checks at 343 px for the ten-line Funabashi map.
+The owner answered every parked call on 2026-10-11 (the drafts file, "The
+owner's answers to the parked calls" and the follow-up under it):
+
+- **For Cleanup, accepted and not on this branch:** `glitched_name` treats a
+  private-use code point as glitched (Kawaguchi B; Kawaguchi does not land
+  until this does); a late start whose first-permit date is on or before the
+  as-of is a renewal and stays (Kawaguchi A; about 100 more pins there, its
+  page and docs figures re-read then); the JR Keiyo Line moves to #C81000
+  (the owner's choice; the dark-mode label check is not yet run, and the
+  registry still holds #F86040).
+- **Done on this branch:** Kawaguchi's line is labelled "Saitama Rapid
+  Railway Line".
+- **Left as they are:** the station names OpenStreetMap spells its own way
+  (Bay Side Station, Chikucenter).
+
+Still for review time: the proposed page sentences listed in the drafts file,
+the credit titles of notices 187 and 188, the browser map checks (Ichihara's
+opening view, the ten-line Funabashi map's labels at 343 px), and the master
+list's built counts, which Staging moves after landing.
