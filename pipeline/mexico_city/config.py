@@ -298,17 +298,28 @@ MEXICO_CITY_BBOX = {
 # Place search (batch 3, the size tests, 2026-10-11): pipeline/place_index.py
 # builds app/static/places/mexico_city.json from the caches place_index_fetch.py
 # writes. The search area is the map's: Ciudad de Mexico, relation 1376330 (admin_level 4, ISO3166-2 MX-CMX; the one OSM_BOUNDARY_JSON holds),
-# confirmed by id 2026-10-11. Overpass area id = 3600000000 + relation id.
-PLACE_AREA = "(id:3601376330)"
+# confirmed by id 2026-10-11, AND the four State of Mexico municipios the
+# regional map reaches (MUNICIPIOS above), by the admin_level 6 relations
+# OSM_MUNICIPIOS_JSON holds, each matched on INEGI:MUNID: Ecatepec de Morelos
+# 5605754, Nezahualcoyotl 5606086, La Paz 5605964, Naucalpan de Juarez
+# 5606080. The index first landed cut to Ciudad de Mexico alone, and the 11
+# stations in the four had 0 or 1 places within 1 km (owner, 2026-10-12;
+# check H of check_place_search.py now refuses that). Overpass area id =
+# 3600000000 + relation id.
+PLACE_AREA = "(id:3601376330,3605605754,3605606086,3605605964,3605606080)"
 # NEW file names: data/ is shared by every worktree.
-PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-11.json"
-PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-11.json"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
 # The local language of OSM's names here: Spanish.
 PLACE_LANGUAGES = ("es",)
 PLACE_FOLD = None
 # Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
 # places, each with why; scripts/check_place_search.py fails on any other.
 PLACE_REVIEWED = {
+    # Ecatepec, from the wider area of 2026-10-12: OSM ways 777821685 (name) and
+    # 168525171, 848582662 (alt_name), all highway=residential.
+    "Calle Estacionamiento": "a street's own name, residential class (the service-class ways of the same name are dropped by rule)",
+    "G. Canal": "a residential street whose alt_name is Calle Estacionamiento, a street's own name",
     "Cerrada 1 Estacionamiento Santo Tomás": "a street's own name in a housing unit (a cerrada named for the car park it serves), residential class",
     "Cerrada 1 Estacionamiento Vista Hermosa": "a street's own name in a housing unit (a cerrada named for the car park it serves), residential class",
     "Cerrada Estacionamiento": "a street's own name in a housing unit, residential class",
@@ -319,6 +330,53 @@ PLACE_REVIEWED = {
 # OSM objects a reading by eye found to be a business or a home that no rule
 # in place_index.py catches, each with why (place_index.build, `dropped`).
 PLACE_DROPPED = {
+    # From the read of the 1,240 rows the wider area added (the place-read agent, 2026-10-12): every id
+    # printed its cached name first. Each under a settled call (the skill's "owner's calls").
+    "way/558121084": "residents-only parks of a housing complex, by the mapper's own description",
+    "way/544603168": "a condominium's numbered green tagged a park",
+    "way/906659808": "a condominium's numbered green tagged a park",
+    "way/558126092": "a house under a family's name tagged a park",
+    "node/13581286261": "a condominium-tower brand tagged a neighbourhood",
+    "node/13581286471": "a gated residential brand tagged a neighbourhood",
+    "node/13581286507": "a gated residential brand tagged a neighbourhood",
+    "node/13588750504": "a residential-complex brand tagged a neighbourhood",
+    "relation/10542712": "a religious residence tagged a place of worship, not notable",
+    "way/802738147": "a shopping mall tagged a park",
+    "node/5338531394": "a travel agency tagged a park",
+    "node/13585104659": "a private sports club tagged a neighbourhood",
+    "node/6936086418": "a sports club with opening hours tagged a park",
+    "way/545099518": "a well named for the chain store beside it",
+    "node/12574189307": "a minibus route's office tagged a station",
+    "node/6237356685": "a person's name alone on a monument node",
+    "node/10203187281": "a mapper's comment as a name",
+    "node/9969120518": "a mapper's comment as a name",
+    "way/555585757": "an address as a name",
+    "way/1350986475": "a block and lot number as a name",
+    "way/680999072": "a description: a garden on an unnamed cul-de-sac",
+    "node/6377133599": "a description: the same garden's node",
+    "way/1038945277": "a description: an exercise area",
+    "way/1038945276": "a description: a play area with tables",
+    "way/550890540": "a description: a green area with walkways",
+    "way/628362796": "a description: a bridge with a park",
+    "way/550775492": "a description: a kiosk and park",
+    "way/549459849": "two type words as a name",
+    "way/777204260": "a works area named for its use",
+    "node/5320713767": "a bench with a palm tagged a place of worship",
+    "node/6936071700": "a cemetery gate tagged a place of worship",
+    "node/5371263214": "water tanks tagged a park",
+    "way/584498564": "a description: a street corner",
+    "way/557195869": "a description: football pitches",
+    "node/5320852853": "a chapel named only for the market beside it",
+    "node/13690861201": "a wrong object: an animal's name on a castle node",
+    "way/550763786": "a former aid-post building tagged a place of worship",
+    "node/5320759161": "a monument tagged a place of worship",
+    "way/396783684": "a church's plot, words run together; the church is its own row",
+    "node/6051688640": "a misspelled duplicate of the park's own row",
+    "node/5320860500": "a locality's name with a number on a church",
+    "node/13684009152": "not a word; a wrong name",
+    "way/550932648": "a misspelled type word as a name",
+    "node/6051688644": "a node duplicate of the garden's own row",
+    "node/6051688636": "a node duplicate of the garden's own row",
     # From the read of every landmark and place (the place-read agent, batch 3, 2026-10-11), each id checked against its cached name.
     "way/469208590": "a condominium-tower brand's building tagged a neighbourhood",
     "way/465106032": "a condominium-tower brand's building tagged a neighbourhood",

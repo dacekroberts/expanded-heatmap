@@ -67,10 +67,8 @@ if hasattr(sys.stdout, "reconfigure"):
 # H: a city whose index is known not to reach its whole map, with the date
 # and the reason. A dated defect, not a pass; an entry whose city has no gap
 # left fails, so the list only shrinks.
-KNOWN_GAPS = {
-    "mexico_city": "2026-10-12: the index is cut to Ciudad de Mexico, the map is regional; rebuilt in "
-                   "the search rollout's first wave (owner; PLAN.md)",
-}
+# Empty since Mexico City's index was rebuilt for its regional map, 2026-10-12.
+KNOWN_GAPS = {}
 
 
 def check_coverage(slug, index, stations, known=None):

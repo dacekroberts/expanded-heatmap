@@ -319,6 +319,61 @@
    "open_namesake_in_index": true,
    "cache": "2026-10-08",
    "noted": "2026-10-11"
+  },
+  {
+   "city": "mexico_city",
+   "line": "Tren ligero Texcoco-La Paz",
+   "line_source": "tag: network on the station node",
+   "name": "La Paz",
+   "osm": "node/13555578357",
+   "tag": "proposed=yes",
+   "open_namesake_in_index": true,
+   "cache": "2026-10-12",
+   "noted": "2026-10-12"
+  },
+  {
+   "city": "mexico_city",
+   "line": "Tren ligero Texcoco-La Paz",
+   "line_source": "tag: network on the station node",
+   "name": "Panteón Coaxusco",
+   "osm": "node/13555578358",
+   "tag": "proposed=yes",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-12",
+   "noted": "2026-10-12"
+  },
+  {
+   "city": "mexico_city",
+   "line": "Tren ligero Texcoco-La Paz",
+   "line_source": "tag: network on the station node",
+   "name": "Magdalena Atlicpac",
+   "osm": "node/13555578359",
+   "tag": "proposed=yes",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-12",
+   "noted": "2026-10-12"
+  },
+  {
+   "city": "mexico_city",
+   "line": "Tren ligero Texcoco-La Paz",
+   "line_source": "tag: network on the station node",
+   "name": "Conalep Los Reyes",
+   "osm": "node/13555578360",
+   "tag": "proposed=yes",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-12",
+   "noted": "2026-10-12"
+  },
+  {
+   "city": "mexico_city",
+   "line": "Tren ligero Texcoco-La Paz",
+   "line_source": "tag: network on the station node",
+   "name": "Hospital Materno Infantil",
+   "osm": "node/13555578361",
+   "tag": "proposed=yes",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-12",
+   "noted": "2026-10-12"
   }
  ]
 }

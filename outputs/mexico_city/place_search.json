@@ -1,7 +1,7 @@
 {
   "index": "app/static/places/mexico_city.json",
-  "places": 129413,
-  "data_retrieved": "2026-10-11",
+  "places": 192418,
+  "data_retrieved": "2026-10-12",
   "languages": {
     "local": [
       "es"
@@ -15,5 +15,31 @@
       "Spanish"
     ]
   },
-  "stations_not_open": []
+  "stations_not_open": [
+    {
+      "osm": "node/13555578357",
+      "name": "La Paz",
+      "tag": "proposed=yes"
+    },
+    {
+      "osm": "node/13555578358",
+      "name": "Panteón Coaxusco",
+      "tag": "proposed=yes"
+    },
+    {
+      "osm": "node/13555578359",
+      "name": "Magdalena Atlicpac",
+      "tag": "proposed=yes"
+    },
+    {
+      "osm": "node/13555578360",
+      "name": "Conalep Los Reyes",
+      "tag": "proposed=yes"
+    },
+    {
+      "osm": "node/13555578361",
+      "name": "Hospital Materno Infantil",
+      "tag": "proposed=yes"
+    }
+  ]
 }

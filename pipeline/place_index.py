@@ -1418,15 +1418,25 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             # Tours - Michigan Avenue", Chicago, 2026-10-08): no station.
             report["station_skipped_not_rail"] += 1
             continue
+        lifecycle = next((f"{k}={t[k]}" for k in ("proposed", "construction") if t.get(k) == "yes"), None) \
+            or next((f"{k}={t[k]}" for k in ("proposed:railway", "construction:railway",
+                                             "proposed:public_transport", "construction:public_transport")
+                     if t.get(k)), None)
         if (t.get("public_transport") == "station"
-                and t.get("railway") in ("construction", "proposed", "disused", "abandoned", "razed")):
+                and (t.get("railway") in ("construction", "proposed", "disused", "abandoned", "razed")
+                     or lifecycle)):
             # Busan's seven light-rail stations under construction carry
             # public_transport=station already (2026-10-08): not yet a
             # station. Stations only: Prague's historic horse railway
-            # (railway=abandoned) is a landmark.
+            # (railway=abandoned) is a landmark. The lifecycle tags are read
+            # too: five proposed stops of the Texcoco-La Paz light rail carry
+            # railway=prpopsed, a typo no list of values holds, beside
+            # proposed=yes and proposed:railway=stop (Mexico City, 2026-10-12).
             report["station_skipped_not_open"] += 1
-            not_open.append({"osm": f"{e['type']}/{e['id']}", "name": names[0],
-                             "tag": f"railway={t['railway']}"})
+            tag = (f"railway={t['railway']}"
+                   if t.get("railway") in ("construction", "proposed", "disused", "abandoned", "razed")
+                   else lifecycle)
+            not_open.append({"osm": f"{e['type']}/{e['id']}", "name": names[0], "tag": tag})
             continue
         if t.get("emergency") == "designated" and (t.get("railway") or t.get("public_transport")):
             # A platform for emergency use only (Hong Kong's Light Rail
