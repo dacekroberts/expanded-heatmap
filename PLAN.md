@@ -315,9 +315,9 @@ Detail files: [japan](docs/plan_detail/japan.md),
 
 - [~] **This week (from the 2026-10-11 reset), the final scoped adds (owner,
   2026-10-11):** phase 2, the last build wave; place search batch 3
-  alongside it; the site's partial Travel view, which waits on the owner's
-  go-live call and hosting (the basemap branch's resume note, five
-  blockers). Nothing else new (the freeze of 2026-10-08).
+  alongside it; the site's partial Travel view, LANDED 2026-10-12 with the
+  phase 2 re-render (`71b66bae`: the switch on in all 237 maps, packs at
+  `https://files.dacekroberts.dev`). Nothing else new (the freeze of 2026-10-08).
 
 - [ ] **A site-wide junk-name pass once the final batch lands** (owner,
   2026-10-08, via the place-search pilot): no dot shows an error value or

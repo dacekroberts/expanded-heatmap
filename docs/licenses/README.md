@@ -83,7 +83,7 @@ rewritten without notice, which is the reason this directory exists. What it
 changes is the **scope of an attribution the project already carries** - see
 `../data_sources.md`.
 
-### Brazil — screened 2026-09-23, none built yet
+### Brazil — screened 2026-09-23; nine cities built since (heading corrected 2026-10-12)
 
 | File | Source | Source URL | Retrieved |
 |---|---|---|---|

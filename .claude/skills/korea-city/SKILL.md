@@ -178,8 +178,9 @@ filter landed with the Korea sweep: commit 8f0471c9 is on `origin/master`
 
 ## Notices and the Visuals card hold
 
-- **Notice 68, Small Enterprise and Market Service** (`docs/data_sources.md`
-  lines 2246-2264): PERMITTED WITH CONDITIONS, 이용허락범위 제한 없음. Display a
+- **Notice 68, Small Enterprise and Market Service** (`docs/data_sources.md`,
+  under "Notices this project MUST display when published"; find it by its
+  number, line numbers drift): PERMITTED WITH CONDITIONS, 이용허락범위 제한 없음. Display a
   source credit (no wording prescribed) and state the categories and counts
   as this project's; never present them as SEMAS's, or the data as accurate
   or complete on SEMAS's behalf.

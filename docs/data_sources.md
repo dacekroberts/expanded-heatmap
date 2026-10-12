@@ -5313,10 +5313,13 @@ as written; this list is the correction.
 - **Sources with no licence on record**: 13 of 16 show one on the
   publisher's page today (the rows marked "none recorded" in the positions
   file's hand-count table).
-- **Stale pointers, not yet fixed**: line references in the `korea-city`
-  skill and `docs/licence_positions.md`; `docs/licenses/README.md` on which
-  French and Brazilian cities are built; Monterrey's map PDF has no source
-  row; the US Census geocoder's rows disagree.
+- **Stale pointers, fixed 2026-10-12**: the `korea-city` skill's line
+  reference to notice 68 (now by name); a dated note at the head of
+  `docs/licence_positions.md`, whose line references are left as written;
+  Brazil's heading in `docs/licenses/README.md` and the opening of
+  `docs/licenses/france-required-notices.md`; a source paragraph for
+  Monterrey's map PDF in `docs/data_sources/mexico.md`; the US Census
+  geocoder's row in `docs/data_sources/united-states.md`.
 
 ## Gaps
 
