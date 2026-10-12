@@ -6764,6 +6764,13 @@ REGION_FIT_NOTE = {"Kyushu-Okinawa": "Naha is south of this view; pan down to se
 # phone canvas and check_macro_labels.py reports PROBLEMS 0; Hyogo needs
 # Amagasaki's label above and right of its dot (else Itami is labelled in no
 # view). Osaka Prefecture at 9.5 already holds all 6.
+# Chugoku 6.0 (owner, 2026-10-12, the phase 2 landing's deploy check): at 6.6
+# a phone's canvas held 6 of the 8 cities, Tottori (new) and Shimonoseki off
+# it. At 6.0 all eight dots are on it; Shimonoseki's pill is clipped 26.6 px
+# and Tottori's 5.9 px at 375, nothing at 768 or 1200, PROBLEMS 0. At 5.8
+# Kure's pill grazes Hiroshima's marker. The three label offsets set for
+# Chugoku at 6.6 (Okayama, Fukuyama, Kurashiki) still place at 6.0;
+# re-measure them if this zoom changes.
 # Chiba Prefecture 9.25 (2026-10-12, the phase 2 landing's deploy check): at
 # 9.5, pinned before its seven cities were built, Matsudo's dot sat 5 px above
 # the 460 px canvas and Ichihara's 5 px below it at every width. At 9.25 all
@@ -6772,7 +6779,7 @@ REGION_FIT_NOTE = {"Kyushu-Okinawa": "Naha is south of this view; pan down to se
 # 9.0 Sakura's pill is clipped 4.1 px on a phone.
 REGION_ZOOM = {"France North": 5.0, "France South": 5.0, "Benelux": 6.25,
                "Tokyo Metropolis": 9.0, "Saitama Prefecture": 9.0, "Chiba Prefecture": 9.25,
-               "Hyogo Prefecture": 8.25, "Osaka Prefecture": 9.5, "Kansai": 7.5, "Chugoku": 6.6}
+               "Hyogo Prefecture": 8.25, "Osaka Prefecture": 9.5, "Kansai": 7.5, "Chugoku": 6.0}
 
 # Global is every region that is not itself a composite, derived rather than
 # listed so a new region joins it without an edit here.
