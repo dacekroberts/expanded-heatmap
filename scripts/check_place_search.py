@@ -40,11 +40,18 @@ index step measures each language's share of the places
      and the date it was checked, and was checked within
      place_index.VISITABLE_MAX_DAYS: a lapsed entry fails until re-checked
      or removed (owner, 2026-10-08: visitable only, kept up to date).
+  H. The index reaches the whole map (owner, 2026-10-12): every station the
+     map draws has an indexed place within place_index.COVER_KM. Mexico
+     City's index landed cut to the city proper under a regional map, so 11
+     stations on the map could not be found. Read from the city's processed
+     stations, so on a machine without data/ it is reported as not checked,
+     never as passed. KNOWN_GAPS holds a dated defect and may only shrink.
   A and D apply to the intersections file too (app/static/places/crossings/,
      since 2026-10-08): the index names it under its current hash, and it
      holds only [lat, lon, street, street] rows and the index's licence.
 """
 import hashlib
+import importlib
 import json
 import re
 import sys
@@ -56,6 +63,27 @@ from pipeline import place_index  # noqa: E402
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
+# H: a city whose index is known not to reach its whole map, with the date
+# and the reason. A dated defect, not a pass; an entry whose city has no gap
+# left fails, so the list only shrinks.
+KNOWN_GAPS = {
+    "mexico_city": "2026-10-12: the index is cut to Ciudad de Mexico, the map is regional; rebuilt in "
+                   "the search rollout's first wave (owner; PLAN.md)",
+}
+
+
+def check_coverage(slug, index, stations, known=None):
+    """H for one city: problems, given its index and its map's stations."""
+    known = KNOWN_GAPS if known is None else known
+    bare = place_index.uncovered_stations(index["rows"], stations)
+    if bare and slug not in known:
+        return [f"H: {len(bare)} map station(s) with no indexed place within {place_index.COVER_KM:g} km "
+                f"({', '.join(bare[:6])}): config.PLACE_AREA does not cover the whole map"]
+    if not bare and slug in known:
+        return ["H: listed in KNOWN_GAPS but every station is covered: delete the entry"]
+    return []
+
 
 TOP_KEYS = {"license", "city", "languages", "fold", "kinds", "rows", "crossings"}
 CROSS_KEYS = {"license", "city", "part_of", "rows"}
@@ -189,6 +217,7 @@ def pages_by_slug():
 
 def main():
     problems = {}
+    unread = []
     indexes = sorted((ROOT / "app" / "static" / "places").glob("*.json"))
     pages = pages_by_slug()
     searched = set()
@@ -225,6 +254,11 @@ def main():
         p += check_junk(index)
         p += check_leaks(slug, index)
         p += check_visitable(slug)
+        stations = place_index.map_stations(importlib.import_module(f"pipeline.{slug}.config"))
+        if stations is None:
+            unread.append(slug)
+        else:
+            p += check_coverage(slug, index, stations)
     for page in sorted((ROOT / "app" / "pages").glob("*.py")):
         if BULLET in page.read_text(encoding="utf-8"):
             problems.setdefault(page.name, []).append(
@@ -244,6 +278,11 @@ def main():
             summary = json.loads(place_index.summary_path(slug).read_text(encoding="utf-8"))
             print(f"  OK   {slug:14} {summary['places']:,} places; the page names "
                   f"{', '.join(summary['languages']['listed'])} {summary['languages']['coverage']}")
+    for slug in sorted(KNOWN_GAPS):
+        print(f"  GAP  {slug:14} H: {KNOWN_GAPS[slug]}")
+    if unread:
+        print(f"  H NOT CHECKED for {len(unread)} city(ies), no processed stations on this machine: "
+              f"{', '.join(unread)}")
     if failed:
         print(f"\n{len(failed)} place-search problem(s).")
         return 1
@@ -304,7 +343,20 @@ def selftest():
         got = len(check_visitable("x", visitable, today))
         ok += got == want
         print(f"  {'ok ' if got == want else 'BAD'} {label}: {got} problem(s)")
-    total = len(cases) + 1 + len(leak_cases) + 1 + len(junk_cases) + len(visit_cases)
+    near = [[2, 10.001, 20.001, "a street", "", 0]]
+    cover_cases = [
+        ("a station with a place beside it", near, [("A", 10.0, 20.0)], {}, 0),
+        ("a station past the index's edge", near, [("A", 10.0, 20.0), ("B", 10.3, 20.0)], {}, 1),
+        ("only another station nearby is no cover", [[0, 10.0, 20.0, "A", "", 0]], [("A", 10.0, 20.0)], {}, 1),
+        ("a known gap is reported, not failed", near, [("B", 10.3, 20.0)], {"x": "dated"}, 0),
+        ("a known gap that has closed", near, [("A", 10.0, 20.0)], {"x": "dated"}, 1),
+    ]
+    for label, rows, stations, known, want in cover_cases:
+        got = len(check_coverage("x", dict(base, rows=rows), stations, known))
+        ok += got == want
+        print(f"  {'ok ' if got == want else 'BAD'} {label}: {got} problem(s)")
+    total = (len(cases) + 1 + len(leak_cases) + 1 + len(junk_cases) + len(visit_cases)
+             + len(cover_cases))
     print(f"{ok} of {total} cases behaved as intended.")
     return 0 if ok == total else 1
 

@@ -125,6 +125,17 @@ def run(config):
     PLACE_FOLD; the slug and name come from city_of."""
     slug, _ = city_of(config)
     index, report = build_city(config)
+    stations = map_stations(config)
+    if stations is None:
+        print(f"  coverage: not checked (no {getattr(config, 'STATIONS_CSV', 'STATIONS_CSV')})")
+    else:
+        bare = uncovered_stations(index["rows"], stations)
+        if bare:
+            import sys
+            sys.exit(f"{len(bare)} station(s) on the {slug} map have no indexed place within "
+                     f"{COVER_KM:g} km: {', '.join(bare[:12])}. config.PLACE_AREA does not cover the "
+                     f"whole map (a regional map needs every municipality it draws): widen it, then "
+                     f"run: python pipeline/place_index_fetch.py {slug} --force")
     out = write(index, slug)
     cpath = crossings_path(slug)
     print(f"Wrote {out} ({out.stat().st_size:,} bytes, {len(index['rows']):,} places), "
@@ -1095,6 +1106,64 @@ def _square_keys(names):
                         .encode("ascii", "ignore").decode())
         if ws:
             out.add(tuple([SQUARE_ABBR.get(ws[0], ws[0])] + ws[1:]))
+    return out
+
+
+# THE INDEX REACHES THE WHOLE MAP (owner, 2026-10-12). Mexico City's index
+# landed cut to the city proper after its map became regional: the 11
+# stations in the four added municipios were on the map and not in the
+# search, with 0 or 1 indexed places within 1 km of each. The rule: every
+# station the map draws has at least one indexed place, other than a
+# station, within COVER_KM. Measured on the 19 indexes of 2026-10-12, the
+# emptiest covered stations hold 2 (Montreal's Anse-a-l'Orme), 3 (Kyoto's
+# Hozukyo and Kibuneguchi) and 4 (Busan's Seokdae), so zero is a boundary
+# cut and not a quiet station. Re-measure before raising the floor.
+# run() exits on it; scripts/check_place_search.py H re-reads it.
+COVER_KM = 1.0
+_STATION_COLS = (("latitude", "longitude"), ("lat", "lon"), ("stop_lat", "stop_lon"), ("lat", "lng"))
+
+
+def map_stations(config):
+    """[(name, lat, lon)] for the stations a city's map draws, from
+    config.STATIONS_CSV, or None when that file is not on this machine
+    (data/ is not committed). Exits on a file whose columns it cannot read,
+    since a coverage check that silently reads nothing is no check."""
+    import csv
+    import sys
+    path = getattr(config, "STATIONS_CSV", None)
+    if path is None or not Path(path).is_file():
+        return None
+    with open(path, encoding="utf-8", newline="") as f:
+        rows = list(csv.DictReader(f))
+    if not rows:
+        return []
+    cols = {c.lower(): c for c in rows[0]}
+    pair = next(((cols[a], cols[b]) for a, b in _STATION_COLS if a in cols and b in cols), None)
+    if pair is None:
+        sys.exit(f"{path}: no latitude and longitude columns among {list(rows[0])}; "
+                 f"add the pair to place_index._STATION_COLS")
+    name = cols.get("station") or cols.get("name") or cols.get("stop_name") or list(rows[0])[0]
+    return [(r[name], float(r[pair[0]]), float(r[pair[1]])) for r in rows]
+
+
+def uncovered_stations(rows, stations, km=None):
+    """Names of the stations with no index row, other than a station row,
+    within COVER_KM. rows are the index's ([kind, lat, lon, ...], kind 0 a
+    station); a 0.01 degree grid keeps it linear."""
+    km = COVER_KM if km is None else km
+    grid = {}
+    for r in rows:
+        if r[0] != 0:
+            grid.setdefault((math.floor(r[1] * 100), math.floor(r[2] * 100)), []).append((r[1], r[2]))
+    span = int(km / 1.0) + 2
+    out = []
+    for name, lat, lon in stations:
+        i0, j0 = math.floor(lat * 100), math.floor(lon * 100)
+        near = any(_dist_m((lat, lon), p) <= km * 1000.0
+                   for i in range(i0 - span, i0 + span + 1) for j in range(j0 - span, j0 + span + 1)
+                   for p in grid.get((i, j), ()))
+        if not near:
+            out.append(name)
     return out
 
 
