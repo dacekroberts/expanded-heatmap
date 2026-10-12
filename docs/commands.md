@@ -46,6 +46,8 @@ python scripts/measure_rail_backbone.py --osm <json> --relation <id> --municipio
 python scripts/check_deploy_imports.py [--ref REF]      # before ANY push touching app/
 node scripts/profile_zoom.mjs <baseUrl> <city,city> [reps]   # zoom lag
 node scripts/check_macro_attribution.mjs [baseUrl] [375,768,1200]   # front page OSM credit; live: <app>/~/+
+node scripts/check_travel_style.mjs <basemaps.js> [<TravelTrim.java>]   # Travel style hides removed features in every layer; trim lists match
+python scripts/check_travel_packs.py                    # the Travel table (pipeline/travel_packs.py) agrees with the built maps
 python scripts/decisions_index.py [--check]
 python scripts/rendered_surfaces.py [--write|--check]   # every surface the app renders -> docs/rendered_surfaces.md
 python scripts/downstream_changes.py <old> [<new>]       # after every push: what to tell Visuals and Analytics

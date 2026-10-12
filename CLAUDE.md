@@ -43,6 +43,8 @@ the bracketed anchor** - read it before relaxing a rule, not before obeying one.
 - Rail from OpenStreetMap, not GTFS -> `osm-rail`. Put a lesson where the next
   city must pass through it - a raising check in shared code, then a skill - not
   in a sibling city's comments. [#osm-rail]
+- Travel basemap (packs, the table, what a new city owes it) ->
+  `docs/travel_packs.md`.
 - Map opens at the wrong zoom -> `map-view`; verify with
   `scripts/check_map_view.js`, never a screenshot, live as well as locally. [#map-view]
 - More than one session at once -> `docs/session_roles.md`. [#session-roles]

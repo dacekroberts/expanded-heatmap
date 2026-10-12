@@ -850,6 +850,12 @@ batch at review time (`CLAUDE.md`, `publish-city`).
   table has the row and the city's `app/cities.py` entry has its three
   summary fields (Step 8). Check that the fields agree with the rows you just
   wrote.
+- **Place the city in the Travel table and build its pack**
+  (`docs/travel_packs.md`, "A new city: three things"): a line in
+  `pipeline/travel_packs.py` under its label language or in `ENGLISH_ONLY`,
+  its PMTiles pack, and a refresh of the upload folder.
+  `python scripts/check_travel_packs.py` (in `check_all.py`) fails until the
+  table line exists; nothing checks the pack, so do not stop at the line.
 - **Run `python scripts/check_provenance.py` and make it name your city OK.**
   This replaces confirming the rows by eye, because confirming by eye is what
   failed: the sentence below has been in this skill since the start, was
