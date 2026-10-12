@@ -2651,9 +2651,13 @@ _PLACE_SEARCH_TEMPLATE = r"""
             // halves, before North Damen Avenue's other crossings (Chicago,
             // 2026-10-08).
             if (pair && d.kind === "crossing" && pairHit(d, pair)) s -= 60;
-            if (streetQ && (d.kind === "street" || d.kind === "crossing" || d.kind === "junction")) s -= 45;
+            var streetD = d.kind === "street" || d.kind === "crossing" || d.kind === "junction";
+            if (streetQ && streetD) s -= 45;
             // And its own type first: "NE 45th St" is the Street, not the Court.
-            if (streetQ && d.hay.indexOf(" " + (STREET_TYPE[typeW] || ABBR[typeW] || typeW) + " ") >= 0) s -= 5;
+            // Streets only: given to every kind, it put the Lake Shore Drive
+            // Synagogue, a landmark holding the word "drive", 0.5 ahead of
+            // the Drive for "Lake Shore Dr" (Chicago, live, 2026-10-12).
+            if (streetQ && streetD && d.hay.indexOf(" " + (STREET_TYPE[typeW] || ABBR[typeW] || typeW) + " ") >= 0) s -= 5;
             // Whole words before parts: "Art Institute" before "Arturo ...".
             // An abbreviation counts as its whole word: "bd St-Laurent" is
             // Boulevard Saint-Laurent before Boulevard Laurentien (batch 2a).
