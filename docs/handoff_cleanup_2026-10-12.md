@@ -24,18 +24,37 @@ branch's drafts file.
     S1 lands.
   - `worktree-japan-kansai-2` `40af664c`: 7 cities and Cluj-Napoca, with the
     `romania-city` skill and `name_kind_extended()`.
-  - `worktree-japan-regional-2` `1e4690b1`: 11 cities. `check_all` 48 of 51
-    there (the master list's counts, two macro labels, the Okazaki and
-    Toyota red): all three are expected and are items below.
+  - `worktree-japan-regional-2` `75fa42ac`: 11 cities. `check_all` 49 of 51
+    there (the master list's counts, two macro labels): both expected,
+    both items below. S16 is DONE on this branch: a
+    `NEIGHBOUR_EXCEPTIONS` entry, with the Mikawa Line registered as
+    `meitetsu-mikawa-line` at the red Toyota's map already draws;
+    Toyota's config and map untouched.
   - `legend-dot-georgia` `16a68efe` (worktree `review-prep`), 57 behind
     master: needs the one full re-render.
-  - `place-search` `fe16ab93`, 233 behind master: batches 1 to 3, nineteen
-    cities, the watch file and its check. **Waits on the owner's phone test
-    of São Paulo, then London.** Its worktree was found missing on
-    2026-10-11 and re-added by the owner; the standing block on removing it
-    holds until place search has landed.
-  - `basemap` `82c0379f`: not part of this landing (its five blockers are
-    with the owner in its own session).
+  - `place-search` `498853e7` (2026-10-12; far behind master): batches 1
+    to 3, nineteen cities, the watch file and its check. **The owner's
+    phone test of São Paulo PASSED (2026-10-12, his word in that
+    session, relayed)**, and it covers London, the second largest (owner,
+    2026-10-12, in Cleanup's chat: "sao paulo covers london"), so place
+    search joins this landing. Its worktree was found missing on 2026-10-11 and re-added
+    by the owner; the standing block on removing it holds until place
+    search has landed. **Four owner calls to put at review time**
+    (owner: "open from earlier stuff goes to cleanup"; the branch's
+    PLAN, "Review time: the place search pilot"): (1) whether the
+    suggestions go live as they are, marked work in progress; (2) the
+    corner-credit test, the ODbL credit moved into the map's corner
+    credit; (3) the Cities menu out of the map, measured at 343 px with
+    the search box in place; (4) whether "Download this index" also
+    links the intersections file (ODbL 4.6). Back with the owner and not
+    built: stricter notability for monuments and galleries (measured to
+    remove about 420 rows, two well-known Seoul landmarks among them),
+    and a stronger station highlight on phones.
+  - `basemap` (tip `16acf351` on 2026-10-12, master merged in): the
+    site's partial Travel view. **The owner wants it finished (2026-10-12),
+    and its go-live call is his, made at review time** (its drafts,
+    2026-10-08). See "The basemap" below; an earlier version of this note
+    wrongly left it out of the landing.
 - **Each build branch has `docs/decisions_drafts/<branch>.md` and a handoff
   note.** Fold the drafts when the owner hands them off. S numbers are
   Staging's.
@@ -59,7 +78,17 @@ branch's drafts file.
    two differ). Then read notice 1's sentence, reported to stop at "Tachikawa
    and Hino", and bring it up to every Japanese city; that sentence renders,
    so its wording goes to the owner if no template covers it.
-4. **Shared-code changes, Cleanup's (S14)**, each with the Minato control
+4. **Shared-code changes, Cleanup's (S14). These go to master BEFORE the
+   build branches merge** (a pipeline-only push, no `app/` file, no
+   deploy), so step 2 above waits for them: Regional-2 re-runs
+   Kurashiki's steps 2 and 3 after S17 (and S18 if written) and deletes
+   Tottori's hook and re-runs Tottori after S19, on its own branch, and
+   asked for a message as each lands. **The owner's instruction
+   (2026-10-12): message Regional-2 when the changes land on master**: the
+   session titled "Regional-2 build session expanded-heatmap", one message
+   per push, naming the commit and which of S17, S18, S19 and call 182 it
+   carries. East-2 gets the same for S1 and S2 (Kawaguchi is held on S1).
+   Each with the Minato control
    (`screen_japan_join.py minato`, expect 98.0 / 0.2 / 1.8) and a Japan drift
    run through the gate (`--jobs 3`, about 5.3 GB; read
    `heavy_job.py status` first):
@@ -76,8 +105,17 @@ branch's drafts file.
    - Call 182: move Yamagata's permit-match name rule from
      `pipeline/yamagata/config.py` into `japan_step2`, find out why it flags
      3 rows where the brief counted 4, delete the city-local copy.
-   - S18: read Kurashiki's 8 特殊形態 pins and check them; a shared rule
-     only if one is needed, put to the owner.
+   - S18 (owner, 2026-10-12, in Regional-2's chat: "s18 yes treat as
+     temporary"; relayed, recorded in that branch's drafts): 特殊形態
+     joins `FORM_RULES` as a TEMPORARY form, set aside as 露天 is, in the
+     same edit as S17. Okayama City's page defines it as a facility meant
+     to be moved or removed; the prefecture's ordinance text was not
+     found. Kurashiki loses 8 pins (six stadium concession stands, one
+     market stall in two rows). 屋台 at a fixed pitch stays counted
+     (Fukuoka, Kure). Check whether a form rule is switchable per city or
+     universal before the drift run: no built Japanese city may move
+     unlisted. Then tell Regional-2, which re-runs Kurashiki (83 vending
+     pins and these 8 gone) and corrects its page's sentences.
 5. **Bucharest's name repair** (a privacy repair on a published map): call
    `name_kind_extended()` in Bucharest's step 2 so the 127 pins (93 names) of
    a given name beside one other word show their category. The "two or more
@@ -88,8 +126,7 @@ branch's drafts file.
    Tokyo's own JE literal switched to the registry; run the dark-mode label
    check, which nobody has run on this value (10.2 from the Keikyu Main Line
    on Tokyo; if the labels do not separate, moving Keikyu's red goes back to
-   the owner). A `NEIGHBOUR_EXCEPTIONS` entry with a note for Okazaki's
-   Meitetsu Nagoya Main Line and Toyota's Mikawa Line (S16). Osaka's three
+   the owner). S16's exception arrives with Regional-2's branch. Osaka's three
    lines renamed "Osaka Metro ..." as the registry has them.
    `scripts/check_line_identity.py` green.
 7. **Macro map (call 198):** place Minoh, Fuji and Kurashiki in a view; add
@@ -133,6 +170,52 @@ branch's drafts file.
       review").
     - At a later review time: Bucharest's address and name functions to a
       shared module.
+
+## The basemap (the site's partial Travel view)
+
+Read `docs/decisions_drafts/basemap.md` on the branch, the 2026-10-11
+entries first. As that file records:
+
+- **Built and switched off.** `pipeline/travel_packs.py` is one table for
+  every city, with `PACK_HOST` None, so every committed map is unchanged
+  (`check_render_current` 206 of 206 on the branch). Go-live is one line
+  and one re-render of the maps. `scripts/check_travel_packs.py` is in
+  `check_all`.
+- **Packs:** 192 `.pmtiles` in the main checkout's
+  `data/_basemap_build/host_upload_2026-10/` (1.9 GB, counted
+  2026-10-12), with `MANIFEST.csv`, the libraries and the glyphs. Nothing
+  is uploaded anywhere.
+- **Wording P1 to P6 approved** (owner, 2026-10-11); none applied: each
+  waits for the host's address. P5 goes into notice 1 beside CARTO's
+  sentence at go-live, with its "keeps no record" clause confirmed
+  against the chosen host's log settings.
+
+**What is left, in order:**
+
+1. **The owner's:** a Cloudflare account and the host (R2 behind an owned
+   domain against the free Worker, compared live); the upload; the
+   go-live call. Claude creates no account and enters no credential.
+2. **The missing packs.** 206 cities and 192 packs: the basemap session
+   names the 14 and why. Phase 2's 30 cities each need a pack and a row in
+   the Travel table or `ENGLISH_ONLY`: **the pre-push check fails on the
+   merged tree until each new city is placed**, by design. A pack build is
+   a heavy job (about 4 GB, 2 to 2.5 min; three lanes at most, one gate
+   slot left free); a new Geofabrik extract is the owner's download.
+3. **Merge order:** `basemap` changes `pipeline/map_common.py` (five
+   conflicts with master resolved on the branch, both sides kept). Merge
+   it into the integration worktree BEFORE writing S1 and the phone
+   legend, which edit the same file.
+4. **One re-render, not two.** If the host is ready before step 10 of the
+   order, set `PACK_HOST` first and the one full re-render carries the
+   Travel switch. If it is not, land with the switch off (maps unchanged)
+   and say plainly to the owner that go-live then costs a second full
+   re-render.
+5. **At go-live:** the license rows in `docs/data_sources.md` (Protomaps
+   BSD-3, the tiles an ODbL produced work, Noto OFL with its trademark
+   line, Cloudflare), the notice wording, deploy-verify `scope:
+   map-chrome` with the Travel switch opened on a phone-width map,
+   `scripts/check_map_attribution.js` at more than one height (a new tile
+   source must show its own attribution), and the drafts fold.
 
 ## Approved wording
 
