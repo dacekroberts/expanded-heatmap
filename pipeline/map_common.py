@@ -28,6 +28,7 @@ import pandas as pd
 from folium.plugins import HeatMap, FastMarkerCluster
 from folium.template import Template
 
+from pipeline import travel_packs
 from pipeline.linecolour import check_line_colours, contrast_ratio, dark_label_colours, label_colours
 from pipeline.taxonomies import (CATEGORY_BUCKETS, MEANING_COLOURS, load_taxonomy_module,
                                  pin_colours, pin_outline)
@@ -4206,6 +4207,11 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
             stations=stations, lines=lines, crs_geographic=crs_geographic,
             crs_projected=crs_projected, center=center, zoom=zoom, lang=lang,
             names=names, **full_travel)
+
+    # The Travel switch for every city comes from one table, switched off
+    # (None) until a pack host is set there; a city's own open_basemap wins.
+    if open_basemap is None:
+        open_basemap = travel_packs.for_city(Path(output_path).parent.name)
 
     taxonomy = load_taxonomy_module(taxonomy_system)
 

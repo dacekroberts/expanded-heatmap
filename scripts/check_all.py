@@ -79,6 +79,7 @@ CHECKS = [
     ["scripts/check_stray_bullets.py"],
     ["scripts/check_stray_bullets_selftest.py"],
     ["scripts/check_theme_sync.py"],
+    ["scripts/check_travel_packs.py"],
     ["scripts/decisions_index.py", "--check"],
     ["scripts/downstream_changes.py", "--selftest"],
     ["scripts/drift_check_selftest.py"],
