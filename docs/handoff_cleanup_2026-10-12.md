@@ -252,16 +252,18 @@ construction is not listed until it opens."
 - **`docs/licence_positions.md` row 2.10 names 12 MHLW cities; at least 28
   read MHLW's filings** (27 configs name the download, and Tokyo). Left for
   the audit, which counts every source.
-- **Naha is not in this landing** (Staging's relay of the owner's answers,
-  2026-10-12, S30, S33, S35; not heard in Cleanup's chat): Band B, food
-  only, brief `docs/build_briefs/naha.md` on `worktree-staging` (not
-  pushed), no build session assigned. When it is built: mode `light_rail`,
-  region Kyushu-Okinawa, and the macro view's fit is Cleanup's at that
-  landing. Its brief lists six shared-code items a build would need (a
-  reader argument on `rebuilt_register`; unnamed header columns in
-  `xlsx_rows`; `NAME_COLS` 営業所名所; `TYPE_COLS` 営業所種類 and
-  営業の種目; `VARIANTS` 壼; config keys). None is written; they are
-  Cleanup's only once a build is assigned.
+- **Naha is in phase 2** (owner, 2026-10-12, in Cleanup's chat: "naha
+  should get built as part of phase 2"; DECISIONS, that date). Band B,
+  food only, mode `light_rail`, region Kyushu-Okinawa, the macro view's
+  fit Cleanup's at the landing (Staging's relay of S30, S33, S35). Brief
+  `docs/build_briefs/naha.md` on `worktree-staging`. Expect 31 cities
+  from phase 2 and 237 on the site, wherever this note says 30 and 236.
+  Its five shared-code items (a reader argument on `rebuilt_register`;
+  unnamed header columns in `xlsx_rows`; `NAME_COLS` 営業所名所;
+  `TYPE_COLS` 営業所種類 and 営業の種目; `VARIANTS` 壼) are Cleanup's
+  and go to master before its build starts: check `git log` for them
+  before assuming either way. The build session and its timing are
+  Staging's plan.
 - **Toulouse and Rennes:** whether step 1's name-level fallback fired; one
   read-only step 1 run per city.
 - **Five unverified leads** from the PLAN cleanup pass (DECISIONS,

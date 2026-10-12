@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**197 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**198 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-12**
 
+- [Naha joins phase 2 (owner); its reader changes to shared code are Cleanup's, ahead of the build](#2026-10-12---naha-joins-phase-2-owner-its-reader-changes-to-shared-code-are-cleanups-ahead-of-the-build)
 - [Before the phase 2 landing: seven owner calls, and the landing handoff written](#2026-10-12---before-the-phase-2-landing-seven-owner-calls-and-the-landing-handoff-written)
 
 **2026-10-11**
@@ -249,6 +250,32 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-10-12 - Naha joins phase 2 (owner); its reader changes to shared code are Cleanup's, ahead of the build
+
+- **Decided by the owner in Cleanup's chat, 2026-10-12: "naha should
+  get built as part of phase 2".** Until then Naha had a brief and no
+  build session: Staging's relay the same day gave it as Band B, food
+  only (S30), mode `light_rail` (S33), region Kyushu-Okinawa with the
+  macro view's fit left to Cleanup (S35), and the brief
+  (`docs/build_briefs/naha.md` on `worktree-staging`, not pushed) said
+  a build waited for the owner's go. Those three answers were given in
+  Staging's chat and are recorded here as relayed.
+- **What follows.** Phase 2 becomes 31 cities and the expected count
+  after the landing 237, to be read from `app/cities.py` and not from
+  this entry. Which session builds it, and when, is Staging's plan and
+  the owner's go; three build sessions is still the ceiling.
+- **Shared code.** The brief (read on the branch, its section "Shared
+  code") lists five changes a build needs and measured each on the
+  unchanged readers: a reader or rows argument on
+  `japan_register.rebuilt_register`; unnamed header columns in
+  `xlsx_rows` (3,405 rows whose form column has no header); `NAME_COLS`
+  without 営業所名所 (86 rows); `TYPE_COLS` without 営業所種類 and
+  営業の種目 (84 in-term rows); `VARIANTS` without 壼 for 壺 (2 rows).
+  The sixth item is the city's own config. Shared code is Cleanup's
+  (S14), so these are written by Cleanup and go to master before the
+  build starts, with the Japan drift run showing no built city moved.
+- **Not measured by Cleanup:** every figure above is the brief's.
 
 ### 2026-10-12 - Before the phase 2 landing: seven owner calls, and the landing handoff written
 
