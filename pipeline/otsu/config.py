@@ -221,3 +221,11 @@ OTSU_BBOX = {
     "lon_max": OSM_BBOX[3],
 }
 CITY_BBOX = OTSU_BBOX
+
+# Trade names read by eye as a person's own name, or a shop word and a
+# person's full name (owner, 2026-10-12: the sweep of every Japanese city,
+# borderline readings included). KEYS, never names (pipeline/name_keys.py,
+# over japan_register._name_key of the name).
+PERSON_NAMED = (
+    "9bccfc3f2edcfddb",
+)

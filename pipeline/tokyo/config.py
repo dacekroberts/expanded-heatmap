@@ -643,4 +643,6 @@ PERSON_NAMED = (
     "32e0a8a81fde2ae4",
     "69369885b06cb82a",
     "3f70b7d079cbd22b",
+    # the second read, labels with a hiragana part (2026-10-12)
+    "c3d6b30f9452cfef",
 )

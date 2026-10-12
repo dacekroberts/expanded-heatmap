@@ -20,10 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**77 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**78 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-12**
 
+- [Japanese maps: a name with a lost character shows its permit type; Kurashiki's number-only names; 7 more names from the second read](#2026-10-12---japanese-maps-a-name-with-a-lost-character-shows-its-permit-type-kurashikis-number-only-names-7-more-names-from-the-second-read)
 - [The name sweep of every Japanese city: 15 more trade names withheld by key; check I guards the search index path](#2026-10-12---the-name-sweep-of-every-japanese-city-15-more-trade-names-withheld-by-key-check-i-guards-the-search-index-path)
 - [Place search never loaded its index on the deployed site; four personal names withheld by eye in Kanazawa and Fujisawa](#2026-10-12---place-search-never-loaded-its-index-on-the-deployed-site-four-personal-names-withheld-by-eye-in-kanazawa-and-fujisawa)
 - [After the landing: Mexico City's index rebuilt, the label batch as measured, four delegated scripts reviewed, and the owner's calls of the day](#2026-10-12---after-the-landing-mexico-citys-index-rebuilt-the-label-batch-as-measured-four-delegated-scripts-reviewed-and-the-owners-calls-of-the-day)
@@ -115,6 +116,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 <!-- INDEX:END -->
 
 ## Changes
+
+### 2026-10-12 - Japanese maps: a name with a lost character shows its permit type; Kurashiki's number-only names; 7 more names from the second read
+
+- **A trade name the publisher's file damaged is not shown, and not repaired** (owner: "1. yes, show the few real names and devise a way to preserve those"). The publishers' exports write a half-width question mark for a character their encoding does not hold (an accented letter, a variant kanji at a chain's head). `japan_register.lost_character()` reads a half-width mark touching a character outside ASCII, or U+FFFD, as lost; `japan_step2.run()` shows the permit type. 1,028 rows in 30 cities (Osaka 444, Kobe 225, Tokyo 130, Yamagata 25, Kawasaki 23, Nagasaki 23, Tachikawa 21). **Real marks are kept three ways**: an interrobang ("!?", "?!") is set aside before the test, a full-width mark never matches, and `config.NAME_MARK_REAL` names a trade name read by eye as real (a stale entry stops the step). Of the 28 names whose mark closes the name or follows "!", one was real, a Yokohama shop's interrobang, which the rule keeps by itself; the other 27 end where a character was dropped. `NAME_MARK_REAL` is empty everywhere. Rejected: repairing names from the chain's known spelling, which the owner ruled out for place names on 2026-10-11.
+- **A number alone stays a name, except in Kurashiki** (owner: "leave them besides kurashiki if there's a good reason for those to be wiped specifically"). 530 shown names in 70 cities are a number alone; many are a bar's real sign. Kurashiki's 25 are codes: runs of consecutive five-digit numbers (47721 and 47722; 47845, 47847 and 47848), 24 of them restaurant permits, a nursery school's and a student dormitory's kitchens among the addresses. `config.NUMERIC_NAME_IS_CODE` shows their permit type.
+- **The second read** (owner: "3. yes read"): the 1,293 labels whose second part holds hiragana or a longer kanji run. 7 more withheld by key under the same ruling, borderline included: one clear full name (Osaka), four where a shop or place word is followed by a person's full name (Otsu, Tachikawa, Tokyo, Kyoto), two borderline (Osaka, Kobe). The day's total: 26 trade names in 13 cities. After the re-runs no shown name in any of the 94 maps carries a lost character or matches a key.
 
 ### 2026-10-12 - The name sweep of every Japanese city: 15 more trade names withheld by key; check I guards the search index path
 

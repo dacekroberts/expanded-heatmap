@@ -220,4 +220,6 @@ CITY_BBOX = TACHIKAWA_BBOX
 # names (pipeline/name_keys.py, over japan_register._name_key of the name).
 PERSON_NAMED = (
     "dd4c7158951b4b72",
+    # the second read, labels with a hiragana part (2026-10-12)
+    "7a77f134c4c8a703",
 )

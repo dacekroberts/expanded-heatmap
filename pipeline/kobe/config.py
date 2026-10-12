@@ -251,4 +251,6 @@ CITY_BBOX = KOBE_BBOX
 # names (pipeline/name_keys.py, over japan_register._name_key of the name).
 PERSON_NAMED = (
     "ec08a0165981e045",
+    # the second read, labels with a hiragana part (2026-10-12)
+    "5a755b9787b3505a",
 )

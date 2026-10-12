@@ -713,8 +713,30 @@ def run(config, write=True):
 
     # --- the name rule --------------------------------------------------------------
     hidden = df["name_is_operator"]
+    # A NAME THE PUBLISHER'S FILE DAMAGED IS NOT SHOWN (owner, 2026-10-12; no
+    # glitched name goes live, and none is repaired): jr.lost_character().
+    # Measured on the 94 maps of this step: 1,029 rows in 30 cities (Osaka
+    # 444, Kobe 225, Tokyo 130). A real mark read by eye is kept by naming
+    # the trade name in config.NAME_MARK_REAL (a trade name, not a person's).
+    kept = set(getattr(config, "NAME_MARK_REAL", ()))
+    lost = df["name"].map(jr.lost_character) & ~df["name"].isin(kept) & ~hidden
+    stale = kept - set(df["name"])
+    if stale:
+        sys.exit(f"config.NAME_MARK_REAL names {len(stale)} trade name(s) no row carries: {sorted(stale)}")
+    print(f"  names with a lost character (shown as their permit type): {int(lost.sum())}")
+    emit("names_lost_character", int(lost.sum()))
+    # A NUMBER ALONE IN THE NAME COLUMN, where the city's file fills it with a
+    # code (config.NUMERIC_NAME_IS_CODE; Kurashiki: 25 rows, runs of
+    # consecutive five-digit numbers, a nursery school's and a student
+    # dormitory's kitchens among them). Elsewhere a number alone can be a
+    # bar's real name and stays (530 rows in 70 cities, owner 2026-10-12).
+    coded = pd.Series(False, index=df.index)
+    if getattr(config, "NUMERIC_NAME_IS_CODE", False):
+        coded = df["name"].map(lambda s: bool(jr.NUMBER_ALONE.fullmatch((s or "").strip()))) & ~hidden
+        print(f"  names that are a number alone, a code in this city's file: {int(coded.sum())}")
+        emit("names_number_alone", int(coded.sum()))
     df["permit_type"] = [REGISTER_TYPE.get(s, t) for s, t in zip(df["kind"], df["type"])]
-    df["business_name"] = df["name"].where(~hidden, df["permit_type"])
+    df["business_name"] = df["name"].where(~(hidden | lost | coded), df["permit_type"])
     print(f"  names withheld (the trade name IS the operator's own name): {int(hidden.sum())}; "
           f"shown as their permit type")
     emit("names_withheld", int(hidden.sum()))

@@ -1488,6 +1488,27 @@ def bare_personal_name(name):
     return bool(_BARE_NAME.match(unicodedata.normalize("NFKC", name or "").strip()))
 
 
+# A CHARACTER THE PUBLISHER'S FILE LOST: its export wrote a half-width
+# question mark for a letter or kanji its encoding does not hold (an accented
+# letter in "caf?", a variant kanji at a chain's head), or U+FFFD. Read as
+# lost when the mark touches a character outside ASCII. An interrobang ("!?",
+# "?!", either width of "!") is a real mark and is set aside first; a
+# full-width question mark is the publisher's own typing and never matches.
+# The name is shown as its permit type, never repaired (japan_step2.run).
+_INTERROBANG = re.compile(r"[!！]\?|\?[!！]")
+_LOST_CHAR = re.compile("�|[^\x00-\x7f]\\?|\\?[^\x00-\x7f]")
+NUMBER_ALONE = re.compile(r"[\d０-９\s\-－‐]+")
+
+
+def lost_character(name):
+    """True when a trade name carries a lost character (the rule above)."""
+    return bool(_LOST_CHAR.search(_INTERROBANG.sub("", name or "")))
+
+
+assert lost_character("ｃａｆ?　ＣＡＳＴＡＬＩＡ") and lost_character("??野家　駅前店")
+assert not lost_character("Mode!?横浜店") and not lost_character("なに？なに？") and not lost_character("Bar Shall we...?")
+
+
 # Not a person, for the name rule where a city opts into "coop": KYOTO_CORP's
 # companies and, apart from it so Kyoto's de-duplication key never moves,
 # cooperatives and unions (組合: 協同組合, 企業組合). Takamatsu (2026-10-03): a

@@ -348,3 +348,9 @@ KURASHIKI_BBOX = {
     "lon_max": OSM_BBOX[3],
 }
 CITY_BBOX = KURASHIKI_BBOX
+
+# A number alone in this file's name column is a code, not a sign: 25 shown
+# rows, runs of consecutive five-digit numbers, a nursery school's and a
+# student dormitory's kitchens among them. Shown as the permit type
+# (owner, 2026-10-12; japan_step2.run).
+NUMERIC_NAME_IS_CODE = True
