@@ -432,4 +432,6 @@ PLACE_DROPPED = {
     "way/611243545": "a glitched name: a church's, cut short",
     "way/608105550": "a description standing in for a name (a playground's equipment)",
     "node/10003160223": "a chapel that no longer exists (its name says so): a search would move the map to a place where it is not",
+    "way/1418500626": "a park's name with a stray leading accent mark and a misspelling (glitched; the outside name net, 2026-10-12)",
+    "way/639768197": "'Jeugos infantiles', the type words 'juegos infantiles' misspelled",
 }

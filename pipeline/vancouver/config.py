@@ -574,4 +574,5 @@ PLACE_VISITABLE = {
 PLACE_DROPPED = {
     # A description standing in for a name (owner, 2026-10-11).
     "node/4390230582": "a description standing in for a name (a church with no name recorded)",
+    "way/96778390": "'North Slope Buffer', a land-use strip named for its use",
 }

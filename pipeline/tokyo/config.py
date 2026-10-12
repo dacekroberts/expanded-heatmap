@@ -632,6 +632,7 @@ PLACE_DROPPED = {
     "node/3485961864": "a protected-tree register entry standing in for a name",
     "way/1384190240": "a garden style's name on a part of a park",
     "way/1384190239": "a garden style's name on a part of a park",
+    "node/4976908576": "'琵琶絵馬掛', a rack for votive tablets at a shrine",
 }
 
 # Trade names read by eye as a person's own name and nothing else, on

@@ -361,6 +361,8 @@ PLACE_DROPPED = {
     "way/614574610": "Casa Calvet: apartments, not open to visitors, only the ground-floor restaurant is public (https://patrimoni.gencat.cat/en/node/33069)",
     "way/385187741": "Casa Bruno Cuadros: the interior cannot be visited (https://thisisbarcelona.com/architecture/houses-and-emblematic-buildings/casa-bruno-cuadros)",
     "way/679019157": "Casa Lleó Morera: closed to the public for about ten years; a reopening as a museum was approved 2026-06-26 with no date (https://en.ara.cat/society/barcelona-will-reopen-to-the-public-one-of-the-modernist-treasures-of-passeig-gracia_1_5780887.html). Re-check when it reopens",
+    "way/385618161": "'Can Valent', a historic building named as a house (Catalan 'Can'), no wikidata and no sign of visiting (owner's house rule; the outside name net, 2026-10-12)",
+    "node/4399013374": "a boundary stone under a sentence describing it",
 }
 
 # Visitable former homes (owner, 2026-10-08: "visitable only hard line. Must

@@ -240,4 +240,10 @@ PLACE_DROPPED = {
     "way/842047734": "a glitched name: one Latin letter before the word for park",
     "node/10689843449": "a prayer house (기도원), a religious residence tagged a place of worship, not notable",
     "way/1098390945": "a convent (수녀원), a religious residence tagged a place of worship, not notable",
+    "node/4653835379": "a place of worship under a word that is no name (glitched; the outside name net, 2026-10-12)",
+    "way/475868716": "a park named as a district's park site, a description",
+    "way/616486306": "a square named as the space in front of a store, a description",
+    "way/472093440": "a rest area named as beside a university hall, a description",
+    "node/4632026481": "a locality named as a sports centre's entrance, a description",
+    "node/9739246184": "a site named as a group of steles, a description",
 }

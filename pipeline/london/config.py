@@ -370,4 +370,5 @@ PLACE_DROPPED = {
     "node/4336765075": "a street's name alone on a bare monument node: a wrong object",
     "node/2014156881": "a dock's name alone on a bare monument node: a wrong object",
     "node/6343767873": "a boundary stone under the name of the common it once marked: a wrong object",
+    "way/1340893634": "'Canada Gardens - Play Area', a play area named by its location and type",
 }
