@@ -1141,12 +1141,11 @@ _NOTICES = [
      "Le Havre, Caen and Rouen, the location of Philadelphia's 11th Street "
      "station, which is closed for works and not drawn, "
      "the routes of Taichung's Green Line and Taoyuan's Airport MRT, the "
-     "English station names, though not the lines or boundaries, of Kobe, "
-     "Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, "
-     "Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, "
-     "Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, "
-     "Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, "
-     "Higashiōsaka, Kurume, Sasebo, Shimonoseki, Higashiyamato, Nishitōkyō, Tama, Higashimurayama, Chōfu, Ageo (Regional), Sōka, Tokorozawa, Fuchū (Tokyo), Kasukabe, Tachikawa, Hino, Koshigaya, Kawaguchi, Fujisawa, Sagamihara, Funabashi, Matsudo, Ichikawa, Urayasu, Sakura, Yachiyo and Ichihara, and the "
+     # The Japanese cities as a class, not a list (owner, 2026-10-12): the
+     # hand-kept list had fallen 48 cities behind. The check under
+     # _NOTICES keeps the sentence true.
+     "English station names, though not the lines or boundaries, of every "
+     "Japanese city on this site, and the "
      "metro and light-rail lines and stations of Taipei and New Taipei are from OpenStreetMap, "
      "© OpenStreetMap contributors, available "
      "under the Open Database License. The alignments drawn are OSM's own "
@@ -4484,6 +4483,16 @@ def city_notices(city):
 # a city in one and not the other would show the full list, or a line on a
 # page the notice does not reach.
 _osm_rail = next(n for n in _NOTICES if n.per_city is osm_rail_text)
+# Notice 1 says the English station names of EVERY Japanese city on the site
+# come from OpenStreetMap (owner, 2026-10-12), so every Japanese city must be
+# in _OSM_STATION_NAMES: a Japanese city built without it would make the
+# sentence untrue and leave its page without the credit.
+_japan_uncredited = sorted(c["name"] for c in CITIES
+                           if c.get("country") == "Japan" and c["name"] not in _OSM_STATION_NAMES)
+if _japan_uncredited:
+    raise RuntimeError(
+        "Japanese cities missing from _OSM_STATION_NAMES (and OSM_RAIL_BY_CITY in osm_notice.py), which "
+        f"notice 1's sentence covers as a class: {_japan_uncredited}")
 if set(_osm_rail.cities) != set(OSM_RAIL_BY_CITY):
     raise ValueError(
         "app/osm_notice.py and notice 1's cities differ: only in the notice "
