@@ -9,6 +9,62 @@ app is its own project, this repo keeps the basemap switch, its hosting and an
 export contract (owner, relayed by Cleanup). Nothing here is landed, pushed
 or published; every proposal waits for the owner.
 
+### 2026-10-12 - RESUME NOTE for the next session (internal; Cleanup drops this entry when folding; it replaces the 2026-10-08 note below)
+
+- **Where the branch stands.** `basemap` has master merged (2026-10-12),
+  `check_all.py` 52 of 52, nothing pushed. The site's Travel view is built
+  and switched off: `pipeline/travel_packs.py` (`PACK_HOST = None`),
+  dark mode on Protomaps' dark flavor, `docs/travel_packs.md` for the
+  procedure, pointers in `CLAUDE.md`, `add-city` and `publish-city`. The
+  entries of 2026-10-11 and 2026-10-12 below hold every measurement.
+- **Packs.** All 206 built cities have a stamped, verified pack in
+  `data/_basemap_build/host_upload_2026-10/` (main checkout's shared data
+  folder). Phase 2's 30 packs were started 2026-10-12 on the owner's word:
+  rows are in `download_plan_2026-10-08/plan_cities.csv`. **To finish or
+  confirm them:** `python status.py` there names what is not built;
+  `python build_packs.py` (no arguments) builds whatever is left and is
+  safe to re-run; then `python make_upload.py` and
+  `python ../session_tools_2026-10-08/stamp_verify.py ../packs_pilot_2026-10
+  ../host_upload_2026-10/packs` from that folder. Three gate slots at most,
+  `heavy_job.py status` first. Record the phase 2 totals in a new entry.
+- **Naha** (added to phase 2 by the owner, 2026-10-12): no pack yet, since
+  its box needs its `processed/stations.csv`. When its map is built:
+  `new_cities_poly.py` (the `.poly` files must be fetched again, one per
+  Japanese region, from download.geofabrik.de/asia/japan/; kyushu is
+  expected and is held), `add_plan_rows.py`, `build_packs.py naha`,
+  `make_upload.py`.
+- **Owed at the landing (Cleanup's integration worktree asks for them):**
+  the Travel table lines for phase 2: under `"ja"` in `LOCAL_LANG`:
+  fujisawa, funabashi, ichihara, ichikawa, kawaguchi, koshigaya, matsudo,
+  sagamihara, sakura, urayasu, yachiyo, ibaraki_osaka, kadoma, minoh,
+  moriguchi, neyagawa, takatsuki, yao, aomori, fuji, kanazawa, kurashiki,
+  kure, matsue, matsumoto, okazaki, shizuoka, tottori, yamagata, and naha
+  once built; under `"ro"`: cluj_napoca. They cannot go on this branch
+  (the check fails a row with no built map).
+- **Next with the owner: the hosting call.** Which Cloudflare option (R2
+  behind an owned domain, recommended, against a free Worker on
+  workers.dev), the owner's own account and acceptance of its terms, and
+  the go-live decision. Claude creates no account and enters no
+  credential. Then: upload the folder; set `PACK_HOST`; fill the address
+  into P4 (`docs/data_sources.md`, the internal block becomes
+  reader-facing) and P5 (notice 1 in `app/components.py`, after confirming
+  the host keeps no request logs); re-render the maps; `deploy-verify`
+  scope `map-chrome`; push with the reboot question answered. If the host
+  is not ready before the landing's full re-render, the landing ships
+  with the switch off and go-live costs a second full re-render (told to
+  the owner and to Cleanup).
+- **Approved by the owner and not to be re-asked:** the four dark colours;
+  the ferry crimson stays; P1 to P6 with P4's added software sentence; the
+  shared table; the internal upload folder; multi-route ferry work is
+  later.
+- **Tools.** Temporary launch entries `basemap-proto-tmp` (pages) and
+  `basemap-host-tmp` (the upload folder) are added to this worktree's
+  `.claude/launch.json` per run and removed after; ports 8831 and 8832 were
+  taken by another session on 2026-10-12, 8833 and 8834 were free.
+  `render_switch_on.py`, `render_plain_diff.py`, `dark_check.mjs` with
+  `dark_summary.cjs`, `pack_sides.py`, `pack_metadata.py` are in
+  `data/_basemap_build/session_tools_2026-10-08/`.
+
 ### 2026-10-08 - RESUME NOTE for the next session (internal; Cleanup drops this entry when folding)
 
 - **Done: the full Travel version (Mendoza and Tokyo), reviewed by the
