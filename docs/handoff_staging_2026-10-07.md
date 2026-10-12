@@ -82,7 +82,16 @@ fresh `docs/decisions_drafts/staging.md`.
   name rule), S11 Cluj D (Bucharest's functions to a shared module), S12
   Cluj E (osm_tram name_members), S13 Naha (a brief, two licence reads
   first). Kansai-2's Batch C (macro label widths for three names) is
-  Cleanup's and has no S number. Next free: S14.
+  Cleanup's and has no S number. **The owner answered S1-S5
+  in East-2's own chat on 2026-10-11** (East-2's drafts, tip a62db0e7): S1
+  "accepted" (glitched_name treats U+E000-U+F8FF as glitched; not yet
+  implemented, Kawaguchi held until it lands); S2 "shared rule accepted" (a
+  late start with a first permit on or before the as-of stays; not yet
+  implemented, Kawaguchi gains about 100 pins); S3 open ("show me a
+  visual", shown in East-2's chat); S4 "note internally" (the OSM spellings
+  stay); S5 relabelled "Saitama Rapid Railway Line" on East-2's reading of
+  the owner's pointer to the line's Wikipedia entry, to be confirmed.
+  **S14, put 2026-10-12:** who implements S1 and S2. Next free: S15.
 - **The live privacy fix (call 209)** landed on 2026-10-07 before the review:
   13 operators' own names withheld on six Japanese maps by the `name_city`
   switch.
