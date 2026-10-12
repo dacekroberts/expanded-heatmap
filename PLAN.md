@@ -164,9 +164,11 @@ Detail files: [japan](docs/plan_detail/japan.md),
     on the branch with its check, no per-city page text; one general
     sentence for About the Data is approved (the handoff has it).
   - **FIRST after the phase 2 landing, before the rollout or the audit
-    starts: the skills that make both cheap** (owner, 2026-10-12). The
-    DeepSeek integration (the owner's own handoff, a new session) comes
-    before the work these skills serve.
+    starts: the skills that make both cheap** (owner, 2026-10-12). **The
+    order after the landing (owner): 1. these skills; 2. the DeepSeek
+    integration (the owner's own handoff, read and started in a new
+    session); 3. everything else** (the search rollout, the
+    commercial-use audit, the label batch).
     - **`search-city` skill**, with what it rests on: one script that
       scaffolds every remaining city's search config and thin index step
       (area from the boundary already in the repo, languages from
