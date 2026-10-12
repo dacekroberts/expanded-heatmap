@@ -32,11 +32,24 @@ branch's drafts file.
     Toyota's config and map untouched.
   - `legend-dot-georgia` `16a68efe` (worktree `review-prep`), 57 behind
     master: needs the one full re-render.
-  - `place-search` `fe16ab93`, 233 behind master: batches 1 to 3, nineteen
-    cities, the watch file and its check. **Waits on the owner's phone test
-    of São Paulo, then London.** Its worktree was found missing on
-    2026-10-11 and re-added by the owner; the standing block on removing it
-    holds until place search has landed.
+  - `place-search` `498853e7` (2026-10-12; far behind master): batches 1
+    to 3, nineteen cities, the watch file and its check. **The owner's
+    phone test of São Paulo PASSED (2026-10-12, his word in that
+    session, relayed)**; London, the second largest, was not reported
+    tested: ask him whether São Paulo's pass covers it before the
+    rollout. Its worktree was found missing on 2026-10-11 and re-added
+    by the owner; the standing block on removing it holds until place
+    search has landed. **Four owner calls to put at review time**
+    (owner: "open from earlier stuff goes to cleanup"; the branch's
+    PLAN, "Review time: the place search pilot"): (1) whether the
+    suggestions go live as they are, marked work in progress; (2) the
+    corner-credit test, the ODbL credit moved into the map's corner
+    credit; (3) the Cities menu out of the map, measured at 343 px with
+    the search box in place; (4) whether "Download this index" also
+    links the intersections file (ODbL 4.6). Back with the owner and not
+    built: stricter notability for monuments and galleries (measured to
+    remove about 420 rows, two well-known Seoul landmarks among them),
+    and a stronger station highlight on phones.
   - `basemap` (tip `16acf351` on 2026-10-12, master merged in): the
     site's partial Travel view. **The owner wants it finished (2026-10-12),
     and its go-live call is his, made at review time** (its drafts,
