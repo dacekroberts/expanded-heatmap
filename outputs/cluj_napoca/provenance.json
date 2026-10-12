@@ -1,0 +1,78 @@
+{
+  "fetched_utc": "2026-10-11T22:48:12+00:00",
+  "register_dates": [
+    "2026-04-30",
+    "2026-10-06"
+  ],
+  "register_files": {
+    "raw/01.inregistrate-carmangerie.xls": {
+      "sha256": "137d5b6ed5914d0165a0bbed1720d76462f5918c5a545a1bb5fb6b51f250be0a",
+      "date_in_file": "2026-09-15"
+    },
+    "raw/02.inregistrate-macelarie.xls": {
+      "sha256": "07d5496e889e40fdbec3427f0fef18a2716e78b978299bb3e1bda737f8ecaf67",
+      "date_in_file": "2026-09-15"
+    },
+    "raw/15.inregistrate-magazin-desfacere-miere.xls": {
+      "sha256": "044d73fad049be25a1f29eae397a00d68ad3d1056a058ce1c1ef3ae1d39c7010",
+      "date_in_file": "2026-09-25"
+    },
+    "raw/17.inregistrate-restaurant-bistro.xls": {
+      "sha256": "3e6a8eb2a8b1945465a670e7f77108df25b873fa7933b4152292e469aaa6f19a",
+      "date_in_file": "2026-06-29"
+    },
+    "raw/18.inregistrate-pizzerie.xls": {
+      "sha256": "eb44ad444be9462eecd013e98e8d6291bb2e901a1cb42ffd792b7f699952f820",
+      "date_in_file": "2026-09-25"
+    },
+    "raw/21.inregistrate-cofetarie_patiserie.xls": {
+      "sha256": "cd08919fc1e38a054a28662dd01a36194514de101c8551f86390227071792499",
+      "date_in_file": "2026-09-25"
+    },
+    "raw/23.inregistrate-magazin-alimentar.xls": {
+      "sha256": "da52efeccf6512fb52cead4829044452ea63e4ca4bdda6af769d05cf3915a2a3",
+      "date_in_file": "2026-09-25"
+    },
+    "raw/24INREGISTRARE-SUPERMARKET.xls": {
+      "sha256": "f3ac53f85b0fe751c0de6718fa1bdaecc2d058dbb67820d72bbc1cf7fc00f858",
+      "date_in_file": "2026-09-28"
+    },
+    "raw/36.inregistrate-Bar.xlsx": {
+      "sha256": "b9940846f7ce2db21e5d00ac40a156d5536923591a4033466d0025bb050454e8",
+      "date_in_file": "2026-04-30"
+    },
+    "non-animal/01.-FABRICARE-PAINE.xls": {
+      "sha256": "6cc35b7890a2fbdfcc2c14a0f873faa0031403dddb1ce1c92b1e0b389f38332a",
+      "date_in_file": "2026-10-06"
+    },
+    "non-animal/02.inregistrate-prajituri_proaspete-patiserie.xlsx": {
+      "sha256": "987eef23f4a4ba70ee1869d6bb5e9649215bc2cf2a5bafaa5f9d44c9f2f53c57",
+      "date_in_file": "2026-10-06"
+    },
+    "non-animal/03.inregistrate-paine_prajituri_proaspete-patiserie-1-ok.xlsx": {
+      "sha256": "9da1a32b5d02cf964583228f9e263b983d7c2a1b722a183205e1f73f7bafb9c5",
+      "date_in_file": "2026-10-06"
+    },
+    "non-animal/19.inregistrate-fabricare-inghetata_25047ro.xlsx": {
+      "sha256": "efd5139501aee7742948778e92f95712ccfc346576e8e3f7b9045db2320aaccd",
+      "date_in_file": "2026-10-06"
+    },
+    "non-animal/26.inregistrate-comercializ-cu-amanuntul-prod-nonanimala.xlsx": {
+      "sha256": "b203ce558a5269719ae5dc28bffa44f5acd1d68d48c808000c251fac097686e7",
+      "date_in_file": "2026-10-06"
+    },
+    "non-animal/27-.inregistrate-Bar_25092ro-1.xlsx": {
+      "sha256": "58fc0c88abd40a3ef1f6b1ecbea13a60f89d43633047b09cb26bac495871a4cb",
+      "date_in_file": "2026-10-06"
+    },
+    "non-animal/29.inregistrate-cantine-catering_restaurant-vegan.xlsx": {
+      "sha256": "fde2868c8fa7fde690ee122e2b53df658a41a4c00b9d58f8073cc7b3af8bc740",
+      "date_in_file": "2026-10-06"
+    },
+    "non-animal/33.inregistrate-comercializ-prod-nonanimala-congelate.xlsx": {
+      "sha256": "34568629f1a2ff1492cb706fdf7429712611d9db1e37ac5fb25168d020064f8e",
+      "date_in_file": "2026-10-06"
+    }
+  },
+  "osm_addresses": "osm_addresses_2026-10-11.csv"
+}

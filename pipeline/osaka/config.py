@@ -209,14 +209,14 @@ _JR, _M = "西日本旅客鉄道", "大阪市高速電気軌道"
 LINES = {
     # Osaka Metro (大阪市高速電気軌道)
     "M": {"n02": [(_M, "1号線(御堂筋線)")], "name": "Midōsuji Line", "name_ja": "御堂筋線", "colour": line_registry.colour("osaka-metro-midosuji-line")},
-    "T": {"n02": [(_M, "2号線(谷町線)")], "name": "Tanimachi Line", "name_ja": "谷町線", "colour": "#933CA5"},
+    "T": {"n02": [(_M, "2号線(谷町線)")], "name": "Tanimachi Line", "name_ja": "谷町線", "colour": line_registry.colour("osaka-metro-tanimachi-line")},
     "Y": {"n02": [(_M, "3号線(四つ橋線)")], "name": "Yotsubashi Line", "name_ja": "四つ橋線", "colour": "#4898D0"},
     "C": {"n02": [(_M, "4号線(中央線)")], "name": "Osaka Metro Chuo Line", "name_ja": "中央線", "colour": line_registry.colour("osaka-metro-chuo-line")},
     "S": {"n02": [(_M, "5号線(千日前線)")], "name": "Sennichimae Line", "name_ja": "千日前線", "colour": "#DB69CF"},
     "K": {"n02": [(_M, "6号線(堺筋線)")], "name": "Sakaisuji Line", "name_ja": "堺筋線", "colour": "#90542D"},
     "N": {"n02": [(_M, "7号線(長堀鶴見緑地線)")], "name": "Nagahori Tsurumi-ryokuchi Line",
-          "name_ja": "長堀鶴見緑地線", "colour": "#7CA014"},
-    "I": {"n02": [(_M, "8号線(今里筋線)")], "name": "Imazatosuji Line", "name_ja": "今里筋線", "colour": "#E77512"},
+          "name_ja": "長堀鶴見緑地線", "colour": line_registry.colour("osaka-metro-nagahori-tsurumi-ryokuchi-line")},
+    "I": {"n02": [(_M, "8号線(今里筋線)")], "name": "Imazatosuji Line", "name_ja": "今里筋線", "colour": line_registry.colour("osaka-metro-imazatosuji-line")},
     "P": {"n02": [(_M, "南港ポートタウン線")], "name": "New Tram", "name_ja": "ニュートラム", "colour": "#00758A"},
     # JR West (西日本旅客鉄道)
     "JO": {"n02": [(_JR, "大阪環状線")], "name": "Osaka Loop Line", "name_ja": "大阪環状線", "colour": "#FF3C03"},

@@ -88,6 +88,10 @@ REGISTRIES = {
     # SOLE_TRADER). No address reaches the map; placement is by OSM address.
     "bucharest": dict(raw=None, trade=None, owner=None,
                       processed="businesses_clean.csv", address=None),
+    # Cluj-Napoca (2026-10-11): DSVSA Cluj's registers, Bucharest's rule and
+    # Bucharest's own display_name(), imported unchanged by its step 2.
+    "cluj_napoca": dict(raw=None, trade=None, owner=None,
+                        processed="businesses_clean.csv", address=None),
     # Incheon: SEMAS's 상가(상권)정보 names STOREFRONTS (상호명, with the branch),
     # with no owner, representative or phone column; the Korean pass (Seoul's rule,
     # pipeline/korean_names.py) withholds a bare personal name at a residential
@@ -524,6 +528,11 @@ REGISTRIES = {
     **{slug: dict(raw=None, trade=None, owner=None, processed="businesses_clean.csv",
                   address=("address",), japan=True)
        for slug in ("toyonaka", "hirakata", "suita", "itami", "kakogawa", "amagasaki", "uji")},
+    # Kansai-2 (2026-10-11), the same: Osaka Prefecture's and Neyagawa's 開設者
+    # and MHLW's 法人名 are read only by the name rule, in memory.
+    **{slug: dict(raw=None, trade=None, owner=None, processed="businesses_clean.csv",
+                  address=("address",), japan=True)
+       for slug in ("ibaraki_osaka", "minoh", "moriguchi", "kadoma", "neyagawa", "yao", "takatsuki")},
     # The rest of the 2026-10-01 Japanese batch (2026-10-02), each on the shared
     # steps: every list's operator column is read only by the name rule, in
     # memory (japan_register.OPERATOR_COLS); MHLW's rows and BODIK's

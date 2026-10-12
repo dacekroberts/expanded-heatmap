@@ -90,7 +90,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Italy | [`data_sources/italy.md`](data_sources/italy.md) | Milan, Rome, Florence |
 | France | [`data_sources/france.md`](data_sources/france.md) | Paris, Marseille, Toulouse, Lille (Regional), Rennes, Le Mans, Besançon, Avignon, Tours, Dijon, Reims, Orléans, Mulhouse, Brest, Saint-Étienne, Nice, Montpellier, Strasbourg, Le Havre, Caen, Rouen (Regional), Bordeaux (Regional), Nantes (Regional), Grenoble (Regional), Valenciennes (Regional), Angers |
 | Norway | [`data_sources/norway.md`](data_sources/norway.md) | Oslo, Bergen |
-| Romania | [`data_sources/romania.md`](data_sources/romania.md) | Bucharest |
+| Romania | [`data_sources/romania.md`](data_sources/romania.md) | Bucharest, Cluj-Napoca |
 | Sweden | [`data_sources/sweden.md`](data_sources/sweden.md) | Stockholm, Göteborg |
 | Denmark | [`data_sources/denmark.md`](data_sources/denmark.md) | Copenhagen (Regional), Aarhus, Odense |
 | Czechia | [`data_sources/czechia.md`](data_sources/czechia.md) | Prague, Brno, Plzeň, Olomouc, Ostrava, Liberec (Regional), Most (Regional) |
@@ -100,7 +100,7 @@ together, so a row in either counts and a row in neither still fails.<!-- /inter
 | Hong Kong | [`data_sources/hong-kong.md`](data_sources/hong-kong.md) | Hong Kong |
 | South Korea | [`data_sources/south-korea.md`](data_sources/south-korea.md) | Seoul, Daegu, Busan, Incheon, Goyang, Seongnam, Yongin, Suwon, Bucheon, Namyangju, Ansan, Uijeongbu, Anyang (Regional), Daejeon, Gwangju, Gimhae, Gimpo, Siheung |
 | Taiwan | [`data_sources/taiwan.md`](data_sources/taiwan.md) | Taichung, Taoyuan, Taipei (Regional) |
-| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki, Higashiyamato, Nishitōkyō, Tama, Higashimurayama, Ageo (Regional), Sōka, Tokorozawa, Kasukabe, Fuchū (Tokyo), Chōfu, Tachikawa, Hino, Toyonaka, Hirakata, Suita, Itami, Kakogawa, Amagasaki, Uji, Maebashi, Fukushima, Fukuyama, Ichinomiya, Tsu, Akita, Ōita, Gifu, Iwaki, Mito, Morioka |
+| Japan | [`data_sources/japan.md`](data_sources/japan.md) | Kobe, Osaka, Sapporo, Fukuoka, Kyoto, Tokyo, Yokohama, Hiroshima, Matsuyama, Toyama, Kumamoto, Fukui, Nagasaki, Utsunomiya, Kitakyushu, Sakai, Hakodate, Kagoshima, Okayama, Kōchi, Kawasaki, Yokosuka, Himeji, Nishinomiya, Takamatsu, Toyota, Yokkaichi, Ōtsu, Nara, Hamamatsu, Higashiōsaka, Kurume, Sasebo, Shimonoseki, Higashiyamato, Nishitōkyō, Tama, Higashimurayama, Ageo (Regional), Sōka, Tokorozawa, Kasukabe, Fuchū (Tokyo), Chōfu, Tachikawa, Hino, Toyonaka, Hirakata, Suita, Itami, Kakogawa, Amagasaki, Uji, Maebashi, Fukushima, Fukuyama, Ichinomiya, Tsu, Akita, Ōita, Gifu, Iwaki, Mito, Morioka, Ibaraki (Osaka), Minoh, Moriguchi, Kadoma, Neyagawa, Yao, Takatsuki |
 | Germany | [`data_sources/germany.md`](data_sources/germany.md) | Berlin, Gelsenkirchen, Bremen |
 | United Kingdom | [`data_sources/united-kingdom.md`](data_sources/united-kingdom.md) | London, Glasgow, Newcastle (Regional), Manchester (Regional), Birmingham (Regional), Edinburgh, Sheffield, Nottingham (Regional), Blackpool (Regional), Liverpool (Regional) |
 | Argentina | [`data_sources/argentina.md`](data_sources/argentina.md) | Buenos Aires, Mendoza |
@@ -4597,6 +4597,147 @@ batch at review time).
   2026-10-07). Re-read the terms PDF
   (`/_res/projects/default_project/_page_/001/024/522/opendateriyokiyaku.pdf`)
   at review time, before publishing.<!-- /internal -->
+
+**198. Osaka Prefecture and MLIT (Ibaraki (Osaka)) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-11; lands with the Kansai-2
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS**: Osaka Prefecture's 理容所届出施設一覧 and
+  美容所届出施設一覧 on BODIK are **CC BY 4.0** by 大阪府オープンデータ利用規約
+  第1条 (`https://odcs.bodik.jp/270008/tos/`), and both dataset pages state
+  it with no exception; MLIT's 位置参照情報 and N02 (the 2025 edition) are
+  **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only picks stations and is
+  **never drawn** (the Survey Act).
+- **MUST DISPLAY** (no form prescribed; CC BY 4.0 §3(a)): 大阪府, the two
+  titles, the CC BY 4.0 link and a statement of change; MLIT's credit lines.
+  The titles are cited without a link to a prefecture page.
+- **MUST NOT**: imply endorsement; use the prefecture's logo without asking
+  (第3条); call the lists current (the full lists renew twice a year).<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py ibaraki_osaka` with its Japan
+  pass, run 2026-10-11; the verdict is in
+  `docs/decisions_drafts/worktree-japan-kansai-2.md` ("Kansai-2: seven
+  Japanese cities built", 2026-10-11).<!-- /internal -->
+
+**199. Osaka Prefecture and MLIT (Minoh) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-11; lands with the Kansai-2
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS**: the same sources and terms as Ibaraki's
+  (198), with Minoh's rows of the same lists.
+- **MUST DISPLAY** and **MUST NOT**: as 198.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py minoh` with its Japan pass, run
+  2026-10-11; the verdict is in
+  `docs/decisions_drafts/worktree-japan-kansai-2.md` ("Kansai-2: seven
+  Japanese cities built", 2026-10-11).<!-- /internal -->
+
+**200. Osaka Prefecture and MLIT (Moriguchi) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-11; lands with the Kansai-2
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS**: the same sources and terms as Ibaraki's
+  (198), with Moriguchi's rows of the same lists.
+- **MUST DISPLAY** and **MUST NOT**: as 198.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py moriguchi` with its Japan pass,
+  run 2026-10-11; the verdict is in
+  `docs/decisions_drafts/worktree-japan-kansai-2.md` ("Kansai-2: seven
+  Japanese cities built", 2026-10-11).<!-- /internal -->
+
+**201. Osaka Prefecture and MLIT (Kadoma) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-11; lands with the Kansai-2
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS**: the same sources and terms as Ibaraki's
+  (198), with Kadoma's rows of the same lists.
+- **MUST DISPLAY** and **MUST NOT**: as 198.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py kadoma` with its Japan pass, run
+  2026-10-11; the verdict is in
+  `docs/decisions_drafts/worktree-japan-kansai-2.md` ("Kansai-2: seven
+  Japanese cities built", 2026-10-11).<!-- /internal -->
+
+**202. Neyagawa City and MLIT (Neyagawa) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-11; lands with the Kansai-2
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS**: Neyagawa City's 理容所確認施設一覧,
+  美容所確認施設一覧 and クリーニング所確認施設一覧 on BODIK are **CC BY 4.0** by
+  寝屋川市オープンデータ利用規約 and BODIK's terms 第1条
+  (`https://odcs.bodik.jp/272159/tos/`); MLIT's 位置参照情報 and N02 (the
+  2025 edition) are **PDL 1.0**, as in Kobe's (50). N03 (CC BY 4.0) only
+  picks stations and is **never drawn** (the Survey Act).
+- **MUST DISPLAY** (the terms' 記載例):
+  「「理容所確認施設一覧」「美容所確認施設一覧」「クリーニング所確認施設一覧」（寝屋川市）（[ページURL]）を加工して作成」,
+  the edit stated apart from the credit; MLIT's credit lines.
+- **MUST NOT**: present the edited data as the city's; claim completeness or
+  accuracy (BODIK 第4条); use the logo alone without asking (第3条); imply
+  endorsement.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py neyagawa` with its Japan pass,
+  run 2026-10-11; the verdict is in
+  `docs/decisions_drafts/worktree-japan-kansai-2.md` ("Kansai-2: seven
+  Japanese cities built", 2026-10-11).<!-- /internal -->
+
+**203. MHLW and MLIT (Yao) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-11; lands with the Kansai-2
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS**: MHLW's 食品衛生申請等システム open data is
+  **PDL 1.0**, as in Kurume's (126), with Yao's own file (27212); MLIT's
+  位置参照情報 and N02 (the 2025 edition) are **PDL 1.0**, as in Kobe's (50).
+  N03 (CC BY 4.0) only picks stations and is **never drawn** (the Survey
+  Act).
+- **MUST DISPLAY**: MHLW's 出典 line, linking its top page only, and who
+  processed it; MLIT's credit lines.
+- **MUST NOT**: present the map as MHLW's; use its logo; claim the list
+  complete or accurate; imply endorsement.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py yao` with its Japan pass, run
+  2026-10-11; the verdict is in
+  `docs/decisions_drafts/worktree-japan-kansai-2.md` ("Kansai-2: seven
+  Japanese cities built", 2026-10-11).<!-- /internal -->
+
+**204. MHLW and MLIT (Takatsuki) — required, and DISPLAYED**
+(written into `render_site_notices()` 2026-10-11; lands with the Kansai-2
+batch at review time).
+
+- **PERMITTED WITH CONDITIONS**: the same sources and terms as Yao's (203),
+  with Takatsuki's own file (27207).
+- **MUST DISPLAY** and **MUST NOT**: as 203.<!-- internal -->
+- **MUST DO:** `check_personal_exposure.py takatsuki` with its Japan pass,
+  run 2026-10-11; the verdict is in
+  `docs/decisions_drafts/worktree-japan-kansai-2.md` ("Kansai-2: seven
+  Japanese cities built", 2026-10-11).<!-- /internal -->
+
+**215. DSVSA Cluj (Cluj-Napoca) — displayed by choice, not required**
+(written into `render_site_notices()` 2026-10-11; lands with the Kansai-2
+batch at review time).
+
+- **SILENT, with the pages named** (read in the browser 2026-10-11; the
+  Cluj-Napoca rows in [`data_sources/romania.md`](data_sources/romania.md)):
+  `cluj.dsvsa.ro` has no terms-of-use, copyright or privacy page, only a
+  cookie policy; its three list pages carry a title, a technical note and
+  the file table, with no attribution wording and no ban on republication.
+  The footer names ANSVSA ("Toate drepturile rezervate"), a website footer,
+  which governs site content, not the data (the reading made for
+  DSVSA București, notice 67).
+  ANSVSA's own site (`www.ansvsa.ro`, read in the browser the same day) has
+  no terms-of-use, reuse or open-data page either: a privacy policy, which
+  says ANSVSA and DSVSA staff run the county sites and speaks only of
+  visitors' personal data, a cookie policy, and a bare index linking each
+  county's lists. `data.gov.ro` did not answer that day; the European data
+  portal's copy of its catalogue holds two ANSVSA datasets, both livestock
+  counts, and none from a county DSVSA.
+- **MUST DISPLAY**: nothing is prescribed. The notice credits the publisher,
+  says no license is stated, names the changes (the cut to the city, the
+  name rule and the address placement) and disclaims endorsement, in the
+  wording of DSVSA București's notice 67 (approved by the owner 2026-09-29).
+- **MUST NOT**: present the map as the official register, or imply DSVSA or
+  ANSVSA produced or endorses it.
+- **MUST DO**: nothing to the publisher. The owner saved the files in their
+  own browser; the county's hosts refuse scripts, and no script fetches
+  them. <!-- internal -->Privacy: `check_personal_exposure.py cluj_napoca`, run
+  2026-10-11; the verdict is in
+  `docs/decisions_drafts/worktree-japan-kansai-2.md` ("Cluj-Napoca built",
+  2026-10-11).<!-- /internal -->
+- **Cluj-Napoca's tram lines and stops, boundary and address points are
+  OpenStreetMap data** (ODbL, notice 1).
 
 
 ## Gaps

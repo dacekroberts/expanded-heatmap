@@ -226,6 +226,9 @@ SLUG_OVERRIDES = {
     "Fuchū (Tokyo)": "fuchu_tokyo",
     "Chōfu": "chofu",
     "Ageo (Regional)": "ageo_regional",
+    # Kansai-2 (2026-10-11): Ibaraki's page names its prefecture, as Fuchū's.
+    "Ibaraki (Osaka)": "ibaraki_osaka",
+    "Cluj-Napoca": "cluj_napoca",
     # The A/B build plan's Regional-1 batch (2026-10-07), likewise.
     "Ōita": "oita",
     # Brazil: accents dropped from the package name, and the regional pages'

@@ -1,0 +1,2061 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <style>:root { --hm-font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", "Hiragino Sans", "Yu Gothic", Meiryo, "Apple SD Gothic Neo", "Malgun Gothic", "PingFang TC", "Microsoft JhengHei", "PingFang SC", "Microsoft YaHei", Arial, sans-serif; }</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_5f596111914dd6d7dddc5c6c89d63d07 {
+                    position: relative;
+                    width: 1000.0px;
+                    height: 650.0px;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/gh/python-visualization/folium@main/folium/templates/leaflet_heat.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css"/>
+</head>
+<body>
+    
+    
+<style>
+/* THE HEADER IS THE CONTROL, AND IT HAS TO SAY SO. A native <summary> does
+   render a disclosure triangle - `list-style-type` computes to
+   `disclosure-open` here - but it is a ~6 px glyph in the same colour and
+   weight as the text beside it, and on a dense map it reads as punctuation
+   rather than as something to click. Replaced with an explicit chevron plus a
+   VERB, because the chevron alone is ambiguous: this panel is anchored
+   bottom-right, so its box grows upward while its content flows downward, and
+   no arrow direction is honestly self-explanatory. "Hide"/"Show" is.
+
+   Laid out as a flex row with space-between, which keeps the marker INSIDE the
+   legend's existing width rather than extending it. That matters: the label
+   layout in _layout_labels models the open legend as a hardcoded 274 px
+   obstacle, and a wider panel would start covering line labels it currently
+   clears. Verified after the change that the open width is unchanged.
+
+   No script: the collapse is still the browser's own <details> behaviour, so
+   this is presentation only and scripts/check_map_labels.js keeps working. The
+   colour is `currentColor`, so it follows .dark-base .map-legend's own
+   `color` and needs no dark-mode rule of its own. */
+.map-legend > summary { list-style: none; display: flex;
+    align-items: baseline; justify-content: space-between; gap: 12px; }
+.map-legend > summary::-webkit-details-marker { display: none; }
+.map-legend > summary::after {
+    content: "\25BE\00A0Hide"; font: 600 11px var(--hm-font, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", "Hiragino Sans", "Yu Gothic", Meiryo, "Apple SD Gothic Neo", "Malgun Gothic", "PingFang TC", "Microsoft JhengHei", "PingFang SC", "Microsoft YaHei", Arial, sans-serif);
+    opacity: 0.7; white-space: nowrap; }
+.map-legend:not([open]) > summary::after { content: "\25B8\00A0Show"; }
+.map-legend > summary:hover::after { opacity: 1; text-decoration: underline; }
+.map-legend > summary:focus-visible { outline: 2px solid currentColor;
+    outline-offset: 2px; }
+/* THE OPEN LEGEND IS CAPPED BELOW THE BUTTON ROW, AND SCROLLS. Amsterdam
+   (2026-09-24) was the first map with 21 lines: open, its legend was 634 px
+   tall at the 650 px embed, so its top sat at y = -8 and its header and Hide
+   control were under the "Global View" and theme buttons (#map-actions, fixed
+   at top 10px, ~30 px tall) - found by deploy-verify. Every earlier legend was
+   shorter than the cap (Paris's the tallest, its top at y 84), so none of
+   them changes. min(100vh, MAP_H) is the visible map height whichever way
+   _LEGEND_BOTTOM_CSS resolves; border-box so the cap is the whole panel. The
+   header sticks, so Hide stays in reach while the rows scroll. Its background
+   is set, NOT `inherit`: a <summary> is slotted into the <details> shadow
+   root, so it inherits from a transparent slot - measured, the rows showed
+   through the header in dark mode.
+   The clearance is the button row's, measured: --hm-actions-clear is set by
+   the region button's script when the row wraps to a second line (a phone's
+   343 px frame since 2026-10-07: four buttons where three fitted, 72 px tall),
+   else this fixed figure. */
+.map-legend { box-sizing: border-box; overflow-y: auto;
+    overscroll-behavior: contain;
+    max-height: calc(min(100vh, 650px) - 24px - var(--hm-actions-clear, 56px)); }
+.map-legend > summary { position: sticky; top: -8px; z-index: 1;
+    padding-top: 8px; margin-top: -8px; background: white; }
+.dark-base .map-legend > summary { background: var(--dm-surface); }
+</style>
+<style>.map-legend { max-width: 274px; }</style>
+<details open class="map-legend" style="
+    position: fixed; bottom: max(24px, calc(100vh - 626px)); right: 24px; z-index: 9999;
+    background: white; padding: 8px 14px; border: 1px solid #999;
+    border-radius: 4px; font-family: var(--hm-font, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', 'Hiragino Sans', 'Yu Gothic', Meiryo, 'Apple SD Gothic Neo', 'Malgun Gothic', 'PingFang TC', 'Microsoft JhengHei', 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif); font-size: 13px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+">
+  <summary style="font-weight: bold; cursor: pointer; user-select: none;
+    outline: none;">Legend</summary>
+  <div style="font-weight: bold; margin: 8px 0 6px;">Business Category</div>
+  
+  <div style="display:flex; align-items:center; margin:3px 0;">
+    <span style="display:inline-block; width:11px; height:11px;
+      border-radius:50%; background:#1baf7a; margin-right:7px;
+      border:1px solid rgba(0,0,0,0.3);"></span>Personal services
+  </div>
+
+  <div style="font-weight: bold; margin: 10px 0 6px;">Transit Lines</div>
+  
+  <div class="hm-line-row" data-line="0" role="button" tabindex="0" aria-pressed="false"
+    style="display:flex; align-items:center; margin:3px 0;">
+    <span style="display:inline-block; width:16px; height:3px;
+      background:#7B7B5A; margin-right:7px;
+      border-radius:2px;"></span>Keihan Main Line
+  </div>
+
+  <div class="hm-line-row" data-line="1" role="button" tabindex="0" aria-pressed="false"
+    style="display:flex; align-items:center; margin:3px 0;">
+    <span style="display:inline-block; width:16px; height:3px;
+      background:#C000A8; margin-right:7px;
+      border-radius:2px;"></span>JR Gakkentoshi Line
+  </div>
+
+</details>
+
+<script>
+(function () {
+    var MAP_W = 1000;
+    var legend = document.querySelector('details.map-legend');
+    if (!legend) return;
+    var touched = false;
+
+    // Reader ownership is detected from an actual user gesture, NOT from the
+    // `toggle` event. `toggle` also fires for programmatic changes, and Chrome
+    // queues one for a <details open> element that lands AFTER this script
+    // attaches its listener - on a wide load `fit()` returns early, so that
+    // stray event used to set `touched` permanently and kill the breakpoint
+    // for the rest of the page's life (found by deploy-verify, 2026-09-21: the
+    // legend then covered four of New York's labels for anyone who narrowed
+    // their window rather than loading narrow). A click on the <summary> is
+    // unambiguous, and keyboard activation dispatches a click too.
+    var summary = legend.querySelector('summary');
+    if (summary) {
+        summary.addEventListener('click', function () { touched = true; });
+    }
+
+    function fit() {
+        if (touched) return;
+        var narrow = (document.documentElement.clientWidth || window.innerWidth) < MAP_W;
+        if (narrow !== !legend.open) legend.open = !narrow;
+    }
+    fit();
+    // Second pass: the 1000px map forces scrollbars at load, so the first
+    // measurement can read ~15px short; once PHONE_FIT_SCRIPT has resized the
+    // container they are gone and the width is accurate.
+    requestAnimationFrame(fit);
+    window.addEventListener('resize', fit);
+})();
+</script>
+    
+        <style>
+            .leaflet-control-layers-expanded {
+                max-height: 480px;
+                overflow-y: auto;
+            }
+        </style>
+    
+    
+<style>
+    #map-actions { position: fixed; top: 10px; right: 10px; z-index: 10000;
+        display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end;
+        max-width: calc(100% - 56px); }   /* clear of the zoom control on a phone */
+    .map-btn {
+        font: 600 13px var(--hm-font, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", "Hiragino Sans", "Yu Gothic", Meiryo, "Apple SD Gothic Neo", "Malgun Gothic", "PingFang TC", "Microsoft JhengHei", "PingFang SC", "Microsoft YaHei", Arial, sans-serif); padding: 6px 12px; cursor: pointer;
+        background: #ffffff; color: #1c2b2a;
+        border: 1px solid #999999;
+        border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    }
+    .map-btn[hidden] { display: none; }
+    /* THE TOOLTIP IS WHERE BUSINESS NAMES APPEAR, so it needs the font stack
+       more than anything else on the map does. Leaflet's own CSS sets
+       `"Helvetica Neue", Arial, Helvetica, sans-serif` on .leaflet-tooltip,
+       which is Latin-only - so without this rule a Japanese, Korean or Greek
+       shop name would render in whatever the browser substituted, as tofu
+       boxes or at metrics that outgrow the tooltip's own box. Added
+       2026-09-21 alongside pipeline/theme.FONT_STACK, whose own note explains
+       why the fallback ORDER matters (browsers fall through per glyph, not
+       per string). */
+    .leaflet-tooltip { font-family: var(--hm-font, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", "Hiragino Sans", "Yu Gothic", Meiryo, "Apple SD Gothic Neo", "Malgun Gothic", "PingFang TC", "Microsoft JhengHei", "PingFang SC", "Microsoft YaHei", Arial, sans-serif); }
+    .map-btn:focus-visible { outline: 2px solid #0d9488; outline-offset: 2px; }
+    #city-menu { width: 84px; text-overflow: ellipsis; }
+    @media (max-width: 480px) {
+        #map-actions { gap: 6px; }
+        .map-btn { padding: 6px 7px; font-size: 12px; }
+        #city-menu { width: 78px; }
+    }
+    .dark-base { color-scheme: dark; --dm-page: #0B1220; --dm-surface: #131C2E; --dm-surface-hover: #1A2740; --dm-surface-disabled: #0F1626; --dm-border: #23304A; --dm-text: #E6EDF7; --dm-muted: #8B9AB5; --dm-disabled-text: #5A6B8C; --dm-accent: #5eead4; --dm-ring: #C9D6EA; --dm-station: #7cc0ff;
+        background: var(--dm-page); }
+    .dark-base .leaflet-tile-pane {
+        filter: invert(1) hue-rotate(180deg) brightness(0.85) contrast(0.9) saturate(0.7); }
+    .dark-base .map-btn { background: var(--dm-surface); color: var(--dm-text);
+        border-color: var(--dm-border); }
+    .dark-base .map-btn:hover { background: var(--dm-surface-hover); }
+    /* These two selectors match on the LIGHT ring and station colours, which
+       is only safe because each is used nowhere else on the map. Both the
+       selector and the drawing code below read the same LIGHT value, so they
+       cannot drift apart - changing one used to silently break the other. */
+    .dark-base path.leaflet-interactive[stroke="#2c3e50"] { stroke: var(--dm-ring); }
+    .dark-base path.leaflet-interactive[stroke="#1a5490"] {
+        stroke: var(--dm-station); fill: var(--dm-station); }
+    .dark-base .leaflet-overlay-pane path[stroke-width="4"] { filter: brightness(1.55) saturate(0.9); }
+    .dark-base .map-legend span[style*="height:3px"] { filter: brightness(1.55) saturate(0.9); }
+    /* NO FILTER on a line label: a brightness() filter here once lifted the
+       halo with the text, so the dark page colour rendered #132039 and every
+       contrast figure measured a halo nobody saw. Each label carries its own
+       dark-theme colour in --dm-label instead (pipeline/linecolour.py,
+       "LINE LABELS"), read at 4.5:1 against exactly this halo. */
+    .dark-base .leaflet-marker-icon div[style*="text-shadow"] {
+        text-shadow: -1px -1px 0 var(--dm-page), 1px -1px 0 var(--dm-page),
+                     -1px 1px 0 var(--dm-page), 1px 1px 0 var(--dm-page),
+                     0 0 6px var(--dm-page) !important; }
+    .dark-base .hm-line-label { color: var(--dm-label) !important; }
+    .dark-base .map-legend { background: var(--dm-surface) !important;
+        color: var(--dm-text) !important; border-color: var(--dm-border) !important; }
+    .dark-base .leaflet-bar, .dark-base .leaflet-control-layers {
+        border: 1px solid var(--dm-border); box-shadow: none; }
+    .dark-base .leaflet-bar a, .dark-base .leaflet-control-layers {
+        background-color: var(--dm-surface); color: var(--dm-text); }
+    .dark-base .leaflet-bar a { border-bottom-color: var(--dm-border); }
+    .dark-base .leaflet-bar a:hover, .dark-base .leaflet-bar a:focus {
+        background-color: var(--dm-surface-hover); }
+    .dark-base .leaflet-bar a.leaflet-disabled {
+        background-color: var(--dm-surface-disabled); color: var(--dm-disabled-text); }
+    .dark-base .leaflet-control-layers-toggle { filter: invert(1); }
+    .dark-base .leaflet-control-layers-separator { border-top-color: var(--dm-border); }
+    .dark-base .leaflet-control-attribution { background: rgba(11, 18, 32, 0.8); color: var(--dm-muted); }
+    .dark-base .leaflet-control-attribution a { color: var(--dm-accent); }
+    .dark-base .leaflet-tooltip { background: var(--dm-surface); color: var(--dm-text);
+        border-color: var(--dm-border); box-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+    .dark-base .leaflet-tooltip-top:before { border-top-color: var(--dm-border); }
+    .dark-base .leaflet-tooltip-bottom:before { border-bottom-color: var(--dm-border); }
+    .dark-base .leaflet-tooltip-left:before { border-left-color: var(--dm-border); }
+    .dark-base .leaflet-tooltip-right:before { border-right-color: var(--dm-border); }
+</style>
+<div id="map-actions">
+    <select id="city-menu" class="map-btn" hidden aria-label="Go to another city">
+        <option value="" selected disabled>Cities</option>
+    </select>
+    <button id="back-to-map" class="map-btn" type="button" hidden
+        aria-label="Back to the Global View map">&larr; Global View</button>
+    <button id="back-to-region" class="map-btn" type="button" hidden></button>
+    <button id="theme-toggle" class="map-btn" type="button" aria-pressed="false">&#9790; Dark mode</button>
+</div>
+<script>
+(function () {
+    var KEY = 'expanded-heatmap-theme';
+    var btn = document.getElementById('theme-toggle');
+    function saved() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+    function save(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
+    function apply(dark) {
+        document.body.classList.toggle('dark-base', dark);
+        btn.setAttribute('aria-pressed', dark ? 'true' : 'false');
+        btn.textContent = dark ? '\u2600 Light mode' : '\u263E Dark mode';
+        // The theme button is 30 px tall in light mode and 34 px in dark, so
+        // the open legend's clearance is re-measured on every switch (review
+        // lane 2, L2-1: light to dark left 94 px where 98 was needed). The
+        // first call comes before `actions` is set; the load path measures then.
+        if (actions) syncClear();
+    }
+
+    function ambientPrefersDark() {
+        try {
+            if (window.parent !== window) {
+                var bg = window.parent.getComputedStyle(
+                    window.parent.document.body).backgroundColor;
+                var n = bg && bg.match(/[\d.]+/g);
+                if (n && n.length >= 3) {
+                    var alpha = n.length > 3 ? parseFloat(n[3]) : 1;
+                    if (alpha > 0.1) {          // transparent tells us nothing
+                        // Perceived brightness, 0-255; a binary decision does
+                        // not need full WCAG gamma expansion.
+                        var b = 0.299 * +n[0] + 0.587 * +n[1] + 0.114 * +n[2];
+                        return b < 128;
+                    }
+                }
+            }
+        } catch (e) { /* cross-origin or no parent: fall through */ }
+        return !!(window.matchMedia
+                  && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    }
+
+    // A remembered click wins; otherwise follow the surrounding page, so a map
+    // embedded in a dark app page does not open as a white rectangle.
+    var choice = saved();
+    apply(choice === 'dark' || choice === 'light'
+          ? choice === 'dark'
+          : ambientPrefersDark());
+    btn.addEventListener('click', function () {
+        var dark = !document.body.classList.contains('dark-base');
+        apply(dark);
+        save(dark ? 'dark' : 'light');
+    });
+    window.addEventListener('storage', function (e) {
+        if (e.key === KEY) apply(e.newValue === 'dark');
+    });
+    // Follow the OS preference while the visitor has made no explicit choice.
+    // NOTE: devtools colour-scheme emulation updates matchMedia().matches
+    // WITHOUT dispatching this event inside an iframe, so this listener can
+    // only be tested with a real OS theme switch (docs/theming.md).
+    if (window.matchMedia) {
+        var mq = window.matchMedia('(prefers-color-scheme: dark)');
+        if (mq.addEventListener) {
+            mq.addEventListener('change', function (e) {
+                if (!saved()) apply(e.matches);
+            });
+        }
+    }
+
+    // "Global View" button: only when this map is embedded in the app (it has a
+    // parent page to go back to); opened on its own it stays hidden. It clicks
+    // the app's own link to the Overview, so Streamlit navigates in place, and
+    // saves the current theme first so the macro map opens in the same mode.
+    var back = document.getElementById('back-to-map');
+    function trimSlash(p) { while (p.length > 1 && p.charAt(p.length - 1) === '/') p = p.slice(0, -1); return p; }
+    function overviewLink() {
+        var doc = window.parent.document, links = doc.querySelectorAll('a[href]');
+        for (var i = 0; i < links.length; i++) {          // the page's own link to the Overview:
+            var t = links[i].textContent;                 // hidden "All cities", switcher "Global View"
+            if (t.indexOf('All cities') !== -1 || t.indexOf('Global View') !== -1) return links[i];
+        }
+        var here = window.parent.location.pathname;      // else the link to the app's root
+        var root = trimSlash(here.substring(0, here.lastIndexOf('/') + 1));
+        for (var j = 0; j < links.length; j++) {
+            if (trimSlash(links[j].pathname) === root) return links[j];
+        }
+        return null;
+    }
+    // City menu: the other cities, read from the hidden links the app page renders
+    // (one per city, from app/cities.py), so a new city appears here without
+    // regenerating any map. The city this page belongs to is left out.
+    var menu = document.getElementById('city-menu');
+    function cityLinks() {
+        var box = window.parent.document.querySelector('.st-key-map-only-nav');
+        var out = [];
+        if (!box) return out;
+        var links = box.querySelectorAll('a');
+        for (var i = 0; i < links.length; i++) {
+            if (links[i].textContent.indexOf('All cities') === -1) out.push(links[i]);
+        }
+        return out;
+    }
+    // Identify "which page is this" by PAGE SLUG, not by display label.
+    //
+    // This used to derive a city name from the URL ("/Miami_Heatmap" -> "Miami")
+    // and compare it to the link's text. That breaks as soon as a city's
+    // display name is not its filename: Miami's label is "Miami (Regional)",
+    // so the comparison never matched and Miami's own map listed Miami in its
+    // "Cities" dropdown. Comparing slug to slug is immune to the label, which
+    // matters because a regional map's name will keep diverging from its
+    // filename (a Seattle build spanning twelve municipalities is the next).
+    function lastSegment(path) {
+        var parts = String(path || '').split('?')[0].split('#')[0]
+            .split('/').filter(Boolean);
+        return decodeURIComponent(parts.length ? parts[parts.length - 1] : '');
+    }
+    function fillMenu() {
+        if (menu.options.length > 1) return;    // already built
+        var here = lastSegment(window.parent.location.pathname);
+        var links = cityLinks();
+        for (var i = 0; i < links.length; i++) {
+            var name = links[i].textContent.trim();
+            if (lastSegment(links[i].getAttribute('href')) === here) continue;
+            var o = document.createElement('option');
+            o.value = name; o.textContent = name;
+            menu.appendChild(o);
+        }
+        menu.hidden = menu.options.length < 2;
+    }
+    function goTo(link) {
+        save(document.body.classList.contains('dark-base') ? 'dark' : 'light');
+        if (link) link.click();
+    }
+    // Region button, beside "Global View" (owner, 2026-10-07): the Overview
+    // opened on this city's region. Its link and its words come from the app
+    // page (components.render_city_nav, from app/cities.py), so a region
+    // renamed or a city regrouped needs no map re-rendered; with no such link
+    // (an older app, or the map opened alone) it stays hidden.
+    var regionBtn = document.getElementById('back-to-region');
+    function regionLink() {
+        var box = window.parent.document.querySelector('.st-key-map-region-nav');
+        return box ? box.querySelector('a[href]') : null;
+    }
+    function fillRegion() {
+        var link = regionLink();
+        if (!link) return;
+        var text = link.textContent.trim();
+        regionBtn.textContent = text;
+        regionBtn.setAttribute('aria-label', 'Back to ' + text.replace(/^\u2190\s*/, '') +
+            ' on the Global View map');
+        regionBtn.hidden = false;
+        syncClear();
+    }
+    // A fourth button wraps the row onto a second line in a phone's frame, so
+    // the open legend's cap (.map-legend, --hm-actions-clear) follows the
+    // row's measured bottom plus the 16 px gap the fixed 56 px figure keeps.
+    var actions = document.getElementById('map-actions');
+    function syncClear() {
+        var clear = Math.max(56, Math.ceil(actions.getBoundingClientRect().bottom) + 16);
+        document.documentElement.style.setProperty('--hm-actions-clear', clear + 'px');
+    }
+    window.addEventListener('resize', syncClear);
+    if (window.parent !== window) {
+        back.hidden = false;
+        back.addEventListener('click', function () { goTo(overviewLink()); });
+        fillRegion();
+        setTimeout(fillRegion, 800);            // as fillMenu: the links may render after this frame
+        setTimeout(fillRegion, 2500);
+        regionBtn.addEventListener('click', function () { goTo(regionLink()); });
+        fillMenu();
+        setTimeout(fillMenu, 800);              // the page's links may render just after this frame
+        setTimeout(fillMenu, 2500);
+        menu.addEventListener('mousedown', fillMenu);
+        menu.addEventListener('change', function () {
+            var links = cityLinks(), want = menu.value, hit = null;
+            for (var i = 0; i < links.length; i++) {
+                if (links[i].textContent.trim() === want) hit = links[i];
+            }
+            menu.selectedIndex = 0;
+            goTo(hit);
+        });
+    }
+})();
+</script>
+    
+<script>
+(function () {
+    var MAP_W = 1000, MAP_H = 650;
+    var BOUNDS = [[34.69875, 135.59848], [34.7845600023301, 135.65335]];            // [[south, west], [north, east]]
+    var NAME = "map_5f596111914dd6d7dddc5c6c89d63d07";
+    var tries = 0;
+    // The view Folium baked in, captured before any fit runs. apply() restores
+    // it when the map returns to full width - see the else branch there.
+    var HOME = null;
+    // The width the CURRENT view was fitted for, which is not the same thing as
+    // the container's width. See apply(): a view fitted while the container was
+    // still laying out stays wrong until something notices the mismatch, and
+    // comparing widths alone cannot notice it.
+    var FITTED_AT = null;
+
+    // THE GUARD - owner's decision 2026-09-23, after the same race surfaced a
+    // THIRD way. Edmonton (2026-09-21) and Paris (2026-09-23 morning) were each
+    // fixed at the point where they broke; that afternoon Lille's embedded map
+    // loaded at zoom 8.25 against a baked 11.75 - Edmonton's exact number - and
+    // a reload fixed it. Four further loads would not reproduce it. A race that
+    // cannot be reproduced on demand cannot be fixed one trigger at a time, so
+    // this stops chasing triggers and checks the OUTCOME instead: until the
+    // reader touches the map, the view is compared with what it should be for
+    // the frame's current width, and re-fitted when it is not.
+    //
+    // "What it should be" is exactly what apply() produces - HOME at full
+    // width, fitBounds(BOUNDS, padding 26/18 each side) when narrow - computed
+    // with getBoundsZoom rather than by calling fitBounds, so a correct view is
+    // never touched and the common case stays pixel-identical.
+    //
+    // TOUCHED ends it for good. Any pointer, wheel, touch or key event inside
+    // the map means the reader is steering, and a guard that restored the
+    // view under them would be a new bug. Captured on the container, so the
+    // zoom buttons, the pins and the in-map controls all count. The one
+    // exception is a touch that cannot move the map: see steering() below.
+    //
+    // __HEATMAP_VIEW is read by scripts/check_map_view.js. It exposes the
+    // INPUTS (home, bounds, padding) as well as the guard's own bookkeeping, so
+    // the check can recompute the expected zoom independently instead of
+    // trusting the thing it is checking.
+    var TOUCHED = false;
+    var PAD = [26, 18];
+    var VIEW = window.__HEATMAP_VIEW = {
+        bounds: BOUNDS, mapW: MAP_W, padding: PAD, home: null,
+        expected: null, actual: null, touched: false, corrections: 0};
+
+    function wantedZoom(m, target) {
+        if (target < MAP_W && BOUNDS) {
+            return m.getBoundsZoom(L.latLngBounds(BOUNDS), false,
+                                   L.point(2 * PAD[0], 2 * PAD[1]));
+        }
+        return HOME ? HOME.zoom : null;
+    }
+
+    function guard(m) {
+        if (TOUCHED || !HOME) return;
+        var w = document.documentElement.clientWidth || window.innerWidth;
+        var target = Math.min(w, MAP_W);
+        if (!target) return;
+        var want = wantedZoom(m, target);
+        VIEW.expected = want;
+        VIEW.actual = m.getZoom();
+        if (want === null || Math.abs(m.getZoom() - want) < 0.01) return;
+        VIEW.corrections += 1;
+        FITTED_AT = null;   // make apply() re-fit instead of trusting the width
+        apply(m);
+        VIEW.actual = m.getZoom();
+    }
+
+    // A touch that cannot move the map is not steering. With one-finger
+    // dragging off (TOUCH_GESTURE_SCRIPT, on a touch screen) a single finger
+    // only scrolls the page, so its touchstart and pointerdown leave the guard
+    // running; two fingers, or a tap (which goes on to send mousedown and
+    // click, a scroll sends neither), still end it. With dragging on, every
+    // touch counts, as before.
+    function steering(m, e) {
+        if (e.type === "touchstart") return e.touches.length > 1 || m.dragging.enabled();
+        if (e.type === "pointerdown" && e.pointerType === "touch") return m.dragging.enabled();
+        return true;
+    }
+
+    function armGuard(m) {
+        var el = m.getContainer();
+        ["pointerdown", "mousedown", "click", "touchstart", "wheel", "keydown"].forEach(
+            function (ev) {
+                el.addEventListener(ev, function (e) {
+                    if (!steering(m, e)) return;
+                    TOUCHED = true;
+                    VIEW.touched = true;
+                }, {capture: true, passive: true});
+            });
+        // Bounded polling for the load itself - every earlier variant of the
+        // race resolved or struck inside the first seconds...
+        var ticks = 0;
+        var iv = setInterval(function () {
+            guard(m);
+            if (TOUCHED || ++ticks >= 40) clearInterval(iv);
+        }, 500);
+        // ...and event triggers for everything slower: a page opened in a
+        // background tab (timers throttled, layout late), an embed below the
+        // fold, a bfcache restore.
+        document.addEventListener("visibilitychange", function () {
+            if (!document.hidden) guard(m);
+        });
+        window.addEventListener("pageshow", function () { guard(m); });
+        if (window.IntersectionObserver) {
+            new IntersectionObserver(function (entries) {
+                if (entries.some(function (e) { return e.isIntersecting; })) guard(m);
+            }).observe(el);
+        }
+    }
+
+    // Folium renders body HTML before the figure's script block, so this runs
+    // before the map exists - poll for it rather than assuming.
+    function ready() {
+        var m = window[NAME];
+        if (m && m.invalidateSize) return m;
+        return null;
+    }
+
+    function apply(m) {
+        var el = m.getContainer();
+        var w = document.documentElement.clientWidth || window.innerWidth;
+        var target = Math.min(w, MAP_W);
+        // A ZERO TARGET IS ALWAYS A BAD MEASUREMENT, NEVER A REAL WIDTH.
+        //
+        // Added 2026-09-23 after Paris rendered BLANK on first load, with
+        // `width: 0px` written onto the container and Leaflet.heat throwing
+        // "IndexSizeError: getImageData ... source width is 0". A pass that
+        // runs before the document has laid out reads clientWidth 0, and the
+        // old code wrote that straight through.
+        //
+        // It is the same RACE the else branch below documents for Edmonton -
+        // intermittent, not specific to a city, and the same page reloaded
+        // rendered correctly - but this manifestation is worse: a narrow fit
+        // is a bad view, a zero width is no map at all plus a console error.
+        // Paris is the city that exposed it because it is the heaviest map
+        // here (84,125 points), which widens the window before layout settles.
+        //
+        // Returning leaves the container alone for the later passes - immediate,
+        // rAF, 120 ms, 400 ms, 1200 ms and resize - one of which measures a
+        // laid-out document. Correct renders are untouched, because `target` is
+        // only 0 when the measurement is meaningless.
+        if (!target) return;
+        // THE EARLY RETURN USED TO BE A CORRECTNESS BUG, not just an
+        // optimisation. It read "the width already matches, so there is
+        // nothing to do" - but the VIEW can be wrong while the WIDTH is right.
+        //
+        // Observed on the deployed site 2026-09-23, on Paris: the embedded map
+        // sat at zoom 9 against its baked 12.5, showing the whole Ile-de-France
+        // with every line label flung to the frame edges. Sequence: an early
+        // pass measured the container mid-layout at some narrow width and
+        // fitted BOUNDS for THAT width; a later pass found the container now at
+        // its real 854 px, matched `target`, and returned - so the zoom from
+        // the narrow fit was never undone. Intermittent, and it survived the
+        // 2026-09-21 fix because that one only added an `else` branch AFTER
+        // this return.
+        //
+        // So the state that matters is "what width was the current view fitted
+        // for", not "what width is the container". FITTED_AT records it, and a
+        // mismatch re-fits even when the width needs no change.
+        var atWidth = Math.abs(el.getBoundingClientRect().width - target) < 1;
+        if (atWidth && FITTED_AT === target) return;
+        if (!atWidth) {
+            el.style.width = target + "px";
+            document.body.style.width = target + "px";
+            m.invalidateSize();
+        }
+        FITTED_AT = target;
+        if (target < MAP_W && BOUNDS) {
+            // Generous padding because BOUNDS holds label ANCHORS, and a label's
+            // text box extends past its anchor by up to ~70px.
+            // PAD, not a literal: the guard computes the zoom this call lands
+            // on, and a padding that drifted between the two would make it
+            // "correct" a right view forever.
+            m.fitBounds(L.latLngBounds(BOUNDS), {padding: PAD, animate: false});
+        } else if (HOME) {
+            // BACK AT FULL WIDTH, AND THIS BRANCH IS A BUG FIX, NOT SYMMETRY.
+            //
+            // Until 2026-09-21 there was no else. A pass that ran while the
+            // iframe was still laying out measured a narrow clientWidth,
+            // fitted BOUNDS at that width - which is a much lower zoom - and
+            // then the later full-width pass restored the WIDTH and left the
+            // ZOOM alone, because re-fitting was conditional on being narrow.
+            // Nothing afterwards ever corrected it, so the map sat at the
+            // narrow-width zoom at full width: Edmonton was caught embedded at
+            // zoom 8.25 against its baked 11.5, showing the whole region with
+            // every pin in one cluster. It is a RACE, so it is intermittent and
+            // not specific to a city - the same page reloaded rendered
+            // correctly, and Calgary's rendered correctly alongside the broken
+            // Edmonton.
+            //
+            // Restoring HOME rather than re-fitting BOUNDS is deliberate:
+            // Folium's baked view is what every full-width map has always
+            // shown, and a runtime fitBounds lands a quarter-step tighter
+            // (Edmonton 11.75 against 11.5). So this repairs the broken case
+            // and leaves the normal one pixel-identical.
+            m.setView(HOME.center, HOME.zoom, {animate: false});
+        }
+    }
+
+    function start() {
+        var m = ready();
+        if (!m) {
+            if (tries++ < 60) return setTimeout(start, 100);
+            return;
+        }
+        // Before the first apply(), so this is Folium's own fitted view and not
+        // something a narrow-width pass has already moved.
+        if (!HOME) {
+            HOME = {center: m.getCenter(), zoom: m.getZoom()};
+            VIEW.home = {center: [HOME.center.lat, HOME.center.lng], zoom: HOME.zoom};
+        }
+        // Applied more than once on purpose. At load the 1000px-wide map forces
+        // a horizontal scrollbar, which costs enough height to force a vertical
+        // one, so `clientWidth` reads ~15px short; once the first pass has
+        // shrunk the container both scrollbars go away and the measurement is
+        // right, but no resize event is dispatched to notice that. The later
+        // passes also settle a transient seen on the heaviest map at phone
+        // width, where the pane transform lagged a correct fit. apply() returns
+        // immediately once the width already matches, so the extra passes are
+        // free. (deploy-verify, 2026-09-21)
+        apply(m);
+        requestAnimationFrame(function () { apply(m); });
+        [120, 400, 1200].forEach(function (d) {
+            setTimeout(function () { apply(m); }, d);
+        });
+        var t = null;
+        window.addEventListener("resize", function () {
+            clearTimeout(t);
+            t = setTimeout(function () { apply(m); guard(m); }, 150);
+        });
+        armGuard(m);
+    }
+    start();
+})();
+</script>
+    
+<script>
+(function () {
+    var NAME = "map_5f596111914dd6d7dddc5c6c89d63d07";
+    var MARGIN = 6;     // px kept between a label's text and the frame edge
+    var GAP = 4;        // px between a re-placed label and its line's tip
+    var CLEAR = 2;      // px a label keeps from a button, control or legend
+    var PASSES = 4;
+    var tries = 0;
+
+    function box(x0, y0, x1, y1) { return {x0: x0, y0: y0, x1: x1, y1: y1}; }
+    function shift(b, sx, sy) { return box(b.x0 + sx, b.y0 + sy, b.x1 + sx, b.y1 + sy); }
+    function area(a, b) {
+        var w = Math.min(a.x1, b.x1) - Math.max(a.x0, b.x0);
+        var h = Math.min(a.y1, b.y1) - Math.max(a.y0, b.y0);
+        return w > 0 && h > 0 ? w * h : 0;
+    }
+
+    // What a label must stay clear of, in the map container's coordinates:
+    // the fixed "Global View"/theme buttons, Leaflet's own top-left controls,
+    // and the legend while it is COLLAPSED. An open legend is the reader's
+    // choice to cover part of the map; shuffling labels out from under it
+    // would only crowd them elsewhere.
+    function obstacles(m) {
+        var c = m.getContainer(), mr = c.getBoundingClientRect(), out = [];
+        function add(el) {
+            if (!el) return;
+            var r = el.getBoundingClientRect();
+            if (r.width && r.height) {
+                out.push(box(r.left - mr.left, r.top - mr.top,
+                             r.right - mr.left, r.bottom - mr.top));
+            }
+        }
+        add(document.getElementById("map-actions"));
+        var legend = document.querySelector("details.map-legend");
+        if (legend && !legend.open) add(legend);
+        c.querySelectorAll(".leaflet-top.leaflet-left .leaflet-control").forEach(add);
+        return out;
+    }
+
+    function place(m) {
+        var size = m.getSize();
+        if (!size.x || !size.y) return;
+        // Never slide a label ONTO the basemap credit, which must stay
+        // visible (ODbL). The credit is a strip along the bottom edge, so the
+        // bottom limit clears its height as well as MARGIN.
+        var att = m.getContainer().querySelector(".leaflet-control-attribution");
+        var bottom = size.y - MARGIN - (att ? att.getBoundingClientRect().height : 0);
+        function inside(b) {
+            var dx = Math.max(0, MARGIN - b.x0) - Math.max(0, b.x1 - (size.x - MARGIN));
+            var dy = Math.max(0, MARGIN - b.y0) - Math.max(0, b.y1 - bottom);
+            return [dx, dy];
+        }
+
+        // 1. Every label at its baked position, slid inside the frame if it
+        //    would be cut - exactly as before this placer existed.
+        var labels = [];
+        m.eachLayer(function (layer) {
+            if (!layer._icon || !layer.getLatLng) return;
+            var d = layer._icon.querySelector(".hm-line-label");
+            if (!d) return;
+            if (d.dataset.base === undefined) d.dataset.base = d.style.transform;
+            d.style.transform = d.dataset.base;
+            var i = layer._icon.getBoundingClientRect();
+            var r = d.getBoundingClientRect();
+            if (!r.width) return;
+            var p = m.latLngToContainerPoint(layer.getLatLng());
+            if (p.x < 0 || p.y < 0 || p.x > size.x || p.y > size.y) return;
+            var base = box(p.x + (r.left - i.left), p.y + (r.top - i.top),
+                           p.x + (r.right - i.left), p.y + (r.bottom - i.top));
+            var s = inside(base);
+            labels.push({d: d, p: p, base: base, sx: s[0], sy: s[1],
+                         b: shift(base, s[0], s[1])});
+        });
+
+        // 2. Re-place only a label that overlaps another label or an obstacle,
+        //    trying spots around its own line's tip, so it still names that
+        //    line. A label that collides with nothing never moves, so a map
+        //    that was already clean - every desktop view - is unchanged.
+        var obs = obstacles(m);
+        function cost(L, b) {
+            var c = 0;
+            labels.forEach(function (o) {
+                if (o !== L) c += area(b, box(o.b.x0 - 1, o.b.y0 - 1, o.b.x1 + 1, o.b.y1 + 1));
+            });
+            // Obstacles count with CLEAR px of margin: Edmonton's Valley Line
+            // tip sits under the collapsed legend, and the best spot beside it
+            // still overlapped the legend by one pixel - which reads as
+            // touching and which the check rightly refuses.
+            obs.forEach(function (o) {
+                c += area(b, box(o.x0 - CLEAR, o.y0 - CLEAR, o.x1 + CLEAR, o.y1 + CLEAR));
+            });
+            return c;
+        }
+        function candidates(L) {
+            var b = L.base, p = L.p;
+            var w = b.x1 - b.x0, h = b.y1 - b.y0;
+            var cx = (b.x0 + b.x1) / 2, cy = (b.y0 + b.y1) / 2;
+            var at = function (x, y) { return [x - cx, y - cy]; };
+            return [
+                [2 * (p.x - cx), 0],                       // mirrored across the tip
+                [0, 2 * (p.y - cy)],
+                at(p.x, p.y - h / 2 - GAP),                // above the tip
+                at(p.x, p.y + h / 2 + GAP),                // below
+                at(p.x + w / 2 + GAP, p.y),                // right
+                at(p.x - w / 2 - GAP, p.y),                // left
+                [2 * (p.x - cx), 2 * (p.y - cy)],
+                at(p.x, p.y - 1.5 * h - 2 * GAP),          // a step further out
+                at(p.x, p.y + 1.5 * h + 2 * GAP),
+                at(p.x + w / 2 + GAP, p.y - h / 2 - GAP),  // the four diagonals
+                at(p.x - w / 2 - GAP, p.y - h / 2 - GAP),
+                at(p.x + w / 2 + GAP, p.y + h / 2 + GAP),
+                at(p.x - w / 2 - GAP, p.y + h / 2 + GAP),
+                at(p.x, p.y - 2.5 * h - 3 * GAP),          // for a tip buried
+                at(p.x, p.y + 2.5 * h + 3 * GAP)           // under an obstacle
+            ];
+        }
+        for (var pass = 0; pass < PASSES; pass++) {
+            var moved = false;
+            labels.forEach(function (L) {
+                var best = cost(L, L.b);
+                if (!best) return;
+                candidates(L).forEach(function (c) {
+                    if (!best) return;
+                    var b = shift(L.base, c[0], c[1]);
+                    var s = inside(b);
+                    b = shift(b, s[0], s[1]);
+                    var k = cost(L, b);
+                    if (k < best) {
+                        best = k; L.b = b;
+                        L.sx = c[0] + s[0]; L.sy = c[1] + s[1];
+                        moved = true;
+                    }
+                });
+            });
+            if (!moved) break;
+        }
+
+        labels.forEach(function (L) {
+            if (L.sx || L.sy) {
+                L.d.style.transform = L.d.dataset.base + " translate(" +
+                    L.sx.toFixed(1) + "px, " + L.sy.toFixed(1) + "px)";
+            }
+        });
+    }
+
+    function start() {
+        var m = window[NAME];
+        if (!m || !m.getSize) {
+            if (tries++ < 60) setTimeout(start, 100);
+            return;
+        }
+        m.on("moveend zoomend resize viewreset", function () { place(m); });
+        // The collapsed legend is an obstacle and the open one is not, so a
+        // reader opening or closing it re-runs the placement.
+        var legend = document.querySelector("details.map-legend");
+        if (legend) legend.addEventListener("toggle", function () { place(m); });
+        place(m);
+    }
+    start();
+})();
+</script>
+    
+<script>
+(function () {
+    var NAME = "map_5f596111914dd6d7dddc5c6c89d63d07";
+    // One event of at least this many normalised units (L.DomEvent.
+    // getWheelDelta) marks a notched wheel: Chrome and Edge on Windows give
+    // 50 per notch, Firefox's line mode 60. Trackpads send many events of a
+    // few units each.
+    var NOTCH = 25;
+
+    function install(m) {
+        var h = m.scrollWheelZoom;
+        if (!h) return;
+        // Re-registering is the only way in: Leaflet bound the listener to the
+        // handler's own _onWheelScroll when it enabled it.
+        var was = h.enabled();
+        h.disable();
+        h._onWheelScroll = function (e) {
+            var delta = L.DomEvent.getWheelDelta(e);
+            this._delta += delta;
+            this._maxEvent = Math.max(this._maxEvent || 0, Math.abs(delta));
+            this._lastMousePos = this._map.mouseEventToContainerPoint(e);
+            if (!this._startTime) this._startTime = +new Date();
+            var left = Math.max(this._map.options.wheelDebounceTime -
+                                (+new Date() - this._startTime), 0);
+            clearTimeout(this._timer);
+            this._timer = setTimeout(L.bind(this._performZoom, this), left);
+            L.DomEvent.stop(e);
+        };
+        h._performZoom = function () {
+            var map = this._map;
+            if (map._animatingZoom) {
+                clearTimeout(this._timer);
+                this._timer = setTimeout(L.bind(this._performZoom, this), 20);
+                return;
+            }
+            var zoom = map.getZoom(), step;
+            map._stop();
+            if (this._maxEvent >= NOTCH) {
+                step = Math.min(Math.max(Math.round(Math.abs(this._delta) / this._maxEvent), 1),
+                                map.options.zoomAnimationThreshold);
+            } else {
+                // Leaflet 1.9's own curve and snap, verbatim.
+                var snap = map.options.zoomSnap || 0,
+                    d2 = this._delta / (map.options.wheelPxPerZoomLevel * 4),
+                    d3 = 4 * Math.log(2 / (1 + Math.exp(-Math.abs(d2)))) / Math.LN2;
+                step = snap ? Math.ceil(d3 / snap) * snap : d3;
+            }
+            var delta = map._limitZoom(zoom + (this._delta > 0 ? step : -step)) - zoom;
+            this._delta = 0;
+            this._maxEvent = 0;
+            this._startTime = null;
+            if (!delta) return;
+            if (map.options.scrollWheelZoom === "center") map.setZoom(zoom + delta);
+            else map.setZoomAround(this._lastMousePos, zoom + delta);
+        };
+        if (was) h.enable();
+    }
+
+    // Folium's map script is inline at the end of the body, so the map exists
+    // once parsing is done.
+    function start() { if (window[NAME]) install(window[NAME]); }
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", start);
+    } else {
+        start();
+    }
+})();
+</script>
+    
+<script>
+(function () {
+    var NAME = "map_5f596111914dd6d7dddc5c6c89d63d07";
+    function start() {
+        var m = window[NAME], ac = m && m.attributionControl;
+        if (!ac || typeof ac.options.prefix !== "string") return;
+        var p = ac.options.prefix;
+        if (p.indexOf("target=") === -1) {
+            ac.setPrefix(p.replace(/<a /g, '<a target="_blank" rel="noopener noreferrer" '));
+        }
+    }
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", start);
+    } else {
+        start();
+    }
+})();
+</script>
+    
+<style>
+.map-legend .hm-line-row { cursor: pointer; border-radius: 3px; }
+.map-legend .hm-line-row:focus-visible { outline: none;
+    background: rgba(127,127,127,0.16); box-shadow: 0 0 0 3px rgba(127,127,127,0.16); }
+@media (hover: hover) {
+    .map-legend .hm-line-row:hover { background: rgba(127,127,127,0.16);
+        box-shadow: 0 0 0 3px rgba(127,127,127,0.16); } }
+.map-legend .hm-line-row.hm-on { background: rgba(127,127,127,0.28);
+    box-shadow: 0 0 0 3px rgba(127,127,127,0.28); }
+.map-legend .hm-line-row.hm-on > span { transform: scaleY(2); }
+.map-legend.hm-picking .hm-line-row:not(.hm-on) { opacity: 0.6; }
+.leaflet-overlay-pane path.hm-line.hm-dim { stroke-opacity: 0.25; }
+.leaflet-overlay-pane path.hm-line.hm-hot { stroke-width: 7px; stroke-opacity: 1; }
+</style>
+<script>
+(function () {
+    var NAME = "map_5f596111914dd6d7dddc5c6c89d63d07";
+    var tries = 0;
+
+    function start() {
+        var m = window[NAME];
+        if (!m || !m.eachLayer) {
+            if (tries++ < 60) setTimeout(start, 100);
+            return;
+        }
+        var lines = {};
+        function line(k) { return lines[k] || (lines[k] = {polys: [], label: null}); }
+        m.eachLayer(function (layer) {
+            var c = layer.options && layer.options.className;
+            var hit = typeof c === "string" && /\bhm-line-(\d+)\b/.exec(c);
+            if (hit && layer._path) {
+                line(hit[1]).polys.push(layer);
+                layer._path._hmLine = true;
+            } else if (layer._icon) {
+                var d = layer._icon.querySelector(".hm-line-label[data-line]");
+                if (d) line(d.getAttribute("data-line")).label = layer;
+            }
+        });
+        var keys = Object.keys(lines).filter(function (k) {
+            return lines[k].polys.length;
+        }).sort(function (a, b) { return a - b; });
+        if (!keys.length) return;
+        var legend = document.querySelector("details.map-legend");
+        var rows = legend ? legend.querySelectorAll(".hm-line-row[data-line]") : [];
+        var mq = function (q) { return !!(window.matchMedia && window.matchMedia(q).matches); };
+        var HOVER = mq("(hover: hover) and (pointer: fine)");
+        // 22 on a touch screen is TAP_SELECT_SCRIPT's REACH: a 44 px target.
+        var TOL = mq("(pointer: coarse)") ? 22 : 7;
+        var sel = null, hov = null, shown = null, outTimer = null;
+
+        // The picked line's paths go last within the run of line paths, so
+        // above every other line and still under anything drawn after them.
+        function restack(top) {
+            var paths = [];
+            keys.forEach(function (k) {
+                if (k !== top) lines[k].polys.forEach(function (p) { paths.push(p._path); });
+            });
+            if (top !== null) lines[top].polys.forEach(function (p) { paths.push(p._path); });
+            var g = paths[0].parentNode;
+            if (!g) return;
+            var last = g.lastChild;
+            while (last && !last._hmLine) last = last.previousSibling;
+            var ref = last ? last.nextSibling : null;
+            // Already in this order? Then touch nothing: re-inserting the path
+            // under the pointer detaches it, and the browser never sends it
+            // mouseout - which left a hover stuck on (map-refresh check).
+            var run = [], n = last;
+            while (n && run.length < paths.length) {
+                if (n._hmLine) run.unshift(n);
+                n = n.previousSibling;
+            }
+            if (run.length === paths.length && run.every(function (x, i) { return x === paths[i]; })) return;
+            paths.forEach(function (p) { if (p.parentNode === g) g.insertBefore(p, ref); });
+        }
+
+        function show() {
+            var want = hov !== null ? hov : sel;
+            if (want === shown) return;
+            shown = want;
+            keys.forEach(function (k) {
+                var on = k === want, rec = lines[k];
+                rec.polys.forEach(function (p) {
+                    p._path.classList.toggle("hm-hot", on);
+                    p._path.classList.toggle("hm-dim", want !== null && !on);
+                });
+                if (rec.label) rec.label.setZIndexOffset(on ? 1500 : 1000);
+            });
+            for (var i = 0; i < rows.length; i++) {
+                var on = rows[i].getAttribute("data-line") === want;
+                rows[i].classList.toggle("hm-on", on);
+                rows[i].setAttribute("aria-pressed", on ? "true" : "false");
+            }
+            if (legend) legend.classList.toggle("hm-picking", want !== null);
+            restack(want);
+        }
+        function pick(k) { sel = sel === k ? null : k; show(); }
+        // A short delay before a hover ends, so moving from one line onto the
+        // line beside it, or a path being restacked under the pointer, does
+        // not flash the whole map back to normal in between.
+        function hover(k) {
+            clearTimeout(outTimer);
+            if (k !== null) { hov = k; show(); return; }
+            outTimer = setTimeout(function () { hov = null; show(); }, 80);
+        }
+
+        function distance(rec, p) {
+            var d = Infinity;
+            rec.polys.forEach(function (layer) {
+                (layer._parts || []).forEach(function (part) {
+                    for (var i = 1; i < part.length; i++) {
+                        d = Math.min(d, L.LineUtil.pointToSegmentDistance(p, part[i - 1], part[i]));
+                    }
+                });
+            });
+            return d;
+        }
+
+        m.on("click", function (e) {
+            // On a touch screen TAP_SELECT_SCRIPT has already measured this
+            // tap from where the finger lifted and sent it on as a line tap.
+            var tap = window.__HEATMAP_TAP && window.__HEATMAP_TAP.last;
+            var mine = !!(tap && tap.event === e.originalEvent);
+            var at = mine ? m.containerPointToLayerPoint(tap.point) : e.layerPoint;
+            var t = e.originalEvent && e.originalEvent.target;
+            if (!mine && t && t.classList && t.classList.contains("leaflet-interactive") && !t._hmLine) return;
+            var found = [];
+            keys.forEach(function (k, i) {
+                var d = distance(lines[k], at);
+                if (d <= TOL) found.push({k: k, d: d, z: k === shown ? keys.length : i});
+            });
+            if (!found.length) { clearTimeout(outTimer); sel = null; hov = null; show(); return; }
+            var near = Math.min.apply(null, found.map(function (f) { return f.d; }));
+            var best = null;
+            found.forEach(function (f) {
+                if (f.d <= near + 1 && (!best || f.z > best.z)) best = f;
+            });
+            pick(best.k);
+        });
+
+        for (var i = 0; i < rows.length; i++) {
+            (function (row) {
+                var k = row.getAttribute("data-line");
+                if (!lines[k]) return;
+                row.addEventListener("click", function () { pick(k); });
+                row.addEventListener("keydown", function (e) {
+                    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(k); }
+                });
+                if (HOVER) {
+                    row.addEventListener("mouseenter", function () { hover(k); });
+                    row.addEventListener("mouseleave", function () { hover(null); });
+                }
+            })(rows[i]);
+        }
+        if (HOVER) {
+            keys.forEach(function (k) {
+                lines[k].polys.forEach(function (layer) {
+                    layer.on("mouseover", function () { hover(k); });
+                    layer.on("mouseout", function () { hover(null); });
+                });
+            });
+            m.on("mousemove", function (e) {
+                if (hov === null || !lines[hov]) return;
+                var t = e.originalEvent && e.originalEvent.target;
+                if (legend && t && legend.contains(t)) return;
+                if (distance(lines[hov], e.layerPoint) > TOL) hover(null);
+            });
+        }
+        document.addEventListener("keydown", function (e) {
+            if (e.key === "Escape" && (sel !== null || hov !== null)) {
+                clearTimeout(outTimer); sel = null; hov = null; show();
+            }
+        });
+    }
+    start();
+})();
+</script>
+    
+<style>
+.hm-touch-hint { position: absolute; left: 50%; top: 50%; z-index: 900;
+    transform: translate(-50%, -50%); pointer-events: none; opacity: 0;
+    transition: opacity 0.25s; max-width: calc(100% - 48px); box-sizing: border-box;
+    padding: 8px 14px; border-radius: 4px; text-align: center;
+    font: 600 14px var(--hm-font, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", "Hiragino Sans", "Yu Gothic", Meiryo, "Apple SD Gothic Neo", "Malgun Gothic", "PingFang TC", "Microsoft JhengHei", "PingFang SC", "Microsoft YaHei", Arial, sans-serif);
+    background: #ffffff; color: #1c2b2a; border: 1px solid #999999;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.3); }
+.hm-touch-hint:empty { display: none; }
+.hm-touch-hint.hm-shown { opacity: 1; }
+.dark-base .hm-touch-hint { background: var(--dm-surface); color: var(--dm-text);
+    border-color: var(--dm-border); box-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+</style>
+<script>
+(function () {
+    var NAME = "map_5f596111914dd6d7dddc5c6c89d63d07";
+    var TEXT = "Use two fingers to move the map";
+    var HINT_MS = 1500;     // shown this long after the last one-finger move
+    var FADE_MS = 300;      // a little over the CSS transition
+    var MOVE_PX = 10;       // a tap's jitter stays under this
+    var tries = 0;
+
+    function start() {
+        var m = window[NAME];
+        if (!m || !m.dragging || !m.getContainer) {
+            if (tries++ < 60) setTimeout(start, 100);
+            return;
+        }
+        var el = m.getContainer();
+        var mq = window.matchMedia ? window.matchMedia("(pointer: coarse)") : null;
+        var coop = false, disabledHere = false;
+
+        function apply() {
+            coop = !!(mq && mq.matches);
+            if (coop && m.dragging.enabled()) { m.dragging.disable(); disabledHere = true; }
+            else if (!coop && disabledHere) { m.dragging.enable(); disabledHere = false; }
+            window.__HEATMAP_TOUCH = {cooperative: coop, dragging: m.dragging.enabled()};
+        }
+        apply();
+        if (mq) {
+            if (mq.addEventListener) mq.addEventListener("change", apply);
+            else if (mq.addListener) mq.addListener(apply);
+        }
+
+        var hint = document.createElement("div");
+        hint.className = "hm-touch-hint";
+        hint.setAttribute("role", "status");
+        hint.setAttribute("aria-live", "polite");
+        el.appendChild(hint);
+        var hideTimer = null, clearTimer = null;
+        function hide() {
+            clearTimeout(hideTimer);
+            hint.classList.remove("hm-shown");
+            clearTimeout(clearTimer);
+            clearTimer = setTimeout(function () { hint.textContent = ""; }, FADE_MS);
+        }
+        function show() {
+            clearTimeout(clearTimer);
+            if (hint.textContent !== TEXT) hint.textContent = TEXT;
+            hint.classList.add("hm-shown");
+            clearTimeout(hideTimer);
+            hideTimer = setTimeout(hide, HINT_MS);
+        }
+
+        function pos(t) {
+            return t.screenX || t.screenY ? [t.screenX, t.screenY] : [t.clientX, t.clientY];
+        }
+        var from = null;
+        el.addEventListener("touchstart", function (e) {
+            from = null;
+            if (!coop) return;
+            if (e.touches.length !== 1) { hide(); return; }
+            var t = e.target;
+            if (t && t.closest && t.closest(".leaflet-control")) return;
+            from = pos(e.touches[0]);
+        }, {passive: true});
+        el.addEventListener("touchmove", function (e) {
+            if (!from) return;
+            if (e.touches.length !== 1) { from = null; hide(); return; }
+            var p = pos(e.touches[0]);
+            if (Math.abs(p[0] - from[0]) + Math.abs(p[1] - from[1]) >= MOVE_PX) show();
+        }, {passive: true});
+        el.addEventListener("touchend", function (e) {
+            if (!e.touches.length) from = null;
+        }, {passive: true});
+        el.addEventListener("touchcancel", function () { from = null; }, {passive: true});
+    }
+    start();
+})();
+</script>
+    
+<style>
+.hm-tap-panel { display: none; position: fixed; z-index: 10000; box-sizing: border-box;
+    left: 10px; bottom: 24px; max-width: 420px; overflow-y: auto;
+    padding: 8px 40px 8px 12px; border-radius: 4px; overflow-wrap: anywhere;
+    font: 13px/1.4 var(--hm-font, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", "Hiragino Sans", "Yu Gothic", Meiryo, "Apple SD Gothic Neo", "Malgun Gothic", "PingFang TC", "Microsoft JhengHei", "PingFang SC", "Microsoft YaHei", Arial, sans-serif);
+    background: #ffffff; color: #1c2b2a; border: 1px solid #999999;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.3); }
+.hm-tap-panel.hm-shown { display: block; }
+.hm-tap-close { position: absolute; top: 0; right: 0; width: 40px; height: 40px;
+    padding: 0; border: 0; background: none; color: inherit; cursor: pointer;
+    font: 22px/40px var(--hm-font, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", "Hiragino Sans", "Yu Gothic", Meiryo, "Apple SD Gothic Neo", "Malgun Gothic", "PingFang TC", "Microsoft JhengHei", "PingFang SC", "Microsoft YaHei", Arial, sans-serif); }
+.dark-base .hm-tap-panel { background: var(--dm-surface); color: var(--dm-text);
+    border-color: var(--dm-border); box-shadow: 0 1px 4px rgba(0,0,0,0.5); }
+.hm-tap-ring { box-sizing: border-box; border-radius: 50%; pointer-events: none;
+    border: 2px solid #fff; box-shadow: 0 0 0 2px #111, 0 0 6px 2px rgba(0,0,0,0.45); }
+@media (pointer: coarse) { .leaflet-tooltip-pane { display: none; } }
+</style>
+<script>
+(function () {
+    var NAME = "map_5f596111914dd6d7dddc5c6c89d63d07";
+    var REACH = 22;         // px from a centre or centreline: a 44 px target
+    var TIE_PX = 2;         // edges this close count as a tie, broken by kind
+    var ROOM_PX = 200;      // map height the panel needs above the legend
+    var RING_PX = 26;       // the selection ring's outer diameter
+    var LIFT_MS = 800;      // a click this soon after a touchend is that tap's
+    var tries = 0;
+
+    function start() {
+        var m = window[NAME];
+        if (!m || !m.getContainer || !m.eachLayer) {
+            if (tries++ < 60) setTimeout(start, 100);
+            return;
+        }
+        var el = m.getContainer();
+        var mq = window.matchMedia ? window.matchMedia("(pointer: coarse)") : null;
+        var legend = document.querySelector("details.map-legend");
+        var TAP = window.__HEATMAP_TAP = {reach: REACH, last: null};
+
+        var panel = document.createElement("div");
+        panel.className = "hm-tap-panel";
+        var body = document.createElement("div");
+        body.setAttribute("role", "status");
+        body.setAttribute("aria-live", "polite");
+        var close = document.createElement("button");
+        close.type = "button";
+        close.className = "hm-tap-close";
+        close.setAttribute("aria-label", "Close");
+        close.innerHTML = "&times;";
+        panel.appendChild(body);
+        panel.appendChild(close);
+        document.body.appendChild(panel);
+
+        var ring = null, picked = null, passing = false;
+        function follow() { if (ring && picked) { ring.setLatLng(picked.getLatLng()); place(); } }
+        function clear() {
+            panel.classList.remove("hm-shown");
+            panel.removeAttribute("data-for");
+            body.innerHTML = "";
+            if (ring) { m.removeLayer(ring); ring = null; }
+            if (picked) { picked.off("move", follow); picked = null; }
+        }
+
+        // Pinned bottom-left, clear of the OSM credit and of the legend.
+        function place() {
+            if (!panel.classList.contains("hm-shown")) return;
+            var c = el.getBoundingClientRect();
+            var vw = document.documentElement.clientWidth || window.innerWidth;
+            var vh = document.documentElement.clientHeight || window.innerHeight;
+            var top = Math.max(c.top, 0), bot = Math.min(c.bottom, vh);
+            var left = Math.max(c.left, 0) + 10, right = vw - Math.min(c.right, vw) + 10;
+            var bottom = vh - bot + 24;
+            var lg = legend ? legend.getBoundingClientRect() : null;
+            if (lg && lg.width && lg.left < vw - right && lg.top < bot - 24) {
+                if (lg.top - top >= ROOM_PX) bottom = Math.max(bottom, vh - lg.top + 8);
+                else right = Math.max(right, vw - lg.left + 8);
+            }
+            panel.style.left = left + "px";
+            panel.style.right = right + "px";
+            panel.style.top = "auto";
+            panel.style.bottom = bottom + "px";
+            panel.style.maxHeight = Math.max(80, Math.round(0.45 * (bot - top))) + "px";
+            // Never over the dot it describes: then it goes to the top, under
+            // the zoom and layer controls and the button row.
+            if (ring && ring._icon && overlaps(ring._icon.getBoundingClientRect(), panel.getBoundingClientRect())) {
+                var under = top;
+                [el.querySelector(".leaflet-top.leaflet-left"), document.getElementById("map-actions")]
+                    .forEach(function (n) { if (n) under = Math.max(under, n.getBoundingClientRect().bottom); });
+                panel.style.bottom = "auto";
+                panel.style.top = (under + 8) + "px";
+                if (overlaps(ring._icon.getBoundingClientRect(), panel.getBoundingClientRect())) {
+                    panel.style.top = "auto";
+                    panel.style.bottom = bottom + "px";
+                }
+            }
+        }
+        function overlaps(a, b) {
+            return a.right + 8 > b.left && a.left - 8 < b.right && a.bottom + 8 > b.top && a.top - 8 < b.bottom;
+        }
+        window.addEventListener("resize", place);
+        m.on("moveend", place);
+        if (legend) legend.addEventListener("toggle", place);
+        close.addEventListener("click", clear);
+        document.addEventListener("keydown", function (e) { if (e.key === "Escape") clear(); });
+
+        function select(layer) {
+            var tip = layer.getTooltip(), text = tip.getContent();
+            if (typeof text === "function") text = text(layer);
+            if (picked !== layer) { clear(); }
+            if (typeof text === "string") body.innerHTML = text;
+            else if (text && text.cloneNode) { body.innerHTML = ""; body.appendChild(text.cloneNode(true)); }
+            panel.setAttribute("data-for", String(L.stamp(layer)));
+            panel.classList.add("hm-shown");
+            if (!ring) {
+                ring = L.marker(layer.getLatLng(), {
+                    interactive: false, keyboard: false,
+                    icon: L.divIcon({className: "hm-tap-ring", iconSize: [RING_PX, RING_PX]})
+                }).addTo(m);
+            }
+            if (picked !== layer) { picked = layer; layer.on("move", follow); }
+            place();
+            if (layer.isTooltipOpen()) layer.closeTooltip();
+        }
+
+        function isLine(l) {
+            return (" " + (l.options.className || "") + " ").indexOf(" hm-line ") >= 0;
+        }
+        // Where the finger actually lifted. Chromium's touch adjustment moves
+        // a tap's click onto a nearby target (a spiderfied cluster's badge,
+        // say) and reports the moved point; the touch events keep the real one.
+        var lift = null;
+        el.addEventListener("touchend", function (e) {
+            var t = e.changedTouches && e.changedTouches[0];
+            lift = t ? {x: t.clientX, y: t.clientY, at: Date.now()} : null;
+        }, {capture: true, passive: true});
+        function tapPoint(e) {
+            if (lift && Date.now() - lift.at < LIFT_MS &&
+                Math.abs(lift.x - e.clientX) + Math.abs(lift.y - e.clientY) <= 2 * REACH) {
+                return m.mouseEventToContainerPoint({clientX: lift.x, clientY: lift.y});
+            }
+            return m.mouseEventToContainerPoint(e);
+        }
+
+        // The nearest dot, station, cluster or line within reach of a tap.
+        function nearest(p) {
+            var lp = m.containerPointToLayerPoint(p);
+            var best = null, fanned = null;
+            function consider(kind, layer, d, reach, edge, rank) {
+                if (d > reach) return;
+                // Equal distance and kind: the later layer, drawn on top, is
+                // the one the reader sees (categories cluster separately, so
+                // two badges can share one point).
+                if (!best || edge < best.edge - TIE_PX ||
+                    (edge <= best.edge + TIE_PX && rank < best.rank) ||
+                    (rank === best.rank && Math.abs(edge - best.edge) < 0.5)) {
+                    best = {kind: kind, layer: layer, edge: edge, rank: rank};
+                }
+                // A dot of a spiderfied group the reader has just opened.
+                if (layer._spiderLeg && (!fanned || edge < fanned.edge)) {
+                    fanned = {kind: kind, layer: layer, edge: edge, rank: rank};
+                }
+            }
+            m.eachLayer(function (l) {
+                var q, r, d;
+                if (l instanceof L.CircleMarker) {
+                    // Rings (L.Circle) carry no tooltip and are not targets.
+                    if (l instanceof L.Circle || !l.getTooltip || !l.getTooltip() || !l._point) return;
+                    q = m.latLngToContainerPoint(l.getLatLng());
+                    r = l._radius + (l.options.stroke ? l.options.weight / 2 : 0);
+                    d = q.distanceTo(p);
+                    consider("point", l, d, Math.max(REACH, r), d - r, 0);
+                } else if (L.MarkerCluster && l instanceof L.MarkerCluster && l._icon) {
+                    if (l._group && l._group._spiderfied === l) return;
+                    q = m.latLngToContainerPoint(l.getLatLng());
+                    r = l._icon.offsetWidth / 2;
+                    d = q.distanceTo(p);
+                    consider("cluster", l, d, Math.max(REACH, r), d - r, 1);
+                } else if (l instanceof L.Polyline && l._parts && isLine(l)) {
+                    d = Infinity;
+                    l._parts.forEach(function (part) {
+                        for (var i = 1; i < part.length; i++) {
+                            d = Math.min(d, L.LineUtil.pointToSegmentDistance(lp, part[i - 1], part[i]));
+                        }
+                    });
+                    consider("line", l, d, REACH, d - l.options.weight / 2, 2);
+                }
+            });
+            return fanned || best;
+        }
+
+        el.addEventListener("click", function (e) {
+            if (passing || !(mq && mq.matches)) return;
+            var t = e.target;
+            if (t && t.closest && t.closest(".leaflet-control")) return;
+            var p = tapPoint(e), best = nearest(p);
+            if (!best || best.kind === "line") {
+                // On to Leaflet; LINE_HIGHLIGHT_SCRIPT reads this point.
+                if (best) TAP.last = {event: e, point: p};
+                clear();
+                return;
+            }
+            e.stopPropagation();
+            if (best.kind === "point") { select(best.layer); return; }
+            clear();
+            passing = true;
+            try {
+                best.layer._icon.dispatchEvent(new MouseEvent("click", {
+                    bubbles: true, cancelable: true, view: window,
+                    clientX: e.clientX, clientY: e.clientY}));
+            } finally { passing = false; }
+        }, true);
+    }
+    start();
+})();
+</script>
+    
+            <div class="folium-map" id="map_5f596111914dd6d7dddc5c6c89d63d07" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_5f596111914dd6d7dddc5c6c89d63d07 = L.map(
+                "map_5f596111914dd6d7dddc5c6c89d63d07",
+                {
+                    center: [34.74165500116506, 135.62591499999996],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 12.75,
+  "zoomControl": true,
+  "preferCanvas": false,
+  "zoomSnap": 0.25,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_e8dd0db3a78704b918afb9087a949f70 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\" rel=\"noopener noreferrer\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_e8dd0db3a78704b918afb9087a949f70.addTo(map_5f596111914dd6d7dddc5c6c89d63d07);
+        
+    
+            var heat_map_39bed195298fa92d8c028a78d47664ad = L.heatLayer(
+                JSON.parse("[[34.764473,135.62291],[34.767942,135.616042],[34.748631,135.612469],[34.760809,135.624039],[34.760344,135.616654],[34.765077,135.620697],[34.767763,135.618261],[34.768884,135.612901],[34.74961,135.616262],[34.784889,135.62859],[34.788754,135.630881],[34.782476,135.629879],[34.776534,135.632863],[34.767165,135.612617],[34.779972,135.628317],[34.780745,135.625044],[34.753003,135.653533],[34.788173,135.629248],[34.747968,135.619851],[34.759999,135.613268],[34.771335,135.624067],[34.782359,135.638964],[34.785331,135.620906],[34.779719,135.624052],[34.75547,135.654394],[34.750174,135.612373],[34.768565,135.6152],[34.76601,135.629467],[34.769195,135.615939],[34.767647,135.611826],[34.781523,135.626799],[34.786731,135.62413],[34.778019,135.626392],[34.762289,135.615028],[34.76669,135.612676],[34.755684,135.610425],[34.767945,135.624978],[34.767817,135.615046],[34.762298,135.628214],[34.765633,135.630545],[34.783237,135.623544],[34.784061,135.628328],[34.747926,135.61939],[34.787128,135.62169],[34.754764,135.651994],[34.764527,135.612402],[34.745326,135.617083],[34.751108,135.606056],[34.764974,135.630209],[34.781447,135.628621],[34.784034,135.629753],[34.764229,135.618616],[34.765629,135.618174],[34.747464,135.608536],[34.777454,135.632662],[34.76694,135.616243],[34.758454,135.623808],[34.760809,135.624039],[34.768198,135.613633],[34.781337,135.632708],[34.757329,135.655437],[34.747895,135.614718],[34.78604,135.624993],[34.749009,135.61121],[34.783929,135.630241],[34.786863,135.628638],[34.766808,135.624539],[34.76032,135.611522],[34.76365,135.610624],[34.764972,135.627707],[34.751962,135.608204],[34.758179,135.624022],[34.784889,135.62859],[34.747117,135.617274],[34.763893,135.618729],[34.784738,135.636806],[34.786633,135.629413],[34.785342,135.628608],[34.747816,135.613988],[34.761651,135.620186],[34.777454,135.632662],[34.76312,135.620814],[34.77923,135.624748],[34.762801,135.620476],[34.761705,135.623619],[34.783359,135.627023],[34.746616,135.611317],[34.758454,135.623808],[34.745995,135.619322],[34.78341,135.627935],[34.783237,135.623544],[34.76081,135.615998],[34.785214,135.632053],[34.756884,135.626801],[34.779941,135.624927],[34.784831,135.634511],[34.76312,135.620814],[34.785075,135.627596],[34.787463,135.630153],[34.762477,135.623987],[34.783076,135.62977],[34.786863,135.628638],[34.782797,135.630284],[34.767763,135.618261],[34.749226,135.616469],[34.759491,135.62248],[34.766165,135.616541],[34.767919,135.613293],[34.74797,135.616424],[34.767763,135.618261],[34.762285,135.616127],[34.760809,135.624039],[34.787906,135.629243],[34.76669,135.612676],[34.764074,135.619421],[34.754444,135.643177],[34.749324,135.609171],[34.747968,135.619851],[34.786302,135.620767],[34.771675,135.619305],[34.766511,135.610765],[34.760215,135.616906],[34.769195,135.615939],[34.786863,135.628638],[34.754524,135.653612],[34.761032,135.615777],[34.760372,135.613803],[34.760372,135.613803],[34.747968,135.619851],[34.761898,135.626747],[34.75128,135.608489],[34.747071,135.616366],[34.747464,135.608536],[34.747209,135.612981],[34.781447,135.628621],[34.764708,135.622763],[34.78977,135.626897],[34.760594,135.615598],[34.761401,135.624146],[34.767411,135.625232],[34.754764,135.651994],[34.756439,135.654175],[34.758179,135.624022],[34.783178,135.627226],[34.770658,135.624172],[34.780073,135.632319],[34.783237,135.623544],[34.780849,135.630912],[34.766675,135.6266],[34.785137,135.62541],[34.763955,135.610804],[34.769794,135.616946],[34.748112,135.61401],[34.771171,135.619772],[34.780027,135.630342],[34.783892,135.625468],[34.784034,135.629753],[34.763893,135.618729],[34.78341,135.627935],[34.786863,135.628638],[34.762848,135.62154],[34.786863,135.628638],[34.785255,135.626992],[34.755267,135.65533],[34.765905,135.619238],[34.779572,135.625496],[34.765257,135.623754],[34.785779,135.62938],[34.765113,135.618014],[34.747542,135.617281],[34.789436,135.628156],[34.783178,135.627226],[34.783173,135.63157],[34.761386,135.624474],[34.786856,135.630645],[34.782804,135.625166],[34.757329,135.655437],[34.745448,135.613726],[34.785156,135.633705],[34.753231,135.606171],[34.786856,135.630645],[34.78757,135.628733],[34.765726,135.612142],[34.784045,135.628638],[34.784831,135.634511],[34.785032,135.627921],[34.788511,135.626912],[34.786863,135.628638],[34.768291,135.61813],[34.770271,135.623311],[34.782087,135.631178],[34.784469,135.626263],[34.760372,135.613803],[34.769195,135.615939],[34.769641,135.614202],[34.786856,135.630645],[34.766165,135.616541],[34.785075,135.627596],[34.76347,135.618278],[34.782797,135.630284],[34.767647,135.611826],[34.748903,135.612782],[34.764763,135.621239],[34.758629,135.622495],[34.762003,135.629883],[34.763664,135.617708],[34.747449,135.613225],[34.786952,135.627636],[34.750525,135.607534],[34.785032,135.627921],[34.760353,135.61634],[34.762661,135.622154],[34.747209,135.612981],[34.785906,135.630174],[34.765921,135.618264],[34.764968,135.619006],[34.784037,135.628977],[34.764208,135.617946],[34.763851,135.622444],[34.758736,135.655931],[34.763893,135.618729],[34.746855,135.612913],[34.781451,135.625111],[34.776295,135.631813],[34.76547,135.611192],[34.784037,135.628977],[34.787396,135.631098],[34.766726,135.618274],[34.782797,135.630284],[34.765846,135.62238],[34.754469,135.606539],[34.781451,135.625111],[34.780745,135.625044],[34.747209,135.612981],[34.766503,135.622788],[34.749059,135.610895],[34.786633,135.629413],[34.788727,135.631329],[34.765241,135.622299],[34.746516,135.614519],[34.78596,135.628711],[34.765846,135.62238],[34.757116,135.654627],[34.785214,135.632053],[34.782087,135.631178],[34.762488,135.624507],[34.762559,135.627136],[34.762661,135.622154],[34.77157,135.617095],[34.747816,135.613988],[34.787021,135.6256],[34.784889,135.62859],[34.758984,135.613185],[34.784889,135.62859],[34.78596,135.628711],[34.758318,135.618649],[34.75388,135.604246],[34.784045,135.628638],[34.767668,135.617231],[34.765241,135.622299],[34.781794,135.631435],[34.76601,135.629467],[34.763418,135.62359],[34.787539,135.629238],[34.747131,135.610925],[34.784083,135.627706],[34.78328,135.628727],[34.763851,135.622444],[34.762801,135.620476],[34.758454,135.623808],[34.764074,135.619421],[34.762668,135.625534],[34.78328,135.628727],[34.762801,135.620476],[34.765846,135.62238],[34.765241,135.622299],[34.786633,135.629413],[34.752191,135.652097],[34.762488,135.624507],[34.767118,135.625956],[34.786633,135.629413],[34.76744,135.625964],[34.783238,135.629191],[34.785214,135.632053],[34.786633,135.629413],[34.766405,135.62117],[34.784469,135.626263],[34.783929,135.630241],[34.765852,135.623637],[34.746364,135.612877],[34.783835,135.632213],[34.787463,135.630153],[34.764555,135.617349],[34.786856,135.630645],[34.747742,135.61039],[34.767763,135.618261],[34.766571,135.62445],[34.764208,135.617946],[34.767118,135.625956],[34.78399,135.622488],[34.78341,135.627935],[34.784988,135.629049],[34.782476,135.629879],[34.747509,135.612243],[34.765241,135.622299],[34.765426,135.618065],[34.785214,135.632053],[34.766096,135.621577],[34.785579,135.630751],[34.765852,135.623637],[34.787463,135.630153],[34.763626,135.62125],[34.780636,135.632983],[34.780849,135.630912],[34.768646,135.617048],[34.78328,135.628727],[34.779941,135.624927],[34.764159,135.617345],[34.764839,135.624882],[34.759504,135.623195],[34.757456,135.626213],[34.77873,135.631101],[34.749754,135.612207],[34.749009,135.61121],[34.78596,135.628711],[34.78328,135.628727],[34.769428,135.617801],[34.765387,135.62437],[34.747659,135.616001],[34.787539,135.629238],[34.784061,135.628328],[34.764208,135.617946],[34.763626,135.62125],[34.762488,135.624507],[34.756688,135.655639],[34.783237,135.623544],[34.76601,135.629467],[34.76298,135.618871],[34.764763,135.621239],[34.75717,135.648604],[34.781567,135.631256],[34.763626,135.62125],[34.762559,135.627136],[34.764974,135.630209],[34.784037,135.628977],[34.767,135.618853],[34.759513,135.621462],[34.77873,135.631101],[34.765846,135.62238],[34.785906,135.630174],[34.766405,135.62117],[34.783076,135.62977],[34.749878,135.608215],[34.762801,135.620476],[34.763626,135.62125],[34.764412,135.624128],[34.762774,135.623451],[34.749009,135.61121],[34.766675,135.6266],[34.762661,135.622154],[34.767082,135.622771],[34.785579,135.630751],[34.78328,135.628727],[34.787396,135.631098],[34.765241,135.622299],[34.768879,135.622874],[34.78596,135.628711],[34.76298,135.618871],[34.765852,135.623637],[34.764159,135.617345],[34.766859,135.611533],[34.758629,135.622495],[34.762801,135.620476],[34.755253,135.651501],[34.76298,135.618871],[34.787906,135.629243],[34.765549,135.619289],[34.763626,135.62125],[34.768646,135.617048],[34.782797,135.630284],[34.767373,135.615921],[34.770569,135.627028],[34.785032,135.627921],[34.783076,135.62977],[34.786863,135.628638],[34.767942,135.616042],[34.769832,135.621105],[34.782797,135.630284],[34.786927,135.629307],[34.786019,135.626914],[34.762774,135.623451],[34.76547,135.611192],[34.759491,135.62248],[34.762774,135.623451],[34.786633,135.629413],[34.78328,135.628727],[34.786927,135.629307],[34.765241,135.622299],[34.762488,135.624507],[34.786633,135.629413],[34.747449,135.613225],[34.76298,135.618871],[34.786633,135.629413],[34.782797,135.630284],[34.78328,135.628727],[34.770384,135.621823],[34.770271,135.623311],[34.744948,135.619335],[34.749344,135.614634],[34.763955,135.610804],[34.762733,135.616867],[34.762488,135.624507],[34.768185,135.623524],[34.766117,135.627373],[34.777454,135.632662],[34.766442,135.625789],[34.766571,135.62445],[34.783237,135.623544],[34.781228,135.639028],[34.748589,135.609225],[34.769195,135.615939],[34.759126,135.655084],[34.77923,135.624748],[34.764441,135.629919],[34.787054,135.623621],[34.784427,135.637296],[34.765852,135.623637],[34.764208,135.617946],[34.758357,135.622792],[34.749754,135.612207],[34.747012,135.612013],[34.768879,135.622874],[34.752441,135.608651],[34.784962,135.630066],[34.785137,135.62541],[34.788925,135.630411],[34.786863,135.628638],[34.761012,135.611663],[34.785214,135.632053],[34.760409,135.624037],[34.746695,135.618256],[34.787939,135.625905],[34.744651,135.61999]]"),
+                {
+  "minOpacity": 0.35,
+  "maxZoom": 18,
+  "radius": 8,
+  "blur": 10,
+  "gradient": {
+  0.3: "#FBB878",
+  0.5: "#F97316",
+  0.7: "#DE6412",
+  0.85: "#C0570F",
+  1.0: "#8F3A05",
+},
+}
+            );
+        
+    
+            heat_map_39bed195298fa92d8c028a78d47664ad.addTo(map_5f596111914dd6d7dddc5c6c89d63d07);
+        
+    
+            var heat_map_96f57410c9f519c2575eaa8329ec5fd2 = L.heatLayer(
+                JSON.parse("[[34.764473,135.62291],[34.767942,135.616042],[34.748631,135.612469],[34.760809,135.624039],[34.760344,135.616654],[34.765077,135.620697],[34.767763,135.618261],[34.768884,135.612901],[34.74961,135.616262],[34.784889,135.62859],[34.765835,135.603159],[34.788754,135.630881],[34.761096,135.602364],[34.782476,135.629879],[34.763508,135.639665],[34.776534,135.632863],[34.767165,135.612617],[34.733636,135.626503],[34.740539,135.62531],[34.779972,135.628317],[34.753564,135.626812],[34.780745,135.625044],[34.753003,135.653533],[34.763035,135.60796],[34.788173,135.629248],[34.773276,135.614051],[34.747968,135.619851],[34.756109,135.604694],[34.759999,135.613268],[34.771335,135.624067],[34.782359,135.638964],[34.773504,135.628414],[34.785331,135.620906],[34.760765,135.60267],[34.736647,135.62474],[34.762571,135.59845],[34.774797,135.601749],[34.779719,135.624052],[34.75547,135.654394],[34.750174,135.612373],[34.768565,135.6152],[34.759002,135.60092],[34.76601,135.629467],[34.769195,135.615939],[34.757533,135.597009],[34.767647,135.611826],[34.781523,135.626799],[34.760602,135.605394],[34.786731,135.62413],[34.779237,135.621233],[34.767506,135.595717],[34.778019,135.626392],[34.756726,135.627539],[34.752134,135.626606],[34.762289,135.615028],[34.76669,135.612676],[34.764994,135.604542],[34.733087,135.628525],[34.755684,135.610425],[34.748015,135.623651],[34.764007,135.606838],[34.767945,135.624978],[34.767817,135.615046],[34.762298,135.628214],[34.768359,135.643259],[34.765633,135.630545],[34.756837,135.608044],[34.783237,135.623544],[34.775481,135.648688],[34.784061,135.628328],[34.765684,135.638959],[34.747926,135.61939],[34.738838,135.623694],[34.787128,135.62169],[34.775948,135.62471],[34.754764,135.651994],[34.764527,135.612402],[34.745326,135.617083],[34.767648,135.596921],[34.751108,135.606056],[34.764974,135.630209],[34.770319,135.612732],[34.781447,135.628621],[34.784034,135.629753],[34.763066,135.599755],[34.764229,135.618616],[34.765629,135.618174],[34.747464,135.608536],[34.775121,135.627021],[34.777454,135.632662],[34.754263,135.604365],[34.76694,135.616243],[34.758454,135.623808],[34.760809,135.624039],[34.76231,135.632427],[34.765398,135.609416],[34.768198,135.613633],[34.781337,135.632708],[34.780324,135.640296],[34.757329,135.655437],[34.747895,135.614718],[34.773792,135.622985],[34.78604,135.624993],[34.749009,135.61121],[34.783929,135.630241],[34.786863,135.628638],[34.776032,135.639932],[34.766808,135.624539],[34.76032,135.611522],[34.759621,135.597443],[34.76365,135.610624],[34.764972,135.627707],[34.751962,135.608204],[34.774311,135.644854],[34.758179,135.624022],[34.784889,135.62859],[34.747117,135.617274],[34.763893,135.618729],[34.784738,135.636806],[34.759039,135.607925],[34.786633,135.629413],[34.785342,135.628608],[34.747816,135.613988],[34.761651,135.620186],[34.777454,135.632662],[34.76312,135.620814],[34.77923,135.624748],[34.762801,135.620476],[34.761705,135.623619],[34.783359,135.627023],[34.746616,135.611317],[34.767248,135.630798],[34.758454,135.623808],[34.763813,135.596832],[34.760397,135.601437],[34.745995,135.619322],[34.78341,135.627935],[34.783237,135.623544],[34.76081,135.615998],[34.785214,135.632053],[34.772846,135.613572],[34.756884,135.626801],[34.779941,135.624927],[34.784831,135.634511],[34.76312,135.620814],[34.785075,135.627596],[34.787463,135.630153],[34.768161,135.608057],[34.762477,135.623987],[34.783076,135.62977],[34.786863,135.628638],[34.782797,135.630284],[34.767763,135.618261],[34.749226,135.616469],[34.759491,135.62248],[34.766165,135.616541],[34.767919,135.613293],[34.74797,135.616424],[34.76064,135.610852],[34.767763,135.618261],[34.76022,135.60998],[34.762285,135.616127],[34.763668,135.607726],[34.760809,135.624039],[34.764314,135.602985],[34.787906,135.629243],[34.760682,135.600639],[34.76669,135.612676],[34.774105,135.619748],[34.776068,135.63918],[34.764074,135.619421],[34.754444,135.643177],[34.749324,135.609171],[34.747968,135.619851],[34.786302,135.620767],[34.765122,135.63671],[34.76225,135.598756],[34.771675,135.619305],[34.757283,135.612771],[34.766511,135.610765],[34.760215,135.616906],[34.759964,135.601771],[34.769195,135.615939],[34.754269,135.604517],[34.786863,135.628638],[34.775048,135.605204],[34.768161,135.608057],[34.754524,135.653612],[34.774922,135.617688],[34.761032,135.615777],[34.760372,135.613803],[34.760372,135.613803],[34.747968,135.619851],[34.762275,135.599572],[34.751803,135.627215],[34.768201,135.608833],[34.761898,135.626747],[34.75128,135.608489],[34.747071,135.616366],[34.747464,135.608536],[34.774657,135.650379],[34.747209,135.612981],[34.775121,135.627021],[34.781447,135.628621],[34.764708,135.622763],[34.767219,135.596187],[34.78977,135.626897],[34.760594,135.615598],[34.774192,135.629379],[34.761401,135.624146],[34.767411,135.625232],[34.754764,135.651994],[34.758639,135.610136],[34.76201,135.601657],[34.768359,135.643259],[34.756439,135.654175],[34.758179,135.624022],[34.783178,135.627226],[34.770658,135.624172],[34.780073,135.632319],[34.783237,135.623544],[34.780849,135.630912],[34.768174,135.633317],[34.776068,135.63918],[34.758518,135.602847],[34.766675,135.6266],[34.785137,135.62541],[34.763955,135.610804],[34.769794,135.616946],[34.748112,135.61401],[34.771171,135.619772],[34.756537,135.610922],[34.780027,135.630342],[34.783892,135.625468],[34.7638,135.600565],[34.776032,135.639932],[34.774206,135.604053],[34.784034,135.629753],[34.765586,135.602163],[34.774978,135.627584],[34.763893,135.618729],[34.78341,135.627935],[34.786863,135.628638],[34.762848,135.62154],[34.765553,135.607151],[34.786863,135.628638],[34.771863,135.632649],[34.785255,135.626992],[34.755267,135.65533],[34.765905,135.619238],[34.779572,135.625496],[34.765257,135.623754],[34.761368,135.636917],[34.785779,135.62938],[34.765113,135.618014],[34.747542,135.617281],[34.789436,135.628156],[34.783178,135.627226],[34.783173,135.63157],[34.761386,135.624474],[34.786856,135.630645],[34.782804,135.625166],[34.759841,135.611025],[34.757329,135.655437],[34.75277,135.629121],[34.745448,135.613726],[34.776455,135.603934],[34.759296,135.60059],[34.785156,135.633705],[34.775533,135.64496],[34.753231,135.606171],[34.729328,135.632686],[34.764864,135.607327],[34.786856,135.630645],[34.749444,135.624298],[34.776542,135.635616],[34.78757,135.628733],[34.765726,135.612142],[34.784045,135.628638],[34.784831,135.634511],[34.785032,135.627921],[34.788511,135.626912],[34.775948,135.62471],[34.761368,135.636917],[34.786863,135.628638],[34.768291,135.61813],[34.770271,135.623311],[34.782087,135.631178],[34.784469,135.626263],[34.760372,135.613803],[34.769195,135.615939],[34.769641,135.614202],[34.738608,135.624667],[34.77387,135.624825],[34.761217,135.600813],[34.761108,135.604331],[34.786856,135.630645],[34.766165,135.616541],[34.785075,135.627596],[34.76347,135.618278],[34.782797,135.630284],[34.767647,135.611826],[34.748903,135.612782],[34.764763,135.621239],[34.762471,135.607202],[34.758629,135.622495],[34.779799,135.640334],[34.762003,135.629883],[34.763664,135.617708],[34.762704,135.598923],[34.747449,135.613225],[34.786952,135.627636],[34.732088,135.626926],[34.766488,135.651676],[34.750525,135.607534],[34.766488,135.651676],[34.785032,135.627921],[34.760353,135.61634],[34.774302,135.628208],[34.762661,135.622154],[34.747209,135.612981],[34.785906,135.630174],[34.765921,135.618264],[34.764968,135.619006],[34.752997,135.630542],[34.78118,135.619711],[34.784037,135.628977],[34.764208,135.617946],[34.763851,135.622444],[34.758736,135.655931],[34.763893,135.618729],[34.746855,135.612913],[34.77612,135.614503],[34.752091,135.639684],[34.781451,135.625111],[34.757533,135.597009],[34.776295,135.631813],[34.77387,135.624825],[34.76301,135.609441],[34.76547,135.611192],[34.757665,135.603126],[34.784037,135.628977],[34.787396,135.631098],[34.78118,135.619711],[34.766726,135.618274],[34.782797,135.630284],[34.765846,135.62238],[34.754469,135.606539],[34.781451,135.625111],[34.780745,135.625044],[34.747209,135.612981],[34.766503,135.622788],[34.749059,135.610895],[34.774167,135.656533],[34.775522,135.606878],[34.786633,135.629413],[34.754606,135.629661],[34.788727,135.631329],[34.765241,135.622299],[34.746516,135.614519],[34.774597,135.601332],[34.78596,135.628711],[34.784064,135.642981],[34.765846,135.62238],[34.757116,135.654627],[34.760355,135.60294],[34.776471,135.639391],[34.785214,135.632053],[34.782087,135.631178],[34.762488,135.624507],[34.762559,135.627136],[34.762661,135.622154],[34.77157,135.617095],[34.747816,135.613988],[34.787021,135.6256],[34.784889,135.62859],[34.758984,135.613185],[34.784889,135.62859],[34.76968,135.606093],[34.78596,135.628711],[34.758318,135.618649],[34.757384,135.63378],[34.75388,135.604246],[34.774978,135.627584],[34.784045,135.628638],[34.753872,135.629911],[34.767668,135.617231],[34.765241,135.622299],[34.781794,135.631435],[34.766488,135.651676],[34.76601,135.629467],[34.767969,135.649413],[34.763418,135.62359],[34.787539,135.629238],[34.747131,135.610925],[34.761096,135.602364],[34.766488,135.651676],[34.784083,135.627706],[34.78328,135.628727],[34.763851,135.622444],[34.762801,135.620476],[34.758454,135.623808],[34.759498,135.633194],[34.764074,135.619421],[34.763603,135.608686],[34.762668,135.625534],[34.78328,135.628727],[34.762801,135.620476],[34.765846,135.62238],[34.765241,135.622299],[34.76968,135.606093],[34.756249,135.605757],[34.775359,135.638033],[34.77918,135.620242],[34.786633,135.629413],[34.752191,135.652097],[34.762488,135.624507],[34.767118,135.625956],[34.786633,135.629413],[34.776471,135.639391],[34.76744,135.625964],[34.783238,135.629191],[34.785214,135.632053],[34.786633,135.629413],[34.766405,135.62117],[34.784469,135.626263],[34.783929,135.630241],[34.765852,135.623637],[34.746364,135.612877],[34.783835,135.632213],[34.787463,135.630153],[34.755727,135.625628],[34.764555,135.617349],[34.786856,135.630645],[34.747742,135.61039],[34.763813,135.596832],[34.767763,135.618261],[34.766571,135.62445],[34.764208,135.617946],[34.767118,135.625956],[34.757665,135.603126],[34.78399,135.622488],[34.78341,135.627935],[34.784988,135.629049],[34.782476,135.629879],[34.747509,135.612243],[34.765241,135.622299],[34.765426,135.618065],[34.785214,135.632053],[34.766096,135.621577],[34.785579,135.630751],[34.769177,135.6107],[34.765852,135.623637],[34.787463,135.630153],[34.763626,135.62125],[34.780636,135.632983],[34.780849,135.630912],[34.768646,135.617048],[34.78328,135.628727],[34.776011,135.63315],[34.779941,135.624927],[34.764159,135.617345],[34.764839,135.624882],[34.757533,135.597009],[34.759504,135.623195],[34.757456,135.626213],[34.77873,135.631101],[34.749754,135.612207],[34.749009,135.61121],[34.78596,135.628711],[34.78328,135.628727],[34.769428,135.617801],[34.765387,135.62437],[34.747659,135.616001],[34.774711,135.612729],[34.787539,135.629238],[34.784061,135.628328],[34.764208,135.617946],[34.763626,135.62125],[34.762488,135.624507],[34.756688,135.655639],[34.783237,135.623544],[34.76601,135.629467],[34.76298,135.618871],[34.764763,135.621239],[34.75717,135.648604],[34.781567,135.631256],[34.763626,135.62125],[34.762559,135.627136],[34.764974,135.630209],[34.784037,135.628977],[34.767,135.618853],[34.759513,135.621462],[34.77873,135.631101],[34.761486,135.640175],[34.765846,135.62238],[34.785906,135.630174],[34.766405,135.62117],[34.765012,135.601658],[34.783076,135.62977],[34.749878,135.608215],[34.762801,135.620476],[34.763626,135.62125],[34.764412,135.624128],[34.762774,135.623451],[34.749009,135.61121],[34.766675,135.6266],[34.762661,135.622154],[34.767082,135.622771],[34.785579,135.630751],[34.770643,135.631573],[34.767345,135.610911],[34.78328,135.628727],[34.787396,135.631098],[34.765241,135.622299],[34.768879,135.622874],[34.751166,135.642663],[34.776471,135.639391],[34.78596,135.628711],[34.76298,135.618871],[34.765852,135.623637],[34.764159,135.617345],[34.766859,135.611533],[34.776068,135.63918],[34.758629,135.622495],[34.762801,135.620476],[34.755253,135.651501],[34.76298,135.618871],[34.787906,135.629243],[34.765549,135.619289],[34.763626,135.62125],[34.772797,135.631775],[34.768646,135.617048],[34.782797,135.630284],[34.767373,135.615921],[34.770569,135.627028],[34.785032,135.627921],[34.779799,135.640334],[34.783076,135.62977],[34.773504,135.628414],[34.786863,135.628638],[34.767942,135.616042],[34.769832,135.621105],[34.782797,135.630284],[34.786927,135.629307],[34.786019,135.626914],[34.762774,135.623451],[34.76547,135.611192],[34.759491,135.62248],[34.762774,135.623451],[34.756158,135.606504],[34.786633,135.629413],[34.750764,135.623414],[34.78328,135.628727],[34.786927,135.629307],[34.765241,135.622299],[34.76231,135.632427],[34.762488,135.624507],[34.786633,135.629413],[34.747449,135.613225],[34.76298,135.618871],[34.786633,135.629413],[34.782797,135.630284],[34.78328,135.628727],[34.759655,135.605515],[34.770384,135.621823],[34.770271,135.623311],[34.769282,135.643182],[34.771053,135.612621],[34.771053,135.612621],[34.744948,135.619335],[34.749344,135.614634],[34.75385,135.632199],[34.773603,135.601369],[34.757725,135.628751],[34.765586,135.602163],[34.763955,135.610804],[34.759841,135.611025],[34.762733,135.616867],[34.762488,135.624507],[34.768185,135.623524],[34.766117,135.627373],[34.777454,135.632662],[34.766442,135.625789],[34.77482,135.604733],[34.766571,135.62445],[34.774311,135.644854],[34.783237,135.623544],[34.784514,135.642454],[34.781228,135.639028],[34.774833,135.638455],[34.748589,135.609225],[34.769195,135.615939],[34.758599,135.608938],[34.759126,135.655084],[34.77923,135.624748],[34.772579,135.624689],[34.767349,135.608326],[34.765812,135.59917],[34.764441,135.629919],[34.774855,135.623718],[34.787054,135.623621],[34.784427,135.637296],[34.766488,135.651676],[34.765852,135.623637],[34.764208,135.617946],[34.775481,135.648688],[34.758357,135.622792],[34.749754,135.612207],[34.775928,135.602287],[34.747012,135.612013],[34.776282,135.60711],[34.768879,135.622874],[34.774218,135.624708],[34.752441,135.608651],[34.784962,135.630066],[34.785137,135.62541],[34.762423,135.60168],[34.773539,135.641483],[34.77359,135.604238],[34.788925,135.630411],[34.786863,135.628638],[34.761012,135.611663],[34.785214,135.632053],[34.760523,135.63044],[34.760409,135.624037],[34.746695,135.618256],[34.765322,135.602792],[34.787939,135.625905],[34.744651,135.61999]]"),
+                {
+  "minOpacity": 0.35,
+  "maxZoom": 18,
+  "radius": 8,
+  "blur": 10,
+  "gradient": {
+  0.3: "#FBB878",
+  0.5: "#F97316",
+  0.7: "#DE6412",
+  0.85: "#C0570F",
+  1.0: "#8F3A05",
+},
+}
+            );
+        
+    
+            var feature_group_8a1674f55a356e155005a59b5d479ca2 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_561c7af90780a6cffb5baeec44cd07ab = L.circle(
+                [34.747501, 135.611219],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
+            ).addTo(feature_group_8a1674f55a356e155005a59b5d479ca2);
+        
+    
+            var circle_e9ea65cb6d16d91314af6625062d1810 = L.circle(
+                [34.78456, 135.63094],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
+            ).addTo(feature_group_8a1674f55a356e155005a59b5d479ca2);
+        
+    
+            var circle_f61951f3eaea81284262c1bf8111fd13 = L.circle(
+                [34.755505, 135.65335],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
+            ).addTo(feature_group_8a1674f55a356e155005a59b5d479ca2);
+        
+    
+            var circle_9e64c4bf24ab13608f59efae35de724a = L.circle(
+                [34.76397, 135.620741],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
+            ).addTo(feature_group_8a1674f55a356e155005a59b5d479ca2);
+        
+    
+            var feature_group_d70586c7853471e3b9915d4ee8461c46 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_bb5a6076df4e1e6d120fe59683575a6e = L.circle(
+                [34.747501, 135.611219],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
+            ).addTo(feature_group_d70586c7853471e3b9915d4ee8461c46);
+        
+    
+            var circle_afb5d8e94cbf1c38744d8ea431f4cca0 = L.circle(
+                [34.78456, 135.63094],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
+            ).addTo(feature_group_d70586c7853471e3b9915d4ee8461c46);
+        
+    
+            var circle_7fbf8d472fd45775e4d7898c39d30e89 = L.circle(
+                [34.755505, 135.65335],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
+            ).addTo(feature_group_d70586c7853471e3b9915d4ee8461c46);
+        
+    
+            var circle_8095b213ed38562c67abf652ad7556c3 = L.circle(
+                [34.76397, 135.620741],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
+            ).addTo(feature_group_d70586c7853471e3b9915d4ee8461c46);
+        
+    
+            var feature_group_fe946e91393ab6ccbf0e594de069e019 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_4d1148887ec14bef4cd6589fd09d6292 = L.circle(
+                [34.747501, 135.611219],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
+            ).addTo(feature_group_fe946e91393ab6ccbf0e594de069e019);
+        
+    
+            var circle_e41e6cd343b761fc4936b6df0fd8744b = L.circle(
+                [34.78456, 135.63094],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
+            ).addTo(feature_group_fe946e91393ab6ccbf0e594de069e019);
+        
+    
+            var circle_f088edfd5a02694d19a6f66c987ab630 = L.circle(
+                [34.755505, 135.65335],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
+            ).addTo(feature_group_fe946e91393ab6ccbf0e594de069e019);
+        
+    
+            var circle_e6a4717b6808e7aae89103693efbcd34 = L.circle(
+                [34.76397, 135.620741],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
+            ).addTo(feature_group_fe946e91393ab6ccbf0e594de069e019);
+        
+    
+            var feature_group_836db7a43896bd787075e2212459f6f8 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_a5b6acce0ab977ca8c80e6ca968e0288 = L.circle(
+                [34.747501, 135.611219],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 965.6064, "stroke": true, "weight": 1}
+            ).addTo(feature_group_836db7a43896bd787075e2212459f6f8);
+        
+    
+            var circle_ff6e902ad6e7587c0e8e66739620d5d8 = L.circle(
+                [34.78456, 135.63094],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 965.6064, "stroke": true, "weight": 1}
+            ).addTo(feature_group_836db7a43896bd787075e2212459f6f8);
+        
+    
+            var circle_821fa99c0d420d6a862d26c6d162d606 = L.circle(
+                [34.755505, 135.65335],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 965.6064, "stroke": true, "weight": 1}
+            ).addTo(feature_group_836db7a43896bd787075e2212459f6f8);
+        
+    
+            var circle_814613d45ab045b4005ef3982216a3f5 = L.circle(
+                [34.76397, 135.620741],
+                {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 965.6064, "stroke": true, "weight": 1}
+            ).addTo(feature_group_836db7a43896bd787075e2212459f6f8);
+        
+    
+            var feature_group_5adcf91258f13b0d5a044ae6296e17bd = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var poly_line_7f8f4847adddb947bff94dc8540e66c6 = L.polyline(
+                [[34.74783, 135.61195], [34.74815, 135.61248], [34.74842, 135.61277], [34.74874, 135.61309], [34.7492, 135.61348], [34.75044, 135.61455], [34.75164, 135.61553], [34.75325, 135.61681], [34.75339, 135.61695], [34.7535, 135.61706], [34.75395, 135.61743], [34.75423, 135.61762], [34.75433, 135.61769], [34.75451, 135.61778], [34.75481, 135.61789], [34.75523, 135.61796], [34.75571, 135.61799], [34.7561, 135.61797], [34.75619, 135.61797], [34.75675, 135.61793], [34.75701, 135.61791], [34.75735, 135.61789], [34.75809, 135.61789], [34.75825, 135.61792], [34.75873, 135.61807], [34.75967, 135.61841], [34.7613, 135.61902], [34.76185, 135.61924], [34.76248, 135.6195], [34.76267, 135.6196], [34.76295, 135.61977], [34.76322, 135.61999], [34.76331, 135.62006]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_5adcf91258f13b0d5a044ae6296e17bd);
+        
+    
+            var poly_line_9407703c9b5e1a1bd4374f30567c543f = L.polyline(
+                [[34.78394, 135.63083], [34.7837, 135.63078], [34.78334, 135.63069], [34.78275, 135.63046], [34.78194, 135.63013], [34.7817, 135.63], [34.78133, 135.62981], [34.77958, 135.62881], [34.77634, 135.62689], [34.77458, 135.62586], [34.7742, 135.62566], [34.77392, 135.62554], [34.7735, 135.62544], [34.77318, 135.6254], [34.77306, 135.6254], [34.77287, 135.62538], [34.77275, 135.62537], [34.77259, 135.62537], [34.77251, 135.62536], [34.77207, 135.62535], [34.76981, 135.62529], [34.76905, 135.62523], [34.76882, 135.62518], [34.76843, 135.62506], [34.76815, 135.62493], [34.76783, 135.62474], [34.76756, 135.62455], [34.76723, 135.62427], [34.76635, 135.62337], [34.76522, 135.62218], [34.76519, 135.62213], [34.76461, 135.62145]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_5adcf91258f13b0d5a044ae6296e17bd);
+        
+    
+            var poly_line_3b3aea5995fa8953cf59834e9355cf8c = L.polyline(
+                [[34.81561, 135.64823], [34.81556, 135.64818], [34.81535, 135.6479], [34.81514, 135.64757], [34.8149, 135.64706], [34.81468, 135.64643], [34.81455, 135.64599], [34.81448, 135.64565], [34.81442, 135.64504], [34.8144, 135.64429], [34.81441, 135.64367], [34.8144, 135.64356], [34.81438, 135.64313], [34.81433, 135.64273], [34.81427, 135.64247], [34.81418, 135.64218], [34.814, 135.64166], [34.81388, 135.64142], [34.81373, 135.6412], [34.81357, 135.64099], [34.81317, 135.64059], [34.81266, 135.6402], [34.81221, 135.63988]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_5adcf91258f13b0d5a044ae6296e17bd);
+        
+    
+            var poly_line_c36293361ab3733d323dde25328e6e4a = L.polyline(
+                [[34.79742, 135.62998], [34.7971, 135.62987], [34.79652, 135.62974], [34.7958, 135.62963], [34.79477, 135.62956], [34.79443, 135.62957], [34.79412, 135.62958], [34.79374, 135.62964], [34.79343, 135.62973], [34.79312, 135.62983], [34.79252, 135.63009], [34.79044, 135.63111], [34.79004, 135.63127], [34.78958, 135.63142], [34.78956, 135.63142], [34.7891, 135.63151], [34.78861, 135.63156], [34.78819, 135.63155], [34.7875, 135.63145], [34.78639, 135.63127], [34.78518, 135.63105]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_5adcf91258f13b0d5a044ae6296e17bd);
+        
+    
+            var poly_line_e58c7651f6ccb34bdd9b52e07311db2a = L.polyline(
+                [[34.73599, 135.56606], [34.73639, 135.56665], [34.73674, 135.56725], [34.73685, 135.56746], [34.73714, 135.56813], [34.73727, 135.56846], [34.73735, 135.56871], [34.73738, 135.56879], [34.73749, 135.56912], [34.73762, 135.56972], [34.73772, 135.57054], [34.73775, 135.57124], [34.73775, 135.57165], [34.73775, 135.57259], [34.73769, 135.57365], [34.73759, 135.57452], [34.73758, 135.57455], [34.73758, 135.57465], [34.73756, 135.57474], [34.73754, 135.57493]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_5adcf91258f13b0d5a044ae6296e17bd);
+        
+    
+            var poly_line_1b119e91cbc3c27f3bd9e83bdc057c8b = L.polyline(
+                [[34.81104, 135.63911], [34.80995, 135.63847], [34.8098, 135.63838], [34.80895, 135.6379], [34.80843, 135.63763], [34.80792, 135.6374], [34.80593, 135.63661], [34.80556, 135.63645], [34.80475, 135.63611], [34.80442, 135.63593], [34.80392, 135.6356], [34.80281, 135.63469], [34.80237, 135.63432], [34.80034, 135.63234], [34.7993, 135.63131], [34.79902, 135.63105], [34.79879, 135.63086], [34.7981, 135.63036]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_5adcf91258f13b0d5a044ae6296e17bd);
+        
+    
+            var poly_line_8961bb2e9b451e6cf93f350b044b9a63 = L.polyline(
+                [[34.74033, 135.59218], [34.7407, 135.59309], [34.74098, 135.59391], [34.74122, 135.59463], [34.74185, 135.59667], [34.7422, 135.59779], [34.74235, 135.59841], [34.74248, 135.59912], [34.74254, 135.59965], [34.7426, 135.60088], [34.74266, 135.6014], [34.74273, 135.60179]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_5adcf91258f13b0d5a044ae6296e17bd);
+        
+    
+            var poly_line_fdff94c4612d5475f9766118126d5538 = L.polyline(
+                [[34.73825, 135.58395], [34.73826, 135.58405], [34.73844, 135.58545], [34.73848, 135.58571], [34.73855, 135.58622], [34.73886, 135.58846], [34.73897, 135.58901], [34.73904, 135.58929], [34.73915, 135.58969], [34.73923, 135.58991], [34.73953, 135.5906]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_5adcf91258f13b0d5a044ae6296e17bd);
+        
+    
+            var poly_line_35418621aba4a26abd52c43e3257bcd1 = L.polyline(
+                [[34.7432, 135.60338], [34.74344, 135.6038], [34.74378, 135.60444], [34.74452, 135.60563], [34.74565, 135.60743], [34.74618, 135.60833], [34.74648, 135.60887], [34.74717, 135.61049]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_5adcf91258f13b0d5a044ae6296e17bd);
+        
+    
+            var poly_line_d566ffd5777ff4e4e4dcf9d1a9b8fad1 = L.polyline(
+                [[34.73714, 135.57685], [34.73713, 135.57779], [34.73717, 135.57824], [34.7372, 135.57852], [34.73728, 135.57899], [34.73737, 135.57937], [34.7375, 135.57994], [34.73795, 135.58205]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_5adcf91258f13b0d5a044ae6296e17bd);
+        
+    
+            var poly_line_dd04b25aee49ee23bb7d22c5106a2d93 = L.polyline(
+                [[34.74273, 135.60179], [34.74282, 135.60218], [34.7429, 135.60249], [34.74302, 135.60292], [34.7432, 135.60338]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_5adcf91258f13b0d5a044ae6296e17bd);
+        
+    
+            var poly_line_b9bedb625490e64f50ddfeccfadcc8a3 = L.polyline(
+                [[34.76331, 135.62006], [34.7635, 135.62024], [34.76409, 135.62085], [34.76451, 135.62134], [34.76461, 135.62145]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_5adcf91258f13b0d5a044ae6296e17bd);
+        
+    
+            var poly_line_fb4e5e9b48ecffa01c747f8a4e1a7c20 = L.polyline(
+                [[34.74717, 135.61049], [34.7472, 135.61055], [34.74783, 135.61195]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_5adcf91258f13b0d5a044ae6296e17bd);
+        
+    
+            var poly_line_3c7a87f72f906e3ca6cf22e79a11fcac = L.polyline(
+                [[34.73953, 135.5906], [34.73976, 135.59109], [34.74033, 135.59218]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_5adcf91258f13b0d5a044ae6296e17bd);
+        
+    
+            var poly_line_7f020b276fa030fae5b3b24c357ccae2 = L.polyline(
+                [[34.78518, 135.63105], [34.78394, 135.63083]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_5adcf91258f13b0d5a044ae6296e17bd);
+        
+    
+            var poly_line_67df77cc20d7833e6e95ef26e061c430 = L.polyline(
+                [[34.81221, 135.63988], [34.81104, 135.63911]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_5adcf91258f13b0d5a044ae6296e17bd);
+        
+    
+            var poly_line_d8cb66b1ccce5f7e79cade9dc7258734 = L.polyline(
+                [[34.7981, 135.63036], [34.79742, 135.62998]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_5adcf91258f13b0d5a044ae6296e17bd);
+        
+    
+            var poly_line_cdaa7d5908581baee247c2b6fbb44e32 = L.polyline(
+                [[34.73754, 135.57493], [34.73714, 135.57685]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_5adcf91258f13b0d5a044ae6296e17bd);
+        
+    
+            var poly_line_2ac5593e598b3d7883b9747bc48409f0 = L.polyline(
+                [[34.73795, 135.58205], [34.73825, 135.58395]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_5adcf91258f13b0d5a044ae6296e17bd);
+        
+    
+            var marker_5bc9a27148cb2d05996344eebca8f641 = L.marker(
+                [34.76331, 135.62006],
+                {
+  "zIndexOffset": 1000,
+}
+            ).addTo(feature_group_5adcf91258f13b0d5a044ae6296e17bd);
+        
+    
+            var div_icon_3daab056d9c0f90e82e43ec2c1624442 = L.divIcon({
+  "html": "\n            \u003cdiv class=\"hm-line-label\" data-line=\"0\" style=\"\n                position: absolute; left: 0; top: 0;\n                transform: translate(-50%, -50%) translate(7.1px, -16.5px);\n                font-size: 14px; font-weight: bold; color: #787858; --dm-label: #81815e;\n                text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff,\n                             -1px 1px 0 #ffffff, 1px 1px 0 #ffffff,\n                             0 0 6px #ffffff;\n                white-space: nowrap; pointer-events: none;\n            \"\u003eKeihan Main Line\u003c/div\u003e\n        ",
+  "iconSize": [0, 0],
+  "iconAnchor": [0, 0],
+  "className": "empty",
+});
+        
+    
+                marker_5bc9a27148cb2d05996344eebca8f641.setIcon(div_icon_3daab056d9c0f90e82e43ec2c1624442);
+            
+    
+            feature_group_5adcf91258f13b0d5a044ae6296e17bd.addTo(map_5f596111914dd6d7dddc5c6c89d63d07);
+        
+    
+            var feature_group_5d822b552f82cb7501b7f8688319a2ff = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var poly_line_5bc3db21d8dade88d285d57ae960d13b = L.polyline(
+                [[34.69875, 135.59848], [34.69874, 135.59852], [34.69872, 135.59872], [34.69868, 135.59914], [34.69867, 135.59966], [34.69868, 135.59992], [34.6987, 135.60022], [34.69882, 135.60079], [34.69893, 135.60112], [34.69909, 135.6015], [34.70008, 135.60343], [34.70072, 135.6047], [34.70095, 135.60515], [34.70097, 135.60518], [34.70116, 135.60556], [34.7013, 135.60582], [34.7016, 135.60642], [34.70354, 135.61013], [34.7038, 135.61062], [34.70389, 135.61077], [34.7046, 135.61223], [34.70481, 135.6127], [34.70496, 135.61307], [34.70509, 135.61344], [34.70518, 135.61371], [34.7053, 135.61408], [34.70539, 135.61442], [34.70548, 135.61473], [34.70556, 135.61502], [34.70565, 135.61533], [34.70592, 135.61644], [34.70606, 135.61714], [34.70606, 135.61721], [34.70613, 135.61781], [34.70619, 135.61856], [34.70619, 135.61865], [34.7062, 135.61876], [34.70623, 135.61933], [34.70623, 135.61938], [34.70625, 135.61998], [34.70626, 135.62049]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#C000A8", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#C000A8", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_5d822b552f82cb7501b7f8688319a2ff);
+        
+    
+            var poly_line_b31104cfc90bc04bd8368f295f0ed365 = L.polyline(
+                [[34.70631, 135.62238], [34.70633, 135.62371], [34.70639, 135.62434], [34.70651, 135.62481], [34.70668, 135.62539], [34.70677, 135.62568], [34.70702, 135.6264], [34.70756, 135.62794], [34.70766, 135.62821], [34.70813, 135.62961], [34.70864, 135.63107], [34.70898, 135.63207], [34.70903, 135.63224], [34.70904, 135.63228], [34.70916, 135.63258], [34.70922, 135.63275], [34.70937, 135.63313], [34.70964, 135.63362], [34.70986, 135.63391], [34.71013, 135.63416], [34.71057, 135.6345], [34.7108, 135.63467], [34.71108, 135.63483], [34.71119, 135.63489], [34.71138, 135.63498], [34.71163, 135.63507], [34.71199, 135.63517], [34.71255, 135.63533], [34.71284, 135.63541], [34.71317, 135.63551], [34.71358, 135.63563], [34.71546, 135.63616], [34.71564, 135.63622], [34.71595, 135.63631], [34.71688, 135.63657], [34.71711, 135.63664], [34.71789, 135.63686], [34.71795, 135.63688]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#C000A8", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#C000A8", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_5d822b552f82cb7501b7f8688319a2ff);
+        
+    
+            var poly_line_a81ab9f8466bb47c910ca7ea7d89003d = L.polyline(
+                [[34.74534, 135.64487], [34.74526, 135.64478], [34.74485, 135.6444], [34.74433, 135.64393], [34.74413, 135.64378], [34.74393, 135.64365], [34.7437, 135.64352], [34.74353, 135.64345], [34.74242, 135.64305], [34.74224, 135.64298], [34.74211, 135.64294], [34.74154, 135.64274], [34.74092, 135.64252], [34.7408, 135.64247], [34.74039, 135.64233], [34.7401, 135.64223], [34.73985, 135.64213], [34.73914, 135.64189], [34.73854, 135.64169], [34.73844, 135.64165], [34.73736, 135.64129], [34.73634, 135.64096], [34.73583, 135.64075], [34.73567, 135.64069], [34.73511, 135.64036], [34.73461, 135.64001], [34.73434, 135.63983], [34.73398, 135.63965], [34.73376, 135.63957], [34.73327, 135.63943], [34.73299, 135.63937], [34.73274, 135.63932], [34.73236, 135.63931], [34.73187, 135.63929], [34.73117, 135.63927]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#C000A8", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#C000A8", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_5d822b552f82cb7501b7f8688319a2ff);
+        
+    
+            var poly_line_51819c623cb956c695f782e802be87cd = L.polyline(
+                [[34.71896, 135.63717], [34.71902, 135.63718], [34.71954, 135.63732], [34.71971, 135.63737], [34.72076, 135.63765], [34.72113, 135.63775], [34.72114, 135.63777], [34.72122, 135.63777], [34.72169, 135.63791], [34.72234, 135.63809], [34.72248, 135.63813], [34.72276, 135.6382], [34.72277, 135.63821], [34.72296, 135.63826], [34.72312, 135.63831], [34.7233, 135.63835], [34.72374, 135.63847], [34.72386, 135.63851], [34.72394, 135.63853], [34.7243, 135.63864], [34.72469, 135.63874], [34.72486, 135.6388], [34.72491, 135.6388], [34.72492, 135.63882], [34.72567, 135.63901], [34.7257, 135.63902], [34.72587, 135.63906], [34.72592, 135.63908], [34.7265, 135.63918], [34.72695, 135.63926], [34.72745, 135.63928], [34.72793, 135.63927], [34.72808, 135.63925], [34.72891, 135.63923], [34.72963, 135.63922]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#C000A8", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#C000A8", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_5d822b552f82cb7501b7f8688319a2ff);
+        
+    
+            var poly_line_6c910e13d9da599c3a533af83f293111 = L.polyline(
+                [[34.80094, 135.69791], [34.7997, 135.69771], [34.79954, 135.69769], [34.79891, 135.69761], [34.79709, 135.6974], [34.79401, 135.69704], [34.79249, 135.69687], [34.79134, 135.69671], [34.79074, 135.69661], [34.79033, 135.69652], [34.79011, 135.69643], [34.78972, 135.69625], [34.78935, 135.69606], [34.7889, 135.69576], [34.78731, 135.69464], [34.78532, 135.69328], [34.78512, 135.69314], [34.7848, 135.69293], [34.78458, 135.69279], [34.78415, 135.69251], [34.78169, 135.69085], [34.78142, 135.69067], [34.77969, 135.68948], [34.77918, 135.68908], [34.77883, 135.68878], [34.7785, 135.68843], [34.77823, 135.68808], [34.77792, 135.68767], [34.77774, 135.68739], [34.7776, 135.68713], [34.77668, 135.68502]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#C000A8", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#C000A8", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_5d822b552f82cb7501b7f8688319a2ff);
+        
+    
+            var poly_line_a614a08929c77c73e80b5283b1637aae = L.polyline(
+                [[34.76708, 135.66281], [34.76675, 135.66208], [34.76657, 135.66173], [34.76639, 135.66148], [34.76624, 135.66128], [34.76596, 135.66094], [34.76587, 135.66084], [34.76525, 135.6601], [34.76459, 135.65936], [34.76399, 135.65869], [34.76225, 135.65669], [34.761, 135.6552], [34.76081, 135.655], [34.76002, 135.6541], [34.75966, 135.65373], [34.75947, 135.65358], [34.75922, 135.65345], [34.759, 135.65338], [34.75874, 135.65333], [34.75857, 135.65332], [34.7583, 135.65332], [34.75753, 135.6533], [34.75677, 135.65331], [34.75674, 135.65331], [34.75592, 135.65337], [34.75583, 135.65337]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#C000A8", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#C000A8", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_5d822b552f82cb7501b7f8688319a2ff);
+        
+    
+            var poly_line_7b5c279d6b2342ce97ff1e5a35835697 = L.polyline(
+                [[34.75518, 135.65333], [34.75507, 135.65333], [34.75486, 135.65331], [34.75441, 135.65322], [34.7541, 135.65312], [34.75377, 135.65297], [34.75352, 135.65283], [34.75325, 135.65264], [34.75313, 135.65249], [34.75269, 135.65204], [34.75157, 135.65096], [34.75131, 135.65071], [34.75051, 135.64993], [34.75043, 135.64986], [34.75021, 135.64964], [34.74936, 135.64881], [34.74916, 135.64861], [34.74912, 135.64858], [34.74912, 135.64857], [34.7471, 135.64657], [34.7465, 135.64598], [34.74647, 135.64596], [34.74608, 135.64557], [34.74595, 135.64544]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#C000A8", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#C000A8", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_5d822b552f82cb7501b7f8688319a2ff);
+        
+    
+            var poly_line_31a1694faf805ca4553ce47ea80a1fb3 = L.polyline(
+                [[34.77635, 135.68428], [34.77503, 135.68122], [34.7749, 135.68092], [34.77482, 135.68072], [34.77357, 135.67791], [34.77339, 135.67751], [34.77308, 135.6768], [34.77219, 135.67473], [34.77174, 135.67371], [34.77093, 135.67181], [34.77089, 135.67169], [34.76909, 135.66751], [34.76765, 135.66414], [34.76762, 135.66408]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#C000A8", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#C000A8", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_5d822b552f82cb7501b7f8688319a2ff);
+        
+    
+            var poly_line_1f026db2b482bb0a9e41e316eefd39f2 = L.polyline(
+                [[34.70631, 135.62238], [34.7063, 135.62218], [34.70626, 135.62049]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#C000A8", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#C000A8", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_5d822b552f82cb7501b7f8688319a2ff);
+        
+    
+            var poly_line_185d5badb4ddc30203b025cdac1caef3 = L.polyline(
+                [[34.75583, 135.65337], [34.75518, 135.65333]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#C000A8", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#C000A8", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_5d822b552f82cb7501b7f8688319a2ff);
+        
+    
+            var poly_line_c3e66295c71cdb56815dbf85bf74ccda = L.polyline(
+                [[34.71795, 135.63688], [34.71896, 135.63717]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#C000A8", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#C000A8", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_5d822b552f82cb7501b7f8688319a2ff);
+        
+    
+            var poly_line_b9e068bc0c315dfc3bbab74a8a0a2c36 = L.polyline(
+                [[34.76762, 135.66408], [34.76708, 135.66281]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#C000A8", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#C000A8", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_5d822b552f82cb7501b7f8688319a2ff);
+        
+    
+            var poly_line_ee01481075f4f150fe536708963d7d3f = L.polyline(
+                [[34.72963, 135.63922], [34.73117, 135.63927]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#C000A8", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#C000A8", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_5d822b552f82cb7501b7f8688319a2ff);
+        
+    
+            var poly_line_9681f87fa981ce84e80359e6c33f8b03 = L.polyline(
+                [[34.77668, 135.68502], [34.77635, 135.68428]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#C000A8", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#C000A8", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_5d822b552f82cb7501b7f8688319a2ff);
+        
+    
+            var poly_line_a5677b17481476f7a8db36e36655eeea = L.polyline(
+                [[34.74595, 135.64544], [34.74534, 135.64487]],
+                {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#C000A8", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#C000A8", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(feature_group_5d822b552f82cb7501b7f8688319a2ff);
+        
+    
+            var marker_dda108287c16dad20bd055ae65cc1ae6 = L.marker(
+                [34.69875, 135.59848],
+                {
+  "zIndexOffset": 1000,
+}
+            ).addTo(feature_group_5d822b552f82cb7501b7f8688319a2ff);
+        
+    
+            var div_icon_ca7443d2ae7ffbb57a25b82075cef311 = L.divIcon({
+  "html": "\n            \u003cdiv class=\"hm-line-label\" data-line=\"1\" style=\"\n                position: absolute; left: 0; top: 0;\n                transform: translate(-50%, -50%) translate(-88.9px, -3.1px);\n                font-size: 14px; font-weight: bold; color: #C000A8; --dm-label: #e400c7;\n                text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff,\n                             -1px 1px 0 #ffffff, 1px 1px 0 #ffffff,\n                             0 0 6px #ffffff;\n                white-space: nowrap; pointer-events: none;\n            \"\u003eJR Gakkentoshi Line\u003c/div\u003e\n        ",
+  "iconSize": [0, 0],
+  "iconAnchor": [0, 0],
+  "className": "empty",
+});
+        
+    
+                marker_dda108287c16dad20bd055ae65cc1ae6.setIcon(div_icon_ca7443d2ae7ffbb57a25b82075cef311);
+            
+    
+            feature_group_5d822b552f82cb7501b7f8688319a2ff.addTo(map_5f596111914dd6d7dddc5c6c89d63d07);
+        
+    
+            var feature_group_b5bbfffed148ddb9d1d5e7f3cfe3f445 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_81302805f972f4d951dbcc9332228ef5 = L.circleMarker(
+                [34.747501, 135.611219],
+                {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_b5bbfffed148ddb9d1d5e7f3cfe3f445);
+        
+    
+            circle_marker_81302805f972f4d951dbcc9332228ef5.bindTooltip(
+                `<div>
+                     <b>Kayashima</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ac4742180e8a3dc1a02c29da8aef4dfd = L.circleMarker(
+                [34.78456, 135.63094],
+                {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_b5bbfffed148ddb9d1d5e7f3cfe3f445);
+        
+    
+            circle_marker_ac4742180e8a3dc1a02c29da8aef4dfd.bindTooltip(
+                `<div>
+                     <b>Korien</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fab1221c1d9c47b59b94b35ee914fe84 = L.circleMarker(
+                [34.755505, 135.65335],
+                {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_b5bbfffed148ddb9d1d5e7f3cfe3f445);
+        
+    
+            circle_marker_fab1221c1d9c47b59b94b35ee914fe84.bindTooltip(
+                `<div>
+                     <b>Neyagawakoen</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_41bb5f3e2c70158adb588821b45b7222 = L.circleMarker(
+                [34.76397, 135.620741],
+                {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
+            ).addTo(feature_group_b5bbfffed148ddb9d1d5e7f3cfe3f445);
+        
+    
+            circle_marker_41bb5f3e2c70158adb588821b45b7222.bindTooltip(
+                `<div>
+                     <b>Neyagawashi</b>
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            feature_group_b5bbfffed148ddb9d1d5e7f3cfe3f445.addTo(map_5f596111914dd6d7dddc5c6c89d63d07);
+        
+    
+            var feature_group_0e4e180926b1ab381e4e64608f48d860 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var fast_marker_cluster_d84df3bdefab6a194afdb6f5df6d8cdf = (function(){
+                var callback = 
+        (function () {
+            var CATEGORIES = ["\u7406\u5bb9\u6240", "\u7f8e\u5bb9\u6240", "\u30af\u30ea\u30fc\u30cb\u30f3\u30b0\u6240"];
+            var STATIONS = ["Neyagawashi", "Kayashima", "Korien", "Neyagawakoen"];
+            var BANDS = ["Ring 2 (0.1-0.2 mi)", "Ring 4 (0.3-0.6 mi)", "Ring 3 (0.2-0.3 mi)", "Ring 1 (0-0.1 mi)"];
+            return function (row) {
+                // bubblingMouseEvents false: a click on a dot of a spiderfied
+                // group no longer reaches the map, where Leaflet.markercluster
+                // unspiderfies on any click (desktop; owner, 2026-10-04).
+                var marker = L.circleMarker(new L.LatLng(row[0], row[1]), {
+                    radius: 5, color: '#1baf7a', fillColor: '#1baf7a',
+                    fillOpacity: 0.85, weight: 1, bubblingMouseEvents: false
+                });
+                var html = '<b>' + row[2] + '</b><br>' +
+                    'Permit type (営業の種類): ' + CATEGORIES[row[3]] + '<br>' +
+                    'Nearest station: ' + STATIONS[row[4]] + '<br>' +
+                    BANDS[row[5]];
+                marker.bindTooltip(html, {sticky: true});
+                return marker;
+            };
+        })()
+    ;
+
+                var data = JSON.parse("[[34.764473,135.62291,\"理容ＯＫ\",0,0,0],[34.767942,135.616042,\"理容  丸十\",0,0,1],[34.748631,135.612469,\"芝理容所\",0,1,0],[34.760809,135.624039,\"理容なかむら\",0,0,2],[34.760344,135.616654,\"理容ゴーナイ\",0,0,1],[34.765077,135.620697,\"ナカジマ理容所\",0,0,3],[34.767763,135.618261,\"理容  アオキ\",0,0,2],[34.768884,135.612901,\"理容  メルシー\",0,0,1],[34.74961,135.616262,\"かず理容所\",0,1,1],[34.784889,135.62859,\"理容富士\",0,2,0],[34.788754,135.630881,\"ヘアーサロン  フジタ\",0,2,2],[34.782476,135.629879,\"理容戸松\",0,2,0],[34.776534,135.632863,\"理容山根\",0,2,1],[34.767165,135.612617,\"理容土佐\",0,0,1],[34.779972,135.628317,\"ヘアーサロンヤマモト\",0,2,1],[34.780745,135.625044,\"ヘアースタジアム  ホームラン\",0,2,1],[34.753003,135.653533,\"理容  ３  ９\",0,3,0],[34.788173,135.629248,\"ヘアーサロンハヤシ\",0,2,2],[34.747968,135.619851,\"理容  富士\",0,1,1],[34.759999,135.613268,\"ファミリーサロン  ミヤモト\",0,0,1],[34.771335,135.624067,\"アムール理容室\",0,0,1],[34.782359,135.638964,\"ヘアサロン  ワタナベ\",0,2,1],[34.785331,135.620906,\"理容コミック\",0,2,1],[34.779719,135.624052,\"ヘアーサロン  みなみ\",0,2,1],[34.75547,135.654394,\"ヘアサロン  ３  ９\",0,3,3],[34.750174,135.612373,\"奥田理容\",0,1,0],[34.768565,135.6152,\"Creap hair design\",0,0,1],[34.76601,135.629467,\"理容イシダ\",0,0,1],[34.769195,135.615939,\"エリート\",0,0,1],[34.767647,135.611826,\"ヘアースポットＫＡＪＩ\",0,0,1],[34.781523,135.626799,\"ヘアーサロン　コトブキ\",0,2,1],[34.786731,135.62413,\"メンズヘアー  ホワイト\",0,2,1],[34.778019,135.626392,\"理容  宅間\",0,2,1],[34.762289,135.615028,\"理容  エンゼル\",0,0,1],[34.76669,135.612676,\"ヘアーサロンおかもと\",0,0,1],[34.755684,135.610425,\"理容  ナカモリ\",0,1,1],[34.767945,135.624978,\"理容サワイ\",0,0,1],[34.767817,135.615046,\"髪倶楽部  ＫＡＮＤＡ\",0,0,1],[34.762298,135.628214,\"ヘアーサロン  ホンダ\",0,0,1],[34.765633,135.630545,\"カット＆パーマ  ライブ\",0,0,1],[34.783237,135.623544,\"Ｃｈａｒｍｅ\",0,2,1],[34.784061,135.628328,\"カットサロン  ＧＯＲＯ\",0,2,0],[34.747926,135.61939,\"理容ハッピーロード\",0,1,1],[34.787128,135.62169,\"ヘアーサロン  三賀\",0,2,1],[34.754764,135.651994,\"サントウ理容\",0,3,3],[34.764527,135.612402,\"ヘアーサロン  オアシス\",0,0,1],[34.745326,135.617083,\"カットスタジオ  ＴＨＩＣＫ\",0,1,1],[34.751108,135.606056,\"ヘアーサロン  ヨリオカ\",0,1,1],[34.764974,135.630209,\"カットハウス  雅\",0,0,1],[34.781447,135.628621,\"ＳＡＷＡＤＡ  ＨＡＩＲ  ＮＡＶＩ\",0,2,2],[34.784034,135.629753,\"セントジョージ\",0,2,3],[34.764229,135.618616,\"理容  ナンコウ\",0,0,0],[34.765629,135.618174,\"ヘアーサロン  メトロ\",0,0,0],[34.747464,135.608536,\"ヘアーサロン  ミヤサコ\",0,1,0],[34.777454,135.632662,\"ヘアーサロン  スマート\",0,2,1],[34.76694,135.616243,\"ヘアショップｈ２\",0,0,1],[34.758454,135.623808,\"ＶＩＳＩＯＮ２０００\",0,0,1],[34.760809,135.624039,\"理容コロナ\",0,0,2],[34.768198,135.613633,\"理容あづま\",0,0,1],[34.781337,135.632708,\"スフェーラ\",0,2,2],[34.757329,135.655437,\"カットショップ  ウィル\",0,3,0],[34.747895,135.614718,\"Ｈａｉｒ  ｓａｌｏｎ  ＳＵＧＡ\",0,1,2],[34.78604,135.624993,\"ＳＮＩＰ　hair\",0,2,1],[34.749009,135.61121,\"ヘアーサロン　ＰＩＮＯ\",0,1,0],[34.783929,135.630241,\"理容プラザ香里駅前店\",0,2,3],[34.786863,135.628638,\"マッハ理髪所\",0,2,2],[34.766808,135.624539,\"ヘアーブティック  Ｂｅｅ\",0,0,2],[34.76032,135.611522,\"理容　高柳\",0,0,1],[34.76365,135.610624,\"ヘアカットサロン　ほがらか\",0,0,1],[34.764972,135.627707,\"ＨＡＩＲ’Ｓ　ＳＨＯＷ　ＲＥ\",0,0,1],[34.751962,135.608204,\"カットハウス　Ｋ’ｓ\",0,1,1],[34.758179,135.624022,\"ＴＷＩＮ\",0,0,1],[34.784889,135.62859,\"かみいち\",0,2,0],[34.747117,135.617274,\"カット　イン　アート\",0,1,1],[34.763893,135.618729,\"理髪館　寝屋川店\",0,0,0],[34.784738,135.636806,\"Ｒｅｐｏｓ　Ｈａｉｒ　Ｒｅｓｏｒｔ\",0,2,1],[34.786633,135.629413,\"男髪\",0,2,0],[34.785342,135.628608,\"ｈａｉｒ  ＴＲＵＮＫ\",0,2,0],[34.747816,135.613988,\"ヘアーサロン艶美\",0,1,0],[34.761651,135.620186,\"理容イケ\",0,0,0],[34.777454,135.632662,\"Ｌｅ　Ｓｏｌｅｉｌ\",0,2,1],[34.76312,135.620814,\"Ｂｅａｕｔｙ　Ｆａｃｅ\",0,0,3],[34.77923,135.624748,\"ｂａｒｂｅｒ　ＨＹＡＴＴ\",0,2,1],[34.762801,135.620476,\"BARBER STYLE CANVAS\",0,0,3],[34.761705,135.623619,\"ヘアーサロン　サコ\",0,0,2],[34.783359,135.627023,\"Ｒ  ｃｏｎｃｅｐｔ\",0,2,2],[34.746616,135.611317,\"HAIR MAKE UP STUDIO M1/2\",0,1,3],[34.758454,135.623808,\"hair atelier Re:nk\",0,0,1],[34.745995,135.619322,\"ヘアーサロンヒーロー\",0,1,1],[34.78341,135.627935,\"ヘア　クロス\",0,2,0],[34.783237,135.623544,\"クイックカットＢＢ　アル・プラザ香里園店\",0,2,1],[34.76081,135.615998,\"ヘアーサロン  まごころ\",0,0,1],[34.785214,135.632053,\"ＮＡＮＣＹ\",0,2,3],[34.756884,135.626801,\"CUT CLUB BASE\",0,0,1],[34.779941,135.624927,\"ＹＵＫＫＹ\u0026#x27;Ｓ　ＢＡＲＢＥＲ　ＳＨＯＰ\",0,2,1],[34.784831,135.634511,\"seine\",0,2,2],[34.76312,135.620814,\"NEWpOLICY\",0,0,3],[34.785075,135.627596,\"HAIR SALON MATSUSHIMA\",0,2,0],[34.787463,135.630153,\"ラ・クール\",0,2,2],[34.762477,135.623987,\"ヘア  アトリウム  エスタ\",0,0,2],[34.783076,135.62977,\"パパス香里園店\",0,2,0],[34.786863,135.628638,\"男髪\",0,2,2],[34.782797,135.630284,\"早川理容\",0,2,0],[34.767763,135.618261,\"META BARBER\",0,0,2],[34.749226,135.616469,\"Guild\",0,1,1],[34.759491,135.62248,\"エステルーム　ラティア\",0,0,1],[34.766165,135.616541,\"大利美容室\",1,0,2],[34.767919,135.613293,\"フジムラ美容室\",1,0,1],[34.74797,135.616424,\"アリス美容室\",1,1,2],[34.767763,135.618261,\"たから美容院\",1,0,2],[34.762285,135.616127,\"オカダ美容室\",1,0,2],[34.760809,135.624039,\"ハート美容室\",1,0,2],[34.787906,135.629243,\"カズミ美容室\",1,2,2],[34.76669,135.612676,\"チャーム美容室\",1,0,1],[34.764074,135.619421,\"ビューティーサロンニシノ\",1,0,3],[34.754444,135.643177,\"ミチ美容室\",1,3,1],[34.749324,135.609171,\"ベルアミ\",1,1,0],[34.747968,135.619851,\"カッテングサロン未来\",1,1,1],[34.786302,135.620767,\"フミ美容室\",1,2,1],[34.771675,135.619305,\"おがき美容室\",1,0,1],[34.766511,135.610765,\"ちよみ美容室\",1,0,1],[34.760215,135.616906,\"ヒロ美容室\",1,0,1],[34.769195,135.615939,\"おしゃれの店チャーミング\",1,0,1],[34.786863,135.628638,\"美容室おてもやん\",1,2,2],[34.754524,135.653612,\"（株）ビューティサロンモリワキ東寝屋川店\",1,3,3],[34.761032,135.615777,\"シャロン美容室\",1,0,1],[34.760372,135.613803,\"美容室ながい\",1,0,1],[34.760372,135.613803,\"美容室  芙実\",1,0,1],[34.747968,135.619851,\"サキ美容室\",1,1,1],[34.761898,135.626747,\"ビューティサロン  こころ\",1,0,1],[34.75128,135.608489,\"いんあんどいん\",1,1,1],[34.747071,135.616366,\"みつこ美容室\",1,1,2],[34.747464,135.608536,\"美容室シャボン\",1,1,0],[34.747209,135.612981,\"ヘアールーム多恋路\",1,1,0],[34.781447,135.628621,\"ぱーま屋  ＪＡＭＪＡＭ\",1,2,2],[34.764708,135.622763,\"ぱーまはうす　はま\",1,0,0],[34.78977,135.626897,\"ビューティサロン  モア\",1,2,1],[34.760594,135.615598,\"ビューティーサロン  ルマン\",1,0,1],[34.761401,135.624146,\"マリー美容室\",1,0,2],[34.767411,135.625232,\"スタジオベストワン\",1,0,1],[34.754764,135.651994,\"カットハウス  ヴィーナス\",1,3,3],[34.756439,135.654175,\"美容室  アッシュ\",1,3,3],[34.758179,135.624022,\"サカエ\",1,0,1],[34.783178,135.627226,\"美容室ポニーテール\",1,2,2],[34.770658,135.624172,\"青いとり美容室\",1,0,1],[34.780073,135.632319,\"マヤ美容室\",1,2,1],[34.783237,135.623544,\"Charme　hair　make　atelier\",1,2,1],[34.780849,135.630912,\"美容室プチ\",1,2,2],[34.766675,135.6266,\"ビューティサロン世来美\",1,0,1],[34.785137,135.62541,\"ＴＷＵ－ＲＵＲＵ  トウードゥルー\",1,2,1],[34.763955,135.610804,\"ビューティ  花フサ\",1,0,1],[34.769794,135.616946,\"トミー美容室\",1,0,1],[34.748112,135.61401,\"アトリエ  ピノキオ\",1,1,0],[34.771171,135.619772,\"美容室ＭＥＲＹ\",1,0,1],[34.780027,135.630342,\"京美容室\",1,2,1],[34.783892,135.625468,\"アトモスフェール\",1,2,1],[34.784034,135.629753,\"美容室  セントジョージ\",1,2,3],[34.763893,135.618729,\"Ｈａｉｒ  Ａｒｔ  ＬＡＳＴ  ＳＣＥＮＥ\",1,0,0],[34.78341,135.627935,\"ヘアカラーショップ  アルページュ\",1,2,0],[34.786863,135.628638,\"香里丸善美容院\",1,2,2],[34.762848,135.62154,\"髪工房ｐｅａｃｅ\",1,0,3],[34.786863,135.628638,\"シンジュ  ハウス\",1,2,2],[34.785255,135.626992,\"美容室  チャーミング\",1,2,2],[34.755267,135.65533,\"ヘアースタジアム  ボブ\",1,3,0],[34.765905,135.619238,\"愛美容室\",1,0,0],[34.779572,135.625496,\"みちよ美容室\",1,2,1],[34.765257,135.623754,\"ヘアースタジオ  マキシム\",1,0,0],[34.785779,135.62938,\"Ｃａｐｅｌｌｉ  Ｂｅｌｌａ\",1,2,0],[34.765113,135.618014,\"ＣＡＤＥＡＵ\",1,0,0],[34.747542,135.617281,\"ＳＡＴＩＥ  ＨＡＩＲ  ＷＯＲＫＳ\",1,1,1],[34.789436,135.628156,\"Ｓａｌｏｎ  Ａｔｅｌｉｅｒ\",1,2,1],[34.783178,135.627226,\"美容室　ADO　香里園店\",1,2,2],[34.783173,135.63157,\"Ｈａｉｒ  ＆  Ｆａｃｅ  ｆｉｎｅ\",1,2,0],[34.761386,135.624474,\"ＣＵＴ  ＨＯＵＳＥ  ぽけっと\",1,0,2],[34.786856,135.630645,\"ＡＲＴ\",1,2,0],[34.782804,135.625166,\"スター美容室\",1,2,1],[34.757329,135.655437,\"美容室ＤＥＡＲ\",1,3,0],[34.745448,135.613726,\"京田美容室\",1,1,2],[34.785156,135.633705,\"ヘアタイム  バンビ\",1,2,0],[34.753231,135.606171,\"Ｈａｉｒ  Ｃａｌｌｉｓｔｏ\",1,1,1],[34.786856,135.630645,\"ARTSTYLE\u0026amp;CO.\",1,2,0],[34.78757,135.628733,\"えむず美容室\",1,2,2],[34.765726,135.612142,\"Ｈａｉｒ  Ｔｉｍｅ  Ｑ；ａ\",1,0,1],[34.784045,135.628638,\"Hair　Remake　MAI\",1,2,0],[34.784831,135.634511,\"ビュアクス\",1,2,2],[34.785032,135.627921,\"ハーフタイム\",1,2,0],[34.788511,135.626912,\"Ａ．ｍａ  美容室\",1,2,1],[34.786863,135.628638,\"カットハウス　ページボーイ\",1,2,2],[34.768291,135.61813,\"ヘア　スペース　香舞里菜\",1,0,1],[34.770271,135.623311,\"ＢＥ－ＰＨＡＳＥ  ＣＵ－ＣＵ\",1,0,1],[34.782087,135.631178,\"ｈａｉｒ　ｍｏｖｅ\",1,2,0],[34.784469,135.626263,\"髪工房  ＣｈｕＲａＳａ\",1,2,2],[34.760372,135.613803,\"美容室　ｇｒｏｗ＋１\",1,0,1],[34.769195,135.615939,\"Ｓｏｌｅｉｌ\",1,0,1],[34.769641,135.614202,\"CUT STUDIO PIXY\",1,0,1],[34.786856,135.630645,\"Ｌｉｔｔｌｅ　ｓｋｙ\",1,2,0],[34.766165,135.616541,\"Ｃａｔｒａ　Ｈａｉｒ　ｍａｋｅ\",1,0,2],[34.785075,135.627596,\"hair room mano\",1,2,0],[34.76347,135.618278,\"HAIR SALON IWASAKI\",1,0,0],[34.782797,135.630284,\"カット　ＯＮＥ\",1,2,0],[34.767647,135.611826,\"Hair Motley\",1,0,1],[34.748903,135.612782,\"ＳＩＳ　ＴＡＩＬ　ＨＡＩＲ\",1,1,0],[34.764763,135.621239,\"ｈａｉｒ　ｄｒｅｓｓｅｒ　ｄａｉｓｙ\",1,0,3],[34.758629,135.622495,\"Ｄｕｋａ　ａｎｔｉｑｕｅ\",1,0,1],[34.762003,135.629883,\"ＳＴＵＤＩＯ Ｚａｐ\",1,0,1],[34.763664,135.617708,\"Ｍａｒｉｅ　Ｈａｉｒ\",1,0,0],[34.747449,135.613225,\"ｓａｔｃｈ　ｈａｉｒ\",1,1,0],[34.786952,135.627636,\"ＭａＨａｌｏ\",1,2,2],[34.750525,135.607534,\"美容室　デフィ\",1,1,2],[34.785032,135.627921,\"ＥＣＯ　Ｈａｉｒ　ＡＰＥＸＳ\",1,2,0],[34.760353,135.61634,\"サロン・ド・ムー\",1,0,1],[34.762661,135.622154,\"Ａｒｍ　美容室\",1,0,0],[34.747209,135.612981,\"ｃｕｔ ｓｔｕｄｉｏ ｐｉｘｙ Ｓｅｌｖａ\",1,1,0],[34.785906,135.630174,\"Ａｎｚｕ　Ｇｌｏｗ\",1,2,0],[34.765921,135.618264,\"Cachette\",1,0,0],[34.764968,135.619006,\"ぶらんこ美容室\",1,0,0],[34.784037,135.628977,\"Ｈａｉｒ　Ｓｔｕｄｉｏ　Ｒｉｓｅ\",1,2,0],[34.764208,135.617946,\"美粧館　寝屋川店\",1,0,0],[34.763851,135.622444,\"Ｈａｉｒ＋　Ｃｈｏｕ　Ｃｈｏｕ\",1,0,3],[34.758736,135.655931,\"ｈａｉｒ’ｓ　Ｆｅｌｉｃｉｔｅ\",1,3,2],[34.763893,135.618729,\"サニー美容室\",1,0,0],[34.746855,135.612913,\"HAIR SALON IWASAKI\",1,1,0],[34.781451,135.625111,\"ファセサロン\",1,2,1],[34.776295,135.631813,\"ＥＭＩＵ＊\",1,2,1],[34.76547,135.611192,\"Ｈａｉｒ  Ｓａｌｏｎ  Ｇａｒａｇｅ\",1,0,1],[34.784037,135.628977,\"美粧館　香里園店\",1,2,0],[34.787396,135.631098,\"ａｆｆｅ＋\",1,2,0],[34.766726,135.618274,\"サロン・想愛\",1,0,2],[34.782797,135.630284,\"ｅＬ\",1,2,0],[34.765846,135.62238,\"ＬＩＢＲＥ\",1,0,0],[34.754469,135.606539,\"Ｌａｂｙｒｉｎｔｈ　ｙｕｍｅ\",1,1,1],[34.781451,135.625111,\"ヘアー　コレクション　やんちゃ姫\",1,2,1],[34.780745,135.625044,\"Ｈａｉｒ＆Ｍａｋｅ　ｃｈａｒａ\",1,2,1],[34.747209,135.612981,\"アイラッシュサロン　フェリス\",1,1,0],[34.766503,135.622788,\"Ｈａｉｒ　Ａｔｅｌｉｅｒ　ｍｕ－ｔｅ\",1,0,2],[34.749059,135.610895,\"有限会社山下フォートスタジオ\",1,1,0],[34.786633,135.629413,\"Artisan beauty box anana\",1,2,0],[34.788727,135.631329,\"Ａ－Ｓｔｙｌｅ\",1,2,2],[34.765241,135.622299,\"Ｄｕｋａ　ｂｏｎｈｅｕｒ\",1,0,0],[34.746516,135.614519,\"Ｈａｉｒ　ａ－ｔｏ　Ｌｕｍｉｃｈｏｕ\",1,1,0],[34.78596,135.628711,\"hair make GraZia Cielo\",1,2,0],[34.765846,135.62238,\"Ｒ＋\",1,0,0],[34.757116,135.654627,\"Ｌｕｎａ　Ｓａｌｏｎ\",1,3,0],[34.785214,135.632053,\"ＡＮＧＥＬＩＱＵＥ\",1,2,3],[34.782087,135.631178,\"Ｂｅｌｌ　ｌａ　ｃｏｃｏ\",1,2,0],[34.762488,135.624507,\"ＶｉＶｉ\",1,0,2],[34.762559,135.627136,\"Ｌｅ　Ｒｅｖｅ　Ｍａｒｃｈｅ\",1,0,1],[34.762661,135.622154,\"Ｂａｎｄｅ\",1,0,0],[34.77157,135.617095,\"ヘアメイク　ロッツ\",1,0,1],[34.747816,135.613988,\"すみれ菫美容室\",1,1,0],[34.787021,135.6256,\"hair room 35\",1,2,1],[34.784889,135.62859,\"ＡＣＮＥ\",1,2,0],[34.758984,135.613185,\"Ｕ－ｔｒａｃｔ\",1,0,1],[34.784889,135.62859,\"Ｖｉｎｔａｇｅ\",1,2,0],[34.78596,135.628711,\"geNe \u0026#x27;n GRUS\",1,2,0],[34.758318,135.618649,\"ａｎｅｗ　ａｅｉｒ\",1,0,1],[34.75388,135.604246,\"ｃｌｅａｒ\",1,1,1],[34.784045,135.628638,\"ｈａｉｒｓ　ＢＥＲＲＹ　香里園店\",1,2,0],[34.767668,135.617231,\"Flag hair\",1,0,1],[34.765241,135.622299,\"ｍｏｃｏ.ａｍａｚｉｎｇ\",1,0,0],[34.781794,135.631435,\"ＡＮＤＲＥＡ\",1,2,0],[34.76601,135.629467,\"Lucia\",1,0,1],[34.763418,135.62359,\"カペリベラ寝屋川\",1,0,0],[34.787539,135.629238,\"ＬｕＬｕ．\",1,2,2],[34.747131,135.610925,\"零\",1,1,3],[34.784083,135.627706,\"Agu hair will 香里園店\",1,2,0],[34.78328,135.628727,\"room hair\",1,2,0],[34.763851,135.622444,\"ma cherie \",1,0,3],[34.762801,135.620476,\"ｖｉｖｉａｎａ\",1,0,3],[34.758454,135.623808,\"eyelash Re:nk\",1,0,1],[34.764074,135.619421,\"２ｎｄ　Ｖｉｎｔａｇｅ\",1,0,3],[34.762668,135.625534,\"ＲＵＦＦ\",1,0,2],[34.78328,135.628727,\"kiino\",1,2,0],[34.762801,135.620476,\"ショコラ\",1,0,3],[34.765846,135.62238,\"Hair House LePo\",1,0,0],[34.765241,135.622299,\"Agu hair roy\",1,0,0],[34.786633,135.629413,\"ミニョンアイラッシュデザインサロン\",1,2,0],[34.752191,135.652097,\"ritta.\",1,3,2],[34.762488,135.624507,\"hair CrOSS\",1,0,2],[34.767118,135.625956,\"ＯＣＴＯ　ｈａｉｒ\",1,0,1],[34.786633,135.629413,\"hair＆make O\",1,2,0],[34.76744,135.625964,\"チェリー美容室\",1,0,1],[34.783238,135.629191,\"ママス　香里園店\",1,2,0],[34.785214,135.632053,\"Spa\u0026amp;Eyelash Glow\",1,2,3],[34.786633,135.629413,\"matin+\",1,2,0],[34.766405,135.62117,\"ソイル\",1,0,0],[34.784469,135.626263,\"be\u0026#x27;leef.ema\",1,2,2],[34.783929,135.630241,\"Crew\u0026#x27;s\",1,2,3],[34.765852,135.623637,\"LieN huiT\",1,0,2],[34.746364,135.612877,\"ヘアーステーション　CHASER\",1,1,0],[34.783835,135.632213,\"美容プラーナ香里園駅前店\",1,2,3],[34.787463,135.630153,\"ビューティーサロン　スナチュラル\",1,2,2],[34.764555,135.617349,\"hair quench ottis\",1,0,0],[34.786856,135.630645,\"アトリエ　ヨーコ\",1,2,0],[34.747742,135.61039,\"PRISM\",1,1,3],[34.767763,135.618261,\"ｈａｉｒ　ｓｔｕｄｉｏ　ｃａｌｏｎ\",1,0,2],[34.766571,135.62445,\"SoRa for hair\",1,0,2],[34.764208,135.617946,\"Crystal eyelash and eyebrow\",1,0,0],[34.767118,135.625956,\"ma jolie.lou 寝屋川店\",1,0,1],[34.78399,135.622488,\"cu-cu j coo\",1,2,1],[34.78341,135.627935,\"【ｅｓｏＬＡ】\",1,2,0],[34.784988,135.629049,\"まだ名前のないサロン\",1,2,0],[34.782476,135.629879,\"hair\u0026#x27;s LOG\",1,2,0],[34.747509,135.612243,\"tomoe.\",1,1,3],[34.765241,135.622299,\"veretta.～neyagawa～\",1,0,0],[34.765426,135.618065,\"Eyelash salon Kii\",1,0,0],[34.785214,135.632053,\"Jour ritta\",1,2,3],[34.766096,135.621577,\"No.33\",1,0,0],[34.785579,135.630751,\"アトリエ　ＢＯＮＯ\",1,2,3],[34.765852,135.623637,\"可愛くなれるまつ毛やさん\",1,0,2],[34.787463,135.630153,\"美容室　ラ・クール\",1,2,2],[34.763626,135.62125,\"プロカラーカレン　アドバンス寝屋川\",1,0,3],[34.780636,135.632983,\"A-studio\",1,2,2],[34.780849,135.630912,\"SANKA KU\",1,2,2],[34.768646,135.617048,\"Ｓａｌｏｎ．Ｋ\",1,0,1],[34.78328,135.628727,\"Charme\",1,2,0],[34.779941,135.624927,\"Gracias寝屋川店\",1,2,1],[34.764159,135.617345,\"Love\u0026amp;Beauty Mahalo 寝屋川店\",1,0,0],[34.764839,135.624882,\"癒しの森\",1,0,2],[34.759504,135.623195,\"マシュマロラッシュ\",1,0,1],[34.757456,135.626213,\"BOB SORA\",1,0,1],[34.77873,135.631101,\"ｅｙｅｌａｓｈ　ｓａｌｏｎ　ｆ　まつエク・まつげパーマ\",1,2,1],[34.749754,135.612207,\"KATE　Beauty\",1,1,0],[34.749009,135.61121,\"アーク・ヘアー・シェリー　萱島店\",1,1,0],[34.78596,135.628711,\"TRINITY\",1,2,0],[34.78328,135.628727,\"grace nail＆eyelash salon\",1,2,0],[34.769428,135.617801,\"美容室ラルゴ\",1,0,1],[34.765387,135.62437,\"ヘアカラー専門店　コレット寝屋川店\",1,0,2],[34.747659,135.616001,\"ヘアースタジオ ボン\",1,1,2],[34.787539,135.629238,\"ヘアースタジオ　フラッシュ\",1,2,2],[34.784061,135.628328,\"Bene　hair\",1,2,0],[34.764208,135.617946,\"Himitsukichi on Iridescent\",1,0,0],[34.763626,135.62125,\"Ｌ－ＭＡＲＫ\",1,0,3],[34.762488,135.624507,\"Vante\",1,0,2],[34.756688,135.655639,\"nail\u0026amp;eye Lily 寝屋川公園店\",1,3,0],[34.783237,135.623544,\"クイックカラーQ\",1,2,1],[34.76601,135.629467,\"HIKARI＋\",1,0,1],[34.76298,135.618871,\"NYNY寝屋川店\",1,0,0],[34.764763,135.621239,\"コレット\",1,0,3],[34.75717,135.648604,\"Ｅｙｅｌａｓｈ　Ｓａｌｏｎ　Ｃｏｐａｎ\",1,3,2],[34.781567,135.631256,\"ALLURE\",1,2,2],[34.763626,135.62125,\"eyelash salon petit mill\",1,0,3],[34.762559,135.627136,\"Repit.\",1,0,1],[34.764974,135.630209,\"soft\",1,0,1],[34.784037,135.628977,\"SHERRY\",1,2,0],[34.767,135.618853,\"Mii private salon\",1,0,2],[34.759513,135.621462,\"eyelash ki.ki-lente.magica\",1,0,1],[34.77873,135.631101,\"ｈａｉｒ　ｌｉｆｅ　流　ｎａｇａｒｅ\",1,2,1],[34.765846,135.62238,\"Ｈａｉｒ　Ｈｏｕｓｅ　ＬｅＰｏ　Ｐｌｕｓ\",1,0,0],[34.785906,135.630174,\"Daily　Color　ライフ香里園店\",1,2,0],[34.766405,135.62117,\"eyelash salon Crebia\",1,0,0],[34.783076,135.62977,\"ヘアーサロン　まみ\",1,2,0],[34.749878,135.608215,\"L\u0026#x27;unique eyelash\u0026amp;eyebrow\",1,1,2],[34.762801,135.620476,\"BeautyPlace Jam Audrey\",1,0,3],[34.763626,135.62125,\"Terrace 寝屋川\",1,0,3],[34.764412,135.624128,\"CHEERS\",1,0,0],[34.762774,135.623451,\"ekubo.\",1,0,0],[34.749009,135.61121,\"Total Beauty Salon Eriza\",1,1,0],[34.766675,135.6266,\"nico*\",1,0,1],[34.762661,135.622154,\"美容所\",1,0,0],[34.767082,135.622771,\"玉姫殿　ヤサカ美容室\",1,0,2],[34.785579,135.630751,\"eyelash アトリエ BONO\",1,2,3],[34.78328,135.628727,\"JILL 香里園\",1,2,0],[34.787396,135.631098,\"affe＋ total beauty salon\",1,2,0],[34.765241,135.622299,\"Lila/ECREA/Heilee brow 寝屋川店\",1,0,0],[34.768879,135.622874,\"ahare\",1,0,1],[34.78596,135.628711,\"LANIKAI eyelash＆eyebrowsalon\",1,2,0],[34.76298,135.618871,\"affe＋ total beauty salon\",1,0,0],[34.765852,135.623637,\"IDEAL\",1,0,2],[34.764159,135.617345,\"Choki Peta 寝屋川店\",1,0,0],[34.766859,135.611533,\"Lino.Amazing\",1,0,1],[34.758629,135.622495,\"Ｋｉｍｉｅ　Ｒｏｏｍ\",1,0,1],[34.762801,135.620476,\"魔女のぼうし\",1,0,3],[34.755253,135.651501,\"ＡＩＬ．\",1,3,0],[34.76298,135.618871,\"ＨＡＲＵＨＡＲＵ\",1,0,0],[34.787906,135.629243,\"tres mignon\",1,2,2],[34.765549,135.619289,\"ＥＮＴＯ　ｎａｉｌ＆ｅｙｅ\",1,0,0],[34.763626,135.62125,\"ビューティーカラープラス／ｅｙｅｔｅｍ寝屋川市駅店\",1,0,3],[34.768646,135.617048,\"ｈａｉｒ＋ｍａｋｅ　ＢＥＲＹＬ\",1,0,1],[34.782797,135.630284,\"Le\u0026#x27;a first 香里園店\",1,2,0],[34.767373,135.615921,\"Cruru\",1,0,1],[34.770569,135.627028,\"ヘアーサロン　夢\",1,0,1],[34.785032,135.627921,\"NAGOCORO\",1,2,0],[34.783076,135.62977,\"epica\",1,2,0],[34.786863,135.628638,\"LUANA hair\",1,2,2],[34.767942,135.616042,\"Coyori HairDesign\",1,0,1],[34.769832,135.621105,\"eyelash COCO\",1,0,1],[34.782797,135.630284,\"Rich Brand \u0026amp; Co\",1,2,0],[34.786927,135.629307,\"leeu eyelash salon\",1,2,0],[34.786019,135.626914,\"un/cil美容所\",1,2,2],[34.762774,135.623451,\"スマイリー眉毛・まつげパーマ・パリジェンヌ専門店\",1,0,0],[34.76547,135.611192,\"In Bloom hair design\",1,0,1],[34.759491,135.62248,\"よしだ美容室\",1,0,1],[34.762774,135.623451,\"Aoi　美容室\",1,0,0],[34.786633,135.629413,\"エステサロン　ｕｎ・ｖｉｅ\",1,2,0],[34.78328,135.628727,\"Nail \u0026amp; Eyelash Salon y\",1,2,0],[34.786927,135.629307,\"Men\u0026#x27;s salon～R～[アール]\",1,2,0],[34.765241,135.622299,\"Lafith hair lavie 寝屋川店\",1,0,0],[34.762488,135.624507,\"ASTERISM\",1,0,2],[34.786633,135.629413,\"Racine Henna Salon\",1,2,0],[34.747449,135.613225,\"mahalo\",1,1,0],[34.76298,135.618871,\"aile\",1,0,0],[34.786633,135.629413,\"hair＆spa　maru\",1,2,0],[34.782797,135.630284,\"private salon MKKS\",1,2,0],[34.78328,135.628727,\"UNI BROW 香里園\",1,2,0],[34.770384,135.621823,\"CUT CLUB Jr\",1,0,1],[34.770271,135.623311,\"西洋舎　平池営業所\",2,0,1],[34.744948,135.619335,\"有限会社  ホープクリーニング大阪\",2,1,1],[34.749344,135.614634,\"平野屋クリーニング\",2,1,2],[34.763955,135.610804,\"トミヤクリーニング\",2,0,1],[34.762733,135.616867,\"ファッションクリーニングやまと\",2,0,2],[34.762488,135.624507,\"ヒノモトクリーニング商会\",2,0,2],[34.768185,135.623524,\"クリーニング泉光舎\",2,0,1],[34.766117,135.627373,\"帝国洗業株式会社\",2,0,1],[34.777454,135.632662,\"つくばクリーニング\",2,2,1],[34.766442,135.625789,\"加藤ランドリー\",2,0,1],[34.766571,135.62445,\"讃岐屋クリーニング八坂店\",2,0,2],[34.783237,135.623544,\"正栄クリーニングアルプラザ香里園店\",2,2,1],[34.781228,135.639028,\"ノムラクリーニング成田ＳＳ\",2,2,1],[34.748589,135.609225,\"ランドリー＆ドライクリーニング  ヒロヤ\",2,1,0],[34.769195,135.615939,\"フタバクリーニング池田店\",2,0,1],[34.759126,135.655084,\"正栄クリーニング　フレンドマート東寝屋川店\",2,3,2],[34.77923,135.624748,\"有限会社クリーニングマミー寝屋川\",2,2,1],[34.764441,135.629919,\"おしぼり工房白い屋\",2,0,1],[34.787054,135.623621,\"ホワイト急便　松屋町店\",2,2,1],[34.784427,135.637296,\"株式会社シルキードライ紅葉ケ丘店\",2,2,1],[34.765852,135.623637,\"ホワイト急便　八坂店\",2,0,2],[34.764208,135.617946,\"ホワイト急便　ベル大利店\",2,0,0],[34.758357,135.622792,\"ホワイト急便　出雲店\",2,0,1],[34.749754,135.612207,\"讃岐屋クリーニング　萱島店\",2,1,0],[34.747012,135.612013,\"きょくとう萱島駅前店\",2,1,3],[34.768879,135.622874,\"シルキードライ豊野店\",2,0,1],[34.752441,135.608651,\"正栄クリーニング　御幸東町店\",2,1,1],[34.784962,135.630066,\"ホワイト急便香里園駅前店\",2,2,3],[34.785137,135.62541,\"シルキードライ寝屋川工場\",2,2,1],[34.788925,135.630411,\"クリーニング　シロヤ\",2,2,1],[34.786863,135.628638,\"クリーニング　シロヤ　新町店\",2,2,2],[34.761012,135.611663,\"セントラルクリーニング\",2,0,1],[34.785214,135.632053,\"正栄クリーニング　かほりまちテラス店\",2,2,3],[34.760409,135.624037,\"紀の国屋\",2,0,1],[34.746695,135.618256,\"イセヅドライ　万代萱島店\",2,1,1],[34.787939,135.625905,\"イセヅドライ　万代香里西店\",2,2,1],[34.744651,135.61999,\"ザイマックスカレス関西　大阪工場\",2,1,1]]");
+                var cluster = L.markerClusterGroup({
+  "animate": false,
+});
+                cluster.options.iconCreateFunction =
+                    function (cluster) {
+            var count = cluster.getChildCount();
+            var size = count <= 3 ? 18 : count <= 10 ? 26 : count <= 50 ? 34 : 42;
+            var fontSize = Math.max(9, Math.round(size * 0.42));
+            return new L.DivIcon({
+                html: '<div style="width:100%; height:100%; border-radius:50%; ' +
+                    'background:#1baf7a; opacity:0.85; ' +
+                    'border:1px solid rgba(0,0,0,0.4); display:flex; ' +
+                    'align-items:center; justify-content:center; color:#fff; ' +
+                    'font-size:' + fontSize + 'px; font-weight:600;">' +
+                    count + '</div>',
+                className: 'business-cluster-icon',
+                iconSize: new L.Point(size, size)
+            });
+        };
+
+                for (var i = 0; i < data.length; i++) {
+                    var row = data[i];
+                    var marker = callback(row);
+                    marker.addTo(cluster);
+                }
+
+                cluster.addTo(feature_group_0e4e180926b1ab381e4e64608f48d860);
+                return cluster;
+            })();
+        
+    
+            fast_marker_cluster_d84df3bdefab6a194afdb6f5df6d8cdf.addTo(feature_group_0e4e180926b1ab381e4e64608f48d860);
+        
+    
+            feature_group_0e4e180926b1ab381e4e64608f48d860.addTo(map_5f596111914dd6d7dddc5c6c89d63d07);
+        
+    
+            var layer_control_11a95570c96f13d73e475adc18eba346_layers = {
+                base_layers : {
+                    "Neyagawa Rail Business Density Heatmap" : tile_layer_e8dd0db3a78704b918afb9087a949f70,
+                },
+                overlays :  {
+                    "Commercial Density (Within Station Proximity)" : heat_map_39bed195298fa92d8c028a78d47664ad,
+                    "Commercial Density (All Neyagawa Businesses)" : heat_map_96f57410c9f519c2575eaa8329ec5fd2,
+                    "Concentric Ring 1: 0-0.1 mi" : feature_group_8a1674f55a356e155005a59b5d479ca2,
+                    "Concentric Ring 2: 0.1-0.2 mi" : feature_group_d70586c7853471e3b9915d4ee8461c46,
+                    "Concentric Ring 3: 0.2-0.3 mi" : feature_group_fe946e91393ab6ccbf0e594de069e019,
+                    "Concentric Ring 4: 0.3-0.6 mi" : feature_group_836db7a43896bd787075e2212459f6f8,
+                    "\u003cb\u003eBusinesses: Personal services (443)\u003c/b\u003e" : feature_group_0e4e180926b1ab381e4e64608f48d860,
+                },
+            };
+            let layer_control_11a95570c96f13d73e475adc18eba346 = L.control.layers(
+                layer_control_11a95570c96f13d73e475adc18eba346_layers.base_layers,
+                layer_control_11a95570c96f13d73e475adc18eba346_layers.overlays,
+                {
+  "position": "topleft",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_5f596111914dd6d7dddc5c6c89d63d07);
+
+        
+</script>
+</html>

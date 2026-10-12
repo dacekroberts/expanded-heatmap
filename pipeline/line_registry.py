@@ -99,7 +99,7 @@ REGISTRY = {
     # the project's colour osaka already drew; pins >= 45.9, lines >= 18.0, lines beside it >= 18.0.
     "hankyu-kyoto-line": {
         "name": "Hankyu Kyoto Line", "operator": "Hankyu", "colour": "#87544B",
-        "maps": {"kyoto": "HY", "osaka": "HY", "suita": "HY"},
+        "maps": {"ibaraki_osaka": "HY", "kyoto": "HY", "osaka": "HY", "suita": "HY", "takatsuki": "HY"},
     },
     # the project's colour osaka already drew; pins >= 45.8, lines >= 18.0, lines beside it >= 18.0.
     "hankyu-senri-line": {
@@ -144,7 +144,7 @@ REGISTRY = {
     # the project's colour higashiosaka, hirakata already drew; pins >= 46.0, lines >= 19.9, lines beside it >= 19.9.
     "jr-west-gakkentoshi-line": {
         "name": "JR Gakkentoshi Line", "operator": "JR West", "colour": "#C000A8",
-        "maps": {"higashiosaka": "JG", "hirakata": "JG", "osaka": "JG"},
+        "maps": {"higashiosaka": "JG", "hirakata": "JG", "neyagawa": "JG", "osaka": "JG"},
     },
     # the project's colour sapporo already drew; pins >= 24.5, lines >= 18.9, lines beside it >= 18.9.
     "jr-hokkaido-hakodate-main-line": {
@@ -190,7 +190,7 @@ REGISTRY = {
     # the project's colour kyoto already drew; pins >= 50.6, lines >= 17.5, lines beside it >= 18.8.
     "jr-west-kyoto-line": {
         "name": "JR Kyoto Line", "operator": "JR West", "colour": "#08A0C0",
-        "maps": {"kyoto": "JA", "osaka": "JY", "suita": "JY"},
+        "maps": {"ibaraki_osaka": "JY", "kyoto": "JA", "osaka": "JY", "suita": "JY", "takatsuki": "JY"},
     },
     # the project's colour every map already drew (hue-matched to the operator); pins >= 44.4, lines >= 81.8, lines beside it >= 90.7.
     "jr-kyushu-kyudai-main-line": {
@@ -220,7 +220,7 @@ REGISTRY = {
     # the project's colour higashiosaka, suita already drew; pins >= 57.3, lines >= 18.8, lines beside it >= 22.5.
     "jr-west-osaka-higashi-line": {
         "name": "JR Osaka Higashi Line", "operator": "JR West", "colour": "#A088A0",
-        "maps": {"higashiosaka": "JH", "osaka": "OH", "suita": "OH"},
+        "maps": {"higashiosaka": "JH", "osaka": "OH", "suita": "OH", "yao": "OH"},
     },
     # the project's colour every map already drew (hue-matched to the operator); pins >= 53.6, lines >= 45.4, lines beside it >= 45.4.
     "jr-east-ou-line": {
@@ -271,7 +271,7 @@ REGISTRY = {
     # the project's colour osaka already drew; pins >= 45.0, lines >= 18.1, lines beside it >= 18.1.
     "jr-west-yamatoji-line": {
         "name": "JR Yamatoji Line", "operator": "JR West", "colour": "#12A500",
-        "maps": {"nara": "JY", "osaka": "JQ"},
+        "maps": {"nara": "JY", "osaka": "JQ", "yao": "JQ"},
     },
     # JR East's own line colour; pins >= 82.5, lines >= 12.7, lines beside it >= 23.4.
     "jr-east-yokosuka-line": {
@@ -291,7 +291,8 @@ REGISTRY = {
     # the project's colour osaka already drew; pins >= 37.3, lines >= 16.4, lines beside it >= 18.0.
     "keihan-main-line": {
         "name": "Keihan Main Line", "operator": "Keihan", "colour": "#7B7B5A",
-        "maps": {"hirakata": "KM", "kyoto": "KM", "osaka": "KM"},
+        "maps": {"hirakata": "KM", "kadoma": "KM", "kyoto": "KM", "moriguchi": "KM", "neyagawa": "KM",
+                 "osaka": "KM"},
     },
     # the project's colour every map already drew (hue-matched to the operator); pins >= 45.7, lines >= 18.8, lines beside it >= 70.3.
     "keihan-uji-line": {
@@ -331,12 +332,12 @@ REGISTRY = {
     # the project's colour tsu already drew; pins >= 46.4, lines >= 16.5, lines beside it >= 18.3.
     "kintetsu-osaka-line": {
         "name": "Kintetsu Osaka Line", "operator": "Kintetsu", "colour": "#F85838",
-        "maps": {"higashiosaka": "KO", "osaka": "KO", "tsu": "KO"},
+        "maps": {"higashiosaka": "KO", "osaka": "KO", "tsu": "KO", "yao": "KO"},
     },
     # the project's colour every map already drew (hue-matched to the operator); pins >= 45.5, lines >= 38.1, lines beside it >= 120.0.
     "kita-osaka-kyuko-namboku-line": {
         "name": "Kita-Osaka Kyuko Namboku Line", "operator": "Kita-Osaka Kyuko", "colour": "#E81820",
-        "maps": {"suita": "KK", "toyonaka": "KK"},
+        "maps": {"minoh": "KK", "suita": "KK", "toyonaka": "KK"},
     },
     # the project's colour every map already drew (hue-matched to the operator); pins >= 51.6, lines >= 18.1, lines beside it >= 18.1.
     "meitetsu-nagoya-main-line": {
@@ -378,10 +379,29 @@ REGISTRY = {
         "name": "Osaka Metro Chuo Line", "operator": "Osaka Metro", "colour": "#5D662A",
         "maps": {"higashiosaka": "C", "osaka": "C"},
     },
+    # the project's colours osaka already drew (registered 2026-10-11, when Moriguchi's, Kadoma's and Yao's
+    # maps became the second to draw each).
+    "osaka-metro-tanimachi-line": {
+        "name": "Osaka Metro Tanimachi Line", "operator": "Osaka Metro", "colour": "#933CA5",
+        "maps": {"moriguchi": "T", "osaka": "T", "yao": "T"},
+    },
+    "osaka-metro-imazatosuji-line": {
+        "name": "Osaka Metro Imazatosuji Line", "operator": "Osaka Metro", "colour": "#E77512",
+        "maps": {"moriguchi": "I", "osaka": "I"},
+    },
+    "osaka-metro-nagahori-tsurumi-ryokuchi-line": {
+        "name": "Osaka Metro Nagahori Tsurumi-ryokuchi Line", "operator": "Osaka Metro", "colour": "#7CA014",
+        "maps": {"kadoma": "N", "osaka": "N"},
+    },
     # Osaka Monorail's own line colour; pins >= 81.9, lines >= 37.6, lines beside it >= 37.6.
     "osaka-monorail-main-line": {
         "name": "Osaka Monorail Main Line", "operator": "Osaka Monorail", "colour": "#0067B0",
-        "maps": {"itami": "MO", "suita": "MO", "toyonaka": "MO"},
+        "maps": {"ibaraki_osaka": "MO", "itami": "MO", "suita": "MO", "toyonaka": "MO"},
+    },
+    # the project's colour suita already drew (registered 2026-10-11, when Ibaraki's map became the second to draw it).
+    "osaka-monorail-saito-line": {
+        "name": "Osaka Monorail Saito Line", "operator": "Osaka Monorail", "colour": "#708898",
+        "maps": {"ibaraki_osaka": "MS", "suita": "MS"},
     },
     # the project's colour himeji, kakogawa already drew; pins >= 45.4, lines >= 18.9, lines beside it >= 18.9.
     "sanyo-electric-main-line": {

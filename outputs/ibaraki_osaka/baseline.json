@@ -1,0 +1,23 @@
+{
+  "combined_form_restaurant": 0,
+  "join_block": 625,
+  "join_chome": 1,
+  "line_station_rows": 23,
+  "name_rule_spread_rows": 0,
+  "names_masked": 0,
+  "names_withheld": 2,
+  "not_a_premises": 0,
+  "not_storefront": 0,
+  "permits_late_start": 0,
+  "permits_past_term": 0,
+  "repeat_permits_dropped": 5,
+  "rows_barber": 142,
+  "rows_beauty": 484,
+  "stations_collapsed": 21,
+  "stations_excluded": 11,
+  "stations_in_scope": 10,
+  "storefronts": 621,
+  "storefronts_personal_services": 621,
+  "sweets_deli_factory_like": 0,
+  "sweets_deli_rows": 0
+}
