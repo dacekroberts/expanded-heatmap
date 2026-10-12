@@ -1,11 +1,9 @@
 // THE SHARED TRAVEL STYLE (draft, branch only). One function that turns the
 // layer list of @protomaps/basemaps 5.7.2 into the Travel basemap shared by
-// the site's Travel view, the full Travel version and transit-globe's
-// starting point (owner, 2026-10-08; rules in docs/decisions_drafts/
-// basemap.md, "The travel app's basemap rules"). Every hex
+// the site's Travel view and the full Travel version (owner, 2026-10-08;
+// rules in DECISIONS.md, the basemap entries of that date). Every hex
 // value is a draft. pipeline/map_common.py inlines this file into the
-// OpenBasemap layer; transit-globe reads it as the reference and records
-// its own departures in its own DECISIONS.md.
+// OpenBasemap layer, so it is the one reference for the style.
 //
 //   travelStyle(layers, {flavor: "light", world: false, variant: "site", lang: "en"})
 //
@@ -37,7 +35,7 @@ var travelStyle = (function () {
     aerodrome: "#d8dae1",
     runway: "#c3c6cf"
   };
-  // Dark: INTERIM, until transit-globe drafts its dark tints. The same
+  // Dark: INTERIM, until the dark tints are drafted. The same
   // categories as light (scripts/check_travel_style.mjs found gardens,
   // meadows and platforms undrawn in dark when it kept 5.7.2's own fills),
   // in 5.7.2's dark flavor colours; platforms take a dark lavender.
@@ -115,7 +113,7 @@ var travelStyle = (function () {
   var DISPUTED = {color: "#c4c4c4", colorDark: "#4a4f5a", width: 1.5, dash: [0, 1.5]};
   var UNRECOGNIZED = ["unrecognized_country", "unrecognized_region", "unrecognized_macroregion"];
   // Ferries and aerial lifts are told apart from operators' line colours by
-  // pattern first (transit-globe's suggestion, owner, 2026-10-08). Ferries
+  // pattern first (owner, 2026-10-08). Ferries
   // are dashed. Colours measured with pipeline/linecolour (CIE76) on
   // 2026-10-08: on the site, every blue tried sat under 45 from Retail blue
   // or the backup teal, which pins can bring back, so the site variant's

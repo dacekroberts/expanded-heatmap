@@ -4101,8 +4101,9 @@ OPEN_BASEMAP_LIBS = (
 # prototype; a release self-hosts them beside the packs.
 OPEN_BASEMAP_ASSETS = "https://protomaps.github.io/basemaps-assets"
 # The shared Travel style (pipeline/travel_style.js): one file for the site's
-# Travel view, the full Travel version and transit-globe's reference, so the
-# three never drift apart. Inlined into each OpenBasemap layer.
+# Travel view and the full Travel version, so the two never drift apart.
+# Inlined into each OpenBasemap layer, comments included: it names no other
+# project (owner, 2026-10-12).
 TRAVEL_STYLE_JS = Path(__file__).with_name("travel_style.js").read_text(encoding="utf-8")
 # Ferry and lift colours read from the style itself, so a legend swatch can
 # never drift from the line it explains.
