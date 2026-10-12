@@ -211,6 +211,9 @@ process that never restarted.
 - [ ] Steps 1–5 green, with `git checkout -- outputs/` after the drift check
 - [ ] Step 5a: the page and the city's doc sections read against
   `docs/city_page_format.md`
+- [ ] The city is in `pipeline/travel_packs.py` and its Travel pack is built
+  and in the upload folder (`docs/travel_packs.md`; once a pack host is set,
+  on the host too, before the map is pushed)
 - [ ] `check_deploy_imports` run **on the commit being pushed**
 - [ ] `deploy-verify` scope chosen deliberately and stated
 - [ ] Reboot question computed from **the whole push's `app/` diff**

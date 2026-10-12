@@ -56,7 +56,7 @@ if both:
 unplaced = [c for c in built if c not in listed and c not in english]
 if unplaced:
     problems.append(f"{len(unplaced)} built map(s) in neither LOCAL_LANG nor ENGLISH_ONLY "
-                    f"(place each, and build its pack): {', '.join(unplaced)}")
+                    f"(place each and build its pack, docs/travel_packs.md): {', '.join(unplaced)}")
 if problems:
     print("\n".join("FAIL " + p for p in problems))
     sys.exit(1)
