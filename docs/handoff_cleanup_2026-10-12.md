@@ -86,6 +86,20 @@ branch's drafts file.
 
 ## Order
 
+**State when the fresh session starts (the earlier Cleanup session,
+2026-10-12, paused by the owner so the landing runs in a new one):**
+step 1 is DONE and pushed (189 entries moved to
+`docs/decisions/2026-10-04.md`, 13 left in `DECISIONS.md`); start at
+step 4. Nothing else was begun: no shared code changed, no worktree
+made. Tips read that day, three of them newer than the list above:
+`worktree-japan-east-2` `8558c489`, `worktree-japan-kansai-2`
+`40af664c`, `worktree-japan-regional-2` `d1df4ae9`,
+`worktree-japan-naha` `ceb9f767`, `legend-dot-georgia` `16a68efe`,
+`place-search` `adeb88bd`, `basemap` `d509d525`. Confirm each again
+before merging. For S17 and S18: `japan_eigyo.FORM_RULES` is one list
+of patterns for every city, with no per-city switch, so count the two
+form words in the built cities' files before adding them.
+
 1. **The weekly archive first**: `python scripts/archive_decisions.py` (due
    2026-10-11, held for the batch by the owner), then
    `python scripts/decisions_index.py`. The branches' drafts cite entries by
@@ -329,8 +343,9 @@ go-live call, and the one re-render carries the Travel switch:
   whether he has seen it, and show it again if not.
 - **One file for the owner to replace on the host:** the README live
   at `/README.md` is an internal draft; the approved public text (P6) is
-  in `host_upload_2026-10/README.md`. Confirm with him that it is
-  replaced before go-live. The live manifest matches the local one.
+  in `host_upload_2026-10/README.md`. REPLACED: fetched 2026-10-12, the
+  live file is byte for byte the local one (1,385 bytes, same MD5, no
+  draft marking). The live manifest matches the local one.
 - The OpenStreetMap credit must show on both base layers
   (`check_map_attribution.js`, more than one height).
 - A pack rebuilt after upload (Naha's S39 re-run did not change its
