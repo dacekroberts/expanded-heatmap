@@ -266,7 +266,19 @@ entries first. As that file records:
    order, set `PACK_HOST` first and the one full re-render carries the
    Travel switch. If it is not, land with the switch off (maps unchanged)
    and say plainly to the owner that go-live then costs a second full
-   re-render.
+   re-render. **The owner chose ONE re-render** (2026-10-12, in the
+   basemap session's chat, relayed: "one re render decided, making
+   cloudflare right now"; he told Cleanup the same day he was working on
+   Cloudflare while Naha builds). So before step 10, **ask the owner
+   whether the host address is in**: `PACK_HOST`, P4
+   (`docs/data_sources.md`) and P5 (notice 1 in `app/components.py`) go
+   into the integration tree first, and the basemap session sends the
+   address and the exact edits when he gives them. Do not start the full
+   re-render on the assumption either way; if the host is not ready when
+   everything else is, the choice between waiting and a second re-render
+   is his. Packs: 236 in `host_upload_2026-10` (2.3 GB) by that session's
+   report, Naha's still to build once its stations exist; branch at
+   `09fd1c17` or later.
 5. **At go-live:** the license rows in `docs/data_sources.md` (Protomaps
    BSD-3, the tiles an ODbL produced work, Noto OFL with its trademark
    line, Cloudflare), the notice wording, deploy-verify `scope:
