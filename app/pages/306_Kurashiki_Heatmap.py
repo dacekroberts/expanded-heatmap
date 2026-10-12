@@ -43,25 +43,57 @@ else:
 # replaces this with its own caption of the sources' dates and credits.
 render_data_age("Kurashiki")
 
-# TODO: replace every TODO bullet with prose true for this city, as short
-# bullets under bold headings (app/pages/43_Seoul_Heatmap.py is the model):
-# the lines by name, what is not drawn, the area and the stations left out, the
-# source and its limitations. Detail a reference page carries stays there.
+# From the japan-city skill's template and Hiroshima's one-bucket line
+# (approved wording, pre-approved for this build, 2026-09-30). Four bullets
+# adapt an approved sentence of another page and are listed as proposals in
+# docs/decisions_drafts/worktree-japan-regional-2.md: the personal-services
+# lists (Okayama's bullet), the area-wide permits (Aomori's), the upper-bound
+# bullet (Kyoto's and Shizuoka's) and the share at a district's center (call
+# 145). No coverage sentence (owner, call 229). The date is
+# config.FOOD_AS_OF; the ring share, 53.2%, is step 3's (2,610 of 4,904).
 st.markdown(
     """
 **The lines**
 
-- TODO: the lines drawn, by name (each is labeled on the map and in the legend).
-- TODO: what is not drawn, and why.
-- TODO: the area covered; stations left out are listed below.
+- Six lines are drawn, each labeled on the map and in the legend: the Mizushima Rinkai Railway's
+  Mizushima Main Line, JR West's Sanyo, Seto-Ohashi, Hakubi and Uno Minato lines, and the Ibara
+  Railway's Ibara Line.
+- Lines and stations come from MLIT's national railway data (国土数値情報); station names in
+  English are from OpenStreetMap. Line colors are this project's own, not the operators'.
+- Only stations inside Kurashiki City get rings, because the business data covers the city alone:
+  lines running on to Okayama, Hayashima, Soja, Yakage, Asakuchi, Tamano and Kagawa are cut at the
+  city line. The stations left out are listed below.
+- The Shinkansen is not drawn (Shin-Kurashiki appears as a JR Sanyo Line station).
 
 **The businesses**
 
-- TODO: the data source, and any category it is missing.
+- **This map shows food businesses only.**
+- Kurashiki City publishes its lists of barbers and beauty salons under terms that do not allow
+  reuse, and no list of laundries, so personal services are not on this map.
+- From Kurashiki City's list of food-business permits (as of March 31, 2026).
+- Japan has no general business license, so shops other than food shops (clothing, electronics,
+  pharmacies) do not appear: the Food shops layer is food retail only (bakeries and confectioners,
+  delis, butchers and fishmongers).
+- Food businesses that only notify the city rather than hold a permit, such as many convenience
+  stores and greengrocers, are not in the list.
+- About 660 permits are registered for an area rather than an address, which are food trucks and
+  stalls; they are not on this map.
+- The city publishes the list once a year and no closures in between, so a business that closed
+  after March 2026 is still counted. The map shows an upper bound, and a dot means a permit on
+  file, not a business open today.
+
+**Reading the map**
+
+- The list gives an address but no location. Each address is matched to MLIT's address reference
+  data, which places most at their street block; where only the district can be found, the dot
+  sits at the district's center. About one dot in eight sits at a district's center.
+- Where a business's trade name is its operator's own name, the dot shows its permit type instead.
+- Names and permit types are shown in Japanese, as the city records them.
+- **About 53% of storefronts sit within a ring.**
 """
 )
 
-render_map_help("three business categories (Retail, Food service and Personal services)")
+render_map_help("two business categories (Food shops and Food service)")
 render_excluded_stations("Kurashiki")
 render_country_links("Kurashiki")
 

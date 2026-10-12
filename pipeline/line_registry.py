@@ -230,8 +230,8 @@ REGISTRY = {
     # the project's colour fukuyama, okayama, shimonoseki already drew; pins >= 51.4, lines >= 15.8, lines beside it >= 18.8.
     "jr-west-sanyo-line": {
         "name": "JR Sanyo Line", "operator": "JR West and JR Kyushu", "colour": "#007890",
-        "maps": {"fukuyama": "JS", "himeji": "JS", "hiroshima": "JS", "kitakyushu": "JS", "okayama": "JS",
-                 "shimonoseki": "JS"},
+        "maps": {"fukuyama": "JS", "himeji": "JS", "hiroshima": "JS", "kitakyushu": "JS", "kurashiki": "JS",
+                 "okayama": "JS", "shimonoseki": "JS"},
     },
     # the project's colour amagasaki, itami, kobe already drew; pins >= 20.1, lines >= 19.5, lines beside it >= 35.2.
     "jr-west-takarazuka-line": {
@@ -505,6 +505,21 @@ REGISTRY = {
     "aichi-loop-railway-aichi-loop-line": {
         "name": "Aichi Loop Line", "operator": "Aichi Loop Railway", "colour": "#28A800",
         "maps": {"okazaki": "AK", "toyota": "AK"},
+    },
+    # the project's colours okayama and fukuyama already drew, registered when
+    # kurashiki's map drew the lines too (Regional-2, 2026-10-11); pins >= 45.1
+    # on kurashiki.
+    "jr-west-seto-ohashi-line": {
+        "name": "JR Seto-Ohashi Line", "operator": "JR West", "colour": "#00A0B8",
+        "maps": {"kurashiki": "JB", "okayama": "JB"},
+    },
+    "jr-west-uno-minato-line": {
+        "name": "JR Uno Minato Line", "operator": "JR West", "colour": "#7098A8",
+        "maps": {"kurashiki": "JU", "okayama": "JU"},
+    },
+    "ibara-railway-ibara-line": {
+        "name": "Ibara Railway Ibara Line", "operator": "Ibara Railway", "colour": "#28A800",
+        "maps": {"fukuyama": "IB", "kurashiki": "IB"},
     },
     # the project's colour hiroshima already drew, registered when kure's map
     # drew the line too (Regional-2, 2026-10-11); pins >= 43.0 on kure (Food

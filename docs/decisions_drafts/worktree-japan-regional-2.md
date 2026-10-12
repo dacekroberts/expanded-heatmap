@@ -38,6 +38,19 @@ Each city's own parked calls and proposals are under its entry below
   alternative moves Toyota's Mikawa Line (a built map: Cleanup's, with a
   re-render). Nothing was changed; Okazaki is committed with the check
   failing on this one pair.
+- **Kurashiki A: 83 vending-machine pins a missing shared rule leaves on the
+  map.** Kurashiki's brief lists 自動販売形態 (the old-law vending form) as a
+  shared-code item, but `japan_eigyo.FORM_RULES` does not hold it, so 83
+  vending machines (67 on a café permit, 3 on a restaurant permit, 13 milk
+  sellers) are on the map as built; What Is Excluded says so. Parked, not
+  fixed city-locally. Recommended: add the form to `FORM_RULES` (vending is
+  out everywhere), check by drift that no built city moves, re-run
+  Kurashiki's steps 2 and 3 and re-record its baseline before the page
+  lands. Tradeoff: a taxonomy change with a Japan-wide drift run; without it
+  the page publishes 83 pins the owner's rule leaves out.
+- **Kurashiki B: 特殊形態, 8 pins at fixed addresses.** The brief expected them
+  set aside; no rule names the form and its meaning in the prefecture's old
+  ordinance is unread. Recommended: read it before any rule; kept as built.
 - **Tottori A: a shared rule that misses, worked around in the city's
   config.** The foundation's area-wide rule tests the prefecture-wide
   address before the city's name is cut, so Tottori's main spelling
@@ -85,6 +98,209 @@ Each city's own parked calls and proposals are under its entry below
 - `pipeline/line_registry.py`: `jr-central-tokaido-line` gains Shizuoka.
 
 ## Changes
+
+### 2026-10-11 - Kurashiki built, the city's year-end food-permit list of March 31, 2026, food only
+
+- **Kurashiki built (page 306, notice 216), Hiroshima's page shape (food
+  only) on a source that is rows, not a file (a PDF read through
+  `config.source_rows`, Kyoto's and Maebashi's hook): 4,904 storefronts
+  (Food service 4,005, Food shops 899) around 21 stations on 6 lines, 53.2%
+  of them in a ring (2,610: 2,281 and 329) on the standard rings.** Source:
+  Kurashiki City's 食品営業許可一覧, the year-end list of permits in force
+  (令和7年度末, 2026-03-31), `r07nenndinatu_2026-03-31.pdf`, 8,034,340 B, 243
+  pages, CC BY 4.0 by the page's mark (read 2026-10-08 by staging). Built by
+  a Regional-2 subagent; the brief passed 11 of 11 on 2026-10-11.
+- **The PDF is read with `pdftotext -table` only** (xpdf 4.06), never a
+  hand-written decoder. `fetch_sources.py city` writes the text beside the
+  PDF (`r07nenndinatu_2026-03-31.table.txt`, 1,713,215 B, recorded in
+  provenance with the tool and its sha256) and `config.pdf_rows()` reads it:
+  each page's header gives the column offsets; the operator cell, the
+  operator's phone cell and the address by offset; three dates and the
+  permit number from the right by pattern; the form (6 values), the type and
+  the premises' phone as whole tokens off the right of the trade-name cell.
+  It stops on a page without a header, a line that is not a record, a cell
+  overflowing the address column, or a record without a type. The whole
+  extraction ran once through the gate (`heavy_job.py`, label "kurashiki
+  pdf", admitted after a wait behind four basemap jobs). Step 2 reads the
+  text and never runs pdftotext.
+- **The reader reproduces the brief exactly:** 6,288 records on 242 pages,
+  38 types, 6 forms (普通形態 970, 特殊形態 101, 自動販売形態 91,
+  卸販売及び小売販売形態 48, 簡易形態 47, 移動販売形態 12, every one on a
+  pre-2021 row), 飲食店営業 4,727 (867 old-law), 1,322 old-law rows, 13 blank
+  operator cells, 11 blank and 66 ＊＊＊ trade names, 667 rows with 一円, no
+  expiry before 2026-03-31, no grant after it.
+- **Call 229, the same-number rule, as the brief and DECISIONS record it:**
+  127 permit numbers carry one old-law and one new-law row; the old-law row
+  goes (108 restaurants, 8 confectioners, 3 cafés, 2 delis, 2 fishmongers, 2
+  butchers, 2 others), leaving 6,161 rows and **4,619 restaurant permits,
+  99.3% of e-Stat's 4,653**. A number repeated in any other shape stops the
+  build (none). The other 1,195 old-law rows stay: "pre-2021 rows dropped"
+  was read as the old-law row of a pair, not every old-law row, since the
+  brief's and DECISIONS' wording, the expected counts and call 230's ratio
+  all keep them.
+- **Step 2:** 4 rows set aside as area-wide (周辺 / 全域), 657 not a premises
+  (一円: 608 restaurant permits, 19 fishmongers, 18 confectioners, 8 cafés, 2
+  butchers, 2 milk sellers), 0 past term and 0 late starters against
+  `TERM_AS_OF` 2026-03-31, 326 not a storefront (239 "no rule", 87 vending
+  machines by type). Storefront rows 5,174 (Food service 4,099, Retail
+  1,075); 270 repeat rows shown once; **4,904 pins**. The brief expected
+  about 3,933 and 886 with two shared-code items it listed as landed first;
+  they are not in shared code (parked calls 1 and 2), which is the whole
+  difference: 83 pins carry 自動販売形態 (67 喫茶店営業, 13 乳類販売業, 3
+  飲食店営業) and 8 carry 特殊形態 (6 飲食店営業, 1 喫茶店営業, 1 菓子製造業).
+- **The join:** block 4,531 rows (87.6%), town-chōme 643 (12.4%), unplaced
+  0; on the pins 87.8% and 12.2% (599). The brief's figures.
+- **Position check (MHLW's file, read by no step):** on the 169 pins MHLW
+  also holds with a point, a median 97 m; on the 128 block-tier pins a
+  median 66 m, 85.9% within 250 m (the brief: 67 m, 83.5%), 1 over 1 km
+  (松島, where MHLW's point is at 倉敷 station, 4.1 km from the address's
+  block). The 41 town-chōme pins sit a median 288 m off, 8 over 1 km: five
+  at 酒津 and one at 林 (large 大字, 1.2 to 1.6 km from the centroid) and one
+  at 東塚1丁目 whose MHLW point lies 6.7 km away in 児島 (MHLW's point, not
+  the join, is the outlier).
+- **The name rule:** 6 trade names in the list are an operator's own name
+  (the brief's 6); 4 pins show their permit type. 24 more pins the list
+  masks with ＊＊＊ and 9 with a blank name show their permit type too
+  (counted on `businesses_clean.csv`, the data the map embeds).
+- **Factory share:** 27 of 638 菓子 / そうざい premises (4.2%); kept (owner,
+  2026-09-24).
+- **Economic Census control (`scripts/japan_census_control.py kurashiki`):**
+  4,005 Food service pins against 1,405 establishments (2021), **2.85 per
+  establishment**; about 2.80 once the vending and 特殊形態 pins go (the
+  brief's 3,933). Accepted and recorded by the owner (call 230): the city
+  has 3.31 in-force restaurant permits per census establishment (4,653 over
+  1,405, the highest of the 14 cities the Kure brief read), so the excess is
+  permits the census does not count as establishments, not a join defect;
+  new-law rows carry no 業態, so snack bars, hotel restaurants and caterers
+  stay in Food service, and no caterer count exists to disclose.
+- **Rail:** step 1 reproduces the brief: 21 station groups (Mizushima Main
+  Line 10, Sanyo 4, Seto-Ohashi 4, Ibara 3, Hakubi 1, Uno Minato 1; 倉敷 and
+  茶屋町 on two lines each), the Shinkansen's 新倉敷 dropped, 14 stations
+  beyond the line within 3 km listed (岡山市南区 5, 岡山市北区 1, 早島町 2,
+  浅口市 2, 総社市 2, 玉野市 1, 矢掛町 1; 久々原 and 植松 fall outside, as the
+  brief asked to check). Median nearest-station gap 1,523 m (the brief's):
+  standard rings. One pair under 200 m, 倉敷 (JR) and 倉敷市 (Mizushima
+  Rinkai), 150 m: two operators' stations, kept apart (Kobe's Tarumi
+  precedent). Gate 3 exact on the Mizushima Main Line, 10 of 10.
+- **One-station JR stubs drawn as cut** (standing call 3): the Hakubi Line
+  (倉敷) and the Uno Minato Line (茶屋町). 本四備讃線's JR West and JR Shikoku
+  records are one line, the JR Seto-Ohashi Line (the Sanyo Line's
+  two-operator precedent).
+- **Station names:** 37 OSM objects, 36 with `name:en`; 21 names read, none
+  translated, no 丁目. Two overrides bring OSM's two macron spellings to the
+  style of the other 19 and of Okayama's map: Kaminocho (Kaminochō), Nakasho
+  (Nakashō). Kurashikishi and Kibinomakibi stand as OSM writes them, not
+  checked against the operators' signs.
+- **Line names:** Okayama's ("JR Sanyo Line", "JR Seto-Ohashi Line", "JR Uno
+  Minato Line"), Fukuyama's ("Ibara Railway Ibara Line"), and two new ones:
+  "JR Hakubi Line" and "Mizushima Rinkai Railway Mizushima Main Line".
+- **Line colours:** the Sanyo Line `#007890` from the registry; the
+  Seto-Ohashi `#00A0B8` and Uno Minato `#7098A8` are Okayama's and the Ibara
+  Line `#28A800` Fukuyama's, as literals (no registry entry yet). New: the
+  Mizushima Main Line `#0068B8` and the Hakubi Line `#A89078`
+  (`line_colour_search.py`'s rule with the four held fixed, scratch
+  `kurashiki/colours.py`; no yellow-green clears the pins by 45, so the
+  Hakubi Line is tan). Against the pins (CIE76): 82.3, 75.2 (Sanyo), 77.8,
+  45.1, 68.1, 45.7; none between 20 and 45. Closest pair within 500 m 19.0
+  (Seto-Ohashi, Uno Minato, inherited), anywhere 15.8 (Sanyo, Seto-Ohashi,
+  inherited, never near each other here); dark-mode labels 6 of 6.
+- **Privacy verdict: publish.** `check_personal_exposure.py kurashiki`: the
+  Japan pass prints 0 of 4,904. The name rule compares 営業者氏名 in memory
+  only; the two phone columns are never handed to step 2. The PDF's text
+  file holds everything the PDF does and stays in `data/kurashiki/raw/`
+  (gitignored).
+- **Not done:** JR West's train counts at 木見 and 上の町 (the brief's "read
+  at build"; ASSERTED well above 11 a day, not read); the GSI sample (the
+  brief leaves it to the owner); `check_map_view.js`, `TEXT_WIDTH`,
+  `check_macro_labels.py`, drift, provenance (the lead's).
+- Files: `pipeline/kurashiki/` (config, fetch_sources, three steps),
+  `outputs/kurashiki/` (heatmap.html, excluded_stations.csv,
+  provenance.json).
+
+#### Parked calls
+
+1. **自動販売形態 is not a vending form in shared code** (the brief's
+   "⚠️ Shared code" item; `japan_eigyo.FORM_RULES` reads `自動販売機|自販機`).
+   91 fixed old-law rows carry it; 83 pins are on the map as built (67 cafés
+   and 3 restaurants in Food service, 13 milk sellers in Food shops), 30 of
+   them in a ring. Recommend: add 自動販売形態 to the vending form rule
+   (Minato control and every city screen first), then re-run Kurashiki's
+   steps 2 and 3 and re-measure the hand-back counts. Tradeoff: until it
+   lands the map shows 83 vending machines as cafés and dairy shops, which
+   `excluded.md` discloses; a city-local filter in `source_rows` would hide a
+   rule the next old-law list also needs.
+2. **特殊形態** (Okayama Prefecture's old-law form; 101 rows, 92 of them
+   area-wide already; 9 at a fixed address, 8 pins: 6 restaurants, 1 café, 1
+   confectioner, all in a ring). Recommend: confirm its meaning in the
+   prefecture's old 施行条例 before any rule, as the brief says; if it is
+   temporary or mobile trading, a form rule drops the 8. Tradeoff: 8 pins
+   that may be stalls stay on the map meanwhile.
+3. **Kagawa in the "running on to" bullet.** The brief's bullet names
+   Kagawa (the Seto-Ohashi Line crosses the bridge from 児島); no station of
+   Kagawa is within 3 km, so `excluded_stations.csv` lists none there.
+   Recommend keeping it (Aomori's Hiranai call). Tradeoff: the bullet names
+   a place the list below does not.
+4. **JR West's counts at 木見 and 上の町** were not read. Recommend one read
+   of `timetable.jr-odekake.net` at review; tradeoff: a low-frequency
+   stretch would need its bullet, though Seto-Ohashi locals are far above 11
+   a day (ASSERTED).
+5. **Station spellings Kurashikishi and Kibinomakibi** (OSM's, one word
+   each) against the operators' signs. Recommend leaving OSM's unless a sign
+   read says otherwise; tradeoff: none measured.
+
+#### Proposals
+
+Sentences adapted from an approved bullet of another page, none in the
+japan-city template:
+
+- "Kurashiki City publishes its lists of barbers and beauty salons under
+  terms that do not allow reuse, and no list of laundries, so personal
+  services are not on this map." (from Okayama's)
+- "About 660 permits are registered for an area rather than an address,
+  which are food trucks and stalls; they are not on this map." (from
+  Aomori's)
+- "The city publishes the list once a year and no closures in between, so a
+  business that closed after March 2026 is still counted. The map shows an
+  upper bound, and a dot means a permit on file, not a business open today."
+  (from Kyoto's and Shizuoka's upper-bound bullets; it replaces the
+  template's may-include-closed bullet)
+- "About one dot in eight sits at a district's center." (call 145; 12.2% of
+  pins)
+- Notice 216's credit and processing sentence: "Source: Kurashiki City
+  (倉敷市), 食品営業許可一覧, the food-business permits in force at March 31,
+  2026 (page URL), CC BY 4.0. Edited and processed by this project, which
+  read the list from the city's PDF, selected the storefront types, left out
+  permits registered for an area rather than an address, showed a renewed
+  permit and a premises with several permits once, placed each by its
+  address, and counted them around stations. The list is published once a
+  year and closures since its date are not shown, so it is not claimed to be
+  complete or current, and it may include premises that have closed." (the
+  licence read's example form, with Aomori's processing sentence)
+- `excluded.md`'s sentence on the 83 vending-machine pins (it goes if parked
+  call 1 lands).
+
+#### Registry
+
+- `jr-west-sanyo-line`: add `"kurashiki": "JS"` to `maps`.
+- New entry needed, JR Seto-Ohashi Line (JR West and JR Shikoku, 本四備讃線),
+  `#00A0B8`: maps `{"okayama": "JB", "kurashiki": "JB"}`.
+- New entry needed, JR Uno Minato Line (JR West, 宇野線), `#7098A8`: maps
+  `{"okayama": "JU", "kurashiki": "JU"}`.
+- New entry needed, Ibara Railway Ibara Line (井原鉄道 井原線), `#28A800`:
+  maps `{"fukuyama": "IB", "kurashiki": "IB"}`.
+- Kurashiki's config holds the three as literals; swap each for
+  `line_registry.colour(...)` when its entry lands.
+- No entry: the JR Hakubi Line and the Mizushima Main Line are drawn by no
+  other built map and by no other city of this batch.
+
+#### Downstream
+
+- Notice 216 (Kurashiki City, CC BY 4.0 by the page's mark): the page asks
+  that the source and the fact of editing be stated wherever the edited data
+  is published (「出典を明記し、編集・加工等した旨を記載して、公表してください」), so
+  card face, in the short form Visuals uses for CC BY 4.0 city lists, with
+  "edited"; the MLIT credits as for every Japanese card. No open terms
+  question: no indemnity or reimbursement clause, no prescribed wording.
 
 ### 2026-10-11 - Kure built, the national food filings alone, food only
 

@@ -659,7 +659,7 @@ _OSM_STATION_NAMES = (
     # Kansai-1 (2026-10-07)
     "Toyonaka", "Hirakata", "Suita", "Itami", "Kakogawa", "Amagasaki", "Uji",
     # Regional-2 (2026-10-11)
-    "Shizuoka", "Aomori", "Okazaki", "Kanazawa", "Matsue", "Fuji", "Matsumoto", "Tottori", "Yamagata", "Kure",
+    "Shizuoka", "Aomori", "Okazaki", "Kanazawa", "Matsue", "Fuji", "Matsumoto", "Tottori", "Yamagata", "Kure", "Kurashiki",
 )
 
 # Verbatim where verbatim is required. Each entry is a Notice, and the sources
@@ -3089,56 +3089,6 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). Shizuoka City and MLIT did not make "
      "and do not endorse this map.",
      False, ("Shizuoka",)),
-    # Aomori (notice 208): the city's 食品営業許可施設一覧（オープンデータ）, page
-    # 1006184 on its own site, CC BY 4.0 through 青森市オープンデータ利用規約
-    # (read 2026-10-07 by staging: permitted with conditions, fault-based cost
-    # clauses), credited in the terms' form for a modified work (3(2)): the
-    # title as the dataset page names it, 青森市, the CC BY 4.0 deed, the
-    # page's URL. MHLW's file is a control only and is not credited (Gifu's).
-    # MLIT as in Kobe's, N02 in its 2025 edition. Written from Gifu's and
-    # Shizuoka's approved wording under the owner's pre-approval of template
-    # prose (2026-09-30); the processing sentence is a proposal in
-    # docs/decisions_drafts/worktree-japan-regional-2.md.
-    Notice(208, "Aomori City and MLIT (Aomori)",
-     "Aomori's businesses: この地図は以下の著作物を改変して利用しています。"
-     "食品営業許可施設一覧（オープンデータ）、青森市、クリエイティブ・コモンズ・ライセンス表示 4.0 国際"
-     "（[https://creativecommons.org/licenses/by/4.0/deed.ja](https://creativecommons.org/licenses/by/4.0/deed.ja)）、"
-     "[https://www.city.aomori.aomori.jp/shisei/jouhokoukai/opendata/1006170/1006184.html](https://www.city.aomori.aomori.jp/shisei/jouhokoukai/opendata/1006170/1006184.html). "
-     "(This map modifies Aomori City's list of food-business permits as of August 31, 2026: this project "
-     "selected the storefront types, left out permits registered for the whole city rather than an address, "
-     "showed a premises with several permits once, placed each by its address, and counted them around "
-     "stations.) The list is not claimed to be complete or current, and it may include premises that have closed. "
-     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
-     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
-     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). Aomori City and MLIT did not make "
-     "and do not endorse this map.",
-     False, ("Aomori",)),
-    # Okazaki (notice 207): the city's 食品等営業許可・届出一覧 on its BODIK
-    # catalogue (organization 232025), CC BY 4.0 under the 岡崎市オープンデータ
-    # 利用規約 (read 2026-10-07 by staging: permitted with conditions; clause
-    # 5(5), triggered by use, accepted by the owner, call 214), in the terms'
-    # form for a modified work (4(2)), the dataset page linked. MHLW as in
-    # Sasebo's (its notifications and its own coordinates reach the map);
-    # MLIT as in Kobe's, N02 in its 2025 edition. Written from Ichinomiya's
-    # approved wording under the owner's pre-approval of template prose
-    # (2026-09-30); the completeness sentence is a proposal in
-    # docs/decisions_drafts/worktree-japan-regional-2.md.
-    Notice(207, "Okazaki City, MHLW and MLIT (Okazaki)",
-     "Okazaki's businesses: この地図は、以下の著作物を改変して利用しています。"
-     "食品等営業許可・届出一覧、岡崎市、"
-     "[クリエイティブ・コモンズ・ライセンス 表示４.０国際](http://creativecommons.org/licenses/by/4.0/legalcode.ja)"
-     "（[https://data.bodik.jp/dataset/232025_food_business_all](https://data.bodik.jp/dataset/232025_food_business_all)）; and "
-     "出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一覧」を加工して作成. "
-     "Processed by this project, which selected the storefront types from the city's list of food permits in "
-     "term on August 31, 2026, took only the ministry's notifications, showed a premises in both once, placed "
-     "each by its address or the ministry's own coordinates, and counted them around stations. The city's "
-     "list holds about four restaurant permits in five of the official count, and the ministry's list holds "
-     "only filings whose applicants agreed to publish them; neither is complete. "
-     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
-     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
-     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
-     "Okazaki City, MHLW and MLIT did not make and do not endorse this map.",
-     False, ("Okazaki",)),
     # Kanazawa (notice 206): the city catalogue's 食品衛生関係営業許可施設一覧
     # (172014-syokuhineisei-kyokashisetsu), cc-by with no version, titled
     # 「クリエイティブ・コモンズ 表示」 as the city writes it (read 2026-10-05 by
@@ -3166,6 +3116,56 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). Kanazawa City and MLIT did not make "
      "and do not endorse this map.",
      False, ("Kanazawa",)),
+    # Okazaki (notice 207): the city's 食品等営業許可・届出一覧 on its BODIK
+    # catalogue (organization 232025), CC BY 4.0 under the 岡崎市オープンデータ
+    # 利用規約 (read 2026-10-07 by staging: permitted with conditions; clause
+    # 5(5), triggered by use, accepted by the owner, call 214), in the terms'
+    # form for a modified work (4(2)), the dataset page linked. MHLW as in
+    # Sasebo's (its notifications and its own coordinates reach the map);
+    # MLIT as in Kobe's, N02 in its 2025 edition. Written from Ichinomiya's
+    # approved wording under the owner's pre-approval of template prose
+    # (2026-09-30); the completeness sentence is a proposal in
+    # docs/decisions_drafts/worktree-japan-regional-2.md.
+    Notice(207, "Okazaki City, MHLW and MLIT (Okazaki)",
+     "Okazaki's businesses: この地図は、以下の著作物を改変して利用しています。"
+     "食品等営業許可・届出一覧、岡崎市、"
+     "[クリエイティブ・コモンズ・ライセンス 表示４.０国際](http://creativecommons.org/licenses/by/4.0/legalcode.ja)"
+     "（[https://data.bodik.jp/dataset/232025_food_business_all](https://data.bodik.jp/dataset/232025_food_business_all)）; and "
+     "出典：「食品衛生申請等システム」（厚生労働省）（[https://i2fas.mhlw.go.jp/](https://i2fas.mhlw.go.jp/)）の「食品等営業許可・届出一覧」を加工して作成. "
+     "Processed by this project, which selected the storefront types from the city's list of food permits in "
+     "term on August 31, 2026, took only the ministry's notifications, showed a premises in both once, placed "
+     "each by its address or the ministry's own coordinates, and counted them around stations. The city's "
+     "list holds about four restaurant permits in five of the official count, and the ministry's list holds "
+     "only filings whose applicants agreed to publish them; neither is complete. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The lists may include premises that have closed. "
+     "Okazaki City, MHLW and MLIT did not make and do not endorse this map.",
+     False, ("Okazaki",)),
+    # Aomori (notice 208): the city's 食品営業許可施設一覧（オープンデータ）, page
+    # 1006184 on its own site, CC BY 4.0 through 青森市オープンデータ利用規約
+    # (read 2026-10-07 by staging: permitted with conditions, fault-based cost
+    # clauses), credited in the terms' form for a modified work (3(2)): the
+    # title as the dataset page names it, 青森市, the CC BY 4.0 deed, the
+    # page's URL. MHLW's file is a control only and is not credited (Gifu's).
+    # MLIT as in Kobe's, N02 in its 2025 edition. Written from Gifu's and
+    # Shizuoka's approved wording under the owner's pre-approval of template
+    # prose (2026-09-30); the processing sentence is a proposal in
+    # docs/decisions_drafts/worktree-japan-regional-2.md.
+    Notice(208, "Aomori City and MLIT (Aomori)",
+     "Aomori's businesses: この地図は以下の著作物を改変して利用しています。"
+     "食品営業許可施設一覧（オープンデータ）、青森市、クリエイティブ・コモンズ・ライセンス表示 4.0 国際"
+     "（[https://creativecommons.org/licenses/by/4.0/deed.ja](https://creativecommons.org/licenses/by/4.0/deed.ja)）、"
+     "[https://www.city.aomori.aomori.jp/shisei/jouhokoukai/opendata/1006170/1006184.html](https://www.city.aomori.aomori.jp/shisei/jouhokoukai/opendata/1006170/1006184.html). "
+     "(This map modifies Aomori City's list of food-business permits as of August 31, 2026: this project "
+     "selected the storefront types, left out permits registered for the whole city rather than an address, "
+     "showed a premises with several permits once, placed each by its address, and counted them around "
+     "stations.) The list is not claimed to be complete or current, and it may include premises that have closed. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). Aomori City and MLIT did not make "
+     "and do not endorse this map.",
+     False, ("Aomori",)),
     # Matsue (notice 209): the city's three registers on Shimane Prefecture's
     # portal (shimane-opendata.jp, resources 76779, 76780 and 76781), PDL 1.0
     # as each resource page states (read 2026-10-06 by staging: permitted with
@@ -3300,6 +3300,33 @@ _NOTICES = [
      "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). The list may include premises that have closed. "
      "MHLW and MLIT did not make and do not endorse this map.",
      False, ("Kure",)),
+    # Kurashiki (notice 216): the city's 食品営業許可一覧, the year-end list of
+    # food-business permits in force (令和7年度末, as of March 31, 2026), a PDF
+    # on page 1004977 of its own site, CC BY 4.0 by the page's mark (read
+    # 2026-10-08 by staging: permitted with conditions, no indemnity clause).
+    # The page asks for the source and a statement that the data was edited
+    # and prescribes no wording, so the credit follows the licence read's
+    # form: source, page, licence, then what this project did. The catalogue
+    # CSV and MHLW's file are controls only and are not credited (Gifu's).
+    # MLIT as in Kobe's, N02 in its 2025 edition. Written from Aomori's and
+    # Shizuoka's approved wording under the owner's pre-approval of template
+    # prose (2026-09-30); the credit and the processing sentence are
+    # proposals in docs/decisions_drafts/worktree-japan-regional-2.md.
+    Notice(216, "Kurashiki City and MLIT (Kurashiki)",
+     "Kurashiki's businesses: Source: Kurashiki City (倉敷市), 食品営業許可一覧, the food-business permits in "
+     "force at March 31, 2026 "
+     "([https://www.city.kurashiki.okayama.jp/business/health-safety/1004966/1004974/1004977.html](https://www.city.kurashiki.okayama.jp/business/health-safety/1004966/1004974/1004977.html)), "
+     "[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). "
+     "Edited and processed by this project, which read the list from the city's PDF, selected the storefront "
+     "types, left out permits registered for an area rather than an address, showed a renewed permit and a "
+     "premises with several permits once, placed each by its address, and counted them around stations. "
+     "The list is published once a year and closures since its date are not shown, so it is not claimed to be "
+     "complete or current, and it may include premises that have closed. "
+     "Their locations: 出典：位置参照情報ダウンロードサービス（国土交通省）（[https://nlftp.mlit.go.jp/isj/](https://nlftp.mlit.go.jp/isj/)）を加工して作成. "
+     "Lines and stations: 「国土数値情報（鉄道データ）」（国土交通省）をもとに作成, stations chosen with "
+     "国土数値情報（行政区域データ） (CC BY 4.0; not drawn). Kurashiki City and MLIT did not make "
+     "and do not endorse this map.",
+     False, ("Kurashiki",)),
     # Berlin (notice 57): VBB's GTFS, CC BY 4.0 per VBB's own dataset page -
     # the requested credit, the licence link, what was modified, the
     # disclaimer, no endorsement. IHK Berlin's register is CC0 and needs no

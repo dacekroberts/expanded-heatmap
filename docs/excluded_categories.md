@@ -6272,6 +6272,66 @@ own name. 2 pins with no trade name in the filings show their permit type.
 drawn, cut at the city line at both ends.
 - Left out: 3 stations beyond it, 2 in Saka and 1 in Higashihiroshima.
 
+### Kurashiki - the city's year-end food-permit list only, joined to MLIT's address blocks
+
+**Left out**
+- Barbers, beauty salons and laundries: the city publishes its barber and
+  beauty-salon lists under terms that do not allow reuse and no laundry
+  list, so this map shows food businesses only.
+- Every shop that is not a food shop: Japan has no general business license.
+- Food businesses that only notify the city rather than hold a permit, such
+  as many convenience stores and greengrocers: they are not in the list.
+- 657 permits registered for an area rather than an address (県内一円, across
+  the prefecture, or 倉敷市内一円, anywhere in the city), which are food
+  trucks and stalls: 608 restaurant permits, 19 fishmongers, 18
+  confectioners, 8 cafés, 2 butchers and 2 milk sellers. 4 more are
+  registered for a district at large.
+- 87 permits for vending machines that prepare food
+  (調理の機能を有する自動販売機).
+- 239 rows of food manufacturing other than bakeries and confectioners (菓子)
+  and delis (そうざい), and other types that are not a counter.
+
+**Counted** - every food permit in force on March 31, 2026 in the city's
+year-end list: 6,288 rows, 6,161 permits, 4,619 of them restaurant permits,
+against 4,653 in the national count of March 31, 2025; 4,008 restaurant
+permits are at a fixed address. The list is published once a year and
+closures after its date are not published, so the count is an upper bound.
+Permits granted since June 2021 carry no form of business, so convenience
+stores, supermarkets, canteens, hotel restaurants and snack bars that hold a
+restaurant permit count as Food service. 83 pins are vending machines
+licensed before June 2021 (自動販売形態: 67 café permits, 13 milk-sales
+permits and 3 restaurant permits), which the list marks only in its form
+column. 27 of the 638 bakery, confectioner and deli premises (4.2%) have a
+trade name that reads as a factory; they are kept (owner, 2026-09-24).
+
+**One pin per premises** - 127 permits from before June 2021 that were
+renewed under the same number are listed twice and shown once, the renewed
+permit kept. 270 more repeat rows are shown once: several permits of one
+kind at one premises.
+
+**Not placed** - none. 599 pins (12.2%) sit at their town's center, where
+the address is a lot number in a large rural district (大字) that MLIT's
+block file does not hold.
+
+**Names not shown** - 4 pins whose trade name is the operator's own name
+show their permit type. So do 24 pins the list itself records without a
+name (＊＊＊) and 9 with a blank name.
+
+**Stations.** The Mizushima Rinkai Railway's Mizushima Main Line is drawn
+whole; JR West's Sanyo, Seto-Ohashi, Hakubi and Uno Minato lines and the
+Ibara Railway's Ibara Line are cut at the city line.
+- Left out: 14 stations beyond it, 6 in Okayama, 2 in Hayashima, 2 in
+  Asakuchi, 2 in Soja, 1 in Tamano and 1 in Yakage.
+- The Shinkansen is not drawn; Shin-Kurashiki stays a JR Sanyo Line station.
+- The JR Hakubi Line and the JR Uno Minato Line each have one station inside
+  the city (Kurashiki and Chayamachi) and are drawn as cut.
+<!-- internal -->
+The 83 vending-machine pins and 8 pins of the old-law form 特殊形態 wait on a
+shared-code call (the drafts entry, "Parked calls" 1 and 2): if the vending
+form rule lands, the 自動販売形態 sentence moves to **Left out** and the
+counts above are re-measured.
+<!-- /internal -->
+
 ### Berlin - the chamber of commerce's members, with no names and no crafts
 
 **Excluded by the classification itself** - catering and contract catering
