@@ -32,8 +32,22 @@ branch's drafts file.
     Toyota's config and map untouched.
   - `legend-dot-georgia` `16a68efe` (worktree `review-prep`), 57 behind
     master: needs the one full re-render.
-  - `place-search` `e4b9e9bf` (2026-10-12; far behind master): batches 1
-    to 3, nineteen cities, the watch file and its check. Since `498853e7`
+  - `place-search` `1f917fe8` (2026-10-12; far behind master): batches 1
+    to 3, nineteen cities, the watch file and its check. **Its rollout
+    plan for the whole site is `docs/handoff_place_search_rollout.md` on
+    the branch: a PROPOSAL the owner has not approved** (that session's
+    message). Its stage 0 is this landing's place search share; where it
+    says to re-render the nineteen and run its own deploy-verify, this
+    landing's ONE full re-render and its deploy-verify lanes cover both.
+    Its stage 0 item 5 is a new duty here: measure `app/static/places/`
+    at the merge (38 MB for nineteen cities by its count) and put the
+    projected total for the whole site to the owner before any stage 2
+    batch. Stages 1 and 2 (the other cities, in waves by language, about
+    ten a batch) are after the landing and need the owner's yes. New on
+    the branch since `e4b9e9bf`: a picked line fades the businesses and
+    takes a casing and a boxed label, built in the search script, so an
+    unsearched map gets it only when its own search lands (owner, relayed).
+    Since `498853e7`
     (that session's message; its newest drafts entry has the detail): the
     found place's marker rebuilt site-wide in `map_common` (own pane above
     the dots; dots, clusters and heat fade to 28% while it shows), all 19
