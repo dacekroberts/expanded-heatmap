@@ -12,14 +12,16 @@ python pipeline/<city_slug>/step3_map.py
 python pipeline/place_index_fetch.py <city_slug> [--force]   # place search: its two Overpass queries, in turn; NOT a step
 python pipeline/<city_slug>/step2b_place_index.py       # place search: the index, before step 3
 python scripts/check_place_search.py [--selftest]       # every searched map current; languages measured; ODbL; junk and leak words
-python pipeline/place_index_fetch.py <city> [--force] [--wait <min>]   # a city's two place queries; one run at a time on this machine (a lock); `--selftest` runs the lock's cases
+python pipeline/place_index_fetch.py <city> [--force] [--wait <min>] [--host <mirror>]   # a city's two place queries; one run per Overpass mirror at a time on this machine (a lock per mirror; with no --host it holds both); `--selftest` runs the lock's cases
 python scripts/rule_breaks.py <script> <breaks.json>   # break each rule in a temporary copy and run its selftest: caught, MISSED or stale; a selftest that cannot fail proves nothing
 python scripts/check_all.py --only <text> [<text> ...]   # only the checks whose command line holds a text (a session's own selftest); a partial run, never the gate
 python scripts/place_search_scaffold.py --plan <plan.json> [--write]   # the place-search boilerplate for the cities a plan names (config block, step2b, map and page arguments); prints only without --write; `--selftest` runs its cases
-python scripts/place_search_fetch_queue.py <city> [<city> ...] [--log <file>] [--dry-run] [--retries <n>]   # a wave's place fetches, one city after another, no session attending; `--selftest` runs the queue's cases
+python scripts/place_search_fetch_queue.py <city> [<city> ...] [--log <file>] [--dry-run] [--retries <n>] [--host <mirror>]   # a wave's place fetches, one city after another, no session attending; `--selftest` runs the queue's cases
 python scripts/place_search_review.py odd|tags|ids|ways|added|sizes <city_slug>   # REPORTS only: a new index's reading by eye (skill place-search-city)
 python scripts/check_place_index_drift.py [city] [--against REV] [--selftest]   # every index is what the code builds from its cache; --against lists rows changed since REV
 python scripts/commercial_use_sources.py [--json OUT] [--city SLUG] [--selftest]   # how many distinct sources the commercial-use audit must read: one line per source, grouped from provenance
+python scripts/place_name_net.py stage OUT_DIR --ref REF INDEX_PATH [...] | collect OUT_DIR | --selftest   # the outside name review's second net: stages committed place-index names (never data/) and collects the replies; sends nothing itself, each call is by hand with the owner's yes; prompt in scripts/place_name_net_prompt.md
+python scripts/commercial_use_cities.py [--write]   # the city table of docs/commercial_use_positions.md, derived from its source table; without --write, fails if it is stale or a city is missing
 python scripts/commercial_use_quote_check.py VERDICTS_JSON [--selftest]   # every first-pass licence verdict rests on a quote the stored text really contains; a missing quote voids it
 python scripts/licence_renderings.py [--write]   # every stored licence PDF and HTML file has its plain-text rendering, hashed in docs/licenses/README.md's second table; --write makes a missing one and never replaces one; `--selftest` runs its cases
 python pipeline/drift_check.py [city_slug] [--jobs N]   # every city; --jobs 3 at most, one run per machine

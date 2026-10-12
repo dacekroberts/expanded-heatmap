@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**79 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**83 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-12**
 
@@ -56,6 +56,10 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Before the phase 2 landing: seven owner calls, and the landing handoff written](#2026-10-12---before-the-phase-2-landing-seven-owner-calls-and-the-landing-handoff-written)
 - [The phase 2 landing: Bucharest's step 2 calls `name_kind_extended()`, so a company named as a given name beside one other word shows its category; no exception for a name on two or more premises (owner, 2026-10-12)](#2026-10-12---the-phase-2-landing-bucharests-step-2-calls-name_kind_extended-so-a-company-named-as-a-given-name-beside-one-other-word-shows-its-category-no-exception-for-a-name-on-two-or-more-premises-owner-2026-10-12)
 - [The search rollout's cheap path and the commercial-use audit's method (owner)](#2026-10-12---the-search-rollouts-cheap-path-and-the-commercial-use-audits-method-owner)
+- [The commercial-use audit: read, ruled and written (owner)](#2026-10-12---the-commercial-use-audit-read-ruled-and-written-owner)
+- [The outside name net lands; code-plus-type names go; public sharing follows the Visuals registry (owner)](#2026-10-12---the-outside-name-net-lands-code-plus-type-names-go-public-sharing-follows-the-visuals-registry-owner)
+- [Thessaloniki after its full read: allowed with condition, and lifted for shared pieces (owner)](#2026-10-12---thessaloniki-after-its-full-read-allowed-with-condition-and-lifted-for-shared-pieces-owner)
+- [Overpass: one query in flight per mirror, each fetch pinned to its mirror (owner)](#2026-10-12---overpass-one-query-in-flight-per-mirror-each-fetch-pinned-to-its-mirror-owner)
 
 **2026-10-11**
 
@@ -4576,3 +4580,144 @@ japan-city template:
   count and the quote check (each marked TO BUILD in its skill). Rejected:
   a second search skill beside `place-search-city`, which already holds
   the recipe and the owner's calls.
+
+### 2026-10-12 - The commercial-use audit: read, ruled and written (owner)
+
+- **Decided by the owner, 2026-10-12, on Cleanup's verdict report, in two
+  rounds ("1. hold. 2. yes, 3 yes"; then twelve numbered answers).** A
+  reading of licence terms and of this project's record, not legal advice;
+  for transit-globe's decisions only. Nothing here changes what this site
+  publishes.
+  - **What was read.** 383 script-counted sources and 105 counted by hand
+    for the 34 cities with no usable provenance, joined to the recorded
+    licence by five agents, then one verdict per licence position by six
+    agents (211 positions after merging the shared ones), with ten
+    single-source reads by the `licence-read` agent. The agents fetched
+    publishers' own terms pages only, on the owner's word ("2 yes fetch").
+    The cheaper model's first pass over the stored texts, as the skill
+    describes it, was not used: the agents read the record and the pages.
+  - **The result.** 237 cities: 153 allowed, 45 allowed if one layer is
+    left out or replaced, 37 held, 2 blacklisted (Philadelphia, Seattle
+    (Regional)). `docs/commercial_use_positions.md` holds the source table
+    and the city table; `docs/commercial_use_reads_2026-10-12.md` the quoted
+    sentences, reasons and what could not be read.
+  - **The owner's rulings.** Held: MHLW's food list, Tokyo's Tama ledgers
+    ("held and state"), Daegu's own datasets (national route noted),
+    IBGE's address file, the Paris timetable feed, the cadastre's addresses
+    for Palma, and the ten cities whose only register is silent or not
+    established. Blacklisted: Philadelphia. Permitted with condition: the
+    French boundary API under the stricter ODbL, Busan, SEMAS, Geneva's
+    register (no resale), Palma's Balearic register, Hong Kong with the
+    uncapped indemnity stated prominently. Permitted and flagged: New York
+    City's three datasets and the US Census files, whose sentences never
+    name commercial use. Brussels (Regional): allowed only under the app's
+    own KBO registration.
+  - **The owner's rider on Hong Kong**: "if this forces users to sitewide
+    accept an indemnity for a city they don't care about, hold instead." As
+    read, the indemnity binds the party that reproduces the data (the app's
+    operator, once), not the app's users, so the row is recorded permitted
+    with the rider beside it.
+  - **Cleanup's calls inside the merge (interpretation, for the owner to
+    overturn).** Seattle (Regional) is in the blacklisted column by the
+    weakest-source rule, two of its layers forbidding commercial use and
+    the rest held; the report had listed it as held. The eight cities on
+    the Tama ledgers are held outright, the ledgers and MHLW being their
+    only registers. Two passes disagreed on Saitama's 生活衛生 page; the
+    weaker reading (not established) stands for Sōka, Tokorozawa, Ageo
+    (Regional) and Kasukabe, each allowed without that list. Rows not ruled
+    one by one stand as read.
+  - **The city table is derived**, never written by hand:
+    `scripts/commercial_use_cities.py` rebuilds it from the source table and
+    fails on a city missing, a name not in `app/cities.py`, or a stale
+    table. It is not in `check_all.py`.
+  - Record corrections the reads found are listed in the positions file and
+    in `docs/data_sources.md`; two rows of `docs/data_sources/japan.md`
+    carry a dated re-read note. Still owed: the public-sharing question for
+    analytics and visuals pieces, which waits on Analytics' list of pieces.
+
+### 2026-10-12 - The outside name net lands; code-plus-type names go; public sharing follows the Visuals registry (owner)
+
+- **Decided by the owner, 2026-10-12, on Cleanup's review and
+  recommendations ("1. retry landing from here. 2. yes drop. 3. change per
+  your recommendations here, we can do a thessaloniki full read now").**
+  - **The second net's script is in the repository**:
+    `scripts/place_name_net.py` and its prompt, written by the DeepSeek
+    session and reviewed by Cleanup (selftest in `check_all.py`; 24 of 24
+    rule breaks caught). It sends nothing: it stages index names from a
+    resolved commit, refuses any path outside `app/static/places/`, and
+    collects replies. Each outside call still needs the owner's yes.
+  - **What the net's 248 flags on live rows came to.** Checked against
+    cached OpenStreetMap tags, nearly all are correct keeps under rules
+    already made (estates mapped as neighbourhoods, houses that are museums,
+    notable theatres, notable artworks). Real finds: about 35 bare type
+    words missing from the list, five glitched names, one house to check
+    (Barcelona's "Can Valent"), and a new class.
+  - **The new class: a code plus a type is no name** ("54F - Greenbelt",
+    "Building 30", "10. zastavení"); dropped, as a description. Built with
+    the missing words and the glitches at the wave 1 landing, so the built
+    cities' index bytes change once and transit-globe is told once.
+  - **Public sharing of analytics and visuals pieces** is the same kind of
+    use as the site, so the Visuals registry decides which cities are left
+    out, not the commercial-use columns. Lifted: Dublin and Milan (sources
+    read as CC BY 4.0), after the SEMAS cities and Busan earlier the same
+    day. Held pending a full read: Thessaloniki. Den Haag, Miami (Regional),
+    Bucharest and Cluj-Napoca stay held. The per-piece counts and notices
+    are in `docs/derived_use_licensing.md`, "Update, 2026-10-12". Whether a
+    piece goes public stays the owner's call, piece by piece.
+
+### 2026-10-12 - Thessaloniki after its full read: allowed with condition, and lifted for shared pieces (owner)
+
+- **Decided by the owner, 2026-10-12 ("yes lift thessaloniki, allowed with
+  condition"), on the `licence-read` agent's full read of the same day.**
+  - **The read.** The national record governs (the City publishes no page
+    for the layer on its own host): CC BY 4.0 on each resource, and
+    data.gov.gr's terms art. 3.2 allow reuse for any lawful purpose,
+    commercial exploitation included. The clause the audit took for the open
+    data portal's is clause 3 of the City's map application splash, about
+    the Portal's content and source code.
+  - **The doubt, kept in the row**: the CC BY stamp is the harvest source's
+    default across all 131 of the City's layers and does not always match
+    the City's own labels; the layer is not on the City's own portal; the
+    splash's preamble can be read as reaching all the department's geodata.
+    Ministerial Decision 11654 ΕΞ 2026 art. 8(3) was not read.
+  - **Recorded as** row EW-13+1 in `docs/commercial_use_positions.md`. A
+    re-read is a new row whose Id is the old Id plus "+1"; the old row stays
+    as written and `scripts/commercial_use_cities.py` counts only the newest.
+    The table is now 154 allowed, 45 allowed if a layer is left out, 36
+    held, 2 blacklisted.
+  - **For this site**: the same read permits its own use with the notice it
+    already shows; nothing changes on the page. Thessaloniki is lifted for
+    shared pieces, leaving 10 cities held off them.
+
+### 2026-10-12 - Overpass: one query in flight per mirror, each fetch pinned to its mirror (owner)
+
+- **Decided by the owner, 2026-10-12 ("3 yes go ahead"; "make sure the
+  relevant overpass skills are re-written"; "tell wave 1 to pilot the change
+  once it is built"), on the wave 1 search session's idea, relayed and then
+  confirmed first hand.** The rule of 2026-09-30 was one query in flight,
+  ever.
+  - **What changed.** `pipeline/osm.py`: `fetch(..., hosts=)` and
+    `pinned(name)`, a fetch that asks one mirror and never fails over.
+    `pipeline/place_index_fetch.py --host MIRROR`: the whole city on that
+    mirror, under a lock per mirror in the shared data folder; with no
+    `--host` it takes both locks. `scripts/place_search_fetch_queue.py
+    --host MIRROR` passes it to every child, so two queues run side by side.
+  - **What did not.** A plain `osm.fetch()` can reach both mirrors, so it
+    still runs alone: every rail, boundary and address fetch in a build. One
+    query per city. The 60 s wait after a 504 or 429, per mirror.
+  - **The split.** A city never crosses mirrors (they return different data
+    for one area on one day). The large cities and every tiled one go to
+    `overpass-api.de`; the small and middle ones to `overpass.kumi.systems`,
+    which has read-timed out on heavy queries. Two queues never share a
+    city: nothing enforces that but the lists.
+  - **Weaker in one place, on purpose**: a tile that answers empty is taken
+    as empty on the one pinned mirror's word, where two mirrors used to
+    agree. Tile corners outside a city's area are the usual cause.
+  - **Not measured yet**: that two queues finish a wave in about half the
+    time, and that kumi carries the middle cities. Wave 1 pilots it; a
+    refusal pattern on either mirror goes back to one queue.
+  - Selftests: the fetch script's 13 cases (a lock per mirror, the old lock
+    still honoured, an unknown mirror refused), the queue's 34. The rule's
+    full system is in `docs/rule_history.md`, #overpass; `CLAUDE.md`, the
+    `place-search-city`, `osm-rail`, `korea-city` and `screen-wave` skills
+    carry the new wording.

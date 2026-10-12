@@ -1,5 +1,11 @@
 # Notice positions, weakest to strongest
 
+**Note, 2026-10-12: as of 144 to 170 cities, and its line references into the
+country files have drifted** (the commercial-use audit found `south-korea.md`
+and `united-states.md` ranges 10 to 40 lines off). Find a cited passage by its
+source name, not its line. For commercial use by a third party, the current
+record of all 237 cities is `docs/commercial_use_positions.md`.
+
 The owner's question was: "we should list our weakest to strongest notice positions to know what could potentially be flagged."
 
 For DERIVED material (the Analytics session's statistics and dashboards, the Visuals session's cards), see `docs/derived_use_licensing.md` (2026-10-04).

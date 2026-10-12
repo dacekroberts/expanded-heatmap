@@ -2,14 +2,17 @@
 step: drift_check.py never runs this file, and the index step exits naming it
 when its cache is missing.
 
-    python pipeline/place_index_fetch.py <city> [--force] [--wait MINUTES]
+    python pipeline/place_index_fetch.py <city> [--force] [--wait MINUTES] [--host MIRROR]
     python pipeline/place_index_fetch.py --selftest      # the lock's cases
 
-One run of this script at a time on this machine (FetchLock, below).
+One run of this script per Overpass mirror at a time on this machine
+(FetchLock, below). With --host the whole city, both queries and every tile,
+is asked of that one mirror and never fails over; without it the run may
+touch either mirror, so it holds both mirrors' locks.
 
 Two Overpass queries per city, one after the other (the owner's rule: one in
-flight per session, none in parallel, 60 s after a 504 or 429, all in
-pipeline/osm.py), cut by the city's own boundary (config.PLACE_AREA): QUERY,
+flight per mirror, a city never split across mirrors, 60 s after a 504 or
+429, all in pipeline/osm.py), cut by the city's own boundary (config.PLACE_AREA): QUERY,
 cached at config.PLACE_OSM_JSON, and EXTRA_QUERY, at
 config.PLACE_OSM_EXTRA_JSON; each recorded in outputs/<slug>/provenance.json
 ("osm_places", "osm_places_extra"; a cache already on disk is recorded
@@ -132,7 +135,7 @@ def tiles(split):
             for r in range(rows) for c in range(cols)]
 
 
-def fetch_split(config, path, force):
+def fetch_split(config, path, force, hosts=None):
     """QUERY for a city too large for one answer (batch 3, 2026-10-11: London
     and the other size tests), asked once per tile of config.PLACE_SPLIT, one
     after the other, each tile still cut by the city's own area, then merged
@@ -148,11 +151,12 @@ def fetch_split(config, path, force):
         query = QUERY.format(area=config.PLACE_AREA).replace("(area.a)", "(area.a)" + tile)
         part = path.with_name(f"{path.stem}.tile{i}.json")
         try:
-            els, host = osm.fetch(query, part, force=force, timeout=180, deadline=900)
+            els, host = osm.fetch(query, part, force=force, timeout=180, deadline=900, hosts=hosts)
         except RuntimeError as exc:
             # A tile with nothing in it (a corner of the bbox outside the
-            # area) answers empty on every host, which osm.fetch does not
-            # trust; a tile any host refused is a failure, never empty.
+            # area) answers empty on every host asked (one, when pinned),
+            # which osm.fetch does not trust; a tile any host refused is a
+            # failure, never empty.
             if "empty 200" in str(exc) and "Error" not in str(exc).split(" - ", 1)[-1] \
                     and "remark" not in str(exc):
                 print(f"tile {i} {tile}: empty on every host, taken as empty")
@@ -172,21 +176,27 @@ def fetch_split(config, path, force):
     path.write_text(json.dumps(out, ensure_ascii=False), encoding="utf-8")
     return merged, out["_fetched_from"]
 
-# ONE PLACE FETCH ON THIS MACHINE AT A TIME (owner, 2026-10-12). The Overpass
-# rule is one query in flight; pipeline/osm.py holds it inside one process,
-# and nothing held it between processes. The rollout runs an unattended queue
-# and may be driven by an outside model, which a session hook does not see,
-# so the rule is a lock file here: data/_place_fetch.lock, in the data folder
-# every worktree shares. It names its holder (pid, city, since). A holder
-# whose process is gone is replaced; a live one makes this script exit
-# non-zero naming it, or wait with --wait MINUTES. PLACE_FETCH_LOCK_DIR moves
-# the file (the selftest's).
+# ONE PLACE FETCH PER MIRROR ON THIS MACHINE AT A TIME (owner, 2026-10-12:
+# first one on the machine, then, the same day, one per Overpass mirror). The
+# rule is one query in flight per mirror; pipeline/osm.py holds it inside one
+# process, and nothing held it between processes. The rollout runs unattended
+# queues and may be driven by an outside model, which a session hook does not
+# see, so the rule is a lock file per mirror here:
+# data/_place_fetch.<mirror>.lock, in the data folder every worktree shares.
+# It names its holder (pid, city, since). A holder whose process is gone is
+# replaced; a live one makes this script exit non-zero naming it, or wait
+# with --wait MINUTES. A run with no --host can reach both mirrors, so it
+# takes both locks, in osm.host_names() order. The lock of the one-fetch rule
+# (data/_place_fetch.lock) is still honoured while a live process holds it: a
+# queue started before this change keeps the whole machine until it ends.
+# PLACE_FETCH_LOCK_DIR moves the files (the selftest's).
 LOCK_NAME = "_place_fetch.lock"
 LOCK_POLL_S = 5
 
 
-def lock_path():
-    return Path(os.environ.get("PLACE_FETCH_LOCK_DIR", Path(__file__).parent.parent / "data")) / LOCK_NAME
+def lock_path(host=None):
+    name = f"_place_fetch.{host}.lock" if host else LOCK_NAME
+    return Path(os.environ.get("PLACE_FETCH_LOCK_DIR", Path(__file__).parent.parent / "data")) / name
 
 
 def _pid_alive(pid):
@@ -198,10 +208,28 @@ class FetchLock:
     """Held for a whole run of this script. alive and sleep are injected by
     the selftest."""
 
-    def __init__(self, city, wait_min=0, path=None, alive=_pid_alive, sleep=time.sleep):
+    def __init__(self, city, wait_min=0, path=None, alive=_pid_alive, sleep=time.sleep,
+                 host=None, blockers=()):
         self.city, self.wait_s = city, wait_min * 60
-        self.path = Path(path) if path else lock_path()
+        self.path = Path(path) if path else lock_path(host)
         self.alive, self.sleep = alive, sleep
+        # Other lock files that hold this one off while a live process owns
+        # them, without being taken: the machine-wide lock of the old rule.
+        self.blockers = [Path(b) for b in blockers]
+
+    def _read(self, path):
+        try:
+            return json.loads(Path(path).read_text(encoding="utf-8"))
+        except (FileNotFoundError, ValueError):
+            return None
+
+    def blocked_by(self):
+        """The holder record of a blocker a live process owns, or None."""
+        for b in self.blockers:
+            held = self._read(b)
+            if held and self.alive(held.get("pid", -1)):
+                return held
+        return None
 
     def holder(self):
         try:
@@ -212,6 +240,15 @@ class FetchLock:
     def __enter__(self):
         waited = 0
         while True:
+            held = self.blocked_by()
+            if held is not None:
+                if waited >= self.wait_s:
+                    raise SystemExit(
+                        f"A place fetch holding every mirror is running: {held.get('city')} (pid "
+                        f"{held.get('pid')}, since {held.get('since')}). Wait for it, or pass --wait MINUTES.")
+                self.sleep(LOCK_POLL_S)
+                waited += LOCK_POLL_S
+                continue
             try:
                 fd = os.open(self.path, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
             except FileExistsError:
@@ -230,8 +267,8 @@ class FetchLock:
                 if waited >= self.wait_s:
                     raise SystemExit(
                         f"Another place fetch is running: {held.get('city')} (pid {held.get('pid')}, "
-                        f"since {held.get('since')}). One Overpass query at a time on this machine: "
-                        f"wait for it, or pass --wait MINUTES.")
+                        f"since {held.get('since')}), lock {self.path.name}. One Overpass query per "
+                        f"mirror at a time on this machine: wait for it, or pass --wait MINUTES.")
                 self.sleep(LOCK_POLL_S)
                 waited += LOCK_POLL_S
                 continue
@@ -283,6 +320,40 @@ def selftest():
         other.write_text(json.dumps({"pid": -5, "city": "x", "since": "x"}), encoding="utf-8")
         FetchLock("e", path=other).__exit__()
         cases.append(("exit never removes another holder's lock", other.exists()))
+        a_lock, b_lock = Path(d) / "_place_fetch.a.lock", Path(d) / "_place_fetch.b.lock"
+        with FetchLock("f", path=a_lock):
+            with FetchLock("g", path=b_lock):
+                both = a_lock.exists() and b_lock.exists()
+            try:
+                FetchLock("h", path=a_lock, alive=lambda pid: True, sleep=lambda s: None).__enter__()
+                same = False
+            except SystemExit as exc:
+                same = "_place_fetch.a.lock" in str(exc)
+        cases.append(("two mirrors' locks are held at once", both))
+        cases.append(("a second fetch on the same mirror is refused, naming the lock", same))
+        os.environ["PLACE_FETCH_LOCK_DIR"] = d
+        try:
+            named = lock_path("x.example").name == "_place_fetch.x.example.lock" and lock_path().name == LOCK_NAME
+        finally:
+            del os.environ["PLACE_FETCH_LOCK_DIR"]
+        cases.append(("a mirror's lock file carries its host name", named))
+        old = Path(d) / LOCK_NAME
+        old.write_text(json.dumps({"pid": 7, "city": "queue", "since": "x"}), encoding="utf-8")
+        try:
+            FetchLock("i", path=a_lock, blockers=[old], alive=lambda pid: pid == 7, sleep=lambda s: None).__enter__()
+            held_off = False
+        except SystemExit as exc:
+            held_off = "queue" in str(exc) and not a_lock.exists()
+        cases.append(("a live holder of the machine-wide lock holds a mirror's lock off", held_off))
+        with FetchLock("j", path=a_lock, blockers=[old], alive=lambda pid: False):
+            cases.append(("a machine-wide lock whose holder is gone holds nothing off", a_lock.exists()))
+        try:
+            osm.pinned("overpass.osm.ch")
+            unknown = False
+        except ValueError:
+            unknown = True
+        cases.append(("an unknown mirror is refused, a known one pins to one host",
+                      unknown and osm.pinned(osm.host_names()[1]) == (osm.OVERPASS_HOSTS[1],)))
     for label, ok in cases:
         print(f"  {'ok ' if ok else 'BAD'} {label}")
     good = sum(ok for _, ok in cases)
@@ -296,23 +367,36 @@ def main():
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--wait", type=int, default=0, metavar="MINUTES",
                     help="wait this long for another place fetch to finish, then exit non-zero")
+    ap.add_argument("--host", choices=osm.host_names(), metavar="MIRROR",
+                    help="ask this one mirror only, for the whole city, and hold only its lock: "
+                         + " or ".join(osm.host_names()))
     args = ap.parse_args()
     config = importlib.import_module(f"pipeline.{args.city}.config")
-    with FetchLock(args.city, args.wait):
+    old = [lock_path()]
+    if args.host:
+        with FetchLock(args.city, args.wait, host=args.host, blockers=old):
+            fetch_city(config, args.force, osm.pinned(args.host))
+        return
+    # No mirror named: the fetch may fail over, so it holds every mirror.
+    import contextlib
+    with contextlib.ExitStack() as stack:
+        for name in osm.host_names():
+            stack.enter_context(FetchLock(args.city, args.wait, host=name, blockers=old))
         fetch_city(config, args.force)
 
 
-def fetch_city(config, force):
+def fetch_city(config, force, hosts=None):
     args = argparse.Namespace(force=force)
-    # One after the other, never in parallel (the owner's Overpass rule).
+    # One after the other, never in parallel (the owner's Overpass rule), and
+    # both of the one mirror when pinned.
     for query, path, key in ((QUERY, config.PLACE_OSM_JSON, "osm_places"),
                              (EXTRA_QUERY, config.PLACE_OSM_EXTRA_JSON, "osm_places_extra")):
         kept = path.exists() and not args.force
         if query is QUERY and getattr(config, "PLACE_SPLIT", None):
-            els, host = fetch_split(config, path, args.force)
+            els, host = fetch_split(config, path, args.force, hosts)
         else:
             els, host = osm.fetch(query.format(area=config.PLACE_AREA), path, force=args.force,
-                                  timeout=180, deadline=900)
+                                  timeout=180, deadline=900, hosts=hosts)
         kinds = {}
         for e in els:
             kinds[e["type"]] = kinds.get(e["type"], 0) + 1

@@ -2,7 +2,7 @@
 the existing fetch script for them one after another, with no session
 attending.
 
-    python scripts/place_search_fetch_queue.py CITY [CITY ...] [--log FILE] [--dry-run] [--retries N]
+    python scripts/place_search_fetch_queue.py CITY [CITY ...] [--log FILE] [--dry-run] [--retries N] [--host MIRROR]
     python scripts/place_search_fetch_queue.py --selftest
 
 For each city, in the order given, read pipeline.CITY.config and take its two
@@ -28,13 +28,23 @@ running after CHILD_TIMEOUT_MIN minutes is stopped and counts as failed: a
 hung fetch would otherwise hold the queue and the fetch lock all night. The
 lock file it leaves names a dead process, which the next fetch replaces.
 
+--host MIRROR is passed to every child: the whole queue asks that one
+Overpass mirror and holds only its lock, so a second queue with the other
+mirror and a DIFFERENT city list may run beside it (owner, 2026-10-12: one
+query in flight per mirror). Two queues must never share a city: nothing
+here stops both from fetching it. The heavy cities, and every city fetched
+in tiles, go to overpass-api.de: overpass.kumi.systems has read-timed out on
+heavy queries (pipeline/osm.py).
+
 WHAT IT DOES NOT DO. This script makes no request itself and holds no lock
-itself: the fetch script holds the machine-wide FetchLock, and pipeline/osm.py
-holds the wait after a 504 or 429. It never starts two children at once: one
-child is started and waited for to the end, and only then the next.
+itself: the fetch script holds the mirror's FetchLock (both mirrors' with no
+--host), and pipeline/osm.py holds the wait after a 504 or 429. It never
+starts two children at once: one child is started and waited for to the end,
+and only then the next.
 """
 import argparse
 import datetime
+import functools
 import importlib
 import json
 import os
@@ -51,6 +61,10 @@ WAIT_MINUTES = "30"
 # Longer than any fetch measured: London's twelve tiles with their waits took
 # under an hour (2026-10-11), and the lock wait adds at most WAIT_MINUTES.
 CHILD_TIMEOUT_MIN = 180
+# The mirrors a queue may be pinned to: pipeline/osm.py's OVERPASS_HOSTS by
+# name, repeated here so this script still imports nothing that can fetch
+# (the selftest fails if the two lists differ).
+MIRRORS = ("overpass-api.de", "overpass.kumi.systems")
 
 for stream in (sys.stdout, sys.stderr):
     if hasattr(stream, "reconfigure"):
@@ -62,11 +76,12 @@ def utc_now():
     return datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-def child_command(city, script=FETCH_SCRIPT):
+def child_command(city, script=FETCH_SCRIPT, host=None):
     """The argument list the real runner starts for one city: this
-    interpreter, the fetch script, the city, --wait 30. Built here so a test
-    can assert on it without starting it."""
-    return [sys.executable, script, city, "--wait", WAIT_MINUTES]
+    interpreter, the fetch script, the city, --wait 30, and --host MIRROR
+    when the queue is pinned. Built here so a test can assert on it without
+    starting it."""
+    return [sys.executable, script, city, "--wait", WAIT_MINUTES] + (["--host", host] if host else [])
 
 
 def _last_line(stdout, stderr, failed=False):
@@ -81,7 +96,7 @@ def _last_line(stdout, stderr, failed=False):
     return ""
 
 
-def real_runner(city, script=FETCH_SCRIPT, timeout_min=CHILD_TIMEOUT_MIN):
+def real_runner(city, script=FETCH_SCRIPT, timeout_min=CHILD_TIMEOUT_MIN, host=None):
     """Start the fetch script for one city and wait for it to the end. Returns
     (exit code, last non-empty line). The child holds the fetch lock; this
     process makes no request. The child's pipes are UTF-8 whatever the
@@ -89,7 +104,7 @@ def real_runner(city, script=FETCH_SCRIPT, timeout_min=CHILD_TIMEOUT_MIN):
     child past timeout_min is stopped and reported as exit 124."""
     env = dict(os.environ, PYTHONIOENCODING="utf-8")
     try:
-        proc = subprocess.run(child_command(city, script), cwd=ROOT, env=env,
+        proc = subprocess.run(child_command(city, script, host), cwd=ROOT, env=env,
                               capture_output=True, text=True, encoding="utf-8",
                               errors="replace", timeout=timeout_min * 60)
     except subprocess.TimeoutExpired as exc:
@@ -343,9 +358,13 @@ def main(argv=None, *, runner=real_runner, config_reader=read_place_paths,
                     help="print the plan and start no child")
     ap.add_argument("--retries", type=int, default=1, metavar="N",
                     help="retry rounds after the first pass (default 1; more for a city fetched in tiles)")
+    ap.add_argument("--host", metavar="MIRROR", choices=MIRRORS,
+                    help="pin every child to this one Overpass mirror: " + " or ".join(MIRRORS))
     args = ap.parse_args(argv)
     if args.retries < 1:
         ap.error("--retries must be 1 or more")
+    if args.host and runner is real_runner:
+        runner = functools.partial(real_runner, host=args.host)
     log_path = Path(args.log) if args.log else None
     return run_queue(args.city, runner=runner, config_reader=config_reader,
                      cached=cached, out=out, log=log_path, dry_run=args.dry_run,
@@ -501,6 +520,14 @@ def selftest():
     report("a city named twice is run once and the repeat is said",
            runner.calls == ["a", "b"] and "a: named twice, run once" in text)
 
+    import re as _re
+    osm_text = (ROOT / "pipeline" / "osm.py").read_text(encoding="utf-8")
+    block = osm_text.split("OVERPASS_HOSTS = (", 1)[1].split(")", 1)[0]
+    report("MIRRORS is pipeline/osm.py's host list, in its order",
+           tuple(_re.findall(r"https://([^/]+)/", block)) == MIRRORS)
+    report("a pinned queue's command ends --host MIRROR; an unpinned one has none",
+           child_command("somewhere", host=MIRRORS[1])[-2:] == ["--host", MIRRORS[1]]
+           and "--host" not in child_command("somewhere"))
     report("the real runner's command is the interpreter, the fetch script, the city, --wait, 30",
            child_command("somewhere") == [sys.executable, FETCH_SCRIPT, "somewhere",
                                           "--wait", WAIT_MINUTES]

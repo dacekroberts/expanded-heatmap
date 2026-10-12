@@ -47,7 +47,12 @@ Detail files: [japan](docs/plan_detail/japan.md),
     code, and the handoff is a full build-and-decisions account for it to
     critique, with every pilot-only choice named (owner, 2026-10-07 and
     2026-10-08). A draft for the owner to read before it goes over.
-  - [ ] **The commercial-use audit, after the batch lands:**
+  - [ ] **The commercial-use audit, after the batch lands:** READ, RULED
+    AND WRITTEN 2026-10-12 (153 allowed, 45 allowed if a layer is left out,
+    37 held, 2 blacklisted; `DECISIONS.md`, "The commercial-use audit: read,
+    ruled and written"). Still open: the public-sharing answer below, which
+    waits on Analytics' list of pieces, and the stale pointers listed in
+    `docs/data_sources.md`.
     `docs/commercial_use_positions.md`, for transit-globe's decisions only
     (this site stays non-commercial). One row per city, layer and source;
     the weakest source in use decides the city's column (allowed,
@@ -249,6 +254,23 @@ Detail files: [japan](docs/plan_detail/japan.md),
     group folded on a phone. **Known and left:** Chicago's "Lake Shore
     Dr" lists the synagogue above the street. **Not yet tested live:**
     Tokyo and Vancouver.
+  - **Owner's rulings on the rollout, 2026-10-12 (afternoon):** wave 1
+    (English, 34) runs in its own session on branch `search-wave1`, from
+    `handoff_search_wave1.md`. **A small wave follows it for the travel
+    app's seven unbuilt pilot cities** (New York is in wave 1; Osaka,
+    Amsterdam, Strasbourg, Avignon, Mendoza, Florence), ahead of their
+    language waves; "italian list early is okay", so Italian's word lists
+    are built for Florence then. **The outside model is a second net
+    beside the `place-read` agent, never the first pass, and may be used
+    on every wave** ("second net is okay, we can include net for all
+    waves if we want"): its trial on the 19 built cities flagged 402 of
+    691 removed rows and 4.4% of kept ones, strong in English, Korean,
+    Chinese and Japanese, and kept three named homes it had the rule for.
+    Its script landed 2026-10-12 (`scripts/place_name_net.py`). **Owed at
+    the wave 1 landing** (owner, 2026-10-12): the code-plus-type rule, the
+    missing bare type words and five glitched names the net found live
+    (`place-search-city`), and a check of Barcelona's "Can Valent".
+    The schema number and the id side file are built at wave 1's landing.
   - **Idea for the next landing (owner, 2026-10-12): a button that
     returns a map to its starting view.** After a search the map stays
     at the found place and nothing restores the city-wide view (the
@@ -293,9 +315,9 @@ Detail files: [japan](docs/plan_detail/japan.md),
 
 - [~] **This week (from the 2026-10-11 reset), the final scoped adds (owner,
   2026-10-11):** phase 2, the last build wave; place search batch 3
-  alongside it; the site's partial Travel view, which waits on the owner's
-  go-live call and hosting (the basemap branch's resume note, five
-  blockers). Nothing else new (the freeze of 2026-10-08).
+  alongside it; the site's partial Travel view, LANDED 2026-10-12 with the
+  phase 2 re-render (`71b66bae`: the switch on in all 237 maps, packs at
+  `https://files.dacekroberts.dev`). Nothing else new (the freeze of 2026-10-08).
 
 - [ ] **A site-wide junk-name pass once the final batch lands** (owner,
   2026-10-08, via the place-search pilot): no dot shows an error value or

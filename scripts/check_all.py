@@ -103,6 +103,7 @@ CHECKS = [
     ["scripts/licence_renderings.py", "--selftest"],
     ["scripts/archive_decisions_selftest.py"],
     ["scripts/rule_breaks.py", "--selftest"],
+    ["scripts/place_name_net.py", "--selftest"],
 ]
 
 

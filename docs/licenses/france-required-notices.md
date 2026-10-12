@@ -1,5 +1,9 @@
 # France — required notices and obligations
 
+**Note, 2026-10-12: this opening is out of date. 26 French cities are built
+and their notices are in `docs/data_sources.md`; read this file as the
+history of how they were drafted.**
+
 **NOT YET PROMOTED. No French city is built.** These are held here
 deliberately: `docs/data_sources.md`'s numbered notices list is the **deploy
 gate**, and it stays a list of things that actually apply. When Paris ships,

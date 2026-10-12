@@ -960,6 +960,36 @@ python scripts/scaffold_city.py --slug <slug> --name <Name> --system-name <syste
   was activated at once (`docs/decisions/2026-09-27.md`, "2026-09-30 - New
   working rules"). The short form in `CLAUDE.md` carried "(owner, 2026-09-30)"
   until the trim of 2026-10-08.
+- **Relaxed by the owner on 2026-10-12 to one query in flight per MIRROR**
+  ("3 yes go ahead", on Cleanup's reading of the wave 1 session's idea), to
+  speed the place-search rollout: 34 cities at about five minutes each on one
+  queue. The whole system, so nobody keeps half of it:
+  - **Two mirrors, so two queries at most**: `overpass-api.de` and
+    `overpass.kumi.systems` (`pipeline/osm.py`, `OVERPASS_HOSTS`;
+    `scripts/check_overpass_hosts.py` keeps the list to global mirrors).
+  - **A second query in flight needs both fetches PINNED**:
+    `osm.fetch(..., hosts=osm.pinned(name))` asks one mirror and never fails
+    over. A plain `osm.fetch()` walks both mirrors, so it can be a second
+    query on either: it runs alone, as before. Every rail and boundary fetch
+    in a build is still unpinned; the rule did not change for them.
+  - **A lock per mirror, not a promise**: `pipeline/place_index_fetch.py
+    --host MIRROR` holds `data/_place_fetch.<mirror>.lock` (the shared data
+    folder, so it holds across worktrees and for an outside model's runs);
+    with no `--host` it takes both. A live holder of the old machine-wide
+    `data/_place_fetch.lock` still holds everything off.
+  - **A city is never split across mirrors**: the two return different data
+    for the same area on the same day (`pipeline/osm.py`, Barcelona's
+    measurement), so both of a city's queries and every tile of a
+    `PLACE_SPLIT` city go to one mirror, recorded per cache in
+    `provenance.json`.
+  - **Heavy to `overpass-api.de`, light to `kumi`**: `kumi.systems` has
+    read-timed out on heavy queries, so the large cities and every tiled one
+    go to `overpass-api.de`.
+  - **Two queues never share a city**: `scripts/place_search_fetch_queue.py
+    --host MIRROR`, each with its own city list; nothing stops two queues
+    from fetching one city twice.
+  - **The 60 s wait is per mirror and unchanged**; a pinned fetch that is
+    refused waits for its own mirror instead of asking the other.
 
 <a id="ridership"></a>
 ### Ridership out of scope; AI-driven analysis private

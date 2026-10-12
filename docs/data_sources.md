@@ -5282,6 +5282,45 @@ build at review time).
   2026-10-12; the verdict is in `docs/decisions_drafts/worktree-japan-naha.md`
   ("Naha built", 2026-10-12).<!-- /internal -->
 
+## Corrections from the commercial-use audit, 2026-10-12
+
+The audit re-read many publishers' pages for one question, commercial use by
+a third party (`docs/commercial_use_positions.md`; not legal advice). None of
+these changes what this site may publish. The dated rows they touch are left
+as written; this list is the correction.
+
+- **MHLW 食品衛生申請等システム**: 免責 2) ウ is about for-profit reuse of the
+  information, not personal data. Held for commercial use by the owner.
+- **MLIT N02**: the N02 pages state CC BY 4.0; the record says PDL 1.0.
+  Either permits.
+- **MLIT N03**: the page does not itself say that reproducing the boundaries
+  needs the survey agency's approval; that is this project's reading of
+  GSI's guidance. The rule that no N03 geometry is drawn is unchanged.
+- **e-Stat**: its terms say 「商用利用も可能です」.
+- **Palma's Balearic register**: the "no alteration" line is about the
+  information's content (Ley 37/2007 art. 8), not derived maps.
+- **Catastro INSPIRE addresses**: the 2016 licence allows use of transformed
+  cadastral information but not distribution of the original; the feed's
+  rights line and the 2013 metadata differ. Not established for commercial
+  use.
+- **San Diego's Business Tax Certificates**: the page now links PDDL.
+- **MTR's station lists**: no licence field of their own, but DATA.GOV.HK's
+  terms reach every dataset on the portal.
+- **King County**: the open-data terms are at data.kingcounty.gov/terms and
+  are silent on commercial use.
+- **IDFM (Paris)**: three licences are declared for the timetable feed; the
+  quoted Licence Mobilités articles in the record were not re-verified.
+- **Sources with no licence on record**: 13 of 16 show one on the
+  publisher's page today (the rows marked "none recorded" in the positions
+  file's hand-count table).
+- **Stale pointers, fixed 2026-10-12**: the `korea-city` skill's line
+  reference to notice 68 (now by name); a dated note at the head of
+  `docs/licence_positions.md`, whose line references are left as written;
+  Brazil's heading in `docs/licenses/README.md` and the opening of
+  `docs/licenses/france-required-notices.md`; a source paragraph for
+  Monterrey's map PDF in `docs/data_sources/mexico.md`; the US Census
+  geocoder's row in `docs/data_sources/united-states.md`.
+
 ## Gaps
 
 - ~~San Francisco's boundary layer endpoint is not recorded anywhere.~~

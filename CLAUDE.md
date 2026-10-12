@@ -38,8 +38,9 @@ the bracketed anchor** - read it before relaxing a rule, not before obeying one.
 - Brazilian city -> `brazil-city`; Taiwanese city -> `taiwan-city`; Japanese
   city -> `japan-city`; Korean city -> `korea-city`; French city -> `france-tram-city`; a trams-only
   city outside France and Czechia -> `tram-city`. [#country-skills]
-- **Overpass: one query in flight per session, one per city**, never
-  parallel; after a 504 or 429 wait at least 60 s before a retry. [#overpass]
+- **Overpass: one query in flight per mirror, pinned to it; an unpinned
+  fetch runs alone.** One query per city, a city on one mirror; after a 504
+  or 429 wait at least 60 s before a retry. [#overpass]
 - Rail from OpenStreetMap, not GTFS -> `osm-rail`. Put a lesson where the next
   city must pass through it - a raising check in shared code, then a skill - not
   in a sibling city's comments. [#osm-rail]
