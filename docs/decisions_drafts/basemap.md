@@ -23,8 +23,10 @@ or published; every proposal waits for the owner.
   2026-10-12: "diff approved").** Still the owner's: replacing the host's
   `README.md` with the public text (read 2026-10-12 after his "readme
   re-upload": the host still served the internal draft, MD5
-  29c9395e...fbf6 against the public text's 5a1dc340...f45f; check again
-  before go-live), and the word before anything reaches the deployed app.
+  29c9395e...fbf6 against the public text's 5a1dc340...f45f; **replaced by
+  the owner and confirmed the same day: the host's README is the public
+  text, same MD5, modified 06:35:21 GMT**), and the word before anything
+  reaches the deployed app.
   On go-live he wrote in the basemap chat the same day: "word to go live?
   ready". Recorded as his readiness, not as the push approval: the push is
   the landing session's, and his standing instruction is to be asked at
