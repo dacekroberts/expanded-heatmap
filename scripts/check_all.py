@@ -100,6 +100,7 @@ CHECKS = [
     ["scripts/commercial_use_sources.py", "--selftest"],
     ["scripts/commercial_use_quote_check.py", "--selftest"],
     ["scripts/archive_decisions_selftest.py"],
+    ["scripts/rule_breaks.py", "--selftest"],
 ]
 
 
@@ -121,15 +122,29 @@ def run(argv):
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--list", action="store_true", help="name the checks and exit")
+    ap.add_argument("--only", nargs="+", metavar="TEXT",
+                    help="run only the checks whose command line holds one of these texts; "
+                         "never the pre-push gate, which runs them all")
     args = ap.parse_args()
     if args.list:
         for argv in CHECKS:
             print(" ".join(argv))
         return 0
+    checks = CHECKS
+    if args.only:
+        # For a session writing one script (its own selftest, the em-dash
+        # check) while others run the suite: under four concurrent suites
+        # single checks took 140 s (2026-10-12). A text that matches nothing
+        # is an error, so a typo cannot read as a pass.
+        unmatched = [t for t in args.only if not any(t in " ".join(c) for c in CHECKS)]
+        if unmatched:
+            print(f"--only: no check's command line holds {unmatched}; --list names them")
+            return 1
+        checks = [c for c in CHECKS if any(t in " ".join(c) for t in args.only)]
 
     start = time.monotonic()
     with ThreadPoolExecutor(max_workers=min(8, os.cpu_count() or 4)) as pool:
-        results = list(pool.map(run, CHECKS))
+        results = list(pool.map(run, checks))
 
     failed = []
     for argv, rc, secs, out in results:
@@ -142,8 +157,9 @@ def main():
         print(f"\n--- {' '.join(argv)} ---")
         print("\n".join(out.strip().splitlines()[-25:]))
 
-    print(f"\n{len(CHECKS) - len(failed)} of {len(CHECKS)} checks passed "
-          f"in {time.monotonic() - start:.1f}s.")
+    print(f"\n{len(checks) - len(failed)} of {len(checks)} checks passed "
+          f"in {time.monotonic() - start:.1f}s."
+          + (f" PARTIAL RUN: {len(CHECKS) - len(checks)} checks not run (--only)." if args.only else ""))
     return 1 if failed else 0
 
 
