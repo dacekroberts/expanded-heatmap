@@ -278,13 +278,25 @@ OpenStreetMap data in the OpenMapTiles schema. The city maps do not use it.
   copyright page, CARTO's attribution page and openmaptiles.org, as CARTO's
   attribution page and the style's license ask.
 
-<!-- internal -->
-### The Travel basemap (pilot, not published): self-built Protomaps packs, Noto glyphs, a Cloudflare host
+### The Travel basemap: self-built Protomaps packs, Noto glyphs, a Cloudflare host
 
-Recorded 2026-10-08 on branch `basemap`, ahead of review time. Nothing below
-is live: the Travel view waits for the owner's go-live call (decision 19) and
-for a host. The reader-facing wording of this section is drafted at review
-time, when this block stops being internal.
+**The Travel basemap.** Each city map has a second base layer, Travel. Its
+map tiles are built by this project from OpenStreetMap data (© OpenStreetMap
+contributors, Open Database License 1.0) with the open-source Protomaps
+basemap builder, and stored as one file per city. Those files are offered
+under the same license: they, and the list of OpenStreetMap extracts each was
+built from, are at https://files.dacekroberts.dev (README.md and
+MANIFEST.csv). Map labels are drawn in Noto fonts (SIL Open Font License
+1.1); Noto is a trademark of Google LLC. The map is drawn with open-source
+software (MapLibre GL, maplibre-gl-leaflet and PMTiles); each license is
+published beside the files, at https://files.dacekroberts.dev/lib/licenses/.
+The map style is adapted from Protomaps' basemap style (BSD 3-Clause) and is
+this project's own version, not a Protomaps product.
+
+<!-- internal -->
+Recorded 2026-10-08 on branch `basemap`; live with the phase 2 landing
+(2026-10-12). The paragraph above is the owner's approved wording (P4,
+2026-10-11); the working record below stays internal.
 
 - **Tiles: built by this project, never fetched from a tile service.** Each
   city's pack (PMTiles, zoom 14, the stations' extent plus 10 km) is built
@@ -318,9 +330,14 @@ time, when this block stops being internal.
   Noto Project Authors") and the line "Noto is a trademark of Google LLC"
   beside it (owner, 2026-10-08). Han and Hangul are not in the glyph files;
   MapLibre draws them from the device's own fonts.
-- **Host: Cloudflare, not yet chosen or opened** (licence-read, 2026-10-08;
-  decision 12 compares R2 behind an owned domain with a Worker on
-  workers.dev). Governed by the Self-Serve Subscription Agreement (updated
+- **Host: Cloudflare R2 behind the owner's own subdomain,
+  `https://files.dacekroberts.dev`, with no Worker** (owner, 2026-10-12;
+  terms accepted 2026-10-11, the day the account was made; the free Worker
+  on workers.dev, the option compared, was not taken). The bucket answers
+  only the live app's origin and the local test ports (8501 and 8000 on
+  localhost and 127.0.0.1), sets no cookie, and keeps no raw request logs on
+  its plan, which notice 1's sentence relies on. Terms as read by
+  licence-read, 2026-10-08: governed by the Self-Serve Subscription Agreement (updated
   2025-09-12), which incorporates the Service-Specific Terms (updated
   2026-09-28) and the developer documentation's limits. R2 behind a custom
   domain and a Worker on workers.dev are both permitted with conditions; the

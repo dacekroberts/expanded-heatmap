@@ -705,7 +705,19 @@ _NOTICES = [
            # site the controller of the request data CARTO receives.
            "The overview map's basemap loads from CARTO, so your browser sends "
            "CARTO your IP address and browser details with each map request; "
-           "CARTO processes them for this site.",
+           "CARTO processes them for this site. "
+           # P5, approved by the owner 2026-10-11, the Cloudflare clause his of
+           # 2026-10-12 (DECISIONS, that date): the Travel view's file host. True
+           # only while the host sets no cookie, runs no Worker and keeps no
+           # request logs; re-read docs/data_sources.md, "The Travel basemap",
+           # before changing the host or its plan.
+           "Choosing Travel on a city map loads that city's map file and the map "
+           "software from files.dacekroberts.dev. This project sets no cookies "
+           "there and keeps no record of those requests. The files are delivered "
+           "through Cloudflare, which processes requests under its own privacy "
+           "policy. Nothing is loaded from that address until a visitor chooses "
+           "Travel; the choice is remembered on the visitor's own device, so the "
+           "next map opens the same way.",
            False, (), every_page=True),
     Notice(2, "City of Chicago",
      "This site provides applications using data that has been modified for "
