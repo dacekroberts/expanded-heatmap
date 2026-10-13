@@ -32,26 +32,26 @@
     "sha256": "fa15ee74737436baa3d6c3aaddec92b13c82db0ca8c88d321e631850814aaa52"
   },
   "osm_places": {
-    "bytes": 8231982,
-    "elements": 64131,
-    "file": "osm_places_2026-10-12.json",
-    "host": "overpass.kumi.systems",
-    "how": "kept (on disk from an earlier run)",
-    "osm_base": "2026-06-01T08:52:28Z",
+    "bytes": 8361027,
+    "elements": 65171,
+    "file": "osm_places_2026-10-13.json",
+    "host": "download.geofabrik.de (louisiana-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
     "query": "[out:json][timeout:170];\narea(id:3600131885)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
-    "retrieved": "2026-10-12T22:24:51+00:00",
-    "sha256": "b048d6cdc210ed8f85ac770c7d3a92e8d427c0213d46639a844f7ed022356db6"
+    "retrieved": "2026-10-13T09:26:52+00:00",
+    "sha256": "acc58b54b9fee9f0d312fb4b75566fc5c941747709e0ce0423919f195ef73032"
   },
   "osm_places_extra": {
-    "bytes": 37109,
+    "bytes": 37378,
     "elements": 132,
-    "file": "osm_places_extra_2026-10-12.json",
-    "host": "overpass-api.de",
-    "how": "kept (on disk from an earlier run)",
-    "osm_base": "2026-10-12T22:23:49Z",
+    "file": "osm_places_extra_2026-10-13.json",
+    "host": "download.geofabrik.de (louisiana-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
     "query": "[out:json][timeout:170];\narea(id:3600131885)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
-    "retrieved": "2026-10-12T22:25:59+00:00",
-    "sha256": "33c8d3225e16817fd6ae9a2f74ba214ca9106b20e4e26b5facad665205f3c475"
+    "retrieved": "2026-10-13T09:26:53+00:00",
+    "sha256": "13dfa87620dc3f822b6432e534e04eb441ee8ec17572da49518853cf4d9736e9"
   },
   "register": {
     "fields": [
