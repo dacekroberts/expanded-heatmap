@@ -1,21 +1,54 @@
 {
-  "fetched_utc": "2026-09-29T19:40:30+00:00",
-  "gtfs_url": "https://storage.googleapis.com/marduk-production/outbound/gtfs/rb_sky-aggregated-gtfs.zip",
-  "boundary_url": "https://api.kartverket.no/kommuneinfo/v1/kommuner/4601/omrade",
   "address_url": "https://nedlasting.geonorge.no/geonorge/Basisdata/MatrikkelenAdresse/CSV/Basisdata_4601_Bergen_4258_MatrikkelenAdresse_CSV.zip",
-  "subunits_url": "https://data.brreg.no/enhetsregisteret/api/underenheter/lastned/csv",
-  "units_url": "https://data.brreg.no/enhetsregisteret/api/enheter/lastned/csv",
-  "gtfs_self_attests": false,
+  "boundary_url": "https://api.kartverket.no/kommuneinfo/v1/kommuner/4601/omrade",
   "feed_info": {
     "feed_id": "ENTUR",
+    "feed_lang": "no",
     "feed_publisher_name": "Entur",
-    "feed_publisher_url": "https://www.entur.org",
-    "feed_lang": "no"
+    "feed_publisher_url": "https://www.entur.org"
   },
+  "fetched_utc": "2026-09-29T19:40:30+00:00",
   "files_utc": {
-    "rb_sky-aggregated-gtfs.zip": "2026-09-27T21:20:01+00:00",
     "Basisdata_4601_Bergen_4258_MatrikkelenAdresse_CSV.zip": "2026-09-27T21:20:01+00:00",
-    "underenheter.csv.gz": "2026-09-24T01:30:45+00:00",
-    "enheter.csv.gz": "2026-09-24T01:34:08+00:00"
-  }
+    "enheter.csv.gz": "2026-09-24T01:34:08+00:00",
+    "rb_sky-aggregated-gtfs.zip": "2026-09-27T21:20:01+00:00",
+    "underenheter.csv.gz": "2026-09-24T01:30:45+00:00"
+  },
+  "gtfs_self_attests": false,
+  "gtfs_url": "https://storage.googleapis.com/marduk-production/outbound/gtfs/rb_sky-aggregated-gtfs.zip",
+  "osm_place_outline": {
+    "bytes": 25295,
+    "elements": 1,
+    "file": "osm_place_outline_v1.json",
+    "host": "download.geofabrik.de (vestlandet-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:60];\narea(id:3600404159)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T19:25:21+00:00",
+    "sha256": "764ccd1f13354c8cdec2dba7eb8480eb0ddcfdd99d43822e1ea2ff9723cbc8a2"
+  },
+  "osm_places": {
+    "bytes": 20319953,
+    "elements": 220624,
+    "file": "osm_places_2026-10-13.json",
+    "host": "download.geofabrik.de (vestlandet-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3600404159)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T19:25:21+00:00",
+    "sha256": "c4230d88a1aced29c375e337ca46418828347a83996cdec9bc5be9a1bb446f55"
+  },
+  "osm_places_extra": {
+    "bytes": 138252,
+    "elements": 520,
+    "file": "osm_places_extra_2026-10-13.json",
+    "host": "download.geofabrik.de (vestlandet-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3600404159)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T19:25:22+00:00",
+    "sha256": "baafbdff79b4d3bc123b0ecc42641c200909d27cea2d8986b150544af3d85df1"
+  },
+  "subunits_url": "https://data.brreg.no/enhetsregisteret/api/underenheter/lastned/csv",
+  "units_url": "https://data.brreg.no/enhetsregisteret/api/enheter/lastned/csv"
 }

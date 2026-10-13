@@ -1,26 +1,59 @@
 {
-  "written_utc": "2026-10-07T07:51:51+00:00",
-  "register": {
-    "url": "https://ge.ch/sitg/geodata/SITG/OPENDATA/REG_ENTREPRISE_ETABLISSEMENT-CSV.zip",
-    "page": "https://sitg.ge.ch/donnees/reg-entreprise-etablissement",
-    "file": "REG_ENTREPRISE_ETABLISSEMENT-CSV.zip",
-    "bytes": 11344581,
-    "sha256": "45aff219dfe4bdd1e41eb386df7a25c24ab9cd7989ab5a9c98940b2fcfa3d616",
-    "fetched": "2026-10-04",
-    "zip_created": "04.10.2026 07:32:19.1061949",
-    "conditions": "https://sitg.ge.ch/ressources/conditions-utilisation-donnees"
-  },
   "osm": {
-    "host": "overpass-api.de",
-    "query": "[out:json][timeout:300];relation[\"type\"=\"route\"][\"route\"~\"^(tram|light_rail)$\"](46.15,6.03,46.25,6.26)->.r;relation[\"boundary\"=\"administrative\"][\"admin_level\"=\"8\"](46.15,6.03,46.25,6.26)->.b;.r out geom;(node(r.r);node[\"railway\"=\"tram_stop\"](46.15,6.03,46.25,6.26););out body;.b out geom;",
     "bbox": [
       46.15,
       6.03,
       46.25,
       6.26
     ],
+    "host": "overpass-api.de",
     "osm_base": "2026-10-07T07:49:43Z",
+    "query": "[out:json][timeout:300];relation[\"type\"=\"route\"][\"route\"~\"^(tram|light_rail)$\"](46.15,6.03,46.25,6.26)->.r;relation[\"boundary\"=\"administrative\"][\"admin_level\"=\"8\"](46.15,6.03,46.25,6.26)->.b;.r out geom;(node(r.r);node[\"railway\"=\"tram_stop\"](46.15,6.03,46.25,6.26););out body;.b out geom;",
     "sha256": "6e6ce8c2deb158d3e5fc8a797f2e9eb63c12ca22cf0f3963fbd706bbaab8c3e0"
   },
-  "osm_fetched_utc": "2026-10-07T07:51:51+00:00"
+  "osm_fetched_utc": "2026-10-07T07:51:51+00:00",
+  "osm_place_outline": {
+    "bytes": 253858,
+    "elements": 12,
+    "file": "osm_place_outline_v1.json",
+    "host": "download.geofabrik.de (switzerland-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:60];\narea(id:3601685451,3601685459,3601685465,3601685466,3601685472,3601685488,3601685502,3601685516,3601685520,3601685523,3601685534,3601685540)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T19:27:30+00:00",
+    "sha256": "8105e378740cd1cc03a61a832e3c3de30175de7ed310d0db47781aa74a5a05a6"
+  },
+  "osm_places": {
+    "bytes": 7452037,
+    "elements": 61853,
+    "file": "osm_places_2026-10-13.json",
+    "host": "download.geofabrik.de (switzerland-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3601685451,3601685459,3601685465,3601685466,3601685472,3601685488,3601685502,3601685516,3601685520,3601685523,3601685534,3601685540)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T19:27:30+00:00",
+    "sha256": "3f32bda34cbccf611b6c53c305769eeade85fbcc4d5a823ac8f689953c718e29"
+  },
+  "osm_places_extra": {
+    "bytes": 268050,
+    "elements": 586,
+    "file": "osm_places_extra_2026-10-13.json",
+    "host": "download.geofabrik.de (switzerland-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3601685451,3601685459,3601685465,3601685466,3601685472,3601685488,3601685502,3601685516,3601685520,3601685523,3601685534,3601685540)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T19:27:31+00:00",
+    "sha256": "7eb00add79bc307cddc882d6a546e8ab487ec7d88804f8040c8de03b0139d9b6"
+  },
+  "register": {
+    "bytes": 11344581,
+    "conditions": "https://sitg.ge.ch/ressources/conditions-utilisation-donnees",
+    "fetched": "2026-10-04",
+    "file": "REG_ENTREPRISE_ETABLISSEMENT-CSV.zip",
+    "page": "https://sitg.ge.ch/donnees/reg-entreprise-etablissement",
+    "sha256": "45aff219dfe4bdd1e41eb386df7a25c24ab9cd7989ab5a9c98940b2fcfa3d616",
+    "url": "https://ge.ch/sitg/geodata/SITG/OPENDATA/REG_ENTREPRISE_ETABLISSEMENT-CSV.zip",
+    "zip_created": "04.10.2026 07:32:19.1061949"
+  },
+  "written_utc": "2026-10-07T07:51:51+00:00"
 }

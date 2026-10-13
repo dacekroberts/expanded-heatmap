@@ -1,18 +1,51 @@
 {
-  "kbo": {
-    "file": "KboOpenData_0501_2026_10_03_Full.zip",
-    "bytes": 313432247,
-    "sha256": "3a5719a98c6396948f0dbc73caabec297bc873ccd3aad79a799b54ab2f705b97",
-    "source": "KBO/BCE Open Data, FPS Economy (kbopub.economie.fgov.be), full file of 2026-10-03, fetched by the owner under their own free account",
-    "retrieved": "moved from the main checkout root by staging, 2026-10-03"
-  },
   "best": {
-    "file": "openaddress-bebru.zip",
     "bytes": 17941521,
+    "file": "openaddress-bebru.zip",
+    "retrieved": "2026-10-03",
     "sha256": "f558a29d0e26e38ee30305a6b3d442a4d85814f2703462df1d76e4a76df24d76",
-    "source": "https://opendata.bosa.be/download/best/openaddress-bebru.zip",
-    "retrieved": "2026-10-03"
+    "source": "https://opendata.bosa.be/download/best/openaddress-bebru.zip"
   },
-  "stib_gtfs_and_communes": "pipeline/brussels/fetch_sources.py (the Brussels page's)",
-  "checked_utc": "2026-10-04T08:38:48+00:00"
+  "checked_utc": "2026-10-04T08:38:48+00:00",
+  "kbo": {
+    "bytes": 313432247,
+    "file": "KboOpenData_0501_2026_10_03_Full.zip",
+    "retrieved": "moved from the main checkout root by staging, 2026-10-03",
+    "sha256": "3a5719a98c6396948f0dbc73caabec297bc873ccd3aad79a799b54ab2f705b97",
+    "source": "KBO/BCE Open Data, FPS Economy (kbopub.economie.fgov.be), full file of 2026-10-03, fetched by the owner under their own free account"
+  },
+  "osm_place_outline": {
+    "bytes": 354218,
+    "elements": 18,
+    "file": "osm_place_outline_v1.json",
+    "host": "download.geofabrik.de (belgium-261008.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-08T20:21:06Z",
+    "query": "[out:json][timeout:60];\narea(id:3600058248,3600058249,3600058250,3600058252,3600058253,3600058254,3600058255,3600058256,3600058257,3600058258,3600058260,3600058262,3600058263,3600058264,3600060140,3600060144,3600060167,3600060168)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T19:31:39+00:00",
+    "sha256": "a3c29ebf8c0ce9fc352ea08c8231091ca5dce67be61e95c69706d4210dbd915d"
+  },
+  "osm_places": {
+    "bytes": 14443748,
+    "elements": 104545,
+    "file": "osm_places_2026-10-13.json",
+    "host": "download.geofabrik.de (belgium-261008.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-08T20:21:06Z",
+    "query": "[out:json][timeout:170];\narea(id:3600058248,3600058249,3600058250,3600058252,3600058253,3600058254,3600058255,3600058256,3600058257,3600058258,3600058260,3600058262,3600058263,3600058264,3600060140,3600060144,3600060167,3600060168)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T19:31:39+00:00",
+    "sha256": "50f0c471fa9f0bc5038cb1c6ef97f1ededd795a138dd4356c8aaba54a8bbef93"
+  },
+  "osm_places_extra": {
+    "bytes": 183089,
+    "elements": 593,
+    "file": "osm_places_extra_2026-10-13.json",
+    "host": "download.geofabrik.de (belgium-261008.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-08T20:21:06Z",
+    "query": "[out:json][timeout:170];\narea(id:3600058248,3600058249,3600058250,3600058252,3600058253,3600058254,3600058255,3600058256,3600058257,3600058258,3600058260,3600058262,3600058263,3600058264,3600060140,3600060144,3600060167,3600060168)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T19:31:39+00:00",
+    "sha256": "cb77de00a45bd6cd6891d932cfc8d5a2aed7b743da4f23fa92d490e468886287"
+  },
+  "stib_gtfs_and_communes": "pipeline/brussels/fetch_sources.py (the Brussels page's)"
 }
