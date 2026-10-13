@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**94 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**95 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -31,6 +31,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Place search: the owner's rulings on keep against drop, personal names, private streets and the typo line; NOT yet built](#2026-10-13---place-search-the-owners-rulings-on-keep-against-drop-personal-names-private-streets-and-the-typo-line-not-yet-built)
 - [Place search: where readers see what search leaves out; the rollout's own worktree; the id side file told to transit-globe (owner)](#2026-10-13---place-search-where-readers-see-what-search-leaves-out-the-rollouts-own-worktree-the-id-side-file-told-to-transit-globe-owner)
 - [Place search: an extract route beside Overpass, proved on two cities; wave 1 first on the main mirror; streets on a shared border queued (owner)](#2026-10-13---place-search-an-extract-route-beside-overpass-proved-on-two-cities-wave-1-first-on-the-main-mirror-streets-on-a-shared-border-queued-owner)
+- [Trams left off built maps: no longer parked, queued after the next landing (owner)](#2026-10-13---trams-left-off-built-maps-no-longer-parked-queued-after-the-next-landing-owner)
 
 **2026-10-12**
 
@@ -5151,3 +5152,21 @@ japan-city template:
   Revolución), which the rules build reports on by name.
 - `outputs/testville/`, empty and untracked since 2026-09-24, was deleted
   on the owner's word.
+
+### 2026-10-13 - Trams left off built maps: no longer parked, queued after the next landing (owner)
+
+- **The owner: "tram rescope should be another item after the next land".**
+  The rescope was parked on 2026-09-27 to save usage and, from 2026-10-04,
+  raised whenever the owner asked what was next. It is now a queued item:
+  it starts after the search-rules landing, behind nothing else the owner
+  has named.
+- **Still the owner's, city by city:** which lines are drawn. The
+  recommendations of `docs/tram_rescope_estimate.md` (2026-09-27) are the
+  starting list, to be re-checked before any build: the light batch with
+  Montreal's REM first, Paris T3a and T3b, a label and legend rule and a
+  Toronto pilot before Toronto, Milan and Prague, Barcelona likely,
+  Cablebus yes, Hong Kong Tramways out. Its usage estimate rests on one
+  session and is re-measured on the first batch.
+- The queue after the rules landing now holds two items: this, and keeping
+  streets on a shared municipal border once the extract route is in
+  production. Their order is not decided.

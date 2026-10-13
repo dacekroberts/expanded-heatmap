@@ -165,3 +165,8 @@ entry first; it is the specification.
   queue on `overpass-api.de` is done; then rerun with `--retry-failed`.
 - The owner is running the iPhone and Safari test of the landed features.
 - `outputs/testville/` is deleted.
+- **The tram rescope is no longer parked** (the owner, 2026-10-13: "tram
+  rescope should be another item after the next land"): queued after the
+  rules landing, beside the shared-border streets; order between the two
+  not decided. Re-check `docs/tram_rescope_estimate.md` and
+  `docs/tram_rescope_specs.md` before proposing a first batch.
