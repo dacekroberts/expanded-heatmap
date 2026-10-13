@@ -111,6 +111,27 @@ entry first; it is the specification.
 - transit-globe was told the id side file is ready; the cut-over message at
   wave 1's landing is still owed.
 
+## State after the owner's "run all open items" (2026-10-13, about 08:15Z)
+
+- **master = `f549e6a8`**: the two runner scripts, registered (70 of 70
+  checks). The area lookup's query has still never been answered by a live
+  mirror: a two-city trial timed out on `overpass.kumi.systems`, whose
+  status page took 79 s; `overpass-api.de` gave no answer.
+- **The night runner is running** from `.claude/worktrees/search-rollout`
+  (branch `search-rollout`), a background command of the Cleanup session,
+  `--max-hours 14`. Its files are in `data/_search_rollout/`: `waves.json`,
+  `plan.json`, `night_2026-10-13.md` (the morning report), `.json` (state),
+  `.log`. A rerun with the same state file resumes; lookups that failed
+  while the mirrors were down are only asked again by a rerun. Open before
+  its output is trusted: 36 draft-filled relations nobody confirmed, and
+  Japan auto-filled at admin level 7.
+- **The rules build is running** in a subagent on
+  `.claude/worktrees/search-rules` (branch `search-rules`), with wave 1's
+  four new gaps; its changed-row report goes to
+  `data/_place_rules_2026-10-13/build/changed_rows.md`, for the owner
+  before anything lands.
+- Wave 1 was told both (18 of 34 built, 23 fetched).
+
 ## Small open items
 
 - London's tile 2 of 12 is May 2026 data; the owner approved a refetch from
