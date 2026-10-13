@@ -162,9 +162,6 @@ PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
 PLACE_DROPPED = {
-    "way/1058368110": "'Bayshore Station', a duplicate beside the same thing's own row (owner, 2026-10-13)",
-    "relation/7657290": "'Kanata', a duplicate beside the same thing's own row (owner, 2026-10-13)",
-    "relation/14534637": "'Orléans', a duplicate beside the same thing's own row (owner, 2026-10-13)",
     "relation/7057829": "'Chapel Hill South', a duplicate beside the same thing's own row (owner, 2026-10-13)",
     "node/12170991637": "'Artillery Piece', a description standing in for a name (owner, 2026-10-13)",
     "way/1289234021": "'Helicopter', a bare type word for a name (owner, 2026-10-13)",

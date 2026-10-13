@@ -47,6 +47,19 @@
     "retrieved": "2026-10-13T09:20:46+00:00",
     "sha256": "9f07b882b9633a5e8894bee31140efaa556a184922f27631cd9dc9396d346b12"
   },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 231,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 2,
+    "ids_not_read": 0,
+    "ids_with_article": 0,
+    "ids_without_article": 2,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "ec1cf1258b1a84fdaed519b7d967924ccc49fbac8cd4799350a1c967da34fc5c"
+  },
   "sources": {
     "city": {
       "endpoint": "https://data.buffalony.gov/resource/qcyy-feh8.csv",

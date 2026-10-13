@@ -46,6 +46,19 @@
     "retrieved": "2026-10-13T09:57:21+00:00",
     "sha256": "22f9955c65d8aa2703c726361a912d250966dfa9343320ab7fd48e8e04ca3566"
   },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 990,
+    "file": "wikidata_articles_2026-10-12.json",
+    "host": "www.wikidata.org",
+    "ids": 9,
+    "ids_not_read": 0,
+    "ids_with_article": 5,
+    "ids_without_article": 4,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "f3ce7bbcce294015087ada76a0a2720f0f2f462b50f4ef963a56c922c1cf8279"
+  },
   "sources": {
     "feed": "https://opendata.ottawa.ca/inspections/yelp_ottawa_healthscores_FoodSafety.zip",
     "wards": "https://services.arcgis.com/G6F8XLCl5KtAlZ2G/arcgis/rest/services/Wards_2022_2026/FeatureServer/0/query"

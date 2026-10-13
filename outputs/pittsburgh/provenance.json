@@ -46,6 +46,19 @@
     "retrieved": "2026-10-13T06:11:41+00:00",
     "sha256": "f0fb2620c870de28a23cb47ecb60dd641bc37551a760c4af6cc7af2104a59f0a"
   },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 757,
+    "file": "wikidata_articles_2026-10-12.json",
+    "host": "www.wikidata.org",
+    "ids": 13,
+    "ids_not_read": 0,
+    "ids_with_article": 12,
+    "ids_without_article": 1,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "6573be5af20d5d3a7e7283850a718dc4bf838a64680a3c7dc1cf2833b5ba0c96"
+  },
   "register_date": "2025-08-27",
   "sources": {
     "food_facilities": {

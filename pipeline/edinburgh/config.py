@@ -178,8 +178,6 @@ PLACE_DROPPED = {
     "way/220274539": "'Centre Court', a court's label, not a name",
     "node/4768575847": "'Stone Arch', a description on a monument node",
     "node/360303994": "'Cup and Ring Marked Rocks', a description of the site's type",
-    "node/2317496550": "'The Chaplaincy', a bare type word",
-    "way/118329795": "'The Chaplaincy', a bare type word",
     "node/11181555589": "'Muslim Prayer Room', a bare type word",
     "node/13564998178": "'The Jellicoe Express -- 1917 - 2017', stray dashes and dates in the name, and the wikidata is the railway company's: a glitch",
     "node/13920130909": "'Juniper Green', a monument carrying the village's name; the suburb is its own row: a wrong object's name",

@@ -184,7 +184,6 @@ PLACE_DROPPED = {
     "way/154217734": "'Joseph Schneider Haus National Historic Site', a duplicate beside the same thing's own row (owner, 2026-10-13)",
     "node/7985356773": "'Shelmerdine Grave', a plaque or grave under a private person's name (owner, 2026-10-13)",
     "way/43352710": "'Zion United / Rockway Mennonite', a duplicate beside the same thing's own row (owner, 2026-10-13)",
-    "relation/2062154": "'Waterloo', the city boundary's center as a second place row beside the city's own: a duplicate (owner, 2026-10-13)",
     "way/385344932": "'243 Grey Silo Road', an address standing in for a street's name: a driveway, not a street",
     "way/385344933": "'243 Grey Silo Road', an address standing in for a street's name: a driveway, not a street",
     "way/385344950": "'243 Grey Silo Road', an address standing in for a street's name: a driveway, not a street",

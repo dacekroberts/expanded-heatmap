@@ -164,7 +164,6 @@ PLACE_DROPPED = {
     "node/4769764430": "'Old Ironstone Pit', one description on eight points",
     "node/4769764431": "'Old Ironstone Pit', one description on eight points",
     "node/4769755746": "'Pit No9', a code and a type word, unregistered",
-    "node/1178965392": "'William Ewart Gladstone State', the name is cut short: a glitch, not repaired",
     "way/221338076": "'Nelson Monument', a second drawing of the monument way/101931684, which stays",
     "node/3686170727": "'Robroyston House (site of)', the site of a vanished house (historic=site)",
     "way/1312996667": "'Access path to Easterhouse train station', a description as a street's name (owner, 2026-10-13)",

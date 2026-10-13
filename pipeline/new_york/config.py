@@ -357,7 +357,6 @@ PLACE_REVIEWED = {
     "Mount Vernon Hotel Museum": "a museum with its own article; \"Hotel\" is the historic building's name",
 }
 PLACE_DROPPED = {
-    "way/812938420": "'34th Street–Herald Square', a duplicate beside the same thing's own row (owner, 2026-10-13)",
     "relation/11171793": "'Grand Central Terminal', a duplicate beside the same thing's own row (owner, 2026-10-13)",
     "way/812714851": "'Pennsylvania Station', a duplicate beside the same thing's own row (owner, 2026-10-13)",
     "node/3039737083": "'16th Street', demolished or gone by its own tags or name (owner, 2026-10-13)",
@@ -444,8 +443,6 @@ PLACE_DROPPED = {
     "node/357635065": "'United We Stand Garden', a duplicate beside the same thing's own row (owner, 2026-10-13)",
     "node/2810116541": "'Saint Stephen's Methodist Episcopal Church', a duplicate beside the same thing's own row (owner, 2026-10-13)",
     "way/994049384": "'Memorial Field Park', a home",
-    "node/12835627251": "'The Sources of Music', an indoor artwork inside a venue, which keeps its own row (owner, 2026-10-13)",
-    "node/12835627250": "'Triumph of Music', an indoor artwork inside a venue, which keeps its own row (owner, 2026-10-13)",
     "way/578280392": "'PATH - 33rd Street entrance (closed)', not a street: another kind of object indexed as one",
     "way/578280393": "'PATH - 33rd Street entrance (closed)', not a street: another kind of object indexed as one",
     "way/578280394": "'PATH - 33rd Street entrance (closed)', not a street: another kind of object indexed as one",
@@ -671,7 +668,6 @@ PLACE_DROPPED = {
     "way/1416501146": "'Bronx State Hospital', a housing estate's own way, named for the estate",
     "way/1418624242": "'Bronx State Hospital', a housing estate's own way, named for the estate",
     "way/1418624243": "'Bronx State Hospital', a housing estate's own way, named for the estate",
-    "way/293082336": "'Beach Reservation', a housing estate's own way, named for the estate",
     "way/420900450": "'Edward L. Grant Highway', not a street: another kind of object indexed as one",
     "way/421842668": "'Edward L. Grant Highway', not a street: another kind of object indexed as one",
     "way/984188814": "'Edward L. Grant Highway', not a street: another kind of object indexed as one",

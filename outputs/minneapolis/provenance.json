@@ -46,6 +46,19 @@
     "retrieved": "2026-10-12T22:42:05+00:00",
     "sha256": "ab13fcdcced21e58866b063c29469f471d3d87c83eef95199f0a9949be93fe14"
   },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 1703,
+    "file": "wikidata_articles_2026-10-12.json",
+    "host": "www.wikidata.org",
+    "ids": 39,
+    "ids_not_read": 0,
+    "ids_with_article": 18,
+    "ids_without_article": 21,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "ecd58f4ebab45597f66874eae5129548382ea2b1f04cc87433d0a70fbcdbc7f1"
+  },
   "sources": {
     "food_inspections": {
       "endpoint": "https://services.arcgis.com/afSMGVsC7QlRK1kZ/arcgis/rest/services/Food_Inspections/FeatureServer/0/query",

@@ -55,6 +55,19 @@
     "retrieved": "2026-10-12T22:31:08+00:00",
     "sha256": "a478a0d084831e81918db76d61cbc3d7107739f2cf12d37fcebcbd5558694e93"
   },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 414,
+    "file": "wikidata_articles_2026-10-12.json",
+    "host": "www.wikidata.org",
+    "ids": 5,
+    "ids_not_read": 0,
+    "ids_with_article": 3,
+    "ids_without_article": 2,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "898a3234cee237d9a317510b6abeab8a4cbd1d1c3c5d69776241b2be57575a60"
+  },
   "register": {
     "data_date": "2026-01-15",
     "fields": [

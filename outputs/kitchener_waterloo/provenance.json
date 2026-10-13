@@ -49,6 +49,19 @@
     "retrieved": "2026-10-13T10:00:21+00:00",
     "sha256": "bf55602d5daea450cdf2e3d4a4a4e107713889ba13b7a82dc7ad634bd50d1e0c"
   },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 333,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 5,
+    "ids_not_read": 0,
+    "ids_with_article": 2,
+    "ids_without_article": 3,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "d23ab104a09265915fb647f031045e3f86024984066eb5933da02d2e6b49db3f"
+  },
   "sources": {
     "cities": "https://utility.arcgis.com/usrsvcs/servers/61a7a8d8775e4da381d9718658c0d842/rest/services/OpenData/OpenData/MapServer/15",
     "food_layer": "https://utility.arcgis.com/usrsvcs/servers/61a7a8d8775e4da381d9718658c0d842/rest/services/OpenData/OpenData/MapServer/17",

@@ -270,8 +270,6 @@ PLACE_REVIEWED = {
 }
 PLACE_DROPPED = {
     "node/4391233440": "'Farmer's Market', a business's own feature under its own name",
-    "way/784708483": "'Wilshire/La Brea', a duplicate beside the same thing's own row (owner, 2026-10-13)",
-    "way/784708484": "'Wilshire/La Brea', a duplicate beside the same thing's own row (owner, 2026-10-13)",
     "node/5365944604": "'Truck Scales', a description standing in for a name (owner, 2026-10-13)",
     "way/778092634": "'Lafayette Park Square', a gated community's own way, described",
     "way/441260319": "'B Squared Funding - Home Loans', a business's own feature under its own name",
