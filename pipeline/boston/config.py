@@ -284,6 +284,7 @@ PLACE_FOLD = None
 PLACE_REVIEWED = {
     "Ancient and Honorable Artillery Company Museum": "a museum (tourism=museum, Wikipedia); the Company is a militia company",
     "Massachusetts College of Pharmacy and Health Science": "a university (amenity=college, Wikipedia)",
+    "Central Parking Access Road": "a public secondary road at the airport, named for its function (owner, 2026-10-13: reviewed)",
 }
 PLACE_DROPPED = {
     "relation/17935032": "'Smith Court Residences', private residences, named as such, whatever their wikidata: homes",
@@ -301,4 +302,13 @@ PLACE_DROPPED = {
     "way/823307806": "'Sitting Grove', a description standing in for a name",
     "way/29791110": "'Supply', a use word as the whole name, kept only by its district's register number",
     "node/13809760118": "'Hyde Park Library, Cleary Square', a library and its address as a park's name",
+    "node/367779573": "'Huntington Theatre Company', the company's own node, 14 m from its theatre's row, which stays (owner, 2026-10-13)",
+    "way/96268219": "'The Green', an article and a type word: a bare type",
+    "way/345146747": "'The Grove', an article and a type word: a bare type",
+    "way/197735258": "'Service Road', a bare type as a street's name, and access=no on every way (owner, 2026-10-13)",
+    "way/197735260": "'Service Road', a bare type as a street's name, and access=no on every way (owner, 2026-10-13)",
+    "way/591677320": "'Service Road', a bare type as a street's name, and access=no on every way (owner, 2026-10-13)",
+    "way/1046209412": "'Service Road', a bare type as a street's name, and access=no on every way (owner, 2026-10-13)",
+    "way/1232128799": "'Service Road', a bare type as a street's name, and access=no on every way (owner, 2026-10-13)",
+    "way/1348342171": "'Doubletree', a hotel brand as a road's whole name: the business's own road",
 }

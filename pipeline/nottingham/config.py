@@ -196,4 +196,6 @@ PLACE_DROPPED = {
     "way/1100953705": "'Judges Retiring Room', a room's name on a museum building: a wrong object's name",
     "node/605141968": "'Nottingham Midland Station', a plaque carrying the station's name: a wrong object's name",
     "way/193747067": "'Stanford Hall Rehabilitation Estate', not open to the public",
+    "relation/5514628": "'Medieval village', a description standing in for a name; a bare type goes whatever the object carries (owner, 2026-10-13)",
+    "way/371452526": "'Moats & fishponds', a description standing in for a name; a bare type goes whatever the object carries (owner, 2026-10-13)",
 }

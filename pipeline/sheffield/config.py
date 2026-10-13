@@ -224,4 +224,11 @@ PLACE_DROPPED = {
     "way/22338566": "'Crabtree Grange Sheltered', sheltered housing's name on its own drive",
     "way/33719780": "'Brunswick Gardens Village', a retirement village's own road",
     "way/33758915": "'Brunswick Gardens Village', a retirement village's own road",
+    "way/134120847": "'Packhorse Bridge', a bare type word; a bare type goes whatever the object carries (owner, 2026-10-13)",
+    "way/532928315": "'Clock Tower', a bare type word; a bare type goes whatever the object carries (owner, 2026-10-13)",
+    "node/4098288054": "'Stone Circle', a bare type word; a bare type goes whatever the object carries (owner, 2026-10-13)",
+    "way/425751776": "'Rear Access To Deep Lane', a description as a street's name (owner, 2026-10-13)",
+    "way/27827397": "'Rear Access To Deep Lane', a description as a street's name (owner, 2026-10-13)",
+    "way/27827398": "'Rear Access To Deep Lane', a description as a street's name (owner, 2026-10-13)",
+    "way/847232420": "'Merchants Crescent, Exchange Street', two street names glued in one: a glitch (owner, 2026-10-13)",
 }
