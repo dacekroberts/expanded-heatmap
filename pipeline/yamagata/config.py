@@ -299,6 +299,11 @@ PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "node/8527320952": "a second node for one district name (owner, 2026-10-13)",
+    "node/8527285076": "a second node for one district name (owner, 2026-10-13)",
+    "node/8527320992": "a second node for one district name (owner, 2026-10-13)",
+    "node/8527285078": "a second node for one district name (owner, 2026-10-13)",
+    "node/8527320944": "a second node for one district name (owner, 2026-10-13)",
     "node/5644909123": "an English description standing in for a name, tagged a place of worship",
     "way/909125609": "a duplicate row: the same shrine is a row under its plain name at the same spot",
     "way/909125629": "a duplicate row: the same shrine is a row under its plain name at the same spot",

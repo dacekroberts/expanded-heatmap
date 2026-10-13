@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/yamagata.json",
-  "places": 1072,
+  "places": 1067,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.575,
+      "en": 0.573,
       "ja": 0.999
     },
     "list_share": 0.5,

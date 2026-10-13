@@ -143,7 +143,9 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("it",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
+PLACE_REVIEWED = {
+    "Museo dell'Officina Profumo - Farmaceutica di Santa Maria Novella": "a museum (owner, 2026-10-13)",
+}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
     "node/9687617360": "a freight yard, depot or operating point, not a passenger station (owner, 2026-10-13)",

@@ -236,9 +236,21 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("de",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
+PLACE_REVIEWED = {
+    "Shakespeare Company Berlin": "a theatre, not a firm (owner, 2026-10-13)",
+}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "way/779355298": "a housing complex (owner, 2026-10-13)",
+    "way/779355299": "a housing complex (owner, 2026-10-13)",
+    "way/11645391": "a generic path word as the whole name (owner, 2026-10-13)",
+    "way/23950137": "a generic path word as the whole name (owner, 2026-10-13)",
+    "way/24667659": "a generic path word as the whole name (owner, 2026-10-13)",
+    "way/40233852": "a generic path word as the whole name (owner, 2026-10-13)",
+    "way/47126304": "a generic path word as the whole name (owner, 2026-10-13)",
+    "way/58428733": "a generic path word as the whole name (owner, 2026-10-13)",
+    "way/59266966": "a generic path word as the whole name (owner, 2026-10-13)",
+    "way/266583999": "a generic path word as the whole name (owner, 2026-10-13)",
     "way/253364082": "a letter code beside a path type on minor ways",
     "way/217003490": "a letter code beside a path type on minor ways",
     "way/112844760": "a letter code beside a path type on minor ways",

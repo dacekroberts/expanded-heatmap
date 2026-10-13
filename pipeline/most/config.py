@@ -147,6 +147,8 @@ PLACE_FOLD = None
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "relation/1266525": "a whole name that is only a type word (castle); the object itself has an article (owner, 2026-10-13)",
+    "node/13894102732": "a bare quarter node doubling the district boundary row that already carries this short name (owner, 2026-10-13)",
     "node/13158629883": "a vanished object: a station closed in 1970, its site now under the lake",
 }
 # QUIET STATIONS (owner, 2026-10-13): stops inside the search area with

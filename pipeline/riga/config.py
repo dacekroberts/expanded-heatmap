@@ -200,7 +200,9 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("lv",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
+PLACE_REVIEWED = {
+    "Farmācijas muzejs": "a museum (owner, 2026-10-13)",
+}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
     "relation/13159520": "a dead railway alignment with no article",

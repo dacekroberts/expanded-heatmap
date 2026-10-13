@@ -276,6 +276,7 @@ PLACE_FOLD = None
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "node/2284244739": "a company's name on a building (owner, 2026-10-13)",
     "node/2417487842": "a numbered sculpture group carrying another work's article and none of its own",
     "node/2417487843": "a numbered sculpture group carrying another work's article and none of its own",
     "node/2417487844": "a numbered sculpture group carrying another work's article and none of its own",
