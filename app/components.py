@@ -6,6 +6,8 @@ identically on every page lives here once and gets called from each page,
 rather than duplicated per page.
 """
 
+import html
+import json
 import re
 import sys
 from pathlib import Path
@@ -13,7 +15,7 @@ from typing import NamedTuple
 
 import streamlit as st
 
-from cities import CITIES, DEFAULT_REGION, MAP_ONLY_NAV, REGIONS, SWITCHER_ORDER
+from cities import CITIES, DEFAULT_REGION, MAP_ONLY_NAV, MENU_GROUPS, REGIONS, SWITCHER_ORDER
 from osm_notice import OSM_RAIL_BY_CITY, osm_rail_text
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -57,8 +59,17 @@ def render_city_nav(current: str):
             # Keep this text: the maps' JS finds this link, and leaves it out of
             # the Cities menu, by "All cities" (pipeline/map_common.py).
             st.page_link(OVERVIEW_PAGE, label="All cities")
-            for city in SWITCHER_ORDER:   # grouped by country; see cities.py
-                st.page_link(city["page"], label=city["name"])
+            # The links in the menu's order, and the headers they fall under
+            # as one hidden element: [[header, number of links], ...] in the
+            # same order (cities.MENU_GROUPS). The map's menu reads both; a
+            # map rendered before the headers ignores the element and lists
+            # the links as they come.
+            groups = json.dumps([[header, len(members)] for header, members in MENU_GROUPS],
+                                ensure_ascii=False)
+            st.html(f'<span class="hm-city-groups" hidden data-groups="{html.escape(groups, quote=True)}"></span>')
+            for _header, members in MENU_GROUPS:
+                for city in members:
+                    st.page_link(city["page"], label=city["name"])
         return
     # A horizontal container sizes each item to its content and wraps onto a
     # second line when the row is too narrow; fixed-width columns clipped the

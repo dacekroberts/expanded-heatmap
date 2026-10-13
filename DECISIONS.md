@@ -20,11 +20,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**88 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**89 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
 - [The id side file for the travel app, built on the 19 searched cities (owner)](#2026-10-13---the-id-side-file-for-the-travel-app-built-on-the-19-searched-cities-owner)
+- [A picked street is drawn at its whole length, from a street lines side file; the ring is the failsafe (owner)](#2026-10-13---a-picked-street-is-drawn-at-its-whole-length-from-a-street-lines-side-file-the-ring-is-the-failsafe-owner)
 
 **2026-10-12**
 
@@ -4894,3 +4895,45 @@ japan-city template:
   - **Held by** `check_place_search.py`, rule I (the hash is this index's,
     rows ascending and in range and never a street, ids well formed), and by
     the place index drift check, which compares every file the step writes.
+
+### 2026-10-13 - A picked street is drawn at its whole length, from a street lines side file; the ring is the failsafe (owner)
+
+- **Asked and decided by the owner** ("can we make searching a street
+  without an intersection show the whole length of the street?"; then "yes
+  build it as a side file, measure all 19 first"; then, on the rows with no
+  line, "ring where line is not possible is a good failsafe, record").
+  - **What is built** (branch `street-lines`, on `map-rights`; NOT on
+    master, no index rebuilt, no map re-rendered): the index step writes
+    `app/static/places/streets/<city>.json`, each street row's ways joined
+    end to end and simplified by 10 m in the city's own CRS
+    (`place_index.chain_ways`, `street_lines`, `STREET_SIMPLIFY_M`). The
+    index names the file under its hash (`"streets"`, a key added, schema
+    still 1). The map fetches it at the first street picked and draws the
+    line in the ring's colours; the name label stays.
+  - **The failsafe.** The ring is drawn first and hidden only once a line is
+    on the map, so it stays when the index names no street file, when the
+    fetch fails, and for a row with no line.
+  - **Why a side file.** Measured on Seattle before building: the shapes are
+    larger than the whole index (330 KB gzipped against 230 KB), so in the
+    index they would have more than doubled what opening the search costs.
+  - **How accurate, as told to the owner: mostly, not totally.** A line is
+    what OSM names with exactly the row's name: it stops where the name
+    changes (a third of Seattle's street names, 3,707 of 11,117, share a
+    base with a direction-word sibling such as Pike Street and East Pike
+    Street), at the edge of the search area, and at any gap. Not counted:
+    bridges and ramps under their own name.
+  - **Measured on the 19 built cities** (the real step, written nowhere):
+    15.6 MB raw and 5.8 MB gzipped in all; London 2,841 / 1,094 KB, Mexico
+    City 2,732 / 997, São Paulo 2,412 / 870, the smallest Brussels 75 / 29.
+    Of about 254,000 street rows, 11 have no line (four in São Paulo, one
+    each in seven cities). The delta-integer encoding is 62% of plain
+    coordinates' bytes on Seattle.
+  - **Tested** on a local Seattle map in the browser: "Pike Street" and
+    "Rainier Avenue South" drawn, the ring's two paths hidden, the label
+    shown. Not tested: a phone, a failed fetch in a browser.
+  - **Held by** `check_place_search.py` rule J (the file is this index's;
+    every line inside its street row's extent; selftest 28 of 28).
+  - **For future waves:** the `place-street-lines` skill.
+  - **Open with the owner:** the line's colour, a "streets" link in the
+    credit line, 10 or 20 m for the three largest cities, and the word to
+    rebuild the 19.

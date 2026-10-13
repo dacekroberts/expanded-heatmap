@@ -272,17 +272,50 @@ _THEME_TOGGLE_TEMPLATE = """
             .split('/').filter(Boolean);
         return decodeURIComponent(parts.length ? parts[parts.length - 1] : '');
     }
+    // The headers the links fall under (owner, 2026-10-13: non clickable
+    // section headers): [[header, number of links], ...] in the links' own
+    // order, from one hidden element beside them (components.render_city_nav,
+    // cities.MENU_GROUPS). Each header is an optgroup, which no browser lets
+    // a reader pick. With no such element, or one that does not count the
+    // links it sits beside, the menu is the plain list.
+    function cityGroups(n) {
+        var el = window.parent.document.querySelector('.st-key-map-only-nav [data-groups]');
+        try {
+            var groups = JSON.parse(el.getAttribute('data-groups')), total = 0;
+            groups.forEach(function (g) { total += g[1]; });
+            return total === n ? groups : null;
+        } catch (e) { return null; }
+    }
+    // Built again whenever the links or their headers have changed since the
+    // last build: the app page draws its links one by one, and a menu filled
+    // while half of them were there stayed short, and without its headers.
+    var menuBuilt = null;
     function fillMenu() {
-        if (menu.options.length > 1) return;    // already built
         var here = lastSegment(window.parent.location.pathname);
         var links = cityLinks();
-        for (var i = 0; i < links.length; i++) {
-            var name = links[i].textContent.trim();
-            if (lastSegment(links[i].getAttribute('href')) === here) continue;
-            var o = document.createElement('option');
-            o.value = name; o.textContent = name;
-            menu.appendChild(o);
-        }
+        var groups = cityGroups(links.length);
+        var state = links.length + (groups ? ':headers' : ':plain');
+        if (state === menuBuilt) return;
+        menuBuilt = state;
+        while (menu.children.length > 1) menu.removeChild(menu.lastChild);
+        groups = groups || [[null, links.length]];
+        var i = 0;
+        groups.forEach(function (g) {
+            var into = menu;
+            if (g[0] !== null) {
+                into = document.createElement('optgroup');
+                into.label = g[0];
+            }
+            for (var end = i + g[1]; i < end; i++) {
+                var name = links[i].textContent.trim();
+                if (lastSegment(links[i].getAttribute('href')) === here) continue;
+                var o = document.createElement('option');
+                o.value = name; o.textContent = name;
+                into.appendChild(o);
+            }
+            // A header over nothing (this map's city was its only one) is left out.
+            if (into !== menu && into.children.length) menu.appendChild(into);
+        });
         menu.hidden = menu.options.length < 2;
     }
     function goTo(link) {

@@ -7125,3 +7125,36 @@ _region_rank = {
 # sorted() is stable, so countries sharing a region keep first-built order.
 COUNTRY_ORDER = sorted(_first_built, key=lambda k: _region_rank[k])
 SWITCHER_ORDER = [c for k in COUNTRY_ORDER for c in CITIES if c["country"] == k]
+
+# --- THE MAPS' "CITIES" MENU, UNDER HEADERS ----------------------------------
+#
+# The menu on every city map listed every other city in one run, 236 options
+# (owner, 2026-10-13: "non clickable divider section headers"). MENU_GROUPS is
+# that list under headers: [(header, [city, ...]), ...], countries in
+# COUNTRY_ORDER. A country whose cities sit in ONE region is one group under
+# its own name. A country in several regions (Japan's 13, the United States'
+# two) is a group per region, in REGION_ORDER, headed "Country · Region" with
+# the country's name taken off the front of the region's ("United States ·
+# West", "Japan · Kansai"): one header over Japan's 94 cities would divide
+# nothing. Cities keep build order inside a group. SWITCHER_ORDER is not
+# changed: the Overview's list and Why the Maps Differ read it.
+# MENU_LAST: countries listed after every other (owner, 2026-10-13: "put
+# japanese cities at the bottom since they are the largest group", 94 of the
+# 237), so a reader of any other country does not scroll past them.
+MENU_LAST = ("Japan",)
+MENU_SEPARATOR = " \u00b7 "
+
+
+def _menu_header(country, region):
+    rest = region[len(country):].strip() if region.startswith(country) else region
+    return country + MENU_SEPARATOR + rest[:1].upper() + rest[1:] if rest else country
+
+
+MENU_GROUPS = []
+for _k in sorted(COUNTRY_ORDER, key=lambda k: k in MENU_LAST):   # stable: the rest keep their order
+    _own = [c for c in CITIES if c["country"] == _k]
+    _regions = sorted({c["region"] for c in _own}, key=REGION_ORDER.index)
+    if len(_regions) == 1:
+        MENU_GROUPS.append((_k, _own))
+    else:
+        MENU_GROUPS += [(_menu_header(_k, r), [c for c in _own if c["region"] == r]) for r in _regions]

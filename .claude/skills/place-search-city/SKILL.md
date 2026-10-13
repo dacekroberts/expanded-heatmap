@@ -348,6 +348,12 @@ All quoted in the drafts file; the short list:
      junction, landmark and neighborhood row, by row position, with the
      sha256 of the index it describes. Commit it with the index; no browser
      fetches it. `check_place_search.py` I holds it to its index.
+   - **The index step also writes the street lines file**
+     (`app/static/places/streets/<city>.json`, owner 2026-10-13): a picked
+     street is drawn at its whole length, and the ring stays where no line
+     can be drawn. Commit it with the index and follow the
+     **`place-street-lines` skill** for the size line, rule J and the one
+     street to pick in the browser test.
    - **Look at the outline once**, in the browser test: open the search box
      and see that the dashed line holds every station and no stray island
      or missing municipality. The outline is exterior rings only, simplified
