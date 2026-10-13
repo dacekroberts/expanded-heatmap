@@ -53,6 +53,9 @@ st.markdown(
   meters past the boundary.
 - The lines are drawn in full, but mapping those stations would need each municipality's own
   premises data. They are listed below.
+- **The trams are not drawn: Trambaix (T1-T3) and Trambesòs (T4-T6).** They have 28 stops inside
+  Barcelona. Each is within about half a mile of a metro or funicular station already on the map,
+  so drawing them would bring no new storefront inside the rings.
 
 **The businesses**
 

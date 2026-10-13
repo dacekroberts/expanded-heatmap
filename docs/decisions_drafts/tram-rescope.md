@@ -2,6 +2,21 @@
 
 Newest first. Cleanup folds these into `DECISIONS.md` at review time.
 
+### 2026-10-13 - Mexico City (Regional): Cablebus and Mexicable both drawn (owner)
+
+- **The owner: "1. draw both"**, to "Draw both: one rule for cable cars on
+  one page, and Ecatepec's hill districts get rings", against drawing
+  Cablebus alone with a different stated reason for Mexicable. This
+  supersedes the Mexicable half of the call of 2026-10-04 ("Out, the
+  owner's call: ... Mexicable (a cable car)",
+  `docs/build_briefs/mexico_city_regional.md`); the Tren Suburbano and El
+  Insurgente stay out on commuter spacing. Toulouse's Téléo is the
+  precedent for a drawn cable car.
+- **Not yet verified, and the build checks each before drawing:** which
+  Mexicable lines are in revenue service and which of their stations fall
+  inside Ecatepec and Naucalpan; each system's own line names, colors and
+  station counts; the cable geometry.
+
 ### 2026-10-13 - Tram rescope: Barcelona's trams stay out, the page to say why (owner); Cablebus measured
 
 - **Barcelona, the owner: "2 leave it out" and "and state why"**, to the

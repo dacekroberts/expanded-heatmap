@@ -65,8 +65,8 @@ among them - Marseille draws its three Tramway lines beside its two Métro
 lines, and Toulouse draws T1 beside Métro A and B. Where a tram network is left
 out, the city already has a metro and the trams run over the top of it: Milan's
 17 tram routes stop a block or two apart and the agency publishes no color for
-any of them, and Barcelona's tram falls outside the network-identity test that
-picks out its metro. San Francisco's cable cars are out as a different mode. Its
+any of them, and Barcelona's 28 tram stops inside the city all sit within about
+half a mile of a metro or funicular station. San Francisco's cable cars are out as a different mode. Its
 F Market & Wharves streetcar, once left out as a separately branded service, is
 drawn for its waterfront, as Rome's tram 8, Madrid's Metro Ligero line 1, Paris's
 T3a and T3b and Montréal's REM are drawn for districts their metros do not reach.
