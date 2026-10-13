@@ -812,13 +812,4 @@ PLACE_DROPPED = {
     "way/700015259": "'Dry Dock No. 4', a numbered building of a register district, a bare type and a number for a name (owner, 2026-10-13)",
     "way/700015253": "'Dry Dock No. 5', a numbered building of a register district, a bare type and a number for a name (owner, 2026-10-13)",
     "way/700015256": "'Dry Dock No. 6', a numbered building of a register district, a bare type and a number for a name (owner, 2026-10-13)",
-    "way/285931554": "'Riverside Hospital', abandoned or ruined by its own tags, with no article of its own (owner, 2026-10-13)",
-    "node/368043220": "'Pellman Cottage', abandoned or ruined by its own tags, with no article of its own (owner, 2026-10-13)",
-    "node/14240435231": "'Orchard', abandoned or ruined by its own tags, with no article of its own (owner, 2026-10-13)",
-    "node/11422250390": "'Ruins of Seton Hospital', abandoned or ruined by its own tags, with no article of its own (owner, 2026-10-13)",
-    "node/2210392629": "'Van Cortlandt Station ruins', abandoned or ruined by its own tags, with no article of its own (owner, 2026-10-13)",
-    "way/363319119": "'Nike Silo', abandoned or ruined by its own tags, with no article of its own (owner, 2026-10-13)",
-    "way/285103711": "'Power Plant 3', abandoned or ruined by its own tags, with no article of its own (owner, 2026-10-13)",
-    "node/10160790355": "'Miller Highway Remnant', abandoned or ruined by its own tags, with no article of its own (owner, 2026-10-13)",
-    "way/284856408": "'Observation Towers', abandoned or ruined by its own tags, with no article of its own (owner, 2026-10-13)",
 }
