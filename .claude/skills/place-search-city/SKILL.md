@@ -92,6 +92,15 @@ marked TO BUILD name a script that does not exist yet.
    Paris) and compare before any new city relies on it. Place names from
    OpenStreetMap may go to an outside model; nothing from a business
    register may, and no key enters the repository.
+   **Which model reads what (owner, 2026-10-13):** the `place-read` agent
+   on the session's top model for station, junction, place and landmark
+   rows; a Sonnet-tier `place-read` (the Agent tool's `model: sonnet`) for
+   the street screen, one city per call. Measured on Birmingham, Boston and
+   Tacoma against wave 1's applied drops: Sonnet found 34 of 38 dropped
+   street names and 43 of 77 dropped ids, Haiku 15 of 38 and 32 of 77. The
+   test indexes predated the rules of 2026-10-13, which now drop several of
+   the missed classes; re-measure before moving the place and landmark rows
+   to a lower tier. Haiku reads nothing.
 6. **Visitable former homes are left out of the rollout**: the home rule
    already keeps homes out, and `PLACE_VISITABLE` is added later for the
    cities the owner names.
@@ -284,6 +293,36 @@ All quoted in the drafts file; the short list:
 - **A removed object is dropped by id** (owner, 2026-10-11, Hong Kong's
   Pillar of Shame): a search must not move the map to a place where the
   thing is not.
+- **The rules of 2026-10-13 (landed 86aadced) made rules of what the eye
+  read used to drop by id.** `docs/place_search_exclusions.md` is the record
+  of every class left out, with its rule and date: read it before a read,
+  and add a row there in the same commit as any new class. What changes for
+  a builder:
+  - **Not there is a rule now**, not an id: a landmark or place demolished,
+    razed, removed or abandoned by its own tags goes (`lifecycle`), a closed
+    station goes (`station_closed`), a ride tagged a station goes
+    (`station_ride`). The rule reads the tags narrowly, so a vanished thing
+    the tags do not mark is still a `PLACE_DROPPED` id. A `PLACE_DROPPED` id
+    that matches no row after a rebuild is expected: remove the entry.
+  - **A place that stands and is closed for works is kept by id** in
+    `config.PLACE_CLOSED_FOR_WORKS` (owner, 2026-10-13: a Paris museum, a
+    Seattle library branch and a playground). Read every row the not-yet-open
+    test drops in a new city for this class; no tag separates them.
+  - **A grave or a plaque needs a Wikipedia article of its own**
+    (`grave_or_plaque`, `own_article`); a Wikidata entry alone admits none,
+    and an article that is the person's is not the grave's. Statues, busts
+    and public memorials are untouched. Where the tags cannot say whose the
+    article is, the row stays as it was: do not decide those by eye.
+  - **Private streets go by rule** on residential and unclassified ways too
+    (`street_public`), with busways and race tracks (`street_real`) and
+    minor-way streets named by a description (`street_description`). A way's
+    own article keeps one.
+  - **A tram stop's platforms are one row** (`PLATFORM_MERGE_M`); an
+    interchange stays two.
+  - **A district with an article of its own is a neighborhood**, so read the
+    rows `added` lists for a county or district that only borders the city
+    and drop it by id (Prague's two).
+  - **Misspelled names are never corrected**; the page says so.
 - **A station OSM draws as not yet open is no station**, and is recorded in
   `docs/place_search_unopened_stations.json` (owner, 2026-10-11: an internal
   watch file, never page text). A station leaves the file when OSM marks it

@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**99 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**108 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -36,6 +36,15 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Place search: the owner's two fixes to the changed-row report (three places closed for works kept, two counties by Prague dropped)](#2026-10-13---place-search-the-owners-two-fixes-to-the-changed-row-report-three-places-closed-for-works-kept-two-counties-by-prague-dropped)
 - [Place search: the owner's rulings of 2026-10-13 built on a branch, the 19 indexes rebuilt, every changed row reported; NOT landed](#2026-10-13---place-search-the-owners-rulings-of-2026-10-13-built-on-a-branch-the-19-indexes-rebuilt-every-changed-row-reported-not-landed)
 - [Place search: the rules of 2026-10-13 approved for landing, with two row fixes and the page section (owner)](#2026-10-13---place-search-the-rules-of-2026-10-13-approved-for-landing-with-two-row-fixes-and-the-page-section-owner)
+- [Place search: the top model reads places and landmarks, Sonnet screens streets (owner)](#2026-10-13---place-search-the-top-model-reads-places-and-landmarks-sonnet-screens-streets-owner)
+- [Place search rollout: shared-border streets next, batches tonight, tram-rescope cities held as the last batch (owner)](#2026-10-13---place-search-rollout-shared-border-streets-next-batches-tonight-tram-rescope-cities-held-as-the-last-batch-owner)
+- [Place search from regional extracts (branch place-extract)](#2026-10-13---place-search-from-regional-extracts-branch-place-extract)
+- [Extract route landed with its five border extras; San Francisco and the tram rescope (owner)](#2026-10-13---extract-route-landed-with-its-five-border-extras-san-francisco-and-the-tram-rescope-owner)
+- [Correction: five tram rescopes were already built and landed on 2026-09-27](#2026-10-13---correction-five-tram-rescopes-were-already-built-and-landed-on-2026-09-27)
+- [Search rollout: Madrid runs in wave 7, Toronto stays held (owner)](#2026-10-13---search-rollout-madrid-runs-in-wave-7-toronto-stays-held-owner)
+- [Search rollout: Rome runs in its normal wave (owner)](#2026-10-13---search-rollout-rome-runs-in-its-normal-wave-owner)
+- [Several regional extracts read as one (branch multi-region)](#2026-10-13---several-regional-extracts-read-as-one-branch-multi-region)
+- [Extract route: sets of regions landed; what the proof does and does not show (owner)](#2026-10-13---extract-route-sets-of-regions-landed-what-the-proof-does-and-does-not-show-owner)
 
 **2026-10-12**
 
@@ -5269,3 +5278,355 @@ japan-city template:
   typed word finds a misspelled name was not sized; the shared-Wikidata
   threshold of two (48 more rows) and the roman-road landmark rows are
   measured only.
+
+### 2026-10-13 - Place search: the top model reads places and landmarks, Sonnet screens streets (owner)
+
+- **The test.** Three cities wave 1 had read on the top model (Birmingham,
+  Boston, Tacoma) were read again by the `place-read` agent at two lower
+  tiers, from indexes as they stood before wave 1's drops, and scored
+  against the drops wave 1 applied. Dropped ids found, of 77: Sonnet 43,
+  Haiku 32. Dropped street names found, of 38: Sonnet 34, Haiku 15.
+- **What Sonnet missed:** 9 of Birmingham's 17 abandoned canals, plaques
+  named by a description, Boston's demolished and never-built rows, a
+  company's own node. Haiku missed 10 of Tacoma's 13 street names.
+- **The owner, to the recommendation "keep the top model for the place and
+  landmark rows, and let Sonnet do the street screen": "recommendation for
+  models sounds good".** Recorded in the `place-search-city` skill, step 5.
+- **Limits.** The test indexes predate the rules landed the same day
+  (86aadced), which drop gone places and bare type words before any read,
+  so the gap on a rules-built index is smaller and was not measured. Homes
+  could not be scored: wave 1's drop files do not mark which drops were
+  homes. Both tiers flagged far more rows than wave 1 dropped (Sonnet 671
+  across the three cities); those were not judged row by row.
+
+### 2026-10-13 - Place search rollout: shared-border streets next, batches tonight, tram-rescope cities held as the last batch (owner)
+
+- **Order after the rules landing, the owner: "2. shared border streets, we
+  should get the search batches going now that we have an efficient system.
+  could potentially finish all cities overnight".** Shared-border streets
+  (a way on the border of two searched municipalities is in neither area
+  under Overpass's test, so its street is missing) is built before the tram
+  rescope, in the extract route, so the wave rebuilds carry it. It changes
+  built indexes, so the rule-change protocol applies: a changed-row report
+  for the 19 built cities before it lands.
+- **The tram rescope runs in parallel, and its cities wait, the owner: "tram
+  rescope cities should be left out as a final batch, as we work on tram
+  rescope in parallel with the other batches beginning".** Held out of the
+  waves until their rescope lands: Madrid (wave 7), Rome and Milan (the
+  new-language wave), Toronto (in no wave yet). Already searched on master
+  and rebuilt after their rescope instead: Montreal, Paris, Barcelona,
+  Mexico City, Prague. San Francisco is in wave 1, already read on its
+  branch: whether it lands with wave 1 or waits is asked of the owner. Hong
+  Kong's tramways stay out of the rescope, so Hong Kong is not held.
+- **"Overnight" is a hope, not a measurement:** the extract route's timing
+  table is not in yet, the eye read per city is the slow step, and landings
+  are batched at review time.
+
+### 2026-10-13 - Place search from regional extracts (branch place-extract)
+
+- **Built the extract route as two files: a general reader and this project's
+  caller.** `pipeline/osm_extract.py` holds everything another project could
+  lift (region choice from the server's `index-v1.json`, the download and its
+  conduct, area polygons with holes, the area tests, a parser for Overpass
+  union statements, the three-pass read, Overpass's output shapes);
+  `pipeline/place_extract_fetch.py` reads `place_index_fetch.py`'s three
+  queries as written and writes the three place caches. Rejected: a second
+  copy of the query as Python predicates (the prototype's form), because a
+  union line changed in one file would not reach the other. The caller
+  instead parses the union text and exits when a query's shape outside its
+  union changes. `scripts/place_extract_compare.py` is the proof's report.
+- **Proved it with the production code on four cities, extracts dated
+  2026-10-08T20:21Z against Overpass caches of the same day.** Tbilisi:
+  13,229 street ways, 79,174 street nodes and 2,218 tagged elements identical
+  in id, tags, node lists and position; index 5,686 rows identical. Seattle
+  (11 municipalities): 47,809 of 47,810 street ways identical, 2 tag
+  differences both edited after the Overpass date (node/29546940 at 09:47Z,
+  way/521303400 at 18:20Z), 2 objects only in the extract. Brussels: 5,752
+  street ways and 1,389 tagged elements identical, 2 ways only in the
+  extract. Kyoto (area by tag filter): 5,739 street ways and 13,570 tagged
+  elements identical apart from 3 tag edits dated after the Overpass date, 2
+  ways only in the extract, one of them edited at 17:52Z. No element of any
+  Overpass answer was absent from the extract's.
+- **Found the cause class of the unexplained objects, not the mechanism, and
+  did not tune for them.** Five unedited objects in four cities are in the
+  extract's answer and not Overpass's, and every one lies on the boundary:
+  Seattle's way/428075842 has one node 3.6 mm inside Kent's line (under the
+  1e-7 degree grid) and three on it; way/32544404 shares 16 of 19 nodes with
+  Redmond's boundary and cuts up to 2.5 m inside between two of them;
+  Brussels' way/14193701 clips a corner for 2 cm with every node outside and
+  way/35272078 runs 0.3 m inside between boundary nodes; Kyoto's
+  way/45249938 runs 32 m through a corner with all 17 nodes outside. No
+  boundary way, node or relation of Seattle's eleven was edited after
+  Overpass's areas date (2026-10-07T10:19Z), which rules out the
+  edited-boundary reading. Of the 12 street ways the line test alone admits
+  in the four cities Overpass returned 9, and neither length inside nor
+  depth separates the 9 from the 3 (1.7 m inside returned, 32 m not), so no
+  threshold was added. How Overpass decides these is not established.
+- **Changed rule 5 on a measured difference: a center's latitude is averaged
+  the way Overpass holds it.** The prototype's comparison allowed 1.5e-7
+  degrees and so hid that `round((lo + hi) / 2, 7)` printed 121 of Tbilisi's
+  772 center latitudes one last digit off (389 of the 772 are exact halves in
+  the 8th decimal). Averaging latitudes as doubles offset by 91 degrees, and
+  longitudes plainly, matched all 772; it then matched every center of
+  Seattle, Brussels and Kyoto with no further change. The reason given for
+  the offset (Overpass's stored form) is from memory of its source, not read
+  today.
+- **Chose ascending id as the one written order, and measured what it does to
+  the index.** Street ways, their nodes, then nodes, ways and relations, each
+  by id. Overpass's `qt` order is not reproduced. Re-ordering the Overpass
+  caches themselves this way changes 0 of Tbilisi's 5,686 rows, 5 of
+  Seattle's 13,426 (which of two same-name landmark ways is kept), 0 of
+  Brussels' 2,059 and 158 of Kyoto's 9,331 (155 junctions whose English
+  alias comes from a differently capitalised street name, 3 landmarks). A
+  city refetched by the extract route will therefore show such rows as
+  changed against its Overpass-built index.
+- **Decided what the fetch does with caches and provenance.** A cache on disk
+  is never written over without `--force`, whoever wrote it, and a kept
+  cache's provenance entry is left as it was rather than re-recorded as
+  kept. `--out DIR` writes all three elsewhere and records nothing (the
+  proof's route). `PLACE_SPLIT` is unused and said so. `PLACE_AREA` as tag
+  filters is answered from boundary and multipolygon relations only; an
+  area made from a closed way is taken by its id (2400000000 + the way's
+  id) and outlined as a way with geometry; a relation's own tags are never
+  consulted when it is named by id.
+- **Set the download's conduct in code, with no override.** A dated file once
+  downloaded and since removed is refused by a ledger
+  (`data/_osm_extracts/downloads.json`); the only way past is to edit the
+  ledger by hand. One download at a time on the machine
+  (`osm_extract.DownloadLock`), so two runs sharing a regional file are
+  safe. Defaults: `place_extract_fetch.py --max-mb 1000`, the lookup's
+  `--max-mb 800`. Updating a region by diffs is not built.
+- **Gave the area lookup a second source, and left Overpass the default.**
+  `scripts/place_search_area_lookup.py --source extract` reads
+  `osm_extract.boundaries_holding` from the smallest region holding all of a
+  city's stations; a city whose smallest covering region has subregions is
+  left for a person. A held extract of any age is used. A relation the
+  extract holds only part of (the country, sometimes the state) is not
+  answered and is listed in the cache. Added `--cache-root` so a trial
+  leaves a city's raw folder untouched; the proof's caches are under
+  `data/_osm_extracts/build_test/lookup/`, none under any `data/<city>/raw/`.
+- **Confirmed both official-code tag keys on real data.** `ref:INSEE` tied
+  Strasbourg (67482) and Mulhouse (68224) in alsace-261012; `IBGE:GEOCODIGO`
+  tied Porto Alegre (4314902) in sul-261012, and the six relations chosen
+  carry exactly the six codes of that config's `SCOPE_CODES`. Each key was
+  checked in one region only. Belgian municipalities carry `ref:INS` (Antwerp
+  11002, Liège 62063, equal to those configs' NIS codes): not added to
+  `CODE_TAGS`, a change for the owner.
+- **Lookup results on eight cities with no search, all right by their own
+  configs:** Tacoma (relation 8348295, level 8), Kobe (900329, level 7,
+  `MUNICIPALITY`), Otsu (722196), Antwerp (59518), Liège (1681788),
+  Strasbourg (71033), Mulhouse (38246), Porto Alegre and its five neighbors
+  (242397, 242399, 242471, 242574, 242616, 242778). On built cities the
+  returned set held every relation `PLACE_AREA` names (Tbilisi 1 of 1,
+  Seattle 11 of 11, Brussels 1 of 1, Kyoto 1 of 1). Brussels' stations also
+  sit in Ixelles and Saint-Josse-ten-Noode at level 8, which its
+  `PLACE_AREA` does not name: for the owner, not changed.
+- **Did not call DeepSeek.** The `deepseek-delegate` skill requires the
+  owner's yes before every call to its wrapper, and a build agent cannot
+  obtain one. The offline compatibility check passed (claude 2.1.296, 9 of 9
+  settings). Nothing was sent.
+- **PROPOSAL for review time (a reference-doc sentence no template covers):**
+  the bullet "A second route to the same OpenStreetMap data: regional
+  extracts from download.geofabrik.de" added to `docs/data_sources.md`'s
+  place search section, written from the 2026-10-13 licence read. Also new:
+  the `osm-extract` skill and the alternative named in `place-search-city`
+  step 3, which does not make the extract route the default.
+
+### 2026-10-13 - Extract route landed with its five border extras; San Francisco and the tram rescope (owner)
+
+- **The landing, the owner: "1 yes"**, to "Land the extract route on master
+  now, with the five border extras as they are?". The five are the unedited
+  ways the extract returns and Overpass does not (Seattle 2, Brussels 2,
+  Kyoto 1), each cutting inside a municipal line by 4 mm to 32 m; nothing
+  Overpass returned is missing. Not tuned for; the mechanism on Overpass's
+  side is not established.
+- **Overpass stays the default route in the scripts.** Cleanup's
+  recommendation, extract first for a batch or a slow mirror and Overpass for
+  a one-off small city, was shown with the timing table; the owner answered
+  the landing and has not ruled on the default.
+- **San Francisco, the owner: "2 rebuild after rescope".** It lands with
+  wave 1 and is rebuilt after its tram rescope, as Paris, Montreal,
+  Barcelona, Mexico City and Prague are.
+- **The tram rescope gets a session of its own** ("tram rescope can get its
+  own session"), from a handoff prompt Cleanup writes.
+- **Not verified at this landing:** a full city fetch that picks and
+  downloads its own region (the path ran live only through the lookup); the
+  reason for the 91-degree latitude averaging is from memory of Overpass's
+  source; DeepSeek was not called.
+
+### 2026-10-13 - Correction: five tram rescopes were already built and landed on 2026-09-27
+
+- **Three entries of this date describe the light batch and Paris as still
+  to build. They were wrong.** Montreal's REM (c8c1c53a), Rome's tram 8
+  (eedeb329), Madrid's ML1 (5f9106e5), Paris T3a and T3b (821ca1a9) and San
+  Francisco's F Market (f3e051d7) were built on 2026-09-27 and merged at
+  be2e3713; all six commits are ancestors of origin/master, and the
+  committed maps carry the lines' labels. The tram rescope session found it
+  on its first check; Cleanup had repeated a parked-work note without
+  checking the log, and gave the owner a scope that listed done work.
+- **What is left of the rescope:** Barcelona TRAM (color rule) and Mexico
+  City Cablebus (coordinates) after their checks; Toronto, Milan and Prague
+  after a label and legend rule and a Toronto pilot; Hong Kong Tramways out.
+  Rome's tram 3, back in service since 2026-09-07 by the watch item, is an
+  open question with the owner in the tram session.
+- **What it changes for the search rollout:** no index rebuild is owed for
+  trams in Montreal, Paris or San Francisco. Madrid has nothing left to
+  rescope; whether it leaves the held batch is asked of the owner. Rome
+  stays held until the tram 3 answer. Barcelona, Mexico City and Prague are
+  rebuilt after theirs, if and when they change.
+- **Stale and not corrected here:** `docs/tram_rescope_estimate.md`
+  ("Nothing is rescoped") and `docs/plan_detail/city_watch.md` ("In
+  progress: specs"); the tram session corrects both on its branch.
+
+### 2026-10-13 - Search rollout: Madrid runs in wave 7, Toronto stays held (owner)
+
+- **Madrid, the owner: "madrid wave 7 yes".** Its ML1 has been on master
+  since 2026-09-27 and nothing is left to rescope, so it leaves the held
+  batch.
+- **Toronto, the owner: "toronto decided on"**, to the question whether it
+  stays held out of wave 1's landing until its rescope is settled, as the
+  ruling on tram-rescope cities says. Read as: the ruling stands. Toronto is
+  in wave 1's queue (an earlier entry of this date says it is in no wave,
+  which was wrong); wave 1 may fetch it and does not build, read or land it.
+- **Held as the last batch now:** Rome (until the tram 3 answer), Milan and
+  Toronto.
+
+### 2026-10-13 - Search rollout: Rome runs in its normal wave (owner)
+
+- **The owner: "rome can run in normal wave".** The tram session reported
+  that the owner parked Rome's trams (2, 3, 5, 14, 19) as one decision after
+  2026-11-23, none drawn before, so Rome's rail is final until then. A later
+  tram build rebuilds its index.
+- **Held as the last batch now:** Milan and Toronto.
+- The run started today skips Rome (`--skip-cities rome,milan,toronto`); it
+  is added back on the next rerun, not by interrupting this one.
+
+### 2026-10-13 - Several regional extracts read as one (branch multi-region)
+
+- **Built the owner's "proper fix" for a search area that crosses a region
+  border: the reader takes the few small regions that together cover the
+  area and reads them as one.** `osm_extract.choose_regions` keeps ONE region
+  whenever one covers the area and either nothing else meets it or its file
+  is under the cap; otherwise it takes the smallest set by total bytes, at
+  most four regions (`SET_MAX_REGIONS`), each under the cap. Sizes come from
+  HEAD requests, so nothing is downloaded to learn a size. Rejected: raising
+  the cap to the parent region (us-northeast is 1,803,892,540 bytes for a
+  city that needs 512,803,904), and merging files on disk with a second tool
+  (a new dependency and a second copy of the data). Four was chosen as the
+  limit because Philadelphia needs two and no measured city more than two;
+  an area needing five is nearer a country than a city and is left for a
+  person. Files: `pipeline/osm_extract.py`, `pipeline/place_extract_fetch.py`,
+  `scripts/place_search_area_lookup.py`.
+- **Decided a set must be ONE snapshot, bound 0 seconds
+  (`SET_MAX_SPREAD_S`).** Measured on the 23 extracts held that day: every
+  file of one daily run states the same timestamp to the second (19 at
+  2026-10-12T20:21:35Z, 4 at 2026-10-08T20:21:06Z), and two runs are a day
+  apart, so no bound between zero and a day separates anything. A day was
+  rejected because an object moved across the cut between two snapshots can
+  be in neither file, which no comparison of copies detects. `download_set`
+  therefore completes a set at the date most of it is already held at (the
+  server keeps several days of dated files), which is also the fewest
+  downloads; every file still goes through `download_extract`, one at a
+  time, never one in the ledger.
+- **Decided what to do with two copies of one object, and refused to guess.**
+  An extract keeps whole every way and relation that crosses its cut, so the
+  files of a set overlap. Equal copies: the first is kept. A copy holding
+  fewer of its nodes' positions: the fuller one, since a cut-short copy is
+  incomplete, not different. Two full copies that differ: the read stops and
+  names the object and both files (`osm_extract._Once`). Rejected: taking the
+  higher version, because files of one snapshot cannot differ and a
+  difference means the set is not what its timestamps claim. On the real
+  files every shared object was an equal copy: 122 for Philadelphia (63
+  boundary member ways, 35 ways, 20 relations, 2 nodes, the boundary relation
+  and one member node).
+- **Proved the set on Philadelphia with real files, and found the second
+  file added nothing.** us/new-jersey (164,191,466 bytes) + us/pennsylvania
+  (348,612,438), both dated 261012. The outline assembled from the two files
+  equals the Overpass outline cache on disk (relation 188022, 168 members,
+  geometry, tags and bounds identical; Overpass data 2026-10-13T06:19:51Z).
+  The answer was 27,683 street ways, 153,170 street nodes, 3,420 tagged
+  elements and 458 extra. Read from pennsylvania ALONE with the scope checks
+  off, the answer is the same, byte for byte: the 0.0002% of the area inside
+  New Jersey's polygon is river. **The acceptance bar set for this work,
+  nothing in the Overpass answer missing from the set's, was NOT tested for
+  the two place caches: Philadelphia has no Overpass place cache on disk
+  (only its outline), us-northeast was not on disk, and no Overpass request
+  was allowed.** 346.8 s with both downloads, peak 1,625 MB (pennsylvania
+  alone: 118 s, 1.05 GB); the Korean sets peaked at 2,136 MB after a first
+  try in the same process (south-korea alone: 0.97 GB). A set's memory is
+  more than its largest file's alone; the cause was not looked into.
+- **Found Washington D.C. is not a multi-region city under its current
+  config.** `PLACE_AREA` on branch search-wave1 is the District's relation
+  alone (162069), which us/district-of-columbia (21,028,680 bytes, held
+  since another session's download) covers by itself; Maryland's and
+  Virginia's polygons overlap it by 0.5% and 4.0% but the one region is under
+  the cap, so it is taken. The changed reader's answer from that file is
+  byte-equal to the caches the unchanged code wrote that day (16,074 street
+  ways, 113,347 street nodes, 1,892 tagged, 630 extra): the single-region
+  path did not move. A regional D.C. area with Maryland and Virginia
+  municipalities would be a three-file set (not downloaded, not tested).
+- **Decided an area reaching past its region's polygon is one of two cases,
+  told apart by the index (asked for by the rollout session after Gimpo and
+  Incheon stopped).** The part outside lies in ANOTHER region: that region
+  joins the set, however small the part. The part lies in NO other region
+  (open sea): the region is accepted as water-side overflow when the part is
+  at most 1% of the area (`OVERFLOW_MAX_SHARE`) and every boundary closed
+  from the files read; the size is printed and recorded in the cache's
+  source line and `_extract.stats.overflow`. A region larger than the one
+  read (its country, its continent) does not count as "another region".
+  Measured: Gimpo 0.04 km2 outside south-korea (0.014% of 294.8 km2) and
+  Incheon 8.82 km2 (0.089% of 9,906.4 km2), and BOTH lie inside north-korea's
+  polygon (the Han estuary), so both are sets, not overflow: north-korea
+  (92,675,862 bytes, downloaded once) + south-korea (held). Gimpo: 4,904
+  street ways, 75,007 street nodes, 422 tagged, 136 extra, 21 objects in both
+  files, all equal. Incheon: 15,971 street ways, 126,760 street nodes, 2,508
+  tagged, 529 extra, 98 in both files, all equal. Neither city has an
+  Overpass place cache, so counts only; each set's answer equals
+  south-korea's alone byte for byte (scope checks off). One percent is
+  ten times the largest measured mismatch; **no overflow over open sea has
+  been measured, so the bound is untested on a real city** and is to be
+  re-measured on the first one accepted.
+- **Decided the command chooses again, once, when the region was chosen from
+  stations and the area then read reaches into another region.** Without an
+  outline cache the area is unknown until the boundary is read; the run
+  stops with `AreaPastRegion` and `place_extract_fetch.cli` repeats the
+  choice from the area as read. Rejected: probing every city's boundary
+  before choosing (a cost on every city for a rare case). Gimpo's first try
+  cost 10.7 s.
+- **Added the refusal the rollout session asked for: a cache KEPT on disk is
+  held to the current `config.PLACE_AREA`.** The area comes from the cache's
+  provenance entry when that entry names the file, else from the query the
+  cache carries; ids in another order are the same area. A different area
+  exits non-zero naming both, before anything is written; a cache recording
+  no area is kept with a printed warning.
+- **Changed the area lookup: a city whose stations span two regions is read
+  from the set, where it was left for a person.** It uses the same
+  `choose_regions`; a relation cut at one file's edge is whole across the
+  set. This also means a city spanning regions is now answered from its one
+  covering region when that file is under the cap, which the earlier rule
+  ("never from a file with subregions") did not allow. The lookup's cap is
+  1000 MB, as the fetch's (raised on search-rollout the same night).
+
+### 2026-10-13 - Extract route: sets of regions landed; what the proof does and does not show (owner)
+
+- **The owner, to the two-region reader for areas that cross a region's
+  edge: "proper fix for DC sounds good"**, after allowing the 1.8 GB
+  us-northeast file once for Philadelphia ("yes allowed for philadelphia").
+  With sets landed Philadelphia reads from new-jersey plus pennsylvania
+  (513 MB together), so the large file is not needed and was not
+  downloaded by Cleanup; wave 1 is told.
+- **What the proof shows:** a set's answer equals the single file's byte for
+  byte wherever both can be read (Philadelphia against pennsylvania alone
+  with the scope checks off; Gimpo and Incheon against south-korea alone);
+  Philadelphia's outline equals its Overpass outline cache; 122 objects held
+  by both files were equal copies.
+- **What it does not show:** no set was compared with an Overpass answer
+  (Philadelphia, Gimpo and Incheon have no Overpass place caches), no
+  three-file set was read, and the 1% bound on overflow that no region
+  covers has met no real city.
+- **Found by the rollout run the same night and built with it:** Gimpo and
+  Incheon reach 0.04 and 8.82 km2 past the south-korea region, into the
+  north-korea region's polygon, and now read as a set of the two.
+- **Also in this landing:** a kept cache whose recorded area differs from
+  `config.PLACE_AREA` is refused, not kept (wave 1's Buffalo finding), and
+  the lookup's size cap matches the fetch's at 1,000 MB.

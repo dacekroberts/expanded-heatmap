@@ -84,10 +84,12 @@ if hasattr(sys.stdout, "reconfigure"):
 KNOWN_GAPS = {}
 
 
-def check_coverage(slug, index, stations, known=None):
-    """H for one city: problems, given its index and its map's stations."""
+def check_coverage(slug, index, stations, known=None, lines=None):
+    """H for one city: problems, given its index, its map's stations and
+    its streets' polylines (place_index.decode_lines), which cover a station
+    a long street runs past though the street's one row point is far off."""
     known = KNOWN_GAPS if known is None else known
-    bare = place_index.uncovered_stations(index["rows"], stations)
+    bare = place_index.uncovered_stations(index["rows"], stations, lines=lines)
     if bare and slug not in known:
         return [f"H: {len(bare)} map station(s) with no indexed place within {place_index.COVER_KM:g} km "
                 f"({', '.join(bare[:6])}): config.PLACE_AREA does not cover the whole map"]
@@ -362,7 +364,10 @@ def main():
         if stations is None:
             unread.append(slug)
         else:
-            p += check_coverage(slug, index, stations)
+            stpath = place_index.streets_path(slug)
+            lines = (place_index.decode_lines(json.loads(stpath.read_text(encoding="utf-8")).get("lines", []))
+                     if stpath.exists() else None)
+            p += check_coverage(slug, index, stations, lines=lines)
     for page in sorted((ROOT / "app" / "pages").glob("*.py")):
         if BULLET in page.read_text(encoding="utf-8"):
             problems.setdefault(page.name, []).append(
@@ -450,15 +455,24 @@ def selftest():
         ok += got == want
         print(f"  {'ok ' if got == want else 'BAD'} {label}: {got} problem(s)")
     near = [[2, 10.001, 20.001, "a street", "", 0]]
+    far = [[2, 10.045, 20.0, "a long road", "", 0]]
+
+    def road(dlon):
+        return [(9.95, 20.0 + dlon), (10.05, 20.0 + dlon)]
     cover_cases = [
         ("a station with a place beside it", near, [("A", 10.0, 20.0)], {}, 0),
         ("a station past the index's edge", near, [("A", 10.0, 20.0), ("B", 10.3, 20.0)], {}, 1),
         ("only another station nearby is no cover", [[0, 10.0, 20.0, "A", "", 0]], [("A", 10.0, 20.0)], {}, 1),
         ("a known gap is reported, not failed", near, [("B", 10.3, 20.0)], {"x": "dated"}, 0),
         ("a known gap that has closed", near, [("A", 10.0, 20.0)], {"x": "dated"}, 1),
+        # A road 10 km long whose row point is 5 km off passes 100 m from the
+        # station (Ottawa's Bowesville); the same road 2 km away is no cover.
+        ("a long street passing the station, its point far off", far, [("A", 10.0, 20.0)], {}, 0, [road(0.001)]),
+        ("a long street 2 km from the station", far, [("A", 10.0, 20.0)], {}, 1, [road(0.02)]),
+        ("no street lines given: the row points decide", far, [("A", 10.0, 20.0)], {}, 1, None),
     ]
-    for label, rows, stations, known, want in cover_cases:
-        got = len(check_coverage("x", dict(base, rows=rows), stations, known))
+    for label, rows, stations, known, want, *rest in cover_cases:
+        got = len(check_coverage("x", dict(base, rows=rows), stations, known, lines=rest[0] if rest else None))
         ok += got == want
         print(f"  {'ok ' if got == want else 'BAD'} {label}: {got} problem(s)")
     current = "function getIndex(u) { window.parent.location.pathname; fetch(abs(u), opt) }"
