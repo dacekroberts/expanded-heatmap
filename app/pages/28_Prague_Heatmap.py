@@ -65,8 +65,7 @@ if PROVENANCE_JSON.exists():
         pass
 
 # Approved by the owner 2026-09-24; set as bullets 2026-10-01. The lines bullets and the
-# ring share were redrafted for the tram rescope (2026-10-13) and are a DRAFT until the
-# owner approves them.
+# ring share were redrafted for the tram rescope and approved by the owner 2026-10-13.
 st.markdown(
     """
 **The lines**

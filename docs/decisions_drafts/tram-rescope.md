@@ -2,6 +2,21 @@
 
 Newest first. Cleanup folds these into `DECISIONS.md` at review time.
 
+### 2026-10-13 - Tram rescope: the owner signs off Prague's page text and label form, and Toronto's and Mexico City's page text
+
+- **Owner, 2026-10-13:** "i sign off on all the waiting on you items
+  (unless my version of label comma is grammatically incorrect)". The
+  items put to the owner were: Prague's page text (The lines bullets, the
+  "more than eight storefronts in ten" sentence, the Overview blurb), the
+  label comma, and the page text of Toronto and Mexico City.
+- **The label comma stays as built**, "Trams 2, 18, & 24". A comma before
+  an ampersand is not a grammatical error; it is a style choice (the
+  Chicago Manual drops it, "2, 18 & 24"). Reported to the owner as that,
+  with the one-line change in `config.tram_group_name` if they prefer the
+  other.
+- With Milan approved earlier the same day, all four rescoped cities'
+  page text is approved. Landing is Cleanup's, at review time.
+
 ### 2026-10-13 - Tram rescope: Prague's trams are drawn in ten groups (owner), built on the branch; the page text is a draft
 
 - **Owner, 2026-10-13:** "1 yes" to the ten groups of the entry below, and
