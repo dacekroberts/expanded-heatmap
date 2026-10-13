@@ -20,12 +20,13 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**89 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**90 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
 - [The id side file for the travel app, built on the 19 searched cities (owner)](#2026-10-13---the-id-side-file-for-the-travel-app-built-on-the-19-searched-cities-owner)
 - [A picked street is drawn at its whole length, from a street lines side file; the ring is the failsafe (owner)](#2026-10-13---a-picked-street-is-drawn-at-its-whole-length-from-a-street-lines-side-file-the-ring-is-the-failsafe-owner)
+- [The maps' Cities menu under non clickable headers, Japan last (owner)](#2026-10-13---the-maps-cities-menu-under-non-clickable-headers-japan-last-owner)
 
 **2026-10-12**
 
@@ -4937,3 +4938,29 @@ japan-city template:
   - **Open with the owner:** the line's colour, a "streets" link in the
     credit line, 10 or 20 m for the three largest cities, and the word to
     rebuild the 19.
+
+### 2026-10-13 - The maps' Cities menu under non clickable headers, Japan last (owner)
+
+- **Decided by the owner** ("could we make collapsible region groups within
+  the list: or non clickable divider section headers?"; then "non clickable
+  headers sounds good"; then "also put japanese cities at the bottom since
+  they are the largest group").
+  - **Why headers and not collapsing groups.** The menu is the browser's own
+    dropdown, 236 cities in one run. A native dropdown takes headers
+    (optgroup) and cannot collapse; collapsing means a custom panel inside
+    the map, a larger build with more to get right on a phone.
+  - **The grouping** (`cities.MENU_GROUPS`, 43 headers): a country in one
+    region is one group under its name; a country in several regions is a
+    group per region, "Country · Region" ("United States · West", "Japan ·
+    Kansai"), because one header over Japan's 94 cities divides nothing.
+    The split is this session's choice, told to the owner, not yet answered.
+    Japan's 13 groups come last (`MENU_LAST`). `SWITCHER_ORDER` is unchanged.
+  - **How.** The app page writes the headers and their link counts in one
+    hidden element beside the hidden city links; the map's menu reads both.
+    A map rendered before this lists the links plainly, in the new order.
+  - **A fault found on the way and fixed:** the menu was built once and kept,
+    so one filled while the page had drawn only some links stayed short. It
+    is now rebuilt whenever the links or headers have changed.
+  - **Tested** on a local Seattle page: 43 headers, 236 options, Seattle
+    itself left out. Not tested: an iPhone's picker, Safari on a Mac.
+  - **Held** on branch `street-lines`; needs the full re-render and a reboot.
