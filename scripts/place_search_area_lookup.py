@@ -114,7 +114,7 @@ SOURCES = ("overpass", "extract")
 # The largest regional file the extract source downloads without a person
 # (--max-mb), and the age of a held extract it accepts: any. Boundaries are
 # stable, the reason an Overpass answer of any date is accepted above.
-EXTRACT_MAX_MB = 800
+EXTRACT_MAX_MB = 1000
 EXTRACT_ANY_AGE_DAYS = 36500
 # The area id of a relation is this plus its id (config.PLACE_AREA).
 AREA_BASE = 3600000000
@@ -953,8 +953,8 @@ def selftest():
             ex_calls.append((method, name))
             if method == "HEAD" and "-latest" in name:
                 return 302, {"Location": url.replace("-latest", "-260107")}, None
-            # The country's file states 900 MB to a HEAD: over the 800 MB cap.
-            size = 900 * 2 ** 20 if name.startswith("alphaland") else len(east_bytes)
+            # The country's file states 1,200 MB to a HEAD: over the 1,000 MB cap.
+            size = 1200 * 2 ** 20 if name.startswith("alphaland") else len(east_bytes)
             return 200, {"Content-Length": str(size)}, (ExBody(east_bytes) if method == "GET" else None)
 
         local = functools.partial(real_extract, extract_root=ex_root, out=lambda text: None,

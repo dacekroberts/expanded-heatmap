@@ -489,8 +489,47 @@ def regions_meeting(index, geom):
     return sorted(out, key=lambda t: t[0]["properties"]["id"])
 
 
-def choose_regions(index, geom, size_of, *, max_bytes=None, max_regions=SET_MAX_REGIONS):
+def _larger(big, small):
+    """True when polygon `big` holds polygon `small` but for a sliver: a
+    country to its state, a continent to its country. The index's polygons
+    are drawn separately, so a strict covers() can fail by a hair."""
+    return small.difference(big).area <= 1e-3 * small.area
+
+
+def beyond(index, geom, features, pool=None):
+    """(rest, [region id, ...]): the part of `geom` outside the polygons of
+    `features` taken together, and the OTHER regions that hold data there,
+    by id. A region larger than one of `features` (its country, its
+    continent) is not another region: it is the larger download the set
+    stands in for. With no other region, nothing short of that larger
+    download holds data in `rest`: open sea, or a gap in the index. `pool`
+    is [(feature, polygon)] to look in instead of the whole index."""
+    from shapely.geometry import shape
+    from shapely.ops import unary_union
+    mine = [shape(f["geometry"]) for f in features]
+    rest = geom.difference(unary_union(mine))
+    if rest.is_empty:
+        return rest, []
+    chosen = {f["properties"]["id"] for f in features}
+    others = []
+    for f, shp in (regions_meeting(index, rest) if pool is None else pool):
+        if f["properties"]["id"] in chosen or any(_larger(shp, m) for m in mine):
+            continue
+        part = shp.intersection(rest)
+        if part.area > 0 or (rest.area == 0 and not part.is_empty):
+            others.append(f["properties"]["id"])
+    return rest, sorted(others)
+
+
+def choose_regions(index, geom, size_of, *, max_bytes=None, max_regions=SET_MAX_REGIONS, max_uncovered=0.0):
     """([feature, ...], why) for the extract(s) that answer for `geom`.
+
+    `max_uncovered` (a share of the geometry's area, 0 by default) lets a
+    region or a set stand although a part of the geometry that small lies
+    outside it, when NO other region holds data there (beyond()): a
+    municipality whose boundary runs out to sea past the region's polygon.
+    A part another region holds is never passed over: that region joins
+    the set. `why` then states the share.
 
     ONE region whenever one will do: the smallest region covering the
     geometry, when no other region meets it (the usual case, decided with no
@@ -527,11 +566,28 @@ def choose_regions(index, geom, size_of, *, max_bytes=None, max_regions=SET_MAX_
                   f"{mb(cap)} cap")
     sized = [(f, shp, size_of(f)) for f, shp in partial]
 
+    left = {}
+
+    def holds(combo):
+        """True when the regions of `combo` cover the geometry, or leave
+        out no more than `max_uncovered` of it where no other region holds
+        data."""
+        if unary_union([shp for _, shp, _ in combo]).covers(geom):
+            return True
+        if not max_uncovered or not geom.area:
+            return False
+        rest, others = beyond(index, geom, [f for f, _, _ in combo], pool=partial)
+        share = rest.area / geom.area
+        if others or share > max_uncovered:
+            return False
+        left[tuple(f["properties"]["id"] for f, _, _ in combo)] = share
+        return True
+
     def best(rows):
         found = None
-        for n in range(2, max_regions + 1):
+        for n in range(1, max_regions + 1):
             for combo in combinations(rows, n):
-                if unary_union([shp for _, shp, _ in combo]).covers(geom):
+                if holds(combo):
                     key = (sum(size for _, _, size in combo), n, [f["properties"]["id"] for f, _, _ in combo])
                     if found is None or key < found[0]:
                         found = (key, combo)
@@ -543,8 +599,13 @@ def choose_regions(index, geom, size_of, *, max_bytes=None, max_regions=SET_MAX_
     found = best([row for row in sized if row[2] <= cap])
     if found is not None:
         (total, _, _), combo = found
+        share = left.get(tuple(f["properties"]["id"] for f, _, _ in combo))
+        outside = "" if share is None else (f"; {share:.3%} of it lies outside, where no other region of the "
+                                            f"index holds data (water-side overflow, accepted)")
+        if len(combo) == 1:
+            return [combo[0][0]], f"{passed}; {listed(combo)} holds it{outside}"
         return [f for f, _, _ in combo], (f"{passed}; the smallest set of regions that together cover it: "
-                                          f"{listed(combo)}, {mb(total)} in all")
+                                          f"{listed(combo)}, {mb(total)} in all{outside}")
     over = best(sized)
     if over is not None:
         raise NoRegionSet(f"No region or set of regions under the cap covers the whole geometry: {passed}, "
@@ -1802,6 +1863,29 @@ def selftest():
         four, _ = chosen(box(0.5, 0, 3.5, 1), idx=strips, table=dict({f"s{i}": 10 for i in range(5)}, country=2000))
         case("set choice: four regions are taken, more than four are refused",
              four == ["s0", "s1", "s2", "s3"] and why and "More than 4 regions" in why)
+        coast = {"features": [strip("country", -10, 1.99), strip("country/west", -10, 1.2),
+                              strip("country/east", 1.2, 1.99)]}
+        coast_weigh = {"country": 2000, "country/west": 300, "country/east": 200}
+
+        def coastal(geom, share):
+            got_, why_ = choose_regions(coast, geom, lambda f: size_of(f, coast_weigh), max_bytes=1000 * mbytes,
+                                        max_uncovered=share)
+            return [f["properties"]["id"] for f in got_], why_
+        ids, why = coastal(merged, 0.01)
+        rest, others = beyond(coast, merged, coast["features"][1:])
+        case("overflow: a part of the area outside every region (0.51% of it, open sea) is accepted under the "
+             "bound, and said; with no bound, or a tighter one, it is refused",
+             ids == ["country/east", "country/west"] and "0.510% of it lies outside" in why and others == []
+             and abs(rest.area - 0.01) < 1e-9 and abs(merged.area - 1.96) < 1e-9
+             and stopped(lambda: coastal(merged, 0.0)) and stopped(lambda: coastal(merged, 0.004)))
+        ids, why = coastal(box(0, 0, 1.21, 1), 0.01)
+        case("overflow: a part another region holds is never passed over, however small: that region joins the set",
+             ids == ["country/east", "country/west"] and "lies outside" not in why
+             and beyond(coast, box(0, 0, 1.21, 1), coast["features"][1:2])[1] == ["country/east"])
+        ids, why = coastal(box(1.5, 0, 2.0, 1), 0.05)
+        case("overflow: one region with a small part at sea is taken alone, its country is not 'another region'",
+             ids == ["country/east"] and "2.000% of it lies outside" in why
+             and beyond(coast, box(1.5, 0, 2.0, 1), coast["features"][2:])[1] == [])
         case("set choice: a geometry no region meets is refused",
              "no set of them does" in (stopped(lambda: chosen(box(50, 50, 51, 51))) or ""))
 

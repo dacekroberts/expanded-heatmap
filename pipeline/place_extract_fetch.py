@@ -3,7 +3,7 @@ on this machine: the second route beside pipeline/place_index_fetch.py's
 Overpass queries, for the same three caches in the same shape. NOT a step:
 drift_check.py never runs this file.
 
-    python pipeline/place_extract_fetch.py <city> [--force] [--pbf FILE [--pbf FILE ..]] [--out DIR] [--max-mb N]
+    python pipeline/place_extract_fetch.py <city> [--force] [--pbf FILE] [--out DIR] [--max-mb N]
     python pipeline/place_extract_fetch.py --selftest
 
 It answers place_index_fetch.py's OUTLINE_QUERY, QUERY and EXTRA_QUERY, read
@@ -36,10 +36,20 @@ on Tbilisi and Seattle, 2026-10-13 (osm-extract skill, "The proof").
     most osm_extract.SET_MAX_REGIONS) whose polygons together cover the
     area is taken instead, each file under --max-mb and each downloaded
     under the same rules, all of one dated run. The run says which set and
-    why. Several --pbf name a set by hand. A set whose files do not state
-    one data timestamp is refused; the cache's data date is that timestamp
-    and its provenance names every file. One region is still taken whenever
-    one under the cap covers the area.
+    why. --pbf given more than once names a set by hand. A set whose files
+    do not state one data timestamp is refused; the cache's data date is
+    that timestamp and its provenance names every file. One region is still
+    taken whenever one under the cap covers the area.
+  * AN AREA REACHING PAST ITS REGION'S POLYGON (2026-10-13; Gimpo and
+    Incheon stopped on it). Two cases, told apart by the index. The part
+    outside lies in ANOTHER region (both Korean cities: the Han estuary is
+    inside north-korea's polygon): that region joins the set, and when the
+    first region was chosen from the stations alone the command chooses
+    again from the area it has just read, once. The part outside lies in NO
+    other region (open sea): the region or set is accepted when that part
+    is no more than OVERFLOW_MAX_SHARE of the area and every boundary
+    closed from the files read; the run prints its size, and the cache's
+    source line and "_extract" record it. Anything larger stops.
   * A way-made area and a relation that has lost its boundary tags are both
     taken by id: the area never depends on a boundary's tags.
   * FRESHNESS: the place caches are refused from an extract whose own
@@ -92,6 +102,35 @@ EXTRA_SHAPE = '[out:json][timeout:N];\narea{area}->.a;\n(\n<UNION>\n);\nout tags
 OUTLINE_SHAPE = '[out:json][timeout:N];\narea{area}->.a;\n(\n<UNION>\n);\nout geom;\n'
 OUTLINE_UNION = "  rel(pivot.a);\n  way(pivot.a);"
 STREETS = 'way["highway"]["name"](area.a)->.w;'
+# The largest share of a search area that may lie outside the region(s) read
+# when no other region of the index holds data there (water-side overflow).
+# Measured 2026-10-13, the share of each area outside its region's polygon:
+# Philadelphia 0.0002% (state line in the Delaware), Gimpo 0.01% (0.04 km2),
+# Incheon 0.09% (8.83 km2 of 9,906); all three lay in a neighbouring region
+# and went to a set, so NO overflow over open sea has been measured yet. One
+# percent is ten times the largest of those: room for a coastline drawn a
+# little differently, and far under what a wrong file or a hole in the index
+# over land would leave out. Re-measure on the first coastal city accepted.
+OVERFLOW_MAX_SHARE = 0.01
+# The area a run read from an extract before stopping on AreaPastRegion, by
+# city, and what the last region choice was made from: cli() chooses again
+# from the area, once.
+_AREA_READ, _LAST = {}, {}
+
+
+class AreaPastRegion(SystemExit):
+    """The search area reaches past the region(s) read, into another
+    region of the index. `geom` is the area as read."""
+
+    def __init__(self, message, geom):
+        super().__init__(message)
+        self.geom = geom
+
+
+def km2(geom):
+    """Geodesic area in square kilometres (WGS84)."""
+    import pyproj
+    return abs(pyproj.Geod(ellps="WGS84").geometry_area_perimeter(geom)[0]) / 1e6
 _UNION = re.compile(r"\(\n(.*?)\n\);", re.S)
 
 
@@ -204,13 +243,20 @@ def choose_extract(config, root=EXTRACT_ROOT, out=print, max_mb=None, transport=
     its outline cache when one is on disk, else its stations. When that
     region's file is over `max_mb` and the area crosses a region border, the
     smallest set of regions that together cover it, as an ExtractSet
-    (osm_extract.choose_regions has the rule). `transport` and `now` are the
+    (osm_extract.choose_regions has the rule). A part of the area no larger
+    than OVERFLOW_MAX_SHARE that no other region holds is passed over
+    (water-side overflow). After a run stopped on AreaPastRegion the choice
+    is made from the area that run read. `transport` and `now` are the
     selftest's."""
     from shapely.geometry import MultiPoint
     from shapely.ops import unary_union
     slug = place_index.city_of(config)[0]
     ocache = place_index.outline_cache(config)
-    if ocache.exists():
+    seen = _AREA_READ.get(slug)
+    _LAST.update(slug=slug, from_area=seen is not None)
+    if seen is not None:
+        geom, basis = seen, "its search area as read from the extract"
+    elif ocache.exists():
         munis = place_index.municipalities(json.loads(ocache.read_bytes().decode("utf-8"))["elements"])
         geom, basis = unary_union([g for _, _, g in munis]), "its outline cache"
     else:
@@ -228,7 +274,8 @@ def choose_extract(config, root=EXTRACT_ROOT, out=print, max_mb=None, transport=
         return size["bytes"]
 
     try:
-        regions, why = osm_extract.choose_regions(index, geom, size_of, max_bytes=cap)
+        regions, why = osm_extract.choose_regions(index, geom, size_of, max_bytes=cap,
+                                                  max_uncovered=OVERFLOW_MAX_SHARE)
     except osm_extract.NoRegionSet as exc:
         raise SystemExit(f"{slug}, by {basis}: {exc}")
     if len(regions) > 1:
@@ -237,7 +284,10 @@ def choose_extract(config, root=EXTRACT_ROOT, out=print, max_mb=None, transport=
         return osm_extract.download_set(regions, root, sizes=sizes, max_age_days=age, max_bytes=cap,
                                         transport=transport, now=now, out=out)
     region = regions[0]
-    out(f"region: {region['properties']['id']}, the smallest covering {slug} by {basis}")
+    if why:
+        out(f"region: {region['properties']['id']} for {slug} by {basis}: {why}")
+    else:
+        out(f"region: {region['properties']['id']}, the smallest covering {slug} by {basis}")
     return osm_extract.download_extract(region, root, max_age_days=age, max_bytes=cap, out=out,
                                         transport=transport, now=now)
 
@@ -247,7 +297,15 @@ def check_region(pbf, area, root=EXTRACT_ROOT, out=print):
     boundary can close there while the streets beyond the cut are absent.
     Said out loud when the region cannot be found (no index on disk, or a
     file under another name). For several extracts read as one, the area is
-    held to the regions' polygons taken together."""
+    held to the regions' polygons taken together.
+
+    A part of the area outside the polygon(s) is one of two things
+    (osm_extract.beyond): data ANOTHER region holds, which raises
+    AreaPastRegion naming that region (it belongs in the set), or water no
+    region holds, which is accepted up to OVERFLOW_MAX_SHARE of the area and
+    returned as {"km2", "share", "outside", "accepted_as"} for the cache to
+    record. The boundaries have closed from the file(s) by the time this
+    runs: query() exits before it otherwise."""
     from shapely.geometry import shape
     from shapely.ops import unary_union
     files = osm_extract.as_files(pbf)
@@ -266,17 +324,27 @@ def check_region(pbf, area, root=EXTRACT_ROOT, out=print):
             "is not named <region>-YYMMDD.osm.pbf)")
         return
     ids = " + ".join(f["properties"]["id"] for f in features)
-    inside = unary_union([shape(f["geometry"]) for f in features]).covers(unary_union(area.parts))
-    if len(files) > 1:
-        if not inside:
-            raise SystemExit(f"{Path(pbf).name}: the search area reaches past regions {ids} taken "
-                             f"together. The set does not cover it.")
-        out(f"  region: the area lies wholly inside {ids} taken together")
-        return
-    if not inside:
-        raise SystemExit(f"{Path(pbf).name}: the search area reaches past region "
-                         f"{ids}. Use the next larger region.")
-    out(f"  region: the area lies wholly inside {ids}")
+    where = f"regions {ids} taken together" if len(files) > 1 else f"region {ids}"
+    whole = unary_union(area.parts)
+    rest, others = osm_extract.beyond(index, whole, features)
+    if rest.is_empty or rest.area == 0:
+        out(f"  region: the area lies wholly inside {ids}" + (" taken together" if len(files) > 1 else ""))
+        return None
+    size, share = km2(rest), km2(rest) / km2(whole)
+    said = f"{size:,.2f} km2, {share:.3%} of the area,"
+    if others:
+        raise AreaPastRegion(f"{Path(pbf).name}: the search area reaches past {where}: {said} lies in "
+                             f"{' + '.join(others)}. The regions are to be read as one set: run with no "
+                             f"--pbf (they are then chosen from the area itself), or name every file "
+                             f"with --pbf.", whole)
+    if share > OVERFLOW_MAX_SHARE:
+        raise SystemExit(f"{Path(pbf).name}: the search area reaches past {where}: {said} lies outside, in "
+                         f"no other region of the index, over the {OVERFLOW_MAX_SHARE:.0%} accepted as "
+                         f"water-side overflow. Use the next larger region.")
+    out(f"  region: {said} lies outside {where}, where no other region of the index holds data: accepted "
+        f"as water-side overflow (every boundary closed from the file(s) read)")
+    return {"km2": round(size, 3), "share": round(share, 6), "outside": ids,
+            "accepted_as": "water-side overflow: no other region of the index holds data there"}
 
 
 def build(config, pbf, *, scope=True, say=print, root=EXTRACT_ROOT):
@@ -290,20 +358,26 @@ def build(config, pbf, *, scope=True, say=print, root=EXTRACT_ROOT):
     # One extract, or several read as one: the set's data date is its files'
     # one timestamp, and Path(pbf).name below names every file of it.
     timestamp = osm_extract.set_timestamp(pbf)
-    outline = []
+    outline, overflow = [], {}
 
     def on_area(boundaries, area):
         outline.extend(osm_extract.out_geom(b) for b in boundaries)
         if scope:
             place_index_fetch.check_area(config, outline, out=say)
-            check_region(pbf, area, root, out=say)
+            overflow.update(check_region(pbf, area, root, out=say) or {})
 
     got = osm_extract.query(pbf, spec, plan, on_area=on_area, say=say)
     streets = got["elements"]["streets"]
     main = ([osm_extract.out_body(e) for e in streets] + osm_extract.out_skel_nodes(streets)
             + [osm_extract.out_tags_center(e) for e in got["elements"]["main"]])
     extra = [osm_extract.out_tags_center(e) for e in got["elements"]["extra"]]
-    source = f"{osm_extract.DOWNLOAD_HOST} ({Path(pbf).name}, filtered on this machine)"
+    passed_over = ""
+    if overflow:
+        # Recorded where both the cache and its provenance entry carry it.
+        got["stats"]["overflow"] = dict(overflow)
+        passed_over = (f"; {overflow['km2']:,.2f} km2 ({overflow['share']:.3%}) of the area lies outside "
+                       f"the region(s), accepted as water-side overflow")
+    source = f"{osm_extract.DOWNLOAD_HOST} ({Path(pbf).name}, filtered on this machine{passed_over})"
     area_text = config.PLACE_AREA
 
     def payload(elements, query):
@@ -665,6 +739,71 @@ def selftest():
         case("an area reaching past the regions of a set taken together stops the run",
              why and "country/east + country/west taken together" in why and not (d / "past").exists())
 
+        # THE AREA PAST ITS REGION. The whole file under west's name, west's
+        # polygon ending at 1.5: a quarter of the area lies in east.
+        (d / "over" / "west").mkdir(parents=True)
+        as_west = d / "over" / "west" / "west-260101.osm.pbf"
+        as_west.write_bytes(whole.read_bytes())
+
+        def over_index(folder, west_to, east_from, east_to):
+            folder.mkdir(parents=True, exist_ok=True)
+            rows = [strip("country", -10, 10), strip("country/west", -10, west_to)]
+            if east_from is not None:
+                rows.append(strip("country/east", east_from, east_to))
+            (folder / "index-v1.json").write_bytes(json.dumps({"features": rows}).encode("utf-8"))
+
+        over_index(d / "over", 1.5, 1.5, 10)
+        caught = []
+        try:
+            run(City, pbf=as_west, out_dir=d / "sibling", now=day, say=said.append, root=d / "over")
+        except AreaPastRegion as exc:
+            caught.append(exc)
+        case("OVERFLOW INTO ANOTHER REGION is never accepted: the run stops naming the region that holds "
+             "the rest, and nothing is written",
+             caught and "reaches past region country/west" in str(caught[0]) and "lies in country/east" in str(caught[0])
+             and "25." in str(caught[0]) and not (d / "sibling").exists())
+        (d / "over" / "east").mkdir()
+        (d / "over" / "east" / "east-260101.osm.pbf").write_bytes(east.read_bytes())
+        (d / "over" / "west" / "west-260101.osm.pbf").write_bytes(west.read_bytes())
+        kept_seen = dict(_AREA_READ)
+        try:
+            _AREA_READ[City.SLUG] = caught[0].geom if caught else None
+            said.clear()
+            again = choose_extract(City, d / "over", out=said.append, max_mb=1, transport=transport, now=day)
+            case("the choice made again from the area as read takes the set that holds all of it",
+                 isinstance(again, osm_extract.ExtractSet) and again.name == "east-260101.osm.pbf + west-260101.osm.pbf"
+                 and any("by its search area as read from the extract" in s for s in said) and _LAST.get("from_area"))
+        finally:
+            _AREA_READ.clear()
+            _AREA_READ.update(kept_seen)
+        # Open sea: east's polygon ends at 1.99 and nothing else is there.
+        over_index(d / "sea", 1.05, 0.95, 1.99)
+        said.clear()
+        sea = run(City, pbf=chosen, out_dir=d / "sea-out", now=day, say=said.append, root=d / "sea")
+        sea_main = json.loads(sea[1].read_bytes().decode("utf-8"))
+        sea_over = sea_main["_extract"]["stats"].get("overflow", {})
+        case("WATER-SIDE OVERFLOW: a part of the area no other region holds, under the bound, is accepted; "
+             "its size is printed and recorded in the cache and its source line, and the elements are the same",
+             elements(sea) == elements(ref) and abs(sea_over.get("share", 0) - 0.0051) < 2e-4 and sea_over.get("km2", 0) > 0
+             and sea_over.get("outside") == "country/east + country/west"
+             and "accepted as water-side overflow" in sea_main["_fetched_from"]
+             and any("accepted as water-side overflow" in s and "km2" in s for s in said))
+        over_index(d / "sea2", 1.05, 0.95, 1.9)
+        why = stopped(lambda: run(City, pbf=chosen, out_dir=d / "sea2-out", now=day, say=said.append, root=d / "sea2"))
+        case("an overflow over the bound stops, with its size, though no other region holds it",
+             why and "over the 1% accepted" in why and "next larger region" in why and not (d / "sea2-out").exists())
+        (d / "open" / "west").mkdir(parents=True)
+        (d / "open" / "west" / "west-260101.osm.pbf").write_bytes(west.read_bytes())
+        over_index(d / "open", 0.999, None, None)
+
+        class AlphaOnly(OneSided):
+            PLACE_AREA = "(id:3600000001)"
+
+        why = stopped(lambda: run(AlphaOnly, pbf=d / "open" / "west" / "west-260101.osm.pbf", out_dir=d / "open-out",
+                                  now=day, say=said.append, root=d / "open"))
+        case("a boundary that does not close from the file read is refused before any overflow is weighed",
+             why and "not whole in this extract" in why and not (d / "open-out").exists())
+
         # A KEPT cache is held to the area the config names now.
         run(City, pbf=chosen, now=day, say=said.append, root=m)
         prov = json.loads(City.PROVENANCE_JSON.read_bytes().decode("utf-8"))
@@ -737,8 +876,26 @@ def main():
         print(f"{len(written)} cache(s) written in {time.time() - start:.1f} s{peak}")
 
 
+def cli():
+    """main(), and main() once more when the region was chosen from the
+    stations or an outline and the area then read reaches into another
+    region: the second choice is made from that area and takes the set. A
+    run given --pbf, or one already chosen from the area, is not repeated."""
+    _AREA_READ.clear()
+    _LAST.clear()
+    try:
+        return main()
+    except AreaPastRegion as exc:
+        if not _LAST.get("slug") or _LAST.get("from_area"):
+            raise
+        _AREA_READ[_LAST["slug"]] = exc.geom
+        print(f"{exc}\nThe region(s) were not chosen from the area itself: choosing again from the area "
+              f"as read.")
+        return main()
+
+
 if __name__ == "__main__":
     for stream in (sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):
             stream.reconfigure(encoding="utf-8", errors="replace")
-    sys.exit(selftest() if "--selftest" in sys.argv else main())
+    sys.exit(selftest() if "--selftest" in sys.argv else cli())
