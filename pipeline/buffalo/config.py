@@ -206,7 +206,14 @@ BUFFALO_BBOX = {
 
 # --- Place search (scripts/place_search_scaffold.py, 2026-10-12) ---
 
-PLACE_AREA = "(id:3600036074)"
+# The City of Buffalo's own relation (175031, wikidata Q40435), not Erie
+# County (36074), which the wave's plan gave: the map is cut to the city.
+# Found through the OSM API while Overpass was down, 2026-10-13. Its
+# boundary and admin_level tags were absent at version 49 (edited
+# 2026-10-11), so Nominatim returns only the city's node; its 17 outer
+# ways still close. Re-check the tags if a fetch says the area names no
+# boundary.
+PLACE_AREA = "(id:3600175031)"
 PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
 PLACE_LANGUAGES = ("en",)

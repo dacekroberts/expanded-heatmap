@@ -324,7 +324,21 @@ MIAMI_BBOX = {
 
 # --- Place search (scripts/place_search_scaffold.py, 2026-10-12) ---
 
-PLACE_AREA = "(id:3601210692)"
+# The five municipalities the map names, then the census-designated place
+# holding each station on unincorporated land (owner, 2026-10-13: "approve
+# the narrowed shape"), not Miami-Dade County (1210692), which the wave's
+# plan gave. Found through Nominatim and the OSM API, 2026-10-13, each
+# station tested against the area's own geometry:
+#   relation 1216769 Miami, 118853 Hialeah, 1216645 Coral Gables,
+#   118855 Medley, 118861 South Miami;
+#   way 33614621 Brownsville: Brownsville and Earlington Heights stations;
+#   way 33614629 Gladeview: M.L. King and Northside stations;
+#   relation 9853985 Glenvar Heights: Dadeland North station;
+#   relation 1244549 Kendall: Dadeland South station.
+# Miami International Airport station sits in none of them: no named area
+# smaller than the county holds it (not the aerodrome, way 113657169, nor
+# the City of Miami).
+PLACE_AREA = "(id:3601216769,3600118853,3601216645,3600118855,3600118861,2433614621,2433614629,3609853985,3601244549)"
 PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
 PLACE_LANGUAGES = ("en",)
