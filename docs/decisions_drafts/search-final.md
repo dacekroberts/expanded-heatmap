@@ -1,3 +1,17 @@
+### 2026-10-13 - Berlin: Gärten der Welt's small plots and courtyards dropped, the Kleistgrab kept (branch search-final)
+
+- **The owner: "1. yes real name and drop small plots. 2. keep as
+  attraction".** Inside Gärten der Welt the gardens with a name of their
+  own stay (Chinesischer Garten, Orientalischer Garten, Christlicher Garten
+  and the rest). Dropped by id: the five plots named only for a country
+  (way/524037019, way/524037023, way/524037022, way/1042056230,
+  way/501358054) and three courtyards drawn as localities (way/1042056279,
+  way/497734026, way/497734021).
+- **The Kleistgrab (node/639131685) stays** as a tourist attraction, though
+  its article link is a section of another article and the grave rule alone
+  would drop it. A grave that is tagged an attraction and is a known sight
+  is kept on the owner's word, per city; no rule is asked for.
+
 ### 2026-10-13 - The boundaries for the last 24 cities; the smaller German items answered by precedent (branch search-final)
 
 - **The owner, to the six boundary calls: "1. yes sounds good. 2. whole

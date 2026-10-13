@@ -239,6 +239,14 @@ PLACE_FOLD = None
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "way/524037019": "a small plot inside Gärten der Welt named only for a country (owner, 2026-10-13)",
+    "way/524037023": "a small plot inside Gärten der Welt named only for a country (owner, 2026-10-13)",
+    "way/524037022": "a small plot inside Gärten der Welt named only for a country (owner, 2026-10-13)",
+    "way/1042056230": "a small plot inside Gärten der Welt named only for a country (owner, 2026-10-13)",
+    "way/501358054": "a small plot inside Gärten der Welt named only for a country (owner, 2026-10-13)",
+    "way/1042056279": "a courtyard inside a garden of Gärten der Welt, drawn as a locality (owner, 2026-10-13)",
+    "way/497734026": "a courtyard inside a garden of Gärten der Welt, drawn as a locality (owner, 2026-10-13)",
+    "way/497734021": "a courtyard inside a garden of Gärten der Welt, drawn as a locality (owner, 2026-10-13)",
     "node/286472713": "a grave on its subject's article, none of its own (owner's rule for graves, 2026-10-13)",
     "node/925074789": "a grave with no article of its own (owner's rule for graves, 2026-10-13)",
     "way/1020102178": "a dead railway alignment (railway=abandoned) with no article of its own (owner, 2026-10-13)",
