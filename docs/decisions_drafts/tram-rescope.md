@@ -2,6 +2,44 @@
 
 Newest first. Cleanup folds these into `DECISIONS.md` at review time.
 
+### 2026-10-13 - Tram rescope: Prague built with 28 tram routes (owner); per-route labels fail on phones, and a ten-group trial passes (the grouping is with the owner)
+
+- **Owner, 2026-10-13:** all 28 day routes ("yes your recommendations"),
+  tram 37 drawn ("draw"), and corridor grouping if label overlaps remain
+  ("corridor grouping").
+- **Built on the branch, per route.** `pipeline/prague/trams.py` (the
+  Toronto and Milan rules; a place is a stop name, since PID's node 1040
+  holds both Anděl and Na Knížecí), steps 1 and 3, config. Steps write and
+  read `data/prague/processed/tram/`. The trams read the re-pull
+  `pid_gtfs_2026-10-13.zip` (`TRAM_GTFS_ZIP`, window asserted); the metro
+  still reads the cache of 2026-09-24. `provenance.json` does not record
+  the re-pull yet: owed at landing, with a refetch.
+- **Measured:** 281 tram places, none outside the city; 34 are a drawn
+  metro station; 108 thinned to one per half mile; 139 new stations. 57
+  metro + 139 tram = 196 stations, nearest-neighbor median 477 m, closest
+  pair 153 m. 21,462 of 25,185 storefronts in a ring (17,528 before).
+  Midday headways 4.5 to 10.0 minutes; tram 23 at 30.0, not drawn.
+  Four stop names have platforms more than 200 m apart and are kept as one
+  place each (`TRAM_WIDE_PLACES`), on the names alone, not a map read.
+  Flora's tram stop is a tram station while the metro station stays listed
+  as closed for works.
+- **Per-route labels (`scripts/check_map_labels.js`, 31 labels):** no
+  problem at 1024; five overlaps at 375; sixteen at 343. At 343 the phone
+  fit shows the whole network at zoom 10.25 in about 175 by 170 px, less
+  room than 31 labels need, so moving label ends cannot clear it (not
+  tried, on that measurement).
+- **Grouping trial (session scratchpad, nothing in the repo).** Routes
+  merged by average shared track (track within 40 m, over the shorter
+  route). Ten groups: 1+25; 2+18+24; 3+17+20+40; 4+22; 5+12+15+21+32;
+  6+7+19; 8+26; 9+10; 11+13; 30+31+37. Labels "Trams 1, 25" and so on, one
+  color per group at pin floor 45 (closest pair within 500 m 41.9). 13
+  labels: no problem at 1024, 375 or 343. Eight groups leave one label
+  under the legend at 1024; twelve leave one there and one overlap at 343.
+- **The limit:** these are the project's groups, not PID's. Two routes in
+  a group share as little as 26% of their track (2 and 24), so a group's
+  color follows several streets, not one corridor.
+- **Not decided:** grouped or per route with overlaps. The owner's.
+
 ### 2026-10-13 - Tram rescope: Prague's 23 regular routes alone leave six stops with no drawn tram; the recommendation moves to all 28 day routes (open, nothing built)
 
 - **Measured** on the feed of 2026-10-13, weekday 2026-10-14, by stop name:
