@@ -31,6 +31,15 @@ Detail files: [japan](docs/plan_detail/japan.md),
 
 ## Now
 
+- [ ] **After the search rollout's big review lands: publish a search
+  retrospective, and a partial transit-layer retrospective from what is
+  known** (owner, 2026-10-13: both features were built recently, so the
+  record is fresh). In the form of the `docs/*_retrospective.md` files.
+  "Publish" is the owner's word; where each goes (docs only, or a public
+  piece) is asked when the drafts exist. Sources for search: the
+  `place-search-city`, `place-street-lines` and `osm-extract` skills, the
+  decisions entries of 2026-10-07 to 2026-10-13, the night run's report in
+  `data/_search_rollout/`.
 - [ ] **From the portfolio review (owner, 2026-10-11; DECISIONS, that day),
   in order:**
   - [~] Phase 2 runs with no weekly usage stop; one usage check-in with the

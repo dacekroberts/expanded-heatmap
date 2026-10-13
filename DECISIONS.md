@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**111 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**117 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -48,6 +48,12 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Shared-border streets (branch shared-border)](#2026-10-13---shared-border-streets-branch-shared-border)
 - [One big review for the rest of the rollout; shared-border streets landed; the second rule batch goes to the owner (owner)](#2026-10-13---one-big-review-for-the-rest-of-the-rollout-shared-border-streets-landed-the-second-rule-batch-goes-to-the-owner-owner)
 - [Place search: the second rule batch and the final group (owner)](#2026-10-13---place-search-the-second-rule-batch-and-the-final-group-owner)
+- [Place search: named roundabouts and standing abandoned landmarks stay (owner)](#2026-10-13---place-search-named-roundabouts-and-standing-abandoned-landmarks-stay-owner)
+- [Place search: quiet stations, Brussels' two neighbors, hand work in its own session, where the retrospectives go (owner)](#2026-10-13---place-search-quiet-stations-brussels-two-neighbors-hand-work-in-its-own-session-where-the-retrospectives-go-owner)
+- [Place search: six corrections to the second rule batch before it lands (owner)](#2026-10-13---place-search-six-corrections-to-the-second-rule-batch-before-it-lands-owner)
+- [Place search: the second rule batch built on a branch, the 19 indexes rebuilt, every changed row reported; NOT landed](#2026-10-13---place-search-the-second-rule-batch-built-on-a-branch-the-19-indexes-rebuilt-every-changed-row-reported-not-landed)
+- [Place search: the owner's six rulings on the second batch's changed rows, built; the 19 rebuilt again](#2026-10-13---place-search-the-owners-six-rulings-on-the-second-batchs-changed-rows-built-the-19-rebuilt-again)
+- [Place search: the second rule batch landed as rules only; the rebuilt indexes wait for the big review](#2026-10-13---place-search-the-second-rule-batch-landed-as-rules-only-the-rebuilt-indexes-wait-for-the-big-review)
 
 **2026-10-12**
 
@@ -5761,3 +5767,126 @@ japan-city template:
   country or language), and a tram segment (Milan and Toronto as new builds;
   Mexico City, and Prague if it goes ahead, as rebuilds) that waits on the
   rescope decisions.
+
+### 2026-10-13 - Place search: named roundabouts and standing abandoned landmarks stay (owner)
+
+- **Two rulings of this date differed between two sessions.** The owner
+  agreed to Cleanup's list (named roundabouts stay, interchanges go;
+  landmarks that stand but are abandoned stay) and, in wave 1's session, to
+  a lettered list that dropped roundabouts with interchanges and ramps and
+  kept an abandoned landmark only with an article of its own.
+- **Asked which stands, the owner: "keep the named roundabouts, keep all
+  standing abandoned landmarks".** Interchanges and ramps still go. Wave 1
+  takes back its by-id drops for those two classes; the rule batch carries
+  each as a named constant set to keep.
+- **Also from wave 1's lettered list, agreed there by the owner ("by letter
+  i agree with all recommendations") and built with the batch:** cemetery
+  and church-ground avenues go, numbered buildings of a register district
+  go, campus lawns and courts named for a building go where a safe test
+  exists, parks named only as an intersection stay. Melbourne gets its lane
+  words as a per-city setting ("1. sounds good for melbourne").
+- **The street coverage bar is measured against the names the rulings
+  keep** (Cleanup's call, on a measurement: ruled drops had moved
+  Washington D.C. from 86.9% to 83.3%, with no street missed).
+
+### 2026-10-13 - Place search: quiet stations, Brussels' two neighbors, hand work in its own session, where the retrospectives go (owner)
+
+- **Asked four open questions, the owner: "1. yes agreed and sounds good
+  note for these cities. 3.add them with light probe/work if possible. 3.
+  after big review lands inform. 4. private artifacts here".** Read as: the
+  quiet-station list, Brussels, Visuals' rebuild, the retrospectives, in the
+  order asked.
+- **A quiet station is recorded, per city.** Four stations lie inside their
+  search area with nothing indexable within 1 km (measured by the final-group
+  session, 2026-10-13: Most's three Zaluzi tram stops inside Litvinov,
+  nearest index row 1,065 to 1,388 m; Yamagata's Omoshiroyama-Kogen, nearest
+  row 2,146 m). `config.PLACE_QUIET_STATIONS` names each with why, who and
+  when; a listed station that is covered, or not on the map, stops the step.
+  Built in shared code after the second rule batch lands. Rejected: counting
+  a river's drawn line toward reach, which covers Yamagata and one of Most's
+  three only.
+- **Brussels' search area takes in Ixelles and Saint-Josse-ten-Noode**, if a
+  light probe shows the work is small. Four corridor stations sit on the
+  Petite Ceinture, the commune's border with those two.
+- **Visuals' full rebuild waits for the big review; Cleanup tells it then.**
+- **The search retrospective and the partial transit-layer retrospective are
+  private artifacts, published from the Cleanup session.**
+- **The final group's hand work runs in its own session, with DeepSeek
+  delegation, the owner: "the hand work can start with deepseek delegation in
+  its own session".** Branch `search-final`, cut from `search-rollout`;
+  nothing pushed from it.
+
+### 2026-10-13 - Place search: six corrections to the second rule batch before it lands (owner)
+
+- **The batch as built changed 323,407 rows to 322,788 on the 19 live
+  cities** (the build agent's report, `data/_place_rules_2026-10-13/batch2/`).
+  Cleanup read the report and brought six rows-level problems, each with a
+  recommendation. **The owner: "1 i agree with you. 2. yes agreed. 3. keep as
+  per-city with reasoning. 4. keep by name. 5. stays. 6. yes stop area with
+  your rule".**
+- **(1) A register entry stays with a Wikidata entry of its own**, not only
+  with an article. As built the rule dropped Seattle's Ballard Locks, Pacific
+  Tower, the Naval Reserve Armory and the Canoe House beside 45 numbered
+  buildings; the Locks stay by name if they carry neither.
+- **(2) A street's way loses its landmark row only when a street row of the
+  same name exists.** Measured: 25 of 27 dropped rows stayed findable as
+  streets; Aurora Bridge (the road's name is Aurora Avenue) and one Seoul
+  park did not.
+- **(3) Hong Kong keeps its 44 interchange names, a per-city setting.** They
+  were admitted on purpose on 2026-10-08, and sixteen are tagged
+  roundabouts. Interchanges go everywhere else.
+- **(4) London's Greenway stays by name;** the bare word stays on the list
+  for other cities.
+- **(5) A disused place of worship with an article or entry of its own
+  stays** (Montreal's Eglise Saint-Enfant-Jesus du Mile-End), by the
+  abandoned-landmark ruling of this date.
+- **(6) A stop-area relation stays when no other row carries that station**
+  (two Washington streetcar stops).
+- **As built, not changed, the owner: "smaller points all look good":** Manchester's Circles stay by the junction tag,
+  White City Circle (no tag) by a per-city keep, interchanges go by name;
+  cemetery avenues and campus lawns have no safe test and stay as by-id
+  drops; end dates on landmarks are not read.
+
+### 2026-10-13 - Place search: the second rule batch built on a branch, the 19 indexes rebuilt, every changed row reported; NOT landed
+
+- **Built the rulings of "Place search: the second rule batch and the final group" in `pipeline/place_index.py`, rebuilt the 19 live indexes and reported every changed row; nothing is landed and no map is rendered.** Branch `search-rules-2`, cut from 8d870d4d. The 19 indexes go from 323,407 rows to 322,788 and from 530,756 intersections to 529,549; the files under `app/static/places/` from 57.16 MB to 57.05 MB raw. Every changed row, a line a row with its OSM id and deciding tags, is `data/_place_rules_2026-10-13/batch2/changed_rows.md` (and `.json`), from each city built in memory before and after; no row is unattributed. Wave 1's 33 cities, built in memory the same way from the configs of branch `search-wave1`, go from 311,182 rows to 307,437 with wave 1's by-id drops applied: `batch2/wave1_coverage.md`. `check_place_search.py` fails rule A on all 19 (the maps carry the old index hash) and passes every other rule; `check_place_index_drift.py`, `check_place_unopened.py` and `check_place_scope.py` pass. The selftest has 129 cases (80 before, one replaced) and `scripts/place_index_breaks.json` 98 breaks (54 before, one retired), all caught.
+- **Rows changed on the 19, by rule.** (1) Private alleys: 8 streets. (2) Bare type words: 2 rows, both London's "Greenway", and 2 numbered Sand Point buildings in Seattle under their district's register number. (3) "(historical)": none. (4) Register entries: 55 (Seattle 51). (5) One row a station: 5 stop areas, 91 outlines, 215 rows merged into their transfer complex (Tokyo 88, Seoul 45, Barcelona 34, London 16), 1 bus station. (6) Listed highway values: none. (7) A street's way as a landmark: 27. (8) Gone: 1 (a Montreal church tagged disused=yes) and one segment of a Hong Kong river row. (9) Estates: 2 (Vancouver). (10) Boundaries: 11 (Seattle's Bellevue, Kent, Redmond and Tukwila, three Tokyo wards, Busan, Mexico City, Prague, Tbilisi). (11) Ramps 25 (Sydney 24), cycle facilities named for their street 127 (Chicago 52, Sydney 40, Seattle 20, Vancouver 15), no driveway, numbered alley or path-between row. (12) Managed lanes: 1. Question b: interchanges 51 (Hong Kong 44, London 6, Tokyo 1). Three rows appear because the row that hid them left (Prague's Karlův most and Seattle's Montlake Bridge as their bridge outlines), and London's two "Back Lane" footway rows return.
+- **The two constants (owner, relayed by the launching session, 2026-10-13: "keep the named roundabouts, keep all standing abandoned landmarks").** `ROUNDABOUTS_STAY = True`: 479 roundabout rows stay on the 19 (São Paulo 159, London 115, Marseille 102) and 373 in wave 1; False would drop them all. `ABANDONED_NEED_ARTICLE = False`: 297 rows on the 19 and 335 in wave 1 stand abandoned or ruined with no article of their own and stay; True would drop them.
+- **Decided: a named roundabout is read from `junction=roundabout` or `circular` on every way, never from the name, and the tag does not separate roundabouts from interchanges.** In Manchester's cache nine of the ten Circles wave 1 dropped carry the tag (Cadishead Way, Canal, Centenary, Guinness, Irlam Locks, Omega and Tenax roundabout; Lostock and Village circular) and White City Circle carries none on its 16 trunk ways. Eleven of the thirteen names ending "Interchange" carry the same tag, so interchanges go by name ("X Interchange", any way class) and by one tag test, a circular junction whose every way is a motorway's, which takes Simister Island (13 motorway ways, junction=circular). "The Island" is three residential ways with no junction tag: no test reaches it and it stays a by-id drop. Rejected: a list of names.
+- **Decided: rule 4 is read as written, and it takes known landmarks.** A landmark tagged historic=maritime, naval, military or engine needs a Wikipedia article of its own. On the 19 this takes 51 Seattle rows: the Ballard Locks (its three rows, from five objects tagged with the district's register number and no article) and other register members, among them the numbered buildings the owner kept on 2026-10-12 ("a registered code is a name"); in New York it takes five Brooklyn Navy Yard rows a wave 1 reader kept (the historic district, the Navy Yard Center, the Barrier Forts Monument, Dry Dock 1, Building 77). Flagged for the owner. The district rule beside it: a `ref:nrhp` three or more objects share keeps no coded name.
+- **Decided: rule 7 retires the first batch's bridge:name rule.** A way with a highway tag that is no area and no square is never a landmark row, so a registered bridge drawn only on its road is found by the road's name alone: Seattle's Aurora, Jose Rizal and Ravenna Park bridges and Vancouver's Lions Gate Bridge leave the landmark kind (27 rows on the 19, 76 in wave 1). Flagged for the owner.
+- **Found: `SKIP_HIGHWAY` already skipped platforms, corridors, proposed and construction ways under any name.** The ids wave 1 listed (Miami 10, Washington 7, Manchester's corridors) fed no row; their streets' rows came from the streets' own ways. What got through was a highway tag listing two values (`platform;bus_stop`, four Minneapolis ways), now read value by value.
+- **Ruled as drops and NOT built, because no test on the cached tags and names is safe; each stays by id.** Cemetery and church-ground avenues (91 ids: the caches hold no cemetery outline). Campus lawns and courts (21 ids: leisure=park with no tag in common). Names ending "Driveway" on a residential-class way (San Diego's about 15 beside Ottawa's 14 real Driveways, New York's and Boston's; "Drwy" and a minor-way "Driveway" are built). Cycle facilities whose name holds no street type word (228 ids still a row, most of them trails' own names such as the Los Angeles River Bike Path, which wave 1 dropped and the ruling keeps). Homes with an article and no home tag (12 ids: historic=building on a plain building, no house word in the name; the home rule reads tags and does not reach them). An end date on a landmark: the stray-character reading is built for stations, and a landmark's end date is still not read, since an archaeological site carries one too.
+- **Decided: station rows sharing a Wikidata entry are merged only within 600 m of one another (`COMPLEX_MERGE_M`), and a station outline is dropped only beside a rail-tagged station row** (150 m, or 400 m under the same name). An outline further off stays: most are bus terminals and depots no rule covers. Two of Washington's streetcar stops are rows only as stop-area relations (no station row within 400 m) and leave the index with the rule.
+- **`config.PLACE_WAY_WORDS`** (owner: "sounds good for melbourne") adds one city's own words to its minor-way test. No config sets it on this branch; Melbourne's is on `search-wave1`. A private way the words admit is still dropped (selftest).
+- **The four possible misfires, each the rule working as written.** Washington: the cache holds two boundary stones, neither with a Wikidata entry, dropped as minor historic objects (`SKIP_HISTORIC`); the place queries fetch no embassy class, and of four objects with "embassy" in the name one is a church and a row, one a plaque. University of Waterloo: the campus relation's center lies outside the extent of the fetched streets (`outside_area`); its station is a row. Château Laurier: tourism=hotel with a brand, a business (`commercial`). Old Ursuline Convent Museum: tourism=museum with neither wikidata nor wikipedia (`not_notable`).
+- **Street coverage scripts:** none is in the repository (the figure in the skill was measured by scratch scripts), so nothing was changed.
+- **Not done:** no map rendered; `pipeline/drift_check.py` not run (it runs city steps against the shared data folder); no browser test; wave 1's configs were read, not edited, so its by-id entries the rules now cover are still there.
+- **Questions for the owner.** (1) Rule 4 against the Ballard Locks, Sand Point and the Brooklyn Navy Yard's own rows. (2) Rule 7 against registered bridges known by bridge:name. (3) Hong Kong's 44 interchange rows, which the 2026-10-08 word list had admitted on purpose (交匯處). (4) London's "Greenway", a named linear park the bare word takes. (5) Rule 9's "X Estates" against question g's keep for estates tied to a complex only by name (Ottawa appears in both counts). (6) Washington's two streetcar stops that are only stop areas.
+
+### 2026-10-13 - Place search: the owner's six rulings on the second batch's changed rows, built; the 19 rebuilt again
+
+- **The owner ruled on the six questions of the entry below ("1 i agree with you. 2. yes agreed. 3. keep as per-city with reasoning. 4. keep by name. 5. stays. 6. yes stop area with your rule", relayed by the Cleanup session) and each was built on `search-rules-2`.** The 19 live indexes now go from 323,407 rows to 322,843 (322,788 before these rulings) and from 530,756 intersections to 529,733; wave 1's 33, with its by-id drops applied, from 311,182 to 307,474. Both reports under `data/_place_rules_2026-10-13/batch2/` were regenerated; no row is unattributed. Selftest 136 cases, 109 breaks, all caught.
+- **(1) A register entry stays on a Wikidata entry of its own as well as an article.** Own: no other object of the city's cache carries the entry, and it is not the object's subject's, brand's or operator's (`own_item`). That is what catches an entry for a class of thing, which sits on several objects (Seoul's tanks under their model's entry; Seattle's three lock ways under the Locks'). Not read for historic=engine, where a lone example would carry its model's entry unshared. Back on the 19: Pacific Tower, Naval Reserve Armory Building and Canoe House (Seattle); 15 rows back in wave 1. **The Ballard Locks are kept by id**: the dam (way/32823954) carries neither an article nor an entry, and the three lock ways share one of each (Q5769218, en:Ballard Locks), so none is one way's own. No existing setting keeps a row against a rule (`PLACE_REVIEWED` is check E's list for leak words, and fails on a name that carries none), so `config.PLACE_KEPT` was added: an OSM id and why, read by the register-entry and bare-type rules only; an id not in the cache stops the step. **None of the five Brooklyn Navy Yard rows a wave 1 reader kept comes back**: the historic district, the Navy Yard Center, the Barrier Forts Monument, Dry Dock 1 and Building 77 carry the district's register number and neither an article nor an entry.
+- **(2) A street's way is dropped as a landmark only where a street row bears the name the landmark row would have, bridge:name leading; the first batch's bridge:name rule is back.** Back on the 19: Aurora Bridge and Montlake Bridge (Seattle), Seoul's way/471457870 and Sydney's Law Lawns, two more than the two expected, each with no street row of its name; 23 still drop. Wave 1: 19 back, 57 still drop.
+- **(3) `config.PLACE_KEEP_INTERCHANGES = True`, set for Hong Kong with the owner's reason**: all 44 rows stay. London's six and Tokyo's one still go, and Manchester's 13.
+- **(4) London's "Greenway" stays by id in `PLACE_KEPT`** (way/120317147, relation/17674520); the word stays on the list.
+- **(5) A disused place of worship with an article or a Wikidata entry of its own stays.** Back: Montreal's way/46867692. Washington's two disused temples carry neither and still go.
+- **(6) A stop-area relation stays where no other row carries its station.** The cache holds no members, so the test is position and name: another station row within 150 m, one of its folded name within 400 m, or one sharing its Wikidata entry. Kept: Washington's "H Street & 3rd Street Northeast" (relation/11491459) and "Benning Road & Oklahoma Avenue Northeast" (relation/11491453). The other 18 still go (5 on the 19).
+- **Not done:** no map rendered, so `check_place_search.py` still fails rule A on the 19 and nothing else; wave 1's configs not edited.
+
+### 2026-10-13 - Place search: the second rule batch landed as rules only; the rebuilt indexes wait for the big review
+
+- **Landed on master: the rules, their selftest and breaks, the skill, the
+  exclusions record and three configs** (Hong Kong's
+  `PLACE_KEEP_INTERCHANGES`, London's and Seattle's `PLACE_KEPT`). The two
+  entries above are the build agent's drafts, folded; the owner's rulings
+  are the two entries of this date before them.
+- **Not landed: the 19 rebuilt indexes** (branch `search-rules-2`, commits
+  f64ecd4e and 01bce485). An index and its map land together, and the maps
+  are rendered once, at the big review, after the next rule pass (the German
+  lists, quiet stations, the third list). Until then master's 19 indexes are
+  those of the first batch and the live site is unchanged; no reboot is
+  owed for this landing.
+- **Measured on the branch:** 19 live cities 323,407 rows to 322,843; wave 1
+  in memory 311,182 to 307,474; selftest 136 of 136, breaks 109 of 109.
