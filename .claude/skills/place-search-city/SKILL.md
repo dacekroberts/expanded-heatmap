@@ -347,7 +347,7 @@ All quoted in the drafts file; the short list:
    (`osm_places_<date>.json`, `osm_places_extra_<date>.json`; data/ is shared
    by every worktree), `PLACE_LANGUAGES`, `PLACE_FOLD` (`"ja"` or `None`),
    `PLACE_REVIEWED = {}`, `PLACE_DROPPED = {}`.
-3. **Fetch:** `python pipeline/place_index_fetch.py <city>` (three queries
+3. **Fetch:** `python pipeline/place_index_fetch.py <city>` (three queries, THE BOUNDARY FIRST: a municipality with no station and no `PLACE_AREA_KEPT` entry stops the fetch in seconds, before the heavy two;
    in turn: places, the extra classes, and the area's boundaries with their
    geometry, `osm_place_outline_v1.json`; records provenance). A city fetched
    before 2026-10-12 lacks the third: the queue sees that and fetches only

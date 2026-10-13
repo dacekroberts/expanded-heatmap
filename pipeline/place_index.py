@@ -184,6 +184,17 @@ def outline(munis, crs_projected):
     return {"names": [n for _, n, _ in munis], "outline": rings}
 
 
+def scope_refusals(munis, counts, kept):
+    """One sentence per municipality the scope rule refuses: none of the
+    map's stations inside (`counts`, by OSM id) and no entry in `kept`
+    (config.PLACE_AREA_KEPT). Empty when the area stands. Used by the fetch,
+    before its heavy queries, and by scripts/check_place_scope.py's rule B on
+    the committed summary."""
+    return [f"{name} ({osm_id}) holds none of the map's stations and has no entry in "
+            f"config.PLACE_AREA_KEPT"
+            for osm_id, name, _ in munis if counts.get(osm_id) == 0 and osm_id not in kept]
+
+
 def stations_per_municipality(munis, stations):
     """{osm id: number of the map's stations inside}, for the ceiling check
     (scripts/check_place_scope.py)."""

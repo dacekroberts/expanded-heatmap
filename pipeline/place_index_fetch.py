@@ -373,6 +373,58 @@ def selftest():
             unknown = True
         cases.append(("an unknown mirror is refused, a known one pins to one host",
                       unknown and osm.pinned(osm.host_names()[1]) == (osm.OVERPASS_HOSTS[1],)))
+    # The boundary first, and the scope stop: two square municipalities, the
+    # stations all in the first.
+    def square(rel_id, name, west):
+        ring = [(47.0, west), (47.0, west + 0.1), (47.1, west + 0.1), (47.1, west), (47.0, west)]
+        return {"type": "relation", "id": rel_id, "tags": {"name": name}, "members": [
+            {"type": "way", "role": "outer", "geometry": [{"lat": la, "lon": lo} for la, lo in ring]}]}
+    with tempfile.TemporaryDirectory() as d:
+        csv_path = Path(d) / "stations.csv"
+        csv_path.write_bytes(b"station,lat,lon\nOne,47.05,-122.45\nTwo,47.06,-122.44\n")
+
+        class Area:
+            SLUG = "x"
+            PLACE_OSM_JSON = Path(d) / "osm_places_2026-01-01.json"
+            PLACE_OSM_EXTRA_JSON = Path(d) / "osm_places_extra_2026-01-01.json"
+            PLACE_AREA = "(id:1,2)"
+            STATIONS_CSV = csv_path
+
+        class Kept(Area):
+            PLACE_AREA_KEPT = {"relation/2": "owner, 2026-10-12"}
+
+        class NoStations(Area):
+            STATIONS_CSV = Path(d) / "absent.csv"
+
+        both = [square(1, "Alpha", -122.5), square(2, "Beta", -122.3)]
+
+        def stopped(config, elements):
+            said = []
+            try:
+                check_area(config, elements, out=said.append)
+            except SystemExit as exc:
+                return str(exc.code), said
+            return None, said
+        why, _ = stopped(Area, both)
+        cases.append(("a municipality with no station stops the fetch, by name",
+                      why is not None and "Beta (relation/2)" in why and "Alpha" not in why))
+        why, said = stopped(Area, both[:1])
+        cases.append(("an area whose every municipality holds a station goes on",
+                      why is None and "Alpha 2" in said[0]))
+        why, _ = stopped(Kept, both)
+        cases.append(("the same empty municipality with a recorded reason goes on", why is None))
+        why, said = stopped(NoStations, both)
+        cases.append(("stations that cannot be read are said out loud, not passed in silence",
+                      why is None and "NOT counted" in said[0]))
+        why, _ = stopped(Area, [])
+        cases.append(("an area naming no boundary stops the fetch", why is not None and "names no boundary" in why))
+        open_ring = square(3, "Gamma", -122.5)
+        open_ring["members"][0]["geometry"] = open_ring["members"][0]["geometry"][:3]
+        why, _ = stopped(Area, [open_ring])
+        cases.append(("a boundary that does not close stops the fetch",
+                      why is not None and "not a closed boundary" in why))
+    order = [key for _, _, key in _queries(Area)] if "_queries" in globals() else None
+    cases.append(("the boundary is the first query of a fetch", order is not None and order[0] == "osm_place_outline"))
     for label, ok in cases:
         print(f"  {'ok ' if ok else 'BAD'} {label}")
     good = sum(ok for _, ok in cases)
@@ -404,13 +456,21 @@ def main():
         fetch_city(config, args.force)
 
 
+def _queries(config):
+    """(query, cache path, provenance key) in the order a fetch asks them."""
+    return ((OUTLINE_QUERY, place_index.outline_cache(config), "osm_place_outline"),
+            (QUERY, config.PLACE_OSM_JSON, "osm_places"),
+            (EXTRA_QUERY, config.PLACE_OSM_EXTRA_JSON, "osm_places_extra"))
+
+
 def fetch_city(config, force, hosts=None):
     args = argparse.Namespace(force=force)
     # One after the other, never in parallel (the owner's Overpass rule), and
-    # both of the one mirror when pinned.
-    for query, path, key in ((QUERY, config.PLACE_OSM_JSON, "osm_places"),
-                             (EXTRA_QUERY, config.PLACE_OSM_EXTRA_JSON, "osm_places_extra"),
-                             (OUTLINE_QUERY, place_index.outline_cache(config), "osm_place_outline")):
+    # all of the one mirror when pinned. THE BOUNDARY FIRST (owner,
+    # 2026-10-12: "yes force the boundary first"): it is the light query, and
+    # check_area() stops a wrong area in seconds, before the two heavy ones
+    # (Buffalo was planned as Erie County and failed its fetch at 512 s).
+    for query, path, key in _queries(config):
         kept = path.exists() and not args.force
         if query is QUERY and getattr(config, "PLACE_SPLIT", None):
             els, host = fetch_split(config, path, args.force, hosts)
@@ -424,6 +484,35 @@ def fetch_city(config, force, hosts=None):
         print(f"{path.name}: {len(els):,} elements from {host} {kinds}")
         prov = record(config, path, key, "kept (on disk from an earlier run)" if kept else "fetched")
         print(f"recorded in {prov.relative_to(Path(__file__).parent.parent)} as {key}")
+        if query is OUTLINE_QUERY:
+            check_area(config, els)
+
+
+def check_area(config, elements, out=print):
+    """Hold config.PLACE_AREA to the scope rule on the boundaries just
+    fetched, and exit before any place query when it fails: a boundary that
+    does not close, or a municipality with none of the map's stations and no
+    reason recorded. Says so out loud when the stations cannot be read."""
+    slug = place_index.city_of(config)[0]
+    try:
+        munis = place_index.municipalities(elements)
+    except ValueError as exc:
+        sys.exit(f"{slug}: {exc}. config.PLACE_AREA names something that is not a closed boundary.")
+    if not munis:
+        sys.exit(f"{slug}: config.PLACE_AREA {config.PLACE_AREA} names no boundary.")
+    stations = place_index.map_stations(config)
+    if stations is None:
+        out(f"  area: {len(munis)} municipality(ies); stations NOT counted "
+            f"(no {getattr(config, 'STATIONS_CSV', 'STATIONS_CSV')})")
+        return
+    counts = place_index.stations_per_municipality(munis, stations)
+    out("  area: " + ", ".join(f"{name} {counts[osm_id]}" for osm_id, name, _ in munis)
+        + f"; {len(stations) - sum(counts.values())} of {len(stations)} stations outside every one")
+    bad = place_index.scope_refusals(munis, counts, getattr(config, "PLACE_AREA_KEPT", {}))
+    if bad:
+        sys.exit(f"{slug}: the search area breaks the scope rule, nothing else fetched: " + "; ".join(bad)
+                 + ". Take it out of config.PLACE_AREA, or record the owner's word for it in "
+                   "PLACE_AREA_KEPT (place-search-city skill, \"The search area\").")
 
 
 if __name__ == "__main__":
