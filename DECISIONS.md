@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**91 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**92 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -28,6 +28,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [A picked street is drawn at its whole length, from a street lines side file; the ring is the failsafe (owner)](#2026-10-13---a-picked-street-is-drawn-at-its-whole-length-from-a-street-lines-side-file-the-ring-is-the-failsafe-owner)
 - [The maps' Cities menu under non clickable headers, Japan last (owner)](#2026-10-13---the-maps-cities-menu-under-non-clickable-headers-japan-last-owner)
 - [Street lines: the teal stays, a third credit link, the 19 rebuilt; the picked-line look goes to every map (owner)](#2026-10-13---street-lines-the-teal-stays-a-third-credit-link-the-19-rebuilt-the-picked-line-look-goes-to-every-map-owner)
+- [Place search: the owner's rulings on keep against drop, personal names, private streets and the typo line; NOT yet built](#2026-10-13---place-search-the-owners-rulings-on-keep-against-drop-personal-names-private-streets-and-the-typo-line-not-yet-built)
 
 **2026-10-12**
 
@@ -5001,3 +5002,74 @@ japan-city template:
   - **Asked by the owner, answered:** boundaries and street lines are built
     in each batch, not at the end; both come from steps a wave already runs.
   - **Held** on branch `street-lines` for the one full re-render.
+
+### 2026-10-13 - Place search: the owner's rulings on keep against drop, personal names, private streets and the typo line; NOT yet built
+
+- **The street-lines batch landed** (master 4d7cf5f9, the owner's "yes sounds
+  good"; rebooted by the owner; verified live on Seattle: 43 menu headers, a
+  street drawn with its ring hidden, three credit links, the rights tags).
+- **Two read-only measures on the 19 built cities came first** (the owner:
+  "yes measure first", and "identify any other cases where a positive rule
+  should outweigh a negative or vice versa", "e.g. personal names"). Both
+  rebuilt every index in memory and matched the committed files (328,692
+  rows). Scripts and results: the session scratchpad, `rules_measure/` and
+  `rules_precedence/`; the figures below are from them.
+- **The owner's words, on the list put to them** ("1" the audit's lean
+  tables, "2" personal names, "3" private residential streets, "4" the typo
+  line, "5" wave 1's twelve bare-type drops with a Wikidata entry only):
+  "2. recommendation approved. 3. drop as ruled, add to list of dropped
+  categories (unless one doesn't exist for searches, then we should probably
+  start one now and retrofit). 1. all as leaned. 5. drop. 4. short okay".
+  Earlier the same day: "famous landmark rule takes priority over others".
+- **1. Keep now beats drop** where the object has its OWN Wikipedia article
+  and today's drop is: a bare type word (81 rows; not where the article is
+  the type's, as with Paris's 69 Édicule Guimard); a privately operated or
+  office tag (115; brand rows stay out, the Panama Hotel precedent); a place
+  kind the index does not list, for islands, islets and districts (121); a
+  pedestrian square drawn as an area (47 of 75; rest areas stay out); an
+  estate drawn as an area (46, to match the estate kept as a point); the
+  home test tripped by access=private on something that is no home (about
+  16); and a small memorial with an article but no Wikidata entry (23).
+- **1. Drop now beats keep:** a place or landmark its own tags say is
+  demolished, razed, abandoned or not yet open, article or not (266, of
+  which about 126 Hong Kong hamlets), "the search must not land where the
+  thing is not"; a station that is a business or a bare type (6); a closed
+  station (2); a row admitted only by a Wikidata entry shared by three or
+  more rows (23).
+- **1. Left as they are:** a home with its own article stays out (294; the
+  16 non-homes above excepted); everything the audit ranked "looks right".
+- **2. Personal names:** statues, busts and public memorials stay; a grave
+  or a plaque is kept only when the object has its own Wikipedia article. A
+  Wikidata entry alone no longer admits one (258 graves and 241 plaques are
+  in on a key today; nothing in the data tells a private person from a
+  public one, which is why the article is the test).
+- **3. Private residential streets are dropped, as first ruled**: a street
+  whose every way is access=private or no on residential or unclassified
+  (4,102 rows, 1.6% of streets; Mexico City 1,982, London 1,088). Put to the
+  owner with the Paris precedent of 2026-10-11 it departs from (addressed
+  private streets kept) and two narrower options; the owner kept the ruling.
+  The French named-street exception stands (52 of them) and so does a way's
+  own article. **And a list of what search leaves out is to exist**: none
+  does for search (`docs/excluded_categories.md` is the businesses'), so one
+  is started and the settled classes retrofitted into it.
+- **4. The typo line, short form, approved:** "Place names come from
+  OpenStreetMap as its contributors wrote them, so a few are misspelt." At
+  the end of the search bullet in "Using the map". US spelling applies
+  site-wide (2026-10-01), so it lands as "misspelled".
+- **5. Wave 1's twelve bare-type drops with a Wikidata entry only stay
+  dropped**: the landmark ruling rests on an article of the object's own.
+- **Also to build, from the rule measure, as leaned and to be reported row
+  by row before landing:** one row a stop for same-mode platform rows only
+  (294 of 590; interchanges stay two rows); duplicate junction, place and
+  landmark rows merged (417); street names that are descriptions or a type
+  plus a code, on minor ways only (89 and 41; 193 real streets such as The
+  Avenue stay); rides as stations without the tourism=attraction signal
+  alone (14); busways and race tracks out unless the way has its own article
+  (126); a bridge's own name from bridge:name (3); the not-open test reading
+  opening_date, disused:railway and end_date; the candidate bare type words
+  (5 rows here). Not built as rules: castles (a web check is owed), coded
+  names the rule misses (by id), zoo contents (by id).
+- **Every one of these changes built indexes**, so the rule-change protocol
+  applies: built on a branch, the 19 rebuilt, every changed row reported to
+  the owner before landing; the typo line and any matcher change re-render
+  the searched maps.
