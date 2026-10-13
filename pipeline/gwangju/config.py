@@ -134,6 +134,9 @@ PLACE_REVIEWED = {name: _JUNCTION for name in (
 # customers-only service roads, candidate 1 the play-park and plaza rows
 # (docs/decisions_drafts/search-final.md, "Rule candidates").
 PLACE_DROPPED = {
+    "way/629024038": "a composer's birthplace, in on the composer's article; no sign it is open to visitors was checked (owner, 2026-10-13)",
+    "way/444717696": "the air force unit as a second row for Gwangju Airport (owner, 2026-10-13)",
+    "node/6411444468": "a development zone's planning label drawn as a place (owner, 2026-10-13)",
     "way/835704878": "an apartment estate's own garden, plaza or playground",
     "way/469653066": "an apartment estate's own garden, plaza or playground",
     "way/473501622": "an apartment estate's own garden, plaza or playground",

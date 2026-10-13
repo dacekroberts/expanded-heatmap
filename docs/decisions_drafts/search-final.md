@@ -1,3 +1,21 @@
+### 2026-10-13 - Gwangju: the owner's four answers on its read (branch search-final)
+
+- **The owner, to four questions with a recommendation each: "1 keep, 2
+  drop, 3 drop, 4 drop and keep like you said".**
+- **1. Kept:** the signed junction 전철우사거리 (node/436870846), named for a
+  restaurant brand that is also a living person's name. A road feature
+  under a trade name; no config entry is needed, since no leak word fires.
+- **2. Dropped by id:** 정율성생가 (way/629024038), a birthplace admitted by
+  the composer's own article. The home rule needs a checked sign of
+  visiting and none was checked; it can come back through
+  `PLACE_VISITABLE` with a source.
+- **3. Dropped by id:** 제1전투비행단 (way/444717696), the air force unit as
+  a second row for the airfield 광주공항 (way/105569841), which stays.
+- **4. Dropped by id:** 광주하남3도시개발지역 (node/6411444468), a development
+  zone's planning label. **Kept:** 목교 (node/6367714556) and 월봉
+  (way/572641161), as localities.
+- Index 4,242 rows to 4,239.
+
 ### 2026-10-13 - Search final group: the four search areas ruled; Anyang and Gwangju built and read; German measured on Gelsenkirchen, not yet ruled (branch search-final)
 
 - **Branch `search-final`, cut from `search-rollout` 57bdff22, holds the 32
