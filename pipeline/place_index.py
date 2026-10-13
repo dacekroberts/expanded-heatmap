@@ -429,6 +429,7 @@ def build_city(config):
                           visitable=live, rebuilt=rebuilt, closed_for_works=set(works),
                           way_words=tuple(getattr(config, "PLACE_WAY_WORDS", ())),
                           kept=set(getattr(config, "PLACE_KEPT", {})),
+                          map_stations=[n for n, _, _ in (map_stations(config) or [])],
                           keep_interchanges=bool(getattr(config, "PLACE_KEEP_INTERCHANGES", False)))
     if rebuilt and report.get("street_way_kept_rebuilt", 0) == 0 or any(
             not any((e.get("tags") or {}).get("highway") == "construction"
@@ -927,6 +928,7 @@ COMMERCIAL_VALUES = {
 # Any value but "no" marks the mode: Hong Kong's termini carry bus=private
 # and bus=minibus (batch 2b, 2026-10-08).
 RAIL_MODES = ("train", "subway", "light_rail", "tram", "monorail", "funicular")
+RAIL_STATION_VALUES = {"subway", "light_rail", "train"}
 OTHER_MODES = ("bus", "ferry", "trolleybus", "coach", "minibus")
 # And by the facility's own tag, where no mode is written: Hong Kong's public
 # transport interchanges (amenity=bus_station), ferry piers and the Ngong
@@ -991,6 +993,18 @@ HOME_HISTORIC = {"house", "manor"}
 CIVIC_AMENITIES = {"townhall", "arts_centre", "community_centre", "library", "theatre"}
 
 
+# German only (HOME_LEAD_ON_PARKS): measured on the 19, the Spanish lead
+# "casa" took six of Mexico City's culture houses tagged leisure=park ("Casa
+# de la Cultura ...") and no home; no other language's lead moved a row.
+# Measure a language on its built cities before adding it.
+HOME_LEAD_ON_PARKS = {"de"}
+
+
+def _home_lead(name, local):
+    ws = re.findall(r"\w+", name.lower()) or [""]
+    return any(ws[0] in HOME_NAME_LEAD.get(c, ()) for c in local if c in HOME_LEAD_ON_PARKS)
+
+
 def _home_name(name, local):
     if HOME_NAME.search(name):
         return True
@@ -1029,7 +1043,12 @@ def _home(tags, names, local=()):
             # By name only where the building tag says no more: Kyoto's
             # "Kwasan Observatory Solar House" is building=university.
             or (tags.get("historic") and tags.get("building") in (None, "yes") and not civic
-                and any(_home_name(n, local) for n in names)))
+                and any(_home_name(n, local) for n in names))
+            # A park or a garden whose name LEADS with a house word is the
+            # house's grounds (the third list, 2026-10-13: Berlin's "Villa
+            # Lemm", leisure=park). The lead only: a name that ends in one
+            # ("Hull House Park") is a park named for a house.
+            or (tags.get("leisure") in ("park", "garden") and any(_home_lead(n, local) for n in names)))
 
 
 def _home_signs(tags, names, local=()):
@@ -1203,11 +1222,23 @@ BARE_TYPE_NAMES = {
            "조형물", "조각상", "연못",
            # The outside name net's read of the 19 built cities (owner, 2026-10-12).
            "비석", "배수로", "화단", "대운동장", "산책공원", "분수공원", "강변 공원", "가마터",
-           "유아숲체험장", "가족조각상", "호상비문", "강학공간"),
+           "유아숲체험장", "가족조각상", "호상비문", "강학공간",
+           # The final group's reads of Anyang and Gwangju (owner, 2026-10-13,
+           # the third list).
+           "족구장", "고인돌", "왕국회관", "가든", "공터", "구령대", "물놀이장", "산책로", "생태 공원",
+           "조각공원", "호수공원", "기념탑", "설립기념탑", "일주문", "비좌", "연자방아", "훈련센터",
+           "자연마을", "놀이공원", "물놀이공원", "썬큰광장"),
     "zh": ("祠堂", "土地", "土地廟", "土地公", "伯公", "社壇", "碉堡", "涼亭", "公園", "遊樂場", "休憩處",
            "觀景台", "廟",
            # The outside name net's read of the 19 built cities (owner, 2026-10-12).
-           "炮台"),
+           "炮台",
+           # Earth-god shrines under their type alone (candidate 19, owner
+           # 2026-10-13; the commonest whole names of Taipei's, Taoyuan's and
+           # Taichung's places of worship: 福德祠 134, 福德宮 120, 土地公廟 116).
+           # The last two are "福德祠(土地公廟)" less its closing bracket, as
+           # bare_type strips it. NOT 福安宮, 福興宮, 萬善堂: temples' own names.
+           "福德祠", "福德宮", "福德廟", "福德正神", "土地公廟", "土地公祠", "伯公廟", "福德祠(土地公廟",
+           "福德宮(土地公廟"),
     "fr": ("cuve", "ancienne batterie", "monument", "statue", "fontaine", "parc", "église", "chapelle",
            "jardin", "square", "calvaire", "croix",
            # Paris's read (batch 3, 2026-10-11). "Édicule Guimard" is the
@@ -1248,7 +1279,10 @@ BARE_TYPE_NAMES = {
            "área común", "áreas comunes", "área infantil", "área de juegos", "juegos",
            "aparatos de ejercicio", "zona de perros", "parque recreativo", "parque infantil",
            "centro comunitario", "centro de reuniones", "vecindad", "terreno", "helipuerto",
-           "iglesia católica", "iglesia mormona", "jardín botánico", "casa de retiros"),
+           "iglesia católica", "iglesia mormona", "jardín botánico", "casa de retiros",
+           # Guadalajara's estate amenities tagged parks (candidate 26, owner
+           # 2026-10-13). NOT "coto" names; "camellón" is above.
+           "terraza", "casa club"),
     "pt": ("praça", "parque", "igreja", "capela", "monumento", "estátua", "fonte", "jardim",
            "playground", "quadra", "mirante", "coreto", "área verde",
            # Sao Paulo's read (batch 3, 2026-10-11).
@@ -1292,7 +1326,10 @@ CODED_TYPE = {
                      r"|Building \d+(?: ?[A-Z])?"
                      r"|Operating House No\.? ?\d+"),
     "cs": re.compile(r"\d+\. zastavení"),
-    "ko": re.compile(r"\d+호 공원"),
+    # A gated estate's numbered section (Guadalajara's "Cluster 12"; candidate 26).
+    "es": re.compile(r"[Cc]luster \d+[A-Za-z]?"),
+    # "115호 어린이공원", "1호근린공원" (Anyang; the third list, 2026-10-13).
+    "ko": re.compile(r"\d+호\s*(?:어린이|근린|소|쌈지)?\s*공원"),
 }
 
 
@@ -1318,14 +1355,39 @@ def bare_type(name, local, tags=None):
     (REGISTERED_KEYS) keeps a coded name."""
     if coded_type(name, local):
         return not (tags and any(tags.get(k) for k in REGISTERED_KEYS))
-    low = unicodedata.normalize("NFKC", name).lower().strip(" .,;:()")
+    # BEHIND AN ARTICLE, OR IN TWO LANGUAGES (candidate 22, owner 2026-10-13):
+    # the name is split at a bar, slash or dash with a space either side,
+    # one leading article of English or a city's language is set aside from
+    # each part (BARE_ARTICLES), and the name is bare when EVERY part is a
+    # listed word ("Le Château", "Château - Kasteel"). One part a real name
+    # and it stays ("Château - Kasteel van Beersel"). Nothing else is
+    # stripped: a name in two scripts with no separator is read whole.
+    parts = [x for x in _NAME_SEPARATOR.split(unicodedata.normalize("NFKC", name)) if x.strip()]
+    return bool(parts) and all(_bare_word(x, local) for x in parts)
+
+
+BARE_ARTICLES = {"en": ("the",), "fr": ("le", "la", "les", "l'", "l’"), "nl": ("de", "het"),
+                 "es": ("el", "la", "los", "las"), "ca": ("el", "la", "els", "les", "l'", "l’"),
+                 "pt": ("o", "a", "os", "as"), "de": ("der", "die", "das")}
+
+
+def _bare_word(part, local):
+    low = part.lower().strip(" .,;:()")
     if _CJK_WORD.search(low):
         low = re.sub(r"[\s#]*\d+$", "", low).strip()
         return any(low in BARE_TYPE_NAMES.get(c, ()) for c in ("en", *local))
     # Accents set aside for a Latin word: Mexico City's "jardin" and "Area
     # verde" are the listed words unaccented (batch 3, 2026-10-11).
     low = _unaccent(low)
-    return any(low in _BARE_FOLDED.get(c, ()) for c in ("en", *local))
+    if any(low in _BARE_FOLDED.get(c, ()) for c in ("en", *local)):
+        return True
+    for code in ("en", *local):
+        for art in BARE_ARTICLES.get(code, ()):
+            rest = low[len(art):].lstrip() if low.startswith(art + " ") or (
+                art[-1] in "'’" and low.startswith(art)) else None
+            if rest and any(rest in _BARE_FOLDED.get(c, ()) for c in ("en", *local)):
+                return True
+    return False
 
 
 def _unaccent(s):
@@ -1441,6 +1503,21 @@ def _local_first(tags, names, local):
 EXHIBIT_HISTORIC = {"aircraft", "tank", "cannon", "missile", "rocket", "vehicle",
                     "locomotive", "railway_car"}
 MODEL_EXHIBITS = {"aircraft", "tank", "cannon", "missile", "rocket", "vehicle"}
+# EXHIBITS UNDER THEIR CLASS'S OR KIND'S ARTICLE (the third list,
+# 2026-10-13): Anyang's railway museum yard carried eight ("Mika-type steam
+# locomotive"). Three tests: an entry another object of the cache carries is
+# the class's (build()'s own_item, any EXHIBIT_HISTORIC value); a locomotive
+# or railway car needs a tourism tag or an article under its own name
+# (RAIL_EXHIBITS, _titled_by_name: Chicago's Pioneer Zephyr and Vancouver's
+# Canadian Pacific 374 stay on theirs); a vehicle with no historic tag
+# (locomotive:type on a tourism=attraction) likewise needs that article.
+RAIL_EXHIBITS = {"locomotive", "railway_car"}
+
+
+def _titled_by_name(tags):
+    title = fold_name(article_title(tags.get("wikipedia") or ""))
+    return bool(title) and title == fold_name(tags.get("name") or "")
+STOLPERSTEIN_MEMORIALS = {"stolperstein", "stolperschwelle"}
 
 
 def _exhibit(tags):
@@ -1453,6 +1530,8 @@ def _exhibit(tags):
             and (tags.get("indoor") == "yes" or tags.get("location") == "indoor")):
         return True
     h = tags.get("historic")
+    if not h and tags.get("locomotive:type") and not tags.get("railway"):
+        return not _titled_by_name(tags)
     if h not in EXHIBIT_HISTORIC:
         return False
     return not (tags.get("wikidata") and (h not in MODEL_EXHIBITS or tags.get("tourism")))
@@ -1842,6 +1921,12 @@ def street_description(name, local):
     second = street_description_2(name)
     if second:
         return second
+    plain = re.sub(r"\s+", " ", _plain(name).casefold().strip(" .,;:()"))
+    for code in local:
+        m = PATH_CODE[code].fullmatch(plain) if code in PATH_CODE else None
+        # A code there must be: the bare word "Weg" is the way-word class.
+        if m and re.search(r"\d|\s", plain):
+            return "path code"
     if _STREET_ALLEY_CODE.fullmatch(low):
         return None
     if coded_type(name, local):
@@ -1875,7 +1960,9 @@ NOT_STREET_HIGHWAYS = {"busway", "raceway"}
 # London 1,088). It departs from the Paris precedent of 2026-10-11 (addressed
 # private streets kept); the owner kept the ruling. PRIVATE_STREET_LEAD
 # stands (52 rows) and so does a way's own article.
-PRIVATE_STREET_HIGHWAYS = {"residential", "unclassified"}
+# living_street since the third list (2026-10-13): seven Berlin streets
+# tagged access=private on it.
+PRIVATE_STREET_HIGHWAYS = {"residential", "unclassified", "living_street"}
 # PLACE KINDS THE INDEX DOES NOT LIST, kept on an article of their own
 # (owner, 2026-10-13): an island or an islet as a landmark, a district as a
 # neighborhood (121 measured, with archipelagos, which are not built).
@@ -1914,9 +2001,77 @@ SHARED_WIKIDATA_MIN = 3
 # goes (Buffalo's "Trestle Alley", one residential way and one alley): 8 rows
 # on the 19, 5 in wave 1.
 PRIVATE_STREET_SERVICES = {"alley"}
+# OPEN ON FOOT IS NOT PRIVATE (owner, 2026-10-13): a way whose foot tag lets
+# people in is no private way for either private-street rule, whatever access
+# says. Florence's limited-traffic zone is access=no with motor_vehicle=
+# permit and foot=yes, and lost 55 public streets. access=private or no with
+# no foot tag stays private.
+FOOT_OPEN = {"yes", "designated", "permissive"}
+# ---------------------------------------------------------------------------
+# THE THIRD LIST (owner, 2026-10-13: "new rules and narrow version accepted";
+# docs/decisions_drafts/search-rules-3.md), classes the final group's reads
+# found in Anyang, Gwangju, Berlin, Bremen, Zurich and Gelsenkirchen. Figures
+# measured 2026-10-13 on the 19 live cities and wave 1's 33, in memory.
+# ---------------------------------------------------------------------------
+# An apartment estate or its management office as a park's operator (3).
+ESTATE_OPERATOR = re.compile("아파트|관리사무소|관리소")
+# A customers-only service road named by a description (4): every way
+# highway=service with access=customers, and a Korean name whose last word
+# is a bare road word (Gwangju's "후문 진입로", "단지 내 도로"). The tags alone
+# are no test: measured on the 19 they took 32 named streets (Montreal's
+# Place du Canada, Sao Paulo's gated Alamedas), which stay.
+CUSTOMER_ROAD_ENDS = ("도로", "진입로")
+# A SITE OR BOUNDARY RELATION THAT REPEATS ANOTHER ROW (9): a type=site or
+# boundary relation whose Wikidata entry or Wikipedia article another row
+# carries is that thing's second row, set at the middle of scattered members
+# (Bremen's university, 3 km from its campus row). Beyond ROW_MERGE_M only:
+# nearer rows of one name are merged already, and a relation that near is on
+# the object.
+SITE_RELATION_TYPES = {"site", "boundary"}
+# A public_transport=station OBJECT WITH NO RAILWAY TAG IS NO STATION ROW
+# (13): a service point, a mezzanine, a bus terminal with no mode written.
+# Reconciled with the lone stop area: one that lists a rail mode or carries a
+# station tag stays where no other station row carries its station (the
+# same test, OUTLINE_BESIDE_M and OUTLINE_SAME_M).
+# PUBLIC ART NEEDS A WIKIPEDIA ARTICLE OF ITS OWN (16; owner, 2026-10-13:
+# "yes article needed"): tourism=artwork was in on a wikidata tag alone
+# (1,048 of Berlin's 1,111 artworks). The cost the owner accepted: a real
+# sculpture with no article leaves too. An article the tags cannot place
+# (own_article's "undecided") keeps the row as it was.
+# A CODE BESIDE A PATH TYPE (17), German, on a street whose every way is a
+# minor way: "Weg 5", "Weg X", "Querweg 12", "3. Querweg", "Stichweg A",
+# "Ring II", "Fußweg 3", "Nebenweg 1" (Berlin: 79 names, 227 ways). NEVER
+# "Straße N", a real Berlin street name on any class of way, and never a
+# name before the type ("Volksgartenweg 1", "Pfuhlweg II").
+PATH_CODE = {"de": re.compile(r"(?:\d+\.\s*)?(?:querweg|stichweg|nebenweg|fussweg|weg|ring)"
+                              r"(?:\s+(?:\d+[a-z]?|[a-z]|[ivx]+))?")}
+# A DEAD RAILWAY ALIGNMENT (18): a way whose railway is abandoned, disused,
+# razed or dismantled, or prefixed so, with no wikipedia tag, is a line on
+# old maps and no place (Berlin 28). A standing structure under a lifecycle
+# tag (a water tower, a tunnel, a bridge) is not this class.
+DEAD_RAILWAY_VALUES = {"abandoned", "disused", "razed", "dismantled"}
+DEAD_RAILWAY_PREFIXES = ("abandoned", "disused", "razed", "dismantled", "demolished")
+STANDING_KEYS = ("building", "man_made", "bridge", "tunnel", "tourism", "amenity")
+
+
+def dead_railway(tags):
+    """The tag that says a way is a dead railway alignment, else None."""
+    if any(tags.get(k) not in (None, "no") for k in STANDING_KEYS) or tags.get("wikipedia"):
+        return None
+    if tags.get("railway") in DEAD_RAILWAY_VALUES:
+        return f"railway={tags['railway']}"
+    return next((f"{p}:railway={tags[f'{p}:railway']}" for p in DEAD_RAILWAY_PREFIXES if tags.get(f"{p}:railway")),
+                None)
+
+
 # A NAME ENDING "(historical)" IS GONE (rule 3): the GNIS import's mark for a
 # feature no longer there ("Lake Vista Park (historical)"). Any tagged row.
-HISTORICAL_NAME = re.compile(r"\(historical\)\s*$", re.I)
+# And, narrowly, the German marks the final group's reads found (the third
+# list, 2026-10-13): "(geschlossen)", "(abgebrannt)", "(stillgelegt)",
+# "(außer Betrieb)". NOT "ehem." or "ehemalig": it leads 39 Berlin landmark
+# names, several of them standing buildings.
+HISTORICAL_NAME = re.compile(
+    r"\((?:historical|geschlossen|abgebrannt|stillgelegt|außer betrieb|ausser betrieb)\)\s*$", re.I)
 # REGISTER AND INVENTORY ENTRIES (rule 4): historic=maritime, naval, military
 # and engine are the values a register district's members and a museum's
 # hardware carry. A landmark of these values needs a Wikipedia article of its
@@ -2309,7 +2464,7 @@ def _point(el):
 
 
 def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=(), rebuilt=(),
-          closed_for_works=(), way_words=(), kept=(), keep_interchanges=False, log=None):
+          closed_for_works=(), way_words=(), kept=(), keep_interchanges=False, map_stations=(), log=None):
     """Return (index dict, report dict) from one place cache's elements.
     `local`: the city's local language codes (config.PLACE_LANGUAGES).
     `dropped`: OSM objects ("way/504652702") a reading by eye found to be a
@@ -2326,11 +2481,14 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
     register-entry rules (config.PLACE_KEPT).
     `keep_interchanges`: this city's interchange names are street names
     (config.PLACE_KEEP_INTERCHANGES).
+    `map_stations`: the names of the stations the city's map draws
+    (map_stations()), for the station guard.
     `log`: a list that receives one record per decision of the 2026-10-13
     rules (class, action, OSM id, name, the deciding tag), for the changed-row
     report of a rule change; nothing reads it otherwise."""
     name_tags = _name_tags(local)
     kept_ids = set(kept)
+    drawn = {fold_name(n) for n in map_stations}
 
     def note(cls, act, osm, name, why="", tags=None, bbox=None, ways=None):
         if log is not None:
@@ -2443,6 +2601,7 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
     street_nonramp = defaultdict(bool)
     street_nonmotorway = defaultdict(bool)
     street_nonround = defaultdict(bool)
+    street_noncustomer = defaultdict(bool)
     square_areas = []                         # pedestrian areas with an article of their own
     way_tags = {w["id"]: w.get("tags", {}) for w in ways} if log is not None else {}
     node_streets = defaultdict(set)           # node id -> street display names
@@ -2522,11 +2681,12 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         prev = street_names.get(cell, [])
         street_names[cell] = prev + [n for n in names if n not in prev]
         street_langs[cell] |= _langs(t, local)
-        street_open[cell] |= not (minor and t.get("access") in ("private", "no")
+        shut = t.get("access") in ("private", "no") and t.get("foot") not in FOOT_OPEN
+        street_open[cell] |= not (minor and shut
                                   and not (t.get("wikidata") or t.get("wikipedia"))
                                   and not _private_street(names, local))
         way_article = bool(t.get("wikipedia")) and article(w, t, names, mid, way=True)[0] == "own"
-        street_public[cell] |= not (t.get("access") in ("private", "no")
+        street_public[cell] |= not (shut
                                     and (t.get("highway") in PRIVATE_STREET_HIGHWAYS
                                          or t.get("service") in PRIVATE_STREET_SERVICES)
                                     and not way_article and not _private_street(names, local))
@@ -2536,6 +2696,8 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         street_nonramp[cell] |= not hw <= RAMP_HIGHWAYS
         street_nonmotorway[cell] |= not hw <= MOTORWAY_HIGHWAYS
         street_nonround[cell] |= t.get("junction") not in ROUNDABOUT_JUNCTIONS
+        street_noncustomer[cell] |= not (t.get("highway") == "service" and t.get("access") == "customers"
+                                         and not way_article)
         street_real[cell] |= way_article or not (
             {v.strip() for v in str(t.get("highway") or "").split(";")} & NOT_STREET_HIGHWAYS)
         street_major[cell] |= not minor or bool(t.get("wikidata") or t.get("wikipedia"))
@@ -2555,14 +2717,14 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             merged = [ids, list(street_names[cell]), set(street_langs[cell]), street_open[cell],
                       list(street_ways[cell]), street_public[cell], street_real[cell],
                       street_major[cell], street_nonramp[cell], street_nonmotorway[cell],
-                      street_nonround[cell]]
+                      street_nonround[cell], street_noncustomer[cell]]
             for g in hit:
                 merged[0] |= g[0]
                 merged[1] += [n for n in g[1] if n not in merged[1]]
                 merged[2] |= g[2]
                 merged[3] |= g[3]
                 merged[4] += g[4]
-                for k in range(5, 11):
+                for k in range(5, 12):
                     merged[k] |= g[k]
                 groups.remove(g)
             groups.append(merged)
@@ -2599,7 +2761,8 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         plain = _plain(name)
         for g in list(groups):
             round_ = not g[10]
-            cls = ("private_residential" if not g[5] else "busway_raceway" if not g[6]
+            cls = ("private_residential" if not g[5] else "customers_only" if not g[11] and name.split()[-1:] and name.split()[-1] in CUSTOMER_ROAD_ENDS
+                   else "busway_raceway" if not g[6]
                    else "description" if described and not g[7]
                    else "description" if described in ANY_WAY_DESCRIPTIONS
                    else never if never
@@ -2726,7 +2889,8 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             kept.append("bare_type")
         names = names[:1] + [n for n in names[1:] if not bare_type(n, local, rt)] if kept else \
             [n for n in names if not bare_type(n, local, rt)]
-        if _exhibit(t):
+        if _exhibit(t) or (t.get("historic") in EXHIBIT_HISTORIC and not own_item(t)) or (
+                t.get("historic") in RAIL_EXHIBITS and not (t.get("tourism") or _titled_by_name(t))):
             return "exhibit", names
         why = _commercial_reasons(t)
         if why:
@@ -2738,6 +2902,12 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             if not (own and set(why) <= KEPT_COMMERCIAL_REASONS):
                 return "commercial", names
             kept.append("commercial")
+        # A PARK AN APARTMENT ESTATE RUNS (the third list, 2026-10-13): a
+        # leisure=park whose operator names an apartment estate or its
+        # management office is the estate's own ground. A park tied to an
+        # estate only by its name stays.
+        if t.get("leisure") == "park" and ESTATE_OPERATOR.search(t.get("operator") or ""):
+            return "estate_park", names
         if (any(k in t for k in NOTABLE_ONLY) and t.get("amenity") != "place_of_worship"
                 and not (t.get("wikidata") or t.get("wikipedia"))):
             return "not_notable", names
@@ -2805,7 +2975,9 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         # Irma Kohnová", here lived ...): a private person at a home, never
         # a place to search, whatever its wikidata item (Prague's came in
         # bulk from the small-monuments register; batch 2a, 2026-10-08).
-        if t.get("memorial") == "stolperstein":
+        # A Stolperschwelle is one too (the third list, 2026-10-13:
+        # memorial=stolperschwelle, artwork_type=stolperstein).
+        if t.get("memorial") in STOLPERSTEIN_MEMORIALS or t.get("artwork_type") == "stolperstein":
             return "stolperstein", names
         if t.get("historic") == "tomb" and any(FAMILY_TOMB.match(n.strip()) for n in names):
             return "family_tomb", names
@@ -2868,6 +3040,17 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
                 report["landmark_dropped_not_there"] += 1
                 note("not_there", "drop", oid, names[0], f"{life[0]}: {life[1]}", t)
                 return
+        # THE THIRD LIST (2026-10-13): a dead railway alignment (18), and
+        # public art without a Wikipedia article of its own (16).
+        dead = e["type"] == "way" and dead_railway(t)
+        if dead:
+            report["landmark_dropped_dead_railway"] += 1
+            note("dead_railway", "drop", oid, names[0], dead, t)
+            return
+        if t.get("tourism") == "artwork" and verdict in ("none", "not"):
+            report["landmark_dropped_artwork_no_article"] += 1
+            note("artwork_no_article", "drop", oid, names[0], why or "no wikipedia tag", t)
+            return
         # REGISTER AND INVENTORY ENTRIES (REGISTER_HISTORIC; the second
         # batch, 2026-10-13): an article of the object's own, or no row.
         if t.get("historic") in REGISTER_HISTORIC and not own and oid not in kept_ids and not (
@@ -3015,6 +3198,17 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
                     else ("business", "+".join(_commercial_reasons(t))) if no_rail and _commercial(t)
                     else ("bare_type", "no wikidata or wikipedia")
                     if bare_type(names[0], local) and not (t.get("wikidata") or t.get("wikipedia")) else None)
+            # A STATION OF THE MAP OR OF A RAIL NETWORK IS NEVER DROPPED FOR A
+            # BARE TYPE NAME (owner, 2026-10-13: every drawn station is
+            # searchable). Monterrey's "Sendero", a metro terminus, is a
+            # Spanish bare word. Guarded: a name the map draws
+            # (STATIONS_CSV, folded), or station=subway, light_rail or train,
+            # or a network tag on a railway station, halt or tram stop.
+            if skip and skip[0] == "bare_type" and (
+                    fold_name(names[0]) in drawn or t.get("station") in RAIL_STATION_VALUES
+                    or (t.get("network") and t.get("railway") in ("station", "halt", "tram_stop"))):
+                note("station_bare_name_kept", "kept", oid, names[0], "a station of the map or of a rail network", t)
+                skip = None
             if skip:
                 report[f"station_skipped_{skip[0]}"] += 1
                 note(f"station_{skip[0]}", "drop", oid, names[0], skip[1], t)
@@ -3055,7 +3249,11 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             # kept as a point).
             if (e["type"] != "node" and t.get("place") not in SETTLEMENTS
                     and (t.get("landuse") == "residential" or t.get("residential"))):
-                if not own:
+                # Kept by id too (config.PLACE_KEPT, 2026-10-13: a real
+                # neighborhood drawn on residential land).
+                if oid in kept_ids:
+                    note("kept_estate_area", "keep", oid, names[0], "by id", t)
+                elif not own:
                     report["place_dropped_estate"] += 1
                     continue
                 note("kept_estate_area", "keep", oid, names[0], "an article of its own", t)
@@ -3269,6 +3467,31 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
     def is_stop_area(r):
         return r[7].startswith("relation/") and r[9].get("public_transport") == "stop_area"
 
+    # A STATION'S OUTLINE UNDER THE STATION'S NAME (owner, 2026-10-13): a
+    # station way or relation within OUTLINE_BESIDE_M of a station node of
+    # its folded name, or one sharing its Wikidata entry, is that station
+    # drawn twice, whatever railway tag it carries (Gwangju's 상무역, 15 m
+    # from its node). It merges into the node's row, its names aliases. An
+    # outline with no such node is the station's only row and stays.
+    station_nodes = [r for r in stations if r[7].startswith("node/")]
+    for r in stations:
+        if r[7].startswith("node/") or is_stop_area(r) or id(r) in gone:
+            continue
+        mine, wd = fold_name(r[3]), (r[9].get("wikidata") or "").strip()
+        o = next((o for o in station_nodes if id(o) not in gone
+                  and _dist_m((r[1], r[2]), (o[1], o[2])) <= OUTLINE_BESIDE_M
+                  and (fold_name(o[3]) == mine or (wd and wd == (o[9].get("wikidata") or "").strip()))), None)
+        if o is not None:
+            alias = [a for a in o[4].split("|") if a]
+            alias += [n for n in [r[3], *r[4].split("|")] if n and n != o[3] and n not in alias]
+            o[4] = "|".join(alias)
+            o[8] |= r[8]
+            gone.add(id(r))
+            report["station"] -= 1
+            report["station_merged_outline"] += 1
+            note("merged_outline", "merge", r[7], r[3], f"into {o[7]} (station)", r[9])
+    stations = [r for r in stations if id(r) not in gone]
+
     for r in [x for x in stations if is_stop_area(x)]:
         mine, wd = fold_name(r[3]), (r[9].get("wikidata") or "").strip()
         for o in stations:
@@ -3287,7 +3510,7 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
     stations = [r for r in stations if id(r) not in gone]
     rail = [r for r in stations if r[9].get("railway")]
     for r in stations:
-        if r[7].startswith("node/") or r[9].get("railway") or r[9].get("public_transport") != "station":
+        if r[9].get("railway") or r[9].get("public_transport") != "station":
             continue
         mine = fold_name(r[3])
         for o in rail:
@@ -3298,6 +3521,17 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
                 report["station_dropped_outline"] += 1
                 note("station_outline", "drop", r[7], r[3], f"{round(d)} m from {o[7]} ({o[3]})", r[9])
                 break
+        else:
+            # NO RAILWAY TAG, NO STATION ROW (the third list, 13). Kept, as
+            # the lone stop area is, where it lists a rail mode or carries a
+            # station tag and no rail-tagged station row stands for it.
+            if r[9].get("station") or any(r[9].get(k) == "yes" for k in RAIL_MODES):
+                note("station_no_railway_tag_kept", "kept", r[7], r[3], "a rail mode, and no other row", r[9])
+            else:
+                gone.add(id(r))
+                report["station"] -= 1
+                report["station_dropped_no_railway_tag"] += 1
+                note("station_no_railway_tag", "drop", r[7], r[3], "public_transport=station alone", r[9])
     by_item = defaultdict(list)
     for r in stations:
         if id(r) not in gone:
@@ -3307,6 +3541,33 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         items = [r for r in by_item[wd] if id(r) not in gone]
         for group in _clusters([(r[1], r[2]) for r in items], COMPLEX_MERGE_M):
             merge([items[i] for i in group], "complex")
+    if gone:
+        rows[:] = [r for r in rows if id(r) not in gone]
+    # A SITE OR BOUNDARY RELATION THAT REPEATS ANOTHER ROW (the third list, 9).
+    by_entry = defaultdict(list)
+    for r in rows:
+        if r[7] and KINDS[r[0]] in ("landmark", "place"):
+            for key in ("wikidata", "wikipedia"):
+                if (r[9].get(key) or "").strip():
+                    by_entry[(key, r[9][key].strip())].append(r)
+
+    def site_relation(r):
+        return r[7].startswith("relation/") and (r[9].get("type") in SITE_RELATION_TYPES or r[9].get("boundary"))
+
+    gone = set()
+    for (key, value), items in by_entry.items():
+        for r in items:
+            if id(r) in gone or not site_relation(r):
+                continue
+            other = next((o for o in items if o is not r and not site_relation(o)
+                          and _dist_m((r[1], r[2]), (o[1], o[2])) > ROW_MERGE_M), None)
+            if other is not None:
+                gone.add(id(r))
+                report[KINDS[r[0]]] -= 1
+                report["dropped_site_relation_repeat"] += 1
+                note("site_relation_repeat", "drop", r[7], r[3],
+                     f"{key}={value} also on {other[7]}, {round(_dist_m((r[1], r[2]), (other[1], other[2])))} m off",
+                     r[9])
     if gone:
         rows[:] = [r for r in rows if id(r) not in gone]
     shared = defaultdict(int)
@@ -3409,25 +3670,26 @@ def _selftest():
     scripts/place_index_breaks.json). Reads no file and builds everything it
     needs here."""
     els, ids = [], iter(range(1, 100000))
+    target = [els]
 
     def node(lat, lon, **tags):
         e = {"type": "node", "id": next(ids), "lat": lat, "lon": lon}
         if tags:
             e["tags"] = {k.replace("__", ":"): v for k, v in tags.items()}
-        els.append(e)
+        target[0].append(e)
         return e["id"]
 
     def street(name, lat, highway="residential", share=None, lon=-122.30, **tags):
         """A two-node way running east at `lat`; `share` is a node id it ends on."""
         a = share or node(lat, lon)
         b = node(lat + 0.0002, lon + 0.002)
-        els.append({"type": "way", "id": next(ids), "nodes": [a, b],
+        target[0].append({"type": "way", "id": next(ids), "nodes": [a, b],
                     "tags": {"name": name, "highway": highway,
                              **{k.replace("__", ":"): v for k, v in tags.items()}}})
         return a, b
 
     def area(lat, lon, **tags):
-        els.append({"type": "way", "id": next(ids), "center": {"lat": lat, "lon": lon},
+        target[0].append({"type": "way", "id": next(ids), "center": {"lat": lat, "lon": lon},
                     "tags": {k.replace("__", ":"): v for k, v in tags.items()}})
 
     # Streets.
@@ -3525,16 +3787,16 @@ def _selftest():
          disused__amenity="drinking_water")
     # An item shared by three rows, and one shared by two.
     for i, name in enumerate(("Piece One", "Piece Two", "Piece Three")):
-        node(47.7200 + i * 0.005, -122.32, name=name, tourism="artwork", wikidata="Q77")
+        node(47.7200 + i * 0.005, -122.32, name=name, tourism="attraction", wikidata="Q77")
     for i, name in enumerate(("Pair One", "Pair Two")):
-        node(47.7400 + i * 0.005, -122.32, name=name, tourism="artwork", wikidata="Q88")
+        node(47.7400 + i * 0.005, -122.32, name=name, tourism="attraction", wikidata="Q88")
     # A pedestrian square drawn as an area, and a bridge on a road.
     sq = [node(47.7500, -122.32), node(47.7500, -122.319), node(47.7505, -122.319)]
-    els.append({"type": "way", "id": next(ids), "nodes": sq + sq[:1],
+    target[0].append({"type": "way", "id": next(ids), "nodes": sq + sq[:1],
                 "tags": {"name": "Market Square", "highway": "pedestrian", "area": "yes",
                          "wikipedia": "en:Market Square"}})
     sq = [node(47.7600, -122.32), node(47.7600, -122.319), node(47.7605, -122.319)]
-    els.append({"type": "way", "id": next(ids), "nodes": sq + sq[:1],
+    target[0].append({"type": "way", "id": next(ids), "nodes": sq + sq[:1],
                 "tags": {"name": "Plain Plaza", "highway": "pedestrian", "area": "yes",
                          "wikipedia": "en:City Park#Plaza"}})
     area(47.7640, -122.32, name="River Road", highway="primary", bridge="yes", bridge__name="Iron Bridge",
@@ -3542,7 +3804,7 @@ def _selftest():
 
     # --- The second batch (2026-10-13).
     def rel(lat, lon, **tags):
-        els.append({"type": "relation", "id": next(ids), "center": {"lat": lat, "lon": lon},
+        target[0].append({"type": "relation", "id": next(ids), "center": {"lat": lat, "lon": lon},
                     "tags": {k.replace("__", ":"): v for k, v in tags.items()}})
 
     # Streets.
@@ -3581,8 +3843,9 @@ def _selftest():
     area(47.8250, -122.31, name="Central Bus Hub", public_transport="station", amenity="bus_station",
          light_rail="yes")
     node(47.8310, -122.31, name="Harbor", railway="station")
-    area(47.8314, -122.31, name="Harbor Station Building", public_transport="station")
-    area(47.8400, -122.31, name="Far Depot", public_transport="station")
+    area(47.8314, -122.31, name="Harbor Station Building", public_transport="station", subway="yes")
+    area(47.8400, -122.31, name="Far Depot", public_transport="station", subway="yes")
+    area(47.8450, -122.31, name="Bus Yard", public_transport="station")
     node(47.8500, -122.31, name="Times Square", railway="station", wikidata="Q500")
     node(47.8518, -122.31, name="Port Authority", railway="station", wikidata="Q500")
     node(47.8600, -122.31, name="North Loop", railway="station", wikidata="Q501")
@@ -3620,12 +3883,86 @@ def _selftest():
     node(47.8550, -122.32, name="Masjid", amenity="place_of_worship")
     node(47.8560, -122.32, name="Tot Lot", leisure="park")
 
+    # --- The third list (2026-10-13).
+    node(47.7700, -122.32, name="Engine 3100", historic="locomotive", wikidata="Q900")
+    node(47.7705, -122.32, name="Royal Train", historic="locomotive", tourism="attraction", wikidata="Q901")
+    node(47.7707, -122.32, name="Zephyr", historic="locomotive", wikidata="Q910", wikipedia="en:Zephyr")
+    node(47.7710, -122.32, name="Coach A", historic="railway_car", tourism="attraction", wikidata="Q902")
+    node(47.7790, -122.32, name="Coach B", historic="railway_car", tourism="attraction", wikidata="Q902")
+    node(47.7715, -122.32, name="EMU Demo", tourism="attraction", locomotive__type="electric", wikidata="Q903",
+         wikipedia="en:KTX Class")
+    node(47.7720, -122.32, name="Old 99", tourism="attraction", locomotive__type="steam", wikidata="Q904",
+         wikipedia="en:Old 99")
+    node(47.7000, -122.325, name="City College", amenity="college", wikidata="Q905")
+    rel(47.7400, -122.325, name="City College", type="site", amenity="college", wikidata="Q905")
+    node(47.7050, -122.325, name="Art School", amenity="college", wikidata="Q906")
+    rel(47.7058, -122.325, name="Art School Grounds", type="site", amenity="college", wikidata="Q906")
+    node(47.7725, -122.32, name="Bronze Horse", tourism="artwork", wikidata="Q907")
+    node(47.7730, -122.32, name="Cloud Gate", tourism="artwork", wikipedia="en:Cloud Gate")
+    node(47.7735, -122.32, name="Founder Statue", tourism="artwork", artwork_type="statue",
+         wikipedia="en:John Founder")
+    area(47.7740, -122.32, name="Old Branch Line", historic="railway", railway="abandoned", wikidata="Q908")
+    area(47.7745, -122.32, name="Old Trunk Line", historic="railway", railway="abandoned",
+         wikipedia="en:Old Trunk Line")
+    area(47.7750, -122.32, name="Rail Water Tower", historic="yes", railway="disused", man_made="water_tower",
+         wikidata="Q909")
+    street("Shut Close", 47.8235, highway="living_street", access="private")
+    street("Zone Street", 47.8237, access="no", foot="yes", motor_vehicle="permit")
+    node(47.8650, -122.31, name="Depot Halt", railway="station")
+    area(47.8642, -122.31, name="Depot Halt", railway="station", building="train_station")
+    area(47.8680, -122.31, name="Lone Hall", railway="station", building="train_station")
+    node(47.8683, -122.31, name="Other Stop", railway="station")
+    node(47.7755, -122.32, name="The Fountain", amenity="fountain", wikidata="Q911")
+    node(47.7760, -122.32, name="Fountain - Chapel", amenity="place_of_worship")
+    node(47.7765, -122.32, name="Fountain - Saint Ann", amenity="place_of_worship")
+    node(47.6492, -122.31, name="Greenway", railway="station", station="subway")
+    node(47.6494, -122.31, name="Sanctuary", railway="halt")
+    node(47.6496, -122.31, name="Parkland", railway="halt", network="Metro")
+    node(47.6498, -122.31, name="Barn", railway="halt")
+    colonia = next(ids)
+    target[0].append({"type": "way", "id": colonia, "center": {"lat": 47.6575, "lon": -122.32},
+                      "tags": {"name": "Colonia Real", "place": "neighbourhood", "landuse": "residential"}})
+    # A German city and a Korean one, each its own cache.
+    de_els = []
+    target[0] = de_els
+    street("Hauptstraße", 52.5000, lon=13.40)
+    street("Kirchweg", 52.5005, highway="footway", lon=13.40)
+    street("Zum Hafen", 52.5010, highway="footway", lon=13.40)
+    street("Spielgerät", 52.5020, highway="footway", lon=13.40)
+    street("Weg 5", 52.5030, highway="footway", lon=13.40)
+    street("Straße 5", 52.5040, highway="footway", lon=13.40)
+    street("Volksgartenweg 1", 52.5050, highway="footway", lon=13.40)
+    street("Zufahrt Nord", 52.5060, lon=13.40)
+    node(52.5100, 13.401, name="Kapelle", amenity="place_of_worship")
+    node(52.5110, 13.401, name="Villa Lemm", leisure="park")
+    node(52.5120, 13.401, name="Schlosspark", leisure="park")
+    node(52.5130, 13.401, name="Alte Mühle (abgebrannt)", historic="yes", wikidata="Q1")
+    node(52.5140, 13.401, name="Ehem. Rathaus", historic="yes", wikidata="Q2")
+    node(52.5150, 13.401, name="Betraum", historic="memorial", memorial="stolperschwelle", tourism="attraction",
+         wikidata="Q3")
+    de_rows = {(KINDS[r[0]], r[3]) for r in build(de_els, city="Teststadt", retrieved="2026-10-10",
+                                                  local=("de",))[0]["rows"]}
+    ko_els = []
+    target[0] = ko_els
+    street("시험로", 37.4000, lon=126.95)
+    node(37.4010, 126.951, name="족구장", leisure="park")
+    node(37.4020, 126.951, name="115호 어린이공원", leisure="park")
+    node(37.4030, 126.951, name="포도원놀이터", leisure="park", operator="호계대림아파트관리소")
+    node(37.4040, 126.951, name="포도원공원", leisure="park")
+    street("후문 진입로", 37.4050, highway="service", access="customers", lon=126.95)
+    street("정문 진입로", 37.4060, highway="service", lon=126.95)
+    street("시험 안길", 37.4070, highway="service", access="customers", lon=126.95)
+    ko_rows = {(KINDS[r[0]], r[3]) for r in build(ko_els, city="시험시", retrieved="2026-10-10",
+                                                  local=("ko",))[0]["rows"]}
+    target[0] = els
+
     log = []
     index, report = build(els, city="Testville", retrieved="2026-10-10", local=("en",), log=log,
+                          map_stations=["Barn"],
                           closed_for_works={f"node/{works}", f"node/{gone_id}"})
     worded, _ = build(els, city="Testville", retrieved="2026-10-10", local=("en",),
                       closed_for_works={f"node/{works}", f"node/{gone_id}"}, way_words=("place",),
-                      kept={f"node/{dam}", f"node/{green}"}, keep_interchanges=True)
+                      kept={f"node/{dam}", f"node/{green}", f"way/{colonia}"}, keep_interchanges=True)
     worded_rows = {(KINDS[r[0]], r[3]) for r in worded["rows"]}
     rows = {(KINDS[r[0]], r[3]) for r in index["rows"]}
     count = defaultdict(int)
@@ -3759,7 +4096,70 @@ def _selftest():
         ("a bus station listing a rail mode is no station", not any(n == "Central Bus Hub" for _, n in rows)),
         ("a station outline beside its station is no row", not any(n == "Harbor Station Building" for _, n in rows)
          and ("station", "Harbor") in rows),
-        ("a station outline with no station beside it stays", ("station", "Far Depot") in rows),
+        ("a station object with no railway tag, a rail mode and no station beside it stays",
+         ("station", "Far Depot") in rows),
+        ("a station object with no railway tag and no rail mode is no row",
+         not any(n == "Bus Yard" for _, n in rows)),
+        # --- The third list (2026-10-13), German and Korean.
+        ("German: a way word ends a compound", ("street", "Kirchweg") in de_rows),
+        ("German: a leading preposition reads as a way", ("street", "Zum Hafen") in de_rows),
+        ("German: a footway with no way word is no street", ("street", "Spielgerät") not in de_rows),
+        ("German: a leak word drops a street", ("street", "Zufahrt Nord") not in de_rows),
+        ("German: a bare type word is no name", ("landmark", "Kapelle") not in de_rows),
+        ("a code beside a path type on a minor way is no name", ("street", "Weg 5") not in de_rows),
+        ("Straße and a number is a name", ("street", "Straße 5") in de_rows),
+        ("a name before the path type and a number is a name", ("street", "Volksgartenweg 1") in de_rows),
+        ("a park whose name leads with a house word is the house's", ("landmark", "Villa Lemm") not in de_rows
+         and ("landmark", "Schlosspark") in de_rows),
+        ("a name ending (abgebrannt) is gone", not any(n.startswith("Alte Mühle") for _, n in de_rows)),
+        ("a name led by Ehem. stays", ("landmark", "Ehem. Rathaus") in de_rows),
+        ("a Stolperschwelle is read as a Stolperstein", ("landmark", "Betraum") not in de_rows),
+        ("Korean: the third list's bare type words are no names", ("landmark", "족구장") not in ko_rows),
+        ("Korean: a numbered park lot is a code beside a type", ("landmark", "115호 어린이공원") not in ko_rows),
+        ("a park an apartment estate's office runs is no row", ("landmark", "포도원놀이터") not in ko_rows
+         and ("landmark", "포도원공원") in ko_rows),
+        ("a customers-only service road is no street", ("street", "후문 진입로") not in ko_rows
+         and ("street", "정문 진입로") in ko_rows),
+        ("the private-street rule reads living_street", ("street", "Shut Close") not in rows),
+        ("a street closed to traffic and open on foot is no private street", ("street", "Zone Street") in rows),
+        ("a station's outline under its node's name is one row with it", count[("station", "Depot Halt")] == 1),
+        ("a station outline with no node of its name stays", ("station", "Lone Hall") in rows),
+        ("a bare type word behind an article is bare", ("landmark", "The Fountain") not in rows),
+        ("two bare words either side of a dash are bare", not any(n == "Fountain - Chapel" for _, n in rows)),
+        ("a bare word beside a real name stays", ("landmark", "Fountain - Saint Ann") in rows),
+        ("a subway station under a bare type word stays", ("station", "Greenway") in rows),
+        ("a halt under a bare type word, no network and not on the map, goes", ("station", "Sanctuary") not in rows),
+        ("a network's halt under a bare type word stays", ("station", "Parkland") in rows),
+        ("a station of the map under a bare type word stays", ("station", "Barn") in rows),
+        ("an estate area kept by id stays", ("place", "Colonia Real") not in rows
+         and ("place", "Colonia Real") in worded_rows),
+        # Lines reach the search box from the map, never from the index: no
+        # kind holds one, so no index rule can drop a line by its name.
+        ("the index holds no kind for a transit line", "line" not in KINDS and "route" not in KINDS),
+        ("bare_type: Spanish estate words and a numbered cluster",
+         bare_type("Casa Club", ("es",)) and bare_type("Cluster 12", ("es",)) and not bare_type("Coto Real", ("es",))),
+        ("bare_type: an earth-god shrine under its type alone",
+         bare_type("福德祠", ("zh",)) and bare_type("福德祠(土地公廟)", ("zh",)) and not bare_type("福安宮", ("zh",))),
+        ("bare_type: a French article and a two-language pair",
+         bare_type("Le Château", ("fr", "nl")) is False and bare_type("La Fontaine", ("fr",))
+         and bare_type("Fontaine - Fontein", ("fr", "nl")) and not bare_type("Fontaine - Manneken", ("fr", "nl"))),
+        ("a locomotive with an entry and no tourism tag is an exhibit", ("landmark", "Engine 3100") not in rows
+         and ("landmark", "Royal Train") in rows),
+        ("a locomotive under an article of its own name stays", ("landmark", "Zephyr") in rows),
+        ("a customers-only service road under a name stays", ("street", "시험 안길") in ko_rows),
+        ("exhibits sharing one entry are admitted by their class's", not any(n.startswith("Coach") for _, n in rows)),
+        ("a vehicle under its kind's article is an exhibit", ("landmark", "EMU Demo") not in rows
+         and ("landmark", "Old 99") in rows),
+        ("a site relation repeating a row's entry far off is no row", count[("landmark", "City College")] == 1),
+        ("a site relation on its object stays", ("landmark", "Art School Grounds") in rows),
+        ("own_article: a list article with an anchor is not the object's",
+         own_article({"wikipedia": "de:Liste der Kulturdenkmäler in Bremen-Mitte#1500,T008"}, ["Bacchus"])[0] == "not"),
+        ("public art with an entry and no article is no row", ("landmark", "Bronze Horse") not in rows),
+        ("public art with its own article is a row", ("landmark", "Cloud Gate") in rows),
+        ("public art whose article the tags cannot place stays", ("landmark", "Founder Statue") in rows),
+        ("a dead railway alignment with no article is no row", not any(n == "Old Branch Line" for _, n in rows)),
+        ("a dead railway alignment with an article stays", any(n == "Old Trunk Line" for _, n in rows)),
+        ("a standing structure under a railway lifecycle tag stays", ("landmark", "Rail Water Tower") in rows),
         ("station rows sharing an item within 600 m are one row, the other name an alias",
          count[("station", "Times Square")] + count[("station", "Port Authority")] == 1
          and any(a in alias.get(("station", b), "") for a, b in (("Times Square", "Port Authority"),
@@ -3789,7 +4189,7 @@ def _selftest():
          and any(x["class"] == "abandoned_standing" and x["name"] == "Ruined Mill" for x in log)),
         ("the second list's bare type words are no names",
          not any(n in ("Masjid", "Tot Lot") for _, n in rows)),
-        ("the report counts the private residential streets", report.get("street_dropped_private_residential") == 3),
+        ("the report counts the private residential streets", report.get("street_dropped_private_residential") == 4),
         ("the log names a rule for a dropped street",
          any(x["class"] == "street_busway_raceway" and x["name"] == "Bus Road" for x in log)),
         ("own_article: a section is not the object's", own_article({"wikipedia": "en:A#B"}, ["A"])[0] == "not"),
