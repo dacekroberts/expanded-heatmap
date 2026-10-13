@@ -179,3 +179,16 @@ entry first; it is the specification.
   (`scripts/downstream_changes.py`; `docs/session_roles.md`). Candidates
   today: Montreal, Rome, Madrid, San Francisco, Paris, then Barcelona and
   Mexico City.
+
+## State after the rules landing (2026-10-13)
+
+- Rules landed on master at 86aadced; the owner rebooted; the live Prague
+  index matches the committed bytes. Local commits after it (skill text, the
+  read-tier call, the ordering entry) ride with the next push.
+- Next, in the owner's order: shared-border streets (in the extract route,
+  with a changed-row report), the rollout batches on the extract route, the
+  tram rescope in parallel. Held out of the waves as the last batch: Madrid,
+  Rome, Milan, Toronto. San Francisco (wave 1) is an open question.
+- Reads: top model for stations, places and landmarks; Sonnet for the street
+  screen (place-search-city skill, step 5).
+- Transit-globe's messages go to its main-checkout session now.

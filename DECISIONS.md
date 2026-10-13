@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**100 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**101 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -37,6 +37,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Place search: the owner's rulings of 2026-10-13 built on a branch, the 19 indexes rebuilt, every changed row reported; NOT landed](#2026-10-13---place-search-the-owners-rulings-of-2026-10-13-built-on-a-branch-the-19-indexes-rebuilt-every-changed-row-reported-not-landed)
 - [Place search: the rules of 2026-10-13 approved for landing, with two row fixes and the page section (owner)](#2026-10-13---place-search-the-rules-of-2026-10-13-approved-for-landing-with-two-row-fixes-and-the-page-section-owner)
 - [Place search: the top model reads places and landmarks, Sonnet screens streets (owner)](#2026-10-13---place-search-the-top-model-reads-places-and-landmarks-sonnet-screens-streets-owner)
+- [Place search rollout: shared-border streets next, batches tonight, tram-rescope cities held as the last batch (owner)](#2026-10-13---place-search-rollout-shared-border-streets-next-batches-tonight-tram-rescope-cities-held-as-the-last-batch-owner)
 
 **2026-10-12**
 
@@ -5290,3 +5291,26 @@ japan-city template:
   could not be scored: wave 1's drop files do not mark which drops were
   homes. Both tiers flagged far more rows than wave 1 dropped (Sonnet 671
   across the three cities); those were not judged row by row.
+
+### 2026-10-13 - Place search rollout: shared-border streets next, batches tonight, tram-rescope cities held as the last batch (owner)
+
+- **Order after the rules landing, the owner: "2. shared border streets, we
+  should get the search batches going now that we have an efficient system.
+  could potentially finish all cities overnight".** Shared-border streets
+  (a way on the border of two searched municipalities is in neither area
+  under Overpass's test, so its street is missing) is built before the tram
+  rescope, in the extract route, so the wave rebuilds carry it. It changes
+  built indexes, so the rule-change protocol applies: a changed-row report
+  for the 19 built cities before it lands.
+- **The tram rescope runs in parallel, and its cities wait, the owner: "tram
+  rescope cities should be left out as a final batch, as we work on tram
+  rescope in parallel with the other batches beginning".** Held out of the
+  waves until their rescope lands: Madrid (wave 7), Rome and Milan (the
+  new-language wave), Toronto (in no wave yet). Already searched on master
+  and rebuilt after their rescope instead: Montreal, Paris, Barcelona,
+  Mexico City, Prague. San Francisco is in wave 1, already read on its
+  branch: whether it lands with wave 1 or waits is asked of the owner. Hong
+  Kong's tramways stay out of the rescope, so Hong Kong is not held.
+- **"Overnight" is a hope, not a measurement:** the extract route's timing
+  table is not in yet, the eye read per city is the slow step, and landings
+  are batched at review time.
