@@ -1,3 +1,77 @@
+### 2026-10-13 - Nine cities built on existing lists and read; Brussels (Regional) is 18 communes, not 19 (branch search-final)
+
+- **Correction to the boundary entry below: Brussels (Regional) takes 18
+  communes.** The session recommended all 19 and the owner agreed, and that
+  was wrong. This map is cut to the communes outside the City of Brussels,
+  which has its own page and index. The fetch's scope stop refused relation
+  58274 (no station of this map inside it); the area was narrowed to the
+  other 18 and refetched. The owner was told in chat.
+- **Built and read on the lists already in `place_index.py`:** Taipei (with
+  New Taipei), Taichung, Taoyuan (`zh`); Kitakyushu (`ja`); Brasília (`pt`);
+  Monterrey, Guadalajara (`es`); Geneva (`fr`); Brussels (Regional) (`fr`,
+  `nl`). Stations, places and landmarks were read by the place-read agent
+  on the top model, streets screened on sonnet. Each reader wrote clear
+  drops under a settled call to one file and everything else to a pending
+  file; only the first was applied.
+- **Dropped by id from the reads** (homes, businesses, descriptions,
+  glitched names, duplicates, public art and plaques with no article, codes
+  beside a path type on minor ways): Taipei 468, Taichung 143, Brasília 130,
+  Guadalajara 123, Taoyuan 120, Brussels (Regional) 116, Monterrey 70,
+  Geneva 28, Kitakyushu 16. Brussels' count includes 42 cemetery lanes
+  named by an ordinal ("10ème Avenue - 10ème Laan"), dropped as a code
+  beside a type on a minor way, and 25 slash-joined doubles of a street
+  that has a clean row.
+- **Held back by the session, not dropped, though a reader listed them:**
+  - Monterrey "Basílica de": the Basílica del Roble under a cut name.
+    Dropping it removes a major church.
+  - Kitakyushu "遠賀川 (Onga River)", three ways: English glued on, but the
+    river has no clean row.
+  - Brasília "Primeiro Avenida" and Kitakyushu "新導寺曽根線": a typo on a
+    real road is still that road.
+  - Guadalajara: 273 street names the reader took for address numbers
+    ("Abeto 1300") without checking a way, five park names with a typo and
+    seven cut names.
+- **Reviewed, kept under `PLACE_REVIEWED`:** Taoyuan's Airport Hotel metro
+  station and an air-crash memorial; Brasília's Shopping station; six
+  Taipei rows with their own articles; Geneva's Chemin de l'Auberge; in
+  Brussels (Regional) four real streets (Brasserie twice, Clinique, Hôtel
+  des Monnaies), that metro station and two town halls; Guadalajara's
+  "Calle G.U.S.A.".
+- **Classes no settled call covers wait for the owner** in each city's
+  pending file: bridges as street rows, motorway ramps, planning-code
+  parks, family compounds and farmhouse ruins with no article, estates
+  tagged hamlets or parks, private streets inside gated estates, campus
+  and cemetery numbered roads, shopping galleries, municipal road codes.
+
+Findings for Cleanup (shared code; nothing edited here), rule candidates 19
+onward:
+
+19. **The Chinese bare-type list is short.** Earth-god shrine words as a
+    whole name (土地公廟, 福德祠 and kin): Taoyuan about 203 rows, Taichung
+    157, Taipei 263.
+20. **A metro station's outline way enters as a second station row.**
+    Brussels (Regional) 10 (dropped by id). Same shape as candidate 6;
+    Hôtel des Monnaies' outline is that station's only row and stays.
+21. **The way-word test is skipped for `highway=pedestrian`, busway, escape
+    and dummy values.** Brasília.
+22. **A bare word already in the lists gets through on a bilingual or
+    article-led name** (Château, Donjon, Aqueduc, Totem, 本殿). Brussels
+    (Regional), Geneva, Kitakyushu.
+23. **A name of two street names joined by " / ".** Brussels (Regional) 41
+    rows; 36 are one street in two spellings.
+24. **An ordinal or number beside a type as the whole name** ("Avenue 1",
+    "10ème Avenue"): Brussels (Regional) 60 rows.
+25. **A name whose every way is `access=private`:** Brussels (Regional) 11
+    names; Guadalajara 2,423 names inside gated cotos (13% of its streets).
+26. **Estate amenities tagged `leisure=park` in Spanish:** Guadalajara
+    "Terraza" 28 rows, "coto" 25, "Cluster N" 9, "Casa Club" 6, "Camellón"
+    6; `amenity=letter_box` carrying a place tag 6.
+27. **Monterrey: the Sendero station is missing from the index, and
+    neighborhood ways carrying `landuse=residential` are dropped** though
+    they are real colonias.
+28. **River rows have no id in `place_ids.json`,** so a river cannot be
+    dropped or kept by id.
+
 ### 2026-10-13 - Berlin: Gärten der Welt's small plots and courtyards dropped, the Kleistgrab kept (branch search-final)
 
 - **The owner: "1. yes real name and drop small plots. 2. keep as
