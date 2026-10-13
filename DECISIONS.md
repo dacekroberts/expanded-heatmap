@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**118 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**119 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -55,6 +55,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Place search: the owner's six rulings on the second batch's changed rows, built; the 19 rebuilt again](#2026-10-13---place-search-the-owners-six-rulings-on-the-second-batchs-changed-rows-built-the-19-rebuilt-again)
 - [Place search: the second rule batch landed as rules only; the rebuilt indexes wait for the big review](#2026-10-13---place-search-the-second-rule-batch-landed-as-rules-only-the-rebuilt-indexes-wait-for-the-big-review)
 - [Place search: the third rule list, from the final group's reads (owner)](#2026-10-13---place-search-the-third-rule-list-from-the-final-groups-reads-owner)
+- [Place search: candidates 19 to 28 join the third pass (owner)](#2026-10-13---place-search-candidates-19-to-28-join-the-third-pass-owner)
 
 **2026-10-12**
 
@@ -5924,3 +5925,29 @@ japan-city template:
   goes.
 - **One pass, one report:** these, the German lists and
   `PLACE_QUIET_STATIONS` are built together on branch `search-rules-3`.
+
+### 2026-10-13 - Place search: candidates 19 to 28 join the third pass (owner)
+
+- **Ten more candidates came from the final group's reads of nine cities**
+  (Taipei, Taoyuan, Taichung, Brasilia, Kitakyushu, Monterrey, Guadalajara,
+  Geneva, Brussels Regional). Brought with a recommendation each; **the
+  owner: "i agree with all".**
+- **Built in the third pass:** (19) Chinese earth-god shrine words as a
+  whole name are bare type words (Taipei 263 rows, Taoyuan 203, Taichung
+  157); (22) a bare type word is still bare behind an article or as half of
+  a two-language name; (26) Spanish "Terraza", "Casa Club" and "Camellon"
+  are bare type words and "Cluster N" a code plus type; (28) river rows get
+  an id, so one can be kept or dropped by id.
+- **No rule:** (23) two street names joined by " / " stay as written (the
+  ruling of this date on two real names in one; 36 of Brussels Regional's 41
+  are one street in two spellings). (24) A number beside a type as a whole
+  name gets no rule: "5th Avenue" has the same shape; cemetery and estate
+  cases stay by-id drops.
+- **(25) The private-street rule stays as it is.** It drops 2,423 street
+  names in Guadalajara, 13% of the city's streets, all inside gated estates.
+  Accepted cost: a resident searching for a gated street finds nothing.
+- **Open, with Cleanup:** (27) Monterrey's Sendero station missing from the
+  index, and neighborhoods mapped as residential land use dropped though
+  they are colonias. No rule until it is traced against Mexico City.
+- (20) is the second batch's station-outline rule; (21) is measured in the
+  pass, not ruled.
