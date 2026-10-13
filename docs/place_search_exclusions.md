@@ -4,9 +4,9 @@ The internal record of every settled class the place-search index leaves
 out, and of the classes it keeps against one of those rules. Started
 2026-10-13 on the owner's word ("add to list of dropped categories ... start
 one now and retrofit"). `docs/excluded_categories.md` is the businesses' list;
-this one is search's. The reader-facing version is to be a section of its own
-on the What Is Excluded page; its wording is the owner's and is still a draft
-(`docs/decisions_drafts/search-rules.md`).
+this one is search's. The reader-facing version is the section "What the
+map's search leaves out" in `docs/excluded_categories.md`, in the owner's
+approved wording (landed 2026-10-13).
 
 Every rule lives in `pipeline/place_index.py` unless a row says otherwise. A
 date is the `DECISIONS.md` entry (or its week file under `docs/decisions/`)
