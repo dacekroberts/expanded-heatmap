@@ -4,6 +4,7 @@ Overpass queries, for the same three caches in the same shape. NOT a step:
 drift_check.py never runs this file.
 
     python pipeline/place_extract_fetch.py <city> [--force] [--pbf FILE] [--out DIR] [--max-mb N]
+                                           [--overpass-exact]
     python pipeline/place_extract_fetch.py --selftest
 
 It answers place_index_fetch.py's OUTLINE_QUERY, QUERY and EXTRA_QUERY, read
@@ -11,6 +12,19 @@ from that module as written (the unions are parsed line by line by
 pipeline/osm_extract.py, and a QUERY whose shape has changed stops this
 script), with osm_extract's five rules. Proven equal to Overpass's answers
 on Tbilisi and Seattle, 2026-10-13 (osm-extract skill, "The proof").
+
+  * ONE DISCLOSED DEPARTURE from the Overpass answer, SHARED_BORDER_UNIONS:
+    a street way lying along the border two municipalities of PLACE_AREA
+    share is inside neither of them, so Overpass returns it for neither,
+    yet it is inside the searched area as a whole. It is admitted here
+    (osm_extract.query's shared_borders). A way on the outer edge of the
+    searched area, or on a border with a municipality PLACE_AREA does not
+    name, stays out. Each cache says in its own "_extract" block that the
+    option was on, how many elements it admitted and which, and the
+    provenance entry's "how" repeats the count. --overpass-exact turns it
+    off for one run (the proof against an Overpass cache needs that). A
+    city with one municipality is unchanged by construction. A city fetched
+    by pipeline/place_index_fetch.py does NOT have these ways.
 
   * A cache already on disk is KEPT, never written over, whoever wrote it;
     only --force replaces one. With every cache present nothing is read.
@@ -92,6 +106,12 @@ EXTRACT_ROOT = Path(__file__).parent.parent / "data" / "_osm_extracts"
 # figure (--max-mb): a city whose smallest covering region is larger is a
 # country-sized download, and a person's call.
 MAX_MB = 1000
+# The unions the shared-border rule applies to (the module docstring has the
+# rule; the names are unions()'s). Streets only: the other unions were
+# measured and left out (docs/decisions_drafts/place-extract.md,
+# "Shared-border streets"). Empty answers exactly as Overpass does.
+SHARED_BORDER_UNIONS = ("streets",)
+HOW = "filtered from a regional extract"
 # The two place queries with their unions taken out and the timeout's number
 # blanked: what this script answers. A change to either constant in
 # place_index_fetch.py that is not a union line stops the run until this file
@@ -347,9 +367,22 @@ def check_region(pbf, area, root=EXTRACT_ROOT, out=print):
             "accepted_as": "water-side overflow: no other region of the index holds data there"}
 
 
-def build(config, pbf, *, scope=True, say=print, root=EXTRACT_ROOT):
+def how_recorded(payload):
+    """The provenance entry's "how" for a cache this script wrote: the route,
+    and the shared-border count when the option was on for it."""
+    block = payload.get("_extract", {}).get("shared_border")
+    if not block:
+        return HOW
+    return (f"{HOW}; shared-border rule on for {', '.join(block['unions'])}: "
+            f"{sum(block['admitted'].values())} element(s) admitted that the Overpass query does not return")
+
+
+def build(config, pbf, *, scope=True, say=print, root=EXTRACT_ROOT, shared_borders=None):
     """{key: payload} for the three caches of a city from `pbf`, each payload
-    in the shape place_index and place_index_fetch.record read."""
+    in the shape place_index and place_index_fetch.record read.
+    `shared_borders` is SHARED_BORDER_UNIONS unless given; () answers
+    exactly as Overpass does."""
+    shared_borders = tuple(SHARED_BORDER_UNIONS if shared_borders is None else shared_borders)
     plan = unions()
     try:
         spec = osm_extract.parse_area(config.PLACE_AREA)
@@ -366,7 +399,7 @@ def build(config, pbf, *, scope=True, say=print, root=EXTRACT_ROOT):
             place_index_fetch.check_area(config, outline, out=say)
             overflow.update(check_region(pbf, area, root, out=say) or {})
 
-    got = osm_extract.query(pbf, spec, plan, on_area=on_area, say=say)
+    got = osm_extract.query(pbf, spec, plan, on_area=on_area, say=say, shared_borders=shared_borders)
     streets = got["elements"]["streets"]
     main = ([osm_extract.out_body(e) for e in streets] + osm_extract.out_skel_nodes(streets)
             + [osm_extract.out_tags_center(e) for e in got["elements"]["main"]])
@@ -380,23 +413,35 @@ def build(config, pbf, *, scope=True, say=print, root=EXTRACT_ROOT):
     source = f"{osm_extract.DOWNLOAD_HOST} ({Path(pbf).name}, filtered on this machine{passed_over})"
     area_text = config.PLACE_AREA
 
-    def payload(elements, query):
+    def payload(elements, query, names=()):
+        block = {"file": Path(pbf).name, "stats": got["stats"],
+                 "method": "pipeline/place_extract_fetch.py: the query answered from the "
+                           "extract by pipeline/osm_extract.py's five rules, elements in "
+                           "ascending id order"}
+        on = [name for name in names if name in got["shared_border"]]
+        if on:
+            # Said in the cache itself: with the option on, the elements are
+            # the query's answer PLUS the ones listed here.
+            block["shared_border"] = {
+                "unions": on,
+                "admitted": {name: len(got["shared_border"][name]) for name in on},
+                "elements": {name: got["shared_border"][name] for name in on},
+                "note": "NOT in the Overpass answer to _query: elements on a border two "
+                        "boundaries of the area share, inside the area as a whole"}
         return {"osm3s": {"timestamp_osm_base": timestamp,
                           "copyright": "The data included in this document is from www.openstreetmap.org. "
                                        "The data is made available under ODbL."},
                 "elements": elements, "_fetched_from": source, "_query": query.format(area=area_text),
-                "_extract": {"file": Path(pbf).name, "stats": got["stats"],
-                             "method": "pipeline/place_extract_fetch.py: the query answered from the "
-                                       "extract by pipeline/osm_extract.py's five rules, elements in "
-                                       "ascending id order"}}
+                "_extract": block}
     return {"osm_place_outline": payload(outline, place_index_fetch.OUTLINE_QUERY),
-            "osm_places": payload(main, place_index_fetch.QUERY),
-            "osm_places_extra": payload(extra, place_index_fetch.EXTRA_QUERY)}
+            "osm_places": payload(main, place_index_fetch.QUERY, ("streets", "main")),
+            "osm_places_extra": payload(extra, place_index_fetch.EXTRA_QUERY, ("extra",))}
 
 
 def run(config, *, force=False, pbf=None, out_dir=None, now=None, say=print, root=EXTRACT_ROOT,
-        max_mb=None):
-    """The script's body; returns the paths written."""
+        max_mb=None, overpass_exact=False):
+    """The script's body; returns the paths written. `overpass_exact` turns
+    the shared-border rule off for this run."""
     todo = targets(config, force, out_dir)
     for key, path, write in todo:
         if not write:
@@ -416,7 +461,7 @@ def run(config, *, force=False, pbf=None, out_dir=None, now=None, say=print, roo
     say(f"{pbf.name}: data dated {timestamp}")
     if any(write for key, _, write in todo if key != "osm_place_outline"):
         check_fresh(timestamp, pbf, now)
-    payloads = build(config, pbf, say=say, root=root)
+    payloads = build(config, pbf, say=say, root=root, shared_borders=() if overpass_exact else None)
     written = []
     for key, path, write in todo:
         if not write:
@@ -430,7 +475,7 @@ def run(config, *, force=False, pbf=None, out_dir=None, now=None, say=print, roo
             kinds[e["type"]] = kinds.get(e["type"], 0) + 1
         say(f"{path.name}: {len(payloads[key]['elements']):,} elements from {pbf.name} {kinds}")
         if out_dir is None:
-            prov = place_index_fetch.record(config, path, key, "filtered from a regional extract")
+            prov = place_index_fetch.record(config, path, key, how_recorded(payloads[key]))
             say(f"recorded in {prov.parent.name}/{prov.name} as {key}")
         written.append(path)
     return written
@@ -503,7 +548,7 @@ def selftest():
         outline = json.loads(place_index.outline_cache(City).read_bytes().decode("utf-8"))
         case("a city with no cache gets all three, in the shape the index step reads",
              len(written) == 3 and main["osm3s"]["timestamp_osm_base"] == "2026-01-01T06:00:00Z"
-             and [e["id"] for e in main["elements"] if "nodes" in e] == [201, 204]
+             and [e["id"] for e in main["elements"] if "nodes" in e] == [200, 201, 204]
              and {e["id"] for e in extra["elements"]} == {60}
              and [n for _, n, _ in place_index.municipalities(outline["elements"])] == ["Alpha", "Beta"])
         ways_first = [("nodes" in e, e["type"] == "node" and "tags" not in e) for e in main["elements"]]
@@ -521,6 +566,34 @@ def selftest():
              and set(prov["osm_places"]) == {"bytes", "elements", "file", "host", "how", "osm_base", "query",
                                              "retrieved", "sha256"})
         first = {p.name: p.read_bytes() for p in written}
+        # SHARED BORDERS: on by the constant, said in the cache and in the
+        # provenance; off with overpass_exact.
+        block = main["_extract"].get("shared_border", {})
+        tagged_ids = {(e["type"], e["id"]) for e in main["elements"] if "tags" in e and "nodes" not in e}
+        case("SHARED BORDERS: the street on the border Alpha and Beta share is in, and the cache says "
+             "which element was admitted and between which two",
+             SHARED_BORDER_UNIONS == ("streets",) and block.get("admitted") == {"streets": 1}
+             and block.get("elements") == {"streets": [{"type": "way", "id": 200,
+                                                        "between": ["relation/1", "relation/2"]}]}
+             and "shared_border" not in extra["_extract"] and "shared_border" not in outline["_extract"])
+        case("SHARED BORDERS: streets only: the place node on the same border stays out",
+             ("node", 20) not in tagged_ids and ("node", 24) in tagged_ids)
+        case("SHARED BORDERS: the street on the outer edge of the area and the one on the edge of a hole "
+             "stay out",
+             not {202, 203, 205} & {e["id"] for e in main["elements"] if "nodes" in e})
+        case("SHARED BORDERS: the provenance entry says the rule was on and how many it admitted",
+             prov["osm_places"]["how"].startswith(HOW + "; shared-border rule on for streets: 1 element(s)")
+             and prov["osm_places_extra"]["how"] == HOW and prov["osm_place_outline"]["how"] == HOW)
+        exact = run(City, pbf=pbf, out_dir=d / "exact", now=day, say=said.append, root=d, overpass_exact=True)
+        exact_main = json.loads(exact[1].read_bytes().decode("utf-8"))
+        case("SHARED BORDERS: --overpass-exact gives the Overpass answer and no shared-border block; the "
+             "rest of the cache is the same",
+             [e["id"] for e in exact_main["elements"] if "nodes" in e] == [201, 204]
+             and "shared_border" not in exact_main["_extract"]
+             and [e for e in main["elements"] if (e["type"], e["id"]) not in
+                  (("way", 200), ("node", 21), ("node", 22))] == exact_main["elements"]
+             and exact[0].read_bytes() == place_index.outline_cache(City).read_bytes()
+             and exact[2].read_bytes() == City.PLACE_OSM_EXTRA_JSON.read_bytes())
         # NEVER OVER A CACHE: a second run reads nothing and writes nothing.
         City.PLACE_OSM_JSON.write_bytes(b'{"elements": [], "marker": "an Overpass cache"}')
         said.clear()
@@ -577,6 +650,11 @@ def selftest():
         got = run(Kyotoish, pbf=pbf, out_dir=d / "tags", now=day, say=said.append, root=d)
         tagged_outline = json.loads(got[0].read_bytes().decode("utf-8"))["elements"]
         case("PLACE_AREA given as tag filters is answered", [e["id"] for e in tagged_outline] == [1])
+        one_main = json.loads(got[1].read_bytes().decode("utf-8"))
+        case("SHARED BORDERS: with Beta not in PLACE_AREA the street on Alpha's border with it stays out "
+             "(one municipality: nothing admitted)",
+             200 not in {e["id"] for e in one_main["elements"] if "nodes" in e}
+             and one_main["_extract"]["shared_border"]["admitted"] == {"streets": 0})
 
         class Unreadable(City):
             PLACE_AREA = '["name"~"Alp"]'
@@ -617,6 +695,8 @@ def selftest():
              and way_el["geometry"][0] == {"lat": 0.4, "lon": 0.4}
              and [n for _, n, _ in place_index.municipalities(way_outline)] == ["Alpha", "Hole Village"]
              and {e["id"] for e in way_main if e.get("tags", {}).get("place")} == {23, 24})
+        case("SHARED BORDERS: the edge of a hole is a shared border once an included area fills the hole",
+             [e["id"] for e in way_main if "nodes" in e] == [201, 204, 205])
 
         class Untagged(City):
             PLACE_AREA = "(id:3600000001,3600000006)"
@@ -864,10 +944,13 @@ def main():
     ap.add_argument("--max-mb", type=int, default=MAX_MB, metavar="N",
                     help=f"the largest regional file downloaded without a person (default {MAX_MB})")
     ap.add_argument("--out", metavar="DIR", help="write all three caches here and record nothing (the proof)")
+    ap.add_argument("--overpass-exact", action="store_true",
+                    help="answer exactly as Overpass does: no street on a shared border is admitted")
     args = ap.parse_args()
     config = importlib.import_module(f"pipeline.{args.city}.config")
     start = time.time()
-    written = run(config, force=args.force, pbf=args.pbf, out_dir=args.out, max_mb=args.max_mb)
+    written = run(config, force=args.force, pbf=args.pbf, out_dir=args.out, max_mb=args.max_mb,
+                  overpass_exact=args.overpass_exact)
     if written:
         peak = ""
         try:
