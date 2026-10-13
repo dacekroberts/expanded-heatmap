@@ -251,4 +251,5 @@ PLACE_DROPPED = {
     "way/37393365": "'Liver Industrial Estate', an industrial estate's own road",
     "way/37393366": "'Liver Industrial Estate', an industrial estate's own road",
     "way/254831404": "'Woodside Bus Station', a bus station indexed as a street (owner, 2026-10-13)",
+    "node/8647055259": "'Dingle', a demolished station, by its own description, whatever its article (owner, 2026-10-13: \"2. drop\")",
 }

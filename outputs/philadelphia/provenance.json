@@ -4,7 +4,7 @@
     "elements": 1,
     "file": "osm_place_outline_v1.json",
     "host": "overpass-api.de",
-    "how": "fetched",
+    "how": "kept (on disk from an earlier run)",
     "osm_base": "2026-10-13T06:19:51Z",
     "query": "[out:json][timeout:60];\narea(id:3600188022)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
     "retrieved": "2026-10-13T06:20:46+00:00",
