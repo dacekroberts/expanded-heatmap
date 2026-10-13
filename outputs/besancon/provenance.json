@@ -25,19 +25,19 @@
     "how": "filtered from a regional extract",
     "osm_base": "2026-10-12T20:21:35Z",
     "query": "[out:json][timeout:60];\narea(id:3600103599)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
-    "retrieved": "2026-10-13T10:17:52+00:00",
+    "retrieved": "2026-10-13T22:28:32+00:00",
     "sha256": "d2ad105dad0517c8dfd125fd2588a8a952a4910d869b8944fb96d48e9086d527"
   },
   "osm_places": {
-    "bytes": 3240045,
+    "bytes": 3240275,
     "elements": 30315,
     "file": "osm_places_2026-10-13.json",
     "host": "download.geofabrik.de (franche-comte-261012.osm.pbf, filtered on this machine)",
-    "how": "filtered from a regional extract",
+    "how": "filtered from a regional extract; shared-border rule on for streets: 0 element(s) admitted that the Overpass query does not return",
     "osm_base": "2026-10-12T20:21:35Z",
     "query": "[out:json][timeout:170];\narea(id:3600103599)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
-    "retrieved": "2026-10-13T10:17:52+00:00",
-    "sha256": "83512192a8e9f14b8958932f7e462a3f5e84d05f7b02530d13c5387cd69160ab"
+    "retrieved": "2026-10-13T22:28:32+00:00",
+    "sha256": "bd92fe9e4aa8ff8c2c2fa2a69713b2e4858b4e343a7417ca784ecd89c275b586"
   },
   "osm_places_extra": {
     "bytes": 30711,
@@ -47,7 +47,7 @@
     "how": "filtered from a regional extract",
     "osm_base": "2026-10-12T20:21:35Z",
     "query": "[out:json][timeout:170];\narea(id:3600103599)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
-    "retrieved": "2026-10-13T10:17:53+00:00",
+    "retrieved": "2026-10-13T22:28:32+00:00",
     "sha256": "f3c1a96d59155ac1990580ae221dd7453d15afe41cf90276bd216e674f0946e3"
   },
   "osm_query": "[out:json][timeout:120];relation[\"type\"=\"route\"][\"route\"~\"^(tram|light_rail)$\"](47.18,5.92,47.34,6.1);out geom;",
