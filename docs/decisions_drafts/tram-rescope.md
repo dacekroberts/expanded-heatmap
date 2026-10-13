@@ -2,6 +2,38 @@
 
 Newest first. Cleanup folds these into `DECISIONS.md` at review time.
 
+### 2026-10-13 - Tram rescope: Prague's tram routes and label placement measured; the line list is with the owner (open, nothing built)
+
+- **The feed.** `https://data.pid.cz/PID_GTFS.zip` re-pulled 2026-10-13 as
+  `data/prague/raw/pid_gtfs_2026-10-13.zip` (feed_info 2026-10-13 to
+  2026-10-26). The cache of 2026-09-24 is untouched.
+- **39 tram routes** (route_type 0). Read on Wednesday 2026-10-14, 10:00 to
+  15:00, the busier direction:
+  - 23 numbered day routes at 4.8 to 10.0 minutes: 1 to 13, 15, 17 to 22,
+    24, 25, 26. There is no 14 and no 16 in this feed.
+  - Four more day routes at 4.5 to 10.0 minutes: 30, 31, 32 and 40. Why
+    they run was not read; the numbers are outside the regular 1 to 26.
+  - 37 at 9.7 minutes, the only tram the feed flags
+    `is_substitute_transport`.
+  - 23 at 30.0 minutes, 07:27 to 18:51: fails the 15-minute test.
+  - Ten night routes, 90 to 99 (`is_night`): not drawn, on the per-route
+    rule.
+- **Colors (measured, the method of the Milan entry):** 28 trams beside
+  the three metro colors fit at a pin floor of 45, closest pair within
+  500 m 27.1 (trams 6 and 9); the 23 regular routes alone fit at 29.2
+  (trams 2 and 8). A tram has 18.6 other lines within 500 m on average.
+- **Label placement (measured, a trial render to the session scratchpad,
+  each route on its most-used shape, the metro-only station set,
+  `scripts/check_map_labels.js`):**
+  - 28 trams, 31 lines: no problem at 1024; three label overlaps at 375
+    (13/15, 18/21, 22/26); five at 343 (Metro A/9, 1/25, 4/5, 6/18, 12/13).
+  - 23 trams, 26 lines: no problem at 1024 or 375; two overlaps at 343
+    (8/12, 11/13).
+  - No per-line label end was set; whether overrides clear the overlaps is
+    not measured.
+- **Nothing built, no step run, no output changed.** Prague has a place
+  search index, so a new station set owes Cleanup a rebuild.
+
 ### 2026-10-13 - Tram rescope: Milan approved as built (owner)
 
 - **Owner, 2026-10-13, after the four items put for approval (the stop-name
