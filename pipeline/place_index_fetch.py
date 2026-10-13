@@ -98,6 +98,11 @@ out tags center qt;
 # search stops and the index step can say which municipalities it covers
 # (place_index.outline). `pivot` gives the relation or way each area was made
 # from. A light query: one object per municipality.
+# A place answer older than this is refused and the next mirror asked
+# (osm.fetch, max_age_days): a mirror serving months-old data gave five of
+# wave 1's main caches and part of London's on 2026-10-12, each beside a
+# second query dated that day. The outline accepts any date.
+PLACE_MAX_AGE_DAYS = 7
 OUTLINE_QUERY = """[out:json][timeout:60];
 area{area}->.a;
 (
@@ -164,7 +169,8 @@ def fetch_split(config, path, force, hosts=None):
         query = QUERY.format(area=config.PLACE_AREA).replace("(area.a)", "(area.a)" + tile)
         part = path.with_name(f"{path.stem}.tile{i}.json")
         try:
-            els, host = osm.fetch(query, part, force=force, timeout=180, deadline=900, hosts=hosts)
+            els, host = osm.fetch(query, part, force=force, timeout=180, deadline=900, hosts=hosts,
+                                  max_age_days=PLACE_MAX_AGE_DAYS)
         except RuntimeError as exc:
             # A tile with nothing in it (a corner of the bbox outside the
             # area) answers empty on every host asked (one, when pinned),
@@ -410,7 +416,8 @@ def fetch_city(config, force, hosts=None):
             els, host = fetch_split(config, path, args.force, hosts)
         else:
             els, host = osm.fetch(query.format(area=config.PLACE_AREA), path, force=args.force,
-                                  timeout=180, deadline=900, hosts=hosts)
+                                  timeout=180, deadline=900, hosts=hosts,
+                                  max_age_days=None if query is OUTLINE_QUERY else PLACE_MAX_AGE_DAYS)
         kinds = {}
         for e in els:
             kinds[e["type"]] = kinds.get(e["type"], 0) + 1
