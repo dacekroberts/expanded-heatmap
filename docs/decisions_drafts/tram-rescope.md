@@ -2,6 +2,38 @@
 
 Newest first. Cleanup folds these into `DECISIONS.md` at review time.
 
+### 2026-10-13 - Tram rescope: the many-route rule is per route (owner), and Prague's colors fit it (measured)
+
+- **Owner, 2026-10-13: "yes per route sounds good".** Toronto, Milan and
+  Prague take the rule the built tram maps already follow (Amsterdam's 16
+  trams, Brussels, Zurich, Ostrava, Brno, Göteborg): one on-map label and
+  one legend row per day route, named "Tram N" (Toronto: "Streetcar N").
+  Night routes are not drawn, since they run the day routes' streets
+  (Toronto's 301 to 312, Prague's 91 to 99), and the page says so. All
+  three operators give every tram one color, so colors come from the
+  project palette by the color search. Toronto's Lines 5 and 6 keep their
+  own names and feed colors.
+- **Not chosen: grouping by corridor (New York's trunks).** New York's
+  groups are the operator's own; none of these three publishes tram
+  trunks, so the groups would be the project's. Kept only as the fallback
+  if Prague's labels cannot be placed.
+- **Prague's colors, measured at the owner's request (read-only).** Each
+  tram route's most-used GTFS shape, Metro A, B and C on their built
+  colors, the sRGB cube in steps of 8, farthest-point greedy with the
+  most-crowded line first. Rules: 3:1 on both pages, CIE76 18 from every
+  line within 500 m, 10 from every other line, and a pin floor.
+  - 25 day routes (1 to 13, 15 to 26), 28 lines: fits at pin floors 45, 30
+    and 20. At 45: 3,817 colors available, closest pair within 500 m 27.1,
+    closest tram to a pin 45.2.
+  - With 31, 32 and 40 as well, 31 lines: fits at all three floors; at 45
+    the closest pair within 500 m is 25.1.
+  - A tram has 22 other lines within 500 m on average (most 27 of 27), so
+    nearly every pair is held to 18. Dark-mode labels separate and
+    `check_line_colours` passes in every run.
+- **Limits:** the colors found are a feasibility result, not the palette a
+  build would record. Label placement for 28 labels is not measured. Metro
+  C stays 21.2 from the Food service pins, as built.
+
 ### 2026-10-13 - Tram rescope: Toronto, Milan and Prague pass the overlap test (measured, nothing built)
 
 - **The test that left Barcelona's trams out, run on the three cities not
