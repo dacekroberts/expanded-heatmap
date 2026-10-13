@@ -1899,6 +1899,10 @@ def fold_name(s):
 # ways of one street share nothing whatever their distance.
 SAME_THING_M = 300
 _SUBJECT_KEYS = ("subject", "buried", "name:etymology", "brand", "operator")
+# For candidate 38 the subject key alone: measured on the 19, an entry equal
+# to operator:wikidata or name:etymology:wikidata sat on the thing itself
+# (Roehampton University, Barcelona's Teatre Grec), which stays.
+SUBJECT_ENTRY_KEYS = ("subject",)
 # Words that say an article is about a grave, a plaque or a monument and not
 # about the person it names ("Tomb of Karl Marx", "Tombe d'Oscar Wilde",
 # "Monument funéraire de ..."). In the article's language, which is often not
@@ -3297,11 +3301,11 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         verdict, why = article(e, t, names, pt)
         own = verdict == "own"
         # THE SUBJECT'S ENTRY IS NOT THE OBJECT'S (candidate 38, owner
-        # 2026-10-13): a wikidata tag equal to the object's subject:, brand:
-        # or operator:wikidata admits it to nothing (a bench under the
+        # 2026-10-13): a wikidata tag equal to the object's subject:wikidata
+        # admits it to nothing (SUBJECT_ENTRY_KEYS; a bench under the
         # entry of the poet it is named for).
         wd = (t.get("wikidata") or "").strip()
-        subject = wd and next((k for k in _SUBJECT_KEYS if wd in [
+        subject = wd and next((k for k in SUBJECT_ENTRY_KEYS if wd in [
             v.strip() for v in (t.get(f"{k}:wikidata") or "").split(";")]), None)
         if subject:
             t = {k: v for k, v in t.items() if k != "wikidata"}
