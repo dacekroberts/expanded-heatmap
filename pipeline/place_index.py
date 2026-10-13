@@ -89,6 +89,7 @@ def files(index, slug):
     row_osm = index.pop("row_osm", [])
     lines = index.pop("street_lines", [])
     index.pop("street_lines_raw", None)
+    index.pop("wikidata_asked", None)
     cpath = crossings_path(slug)
     cbytes = json.dumps({"license": index["license"], "schema": SCHEMA, "city": index["city"],
                          "part_of": f"{slug}.json", "rows": cross},
@@ -336,6 +337,50 @@ def stations_per_municipality(munis, stations):
     return counts
 
 
+# AN ARTICLE OF ITS OWN, ASKED OF WIKIDATA (owner, 2026-10-13: "yes and
+# delegate"). Most notable objects carry a wikidata tag and no wikipedia tag
+# (1,278 works of public art left the 19 on the tag alone). The fetch script,
+# pipeline/place_wikidata_fetch.py, asks Wikidata once which of a city's
+# entries have a Wikipedia article in any language and caches the answer:
+#     {"_source": {...}, "articles": {"Q1": ["enwiki", "frwiki"], "Q2": [], "Q3": null}}
+# an empty list for an entry with no article, null for one the lookup could
+# not read. This module only READS the cache (a step never fetches). With no
+# cache on disk the rules fall back to the wikipedia tag and the step says
+# so; with a cache that lacks an entry the step needs, it stops naming the
+# fetch script. Read for public art and libraries only (rules 16
+# and 39); every other "own article" test still reads the wikipedia tag.
+def wikidata_cache(config):
+    """The path of a city's Wikidata article cache: config.PLACE_WIKIDATA_JSON,
+    else beside the place cache, "osm_places" in its name read as
+    "wikidata_articles"."""
+    given = getattr(config, "PLACE_WIKIDATA_JSON", None)
+    if given is not None:
+        return Path(given)
+    main = Path(config.PLACE_OSM_JSON)
+    return main.with_name(main.name.replace("osm_places", "wikidata_articles", 1))
+
+
+def read_wikidata_articles(path):
+    """{wikidata id: [wiki, ...] or None} from a cache file, None when the
+    file is not there. No network, and no import of the fetch module."""
+    path = Path(path)
+    if not path.is_file():
+        return None
+    return dict(json.loads(path.read_text(encoding="utf-8")).get("articles") or {})
+
+
+def has_article(tags, articles, own=False, own_entry=True):
+    """True when an object has an article of its own: `own`, its wikipedia
+    tag read as today (own_article: not a section, an anchored list or its
+    subject's), OR its Wikidata entry has a Wikipedia article in the cache
+    `articles` AND the entry is the object's own (`own_entry`: no other
+    object of the city's cache carries it, build()'s own_item)."""
+    if own:
+        return True
+    wd = (tags.get("wikidata") or "").strip()
+    return bool(wd and own_entry and (articles or {}).get(wd))
+
+
 def city_of(config):
     """(slug, name) for a city's config module, pipeline.<slug>.config. The
     slug comes from the module path, since 78 of 170 configs had no SLUG
@@ -378,6 +423,10 @@ def run(config):
           f"{cpath.relative_to(STATIC_DIR).as_posix()} ({cpath.stat().st_size:,} bytes, "
           f"{report.get('crossing', 0):,} intersections) and {summary_path(slug).name}")
     print(f"  languages: {index['languages']['coverage']} -> the page names {index['languages']['listed']}")
+    if report.get("wikidata_cache_absent") and report.get("wikidata_entries_asked"):
+        print(f"  NO WIKIDATA CACHE at {wikidata_cache(config)}: {report['wikidata_entries_asked']:,} "
+              f"entries went unasked, so public art and libraries were held to the wikipedia tag alone. "
+              f"Run: python pipeline/place_wikidata_fetch.py {slug}")
     for k in sorted(report):
         print(f"  {k}: {report[k]:,}")
     return index
@@ -430,6 +479,9 @@ def build_city(config):
                           way_words=tuple(getattr(config, "PLACE_WAY_WORDS", ())),
                           kept=set(getattr(config, "PLACE_KEPT", {})),
                           map_stations=[n for n, _, _ in (map_stations(config) or [])],
+                          also=tuple(getattr(config, "PLACE_LANGUAGES_ALSO", ())),
+                          station_strip=tuple(getattr(config, "PLACE_STATION_STRIP", ())),
+                          articles=read_wikidata_articles(wikidata_cache(config)),
                           keep_interchanges=bool(getattr(config, "PLACE_KEEP_INTERCHANGES", False)))
     if rebuilt and report.get("street_way_kept_rebuilt", 0) == 0 or any(
             not any((e.get("tags") or {}).get("highway") == "construction"
@@ -463,6 +515,18 @@ def build_city(config):
     stale = sorted(set(dropped) - found)
     if stale:
         sys.exit(f"config.PLACE_DROPPED names {stale}, not in the cache: remove them")
+    # A cache absent from disk is no answer: the rules fall back to the
+    # wikipedia tag alone, and run() says so. A cache that is there and lacks
+    # an entry the step needs is stale, and stops the step.
+    known = read_wikidata_articles(wikidata_cache(config))
+    report["wikidata_cache_absent"] = int(known is None)
+    report["wikidata_entries_asked"] = len(index.get("wikidata_asked", ()))
+    unasked = [] if known is None else sorted(set(index.get("wikidata_asked", ())) - set(known))
+    if unasked:
+        sys.exit(f"{len(unasked)} Wikidata entr{'y' if len(unasked) == 1 else 'ies'} the index step needs "
+                 f"({', '.join(unasked[:5])}{', ...' if len(unasked) > 5 else ''}) "
+                 f"{'are' if len(unasked) > 1 else 'is'} not in {wikidata_cache(config)}.\n"
+                 f"Run: python pipeline/place_wikidata_fetch.py {slug}")
     stale = sorted(set(getattr(config, "PLACE_KEPT", {})) - found)
     if stale:
         sys.exit(f"config.PLACE_KEPT names {stale}, not in the cache: remove them")
@@ -564,7 +628,7 @@ LANGUAGE_NAMES = {
     "en": "English", "ja": "Japanese", "ko": "Korean", "zh": "Chinese", "fr": "French",
     "nl": "Dutch", "de": "German", "es": "Spanish", "ca": "Catalan", "eu": "Basque",
     "gl": "Galician", "it": "Italian", "pt": "Portuguese", "cs": "Czech", "lv": "Latvian",
-    "ka": "Georgian", "da": "Danish", "sv": "Swedish", "nb": "Norwegian", "ro": "Romanian",
+    "ka": "Georgian", "ru": "Russian", "da": "Danish", "sv": "Swedish", "nb": "Norwegian", "ro": "Romanian",
     "hu": "Hungarian", "el": "Greek", "pl": "Polish", "tr": "Turkish", "fi": "Finnish",
 }
 # Readings a local language's readers type in (kana for Japanese).
@@ -626,6 +690,52 @@ LEAK_WORDS = {
            "gaststätte", "wohnanlage", "wohnpark", "wohnhaus", "mehrfamilienhaus", "apotheke", "gmbh",
            "ohg", "supermarkt", "einkaufszentrum", "zufahrt", "seniorenresidenz", "autohaus",
            "tankstelle"),
+    # Danish (owner, 2026-10-13; search-final's search-lang-da.md, with its id catches and future edit points).
+    "da": ("hotel", "hotellet", "vandrerhjem", "parkeringsplads", "p-plads", "parkeringshus", "p-hus",
+           "privat", "privatvej", "privat vej", "butik", "restaurant", "apotek", "aps", "a/s",
+           "supermarked", "indkøbscenter", "tankstation", "varelevering", "indkørsel", "udkørsel",
+           "boligforening", "andelsboligforening", "ejerforening", "plejehjem", "drive-in"),
+    # Norwegian (owner, 2026-10-13; search-final's search-lang-nb.md, with its id catches and future edit points).
+    "nb": ("hotell", "hotel", "pensjonat", "vandrerhjem", "parkering", "parkeringsplass",
+           "parkeringshus", "parkeringsanlegg", "parkeringskjeller", "p-hus", "p-plass",
+           "beboerparkering", "gjesteparkering", "garasje", "garasjer", "garasjeanlegg", "garasjeport",
+           "privat", "privat vei", "privat veg", "privatvei", "innkjørsel", "innkjøring", "utkjørsel",
+           "utkjøring", "avkjørsel", "oppkjørsel", "adkomst", "atkomst", "varelevering", "varemottak",
+           "butikk", "restaurant", "kafé", "kafe", "apotek", "as", "a/s", "asa", "borettslag", "brl",
+           "sameie", "sameiet", "boligsameie", "kjøpesenter", "legesenter", "tannlege", "leiligheter",
+           "boliger", "studentboliger", "omsorgsboliger", "snuplass", "busslomme"),
+    # Swedish (owner, 2026-10-13; search-final's search-lang-sv.md, with its id catches and future edit points).
+    "sv": ("hotell", "vandrarhem", "pensionat", "värdshus", "parkering", "parkeringsplats",
+           "parkeringshus", "parkeringsgarage", "kundparkering", "besöksparkering", "personalparkering",
+           "p-hus", "garage", "privat", "privatväg", "butik", "affär", "restaurang", "apotek", "ab",
+           "aktiebolag", "handelsbolag", "brf", "bostadsrättsförening", "bostadsrättsföreningen",
+           "bostadshus", "flerfamiljshus", "lägenheter", "radhus", "studentbostäder", "äldreboende",
+           "vårdboende", "seniorboende", "samfällighet", "köpcentrum", "galleria", "gallerian",
+           "stormarknad", "bensinstation", "infart", "utfart", "inlastning", "varumottagning",
+           "godsmottagning", "serviceväg", "drive-in"),
+    # Latvian (owner, 2026-10-13; search-final's search-lang-lv.md, with its id catches and future edit points).
+    "lv": ("viesnīca", "hotelis", "hostelis", "motelis", "viesu nams", "viesu māja", "stāvvieta",
+           "autostāvvieta", "stāvlaukums", "privāts", "privāta", "privātais", "privātā",
+           "privātīpašums", "privātmāja", "privātmājas", "veikals", "lielveikals", "restorāns",
+           "kafejnīca", "aptieka", "sia", "a/s", "dzīvokļi", "daudzdzīvokļu", "dzīvojamā māja",
+           "tirdzniecības centrs", "iebrauktuve", "piebraucamais", "klīnika", "autoserviss", "garāžas",
+           "kooperatīvs", "pansija", "pansionāts", "degvielas uzpildes stacija"),
+    # Romanian (owner, 2026-10-13; search-final's search-lang-ro.md, with its id catches and future edit points).
+    "ro": ("hotel", "hotelul", "hostel", "motel", "pensiune", "pensiunea", "parcare", "parcarea",
+           "privat", "privată", "magazin", "restaurant", "restaurantul", "farmacia", "srl", "s.r.l.",
+           "s.a.", "supermarket", "hipermarket", "benzinărie", "benzinăria", "rezidențial",
+           "rezidenţial", "residence", "apartamente", "blocuri", "acces", "intrare"),
+    # Italian (owner, 2026-10-13; search-final's search-lang-it.md, with its id catches and future edit points).
+    "it": ("albergo", "ostello", "agriturismo", "affittacamere", "b&b", "parcheggio", "parcheggi",
+           "garage", "autorimessa", "proprietà privata", "strada privata", "negozio", "ristorante",
+           "trattoria", "pizzeria", "farmacia", "supermercato", "ipermercato", "centro commerciale",
+           "condominio", "residence", "appartamenti", "srl", "s.r.l.", "s.p.a.", "snc", "s.n.c.",
+           "s.a.s.", "ingresso", "accesso", "autolavaggio", "distributore"),
+    # Greek (owner, 2026-10-13; search-final's search-lang-el.md, with its id catches and future edit points).
+    "el": ("ξενοδοχείο", "ξενώνας", "πάρκινγκ", "στάθμευση", "στάθμευσης", "γκαράζ", "ιδιωτικός",
+           "ιδιωτική", "ιδιωτικό", "φαρμακείο", "εστιατόριο", "ταβέρνα", "κατάστημα", "σούπερ μάρκετ",
+           "εμπορικό κέντρο", "πρατήριο", "βενζινάδικο", "πολυκατοικία", "διαμερίσματα", "α.ε.",
+           "ε.π.ε.", "ο.ε.", "ι.κ.ε.", "επε", "ικε"),
     # Batch 2b (2026-10-08): Chinese (Hong Kong), Korean (Seoul, Busan) and
     # Georgian (Tbilisi), each checked against its city's own hits. A CJK or
     # Hangul word matches anywhere; a Georgian one as a whole word.
@@ -656,6 +766,19 @@ HOME_WORDS = {
     "nl": ("appartementen", "residentie", "privé"),
     "de": ("wohnanlage", "wohnpark", "wohnhaus", "mehrfamilienhaus", "privat", "privatweg",
            "privatstraße", "privatgrundstück", "seniorenresidenz"),
+    "da": ("privat", "privatvej", "privat vej", "boligforening", "andelsboligforening", "ejerforening",
+           "plejehjem"),
+    "nb": ("privat", "privat vei", "privat veg", "privatvei", "borettslag", "brl", "sameie", "sameiet",
+           "boligsameie", "leiligheter", "boliger", "studentboliger", "omsorgsboliger",
+           "beboerparkering"),
+    "sv": ("privat", "privatväg", "brf", "bostadsrättsförening", "bostadsrättsföreningen", "bostadshus",
+           "flerfamiljshus", "lägenheter", "radhus", "studentbostäder", "äldreboende", "vårdboende",
+           "seniorboende", "samfällighet"),
+    "lv": ("privāts", "privāta", "privātais", "privātā", "privātīpašums", "privātmāja", "privātmājas",
+           "dzīvokļi", "daudzdzīvokļu", "dzīvojamā māja", "pansionāts"),
+    "ro": ("privat", "privată", "rezidențial", "rezidenţial", "residence", "apartamente", "blocuri"),
+    "it": ("proprietà privata", "strada privata", "condominio", "residence", "appartamenti"),
+    "el": ("πολυκατοικία", "διαμερίσματα", "ιδιωτικός", "ιδιωτική", "ιδιωτικό"),
     "zh": ("私人", "私家", "屋苑", "住宅"),
     "ko": ("아파트", "빌라", "맨션", "연립", "주택", "오피스텔", "사유지"),
     "ka": ("კერძო", "ბინა", "საცხოვრებელი"),
@@ -673,6 +796,13 @@ def _has_word(word, low):
     return re.search(r"(?<!\w)" + re.escape(word) + r"(?!\w)", low) is not None
 
 
+# A LEAK WORD OF ONE LANGUAGE IS A PLAIN WORD OF ANOTHER (candidate 29,
+# owner 2026-10-13): English "store" is "big" in Danish, Norwegian and
+# Swedish ("Store Kongensgade"). The English word is not read in a city that
+# declares one of them; every word set aside is listed here.
+LEAK_SET_ASIDE = {"da": ("store",), "nb": ("store",), "sv": ("store",)}
+
+
 def leak_word(names, local):
     """The first LEAK_WORD of English or a local language in `names`, after
     LEAK_ALLOW compounds are removed; None when there is none."""
@@ -681,6 +811,8 @@ def leak_word(names, local):
         for allow in LEAK_ALLOW.get(code, ()):
             low = low.replace(allow, " ")
         for word in LEAK_WORDS.get(code, ()):
+            if code not in local and any(word in LEAK_SET_ASIDE.get(c, ()) for c in local):
+                continue
             if _has_word(word, low):
                 return word
     return None
@@ -720,7 +852,9 @@ def _name_tags(local):
     tags = ["name", "name:en"]
     for code in local:
         tags += [f"name:{code}", f"name:{code}-Latn", f"name:{code}_rm", *READINGS.get(code, ())]
-    tags += ["alt_name", "alt_name:en", "official_name", "official_name:en",
+    # int_name since the fourth pass (2026-10-13): Thessaloniki writes its
+    # Latin-letter names there on 44% of rows.
+    tags += ["alt_name", "alt_name:en", "int_name", "official_name", "official_name:en",
              "short_name", "short_name:en", "old_name:en"]
     return tuple(dict.fromkeys(tags))
 
@@ -743,10 +877,17 @@ def _langs(tags, local):
     return out
 
 
-def languages(row_langs, local):
+def languages(row_langs, local, also=()):
     """Coverage of English and each local language over the index's rows, and
-    the languages the page may name, English first, then the local ones."""
-    order = list(dict.fromkeys(["en", *local]))
+    the languages the page may name, English first, then the local ones.
+    `also`: languages declared below the floor (config.PLACE_LANGUAGES_ALSO;
+    owner, 2026-10-13: "declare"): a city's second language whose names are
+    on a share of its rows (Cluj-Napoca's Hungarian 39.8%, Daugavpils'
+    Russian 15.5%). The floor, LOCAL_MIN (90%), is asked of PLACE_LANGUAGES
+    only; a language declared here has its name:<code> tags read as aliases
+    and its coverage measured, is never credited from the main name, and is
+    named on the page at LIST_SHARE (50%) like any other."""
+    order = list(dict.fromkeys(["en", *local, *also]))
     n = max(len(row_langs), 1)
     coverage = {c: round(sum(c in s for s in row_langs) / n, 3) for c in order}
     short = [c for c in local if coverage[c] < LOCAL_MIN]
@@ -757,7 +898,8 @@ def languages(row_langs, local):
     if unnamed:
         raise SystemExit(f"no display name for language code(s) {unnamed}: add to LANGUAGE_NAMES")
     listed = [LANGUAGE_NAMES[c] for c in order if coverage[c] >= LIST_SHARE]
-    return {"local": list(local), "coverage": coverage, "list_share": LIST_SHARE, "listed": listed}
+    return {"local": list(local), "coverage": coverage, "list_share": LIST_SHARE, "listed": listed,
+            **({"also": list(also)} if also else {})}
 
 # Highways that are not streets a reader would search for: platforms, indoor
 # corridors, parking aisles, driveways, service areas and the like.
@@ -836,6 +978,56 @@ WAY_WORDS = {
            "steg", "pfad", "stieg", "steig", "treppe", "promenade", "chaussee", "markt", "wall", "graben",
            "passage", "tunnel", "unterführung", "durchgang", "trasse", "kamp", "winkel", "acker", "hof",
            "höfe", "wegli", "rain", "halde", "quai", "viadukt", "deich", "pad", "pforte", "eck"),
+    # Danish (owner, 2026-10-13; search-final's search-lang-da.md, with its id catches and future edit points).
+    "da": ("gade", "gaden", "vej", "vejen", "allé", "alle", "alléen", "alleen", "stræde", "strædet",
+           "plads", "pladsen", "torv", "torvet", "sti", "stien", "bro", "broen", "boulevard", "passage",
+           "passagen", "kaj", "kajen", "gyde", "gyden", "trappe", "trappen", "tunnel", "tunnelen",
+           "promenade", "promenaden", "vold", "volden", "dæmning", "dæmningen", "viadukt", "viadukten",
+           "smøge", "smøgen", "strøg", "strøget", "brygge", "bryggen", "vænget", "skellet", "vangen",
+           "krogen", "toften", "højen", "svinget", "kæret", "lodden", "dyssen"),
+    # Norwegian (owner, 2026-10-13; search-final's search-lang-nb.md, with its id catches and future edit points).
+    "nb": ("vei", "veien", "veg", "vegen", "gate", "gata", "gaten", "allé", "alléen", "strede",
+           "stredet", "veita", "veiten", "ringen", "faret", "stubben", "plass", "plassen", "torg",
+           "torget", "torv", "torvet", "allmenning", "allmenningen", "almenning", "almenningen", "kai",
+           "kaia", "kaien", "brygge", "brygga", "bryggen", "terrasse", "terrassen", "sti", "stien",
+           "stigen", "smau", "smauet", "smug", "smuget", "gangen", "tråkk", "tråkket", "løype", "løypa",
+           "løypen", "passasje", "passasjen", "promenade", "promenaden", "bakke", "bakken", "bakkene",
+           "bakkane", "kleiv", "kleiva", "kleiven", "kleivene", "sving", "svingen", "svingene",
+           "svingane", "krok", "kroken", "bru", "brua", "bro", "broen", "trapp", "trappa", "trappen",
+           "trappene", "tunnel", "tunnelen", "tunellen", "viadukt", "undergang", "undergangen", "lia",
+           "lien", "toppen", "grenda", "grenden", "tunet", "jordet", "kollen", "berget", "haugen",
+           "gården"),
+    # Swedish (owner, 2026-10-13; search-final's search-lang-sv.md, with its id catches and future edit points).
+    "sv": ("gata", "gatan", "väg", "vägen", "gränd", "gränden", "stig", "stigen", "backe", "backen",
+           "torg", "torget", "plan", "plats", "platsen", "allé", "allén", "gång", "gången", "bro",
+           "bron", "spång", "spången", "trappa", "trappan", "trappor", "trapporna", "trapp", "brink",
+           "brinken", "krok", "kroken", "krokarna", "slinga", "slingan", "kaj", "kajen", "led", "leden",
+           "lid", "liden", "stråk", "stråket", "strand", "stranden", "promenad", "promenaden",
+           "esplanad", "esplanaden", "tunnel", "tunneln", "viadukt", "viadukten", "passage", "passagen",
+           "terrass", "terrassen", "svängen", "ringen", "länken", "rundan", "faret", "gård", "gården",
+           "gårdar", "gårdarna", "lycka", "lyckan", "lyckor", "lyckorna"),
+    # Latvian (owner, 2026-10-13; search-final's search-lang-lv.md, with its id catches and future edit points).
+    "lv": ("iela", "šķērsiela", "jauniela", "augšiela", "līnija", "šķērslīnija", "gatve", "prospekts",
+           "bulvāris", "šoseja", "ceļš", "aleja", "laukums", "skvērs", "aplis", "gāte", "sēta", "tilts",
+           "tunelis", "dambis", "aizsargdambis", "krastmala", "ostmala", "mols", "promenāde", "pasāža",
+           "taka", "laipa", "veloceliņš"),
+    # Romanian (owner, 2026-10-13; search-final's search-lang-ro.md, with its id catches and future edit points).
+    "ro": ("strada", "aleea", "intrarea", "drumul", "bulevardul", "șoseaua", "şoseaua", "calea",
+           "piața", "piaţa", "piațeta", "piaţeta", "splaiul", "prelungirea", "fundătura", "cheiul",
+           "rondul", "podul", "pasajul", "pasarela", "promenada", "scările"),
+    # Italian (owner, 2026-10-13; search-final's search-lang-it.md, with its id catches and future edit points).
+    "it": ("via", "viale", "vialetto", "vicolo", "vico", "viuzzo", "viuccia", "largo", "piazza",
+           "piazzale", "piazzetta", "piazzaletto", "corso", "strada", "stradone", "lungotevere",
+           "lungarno", "lungomare", "lungolago", "lungomura", "ponte", "ponticello", "passerella",
+           "salita", "discesa", "rampa", "rampe", "scalea", "scalinata", "scala", "gradinata",
+           "cordonata", "clivo", "clivio", "erta", "borgo", "borghetto", "chiasso", "sdrucciolo",
+           "sentiero", "ciclabile", "ciclovia", "ciclopedonale", "superciclabile", "passeggiata",
+           "passaggio", "passetto", "sottopasso", "sottopassaggio", "sottovia", "galleria pedonale",
+           "traforo", "viadotto", "cavalcavia", "circonvallazione", "rotatoria", "svincolo", "raccordo",
+           "complanare", "traversa", "argine", "arco", "belvedere"),
+    # Greek (owner, 2026-10-13; search-final's search-lang-el.md, with its id catches and future edit points).
+    "el": ("οδός", "λεωφόρος", "πλατεία", "πάροδος", "στοά", "μονοπάτι", "γέφυρα", "σκάλες",
+           "πεζόδρομος"),
     # Batch 2b (2026-10-08), checked against each city's named minor ways.
     # Hong Kong writes a street's type last, in one word (彌敦道, 西洋菜南街,
     # 摩羅上街), and a lane, court or terrace as 巷, 里, 坊, 台 or 圍.
@@ -892,7 +1084,8 @@ def _private_street(names, local):
 
 # Languages that write a way word inside a compound ("Nieuwstraat",
 # "Kerkpad"; Korean 세종대로): _reads_as_way matches it as a word's ending there.
-SUFFIX_WAY_LANGUAGES = {"nl", "ko", "de"}
+SUFFIX_WAY_LANGUAGES = {"nl", "ko", "de", "da", "nb", "sv"}
+GLUED_STREET_LANGUAGES = SUFFIX_WAY_LANGUAGES - {"ko"}
 # Street names that carry no street word at all. Czech names a street with a
 # preposition ("Na Viničce", "U Vizerky", "Pod Havránkou") or an adjective
 # agreeing with the unwritten "ulice" ("Bělohorská", "Goyova"): Prague's
@@ -904,9 +1097,15 @@ WAY_LEAD = {"cs": ("na", "u", "k", "ke", "pod", "nad", "za", "do", "ve", "v", "p
             # German names a lane by a preposition too ("Am Wall", "Zum
             # Hafen"): the loosest group, about 15 misfires in Berlin ("Am
             # Reitstall") against about 80 real names (search-lang-de.md).
-            "de": ("am", "an", "auf", "im", "in", "zum", "zur", "hinter", "unter", "vor", "bei", "beim")}
+            "de": ("am", "an", "auf", "im", "in", "zum", "zur", "hinter", "unter", "vor", "bei", "beim"),
+            "da": ("ved",)}
 # A trailing Roman numeral ("Herálecká II", "Podnikatelská Ⅰ") is set aside first.
-WAY_ENDING = {"cs": ("á", "ní", "ova", "ého")}
+WAY_ENDING = {"cs": ("á", "ní", "ova", "ého"),
+              # Greek names a street in the genitive with no street word
+              # (search-lang-el.md): the ending of the name's last word,
+              # accented and plain forms both, since the test folds no accent.
+              "el": ("ου", "ού", "ας", "άς", "ης", "ής", "ος", "ων", "ών", "ους", "ως", "η", "ή", "α",
+                     "ά")}
 ROMAN = {"i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x"}
 # Any landmark with one of these is (also) a business, and stays out.
 COMMERCIAL_KEYS = ("shop", "office", "craft", "brand", "cuisine")
@@ -974,14 +1173,26 @@ HOME_NAME_LEAD = {"fr": ("maison", "manoir"), "ca": ("casa",), "es": ("casa",),
                   "cs": ("dům", "vila"), "nl": ("huis",),
                   # NOT "haus": in Westphalia it names a manor (Haus Darl), and
                   # a "-haus" ending is a town hall or a hospital.
-                  "de": ("wohnhaus", "villa", "landhaus")}
+                  "de": ("wohnhaus", "villa", "landhaus"),
+                  "da": ("villa", "landsted", "landstedet"),
+                  "nb": ("villa",),
+                  "sv": ("villa", "bostadshus"),
+                  "lv": ("villa", "vila", "savrupmāja", "dzīvojamā"),
+                  "ro": ("casa", "casă", "vila", "vilă"),
+                  "it": ("villino", "villini"),
+                  "el": ("οικία", "κατοικία", "βίλα", "βίλλα", "έπαυλη", "αρχοντικό", "σπίτι")}
 # And where the house word CLOSES the name (batch 2b, 2026-10-08): Korean 가옥
 # and 고택 (a traditional house), 옛집 (an old house), 생가 (a birthplace),
 # 저택 and 주택; Chinese 故居 and 舊居 (a former residence), 大宅, 別墅 and
 # 宅; Georgian სახლი (a house), as the last word. A house-museum (tourism=
 # museum, სახლ-მუზეუმი) passes _public_home, as a museum in a 생가 does.
 HOME_NAME_END = {"ko": ("가옥", "고택", "옛집", "생가", "저택", "주택"),
-                 "zh": ("故居", "舊居", "大宅", "別墅", "宅"), "ka": ("სახლი",)}
+                 "zh": ("故居", "舊居", "大宅", "別墅", "宅"), "ka": ("სახლი",),
+                 # Where the house word comes last (candidate 34, owner
+                 # 2026-10-13): Latvian "Mindeļa villa"; Norwegian farms, the
+                 # three words as the whole last word, so "kirkegård" (a
+                 # churchyard) and "skolegård" are not read.
+                 "lv": ("villa",), "nb": ("gård", "hovedgård", "prestegård")}
 
 
 # historic=* values that are a house: a manor is OSM's manor house or country
@@ -1304,6 +1515,51 @@ BARE_TYPE_NAMES = {
            "evangelisches gemeindehaus", "friedhofskapelle", "dachgarten", "rodelberg", "badestrand",
            "fkk-strand", "hundestrand", "tennisstadion", "hügelgrab", "kirchgemeindehaus", "atrium",
            "hartplatz"),
+    # Danish (owner, 2026-10-13; search-final's search-lang-da.md, with its id catches and future edit points).
+    "da": ("kirke", "kapel", "park", "legeplads", "mindesten", "mindesmærke", "monument", "springvand",
+           "kirkegård", "skulptur", "statue", "genforeningssten", "genforeningsstenen", "byfredssten",
+           "bautasten", "mindelund", "vandkunst", "græsplæne", "stenkister", "bænk", "sten",
+           "abstrakt skulptur", "steler"),
+    # Norwegian (owner, 2026-10-13; search-final's search-lang-nb.md, with its id catches and future edit points).
+    "nb": ("kirke", "kapell", "park", "lekeplass", "leikeplass", "lekeplassen", "minnesmerke",
+           "monument", "statue", "skulptur", "fontene", "kirkegård", "gravlund", "krigsminnesmerke",
+           "minnelund", "kanoner", "kanon", "relieff", "telefon", "gurdwara", "bosetning"),
+    # Swedish (owner, 2026-10-13; search-final's search-lang-sv.md, with its id catches and future edit points).
+    "sv": ("kyrka", "kyrkan", "kapell", "kapellet", "park", "parken", "lekplats", "lekplatsen",
+           "lekpark", "minnesmärke", "minnessten", "minneslund", "fontän", "fontänen", "kyrkogård",
+           "kyrkogården", "begravningsplats", "skulptur", "staty", "byst", "kors", "fotbollsplan",
+           "bollplan", "idrottsplats", "badplats", "utsikt", "utsiktsplats", "utsiktspunkt", "gravfält",
+           "runsten", "domarring", "kvarnruin", "hamnkran", "lekparken"),
+    # Latvian (owner, 2026-10-13; search-final's search-lang-lv.md, with its id catches and future edit points).
+    "lv": ("baznīca", "kapela", "kapliča", "lūgšanu nams", "parks", "skvērs", "rotaļu laukums",
+           "bērnu rotaļu laukums", "bērnu laukums", "sporta laukums", "basketbola laukums",
+           "futbola laukums", "suņu pastaigu laukums", "skeitparks", "stadions", "pludmale",
+           "peldvieta", "piemineklis", "piemiņas akmens", "piemiņas plāksne", "piemiņas zīme",
+           "memoriāls", "skulptūra", "strūklaka", "krusts", "kapi", "kapsēta", "estrāde"),
+    # Romanian (owner, 2026-10-13; search-final's search-lang-ro.md, with its id catches and future edit points).
+    "ro": ("biserică", "biserica", "capelă", "capela", "parc", "parcul", "loc de joacă", "troiță",
+           "troița", "cruce", "monument", "statuie", "bust", "fântână", "fântână arteziană", "cimitir",
+           "foișor", "clopotniță", "casa parohială", "casă parohială", "biserica ortodoxă",
+           "biserică ortodoxă", "biserica reformată", "teren de sport"),
+    # Italian (owner, 2026-10-13; search-final's search-lang-it.md, with its id catches and future edit points).
+    "it": ("chiesa", "cappella", "parco", "giardino", "giardini", "parco giochi", "area giochi",
+           "fontana", "fontanella", "monumento", "monumento ai caduti", "statua", "madonnina",
+           "edicola", "obelisco", "rudere", "ruderi", "anfiteatro", "mausoleo", "colombario", "ninfeo",
+           "cisterna", "cisterne", "sacrario", "area fitness", "area relax", "parco condominiale",
+           "parco comunale", "giardino comunale", "giardino parrocchiale", "parco per bambini",
+           "parco della chiesa", "chiesa evangelica", "chiesa cristiana evangelica",
+           "chiesa apostolica", "evangelica", "sala del regno", "sala del regno dei testimoni di geova",
+           "tomba romana", "tombe romane", "cisterna romana", "villa romana", "villa rustica",
+           "domus rustica", "mausoleo romano", "sepolcro romano", "terme romane", "terme romana",
+           "ninfeo romano", "colonna romana", "cippo romano", "vasca romana",
+           "resti di una villa romana", "zona archeologica", "necropoli arcaica",
+           "basilica paleocristiana", "latrine pubbliche", "cortili porticati", "strada lastricata",
+           "piazzale lastricato", "calidarium", "frigidarium", "colonnata", "edicola di culto",
+           "sepolcro a camera", "roman tomb", "pista ciclabile", "percorso ciclopedonale"),
+    # Greek (owner, 2026-10-13; search-final's search-lang-el.md, with its id catches and future edit points).
+    "el": ("εκκλησία", "εκκλησάκι", "παρεκκλήσι", "ναός", "ιερός ναός", "πάρκο", "πάρκο τσέπης",
+           "παιδική χαρά", "πλατεία", "μνημείο", "ηρώο", "άγαλμα", "προτομή", "γλυπτό", "κρήνη",
+           "βρύση", "νεκροταφείο", "κοιμητήριο", "εικονοστάσι", "βοηθητικό γήπεδο"),
     "ka": ("ეკლესია", "პარკი", "სკვერი", "ძეგლი", "შადრევანი", "ბაღი", "სასაფლაო"),
 }
 
@@ -1449,7 +1705,7 @@ _SCRIPT_RANGES = {
 }
 # Han in a Korean name is hanja (Seoul's "서십자각 터 西十字閣址"), its own.
 _OWN_SCRIPTS = {"ja": ("kana", "han"), "zh": ("han",), "ko": ("hangul", "han"), "ka": ("georgian",),
-                "el": ("greek",)}
+                "el": ("greek",), "ru": ("cyrillic",)}
 
 
 # What sits between the two halves of a bilingual name: a bar, a slash or a
@@ -1577,7 +1833,10 @@ def _named_street(name, local):
     for code in dict.fromkeys(["en", *local]):
         for w in WAY_WORDS.get(code, ()):
             if code in SUFFIX_WAY_LANGUAGES:
-                if ws[-1] == w:
+                # A glued name passes on its ending in a Latin-script suffix
+                # language ("Hotelstraße", "Store Kongensgade"; candidate 33,
+                # 2026-10-13). Korean keeps the whole word (상가진입로).
+                if ws[-1] == w or (code in GLUED_STREET_LANGUAGES and ws[-1].endswith(w)):
                     return True
             elif _CJK_WORD.search(w):
                 if low.endswith(w):
@@ -1588,7 +1847,7 @@ def _named_street(name, local):
 
 
 # Languages whose street word leads the name (_named_street).
-WAY_WORD_LEADS = {"fr", "ca", "es", "cs", "pt"}
+WAY_WORD_LEADS = {"fr", "ca", "es", "cs", "pt", "ro", "it"}
 
 
 def _reads_as_way(names, local, extra=()):
@@ -1644,6 +1903,10 @@ def fold_name(s):
 # ways of one street share nothing whatever their distance.
 SAME_THING_M = 300
 _SUBJECT_KEYS = ("subject", "buried", "name:etymology", "brand", "operator")
+# For candidate 38 the subject key alone: measured on the 19, an entry equal
+# to operator:wikidata or name:etymology:wikidata sat on the thing itself
+# (Roehampton University, Barcelona's Teatre Grec), which stays.
+SUBJECT_ENTRY_KEYS = ("subject",)
 # Words that say an article is about a grave, a plaque or a monument and not
 # about the person it names ("Tomb of Karl Marx", "Tombe d'Oscar Wilde",
 # "Monument funéraire de ..."). In the article's language, which is often not
@@ -2194,6 +2457,18 @@ def _bridge_led(tags, names):
     return names
 
 
+# A station word closing a name is set aside when an outline is matched to
+# its node (Gwangju's outline "상무역" beside its node "상무").
+STATION_NAME_ENDS = ("station", "역", "駅", "站")
+
+
+def _station_core(name):
+    # Folded like the name: fold_name writes a Hangul syllable as its jamo.
+    key = fold_name(name)
+    return next((key[:-len(end)] for end in map(fold_name, STATION_NAME_ENDS)
+                 if key.endswith(end) and len(key) > len(end)), key)
+
+
 def street_never(name):
     """The class of a street name that is no street's whatever its ways
     ("interchange", "ramp", "driveway"), else None."""
@@ -2464,7 +2739,8 @@ def _point(el):
 
 
 def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=(), rebuilt=(),
-          closed_for_works=(), way_words=(), kept=(), keep_interchanges=False, map_stations=(), log=None):
+          closed_for_works=(), way_words=(), kept=(), keep_interchanges=False, map_stations=(), also=(),
+          station_strip=(), articles=None, log=None):
     """Return (index dict, report dict) from one place cache's elements.
     `local`: the city's local language codes (config.PLACE_LANGUAGES).
     `dropped`: OSM objects ("way/504652702") a reading by eye found to be a
@@ -2483,10 +2759,20 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
     (config.PLACE_KEEP_INTERCHANGES).
     `map_stations`: the names of the stations the city's map draws
     (map_stations()), for the station guard.
+    `also`: languages declared below the floor (config.PLACE_LANGUAGES_ALSO).
+    `station_strip`: endings taken off station names (config.PLACE_STATION_STRIP).
+    `articles`: the city's Wikidata article cache (read_wikidata_articles),
+    None when there is none.
     `log`: a list that receives one record per decision of the 2026-10-13
     rules (class, action, OSM id, name, the deciding tag), for the changed-row
     report of a rule change; nothing reads it otherwise."""
-    name_tags = _name_tags(local)
+    also = tuple(a for a in also if a not in local)
+    read = (*local, *also)
+    name_tags = _name_tags(read)
+    asked = set()                             # Wikidata entries has_article was asked about
+
+    def langs_of(t):
+        return _langs(t, local) | {a for a in also if t.get(f"name:{a}")}
     kept_ids = set(kept)
     # A RIVER IS ONE ROW OF MANY WAYS (candidate 28, owner 2026-10-13): its
     # row carries the id of its lowest-numbered way in place_ids.json, and an
@@ -2497,13 +2783,13 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         t = e.get("tags") or {}
         oid = f"{e['type']}/{e['id']}"
         if t.get("waterway") and (oid in dropped or oid in kept_ids):
-            ns = _local_first(t, _names(t, name_tags), local)
+            ns = _local_first(t, _names(t, name_tags), read)
             if ns:
                 river_names["dropped" if oid in dropped else "kept"].add(ns[0])
     for e in elements:
         t = e.get("tags") or {}
         if t.get("waterway") and (river_names["dropped"] or river_names["kept"]):
-            ns = _local_first(t, _names(t, name_tags), local)
+            ns = _local_first(t, _names(t, name_tags), read)
             if ns and ns[0] in river_names["dropped"]:
                 dropped.add(f"{e['type']}/{e['id']}")
             elif ns and ns[0] in river_names["kept"]:
@@ -2562,7 +2848,7 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         wp = (t.get("wikipedia") or "").strip()
         if not wp:
             continue
-        ns = _local_first(t, _names(t, name_tags), local)
+        ns = _local_first(t, _names(t, name_tags), read)
         is_way = e["type"] == "way" and "nodes" in e
         if is_way:
             ids = [n for n in e["nodes"] if n in nodes]
@@ -2633,7 +2919,7 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             report["street_way_dropped_by_id"] += 1
             continue
         t = w.get("tags", {})
-        names = _local_first(t, _names(t, name_tags), local)
+        names = _local_first(t, _names(t, name_tags), read)
         # STREETS BEING REBUILT (owner, 2026-10-11): highway=construction is
         # skipped because most such ways are roads not yet open (Hong Kong's
         # D1 to D7), and no tag tells those from a street closed for
@@ -2700,7 +2986,7 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         street_ways[cell].append((w["id"], w["nodes"]))
         prev = street_names.get(cell, [])
         street_names[cell] = prev + [n for n in names if n not in prev]
-        street_langs[cell] |= _langs(t, local)
+        street_langs[cell] |= langs_of(t)
         shut = t.get("access") in ("private", "no") and t.get("foot") not in FOOT_OPEN
         street_open[cell] |= not (minor and shut
                                   and not (t.get("wikidata") or t.get("wikipedia"))
@@ -2876,7 +3162,7 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             register_ids[ref].add((e["type"], e["id"]))
         if e["type"] == "node" and t.get("place") in SETTLEMENTS and not (
                 extent and not (extent[0] <= e["lat"] <= extent[2] and extent[1] <= e["lon"] <= extent[3])):
-            ns = _local_first(t, _names(t, name_tags), local)
+            ns = _local_first(t, _names(t, name_tags), read)
             if ns:
                 settlement_nodes.add(fold_name(ns[0]))
     district_refs = {ref for ref, ids in register_ids.items() if len(ids) >= SHARED_REGISTER_MIN}
@@ -3018,6 +3304,15 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         seen_tags = t
         verdict, why = article(e, t, names, pt)
         own = verdict == "own"
+        # THE SUBJECT'S ENTRY IS NOT THE OBJECT'S (candidate 38, owner
+        # 2026-10-13): a wikidata tag equal to the object's subject:wikidata
+        # admits it to nothing (SUBJECT_ENTRY_KEYS; a bench under the
+        # entry of the poet it is named for).
+        wd = (t.get("wikidata") or "").strip()
+        subject = wd and next((k for k in SUBJECT_ENTRY_KEYS if wd in [
+            v.strip() for v in (t.get(f"{k}:wikidata") or "").split(";")]), None)
+        if subject:
+            t = {k: v for k, v in t.items() if k != "wikidata"}
         # A BRIDGE'S OWN NAME (owner, 2026-10-13): a registered bridge drawn
         # on a road came in under the road's name ("Aurora Avenue North" for
         # Seattle's Aurora Bridge). bridge:name leads (_bridge_led). A
@@ -3067,10 +3362,18 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             report["landmark_dropped_dead_railway"] += 1
             note("dead_railway", "drop", oid, names[0], dead, t)
             return
-        if t.get("tourism") == "artwork" and verdict in ("none", "not"):
-            report["landmark_dropped_artwork_no_article"] += 1
-            note("artwork_no_article", "drop", oid, names[0], why or "no wikipedia tag", t)
-            return
+        # Rule 16 and rule 39 (a library is a landmark only with an article
+        # of its own; owner, 2026-10-13: "same rule") ask has_article: the
+        # wikipedia tag as before, else the Wikidata cache.
+        needs = "artwork" if t.get("tourism") == "artwork" else "library" if t.get("amenity") == "library" else None
+        if needs and verdict in ("none", "not"):
+            mine = own_item(seen_tags)
+            if mine:
+                asked.add(seen_tags["wikidata"].strip())
+            if not has_article(seen_tags, articles, own=False, own_entry=mine):
+                report[f"landmark_dropped_{needs}_no_article"] += 1
+                note(f"{needs}_no_article", "drop", oid, names[0], why or "no article on the tag or in Wikidata", t)
+                return
         # REGISTER AND INVENTORY ENTRIES (REGISTER_HISTORIC; the second
         # batch, 2026-10-13): an article of the object's own, or no row.
         if t.get("historic") in REGISTER_HISTORIC and not own and oid not in kept_ids and not (
@@ -3101,7 +3404,9 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         reason, names = landmark_drop(t, names, oid, own, kept)
         if reason:
             report[f"landmark_dropped_{reason}"] += 1
-            if log is not None:
+            if log is not None and subject and landmark_drop(seen_tags, names, oid, own)[0] is None:
+                note("subject_entry", "drop", oid, names[0], f"wikidata is its {subject}'s", seen_tags)
+            elif log is not None:
                 if stripped and landmark_drop(seen_tags, names, oid, own)[0] is None:
                     note(f"{person}_no_own_article", "drop", oid, names[0], stripped, seen_tags)
                 elif verdict == "undecided" and reason in ("bare_type", "minor_historic"):
@@ -3137,14 +3442,14 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
 
     for e in tagged:
         t = e.get("tags", {})
-        names = _local_first(t, _names(t, name_tags), local)
+        names = _local_first(t, _names(t, name_tags), read)
         pt = _point(e)
         if not names or not pt:
             continue
         if extent and not (extent[0] <= pt[0] <= extent[2] and extent[1] <= pt[1] <= extent[3]):
             report["outside_area"] += 1
             continue
-        langs = _langs(t, local)
+        langs = langs_of(t)
         oid = f"{e['type']}/{e['id']}"
         # The second batch (2026-10-13): a name that says the thing is gone
         # (HISTORICAL_NAME; 5 rows in wave 1, none on the 19), and a stop-area
@@ -3211,7 +3516,18 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             # station, a ticket shop: 5 rows) or with no registered key (a
             # temple's slope car halt named 本堂: 1 row). Each is dropped,
             # never passed on to the landmark rules.
+            # An ending a city's stops carry in OSM and its map does not
+            # (config.PLACE_STATION_STRIP; Cluj-Napoca's tram stops end " Tram").
+            for end in station_strip:
+                names = list(dict.fromkeys(n[:-len(end)].rstrip() if n.endswith(end) and len(n) > len(end) else n
+                                           for n in names))
             closed = station_closed(t, retrieved)
+            # NO PASSENGERS, NO STATION (candidate 42, owner 2026-10-13):
+            # passenger=no or public_transport=no on a station is a freight
+            # or works halt. A station the map draws stays (the guard).
+            if not closed and (t.get("passenger") == "no" or t.get("public_transport") == "no") \
+                    and fold_name(names[0]) not in drawn:
+                closed = "passenger=no" if t.get("passenger") == "no" else "public_transport=no"
             ride = station_ride(t)
             no_rail = not (t.get("railway") or t.get("station") or any(t.get(k) == "yes" for k in RAIL_MODES))
             skip = (("closed", closed) if closed else ("ride", ride) if ride
@@ -3475,6 +3791,20 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
                 merge(members, "duplicate")
             elif all(m[9].get("railway") == "tram_stop" for m in members):
                 merge(members, "platform")
+    # ONE LINEAR MONUMENT DRAWN IN SEGMENTS IS ONE ROW (candidate 40, owner
+    # 2026-10-13): landmark rows of one folded name and one Wikidata entry,
+    # every one a way or a relation, at any distance (Rome's Aurelian Walls,
+    # 27 rows). The row's point is the segment's nearest the middle of them
+    # all (merge()), so it lies on the monument. Nodes are not merged: two
+    # casts of one statue are two places.
+    by_segment = defaultdict(list)
+    for r in rows:
+        if r[7] and id(r) not in gone and KINDS[r[0]] == "landmark" and not r[7].startswith("node/") \
+                and (r[9].get("wikidata") or "").strip():
+            by_segment[(fold_name(r[3]), r[9]["wikidata"].strip())].append(r)
+    for key in sorted(by_segment):
+        if len(by_segment[key]) > 1:
+            merge(by_segment[key], "segments")
     # ONE ROW A STATION (the second batch, 2026-10-13). An outline with no
     # railway tag beside a rail-tagged station row is that station's building
     # and no row (OUTLINE_BESIDE_M, OUTLINE_SAME_M: 97 of the 134 outline
@@ -3503,10 +3833,10 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
     for r in stations:
         if r[7].startswith("node/") or is_stop_area(r) or id(r) in gone:
             continue
-        mine, wd = fold_name(r[3]), (r[9].get("wikidata") or "").strip()
+        mine, wd = _station_core(r[3]), (r[9].get("wikidata") or "").strip()
         o = next((o for o in station_nodes if id(o) not in gone
                   and _dist_m((r[1], r[2]), (o[1], o[2])) <= OUTLINE_BESIDE_M
-                  and (fold_name(o[3]) == mine or (wd and wd == (o[9].get("wikidata") or "").strip()))), None)
+                  and (_station_core(o[3]) == mine or (wd and wd == (o[9].get("wikidata") or "").strip()))), None)
         if o is not None:
             alias = [a for a in o[4].split("|") if a]
             alias += [n for n in [r[3], *r[4].split("|")] if n and n != o[3] and n not in alias]
@@ -3551,8 +3881,12 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             # NO RAILWAY TAG, NO STATION ROW (the third list, 13). Kept, as
             # the lone stop area is, where it lists a rail mode or carries a
             # station tag and no rail-tagged station row stands for it.
-            if r[9].get("station") or any(r[9].get(k) == "yes" for k in RAIL_MODES):
-                note("station_no_railway_tag_kept", "kept", r[7], r[3], "a rail mode, and no other row", r[9])
+            # A network tag or a name the map draws counts as well: Brussels'
+            # Hotel des Monnaies, Rogier, Madou and Botanique are outlines
+            # with a network and no mode, each its station's only row.
+            if (r[9].get("station") or any(r[9].get(k) == "yes" for k in RAIL_MODES) or r[9].get("network")
+                    or fold_name(r[3]) in drawn):
+                note("station_no_railway_tag_kept", "kept", r[7], r[3], "a rail sign, and no other row", r[9])
             else:
                 gone.add(id(r))
                 report["station"] -= 1
@@ -3671,7 +4005,9 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         },
         "schema": SCHEMA,
         "city": city,
-        "languages": languages(row_langs, local),
+        "languages": languages(row_langs, local, also),
+        # build_city() holds these to the city's Wikidata cache; never served.
+        "wikidata_asked": sorted(asked),
         "fold": fold,
         "kinds": list(KINDS),
         "rows": rows,
@@ -3936,9 +4272,27 @@ def _selftest():
     area(47.7750, -122.32, name="Rail Water Tower", historic="yes", railway="disused", man_made="water_tower",
          wikidata="Q909")
     street("Shut Close", 47.8235, highway="living_street", access="private")
+    # --- The fourth pass (2026-10-13).
+    node(47.7770, -122.32, name="Iron Horse", tourism="artwork", wikidata="Q920", int_name="Cheval de Fer")
+    node(47.7772, -122.32, name="Twin A", tourism="artwork", wikidata="Q921")
+    node(47.7774, -122.32, name="Twin B", tourism="artwork", wikidata="Q921")
+    node(47.7776, -122.32, name="Town Library", amenity="library", wikidata="Q922")
+    node(47.7778, -122.32, name="Great Library", amenity="library", wikidata="Q923")
+    node(47.7780, -122.32, name="Null Library", amenity="library", wikidata="Q924")
+    node(47.7782, -122.32, name="Poet Bench", tourism="attraction", wikidata="Q927", subject__wikidata="Q927")
+    for k in range(3):
+        area(47.7000 + k * 0.02, -122.3245, name="Old Wall", historic="citywalls", wikidata="Q925")
+    node(47.7010, -122.3245, name="Cast Statue", tourism="attraction", wikidata="Q926")
+    node(47.7410, -122.3245, name="Cast Statue", tourism="attraction", wikidata="Q926")
+    node(47.6660, -122.32, name="St Luke", amenity="place_of_worship")
+    area(47.6675, -122.32, name="St Luke", amenity="place_of_worship", building="church")
+    node(47.6452, -122.31, name="Freight Yard", railway="station", passenger="no")
+    node(47.6454, -122.31, name="Works Halt", railway="station", public_transport="no")
+    node(47.6456, -122.31, name="Mill Stop Tram", railway="tram_stop")
     street("Zone Street", 47.8237, access="no", foot="yes", motor_vehicle="permit")
     node(47.8650, -122.31, name="Depot Halt", railway="station")
-    area(47.8642, -122.31, name="Depot Halt", railway="station", building="train_station")
+    area(47.8642, -122.31, name="Depot Halt Station", railway="station", building="train_station")
+    area(47.8720, -122.31, name="Net Hall", public_transport="station", network="Metro")
     area(47.8680, -122.31, name="Lone Hall", railway="station", building="train_station")
     node(47.8683, -122.31, name="Other Stop", railway="station")
     node(47.7755, -122.32, name="The Fountain", amenity="fountain", wikidata="Q911")
@@ -3983,15 +4337,41 @@ def _selftest():
     street("시험 안길", 37.4070, highway="service", access="customers", lon=126.95)
     ko_rows = {(KINDS[r[0]], r[3]) for r in build(ko_els, city="시험시", retrieved="2026-10-10",
                                                   local=("ko",))[0]["rows"]}
+    small = {}
+    for code, streets, extra in (
+            ("da", [("Store Kongensgade", "residential"), ("Hotel Strandvej", "residential"), ("Kirkestien", "footway")],
+             [("Store Plads", {"place": "suburb"})]),
+            ("nb", [("Storgata", "footway")], []),
+            ("sv", [("Stora gården", "footway"), ("Lilla gården", "path"), ("Kungsgatan", "footway")], []),
+            ("lv", [("Brīvības iela", "footway")], [("Mindeļa villa", {"historic": "building"})]),
+            ("ro", [("Strada Mare", "footway")], []),
+            ("it", [("Via Roma", "footway"), ("Via Albergo Vecchio", "residential")],
+             [("Chiesa", {"amenity": "place_of_worship"})]),
+            ("el", [("Αριστοτέλους", "footway"), ("Οδός Ερμού", "footway")], [])):
+        target[0] = []
+        for k, (name, hw) in enumerate(streets):
+            street(name, 55.0 + k * 0.001, highway=hw, lon=12.0)
+        for k, (name, tags) in enumerate(extra):
+            node(55.01 + k * 0.001, 12.001, name=name, **tags)
+        small[code] = {(KINDS[r[0]], r[3]) for r in build(target[0], city="Test", retrieved="2026-10-10",
+                                                          local=(code,))[0]["rows"]}
+    target[0] = []
+    street("Strada Mare", 46.77, lon=23.59, name__hu="Nagy utca")
+    street("Strada Mica", 46.771, lon=23.59)
+    street("Strada Lunga", 46.772, lon=23.59)
+    also_index = build(target[0], city="Test", retrieved="2026-10-10", local=("ro",), also=("hu",))[0]
     target[0] = els
 
     log = []
     index, report = build(els, city="Testville", retrieved="2026-10-10", local=("en",), log=log,
-                          map_stations=["Barn"],
+                          map_stations=["Barn", "Works Halt"],
+                          articles={"Q920": ["enwiki"], "Q921": ["enwiki"], "Q922": [], "Q923": ["frwiki"],
+                                    "Q924": None},
                           closed_for_works={f"node/{works}", f"node/{gone_id}"})
     worded, _ = build(els, city="Testville", retrieved="2026-10-10", local=("en",),
                       closed_for_works={f"node/{works}", f"node/{gone_id}"}, way_words=("place",),
-                      kept={f"node/{dam}", f"node/{green}", f"way/{colonia}"}, keep_interchanges=True)
+                      kept={f"node/{dam}", f"node/{green}", f"way/{colonia}"}, keep_interchanges=True,
+                      station_strip=(" Tram",))
     worded_rows = {(KINDS[r[0]], r[3]) for r in worded["rows"]}
     dropped_rows = {(KINDS[r[0]], r[3]) for r in build(
         els, city="Testville", retrieved="2026-10-10", local=("en",), dropped={f"way/{river[3]}": "why"},
@@ -4153,12 +4533,55 @@ def _selftest():
         ("a customers-only service road is no street", ("street", "후문 진입로") not in ko_rows
          and ("street", "정문 진입로") in ko_rows),
         ("the private-street rule reads living_street", ("street", "Shut Close") not in rows),
+        # --- The fourth pass (2026-10-13).
+        ("public art whose own entry has an article in the cache is a row", ("landmark", "Iron Horse") in rows),
+        ("public art under an entry two objects share is no row", not any(n.startswith("Twin") for _, n in rows)),
+        ("a library whose entry has no article is no row", ("landmark", "Town Library") not in rows
+         and ("landmark", "Null Library") not in rows),
+        ("a library whose own entry has an article is a row", ("landmark", "Great Library") in rows),
+        ("the entries the lookup is asked about are listed",
+         {"Q907", "Q920", "Q922", "Q923", "Q924"} <= set(index["wikidata_asked"]) and "Q921" not in index["wikidata_asked"]),
+        ("has_article: the tag, or an own entry with an article",
+         has_article({}, None, own=True) and has_article({"wikidata": "Q1"}, {"Q1": ["enwiki"]})
+         and not has_article({"wikidata": "Q1"}, {"Q1": []}) and not has_article({"wikidata": "Q1"}, {"Q1": None})
+         and not has_article({"wikidata": "Q1"}, {"Q1": ["enwiki"]}, own_entry=False)
+         and not has_article({"wikidata": "Q1"}, None)),
+        ("int_name is an alias", "Cheval de Fer" in alias.get(("landmark", "Iron Horse"), "")),
+        ("an entry that is the object's subject's admits it to nothing", ("landmark", "Poet Bench") not in rows),
+        ("a monument drawn in segments is one row", count[("landmark", "Old Wall")] == 1),
+        ("two nodes of one name and entry far apart stay two", count[("landmark", "Cast Statue")] == 2),
+        ("a place-of-worship node beside the way of its name is one row", count[("landmark", "St Luke")] == 1),
+        ("a station with passenger=no is no station", ("station", "Freight Yard") not in rows),
+        ("a map station tagged public_transport=no stays", ("station", "Works Halt") in rows),
+        ("a city's station ending is stripped", ("station", "Mill Stop Tram") in rows
+         and ("station", "Mill Stop") in worded_rows and ("station", "Mill Stop Tram") not in worded_rows),
+        ("Danish: store is no leak word, and a glued street passes beside one",
+         ("street", "Store Kongensgade") in small["da"] and ("street", "Hotel Strandvej") in small["da"]
+         and ("street", "Kirkestien") in small["da"] and ("place", "Store Plads") in small["da"]),
+        ("Norwegian: a glued way word", ("street", "Storgata") in small["nb"]),
+        ("Swedish: a glued way word, and -gården a street ending on any way", ("street", "Kungsgatan") in small["sv"]
+         and ("street", "Stora gården") in small["sv"] and ("street", "Lilla gården") in small["sv"]),
+        ("Latvian: a way word, and a house word closing a name", ("street", "Brīvības iela") in small["lv"]
+         and ("landmark", "Mindeļa villa") not in small["lv"]),
+        ("Romanian: a leading way word", ("street", "Strada Mare") in small["ro"]),
+        ("Italian: a leading way word, beside a leak word too, and a bare type word",
+         ("street", "Via Roma") in small["it"] and ("street", "Via Albergo Vecchio") in small["it"]
+         and ("landmark", "Chiesa") not in small["it"]),
+        ("Greek: a genitive ending and a way word", ("street", "Αριστοτέλους") in small["el"]
+         and ("street", "Οδός Ερμού") in small["el"]),
+        ("a language declared below the floor is read and measured, and stops nothing",
+         any("Nagy utca" in r[4] for r in also_index["rows"]) and also_index["languages"]["also"] == ["hu"]
+         and 0 < also_index["languages"]["coverage"]["hu"] < LOCAL_MIN and "Hungarian" not in also_index["languages"]["listed"]),
+        ("fold_name: final sigma and the cedilla letters fold with their twins",
+         fold_name("ΟΔΟΣ") == fold_name("οδός") and fold_name("Ştefan Ţepeş") == fold_name("Ștefan Țepeș")),
         ("a river row carries the id of its lowest way",
          f"way/{river[0]}" in index["row_osm"] and f"way/{river[1]}" not in index["row_osm"]),
         ("a river is dropped whole by the id of one of its ways", ("landmark", "Lost Creek") in rows
          and ("landmark", "Lost Creek") not in dropped_rows and ("landmark", "Mill Creek") in dropped_rows),
         ("a street closed to traffic and open on foot is no private street", ("street", "Zone Street") in rows),
-        ("a station's outline under its node's name is one row with it", count[("station", "Depot Halt")] == 1),
+        ("a station's outline under its node's name, a station word aside, is one row with it",
+         count[("station", "Depot Halt")] == 1 and ("station", "Depot Halt Station") not in rows),
+        ("a lone station object with a network tag stays", ("station", "Net Hall") in rows),
         ("a station outline with no node of its name stays", ("station", "Lone Hall") in rows),
         ("a bare type word behind an article is bare", ("landmark", "The Fountain") not in rows),
         ("two bare words either side of a dash are bare", not any(n == "Fountain - Chapel" for _, n in rows)),
@@ -4229,6 +4652,8 @@ def _selftest():
         ("the log names a rule for a dropped street",
          any(x["class"] == "street_busway_raceway" and x["name"] == "Bus Road" for x in log)),
         ("own_article: a section is not the object's", own_article({"wikipedia": "en:A#B"}, ["A"])[0] == "not"),
+        ("_station_core: a Hangul station word is set aside", _station_core("상무역") == _station_core("상무")
+         and _station_core("역") == fold_name("역")),
         ("quiet_stations: a listed uncovered station is accounted for",
          quiet_stations({"B": "why"}, [("A", 1, 1), ("B", 2, 2)], ["B"]) == ([], [])),
         ("quiet_stations: an unlisted uncovered station still fails",
