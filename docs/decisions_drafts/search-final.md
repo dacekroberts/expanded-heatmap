@@ -1,3 +1,72 @@
+### 2026-10-13 - All 32 cities built on master's third and fourth rule passes; Most and Yamagata read; German street screens (branch search-final)
+
+- **Master 50d551f4 merged (420a556f).** Each city's Wikidata article cache
+  fetched (`pipeline/place_wikidata_fetch.py`, one city at a time), then its
+  index built; 21 cities for the first time, the eleven built ones again.
+  All 31 chain builds and the Liepāja trial exited 0 (07729cb5).
+- **Settings from the landed rules:** Cluj-Napoca `PLACE_LANGUAGES_ALSO =
+  ("hu",)` and `PLACE_STATION_STRIP = (" Tram",)`; Daugavpils
+  `PLACE_LANGUAGES_ALSO = ("ru",)`.
+- **`check_place_search.py`:** rule A on all 32 (no map yet), and rule E on
+  five names that wait for the owner: Berlin "Shakespeare Company Berlin"
+  and "Wohnanlage ehem. Gertraudenhospital", Florence's pharmacy museum of
+  Santa Maria Novella, Riga "Farmācijas muzejs", Oslo "De Norske
+  Gjærspritfabrikker a/s".
+- **The reads were refined by a measurement, not repeated.** Each of the 15
+  new-language indexes was compared, by kind and name, with the dump its
+  readers saw: 106 unread rows in all (Florence 60 streets, the
+  limited-traffic streets the new rule restores; Cluj-Napoca 13 stops with
+  " Tram" stripped; Rome 20, the rest 13). Read by the session: all street
+  or stop names, except Rome's "prosecuzione ciclabile ponte Fonte
+  Laurentina", dropped as a mode-lane description.
+- **Most and Yamagata, never read before, read in full** (places on the top
+  model, streets on sonnet). Most: 1 drop (a station abandoned in 1970), 9
+  pending. Yamagata: 6 drops (a description, 4 duplicate shrine rows, a
+  glitched reading), 19 pending; its 76 streets are clean.
+- **Street screens of Berlin (three shares), Bremen, Gelsenkirchen and
+  Zurich** on sonnet, since their first read came before the German way-word
+  list was settled. Gelsenkirchen: nothing. Bremen: 4 drops and 10 ramp
+  names (owner's ramp ruling). Zurich: 2 address-number names and 2 motorway
+  interchange labels. Berlin: 63 names (14 single-letter path codes, 38
+  "Straße <number>" names on minor ways only, 4 glued names, 2 gate roads, 2
+  bare type words, 2 interchange labels, a platform). Held by the session:
+  Berlin "Volksgartenweg 1" to "6", "Pfuhlweg I" and "II" (a real name with a
+  lane number, not the settled code class) and "Rabbit trail"; Zurich
+  "Rundweg" (it carries the city street list's entry).
+- **Florence's 213 library drops by id are removed** (owner, 2026-10-13, in
+  the Cleanup session: the Wikidata lookup decides). The rule drops 212;
+  Biblioteca Villa Bandini (way/134663645) has an Italian article and is a
+  row again.
+- **Re-checks owed:** Monterrey's Sendero station is a row; 18 colonias are
+  place rows; Florence's limited-traffic streets are back.
+
+Findings for Cleanup:
+
+45. **The private-residential rule took 2,391 named streets out of
+    Guadalajara and 124 out of Monterrey** against the committed indexes
+    (`street_dropped_private_residential`: 3,683 ways in Guadalajara). They
+    are named streets of gated neighborhoods ("Calle Río Segura", "Paseo de
+    los Naranjos Oriente"). The owner's answer 8 to this session was "named
+    keep, codenamed drop". Put to the owner, not decided here.
+46. **A city with no art or library entry gets no Wikidata cache file**, so
+    its build reports `wikidata_cache_absent: 1` (Yamagata, Monterrey).
+47. **Drawn station names against index names**, compared by `norm()` on
+    name and aliases: 201 drawn names in 16 cities have no row under the
+    drawn form. Nearly all are forms the matcher has to bridge, not missing
+    stations: Berlin 68 ("Afrikanische Str."), Brussels 62 (both languages
+    joined by a slash), Kitakyushu 18 (romanized), Cluj-Napoca 15 (two stops
+    joined), Riga 12, Geneva 9. Single names worth a look: Bremen "Bahnhof
+    Walle", Bucharest "Basarab 2 - M4", Daugavpils "Stropu ciemats",
+    Monterrey "Ruiz Cortines", Oslo "Kjelsåsalléen", Thessaloniki "New
+    Railway Station", Yamagata "Omoshiroyama-Kogen", Odense "Hjallese St."
+    and "Odense Banegård", Bergen's two terminals, Taichung "Nantun" and
+    "Wenxin Zhongqing", Taipei "Guangci/Fengtian Temple", Guadalajara
+    "Guadalajara Centro / Plaza Universidad".
+48. **Rule candidates from the German street screens:** a single letter
+    beside "-Weg" on minor ways (Berlin 16); "Straße <number>" on minor ways
+    only (Berlin 38); a name holding a slash that joins two street names
+    (Berlin 4); "Abfahrt" and "Zufahrt" ramp names (Bremen 10).
+
 ### 2026-10-13 - The owner's 14 answers on the built cities and 15 on the new-language cities; fifteen cities read from in-memory dumps (branch search-final)
 
 - **The owner, to the 14 calls on the nine built cities: "1. yes. 2. drop.
