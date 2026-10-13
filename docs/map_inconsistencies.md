@@ -175,7 +175,7 @@ run on top of a metro network.
   Midlands Metro), Edinburgh (Edinburgh Trams), Sheffield (Supertram; the Tram-Train to
   Rotherham not drawn), Nottingham (Regional) (NET) and Blackpool (Regional) (the
   Blackpool Tramway).
-- **Trams not drawn:** Hong Kong Tramways (it runs beside the Island Line), Milan (17 routes), Barcelona,
+- **Trams not drawn:** Hong Kong Tramways (it runs beside the Island Line), Barcelona,
   Paris (all but T3a and T3b; T2 and T9 are stubs), Prague, Rome (all but tram
   8), Madrid (Metro Ligero ML2 and ML3, stubs), Berlin (BVG's 22 lines, an overlay on the U- and S-Bahn: they would add
   518 stops for about 7 more points of storefronts in the rings; owner,
@@ -574,7 +574,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | **Ireland** | | | | | |
 | Dublin | Luas Red, Green + DART | Commuter, InterCity | NTA national GTFS; gate 3 exact | 4 local authorities | 2 / 0 |
 | **Italy** | | | | | |
-| Milan | Metro M1–M5 | 17 trams; Passante, Trenord | ATM GIS layers (+GTFS colours) | Comune | 21 / 0 |
+| Milan | Metro M1–M5 + trams 1, 2, 3, 4, 5, 7, 9, 10, 12, 14, 15, 16, 19, 24, 27, 31, 33 | Passante, Trenord | ATM GIS layers (metro); ATM GTFS (trams, metro colours) | Comune | 40 / 158 |
 | Rome | Metro A, B, B1, C + Roma–Viterbo (urban) + Tram 8 | Other trams (2, 5, 14, 19 bus-replaced; 3 running again from 2026-09-07 but not in the cached feed); 8 prolungato; Roma–Lido; suburban | OpenStreetMap | Comune | 1 / 9 |
 | Florence | Tramvia T1 and T2 | Buses, trains; T3 and T4 (building) | OpenStreetMap; gate 3 exact | Comune | 4 / 0 |
 | **France** | | | | | |

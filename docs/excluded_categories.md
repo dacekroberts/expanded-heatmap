@@ -63,9 +63,8 @@ left out where it only runs over the top of a metro.** Many of these maps draw l
 San Diego, San Francisco, Los Angeles, Edmonton, Calgary, Miami and Dublin
 among them - Marseille draws its three Tramway lines beside its two Métro
 lines, and Toulouse draws T1 beside Métro A and B. Where a tram network is left
-out, the city already has a metro and the trams run over the top of it: Milan's
-17 tram routes stop a block or two apart and the agency publishes no color for
-any of them, and Barcelona's 28 tram stops inside the city all sit within about
+out, the city already has a metro and the trams run over the top of it:
+Barcelona's 28 tram stops inside the city all sit within about
 half a mile of a metro or funicular station. San Francisco's cable cars are out as a different mode. Its
 F Market & Wharves streetcar, once left out as a separately branded service, is
 drawn for its waterfront, as Rome's tram 8, Madrid's Metro Ligero line 1, Paris's
@@ -126,7 +125,7 @@ page.
   underground station, every terminus and every interchange is kept. It applies
   to San Francisco's Muni Metro and F Market & Wharves, Philadelphia's
   trolleys, the Boston Green Line's surface branches, the trams of Amsterdam,
-  Rotterdam and Riga, Toronto's streetcars, Rome's tram 8, Hong Kong's Light
+  Rotterdam, Riga and Milan, Toronto's streetcars, Rome's tram 8, Hong Kong's Light
   Rail, and the Brussels trams 10, 51 and 62.<!-- internal --> The reasoning is in
   `docs/sub_transit_line_filters.md`.<!-- /internal -->
 - **It is on a stretch that runs too rarely.** Light rail is drawn only where
@@ -1725,6 +1724,14 @@ city's map worth knowing before reading its food-service colors.
 
 Milan's registers carry no funeral code; about 29 funeral services reach the
 non-food shop layer through the shop register, and they stay.
+
+**Stations.** ATM's five metro lines and 17 tram lines are drawn: Trams 1, 2,
+3, 4, 5, 7, 9, 10, 12, 14, 15, 16, 19, 24, 27, 31 and 33, as the timetable for
+September 14 to October 2, 2026 ran them. 158 tram stops are thinned by the
+spacing filter to about one per half mile. Twenty-one metro stations and 19
+tram stops stand outside the Comune di Milano; the tram stops are the outer
+ends of Tram 15 in Rozzano and Tram 31 in Cinisello Balsamo. The Passante and
+Trenord's suburban trains are not drawn.
 
 ### Paris - four trades with no premises, and two catch-alls the publisher's own hierarchy settled
 

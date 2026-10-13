@@ -1,22 +1,199 @@
-station,latitude,longitude,reason
-ASSAGO MILANOFIORI FORUM,45.40174850104714,9.145538807891427,outside the Comune di Milano boundary
-ASSAGO MILANOFIORI NORD,45.40945450104614,9.150046307890632,outside the Comune di Milano boundary
-BUSSERO,45.52530166255255,9.375896921658377,outside the Comune di Milano boundary
-CASCINA ANTONIETTA,45.54207947755688,9.423500191490161,outside the Comune di Milano boundary
-CASCINA BURRONA,45.51736435689484,9.29783542421094,outside the Comune di Milano boundary
-CASSINA DE PECCHI,45.52186403371028,9.363121602131207,outside the Comune di Milano boundary
-CERNUSCO SUL NAVIGLIO,45.52106901120665,9.331377713029724,outside the Comune di Milano boundary
-COLOGNO CENTRO,45.52747820102605,9.28296420785263,outside the Comune di Milano boundary
-COLOGNO NORD,45.53430280102485,9.291094107850261,outside the Comune di Milano boundary
-COLOGNO SUD,45.52021310102728,9.27492710785491,outside the Comune di Milano boundary
-GESSATE,45.54528723128334,9.436625130131565,outside the Comune di Milano boundary
-GORGONZOLA,45.536741001016644,9.403454107805203,outside the Comune di Milano boundary
-LINATE AEROPORTO,45.46285013515022,9.277901470319877,outside the Comune di Milano boundary
-PERO,45.50879970104198,9.085806707929784,outside the Comune di Milano boundary
-RHO FIERAMILANO,45.519839801040895,9.087107307930731,outside the Comune di Milano boundary
-SESTO 1 MAGGIO FS,45.541691201027994,9.23833340787256,outside the Comune di Milano boundary
-SESTO MARELLI,45.523477101030345,9.22796150787432,outside the Comune di Milano boundary
-SESTO RONDO,45.53415930102917,9.231245807874418,outside the Comune di Milano boundary
-VILLA FIORITA,45.52073979974015,9.345971366778187,outside the Comune di Milano boundary
-VILLA POMPEA,45.527848518671256,9.384974351830312,outside the Comune di Milano boundary
-VIMODRONE,45.51578330102689,9.285989107849856,outside the Comune di Milano boundary
+station,latitude,longitude,lines,reason
+ASSAGO MILANOFIORI FORUM,45.40174850104714,9.145538807891427,Metro M2,outside the Comune di Milano boundary
+ASSAGO MILANOFIORI NORD,45.40945450104614,9.150046307890632,Metro M2,outside the Comune di Milano boundary
+BUSSERO,45.52530166255255,9.375896921658377,Metro M2,outside the Comune di Milano boundary
+CASCINA ANTONIETTA,45.54207947755688,9.423500191490161,Metro M2,outside the Comune di Milano boundary
+CASCINA BURRONA,45.51736435689484,9.29783542421094,Metro M2,outside the Comune di Milano boundary
+CASSINA DE PECCHI,45.52186403371028,9.363121602131207,Metro M2,outside the Comune di Milano boundary
+CERNUSCO SUL NAVIGLIO,45.52106901120665,9.331377713029724,Metro M2,outside the Comune di Milano boundary
+COLOGNO CENTRO,45.52747820102605,9.28296420785263,Metro M2,outside the Comune di Milano boundary
+COLOGNO NORD,45.53430280102485,9.291094107850261,Metro M2,outside the Comune di Milano boundary
+COLOGNO SUD,45.52021310102728,9.27492710785491,Metro M2,outside the Comune di Milano boundary
+GESSATE,45.54528723128334,9.436625130131565,Metro M2,outside the Comune di Milano boundary
+GORGONZOLA,45.536741001016644,9.403454107805203,Metro M2,outside the Comune di Milano boundary
+LINATE AEROPORTO,45.46285013515022,9.277901470319877,Metro M4,outside the Comune di Milano boundary
+PERO,45.50879970104198,9.085806707929784,Metro M1,outside the Comune di Milano boundary
+RHO FIERAMILANO,45.519839801040895,9.087107307930731,Metro M1,outside the Comune di Milano boundary
+SESTO 1 MAGGIO FS,45.541691201027994,9.23833340787256,Metro M1,outside the Comune di Milano boundary
+SESTO MARELLI,45.523477101030345,9.22796150787432,Metro M1,outside the Comune di Milano boundary
+SESTO RONDO,45.53415930102917,9.231245807874418,Metro M1,outside the Comune di Milano boundary
+VILLA FIORITA,45.52073979974015,9.345971366778187,Metro M2,outside the Comune di Milano boundary
+VILLA POMPEA,45.527848518671256,9.384974351830312,Metro M2,outside the Comune di Milano boundary
+VIMODRONE,45.51578330102689,9.285989107849856,Metro M2,outside the Comune di Milano boundary
+Agrippa,45.432764,9.182986,Tram 15,"spacing filter on Tram 15: 0.125 mi after Volvinio, under 0.5 mi"
+Arcimboldi Ateneo Nuovo,45.515805,9.213752,Tram 7,"spacing filter on Tram 7: 0.166 mi after Stazione Greco Pirelli, under 0.5 mi"
+Arco della Pace,45.476678,9.171108,"Tram 1, Tram 10","spacing filter on Tram 1: 0.363 mi after C.so Sempione Via Procaccini, under 0.5 mi"
+Arena,45.475301,9.18148,"Tram 2, Tram 4, Tram 12, Tram 14","spacing filter on Tram 2: 0.224 mi after P.za Lega Lombarda, under 0.5 mi"
+C.so Italia Via Lusardi,45.453854,9.186981,Tram 15,"spacing filter on Tram 15: 0.176 mi after SANTA SOFIA, under 0.5 mi"
+C.so Magenta Via Nirone,45.465808,9.178011,"Tram 16, Tram 19","spacing filter on Tram 16: 0.143 mi from L.go d'Ancona, under 0.5 mi"
+C.so P.ta Vigentina,45.45358,9.196114,Tram 24,"spacing filter on Tram 24: 0.211 mi after CROCETTA, under 0.5 mi"
+C.so P.ta Vittoria (Camera del Lavoro),45.462313,9.203563,"Tram 12, Tram 19, Tram 27","spacing filter on Tram 12: 0.467 mi after Via Larga, under 0.5 mi"
+C.so S. Gottardo Via Lagrange,45.448836,9.179683,Tram 3,"spacing filter on Tram 3: 0.2 mi after L.go Mahler, under 0.5 mi"
+C.so Sempione Via Arona,45.484105,9.160818,"Tram 1, Tram 19","spacing filter on Tram 1: 0.344 mi after P.za Firenze, under 0.5 mi"
+C.so Sempione Via Canova,45.478107,9.168735,"Tram 1, Tram 10","spacing filter on Tram 1: 0.212 mi after C.so Sempione Via Procaccini, under 0.5 mi"
+C.so Sempione Via Villasanta,45.479273,9.167155,"Tram 1, Tram 10","spacing filter on Tram 1: 0.101 mi after C.so Sempione Via Procaccini, under 0.5 mi"
+C.so Sempione Via e. Filiberto,45.485912,9.158605,"Tram 1, Tram 19","spacing filter on Tram 1: 0.179 mi after P.za Firenze, under 0.5 mi"
+C.so Vercelli L.go Settimio Severo,45.466353,9.162359,Tram 16,"spacing filter on Tram 16: 0.12 mi after P.le Baracca, under 0.5 mi"
+C.so Vercelli Via Cherubini,45.466639,9.158489,Tram 16,"spacing filter on Tram 16: 0.309 mi after P.le Baracca, under 0.5 mi"
+Carrobbio,45.4597,9.181201,Tram 3,"spacing filter on Tram 3: 0.186 mi after VETRA, under 0.5 mi"
+Castelbarco,45.448714,9.185543,Tram 15,"spacing filter on Tram 15: 0.203 mi after P.ta Lodovica, under 0.5 mi"
+G. da Cermenate,45.437681,9.183415,Tram 15,"spacing filter on Tram 15: 0.467 mi after Tibaldi, under 0.5 mi"
+Giambologna,45.445617,9.184597,Tram 15,"spacing filter on Tram 15: 0.421 mi after P.ta Lodovica, under 0.5 mi"
+L.go Augusto,45.462649,9.197736,"Tram 12, Tram 19, Tram 27","spacing filter on Tram 12: 0.183 mi after Via Larga, under 0.5 mi"
+Medeghino,45.43144,9.18042,Tram 15,"spacing filter on Tram 15: 0.28 mi after Volvinio, under 0.5 mi"
+Nizza,45.503097,9.189051,Tram 4,"spacing filter on Tram 4: 0.388 mi after Niguarda (Ospedale), under 0.5 mi"
+P.le Aquileia,45.461194,9.163231,"Tram 2, Tram 10","spacing filter on Tram 2: 0.347 mi after P.le Baracca, under 0.5 mi"
+P.le Brescia (Osp. San Luca),45.469917,9.145952,Tram 16,"spacing filter on Tram 16: 0.3 mi after DE ANGELI, under 0.5 mi"
+P.le Martini,45.457196,9.222141,"Tram 12, Tram 16","spacing filter on Tram 12: 0.487 mi after P.za Emilia, under 0.5 mi"
+P.le Nigra,45.496676,9.171022,Tram 2,"spacing filter on Tram 2: 0.448 mi after Bausan, under 0.5 mi"
+P.le Principessa Clotilde (Osp. Fatebenefratelli),45.480286,9.192651,"Tram 10, Tram 33","spacing filter on Tram 10: 0.109 mi after V.le Monte Santo, under 0.5 mi"
+P.za Aspari,45.471797,9.221386,Tram 5,"spacing filter on Tram 5: 0.269 mi after Via B. Angelico Via Colombo, under 0.5 mi"
+P.za Axum (Stadio Meazza),45.476168,9.124527,Tram 16,"spacing filter on Tram 16: 0.218 mi after SAN SIRO IPPODROMO, under 0.5 mi"
+P.za Caneva,45.487752,9.161377,Tram 14,"spacing filter on Tram 14: 0.19 mi after P.za Diocleziano, under 0.5 mi"
+P.za Carbonari,45.494765,9.197486,Tram 5,"spacing filter on Tram 5: 0.466 mi after V.le Lunigiana, under 0.5 mi"
+P.za Carlo Erba,45.475102,9.221253,"Tram 19, Tram 33","spacing filter on Tram 19: 0.405 mi after P.za Leonardo da Vinci (Politecnico), under 0.5 mi"
+P.za Cavour,45.472706,9.195159,Tram 1,"spacing filter on Tram 1: 0.218 mi after MONTENAPOLEONE, under 0.5 mi"
+P.za Cincinnato,45.479916,9.204014,"Tram 1, Tram 5","spacing filter on Tram 1: 0.11 mi after V.le Tunisia, under 0.5 mi"
+P.za Esquilino,45.476041,9.132051,Tram 16,"spacing filter on Tram 16: 0.285 mi after SEGESTA, under 0.5 mi"
+P.za Ferravilla,45.470995,9.223824,Tram 5,"spacing filter on Tram 5: 0.138 mi after Via B. Angelico Via Colombo, under 0.5 mi"
+P.za Grandi,45.462194,9.220643,Tram 27,"spacing filter on Tram 27: 0.161 mi after V.le Campania V.le Corsica, under 0.5 mi"
+P.za M.Te Falterona,45.474098,9.140441,Tram 16,"spacing filter on Tram 16: 0.165 mi after Via Dolci Via Ricciarelli, under 0.5 mi"
+P.za Morbegno,45.493003,9.216276,Tram 1,"spacing filter on Tram 1: 0.137 mi after Via Venini Via Sauli, under 0.5 mi"
+P.za Napoli,45.452232,9.153512,Tram 14,"spacing filter on Tram 14: 0.283 mi after TOLSTOJ, under 0.5 mi"
+P.za Otto Novembre,45.474696,9.211123,"Tram 5, Tram 33","spacing filter on Tram 5: 0.205 mi after P.za Adelaide di Savoia, under 0.5 mi"
+P.za Ovidio,45.458169,9.240892,Tram 27,"spacing filter on Tram 27: 0.251 mi after Via Mecenate Via Maderna, under 0.5 mi"
+P.za S. Eustorgio,45.453753,9.180431,Tram 3,"spacing filter on Tram 3: 0.105 mi after P.za Ventiquattro Maggio, under 0.5 mi"
+P.za S.Maria del Suffragio,45.462236,9.211332,"Tram 12, Tram 16, Tram 27","spacing filter on Tram 12: 0.168 mi after P.za 5 Giornate, under 0.5 mi"
+P.za Sei Febbraio,45.477411,9.160633,Tram 19,"spacing filter on Tram 19: 0.477 mi after L.go Quinto Alpini, under 0.5 mi"
+P.za del Rosario,45.455234,9.162786,Tram 14,"spacing filter on Tram 14: 0.206 mi after Via Solari Via Stendhal, under 0.5 mi"
+Palazzo di Giustizia,45.462338,9.2004,"Tram 12, Tram 19, Tram 27","spacing filter on Tram 12: 0.314 mi after Via Larga, under 0.5 mi"
+Pezzotti,45.440964,9.183141,Tram 15,"spacing filter on Tram 15: 0.24 mi after Tibaldi, under 0.5 mi"
+Ponte Guido Crepax,45.448197,9.158296,Tram 2,"spacing filter on Tram 2: 0.106 mi after Ripa di P.ta Ticinese Via d'Adda, under 0.5 mi"
+Ripa di P.ta Ticinese Via Lombardini,45.449376,9.16398,Tram 2,"spacing filter on Tram 2: 0.359 mi after P.TA GENOVA F.S., under 0.5 mi"
+S. Maria delle Grazie (Cenacolo Vinciano),45.4657,9.169953,Tram 16,"spacing filter on Tram 16: 0.251 mi after L.go d'Ancona, under 0.5 mi"
+Teatro alla Scala,45.466979,9.189467,Tram 1,"spacing filter on Tram 1: 0.186 mi after CORDUSIO, under 0.5 mi"
+Tremelloni,45.513896,9.227571,Tram 7,"spacing filter on Tram 7: 0.197 mi after PRECOTTO, under 0.5 mi"
+UniversitÃ  Bicocca Scienza,45.513676,9.211277,Tram 7,"spacing filter on Tram 7: 0.45 mi after V.le Testi Via S. Marcellina, under 0.5 mi"
+V.le Bligny,45.450946,9.194071,Tram 9,"spacing filter on Tram 9: 0.354 mi after P.ta Lodovica, under 0.5 mi"
+V.le Brianza,45.487911,9.21244,Tram 1,"spacing filter on Tram 1: 0.232 mi after CAIAZZO, under 0.5 mi"
+V.le Ca' Granda V.le Suzzani,45.506958,9.198065,Tram 5,"spacing filter on Tram 5: 0.149 mi after CA GRANDA, under 0.5 mi"
+V.le Ca' Granda Via Cherasco,45.508402,9.192037,Tram 5,"spacing filter on Tram 5: 0.458 mi after CA GRANDA, under 0.5 mi"
+V.le Ca' Granda Via Val Furva,45.507699,9.195044,Tram 5,"spacing filter on Tram 5: 0.304 mi after CA GRANDA, under 0.5 mi"
+V.le Certosa (Cimitero  Maggiore),45.503368,9.122135,Tram 14,"spacing filter on Tram 14: 0.13 mi after V.le Certosa Via Giorgini, under 0.5 mi"
+V.le Certosa V.le Serra,45.490008,9.151419,"Tram 1, Tram 14","spacing filter on Tram 1: 0.401 mi after P.le Accursio, under 0.5 mi"
+V.le Certosa Via Casella,45.494488,9.141577,Tram 14,"spacing filter on Tram 14: 0.171 mi after P.le Accursio, under 0.5 mi"
+V.le Certosa Via Cormons,45.501311,9.126521,Tram 14,"spacing filter on Tram 14: 0.414 mi after V.le Certosa Via Tibullo, under 0.5 mi"
+V.le Certosa Via Giannini,45.496235,9.137763,Tram 14,"spacing filter on Tram 14: 0.392 mi after P.le Accursio, under 0.5 mi"
+V.le Certosa Via Gradisca,45.49991,9.129639,Tram 14,"spacing filter on Tram 14: 0.235 mi after V.le Certosa Via Tibullo, under 0.5 mi"
+V.le Certosa Via Grosotto,45.491665,9.147775,"Tram 1, Tram 14","spacing filter on Tram 1: 0.19 mi after P.le Accursio, under 0.5 mi"
+V.le Col di Lana,45.452068,9.183691,"Tram 9, Tram 14","spacing filter on Tram 9: 0.197 mi after P.za Ventiquattro Maggio, under 0.5 mi"
+V.le Corsica Via Battistotti Sassi,45.462319,9.22826,Tram 27,"spacing filter on Tram 27: 0.429 mi after STAZIONE FORLANINI, under 0.5 mi"
+V.le Corsica Via Negroli,45.462239,9.2308,Tram 27,"spacing filter on Tram 27: 0.305 mi after STAZIONE FORLANINI, under 0.5 mi"
+V.le Espinasse Via Casella,45.495523,9.1434,Tram 1,"spacing filter on Tram 1: 0.394 mi after P.le Santorre di Santarosa, under 0.5 mi"
+V.le Espinasse Via Nuvolone,45.497933,9.141703,Tram 1,"spacing filter on Tram 1: 0.209 mi after P.le Santorre di Santarosa, under 0.5 mi"
+V.le Espinasse Via Palizzi,45.502847,9.138796,"Tram 1, Tram 12","spacing filter on Tram 1: 0.357 mi after Certosa, under 0.5 mi"
+V.le Isonzo Via Ripamonti,45.446737,9.19794,Tram 24,"spacing filter on Tram 24: 0.295 mi after Via Ripamonti V.le Sabotino, under 0.5 mi"
+V.le Lunigiana Via Gioia,45.492323,9.203644,Tram 5,"spacing filter on Tram 5: 0.122 mi after V.le Lunigiana, under 0.5 mi"
+V.le Monte Nero Via Bergamo,45.457462,9.205517,Tram 9,"spacing filter on Tram 9: 0.431 mi after PORTA ROMANA, under 0.5 mi"
+V.le Monte Nero Via Pier Lombardo,45.45511,9.204246,Tram 9,"spacing filter on Tram 9: 0.257 mi after PORTA ROMANA, under 0.5 mi"
+V.le Premuda,45.465394,9.207243,"Tram 9, Tram 19","spacing filter on Tram 9: 0.225 mi after P.za 5 Giornate, under 0.5 mi"
+V.le Romagna Via Pascoli,45.476112,9.22371,"Tram 19, Tram 33","spacing filter on Tram 19: 0.267 mi after P.za Leonardo da Vinci (Politecnico), under 0.5 mi"
+V.le S. Michele del Carso P.za de Meis,45.463662,9.164084,"Tram 2, Tram 10","spacing filter on Tram 2: 0.172 mi after P.le Baracca, under 0.5 mi"
+V.le Sabotino,45.450935,9.200436,Tram 9,"spacing filter on Tram 9: 0.179 mi after Via Ripamonti V.le Sabotino, under 0.5 mi"
+V.le Testi Via Dolcebuono,45.504061,9.199303,"Tram 4, Tram 5","spacing filter on Tram 4: 0.181 mi after ISTRIA, under 0.5 mi"
+V.le Testi Via La Farina,45.516466,9.206317,Tram 31,"spacing filter on Tram 31: 0.411 mi after PONALE, under 0.5 mi"
+V.le Testi Via S. Glicerio,45.518687,9.20757,Tram 31,"spacing filter on Tram 31: 0.246 mi after PONALE, under 0.5 mi"
+V.le Tibaldi Via Meda,45.443542,9.179009,Tram 3,"spacing filter on Tram 3: 0.404 mi after Via Montegani V.le da Cermenate, under 0.5 mi"
+V.le Umbria,45.459608,9.217389,"Tram 12, Tram 16","spacing filter on Tram 12: 0.167 mi after P.za Emilia, under 0.5 mi"
+V.le Ungheria L.go Gonzaga Ice Hockey Arena,45.446055,9.251109,Tram 27,"spacing filter on Tram 27: 0.269 mi after V.le Ungheria, under 0.5 mi"
+V.le Ungheria Via Mecenate,45.446933,9.25495,Tram 27,"spacing filter on Tram 27: 0.465 mi after V.le Ungheria, under 0.5 mi"
+V.le Zara Via Laurana,45.499194,9.196566,"Tram 4, Tram 5","spacing filter on Tram 4: 0.227 mi after MARCHE, under 0.5 mi"
+Via Amadeo Via Paladini,45.470966,9.233524,Tram 5,"spacing filter on Tram 5: 0.214 mi after Ortica, under 0.5 mi"
+Via Amadeo Via S. Benigno,45.471041,9.236414,Tram 5,"spacing filter on Tram 5: 0.073 mi after Ortica, under 0.5 mi"
+Via Arconati,45.457997,9.218123,"Tram 12, Tram 16","spacing filter on Tram 12: 0.284 mi after P.za Emilia, under 0.5 mi"
+Via Ariosto,45.469612,9.165878,"Tram 2, Tram 10","spacing filter on Tram 2: 0.201 mi after L.go Quinto Alpini, under 0.5 mi"
+Via B. Angelico Via Aselli,45.470939,9.23028,Tram 5,"spacing filter on Tram 5: 0.371 mi after Ortica, under 0.5 mi"
+Via Bartolini V.le M.Te Ceneri,45.491255,9.153283,Tram 19,"spacing filter on Tram 19: 0.272 mi after P.za Firenze, under 0.5 mi"
+Via Bassini Via Golgi,45.480394,9.234242,"Tram 19, Tram 33","spacing filter on Tram 19: 0.13 mi after Via Valvassori Peroni, under 0.5 mi"
+Via Bassini Via Ponzio,45.479317,9.229979,"Tram 19, Tram 33","spacing filter on Tram 19: 0.35 mi after Via Valvassori Peroni, under 0.5 mi"
+Via Bernina,45.495617,9.18126,Tram 2,"spacing filter on Tram 2: 0.264 mi after Lancetti, under 0.5 mi"
+Via Bixio,45.472416,9.211129,Tram 19,"spacing filter on Tram 19: 0.172 mi after P.za Adelaide di Savoia, under 0.5 mi"
+Via Bocconi,45.450963,9.19034,Tram 9,"spacing filter on Tram 9: 0.173 mi after P.ta Lodovica, under 0.5 mi"
+Via Bramante Via Sarpi,45.481682,9.178952,"Tram 12, Tram 14","spacing filter on Tram 12: 0.22 mi after MONUMENTALE, under 0.5 mi"
+Via Brunelleschi,45.449001,9.14343,Tram 14,"spacing filter on Tram 14: 0.377 mi after GELSOMINI, under 0.5 mi"
+Via C. Marcello (Villapizzone),45.500983,9.145923,Tram 12,"spacing filter on Tram 12: 0.336 mi after P.le Santorre di Santarosa, under 0.5 mi"
+Via C. Marcello Via Ferrario,45.50004,9.147839,Tram 12,"spacing filter on Tram 12: 0.45 mi after P.le Santorre di Santarosa, under 0.5 mi"
+Via C. Marcello Via M.Te Altissimo,45.502075,9.143145,Tram 12,"spacing filter on Tram 12: 0.182 mi after P.le Santorre di Santarosa, under 0.5 mi"
+Via Cadore C.so Ventidue Marzo,45.462221,9.214618,"Tram 12, Tram 16, Tram 27","spacing filter on Tram 12: 0.328 mi after P.za 5 Giornate, under 0.5 mi"
+Via Farini Via Alserio,45.491296,9.18391,"Tram 2, Tram 4","spacing filter on Tram 2: 0.236 mi after Via Farini V.le Stelvio, under 0.5 mi"
+Via Faruffini Via Correggio,45.468261,9.148141,Tram 16,"spacing filter on Tram 16: 0.144 mi after DE ANGELI, under 0.5 mi"
+Via Filzi Via Adda,45.48363,9.199788,"Tram 9, Tram 10","spacing filter on Tram 9: 0.249 mi after REPUBBLICA, under 0.5 mi"
+Via Filzi Via Galvani,45.484814,9.200634,"Tram 9, Tram 10","spacing filter on Tram 9: 0.34 mi after REPUBBLICA, under 0.5 mi"
+Via Giambellino Via Odazio,45.446219,9.1349,Tram 14,"spacing filter on Tram 14: 0.212 mi after SEGNERI, under 0.5 mi"
+Via Gonin Via Giordani,45.442584,9.123679,Tram 14,"spacing filter on Tram 14: 0.363 mi after Lorenteggio, under 0.5 mi"
+Via Gonin Via M di Lorenteggio,45.440998,9.118796,Tram 14,"spacing filter on Tram 14: 0.102 mi after Lorenteggio, under 0.5 mi"
+Via Grassi,45.513806,9.125629,"Tram 1, Tram 12","spacing filter on Tram 1: 0.38 mi after Roserio (Ospedale Sacco), under 0.5 mi"
+Via Imbriani Via Scalvini,45.499087,9.169253,Tram 2,"spacing filter on Tram 2: 0.26 mi after Bausan, under 0.5 mi"
+Via L. il Moro Cavalcavia Don Milani,45.445653,9.146444,Tram 2,"spacing filter on Tram 2: 0.192 mi after Via L. il Moro, 25, under 0.5 mi"
+Via L. il Moro Via Guintellino,45.444898,9.142857,Tram 2,"spacing filter on Tram 2: 0.374 mi after Via L. il Moro, 25, under 0.5 mi"
+Via L. il Moro Via Pestalozzi,45.447415,9.154728,Tram 2,"spacing filter on Tram 2: 0.288 mi after Ripa di P.ta Ticinese Via d'Adda, under 0.5 mi"
+Via Lamarmora,45.457302,9.202998,Tram 16,"spacing filter on Tram 16: 0.266 mi after V.le Monte Nero Via Spartaco, under 0.5 mi"
+Via Lamarmora Via Commenda,45.456792,9.20029,Tram 16,"spacing filter on Tram 16: 0.402 mi after V.le Monte Nero Via Spartaco, under 0.5 mi"
+Via Mac Mahon V.le M.Te Ceneri,45.494088,9.157705,Tram 12,"spacing filter on Tram 12: 0.18 mi after Via Mac Mahon Via Artieri, under 0.5 mi"
+Via Mac Mahon Via Bramantino,45.497696,9.152925,"Tram 12, Tram 19","spacing filter on Tram 12: 0.167 mi after P.za Castelli, under 0.5 mi"
+Via Mac Mahon Via Caracciolo,45.491149,9.161538,Tram 12,"spacing filter on Tram 12: 0.456 mi after Via Mac Mahon Via Artieri, under 0.5 mi"
+Via Mambretti,45.509394,9.131709,"Tram 1, Tram 12","spacing filter on Tram 1: 0.229 mi after L.go Boccioni, under 0.5 mi"
+Via Mecenate Via Fantoli,45.450941,9.250758,Tram 27,"spacing filter on Tram 27: 0.153 mi after Via Mecenate Via Quintiliano, under 0.5 mi"
+Via Mecenate Via Zante,45.454157,9.246392,Tram 27,"spacing filter on Tram 27: 0.46 mi after Via Mecenate Via Quintiliano, under 0.5 mi"
+Via Meda Via Spaventa,45.440732,9.178632,Tram 3,"spacing filter on Tram 3: 0.21 mi after Via Montegani V.le da Cermenate, under 0.5 mi"
+Via Meravigli,45.465701,9.181386,"Tram 16, Tram 19","spacing filter on Tram 16: 0.236 mi after CORDUSIO, under 0.5 mi"
+Via Montegani Via Neera,45.433073,9.17771,Tram 3,"spacing filter on Tram 3: 0.213 mi after ABBIATEGRASSO, under 0.5 mi"
+Via Montegani Via Palmieri,45.434977,9.177956,Tram 3,"spacing filter on Tram 3: 0.345 mi after ABBIATEGRASSO, under 0.5 mi"
+Via Montevideo,45.456269,9.165991,Tram 14,"spacing filter on Tram 14: 0.377 mi after Via Solari Via Stendhal, under 0.5 mi"
+Via Monti P.za Virgilio,45.467544,9.173684,Tram 19,"spacing filter on Tram 19: 0.121 mi after L.go d'Ancona, under 0.5 mi"
+Via Monti Via Comerio,45.476189,9.162317,Tram 19,"spacing filter on Tram 19: 0.36 mi after L.go Quinto Alpini, under 0.5 mi"
+Via Monti Via Savoia Cavalleria,45.47455,9.164371,Tram 19,"spacing filter on Tram 19: 0.209 mi after L.go Quinto Alpini, under 0.5 mi"
+Via Palizzi Via Mambretti,45.508414,9.134942,"Tram 1, Tram 12","spacing filter on Tram 1: 0.4 mi after L.go Boccioni, under 0.5 mi"
+Via Pascoli P.za L. da Vinci,45.476952,9.225554,"Tram 19, Tram 33","spacing filter on Tram 19: 0.16 mi after P.za Leonardo da Vinci (Politecnico), under 0.5 mi"
+Via Porro Lambertenghi,45.489151,9.186845,Tram 33,"spacing filter on Tram 33: 0.17 mi after Via Ugo Bassi, under 0.5 mi"
+Via Procaccini Via Lomazzo,45.483528,9.170623,Tram 10,"spacing filter on Tram 10: 0.454 mi after MONUMENTALE, under 0.5 mi"
+Via Pulci V.le Sarca,45.514286,9.207518,Tram 7,"spacing filter on Tram 7: 0.263 mi after V.le Testi Via S. Marcellina, under 0.5 mi"
+Via Ripamonti Via Bellezza,45.448593,9.197431,Tram 24,"spacing filter on Tram 24: 0.165 mi after Via Ripamonti V.le Sabotino, under 0.5 mi"
+Via Ripamonti Via Dell'Assunta,45.433559,9.20108,Tram 24,"spacing filter on Tram 24: 0.162 mi after Via Ripamonti Via Quaranta, under 0.5 mi"
+Via Ripamonti Via Noto,45.431608,9.201641,Tram 24,"spacing filter on Tram 24: 0.299 mi after Via Ripamonti Via Quaranta, under 0.5 mi"
+Via Ripamonti Via Rutilia,45.440109,9.199805,Tram 24,"spacing filter on Tram 24: 0.23 mi after Via Ripamonti Via Lorenzini, under 0.5 mi"
+Via Ripamonti Via Val di Sole,45.428892,9.202453,Tram 24,"spacing filter on Tram 24: 0.491 mi after Via Ripamonti Via Quaranta, under 0.5 mi"
+Via Rosales,45.480943,9.188799,"Tram 10, Tram 33","spacing filter on Tram 10: 0.301 mi after V.le Monte Santo, under 0.5 mi"
+Via Schiaparelli Via P.Te Seveso,45.489707,9.204764,Tram 10,"spacing filter on Tram 10: 0.12 mi after V.le Lunigiana, under 0.5 mi"
+Via Settembrini,45.48365,9.207958,Tram 1,"spacing filter on Tram 1: 0.111 mi after Via Vitruvio, under 0.5 mi"
+Via Torino Via Palla,45.461599,9.18558,Tram 3,"spacing filter on Tram 3: 0.436 mi after VETRA, under 0.5 mi"
+Via Torino Via S. Maria Valle,45.460735,9.183195,Tram 3,"spacing filter on Tram 3: 0.306 mi after VETRA, under 0.5 mi"
+Via Tremelloni Via Anassagora,45.514298,9.231083,Tram 7,"spacing filter on Tram 7: 0.37 mi after PRECOTTO, under 0.5 mi"
+Via Valenza Alzaia Nav. Grande,45.450766,9.168327,Tram 2,"spacing filter on Tram 2: 0.127 mi after P.TA GENOVA F.S., under 0.5 mi"
+Via Venini Via Battaglia,45.489553,9.214181,Tram 1,"spacing filter on Tram 1: 0.373 mi after CAIAZZO, under 0.5 mi"
+Via Venti Settembre,45.47002,9.170329,"Tram 1, Tram 2, Tram 19","spacing filter on Tram 1: 0.217 mi after L.go Quinto Alpini, under 0.5 mi"
+Via Vigevano V.le Gorizia,45.452768,9.176031,"Tram 9, Tram 10, Tram 14","spacing filter on Tram 9: 0.319 mi after P.TA GENOVA F.S., under 0.5 mi"
+Via Vigevano Via Corsico,45.453035,9.173166,"Tram 9, Tram 10, Tram 14","spacing filter on Tram 9: 0.179 mi after P.TA GENOVA F.S., under 0.5 mi"
+Via da Panicale,45.493264,9.151303,Tram 19,"spacing filter on Tram 19: 0.44 mi after P.za Firenze, under 0.5 mi"
+Via dei Missaglia (Scuola Santarosa),45.406696,9.174678,"Tram 3, Tram 15","spacing filter on Tram 3: 0.206 mi after Gratosoglio, under 0.5 mi"
+Via dei Missaglia Via Boifava,45.426862,9.177233,"Tram 3, Tram 15","spacing filter on Tram 3: 0.271 mi after Via dei Missaglia (Isola Anita), under 0.5 mi"
+Via dei Missaglia Via S. Abbondio,45.424627,9.17704,"Tram 3, Tram 15","spacing filter on Tram 3: 0.116 mi after Via dei Missaglia (Isola Anita), under 0.5 mi"
+Cinisello (Primo Maggio),45.559903,9.211074,Tram 31,outside the Comune di Milano boundary
+Gorky Monfalcone (Cinisello B.),45.551133,9.217653,Tram 31,outside the Comune di Milano boundary
+Gramsci (Cinisello B.),45.555715,9.215566,Tram 31,outside the Comune di Milano boundary
+Liberta' (Cinisello B.),45.553342,9.216663,Tram 31,outside the Comune di Milano boundary
+Monte Ortigara (Cinisello B.),45.559773,9.213651,Tram 31,outside the Comune di Milano boundary
+Parco Nord (Ist. Tecnico)(Cinisello B.),45.537428,9.217737,Tram 31,outside the Comune di Milano boundary
+Parco Nord (Osp.Bassini)(Cinisello B.),45.545673,9.218065,Tram 31,outside the Comune di Milano boundary
+Parco Nord (Torretta),45.529816,9.213453,Tram 31,outside the Comune di Milano boundary
+Parco Nord Clerici (Sesto S.G.),45.533745,9.215513,Tram 31,outside the Comune di Milano boundary
+Rozzano (Via Cabrini),45.382839,9.161913,Tram 15,outside the Comune di Milano boundary
+Rozzano (Via G.Rossa),45.376938,9.150015,Tram 15,outside the Comune di Milano boundary
+V.le Don Lonni (Rozzano),45.381886,9.159006,Tram 15,outside the Comune di Milano boundary
+V.le Liguria Via G.Rossa (Rozzano),45.378594,9.149087,Tram 15,outside the Comune di Milano boundary
+V.le Liguria Via delle Mimose (Rozzano),45.380631,9.155062,Tram 15,outside the Comune di Milano boundary
+V.le Romagna (Rozzano),45.383483,9.167166,Tram 15,outside the Comune di Milano boundary
+Via Curiel Via Lambro (Rozzano),45.394316,9.172954,Tram 15,outside the Comune di Milano boundary
+Via Curiel Viale Isonzo (Rozzano),45.389341,9.172108,Tram 15,outside the Comune di Milano boundary
+Via Grandi Via Buozzi (Rozzano),45.38412,9.170621,Tram 15,outside the Comune di Milano boundary
+Villa Ghirlanda (Cinisello B.),45.557966,9.214648,Tram 31,outside the Comune di Milano boundary

@@ -120,8 +120,8 @@ This is open work, not a record: update an item here as it moves, and send a fin
   2026-10-13 (branch `tram-rescope`); the owner decides case by case.**
   **Built and on master since 2026-09-27** (merge be2e3713): Montreal's REM,
   Rome's tram 8, Madrid's ML1, Paris T3a and T3b, San Francisco's F Market &
-  Wharves. Mexico City's Cablebús and Mexicable are built on the branch (2026-10-13). Toronto's eight running streetcar lines are built on the branch (2026-10-13; 503, 507 and 508 wait on the TTC's timetable after 10-31, `docs/recheck_calendar.md`). **Left:** Milan and Prague, on the per-route label
-  and legend rule and a Toronto pilot. Hong Kong Tramways is out (owner).
+  Wharves. Mexico City's Cablebús and Mexicable are built on the branch (2026-10-13). Toronto's eight running streetcar lines are built on the branch (2026-10-13; 503, 507 and 508 wait on the TTC's timetable after 10-31, `docs/recheck_calendar.md`). Milan's 17 tram lines are built on the branch (2026-10-13, on ATM's timetable to 10-02; re-read when AMAT republishes, `docs/recheck_calendar.md`). **Left:** Prague, on the per-route label
+  and legend rule. Hong Kong Tramways is out (owner).
   Estimate as first written: `docs/tram_rescope_estimate.md`.
   - **Barcelona TRAM: OUT (owner, 2026-10-13).** Measured that day: none of
     its 28 stops inside the city is beyond the 0.6 mile ring of a drawn
@@ -135,8 +135,8 @@ This is open work, not a record: update an item here as it moves, and send a fin
     Maggiore since 2026-09-07; the whole network is due back by 2026-11-23
     (`docs/recheck_calendar.md`). ⏸ **Parked by the owner 2026-10-13 as ONE
     decision for all five after 2026-11-23**; none drawn before.
-  - **Candidates still open (stops in scope):** Toronto streetcars (476);
-    Milan (323 of 341; no ATM colours); Prague (285); Barcelona TRAM (28).
+  - **Candidate still open (stops in scope):** Prague (285). Toronto's
+    streetcars and Milan's trams are built on the branch; Barcelona TRAM is out.
     Fortaleza's VLT failed the rail test. D.C. Streetcar ended 2026-03-31.
   - **Seoul's Wirye Line is not open:** re-check in January 2027; if open,
     count its stops inside Seoul for the rescope.

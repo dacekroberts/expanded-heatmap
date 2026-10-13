@@ -654,7 +654,7 @@ CITIES = [
         "rail_extra": "—",
         "record_kind": "License register",
         "categories": "All three",
-        "blurb": "Metro M1-M5 (rossa, verde, gialla, blu, lilla)",
+        "blurb": "Metro M1-M5 (rossa, verde, gialla, blu, lilla); 17 tram lines",
         "region": "Europe West",
         "country": "Italy",
         "in_default_view": False,

@@ -14,13 +14,15 @@ import sys
 from pathlib import Path
 
 import geopandas as gpd
+import numpy as np
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from pipeline.baseline import emit
 from pipeline.milan import config
-from pipeline.stations import verify_stations
+from pipeline.milan import trams as tram_stops
+from pipeline.stations import nearest_neighbour_m, verify_stations
 
 
 def load(path, what):
@@ -145,18 +147,44 @@ def main():
     for name in sorted(outside["station"]):
         print(f"  {name}")
 
-    config.DATA_PROCESSED.mkdir(parents=True, exist_ok=True)
+    config.STATIONS_CSV.parent.mkdir(parents=True, exist_ok=True)
     config.OUTPUTS.mkdir(parents=True, exist_ok=True)
 
-    out = (inside[["station", "latitude", "longitude", "linee"]]
-           .sort_values("station").reset_index(drop=True))
-    out.to_csv(config.STATIONS_CSV, index=False, encoding="utf-8")
-    print(f"\nwrote {config.STATIONS_CSV.name}  {len(out)} stations")
+    metro = (inside[["station", "latitude", "longitude", "linee"]]
+             .sort_values("station").reset_index(drop=True))
+
+    # --- trams (tram rescope, owner 2026-10-13) ------------------------------
+    # Everything above is the metro set, unchanged. The tram stops are
+    # selected against it: a stop at one of these stations adds nothing, the
+    # rest are thinned (pipeline/milan/trams.py).
+    tr = tram_stops.build(metro[["station", "latitude", "longitude"]],
+                          region.to_crs(config.CRS_PROJECTED).geometry.union_all())
+    clash = set(tr["stations"]["station"]) & set(gdf["station"])
+    if clash:
+        sys.exit(f"tram stations share a name with metro stations: {sorted(clash)}")
+    out = pd.concat([metro, tr["stations"]], ignore_index=True)
+    nn_all = nearest_neighbour_m(out["longitude"], out["latitude"], config.CRS_PROJECTED)
+    print(f"\n{len(metro)} metro + {len(tr['stations'])} tram = {len(out)} stations; "
+          f"nearest-neighbour median {np.median(nn_all):.0f} m, closest pair {nn_all.min():.0f} m")
+    nn_new = nn_all[len(metro):]
+    if len(nn_new) and nn_new.min() < config.TRAM_ATTACH_M / 2:
+        worst = out.iloc[len(metro) + int(nn_new.argmin())]["station"]
+        sys.exit(f"tram station {worst} is closer than half the attach distance to another "
+                 f"station: it should be that station, or one of the two.")
+    out = out.sort_values("station").reset_index(drop=True)
+    out.to_csv(config.STATIONS_CSV, index=False, encoding="utf-8", lineterminator="\n")
+    print(f"\nwrote {config.STATIONS_CSV}  {len(out)} stations")
+    config.TRAM_SHAPES_JSON.write_text(json.dumps(tr["shapes"], indent=1), encoding="utf-8")
 
     excl = outside[["station", "latitude", "longitude"]].copy()
+    excl["lines"] = ["Metro " + ", ".join(f"M{x}" for x in str(v).split(",") if x.strip())
+                     for v in outside["linee"]]
     excl["reason"] = "outside the Comune di Milano boundary"
-    excl.sort_values("station").to_csv(config.EXCLUDED_STATIONS_CSV,
-                                       index=False, encoding="utf-8")
+    excl = pd.concat([excl.sort_values("station"),
+                      pd.DataFrame(tr["excluded"], columns=["station", "latitude", "longitude",
+                                                            "lines", "reason"])], ignore_index=True)
+    excl[["station", "latitude", "longitude", "lines", "reason"]].to_csv(
+        config.EXCLUDED_STATIONS_CSV, index=False, encoding="utf-8", lineterminator="\n")
     print(f"wrote {config.EXCLUDED_STATIONS_CSV.name}  {len(excl)} stations")
 
     # One feature per line, for map_common's GeoJSON loader. ds539 carries 31
@@ -185,8 +213,11 @@ def main():
     emit("metro_features", len(platforms))
     emit("lines_drawn", len(picked))
     emit("stations_collapsed", len(stations))
-    emit("stations_in_comune", len(out))
-    emit("stations_excluded", len(excl))
+    emit("stations_in_comune", len(metro))
+    emit("stations_excluded", len(outside))
+    for key, value in tr["counts"].items():
+        emit(key, value)
+    emit("stations_drawn", len(out))
 
 
 if __name__ == "__main__":

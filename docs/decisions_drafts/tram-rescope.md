@@ -2,6 +2,52 @@
 
 Newest first. Cleanup folds these into `DECISIONS.md` at review time.
 
+### 2026-10-13 - Tram rescope: Milan built with all 17 tram lines (owner); page text and stop-name form are drafts
+
+- **Owner, 2026-10-13: "i agree with your applications from precedent.
+  project colors okay. all 17", then "build now and add the re-check to
+  the future logs".** So: all 17 routes as "Tram N"; 7 and 33 drawn at
+  exactly 15.0 minutes; the five routes on diversion drawn as the
+  timetable ran them; 15 and 31 drawn whole with their stops outside the
+  comune listed; half-mile thinning with the crossing-or-junction rule
+  (Toronto's, approved there the same day).
+- **Built on the branch** (`pipeline/milan/trams.py`, steps 1 and 3):
+  22 lines, 193 stations (104 metro + 89 tram). 710 tram stop ids on
+  regular patterns make 312 places; 46 are a drawn metro station, 19 are
+  outside the comune, 158 are thinned. Keeping every stop shared by two
+  or more lines would have kept 137 new stations instead of 89.
+  Storefronts in a ring: 45,999 of 47,540 (41,510 before).
+- **Colors** in `config.TRAM_COLOURS`: every tram 45 or more from every
+  pin (closest 45.2, Tram 12 against Retail); `check_line_colours` passes
+  at render. The search ran on each route's most-used shape.
+- **Labels:** `scripts/check_map_labels.js` reports no problem at 1024,
+  375 and 343 wide; 22 labels, 22 legend rows, the legend scrolls.
+- **Judgment calls made in the build, for the owner at review time:**
+  - *Stop names.* The feed writes them in lower case ("p.za ventiquattro
+    maggio"). They are shown as "P.za Ventiquattro Maggio": a capital on
+    each word, small Italian words and the second half of "p.za", "v.le",
+    "c.so", "l.go", "p.ta", "p.le" left small. The metro stations keep
+    ATM's upper-case names from its GIS layer, so the two forms sit side
+    by side on one map.
+  - *A stop the feed names for its metro lines* ("stazione centrale m2
+    m3") is that metro station when one is within 400 m; otherwise 150 m.
+  - *One stop id has no name* (17369) and is left out.
+  - *"Via Curiel Via Maggi (Rozzano)"* is drawn: its point is inside the
+    comune's polygon whatever its name says.
+- **Page text is a draft** (The lines bullets of
+  `app/pages/20_Milan_Heatmap.py`), as are the Milan sentences changed in
+  `docs/excluded_categories.md`: Milan taken out of the "trams left out"
+  example, added to the spacing-filter list, and a new Stations paragraph.
+- **Re-check:** `docs/recheck_calendar.md`, action list and calendar row.
+  Step 1 stops if the feed's surface dates or tram route list differ from
+  the config, so a new edition cannot be drawn unread.
+- **Branch-only paths:** `config.TRAM_DIR` is `processed/tram/`; at
+  landing set it to `DATA_PROCESSED` and re-run steps 1 and 3.
+  `baseline.json` is not updated and no drift check ran (step 2 writes
+  the shared folder). Step 2 is untouched, so no privacy re-read is owed.
+- **Owed later:** Toronto's and Milan's modules are near copies; a shared
+  one belongs with Prague, the third use.
+
 ### 2026-10-13 - Tram rescope: Milan's 17 tram routes measured; the line list is with the owner (open, nothing built)
 
 - **The feed.** `https://dati.comune.milano.it/gtfs.zip` re-pulled

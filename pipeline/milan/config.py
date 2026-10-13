@@ -21,12 +21,17 @@ OUTPUTS = ROOT / "outputs" / "milan"
 HEATMAP_HTML = OUTPUTS / "heatmap.html"
 EXCLUDED_STATIONS_CSV = OUTPUTS / "excluded_stations.csv"
 
-STATIONS_CSV = DATA_PROCESSED / "stations.csv"
+# UNTIL THE TRAM RESCOPE BRANCH LANDS, step 1 writes under processed/tram/,
+# because data/ is shared with master's checkout and the station set changes
+# (owner 2026-10-13). At landing: TRAM_DIR = DATA_PROCESSED, then re-run
+# steps 1 and 3.
+TRAM_DIR = DATA_PROCESSED / "tram"
+STATIONS_CSV = TRAM_DIR / "stations.csv"
 BUSINESSES_CLEAN_CSV = DATA_PROCESSED / "businesses_clean.csv"
 # One feature per drawn line, written by step 1 from ds539's 31
 # alignment variants - which is the shape map_common's GeoJSON loader
 # expects, and the reason step 1 rather than step 3 does the selecting.
-LINES_GEOJSON = DATA_PROCESSED / "metro_lines.geojson"
+LINES_GEOJSON = TRAM_DIR / "metro_lines.geojson"
 
 # Raw inputs, all downloaded by fetch_sources.py - deliberately NOT named
 # step*.py, so drift_check.py never runs it.
@@ -203,6 +208,57 @@ STATION_ALIASES = {
     "LOTTO FIERAMILANOCITY": "LOTTO",       # 71 m apart, name alias
     "CADORNA FN M1": "CADORNA FN",
     "CADORNA FN M2": "CADORNA FN",
+}
+
+# --- Trams (tram rescope, owner 2026-10-13) ---------------------------------
+
+# All 17 ATM tram routes are drawn, one label and one legend row each
+# ("Tram N"), on the per-route rule Amsterdam, Brussels and Zurich follow.
+# Stops are thinned by docs/sub_transit_line_filters.md, as Toronto's
+# streetcars are (pipeline/milan/trams.py). Reasoning and measurements:
+# docs/decisions_drafts/tram-rescope.md, "Milan".
+TRAM_SHAPES_JSON = TRAM_DIR / "tram_shapes.json"
+
+# The feed's 17 route_short_names (route_type 0). trams.py stops if the feed
+# carries another set: a route added or withdrawn is a scope decision.
+TRAM_LINES = ("1", "2", "3", "4", "5", "7", "9", "10", "12", "14", "15",
+              "16", "19", "24", "27", "31", "33")
+
+# The feed's tram timetable runs 2026-09-14 to 2026-10-02
+# (feed_info.txt surface_end_date); the portal still served that edition on
+# 2026-10-13. Five routes are on diversion for works in it (2, 4, 7, 14, 16,
+# by their own route_long_name) and are drawn as the timetable runs them.
+# Re-read when AMAT republishes: docs/recheck_calendar.md.
+TRAM_TIMETABLE = ("2026-09-14", "2026-10-02")
+# The weekday the 15-minute test is read on (10:00 to 15:00, the busier
+# direction). 7 and 33 run exactly every 15.0 minutes and pass.
+TRAM_HEADWAY_DAY = "20260930"
+TRAM_MAX_HEADWAY_MIN = 15.0
+
+# A stop pattern is regular when it carries at least this share of its
+# line's trips; depot runs and short workings fall under it.
+TRAM_REGULAR_TRIP_SHARE = 0.10
+# The feed has no parent_station; stops of one name are grouped first, then
+# by distance, never past MAX_SPREAD (Toronto's measured values).
+TRAM_PLACE_LINK_M = 60.0
+TRAM_PLACE_CROSS_M = 120.0
+TRAM_PLACE_MAX_SPREAD_M = 200.0
+# A tram stop this close to a drawn metro station is that station, or within
+# the NAMED distance when its name carries the station's ("duomo m1 m3").
+TRAM_ATTACH_M = 150.0
+TRAM_ATTACH_NAMED_M = 400.0
+TRAM_THIN_SPACING_MILES = 0.5
+
+# ATM gives the trams no route_color, so these are the project's, searched
+# with pipeline/linecolour.py against the five metro colours and the pins:
+# CIE76 45 or more from every pin, 18 or more from every line within 500 m.
+# Re-run the search if a line or a metro colour changes.
+TRAM_COLOURS = {
+    "1": "#8800F8", "2": "#C08068", "3": "#B88888", "4": "#50A800",
+    "5": "#0088A0", "7": "#889800", "9": "#C870C8", "10": "#D07800",
+    "12": "#00A0C0", "14": "#689000", "15": "#B86000", "16": "#F800D8",
+    "19": "#606820", "24": "#00A800", "27": "#7850E8", "31": "#F83800",
+    "33": "#F840F0",
 }
 
 # --- Business filtering ------------------------------------------------
