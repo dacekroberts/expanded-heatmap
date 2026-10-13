@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**110 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**111 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -47,6 +47,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Extract route: sets of regions landed; what the proof does and does not show (owner)](#2026-10-13---extract-route-sets-of-regions-landed-what-the-proof-does-and-does-not-show-owner)
 - [Shared-border streets (branch shared-border)](#2026-10-13---shared-border-streets-branch-shared-border)
 - [One big review for the rest of the rollout; shared-border streets landed; the second rule batch goes to the owner (owner)](#2026-10-13---one-big-review-for-the-rest-of-the-rollout-shared-border-streets-landed-the-second-rule-batch-goes-to-the-owner-owner)
+- [Place search: the second rule batch and the final group (owner)](#2026-10-13---place-search-the-second-rule-batch-and-the-final-group-owner)
 
 **2026-10-12**
 
@@ -5722,3 +5723,41 @@ japan-city template:
   live with search, 33 in wave 1, 151 built and unread, 4 with a search area
   to settle, 5 with a lookup unresolved, 23 first in a country or language
   (Geneva among them), 2 held (Milan, Toronto).
+
+### 2026-10-13 - Place search: the second rule batch and the final group (owner)
+
+- **The owner, to twelve rules and eight questions from wave 1's reads, each
+  with Cleanup's recommendation: "I agree with all recommendatinos".** The
+  counts are the readers', not re-measured; each rule gets a changed-row
+  report on the built cities before it lands.
+- **Rules to build:** (1) the private-street rule reaches alleys; (2) more
+  bare type words (Office, Garage, Sanctuary, Masjid, Mini-Park, Sports
+  Complex, Greenstreets, Greenway, Parkland, Barn, Cistern, Tot Lot,
+  "Building N"), never "Back Lane"; (3) a name ending "(historical)" is
+  gone; (4) ship, engine, naval and military register entries are landmarks
+  only with an article of their own; (5) one row per station: no stop-area
+  relation, no station outline without a rail tag, one row for a transfer
+  complex; (6) platforms, corridors, proposed and under-construction ways
+  are no streets, under whatever name; (7) a street's way is never a
+  landmark row; (8) derelict canals, a disused place of worship and a
+  malformed end date read as gone; (9) "Estates" in the plural and
+  mobile-home parks tagged as hamlets are housing estates; (10) a city's
+  boundary is not a second place row; (11) driveway names, "Path between X
+  and Y" and ramp names are descriptions; (12) HOV and managed-lane names
+  are no streets.
+- **Questions, as ruled:** (a) named bridges, viaducts and tunnels stay as
+  street rows; (b) named roundabouts stay, interchanges go; (c) numbered
+  alleys and alleys named by their two cross streets go; (d) two real names
+  in one stay as written; (e) frontage roads named for a freeway stay; (f)
+  descriptive cycle-facility names go; (g) parks tied to a housing complex
+  only by name stay; (h) landmarks that stand but are abandoned stay.
+- **Not in this batch:** Melbourne's lane words (with the owner in wave 1's
+  session) and four possible misfires Cleanup checks itself.
+- **The final group, the owner: "should we bundle search area and lookup
+  unresolved into the final group?", "also put milan and toronto in final
+  group", "we can also segment off the tram rescopes within that final
+  group".** The big review is the 184 built cities. The final group lands
+  after it: 32 needing hand work (4 search areas, 5 lookups, 23 first in a
+  country or language), and a tram segment (Milan and Toronto as new builds;
+  Mexico City, and Prague if it goes ahead, as rebuilds) that waits on the
+  rescope decisions.
