@@ -2,6 +2,26 @@
 
 Newest first. Cleanup folds these into `DECISIONS.md` at review time.
 
+### 2026-10-13 - Tram rescope: Prague's 23 regular routes alone leave six stops with no drawn tram; the recommendation moves to all 28 day routes (open, nothing built)
+
+- **Measured** on the feed of 2026-10-13, weekday 2026-10-14, by stop name:
+  276 of 284 tram stop names have one of the 23 regular day routes.
+  - Strážní, Chmelnice, Kněžská luka and Spojovací (the Spojovací branch)
+    have only 30, 31 and 37.
+  - Třebenická has only 30. Smíchovské nádraží has only 32 and 40.
+  - Královka and Hládkov have only 23, every 30 minutes, which fails the
+    15-minute test whichever set is drawn.
+- **Route ends in the feed:** 30 Sídliště Ďáblice to Spojovací, 31 to
+  Spojovací, 37 Lehovec to Spojovací, 32 to Slivenec, 40 to Sídliště
+  Modřany. Why the regular routes are off those stops was not read.
+- **What it changes.** The earlier recommendation (23 routes) would leave
+  running track undrawn. Milan and Zurich draw the timetable as it runs, so
+  the recommendation to the owner is now all 28 day routes at 15 minutes or
+  better; 23 routes plus 30 and 32 (25 lines) is the smallest set that
+  covers the six stops. 37 adds no stop that 30 and 31 lack.
+- **Not decided:** the set, and what to do if label overlaps remain on
+  phones after label-end overrides. Both are the owner's.
+
 ### 2026-10-13 - Tram rescope: Prague's tram routes and label placement measured; the line list is with the owner (open, nothing built)
 
 - **The feed.** `https://data.pid.cz/PID_GTFS.zip` re-pulled 2026-10-13 as
