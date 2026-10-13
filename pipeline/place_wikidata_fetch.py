@@ -23,9 +23,11 @@ Retry-After pause (at least 5 s, at most 120 s, at most 3 tries a batch), then
 the run exits non-zero naming the batch. The cache is written after each batch,
 so a refused batch leaves the earlier answers on disk.
 
-No provenance entry is written: place_index_fetch.record reads Overpass-shaped
-fields (elements, _fetched_from, osm3s, _query) this cache does not carry, and
-record is not changed here.
+The cache is recorded in outputs/<city>/provenance.json under
+"place_search_wikidata" by place_index_fetch.record_wikidata, a recorder of
+its own, since record() there reads Overpass-shaped fields this cache does not
+carry. A run that makes no request records the cache already on disk; --out
+records nothing.
 """
 import argparse
 import datetime
@@ -550,6 +552,11 @@ def main():
     args = ap.parse_args()
     config = importlib.import_module(f"pipeline.{args.city}.config")
     run(config, force=args.force, out_path=args.out)
+    if not args.out:
+        from pipeline import place_index, place_index_fetch
+        cache = place_index.wikidata_cache(config)
+        if cache.exists():
+            print(f"recorded in {place_index_fetch.record_wikidata(config, cache)}")
 
 
 if __name__ == "__main__":
