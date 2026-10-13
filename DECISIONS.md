@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**117 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**128 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -54,6 +54,17 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Place search: the second rule batch built on a branch, the 19 indexes rebuilt, every changed row reported; NOT landed](#2026-10-13---place-search-the-second-rule-batch-built-on-a-branch-the-19-indexes-rebuilt-every-changed-row-reported-not-landed)
 - [Place search: the owner's six rulings on the second batch's changed rows, built; the 19 rebuilt again](#2026-10-13---place-search-the-owners-six-rulings-on-the-second-batchs-changed-rows-built-the-19-rebuilt-again)
 - [Place search: the second rule batch landed as rules only; the rebuilt indexes wait for the big review](#2026-10-13---place-search-the-second-rule-batch-landed-as-rules-only-the-rebuilt-indexes-wait-for-the-big-review)
+- [Place search: the third rule list, from the final group's reads (owner)](#2026-10-13---place-search-the-third-rule-list-from-the-final-groups-reads-owner)
+- [Place search: candidates 19 to 28 join the third pass (owner)](#2026-10-13---place-search-candidates-19-to-28-join-the-third-pass-owner)
+- [Place search: every drawn line and station is searchable, the floor for the big review (owner)](#2026-10-13---place-search-every-drawn-line-and-station-is-searchable-the-floor-for-the-big-review-owner)
+- [Place search: a drawn station or line is never dropped for its name; wave 1's branch complete (owner)](#2026-10-13---place-search-a-drawn-station-or-line-is-never-dropped-for-its-name-wave-1s-branch-complete-owner)
+- [Place search: Monterrey's 19 colonias kept by id, the estate rule unchanged (owner)](#2026-10-13---place-search-monterreys-19-colonias-kept-by-id-the-estate-rule-unchanged-owner)
+- [Place search: "an article of its own" is asked of Wikidata, not of the map's tag; candidates 29 to 44 (owner)](#2026-10-13---place-search-an-article-of-its-own-is-asked-of-wikidata-not-of-the-maps-tag-candidates-29-to-44-owner)
+- [Place search: libraries by the Wikidata lookup; Swedish "-gard" stays an ending (owner)](#2026-10-13---place-search-libraries-by-the-wikidata-lookup-swedish--gard-stays-an-ending-owner)
+- [Place search: the third and fourth rule passes landed as rules only; the lookup narrowed by rule (owner)](#2026-10-13---place-search-the-third-and-fourth-rule-passes-landed-as-rules-only-the-lookup-narrowed-by-rule-owner)
+- [Place search: the third rule pass built on a branch (German, quiet stations, the third list, the station guard); in memory only, NOT landed](#2026-10-13---place-search-the-third-rule-pass-built-on-a-branch-german-quiet-stations-the-third-list-the-station-guard-in-memory-only-not-landed)
+- [Place search: the fourth pass (an article asked of Wikidata, seven languages, candidates 29 to 43); in memory only, NOT landed](#2026-10-13---place-search-the-fourth-pass-an-article-asked-of-wikidata-seven-languages-candidates-29-to-43-in-memory-only-not-landed)
+- [Place search: the fourth pass re-measured with the 19 Wikidata caches read; an article under the object's own name is its own](#2026-10-13---place-search-the-fourth-pass-re-measured-with-the-19-wikidata-caches-read-an-article-under-the-objects-own-name-is-its-own)
 
 **2026-10-12**
 
@@ -5890,3 +5901,263 @@ japan-city template:
   owed for this landing.
 - **Measured on the branch:** 19 live cities 323,407 rows to 322,843; wave 1
   in memory 311,182 to 307,474; selftest 136 of 136, breaks 109 of 109.
+
+### 2026-10-13 - Place search: the third rule list, from the final group's reads (owner)
+
+- **Eighteen candidates came from the final group's reads of the Korean and
+  German cities** (numbered in `docs/decisions_drafts/search-final.md` on
+  branch `search-final`). Three were ruled by the owner in that session (16
+  public art needs a Wikipedia article of its own; 17 a code beside a path
+  type on minor ways; 18 a dead railway alignment with no article). Cleanup
+  brought the rest in three groups with a recommendation each. **The owner:
+  "new rules and narrow version accepted".**
+- **New rules, to build:** (3) a park whose operator is an apartment estate
+  or its management office goes; (4) a customers-only service road named by
+  a description goes; (7) an exhibit admitted only by its class's article
+  goes; (9) a relation that repeats another row's Wikidata entry far from
+  the object goes; (10) a link to a list article with an anchor is no
+  article of the object's own; (13) a public-transport station with no rail
+  tag is no station.
+- **Narrow version:** (11) a name ending "(geschlossen)", "(abgebrannt)",
+  "(stillgelegt)" or "(ausser Betrieb)" in its German spelling is gone;
+  "ehem." and "ehemalig" are not read (39 Berlin names, several standing).
+  (15) A park tag on a pool, a club or an office gets no rule and stays a
+  by-id drop.
+- **Extensions of rules already approved, built with them, the owner:
+  "already approved rules stay approved":** (1) Korean bare
+  type words; (2) Korean numbered parks as code plus type; (8) the
+  private-street rule reads living streets; (12) a Stolperschwelle is a
+  Stolperstein; (14) the home-name test reads parks and gardens. Each shows
+  in the changed-row report before it lands.
+- **Rule 3 beside question g of this date:** a park tied to a housing
+  complex only by its name stays; one whose operator tag names the estate
+  goes.
+- **One pass, one report:** these, the German lists and
+  `PLACE_QUIET_STATIONS` are built together on branch `search-rules-3`.
+
+### 2026-10-13 - Place search: candidates 19 to 28 join the third pass (owner)
+
+- **Ten more candidates came from the final group's reads of nine cities**
+  (Taipei, Taoyuan, Taichung, Brasilia, Kitakyushu, Monterrey, Guadalajara,
+  Geneva, Brussels Regional). Brought with a recommendation each; **the
+  owner: "i agree with all".**
+- **Built in the third pass:** (19) Chinese earth-god shrine words as a
+  whole name are bare type words (Taipei 263 rows, Taoyuan 203, Taichung
+  157); (22) a bare type word is still bare behind an article or as half of
+  a two-language name; (26) Spanish "Terraza", "Casa Club" and "Camellon"
+  are bare type words and "Cluster N" a code plus type; (28) river rows get
+  an id, so one can be kept or dropped by id.
+- **No rule:** (23) two street names joined by " / " stay as written (the
+  ruling of this date on two real names in one; 36 of Brussels Regional's 41
+  are one street in two spellings). (24) A number beside a type as a whole
+  name gets no rule: "5th Avenue" has the same shape; cemetery and estate
+  cases stay by-id drops.
+- **(25) The private-street rule stays as it is.** It drops 2,423 street
+  names in Guadalajara, 13% of the city's streets, all inside gated estates.
+  Accepted cost: a resident searching for a gated street finds nothing.
+- **Open, with Cleanup:** (27) Monterrey's Sendero station missing from the
+  index, and neighborhoods mapped as residential land use dropped though
+  they are colonias. No rule until it is traced against Mexico City.
+- (20) is the second batch's station-outline rule; (21) is measured in the
+  pass, not ruled.
+
+### 2026-10-13 - Place search: every drawn line and station is searchable, the floor for the big review (owner)
+
+- **The owner: "when we do our final big sweep, we should ensure all drawn
+  lines and stations are searchable (bare minimum)".**
+- **What answers it today:** the search box takes a map's own stations and
+  lines from the map itself (`pipeline/map_common.py`, kinds `mapstation`
+  and `line`), not from the OpenStreetMap index, so a drawn station is
+  findable even when no index row carries it (Monterrey's Sendero, absent
+  from its index on 2026-10-13, is such a case to test). Nothing checks it:
+  check H measures reach around a station, not whether its name is found.
+- **Owed before the big review's landing:** a check that opens every
+  rendered map with search, types each drawn station's name and each drawn
+  line's name as the map shows them, and fails naming any that is not
+  returned as its own kind. A browser script beside
+  `scripts/check_map_view.js`, run over all maps at the sweep; a failure is
+  a map to fix, never a name to skip.
+- The retrospectives of this date's earlier entry are private artifacts
+  (owner), which supersedes the "docs file" form in PLAN.md's item.
+
+### 2026-10-13 - Place search: a drawn station or line is never dropped for its name; wave 1's branch complete (owner)
+
+- **Found in Monterrey by the final-group session:** Sendero, a metro
+  terminus on the map (node/1041636979, way/1286342563, railway=station,
+  station=subway), had no index row. "Sendero" is a Spanish bare type word
+  and the station rule's bare-type branch dropped both objects.
+- **Cleanup's fix, on the owner's floor of this date (every drawn station
+  searchable):** the bare-type branch does not apply to a station of the
+  map or of a rail network. **The owner, told of it: "apply the same station
+  rule to transit lines as well".** Both are built in the third pass, with
+  every row they bring back listed in its report.
+- **Wave 1's branch is complete** (`search-wave1`, cf9155f3, on master
+  4c89e15b, nothing pushed): 33 indexes rebuilt on the second batch, 2,100
+  by-id drops removed as covered by the rules, 2,952 remain; Melbourne's
+  `PLACE_WAY_WORDS` admit 209 rows; the five Brooklyn Navy Yard rows go with
+  rule 4 (the owner, in that session: "i accept your calls"). Its readers'
+  files are copied to `data/_search_rollout/wave1_session/` (793 files). The
+  render, fold, merge and push are Cleanup's at the big review.
+
+### 2026-10-13 - Place search: Monterrey's 19 colonias kept by id, the estate rule unchanged (owner)
+
+- **Measured by the final-group session:** 21 named ways in Monterrey's
+  extra cache carry `landuse=residential` with `place=neighbourhood` (19) or
+  `place=suburb` (2), sourced to the municipality's Plano de Colonias. The
+  estate rule (a place drawn as an area on residential land, no article of
+  its own; Seattle, 2026-10-08) drops them; 19 names leave the index.
+- **Recommended and agreed, the owner: "keep the 19 in monterrey".** By id
+  in Monterrey's config (`PLACE_KEPT`, which the third pass extends to the
+  estate rule). The shared rule stays: the tags are those of the housing
+  estates it removes, so loosening it readmits them everywhere.
+- **Cost:** 19 ids in one config, and the same call again if another
+  Mexican city shows the class. Mexico City is checked in the third pass.
+
+### 2026-10-13 - Place search: "an article of its own" is asked of Wikidata, not of the map's tag; candidates 29 to 44 (owner)
+
+- **The third pass, measured on the 19 live cities in memory (branch
+  `search-rules-3`): 322,843 rows to 321,534.** Rule 16 of this date (public
+  art needs a Wikipedia article of its own) dropped 1,278 rows, and among
+  them works a visitor searches for: the Angel de la Independencia, the
+  Burghers of Calais, Tokyo's Maman, Sue the Dinosaur, A-maze-ing Laughter,
+  Prague's Miminka. Each carries a `wikidata` tag and no `wikipedia` tag:
+  the tag on the map is a poor stand-in for the article.
+- **Three options went to the owner** (ask Wikidata; keep the rule and keep
+  the famous by id; leave public art out). **The owner: "1. yes and delegate
+  to deepseek. no rule for brasilia."** A fetch script
+  (`pipeline/place_wikidata_fetch.py`) asks Wikidata which entries named in
+  a city's place caches have a Wikipedia article in any language and caches
+  the answer; the index step reads the cache. The script is written by the
+  DeepSeek worker from a plan (new file only; code, no data sent), reviewed
+  and wired in by Cleanup. Wikidata is a new source: its licence row is
+  read before the first request.
+- **No rule for the Brasilia finding:** applying the street-word test to
+  pedestrian ways would drop 483 live rows, 266 in London, many of them
+  real pedestrian streets. Brasilia's corridors stay by-id drops.
+- **Candidates 36 and 39, the owner: "36. declare. 39. same rule".**
+  Cluj-Napoca declares Hungarian and Daugavpils Russian as searched
+  languages (39.8% and 15.5% of rows). A library needs an article of its
+  own, as public art does (Florence: 213 of 1,004 landmarks).
+- **Built with the seven language lists as a fourth pass, on Cleanup's
+  recommendation, not objected to:** (29) a leak word is set aside in a
+  language where it is a plain word ("store"); (31) Greek final sigma and
+  (35) Romanian cedilla letters fold; (32) `int_name` is read as an
+  alternate name; (33) a glued way word passes in a suffix language; (34) a
+  home-name ending; (37) Swedish "-gard" is no street word on a footway;
+  (38) a Wikidata entry that is the subject's is not the object's own; (40)
+  one monument drawn in segments is one row; (41) a place of worship as a
+  node beside its way is one row; (42) a station closed to passengers is no
+  station; (43) Cluj-Napoca's tram stops lose a trailing " Tram". (44) gets
+  no rule.
+- **Also from the third pass:** the station guard brings back Sendero,
+  Brussels' Parc, Mexico City's La Virgen and Blackpool's Tower; the index
+  holds no line rows, and lines and a map's own stations reach the search
+  box from the map with no name filter (pinned by a selftest); foot access
+  brings back 189 public streets; four rules were narrowed after measuring
+  (the draft has each). The German matcher words are a separate commit
+  (`search-rules-3-matcher`), held for the big review's render.
+
+### 2026-10-13 - Place search: libraries by the Wikidata lookup; Swedish "-gard" stays an ending (owner)
+
+- **Two rulings relayed by the final-group session (`search-final`,
+  73cbf388) read differently from the ones given to Cleanup, so both went
+  back to the owner. The owner: "4. approved. 5. approved".**
+- **Libraries (4):** the Wikidata lookup decides, as for public art. A
+  library whose Wikidata entry has a Wikipedia article stays; the rest go.
+  The final-group reading ("libraries on a Wikidata entry alone are
+  dropped", Florence 213) is replaced by it; any by-id drops written there
+  are reconciled against the rule at the rebuild.
+- **Swedish "-gard" (5):** it stays a street ending in shared code;
+  Goteborg's 31 courtyard names are dropped by id. Candidate 37 of this
+  date (no street word on a footway) is pulled from the fourth pass: the
+  by-id ruling is the later and the narrower one.
+- **The DeepSeek worker's script is written and reviewed, not merged:**
+  `pipeline/place_wikidata_fetch.py` on `feat/local-wikidata-fetch`
+  (c78aac8c, then Cleanup's 064acb0e: gzip asked for, and an error body
+  arriving with HTTP 200 refused instead of cached as 50 missing entries).
+  The plan sent held code paths and rules only, no data. Wikidata's licence
+  read is back (CC0, conduct rules on the API).
+- **The owner on the three points that followed: "1 yes. 2. yes. 3. yes
+  credit".** (1) The script is merged into the rules branch. (2) Two
+  readings of Wikimedia's terms are taken as Cleanup recommended, going
+  ahead: the robots file's bar on the API's path is read as addressed to
+  page crawlers, and the "not approved by the community" limb with the
+  guidelines' no-prior-permission sentence; the cost of a wrong reading is
+  a blocked user-agent. The row is in `docs/data_sources.md`. (3) Wikidata
+  asks for a mention without requiring one; About the Data gains one
+  sentence at the big review: "Whether a landmark has a Wikipedia article,
+  one of the tests for listing it, is read from Wikidata (CC0)."
+
+### 2026-10-13 - Place search: the third and fourth rule passes landed as rules only; the lookup narrowed by rule (owner)
+
+- **Landed on the owner's word ("sounds good with releasing final group
+  sooner"): on green checks, the changed rows read by the owner after, not
+  before.** Rules only, as the second batch was: no index and no map on
+  master changes until the big review's render. The cost accepted: a rule
+  overturned on that read means rebuilding the cities built since, minutes
+  each, no refetch.
+- **The lookup is narrow by rule (owner: "yes narrow the lookup and hard
+  code the narrowing as a rule").** `place_index.article_lookup_kind` names
+  the kinds whose own article is asked of Wikidata (public art, libraries);
+  the rule and the fetch script both call it. The first run asked about
+  every entry on an object with no `wikipedia` tag (14,071 on the 19 live
+  cities) and was stopped part way; the narrowed run asked 1,849 entries'
+  worth in 47 requests, no error, two London entries missing on Wikidata.
+- **Measured with the 19 caches read (in memory): 321,534 rows to 321,284.**
+  Public art kept: 430 by the tag, 254 by Wikidata. Libraries kept: 193 and
+  109; 469 leave (London 219, Chicago 66, Tokyo 55). Wave 1 has no caches
+  yet and was measured on the fallback.
+- **Not solved by the lookup, put to the owner after landing:** the Angel
+  de la Independencia, the Burghers of Calais and Prague's Miminka carry a
+  Wikidata entry with no article in any language; Maman, Sue and 21 Chicago
+  works carry their subject's entry as their own. Cloud Gate, dropped since
+  the third pass, is back (an article under the object's own name is its
+  own).
+- The three entries below are the branch's drafts, folded as written.
+
+### 2026-10-13 - Place search: the third rule pass built on a branch (German, quiet stations, the third list, the station guard); in memory only, NOT landed
+
+- **Built the third list ("new rules and narrow version accepted"), candidates 19, 22, 26 and 28 ("i agree with all"), German's word lists, quiet stations, the station guard, the named-outline merge and the foot-access reading, in `pipeline/place_index.py` on branch `search-rules-3`, cut from 4c89e15b.** No index was written. Built in memory before (4c89e15b) and after, the 19 live cities go from 322,843 rows to 321,534 and from 529,733 intersections to 529,900; wave 1's 33, with its by-id drops applied, from 307,684 to 307,311. Every changed live row is in `data/_place_rules_2026-10-13/batch3/changed_rows.md` (and `.json`), a totals table per rule first; `wave1_coverage.md` is beside it. No row is unattributed. Selftest 191 cases, 159 breaks, all caught; `check_place_search.py --selftest` 35 cases.
+- **German (owner, search-lang-de.md).** `LEAK_WORDS` 28, `HOME_WORDS` 9, `WAY_WORDS` 40 with German in `SUFFIX_WAY_LANGUAGES`, `WAY_LEAD` 12, `HOME_NAME_LEAD` 3, `BARE_TYPE_NAMES` 33, exactly as ruled, the -hof and -eck id catches as comments. Not done: `place_search_review.py`'s `PLACE_WORD` has no German words yet.
+- **The German matcher words are a separate commit, left off this branch's tip** (c0e2a7dd on `search-rules-3-matcher`): with `map_common.py` changed and no map rendered, `check_render_current.py` fails on the 19 searched maps. It adds the `LANG_WORDS` entry as drafted, writes sharp s as "ss" in `norm()` for every language and, where German is declared, "ae", "oe" and "ue" as the bare vowel on both sides. Tested in Node on `norm()`, `words()` and the language table cut from the script (17 cases: Straße and Strasse meet, "Hauptstr." and "Kurt-Schumacher-Str." are prefixes of the name's words, the three vowel pairs, "und" and "ecke" between two streets, and that Spanish, French, Japanese and English strings are unchanged with German not declared). NOT tested: the ranking and the box itself, since the prefix match was a stand-in for the matcher; the map's own stations are prepared before the index declares German, so one written with "ue" would not meet a typed umlaut.
+- **Quiet stations (owner).** `config.PLACE_QUIET_STATIONS` names a station with nothing indexed within `COVER_KM`; `place_index.run()` and check H count it as accounted for, and a listed station that is covered after all, or is not on the map, stops the step and fails the check by name (`quiet_stations`). The comment above `COVER_KM` no longer says zero is always a boundary cut. Tested on made-up cases in both selftests; Most's and Yamagata's configs were not built here.
+- **Rows changed on the 19, by rule.** 16, public art needs a Wikipedia article of its own: 1,278 (Paris 350, Prague 319, London 233, Barcelona 123, Seattle 69). 8, living_street in the private-street rule, net of the foot reading: 135 dropped. 9, site and boundary relations repeating a row's entry more than 300 m off: 66 (Prague 36 boroughs and districts whose node keeps the row, Marseille 11). 13: 18 station objects with no railway tag and no rail sign, 4 beside a station. Outlines merged into the node of their name: 19. Bare words and codes (1, 2, 19, 22, 26): 19 (Seoul 5, London 4, Mexico City 4, Hong Kong 3). 3, estate parks: 4 (Seoul). Foot access brings back 189 streets (São Paulo 48, London 46, Mexico City 23, Paris 21) and changes 37 more. No live row: 4, 7, 11, 12, 14, 17, 18.
+- **Rule 16 takes works a visitor would search for.** Read from the lists, as flagged for the owner: Mexico City's Ángel de la Independencia, Chicago's Sue the Dinosaur, London's Burghers of Calais, Vancouver's A-maze-ing Laughter, Digital Orca and Inukshuk, Tokyo's Statue of Liberty, Maman and the Saigō statue, Paris's Statue de la Liberté, Prague's Miminka, Hong Kong's McDull statue, Brussels's Smurf, Montreal's La Joute, São Paulo's Mão. Each carries a Wikidata entry and no wikipedia tag. The report lists, per city, the twenty works whose name is tagged in the most languages; that order is a proxy and not a judgment.
+- **Decided, three narrowings after the first measure.** (14) The home-name lead is read on parks and gardens for German only: the Spanish lead "casa" took six of Mexico City's culture houses tagged leisure=park and no home. (7) A locomotive or railway car stays on a tourism tag or an article under its own name, so Chicago's Pioneer Zephyr and Vancouver's Canadian Pacific 374 stay; one of Anyang's eight (우등형 전기동차, whose kind's article bears its name) is not reached. (4) A customers-only service road goes only under a Korean name whose last word is 도로 or 진입로: by the tags alone the rule took 32 named live streets (Montreal's Place du Canada).
+- **Decided: rule 13 keeps a lone station object that shows a rail sign.** A public_transport=station object with no railway tag is no station row, except where no rail-tagged station row stands for it (150 m, or 400 m under its name) AND it lists a rail mode, a station tag, a network tag or a name the map draws. That is the lone-stop-area test again. Without the network half Brussels lost Rogier, Madou, Botanique and Hôtel des Monnaies, each an outline that is its station's only row. 20 such rows stay on the 19.
+- **Decided: 9 uses 300 m (`ROW_MERGE_M`)**, the distance within which rows of one name are merged already; a relation nearer than that is on its object.
+- **10 needed no rule**: `own_article` has read a `wikipedia` value with an anchor as not the object's own since the first batch. A case and a break pin it.
+- **The station guard (owner: every drawn station is searchable).** A station is not dropped for a bare type name when its name is a station of the map (`STATIONS_CSV`, folded), or it carries station=subway, light_rail or train, or a network tag on a railway station, halt or tram stop. Brought back: Brussels "Parc - Park" (three objects), Mexico City "La Virgen", Blackpool "Tower" (two); Monterrey's Sendero is a row. No junk came back, so both halves stay.
+- **Transit lines: the index holds none.** `KINDS` has no line kind and the fetch asks for no route relation, so no index rule can drop a line; lines and the map's own stations reach the box from the rendered map (`map_common.py`, kinds "line" and "mapstation"), where the only test is that the name is not empty. No bare-word, leak-word or description filter is applied to them there; the one name filter in that script (`JUNK_Q`) reads the typed query. A selftest case pins that the index has no line kind. Nothing else changed.
+- **A station's outline under the station's name merges into its node** (150 m, the folded name with a closing station word set aside, or a shared Wikidata entry): Gwangju's 상무역 (candidate 6) and Brussels Regional's ten (candidate 20) merge; Hôtel des Monnaies stays. 19 rows on the 19, 5 in wave 1.
+- **Open on foot is not private** (foot=yes, designated or permissive, whatever access says). Tokyo's MOA2番街 and MOA中央通り are access=no with foot=yes on every such way, and come back.
+- **28: a river row carries the id of its lowest way** in `place_ids.json`, and an id of any of its ways in `PLACE_DROPPED` or `PLACE_KEPT` stands for the whole row. No row changed in any of the 58 cities built (633 live rows gained an id). The side files on disk gain the ids at the next rebuild.
+- **`PLACE_KEPT` is read by the estate rule** (mechanism only; no config has an entry).
+- **Checked, no rule.** 5: Anyang's way/1418223062 is kept as undecidable (a grave under an article that could be its subject's). 25: the private-street rules drop 2,020 and 133 street names in Mexico City and 355 and 63 in São Paulo (residential-class rule, minor-way rule). Measure only, the way-word test on four more classes: highway=pedestrian would drop 483 live rows (London 266, Mexico City 72, Paris 41) and 530 in wave 1 (Manchester 73, Newcastle 63), squares and arcades among them; busway, escape and dummy none.
+- **Not built:** 15, 23, 24, 27.
+- **Not done:** no index rebuilt, no map rendered, no browser test; wave 1's and the final group's configs were read, not edited.
+
+### 2026-10-13 - Place search: the fourth pass (an article asked of Wikidata, seven languages, candidates 29 to 43); in memory only, NOT landed
+
+- **The owner: "1. yes and delegate to deepseek. no rule for brasilia." and "36. declare. 39. same rule"; later the same day candidate 37 was pulled (Swedish -gård stays a street ending; Göteborg's courtyards go by id on the final group's branch).** Built on `search-rules-3` from 588172a3. Built in memory with NO Wikidata cache, the 19 live cities go from 321,534 rows to 320,914 and wave 1's 33 from 307,311 to 306,768; `data/_place_rules_2026-10-13/batch4/changed_rows.md` (and `.json`) is to be re-run once the caches are fetched. Selftest 214 cases, 177 breaks, all caught. No rule for candidate 21 (pedestrian and busway classes), 41 or 44.
+- **An article of its own is asked of Wikidata, for public art (16) and libraries (39) only.** `has_article(tags, articles, own, own_entry)`: the wikipedia tag as before (a section or an anchored list is not the object's own), OR the object's Wikidata entry has a Wikipedia article in the city's cache AND no other object of the cache carries the entry. `place_index.py` only reads the cache (`wikidata_cache`, `read_wikidata_articles`): `config.PLACE_WIKIDATA_JSON`, else the place cache's name with "osm_places" read as "wikidata_articles", the path `pipeline/place_wikidata_fetch.py` writes. A cache absent from disk is no answer: the two rules fall back to the tag and the step says so, naming the fetch script; a cache that is there and lacks an entry the step needs stops it. The lookup would be asked about 1,849 entries on the 19: London 485, Paris 374, Prague 329, Barcelona 149, São Paulo 104, Seattle 100, Chicago 79, Hong Kong 46, Brussels 39, Vancouver 39, Tokyo 37, Montreal 25, Sydney 15, Mexico City 13, Seoul 6, Kyoto 3, Tbilisi 3, Marseille 2, Busan 1. With no cache, rule 39 takes 579 live library rows (London 242, Chicago 68, Tokyo 58) and 534 in wave 1; those whose entry has an article come back with the cache.
+- **The fetch script was merged from `feat/local-wikidata-fetch` (owner approved; 064acb0e) and given a provenance recorder**: `place_index_fetch.record_wikidata` writes the key `place_search_wikidata` (host, api, licence, the date fetched, the file, its bytes and sha256, the counts with an article, without, and not read), called by the fetch script after a run with no `--out`, also when no request was needed. `check_provenance.py` reads no provenance key by name and passes unchanged. No real city was fetched from this branch.
+- **The other own-article tests are unchanged and still read the wikipedia tag**: a bare type word kept on an article, a private operator or office, access=private as the only home sign, small historic objects, graves and plaques, estate areas, islands and districts, pedestrian areas, a private street's way, a dead railway alignment. Register entries and disused places of worship already accept an entry of the object's own, with no lookup. Upper bounds on what switching could add, counted as objects with an entry of their own and no wikipedia tag: 417 graves and plaques (Paris 193, Prague 156), 205 pedestrian areas (Paris 174), 81 islands and districts (Hong Kong 52), 79 small historic objects.
+- **Seven languages folded as ruled** (Danish, Norwegian, Swedish, Latvian, Romanian, Italian, Greek; search-final's `search-lang-*.md` at 802765bc), parsed from the files by script so no word was retyped: leak, home, way, lead and ending lists and bare type words; Danish, Norwegian and Swedish in `SUFFIX_WAY_LANGUAGES`; Romanian and Italian in `WAY_WORD_LEADS`; Greek's fifteen genitive endings in `WAY_ENDING`. No live or wave 1 city declares one, so no row changed. The matcher words are on `search-rules-3-matcher` (f069c4a3), as drafted, with final sigma written as sigma, and æ, ø and å written "ae", "o" and "aa" where Danish or Norwegian is declared; 25 Node cases pass on `norm()` and the word table, the ranking is not exercised.
+- **29**: `LEAK_SET_ASIDE` sets the English leak word "store" aside for Danish, Norwegian and Swedish; nothing else is listed. **33**: in a Latin-script suffix language a glued street name passes `_named_street` on its ending (Danish, Norwegian, Swedish, German, Dutch; not Korean). **34**: `HOME_NAME_END` gains Latvian "villa" and Norwegian "gård", "hovedgård" and "prestegård" as the whole last word, so "kirkegård" is not read; the Norwegian file notes five farms kept on an article that this rule would take. **31 and 35** need nothing in the index: `fold_name` already folds final sigma and writes the cedilla and comma letters alike (pinned by a case).
+- **32, int_name is an alternate name**: 48 live rows gain an alias (Busan 25, Tokyo 9, Tbilisi 5); no index grows by 2% (the largest is Tbilisi, +0.14% of its rows gzipped).
+- **36, declared below the floor**: `config.PLACE_LANGUAGES_ALSO`. The floor is `LOCAL_MIN`, 90% of rows, asked of `PLACE_LANGUAGES` only. A language declared here has its `name:<code>` tags read as aliases and its coverage measured, is not credited from the main name, stops nothing, and is named on the page at 50% like any other. Russian gained a display name and its script. Not built: its matcher words switched on in the search script (the index names it under "also").
+- **38, the subject's entry**: a wikidata tag equal to `subject:wikidata` admits the object to nothing. 9 live rows (Chicago 5 memorials, Tokyo 2, Mexico City 1, Prague 1). Narrowed after the first measure to the subject key alone: an entry equal to `operator:wikidata` or `name:etymology:wikidata` sat on the thing itself (Roehampton University, Barcelona's Teatre Grec, the University of São Paulo's campus).
+- **40, segments**: landmark rows of one folded name and one Wikidata entry, each a way or relation, are one row at any distance, set at the segment nearest the middle of them all. 34 live rows merge (São Paulo 8, London 7, Prague 5); beside walls and aqueducts this joins university campuses and parks drawn in parts (McGill, Concordia, Wanstead Flats).
+- **41 needed no rule**: a place-of-worship node and the way of its name within 300 m are one row already (`ROW_MERGE_M`); a case pins it.
+- **42**: a station tagged passenger=no or public_transport=no is no station unless the map draws it. No live row.
+- **43**: `config.PLACE_STATION_STRIP` lists endings taken off station names; no config sets it here.
+- **Not done:** no index rebuilt, no map rendered, no fetch run from this branch; the final group's configs were read, not edited.
+
+### 2026-10-13 - Place search: the fourth pass re-measured with the 19 Wikidata caches read; an article under the object's own name is its own
+
+- **With each live city's Wikidata cache read (fetched by Cleanup; none fetched from this branch), the 19 go from 321,534 rows (588172a3) to 321,284, in memory.** No city stops on an entry its cache lacks. `data/_place_rules_2026-10-13/batch4b/` holds `changed_rows.md` and `art_and_libraries.md` (and `.json`); batch4 is untouched. Wave 1's 33 cities have no cache and fall back to the tag test (307,311 to 306,768): their art and library counts are not final.
+- **Public art and libraries per city, as kept by the tag / kept by Wikidata / held out, art then libraries:** barcelona 46/12/323/17/2/62; brussels 17/4/358/3/0/26; busan 0/0/40/0/1/97; chicago 42/6/410/16/2/88; hong_kong 5/1/105/30/35/29; kyoto 0/0/355/2/2/37; london 91/56/1005/41/23/329; marseille 6/0/84/3/0/33; mexico_city 22/0/475/7/0/143; montreal 9/3/279/12/3/67; paris 77/72/966/17/17/107; prague 32/24/441/9/3/83; sao_paulo 3/7/143/6/5/70; seattle 22/58/761/5/7/61; seoul 8/1/204/3/4/551; sydney 26/1/243/1/2/20; tbilisi 1/2/159/3/0/29; tokyo 16/0/487/17/3/285; vancouver 7/7/304/1/0/47. Across the 19: art 430 by the tag, 254 by Wikidata; libraries 193 and 109. The held-out counts include every named work and library in the cache, most of which carry no entry and were never rows; against the tag-only rule the caches bring back 262 rows, and 469 libraries leave.
+- **Found and fixed: an article under the object's own name was read as its subject's.** Chicago's mappers copy a work's own article into `subject:wikipedia`, so `own_article` read Cloud Gate (en:Cloud Gate) as not its own and rule 16 dropped it, in the third pass already and unseen in that report. For rules 16 and 39 an article whose title folds to the object's name is its own whatever subject tag repeats it; Cloud Gate is a row again. Not changed: `own_article` itself, which the other tests read.
+- **Still out, and arguable:** 23 works whose `wikidata` equals their `subject:wikidata` and has an article (Chicago 21, Tokyo's Maman, Vancouver's Harry Jerome), among them Sue the Dinosaur, whose article is "Sue (dinosaur)". The tags do not tell a work that is its subject (Sue, Maman) from a statue of one (Brachiosaurus Replica, Olmec Head); 130 more works carry an entry two or more objects share and are never asked about (Paris 57). The Ángel de la Independencia node, London's Burghers of Calais and Prague's Miminka carry entries with no article in any language, and stay out; A-maze-ing Laughter is a row.
+- Selftest 216 cases, 179 breaks, all caught.
