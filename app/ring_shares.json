@@ -17,7 +17,7 @@
  "chicago": {
   "in_ring": 11685,
   "all": 20492,
-  "map_blob": "99ccf6ec51c88528b44ed753a8c6bb8fd43acc16"
+  "map_blob": "cb23bd83f850a5d8679ceb264a23fb345a4e26fd"
  },
  "new_york": {
   "in_ring": 44360,
@@ -47,12 +47,12 @@
  "vancouver": {
   "in_ring": 7010,
   "all": 15436,
-  "map_blob": "5c67c8d9bf6b9ce2deee3d57530e2e046b7b02f0"
+  "map_blob": "50dc7fdeccf16b7439257d93c555ca7d0db53617"
  },
  "montreal": {
   "in_ring": 10386,
   "all": 17162,
-  "map_blob": "42036eb140c5aa6f6319471f022785f74166daf0"
+  "map_blob": "0fa0d2746091ee5ee03ddfc0bf084054bb689aca"
  },
  "calgary": {
   "in_ring": 6156,
@@ -72,7 +72,7 @@
  "mexico_city": {
   "in_ring": 149980,
   "all": 407628,
-  "map_blob": "2d641fd78f5363dfed649427903dd190ad4e8247"
+  "map_blob": "e5281faa4cbd0d472ccce9fdf9954ebdf85ba27d"
  },
  "guadalajara": {
   "in_ring": 36729,
@@ -87,7 +87,7 @@
  "barcelona": {
   "in_ring": 35287,
   "all": 35309,
-  "map_blob": "93cd6eb0acc2747057fad537594fba1a6e57940d"
+  "map_blob": "7f3973ecc0abe8312cd08d617c6ba5e2cbd94a6c"
  },
  "dublin": {
   "in_ring": 7411,
@@ -102,12 +102,12 @@
  "paris": {
   "in_ring": 85228,
   "all": 86884,
-  "map_blob": "b8a7f32dd5e9ce51f59241c094826db13747fe9c"
+  "map_blob": "9b53e9f96759e22a30607ae6e267ba5249d70630"
  },
  "marseille": {
   "in_ring": 9946,
   "all": 18026,
-  "map_blob": "7571c02d856ac8e2028a51571e74c95718dee9d2"
+  "map_blob": "9f65092cfbc51be393429b80d3366df0b169e334"
  },
  "toulouse": {
   "in_ring": 5532,
@@ -137,7 +137,7 @@
  "prague": {
   "in_ring": 17528,
   "all": 25185,
-  "map_blob": "5ca1608cdbabad0bcbba91da27e269ee7257cacf"
+  "map_blob": "b8f6f603b5a6fb5efca9869d509ed414d8b4564a"
  },
  "amsterdam": {
   "in_ring": 12648,
@@ -152,7 +152,7 @@
  "sao_paulo": {
   "in_ring": 50436,
   "all": 219667,
-  "map_blob": "e79788048627ec759a5749fdd6f621086e3e973e"
+  "map_blob": "91a1e03d0f77cc22de1d9cd7729197e1fbcd53eb"
  },
  "rio_de_janeiro": {
   "in_ring": 33029,
@@ -202,7 +202,7 @@
  "hong_kong": {
   "in_ring": 19275,
   "all": 21135,
-  "map_blob": "aa0dc4c3770ac069eb61570a333df225be4c1a12"
+  "map_blob": "30e47f3d63d3dbfa497cf29bb3bfb99afea931a2"
  },
  "riga": {
   "in_ring": 5213,
@@ -212,7 +212,7 @@
  "seoul": {
   "in_ring": 224381,
   "all": 239410,
-  "map_blob": "aecc01e67b3877edc571df287c5ed5d3bd788c0d"
+  "map_blob": "d3cd666b65f341ea7db8f9e794d4e9b638c59dd9"
  },
  "taichung": {
   "in_ring": 12250,
@@ -237,7 +237,7 @@
  "busan": {
   "in_ring": 66348,
   "all": 89798,
-  "map_blob": "790d54817a23f2657b8d391f9d1b2d6fb7834a23"
+  "map_blob": "3dcad9162a247436ee3a976210f4170bf3eeffff"
  },
  "monterrey": {
   "in_ring": 14630,
@@ -267,12 +267,12 @@
  "kyoto": {
   "in_ring": 28008,
   "all": 32390,
-  "map_blob": "e68774bcd4c69245396f66dbc9a97b94c2ba8be6"
+  "map_blob": "a41bcbbaa632411483231db9caed41eb3546b700"
  },
  "tokyo": {
   "in_ring": 59811,
   "all": 61299,
-  "map_blob": "22fcae5bb2a38058f764d125985d58cd5c6c7ee4"
+  "map_blob": "269e551fcc96bbc51a9aca604df8f0178f42d741"
  },
  "berlin": {
   "in_ring": 49394,
@@ -282,7 +282,7 @@
  "london": {
   "in_ring": 41574,
   "all": 56491,
-  "map_blob": "a92641c18a08affe1a9606ca175747b8495b6d09"
+  "map_blob": "21ac4dbe301e50d4f5124af736f33afd8e09d8cd"
  },
  "buenos_aires": {
   "in_ring": 41633,
@@ -302,7 +302,7 @@
  "sydney": {
   "in_ring": 5901,
   "all": 7074,
-  "map_blob": "92ee36c652c1de361a3856ca4f71e70a6d8520c7"
+  "map_blob": "22fdd22ac6aa14ae15a328a63884093fcd3ddf2b"
  },
  "melbourne": {
   "in_ring": 4760,
@@ -712,12 +712,12 @@
  "seattle": {
   "in_ring": 5548,
   "all": 14430,
-  "map_blob": "06fba13260726a0cd82eb12f4a3db01e999608b8"
+  "map_blob": "a0e398bcccb82dd0bdf898863529c6b830f7d3b9"
  },
  "tbilisi": {
   "in_ring": 8043,
   "all": 13211,
-  "map_blob": "ea4188ad60901130b7e4cf0b620b79aeafe2fdea"
+  "map_blob": "ac3e57b493c45f1387ea1d59ad537218de69c639"
  },
  "kawasaki": {
   "in_ring": 9931,
@@ -792,7 +792,7 @@
  "brussels": {
   "in_ring": 4762,
   "all": 5069,
-  "map_blob": "79e65ec4acb1338e85fe1aa1ed798036bd74aa72"
+  "map_blob": "9ba650247019aadd9fdd36e6dffef17f5b4e500e"
  },
  "antwerp": {
   "in_ring": 3973,
