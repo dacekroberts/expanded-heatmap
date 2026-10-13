@@ -2,6 +2,18 @@
 
 Newest first. Cleanup folds these into `DECISIONS.md` at review time.
 
+### 2026-10-13 - Tram rescope: Toronto's thinning rule, colors and page text approved (owner)
+
+- **Owner, 2026-10-13: "1 yes sounds good. 2. approved. 3. concatenate if
+  possible but content looks good".** (1) The crossing-or-junction form of
+  the interchange filter stands for Toronto. (2) The eight streetcar
+  colors are approved as recorded in `pipeline/toronto/config.py`. (3)
+  The page bullets' content is approved; they were shortened the same day
+  with no fact added or dropped (the lines bullet takes the labeling
+  clause, the colors bullet loses its second explanation of Line 2, the
+  not-drawn bullet takes the "listed below" pointer). The Overview blurb
+  and the What Is Excluded additions went with them.
+
 ### 2026-10-13 - Tram rescope: Toronto built with eight streetcar lines; 503, 507 and 508 not drawn (owner)
 
 - **Owner, 2026-10-13: "follow those rules (8 not 11) note the drops and
