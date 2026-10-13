@@ -1502,7 +1502,11 @@ CREDIT_TAB_SCRIPT = """
 # nearer than the nearest line.
 LINE_HIGHLIGHT_SCRIPT = """
 <style>
-.map-legend .hm-line-row { cursor: pointer; border-radius: 3px; }
+.map-legend .hm-line-row { cursor: pointer; border-radius: 3px;
+    /* A button, not text: a quick second click on a Mac selected the line's
+       name for copying instead of picking the line (owner's demo,
+       2026-10-13). The whole row is the target; hover is unchanged. */
+    -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
 .map-legend .hm-line-row:focus-visible { outline: none;
     background: rgba(127,127,127,0.16); box-shadow: 0 0 0 3px rgba(127,127,127,0.16); }
 @media (hover: hover) {
@@ -1645,6 +1649,10 @@ LINE_HIGHLIGHT_SCRIPT = """
                 var k = row.getAttribute("data-line");
                 if (!lines[k]) return;
                 row.addEventListener("click", function () { pick(k); });
+                // A double or triple click starts a text selection on the
+                // mousedown, before any click: stopped here, so repeated
+                // clicks only pick and unpick.
+                row.addEventListener("mousedown", function (e) { if (e.detail > 1) e.preventDefault(); });
                 row.addEventListener("keydown", function (e) {
                     if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(k); }
                 });
