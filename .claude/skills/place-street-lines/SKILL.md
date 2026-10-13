@@ -152,12 +152,16 @@ Nothing extra is fetched. For each new searched city:
 - **The measure in degrees.** Simplifying in EPSG:4326 is refused by the
   project's invariants; pass the city's CRS.
 
-## Open with the owner (2026-10-13; check `DECISIONS.md` for the answers)
+## The owner's calls (2026-10-13)
 
-- The line's colour: the ring's teal, or a white-cased dark line as a picked
-  transit line gets (the teal sits near Seattle's green and blue lines).
-- The credit line: a third link, "streets", beside "download" and
-  "intersections".
-- 10 m or 20 m for the three largest cities.
-- The 19 built indexes are NOT yet rebuilt with their street files; that and
-  the re-render wait for the owner's word.
+- **The line's colour is the ring's teal** ("ring teal is good, stands
+  out"). Not a white-cased dark line: that is a picked TRANSIT line's look.
+- **The credit carries a third link, "streets"**, beside "download" and
+  "intersections", in the bottom line and in the box form alike. It shows
+  once the index has named the file. The three files are one ODbL database
+  (`docs/data_sources.md`, "Place search index", Access).
+- **10 m everywhere.** The owner gave the word to rebuild after seeing the
+  three largest files' sizes; 20 m was offered and not asked for.
+- **Built in each batch, never at the end:** the file comes out of the index
+  step a wave already runs. Adding it afterwards means rebuilding and
+  re-rendering every index a second time.

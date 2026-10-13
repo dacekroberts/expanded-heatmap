@@ -20,13 +20,14 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**90 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**91 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
 - [The id side file for the travel app, built on the 19 searched cities (owner)](#2026-10-13---the-id-side-file-for-the-travel-app-built-on-the-19-searched-cities-owner)
 - [A picked street is drawn at its whole length, from a street lines side file; the ring is the failsafe (owner)](#2026-10-13---a-picked-street-is-drawn-at-its-whole-length-from-a-street-lines-side-file-the-ring-is-the-failsafe-owner)
 - [The maps' Cities menu under non clickable headers, Japan last (owner)](#2026-10-13---the-maps-cities-menu-under-non-clickable-headers-japan-last-owner)
+- [Street lines: the teal stays, a third credit link, the 19 rebuilt; the picked-line look goes to every map (owner)](#2026-10-13---street-lines-the-teal-stays-a-third-credit-link-the-19-rebuilt-the-picked-line-look-goes-to-every-map-owner)
 
 **2026-10-12**
 
@@ -4964,3 +4965,39 @@ japan-city template:
   - **Tested** on a local Seattle page: 43 headers, 236 options, Seattle
     itself left out. Not tested: an iPhone's picker, Safari on a Mac.
   - **Held** on branch `street-lines`; needs the full re-render and a reboot.
+
+### 2026-10-13 - Street lines: the teal stays, a third credit link, the 19 rebuilt; the picked-line look goes to every map (owner)
+
+- **Decided by the owner** ("yes roll out the highlight, region split is
+  good. ring teal is good, stands out. third link is okay. i give you word
+  to rebuild").
+  - **The street line keeps the search ring's teal.** Offered against it: a
+    white-cased dark line, since the teal sits near Seattle's green and blue
+    transit lines. The owner: it stands out.
+  - **The search credit gains a third link, "streets"**, in the bottom line
+    ("Search index ODbL (download, intersections, streets)") and in the box
+    form. The street file is part of the same ODbL database, so the 4.6
+    offer covers it; `docs/data_sources.md` says three files now.
+  - **The 19 built indexes are rebuilt with their street files** at 10 m.
+    The 1 MB first street pick in London, Mexico City and São Paulo was put
+    to the owner with a 20 m alternative; the word to rebuild came without
+    asking for it.
+  - **The Cities menu's region split stands** (the entry above).
+  - **The picked-line look on every map.** The casing, the boxed label and
+    the businesses stepping back were built inside the search script, so
+    only the 19 searched maps had them, and one legend click looked two ways
+    across the site. Moved into `LINE_HIGHLIGHT_SCRIPT`, which already holds
+    the pick (`sel`), so the search script's sampling of the legend row's
+    `aria-pressed` (a MutationObserver and document click and key listeners)
+    is gone. The fade is a class of its own (`hm-line-picked`), so the
+    search marker's fade (`hm-searching`) and a picked line's no longer
+    share one class and one owner. Classes renamed `hm-pick-case`,
+    `hm-pick-label`.
+  - **Tested locally** on a map without search and with 16 lines (Zurich:
+    pick, switch, unpick; the casing under its line; the dots at 0.28; one
+    label boxed) and on Saint-Etienne, where the trams share track, in both
+    themes; no console error. Not tested: a real hover while another line is
+    picked, a phone, the search picking a line after the move.
+  - **Asked by the owner, answered:** boundaries and street lines are built
+    in each batch, not at the end; both come from steps a wave already runs.
+  - **Held** on branch `street-lines` for the one full re-render.
