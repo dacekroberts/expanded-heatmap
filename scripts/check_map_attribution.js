@@ -125,7 +125,15 @@ if (att && mapEl) {
   // against _MAP_H, so this stays true if that constant ever changes.
   if (legend) {
     const m = mapEl.getBoundingClientRect();
-    const need = Math.max(24, Math.round(innerHeight - m.bottom + 24));
+    // A searched map adds its index credit to the line after a search, and
+    // the line wraps to two at phone width; the search script then raises
+    // the legend by what the line grew (PLACE_SEARCH_SCRIPT's credit()). So
+    // the legend needs the one-line clamp plus that growth. ONE_LINE is the
+    // credit's height on every map (measured 14 px, 2026-10-13); re-measure
+    // if the attribution's font size changes.
+    const ONE_LINE = 14;
+    const grew = Math.max(0, Math.round(att.getBoundingClientRect().height) - ONE_LINE);
+    const need = Math.max(24, Math.round(innerHeight - m.bottom + 24)) + grew;
     const got = Math.round(parseFloat(getComputedStyle(legend).bottom));
     clamp = { need, got, mapBottom: Math.round(m.bottom), innerHeight, ok: Math.abs(got - need) <= 2 };
     if (!clamp.ok)
