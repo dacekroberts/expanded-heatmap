@@ -8,12 +8,14 @@ this file.
 Reads config.PLACE_OSM_JSON and, when the config defines it and the file is on
 disk, config.PLACE_OSM_EXTRA_JSON, both Overpass-shaped
 {"elements": [{"type", "id", "tags"}, ...]}. Every wikidata id on an element
-with no wikipedia tag and no tag whose key starts with "wikipedia:" is asked of
-Wikidata (wbgetentities, props=sitelinks); which ids have an article in any
+of a kind a rule reads the answer for (place_index.article_lookup_kind: public
+art and libraries; owner, 2026-10-13, the lookup is narrow by rule) is asked
+of Wikidata (wbgetentities, props=sitelinks); which ids have an article in any
 language is written to one cache, config.PLACE_WIKIDATA_JSON or, when the
 config has no such path, the PLACE_OSM_JSON folder with "osm_places" replaced
-by "wikidata_articles" in the file name. Wiring this cache into the index step
-is a later change; this file only fetches.
+by "wikidata_articles" in the file name. An element's wikipedia tag does not
+excuse it: the index step asks about one whose tag is a section's or its
+subject's. No other kind is asked about, whatever tags it carries.
 
 A cache already on disk is kept: without --force only the ids it does not hold
 yet are asked, with every id held nothing is asked, and --force asks all of
@@ -44,6 +46,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from pipeline.osm import OVERPASS_USER_AGENT  # noqa: E402
+from pipeline.place_index import article_lookup_kind  # noqa: E402
 
 API_URL = "https://www.wikidata.org/w/api.php"
 BATCH_SIZE = 50
@@ -64,15 +67,14 @@ QID = re.compile(r"^Q\d+$")
 
 
 def collect_ids(elements):
-    """Every distinct Q id in a wikidata tag of an element with no wikipedia
-    tag and no tag whose key starts with "wikipedia:", in first-seen order,
-    and how many wikidata values were not Q ids."""
+    """Every distinct Q id in a wikidata tag of an element of a kind a rule
+    reads (article_lookup_kind), in first-seen order, and how many of their
+    wikidata values were not Q ids. An element of no such kind contributes
+    nothing: the narrowing is the rule, not a saving."""
     ids, skipped, seen = [], 0, set()
     for element in elements:
         tags = element.get("tags") or {}
-        if "wikidata" not in tags:
-            continue
-        if "wikipedia" in tags or any(k.startswith("wikipedia:") for k in tags):
+        if "wikidata" not in tags or article_lookup_kind(tags) is None:
             continue
         for piece in str(tags["wikidata"]).split(";"):
             piece = piece.strip()
@@ -270,18 +272,25 @@ def selftest():
     case("the User-Agent holds no @ character", "@" not in OVERPASS_USER_AGENT)
 
     elements = [
-        {"type": "node", "id": 1, "tags": {"wikidata": "Q5;Q6"}},
-        {"type": "node", "id": 2, "tags": {"wikidata": "Q5x"}},
-        {"type": "node", "id": 3, "tags": {"wikidata": "P31"}},
-        {"type": "node", "id": 4, "tags": {"wikidata": "Q7", "wikipedia": "en:X"}},
-        {"type": "node", "id": 5, "tags": {"wikidata": "Q8", "wikipedia:en": "X"}},
+        {"type": "node", "id": 1, "tags": {"tourism": "artwork", "wikidata": "Q5;Q6"}},
+        {"type": "node", "id": 2, "tags": {"tourism": "artwork", "wikidata": "Q5x"}},
+        {"type": "node", "id": 3, "tags": {"tourism": "artwork", "wikidata": "P31"}},
+        {"type": "node", "id": 4, "tags": {"tourism": "artwork", "wikidata": "Q7", "wikipedia": "en:X"}},
+        {"type": "node", "id": 5, "tags": {"tourism": "artwork", "wikidata": "Q8", "wikipedia:en": "X"}},
         {"type": "node", "id": 6, "tags": {"name": "no wikidata"}},
-        {"type": "node", "id": 7, "tags": {"wikidata": "Q5;Q5"}},
+        {"type": "node", "id": 7, "tags": {"tourism": "artwork", "wikidata": "Q5;Q5"}},
+        {"type": "node", "id": 8, "tags": {"amenity": "library", "wikidata": "Q9"}},
+        {"type": "node", "id": 9, "tags": {"tourism": "museum", "wikidata": "Q10"}},
+        {"type": "way", "id": 10, "tags": {"highway": "residential", "wikidata": "Q11"}},
+        {"type": "node", "id": 11, "tags": {"wikidata": "Q12"}},
     ]
     ids, skipped = collect_ids(elements)
-    case("Q5;Q6 gives two ids; Q5x and P31 are not sent; a wikipedia or wikipedia: tag contributes "
-         "no id; a repeated id is kept once",
-         ids == ["Q5", "Q6"] and skipped == 2)
+    case("Q5;Q6 gives two ids; Q5x and P31 are not sent; a wikipedia tag does not excuse an "
+         "element; a repeated id is kept once",
+         ids[:4] == ["Q5", "Q6", "Q7", "Q8"] and skipped == 2)
+    case("the lookup is narrow by rule: public art and libraries are asked about, and a museum, "
+         "a street and an untyped object are not",
+         ids == ["Q5", "Q6", "Q7", "Q8", "Q9"])
 
     case("enwiki is an article; commonswiki is not; wikiquote, wikisource, wikivoyage, wikinews, "
          "wikibooks, wikiversity and wiktionary are not (no wiki suffix)",
@@ -318,7 +327,7 @@ def selftest():
             return json.dumps({"entities": {q: {"sitelinks": {"enwiki": {"title": "T"}}} for q in asked}})
 
         City.PLACE_OSM_JSON.write_bytes(json.dumps({"elements": [
-            {"type": "node", "id": i, "tags": {"wikidata": f"Q{i}"}} for i in range(1, 121)
+            {"type": "node", "id": i, "tags": {"tourism": "artwork", "wikidata": f"Q{i}"}} for i in range(1, 121)
         ]}).encode("utf-8"))
         urls = []
 
@@ -363,9 +372,9 @@ def selftest():
              and _body_text(b"{}", {}) == "{}")
 
         City.PLACE_OSM_JSON.write_bytes(json.dumps({"elements": [
-            {"type": "node", "id": 1, "tags": {"wikidata": "Q1"}},
-            {"type": "node", "id": 2, "tags": {"wikidata": "Q2"}},
-            {"type": "node", "id": 3, "tags": {"wikidata": "Q3"}},
+            {"type": "node", "id": 1, "tags": {"tourism": "artwork", "wikidata": "Q1"}},
+            {"type": "node", "id": 2, "tags": {"tourism": "artwork", "wikidata": "Q2"}},
+            {"type": "node", "id": 3, "tags": {"tourism": "artwork", "wikidata": "Q3"}},
         ]}).encode("utf-8"))
         cache_path.write_bytes(json.dumps({
             "_source": {"host": "www.wikidata.org", "api": "wbgetentities, props=sitelinks",
@@ -400,10 +409,10 @@ def selftest():
              and payload["articles"] == {"Q1": ["dewiki"], "Q2": ["dewiki"], "Q3": ["dewiki"]})
 
         City.PLACE_OSM_JSON.write_bytes(json.dumps({"elements": [
-            {"type": "node", "id": 1, "tags": {"wikidata": "Q1"}},
-            {"type": "node", "id": 2, "tags": {"wikidata": "Q2"}},
-            {"type": "node", "id": 3, "tags": {"wikidata": "Q3"}},
-            {"type": "node", "id": 4, "tags": {"wikidata": "Q4"}},
+            {"type": "node", "id": 1, "tags": {"tourism": "artwork", "wikidata": "Q1"}},
+            {"type": "node", "id": 2, "tags": {"tourism": "artwork", "wikidata": "Q2"}},
+            {"type": "node", "id": 3, "tags": {"tourism": "artwork", "wikidata": "Q3"}},
+            {"type": "node", "id": 4, "tags": {"tourism": "artwork", "wikidata": "Q4"}},
         ]}).encode("utf-8"))
         cache_path.unlink()
         said = []
@@ -422,7 +431,7 @@ def selftest():
              and "requests 1" in line)
 
         City.PLACE_OSM_JSON.write_bytes(json.dumps({"elements": [
-            {"type": "node", "id": 1, "tags": {"wikidata": "Q9"}},
+            {"type": "node", "id": 1, "tags": {"tourism": "artwork", "wikidata": "Q9"}},
         ]}).encode("utf-8"))
         cache_path.unlink()
         pauses = []
@@ -440,7 +449,7 @@ def selftest():
              state["n"] == 2 and pauses == [7] and payload["articles"]["Q9"] == ["enwiki"])
 
         City.PLACE_OSM_JSON.write_bytes(json.dumps({"elements": [
-            {"type": "node", "id": i, "tags": {"wikidata": f"Q{i}"}} for i in range(1, 61)
+            {"type": "node", "id": i, "tags": {"tourism": "artwork", "wikidata": f"Q{i}"}} for i in range(1, 61)
         ]}).encode("utf-8"))
         cache_path.unlink()
 
@@ -470,7 +479,7 @@ def selftest():
              and list(parsed["articles"]) == sorted(parsed["articles"]))
 
         City.PLACE_OSM_JSON.write_bytes(json.dumps({"elements": [
-            {"type": "node", "id": 1, "tags": {"wikidata": "Q9"}},
+            {"type": "node", "id": 1, "tags": {"tourism": "artwork", "wikidata": "Q9"}},
         ]}).encode("utf-8"))
         cache_path.unlink()
         pauses2 = []
@@ -487,10 +496,10 @@ def selftest():
              state2["n"] == 2 and pauses2 == [5])
 
         City.PLACE_OSM_JSON.write_bytes(json.dumps({"elements": [
-            {"type": "node", "id": 1, "tags": {"wikidata": "Q1"}},
+            {"type": "node", "id": 1, "tags": {"tourism": "artwork", "wikidata": "Q1"}},
         ]}).encode("utf-8"))
         City.PLACE_OSM_EXTRA_JSON.write_bytes(json.dumps({"elements": [
-            {"type": "node", "id": 2, "tags": {"wikidata": "Q2"}},
+            {"type": "node", "id": 2, "tags": {"tourism": "artwork", "wikidata": "Q2"}},
         ]}).encode("utf-8"))
         cache_path.unlink()
         extra_asked = []
@@ -505,7 +514,7 @@ def selftest():
 
         out_file = d / "elsewhere.json"
         City.PLACE_OSM_JSON.write_bytes(json.dumps({"elements": [
-            {"type": "node", "id": 1, "tags": {"wikidata": "Q1"}},
+            {"type": "node", "id": 1, "tags": {"tourism": "artwork", "wikidata": "Q1"}},
         ]}).encode("utf-8"))
         cache_path.unlink()
 

@@ -349,6 +349,30 @@ def stations_per_municipality(munis, stations):
 # so; with a cache that lacks an entry the step needs, it stops naming the
 # fetch script. Read for public art and libraries only (rules 16
 # and 39); every other "own article" test still reads the wikipedia tag.
+#
+# THE LOOKUP IS NARROW BY RULE (owner, 2026-10-13: "narrow the lookup and
+# hard code the narrowing as a rule"). Wikidata is asked only about an object
+# of a kind listed here, the kinds a rule reads the answer for: the 19 live
+# cities carry 14,071 entries on objects with no wikipedia tag, and the rules
+# read 1,849 of them. article_lookup_kind is the ONE test: the rule below
+# and the fetch script both call it, so the fetch cannot ask about a kind no
+# rule reads, and a rule cannot read a kind the fetch did not ask about. A
+# new kind is added here, with the owner's ruling, and nowhere else.
+ARTICLE_LOOKUP_KINDS = (
+    ("tourism", "artwork", "artwork"),      # rule 16, public art
+    ("amenity", "library", "library"),      # rule 39, libraries
+)
+
+
+def article_lookup_kind(tags):
+    """The kind ("artwork", "library") under which an object's own article
+    is asked of Wikidata, None for every other object."""
+    for key, value, kind in ARTICLE_LOOKUP_KINDS:
+        if tags.get(key) == value:
+            return kind
+    return None
+
+
 def wikidata_cache(config):
     """The path of a city's Wikidata article cache: config.PLACE_WIKIDATA_JSON,
     else beside the place cache, "osm_places" in its name read as
@@ -3365,7 +3389,7 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         # Rule 16 and rule 39 (a library is a landmark only with an article
         # of its own; owner, 2026-10-13: "same rule") ask has_article: the
         # wikipedia tag as before, else the Wikidata cache.
-        needs = "artwork" if t.get("tourism") == "artwork" else "library" if t.get("amenity") == "library" else None
+        needs = article_lookup_kind(t)
         if needs and verdict in ("none", "not"):
             mine = own_item(seen_tags)
             if mine:
@@ -4541,6 +4565,12 @@ def _selftest():
         ("a library whose own entry has an article is a row", ("landmark", "Great Library") in rows),
         ("the entries the lookup is asked about are listed",
          {"Q907", "Q920", "Q922", "Q923", "Q924"} <= set(index["wikidata_asked"]) and "Q921" not in index["wikidata_asked"]),
+        ("the lookup is narrow by rule: public art and libraries, no other kind",
+         article_lookup_kind({"tourism": "artwork"}) == "artwork"
+         and article_lookup_kind({"amenity": "library"}) == "library"
+         and article_lookup_kind({"tourism": "museum", "wikidata": "Q1"}) is None
+         and article_lookup_kind({"historic": "memorial", "wikidata": "Q1"}) is None
+         and {k for _, _, k in ARTICLE_LOOKUP_KINDS} == {"artwork", "library"}),
         ("has_article: the tag, or an own entry with an article",
          has_article({}, None, own=True) and has_article({"wikidata": "Q1"}, {"Q1": ["enwiki"]})
          and not has_article({"wikidata": "Q1"}, {"Q1": []}) and not has_article({"wikidata": "Q1"}, {"Q1": None})
