@@ -116,7 +116,7 @@ This is open work, not a record: update an item here as it moves, and send a fin
 
 ## Trams left off built maps
 
-- [ ] ⏸ **Trams left off built maps: PARKED (owner, 2026-09-27); the owner
+- [ ] **Trams left off built maps: QUEUED after the search-rules landing (owner, 2026-10-13; parked 2026-09-27 to 2026-10-13); the owner
   decides case by case.** Estimate and recommendations:
   `docs/tram_rescope_estimate.md` (light batch yes, REM first; Paris T3 yes;
   Toronto, Milan, Prague not yet, a label and legend rule then a Toronto

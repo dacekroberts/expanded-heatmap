@@ -111,6 +111,27 @@ entry first; it is the specification.
 - transit-globe was told the id side file is ready; the cut-over message at
   wave 1's landing is still owed.
 
+## State after the owner's "run all open items" (2026-10-13, about 08:15Z)
+
+- **master = `f549e6a8`**: the two runner scripts, registered (70 of 70
+  checks). The area lookup's query has still never been answered by a live
+  mirror: a two-city trial timed out on `overpass.kumi.systems`, whose
+  status page took 79 s; `overpass-api.de` gave no answer.
+- **The night runner is running** from `.claude/worktrees/search-rollout`
+  (branch `search-rollout`), a background command of the Cleanup session,
+  `--max-hours 14`. Its files are in `data/_search_rollout/`: `waves.json`,
+  `plan.json`, `night_2026-10-13.md` (the morning report), `.json` (state),
+  `.log`. A rerun with the same state file resumes; lookups that failed
+  while the mirrors were down are only asked again by a rerun. Open before
+  its output is trusted: 36 draft-filled relations nobody confirmed, and
+  Japan auto-filled at admin level 7.
+- **The rules build is running** in a subagent on
+  `.claude/worktrees/search-rules` (branch `search-rules`), with wave 1's
+  four new gaps; its changed-row report goes to
+  `data/_place_rules_2026-10-13/build/changed_rows.md`, for the owner
+  before anything lands.
+- Wave 1 was told both (18 of 34 built, 23 fetched).
+
 ## Small open items
 
 - London's tile 2 of 12 is May 2026 data; the owner approved a refetch from
@@ -126,3 +147,35 @@ entry first; it is the specification.
   failsafe (no built city the test used has one).
 - Mention whenever the owner asks what is next: the tram rescope stays
   parked.
+
+## Added later on 2026-10-13 (the owner's words; DECISIONS has the entry)
+
+- **Priority: the search-rules landing**, for Visuals' motion opener. When
+  the rules agent reports: read `changed_rows.md`, bring the owner every
+  changed row by class, and answer Visuals on its five searched names.
+- **The extract route** (Geofabrik `.osm.pbf`, filtered here) is proved on
+  Tbilisi and Seattle and is being built by an agent on
+  `.claude/worktrees/place-extract`; the fetch order between Overpass and
+  extracts is the owner's call after its timings. Prototype and comparison
+  tools: `data/_osm_extracts/proto/`.
+- **Queued for after the rules landing:** keep streets that run along the
+  border of two included municipalities (owner approved the queueing, not
+  yet the changed rows).
+- The night runner is on `overpass.kumi.systems` only until wave 1 says its
+  queue on `overpass-api.de` is done; then rerun with `--retry-failed`.
+- The owner is running the iPhone and Safari test of the landed features.
+- `outputs/testville/` is deleted.
+- **The tram rescope is no longer parked** (the owner, 2026-10-13: "tram
+  rescope should be another item after the next land"): queued after the
+  rules landing, beside the shared-border streets; order between the two
+  not decided. Re-check `docs/tram_rescope_estimate.md` and
+  `docs/tram_rescope_specs.md` before proposing a first batch.
+- **When the tram rescope lands, mark its cities for review downstream**
+  (the owner, 2026-10-13: "we should make sure those cities are marked for
+  review in analytics/visuals when it is time"). A rescoped city gains
+  stations and rings, so its station counts, ring shares and any analysis
+  or card built on them are stale: name every rescoped city, with what
+  changed, in the downstream note to Analytics and Visuals at that landing
+  (`scripts/downstream_changes.py`; `docs/session_roles.md`). Candidates
+  today: Montreal, Rome, Madrid, San Francisco, Paris, then Barcelona and
+  Mexico City.
