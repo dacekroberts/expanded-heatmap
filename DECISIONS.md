@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**93 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**94 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -30,6 +30,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Street lines: the teal stays, a third credit link, the 19 rebuilt; the picked-line look goes to every map (owner)](#2026-10-13---street-lines-the-teal-stays-a-third-credit-link-the-19-rebuilt-the-picked-line-look-goes-to-every-map-owner)
 - [Place search: the owner's rulings on keep against drop, personal names, private streets and the typo line; NOT yet built](#2026-10-13---place-search-the-owners-rulings-on-keep-against-drop-personal-names-private-streets-and-the-typo-line-not-yet-built)
 - [Place search: where readers see what search leaves out; the rollout's own worktree; the id side file told to transit-globe (owner)](#2026-10-13---place-search-where-readers-see-what-search-leaves-out-the-rollouts-own-worktree-the-id-side-file-told-to-transit-globe-owner)
+- [Place search: an extract route beside Overpass, proved on two cities; wave 1 first on the main mirror; streets on a shared border queued (owner)](#2026-10-13---place-search-an-extract-route-beside-overpass-proved-on-two-cities-wave-1-first-on-the-main-mirror-streets-on-a-shared-border-queued-owner)
 
 **2026-10-12**
 
@@ -5098,3 +5099,55 @@ japan-city template:
   file and its index key, that every index hash changed on 2026-10-13 and
   changes again with the rule build, and that the OSM id, never the row, is
   the stable key. The cut-over message at wave 1's landing is still owed.
+
+### 2026-10-13 - Place search: an extract route beside Overpass, proved on two cities; wave 1 first on the main mirror; streets on a shared border queued (owner)
+
+- **The owner's "run all open items"** started the night runner (master
+  `f549e6a8` carries its two scripts, 70 of 70 checks) from
+  `.claude/worktrees/search-rollout`, and the rules build on `search-rules`.
+  Wave 1 relayed the owner's "yes, message cleanup, wave 1 goes first": the
+  runner was stopped and restarted on `overpass.kumi.systems` only, until
+  wave 1 says its queue on `overpass-api.de` is done.
+- **Extracts as a second route, the owner: "yes build it, proof first".**
+  Wave 1 had put it to the owner as an option; Cleanup recommended building
+  it whatever the day's outage, since the place fetch has one usable mirror.
+  Geofabrik's terms were read the same day (licence-read: permitted with
+  conditions, ODbL 1.0, no credit to Geofabrik, no written usage policy; its
+  request is the smallest region, never the same file twice, no daily full
+  copies of large regions).
+- **The proof** (a scratch prototype, kept in `data/_osm_extracts/proto/`):
+  Tbilisi from `georgia-261008` matched its Overpass caches element for
+  element (13,229 street ways, 79,174 street nodes, 2,218 tagged) and its
+  index row for row, order aside (5,686). Seattle from `washington-261008`,
+  12.5 hours newer than its Overpass cache: 47,809 of 47,810 street ways
+  identical; two tag differences are edits made in the gap (checked on the
+  OSM API); two objects the extract includes are unexplained (way/428075842,
+  way/32544404, neither a recent edit); five landmark rows carry the id of a
+  same-name duplicate, because the index keeps the first of two and
+  Overpass's order is not reproduced.
+- **What matching Overpass took:** each municipality tested on its own,
+  never their union; inner rings as holes; a way in by a node strictly
+  inside or a line through the interior, never by touching the boundary; a
+  relation in by a member that is; `out center` as the middle of the
+  bounding box.
+- **The owner, as the builds ran:** try several at once if the new host
+  allows it; re-order where places are fetched from if the route proves
+  faster (to be recommended from measured timings, not yet decided); build
+  it "with proper structure/skills" so it can be relayed to other projects
+  that use Overpass; enlist DeepSeek in it. A build agent has these on
+  branch `place-extract`.
+- **Streets on a shared border, the owner: "yes add shared border streets
+  to queue where you said to".** Overpass leaves out a street that runs
+  exactly along the line between two included municipalities (60 street
+  ways in Seattle, 148th Avenue Northeast among them), since it lies in
+  neither area. Keeping them is queued for AFTER the rules landing, once
+  the extract route is in production; it changes every built regional
+  index, so it goes through the changed-row report like any rule change.
+  Until then the extract route matches Overpass and leaves them out.
+- **The search-rules landing is the priority** (the owner: "can we make the
+  search rules landing a priority to kick off motion?"): Visuals' motion
+  opener waits on it for three search scenes and five searched names
+  (Abbesses, Ligne 12, Avenida Paulista, Liberdade, Monumento a la
+  Revolución), which the rules build reports on by name.
+- `outputs/testville/`, empty and untracked since 2026-09-24, was deleted
+  on the owner's word.

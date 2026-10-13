@@ -147,3 +147,21 @@ entry first; it is the specification.
   failsafe (no built city the test used has one).
 - Mention whenever the owner asks what is next: the tram rescope stays
   parked.
+
+## Added later on 2026-10-13 (the owner's words; DECISIONS has the entry)
+
+- **Priority: the search-rules landing**, for Visuals' motion opener. When
+  the rules agent reports: read `changed_rows.md`, bring the owner every
+  changed row by class, and answer Visuals on its five searched names.
+- **The extract route** (Geofabrik `.osm.pbf`, filtered here) is proved on
+  Tbilisi and Seattle and is being built by an agent on
+  `.claude/worktrees/place-extract`; the fetch order between Overpass and
+  extracts is the owner's call after its timings. Prototype and comparison
+  tools: `data/_osm_extracts/proto/`.
+- **Queued for after the rules landing:** keep streets that run along the
+  border of two included municipalities (owner approved the queueing, not
+  yet the changed rows).
+- The night runner is on `overpass.kumi.systems` only until wave 1 says its
+  queue on `overpass-api.de` is done; then rerun with `--retry-failed`.
+- The owner is running the iPhone and Safari test of the landed features.
+- `outputs/testville/` is deleted.
