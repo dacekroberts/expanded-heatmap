@@ -142,4 +142,30 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
 PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+PLACE_DROPPED = {
+    "node/5595785628": "'Sandyhills Parish Church Manse', a manse tagged a place of worship: a minister's residence",
+    "node/6917284302": "'Kennishead Flats', tower blocks mapped as a neighbourhood node: homes",
+    "way/1385345354": "'Newton Street EV Charging Hub', a charging site's own road",
+    "way/660545306": "'Glasgow Tigers', a speedway team's name on its track (highway=raceway)",
+    "way/1328175953": "'Common Ground', a description on a private body's plot",
+    "way/1328175405": "'Common Lanscaped Area', a description on a private body's plot",
+    "way/1328175406": "'Coomon Lanscaped Area', a description on a private body's plot",
+    "way/1328173541": "'Landscaped Area', a description on a private body's plot",
+    "node/13161702802": "'New Chapel', a chapel named by a type word, one of two beside a garden of remembrance",
+    "node/13161702803": "'Old Chapel', a chapel named by a type word, one of two beside a garden of remembrance",
+    "way/387063804": "'The Entrance Facade', a description standing in for a name",
+    "node/9454970862": "'Suspension Bridge', a bare type word on a ruin",
+    "node/4769764432": "'Old Ironstone Pit', one description on eight points",
+    "node/4769764433": "'Old Ironstone Pit', one description on eight points",
+    "node/4769764442": "'Old Ironstone Pit', one description on eight points",
+    "node/4769764465": "'Old Ironstone Pit', one description on eight points",
+    "node/4769764443": "'Old Ironstone Pit', one description on eight points",
+    "node/4769764428": "'Old Ironstone Pit', one description on eight points",
+    "node/4769764430": "'Old Ironstone Pit', one description on eight points",
+    "node/4769764431": "'Old Ironstone Pit', one description on eight points",
+    "node/4769755746": "'Pit No9', a code and a type word, unregistered",
+    "node/1178965392": "'William Ewart Gladstone State', the name is cut short: a glitch, not repaired",
+    "way/221338076": "'Nelson Monument', a second drawing of the monument way/101931684, which stays",
+    "node/3686170727": "'Robroyston House (site of)', the site of a vanished house (historic=site)",
+    "way/153208350": "'Yoker Parish Church', tagged abandoned=yes: not open",
+}

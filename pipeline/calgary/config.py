@@ -255,4 +255,25 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
 PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+PLACE_DROPPED = {
+    "way/749024649": "'Lake Sundance', a residents' association's lake; its description says exclusive to residents",
+    "way/640136474": "'Cranston Residents Association', named for the residents' association whose facility it is",
+    "node/11345358876": "'Cedarglen Living Park Area', a home builder's own park area (operator)",
+    "way/1451256862": "'Tennis and Pickleball Courts', a community centre's courts described",
+    "node/12292137635": "'Old Car', a description on a ruin",
+    "node/11788105662": "'Carrington Pond FootPath', a footpath described on a park node",
+    "node/11882099334": "'Carrington Lake Greenspace', a green space described on a park node",
+    "way/171072776": "'St. Boniface School', a park carrying a school's name: a wrong object's name",
+    "way/418093972": "'City of Calgary Parks Depot', a works depot tagged a park; its note says not a public park area",
+    "way/417053234": "'City of Calgary Parks, Baker Park Depot', a works depot tagged a park",
+    "way/449759375": "'City of Calgary Parks, Northern Hills Depot', a works depot tagged a park",
+    "node/12057686213": "'Studio Back Lot', a description on a locality node",
+    "node/12056311379": "'Back Lot', a description on a locality node",
+    "node/12056311444": "'Circus', a description on a locality node beside the two above",
+    "node/6820512169": "'Archway', a bare type word on a monument node",
+    "node/4937528021": "'Sda', an abbreviation as the whole name: a glitch",
+    "way/1367619198": "'Varsity Bible Church3', a stray digit in the name: a glitch",
+    "node/10671933496": "'Liony', a park node with a stray name and nothing nearby: a glitch",
+    "way/775912343": "'Good Shepard', the name is cut short: a glitch",
+    "way/292899925": "'Avatamsaka Monastery', a monastery tagged a place of worship, not notable: a religious residence, by id",
+}

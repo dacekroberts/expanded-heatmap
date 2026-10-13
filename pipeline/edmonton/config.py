@@ -336,5 +336,29 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
 PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+PLACE_REVIEWED = {
+    "Transit Hotel": "a historic building (historic=building, Wikipedia) tagged as the building, not the business: the Panama Hotel precedent",
+}
+PLACE_DROPPED = {
+    "way/632373455": "'Pointe Uptown Courtyard', a condominium complex's courtyard, by its own description: homes",
+    "way/325217107": "'Mahamevnawa Buddhist Monastery Edmonton', a monastery tagged a place of worship, not notable: a religious residence, by id",
+    "way/325035890": "'Truc Lam Monastery', a monastery tagged a place of worship, not notable: a religious residence, by id",
+    "relation/15307341": "'Sisters of Our Lady of Charity', a religious order's house tagged a place of worship, not notable: a religious residence, by id",
+    "way/325268748": "'Hangar 11', destroyed in a fire (end_date=2024-04-22): removed",
+    "node/13505217645": "'NAIT', a closed station (disused:railway=station), still indexed",
+    "way/325267625": "'Courtyard #1', a numbered courtyard: a code and a type word, unregistered",
+    "way/1216140709": "'Courtyard #2', a numbered courtyard: a code and a type word, unregistered",
+    "way/325267631": "'Courtyard #3', a numbered courtyard: a code and a type word, unregistered",
+    "way/325267628": "'Courtyard #4', a numbered courtyard: a code and a type word, unregistered",
+    "way/325267630": "'Courtyard #5', a numbered courtyard: a code and a type word, unregistered",
+    "way/325267624": "'Courtyard #6', a numbered courtyard: a code and a type word, unregistered",
+    "way/325267629": "'Courtyard #7', a numbered courtyard: a code and a type word, unregistered",
+    "node/5262997168": "'Jagre Ridge Golf Course hole # 15 scenic park area north of pond', a sentence describing a spot on a golf course",
+    "way/544443569": "'Jagare Ridge Excercise Warm Up Park', a description of an exercise area",
+    "node/12150520067": "'Water fountain', a bare type word on a park node",
+    "way/1545297602": "'Future School Site', a description (a future school site) tagged a park",
+    "node/3636133577": "'Dog Park', a bare type word on a park node",
+    "way/725900429": "'Off Leash Dog Park', a bare type word",
+    "way/320156860": "'Ellerslie RoadBaptist Church', two words glued in the name: a glitch",
+    "way/322564914": "'Jesus Christ of Latter Day Saints 116 St', the name is cut short and carries an address: a glitch",
+}

@@ -140,5 +140,26 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
 PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+PLACE_REVIEWED = {
+    "Children's Theatre Company": "a notable theatre (amenity=theatre, Wikipedia); \"Company\" is its name",
+    "Emerson-Newton Implement Company": "the historic name of an NRHP-listed building (Wikipedia), not the present hotel's",
+}
+PLACE_DROPPED = {
+    "way/56157617": "'1010 Lofts', an NRHP-listed building that is apartments today (building:use=apartments): a home",
+    "way/60712042": "'430 Oak Grove', an NRHP-listed building that is 75 flats today, named by its address: a home",
+    "way/45581681": "'American Trio Lofts', an NRHP-listed building that is apartments today (building:use=apartments): a home",
+    "way/143297651": "'The Historic Bremer', an NRHP-listed former school that is apartments today: a home",
+    "way/88039984": "'Sigma Phi Epsilon', a fraternity's house, its members' residence",
+    "way/153793175": "'Mansion at Uptown', tagged as an events venue under the business's name; the library it was is its own row",
+    "node/11206832547": "'Minneapolis', a city-limit sign named by its inscription, the city's name",
+    "node/11206832549": "'Minneapolis', a city-limit sign named by its inscription, the city's name",
+    "node/11206832550": "'Minneapolis', a city-limit sign named by its inscription, the city's name",
+    "node/11206824503": "'Minneapolis', a city-limit sign named by its inscription, the city's name",
+    "node/11206824507": "'Minneapolis: City of Lakes', a city-limit sign named by its inscription",
+    "way/469741572": "'Theo Wirth', the name is cut short; the park is its own row (relation/19413892)",
+    "node/6641824112": "'Bassett Creek Valley', a station not yet open (opening_date=2027-06-12); the not-open test does not read that tag",
+    "node/6641824115": "'Bryn Mawr', a station not yet open (opening_date=2027-06-12); the not-open test does not read that tag",
+    "node/6641824111": "'Royalston Avenue/Farmers Market', a station not yet open (opening_date=2027-06-12); the not-open test does not read that tag",
+    "node/6652952037": "'West 21st Street', a station not yet open (opening_date=2027-06-12); the not-open test does not read that tag",
+    "node/6652942386": "'West Lake Street', a station not yet open (opening_date=2027-06-12); the not-open test does not read that tag",
+}

@@ -148,4 +148,12 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
 PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+PLACE_DROPPED = {
+    "node/5691446641": "'Whispering Firs Condominiums', a condominium complex mapped as a neighbourhood node: homes",
+    "way/1032999207": "'Sacred Heart Convent', a convent tagged a place of worship, not notable: a religious residence, by id",
+    "way/587121586": "'Tacoma Golf Center', a closed golf business indexed through historic=ruins (abandoned:leisure=golf_course)",
+    "way/32827130": "'Tacoma Fire Communications Manager', a job title as a building's name (a GNIS import artifact): a glitch, not repaired",
+    "way/1034352798": "'Церковь Христиан Адвентистов Седьмого Дня Seventh-day Adventist Church', Cyrillic and English glued in one name, neither a name:<language> value: a glitch",
+    "way/39675002": "'Tacoma Mall', a shopping mall's name on its own internal road",
+    "way/1100744270": "'Tacoma Mall', a shopping mall's name on its own internal road",
+}

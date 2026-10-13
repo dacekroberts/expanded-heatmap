@@ -178,5 +178,21 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
 PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+PLACE_REVIEWED = {
+    "Economy Parking Access Road": "a public tertiary road at the city-owned airport, no private access",
+}
+PLACE_DROPPED = {
+    "way/620966861": "'Somberbrook HOA', a homeowners' association's residents' facilities tagged a park",
+    "relation/18741305": "'Convent of Christ the King', a convent tagged a place of worship, not notable: a religious residence, by id",
+    "node/358087457": "'Merry Moments Preschool', a preschool tagged a place of worship: a business",
+    "way/528648886": "'Urban Christian Academy', a school tagged a place of worship: a business",
+    "way/1526646550": "'Children's Center Campus Sensory Garden', a customers-only garden of a private clinic and school campus (access=customers)",
+    "relation/8604575": "'Zona Rosa Town Square', a shopping centre's own green",
+    "way/1535254921": "'Bier Garten', a venue's outdoor seating area indexed as a street",
+    "way/498630395": "'Martin Temple Church of God', tagged demolished (demolished:building=yes): removed",
+    "way/232491199": "'McConahay_ Building', a stray underscore in the name: a glitch, not repaired",
+    "node/11873067269": "'Trail of Heros Memorial', a misspelt node duplicate of the park way/565937763, which stays",
+    "node/14090104405": "'Christian Science', the denomination's name alone on a node: a description",
+    "way/1150548105": "'North Courtyard', a position word and a type word at the airport terminal: a description",
+    "node/11873001864": "'Shoal Creek Round-about', a roundabout mapped as a park node: a description",
+}

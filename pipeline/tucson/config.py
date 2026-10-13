@@ -187,4 +187,13 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
 PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+PLACE_DROPPED = {
+    "way/34197140": "'Pharmacy', a campus building labelled by a bare type word; its wikidata is the college's",
+    "way/231522335": "'Worship Center', a bare type word on a building of the church beside it",
+    "way/491267097": "'Sculpture Garden', a bare type word on a campus green",
+    "way/1024676831": "'Carlos Y. Velasco House', a historic building named as a person's house, with no sign of visiting: a home",
+    "way/34762263": "'Charles O. Brown House', a historic building named as a person's house, with no sign of visiting: a home",
+    "way/463119416": "'Benedictine Sisters of Perpetual Adoration', a monastery tagged a place of worship and named for its order, not notable: a religious residence, by id",
+    "node/989215892": "'Pascua Yaqui Village', a church carrying the neighbourhood's name; the neighbourhood is its own row: a wrong object's name",
+    "way/866398527": "'Pascua Yaqui Village', a church carrying the neighbourhood's name; the neighbourhood is its own row: a wrong object's name",
+}

@@ -191,5 +191,37 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
 PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+PLACE_REVIEWED = {
+    "Stony Ridge Hotel": "the ruin of a former inn on the moor (historic=ruins), no business tag",
+    "Store Street": "an ordinary residential street",
+}
+PLACE_DROPPED = {
+    "node/304384666": "'The Methodist Church Birley Carr', no longer a church; its description says now apartments",
+    "way/111377893": "'Intake Methodist Church', its note says it was this church: removed",
+    "node/257665636": "'Shirefreen UJnited Reformed Church', a garbled node duplicate of way/146060385, which stays",
+    "way/534975018": "'Sheep fold', a bare type word on a ruin",
+    "way/23558502": "'WW1 Firing Range', a description, no name",
+    "node/7342668317": "'WWII Bomb Crater', a description, no name",
+    "way/793510476": "'WW2 Tank training target winch.', a description, no name",
+    "way/794550759": "'WW2 Tank training target winch.', a description, no name",
+    "way/107085768": "'Mill Race', a bare type word on a culverted watercourse",
+    "way/107038765": "'Mill Race', a bare type word on a culverted watercourse",
+    "way/167086055": "'Mill Race', a bare type word on a culverted watercourse",
+    "way/987794026": "'Mill Race', a bare type word on a culverted watercourse",
+    "way/175726549": "'Parish Centre', a bare type word on a building beside its church",
+    "node/1819023474": "'Broadfield Business Park', a business park tagged a locality",
+    "way/394755113": "'Sheffield Tigers Speedway', a speedway team's track indexed as a street (highway=raceway)",
+    "way/1251515880": "'Heeley Retail Park', a retail park's own road",
+    "way/32146892": "'Heeley Retail Park', a retail park's own road",
+    "way/819927110": "'Heeley Retail Park', a retail park's own road",
+    "way/32216819": "'Heeley Retail Park', a retail park's own road",
+    "way/274667024": "'Heeley Retail Park', a retail park's own road",
+    "way/25881747": "'Hydra Business Park', a business park's own road",
+    "way/24616480": "'Newton Business Centre', a business centre's own road",
+    "way/24616535": "'Rotunda Business Centre', a business centre's own road",
+    "way/28711277": "'Ernest Copley House', a housing block's name on its own drive",
+    "way/24202284": "'Westnall House', a housing block's name on its own drive",
+    "way/22338566": "'Crabtree Grange Sheltered', sheltered housing's name on its own drive",
+    "way/33719780": "'Brunswick Gardens Village', a retirement village's own road",
+    "way/33758915": "'Brunswick Gardens Village', a retirement village's own road",
+}

@@ -181,4 +181,19 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
 PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+PLACE_DROPPED = {
+    "way/244468048": "'Geological walk', a description standing in for a name",
+    "node/2400164517": "'Moat (site of)', a description (\"site of\") standing in for a name",
+    "relation/17280686": "'WW2 Bunkers', a description standing in for a name",
+    "node/1349348375": "'Gatepier at South Lodge', a description of a gate pier",
+    "node/4121180770": "'Muslim Prayer Room', a prayer room: a bare type",
+    "node/13524967129": "'NTU Prayer Room', a prayer room: a bare type",
+    "node/4715712714": "'QMC Prayer Room Level 3', a prayer room: a bare type",
+    "node/13524956164": "'UoN Prayer Room Portland Building', a prayer room: a bare type",
+    "way/1460685283": "'Main Chapel', a building part named by a type word",
+    "way/1460685281": "'West Chapel', a building part named by a type word",
+    "node/3310059291": "'NTU Main Entrance', an entrance described, indexed as a junction",
+    "way/1100953705": "'Judges Retiring Room', a room's name on a museum building: a wrong object's name",
+    "node/605141968": "'Nottingham Midland Station', a plaque carrying the station's name: a wrong object's name",
+    "way/193747067": "'Stanford Hall Rehabilitation Estate', not open to the public",
+}

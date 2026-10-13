@@ -163,4 +163,30 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
 PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+PLACE_DROPPED = {
+    "way/454542979": "'Westfield St James Quarter', a shopping mall mapped as a quarter (landuse=retail)",
+    "relation/11913072": "'Castlebrae Business Centre', a listed former school under the name of the business centre in it; no article, so no Panama Hotel precedent",
+    "node/6285079351": "'Home Farm Cottages', a row of cottages mapped as a hamlet: homes",
+    "node/27236546": "'OPD1', a bare code on a locality node: a description",
+    "node/27236545": "'OPD2', a bare code on a locality node: a description",
+    "node/27235585": "'OPD5', a bare code on a locality node: a description",
+    "node/27235589": "'OPD6', a bare code on a locality node: a description",
+    "way/1377428318": "'Gasholder 1', a code and a type word, unregistered",
+    "way/109243252": "'Old Norton Quarry (filled)', a status note in the name: a description",
+    "node/13799890500": "'Former Edmonstone Policies Park', a description (\"Former ...\") on a locality node",
+    "node/13138138611": "'Research Park', a bare type word as a neighbourhood",
+    "way/715762570": "'Parade Ground', a bare type word; the mapper's note doubts the tag",
+    "way/220274539": "'Centre Court', a court's label, not a name",
+    "node/4768575847": "'Stone Arch', a description on a monument node",
+    "node/360303994": "'Cup and Ring Marked Rocks', a description of the site's type",
+    "way/536980836": "'Dovecot', a bare type word",
+    "way/30618550": "'Kiln', a bare type word",
+    "node/4353594765": "'Mort Safe', a bare type word",
+    "node/512529477": "'Chaplaincy', a bare type word",
+    "node/2317496550": "'The Chaplaincy', a bare type word",
+    "way/118329795": "'The Chaplaincy', a bare type word",
+    "node/11181555589": "'Muslim Prayer Room', a bare type word",
+    "node/13564998178": "'The Jellicoe Express -- 1917 - 2017', stray dashes and dates in the name, and the wikidata is the railway company's: a glitch",
+    "node/13920130909": "'Juniper Green', a monument carrying the village's name; the suburb is its own row: a wrong object's name",
+    "way/1092353112": "'Fairafar Fish pass', a fish pass mapped as a river",
+}

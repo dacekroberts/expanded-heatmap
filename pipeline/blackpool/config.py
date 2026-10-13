@@ -166,5 +166,9 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
 PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+PLACE_REVIEWED = {
+    "Cliffs Hotel": "a Blackpool Tramway stop named for the building beside it; no hotel object is indexed",
+}
+PLACE_DROPPED = {
+    "way/988369957": "'Hackensall Hall', a manor house (historic=manor, building=farm, Grade II) with no sign of visiting: a home, whatever its article",
+}

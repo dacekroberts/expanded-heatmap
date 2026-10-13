@@ -281,5 +281,24 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
 PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+PLACE_REVIEWED = {
+    "Ancient and Honorable Artillery Company Museum": "a museum (tourism=museum, Wikipedia); the Company is a militia company",
+    "Massachusetts College of Pharmacy and Health Science": "a university (amenity=college, Wikipedia)",
+}
+PLACE_DROPPED = {
+    "relation/17935032": "'Smith Court Residences', private residences, named as such, whatever their wikidata: homes",
+    "way/240390123": "'Modern Theatre Residence Hall', a university residence hall: a home",
+    "node/358284346": "'Immaculate Conception-Salesian Rectory', a rectory tagged a place of worship, not notable: a religious residence, by id",
+    "node/358277212": "'Saint Margarets Convent', a convent tagged a place of worship, not notable: a religious residence, by id",
+    "node/367779308": "'Saint Theresa's Convent', a convent tagged a place of worship, not notable: a religious residence, by id",
+    "node/7745736227": "'Boston Duck Tours', a tour operator's record at one departure point; the wikidata is the company's",
+    "way/29941243": "'Hoosac Stores', tagged demolished=yes: removed",
+    "way/702789227": "'Chinatown Archaeological Site', a temporary 2019 dig, over by its own description",
+    "node/7629903523": "'Adams Square', a square that no longer exists (demolished:place=square)",
+    "way/1316241908": "'Proposed Dedham Heritage Rail Trail', a proposed trail, not built; the trail is its own row",
+    "way/1112835157": "'Upper Plaza', a position word and a type word: a description",
+    "node/12660081324": "'Quad', a bare type word",
+    "way/823307806": "'Sitting Grove', a description standing in for a name",
+    "way/29791110": "'Supply', a use word as the whole name, kept only by its district's register number",
+    "node/13809760118": "'Hyde Park Library, Cleary Square', a library and its address as a park's name",
+}

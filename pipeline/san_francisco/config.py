@@ -310,4 +310,18 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
 PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+PLACE_DROPPED = {
+    "way/260181659": "'Dashiell Hammett Place', an apartment building (rooms=22) named for a former resident: a home",
+    "way/276641708": "'Earthquake Refugee Cottage.  San Francisco Landmark No. 171', two names glued in one, and a residence by tag (building:use=residential)",
+    "way/289372464": "a place of worship with a person's own name glued onto its name: a glitch, not repaired",
+    "way/289665929": "'Luke Bt. St. Church', the words of the name are transposed: a glitch",
+    "way/32776568": "'Boiler rooms', a description on a ruin",
+    "way/1214385020": "'moscone dog play area', a lower-case description",
+    "relation/6260731": "'Baker Beach (Clothing-Optional Area)', a labelled part of the beach, admitted on its parent's wikidata",
+    "way/25371892": "'United States Mint', a fenced outline with access=no; the Mint is its own row (way/115944818)",
+    "way/260524896": "'Gold Mountain Monastery', a monastery tagged a place of worship, not notable: a religious residence, by id",
+    "node/358805109": "'Paradise Monastery of San Francisco', a monastery tagged a place of worship, not notable: a religious residence, by id",
+    "node/4969302973": "'Tze Zhan Monastery', a monastery tagged a place of worship, not notable: a religious residence, by id",
+    "way/260152155": "'Russian Orthodox Convent of Our Lady of Vladimir', a convent tagged a place of worship, not notable: a religious residence, by id",
+    "way/289952218": "'Saint Elizabeth Rectory Chapel', a rectory chapel, not notable: a religious residence, by id",
+}
