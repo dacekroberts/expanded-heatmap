@@ -2,6 +2,72 @@
 
 Newest first. Cleanup folds these into `DECISIONS.md` at review time.
 
+### 2026-10-13 - Mexico City (Regional): the cable cars built on the branch; colors and names (owner); Tlalnepantla open
+
+- **The owner, on the Cablebús colors: "darker project shades sounds good,
+  feel free to use other colors if we run into color similarity
+  conflicts"**, to "three drawn lines, the system blue on Línea 1 and two
+  darker project shades on the others, and the page saying so", against one
+  legend entry for all three. **On the Mexicable names: "labels sound
+  good"**, to "Mexicable Línea 1" and "Mexicable Línea 2" in a red and a
+  green chosen by this project, against the operator's Línea Roja and Línea
+  Verde.
+- **Colors (branch, inside those calls; `pipeline/mexico_city/config.py`,
+  `CABLE_COLOURS`):** Cablebús Línea 1 #4EC3E0 (es.wikipedia's system blue),
+  Línea 2 #1f96b3 (16.4 from Línea 1), Línea 3 #135c6d (23.9 from Línea 2);
+  the nearest Metro line to any of the three is Línea 4 at 23.5, the nearest
+  pin Retail at 44.4. Mexicable Línea 1 #d85868, the color nearest
+  Wikipedia's reds that clears every pin by 20 and every line by 18 (Food
+  service 20.8, Línea 1 27.9, Línea 6 37.7). Mexicable Línea 2 #79a133,
+  es.wikipedia's map green #95C344 darkened 10% for 3:1 on a white page
+  (Línea 12 25.5, Línea 8 28.4, Personal services 38.5).
+- **Built (commit bff95ea7), nothing on master's path touched.** Steps write
+  `data/mexico_city/processed/regional/cable/` until landing; the landing
+  commit removes the `cable` part of `DATA_PROCESSED` and re-runs steps 1 to
+  3. Step 2 did not change, and its output was copied into that folder.
+- **Stations: 180 to 204 in scope.** 33 cable station points give 28 new
+  stations, 24 in scope and 4 outside. Gate 3 runs per cable line and
+  matches: 6, 7, 6, 7, 7. Ecatepec goes from 5 stations to 13
+  (`STATIONS_PER_MUNICIPIO`). Storefronts inside a ring: 149,980 to 172,362
+  of 407,628.
+- **Same-named interchanges attach, and no existing station moves**
+  (asserted in step 1, and compared row by row: 0 of 180 moved). Indios
+  Verdes (345 m at the farthest cable node), Constitución de 1917 (171 m)
+  and Santa Marta (150 m) keep the Metro station's point and get no second
+  station. Mexicable's two Hank González nodes, 30 m apart, are one station.
+  Los Pinos / Constituyentes (Cablebús Línea 3) stays its own station 154 m
+  from the Metro's Constituyentes: a different name, as Barcelona's Sant
+  Gervasi and Plaça Molina are.
+- **A name two places carry:** Mexicable's Periférico is 26 km from the Tren
+  Ligero's Periférico; the attach check raised on it, and the Mexicable one
+  is shown as "Periférico (Mexicable)".
+- **Cablebús Línea 3's stations are named in config by OSM id** (three ways,
+  three relations), since its relation holds no station member; its count
+  of six is from es.wikipedia only. Re-measure if the relation gains
+  members.
+- **Shared code:** `map_common.load_osm_line_shapes` takes a relation id in
+  place of a `ref`, because the five relations' refs are "1", "2", "3", "1",
+  "2". No other map's output changes.
+- **Checked:** line identity, no-fetch, em dashes, scope disclosure,
+  provenance (names the city OK), map markup (237 maps, 0 problems); the 18
+  labels by the label check's own tests at 1024 and 375 wide, 0 problems.
+  Not yet run: the drift check, the privacy check (step 2 unchanged), the
+  full `check_all.py`.
+- **Open, the owner's: Tlalnepantla de Baz.** Mexicable Línea 2's four
+  middle stations stand in its detached eastern part. Measured from the
+  cached register: Tlalnepantla has 19,483 storefronts under this map's
+  filter, 5,260 of them in the eastern part and 2,940 within 0.6 miles of
+  the four stations. Precedent for adding it: Naucalpan, kept for one
+  station (22,216 storefronts). Recommended: add it, in the same build. As
+  built, the four are in `outputs/mexico_city/excluded_stations.csv` and
+  the line is drawn through.
+- **Owed before landing:** the page's bullets for the cable cars (a draft,
+  the owner's to approve), `docs/excluded_categories.md` (it still says
+  Mexicable is not drawn), `docs/map_inconsistencies.md` (the table row and
+  item 12), `docs/data_sources/mexico.md`, the brief's line 24, the map
+  title and `system_name` (they still read "Metro CDMX and Tren Ligero"),
+  the search index rebuilt on the new stations (Cleanup).
+
 ### 2026-10-13 - Mexico City (Regional): Cablebus and Mexicable both drawn (owner)
 
 - **The owner: "1. draw both"**, to "Draw both: one rule for cable cars on

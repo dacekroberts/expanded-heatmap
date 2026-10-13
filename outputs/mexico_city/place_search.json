@@ -46,12 +46,12 @@
     {
       "osm": "relation/1376330",
       "name": "Mexico City",
-      "stations": 169
+      "stations": 185
     },
     {
       "osm": "relation/5605754",
       "name": "Ecatepec de Morelos",
-      "stations": 5
+      "stations": 13
     },
     {
       "osm": "relation/5606086",
