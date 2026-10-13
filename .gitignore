@@ -28,7 +28,7 @@ data/_*/
 # (scripts/heavy_job.py): machine state, never committed.
 data/_heavy_jobs*
 # The place fetch's machine-wide lock (pipeline/place_index_fetch.py).
-data/_place_fetch.lock
+data/_place_fetch*
 
 # outputs/<city>/ IS committed - the deployed app only ever reads from
 # there, per the pipeline/app split.

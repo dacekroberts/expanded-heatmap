@@ -104,7 +104,7 @@ area{area}->.a;
   rel(pivot.a);
   way(pivot.a);
 );
-out tags geom;
+out geom;
 """
 
 

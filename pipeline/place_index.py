@@ -293,9 +293,12 @@ def build_city(config):
     munis = municipalities(json.loads(ocache.read_text(encoding="utf-8"))["elements"])
     if not munis:
         sys.exit(f"{ocache}: no boundary in it; config.PLACE_AREA names none")
-    index["area"] = outline(munis, config.CRS_PROJECTED)
     stations = map_stations(config)
     counts = stations_per_municipality(munis, stations) if stations is not None else {}
+    # The municipality with the most of the map's stations first, so the map
+    # can say "Seattle and 10 more"; by name where stations are not counted.
+    munis.sort(key=lambda m: (-counts.get(m[0], 0), m[1]))
+    index["area"] = outline(munis, config.CRS_PROJECTED)
     kept = getattr(config, "PLACE_AREA_KEPT", {})
     stale = sorted(set(kept) - {m[0] for m in munis})
     if stale:

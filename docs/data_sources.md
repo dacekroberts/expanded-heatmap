@@ -392,6 +392,17 @@ sample batches after it); the other maps follow in the rollout's waves.<!-- /int
   "Download this index" to the file (§4.6). This is the OSM Attribution
   Guideline's "© OpenStreetMap contributors" form, chosen over §4.3(a)'s
   longer example wording to save space (owner, 2026-10-07).
+  **Moved 2026-10-12 (owner, on a local render of both placements): the
+  notice sits in the map's bottom attribution line**, beside the basemap's
+  "© OpenStreetMap contributors" (linked to the copyright page), as "Search
+  index ODbL (download, intersections)": "ODbL" linked to the licence (§4.3),
+  "download" to the index and "intersections" to the second file (§4.6). It
+  is added when the search box first opens and stays. The box's own line now
+  reads "Search covers <municipality> and N more, outlined on the map." The
+  bottom line wraps to two lines on a phone (28 px at a 343 px map): run
+  `scripts/check_map_attribution.js` at more than one height after any
+  change to it. `PLACE_CREDIT_BELOW` in `pipeline/map_common.py` puts the
+  notice back in the box; never drop both.
 - **Access (§4.6):** each city's database is two files, both downloadable
   free of charge from the site: the index (`app/static/places/<city>.json`,
   which the search box links) and its street-pair intersections

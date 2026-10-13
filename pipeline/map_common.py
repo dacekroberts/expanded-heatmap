@@ -17,7 +17,6 @@ entry (build_legend). render_heatmap does both for every line passed in.
 import html
 import json
 import math
-import os
 import re
 import zipfile
 from pathlib import Path
@@ -2380,13 +2379,14 @@ _PLACE_SEARCH_TEMPLATE = r"""
         areaLayer = L.polygon(polys, {fill: false, weight: 2, dashArray: "6 5", opacity: 0.9,
                                       interactive: false, className: "hm-search-area"}).addTo(map);
     }
-    // "Seattle", "Seattle and Bellevue", "Seattle and 10 more".
+    // "Seattle", "Seattle and Bellevue", "Seattle and 10 more": the index
+    // lists the municipality with the most of the map's stations first.
     function areaName() {
         var n = (area && area.names || []).filter(Boolean);
         if (!n.length) return "";
         if (n.length === 1) return n[0];
         if (n.length === 2) return n[0] + " and " + n[1];
-        return (area.lead || n[0]) + " and " + (n.length - 1) + " more";
+        return n[0] + " and " + (n.length - 1) + " more";
     }
 
     function norm(s) {
@@ -2800,7 +2800,10 @@ _PLACE_SEARCH_TEMPLATE = r"""
             list.classList.add("has");
         }
         var creditBelow = false;
-        function credit() {
+        // `found` is false for a search that found nothing: the note above
+        // it already says where search stops, so the area line is left out
+        // (owner, 2026-10-12).
+        function credit(found) {
             var c = document.createElement("div");
             c.className = "hm-search-credit";
             if (CREDIT_BELOW && map.attributionControl) {
@@ -2812,7 +2815,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
                         '" target="_blank" rel="noopener" download>download</a>' +
                         (crossURL ? ', <a href="' + abs(crossURL) + '" target="_blank" rel="noopener" download>intersections</a>' : '') + ')');
                 }
-                if (!areaName()) return;
+                if (found === false || !areaName()) return;
                 c.textContent = "Search covers " + areaName() + ", outlined on the map.";
                 list.appendChild(c);
                 return;
@@ -2875,7 +2878,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
             if (!data) { note("Loading places…"); return; }
             // An error value typed in ("#N/A", "#REF!", "!ERROR!") finds
             // nothing, as no index holds one (place_index.junk_name).
-            if (JUNK_Q.test(input.value)) { note("No street, station or place by that name"); credit(); return; }
+            if (JUNK_Q.test(input.value)) { note("No street, station or place by that name"); credit(false); return; }
             shown = gated ? early : search(input.value);
             if (!gated && needCrossings(input.value, shown)) {
                 // Shown again when the intersections arrive, or as it stands
@@ -2887,7 +2890,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
                 note("No street, station or place by that name");
                 // The owner's wording (2026-10-12).
                 if (area) note("Search covers the outlined area only. Zoom out to see it.");
-                credit();
+                credit(false);
                 return;
             }
             var nOwn = shown.filter(isOwn).length, nPlaces = shown.length - nOwn;
@@ -3131,11 +3134,12 @@ _PLACE_SEARCH_TEMPLATE = r"""
 })();
 </script>
 """
-# Where the search data's ODbL notice and download offer sit: False, in the
-# search box (as landed 2026-10-12); True, in the map's bottom attribution
-# line, the box's line then naming the searched area. The owner's to choose
-# on a local render of both (2026-10-12); a required notice either way.
-PLACE_CREDIT_BELOW = os.environ.get("HEATMAP_CREDIT_BELOW") == "1"
+# Where the search data's ODbL notice and download offer sit: True, in the
+# map's bottom attribution line, the box's line then naming the searched
+# area (owner, 2026-10-12, on a local render of both: "B, wording approved").
+# False puts them back in the search box, as first landed. A required notice
+# either way (ODbL 4.3 and the 4.6 offer): never drop both.
+PLACE_CREDIT_BELOW = True
 PLACE_SEARCH_SCRIPT = (
     _PLACE_SEARCH_TEMPLATE
     .replace("@@FONT_STACK@@", FONT_VAR)
