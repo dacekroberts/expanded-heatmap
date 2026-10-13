@@ -1,5 +1,6 @@
 [
- {"label": "private residential streets are dropped", "old": "\"private_residential\" if not g[5] else", "new": "\"private_residential\" if False else"},
+ {"label": "private residential streets are dropped", "old": "\"private_residential\" if private else", "new": "\"private_residential\" if False else"},
+ {"label": "a named private street stays only where the city's switch is on", "old": "(described or not keep_named_private)", "new": "(described)"},
  {"label": "a way's own article keeps a private street", "old": "and not way_article and not _private_street(names, local))", "new": "and not _private_street(names, local))"},
  {"label": "a raceway is no street", "old": "NOT_STREET_HIGHWAYS = {\"busway\", \"raceway\"}", "new": "NOT_STREET_HIGHWAYS = {\"busway\"}"},
  {"label": "a busway is no street", "old": "\"busway_raceway\" if not g[6]", "new": "\"busway_raceway\" if False"},

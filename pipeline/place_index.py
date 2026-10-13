@@ -506,6 +506,7 @@ def build_city(config):
                           also=tuple(getattr(config, "PLACE_LANGUAGES_ALSO", ())),
                           station_strip=tuple(getattr(config, "PLACE_STATION_STRIP", ())),
                           articles=read_wikidata_articles(wikidata_cache(config)),
+                          keep_named_private=bool(getattr(config, "PLACE_KEEP_NAMED_PRIVATE_STREETS", False)),
                           keep_interchanges=bool(getattr(config, "PLACE_KEEP_INTERCHANGES", False)))
     if rebuilt and report.get("street_way_kept_rebuilt", 0) == 0 or any(
             not any((e.get("tags") or {}).get("highway") == "construction"
@@ -2249,6 +2250,13 @@ NOT_STREET_HIGHWAYS = {"busway", "raceway"}
 # stands (52 rows) and so does a way's own article.
 # living_street since the third list (2026-10-13): seven Berlin streets
 # tagged access=private on it.
+# PER CITY, A NAMED PRIVATE STREET STAYS (config.PLACE_KEEP_NAMED_PRIVATE_STREETS;
+# owner, 2026-10-13: "named keep, codenamed drop", then "yes" to a per-city
+# setting): the rule took 2,391 named streets out of Guadalajara and 124 out
+# of Monterrey, the grids of gated neighborhoods, where the tag marks a gate
+# and not a driveway. With the switch on, a private street goes only when
+# its name is a code beside a type word (street_description). Off everywhere
+# else: the rule stands for the estate roads it was written for.
 PRIVATE_STREET_HIGHWAYS = {"residential", "unclassified", "living_street"}
 # PLACE KINDS THE INDEX DOES NOT LIST, kept on an article of their own
 # (owner, 2026-10-13): an island or an islet as a landmark, a district as a
@@ -2763,7 +2771,8 @@ def _point(el):
 
 
 def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=(), rebuilt=(),
-          closed_for_works=(), way_words=(), kept=(), keep_interchanges=False, map_stations=(), also=(),
+          closed_for_works=(), way_words=(), kept=(), keep_interchanges=False, keep_named_private=False,
+          map_stations=(), also=(),
           station_strip=(), articles=None, log=None):
     """Return (index dict, report dict) from one place cache's elements.
     `local`: the city's local language codes (config.PLACE_LANGUAGES).
@@ -3091,7 +3100,8 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         plain = _plain(name)
         for g in list(groups):
             round_ = not g[10]
-            cls = ("private_residential" if not g[5] else "customers_only" if not g[11] and name.split()[-1:] and name.split()[-1] in CUSTOMER_ROAD_ENDS
+            private = not g[5] and (described or not keep_named_private)
+            cls = ("private_residential" if private else "customers_only" if not g[11] and name.split()[-1:] and name.split()[-1] in CUSTOMER_ROAD_ENDS
                    else "busway_raceway" if not g[6]
                    else "description" if described and not g[7]
                    else "description" if described in ANY_WAY_DESCRIPTIONS
@@ -4415,9 +4425,10 @@ def _selftest():
                           articles={"Q920": ["enwiki"], "Q921": ["enwiki"], "Q922": [], "Q923": ["frwiki"],
                                     "Q924": None},
                           closed_for_works={f"node/{works}", f"node/{gone_id}"})
-    worded, _ = build(els, city="Testville", retrieved="2026-10-10", local=("en",),
+    worded, worded_report = build(els, city="Testville", retrieved="2026-10-10", local=("en",),
                       closed_for_works={f"node/{works}", f"node/{gone_id}"}, way_words=("place",),
                       kept={f"node/{dam}", f"node/{green}", f"way/{colonia}"}, keep_interchanges=True,
+                      keep_named_private=True,
                       station_strip=(" Tram",))
     worded_rows = {(KINDS[r[0]], r[3]) for r in worded["rows"]}
     dropped_rows = {(KINDS[r[0]], r[3]) for r in build(
@@ -4704,6 +4715,8 @@ def _selftest():
         ("the second list's bare type words are no names",
          not any(n in ("Masjid", "Tot Lot") for _, n in rows)),
         ("the report counts the private residential streets", report.get("street_dropped_private_residential") == 4),
+        ("with a city's switch on, a named private street stays (none of the four fixtures is code-named)",
+         worded_report.get("street_dropped_private_residential", 0) == 0),
         ("the log names a rule for a dropped street",
          any(x["class"] == "street_busway_raceway" and x["name"] == "Bus Road" for x in log)),
         ("own_article: a section is not the object's", own_article({"wikipedia": "en:A#B"}, ["A"])[0] == "not"),
