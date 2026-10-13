@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**130 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**131 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -67,6 +67,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Place search: the fourth pass re-measured with the 19 Wikidata caches read; an article under the object's own name is its own](#2026-10-13---place-search-the-fourth-pass-re-measured-with-the-19-wikidata-caches-read-an-article-under-the-objects-own-name-is-its-own)
 - [Place search: 16 known works kept by id against the article rule; a DeepSeek first read for the rollout's cities (owner)](#2026-10-13---place-search-16-known-works-kept-by-id-against-the-article-rule-a-deepseek-first-read-for-the-rollouts-cities-owner)
 - [Place search: a named private street stays in Guadalajara and Monterrey, by a per-city switch (owner)](#2026-10-13---place-search-a-named-private-street-stays-in-guadalajara-and-monterrey-by-a-per-city-switch-owner)
+- [Place search: Mexico City keeps its named private streets too (owner)](#2026-10-13---place-search-mexico-city-keeps-its-named-private-streets-too-owner)
 
 **2026-10-12**
 
@@ -6216,3 +6217,17 @@ japan-city template:
   all abbreviations and two-language forms the matcher bridges, and go to
   the browser check owed before the big review; four small Berlin and
   Bremen street classes (78 streets) stay by-id drops.
+
+### 2026-10-13 - Place search: Mexico City keeps its named private streets too (owner)
+
+- **Measured on an in-memory build:** the private-residential rule takes
+  2,020 streets out of Mexico City, 1,946 distinct names: Calle 561, Cerrada
+  506, Privada 504. A sample reads as the named streets of gated
+  neighborhoods (Calle Guaymas, Bosques de Costa Rica, Paseo de las
+  Jacarandas); 267 names hold a number; 489 still have a row elsewhere in
+  the city under the same name.
+- **Recommended, and the owner: "yes".** `PLACE_KEEP_NAMED_PRIVATE_STREETS`
+  is set for Mexico City, as for Guadalajara and Monterrey. It reverses
+  "drop as ruled" of this date for this one city; the rule stands in the
+  other live cities (London 1,088).
+- **Measured after:** 61,130 rows to 63,146 in memory; one private street still goes ("Circuito", a bare type word). Numbered names such as "Calle 20" stay: they are street names there, not codes beside a type word.
