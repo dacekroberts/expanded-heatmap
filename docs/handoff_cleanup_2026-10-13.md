@@ -170,3 +170,12 @@ entry first; it is the specification.
   rules landing, beside the shared-border streets; order between the two
   not decided. Re-check `docs/tram_rescope_estimate.md` and
   `docs/tram_rescope_specs.md` before proposing a first batch.
+- **When the tram rescope lands, mark its cities for review downstream**
+  (the owner, 2026-10-13: "we should make sure those cities are marked for
+  review in analytics/visuals when it is time"). A rescoped city gains
+  stations and rings, so its station counts, ring shares and any analysis
+  or card built on them are stale: name every rescoped city, with what
+  changed, in the downstream note to Analytics and Visuals at that landing
+  (`scripts/downstream_changes.py`; `docs/session_roles.md`). Candidates
+  today: Montreal, Rome, Madrid, San Francisco, Paris, then Barcelona and
+  Mexico City.
