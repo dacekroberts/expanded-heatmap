@@ -476,7 +476,7 @@ CITIES = [
         "rail_extra": "Trams",
         "record_kind": "National register",
         "categories": "All three",
-        "blurb": "Metro CDMX (Líneas 1–9, A, B and 12) and the STE Tren Ligero, with four State of México municipios",
+        "blurb": "Metro CDMX (Líneas 1–9, A, B and 12), the STE Tren Ligero and the Cablebús and Mexicable cable cars, with five State of México municipios",
         "region": "Mexico",
         "country": "Mexico",
         # Outside the United States frame, like every Canadian city - see

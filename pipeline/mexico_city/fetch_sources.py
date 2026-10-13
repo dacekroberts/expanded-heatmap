@@ -4,7 +4,7 @@
     python pipeline/mexico_city/fetch_sources.py --regional [--skip-osm]
 
 `--regional` (implied when config.REGIONAL is on) also fetches what Mexico
-City (Regional) adds: DENUE entidad 15 in its two parts and the four State of
+City (Regional) adds: DENUE entidad 15 in its two parts and the five State of
 México municipio boundaries. `--skip-osm` leaves every Overpass query unasked
 (one query in flight per session; CLAUDE.md).
 
@@ -98,7 +98,7 @@ out geom;
 """
 
 
-# Mexico City (Regional): the four municipios by INEGI's code, Monterrey's
+# Mexico City (Regional): the five municipios by INEGI's code, Monterrey's
 # query (pipeline/monterrey/fetch_sources.py). `INEGI:MUNID` is DENUE's
 # cve_ent + cve_mun, so boundaries and register join on one key. Bounded by
 # the bbox, osm-rail's rule (an unbounded name search once found Guadalajara,

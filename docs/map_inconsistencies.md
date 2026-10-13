@@ -214,7 +214,7 @@ register covers them all, or because the rail network only makes sense that way.
   (Blackpool and Wyre), Seattle (Regional) (11 cities, five
   publishers, each in the places it covers), Geneva (Regional) (the 12 Swiss
   communes its trams serve), Anyang (Regional) (with Gunpo and Uiwang), Mexico City
-  (Regional) (with four State of México municipios), Copenhagen (Regional) (with
+  (Regional) (with five State of México municipios), Copenhagen (Regional) (with
   Frederiksberg and the eight Letbane municipalities).
 - **Cover more than one municipality but are not labelled:** Montréal (the
   agglomeration: 19 boroughs and 15 related municipalities), Dublin (four local
@@ -564,7 +564,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Toronto | Subway 1, 2, 4 + LRT 5, 6 | 18 streetcar routes; GO | TTC GTFS (City CKAN) | City | 2 / 0 |
 | Ottawa | O-Train Lines 1, 2 and 4 (light rail) | Buses, the Transitway | OpenStreetMap route relations (OC Transpo's GTFS licence unread); gate 3 exact against Wikipedia | City (its own wards) | 0 / 0 |
 | **Mexico** | | | | | |
-| Mexico City (Regional) | Metro, 12 lines + Tren Ligero | not stated (Tren Suburbano, Cablebús) | OpenStreetMap | CDMX and four State of México municipios | 0 / 0 |
+| Mexico City (Regional) | Metro, 12 lines + Tren Ligero + Cablebús Líneas 1-3 + Mexicable Líneas 1-2 | Tren Suburbano, El Insurgente (commuter spacing); Mexicable Línea 3 and Cablebús Líneas 4-6 (not open) | OpenStreetMap | CDMX and five State of México municipios | 0 / 0 |
 | Guadalajara (Regional) | Tren Ligero L1–L4 | — | OpenStreetMap (only GTFS expired 2023, lacks L4) | 4 municipios; Tonalá out | no CSV (all in scope) / 0 |
 | Monterrey (Regional) | Metrorrey L1–L3 | Líneas 4 and 6 (monorail, under construction) | OpenStreetMap (no agency data published); L3 in the operator's red | 4 municipios, by INEGI code | no CSV (all in scope) / 0 |
 | **Spain** | | | | | |
@@ -1690,7 +1690,8 @@ wording lands at review time.
     not a reason to exclude. Mexico City's Cablebús and Tren Suburbano, and
     Montréal's REM and exo, are not mentioned in any file read. Unknown whether they
     were considered. *(2026-09-27: the REM is now drawn; exo, Cablebús and the
-    Tren Suburbano remain open.)*
+    Tren Suburbano remain open. 2026-10-13: Cablebús and Mexicable are drawn, the
+    owner's call; the Tren Suburbano stays out on commuter spacing.)*
 13. **Undisclosed floors in the first US cities: settled 2026-10-04 (owner).**
     Re-measured: Los Angeles 8.8% of City rows have no NAICS code; San Francisco
     21.4% of OPEN rows (the 37% counted closed locations, which the map also

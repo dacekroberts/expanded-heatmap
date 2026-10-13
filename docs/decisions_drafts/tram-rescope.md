@@ -2,6 +2,58 @@
 
 Newest first. Cleanup folds these into `DECISIONS.md` at review time.
 
+### 2026-10-13 - Mexico City (Regional): Tlalnepantla de Baz added, page text approved, the title names the cable cars (owner)
+
+- **The owner: "1 add, 2 bullets looks good, Tlalnepantla added. 3. name
+  cable cars"**, to three calls: add Tlalnepantla de Baz as a fifth
+  municipio (against leaving Mexicable Línea 2's four stations out); the
+  drafted page bullets for the cable cars, with the municipio added; and a
+  map title that names the cable cars (against keeping "Metro CDMX:
+  commercial density around stations"). The precedent stated for adding it:
+  Naucalpan, kept for one station.
+- **Scope now:** Ciudad de México and five municipios (`cve_mun` 104,
+  relation 5606521, 80.3 km²; the union 494.2 km², gated at 410 to 600).
+  The five boundaries are a new cache,
+  `osm_municipios_15_2026-10-13.json` (overpass.kumi.systems, after a 504
+  from overpass-api.de); master's four-municipio cache is untouched. No new
+  download: the cached State of México register holds Tlalnepantla.
+- **Figures:** 208 stations (204 plus the four), none left out, and no
+  station's rings reach outside the scope. 427,123 storefronts written
+  (407,629 before), 427,121 on the map after the contact scrub, 175,939 in a
+  ring. Tlalnepantla brings 19,483 storefronts; 405 entidad 15 storefronts
+  fall outside the scope polygon (416 before).
+- **Privacy verdict: publish, the same structural position as before.**
+  `check_personal_exposure.py mexico_city` over 175,939 pins: no
+  registrant-name column is loaded, 0 e-mails and 0 phone numbers in a
+  displayed name, the one c/o the same sign abbreviation, 33.1% on the
+  person-name heuristic (32.2% before; the Spanish sign convention). The
+  19,494 added rows were read for contact details: five long digit runs,
+  all LICONSA outlet numbers, and one e-mail-shaped sign name, which the
+  render's contact scrub drops. Cleanup: this needs its row in
+  `docs/privacy_verdicts.md` when the entry is folded.
+- **Wording (branch, for review):** the map title is "Metro CDMX, Cablebús
+  and Mexicable: commercial density around stations" and the Overview blurb
+  "Metro CDMX (Líneas 1–9, A, B and 12), the STE Tren Ligero and the
+  Cablebús and Mexicable cable cars, with five State of México municipios";
+  the owner asked for the cable cars to be named and did not see these
+  exact strings. The page's regional bullet gained one sentence
+  ("Mexicable runs through Ecatepec and Tlalnepantla.") and "four" became
+  "five". `docs/excluded_categories.md`'s regional paragraphs carry the
+  five-municipio counts, each recomputed by a script that first reproduced
+  the published four-municipio figures exactly; its sentence on rings
+  crossing the city line is replaced, since none now does.
+- **Not done, and it blocks the drift check: the search index.**
+  `step2b_place_index.py` refuses, as check H does: San Isidro has no
+  indexed place within 1 km, because `PLACE_AREA` does not cover
+  Tlalnepantla. It needs area id 3605606521 added, a place fetch under new
+  cache names, the index rebuilt and the new rows read. Left to Cleanup
+  with the search work (the handoff's rule). Until then
+  `outputs/mexico_city/baseline.json` and `place_search.json` are not
+  updated, and `check_all.py` fails on `check_place_search.py` alone (72 of
+  73; `macro_facts.json` and Mexico City's row of `ring_shares.json` were
+  rewritten). `check_deploy_imports.py` was not run: this worktree has no
+  `.venv-lean`.
+
 ### 2026-10-13 - Mexico City (Regional): the cable cars built on the branch; colors and names (owner); Tlalnepantla open
 
 - **The owner, on the Cablebús colors: "darker project shades sounds good,

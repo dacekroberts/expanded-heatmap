@@ -77,15 +77,17 @@ from pipeline.mexico_city.config import (
 BOUNDARY_AREA_KM2_MIN = 1_300.0
 BOUNDARY_AREA_KM2_MAX = 1_700.0
 
-# Mexico City (Regional): the four State of México municipios together,
-# measured 414.0 km2 in EPSG:32614 on 2026-10-07 (Ecatepec 156.1, Naucalpan
-# 157.9, Nezahualcóyotl 62.6, La Paz 37.3; relations 5605754, 5606080,
-# 5606086, 5605964). The band is wide enough for OSM edits and narrow enough
-# to catch a ring that did not close or a municipio that went missing (the
-# smallest, La Paz, is 37 km2: losing it leaves 377, inside the band, which
-# is why each MUNID is also required by name below).
-MUNICIPIOS_AREA_KM2_MIN = 330.0
-MUNICIPIOS_AREA_KM2_MAX = 520.0
+# Mexico City (Regional): the five State of México municipios together,
+# measured 494.2 km2 in EPSG:32614 on 2026-10-13 (Ecatepec 156.1, Naucalpan
+# 157.9, Nezahualcóyotl 62.6, La Paz 37.3, Tlalnepantla de Baz 80.3;
+# relations 5605754, 5606080, 5606086, 5605964, 5606521). It was 414.0 over
+# four until Tlalnepantla was added with the cable cars. The band is wide
+# enough for OSM edits and narrow enough to catch a ring that did not close
+# or a municipio that went missing (the smallest, La Paz, is 37 km2: losing
+# it leaves 457, inside the band, which is why each MUNID is also required
+# by name below).
+MUNICIPIOS_AREA_KM2_MIN = 410.0
+MUNICIPIOS_AREA_KM2_MAX = 600.0
 
 
 def read_cached(path, label):
@@ -175,7 +177,7 @@ def load_municipios():
         by_code[munid] = geom
     missing = [m for m in MUNIDS if m not in by_code]
     if missing:
-        raise SystemExit(f"No boundary for {missing}. All four are required: a "
+        raise SystemExit(f"No boundary for {missing}. All five are required: a "
                          "missing municipio would silently drop its stations.")
     areas = (gpd.GeoSeries(list(by_code.values()), index=list(by_code),
                            crs=CRS_GEOGRAPHIC).to_crs(CRS_PROJECTED).area / 1e6)
@@ -456,7 +458,7 @@ def main():
         # asserted against the brief's count per municipio, so a boundary
         # edit that moves a station across a line fails here.
         in_cdmx = gdf[inside].within(cdmx)
-        print(f"\nInside the scope (CDMX and four municipios): {len(kept):,}"
+        print(f"\nInside the scope (CDMX and five municipios): {len(kept):,}"
               f"   CDMX {int(in_cdmx.sum()):,}   outside: {len(outside):,}")
         per_muni = {}
         for _, r in gdf[inside][~in_cdmx].iterrows():

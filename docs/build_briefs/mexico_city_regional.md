@@ -22,6 +22,9 @@ stays `mexico_city`; this brief's file name only marks the extension.
   call 2 below).
 - **Out, the owner's call:** the Tren Suburbano and El Insurgente (commuter
   spacing) and Mexicable (a cable car). Rail stays the page's own lines.
+  *(2026-10-13, superseded for Mexicable: the owner had Cablebús Líneas 1-3
+  and Mexicable Líneas 1-2 drawn and Tlalnepantla de Baz added as a fifth
+  municipio; `docs/decisions_drafts/tram-rescope.md`.)*
 - **The station repair has landed on master** (`DECISIONS.md`, 2026-10-04,
   "Mexico City's station repair landed"; commits 097fb3af and 39699586): the
   nine stop-only Metro stations are taken from route membership

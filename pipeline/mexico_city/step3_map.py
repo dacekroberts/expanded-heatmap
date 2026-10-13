@@ -80,7 +80,7 @@ def city_boundary():
         sys.exit("CDMX boundary did not assemble into a polygon.")
     if REGIONAL:
         # Mexico City (Regional): the same scope polygon steps 1 and 2 use,
-        # CDMX and the four municipios, so the labels anchor to the region.
+        # CDMX and the five municipios, so the labels anchor to the region.
         _by_code, municipios = load_municipios()
         return unary_union(polys + [municipios])
     return unary_union(polys)
@@ -103,9 +103,9 @@ def main():
 
     render_heatmap(
         output_path=HEATMAP_HTML,
-        map_title="Metro CDMX: commercial density around stations",
+        map_title="Metro CDMX, Cablebús and Mexicable: commercial density around stations",
         city_name=NAME,
-        system_name="Metro CDMX and Tren Ligero",
+        system_name="Metro CDMX, Tren Ligero, Cablebús and Mexicable",
         stations=pd.read_csv(STATIONS_CSV),
         businesses=pd.read_csv(BUSINESSES_CLEAN_CSV),
         taxonomy_system=TAXONOMY_SYSTEM,

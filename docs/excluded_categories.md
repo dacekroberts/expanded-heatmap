@@ -107,7 +107,7 @@ page.
   Metrorail reaches Maryland and Virginia, and Toronto's Line 1 ends past the
   city limit at Highway 407. **Several maps are deliberately regional instead**
   — among them Miami with its county, Vancouver with four neighbors, Mexico
-  City with four State of México municipios, Guadalajara with three
+  City with five State of México municipios, Guadalajara with three
   neighboring municipios, and Lille across eleven communes — because there one
   registry covers the whole area. Guadalajara
   goes one step further and leaves out a municipio it could have included:
@@ -1472,7 +1472,7 @@ would distort the map: across the wards holding at least 200 storefront rows
 the match rate runs 75.4% to 99.3%, a **1.3x spread** with a standard deviation
 of 5.7 points.
 
-### Mexico City (Regional) - street stalls, a nonstore twin, four State of México municipios, and a heuristic that does not speak Spanish
+### Mexico City (Regional) - street stalls, a nonstore twin, five State of México municipios, and a heuristic that does not speak Spanish
 
 **Semifijo premises are excluded — 20,586 of 462,732 economic units (4.45%),
 of which 18,264 would otherwise have classified into a bucket.** DENUE records
@@ -1518,26 +1518,28 @@ nouns — also trips it. The heuristic is tuned for English "SMITH JOHN" forms
 and does not transfer to Spanish ones. Nothing is filtered on that number.
 
 
-**The four State of México municipios** (Ecatepec de Morelos, Nezahualcóyotl, La Paz
-and Naucalpan de Juárez) add the same exclusions from the same register: semifijo
-premises, 6,472 of 199,571 units (3.24%), 5,397 of which would otherwise classify; among
-fixed premises, public toilets and shoe-shine stands (`812130`) 578, the "other personal
-services" catch-all (`812990`) 354, funeral services 241, parking (`812410`) 226, event
-caterers 43, nonstore retail (`469`) 29, food trucks 10 and institutional canteens 8.
-Pawnshops (`522452`) count as retail: 177.
+**The five State of México municipios** (Ecatepec de Morelos, Nezahualcóyotl, La Paz,
+Naucalpan de Juárez and Tlalnepantla de Baz) add the same exclusions from the same register:
+semifijo premises, 7,808 of 232,964 units (3.35%), 6,601 of which would otherwise classify;
+among fixed premises, public toilets and shoe-shine stands (`812130`) 637, the "other
+personal services" catch-all (`812990`) 430, parking (`812410`) 314, funeral services 303,
+event caterers 60, nonstore retail (`469`) 38, food trucks 19 and institutional canteens 16.
+Pawnshops (`522452`) count as retail: 207.
 
-**Storefronts located outside the region are dropped**: 416 of 127,860 (0.33%) from the
-four municipios. 398 are one cluster that DENUE codes Nezahualcóyotl but that falls just
+**Storefronts located outside the region are dropped**: 405 of 147,343 (0.27%) from the
+five municipios. 398 are one cluster that DENUE codes Nezahualcóyotl but that falls just
 east of the municipio's boundary as OpenStreetMap draws it, more than 5 km from any station.
 
-**The rest of the State of México is not covered.** Its other 121 municipios have no
-station on these lines; Politécnico's and El Rosario's rings reach under 1% across the city
-line into municipios that are not covered.
+**The rest of the State of México is not covered.** Its other 120 municipios have no
+station on the drawn lines, and no station's rings reach into them.
 
 **Stations.** Línea B's eight stations in Ecatepec de Morelos and Nezahualcóyotl, Línea A's
 two in La Paz, and Línea 2's terminus, Cuatro Caminos, in Naucalpan de Juárez are drawn and
-ringed. No station on the drawn lines is left out. The Tren Suburbano, El Insurgente and
-Mexicable are not drawn.
+ringed. So are two cable-car systems: Cablebús Líneas 1 to 3 in Ciudad de México, Mexicable
+Línea 1 in Ecatepec de Morelos, and Mexicable Línea 2, which runs from Indios Verdes through
+Tlalnepantla de Baz to Ecatepec. No station on the drawn lines is left out. Mexicable Línea 3
+and Cablebús Líneas 4 to 6 are not open and are not drawn. The Tren Suburbano and El
+Insurgente are not drawn, on commuter spacing.
 ### Guadalajara (Regional) - a municipio with no station, and the same Spanish-name artifact
 
 **Everything excluded in Mexico City is excluded here, for the same reasons and

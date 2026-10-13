@@ -59,7 +59,7 @@ from pipeline.countries.mexico import (  # noqa: F401
 REGIONAL = True
 NAME = "Mexico City (Regional)" if REGIONAL else "Mexico City"
 
-# The four State of México municipios, keyed on INEGI's code as Monterrey's
+# The five State of México municipios, keyed on INEGI's code as Monterrey's
 # are (pipeline/monterrey/config.py): OSM's `INEGI:MUNID` equals DENUE's
 # cve_ent + cve_mun, so register and boundaries join on one code. The names
 # exist only to be ASSERTED against DENUE's own `municipio` column, so a wrong
@@ -71,6 +71,11 @@ MUNICIPIOS = {
     "058": "Nezahualcóyotl",
     "070": "La Paz",
     "057": "Naucalpan de Juárez",
+    # Added with the cable cars (owner, 2026-10-13: "1 add"): Mexicable Línea
+    # 2's four middle stations stand in its detached eastern part. 19,483
+    # storefronts under this map's filter, 2,940 of them within 0.6 miles of
+    # the four (measured from the cached register that day).
+    "104": "Tlalnepantla de Baz",
 }
 MUNIDS = tuple(REGIONAL_STATE_CODE + code for code in MUNICIPIOS)
 # The 11 stations of Líneas A, B and 2 in the four, by municipio (staging's
@@ -80,7 +85,7 @@ MUNIDS = tuple(REGIONAL_STATE_CODE + code for code in MUNICIPIOS)
 # Ecatepec went 5 -> 13 with the cable cars (2026-10-13): Mexicable Línea 1's
 # seven stations and Línea 2's La Mesa (Hank González is counted once, both
 # lines meet there).
-STATIONS_PER_MUNICIPIO = {"033": 13, "058": 3, "070": 2, "057": 1}
+STATIONS_PER_MUNICIPIO = {"033": 13, "058": 3, "070": 2, "057": 1, "104": 4}
 
 # --- Paths ---------------------------------------------------------------
 
@@ -144,8 +149,10 @@ DENUE_REGIONAL_ZIPS = tuple(
 OSM_STATIONS_JSON = DATA_RAW / "osm_stations.json"
 OSM_ROUTES_JSON = DATA_RAW / "osm_routes.json"
 OSM_BOUNDARY_JSON = DATA_RAW / "osm_boundary.json"
-# The four municipios' admin_level=6 relations, by INEGI:MUNID (REGIONAL only).
-OSM_MUNICIPIOS_JSON = DATA_RAW / "osm_municipios_15.json"
+# The five municipios' admin_level=6 relations, by INEGI:MUNID (REGIONAL only).
+# A dated name since Tlalnepantla was added: data/ is shared by every
+# worktree, and master reads the four-municipio cache osm_municipios_15.json.
+OSM_MUNICIPIOS_JSON = DATA_RAW / "osm_municipios_15_2026-10-13.json"
 
 # --- OpenStreetMap fetch --------------------------------------------------
 

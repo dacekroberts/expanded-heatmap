@@ -99,7 +99,7 @@ PHONE_LIKE = re.compile(r"(?<!\d)\d{8,10}(?!\d)|(?<!\d)\d{2,3}[\s.-]\d{3,4}[\s.-
 
 
 def read_regional():
-    """Mexico City (Regional): the four State of México municipios from
+    """Mexico City (Regional): the five State of México municipios from
     DENUE entidad 15, which INEGI publishes in two ZIPs. Each member is named
     exactly (never the first .csv), the two parts must share no `id`, and
     every configured code must carry the configured name in DENUE's own
@@ -147,7 +147,7 @@ def read_regional():
                 "The code is the join key; a mismatch means the code is wrong.")
     df = df[code.isin(MUNICIPIOS)].copy()
     df[DENUE_MUNICIPIO_CODE_COLUMN] = df[DENUE_MUNICIPIO_CODE_COLUMN].str.zfill(3)
-    print(f"Four municipios (by INEGI code): {len(df):,} units")
+    print(f"Five municipios (by INEGI code): {len(df):,} units")
     for m, n in df[DENUE_MUNICIPIO_COLUMN].value_counts().items():
         print(f"    {m:26s} {n:8,}")
     emit("in_scope_15_rows", len(df))
@@ -208,7 +208,7 @@ def main():
           f"{df[DENUE_MUNICIPIO_COLUMN].nunique()} alcaldias")
     del raw
 
-    # --- Mexico City (Regional): entidad 15's four municipios ---------------
+    # --- Mexico City (Regional): entidad 15's five municipios ---------------
     # One register over two entidades, so no cross-source dedup is needed:
     # DENUE's `id` is national, and the two sets are asserted disjoint.
     if REGIONAL:
@@ -260,7 +260,7 @@ def main():
               "  (counts only; read by hand before publishing)")
     if REGIONAL:
         is15 = df[DENUE_STATE_COLUMN] == REGIONAL_STATE_CODE
-        print("Per municipio of the four (storefronts by bucket, blank names):")
+        print("Per municipio of the five (storefronts by bucket, blank names):")
         for m, g in df[is15].groupby(DENUE_MUNICIPIO_COLUMN):
             gb = int(g["business_name"].isna().sum() + (g["business_name"] == "").sum())
             print(f"    {m:26s} {len(g):7,}  {dict(g['bucket'].value_counts())}  "
@@ -292,7 +292,7 @@ def main():
     else:
         # CDMX's rows keep the city-alone test (the sanity box), so the CDMX
         # side of the map does not move. Entidad 15's rows are tested against
-        # the SCOPE polygon (CDMX and the four municipios), Monterrey's
+        # the SCOPE polygon (CDMX and the five municipios), Monterrey's
         # pattern of testing a regional register against its own boundaries
         # rather than a box. Points outside their OWN municipio are counted
         # for the record; a point over a municipio line inside the scope is a

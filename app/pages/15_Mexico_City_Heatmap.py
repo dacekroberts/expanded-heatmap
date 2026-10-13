@@ -49,13 +49,21 @@ st.markdown(
 
 - Metro CDMX runs twelve lines — Líneas 1 to 9, A, B and 12 — and this map draws all of them
   alongside the STE Tren Ligero, which continues south from Tasqueña to Xochimilco.
+- **Two cable-car systems are drawn as well: Cablebús Líneas 1 to 3 in Ciudad de México, and
+  Mexicable Líneas 1 and 2 in the State of México.** They climb into hill districts the Metro
+  does not reach.
+- **Some cable-car colors are this map's own.** Cablebús uses one light blue for all three
+  lines, so Línea 1 keeps that blue and Líneas 2 and 3 are darker shades of it. Mexicable calls
+  its lines Línea Roja and Línea Verde and publishes no exact colors, so the red and green here
+  were chosen to stay clear of the business pins.
 - Each line is labeled directly on the map in the name its riders use, and appears in the
   legend.
 - **This is a regional map, not a city one.** Líneas A and B run east and north out of Ciudad
   de México into the State of México, and Línea 2 ends just across the city line at Cuatro
-  Caminos, so the map also covers the four municipios those stations stand in: Ecatepec de
-  Morelos, Nezahualcóyotl, La Paz and Naucalpan de Juárez.
-- Stations and businesses across Ciudad de México and those four municipios are included. The
+  Caminos. Mexicable runs through Ecatepec and Tlalnepantla. So the map also covers the five
+  municipios those stations stand in: Ecatepec de Morelos, Nezahualcóyotl, La Paz, Naucalpan
+  de Juárez and Tlalnepantla de Baz.
+- Stations and businesses across Ciudad de México and those five municipios are included. The
   rest of the State of México has no station on these lines and is not covered.
 - **The line geometry here comes from OpenStreetMap, not from the operator.** None of the
   public servers of the Mexico City government, STC Metro or the STE could be reached from
@@ -76,7 +84,7 @@ st.markdown(
 - Fixed premises only. DENUE separately records semi-fixed units — stalls and street posts —
   and those are not shown, although street commerce is a real and substantial part of the
   region's retail.
-- **Most storefronts in the four municipios are beyond a station's reach.** Línea B runs along
+- **Most storefronts in the five municipios are beyond a station's reach.** Línea B runs along
   Ecatepec's western edge and Naucalpan's one station, Cuatro Caminos, sits on its border, so the
   region's share of storefronts within a ring is lower than Ciudad de México's alone.
 - 398 storefronts that DENUE files under Nezahualcóyotl are left out: they sit just east of the

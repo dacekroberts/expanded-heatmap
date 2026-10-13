@@ -120,8 +120,7 @@ This is open work, not a record: update an item here as it moves, and send a fin
   2026-10-13 (branch `tram-rescope`); the owner decides case by case.**
   **Built and on master since 2026-09-27** (merge be2e3713): Montreal's REM,
   Rome's tram 8, Madrid's ML1, Paris T3a and T3b, San Francisco's F Market &
-  Wharves. **Left:** Mexico City's
-  Cablebús (coordinates first), then Toronto, Milan and Prague after a label
+  Wharves. Mexico City's Cablebús and Mexicable are built on the branch (2026-10-13). **Left:** Toronto, Milan and Prague after a label
   and legend rule and a Toronto pilot. Hong Kong Tramways is out (owner).
   Estimate as first written: `docs/tram_rescope_estimate.md`.
   - **Barcelona TRAM: OUT (owner, 2026-10-13).** Measured that day: none of
