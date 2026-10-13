@@ -2,6 +2,13 @@
 
 Newest first. Cleanup folds these into `DECISIONS.md` at review time.
 
+### 2026-10-13 - Tram rescope: Milan approved as built (owner)
+
+- **Owner, 2026-10-13, after the four items put for approval (the stop-name
+  form, The lines bullets, the What Is Excluded sentences, the 17 colors):
+  "milan looks great".** Read by the session as approving all four as
+  built in 1dadd89c; no item was singled out. Nothing changed after it.
+
 ### 2026-10-13 - Tram rescope: Milan built with all 17 tram lines (owner); page text and stop-name form are drafts
 
 - **Owner, 2026-10-13: "i agree with your applications from precedent.
