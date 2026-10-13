@@ -1,3 +1,72 @@
+### 2026-10-13 - Seven languages ruled; Monterrey's colonias kept; eleven cities rebuilt on master's second rule batch (branch search-final)
+
+- **The owner, to the eleven language calls: "1. yes 2. yes. 3. yes. 4.
+  yes. 5. yes. 6.yes. 7. 35 in like you said. 8. drop by id. 9.
+  recommendation ok. 10. yes and test. 11. yes."** In the order asked:
+  1. The English leak word "store" is set aside for Danish, Norwegian and
+     Swedish, where it means "big" (Danish 18 rows lost, 13 of them streets
+     such as Store Kongensgade; Norwegian 4 per city; Göteborg's Store udd).
+     A shared-code change, so a finding for Cleanup.
+  2. Farm and yard endings: Swedish -gård and -gården in with an id catch
+     as German -hof has (67 rows, 5 not streets); Norwegian -gården in;
+     Danish -gård out on its measured misfires.
+  3. Home words that take heritage houses are in (Romanian "casa", 97
+     landmark rows, 80 in Cluj-Napoca; Greek home leads, 2 rows), a house
+     kept when it has an article of its own.
+  4. Norwegian terrain endings in (-lia, -lien, -toppen, -grenda, -grenden,
+     -tunet, -jordet, -kollen, -berget, -haugen, -gården): 49 rows, 1 not a
+     street.
+  5. Norwegian historic farms are held to the home rule: dropped until
+     visiting is shown (Oslo: 64 landmarks ending in "gård", 54 with no
+     Wikidata entry).
+  6. Swedish -gång (235 rows, 1 misfire), -faret (11) and -lycka (14) in;
+     -spår out.
+  7. Danish field endings in, the ten measured (35 rows); -gang out.
+  8. Riga's 19 numbered garden lanes and 3 station tunnels dropped by id;
+     the Daugavpils fortress's ten numbered bastions kept.
+  9. Italian: "villa" and "casa" stay out as home words (94 rows, 48 of
+     them Roman ruins), "villino" in; "arco" and "belvedere" in; "galleria"
+     out.
+  10. Greek name endings as the street test: in, and tested (every row the
+      endings admit read, the names they do not admit read, and the share
+      they would match on non-streets measured).
+  11. Romanian "pasajul" in, "pasaj" out.
+- **The settled lists** go to `docs/decisions_drafts/search-lang-<code>.md`
+  for `da`, `nb`, `sv`, `lv`, `ro`, `it`, `el`, each with its measurements,
+  as German's did.
+- **Monterrey's 19 colonias are kept by id (owner: "yes for monterrey").**
+  Named neighborhood areas drawn on residential land, several from the
+  municipal Plano de Colonias; the estate rule drops them. Written to
+  `PLACE_KEPT`; the rows appear once that setting reaches the estate rule
+  in Cleanup's third pass. Polanco and Del Maestro survive through another
+  object and need no entry.
+- **Master 4c89e15b merged (e96f8ab7) and eleven cities rebuilt** (the nine
+  of the entry below, Anyang and Gwangju). `check_place_search.py` fails
+  only on rule A (no map yet) and on two street names waiting for the
+  owner: Taoyuan 停車場路, Monterrey "Calle Hotel Río".
+
+Findings for Cleanup:
+
+- **Candidate 6 was not taken by the station-outline rule:** Gwangju
+  way/1442542051 is still a row after the rebuild.
+- **Candidate 27 traced.** Sendero (node/1041636979, way/1286342563) is in
+  `STATIONS_CSV` and is dropped by the station rule's bare-type branch:
+  "sendero" is a Spanish bare type word and neither object carries a
+  wikidata or wikipedia tag. The colonias are 21 ways in the extra cache
+  under `place_dropped_estate`.
+29. **A leak word of one language is a plain word of another** ("store").
+30. **Florence's limited-traffic zone** (access=no, motor_vehicle=permit,
+    foot=yes) loses 55 public streets to the private-street rule.
+31. **Greek final sigma is not folded in `norm()`:** 726 names.
+32. **`int_name` is not read:** Thessaloniki 44.1% of rows carry one.
+33. **In a suffix language `_named_street` asks the way word as the whole
+    last word,** so a glued name never passes (Danish, German, Dutch).
+34. **A home-name ending is needed** where the house word comes last
+    (Latvian "villa", Norwegian "gård").
+35. **Romanian cedilla letters want folding to the comma forms:** 19 names.
+36. **Second-language names below the declared floor are not searchable:**
+    Cluj-Napoca's Hungarian (39.8% of rows), Daugavpils' Russian (15.5%).
+
 ### 2026-10-13 - Nine cities built on existing lists and read; Brussels (Regional) is 18 communes, not 19 (branch search-final)
 
 - **Correction to the boundary entry below: Brussels (Regional) takes 18
