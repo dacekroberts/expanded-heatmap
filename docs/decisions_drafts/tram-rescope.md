@@ -14,6 +14,26 @@ Newest first. Cleanup folds these into `DECISIONS.md` at review time.
   not-drawn bullet takes the "listed below" pointer). The Overview blurb
   and the What Is Excluded additions went with them.
 
+### 2026-10-13 - Tram rescope: the sources behind Toronto's closed routes (owner: "save sources")
+
+Search results of 2026-10-13, none read in full; the feed, not these,
+decided what is drawn. The same links are in `docs/recheck_calendar.md`.
+- 507 Long Branch, bus-replaced from 2026-06-07 for the Long Branch Loop
+  track renewal, phase 2 to 2026-10-31:
+  https://www.ttc.ca/about-the-ttc/projects-and-plans/Long-Branch-Loop-Track-Renewal
+  and
+  https://www.ttc.ca/service-advisories/Service-Changes/501-301-507-508-Long-Branch-Loop-Streetcar-Track-Renewal-Work
+- 512 St Clair, bus west of Lansdowne to 2026-10-31 for the rail bridge:
+  https://www.ttc.ca/service-advisories/Service-Changes/512-312-Route-change-due-to-rail-bridge-construction
+- 503 and 508 during about ten months of King Street West construction
+  (news): https://www.blogto.com/city/2026/09/toronto-construction-busiest-ttc-routes-10-months/
+  and the City's page, https://www.toronto.ca/kingwestconstruction
+- The TTC's running list of streetcar changes, the page to re-read after
+  2026-10-31: https://www.ttc.ca/service-advisories/Streetcar-Service-Changes
+- The feed itself: the City's CKAN package `ttc-routes-and-schedules`
+  (`config.GTFS_URL`), cached as `data/toronto/raw/gtfs.zip` (2026-09-21)
+  and `gtfs_2026-10-13.zip`.
+
 ### 2026-10-13 - Tram rescope: Toronto built with eight streetcar lines; 503, 507 and 508 not drawn (owner)
 
 - **Owner, 2026-10-13: "follow those rules (8 not 11) note the drops and
