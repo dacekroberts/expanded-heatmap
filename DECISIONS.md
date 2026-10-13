@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**131 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**132 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -68,6 +68,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Place search: 16 known works kept by id against the article rule; a DeepSeek first read for the rollout's cities (owner)](#2026-10-13---place-search-16-known-works-kept-by-id-against-the-article-rule-a-deepseek-first-read-for-the-rollouts-cities-owner)
 - [Place search: a named private street stays in Guadalajara and Monterrey, by a per-city switch (owner)](#2026-10-13---place-search-a-named-private-street-stays-in-guadalajara-and-monterrey-by-a-per-city-switch-owner)
 - [Place search: Mexico City keeps its named private streets too (owner)](#2026-10-13---place-search-mexico-city-keeps-its-named-private-streets-too-owner)
+- [Place search: seven rulings on the final group's held rows (owner)](#2026-10-13---place-search-seven-rulings-on-the-final-groups-held-rows-owner)
 
 **2026-10-12**
 
@@ -6231,3 +6232,35 @@ japan-city template:
   "drop as ruled" of this date for this one city; the rule stands in the
   other live cities (London 1,088).
 - **Measured after:** 61,130 rows to 63,146 in memory; one private street still goes ("Circuito", a bare type word). Numbered names such as "Calle 20" stay: they are street names there, not codes beside a type word.
+
+### 2026-10-13 - Place search: seven rulings on the final group's held rows (owner)
+
+- **The final-group session retired and handed Cleanup its undecided rows**
+  (`docs/decisions_drafts/search-final-held.md` on `search-final`, abaf5c34:
+  1,810 rows in 57 city parts, an upper bound; none blocks the landing).
+  Seven groups went to the owner with a recommendation each. **The owner:
+  "agree with all seven".**
+  1. Misspelled street names (about 25; Monterrey's "Calle Frida Khalo"):
+     kept. A misspelled street is still that street.
+  2. Guadalajara street names ending in a house number (283): dropped by
+     id, after a tag check of a sample; no shared rule for one city.
+  3. Oslo: 14 statues on their subject's article are kept (a statue or a
+     public memorial is not held to the public-art rule); 4 shielings
+     mapped as farmyards are dropped.
+  4. Rome's 23 bare type words on ruins and Cluj-Napoca's 4 type-phrase
+     names are dropped; so is the Cluj-Napoca way whose real name sits in an
+     alternate field (there is no name repair).
+  5. Copenhagen: Christiania's 9 area names on paths are kept; 2 allotment
+     section names are dropped. Kitakyushu's Onga River rows with English
+     glued on are dropped as glitched.
+  6. Monterrey: 17 avenue names that read as ramps, 11 doubled type words
+     and 7 series-number names are kept, as Mexico City's numbered names.
+  7. Most and Yamagata: a replica gun, a memorial named by its inscription,
+     "okres Most" as a place, two halls named for organisations: dropped.
+- **Applied on the branch by an agent**, which also regroups the rows left
+  held by class across cities. The final group's reader files are copied
+  to `data/_search_rollout/final_session/` (1,589 files).
+- **Wave 1 is rebuilt on the final rules** (`search-wave1`, 5c36cb30):
+  307,677 rows to 306,979; the lookup keeps 108 works of public art and 96
+  libraries the tag alone would lose. DeepSeek's 1,977 flags on wave 1 are
+  1,749 on surviving rows, read against the tags in three lanes.
