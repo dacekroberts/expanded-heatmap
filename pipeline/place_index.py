@@ -3399,6 +3399,11 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         # subject (Tokyo's Maman, Chicago's Sue): those go, and are listed.
         if needs and verdict == "not" and _titled_by_name({**seen_tags, "name": names[0]}):
             needs = None
+        # Kept by id against this rule too (config.PLACE_KEPT; owner,
+        # 2026-10-13, "yes if not costly"): a known work whose entry has no
+        # article in any language, or is copied into its subject tag.
+        if oid in kept_ids:
+            needs = None
         if needs and verdict in ("none", "not"):
             mine = own_item(seen_tags)
             if mine:
@@ -3435,6 +3440,11 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
                 t = {k: v for k, v in t.items() if k not in ("wikidata", "wikipedia")}
         kept = []
         reason, names = landmark_drop(t, names, oid, own, kept)
+        # Kept by id (config.PLACE_KEPT) against the landmark tests as well:
+        # Tokyo's Maman carries its entry as its subject's too, and left here
+        # as a work with no entry of its own (2026-10-13).
+        if reason and oid in kept_ids and t.get("tourism") == "artwork":
+            reason = None
         if reason:
             report[f"landmark_dropped_{reason}"] += 1
             if log is not None and subject and landmark_drop(seen_tags, names, oid, own)[0] is None:

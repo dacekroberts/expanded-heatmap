@@ -202,3 +202,11 @@ PLACE_DROPPED = {
     "node/3475173927": "'Rozhledna', a viewpoint under its type word (dropped by id: an artwork of the same title, with wikidata, keeps its name)",
     "node/11652593441": "'daněk bílý', an animal enclosure named for the animal",
 }
+
+# Public art kept by the owner's word against the article rule (place_index,
+# PLACE_KEPT; owner, 2026-10-13). Each is a known work the Wikidata lookup
+# cannot admit; DECISIONS.md of that date lists the works left out.
+PLACE_KEPT = {
+    "node/1185943005": "'Miminka', its Wikidata entry has no article in any language (owner, 2026-10-13)",
+    "node/14081371646": "'Miminka', its Wikidata entry has no article in any language (owner, 2026-10-13)",
+}
