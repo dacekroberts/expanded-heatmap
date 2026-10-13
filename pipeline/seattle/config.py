@@ -355,3 +355,13 @@ PLACE_DROPPED = {
     "node/430982177": "a library branch whose name repeats its last word (glitched; the outside name net, 2026-10-12)",
     "way/727155292": "'Lake Hills Nursery Operations', a parks department works yard",
 }
+# Kept by the owner's word against the register-entry rule (place_index,
+# PLACE_KEPT; owner, 2026-10-13): the Ballard Locks. The dam carries neither a
+# Wikipedia article nor a Wikidata entry; the three lock ways share one entry
+# and one article (Q5769218, en:Ballard Locks), so none is any one way's own.
+PLACE_KEPT = {
+    "way/32823954": "'Hiram M. Chittenden Locks and Dam', the Ballard Locks (owner, 2026-10-13)",
+    "way/164115502": "'Large Lock', the Ballard Locks (owner, 2026-10-13)",
+    "way/472179860": "'Large Lock', the Ballard Locks (owner, 2026-10-13)",
+    "way/164115503": "'Small Lock', the Ballard Locks (owner, 2026-10-13)",
+}
