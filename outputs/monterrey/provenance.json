@@ -1,0 +1,35 @@
+{
+  "osm_place_outline": {
+    "bytes": 182680,
+    "elements": 4,
+    "file": "osm_place_outline_v1.json",
+    "host": "download.geofabrik.de (mexico-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:60];\narea(id:3605605805,3605605824,3605606060,3605606272)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T19:26:16+00:00",
+    "sha256": "08b85a3bd5e3524112acf2e3e2a390e5f1ac6616628b5c9651f418b8dab1d608"
+  },
+  "osm_places": {
+    "bytes": 22435662,
+    "elements": 216684,
+    "file": "osm_places_2026-10-13.json",
+    "host": "download.geofabrik.de (mexico-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3605605805,3605605824,3605606060,3605606272)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T19:26:17+00:00",
+    "sha256": "b1a5158f60204fdbc078ac140d11c61476f88ea57b4010f75e07926a1d03289d"
+  },
+  "osm_places_extra": {
+    "bytes": 33221,
+    "elements": 160,
+    "file": "osm_places_extra_2026-10-13.json",
+    "host": "download.geofabrik.de (mexico-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3605605805,3605605824,3605606060,3605606272)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T19:26:18+00:00",
+    "sha256": "b79111304766f9a3d859d00d7974fe73bb39ceb20eb814b21e2f85977dcf119e"
+  }
+}

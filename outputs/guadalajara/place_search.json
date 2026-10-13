@@ -1,0 +1,47 @@
+{
+  "index": "app/static/places/guadalajara.json",
+  "places": 85002,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "es"
+    ],
+    "coverage": {
+      "en": 0.0,
+      "es": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Spanish"
+    ]
+  },
+  "stations_not_open": [
+    {
+      "osm": "way/1409567646",
+      "name": "Acueducto",
+      "tag": "construction=yes"
+    }
+  ],
+  "area": [
+    {
+      "osm": "relation/5605820",
+      "name": "Guadalajara",
+      "stations": 32
+    },
+    {
+      "osm": "relation/5606660",
+      "name": "Zapopan",
+      "stations": 9
+    },
+    {
+      "osm": "relation/5606276",
+      "name": "San Pedro Tlaquepaque",
+      "stations": 6
+    },
+    {
+      "osm": "relation/5606517",
+      "name": "Tlajomulco de Zúñiga",
+      "stations": 6
+    }
+  ]
+}

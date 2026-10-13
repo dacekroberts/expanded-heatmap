@@ -1,0 +1,26 @@
+{
+  "index": "app/static/places/brasilia.json",
+  "places": 33698,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "pt"
+    ],
+    "coverage": {
+      "en": 0.001,
+      "pt": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Portuguese"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/421151",
+      "name": "Federal District",
+      "stations": 27
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "index": "app/static/places/geneva.json",
+  "places": 6031,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "fr"
+    ],
+    "coverage": {
+      "en": 0.005,
+      "fr": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "French"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/1685488",
+      "name": "Geneva",
+      "stations": 31
+    },
+    {
+      "osm": "relation/1685502",
+      "name": "Lancy",
+      "stations": 13
+    },
+    {
+      "osm": "relation/1685516",
+      "name": "Meyrin",
+      "stations": 10
+    },
+    {
+      "osm": "relation/1685451",
+      "name": "Bernex",
+      "stations": 5
+    },
+    {
+      "osm": "relation/1685459",
+      "name": "Carouge",
+      "stations": 5
+    },
+    {
+      "osm": "relation/1685465",
+      "name": "Chêne-Bougeries",
+      "stations": 3
+    },
+    {
+      "osm": "relation/1685520",
+      "name": "Onex",
+      "stations": 3
+    },
+    {
+      "osm": "relation/1685523",
+      "name": "Plan-les-Ouates",
+      "stations": 3
+    },
+    {
+      "osm": "relation/1685540",
+      "name": "Vernier",
+      "stations": 3
+    },
+    {
+      "osm": "relation/1685466",
+      "name": "Chêne-Bourg",
+      "stations": 2
+    },
+    {
+      "osm": "relation/1685534",
+      "name": "Thônex",
+      "stations": 2
+    },
+    {
+      "osm": "relation/1685472",
+      "name": "Confignon",
+      "stations": 1
+    }
+  ]
+}
