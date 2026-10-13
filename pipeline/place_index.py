@@ -2200,8 +2200,10 @@ STATION_NAME_ENDS = ("station", "역", "駅", "站")
 
 
 def _station_core(name):
+    # Folded like the name: fold_name writes a Hangul syllable as its jamo.
     key = fold_name(name)
-    return next((key[:-len(end)] for end in STATION_NAME_ENDS if key.endswith(end) and len(key) > len(end)), key)
+    return next((key[:-len(end)] for end in map(fold_name, STATION_NAME_ENDS)
+                 if key.endswith(end) and len(key) > len(end)), key)
 
 
 def street_never(name):
@@ -4246,6 +4248,8 @@ def _selftest():
         ("the log names a rule for a dropped street",
          any(x["class"] == "street_busway_raceway" and x["name"] == "Bus Road" for x in log)),
         ("own_article: a section is not the object's", own_article({"wikipedia": "en:A#B"}, ["A"])[0] == "not"),
+        ("_station_core: a Hangul station word is set aside", _station_core("상무역") == _station_core("상무")
+         and _station_core("역") == fold_name("역")),
         ("quiet_stations: a listed uncovered station is accounted for",
          quiet_stations({"B": "why"}, [("A", 1, 1), ("B", 2, 2)], ["B"]) == ([], [])),
         ("quiet_stations: an unlisted uncovered station still fails",
