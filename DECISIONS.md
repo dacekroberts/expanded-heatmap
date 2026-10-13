@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**92 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**93 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -29,6 +29,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [The maps' Cities menu under non clickable headers, Japan last (owner)](#2026-10-13---the-maps-cities-menu-under-non-clickable-headers-japan-last-owner)
 - [Street lines: the teal stays, a third credit link, the 19 rebuilt; the picked-line look goes to every map (owner)](#2026-10-13---street-lines-the-teal-stays-a-third-credit-link-the-19-rebuilt-the-picked-line-look-goes-to-every-map-owner)
 - [Place search: the owner's rulings on keep against drop, personal names, private streets and the typo line; NOT yet built](#2026-10-13---place-search-the-owners-rulings-on-keep-against-drop-personal-names-private-streets-and-the-typo-line-not-yet-built)
+- [Place search: where readers see what search leaves out; the rollout's own worktree; the id side file told to transit-globe (owner)](#2026-10-13---place-search-where-readers-see-what-search-leaves-out-the-rollouts-own-worktree-the-id-side-file-told-to-transit-globe-owner)
 
 **2026-10-12**
 
@@ -5073,3 +5074,27 @@ japan-city template:
   applies: built on a branch, the 19 rebuilt, every changed row reported to
   the owner before landing; the typo line and any matcher change re-render
   the searched maps.
+
+### 2026-10-13 - Place search: where readers see what search leaves out; the rollout's own worktree; the id side file told to transit-globe (owner)
+
+- **Where the list of what search leaves out is shown, decided by the
+  owner:** "where readers see search leave out: what is counted and what is
+  not, its own section". So it is a section of its own on the What Is
+  Excluded page (`app/pages/What_Is_Excluded.py`), not a line under each
+  city. Its wording is still a draft for the owner; it lands with the rule
+  build.
+- **The later waves get a worktree and branch of their own**, the owner: "i
+  accept the separate worktree and branch. screen will turn off but machine
+  stays awake. create dedicated names not random ones". Names:
+  `.claude/worktrees/search-rollout`, branch `search-rollout`, cut from
+  master once the night runner's scripts are on it.
+- **Pushes approved** ("yes to pushing on both bullet points"): the two
+  docs commits (pushed, master 89c3ff24) and the runner's scripts once they
+  pass.
+- **The id side file was told to transit-globe** on the owner's word ("if
+  id side file is ready, inform transit-globe and send"): a note to its
+  "Place search index handoff review" session and a pointer to its phase 1
+  session, information only. It names the file's format, the street lines
+  file and its index key, that every index hash changed on 2026-10-13 and
+  changes again with the rule build, and that the OSM id, never the row, is
+  the stable key. The cut-over message at wave 1's landing is still owed.

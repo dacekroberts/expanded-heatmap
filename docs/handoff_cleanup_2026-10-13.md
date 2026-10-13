@@ -99,6 +99,18 @@ entry first; it is the specification.
   reads, one render, a push on the owner's word, a reboot, the cut-over
   message to transit-globe.
 
+## Owner's words after this note was first written (2026-10-13)
+
+- The list of what search leaves out goes on the What Is Excluded page as
+  a section of its own; wording is a draft for the owner.
+- The rollout worktree is `.claude/worktrees/search-rollout`, branch
+  `search-rollout` (accepted; dedicated names); the screen may turn off,
+  the machine stays awake.
+- Pushing the runner's scripts once they pass is approved. The two docs
+  commits are pushed (master `89c3ff24`).
+- transit-globe was told the id side file is ready; the cut-over message at
+  wave 1's landing is still owed.
+
 ## Small open items
 
 - London's tile 2 of 12 is May 2026 data; the owner approved a refetch from
