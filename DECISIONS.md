@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**112 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**113 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -49,6 +49,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [One big review for the rest of the rollout; shared-border streets landed; the second rule batch goes to the owner (owner)](#2026-10-13---one-big-review-for-the-rest-of-the-rollout-shared-border-streets-landed-the-second-rule-batch-goes-to-the-owner-owner)
 - [Place search: the second rule batch and the final group (owner)](#2026-10-13---place-search-the-second-rule-batch-and-the-final-group-owner)
 - [Place search: named roundabouts and standing abandoned landmarks stay (owner)](#2026-10-13---place-search-named-roundabouts-and-standing-abandoned-landmarks-stay-owner)
+- [Place search: quiet stations, Brussels' two neighbors, hand work in its own session, where the retrospectives go (owner)](#2026-10-13---place-search-quiet-stations-brussels-two-neighbors-hand-work-in-its-own-session-where-the-retrospectives-go-owner)
 
 **2026-10-12**
 
@@ -5783,3 +5784,30 @@ japan-city template:
 - **The street coverage bar is measured against the names the rulings
   keep** (Cleanup's call, on a measurement: ruled drops had moved
   Washington D.C. from 86.9% to 83.3%, with no street missed).
+
+### 2026-10-13 - Place search: quiet stations, Brussels' two neighbors, hand work in its own session, where the retrospectives go (owner)
+
+- **Asked four open questions, the owner: "1. yes agreed and sounds good
+  note for these cities. 3.add them with light probe/work if possible. 3.
+  after big review lands inform. 4. private artifacts here".** Read as: the
+  quiet-station list, Brussels, Visuals' rebuild, the retrospectives, in the
+  order asked.
+- **A quiet station is recorded, per city.** Four stations lie inside their
+  search area with nothing indexable within 1 km (measured by the final-group
+  session, 2026-10-13: Most's three Zaluzi tram stops inside Litvinov,
+  nearest index row 1,065 to 1,388 m; Yamagata's Omoshiroyama-Kogen, nearest
+  row 2,146 m). `config.PLACE_QUIET_STATIONS` names each with why, who and
+  when; a listed station that is covered, or not on the map, stops the step.
+  Built in shared code after the second rule batch lands. Rejected: counting
+  a river's drawn line toward reach, which covers Yamagata and one of Most's
+  three only.
+- **Brussels' search area takes in Ixelles and Saint-Josse-ten-Noode**, if a
+  light probe shows the work is small. Four corridor stations sit on the
+  Petite Ceinture, the commune's border with those two.
+- **Visuals' full rebuild waits for the big review; Cleanup tells it then.**
+- **The search retrospective and the partial transit-layer retrospective are
+  private artifacts, published from the Cleanup session.**
+- **The final group's hand work runs in its own session, with DeepSeek
+  delegation, the owner: "the hand work can start with deepseek delegation in
+  its own session".** Branch `search-final`, cut from `search-rollout`;
+  nothing pushed from it.
