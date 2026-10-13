@@ -179,8 +179,6 @@ PLACE_FOLD = None
 # places, each with why; scripts/check_place_search.py fails on any other.
 PLACE_REVIEWED = {
     "Schulze Baking Company": "an NRHP-listed former bakery building (Wikipedia), building=manufacture",
-    "Site of the Sauganash Hotel/Wigwam": "a plaque marking the site of the Wigwam, where Lincoln was "
-                                          "nominated in 1860 (Wikipedia)",
 }
 # OSM objects a reading by eye found to be a business or a home that no rule
 # in place_index.py catches, each with why (place_index.build, `dropped`).
