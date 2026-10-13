@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**86 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**87 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-12**
 
@@ -63,6 +63,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [The outside net's finds built on the 19 searched cities: a code plus a type is no name, 41 type words, 23 drops by id (owner)](#2026-10-12---the-outside-nets-finds-built-on-the-19-searched-cities-a-code-plus-a-type-is-no-name-41-type-words-23-drops-by-id-owner)
 - [A registered code is a name: Seattle's 27 buildings and Prague's 14 stations go back (owner)](#2026-10-12---a-registered-code-is-a-name-seattles-27-buildings-and-pragues-14-stations-go-back-owner)
 - [Korean brand names may appear in public chain tables; the Chicago ranking fix and small open items (owner)](#2026-10-12---korean-brand-names-may-appear-in-public-chain-tables-the-chicago-ranking-fix-and-small-open-items-owner)
+- [Place search gets a defined area: the scope rule, the outline on the map, the credit in the bottom line, the boundary fetched first (owner)](#2026-10-12---place-search-gets-a-defined-area-the-scope-rule-the-outline-on-the-map-the-credit-in-the-bottom-line-the-boundary-fetched-first-owner)
 
 **2026-10-11**
 
@@ -4811,3 +4812,57 @@ japan-city template:
   the folded places group): "good for now" (owner).
 - **The outside net's rule changes on Vancouver**: two Surrey parcels the
   pattern misses are held for wave 1's landing (`PLAN.md`).
+
+### 2026-10-12 - Place search gets a defined area: the scope rule, the outline on the map, the credit in the bottom line, the boundary fetched first (owner)
+
+- **Decided by the owner, 2026-10-12**, on a proposal relayed by the wave 1
+  search session and Cleanup's recommendations: "1. yes part of rollout. 2.
+  before [wave 1's re-render]. 3. approved"; "cost is acceptable"; "B,
+  wording approved, drop the area line on no-result"; "yes force the
+  boundary first".
+  - **The scope rule.** An index covers exactly the municipalities its map
+    covers: the boundary the businesses are cut to and, on a regional map,
+    every municipality a drawn station sits in; a station on unincorporated
+    land adds the smallest named area that holds it; nothing wider without
+    the owner's word (`config.PLACE_AREA_KEPT`). Check H stays the floor;
+    `scripts/check_place_scope.py` is the ceiling. Measured on the 19 built
+    cities: every municipality holds a station, none needed a kept entry.
+    Of wave 1's 34 only Buffalo (planned as Erie County) and Miami (planned
+    as Miami-Dade County, seven stations on unincorporated land) change;
+    Miami goes to the owner as its own proposal.
+  - **The outline.** One merged outline per city in the index ("area":
+    names and rings), exterior rings only, simplified by 40 m in the city's
+    own projected CRS, parts under 0.2% left out. Drawn dashed only while
+    the search box is open. **Measured: 0.6% on the indexes** (143,641
+    bytes over 18 cities, about 53 KB gzipped; São Paulo's 21 KB the
+    largest; Seoul was fetched after the table).
+  - **Wording, approved by the owner:** on no result, "Search covers the
+    outlined area only. Zoom out to see it."; in the box, "Search covers
+    <municipality> and N more, outlined on the map." (left out when a
+    search finds nothing); in the bottom line, "Search index ODbL
+    (download, intersections)".
+  - **The credit moved (B).** The owner chose it on a local render of both:
+    the ODbL notice and the download offer sit in the map's bottom
+    attribution line, which wraps to two lines on a phone (28 px at 343 px).
+    The page bullet is unchanged: the owner's point was that a bullet
+    outside the map is off screen on a phone.
+  - **The boundary is the fetch's first query**, and the fetch stops before
+    its two heavy queries when a municipality holds no station and has no
+    recorded reason, or a boundary does not close. Limit: one too-large
+    relation (a county) passes that count; it is caught by reading the
+    config, as the skill now says. No hand-off pass between sessions: each
+    wave's own queue brings boundary and places.
+- **Found on the way, and built: a mirror serving old data.**
+  `overpass.kumi.systems` answered on 2026-10-12 from data dated 2026-05-31
+  to 2026-07-24. Five of wave 1's main caches and one of London's twelve
+  tiles (live; 70,683 elements) carry it. The fetch now refuses a place
+  answer over 7 days old (`PLACE_MAX_AGE_DAYS`); boundaries accept any
+  date, and all 19 outlines came from that mirror while `overpass-api.de`
+  did not answer (from about 23:50Z for over two hours). The owner: "1. yes
+  refetch. 2. yes refetch london tile", both when the other mirror returns.
+- **Schema number 1** went into the index and intersections file in the same
+  re-render, ahead of the first wave where the owner had approved it, so the
+  wave's landing needs no second re-render; the id side file is still owed.
+- **Cleanup's own slips, for the record:** the first outline query asked for
+  `out tags geom` and returned no geometry (refetched); a first queue ran
+  unpinned against the unreachable mirror and was stopped.

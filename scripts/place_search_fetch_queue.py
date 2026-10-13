@@ -174,7 +174,12 @@ def real_cached(city, json_path, extra_path):
     """None when both place caches are there and whole, else which one is
     not and why. The city argument is unused here; the selftest's lookup keys
     off it instead."""
-    for key, path in (("PLACE_OSM_JSON", json_path), ("PLACE_OSM_EXTRA_JSON", extra_path)):
+    # The outline cache sits beside the place cache under one name for every
+    # city (place_index.OUTLINE_CACHE_NAME): a city fetched before the
+    # outline existed (2026-10-12) is queued again and fetches only that.
+    from pipeline import place_index
+    for key, path in (("PLACE_OSM_JSON", json_path), ("PLACE_OSM_EXTRA_JSON", extra_path),
+                      ("the outline cache", json_path.parent / place_index.OUTLINE_CACHE_NAME)):
         state = _cache_state(path)
         if state is not None:
             return f"{key} {state}"
@@ -560,9 +565,12 @@ def selftest():
         one = real_cached("x", a, b)
         b.write_bytes(b'{"elements": []}')
         both = real_cached("x", a, b)
-        report("the real cache test names the missing file and passes only with both",
+        from pipeline import place_index
+        (tmp / place_index.OUTLINE_CACHE_NAME).write_bytes(b'{"elements": []}')
+        three = real_cached("x", a, b)
+        report("the real cache test names the missing file and passes only with all three",
                none == "PLACE_OSM_JSON missing" and one == "PLACE_OSM_EXTRA_JSON missing"
-               and both is None)
+               and both == "the outline cache missing" and three is None)
 
         class Config:
             PLACE_OSM_JSON = a
@@ -646,6 +654,8 @@ def selftest():
         cut.write_bytes(b'{"elements": [{"id": 1')
         other = tmp / "other.json"
         other.write_bytes(b'{"remark": "runtime error: timed out"}')
+        from pipeline import place_index
+        (tmp / place_index.OUTLINE_CACHE_NAME).write_bytes(b'{"elements": []}\n')
         report("a cache that is empty, cut short or not an Overpass answer is not a cache",
                real_cached("x", whole, whole) is None
                and real_cached("x", whole, empty) == "PLACE_OSM_EXTRA_JSON empty"

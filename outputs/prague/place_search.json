@@ -41,5 +41,12 @@
       "name": "Ryšánka",
       "tag": "railway=construction"
     }
+  ],
+  "area": [
+    {
+      "osm": "relation/435514",
+      "name": "Prague",
+      "stations": 57
+    }
   ]
 }

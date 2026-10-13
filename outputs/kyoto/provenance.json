@@ -902,6 +902,17 @@
     "sha256": "93318ba76fbc30bd6ce44b0bd3d0be599d6130cab07b6e734c9f464e40fd6515",
     "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_26_GML.zip"
   },
+  "osm_place_outline": {
+    "bytes": 316435,
+    "elements": 1,
+    "file": "osm_place_outline_v1.json",
+    "host": "overpass.kumi.systems",
+    "how": "fetched",
+    "osm_base": "2026-07-24T11:04:51Z",
+    "query": "[out:json][timeout:60];\narea[\"name\"=\"京都市\"][\"admin_level\"=\"7\"][\"boundary\"=\"administrative\"]->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T01:46:34+00:00",
+    "sha256": "40eea3b9d2dc3623913f3d190c61675d7f6747ecfdb36b4ca2e35688dd9c650a"
+  },
   "osm_places": {
     "bytes": 11519000,
     "elements": 81521,
@@ -918,7 +929,7 @@
     "elements": 513,
     "file": "osm_places_extra_2026-10-08.json",
     "host": "overpass-api.de",
-    "how": "fetched",
+    "how": "kept (on disk from an earlier run)",
     "osm_base": "2026-10-08T08:29:52Z",
     "query": "[out:json][timeout:170];\narea[\"name\"=\"京都市\"][\"admin_level\"=\"7\"][\"boundary\"=\"administrative\"]->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
     "retrieved": "2026-10-08T08:33:05+00:00",

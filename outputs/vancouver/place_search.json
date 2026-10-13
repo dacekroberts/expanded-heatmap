@@ -1,6 +1,6 @@
 {
   "index": "app/static/places/vancouver.json",
-  "places": 28099,
+  "places": 28097,
   "data_retrieved": "2026-10-08",
   "languages": {
     "local": [
@@ -14,5 +14,32 @@
       "English"
     ]
   },
-  "stations_not_open": []
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/1852574",
+      "name": "Vancouver",
+      "stations": 20
+    },
+    {
+      "osm": "relation/2221119",
+      "name": "Burnaby",
+      "stations": 11
+    },
+    {
+      "osm": "relation/1377803",
+      "name": "New Westminster",
+      "stations": 5
+    },
+    {
+      "osm": "relation/2221139",
+      "name": "Coquitlam",
+      "stations": 4
+    },
+    {
+      "osm": "relation/1384967",
+      "name": "Surrey",
+      "stations": 4
+    }
+  ]
 }

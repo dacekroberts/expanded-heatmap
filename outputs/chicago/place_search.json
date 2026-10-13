@@ -40,5 +40,12 @@
       "name": "130th",
       "tag": "railway=proposed"
     }
+  ],
+  "area": [
+    {
+      "osm": "relation/122604",
+      "name": "Chicago",
+      "stations": 123
+    }
   ]
 }

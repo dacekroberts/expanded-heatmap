@@ -47,6 +47,17 @@
     "url": "https://apl2.czso.cz/iSMS/do_cis_export?kodcis=6105&typdat=0&cisjaz=203&format=2&separator=%2C"
   },
   "osm_host": "overpass-api.de",
+  "osm_place_outline": {
+    "bytes": 161062,
+    "elements": 1,
+    "file": "osm_place_outline_v1.json",
+    "host": "overpass.kumi.systems",
+    "how": "fetched",
+    "osm_base": "2026-07-28T02:16:18Z",
+    "query": "[out:json][timeout:60];\narea(id:3600435514)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T01:03:26+00:00",
+    "sha256": "758ec97f46c036446ecc873b2502a27251dda7bba604dbcf4c737a800c62bec0"
+  },
   "osm_places": {
     "bytes": 24216543,
     "elements": 188765,
@@ -63,7 +74,7 @@
     "elements": 1189,
     "file": "osm_places_extra_2026-10-08.json",
     "host": "overpass-api.de",
-    "how": "fetched",
+    "how": "kept (on disk from an earlier run)",
     "osm_base": "2026-10-08T19:00:52Z",
     "query": "[out:json][timeout:170];\narea(id:3600435514)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
     "retrieved": "2026-10-08T19:04:06+00:00",

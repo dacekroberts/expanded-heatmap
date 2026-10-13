@@ -2169,6 +2169,8 @@ _PLACE_SEARCH_TEMPLATE = r"""
     .hm-search-credit { padding: 4px 8px 6px; font-size: 11px; opacity: 0.8;
         border-top: 1px solid @@LIGHT_BORDER@@; }
     .hm-search-credit a { color: inherit; }
+    .hm-search-area { stroke: @@LIGHT_ACCENT@@; }
+    .dark-base .hm-search-area { stroke: @@DARK_ACCENT@@; }
     .hm-search-btn:focus-visible, .hm-search-input:focus-visible {
         outline: 2px solid @@LIGHT_ACCENT@@; outline-offset: 1px; }
     .dark-base .hm-search { background: var(--dm-surface); color: var(--dm-text);
@@ -2359,6 +2361,33 @@ _PLACE_SEARCH_TEMPLATE = r"""
     var data = null, own = null, loading = null, fold = null, marker = null, timer = null;
     var renderer = null, lineRow = null, casing = null, cased = null;
     var byIndex = [], crossURL = null, crossings = null;
+    // THE SEARCHED AREA (owner, 2026-10-12): the index names the
+    // municipalities it covers and carries their merged outline
+    // (place_index.outline). The outline is drawn only while the search box
+    // is open, so the map is not given a standing border; a search that finds
+    // nothing says where search stops.
+    var area = null, areaLayer = null;
+    var CREDIT_BELOW = @@CREDIT_BELOW@@;
+    function showArea(map, on) {
+        if (areaLayer) { map.removeLayer(areaLayer); areaLayer = null; }
+        if (!on || !area || !area.outline || !area.outline.length) return;
+        var polys = area.outline.map(function (r) {
+            var ring = [];
+            for (var i = 0; i + 1 < r.length; i += 2) ring.push([r[i], r[i + 1]]);
+            return [ring];
+        });
+        areaLayer = L.polygon(polys, {fill: false, weight: 2, dashArray: "6 5", opacity: 0.9,
+                                      interactive: false, className: "hm-search-area"}).addTo(map);
+    }
+    // "Seattle", "Seattle and Bellevue", "Seattle and 10 more": the index
+    // lists the municipality with the most of the map's stations first.
+    function areaName() {
+        var n = (area && area.names || []).filter(Boolean);
+        if (!n.length) return "";
+        if (n.length === 1) return n[0];
+        if (n.length === 2) return n[0] + " and " + n[1];
+        return n[0] + " and " + (n.length - 1) + " more";
+    }
 
     function norm(s) {
         s = String(s).normalize("NFKC").toLowerCase().normalize("NFD")
@@ -2494,6 +2523,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
                 // by their place here.
                 byIndex = rows;
                 crossURL = ix.crossings || null;
+                area = ix.area || null;
                 data = own.concat(link(rows));
                 document.querySelector(".hm-search").setAttribute(
                     "data-load-ms", Math.round(performance.now() - t0));
@@ -2621,9 +2651,13 @@ _PLACE_SEARCH_TEMPLATE = r"""
             // halves, before North Damen Avenue's other crossings (Chicago,
             // 2026-10-08).
             if (pair && d.kind === "crossing" && pairHit(d, pair)) s -= 60;
-            if (streetQ && (d.kind === "street" || d.kind === "crossing" || d.kind === "junction")) s -= 45;
+            var streetD = d.kind === "street" || d.kind === "crossing" || d.kind === "junction";
+            if (streetQ && streetD) s -= 45;
             // And its own type first: "NE 45th St" is the Street, not the Court.
-            if (streetQ && d.hay.indexOf(" " + (STREET_TYPE[typeW] || ABBR[typeW] || typeW) + " ") >= 0) s -= 5;
+            // Streets only: given to every kind, it put the Lake Shore Drive
+            // Synagogue, a landmark holding the word "drive", 0.5 ahead of
+            // the Drive for "Lake Shore Dr" (Chicago, live, 2026-10-12).
+            if (streetQ && streetD && d.hay.indexOf(" " + (STREET_TYPE[typeW] || ABBR[typeW] || typeW) + " ") >= 0) s -= 5;
             // Whole words before parts: "Art Institute" before "Arturo ...".
             // An abbreviation counts as its whole word: "bd St-Laurent" is
             // Boulevard Saint-Laurent before Boulevard Laurentien (batch 2a).
@@ -2769,9 +2803,41 @@ _PLACE_SEARCH_TEMPLATE = r"""
             list.appendChild(n);
             list.classList.add("has");
         }
-        function credit() {
+        var creditBelow = false;
+        // `found` is false for a search that found nothing: the note above
+        // it already says where search stops, so the area line is left out
+        // (owner, 2026-10-12).
+        function credit(found) {
             var c = document.createElement("div");
             c.className = "hm-search-credit";
+            if (CREDIT_BELOW && map.attributionControl) {
+                if (!creditBelow) {
+                    creditBelow = true;
+                    var creditEl = map.attributionControl.getContainer();
+                    var creditH = creditEl ? creditEl.offsetHeight : 0;
+                    map.attributionControl.addAttribution(
+                        'Search index <a href="https://opendatacommons.org/licenses/odbl/1-0/" ' +
+                        'target="_blank" rel="noopener noreferrer">ODbL</a> (<a href="' + abs(URL) +
+                        '" target="_blank" rel="noopener" download>download</a>' +
+                        (crossURL ? ', <a href="' + abs(crossURL) + '" target="_blank" rel="noopener" download>intersections</a>' : '') + ')');
+                    // The line is taller now (two lines on a phone), and
+                    // the legend's bottom is clamped for a one-line credit
+                    // (_LEGEND_BOTTOM_CSS): it is raised by what the line
+                    // grew. Measured 2026-10-13 at a 343 px map: the line
+                    // goes from 14 to 28 px and an open legend's bottom 4 px
+                    // sat under it.
+                    var grew = creditEl ? creditEl.offsetHeight - creditH : 0;
+                    var lg = document.querySelector(".map-legend");
+                    if (lg && grew > 0) {
+                        var was = lg.style.bottom || getComputedStyle(lg).bottom;
+                        lg.style.bottom = "calc(" + was + " + " + grew + "px)";
+                    }
+                }
+                if (found === false || !areaName()) return;
+                c.textContent = "Search covers " + areaName() + ", outlined on the map.";
+                list.appendChild(c);
+                return;
+            }
             // The short credit (owner, 2026-10-07, to save space in the box):
             // the OSM Attribution Guideline's "© OpenStreetMap contributors"
             // form, linked to the copyright page, the licence named and linked
@@ -2830,7 +2896,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
             if (!data) { note("Loading places…"); return; }
             // An error value typed in ("#N/A", "#REF!", "!ERROR!") finds
             // nothing, as no index holds one (place_index.junk_name).
-            if (JUNK_Q.test(input.value)) { note("No street, station or place by that name"); credit(); return; }
+            if (JUNK_Q.test(input.value)) { note("No street, station or place by that name"); credit(false); return; }
             shown = gated ? early : search(input.value);
             if (!gated && needCrossings(input.value, shown)) {
                 // Shown again when the intersections arrive, or as it stands
@@ -2838,7 +2904,13 @@ _PLACE_SEARCH_TEMPLATE = r"""
                 loadCrossings().then(render, render);
                 if (!shown.length) { note("Loading intersections…"); return; }
             }
-            if (!shown.length) { note("No street, station or place by that name"); credit(); return; }
+            if (!shown.length) {
+                note("No street, station or place by that name");
+                // The owner's wording (2026-10-12).
+                if (area) note("Search covers the outlined area only. Zoom out to see it.");
+                credit(false);
+                return;
+            }
             var nOwn = shown.filter(isOwn).length, nPlaces = shown.length - nOwn;
             var foldable = nOwn > 0 && nPlaces > 0 && narrow();
             var pills = null, rows = null;
@@ -3030,7 +3102,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
         function open() {
             box.classList.add("open");
             input.focus();
-            load(map).then(render, function () {
+            load(map).then(function () { showArea(map, true); render(); }, function () {
                 // No index (a map opened outside the site): the map's own
                 // stations and lines still answer.
                 data = own;
@@ -3045,6 +3117,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
                 input.value = "";
                 render();
                 box.classList.remove("open");
+                showArea(map, false);
                 return;
             }
             open();
@@ -3067,6 +3140,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
                 input.value = "";
                 render();
                 box.classList.remove("open");
+                showArea(map, false);
             }
         });
     }
@@ -3078,6 +3152,12 @@ _PLACE_SEARCH_TEMPLATE = r"""
 })();
 </script>
 """
+# Where the search data's ODbL notice and download offer sit: True, in the
+# map's bottom attribution line, the box's line then naming the searched
+# area (owner, 2026-10-12, on a local render of both: "B, wording approved").
+# False puts them back in the search box, as first landed. A required notice
+# either way (ODbL 4.3 and the 4.6 offer): never drop both.
+PLACE_CREDIT_BELOW = True
 PLACE_SEARCH_SCRIPT = (
     _PLACE_SEARCH_TEMPLATE
     .replace("@@FONT_STACK@@", FONT_VAR)
@@ -3092,6 +3172,7 @@ PLACE_SEARCH_SCRIPT = (
     .replace("@@STATION_DUP_M@@", str(STATION_DUP_M))
     .replace("@@CJK_CLASS@@", _JS_CJK_CLASS)
     .replace("@@MARKS_CLASS@@", _JS_MARKS_CLASS)
+    .replace("@@CREDIT_BELOW@@", "true" if PLACE_CREDIT_BELOW else "false")
 )
 assert "@@" not in PLACE_SEARCH_SCRIPT, "unresolved placeholder in PLACE_SEARCH_SCRIPT"
 # The dot never shrinks: a label that wraps on a phone took width from it and

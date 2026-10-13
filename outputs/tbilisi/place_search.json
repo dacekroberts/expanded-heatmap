@@ -16,5 +16,12 @@
       "Georgian"
     ]
   },
-  "stations_not_open": []
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/1996871",
+      "name": "Tbilisi",
+      "stations": 23
+    }
+  ]
 }

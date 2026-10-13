@@ -41,12 +41,23 @@
     "sha256": "3cd0737c98d62b65fbbf614f73c739dd5bab48f7a4b03199d2cee6defe738d0f",
     "url": "overpass (overpass-api.de)"
   },
+  "osm_place_outline": {
+    "bytes": 118188,
+    "elements": 1,
+    "file": "osm_place_outline_v1.json",
+    "host": "overpass.kumi.systems",
+    "how": "fetched",
+    "osm_base": "2026-07-15T15:22:01Z",
+    "query": "[out:json][timeout:60];\narea(id:3601996871)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T01:30:02+00:00",
+    "sha256": "18fb9f0e4c1083d308b298c68d0be07252ea89925ccd2e6cabc49db443e89b7b"
+  },
   "osm_places": {
     "bytes": 13605732,
     "elements": 94118,
     "file": "osm_places_2026-10-08.json",
     "host": "overpass-api.de",
-    "how": "fetched",
+    "how": "kept (on disk from an earlier run)",
     "osm_base": "2026-10-08T21:40:36Z",
     "query": "[out:json][timeout:170];\narea(id:3601996871)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
     "retrieved": "2026-10-08T21:44:14+00:00",
@@ -57,7 +68,7 @@
     "elements": 503,
     "file": "osm_places_extra_2026-10-08.json",
     "host": "overpass-api.de",
-    "how": "fetched",
+    "how": "kept (on disk from an earlier run)",
     "osm_base": "2026-10-08T21:43:46Z",
     "query": "[out:json][timeout:170];\narea(id:3601996871)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
     "retrieved": "2026-10-08T21:46:10+00:00",

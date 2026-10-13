@@ -16,5 +16,12 @@
       "Chinese"
     ]
   },
-  "stations_not_open": []
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/913110",
+      "name": "Hong Kong",
+      "stations": 141
+    }
+  ]
 }

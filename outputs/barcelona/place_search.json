@@ -71,5 +71,12 @@
       "name": "Gràcia",
       "tag": "railway=construction"
     }
+  ],
+  "area": [
+    {
+      "osm": "relation/347950",
+      "name": "Barcelona",
+      "stations": 111
+    }
   ]
 }

@@ -57,5 +57,12 @@
       "name": "동아대",
       "tag": "railway=construction"
     }
+  ],
+  "area": [
+    {
+      "osm": "relation/2396450",
+      "name": "Busan",
+      "stations": 110
+    }
   ]
 }

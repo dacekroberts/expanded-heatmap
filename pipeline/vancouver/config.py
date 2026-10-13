@@ -575,4 +575,9 @@ PLACE_DROPPED = {
     # A description standing in for a name (owner, 2026-10-11).
     "node/4390230582": "a description standing in for a name (a church with no name recorded)",
     "way/96778390": "'North Slope Buffer', a land-use strip named for its use",
+    # Surrey park parcels whose codes CODED_TYPE's pattern does not match (a
+    # lower-case letter, a hyphen inside the code); owner, 2026-10-12.
+    "way/542704845": "'122l Greenbelt', a parcel code beside a type word",
+    "way/542704847": "'122l Greenbelt', a parcel code beside a type word",
+    "way/1290572402": "'15-H - Greenbelt', a parcel code beside a type word",
 }

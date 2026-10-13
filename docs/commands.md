@@ -12,6 +12,7 @@ python pipeline/<city_slug>/step3_map.py
 python pipeline/place_index_fetch.py <city_slug> [--force]   # place search: its two Overpass queries, in turn; NOT a step
 python pipeline/<city_slug>/step2b_place_index.py       # place search: the index, before step 3
 python scripts/check_place_search.py [--selftest]       # every searched map current; languages measured; ODbL; junk and leak words
+python scripts/check_place_scope.py [--selftest]        # the ceiling: every searched index covers only municipalities with a station or a recorded reason, and carries its outline
 python pipeline/place_index_fetch.py <city> [--force] [--wait <min>] [--host <mirror>]   # a city's two place queries; one run per Overpass mirror at a time on this machine (a lock per mirror; with no --host it holds both); `--selftest` runs the lock's cases
 python scripts/rule_breaks.py <script> <breaks.json>   # break each rule in a temporary copy and run its selftest: caught, MISSED or stale; a selftest that cannot fail proves nothing
 python scripts/check_all.py --only <text> [<text> ...]   # only the checks whose command line holds a text (a session's own selftest); a partial run, never the gate

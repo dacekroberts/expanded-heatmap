@@ -23,12 +23,23 @@
     "sha256": "e1365e23d96c99689c3f5c07a114e10c003777677562a93c72bf881576a5ea00",
     "url": "https://opendata.brussels.be/api/explore/v2.1/catalog/datasets/commerces-recenses-par-hubbrussels-vbx/exports/json?select=objectid%2Ccategory_fr%2Ccategory_nl%2Ccategory_en%2Ctype_fr%2Ctype_nl%2Ctype_en%2Cname_fr%2Cname_nl%2Cname_en%2Caddress_fr%2Cpostalcode%2Cmunicipality_fr%2Cgeo_point_2d%2Csource%2Clast_update"
   },
+  "osm_place_outline": {
+    "bytes": 61963,
+    "elements": 1,
+    "file": "osm_place_outline_v1.json",
+    "host": "overpass.kumi.systems",
+    "how": "fetched",
+    "osm_base": "2026-05-31T22:37:44Z",
+    "query": "[out:json][timeout:60];\narea(id:3600058274)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T00:07:04+00:00",
+    "sha256": "27948391488916951bc8218e7ccaa6942e5a7d57c6d34d738d977c760d02085f"
+  },
   "osm_places": {
     "bytes": 4930901,
     "elements": 34884,
     "file": "osm_places_2026-10-08.json",
     "host": "overpass-api.de",
-    "how": "fetched",
+    "how": "kept (on disk from an earlier run)",
     "osm_base": "2026-10-08T18:44:36Z",
     "query": "[out:json][timeout:170];\narea(id:3600058274)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
     "retrieved": "2026-10-08T18:46:38+00:00",
@@ -39,7 +50,7 @@
     "elements": 549,
     "file": "osm_places_extra_2026-10-08.json",
     "host": "overpass-api.de",
-    "how": "fetched",
+    "how": "kept (on disk from an earlier run)",
     "osm_base": "2026-10-08T18:45:35Z",
     "query": "[out:json][timeout:170];\narea(id:3600058274)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
     "retrieved": "2026-10-08T18:46:54+00:00",

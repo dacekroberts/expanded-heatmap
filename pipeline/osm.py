@@ -144,6 +144,19 @@ def is_overload(exc):
     return isinstance(exc, TimeoutError) or "timed out" in str(exc).lower()
 
 
+def data_age_days(payload, now=None):
+    """Days between an Overpass answer's own data date
+    (osm3s.timestamp_osm_base) and now; None when it carries no date."""
+    import datetime
+    base = (payload.get("osm3s") or {}).get("timestamp_osm_base")
+    try:
+        then = datetime.datetime.fromisoformat(str(base).replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    now = now or datetime.datetime.now(datetime.timezone.utc)
+    return (now - then).total_seconds() / 86400
+
+
 def overload_wait_left(name):
     """Seconds before host `name` may be asked again; 0 if it has not refused."""
     at = _overloaded_at.get(name)
@@ -170,8 +183,15 @@ def pinned(name):
 
 
 def fetch(query, cache_path, *, force=False, timeout=180, retries=2,
-          deadline=900, verbose=True, hosts=None):
+          deadline=900, verbose=True, hosts=None, max_age_days=None):
     """Return the Overpass elements for `query`, cached at `cache_path`.
+
+    `max_age_days` refuses an answer whose data (osm3s.timestamp_osm_base)
+    is older than that, as it refuses an empty one, and asks the next mirror:
+    overpass.kumi.systems answered place queries from data dated 2026-05-31,
+    2026-06-01, 2026-07-15 and 2026-07-24 on 2026-10-12, and a tiled London
+    cache mixed May tiles with October ones. None accepts any date
+    (boundaries, where months do not matter).
 
     `hosts` is the mirrors to ask, in order; None is every mirror. A pinned
     fetch (`hosts=pinned(name)`) asks one mirror only and, when it refuses,
@@ -284,6 +304,12 @@ def fetch(query, cache_path, *, force=False, timeout=180, retries=2,
                     for v in (e.get("tags") or {}).values()):
                 problems.append(f"{name}: all-zero count")
                 _say(f"[{attempt}] {name} -> all-zero count (not trusted)")
+                continue
+            age = data_age_days(payload)
+            if max_age_days is not None and (age is None or age > max_age_days):
+                base = (payload.get("osm3s") or {}).get("timestamp_osm_base")
+                problems.append(f"{name}: data dated {base}, older than {max_age_days} days")
+                _say(f"[{attempt}] {name} -> data dated {base} (not trusted)")
                 continue
             payload["_fetched_from"] = name
             payload["_query"] = query

@@ -16,5 +16,12 @@
       "Korean"
     ]
   },
-  "stations_not_open": []
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/2297418",
+      "name": "Seoul",
+      "stations": 308
+    }
+  ]
 }
