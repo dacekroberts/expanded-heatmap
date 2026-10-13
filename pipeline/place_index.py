@@ -75,7 +75,7 @@ def files(index, slug):
     not_open = index.pop("stations_not_open", [])
     munis = index.pop("area_municipalities", [])
     cpath = crossings_path(slug)
-    cbytes = json.dumps({"license": index["license"], "city": index["city"],
+    cbytes = json.dumps({"license": index["license"], "schema": SCHEMA, "city": index["city"],
                          "part_of": f"{slug}.json", "rows": cross},
                         ensure_ascii=False, separators=(",", ":")).encode("utf-8")
     # The index carries the intersections file's hashed path, so a rebuilt
@@ -121,6 +121,11 @@ FOLDS = (None, "ja")
 # and their merged outline, each ring a flat [lat, lon, lat, lon, ...].
 # OUTLINE_SIMPLIFY_M is measured in the city's own projected CRS, never in
 # degrees. Re-measure the index sizes if either constant changes.
+# THE FILES' SCHEMA NUMBER (owner, 2026-10-12, for the travel app that reads
+# them): in the index and in its intersections file. 1 is the format with
+# "area". Raise it when a reader of the files would have to change: a key
+# removed or renamed, a row's fields reordered. A key added is not a break.
+SCHEMA = 1
 OUTLINE_SIMPLIFY_M = 40
 # A part under this share of the whole area is left undrawn (islets, slivers).
 OUTLINE_MIN_SHARE = 0.002
@@ -1907,6 +1912,7 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
                        "builds it is published at https://github.com/dacekroberts/expanded-heatmap."),
             "data_retrieved": retrieved,
         },
+        "schema": SCHEMA,
         "city": city,
         "languages": languages(row_langs, local),
         "fold": fold,

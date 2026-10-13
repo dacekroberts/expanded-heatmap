@@ -16,5 +16,122 @@
       "Japanese"
     ]
   },
-  "stations_not_open": []
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/1758947",
+      "name": "Ota",
+      "stations": 39
+    },
+    {
+      "osm": "relation/1759474",
+      "name": "Setagaya",
+      "stations": 38
+    },
+    {
+      "osm": "relation/1761717",
+      "name": "Minato",
+      "stations": 33
+    },
+    {
+      "osm": "relation/3554015",
+      "name": "Koto",
+      "stations": 28
+    },
+    {
+      "osm": "relation/1758858",
+      "name": "Shinjuku",
+      "stations": 28
+    },
+    {
+      "osm": "relation/1761742",
+      "name": "Chiyoda",
+      "stations": 25
+    },
+    {
+      "osm": "relation/3554304",
+      "name": "Shinagawa",
+      "stations": 25
+    },
+    {
+      "osm": "relation/1759506",
+      "name": "Toshima",
+      "stations": 25
+    },
+    {
+      "osm": "relation/1760124",
+      "name": "Adachi",
+      "stations": 24
+    },
+    {
+      "osm": "relation/1758897",
+      "name": "Chuo",
+      "stations": 22
+    },
+    {
+      "osm": "relation/1760040",
+      "name": "Arakawa",
+      "stations": 20
+    },
+    {
+      "osm": "relation/1760078",
+      "name": "Itabashi",
+      "stations": 19
+    },
+    {
+      "osm": "relation/1760038",
+      "name": "Kita",
+      "stations": 19
+    },
+    {
+      "osm": "relation/1760119",
+      "name": "Nerima",
+      "stations": 18
+    },
+    {
+      "osm": "relation/1759477",
+      "name": "Shibuya",
+      "stations": 18
+    },
+    {
+      "osm": "relation/1543055",
+      "name": "Suginami",
+      "stations": 18
+    },
+    {
+      "osm": "relation/1758888",
+      "name": "Taito",
+      "stations": 16
+    },
+    {
+      "osm": "relation/1758878",
+      "name": "Bunkyō",
+      "stations": 15
+    },
+    {
+      "osm": "relation/1758891",
+      "name": "Sumida",
+      "stations": 14
+    },
+    {
+      "osm": "relation/1543056",
+      "name": "Nakano",
+      "stations": 13
+    },
+    {
+      "osm": "relation/1761718",
+      "name": "Katsushika",
+      "stations": 12
+    },
+    {
+      "osm": "relation/1761743",
+      "name": "Edogawa",
+      "stations": 11
+    },
+    {
+      "osm": "relation/1758936",
+      "name": "Meguro",
+      "stations": 10
+    }
+  ]
 }

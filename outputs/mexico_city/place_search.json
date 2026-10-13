@@ -41,5 +41,32 @@
       "name": "Hospital Materno Infantil",
       "tag": "proposed=yes"
     }
+  ],
+  "area": [
+    {
+      "osm": "relation/1376330",
+      "name": "Mexico City",
+      "stations": 169
+    },
+    {
+      "osm": "relation/5605754",
+      "name": "Ecatepec de Morelos",
+      "stations": 5
+    },
+    {
+      "osm": "relation/5606086",
+      "name": "Nezahualcóyotl",
+      "stations": 3
+    },
+    {
+      "osm": "relation/5605964",
+      "name": "La Paz",
+      "stations": 2
+    },
+    {
+      "osm": "relation/5606080",
+      "name": "Naucalpan de Juárez",
+      "stations": 1
+    }
   ]
 }

@@ -178,9 +178,16 @@ All quoted in the drafts file; the short list:
     "Paseo de la Reforma" (Mexico City), "Sanjo Street" and 三条通 (Kyoto),
     "Damen and North", "Clark and Lake", "Art Institute" (Chicago), "Brick
     Lane", "Oxford Street" (London).
-  - *Known and left*: Chicago's "Lake Shore Dr" lists the synagogue above
-    the street; the four-letter gate, streets ranked after other kinds, and
-    the places group folded on a phone are the owner's to tune by feel.
+  - "Lake Shore Dr" (Chicago) lists the Drives, not the Lake Shore Drive
+    Synagogue: the typed street type's bonus goes to streets only (fixed
+    2026-10-12; a regression query). The four-letter gate, streets ranked
+    after other kinds, and the places group folded on a phone are "good for
+    now" (owner, 2026-10-12).
+  - **To rank-test without a browser**: cut the search script out of a
+    rendered map and run it on the index with Node (the scratch harness of
+    2026-10-12 slices from `var KIND_RANK` to `function isOwn`, stubs the
+    map and prints each result's score). It found in one run what reading
+    the code had not.
 - **Street coverage is measured, not assumed**: distinct street names in the
   index against named highway ways in the cache run 85 to 99% on 18 built
   cities and 72% in Tokyo, where 812 of the 1,203 names left out are

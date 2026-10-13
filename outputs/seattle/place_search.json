@@ -14,5 +14,62 @@
       "English"
     ]
   },
-  "stations_not_open": []
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/237385",
+      "name": "Seattle",
+      "stations": 18
+    },
+    {
+      "osm": "relation/237868",
+      "name": "Bellevue",
+      "stations": 6
+    },
+    {
+      "osm": "relation/237376",
+      "name": "Redmond",
+      "stations": 4
+    },
+    {
+      "osm": "relation/237875",
+      "name": "Kent",
+      "stations": 2
+    },
+    {
+      "osm": "relation/237380",
+      "name": "SeaTac",
+      "stations": 2
+    },
+    {
+      "osm": "relation/237358",
+      "name": "Shoreline",
+      "stations": 2
+    },
+    {
+      "osm": "relation/237350",
+      "name": "Federal Way",
+      "stations": 1
+    },
+    {
+      "osm": "relation/237662",
+      "name": "Lynnwood",
+      "stations": 1
+    },
+    {
+      "osm": "relation/237360",
+      "name": "Mercer Island",
+      "stations": 1
+    },
+    {
+      "osm": "relation/237670",
+      "name": "Mountlake Terrace",
+      "stations": 1
+    },
+    {
+      "osm": "relation/237384",
+      "name": "Tukwila",
+      "stations": 1
+    }
+  ]
 }

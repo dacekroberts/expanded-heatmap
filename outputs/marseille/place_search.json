@@ -15,5 +15,12 @@
       "French"
     ]
   },
-  "stations_not_open": []
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/76469",
+      "name": "Marseille",
+      "stations": 66
+    }
+  ]
 }

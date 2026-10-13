@@ -18,5 +18,12 @@
       "Dutch"
     ]
   },
-  "stations_not_open": []
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/58274",
+      "name": "Brussels",
+      "stations": 62
+    }
+  ]
 }

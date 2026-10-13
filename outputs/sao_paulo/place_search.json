@@ -15,5 +15,12 @@
       "Portuguese"
     ]
   },
-  "stations_not_open": []
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/298285",
+      "name": "São Paulo",
+      "stations": 109
+    }
+  ]
 }

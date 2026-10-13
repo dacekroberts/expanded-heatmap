@@ -15,5 +15,32 @@
       "French"
     ]
   },
-  "stations_not_open": []
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/1634158",
+      "name": "Montreal",
+      "stations": 74
+    },
+    {
+      "osm": "relation/197576",
+      "name": "Pointe-Claire",
+      "stations": 2
+    },
+    {
+      "osm": "relation/197577",
+      "name": "Kirkland",
+      "stations": 1
+    },
+    {
+      "osm": "relation/197567",
+      "name": "Mount Royal",
+      "stations": 1
+    },
+    {
+      "osm": "relation/197580",
+      "name": "Sainte-Anne-de-Bellevue",
+      "stations": 1
+    }
+  ]
 }

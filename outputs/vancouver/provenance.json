@@ -1,4 +1,15 @@
 {
+  "osm_place_outline": {
+    "bytes": 91413,
+    "elements": 5,
+    "file": "osm_place_outline_v1.json",
+    "host": "overpass.kumi.systems",
+    "how": "fetched",
+    "osm_base": "2026-05-06T03:25:00Z",
+    "query": "[out:json][timeout:60];\narea(id:3601852574,3602221119,3601377803,3602221139,3601384967)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T01:33:10+00:00",
+    "sha256": "881be45ae254d4793cd7a3c020edbcc644e051adb784baca769aedfdb96ed756"
+  },
   "osm_places": {
     "bytes": 33326549,
     "elements": 280535,
@@ -15,7 +26,7 @@
     "elements": 538,
     "file": "osm_places_extra_2026-10-08.json",
     "host": "overpass-api.de",
-    "how": "fetched",
+    "how": "kept (on disk from an earlier run)",
     "osm_base": "2026-10-08T08:32:56Z",
     "query": "[out:json][timeout:170];\narea(id:3601852574,3602221119,3601377803,3602221139,3601384967)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
     "retrieved": "2026-10-08T08:36:37+00:00",

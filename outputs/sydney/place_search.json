@@ -14,5 +14,12 @@
       "English"
     ]
   },
-  "stations_not_open": []
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/1251066",
+      "name": "Council of the City of Sydney",
+      "stations": 16
+    }
+  ]
 }

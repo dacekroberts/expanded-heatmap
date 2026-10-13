@@ -15,5 +15,12 @@
       "French"
     ]
   },
-  "stations_not_open": []
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/7444",
+      "name": "Paris",
+      "stations": 280
+    }
+  ]
 }

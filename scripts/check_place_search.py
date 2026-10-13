@@ -89,8 +89,8 @@ def check_coverage(slug, index, stations, known=None):
     return []
 
 
-TOP_KEYS = {"license", "city", "languages", "fold", "kinds", "rows", "crossings"}
-CROSS_KEYS = {"license", "city", "part_of", "rows"}
+TOP_KEYS = {"license", "schema", "city", "languages", "fold", "kinds", "rows", "crossings", "area"}
+CROSS_KEYS = {"license", "schema", "city", "part_of", "rows"}
 URL_RE = re.compile(r"/app/static/places/([a-z0-9_]+)[.]json[?]v=([0-9a-f]+)")
 CROSS_RE = re.compile(r"^/app/static/places/crossings/([a-z0-9_]+)[.]json[?]v=([0-9a-f]+)$")
 BULLET = "never leaves your browser"
@@ -318,7 +318,8 @@ def selftest():
     base = {"license": {"url": "https://opendatacommons.org/licenses/odbl/1-0/",
                         "attribution": "© OpenStreetMap contributors"},
             "city": "X", "fold": None, "kinds": [], "rows": [[0, 1, 2, "a", "", 0]],
-            "crossings": "/app/static/places/crossings/x.json?v=0"}
+            "crossings": "/app/static/places/crossings/x.json?v=0", "schema": 1,
+            "area": {"names": ["X"], "outline": [[1, 2, 1, 3, 2, 3, 1, 2]]}}
     ok = 0
     for label, langs, want in cases:
         got = len(check_index("x", dict(base, languages=langs), None))

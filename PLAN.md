@@ -251,8 +251,8 @@ Detail files: [japan](docs/plan_detail/japan.md),
     coverage figures are in the `place-search-city` skill. **Still the
     owner's to tune by feel**, each one re-render of the searched maps:
     the four-letter gate, streets ranked after other kinds, the places
-    group folded on a phone. **Known and left:** Chicago's "Lake Shore
-    Dr" lists the synagogue above the street. **Not yet tested live:**
+    group folded on a phone. Chicago's "Lake Shore Dr" is fixed (2026-10-12).
+    **Not yet tested live:**
     Tokyo and Vancouver.
   - **Owner's rulings on the rollout, 2026-10-12 (afternoon):** wave 1
     (English, 34) runs in its own session on branch `search-wave1`, from
@@ -273,26 +273,19 @@ Detail files: [japan](docs/plan_detail/japan.md),
     outside net's finds built", then "A registered code is a name", which
     put back Seattle's 27 buildings and Prague's 14 stations).
     The schema number and the id side file are built at wave 1's landing.
-    **Held for that landing (owner, 2026-10-12): two Surrey parcels still
-    in Vancouver's live index**, "122l Greenbelt" and "15-H - Greenbelt",
-    whose codes the pattern does not match. Drop both by id in
-    `PLACE_DROPPED`, re-render Vancouver once, in the same push.
-    **Also held for it: the Chicago ranking fix**, on local branch
-    `chicago-rank-fix` (`ad7aec79`, `pipeline/map_common.py` only): the
-    street-type bonus goes to streets only, so "Lake Shore Dr" lists the
-    Drive, not the synagogue. Cherry-pick it, re-render the 19 searched
-    maps, and take the "Known and left" line out of the skill.
-    **Also for that landing (owner, 2026-10-12), built on
-    `worktree-cleanup` and not on master:** the searched area's outline and
-    scope rule (`scripts/check_place_scope.py`; the 18 other built cities
-    still need their outline fetch and an index rebuild, then the size
-    table goes to the owner), the search credit in the map's bottom line
-    (run `check_map_attribution.js` with the search box opened, at several
-    heights), and the 7-day data-age guard in the fetch. **London's tile 2
-    is May data from `overpass.kumi.systems`: refetch it from
-    `overpass-api.de` when that mirror answers again (owner: "yes refetch
-    london tile"), rebuild London, report the rows that change.** Wave 1
-    refetches five main caches for the same reason.
+    **Built 2026-10-12 and 13, ahead of wave 1's landing, in one re-render
+    of the 19 searched maps:** the searched area's outline and scope rule
+    (`scripts/check_place_scope.py`), the search credit in the map's bottom
+    line, the boundary as the fetch's first query, the 7-day data-age guard,
+    schema number 1 in the index and intersections file, the Chicago
+    ranking fix and Vancouver's three Surrey parcels dropped by id.
+    **Still owed at wave 1's landing:** the id side file
+    (`outputs/<city>/place_ids.json`; it does not change an index, so no
+    re-render), and the cut-over message to transit-globe.
+    **London's tile 2 is May data from `overpass.kumi.systems`: refetch it
+    from `overpass-api.de` when that mirror answers again (owner: "yes
+    refetch london tile"), rebuild London, report the rows that change.**
+    Wave 1 refetches five main caches for the same reason.
   - **Idea for the next landing (owner, 2026-10-12): a button that
     returns a map to its starting view.** After a search the map stays
     at the found place and nothing restores the city-wide view (the

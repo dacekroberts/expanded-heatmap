@@ -16,5 +16,12 @@
       "Japanese"
     ]
   },
-  "stations_not_open": []
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/357794",
+      "name": "Kyoto",
+      "stations": 117
+    }
+  ]
 }

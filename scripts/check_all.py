@@ -76,6 +76,8 @@ CHECKS = [
     ["scripts/place_search_fetch_queue.py", "--selftest"],
     ["scripts/place_search_scaffold.py", "--selftest"],
     ["scripts/check_place_index_drift.py", "--selftest"],
+    ["scripts/check_place_scope.py"],
+    ["scripts/check_place_scope.py", "--selftest"],
     ["scripts/check_place_unopened.py"],
     ["scripts/check_place_unopened.py", "--selftest"],
     ["scripts/check_privacy_verdicts.py"],
