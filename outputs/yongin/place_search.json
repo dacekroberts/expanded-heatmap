@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/yongin.json",
-  "places": 4156,
+  "places": 4152,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ko"
     ],
     "coverage": {
-      "en": 0.582,
+      "en": 0.583,
       "ko": 0.997
     },
     "list_share": 0.5,

@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/kurume.json",
-  "places": 942,
+  "places": 938,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.352,
+      "en": 0.354,
       "ja": 1.0
     },
     "list_share": 0.5,

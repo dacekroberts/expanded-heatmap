@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/matsudo.json",
-  "places": 1130,
+  "places": 1106,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.244,
+      "en": 0.247,
       "ja": 0.997
     },
     "list_share": 0.5,

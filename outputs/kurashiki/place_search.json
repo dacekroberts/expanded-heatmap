@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/kurashiki.json",
-  "places": 1636,
+  "places": 1640,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.394,
+      "en": 0.393,
       "ja": 1.0
     },
     "list_share": 0.5,

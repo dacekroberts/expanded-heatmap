@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/fukui.json",
-  "places": 2991,
+  "places": 2988,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.282,
+      "en": 0.281,
       "ja": 0.998
     },
     "list_share": 0.5,

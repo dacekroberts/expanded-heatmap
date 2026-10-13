@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/neyagawa.json",
-  "places": 642,
+  "places": 641,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.447,
+      "en": 0.448,
       "ja": 1.0
     },
     "list_share": 0.5,

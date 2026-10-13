@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/kakogawa.json",
-  "places": 752,
+  "places": 751,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.536,
+      "en": 0.537,
       "ja": 0.995
     },
     "list_share": 0.5,

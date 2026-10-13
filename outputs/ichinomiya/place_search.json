@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/ichinomiya.json",
-  "places": 1129,
+  "places": 1127,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.27,
+      "en": 0.271,
       "ja": 0.999
     },
     "list_share": 0.5,

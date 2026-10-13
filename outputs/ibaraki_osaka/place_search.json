@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/ibaraki_osaka.json",
-  "places": 954,
+  "places": 952,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.453,
+      "en": 0.452,
       "ja": 0.998
     },
     "list_share": 0.5,

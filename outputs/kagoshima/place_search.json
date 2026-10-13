@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/kagoshima.json",
-  "places": 2774,
+  "places": 2760,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.311,
+      "en": 0.308,
       "ja": 1.0
     },
     "list_share": 0.5,

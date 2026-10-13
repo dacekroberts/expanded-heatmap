@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/higashiyamato.json",
-  "places": 832,
+  "places": 830,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.442,
+      "en": 0.443,
       "ja": 0.996
     },
     "list_share": 0.5,

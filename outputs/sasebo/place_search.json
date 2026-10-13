@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/sasebo.json",
-  "places": 1013,
+  "places": 1012,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.429,
+      "en": 0.43,
       "ja": 0.906
     },
     "list_share": 0.5,

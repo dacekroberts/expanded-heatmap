@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/tachikawa.json",
-  "places": 582,
+  "places": 580,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.431,
+      "en": 0.433,
       "ja": 0.995
     },
     "list_share": 0.5,

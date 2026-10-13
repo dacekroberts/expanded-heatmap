@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/yokkaichi.json",
-  "places": 1352,
+  "places": 1351,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.507,
+      "en": 0.506,
       "ja": 1.0
     },
     "list_share": 0.5,
