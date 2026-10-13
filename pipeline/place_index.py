@@ -2194,6 +2194,16 @@ def _bridge_led(tags, names):
     return names
 
 
+# A station word closing a name is set aside when an outline is matched to
+# its node (Gwangju's outline "상무역" beside its node "상무").
+STATION_NAME_ENDS = ("station", "역", "駅", "站")
+
+
+def _station_core(name):
+    key = fold_name(name)
+    return next((key[:-len(end)] for end in STATION_NAME_ENDS if key.endswith(end) and len(key) > len(end)), key)
+
+
 def street_never(name):
     """The class of a street name that is no street's whatever its ways
     ("interchange", "ramp", "driveway"), else None."""
@@ -3503,10 +3513,10 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
     for r in stations:
         if r[7].startswith("node/") or is_stop_area(r) or id(r) in gone:
             continue
-        mine, wd = fold_name(r[3]), (r[9].get("wikidata") or "").strip()
+        mine, wd = _station_core(r[3]), (r[9].get("wikidata") or "").strip()
         o = next((o for o in station_nodes if id(o) not in gone
                   and _dist_m((r[1], r[2]), (o[1], o[2])) <= OUTLINE_BESIDE_M
-                  and (fold_name(o[3]) == mine or (wd and wd == (o[9].get("wikidata") or "").strip()))), None)
+                  and (_station_core(o[3]) == mine or (wd and wd == (o[9].get("wikidata") or "").strip()))), None)
         if o is not None:
             alias = [a for a in o[4].split("|") if a]
             alias += [n for n in [r[3], *r[4].split("|")] if n and n != o[3] and n not in alias]
@@ -3551,8 +3561,12 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             # NO RAILWAY TAG, NO STATION ROW (the third list, 13). Kept, as
             # the lone stop area is, where it lists a rail mode or carries a
             # station tag and no rail-tagged station row stands for it.
-            if r[9].get("station") or any(r[9].get(k) == "yes" for k in RAIL_MODES):
-                note("station_no_railway_tag_kept", "kept", r[7], r[3], "a rail mode, and no other row", r[9])
+            # A network tag or a name the map draws counts as well: Brussels'
+            # Hotel des Monnaies, Rogier, Madou and Botanique are outlines
+            # with a network and no mode, each its station's only row.
+            if (r[9].get("station") or any(r[9].get(k) == "yes" for k in RAIL_MODES) or r[9].get("network")
+                    or fold_name(r[3]) in drawn):
+                note("station_no_railway_tag_kept", "kept", r[7], r[3], "a rail sign, and no other row", r[9])
             else:
                 gone.add(id(r))
                 report["station"] -= 1
@@ -3938,7 +3952,8 @@ def _selftest():
     street("Shut Close", 47.8235, highway="living_street", access="private")
     street("Zone Street", 47.8237, access="no", foot="yes", motor_vehicle="permit")
     node(47.8650, -122.31, name="Depot Halt", railway="station")
-    area(47.8642, -122.31, name="Depot Halt", railway="station", building="train_station")
+    area(47.8642, -122.31, name="Depot Halt Station", railway="station", building="train_station")
+    area(47.8720, -122.31, name="Net Hall", public_transport="station", network="Metro")
     area(47.8680, -122.31, name="Lone Hall", railway="station", building="train_station")
     node(47.8683, -122.31, name="Other Stop", railway="station")
     node(47.7755, -122.32, name="The Fountain", amenity="fountain", wikidata="Q911")
@@ -4158,7 +4173,9 @@ def _selftest():
         ("a river is dropped whole by the id of one of its ways", ("landmark", "Lost Creek") in rows
          and ("landmark", "Lost Creek") not in dropped_rows and ("landmark", "Mill Creek") in dropped_rows),
         ("a street closed to traffic and open on foot is no private street", ("street", "Zone Street") in rows),
-        ("a station's outline under its node's name is one row with it", count[("station", "Depot Halt")] == 1),
+        ("a station's outline under its node's name, a station word aside, is one row with it",
+         count[("station", "Depot Halt")] == 1 and ("station", "Depot Halt Station") not in rows),
+        ("a lone station object with a network tag stays", ("station", "Net Hall") in rows),
         ("a station outline with no node of its name stays", ("station", "Lone Hall") in rows),
         ("a bare type word behind an article is bare", ("landmark", "The Fountain") not in rows),
         ("two bare words either side of a dash are bare", not any(n == "Fountain - Chapel" for _, n in rows)),
