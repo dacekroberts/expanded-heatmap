@@ -374,6 +374,149 @@
    "open_namesake_in_index": false,
    "cache": "2026-10-12",
    "noted": "2026-10-12"
+  },
+  {
+   "city": "calgary",
+   "line": null,
+   "line_reason": "the station carries no line tag (its tags name only the network) and the place cache holds no route relation; no route query was made for it (overpass-api.de did not answer on 2026-10-13)",
+   "name": "Inglewood / Ramsay",
+   "osm": "node/13505344037",
+   "tag": "construction:railway=station",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-12",
+   "noted": "2026-10-13"
+  },
+  {
+   "city": "calgary",
+   "line": null,
+   "line_reason": "the station carries no line tag (its tags name only the network) and the place cache holds no route relation; no route query was made for it (overpass-api.de did not answer on 2026-10-13)",
+   "name": "26 Avenue SE",
+   "osm": "node/13505344038",
+   "tag": "construction:railway=station",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-12",
+   "noted": "2026-10-13"
+  },
+  {
+   "city": "calgary",
+   "line": null,
+   "line_reason": "the station carries no line tag (its tags name only the network) and the place cache holds no route relation; no route query was made for it (overpass-api.de did not answer on 2026-10-13)",
+   "name": "Highfield",
+   "osm": "node/13505344039",
+   "tag": "construction:railway=station",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-12",
+   "noted": "2026-10-13"
+  },
+  {
+   "city": "calgary",
+   "line": null,
+   "line_reason": "the station carries no line tag (its tags name only the network) and the place cache holds no route relation; no route query was made for it (overpass-api.de did not answer on 2026-10-13)",
+   "name": "Lynnwood/Millican",
+   "osm": "node/13505344040",
+   "tag": "construction:railway=station",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-12",
+   "noted": "2026-10-13"
+  },
+  {
+   "city": "calgary",
+   "line": null,
+   "line_reason": "the station carries no line tag (its tags name only the network) and the place cache holds no route relation; no route query was made for it (overpass-api.de did not answer on 2026-10-13)",
+   "name": "Ogden",
+   "osm": "node/13505344041",
+   "tag": "construction:railway=station",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-12",
+   "noted": "2026-10-13"
+  },
+  {
+   "city": "calgary",
+   "line": null,
+   "line_reason": "the station carries no line tag (its tags name only the network) and the place cache holds no route relation; no route query was made for it (overpass-api.de did not answer on 2026-10-13)",
+   "name": "South Hill",
+   "osm": "node/13505344042",
+   "tag": "construction:railway=station",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-12",
+   "noted": "2026-10-13"
+  },
+  {
+   "city": "calgary",
+   "line": null,
+   "line_reason": "the station carries no line tag (its tags name only the network) and the place cache holds no route relation; no route query was made for it (overpass-api.de did not answer on 2026-10-13)",
+   "name": "Quarry Park",
+   "osm": "node/13505344043",
+   "tag": "construction:railway=station",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-12",
+   "noted": "2026-10-13"
+  },
+  {
+   "city": "calgary",
+   "line": null,
+   "line_reason": "the station carries no line tag (its tags name only the network) and the place cache holds no route relation; no route query was made for it (overpass-api.de did not answer on 2026-10-13)",
+   "name": "Douglas Glen",
+   "osm": "node/13505344044",
+   "tag": "construction:railway=station",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-12",
+   "noted": "2026-10-13"
+  },
+  {
+   "city": "calgary",
+   "line": null,
+   "line_reason": "the station carries no line tag (its tags name only the network) and the place cache holds no route relation; no route query was made for it (overpass-api.de did not answer on 2026-10-13)",
+   "name": "Shepard",
+   "osm": "node/8017899203",
+   "tag": "construction:railway=station",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-12",
+   "noted": "2026-10-13"
+  },
+  {
+   "city": "edmonton",
+   "line": null,
+   "line_reason": "the station carries no line tag (its tags name only the network) and the place cache holds no route relation; no route query was made for it (overpass-api.de did not answer on 2026-10-13)",
+   "name": "MacEwan",
+   "osm": "node/11963329767",
+   "tag": "railway=proposed",
+   "open_namesake_in_index": true,
+   "cache": "2026-10-12",
+   "noted": "2026-10-13"
+  },
+  {
+   "city": "edmonton",
+   "line": null,
+   "line_reason": "the station carries no line tag (its tags name only the network) and the place cache holds no route relation; no route query was made for it (overpass-api.de did not answer on 2026-10-13)",
+   "name": "MacEwan",
+   "osm": "node/11963329768",
+   "tag": "railway=proposed",
+   "open_namesake_in_index": true,
+   "cache": "2026-10-12",
+   "noted": "2026-10-13"
+  },
+  {
+   "city": "edmonton",
+   "line": null,
+   "line_reason": "the station carries no line tag (its tags name only the network) and the place cache holds no route relation; no route query was made for it (overpass-api.de did not answer on 2026-10-13)",
+   "name": "Blatchford Gate",
+   "osm": "node/11969957456",
+   "tag": "construction=yes",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-12",
+   "noted": "2026-10-13"
+  },
+  {
+   "city": "edmonton",
+   "line": null,
+   "line_reason": "the station carries no line tag (its tags name only the network) and the place cache holds no route relation; no route query was made for it (overpass-api.de did not answer on 2026-10-13)",
+   "name": "Blatchford Gate",
+   "osm": "way/1096437871",
+   "tag": "construction:railway=station",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-12",
+   "noted": "2026-10-13"
   }
  ]
 }
