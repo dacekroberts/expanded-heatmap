@@ -1716,11 +1716,11 @@ class Night:
                 out(f"  {city}: " + "; ".join(parts))
             lookup_hosts = [h for h in LOOKUP_ORDER if h in self.hosts]
             if extract:
-                gate = [GATE_SCRIPT, "run", "--label", "<label>", "--peak-gb", f"{EXTRACT_PEAK_GB:g}",
+                gate = [GATE_SCRIPT, "run", "--label", "<city>-place-extract", "--peak-gb", f"{EXTRACT_PEAK_GB:g}",
                         "--estimate", "<basis>", "--session", self.session, "--wait", str(EXTRACT_WAIT_MIN),
                         "--", "python"]
                 if look:
-                    out("  1. " + " ".join(self.python(*gate, LOOKUP_SCRIPT, str(self.plan_path),
+                    out("  1. " + " ".join(self.python(*gate[:3], f"{name}-place-area-lookup", *gate[4:], LOOKUP_SCRIPT, str(self.plan_path),
                                                        f"<{len(look)} cities>", "--source", "extract",
                                                        "--report", "<file>")))
                 out(f"  2. scaffold up to {len(scaffold)} cities from a plan copy dated {self.date}")
