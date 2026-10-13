@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**120 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**121 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -57,6 +57,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Place search: the third rule list, from the final group's reads (owner)](#2026-10-13---place-search-the-third-rule-list-from-the-final-groups-reads-owner)
 - [Place search: candidates 19 to 28 join the third pass (owner)](#2026-10-13---place-search-candidates-19-to-28-join-the-third-pass-owner)
 - [Place search: every drawn line and station is searchable, the floor for the big review (owner)](#2026-10-13---place-search-every-drawn-line-and-station-is-searchable-the-floor-for-the-big-review-owner)
+- [Place search: a drawn station or line is never dropped for its name; wave 1's branch complete (owner)](#2026-10-13---place-search-a-drawn-station-or-line-is-never-dropped-for-its-name-wave-1s-branch-complete-owner)
 
 **2026-10-12**
 
@@ -5971,3 +5972,22 @@ japan-city template:
   a map to fix, never a name to skip.
 - The retrospectives of this date's earlier entry are private artifacts
   (owner), which supersedes the "docs file" form in PLAN.md's item.
+
+### 2026-10-13 - Place search: a drawn station or line is never dropped for its name; wave 1's branch complete (owner)
+
+- **Found in Monterrey by the final-group session:** Sendero, a metro
+  terminus on the map (node/1041636979, way/1286342563, railway=station,
+  station=subway), had no index row. "Sendero" is a Spanish bare type word
+  and the station rule's bare-type branch dropped both objects.
+- **Cleanup's fix, on the owner's floor of this date (every drawn station
+  searchable):** the bare-type branch does not apply to a station of the
+  map or of a rail network. **The owner, told of it: "apply the same station
+  rule to transit lines as well".** Both are built in the third pass, with
+  every row they bring back listed in its report.
+- **Wave 1's branch is complete** (`search-wave1`, cf9155f3, on master
+  4c89e15b, nothing pushed): 33 indexes rebuilt on the second batch, 2,100
+  by-id drops removed as covered by the rules, 2,952 remain; Melbourne's
+  `PLACE_WAY_WORDS` admit 209 rows; the five Brooklyn Navy Yard rows go with
+  rule 4 (the owner, in that session: "i accept your calls"). Its readers'
+  files are copied to `data/_search_rollout/wave1_session/` (793 files). The
+  render, fold, merge and push are Cleanup's at the big review.
