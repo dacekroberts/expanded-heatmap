@@ -1,7 +1,9 @@
 """Compare a city's Overpass place caches with caches built from an extract
-(pipeline/place_extract_fetch.py <city> --out DIR): the proof that the
-extract route answers what Overpass answers. A report; it writes nothing in
-the repository and fails nothing.
+(pipeline/place_extract_fetch.py <city> --out DIR --overpass-exact): the
+proof that the extract route answers what Overpass answers. A report; it
+writes nothing in the repository and fails nothing. Caches built without
+--overpass-exact also hold the shared-border streets, each shown here as
+"only extract".
 
     python scripts/place_extract_compare.py <city> DIR [--show N]
 

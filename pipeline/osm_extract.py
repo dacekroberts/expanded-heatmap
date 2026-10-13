@@ -45,6 +45,17 @@ Seattle, 2026-10-13; the osm-extract skill has the measurements):
   5. `out center` is the middle of the bounding box of the element's nodes,
      not a centroid, rounded to 7 decimals.
 
+THE ONE NAMED DEPARTURE, off unless a caller asks: query(shared_borders=
+[union names]) also admits, into those unions only, an element that fails
+every single-boundary test and passes rule 3 against the boundaries taken
+TOGETHER (their union, holes kept): a street along the border two included
+municipalities share. An element on the outer edge of the whole area, on a
+border with an area that is not included, or on the edge of a hole nothing
+included fills stays out, as under rule 1. Overpass does not return these
+elements: an answer made with the option on is no longer the Overpass
+answer, and query() lists every element admitted this way under
+"shared_border" so a caller can record and disclose them.
+
 LIFTING THIS FILE INTO ANOTHER PROJECT: it needs osmium (pyosmium 4), shapely
 2 and numpy. The one project-specific line is _refuse_if_offline(), which
 defers to pipeline/offline.py when that module exists and is a no-op without
@@ -458,34 +469,94 @@ class Area:
         bounds = [p.bounds for p in self.parts]
         self.bounds = (min(b[0] for b in bounds), min(b[1] for b in bounds),
                        max(b[2] for b in bounds), max(b[3] for b in bounds))
+        self._whole = None
 
     def in_bounds(self, lat, lon):
         minx, miny, maxx, maxy = self.bounds
         return minx <= lon <= maxx and miny <= lat <= maxy
 
+    def whole(self):
+        """The boundaries taken together, as [polygon]: their union, with a
+        border two of them share dissolved and every hole nothing fills
+        kept. Only the shared-border option reads it. Built once."""
+        if self._whole is None:
+            import shapely
+            from shapely.ops import unary_union
+            merged = unary_union(self.parts)
+            shapely.prepare(merged)
+            self._whole = [merged]
+        return self._whole
+
     def points_in(self, lats, lons):
         """A boolean per point: strictly inside one boundary. A point on a
         boundary line is in none."""
+        return self._points_in(self.parts, lats, lons)
+
+    def ways_in(self, ways):
+        """A boolean per way, each a list of (lat, lon): rule 3."""
+        return self._ways_in(self.parts, ways)
+
+    def points_on_shared_border(self, lats, lons):
+        """A boolean per point: inside no single boundary, strictly inside
+        the boundaries taken together. All False for one boundary."""
+        import numpy as np
+        alone = np.asarray(self._points_in(self.parts, lats, lons), dtype=bool)
+        if len(self.parts) < 2:
+            return np.zeros(len(alone), dtype=bool)
+        return ~alone & np.asarray(self._points_in(self.whole(), lats, lons), dtype=bool)
+
+    def ways_on_shared_border(self, ways):
+        """A boolean per way: out by rule 3 against every single boundary, in
+        by rule 3 against the boundaries taken together. All False for one
+        boundary."""
+        if len(self.parts) < 2 or not ways:
+            return [False] * len(ways)
+        alone = self._ways_in(self.parts, ways)
+        rest = [i for i, ok in enumerate(alone) if not ok]
+        out = [False] * len(ways)
+        for i, ok in zip(rest, self._ways_in(self.whole(), [ways[i] for i in rest])):
+            out[i] = ok
+        return out
+
+    def border_of(self, points):
+        """The positions in self.parts of the boundaries whose own line the
+        points [(lat, lon)] run along (a way) or sit on (one point); every
+        boundary touched when none is run along."""
+        import shapely
+        from shapely.geometry import LineString, Point
+        xy = [(lon, lat) for lat, lon in points]
+        geom = LineString(xy) if len(xy) >= 2 else Point(xy[0])
+        touched, along = [], []
+        for i, p in enumerate(self.parts):
+            if not shapely.intersects(p.boundary, geom):
+                continue
+            touched.append(i)
+            if len(xy) >= 2 and shapely.relate_pattern(geom, p, "*1*******"):
+                along.append(i)
+        return along or touched
+
+    @staticmethod
+    def _points_in(parts, lats, lons):
         import numpy as np
         import shapely
         x, y = np.asarray(lons, dtype=float), np.asarray(lats, dtype=float)
         hit = np.zeros(len(x), dtype=bool)
-        for p in self.parts:
+        for p in parts:
             minx, miny, maxx, maxy = p.bounds
             todo = ~hit & (x >= minx) & (x <= maxx) & (y >= miny) & (y <= maxy)
             if todo.any():
                 hit[todo] = shapely.contains_xy(p, x[todo], y[todo])
         return hit
 
-    def ways_in(self, ways):
-        """A boolean per way, each a list of (lat, lon): rule 3."""
+    @staticmethod
+    def _ways_in(parts, ways):
         import numpy as np
         import shapely
         if not ways:
             return []
         counts = np.array([len(w) for w in ways], dtype=np.int64)
         flat = np.array([pt for w in ways for pt in w], dtype=float).reshape(-1, 2)
-        inside = self.points_in(flat[:, 0], flat[:, 1])
+        inside = Area._points_in(parts, flat[:, 0], flat[:, 1])
         owner = np.repeat(np.arange(len(ways)), counts)
         result = np.zeros(len(ways), dtype=bool)
         result[np.unique(owner[inside])] = True
@@ -497,7 +568,7 @@ class Area:
             lines = shapely.linestrings(flat[keep][:, ::-1], indices=index)
             lb = shapely.bounds(lines)
             through = np.zeros(len(rest), dtype=bool)
-            for p in self.parts:
+            for p in parts:
                 minx, miny, maxx, maxy = p.bounds
                 near = ~through & (lb[:, 0] <= maxx) & (lb[:, 2] >= minx) & (lb[:, 1] <= maxy) & (lb[:, 3] >= miny)
                 idx = np.flatnonzero(near)
@@ -644,7 +715,7 @@ def parse_area(text):
 
 # -------------------------------------------------------------------- the read
 
-def query(pbf, area_spec, unions, *, on_area=None, say=None):
+def query(pbf, area_spec, unions, *, on_area=None, say=None, shared_borders=()):
     """Answer `unions` ({name: [Clause]}) inside the area `area_spec`
     (parse_area) from the extract `pbf`. Returns a dict:
 
@@ -659,6 +730,14 @@ def query(pbf, area_spec, unions, *, on_area=None, say=None):
       stats       counts, among them ways and relations with members the
                   extract does not hold (a relation running past the
                   region's edge: its center then differs from Overpass's)
+      shared_border  {union name: [{"type", "id", "between": [boundary
+                  "type/id", ...]}]} for the unions `shared_borders` names:
+                  the elements admitted beyond the Overpass answer. No
+                  names in it when the option is off.
+
+    `shared_borders` names the unions the module's one departure applies to
+    (the header has the rule). The default, none, answers exactly as
+    Overpass does.
 
     `on_area(boundaries, area)` runs once the area is built and before the
     heavy pass, so a caller can stop a wrong area early.
@@ -676,6 +755,9 @@ def query(pbf, area_spec, unions, *, on_area=None, say=None):
     pbf = str(pbf)
     say = say or (lambda text: None)
     stats = {}
+    if set(shared_borders) - set(unions):
+        raise ValueError(f"shared_borders names no union: {sorted(set(shared_borders) - set(unions))}")
+    shared = [name for name in unions if name in set(shared_borders)]
     keys = prefilter_keys(unions)
     want_rel = area_spec["relations"]
     want_tags = area_spec["tags"]
@@ -795,19 +877,37 @@ def query(pbf, area_spec, unions, *, on_area=None, say=None):
         f"{len(cand_ways):,} ways in the area's bounding box")
 
     elements = {name: [] for name in unions}
+    admitted = {name: [] for name in shared}
+    bound_ids = [f"{b['type']}/{b['id']}" for b in out_bounds]
+
+    def names_for(ok, on_border, names, kind, eid, points):
+        """The unions an element goes into: all of its own when it is in by
+        the five rules; with the option on, the named ones when it is in by
+        a shared border alone, each such admission listed."""
+        if ok:
+            return names
+        got = [name for name in names if name in admitted] if on_border else []
+        if got:
+            between = [bound_ids[i] for i in area.border_of(points)]
+            for name in got:
+                admitted[name].append({"type": kind, "id": eid, "between": between})
+        return got
+
     cand_nodes.sort(key=lambda c: c[0])
     cand_ways.sort(key=lambda c: c[0])
     if cand_nodes:
-        hit = area.points_in([c[1] for c in cand_nodes], [c[2] for c in cand_nodes])
-        for ok, (nid, lat, lon, tags, names) in zip(hit, cand_nodes):
-            if ok:
-                for name in names:
-                    elements[name].append({"type": "node", "id": nid, "lat": lat, "lon": lon, "tags": tags})
-    hit = area.ways_in([[(lat, lon) for _, lat, lon in c[2]] for c in cand_ways])
-    for ok, (wid, refs, pts, tags, names) in zip(hit, cand_ways):
-        if ok:
-            for name in names:
-                elements[name].append({"type": "way", "id": wid, "nodes": refs, "points": pts, "tags": tags})
+        lats, lons = [c[1] for c in cand_nodes], [c[2] for c in cand_nodes]
+        hit = area.points_in(lats, lons)
+        border = area.points_on_shared_border(lats, lons) if shared else [False] * len(cand_nodes)
+        for ok, edge, (nid, lat, lon, tags, names) in zip(hit, border, cand_nodes):
+            for name in names_for(ok, edge, names, "node", nid, [(lat, lon)]):
+                elements[name].append({"type": "node", "id": nid, "lat": lat, "lon": lon, "tags": tags})
+    lines = [[(lat, lon) for _, lat, lon in c[2]] for c in cand_ways]
+    hit = area.ways_in(lines)
+    border = area.ways_on_shared_border(lines) if shared else [False] * len(cand_ways)
+    for ok, edge, line, (wid, refs, pts, tags, names) in zip(hit, border, lines, cand_ways):
+        for name in names_for(ok, edge, names, "way", wid, line):
+            elements[name].append({"type": "way", "id": wid, "nodes": refs, "points": pts, "tags": tags})
 
     # Rule 4: a candidate relation is in when a member node or way is.
     rel_ids = sorted(cand_rel)
@@ -816,24 +916,34 @@ def query(pbf, area_spec, unions, *, on_area=None, say=None):
     member_nodes = sorted({ref for rid in rel_ids for t, ref, _ in cand_rel[rid][1] if t == "n" and ref in node_pt})
     node_ok = dict(zip(member_nodes, area.points_in([node_pt[n][0] for n in member_nodes],
                                                     [node_pt[n][1] for n in member_nodes]))) if member_nodes else {}
+    way_edge = dict(zip(member_ways, area.ways_on_shared_border([way_pts[w] for w in member_ways]))) if shared else {}
+    node_edge = dict(zip(member_nodes, area.points_on_shared_border(
+        [node_pt[n][0] for n in member_nodes], [node_pt[n][1] for n in member_nodes]))) if shared and member_nodes else {}
     partial = 0
     for rid in rel_ids:
         tags, members, names = cand_rel[rid]
-        points, inside, lacking = [], False, 0
+        points, inside, lacking, edge = [], False, 0, []
         for t, ref, _ in members:
             if t == "w":
                 if ref in way_pts:
                     points += way_pts[ref]
                     inside = inside or way_ok[ref]
+                    if way_edge.get(ref):
+                        edge += way_pts[ref]
                 else:
                     lacking += 1
             elif t == "n":
                 if ref in node_pt:
                     points.append(node_pt[ref])
                     inside = inside or bool(node_ok[ref])
+                    if node_edge.get(ref):
+                        edge.append(node_pt[ref])
                 else:
                     lacking += 1
-        if not inside or not points:
+        if not points:
+            continue
+        names = names_for(inside, bool(edge), names, "relation", rid, edge)
+        if not names:
             continue
         partial += lacking > 0
         for name in names:
@@ -844,7 +954,11 @@ def query(pbf, area_spec, unions, *, on_area=None, say=None):
     if short or partial:
         say(f"NOTE: {short} way(s) with nodes the extract lacks and {partial} relation(s) with members it "
             f"lacks; their centers can differ from Overpass's")
-    return {"boundaries": out_bounds, "area": area, "elements": elements, "stats": stats}
+    if shared:
+        say("shared borders: " + ", ".join(f"{len(admitted[name])} admitted into {name}" for name in shared)
+            + " (not in the Overpass answer)")
+    return {"boundaries": out_bounds, "area": area, "elements": elements, "stats": stats,
+            "shared_border": admitted}
 
 
 def boundaries_holding(pbf, points, *, tag=("boundary", "administrative"), say=None):
@@ -1044,6 +1158,13 @@ def test_world():
     ways[203] = ([34, 35], {"highway": "residential", "name": "Dead End At The Line"})
     node(36, 0.7, 0.1)
     ways[204] = ([34, 36], {"highway": "residential", "name": "Runs In"})
+    # The shared-border option's cases, all out by the five rules: a street
+    # along the edge of Alpha's hole, and a relation whose one member is the
+    # street on the shared border.
+    node(37, 0.4, 0.45)
+    node(38, 0.4, 0.55)
+    ways[205] = ([37, 38], {"highway": "residential", "name": "Hole Edge"})
+    relations[13] = ([("w", 200, "")], {"tourism": "attraction", "name": "On The Border Only"})
     # Rule 4: relations in by a member node, by a member way, and not in.
     node(40, 0.9, 0.9)
     node(41, 3.0, 3.0)
@@ -1172,6 +1293,43 @@ def selftest():
         again = query(pbf, parse_area("(id:3600000002,3600000001)"), dict(reversed(list(unions.items()))))
         case("the answer does not depend on the order the area or the unions were given in",
              json.dumps(again["elements"], sort_keys=True) == json.dumps(got["elements"], sort_keys=True))
+        # The shared-border option: off by default, and on only where named.
+        both = parse_area("(id:3600000001,3600000002)")
+
+        def ids(result, name):
+            return {(e["type"], e["id"]) for e in result["elements"][name]}
+        case("shared borders: off by default, and nothing is listed as admitted",
+             got["shared_border"] == {} and 205 not in streets and ("relation", 13) not in main)
+        on = query(pbf, both, unions, shared_borders=["streets"])
+        case("shared borders: a street along the border two included municipalities share is in, "
+             "listed with the two it lies between",
+             ids(on, "streets") == {("way", w) for w in streets | {200}}
+             and on["shared_border"] == {"streets": [{"type": "way", "id": 200,
+                                                      "between": ["relation/1", "relation/2"]}]})
+        case("shared borders: a street on the outer edge of the whole area stays out, and one ending on it",
+             not {("way", 202), ("way", 203)} & ids(on, "streets"))
+        case("shared borders: a street on the edge of a hole nothing included fills stays out",
+             ("way", 205) not in ids(on, "streets"))
+        case("shared borders: a union not named answers as Overpass does",
+             on["elements"]["main"] == got["elements"]["main"])
+        wide = query(pbf, both, unions, shared_borders=["streets", "main"])
+        case("shared borders: named for tagged elements, a node on the shared border and a relation whose "
+             "member lies along it are in, and nothing else is added",
+             ids(wide, "main") == main | {("node", 20), ("relation", 13)}
+             and [(a["type"], a["id"]) for a in wide["shared_border"]["main"]] == [("node", 20), ("relation", 13)]
+             and wide["shared_border"]["main"][0]["between"] == ["relation/1", "relation/2"])
+        alone = query(pbf, parse_area("(id:3600000001)"), unions, shared_borders=["streets", "main"])
+        plain = query(pbf, parse_area("(id:3600000001)"), unions)
+        case("shared borders: a border with a municipality that is NOT included admits nothing "
+             "(one boundary: the answer is the Overpass answer)",
+             alone["elements"] == plain["elements"] and alone["shared_border"] == {"streets": [], "main": []}
+             and ("way", 200) not in ids(alone, "streets"))
+        try:
+            query(pbf, both, unions, shared_borders=["roads"])
+            named = True
+        except ValueError:
+            named = False
+        case("shared borders: a name that is no union is refused", not named)
         geom = out_geom(got["boundaries"][0])
         case("a boundary is written as out geom gives it: member geometry and bounds",
              geom["bounds"] == {"minlat": 0.0, "minlon": 0.0, "maxlat": 1.0, "maxlon": 1.0}
@@ -1190,6 +1348,11 @@ def selftest():
         case("an area made from a closed way is that way's polygon",
              {(e["type"], e["id"]) for e in by_way["elements"]["main"]} == {("node", 23)}
              and out_geom(by_way["boundaries"][0])["type"] == "way")
+        filled = query(d / "way.osm.pbf", parse_area("(id:3600000001,2400000500)"), unions,
+                       shared_borders=["streets"])
+        case("shared borders: the edge of a hole an included area fills is a shared border",
+             filled["shared_border"]["streets"] == [{"type": "way", "id": 205,
+                                                     "between": ["way/500", "relation/1"]}])
 
         def stopped(fn):
             try:
