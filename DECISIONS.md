@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**91 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**99 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -28,6 +28,14 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [A picked street is drawn at its whole length, from a street lines side file; the ring is the failsafe (owner)](#2026-10-13---a-picked-street-is-drawn-at-its-whole-length-from-a-street-lines-side-file-the-ring-is-the-failsafe-owner)
 - [The maps' Cities menu under non clickable headers, Japan last (owner)](#2026-10-13---the-maps-cities-menu-under-non-clickable-headers-japan-last-owner)
 - [Street lines: the teal stays, a third credit link, the 19 rebuilt; the picked-line look goes to every map (owner)](#2026-10-13---street-lines-the-teal-stays-a-third-credit-link-the-19-rebuilt-the-picked-line-look-goes-to-every-map-owner)
+- [Place search: the owner's rulings on keep against drop, personal names, private streets and the typo line; NOT yet built](#2026-10-13---place-search-the-owners-rulings-on-keep-against-drop-personal-names-private-streets-and-the-typo-line-not-yet-built)
+- [Place search: where readers see what search leaves out; the rollout's own worktree; the id side file told to transit-globe (owner)](#2026-10-13---place-search-where-readers-see-what-search-leaves-out-the-rollouts-own-worktree-the-id-side-file-told-to-transit-globe-owner)
+- [Place search: an extract route beside Overpass, proved on two cities; wave 1 first on the main mirror; streets on a shared border queued (owner)](#2026-10-13---place-search-an-extract-route-beside-overpass-proved-on-two-cities-wave-1-first-on-the-main-mirror-streets-on-a-shared-border-queued-owner)
+- [Trams left off built maps: no longer parked, queued after the next landing (owner)](#2026-10-13---trams-left-off-built-maps-no-longer-parked-queued-after-the-next-landing-owner)
+- [Trams left off built maps: the per-city recommendations approved (owner)](#2026-10-13---trams-left-off-built-maps-the-per-city-recommendations-approved-owner)
+- [Place search: the owner's two fixes to the changed-row report (three places closed for works kept, two counties by Prague dropped)](#2026-10-13---place-search-the-owners-two-fixes-to-the-changed-row-report-three-places-closed-for-works-kept-two-counties-by-prague-dropped)
+- [Place search: the owner's rulings of 2026-10-13 built on a branch, the 19 indexes rebuilt, every changed row reported; NOT landed](#2026-10-13---place-search-the-owners-rulings-of-2026-10-13-built-on-a-branch-the-19-indexes-rebuilt-every-changed-row-reported-not-landed)
+- [Place search: the rules of 2026-10-13 approved for landing, with two row fixes and the page section (owner)](#2026-10-13---place-search-the-rules-of-2026-10-13-approved-for-landing-with-two-row-fixes-and-the-page-section-owner)
 
 **2026-10-12**
 
@@ -5001,3 +5009,263 @@ japan-city template:
   - **Asked by the owner, answered:** boundaries and street lines are built
     in each batch, not at the end; both come from steps a wave already runs.
   - **Held** on branch `street-lines` for the one full re-render.
+
+### 2026-10-13 - Place search: the owner's rulings on keep against drop, personal names, private streets and the typo line; NOT yet built
+
+- **The street-lines batch landed** (master 4d7cf5f9, the owner's "yes sounds
+  good"; rebooted by the owner; verified live on Seattle: 43 menu headers, a
+  street drawn with its ring hidden, three credit links, the rights tags).
+- **Two read-only measures on the 19 built cities came first** (the owner:
+  "yes measure first", and "identify any other cases where a positive rule
+  should outweigh a negative or vice versa", "e.g. personal names"). Both
+  rebuilt every index in memory and matched the committed files (328,692
+  rows). Scripts and results: the session scratchpad, `rules_measure/` and
+  `rules_precedence/`; the figures below are from them.
+- **The owner's words, on the list put to them** ("1" the audit's lean
+  tables, "2" personal names, "3" private residential streets, "4" the typo
+  line, "5" wave 1's twelve bare-type drops with a Wikidata entry only):
+  "2. recommendation approved. 3. drop as ruled, add to list of dropped
+  categories (unless one doesn't exist for searches, then we should probably
+  start one now and retrofit). 1. all as leaned. 5. drop. 4. short okay".
+  Earlier the same day: "famous landmark rule takes priority over others".
+- **1. Keep now beats drop** where the object has its OWN Wikipedia article
+  and today's drop is: a bare type word (81 rows; not where the article is
+  the type's, as with Paris's 69 Édicule Guimard); a privately operated or
+  office tag (115; brand rows stay out, the Panama Hotel precedent); a place
+  kind the index does not list, for islands, islets and districts (121); a
+  pedestrian square drawn as an area (47 of 75; rest areas stay out); an
+  estate drawn as an area (46, to match the estate kept as a point); the
+  home test tripped by access=private on something that is no home (about
+  16); and a small memorial with an article but no Wikidata entry (23).
+- **1. Drop now beats keep:** a place or landmark its own tags say is
+  demolished, razed, abandoned or not yet open, article or not (266, of
+  which about 126 Hong Kong hamlets), "the search must not land where the
+  thing is not"; a station that is a business or a bare type (6); a closed
+  station (2); a row admitted only by a Wikidata entry shared by three or
+  more rows (23).
+- **1. Left as they are:** a home with its own article stays out (294; the
+  16 non-homes above excepted); everything the audit ranked "looks right".
+- **2. Personal names:** statues, busts and public memorials stay; a grave
+  or a plaque is kept only when the object has its own Wikipedia article. A
+  Wikidata entry alone no longer admits one (258 graves and 241 plaques are
+  in on a key today; nothing in the data tells a private person from a
+  public one, which is why the article is the test).
+- **3. Private residential streets are dropped, as first ruled**: a street
+  whose every way is access=private or no on residential or unclassified
+  (4,102 rows, 1.6% of streets; Mexico City 1,982, London 1,088). Put to the
+  owner with the Paris precedent of 2026-10-11 it departs from (addressed
+  private streets kept) and two narrower options; the owner kept the ruling.
+  The French named-street exception stands (52 of them) and so does a way's
+  own article. **And a list of what search leaves out is to exist**: none
+  does for search (`docs/excluded_categories.md` is the businesses'), so one
+  is started and the settled classes retrofitted into it.
+- **4. The typo line, short form, approved:** "Place names come from
+  OpenStreetMap as its contributors wrote them, so a few are misspelt." At
+  the end of the search bullet in "Using the map". US spelling applies
+  site-wide (2026-10-01), so it lands as "misspelled".
+- **5. Wave 1's twelve bare-type drops with a Wikidata entry only stay
+  dropped**: the landmark ruling rests on an article of the object's own.
+- **Also to build, from the rule measure, as leaned and to be reported row
+  by row before landing:** one row a stop for same-mode platform rows only
+  (294 of 590; interchanges stay two rows); duplicate junction, place and
+  landmark rows merged (417); street names that are descriptions or a type
+  plus a code, on minor ways only (89 and 41; 193 real streets such as The
+  Avenue stay); rides as stations without the tourism=attraction signal
+  alone (14); busways and race tracks out unless the way has its own article
+  (126); a bridge's own name from bridge:name (3); the not-open test reading
+  opening_date, disused:railway and end_date; the candidate bare type words
+  (5 rows here). Not built as rules: castles (a web check is owed), coded
+  names the rule misses (by id), zoo contents (by id).
+- **Every one of these changes built indexes**, so the rule-change protocol
+  applies: built on a branch, the 19 rebuilt, every changed row reported to
+  the owner before landing; the typo line and any matcher change re-render
+  the searched maps.
+
+### 2026-10-13 - Place search: where readers see what search leaves out; the rollout's own worktree; the id side file told to transit-globe (owner)
+
+- **Where the list of what search leaves out is shown, decided by the
+  owner:** "where readers see search leave out: what is counted and what is
+  not, its own section". So it is a section of its own on the What Is
+  Excluded page (`app/pages/What_Is_Excluded.py`), not a line under each
+  city. Its wording is still a draft for the owner; it lands with the rule
+  build.
+- **The later waves get a worktree and branch of their own**, the owner: "i
+  accept the separate worktree and branch. screen will turn off but machine
+  stays awake. create dedicated names not random ones". Names:
+  `.claude/worktrees/search-rollout`, branch `search-rollout`, cut from
+  master once the night runner's scripts are on it.
+- **Pushes approved** ("yes to pushing on both bullet points"): the two
+  docs commits (pushed, master 89c3ff24) and the runner's scripts once they
+  pass.
+- **The id side file was told to transit-globe** on the owner's word ("if
+  id side file is ready, inform transit-globe and send"): a note to its
+  "Place search index handoff review" session and a pointer to its phase 1
+  session, information only. It names the file's format, the street lines
+  file and its index key, that every index hash changed on 2026-10-13 and
+  changes again with the rule build, and that the OSM id, never the row, is
+  the stable key. The cut-over message at wave 1's landing is still owed.
+
+### 2026-10-13 - Place search: an extract route beside Overpass, proved on two cities; wave 1 first on the main mirror; streets on a shared border queued (owner)
+
+- **The owner's "run all open items"** started the night runner (master
+  `f549e6a8` carries its two scripts, 70 of 70 checks) from
+  `.claude/worktrees/search-rollout`, and the rules build on `search-rules`.
+  Wave 1 relayed the owner's "yes, message cleanup, wave 1 goes first": the
+  runner was stopped and restarted on `overpass.kumi.systems` only, until
+  wave 1 says its queue on `overpass-api.de` is done.
+- **Extracts as a second route, the owner: "yes build it, proof first".**
+  Wave 1 had put it to the owner as an option; Cleanup recommended building
+  it whatever the day's outage, since the place fetch has one usable mirror.
+  Geofabrik's terms were read the same day (licence-read: permitted with
+  conditions, ODbL 1.0, no credit to Geofabrik, no written usage policy; its
+  request is the smallest region, never the same file twice, no daily full
+  copies of large regions).
+- **The proof** (a scratch prototype, kept in `data/_osm_extracts/proto/`):
+  Tbilisi from `georgia-261008` matched its Overpass caches element for
+  element (13,229 street ways, 79,174 street nodes, 2,218 tagged) and its
+  index row for row, order aside (5,686). Seattle from `washington-261008`,
+  12.5 hours newer than its Overpass cache: 47,809 of 47,810 street ways
+  identical; two tag differences are edits made in the gap (checked on the
+  OSM API); two objects the extract includes are unexplained (way/428075842,
+  way/32544404, neither a recent edit); five landmark rows carry the id of a
+  same-name duplicate, because the index keeps the first of two and
+  Overpass's order is not reproduced.
+- **What matching Overpass took:** each municipality tested on its own,
+  never their union; inner rings as holes; a way in by a node strictly
+  inside or a line through the interior, never by touching the boundary; a
+  relation in by a member that is; `out center` as the middle of the
+  bounding box.
+- **The owner, as the builds ran:** try several at once if the new host
+  allows it; re-order where places are fetched from if the route proves
+  faster (to be recommended from measured timings, not yet decided); build
+  it "with proper structure/skills" so it can be relayed to other projects
+  that use Overpass; enlist DeepSeek in it. A build agent has these on
+  branch `place-extract`.
+- **Streets on a shared border, the owner: "yes add shared border streets
+  to queue where you said to".** Overpass leaves out a street that runs
+  exactly along the line between two included municipalities (60 street
+  ways in Seattle, 148th Avenue Northeast among them), since it lies in
+  neither area. Keeping them is queued for AFTER the rules landing, once
+  the extract route is in production; it changes every built regional
+  index, so it goes through the changed-row report like any rule change.
+  Until then the extract route matches Overpass and leaves them out.
+- **The search-rules landing is the priority** (the owner: "can we make the
+  search rules landing a priority to kick off motion?"): Visuals' motion
+  opener waits on it for three search scenes and five searched names
+  (Abbesses, Ligne 12, Avenida Paulista, Liberdade, Monumento a la
+  Revolución), which the rules build reports on by name.
+- `outputs/testville/`, empty and untracked since 2026-09-24, was deleted
+  on the owner's word.
+
+### 2026-10-13 - Trams left off built maps: no longer parked, queued after the next landing (owner)
+
+- **The owner: "tram rescope should be another item after the next land".**
+  The rescope was parked on 2026-09-27 to save usage and, from 2026-10-04,
+  raised whenever the owner asked what was next. It is now a queued item:
+  it starts after the search-rules landing, behind nothing else the owner
+  has named.
+- **Still the owner's, city by city:** which lines are drawn. The
+  recommendations of `docs/tram_rescope_estimate.md` (2026-09-27) are the
+  starting list, to be re-checked before any build: the light batch with
+  Montreal's REM first, Paris T3a and T3b, a label and legend rule and a
+  Toronto pilot before Toronto, Milan and Prague, Barcelona likely,
+  Cablebus yes, Hong Kong Tramways out. Its usage estimate rests on one
+  session and is re-measured on the first batch.
+- The queue after the rules landing now holds two items: this, and keeping
+  streets on a shared municipal border once the extract route is in
+  production. Their order is not decided.
+
+### 2026-10-13 - Trams left off built maps: the per-city recommendations approved (owner)
+
+- **The owner, on the recommendations as Cleanup restated them that day:
+  "your per city recommendations all sounded good".** So the scope of the
+  rescope, when it starts after the search-rules landing, is:
+  - **In, the light batch:** Montreal's REM first, then Rome tram 8 and
+    Madrid ML1, then San Francisco's F Market at low priority.
+  - **In:** Paris T3a and T3b (62 stops).
+  - **In, after its own checks:** Barcelona TRAM (one OSM color for six
+    lines, so a color rule first) and Mexico City's Cablebus (no official
+    station coordinates yet; Toulouse's Teleo is the precedent).
+  - **Not yet:** Toronto, Milan and Prague wait for a label and legend
+    rule, then a Toronto pilot; Milan also needs a color decision and
+    Prague probably a core-network filter.
+  - **Out:** Hong Kong Tramways. **Dropped:** the D.C. Streetcar, which
+    ended service on 2026-03-31. **Waiting:** Seoul's Wirye Line, not open,
+    re-check in January 2027.
+- **What the approval does not cover:** the label and legend rule for the
+  heavy three, the color rules, and anything the re-check of
+  `docs/tram_rescope_estimate.md` and `docs/tram_rescope_specs.md` turns up
+  as changed since 2026-09-27. Each comes to the owner as its own call.
+
+### 2026-10-13 - Place search: the owner's two fixes to the changed-row report (three places closed for works kept, two counties by Prague dropped)
+
+- **The owner approved the changed rows with two fixes; both are by id, and five rows change, no others.** The 19 indexes now hold 323,407 rows (Paris 9,227, Prague 10,790, Seattle 13,113; the other 16 untouched). `changed_rows.md` and `.json` are regenerated.
+- **Kept by id, through a NEW config list, `PLACE_CLOSED_FOR_WORKS`: the Musée Yves Saint Laurent (Paris), the Seattle Public Library's University Branch and South Park Playground (Seattle).** What tripped the not-yet-open test: opening_date=2027-09 on the museum, building=construction on the library, construction=yes on the playground. No tag separates them from a place not yet built: three different tags, none of historic, heritage or a start date, and they are the only three not-yet-open drops on the 19, so a rule would be fitted to three rows. No by-id keep existed for this (`PLACE_VISITABLE` is for homes and has its own evidence fields, `PLACE_REBUILT` is for streets by name), so the list is new: OSM id and why, read only by the not-yet-open class (a demolished object named there still goes), and an id that has left the cache stops the step. Rejected: reading opening_hours=closed or operational_status=closed, carried by one of the three.
+- **Dropped by id in Prague's `PLACE_DROPPED`: okres Praha-východ and okres Praha-západ.** What admitted them: place=district with an article of their own, the district keep. Not tightened by rule: Prague's own ten districts carry the same tags (boundary=administrative, admin_level=5), and a test of the area would need the boundary geometry inside the row rules. The district keep now adds no row on the 19; it stays for other cities.
+- **Selftest 80 cases, 55 rule breaks, all caught.**
+
+### 2026-10-13 - Place search: the owner's rulings of 2026-10-13 built on a branch, the 19 indexes rebuilt, every changed row reported; NOT landed
+
+- **Built the rulings of "Place search: the owner's rulings on keep against drop, personal names, private streets and the typo line" in `pipeline/place_index.py`, rebuilt the 19 searched indexes from their caches and reported every changed row; nothing is landed and no map is rendered.** Branch `search-rules`, cut from 89c3ff24. The 19 indexes go from 328,692 rows to 323,406 and from 536,583 intersections to 530,756; index files 26.27 MB to 25.86 MB raw, street files 15.63 MB to 15.44 MB. The full list, a line a row with its OSM id and deciding tags, is `data/_place_rules_2026-10-13/build/changed_rows.md` (and `.json`), written by `build/report.py` from an in-memory rebuild compared with the committed indexes row by row (`build/harness.py`); every changed row carries the rule that logged it, none is unattributed. `check_place_search.py` fails rule A on all 19 (the maps carry the old index hash until the one re-render at landing) and nothing else; `check_place_index_drift.py`, `check_place_scope.py` and `check_place_unopened.py` pass. The baseline was proved first: before any change, all 19 committed indexes matched the code.
+- **Built counts against the figures in the ruling, where they differ and why.** Private residential streets 4,047 (ruling 4,102 gross, 4,041 net of the French lead and of ways with wikidata or wikipedia: the built exception is an article of the way's own, so six streets with a Wikidata entry alone go). Busways and raceways 124 of 126 (not traced row by row; a way's own article is the only exception built). Described minor-way street names 124 of 130 (89 and 41; a minor way with wikidata or wikipedia is exempt, as the minor-way rule already exempts it; not traced row by row). Tram platforms 293 of 294 (one Hong Kong platform went first as a closed stop). Duplicates 404 of 417: junctions 226 of 226, places 91 of 96, landmarks 87 of 95 (rows another rule took first; river rows are never merged). Rides 12 of 14 (the two the measure found only by an operator's name are not built). Stations that are a business or a bare type 6 of 6; closed stations 2 of 2. Graves 215 dropped of 258 in on a key, plaques 224 of 241; 39 stay as undecidable by tag and the rest have an article of their own or another tag that holds them. A Wikidata entry shared by three or more rows 14 of 23 (counted after the duplicate merges, and the object an article is named after owns it). Not there 124 of 266, read narrowly (below). Kept on an article of the object's own: bare type 3 of 81 (69 are the Édicule Guimard, the others carry a shared article, a section, or the type's own article), private operator or office 96 of 115 (shared articles, and rows another rule drops), islands, islets and districts 111 of 121 (archipelagos not built), pedestrian areas 39 of 47, estate areas 38 of 46, private access 11 of about 16, small memorials 6 of 23. Candidate bare type words 4 rows of 5 (Seattle's Quad keeps its row on its own article).
+- **Decided, as the narrower reading and FLAGGED for the owner: "demolished, razed, abandoned or not yet open" is read from the object's own tags, not from any lifecycle prefix on any key.** The measure's 266 counted every `disused:`, `abandoned:`, `demolished:`, `proposed:` and `construction:` prefix on a feature key, and end dates. Built: a plain flag is the object's own; a prefixed key counts only where the object has no live amenity, tourism, leisure, natural or man_made key (London's St John Zachary is a garden on a demolished church's site); a feature live and prefixed alike is kept and listed (eight Hong Kong parks tagged leisure=park beside construction:leisure=park); an abandoned object with a historic tag is kept as a historic site (Hong Kong's pillboxes and Shing Mun Redoubt, Marseille's batteries); a not-yet-open object that is historic, listed or has a start date behind it is kept as a rebuilding (the Centre Pompidou); `disused`, `was:` and end dates are not read. 124 rows go (105 in Hong Kong, 104 of them places, former villages for the most part); 62 are kept and listed. Rejected: the measured test, which took fountains with a disused drinking tap and artworks on a former fountain. To be ruled on by the owner: Prague's razed horse railway (seven rows, with an article; the 2b audit had put it back), three places closed for works that the tags show as not yet open (the Musée Yves Saint Laurent, a Seattle library branch and a playground), and the 62 kept rows.
+- **Decided: the fame test is read from tags as follows, and what the tags cannot tell is left as it was.** Not the object's own: an article named by a section or twice in one tag, one equal to the object's subject, brand or operator article or item, and one another object in the cache carries, unless the object is the one the article is named after. A grave or a plaque is named for its subject, so its article is its own only where the title says tomb, plaque, monument or the like; an article under the row's own name is the subject's. Any other memorial under its subject's name is undecidable. 39 graves and plaques stay as they were (Seoul's fourteen royal tombs tagged with their kings' articles among them) and 54 candidate keeps stay out, all listed. Rejected: guessing from the name whether a person is public.
+- **Decided: an island or islet with its own article is a landmark row, a district a neighborhood row.** The index's kinds are fixed and the search labels a place row "Neighborhood". Two districts qualify, both counties that border Prague and not part of it: flagged.
+- **Decided: access=private keeps a row out as a home unless it is the only home sign, the object has its own article and it is no garden, park or palace.** Eleven rows come in (libraries, a university building, monuments behind a fence, theatres); 45 gardens and palaces with an article stay out as undecidable by tag.
+- **Decided: one street-level reading for the three street rules.** A street is dropped only when every one of its ways fails the rule, so no street changes its drawn length. Rejected: skipping single ways, which would have shortened 71 streets that share a name with a busway.
+- **Decided: a merge keeps the member nearest the group's middle, the lower OSM id on a tie, and takes in the others' names.** The row's id in `place_ids.json` is that member's.
+- **Decided: a closed station is counted (`station_skipped_closed`) and is not added to the watch file of unopened stations**, which is for stations not yet open. No new unopened station appears on the 19.
+- **Four new rows carry a leak word and are reviewed by name; one reviewed name left.** `PLACE_REVIEWED` gained Hôtel de Castries and Hôtel de Matignon (Paris), Hôtel Errera (Brussels) and HMS Wellington (London), each a government building or a ship with its own article, in on the office ruling; Chicago's "Site of the Sauganash Hotel/Wigwam" was removed, since its plaque row went with the plaque rule.
+- **Wave 1's four additions.** construction=yes is read on any station or stop (no row on the 19). usage=tourism is in the ride rule and takes 11 of the 12 rides dropped. No highway way tagged historic=roman_road is a landmark row on the 19, so nothing is proposed from this data; the same pattern exists for historic=railway on a street in Prague (two rows, kept). The plaque rule and the shared-item rule take the pavement plates and subject-item plaques found (Paris's fourteen "Hommage à Arago" plates share one article); a threshold of two would drop 48 more rows (measured only, listed).
+- **A selftest for the index rules, new:** `python pipeline/place_index.py --selftest` (78 cases on a made-up city, in `check_all.py`); `scripts/place_index_breaks.json` breaks 53 rules in a copy and all 53 are caught.
+- **The typo sentence is in `app/components.py`** (`render_map_help`), the owner's wording with US spelling. An `app/` change: it lands with the batch and needs the reboot.
+- **`docs/place_search_exclusions.md` is the internal list of what search leaves out**, every settled class with its rule, where it lives and its date.
+- **Not done:** no map rendered (the landing's one re-render); the matcher change for a correctly typed word finding a misspelled name was not sized; `pipeline/drift_check.py` was not run (it runs city steps against the shared data folder).
+- **PROPOSAL for review time, a DRAFT, the owner's wording to settle: the section for the What Is Excluded page.**
+
+  > ## What the map's search leaves out
+  >
+  > The search box finds places, not businesses. It reads a list of streets, intersections, stations, neighborhoods and landmarks taken from OpenStreetMap for the area each map covers. Some places are left off that list on purpose.
+  >
+  > **Homes.** A house, an apartment building or a private garden is not in the search, even a well-known one. A former home is included when it is open to visitors as a museum.
+  >
+  > **Businesses.** A shop, a hotel, a restaurant or an office is not a search result. A historic building is included for the building, not for the business inside it.
+  >
+  > **People.** A grave or a plaque is included only when it has its own Wikipedia article. Statues and public memorials are included. Stumbling stones, which mark a person's last home, are never included.
+  >
+  > **Private streets.** A street closed to the public is left out. So are driveways, parking aisles, bus-only roads and race tracks.
+  >
+  > **Places that are not there.** A building that was demolished, a village that was abandoned and a station that has closed or has not opened yet are left out. The search should not take you to something that is gone.
+  >
+  > **Names that are not names.** A park labeled only "Park" or a path labeled "Footpath 12" is left out, because the label describes the thing and does not name it.
+  >
+  > **Small or repeated things.** Wayside shrines, boundary stones and museum exhibits are left out. A tram stop with two platforms is one result, not two.
+  >
+  > Place names come from OpenStreetMap as its contributors wrote them, so a few are misspelled.
+
+### 2026-10-13 - Place search: the rules of 2026-10-13 approved for landing, with two row fixes and the page section (owner)
+
+- **The owner read the changed-row summary** (`changed_rows.md`, every row
+  by class and city; 328,692 rows to 323,407 on the 19 built cities) and the
+  rows Cleanup singled out, and answered: "i agree with your recommendations
+  for rows i'd look at". The recommendations were two: restore the three
+  places dropped as not yet open that are closed for works (Musée Yves Saint
+  Laurent in Paris, a Seattle library branch, South Park Playground), and
+  drop the two "districts" added in Prague that are counties bordering the
+  city. Both were applied by id; no tag separates either group.
+  `config.PLACE_CLOSED_FOR_WORKS` is new for the first.
+- **Left as built, as ruled:** Prague's razed horse railway (seven rows
+  with an article) is dropped, famous graves whose tag is the person's
+  article are dropped, "Amazon.com Stackhouse" comes in on the office rule,
+  and the rows undecidable by tag stay as they were (28 graves and 11
+  plaques in, 54 candidate keeps out).
+- **The section for the What Is Excluded page, the owner: "what is excluded
+  looks good".** The draft above is the text, unchanged, as a section of its
+  own in `docs/excluded_categories.md`, before the removal section.
+- **The landing, the owner: "landing itself approved".** One re-render of
+  the 19 searched maps, the push, the owner's reboot (the typo sentence is
+  an `app/` change).
+- **Not done with this landing:** the matcher change by which a correctly
+  typed word finds a misspelled name was not sized; the shared-Wikidata
+  threshold of two (48 more rows) and the roman-road landmark rows are
+  measured only.

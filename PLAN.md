@@ -463,7 +463,7 @@ decisions inside a build are named in its brief.
   "Tokyo: the missing wards".
   - [ ] ⏸ **PARKED, the last resort (owner, 2026-09-24): four requests**
     (`docs/gated_access.md` items 29–32), not sent and not the next step.
-- [ ] ⏸ **Trams left off built maps: PARKED (owner, 2026-09-27); the owner
+- [ ] **Trams left off built maps: QUEUED after the search-rules landing (owner, 2026-10-13; parked 2026-09-27 to 2026-10-13); the owner
   decides case by case.** `docs/plan_detail/city_watch.md`, "Trams left off built maps".
 - [ ] **Efficiency review follow-ups:** the weekly `archive_decisions.py`
   run, due 2026-10-11 and HELD until phase 2 finishes (owner, that day:

@@ -194,6 +194,11 @@ PLACE_REVIEWED = {
 # OSM objects a reading by eye found to be a business or a home that no rule
 # in place_index.py catches, each with why (place_index.build, `dropped`).
 PLACE_DROPPED = {
+    # Counties that border Prague, tagged place=district with an article of
+    # their own: no part of the city (owner, 2026-10-13). By id, since the
+    # city's own districts carry the same tags.
+    "relation/441584": "'okres Praha-východ', a county bordering Prague, not a district of the city",
+    "relation/442269": "'okres Praha-západ', a county bordering Prague, not a district of the city",
     "node/3475173927": "'Rozhledna', a viewpoint under its type word (dropped by id: an artwork of the same title, with wikidata, keeps its name)",
     "node/11652593441": "'daněk bílý', an animal enclosure named for the animal",
 }

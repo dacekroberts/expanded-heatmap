@@ -418,9 +418,10 @@ def build_city(config):
     # the calendar line.
     live = {k for k, v in visitable.items() if _days(v["checked"], retrieved) <= VISITABLE_MAX_DAYS}
     rebuilt = getattr(config, "PLACE_REBUILT", {})
+    works = getattr(config, "PLACE_CLOSED_FOR_WORKS", {})
     index, report = build(payload["elements"], city=name, retrieved=retrieved,
                           local=config.PLACE_LANGUAGES, fold=fold, dropped=dropped,
-                          visitable=live, rebuilt=rebuilt)
+                          visitable=live, rebuilt=rebuilt, closed_for_works=set(works))
     if rebuilt and report.get("street_way_kept_rebuilt", 0) == 0 or any(
             not any((e.get("tags") or {}).get("highway") == "construction"
                     and n in (e.get("tags") or {}).values() for e in payload["elements"])
@@ -453,6 +454,9 @@ def build_city(config):
     stale = sorted(set(dropped) - found)
     if stale:
         sys.exit(f"config.PLACE_DROPPED names {stale}, not in the cache: remove them")
+    stale = sorted(set(works) - found)
+    if stale:
+        sys.exit(f"config.PLACE_CLOSED_FOR_WORKS names {stale}, not in the cache: remove them")
     stale = sorted(set(visitable) - found)
     if stale:
         sys.exit(f"config.PLACE_VISITABLE names {stale}, not in the cache: remove them")
@@ -971,6 +975,24 @@ def _home(tags, names, local=()):
                 and any(_home_name(n, local) for n in names)))
 
 
+def _home_signs(tags, names, local=()):
+    """["access"] where access=private is the ONLY thing that makes an object
+    a home for _home, [] where _home does not fire, else ["other"]."""
+    if not _home(tags, names, local):
+        return []
+    less = {k: v for k, v in tags.items() if k != "access"}
+    return ["other"] if tags.get("access") != "private" or _home(less, names, local) else ["access"]
+
+
+def _private_access_only(tags, names, local=()):
+    """True where access=private alone trips the home test on something that
+    is no home by its tags: not a garden or a park (a private garden is a
+    home's) and not a castle or palace (a residence). Asked only of an object
+    with an article of its own (landmark_drop)."""
+    return (_home_signs(tags, names, local) == ["access"] and not tags.get("leisure")
+            and tags.get("historic") != "castle" and not tags.get("castle_type"))
+
+
 def _public_home(tags):
     """A home a visitor may look for: open as a museum or an attraction. A
     heritage designation, a wikidata item or a Wikipedia article is not:
@@ -1089,7 +1111,18 @@ BARE_TYPE_NAMES = {
            "common watercourse", "pocket park", "play area",
            # The outside name net's read of the 19 built cities (owner, 2026-10-12).
            "detention pond", "meadow", "lawn", "showring", "gatehouse", "control tower",
-           "perennial border", "mooring anchors", "solarium"),
+           "perennial border", "mooring anchors", "solarium",
+           # Wave 1's candidates (owner, 2026-10-13), measured on the 19 built
+           # cities first: 5 rows, "The Quad" in Chicago and Seattle, "Quad"
+           # in Montréal, "Parade Ground" in Seattle and Sydney. Seattle's
+           # Quad keeps its row on an article of its own.
+           "walled garden", "standing stone", "stone circle", "clock tower", "packhorse bridge",
+           "grotto", "dovecot", "kiln", "mort safe", "parade ground", "chaplaincy", "prayer room",
+           "cairn", "cross", "tower", "barrow", "bathhouse", "battery", "bullaun stone",
+           "water pump", "ice house", "martello tower", "granary", "sheep fold", "mill race",
+           "parish centre", "quad", "the quad", "pharmacy", "worship center", "sculpture garden",
+           "dog park", "off leash dog park", "water fountain", "community park", "urban park",
+           "rooftop park", "redwood grove", "secret garden"),
     "ja": ("本殿", "本堂", "拝殿", "灯籠", "唐門", "山門", "五重塔", "御影堂", "金堂", "鳥居", "鐘楼",
            "石碑", "公園", "児童公園", "広場", "記念碑",
            # Tokyo's read (batch 3, 2026-10-11): shrine fixtures, pocket parks
@@ -1428,6 +1461,368 @@ def _reads_as_way(names, local):
     return False
 
 
+# ---------------------------------------------------------------------------
+# THE RULINGS OF 2026-10-13 (owner; DECISIONS.md, "Place search: the owner's
+# rulings on keep against drop, personal names, private streets and the typo
+# line"). Every figure below was measured on the 19 built cities, on the
+# caches of 2026-10-07 to 2026-10-11; re-measure a figure before relying on
+# it for a new city. docs/place_search_exclusions.md lists every class.
+# ---------------------------------------------------------------------------
+
+
+def fold_name(s):
+    """A name with case, accents, spaces and punctuation set aside: the key
+    two rows of one thing share ("St. Mary's" and "St Marys")."""
+    s = unicodedata.normalize("NFKD", unicodedata.normalize("NFKC", s).casefold())
+    return "".join(ch for ch in s if ch.isalnum())
+
+
+# THE FAME TEST (owner, 2026-10-13: "famous landmark rule takes priority over
+# others"): a `wikipedia` tag of the object's OWN. Not its own, read from the
+# tags alone: an article named twice or by a section ("#"), one the object
+# shares with its subject, brand or operator, and one another object in the
+# cache carries too (Paris's 69 metro entrances all tagged "Édicule Guimard",
+# a presbytery tagged with its church's article). Two objects of one folded
+# name within SAME_THING_M are one thing drawn twice and share nothing; the
+# ways of one street share nothing whatever their distance.
+SAME_THING_M = 300
+_SUBJECT_KEYS = ("subject", "buried", "name:etymology", "brand", "operator")
+# Words that say an article is about a grave, a plaque or a monument and not
+# about the person it names ("Tomb of Karl Marx", "Tombe d'Oscar Wilde",
+# "Monument funéraire de ..."). In the article's language, which is often not
+# the city's, so one list. A whole word, or anywhere in a Han or kana title.
+OBJECT_WORDS = (
+    "tomb", "tombs", "grave", "gravesite", "mausoleum", "memorial", "monument", "cenotaph", "crypt",
+    "plaque", "statue", "sepulchre", "tombstone", "headstone",
+    "tombe", "tombeau", "sépulture", "mémorial", "mausolée", "crypte", "stèle", "cénotaphe", "caveau",
+    "tumba", "sepulcro", "mausoleo", "monumento", "placa", "estatua", "estàtua", "estátua", "túmulo",
+    "jazigo", "mausoléu", "làpida",
+    "hrob", "hrobka", "pomník", "památník", "pamětní", "socha", "mauzoleum", "náhrobek",
+    "graf", "grafmonument", "gedenkteken", "gedenkplaat", "standbeeld", "grab", "grabmal", "denkmal",
+    "მემორიალი", "ძეგლი", "საფლავი", "памятник", "мемориал", "мемарыяльная", "могила",
+    "墓", "陵", "塚", "古墳", "碑", "像")
+# Korean, as a title's ending only: 능 and 비 sit inside common words.
+OBJECT_ENDINGS = ("묘", "릉", "능", "묘역", "묘소", "기념비", "동상", "비석")
+
+
+def article_title(value):
+    """The title of a `wikipedia` tag's article: the language prefix, a
+    trailing disambiguation in brackets and underscores set aside."""
+    title = re.sub(r"^[A-Za-z][A-Za-z\-]{1,11}:", "", value.strip()).replace("_", " ").strip()
+    return re.sub(r"\s*\([^()]*\)$", "", title).strip()
+
+
+def _object_title(title):
+    low = title.lower()
+    return any(_has_word(w, low) for w in OBJECT_WORDS) or low.endswith(OBJECT_ENDINGS)
+
+
+def grave_or_plaque(tags):
+    """"grave", "plaque" or None (the test the 2026-10-13 measure used)."""
+    if tags.get("cemetery") == "grave" or tags.get("historic") == "tomb" or tags.get("tomb"):
+        return "grave"
+    if tags.get("memorial") in ("plaque", "blue_plaque"):
+        return "plaque"
+    return None
+
+
+def _memorial(tags):
+    return bool(tags.get("historic") == "memorial" or tags.get("memorial")
+                or (tags.get("tourism") == "artwork" and tags.get("artwork_type") in ("statue", "bust")))
+
+
+def own_article(tags, names, shared=False):
+    """("own" | "not" | "undecided" | "none", why) for an object's `wikipedia`
+    tag. `shared`: another object in the cache carries the same article.
+    "undecided" is a verdict: the tags cannot tell, and the caller leaves the
+    row as it was (never a guess). A grave or a plaque is named for its
+    subject, so an article under the row's own name is the subject's unless
+    the title says tomb, plaque or monument; any other memorial under its own
+    name could be either."""
+    wp = (tags.get("wikipedia") or "").strip()
+    if not wp:
+        return "none", ""
+    if ";" in wp:
+        return "not", "several articles in one tag"
+    if "#" in wp:
+        return "not", "a section of another article"
+    wd = (tags.get("wikidata") or "").strip()
+    for key in _SUBJECT_KEYS:
+        if (tags.get(f"{key}:wikipedia") or "").strip() == wp:
+            return "not", f"the article is its {key}'s ({key}:wikipedia)"
+        if wd and wd in [v.strip() for v in (tags.get(f"{key}:wikidata") or "").split(";")]:
+            return "not", f"the item is its {key}'s ({key}:wikidata)"
+    if shared:
+        return "not", "the article is shared with another object"
+    title = article_title(wp)
+    person = grave_or_plaque(tags)
+    if person or _memorial(tags):
+        if _object_title(title):
+            return "own", "the title names the object"
+        if person and fold_name(title) in {fold_name(n) for n in names}:
+            return "not", "the article bears the row's name, its subject's"
+        return "undecided", "a memorial's article that could be its subject's"
+    return "own", ""
+
+
+# A PLACE OR LANDMARK THAT IS NOT THERE (owner, 2026-10-13: "the search must
+# not land where the thing is not"): demolished, razed, removed, abandoned or
+# not yet open by its own tags, article or not. Read narrowly, since a
+# lifecycle prefix sits on one feature of an object and not on the object:
+#   * a plain flag (demolished=yes, abandoned=yes, construction=yes) is the
+#     object's own;
+#   * a prefixed key (demolished:building=church) counts only where the
+#     object has no live amenity, tourism, leisure, natural or man_made key:
+#     London's St John Zachary is a garden today on the site of a demolished
+#     church, and stays;
+#   * the same feature live and prefixed alike (leisure=park beside
+#     construction:leisure=park, eight Hong Kong parks) says both: the row
+#     stays and is listed, never a guess;
+#   * on a place, a demolished or abandoned prefix on the place key itself
+#     (Hong Kong's former villages, place=locality with abandoned:place=
+#     village or demolished:place=hamlet). A proposed or construction prefix
+#     there never drops a place: a locality proposed to become a quarter is
+#     there today;
+#   * an ABANDONED landmark with a historic tag is a historic site and is
+#     there; a NOT-YET-OPEN one that is historic, listed or has a start date
+#     behind it is being rebuilt (build()'s landmark()).
+# NOT read: disused (a disused fountain stands), was: (a former use) and
+# end_date on anything but a station. The 2026-10-13 measure counted 266
+# rows with a wider test (any of these prefixes on any feature key, disused
+# and end_date included); the narrow reading and its count are in
+# docs/decisions_drafts/search-rules.md, flagged for the owner.
+LIFE_GONE = ("razed", "demolished", "removed", "destroyed")
+LIFE_AHEAD = ("proposed", "construction", "planned")
+LIFE_FEATURES = ("railway", "building", "amenity", "tourism", "historic", "leisure", "shop", "man_made",
+                 "highway", "public_transport", "place", "natural", "landuse")
+LIFE_LIVE_KEYS = ("amenity", "tourism", "leisure", "natural", "man_made")
+
+
+def _future(value, retrieved):
+    """True for a date tag later than the cache (`retrieved`, ISO)."""
+    v = str(value or "").strip()
+    return bool(re.match(r"\d{4}", v)) and v[:10] > retrieved and not retrieved.startswith(v)
+
+
+def _past(value, retrieved):
+    v = str(value or "").strip()
+    return bool(re.match(r"(1[5-9]|20)\d{2}", v)) and v[:10] < retrieved and not retrieved.startswith(v)
+
+
+def lifecycle(tags, retrieved, place=False):
+    """("gone" | "abandoned" | "ahead" | "both", the deciding tag) for a place
+    or a landmark its own tags say is not there, else None."""
+    classes = (("gone", LIFE_GONE), ("abandoned", ("abandoned",)), ("ahead", LIFE_AHEAD))
+    for cls, prefixes in classes:
+        for p in prefixes:
+            if tags.get(p) == "yes":
+                return cls, f"{p}=yes"
+    if place:
+        for cls, prefixes in classes:
+            for p in prefixes:
+                v = tags.get(f"{p}:place")
+                if v and v == tags.get("place"):
+                    return "both", f"{p}:place={v}"
+                if v and cls != "ahead":
+                    return cls, f"{p}:place={v}"
+        return None
+    for k in ("railway", "building", "highway"):
+        v = tags.get(k)
+        if v in ("razed", "abandoned") or v in LIFE_AHEAD:
+            return ("gone" if v == "razed" else "abandoned" if v == "abandoned" else "ahead"), f"{k}={v}"
+    for cls, prefixes in classes:
+        keys = sorted(k for k in tags if k.partition(":")[0] in prefixes
+                      and k.partition(":")[2] in LIFE_FEATURES)
+        if not keys:
+            continue
+        # The same feature live and prefixed (leisure=park beside
+        # construction:leisure=park, eight Hong Kong parks) says both: "both"
+        # is a verdict the caller keeps and lists, never a guess.
+        both = [k for k in keys if tags.get(k.partition(":")[2]) == tags[k]]
+        if both:
+            return "both", f"{both[0]}={tags[both[0]]}"
+        if not any(tags.get(k) for k in LIFE_LIVE_KEYS):
+            return cls, f"{keys[0]}={tags[keys[0]]}"
+    if _future(tags.get("opening_date"), retrieved):
+        return "ahead", f"opening_date={tags['opening_date']}"
+    return None
+
+
+# A STATION THAT IS NO STATION TO SEARCH (owner, 2026-10-13).
+# Not yet open: opening_date after the cache, beside the lifecycle tags read
+# since 2026-10-08, and on any station or stop, not only public_transport=
+# station (a Birmingham tram stop carries construction=yes on railway=
+# tram_stop; wave 1, 2026-10-13). Closed: end_date before the cache, a
+# disused, abandoned, razed or demolished prefix on railway or
+# public_transport, disused=yes or abandoned=yes (2 rows on the 19).
+STATION_CLOSED_PREFIXES = ("disused", "abandoned", "razed", "demolished")
+
+
+def station_closed(tags, retrieved):
+    """The tag that says a station has closed, else None."""
+    for p in STATION_CLOSED_PREFIXES:
+        for k in ("railway", "public_transport"):
+            if tags.get(f"{p}:{k}"):
+                return f"{p}:{k}={tags[f'{p}:{k}']}"
+    for k in ("disused", "abandoned"):
+        if tags.get(k) == "yes":
+            return f"{k}=yes"
+    if _past(tags.get("end_date"), retrieved):
+        return f"end_date={tags['end_date']}"
+    return None
+
+
+def station_ride(tags):
+    """The tag that says a station is a ride's and not a transit stop: a
+    tourist or miniature railway inside a park or a museum (14 rows on the
+    19: London's miniature railways, Ocean Park's train in Hong Kong).
+    usage=tourism is the cleanest of them (wave 1, 2026-10-13; 11 of the 14).
+    tourism=attraction ALONE is no sign: Hong Kong's Peak Tram termini and
+    Sao Paulo's Estação da Luz carry it. An operator's or network's name is
+    not read either (a heritage line can be a city's transit)."""
+    if tags.get("usage") == "tourism":
+        return "usage=tourism"
+    if tags.get("attraction"):
+        return f"attraction={tags['attraction']}"
+    for k in ("railway", "station"):
+        if tags.get(k) == "miniature":
+            return f"{k}=miniature"
+    if "miniature" in str(tags.get("railway:traffic_mode") or ""):
+        return f"railway:traffic_mode={tags['railway:traffic_mode']}"
+    return None
+
+
+# A STREET NAME THAT DESCRIBES (owner, 2026-10-13): on a street whose every
+# way is a minor way, a name that is a bare type or way word ("Path", "The
+# Walk"), a description ("Service Road", "Pedestrian Crossing") or a type and
+# a code ("Footpath 104", "Trail #2", "Bridge 22") is no name: 89 and 41 rows
+# on the 19. Never on a street with a way of residential class or above: 193
+# such rows are real streets (London's "The Avenue"). Kept all the same: an
+# alley or lane with a number (Sydney's "Lane 5"), and a local way word with
+# a number where streets are numbered (Rua 1, Calle 5, Eje 3: 3,297 rows).
+# English only; measure a new language's phrases on its built cities first.
+STREET_DESCRIPTIONS = frozenset((
+    "exit", "entrance", "entry", "access", "access road", "access lane", "access path", "access way",
+    "service road", "service lane", "service alley", "service entrance", "service access",
+    "bus terminus", "bus terminal", "bus station", "bus lane", "bus only", "buses only", "bus loop",
+    "bus stop", "bus bay", "busway", "park path", "dirt path", "dirt road", "dirt track", "gravel path",
+    "gravel road", "footpath", "foot path", "public footpath", "path", "trail", "walkway", "walking path",
+    "walking trail", "sidewalk", "pavement", "alley", "alleyway", "back alley", "driveway", "drive",
+    "ramp", "stairs", "steps", "staircase", "stairway", "bike path", "bicycle path", "cycle path",
+    "cycle track", "bike lane", "cycle lane", "cycleway", "bikeway", "bike trail", "pedestrian path",
+    "pedestrian walkway", "pedestrian crossing", "pedestrian access", "pedestrian bridge", "crosswalk",
+    "crossing", "underpass", "overpass", "subway", "footbridge", "foot bridge", "bridge", "tunnel",
+    "fire lane", "fire road", "fire access", "emergency access", "emergency exit", "loading dock",
+    "loading bay", "parking", "car park", "track", "road", "street", "lane", "slip road", "on ramp",
+    "off ramp", "on-ramp", "off-ramp", "taxi rank", "taxi stand", "drop off", "drop-off", "pick up",
+    "pick-up", "turnaround", "roundabout", "u-turn", "unnamed road", "shortcut", "short cut",
+    "cut through", "towpath", "boardwalk", "connector", "link", "link road", "haul road", "private road",
+    "private drive", "private", "no entry", "one way", "main entrance", "rear entrance", "back entrance",
+    "side entrance", "delivery", "deliveries", "delivery entrance", "delivery road", "loop", "loop road",
+    "trailhead", "nature trail", "bridle path", "bridleway", "public bridleway", "public right of way",
+    "right of way", "easement", "laneway", "rear lane", "back lane", "garage", "garages", "service",
+    "maintenance road", "maintenance access", "school path", "school entrance", "station access",
+    "station entrance", "station approach", "platform", "platform access", "concourse", "arcade",
+    "escalator", "lift", "elevator", "passage", "passageway", "corridor", "pathway", "path to beach",
+    "beach access", "boat ramp", "slipway", "jetty", "pier", "promenade", "esplanade", "greenway"))
+_STREET_CODE_TYPES = (
+    "route", "highway", "hwy", "road", "bridge", "ramp", "exit", "gate", "lot", "path", "trail",
+    "track", "tunnel", "loop", "section", "sector", "block", "bay", "stand", "stairs", "steps", "line",
+    "aisle", "drive aisle", "level", "platform", "pier", "dock", "berth", "entrance", "access", "unit",
+    "building", "zone", "area", "phase", "stage", "parking", "car park", "access road", "service road",
+    "footpath", "walkway", "taxiway", "runway", "stair", "staircase", "driveway", "subway", "underpass",
+    "footbridge", "culvert")
+_STREET_CODE = r"(?:(?:no\.?\s*|#\s*|nr\.?\s*|n[°º]\s*)?\d+[a-z]{0,2}(?:[/\-]\d+[a-z]?)?|[a-z])"
+_STREET_TYPE_CODE = re.compile(
+    r"(?:" + "|".join(re.escape(w) for w in sorted(_STREET_CODE_TYPES, key=len, reverse=True))
+    + r")\s+" + _STREET_CODE, re.I)
+_STREET_ALLEY_CODE = re.compile(r"(?:public\s+)?(?:alley|lane|laneway)\s+(?:no\.?\s*|#\s*)?\d+[a-z]?", re.I)
+_STREET_PAVEMENT = re.compile(r"\s\(?(?:\w+\s)?(pavement|sidewalk|footway)$")
+
+
+def street_description(name, local):
+    """The class of a street name that describes and does not name
+    ("bare type", "way word", "description", "pavement", "type and code"),
+    else None. Asked of a street whose every way is a minor way only."""
+    low = re.sub(r"\s+", " ", unicodedata.normalize("NFKC", name).casefold().strip(" .,;:()"))
+    low = low[4:] if low.startswith("the ") else low
+    if _STREET_ALLEY_CODE.fullmatch(low):
+        return None
+    if coded_type(name, local):
+        return "type and code"
+    if bare_type(name, local):
+        return "bare type"
+    ways = {w for c in ("en", *local) for w in WAY_WORDS.get(c, ())}
+    if low in ways or name.strip().casefold() in ways:
+        return "way word"
+    if low in STREET_DESCRIPTIONS:
+        return "description"
+    if _STREET_PAVEMENT.search(low):
+        return "pavement"
+    m = re.fullmatch(r"(.+?)\s+" + _STREET_CODE, low)
+    if m and tuple(local) != ("en",) and m.group(1) in {w for c in local for w in WAY_WORDS.get(c, ())}:
+        return None
+    if _STREET_TYPE_CODE.fullmatch(low):
+        return None if low.split()[0] in ("route", "highway", "hwy") else "type and code"
+    return None
+
+
+# BUSWAYS AND RACE TRACKS (owner, 2026-10-13): a street whose every way is
+# highway=busway or raceway is no street to search, unless a way has its own
+# article: 126 rows on the 19 (100 busways, 26 raceways, among them the
+# corners of Interlagos, each named on its own way). A street with one other
+# way keeps all its ways (71 rows).
+NOT_STREET_HIGHWAYS = {"busway", "raceway"}
+# PRIVATE RESIDENTIAL STREETS (owner, 2026-10-13: "drop as ruled"): a street
+# whose every way is access=private or no on highway=residential or
+# unclassified, 4,102 rows on the 19 (1.6% of streets; Mexico City 1,982,
+# London 1,088). It departs from the Paris precedent of 2026-10-11 (addressed
+# private streets kept); the owner kept the ruling. PRIVATE_STREET_LEAD
+# stands (52 rows) and so does a way's own article.
+PRIVATE_STREET_HIGHWAYS = {"residential", "unclassified"}
+# PLACE KINDS THE INDEX DOES NOT LIST, kept on an article of their own
+# (owner, 2026-10-13): an island or an islet as a landmark, a district as a
+# neighborhood (121 measured, with archipelagos, which are not built).
+ISLAND_VALUES = {"island", "islet"}
+# ONE ROW A STOP (owner, 2026-10-13): tram platforms of one folded name
+# within PLATFORM_MERGE_M, every one railway=tram_stop, are one stop mapped a
+# row a platform (294 rows on the 19, 205 of them in Prague). Rows that
+# differ in mode or network are an interchange and stay two rows (261), and
+# so do same-mode rows that are not tram stops (35).
+PLATFORM_MERGE_M = 150
+# ONE ROW A THING (owner, 2026-10-13): junction, place and landmark rows of
+# one folded name chained within ROW_MERGE_M are one thing in several rows
+# (417 on the 19: Hong Kong's signalled junctions a row a signal, Kyoto's 町
+# drawn twice). Supersedes "two nodes are two places" at NEAR_DUP_M for rows
+# this near; a river row is never merged.
+ROW_MERGE_M = 300
+# A WIKIDATA ENTRY SHARED BY THREE OR MORE ROWS admits none of them (owner,
+# 2026-10-13): 23 rows on the 19 were held only by an item their whole group
+# shares (Seattle's park-system and campus items). Counted after the merges
+# above, so one thing drawn three times is not a group.
+SHARED_WIKIDATA_MIN = 3
+
+
+def _clusters(points, radius):
+    """Index lists of `points` [(lat, lon)] chained within `radius` metres
+    (single link), each of two or more, in first-member order."""
+    parent = list(range(len(points)))
+
+    def find(x):
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]
+            x = parent[x]
+        return x
+    for i in range(len(points)):
+        for j in range(i + 1, len(points)):
+            if _dist_m(points[i], points[j]) <= radius:
+                parent[find(i)] = find(j)
+    out = defaultdict(list)
+    for i in range(len(points)):
+        out[find(i)].append(i)
+    return sorted((v for v in out.values() if len(v) > 1), key=lambda v: v[0])
+
+
 SQUARE_DUP_M = 500
 SQUARE_NEAR_M = 150
 # Abbreviated square words read in full when a square is compared with the
@@ -1517,16 +1912,36 @@ def _r(x):
     return round(x, 4)
 
 
-def _commercial(tags):
-    if any(k in tags for k in COMMERCIAL_KEYS):
-        return True
+def _commercial_reasons(tags):
+    """Why _commercial fires: the commercial keys present, "building", and
+    each COMMERCIAL_VALUES hit as "key=value"."""
+    out = [k for k in COMMERCIAL_KEYS if k in tags]
     # A ruin is no business, whatever building it was (Seattle's Coal Creek
     # Hotel ruins, building=hotel, reviewed).
     if tags.get("building") in COMMERCIAL_BUILDINGS and not (
             tags.get("wikidata") or tags.get("wikipedia") or tags.get("heritage")
             or tags.get("historic") in ("ruins", "archaeological_site")):
-        return True
-    return any(tags.get(k) in vals for k, vals in COMMERCIAL_VALUES.items())
+        out.append("building")
+    return out + [f"{k}={tags[k]}" for k, vals in COMMERCIAL_VALUES.items() if tags.get(k) in vals]
+
+
+def _commercial(tags):
+    return bool(_commercial_reasons(tags))
+
+
+# The business signs an article of the object's own outweighs (owner,
+# 2026-10-13; landmark_drop): a private operator and an office tag, nothing
+# else. operator:type=business or commercial is not among them.
+KEPT_COMMERCIAL_REASONS = {"office", "operator:type=private"}
+# What a rule's record keeps of an object's tags (build()'s `log`).
+_LOG_KEYS = {"wikidata", "wikipedia", "heritage", "ref:nrhp", "historic", "tourism", "amenity", "building",
+             "leisure", "landuse", "access", "memorial", "cemetery", "tomb", "place", "railway",
+             "public_transport", "highway", "service", "station", "usage", "attraction", "artwork_type",
+             "man_made", "natural", "office", "shop", "brand", "bridge", "area", "opening_date",
+             "start_date", "end_date", "construction", "proposed", "disused", "abandoned", "demolished",
+             "razed", "removed", "castle_type", "garden:type", "network", "ruins"}
+_LOG_PREFIXES = {"subject", "buried", "operator", "bridge", "proposed", "construction", "planned",
+                 "disused", "abandoned", "razed", "demolished", "removed", "destroyed", "was"}
 
 
 def _point(el):
@@ -1536,7 +1951,8 @@ def _point(el):
     return (c["lat"], c["lon"]) if c else None
 
 
-def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=(), rebuilt=()):
+def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=(), rebuilt=(),
+          closed_for_works=(), log=None):
     """Return (index dict, report dict) from one place cache's elements.
     `local`: the city's local language codes (config.PLACE_LANGUAGES).
     `dropped`: OSM objects ("way/504652702") a reading by eye found to be a
@@ -1544,8 +1960,38 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
     `visitable`: homes the public can visit today, kept against the home rule
     (config.PLACE_VISITABLE's live entries; VISITABLE FORMER HOMES above).
     `rebuilt`: names of streets closed for rebuilding, kept although OSM
-    draws them highway=construction (config.PLACE_REBUILT)."""
+    draws them highway=construction (config.PLACE_REBUILT).
+    `closed_for_works`: OSM objects that stand but are closed for works, kept
+    although their tags read as not yet open (config.PLACE_CLOSED_FOR_WORKS).
+    `log`: a list that receives one record per decision of the 2026-10-13
+    rules (class, action, OSM id, name, the deciding tag), for the changed-row
+    report of a rule change; nothing reads it otherwise."""
     name_tags = _name_tags(local)
+
+    def note(cls, act, osm, name, why="", tags=None, bbox=None):
+        if log is not None:
+            log.append({"class": cls, "act": act, "osm": osm, "name": name, "why": why, "bbox": bbox,
+                        "tags": {k: v for k, v in (tags or {}).items() if k in _LOG_KEYS
+                                 or k.partition(":")[0] in _LOG_PREFIXES}})
+
+    carriers = defaultdict(list)              # wikipedia value -> (OSM id, folded name, point, a way)
+
+    def article(e, t, names, pt, way=False):
+        """own_article() for one element, with who shares its article."""
+        wp = (t.get("wikipedia") or "").strip()
+        if not wp:
+            return "none", ""
+        oid, mine = f"{e['type']}/{e['id']}", fold_name(names[0])
+        others = [c for c in carriers[wp] if c[0] != oid and not (
+            c[1] == mine and ((way and c[3]) or _dist_m(c[2], pt) <= SAME_THING_M))]
+        # The one object an article is named after owns it, whoever else
+        # carries it: Chicago's Pullman National Historical Park and the
+        # buildings inside it tagged with the park's article. Not where
+        # another carrier bears the same name (the 69 Édicule Guimard).
+        if others and fold_name(article_title(wp)) == mine and not any(c[1] == mine for c in others):
+            others = []
+        return own_article(t, names, shared=bool(others))
+
     nodes = {}
     ways = []
     tagged = []
@@ -1566,6 +2012,23 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             if e["type"] == "node":
                 nodes.setdefault(e["id"], (e["lat"], e["lon"]))
 
+    # Who else carries each article (own_article's `shared`): every named
+    # object in the cache, a highway way at its middle node.
+    for e in elements:
+        t = e.get("tags") or {}
+        wp = (t.get("wikipedia") or "").strip()
+        if not wp:
+            continue
+        ns = _local_first(t, _names(t, name_tags), local)
+        is_way = e["type"] == "way" and "nodes" in e
+        if is_way:
+            ids = [n for n in e["nodes"] if n in nodes]
+            pt = nodes[ids[len(ids) // 2]] if ids else None
+        else:
+            pt = _point(e)
+        if ns and pt:
+            carriers[wp].append((f"{e['type']}/{e['id']}", fold_name(ns[0]), pt, is_way))
+
     report = defaultdict(int)
     not_open = []                             # stations skipped as not yet open
     rows = []
@@ -1580,21 +2043,24 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
     seen_key = set()
     seen_near = defaultdict(list)             # (kind, name) -> (point, is_area)
 
-    def add(kind, pt, names, langs, bbox=0, area=False, osm=None, ways=None):
+    def add(kind, pt, names, langs, bbox=0, area=False, osm=None, ways=None, tags=None):
         key = (kind, names[0], round(pt[0], 3), round(pt[1], 3))
         near = NEAR_DUP_M.get(kind)
         if key in seen_key or (near and any(
                 (area or a) and _dist_m(p, pt) <= near for p, a in seen_near[(kind, names[0])])):
             report[f"{kind}_duplicate"] += 1
+            if osm:
+                note("same_name_near", "merge", osm, names[0], f"a {kind} row of that name is near", tags)
             return
         seen_key.add(key)
         seen_near[(kind, names[0])].append((pt, area))
         # A street's ways (chain_ways), the row's OSM id ("node/123"; None
-        # for a street or a river, which are many ways) and its languages
-        # ride along as a 7th, 8th and 9th field until the rows are sorted;
-        # none is served in the index.
+        # for a street or a river, which are many ways), its languages and
+        # its object's tags (the merges after the tagged pass read them) ride
+        # along as a 7th to 10th field until the rows are sorted; none is
+        # served in the index.
         rows.append([KINDS.index(kind), _r(pt[0]), _r(pt[1]), names[0], "|".join(names[1:]), bbox,
-                     ways, osm, set(langs)])
+                     ways, osm, set(langs), tags or {}])
         report[kind] += 1
 
     # --- Streets: every way of one name merged; a name used by streets far
@@ -1604,6 +2070,13 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
     street_names = {}                         # (name, cell) -> all names
     street_langs = defaultdict(set)           # (name, cell) -> languages
     street_open = defaultdict(bool)           # (name, cell) -> a way the public may use
+    # The 2026-10-13 rules, each true once one way of the street clears it:
+    # not a private residential way, not a busway or raceway, not a minor way.
+    street_public = defaultdict(bool)
+    street_real = defaultdict(bool)
+    street_major = defaultdict(bool)
+    square_areas = []                         # pedestrian areas with an article of their own
+    way_tags = {w["id"]: w.get("tags", {}) for w in ways} if log is not None else {}
     node_streets = defaultdict(set)           # node id -> street display names
     for w in ways:
         # A way a reading by eye found to be a business's or a home's own
@@ -1626,6 +2099,14 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         elif (t.get("highway") in SKIP_HIGHWAY or t.get("area") == "yes"
                 or t.get("service") in SKIP_SERVICE):
             report["street_way_skipped"] += 1
+            # A PEDESTRIAN SQUARE DRAWN AS AN AREA is no street, and is a
+            # landmark when it has an article of its own (owner, 2026-10-13:
+            # 47 such areas on the 19 had no row at all; a rest area stays
+            # out). Read after the tagged pass, as a square is; one that is
+            # also tagged place=* is read there already.
+            if (t.get("highway") == "pedestrian" and t.get("area") == "yes" and t.get("wikipedia")
+                    and names and not (t.get("place") and "center" in w)):
+                square_areas.append((w, t, names))
             continue
         if (t.get("highway") in MINOR_HIGHWAYS and not (t.get("wikidata") or t.get("wikipedia"))
                 and not _reads_as_way(names, local)
@@ -1664,6 +2145,13 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         street_open[cell] |= not (minor and t.get("access") in ("private", "no")
                                   and not (t.get("wikidata") or t.get("wikipedia"))
                                   and not _private_street(names, local))
+        way_article = bool(t.get("wikipedia")) and article(w, t, names, mid, way=True)[0] == "own"
+        street_public[cell] |= not (t.get("access") in ("private", "no")
+                                    and t.get("highway") in PRIVATE_STREET_HIGHWAYS
+                                    and not way_article and not _private_street(names, local))
+        street_real[cell] |= way_article or not (
+            {v.strip() for v in str(t.get("highway") or "").split(";")} & NOT_STREET_HIGHWAYS)
+        street_major[cell] |= not minor or bool(t.get("wikidata") or t.get("wikipedia"))
         for n in w["nodes"]:
             node_streets[n].add(names[0])
     # Neighbouring cells of one name are one street: merge cells that share a node.
@@ -1678,13 +2166,17 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             ids = set(street_nodes[cell])
             hit = [g for g in groups if g[0] & ids]
             merged = [ids, list(street_names[cell]), set(street_langs[cell]), street_open[cell],
-                      list(street_ways[cell])]
+                      list(street_ways[cell]), street_public[cell], street_real[cell],
+                      street_major[cell]]
             for g in hit:
                 merged[0] |= g[0]
                 merged[1] += [n for n in g[1] if n not in merged[1]]
                 merged[2] |= g[2]
                 merged[3] |= g[3]
                 merged[4] += g[4]
+                merged[5] |= g[5]
+                merged[6] |= g[6]
+                merged[7] |= g[7]
                 groups.remove(g)
             groups.append(merged)
         # KEPT all the same (owner, 2026-10-11, on what the rule took in
@@ -1705,9 +2197,31 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             for n in g[0]:
                 node_streets[n].discard(name)
         groups = [g for g in groups if g[3]]
+        # The 2026-10-13 rules (PRIVATE_STREET_HIGHWAYS, NOT_STREET_HIGHWAYS,
+        # street_description), each asked of the whole street: one way that
+        # clears a rule keeps every way of the street. Crossings go with a
+        # dropped street, as above.
+        described = street_description(name, local)
+        for g in list(groups):
+            cls = ("private_residential" if not g[5] else "busway_raceway" if not g[6]
+                   else "description" if described and not g[7] else None)
+            if cls is None:
+                continue
+            report[f"street_dropped_{cls}"] += 1
+            if log is not None:
+                first = min(g[4])[0]
+                pts = [nodes[n] for n in g[0] if n in nodes]
+                note(f"street_{cls}", "drop", f"way/{first}", name,
+                     (described if cls == "description" else "") + f" ({len(g[4])} way(s))",
+                     way_tags.get(first),
+                     bbox=[_r(min(q[0] for q in pts)), _r(min(q[1] for q in pts)),
+                           _r(max(q[0] for q in pts)), _r(max(q[1] for q in pts))])
+            for n in g[0]:
+                node_streets[n].discard(name)
+            groups.remove(g)
         if not groups:
             continue
-        for ids, names, langs, _open, group_ways in groups:
+        for ids, names, langs, _open, group_ways, *_flags in groups:
             pts = [nodes[n] for n in ids if n in nodes]
             s, w_ = min(p[0] for p in pts), min(p[1] for p in pts)
             n_, e = max(p[0] for p in pts), max(p[1] for p in pts)
@@ -1746,6 +2260,211 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
 
     # --- Tagged places.
     rivers = defaultdict(list)
+    held_by_wikidata = {}                     # OSM id -> the item that alone admits its row
+
+    def landmark_drop(t, names, oid, own, kept=None):
+        """(reason, names) for a landmark the rules drop, the reason a
+        report key's ending; (None, names less their bare aliases) for one
+        they keep. `own`: the object has an article of its own (the fame
+        test), which keeps it against five of the tests (owner, 2026-10-13);
+        each such keep is appended to `kept`. No side effect, so the caller
+        can ask again with a tag taken away."""
+        kept = [] if kept is None else kept
+        if bare_type(names[0], local, t):
+            # KEPT on an article of its own (81 measured, 69 of them Paris's
+            # Édicule Guimard, whose article is the type's and shared): not
+            # where the article's title is the bare word itself, the type's
+            # article (London's "Lych Gate", en:Lychgate).
+            if not (own and fold_name(article_title(t["wikipedia"])) != fold_name(names[0])):
+                return "bare_type", names
+            kept.append("bare_type")
+        names = names[:1] + [n for n in names[1:] if not bare_type(n, local, t)] if kept else \
+            [n for n in names if not bare_type(n, local, t)]
+        if _exhibit(t):
+            return "exhibit", names
+        why = _commercial_reasons(t)
+        if why:
+            # KEPT on an article of its own where the only business sign is a
+            # private operator or an office tag (115 measured: private
+            # universities and museums, parliaments, town halls). A brand, a
+            # shop or a lodging tag still keeps a row out (the Panama Hotel
+            # precedent: the building, never the business).
+            if not (own and set(why) <= KEPT_COMMERCIAL_REASONS):
+                return "commercial", names
+            kept.append("commercial")
+        if (any(k in t for k in NOTABLE_ONLY) and t.get("amenity") != "place_of_worship"
+                and not (t.get("wikidata") or t.get("wikipedia"))):
+            return "not_notable", names
+        # NOT a rule that a tourism=gallery needs a Wikipedia TAG (measured
+        # 2026-10-11, after the owner's yes): it removed the Seoul Museum
+        # of Art, Busan's city art museum, Vancouver's Bill Reid Gallery,
+        # Sydney's S.H. Ervin Gallery, Kew's Marianne North Gallery and
+        # the Grand Palais's national galleries, public galleries whose
+        # OSM objects carry wikidata and no wikipedia tag. Dealers'
+        # galleries are dropped by id (config.PLACE_DROPPED). Put back to
+        # the owner.
+        # A home is never a landmark (_home), unless public (_public_home:
+        # a former residence that is now a museum) or listed as visitable
+        # today with a dated source (config.PLACE_VISITABLE). Kyoto's condominium
+        # grounds were tagged leisure=park on landuse=residential
+        # (2026-10-07); Vancouver's register of heritage houses carries the
+        # names of the families who built them (2026-10-08).
+        if _home(t, names, local) and not _public_home(t) and oid not in visitable:
+            # KEPT on an article of its own where access=private is the only
+            # home sign and the object is no garden, park or palace (a
+            # university, a library, a monument behind a fence: 11 rows on
+            # the 19; "about 16" by eye, the rest undecidable by tag). A home
+            # with its own article stays out (owner, 2026-10-13: 294 rows).
+            if not (own and _private_access_only(t, names, local)):
+                return "residential", names
+            kept.append("residential")
+        # A landmark named as a bare Japanese personal name (the map's sign
+        # rule, japan_register.bare_personal_name: a common surname, a space,
+        # a given name) is someone's house or grave, unless public. The
+        # Korean rule (korean_names.looks_like_personal_name) is NOT used:
+        # without its address test it reads 이태원 and 강남역 as people.
+        if "ja" in local and not _public_home(t) and oid not in visitable and any(_bare_personal(n) for n in names):
+            return "personal_name", names
+        # A garden is often a private one at a house, and may carry a
+        # person's own name ("Aoyama's Garden", Kyoto, 2026-10-07): kept only
+        # when notable (wikidata, wikipedia or a heritage designation), and
+        # a residential garden never.
+        if t.get("leisure") == "garden" and (
+                t.get("garden:type") == "residential"
+                or not (t.get("wikidata") or t.get("wikipedia") or t.get("heritage"))):
+            return "garden", names
+        # A landmark named for a business or a home is one, unless public
+        # in _public_home's sense or a ruin (then check_place_search.py E
+        # asks for a review): Sydney's "Serviced Apartments Park", a
+        # leisure=park; Chicago's landmark apartment buildings, homes
+        # whatever their designation; Kyoto's 愛宕山ホテル跡, a hotel's
+        # ruins, stays (2026-10-08).
+        # A business word may pass on a Wikipedia article (a landmark
+        # building, reviewed by name); a home word may not. PRECEDENT
+        # (owner, 2026-10-08, Seattle's Panama Hotel): a notable historic
+        # building that still houses the business its name carries is
+        # kept, as a historic site, the building and not the business; one
+        # tagged as the business itself (amenity=casino, tourism=hotel)
+        # stays out (_commercial). Homes with an article stay out.
+        word = leak_word(names, local)
+        home_word = word in {w for c in (["en", *local]) for w in HOME_WORDS.get(c, ())}
+        if word and not (
+                _public_home(t) or oid in visitable or t.get("historic") in ("ruins", "archaeological_site")
+                or (t.get("wikipedia") and not home_word)):
+            return "leak_word", names
+        if t.get("waterway"):
+            # A river comes as one row per way; merged by name by the caller.
+            return None, names
+        # A Stolperstein names one person at their last home ("Zde bydlela
+        # Irma Kohnová", here lived ...): a private person at a home, never
+        # a place to search, whatever its wikidata item (Prague's came in
+        # bulk from the small-monuments register; batch 2a, 2026-10-08).
+        if t.get("memorial") == "stolperstein":
+            return "stolperstein", names
+        if t.get("historic") == "tomb" and any(FAMILY_TOMB.match(n.strip()) for n in names):
+            return "family_tomb", names
+        if t.get("historic") in SKIP_HISTORIC and not any(
+                t.get(k) for k in ("tourism", "amenity", "leisure", "wikidata")):
+            # KEPT on an article of its own though it has no Wikidata entry
+            # (23 measured; 6 pass the fame test, the others carry their
+            # subject's article, a section, or one the tags cannot place).
+            if not own:
+                return "minor_historic", names
+            kept.append("minor_historic")
+        return None, names
+
+    def landmark(e, t, names, pt, langs, square_like=False):
+        """One landmark candidate through the rules: a row, a river segment,
+        or a counted drop."""
+        oid = f"{e['type']}/{e['id']}"
+        seen_tags = t
+        verdict, why = article(e, t, names, pt)
+        own = verdict == "own"
+        # A BRIDGE'S OWN NAME (owner, 2026-10-13): a registered bridge drawn
+        # on a road came in under the road's name ("Aurora Avenue North" for
+        # Seattle's Aurora Bridge; 3 rows on the 19). bridge:name leads.
+        bridge = (t.get("bridge:name") or "").strip()
+        if t.get("highway") and t.get("bridge") not in (None, "no") and bridge \
+                and bridge != names[0] and not junk_name(bridge):
+            note("bridge_name", "rename", oid, bridge, f"was {names[0]}", t)
+            names = [bridge] + [n for n in names if n != bridge]
+            report["landmark_named_by_bridge_name"] += 1
+        life = lifecycle(t, retrieved)
+        if life:
+            # Read narrowly (logged in the drafts file, flagged for the
+            # owner): an ABANDONED object with a historic tag is a historic
+            # site and is there (Hong Kong's wartime pillboxes, Shing Mun
+            # Redoubt); a NOT-YET-OPEN one that is historic, listed or has a
+            # start date behind it is being rebuilt, and is there too.
+            if life[0] == "both":
+                note("not_there_kept", "kept", oid, names[0], f"{life[1]}: live and prefixed alike", t)
+            # CLOSED FOR WORKS, BY ID (owner, 2026-10-13, on the first
+            # changed-row report: a museum and a library closed for
+            # renovation and a playground being rebuilt are there). No tag
+            # separates them from a place not yet built: the three carry
+            # three different tags and none of historic, heritage or a start
+            # date. Only the not-yet-open class; a demolished object is never
+            # kept this way.
+            elif life[0] == "ahead" and oid in closed_for_works:
+                note("not_there_kept", "kept", oid, names[0], f"{life[1]}: closed for works, by id", t)
+            elif life[0] == "abandoned" and t.get("historic"):
+                note("not_there_kept", "kept", oid, names[0], f"{life[1]}: a historic site", t)
+            elif life[0] == "ahead" and (t.get("historic") or t.get("heritage")
+                                         or _past(t.get("start_date"), retrieved)):
+                note("not_there_kept", "kept", oid, names[0], f"{life[1]}: a rebuilding", t)
+            else:
+                report["landmark_dropped_not_there"] += 1
+                note("not_there", "drop", oid, names[0], f"{life[0]}: {life[1]}", t)
+                return
+        # PERSONAL NAMES (owner, 2026-10-13): a grave or a plaque is kept
+        # only on a Wikipedia article of its own; its Wikidata entry alone
+        # admits it no longer (258 graves and 241 plaques were in on a key).
+        # Nothing in the data tells a private person from a public one, which
+        # is why the article is the test. Statues, busts and public
+        # memorials are untouched. Where the tags cannot say whose the
+        # article is, the row stays as it was and is listed (never a guess).
+        person = grave_or_plaque(t)
+        stripped = None
+        if person and (t.get("wikidata") or t.get("wikipedia")):
+            if not own and verdict != "undecided":
+                stripped = why or "a Wikidata entry and no article"
+                t = {k: v for k, v in t.items() if k not in ("wikidata", "wikipedia")}
+        kept = []
+        reason, names = landmark_drop(t, names, oid, own, kept)
+        if reason:
+            report[f"landmark_dropped_{reason}"] += 1
+            if log is not None:
+                if stripped and landmark_drop(seen_tags, names, oid, own)[0] is None:
+                    note(f"{person}_no_own_article", "drop", oid, names[0], stripped, seen_tags)
+                elif verdict == "undecided" and reason in ("bare_type", "minor_historic"):
+                    note("keep_undecided", "left out", oid, names[0], f"{reason}: {why}", t)
+                elif own and reason == "residential" and _home_signs(t, names, local) == ["access"]:
+                    note("keep_undecided", "left out", oid, names[0],
+                         "access=private on a garden, a park or a palace: a home or not, "
+                         "the tags cannot tell", t)
+            return
+        for k in kept:
+            note(f"kept_{k}", "keep", oid, names[0], "an article of its own", t)
+        if t.get("waterway"):
+            # A river comes as one row per way; merged by name below.
+            rivers[names[0]].append((pt, names, langs))
+            return
+        if t.get("wikidata") and not kept:
+            less = {k: v for k, v in t.items() if k != "wikidata"}
+            if landmark_drop(less, names, oid, own)[0] is not None:
+                held_by_wikidata[oid] = t["wikidata"]
+        before = len(rows)
+        add("landmark", pt, names, langs, area=e["type"] != "node", osm=oid, tags=seen_tags)
+        if len(rows) > before:
+            if person and verdict == "undecided":
+                note(f"{person}_undecided", "kept", oid, names[0], why, t)
+            if t.get("place") in ISLAND_VALUES:
+                note("kept_island", "keep", oid, names[0], "an article of its own", t)
+            if square_like:
+                note("kept_square_area", "keep", oid, names[0], "an article of its own", t)
+            if t.get("place") == "square" or square_like:
+                square_rows.append(rows[-1])
+
     for e in tagged:
         t = e.get("tags", {})
         names = _local_first(t, _names(t, name_tags), local)
@@ -1756,6 +2475,8 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             report["outside_area"] += 1
             continue
         langs = _langs(t, local)
+        oid = f"{e['type']}/{e['id']}"
+        station = t.get("railway") in ("station", "halt", "tram_stop") or t.get("public_transport") == "station"
         if (t.get("public_transport") == "station" and not t.get("railway")
                 and not any(t.get(k) == "yes" for k in RAIL_MODES)
                 and (any(t.get(k) not in (None, "no") for k in OTHER_MODES)
@@ -1764,13 +2485,13 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             # Tours - Michigan Avenue", Chicago, 2026-10-08): no station.
             report["station_skipped_not_rail"] += 1
             continue
-        lifecycle = next((f"{k}={t[k]}" for k in ("proposed", "construction") if t.get(k) == "yes"), None) \
+        lifecycle_tag = next((f"{k}={t[k]}" for k in ("proposed", "construction") if t.get(k) == "yes"), None) \
             or next((f"{k}={t[k]}" for k in ("proposed:railway", "construction:railway",
                                              "proposed:public_transport", "construction:public_transport")
-                     if t.get(k)), None)
-        if (t.get("public_transport") == "station"
-                and (t.get("railway") in ("construction", "proposed", "disused", "abandoned", "razed")
-                     or lifecycle)):
+                     if t.get(k)), None) \
+            or (f"opening_date={t['opening_date']}" if _future(t.get("opening_date"), retrieved) else None)
+        if station and (t.get("railway") in ("construction", "proposed", "disused", "abandoned", "razed")
+                        or lifecycle_tag):
             # Busan's seven light-rail stations under construction carry
             # public_transport=station already (2026-10-08): not yet a
             # station. Stations only: Prague's historic horse railway
@@ -1778,31 +2499,66 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             # too: five proposed stops of the Texcoco-La Paz light rail carry
             # railway=prpopsed, a typo no list of values holds, beside
             # proposed=yes and proposed:railway=stop (Mexico City, 2026-10-12).
+            # Since 2026-10-13 on any station or stop (construction=yes on a
+            # railway=tram_stop) and with opening_date after the cache.
             report["station_skipped_not_open"] += 1
             tag = (f"railway={t['railway']}"
                    if t.get("railway") in ("construction", "proposed", "disused", "abandoned", "razed")
-                   else lifecycle)
-            not_open.append({"osm": f"{e['type']}/{e['id']}", "name": names[0], "tag": tag})
+                   else lifecycle_tag)
+            not_open.append({"osm": oid, "name": names[0], "tag": tag})
+            if t.get("public_transport") != "station" or tag.startswith("opening_date"):
+                note("station_not_open", "drop", oid, names[0], tag, t)
             continue
         if t.get("emergency") == "designated" and (t.get("railway") or t.get("public_transport")):
             # A platform for emergency use only (Hong Kong's Light Rail
             # "Hung Tin Road Emergency Platform", 2026-10-08): no station.
             report["station_skipped_emergency"] += 1
             continue
-        if t.get("railway") in ("station", "halt", "tram_stop") or t.get("public_transport") == "station":
-            add("station", pt, names, langs, osm=f"{e['type']}/{e['id']}")
-        elif t.get("place") in PLACE_VALUES:
+        if station:
+            # The 2026-10-13 station rules (station_closed, station_ride): a
+            # closed station; a ride; a business or a bare type word tagged a
+            # station with no rail tag at all (a car park named for its
+            # station, a ticket shop: 5 rows) or with no registered key (a
+            # temple's slope car halt named 本堂: 1 row). Each is dropped,
+            # never passed on to the landmark rules.
+            closed = station_closed(t, retrieved)
+            ride = station_ride(t)
+            no_rail = not (t.get("railway") or t.get("station") or any(t.get(k) == "yes" for k in RAIL_MODES))
+            skip = (("closed", closed) if closed else ("ride", ride) if ride
+                    else ("business", "+".join(_commercial_reasons(t))) if no_rail and _commercial(t)
+                    else ("bare_type", "no wikidata or wikipedia")
+                    if bare_type(names[0], local) and not (t.get("wikidata") or t.get("wikipedia")) else None)
+            if skip:
+                report[f"station_skipped_{skip[0]}"] += 1
+                note(f"station_{skip[0]}", "drop", oid, names[0], skip[1], t)
+                continue
+            add("station", pt, names, langs, osm=oid, tags=t)
+            continue
+        verdict, why = article(e, t, names, pt)
+        own = verdict == "own"
+        if t.get("place") in PLACE_VALUES or (t.get("place") == "district" and own):
+            life = lifecycle(t, retrieved, place=True)
+            if life and life[0] == "both":
+                note("not_there_kept", "kept", oid, names[0], f"{life[1]}: live and prefixed alike", t)
+            elif life:
+                report["place_dropped_not_there"] += 1
+                note("not_there", "drop", oid, names[0], f"{life[0]}: {life[1]}", t)
+                continue
             # A place drawn as an area on residential land is an estate, its
             # homes' own name ("Kentbrook Apartments", Seattle: 85 of the
             # place areas, 2026-10-08); a place named for a business or a
             # home is one, as a landmark is. A hamlet or village is a
             # settlement whatever its land use: Hong Kong's New Territories
             # villages, 22 drawn on residential land (batch 2b, 2026-10-08);
-            # no other built city had one.
+            # no other built city had one. KEPT on an article of its own
+            # (owner, 2026-10-13: 46 rows, 36 in London, to match the estate
+            # kept as a point).
             if (e["type"] != "node" and t.get("place") not in SETTLEMENTS
                     and (t.get("landuse") == "residential" or t.get("residential"))):
-                report["place_dropped_estate"] += 1
-                continue
+                if not own:
+                    report["place_dropped_estate"] += 1
+                    continue
+                note("kept_estate_area", "keep", oid, names[0], "an article of its own", t)
             # A place drawn as an area WITH A HOUSE NUMBER is one address, a
             # building or a block of them: Mexico City's developer towers
             # ("TORRE CADU OASIS") and the 26 numbered sections of one estate
@@ -1825,11 +2581,20 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             if leak_word(names, local):
                 report["place_dropped_leak_word"] += 1
                 continue
+            lead = names[:0]
             if bare_type(names[0], local):
-                report["place_dropped_bare_type"] += 1
-                continue
-            names = [n for n in names if not bare_type(n, local)]
-            add("place", pt, names, langs, area=e["type"] != "node", osm=f"{e['type']}/{e['id']}")
+                # KEPT on an article of its own (London's quarter "Temple",
+                # en:Temple, London), as a bare landmark is.
+                if not (own and fold_name(article_title(t["wikipedia"])) != fold_name(names[0])):
+                    report["place_dropped_bare_type"] += 1
+                    continue
+                note("kept_bare_type", "keep", oid, names[0], "an article of its own", t)
+                lead = names[:1]
+            names = lead + [n for n in names[len(lead):] if not bare_type(n, local)]
+            before = len(rows)
+            add("place", pt, names, langs, area=e["type"] != "node", osm=oid, tags=t)
+            if t.get("place") == "district" and len(rows) > before:
+                note("kept_district", "keep", oid, names[0], "an article of its own", t)
         elif e["type"] == "node" and (t.get("highway") == "traffic_signals" or "junction" in t):
             # A signal's number is no name (Sydney's "5065", 2026-10-08).
             if not any(c.isalpha() for c in names[0]):
@@ -1845,8 +2610,7 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
                 if all(en):
                     alias.append(" / ".join(en))
                 langs = langs | set.intersection(*(street_lang.get(v, set()) for v in via))
-            add("junction", pt, names + [a for a in alias if a not in names], langs,
-                osm=f"{e['type']}/{e['id']}")
+            add("junction", pt, names + [a for a in alias if a not in names], langs, osm=oid, tags=t)
         else:
             # A named square is a landmark when no street carries its name:
             # Brussels' Grand-Place is a pedestrian AREA (skipped as a street)
@@ -1856,99 +2620,11 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             square = (t.get("place") == "square" and names[0] not in street_alias
                       and t.get("indoor") in (None, "no") and t.get("location") != "underground"
                       and not str(t.get("level", "0")).lstrip().startswith("-"))
-            if t.get("place") and not square:
+            # An island or an islet with an article of its own is a landmark
+            # (ISLAND_VALUES); every other place value stays unlisted.
+            if t.get("place") and not square and not (t.get("place") in ISLAND_VALUES and own):
                 continue
-            if bare_type(names[0], local, t):
-                report["landmark_dropped_bare_type"] += 1
-                continue
-            names = [n for n in names if not bare_type(n, local, t)]
-            if _exhibit(t):
-                report["landmark_dropped_exhibit"] += 1
-                continue
-            if _commercial(t):
-                report["landmark_dropped_commercial"] += 1
-                continue
-            if (any(k in t for k in NOTABLE_ONLY) and t.get("amenity") != "place_of_worship"
-                    and not (t.get("wikidata") or t.get("wikipedia"))):
-                report["landmark_dropped_not_notable"] += 1
-                continue
-            # NOT a rule that a tourism=gallery needs a Wikipedia TAG (measured
-            # 2026-10-11, after the owner's yes): it removed the Seoul Museum
-            # of Art, Busan's city art museum, Vancouver's Bill Reid Gallery,
-            # Sydney's S.H. Ervin Gallery, Kew's Marianne North Gallery and
-            # the Grand Palais's national galleries, public galleries whose
-            # OSM objects carry wikidata and no wikipedia tag. Dealers'
-            # galleries are dropped by id (config.PLACE_DROPPED). Put back to
-            # the owner.
-            # A home is never a landmark (_home), unless public (_public_home:
-            # a former residence that is now a museum) or listed as visitable
-            # today with a dated source (config.PLACE_VISITABLE). Kyoto's condominium
-            # grounds were tagged leisure=park on landuse=residential
-            # (2026-10-07); Vancouver's register of heritage houses carries the
-            # names of the families who built them (2026-10-08).
-            oid = f"{e['type']}/{e['id']}"
-            if _home(t, names, local) and not _public_home(t) and oid not in visitable:
-                report["landmark_dropped_residential"] += 1
-                continue
-            # A landmark named as a bare Japanese personal name (the map's sign
-            # rule, japan_register.bare_personal_name: a common surname, a space,
-            # a given name) is someone's house or grave, unless public. The
-            # Korean rule (korean_names.looks_like_personal_name) is NOT used:
-            # without its address test it reads 이태원 and 강남역 as people.
-            if "ja" in local and not _public_home(t) and oid not in visitable and any(_bare_personal(n) for n in names):
-                report["landmark_dropped_personal_name"] += 1
-                continue
-            # A garden is often a private one at a house, and may carry a
-            # person's own name ("Aoyama's Garden", Kyoto, 2026-10-07): kept only
-            # when notable (wikidata, wikipedia or a heritage designation), and
-            # a residential garden never.
-            if t.get("leisure") == "garden" and (
-                    t.get("garden:type") == "residential"
-                    or not (t.get("wikidata") or t.get("wikipedia") or t.get("heritage"))):
-                report["landmark_dropped_garden"] += 1
-                continue
-            # A landmark named for a business or a home is one, unless public
-            # in _public_home's sense or a ruin (then check_place_search.py E
-            # asks for a review): Sydney's "Serviced Apartments Park", a
-            # leisure=park; Chicago's landmark apartment buildings, homes
-            # whatever their designation; Kyoto's 愛宕山ホテル跡, a hotel's
-            # ruins, stays (2026-10-08).
-            # A business word may pass on a Wikipedia article (a landmark
-            # building, reviewed by name); a home word may not. PRECEDENT
-            # (owner, 2026-10-08, Seattle's Panama Hotel): a notable historic
-            # building that still houses the business its name carries is
-            # kept, as a historic site, the building and not the business; one
-            # tagged as the business itself (amenity=casino, tourism=hotel)
-            # stays out (_commercial). Homes with an article stay out.
-            word = leak_word(names, local)
-            home_word = word in {w for c in (["en", *local]) for w in HOME_WORDS.get(c, ())}
-            if word and not (
-                    _public_home(t) or oid in visitable or t.get("historic") in ("ruins", "archaeological_site")
-                    or (t.get("wikipedia") and not home_word)):
-                report["landmark_dropped_leak_word"] += 1
-                continue
-            if t.get("waterway"):
-                # A river comes as one row per way; merged by name below.
-                rivers[names[0]].append((pt, names, langs))
-                continue
-            # A Stolperstein names one person at their last home ("Zde bydlela
-            # Irma Kohnová", here lived ...): a private person at a home, never
-            # a place to search, whatever its wikidata item (Prague's came in
-            # bulk from the small-monuments register; batch 2a, 2026-10-08).
-            if t.get("memorial") == "stolperstein":
-                report["landmark_dropped_stolperstein"] += 1
-                continue
-            if t.get("historic") == "tomb" and any(FAMILY_TOMB.match(n.strip()) for n in names):
-                report["landmark_dropped_family_tomb"] += 1
-                continue
-            if t.get("historic") in SKIP_HISTORIC and not any(
-                    t.get(k) for k in ("tourism", "amenity", "leisure", "wikidata")):
-                report["landmark_dropped_minor_historic"] += 1
-                continue
-            before = len(rows)
-            add("landmark", pt, names, langs, area=e["type"] != "node", osm=f"{e['type']}/{e['id']}")
-            if t.get("place") == "square" and len(rows) > before:
-                square_rows.append(rows[-1])
+            landmark(e, t, names, pt, langs)
 
     for segs in rivers.values():
         pts = [p for p, _, _ in segs]
@@ -1961,6 +2637,23 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         add("landmark", min(pts, key=lambda p: _dist_m(p, c)), names,
             set().union(*(ls for _, _, ls in segs)),
             [_r(s), _r(w_), _r(n_), _r(e)] if len(pts) > 1 else 0)
+
+    # Pedestrian squares drawn as areas (collected in the street pass), each
+    # held to the landmark rules; one a street already names is findable.
+    for w, t, names in square_areas:
+        if names[0] in street_alias:
+            report["square_area_named_by_a_street"] += 1
+            continue
+        c = w.get("center")
+        pts = [nodes[n] for n in w["nodes"] if n in nodes]
+        if not c and not pts:
+            continue
+        pt = (c["lat"], c["lon"]) if c else (sum(p[0] for p in pts) / len(pts),
+                                             sum(p[1] for p in pts) / len(pts))
+        if article(w, t, names, pt)[0] != "own":
+            report["square_area_without_own_article"] += 1
+            continue
+        landmark(w, t, names, pt, _langs(t, local), square_like=True)
 
     # A square already findable under its name is a duplicate (owner,
     # 2026-10-08: "remove duplicates if we can"): a street or another square
@@ -1995,7 +2688,69 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         rows[:] = [r for r in rows if id(r) not in drop]
         report["landmark"] -= len(drop)
         report["square_dropped_duplicate"] += len(drop)
+    # --- The merges of 2026-10-13 (PLATFORM_MERGE_M, ROW_MERGE_M) and the
+    # shared-item rule (SHARED_WIKIDATA_MIN), in that order: a thing drawn in
+    # three rows is merged before its item is counted.
+    gone = set()
+
+    def merge(members, cls):
+        """Keep the member nearest the group's middle (the lower OSM id on a
+        tie, so a rebuild keeps the same row); its names and languages take
+        in the others'."""
+        mid = (sum(r[1] for r in members) / len(members), sum(r[2] for r in members) / len(members))
+        keep = min(members, key=lambda r: (round(_dist_m((r[1], r[2]), mid)),
+                                           r[7].split("/")[0], int(r[7].split("/")[1])))
+        alias = [a for a in keep[4].split("|") if a]
+        for r in members:
+            if r is keep:
+                continue
+            alias += [n for n in [r[3], *r[4].split("|")] if n and n != keep[3] and n not in alias]
+            keep[8] |= r[8]
+            gone.add(id(r))
+            report[KINDS[r[0]]] -= 1
+            report[f"{KINDS[r[0]]}_merged_{cls}"] += 1
+            note(f"merged_{cls}", "merge", r[7], r[3], f"into {keep[7]} ({KINDS[r[0]]})", r[9])
+        keep[4] = "|".join(alias)
+
+    by_name = defaultdict(list)
+    for r in rows:
+        if r[7] and KINDS[r[0]] in ("station", "junction", "place", "landmark") and fold_name(r[3]):
+            by_name[(r[0], fold_name(r[3]))].append(r)
+    for (kind, _), items in by_name.items():
+        if len(items) < 2:
+            continue
+        station = KINDS[kind] == "station"
+        for group in _clusters([(r[1], r[2]) for r in items], PLATFORM_MERGE_M if station else ROW_MERGE_M):
+            members = [items[i] for i in group]
+            if not station:
+                merge(members, "duplicate")
+            elif all(m[9].get("railway") == "tram_stop" for m in members):
+                merge(members, "platform")
+    if gone:
+        rows[:] = [r for r in rows if id(r) not in gone]
+    shared = defaultdict(int)
+    for r in rows:
+        for wd in str(r[9].get("wikidata") or "").split(";"):
+            if wd.strip():
+                shared[wd.strip()] += 1
+    gone = set()
+    for r in rows:
+        held = held_by_wikidata.get(r[7])
+        if not held:
+            continue
+        n = max(shared[wd.strip()] for wd in held.split(";") if wd.strip())
+        if n >= SHARED_WIKIDATA_MIN:
+            gone.add(id(r))
+            report[KINDS[r[0]]] -= 1
+            report["landmark_dropped_shared_wikidata"] += 1
+            note("shared_wikidata", "drop", r[7], r[3], f"{held} on {n} rows", r[9])
+        elif n == 2:
+            note("shared_wikidata_two", "measure", r[7], r[3], f"{held} on 2 rows", r[9])
+    if gone:
+        rows[:] = [r for r in rows if id(r) not in gone]
     rows.sort(key=lambda r: (r[0], r[3]))
+    for r in rows:
+        r.pop()                               # the object's tags
     row_langs = [r.pop() for r in rows]
     row_osm = [r.pop() for r in rows]
     row_ways = [r.pop() for r in rows]
@@ -2064,3 +2819,260 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         "street_lines_raw": [[i, chain_ways(w, nodes)] for i, w in enumerate(row_ways) if w],
     }
     return index, dict(report)
+
+
+def _selftest():
+    """The 2026-10-13 rules on a made-up city: each case is a row that is
+    there, or is not, only because of the rule it names (break a rule in a
+    copy and its case fails: scripts/rule_breaks.py with
+    scripts/place_index_breaks.json). Reads no file and builds everything it
+    needs here."""
+    els, ids = [], iter(range(1, 100000))
+
+    def node(lat, lon, **tags):
+        e = {"type": "node", "id": next(ids), "lat": lat, "lon": lon}
+        if tags:
+            e["tags"] = {k.replace("__", ":"): v for k, v in tags.items()}
+        els.append(e)
+        return e["id"]
+
+    def street(name, lat, highway="residential", share=None, lon=-122.30, **tags):
+        """A two-node way running east at `lat`; `share` is a node id it ends on."""
+        a = share or node(lat, lon)
+        b = node(lat + 0.0002, lon + 0.002)
+        els.append({"type": "way", "id": next(ids), "nodes": [a, b],
+                    "tags": {"name": name, "highway": highway,
+                             **{k.replace("__", ":"): v for k, v in tags.items()}}})
+        return a, b
+
+    def area(lat, lon, **tags):
+        els.append({"type": "way", "id": next(ids), "center": {"lat": lat, "lon": lon},
+                    "tags": {k.replace("__", ":"): v for k, v in tags.items()}})
+
+    # Streets.
+    main_a, _ = street("Main Street", 47.6000)
+    street("Gated Lane", 47.6010, access="private", share=main_a)
+    street("Gated Court", 47.6020, highway="unclassified", access="no")
+    half_a, _ = street("Half Lane", 47.6030, access="private")
+    street("Half Lane", 47.6031, share=half_a)
+    street("Known Close", 47.6040, access="private", wikipedia="en:Known Close")
+    street("Bus Road", 47.6050, highway="busway")
+    street("Race Bend", 47.6060, highway="raceway")
+    mixed_a, _ = street("Mixed Way", 47.6070, highway="busway")
+    street("Mixed Way", 47.6071, share=mixed_a)
+    street("Footpath 104", 47.6080, highway="footway")
+    street("The Walk", 47.6090, highway="path")
+    street("Service Road", 47.6100, highway="service")
+    street("The Avenue", 47.6110)
+    street("Lane 5", 47.6120, highway="footway")
+    # Stations.
+    node(47.6200, -122.31, name="Old Town", railway="tram_stop")
+    node(47.6206, -122.31, name="Old Town", railway="tram_stop")
+    node(47.6304, -122.31, name="Union", railway="station")
+    node(47.6316, -122.31, name="Union", railway="tram_stop")
+    node(47.6400, -122.31, name="Future Halt", railway="tram_stop", construction="yes")
+    node(47.6410, -122.31, name="Later Station", railway="station", opening_date="2027-01-01")
+    node(47.6420, -122.31, name="Opened Station", railway="station", opening_date="2020-05-01")
+    node(47.6430, -122.31, name="Shut Station", railway="station", end_date="2002-07-14")
+    node(47.6440, -122.31, name="Ghost Halt", railway="halt", abandoned="yes")
+    node(47.6450, -122.31, name="Toy Station", railway="station", usage="tourism")
+    node(47.6460, -122.31, name="Peak Tram", railway="station", tourism="attraction")
+    node(47.6470, -122.31, name="Car Park Station", public_transport="station", amenity="parking")
+    node(47.6480, -122.31, name="Monument", railway="station", wikidata="Q100")
+    node(47.6490, -122.31, name="Chapel", railway="halt")
+    # Places.
+    node(47.6500, -122.32, name="Old Village", place="locality", abandoned__place="village")
+    node(47.6510, -122.32, name="New Quarter", place="quarter", construction__place="quarter")
+    node(47.6520, -122.32, name="Flag Hamlet", place="hamlet", demolished="yes")
+    node(47.6525, -122.32, name="Twice Hamlet", place="hamlet", abandoned__place="hamlet")
+    node(47.6530, -122.32, name="Green Island", place="island", wikipedia="en:Green Island")
+    node(47.6540, -122.32, name="Bare Islet", place="islet")
+    node(47.6550, -122.32, name="North District", place="district", wikipedia="en:North District")
+    node(47.6555, -122.32, name="South District", place="district")
+    area(47.6560, -122.32, name="Model Dwellings", place="neighbourhood", landuse="residential",
+         wikipedia="en:Model Dwellings")
+    area(47.6570, -122.32, name="Plain Dwellings", place="neighbourhood", landuse="residential")
+    node(47.6580, -122.32, name="Riverside", place="suburb")
+    node(47.6595, -122.32, name="Riverside", place="suburb")
+    node(47.6600, -122.33, name="Hillside", place="suburb")
+    node(47.6660, -122.33, name="Hillside", place="suburb")
+    node(47.6700, -122.32, name="Five Ways", highway="traffic_signals")
+    node(47.6709, -122.32, name="Five Ways", highway="traffic_signals")
+    node(47.6720, -122.32, name="St. Mary's Church", amenity="place_of_worship")
+    node(47.6729, -122.32, name="St Marys Church", amenity="place_of_worship")
+    # Graves, plaques and memorials.
+    node(47.6800, -122.32, name="Ada Person", historic="tomb", wikidata="Q1")
+    node(47.6805, -122.32, name="Bea Person", historic="tomb", wikidata="Q2", wikipedia="en:Tomb of Bea Person")
+    node(47.6810, -122.32, name="Cy Person", historic="tomb", wikidata="Q3", wikipedia="en:Cy Person")
+    node(47.6815, -122.32, name="Dee Person", historic="tomb", wikidata="Q4", wikipedia="en:Delia Person")
+    node(47.6820, -122.32, name="Eli Person", historic="memorial", memorial="plaque", wikidata="Q5")
+    node(47.6825, -122.32, name="Fay Person", historic="memorial", memorial="statue", wikidata="Q6")
+    # Keep beats drop on an article of the object's own.
+    node(47.6900, -122.32, name="Monument", historic="monument", wikipedia="en:Monument to the Fire")
+    node(47.6905, -122.32, name="Fountain", amenity="fountain", wikidata="Q7", wikipedia="en:Fountain")
+    node(47.6910, -122.32, name="Sundial", tourism="artwork", wikipedia="en:Sundial Park")
+    node(47.6990, -122.32, name="Sundial", tourism="artwork", wikipedia="en:Sundial Park")
+    node(47.7000, -122.32, name="Hill College", amenity="college", operator__type="private",
+         wikipedia="en:Hill College")
+    node(47.7005, -122.32, name="Brand Museum", tourism="museum", brand="Brand", wikipedia="en:Brand Museum")
+    node(47.7010, -122.32, name="Fenced Library", amenity="library", access="private",
+         wikipedia="en:Fenced Library")
+    node(47.7015, -122.32, name="Fenced Garden", leisure="garden", access="private", wikidata="Q8",
+         wikipedia="en:Fenced Garden")
+    node(47.7020, -122.32, name="Fenced Palace", historic="castle", access="private",
+         wikipedia="en:Fenced Palace")
+    node(47.7025, -122.32, name="Old Marker", historic="milestone", wikipedia="en:Old Marker")
+    node(47.7030, -122.32, name="Lost Marker", historic="milestone")
+    node(47.7035, -122.32, name="Stone of Remembrance", historic="memorial",
+         wikipedia="en:Remembrance Memorial")
+    node(47.7040, -122.32, name="Wayside Saint", historic="memorial", wikipedia="en:Wayside Saint")
+    # Not there.
+    node(47.7100, -122.32, name="Razed Hall", historic="yes", wikidata="Q9", razed__building="yes")
+    node(47.7105, -122.32, name="Garden On Site", leisure="park", demolished__building="church")
+    node(47.7110, -122.32, name="Old Fort", historic="fort", abandoned="yes", wikidata="Q10")
+    node(47.7115, -122.32, name="Empty Park", leisure="park", abandoned="yes")
+    node(47.7120, -122.32, name="New Park", leisure="park", construction="yes")
+    node(47.7125, -122.32, name="Both Park", leisure="park", construction__leisure="park")
+    node(47.7127, -122.32, name="Both Hall", historic="yes", wikidata="Q15", razed__historic="yes")
+    node(47.7130, -122.32, name="Reopening Museum", tourism="museum", wikidata="Q11",
+         opening_date="2030-01-01", start_date="1977")
+    node(47.7135, -122.32, name="Unbuilt Museum", tourism="museum", wikidata="Q12", opening_date="2030-01-01")
+    works = node(47.7137, -122.32, name="Closed Museum", tourism="museum", wikidata="Q16",
+                 opening_date="2030-01-01")
+    gone_id = node(47.7138, -122.32, name="Listed Ruin", historic="yes", wikidata="Q17", razed__building="yes")
+    node(47.7140, -122.32, name="Disused Fountain", amenity="fountain", wikidata="Q13",
+         disused__amenity="drinking_water")
+    # An item shared by three rows, and one shared by two.
+    for i, name in enumerate(("Piece One", "Piece Two", "Piece Three")):
+        node(47.7200 + i * 0.005, -122.32, name=name, tourism="artwork", wikidata="Q77")
+    for i, name in enumerate(("Pair One", "Pair Two")):
+        node(47.7400 + i * 0.005, -122.32, name=name, tourism="artwork", wikidata="Q88")
+    # A pedestrian square drawn as an area, and a bridge on a road.
+    sq = [node(47.7500, -122.32), node(47.7500, -122.319), node(47.7505, -122.319)]
+    els.append({"type": "way", "id": next(ids), "nodes": sq + sq[:1],
+                "tags": {"name": "Market Square", "highway": "pedestrian", "area": "yes",
+                         "wikipedia": "en:Market Square"}})
+    sq = [node(47.7600, -122.32), node(47.7600, -122.319), node(47.7605, -122.319)]
+    els.append({"type": "way", "id": next(ids), "nodes": sq + sq[:1],
+                "tags": {"name": "Plain Plaza", "highway": "pedestrian", "area": "yes",
+                         "wikipedia": "en:City Park#Plaza"}})
+    area(47.7640, -122.32, name="River Road", highway="primary", bridge="yes", bridge__name="Iron Bridge",
+         historic="yes", wikidata="Q14")
+
+    log = []
+    index, report = build(els, city="Testville", retrieved="2026-10-10", local=("en",), log=log,
+                          closed_for_works={f"node/{works}", f"node/{gone_id}"})
+    rows = {(KINDS[r[0]], r[3]) for r in index["rows"]}
+    count = defaultdict(int)
+    for r in index["rows"]:
+        count[(KINDS[r[0]], r[3])] += 1
+    alias = {(KINDS[r[0]], r[3]): r[4] for r in index["rows"]}
+    not_open = {r["name"] for r in index["stations_not_open"]}
+    cases = [
+        # (what the rule says, True when the index agrees)
+        ("a public street is a row", ("street", "Main Street") in rows),
+        ("a private residential street is no row", ("street", "Gated Lane") not in rows),
+        ("an access=no unclassified street is no row", ("street", "Gated Court") not in rows),
+        ("one public way keeps a private street", ("street", "Half Lane") in rows),
+        ("a private street with its own article stays", ("street", "Known Close") in rows),
+        ("a busway is no row", ("street", "Bus Road") not in rows),
+        ("a raceway is no row", ("street", "Race Bend") not in rows),
+        ("a street with a way that is no busway stays", ("street", "Mixed Way") in rows),
+        ("a type and a code on a minor way is no name", ("street", "Footpath 104") not in rows),
+        ("a way word alone on a minor way is no name", ("street", "The Walk") not in rows),
+        ("a description on a minor way is no name", ("street", "Service Road") not in rows),
+        ("a way word on a residential street is a name", ("street", "The Avenue") in rows),
+        ("a numbered lane on a minor way is a name", ("street", "Lane 5") in rows),
+        ("tram platforms of one name are one row", count[("station", "Old Town")] == 1),
+        ("a station and a tram stop of one name are two rows", count[("station", "Union")] == 2),
+        ("construction=yes on a tram stop is not open", "Future Halt" in not_open
+         and ("station", "Future Halt") not in rows),
+        ("an opening date after the cache is not open", "Later Station" in not_open),
+        ("an opening date behind the cache is open", ("station", "Opened Station") in rows),
+        ("an end date behind the cache is closed", ("station", "Shut Station") not in rows
+         and "Shut Station" not in not_open),
+        ("abandoned=yes on a halt is closed", ("station", "Ghost Halt") not in rows),
+        ("usage=tourism is a ride", ("station", "Toy Station") not in rows),
+        ("tourism=attraction alone is no ride", ("station", "Peak Tram") in rows),
+        ("a station with no rail tag and a business tag is none",
+         not any(n == "Car Park Station" for _, n in rows)),
+        ("a bare station name with an item stays", ("station", "Monument") in rows),
+        ("a bare station name with no item goes", ("station", "Chapel") not in rows),
+        ("an abandoned prefix on place drops a place", ("place", "Old Village") not in rows),
+        ("a place live and under construction alike stays", ("place", "New Quarter") in rows),
+        ("demolished=yes drops a place", ("place", "Flag Hamlet") not in rows),
+        ("a place live and abandoned alike stays", ("place", "Twice Hamlet") in rows),
+        ("an island with its own article is a landmark", ("landmark", "Green Island") in rows),
+        ("an islet with no article is no row", not any(n == "Bare Islet" for _, n in rows)),
+        ("a district with its own article is a place", ("place", "North District") in rows),
+        ("a district with no article is no row", not any(n == "South District" for _, n in rows)),
+        ("an estate area with its own article is a place", ("place", "Model Dwellings") in rows),
+        ("an estate area with no article is no row", ("place", "Plain Dwellings") not in rows),
+        ("two place rows of one name within 300 m are one", count[("place", "Riverside")] == 1),
+        ("two place rows of one name 660 m apart are two", count[("place", "Hillside")] == 2),
+        ("two junction rows of one name within 300 m are one", count[("junction", "Five Ways")] == 1),
+        ("two landmark rows that fold alike are one, the other spelling an alias",
+         sum(count[("landmark", n)] for n in ("St. Mary's Church", "St Marys Church")) == 1
+         and any("Mary" in alias.get(("landmark", n), "") for n in ("St. Mary's Church", "St Marys Church"))),
+        ("a grave with an item and no article is no row", ("landmark", "Ada Person") not in rows),
+        ("a grave with its own article is a row", ("landmark", "Bea Person") in rows),
+        ("a grave under its subject's article is no row", ("landmark", "Cy Person") not in rows),
+        ("a grave whose article the tags cannot place stays", ("landmark", "Dee Person") in rows),
+        ("a plaque with an item and no article is no row", ("landmark", "Eli Person") not in rows),
+        ("a statue with an item stays", ("landmark", "Fay Person") in rows),
+        ("a bare type word with its own article is a row", ("landmark", "Monument") in rows),
+        ("a bare type word under the type's article is no row", ("landmark", "Fountain") not in rows),
+        ("a bare type word under a shared article is no row", ("landmark", "Sundial") not in rows),
+        ("a private operator with its own article is a row", ("landmark", "Hill College") in rows),
+        ("a brand with its own article is no row", ("landmark", "Brand Museum") not in rows),
+        ("private access on a library with its own article is a row", ("landmark", "Fenced Library") in rows),
+        ("private access on a garden stays a home's", ("landmark", "Fenced Garden") not in rows),
+        ("private access on a palace stays a home's", ("landmark", "Fenced Palace") not in rows),
+        ("a minor historic object with its own article is a row", ("landmark", "Old Marker") in rows),
+        ("a minor historic object with no article is no row", ("landmark", "Lost Marker") not in rows),
+        ("a memorial whose article names the object is a row", ("landmark", "Stone of Remembrance") in rows),
+        ("a memorial whose article could be its subject's is left out", ("landmark", "Wayside Saint") not in rows),
+        ("a razed building is no row", ("landmark", "Razed Hall") not in rows),
+        ("a garden on a demolished church's site stays", ("landmark", "Garden On Site") in rows),
+        ("an abandoned historic site stays", ("landmark", "Old Fort") in rows),
+        ("an abandoned park is no row", ("landmark", "Empty Park") not in rows),
+        ("a park under construction is no row", ("landmark", "New Park") not in rows),
+        ("a park live and under construction alike stays", ("landmark", "Both Park") in rows),
+        ("a historic object live and razed alike stays", ("landmark", "Both Hall") in rows),
+        ("a museum reopening later, with a start date, stays", ("landmark", "Reopening Museum") in rows),
+        ("a museum not yet open is no row", ("landmark", "Unbuilt Museum") not in rows),
+        ("a place closed for works, named by id, stays", ("landmark", "Closed Museum") in rows),
+        ("a razed object is never kept by id", ("landmark", "Listed Ruin") not in rows),
+        ("a disused prefix drops nothing", ("landmark", "Disused Fountain") in rows),
+        ("an item on three rows admits none", not any(n.startswith("Piece") for _, n in rows)),
+        ("an item on two rows admits both", count[("landmark", "Pair One")] + count[("landmark", "Pair Two")] == 2),
+        ("a pedestrian area with its own article is a landmark", ("landmark", "Market Square") in rows),
+        ("a pedestrian area under another thing's article is no row", not any(n == "Plain Plaza" for _, n in rows)),
+        ("a bridge on a road takes bridge:name", ("landmark", "Iron Bridge") in rows
+         and "River Road" in alias.get(("landmark", "Iron Bridge"), "")),
+        ("the report counts the private residential streets", report.get("street_dropped_private_residential") == 2),
+        ("the log names a rule for a dropped street",
+         any(x["class"] == "street_busway_raceway" and x["name"] == "Bus Road" for x in log)),
+        ("own_article: a section is not the object's", own_article({"wikipedia": "en:A#B"}, ["A"])[0] == "not"),
+        ("own_article: the subject's article is not the object's",
+         own_article({"wikipedia": "en:X", "subject:wikipedia": "en:X"}, ["Y"])[0] == "not"),
+        ("street_description: a local way word with a number is a name",
+         street_description("Rua 1", ("pt",)) is None and street_description("Trail #2", ("en",)) is not None),
+        ("lifecycle: was: and disused: are not read",
+         lifecycle({"was:building": "yes", "disused:building": "yes"}, "2026-10-10") is None),
+    ]
+    bad = [what for what, ok in cases if not ok]
+    for what in bad:
+        print(f"BAD   {what}")
+    print(f"place_index selftest: {len(cases) - len(bad)} of {len(cases)} cases hold")
+    return 1 if bad else 0
+
+
+if __name__ == "__main__":
+    import sys
+    for _stream in (sys.stdout, sys.stderr):
+        if hasattr(_stream, "reconfigure"):
+            _stream.reconfigure(encoding="utf-8", errors="replace")
+    if sys.argv[1:] == ["--selftest"]:
+        sys.exit(_selftest())
+    sys.exit("usage: python pipeline/place_index.py --selftest   (a city's index: its step2b_place_index.py)")

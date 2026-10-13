@@ -339,6 +339,15 @@ PLACE_REVIEWED = {
 }
 # OSM objects a reading by eye found to be a business or a home that no rule
 # in place_index.py catches, each with why (place_index.build, `dropped`).
+# OSM objects that stand but are closed for works, kept although their tags
+# read as not yet open (place_index.build, `closed_for_works`; owner,
+# 2026-10-13). Remove an entry when OSM's tags no longer say so: an id that
+# has left the cache stops the step.
+PLACE_CLOSED_FOR_WORKS = {
+    "way/37058938": "The Seattle Public Library - University Branch: building=construction, closed for "
+                    "renovation (owner, 2026-10-13)",
+    "way/50622242": "South Park Playground: construction=yes on a park being rebuilt (owner, 2026-10-13)",
+}
 PLACE_DROPPED = {
     "way/533706524": "'Ride Store', Community Transit's fare-sales office, tagged as a station",
     "way/221903524": "'Quarters A', a lighthouse keepers' residence (historic=lighthouse, building=yes)",
