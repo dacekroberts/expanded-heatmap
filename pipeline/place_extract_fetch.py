@@ -766,6 +766,7 @@ def selftest():
         (d / "over" / "east" / "east-260101.osm.pbf").write_bytes(east.read_bytes())
         (d / "over" / "west" / "west-260101.osm.pbf").write_bytes(west.read_bytes())
         kept_seen = dict(_AREA_READ)
+        armed = os.environ.pop("HEATMAP_NO_NETWORK", None)
         try:
             _AREA_READ[City.SLUG] = caught[0].geom if caught else None
             said.clear()
@@ -776,6 +777,8 @@ def selftest():
         finally:
             _AREA_READ.clear()
             _AREA_READ.update(kept_seen)
+            if armed is not None:
+                os.environ["HEATMAP_NO_NETWORK"] = armed
         # Open sea: east's polygon ends at 1.99 and nothing else is there.
         over_index(d / "sea", 1.05, 0.95, 1.99)
         said.clear()

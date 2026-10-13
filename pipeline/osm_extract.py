@@ -1006,8 +1006,10 @@ def query(pbf, area_spec, unions, *, on_area=None, say=None):
     SEVERAL EXTRACTS READ AS ONE: the first argument may be a list of files
     (an ExtractSet). Each pass then reads the files in turn, every id is
     taken once (_Once), and a boundary whose member ways lie in different
-    files is assembled from all of them. One file's node positions are held
-    at a time, so the peak is the largest file's, not the sum. A caller
+    files is assembled from all of them. The files are read in turn, one
+    file's node positions at a time, but the peak is NOT the largest
+    file's alone: measured 2026-10-13, 1.6 GB for pennsylvania (349 MB) with
+    new-jersey (164 MB) against 1.05 GB for pennsylvania alone. A caller
     checks the set is one snapshot first (set_timestamp); stats gains
     "files" and "taken_once".
 
