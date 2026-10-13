@@ -75,6 +75,8 @@ CHECKS = [
     ["pipeline/place_index_fetch.py", "--selftest"],
     ["scripts/place_search_fetch_queue.py", "--selftest"],
     ["scripts/place_search_scaffold.py", "--selftest"],
+    ["scripts/place_search_area_lookup.py", "--selftest"],
+    ["scripts/place_search_night.py", "--selftest"],
     ["scripts/check_place_index_drift.py", "--selftest"],
     ["scripts/check_place_scope.py"],
     ["scripts/check_place_scope.py", "--selftest"],
