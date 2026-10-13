@@ -425,6 +425,19 @@ All quoted in the drafts file; the short list:
    by `PLACE_AREA`, keeps each tile's answer beside the cache so only a
    refused tile is asked again, and merges by OSM id. Re-run the script
    until every tile is in.
+   **An alternative, not the default (2026-10-13; which route comes first is
+   the owner's call):** `python pipeline/place_extract_fetch.py <city>`
+   writes the same three caches from a regional OpenStreetMap extract
+   filtered on this machine, with no Overpass request and no mirror lock, so
+   it can run beside a mirror queue (through `scripts/heavy_job.py`). It
+   writes only the caches that are missing, applies the same 7-day rule to
+   the extract's own date and the same scope stop, needs no `PLACE_SPLIT`,
+   and records the download host and file in the provenance. Its element
+   order is its own (ascending id), so same-name ties in the index can fall
+   differently from an Overpass cache of the same data, and one or two
+   objects grazing the boundary can be added per city. Read the
+   **`osm-extract` skill** first: the proof, the leftovers and the download
+   server's conduct rules are there.
 4. **A new language first** (see "A new language" below), then copy
    `pipeline/sydney/step2b_place_index.py`, rename, run it. Read the
    languages line before anything else.

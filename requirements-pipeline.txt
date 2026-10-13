@@ -8,6 +8,7 @@
 # themselves are done with curl.
 # openpyxl: registers published only as XLSX (Sendai's permit lists, inside ZIPs).
 # xlrd: the old .xls format (Kyoto's 2021-03-31 full permit list).
+# osmium: pyosmium, reads regional OpenStreetMap extracts (pipeline/osm_extract.py).
 pandas>=2.2
 geopandas>=1.0
 shapely>=2.0
@@ -16,3 +17,4 @@ folium>=0.17
 requests>=2.32
 openpyxl>=3.1
 xlrd>=2.0
+osmium>=4.0
