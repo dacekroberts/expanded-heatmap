@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**122 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**123 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -59,6 +59,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Place search: every drawn line and station is searchable, the floor for the big review (owner)](#2026-10-13---place-search-every-drawn-line-and-station-is-searchable-the-floor-for-the-big-review-owner)
 - [Place search: a drawn station or line is never dropped for its name; wave 1's branch complete (owner)](#2026-10-13---place-search-a-drawn-station-or-line-is-never-dropped-for-its-name-wave-1s-branch-complete-owner)
 - [Place search: Monterrey's 19 colonias kept by id, the estate rule unchanged (owner)](#2026-10-13---place-search-monterreys-19-colonias-kept-by-id-the-estate-rule-unchanged-owner)
+- [Place search: "an article of its own" is asked of Wikidata, not of the map's tag; candidates 29 to 44 (owner)](#2026-10-13---place-search-an-article-of-its-own-is-asked-of-wikidata-not-of-the-maps-tag-candidates-29-to-44-owner)
 
 **2026-10-12**
 
@@ -6006,3 +6007,47 @@ japan-city template:
   estates it removes, so loosening it readmits them everywhere.
 - **Cost:** 19 ids in one config, and the same call again if another
   Mexican city shows the class. Mexico City is checked in the third pass.
+
+### 2026-10-13 - Place search: "an article of its own" is asked of Wikidata, not of the map's tag; candidates 29 to 44 (owner)
+
+- **The third pass, measured on the 19 live cities in memory (branch
+  `search-rules-3`): 322,843 rows to 321,534.** Rule 16 of this date (public
+  art needs a Wikipedia article of its own) dropped 1,278 rows, and among
+  them works a visitor searches for: the Angel de la Independencia, the
+  Burghers of Calais, Tokyo's Maman, Sue the Dinosaur, A-maze-ing Laughter,
+  Prague's Miminka. Each carries a `wikidata` tag and no `wikipedia` tag:
+  the tag on the map is a poor stand-in for the article.
+- **Three options went to the owner** (ask Wikidata; keep the rule and keep
+  the famous by id; leave public art out). **The owner: "1. yes and delegate
+  to deepseek. no rule for brasilia."** A fetch script
+  (`pipeline/place_wikidata_fetch.py`) asks Wikidata which entries named in
+  a city's place caches have a Wikipedia article in any language and caches
+  the answer; the index step reads the cache. The script is written by the
+  DeepSeek worker from a plan (new file only; code, no data sent), reviewed
+  and wired in by Cleanup. Wikidata is a new source: its licence row is
+  read before the first request.
+- **No rule for the Brasilia finding:** applying the street-word test to
+  pedestrian ways would drop 483 live rows, 266 in London, many of them
+  real pedestrian streets. Brasilia's corridors stay by-id drops.
+- **Candidates 36 and 39, the owner: "36. declare. 39. same rule".**
+  Cluj-Napoca declares Hungarian and Daugavpils Russian as searched
+  languages (39.8% and 15.5% of rows). A library needs an article of its
+  own, as public art does (Florence: 213 of 1,004 landmarks).
+- **Built with the seven language lists as a fourth pass, on Cleanup's
+  recommendation, not objected to:** (29) a leak word is set aside in a
+  language where it is a plain word ("store"); (31) Greek final sigma and
+  (35) Romanian cedilla letters fold; (32) `int_name` is read as an
+  alternate name; (33) a glued way word passes in a suffix language; (34) a
+  home-name ending; (37) Swedish "-gard" is no street word on a footway;
+  (38) a Wikidata entry that is the subject's is not the object's own; (40)
+  one monument drawn in segments is one row; (41) a place of worship as a
+  node beside its way is one row; (42) a station closed to passengers is no
+  station; (43) Cluj-Napoca's tram stops lose a trailing " Tram". (44) gets
+  no rule.
+- **Also from the third pass:** the station guard brings back Sendero,
+  Brussels' Parc, Mexico City's La Virgen and Blackpool's Tower; the index
+  holds no line rows, and lines and a map's own stations reach the search
+  box from the map with no name filter (pinned by a selftest); foot access
+  brings back 189 public streets; four rules were narrowed after measuring
+  (the draft has each). The German matcher words are a separate commit
+  (`search-rules-3-matcher`), held for the big review's render.
