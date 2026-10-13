@@ -1,0 +1,2389 @@
+# Search final group: rows held with no ruling (2026-10-13)
+
+Rows a reader left pending that are still in the built index, by city and
+class. A class the owner ruled to keep is left out; the rulings are in
+`search-final.md`. Each line: name, OSM id where the reader gave one, and
+the reader's reason; a home, family or person class is listed by id alone.
+Nothing here is dropped.
+
+## aarhus (places)
+
+- **family compounds or heritage houses with no article** (1)
+  - way/148254169
+- **motorway ramps** (1)
+  - Motorvejskryds Aarhus Vest (node/5528603819): a motorway interchange tagged a locality
+- **planning-code or block-code parks and greens** (2)
+  - Bypark Midt (way/482609784): a section label of one town park (middle)
+  - Bypark Nord (way/496428589): a section label of one town park (north)
+- **unsure: a glitched name** (1)
+  - "Nullet" (way/125793727): a nickname written inside quotation marks
+- **unsure: a memorial with no article** (1)
+  - DSB Centralværksted Mindesmærke (node/13717918789): a memorial plate to a railway workshop, no article
+- **unsure: a place name plus type words as a park's name** (3)
+  - Egå Engvej park og legeplads (way/617763066): a street name plus 'park and playground' as the name
+  - Egå dam park (way/621192243): a place name plus 'pond park' as the name
+  - Gammel Skejby legeplads (way/482180292): a place name plus 'playground', tagged a park
+- **unsure: a possible duplicate row** (1)
+  - Ørnereden (node/5290181294): a barrow with the name of the locality row 130 m away, which has the article
+- **unsure: a thing that is gone** (1)
+  - Sankt Olufs Kirke (node/9534520440): the site of a vanished church, beside its churchyard's own row
+- **unsure: museum contents** (6)
+  - Teaterplads (way/1281370998): a square that appears to lie inside an open-air museum (from coordinates)
+  - Lilletorv (way/1280496716): a square that appears to lie inside an open-air museum (from coordinates)
+  - Karlstrupkister (node/6446305089): stone cists moved to a museum's grounds (moved=yes), no article
+  - Kobberupkisten (node/3760236264): a stone cist moved to a museum's grounds (moved=yes), no article
+  - Rostrupkisten (node/3760236263): a stone cist moved to a museum's grounds (moved=yes), no article
+  - Stigsnæsdyssen (way/149563662): a dolmen moved to a museum's grounds (moved=yes), no article
+- **unsure: named spots inside one garden, tagged localities** (4)
+  - Egeplænen (node/12887631803): a named lawn inside a forest garden
+  - Fyrreplænen (node/12887631805): a named lawn inside a forest garden
+  - Gravhøjen (node/12887631804): a named spot inside a forest garden
+  - Grotten (node/12887631806): a named spot inside a forest garden
+
+## aarhus (streets)
+
+- **bare type word** (1)
+  - Rampen: a bare type word as the whole name
+- **business road** (2)
+  - Agro Food Park: a business park's own road
+  - Logistikparken: a business park's own road
+- **code or address number** (1)
+  - Bane 17-21: a number range standing in for a name
+- **glitch or unsure** (1)
+  - Path of Discovery: an English name on a path
+- **mode lane** (3)
+  - Busgaden: a busway street
+  - Lystrup Busvej: a bus-only service road
+  - Kærgårdsparkens Busvej: a bus-only service road
+
+## bergen (places)
+
+- **bare type words on landmarks or places** (36)
+  - Knutepunktet (node/4843690522): a locality whose whole name may be a type word (the hub), inferred from the name alone
+  - Botn (node/4648154177): whole name is a terrain or type word in its definite form; likely a real local name
+  - Dalen (node/4427011738): whole name is a terrain or type word in its definite form; likely a real local name
+  - Gavlen (node/4644216195): whole name is a terrain or type word in its definite form; likely a real local name
+  - Gjelet (node/4676512253): whole name is a terrain or type word in its definite form; likely a real local name
+  - Haugane (node/4820040732): whole name is a terrain or type word in its definite form; likely a real local name
+  - Hola (node/4648151469): whole name is a terrain or type word in its definite form; likely a real local name
+  - Kampen (node/4416815398): whole name is a terrain or type word in its definite form; likely a real local name
+  - Klubben (node/4725822871): whole name is a terrain or type word in its definite form; likely a real local name
+  - Korsen (node/4939174538): whole name is a terrain or type word in its definite form; likely a real local name
+  - Kvernane (node/5538716329): whole name is a terrain or type word in its definite form; likely a real local name
+  - Kyrkja (node/4644216193): whole name is a terrain or type word in its definite form; likely a real local name
+  - Leitet (node/4648151468): whole name is a terrain or type word in its definite form; likely a real local name
+  - Liane (node/4735185480): whole name is a terrain or type word in its definite form; likely a real local name
+  - Myren (node/4281046564): whole name is a terrain or type word in its definite form; likely a real local name
+  - Neset (node/4732029576): whole name is a terrain or type word in its definite form; likely a real local name
+  - Rabben (node/4647570117): whole name is a terrain or type word in its definite form; likely a real local name
+  - Setra (node/5538715618): whole name is a terrain or type word in its definite form; likely a real local name
+  - Setra (node/5538716452): whole name is a terrain or type word in its definite form; likely a real local name
+  - Skaret (node/6835335340): whole name is a terrain or type word in its definite form; likely a real local name
+  - Steinen (node/4750655803): whole name is a terrain or type word in its definite form; likely a real local name
+  - Tangen (node/4644353138): whole name is a terrain or type word in its definite form; likely a real local name
+  - Tangen (node/4750655793): whole name is a terrain or type word in its definite form; likely a real local name
+  - Varden (node/291028924): whole name is a terrain or type word in its definite form; likely a real local name
+  - Varden (node/4195882657): whole name is a terrain or type word in its definite form; likely a real local name
+  - Åsen (node/4644353095): whole name is a terrain or type word in its definite form; likely a real local name
+  - Fjellet (node/4086807873): whole name is a terrain or type word in its definite form; likely a real local name
+  - Hovden (node/6239376289): whole name is a terrain or type word in its definite form; likely a real local name
+  - Kampen (node/4095926431): whole name is a terrain or type word in its definite form; likely a real local name
+  - Kampen (node/4648154144): whole name is a terrain or type word in its definite form; likely a real local name
+  - Kampen (node/10240417876): whole name is a terrain or type word in its definite form; likely a real local name
+  - Klubben (node/4648153112): whole name is a terrain or type word in its definite form; likely a real local name
+  - Osen (node/11505839733): whole name is a terrain or type word in its definite form; likely a real local name
+  - Såta (node/4837590511): whole name is a terrain or type word in its definite form; likely a real local name
+  - Tangen (node/5029788562): whole name is a terrain or type word in its definite form; likely a real local name
+  - Treet (way/768568730): whole name is a terrain or type word in its definite form; likely a real local name
+- **duplicated gazetteer hamlets** (7)
+  - Elvenes (node/4087939234): same name as the registered neighbourhood 300 m away
+  - Vallaheiane (node/4427011742): same name as the neighbourhood 450 m away
+  - Vardafjellet (node/4644353096): same name as the peak 200 m away
+  - Gamle Bergen (node/5538716350): same name as the museum 45 m away
+  - Borgasetra (node/5538716449): same name as the ruin 40 m away
+  - Gullstølen (node/9798473345): same name as the ruin 25 m away
+  - Riplestølen (node/4647570692): a second spelling of the shieling locality 600 m away, inferred from the name alone
+- **unsure: business with an article** (1)
+  - Brushytten (way/446699596): a kiosk cafe tagged a locality; it has an article
+- **unsure: duplicate row** (2)
+  - Åsane kirke (way/381377378): same name as the church beside the old church 900 m away; which is right not confirmed
+  - node/1070084018
+- **unsure: glitched name** (7)
+  - Åsen batteri (Olsvik batteri) (way/23994272): a second name glued on in brackets; battery ruin with no article
+  - Midtfjellet - Gullfjellet (node/1808855907): two names joined by a hyphen on one peak
+  - Bergen Kunsthall Project (way/133607327): an English word after the gallery's name
+  - Bibliotek for humaniora (way/186894043): English alt names a different library (social science on the humanities library)
+  - Åsane kirke (way/199693848): alt name is the neighbouring old church's; same name as a second church 900 m away
+  - Knulrtane (node/9811334757): possible typing slip in a locality name, inferred from the name alone
+  - Sanbrekkedalen (node/4702348094): possible typing slip (a d missing against the neighbouring locality's spelling), inferred from the name alone
+- **unsure: museum contents** (2)
+  - Eidsvågsteinen (node/4181285524): a rune stone standing at the university museum, no article; museum contents inferred from the coordinates
+  - KNM Brask (way/679572967): a monument named for a naval vessel inside the naval base, no article
+- **unsure: museum tramway stops as stations** (5)
+  - Bergen Kino (node/11069317721): a stop position on the museum tram line, tagged a tram stop
+  - Engen (node/12164308762): a stop position on the museum tram line, tagged a tram stop
+  - Johanneskirken (node/11173604641): a stop position on the museum tram line, tagged a tram stop
+  - Muséplassen (node/11173604640): a stop position on the museum tram line, tagged a tram stop
+  - Møhlenpris (node/1769605890): a stop position on the museum tram line, tagged a tram stop
+- **unsure: name says the thing is gone** (1)
+  - Gamle Nordvik skole (node/318665121): a former school as a locality, no article
+- **unsure: notable home tagged an attraction** (1)
+  - way/431495717
+- **unsure: person's name** (1)
+  - way/469522633
+- **unsure: plaque with no article** (1)
+  - Walk of Fame (node/12484079401): pavement plaques tagged a monument, no article
+- **unsure: ruin with no article** (1)
+  - Vassenden skule (node/6517695373): ruin of a school, no article
+
+## bergen (streets)
+
+- **terrain ending -gården** (1)
+  - Tvedtegården: -gården admits one service way, possibly a private yard
+- **terrain ending -toppen** (1)
+  - Skjentoppen: -toppen admits five service ways, possibly a hilltop estate
+- **terrain ending -tunet** (2)
+  - Eidsvågtunet: -tunet admits a service way, possibly a housing cluster
+  - Søreidtunet: -tunet admits a service way, possibly a housing cluster
+- **unsure: business or port road** (1)
+  - Dokkeskjærskaien: a quay of service ways, mostly private
+- **unsure: estate courtyard or old-town lane** (1)
+  - Arbeiderboligen: pedestrian ways named the workers' housing
+- **unsure: estate name** (1)
+  - Sandven hageby: one residential way named a garden suburb
+- **unsure: facility's own road** (1)
+  - Travparkvegen: a service road to a trotting track
+- **unsure: glitched or description** (1)
+  - Arna Urban Vosseban-tunnelen: a project-style name on a footway tunnel
+- **unsure: military post's own road** (1)
+  - Sjøkrigsskoleveien: naval academy road, half private access
+- **unsure: not a street name** (1)
+  - Fløyfjellet: a mountain name on service and pedestrian ways
+
+## berlin (streets_ag)
+
+- **abbreviated name** (3)
+  - Bergstr.: an abbreviated type word in the name
+  - Carl-Langbecker-Str.: an abbreviated type word in the name
+  - Goten-Str.: an abbreviated type word in the name
+- **glitched name, unsure** (1)
+  - Gottfried-Funeck-Weg (Wuhlesteg): a second name in brackets glued on
+- **motorway ramp** (2)
+  - A113 Autobahnzubringer Dresden: a motorway feeder label
+  - Autobahnzubringer Dresden: a motorway feeder label
+- **site road, unsure** (10)
+  - Charitéplatz: possibly a hospital's own road (permit access)
+  - Bonhoefferweg: possibly a hospital's own road (permit access)
+  - DGZ-Ring: possibly a business site's own road
+  - Bachsaiblingstraße: possibly a business site's own road
+  - Belgienstraße: possibly a business site's own road
+  - Am Güterbahnhof Halensee: possibly a business site's own road
+  - Gewerbegebiet zum Wasserwerk: possibly a business site's own road
+  - Altes Gaswerk Mariendorf: possibly a business site's own road
+  - Gewerbehof: possibly a business site's own road
+  - Am Cleantech Business Park: possibly a business site's own road
+- **typo, unsure** (2)
+  - Fresienweg: a likely misspelling of a flower name beside a correct sibling
+  - Dalienweg: a likely misspelling of a flower name beside a correct sibling
+- **unsure** (1)
+  - Ädikulanische Treppe: an unusual name, not clearly a street
+- **variant duplicate, unsure** (2)
+  - Andersen Weg: a spaced variant beside a hyphenated or joined sibling
+  - Frau Holle Weg: a spaced variant beside a hyphenated or joined sibling
+
+## berlin (streets_hp)
+
+- **business road** (1)
+  - Lagerweg: customers-only service way, a business's own road
+- **code beside type** (2)
+  - Platz A: a letter code beside a type on residential ways
+  - Platz E: a letter code beside a type on residential ways
+- **estate** (2)
+  - Parksiedlung Spruch: an estate name on footways
+  - Metropolitan Park: a development name with an English word
+- **facility road** (2)
+  - Kitaweg: may be a childcare site's own path
+  - Kantinenweg: may be a canteen's own path
+- **generic name** (3)
+  - Haupttreppe: a generic description of a stair
+  - Plateautreppe: a generic description of a stair
+  - Naturlehrpfad: a generic trail word
+- **glued second name** (2)
+  - Niebüllerweg (Parkstraße): a second name in brackets
+  - Pankeweg (Panke-Trail): a second name in brackets
+
+## berlin (streets_qz)
+
+- **code name** (2)
+  - R-Weg: a one-letter code beside a path type
+  - S-Weg: a one-letter code beside a path type
+- **motorway label** (1)
+  - Stadtring Berlin: a motorway label, not a street name
+- **unsure: proposed name** (1)
+  - Sachsendammsteg: the way carries only a proposed name in its note
+
+## brasilia (places)
+
+- **bare type word** (55)
+  - Área Livre (way/832670982): a generic open-area word as the whole name of a park
+  - Área Livre (way/832670996): a generic open-area word as the whole name of a park
+  - Área Livre (way/832670997): a generic open-area word as the whole name of a park
+  - Área Livre (way/832671009): a generic open-area word as the whole name of a park
+  - Areá Livre (way/473221556): a generic open-area word as the whole name of a park
+  - PEC (way/477045391): a community meeting-point type word or its acronym as the whole name
+  - PEC (way/616786773): a community meeting-point type word or its acronym as the whole name
+  - PEC - Ponto de Enconto Comunitário (node/8686127218): a community meeting-point type word or its acronym as the whole name
+  - Ponto de Encontro Comunitário (way/400979380): a community meeting-point type word or its acronym as the whole name
+  - Ponto de Encontro Comunitário (way/563103335): a community meeting-point type word or its acronym as the whole name
+  - Ponto de Encontro Comunitário (way/667353631): a community meeting-point type word or its acronym as the whole name
+  - Ponto de Encontro de Comunitário (way/681015145): a community meeting-point type word or its acronym as the whole name
+  - Ponto de Convivência (way/696050217): a community meeting-point type word or its acronym as the whole name
+  - Churrasqueira Pública (way/672792988): a public barbecue type word as the whole name
+  - Churrasqueira Pública (way/672792989): a public barbecue type word as the whole name
+  - Churrasqueira Pública (way/672792990): a public barbecue type word as the whole name
+  - Churrasqueira Pública (way/672792991): a public barbecue type word as the whole name
+  - Campo Gramado (way/854250142): a generic pitch, court or lawn word as the whole name
+  - Campo gramado (way/1092714621): a generic pitch, court or lawn word as the whole name
+  - Campo de Areia (way/854250143): a generic pitch, court or lawn word as the whole name
+  - Campo Aberto (way/473221555): a generic pitch, court or lawn word as the whole name
+  - campinho de futebol (way/1290591094): a generic pitch, court or lawn word as the whole name
+  - gramado (way/653683261): a generic pitch, court or lawn word as the whole name
+  - Quadra de Areia (node/2579650025): a generic pitch, court or lawn word as the whole name
+  - quadra de areia (node/10538295100): a generic pitch, court or lawn word as the whole name
+  - quadra de futvolei (way/959201858): a generic pitch, court or lawn word as the whole name
+  - Quadra Poliesportiva (node/12501369386): a generic pitch, court or lawn word as the whole name
+  - Academia Comunitária (way/473243664): a generic park, square or facility word as the whole name
+  - Area Verde Comunitária (way/1232967527): a generic park, square or facility word as the whole name
+  - Centro comunitario (way/730841312): a generic park, square or facility word as the whole name
+  - Centro Esportivo Publico (way/557163963): a generic park, square or facility word as the whole name
+  - Outdoor Gym (way/808579799): a generic park, square or facility word as the whole name
+  - Parque de esportes (way/666797689): a generic park, square or facility word as the whole name
+  - Parque de uso múltiplo (way/287298535): a generic park, square or facility word as the whole name
+  - Praça Comunitária Pública (way/732800858): a generic park, square or facility word as the whole name
+  - Praça de entrequadras (way/557474102): a generic park, square or facility word as the whole name
+  - Pracinha da igreja (way/625954562): a generic park, square or facility word as the whole name
+  - Calçada Arborizada (way/544009368): a generic park, square or facility word as the whole name
+  - circo (way/737699342): a generic park, square or facility word as the whole name
+  - cras (node/10538261954): a generic park, square or facility word as the whole name
+  - Cruz (node/3166592509): a generic monument word as the whole name
+  - Totem (way/701879973): a generic monument word as the whole name
+  - Horatorio (way/479855495): a generic monument word as the whole name
+  - Capela Católica Igreja (node/4957629123): a generic monument word as the whole name
+  - Elipse (node/2540440295): a generic monument word as the whole name
+  - Paróquia (way/237042476): a generic church or parish word as the whole name
+  - Paróquia (way/1301522937): a generic church or parish word as the whole name
+  - Igreja Religiosa (node/11226860325): a generic church or parish word as the whole name
+  - Igreja Protestante (node/11331674635): a generic church or parish word as the whole name
+  - igreja evangélica (node/10315458705): a generic church or parish word as the whole name
+  - Centro de adoração (way/615488001): a generic church or parish word as the whole name
+  - Presbiteriana (way/1315990243): a generic church or parish word as the whole name
+  - Igreja Pentecostal (node/2579649759): a generic church or parish word as the whole name
+  - Igreja Pentecostal (way/549813144): a generic church or parish word as the whole name
+  - Igreja Pentecostal (way/1314737001): a generic church or parish word as the whole name
+- **estate or condominium tagged a village, hamlet or neighbourhood** (11)
+  - node/8307387085
+  - node/8307387353
+  - way/1292087282
+  - way/1292202162
+  - way/1292202169
+  - way/1292202176
+  - way/1292202166
+  - way/1292202165
+  - way/1475998094
+  - node/13234591469
+  - node/12179472805
+- **personal name on a house of worship** (2)
+  - node/6556105487
+  - node/12978825336
+- **unsure** (15)
+  - Brasília (node/303847107): a rail station that may have no passenger service; not confirmed from tags
+  - Praça SRI 02 (way/821922992): a housing sector's own square by its operator tag; public access not confirmed
+  - Parquinho Infantil do Bloco G da 104 Sul (way/734333868): a block's playground; superblock grounds are normally public
+  - node/2507849347
+  - node/4964514921
+  - Renascer Hall (node/6988564235): tagged a place of worship but the name is a hall, library or society
+  - Biblioteca Boa Nova (node/2579649286): tagged a place of worship but the name is a hall, library or society
+  - Nova Acrópole (node/6554263573): tagged a place of worship but the name is a hall, library or society
+  - Grande Oriente do Distrito Federal (way/141109296): tagged a place of worship but the name is a hall, library or society
+  - Feira do Produtor Rural (way/237174088): a market tagged a park
+  - COOPADF (way/1366018476): a private farm airstrip with wikidata
+  - Fazenda Coperbrás (way/1366015781): a private farm airstrip with wikidata
+  - Paróquia São José Operário Antiga Igreja (node/2691215191): the name says an old church; whether it stands is not confirmed
+  - Infraero (node/4949885122): a company's name on a monument node, no article; object unclear
+  - Economia Solidaria do Sol Nascente (node/12501369383): a park node whose name reads as a programme, not a place
+
+## brasilia (streets)
+
+- **Edf address strings** (14)
+  - Edf Bairro Bela Vista Rua do Terminal: an address string standing in for a name
+  - Edf Estrada do Sol Condominio Ouro Vermelho I Vt 1Qd: an address string standing in for a name
+  - Edf Marginal Df480: an address string standing in for a name
+  - Edf Nucleo Rural Capão Comprido Chácara Flengo Nurmero 7: an address string standing in for a name
+  - Edf Pmu Praça do Biriti: an address string standing in for a name
+  - Edf Setor Qi Qi 20: an address string standing in for a name
+  - Edf Sh Ponte Alta Norte Chacara Zuzao: an address string standing in for a name
+  - Edf Sh Sol Nascente Chacara 110: an address string standing in for a name
+  - Edf Shjm Qc 2 Rua I: an address string standing in for a name
+  - EdfShns Chácara 51 Conjunto C: an address string standing in for a name
+  - EdfShsn Chac 52A: an address string standing in for a name
+  - EdfShsn Chácara 126 Conj A: an address string standing in for a name
+  - EdfShsnChácara 98 Quadra B: an address string standing in for a name
+  - edf Shsn Chácara 51 Conjunto A: an address string standing in for a name
+- **borderline** (7)
+  - Autódromo Nelson Piquet: a road named for a venue or institution
+  - Barragem do Paranoá: a road named for a venue or institution
+  - Embrapa: a road named for a venue or institution
+  - Reserva Jardim Botânico: a road named for a venue or institution
+  - Rua Chiara Chácara Shalom e Nossa Senhora de Aparecida: a private religious or estate road
+  - Rua Chiara Ponte Alta Norte: a private religious or estate road
+  - Rua Caminho do Amor: a private religious or estate road
+- **exit descriptions on primary roads** (3)
+  - Saída Norte: an exit description on a primary road
+  - Saída Sul: an exit description on a primary road
+  - Complexo Viário Saída Leste: an exit description on a primary road
+- **settlement names** (2)
+  - Comunidade Alto Bela Vista: a settlement name
+  - Invasão 4: a settlement name
+
+## bremen (streets)
+
+- **description, unsure** (1)
+  - Am Wendeplatz: a description standing in for a name
+- **motorway ramp** (3)
+  - Nordwestknoten: a ramp or interchange description
+  - Verteilerkreis Utbremen: a ramp or interchange description
+  - Fährzufahrt: a ramp or interchange description
+- **numeral code on minor ways** (20)
+  - Cäcilienweg I: a numeral beside a type on minor ways
+  - Cäcilienweg II: a numeral beside a type on minor ways
+  - Eisenbahnerweg I: a numeral beside a type on minor ways
+  - Eisenbahnerweg II: a numeral beside a type on minor ways
+  - Ontarioweg I: a numeral beside a type on minor ways
+  - Ontarioweg II: a numeral beside a type on minor ways
+  - Paradiesweg I: a numeral beside a type on minor ways
+  - Paradiesweg II: a numeral beside a type on minor ways
+  - Wetternweg II: a numeral beside a type on minor ways
+  - Im Suhrfelde I: a numeral beside a type on minor ways
+  - Im Suhrfelde II: a numeral beside a type on minor ways
+  - Im Suhrfelde III: a numeral beside a type on minor ways
+  - Im Suhrfelde IV: a numeral beside a type on minor ways
+  - Im Suhrfelde V: a numeral beside a type on minor ways
+  - Im Suhrfelde VI: a numeral beside a type on minor ways
+  - Im Suhrfelde Va: a numeral beside a type on minor ways
+  - Turmkamp I: a numeral beside a type on minor ways
+  - Turmkamp II: a numeral beside a type on minor ways
+  - Turmkamp III: a numeral beside a type on minor ways
+  - Turmkamp IV: a numeral beside a type on minor ways
+- **site road, unsure** (8)
+  - Am Kraftwerk: possibly a utility or port site's own road
+  - Schalthausstraße: possibly a utility or port site's own road
+  - Klärwerkstraße: possibly a utility or port site's own road
+  - Am Umspannwerk: possibly a utility or port site's own road
+  - Am Gaswerk: possibly a utility or port site's own road
+  - Am Oslebshauser Pumpwerk: possibly a utility or port site's own road
+  - Am Weser-Terminal: possibly a utility or port site's own road
+  - Am Stückgutterminal: possibly a utility or port site's own road
+
+## brussels_regional (places)
+
+- **bare type word on a landmark** (19)
+  - Château (way/30355564): whole name is the word for castle, a school building
+  - Donjon (way/661611166): whole name is the word for keep, a 1321 ruin
+  - Aqueduc (way/261670528): whole name is the word for aqueduct, a demonstration model
+  - Totem (node/6407667593): whole name is the word totem, no other tag
+  - L'infirmerie - De ziekenboeg (way/1395714219): whole name is the infirmary, with an article, in both languages
+  - Oud kapelleke (way/541176037): name means old little chapel
+  - Sentier didactique - Didactisch wandelpa (way/101985891): name means educational trail, tagged a park
+  - Centre évangélique (node/826789096): name is only a denomination's type
+  - Église Chrétienne Évangélique (node/10679274167): name is only a denomination's type
+  - Église adventiste - Adventkerk (way/117233607): name is only a denomination's type
+  - Église évangélique arabe (way/230206208): name is only a denomination's type
+  - Salle du Royaume des Témoins de Jéhovah (node/12617079521): generic hall name shared by seven rows
+  - Salle du Royaume des Témoins de Jéhovah (node/13750027380): generic hall name shared by seven rows
+  - Salle du Royaume des Témoins de Jéhovah (node/13750027390): generic hall name shared by seven rows
+  - Salle du Royaume des Témoins de Jéhovah (node/13750038397): generic hall name shared by seven rows
+  - Salle du Royaume des Témoins de Jéhovah (node/13750065801): generic hall name shared by seven rows
+  - Salle du Royaume des Témoins de Jéhovah (node/13750139205): generic hall name shared by seven rows
+  - Salle du Royaume des Témoins de Jéhovah (node/4430824594): generic hall name shared by seven rows
+  - Salles du Royaume des Témoins de Jéhovah (node/13750034233): generic hall name, plural form
+- **estate tagged a neighbourhood or locality** (11)
+  - Cité Jouët-Rey (way/998222835): a 1910 housing estate, no wikidata
+  - Cité Nogent - Tuinwijk Nogent (node/9970637900): a garden-city estate, no wikidata
+  - Cité Van Lindt (node/496816293): a housing estate, no wikidata
+  - Cité Volta - Voltawijk (node/10185837291): a housing estate, no wikidata
+  - Cité-jardin Chomé - Tuinwijk Chomé (node/9970808596): a garden-city estate, no wikidata
+  - Germinal (node/11620057021): a housing estate, no wikidata
+  - Les Jardins Saint-Lambert (node/1285044547): a residential development tagged a locality, no wikidata
+  - Cité Forest Vert (way/998217237): a housing estate, wikidata but no article
+  - Jardins de Jette - Tuinen van Jette (node/9975914968): a residential development, wikidata but no article
+  - Jardins de la Chasse - Jachthof (way/1331392238): a residential development, wikidata but no article
+  - Square du Bois - Bossquare (way/1124236591): a private residential street tagged a neighbourhood, has an article
+- **heritage house with no article** (11)
+  - way/200673325
+  - way/233650796
+  - way/225633344
+  - way/225203717
+  - way/260452424
+  - way/244020440
+  - way/226410659
+  - way/226554341
+  - way/226405293
+  - way/997942297
+  - way/245897885
+- **monument with no wikidata and no article** (4)
+  - Marquis de Villalobar - Markies de Villa (node/6739130225): a commemorative stone to a public figure
+  - Monument aux Morts de Guerre - Monument  (node/3136263140): a war memorial tagged historic=monument
+  - Monument de commémoration des victimes d (node/4327004903): a memorial tagged historic=monument
+  - Monument à Edith Cavell et Marie Depage  (node/9977870562): a memorial tagged historic=monument
+- **unsure: closed park** (2)
+  - Plaine Limite - Plein Grensstraat (way/722051451): access=no, described as closed since 2019
+  - Parc de la petite Senne - Park van de Kl (way/365723197): access=no, noted as closed
+- **unsure: description standing in for a name** (1)
+  - Ancient Stokkel Railway Station (way/404657842): an English description of a former station's ruins, no wikidata
+- **unsure: duplicate object under two names** (1)
+  - Institut d'enseignement supérieur social (way/847795742): same wikidata as the campus row of the same institute
+- **unsure: estate courtyard, campus or company green tagged a park** (9)
+  - Clos de la Balance - Weegschaalbinnenhof (way/793076936): a housing block's inner court by its Dutch name
+  - Clos du Parnasse - Parnassusgaarde (way/112409831): a close with permissive access tagged a park
+  - Carré aux Platanes - Platanenwijk (way/507306356): a grassed estate block tagged a park
+  - Parc de la Cité Jouët-Rey - Cité Jouët-R (way/30670741): a housing estate's own park
+  - Parc ING - ING Park (way/30089206): a park named for a bank
+  - Jardin Delhaize - Tuin Delhaize (way/31356453): a garden named for a supermarket chain
+  - Jardin du Delhaize Saint-Antoine- Tuin v (node/13911607839): a garden named for a supermarket branch, name missing a space
+  - Place facultaire (way/556952194): a campus green, name means faculty square
+  - Saint-Pie X (way/553438019): a green carrying only the neighbouring church's dedication
+- **unsure: heritage building, name not understood** (1)
+  - Le Thé au Harem d’Archi Ahmed (way/239903636): a heritage building with no wikidata under a film's title
+- **unsure: historic building named for a business** (1)
+  - Aux Trois Rois (way/227395225): a former inn tagged historic=bar, wikidata but no article
+- **unsure: home tagged an attraction** (1)
+  - way/241553744
+- **unsure: private estate, customers only** (2)
+  - Château Latour de Frein (way/30498629): a chateau open to customers only, wikidata but no article
+  - Domaine Latour de Freins (way/47353486): a private garden open to customers only, wikidata but no article
+- **unsure: public art with no article** (1)
+  - Tintin et Milou - Kuifje en Bobbie (node/9001639449): a rooftop sign tagged an attraction, wikidata but no article
+- **unsure: religious residence** (1)
+  - way/158927030
+
+## brussels_regional (streets)
+
+- **campus roads** (7)
+  - Chemin Elena Milashina: university campus road (note on one way says ULB property)
+  - Chemin François Englert: university campus road (note on one way says ULB property)
+  - Chemin Henri Storck: university campus road (note on one way says ULB property)
+  - Chemin Ilya Prigogine: university campus road (note on one way says ULB property)
+  - Chemin Isabelle Stengers: university campus road (note on one way says ULB property)
+  - Chemin Marie Popelin: university campus road (note on one way says ULB property)
+  - Chemin Robert Brout: university campus road (note on one way says ULB property)
+- **description** (2)
+  - Fond de vallée - Beneden in het dal: a description standing in for a name
+  - Chemin d'Accès - Toegangsweg: a description standing in for a name
+- **numbered path** (7)
+  - Sentier 116 - Voetweg 116: a number as the name of a footpath or track
+  - Sentier 141 - Voetweg 141: a number as the name of a footpath or track
+  - Sentier 26 - Pad 26: a number as the name of a footpath or track
+  - Sentier 34 - Pad 34: a number as the name of a footpath or track
+  - Voetweg 32: a number as the name of a footpath or track
+  - Voie 1 - Spoor 1: a number as the name of a footpath or track
+  - Voie 2 - Spoor 2: a number as the name of a footpath or track
+- **private road** (11)
+  - Avenue des Cosaques de la Meuse - Maaskozakkenlaan: every cached way access private, customers or no
+  - Cité Fontainas - Fontainashof: every cached way access private, customers or no
+  - Drève des Dames Blanches - Witte Vrouwendreef: every cached way access private, customers or no
+  - Passage Linthout: every cached way access private, customers or no
+  - Square Charles Jordens - Charles Jordenssquare: every cached way access private, customers or no
+  - Square Charles-Maurice Wiser - Charles-Maurice Wiserplein: every cached way access private, customers or no
+  - Square Gérard Van Caulaert - Gérard Van Caulaertsquare: every cached way access private, customers or no
+  - Square Sans Souci - Sans Soucisquare: every cached way access private, customers or no
+  - Voie Minckelers: every cached way access private, customers or no
+  - Voie Montefiore: every cached way access private, customers or no
+  - Chemin de Delleweg - De Delleweg: every cached way access private, customers or no
+- **shopping gallery** (13)
+  - Espace Louise - Louiza Espace: shopping gallery or arcade passage
+  - Galerie Horta - Hortagalerij: shopping gallery or arcade passage
+  - Galerie Louise - Louizagalerij: shopping gallery or arcade passage
+  - Galerie M - M-galerij: shopping gallery or arcade passage
+  - Galerie Matongé - Matongégalerij: shopping gallery or arcade passage
+  - Galerie Pacific: shopping gallery or arcade passage
+  - Galerie Saint-Josse - Sint-Joost Galerij: shopping gallery or arcade passage
+  - Galerie Sud - Zuidgalerij: shopping gallery or arcade passage
+  - Galerie Toison d'Or - Galerij Toison d’Or: shopping gallery or arcade passage
+  - Galerie de la Porte Louise - Galerij van de Louizapoort: shopping gallery or arcade passage
+  - Galerie de la Porte de Namur - Galerij van de Naamsepoort: shopping gallery or arcade passage
+  - Galerie des Argousiers - Duindoorngalerij: shopping gallery or arcade passage
+  - Galerie du Cinquantenaire - Jubelgalerij: shopping gallery or arcade passage
+- **single-language duplicate** (13)
+  - Alsembergsesteenweg: single-language name that is also half of a bilingual row
+  - Eversestraat: single-language name that is also half of a bilingual row
+  - Kasterlindenstraat: single-language name that is also half of a bilingual row
+  - Kerselaarstraat: single-language name that is also half of a bilingual row
+  - Leuvensesteenweg: single-language name that is also half of a bilingual row
+  - Molenweg: single-language name that is also half of a bilingual row
+  - Place du Nord: single-language name that is also half of a bilingual row
+  - Quai de Biestebroeck: single-language name that is also half of a bilingual row
+  - Terhulpsesteenweg: single-language name that is also half of a bilingual row
+  - Tervuursesteenweg: single-language name that is also half of a bilingual row
+  - Tumulidreef: single-language name that is also half of a bilingual row
+  - Vieressendreef: single-language name that is also half of a bilingual row
+  - Woluwedal: single-language name that is also half of a bilingual row
+- **slash join, sole row** (11)
+  - Avenue de Castonier - de Castonierlaan / de Castonierlaan - Avenue de Castonier: one street twice, two spellings joined; no clean row under either half
+  - Gouvernementsweg - Route Gouvernementale / Route Gouvernementale - Goevernementsweg: one street twice, two spellings joined; no clean row under either half
+  - Rue François Vander Elst - François Vander Elststraat / Frans Vander Elststraat - Rue François Vander Elst: one street twice, two spellings joined; no clean row under either half
+  - Rue Longue - Langestraat / Langestraat - Rue Longue: one street twice, two spellings joined; no clean row under either half
+  - Rue Pannenhuis - Pannenhuisstraat / Rue du Pannenhuys - Pannenhuisstraat: one street twice, two spellings joined; no clean row under either half
+  - Rue Walckiers - Walckiersstraat / Rue Walkiers - Walkiersstraat: one street twice, two spellings joined; no clean row under either half
+  - Rue de la Duchesse - Hertoginstraat / Rue de la Duchesse - Hertoginnestraat: one street twice, two spellings joined; no clean row under either half
+  - Rue de la Longue Haie - Langehaagstraat / Rue de la Longue Haie - Lange-Haagstraat: one street twice, two spellings joined; no clean row under either half
+  - Rue du Cardinal - Kardinaalstraat / Rue du Cardinal - Kardinaalsstraat: one street twice, two spellings joined; no clean row under either half
+  - Rue du Noyer - Notelaarsstraat / Rue du Noyer - Notelaarstraat: one street twice, two spellings joined; no clean row under either half
+  - Rue du Pannenhuys - Pannenhuisstraat / Rue Pannenhuis - Pannenhuisstraat: one street twice, two spellings joined; no clean row under either half
+
+## bucharest (places)
+
+- **a business or office on a historic or school tag** (3)
+  - Prințesele lui Tata (way/1366689705): not a castle's name; a business inferred from the name alone
+  - Asociația Națională a Veteranilor (way/694299391): an association's branch office tagged a historic building
+  - The International School of Bucharest (way/242092560): a private school with an article
+- **a part of a facility** (1)
+  - Peluza (way/860001496): one stand of a stadium tagged a stadium, 77 m from the stadium's row
+- **bare type words on landmarks** (7)
+  - Tun (node/11259913598): the whole name is the word for cannon
+  - Tunuri (node/1725768052): the whole name is the word for cannons
+  - Monumentul eroilor (way/1229553616): a generic name, the heroes' monument
+  - Turnul de apă (way/678037221): the whole name is the words for the water tower
+  - parc copii (way/297945586): a description, children's park
+  - Biserica Veche (way/210642313): a generic name, the old church, 23 m from the parish's named church
+  - Biserica Ortodoxa de Lemn (node/8574653317): a generic name, wooden Orthodox church
+- **descriptions of works buildings or sites** (5)
+  - Siloz Mălțărie (way/430820893): a works building named by its function
+  - Siloz Orzărie (way/423683662): a works building named by its function
+  - Pavilion administrativ - Casa Luther (way/545859282): a works building named by its function
+  - Perimetru Bateria Nr. 17 - 18 (way/395016793): the perimeter of a fort battery, a description
+  - Stâlpul Electric Verzișori (node/13645220824): an electricity pole tagged a monument, no article
+- **estates tagged as neighbourhoods** (3)
+  - One Floreasca Lake (way/239429322): a developer's estate, inferred from the name
+  - Planorama (way/238310820): a developer's estate, inferred from the name
+  - Greenfield (node/12137771371): a developer's estate, inferred from the name
+- **glitched names** (3)
+  - Eroilor militari Romani (way/646051432): a cut name, the head noun is missing
+  - Biserica Sfinții Trei Ierarhi - Coltea Col (way/77940084): a second spelling glued on; the church has an article, so the drop loses a known sight
+  - Cimitirul Izvorul Nou (node/6053541823): a cemetery's name on a place of worship node
+- **graves and memorials with no article of their own** (2)
+  - node/8399467017
+  - node/7040539622
+- **heritage houses with no article** (1)
+  - way/78442442
+- **parks named by a location phrase** (3)
+  - Dumitru Teodoru - Viilor (way/338192471): a park named by the two streets at its corner
+  - La Militari (way/641716026): a park named by a locative phrase
+  - La Rond (way/1459493780): a park named by a locative phrase
+- **parks with access=no** (2)
+  - Cotroceni (way/23557177): palace grounds tagged a park, access=no
+  - Parcul Sala Palatului (way/125447897): a park tagged access=no
+- **possible duplicate rows** (7)
+  - Decebal (node/13766598373): a second neighbourhood node of the same name 2.3 km from the first
+  - Balta Albă - Titan (node/8865171993): the same suburb is way/230446519 with the two halves reversed
+  - Mănăstirea Stavropoleos (node/672149975): an attraction node sharing the church way's wikidata
+  - Parcul Alexandru Ioan Cuza (relation/8321313): the second part of one park, same wikidata as relation/8321292
+  - Parcul Regele Mihai I (way/88337000): one of three parts of one park, way/88337012 carries the article
+  - Parcul Regele Mihai I (way/91797290): one of three parts of one park, way/88337012 carries the article
+  - Ion Luca Caragiale (way/1435346473): one figure of a statuary group carrying the group's article, 11 m from the group's row
+- **religious or official residences** (2)
+  - relation/3166516
+  - way/144932693
+
+## bucharest (streets)
+
+- **code or duplicate** (1)
+  - Aleea Iacob Andrei D: a letter-coded variant of Aleea Iacob Andrei
+- **code or gate name** (1)
+  - Rondul Poarta 4: a gate number on a works road
+- **description** (2)
+  - Chitila-Chiajna: a place-pair label, no street word
+  - Pasarela pietonală Popești-Leordeni: a footbridge by description
+- **facility road** (3)
+  - Strada Palatul Cotroceni: a palace's own road, access no on most ways
+  - Strada Sala Palatului: a concert hall's service road
+  - Strada Institutul Medico-Militar: an institute's road
+- **park feature, not a street** (1)
+  - Parterul Central: a park parterre carried by footways and steps
+- **route code** (1)
+  - DN6D: a national route code as a name
+
+## cluj_napoca (places)
+
+- **bare type or denomination as the whole name** (5)
+  - Biserica Creștină Penticostală (way/276967051): a denomination as the whole name, the real name is in alt_name
+  - Bisericuța de lemn (way/1427758602): a type phrase as the whole name
+  - Vestigii Romane (way/1145050481): a type phrase as the whole name
+  - Poarta de vest (way/276212112): a direction and type as the whole name
+  - Grădina japoneză (node/4134073486): a garden section inside the botanical garden, a type phrase as its name
+- **estate courtyard tagged a park** (2)
+  - La Barieră (way/469783140): a small park among housing blocks by its description
+  - Parc Platinia (way/1548857318): a park named for a commercial and residential complex
+- **name that says a former use** (2)
+  - Fosta "Casină Română" (way/275141007): named as a former venue, a heritage building with no article
+  - Fostul Sediu al Băncii "Economu" (way/247586801): named as a former bank seat, a heritage building with no article
+- **peak named for a village** (2)
+  - node/12236485011
+  - node/3462446035
+- **planning-code or block-code neighbourhood** (4)
+  - Micro 1 (node/11459460481): a planning-code neighbourhood
+  - Micro 2 (node/11459460482): a planning-code neighbourhood
+  - Micro 3 (node/11459460483): a planning-code neighbourhood
+  - Micro 4 (node/11459460484): a planning-code neighbourhood
+- **public art or sign with no article** (1)
+  - Sigla CUG (node/12297324584): a works' sign tagged a monument, no article
+- **religious residence not tagged a place of worship** (5)
+  - way/247586363
+  - way/202393357
+  - way/278311108
+  - way/237819797
+  - node/13607820451
+- **stop name with a mode or type word glued on** (2)
+  - Clujana h (node/2018383621): a halt abbreviation glued on the name
+  - Disp. Tram CUG (node/1870509058): a dispatcher point with the mode word inside the name
+
+## cluj_napoca (streets)
+
+- **business park road (unsure)** (1)
+  - Strada Tetarom: an industrial park's own road
+- **business road (unsure)** (1)
+  - Strada Tehnofrig: named for a company, private on 3 of 4 ways
+- **campus road (unsure)** (1)
+  - Strada Căminele Hașdeu: a student-hall campus road, private on 4 of 6 ways
+- **cut name (unsure)** (3)
+  - Rozelor: no street word, probably cut from Strada/Aleea Rozelor
+  - Constantin Brâncoveanu: no street word, probably cut name
+  - Nadasel: no street word, a district name on a residential way
+- **description/park (unsure)** (1)
+  - Parcul Central: a park name on a pedestrian way, no street word
+
+## copenhagen (places)
+
+- **bare type words on landmarks or places** (6)
+  - Engelsk Have (node/12269322560): a named section of one park, a generic garden word
+  - Cherry Grove (node/12269322561): a named section of one park, in English only
+  - Nordamerikansk Skov (node/12269322562): a named section of one park, a generic forest word
+  - Egeskov (node/12269322563): a named section of one park, a generic forest word
+  - Birkeskov (node/12269322564): a named section of one park, a generic forest word
+  - Vinterhave (node/12269322565): a named section of one park, a generic garden word
+- **business name on a notable building** (1)
+  - Studio Oliver Gustav (way/134655236): a design studio's own name on a notable building; the building's name is the alt name
+- **business tagged an attraction, unsure** (2)
+  - Korsbæk på Bakken (way/341565866): a themed restaurant quarter inside an amusement park tagged an attraction
+  - House of Amber (way/133940331): an amber shop with a small museum tagged an attraction, wikidata only
+- **chapel inside a prison** (2)
+  - Blegdamsvejens Fængsels Kirkesal (way/266646050): a prison chapel, not open to the public
+  - Vestre Fængsels Kirke (way/266646075): a prison church, not open to the public
+- **commercial gallery with an article** (2)
+  - Edition Copenhagen (node/6372863355): a commercial print workshop and gallery with an article
+  - Galerie Birch (node/4886228802): a commercial gallery with an article
+- **description standing in for a name, unsure** (2)
+  - One tree park (way/480987209): a description standing in for a park name, unsure
+  - Nexus Landscape (way/1371647599): a landscape design's project title on a park, unsure
+- **duplicate row, unsure** (1)
+  - Vestvolden (way/25674413): a second row of the same name, a section of the rampart park; the relation carries the article
+- **duplicate station row, same operator** (2)
+  - København Syd (node/1017968484): a second row for one station, 43 m from the row that carries the wikidata
+  - Østerport (node/4989664667): a second row for one station, 33 m from the row that carries the wikidata
+- **estate courtyard tagged a park, inferred** (4)
+  - Strandgården (way/330699477): likely an estate courtyard tagged a park, inferred from name and position
+  - Ågården (way/330699476): likely an estate courtyard tagged a park, inferred from name and position
+  - Emaljehaven (way/313263227): likely a housing development's courtyard tagged a park, inferred from the name
+  - Søborghave "Marken" (way/548176169): likely a housing estate's green tagged a park, inferred from the name
+- **family compounds or heritage houses with no article** (2)
+  - way/147007470
+  - way/25567918
+- **plain typo** (2)
+  - Margethehaven (way/133721518): a plain typo in the name (a letter missing)
+  - Soka Gakkai Internatinal Danmark (node/9804890264): a plain typo in the name (a letter missing)
+- **residents' facility, unsure** (1)
+  - way/404898332
+- **temporary object by its tags** (2)
+  - Nordens Plads Byrum (way/1472680157): a temporary urban space, per its description tag (2025 to 2029)
+  - Den Gule Plads (node/14133275087): a temporary square, per its description tag
+- **venue carrying a person's name** (2)
+  - way/946799580
+  - way/26181018
+
+## copenhagen (streets)
+
+- **allotment estate named by section number** (2)
+  - Brøndby Haveby Afdeling 3: a section code beside an allotment name
+  - Brøndby Haveby Afdeling 5: a section code beside an allotment name
+- **area description or internal path of a commune** (9)
+  - Fabriksområdet: pedestrian ways that read as area or building names
+  - Nordområdet: pedestrian ways that read as area or building names
+  - Sydområdet: pedestrian ways that read as area or building names
+  - Flaskehalsen: pedestrian ways that read as area or building names
+  - Fredens Ark: pedestrian ways that read as area or building names
+  - Psyak: pedestrian ways that read as area or building names
+  - Løvehuset: pedestrian ways that read as area or building names
+  - Mælkebøtten: pedestrian ways that read as area or building names
+  - Mælkevejen: pedestrian ways that read as area or building names
+- **building or courtyard name on pedestrian ways** (3)
+  - Rosengården: a building or courtyard, not a street
+  - Prins Jørgens Gård: a building or courtyard, not a street
+  - Klostergårdens Passage: a building or courtyard, not a street
+- **campus or business own road (inferred from name)** (10)
+  - Kemitorvet: possible campus, association or business road
+  - Matematiktorvet: possible campus, association or business road
+  - Biologiens Vej: possible campus, association or business road
+  - DBU Allé: possible campus, association or business road
+  - Handelstorvet: possible campus, association or business road
+  - Bygningstorvet: possible campus, association or business road
+  - Kemikalievej: possible campus, association or business road
+  - Maskinvej: possible campus, association or business road
+  - Montagehalsvej: possible campus, association or business road
+  - Chokoladevej: possible campus, association or business road
+- **housing or dormitory estate own road** (7)
+  - Grønjordskollegiet: named for a dormitory or housing block
+  - Kagsåkollegiet: named for a dormitory or housing block
+  - Voldboligerne: named for a dormitory or housing block
+  - Frankrigshusene: named for a dormitory or housing block
+  - Kamhusene: named for a dormitory or housing block
+  - Hegnshusene: named for a dormitory or housing block
+  - Mejerihusene: named for a dormitory or housing block
+- **mall or town-centre named road** (2)
+  - Rødovre Centrum: road named for a shopping centre
+  - Brøndby Strand Centrum: road named for a shopping centre
+- **motorway interchange description** (1)
+  - Gladsaxe Trafikplads: an interchange named as a plads
+- **service roads inside a named holiday or allotment estate (inferred)** (9)
+  - Nokken Forgaden: an estate's internal roads, access not restricted
+  - Nokken Hovedgaden: an estate's internal roads, access not restricted
+  - Nyvang Hovedvej: an estate's internal roads, access not restricted
+  - Nyvang Mellemvej: an estate's internal roads, access not restricted
+  - Nyvang Nordvej: an estate's internal roads, access not restricted
+  - Nyvang Sydvej: an estate's internal roads, access not restricted
+  - Nyvang Vestvej: an estate's internal roads, access not restricted
+  - Nyvang Åvej: an estate's internal roads, access not restricted
+  - Nyvang Østvej: an estate's internal roads, access not restricted
+
+## daugavpils (places)
+
+- **facility tagged a locality** (1)
+  - Mežciema sanatorijs (node/8612313870): a sanatorium tagged a locality; its building has a landmark row
+- **heritage building that may be a business** (1)
+  - Sanatorija "Mežciems" (way/998240315): a sanatorium building with no article; open or closed not read
+- **typo in a fortress work outside the ten kept** (1)
+  - Daugavpils cietokšņa 3. roduts (node/7141024262): a typo in the type word (reduts) of a fortress redoubt
+
+## florence (places)
+
+- **bare type word on a landmark** (1)
+  - way/482461122
+- **duplicate row** (3)
+  - Piazza Brunelleschi (way/1205438727): the same square as way/461736841 under a shorter name
+  - Giardino vittime di via Fani (way/763779020): the same name as relation/19357489 on a second park 500 m away
+  - Biblioteca Umanistica di Lettere e Filosofia (way/781613868): the same library as node/7325281941 (one wikidata item)
+- **exhibition-centre pavilion** (4)
+  - Padiglione Arsenale (way/90940145): an exhibition-centre pavilion, no article
+  - Padiglione Cavaniglia (way/866278407): an exhibition-centre pavilion, no article
+  - Padiglione Rastriglia (way/90940144): an exhibition-centre pavilion, no article
+  - Padiglione delle Ghiaie (way/866278400): an exhibition-centre pavilion, no article
+- **former-use name (Ex ...) on a historic building with no article** (6)
+  - Ex cappella di villa il Casone (way/463513949): a former chapel, no article
+  - Ex chiesa di Santa Maria di Orbatello (way/480911018): a former church, no article
+  - Ex monastero domenicano della Santa Croce (relation/11207153): a former monastery, no article
+  - Ex mulino di Sant’Andrea a Rovezzano (way/1124689288): a former mill, no article
+  - Ex oratorio del Bandino (way/374064989): a former oratory, no article
+  - Ex oratorio di Gesù Pellegrino (way/306240095): a former oratory, no article
+- **generic park word** (2)
+  - Area Cani Paolo Uccello (way/478229004): a dog area tagged a park, named by type and street
+  - Giardino Interno Via Argin Grosso (way/760909959): an inner garden named by its street, possibly a block's courtyard
+- **glitched name** (4)
+  - Chiesa di San Giuliano (Firenze) (way/306396530): a Wikipedia disambiguator glued on the name
+  - Chiesa Evangelica Valdese di Firenze (Holy Trinity Church) (way/484785562): an English name glued on in brackets
+  - Santo di Stefano in Pane (way/771929814): a typo that changes the name
+  - Pier della Francesca (way/676644892): a square's name with its type word cut
+- **heritage house or ruin with no article** (4)
+  - way/305870493
+  - way/305870475
+  - way/465939106
+  - way/255971544
+- **park named for a former use** (2)
+  - Ex Giardino Zoologico (way/627558686): a park named for the zoo that is gone
+  - Giardino Ex Caterina De' Medici (way/474348946): a park named for a former occupant
+- **public art or monument, unsure** (1)
+  - L'Ippopotamo (node/6742519788): a monument or sculpture with no article, kind not shown
+- **residence in a notable building** (1)
+  - way/443027894
+- **wikidata or Wikipedia link is not the object's own** (4)
+  - Soka Gakkai (node/573615484): a place of worship carrying its organization's item
+  - Palazzina della Meridiana (relation/7071160): a pavilion carrying the item of the garden around it
+  - Colonna della Giustizia (node/2426842882): public art whose article is a section of a list article
+  - Colonna dell’Abbondanza (node/2732676607): public art whose article is a section of a list article
+
+## florence (streets)
+
+- **unsure: description** (1)
+  - Prato del quercione: pedestrian way named like a meadow, lowercase, a description?
+- **unsure: description or post road** (1)
+  - Via Allievi Sottufficiali Carabinieri del Cinquantanovesimo Corso 1966-1967: a course commemoration as a road name, possibly a military school's own road
+- **unsure: possible facility road** (1)
+  - Via Madre Teresa di Calcutta: ten service ways, could be a facility's own road; inferred from the name
+- **unsure: possible hospital road** (4)
+  - Via della Maternità: service ways only, name suggests a hospital's own road; inferred from the name
+  - Via Esculapio: service ways only, name suggests a hospital's own road; inferred from the name
+  - Via Paracelso: service ways only, name suggests a hospital's own road; inferred from the name
+  - Via Franco Basaglia: service ways only, name suggests a hospital's own road; inferred from the name
+
+## geneva (places)
+
+- **bare type words on landmarks or places** (10)
+  - Paroisse (node/1917475456): a bare type word, no article
+  - Mairie (way/85233022): a bare type word; wikidata only
+  - Grotte mariale (node/2184046195): a bare type word, no article
+  - Hôtel de Ville (relation/1301860): a bare type word; has its own Wikipedia article
+  - Centre paroissial protestant (node/955976701): a type and denomination only, no article
+  - Centre paroissial protestant (way/85677049): a type and denomination only, no article
+  - Temple protestant (way/79650770): a type and denomination only; wikidata only
+  - Temple protestant (way/84697836): a type and denomination only, no article
+  - Église catholique (way/80266193): a type and denomination only; wikidata only
+  - Église catholique (way/84697805): a type and denomination only; wikidata only
+- **unsure: description or temporary site** (1)
+  - Friche de l'étang (way/1554778805): a wasteland plot tagged a park
+- **unsure: description standing in for a name** (2)
+  - Roman Villa ruins (way/1191912503): an English description standing in for a name, real site
+  - Les menhirs prehistoriques (way/1191912502): a description standing in for a name, real site
+- **unsure: duplicate row** (2)
+  - Paroisse protestante Rive gauche (node/9629273704): a parish node 32 m from its church's row
+  - Parc des Molliers (way/118190141): second of two rows of one name 300 m apart
+- **unsure: estate grounds tagged a park** (1)
+  - Morillon-Parc (way/85344453): possibly an estate's grounds tagged a park (inferred from the name)
+- **unsure: two names in one** (3)
+  - Esplanade Théodelinde (Esplanade Théodore-de-Bèze) (way/81088250): a second name glued on in parentheses; real place
+  - Parc Eglantyne-Jebb (Parc des Acacias) (way/40022875): a second name glued on in parentheses; real place
+  - Place Beatriz-Consuelo (Place Charles-Sturm) (way/77945334): a second name glued on in parentheses; real place
+- **unsure: wrong object's name** (2)
+  - Église de Bernex (way/632236534): a park carrying a church's name
+  - Le Lièvre et la Truite (way/894896702): a park whose name reads as an artwork's or a venue's
+
+## geneva (streets)
+
+- **abbreviation** (1)
+  - Ch. de la Parouse: an abbreviated way word, no full-name row
+- **bare type word** (1)
+  - La Promenade: an article plus a type word as the whole name
+- **private road** (2)
+  - Route Blau: a private road (access=private)
+  - Allée Paul: a private road (access=private)
+- **spelling variant** (7)
+  - Chemin Charles Baudouin: a spelling variant of another row of the same street
+  - Chemin François Joulet: a spelling variant of another row of the same street
+  - Allée du Vieil Orme: a spelling variant of another row of the same street
+  - Avenue Jules Crosnier: a spelling variant of another row of the same street
+  - Promenade Louise Boulaz: a spelling variant of another row of the same street
+  - Chemin des Longues Rasses: a spelling variant of another row of the same street
+  - Chemin J. Philibert de Sauvage: a spelling variant of another row of the same street
+- **station corridor** (1)
+  - Passage sous-voies de Pont-Rouge: a station underpass, not a street
+- **typo** (1)
+  - Place Jean-HERIDIER: a stray capitalization typo
+
+## goteborg (places)
+
+- **allotments tagged a park** (1)
+  - Kolonigatans koloniträdgårdar (relation/10753258): allotment gardens tagged a park
+- **community garden tagged a locality (unsure)** (1)
+  - Silverkällan (way/173692111): a collective's garden tagged a locality
+- **descriptions standing in for names (unsure)** (1)
+  - Park Lagmansgatan (way/798501733): a park named only by the type word and its street
+- **family compounds or heritage houses with no article** (2)
+  - way/52564823
+  - node/7683661890
+- **plain typos** (1)
+  - Bergslagsunrnan (node/1834210643): a typo in the name; the object has its own article under the right spelling
+- **planning-code or block-code parks and greens** (1)
+  - Lekplats 320 (relation/10523765): a playground under a municipal number, tagged a park
+- **possible block names tagged quarters (unsure)** (3)
+  - Berglärkan (node/7096292172): possibly a city block's name tagged a quarter; read from the name alone
+  - Bällskär (node/7713526547): possibly a city block's name tagged a quarter; read from the name alone
+  - Snäckeberget (node/7096293809): possibly a city block's name tagged a quarter; read from the name alone
+- **underwater wrecks** (2)
+  - Marina af Hönö (node/6612200789): a wreck under water, a dive spot
+  - Nieman (node/12569811096): a wreck under water, a dive spot
+
+## goteborg (streets)
+
+- **campus or facility own road (-gård)** (1)
+  - Kemigården: possibly a campus or barracks own way
+- **description standing in for a name** (1)
+  - Välkommen: a greeting sign, not a street name
+- **estate courtyard paths (-gård)** (5)
+  - Annas Gård: footway-only name ending -gården, probably a housing courtyard path
+  - Fredrikas Gård: footway-only name ending -gården, probably a housing courtyard path
+  - Idas Gård: footway-only name ending -gården, probably a housing courtyard path
+  - Julianas Gård: footway-only name ending -gården, probably a housing courtyard path
+  - Pilegården: footway-only name ending -gården, probably a housing courtyard path
+- **facility own road** (2)
+  - Campingvägen: a campsite own road
+  - Stora Holm Övningsväg: private raceway practice road
+- **generic type description** (2)
+  - Sidovägen: generic word for a side road
+  - Stigvägen: generic path word
+- **glitched name** (2)
+  - Kvarternästaregången: probable typo twin of Kvartermästaregången
+  - Kvartermästaregången: twin of Kvarternästaregången; one of the pair is a typo
+- **hospital own road** (6)
+  - Blå stråket: colour-named way of a hospital site
+  - Gula stråket: colour-named way of a hospital site
+  - Röda stråket: colour-named way of a hospital site
+  - Vita stråket: colour-named way of a hospital site
+  - Bruna stråket: colour-named way of a hospital site
+  - Gröna stråket: colour-named way of a hospital site
+
+## guadalajara (places)
+
+- **bare type words on landmarks or places** (12)
+  - Canchas deportivas (way/1360536867): the whole name is a type word
+  - Mirador (node/2810103584): the whole name is a type word
+  - Unidad Deportiva (way/706174933): the whole name is a type word
+  - Arboretum (way/1359661272): the whole name is a type word
+  - Parque Público (way/480504147): the whole name is a type word
+  - parque publico (way/683153514): the whole name is a type word
+  - Parque Comunitario (way/480119493): the whole name is a type word
+  - Parque Recreactivo (way/840708042): the whole name is a type word
+  - Astas (way/1492272251): the whole name is a type word
+  - Pileta (way/1195370962): the whole name is a type word
+  - Mirador (way/470409905): the whole name is a type word
+  - Capilla mormona (way/402245973): the whole name is a type word
+- **campus tagged a neighbourhood** (2)
+  - Nucleo Universitario Belenes UDG (way/1347391531): a university campus mapped as a neighbourhood
+  - UAG (node/4831757870): a university campus mapped as a neighbourhood
+- **coto (gated cluster) as a place** (2)
+  - Coto Albano (way/1027132581): a gated cluster tagged a neighbourhood
+  - Coto del Sol (node/4675671875): a gated cluster tagged a neighbourhood
+- **description or duplicate** (2)
+  - Zona turistica Parian de San Pedro Tlaquepaque (way/552497830): a description for a name, mapped twice
+  - Zona turistica Parian de San Pedro Tlaquepaque (way/597015961): a description for a name, mapped twice
+- **family compounds or heritage houses with no article** (2)
+  - node/13971229192
+  - node/2810167115
+- **former settlements tagged towns** (2)
+  - Antiguo Pueblo de Arcediano (node/14005560287): the name says former or ex
+  - Ex Hacienda de los Ibarra (node/14005522595): the name says former or ex
+- **glitched name on a notable object** (3)
+  - Rotonda de Los Ilustres Jalisiences (way/562057473): a misspelled name, the object is notable
+  - Plaza Rotonda de los Jalisciences Ilustres (relation/15777069): a misspelled name, the object is notable
+  - Centro Univesitario de Ciencias Exactas e Ingenierías (way/589064435): a misspelled name, the object is notable
+- **named zones inside one park (nodes tagged park)** (17)
+  - Arenal de los Sauces (node/12259705613): a zone of a larger park mapped as a park node
+  - Borde Surponiente (node/12259705610): a zone of a larger park mapped as a park node
+  - Borde de los Ciruelos (node/12259705611): a zone of a larger park mapped as a park node
+  - Borde de los Pinos (node/12259705606): a zone of a larger park mapped as a park node
+  - Cañada de Román (node/12259538270): a zone of a larger park mapped as a park node
+  - Cañada del Inge Ricardo (node/12259705605): a zone of a larger park mapped as a park node
+  - El Peñón (node/12259538299): a zone of a larger park mapped as a park node
+  - El Pinar de Abajo (node/12259538298): a zone of a larger park mapped as a park node
+  - El Valle de los Aromas (node/12259538300): a zone of a larger park mapped as a park node
+  - Galería de las Higueras (node/12259705604): a zone of a larger park mapped as a park node
+  - Huerto de Don Catarino (node/12259705612): a zone of a larger park mapped as a park node
+  - Meseta de la Cruz (node/12259538271): a zone of a larger park mapped as a park node
+  - Meseta de la Secundaria (node/12259538269): a zone of a larger park mapped as a park node
+  - Meseta de las Burseras (node/12259705607): a zone of a larger park mapped as a park node
+  - Pinar de la Mesa (node/12259705608): a zone of a larger park mapped as a park node
+  - Salto del Agua (node/12259538297): a zone of a larger park mapped as a park node
+  - Triángulo de los Guamúchiles (node/12259705609): a zone of a larger park mapped as a park node
+- **park with a developer or residents as operator** (4)
+  - Parque de las ideas (way/895041902): the operator tag names a developer or a residential
+  - Parque Belcanto (node/9527882478): the operator tag names a developer or a residential
+  - Glorieta Belcanto (node/6141624470): the operator tag names a developer or a residential
+  - Parque Triangular en Haciendas de San Jose (way/708335953): the operator tag names a developer or a residential
+- **peaks named for villages** (1)
+  - node/8593938120
+- **possible duplicate neighbourhood nodes** (4)
+  - Arcos Vallarta (node/4840452995): the same colonia name twice within 1.6 km
+  - Jardines de la Victoria (node/4840453016): the same colonia name twice within 1.6 km
+  - Jardines del Bosque (node/4840453001): the same colonia name twice within 1.6 km
+  - Lomas del Bosque (node/4840355549): the same colonia name twice within 1.6 km
+- **public art tagged a monument or park, no article** (9)
+  - Escultura La Estampida (node/2325628061): a sculpture, bust or tribute with no article or wikidata
+  - Escultura La Maestra (node/11590562197): a sculpture, bust or tribute with no article or wikidata
+  - Escultura de la Madre Patria (node/2325628062): a sculpture, bust or tribute with no article or wikidata
+  - El Grito Continua (node/8406273917): a sculpture, bust or tribute with no article or wikidata
+  - Hemiciclo Rotary International (node/12434133851): a sculpture, bust or tribute with no article or wikidata
+  - Homenaje a la Profesión Médica (node/12434133852): a sculpture, bust or tribute with no article or wikidata
+  - Busto a Hidalgo (way/183670190): a sculpture, bust or tribute with no article or wikidata
+  - Busto a Morelos (way/183670189): a sculpture, bust or tribute with no article or wikidata
+  - Club de Leones Guadalajara (node/12784690700): a sculpture, bust or tribute with no article or wikidata
+- **religious residence or house, name alone** (5)
+  - node/5711675737
+  - way/276421035
+  - way/466278328
+  - node/4663488905
+  - node/11180479337
+- **river row with a street's name** (6)
+  - 20 de Noviembre (way/1373216727): a watercourse carrying a street date name
+  - 20 de Noviembre (way/1373216728): a watercourse carrying a street date name
+  - 20 de Noviembre (way/1373216730): a watercourse carrying a street date name
+  - 20 de Noviembre (way/1373216731): a watercourse carrying a street date name
+  - 20 de Noviembre (way/1373216732): a watercourse carrying a street date name
+  - 20 de Noviembre (way/1373216733): a watercourse carrying a street date name
+- **road medians (camellon) tagged parks** (6)
+  - Camellon principal Los Cantaros (way/825216932): a road median tagged a park
+  - Camellón Fraccionamiento los cantaros (way/825217128): a road median tagged a park
+  - Camellón Fraccionamiento los cantaros (way/825218942): a road median tagged a park
+  - Camellón Zombie (way/991038901): a road median tagged a park
+  - camellon los cantaros (way/825032654): a road median tagged a park
+  - camellon segunda fase los cantaros (way/825032841): a road median tagged a park
+- **station rows to check** (1)
+  - José Cuervo Express (way/149816275): a rail station named for a tourist train brand
+- **stray trailing period on a real church** (5)
+  - Parroquia El Calvario. (node/7606725686): a full stop glued on the name
+  - Parroquia Guadalupe Reina de los Ángeles. (way/1062782759): a full stop glued on the name
+  - Parroquia Nuestra Señora del Refugio. (way/1062782361): a full stop glued on the name
+  - Parroquia Nuestra Señora del Tepeyac. (node/7606672538): a full stop glued on the name
+  - Parroquia San Francisco de Asís. (node/7606689956): a full stop glued on the name
+- **typo in a neighbourhood's prefix** (3)
+  - Fracccionamiento Las Villas (node/4677484115): the prefix word (Fraccionamiento, Rinconada) is misspelled
+  - Fraccionamineto Terra Vista residencial (node/13073055043): the prefix word (Fraccionamiento, Rinconada) is misspelled
+  - Riconada de la Arboleda (node/4840453014): the prefix word (Fraccionamiento, Rinconada) is misspelled
+- **unsure park** (6)
+  - Centro Recreativo SJF (node/5278718223): the name does not read as a park's
+  - Triangulo de la Gordura (way/160119594): the name does not read as a park's
+  - Galerias (way/544006973): the name does not read as a park's
+  - Parque P. Ketosteril (way/126794647): the name does not read as a park's
+  - Rafael Vaca y Marlla Arzate (way/291224426): the name does not read as a park's
+  - Plaza Portobello (way/466289704): the name does not read as a park's
+- **unsure place of worship** (2)
+  - El Tinaco Azul (node/5739904759): the name is not a church's
+  - Oracion a Virgen de Hostitapaquillo (way/656869835): the name is not a church's
+
+## guadalajara (private)
+
+- **abbreviation** (2)
+  - Calle R. de la Loma: abbreviated word in the name
+  - Calle R. del Cantil: abbreviated word in the name
+- **series number** (7)
+  - Privada El Tecolote 1: trailing number or numeral may be part of a series name
+  - Privada El Tecolote 2: trailing number or numeral may be part of a series name
+  - Privada El Tecolote 3: trailing number or numeral may be part of a series name
+  - Privada Torreón 1: trailing number or numeral may be part of a series name
+  - El Sereno I: trailing number or numeral may be part of a series name
+  - Cerrada 5º De Los Abetos: trailing number or numeral may be part of a series name
+  - Cerrada 6º De Los Abetos: trailing number or numeral may be part of a series name
+- **typo** (4)
+  - Paseo Pedreirac: possible typo beside a sibling spelling
+  - Calle Jardines de Fontain Ebleu Norte: possible typo beside a sibling spelling
+  - Calle Jardines de Fontain Ebleu Poniente: possible typo beside a sibling spelling
+  - Calle Paseo de los Agustínes Sur: possible typo beside a sibling spelling
+
+## guadalajara (streets)
+
+- **Acceso names** (4)
+  - Acceso Altus Bosques: an Acceso road of an estate or venue
+  - Acceso Arena VFG: an Acceso road of an estate or venue
+  - Acceso Ciudad Bugambilias: an Acceso road of an estate or venue
+  - Acceso VFG: an Acceso road of an estate or venue
+- **estate-named road** (19)
+  - Adamás Residencial: a road named for its estate or housing unit
+  - Altea Residencial: a road named for its estate or housing unit
+  - Bambú Residencial: a road named for its estate or housing unit
+  - Carrara Residencial: a road named for its estate or housing unit
+  - El Bosque Residencial: a road named for its estate or housing unit
+  - Hacienda Residencial: a road named for its estate or housing unit
+  - Las Palmas Residencial: a road named for its estate or housing unit
+  - Mítica Residencial: a road named for its estate or housing unit
+  - Santillana Parque Residencial: a road named for its estate or housing unit
+  - Arboleda Coto Residencial: a road named for its estate or housing unit
+  - Residencial 2000: a road named for its estate or housing unit
+  - Residencial Campo Verde: a road named for its estate or housing unit
+  - Residencial Elite: a road named for its estate or housing unit
+  - Residencial El Tapatío: a road named for its estate or housing unit
+  - Residencial La Peña: a road named for its estate or housing unit
+  - Fraccionamiento del Nilo: a road named for its estate or housing unit
+  - Unidad Habitacional Álamos: a road named for its estate or housing unit
+  - Unidad FOVISSSTE Estadio: a road named for its estate or housing unit
+  - Altavista Residencial Bosques 450: a road named for its estate or housing unit
+- **private plot-code street** (2)
+  - Privada 1502: a bare number after Privada
+  - Privada 5: a bare number after Privada
+- **unsure facility or rail road** (10)
+  - Avenida Brad Knight: possibly a facility, venue or rail alignment road, tags unclear
+  - Boulevard Andares: possibly a facility, venue or rail alignment road, tags unclear
+  - Circuito De Aprendizaje - Camino Sinuoso: possibly a facility, venue or rail alignment road, tags unclear
+  - Circuito De Aprendizaje - La Ciudad: possibly a facility, venue or rail alignment road, tags unclear
+  - Circuito de Caminata Viveros del Valle: possibly a facility, venue or rail alignment road, tags unclear
+  - Circuito Bosque Urbano Tlaquepaque: possibly a facility, venue or rail alignment road, tags unclear
+  - Carretera Club Deportivo Universidad de Guadalajara: possibly a facility, venue or rail alignment road, tags unclear
+  - Circuito Logistica Aeropuerto: possibly a facility, venue or rail alignment road, tags unclear
+  - Calle Ferrocarril México-Guadalajara-Nogales: possibly a facility, venue or rail alignment road, tags unclear
+  - FFCC México - Guadalajara - Nogales: possibly a facility, venue or rail alignment road, tags unclear
+- **unsure house number or street number** (25)
+  - Privada Calle 22: a name ending in a number that may be an address or a numbered street
+  - Privada Ocampo 16: a name ending in a number that may be an address or a numbered street
+  - Privada Ocampo 26: a name ending in a number that may be an address or a numbered street
+  - Privada San Roberto 46: a name ending in a number that may be an address or a numbered street
+  - Privada San Roberto 47: a name ending in a number that may be an address or a numbered street
+  - Parral 46: a name ending in a number that may be an address or a numbered street
+  - Fresnos 70: a name ending in a number that may be an address or a numbered street
+  - Occidental 40: a name ending in a number that may be an address or a numbered street
+  - Mirador 63: a name ending in a number that may be an address or a numbered street
+  - Mirador 70: a name ending in a number that may be an address or a numbered street
+  - Mirador 75: a name ending in a number that may be an address or a numbered street
+  - Flores Magón 145: a name ending in a number that may be an address or a numbered street
+  - Vista de la Montaña 75: a name ending in a number that may be an address or a numbered street
+  - Vista Lomas 38: a name ending in a number that may be an address or a numbered street
+  - Vista de las Lomas 38: a name ending in a number that may be an address or a numbered street
+  - Vista de las Lomas 52: a name ending in a number that may be an address or a numbered street
+  - Toronja 77: a name ending in a number that may be an address or a numbered street
+  - Sandía 113: a name ending in a number that may be an address or a numbered street
+  - Pirules 160: a name ending in a number that may be an address or a numbered street
+  - Pirules 300: a name ending in a number that may be an address or a numbered street
+  - Privada Colón 150: a name ending in a number that may be an address or a numbered street
+  - Privada Narciso 215: a name ending in a number that may be an address or a numbered street
+  - Privada San Roberto 113: a name ending in a number that may be an address or a numbered street
+  - Calle Pozo 100: a name ending in a number that may be an address or a numbered street
+  - Calle Frambuesa 100: a name ending in a number that may be an address or a numbered street
+
+## kitakyushu (places)
+
+- **bare type word or generic description on a landmark** (13)
+  - 手水舎 (node/8154773325): a shrine fixture named only by its kind (water basin)
+  - 演舞場 (node/8154773326): a shrine fixture named only by its kind (dance stage)
+  - 文殊菩薩 (node/8154773328): a shrine fixture named only by the figure it holds
+  - 針塚 (node/8154773329): a shrine fixture named only by its kind (needle mound)
+  - 神籬磐境 (node/13387851891): a generic term for a sacred enclosure as the whole name
+  - 荒神様 (node/4851161947): a generic deity word as the whole name
+  - 正一位稲荷大明神 (node/6189795868): a generic deity title as the whole name
+  - 遺跡 (node/9019685341): the word for ruins as the whole name
+  - 仏舎利塔 (node/5487115878): the word for a stupa as the whole name
+  - 浄水場跡 (way/815056105): a description, waterworks ruins, as the whole name
+  - 自由広場 (node/5487115873): a generic open-space description inside a named park
+  - 多目的自由広場 (node/5487115874): a generic open-space description inside a named park
+  - 自然動物公園 (node/6562374173): a generic zoo-park description 200 m from the named zoo row
+- **company grounds tagged a park** (1)
+  - YASKAWAの森 (way/1355886300): a company green tagged a park; public opening inferred
+- **duplicate row, one park in two parts** (4)
+  - 勝山公園 (way/1124048009): one of two rows with one name, 310 m apart
+  - 東田大通公園 (way/1055572497): one of two rows with one name, 340 m apart
+  - 皇后崎公園 (way/675806191): one of two rows with one name, 360 m apart
+  - 間島 (way/858485719): one of two beach rows named for one islet, 390 m apart
+- **duplicated gazetteer place** (3)
+  - 隠蓑 (node/8487541618): one of two quarter rows with one name, 410 m apart
+  - 大字永犬丸 (node/12805153973): one of two quarter rows with one name, 1.4 km apart
+  - 頓田 (node/8487460500): one of two quarter rows with one name, 2.6 km apart
+- **estate park** (3)
+  - UR紅梅団地公園 (way/799127854): a housing estate park, named for the estate and its landlord
+  - 養福寺団地公園 (way/1368221978): a park named for a housing estate
+  - 大蔵ビレッジ公園 (way/695629583): a park named for a housing development
+- **estate tagged a quarter** (2)
+  - 城野団地 (node/8487503656): an address area named for a housing estate
+  - 徳力団地 (node/8487541633): an address area named for a housing estate
+- **housing block tagged historic** (1)
+  - 門司港1950団地 (way/824602430): a housing block tagged a ruin, no article
+- **name with a bracketed addition** (4)
+  - 九州共立大学（経済学部） (way/354371264): a faculty glued on in brackets; the only row for the university
+  - 九州国際大学（国際関係学部） (way/354371263): a faculty glued on in brackets; the only row for the university
+  - 九州栄養福祉大学（食物栄養学部） (way/354371265): a faculty glued on in brackets
+  - 北九州市立大学（経済学部） (way/353920879): a faculty glued on in brackets; the only row for the university
+- **pitch tagged a park** (2)
+  - 朽網臨空公園グラウンド (way/400529643): a sports ground of a park tagged a park of its own
+  - 紫川湖畔公園グラウンド (way/1147748611): a sports ground of a park tagged a park of its own
+- **plain typo** (2)
+  - 堺町町公園 (way/559461625): a doubled character in the name
+  - 上本町ー丁目公園 (way/698515616): a long-vowel mark where the numeral one belongs
+- **shrine office tagged a place of worship** (2)
+  - 天疫神社社務所 (node/6478595004): a shrine office tagged a place of worship, 35 m from the shrine row
+  - 淡島神社 社務所 (node/8154773321): a shrine office tagged a place of worship beside the shrine row
+
+## kitakyushu (streets)
+
+- **code on minor way** (2)
+  - 羽衣町大蔵1号線: a numbered route code on a path
+  - 元城町西川頭町1号線: a numbered route code on a service way and an unclassified way
+- **municipal road code** (24)
+  - 市道浅野10号線: a municipal road code name
+  - 市道浅野11号線: a municipal road code name
+  - 市道浅野12号線: a municipal road code name
+  - 市道浅野19号線: a municipal road code name
+  - 市道浅野20号線: a municipal road code name
+  - 市道浅野21号線: a municipal road code name
+  - 市道浅野22号線: a municipal road code name
+  - 市道浅野23号線: a municipal road code name
+  - 市道浅野24号線: a municipal road code name
+  - 市道浅野25号線: a municipal road code name
+  - 市道浅野26号線: a municipal road code name
+  - 市道浅野28号線: a municipal road code name
+  - 市道浅野31号線: a municipal road code name
+  - 市道浅野34号線: a municipal road code name
+  - 市道浅野3号線: a municipal road code name
+  - 市道浅野4号線: a municipal road code name
+  - 市道浅野7号線: a municipal road code name
+  - 市道浅野8号線: a municipal road code name
+  - 市道浅野9号線: a municipal road code name
+  - 市道空港北町1号線: a municipal road code name
+  - 市道空港北町2号線: a municipal road code name
+  - 市道空港北町3号線: a municipal road code name
+  - 市道空港北町4号線: a municipal road code name
+  - 町道空港南町1号線: a municipal road code name
+- **planning code** (1)
+  - 都市計画道路 汐井町牧山海岸線: a planning-designation prefix on a road name (dated 2024)
+- **unsure** (2)
+  - 公園横通り: may be a description (beside the park street) rather than a name
+  - 牡牛座の道: a star-sign themed road, perhaps a development road; two ways, one-way
+- **variant spelling** (1)
+  - 297号鱒淵八幡東自転車道線: a spelling variant (another character) of a cycle route name; 19 residential ways carry it
+
+## liepaja (places)
+
+- **duplicated gazetteer hamlets** (1)
+  - Laumas rajons (node/13458819823): a second node for a neighbourhood that already carries this name as its alt
+- **family compounds or heritage houses with no article** (3)
+  - way/305602687
+  - way/225089402
+  - way/88674645
+
+## liepaja (streets)
+
+- **unsure** (1)
+  - Zirgu sala: an island name on service and residential ways, unsure it is a street name
+
+## monterrey (places)
+
+- **bare type word on a landmark** (17)
+  - Area recreativa (way/482114896): a type phrase as the whole name
+  - area de descanso (node/13599643841): a type phrase as the whole name
+  - Parque de Juegos (node/7746808881): a type phrase as the whole name
+  - Parque para niños (way/156274890): a type phrase as the whole name
+  - Parquesito (way/539303532): a misspelt diminutive of the type word
+  - Plasita (way/784115788): a misspelt diminutive of the type word
+  - Parque Lineal (way/1375951211): a type phrase as the whole name
+  - Parque hundido (way/200354558): a generic park phrase
+  - Parque Hundido (way/141009654): a generic park phrase
+  - Parque Hundido (way/155861369): a generic park phrase
+  - Rotonda (way/764284631): a type word as the whole name
+  - Arco (node/11860677398): a type word as the whole name
+  - Mirador (node/6085857315): a type word as the whole name, tagged a peak
+  - Centro Deportivo (way/401098523): a type phrase as the whole name
+  - Estadio de Beisbol (way/613570633): a type phrase as the whole name
+  - Canalon (way/469292222): a type word as the whole name
+  - Comunidad Cristiana (node/4121647608): a generic phrase as the whole name
+- **description standing in for a name, unsure** (7)
+  - Parque de la cancha (way/1100674681): a description of the park
+  - Parque de los arboles (way/704407951): a description of the park
+  - Parque de madera (way/309104183): a description of the park
+  - zona de pericos (way/668725041): a description tagged a park
+  - minipiramide (node/6141585789): a description tagged a monument
+  - Jardinera Acapulco (way/653038361): a planter bed named for its street, tagged a park
+  - Jardinera Lázaro Cárdenas (way/653038374): a planter bed named for its street, tagged a park
+- **estate tagged a hamlet or neighbourhood** (3)
+  - Campestre El Barro (node/8250250879): a country estate tagged a hamlet
+  - Campestre Los Cristales (node/8250268960): a country estate tagged a hamlet
+  - Privada Roma (node/3256518880): a privada tagged a neighbourhood, no access tag
+- **open-air industrial exhibit tagged a monument, no article** (5)
+  - Crisol de Fundición (node/3521555486): a foundry relic on display in a park
+  - Las Estufas (node/3521733686): a foundry relic on display in a park
+  - Olla de Fundición #4 (node/11734561988): a numbered foundry relic on display
+  - Olla de Vaciado #9 (node/11734558350): a numbered foundry relic on display
+  - Grúa Portal (way/1262980996): a foundry crane on display in a park
+- **possible business or pitch tagged a park, unsure** (3)
+  - Plaza Gastronómica (way/1283044560): possibly a food court tagged a park
+  - CEDECO (way/375133972): an acronym, possibly a community centre tagged a park
+  - Campo Los Pinos (way/1322919572): possibly a pitch tagged a park
+- **public art tagged a monument, no article** (4)
+  - Estatua Virgen de Rosario (node/5794653472): a statue tagged a place of worship
+  - Virgen de Guadalupe (node/8234930880): a sculpture by its own inscription
+  - La Lagartera (way/345504883): a sculpture, artist credited in the inscription
+  - La Radiodifusión (node/3521567806): a sculpture or commemorative piece
+- **religious house, centre or office tagged a place of worship, no article** (4)
+  - node/7616694520
+  - way/815550056
+  - node/4977980090
+  - way/525048573
+- **station row, unsure** (3)
+  - Pablo G. Garza (way/1319957016): a monorail station with no construction tag, opening not confirmed
+  - Arena Monterrey (node/308521309): a Line 1 station whose name may be wrong
+  - Félix U. Gomez (node/3788005136): second row of one interchange, accent missing
+- **typo, unsure** (1)
+  - Santa Isael (way/317701104): a typo that may change the name
+- **wrong object's name, unsure** (1)
+  - Roma (node/988320548): a church carrying only its neighbourhood's name
+
+## monterrey (private)
+
+- **code** (1)
+  - Andador U-ERRE: possible code or brand name
+- **double type word** (11)
+  - Calle Paseo Ginebra: two type words in a row
+  - Calle Paseo de Los Alpes: two type words in a row
+  - Calle Paseo de la Plata: two type words in a row
+  - Calle Paseo de los Alpes: two type words in a row
+  - Calle Paseo de los Olivos: two type words in a row
+  - Calle Paseo del Ciprés: two type words in a row
+  - Privada Paseo San Sebastián: two type words in a row
+  - Privada Paseo de la Montaña: two type words in a row
+  - Privada Paseo de las Lajas: two type words in a row
+  - Privada Paseo de las Minas: two type words in a row
+  - Privada Paseo las Villas: two type words in a row
+- **generic description** (1)
+  - Camino grande: lowercase generic wording
+- **series number** (7)
+  - Balcones 3: trailing number, may be a real series name
+  - Balcones n°2: trailing number, may be a real series name
+  - Privada Balcones Número 3: trailing number, may be a real series name
+  - Privada del Rincón 1: trailing number, may be a real series name
+  - Privada del Rincón 2: trailing number, may be a real series name
+  - Privada del Rincón 3: trailing number, may be a real series name
+  - Privada del Rincón 4: trailing number, may be a real series name
+- **spelling variant** (2)
+  - Calle Provensa: possible misspelling
+  - Calzada Iberica: unaccented twin of Calzada Ibérica
+
+## monterrey (streets)
+
+- **bare type word** (1)
+  - Calle Acceso: generic type word after Calle
+- **motorway ramp or motorway** (17)
+  - Autopista de Peaje Cadereyta-Monterrey: motorway, no ordinary street
+  - Autopista de Peaje Monterrey-Cadereyta: motorway
+  - Autopista de Peaje Monterrey-Saltillo: motorway link only
+  - Avenida La Rioja: carried only by link ways
+  - Avenida Privadas de Anáhuac: carried only by link ways
+  - Avenida San Nicolas: carried only by link ways
+  - Calle Palacio De Justicia: carried only by link ways
+  - Calzada San Pedro: carried only by link ways
+  - Hermosillo: carried only by link ways
+  - Retorno Bello Amanecer: carried only by link ways
+  - Retorno Constitución: carried only by link ways
+  - San Rafael: carried only by link ways
+  - Sierra de lampazos: carried only by link ways
+  - Via Rapida a Monterrey: motorway
+  - Via Rapida al Aeropuerto: motorway
+  - Vía Rápida a Monterrey: motorway
+  - Vía Rápida al Aeropuerto: motorway
+- **typo, accent** (15)
+  - Adàn Hernàndez R.: grave accent typo on a vowel
+  - Antonio Dìaz Soto y Gama: grave accent typo on a vowel
+  - Calle Plutòn: grave accent typo on a vowel
+  - Calle Torreòn: grave accent typo on a vowel
+  - Dolores Ladròn de Guevara: grave accent typo on a vowel
+  - Enrique Flores Magòn: grave accent typo on a vowel
+  - Eucadio de Leòn: grave accent typo on a vowel
+  - Federico Gonzàlez Garza: grave accent typo on a vowel
+  - Hèrcules: grave accent typo on a vowel
+  - Jesùs Flores Magòn: grave accent typo on a vowel
+  - Penèlope: grave accent typo on a vowel
+  - Privada Nicolò Paganini: grave accent typo on a vowel
+  - Ricardo Flores Magòn: grave accent typo on a vowel
+  - Teòfilo Martìnez Perèz: grave accent typo on a vowel
+  - Torreòn: grave accent typo on a vowel
+- **unsure: acronym** (1)
+  - CROCC: a union acronym; alt name reads Prolongación Vicente Elizondo
+- **unsure: all caps** (1)
+  - AVENIDA DE LA LUZ: all caps
+- **unsure: business-named** (8)
+  - Calle Hotel Río: no hotel object found in the cache; Bing-sourced residential way, likely a hotel's access road; lean drop
+  - Privada Envases Del Norte: path named for a company
+  - Calle Tecnocentro: eight service ways, business-park name
+  - Andador DIF: an agency's alley
+  - Banco Central: bank name; alt name reads Calle Primera Magistratura
+  - Central Park: English; three residential ways, maybe a development's roads
+  - Federación de Trabajadores de Nuevo León: a union's own road
+  - Centro Obrero: a workers' centre
+- **unsure: code** (1)
+  - MEX-40: a route code as a name
+- **unsure: estate** (1)
+  - Acacia Residencial: a residential estate's road
+- **unsure: glitched order** (2)
+  - Calle Segunda Andador Paz: word order glitch
+  - Calle Tercero Andador Paz: word order glitch
+
+## most (places)
+
+- **unsure: administrative district as a place** (1)
+  - okres Most (relation/442417): an administrative district reaching well beyond the map, in as a place row
+- **unsure: description or site marker** (1)
+  - Původní umístění Děkanského kostela (way/1467701572): a description standing in for a name (the former site of a moved church); unsure whether a marker stands there
+- **unsure: inscription as a name** (1)
+  - Na Památku vojenským obětem komunistického bezpráví (node/639173485): a memorial whose name is its inscription; wikidata tag only, no article confirmed
+- **unsure: object named for its model** (1)
+  - FLAK 40 (node/11887477865): a replica gun in a park, named for the gun model; its link is the model's article, own article not confirmed
+- **unsure: service note as a station alt** (1)
+  - Most, nádraží (node/3911158753): a second stop position whose English name is an alighting-only note; it supplies the row's alt, the row itself stays
+- **unsure: typo in a name** (1)
+  - Lounická kopec (node/4223957714): a peak name with a grammatical slip (adjective and noun disagree); no other tags
+
+## most (streets)
+
+- **glitched name** (1)
+  - Přehradni cesta: a missing accent beside a correct duplicate name
+
+## odense (places)
+
+- **duplicated gazetteer hamlets** (1)
+  - node/11291844293
+- **family compounds or heritage houses with no article** (2)
+  - way/190246768
+  - way/153974860
+- **unsure: a business tagged a park** (1)
+  - Galleri Galschiøt (way/619756408): an artist's workshop and gallery tagged a park, with an article
+- **unsure: a memorial with no article** (2)
+  - Adskilte (node/7216857415): a monument with no other tag and no article, probably public art
+  - Forn Siðrs Runesten (node/9129919110): a modern memorial stone in a cemetery, no article
+- **unsure: a possible duplicate row** (1)
+  - Dalum Klosterkirke (way/146056535): a church row 75 m from the parish church's row, no article
+- **unsure: a residents' garden tagged a park** (1)
+  - Sønderparken (way/681478283): a community garden that is its own operator, tagged a park
+- **unsure: wikidata of the original, not of the object** (1)
+  - Odinstårnet (model) (node/7164850197): a model of a demolished tower; its article is the tower's
+
+## odense (streets)
+
+- **business road** (3)
+  - Cortex Park: a science park's own road
+  - Cortex Park Vest: a science park's own road
+  - Servicebyen: a business area's road
+- **campus road** (1)
+  - Campusvej: a campus road
+- **hospital road** (4)
+  - Hospitalsringen: a hospital's ring road
+  - Søndre Hospitalsvej: a hospital's access road
+  - Vestre Hospitalsvej: a hospital's access road
+  - Helikoptervej: a helipad service road
+
+## oslo (places)
+
+- **apartment blocks tagged as localities** (16)
+  - Frankrikegården (node/9508285838): reads as a named apartment block tagged a locality (name and position only)
+  - Italiagården (node/9508285868): reads as a named apartment block tagged a locality (name and position only)
+  - Portalgården (node/9508285869): reads as a named apartment block tagged a locality (name and position only)
+  - Lirekassa (node/9508285872): reads as a named apartment block tagged a locality (name and position only)
+  - Langgården (node/9508285873): reads as a named apartment block tagged a locality (name and position only)
+  - Tysklandsgården (node/9508285874): reads as a named apartment block tagged a locality (name and position only)
+  - Englegården (node/9508285879): reads as a named apartment block tagged a locality (name and position only)
+  - Strykejernet (node/9508285880): reads as a named apartment block tagged a locality (name and position only)
+  - Englandsgården (node/13280145218): reads as a named apartment block tagged a locality (name and position only)
+  - Blågården (node/13280145219): reads as a named apartment block tagged a locality (name and position only)
+  - Solgården (node/13715634847): reads as a named apartment block tagged a locality (name and position only)
+  - Kirsebærgården (node/13715634848): reads as a named apartment block tagged a locality (name and position only)
+  - Funkisgården (node/13715634849): reads as a named apartment block tagged a locality (name and position only)
+  - Søylegården (node/13715634850): reads as a named apartment block tagged a locality (name and position only)
+  - Morellgården (node/13715596513): reads as a named apartment block tagged a locality (name and position only)
+  - Nordkapp (node/13715597005): reads as a named apartment block tagged a locality (name and position only)
+- **generic park word** (5)
+  - Lommeparken (way/1058666314): a generic park word or a park word with a direction as the whole name
+  - Pocketparken (way/837640491): a generic park word or a park word with a direction as the whole name
+  - Park vest (way/335046470): a generic park word or a park word with a direction as the whole name
+  - Øvre park (way/268683600): a generic park word or a park word with a direction as the whole name
+  - Østre parkdrag (way/1434402611): a generic park word or a park word with a direction as the whole name
+- **historic farm or croft site, no farmyard, no article** (1)
+  - Bakken (node/1375248821): a historic croft site with no farmyard and no article
+- **historic farm or croft with a farmyard, no article** (13)
+  - Berg (way/100699900): a historic croft with a farmyard and no article; ruling 3 took only the names ending in gard
+  - Berntsberg (relation/14861977): a historic croft with a farmyard and no article; ruling 3 took only the names ending in gard
+  - Blåsås (way/100711541): a historic farm with a farmyard and no article; ruling 3 took only the names ending in gard
+  - Engelsrud (way/100711547): a historic croft with a farmyard and no article; ruling 3 took only the names ending in gard
+  - Grønvoll (way/123235755): a historic croft with a farmyard and no article; ruling 3 took only the names ending in gard
+  - Hallset (way/25801587): a historic farm with a farmyard and no article; ruling 3 took only the names ending in gard
+  - Halvorsrud (way/123266583): a historic croft with a farmyard and no article; ruling 3 took only the names ending in gard
+  - Hammeren (way/100711534): a historic croft with a farmyard and no article; ruling 3 took only the names ending in gard
+  - Nordre Låkeberget (way/100699837): a historic croft with a farmyard and no article; ruling 3 took only the names ending in gard
+  - Sagbakken (way/100692479): a historic croft with a farmyard and no article; ruling 3 took only the names ending in gard
+  - Salmakerstua (way/100699849): a historic croft with a farmyard and no article; ruling 3 took only the names ending in gard
+  - Steinsrud (way/101311622): a historic croft with a farmyard and no article; ruling 3 took only the names ending in gard
+  - Svingen (way/101222539): a historic croft with a farmyard and no article; ruling 3 took only the names ending in gard
+- **historic route named by a description** (8)
+  - Byvei fra Haugsbygda (relation/2674312): a historic route named by a description of where it runs
+  - Byveien Burås-Enga (relation/1786979): a historic route named by a description of where it runs
+  - Gamle Hadelandsvei via Maridalen til Akersneset (relation/1782816): a historic route named by a description of where it runs
+  - Kølavei Slora-Burud-Sleaskjulet (relation/6358728): a historic route named by a description of where it runs
+  - Oldtidsveien forbi Østensjøvannet (relation/3403035): a historic route named by a description of where it runs
+  - Seterveier i Hakadal (relation/4502681): a historic route named by a description of where it runs
+  - Seterveier i Vestre Aker sogn (relation/4502680): a historic route named by a description of where it runs
+  - Holmenkollen 50km: 2x25km (1951-1998) (relation/1450386): a historic route named by a description of where it runs
+- **not a park** (4)
+  - node/12401818916
+  - node/12401831770
+  - Oslo Summerpark (node/7240592307): reads as a commercial activity park tagged a park (name only)
+  - Biblioteksparken (way/1371007440): its description doubts that it is a park yet
+- **platform letter on a stop name** (4)
+  - Sinsenkrysset (G) (node/1180904125): a tram stop position with a platform letter glued on the name; two rows per stop
+  - Sinsenkrysset (H) (node/30391593): a tram stop position with a platform letter glued on the name; two rows per stop
+  - Storo (A) (node/2454616597): a tram stop position with a platform letter glued on the name; two rows per stop
+  - Storo (B) (node/2454616596): a tram stop position with a platform letter glued on the name; two rows per stop
+- **shieling mapped as a farmyard** (4)
+  - Lørenseter (way/26552882): a shieling mapped as a farmyard, no article
+  - Nordseter (way/100711546): a shieling mapped as a farmyard, no article
+  - Ospeskog (way/852020349): a shieling mapped as a farmyard, no article
+  - Svartorseter (way/102657082): a shieling mapped as a farmyard, no article
+- **statue or memorial with its subject's article** (14)
+  - Albert Nordengen (node/12963921538): a public statue, bust or memorial carrying its subject's article and none of its own
+  - Amaldus Nielsen (node/2792079636): a public statue, bust or memorial carrying its subject's article and none of its own
+  - Arne Garborg (node/12943856329): a public statue, bust or memorial carrying its subject's article and none of its own
+  - Arno Berg (node/8070893062): a public statue, bust or memorial carrying its subject's article and none of its own
+  - Arvid Storsveen (node/12092706789): a public statue, bust or memorial carrying its subject's article and none of its own
+  - Civilingeniør H. E. Heyerdahl (node/13236628537): a public statue, bust or memorial carrying its subject's article and none of its own
+  - Edvard Grieg (node/12945442516): a public statue, bust or memorial carrying its subject's article and none of its own
+  - Eivind Berggrav (node/12707314255): a public statue, bust or memorial carrying its subject's article and none of its own
+  - Gunnar Schjelderup (node/3725012224): a public statue, bust or memorial carrying its subject's article and none of its own
+  - Jens Olav Walaas Selvaag (node/6578285081): a public statue, bust or memorial carrying its subject's article and none of its own
+  - John Collett (node/12092702402): a public statue, bust or memorial carrying its subject's article and none of its own
+  - Niels Henrik Abel 1802–1829 (node/12950534556): a public statue, bust or memorial carrying its subject's article and none of its own
+  - Theodor Julius Løvstad (1843 - 1913) (node/12978566131): a public statue, bust or memorial carrying its subject's article and none of its own
+  - MS Scandinavian Star minnesmerke (node/2772161019): a public statue, bust or memorial carrying its subject's article and none of its own
+- **unsure** (5)
+  - Airship “Norge” Landing Site (node/2194522600): an English description as the name of a historic site
+  - way/756392960
+  - Dyrafjeld (way/1539181176): a vessel at a berth tagged a historic ship, no article
+  - Grefsenkollen øst (node/7626196291): a peak name plus a direction, from the mapper batch that holds a test object
+  - Årvollåsen nordvest (node/7626196288): a peak name plus a direction, from the mapper batch that holds a test object
+
+## oslo (streets)
+
+- **code-numbered estate road** (3)
+  - Alfaset 1. industrivei: numbered road of an industrial estate
+  - Alfaset 2. industrivei: numbered road of an industrial estate
+  - Alfaset 3. industrivei: numbered road of an industrial estate, mostly private or no access
+- **estate named on minor ways** (1)
+  - Kampen hageby: a garden-city estate name on footways and steps, not a street
+- **ordinal cross-road names** (2)
+  - Første tverrvei: numbered cross road on a minor service way
+  - Andre tverrvei: numbered cross road on a minor service way
+- **terrain ending** (1)
+  - Blokkajordet: one footway, may be a field rather than a street
+- **unsure** (3)
+  - Mølleparken: park or estate name on service ways
+  - Battery Road: English name on one service way
+  - Vulkan: a venue district name on service and pedestrian ways
+
+## riga (places)
+
+- **English-only names** (2)
+  - Jews in Latvia (node/4246679918): an English-only name on a museum with a Latvian article
+  - Speedway Stadium (way/727263469): an English-only generic name on a stadium
+- **a business or development as a locality** (4)
+  - Alfa (node/7603970478): a locality that seems named for the shopping center there
+  - Tabakas Fabrikas kvartāls (node/9370631775): a redeveloped factory quarter tagged a locality
+  - Tallinas ielas kvartāls (node/6816178758): a venue quarter tagged a locality
+  - Veldzes kvartāls (node/12400605612): a development quarter tagged a locality
+- **a name of a thing merged away** (1)
+  - Vecanniņmuižas parks (node/12396517747): a historic park name; its description says the park is now part of another
+- **an office tagged a place of worship** (2)
+  - Latvijas Baptistu Draudžu savienība (node/10047464343): a church union's office tagged a place of worship
+  - Dhanvantari (node/9328762367): an ayurveda center tagged a place of worship, possibly a business
+- **bare type words on landmarks** (10)
+  - Komandpunkts (node/5927173333): a type word (command post) as the whole name, a disused bunker
+  - way/1308555384
+  - Jehovas liecinieku Valstības zāle (way/155411311): a denomination's hall type as the whole name, one of 3
+  - Jehovas liecinieku valstības zāle (way/87651511): a denomination's hall type as the whole name, one of 3
+  - Jehovas liecinieku valstības zāle (way/192707095): a denomination's hall type as the whole name, one of 3
+  - Pēdējo Dienu Svēto Jēzus Kristus baznīca (way/445002592): a denomination's own name as the whole name, one of 3
+  - Pēdējo Dienu svēto Jēzus Kristus Baznīca (relation/14212917): a denomination's own name as the whole name, one of 3
+  - Pēdējo dienu svēto Jēzus Kristus baznīca (node/2820185291): a denomination's own name as the whole name, one of 3
+  - Latvijas Apvienotā metodistu baznīca (way/164306077): a denomination's own name as the whole name, one of 2
+  - Latvijas Apvienotā metodistu baznīca (way/215529671): a denomination's own name as the whole name, one of 2
+- **coded or cut locality names** (6)
+  - 1. terase (node/4511175500): a numbered terrace, a code beside a type word
+  - 2. terase (node/4511175501): a numbered terrace, a code beside a type word
+  - Bērnu (node/4511175479): a bare genitive with no noun, a cut name
+  - Ezerkrastu (node/4511175480): a bare genitive with no noun, a cut name
+  - Vecā grunts (node/4511175481): a locality of the same cluster, unsure what it names
+  - A-B dambis (node/3106207722): a lettered dam, a code beside a type word
+- **descriptions on ruins and archaeological sites** (8)
+  - 2. pasaules kara vācu 88 mm zenītlielgabalu pozīcijas (way/787911922): a description of gun positions standing in for a name
+  - 6 collu lielgabalu pozīcijas (way/787911921): a description of gun positions standing in for a name
+  - 1875. gada forta pulverpagrabs (node/11755686174): a dated description of a powder magazine
+  - Latvijas armijas Sapieru pulka nocietinājums (node/8917645244): a description of a bunker by the unit that built it
+  - Daugavas grīvas krastu fortifikācijas būvju komplekss (node/12747913176): a heritage register description of a group of works
+  - Baznīcas kalns - viduslaiku kapsēta (node/12747897646): a name with a description glued on
+  - Pulksteņkalniņš - viduslaiku nocietinājums (way/1356244089): a name with a description glued on
+  - Bukultu viduslaiku pils atrašanās vieta (node/6691122172): a name saying it is the site of a vanished castle; the castle has an article
+- **duplicate rows** (3)
+  - Komētforts (node/12747922749): an archaeological-site node 150 m from the fort row of nearly the same name
+  - Daugavgrīvas cietokšņa apbūve (way/1228651128): a heritage register entry at the same point as the fortress row
+  - Skanstes parks (way/626848700): one of two park rows of the same name 650 m apart
+- **duplicate rows across kinds** (1)
+  - Saules dārzs (node/12444122113): a locality 100 m from the park row of the same name
+- **estates tagged as localities** (1)
+  - Mežaparka rezidences (way/768745536): a residential development tagged a locality
+- **estates tagged as neighbourhoods, numbered** (9)
+  - Imanta-1 (node/6770550136): a numbered microdistrict of a housing estate
+  - Imanta-2 (node/6770550135): a numbered microdistrict of a housing estate
+  - Imanta-3 (node/6770550134): a numbered microdistrict of a housing estate
+  - Imanta-4 (node/6770550133): a numbered microdistrict of a housing estate
+  - Imanta-5 (node/6770550132): a numbered microdistrict of a housing estate
+  - Ziepniekkalns-1 (node/9101832640): a numbered microdistrict of a housing estate; the mapper doubts the name is in use
+  - Ziepniekkalns-2 (node/9101832607): a numbered microdistrict of a housing estate; the mapper doubts the name is in use
+  - Zolitūde-1 (node/6770550130): a numbered microdistrict of a housing estate
+  - Zolitūde-2 (node/6770550131): a numbered microdistrict of a housing estate
+- **heritage houses with no article** (3)
+  - way/163191479
+  - way/115743544
+  - way/904308294
+- **pitches, clubs and generic spaces tagged parks or stadiums** (3)
+  - Lomonosova atpūtas telpa (way/978142879): a generic phrase (rest space) tagged a park
+  - Volejbola skolas stadions (way/84918404): a school's own stadium
+  - Volvo sporta centrs (relation/12857963): a brand-named sports center tagged a stadium, possibly a business
+
+## riga (streets)
+
+- **code beside a type word on a minor way** (1)
+  - Kundziņsalas 5. šķērslīnija (way/416900022): a numbered cross-lane on a track, minor way only
+- **description standing in for a name** (1)
+  - Pievedceļš Salaspils memoriālam (way/1218120929): an access-road description naming a memorial
+
+## rome (places)
+
+- **bare type words on landmarks or places** (23)
+  - Cisterna monumentale (way/1051597079): a type word, or a type word and an adjective, as the whole name
+  - Colonna crucifera (node/5262016102): a type word, or a type word and an adjective, as the whole name
+  - Mausoleo Circolare (way/158022402): a type word, or a type word and an adjective, as the whole name
+  - Monumento Funerario Colombario (way/158028763): a type word, or a type word and an adjective, as the whole name
+  - Sala ottagonale (relation/2712679): a type word, or a type word and an adjective, as the whole name
+  - Sepolcro a esedra (way/140536401): a type word, or a type word and an adjective, as the whole name
+  - Tomba a tempietto (way/158028773): a type word, or a type word and an adjective, as the whole name
+  - Sepolcro a Fregio dorico (way/345611669): a type word, or a type word and an adjective, as the whole name
+  - grande cisterna (way/23955580): a type word, or a type word and an adjective, as the whole name
+  - Resti villa romana (node/1783958809): a type word, or a type word and an adjective, as the whole name
+  - Resti Archeologici Antica Villa Romana (way/172757326): a type word, or a type word and an adjective, as the whole name
+  - Resto di tomba ad arco (way/1365845552): a type word, or a type word and an adjective, as the whole name
+  - Pozzo alla romana (node/2391690507): a type word, or a type word and an adjective, as the whole name
+  - Parco Centrale (way/1340037802): a type word, or a type word and an adjective, as the whole name
+  - Parco Lineare (way/100667764): a type word, or a type word and an adjective, as the whole name
+  - Aereo (way/408362779): a type word, or a type word and an adjective, as the whole name
+  - Nave (way/751286877): a type word, or a type word and an adjective, as the whole name
+  - Gloriette (way/544412725): a type word, or a type word and an adjective, as the whole name
+  - Cappellania universitaria (way/767578061): a type word, or a type word and an adjective, as the whole name
+  - Criptoportico ipogeo centrale (relation/1856081): a type word, or a type word and an adjective, as the whole name
+  - Horrea centrali (way/701791185): a type word, or a type word and an adjective, as the whole name
+  - Palazzo imperiale (way/538110674): a type word, or a type word and an adjective, as the whole name
+  - Villa Romana Costiera (node/13973368255): a type word, or a type word and an adjective, as the whole name
+- **club, pitch, centre or business tagged a park (unsure)** (9)
+  - Happy Family (way/589782512): read as a business or club from the name alone
+  - Sport Park (relation/17020954): read as a business or club from the name alone
+  - Laghi del Salice (node/1250242025): read as a business or club from the name alone
+  - Casetta Rossa (relation/2063039): a park run by a cooperative; read as a community venue from the operator
+  - Campetto Occupato Laurentino Liberato (way/1362598683): a pitch tagged a park, read from the name
+  - Centro Internazionale di Schoenstatt a Belmonte (way/441344137): a religious centre's grounds tagged a park
+  - Centro Polifunzionale Statuario (relation/16952722): a centre or building name on a park
+  - Casa del Parco (relation/19252517): a centre or building name on a park
+  - viale dei cipressi (way/1107728455): an avenue's name on a park, lowercase
+- **convent or monastery under historic=monastery, no article** (3)
+  - relation/530319
+  - relation/6277328
+  - relation/539134
+- **duplicated gazetteer hamlets** (9)
+  - Casalotti (relation/5319632): a zone boundary sharing its name with a place node 1.6 to 4.7 km away
+  - Castel di Leva (relation/5358657): a zone boundary sharing its name with a place node 1.6 to 4.7 km away
+  - Castel Porziano (relation/5358585): a zone boundary sharing its name with a place node 1.6 to 4.7 km away
+  - Labaro (relation/5319540): a zone boundary sharing its name with a place node 1.6 to 4.7 km away
+  - Prima Porta (relation/5319511): a zone boundary sharing its name with a place node 1.6 to 4.7 km away
+  - Torre Gaia (relation/5316529): a zone boundary sharing its name with a place node 1.6 to 4.7 km away
+  - Torre Maura (relation/5316698): a zone boundary sharing its name with a place node 1.6 to 4.7 km away
+  - Torre Spaccata (relation/5316727): a zone boundary sharing its name with a place node 1.6 to 4.7 km away
+  - EUR (node/3711862454): the same district twice, node and boundary 570 m apart, under two spellings
+- **family compounds or heritage houses with no article** (7)
+  - way/360125180
+  - way/623379231
+  - relation/1537625
+  - relation/69320
+  - way/306651608
+  - way/292200534
+  - way/23956864
+- **monument, plaque or statue with no article (historic=monument)** (16)
+  - Ancora nell'edera (node/5401056293): historic=monument with no wikipedia and no wikidata
+  - Santino (node/5262021964): historic=monument with no wikipedia and no wikidata
+  - Ricordo dell'incolumità di Roma (node/5262018890): historic=monument with no wikipedia and no wikidata
+  - San Leonardo da Porto Maurizio (node/7072439134): historic=monument with no wikipedia and no wikidata
+  - Statua della Minerva (node/2317242643): historic=monument with no wikipedia and no wikidata
+  - Statua di San Nicola di Bari (node/7023505139): historic=monument with no wikipedia and no wikidata
+  - Cippo Italcable (node/13500721400): historic=monument with no wikipedia and no wikidata
+  - Antico Deposito Ghiaccio Birra Peroni (node/12181730354): historic=monument with no wikipedia and no wikidata
+  - Agli eroici figli di Ostia (node/4610337594): historic=monument with no wikipedia and no wikidata
+  - Monumento ai Ravennati (node/7592312189): historic=monument with no wikipedia and no wikidata
+  - Monumento al Fante d'Italia (node/5923702159): historic=monument with no wikipedia and no wikidata
+  - Monumento ai Caduti di Ostia (node/14107254607): historic=monument with no wikipedia and no wikidata
+  - Monumento ai Caduti della I Guerra Mondiale (way/220540580): historic=monument with no wikipedia and no wikidata
+  - Monumento alle vittime delle foibe istriane (node/7962489719): historic=monument with no wikipedia and no wikidata
+  - Muro della Repubblica Romana (node/8789982819): historic=monument with no wikipedia and no wikidata
+  - Fontanile Papa Benedetto XIV (node/3209751804): historic=monument with no wikipedia and no wikidata
+- **other unsure** (6)
+  - Via del Corso (relation/6890532): a street relation in as a landmark; the street has its own row
+  - set Ben Hur (way/889382373): a film set tagged a fort; may no longer stand
+  - Caposaldo A (node/2415135651): a survey marker under a letter code
+  - Miracle Water (node/4450594029): an indoor drinking fountain under an English nickname, wikidata only
+  - Reliquia di San Giovanni Battista (node/2423068386): a relic kept inside a church
+  - Roma Casilina (node/1619249491): a railway service station, not a passenger stop; it has an article
+- **planning-code or block-code parks and greens** (1)
+  - Area verde PZB42 (way/216877764): a green area named by a plan code
+- **possible duplicate rows** (2)
+  - Stadio Pasquale Giannattasio - Stella Polare (Mar dei Coralli) (node/14107254623): the same stadium twice, 178 m apart, each with a street name in brackets
+  - villa dei centroni (way/647448254): a lowercase twin of a site 800 m away
+- **religious body's house or office tagged a place of worship (unsure)** (3)
+  - node/13452530782
+  - way/222943831
+  - node/4613794263
+- **typo or suffix glued on a real name** (5)
+  - Baailica di San Giovanni dei Fiorentini (way/127942183): a typo in the first word of a notable church's name
+  - Magazziono dei doli (way/1069679075): a typo in the first word
+  - Chiesa di San Giuseppe Artigiano (Roma) (relation/2958705): a city name in brackets glued on
+  - Chiesa di Santa Teresa di Gesù Bambino (1930) (way/815657375): a year in brackets glued on; another row carries the plain name
+  - Font Ludovisi (node/5383183094): possibly a cut first word
+
+## rome (streets)
+
+- **address number** (1)
+  - Lungotevere Michelangelo 7: ends in a number, possibly an address
+- **customers-only minor way** (2)
+  - Largo Cristina di Svezia: customers-only service way, name of a square
+  - Piazza Alighiero Boetti: customers-only footway
+- **cut name** (1)
+  - Fermi: a one-word surname, perhaps a cut name
+- **description** (2)
+  - Località Castel De' Ceveri: a locality label on an unclassified way
+  - passeggiata Armando Trovajoli VARIANTE: a variant of a path, description
+- **duplicate or English** (1)
+  - Spanish Steps: English name, duplicate of the Scalinata di Trinità dei Monti row
+- **facility road** (1)
+  - Circolo Tor Carbone: named for a club, three residential ways
+- **generic** (2)
+  - Viale Principale: generic name on 4 service ways, likely a site's own road
+  - Piazzale Circolare: generic descriptive name on a service way
+- **gone or temporary** (1)
+  - Strada Pedonale EX Via Ponte Di Nona: name says a former street
+- **indoor** (1)
+  - Scala Sancta: indoor steps in a church (shared-code finding)
+- **station forecourt** (8)
+  - Piazzale della Stazione Anagnina: a station forecourt, service ways only
+  - Piazzale della Stazione Cipro: a station forecourt, service ways only
+  - Piazzale della Stazione Ipogeo degli Ottavi: a station forecourt, service ways only
+  - Piazzale della Stazione Tiburtina: a station forecourt, service ways only
+  - Piazzale della Stazione Tuscolana: a station forecourt, service ways only
+  - Piazzale della Stazione della Storta: a station forecourt, service ways only
+  - Piazzale della Stazione di Montebello: a station forecourt, service ways only
+  - Piazzale della Stazione di Torre Angela: a station forecourt, service ways only
+- **typo** (1)
+  - Via dell'Academia Ambrosiana: possible typo of Accademia
+
+## stockholm (places)
+
+- **artwork or memorial name on a park** (2)
+  - Bussolyckan i Måbødalen (way/733417530): an event's name on a park; the memorial stone has its own row
+  - Crawl Space (way/733417529): an English title on a park, reads as an artwork's name
+- **bare type word on a landmark** (8)
+  - Borggården (way/20679943): a type word as the whole name: the castle yard
+  - Entretorg (way/815832450): a type word as the whole name: entrance square
+  - Koloniträdgård (way/420005727): a type word as the whole name: allotment garden, inside the open-air museum
+  - Köksträdgård (way/141425975): a type word as the whole name: kitchen garden, inside the open-air museum
+  - Örtagården (way/141416382): a type word as the whole name: the herb garden, inside the open-air museum
+  - Avrättningsplats (node/3200805766): a type word as the whole name: execution site; its article has another title
+  - Fontändamm (way/154616186): a type word as the whole name: fountain pond; it is the article's title too
+  - Orangeriet (way/705991789): a type word as the whole name: the orangery, no article
+- **block-code park** (9)
+  - Blåklockan (way/208187273): a park carrying the name of a cached city block
+  - Blåkråkan (way/304275102): a park carrying the name of a cached city block
+  - Dellen (way/480894598): a park carrying the name of a cached city block
+  - Hagelbössan (way/409283552): a park carrying the name of a cached city block
+  - Solvändan (way/41985612): a park carrying the name of a cached city block
+  - Träsket (way/255446767): a park carrying the name of a cached city block
+  - Häradsdomaren (way/116418157): a park with a block-style name; no cached block matches
+  - Aspvirket (way/116631981): a park with a block-style name; no cached block matches
+  - Murlindan (way/322112164): a park with a block-style name; no cached block matches
+- **courtyard tagged a square** (2)
+  - Repslagargården (way/983874377): a courtyard tagged a square
+  - Sing-Sing-gården (way/583885700): a nicknamed courtyard tagged a square
+- **description, unsure** (2)
+  - ödetomten (relation/16004116): a lower-case description: the vacant lot
+  - Bredsätra lekplats- och parkområde (way/741743697): a description-like name: playground and park area
+- **estate courtyard tagged a park, inferred** (6)
+  - Chapmansgården (way/54237497): one of four adjoining courtyards of one estate tagged parks
+  - Jaktvarvsgården (way/54237501): one of four adjoining courtyards of one estate tagged parks
+  - Pontonjärgården (way/54237498): one of four adjoining courtyards of one estate tagged parks
+  - Rinmansgården (way/54237496): one of four adjoining courtyards of one estate tagged parks
+  - Fågelbärsgården (way/28976758): a courtyard name on a park
+  - KSB Utegård (way/643215342): an organisation's outdoor yard tagged a park
+- **estate courtyard, inferred from the name** (1)
+  - Trivselgården (way/205780045): a lawn tagged a neighbourhood; reads as an estate courtyard
+- **glitched name, unsure** (1)
+  - Frihamspiren (node/4868147701): a typo in the name; the wikidata is the port's, not the pier's
+- **heritage house with no article** (2)
+  - way/137825915
+  - way/137825911
+- **monument with no article** (8)
+  - Astrid Lindgrens Berg (node/936059771): a monument with no wikidata and no article
+  - Frihetens Port (node/2242928761): a monument with no wikidata and no article
+  - Mäster Palm (node/29835352): a statue with no wikidata and no article
+  - Pontonjärbataljonen (node/4318365079): a regiment stone with no wikidata and no article
+  - Svea Livgardesstenen (node/5482219701): a regiment stone with no wikidata and no article
+  - The Frescati obelisk (node/13625140161): an obelisk under an English name, no wikidata
+  - Tranebergsbron (node/4837314321): a bridge's name on a monument node, no wikidata
+  - Vegamonumentet (node/783800851): an obelisk with no wikidata tag
+- **name says gone, has an article** (1)
+  - fd Snösätra torp (node/4786195249): a name that says the thing is gone, but it has an article
+- **office or sports facility tagged a park** (5)
+  - Kista Innovation Park (way/1245453269): a business park's name on a park
+  - Akalla Träff (way/559464978): a meeting venue's name on a park
+  - Skarpnäcks Skatepark (way/542372697): a skate park tagged a park
+  - Järva discgolfpark (way/492642127): a disc golf course tagged a park
+  - Rinken (way/981647942): the rink: a pitch tagged a park
+- **open-air museum contents (Skansen)** (8)
+  - Delsbogården (node/1547924149): a building, yard or garden inside the open-air museum, with its own wikidata
+  - Finngården (node/1548045603): a building, yard or garden inside the open-air museum, with its own wikidata
+  - Mekaniska Verkstaden (way/141433538): a building, yard or garden inside the open-air museum, with its own wikidata
+  - Moragården (node/1547924215): a building, yard or garden inside the open-air museum, with its own wikidata
+  - Oktorpsgården (node/1548045731): a building, yard or garden inside the open-air museum, with its own wikidata
+  - Seglora kyrka (way/33407223): a building, yard or garden inside the open-air museum, with its own wikidata
+  - Älvrosgården (node/1588253628): a building, yard or garden inside the open-air museum, with its own wikidata
+  - Ölands-Kvarnar (way/23620152): a building, yard or garden inside the open-air museum, with its own wikidata
+- **peak named for another place** (3)
+  - Kronobergsparken (node/468028209): a peak node carrying a park's name
+  - Stadshagsplan (node/468040078): a peak node carrying a square's name
+  - Solbergaskogen (node/465490000): a peak node carrying a wood's name
+- **register-code name** (2)
+  - Skålgropssten Brännkyrka RAÄ222 (node/492883288): a heritage register number in the name, no article
+  - Fornborg Spånga 58:1 (way/721248066): a heritage register number in the name, wikidata only
+- **unsure** (3)
+  - Hästskovägen (node/9056228543): a street name tagged a locality
+  - Pelarsalen (node/5026949256): a hall name tagged a locality; nothing in the tags says what it is
+  - Hedvig (way/813423971): a first name alone on an area tagged a neighbourhood
+
+## stockholm (streets)
+
+- **description** (3)
+  - Norra brobänken: a generic structural-part label (bridge bench) with a compass word, footways
+  - Västra brobänken: same label, footways
+  - Östra brobänken: same label, footways
+- **duplicate** (3)
+  - Kungsholms Strandstig: case variant of Kungsholms strandstig (same path)
+  - Karl XII:s Torg: case variant of Karl XII:s torg
+  - G.a Hagsätravägen: abbreviated variant of Gamla Hagsätravägen
+- **facility road** (11)
+  - Akutvägen: a hospital function road by name (emergency), inferred from the name
+  - Patientvägen: a hospital function road by name, inferred
+  - Vårdvägen: a care-site road by name, inferred
+  - Vårdstigen: a care-site service way by name, inferred
+  - Friskvårdsvägen: a care-site service way by name, inferred
+  - Sopvägen: a refuse-collection service way by name, inferred
+  - Kioskvägen: a kiosk service way by name, inferred
+  - Parkeringsbacken: a parking-area service way by name, inferred
+  - Terminalslingan: a terminal service loop, access permissive/permit
+  - Inre Bassängkajen: a harbor service way, access customers
+  - Norra Bassängkajen: a harbor service way, access customers
+- **motorway ramps** (27)
+  - Albanotunneln: motorway ramp, interchange or interchange tunnel (link-class ways only)
+  - Bagartunneln: motorway ramp, interchange or interchange tunnel (link-class ways only)
+  - Björktunneln: motorway ramp, interchange or interchange tunnel (link-class ways only)
+  - Bronstunneln: motorway ramp, interchange or interchange tunnel (link-class ways only)
+  - Galaxtunneln: motorway ramp, interchange or interchange tunnel (link-class ways only)
+  - Guldtunneln: motorway ramp, interchange or interchange tunnel (link-class ways only)
+  - Karolinertunneln: motorway ramp, interchange or interchange tunnel (link-class ways only)
+  - Komettunneln: motorway ramp, interchange or interchange tunnel (link-class ways only)
+  - Koppartunneln: motorway ramp, interchange or interchange tunnel (link-class ways only)
+  - Murartunneln: motorway ramp, interchange or interchange tunnel (link-class ways only)
+  - Målartunneln: motorway ramp, interchange or interchange tunnel (link-class ways only)
+  - Måntunneln: motorway ramp, interchange or interchange tunnel (link-class ways only)
+  - Planettunneln: motorway ramp, interchange or interchange tunnel (link-class ways only)
+  - Roslagstunneln: motorway ramp, interchange or interchange tunnel (link-class ways only)
+  - Silvertunneln: motorway ramp, interchange or interchange tunnel (link-class ways only)
+  - Skeppartunneln: motorway ramp, interchange or interchange tunnel (link-class ways only)
+  - Skräddartunneln: motorway ramp, interchange or interchange tunnel (link-class ways only)
+  - Soltunneln: motorway ramp, interchange or interchange tunnel (link-class ways only)
+  - Sotartunneln: motorway ramp, interchange or interchange tunnel (link-class ways only)
+  - Stallmästartunneln: motorway ramp, interchange or interchange tunnel (link-class ways only)
+  - Stjärntunneln: motorway ramp, interchange or interchange tunnel (link-class ways only)
+  - Sågtunneln: motorway ramp, interchange or interchange tunnel (link-class ways only)
+  - Talltunneln: motorway ramp, interchange or interchange tunnel (link-class ways only)
+  - Trafikplats Västertorp: motorway ramp, interchange or interchange tunnel (link-class ways only)
+  - Tranebergsslingan: motorway ramp, interchange or interchange tunnel (link-class ways only)
+  - Tångtunneln: motorway ramp, interchange or interchange tunnel (link-class ways only)
+  - Yxtunneln: motorway ramp, interchange or interchange tunnel (link-class ways only)
+- **unsure** (1)
+  - Vardagslivets gång: a title-like phrase on one path, may be an art route
+
+## taichung (places)
+
+- **bare type words on landmarks or places** (127)
+  - 福德祠 (node/1620265576): an earth-god shrine type word as the whole name
+  - 福德祠 (node/2697420753): an earth-god shrine type word as the whole name
+  - 福德祠 (node/2720128582): an earth-god shrine type word as the whole name
+  - 福德祠 (node/2728436236): an earth-god shrine type word as the whole name
+  - 福德祠 (node/2728441665): an earth-god shrine type word as the whole name
+  - 福德祠 (node/2784914514): an earth-god shrine type word as the whole name
+  - 福德祠 (node/2789934039): an earth-god shrine type word as the whole name
+  - 福德祠 (node/2789950039): an earth-god shrine type word as the whole name
+  - 福德祠 (node/2973974218): an earth-god shrine type word as the whole name
+  - 福德祠 (node/2973983007): an earth-god shrine type word as the whole name
+  - 福德祠 (node/2985714487): an earth-god shrine type word as the whole name
+  - 福德祠 (node/3477877029): an earth-god shrine type word as the whole name
+  - 福德祠 (node/3509537889): an earth-god shrine type word as the whole name
+  - 福德祠 (node/3558886071): an earth-god shrine type word as the whole name
+  - 福德祠 (node/4258202088): an earth-god shrine type word as the whole name
+  - 福德祠 (node/5136630159): an earth-god shrine type word as the whole name
+  - 福德祠 (node/5455874308): an earth-god shrine type word as the whole name
+  - 福德祠 (node/5539797364): an earth-god shrine type word as the whole name
+  - 福德祠 (node/6552271492): an earth-god shrine type word as the whole name
+  - 福德祠 (node/6872473049): an earth-god shrine type word as the whole name
+  - 福德祠 (node/6883903212): an earth-god shrine type word as the whole name
+  - 福德祠 (node/8485627654): an earth-god shrine type word as the whole name
+  - 福德祠 (node/9112344900): an earth-god shrine type word as the whole name
+  - 福德祠 (node/9161821459): an earth-god shrine type word as the whole name
+  - 福德祠 (node/9165415322): an earth-god shrine type word as the whole name
+  - 福德祠 (node/9467826723): an earth-god shrine type word as the whole name
+  - 福德祠 (node/9957326153): an earth-god shrine type word as the whole name
+  - 福德祠 (node/10013346253): an earth-god shrine type word as the whole name
+  - 福德祠 (node/10761239215): an earth-god shrine type word as the whole name
+  - 福德祠 (node/10857838484): an earth-god shrine type word as the whole name
+  - 福德祠 (node/10917691736): an earth-god shrine type word as the whole name
+  - 福德祠 (node/11386708801): an earth-god shrine type word as the whole name
+  - 福德祠 (node/11533243818): an earth-god shrine type word as the whole name
+  - 福德祠 (node/12979118137): an earth-god shrine type word as the whole name
+  - 福德祠 (way/294106594): an earth-god shrine type word as the whole name
+  - 福德祠 (way/299946049): an earth-god shrine type word as the whole name
+  - 福德祠 (way/300173014): an earth-god shrine type word as the whole name
+  - 福德祠 (way/300178152): an earth-god shrine type word as the whole name
+  - 福德祠 (way/733787418): an earth-god shrine type word as the whole name
+  - 福德祠 (way/1083194427): an earth-god shrine type word as the whole name
+  - 福德祠 (way/1163130780): an earth-god shrine type word as the whole name
+  - 福德祠 (way/1163510241): an earth-god shrine type word as the whole name
+  - 福德祠 (way/1163512124): an earth-god shrine type word as the whole name
+  - 福德祠 (way/1190098409): an earth-god shrine type word as the whole name
+  - 福德祠 (way/1191354404): an earth-god shrine type word as the whole name
+  - 福德祠 (way/1207887203): an earth-god shrine type word as the whole name
+  - 福德祠 (way/1318326959): an earth-god shrine type word as the whole name
+  - 福德祠 (way/1351782418): an earth-god shrine type word as the whole name
+  - 福德祠 (way/1386062477): an earth-god shrine type word as the whole name
+  - 福德祠 (way/1386956823): an earth-god shrine type word as the whole name
+  - 福德正神 (node/5934065793): an earth-god shrine type word as the whole name
+  - 福德正神 (node/9736243427): an earth-god shrine type word as the whole name
+  - 福德正神 (way/675180671): an earth-god shrine type word as the whole name
+  - 福德正神廟 (way/1324078541): an earth-god shrine type word as the whole name
+  - 福德堂 (node/8359194827): an earth-god shrine type word as the whole name
+  - 百姓公廟 (node/1624942562): a generic shrine type word as the whole name
+  - 百姓公廟 (node/2973906486): a generic shrine type word as the whole name
+  - 百姓公廟 (way/355264459): a generic shrine type word as the whole name
+  - 百姓公廟 (way/1054320949): a generic shrine type word as the whole name
+  - 百姓公 (node/14069922987): a generic shrine type word as the whole name
+  - 百姓祠 (way/1190964483): a generic shrine type word as the whole name
+  - 萬善堂 (node/4634894807): a generic shrine type word as the whole name
+  - 萬善堂 (node/5237866663): a generic shrine type word as the whole name
+  - 萬善堂 (node/6877309496): a generic shrine type word as the whole name
+  - 萬善堂 (node/12119965116): a generic shrine type word as the whole name
+  - 萬善祠 (node/7846571936): a generic shrine type word as the whole name
+  - 萬善祠 (way/368060945): a generic shrine type word as the whole name
+  - 萬應公 (node/4838178487): a generic shrine type word as the whole name
+  - 萬靈祠 (way/296373875): a generic shrine type word as the whole name
+  - 大眾爺廟 (way/211870616): a generic shrine type word as the whole name
+  - 大眾爺廟 (way/1083194425): a generic shrine type word as the whole name
+  - 觀音亭 (node/1619699653): a generic shrine type word as the whole name
+  - 觀音亭 (node/2272870154): a generic shrine type word as the whole name
+  - 觀音廟 (node/3508125754): a generic shrine type word as the whole name
+  - 宮廟 (node/6162415185): a generic shrine type word as the whole name
+  - 舍利塔 (node/11361162376): a generic shrine type word as the whole name
+  - 金紙爐 (way/1190964479): a generic shrine type word as the whole name
+  - 體育館 (way/651505434): a generic sports hall word as the whole name
+  - 體育館 (way/765573770): a generic sports hall word as the whole name
+  - 體育館 (way/779443581): a generic sports hall word as the whole name
+  - 體育館 (way/1289338303): a generic sports hall word as the whole name
+  - 活動中心 (way/1289327423): a generic sports hall word as the whole name
+  - 技擊館 (way/780115256): a generic sports hall word as the whole name
+  - 綜合球場 (way/761120587): a generic sports hall word as the whole name
+  - 羽球館 (way/311369055): a generic sports hall word as the whole name
+  - 體操館 (way/346472117): a generic sports hall word as the whole name
+  - 三角公園 (way/470653317): a generic park or pitch word as the whole name
+  - 三角公園 (way/547179627): a generic park or pitch word as the whole name
+  - 三角公園 (way/1064302072): a generic park or pitch word as the whole name
+  - 親水公園 (way/285606068): a generic park or pitch word as the whole name
+  - 親水公園 (way/288270210): a generic park or pitch word as the whole name
+  - 口袋公園 (way/1493097943): a generic park or pitch word as the whole name
+  - 兒童公園 (way/1493869293): a generic park or pitch word as the whole name
+  - 園道 (way/704223425): a generic park or pitch word as the whole name
+  - 綠園道 (way/1432522663): a generic park or pitch word as the whole name
+  - 運動公園 (relation/14039124): a generic park or pitch word as the whole name
+  - 運動設施 (way/733785896): a generic park or pitch word as the whole name
+  - 開放空間 (node/13947970359): a generic park or pitch word as the whole name
+  - 足球場 (way/930881775): a generic park or pitch word as the whole name
+  - 滑板場 (way/630831890): a generic park or pitch word as the whole name
+  - 棒/壘球場 (way/930882081): a generic park or pitch word as the whole name
+  - 環保公園 (way/303274462): a generic park or pitch word as the whole name
+  - 河堤公園 (way/1373674203): a generic park or pitch word as the whole name
+  - 站前公園 (way/1191260618): a generic park or pitch word as the whole name
+  - 站前廣場 (way/244259464): a generic park or pitch word as the whole name
+  - 古井 (node/9329796854): a generic feature word as the whole name
+  - 門樓 (relation/10116534): a generic feature word as the whole name
+  - 中廊 (way/880035413): a generic feature word as the whole name
+  - 操場 (way/1068687233): a generic feature word as the whole name
+  - 戶外表演舞台 (way/527008399): a generic feature word as the whole name
+  - 噴水池廣場 (node/5692713862): a generic feature word as the whole name
+  - 第一中庭 (way/1299160930): a numbered courtyard or square, type word and ordinal
+  - 第二中庭 (way/1299160931): a numbered courtyard or square, type word and ordinal
+  - 第三中庭 (way/1299160932): a numbered courtyard or square, type word and ordinal
+  - 第六廣場 (way/1067149188): a numbered courtyard or square, type word and ordinal
+  - 農場 (node/3655363402): a gazetteer hamlet named with a type word
+  - 苗圃 (node/2575970216): a gazetteer hamlet named with a type word
+  - 分場 (node/2575970111): a gazetteer hamlet named with a type word
+  - 馬場 (node/6207209960): a gazetteer hamlet named with a type word
+  - 福利社 (node/2336767666): a gazetteer hamlet named with a type word
+  - 伙房 (node/2572352929): a gazetteer hamlet named with a type word
+  - 堰堤 (node/2575970133): a gazetteer hamlet named with a type word
+  - 水源地 (node/6207210155): a gazetteer hamlet named with a type word
+  - 水源地 (node/6207210700): a gazetteer hamlet named with a type word
+  - 第三區 (node/6207210712): a gazetteer hamlet named with a type word
+  - 第六區 (node/6207210711): a gazetteer hamlet named with a type word
+  - 第四區 露營區 (node/6207209958): a gazetteer hamlet named with a type word
+- **duplicated gazetteer hamlets** (20)
+  - 下段 (node/2571583908): one gazetteer record on eight scattered nodes
+  - 下段 (node/2572352924): one gazetteer record on eight scattered nodes
+  - 下段 (node/2573120005): one gazetteer record on eight scattered nodes
+  - 下段 (node/2573120036): one gazetteer record on eight scattered nodes
+  - 下段 (node/2593999786): one gazetteer record on eight scattered nodes
+  - 下段 (node/2593999858): one gazetteer record on eight scattered nodes
+  - 下段 (node/2593999869): one gazetteer record on eight scattered nodes
+  - 下段 (node/2593999876): one gazetteer record on eight scattered nodes
+  - 赤嵌頭 (node/2336767670): one gazetteer record on eight scattered nodes
+  - 赤嵌頭 (node/2571583892): one gazetteer record on eight scattered nodes
+  - 赤嵌頭 (node/2571583912): one gazetteer record on eight scattered nodes
+  - 赤嵌頭 (node/2571583921): one gazetteer record on eight scattered nodes
+  - 赤嵌頭 (node/2571583932): one gazetteer record on eight scattered nodes
+  - 赤嵌頭 (node/2571583953): one gazetteer record on eight scattered nodes
+  - 赤嵌頭 (node/2571583958): one gazetteer record on eight scattered nodes
+  - 赤嵌頭 (node/2571584021): one gazetteer record on eight scattered nodes
+  - 大坑 (node/2569663462): one gazetteer record on four scattered nodes
+  - 大坑 (node/2571583949): one gazetteer record on four scattered nodes
+  - 大坑 (node/2571584100): one gazetteer record on four scattered nodes
+  - 大坑 (node/6207209952): one gazetteer record on four scattered nodes
+- **peaks named for villages** (10)
+  - node/9831175514
+  - node/10804761741
+  - node/10756054548
+  - node/11896360779
+  - node/11896360778
+  - node/11896360780
+  - node/11497259783
+  - node/9831166744
+  - node/11966800250
+  - node/11093703448
+- **unsure** (37)
+  - 日光郡動態公園 (way/261034490): an estate's garden by its name, not confirmed
+  - 日光郡靜態公園 (way/261034498): an estate's garden by its name, not confirmed
+  - 西班牙社區 小公園 (way/590316476): a housing community's garden by its name, not confirmed
+  - 精銳潮社區公園 (way/1044441492): a housing community's garden by its name, not confirmed
+  - 富宇大地公園 (way/1370244827): a developer-branded park by its name, not confirmed
+  - way/763051487
+  - way/227075002
+  - 天主教立德中心 (way/283040767): a student centre tagged a place of worship
+  - 學生福音中心 (way/227105790): a student centre tagged a place of worship
+  - 東海大學校牧室 (way/227103239): a chaplain's office tagged a place of worship
+  - 豐原白沙屯媽祖文化協進會 (node/6174488233): an association tagged a place of worship
+  - 楓之谷-1956祕密花園 (way/510333828): a paid garden business by its name, not confirmed
+  - 石頭公園生態休閒農場 (way/1013434346): a leisure farm tagged a theme park, wikidata only
+  - PARK2 草悟廣場 (way/326739565): a commercial venue's plaza
+  - 星夢谷 (way/909825777): a name that does not read as a temple
+  - 鼎財窩 (node/3933401477): a name that does not read as a temple
+  - 園藝療育示範區 (node/14148572331): a demonstration plot tagged a park
+  - 高北加壓站園區 (way/624150383): a pumping station's grounds tagged a park
+  - 大覺禪淨寺-法會會場 (way/1064264445): one hall of a temple, a description for a name
+  - 外埔環保生態公園（暫時封閉） (way/1305670144): a closure note glued on the name, access=no
+  - petit forêt (node/5574016321): a French-only name on a park node
+  - 耶穌基督後期聖徒教會_沙鹿 (node/4281388091): an underscore glued in the name
+  - 房福橋 (node/9164530956): a bridge mapped as ruins
+  - 海灣樂世界 (way/219878526): a theme park believed closed; no tag says so
+  - 921地震10週年紀念衛星圖根點 (node/10718159601): a commemorative survey mark tagged a monument
+  - クラウンIII (node/13438012731): a peak nickname in katakana only
+  - 門衛 (node/13397643733): one mapper's nickname for a ridge pinnacle
+  - 引路人 (node/13397643734): one mapper's nickname for a ridge pinnacle
+  - 巴比倫塔 (node/13397643736): one mapper's nickname for a ridge pinnacle
+  - 王冠峰 (node/13397643735): one mapper's nickname for a ridge pinnacle
+  - 將達魯姆 (node/13397643731): one mapper's nickname for a ridge pinnacle
+  - 挖嘎奈大折立 (node/13397643730): one mapper's nickname for a ridge pinnacle
+  - 女王頭 (node/13397643729): one mapper's nickname for a ridge pinnacle
+  - 福德詞 (way/578867199): a shrine name with a mistyped character
+  - 北門福德詞 (way/519924945): a shrine name with a mistyped character
+  - 文武里福德詞 (way/519924942): a shrine name with a mistyped character
+  - 南柳福德祀 (way/677540100): a shrine name with a mistyped character
+
+## taichung (streets)
+
+- **estates** (1)
+  - 興豐山莊: an estate name carried by its own road
+- **facility features** (3)
+  - 鐵道模擬: a facility feature, not a street
+  - 跳遠跑道: a facility feature, not a street
+  - 賞楓平台: a facility feature, not a street
+- **private road** (1)
+  - 大學南路: a campus road tagged private; unconfirmed which university
+- **unsure** (3)
+  - 工三南僑: possibly a cut name; judged from the name alone
+  - 秀山十三: possibly a cut name; judged from the name alone
+  - 清水端: possibly a cut name; judged from the name alone
+
+## taipei (places)
+
+- **Latin-only name** (9)
+  - 1941 incident memorial (node/12818359278): a name in Latin script only
+  - Bread of Life Gospel Center in Wanjin (node/10765935716): a name in Latin script only
+  - Cihu Temple (node/13676653520): a name in Latin script only
+  - Kingdom Hall of Jehovah's Witnesses (node/13341575909): a name in Latin script only
+  - Model quarry (node/12818376871): a name in Latin script only
+  - Mother of God (way/258410880): a name in Latin script only
+  - NTUB Garden (way/880457847): a name in Latin script only
+  - San Jose Gardens (way/609748545): a name in Latin script only
+  - The Hope (node/12560885425): a name in Latin script only
+- **bare type word with wikidata** (5)
+  - 圖書館 (node/9566170061): a bare type word kept on a wikidata tag
+  - 圖書館 (way/139123645): a bare type word kept on a wikidata tag
+  - 圖書館 (way/294649852): a bare type word kept on a wikidata tag
+  - 圖書館 (way/547156822): a bare type word kept on a wikidata tag
+  - 總圖書館 (relation/14045849): a bare type word kept on a wikidata tag
+- **denomination-only name** (11)
+  - 耶和華見證人 (node/5661164136): a denomination or association as the whole name
+  - 天理教 (way/662016767): a denomination or association as the whole name
+  - 淨土宗 (node/10087232675): a denomination or association as the whole name
+  - 創價學會 (node/5110489755): a denomination or association as the whole name
+  - 中國佛教會 (way/268396850): a denomination or association as the whole name
+  - 校園團契 (node/3836965044): a denomination or association as the whole name
+  - YMCA (way/772964636): a denomination or association as the whole name
+  - 台北市中華基督教青年會 (way/251664074): a denomination or association as the whole name
+  - 浸禮會 (node/9932969711): a denomination or association as the whole name
+  - 神召會 (node/3542104232): a denomination or association as the whole name
+  - 佛教正覺同修會 (node/11911124799): a denomination or association as the whole name
+- **duplicate station row** (2)
+  - 南港展覽館 (node/3501186380): a second row for one station on the same network and article
+  - 十四張 (node/8041597963): a second row for one station on the same network and article
+- **estate tagged a hamlet** (10)
+  - node/13910151024
+  - node/3469549088
+  - node/3469549077
+  - way/720784454
+  - node/8949301520
+  - node/2561560085
+  - node/3838071714
+  - node/3510522309
+  - node/9960814446
+  - node/7737699447
+- **pocket-park programme name** (16)
+  - 台北好好看 (way/282430402): a programme name shared by many pocket parks
+  - 台北好好看 (way/376122039): a programme name shared by many pocket parks
+  - 台北好好看 (way/390780633): a programme name shared by many pocket parks
+  - 台北好好看 (way/396410878): a programme name shared by many pocket parks
+  - 台北好好看 (way/435677316): a programme name shared by many pocket parks
+  - 台北好好看 (way/491719320): a programme name shared by many pocket parks
+  - 台北好好看 (way/586287506): a programme name shared by many pocket parks
+  - 台北好好看系列二 (way/232563663): a programme name shared by many pocket parks
+  - 臺北好好看 (way/197316117): a programme name shared by many pocket parks
+  - 臺北好好看 (way/419824448): a programme name shared by many pocket parks
+  - 臺北好好看 (way/427777826): a programme name shared by many pocket parks
+  - 臺北好好看 (way/434899244): a programme name shared by many pocket parks
+  - 臺北好好看 (way/1268985781): a programme name shared by many pocket parks
+  - 臺北好好看二 (way/420571826): a programme name shared by many pocket parks
+  - 臺北好好看二公園 (way/209575978): a programme name shared by many pocket parks
+  - 臺北好好看公園2 (way/296208076): a programme name shared by many pocket parks
+- **unsure: business** (2)
+  - 百事可問 (node/6090305171): may be a fortune-telling business
+  - 財神會館 (node/9748205713): may be a fortune-telling business
+- **unsure: description** (1)
+  - 行刑場 (node/7737699442): may be a description rather than a place name
+- **unsure: family compound as hamlet** (4)
+  - node/3506376839
+  - node/3586391846
+  - node/3586391871
+  - node/3506376866
+- **unsure: former site marker** (4)
+  - 清城隍廟舊址 (node/3076882985): a marker for a vanished historic site, no article
+  - 清臺灣巡撫衙門舊址 (node/3263490568): a marker for a vanished historic site, no article
+  - 臺北府城西門（寶成門）原址 (node/5173474719): a marker for a vanished historic site, no article
+  - 臺北機廠縫紉工場舊址 (way/555513380): a marker for a vanished historic site, no article
+- **unsure: grave** (3)
+  - way/336858254
+  - node/5369856038
+  - node/6467705352
+- **unsure: junction** (1)
+  - 和平門 (node/12050521547): a gate with signals rather than a junction
+- **unsure: mis-tagged** (1)
+  - 永福聖媽宮 (node/7099544554): a folk temple tagged christian
+- **unsure: station not open** (1)
+  - 廣慈/奉天宮 (node/4498833449): its English name says under construction, no lifecycle tag
+- **unsure: station not rapid transit** (2)
+  - 瀑布 (node/1726117679): a tourist push-cart line's stop; one is a bare type word
+  - 烏來 (node/1726116984): a tourist push-cart line's stop; one is a bare type word
+
+## taipei (streets)
+
+- **address parity name** (8)
+  - 保長路35巷（雙號）: an address parity tag in the name
+  - 四川路二段245巷19弄(單號): an address parity tag in the name
+  - 四川路二段245巷19弄(雙號): an address parity tag in the name
+  - 學府路一段23巷(單號): an address parity tag in the name
+  - 學府路一段23巷(雙號): an address parity tag in the name
+  - 景平路92巷 (單號): an address parity tag in the name
+  - 竹林路119巷25弄 (單號): an address parity tag in the name
+  - 莊敬路49巷29弄 (6號): an address parity tag in the name
+- **full-width-space name** (3)
+  - 松　街: a possibly cut name with a full-width space
+  - 梅　街: a possibly cut name with a full-width space
+  - 竹　街: a possibly cut name with a full-width space
+- **uncertain** (3)
+  - 兒三新街: probably an estate walkway, uncertain
+  - 柑樹路: possibly a private road
+  - 翡翠路: possibly a private road
+
+## taoyuan (places)
+
+- **duplicated gazetteer hamlets** (5)
+  - 下陰影窩 (node/12265645076): a second hamlet row of the same name nearby
+  - 中角板 (node/3426401326): a second hamlet row of the same name nearby
+  - 大曼 (node/3489055338): a second hamlet row of the same name nearby
+  - 王公坑 (node/13030800312): a second hamlet row of the same name nearby
+  - 山仔腳 (node/8826303351): a second hamlet row of the same name nearby
+- **peaks named for villages** (13)
+  - node/9516570672
+  - node/10581879054
+  - node/11459485394
+  - node/2482635522
+  - node/2482636148
+  - node/10045173781
+  - node/2482635568
+  - node/9455674737
+  - node/8931790738
+  - node/2482635787
+  - node/2482636125
+  - node/9386943348
+  - node/9327306081
+- **unsure** (24)
+  - 京沅綻公共開放空間 (node/9428408663): an estate-run open space, may be public
+  - 家和心苑社區公園 (way/1117646768): a park named for an estate
+  - 凱旋大地社區公園 (way/1117609275): a park named for an estate
+  - 茶業改良場日式宿舍 (way/1043791269): a staff dormitory, no visiting shown
+  - 台茂籃球場 (way/1519652538): a shopping mall court
+  - 新屋多功能運動中心-夢想體育學院 (way/1530967282): a fitness and swimming centre tagged a stadium
+  - 一天山生命紀念館 (way/448437308): a columbarium tagged a place of worship
+  - 緗琳坊佛堂 (node/12366427526): a private prayer hall
+  - 鄉界 (node/4048491989): a description on a gazetteer hamlet
+  - 新生路口 (node/4048486780): a description on a gazetteer hamlet
+  - バロン橋 (node/4047089743): a name in a third script only
+  - 泥橘子 (node/8863443526): a likely typo of a nearby hamlet
+  - 司法公園 (way/1100987533): tagged under construction
+  - 長樂公園 (way/442136869): tagged under construction
+  - 平鎮 (node/14244739700): a station with no article, opening not confirmed
+  - 開南圓環 (way/728858691): a roundabout tagged a monument
+  - 五酒桶山風景區 (node/5823960472): a possible duplicate row
+  - 龜山區第二運動公園 (way/1050239012): a possible duplicate row
+  - 南崁河濱公園 (way/630460711): a possible duplicate row
+  - 老街溪河岸公園 (way/264447811): a possible duplicate row
+  - 瑞泰社區公園 (way/1024116146): a possible duplicate row
+  - 健行科技大學 (way/664718081): a possible duplicate row
+  - 娘子坑山 (node/11988931685): a possible duplicate row
+  - 停車場路: a description standing in for a name, may be signed
+
+## taoyuan (streets)
+
+- **a road named for a facility, unclassified** (1)
+  - 停車場路: a road named for a facility, unclassified
+- **unsure** (3)
+  - 長庚健康步道: a hospital's or school's own path, unsure
+  - 觀音國小環校人行道: a hospital's or school's own path, unsure
+  - 環校道路: a hospital's or school's own path, unsure
+- **width-code names** (33)
+  - 3-2-12M: a planning width code as a name
+  - 3-4-12M: a planning width code as a name
+  - 4-17-10M: a planning width code as a name
+  - 4-29-10M: a planning width code as a name
+  - 4-30-10M: a planning width code as a name
+  - 4-31-10M: a planning width code as a name
+  - 4-32-10M: a planning width code as a name
+  - 4-33-10M: a planning width code as a name
+  - 4-34-10M: a planning width code as a name
+  - 4-35-10M: a planning width code as a name
+  - 4-36-10M: a planning width code as a name
+  - 4-37-10M: a planning width code as a name
+  - 4-39-10M: a planning width code as a name
+  - 4-40-10M: a planning width code as a name
+  - 4-41-10M: a planning width code as a name
+  - 4-42-10M: a planning width code as a name
+  - 5-13-20M: a planning width code as a name
+  - 5-23-20M: a planning width code as a name
+  - 5-38-20M: a planning width code as a name
+  - 5-5-20M: a planning width code as a name
+  - 5-9-20M: a planning width code as a name
+  - 6-20-15M: a planning width code as a name
+  - 6-40-15M: a planning width code as a name
+  - 6-41-15M: a planning width code as a name
+  - 6-51-15M: a planning width code as a name
+  - 6-61-15M: a planning width code as a name
+  - 6-64-15M: a planning width code as a name
+  - 6-65-15M: a planning width code as a name
+  - 6-80-15M: a planning width code as a name
+  - 6-85-15M: a planning width code as a name
+  - 6-94-15M: a planning width code as a name
+  - 6-96-15M: a planning width code as a name
+  - 7-4-12M: a planning width code as a name
+
+## thessaloniki (places)
+
+- **bare type word on a place** (1)
+  - Κέντρο (way/1093329659): a neighbourhood whose whole name is the word for centre
+- **duplicated gazetteer localities** (4)
+  - Λαχανόκηποι (node/1923779650): one of two locality nodes of one name
+  - Λαχανόκηποι (node/4397147141): one of two locality nodes of one name
+  - Σφαγεία (node/1922578065): one of two locality nodes of one name
+  - Σφαγεία (node/8285166887): one of two locality nodes of one name
+- **heritage house with no article** (1)
+  - way/223419001
+- **religious residence with no article** (1)
+  - way/161685655
+- **unsure: campus lawn tagged a park** (2)
+  - Γρασίδια Γεωπονικής (way/110348838): a faculty lawn tagged a park under an informal name
+  - Γρασίδια Ιατρικής (way/110348832): a faculty lawn tagged a park under an informal name
+- **unsure: description** (2)
+  - Remains of Early Bysantine baptistery (way/1462945298): an English description standing in for a name, ruins with no article
+  - Αρχαιολογικός χώρος βόρειας εισόδου Σταθμού Αγίας Σοφίας (node/12062844326): a description of where the excavation sits, no article
+- **unsure: duplicate** (3)
+  - Βυζαντινά Τείχη (node/1258982282): a generic name on one fragment of the walls, which have a row
+  - way/27445346
+  - Μονή Βλατάδων (node/13036876527): a neighbourhood node carrying the monastery's name, which has a row
+- **unsure: glitched name** (2)
+  - Οθωμανική Κρήνη ή Σαρκοφάγος ή Νέκυια (node/6893513887): three alternative names joined in one name
+  - I.N. Αμώμου Συλλήψεως της Θεοτόκου (way/161717969): Latin letters in the Greek abbreviation that leads the name
+- **unsure: hospital** (1)
+  - Νοσοκομείο Λοιμωδών Νόσων (relation/17126327): a hospital building tagged historic, no article
+
+## thessaloniki (streets)
+
+- **unsure: description** (1)
+  - 27ου Δημοτικού Σχολείου: of the 27th primary school: a street name by its grammar, or a label for the school's walk
+- **unsure: direction label** (1)
+  - Θεσσαλονίκη - Νέα Μουδανιά: a route description (two end points) as the name of a trunk road
+- **unsure: glitched name** (1)
+  - Μενέλαου - Μπακατσέλου: two names joined by a dash on one residential way
+
+## yamagata (places)
+
+- **bare type words on landmarks or places** (2)
+  - 祠 (way/909125601): the whole name is a type word (small shrine)
+  - 森の遊び場 (way/864856166): a generic play-area name inside a larger named park
+- **duplicated gazetteer hamlets** (4)
+  - 古館 (node/8527285074): one of several place rows carrying the same name
+  - 柏倉 (node/8527285075): one of several place rows carrying the same name
+  - 漆山 (node/8527285073): one of several place rows carrying the same name
+  - 門伝 (node/8527285071): one of several place rows carrying the same name
+- **unsure: a name that says the thing is gone** (1)
+  - 漆山学校跡地 (node/6829402553): the site of a former school, on the same point as two other rows
+- **unsure: estate playground** (1)
+  - 漆山住宅第3児童遊園 (way/961850702): a housing estate's playground tagged a park; public status not shown
+- **unsure: office tagged a place of worship** (1)
+  - 生長の家 山形県教化部 (way/863287415): a religious organisation's prefectural office tagged a place of worship
+- **unsure: organisation name as the place name** (2)
+  - 創価学会 (way/106604427): an organisation's name standing in for the hall's own name, which sits in the branch tag
+  - 創価学会 (way/967771539): an organisation's name standing in for the hall's own name, which sits in the branch tag
+- **unsure: religious residence** (1)
+  - node/5009018621
+- **unsure: sports facility tagged a park** (1)
+  - 山形市総合スポーツセンター (way/1303179351): a sports centre run by a sports association, tagged a park
+- **unsure: typo in the name** (1)
+  - 山形ビックウィング (way/864544188): the name differs by one voicing mark from the object's own article title
+
+## zurich (streets)
+
+- **motorway ramps** (6)
+  - Wollishofen: motorway interchange or ramp label, not a street
+  - Geroldrampe: ramp of a city road named as a street
+  - Hardturmrampe: ramp of a city road named as a street
+  - Hönggerrampe: ramp of a city road named as a street
+  - Sihlquai-Nordrampe: ramp of a city road named as a street
+  - Sihlquai-Südrampe: ramp of a city road named as a street
+

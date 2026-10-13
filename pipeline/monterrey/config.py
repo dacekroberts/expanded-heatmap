@@ -227,6 +227,8 @@ PLACE_KEPT = {
 }
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "way/939133719": "a generic footpath name (owner, 2026-10-13)",
+    "way/939133722": "a generic footpath name (owner, 2026-10-13)",
     "way/542617754": "a park named by a planning or stage code (owner, 2026-10-13)",
     "way/242114128": "a residents' amenity inside a gated estate tagged a park (owner, 2026-10-13)",
     "way/1420214452": "a residents' amenity inside a gated estate tagged a park (owner, 2026-10-13)",

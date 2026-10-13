@@ -1,3 +1,50 @@
+### 2026-10-13 - The owner's six answers after the build; named private streets kept in Guadalajara and Monterrey; the held rows written out (branch search-final)
+
+- **The owner, to six calls after the build: all approved.**
+  1. Reviewed names (kept): Berlin "Shakespeare Company Berlin" (a
+     theatre), Florence's pharmacy museum of Santa Maria Novella, Riga
+     "Farmācijas muzejs". Dropped by id: Berlin "Wohnanlage ehem.
+     Gertraudenhospital" (3 ways), Oslo "De Norske Gjærspritfabrikker a/s".
+  2. A real lane name with a number stays (Berlin "Volksgartenweg 1" to
+     "6", "Pfuhlweg I" and "II"; Bremen's 20).
+  3. A generic path word as the whole name is dropped: Bremen 9, Berlin 2,
+     each measured on minor ways only before writing. Zurich "Rundweg"
+     stays (the city street list's entry).
+  4. Utility and business-site roads with a street word stay.
+  5. Zurich's five named city ramps stay.
+  6. Most: "Zámek" (relation/1266525) and the doubled "Janov" node dropped.
+     Yamagata: 5 second nodes of four district names dropped, one node of
+     each kept. The other pending rows of the two cities stay.
+  Seven cities rebuilt (8ecc4718); `check_place_search.py` fails on rule A
+  only.
+- **Named private streets (owner, in the Cleanup session; DECISIONS.md on
+  master).** Master c44ed769 merged; `PLACE_KEEP_NAMED_PRIVATE_STREETS =
+  True` in Guadalajara's and Monterrey's configs, on no other city. Rebuilt
+  (47d46466): Guadalajara 2,830 street names back, Monterrey 731.
+- **The switch restored more than the third pass took:** 453 names in
+  Guadalajara and 615 in Monterrey that no reader had seen. Both lists
+  screened line by line on sonnet. Dropped: Guadalajara's 8 code-named
+  private streets, by way id and only on private ways (29 ways), and
+  "Ciclovía Gigantes" (a mode lane); Monterrey "Vereda peatonal" (a generic
+  footpath name). Held, not dropped: the readers' typo names (Monterrey 21,
+  such as "Calle Frida Khalo"): a misspelled street is still that street.
+  Also held: Guadalajara's 10 names ending in a house number, with the 273
+  of the same class from the first read.
+- **Every held row is in `docs/decisions_drafts/search-final-held.md`**
+  (1,810 rows in 57 city parts, by class, with OSM ids), generated from the
+  readers' pending files against the built indexes, since those files live
+  in a session scratchpad. Home, family and person classes are listed by id
+  alone.
+
+Findings for Cleanup:
+
+49. **The code test under the named-private switch misses some codes:**
+    Guadalajara "Circuito 7", "Circuito 8", "Circuito 9", "Calle 3A",
+    "Calle 5A", "Calle 2A Tramo 4", "Privada C-1", "Privada C-2" stayed in
+    on private residential ways (example way/764659244). Dropped by id here.
+50. **A house number at the end of a private way's name:** Guadalajara 10
+    in the restored rows (example way/166722773), beside the 273 held.
+
 ### 2026-10-13 - All 32 cities built on master's third and fourth rule passes; Most and Yamagata read; German street screens (branch search-final)
 
 - **Master 50d551f4 merged (420a556f).** Each city's Wikidata article cache
