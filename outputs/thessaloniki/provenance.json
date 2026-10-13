@@ -81,5 +81,18 @@
     "osm_base": "2026-10-07T08:09:20Z",
     "sha256": "f6e147a920b15612d968a64e95adbbc769d1b918acdbfceee553b691a5f31dce",
     "split_from": "osm_all.json"
+  },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 3028,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 59,
+    "ids_not_read": 0,
+    "ids_with_article": 6,
+    "ids_without_article": 53,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "b51dd44a99401732d2b1b1224e4a895227c57e7c2af75cbe0c22f4287f4e7b0b"
   }
 }

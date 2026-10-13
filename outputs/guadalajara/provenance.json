@@ -31,5 +31,18 @@
     "query": "[out:json][timeout:170];\narea(id:3605605820,3605606276,3605606517,3605606660)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
     "retrieved": "2026-10-13T19:30:34+00:00",
     "sha256": "73a05c697d04a1c4c1a6036f0d66b87c85e7d856c14a749c6b9e1750adaf7892"
+  },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 251,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 2,
+    "ids_not_read": 0,
+    "ids_with_article": 1,
+    "ids_without_article": 1,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "d19a49375ba4199d8f1960bce74e377808f5cd0d173687b59df09b2c98c1b5b0"
   }
 }

@@ -197,6 +197,11 @@ PLACE_FOLD = None
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "way/1501682516": "a lane named for its mode, a description (owner, 2026-10-13)",
+    "way/885603748": "a lane named for its mode, a description (owner, 2026-10-13)",
+    "way/889178774": "a lane named for its mode, a description (owner, 2026-10-13)",
+    "way/925741177": "a lane named for its mode, a description (owner, 2026-10-13)",
+    "way/925741178": "a lane named for its mode, a description (owner, 2026-10-13)",
     "node/888509033": "a denomination or its hall type as the whole name (owner, 2026-10-13)",
     "way/126527506": "a denomination or its hall type as the whole name (owner, 2026-10-13)",
     "way/575661620": "a denomination or its hall type as the whole name (owner, 2026-10-13)",

@@ -194,6 +194,8 @@ PLACE_AREA = "(id:3613048683)"
 PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("lv",)
+# Russian names sit on a share of the rows, below the floor (owner, 2026-10-13: "declare").
+PLACE_LANGUAGES_ALSO = ("ru",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).

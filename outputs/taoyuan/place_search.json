@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/taoyuan.json",
-  "places": 57102,
+  "places": 56929,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "zh"
     ],
     "coverage": {
-      "en": 0.165,
+      "en": 0.166,
       "zh": 0.998
     },
     "list_share": 0.5,

@@ -43,6 +43,19 @@
     "retrieved": "2026-10-13T18:12:30+00:00",
     "sha256": "418222ac20371f6459aee4279b4bd565cd9d38ee11b9a29b3e3ff1cb9aacbd73"
   },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 33405,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 1214,
+    "ids_not_read": 0,
+    "ids_with_article": 104,
+    "ids_without_article": 1110,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "4e977fe44b476b7a6538aed2027944f88ecf14ed9cd4665b92b63ed804381b6a"
+  },
   "register_columns": [
     "opendata_id",
     "city",

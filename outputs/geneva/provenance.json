@@ -45,6 +45,19 @@
     "retrieved": "2026-10-13T19:27:31+00:00",
     "sha256": "7eb00add79bc307cddc882d6a546e8ab487ec7d88804f8040c8de03b0139d9b6"
   },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 3322,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 118,
+    "ids_not_read": 0,
+    "ids_with_article": 8,
+    "ids_without_article": 110,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "4dc4e1db591ede7c727d4092d26652228e64e9bee3ee05f9ea9e40ca94d25f49"
+  },
   "register": {
     "bytes": 11344581,
     "conditions": "https://sitg.ge.ch/ressources/conditions-utilisation-donnees",

@@ -43,6 +43,19 @@
     "retrieved": "2026-10-13T19:24:32+00:00",
     "sha256": "26b514ee663aac0137e0596c4c481754089c75fd4757f84f54fcc510d78bc05f"
   },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 13807,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 59,
+    "ids_not_read": 1,
+    "ids_with_article": 53,
+    "ids_without_article": 5,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "a27eaaf4186746b3131dc38b5df3a2927969ad4b7527554f4855af3498f22254"
+  },
   "subunits_url": "https://data.brreg.no/enhetsregisteret/api/underenheter/lastned/csv",
   "units_url": "https://data.brreg.no/enhetsregisteret/api/enheter/lastned/csv"
 }

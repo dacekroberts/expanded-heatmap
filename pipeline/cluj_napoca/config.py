@@ -218,6 +218,10 @@ PLACE_AREA = "(id:3603277038)"
 PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ro",)
+# Hungarian names sit on a share of the rows, below the floor (owner, 2026-10-13: "declare").
+PLACE_LANGUAGES_ALSO = ("hu",)
+# Tram stops are mapped with the mode glued on; the index takes it off.
+PLACE_STATION_STRIP = (" Tram",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).

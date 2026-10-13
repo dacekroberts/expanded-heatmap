@@ -1,0 +1,30 @@
+{
+  "index": "app/static/places/cluj_napoca.json",
+  "places": 3472,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "ro"
+    ],
+    "coverage": {
+      "en": 0.022,
+      "ro": 1.0,
+      "hu": 0.418
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Romanian"
+    ],
+    "also": [
+      "hu"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/3277038",
+      "name": "Cluj-Napoca",
+      "stations": 20
+    }
+  ]
+}

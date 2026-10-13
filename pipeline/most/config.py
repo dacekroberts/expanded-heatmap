@@ -145,7 +145,10 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("cs",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
+PLACE_DROPPED = {
+    "node/13158629883": "a vanished object: a station closed in 1970, its site now under the lake",
+}
 # QUIET STATIONS (owner, 2026-10-13): stops inside the search area with
 # nothing indexable within 1 km, so the coverage rule skips them. All three
 # are inside Litvínov, at the Záluží chemical works; ustecky-261012 holds no

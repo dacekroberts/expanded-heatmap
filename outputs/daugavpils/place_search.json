@@ -1,0 +1,30 @@
+{
+  "index": "app/static/places/daugavpils.json",
+  "places": 1627,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "lv"
+    ],
+    "coverage": {
+      "en": 0.01,
+      "lv": 1.0,
+      "ru": 0.087
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Latvian"
+    ],
+    "also": [
+      "ru"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/13048683",
+      "name": "Daugavpils",
+      "stations": 38
+    }
+  ]
+}

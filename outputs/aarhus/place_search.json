@@ -1,0 +1,26 @@
+{
+  "index": "app/static/places/aarhus.json",
+  "places": 8632,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "da"
+    ],
+    "coverage": {
+      "en": 0.002,
+      "da": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Danish"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/1784663",
+      "name": "Aarhus Municipality",
+      "stations": 20
+    }
+  ]
+}

@@ -81,5 +81,18 @@
     "retrieved": "2026-09-25T11:50:05+00:00",
     "sha256": "4b34f9e198ea86751b0abd37628cf82ad134a142f7b5752cc16fd5227aa28420",
     "url": "https://overpass-api.de/api/interpreter"
+  },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 673,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 12,
+    "ids_not_read": 0,
+    "ids_with_article": 6,
+    "ids_without_article": 6,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "4b1a31e8581925e9159f3908338585a4154d0051c4cb497eb6c995850638e096"
   }
 }

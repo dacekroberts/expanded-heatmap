@@ -1,0 +1,26 @@
+{
+  "index": "app/static/places/liepaja.json",
+  "places": 1386,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "lv"
+    ],
+    "coverage": {
+      "en": 0.017,
+      "lv": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Latvian"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/13048685",
+      "name": "Liepāja",
+      "stations": 18
+    }
+  ]
+}

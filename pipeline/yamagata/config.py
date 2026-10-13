@@ -297,7 +297,15 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
+PLACE_DROPPED = {
+    "node/5644909123": "an English description standing in for a name, tagged a place of worship",
+    "way/909125609": "a duplicate row: the same shrine is a row under its plain name at the same spot",
+    "way/909125629": "a duplicate row: the same shrine is a row under its plain name at the same spot",
+    "way/909125618": "a duplicate row: the same shrine is a row under its plain name at the same spot",
+    "way/909125582": "a duplicate row: the same shrine is a row under its fuller name at the same spot",
+    "node/8527320825": "a glitched name: the characters contradict the object's own reading, which is the neighbouring quarter's",
+}
 # QUIET STATION (owner, 2026-10-13): inside the search area, 1,071 m from its
 # edge, with nothing indexable within 1 km (the station, a river whose row
 # point is 2,961 m away, and a viewpoint with no Wikidata entry). Read by

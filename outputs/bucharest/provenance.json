@@ -34,6 +34,19 @@
     "retrieved": "2026-10-13T19:29:09+00:00",
     "sha256": "bdfafb6d03f9f143f8eb65eaac4e75997c95169e0784cbb901f3200aa15e9496"
   },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 2494,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 36,
+    "ids_not_read": 0,
+    "ids_with_article": 35,
+    "ids_without_article": 1,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "ade4ac09d042305c0c4703454b2ee77fb29073f5953bf7e1e2bce77e0865f864"
+  },
   "register_date": "2026-08-25",
   "register_files_sha256": {
     "non-animal/01.-FABRICAREA-PAINII.xlsx": "cc9c3ed541159ab990845c341ba7f11845a9d13ef800653ad2da113a05a06af6",

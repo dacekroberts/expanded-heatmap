@@ -63,6 +63,19 @@
     "sha256": "3854c0950f289c2d66ad1b16e416c1ae4a8c2b0b2aa400eb9ef017f50916c7c2",
     "url": "https://overpass-api.de/api/interpreter"
   },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 886,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 20,
+    "ids_not_read": 0,
+    "ids_with_article": 10,
+    "ids_without_article": 10,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "d74ab0f681e96ab25bd2e315237a5f762a351c2a042c16af389e889749e8a554"
+  },
   "stations": {
     "file": "green_line_stations.csv",
     "retrieved": "2026-09-25T07:19:30+00:00",

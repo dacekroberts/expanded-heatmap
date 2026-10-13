@@ -252,6 +252,15 @@ PLACE_FOLD = None
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "way/326495496": "an address number standing in for a name",
+    "way/326495497": "an address number standing in for a name",
+    "way/1246474482": "a motorway interchange label, not a street (owner, 2026-10-13)",
+    "way/1296447019": "a motorway interchange label, not a street (owner, 2026-10-13)",
+    "way/1296449228": "a motorway interchange label, not a street (owner, 2026-10-13)",
+    "way/624393070": "a motorway interchange label, not a street (owner, 2026-10-13)",
+    "way/78508613": "a motorway interchange label, not a street (owner, 2026-10-13)",
+    "way/9623274": "a motorway interchange label, not a street (owner, 2026-10-13)",
+    "way/9623489": "a motorway interchange label, not a street (owner, 2026-10-13)",
     "way/37380208": "an open-air pool tagged a park",
     "way/251217100": "a minigolf course tagged a park",
     "node/11608454406": "a dealer's gallery: the business itself, no article",

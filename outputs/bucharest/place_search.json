@@ -1,0 +1,26 @@
+{
+  "index": "app/static/places/bucharest.json",
+  "places": 17022,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "ro"
+    ],
+    "coverage": {
+      "en": 0.007,
+      "ro": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Romanian"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/377733",
+      "name": "Bucharest",
+      "stations": 64
+    }
+  ]
+}

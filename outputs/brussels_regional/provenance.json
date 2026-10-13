@@ -47,5 +47,18 @@
     "retrieved": "2026-10-13T19:31:39+00:00",
     "sha256": "cb77de00a45bd6cd6891d932cfc8d5a2aed7b743da4f23fa92d490e468886287"
   },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 962,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 25,
+    "ids_not_read": 0,
+    "ids_with_article": 2,
+    "ids_without_article": 23,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "13147887fc14d981d97aac23a5eac6fb31ab8bda72d61efdd68fd6b5d9446f52"
+  },
   "stib_gtfs_and_communes": "pipeline/brussels/fetch_sources.py (the Brussels page's)"
 }

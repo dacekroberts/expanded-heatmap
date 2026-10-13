@@ -33,6 +33,19 @@
     "retrieved": "2026-10-13T19:24:21+00:00",
     "sha256": "ca074aa90da7a54fd301384aa39c74191c6fb60a7514f1ee61881aabc2ad7a4d"
   },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 8144,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 138,
+    "ids_not_read": 0,
+    "ids_with_article": 82,
+    "ids_without_article": 56,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "5256ae8e9b4306623cf44483636ed6b3f8b59f3a45667f02c6447feb5079e155"
+  },
   "register_last_edited": "2025-10-22",
   "register_layer_url": "https://services-eu1.arcgis.com/81H0sgjoIWj6WxIM/arcgis/rest/services/Livsmedelstillsyn/FeatureServer/41",
   "register_rows": 289742

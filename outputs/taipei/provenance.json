@@ -68,6 +68,19 @@
     "sha256": "8731fc76ebdf7e119510372023c3aca80ce8c688e9c61172eab92aa15ccc6168",
     "url": "https://overpass-api.de/api/interpreter"
   },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 2834,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 71,
+    "ids_not_read": 0,
+    "ids_with_article": 21,
+    "ids_without_article": 50,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "778819a8c5d38f28627e136ae3a6d0dcae60aacd8086c7131b9f8ff25a514df8"
+  },
   "taipei_doorplates": {
     "bytes": 124547303,
     "edition": "臺北市門牌位置數值資料 20260902",
