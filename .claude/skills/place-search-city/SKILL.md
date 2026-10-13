@@ -327,19 +327,26 @@ All quoted in the drafts file; the short list:
   not landed when this was written)** made rules of wave 1's repeated
   classes; `docs/place_search_exclusions.md` has a row for each. What changes
   for a builder:
-  - **One row a station**: a stop-area relation is no station, a station
+  - **One row a station**: a stop-area relation is no station beside its
+    station's own row (it stays where no other row carries the station), a station
     outline with no railway tag beside the station's own row is none, rows
     sharing one Wikidata entry within `COMPLEX_MERGE_M` are one row with the
     others' names as aliases, and a bus station is no rail station whatever
     rail mode it lists. Do not drop these by id.
-  - **A street's way is never a landmark row**, whatever historic, tourism
-    or bridge:name tag it carries (this retired the first batch's bridge:name
-    rule). A square drawn as an area is untouched.
+  - **A street's way is no landmark row where a street row bears its
+    name** (bridge:name leading); with no such street row the landmark row
+    stays (Seattle's Aurora Bridge on Aurora Avenue North). A square drawn
+    as an area is untouched.
   - **Register entries** (historic=maritime, naval, military, engine) need a
-    Wikipedia article of their own, and a `ref:nrhp` three or more objects
-    share registers none of them. Read what this takes in a new city: it
-    took the Ballard Locks from Seattle and the Brooklyn Navy Yard's own
-    rows a wave 1 reader had kept.
+    Wikipedia article of their own or a Wikidata entry no other object of
+    the cache carries, and a `ref:nrhp` three or more objects share registers
+    none of them. Read what this takes in a new city: a known place with
+    neither is kept by id in `config.PLACE_KEPT`, with the owner's word as
+    the why (Seattle's Ballard Locks; London's "Greenway" against the bare
+    word). The Brooklyn Navy Yard's own rows carry neither and go.
+  - **`config.PLACE_KEEP_INTERCHANGES = True`** keeps a city's interchange
+    names (Hong Kong, where they are how junctions are signed); ask the
+    owner before setting it for another city.
   - **No streets by rule**: interchanges, ramps, names ending "Drwy", HOV
     and managed-lane labels on motorways, "Alley" plus digits, alleys named
     by two streets, "Path between X and Y", a cycle facility named for its

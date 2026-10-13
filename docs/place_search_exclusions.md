@@ -40,7 +40,7 @@ protocol in the `place-search-city` skill.
 | A pedestrian area as a street | `area=yes` is skipped; with an article of its own it is a landmark | street pass, `square_areas` | 2026-10-08, 2026-10-13 |
 | A way whose highway tag lists a skipped value beside another (`platform;bus_stop`) | each value of the tag is read against `SKIP_HIGHWAY`, under whatever name | street pass | 2026-10-13 (second batch) |
 | A street private on every way, where some ways are alleys | `PRIVATE_STREET_SERVICES`: a private `service=alley` way is read as a private residential one | street pass | 2026-10-13 (second batch) |
-| An interchange, a ramp, a name ending "Drwy" | `street_never`, whatever the ways; a name ending "Ramp", "Ramp On" or "Ramp Of" on ramp-class ways only (`RAMP_NAME`, `RAMP_HIGHWAYS`); a circular junction whose every way is a motorway's | street pass | 2026-10-13 (second batch) |
+| An interchange, a ramp, a name ending "Drwy" | `street_never`, whatever the ways (interchange names are kept in a city whose config sets `PLACE_KEEP_INTERCHANGES`: Hong Kong); a name ending "Ramp", "Ramp On" or "Ramp Of" on ramp-class ways only (`RAMP_NAME`, `RAMP_HIGHWAYS`); a circular junction whose every way is a motorway's | street pass | 2026-10-13 (second batch) |
 | An HOV or managed-lane label | `MANAGED_LANE`, on a street whose every way is a motorway's | street pass | 2026-10-13 (second batch) |
 | "Alley" and digits; an alley named by its two cross streets | `NUMBERED_ALLEY`, `CROSS_STREET_ALLEY`, on a way of any class (`ANY_WAY_DESCRIPTIONS`); format characters set aside first (`_plain`) | `street_description_2` | 2026-10-13 (second batch) |
 | "Path between X and Y"; a cycle facility named for the street it runs on; a name ending "Driveway" | `PATH_BETWEEN`, `CYCLE_FACILITY`, `DRIVEWAY_NAME`, on a street whose every way is a minor way | `street_description_2` | 2026-10-13 (second batch) |
@@ -71,7 +71,7 @@ read from Overpass. Seattle: 59 ways of six streets.
 | A business tagged a station | no rail tag at all and a commercial tag | tagged pass | 2026-10-13 |
 | A station named by a bare type word | `bare_type` with neither wikidata nor wikipedia | tagged pass | 2026-10-13 |
 | A second row for one tram stop | `PLATFORM_MERGE_M`: tram platforms of one name are one row; an interchange stays two | merges | 2026-10-13 |
-| A stop-area relation | `public_transport=stop_area` on a relation groups a station's parts | tagged pass | 2026-10-13 (second batch) |
+| A stop-area relation beside its station's own row | `public_transport=stop_area` on a relation groups a station's parts; it stays where no other station row is within `OUTLINE_BESIDE_M`, bears its name within `OUTLINE_SAME_M` or shares its Wikidata entry (Washington's two streetcar stops) | merges | 2026-10-13 (second batch) |
 | A bus station that lists a rail mode | `amenity=bus_station` with no railway tag, whatever `light_rail=` or `train=` says | tagged pass | 2026-10-13 (second batch) |
 | A station's outline beside the station's own row | a way or relation tagged `public_transport=station` with no railway tag, within `OUTLINE_BESIDE_M` of a rail-tagged station row or `OUTLINE_SAME_M` of one of its name; one further off stays | merges | 2026-10-13 (second batch) |
 | A second row for one transfer complex | `COMPLEX_MERGE_M`: station rows sharing one Wikidata entry are one row, the others' names its aliases | merges | 2026-10-13 (second batch) |
@@ -107,11 +107,11 @@ read from Overpass. Seattle: 59 ways of six streets.
 | A grave or a plaque without a Wikipedia article of its own | `grave_or_plaque`, `own_article`; a Wikidata entry alone admits none; statues, busts and public memorials are untouched; where the tags cannot say whose the article is, the row stays as it was | `landmark()` | 2026-10-13 |
 | Wayside shrines and crosses, boundary stones, milestones, plain memorials and tombs | `SKIP_HISTORIC`, unless a tourism, amenity or leisure tag, wikidata, or an article of its own | `landmark_drop` | 2026-10-07, 2026-10-13 |
 | A landmark that is not there | `lifecycle`: demolished, razed, removed, abandoned or not yet open by its own tags, read narrowly (the comment sets out each limit); a place that stands and is closed for works is kept by id in `config.PLACE_CLOSED_FOR_WORKS` (the not-yet-open class only) | `landmark()` | 2026-10-13 |
-| A register or inventory entry: `historic=maritime`, `naval`, `military` or `engine` | `REGISTER_HISTORIC`: kept only on a Wikipedia article of its own | `landmark()` | 2026-10-13 (second batch) |
+| A register or inventory entry: `historic=maritime`, `naval`, `military` or `engine` | `REGISTER_HISTORIC`: kept only on a Wikipedia article of its own, or a Wikidata entry no other object of the cache carries (`own_item`; never for an engine), or by id in `config.PLACE_KEPT` | `landmark()` | 2026-10-13 (second batch) |
 | A numbered building under its district's register number | `SHARED_REGISTER_MIN`: a `ref:nrhp` three or more objects share keeps no coded name (`own_register`); wikidata or wikipedia on the object still does | `landmark_drop` | 2026-10-13 (second batch) |
-| A street's way as a landmark | a way with a highway tag that is no area and no square, whatever historic, tourism or bridge:name tag it carries (`NOT_A_STREET_WAY`); retires the first batch's bridge:name rule | tagged pass | 2026-10-13 (second batch) |
+| A street's way as a landmark | a way with a highway tag that is no area and no square, whatever historic or tourism tag it carries (`NOT_A_STREET_WAY`), ONLY where a street row bears the name the landmark row would have, bridge:name leading (`_bridge_led`); with no such street row it stays a landmark | tagged pass | 2026-10-13 (second batch) |
 | A name ending "(historical)" | `HISTORICAL_NAME`, on any tagged row | tagged pass | 2026-10-13 (second batch) |
-| A derelict canal; a place of worship tagged disused=yes; a demolished waterway | `lifecycle`: `waterway=derelict_canal`, `disused=yes` with `amenity=place_of_worship`, `waterway` among `LIFE_FEATURES` | `landmark()` | 2026-10-13 (second batch) |
+| A derelict canal; a place of worship tagged disused=yes with neither an article nor a Wikidata entry of its own; a demolished waterway | `lifecycle`: `waterway=derelict_canal`, `disused=yes` with `amenity=place_of_worship`, `waterway` among `LIFE_FEATURES` | `landmark()` | 2026-10-13 (second batch) |
 | A row admitted only by a Wikidata entry three or more rows share | `SHARED_WIKIDATA_MIN`, `held_by_wikidata` | merges | 2026-10-13 |
 | A square a street already names; a second row for one landmark | `SQUARE_DUP_M`, `NEAR_DUP_M`, `ROW_MERGE_M` | duplicate passes | 2026-10-08, 2026-10-13 |
 | A place value that is no neighborhood (plots, city blocks, islands) | skipped; an island or islet with an article of its own is a landmark (`ISLAND_VALUES`), a district with one a neighborhood (a county that borders the city is dropped by id: Prague's two) | tagged pass, `config.PLACE_DROPPED` | 2026-10-08, 2026-10-13 |
@@ -143,3 +143,7 @@ no street type word in its name; "The Island" in Manchester (three residential
 ways, no junction tag); homes with an article and no home tag; an end date
 behind the cache on a landmark (read on stations only). A standing abandoned
 or ruined landmark stays whatever its article (`ABANDONED_NEED_ARTICLE`).
+
+**Kept by the owner's word, by id (`config.PLACE_KEPT`, 2026-10-13):** an object the bare-type or the register-entry rule
+would drop. Seattle's Ballard Locks (four ways) and London's Greenway (two objects). The word stays on the list for
+every other object.
