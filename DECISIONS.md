@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**134 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**135 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -71,6 +71,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Place search: seven rulings on the final group's held rows (owner)](#2026-10-13---place-search-seven-rulings-on-the-final-groups-held-rows-owner)
 - [Place search: the outside model's flags measured against the tags on wave 1; four rulings (owner)](#2026-10-13---place-search-the-outside-models-flags-measured-against-the-tags-on-wave-1-four-rulings-owner)
 - [Place search: the seven rulings applied on the final group, three departures approved (owner)](#2026-10-13---place-search-the-seven-rulings-applied-on-the-final-group-three-departures-approved-owner)
+- [Place search: the pilot reads and the held rows; sixteen rulings (owner)](#2026-10-13---place-search-the-pilot-reads-and-the-held-rows-sixteen-rulings-owner)
 
 **2026-10-12**
 
@@ -6328,3 +6329,64 @@ japan-city template:
      recorded ruling.
 - **Standing instruction (owner, 2026-10-13):** anything brought back for a
   ruling carries Cleanup's recommendation.
+
+### 2026-10-13 - Place search: the pilot reads and the held rows; sixteen rulings (owner)
+
+- **The pilot: five cities of the extract run read in full against their
+  tags** (`search-rollout`, 88f30b27; lists in
+  `data/_search_rollout/pilot_reads/`): 14,937 rows that are not streets,
+  310 drops (2.1%) and 510 undecided. Osaka 90 and 105 of 5,646, Rio de
+  Janeiro 97 and 118 of 3,747, Madrid 58 and 168 of 2,541, Daegu 45 and 53
+  of 1,712, Amsterdam 20 and 66 of 1,291. Every reader called the list
+  clean; the misses sit in a few classes: bare type words in the local
+  language (Rio 54, Osaka 46, Daegu 20, Madrid 19), worship named by a
+  denomination, estate and mall facilities tagged parks, duplicates.
+- **The final group's held rows, settled by the existing rules in three
+  lanes** (`data/_search_rollout/final_held_settle/`): 1,698 read, 657
+  drops, 884 keeps, 117 in new classes, 41 undecided.
+- **Sixteen items went to the owner with a recommendation each. The owner:
+  "all approved".**
+  1. Religious offices, education halls and residences tagged a place of
+     worship (about 45): dropped; a monastery or convent with an article of
+     its own stays.
+  2. A church named only by its chain (Rio 194; Osaka's Tenrikyo, Soka
+     Gakkai): dropped, inside the denomination rule.
+  3. Planning codes on public streets (Taoyuan, 33): dropped as codes.
+  4. A city programme's name on pocket parks (Taipei, 16): dropped.
+  5. Historic route relations named by their course (Oslo), underwater
+     wrecks (Goteborg), named halls of a venue (Florence), chapels inside
+     prisons (Copenhagen): dropped, 17 in all.
+  6. Peaks carrying a village's name (Taiwan), numbered microdistricts
+     (Riga), parks named for a city block (Stockholm): kept, 41.
+  7. Facilities of an apartment estate or a mall tagged a park or a square
+     (Daegu 13, Osaka about 25, four in Los Angeles): dropped, by a rule
+     where a tag or an estate's brand name shows it.
+  8. Madrid's 372 field, hill and valley names around El Pardo: kept for
+     now; the class is measured on the other cities before any rule.
+  9. A park named as a square that repeats a street row (Madrid, 50): one
+     row, by extending the square and street merge to parks.
+  10. Estates as places: one that works as a district name is kept
+      (colonias, Brasilia's blocks, Taipei's hamlets); a single complex
+      under a marketing name is dropped. Both earlier rulings stand.
+  11. A home tagged an attraction with an article of its own is kept; the
+      German cities' two such rows come back.
+  12. Same-named parks more than 300 m apart are two rows.
+  13. An official road number is a name (Kitakyushu); a campus path number
+      is a code (Brussels). Both stand.
+  14. Wave 1's 58 undecided rows get a one-off Wikidata lookup, outside the
+      narrow-by-rule kinds, to settle them.
+  15. The extract run's 334 street names carrying a leak word are settled
+      by the existing rules in one lane.
+  16. Its 54 stations not yet open join the watch file, each with its
+      evidence.
+- **Fixed without a ruling, as faults:** the bare-type lists gain the words
+  the readers found; station leaks (a freight and a closed station in
+  Madrid, two ticket gates in Osaka, two bus stations in Rio); a suburb
+  boundary given a row beside its node.
+- **Wave 1, after the checked flags were applied** (`search-wave1`,
+  e3515721): 300,403 rows to 300,219 in 32 cities; 21 undecided rows kept
+  (The Dakota, Temple of Dendur, Knowsley Hall and others), 14 dropped.
+- **What the pilot says about the other 146 cities:** the errors left are
+  classes, so one more rule pass built from these reads comes before any
+  further reading; the outside model's scores against the five reads
+  decide how much reading is left.
