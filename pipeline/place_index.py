@@ -362,6 +362,10 @@ def run(config):
     else:
         bare = uncovered_stations(index["rows"], stations,
                                   lines=decode_lines([l for _, l in index.get("street_lines", [])]))
+        bare, wrong = quiet_stations(getattr(config, "PLACE_QUIET_STATIONS", {}), stations, bare)
+        if wrong:
+            import sys
+            sys.exit("; ".join(wrong))
         if bare:
             import sys
             sys.exit(f"{len(bare)} station(s) on the {slug} map have no indexed place within "
@@ -611,6 +615,16 @@ LEAK_WORDS = {
            "bytový dům", "bytové domy", "lékárna", "s.r.o.", "a.s.", "rezidence"),
     "nl": ("hotel", "parking", "privé", "winkel", "restaurant", "appartementen", "residentie",
            "apotheek", "bvba", "nv"),
+    # German (owner, 2026-10-13; docs/decisions_drafts/search-lang-de.md, measured
+    # on Gelsenkirchen, Bremen, Berlin and Zurich). NOT "ag" and "kg": "ag" as
+    # a whole word dropped Bremen's AG-Weser-Straße. Not leak words, measured:
+    # siedlung (145 Berlin neighborhoods), betriebshof (tram stops), residenz,
+    # werkstatt, "e.V.".
+    "de": ("hotel", "gasthof", "gasthaus", "pension", "parkplatz", "parkhaus", "tiefgarage", "privat",
+           "privatweg", "privatstraße", "privatgrundstück", "laden", "geschäft", "restaurant",
+           "gaststätte", "wohnanlage", "wohnpark", "wohnhaus", "mehrfamilienhaus", "apotheke", "gmbh",
+           "ohg", "supermarkt", "einkaufszentrum", "zufahrt", "seniorenresidenz", "autohaus",
+           "tankstelle"),
     # Batch 2b (2026-10-08): Chinese (Hong Kong), Korean (Seoul, Busan) and
     # Georgian (Tbilisi), each checked against its city's own hits. A CJK or
     # Hangul word matches anywhere; a Georgian one as a whole word.
@@ -639,6 +653,8 @@ HOME_WORDS = {
     "pt": ("particular", "privado", "privada", "condomínio", "residencial", "apartamentos"),
     "cs": ("bytový dům", "bytové domy", "soukromé", "soukromá", "rezidence"),
     "nl": ("appartementen", "residentie", "privé"),
+    "de": ("wohnanlage", "wohnpark", "wohnhaus", "mehrfamilienhaus", "privat", "privatweg",
+           "privatstraße", "privatgrundstück", "seniorenresidenz"),
     "zh": ("私人", "私家", "屋苑", "住宅"),
     "ko": ("아파트", "빌라", "맨션", "연립", "주택", "오피스텔", "사유지"),
     "ka": ("კერძო", "ბინა", "საცხოვრებელი"),
@@ -801,6 +817,24 @@ WAY_WORDS = {
            "náplavka"),
     "nl": ("straat", "laan", "weg", "plein", "steenweg", "kaai", "lei", "dreef", "brug", "pad",
            "gang", "steeg", "dijk", "doorgang", "trap", "wandeling", "promenade", "galerij"),
+    # German (owner, 2026-10-13; search-lang-de.md), a word's ending
+    # (SUFFIX_WAY_LANGUAGES): "Hauptstraße", "Kirchweg". Field-name endings in
+    # by the owner's word: -kamp, -winkel, -acker, -hof and -höfe (out:
+    # -garten, -wiese, -heide). Swiss German for Zurich: -wegli, -rain, -halde,
+    # -quai, -viadukt. Low German: -deich, -pad, -pforte (out: -gang, 13 of
+    # Berlin's 19 no street name, and -moor). -eck in after the Berlin
+    # measurement.
+    # THE ID CATCHES (owner): -hof also ends a shopping passage, a schoolyard
+    # and a works yard (Bremen's "Lloydhof" and "Alter Schulhof", Berlin's
+    # "Zuwegung Wirtschaftshof", dropped by id), and -eck a corner cafe or a
+    # building. When a German city's cache is refreshed, list its minor-way
+    # street rows ending -hof or -eck that are new since the last read. The
+    # misfires per word are in search-lang-de.md (tunnel 8 of 11 in Berlin,
+    # passage 5 of 11): the rows go by id, the words stay.
+    "de": ("straße", "strasse", "str", "weg", "gasse", "allee", "platz", "ring", "damm", "ufer", "brücke",
+           "steg", "pfad", "stieg", "steig", "treppe", "promenade", "chaussee", "markt", "wall", "graben",
+           "passage", "tunnel", "unterführung", "durchgang", "trasse", "kamp", "winkel", "acker", "hof",
+           "höfe", "wegli", "rain", "halde", "quai", "viadukt", "deich", "pad", "pforte", "eck"),
     # Batch 2b (2026-10-08), checked against each city's named minor ways.
     # Hong Kong writes a street's type last, in one word (彌敦道, 西洋菜南街,
     # 摩羅上街), and a lane, court or terrace as 巷, 里, 坊, 台 or 圍.
@@ -857,7 +891,7 @@ def _private_street(names, local):
 
 # Languages that write a way word inside a compound ("Nieuwstraat",
 # "Kerkpad"; Korean 세종대로): _reads_as_way matches it as a word's ending there.
-SUFFIX_WAY_LANGUAGES = {"nl", "ko"}
+SUFFIX_WAY_LANGUAGES = {"nl", "ko", "de"}
 # Street names that carry no street word at all. Czech names a street with a
 # preposition ("Na Viničce", "U Vizerky", "Pod Havránkou") or an adjective
 # agreeing with the unwritten "ulice" ("Bělohorská", "Goyova"): Prague's
@@ -865,7 +899,11 @@ SUFFIX_WAY_LANGUAGES = {"nl", "ko"}
 # (batch 2a, 2026-10-08). WAY_LEAD is the name's first word, WAY_ENDING the
 # ending of its last.
 WAY_LEAD = {"cs": ("na", "u", "k", "ke", "pod", "nad", "za", "do", "ve", "v", "při", "před",
-                   "mezi", "po", "proti", "přes", "od", "ze", "z")}
+                   "mezi", "po", "proti", "přes", "od", "ze", "z"),
+            # German names a lane by a preposition too ("Am Wall", "Zum
+            # Hafen"): the loosest group, about 15 misfires in Berlin ("Am
+            # Reitstall") against about 80 real names (search-lang-de.md).
+            "de": ("am", "an", "auf", "im", "in", "zum", "zur", "hinter", "unter", "vor", "bei", "beim")}
 # A trailing Roman numeral ("Herálecká II", "Podnikatelská Ⅰ") is set aside first.
 WAY_ENDING = {"cs": ("á", "ní", "ova", "ého")}
 ROMAN = {"i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x"}
@@ -931,7 +969,10 @@ HOME_NAME = re.compile(r"\b(house|residence|cottage|mansion|farmhouse|homestead)
 # is a civic building.
 HOME_NAME_LEAD = {"fr": ("maison", "manoir"), "ca": ("casa",), "es": ("casa",),
                   "pt": ("casa", "residência", "solar", "palacete"),
-                  "cs": ("dům", "vila"), "nl": ("huis",)}
+                  "cs": ("dům", "vila"), "nl": ("huis",),
+                  # NOT "haus": in Westphalia it names a manor (Haus Darl), and
+                  # a "-haus" ending is a town hall or a hospital.
+                  "de": ("wohnhaus", "villa", "landhaus")}
 # And where the house word CLOSES the name (batch 2b, 2026-10-08): Korean 가옥
 # and 고택 (a traditional house), 옛집 (an old house), 생가 (a birthplace),
 # 저택 and 주택; Chinese 故居 and 舊居 (a former residence), 大宅, 別墅 and
@@ -1219,6 +1260,16 @@ BARE_TYPE_NAMES = {
     "cs": ("kaple", "kostel", "park", "pomník", "památník", "socha", "kříž", "zvonice",
            "hřbitovní kaple", "bývalá kaple", "památník padlých", "pomník padlých"),
     "nl": ("kapel", "kerk", "park", "fontein", "standbeeld", "monument"),
+    # German (owner, 2026-10-13; search-lang-de.md: 45 rows over the four
+    # cities). NOT "marktplatz" (a square's real name), "ohne titel" (a
+    # title), rathaus, bürgerpark, stadtwald, rosengarten, dorfkirche
+    # (proper names in use).
+    "de": ("kirche", "kapelle", "park", "spielplatz", "denkmal", "brunnen", "friedhof", "mahnmal",
+           "wegekreuz", "wegkreuz", "bolzplatz", "sportplatz", "grünanlage", "ehrenmal", "gedenkstein",
+           "kriegerdenkmal", "gedenktafel", "skulptur", "pfarrhaus", "gedenkkreuz", "trauerhalle",
+           "evangelisches gemeindehaus", "friedhofskapelle", "dachgarten", "rodelberg", "badestrand",
+           "fkk-strand", "hundestrand", "tennisstadion", "hügelgrab", "kirchgemeindehaus", "atrium",
+           "hartplatz"),
     "ka": ("ეკლესია", "პარკი", "სკვერი", "ძეგლი", "შადრევანი", "ბაღი", "სასაფლაო"),
 }
 
@@ -2093,10 +2144,31 @@ def _square_keys(names):
 # station the map draws has at least one indexed place, other than a
 # station, within COVER_KM. Measured on the 19 indexes of 2026-10-12, the
 # emptiest covered stations hold 2 (Montreal's Anse-a-l'Orme), 3 (Kyoto's
-# Hozukyo and Kibuneguchi) and 4 (Busan's Seokdae), so zero is a boundary
-# cut and not a quiet station. Re-measure before raising the floor.
+# Hozukyo and Kibuneguchi) and 4 (Busan's Seokdae), so on those 19 zero was a
+# boundary cut and not a quiet station. Re-measure before raising the floor.
 # run() exits on it; scripts/check_place_search.py H re-reads it.
+# QUIET STATIONS (owner, 2026-10-13). Zero is not always a cut: the final
+# group found stations inside their search area with nothing indexed within
+# the distance (Most's stops in the Zaluzi chemical works, Yamagata's). A
+# city names each in config.PLACE_QUIET_STATIONS = {"<station name as in
+# STATIONS_CSV>": "why, who, when"}, and the rule counts it as accounted for.
+# The list may not rot: a listed station that has an indexed place within
+# COVER_KM after all, or is not on the map, stops the step and fails check H,
+# naming it (quiet_stations).
 COVER_KM = 1.0
+
+
+def quiet_stations(quiet, stations, bare):
+    """(the uncovered stations `bare` less those config.PLACE_QUIET_STATIONS
+    lists, problems): a problem for each listed name that is no station of
+    the map (`stations`, map_stations()) or is covered after all."""
+    on_map = {name for name, _, _ in stations}
+    problems = [f"config.PLACE_QUIET_STATIONS lists {name!r}, which is not a station on the map: remove it"
+                for name in sorted(quiet) if name not in on_map]
+    problems += [f"config.PLACE_QUIET_STATIONS lists {name!r}, which has an indexed place within "
+                 f"{COVER_KM:g} km: remove it"
+                 for name in sorted(quiet) if name in on_map and name not in bare]
+    return [name for name in bare if name not in quiet], problems
 _STATION_COLS = (("latitude", "longitude"), ("lat", "lon"), ("stop_lat", "stop_lon"), ("lat", "lng"))
 
 
@@ -3721,6 +3793,14 @@ def _selftest():
         ("the log names a rule for a dropped street",
          any(x["class"] == "street_busway_raceway" and x["name"] == "Bus Road" for x in log)),
         ("own_article: a section is not the object's", own_article({"wikipedia": "en:A#B"}, ["A"])[0] == "not"),
+        ("quiet_stations: a listed uncovered station is accounted for",
+         quiet_stations({"B": "why"}, [("A", 1, 1), ("B", 2, 2)], ["B"]) == ([], [])),
+        ("quiet_stations: an unlisted uncovered station still fails",
+         quiet_stations({"B": "why"}, [("A", 1, 1), ("B", 2, 2), ("C", 3, 3)], ["B", "C"])[0] == ["C"]),
+        ("quiet_stations: a listed station that is covered is a problem",
+         len(quiet_stations({"A": "why"}, [("A", 1, 1), ("B", 2, 2)], [])[1]) == 1),
+        ("quiet_stations: a listed name that is no station of the map is a problem",
+         len(quiet_stations({"Z": "why"}, [("A", 1, 1)], [])[1]) == 1),
         ("own_article: the subject's article is not the object's",
          own_article({"wikipedia": "en:X", "subject:wikipedia": "en:X"}, ["Y"])[0] == "not"),
         ("street_description: a local way word with a number is a name",

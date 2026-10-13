@@ -84,12 +84,25 @@ if hasattr(sys.stdout, "reconfigure"):
 KNOWN_GAPS = {}
 
 
-def check_coverage(slug, index, stations, known=None, lines=None):
+def quiet_of(slug):
+    """config.PLACE_QUIET_STATIONS of a city, {} when it has none."""
+    try:
+        return getattr(importlib.import_module(f"pipeline.{slug}.config"), "PLACE_QUIET_STATIONS", {})
+    except ImportError:
+        return {}
+
+
+def check_coverage(slug, index, stations, known=None, lines=None, quiet=None):
     """H for one city: problems, given its index, its map's stations and
     its streets' polylines (place_index.decode_lines), which cover a station
     a long street runs past though the street's one row point is far off."""
     known = KNOWN_GAPS if known is None else known
     bare = place_index.uncovered_stations(index["rows"], stations, lines=lines)
+    # A station the city lists as quiet is accounted for; a listed one that
+    # is covered after all, or is not on the map, fails by name.
+    bare, wrong = place_index.quiet_stations(quiet_of(slug) if quiet is None else quiet, stations, bare)
+    if wrong:
+        return [f"H: {w}" for w in wrong]
     if bare and slug not in known:
         return [f"H: {len(bare)} map station(s) with no indexed place within {place_index.COVER_KM:g} km "
                 f"({', '.join(bare[:6])}): config.PLACE_AREA does not cover the whole map"]
@@ -475,6 +488,16 @@ def selftest():
         got = len(check_coverage("x", dict(base, rows=rows), stations, known, lines=rest[0] if rest else None))
         ok += got == want
         print(f"  {'ok ' if got == want else 'BAD'} {label}: {got} problem(s)")
+    quiet_cases = [
+        ("a quiet station, listed", near, [("A", 10.0, 20.0), ("B", 10.3, 20.0)], {"B": "why"}, 0),
+        ("a quiet station listed, another uncovered", near, [("B", 10.3, 20.0), ("C", 10.6, 20.0)], {"B": "why"}, 1),
+        ("a listed station that is covered", near, [("A", 10.0, 20.0)], {"A": "why"}, 1),
+        ("a listed station that is not on the map", near, [("A", 10.0, 20.0)], {"Z": "why"}, 1),
+    ]
+    for label, rows, stations, quiet, want in quiet_cases:
+        got = len(check_coverage("x", dict(base, rows=rows), stations, {}, quiet=quiet))
+        ok += got == want
+        print(f"  {'ok ' if got == want else 'BAD'} {label}: {got} problem(s)")
     current = "function getIndex(u) { window.parent.location.pathname; fetch(abs(u), opt) }"
     path_cases = [
         ("a map that takes the app's prefix", current, 0),
@@ -499,7 +522,7 @@ def selftest():
         ok += got == want
         print(f"  {'ok ' if got == want else 'BAD'} {label}: {got} problem(s)")
     total = (len(cases) + 1 + len(leak_cases) + 1 + len(junk_cases) + len(visit_cases)
-             + len(cover_cases) + len(path_cases) + len(street_cases))
+             + len(cover_cases) + len(quiet_cases) + len(path_cases) + len(street_cases))
     print(f"{ok} of {total} cases behaved as intended.")
     return 0 if ok == total else 1
 
