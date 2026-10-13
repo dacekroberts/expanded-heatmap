@@ -116,20 +116,26 @@ This is open work, not a record: update an item here as it moves, and send a fin
 
 ## Trams left off built maps
 
-- [ ] **Trams left off built maps: QUEUED after the search-rules landing (owner, 2026-10-13; parked 2026-09-27 to 2026-10-13); the owner
-  decides case by case.** Estimate and recommendations:
-  `docs/tram_rescope_estimate.md` (light batch yes, REM first; Paris T3 yes;
-  Toronto, Milan, Prague not yet, a label and legend rule then a Toronto
-  pilot; Barcelona likely yes; Hong Kong Tramways out; Cablebús yes; about
-  55–85% of one 5-hour window). ▶ In progress: specs for REM, Rome 8, Madrid
-  ML1, Paris T3a/T3b and SF F Market (`docs/tram_rescope_specs.md`), with
-  Main Build on a branch for review time. Rescoping is main's work, city by
-  city.
-  - **Candidates (stops in scope):** Toronto streetcars (476); Milan (323 of
-    341; no ATM colours); Prague (285); Paris T3a/T3b and edges of T2/T9
-    (62); Barcelona TRAM T1-T6 (9–10 each; one OSM colour, so a colour rule);
-    Rome tram 8 (40); Madrid ML1 (9); SF F Market (46); Fortaleza's VLT (11,
-    failed the rail test); Montreal's REM. D.C. Streetcar ended 2026-03-31.
+- [ ] **Trams left off built maps: the rest is in its own session since
+  2026-10-13 (branch `tram-rescope`); the owner decides case by case.**
+  **Built and on master since 2026-09-27** (merge be2e3713): Montreal's REM,
+  Rome's tram 8, Madrid's ML1, Paris T3a and T3b, San Francisco's F Market &
+  Wharves. **Left:** Barcelona TRAM (a color rule first), Mexico City's
+  Cablebús (coordinates first), then Toronto, Milan and Prague after a label
+  and legend rule and a Toronto pilot. Hong Kong Tramways is out (owner).
+  Estimate as first written: `docs/tram_rescope_estimate.md`.
+  - **Barcelona TRAM, measured 2026-10-13** (OSM, one query, 12 relations):
+    Trambaix T1, T2 and T3 share the same 9 stops inside the city; Trambesòs
+    T4 has 10, and T5 and T6 share the same 10; Glòries is on both groups,
+    so 28 distinct stops. All six carry #007165, Delta-E 13.9 from the
+    Montjuïc funicular's green.
+  - **Rome's other trams (2, 3, 5, 14, 19):** tram 3 runs Trastevere - Porta
+    Maggiore since 2026-09-07; the whole network is due back by 2026-11-23
+    (`docs/recheck_calendar.md`). Not built on 2026-10-13: see the drafts
+    entry of that date.
+  - **Candidates still open (stops in scope):** Toronto streetcars (476);
+    Milan (323 of 341; no ATM colours); Prague (285); Barcelona TRAM (28).
+    Fortaleza's VLT failed the rail test. D.C. Streetcar ended 2026-03-31.
   - **Seoul's Wirye Line is not open:** re-check in January 2027; if open,
     count its stops inside Seoul for the rescope.
   - **Cablebús:** L1 6, L2 7 and L3 6 stations, all in CDMX; no official
