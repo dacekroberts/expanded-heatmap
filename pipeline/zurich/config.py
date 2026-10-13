@@ -250,4 +250,41 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("de",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
+PLACE_DROPPED = {
+    "node/11608454406": "a dealer's gallery: the business itself, no article",
+    "node/11608530438": "a dealer's gallery: the business itself, no article",
+    "node/11391982379": "a dealer's gallery: the business itself, no article",
+    "node/11592562428": "a dealer's gallery: the business itself, no article",
+    "node/10967823417": "a dealer's gallery: the business itself, no article",
+    "node/11608415098": "a dealer's gallery: the business itself, no article",
+    "node/11608133255": "a dealer's gallery: the business itself, no article",
+    "node/13430911922": "a church office, by its own name",
+    "way/846870093": "a housing cooperative's courtyard (operator tag), drawn as a park",
+    "way/846870094": "a housing cooperative's courtyard (operator tag), drawn as a park",
+    "node/2441908509": "a religious residence tagged a place of worship, not notable",
+    "way/1523570871": "a description standing in for a name",
+    "way/1081831416": "a description standing in for a name",
+    "way/1530821189": "a description standing in for a name",
+    "way/1285454510": "a description standing in for a name",
+    "way/495443771": "a description; the museum has its own row",
+    "way/362880331": "a numbered, closed utility building, no register key",
+    "node/5760205836": "a catalogue description standing in for a title",
+    "node/5777113927": "a catalogue description standing in for a title",
+    "node/4581891780": "a catalogue description standing in for a title",
+    "node/13609130931": "a catalogue description standing in for a title",
+    "node/4580439956": "a catalogue description standing in for a title",
+    "node/7405145706": "a zoo enclosure admitted by the breed's article",
+    "node/7059852579": "one statue admitted by an event's article",
+    "node/4472488146": "a library branch admitted by the network's entry",
+    "node/4854152865": "a name cut short",
+    "relation/9379205": "a site relation placed far from both campuses; the campuses have rows",
+    "way/4803419": "a description standing in for a name",
+    "way/4803422": "a description standing in for a name",
+    "way/38693549": "a description standing in for a name",
+    "way/445984147": "a garage's staircase, named by a description",
+    "way/1346762935": "a switchback on a forest track, not a square",
+    "way/28047106": "a switchback on a forest track, not a square",
+    "way/551828960": "a switchback on a forest track, not a square",
+    "way/147046115": "two names in one string with a stray slash; Lochenweg has its own row",
+}

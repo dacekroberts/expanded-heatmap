@@ -101,6 +101,52 @@ page names German only. Every map station has an indexed place within 1 km.
   and Gelsenkirchen's Gedenkkreuz, Trauerhalle and Evangelisches
   Gemeindehaus, one each.
 
+## After the reads (2026-10-13, later the same day)
+
+**A correction to the table above.** The first in-memory builds patched
+`BARE_TYPE_NAMES` and not `_BARE_FOLDED`, the table `bare_type()` reads for a
+Latin-script language, so the German bare type words were not applied: the
+readers found "Kapelle" still in. With both patched, and every by-id drop in
+the four configs applied, the indexes are: Berlin 18,461 rows (13,158
+streets, 3,830 landmarks, 733 places, 738 stations), Bremen 5,648 (4,789,
+510, 165, 184), Zurich 3,331 (2,465, 534, 106, 218), Gelsenkirchen 1,843
+(1,562, 162, 50, 69). The bare list took 12 rows in Berlin, 2 in Bremen, 2
+in Zurich and 3 in Gelsenkirchen. Whoever folds the lists adds the words to
+`BARE_TYPE_NAMES` only; `_BARE_FOLDED` is built from it at import.
+
+**Way words, misfires per word on minor-way-only rows** (the Sonnet street
+screens; Berlin 1,870 such rows, Bremen 1,025, Zurich 747, Gelsenkirchen
+125). No word misfires often enough to leave the list; the rows go by id.
+Zero misfires: damm, winkel, wall, stieg, steg (one under construction),
+acker, gasse, kamp (Bremen's four "Turmkamp I" to "IV" are a numbered
+series, not a misfire of the word), ufer, allee (two glued names), markt,
+chaussee, trasse. tunnel: 8 of 11 in Berlin (station corridors), 2 in
+Zurich, 1 in Bremen. passage: Berlin 5 of 11, Bremen 2 to 5 (arcades).
+treppe: Berlin 5. pfad: Zurich 4, Bremen 5 (trail names; the owner has not
+ruled on trails). hof: Berlin 7, Bremen 8, Zurich 1 clear, Gelsenkirchen 10
+undecidable from tags. The leading prepositions are the loosest group:
+about 14 misfires in Bremen's 69 and 15 in Berlin ("Am Reitstall", "Zum
+Spielplatz"), against about 80 real names in Berlin alone.
+
+**Low German endings, measured and NOT yet ruled** (street rows each would
+add; Bremen only, none in Gelsenkirchen or Zurich; Berlin not measured):
+-deich 12, -diek 1 (and 1 in Gelsenkirchen), -pad 7 (one of them private),
+-gang 10 (three are not streets: Bahnhofsgang, Laubengang, Wasserwerksgang),
+-pforte 2, -eck 3, -moor 2; the leads "achter" 2 and "hinterm" 1.
+
+**Bare type words the reads found, NOT yet ruled** (whole names still in an
+index): friedhofskapelle (Berlin 9, Bremen 2), dachgarten (Zurich 2),
+rodelberg (Berlin 3, Bremen 1), badestrand (Berlin 2), fkk-strand (Berlin 1,
+Bremen 1), hundestrand, tennisstadion, sporthalle, vereinsplatz, hügelgrab,
+kirchgemeindehaus, atrium, hartplatz, one each. Kept out on purpose: rathaus,
+bürgerpark, stadtwald, rosengarten, dorfkirche (proper names in use), and
+every artwork title that is a common noun.
+
+**Home words:** "villa" and "landhaus" lead four Berlin names the rule
+missed because three are tagged a park or garden, where the home-name lead
+is not read. "mietshaus" and "reihenhäuser" hit one row each. "haus" (67
+Berlin hits, nearly all museums and theatres) and "heim" stay out.
+
 ## Matcher words (`map_common.LANG_WORDS`), drafted and NOT tested
 
 No map is rendered on this branch, so none of this has met the search box.

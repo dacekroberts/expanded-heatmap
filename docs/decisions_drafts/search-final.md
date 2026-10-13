@@ -1,3 +1,72 @@
+### 2026-10-13 - The four German cities read; drops by id in each config; the classes left for the owner (branch search-final)
+
+- **The owner, to the three list calls: "1 yes, note the future edit point,
+  2 yes, 3 sounds good"**: -kamp, -winkel, -acker and -hof in with the -hof
+  misfires dropped by id; "AG" and "KG" out of the leak words; the Swiss
+  way words in. The lists and every measurement are in
+  `search-lang-de.md`.
+- **Read from in-memory dumps, since no German index can be written before
+  the lists are folded in.** The `place-read` agent cannot use
+  `place_search_review.py` without an index file, so each reader got a dump
+  of every row with its OSM id and cached tags (scratch `build_dump.py`).
+  Places, stations and landmarks on the top model: Berlin (all 740 places,
+  744 stations and 3,873 landmarks read by name and deciding tags, full tags
+  for about 200), Bremen (all 879 rows), Zurich (all 895 rows);
+  Gelsenkirchen by hand. Streets on Sonnet, minor-way-only rows read line
+  by line and the rest screened by pattern (Berlin 1,870 of 10,840 rows
+  read, Bremen 1,268 of 4,620, Zurich 747 of 2,430, Gelsenkirchen 125 of
+  1,544).
+- **A fault in this session's own measure, found by the readers and
+  fixed:** the in-memory patch missed `_BARE_FOLDED`, so no German bare type
+  word was applied in the first builds or in the dumps the readers read.
+  The corrected counts are in `search-lang-de.md`.
+- **Dropped by id, each checked against its cached name, each under a
+  settled call:** Berlin 110 ids (66 landmark, place and station objects, 44
+  ways of 27 street names); Bremen 55 (19 objects, 36 ways of 18 names,
+  Lloydhof and Alter Schulhof among them); Zurich 35 (27 objects, 8 ways of
+  5 names); Gelsenkirchen 34 in all (15 objects, 19 ways of 2 names). The
+  classes: homes and residents' facilities, dealers' galleries with no
+  article, offices and residences tagged places of worship, descriptions
+  and codes standing in for names, names that say the thing is gone, names
+  cut short or with a mapper's note in them, site relations placed
+  kilometres from their object, zoo and museum contents, one Stolperschwelle,
+  station corridors and exits, facility roads.
+- **NOT acted on, for the owner (no precedent, or a precedent that points
+  two ways):**
+  1. Public art admitted by a Wikidata entry alone: 1,048 of Berlin's 1,111
+     artworks and 171 of Zurich's 563 landmarks, from bulk imports, many
+     under generic titles ("Figur", "Ohne Titel", "Mutter mit Kind" eleven
+     times).
+  2. Allotment lanes: about 600 single-word "-weg" street rows in Bremen
+     and the flower-named paths in Berlin ("Rosenweg" merges 76 footpaths),
+     inferred from themed names, no allotment tag in the cache.
+  3. Coded path names on minor ways in Berlin, about 116 rows ("Weg 5",
+     "Stichweg A", "Querweg 12"), and 38 "Straße N" rows on minor ways only
+     (138 on residential ways are real street names and stay).
+  4. Trail and route names as streets (Zurich 8, Bremen 6, Berlin's Berliner
+     Mauerweg, Gelsenkirchen's Radschnellweg), the question already open
+     for Anyang and Gwangju.
+  5. Abandoned railway alignments as landmarks: 66 rows in Berlin, 50
+     abandoned, disused or razed.
+  6. Homes that are visited monuments (Corbusierhaus, Aalto-Hochhaus, Villa
+     Borgward, Gut Landruhe, Kreuzberg Tower): tourism=attraction opens the
+     home rule and no opening was checked.
+  7. Bremen's exclave: the city relation includes the Überseehafengebiet
+     inside Bremerhaven, 55 km north, with 4 rows and no tram stop.
+  8. Garden plots inside Berlin's Gärten der Welt (10 rows, each with its
+     own Wikidata entry, named for countries) and six courtyards of the
+     same garden drawn as localities.
+  9. Smaller ones, by id once ruled: Zurich's private-for-vehicles service
+     roads that carry a street-register Wikidata entry (about 8), two
+     graves of public figures tagged memorials, pools and a minigolf course
+     tagged parks, Bremen's facade ornaments (22 rows of one ensemble) and
+     the Focke-Museum's re-erected buildings, the Low German endings and
+     the bare type words in `search-lang-de.md`.
+- **Station rows are left to batch 2's one-row-per-station rule**: Berlin's
+  names collide across S-Bahn, U-Bahn, tram and mainline rows (54 names on 2
+  to 4 rows once "S ", "U ", "S+U " and "Berlin " are set aside), Bremen
+  splits stops by platform letters, Zurich has two true duplicates.
+
 ### 2026-10-13 - German: the owner's answers; Anyang's three; Gelsenkirchen's drops by id (branch search-final)
 
 - **The owner, to the four German calls: "1. measure on other cities like
@@ -198,6 +267,36 @@ make redundant. Gwangju's unopened stations are in
    it is; Cleanup checks the own-article test on it.
 6. **A second station row from a station building's outline.** Gwangju
    way/1442542051. Left for batch 2's one-row-per-station rule.
+8. **The private-street rule does not read living_street.** Berlin, 7 rows
+   tagged access=private: way/38574171, 114189253, 114189255, 24839839,
+   148434465, 888746629, 244839885. Not dropped by id.
+9. **A site relation or a boundary relation indexed at a centroid far from
+   its object, a duplicate of a row with the same Wikidata entry.** Bremen
+   relation/2979110 and relation/31489 (dropped by id), relation/62559 (the
+   city boundary, left for batch 2's rule 10); Zurich relation/9379205
+   (dropped by id).
+10. **A `wikipedia` value that is a list article with an anchor ("de:Liste
+    der ...#ref") counted as an article of the object's own.** Bremen, 63
+    landmark rows, example node/5843658961; it keeps bare type names in
+    (way/27012701, way/240493406, way/163219377, node/5858985786).
+11. **A name that says the thing is gone, with no lifecycle tag:**
+    "(geschlossen)", "(abgebrannt)", "(stillgelegt)", "(außer Betrieb)",
+    one each in Berlin, dropped by id; "ehem." or "ehemalig" leads 39 Berlin
+    landmark names, several of them standing buildings, so the word alone
+    is no drop. A razed prefix on a railway key (way/405302873) is not read.
+12. **A Stolperschwelle** (artwork_type=stolperstein, memorial=
+    stolperschwelle): Berlin node/11338877281, dropped by id; the rule reads
+    memorial=stolperstein only.
+13. **A public_transport=station object with no railway tag in the index as
+    a station:** Berlin node/12469014918 and node/11897068961 (a service
+    point and a shared-vehicle hub, dropped by id), way/465683464 (a
+    mezzanine, dropped), way/378955812; Bremen node/2562313294,
+    node/21316810, way/26493594.
+14. **The home-name lead is not read on a park or a garden:** Berlin
+    way/666599487 and way/667618844 (dropped by id), relation/18772488.
+15. **leisure=park on something that is no park** (a pool, a club, an
+    office): Bremen way/237339879 and node/13460725211 (dropped by id),
+    way/205954387; Zurich way/251217100, way/37380208.
 7. **An exhibit admitted by its class's or kind's article.** Anyang
    way/829939487, 829939488, 829939493, 829939494, 829939495, 829939499,
    829939503, and way/829939489 (tourism=attraction, no historic tag).
