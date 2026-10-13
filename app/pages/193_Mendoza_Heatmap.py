@@ -96,7 +96,7 @@ st.markdown(
 """
 )
 
-render_map_help("three business categories (Retail, Food service and Personal services)")
+render_map_help("three business categories (Retail, Food service and Personal services)", search='mendoza')
 render_excluded_stations("Mendoza")
 render_country_links("Mendoza")
 

@@ -116,7 +116,7 @@ st.markdown(
 """
 )
 
-render_map_help('three business categories (Retail, Food service and Personal services)')
+render_map_help('three business categories (Retail, Food service and Personal services)', search='lille')
 render_excluded_stations("Lille (Regional)")
 render_country_links('Lille (Regional)')
 

@@ -194,3 +194,13 @@ RAW_CLASSIFICATION_COLUMN = "naf_label"
 # Sanity bounds: the commune's extent plus ~0.02 deg, from the EPCI
 # contours. They catch a corrupt coordinate; the commune filter scopes.
 ANGERS_BBOX = {"lat_min": 47.42, "lat_max": 47.55, "lon_min": -0.64, "lon_max": -0.49}
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
+
+PLACE_AREA = "(id:3600178351)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
+PLACE_LANGUAGES = ("fr",)
+PLACE_FOLD = None
+PLACE_REVIEWED = {}
+PLACE_DROPPED = {}

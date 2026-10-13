@@ -66,3 +66,13 @@ NODE_NAMES = {}
 GATE3 = {'lines': {'1': 22}, 'network': None, 'source': "pt.wikipedia 'Trensurb', read 2026-09-24 - secondary; Linha 1 22 stations"}
 SPACING_MIN_M = 300.0
 COLLAPSE_MAX_SPREAD_M = 400
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
+
+PLACE_AREA = "(id:3600242397,3600242399,3600242471,3600242574,3600242616,3600242778)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
+PLACE_LANGUAGES = ("pt",)
+PLACE_FOLD = None
+PLACE_REVIEWED = {}
+PLACE_DROPPED = {}

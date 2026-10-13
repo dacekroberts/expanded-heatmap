@@ -18,6 +18,7 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline import place_index  # noqa: E402
 from pipeline.countries import japan  # noqa: E402
 from pipeline.sasebo import config  # noqa: E402
 from pipeline.map_common import load_geojson_line_shapes, render_heatmap  # noqa: E402
@@ -58,6 +59,7 @@ def main():
         # Trade names are Japanese; this orders the Japanese faces first
         # (theme.font_stack) and render_heatmap raises without it.
         lang="ja",
+        place_index_url=place_index.index_url("sasebo"),
     )
 
 

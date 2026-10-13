@@ -23,6 +23,7 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline import place_index  # noqa: E402
 from pipeline.map_common import load_line_shapes, render_heatmap  # noqa: E402
 from pipeline.liege.config import (  # noqa: E402
     STATIONS_CSV,
@@ -81,6 +82,7 @@ def main():
         ring_edges_meters=RING_EDGES_METERS,
         ring_labels=RING_LABELS,
         label_focus=commune_geometry(OSM_COMMUNES_JSON, FETCH, NIS, COMMUNE_AREA_KM2, "Liège"),
+        place_index_url=place_index.index_url("liege"),
     )
 
 

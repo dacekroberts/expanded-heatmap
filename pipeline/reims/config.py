@@ -196,3 +196,13 @@ RAW_CLASSIFICATION_COLUMN = "naf_label"
 # Sanity bounds: the commune's extent plus ~0.02 deg, from the EPCI
 # contours. They catch a corrupt coordinate; the commune filter scopes.
 REIMS_BBOX = {"lat_min": 49.18, "lat_max": 49.32, "lon_min": 3.97, "lon_max": 4.14}
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
+
+PLACE_AREA = "(id:3600036458)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
+PLACE_LANGUAGES = ("fr",)
+PLACE_FOLD = None
+PLACE_REVIEWED = {}
+PLACE_DROPPED = {}

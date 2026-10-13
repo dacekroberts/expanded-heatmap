@@ -86,7 +86,7 @@ st.markdown(
 """
 )
 
-render_map_help("business layer")
+render_map_help("business layer", search='kochi')
 render_excluded_stations("Kōchi")
 render_country_links("Kōchi")
 

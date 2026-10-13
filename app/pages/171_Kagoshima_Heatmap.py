@@ -97,7 +97,7 @@ st.markdown(
 """
 )
 
-render_map_help("two business categories (Food shops and Food service)")
+render_map_help("two business categories (Food shops and Food service)", search='kagoshima')
 render_excluded_stations("Kagoshima")
 render_country_links("Kagoshima")
 

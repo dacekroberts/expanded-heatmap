@@ -91,7 +91,7 @@ st.markdown(
 """
 )
 
-render_map_help("two business categories (Food shops and Food service)")
+render_map_help("two business categories (Food shops and Food service)", search='aomori')
 render_excluded_stations("Aomori")
 render_country_links("Aomori")
 

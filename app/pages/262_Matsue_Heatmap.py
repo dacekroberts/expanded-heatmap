@@ -90,7 +90,7 @@ st.markdown(
 """
 )
 
-render_map_help("business layer")
+render_map_help("business layer", search='matsue')
 render_excluded_stations("Matsue")
 render_country_links("Matsue")
 

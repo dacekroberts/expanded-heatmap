@@ -1,57 +1,90 @@
 {
-  "permits": {
-    "file": "horeca_exploitatievergunning.json",
-    "url": "https://api.data.amsterdam.nl/v1/horeca/exploitatievergunning/",
-    "bytes": 5247388,
-    "sha256": "3707aecffbd47b9d7bc22d806b4da6a2210d51a03b397f7ae221c6b7ac31f0bc",
-    "retrieved": "2026-09-24T09:33:39+00:00",
-    "records": 4092
-  },
-  "bag_units": {
-    "file": "bag_verblijfsobjecten_winkelfunctie.json",
-    "url": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/?gebruiksdoel.omschrijving=winkelfunctie",
-    "bytes": 28672100,
-    "sha256": "de0aa9298c63ca2c2c849bf95466b1170096643cf6d1d2731e6d078a48d3688b",
-    "retrieved": "2026-09-24T09:37:30+00:00",
-    "records": 11607
-  },
   "bag_addresses": {
-    "file": "bag_nummeraanduidingen.json",
-    "url": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/",
     "bytes": 19967387,
-    "sha256": "9b0fb4f66007a720bbc8be2a9d68c6ba0d220e524fe61dedf1a0ba44aadd396f",
+    "file": "bag_nummeraanduidingen.json",
+    "records": 10898,
     "retrieved": "2026-09-24T09:39:39+00:00",
-    "records": 10898
-  },
-  "bag_streets": {
-    "file": "bag_openbareruimtes.json",
-    "url": "https://api.data.amsterdam.nl/v1/bag/openbareruimtes/",
-    "bytes": 4417586,
-    "sha256": "cad5c6e9abb7bb8a5e4951f31657e1b3aafe02f85819d89c97f784567a90e968",
-    "retrieved": "2026-09-24T09:39:55+00:00",
-    "records": 1190
+    "sha256": "9b0fb4f66007a720bbc8be2a9d68c6ba0d220e524fe61dedf1a0ba44aadd396f",
+    "url": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/"
   },
   "bag_permit_lookup": {
-    "file": "bag_permit_address_lookup.json",
-    "url": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/",
     "bytes": 2720211,
-    "sha256": "ec29b6743cc8f12a0e31b2c100083e04bc2d14dd2a166eda96340ccf2c913d09",
+    "file": "bag_permit_address_lookup.json",
+    "records": 492,
     "retrieved": "2026-09-24T09:58:46+00:00",
-    "records": 492
+    "sha256": "ec29b6743cc8f12a0e31b2c100083e04bc2d14dd2a166eda96340ccf2c913d09",
+    "url": "https://api.data.amsterdam.nl/v1/bag/nummeraanduidingen/"
   },
-  "permits_snapshot": "2026-09-24",
+  "bag_streets": {
+    "bytes": 4417586,
+    "file": "bag_openbareruimtes.json",
+    "records": 1190,
+    "retrieved": "2026-09-24T09:39:55+00:00",
+    "sha256": "cad5c6e9abb7bb8a5e4951f31657e1b3aafe02f85819d89c97f784567a90e968",
+    "url": "https://api.data.amsterdam.nl/v1/bag/openbareruimtes/"
+  },
+  "bag_units": {
+    "bytes": 28672100,
+    "file": "bag_verblijfsobjecten_winkelfunctie.json",
+    "records": 11607,
+    "retrieved": "2026-09-24T09:37:30+00:00",
+    "sha256": "de0aa9298c63ca2c2c849bf95466b1170096643cf6d1d2731e6d078a48d3688b",
+    "url": "https://api.data.amsterdam.nl/v1/bag/verblijfsobjecten/?gebruiksdoel.omschrijving=winkelfunctie"
+  },
   "gtfs": {
-    "file": "gtfs-openov-nl.zip",
-    "url": "https://gtfs.openov.nl/gtfs-rt/gtfs-openov-nl.zip",
     "bytes": 242421105,
+    "file": "gtfs-openov-nl.zip",
+    "retrieved": "2026-09-24T09:44:24+00:00",
     "sha256": "57a07bc481bb02e25d8660fe13d4d7cefceded437ef1392cfaffcb019879f57c",
-    "retrieved": "2026-09-24T09:44:24+00:00"
+    "url": "https://gtfs.openov.nl/gtfs-rt/gtfs-openov-nl.zip"
   },
   "gtfs_feed_info": {
-    "feed_start_date": "20260923",
     "feed_end_date": "20261212",
+    "feed_start_date": "20260923",
     "publisher": "OVapi",
     "version": "gtransit_chb:1.0.3:9601"
   },
-  "osm_host": "overpass-api.de"
+  "osm_host": "overpass-api.de",
+  "osm_place_outline": {
+    "bytes": 305379,
+    "elements": 1,
+    "file": "osm_place_outline_v1.json",
+    "host": "download.geofabrik.de (noord-holland-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:60];\narea(id:3600047811)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T09:49:41+00:00",
+    "sha256": "90ec1c3bdaa5602467cb08972f893ea45a2f28e6b8d7da502b20fcbebd5aed77"
+  },
+  "osm_places": {
+    "bytes": 23083989,
+    "elements": 188708,
+    "file": "osm_places_2026-10-13.json",
+    "host": "download.geofabrik.de (noord-holland-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3600047811)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T09:49:41+00:00",
+    "sha256": "d84ac5e20bad82719548efd6ec576d1334549547694f6206a82da4f66fc61e0d"
+  },
+  "osm_places_extra": {
+    "bytes": 346372,
+    "elements": 1115,
+    "file": "osm_places_extra_2026-10-13.json",
+    "host": "download.geofabrik.de (noord-holland-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3600047811)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T09:49:42+00:00",
+    "sha256": "3c91ae553ec695191dd48550d55c72b5a7bce31e0f020f0b3f587ebe9ef7af75"
+  },
+  "permits": {
+    "bytes": 5247388,
+    "file": "horeca_exploitatievergunning.json",
+    "records": 4092,
+    "retrieved": "2026-09-24T09:33:39+00:00",
+    "sha256": "3707aecffbd47b9d7bc22d806b4da6a2210d51a03b397f7ae221c6b7ac31f0bc",
+    "url": "https://api.data.amsterdam.nl/v1/horeca/exploitatievergunning/"
+  },
+  "permits_snapshot": "2026-09-24"
 }

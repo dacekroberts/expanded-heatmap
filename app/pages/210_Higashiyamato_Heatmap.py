@@ -110,7 +110,7 @@ st.markdown(
 """
 )
 
-render_map_help("three business categories (Food shops, Food service and Personal services)")
+render_map_help("three business categories (Food shops, Food service and Personal services)", search='higashiyamato')
 render_excluded_stations("Higashiyamato")
 render_country_links("Higashiyamato")
 

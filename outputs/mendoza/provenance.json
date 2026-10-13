@@ -1,21 +1,54 @@
 {
-  "written_utc": "2026-10-04T07:48:14+00:00",
-  "register": {
-    "page": "https://datos.ciudaddemendoza.gob.ar/dataset/listado-comercios-por-actividad-2025",
-    "url": "https://datos.ciudaddemendoza.gob.ar/dataset/df39f71e-0d7e-40e5-a475-c31f098fab93/resource/94e44b27-951e-4f38-a5c4-17eec535a3fe/download/comercios_limpio.json",
-    "sha256": "ca6af57c5625eb9868a77d6d5bd7e112b9408a33c74de7da00cb9986b707fd17",
-    "data_date": "June 2025",
-    "license": "CC BY 4.0"
+  "files_utc": {
+    "comercios_limpio.json": "2026-10-04T04:00:09+00:00",
+    "osm.json": "2026-10-04T07:48:14+00:00"
   },
-  "osm_host": "overpass-api.de",
   "osm_bbox": [
     -33.0,
     -68.9,
     -32.8,
     -68.76
   ],
-  "files_utc": {
-    "comercios_limpio.json": "2026-10-04T04:00:09+00:00",
-    "osm.json": "2026-10-04T07:48:14+00:00"
-  }
+  "osm_host": "overpass-api.de",
+  "osm_place_outline": {
+    "bytes": 2233264,
+    "elements": 1,
+    "file": "osm_place_outline_v1.json",
+    "host": "download.geofabrik.de (argentina-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:60];\narea(id:3600153540)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T11:20:35+00:00",
+    "sha256": "6630b70bd63b905dc170fb78983947394de543323835d468aeee2cefc748474c"
+  },
+  "osm_places": {
+    "bytes": 16707009,
+    "elements": 166224,
+    "file": "osm_places_2026-10-13.json",
+    "host": "download.geofabrik.de (argentina-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3600153540)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T11:20:35+00:00",
+    "sha256": "2cd2a2a9cbd0a56faaae41122102863774789c8e9db356aae4114b72899e2911"
+  },
+  "osm_places_extra": {
+    "bytes": 92179,
+    "elements": 451,
+    "file": "osm_places_extra_2026-10-13.json",
+    "host": "download.geofabrik.de (argentina-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3600153540)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T11:20:36+00:00",
+    "sha256": "5df2873828e3a0e696a8138ae21d0c118220a27da9c4873cea96429f49fa2a3a"
+  },
+  "register": {
+    "data_date": "June 2025",
+    "license": "CC BY 4.0",
+    "page": "https://datos.ciudaddemendoza.gob.ar/dataset/listado-comercios-por-actividad-2025",
+    "sha256": "ca6af57c5625eb9868a77d6d5bd7e112b9408a33c74de7da00cb9986b707fd17",
+    "url": "https://datos.ciudaddemendoza.gob.ar/dataset/df39f71e-0d7e-40e5-a475-c31f098fab93/resource/94e44b27-951e-4f38-a5c4-17eec535a3fe/download/comercios_limpio.json"
+  },
+  "written_utc": "2026-10-04T07:48:14+00:00"
 }

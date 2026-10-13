@@ -22,6 +22,7 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline import place_index  # noqa: E402
 from pipeline.map_common import load_line_shapes, render_heatmap  # noqa: E402
 from pipeline.countries.belgium import commune_geometry  # noqa: E402
 from pipeline.ghent import config  # noqa: E402
@@ -65,6 +66,7 @@ def main():
         ring_labels=config.RING_LABELS,
         label_focus=commune_geometry(config.OSM_COMMUNES_JSON, FETCH, config.OWN_NIS,
                                      config.COMMUNE_AREA_KM2, "Ghent"),
+        place_index_url=place_index.index_url("ghent"),
     )
 
 

@@ -97,7 +97,7 @@ st.markdown(
 """
 )
 
-render_map_help("business categories (Food service and Food shops)")
+render_map_help("business categories (Food service and Food shops)", search='antwerp')
 render_excluded_stations("Antwerp")
 render_country_links("Antwerp")
 

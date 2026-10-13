@@ -89,7 +89,7 @@ st.markdown(
 """
 )
 
-render_map_help("three business categories (Food shops, Food service and Personal services)")
+render_map_help("three business categories (Food shops, Food service and Personal services)", search='iwaki')
 render_excluded_stations("Iwaki")
 render_country_links("Iwaki")
 

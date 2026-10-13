@@ -189,3 +189,13 @@ RAW_CLASSIFICATION_COLUMN = "naf_label"
 # Sanity bounds: the served communes' extent plus ~0.02 deg, from the EPCI
 # contours. They catch a corrupt coordinate; the commune filter scopes.
 GRENOBLE_BBOX = {"lat_min": 45.08, "lat_max": 45.29, "lon_min": 5.62, "lon_max": 5.83}
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
+
+PLACE_AREA = "(id:3600080347,3600080348,3600080349,3600081678,3600085939,3600085944,3600085947,3600090862,3600105152,3600105162,3600191039,3600192318)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
+PLACE_LANGUAGES = ("fr",)
+PLACE_FOLD = None
+PLACE_REVIEWED = {}
+PLACE_DROPPED = {}

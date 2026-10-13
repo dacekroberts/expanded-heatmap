@@ -102,7 +102,7 @@ st.markdown(
 """
 )
 
-render_map_help("three business categories (Retail, Food service and Personal services)")
+render_map_help("three business categories (Retail, Food service and Personal services)", search='caen')
 render_excluded_stations("Caen")
 render_country_links("Caen")
 

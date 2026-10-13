@@ -67,3 +67,13 @@ NODE_NAMES = {}
 GATE3 = {'lines': {'1': 10, '2': 12}, 'network': None, 'source': "the operator (trilhos.motiva.com.br/metrobahia) and pt.wikipedia 'Metrô de Salvador', read 2026-09-24: Linha 1 10 stations, Linha 2 12"}
 SPACING_MIN_M = 300.0
 COLLAPSE_MAX_SPREAD_M = 400
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
+
+PLACE_AREA = "(id:3600362362)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
+PLACE_LANGUAGES = ("pt",)
+PLACE_FOLD = None
+PLACE_REVIEWED = {}
+PLACE_DROPPED = {}

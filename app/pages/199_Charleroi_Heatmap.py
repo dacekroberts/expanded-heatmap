@@ -90,7 +90,7 @@ st.markdown(
 """
 )
 
-render_map_help("two business categories (Retail and Food service)")
+render_map_help("two business categories (Retail and Food service)", search='charleroi')
 render_excluded_stations("Charleroi")
 render_country_links("Charleroi")
 

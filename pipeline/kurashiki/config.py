@@ -354,3 +354,13 @@ CITY_BBOX = KURASHIKI_BBOX
 # student dormitory's kitchens among them. Shown as the permit type
 # (owner, 2026-10-12; japan_step2.run).
 NUMERIC_NAME_IS_CODE = True
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
+
+PLACE_AREA = "(id:3603938622)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
+PLACE_LANGUAGES = ("ja",)
+PLACE_FOLD = "ja"
+PLACE_REVIEWED = {}
+PLACE_DROPPED = {}

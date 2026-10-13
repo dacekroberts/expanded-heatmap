@@ -1,53 +1,86 @@
 {
-  "semas": {
-    "file": "sbiz_15083033.zip",
-    "page": "https://www.data.go.kr/data/15083033/fileData.do",
-    "url": "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003695831&fileDetailSn=1&insertDataPrcus=N",
-    "bytes": 352699739,
-    "sha256": "57aa361544108ff4fc73334f87d2ced61e41fe8638dd70bcd842930f865d2386",
-    "retrieved": "2026-09-29T09:34:52+00:00",
-    "edition": "2026-06-30"
-  },
-  "osm_rail": {
-    "file": "osm_rail_routes.json",
-    "host": "overpass.kumi.systems",
-    "query": "[out:json][timeout:600];(relation[\"type\"=\"route\"][\"route\"~\"^(subway|light_rail|monorail|tram)$\"](37.34,126.86,37.46,127.01);relation[\"type\"=\"route\"][\"route\"=\"train\"][\"ref\"~\"^(수인·분당|경의·중앙|경강|서해|GTX-A|경춘)$\"](37.34,126.86,37.46,127.01);)->.r;.r out geom;node(r.r);out body;",
-    "bytes": 1818320,
-    "sha256": "913dc2a8ee2f1b935c34c366aa963643e5e3fc337fc002379d8f2dfac06350cd",
-    "elements": {
-      "relation": 37,
-      "node": 250
-    },
-    "osm_base": "2026-07-15T15:22:01Z"
-  },
-  "osm_station_names": {
-    "file": "osm_station_names.json",
-    "host": "overpass-api.de",
-    "query": "[out:json][timeout:240];(node[\"railway\"=\"station\"](37.34,126.86,37.46,127.01);way[\"railway\"=\"station\"](37.34,126.86,37.46,127.01););out tags center;",
-    "bytes": 13724,
-    "sha256": "ddef0ddb905ce98d700d678cd151de72f3c846c3300c211501248f3bce45037a",
-    "elements": {
-      "node": 18
-    },
-    "osm_base": "2026-10-01T01:28:22Z"
-  },
   "osm_boundary": {
-    "file": "osm_boundary.json",
-    "host": "overpass-api.de",
-    "query": "[out:json][timeout:240];relation(2409161)[\"name\"=\"안양시\"];out geom;",
     "bytes": 23717,
-    "sha256": "66ff89c5e62de5ac93c41ab9063f1d33791acdf77f475727b58afca5882a17aa",
     "elements": {
       "relation": 1
     },
-    "osm_base": "2026-10-01T01:29:13Z"
+    "file": "osm_boundary.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-10-01T01:29:13Z",
+    "query": "[out:json][timeout:240];relation(2409161)[\"name\"=\"안양시\"];out geom;",
+    "sha256": "66ff89c5e62de5ac93c41ab9063f1d33791acdf77f475727b58afca5882a17aa"
   },
   "osm_boundary_regional": {
+    "bytes": 63715,
     "file": "osm_boundary_regional.json",
     "host": "overpass-api.de",
+    "osm_base": "2026-10-07T08:22:26Z",
     "query": "[out:json][timeout:240];relation[\"boundary\"=\"administrative\"][\"admin_level\"=\"6\"][\"name\"~\"^(안양시|군포시|의왕시)$\"](37.28,126.85,37.47,127.05);out geom;",
-    "bytes": 63715,
-    "sha256": "8c67671de06d857f0a9d735e48cb6c422d3616d148dbb8079196f29377a0e1c3",
-    "osm_base": "2026-10-07T08:22:26Z"
+    "sha256": "8c67671de06d857f0a9d735e48cb6c422d3616d148dbb8079196f29377a0e1c3"
+  },
+  "osm_place_outline": {
+    "bytes": 24067,
+    "elements": 1,
+    "file": "osm_place_outline_v1.json",
+    "host": "download.geofabrik.de (south-korea-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:60];\narea(id:3602409161)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T09:36:20+00:00",
+    "sha256": "fe8acab933b14878b50188c767696ca29ae3cb8fc2d564e1f96a9072eb1a04c3"
+  },
+  "osm_places": {
+    "bytes": 1426007,
+    "elements": 12844,
+    "file": "osm_places_2026-10-13.json",
+    "host": "download.geofabrik.de (south-korea-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3602409161)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T09:36:20+00:00",
+    "sha256": "76f7358d3dd4ce6b3fadebd55e60cf7bbecbd0cf680779f57070a89be4b1b53b"
+  },
+  "osm_places_extra": {
+    "bytes": 27077,
+    "elements": 63,
+    "file": "osm_places_extra_2026-10-13.json",
+    "host": "download.geofabrik.de (south-korea-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3602409161)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T09:36:20+00:00",
+    "sha256": "e0ea91252baf3d871db8f17119b74567a582465e1b73f356d8f0ef36f13c8972"
+  },
+  "osm_rail": {
+    "bytes": 1818320,
+    "elements": {
+      "node": 250,
+      "relation": 37
+    },
+    "file": "osm_rail_routes.json",
+    "host": "overpass.kumi.systems",
+    "osm_base": "2026-07-15T15:22:01Z",
+    "query": "[out:json][timeout:600];(relation[\"type\"=\"route\"][\"route\"~\"^(subway|light_rail|monorail|tram)$\"](37.34,126.86,37.46,127.01);relation[\"type\"=\"route\"][\"route\"=\"train\"][\"ref\"~\"^(수인·분당|경의·중앙|경강|서해|GTX-A|경춘)$\"](37.34,126.86,37.46,127.01);)->.r;.r out geom;node(r.r);out body;",
+    "sha256": "913dc2a8ee2f1b935c34c366aa963643e5e3fc337fc002379d8f2dfac06350cd"
+  },
+  "osm_station_names": {
+    "bytes": 13724,
+    "elements": {
+      "node": 18
+    },
+    "file": "osm_station_names.json",
+    "host": "overpass-api.de",
+    "osm_base": "2026-10-01T01:28:22Z",
+    "query": "[out:json][timeout:240];(node[\"railway\"=\"station\"](37.34,126.86,37.46,127.01);way[\"railway\"=\"station\"](37.34,126.86,37.46,127.01););out tags center;",
+    "sha256": "ddef0ddb905ce98d700d678cd151de72f3c846c3300c211501248f3bce45037a"
+  },
+  "semas": {
+    "bytes": 352699739,
+    "edition": "2026-06-30",
+    "file": "sbiz_15083033.zip",
+    "page": "https://www.data.go.kr/data/15083033/fileData.do",
+    "retrieved": "2026-09-29T09:34:52+00:00",
+    "sha256": "57aa361544108ff4fc73334f87d2ced61e41fe8638dd70bcd842930f865d2386",
+    "url": "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003695831&fileDetailSn=1&insertDataPrcus=N"
   }
 }

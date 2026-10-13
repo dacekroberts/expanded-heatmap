@@ -81,7 +81,7 @@ st.markdown(
 """
 )
 
-render_map_help('business layer')
+render_map_help('business layer', search='yokohama')
 render_excluded_stations("Yokohama")
 render_country_links('Yokohama')
 

@@ -1,12 +1,45 @@
 {
-  "fetched_utc": "2026-09-23T20:29:08+00:00",
-  "gtfs_url": "https://data.toulouse-metropole.fr/explore/dataset/tisseo-gtfs/files/fc1dda89077cf37e4f7521760e0ef4e9/download/",
   "boundary_url": "https://geo.api.gouv.fr/communes/31555?geometry=contour&format=geojson",
-  "gtfs_self_attests": false,
-  "feed_info": {},
   "catalogue": {
     "modified": "2026-09-23T02:15:22+00:00",
     "records_count": 2,
     "title": "Tisséo : Réseau transport urbain toulousain"
+  },
+  "feed_info": {},
+  "fetched_utc": "2026-09-23T20:29:08+00:00",
+  "gtfs_self_attests": false,
+  "gtfs_url": "https://data.toulouse-metropole.fr/explore/dataset/tisseo-gtfs/files/fc1dda89077cf37e4f7521760e0ef4e9/download/",
+  "osm_place_outline": {
+    "bytes": 81969,
+    "elements": 1,
+    "file": "osm_place_outline_v1.json",
+    "host": "download.geofabrik.de (midi-pyrenees-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:60];\narea(id:3600035738)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T10:29:16+00:00",
+    "sha256": "df2ff3c62104d75837a4e703d7aa1d04adaffa308b743bbb7ee08607f597f18a"
+  },
+  "osm_places": {
+    "bytes": 11684774,
+    "elements": 97398,
+    "file": "osm_places_2026-10-13.json",
+    "host": "download.geofabrik.de (midi-pyrenees-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3600035738)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T10:29:16+00:00",
+    "sha256": "269d530f3a898c50c2bdaec4f376ac647f29619c4171c7f4a345bc49b6ae16d1"
+  },
+  "osm_places_extra": {
+    "bytes": 117654,
+    "elements": 362,
+    "file": "osm_places_extra_2026-10-13.json",
+    "host": "download.geofabrik.de (midi-pyrenees-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3600035738)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T10:29:16+00:00",
+    "sha256": "d7de72f4d67ee17aaeea806bd79cda977efbb46f15a60d3853fae9252c85c93d"
   }
 }

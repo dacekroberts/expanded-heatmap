@@ -110,7 +110,9 @@ SOURCES = ("overpass", "extract")
 # The largest regional file the extract source downloads without a person
 # (--max-mb), and the age of a held extract it accepts: any. Boundaries are
 # stable, the reason an Overpass answer of any date is accepted above.
-EXTRACT_MAX_MB = 800
+# 1,000 since 2026-10-13: the fetch downloads to 1,000 MB, and a lookup capped
+# lower left three Brazilian cities unresolved over a file the fetch may take.
+EXTRACT_MAX_MB = 1000
 EXTRACT_ANY_AGE_DAYS = 36500
 # The area id of a relation is this plus its id (config.PLACE_AREA).
 AREA_BASE = 3600000000

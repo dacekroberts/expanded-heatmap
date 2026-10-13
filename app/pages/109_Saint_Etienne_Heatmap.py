@@ -102,7 +102,7 @@ st.markdown(
 """
 )
 
-render_map_help("three business categories (Retail, Food service and Personal services)")
+render_map_help("three business categories (Retail, Food service and Personal services)", search='saint_etienne')
 render_excluded_stations("Saint-Étienne")
 render_country_links("Saint-Étienne")
 

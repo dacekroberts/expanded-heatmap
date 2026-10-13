@@ -95,7 +95,7 @@ st.markdown(
 """
 )
 
-render_map_help("two business categories (Food shops and Food service)")
+render_map_help("two business categories (Food shops and Food service)", search='sasebo')
 render_excluded_stations("Sasebo")
 render_country_links("Sasebo")
 

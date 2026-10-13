@@ -1,40 +1,73 @@
 {
-  "cnefe:2304400_FORTALEZA.zip": {
-    "file": "2304400_FORTALEZA.zip",
-    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/23_CE/2304400_FORTALEZA.zip",
-    "bytes": 28907115,
-    "sha256": "b4b735e37ba7894d3c812a1367470db12e06d78efbb54dc36ad42d1785339fd9",
-    "retrieved": "2026-09-24T15:56:42+00:00 (cache file time)",
-    "last_modified": "Mon, 20 May 2024 22:52:09 GMT"
-  },
   "cnefe:2303709_CAUCAIA.zip": {
-    "file": "2303709_CAUCAIA.zip",
-    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/23_CE/2303709_CAUCAIA.zip",
     "bytes": 3875954,
-    "sha256": "0cc1c1988c208e213a885fa2ffff005ec11ff70e1a5f09de79faf3e22f012f4d",
+    "file": "2303709_CAUCAIA.zip",
+    "last_modified": "Mon, 20 May 2024 22:52:07 GMT",
     "retrieved": "2026-09-24T15:56:45+00:00 (cache file time)",
-    "last_modified": "Mon, 20 May 2024 22:52:07 GMT"
+    "sha256": "0cc1c1988c208e213a885fa2ffff005ec11ff70e1a5f09de79faf3e22f012f4d",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/23_CE/2303709_CAUCAIA.zip"
+  },
+  "cnefe:2304400_FORTALEZA.zip": {
+    "bytes": 28907115,
+    "file": "2304400_FORTALEZA.zip",
+    "last_modified": "Mon, 20 May 2024 22:52:09 GMT",
+    "retrieved": "2026-09-24T15:56:42+00:00 (cache file time)",
+    "sha256": "b4b735e37ba7894d3c812a1367470db12e06d78efbb54dc36ad42d1785339fd9",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/23_CE/2304400_FORTALEZA.zip"
   },
   "cnefe:2307650_MARACANAU.zip": {
-    "file": "2307650_MARACANAU.zip",
-    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/23_CE/2307650_MARACANAU.zip",
     "bytes": 2340410,
-    "sha256": "ffa32efea24055b3007db973adb697ac8f10cb987f0b18bdf86da1fb4fd8e925",
+    "file": "2307650_MARACANAU.zip",
+    "last_modified": "Mon, 20 May 2024 22:52:11 GMT",
     "retrieved": "2026-09-24T15:56:47+00:00 (cache file time)",
-    "last_modified": "Mon, 20 May 2024 22:52:11 GMT"
+    "sha256": "ffa32efea24055b3007db973adb697ac8f10cb987f0b18bdf86da1fb4fd8e925",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/23_CE/2307650_MARACANAU.zip"
   },
   "cnefe:2309706_PACATUBA.zip": {
-    "file": "2309706_PACATUBA.zip",
-    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/23_CE/2309706_PACATUBA.zip",
     "bytes": 710306,
-    "sha256": "c1685d02b1c1d8a0f123f59c44ac6e1af4f12e197255ec04348869577d18039f",
+    "file": "2309706_PACATUBA.zip",
+    "last_modified": "Mon, 20 May 2024 22:52:11 GMT",
     "retrieved": "2026-09-24T15:56:49+00:00 (cache file time)",
-    "last_modified": "Mon, 20 May 2024 22:52:11 GMT"
+    "sha256": "c1685d02b1c1d8a0f123f59c44ac6e1af4f12e197255ec04348869577d18039f",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/23_CE/2309706_PACATUBA.zip"
   },
   "osm_municipios": {
     "file": "osm_municipios.json",
     "host": "overpass-api.de",
     "retrieved": "2026-09-24T16:07:14+00:00 (cache file time)"
+  },
+  "osm_place_outline": {
+    "bytes": 209510,
+    "elements": 3,
+    "file": "osm_place_outline_v1.json",
+    "host": "download.geofabrik.de (nordeste-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:60];\narea(id:3600302547,3600302588,3600302620)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T10:11:55+00:00",
+    "sha256": "6740c05dade2b23628add04bccaf6cefc224c386eaf60539750fa220ba104546"
+  },
+  "osm_places": {
+    "bytes": 16015301,
+    "elements": 151499,
+    "file": "osm_places_2026-10-13.json",
+    "host": "download.geofabrik.de (nordeste-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3600302547,3600302588,3600302620)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T10:11:55+00:00",
+    "sha256": "27efbbeba84716c07d33862c20fc7c8f03c0e48c575beeece098576036142d0a"
+  },
+  "osm_places_extra": {
+    "bytes": 118040,
+    "elements": 434,
+    "file": "osm_places_extra_2026-10-13.json",
+    "host": "download.geofabrik.de (nordeste-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3600302547,3600302588,3600302620)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T10:11:57+00:00",
+    "sha256": "0aca3f117b30256a8dafbff2c0417540566de82f0a04db81a4e89986cb1c2927"
   },
   "osm_rail": {
     "file": "osm_rail.json",

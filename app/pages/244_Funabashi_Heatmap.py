@@ -82,7 +82,7 @@ st.markdown(
 """
 )
 
-render_map_help("business layer")
+render_map_help("business layer", search='funabashi')
 render_excluded_stations("Funabashi")
 render_country_links("Funabashi")
 

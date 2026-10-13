@@ -90,7 +90,7 @@ st.markdown(
 """
 )
 
-render_map_help("three business categories (Food shops, Food service and Personal services)")
+render_map_help("three business categories (Food shops, Food service and Personal services)", search='fukushima')
 render_excluded_stations("Fukushima")
 render_country_links("Fukushima")
 

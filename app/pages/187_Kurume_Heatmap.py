@@ -92,7 +92,7 @@ st.markdown(
 """
 )
 
-render_map_help("two business categories (Food shops and Food service)")
+render_map_help("two business categories (Food shops and Food service)", search='kurume')
 render_excluded_stations("Kurume")
 render_country_links("Kurume")
 

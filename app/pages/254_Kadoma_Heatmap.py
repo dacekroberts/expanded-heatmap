@@ -91,7 +91,7 @@ st.markdown(
 """
 )
 
-render_map_help("business layer")
+render_map_help("business layer", search='kadoma')
 render_excluded_stations("Kadoma")
 render_country_links("Kadoma")
 

@@ -89,7 +89,7 @@ st.markdown(
 """
 )
 
-render_map_help("business layer")
+render_map_help("business layer", search='fuji')
 render_excluded_stations("Fuji")
 render_country_links("Fuji")
 
