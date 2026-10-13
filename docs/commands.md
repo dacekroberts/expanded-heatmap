@@ -11,6 +11,7 @@ python pipeline/<city_slug>/step2_clean_businesses.py
 python pipeline/<city_slug>/step3_map.py
 python pipeline/place_index_fetch.py <city_slug> [--force]   # place search: its two Overpass queries, in turn; NOT a step
 python pipeline/<city_slug>/step2b_place_index.py       # place search: the index, before step 3
+python pipeline/place_index.py --selftest               # the index rules of 2026-10-13 on a made-up city; break each with `python scripts/rule_breaks.py pipeline/place_index.py scripts/place_index_breaks.json` after any change to a rule
 python scripts/check_place_search.py [--selftest]       # every searched map current; languages measured; ODbL; junk and leak words
 python scripts/check_place_scope.py [--selftest]        # the ceiling: every searched index covers only municipalities with a station or a recorded reason, and carries its outline
 python pipeline/place_index_fetch.py <city> [--force] [--wait <min>] [--host <mirror>]   # a city's two place queries; one run per Overpass mirror at a time on this machine (a lock per mirror; with no --host it holds both); `--selftest` runs the lock's cases

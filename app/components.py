@@ -4811,12 +4811,14 @@ def render_map_help(layers="business categories", search=None):
     languages = search_languages(search) if search else None
     if languages:
         # Wording approved by the owner, 2026-10-07; the languages are measured.
+        # The last sentence: owner, 2026-10-13 (the short form, US spelling).
         search_line = (
             "- The search button (top left) finds streets, intersections, stations, "
             f"lines, neighborhoods and landmarks, in {or_list(languages)}, and moves the "
             "map there. It does not search the businesses on the map. The list of places "
             "loads once when you open the search, and what you type never leaves your "
-            "browser.\n")
+            "browser. Place names come from OpenStreetMap as its contributors wrote them, "
+            "so a few are misspelled.\n")
     st.markdown(
         "**Using the map**\n\n"
         f"- The layer control {_LAYERS_ICON} in the top left turns the rings "
