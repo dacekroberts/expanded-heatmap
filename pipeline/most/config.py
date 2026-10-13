@@ -146,3 +146,16 @@ PLACE_LANGUAGES = ("cs",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
 PLACE_DROPPED = {}
+# QUIET STATIONS (owner, 2026-10-13): stops inside the search area with
+# nothing indexable within 1 km, so the coverage rule skips them. All three
+# are inside Litvínov, at the Záluží chemical works; ustecky-261012 holds no
+# named highway way within 1 km of any, in any municipality. Read by shared
+# code once Cleanup lands it; re-measure if the area or the cache changes.
+PLACE_QUIET_STATIONS = {
+    "Záluží, areál Hlubina": "nearest index row 1,065 m, nearest indexed street line 1,112 m; "
+                             "owner, 2026-10-13",
+    "Záluží, doprava": "nearest index row 1,388 m, nearest indexed street line 1,688 m; "
+                       "owner, 2026-10-13",
+    "Záluží, čerpací stanice": "nearest index row 1,308 m, nearest indexed street line 2,707 m; "
+                               "owner, 2026-10-13",
+}

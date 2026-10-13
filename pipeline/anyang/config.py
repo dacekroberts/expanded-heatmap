@@ -162,6 +162,8 @@ _EXHIBIT = "a Railroad Museum exhibit whose article is its class's or kind's, no
 _MALL = "a corridor of an underground shopping mall, named for the mall"
 _NO_NAME = "a description standing in for a name"
 PLACE_DROPPED = {
+    "node/7817073349": "a rail yard (railway=yard) in the index as a station; no passenger tag "
+                       "(owner, 2026-10-13)",
     "way/777263833": _ESTATE, "way/777264096": _ESTATE, "way/777262929": _ESTATE,
     "way/777263610": _ESTATE, "way/746342781": _ESTATE,
     "way/1464246217": "a diocese's vicariate office, tagged a place of worship",

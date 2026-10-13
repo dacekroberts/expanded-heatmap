@@ -246,4 +246,21 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("de",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# The hand read of 2026-10-13 (docs/decisions_drafts/search-final.md).
+PLACE_DROPPED = {
+    "node/9645844304": "one of seven prayer stones tagged a place of worship, no register key; the group row node/4553571141 stays (owner, 2026-10-13)",
+    "node/9645844303": "one of seven prayer stones tagged a place of worship, no register key; the group row node/4553571141 stays (owner, 2026-10-13)",
+    "node/9645844302": "one of seven prayer stones tagged a place of worship, no register key; the group row node/4553571141 stays (owner, 2026-10-13)",
+    "node/9645844301": "one of seven prayer stones tagged a place of worship, no register key; the group row node/4553571141 stays (owner, 2026-10-13)",
+    "node/9645844300": "one of seven prayer stones tagged a place of worship, no register key; the group row node/4553571141 stays (owner, 2026-10-13)",
+    "node/9645844299": "one of seven prayer stones tagged a place of worship, no register key; the group row node/4553571141 stays (owner, 2026-10-13)",
+    "node/9645844298": "one of seven prayer stones tagged a place of worship, no register key; the group row node/4553571141 stays (owner, 2026-10-13)",
+    "way/322467166": "a kindergarten tagged a place of worship",
+    "node/8998470682": "a church youth office tagged a place of worship",
+    "way/418609149": "a section of the zoo, drawn as a park; the zoo has its own row",
+    "way/418609413": "a section of the zoo, drawn as a park; the zoo has its own row",
+    "way/418624765": "a section of the zoo, drawn as a park; the zoo has its own row",
+    "way/418640757": "a section of the zoo, drawn as a park; the zoo has its own row",
+    "way/244557929": "a park named for the cattle kept in it: a description",
+    "way/556717431": "a description standing in for a name",
+}

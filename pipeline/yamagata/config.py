@@ -298,3 +298,11 @@ PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
 PLACE_DROPPED = {}
+# QUIET STATION (owner, 2026-10-13): inside the search area, 1,071 m from its
+# edge, with nothing indexable within 1 km (the station, a river whose row
+# point is 2,961 m away, and a viewpoint with no Wikidata entry). Read by
+# shared code once Cleanup lands it; re-measure if the cache changes.
+PLACE_QUIET_STATIONS = {
+    "Omoshiroyama-Kogen": "nearest index row 2,146 m, nearest indexed street line 1,439 m; "
+                          "owner, 2026-10-13",
+}

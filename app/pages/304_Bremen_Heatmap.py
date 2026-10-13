@@ -99,7 +99,7 @@ st.markdown(
 """
 )
 
-render_map_help("business layer")
+render_map_help("business layer", search='bremen')
 render_excluded_stations("Bremen")
 render_country_links("Bremen")
 

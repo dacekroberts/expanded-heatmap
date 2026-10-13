@@ -1,3 +1,54 @@
+### 2026-10-13 - German: the owner's answers; Anyang's three; Gelsenkirchen's drops by id (branch search-final)
+
+- **The owner, to the four German calls: "1. measure on other cities like
+  you said first. 2. confirm you are allowed to do so. 3. address the two
+  classes like your recommendation", and then "yes 2 is my confirmation".**
+- **1. Field-name street endings are not in the draft lists** (-kamp,
+  -delle, -winkel, -garten, -hof). They are measured on Berlin, Bremen and
+  Zurich before any is proposed.
+- **2. Germany's search area is the relation whose municipality key
+  (de:amtlicher_gemeindeschluessel) is the one the map is cut to:**
+  Gelsenkirchen 62522 (level 6), Berlin 62422 (level 4, the city-state),
+  Bremen 62559 (level 6, the city and not the state with Bremerhaven).
+  Zurich is 1682248, its config's `ZURICH_RELATION`. Berlin, Bremen and
+  Zurich were scaffolded and fetched on that word.
+- **3. Prayer stones:** the seven "Schmerz Mariens" stones are dropped by
+  id and their group row (node/4553571141) stays. Each is tagged a place of
+  worship and carries no register key, unlike Prague's Stations of the
+  Cross. **Untitled artworks:** the three rows named "Ohne Titel" in some
+  form carry a Wikidata entry and stay; the fourth, with no entry
+  (node/5272526752), was never a row, since the notable rule already leaves
+  it out. Nothing was dropped for this class.
+- **Gelsenkirchen's other drops by id, each covered by a settled call:** a
+  kindergarten and a church youth office tagged places of worship, four
+  sections of the zoo drawn as parks, a park named for the cattle in it and
+  a building named by a description. 15 ids in all; in memory the index is
+  1,837 rows (165 landmarks).
+- **The owner, to Anyang's three: "1. drop, 2. keep, 3. keep".** 오봉
+  (node/7817073349), a rail yard in the index as a station, is dropped by
+  id. The Pasi-class locomotive 5-23 (way/829939510) stays on its
+  registered property number. 오봉정사 (node/12133504731) and 복전원
+  (way/1219935236 and four buildings) stay: the tags cannot tell a
+  residence from a temple.
+
+### 2026-10-13 - Most and Yamagata: the quiet stations recorded in their configs; a page note proposed (branch search-final)
+
+- **`PLACE_QUIET_STATIONS` is written in both configs**, station name as in
+  `STATIONS_CSV` to the measured distances, on the owner's approval as
+  Cleanup relayed it (in `DECISIONS.md` on master, 2026-10-13). Nothing
+  reads the list yet: both cities stay parked until Cleanup lands the
+  shared code after `search-rules-2`.
+- **PROPOSAL for review time, a DRAFT, the owner's wording to settle: one
+  sentence on each city's page, after the search bullet.**
+
+  > Most: Three tram stops at the Záluží chemical works have no named
+  > street or place within 1 km in OpenStreetMap, so a search near them
+  > finds only the stops.
+
+  > Yamagata: Omoshiroyama-Kogen is a mountain station with no named street
+  > or place within 1 km in OpenStreetMap, so a search near it finds only
+  > the station.
+
 ### 2026-10-13 - Gwangju: the owner's four answers on its read (branch search-final)
 
 - **The owner, to four questions with a recommendation each: "1 keep, 2

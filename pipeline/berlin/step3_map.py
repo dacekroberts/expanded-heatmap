@@ -20,6 +20,7 @@ import geopandas as gpd
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline import place_index  # noqa: E402
 from pipeline.map_common import load_geojson_line_shapes, render_heatmap  # noqa: E402
 from pipeline.berlin import config  # noqa: E402
 
@@ -66,6 +67,7 @@ def main():
         ring_edges_meters=config.RING_EDGES_METERS,
         ring_labels=config.RING_LABELS,
         label_focus=city_geometry(),
+        place_index_url=place_index.index_url("berlin"),
     )
 
 
