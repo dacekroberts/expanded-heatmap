@@ -57,10 +57,9 @@ marked TO BUILD name a script that does not exist yet.
    `check_place_search.py` until its fetch, index step and render are done,
    so scaffold a wave on its own branch and push nothing until the wave is
    built.**
-   The area is the relation step 1 already uses; a regional map lists every
-   station municipality (`outputs/<city>/station_municipalities.csv`), and
-   `scripts/check_place_search.py` H fails the city if the index stops short
-   of a station (Mexico City, 2026-10-12). Languages from
+   The area follows the scope rule ("The search area" under "Each city"):
+   the boundary the map's businesses are cut to, plus every station
+   municipality on a regional map, and nothing wider. Languages from
    `pipeline/travel_packs.LOCAL_LANG`, then MEASURED by the step as always.
    The area ids are still confirmed by one light query for the wave.
 3. **Fetch as an unattended queue** (built 2026-10-12,
@@ -305,20 +304,54 @@ All quoted in the drafts file; the short list:
 
 ## Each city
 
-1. **The search area, one light query for the whole batch.** Each city's
-   boundary relation, the SAME one its step 1 uses (read the config:
-   `BOUNDARY_RELATION`, `OSM_BOUNDARY_NAME_EN`, ISO codes), confirmed by id
-   with `out tags`; a regional map lists every station city
-   (`outputs/<city>/station_municipalities.csv`). Area id = 3600000000 plus
-   the relation id: `PLACE_AREA = "(id:3602297418)"`.
+1. **The search area: the scope rule (owner, 2026-10-12).** An index covers
+   exactly the municipalities its map covers, and the map draws that area's
+   outline while the search box is open. Work it out in this order, and
+   write down which case each city is:
+   - **The floor: the boundary the map's businesses are cut to.** Read the
+     city's config for what step 1 or step 2 clips to (`BOUNDARY_RELATION`,
+     `OSM_BOUNDARY_NAME_EN`, a TIGER GEOID, an ISO code), then find the OSM
+     relation of that SAME place. A county is not the city inside it: the
+     wave 1 plan gave Buffalo Erie County where the map is cut to the City
+     of Buffalo, and its fetch failed on the size (2026-10-12).
+   - **A regional map adds every municipality a drawn station sits in**
+     (`outputs/<city>/station_municipalities.csv`), each by its own
+     relation. Not the county or metropolitan area that holds them.
+   - **A station on unincorporated land** adds the smallest named area that
+     holds it (a census-designated place, a township), recorded in the
+     config beside `PLACE_AREA` with the station's name.
+   - **Nothing wider without the owner's word.** A municipality with none
+     of the map's stations is refused by `scripts/check_place_scope.py`
+     unless `PLACE_AREA_KEPT = {"relation/123": "why, who, when"}` in the
+     config records the reason: the owner's ruling, or the business
+     boundary itself on a map whose stations all sit outside it. Bring its
+     measured index size with the request.
+   - **Confirm every relation by id in one light query for the batch**
+     (`out tags`): the name, `boundary=administrative` and the admin level
+     are what the config says. Area id = 3600000000 plus the relation id:
+     `PLACE_AREA = "(id:3602297418)"`, several as `"(id:A,B,C)"`.
+   - **Two checks hold it, floor and ceiling.** `check_place_search.py` H
+     fails an index that stops short of a station (Mexico City,
+     2026-10-12); `check_place_scope.py` fails one that reaches a
+     municipality with no station and no recorded reason. The index step
+     counts stations per municipality into `outputs/<city>/place_search.json`
+     ("area"): read that list after the first build, before the eye read.
+   - **Look at the outline once**, in the browser test: open the search box
+     and see that the dashed line holds every station and no stray island
+     or missing municipality. The outline is exterior rings only, simplified
+     by 40 m, parts under 0.2% of the area left out
+     (`place_index.OUTLINE_SIMPLIFY_M`, `OUTLINE_MIN_SHARE`).
 2. **The config block** (end of `config.py`; write it with a script that
    writes bytes, LF): `PLACE_AREA`, `PLACE_OSM_JSON` and
    `PLACE_OSM_EXTRA_JSON` under NEW file names dated by the fetch
    (`osm_places_<date>.json`, `osm_places_extra_<date>.json`; data/ is shared
    by every worktree), `PLACE_LANGUAGES`, `PLACE_FOLD` (`"ja"` or `None`),
    `PLACE_REVIEWED = {}`, `PLACE_DROPPED = {}`.
-3. **Fetch:** `python pipeline/place_index_fetch.py <city>` (both queries,
-   in turn; records provenance). Chain cities one after another in one
+3. **Fetch:** `python pipeline/place_index_fetch.py <city>` (three queries
+   in turn: places, the extra classes, and the area's boundaries with their
+   geometry, `osm_place_outline_v1.json`; records provenance). A city fetched
+   before 2026-10-12 lacks the third: the queue sees that and fetches only
+   it. Chain cities one after another in one
    background command; never two at once. Most first attempts are refused
    and answer after the wait; a city whose run fails both rounds is retried
    alone afterwards. **A city too large for one answer** (the server's own
