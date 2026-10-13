@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**121 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**122 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -58,6 +58,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Place search: candidates 19 to 28 join the third pass (owner)](#2026-10-13---place-search-candidates-19-to-28-join-the-third-pass-owner)
 - [Place search: every drawn line and station is searchable, the floor for the big review (owner)](#2026-10-13---place-search-every-drawn-line-and-station-is-searchable-the-floor-for-the-big-review-owner)
 - [Place search: a drawn station or line is never dropped for its name; wave 1's branch complete (owner)](#2026-10-13---place-search-a-drawn-station-or-line-is-never-dropped-for-its-name-wave-1s-branch-complete-owner)
+- [Place search: Monterrey's 19 colonias kept by id, the estate rule unchanged (owner)](#2026-10-13---place-search-monterreys-19-colonias-kept-by-id-the-estate-rule-unchanged-owner)
 
 **2026-10-12**
 
@@ -5991,3 +5992,17 @@ japan-city template:
   rule 4 (the owner, in that session: "i accept your calls"). Its readers'
   files are copied to `data/_search_rollout/wave1_session/` (793 files). The
   render, fold, merge and push are Cleanup's at the big review.
+
+### 2026-10-13 - Place search: Monterrey's 19 colonias kept by id, the estate rule unchanged (owner)
+
+- **Measured by the final-group session:** 21 named ways in Monterrey's
+  extra cache carry `landuse=residential` with `place=neighbourhood` (19) or
+  `place=suburb` (2), sourced to the municipality's Plano de Colonias. The
+  estate rule (a place drawn as an area on residential land, no article of
+  its own; Seattle, 2026-10-08) drops them; 19 names leave the index.
+- **Recommended and agreed, the owner: "keep the 19 in monterrey".** By id
+  in Monterrey's config (`PLACE_KEPT`, which the third pass extends to the
+  estate rule). The shared rule stays: the tags are those of the housing
+  estates it removes, so loosening it readmits them everywhere.
+- **Cost:** 19 ids in one config, and the same call again if another
+  Mexican city shows the class. Mexico City is checked in the third pass.
