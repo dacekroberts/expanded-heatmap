@@ -16,6 +16,38 @@ Newest first. Cleanup folds these into `DECISIONS.md` at review time.
   Mexicable lines are in revenue service and which of their stations fall
   inside Ecatepec and Naucalpan; each system's own line names, colors and
   station counts; the cable geometry.
+- **Measured later the same day; nothing built.** OSM, one Overpass query
+  (overpass-api.de, after four failed attempts on both mirrors), cached as
+  `data/mexico_city/raw/osm_aerialway_2026-10-13.json`, 80 elements: five
+  `route=aerialway` relations (Cablebús Línea 1, 2, 3; Mexicable Línea 1,
+  2), none with a `colour`. Cablebús Línea 3's relation holds one node and
+  one way; its six stations are ways and relations, so step 1 cannot take
+  that line from relation membership alone.
+- **Five lines are in service; Mexicable Línea 3 (Naucalpan) is not** (OSM
+  `construction=gondola`; press gives the first quarter of 2027), nor
+  Cablebús Líneas 4 to 6. Operator station counts: Mexicable Línea 1 seven
+  and Línea 2 seven, from the operator's own site script (mexicable.com,
+  primary, read 2026-10-13); Cablebús Línea 1 six and Línea 2 seven from
+  archived copies of STE's pages (primary, dated 2024 and 2026-05-23);
+  Línea 3 six from es.wikipedia only (secondary). ste.cdmx.gob.mx refused
+  every connection, as every cdmx.gob.mx host has.
+- **Scope, by point in polygon:** all 19 Cablebús stations are in Ciudad de
+  México. Mexicable Línea 1's seven are in Ecatepec. Of Línea 2's seven,
+  Indios Verdes is in Ciudad de México, La Mesa and Hank González in
+  Ecatepec, and four (Tanque de Agua, Periférico, San Isidro, Dr. Jorge
+  Jiménez Cantú) are outside the map, in Tlalnepantla per the operator's
+  postcodes: listed as left out, the line drawn to its ends.
+- **Stations that are already on the map under the same name:** Indios
+  Verdes (both systems), Constitución de 1917 and Santa Marta meet Metro
+  stations 150 to 345 m away, and the two Hank González stations are 30 m
+  apart. Step 1 averages same-named nodes today, which would move three
+  Metro stations; the build must attach them without moving any.
+- **Colors, for the owner:** STE uses one light blue for all three Cablebús
+  lines, and the only hex found is es.wikipedia's #4EC3E0 (23.5 from Metro
+  Línea 4, 49.3 from the nearest pin). Mexicable calls its lines Línea Roja
+  and Línea Verde and publishes no hex; Wikipedia's reds sit 6.2 to 16.1
+  from the Food service pin and 12.3 to 19.9 from Metro Línea 1; its greens
+  19.9 to 33.3 from Metro Línea 3.
 
 ### 2026-10-13 - Tram rescope: Barcelona's trams stay out, the page to say why (owner); Cablebus measured
 
