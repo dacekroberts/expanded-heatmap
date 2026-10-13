@@ -153,5 +153,7 @@
  {"label": "an estate area kept by id stays", "old": "                if oid in kept_ids:\n                    note(\"kept_estate_area\", \"keep\", oid, names[0], \"by id\", t)", "new": "                if False:\n                    note(\"kept_estate_area\", \"keep\", oid, names[0], \"by id\", t)"},
  {"label": "a way open on foot is not private", "old": "FOOT_OPEN = {\"yes\", \"designated\", \"permissive\"}", "new": "FOOT_OPEN = set()"},
  {"label": "a station's outline merges into its node", "old": "        if o is not None:\n            alias = [a for a in o[4].split(\"|\") if a]", "new": "        if False:\n            alias = [a for a in o[4].split(\"|\") if a]"},
- {"label": "a station outline merges only under its node's name or entry", "old": "                  and (fold_name(o[3]) == mine or (wd and wd == (o[9].get(\"wikidata\") or \"\").strip()))), None)", "new": "                  ), None)"}
+ {"label": "a station outline merges only under its node's name or entry", "old": "                  and (fold_name(o[3]) == mine or (wd and wd == (o[9].get(\"wikidata\") or \"\").strip()))), None)", "new": "                  ), None)"},
+ {"label": "a river row carries an id", "old": "    row_osm = [r.pop() or river for r, river in zip(rows, river_ids)]", "new": "    row_osm = [r.pop() for r, river in zip(rows, river_ids)]"},
+ {"label": "a river is dropped whole by one way's id", "old": "            if ns and ns[0] in river_names[\"dropped\"]:", "new": "            if False:"}
 ]

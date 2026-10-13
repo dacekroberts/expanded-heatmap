@@ -2488,6 +2488,26 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
     report of a rule change; nothing reads it otherwise."""
     name_tags = _name_tags(local)
     kept_ids = set(kept)
+    # A RIVER IS ONE ROW OF MANY WAYS (candidate 28, owner 2026-10-13): its
+    # row carries the id of its lowest-numbered way in place_ids.json, and an
+    # id of ANY of its ways in config.PLACE_DROPPED or PLACE_KEPT stands for
+    # the whole row, so a river can be dropped or kept by id.
+    dropped, river_names = set(dropped), {"dropped": set(), "kept": set()}
+    for e in elements:
+        t = e.get("tags") or {}
+        oid = f"{e['type']}/{e['id']}"
+        if t.get("waterway") and (oid in dropped or oid in kept_ids):
+            ns = _local_first(t, _names(t, name_tags), local)
+            if ns:
+                river_names["dropped" if oid in dropped else "kept"].add(ns[0])
+    for e in elements:
+        t = e.get("tags") or {}
+        if t.get("waterway") and (river_names["dropped"] or river_names["kept"]):
+            ns = _local_first(t, _names(t, name_tags), local)
+            if ns and ns[0] in river_names["dropped"]:
+                dropped.add(f"{e['type']}/{e['id']}")
+            elif ns and ns[0] in river_names["kept"]:
+                kept_ids.add(f"{e['type']}/{e['id']}")
     drawn = {fold_name(n) for n in map_stations}
 
     def note(cls, act, osm, name, why="", tags=None, bbox=None, ways=None):
@@ -3095,7 +3115,7 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             note(f"kept_{k}", "keep", oid, names[0], "an article of its own", t)
         if t.get("waterway"):
             # A river comes as one row per way; merged by name below.
-            rivers[names[0]].append((pt, names, langs))
+            rivers[names[0]].append((pt, names, langs, oid))
             return
         if t.get("wikidata") and not kept:
             less = {k: v for k, v in t.items() if k != "wikidata"}
@@ -3350,16 +3370,22 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             landmark(e, t, names, pt, langs)
 
     for segs in rivers.values():
-        pts = [p for p, _, _ in segs]
+        pts = [p for p, *_ in segs]
         s, w_ = min(p[0] for p in pts), min(p[1] for p in pts)
         n_, e = max(p[0] for p in pts), max(p[1] for p in pts)
         c = ((s + n_) / 2, (w_ + e) / 2)
         names = []
-        for _, ns, _ in segs:
+        for _, ns, *_ in segs:
             names += [x for x in ns if x not in names]
+        before = len(rows)
         add("landmark", min(pts, key=lambda p: _dist_m(p, c)), names,
-            set().union(*(ls for _, _, ls in segs)),
+            set().union(*(seg[2] for seg in segs)),
             [_r(s), _r(w_), _r(n_), _r(e)] if len(pts) > 1 else 0)
+        # The row's id rides in its tags field until the merges are done: a
+        # river row is never merged, which the merges tell by its empty id.
+        if len(rows) > before:
+            rows[-1][9] = {"_river": min((seg[3] for seg in segs),
+                                         key=lambda o: (o.split("/")[0], int(o.split("/")[1])))}
 
     # Pedestrian squares drawn as areas (collected in the street pass), each
     # held to the landmark rules; one a street already names is findable.
@@ -3591,10 +3617,9 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
     if gone:
         rows[:] = [r for r in rows if id(r) not in gone]
     rows.sort(key=lambda r: (r[0], r[3]))
-    for r in rows:
-        r.pop()                               # the object's tags
+    river_ids = [r.pop().get("_river") for r in rows]     # the object's tags
     row_langs = [r.pop() for r in rows]
-    row_osm = [r.pop() for r in rows]
+    row_osm = [r.pop() or river for r, river in zip(rows, river_ids)]
     row_ways = [r.pop() for r in rows]
     # Each crossing as [lat, lon, row of street A, row of street B]; the
     # browser builds its name ("5th Avenue / Pike Street") and its English
@@ -3878,6 +3903,10 @@ def _selftest():
     area(47.8495, -122.32, name="Fair Plaza", highway="pedestrian", area="yes", tourism="attraction",
          wikidata="Q702")
     area(47.8520, -122.32, name="Old Cut", historic="canal", waterway="derelict_canal")
+    river = [next(ids), next(ids), next(ids), next(ids)]
+    for k, (rid, name) in enumerate(zip(river, ("Mill Creek", "Mill Creek", "Lost Creek", "Lost Creek"))):
+        target[0].append({"type": "way", "id": rid, "center": {"lat": 47.8570 + k * 0.001, "lon": -122.32},
+                          "tags": {"name": name, "waterway": "river"}})
     node(47.8530, -122.32, name="Shut Chapel", amenity="place_of_worship", disused="yes")
     node(47.8540, -122.32, name="Ruined Mill", historic="ruins")
     node(47.8550, -122.32, name="Masjid", amenity="place_of_worship")
@@ -3964,6 +3993,9 @@ def _selftest():
                       closed_for_works={f"node/{works}", f"node/{gone_id}"}, way_words=("place",),
                       kept={f"node/{dam}", f"node/{green}", f"way/{colonia}"}, keep_interchanges=True)
     worded_rows = {(KINDS[r[0]], r[3]) for r in worded["rows"]}
+    dropped_rows = {(KINDS[r[0]], r[3]) for r in build(
+        els, city="Testville", retrieved="2026-10-10", local=("en",), dropped={f"way/{river[3]}": "why"},
+        closed_for_works={f"node/{works}", f"node/{gone_id}"})[0]["rows"]}
     rows = {(KINDS[r[0]], r[3]) for r in index["rows"]}
     count = defaultdict(int)
     for r in index["rows"]:
@@ -4121,6 +4153,10 @@ def _selftest():
         ("a customers-only service road is no street", ("street", "후문 진입로") not in ko_rows
          and ("street", "정문 진입로") in ko_rows),
         ("the private-street rule reads living_street", ("street", "Shut Close") not in rows),
+        ("a river row carries the id of its lowest way",
+         f"way/{river[0]}" in index["row_osm"] and f"way/{river[1]}" not in index["row_osm"]),
+        ("a river is dropped whole by the id of one of its ways", ("landmark", "Lost Creek") in rows
+         and ("landmark", "Lost Creek") not in dropped_rows and ("landmark", "Mill Creek") in dropped_rows),
         ("a street closed to traffic and open on foot is no private street", ("street", "Zone Street") in rows),
         ("a station's outline under its node's name is one row with it", count[("station", "Depot Halt")] == 1),
         ("a station outline with no node of its name stays", ("station", "Lone Hall") in rows),
