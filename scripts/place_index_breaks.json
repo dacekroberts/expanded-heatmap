@@ -158,7 +158,6 @@
  {"label": "a station outline merges only under its node's name or entry", "old": "                  and (_station_core(o[3]) == mine or (wd and wd == (o[9].get(\"wikidata\") or \"\").strip()))), None)", "new": "                  ), None)"},
  {"label": "public art needs an article of its own", "old": "        if needs and verdict in (\"none\", \"not\"):", "new": "        if False:"},
  {"label": "public art with an article the tags cannot place stays", "old": "        if needs and verdict in (\"none\", \"not\"):", "new": "        if needs and verdict != \"own\":"},
- {"label": "a library needs an article of its own", "old": "needs = \"artwork\" if t.get(\"tourism\") == \"artwork\" else \"library\" if t.get(\"amenity\") == \"library\" else None", "new": "needs = \"artwork\" if t.get(\"tourism\") == \"artwork\" else None"},
  {"label": "an entry's article in the cache admits the object", "old": "    return bool(wd and own_entry and (articles or {}).get(wd))", "new": "    return False"},
  {"label": "an entry with no article admits nothing", "old": "    return bool(wd and own_entry and (articles or {}).get(wd))", "new": "    return bool(wd and own_entry)"},
  {"label": "only an entry of the object's own is asked", "old": "    return bool(wd and own_entry and (articles or {}).get(wd))", "new": "    return bool(wd and (articles or {}).get(wd))"},
@@ -175,5 +174,8 @@
  {"label": "a Latvian house word closes a home's name", "old": "                 \"lv\": (\"villa\",), \"nb\": (\"gård\", \"hovedgård\", \"prestegård\")}", "new": "                 \"nb\": (\"gård\", \"hovedgård\", \"prestegård\")}"},
  {"label": "Romanian and Italian lead with the way word", "old": "WAY_WORD_LEADS = {\"fr\", \"ca\", \"es\", \"cs\", \"pt\", \"ro\", \"it\"}", "new": "WAY_WORD_LEADS = {\"fr\", \"ca\", \"es\", \"cs\", \"pt\"}"},
  {"label": "a language below the floor is read", "old": "    read = (*local, *also)", "new": "    read = local"},
- {"label": "a language below the floor is measured", "old": "        return _langs(t, local) | {a for a in also if t.get(f\"name:{a}\")}", "new": "        return _langs(t, local)"}
+ {"label": "a language below the floor is measured", "old": "        return _langs(t, local) | {a for a in also if t.get(f\"name:{a}\")}", "new": "        return _langs(t, local)"},
+ {"label": "a library needs an article of its own", "old": "    (\"amenity\", \"library\", \"library\"),      # rule 39, libraries", "new": ""},
+ {"label": "the lookup is asked of the listed kinds only", "old": "        if tags.get(key) == value:\n            return kind", "new": "        if tags.get(key):\n            return kind"},
+ {"label": "an article under the object's own name is its own for public art", "old": "        if needs and verdict == \"not\" and _titled_by_name({**seen_tags, \"name\": names[0]}):", "new": "        if False:"}
 ]

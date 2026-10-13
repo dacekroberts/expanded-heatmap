@@ -155,7 +155,7 @@ search box from the map itself.
 
 | Left out | Rule | Where | Kind |
 |---|---|---|---|
-| A library with no article of its own | `has_article`: the wikipedia tag, or an entry of the object's own with an article in the city's Wikidata cache; the same test as public art | `landmark()` | landmark |
+| A library with no article of its own | `has_article`: the wikipedia tag, or an entry of the object's own with an article in the city's Wikidata cache; the same test as public art. `article_lookup_kind` is the one list of kinds the lookup is asked about, read by the rule and by the fetch script alike; an article under the object's own name is its own here whatever subject tag repeats it | `landmark()` | landmark |
 | An object admitted only by its subject's Wikidata entry | `SUBJECT_ENTRY_KEYS` | `landmark()` | landmark |
 | A second row for a monument drawn in segments | one folded name and one Wikidata entry, ways and relations, at any distance | merges | landmark |
 | A station tagged passenger=no or public_transport=no | unless the map draws it | tagged pass | station |

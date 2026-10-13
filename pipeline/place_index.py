@@ -3390,6 +3390,15 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         # of its own; owner, 2026-10-13: "same rule") ask has_article: the
         # wikipedia tag as before, else the Wikidata cache.
         needs = article_lookup_kind(t)
+        # AN ARTICLE UNDER THE OBJECT'S OWN NAME IS ITS OWN here, whatever
+        # subject tag repeats it (found 2026-10-13 with the caches read):
+        # Chicago's mappers copy a work's own article into subject:wikipedia,
+        # and Cloud Gate (en:Cloud Gate) read as its subject's and left. A
+        # work whose entry is copied into subject:wikidata with no article
+        # under its name is still not told apart from a statue of its
+        # subject (Tokyo's Maman, Chicago's Sue): those go, and are listed.
+        if needs and verdict == "not" and _titled_by_name({**seen_tags, "name": names[0]}):
+            needs = None
         if needs and verdict in ("none", "not"):
             mine = own_item(seen_tags)
             if mine:
@@ -4299,6 +4308,10 @@ def _selftest():
     # --- The fourth pass (2026-10-13).
     node(47.7770, -122.32, name="Iron Horse", tourism="artwork", wikidata="Q920", int_name="Cheval de Fer")
     node(47.7772, -122.32, name="Twin A", tourism="artwork", wikidata="Q921")
+    node(47.7771, -122.32, name="Bean Gate", tourism="artwork", wikipedia="en:Bean Gate",
+         subject__wikipedia="en:Bean Gate")
+    node(47.7773, -122.32, name="Old Mayor", tourism="artwork", wikipedia="en:John Mayor",
+         subject__wikipedia="en:John Mayor")
     node(47.7774, -122.32, name="Twin B", tourism="artwork", wikidata="Q921")
     node(47.7776, -122.32, name="Town Library", amenity="library", wikidata="Q922")
     node(47.7778, -122.32, name="Great Library", amenity="library", wikidata="Q923")
@@ -4560,6 +4573,8 @@ def _selftest():
         # --- The fourth pass (2026-10-13).
         ("public art whose own entry has an article in the cache is a row", ("landmark", "Iron Horse") in rows),
         ("public art under an entry two objects share is no row", not any(n.startswith("Twin") for _, n in rows)),
+        ("public art whose article bears its own name is a row, though a subject tag repeats it",
+         ("landmark", "Bean Gate") in rows and ("landmark", "Old Mayor") not in rows),
         ("a library whose entry has no article is no row", ("landmark", "Town Library") not in rows
          and ("landmark", "Null Library") not in rows),
         ("a library whose own entry has an article is a row", ("landmark", "Great Library") in rows),
