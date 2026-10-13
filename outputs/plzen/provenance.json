@@ -70,6 +70,19 @@
     "sha256": "5e32ea0f08b91e41a06b3be3a46398a5e8f09659ae7f64f856eb8af4ac237989"
   },
   "osm_tram_host": "overpass.kumi.systems",
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 1645,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 64,
+    "ids_not_read": 0,
+    "ids_with_article": 4,
+    "ids_without_article": 60,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "edf72e400fce94d8fad92f822df05055fb0e3bcdf836ebb6ca81316d175b6eb5"
+  },
   "pmdp_gtfs": {
     "bytes": 950393,
     "file": "pmdp_gtfs.zip",

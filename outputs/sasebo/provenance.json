@@ -103,5 +103,18 @@
     "query": "[out:json][timeout:120];(node[\"railway\"~\"^(station|halt)$\"](33.03,129.04,33.36,129.89);way[\"railway\"=\"station\"](33.03,129.04,33.36,129.89););out tags center;",
     "retrieved": "2026-10-03T18:42:44+00:00",
     "sha256": "028bda9320a6ad9fe24d06d5f5b0a65dfb3e915079ad515f2e173fc63156e31d"
+  },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 229,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 1,
+    "ids_not_read": 0,
+    "ids_with_article": 1,
+    "ids_without_article": 0,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "152104c874ac8b76365d13042f15e024e91abfa166302dbf8eb33ebbfb015240"
   }
 }

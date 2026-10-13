@@ -86,5 +86,18 @@
     "sha256": "3707aecffbd47b9d7bc22d806b4da6a2210d51a03b397f7ae221c6b7ac31f0bc",
     "url": "https://api.data.amsterdam.nl/v1/horeca/exploitatievergunning/"
   },
-  "permits_snapshot": "2026-09-24"
+  "permits_snapshot": "2026-09-24",
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 12013,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 293,
+    "ids_not_read": 0,
+    "ids_with_article": 239,
+    "ids_without_article": 54,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "9644ce38fbb1b2245ff9a8511a2276cfaa44dc0bded38015980805c66249eab6"
+  }
 }

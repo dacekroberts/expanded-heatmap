@@ -58,6 +58,19 @@
     "host": "overpass-api.de",
     "retrieved": "2026-09-24T15:58:45+00:00 (cache file time)"
   },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 2747,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 76,
+    "ids_not_read": 0,
+    "ids_with_article": 9,
+    "ids_without_article": 67,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "2ad28d5e00bc054abfe35d31f39c221b57dd561ca5d47d3a6c65c6b9b16d6fa6"
+  },
   "rio_metro_estacoes_19": {
     "bytes": 20517,
     "file": "rio_metro_estacoes_19.geojson",

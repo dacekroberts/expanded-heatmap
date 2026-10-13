@@ -37,6 +37,19 @@
   },
   "osm_query": "[out:json][timeout:120];relation[\"type\"=\"route\"][\"route\"~\"^(subway|tram)$\"][\"network\"=\"Ilévia\"](50.55,2.95,50.8,3.25);out geom;",
   "osm_relations": 8,
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 933,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 12,
+    "ids_not_read": 0,
+    "ids_with_article": 7,
+    "ids_without_article": 5,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "90d9bd9ef4914fd03d6f04e1c1869ddad61be259da59e7ab3065db817dd93e70"
+  },
   "wfs_feature_counts": {
     "dsp_ilevia:couleurs_lignes": 344,
     "mel_mobilite_et_transport:stations_metro": 62,

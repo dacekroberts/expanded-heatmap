@@ -89,5 +89,18 @@
     "file": "osm_rail.json",
     "host": "overpass-api.de",
     "retrieved": "2026-09-24T16:50:05+00:00 (cache file time)"
+  },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 595,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 8,
+    "ids_not_read": 0,
+    "ids_with_article": 8,
+    "ids_without_article": 0,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "96afba7bb044a5cc19c29770d6d0d7934430293b36b839dbcab1b2bf7ed3c646"
   }
 }

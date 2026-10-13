@@ -48,6 +48,19 @@
     "retrieved": "2026-10-13T22:13:19+00:00",
     "sha256": "e6b9515a5f848ac820df4a9e51fd5b2e2b4628afffffae8a43f987804119cfe6"
   },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 821,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 22,
+    "ids_not_read": 0,
+    "ids_with_article": 4,
+    "ids_without_article": 18,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "76b9141fe02f7182d42b6f19d1c1e848abbff3f5e9d04ad6e129df531f13c96d"
+  },
   "sources": {
     "boundary_osm_relation": 341321,
     "catastro": "https://www.catastro.hacienda.gob.es/INSPIRE/Addresses/07/07040-PALMA/A.ES.SDGC.AD.07040.zip",

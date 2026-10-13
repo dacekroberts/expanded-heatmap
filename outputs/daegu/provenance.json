@@ -226,6 +226,19 @@
     "retrieved": "2026-09-28T01:24:49+00:00",
     "sha256": "449ac043482f2a5e8380a35cd4cd8533eece2aeb0dfc980c3823157c68caa337"
   },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 228,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 1,
+    "ids_not_read": 0,
+    "ids_with_article": 1,
+    "ids_without_article": 0,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "9a9f8feca48de7e87fe4a08b525bd9d9b5160b8009e06413230e16db26d0fb73"
+  },
   "setak": {
     "bytes": 907219,
     "dataset_page": "https://data.daegu.go.kr/open/data/dataView.do?dataSetId=DMI_0000119502&provdMethod=FILE",

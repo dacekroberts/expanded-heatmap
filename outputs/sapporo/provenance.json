@@ -51,5 +51,18 @@
     "query": "[out:json][timeout:120];node[\"railway\"=\"tram_stop\"](42.75,140.95,43.22,141.55);out body;",
     "retrieved": "2026-09-28T08:55:56+00:00",
     "sha256": "7115823dd94ca525efbcea7561678b0e88c5ea0df202a6dd786cf8b99e8d553b"
+  },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 533,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 12,
+    "ids_not_read": 0,
+    "ids_with_article": 3,
+    "ids_without_article": 9,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "0344348d799ddeb0e7f110c6f4f91b9ee86891123586d0c6bbd77ec6b13afcf9"
   }
 }

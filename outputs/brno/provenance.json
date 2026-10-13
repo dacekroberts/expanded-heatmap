@@ -81,6 +81,19 @@
     "sha256": "bfdc3ea268b9e1f4f70dc8fa05999ec822518cc22334a3737471061d0f2c6a02"
   },
   "osm_tram_host": "overpass-api.de",
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 2555,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 86,
+    "ids_not_read": 0,
+    "ids_with_article": 8,
+    "ids_without_article": 78,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "425c96239b578bf7a972ac0fc88d24f9583a4966c7f358d99f47749f212aa060"
+  },
   "res": {
     "bytes": 543309993,
     "file": "res_data.csv",
