@@ -39,6 +39,11 @@ protocol in the `place-search-city` skill.
 | A minor-way street named by a description, a bare type or way word, or a type and a code | `street_description`, `STREET_DESCRIPTIONS`; never a street with a way of residential class or above | street pass | 2026-10-13 |
 | A pedestrian area as a street | `area=yes` is skipped; with an article of its own it is a landmark | street pass, `square_areas` | 2026-10-08, 2026-10-13 |
 
+**Kept against the Overpass answer (2026-10-13):** a street way on a border two searched
+municipalities share, which lies in neither one's interior, is in when the city's places were
+read from a regional extract (`place_extract_fetch.SHARED_BORDER_UNIONS`) and missing when
+read from Overpass. Seattle: 59 ways of six streets.
+
 ## Stations
 
 | Left out | Rule | Where | Decided |
