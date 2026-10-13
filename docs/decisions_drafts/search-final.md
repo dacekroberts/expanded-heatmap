@@ -1,3 +1,52 @@
+### 2026-10-13 - The owner's eight answers on the German reads; Berlin and Bremen drops; Low German endings measured on Berlin (branch search-final)
+
+- **The owner, to the eight calls put after the reads:** "1. yes article
+  needed. 2. keep these. 3. yes drop as code plus type 38 on minor ways
+  okay. 4.keeping named public trails is GOOD yes. 5. drop those 50 besides
+  the article ones. 6.drop until visiting. 7.leave as is. 8. agree with
+  your recommendations and berlin measurement".
+- **1, public art needs a Wikipedia article of its own.** Not applied here:
+  it is a rule in `place_index.py` and changes the 19 live cities, so it is
+  rule candidate 16 for Cleanup, with a changed-row report owed at the
+  fold. Measured on this group: 1,048 of Berlin's 1,111 artworks and 171 of
+  Zurich's landmarks are in on a Wikidata entry alone. The cost the owner
+  accepted: a real sculpture with no article leaves too.
+- **2, allotment lanes stay** (about 600 Bremen street rows, Berlin's
+  flower-named paths): nothing in the data separates them from footpaths.
+- **3, Berlin's coded path names dropped by id:** 79 names, 227 ways, 173
+  street rows, every way a footway, path, service road or track: "Weg N"
+  and "Weg X" (42 names), "Querweg N" and "3. Querweg" (16), "Stichweg X"
+  (13), "Ring I" to "IV" (4), "Fußweg N" (3), "Nebenweg 1". Kept: the 144
+  "Straße N" names on real roads and the 37 on minor ways (owner), "Weg A"
+  and "Weg B" (each has a residential way), six "Weg N (Hasenweg)" names
+  that carry a real name, the numbered Yorckbrücken, "Volksgartenweg 1" to
+  "6" and "Pfuhlweg I" and "II" (a name plus a number, not a code plus a
+  type). Rule candidate 17.
+- **4, named public trails stay; a trail named by a description goes**, as
+  already done by id. This settles the same open point for Anyang and
+  Gwangju.
+- **5, Berlin's dead railway alignments:** 28 ids dropped (railway or
+  lifecycle-prefixed abandoned, disused or razed, no `wikipedia` tag on the
+  way). Kept: the 18 ways that carry an article (Siemensbahn 9, Bötzowbahn
+  5, Industriebahn Tegel-Friedrichsfelde 3, Neukölln-Mittenwalder Eisenbahn
+  1). Also kept, as standing structures and no alignment, and so outside
+  the ruling: three water towers, the AEG-Versuchstunnel and a tank loading
+  ramp; told to the owner. The 50 put to the owner counted the article
+  ways and these five. Rule candidate 18.
+- **6, five homes tagged attractions dropped until a web check shows
+  visiting:** Berlin way/8080757 (Corbusierhaus), way/112149783 (Kreuzberg
+  Tower); Bremen way/162130229 (Aalto-Hochhaus), way/167729560 (Gut
+  Landruhe), way/162235078 (Villa Borgward).
+- **7, Bremen's Bremerhaven exclave stays** in the area, its 4 rows with it.
+- **8, Low German endings:** -deich, -pad and -pforte into the German way
+  words; -gang, -eck and -moor out. Berlin measured after the ruling:
+  the three accepted endings add no name there, -gang adds 19 of which 13
+  are no street name, -eck adds 3 that look like lane names, -moor none.
+  Figures in `search-lang-de.md`.
+- **After this round, built in memory:** Berlin 18,268 rows (12,985
+  streets, 3,810 landmarks), Bremen 5,645 before the endings' 21 street
+  rows. Still no German index on disk.
+
 ### 2026-10-13 - The four German cities read; drops by id in each config; the classes left for the owner (branch search-final)
 
 - **The owner, to the three list calls: "1 yes, note the future edit point,
@@ -297,6 +346,20 @@ make redundant. Gwangju's unopened stations are in
 15. **leisure=park on something that is no park** (a pool, a club, an
     office): Bremen way/237339879 and node/13460725211 (dropped by id),
     way/205954387; Zurich way/251217100, way/37380208.
+16. **Public art needs a Wikipedia article of its own (owner,
+    2026-10-13).** tourism=artwork in on a `wikidata` tag alone: Berlin
+    1,048 of 1,111 artwork rows, Zurich 171 landmark rows; Bremen and
+    Gelsenkirchen not counted. Changes the live cities, so it needs a
+    changed-row report. Nothing dropped by id for it.
+17. **A code beside a path type on minor ways only** ("Weg 5", "Stichweg
+    A", "Querweg 12", "Ring II"; owner, 2026-10-13). Berlin: 227 ways of 79
+    names dropped by id, the entries whose reason reads "a code beside a
+    type on minor ways". Not "Straße N", which is a real Berlin street name
+    on any class of way.
+18. **A dead railway alignment with no article of its own** (railway or
+    abandoned:, disused:, razed:railway of rail on a way, no `wikipedia`
+    tag; owner, 2026-10-13). Berlin: 28 ids dropped. A lifecycle tag on a
+    standing structure (a water tower, a tunnel) is not this class.
 7. **An exhibit admitted by its class's or kind's article.** Anyang
    way/829939487, 829939488, 829939493, 829939494, 829939495, 829939499,
    829939503, and way/829939489 (tourism=attraction, no historic tag).

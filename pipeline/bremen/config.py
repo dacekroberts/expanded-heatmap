@@ -245,6 +245,9 @@ PLACE_FOLD = None
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "way/162130229": "a home tagged an attraction, no visiting shown (owner, 2026-10-13; back in when a web check shows visiting)",
+    "way/167729560": "a home tagged an attraction, no visiting shown (owner, 2026-10-13; back in when a web check shows visiting)",
+    "way/162235078": "a home tagged an attraction, no visiting shown (owner, 2026-10-13; back in when a web check shows visiting)",
     "node/8174043394": "a single farmstead, admitted by an article about an event, not the farm",
     "node/8778943905": "a single farm named for its family",
     "way/523858702": "remains in a private cellar by its own description; nothing to visit at the point",

@@ -16,6 +16,9 @@ fifth city is measured before it relies on them.
 - "AG" and "KG" are not leak words ("2 yes").
 - Swiss German way words for Zurich ("3 sounds good"): -wegli, -rain,
   -halde, -quai, -viadukt.
+- Low German endings ("agree with your recommendations and berlin
+  measurement", later the same day). In: -deich, -pad, -pforte. Out: -gang,
+  -eck, -moor (measured on Berlin after the ruling, below).
 
 **The future edit point (owner):** -hof also ends a shopping passage, a
 schoolyard and a works yard. Three such rows exist today and are dropped by
@@ -36,11 +39,11 @@ seniorenresidenz, autohaus, tankstelle.
 `HOME_WORDS["de"]` (9): wohnanlage, wohnpark, wohnhaus, mehrfamilienhaus,
 privat, privatweg, privatstraße, privatgrundstück, seniorenresidenz.
 
-`WAY_WORDS["de"]` (36), with `"de"` in `SUFFIX_WAY_LANGUAGES`: straße,
+`WAY_WORDS["de"]` (39), with `"de"` in `SUFFIX_WAY_LANGUAGES`: straße,
 strasse, str, weg, gasse, allee, platz, ring, damm, ufer, brücke, steg, pfad,
 stieg, steig, treppe, promenade, chaussee, markt, wall, graben, passage,
 tunnel, unterführung, durchgang, trasse, kamp, winkel, acker, hof, höfe,
-wegli, rain, halde, quai, viadukt.
+wegli, rain, halde, quai, viadukt, deich, pad, pforte.
 
 `WAY_LEAD["de"]` (12, the name's first word): am, an, auf, im, in, zum, zur,
 hinter, unter, vor, bei, beim. No `WAY_ENDING`.
@@ -128,11 +131,22 @@ undecidable from tags. The leading prepositions are the loosest group:
 about 14 misfires in Bremen's 69 and 15 in Berlin ("Am Reitstall", "Zum
 Spielplatz"), against about 80 real names in Berlin alone.
 
-**Low German endings, measured and NOT yet ruled** (street rows each would
-add; Bremen only, none in Gelsenkirchen or Zurich; Berlin not measured):
--deich 12, -diek 1 (and 1 in Gelsenkirchen), -pad 7 (one of them private),
--gang 10 (three are not streets: Bahnhofsgang, Laubengang, Wasserwerksgang),
--pforte 2, -eck 3, -moor 2; the leads "achter" 2 and "hinterm" 1.
+**Low German endings, ruled by the owner (in: -deich, -pad, -pforte; out:
+-gang, -eck, -moor).** Street rows each adds in Bremen, none in
+Gelsenkirchen or Zurich: -deich 12, -pad 7 (one of them private), -pforte
+2; left out: -gang 10 (three are not streets: Bahnhofsgang, Laubengang,
+Wasserwerksgang), -eck 3, -moor 2, -diek 1 (and 1 in Gelsenkirchen), the
+leads "achter" 2 and "hinterm" 1. Berlin, measured after the ruling as
+distinct street names: -deich, -pad, -pforte, -moor, -diek and both leads
+add none; -gang adds 19, of which 13 are no street name (Eingang zur ANB,
+four "Zugang ..." descriptions, Hochbahnübergang, Übergang S1/S2 zur U6,
+Wandelgang and the coded "Gang 1" to "Gang 5")
+and 6 are (Eosgang, Judengang, Liebstadter Gang, Lunagang, Rosengang,
+Tulpengang), so -gang stays out; -eck adds 3 (Lilieneck, Poseidoneck,
+Siedlers Eck), all lane names by their look, not yet put to the owner.
+With the three endings in and the drops of the second round applied, the
+indexes are Berlin 18,268 rows (12,985 streets, 3,810 landmarks, 733
+places, 738 stations) and Bremen 5,645 before the endings' 21 street rows.
 
 **Bare type words the reads found, NOT yet ruled** (whole names still in an
 index): friedhofskapelle (Berlin 9, Bremen 2), dachgarten (Zurich 2),
