@@ -1,0 +1,37 @@
+{
+  "index": "app/static/places/anyang.json",
+  "places": 5026,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "ko"
+    ],
+    "coverage": {
+      "en": 0.905,
+      "ko": 0.999
+    },
+    "list_share": 0.5,
+    "listed": [
+      "English",
+      "Korean"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/2409161",
+      "name": "Anyang-si",
+      "stations": 7
+    },
+    {
+      "osm": "relation/2409167",
+      "name": "Gunpo-si",
+      "stations": 6
+    },
+    {
+      "osm": "relation/2409184",
+      "name": "Uiwang-si",
+      "stations": 1
+    }
+  ]
+}

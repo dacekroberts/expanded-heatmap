@@ -102,7 +102,7 @@ st.markdown(
 """
 )
 
-render_map_help("three business categories (Retail, Food service and Personal services)")
+render_map_help("three business categories (Retail, Food service and Personal services)", search='gelsenkirchen')
 render_excluded_stations("Gelsenkirchen")
 render_country_links("Gelsenkirchen")
 

@@ -118,9 +118,97 @@ GWANGJU_BBOX = {
 # --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
 
 PLACE_AREA = "(id:3604162635,3607348759,3607348741,3607348583,3607348758)"
+# 북구 holds no station and 12,657 of the map's 47,214 businesses, measured
+# 2026-10-13. No 광주광역시 relation exists to name the city as one area.
+PLACE_AREA_KEPT = {"relation/7348583": "part of the boundary the map's businesses are cut to; "
+                                       "owner, 2026-10-13"}
 PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ko",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
+_JUNCTION = 'a signed junction (junction=yes) named for the building beside it: a road feature, not the building'
+PLACE_REVIEWED = {name: _JUNCTION for name in (
+    "신우아파트사거리", "양림2차사거리", "우미광장사거리", "중흥모아사거리", "청아맨션교차로", "한림장오거리", "호반아파트")}
+# Candidate 3 would make way/835704878 redundant, candidate 4 the three
+# customers-only service roads, candidate 1 the play-park and plaza rows
+# (docs/decisions_drafts/search-final.md, "Rule candidates").
+PLACE_DROPPED = {
+    "way/835704878": "an apartment estate's own garden, plaza or playground",
+    "way/469653066": "an apartment estate's own garden, plaza or playground",
+    "way/473501622": "an apartment estate's own garden, plaza or playground",
+    "way/470099446": "an apartment estate's own garden, plaza or playground",
+    "way/863752688": "an apartment estate's own garden, plaza or playground",
+    "way/473599632": "an apartment estate's own garden, plaza or playground",
+    "way/863752689": "a description standing in for a name",
+    "way/863758772": "a description standing in for a name",
+    "way/863758774": "a description standing in for a name",
+    "way/863758770": "a description standing in for a name",
+    "way/863758775": "a description standing in for a name",
+    "way/863758771": "a description standing in for a name",
+    "way/473237154": "a description standing in for a name",
+    "way/473240176": "a description standing in for a name",
+    "way/473474720": "a description standing in for a name",
+    "way/473471661": "a description standing in for a name",
+    "way/636203708": "a description standing in for a name",
+    "way/638451657": "a description standing in for a name",
+    "way/639079455": "a description standing in for a name",
+    "way/1125165997": "a description standing in for a name",
+    "way/1123127732": "a description standing in for a name",
+    "node/4686235141": "a description standing in for a name",
+    "way/468928992": "a description standing in for a name",
+    "node/4643409027": "a church's name stone; the church has its own row",
+    "way/629868781": "a cafe's name on a historic building, no article",
+    "node/4945534269": "a shopping street's name tagged a monument",
+    "way/470116012": "a high school tagged a place of worship",
+    "way/1136431923": "a sisters' congregation house, tagged a place of worship",
+    "way/1126651123": "a retreat house, tagged a place of worship",
+    "way/990254300": "the archdiocese's chancery, tagged a place of worship",
+    "way/1125516300": "a presbytery's office, tagged a place of worship",
+    "way/487746950": "a former church by its own name; no lifecycle tag",
+    "node/13052442101": "an artwork admitted by its artist's article, not its own",
+    "way/628952569": "a community office admitted by its neighborhood's article",
+    "way/1236254153": "a shrine drawn a second time as a place; the landmark row stays",
+    "node/11379880372": "a market car park's entrance, tagged a junction",
+    "way/1380477166": "a bus platform on a footway, named for the junction",
+    "way/106346374": "a placeholder for a name",
+    "way/1433958430": "a placeholder for a name",
+    "way/547068287": "a placeholder for a name",
+    "way/583459748": "a placeholder for a name",
+    "way/583459749": "a placeholder for a name",
+    "way/583459753": "a placeholder for a name",
+    "way/583459755": "a placeholder for a name",
+    "way/583459758": "a placeholder for a name",
+    "way/610965548": "a placeholder for a name",
+    "way/720257544": "a description standing in for a name",
+    "way/554449628": "a description standing in for a name",
+    "way/1213764352": "a school's internal road",
+    "way/1213764353": "a school's internal road",
+    "way/1213764354": "a school's internal road",
+    "way/1213764355": "a school's internal road",
+    "way/469936971": "a school's internal road",
+    "way/863506122": "a school's internal road",
+    "way/863506123": "a school's internal road",
+    "way/863506124": "a school's internal road",
+    "way/863506125": "a school's internal road",
+    "way/863506126": "a school's internal road",
+    "way/987248990": "a description standing in for a name",
+    "way/1011110239": "a planning code, not a street name",
+    "way/1527824182": "a planning code, not a street name",
+    "way/105243409": "a street name with a house number; the street has its own row",
+    "way/471772549": "a description standing in for a name",
+    "way/470163403": "a description standing in for a name",
+    "way/470162153": "a description standing in for a name",
+    "way/470162157": "a description standing in for a name",
+    "way/470164017": "a description standing in for a name",
+    "way/470164912": "a description standing in for a name",
+    "way/1373352638": "a description standing in for a name",
+    "way/1377370198": "a description standing in for a name",
+    "way/1210473557": "a description standing in for a name",
+    "way/947400344": "an access ramp, named by a description",
+    "way/946752294": "an access ramp, named by a description",
+    "way/946752295": "an access ramp, named by a description",
+    "way/946752298": "an access ramp, named by a description",
+    "way/946752302": "an access ramp, named by a description",
+    "way/586284995": "an access ramp, named by a description",
+}
