@@ -323,6 +323,41 @@ All quoted in the drafts file; the short list:
     rows `added` lists for a county or district that only borders the city
     and drop it by id (Prague's two).
   - **Misspelled names are never corrected**; the page says so.
+- **The second rule batch of 2026-10-13 (built on branch `search-rules-2`,
+  not landed when this was written)** made rules of wave 1's repeated
+  classes; `docs/place_search_exclusions.md` has a row for each. What changes
+  for a builder:
+  - **One row a station**: a stop-area relation is no station, a station
+    outline with no railway tag beside the station's own row is none, rows
+    sharing one Wikidata entry within `COMPLEX_MERGE_M` are one row with the
+    others' names as aliases, and a bus station is no rail station whatever
+    rail mode it lists. Do not drop these by id.
+  - **A street's way is never a landmark row**, whatever historic, tourism
+    or bridge:name tag it carries (this retired the first batch's bridge:name
+    rule). A square drawn as an area is untouched.
+  - **Register entries** (historic=maritime, naval, military, engine) need a
+    Wikipedia article of their own, and a `ref:nrhp` three or more objects
+    share registers none of them. Read what this takes in a new city: it
+    took the Ballard Locks from Seattle and the Brooklyn Navy Yard's own
+    rows a wave 1 reader had kept.
+  - **No streets by rule**: interchanges, ramps, names ending "Drwy", HOV
+    and managed-lane labels on motorways, "Alley" plus digits, alleys named
+    by two streets, "Path between X and Y", a cycle facility named for its
+    street. **Named roundabouts stay** (`ROUNDABOUTS_STAY`, read from
+    `junction=roundabout` or `circular`, never from the name), and so do
+    standing abandoned landmarks (`ABANDONED_NEED_ARTICLE`): each is one
+    constant with its count each way in the comment beside it.
+  - **Still by id**, because no tag or name test is safe (the record's last
+    section lists them): cemetery avenues, campus lawns, "X Driveway" on a
+    residential-class way, a cycle facility with no street type word in its
+    name, homes with an article and no home tag.
+  - **`config.PLACE_WAY_WORDS`** adds way words for one city's minor-way test
+    (Melbourne's "place", "court", "mews", "terrace", "arcade"). Measure the
+    words on that city's own named minor ways first; a private way still
+    goes.
+  - **A settlement's boundary** is no second row beside the node of its
+    name; read the place rows of a new city for a boundary of a lesser kind
+    (a townland) that shares a village's name, which stays on purpose.
 - **A station OSM draws as not yet open is no station**, and is recorded in
   `docs/place_search_unopened_stations.json` (owner, 2026-10-11: an internal
   watch file, never page text). A station leaves the file when OSM marks it
