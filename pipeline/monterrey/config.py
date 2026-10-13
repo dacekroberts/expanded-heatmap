@@ -192,7 +192,9 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("es",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
+PLACE_REVIEWED = {
+    "Calle Hotel Río": "a real street name (owner, 2026-10-13)",
+}
 
 # Colonias drawn as areas on residential land, kept by id (owner, 2026-10-13):
 # the estate rule would drop them. The rows appear once PLACE_KEPT reaches
@@ -220,6 +222,22 @@ PLACE_KEPT = {
 }
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "way/542617754": "a park named by a planning or stage code (owner, 2026-10-13)",
+    "way/242114128": "a residents' amenity inside a gated estate tagged a park (owner, 2026-10-13)",
+    "way/1420214452": "a residents' amenity inside a gated estate tagged a park (owner, 2026-10-13)",
+    "way/156274902": "a residents' amenity inside a gated estate tagged a park (owner, 2026-10-13)",
+    "way/468466106": "a residents' amenity inside a gated estate tagged a park (owner, 2026-10-13)",
+    "way/655124438": "a residents' amenity inside a gated estate tagged a park (owner, 2026-10-13)",
+    "way/617513721": "a residents' amenity inside a gated estate tagged a park (owner, 2026-10-13)",
+    "way/175150371": "a residents' amenity inside a gated estate tagged a park (owner, 2026-10-13)",
+    "way/175150379": "a residents' amenity inside a gated estate tagged a park (owner, 2026-10-13)",
+    "way/531335061": "a residents' amenity inside a gated estate tagged a park (owner, 2026-10-13)",
+    "way/679356464": "a lane named for its mode or a generic sidewalk name (owner, 2026-10-13)",
+    "way/79584095": "a lane named for its mode or a generic sidewalk name (owner, 2026-10-13)",
+    "way/1513127383": "a lane named for its mode or a generic sidewalk name (owner, 2026-10-13)",
+    "way/1322900353": "a lane named for its mode or a generic sidewalk name (owner, 2026-10-13)",
+    "way/1322909089": "a lane named for its mode or a generic sidewalk name (owner, 2026-10-13)",
+    "way/1322909090": "a lane named for its mode or a generic sidewalk name (owner, 2026-10-13)",
     "way/510893060": "an office tower tagged a park",
     "way/719014983": "an office complex tagged a park",
     "way/510893061": "a tower of an office complex tagged a park",
