@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**105 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**106 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -42,6 +42,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Extract route landed with its five border extras; San Francisco and the tram rescope (owner)](#2026-10-13---extract-route-landed-with-its-five-border-extras-san-francisco-and-the-tram-rescope-owner)
 - [Correction: five tram rescopes were already built and landed on 2026-09-27](#2026-10-13---correction-five-tram-rescopes-were-already-built-and-landed-on-2026-09-27)
 - [Search rollout: Madrid runs in wave 7, Toronto stays held (owner)](#2026-10-13---search-rollout-madrid-runs-in-wave-7-toronto-stays-held-owner)
+- [Search rollout: Rome runs in its normal wave (owner)](#2026-10-13---search-rollout-rome-runs-in-its-normal-wave-owner)
 
 **2026-10-12**
 
@@ -5487,3 +5488,13 @@ japan-city template:
   which was wrong); wave 1 may fetch it and does not build, read or land it.
 - **Held as the last batch now:** Rome (until the tram 3 answer), Milan and
   Toronto.
+
+### 2026-10-13 - Search rollout: Rome runs in its normal wave (owner)
+
+- **The owner: "rome can run in normal wave".** The tram session reported
+  that the owner parked Rome's trams (2, 3, 5, 14, 19) as one decision after
+  2026-11-23, none drawn before, so Rome's rail is final until then. A later
+  tram build rebuilds its index.
+- **Held as the last batch now:** Milan and Toronto.
+- The run started today skips Rome (`--skip-cities rome,milan,toronto`); it
+  is added back on the next rerun, not by interrupting this one.
