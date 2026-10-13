@@ -124,6 +124,49 @@ read from Overpass. Seattle: 59 ways of six streets.
 | A name in a third script, where a local name exists | `_local_first`; never repaired | `_names` | 2026-10-11 |
 | A junction named by a number | `junction_numbered` | tagged pass | 2026-10-08 |
 
+## The third pass (2026-10-13, branch search-rules-3)
+
+| Left out | Rule | Where | Kind |
+|---|---|---|---|
+| Public art with no Wikipedia article of its own | tourism=artwork; a wikidata tag alone admits none; an article the tags cannot place keeps the row | `landmark()` | landmark |
+| An exhibit under its class's or kind's article | an entry another object carries (`own_item`); a locomotive or railway car with neither a tourism tag nor an article under its own name (`RAIL_EXHIBITS`); a vehicle with no historic tag likewise | `landmark_drop`, `_exhibit` | landmark |
+| A park an apartment estate or its management office runs | `ESTATE_OPERATOR` on leisure=park; a park tied to an estate only by name stays | `landmark_drop` | landmark |
+| A park or garden whose name leads with a house word | `HOME_LEAD_ON_PARKS`, German only | `_home` | landmark |
+| A Stolperschwelle | `STOLPERSTEIN_MEMORIALS`, artwork_type=stolperstein | `landmark_drop` | landmark |
+| A dead railway alignment with no wikipedia tag | `dead_railway`, ways only; a standing structure is not this class | `landmark()` | landmark |
+| A name ending "(geschlossen)", "(abgebrannt)", "(stillgelegt)", "(außer Betrieb)" | `HISTORICAL_NAME`; never "ehem." | tagged pass | any |
+| A site or boundary relation that repeats another row's entry more than 300 m off | `SITE_RELATION_TYPES`, `ROW_MERGE_M` | merges | landmark, place |
+| A bare type word behind an article, or in two languages | `BARE_ARTICLES`, `_bare_word`: every part bare | `bare_type` | landmark, place |
+| Korean, Chinese, Spanish and German bare type words; Korean "N호" park lots; "Cluster N" | `BARE_TYPE_NAMES`, `CODED_TYPE` | `bare_type` | landmark, place |
+| A private street on living_street ways | `PRIVATE_STREET_HIGHWAYS`; a way open on foot is not private (`FOOT_OPEN`) | street pass | street |
+| A customers-only service road named by a Korean description | `CUSTOMER_ROAD_ENDS` | street pass | street |
+| A code beside a path type on minor ways, German | `PATH_CODE`; never "Straße N" | `street_description` | street |
+| A public_transport=station object with no railway tag | dropped beside a station's row; alone, kept only on a rail mode, a station tag, a network tag or a map station's name | merges | station |
+| A station's outline under the station's name | merged into the station node within `OUTLINE_BESIDE_M` (`_station_core`, or a shared Wikidata entry) | merges | station |
+
+**Kept against a rule:** a station of the map or of a rail network is never
+dropped for a bare type name (`RAIL_STATION_VALUES`, `map_stations`); a quiet
+station is accounted for in `config.PLACE_QUIET_STATIONS`; `config.PLACE_KEPT`
+is also read by the estate-area rule; a river row is dropped or kept by the
+id of any of its ways. The index holds no transit line: lines reach the
+search box from the map itself.
+
+## The fourth pass (2026-10-13, branch search-rules-3)
+
+| Left out | Rule | Where | Kind |
+|---|---|---|---|
+| A library with no article of its own | `has_article`: the wikipedia tag, or an entry of the object's own with an article in the city's Wikidata cache; the same test as public art. `article_lookup_kind` is the one list of kinds the lookup is asked about, read by the rule and by the fetch script alike; an article under the object's own name is its own here whatever subject tag repeats it | `landmark()` | landmark |
+| An object admitted only by its subject's Wikidata entry | `SUBJECT_ENTRY_KEYS` | `landmark()` | landmark |
+| A second row for a monument drawn in segments | one folded name and one Wikidata entry, ways and relations, at any distance | merges | landmark |
+| A station tagged passenger=no or public_transport=no | unless the map draws it | tagged pass | station |
+| A home named with the house word last | `HOME_NAME_END`: Latvian "villa", Norwegian "gård" | `_home` | landmark |
+
+**Kept or added:** `int_name` is read as an alternate name; "store" is no leak word in a
+Danish, Norwegian or Swedish city (`LEAK_SET_ASIDE`); a glued street name passes beside a leak
+word in a suffix language; a second language below the 90% floor is declared in
+`config.PLACE_LANGUAGES_ALSO`; `config.PLACE_STATION_STRIP` takes an ending off station names.
+Swedish "-gård" stays a street ending on every way (candidate 37, pulled by the owner).
+
 ## Considered and not built as rules
 
 Castles (a web check is owed), coded names the rule misses and zoo contents
