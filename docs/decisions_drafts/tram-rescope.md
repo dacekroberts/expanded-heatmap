@@ -2,6 +2,38 @@
 
 Newest first. Cleanup folds these into `DECISIONS.md` at review time.
 
+### 2026-10-13 - Tram rescope: Toronto, Milan and Prague pass the overlap test (measured, nothing built)
+
+- **The test that left Barcelona's trams out, run on the three cities not
+  yet started.** Tram stops are each city's cached GTFS stops served by
+  `route_type` 0, collapsed on the stop name; distances in the city's own
+  UTM zone; the storefronts are the built map's. Read-only.
+- **Toronto:** 558 tram stops on 20 routes; 305 (55%) are beyond the 0.6
+  mile outer ring of all 108 drawn stations (median 1,174 m). Storefronts
+  beyond every ring: 9,466 of 18,215 (52.0%) now, 5,855 (32.1%) with the
+  tram stops ringed; 3,611 gain a ring.
+- **Milan:** 325 tram stops with a storefront in reach, on 17 routes; 66
+  (20%) beyond every drawn station (median 408 m). Storefronts beyond every
+  ring: 6,030 of 47,540 (12.7%) now, 1,467 (3.1%) with the trams; 4,563
+  gain a ring.
+- **Prague:** 285 tram stops on 37 routes; 95 (33%) beyond every drawn
+  station (median 720 m). Storefronts beyond every ring: 7,657 of 25,185
+  (30.4%) now, 3,678 (14.6%) with the trams; 3,979 gain a ring.
+- **Reading:** none is Barcelona's case (0 of 28 stops beyond, 0
+  storefronts gained). The trams reach storefronts the metro does not in
+  all three, so the open question is the label and legend rule for 17 to
+  37 routes on one map, not whether to draw them.
+- **Limits:** the route lists include night routes (Toronto's 300s,
+  Prague's 91 to 99) that repeat day routes' streets, and Toronto's
+  `route_type` 0 includes Lines 5 and 6; neither changes the storefront
+  counts. Stops are collapsed by name, not by the station rule a build
+  would use.
+- **Cleanup's sequencing for Mexico City (its message, same day):** the
+  search rebuild waits for the second search rule batch on master and
+  lands in the tram segment of the final group; `PLACE_AREA` and the place
+  caches are not touched on this branch, and `check_place_search.py` stays
+  failing here until then.
+
 ### 2026-10-13 - Mexico City (Regional): Tlalnepantla de Baz added, page text approved, the title names the cable cars (owner)
 
 - **The owner: "1 add, 2 bullets looks good, Tlalnepantla added. 3. name
