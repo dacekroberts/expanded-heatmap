@@ -2813,11 +2813,25 @@ _PLACE_SEARCH_TEMPLATE = r"""
             if (CREDIT_BELOW && map.attributionControl) {
                 if (!creditBelow) {
                     creditBelow = true;
+                    var creditEl = map.attributionControl.getContainer();
+                    var creditH = creditEl ? creditEl.offsetHeight : 0;
                     map.attributionControl.addAttribution(
                         'Search index <a href="https://opendatacommons.org/licenses/odbl/1-0/" ' +
                         'target="_blank" rel="noopener noreferrer">ODbL</a> (<a href="' + abs(URL) +
                         '" target="_blank" rel="noopener" download>download</a>' +
                         (crossURL ? ', <a href="' + abs(crossURL) + '" target="_blank" rel="noopener" download>intersections</a>' : '') + ')');
+                    // The line is taller now (two lines on a phone), and
+                    // the legend's bottom is clamped for a one-line credit
+                    // (_LEGEND_BOTTOM_CSS): it is raised by what the line
+                    // grew. Measured 2026-10-13 at a 343 px map: the line
+                    // goes from 14 to 28 px and an open legend's bottom 4 px
+                    // sat under it.
+                    var grew = creditEl ? creditEl.offsetHeight - creditH : 0;
+                    var lg = document.querySelector(".map-legend");
+                    if (lg && grew > 0) {
+                        var was = lg.style.bottom || getComputedStyle(lg).bottom;
+                        lg.style.bottom = "calc(" + was + " + " + grew + "px)";
+                    }
                 }
                 if (found === false || !areaName()) return;
                 c.textContent = "Search covers " + areaName() + ", outlined on the map.";
