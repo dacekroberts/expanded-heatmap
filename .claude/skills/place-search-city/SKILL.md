@@ -347,11 +347,17 @@ All quoted in the drafts file; the short list:
    (`osm_places_<date>.json`, `osm_places_extra_<date>.json`; data/ is shared
    by every worktree), `PLACE_LANGUAGES`, `PLACE_FOLD` (`"ja"` or `None`),
    `PLACE_REVIEWED = {}`, `PLACE_DROPPED = {}`.
-3. **Fetch:** `python pipeline/place_index_fetch.py <city>` (three queries, THE BOUNDARY FIRST: a municipality with no station and no `PLACE_AREA_KEPT` entry stops the fetch in seconds, before the heavy two;
-   in turn: places, the extra classes, and the area's boundaries with their
-   geometry, `osm_place_outline_v1.json`; records provenance). A city fetched
-   before 2026-10-12 lacks the third: the queue sees that and fetches only
-   it. Chain cities one after another in one
+3. **Fetch:** `python pipeline/place_index_fetch.py <city>` (three queries
+   in turn, **the boundary first** (owner, 2026-10-12): the area's
+   boundaries with their geometry, `osm_place_outline_v1.json`, then places,
+   then the extra classes; records provenance). The fetch counts the map's
+   stations per municipality on the boundary and **stops before the two
+   heavy queries** when one holds none and has no `PLACE_AREA_KEPT` entry,
+   or when a boundary does not close. A place answer whose data is over 7
+   days old is refused and the next mirror asked (`PLACE_MAX_AGE_DAYS`):
+   read `osm_base` in the provenance after a fetch. A city fetched before
+   2026-10-12 lacks the boundary: the queue sees that and fetches only it.
+   Chain cities one after another in one
    background command; never two at once. Most first attempts are refused
    and answer after the wait; a city whose run fails both rounds is retried
    alone afterwards. **A city too large for one answer** (the server's own
