@@ -171,4 +171,5 @@ PLACE_REVIEWED = {
 }
 PLACE_DROPPED = {
     "way/988369957": "'Hackensall Hall', a manor house (historic=manor, building=farm, Grade II) with no sign of visiting: a home, whatever its article",
+    "node/14103850197": "'Whipping Post', description: historic=pillory; name is type words; wikidata, no article (flag check, 2026-10-13)",
 }

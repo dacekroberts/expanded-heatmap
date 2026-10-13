@@ -425,4 +425,7 @@ PLACE_DROPPED = {
     "way/806899639": "'Southwest 144th Street', not a street: another kind of object indexed as one",
     "way/806899644": "'Southwest 128th Street', not a street: another kind of object indexed as one",
     "way/806899645": "'Southwest 128th Street', not a street: another kind of object indexed as one",
+    "node/6942721481": "'Medley Landfill', private facility: a landfill tagged a peak: an operating waste site, by id (flag check, 2026-10-13)",
+    "node/11226868716": "'HMS Bounty', glitch: GNIS artifact: a replica ship's name on a hamlet node; the ship is not there (flag check, 2026-10-13)",
+    "node/153971407": "'Medley Lakeside Retirement Community', a housing development mapped as a place (owner, 2026-10-13)",
 }

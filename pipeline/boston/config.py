@@ -281,6 +281,10 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
 PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
+# Read and kept, 2026-10-13 (the flag check of wave 1; the owner's ruling
+# to settle unsure rows by the existing rules). None carries a leak word,
+# so check E takes no PLACE_REVIEWED entry for it; the reason is kept here.
+#   node/4362209489 'Skinny House': tourism=attraction and an article of its own: a home tagged an attraction is kept
 PLACE_REVIEWED = {
     "Ancient and Honorable Artillery Company Museum": "a museum (tourism=museum, Wikipedia); the Company is a militia company",
     "Massachusetts College of Pharmacy and Health Science": "a university (amenity=college, Wikipedia)",
@@ -307,4 +311,8 @@ PLACE_DROPPED = {
     "way/1046209412": "'Service Road', a bare type as a street's name, and access=no on every way (owner, 2026-10-13)",
     "way/1232128799": "'Service Road', a bare type as a street's name, and access=no on every way (owner, 2026-10-13)",
     "way/1348342171": "'Doubletree', a hotel brand as a road's whole name: the business's own road",
+    "relation/20582057": "'B.A.A. 10k', event: a running race's route relation (route=running) with the event's article: an event, not a place (flag check, 2026-10-13)",
+    "way/1479920617": "'Civil War-era Castmate', description: a ruin named by a description (misspelled), its position a rough estimate by its own note (flag check, 2026-10-13)",
+    "node/7748212236": "'Clef Sculpture', public art, no own article: tourism=artwork whose wikipedia tag is its subject's article (en:Clef), not its own (flag check, 2026-10-13)",
+    "node/12299462771": "'Historic Springhouse', description: a ruin named by 'Historic' and a type word (precedent: New York's 'Historic Stone Chimney') (flag check, 2026-10-13)",
 }

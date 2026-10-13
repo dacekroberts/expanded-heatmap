@@ -220,4 +220,5 @@ PLACE_DROPPED = {
     "way/27827397": "'Rear Access To Deep Lane', a description as a street's name (owner, 2026-10-13)",
     "way/27827398": "'Rear Access To Deep Lane', a description as a street's name (owner, 2026-10-13)",
     "way/847232420": "'Merchants Crescent, Exchange Street', two street names glued in one: a glitch (owner, 2026-10-13)",
+    "node/1759007086": "'Waverley Cottages', a housing development mapped as a place (owner, 2026-10-13)",
 }

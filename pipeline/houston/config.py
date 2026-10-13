@@ -277,4 +277,21 @@ PLACE_DROPPED = {
     "way/1322372780": "'Deerwood Bike Lane', a cycle facility named for the street it runs on: a description (owner, 2026-10-13)",
     "way/1322372782": "'Deerwood Bike Lane', a cycle facility named for the street it runs on: a description (owner, 2026-10-13)",
     "way/1322372784": "'Deerwood Bike Lane', a cycle facility named for the street it runs on: a description (owner, 2026-10-13)",
+    "way/461505830": "'Path and Wendell Wilson Park', glitch: stray words glued to the name: 'Path and' before the park's name, by id; not repaired (flag check, 2026-10-13)",
+    "way/888038121": "'Police Helicopter Patrol Heliport', non-public facility: a police heliport; no visitor's place, by id (flag check, 2026-10-13)",
+    "node/356830047": "'Presbytery of the New Covenant Church', organisation office: a church body's name on a GNIS place-of-worship node: a presbytery is a governing body; decided by the name, not a tag (flag check, 2026-10-13)",
+    "node/4287062610": "'Stone Lantern', description: bare type word: 'Stone Lantern'; a BARE_TYPE_NAMES word (flag check, 2026-10-13)",
+    "node/4324591338": "'World War I Monument', description: bare memorial type: 'World War I Monument'; a bare word needs an article of its own (flag check, 2026-10-13)",
+    "way/449021476": "'Fannin Station East', private complex street: an apartment complex's internal drive; open by permission only (flag check, 2026-10-13)",
+    "way/396608962": "'Fannin Station North', private complex street: access=private; foot, bicycle and motor_vehicle permissive; name is a development's and a compass point (flag check, 2026-10-13)",
+    "way/449021475": "'Fannin Station South', private complex street: access=private; foot, bicycle and motor_vehicle permissive; name is a development's and a compass point (flag check, 2026-10-13)",
+    "way/449021473": "'Fannin Station West', private complex street: access=private; foot, bicycle and motor_vehicle permissive; name is a development's and a compass point (flag check, 2026-10-13)",
+    "way/449021474": "'Fannin Station West', private complex street: access=private; foot, bicycle and motor_vehicle permissive; name is a development's and a compass point (flag check, 2026-10-13)",
+}
+
+# Public art kept by the owner's word against the article rule (place_index,
+# PLACE_KEPT; owner, 2026-10-13). Each is a known work the Wikidata lookup
+# cannot admit; DECISIONS.md of that date lists the works left out.
+PLACE_KEPT = {
+    "way/1393576367": "'Broken Obelisk', a known work the article rule drops for want of an article of its own (owner, 2026-10-13)",
 }

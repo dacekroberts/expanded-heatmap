@@ -262,4 +262,7 @@ PLACE_DROPPED = {
     "way/182950659": "'Mathematics 3 Green', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13)",
     "way/182460938": "'Science Quad', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13)",
     "way/290274346": "'WLU Quad', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13)",
+    "node/9998016266": "'Beechwood Bridle Gate Homes Association', private facility: homeowners' association grounds tagged leisure=park; the name is the association's (flag check, 2026-10-13)",
+    "way/258818568": "'Beechwood II Homes Association Recreation Centre', private facility: homeowners' association recreation centre tagged leisure=park (flag check, 2026-10-13)",
+    "way/169192754": "'Highgate Road SWP', description: stormwater pond tagged leisure=park (SWP) (flag check, 2026-10-13)",
 }

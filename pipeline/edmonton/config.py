@@ -336,6 +336,10 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
 PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
+# Read and kept, 2026-10-13 (the flag check of wave 1; the owner's ruling
+# to settle unsure rows by the existing rules). None carries a leak word,
+# so check E takes no PLACE_REVIEWED entry for it; the reason is kept here.
+#   way/565123468 'Union Bank Inn': a heritage building with a Wikidata entry, tagged as the building: the Panama Hotel precedent
 PLACE_REVIEWED = {
     "Transit Hotel": "a historic building (historic=building, Wikipedia) tagged as the building, not the business: the Panama Hotel precedent",
 }
@@ -397,4 +401,7 @@ PLACE_DROPPED = {
     "way/547299003": "'Off-Leash Path', a description as a street's name (owner, 2026-10-13)",
     "way/1279241230": "'On-Leash Path', a description as a street's name (owner, 2026-10-13)",
     "way/98223790": "'51222 Range Road 260', an address as a street's name (owner, 2026-10-13)",
+    "way/614250085": "'Goodwin Park & Benches', glitch: stray words glued to the name: '& Benches' after the park's name, by id; not repaired (flag check, 2026-10-13)",
+    "node/11940488893": "'Heritage Mall', business: former shopping mall: a demolished mall, by id (flag check, 2026-10-13)",
+    "way/521942121": "'Rehwinkel Parsonage', home: clergy residence with an entry and no home tag: a parsonage; 'parsonage' is not in HOME_NAME (flag check, 2026-10-13)",
 }

@@ -309,6 +309,13 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
 PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
+# Read and kept, 2026-10-13 (the flag check of wave 1; the owner's ruling
+# to settle unsure rows by the existing rules). None carries a leak word,
+# so check E takes no PLACE_REVIEWED entry for it; the reason is kept here.
+#   node/1308317902 'Golden Gate Fortune Cookie Factory': tourism=attraction with a Wikidata entry: a commercial attraction with a tourism tag stays
+#   node/4659836677 'House of Air': tourism=theme_park with a Wikidata entry: a commercial attraction with a tourism tag stays
+#   node/2365845678 'Magowan's Infinite Mirror Maze': tourism=attraction, attraction=maze: a commercial attraction with a tourism tag stays
+#   way/263823315 'Mish House': tourism=attraction and an article of its own: a home tagged an attraction is kept
 PLACE_REVIEWED = {}
 PLACE_DROPPED = {
     "way/260181659": "'Dashiell Hammett Place', an apartment building (rooms=22) named for a former resident: a home",
@@ -350,4 +357,6 @@ PLACE_DROPPED = {
     "way/839972870": "'Route 80', a route number in the name field (owner, 2026-10-13)",
     "way/120813417": "'Route 80', a route number in the name field (owner, 2026-10-13)",
     "way/123741452": "'Route 80', a route number in the name field (owner, 2026-10-13)",
+    "node/8722361747": "'Down to the Seas in Ships', interpretive panel tagged a monument: historic=monument; inscription is a panel's text; no wikidata (flag check, 2026-10-13)",
+    "node/8744048933": "'Whaling Out of San Francisco', interpretive panel tagged a monument: historic=monument; inscription is a panel's text; no wikidata (flag check, 2026-10-13)",
 }

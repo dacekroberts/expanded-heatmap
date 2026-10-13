@@ -179,4 +179,7 @@ PLACE_DROPPED = {
     "way/849512141": "'Shelby', a street name cut short (owner, 2026-10-13)",
     "way/11717499": "'Tarraganno', a street name cut short (owner, 2026-10-13)",
     "way/841978019": "'Zahniser', a street name cut short (owner, 2026-10-13)",
+    "node/357375146": "'Christian Associates of Southwest Pennsylvania', office: a church body's office on a place_of_worship node (GNIS import), not a congregation (flag check, 2026-10-13)",
+    "way/734088469": "'Pittsburgh Presbytery', office: a presbytery's office tagged place_of_worship, not a congregation (flag check, 2026-10-13)",
+    "node/357377205": "'United Methodist Foundation of Western Pennsylvania', office: a foundation's office on a place_of_worship node, not a congregation (flag check, 2026-10-13)",
 }

@@ -160,6 +160,10 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
 PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
+# Read and kept, 2026-10-13 (the flag check of wave 1; the owner's ruling
+# to settle unsure rows by the existing rules). None carries a leak word,
+# so check E takes no PLACE_REVIEWED entry for it; the reason is kept here.
+#   way/242719863 'St. Barnabas Church,': a church with an article of its own; the trailing comma is OpenStreetMap's and stops no search
 PLACE_REVIEWED = {}
 PLACE_DROPPED = {
     "relation/7057829": "'Chapel Hill South', a duplicate beside the same thing's own row (owner, 2026-10-13)",
@@ -212,4 +216,11 @@ PLACE_DROPPED = {
     "way/714851530": "'World Exchange Plaza Level 2', an interior section of a paid venue, which keeps its own row (owner, 2026-10-13)",
     "way/545918946": "'Dead End Street', a description standing in for a name (owner, 2026-10-13)",
     "way/430405250": "'Miners Trail shortcut', a description standing in for a name (owner, 2026-10-13)",
+    "relation/9788372": "'Casino Lac Leamy Plaza', business: a casino's own plaza under the casino's name (place=square) (flag check, 2026-10-13)",
+    "way/1314967982": "'Iltis', description: a display vehicle tagged historic=monument and named by its model alone (two outlines, way/1314967982 and way/1314967983) (flag check, 2026-10-13)",
+    "way/1314967983": "'Iltis', description: a display vehicle tagged historic=monument and named by its model alone (two outlines, way/1314967982 and way/1314967983) (flag check, 2026-10-13)",
+    "way/545714255": "'Kanata Town Centre Stormwater Pond', description: stormwater pond tagged leisure=park (flag check, 2026-10-13)",
+    "way/483954792": "'Mather Award Ditch', description: drainage ditch tagged leisure=park (flag check, 2026-10-13)",
+    "node/12627526960": "'Ottawa's Highest Point', description: natural=peak named by a description (flag check, 2026-10-13)",
+    "way/1324953278": "'The 8th Canadian Hussars (Princess Louise's) Sherman 'Easy Eight' M4A2(76) W HVSS tank', description: a display tank's outline named by a long description, 1 m from the memorial's own node (node/6977909007, 'Royal Canadian Armoured Corps Sherman Tank Memorial') (flag check, 2026-10-13)",
 }

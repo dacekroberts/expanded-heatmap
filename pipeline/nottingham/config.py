@@ -197,4 +197,12 @@ PLACE_DROPPED = {
     "way/193747067": "'Stanford Hall Rehabilitation Estate', not open to the public",
     "relation/5514628": "'Medieval village', a description standing in for a name; a bare type goes whatever the object carries (owner, 2026-10-13)",
     "way/371452526": "'Moats & fishponds', a description standing in for a name; a bare type goes whatever the object carries (owner, 2026-10-13)",
+    "node/1366881581": "'Nottingham Smiths Bank Branch', plaque: memorial=plaque; openplaques:id; wikipedia=en:Smith's Bank is the bank's (a plaque under its subject's article) (flag check, 2026-10-13)",
+    "node/2335829586": "'Village Cross', description: historic=cross; name is type words; wikidata, no article (flag check, 2026-10-13)",
+    "node/2970658303": "'Wharf Crane 1', description: historic=crane; name is a type and a number (flag check, 2026-10-13)",
+    "node/2970658304": "'Wharf Crane 2', description: historic=crane; name is a type and a number (flag check, 2026-10-13)",
+    "node/11869567639": "'Aerodrome', description: place=neighbourhood; name \"Aerodrome\"; no wikidata (bare type word on a place) (flag check, 2026-10-13)",
+    "node/706725025": "'Gotham Moor Farm', home: place=locality; name ends \"Farm\"; no other tag (a farm mapped as a locality) (flag check, 2026-10-13)",
+    "node/4351842912": "'Wiverton Hall', home: place=locality; name ends \"Hall\"; no other tag (a house mapped as a locality, as Dublin's by-id drops) (flag check, 2026-10-13)",
+    "way/342863745": "'Bus Link', description: type words only (flag check, 2026-10-13)",
 }

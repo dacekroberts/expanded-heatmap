@@ -241,4 +241,7 @@ PLACE_DROPPED = {
     "way/651955543": "'Hotel Henry Way', a hotel's own drive, named for the business",
     "way/651955544": "'Hotel Henry Way', a hotel's own drive, named for the business",
     "way/651955545": "'Hotel Henry Way', a hotel's own drive, named for the business",
+    "way/1245814901": "'Robert T. Coles House and Studio', home: historic building named as a house, article, no museum or attraction tag: the 'homes with an article and no home tag' class, by id (flag check, 2026-10-13)",
+    "way/583414129": "'Viola Park Median', description: traffic median tagged leisure=park, named for its street (flag check, 2026-10-13)",
+    "way/446576640": "'W Genesee St. Median', description: traffic median tagged leisure=park, named for its street (flag check, 2026-10-13)",
 }

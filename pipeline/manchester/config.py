@@ -374,4 +374,16 @@ PLACE_DROPPED = {
     "way/4995636": "'The Island', a roundabout, interchange or ramp named for a road, not a street (owner, 2026-10-13)",
     "way/996057416": "'The Island', a roundabout, interchange or ramp named for a road, not a street (owner, 2026-10-13)",
     "way/996057417": "'The Island', a roundabout, interchange or ramp named for a road, not a street (owner, 2026-10-13)",
+    "way/148096669": "'Manchester, Bolton & Bury Canal feeder', description: historic=canal; waterway=stream; note=Canal feeder (a feeder channel under a description) (flag check, 2026-10-13)",
+    "way/176009458": "'Middleton Cons Crown Green Bowls Club', private facility: leisure=park; name is a bowls club's (a club's green tagged a park) (flag check, 2026-10-13)",
+    "way/601214274": "'Sale Model Flying Club', private facility: leisure=park; name is a model flying club's (a club's field tagged a park) (flag check, 2026-10-13)",
+    "way/486642351": "'Whittaker Lane Grass Patch', description: leisure=park; grass=mown; name ends \"Grass Patch\" (flag check, 2026-10-13)",
+    "node/14085210191": "'Hill Top Mews', a housing development mapped as a place (owner, 2026-10-13)",
+}
+
+# Public art kept by the owner's word against the article rule (place_index,
+# PLACE_KEPT; owner, 2026-10-13). Each is a known work the Wikidata lookup
+# cannot admit; DECISIONS.md of that date lists the works left out.
+PLACE_KEPT = {
+    "way/570278857": "'Albert Memorial', a known work the article rule drops for want of an article of its own (owner, 2026-10-13)",
 }

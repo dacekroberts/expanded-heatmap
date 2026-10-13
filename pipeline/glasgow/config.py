@@ -181,4 +181,5 @@ PLACE_DROPPED = {
     "way/1551158324": "'B765', a road number in the name field (owner, 2026-10-13)",
     "way/1551158325": "'B765', a road number in the name field (owner, 2026-10-13)",
     "way/1551158327": "'B765', a road number in the name field (owner, 2026-10-13)",
+    "node/6465079383": "'Crookston Home', home: place=quarter; name ends \"Home\"; no other tag (a care home's site mapped as a quarter) (flag check, 2026-10-13)",
 }

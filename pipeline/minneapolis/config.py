@@ -161,4 +161,6 @@ PLACE_DROPPED = {
     "node/1722225703": "'Cottage City Stop', a streetcar museum's heritage line indexed as a station: not transit (owner, 2026-10-13)",
     "node/9892321102": "'Lakewood Cemetery Stop', a streetcar museum's heritage line indexed as a station: not transit (owner, 2026-10-13)",
     "way/1360166213": "'Minneapolis Skyway (Tunnel)', a description as a street's name (owner, 2026-10-13)",
+    "way/1026174773": "'Loren L. Chadwick Cottages', home: houses with an article and no home tag: private cottages; HOME_NAME misses the plural, by id (flag check, 2026-10-13)",
+    "way/1053667647": "'Stone Path', description: a surface and a type word (flag check, 2026-10-13)",
 }

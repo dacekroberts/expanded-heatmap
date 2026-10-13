@@ -201,6 +201,10 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
 PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
+# Read and kept, 2026-10-13 (the flag check of wave 1; the owner's ruling
+# to settle unsure rows by the existing rules). None carries a leak word,
+# so check E takes no PLACE_REVIEWED entry for it; the reason is kept here.
+#   way/403494967 'Knowsley Hall': castle_type=stately with an article of its own: an estate landmark (owner, 2026-10-13)
 PLACE_REVIEWED = {
     "Shop Lane": "a residential street, no business tag",
     "Shop Road": "a residential street, no business tag",
@@ -245,4 +249,5 @@ PLACE_DROPPED = {
     "way/37393366": "'Liver Industrial Estate', an industrial estate's own road",
     "way/254831404": "'Woodside Bus Station', a bus station indexed as a street (owner, 2026-10-13)",
     "node/8647055259": "'Dingle', a demolished station, by its own description, whatever its article (owner, 2026-10-13: \"2. drop\")",
+    "node/2789978938": "'Squares with Two Circles', artwork without article: tourism=artwork; wikipedia=en:List of public art in Liverpool (the wikipedia tag is a list page, not the work's article) (flag check, 2026-10-13)",
 }

@@ -350,6 +350,15 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
 PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
+# Read and kept, 2026-10-13 (the flag check of wave 1; the owner's ruling
+# to settle unsure rows by the existing rules). None carries a leak word,
+# so check E takes no PLACE_REVIEWED entry for it; the reason is kept here.
+#   way/241857932 'Biddle House': historic=manor with access=yes: a house the tags mark open to the public
+#   way/249742821 'Historic Wyckoff-Bennett-Mont Residence': tourism=attraction and an article of its own: a home tagged an attraction is kept
+#   node/368043220 'Pellman Cottage': historic=ruins: the ruin of a cottage, no home
+#   node/4451144258 'Temple of Dendur': a museum exhibit with an article of its own, a landmark people look for (owner, 2026-10-13)
+#   relation/1341944 'The Dakota': tourism=attraction and an article of its own, a landmark people look for (owner, 2026-10-13)
+#   way/266170658 'The Penn Club': a historic building with an article of its own (30 West 44th Street), under its club's name
 PLACE_REVIEWED = {
     "Classic Stage Company": "a theatre with its own article, named for its company",
     "Coney Island Yard Electric Motor Repair Shop": "a registered historic building with its own article",
@@ -701,4 +710,43 @@ PLACE_DROPPED = {
     "way/724428590": "'Saint Veronica Avenue', a cemetery's or church ground's internal road (owner, 2026-10-13)",
     "way/60836994": "'Saint Vincent de Paul Avenue', a cemetery's or church ground's internal road (owner, 2026-10-13)",
     "way/60837033": "'Saint William Avenue', a cemetery's or church ground's internal road (owner, 2026-10-13)",
+    "way/705304809": "'30 Lincoln Plaza', home: an apartment tower's plaza under the tower's address (leisure=park); precedent: an apartment complex's own feature (flag check, 2026-10-13)",
+    "way/1466260659": "'Aqueduct Walk (Morten to West Burnside)', description: one of eight segment rows 'Aqueduct Walk (X to Y)' beside the park's own 'Aqueduct Walk' row; the other seven were not flagged (flag check, 2026-10-13)",
+    "node/2547006642": "'Bungalow 45', home: amenity=place_of_worship with religion=none at an apartment unit's address; a code and a type word for a name (flag check, 2026-10-13)",
+    "way/247867461": "'Capitale', business: an events venue under its trade name (amenity=events_venue); the landmark bank is only its old_name (flag check, 2026-10-13)",
+    "way/796271669": "'Italian American Organizations of Queens Soccer', glitch: name cut short (ends 'Soccer'); leisure=park (flag check, 2026-10-13)",
+    "way/265345877": "'Knickerbocker Clubhouse', a members' club's building with no article: a private club (flag check, settled by the existing rules, 2026-10-13)",
+    "way/1157217875": "'Loujane', not a place: a derelict ship, access=no, historic=ship with no tourism tag and no article (flag check, 2026-10-13)",
+    "way/296322565": "'Lowe's Esplanade', business: an esplanade named for the store beside it: a brand as the name (flag check, 2026-10-13)",
+    "node/357607736": "'Lower Forecourt', description: a position word and a type word (precedent: Boston's 'Upper Plaza') (flag check, 2026-10-13)",
+    "node/4798493527": "'Michael Altman Fine Art', business: an art dealer's firm under the dealer's name: tourism=gallery, wikidata only, no article (flag check, 2026-10-13)",
+    "way/36870581": "'Park Village's', glitch: a residents' association's park (its note tag) under a cut-short possessive name (flag check, 2026-10-13)",
+    "node/5995383978": "'Roseland Ballroom', gone: historic=theatre node whose own article says the building was demolished; no lifecycle tag, so by id (flag check, 2026-10-13)",
+    "way/1053727138": "'Royal Ranch Pool Club', private facility: a members' pool club tagged leisure=park (flag check, 2026-10-13)",
+    "way/697722180": "'South Bronze Names Parapets', description: a component of a memorial (barrier=wall) named by a description (flag check, 2026-10-13)",
+    "way/1025959315": "'The Square', description: an article and a type word (precedent: Boston's 'The Green') (flag check, 2026-10-13)",
+    "node/357607739": "'Upper Forecourt', description: a position word and a type word (precedent: Boston's 'Upper Plaza') (flag check, 2026-10-13)",
+    "way/1263525980": "'Urban Plaza', description: 'urban plaza' is the zoning type of the space; operator a property company (flag check, 2026-10-13)",
+    "way/218327131": "'Verizon Plaza', business: a privately run plaza named for its corporate tenant (operator a property company) (flag check, 2026-10-13)",
+    "node/4148060867": "'World War I', description: a monument named only by its subject (flag check, 2026-10-13)",
+    "node/11013387510": "'World War I/II victims', description: a monument named only by its subject (flag check, 2026-10-13)",
+    "node/158807303": "'Cedar Manor Houses', a housing development mapped as a place (owner, 2026-10-13)",
+    "node/158813854": "'Lambert Houses', a housing development mapped as a place (owner, 2026-10-13)",
+    "node/158843513": "'Richmond Terrace Houses', a housing development mapped as a place (owner, 2026-10-13)",
+    "way/1134632481": "'Terminal B Bus/Taxi Lane', description: an airport bus and taxi lane (flag check, 2026-10-13)",
+    "way/785917467": "'Terminal B Bus/Taxi Lane', description: an airport bus and taxi lane (flag check, 2026-10-13)",
+    "way/882869690": "'Terminal B Bus/Taxi Lane', description: an airport bus and taxi lane (flag check, 2026-10-13)",
+    "way/1110193733": "'Zoo Center Path', description: a path inside a paid zoo (flag check, 2026-10-13)",
+    "way/1110193734": "'Zoo Center Path', description: a path inside a paid zoo (flag check, 2026-10-13)",
+    "way/221286927": "'Zoo Center Path', description: a path inside a paid zoo (flag check, 2026-10-13)",
+}
+
+# Public art kept by the owner's word against the article rule (place_index,
+# PLACE_KEPT; owner, 2026-10-13). Each is a known work the Wikidata lookup
+# cannot admit; DECISIONS.md of that date lists the works left out.
+PLACE_KEPT = {
+    "way/958999496": "'John Lennon's Imagine', a known work the article rule drops for want of an article of its own (owner, 2026-10-13)",
+    "node/2727025839": "'Balto', a known work the article rule drops for want of an article of its own (owner, 2026-10-13)",
+    "node/7826843768": "'Patience', a known work the article rule drops for want of an article of its own (owner, 2026-10-13)",
+    "node/7826843767": "'Fortitude', a known work the article rule drops for want of an article of its own (owner, 2026-10-13)",
 }

@@ -337,6 +337,10 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
+# Read and kept, 2026-10-13 (the flag check of wave 1; the owner's ruling
+# to settle unsure rows by the existing rules). None carries a leak word,
+# so check E takes no PLACE_REVIEWED entry for it; the reason is kept here.
+#   node/367141729 'Twin Oaks': tourism=attraction with a Wikidata entry: a home tagged an attraction is kept
 PLACE_REVIEWED = {
     "United Brick Corporation Brick Company": "a registered historic site with its own article (the brick complex), not a company",
 }
@@ -456,4 +460,16 @@ PLACE_DROPPED = {
     "way/295652629": "'Tregaron Estate', a home with no sign of visiting, whatever its article (owner, 2026-10-13)",
     "way/1361163002": "'Eighteen Hundred Block Park Road Buildings', a home with no sign of visiting, whatever its article (owner, 2026-10-13)",
     "node/367141563": "'Towpath Row', a home with no sign of visiting, whatever its article (owner, 2026-10-13)",
+    "way/67260451": "'Commander, Navy Installations Command', non-public facility: an office title as a building's name: a command's title on a Navy Yard building; like Tacoma's job-title drop, by id (flag check, 2026-10-13)",
+    "node/3360867538": "'Moishe House', a communal residence tagged a place of worship, no article: a home (flag check, settled by the existing rules, 2026-10-13)",
+    "way/640685801": "'Grove 24 Trail', description: an informal trail under a grove number (flag check, 2026-10-13)",
+    "way/199920712": "'Leavey Center Entrance bridge', description: a campus footbridge named for a building (flag check, 2026-10-13)",
+    "way/199920714": "'Leavey Center Entrance bridge', description: a campus footbridge named for a building (flag check, 2026-10-13)",
+}
+
+# Public art kept by the owner's word against the article rule (place_index,
+# PLACE_KEPT; owner, 2026-10-13). Each is a known work the Wikidata lookup
+# cannot admit; DECISIONS.md of that date lists the works left out.
+PLACE_KEPT = {
+    "node/358960331": "'Three Servicemen Statue', a known work the article rule drops for want of an article of its own (owner, 2026-10-13)",
 }

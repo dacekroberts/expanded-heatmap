@@ -255,4 +255,11 @@ PLACE_DROPPED = {
     "way/862371017": "'Quorum Buiness Park', a shopping centre's, business park's or industrial estate's own way",
     "way/30885632": "'Bellway Industrial Estate', a shopping centre's, business park's or industrial estate's own way",
     "way/84981040": "'Buddle Industrial Estate', a shopping centre's, business park's or industrial estate's own way",
+    "node/6899046018": "'Enclosures near Damhead wood', description: historic=archaeological_site; name is a register description; wikidata, no article (flag check, 2026-10-13)",
+    "node/7890734168": "'Former Hawthorn Leslie Co Shipyard', private: historic=ruins; access=no; name begins \"Former\" (closed to the public) (flag check, 2026-10-13)",
+    "node/1957261720": "'Prominent Church', description: amenity=place_of_worship; name \"Prominent Church\" (a mapper's description) (flag check, 2026-10-13)",
+    "way/854562743": "'St Mark (closed)', closed: amenity=place_of_worship; name ends \"(closed)\" (the English twin of the \"(geschlossen)\" rule) (flag check, 2026-10-13)",
+    "way/1280945292": "'ampitheatre', description: leisure=park; lowercase bare type word (flag check, 2026-10-13)",
+    "way/1280945293": "'ampitheatre', description: leisure=park; lowercase bare type word (flag check, 2026-10-13)",
+    "way/276258656": "'Church Dene footpath', description: a place name and a type word (flag check, 2026-10-13)",
 }

@@ -293,4 +293,5 @@ PLACE_DROPPED = {
     "way/1262092867": "'Welcome Garden', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13)",
     "way/1030920902": "'Picken Lawn', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13)",
     "way/403420628": "'The Bulpadock', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13)",
+    "way/33297408": "'Wildlife Reserve', description: leisure=park; name is type words only (flag check, 2026-10-13)",
 }

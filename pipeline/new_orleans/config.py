@@ -316,4 +316,7 @@ PLACE_DROPPED = {
     "way/342634291": "'Public Road', a description as a street's name (owner, 2026-10-13)",
     "way/38476785": "'Algiers Point Ferry Landing', a ferry landing indexed as a street (access=no, building=yes)",
     "way/319241443": "'Chợ Phiên', a market indexed as a street (amenity=marketplace)",
+    "node/358399750": "'Federation of Churches', organisation office: a church body's name on a GNIS place-of-worship node: a federation, not a congregation; decided by the name, not a tag (flag check, 2026-10-13)",
+    "node/6568622287": "'Vietnam War Monument', description: bare memorial type: 'Vietnam War Monument'; like the listed war-memorial words (flag check, 2026-10-13)",
+    "node/13102822879": "'Melia Subdivision', a housing development mapped as a place (owner, 2026-10-13)",
 }

@@ -171,4 +171,6 @@ PLACE_DROPPED = {
     "way/1422578262": "'South 18th Street Bicycle Diverter', traffic furniture described (owner, 2026-10-13)",
     "way/1422579401": "'South J Street Bicycle Diverter Cut-Through', traffic furniture described (owner, 2026-10-13)",
     "way/1061967365": "'Wilderness Cut Off2', a missing space; the street is its own row: a glitch (owner, 2026-10-13)",
+    "way/1032792013": "'Associated Ministries of Tacoma', organisation office: a church body's name on a place-of-worship object: an interfaith association; decided by the name, not a tag (flag check, 2026-10-13)",
+    "relation/13312852": "'Turning Basin', description: bare type word: a port turning basin under its type alone (flag check, 2026-10-13)",
 }

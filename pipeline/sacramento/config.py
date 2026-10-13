@@ -239,4 +239,5 @@ PLACE_DROPPED = {
     "way/10528149": "'X Street Broadway Alley', an alley named by its two cross streets or by a number: a description (owner, 2026-10-13)",
     "way/10528150": "'X Street Broadway Alley', an alley named by its two cross streets or by a number: a description (owner, 2026-10-13)",
     "way/543271927": "'X Street Broadway Alley', an alley named by its two cross streets or by a number: a description (owner, 2026-10-13)",
+    "way/1026540786": "'Opened Levee Path', description: highway=footway; railway=abandoned; name is a status note (flag check, 2026-10-13)",
 }

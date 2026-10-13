@@ -231,4 +231,10 @@ PLACE_DROPPED = {
     "way/379375539": "'Access Road', a bare type as a street's name (owner, 2026-10-13)",
     "way/1047501620": "'Access track', a bare type as a street's name (owner, 2026-10-13)",
     "way/1442943347": "'Trail Access', a bare type as a street's name (owner, 2026-10-13)",
+    "node/5555468725": "'3625 Park', description: a house number beside a type: '3625 Park'; CODED_TYPE could take digits + type (flag check, 2026-10-13)",
+    "way/839197575": "'Cosmic Coaster', ride inside a paid venue: San Diego's config drops a paid venue's interior sections by id (owner, 2026-10-13) (flag check, 2026-10-13)",
+    "way/318224808": "'Spinning Dragons', ride inside a paid venue: attraction=roller_coaster; tourism=attraction; wikipedia (flag check, 2026-10-13)",
+    "node/5764089857": "'Veterans Monument', description: bare memorial type: 'Veterans Monument'; a BARE_TYPE_NAMES word (flag check, 2026-10-13)",
+    "way/338427485": "'Veterans Monument', description: bare memorial type: 'Veterans Monument'; a BARE_TYPE_NAMES word (flag check, 2026-10-13)",
+    "node/7404076692": "'unseencandle', business: a trade name tagged a place of worship: amenity=place_of_worship; religion=pagan; one lower-case word (flag check, 2026-10-13)",
 }

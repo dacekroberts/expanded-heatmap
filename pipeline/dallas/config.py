@@ -181,6 +181,10 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
 PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
+# Read and kept, 2026-10-13 (the flag check of wave 1; the owner's ruling
+# to settle unsure rows by the existing rules). None carries a leak word,
+# so check E takes no PLACE_REVIEWED entry for it; the reason is kept here.
+#   node/4894832922 'gas monkey live': tourism=attraction with a Wikidata entry: a commercial attraction with a tourism tag stays
 PLACE_REVIEWED = {
     "Hotel Street": "a four-lane public street of that name, not a hotel's drive",
 }
@@ -306,4 +310,5 @@ PLACE_DROPPED = {
     "way/448749011": "'Frankford Cemetery', an institution's own way, named for it",
     "way/9978109": "'Preston Trail Golf Club Drive', an institution's own way, named for it",
     "way/328834824": "'Preston Trail Golf Club Drive', an institution's own way, named for it",
+    "way/497536284": "'Pet Station', description: a pet area under a describing label, by id (flag check, 2026-10-13)",
 }

@@ -262,6 +262,14 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
 PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
+# Read and kept, 2026-10-13 (the flag check of wave 1; the owner's ruling
+# to settle unsure rows by the existing rules). None carries a leak word,
+# so check E takes no PLACE_REVIEWED entry for it; the reason is kept here.
+#   node/4773740642 '1100 Wilshire': tourism=attraction with a Wikidata entry and no home tag
+#   way/563505217 'Common Grounds': leisure=park with no operator tag: a park tied to an estate only by name stays
+#   way/484279014 'Kinesthetics': leisure=park with no operator tag: a park tied to an estate only by name stays
+#   way/562954916 'The Lounge': leisure=park with no operator tag: a park tied to an estate only by name stays
+#   way/562958436 'The Pointe': leisure=park with no operator tag: a park tied to an estate only by name stays
 PLACE_REVIEWED = {
     "Fire Station No. 30, Engine Company No. 30": "a registered historic fire station with its own article",
     "Hotel Rosslyn": "a historic building with its own article, not a trading hotel",
@@ -695,4 +703,35 @@ PLACE_DROPPED = {
     "way/1301828974": "'Headwaters Greenway southbank', a cycle facility named for the street it runs on: a description (owner, 2026-10-13)",
     "way/1301828975": "'Headwaters Greenway southbank', a cycle facility named for the street it runs on: a description (owner, 2026-10-13)",
     "way/721753881": "'Headwaters Greenway southside', a cycle facility named for the street it runs on: a description (owner, 2026-10-13)",
+    "way/432363600": "'Animal Science (Original Quonset Hut)', description: a department label as a building's name: historic=building; building=college; no wikidata (flag check, 2026-10-13)",
+    "relation/6398915": "'Assembly Hall', description: bare type word: 'Assembly Hall'; a BARE_TYPE_NAMES word (flag check, 2026-10-13)",
+    "relation/6409632": "'Case Study House #1', home: houses with an entry and no home tag: a private house; HOME_NAME misses a name that ends in a number (flag check, 2026-10-13)",
+    "way/727000078": "'Great Lawn', description: 'Great Lawn', a lawn under its description, by id (flag check, 2026-10-13)",
+    "node/10778795095": "'Jews for Jesus', organisation office: a mission body's name on a place-of-worship node: decided by the name, not a tag (flag check, 2026-10-13)",
+    "way/892530397": "'Prospect Studios', a working studio's name on its gate, no article: a business with nothing else (flag check, settled by the existing rules, 2026-10-13)",
+    "way/428021906": "'South Park Lofts', home: apartment building by building:use: RESIDENTIAL_BUILDINGS reads building= only; a rule on building:use could catch it (flag check, 2026-10-13)",
+    "way/428021895": "'The Brockman Lofts', home: apartment building by building:use: homes with an article are skipped; a rule on building:use could catch it (flag check, 2026-10-13)",
+    "way/302378864": "'Veterans Memorial', description: bare memorial type: 'Veterans Memorial'; a BARE_TYPE_NAMES word (flag check, 2026-10-13)",
+    "node/13649941158": "'Browmstones', studio backlot set tagged a locality: five set names inside one private studio lot, by id (flag check, 2026-10-13)",
+    "node/13649941154": "'Financial Dirstict', studio backlot set tagged a locality: inside a private studio lot, by id (flag check, 2026-10-13)",
+    "relation/17307354": "'Los Feliz Neighborhood Council District', administrative district under its office's name: a council district, not the neighbourhood's own name, by id (flag check, 2026-10-13)",
+    "way/1317154725": "'Melrose Hill Historic Preservation Overlay Zone', administrative district under its office's name: a planning overlay zone, by id (flag check, 2026-10-13)",
+    "node/3758329249": "'SoHo', studio backlot set tagged a locality: inside a private studio lot, by id (flag check, 2026-10-13)",
+    "node/13649941159": "'South Chicago', studio backlot set tagged a locality: inside a private studio lot, by id (flag check, 2026-10-13)",
+    "way/1198465039": "'Tesoro at Porter Ranch', a housing development mapped as a place (owner, 2026-10-13)",
+    "way/919002009": "'The Canyons at Porter Ranch', a housing development mapped as a place (owner, 2026-10-13)",
+    "node/8551800434": "'The Heights at Porter Ranch', a housing development mapped as a place (owner, 2026-10-13)",
+    "relation/12480050": "'The Heights at Porter Ranch', a housing development mapped as a place (owner, 2026-10-13)",
+    "node/11035338644": "'The Legends at Cascades', a housing development mapped as a place (owner, 2026-10-13)",
+    "way/1198465034": "'Tuscany at Porter Ranch', a housing development mapped as a place (owner, 2026-10-13)",
+    "node/13649941155": "'Upper East Side', studio backlot set tagged a locality: inside a private studio lot, by id (flag check, 2026-10-13)",
+    "way/1198465035": "'Ventana at Porter Ranch', a housing development mapped as a place (owner, 2026-10-13)",
+    "way/919002011": "'Westcliffe at Porter Ranch', a housing development mapped as a place (owner, 2026-10-13)",
+}
+
+# Public art kept by the owner's word against the article rule (place_index,
+# PLACE_KEPT; owner, 2026-10-13). Each is a known work the Wikidata lookup
+# cannot admit; DECISIONS.md of that date lists the works left out.
+PLACE_KEPT = {
+    "node/7857202407": "'Giant Binoculars', a known work the article rule drops for want of an article of its own (owner, 2026-10-13)",
 }

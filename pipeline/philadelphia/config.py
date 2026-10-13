@@ -564,4 +564,16 @@ PLACE_DROPPED = {
     "way/766332792": "'Abraham Rittenhouse Home', a home with no sign of visiting, whatever its article (owner, 2026-10-13)",
     "way/766332795": "'Rittenhouse Home', a home with no sign of visiting, whatever its article (owner, 2026-10-13)",
     "way/341790041": "'Ben Franklin House', a home with no sign of visiting, whatever its article (owner, 2026-10-13)",
+    "way/873264024": "'Birchwood at Brooks', home: a former school turned apartments under the development's name (addr:housename is the school); historic=building, no article (flag check, 2026-10-13)",
+    "way/741772326": "'Fields at 58th and Elmwood', description: a park named by a description of where it is (flag check, 2026-10-13)",
+    "node/10037203113": "'USS Whidbey Island (LSD-41)', not a place: a laid-up navy ship, historic=ship with no tourism tag: movable, and not visitable (flag check, 2026-10-13)",
+    "node/158312745": "'Abbotsford Homes', a housing development mapped as a place (owner, 2026-10-13)",
+    "way/432901522": "'Port Richmond Polish Neighborhood', description: a mapper's description of an area drawn as a neighbourhood, no wikidata (flag check, 2026-10-13)",
+}
+
+# Public art kept by the owner's word against the article rule (place_index,
+# PLACE_KEPT; owner, 2026-10-13). Each is a known work the Wikidata lookup
+# cannot admit; DECISIONS.md of that date lists the works left out.
+PLACE_KEPT = {
+    "node/10285082692": "'AMOR', a known work the article rule drops for want of an article of its own (owner, 2026-10-13)",
 }

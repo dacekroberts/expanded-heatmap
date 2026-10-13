@@ -296,4 +296,7 @@ PLACE_DROPPED = {
     "way/24786148": "'14 St bridge ramp', a description as a street's name (owner, 2026-10-13)",
     "way/171942409": "'14 St bridge ramp', a description as a street's name (owner, 2026-10-13)",
     "way/27527016": "'Queen's Park Cemetery 10 Street entrance', a description as a street's name (owner, 2026-10-13)",
+    "way/1323935108": "'NE Lion Guard', description: compass code beside a type: one of a bridge's four lions, by id (flag check, 2026-10-13)",
+    "way/1323935109": "'NW Lion Guard', description: compass code beside a type: one of a bridge's four lions, by id (flag check, 2026-10-13)",
+    "way/264219626": "'Southwood off-leash area 2', description: type and a number: 'off-leash area 2'; CODED_TYPE could take 'off-leash area N' (flag check, 2026-10-13)",
 }
