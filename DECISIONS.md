@@ -20,7 +20,11 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**87 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**88 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+
+**2026-10-13**
+
+- [The id side file for the travel app, built on the 19 searched cities (owner)](#2026-10-13---the-id-side-file-for-the-travel-app-built-on-the-19-searched-cities-owner)
 
 **2026-10-12**
 
@@ -4866,3 +4870,27 @@ japan-city template:
 - **Cleanup's own slips, for the record:** the first outline query asked for
   `out tags geom` and returned no geometry (refetched); a first queue ran
   unpinned against the unreachable mirror and was stopped.
+
+### 2026-10-13 - The id side file for the travel app, built on the 19 searched cities (owner)
+
+- **Decided by the owner** ("yes build the id side file now"), the second of
+  the two additions approved on 2026-10-12 for the travel app; the schema
+  number went in with the outline.
+  - **What it is.** `outputs/<city>/place_ids.json`, written by the index
+    step beside the summary: `rows` and `osm`, two parallel lists, the row's
+    position in the index and its OpenStreetMap object ("node/123"), for
+    every station, junction, landmark and neighborhood row. It carries
+    `schema`, the index's path, the **sha256 of the index file it
+    describes**, and the licence name and attribution. Under `outputs/`,
+    never `app/static`: no browser fetches it.
+  - **What has no id.** Streets (each is many ways merged by name) and
+    rivers (several ways under one name): 0 to 277 non-street rows a city,
+    Kyoto's 277 the most.
+  - **Measured on all 19: no index changed** (the drift check, and git shows
+    only the 19 new files). 74,069 rows carry an id; every id is an object
+    in its city's cache; 6 rows show a name that is one of two the object
+    lists with a semicolon, and are the right object. Sizes 11 KB (Sydney)
+    to 273 KB (Tokyo), about 1.6 MB in all.
+  - **Held by** `check_place_search.py`, rule I (the hash is this index's,
+    rows ascending and in range and never a street, ids well formed), and by
+    the place index drift check, which compares every file the step writes.

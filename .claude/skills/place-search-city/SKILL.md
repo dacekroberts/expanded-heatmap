@@ -343,6 +343,11 @@ All quoted in the drafts file; the short list:
      municipality with no station and no recorded reason. The index step
      counts stations per municipality into `outputs/<city>/place_search.json`
      ("area"): read that list after the first build, before the eye read.
+   - **The index step also writes `outputs/<city>/place_ids.json`** (owner,
+     2026-10-12, for the travel app): the OSM id behind each station,
+     junction, landmark and neighborhood row, by row position, with the
+     sha256 of the index it describes. Commit it with the index; no browser
+     fetches it. `check_place_search.py` I holds it to its index.
    - **Look at the outline once**, in the browser test: open the search box
      and see that the dashed line holds every station and no stray island
      or missing municipality. The outline is exterior rings only, simplified

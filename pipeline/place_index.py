@@ -57,6 +57,10 @@ def _site_url(path, data):
     return f"/app/static/{rel}?v={hashlib.sha256(data).hexdigest()[:12]}"
 
 
+def ids_path(slug):
+    return Path(__file__).parent.parent / "outputs" / slug / "place_ids.json"
+
+
 def summary_path(slug):
     return Path(__file__).parent.parent / "outputs" / slug / "place_search.json"
 
@@ -74,6 +78,7 @@ def files(index, slug):
     # Never in the served index: the summary alone carries them.
     not_open = index.pop("stations_not_open", [])
     munis = index.pop("area_municipalities", [])
+    row_osm = index.pop("row_osm", [])
     cpath = crossings_path(slug)
     cbytes = json.dumps({"license": index["license"], "schema": SCHEMA, "city": index["city"],
                          "part_of": f"{slug}.json", "rows": cross},
@@ -93,7 +98,20 @@ def files(index, slug):
                # fails one with none and no entry in config.PLACE_AREA_KEPT.
                "area": munis}
     sbytes = (json.dumps(summary, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
-    return {cpath: cbytes, index_path(slug): ibytes, summary_path(slug): sbytes}
+    # THE ID SIDE FILE (owner, 2026-10-12, for the travel app): the OSM object
+    # behind each station, junction, landmark and neighborhood row, by the
+    # row's position in the index. Streets and rivers carry none (each is
+    # many ways). Two parallel lists, rows ascending. Committed under
+    # outputs/, never under app/static: no browser fetches it. It names the
+    # exact index it describes by that file's sha256, so a reader can refuse
+    # a side file that belongs to another build.
+    pairs = [(i, o) for i, o in enumerate(row_osm) if o]
+    ids = {"schema": SCHEMA, "index": f"app/static/places/{slug}.json",
+           "index_sha256": hashlib.sha256(ibytes).hexdigest(),
+           "license": index["license"]["name"], "attribution": index["license"]["attribution"],
+           "rows": [i for i, _ in pairs], "osm": [o for _, o in pairs]}
+    idbytes = (json.dumps(ids, ensure_ascii=False, separators=(",", ":")) + "\n").encode("utf-8")
+    return {cpath: cbytes, index_path(slug): ibytes, summary_path(slug): sbytes, ids_path(slug): idbytes}
 
 
 def write(index, slug):
@@ -1455,7 +1473,7 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
     seen_key = set()
     seen_near = defaultdict(list)             # (kind, name) -> (point, is_area)
 
-    def add(kind, pt, names, langs, bbox=0, area=False):
+    def add(kind, pt, names, langs, bbox=0, area=False, osm=None):
         key = (kind, names[0], round(pt[0], 3), round(pt[1], 3))
         near = NEAR_DUP_M.get(kind)
         if key in seen_key or (near and any(
@@ -1464,9 +1482,11 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             return
         seen_key.add(key)
         seen_near[(kind, names[0])].append((pt, area))
-        # The row's languages ride along as a 7th field until coverage is counted.
+        # The row's OSM id ("node/123"; None for a street or a river, which
+        # are many ways) and its languages ride along as a 7th and 8th field
+        # until the rows are sorted; neither is served.
         rows.append([KINDS.index(kind), _r(pt[0]), _r(pt[1]), names[0], "|".join(names[1:]), bbox,
-                     set(langs)])
+                     osm, set(langs)])
         report[kind] += 1
 
     # --- Streets: every way of one name merged; a name used by streets far
@@ -1658,7 +1678,7 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             report["station_skipped_emergency"] += 1
             continue
         if t.get("railway") in ("station", "halt", "tram_stop") or t.get("public_transport") == "station":
-            add("station", pt, names, langs)
+            add("station", pt, names, langs, osm=f"{e['type']}/{e['id']}")
         elif t.get("place") in PLACE_VALUES:
             # A place drawn as an area on residential land is an estate, its
             # homes' own name ("Kentbrook Apartments", Seattle: 85 of the
@@ -1697,7 +1717,7 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
                 report["place_dropped_bare_type"] += 1
                 continue
             names = [n for n in names if not bare_type(n, local)]
-            add("place", pt, names, langs, area=e["type"] != "node")
+            add("place", pt, names, langs, area=e["type"] != "node", osm=f"{e['type']}/{e['id']}")
         elif e["type"] == "node" and (t.get("highway") == "traffic_signals" or "junction" in t):
             # A signal's number is no name (Sydney's "5065", 2026-10-08).
             if not any(c.isalpha() for c in names[0]):
@@ -1713,7 +1733,8 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
                 if all(en):
                     alias.append(" / ".join(en))
                 langs = langs | set.intersection(*(street_lang.get(v, set()) for v in via))
-            add("junction", pt, names + [a for a in alias if a not in names], langs)
+            add("junction", pt, names + [a for a in alias if a not in names], langs,
+                osm=f"{e['type']}/{e['id']}")
         else:
             # A named square is a landmark when no street carries its name:
             # Brussels' Grand-Place is a pedestrian AREA (skipped as a street)
@@ -1813,7 +1834,7 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
                 report["landmark_dropped_minor_historic"] += 1
                 continue
             before = len(rows)
-            add("landmark", pt, names, langs, area=e["type"] != "node")
+            add("landmark", pt, names, langs, area=e["type"] != "node", osm=f"{e['type']}/{e['id']}")
             if t.get("place") == "square" and len(rows) > before:
                 square_rows.append(rows[-1])
 
@@ -1864,6 +1885,7 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         report["square_dropped_duplicate"] += len(drop)
     rows.sort(key=lambda r: (r[0], r[3]))
     row_langs = [r.pop() for r in rows]
+    row_osm = [r.pop() for r in rows]
     # Each crossing as [lat, lon, row of street A, row of street B]; the
     # browser builds its name ("5th Avenue / Pike Street") and its English
     # pair (Kyoto's "Shijo Street / Karasuma Street") from those rows. A name
@@ -1922,5 +1944,7 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         "crossing_rows": crossing_rows,
         # write() puts these in the page's summary, never in the served file.
         "stations_not_open": sorted(not_open, key=lambda r: r["osm"]),
+        # write() puts these in ids_path(), never in the served file.
+        "row_osm": row_osm,
     }
     return index, dict(report)

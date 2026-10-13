@@ -103,6 +103,29 @@ def rule(langs):
             if langs["coverage"].get(c, 0) >= place_index.LIST_SHARE]
 
 
+def check_ids(slug, index_bytes, index, ids_path):
+    """The id side file (outputs/<slug>/place_ids.json) describes THIS index:
+    its sha256 is the index file's, its rows are in range, ascending, and
+    never a street, and each has one OSM id of the form type/number."""
+    import hashlib
+    import re
+    if not ids_path.is_file():
+        return [f"I: no id side file {ids_path.name}: run the index step"]
+    ids = json.loads(ids_path.read_text(encoding="utf-8"))
+    problems = []
+    if ids.get("index_sha256") != hashlib.sha256(index_bytes).hexdigest():
+        problems.append("I: the id side file names another build of the index: run the index step")
+    rows, osm = ids.get("rows") or [], ids.get("osm") or []
+    if len(rows) != len(osm) or rows != sorted(set(rows)):
+        problems.append("I: the id side file's rows and ids are not two lists of one length, rows ascending")
+    street = index["kinds"].index("street") if "street" in index["kinds"] else -1
+    if any(not 0 <= i < len(index["rows"]) or index["rows"][i][0] == street for i in rows):
+        problems.append("I: the id side file names a row out of range or a street")
+    if any(not re.fullmatch(r"(node|way|relation)/[0-9]+", str(o)) for o in osm):
+        problems.append("I: the id side file holds something that is not an OSM type/id")
+    return problems
+
+
 def check_index(slug, index, summary):
     problems = []
     if set(index) != TOP_KEYS:
@@ -267,6 +290,7 @@ def main():
         sp = place_index.summary_path(slug)
         summary = json.loads(sp.read_text(encoding="utf-8")) if sp.exists() else None
         p += check_index(slug, index, summary)
+        p += check_ids(slug, path.read_bytes(), index, place_index.ids_path(slug))
         p += check_crossings(slug, index)
         p += check_junk(index)
         p += check_leaks(slug, index)
