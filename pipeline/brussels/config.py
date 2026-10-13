@@ -232,6 +232,7 @@ PLACE_REVIEWED = {
     # "Hôtel" in French is also a town mansion (hôtel particulier) or a public
     # building; each of these is a place (batch 2a, 2026-10-08).
     "Hôtel des Monnaies - Munthof": "a metro station, named for the old mint",
+    "Hôtel Errera - Errerahuis": "a listed town mansion, the Flemish government's official residence (historic=townhall, building=public, office=government, Wikipedia), in on an article of its own against its office tag (the owner's ruling of 2026-10-13); tags read 2026-10-13",
     "Hôtel Solvay": "Victor Horta's town mansion, a UNESCO World Heritage site open as a "
                     "museum (tourism=museum, ref:whc 1005)",
     "Hôtel de Roest d'Alkemade": "an 18th-century town mansion, a listed heritage "

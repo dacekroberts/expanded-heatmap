@@ -8274,6 +8274,26 @@ own section above describes it.
   license *permits* is a separate question; a few sources are read in this
   project's favor where their terms are silent (see the next section).
 
+## What the map's search leaves out
+
+The search box finds places, not businesses. It reads a list of streets, intersections, stations, neighborhoods and landmarks taken from OpenStreetMap for the area each map covers. Some places are left off that list on purpose.
+
+**Homes.** A house, an apartment building or a private garden is not in the search, even a well-known one. A former home is included when it is open to visitors as a museum.
+
+**Businesses.** A shop, a hotel, a restaurant or an office is not a search result. A historic building is included for the building, not for the business inside it.
+
+**People.** A grave or a plaque is included only when it has its own Wikipedia article. Statues and public memorials are included. Stumbling stones, which mark a person's last home, are never included.
+
+**Private streets.** A street closed to the public is left out. So are driveways, parking aisles, bus-only roads and race tracks.
+
+**Places that are not there.** A building that was demolished, a village that was abandoned and a station that has closed or has not opened yet are left out. The search should not take you to something that is gone.
+
+**Names that are not names.** A park labeled only "Park" or a path labeled "Footpath 12" is left out, because the label describes the thing and does not name it.
+
+**Small or repeated things.** Wayside shrines, boundary stones and museum exhibits are left out. A tram stop with two platforms is one result, not two.
+
+Place names come from OpenStreetMap as its contributors wrote them, so a few are misspelled.
+
 ## If you believe a listing should not be here
 
 Every business shown is drawn from a public register and is displayed with, at

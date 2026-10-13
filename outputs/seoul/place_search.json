@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/seoul.json",
-  "places": 57493,
+  "places": 57392,
   "data_retrieved": "2026-10-08",
   "languages": {
     "local": [
       "ko"
     ],
     "coverage": {
-      "en": 0.934,
+      "en": 0.935,
       "ko": 0.999
     },
     "list_share": 0.5,

@@ -269,6 +269,7 @@ PLACE_FOLD = None
 PLACE_REVIEWED = {
     "Bank of England": "a notable historic building (tourism=attraction, Wikipedia): the building, not the business (the Panama Hotel precedent)",
     "Canal Cafe Theatre": "a theatre with a Wikipedia article",
+    "HMS Wellington": "a 1934 sloop moored on the Thames (historic=ship, Wikipedia); 'Company' is in its other name, the livery company whose hall the ship is (office=ngo), in on an article of its own against its office tag (the owner's ruling of 2026-10-13); tags read 2026-10-13",
     "Honourable Artillery Company Museum": "a museum (tourism=museum, Wikipedia); 'Company' is the regiment's name. Tagged access=private: put to the owner, batch 3",
     "Store Road": "a street's own name",
     "Store Street": "a street's own name",
