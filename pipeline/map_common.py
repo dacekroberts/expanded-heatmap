@@ -2198,6 +2198,14 @@ _PLACE_SEARCH_TEMPLATE = r"""
     path.hm-search-ring { stroke: @@LIGHT_ACCENT@@; stroke-opacity: 1;
         fill: @@LIGHT_ACCENT@@; fill-opacity: 0.14; }
     path.hm-search-linecase { stroke: #000000; fill: none; }
+    /* A picked street's whole length (owner, 2026-10-13): the ring's two
+       colours as a line, and the ring itself hidden once the line is drawn,
+       its name label left at the street's middle. */
+    path.hm-search-streetcase { stroke: #ffffff; stroke-opacity: 0.95; fill: none; }
+    path.hm-search-street { stroke: @@LIGHT_ACCENT@@; stroke-opacity: 1; fill: none; }
+    .dark-base path.hm-search-streetcase { stroke: @@DARK_PAGE@@; }
+    .dark-base path.hm-search-street { stroke: @@DARK_ACCENT@@; }
+    path.hm-search-hid { display: none; }
     .dark-base path.hm-search-linecase { stroke: #ffffff; }
     .hm-line-label.hm-search-label { padding: 1px 6px; border-radius: 4px; background: #ffffff;
         box-shadow: 0 0 0 2px #000000; }
@@ -2368,7 +2376,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
     var MARKS = /[@@MARKS_CLASS@@]/g;
     var data = null, own = null, loading = null, fold = null, marker = null, timer = null;
     var renderer = null, lineRow = null, casing = null, cased = null;
-    var byIndex = [], crossURL = null, crossings = null;
+    var byIndex = [], crossURL = null, crossings = null, streetURL = null, streets = null;
     // THE SEARCHED AREA (owner, 2026-10-12): the index names the
     // municipalities it covers and carries their merged outline
     // (place_index.outline). The outline is drawn only while the search box
@@ -2523,14 +2531,15 @@ _PLACE_SEARCH_TEMPLATE = r"""
                 fold = ix.fold || null;
                 useLanguages(ix.languages && ix.languages.local);
                 own = ownItems(map);
-                var rows = ix.rows.map(function (r) {
-                    return prep({kind: ix.kinds[r[0]], lat: r[1], lon: r[2], name: r[3],
+                var rows = ix.rows.map(function (r, i) {
+                    return prep({kind: ix.kinds[r[0]], lat: r[1], lon: r[2], name: r[3], row: i,
                                  names: [r[3]].concat(r[4] ? r[4].split("|") : []), bbox: r[5] || null});
                 });
                 // The rows in file order: the crossings file refers to streets
                 // by their place here.
                 byIndex = rows;
                 crossURL = ix.crossings || null;
+                streetURL = ix.streets || null;
                 area = ix.area || null;
                 data = own.concat(link(rows));
                 document.querySelector(".hm-search").setAttribute(
@@ -2572,6 +2581,41 @@ _PLACE_SEARCH_TEMPLATE = r"""
         // A failed fetch leaves the first file's answers, and is not retried.
         crossings.catch(function () { crossURL = null; });
         return crossings;
+    }
+
+    // Each street's drawn length, a third file fetched at the first street
+    // picked (owner, 2026-10-13): {rows, lines, scale}, `rows` ascending and
+    // each a street's place in the first file, `lines` its polylines beside
+    // it. A line is flat integers in units of 1/scale degree: the first
+    // point, then each later point as its difference from the one before.
+    // Resolves to a function from a row to its lines as [[lat, lon], ...].
+    function loadStreets() {
+        if (streets) return streets;
+        streets = getIndex(streetURL).then(function (txt) {
+            var f = JSON.parse(txt), k = f.scale || 100000;
+            return function (row) {
+                var lo = 0, hi = f.rows.length - 1;
+                while (lo <= hi) {
+                    var mid = (lo + hi) >> 1;
+                    if (f.rows[mid] === row) {
+                        return f.lines[mid].map(function (a) {
+                            var la = a[0], ln = a[1], pts = [[la / k, ln / k]];
+                            for (var i = 2; i < a.length; i += 2) {
+                                la += a[i];
+                                ln += a[i + 1];
+                                pts.push([la / k, ln / k]);
+                            }
+                            return pts;
+                        });
+                    }
+                    if (f.rows[mid] < row) lo = mid + 1; else hi = mid - 1;
+                }
+                return [];
+            };
+        });
+        // A failed fetch leaves the ring, and is not retried.
+        streets.catch(function () { streetURL = null; });
+        return streets;
     }
 
     // 2 for a word-start hit, 1 for a Latin word of 4 or more letters inside a
@@ -2722,24 +2766,27 @@ _PLACE_SEARCH_TEMPLATE = r"""
         list.forEach(function (d) {
             d._span = null;
             d._hood = null;
+            d._rows = null;
             if (d.kind !== "street") { kept.push({d: d}); return; }
             var key = norm(d.name), gs = groups[key] || (groups[key] = []), box = boxOf(d);
             for (var i = 0; i < gs.length; i++) {
                 var g = gs[i];
                 if (g.boxes.some(function (b) { return gapM(b, box) <= STRETCH_M; })) {
                     g.boxes.push(box);
+                    g.rows.push(d.row);
                     g.span = [Math.min(g.span[0], box[0]), Math.min(g.span[1], box[1]),
                               Math.max(g.span[2], box[2]), Math.max(g.span[3], box[3])];
                     if (off(d) < off(g.d)) g.d = d;
                     return;
                 }
             }
-            var ng = {d: d, boxes: [box], span: box.slice()};
+            var ng = {d: d, boxes: [box], span: box.slice(), rows: [d.row]};
             gs.push(ng);
             kept.push(ng);
         });
         var rows = kept.map(function (g) {
             if (g.boxes && g.boxes.length > 1) g.d._span = g.span;
+            if (g.rows) g.d._rows = g.rows;
             return g.d;
         });
         rows.forEach(function (d) {
@@ -3027,6 +3074,25 @@ _PLACE_SEARCH_TEMPLATE = r"""
             ]).addTo(map);
             marker.getLayers()[1].bindTooltip(d.name, {permanent: true, direction: "top", pane: "hmsearchtip",
                 offset: [0, -16]}).openTooltip();
+            // A street's whole length, every stretch the result row stands
+            // for (oneRowAStreet), drawn when its file is in; the ring gives
+            // way to it and the name label stays. No file, or a street with
+            // no line in it, leaves the ring.
+            if (d.kind === "street" && streetURL && d._rows) {
+                var mine = marker, rowsOf = d._rows;
+                loadStreets().then(function (linesOf) {
+                    if (marker !== mine) return;
+                    var lines = [];
+                    rowsOf.forEach(function (r) { lines = lines.concat(linesOf(r)); });
+                    if (!lines.length) return;
+                    mine.getLayers().forEach(function (c) { if (c._path) c._path.classList.add("hm-search-hid"); });
+                    [["hm-search-streetcase", 9], ["hm-search-street", 5]].forEach(function (s) {
+                        mine.addLayer(L.polyline(lines, {weight: s[1], opacity: 1, className: s[0],
+                            pane: "hmsearch", renderer: renderer, interactive: false,
+                            lineCap: "round", lineJoin: "round"}));
+                    });
+                }, function () {});
+            }
             map.getContainer().classList.add("hm-searching");
             // The reader's first touch of the map ends the fade (the marker
             // stays its 12 seconds). Armed after the move this search makes.

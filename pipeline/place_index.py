@@ -50,6 +50,13 @@ def crossings_path(slug):
     return STATIC_DIR / "crossings" / f"{slug}.json"
 
 
+def streets_path(slug):
+    """Each street row's drawn length (STREET_SIMPLIFY_M), a file of its own:
+    fetched at the first street picked from the search, so opening the search
+    costs nothing more."""
+    return STATIC_DIR / "streets" / f"{slug}.json"
+
+
 def _site_url(path, data):
     """The site path of a file under app/static/, stamped with the hash of its
     content `data` (index_url's reason)."""
@@ -66,8 +73,9 @@ def summary_path(slug):
 
 
 def files(index, slug):
-    """{path: bytes} for the three files an index step writes: the
-    intersections file, the index (served as-is: bytes, LF only, no BOM) and
+    """{path: bytes} for the files an index step writes: the intersections
+    file, the street lines file, the index (served as-is: bytes, LF only, no
+    BOM), the id side file and
     the page's summary, outputs/<slug>/place_search.json (the languages the
     page names, the count and the retrieval date; the app reads the summary,
     never the index, so a page load costs no megabyte). Computed without
@@ -79,6 +87,8 @@ def files(index, slug):
     not_open = index.pop("stations_not_open", [])
     munis = index.pop("area_municipalities", [])
     row_osm = index.pop("row_osm", [])
+    lines = index.pop("street_lines", [])
+    index.pop("street_lines_raw", None)
     cpath = crossings_path(slug)
     cbytes = json.dumps({"license": index["license"], "schema": SCHEMA, "city": index["city"],
                          "part_of": f"{slug}.json", "rows": cross},
@@ -86,6 +96,18 @@ def files(index, slug):
     # The index carries the intersections file's hashed path, so a rebuilt
     # intersections file is never served from a browser's old copy.
     index["crossings"] = _site_url(cpath, cbytes)
+    # THE STREET LINES FILE (street_lines): `rows` ascending, each a street
+    # row's position in the index, and `lines` beside it, that street's
+    # polylines. A line is a flat list of integers in units of 1/`scale`
+    # degree: the first latitude and longitude, then each later point as its
+    # difference from the one before. Hashed into the index like the
+    # intersections file.
+    stpath = streets_path(slug)
+    stbytes = json.dumps({"license": index["license"], "schema": SCHEMA, "city": index["city"],
+                          "part_of": f"{slug}.json", "scale": 100000,
+                          "rows": [r for r, _ in lines], "lines": [l for _, l in lines]},
+                         ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+    index["streets"] = _site_url(stpath, stbytes)
     ibytes = json.dumps(index, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
     summary = {"index": f"app/static/places/{slug}.json", "places": len(index["rows"]) + len(cross),
                "data_retrieved": index["license"]["data_retrieved"], "languages": index["languages"],
@@ -111,7 +133,8 @@ def files(index, slug):
            "license": index["license"]["name"], "attribution": index["license"]["attribution"],
            "rows": [i for i, _ in pairs], "osm": [o for _, o in pairs]}
     idbytes = (json.dumps(ids, ensure_ascii=False, separators=(",", ":")) + "\n").encode("utf-8")
-    return {cpath: cbytes, index_path(slug): ibytes, summary_path(slug): sbytes, ids_path(slug): idbytes}
+    return {cpath: cbytes, stpath: stbytes, index_path(slug): ibytes, summary_path(slug): sbytes,
+            ids_path(slug): idbytes}
 
 
 def write(index, slug):
@@ -150,6 +173,89 @@ OUTLINE_MIN_SHARE = 0.002
 
 
 OUTLINE_CACHE_NAME = "osm_place_outline_v1.json"
+
+# A STREET'S DRAWN LENGTH (owner, 2026-10-13: a street picked without an
+# intersection shows its whole length). Each street row's ways, joined end to
+# end where they share an end node and simplified by STREET_SIMPLIFY_M in the
+# city's own projected CRS, go to a side file (streets_path) the browser
+# fetches at the first street picked; the index carries no geometry. A line is
+# what OSM names with exactly the row's name: it stops where the name changes
+# ("Pike Street" ends where "East Pike Street" begins) and at the edge of the
+# fetched area. Re-measure the files' sizes if the constant changes.
+STREET_SIMPLIFY_M = 10
+
+
+def chain_ways(ways, nodes):
+    """The polylines [[(lat, lon), ...], ...] of one street's `ways`
+    ([(way id, [node id, ...]), ...]), joined end to end where two share an
+    end node. In way-id order, so a rebuild gives the same lines. A divided
+    street stays two lines, a street with a gap as many as it has pieces."""
+    left = [list(ids) for _, ids in sorted(ways)]
+    left = [[n for n in ids if n in nodes] for ids in left]
+    left = [ids for ids in left if len(ids) > 1]
+    ends = defaultdict(list)                  # end node -> positions in `left`
+    for i, ids in enumerate(left):
+        ends[ids[0]].append(i)
+        ends[ids[-1]].append(i)
+    used = [False] * len(left)
+
+    def take(node):
+        for i in ends[node]:
+            if not used[i]:
+                used[i] = True
+                return left[i] if left[i][0] == node else left[i][::-1]
+        return None
+
+    out = []
+    for i, ids in enumerate(left):
+        if used[i]:
+            continue
+        used[i] = True
+        cur = list(ids)
+        # A closed way (a roundabout, a loop street) is whole as it is.
+        while cur[0] != cur[-1]:
+            nxt = take(cur[-1])
+            if nxt is None:
+                break
+            cur += nxt[1:]
+        while cur[0] != cur[-1]:
+            nxt = take(cur[0])
+            if nxt is None:
+                break
+            cur = nxt[::-1][:-1] + cur
+        out.append([nodes[n] for n in cur])
+    return out
+
+
+def street_lines(raw, crs_projected):
+    """[[row, [line, ...]], ...] from build()'s "street_lines_raw", each line
+    simplified by STREET_SIMPLIFY_M in `crs_projected` and written as a flat
+    list of integers: the first point's latitude and longitude in units of
+    1e-5 degree, then each later point as its difference from the one before
+    (62% of the bytes of plain coordinates, measured on Seattle)."""
+    from pyproj import Transformer
+    from shapely.geometry import LineString
+    to_m = Transformer.from_crs("EPSG:4326", crs_projected, always_xy=True).transform
+    to_deg = Transformer.from_crs(crs_projected, "EPSG:4326", always_xy=True).transform
+    out = []
+    for row, lines in raw:
+        enc = []
+        for line in lines:
+            xs, ys = to_m([p[1] for p in line], [p[0] for p in line])
+            kept = LineString(list(zip(xs, ys))).simplify(STREET_SIMPLIFY_M, preserve_topology=False)
+            if kept.is_empty or len(kept.coords) < 2:
+                continue
+            lons, lats = to_deg(*zip(*kept.coords))
+            pts = [(round(la * 1e5), round(lo * 1e5)) for la, lo in zip(lats, lons)]
+            flat = [pts[0][0], pts[0][1]]
+            for a, b in zip(pts, pts[1:]):
+                if a != b:
+                    flat += [b[0] - a[0], b[1] - a[1]]
+            if len(flat) > 2:
+                enc.append(flat)
+        if enc:
+            out.append([row, enc])
+    return out
 
 
 def outline_cache(config):
@@ -333,6 +439,7 @@ def build_city(config):
     # can say "Seattle and 10 more"; by name where stations are not counted.
     munis.sort(key=lambda m: (-counts.get(m[0], 0), m[1]))
     index["area"] = outline(munis, config.CRS_PROJECTED)
+    index["street_lines"] = street_lines(index.pop("street_lines_raw"), config.CRS_PROJECTED)
     kept = getattr(config, "PLACE_AREA_KEPT", {})
     stale = sorted(set(kept) - {m[0] for m in munis})
     if stale:
@@ -1473,7 +1580,7 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
     seen_key = set()
     seen_near = defaultdict(list)             # (kind, name) -> (point, is_area)
 
-    def add(kind, pt, names, langs, bbox=0, area=False, osm=None):
+    def add(kind, pt, names, langs, bbox=0, area=False, osm=None, ways=None):
         key = (kind, names[0], round(pt[0], 3), round(pt[1], 3))
         near = NEAR_DUP_M.get(kind)
         if key in seen_key or (near and any(
@@ -1482,16 +1589,18 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             return
         seen_key.add(key)
         seen_near[(kind, names[0])].append((pt, area))
-        # The row's OSM id ("node/123"; None for a street or a river, which
-        # are many ways) and its languages ride along as a 7th and 8th field
-        # until the rows are sorted; neither is served.
+        # A street's ways (chain_ways), the row's OSM id ("node/123"; None
+        # for a street or a river, which are many ways) and its languages
+        # ride along as a 7th, 8th and 9th field until the rows are sorted;
+        # none is served in the index.
         rows.append([KINDS.index(kind), _r(pt[0]), _r(pt[1]), names[0], "|".join(names[1:]), bbox,
-                     osm, set(langs)])
+                     ways, osm, set(langs)])
         report[kind] += 1
 
     # --- Streets: every way of one name merged; a name used by streets far
     # apart (two 一番町) is kept apart by a coarse grid of 2 km.
     street_nodes = defaultdict(list)          # (name, cell) -> node ids
+    street_ways = defaultdict(list)           # (name, cell) -> (way id, its node ids)
     street_names = {}                         # (name, cell) -> all names
     street_langs = defaultdict(set)           # (name, cell) -> languages
     street_open = defaultdict(bool)           # (name, cell) -> a way the public may use
@@ -1548,6 +1657,7 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         mid = pts[len(pts) // 2]
         cell = (names[0], int(mid[0] / 0.018), int(mid[1] / 0.022))
         street_nodes[cell].extend(w["nodes"])
+        street_ways[cell].append((w["id"], w["nodes"]))
         prev = street_names.get(cell, [])
         street_names[cell] = prev + [n for n in names if n not in prev]
         street_langs[cell] |= _langs(t, local)
@@ -1567,12 +1677,14 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         for cell in cells:
             ids = set(street_nodes[cell])
             hit = [g for g in groups if g[0] & ids]
-            merged = [ids, list(street_names[cell]), set(street_langs[cell]), street_open[cell]]
+            merged = [ids, list(street_names[cell]), set(street_langs[cell]), street_open[cell],
+                      list(street_ways[cell])]
             for g in hit:
                 merged[0] |= g[0]
                 merged[1] += [n for n in g[1] if n not in merged[1]]
                 merged[2] |= g[2]
                 merged[3] |= g[3]
+                merged[4] += g[4]
                 groups.remove(g)
             groups.append(merged)
         # KEPT all the same (owner, 2026-10-11, on what the rule took in
@@ -1595,13 +1707,13 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         groups = [g for g in groups if g[3]]
         if not groups:
             continue
-        for ids, names, langs, _open in groups:
+        for ids, names, langs, _open, group_ways in groups:
             pts = [nodes[n] for n in ids if n in nodes]
             s, w_ = min(p[0] for p in pts), min(p[1] for p in pts)
             n_, e = max(p[0] for p in pts), max(p[1] for p in pts)
             c = ((s + n_) / 2, (w_ + e) / 2)
             anchor = min(pts, key=lambda p: _dist_m(p, c))
-            add("street", anchor, names, langs, [_r(s), _r(w_), _r(n_), _r(e)])
+            add("street", anchor, names, langs, [_r(s), _r(w_), _r(n_), _r(e)], ways=group_ways)
         street_alias[name] = [n for g in groups for n in g[1]]
         street_lang[name] = set().union(*(g[2] for g in groups))
 
@@ -1886,6 +1998,7 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
     rows.sort(key=lambda r: (r[0], r[3]))
     row_langs = [r.pop() for r in rows]
     row_osm = [r.pop() for r in rows]
+    row_ways = [r.pop() for r in rows]
     # Each crossing as [lat, lon, row of street A, row of street B]; the
     # browser builds its name ("5th Avenue / Pike Street") and its English
     # pair (Kyoto's "Shijo Street / Karasuma Street") from those rows. A name
@@ -1946,5 +2059,8 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         "stations_not_open": sorted(not_open, key=lambda r: r["osm"]),
         # write() puts these in ids_path(), never in the served file.
         "row_osm": row_osm,
+        # build_city() simplifies these (street_lines); write() puts them in
+        # streets_path(), never in the served index.
+        "street_lines_raw": [[i, chain_ways(w, nodes)] for i, w in enumerate(row_ways) if w],
     }
     return index, dict(report)
