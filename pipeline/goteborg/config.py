@@ -311,6 +311,19 @@ PLACE_FOLD = None
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "way/1246865252": "a code-named private street (owner, 2026-10-13)",
+    "way/1246865253": "a code-named private street (owner, 2026-10-13)",
+    "way/1246865250": "a code-named private street (owner, 2026-10-13)",
+    "way/1246865251": "a code-named private street (owner, 2026-10-13)",
+    "way/1411443024": "a code-named private street (owner, 2026-10-13)",
+    "way/462519269": "a code-named private street (owner, 2026-10-13)",
+    "way/940452199": "a code-named private street (owner, 2026-10-13)",
+    "way/1411442191": "a code-named private street (owner, 2026-10-13)",
+    "way/1411442192": "a code-named private street (owner, 2026-10-13)",
+    "way/359777305": "a code-named private street (owner, 2026-10-13)",
+    "way/359779008": "a code-named private street (owner, 2026-10-13)",
+    "way/359783522": "a code-named private street (owner, 2026-10-13)",
+    "way/844636793": "a code-named private street (owner, 2026-10-13)",
     "node/3585966101": "a code standing in for a name, at a car plant's gate",
     "node/3585966117": "a code standing in for a name, at a car plant's gate",
     "node/3585966094": "a code standing in for a name, at a car plant's gate",
