@@ -2419,6 +2419,18 @@ _PLACE_SEARCH_TEMPLATE = r"""
         nl: {join: ["en"], stop: ["de", "het"],
              street: ["straat", "laan", "steenweg", "plein", "kaai", "dreef"],
              lead: [], station: [], abbr: {}},
+        // German (2026-10-13; docs/decisions_drafts/search-lang-de.md). The
+        // street word sits inside the name ("Hauptstrasse"), so a typed
+        // "Hauptstr." meets it as a prefix of the name's word, and "Str."
+        // alone through abbr. norm() writes sharp s as "ss" for every
+        // language and, where German is declared, "ae", "oe" and "ue" as the
+        // bare vowel on both sides (UMLAUT_FOLD). Not yet tried in a browser.
+        de: {join: ["und", "ecke"], stop: ["der", "die", "das", "den", "dem"],
+             street: ["strasse", "str", "weg", "allee", "platz", "gasse", "ring", "damm", "ufer",
+                      "chaussee"],
+             lead: [], station: ["bahnhof", "bf", "bhf", "hbf", "haltestelle"],
+             abbr: {"str": "strasse", "pl": "platz", "bf": "bahnhof", "bhf": "bahnhof",
+                    "hbf": "hauptbahnhof", "st": "sankt"}},
         // Batch 2b (2026-10-08). Chinese and Korean names are one word each
         // to words(), so no street word is set aside and no connector is
         // split (和 and 과 sit inside names: 太和街); two streets are typed
@@ -2442,6 +2454,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
         codes = (codes || []).slice();
         codes.slice().forEach(function (c) { (ALSO[c] || []).forEach(function (a) {
             if (codes.indexOf(a) < 0) codes.push(a); }); });
+        if (codes.indexOf("de") >= 0) UMLAUT_FOLD = true;
         codes.forEach(function (c) {
             var w = LANG_WORDS[c];
             if (!w) return;
@@ -2457,6 +2470,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
     var CJK = /[@@CJK_CLASS@@]/;
     var MARKS = /[@@MARKS_CLASS@@]/g;
     var data = null, own = null, loading = null, fold = null, marker = null, timer = null;
+    var UMLAUT_FOLD = false;
     var renderer = null;
     var byIndex = [], crossURL = null, crossings = null, streetURL = null, streets = null;
     // THE SEARCHED AREA (owner, 2026-10-12): the index names the
@@ -2491,6 +2505,11 @@ _PLACE_SEARCH_TEMPLATE = r"""
         s = String(s).normalize("NFKC").toLowerCase().normalize("NFD")
             .replace(MARKS, "").normalize("NFC");
         if (fold === "ja") s = s.replace(/ou/g, "o").replace(/uu/g, "u").replace(/oo/g, "o");
+        // Sharp s is "ss" (Zurich writes only "strasse"). Where German is
+        // declared, a typed "ae", "oe" or "ue" meets the umlaut, whose marks
+        // are stripped above: both sides lose the "e".
+        s = s.replace(/ß/g, "ss");
+        if (UMLAUT_FOLD) s = s.replace(/ae/g, "a").replace(/oe/g, "o").replace(/ue/g, "u");
         return s;
     }
     function words(s) { return norm(s).split(/[^\p{L}\p{N}]+/u).filter(Boolean); }
