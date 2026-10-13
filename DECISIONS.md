@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**103 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**106 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -40,6 +40,9 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Place search rollout: shared-border streets next, batches tonight, tram-rescope cities held as the last batch (owner)](#2026-10-13---place-search-rollout-shared-border-streets-next-batches-tonight-tram-rescope-cities-held-as-the-last-batch-owner)
 - [Place search from regional extracts (branch place-extract)](#2026-10-13---place-search-from-regional-extracts-branch-place-extract)
 - [Extract route landed with its five border extras; San Francisco and the tram rescope (owner)](#2026-10-13---extract-route-landed-with-its-five-border-extras-san-francisco-and-the-tram-rescope-owner)
+- [Correction: five tram rescopes were already built and landed on 2026-09-27](#2026-10-13---correction-five-tram-rescopes-were-already-built-and-landed-on-2026-09-27)
+- [Search rollout: Madrid runs in wave 7, Toronto stays held (owner)](#2026-10-13---search-rollout-madrid-runs-in-wave-7-toronto-stays-held-owner)
+- [Search rollout: Rome runs in its normal wave (owner)](#2026-10-13---search-rollout-rome-runs-in-its-normal-wave-owner)
 
 **2026-10-12**
 
@@ -5448,3 +5451,50 @@ japan-city template:
   downloads its own region (the path ran live only through the lookup); the
   reason for the 91-degree latitude averaging is from memory of Overpass's
   source; DeepSeek was not called.
+
+### 2026-10-13 - Correction: five tram rescopes were already built and landed on 2026-09-27
+
+- **Three entries of this date describe the light batch and Paris as still
+  to build. They were wrong.** Montreal's REM (c8c1c53a), Rome's tram 8
+  (eedeb329), Madrid's ML1 (5f9106e5), Paris T3a and T3b (821ca1a9) and San
+  Francisco's F Market (f3e051d7) were built on 2026-09-27 and merged at
+  be2e3713; all six commits are ancestors of origin/master, and the
+  committed maps carry the lines' labels. The tram rescope session found it
+  on its first check; Cleanup had repeated a parked-work note without
+  checking the log, and gave the owner a scope that listed done work.
+- **What is left of the rescope:** Barcelona TRAM (color rule) and Mexico
+  City Cablebus (coordinates) after their checks; Toronto, Milan and Prague
+  after a label and legend rule and a Toronto pilot; Hong Kong Tramways out.
+  Rome's tram 3, back in service since 2026-09-07 by the watch item, is an
+  open question with the owner in the tram session.
+- **What it changes for the search rollout:** no index rebuild is owed for
+  trams in Montreal, Paris or San Francisco. Madrid has nothing left to
+  rescope; whether it leaves the held batch is asked of the owner. Rome
+  stays held until the tram 3 answer. Barcelona, Mexico City and Prague are
+  rebuilt after theirs, if and when they change.
+- **Stale and not corrected here:** `docs/tram_rescope_estimate.md`
+  ("Nothing is rescoped") and `docs/plan_detail/city_watch.md` ("In
+  progress: specs"); the tram session corrects both on its branch.
+
+### 2026-10-13 - Search rollout: Madrid runs in wave 7, Toronto stays held (owner)
+
+- **Madrid, the owner: "madrid wave 7 yes".** Its ML1 has been on master
+  since 2026-09-27 and nothing is left to rescope, so it leaves the held
+  batch.
+- **Toronto, the owner: "toronto decided on"**, to the question whether it
+  stays held out of wave 1's landing until its rescope is settled, as the
+  ruling on tram-rescope cities says. Read as: the ruling stands. Toronto is
+  in wave 1's queue (an earlier entry of this date says it is in no wave,
+  which was wrong); wave 1 may fetch it and does not build, read or land it.
+- **Held as the last batch now:** Rome (until the tram 3 answer), Milan and
+  Toronto.
+
+### 2026-10-13 - Search rollout: Rome runs in its normal wave (owner)
+
+- **The owner: "rome can run in normal wave".** The tram session reported
+  that the owner parked Rome's trams (2, 3, 5, 14, 19) as one decision after
+  2026-11-23, none drawn before, so Rome's rail is final until then. A later
+  tram build rebuilds its index.
+- **Held as the last batch now:** Milan and Toronto.
+- The run started today skips Rome (`--skip-cities rome,milan,toronto`); it
+  is added back on the next rerun, not by interrupting this one.
