@@ -151,6 +151,22 @@ is also read by the estate-area rule; a river row is dropped or kept by the
 id of any of its ways. The index holds no transit line: lines reach the
 search box from the map itself.
 
+## The fourth pass (2026-10-13, branch search-rules-3)
+
+| Left out | Rule | Where | Kind |
+|---|---|---|---|
+| A library with no article of its own | `has_article`: the wikipedia tag, or an entry of the object's own with an article in the city's Wikidata cache; the same test as public art | `landmark()` | landmark |
+| An object admitted only by its subject's Wikidata entry | `SUBJECT_ENTRY_KEYS` | `landmark()` | landmark |
+| A second row for a monument drawn in segments | one folded name and one Wikidata entry, ways and relations, at any distance | merges | landmark |
+| A station tagged passenger=no or public_transport=no | unless the map draws it | tagged pass | station |
+| A home named with the house word last | `HOME_NAME_END`: Latvian "villa", Norwegian "gård" | `_home` | landmark |
+
+**Kept or added:** `int_name` is read as an alternate name; "store" is no leak word in a
+Danish, Norwegian or Swedish city (`LEAK_SET_ASIDE`); a glued street name passes beside a leak
+word in a suffix language; a second language below the 90% floor is declared in
+`config.PLACE_LANGUAGES_ALSO`; `config.PLACE_STATION_STRIP` takes an ending off station names.
+Swedish "-gård" stays a street ending on every way (candidate 37, pulled by the owner).
+
 ## Considered and not built as rules
 
 Castles (a web check is owed), coded names the rule misses and zoo contents
