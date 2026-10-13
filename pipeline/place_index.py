@@ -360,7 +360,8 @@ def run(config):
     if stations is None:
         print(f"  coverage: not checked (no {getattr(config, 'STATIONS_CSV', 'STATIONS_CSV')})")
     else:
-        bare = uncovered_stations(index["rows"], stations)
+        bare = uncovered_stations(index["rows"], stations,
+                                  lines=decode_lines([l for _, l in index.get("street_lines", [])]))
         if bare:
             import sys
             sys.exit(f"{len(bare)} station(s) on the {slug} map have no indexed place within "
@@ -1880,10 +1881,45 @@ def map_stations(config):
     return [(r[name], float(r[pair[0]]), float(r[pair[1]])) for r in rows]
 
 
-def uncovered_stations(rows, stations, km=None):
+def decode_lines(encoded, scale=100000):
+    """The polylines [[(lat, lon), ...], ...] of the street lines file's
+    `lines` ([[flat, ...], ...], one list per street row, as street_lines
+    writes them)."""
+    out = []
+    for flats in encoded:
+        for flat in flats:
+            la, lo = flat[0], flat[1]
+            pts = [(la / scale, lo / scale)]
+            for k in range(2, len(flat) - 1, 2):
+                la, lo = la + flat[k], lo + flat[k + 1]
+                pts.append((la / scale, lo / scale))
+            out.append(pts)
+    return out
+
+
+def _seg_dist_m(p, a, b):
+    """Metres from p to the segment a-b, on a local flat grid at p."""
+    kx = 111320.0 * math.cos(math.radians(p[0]))
+    ax, ay = (a[1] - p[1]) * kx, (a[0] - p[0]) * 110540.0
+    bx, by = (b[1] - p[1]) * kx, (b[0] - p[0]) * 110540.0
+    dx, dy = bx - ax, by - ay
+    d2 = dx * dx + dy * dy
+    t = 0.0 if d2 == 0 else max(0.0, min(1.0, -(ax * dx + ay * dy) / d2))
+    return math.hypot(ax + t * dx, ay + t * dy)
+
+
+def uncovered_stations(rows, stations, km=None, lines=None):
     """Names of the stations with no index row, other than a station row,
     within COVER_KM. rows are the index's ([kind, lat, lon, ...], kind 0 a
-    station); a 0.01 degree grid keeps it linear."""
+    station); a 0.01 degree grid keeps it linear.
+
+    lines, when given, are the indexed streets' polylines (decode_lines): a
+    station the row points miss is covered when a street's drawn line passes
+    within COVER_KM. A street row has one point, and a long rural road's
+    point can lie kilometres from a station the road runs past (Ottawa's
+    Bowesville, 2026-10-13: inside the area, two unindexed parks and
+    Bowesville Road nearby). A boundary cut still fails: a station outside
+    the fetched area has no fetched street beside it."""
     km = COVER_KM if km is None else km
     grid = {}
     for r in rows:
@@ -1897,8 +1933,15 @@ def uncovered_stations(rows, stations, km=None):
                    for i in range(i0 - span, i0 + span + 1) for j in range(j0 - span, j0 + span + 1)
                    for p in grid.get((i, j), ()))
         if not near:
-            out.append(name)
-    return out
+            out.append((name, lat, lon))
+    if out and lines:
+        # Only the stations the points missed are measured against the
+        # segments, so the cost is a few stations times the city's segments.
+        reach = km * 1000.0
+        out = [(name, lat, lon) for name, lat, lon in out
+               if not any(_seg_dist_m((lat, lon), a, b) <= reach
+                          for line in lines for a, b in zip(line, line[1:]))]
+    return [name for name, _, _ in out]
 
 
 def _dist_m(a, b):
