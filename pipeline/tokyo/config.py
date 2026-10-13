@@ -647,3 +647,10 @@ PERSON_NAMED = (
     # the second read, labels with a hiragana part (2026-10-12)
     "c3d6b30f9452cfef",
 )
+
+# Public art kept by the owner's word against the article rule (place_index,
+# PLACE_KEPT; owner, 2026-10-13). Each is a known work the Wikidata lookup
+# cannot admit; DECISIONS.md of that date lists the works left out.
+PLACE_KEPT = {
+    "way/219645648": "Maman, the spider at Roppongi Hills, its own article, on an entry the map also gives as its subject's (owner, 2026-10-13)",
+}

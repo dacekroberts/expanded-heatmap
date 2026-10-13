@@ -34,7 +34,7 @@ protocol in the `place-search-city` skill.
 | A minor way whose name does not read as a way | `MINOR_HIGHWAYS`, `WAY_WORDS`, `_reads_as_way`; kept with wikidata or wikipedia | street pass | 2026-10-07 |
 | A street named for a business, a home or private access | `LEAK_WORDS`, `_named_street` | street pass | 2026-10-08 |
 | A street whose every way is a private minor way | `street_open`; except a name led by `PRIVATE_STREET_LEAD` (French) | street pass | 2026-10-11 |
-| A street whose every way is private (access=private or no) on residential or unclassified | `PRIVATE_STREET_HIGHWAYS`, `street_public`; `PRIVATE_STREET_LEAD` and a way's own article keep one | street pass | 2026-10-13 |
+| A street whose every way is private (access=private or no) on residential or unclassified | `PRIVATE_STREET_HIGHWAYS`, `street_public`; `PRIVATE_STREET_LEAD` and a way's own article keep one; where a city sets `PLACE_KEEP_NAMED_PRIVATE_STREETS` only a code-named one goes | street pass | 2026-10-13 |
 | A busway or a race track | `NOT_STREET_HIGHWAYS`, `street_real`; a way's own article keeps one | street pass | 2026-10-13 |
 | A minor-way street named by a description, a bare type or way word, or a type and a code | `street_description`, `STREET_DESCRIPTIONS`; never a street with a way of residential class or above | street pass | 2026-10-13 |
 | A pedestrian area as a street | `area=yes` is skipped; with an article of its own it is a landmark | street pass, `square_areas` | 2026-10-08, 2026-10-13 |

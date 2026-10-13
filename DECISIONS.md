@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**128 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**130 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -65,6 +65,8 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Place search: the third rule pass built on a branch (German, quiet stations, the third list, the station guard); in memory only, NOT landed](#2026-10-13---place-search-the-third-rule-pass-built-on-a-branch-german-quiet-stations-the-third-list-the-station-guard-in-memory-only-not-landed)
 - [Place search: the fourth pass (an article asked of Wikidata, seven languages, candidates 29 to 43); in memory only, NOT landed](#2026-10-13---place-search-the-fourth-pass-an-article-asked-of-wikidata-seven-languages-candidates-29-to-43-in-memory-only-not-landed)
 - [Place search: the fourth pass re-measured with the 19 Wikidata caches read; an article under the object's own name is its own](#2026-10-13---place-search-the-fourth-pass-re-measured-with-the-19-wikidata-caches-read-an-article-under-the-objects-own-name-is-its-own)
+- [Place search: 16 known works kept by id against the article rule; a DeepSeek first read for the rollout's cities (owner)](#2026-10-13---place-search-16-known-works-kept-by-id-against-the-article-rule-a-deepseek-first-read-for-the-rollouts-cities-owner)
+- [Place search: a named private street stays in Guadalajara and Monterrey, by a per-city switch (owner)](#2026-10-13---place-search-a-named-private-street-stays-in-guadalajara-and-monterrey-by-a-per-city-switch-owner)
 
 **2026-10-12**
 
@@ -6161,3 +6163,56 @@ japan-city template:
 - **Found and fixed: an article under the object's own name was read as its subject's.** Chicago's mappers copy a work's own article into `subject:wikipedia`, so `own_article` read Cloud Gate (en:Cloud Gate) as not its own and rule 16 dropped it, in the third pass already and unseen in that report. For rules 16 and 39 an article whose title folds to the object's name is its own whatever subject tag repeats it; Cloud Gate is a row again. Not changed: `own_article` itself, which the other tests read.
 - **Still out, and arguable:** 23 works whose `wikidata` equals their `subject:wikidata` and has an article (Chicago 21, Tokyo's Maman, Vancouver's Harry Jerome), among them Sue the Dinosaur, whose article is "Sue (dinosaur)". The tags do not tell a work that is its subject (Sue, Maman) from a statue of one (Brachiosaurus Replica, Olmec Head); 130 more works carry an entry two or more objects share and are never asked about (Paris 57). The Ángel de la Independencia node, London's Burghers of Calais and Prague's Miminka carry entries with no article in any language, and stay out; A-maze-ing Laughter is a row.
 - Selftest 216 cases, 179 breaks, all caught.
+
+### 2026-10-13 - Place search: 16 known works kept by id against the article rule; a DeepSeek first read for the rollout's cities (owner)
+
+- **The lookup could not admit the works that prompted it.** Three carry a
+  Wikidata entry with no article in any language (the Angel de la
+  Independencia, the Burghers of Calais, Prague's Miminka, two objects);
+  23 carry their own entry copied into the subject tag, which the rules
+  cannot tell from a statue of that subject (Tokyo's Maman, Chicago's Sue).
+- **Recommended: keep them by id, per city, as Monterrey's colonias. The
+  owner: "yes if not costly", then "i'm okay with the cost".** 16 ids in six
+  configs (`PLACE_KEPT`): Chicago 10, Prague 2, London, Mexico City, Tokyo
+  and Vancouver 1 each. `PLACE_KEPT` now beats the article rule and, for
+  public art, the landmark tests after it. Each was built in memory and its
+  row found.
+- **Left out of the 23, Cleanup's call, reversible by an id:** where the
+  article is the subject's and not the work's: Chicago's two Brachiosaurus
+  casts, the Olmec Head and Lincoln Memorial replicas, the Radio Flyer
+  wagon, the Blackhawks sculpture, the three Maxwell Street figures and the
+  CowParade cow. Cloud Gate needs no id (its article is under its name).
+- **The rollout's reads take a DeepSeek first read (owner: "let's utilize
+  heavy deepseek integration as much as we feel confident in doing", "yes
+  approved", "delegate as much as you feel is good").** The batch tool
+  labels every index name (fine, home, business, description, glitched,
+  unsure); Claude readers check what it flags and a fixed random sample of
+  what it passed; Cleanup rules on classes. A five-city pilot read both
+  ways comes first: past about one miss in twenty of the rows a full read
+  drops, that kind goes back to full reads. Only index names from
+  OpenStreetMap are sent. Stations, places and landmarks keep a full read
+  in the twenty largest cities.
+
+### 2026-10-13 - Place search: a named private street stays in Guadalajara and Monterrey, by a per-city switch (owner)
+
+- **Found by the final-group builds (`search-final`, 1a7ef22d, finding 45):**
+  the private-residential rule of this date took 2,391 named streets out of
+  Guadalajara and 124 out of Monterrey: the street grids of gated
+  neighborhoods ("Calle Rio Segura", "Paseo de los Naranjos Oriente"). The
+  owner had told that session "named keep, codenamed drop"; the shared rule,
+  approved the same day, drops both.
+- **Recommended: the shared rule stands, and the two cities get a setting.
+  The owner: "yes".** `config.PLACE_KEEP_NAMED_PRIVATE_STREETS`: with it on,
+  a private street goes only when its name is a code beside a type word.
+  The alternative, "named keep" in every city, would bring back the estate
+  roads and driveways the rule was written to remove (London 1,088 of the
+  4,102 rows it took on the live cities).
+- **Cost:** a second meaning of a private tag, chosen per city by eye. Mexico
+  City lost 1,982 rows to the same rule and is NOT switched: it is asked of
+  the owner at the read of its changed rows, not assumed.
+- **Also from the final group, no ruling needed:** a city with no public art
+  or library entry now gets an empty Wikidata cache (4774bff9); 201 drawn
+  station names have no row under the drawn spelling in 16 cities, nearly
+  all abbreviations and two-language forms the matcher bridges, and go to
+  the browser check owed before the big review; four small Berlin and
+  Bremen street classes (78 streets) stay by-id drops.

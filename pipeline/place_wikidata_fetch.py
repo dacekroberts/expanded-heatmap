@@ -240,6 +240,13 @@ def run(config, *, force=False, out_path=None, transport=_fetch, pause=time.slee
         need = [qid for qid in ids if qid not in articles]
     else:
         articles, need = {}, list(ids)
+    if not need and cache is None:
+        # A city with no public art or library entry still gets a cache, an
+        # empty one: with no file the index step reports the lookup as not
+        # run (Yamagata, Monterrey, 2026-10-13).
+        write_cache(cache_path, {}, today.isoformat())
+        say(f"{cache_path.name}: no id to ask about; an empty cache written, no request made")
+        return cache_path
     if not need:
         say(f"{cache_path.name}: every id already held ({len(ids)} id(s)); no request made")
         return None
