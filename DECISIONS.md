@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**117 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**118 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -54,6 +54,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Place search: the second rule batch built on a branch, the 19 indexes rebuilt, every changed row reported; NOT landed](#2026-10-13---place-search-the-second-rule-batch-built-on-a-branch-the-19-indexes-rebuilt-every-changed-row-reported-not-landed)
 - [Place search: the owner's six rulings on the second batch's changed rows, built; the 19 rebuilt again](#2026-10-13---place-search-the-owners-six-rulings-on-the-second-batchs-changed-rows-built-the-19-rebuilt-again)
 - [Place search: the second rule batch landed as rules only; the rebuilt indexes wait for the big review](#2026-10-13---place-search-the-second-rule-batch-landed-as-rules-only-the-rebuilt-indexes-wait-for-the-big-review)
+- [Place search: the third rule list, from the final group's reads (owner)](#2026-10-13---place-search-the-third-rule-list-from-the-final-groups-reads-owner)
 
 **2026-10-12**
 
@@ -5890,3 +5891,36 @@ japan-city template:
   owed for this landing.
 - **Measured on the branch:** 19 live cities 323,407 rows to 322,843; wave 1
   in memory 311,182 to 307,474; selftest 136 of 136, breaks 109 of 109.
+
+### 2026-10-13 - Place search: the third rule list, from the final group's reads (owner)
+
+- **Eighteen candidates came from the final group's reads of the Korean and
+  German cities** (numbered in `docs/decisions_drafts/search-final.md` on
+  branch `search-final`). Three were ruled by the owner in that session (16
+  public art needs a Wikipedia article of its own; 17 a code beside a path
+  type on minor ways; 18 a dead railway alignment with no article). Cleanup
+  brought the rest in three groups with a recommendation each. **The owner:
+  "new rules and narrow version accepted".**
+- **New rules, to build:** (3) a park whose operator is an apartment estate
+  or its management office goes; (4) a customers-only service road named by
+  a description goes; (7) an exhibit admitted only by its class's article
+  goes; (9) a relation that repeats another row's Wikidata entry far from
+  the object goes; (10) a link to a list article with an anchor is no
+  article of the object's own; (13) a public-transport station with no rail
+  tag is no station.
+- **Narrow version:** (11) a name ending "(geschlossen)", "(abgebrannt)",
+  "(stillgelegt)" or "(ausser Betrieb)" in its German spelling is gone;
+  "ehem." and "ehemalig" are not read (39 Berlin names, several standing).
+  (15) A park tag on a pool, a club or an office gets no rule and stays a
+  by-id drop.
+- **Extensions of rules already approved, built with them, the owner:
+  "already approved rules stay approved":** (1) Korean bare
+  type words; (2) Korean numbered parks as code plus type; (8) the
+  private-street rule reads living streets; (12) a Stolperschwelle is a
+  Stolperstein; (14) the home-name test reads parks and gardens. Each shows
+  in the changed-row report before it lands.
+- **Rule 3 beside question g of this date:** a park tied to a housing
+  complex only by its name stays; one whose operator tag names the estate
+  goes.
+- **One pass, one report:** these, the German lists and
+  `PLACE_QUIET_STATIONS` are built together on branch `search-rules-3`.
