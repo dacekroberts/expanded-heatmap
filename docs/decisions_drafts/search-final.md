@@ -1,3 +1,16 @@
+### 2026-10-13 - German way words: -eck in, with an id catch (branch search-final)
+
+- **The owner, to the one call left from the Berlin measurement: "add, note
+  the id catch".** -eck joins the German way words (40 words). It adds 6
+  street rows today, 3 in Berlin (Lilieneck, Poseidoneck, Siedlers Eck) and
+  3 in Bremen, all lane names by their look.
+- **The id catch:** -eck can also end a corner cafe's or a building's name
+  on a footway. None is in an index today; one that a later edit brings in
+  is dropped by id. When a German city's cache is refreshed, list the
+  minor-way street rows ending -eck that are new since the last read, the
+  same watch as -hof (`search-lang-de.md`).
+- -gang and -moor stay out.
+
 ### 2026-10-13 - The owner's eight answers on the German reads; Berlin and Bremen drops; Low German endings measured on Berlin (branch search-final)
 
 - **The owner, to the eight calls put after the reads:** "1. yes article
