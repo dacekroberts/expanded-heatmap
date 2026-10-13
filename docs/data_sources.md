@@ -336,7 +336,21 @@ Recorded 2026-10-08 on branch `basemap`; live with the phase 2 landing
   on workers.dev, the option compared, was not taken). The bucket answers
   only the live app's origin and the local test ports (8501 and 8000 on
   localhost and 127.0.0.1), sets no cookie, and keeps no raw request logs on
-  its plan, which notice 1's sentence relies on. Terms as read by
+  its plan, which notice 1's sentence relies on. **Cloudflare adds an
+  analytics script to HTML pages on a proxied hostname by default** (Real
+  User Measurements, on for a Free-plan domain: it appeared on another of
+  the owner's hostnames on 2026-10-12, loading from
+  static.cloudflareinsights.com; the owner turned it off that day for all
+  of dacekroberts.dev, at Domains, the domain, Speed, Real User
+  Measurements, "Disable completely"). Checked here on 2026-10-13 in a real
+  browser, after the switch-off: the host's only HTML, its 404 page (the
+  root and a missing path), loads no script and asks no other host. Whether
+  it carried the script before the switch-off is not known. The packs and
+  libraries are not HTML, so the script is not added to them. **Re-check
+  after any change of plan, any new hostname on the domain, and any HTML
+  served from this host: load the page in a browser and list the hosts it
+  asks; curl does not show an injected script.** `heatmap.dacekroberts.dev`
+  did not resolve on 2026-10-13. Terms as read by
   licence-read, 2026-10-08: governed by the Self-Serve Subscription Agreement (updated
   2025-09-12), which incorporates the Service-Specific Terms (updated
   2026-09-28) and the developer documentation's limits. R2 behind a custom
