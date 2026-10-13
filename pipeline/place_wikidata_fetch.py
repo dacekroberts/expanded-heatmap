@@ -29,6 +29,7 @@ record is not changed here.
 """
 import argparse
 import datetime
+import gzip
 import importlib
 import json
 import re
@@ -151,20 +152,37 @@ def ask_batch(ids, transport, pause, say=print):
         if status != 200:
             raise SystemExit(f"batch {ids[0]}..{ids[-1]}: HTTP {status}")
         try:
-            return json.loads(body), attempt
+            payload = json.loads(body)
         except ValueError as exc:
             raise SystemExit(f"batch {ids[0]}..{ids[-1]}: the reply is not JSON: {exc}")
+        # An error body arrives with HTTP 200. Read as an answer it would
+        # cache every id of the batch as missing.
+        if "error" in payload or "entities" not in payload:
+            code = (payload.get("error") or {}).get("code", "no entities in the reply")
+            raise SystemExit(f"batch {ids[0]}..{ids[-1]}: the API refused it ({code}); "
+                             f"nothing of this batch is cached")
+        return payload, attempt
+
+
+def _body_text(raw, headers):
+    """A reply's bytes as text, unpacked when the server sent them gzipped."""
+    if ((headers or {}).get("Content-Encoding") or "").lower() == "gzip":
+        raw = gzip.decompress(raw)
+    return raw.decode("utf-8")
 
 
 def _fetch(url):
     """One HTTP GET; returns (status, headers, body text). An HTTP error is
-    returned, not raised, so its status and headers reach the retry logic."""
-    req = urllib.request.Request(url, headers={"User-Agent": OVERPASS_USER_AGENT})
+    returned, not raised, so its status and headers reach the retry logic.
+    Gzip is asked for: the API's etiquette requires it (docs/data_sources.md,
+    the place search section)."""
+    req = urllib.request.Request(url, headers={"User-Agent": OVERPASS_USER_AGENT,
+                                               "Accept-Encoding": "gzip"})
     try:
         with urllib.request.urlopen(req, timeout=60) as resp:
-            return resp.status, resp.headers, resp.read().decode("utf-8")
+            return resp.status, resp.headers, _body_text(resp.read(), resp.headers)
     except urllib.error.HTTPError as exc:
-        return exc.code, exc.headers, exc.read().decode("utf-8")
+        return exc.code, exc.headers, _body_text(exc.read(), exc.headers)
 
 
 def chunks(ids, size=BATCH_SIZE):
@@ -325,6 +343,22 @@ def selftest():
         run(City, transport=t2, pause=lambda s: None, today=today, say=lambda *a: None)
         case("a cache holding every id makes no request and leaves the file unchanged",
              again_urls == [] and cache_path.read_bytes() == before)
+
+        refused = None
+        try:
+            run(City, force=True, out_path=d / "refused.json",
+                transport=lambda url: (200, {}, json.dumps({"error": {"code": "param-illegal"}})),
+                pause=lambda s: None, today=today, say=lambda *a: None)
+        except SystemExit as exc:
+            refused = exc
+        case("an error body with HTTP 200 exits non-zero and caches nothing as missing",
+             refused is not None and "param-illegal" in str(refused)
+             and not (d / "refused.json").exists())
+
+        packed = gzip.compress("{}".encode("utf-8"))
+        case("a gzipped reply is unpacked and a plain one is read as it is",
+             _body_text(packed, {"Content-Encoding": "gzip"}) == "{}"
+             and _body_text(b"{}", {}) == "{}")
 
         City.PLACE_OSM_JSON.write_bytes(json.dumps({"elements": [
             {"type": "node", "id": 1, "tags": {"wikidata": "Q1"}},
