@@ -2,6 +2,36 @@
 
 Newest first. Cleanup folds these into `DECISIONS.md` at review time.
 
+### 2026-10-13 - Tram rescope: Milan's 17 tram routes measured; the line list is with the owner (open, nothing built)
+
+- **The feed.** `https://dati.comune.milano.it/gtfs.zip` re-pulled
+  2026-10-13 as `data/milan/raw/gtfs_2026-10-13.zip`: byte-identical to the
+  cache of 2026-09-22 (sha256 f0959217..., feed_version 423, the portal's
+  resource last modified 2026-09-21). Its `feed_info.txt` says
+  `surface_end_date` 20261002: every tram service runs 2026-09-14 to
+  2026-10-02 and none after. No newer edition is published, so the tram
+  timetable read here ended eleven days before the reading.
+- **17 tram routes** (1, 2, 3, 4, 5, 7, 9, 10, 12, 14, 15, 16, 19, 24, 27,
+  31, 33), no night routes, no replacement-bus trips under a tram id
+  (headsigns read). Weekday 2026-09-30, 10:00 to 15:00, busier direction:
+  headways 4.5 (14) to 15.0 minutes (7 and 33, 20 trips each way in five
+  hours). All 17 pass the 15-minute test; 7 and 33 sit exactly on it.
+- **Works in the feed's own route names:** 2 ("lav. torino"), 4 ("lavori
+  testi"), 7 ("lavori prol per c.na gobba"), 14 ("lav. orefici"), 16
+  ("lav. umbria - maj"). The precedent is drawn as the timetable runs.
+- **Scope:** 722 tram stop ids, 341 stop names, 323 names inside the
+  comune. Route 15 has 17 of 62 stop ids outside (Rozzano) and route 31
+  has 18 of 31 outside (Cinisello Balsamo). No `parent_station`.
+- **Colors (measured, `pipeline/linecolour.py`, most-used shape per
+  route):** 17 project colors fit beside the five metro colors at a pin
+  floor of 45; closest pair within 500 m 41.7 (M2 and tram 4); dark-mode
+  labels separate; `check_line_colours` passes. A tram has 12.3 other
+  lines within 500 m on average (18 at most). Label placement for 22
+  lines is not measured.
+- **Recommended to the owner, not decided:** all 17 as "Tram N", drawn as
+  the timetable runs, stops outside the comune listed, half-mile thinning
+  as in Toronto.
+
 ### 2026-10-13 - Tram rescope: Toronto's thinning rule, colors and page text approved (owner)
 
 - **Owner, 2026-10-13: "1 yes sounds good. 2. approved. 3. concatenate if
