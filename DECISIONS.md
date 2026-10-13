@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**132 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**133 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -69,6 +69,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Place search: a named private street stays in Guadalajara and Monterrey, by a per-city switch (owner)](#2026-10-13---place-search-a-named-private-street-stays-in-guadalajara-and-monterrey-by-a-per-city-switch-owner)
 - [Place search: Mexico City keeps its named private streets too (owner)](#2026-10-13---place-search-mexico-city-keeps-its-named-private-streets-too-owner)
 - [Place search: seven rulings on the final group's held rows (owner)](#2026-10-13---place-search-seven-rulings-on-the-final-groups-held-rows-owner)
+- [Place search: the outside model's flags measured against the tags on wave 1; four rulings (owner)](#2026-10-13---place-search-the-outside-models-flags-measured-against-the-tags-on-wave-1-four-rulings-owner)
 
 **2026-10-12**
 
@@ -6264,3 +6265,38 @@ japan-city template:
   307,677 rows to 306,979; the lookup keeps 108 works of public art and 96
   libraries the tag alone would lose. DeepSeek's 1,977 flags on wave 1 are
   1,749 on surviving rows, read against the tags in three lanes.
+
+### 2026-10-13 - Place search: the outside model's flags measured against the tags on wave 1; four rulings (owner)
+
+- **Measured:** DeepSeek's batch read flagged 1,977 of wave 1's 43,826
+  rows that are not streets; 1,749 were on rows that survived the rebuild.
+  Three Claude lanes read every one against its cached tags
+  (`data/_search_rollout/wave1_flag_check/`): 233 confirmed drops (13%), 92
+  undecided, the rest real places. By the model's label: description 108
+  of 200 (54%), home 30 of 304, other 59 of 637, glitched 12 of 171,
+  business 24 of 445. The model saw names only, so it finds a description
+  standing in for a name and little else; about 76 "glitched" flags are
+  misspellings of real places, kept. What it MISSES is not measured: that
+  is the five-city both-ways pilot on the extract run.
+- **Four rulings, the owner: "1 shared rule, 2 drop by id, 3 shared rule,
+  4, settle by existing rule".**
+  1. A place of worship named only by its denomination or hall type
+     ("Kingdom Hall", "Methodist Church"; 77 rows) is dropped by a shared
+     rule, as the class was ruled for the final group.
+  2. Housing developments mapped as neighbourhoods (about 24; San Diego's
+     11 "Villa" complexes) are dropped by id.
+  3. A station closed to the public (the Capitol subway, 3 rows) gets no
+     row, by a shared rule; a station drawn on the map is never taken.
+  4. The 92 undecided rows are settled by the existing rules, and the
+     owner is shown what was kept.
+- **Applied without a ruling, as rows existing rules cover:** the other
+  confirmed drops by id; 12 of the 110 new streets (8 descriptions, 4 roads
+  of a Houston apartment complex); an Edinburgh mural kept on its subject's
+  entry. Nine well-known works are kept by id as on the live cities
+  (Imagine, Balto, the Three Servicemen, AMOR, Broken Obelisk, the Giant
+  Binoculars, Patience and Fortitude, Manchester's Albert Memorial).
+- **Two faults found by the lanes, fixed in the rule pass:** Boston's
+  Boylston has no row (it shares a Wikidata entry with Park Street, 350 m
+  away, and was merged into it), and Green Street is indexed as "Green".
+- **The drawn-station check is built** (`scripts/check_map_search.js`,
+  446a3bee): 2,746 stations and 226 lines on the 19 live maps, all found.
