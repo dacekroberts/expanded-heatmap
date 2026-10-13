@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**119 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**120 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -56,6 +56,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Place search: the second rule batch landed as rules only; the rebuilt indexes wait for the big review](#2026-10-13---place-search-the-second-rule-batch-landed-as-rules-only-the-rebuilt-indexes-wait-for-the-big-review)
 - [Place search: the third rule list, from the final group's reads (owner)](#2026-10-13---place-search-the-third-rule-list-from-the-final-groups-reads-owner)
 - [Place search: candidates 19 to 28 join the third pass (owner)](#2026-10-13---place-search-candidates-19-to-28-join-the-third-pass-owner)
+- [Place search: every drawn line and station is searchable, the floor for the big review (owner)](#2026-10-13---place-search-every-drawn-line-and-station-is-searchable-the-floor-for-the-big-review-owner)
 
 **2026-10-12**
 
@@ -5951,3 +5952,22 @@ japan-city template:
   they are colonias. No rule until it is traced against Mexico City.
 - (20) is the second batch's station-outline rule; (21) is measured in the
   pass, not ruled.
+
+### 2026-10-13 - Place search: every drawn line and station is searchable, the floor for the big review (owner)
+
+- **The owner: "when we do our final big sweep, we should ensure all drawn
+  lines and stations are searchable (bare minimum)".**
+- **What answers it today:** the search box takes a map's own stations and
+  lines from the map itself (`pipeline/map_common.py`, kinds `mapstation`
+  and `line`), not from the OpenStreetMap index, so a drawn station is
+  findable even when no index row carries it (Monterrey's Sendero, absent
+  from its index on 2026-10-13, is such a case to test). Nothing checks it:
+  check H measures reach around a station, not whether its name is found.
+- **Owed before the big review's landing:** a check that opens every
+  rendered map with search, types each drawn station's name and each drawn
+  line's name as the map shows them, and fails naming any that is not
+  returned as its own kind. A browser script beside
+  `scripts/check_map_view.js`, run over all maps at the sweep; a failure is
+  a map to fix, never a name to skip.
+- The retrospectives of this date's earlier entry are private artifacts
+  (owner), which supersedes the "docs file" form in PLAN.md's item.
