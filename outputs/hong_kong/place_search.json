@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/hong_kong.json",
-  "places": 20412,
+  "places": 20640,
   "data_retrieved": "2026-10-08",
   "languages": {
     "local": [
       "zh"
     ],
     "coverage": {
-      "en": 0.927,
+      "en": 0.928,
       "zh": 0.989
     },
     "list_share": 0.5,
