@@ -225,6 +225,11 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("es",)
 PLACE_FOLD = None
+# A named private street stays (owner, 2026-10-13; DECISIONS.md, "a named
+# private street stays in Guadalajara and Monterrey"): the shared rule took
+# 2,391 named streets of gated neighborhoods out of this index. A private
+# street whose name is a code beside a type word still goes.
+PLACE_KEEP_NAMED_PRIVATE_STREETS = True
 PLACE_REVIEWED = {
     "Calle G.U.S.A.": "a residential street whose name is an abbreviation, not a company form; the read of 2026-10-13",
 }
