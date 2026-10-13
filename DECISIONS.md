@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**123 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**124 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -60,6 +60,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Place search: a drawn station or line is never dropped for its name; wave 1's branch complete (owner)](#2026-10-13---place-search-a-drawn-station-or-line-is-never-dropped-for-its-name-wave-1s-branch-complete-owner)
 - [Place search: Monterrey's 19 colonias kept by id, the estate rule unchanged (owner)](#2026-10-13---place-search-monterreys-19-colonias-kept-by-id-the-estate-rule-unchanged-owner)
 - [Place search: "an article of its own" is asked of Wikidata, not of the map's tag; candidates 29 to 44 (owner)](#2026-10-13---place-search-an-article-of-its-own-is-asked-of-wikidata-not-of-the-maps-tag-candidates-29-to-44-owner)
+- [Place search: libraries by the Wikidata lookup; Swedish "-gard" stays an ending (owner)](#2026-10-13---place-search-libraries-by-the-wikidata-lookup-swedish--gard-stays-an-ending-owner)
 
 **2026-10-12**
 
@@ -6051,3 +6052,34 @@ japan-city template:
   brings back 189 public streets; four rules were narrowed after measuring
   (the draft has each). The German matcher words are a separate commit
   (`search-rules-3-matcher`), held for the big review's render.
+
+### 2026-10-13 - Place search: libraries by the Wikidata lookup; Swedish "-gard" stays an ending (owner)
+
+- **Two rulings relayed by the final-group session (`search-final`,
+  73cbf388) read differently from the ones given to Cleanup, so both went
+  back to the owner. The owner: "4. approved. 5. approved".**
+- **Libraries (4):** the Wikidata lookup decides, as for public art. A
+  library whose Wikidata entry has a Wikipedia article stays; the rest go.
+  The final-group reading ("libraries on a Wikidata entry alone are
+  dropped", Florence 213) is replaced by it; any by-id drops written there
+  are reconciled against the rule at the rebuild.
+- **Swedish "-gard" (5):** it stays a street ending in shared code;
+  Goteborg's 31 courtyard names are dropped by id. Candidate 37 of this
+  date (no street word on a footway) is pulled from the fourth pass: the
+  by-id ruling is the later and the narrower one.
+- **The DeepSeek worker's script is written and reviewed, not merged:**
+  `pipeline/place_wikidata_fetch.py` on `feat/local-wikidata-fetch`
+  (c78aac8c, then Cleanup's 064acb0e: gzip asked for, and an error body
+  arriving with HTTP 200 refused instead of cached as 50 missing entries).
+  The plan sent held code paths and rules only, no data. Wikidata's licence
+  read is back (CC0, conduct rules on the API).
+- **The owner on the three points that followed: "1 yes. 2. yes. 3. yes
+  credit".** (1) The script is merged into the rules branch. (2) Two
+  readings of Wikimedia's terms are taken as Cleanup recommended, going
+  ahead: the robots file's bar on the API's path is read as addressed to
+  page crawlers, and the "not approved by the community" limb with the
+  guidelines' no-prior-permission sentence; the cost of a wrong reading is
+  a blocked user-agent. The row is in `docs/data_sources.md`. (3) Wikidata
+  asks for a mention without requiring one; About the Data gains one
+  sentence at the big review: "Whether a landmark has a Wikipedia article,
+  one of the tests for listing it, is read from Wikidata (CC0)."

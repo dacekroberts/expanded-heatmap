@@ -439,6 +439,36 @@ sample batches after it); the other maps follow in the rollout's waves.<!-- /int
   stations and lines by reading them from the page, and joins OSM's station
   names to them in the visitor's browser; that display is a Produced Work and
   nothing of it is published as a database.
+- **Wikipedia-article test (Wikidata, CC0; not data in the index):** for an
+  OpenStreetMap object that carries a `wikidata` tag, the project reads one
+  fact from Wikidata's API (https://www.wikidata.org/w/api.php,
+  `action=wbgetentities`, `props=sitelinks`): whether the entry links to a
+  Wikipedia article in any language. The fact is cached per city and helps
+  decide whether a landmark stays in the index. No Wikidata label,
+  description or title is published; the index still holds OpenStreetMap
+  names and coordinates only. **PERMITTED WITH CONDITIONS**
+  (<!-- internal -->`licence-read` 2026-10-13; <!-- /internal -->Wikidata:Copyright, Wikidata:Data access, the
+  Wikimedia Terms of Use and the API policies they incorporate, read
+  2026-10-13): "All structured data from the main, Property, Lexeme, and
+  EntitySchema namespaces is available under the Creative Commons CC0
+  License", and sitelinks are stored in items, which are main-namespace
+  pages. Wikidata offers the data "freely and with no requirement for
+  attribution", so **no notice is required**; it asks, without requiring,
+  that a project mention Wikidata as the origin of its data, and the owner
+  chose to (2026-10-13; one sentence in About the Data). **What must be
+  DONE** is the API's conduct rules (Terms of Use section 12), held in
+  `pipeline/place_wikidata_fetch.py`: a User-Agent that names the client and
+  gives a contact (a website address), never a generic or browser string;
+  one request at a time, at most 50 ids each; `maxlag=5`, with a pause of at
+  least 5 seconds on a lag error; the `Retry-After` delay honored on a 429
+  or 503; gzip; no entry requested twice. Nothing here implies endorsement
+  by Wikidata or the Wikimedia Foundation.<!-- internal --> Two readings went to the owner
+  2026-10-13, who answered yes to going ahead on both: robots.txt's
+  `Disallow: /w/` is read as addressed to page crawlers, since the Robot
+  policy publishes its own Action API rules; and the Terms' "have not been
+  approved by the Wikimedia community" limb is read with the API Usage
+  Guidelines' no-prior-permission sentence. The rate figures are marked
+  experimental for 2026: re-read before a later large run.<!-- /internal -->
 <!-- internal -->- **Visiting-status evidence (not data):** a former home is kept against the
   home rule only when the public can visit it today (`config.PLACE_VISITABLE`;
   owner, 2026-10-08). Each entry names the page that showed it open, read on
