@@ -27,11 +27,15 @@ THE SECOND SOURCE, --source extract (owner, 2026-10-13): the same elements
 with no Overpass request, read from a regional extract on this machine by
 pipeline/osm_extract.py's boundaries_holding(). The region is the smallest
 one of the download server's index whose polygon holds ALL the city's
-stations; a city whose stations span more than one region is left for a
-person, never answered from a country-sized file. A held extract of that
-region, of any date, is used with no request; otherwise one file is
-downloaded under osm_extract.download_extract's rules (never the same file
-twice, one download at a time on this machine, no larger than --max-mb). The
+stations. A city whose stations span more than one region is never answered
+from a country-sized file: when the one region holding them all is over
+--max-mb, the smallest set of regions that together hold them is read as one
+(osm_extract.choose_regions, owner 2026-10-13; at most four, each under
+--max-mb, all of one dated run), and a city no such set answers is left for
+a person. A held extract of a region, of any date, is used with no request;
+otherwise a file is downloaded under osm_extract.download_extract's rules
+(never the same file twice, one download at a time on this machine, no
+larger than --max-mb). The
 cache has the same name and shape, with the download host and the extract
 file as its source, so the resolver below reads either. A relation the
 extract holds only part of (a country or state cut at the region's edge)
@@ -398,38 +402,53 @@ class LeftForPerson(Exception):
 
 
 def real_extract(city, stations, query, cache_path, *, extract_root=None, max_mb=EXTRACT_MAX_MB,
-                 out=print):
-    """The extract source's answer for one city: choose the region, hold or
-    download its extract, read the boundaries holding each station point,
-    write the cache and return the elements. Raises LeftForPerson when no
-    single region holds every station, SystemExit when a download is
-    refused or the run is offline, RuntimeError on an empty answer."""
+                 out=print, transport=None, now=None):
+    """The extract source's answer for one city: choose the region, or the
+    set of regions read as one (osm_extract.choose_regions), hold or
+    download the extract(s), read the boundaries holding each station point,
+    write the cache and return the elements. Raises LeftForPerson when
+    neither one region nor a set under the cap holds every station,
+    SystemExit when a download is refused or the run is offline,
+    RuntimeError on an empty answer. `transport` and `now` are the
+    selftest's."""
     import time
     from shapely.geometry import MultiPoint
     from pipeline import osm_extract
     extract_root = Path(extract_root) if extract_root else ROOT / "data" / "_osm_extracts"
     points = [tuple(float(v) for v in p.split(",")) for p in distinct_points(stations)]
     index = osm_extract.load_index(extract_root / "index-v1.json")
-    found = osm_extract.regions_covering(index, MultiPoint([(lon, lat) for lat, lon in points]))
-    if not found:
-        raise LeftForPerson("no region of the download server's index holds every station")
-    region = found[0]
-    if osm_extract.has_subregions(index, region):
-        raise LeftForPerson(f"its stations span more than one extract region (the smallest holding "
-                            f"them all is {region['properties']['id']}, which has subregions)")
-    pbf = osm_extract.download_extract(region, extract_root, max_age_days=EXTRACT_ANY_AGE_DAYS,
-                                       max_bytes=max_mb * 1024 * 1024, out=out)
+    cap, sizes = max_mb * 1024 * 1024, {}
+
+    def size_of(feature):
+        size = osm_extract.extract_size(feature, extract_root, max_age_days=EXTRACT_ANY_AGE_DAYS,
+                                        transport=transport, now=now)
+        sizes[feature["properties"]["id"]] = size
+        return size["bytes"]
+
+    try:
+        regions, why = osm_extract.choose_regions(index, MultiPoint([(lon, lat) for lat, lon in points]),
+                                                  size_of, max_bytes=cap)
+    except osm_extract.NoRegionSet as exc:
+        raise LeftForPerson(f"its stations are not held by one extract region or a set of them: {exc}")
+    region_ids = [f["properties"]["id"] for f in regions]
+    if len(regions) > 1:
+        out(f"{city}: regions {' + '.join(region_ids)} read as one: {why}")
+        pbf = osm_extract.download_set(regions, extract_root, sizes=sizes, max_age_days=EXTRACT_ANY_AGE_DAYS,
+                                       max_bytes=cap, transport=transport, now=now, out=out)
+    else:
+        pbf = osm_extract.download_extract(regions[0], extract_root, max_age_days=EXTRACT_ANY_AGE_DAYS,
+                                           max_bytes=cap, out=out, transport=transport, now=now)
     start = time.time()
     elements, stats = osm_extract.boundaries_holding(pbf, points)
     if not elements:
         raise RuntimeError(f"no administrative boundary in {pbf.name} holds a station of {city}")
-    payload = {"osm3s": {"timestamp_osm_base": osm_extract.extract_timestamp(pbf),
+    payload = {"osm3s": {"timestamp_osm_base": osm_extract.set_timestamp(pbf),
                          "copyright": "The data included in this document is from www.openstreetmap.org. "
                                       "The data is made available under ODbL."},
                "elements": elements,
                "_fetched_from": f"{osm_extract.DOWNLOAD_HOST} ({pbf.name}, filtered on this machine)",
                "_query": query,
-               "_extract": {"file": pbf.name, "region": region["properties"]["id"],
+               "_extract": {"file": pbf.name, "region": " + ".join(region_ids),
                             "relations_read": stats["relations"], "not_whole": stats["not_whole"],
                             "seconds": round(time.time() - start, 1)}}
     cache_path.parent.mkdir(parents=True, exist_ok=True)
@@ -900,9 +919,48 @@ def selftest():
                    904: ([("w", 4, "outer")], {"type": "boundary", "name": "A Twelve"}),
                    905: ([("w", 5, "outer")], dict(admin, admin_level="8", name="Next Door")),
                    906: ([("w", 6, "outer")], dict(admin, admin_level="6", name="Twelve County"))}
+        # A county whose ring is cut at lon 30, the regions' border: its west
+        # half is in the west file, its east half in the east file, the two
+        # nodes on the cut in both. 908 is a town in the east file alone.
+        ex_nodes.update({30: (5, 30, {}), 31: (5, 18, {}), 32: (15, 18, {}), 33: (15, 30, {})})
+        ex_ways[7] = ([30, 31, 32, 33], {})
+        wide = ([("w", 7, "outer"), ("w", 8, "outer")], dict(admin, admin_level="6", name="Wide County"))
+        ex_rels[907] = wide
+        east_nodes = {30: (5, 30, {}), 33: (15, 30, {}), 34: (15, 42, {}), 35: (5, 42, {}),
+                      36: (9, 39, {}), 37: (11, 39, {}), 38: (11, 41, {}), 39: (9, 41, {})}
+        east_ways = {8: ([33, 34, 35, 30], {}), 9: ([36, 37, 38, 39, 36], {})}
+        east_rels = {907: wide, 908: ([("w", 9, "outer")], dict(admin, admin_level="8", name="A Ten East"))}
         (ex_root / "west").mkdir(parents=True)
         osm_extract.write_test_extract(ex_root / "west" / "west-260101.osm.pbf", ex_nodes, ex_ways, ex_rels)
-        local = functools.partial(real_extract, extract_root=ex_root, out=lambda text: None)
+        east_bytes = osm_extract.write_test_extract(root / "east-source.osm.pbf", east_nodes, east_ways,
+                                                    east_rels).read_bytes()
+        ex_calls = []
+
+        class ExBody:
+            def __init__(self, data):
+                self.data, self.pos = data, 0
+
+            def read(self, n):
+                chunk = self.data[self.pos:self.pos + n]
+                self.pos += len(chunk)
+                return chunk
+
+            def close(self):
+                pass
+
+        def ex_transport(method, url, headers):
+            name = url.rsplit("/", 1)[-1]
+            ex_calls.append((method, name))
+            if method == "HEAD" and "-latest" in name:
+                return 302, {"Location": url.replace("-latest", "-260107")}, None
+            # The country's file states 900 MB to a HEAD: over the 800 MB cap.
+            size = 900 * 2 ** 20 if name.startswith("alphaland") else len(east_bytes)
+            return 200, {"Content-Length": str(size)}, (ExBody(east_bytes) if method == "GET" else None)
+
+        local = functools.partial(real_extract, extract_root=ex_root, out=lambda text: None,
+                                  transport=ex_transport)
+        city("a14", "Alphaland", "A Fourteen")
+        write(root / "data" / "a14" / "stations.csv", "station,lat,lon\nOne,10.0,20.0\nOff the index,10.0,70.0\n")
         city("a11", "Alphaland", "A Eleven")
         write(root / "data" / "a11" / "stations.csv", "station,lat,lon\nIn the hole,10.5,20.5\n")
         city("a12", "Alphaland", "A Twelve")
@@ -910,7 +968,12 @@ def selftest():
         city("a13", "Alphaland", "A Twelve")
         write(root / "data" / "a13" / "stations.csv", "station,lat,lon\nHome,21.0,11.0\n")
         write(root / "app" / "cities.py", "CITIES = " + json.dumps(listing_rows, indent=4) + "\n")
-        code, by, text, asked = go(["a9", "a10", "a11", "a12", "a13"], source="extract", extract=local)
+        kept_offline = os.environ.pop("HEATMAP_NO_NETWORK", None)
+        try:
+            code, by, text, asked = go(["a9", "a10", "a11", "a12", "a13", "a14"], source="extract", extract=local)
+        finally:
+            if kept_offline is not None:
+                os.environ["HEATMAP_NO_NETWORK"] = kept_offline
         report("extract source: a city relation with no boundary tag is not offered, and the city is then "
                "left for a person: never resolved to the tagged neighbor",
                by["a12"]["status"] == "unresolved" and "name mismatch" in by["a12"]["reason"]
@@ -934,10 +997,23 @@ def selftest():
                and saved9["_query"] == build_query([("One", 10.00001, 20.00001), ("Two", 10.5, 20.5)])
                and saved9["osm3s"]["timestamp_osm_base"] == "2026-01-01T00:00:00Z"
                and set(saved9["elements"][0]) == {"type", "id", "tags"})
-        report("extract source: a city whose stations span two regions is left for a person, nothing cached",
-               by["a10"]["status"] == "unresolved" and "span more than one extract region" in by["a10"]["reason"]
-               and plan["cities"]["a10"]["relations"] == []
-               and not list((root / "data" / "a10" / "raw").glob(CACHE_GLOB)))
+        cache10 = sorted((root / "data" / "a10" / "raw").glob(CACHE_GLOB))
+        saved10 = _read_json(cache10[0]) if cache10 else {}
+        report("extract source: a city whose stations span two regions, the country over the cap, is read "
+               "from both regions as one: a county cut at their border is whole, each relation once",
+               sorted(e["id"] for e in saved10.get("elements", [])) == [901, 903, 907, 908]
+               and saved10.get("_extract", {}).get("region") == "east + west"
+               and saved10.get("_extract", {}).get("not_whole") == []
+               and saved10.get("_fetched_from") == "download.geofabrik.de (east-260101.osm.pbf + "
+                                                   "west-260101.osm.pbf, filtered on this machine)")
+        report("extract source: the set is completed at the held file's date with one download, and the "
+               "country file is sized, never downloaded",
+               [c for c in ex_calls if c[0] == "GET"] == [("GET", "east-260101.osm.pbf")]
+               and not (ex_root / "alphaland").exists())
+        report("extract source: a city no region and no set of regions holds is left for a person, nothing cached",
+               by["a14"]["status"] == "unresolved" and "not held by one extract region or a set" in by["a14"]["reason"]
+               and plan["cities"]["a14"]["relations"] == []
+               and not list((root / "data" / "a14" / "raw").glob(CACHE_GLOB)))
 
         def never(*args, **kwargs):
             raise AssertionError("asked twice")

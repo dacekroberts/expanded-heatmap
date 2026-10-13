@@ -3,7 +3,7 @@ on this machine: the second route beside pipeline/place_index_fetch.py's
 Overpass queries, for the same three caches in the same shape. NOT a step:
 drift_check.py never runs this file.
 
-    python pipeline/place_extract_fetch.py <city> [--force] [--pbf FILE] [--out DIR] [--max-mb N]
+    python pipeline/place_extract_fetch.py <city> [--force] [--pbf FILE [--pbf FILE ..]] [--out DIR] [--max-mb N]
     python pipeline/place_extract_fetch.py --selftest
 
 It answers place_index_fetch.py's OUTLINE_QUERY, QUERY and EXTRA_QUERY, read
@@ -14,6 +14,11 @@ on Tbilisi and Seattle, 2026-10-13 (osm-extract skill, "The proof").
 
   * A cache already on disk is KEPT, never written over, whoever wrote it;
     only --force replaces one. With every cache present nothing is read.
+    A kept cache is first held to the CURRENT config.PLACE_AREA: the area
+    its provenance entry records (or, with no entry for that file, the
+    query the cache itself carries) must be the same area, or the run is
+    refused naming both, before anything is written. A cache that records
+    no area is kept with a warning.
   * --out DIR writes all three under DIR instead, records nothing, and
     refuses the folder the config's caches live in: the proof's route
     (scripts/place_extract_compare.py).
@@ -25,6 +30,16 @@ on Tbilisi and Seattle, 2026-10-13 (osm-extract skill, "The proof").
     a time on this machine (osm_extract.DownloadLock), and the second run
     finds the first one's file. No Overpass mirror is asked and no mirror
     lock (place_index_fetch.FetchLock) is taken.
+  * SEVERAL REGIONS READ AS ONE (owner, 2026-10-13). An area that crosses a
+    region border has one covering region, often a country-sized one. When
+    that file is over --max-mb, the smallest set of regions (by bytes, at
+    most osm_extract.SET_MAX_REGIONS) whose polygons together cover the
+    area is taken instead, each file under --max-mb and each downloaded
+    under the same rules, all of one dated run. The run says which set and
+    why. Several --pbf name a set by hand. A set whose files do not state
+    one data timestamp is refused; the cache's data date is that timestamp
+    and its provenance names every file. One region is still taken whenever
+    one under the cap covers the area.
   * A way-made area and a relation that has lost its boundary tags are both
     taken by id: the area never depends on a boundary's tags.
   * FRESHNESS: the place caches are refused from an extract whose own
@@ -110,6 +125,54 @@ def unions():
                          f"statement; teach pipeline/osm_extract.py or keep the city on Overpass.")
 
 
+_AREA_IN_QUERY = re.compile(r"area(.+?)->\.a;")
+
+
+def recorded_area(config, key, path):
+    """The area a cache on disk was fetched for, as its query states it:
+    from the provenance entry `key` when that entry is about this file, else
+    from the query the cache itself carries. None when neither records one."""
+    prov_path = getattr(config, "PROVENANCE_JSON", None) or (
+        Path(__file__).parent.parent / "outputs" / place_index.city_of(config)[0] / "provenance.json")
+    query = None
+    if Path(prov_path).exists():
+        entry = json.loads(Path(prov_path).read_bytes().decode("utf-8")).get(key) or {}
+        if entry.get("file") == path.name:
+            query = entry.get("query")
+    if query is None:
+        try:
+            query = json.loads(path.read_bytes().decode("utf-8")).get("_query")
+        except (ValueError, AttributeError):
+            query = None
+    m = _AREA_IN_QUERY.search(query or "")
+    return m.group(1) if m else None
+
+
+def same_area(a, b):
+    """True when two area selectors name the same area: ids in any order."""
+    try:
+        return osm_extract.parse_area(a) == osm_extract.parse_area(b)
+    except ValueError:
+        return str(a).replace(" ", "") == str(b).replace(" ", "")
+
+
+def check_kept(config, key, path, say=print):
+    """A cache about to be KEPT must be of the area the config names now. A
+    cache fetched for another area would otherwise be kept in silence and
+    indexed as the new one (asked for by the rollout session, 2026-10-13).
+    Exits naming both areas; warns when the cache records none."""
+    recorded = recorded_area(config, key, path)
+    if recorded is None:
+        say(f"WARNING: {path.name} records no area (no provenance entry for this file, no query in "
+            f"it): not compared with config.PLACE_AREA")
+        return
+    if not same_area(recorded, config.PLACE_AREA):
+        raise SystemExit(f"{path.name}: on disk for area {recorded}, and config.PLACE_AREA is now "
+                         f"{config.PLACE_AREA}. Refused: a cache of another area is not kept as this "
+                         f"one. Nothing was written. Fetch under a new cache name, or replace it with "
+                         f"--force when that is meant.")
+
+
 def targets(config, force, out_dir=None):
     """[(key, path, write?)] for the outline, main and extra caches, in that
     order. A cache on disk is written only with --force."""
@@ -136,9 +199,13 @@ def check_fresh(timestamp, pbf, now=None):
     return age
 
 
-def choose_extract(config, root=EXTRACT_ROOT, out=print, max_mb=None):
+def choose_extract(config, root=EXTRACT_ROOT, out=print, max_mb=None, transport=None, now=None):
     """The extract for a city with no --pbf: the smallest region covering
-    its outline cache when one is on disk, else its stations."""
+    its outline cache when one is on disk, else its stations. When that
+    region's file is over `max_mb` and the area crosses a region border, the
+    smallest set of regions that together cover it, as an ExtractSet
+    (osm_extract.choose_regions has the rule). `transport` and `now` are the
+    selftest's."""
     from shapely.geometry import MultiPoint
     from shapely.ops import unary_union
     slug = place_index.city_of(config)[0]
@@ -153,36 +220,63 @@ def choose_extract(config, root=EXTRACT_ROOT, out=print, max_mb=None):
                              f"extract with --pbf.")
         geom, basis = MultiPoint([(lon, lat) for _, lat, lon in stations]), f"its {len(stations)} stations"
     index = osm_extract.load_index(Path(root) / "index-v1.json")
-    region = osm_extract.smallest_region(index, geom)
+    age, cap, sizes = place_index_fetch.PLACE_MAX_AGE_DAYS, (max_mb * 1024 * 1024 if max_mb else None), {}
+
+    def size_of(feature):
+        size = osm_extract.extract_size(feature, root, max_age_days=age, transport=transport, now=now)
+        sizes[feature["properties"]["id"]] = size
+        return size["bytes"]
+
+    try:
+        regions, why = osm_extract.choose_regions(index, geom, size_of, max_bytes=cap)
+    except osm_extract.NoRegionSet as exc:
+        raise SystemExit(f"{slug}, by {basis}: {exc}")
+    if len(regions) > 1:
+        out(f"regions: {' + '.join(f['properties']['id'] for f in regions)}, read as one for {slug} by "
+            f"{basis}: {why}")
+        return osm_extract.download_set(regions, root, sizes=sizes, max_age_days=age, max_bytes=cap,
+                                        transport=transport, now=now, out=out)
+    region = regions[0]
     out(f"region: {region['properties']['id']}, the smallest covering {slug} by {basis}")
-    return osm_extract.download_extract(region, root, max_age_days=place_index_fetch.PLACE_MAX_AGE_DAYS,
-                                        max_bytes=max_mb * 1024 * 1024 if max_mb else None, out=out)
+    return osm_extract.download_extract(region, root, max_age_days=age, max_bytes=cap, out=out,
+                                        transport=transport, now=now)
 
 
 def check_region(pbf, area, root=EXTRACT_ROOT, out=print):
     """Exit when the area reaches past the region the extract was cut to: a
     boundary can close there while the streets beyond the cut are absent.
     Said out loud when the region cannot be found (no index on disk, or a
-    file under another name)."""
+    file under another name). For several extracts read as one, the area is
+    held to the regions' polygons taken together."""
     from shapely.geometry import shape
     from shapely.ops import unary_union
-    m = osm_extract.DATED.match(Path(pbf).name)
+    files = osm_extract.as_files(pbf)
     index_path = Path(root) / "index-v1.json"
-    feature = None
-    if m and index_path.exists():
+    features = []
+    if index_path.exists():
         index = json.loads(index_path.read_bytes().decode("utf-8"))
-        found = [f for f in index["features"] if f.get("geometry")
-                 and "pbf" in f["properties"].get("urls", {})
-                 and osm_extract.region_short(f) == m.group("region")]
-        feature = found[0] if len(found) == 1 else None
-    if feature is None:
+        for f in files:
+            m = osm_extract.DATED.match(f.name)
+            found = [x for x in index["features"] if m and x.get("geometry")
+                     and "pbf" in x["properties"].get("urls", {})
+                     and osm_extract.region_short(x) == m.group("region")]
+            features += found if len(found) == 1 else []
+    if len(features) != len(files):
         out("  region: NOT checked against the extract's own outline (no index on disk, or the file "
             "is not named <region>-YYMMDD.osm.pbf)")
         return
-    if not shape(feature["geometry"]).covers(unary_union(area.parts)):
+    ids = " + ".join(f["properties"]["id"] for f in features)
+    inside = unary_union([shape(f["geometry"]) for f in features]).covers(unary_union(area.parts))
+    if len(files) > 1:
+        if not inside:
+            raise SystemExit(f"{Path(pbf).name}: the search area reaches past regions {ids} taken "
+                             f"together. The set does not cover it.")
+        out(f"  region: the area lies wholly inside {ids} taken together")
+        return
+    if not inside:
         raise SystemExit(f"{Path(pbf).name}: the search area reaches past region "
-                         f"{feature['properties']['id']}. Use the next larger region.")
-    out(f"  region: the area lies wholly inside {feature['properties']['id']}")
+                         f"{ids}. Use the next larger region.")
+    out(f"  region: the area lies wholly inside {ids}")
 
 
 def build(config, pbf, *, scope=True, say=print, root=EXTRACT_ROOT):
@@ -193,7 +287,9 @@ def build(config, pbf, *, scope=True, say=print, root=EXTRACT_ROOT):
         spec = osm_extract.parse_area(config.PLACE_AREA)
     except ValueError as exc:
         raise SystemExit(f"{place_index.city_of(config)[0]}: config.PLACE_AREA: {exc}")
-    timestamp = osm_extract.extract_timestamp(pbf)
+    # One extract, or several read as one: the set's data date is its files'
+    # one timestamp, and Path(pbf).name below names every file of it.
+    timestamp = osm_extract.set_timestamp(pbf)
     outline = []
 
     def on_area(boundaries, area):
@@ -230,6 +326,7 @@ def run(config, *, force=False, pbf=None, out_dir=None, now=None, say=print, roo
     todo = targets(config, force, out_dir)
     for key, path, write in todo:
         if not write:
+            check_kept(config, key, path, say)
             say(f"{path.name}: kept (on disk; --force replaces it)")
     if not any(write for _, _, write in todo):
         return []
@@ -238,10 +335,10 @@ def run(config, *, force=False, pbf=None, out_dir=None, now=None, say=print, roo
         say("config.PLACE_SPLIT is not used: an extract is read whole")
     if pbf is None:
         pbf = choose_extract(config, root, out=say, max_mb=max_mb)
-    pbf = Path(pbf)
+    pbf = osm_extract.one_or_set(pbf)
     if not pbf.exists():
         raise SystemExit(f"{pbf}: no such extract")
-    timestamp = osm_extract.extract_timestamp(pbf)
+    timestamp = osm_extract.set_timestamp(pbf)
     say(f"{pbf.name}: data dated {timestamp}")
     if any(write for key, _, write in todo if key != "osm_place_outline"):
         check_fresh(timestamp, pbf, now)
@@ -464,6 +561,151 @@ def selftest():
         (d / "index-v1.json").write_bytes(json.dumps(index).encode("utf-8"))
         why = stopped(lambda: run(City, pbf=pbf, out_dir=d / "edge", now=day, say=said.append, root=d))
         case("an area reaching past the extract's region stops the run", why and "next larger region" in why)
+
+        # SEVERAL REGIONS READ AS ONE: the same world cut at lon = 1 into two
+        # regional files (osm_extract.cut_world), under a country too large
+        # for the cap.
+        m = d / "multi"
+        (m / "west").mkdir(parents=True)
+        (m / "east").mkdir()
+        nodes[80] = (0.5, 0.9, {"place": "suburb", "name": "On A Crossing Way"})
+        nodes[81] = (0.5, 1.1, {})
+        ways[205] = ([80, 81], {"highway": "residential", "name": "Crosses The Cut"})
+        whole = osm_extract.write_test_extract(d / "world3-260101.osm.pbf", nodes, ways, relations,
+                                               timestamp="2026-01-01T06:00:00Z")
+        west_part = osm_extract.cut_world(nodes, ways, relations, lambda lon: lon < 1.0)
+        east_part = osm_extract.cut_world(nodes, ways, relations, lambda lon: lon >= 1.0)
+        west = osm_extract.write_test_extract(m / "west" / "west-260101.osm.pbf", *west_part,
+                                              timestamp="2026-01-01T06:00:00Z")
+        east = osm_extract.write_test_extract(m / "east" / "east-260101.osm.pbf", *east_part,
+                                              timestamp="2026-01-01T06:00:00Z")
+        host_url = f"https://{osm_extract.DOWNLOAD_HOST}/"
+
+        def strip(rid, x0, x1):
+            return {"properties": {"id": rid, "urls": {"pbf": f"{host_url}{rid}-latest.osm.pbf"}},
+                    "geometry": {"type": "Polygon",
+                                 "coordinates": [[[x0, -10], [x1, -10], [x1, 10], [x0, 10], [x0, -10]]]}}
+
+        def write_index(folder, east_to=10):
+            folder.mkdir(parents=True, exist_ok=True)
+            (folder / "index-v1.json").write_bytes(json.dumps({"features": [
+                strip("country", -10, 10), strip("country/west", -10, 1.05),
+                strip("country/east", 0.95, east_to)]}).encode("utf-8"))
+
+        write_index(m)
+        asked = []
+
+        class Body:
+            def __init__(self, data):
+                self.data, self.pos = data, 0
+
+            def read(self, n):
+                chunk = self.data[self.pos:self.pos + n]
+                self.pos += len(chunk)
+                return chunk
+
+            def close(self):
+                pass
+
+        def transport(method, url, headers):
+            name = url.rsplit("/", 1)[-1]
+            asked.append((method, name))
+            if method == "HEAD" and "-latest" in name:
+                return 302, {"Location": url.replace("-latest", "-260101")}, None
+            data = whole.read_bytes()
+            # The country file states 5 MB to a HEAD: over a 1 MB cap.
+            size = len(data) if method == "GET" else 5 * 2 ** 20
+            return 200, {"Content-Length": str(size)}, (Body(data) if method == "GET" else None)
+
+        import os
+        armed = os.environ.pop("HEATMAP_NO_NETWORK", None)
+        try:
+            said.clear()
+            chosen = choose_extract(City, m, out=said.append, max_mb=1, transport=transport, now=day)
+            case("a city crossing a region border, its one covering region over the cap, takes the smallest "
+                 "set of regions, says which and why, and downloads nothing already held",
+                 isinstance(chosen, osm_extract.ExtractSet) and chosen.name == "east-260101.osm.pbf + west-260101.osm.pbf"
+                 and any(s.startswith("regions: country/east + country/west, read as one for testville") and
+                         "country, is 5 MB, over the 1 MB cap" in s for s in said)
+                 and [a[0] for a in asked] == ["HEAD", "HEAD"] and not (m / osm_extract.LEDGER_NAME).exists())
+            said.clear()
+            asked.clear()
+            single = choose_extract(City, m, out=said.append, max_mb=100, transport=transport, now=day)
+            case("the same city with its covering region under the cap takes that ONE region, in the same words",
+                 single.name == "country-260101.osm.pbf" and "region: country, the smallest covering testville by "
+                 "its 2 stations" in said and ("GET", "country-260101.osm.pbf") in asked)
+        finally:
+            if armed is not None:
+                os.environ["HEATMAP_NO_NETWORK"] = armed
+        ref = run(City, pbf=whole, out_dir=d / "ref", now=day, say=said.append, root=d / "no-index")
+        said.clear()
+        two = run(City, pbf=chosen, out_dir=d / "two", now=day, say=said.append, root=m)
+
+        def elements(paths):
+            return [json.loads(p.read_bytes().decode("utf-8"))["elements"] for p in paths]
+        two_main = json.loads(two[1].read_bytes().decode("utf-8"))
+        case("the set gives the three caches the whole file gives, element for element, each id once",
+             elements(two) == elements(ref) and [e["id"] for e in two_main["elements"] if "nodes" in e].count(205) == 1
+             and any("taken together" in s for s in said) and any("taken once" in s for s in said))
+        case("a cache from a set names every file it was read from and the set's one data date",
+             two_main["_fetched_from"] == f"{osm_extract.DOWNLOAD_HOST} (east-260101.osm.pbf + west-260101.osm.pbf, "
+                                          "filtered on this machine)"
+             and two_main["_extract"]["stats"]["files"] == ["east-260101.osm.pbf", "west-260101.osm.pbf"]
+             and two_main["osm3s"]["timestamp_osm_base"] == "2026-01-01T06:00:00Z")
+        by_hand = run(City, pbf=[str(west), str(east)], out_dir=d / "hand", now=day, say=said.append, root=m)
+        case("several --pbf name a set by hand, and the order of the files does not change the elements",
+             elements(by_hand) == elements(ref))
+        late_east = osm_extract.write_test_extract(d / "east-260102.osm.pbf", *east_part,
+                                                   timestamp="2026-01-02T06:00:00Z")
+        why = stopped(lambda: run(City, pbf=[west, late_east], out_dir=d / "apart", now=day, say=said.append, root=m))
+        case("a set whose files are of two data dates is refused before anything is read or written",
+             why and "not one snapshot" in why and not (d / "apart").exists())
+        write_index(d / "multi2", east_to=1.5)
+        why = stopped(lambda: run(City, pbf=chosen, out_dir=d / "past", now=day, say=said.append, root=d / "multi2"))
+        case("an area reaching past the regions of a set taken together stops the run",
+             why and "country/east + country/west taken together" in why and not (d / "past").exists())
+
+        # A KEPT cache is held to the area the config names now.
+        run(City, pbf=chosen, now=day, say=said.append, root=m)
+        prov = json.loads(City.PROVENANCE_JSON.read_bytes().decode("utf-8"))
+        case("provenance from a set names every file",
+             "east-260101.osm.pbf + west-260101.osm.pbf" in prov["osm_places"]["host"])
+        kept_bytes = City.PLACE_OSM_JSON.read_bytes()
+
+        class Moved(City):
+            PLACE_AREA = "(id:3600000001)"
+
+        why = stopped(lambda: run(Moved, pbf=chosen, now=day, say=said.append, root=m))
+        case("KEPT CACHE, AREA CHANGED: a cache recorded for another area is refused, naming both areas, "
+             "and nothing is written",
+             why and "(id:3600000001,3600000002)" in why and "is now (id:3600000001)." in why
+             and City.PLACE_OSM_JSON.read_bytes() == kept_bytes)
+
+        class Reordered(City):
+            PLACE_AREA = "(id:3600000002, 3600000001)"
+
+        said.clear()
+        case("the same ids in another order are the same area: the caches are kept, with no warning",
+             run(Reordered, pbf=chosen, now=day, say=said.append, root=m) == []
+             and sum("kept" in s for s in said) == 3 and not any("WARNING" in s for s in said))
+
+        class Unrecorded(City):
+            PROVENANCE_JSON = d / "no-provenance.json"
+
+        class UnrecordedMoved(Unrecorded):
+            PLACE_AREA = "(id:3600000001)"
+
+        why = stopped(lambda: run(UnrecordedMoved, pbf=chosen, now=day, say=said.append, root=m))
+        case("with no provenance entry the area is read from the query the cache itself carries",
+             why and "(id:3600000001,3600000002)" in why and "Refused" in why)
+        City.PLACE_OSM_JSON.write_bytes(b'{"elements": []}')
+        said.clear()
+        case("KEPT CACHE, NO AREA RECORDED: it is kept, with a printed warning naming the file",
+             run(Unrecorded, pbf=chosen, now=day, say=said.append, root=m) == []
+             and [s for s in said if s.startswith("WARNING")] == [
+                 f"WARNING: {City.PLACE_OSM_JSON.name} records no area (no provenance entry for this file, "
+                 f"no query in it): not compared with config.PLACE_AREA"]
+             and City.PLACE_OSM_JSON.read_bytes() == b'{"elements": []}')
     for label, ok in cases:
         print(f"  {'ok ' if ok else 'BAD'} {label}")
     good = sum(ok for _, ok in cases)
@@ -475,7 +717,8 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("city")
     ap.add_argument("--force", action="store_true", help="replace caches already on disk")
-    ap.add_argument("--pbf", metavar="FILE", help="read this extract; nothing is downloaded")
+    ap.add_argument("--pbf", metavar="FILE", action="append",
+                    help="read this extract; nothing is downloaded. Repeat it to read several as one")
     ap.add_argument("--max-mb", type=int, default=MAX_MB, metavar="N",
                     help=f"the largest regional file downloaded without a person (default {MAX_MB})")
     ap.add_argument("--out", metavar="DIR", help="write all three caches here and record nothing (the proof)")
