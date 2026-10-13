@@ -219,4 +219,32 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+PLACE_DROPPED = {
+    "way/565952876": "'Sisters of Mercy Convent', a religious residence",
+    "way/822147974": "'Worthington Business Center', a business park under its own name",
+    "way/136633533": "'duende at silo city', a venue's name on an abandoned building: a business's own feature",
+    "way/164256371": "'Enlarged Erie Canal', demolished by its own tags (demolished:waterway=canal) (owner, 2026-10-13: a search must not land where the thing is not)",
+    "way/178898222": "'Operations Office', a description standing in for a name (a lock compound's building named by its function)",
+    "way/623895573": "'Lock Warehouse', a description standing in for a name (a lock compound's building named by its function)",
+    "way/1217636499": "'Oil Storehouse', a description standing in for a name (a lock compound's building named by its function)",
+    "node/2485087172": "'Visiting Ship's Dock', a description standing in for a name (a mooring described)",
+    "node/11254346490": "'Baldt Stockless Merchant Ship's Anchor', an exhibit inside a paid venue, named by its model (owner, 2026-10-13: keep the venue, drop the rest)",
+    "node/357552762": "'Cazenovia Park', a duplicate node beside the park's own row (way/24049866) (owner, 2026-10-13)",
+    "way/266437258": "'Service Access Rd', a description as a street's name (owner, 2026-10-13)",
+    "way/93266150": "'Service Trail', a description as a street's name (owner, 2026-10-13)",
+    "way/119950400": "'Service Trail / service road', two descriptions in one as a street's name (owner, 2026-10-13)",
+    "way/1549971632": "'Service Trail / service road', two descriptions in one as a street's name (owner, 2026-10-13)",
+    "way/118671448": "'Tifft service road', a description as a street's name (owner, 2026-10-13)",
+    "way/12277149": "'Park Entrance Road', a description as a street's name (owner, 2026-10-13)",
+    "way/12284654": "'Park Exit Road', a description as a street's name (owner, 2026-10-13)",
+    "way/96510219": "'Park Exit Road', a description as a street's name (owner, 2026-10-13)",
+    "way/992055009": "'Former International Branch Foot Path', a description as a street's name (owner, 2026-10-13)",
+    "way/350947330": "'Maryner Home', a housing complex's own way, named for the building",
+    "way/350947331": "'Maryner Home', a housing complex's own way, named for the building",
+    "way/41833639": "'Maryner Towers', a housing complex's own way, named for the building",
+    "way/651955543": "'Hotel Henry Way', a hotel's own drive, named for the business",
+    "way/651955544": "'Hotel Henry Way', a hotel's own drive, named for the business",
+    "way/651955545": "'Hotel Henry Way', a hotel's own drive, named for the business",
+    "way/12305529": "'Trestle Alley', a private street (access=private on every way of the name; the private-street rule did not reach it)",
+    "way/805956983": "'Trestle Alley', a private street (access=private on every way of the name; the private-street rule did not reach it)",
+}
