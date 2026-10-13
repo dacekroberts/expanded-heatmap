@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**111 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**112 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -48,6 +48,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Shared-border streets (branch shared-border)](#2026-10-13---shared-border-streets-branch-shared-border)
 - [One big review for the rest of the rollout; shared-border streets landed; the second rule batch goes to the owner (owner)](#2026-10-13---one-big-review-for-the-rest-of-the-rollout-shared-border-streets-landed-the-second-rule-batch-goes-to-the-owner-owner)
 - [Place search: the second rule batch and the final group (owner)](#2026-10-13---place-search-the-second-rule-batch-and-the-final-group-owner)
+- [Place search: named roundabouts and standing abandoned landmarks stay (owner)](#2026-10-13---place-search-named-roundabouts-and-standing-abandoned-landmarks-stay-owner)
 
 **2026-10-12**
 
@@ -5761,3 +5762,24 @@ japan-city template:
   country or language), and a tram segment (Milan and Toronto as new builds;
   Mexico City, and Prague if it goes ahead, as rebuilds) that waits on the
   rescope decisions.
+
+### 2026-10-13 - Place search: named roundabouts and standing abandoned landmarks stay (owner)
+
+- **Two rulings of this date differed between two sessions.** The owner
+  agreed to Cleanup's list (named roundabouts stay, interchanges go;
+  landmarks that stand but are abandoned stay) and, in wave 1's session, to
+  a lettered list that dropped roundabouts with interchanges and ramps and
+  kept an abandoned landmark only with an article of its own.
+- **Asked which stands, the owner: "keep the named roundabouts, keep all
+  standing abandoned landmarks".** Interchanges and ramps still go. Wave 1
+  takes back its by-id drops for those two classes; the rule batch carries
+  each as a named constant set to keep.
+- **Also from wave 1's lettered list, agreed there by the owner ("by letter
+  i agree with all recommendations") and built with the batch:** cemetery
+  and church-ground avenues go, numbered buildings of a register district
+  go, campus lawns and courts named for a building go where a safe test
+  exists, parks named only as an intersection stay. Melbourne gets its lane
+  words as a per-city setting ("1. sounds good for melbourne").
+- **The street coverage bar is measured against the names the rulings
+  keep** (Cleanup's call, on a measurement: ruled drops had moved
+  Washington D.C. from 86.9% to 83.3%, with no street missed).
