@@ -247,4 +247,13 @@ PLACE_DROPPED = {
     "way/651955545": "'Hotel Henry Way', a hotel's own drive, named for the business",
     "way/12305529": "'Trestle Alley', a private street (access=private on every way of the name; the private-street rule did not reach it)",
     "way/805956983": "'Trestle Alley', a private street (access=private on every way of the name; the private-street rule did not reach it)",
+    "way/136633545": "'American/Peavey', abandoned or ruined by its own tags, with no article of its own (owner, 2026-10-13)",
+    "way/136633509": "'American/Peavey Elevator', abandoned or ruined by its own tags, with no article of its own (owner, 2026-10-13)",
+    "way/136632336": "'Perot', abandoned or ruined by its own tags, with no article of its own (owner, 2026-10-13)",
+    "way/136632337": "'Perot Elevator', abandoned or ruined by its own tags, with no article of its own (owner, 2026-10-13)",
+    "way/136632335": "'Lake & Rail Elevator', abandoned or ruined by its own tags, with no article of its own (owner, 2026-10-13)",
+    "way/91201814": "'Marine A Elevator', abandoned or ruined by its own tags, with no article of its own (owner, 2026-10-13)",
+    "way/91358533": "'Cargill Superior Elevator', abandoned or ruined by its own tags, with no article of its own (owner, 2026-10-13)",
+    "way/90990393": "'Connecting Terminal Elevator', abandoned or ruined by its own tags, with no article of its own (owner, 2026-10-13)",
+    "way/90925618": "'Electric Annex', abandoned or ruined by its own tags, with no article of its own (owner, 2026-10-13)",
 }

@@ -264,4 +264,11 @@ PLACE_DROPPED = {
     "way/852243392": "'The Grand Manors of Sims Estate', a housing estate's own way, named for the estate",
     "way/871409692": "'The Grand Manors of Sims Estate', a housing estate's own way, named for the estate",
     "way/871409693": "'The Grand Manors of Sims Estate', a housing estate's own way, named for the estate",
+    "way/1370119458": "'Copper Street Trail', a cycle facility named for the street it runs on: a description (owner, 2026-10-13)",
+    "way/182091551": "'Village Green', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13)",
+    "way/152354970": "'B.C. Matthews Hall Green', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13)",
+    "way/576111990": "'Graduate House Green', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13)",
+    "way/182950659": "'Mathematics 3 Green', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13)",
+    "way/182460938": "'Science Quad', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13)",
+    "way/290274346": "'WLU Quad', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13)",
 }
