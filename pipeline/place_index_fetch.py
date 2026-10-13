@@ -143,6 +143,40 @@ def record(config, path, key, how):
     return prov_path
 
 
+def record_wikidata(config, path):
+    """Record a city's Wikidata article cache (pipeline/place_wikidata_fetch.py)
+    in outputs/<slug>/provenance.json under "place_search_wikidata". A
+    recorder of its own: record() above reads Overpass-shaped fields this
+    cache does not carry. The fields are the cache's own _source (host, api,
+    licence, the date fetched, the number of ids) with the file, its bytes
+    and sha256, and how many entries have an article, have none, or could
+    not be read."""
+    data = path.read_bytes()
+    payload = json.loads(data.decode("utf-8"))
+    source = payload.get("_source") or {}
+    articles = payload.get("articles") or {}
+    prov_path = getattr(config, "PROVENANCE_JSON", None) or (
+        Path(__file__).parent.parent / "outputs" / place_index.city_of(config)[0] / "provenance.json")
+    prov = json.loads(prov_path.read_text(encoding="utf-8")) if prov_path.exists() else {}
+    prov["place_search_wikidata"] = {
+        "api": source.get("api"),
+        "bytes": len(data),
+        "file": path.name,
+        "host": source.get("host"),
+        "ids": len(articles),
+        "ids_with_article": sum(1 for v in articles.values() if v),
+        "ids_without_article": sum(1 for v in articles.values() if v == []),
+        "ids_not_read": sum(1 for v in articles.values() if v is None),
+        "licence": source.get("licence"),
+        "retrieved": source.get("fetched"),
+        "sha256": hashlib.sha256(data).hexdigest(),
+    }
+    prov_path.parent.mkdir(parents=True, exist_ok=True)
+    # Bytes, so the committed file stays LF on Windows.
+    prov_path.write_bytes((json.dumps(prov, indent=2, ensure_ascii=False, sort_keys=True) + "\n").encode("utf-8"))
+    return prov_path
+
+
 def tiles(split):
     """The bbox filters, "(s,w,n,e)", of a config.PLACE_SPLIT: its bbox cut
     into rows x cols equal tiles, south-west first."""
