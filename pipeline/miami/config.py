@@ -337,7 +337,10 @@ MIAMI_BBOX = {
 #   relation 1244549 Kendall: Dadeland South station.
 # Miami International Airport station sits in none of them: no named area
 # smaller than the county holds it (not the aerodrome, way 113657169, nor
-# the City of Miami).
+# the City of Miami). Left outside the search area on the owner's word
+# (2026-10-13: "1. leave it outside, record the exception"): the fetch's
+# area line reports 1 of 47 stations outside every area, and that is the
+# recorded exception, not a gap to close by widening the area.
 PLACE_AREA = "(id:3601216769,3600118853,3601216645,3600118855,3600118861,2433614621,2433614629,3609853985,3601244549)"
 PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
