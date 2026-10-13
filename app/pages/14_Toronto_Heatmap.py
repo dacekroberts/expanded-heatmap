@@ -43,13 +43,24 @@ st.markdown(
     """
 **The lines**
 
-- **Five lines are drawn** from the TTC's own route geometry: Lines 1, 2 and 4 of the
-  subway, and Lines 5 and 6, which are light rail.
-- Four of the five use the TTC's own colors; Line 2's green was darkened because the
-  agency's green is almost exactly the green used for Personal services pins, and the two
-  were indistinguishable where a line ran under its own stations.
-- **The 18 streetcar routes are not included** — they run in traffic every block or two, and
-  adding them would quadruple the station count and change what this map is about.
+- **Thirteen lines are drawn** from the TTC's own route geometry: Lines 1, 2 and 4 of the
+  subway, Lines 5 and 6, which are light rail, and **eight streetcar lines**: 501 Queen,
+  504 King, 505 Dundas, 506 Carlton, 509 Harbourfront, 510 Spadina, 511 Bathurst and
+  512 St Clair. Each is labeled on the map and in the legend.
+- Four of the five subway and light rail lines use the TTC's own colors; Line 2's green was
+  darkened because the agency's green is almost exactly the green used for Personal services
+  pins, and the two were indistinguishable where a line ran under its own stations. The TTC
+  gives every streetcar route the same red, so the streetcar lines are shown in colors chosen
+  for this map.
+- Streetcars stop every block or two, so on each streetcar line only about
+  one stop per half mile is drawn as a station; subway and light rail stations, stops where
+  streetcar lines cross or part, and each line's last stop are always drawn. The stops left
+  out are listed below.
+- **Three streetcar routes are not drawn.** 503 Kingston Rd and 507 Long Branch run as
+  replacement buses on every trip in the timetable to October 31, 2026, and 512 St Clair is a
+  bus west of Lansdowne Avenue; their stops are listed below as closed for works. 508 Lake
+  Shore runs only at weekday rush hours. The seven overnight routes run along the same
+  streets as their day routes.
 - **Two stations are missing on purpose.** Line 1 continues past the city limit into York
   Region, so Highway 407 and Vaughan Metropolitan Centre sit outside Toronto and outside this
   map; they are listed below. Everything else the TTC signs as a

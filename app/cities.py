@@ -448,7 +448,7 @@ CITIES = [
         "rail_extra": "Trams",
         "record_kind": "License register",
         "categories": "Retail thin",
-        "blurb": "TTC (Lines 1, 2 and 4 subway; Lines 5 and 6 LRT)",
+        "blurb": "TTC (Lines 1, 2 and 4 subway; Lines 5 and 6 LRT; eight streetcar lines)",
         # OUTSIDE THE DEFAULT VIEW, like the other Canadian cities. Toronto is
         # the closest of the four to the framed region - its longitude sits
         # inside the US span and its latitude only just north of Boston's - so

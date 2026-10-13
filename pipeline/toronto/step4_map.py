@@ -24,6 +24,7 @@ stretch.
 Run:  python pipeline/toronto/step4_map.py
 """
 
+import json
 import sys
 from pathlib import Path
 
@@ -46,6 +47,10 @@ from pipeline.toronto.config import (  # noqa: E402
     RING_EDGES_METERS,
     RING_LABELS,
     STATIONS_CSV,
+    STREETCAR_COLOURS,
+    STREETCAR_LEGEND_NAMES,
+    STREETCAR_LINE_NAMES,
+    STREETCAR_SHAPES_JSON,
     TAXONOMY_SYSTEM,
 )
 
@@ -55,6 +60,17 @@ LINE_SPECS = {
           LINE_LABEL_ENDS.get(rid))
     for rid in LINE_NAMES
 }
+
+
+def streetcar_specs():
+    """The streetcar lines step 1 drew, each on the shapes it chose there. The
+    on-map label is "Streetcar 501"; the legend row adds the street."""
+    shapes = json.loads(STREETCAR_SHAPES_JSON.read_text(encoding="utf-8"))
+    if set(shapes) != set(STREETCAR_COLOURS):
+        sys.exit(f"step 1 drew streetcar lines {sorted(shapes)}; config colours "
+                 f"{sorted(STREETCAR_COLOURS)}. Re-run the colour search (config).")
+    return {key: (tuple(ids), STREETCAR_COLOURS[key], STREETCAR_LINE_NAMES[key], None)
+            for key, ids in shapes.items()}
 
 
 def city_boundary():
@@ -69,7 +85,7 @@ def city_boundary():
 
 def main():
     for path in (STATIONS_CSV, BUSINESSES_GEOCODED_CSV, GTFS_ZIP,
-                 CITY_BOUNDARY_ZIP):
+                 CITY_BOUNDARY_ZIP, STREETCAR_SHAPES_JSON):
         if not path.exists():
             sys.exit(f"Missing {path}. Run the earlier steps first "
                      f"(fetch_sources.py, then step1, step2, step3).")
@@ -78,11 +94,12 @@ def main():
         output_path=HEATMAP_HTML,
         map_title="Toronto TTC: commercial density around stations",
         city_name="Toronto",
-        system_name="TTC subway and LRT",
+        system_name="TTC subway, LRT and streetcars",
         stations=pd.read_csv(STATIONS_CSV),
         businesses=pd.read_csv(BUSINESSES_GEOCODED_CSV),
         taxonomy_system=TAXONOMY_SYSTEM,
-        lines=load_line_shapes(GTFS_ZIP, LINE_SPECS, "TTC"),
+        lines=load_line_shapes(GTFS_ZIP, {**LINE_SPECS, **streetcar_specs()}, "TTC"),
+        legend_names={k: STREETCAR_LEGEND_NAMES[k] for k in STREETCAR_COLOURS},
         crs_geographic=CRS_GEOGRAPHIC,
         crs_projected=CRS_PROJECTED,
         ring_edges_meters=RING_EDGES_METERS,

@@ -2,6 +2,62 @@
 
 Newest first. Cleanup folds these into `DECISIONS.md` at review time.
 
+### 2026-10-13 - Tram rescope: Toronto built with eight streetcar lines; 503, 507 and 508 not drawn (owner)
+
+- **Owner, 2026-10-13: "follow those rules (8 not 11) note the drops and
+  reasoning".** Drawn: 501 Queen, 504 King, 505 Dundas, 506 Carlton, 509
+  Harbourfront, 510 Spadina, 511 Bathurst, 512 St Clair, beside Lines 1,
+  2, 4, 5 and 6 (13 lines).
+- **The three drops and the rule behind each** (`docs/category_rules.md`,
+  "Station scope"):
+  - **503 Kingston Rd, 507 Long Branch: closed for works.** Every trip in
+    the feed to 2026-10-31 is a replacement bus, so they are drawn as the
+    timetable runs, which is not at all (Berlin's U6 Tegel branch,
+    Prague's Flora). 15 and 31 stops of their own are listed as closed
+    for works.
+  - **512 St Clair west of Lansdowne: closed for works.** The line is
+    drawn to Lansdowne; 10 stops west of it are listed.
+  - **508 Lake Shore: the 15-minute test.** 35 weekday peak trips, none
+    between 09:00 and 15:00 (Aarhus). Every stop it serves is on a drawn
+    line, so it adds no row.
+  - The seven night routes run their day routes' streets (owner's list).
+- **They come back by themselves being noticed:** `streetcars.py` compares
+  config's closed and infrequent sets with the feed and stops the build
+  when a line returns, closes or changes frequency.
+  `docs/recheck_calendar.md` carries the dates and what to do (owner,
+  same day: "put in the timeline into the timetable documentation of
+  future openings/updates i need to check"), with Mexico City's unopened
+  cable lines beside them.
+- **Stop selection** (`pipeline/toronto/streetcars.py`): replacement bus
+  trips left out by headsign; 506 stop ids grouped into 237 places by
+  distance (60 m, or 120 m when two stops share no line and direction; no
+  merge past 200 m; same-named stops first). 15 places are a drawn
+  rapid-transit station (within 150 m, or named for it within 400 m) and
+  add nothing. The rest take the sub-transit-line filters at half a mile.
+- **Judgment call, on a measurement:** filter 4 ("a stop shared by two or
+  more lines is kept") is narrowed to the stop that has a line its
+  neighbor lacks (a crossing, or the last shared stop before two lines
+  part). With every shared stop kept: 82 new stations; with the narrower
+  rule: 68, then 66 after two pairs closer than 150 m were merged.
+- **Result:** 108 rapid-transit + 66 streetcar = 174 stations; 156 stops
+  thinned, 56 closed for works, 2 outside the city. Storefronts in a ring
+  8,749 -> 11,803 of 18,215. Labels pass at 1024 and 375 wide, 13 labels.
+- **Colors: the project palette**, since the TTC gives every streetcar one
+  red. From the color search with Lines 1 to 6 held: 501 #608000, 504
+  #00A800, 505 #0050F8, 506 #886010, 509 #C870C8, 510 #F80028, 511
+  #A000F8, 512 #00A0C0; every one at least 45 from the pins and 35 from
+  every other line. **For the owner's eye; not yet approved.**
+- **Page text is a draft for the owner:** the Toronto page's four new
+  bullets, the Overview blurb, and the Stations paragraph and two list
+  additions in What Is Excluded.
+- **Left for landing (Cleanup):** `STATIONS_CSV` and
+  `STREETCAR_SHAPES_JSON` point at `processed/tram/` on this branch; drop
+  "tram" and re-run steps 1 and 4. `baseline.json` is not updated (step 1
+  emits six new figures), and the drift check was not run from the branch
+  because Toronto's step 2 writes the shared processed folder. Step 2 is
+  untouched, so no new privacy read is owed. `check_all.py`: 72 of 73, the
+  one failure Mexico City's search check, as agreed.
+
 ### 2026-10-13 - Tram rescope: Toronto's line list approved, then the feed shows three routes not running as streetcars (open, owner)
 
 - **Owner, 2026-10-13: "yes"** to Toronto's list: Lines 1, 2, 4, 5 and 6

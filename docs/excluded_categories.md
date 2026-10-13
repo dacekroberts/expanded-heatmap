@@ -126,14 +126,16 @@ page.
   underground station, every terminus and every interchange is kept. It applies
   to San Francisco's Muni Metro and F Market & Wharves, Philadelphia's
   trolleys, the Boston Green Line's surface branches, the trams of Amsterdam,
-  Rotterdam and Riga, Rome's tram 8, Hong Kong's Light Rail, and the Brussels
-  trams 10, 51 and 62.<!-- internal --> The reasoning is in
+  Rotterdam and Riga, Toronto's streetcars, Rome's tram 8, Hong Kong's Light
+  Rail, and the Brussels trams 10, 51 and 62.<!-- internal --> The reasoning is in
   `docs/sub_transit_line_filters.md`.<!-- /internal -->
 - **It is on a stretch that runs too rarely.** Light rail is drawn only where
   it runs at least every 15 minutes by day. Aarhus's Letbane runs every 7 to 8
   minutes on its city tramway but every 30 minutes on the two converted railway
   lines it continues onto, to Odder and to Grenaa, so their stops inside the
-  city are left out and those lines are not drawn.
+  city are left out and those lines are not drawn. Toronto's 508 Lake Shore
+  streetcar runs only at weekday rush hours and is not drawn either; every
+  stop it serves is on a line that is.
 
 **A thinned stop does not leave a hole in the map.** Stops are thinned to half a
 mile apart and the outermost ring reaches 0.6 miles, so the stations that were
@@ -1357,6 +1359,16 @@ history reaching back to 2005 rather than a snapshot - leaving 37,571 current
 licenses, of which 19,575 are storefronts. Every one of the 92 categories has
 a written verdict, and one never seen before stops the build rather than being
 silently left out.
+
+**Stations.** The TTC's subway Lines 1, 2 and 4, light rail Lines 5 and 6 and
+eight streetcar lines are drawn: 501, 504, 505, 506, 509, 510, 511 and 512.
+156 streetcar stops are thinned by the spacing filter to about one per half
+mile. Streetcars 503 and 507 run as replacement buses on every trip in the
+timetable to October 31, 2026, and 512 is a bus west of Lansdowne Avenue; 56
+stops on those stretches are listed as closed for works. Streetcar 508, which
+runs only at weekday rush hours, and the seven overnight streetcar routes are
+not drawn. Two Line 1 stations stand past the city limit. GO Transit is not
+drawn.
 
 **One row per license, and `Category` is single-valued** - which is Calgary's
 double-counting problem without Calgary's delimiter to resolve it. A restaurant

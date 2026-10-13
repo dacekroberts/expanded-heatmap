@@ -163,7 +163,7 @@ run on top of a metro network.
 - **Trams or light rail drawn:** San Diego, San Francisco (Muni Metro; the F Market &
   Wharves from 2026-09-27), Los Angeles,
   Philadelphia (trolleys), Boston (Green Line, Mattapan), Calgary, Edmonton, Toronto
-  (Lines 5 and 6 only), Mexico City (Tren Ligero), Guadalajara, Dublin (Luas),
+  (Lines 5 and 6; eight streetcar lines on the tram-rescope branch, 2026-10-13), Mexico City (Tren Ligero), Guadalajara, Dublin (Luas),
   Marseille, Toulouse, Lille, Oslo, Amsterdam, Rotterdam, Rio (VLT), Santos (VLT),
   Hong Kong (Light Rail), Riga (its trams are the whole network), Montréal (the
   REM, an automated light metro), Rome (tram 8, thinned), Madrid (Metro Ligero
@@ -175,7 +175,7 @@ run on top of a metro network.
   Midlands Metro), Edinburgh (Edinburgh Trams), Sheffield (Supertram; the Tram-Train to
   Rotherham not drawn), Nottingham (Regional) (NET) and Blackpool (Regional) (the
   Blackpool Tramway).
-- **Trams not drawn:** Hong Kong Tramways (it runs beside the Island Line), Toronto's 18 streetcar routes, Milan (17 routes), Barcelona,
+- **Trams not drawn:** Hong Kong Tramways (it runs beside the Island Line), Milan (17 routes), Barcelona,
   Paris (all but T3a and T3b; T2 and T9 are stubs), Prague, Rome (all but tram
   8), Madrid (Metro Ligero ML2 and ML3, stubs), Berlin (BVG's 22 lines, an overlay on the U- and S-Bahn: they would add
   518 stops for about 7 more points of storefronts in the rings; owner,
@@ -561,7 +561,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Calgary | CTrain Red, Blue (light rail) | — | Calgary Transit GTFS | City | 0 / 0 |
 | Edmonton | LRT Capital, Metro, Valley | 3 non-revenue stops | ETS GTFS; gate 3 exact | City | 0 / 0 |
 | Kitchener–Waterloo (Regional) | ION light rail (GRT route 301) | GO Transit's Kitchener line (suburban rail); ION's bus to Cambridge | OpenStreetMap route relations (the light-rail builds' source); gate 3 exact against the Region's ION Stops layer | Two cities (the Region's Kitchener and Waterloo polygons) | 0 / 0 |
-| Toronto | Subway 1, 2, 4 + LRT 5, 6 | 18 streetcar routes; GO | TTC GTFS (City CKAN) | City | 2 / 0 |
+| Toronto | Subway 1, 2, 4 + LRT 5, 6 + streetcars 501, 504, 505, 506, 509, 510, 511, 512 | Streetcars 503, 507 (closed for works), 508 (peaks only), 7 night routes; GO | TTC GTFS (City CKAN) | City | 2 / 156 |
 | Ottawa | O-Train Lines 1, 2 and 4 (light rail) | Buses, the Transitway | OpenStreetMap route relations (OC Transpo's GTFS licence unread); gate 3 exact against Wikipedia | City (its own wards) | 0 / 0 |
 | **Mexico** | | | | | |
 | Mexico City (Regional) | Metro, 12 lines + Tren Ligero + Cablebús Líneas 1-3 + Mexicable Líneas 1-2 | Tren Suburbano, El Insurgente (commuter spacing); Mexicable Línea 3 and Cablebús Líneas 4-6 (not open) | OpenStreetMap | CDMX and five State of México municipios | 0 / 0 |
