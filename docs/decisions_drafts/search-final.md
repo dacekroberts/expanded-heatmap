@@ -1,3 +1,99 @@
+### 2026-10-13 - The owner's 14 answers on the built cities and 15 on the new-language cities; fifteen cities read from in-memory dumps (branch search-final)
+
+- **The owner, to the 14 calls on the nine built cities: "1. yes. 2. drop.
+  3. yes drop. 4. drop. 5. drop taiwanese keep brussels. 6. keep. 7. drop
+  besides kitakyushu. 8. named keep, codenamed drop. 9. drop as a code
+  beside a type. 10. keep. 11. yes keep. 12.keep. 13.drop. 14. keep"** In
+  the order asked:
+  1. Named bridges stay as street rows; a generic bridge word alone is
+     dropped.
+  2. Motorway ramps and interchange descriptions are dropped.
+  3. Lanes named for their mode (bus, scooter, cycle) and generic sidewalk
+     names are dropped.
+  4. Parks named by a planning or stage code are dropped.
+  5. Family compounds with no article are dropped in the Taiwanese cities;
+     Brussels' châteaux are kept.
+  6. Housing estates tagged as places are kept.
+  7. A residents' amenity inside a gated estate tagged a park is dropped;
+     Kitakyushu's estate parks are kept.
+  8. A named private street is kept; a code-named one is dropped.
+  9. Brussels' campus roads that are a number or letter beside a type are
+     dropped, as a code beside a type.
+  10. Kitakyushu's official municipal road codes are kept.
+  11. Shopping galleries that are public passages are kept.
+  12. Geneva's bracketed second names are kept.
+  13. Brasília's "Acesso ..." names are dropped.
+  14. The three single rows asked about are kept.
+  Applied in 8b3422eb and rebuilt in e8843191.
+- **One departure, told to the owner:** Monterrey's 17 pending "ramp" names
+  are not dropped. The class holds real avenue names ("Calzada San Pedro"),
+  and a drop by name takes the whole avenue.
+- **Fifteen cities with no index were read from in-memory dumps** (Danish,
+  Norwegian, Swedish, Latvian, Romanian, Italian, Greek): places on the top
+  model, streets on sonnet, by `READ_DUMP_BRIEF.md` in the session
+  scratchpad. 589 clear drops by id (210e71d2), then the pending classes the
+  14 answers already cover (802765bc): Stockholm 125 ramp names, Rome 27
+  ramps and mode lanes, Florence 10 mode lanes, Bergen 42 and Oslo 25 cabin
+  ruins, Göteborg 5 code-named private ways.
+- **Oslo's farms: 57 dropped, not 58.** Tøyen hovedgård (way/10501503)
+  carries the museum's web page and stays; so does Sørli visiting farm.
+- **The owner, to the 15 calls on those cities: every recommendation
+  approved.** In the order asked, with what was written:
+  1. Swedish -gård stays as an ending; Göteborg's 31 estate courtyard paths
+     and campus yards are dropped by id (94 ways).
+  2. Oslo's historic farms and crofts beyond "gård" with no article: 88 of
+     102 dropped, 14 kept on a visiting tag (website, opening hours,
+     tourism, amenity, museum, fee or an article).
+  3. Sets sharing one article are dropped: Oslo's 36 numbered sculpture
+     groups, Göteborg's 9 planet-walk sculptures.
+  4. Rides dropped (Stockholm 4, Göteborg 7); Skansen's contents kept only
+     with a Wikipedia article (22 of 30 dropped, 8 kept). Göteborg's 2 zoo
+     enclosures have no article and go the same way.
+  5. Florence's 213 libraries with no article are dropped; 17 with one stay.
+  6. Churches and halls named only by their denomination are dropped:
+     Bucharest 9, Cluj-Napoca 9, Göteborg 5, Rome 5. Bergen's 36 one-word
+     terrain names stay. Held: Cluj way/276967051, whose real name sits in
+     `alt_name` (a name repair, not a drop).
+  7. Rome's segmented monuments keep one row each: 44 segments dropped
+     (Aurelian Walls 26, Acquedotto Felice 8, Mura gianicolensi 4,
+     Acquedotto dei Sette Bassi 2, Parco delle Sabine 4).
+  8. Ostia Antica's 22 plot-code names and 14 finds named by location are
+     dropped; the 14 university departments stay.
+  9. A mall's, estate's, hospital's or campus's road with a street word is
+     kept as a named private street. A row that is only the site's own name
+     is dropped when minor ways alone carry it: 3 names (Copenhagen
+     "Glostrup Shoppingcenter" and "Tinghuset", Bergen's war-cemetery
+     footway). Measured before writing: the other 22 such names sit on
+     residential or larger ways (Oslo "Romsås Senter", Copenhagen
+     "Frankrigshusene", Odense "Cortex Park"), so they read as the street's
+     own name and stay.
+  10. Numbered roads on larger ways stay (Oslo "Vei 1872" and 7 more,
+      Copenhagen "Vej 4" to "Vej 10").
+  11. Named tunnels stay, as bridges (Bergen 47, Stockholm 27, Geneva 9).
+  12. Cluj-Napoca's 14 "Palatul" buildings and Florence's 14 private
+      historic buildings with an article stay.
+  13. Stations not for passengers are dropped: Riga 4, Bucharest 4,
+      Daugavpils 1, Florence 1. The same class in two cities not named in
+      the question went with it: Geneva's 2 goods yards and Cluj-Napoca's
+      tram depot stop.
+  14. Named sections of public gardens stay.
+  15. Riga's children's railway (relation/13159520), a dead alignment with
+      no article, is dropped.
+- **Still held, no ruling asked yet:** Oslo's 14 statues carrying their
+  subject's article and 4 shielings; Rome's 23 other bare type words on
+  ruins; Cluj-Napoca's 4 type-phrase names; Copenhagen's 9 area names on
+  Christiania's paths and 2 allotment section names; Guadalajara's 273
+  address-number names, typo and cut names; Kitakyushu's Onga River rows;
+  Bucharest's "Prelugirea Ghencea".
+- **Waiting on shared code, not on a call:** art and memorials on a
+  Wikidata entry alone (Geneva 112, Thessaloniki 83, Copenhagen 65,
+  Stockholm 49, Rome 21) wait for Cleanup's article rule; Cluj-Napoca's 13
+  tram stops with " Tram" glued on wait for a name repair.
+
+Findings 37 to 44 went to Cleanup by message at 802765bc; each one is in
+the "Shared-code findings" section of its language's
+`docs/decisions_drafts/search-lang-<code>.md`.
+
 ### 2026-10-13 - Seven languages ruled; Monterrey's colonias kept; eleven cities rebuilt on master's second rule batch (branch search-final)
 
 - **The owner, to the eleven language calls: "1. yes 2. yes. 3. yes. 4.

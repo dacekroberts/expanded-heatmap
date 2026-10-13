@@ -180,6 +180,8 @@ PLACE_REVIEWED = {
 }
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "relation/4013107": "a freight yard, depot or operating point, not a passenger station (owner, 2026-10-13)",
+    "node/12837201056": "a freight yard, depot or operating point, not a passenger station (owner, 2026-10-13)",
     "node/2406735664": "a business website name tagged a place of worship",
     "node/10848739906": "a code name duplicating the church 23 m away",
     "way/1444049097": "a description standing in for a name",

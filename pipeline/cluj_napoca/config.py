@@ -222,6 +222,16 @@ PLACE_FOLD = None
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "way/278312772": "a denomination or its hall type as the whole name (owner, 2026-10-13)",
+    "way/276704844": "a denomination or its hall type as the whole name (owner, 2026-10-13)",
+    "way/275161895": "a denomination or its hall type as the whole name (owner, 2026-10-13)",
+    "way/207452268": "a denomination or its hall type as the whole name (owner, 2026-10-13)",
+    "node/11491274868": "a denomination or its hall type as the whole name (owner, 2026-10-13)",
+    "way/283161804": "a denomination or its hall type as the whole name (owner, 2026-10-13)",
+    "way/258878037": "a denomination or its hall type as the whole name (owner, 2026-10-13)",
+    "node/14270671517": "a denomination or its hall type as the whole name (owner, 2026-10-13)",
+    "node/8257918819": "a denomination or its hall type as the whole name (owner, 2026-10-13)",
+    "node/9346436677": "a freight yard, depot or operating point, not a passenger station (owner, 2026-10-13)",
     "way/669521911": "a duplicate place row, the node carries the same name",
     "way/669535695": "a duplicate place row, the node carries the same name",
     "node/4494264091": "a duplicate row, the same church as the way beside it",

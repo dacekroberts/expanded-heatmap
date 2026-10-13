@@ -203,6 +203,11 @@ PLACE_FOLD = None
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "relation/13159520": "a dead railway alignment with no article",
+    "way/791167448": "a freight yard, depot or operating point, not a passenger station (owner, 2026-10-13)",
+    "node/2790112177": "a freight yard, depot or operating point, not a passenger station (owner, 2026-10-13)",
+    "node/6391872577": "a freight yard, depot or operating point, not a passenger station (owner, 2026-10-13)",
+    "node/9156040654": "a freight yard, depot or operating point, not a passenger station (owner, 2026-10-13)",
     "node/13901096192": "a direction label on a stop (alighting only), duplicate of the stop beside it",
     "node/976576898": "a duplicate row, the weaker of two halt nodes of one name 150 m apart",
     "node/1722395621": "a duplicate row, the locality node beside the neighborhood of the same name",

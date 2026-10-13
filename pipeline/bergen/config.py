@@ -162,6 +162,7 @@ PLACE_FOLD = None
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "way/836616889": "a mall's, estate's or facility's own name on its paths, not a street (owner, 2026-10-13)",
     "way/1527765183": "a house or cabin ruin with no article: a home until visiting is shown (owner, 2026-10-13)",
     "way/1527782252": "a house or cabin ruin with no article: a home until visiting is shown (owner, 2026-10-13)",
     "way/1529682034": "a house or cabin ruin with no article: a home until visiting is shown (owner, 2026-10-13)",

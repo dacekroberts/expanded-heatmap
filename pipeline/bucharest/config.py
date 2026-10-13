@@ -224,6 +224,19 @@ PLACE_FOLD = None
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "node/10562338619": "a denomination or its hall type as the whole name (owner, 2026-10-13)",
+    "way/225644835": "a denomination or its hall type as the whole name (owner, 2026-10-13)",
+    "node/9048997742": "a denomination or its hall type as the whole name (owner, 2026-10-13)",
+    "node/899633232": "a denomination or its hall type as the whole name (owner, 2026-10-13)",
+    "way/452907275": "a denomination or its hall type as the whole name (owner, 2026-10-13)",
+    "way/308764455": "a denomination or its hall type as the whole name (owner, 2026-10-13)",
+    "way/582491064": "a denomination or its hall type as the whole name (owner, 2026-10-13)",
+    "way/227702630": "a denomination or its hall type as the whole name (owner, 2026-10-13)",
+    "way/241827568": "a denomination or its hall type as the whole name (owner, 2026-10-13)",
+    "node/8693785589": "a freight yard, depot or operating point, not a passenger station (owner, 2026-10-13)",
+    "node/12733150278": "a freight yard, depot or operating point, not a passenger station (owner, 2026-10-13)",
+    "node/2126282888": "a freight yard, depot or operating point, not a passenger station (owner, 2026-10-13)",
+    "node/6536576824": "a freight yard, depot or operating point, not a passenger station (owner, 2026-10-13)",
     "node/3480025393": "a bus station in as a station, no rail tag",
     "way/242467499": "a developer's estate tagged a neighbourhood, the plural of the home word",
     "node/8864235867": "a duplicate row, the same suburb is way/240575327 317 m away",

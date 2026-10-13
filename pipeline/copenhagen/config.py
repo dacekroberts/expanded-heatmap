@@ -313,6 +313,11 @@ PLACE_FOLD = None
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "way/118946532": "a mall's, estate's or facility's own name on its paths, not a street (owner, 2026-10-13)",
+    "way/108175582": "a mall's, estate's or facility's own name on its paths, not a street (owner, 2026-10-13)",
+    "way/116962121": "a mall's, estate's or facility's own name on its paths, not a street (owner, 2026-10-13)",
+    "way/943619169": "a mall's, estate's or facility's own name on its paths, not a street (owner, 2026-10-13)",
+    "way/943619172": "a mall's, estate's or facility's own name on its paths, not a street (owner, 2026-10-13)",
     "relation/27542": "building numbers standing in for a name",
     "way/145618061": "a youth school tagged a park",
     "way/162383253": "a scout group tagged a park",
