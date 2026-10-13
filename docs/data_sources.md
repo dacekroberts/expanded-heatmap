@@ -461,6 +461,29 @@ sample batches after it); the other maps follow in the rollout's waves.<!-- /int
 - **`LICENSE` carves the index files out** of the MIT and reserved terms, as it
   does for Fukui's CC BY-SA files (§4.4(a) forbids dual licensing; owner,
   2026-10-07).
+- **A second route to the same OpenStreetMap data: regional extracts from
+  download.geofabrik.de.** For a city fetched this way
+  (`pipeline/place_extract_fetch.py`; the city's `provenance.json` names the
+  host and the file), the project downloads one regional extract
+  (`<region>-YYMMDD.osm.pbf`, the smallest region of the server's
+  `index-v1.json` that holds the city) and filters it on its own machine into
+  the same three caches the Overpass route writes; the index built from them
+  is the same Derivative Database under the same terms and notices. The area
+  lookup (`scripts/place_search_area_lookup.py --source extract`) reads
+  boundary tags from the same files. **PERMITTED WITH CONDITIONS**
+  (<!-- internal -->`licence-read` 2026-10-13; <!-- /internal -->ODbL 1.0, stated on the server's own pages,
+  read 2026-10-13): the data is OpenStreetMap's, credited "© OpenStreetMap
+  contributors" as above; **no credit to Geofabrik is required**, and the
+  server publishes no written usage policy. **What must be DONE** is its
+  "Download responsibly!" request, which `pipeline/osm_extract.py` holds in
+  code: the smallest region that contains the city; never the same file
+  twice (a dated file already held is used, and a ledger refuses one that
+  was downloaded and since removed); the `-latest` name resolved to its
+  dated file through the server's redirect; one download at a time; only the
+  public server, never `osm-internal.download.geofabrik.de` (extracts with
+  user metadata, behind an OSM login). A large region wanted more often than
+  weekly is to be brought forward with the server's diffs rather than
+  downloaded whole again, which this project does not yet do.
 
 ## Commitment: removal requests are honored, not argued
 

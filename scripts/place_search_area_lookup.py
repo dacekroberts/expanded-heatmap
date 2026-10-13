@@ -2,6 +2,7 @@
 each map draws, by the project's scope rule. One light Overpass query a city.
 
     python scripts/place_search_area_lookup.py PLAN_JSON [CITY ...] --host MIRROR [--wait MIN] [--report FILE] [--stop-after N]
+    python scripts/place_search_area_lookup.py PLAN_JSON [CITY ...] --source extract [--report FILE] [--max-mb N]
     python scripts/place_search_area_lookup.py PLAN_JSON [CITY ...] --dry-run
     python scripts/place_search_area_lookup.py --selftest
 
@@ -21,6 +22,21 @@ PLACE_MAX_AGE_DAYS). The request goes through pipeline/osm.py's fetch, pinned
 to --host, while holding that mirror's FetchLock
 (pipeline/place_index_fetch.py), as a place fetch does: one query in flight
 per mirror on this machine.
+
+THE SECOND SOURCE, --source extract (owner, 2026-10-13): the same elements
+with no Overpass request, read from a regional extract on this machine by
+pipeline/osm_extract.py's boundaries_holding(). The region is the smallest
+one of the download server's index whose polygon holds ALL the city's
+stations; a city whose stations span more than one region is left for a
+person, never answered from a country-sized file. A held extract of that
+region, of any date, is used with no request; otherwise one file is
+downloaded under osm_extract.download_extract's rules (never the same file
+twice, one download at a time on this machine, no larger than --max-mb). The
+cache has the same name and shape, with the download host and the extract
+file as its source, so the resolver below reads either. A relation the
+extract holds only part of (a country or state cut at the region's edge)
+is not in the answer; the cache lists those under "_extract". --host is for
+the overpass source only, and overpass stays the default.
 
 CHOOSING THE ADMIN LEVEL: BY PRECEDENT, NEVER BY GUESS. The cities that
 already have search (a config with PLACE_AREA) each used relations of some
@@ -90,6 +106,12 @@ REQUEST_DEADLINE_S = 300
 # uses to set a mirror aside (scripts/place_search_night.py).
 STOP_AFTER = 3
 CACHE_GLOB = "osm_place_area_lookup_*.json"
+SOURCES = ("overpass", "extract")
+# The largest regional file the extract source downloads without a person
+# (--max-mb), and the age of a held extract it accepts: any. Boundaries are
+# stable, the reason an Overpass answer of any date is accepted above.
+EXTRACT_MAX_MB = 800
+EXTRACT_ANY_AGE_DAYS = 36500
 # The area id of a relation is this plus its id (config.PLACE_AREA).
 AREA_BASE = 3600000000
 # Config attributes that NAME the municipality the map is cut to, compared
@@ -130,12 +152,17 @@ def _norm(text):
     return " ".join("".join(ch if ch.isalnum() else " " for ch in text).split())
 
 
+def distinct_points(stations):
+    """Each distinct station point as "lat,lon" at 5 decimals, in order."""
+    return list(dict.fromkeys(f"{lat:.5f},{lon:.5f}" for _, lat, lon in stations))
+
+
 def build_query(stations):
     """The one query of a city: the areas holding each distinct station
     point, gathered into one set, then the administrative boundary relations
     those areas were made from, tags only. Points are rounded to 5 decimals
     (about a meter), so two platforms of one station ask once."""
-    points = list(dict.fromkeys(f"{lat:.5f},{lon:.5f}" for _, lat, lon in stations))
+    points = distinct_points(stations)
     lines = [f"[out:json][timeout:{QUERY_TIMEOUT_S}];"]
     for i, point in enumerate(points):
         if i == 0:
@@ -333,9 +360,12 @@ def choose(country, relations, table, names, codes, own):
     return at_level, level, None, how
 
 
-def cache_dir(root, city, config):
+def cache_dir(root, city, config, cache_root=None):
     """Where a city's raw downloads live: its config's DATA_RAW, else
-    data/<city>/raw."""
+    data/<city>/raw. With --cache-root, <that folder>/<city> instead, for a
+    trial that must leave the city's own folder as it was."""
+    if cache_root is not None:
+        return Path(cache_root, city)
     raw = getattr(config, "DATA_RAW", None)
     return Path(raw) if isinstance(raw, Path) else Path(root, "data", city, "raw")
 
@@ -363,13 +393,58 @@ def real_fetch(city, query, cache_path, host, wait_min):
     return elements
 
 
+class LeftForPerson(Exception):
+    """The extract source cannot answer this city by its own rules."""
+
+
+def real_extract(city, stations, query, cache_path, *, extract_root=None, max_mb=EXTRACT_MAX_MB,
+                 out=print):
+    """The extract source's answer for one city: choose the region, hold or
+    download its extract, read the boundaries holding each station point,
+    write the cache and return the elements. Raises LeftForPerson when no
+    single region holds every station, SystemExit when a download is
+    refused or the run is offline, RuntimeError on an empty answer."""
+    import time
+    from shapely.geometry import MultiPoint
+    from pipeline import osm_extract
+    extract_root = Path(extract_root) if extract_root else ROOT / "data" / "_osm_extracts"
+    points = [tuple(float(v) for v in p.split(",")) for p in distinct_points(stations)]
+    index = osm_extract.load_index(extract_root / "index-v1.json")
+    found = osm_extract.regions_covering(index, MultiPoint([(lon, lat) for lat, lon in points]))
+    if not found:
+        raise LeftForPerson("no region of the download server's index holds every station")
+    region = found[0]
+    if osm_extract.has_subregions(index, region):
+        raise LeftForPerson(f"its stations span more than one extract region (the smallest holding "
+                            f"them all is {region['properties']['id']}, which has subregions)")
+    pbf = osm_extract.download_extract(region, extract_root, max_age_days=EXTRACT_ANY_AGE_DAYS,
+                                       max_bytes=max_mb * 1024 * 1024, out=out)
+    start = time.time()
+    elements, stats = osm_extract.boundaries_holding(pbf, points)
+    if not elements:
+        raise RuntimeError(f"no administrative boundary in {pbf.name} holds a station of {city}")
+    payload = {"osm3s": {"timestamp_osm_base": osm_extract.extract_timestamp(pbf),
+                         "copyright": "The data included in this document is from www.openstreetmap.org. "
+                                      "The data is made available under ODbL."},
+               "elements": elements,
+               "_fetched_from": f"{osm_extract.DOWNLOAD_HOST} ({pbf.name}, filtered on this machine)",
+               "_query": query,
+               "_extract": {"file": pbf.name, "region": region["properties"]["id"],
+                            "relations_read": stats["relations"], "not_whole": stats["not_whole"],
+                            "seconds": round(time.time() - start, 1)}}
+    cache_path.parent.mkdir(parents=True, exist_ok=True)
+    cache_path.write_bytes(json.dumps(payload, ensure_ascii=False).encode("utf-8"))
+    return elements
+
+
 def _slim(relations):
     """Relations as the report carries them: id, name and level, no tags."""
     return [{"id": r["id"], "name": r["name"], "level": r["level"]} for r in relations]
 
 
 def lookup_city(city, *, root, listing, table, host, wait_min, dry_run, date,
-                load_config, stations_of, fetch):
+                load_config, stations_of, fetch, source="overpass", extract=real_extract,
+                cache_root=None):
     """One city's report entry. status is "resolved", "unresolved" (a
     person's call, with the candidates), "skipped" (nothing to ask with),
     "failed" (the request) or "dry run"."""
@@ -395,14 +470,17 @@ def lookup_city(city, *, root, listing, table, host, wait_min, dry_run, date,
         entry["reason"] = "the stations file holds no station"
         return entry
     entry["stations"] = len(stations)
-    folder = cache_dir(root, city, config)
+    folder = cache_dir(root, city, config, cache_root)
     cached = sorted(folder.glob(CACHE_GLOB)) if folder.is_dir() else []
+    not_whole = []
     query = build_query(stations)
     if cached:
         entry["from_cache"] = True
         entry["cache"] = str(cached[-1])
         try:
-            elements = _read_json(cached[-1])["elements"]
+            payload = _read_json(cached[-1])
+            elements = payload["elements"]
+            not_whole = (payload.get("_extract") or {}).get("not_whole") or []
         except (OSError, ValueError, KeyError, UnicodeDecodeError) as exc:
             entry.update(status="failed", reason=f"the cached answer {cached[-1].name} cannot be "
                                                  f"read ({exc}): remove it to ask again")
@@ -414,17 +492,30 @@ def lookup_city(city, *, root, listing, table, host, wait_min, dry_run, date,
         path = folder / CACHE_GLOB.replace("*", date)
         entry["cache"] = str(path)
         try:
-            elements = fetch(city, query, path, host, wait_min)
+            if source == "extract":
+                elements = extract(city, stations, query, path)
+                not_whole = (_read_json(path).get("_extract") or {}).get("not_whole") or []
+            else:
+                elements = fetch(city, query, path, host, wait_min)
         except KeyboardInterrupt:
             raise
+        except LeftForPerson as exc:
+            entry.update(status="unresolved", reason=str(exc))
+            return entry
         except BaseException as exc:
-            entry.update(status="failed", reason=f"lookup failed on {host}: {exc}")
+            where = "from an extract" if source == "extract" else f"on {host}"
+            entry.update(status="failed", reason=f"lookup failed {where}: {exc}")
             return entry
     relations = relations_of(elements)
     names, codes, own = identity(config, (listing.get(city) or (None, None))[1])
     chosen, level, reason, how = choose(entry["country"], relations, table, names, codes, own)
     entry["level"] = level
     entry["candidates"] = _slim(relations)
+    cut = [r for r in not_whole if level is not None and str(r.get("admin_level")) == str(level)]
+    if chosen is None and cut:
+        # The extract held only part of these: one of them may be the answer.
+        reason += (f"; {len(cut)} relation(s) at that level are not whole in the extract ("
+                   + ", ".join(f"{r.get('name')} ({r['id']})" for r in cut[:5]) + ")")
     if chosen is None:
         entry.update(status="unresolved", reason=reason,
                      relations=_slim([r for r in relations if level is not None and r["level"] == level]))
@@ -449,7 +540,8 @@ def apply_to_plan(plan, entry, date):
 
 def run(plan_path, cities, *, host=None, wait_min=0, dry_run=False, report_path=None,
         stop_after=STOP_AFTER, root=ROOT, date=None, load_config=real_load,
-        stations_of=real_stations, fetch=real_fetch, out=print):
+        stations_of=real_stations, fetch=real_fetch, out=print, source="overpass",
+        extract=real_extract, cache_root=None):
     """Look up the named cities (default: every plan city with no relations)
     and return (exit code, report). The plan and the report are rewritten
     after every city, so a run that is stopped keeps what it had."""
@@ -464,7 +556,9 @@ def run(plan_path, cities, *, host=None, wait_min=0, dry_run=False, report_path=
     date = date or datetime.date.today().isoformat()
     listing = city_listing(root)
     table, unread = precedents(root, listing, load_config)
-    report = {"plan": str(plan_path), "host": host, "date": date, "dry_run": dry_run,
+    if source == "extract":
+        host = "download.geofabrik.de"
+    report = {"plan": str(plan_path), "host": host, "source": source, "date": date, "dry_run": dry_run,
               "precedents": {c: {str(lv): sorted(names) for lv, names in sorted(levels.items())}
                              for c, levels in sorted(table.items())},
               "precedents_not_read": [{"city": c, "why": w} for c, w in unread],
@@ -502,7 +596,8 @@ def run(plan_path, cities, *, host=None, wait_min=0, dry_run=False, report_path=
         else:
             entry = lookup_city(city, root=root, listing=listing, table=table, host=host,
                                 wait_min=wait_min, dry_run=dry_run, date=date,
-                                load_config=load_config, stations_of=stations_of, fetch=fetch)
+                                load_config=load_config, stations_of=stations_of, fetch=fetch,
+                                source=source, extract=extract, cache_root=cache_root)
             if entry["status"] == "failed" and not entry.get("from_cache"):
                 failures_in_a_row += 1
                 gave_up = failures_in_a_row >= stop_after
@@ -543,6 +638,13 @@ def main(argv=None, **effects):
                     help="default: every city of the plan with no relations")
     ap.add_argument("--host", metavar="MIRROR", choices=MIRRORS,
                     help="the one Overpass mirror asked: " + " or ".join(MIRRORS))
+    ap.add_argument("--source", choices=SOURCES, default="overpass",
+                    help="where the boundaries come from: an Overpass mirror (the default) or a "
+                         "regional extract read on this machine, with no Overpass request")
+    ap.add_argument("--max-mb", type=int, default=EXTRACT_MAX_MB, metavar="N",
+                    help=f"extract source: the largest regional file downloaded (default {EXTRACT_MAX_MB})")
+    ap.add_argument("--cache-root", metavar="DIR",
+                    help="read and write each city's answer under DIR/<city> instead of its raw folder")
     ap.add_argument("--wait", type=int, default=0, metavar="MIN",
                     help="minutes to wait for the mirror's lock before a city counts as failed")
     ap.add_argument("--report", metavar="FILE", help="write the JSON report here")
@@ -551,13 +653,19 @@ def main(argv=None, **effects):
     ap.add_argument("--dry-run", action="store_true",
                     help="print each city's query; no request, nothing written")
     args = ap.parse_args(argv)
-    if not args.dry_run and not args.host:
+    if args.source == "overpass" and not args.dry_run and not args.host:
         ap.error("--host MIRROR is required: a lookup is pinned to one mirror")
+    if args.source == "extract" and args.host:
+        ap.error("--host names an Overpass mirror: it is not used with --source extract")
+    if args.source == "extract" and "extract" not in effects:
+        import functools
+        effects["extract"] = functools.partial(real_extract, max_mb=args.max_mb)
     if args.stop_after < 1:
         ap.error("--stop-after must be 1 or more")
     code, _ = run(args.plan, args.city, host=args.host, wait_min=args.wait,
                   dry_run=args.dry_run, report_path=args.report,
-                  stop_after=args.stop_after, **effects)
+                  stop_after=args.stop_after, source=args.source, cache_root=args.cache_root,
+                  **effects)
     return code
 
 
@@ -756,6 +864,103 @@ def selftest():
         lines = []
         report("a plan that cannot be read stops the run with exit 2",
                run(root / "absent.json", [], host=MIRRORS[0], root=root, out=lines.append)[0] == 2)
+
+        # THE EXTRACT SOURCE, on a synthetic extract: a9's two stations sit
+        # in one municipality, in a county, in a region with no subregions.
+        import functools
+        from pipeline import osm_extract
+        city("a9", "Alphaland", "A Nine")
+        city("a10", "Alphaland", "A Ten")
+        write(root / "data" / "a10" / "stations.csv", "station,lat,lon\nOne,10.0,20.0\nFar,10.0,40.0\n")
+        write(root / "app" / "cities.py", "CITIES = " + json.dumps(listing_rows, indent=4) + "\n")
+        ex_root = root / "extracts"
+        square = lambda w, s, e, n: [[[w, s], [e, s], [e, n], [w, n], [w, s]]]  # noqa: E731
+        host_url = "https://download.geofabrik.de/"
+        write(ex_root / "index-v1.json", json.dumps({"features": [
+            {"properties": {"id": "alphaland", "urls": {"pbf": host_url + "alphaland-latest.osm.pbf"}},
+             "geometry": {"type": "Polygon", "coordinates": square(0, 0, 60, 30)}},
+            {"properties": {"id": "west", "parent": "alphaland", "urls": {"pbf": host_url + "alphaland/west-latest.osm.pbf"}},
+             "geometry": {"type": "Polygon", "coordinates": square(0, 0, 30, 30)}},
+            {"properties": {"id": "east", "parent": "alphaland", "urls": {"pbf": host_url + "alphaland/east-latest.osm.pbf"}},
+             "geometry": {"type": "Polygon", "coordinates": square(30, 0, 60, 30)}}]}))
+        ex_nodes = {i + 1: (lat, lon, {}) for i, (lat, lon) in enumerate(
+            [(9, 19), (11, 19), (11, 21), (9, 21), (5, 15), (15, 15), (15, 25), (5, 25),
+             (10.4, 20.4), (10.6, 20.4), (10.6, 20.6), (10.4, 20.6),
+             (20, 10), (22, 10), (22, 12), (20, 12), (22, 14), (20, 14),
+             (19, 9), (23, 9), (23, 15), (19, 15)])}
+        ex_ways = {1: ([1, 2, 3, 4, 1], {}), 2: ([5, 6, 7, 8, 5], {}), 3: ([9, 10, 11, 12, 9], {}),
+                   4: ([13, 14, 15, 16, 13], {}), 5: ([16, 15, 17, 18, 16], {}), 6: ([19, 20, 21, 22, 19], {})}
+        admin = {"type": "boundary", "boundary": "administrative"}
+        # 904 is a city whose relation lost its boundary and admin_level tags
+        # (Buffalo's relation 175031, version 49, 2026-10-11); 905 is the
+        # tagged municipality next to it.
+        ex_rels = {901: ([("w", 1, "outer"), ("w", 3, "inner")], dict(admin, admin_level="8", name="Holed Town")),
+                   902: ([("w", 3, "outer")], dict(admin, admin_level="8", name="A Nine")),
+                   903: ([("w", 2, "outer")], dict(admin, admin_level="6", name="A Nine County")),
+                   904: ([("w", 4, "outer")], {"type": "boundary", "name": "A Twelve"}),
+                   905: ([("w", 5, "outer")], dict(admin, admin_level="8", name="Next Door")),
+                   906: ([("w", 6, "outer")], dict(admin, admin_level="6", name="Twelve County"))}
+        (ex_root / "west").mkdir(parents=True)
+        osm_extract.write_test_extract(ex_root / "west" / "west-260101.osm.pbf", ex_nodes, ex_ways, ex_rels)
+        local = functools.partial(real_extract, extract_root=ex_root, out=lambda text: None)
+        city("a11", "Alphaland", "A Eleven")
+        write(root / "data" / "a11" / "stations.csv", "station,lat,lon\nIn the hole,10.5,20.5\n")
+        city("a12", "Alphaland", "A Twelve")
+        write(root / "data" / "a12" / "stations.csv", "station,lat,lon\nHome,21.0,11.0\nAway,21.0,13.0\n")
+        city("a13", "Alphaland", "A Twelve")
+        write(root / "data" / "a13" / "stations.csv", "station,lat,lon\nHome,21.0,11.0\n")
+        write(root / "app" / "cities.py", "CITIES = " + json.dumps(listing_rows, indent=4) + "\n")
+        code, by, text, asked = go(["a9", "a10", "a11", "a12", "a13"], source="extract", extract=local)
+        report("extract source: a city relation with no boundary tag is not offered, and the city is then "
+               "left for a person: never resolved to the tagged neighbor",
+               by["a12"]["status"] == "unresolved" and "name mismatch" in by["a12"]["reason"]
+               and {c["id"] for c in by["a12"]["candidates"]} == {905, 906}
+               and by["a13"]["status"] == "unresolved"
+               and "no relation at admin_level 8" in by["a13"]["reason"]
+               and _read_json(root / "plan.json")["cities"]["a12"]["relations"] == [])
+        plan = _read_json(root / "plan.json")
+        cache9 = sorted((root / "data" / "a9" / "raw").glob(CACHE_GLOB))
+        saved9 = _read_json(cache9[0]) if cache9 else {}
+        report("extract source: a station in a hole is not in that relation, and nested levels both come back",
+               {c["id"] for c in by["a9"]["candidates"]} == {901, 902, 903}
+               and {c["id"] for c in by["a11"]["candidates"]} == {902, 903}
+               and {e["id"] for e in saved9.get("elements", [])} == {901, 902, 903})
+        report("extract source: the resolver fills the plan from it as from an Overpass answer, no mirror asked",
+               by["a9"]["status"] == "resolved" and plan["cities"]["a9"]["relations"] == [901, 902]
+               and asked.calls == [] and code == 0)
+        report("extract source: the cache has the Overpass cache's name and shape and names host and file",
+               len(cache9) == 1 and cache9[0].name == "osm_place_area_lookup_2026-10-13.json"
+               and saved9["_fetched_from"] == "download.geofabrik.de (west-260101.osm.pbf, filtered on this machine)"
+               and saved9["_query"] == build_query([("One", 10.00001, 20.00001), ("Two", 10.5, 20.5)])
+               and saved9["osm3s"]["timestamp_osm_base"] == "2026-01-01T00:00:00Z"
+               and set(saved9["elements"][0]) == {"type", "id", "tags"})
+        report("extract source: a city whose stations span two regions is left for a person, nothing cached",
+               by["a10"]["status"] == "unresolved" and "span more than one extract region" in by["a10"]["reason"]
+               and plan["cities"]["a10"]["relations"] == []
+               and not list((root / "data" / "a10" / "raw").glob(CACHE_GLOB)))
+
+        def never(*args, **kwargs):
+            raise AssertionError("asked twice")
+        code, by, text, asked = go(["a9"], extract=never)
+        report("the cache an extract wrote is read back by the resolver unchanged, by either source, never asked twice",
+               by["a9"]["status"] == "resolved" and by["a9"]["from_cache"] and asked.calls == []
+               and [r["id"] for r in by["a9"]["relations"]] == [901, 902])
+        code, by, text, _ = go(["a9"], source="extract", extract=local, cache_root=root / "trial")
+        report("--cache-root keeps a trial's answer out of the city's own folder",
+               by["a9"]["status"] == "resolved" and not by["a9"]["from_cache"]
+               and len(list((root / "trial" / "a9").glob(CACHE_GLOB))) == 1 and len(cache9) == 1)
+        errors = []
+        for argv in (["plan.json"], ["plan.json", "--source", "extract", "--host", MIRRORS[0]]):
+            try:
+                import contextlib
+                import io
+                with contextlib.redirect_stderr(io.StringIO()):
+                    main(argv, root=root)
+                errors.append(False)
+            except SystemExit as exc:
+                errors.append(exc.code == 2)
+        report("--host is required for the overpass source and refused with the extract source",
+               errors == [True, True])
 
     query = build_query([("A", 1.0, 2.0), ("A again", 1.000001, 2.000001), ("B", 3.0, 4.0)])
     report("the query asks each distinct station point once, tags only, no geometry",
