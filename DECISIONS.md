@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**95 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**96 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -32,6 +32,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Place search: where readers see what search leaves out; the rollout's own worktree; the id side file told to transit-globe (owner)](#2026-10-13---place-search-where-readers-see-what-search-leaves-out-the-rollouts-own-worktree-the-id-side-file-told-to-transit-globe-owner)
 - [Place search: an extract route beside Overpass, proved on two cities; wave 1 first on the main mirror; streets on a shared border queued (owner)](#2026-10-13---place-search-an-extract-route-beside-overpass-proved-on-two-cities-wave-1-first-on-the-main-mirror-streets-on-a-shared-border-queued-owner)
 - [Trams left off built maps: no longer parked, queued after the next landing (owner)](#2026-10-13---trams-left-off-built-maps-no-longer-parked-queued-after-the-next-landing-owner)
+- [Trams left off built maps: the per-city recommendations approved (owner)](#2026-10-13---trams-left-off-built-maps-the-per-city-recommendations-approved-owner)
 
 **2026-10-12**
 
@@ -5170,3 +5171,25 @@ japan-city template:
 - The queue after the rules landing now holds two items: this, and keeping
   streets on a shared municipal border once the extract route is in
   production. Their order is not decided.
+
+### 2026-10-13 - Trams left off built maps: the per-city recommendations approved (owner)
+
+- **The owner, on the recommendations as Cleanup restated them that day:
+  "your per city recommendations all sounded good".** So the scope of the
+  rescope, when it starts after the search-rules landing, is:
+  - **In, the light batch:** Montreal's REM first, then Rome tram 8 and
+    Madrid ML1, then San Francisco's F Market at low priority.
+  - **In:** Paris T3a and T3b (62 stops).
+  - **In, after its own checks:** Barcelona TRAM (one OSM color for six
+    lines, so a color rule first) and Mexico City's Cablebus (no official
+    station coordinates yet; Toulouse's Teleo is the precedent).
+  - **Not yet:** Toronto, Milan and Prague wait for a label and legend
+    rule, then a Toronto pilot; Milan also needs a color decision and
+    Prague probably a core-network filter.
+  - **Out:** Hong Kong Tramways. **Dropped:** the D.C. Streetcar, which
+    ended service on 2026-03-31. **Waiting:** Seoul's Wirye Line, not open,
+    re-check in January 2027.
+- **What the approval does not cover:** the label and legend rule for the
+  heavy three, the color rules, and anything the re-check of
+  `docs/tram_rescope_estimate.md` and `docs/tram_rescope_specs.md` turns up
+  as changed since 2026-09-27. Each comes to the owner as its own call.
