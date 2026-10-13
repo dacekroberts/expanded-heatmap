@@ -131,8 +131,8 @@ This is open work, not a record: update an item here as it moves, and send a fin
     Montjuïc funicular's green.
   - **Rome's other trams (2, 3, 5, 14, 19):** tram 3 runs Trastevere - Porta
     Maggiore since 2026-09-07; the whole network is due back by 2026-11-23
-    (`docs/recheck_calendar.md`). Not built on 2026-10-13: see the drafts
-    entry of that date.
+    (`docs/recheck_calendar.md`). ⏸ **Parked by the owner 2026-10-13 as ONE
+    decision for all five after 2026-11-23**; none drawn before.
   - **Candidates still open (stops in scope):** Toronto streetcars (476);
     Milan (323 of 341; no ATM colours); Prague (285); Barcelona TRAM (28).
     Fortaleza's VLT failed the rail test. D.C. Streetcar ended 2026-03-31.
