@@ -73,6 +73,8 @@ CHECKS = [
     ["scripts/check_place_search.py"],
     ["scripts/check_place_search.py", "--selftest"],
     ["pipeline/place_index_fetch.py", "--selftest"],
+    ["pipeline/osm_extract.py", "--selftest"],
+    ["pipeline/place_extract_fetch.py", "--selftest"],
     ["scripts/place_search_fetch_queue.py", "--selftest"],
     ["scripts/place_search_scaffold.py", "--selftest"],
     ["scripts/place_search_area_lookup.py", "--selftest"],

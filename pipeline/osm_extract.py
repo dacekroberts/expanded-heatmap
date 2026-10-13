@@ -198,6 +198,14 @@ def smallest_region(index, geom):
     return found[0]
 
 
+def has_subregions(index, feature):
+    """True when the index cuts this region into smaller ones (a country
+    with states, a continent). A set of points whose smallest covering
+    region has subregions spans more than one of them."""
+    rid = feature["properties"]["id"]
+    return any(f["properties"].get("parent") == rid for f in index["features"])
+
+
 def region_by_id(index, region_id):
     for f in index["features"]:
         if f["properties"]["id"] == region_id:
@@ -235,8 +243,75 @@ def sha256_of(path):
     return h.hexdigest()
 
 
-def download_extract(feature, root, *, dated=None, max_age_days=None, max_bytes=None,
-                     transport=None, now=None, out=print):
+LOCK_NAME = "_download.lock"
+LOCK_POLL_S = 5
+
+
+def _pid_alive(pid):
+    try:
+        import psutil
+    except ImportError:
+        return True
+    return psutil.pid_exists(pid)
+
+
+class DownloadLock:
+    """One download from the server at a time on this machine, across
+    processes: root/_download.lock names its holder's pid. A second caller
+    waits (up to wait_s) and then finds the first one's file held; a lock
+    whose process is gone is replaced. alive and sleep are injected by the
+    selftest."""
+
+    def __init__(self, root, wait_s=3600, alive=_pid_alive, sleep=None):
+        import time
+        self.path = Path(root) / LOCK_NAME
+        self.wait_s, self.alive, self.sleep = wait_s, alive, sleep or time.sleep
+
+    def __enter__(self):
+        import os
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        waited = 0
+        while True:
+            try:
+                fd = os.open(self.path, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+            except FileExistsError:
+                try:
+                    pid = int(self.path.read_text(encoding="utf-8").strip() or -1)
+                except (OSError, ValueError):
+                    pid = -1
+                if pid != -1 and not self.alive(pid):
+                    try:
+                        self.path.unlink()
+                    except FileNotFoundError:
+                        pass
+                    continue
+                if waited >= self.wait_s:
+                    raise SystemExit(f"Another download is running (pid {pid}, {self.path}); waited "
+                                     f"{waited} s. Run again when it has finished.")
+                self.sleep(LOCK_POLL_S)
+                waited += LOCK_POLL_S
+                continue
+            with os.fdopen(fd, "w", encoding="utf-8") as f:
+                f.write(str(os.getpid()))
+            return self
+
+    def __exit__(self, *exc):
+        try:
+            self.path.unlink()
+        except FileNotFoundError:
+            pass
+
+
+def download_extract(feature, root, *, lock=None, **kwargs):
+    """_download_extract() under the machine's DownloadLock, so two runs that
+    need one regional file never both download it: the second waits, then
+    finds the file held."""
+    with (lock or DownloadLock(root)):
+        return _download_extract(feature, root, **kwargs)
+
+
+def _download_extract(feature, root, *, dated=None, max_age_days=None, max_bytes=None,
+                      transport=None, now=None, out=print):
     """The path of a region's extract under root/<region>/, downloading at
     most one file. In order:
 
@@ -647,7 +722,7 @@ def query(pbf, area_spec, unions, *, on_area=None, say=None):
                 if o.id in need_ways:
                     way_pts[o.id] = [(n.lat, n.lon) for n in o.nodes if n.location.valid()]
                     if o.id in area_spec["ways"]:
-                        way_tags[o.id] = dict(o.tags)
+                        way_tags[o.id] = (dict(o.tags), [n.ref for n in o.nodes])
             elif o.id in need_nodes:
                 node_pt[o.id] = (o.location.lat, o.location.lon)
     say(f"pass 2: {len(way_pts):,} of {len(need_ways):,} member ways, "
@@ -661,7 +736,8 @@ def query(pbf, area_spec, unions, *, on_area=None, say=None):
             raise SystemExit(f"{Path(pbf).name}: way/{wid} is not a closed way in the extract.")
         from shapely.geometry import Polygon
         parts.append(Polygon([(lon, lat) for lat, lon in pts]))
-        out_bounds.append({"type": "way", "id": wid, "tags": way_tags.get(wid, {}), "points": pts})
+        out_bounds.append({"type": "way", "id": wid, "tags": way_tags[wid][0], "nodes": way_tags[wid][1],
+                           "points": pts})
     for rid in sorted(boundaries):
         tags, members = boundaries[rid]
         absent = [ref for t, ref, _ in members if t == "w" and ref not in way_pts]
@@ -771,6 +847,78 @@ def query(pbf, area_spec, unions, *, on_area=None, say=None):
     return {"boundaries": out_bounds, "area": area, "elements": elements, "stats": stats}
 
 
+def boundaries_holding(pbf, points, *, tag=("boundary", "administrative"), say=None):
+    """Every relation carrying `tag` whose area holds at least one of
+    `points` [(lat, lon)], as Overpass's
+    `is_in(lat,lon); rel(pivot)["boundary"="administrative"]; out tags;`
+    gives them: ([{"type": "relation", "id", "tags"}] by ascending id,
+    stats). Holes are honored (rule 2) and a point on a boundary line is in
+    neither side.
+
+    Three passes: the tagged relations and their member ways' ids; the
+    member ways' node ids; those nodes' positions. A polygon is assembled
+    only for a relation whose members' bounding box holds a point. A
+    relation whose rings do not close in this extract (a country or state
+    cut off at the region's edge) cannot be answered: it is left out and
+    listed in stats["not_whole"] with its admin_level and name, where
+    Overpass, holding the whole planet, would have returned it."""
+    import numpy as np
+    import osmium
+    import shapely
+    pbf = str(pbf)
+    say = say or (lambda text: None)
+    rels = {}
+    fp = osmium.FileProcessor(pbf, osmium.osm.RELATION).with_filter(osmium.filter.TagFilter(tag))
+    for o in fp:
+        if o.tags.get(tag[0]) == tag[1]:
+            rels[o.id] = (dict(o.tags), [(m.ref, m.role) for m in o.members if m.type == "w"])
+    need = {ref for _, mem in rels.values() for ref, _ in mem}
+    way_refs = {}
+    if need:
+        for o in osmium.FileProcessor(pbf, osmium.osm.WAY).with_filter(osmium.filter.IdFilter(need)):
+            if o.id in need:
+                way_refs[o.id] = [n.ref for n in o.nodes]
+    node_ids = {r for refs in way_refs.values() for r in refs}
+    pos = {}
+    if node_ids:
+        for o in osmium.FileProcessor(pbf, osmium.osm.NODE).with_filter(osmium.filter.IdFilter(node_ids)):
+            if o.id in node_ids:
+                pos[o.id] = (o.location.lat, o.location.lon)
+    say(f"{len(rels):,} relations with {tag[0]}={tag[1]}, {len(way_refs):,} of {len(need):,} member ways, "
+        f"{len(pos):,} nodes")
+    lats = np.array([p[0] for p in points], dtype=float)
+    lons = np.array([p[1] for p in points], dtype=float)
+    found, not_whole, assembled = [], [], 0
+    for rid in sorted(rels):
+        tags, members = rels[rid]
+        lines = [(role, [pos[r] for r in way_refs[ref] if r in pos]) for ref, role in members if ref in way_refs]
+        flat = [pt for _, pts in lines for pt in pts]
+        if not flat:
+            continue
+        la = [p[0] for p in flat]
+        lo = [p[1] for p in flat]
+        near = (lats >= min(la)) & (lats <= max(la)) & (lons >= min(lo)) & (lons <= max(lo))
+        whole = len(lines) == len(members) and all(
+            len(pts) == len(way_refs[ref]) for (ref, _), (_, pts) in zip(members, lines))
+        if not near.any():
+            continue
+        try:
+            if not whole:
+                raise ValueError("member ways or nodes are not in the extract")
+            poly = boundary_polygon(lines)
+        except ValueError:
+            # Listed when the part of it the extract holds reaches a point;
+            # one whose held part lies elsewhere is passed over unseen.
+            not_whole.append({"id": rid, "admin_level": tags.get("admin_level"), "name": tags.get("name")})
+            continue
+        assembled += 1
+        if shapely.contains_xy(poly, lons[near], lats[near]).any():
+            found.append({"type": "relation", "id": rid, "tags": tags})
+    stats = {"relations": len(rels), "assembled": assembled, "not_whole": not_whole}
+    say(f"{assembled} assembled, {len(found)} hold a point, {len(not_whole)} not whole in this extract")
+    return found, stats
+
+
 # ------------------------------------------------------------ Overpass shapes
 
 def r7(x):
@@ -813,6 +961,7 @@ def out_geom(boundary):
         return {"minlat": r7(min(lats)), "minlon": r7(min(lons)), "maxlat": r7(max(lats)), "maxlon": r7(max(lons))}
     if boundary["type"] == "way":
         return {"type": "way", "id": boundary["id"], "bounds": bounds(boundary["points"]),
+                "nodes": boundary["nodes"],
                 "geometry": geometry(boundary["points"]), "tags": boundary["tags"]}
     members, every = [], []
     for m in boundary["members"]:
@@ -1048,6 +1197,33 @@ def selftest():
             except SystemExit as exc:
                 return str(exc)
             return None
+        # Which administrative boundaries hold a point: a county around both
+        # municipalities, and a state whose ring the extract holds half of.
+        for nid, (lat, lon) in {70: (-1, -1), 71: (2, -1), 72: (2, 3), 73: (-1, 3), 74: (5, -5), 75: (5, 5)}.items():
+            nodes[nid] = (lat, lon, {})
+        ways[600] = ([70, 71, 72, 73, 70], {})
+        ways[601] = ([70, 74, 75, 72], {})
+        admin = {"type": "boundary", "boundary": "administrative"}
+        relations[3] = ([("w", 600, "outer")], dict(admin, name="County", admin_level="6"))
+        relations[4] = ([("w", 601, "outer"), ("w", 999, "outer")], dict(admin, name="State", admin_level="4"))
+        relations[5] = ([("w", 600, "outer")], {"type": "boundary", "boundary": "postal_code", "name": "Postal"})
+        admin_pbf = write_test_extract(d / "admin.osm.pbf", nodes, ways, relations)
+
+        def holding(*pts):
+            got_, stats_ = boundaries_holding(admin_pbf, list(pts))
+            return [e["id"] for e in got_], stats_
+        ids, stats = holding((0.2, 0.2))
+        case("lookup: a point inside two nested levels returns both, tags only, and no other kind of boundary",
+             ids == [1, 3] and set(boundaries_holding(admin_pbf, [(0.2, 0.2)])[0][0]) == {"type", "id", "tags"})
+        case("lookup: a point in a relation's hole is not in that relation", holding((0.5, 0.5))[0] == [3])
+        case("lookup: a point on the border two municipalities share is in neither",
+             holding((0.5, 1.0))[0] == [3])
+        case("lookup: several points return every relation holding one of them, each once",
+             holding((0.2, 0.2), (0.5, 1.5), (0.3, 0.3))[0] == [1, 2, 3])
+        case("lookup: a relation the extract holds only part of is not answered and is listed",
+             [r["id"] for r in stats["not_whole"]] == [4] and stats["not_whole"][0]["admin_level"] == "4")
+        case("lookup: a point outside everything returns nothing", holding((40.0, 40.0))[0] == [])
+        del relations[3], relations[4], relations[5]
         why = stopped(lambda: query(pbf, parse_area("(id:3600000099)"), unions))
         case("a boundary the extract does not hold stops the read", why and "not in the extract" in why)
         cut = dict(ways)
@@ -1067,7 +1243,8 @@ def selftest():
         index = {"features": [
             {"properties": {"id": "big", "urls": {"pbf": f"https://{DOWNLOAD_HOST}/big-latest.osm.pbf"}},
              "geometry": {"type": "Polygon", "coordinates": [[[-10, -10], [10, -10], [10, 10], [-10, 10], [-10, -10]]]}},
-            {"properties": {"id": "x/small", "urls": {"pbf": f"https://{DOWNLOAD_HOST}/x/small-latest.osm.pbf"}},
+            {"properties": {"id": "x/small", "parent": "big",
+                            "urls": {"pbf": f"https://{DOWNLOAD_HOST}/x/small-latest.osm.pbf"}},
              "geometry": {"type": "Polygon", "coordinates": [[[-1, -1], [3, -1], [3, 3], [-1, 3], [-1, -1]]]}},
             {"properties": {"id": "half", "urls": {"pbf": f"https://{DOWNLOAD_HOST}/half-latest.osm.pbf"}},
              "geometry": {"type": "Polygon", "coordinates": [[[-1, -1], [1.5, -1], [1.5, 3], [-1, 3], [-1, -1]]]}},
@@ -1077,6 +1254,10 @@ def selftest():
              and region_short(smallest_region(index, merged)) == "small"
              and [f["properties"]["id"] for f in regions_covering(index, merged)] == ["x/small", "big"])
         case("a geometry no region covers stops", stopped(lambda: smallest_region(index, box(50, 50, 51, 51))))
+        wide = smallest_region(index, box(0, 0, 5, 1))
+        case("points spanning two regions fall to a region that has subregions, which a caller can see",
+             wide["properties"]["id"] == "big" and has_subregions(index, wide)
+             and not has_subregions(index, smallest_region(index, merged)))
 
         class Body:
             def __init__(self, data):
@@ -1156,6 +1337,30 @@ def selftest():
                                                    max_bytes=10, transport=transport, out=said.append))
             case("a file over the size limit is refused before its body is read",
                  why and "byte limit" in why and not (root / "big" / "big-260105.osm.pbf").exists())
+            # Two runs wanting one file: the lock, then the held file.
+            both = region_by_id(index, "big")
+            lock_file = root / LOCK_NAME
+            lock_file.write_text("4242", encoding="utf-8")
+            calls.clear()
+
+            def first_finishes(seconds):
+                (root / "big").mkdir(exist_ok=True)
+                (root / "big" / "big-260105.osm.pbf").write_bytes(payload)
+                lock_file.unlink()
+            waited = download_extract(both, root, dated="260105", transport=transport, out=said.append,
+                                      lock=DownloadLock(root, alive=lambda pid: True, sleep=first_finishes))
+            case("ONE DOWNLOAD AT A TIME: a second run waits for the first, then finds its file and asks nothing",
+                 waited.name == "big-260105.osm.pbf" and calls == [] and not lock_file.exists())
+            lock_file.write_text("4242", encoding="utf-8")
+            why = stopped(lambda: download_extract(
+                both, root, dated="260106", transport=transport, out=said.append,
+                lock=DownloadLock(root, wait_s=10, alive=lambda pid: True, sleep=lambda s: None)))
+            case("a lock still held after the wait stops the run, naming the holder",
+                 why and "pid 4242" in why and calls == [])
+            got_file = download_extract(both, root, dated="260106", transport=transport, out=said.append,
+                                        lock=DownloadLock(root, alive=lambda pid: False))
+            case("a lock whose process is gone is replaced, and released after the download",
+                 got_file.exists() and not lock_file.exists())
             os.environ["HEATMAP_NO_NETWORK"] = "1"
             calls.clear()
             try:

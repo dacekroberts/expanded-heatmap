@@ -3,7 +3,7 @@ on this machine: the second route beside pipeline/place_index_fetch.py's
 Overpass queries, for the same three caches in the same shape. NOT a step:
 drift_check.py never runs this file.
 
-    python pipeline/place_extract_fetch.py <city> [--force] [--pbf FILE] [--out DIR]
+    python pipeline/place_extract_fetch.py <city> [--force] [--pbf FILE] [--out DIR] [--max-mb N]
     python pipeline/place_extract_fetch.py --selftest
 
 It answers place_index_fetch.py's OUTLINE_QUERY, QUERY and EXTRA_QUERY, read
@@ -21,6 +21,12 @@ on Tbilisi and Seattle, 2026-10-13 (osm-extract skill, "The proof").
     covering the city (its outline cache when there is one, else the map's
     stations), found, held and downloaded by osm_extract.download_extract.
     A held extract no older than PLACE_MAX_AGE_DAYS is used with no request.
+    Two runs that need one regional file are safe at once: one download at
+    a time on this machine (osm_extract.DownloadLock), and the second run
+    finds the first one's file. No Overpass mirror is asked and no mirror
+    lock (place_index_fetch.FetchLock) is taken.
+  * A way-made area and a relation that has lost its boundary tags are both
+    taken by id: the area never depends on a boundary's tags.
   * FRESHNESS: the place caches are refused from an extract whose own
     timestamp is older than place_index_fetch.PLACE_MAX_AGE_DAYS (7 days),
     the rule the Overpass route applies to a mirror's answer. The outline
@@ -57,6 +63,10 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 from pipeline import osm_extract, place_index, place_index_fetch  # noqa: E402
 
 EXTRACT_ROOT = Path(__file__).parent.parent / "data" / "_osm_extracts"
+# The largest regional file downloaded without a person naming a higher
+# figure (--max-mb): a city whose smallest covering region is larger is a
+# country-sized download, and a person's call.
+MAX_MB = 1000
 # The two place queries with their unions taken out and the timeout's number
 # blanked: what this script answers. A change to either constant in
 # place_index_fetch.py that is not a union line stops the run until this file
@@ -126,7 +136,7 @@ def check_fresh(timestamp, pbf, now=None):
     return age
 
 
-def choose_extract(config, root=EXTRACT_ROOT, out=print):
+def choose_extract(config, root=EXTRACT_ROOT, out=print, max_mb=None):
     """The extract for a city with no --pbf: the smallest region covering
     its outline cache when one is on disk, else its stations."""
     from shapely.geometry import MultiPoint
@@ -145,7 +155,8 @@ def choose_extract(config, root=EXTRACT_ROOT, out=print):
     index = osm_extract.load_index(Path(root) / "index-v1.json")
     region = osm_extract.smallest_region(index, geom)
     out(f"region: {region['properties']['id']}, the smallest covering {slug} by {basis}")
-    return osm_extract.download_extract(region, root, max_age_days=place_index_fetch.PLACE_MAX_AGE_DAYS, out=out)
+    return osm_extract.download_extract(region, root, max_age_days=place_index_fetch.PLACE_MAX_AGE_DAYS,
+                                        max_bytes=max_mb * 1024 * 1024 if max_mb else None, out=out)
 
 
 def check_region(pbf, area, root=EXTRACT_ROOT, out=print):
@@ -213,7 +224,8 @@ def build(config, pbf, *, scope=True, say=print, root=EXTRACT_ROOT):
             "osm_places_extra": payload(extra, place_index_fetch.EXTRA_QUERY)}
 
 
-def run(config, *, force=False, pbf=None, out_dir=None, now=None, say=print, root=EXTRACT_ROOT):
+def run(config, *, force=False, pbf=None, out_dir=None, now=None, say=print, root=EXTRACT_ROOT,
+        max_mb=None):
     """The script's body; returns the paths written."""
     todo = targets(config, force, out_dir)
     for key, path, write in todo:
@@ -225,7 +237,7 @@ def run(config, *, force=False, pbf=None, out_dir=None, now=None, say=print, roo
     if getattr(config, "PLACE_SPLIT", None):
         say("config.PLACE_SPLIT is not used: an extract is read whole")
     if pbf is None:
-        pbf = choose_extract(config, root, out=say)
+        pbf = choose_extract(config, root, out=say, max_mb=max_mb)
     pbf = Path(pbf)
     if not pbf.exists():
         raise SystemExit(f"{pbf}: no such extract")
@@ -409,6 +421,43 @@ def selftest():
         case("PLACE_SPLIT is said to be unused, and the whole area is read",
              any("PLACE_SPLIT is not used" in s for s in said)
              and (d / "split" / City.PLACE_OSM_JSON.name).read_bytes() == first[City.PLACE_OSM_JSON.name])
+        # An area made from a closed WAY (Miami names two: Overpass area id
+        # 2400000000 + the way's id), beside one made from a relation.
+        ways[500] = ([7, 8, 9, 10, 7], {"name": "Hole Village", "boundary": "census"})
+        # A city relation that has lost its boundary and admin_level tags
+        # (Buffalo's relation 175031, version 49): the area is taken by id.
+        relations[6] = (relations[2][0], {"name": "Beta"})
+        pbf2 = osm_extract.write_test_extract(d / "world2-260101.osm.pbf", nodes, ways, relations,
+                                              timestamp="2026-01-01T06:00:00Z")
+        (d / "three.csv").write_bytes(b"station,lat,lon\nOne,0.2,0.2\nTwo,0.5,1.5\nThree,0.5,0.5\n")
+
+        class WayMade(City):
+            PLACE_AREA = "(id:3600000001,2400000500)"
+            STATIONS_CSV = d / "three.csv"
+            PLACE_AREA_KEPT = {}
+
+        got = run(WayMade, pbf=pbf2, out_dir=d / "waymade", now=day, say=said.append, root=d)
+        way_outline = json.loads(got[0].read_bytes().decode("utf-8"))["elements"]
+        way_main = json.loads(got[1].read_bytes().decode("utf-8"))["elements"]
+        way_el = next((e for e in way_outline if e["type"] == "way"), {})
+        case("an area made from a closed way is cut and outlined as a way with its geometry",
+             [(e["type"], e["id"]) for e in way_outline] == [("way", 500), ("relation", 1)]
+             and way_el.get("nodes") == [7, 8, 9, 10, 7] and len(way_el.get("geometry", [])) == 5
+             and way_el["geometry"][0] == {"lat": 0.4, "lon": 0.4}
+             and [n for _, n, _ in place_index.municipalities(way_outline)] == ["Alpha", "Hole Village"]
+             and {e["id"] for e in way_main if e.get("tags", {}).get("place")} == {23, 24})
+
+        class Untagged(City):
+            PLACE_AREA = "(id:3600000001,3600000006)"
+
+        got = run(Untagged, pbf=pbf2, out_dir=d / "untagged", now=day, say=said.append, root=d)
+        bare = json.loads(got[0].read_bytes().decode("utf-8"))["elements"]
+        bare_main = json.loads(got[1].read_bytes().decode("utf-8"))["elements"]
+        case("a boundary relation with no boundary or admin_level tag is still the area its id names",
+             [(e["id"], sorted(e["tags"])) for e in bare if e["id"] == 6] == [(6, ["name"])]
+             and any(e["id"] == 400 for e in bare_main)
+             and len(bare_main) == len(json.loads((d / "proof" / City.PLACE_OSM_JSON.name).read_bytes()
+                                                  .decode("utf-8"))["elements"]))
         # The region check: the area against the extract's own outline.
         index = {"features": [{"properties": {"id": "world", "urls": {"pbf": "https://download.geofabrik.de/world-latest.osm.pbf"}},
                                "geometry": {"type": "Polygon", "coordinates": [[[-1, -1], [1.5, -1], [1.5, 2], [-1, 2], [-1, -1]]]}}]}
@@ -427,11 +476,13 @@ def main():
     ap.add_argument("city")
     ap.add_argument("--force", action="store_true", help="replace caches already on disk")
     ap.add_argument("--pbf", metavar="FILE", help="read this extract; nothing is downloaded")
+    ap.add_argument("--max-mb", type=int, default=MAX_MB, metavar="N",
+                    help=f"the largest regional file downloaded without a person (default {MAX_MB})")
     ap.add_argument("--out", metavar="DIR", help="write all three caches here and record nothing (the proof)")
     args = ap.parse_args()
     config = importlib.import_module(f"pipeline.{args.city}.config")
     start = time.time()
-    written = run(config, force=args.force, pbf=args.pbf, out_dir=args.out)
+    written = run(config, force=args.force, pbf=args.pbf, out_dir=args.out, max_mb=args.max_mb)
     if written:
         peak = ""
         try:
