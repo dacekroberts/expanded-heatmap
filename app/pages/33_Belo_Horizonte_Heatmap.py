@@ -109,7 +109,7 @@ st.markdown(
 """
 )
 
-render_map_help('three business categories (Retail, Food service and Personal services)')
+render_map_help('three business categories (Retail, Food service and Personal services)', search='belo_horizonte')
 render_excluded_stations("Belo Horizonte (Regional)")
 render_country_links('Belo Horizonte (Regional)')
 

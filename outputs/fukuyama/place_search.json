@@ -1,0 +1,27 @@
+{
+  "index": "app/static/places/fukuyama.json",
+  "places": 1330,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "ja"
+    ],
+    "coverage": {
+      "en": 0.538,
+      "ja": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "English",
+      "Japanese"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/4090603",
+      "name": "Fukuyama",
+      "stations": 18
+    }
+  ]
+}

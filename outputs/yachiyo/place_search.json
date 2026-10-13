@@ -1,0 +1,26 @@
+{
+  "index": "app/static/places/yachiyo.json",
+  "places": 299,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "ja"
+    ],
+    "coverage": {
+      "en": 0.244,
+      "ja": 0.997
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Japanese"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/2679900",
+      "name": "Yachiyo",
+      "stations": 7
+    }
+  ]
+}

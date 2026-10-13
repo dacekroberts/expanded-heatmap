@@ -1,0 +1,27 @@
+{
+  "index": "app/static/places/naha.json",
+  "places": 1045,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "ja"
+    ],
+    "coverage": {
+      "en": 0.872,
+      "ja": 0.999
+    },
+    "list_share": 0.5,
+    "listed": [
+      "English",
+      "Japanese"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/4556097",
+      "name": "Naha",
+      "stations": 16
+    }
+  ]
+}

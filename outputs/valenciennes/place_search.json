@@ -1,0 +1,86 @@
+{
+  "index": "app/static/places/valenciennes.json",
+  "places": 5644,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "fr"
+    ],
+    "coverage": {
+      "en": 0.0,
+      "fr": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "French"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/53355",
+      "name": "Valenciennes",
+      "stations": 13
+    },
+    {
+      "osm": "relation/53407",
+      "name": "Bruay-sur-l'Escaut",
+      "stations": 6
+    },
+    {
+      "osm": "relation/53825",
+      "name": "Denain",
+      "stations": 6
+    },
+    {
+      "osm": "relation/53397",
+      "name": "Anzin",
+      "stations": 5
+    },
+    {
+      "osm": "relation/53439",
+      "name": "Condé-sur-l'Escaut",
+      "stations": 4
+    },
+    {
+      "osm": "relation/53803",
+      "name": "Aulnoy-lez-Valenciennes",
+      "stations": 3
+    },
+    {
+      "osm": "relation/53422",
+      "name": "Escautpont",
+      "stations": 3
+    },
+    {
+      "osm": "relation/53804",
+      "name": "Famars",
+      "stations": 2
+    },
+    {
+      "osm": "relation/53428",
+      "name": "Fresnes-sur-Escaut",
+      "stations": 2
+    },
+    {
+      "osm": "relation/53351",
+      "name": "Hérin",
+      "stations": 1
+    },
+    {
+      "osm": "relation/53352",
+      "name": "La Sentinelle",
+      "stations": 1
+    },
+    {
+      "osm": "relation/53417",
+      "name": "Marly",
+      "stations": 1
+    },
+    {
+      "osm": "relation/53448",
+      "name": "Vieux-Condé",
+      "stations": 1
+    }
+  ]
+}

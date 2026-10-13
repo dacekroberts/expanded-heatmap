@@ -1,0 +1,31 @@
+{
+  "index": "app/static/places/ageo_regional.json",
+  "places": 790,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "ja"
+    ],
+    "coverage": {
+      "en": 0.211,
+      "ja": 0.997
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Japanese"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/1769174",
+      "name": "Ina",
+      "stations": 5
+    },
+    {
+      "osm": "relation/1769172",
+      "name": "Ageo",
+      "stations": 4
+    }
+  ]
+}

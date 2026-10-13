@@ -1,0 +1,81 @@
+{
+  "index": "app/static/places/grenoble.json",
+  "places": 7497,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "fr"
+    ],
+    "coverage": {
+      "en": 0.001,
+      "fr": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "French"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/80348",
+      "name": "Grenoble",
+      "stations": 35
+    },
+    {
+      "osm": "relation/80349",
+      "name": "Saint-Martin-d'Hères",
+      "stations": 11
+    },
+    {
+      "osm": "relation/105162",
+      "name": "Échirolles",
+      "stations": 8
+    },
+    {
+      "osm": "relation/90862",
+      "name": "Fontaine",
+      "stations": 5
+    },
+    {
+      "osm": "relation/85944",
+      "name": "Saint-Égrève",
+      "stations": 5
+    },
+    {
+      "osm": "relation/80347",
+      "name": "La Tronche",
+      "stations": 3
+    },
+    {
+      "osm": "relation/85939",
+      "name": "Saint-Martin-le-Vinoux",
+      "stations": 3
+    },
+    {
+      "osm": "relation/191039",
+      "name": "Seyssinet-Pariset",
+      "stations": 3
+    },
+    {
+      "osm": "relation/85947",
+      "name": "Fontanil-Cornillon",
+      "stations": 2
+    },
+    {
+      "osm": "relation/81678",
+      "name": "Gières",
+      "stations": 2
+    },
+    {
+      "osm": "relation/105152",
+      "name": "Le Pont-de-Claix",
+      "stations": 2
+    },
+    {
+      "osm": "relation/192318",
+      "name": "Seyssins",
+      "stations": 2
+    }
+  ]
+}

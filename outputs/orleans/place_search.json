@@ -1,0 +1,31 @@
+{
+  "index": "app/static/places/orleans.json",
+  "places": 4102,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "fr"
+    ],
+    "coverage": {
+      "en": 0.002,
+      "fr": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "French"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/147559",
+      "name": "Orléans",
+      "stations": 31
+    },
+    {
+      "osm": "relation/147558",
+      "name": "Saint-Jean-de-la-Ruelle",
+      "stations": 1
+    }
+  ]
+}

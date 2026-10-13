@@ -1,0 +1,26 @@
+{
+  "index": "app/static/places/fuji.json",
+  "places": 917,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "ja"
+    ],
+    "coverage": {
+      "en": 0.196,
+      "ja": 0.999
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Japanese"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/4674651",
+      "name": "Fuji",
+      "stations": 17
+    }
+  ]
+}

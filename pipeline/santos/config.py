@@ -71,3 +71,13 @@ NODE_NAMES = {12396988316: 'Mercado', 12396988312: 'Paquetá', 12396988308: 'Pou
 GATE3 = {'lines': {'L1': 15}, 'network': 27, 'source': "pt.wikipedia 'VLT da Baixada Santista', read 2026-09-24 - secondary; L1 15 stations (14 shared with L2), 12 new on L2 - 27 in all"}
 SPACING_MIN_M = 300.0
 COLLAPSE_MAX_SPREAD_M = 400
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
+
+PLACE_AREA = "(id:3600297995,3600298442)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
+PLACE_LANGUAGES = ("pt",)
+PLACE_FOLD = None
+PLACE_REVIEWED = {}
+PLACE_DROPPED = {}

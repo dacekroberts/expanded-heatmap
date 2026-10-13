@@ -1,0 +1,36 @@
+{
+  "index": "app/static/places/fortaleza.json",
+  "places": 43863,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "pt"
+    ],
+    "coverage": {
+      "en": 0.0,
+      "pt": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Portuguese"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/302588",
+      "name": "Fortaleza",
+      "stations": 14
+    },
+    {
+      "osm": "relation/302620",
+      "name": "Maracanaú",
+      "stations": 5
+    },
+    {
+      "osm": "relation/302547",
+      "name": "Pacatuba",
+      "stations": 1
+    }
+  ]
+}

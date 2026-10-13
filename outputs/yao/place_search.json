@@ -1,0 +1,27 @@
+{
+  "index": "app/static/places/yao.json",
+  "places": 1351,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "ja"
+    ],
+    "coverage": {
+      "en": 0.586,
+      "ja": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "English",
+      "Japanese"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/358711",
+      "name": "Yao",
+      "stations": 11
+    }
+  ]
+}

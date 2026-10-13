@@ -1,0 +1,38 @@
+{
+  "index": "app/static/places/gimhae.json",
+  "places": 3694,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "ko"
+    ],
+    "coverage": {
+      "en": 0.892,
+      "ko": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "English",
+      "Korean"
+    ]
+  },
+  "stations_not_open": [
+    {
+      "osm": "node/10566861522",
+      "name": "장유",
+      "tag": "construction:railway=station"
+    },
+    {
+      "osm": "node/10566861523",
+      "name": "신월",
+      "tag": "construction:railway=station"
+    }
+  ],
+  "area": [
+    {
+      "osm": "relation/7224485",
+      "name": "Gimhae-si",
+      "stations": 12
+    }
+  ]
+}

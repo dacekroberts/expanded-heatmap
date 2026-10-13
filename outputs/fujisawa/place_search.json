@@ -1,0 +1,26 @@
+{
+  "index": "app/static/places/fujisawa.json",
+  "places": 1142,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "ja"
+    ],
+    "coverage": {
+      "en": 0.312,
+      "ja": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Japanese"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/2689443",
+      "name": "Fujisawa",
+      "stations": 17
+    }
+  ]
+}

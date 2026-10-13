@@ -1,0 +1,26 @@
+{
+  "index": "app/static/places/sakura.json",
+  "places": 436,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "ja"
+    ],
+    "coverage": {
+      "en": 0.225,
+      "ja": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Japanese"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/2679899",
+      "name": "Sakura",
+      "stations": 11
+    }
+  ]
+}

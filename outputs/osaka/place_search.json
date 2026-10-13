@@ -1,0 +1,31 @@
+{
+  "index": "app/static/places/osaka.json",
+  "places": 10097,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "ja"
+    ],
+    "coverage": {
+      "en": 0.451,
+      "ja": 0.996
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Japanese"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/358674",
+      "name": "Osaka",
+      "stations": 216
+    },
+    {
+      "osm": "relation/358685",
+      "name": "Moriguchi",
+      "stations": 1
+    }
+  ]
+}

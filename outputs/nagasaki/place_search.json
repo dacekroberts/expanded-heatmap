@@ -1,0 +1,26 @@
+{
+  "index": "app/static/places/nagasaki.json",
+  "places": 1715,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "ja"
+    ],
+    "coverage": {
+      "en": 0.413,
+      "ja": 0.984
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Japanese"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/4011885",
+      "name": "Nagasaki",
+      "stations": 43
+    }
+  ]
+}

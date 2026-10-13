@@ -1,0 +1,26 @@
+{
+  "index": "app/static/places/fukuoka.json",
+  "places": 6317,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "ja"
+    ],
+    "coverage": {
+      "en": 0.291,
+      "ja": 0.998
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Japanese"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/4008611",
+      "name": "Fukuoka",
+      "stations": 71
+    }
+  ]
+}

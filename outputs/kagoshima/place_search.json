@@ -1,0 +1,26 @@
+{
+  "index": "app/static/places/kagoshima.json",
+  "places": 2774,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "ja"
+    ],
+    "coverage": {
+      "en": 0.311,
+      "ja": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Japanese"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/3962762",
+      "name": "Kagoshima",
+      "stations": 55
+    }
+  ]
+}

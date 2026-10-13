@@ -1,0 +1,26 @@
+{
+  "index": "app/static/places/strasbourg.json",
+  "places": 6707,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "fr"
+    ],
+    "coverage": {
+      "en": 0.002,
+      "fr": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "French"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/71033",
+      "name": "Strasbourg",
+      "stations": 65
+    }
+  ]
+}

@@ -82,3 +82,13 @@ NODE_NAMES = {}
 GATE3 = {'lines': {'1': 21, '2': 2}, 'network': 22, 'source': "pt.wikipedia 'Metrô de Belo Horizonte', read 2026-09-24 - secondary; its text: 22 stations in operation. Its table's Linha 1 '20 (+1 being built)' is stale: the +1, Nova Suíça, opened with Linha 2 on 2026-07-03 as the interchange, so Linha 1 21, Linha 2 2"}
 SPACING_MIN_M = 300.0
 COLLAPSE_MAX_SPREAD_M = 400
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
+
+PLACE_AREA = "(id:3600368782,3600368786)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
+PLACE_LANGUAGES = ("pt",)
+PLACE_FOLD = None
+PLACE_REVIEWED = {}
+PLACE_DROPPED = {}

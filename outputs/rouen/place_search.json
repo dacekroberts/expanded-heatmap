@@ -1,0 +1,46 @@
+{
+  "index": "app/static/places/rouen.json",
+  "places": 6562,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "fr"
+    ],
+    "coverage": {
+      "en": 0.0,
+      "fr": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "French"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/75628",
+      "name": "Rouen",
+      "stations": 10
+    },
+    {
+      "osm": "relation/93029",
+      "name": "Sotteville-lès-Rouen",
+      "stations": 6
+    },
+    {
+      "osm": "relation/102145",
+      "name": "Le Grand-Quevilly",
+      "stations": 5
+    },
+    {
+      "osm": "relation/93030",
+      "name": "Le Petit-Quevilly",
+      "stations": 5
+    },
+    {
+      "osm": "relation/102144",
+      "name": "Saint-Étienne-du-Rouvray",
+      "stations": 5
+    }
+  ]
+}

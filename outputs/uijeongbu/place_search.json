@@ -1,0 +1,33 @@
+{
+  "index": "app/static/places/uijeongbu.json",
+  "places": 2649,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "ko"
+    ],
+    "coverage": {
+      "en": 0.892,
+      "ko": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "English",
+      "Korean"
+    ]
+  },
+  "stations_not_open": [
+    {
+      "osm": "node/9950753035",
+      "name": "탑석",
+      "tag": "railway=construction"
+    }
+  ],
+  "area": [
+    {
+      "osm": "relation/2409183",
+      "name": "Uijeongbu-si",
+      "stations": 20
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "index": "app/static/places/rio_de_janeiro.json",
+  "places": 83398,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "pt"
+    ],
+    "coverage": {
+      "en": 0.001,
+      "pt": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Portuguese"
+    ]
+  },
+  "stations_not_open": [
+    {
+      "osm": "node/3135650199",
+      "name": "Gávea",
+      "tag": "railway=construction"
+    }
+  ],
+  "area": [
+    {
+      "osm": "relation/2697338",
+      "name": "Rio de Janeiro",
+      "stations": 95
+    },
+    {
+      "osm": "relation/2220782",
+      "name": "Duque de Caxias",
+      "stations": 3
+    }
+  ]
+}

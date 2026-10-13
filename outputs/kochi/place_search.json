@@ -1,0 +1,26 @@
+{
+  "index": "app/static/places/kochi.json",
+  "places": 1312,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "ja"
+    ],
+    "coverage": {
+      "en": 0.194,
+      "ja": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Japanese"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/4028510",
+      "name": "Kōchi",
+      "stations": 67
+    }
+  ]
+}

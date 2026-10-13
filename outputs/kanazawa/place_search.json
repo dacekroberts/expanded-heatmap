@@ -1,0 +1,26 @@
+{
+  "index": "app/static/places/kanazawa.json",
+  "places": 4243,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "ja"
+    ],
+    "coverage": {
+      "en": 0.302,
+      "ja": 0.998
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Japanese"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/4800041",
+      "name": "Kanazawa",
+      "stations": 21
+    }
+  ]
+}
