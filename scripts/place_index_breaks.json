@@ -27,6 +27,8 @@
  {"label": "a lifecycle flag is the object's own", "old": "            if tags.get(p) == \"yes\":", "new": "            if False:"},
  {"label": "an abandoned historic site stays", "old": "            elif life[0] == \"abandoned\" and t.get(\"historic\"):", "new": "            elif False:"},
  {"label": "a rebuilding stays", "old": "            elif life[0] == \"ahead\" and (t.get(\"historic\") or t.get(\"heritage\")", "new": "            elif False and (t.get(\"historic\") or t.get(\"heritage\")"},
+ {"label": "a place closed for works is kept by id", "old": "            elif life[0] == \"ahead\" and oid in closed_for_works:", "new": "            elif False:"},
+ {"label": "only the not-yet-open class is kept by id", "old": "            elif life[0] == \"ahead\" and oid in closed_for_works:", "new": "            elif oid in closed_for_works:"},
  {"label": "a feature live and prefixed alike stays", "old": "        if both:", "new": "        if False:"},
  {"label": "a live key the prefix leaves alone keeps the object", "old": "        if not any(tags.get(k) for k in LIFE_LIVE_KEYS):", "new": "        if True:"},
  {"label": "a razed value drops a landmark's prefix class", "old": "    for cls, prefixes in classes:\n        keys = sorted(", "new": "    for cls, prefixes in ():\n        keys = sorted("},

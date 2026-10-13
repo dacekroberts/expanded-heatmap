@@ -79,10 +79,10 @@ protocol in the `place-search-city` skill.
 | A Stolperstein; a tomb named for a family | memorial=stolperstein, `FAMILY_TOMB` | `landmark_drop` | 2026-10-08, 2026-10-11 |
 | A grave or a plaque without a Wikipedia article of its own | `grave_or_plaque`, `own_article`; a Wikidata entry alone admits none; statues, busts and public memorials are untouched; where the tags cannot say whose the article is, the row stays as it was | `landmark()` | 2026-10-13 |
 | Wayside shrines and crosses, boundary stones, milestones, plain memorials and tombs | `SKIP_HISTORIC`, unless a tourism, amenity or leisure tag, wikidata, or an article of its own | `landmark_drop` | 2026-10-07, 2026-10-13 |
-| A landmark that is not there | `lifecycle`: demolished, razed, removed, abandoned or not yet open by its own tags, read narrowly (the comment sets out each limit) | `landmark()` | 2026-10-13 |
+| A landmark that is not there | `lifecycle`: demolished, razed, removed, abandoned or not yet open by its own tags, read narrowly (the comment sets out each limit); a place that stands and is closed for works is kept by id in `config.PLACE_CLOSED_FOR_WORKS` (the not-yet-open class only) | `landmark()` | 2026-10-13 |
 | A row admitted only by a Wikidata entry three or more rows share | `SHARED_WIKIDATA_MIN`, `held_by_wikidata` | merges | 2026-10-13 |
 | A square a street already names; a second row for one landmark | `SQUARE_DUP_M`, `NEAR_DUP_M`, `ROW_MERGE_M` | duplicate passes | 2026-10-08, 2026-10-13 |
-| A place value that is no neighborhood (plots, city blocks, islands) | skipped; an island or islet with an article of its own is a landmark (`ISLAND_VALUES`), a district with one a neighborhood | tagged pass | 2026-10-08, 2026-10-13 |
+| A place value that is no neighborhood (plots, city blocks, islands) | skipped; an island or islet with an article of its own is a landmark (`ISLAND_VALUES`), a district with one a neighborhood (a county that borders the city is dropped by id: Prague's two) | tagged pass, `config.PLACE_DROPPED` | 2026-10-08, 2026-10-13 |
 
 ## Names
 

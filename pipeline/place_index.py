@@ -418,9 +418,10 @@ def build_city(config):
     # the calendar line.
     live = {k for k, v in visitable.items() if _days(v["checked"], retrieved) <= VISITABLE_MAX_DAYS}
     rebuilt = getattr(config, "PLACE_REBUILT", {})
+    works = getattr(config, "PLACE_CLOSED_FOR_WORKS", {})
     index, report = build(payload["elements"], city=name, retrieved=retrieved,
                           local=config.PLACE_LANGUAGES, fold=fold, dropped=dropped,
-                          visitable=live, rebuilt=rebuilt)
+                          visitable=live, rebuilt=rebuilt, closed_for_works=set(works))
     if rebuilt and report.get("street_way_kept_rebuilt", 0) == 0 or any(
             not any((e.get("tags") or {}).get("highway") == "construction"
                     and n in (e.get("tags") or {}).values() for e in payload["elements"])
@@ -453,6 +454,9 @@ def build_city(config):
     stale = sorted(set(dropped) - found)
     if stale:
         sys.exit(f"config.PLACE_DROPPED names {stale}, not in the cache: remove them")
+    stale = sorted(set(works) - found)
+    if stale:
+        sys.exit(f"config.PLACE_CLOSED_FOR_WORKS names {stale}, not in the cache: remove them")
     stale = sorted(set(visitable) - found)
     if stale:
         sys.exit(f"config.PLACE_VISITABLE names {stale}, not in the cache: remove them")
@@ -1948,7 +1952,7 @@ def _point(el):
 
 
 def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=(), rebuilt=(),
-          log=None):
+          closed_for_works=(), log=None):
     """Return (index dict, report dict) from one place cache's elements.
     `local`: the city's local language codes (config.PLACE_LANGUAGES).
     `dropped`: OSM objects ("way/504652702") a reading by eye found to be a
@@ -1957,6 +1961,8 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
     (config.PLACE_VISITABLE's live entries; VISITABLE FORMER HOMES above).
     `rebuilt`: names of streets closed for rebuilding, kept although OSM
     draws them highway=construction (config.PLACE_REBUILT).
+    `closed_for_works`: OSM objects that stand but are closed for works, kept
+    although their tags read as not yet open (config.PLACE_CLOSED_FOR_WORKS).
     `log`: a list that receives one record per decision of the 2026-10-13
     rules (class, action, OSM id, name, the deciding tag), for the changed-row
     report of a rule change; nothing reads it otherwise."""
@@ -2392,6 +2398,15 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             # start date behind it is being rebuilt, and is there too.
             if life[0] == "both":
                 note("not_there_kept", "kept", oid, names[0], f"{life[1]}: live and prefixed alike", t)
+            # CLOSED FOR WORKS, BY ID (owner, 2026-10-13, on the first
+            # changed-row report: a museum and a library closed for
+            # renovation and a playground being rebuilt are there). No tag
+            # separates them from a place not yet built: the three carry
+            # three different tags and none of historic, heritage or a start
+            # date. Only the not-yet-open class; a demolished object is never
+            # kept this way.
+            elif life[0] == "ahead" and oid in closed_for_works:
+                note("not_there_kept", "kept", oid, names[0], f"{life[1]}: closed for works, by id", t)
             elif life[0] == "abandoned" and t.get("historic"):
                 note("not_there_kept", "kept", oid, names[0], f"{life[1]}: a historic site", t)
             elif life[0] == "ahead" and (t.get("historic") or t.get("heritage")
@@ -2922,6 +2937,9 @@ def _selftest():
     node(47.7130, -122.32, name="Reopening Museum", tourism="museum", wikidata="Q11",
          opening_date="2030-01-01", start_date="1977")
     node(47.7135, -122.32, name="Unbuilt Museum", tourism="museum", wikidata="Q12", opening_date="2030-01-01")
+    works = node(47.7137, -122.32, name="Closed Museum", tourism="museum", wikidata="Q16",
+                 opening_date="2030-01-01")
+    gone_id = node(47.7138, -122.32, name="Listed Ruin", historic="yes", wikidata="Q17", razed__building="yes")
     node(47.7140, -122.32, name="Disused Fountain", amenity="fountain", wikidata="Q13",
          disused__amenity="drinking_water")
     # An item shared by three rows, and one shared by two.
@@ -2942,7 +2960,8 @@ def _selftest():
          historic="yes", wikidata="Q14")
 
     log = []
-    index, report = build(els, city="Testville", retrieved="2026-10-10", local=("en",), log=log)
+    index, report = build(els, city="Testville", retrieved="2026-10-10", local=("en",), log=log,
+                          closed_for_works={f"node/{works}", f"node/{gone_id}"})
     rows = {(KINDS[r[0]], r[3]) for r in index["rows"]}
     count = defaultdict(int)
     for r in index["rows"]:
@@ -3022,6 +3041,8 @@ def _selftest():
         ("a historic object live and razed alike stays", ("landmark", "Both Hall") in rows),
         ("a museum reopening later, with a start date, stays", ("landmark", "Reopening Museum") in rows),
         ("a museum not yet open is no row", ("landmark", "Unbuilt Museum") not in rows),
+        ("a place closed for works, named by id, stays", ("landmark", "Closed Museum") in rows),
+        ("a razed object is never kept by id", ("landmark", "Listed Ruin") not in rows),
         ("a disused prefix drops nothing", ("landmark", "Disused Fountain") in rows),
         ("an item on three rows admits none", not any(n.startswith("Piece") for _, n in rows)),
         ("an item on two rows admits both", count[("landmark", "Pair One")] + count[("landmark", "Pair Two")] == 2),

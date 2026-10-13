@@ -419,6 +419,14 @@ PLACE_REVIEWED = {
 }
 # OSM objects a reading by eye found to be a business or a home that no rule
 # in place_index.py catches, each with why (place_index.build, `dropped`).
+# OSM objects that stand but are closed for works, kept although their tags
+# read as not yet open (place_index.build, `closed_for_works`; owner,
+# 2026-10-13). Remove an entry when OSM's tags no longer say so: an id that
+# has left the cache stops the step.
+PLACE_CLOSED_FOR_WORKS = {
+    "way/79219238": "Musée Yves Saint Laurent: opening_date=2027-09, closed for works and due to "
+                    "reopen (owner, 2026-10-13); tags read from the cache of 2026-10-11",
+}
 PLACE_DROPPED = {
     # From the read of every landmark and place (the place-read agent, batch 3, 2026-10-11), each id checked against its cached name.
     "node/3209234481": "a commercial art dealer's gallery (tourism=gallery), a business",
