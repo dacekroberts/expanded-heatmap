@@ -1,0 +1,46 @@
+{
+  "index": "app/static/places/birmingham.json",
+  "places": 39605,
+  "data_retrieved": "2026-10-12",
+  "languages": {
+    "local": [
+      "en"
+    ],
+    "coverage": {
+      "en": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "English"
+    ]
+  },
+  "stations_not_open": [
+    {
+      "osm": "node/10291171437",
+      "name": "Digbeth High Street",
+      "tag": "construction=yes"
+    },
+    {
+      "osm": "node/12214861269",
+      "name": "Digbeth High Street",
+      "tag": "construction=yes"
+    }
+  ],
+  "area": [
+    {
+      "osm": "relation/162378",
+      "name": "Birmingham",
+      "stations": 16
+    },
+    {
+      "osm": "relation/162485",
+      "name": "Sandwell",
+      "stations": 10
+    },
+    {
+      "osm": "relation/173722",
+      "name": "Wolverhampton",
+      "stations": 9
+    }
+  ]
+}

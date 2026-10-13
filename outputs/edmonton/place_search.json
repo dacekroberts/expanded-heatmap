@@ -1,0 +1,46 @@
+{
+  "index": "app/static/places/edmonton.json",
+  "places": 23632,
+  "data_retrieved": "2026-10-12",
+  "languages": {
+    "local": [
+      "en"
+    ],
+    "coverage": {
+      "en": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "English"
+    ]
+  },
+  "stations_not_open": [
+    {
+      "osm": "node/11963329767",
+      "name": "MacEwan",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/11963329768",
+      "name": "MacEwan",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/11969957456",
+      "name": "Blatchford Gate",
+      "tag": "construction=yes"
+    },
+    {
+      "osm": "way/1096437871",
+      "name": "Blatchford Gate",
+      "tag": "construction:railway=station"
+    }
+  ],
+  "area": [
+    {
+      "osm": "relation/2564500",
+      "name": "Edmonton",
+      "stations": 30
+    }
+  ]
+}

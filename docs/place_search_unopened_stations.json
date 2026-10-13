@@ -792,6 +792,72 @@
    "open_namesake_in_index": true,
    "cache": "2026-10-12",
    "noted": "2026-10-13"
+  },
+  {
+   "city": "birmingham",
+   "line": null,
+   "line_reason": "the station carries no line tag (its tags name only the network) and the place cache holds no route relation; no route query was made for it (overpass-api.de did not answer on 2026-10-13)",
+   "name": "Digbeth High Street",
+   "osm": "node/10291171437",
+   "tag": "construction=yes",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-12",
+   "noted": "2026-10-13"
+  },
+  {
+   "city": "minneapolis",
+   "line": null,
+   "line_reason": "the station carries no line tag (its tags name only the network) and the place cache holds no route relation; no route query was made for it (overpass-api.de did not answer on 2026-10-13)",
+   "name": "Royalston Avenue/Farmers Market",
+   "osm": "node/6641824111",
+   "tag": "opening_date=2027-06-12",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-12",
+   "noted": "2026-10-13"
+  },
+  {
+   "city": "minneapolis",
+   "line": null,
+   "line_reason": "the station carries no line tag (its tags name only the network) and the place cache holds no route relation; no route query was made for it (overpass-api.de did not answer on 2026-10-13)",
+   "name": "Bassett Creek Valley",
+   "osm": "node/6641824112",
+   "tag": "opening_date=2027-06-12",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-12",
+   "noted": "2026-10-13"
+  },
+  {
+   "city": "minneapolis",
+   "line": null,
+   "line_reason": "the station carries no line tag (its tags name only the network) and the place cache holds no route relation; no route query was made for it (overpass-api.de did not answer on 2026-10-13)",
+   "name": "Bryn Mawr",
+   "osm": "node/6641824115",
+   "tag": "opening_date=2027-06-12",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-12",
+   "noted": "2026-10-13"
+  },
+  {
+   "city": "minneapolis",
+   "line": null,
+   "line_reason": "the station carries no line tag (its tags name only the network) and the place cache holds no route relation; no route query was made for it (overpass-api.de did not answer on 2026-10-13)",
+   "name": "West Lake Street",
+   "osm": "node/6652942386",
+   "tag": "opening_date=2027-06-12",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-12",
+   "noted": "2026-10-13"
+  },
+  {
+   "city": "minneapolis",
+   "line": null,
+   "line_reason": "the station carries no line tag (its tags name only the network) and the place cache holds no route relation; no route query was made for it (overpass-api.de did not answer on 2026-10-13)",
+   "name": "West 21st Street",
+   "osm": "node/6652952037",
+   "tag": "opening_date=2027-06-12",
+   "open_namesake_in_index": false,
+   "cache": "2026-10-12",
+   "noted": "2026-10-13"
   }
  ]
 }

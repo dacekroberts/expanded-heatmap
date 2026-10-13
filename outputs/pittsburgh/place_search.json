@@ -1,0 +1,25 @@
+{
+  "index": "app/static/places/pittsburgh.json",
+  "places": 17024,
+  "data_retrieved": "2026-10-12",
+  "languages": {
+    "local": [
+      "en"
+    ],
+    "coverage": {
+      "en": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "English"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/188553",
+      "name": "Pittsburgh",
+      "stations": 20
+    }
+  ]
+}

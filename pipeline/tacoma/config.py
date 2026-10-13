@@ -156,7 +156,6 @@ PLACE_DROPPED = {
     "way/1034352798": "'Церковь Христиан Адвентистов Седьмого Дня Seventh-day Adventist Church', Cyrillic and English glued in one name, neither a name:<language> value: a glitch",
     "way/39675002": "'Tacoma Mall', a shopping mall's name on its own internal road",
     "way/1100744270": "'Tacoma Mall', a shopping mall's name on its own internal road",
-    "way/520807101": "'Granary', a bare type word; a bare type goes whatever the object carries (owner, 2026-10-13)",
     "way/587121672": "'Cheney Stadium Access Closed During Games', a notice standing in for a street's name (owner, 2026-10-13: descriptions reach streets)",
     "way/23646743": "'Thomp Yakim Trans', a street name cut short (owner, 2026-10-13)",
     "way/12244205": "'Nelighthouse Drive', a direction prefix glued onto the name: a glitch (owner, 2026-10-13)",

@@ -1,0 +1,61 @@
+{
+  "index": "app/static/places/manchester.json",
+  "places": 70489,
+  "data_retrieved": "2026-10-12",
+  "languages": {
+    "local": [
+      "en"
+    ],
+    "coverage": {
+      "en": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "English"
+    ]
+  },
+  "stations_not_open": [
+    {
+      "osm": "node/7007839003",
+      "name": "Crumpsall",
+      "tag": "construction:public_transport=stop_position"
+    }
+  ],
+  "area": [
+    {
+      "osm": "relation/146656",
+      "name": "Manchester",
+      "stations": 42
+    },
+    {
+      "osm": "relation/146675",
+      "name": "Trafford",
+      "stations": 18
+    },
+    {
+      "osm": "relation/146925",
+      "name": "Oldham",
+      "stations": 10
+    },
+    {
+      "osm": "relation/146657",
+      "name": "Salford",
+      "stations": 10
+    },
+    {
+      "osm": "relation/146655",
+      "name": "Tameside",
+      "stations": 7
+    },
+    {
+      "osm": "relation/146927",
+      "name": "Bury",
+      "stations": 6
+    },
+    {
+      "osm": "relation/146926",
+      "name": "Rochdale",
+      "stations": 6
+    }
+  ]
+}

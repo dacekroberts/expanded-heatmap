@@ -312,7 +312,6 @@ PLACE_FOLD = None
 PLACE_REVIEWED = {}
 PLACE_DROPPED = {
     "way/260181659": "'Dashiell Hammett Place', an apartment building (rooms=22) named for a former resident: a home",
-    "way/276641708": "'Earthquake Refugee Cottage.  San Francisco Landmark No. 171', two names glued in one, and a residence by tag (building:use=residential)",
     "way/289372464": "a place of worship with a person's own name glued onto its name: a glitch, not repaired",
     "way/289665929": "'Luke Bt. St. Church', the words of the name are transposed: a glitch",
     "way/32776568": "'Boiler rooms', a description on a ruin",
@@ -325,11 +324,6 @@ PLACE_DROPPED = {
     "way/260152155": "'Russian Orthodox Convent of Our Lady of Vladimir', a convent tagged a place of worship, not notable: a religious residence, by id",
     "way/289952218": "'Saint Elizabeth Rectory Chapel', a rectory chapel, not notable: a religious residence, by id",
     "node/7621537973": "'S.E.A.T Tram', an on-island visitor shuttle indexed as a station: not transit (owner, 2026-10-13)",
-    "way/156681276": "'Community Park', a bare type word, unregistered",
-    "way/1286999777": "'Urban Park', a bare type word, unregistered",
-    "way/148288769": "'Rooftop Park', a bare type word, unregistered",
-    "way/570773694": "'Redwood Grove', a bare type word, unregistered",
-    "node/2721828529": "'Secret Garden', a bare type word, unregistered",
     "way/288340245": "'Post Chapel', a bare type word, unregistered",
     "node/11008350407": "'Crown Point Press', a dealer's gallery is the business itself, whatever its article (owner, 2026-10-11)",
     "node/2627794649": "'Gallery Paule Anglim', a dealer's gallery is the business itself, whatever its article (owner, 2026-10-11)",

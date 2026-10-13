@@ -181,17 +181,9 @@ PLACE_FOLD = None
 PLACE_REVIEWED = {}
 PLACE_DROPPED = {
     "node/7742395209": "'Waterloo', a tourist or heritage ride indexed as a station: not transit (owner, 2026-10-13)",
-    "way/187956624": "'SWP', a bare type word for a name (owner, 2026-10-13)",
-    "way/247427577": "'SWP', a bare type word for a name (owner, 2026-10-13)",
-    "way/144135203": "'Greenway', a bare type word for a name (owner, 2026-10-13)",
-    "way/144135204": "'Greenway', a bare type word for a name (owner, 2026-10-13)",
-    "way/144276936": "'Greenway', a bare type word for a name (owner, 2026-10-13)",
-    "way/158878607": "'Greenway', a bare type word for a name (owner, 2026-10-13)",
-    "way/144135211": "'Greenway', a bare type word for a name (owner, 2026-10-13)",
     "way/154217734": "'Joseph Schneider Haus National Historic Site', a duplicate beside the same thing's own row (owner, 2026-10-13)",
     "node/7985356773": "'Shelmerdine Grave', a plaque or grave under a private person's name (owner, 2026-10-13)",
     "way/43352710": "'Zion United / Rockway Mennonite', a duplicate beside the same thing's own row (owner, 2026-10-13)",
-    "relation/2062153": "'Kitchener', the city boundary's center as a second place row beside the city's own: a duplicate (owner, 2026-10-13)",
     "relation/2062154": "'Waterloo', the city boundary's center as a second place row beside the city's own: a duplicate (owner, 2026-10-13)",
     "way/385344932": "'243 Grey Silo Road', an address standing in for a street's name: a driveway, not a street",
     "way/385344933": "'243 Grey Silo Road', an address standing in for a street's name: a driveway, not a street",

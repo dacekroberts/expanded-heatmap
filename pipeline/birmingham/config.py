@@ -194,18 +194,12 @@ PLACE_LANGUAGES = ("en",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
 PLACE_DROPPED = {
-    "node/7774259407": "'Shakespeare Line Warwick Road', a tourist railway's stop indexed as a station (usage=tourism): not transit (owner, 2026-10-13)",
-    "node/10291171437": "'Digbeth High Street', a tram stop not yet open (construction=yes; its note says not in use yet); the not-open test does not read that tag",
     "node/1745739183": "'The Patrick Collection', closed for good, removed or the site of a vanished thing, by its own tags or name (owner, 2026-10-13)",
     "node/1314883020": "'Blue Plaque: Joseph Lucas 1834-1902', closed for good, removed or the site of a vanished thing, by its own tags or name (owner, 2026-10-13)",
     "node/1374183345": "'Site of Langley Hall', closed for good, removed or the site of a vanished thing, by its own tags or name (owner, 2026-10-13)",
     "node/12525181511": "'Site of Roman Kiln', closed for good, removed or the site of a vanished thing, by its own tags or name (owner, 2026-10-13)",
-    "node/12259285719": "'Blue Plaque: Site of Langley Forge Co. Ltd 1904-1985', a plaque named by a description of what stood or happened there",
-    "node/13981795473": "'The First Health Food Store in the UK', a plaque named by a description of what stood or happened there",
     "node/12804949365": "'Blue Plaque: Site of James Watt's Smethwick Engine', a plaque named by a description of what stood or happened there",
-    "node/12796347627": "'Blue Plaque: Site of the Three Shires Oak', a plaque named by a description of what stood or happened there",
     "node/12424548502": "'Blue Plaque: Location of Zepplin Raid', a plaque named by a description of what stood or happened there",
-    "node/348303274": "'Clock Tower', a description or a bare type word standing in for a name",
     "node/1372922783": "'Burnt Mound', a description or a bare type word standing in for a name",
     "node/1372922786": "'Burnt Mound', a description or a bare type word standing in for a name",
     "node/725889895": "'Burnt Mound', a description or a bare type word standing in for a name",
@@ -230,8 +224,6 @@ PLACE_DROPPED = {
     "way/27758829": "'Norman Street', not the thing its tag says: a school, a club or a business under its own name, or another object's name",
     "node/8832560078": "'Edgbaston Archery & Lawn Tennis Society', not the thing its tag says: a school, a club or a business under its own name, or another object's name",
     "node/13248595683": "'Yew Tree & Tame Bridge Neighbourhood Centre', not the thing its tag says: a school, a club or a business under its own name, or another object's name",
-    "node/12973662298": "'Andrew Carnegie Donation Stone', not the thing its tag says: a school, a club or a business under its own name, or another object's name",
-    "node/12973662297": "'Mitchells & Butlers Donation Stone', not the thing its tag says: a school, a club or a business under its own name, or another object's name",
     "way/156819378": "'Bentley Canal', an abandoned canal by its own tags (abandoned=yes or a former-canal note) (owner, 2026-10-13: a search must not land where the thing is not)",
     "way/122995668": "'Darb's Basin', an abandoned canal by its own tags (abandoned=yes or a former-canal note) (owner, 2026-10-13: a search must not land where the thing is not)",
     "way/203796371": "'Highfield Basin', an abandoned canal by its own tags (abandoned=yes or a former-canal note) (owner, 2026-10-13: a search must not land where the thing is not)",
@@ -250,8 +242,6 @@ PLACE_DROPPED = {
     "way/638540863": "'Sheepcote Street (BUS GATE)', a notice glued onto the street's name: a glitch (owner, 2026-10-13)",
     "way/1417716130": "'Sheepcote Street (BUS GATE)', a notice glued onto the street's name: a glitch (owner, 2026-10-13)",
     "way/1417716131": "'Sheepcote Street (BUS GATE)', a notice glued onto the street's name: a glitch (owner, 2026-10-13)",
-    "way/1277791777": "'Path', a bare type as a street's name (owner, 2026-10-13)",
-    "way/1423810178": "'path', a bare type as a street's name (owner, 2026-10-13)",
     "way/1277667731": "'cemetry path', a description as a street's name (owner, 2026-10-13)",
     "way/1277667730": "'Cemetry path', a description as a street's name (owner, 2026-10-13)",
     "way/1277666439": "'Cemetry Path', a description as a street's name (owner, 2026-10-13)",
@@ -283,6 +273,4 @@ PLACE_DROPPED = {
     "way/28580908": "'Tollgate Shopping Centre', a shopping centre's own way",
     "way/621691363": "'Great Bear Logistics', a company's own road",
     "way/1295640613": "'Great Bear Logistics', a company's own road",
-    "way/394642781": "'Birmingham Brummies Speedway', a speedway team's track indexed as a street (highway=raceway) (owner, 2026-10-13)",
-    "way/394757983": "'Wolverhampton Wolves & Cradley Heathens Speedway', a speedway team's track indexed as a street (highway=raceway) (owner, 2026-10-13)",
 }

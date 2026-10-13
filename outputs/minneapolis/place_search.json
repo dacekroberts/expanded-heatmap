@@ -1,0 +1,51 @@
+{
+  "index": "app/static/places/minneapolis.json",
+  "places": 9287,
+  "data_retrieved": "2026-10-12",
+  "languages": {
+    "local": [
+      "en"
+    ],
+    "coverage": {
+      "en": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "English"
+    ]
+  },
+  "stations_not_open": [
+    {
+      "osm": "node/6641824111",
+      "name": "Royalston Avenue/Farmers Market",
+      "tag": "opening_date=2027-06-12"
+    },
+    {
+      "osm": "node/6641824112",
+      "name": "Bassett Creek Valley",
+      "tag": "opening_date=2027-06-12"
+    },
+    {
+      "osm": "node/6641824115",
+      "name": "Bryn Mawr",
+      "tag": "opening_date=2027-06-12"
+    },
+    {
+      "osm": "node/6652942386",
+      "name": "West Lake Street",
+      "tag": "opening_date=2027-06-12"
+    },
+    {
+      "osm": "node/6652952037",
+      "name": "West 21st Street",
+      "tag": "opening_date=2027-06-12"
+    }
+  ],
+  "area": [
+    {
+      "osm": "relation/136712",
+      "name": "Minneapolis",
+      "stations": 15
+    }
+  ]
+}

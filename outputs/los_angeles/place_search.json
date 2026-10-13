@@ -1,0 +1,36 @@
+{
+  "index": "app/static/places/los_angeles.json",
+  "places": 65041,
+  "data_retrieved": "2026-10-12",
+  "languages": {
+    "local": [
+      "en"
+    ],
+    "coverage": {
+      "en": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "English"
+    ]
+  },
+  "stations_not_open": [
+    {
+      "osm": "way/923855786",
+      "name": "Arts District Station",
+      "tag": "railway=proposed"
+    }
+  ],
+  "area": [
+    {
+      "osm": "relation/207359",
+      "name": "Los Angeles",
+      "stations": 56
+    },
+    {
+      "osm": "relation/112100",
+      "name": "Long Beach",
+      "stations": 8
+    }
+  ]
+}

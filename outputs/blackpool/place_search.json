@@ -1,0 +1,30 @@
+{
+  "index": "app/static/places/blackpool.json",
+  "places": 10910,
+  "data_retrieved": "2026-10-12",
+  "languages": {
+    "local": [
+      "en"
+    ],
+    "coverage": {
+      "en": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "English"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/148603",
+      "name": "Borough of Blackpool",
+      "stations": 26
+    },
+    {
+      "osm": "relation/148604",
+      "name": "Borough of Wyre",
+      "stations": 14
+    }
+  ]
+}

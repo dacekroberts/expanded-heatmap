@@ -1,0 +1,40 @@
+{
+  "index": "app/static/places/liverpool.json",
+  "places": 40875,
+  "data_retrieved": "2026-10-12",
+  "languages": {
+    "local": [
+      "en"
+    ],
+    "coverage": {
+      "en": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "English"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/162456",
+      "name": "Wirral",
+      "stations": 23
+    },
+    {
+      "osm": "relation/172987",
+      "name": "Liverpool",
+      "stations": 17
+    },
+    {
+      "osm": "relation/173023",
+      "name": "Sefton",
+      "stations": 17
+    },
+    {
+      "osm": "relation/173025",
+      "name": "Knowsley",
+      "stations": 2
+    }
+  ]
+}

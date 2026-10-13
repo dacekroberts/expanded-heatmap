@@ -1,0 +1,45 @@
+{
+  "index": "app/static/places/newcastle.json",
+  "places": 37254,
+  "data_retrieved": "2026-10-12",
+  "languages": {
+    "local": [
+      "en"
+    ],
+    "coverage": {
+      "en": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "English"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/142282",
+      "name": "Newcastle upon Tyne",
+      "stations": 19
+    },
+    {
+      "osm": "relation/142245",
+      "name": "North Tyneside",
+      "stations": 17
+    },
+    {
+      "osm": "relation/140390",
+      "name": "South Tyneside",
+      "stations": 10
+    },
+    {
+      "osm": "relation/116279",
+      "name": "Sunderland",
+      "stations": 9
+    },
+    {
+      "osm": "relation/140462",
+      "name": "Gateshead",
+      "stations": 5
+    }
+  ]
+}

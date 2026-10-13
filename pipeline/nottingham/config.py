@@ -186,7 +186,6 @@ PLACE_DROPPED = {
     "node/2400164517": "'Moat (site of)', a description (\"site of\") standing in for a name",
     "relation/17280686": "'WW2 Bunkers', a description standing in for a name",
     "node/1349348375": "'Gatepier at South Lodge', a description of a gate pier",
-    "node/4121180770": "'Muslim Prayer Room', a prayer room: a bare type",
     "node/13524967129": "'NTU Prayer Room', a prayer room: a bare type",
     "node/4715712714": "'QMC Prayer Room Level 3', a prayer room: a bare type",
     "node/13524956164": "'UoN Prayer Room Portland Building', a prayer room: a bare type",

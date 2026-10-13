@@ -1,0 +1,25 @@
+{
+  "index": "app/static/places/washington_dc.json",
+  "places": 12305,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "en"
+    ],
+    "coverage": {
+      "en": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "English"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/162069",
+      "name": "District of Columbia",
+      "stations": 40
+    }
+  ]
+}
