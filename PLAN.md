@@ -279,9 +279,10 @@ Detail files: [japan](docs/plan_detail/japan.md),
     line, the boundary as the fetch's first query, the 7-day data-age guard,
     schema number 1 in the index and intersections file, the Chicago
     ranking fix and Vancouver's three Surrey parcels dropped by id.
-    **Still owed at wave 1's landing:** the id side file
-    (`outputs/<city>/place_ids.json`; it does not change an index, so no
-    re-render), and the cut-over message to transit-globe.
+    **The id side file is built too** (2026-10-13,
+    `outputs/<city>/place_ids.json`, written by the index step; no index
+    changed). **Still owed at wave 1's landing:** the cut-over message to
+    transit-globe.
     **London's tile 2 is May data from `overpass.kumi.systems`: refetch it
     from `overpass-api.de` when that mirror answers again (owner: "yes
     refetch london tile"), rebuild London, report the rows that change.**
