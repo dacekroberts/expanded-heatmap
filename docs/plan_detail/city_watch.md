@@ -120,15 +120,18 @@ This is open work, not a record: update an item here as it moves, and send a fin
   2026-10-13 (branch `tram-rescope`); the owner decides case by case.**
   **Built and on master since 2026-09-27** (merge be2e3713): Montreal's REM,
   Rome's tram 8, Madrid's ML1, Paris T3a and T3b, San Francisco's F Market &
-  Wharves. **Left:** Barcelona TRAM (a color rule first), Mexico City's
+  Wharves. **Left:** Mexico City's
   Cablebús (coordinates first), then Toronto, Milan and Prague after a label
   and legend rule and a Toronto pilot. Hong Kong Tramways is out (owner).
   Estimate as first written: `docs/tram_rescope_estimate.md`.
-  - **Barcelona TRAM, measured 2026-10-13** (OSM, one query, 12 relations):
-    Trambaix T1, T2 and T3 share the same 9 stops inside the city; Trambesòs
-    T4 has 10, and T5 and T6 share the same 10; Glòries is on both groups,
-    so 28 distinct stops. All six carry #007165, Delta-E 13.9 from the
-    Montjuïc funicular's green.
+  - **Barcelona TRAM: OUT (owner, 2026-10-13).** Measured that day: none of
+    its 28 stops inside the city is beyond the 0.6 mile ring of a drawn
+    station, and rings on them add no storefront. The page's "not drawn"
+    wording is owed, for the owner's approval.
+  - **Cablebús, measured 2026-10-13:** all 19 stations now carry
+    coordinates in OSM, and 15 are beyond the 0.6 mile ring of drawn rail;
+    17,783 storefronts would gain a ring. Mexicable (out, owner 2026-10-04)
+    is the open question beside it.
   - **Rome's other trams (2, 3, 5, 14, 19):** tram 3 runs Trastevere - Porta
     Maggiore since 2026-09-07; the whole network is due back by 2026-11-23
     (`docs/recheck_calendar.md`). ⏸ **Parked by the owner 2026-10-13 as ONE

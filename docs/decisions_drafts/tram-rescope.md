@@ -2,6 +2,48 @@
 
 Newest first. Cleanup folds these into `DECISIONS.md` at review time.
 
+### 2026-10-13 - Tram rescope: Barcelona's trams stay out, the page to say why (owner); Cablebus measured
+
+- **Barcelona, the owner: "2 leave it out" and "and state why"**, to the
+  measurement in the entry below: none of the 28 tram stops inside the city
+  is beyond the 0.6 mile outer ring of a drawn station (farthest 807 m), and
+  rings on them would bring no storefront inside the rings (22 of 35,309
+  beyond, before and after). This supersedes "two drawn lines" of the same
+  day, which the owner chose before the overlap was measured; the shade
+  #00524a is not used. It is Hong Kong Tramways' reason, measured.
+- **Owed, as wording for the owner:** a "not drawn" bullet on Barcelona's
+  page (it has none for the trams), and the sentence in
+  `docs/excluded_categories.md` that gives the trams' reason as "falls
+  outside the network-identity test that picks out its metro", which is how
+  they were filtered, not why they are out. Drafted in chat 2026-10-13;
+  nothing in `app/` or that file is changed until approved.
+- **Kept:** `data/barcelona/raw/osm_tram_routes_2026-10-13.json`, the
+  evidence. No Barcelona step ran; no index rebuild is owed.
+- **Cablebus has coordinates now.** The watch list said "no official list or
+  coordinates yet". All 19 stations are in the place-search cache of
+  2026-10-12 (`data/mexico_city/raw/osm_places_2026-10-12.json`,
+  `aerialway=station`): Línea 1 six (Indios Verdes to Cuautepec), Línea 2
+  seven (Constitución de 1917 to Santa Marta), Línea 3 six (Los Pinos /
+  Constituyentes to Vasco de Quiroga), all inside Ciudad de México. Línea 3
+  held one stop in OSM on 2026-09-27. The cable geometry is not in that
+  cache; one Overpass query for it failed on both mirrors the same day
+  (overpass-api.de URLError, kumi.systems 504) and was not retried.
+- **Cablebus passes the test Barcelona failed.** Measured against the 180
+  drawn stations in `data/mexico_city/processed/stations.csv` as it stood:
+  15 of the 19 are beyond the 966 m outer ring (5 on each line), the
+  farthest 6,542 m (Cuautepec); the four within it are the interchanges
+  (Indios Verdes 290 m, Constitución de 1917 171 m, Santa Marta 150 m, Los
+  Pinos / Constituyentes 154 m). Station spacing: medians 1,727 m, 1,613 m
+  and 1,011 m. With rings on the 19, storefronts beyond 0.6 mi go from
+  257,649 of 407,629 (63.2%) to 239,866 (58.8%): 17,783 storefronts gain a
+  ring. Not re-run; `heavy_job.py` measured the read at 0.35 GB.
+- **Raised for the owner, not decided:** Mexicable is out of the regional
+  page by the owner's call of 2026-10-04, recorded as "a cable car". Its
+  Línea 1 has seven stations in Ecatepec, 3.3 to 7.7 km from any drawn
+  station, and Línea 2 two more there. Drawing Cablebus while Mexicable is
+  out for being a cable car needs either the same call for both or a
+  different stated reason.
+
 ### 2026-10-13 - Tram rescope: Rome's trams parked as one decision after 2026-11-23; Barcelona drawn as two lines (owner)
 
 - **Rome, the owner: "yes one rome decision sounds good as a parked
