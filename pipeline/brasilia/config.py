@@ -67,3 +67,13 @@ NODE_NAMES = {}
 GATE3 = {'lines': {}, 'network': 27, 'source': "pt.wikipedia 'Metrô do Distrito Federal', read 2026-09-24 - secondary: 27 stations in operation. The agency's own IPEDF layer (2023) lists 24 and marks 106 Sul, 110 Sul and Estrada Parque as under construction, though they opened in 2020 (106/110 Sul 2020-09-17, Estrada Parque January 2020) - stale by those three, as GeoSampa was by Jardim Colonial; 104 Sul and Onoyama are still being built and are in neither OSM nor the count"}
 SPACING_MIN_M = 300.0
 COLLAPSE_MAX_SPREAD_M = 400
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
+
+PLACE_AREA = "(id:3600421151)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
+PLACE_LANGUAGES = ("pt",)
+PLACE_FOLD = None
+PLACE_REVIEWED = {}
+PLACE_DROPPED = {}

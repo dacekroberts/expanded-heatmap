@@ -1,40 +1,73 @@
 {
-  "fia_register": {
-    "file": "BGMOPEN1.zip",
-    "url": "https://eip.fia.gov.tw/data/BGMOPEN1.zip",
-    "bytes": 66343427,
-    "sha256": "95b08653facc371b44c3281e45256de6dbed3c68955d467faa28ea9a28155000",
-    "retrieved": "2026-09-25T07:19:21+00:00",
-    "data_date": "2026-09-25"
-  },
   "doorplates": {
-    "file": "taichung_doorplate.csv",
-    "edition": "臺中市115年8月GIS門牌號碼",
-    "drive_id": "1oCjMy_eccQHv7R-VUEBZiC9gtJZ18GcV",
-    "index": "https://newdatacenter.taichung.gov.tw/api/v1/no-auth/resource.download?rid=03d9c01c-4a7c-4bd8-ae88-12ed011391b3",
-    "url": "https://drive.usercontent.google.com/download?id=1oCjMy_eccQHv7R-VUEBZiC9gtJZ18GcV&export=download",
     "bytes": 159271987,
+    "drive_id": "1oCjMy_eccQHv7R-VUEBZiC9gtJZ18GcV",
+    "edition": "臺中市115年8月GIS門牌號碼",
+    "file": "taichung_doorplate.csv",
+    "index": "https://newdatacenter.taichung.gov.tw/api/v1/no-auth/resource.download?rid=03d9c01c-4a7c-4bd8-ae88-12ed011391b3",
+    "retrieved": "2026-09-25T07:19:30+00:00",
     "sha256": "965f8def67f0b6a2af47f40f656303ae5785ba27ff0fa00168e2508bdbfe74b2",
-    "retrieved": "2026-09-25T07:19:30+00:00"
+    "url": "https://drive.usercontent.google.com/download?id=1oCjMy_eccQHv7R-VUEBZiC9gtJZ18GcV&export=download"
+  },
+  "fia_register": {
+    "bytes": 66343427,
+    "data_date": "2026-09-25",
+    "file": "BGMOPEN1.zip",
+    "retrieved": "2026-09-25T07:19:21+00:00",
+    "sha256": "95b08653facc371b44c3281e45256de6dbed3c68955d467faa28ea9a28155000",
+    "url": "https://eip.fia.gov.tw/data/BGMOPEN1.zip"
+  },
+  "osm_place_outline": {
+    "bytes": 375870,
+    "elements": 1,
+    "file": "osm_place_outline_v1.json",
+    "host": "download.geofabrik.de (taiwan-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:60];\narea(id:3602921154)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T19:19:43+00:00",
+    "sha256": "3f0666bd70a6f9d138c49a85a9a10d798b8cb762ad81358d348b16bb9f192a12"
+  },
+  "osm_places": {
+    "bytes": 32043470,
+    "elements": 312468,
+    "file": "osm_places_2026-10-13.json",
+    "host": "download.geofabrik.de (taiwan-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3602921154)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T19:19:43+00:00",
+    "sha256": "50ec62391b0c732ca21b4ea972db06799fe72dff486fcbd66154c0761deb5e09"
+  },
+  "osm_places_extra": {
+    "bytes": 142965,
+    "elements": 435,
+    "file": "osm_places_extra_2026-10-13.json",
+    "host": "download.geofabrik.de (taiwan-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3602921154)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T19:19:45+00:00",
+    "sha256": "d467049c2e4d884b24aeaa09ce96f66fa5e3c1c6b514d114da0e3a3ca5ebf2c7"
+  },
+  "osm_rail": {
+    "bytes": 24042927,
+    "elements": {
+      "node": 104,
+      "relation": 183
+    },
+    "file": "osm_rail_routes.json",
+    "osm_base": "2026-09-25T07:18:10Z",
+    "query": "[out:json][timeout:300];relation[\"type\"=\"route\"][\"route\"~\"^(subway|light_rail|train|monorail)$\"](23.99,120.46,24.45,121.46)->.r;.r out geom;node(r.r);out body;",
+    "retrieved": "2026-09-25T07:19:49+00:00",
+    "sha256": "3854c0950f289c2d66ad1b16e416c1ae4a8c2b0b2aa400eb9ef017f50916c7c2",
+    "url": "https://overpass-api.de/api/interpreter"
   },
   "stations": {
     "file": "green_line_stations.csv",
-    "url": "https://newdatacenter.taichung.gov.tw/api/v1/no-auth/resource.download?rid=f9511cc5-4799-4df9-98b7-0b0f89fc2be9",
+    "retrieved": "2026-09-25T07:19:30+00:00",
     "rows": 18,
     "sha256": "edac6764b887cb48f8e07c5a9cf29a948a7b2728d26dafa3ca8a5a7b7da40532",
-    "retrieved": "2026-09-25T07:19:30+00:00"
-  },
-  "osm_rail": {
-    "file": "osm_rail_routes.json",
-    "url": "https://overpass-api.de/api/interpreter",
-    "query": "[out:json][timeout:300];relation[\"type\"=\"route\"][\"route\"~\"^(subway|light_rail|train|monorail)$\"](23.99,120.46,24.45,121.46)->.r;.r out geom;node(r.r);out body;",
-    "bytes": 24042927,
-    "sha256": "3854c0950f289c2d66ad1b16e416c1ae4a8c2b0b2aa400eb9ef017f50916c7c2",
-    "elements": {
-      "relation": 183,
-      "node": 104
-    },
-    "osm_base": "2026-09-25T07:18:10Z",
-    "retrieved": "2026-09-25T07:19:49+00:00"
+    "url": "https://newdatacenter.taichung.gov.tw/api/v1/no-auth/resource.download?rid=f9511cc5-4799-4df9-98b7-0b0f89fc2be9"
   }
 }

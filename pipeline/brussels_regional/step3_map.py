@@ -23,6 +23,7 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline import place_index  # noqa: E402
 from pipeline.brussels_regional.config import (  # noqa: E402
     BUSINESSES_CLEAN_CSV,
     CITY_COMMUNE_CODE,
@@ -88,6 +89,7 @@ def main():
         ring_edges_meters=RING_EDGES_METERS,
         ring_labels=RING_LABELS,
         label_focus=scope,
+        place_index_url=place_index.index_url("brussels_regional"),
     )
 
 

@@ -1,97 +1,130 @@
 {
-  "written_utc": "2026-09-29T20:33:42+00:00",
+  "datafordeler": {
+    "cvr/Adressering.csv": {
+      "csv_sha256": "7f373eec55949f39ecfed85f421cb1924c151614fe1346d865156cff6e1a217c",
+      "entity": "Adressering",
+      "fetched_utc": "2026-09-24T04:29:06+00:00",
+      "filename": "CVR_V2_Adressering_TotalDownload_csv_Current_505.csv",
+      "generation": 505,
+      "generation_time": null,
+      "register": "CVR"
+    },
+    "cvr/Branche.csv": {
+      "csv_sha256": "6f579219eeadb2e8d8c6adaff3139ab85206ce81288768efd34113c38c9c3014",
+      "entity": "Branche",
+      "fetched_utc": "2026-09-24T04:29:07+00:00",
+      "filename": "CVR_V2_Branche_TotalDownload_csv_Current_505.csv",
+      "generation": 505,
+      "generation_time": null,
+      "register": "CVR"
+    },
+    "cvr/Navn.csv": {
+      "csv_sha256": "c7b853408f6e549d75f7ac224cbf6da9b62c9e5d0b7c5d1fc0212a50a9f6106f",
+      "entity": "Navn",
+      "fetched_utc": "2026-09-24T04:29:08+00:00",
+      "filename": "CVR_V2_Navn_TotalDownload_csv_Current_505.csv",
+      "generation": 505,
+      "generation_time": null,
+      "register": "CVR"
+    },
+    "cvr/Produktionsenhed.csv": {
+      "csv_sha256": "bd181e52dd14f0f58603f1f66bbb1fb5573047a78f2d4729b4237b000a20072d",
+      "entity": "Produktionsenhed",
+      "fetched_utc": "2026-09-24T04:29:08+00:00",
+      "filename": "CVR_V2_Produktionsenhed_TotalDownload_csv_Current_505.csv",
+      "generation": 505,
+      "generation_time": null,
+      "register": "CVR"
+    },
+    "cvr/Virksomhed.csv": {
+      "csv_sha256": "ca1ae73b57ca7a70524f30019ce22b30da7c362ebaef4e281d6ac0ea66df2991",
+      "entity": "Virksomhed",
+      "fetched_utc": "2026-09-24T05:11:36+00:00",
+      "filename": "CVR_V2_Virksomhed_TotalDownload_csv_Current_505.zip",
+      "generation": 505,
+      "generation_time": "2026-09-18T23:35:57.01193Z",
+      "register": "CVR"
+    },
+    "cvr/Virksomhedsform.csv": {
+      "csv_sha256": "1aa802082d0b51c4f12dcc805804b8e06708606d3cdba7bb3f003c0ce181ac59",
+      "entity": "Virksomhedsform",
+      "fetched_utc": "2026-09-24T05:13:09+00:00",
+      "filename": "CVR_V2_Virksomhedsform_TotalDownload_csv_Current_505.zip",
+      "generation": 505,
+      "generation_time": "2026-09-18T23:35:41.439118Z",
+      "register": "CVR"
+    },
+    "dar/Adresse.csv": {
+      "csv_sha256": "f46299a29c7a52f3ab17512b6b137d1aa805363004f10e6f236b2e8dca6956db",
+      "entity": "Adresse",
+      "fetched_utc": "2026-09-24T05:32:43+00:00",
+      "filename": "DAR_V4_Adresse_TotalDownload_csv_Current_761.zip",
+      "generation": 761,
+      "generation_time": "2026-09-18T23:02:17.593588Z",
+      "register": "DAR"
+    },
+    "dar/Husnummer.csv": {
+      "csv_sha256": "3930c8b19339248080fab3c03d09cece0bba3ebd4d6df77c50a52ec9d90cc998",
+      "entity": "Husnummer",
+      "fetched_utc": "2026-09-24T06:19:26+00:00",
+      "filename": "DAR_V4_Husnummer_TotalDownload_csv_Current_761.zip",
+      "generation": 761,
+      "generation_time": "2026-09-18T23:02:26.700691Z",
+      "register": "DAR"
+    }
+  },
+  "osm": {
+    "address_points": {
+      "file_utc": "2026-09-29T20:21:09+00:00",
+      "host": "cache"
+    },
+    "kommuner": {
+      "file_utc": "2026-09-29T20:16:24+00:00",
+      "host": "overpass.kumi.systems"
+    },
+    "rail": {
+      "file_utc": "2026-09-29T20:14:51+00:00",
+      "host": "overpass-api.de"
+    }
+  },
   "osm_bbox": [
     55.9,
     9.9,
     56.5,
     10.95
   ],
-  "osm": {
-    "rail": {
-      "host": "overpass-api.de",
-      "file_utc": "2026-09-29T20:14:51+00:00"
-    },
-    "kommuner": {
-      "host": "overpass.kumi.systems",
-      "file_utc": "2026-09-29T20:16:24+00:00"
-    },
-    "address_points": {
-      "host": "cache",
-      "file_utc": "2026-09-29T20:21:09+00:00"
-    }
+  "osm_place_outline": {
+    "bytes": 396286,
+    "elements": 1,
+    "file": "osm_place_outline_v1.json",
+    "host": "download.geofabrik.de (denmark-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:60];\narea(id:3601784663)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T19:18:56+00:00",
+    "sha256": "490a8399930cf3b893c634fa7e4c09014e8d532e662f4a97db32a495032e7deb"
   },
-  "datafordeler": {
-    "cvr/Adressering.csv": {
-      "register": "CVR",
-      "entity": "Adressering",
-      "filename": "CVR_V2_Adressering_TotalDownload_csv_Current_505.csv",
-      "generation": 505,
-      "generation_time": null,
-      "fetched_utc": "2026-09-24T04:29:06+00:00",
-      "csv_sha256": "7f373eec55949f39ecfed85f421cb1924c151614fe1346d865156cff6e1a217c"
-    },
-    "cvr/Branche.csv": {
-      "register": "CVR",
-      "entity": "Branche",
-      "filename": "CVR_V2_Branche_TotalDownload_csv_Current_505.csv",
-      "generation": 505,
-      "generation_time": null,
-      "fetched_utc": "2026-09-24T04:29:07+00:00",
-      "csv_sha256": "6f579219eeadb2e8d8c6adaff3139ab85206ce81288768efd34113c38c9c3014"
-    },
-    "cvr/Navn.csv": {
-      "register": "CVR",
-      "entity": "Navn",
-      "filename": "CVR_V2_Navn_TotalDownload_csv_Current_505.csv",
-      "generation": 505,
-      "generation_time": null,
-      "fetched_utc": "2026-09-24T04:29:08+00:00",
-      "csv_sha256": "c7b853408f6e549d75f7ac224cbf6da9b62c9e5d0b7c5d1fc0212a50a9f6106f"
-    },
-    "cvr/Produktionsenhed.csv": {
-      "register": "CVR",
-      "entity": "Produktionsenhed",
-      "filename": "CVR_V2_Produktionsenhed_TotalDownload_csv_Current_505.csv",
-      "generation": 505,
-      "generation_time": null,
-      "fetched_utc": "2026-09-24T04:29:08+00:00",
-      "csv_sha256": "bd181e52dd14f0f58603f1f66bbb1fb5573047a78f2d4729b4237b000a20072d"
-    },
-    "cvr/Virksomhed.csv": {
-      "register": "CVR",
-      "entity": "Virksomhed",
-      "filename": "CVR_V2_Virksomhed_TotalDownload_csv_Current_505.zip",
-      "generation": 505,
-      "generation_time": "2026-09-18T23:35:57.01193Z",
-      "fetched_utc": "2026-09-24T05:11:36+00:00",
-      "csv_sha256": "ca1ae73b57ca7a70524f30019ce22b30da7c362ebaef4e281d6ac0ea66df2991"
-    },
-    "cvr/Virksomhedsform.csv": {
-      "register": "CVR",
-      "entity": "Virksomhedsform",
-      "filename": "CVR_V2_Virksomhedsform_TotalDownload_csv_Current_505.zip",
-      "generation": 505,
-      "generation_time": "2026-09-18T23:35:41.439118Z",
-      "fetched_utc": "2026-09-24T05:13:09+00:00",
-      "csv_sha256": "1aa802082d0b51c4f12dcc805804b8e06708606d3cdba7bb3f003c0ce181ac59"
-    },
-    "dar/Adresse.csv": {
-      "register": "DAR",
-      "entity": "Adresse",
-      "filename": "DAR_V4_Adresse_TotalDownload_csv_Current_761.zip",
-      "generation": 761,
-      "generation_time": "2026-09-18T23:02:17.593588Z",
-      "fetched_utc": "2026-09-24T05:32:43+00:00",
-      "csv_sha256": "f46299a29c7a52f3ab17512b6b137d1aa805363004f10e6f236b2e8dca6956db"
-    },
-    "dar/Husnummer.csv": {
-      "register": "DAR",
-      "entity": "Husnummer",
-      "filename": "DAR_V4_Husnummer_TotalDownload_csv_Current_761.zip",
-      "generation": 761,
-      "generation_time": "2026-09-18T23:02:26.700691Z",
-      "fetched_utc": "2026-09-24T06:19:26+00:00",
-      "csv_sha256": "3930c8b19339248080fab3c03d09cece0bba3ebd4d6df77c50a52ec9d90cc998"
-    }
-  }
+  "osm_places": {
+    "bytes": 12042496,
+    "elements": 110087,
+    "file": "osm_places_2026-10-13.json",
+    "host": "download.geofabrik.de (denmark-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3601784663)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T19:18:56+00:00",
+    "sha256": "6d7de9e2eca884e13dbb26fcc5f9e5cdd79e2ef0cdbdca16833b553c2ba17cb7"
+  },
+  "osm_places_extra": {
+    "bytes": 103024,
+    "elements": 418,
+    "file": "osm_places_extra_2026-10-13.json",
+    "host": "download.geofabrik.de (denmark-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3601784663)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T19:18:56+00:00",
+    "sha256": "c324a78da1381e724c9e7c1bd7ceb56c1080ad64aa8dbe92c131e4d4d7eecc20"
+  },
+  "written_utc": "2026-09-29T20:33:42+00:00"
 }

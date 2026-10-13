@@ -252,6 +252,8 @@ PLACE_FOLD = None
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "way/37380208": "an open-air pool tagged a park",
+    "way/251217100": "a minigolf course tagged a park",
     "node/11608454406": "a dealer's gallery: the business itself, no article",
     "node/11608530438": "a dealer's gallery: the business itself, no article",
     "node/11391982379": "a dealer's gallery: the business itself, no article",

@@ -140,3 +140,13 @@ OFFICE_FLOOR_MIN = 3
 OFFICE_EXEMPT_ROWS_AT_ADDRESS = 20
 
 CITY_BBOX = {"lat_min": 24.60, "lat_max": 25.35, "lon_min": 121.25, "lon_max": 122.05}
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
+
+PLACE_AREA = "(id:3601293250,3601527220)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
+PLACE_LANGUAGES = ("zh",)
+PLACE_FOLD = None
+PLACE_REVIEWED = {}
+PLACE_DROPPED = {}

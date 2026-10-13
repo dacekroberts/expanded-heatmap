@@ -13,6 +13,7 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline import place_index  # noqa: E402
 from pipeline.map_common import load_osm_line_shapes, render_heatmap  # noqa: E402
 from pipeline.taichung import config  # noqa: E402
 
@@ -44,6 +45,7 @@ def main():
         # Names are Traditional Chinese in Taiwan's forms (theme.font_stack);
         # render_heatmap raises without a lang on CJK names.
         lang="zh-TW",
+        place_index_url=place_index.index_url("taichung"),
     )
 
 

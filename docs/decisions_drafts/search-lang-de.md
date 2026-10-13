@@ -58,10 +58,12 @@ hinter, unter, vor, bei, beim. No `WAY_ENDING`.
 Westphalia it names a manor (Haus Darl, Haus Leithe), and a "-haus" ending
 is a town hall or a hospital.
 
-`BARE_TYPE_NAMES["de"]` (22): kirche, kapelle, park, spielplatz, denkmal,
+`BARE_TYPE_NAMES["de"]` (33): kirche, kapelle, park, spielplatz, denkmal,
 brunnen, friedhof, mahnmal, wegekreuz, wegkreuz, bolzplatz, sportplatz,
 grünanlage, ehrenmal, gedenkstein, kriegerdenkmal, gedenktafel, skulptur,
-pfarrhaus, gedenkkreuz, trauerhalle, evangelisches gemeindehaus.
+pfarrhaus, gedenkkreuz, trauerhalle, evangelisches gemeindehaus,
+friedhofskapelle, dachgarten, rodelberg, badestrand, fkk-strand,
+hundestrand, tennisstadion, hügelgrab, kirchgemeindehaus, atrium, hartplatz.
 NOT "marktplatz" (a square's real name) and NOT "ohne titel" (a title is
 not a type; the three rows so named carry a Wikidata entry).
 
@@ -155,11 +157,14 @@ With the three endings in and the drops of the second round applied, the
 indexes are Berlin 18,268 rows (12,985 streets, 3,810 landmarks, 733
 places, 738 stations) and Bremen 5,645 before the endings' 21 street rows.
 
-**Bare type words the reads found, NOT yet ruled** (whole names still in an
-index): friedhofskapelle (Berlin 9, Bremen 2), dachgarten (Zurich 2),
-rodelberg (Berlin 3, Bremen 1), badestrand (Berlin 2), fkk-strand (Berlin 1,
-Bremen 1), hundestrand, tennisstadion, sporthalle, vereinsplatz, hügelgrab,
-kirchgemeindehaus, atrium, hartplatz, one each. Kept out on purpose: rathaus,
+**Bare type words the reads found, added to the list above** (owner,
+2026-10-13: "if there is precedent to answer answer them"; a whole name
+that is only a type word is the settled class). Rows each takes:
+friedhofskapelle (Berlin 8, Bremen 2), dachgarten (Zurich 2), rodelberg
+(Berlin 3, Bremen 1), badestrand (Berlin 2), fkk-strand (Berlin 1, Bremen
+1), hundestrand, tennisstadion, hügelgrab, kirchgemeindehaus, atrium,
+hartplatz, one each: 26 rows. sporthalle and vereinsplatz are not added;
+their one row each is dropped by id. Kept out on purpose: rathaus,
 bürgerpark, stadtwald, rosengarten, dorfkirche (proper names in use), and
 every artwork title that is a common noun.
 

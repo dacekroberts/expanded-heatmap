@@ -192,3 +192,13 @@ NAME_KEEP = ("shop_retail", "personal_service", "fuel")
 NAME_KIND = {"shop_retail": "Shop", "personal_service": "Service", "fuel": "Fuel station"}
 
 RIGA_BBOX = {"lat_min": 56.85, "lat_max": 57.09, "lon_min": 23.93, "lon_max": 24.33}
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
+
+PLACE_AREA = "(id:3613048688)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
+PLACE_LANGUAGES = ("lv",)
+PLACE_FOLD = None
+PLACE_REVIEWED = {}
+PLACE_DROPPED = {}

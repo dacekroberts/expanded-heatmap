@@ -106,7 +106,7 @@ st.markdown(
 """
 )
 
-render_map_help('two business categories (Shops and services, and Food service)')
+render_map_help('two business categories (Shops and services, and Food service)', search='liepaja')
 render_excluded_stations("Liepāja")
 render_country_links('Liepāja')
 

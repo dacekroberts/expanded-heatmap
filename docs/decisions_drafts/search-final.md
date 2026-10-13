@@ -1,3 +1,46 @@
+### 2026-10-13 - The boundaries for the last 24 cities; the smaller German items answered by precedent (branch search-final)
+
+- **The owner, to the six boundary calls: "1. yes sounds good. 2. whole
+  cities and new taipei for taipei. 3. yes. 4. yes. 5. yes. 6. yes".** Each
+  of the straightforward cities takes its own municipality: Aarhus 1784663,
+  Odense 2178124, Riga 13048688, Daugavpils 13048683, Liepāja 13048685,
+  Bergen 404159, Stockholm 398021, Göteborg 935611, Bucharest 377733,
+  Cluj-Napoca 3277038, Rome 41485, Florence 42602, Thessaloniki 1770680,
+  Brasília the Federal District 421151, Kitakyushu 4008600. Taiwan takes
+  whole cities: Taichung 2921154, Taoyuan 2770986, Taipei 1293250 with New
+  Taipei 1527220. Brussels (Regional) takes the Region's 19 communes.
+  Geneva takes the twelve communes a drawn station sits in. Copenhagen
+  takes ten kommuner, Monterrey four municipios and Guadalajara four, each
+  the ones holding a station. Oslo is 2775550 alone: the extract lookup
+  puts every drawn station inside Oslo kommune, so Bærum is not added.
+- **Scaffolded from one plan and fetched by the extract route.** Language
+  codes: Norway `nb`, Taiwan `zh`, Brussels `fr` and `nl`. Kitakyushu's
+  outline crosses two regions, so it is read from the Kyushu and Chugoku
+  files of one dated run together.
+- **The owner on the smaller items from the German reads: "if there is
+  precedent to answer answer them, if not bring to me with
+  recommendations".** Answered by a settled call:
+  - Eleven more bare type words into the German list (26 rows; the list is
+    in `search-lang-de.md`): a whole name that is only a type word.
+  - Two graves with no article of their own, dropped by id: Berlin
+    node/286472713 (on its subject's article) and node/925074789. The
+    owner's rule for graves and plaques.
+  - Two pools and a minigolf course tagged parks, dropped by id: Bremen
+    way/205954387, Zurich way/37380208 and way/251217100. No pool or course
+    is admitted by its own class; these came in on a wrong park tag, as the
+    office and the club address already dropped in Bremen (candidate 15).
+  - Two re-erected buildings in the Focke-Museum's grounds, on the museum's
+    article, dropped by id as museum contents: Bremen way/162241218,
+    way/207930409.
+  - Bremen's 22 facade ornaments are artworks with no article: rule
+    candidate 16 takes them, nothing by id.
+  - Zurich's service roads closed to vehicles and open on foot stay: the
+    private-street rule reads `access`, and these are in the street
+    register.
+- **Brought to the owner, no precedent:** the garden plots and courtyards
+  inside Berlin's Gärten der Welt; the Kleistgrab, a grave that is a
+  tourist attraction and sits on a section of another article.
+
 ### 2026-10-13 - German way words: -eck in, with an id catch (branch search-final)
 
 - **The owner, to the one call left from the Berlin measurement: "add, note

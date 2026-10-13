@@ -105,7 +105,7 @@ st.markdown(
 """
 )
 
-render_map_help('three business categories (Retail, Food service and Personal services)')
+render_map_help('three business categories (Retail, Food service and Personal services)', search='aarhus')
 render_excluded_stations("Aarhus")
 render_country_links('Aarhus')
 

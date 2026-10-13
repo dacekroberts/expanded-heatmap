@@ -95,7 +95,7 @@ st.markdown(
 """
 )
 
-render_map_help('three business categories (Food service, Retail and Personal services)')
+render_map_help('three business categories (Food service, Retail and Personal services)', search='taichung')
 render_excluded_stations("Taichung")
 render_country_links('Taichung')
 

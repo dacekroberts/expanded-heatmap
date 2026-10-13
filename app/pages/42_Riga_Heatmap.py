@@ -96,7 +96,7 @@ st.markdown(
 """
 )
 
-render_map_help("two business categories (Shops and services, and Food service)")
+render_map_help("two business categories (Shops and services, and Food service)", search='riga')
 render_excluded_stations("Riga")
 render_country_links('Riga')
 

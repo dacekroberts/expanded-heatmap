@@ -117,7 +117,7 @@ st.markdown(
 """
 )
 
-render_map_help('three business categories (Retail, Food service and Personal services)')
+render_map_help('three business categories (Retail, Food service and Personal services)', search='copenhagen')
 render_excluded_stations("Copenhagen (Regional)")
 render_country_links('Copenhagen (Regional)')
 

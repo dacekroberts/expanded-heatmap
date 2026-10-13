@@ -12,6 +12,7 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline import place_index  # noqa: E402
 
 from pipeline.map_common import load_osm_line_shapes, render_heatmap  # noqa: E402
 from pipeline.monterrey.step1_stations import load_boundaries         # noqa: E402
@@ -57,6 +58,7 @@ def main():
         ring_edges_meters=RING_EDGES_METERS,
         ring_labels=RING_LABELS,
         label_focus=union,
+        place_index_url=place_index.index_url("monterrey"),
     )
 
 

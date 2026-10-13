@@ -245,6 +245,9 @@ PLACE_FOLD = None
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "way/205954387": "an indoor pool tagged a park",
+    "way/162241218": "a museum's re-erected building, on the museum's article: museum contents",
+    "way/207930409": "a museum's re-erected building, on the museum's article: museum contents",
     "way/162130229": "a home tagged an attraction, no visiting shown (owner, 2026-10-13; back in when a web check shows visiting)",
     "way/167729560": "a home tagged an attraction, no visiting shown (owner, 2026-10-13; back in when a web check shows visiting)",
     "way/162235078": "a home tagged an attraction, no visiting shown (owner, 2026-10-13; back in when a web check shows visiting)",

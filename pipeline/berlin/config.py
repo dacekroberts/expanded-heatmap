@@ -239,6 +239,8 @@ PLACE_FOLD = None
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "node/286472713": "a grave on its subject's article, none of its own (owner's rule for graves, 2026-10-13)",
+    "node/925074789": "a grave with no article of its own (owner's rule for graves, 2026-10-13)",
     "way/1020102178": "a dead railway alignment (railway=abandoned) with no article of its own (owner, 2026-10-13)",
     "way/179180924": "a dead railway alignment (railway=abandoned) with no article of its own (owner, 2026-10-13)",
     "way/66665912": "a dead railway alignment (disused:railway=disused) with no article of its own (owner, 2026-10-13)",

@@ -97,7 +97,7 @@ st.markdown(
 """
 )
 
-render_map_help("three business categories (Food shops, Food service and Personal services)")
+render_map_help("three business categories (Food shops, Food service and Personal services)", search='kitakyushu')
 render_excluded_stations("Kitakyushu")
 render_country_links("Kitakyushu")
 

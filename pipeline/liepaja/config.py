@@ -152,3 +152,13 @@ TAXONOMY_SYSTEM = "riga_source"
 RAW_CLASSIFICATION_COLUMN = "activity"
 
 LIEPAJA_BBOX = {"lat_min": 56.44, "lat_max": 56.62, "lon_min": 20.93, "lon_max": 21.13}
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
+
+PLACE_AREA = "(id:3613048685)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
+PLACE_LANGUAGES = ("lv",)
+PLACE_FOLD = None
+PLACE_REVIEWED = {}
+PLACE_DROPPED = {}

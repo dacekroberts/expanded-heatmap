@@ -302,3 +302,13 @@ COPENHAGEN_BBOX = {
 # 12.21-12.69 E (the brief), plus ~0.02 deg; never the rail bbox.
 if REGIONAL:
     COPENHAGEN_BBOX = {"lat_min": 55.57, "lat_max": 55.83, "lon_min": 12.19, "lon_max": 12.71}
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
+
+PLACE_AREA = "(id:3602183062,3602186643,3602186660,3602187055,3602187129,3602190423,3602191207,3602191218,3602192190,3602192363)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
+PLACE_LANGUAGES = ("da",)
+PLACE_FOLD = None
+PLACE_REVIEWED = {}
+PLACE_DROPPED = {}
