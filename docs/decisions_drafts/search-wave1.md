@@ -6,6 +6,10 @@ Downstream inputs this branch changes: `outputs/<city>/provenance.json`,
 rendered, `outputs/<city>/heatmap.html` for the wave's cities; no city added,
 no notice, no licence row (every source is OpenStreetMap, already recorded).
 
+### 2026-10-13 - Place search wave 1: the render moves to Cleanup and this session retires after the rebuild
+
+- **The wave's render, `check_all.py` run and browser test pass from this session to Cleanup, at the one big review (owner, 2026-10-13: "we can do it cleanup's way, work pipeline is slowing down so retiring sessions is a good idea").** The handoff had this session run them as its step 7. What stays here once the second rule batch is on master: merge master, rebuild the 33 indexes, remove the by-id drops a rule now covers, add Melbourne's lane words, re-read what the rules newly admit (Melbourne's lanes, the roundabouts and abandoned landmarks taken back), and commit configs, indexes and this file on `search-wave1`. **The built indexes are therefore committed before the maps are rendered**, where they had been left uncommitted to go in with the maps; `check_place_search.py` rule A (not rendered) will fail the 33 on the branch until Cleanup's render.
+
 ### 2026-10-13 - Place search wave 1: named roundabouts and standing abandoned landmarks stay; 256 by-id drops taken back
 
 - **The owner reversed two of the lettered rulings, and the by-id drops for them were removed (owner, 2026-10-13, relayed by Cleanup: "keep the named roundabouts, keep all standing abandoned landmarks"; confirmed in this session: "1 yes, 2 yes to both").** The lettered list had dropped named roundabouts with interchanges and ramps (b) and kept an abandoned or ruined landmark only with an article of its own (i); Cleanup's list of the same day said keep for both, and the owner chose that. Taken out of `PLACE_DROPPED`: Manchester 235 ids (20 "X Roundabout" names, 173 ids; 10 "X Circle" names, 62 ids), Buffalo 9, New York 9, Philadelphia 3: 256 ids. No index was rebuilt: the one rebuild after the second rule batch lands covers it.
