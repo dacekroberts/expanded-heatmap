@@ -92,6 +92,15 @@ marked TO BUILD name a script that does not exist yet.
    Paris) and compare before any new city relies on it. Place names from
    OpenStreetMap may go to an outside model; nothing from a business
    register may, and no key enters the repository.
+   **Which model reads what (owner, 2026-10-13):** the `place-read` agent
+   on the session's top model for station, junction, place and landmark
+   rows; a Sonnet-tier `place-read` (the Agent tool's `model: sonnet`) for
+   the street screen, one city per call. Measured on Birmingham, Boston and
+   Tacoma against wave 1's applied drops: Sonnet found 34 of 38 dropped
+   street names and 43 of 77 dropped ids, Haiku 15 of 38 and 32 of 77. The
+   test indexes predated the rules of 2026-10-13, which now drop several of
+   the missed classes; re-measure before moving the place and landmark rows
+   to a lower tier. Haiku reads nothing.
 6. **Visitable former homes are left out of the rollout**: the home rule
    already keeps homes out, and `PLACE_VISITABLE` is added later for the
    cities the owner names.

@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**99 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**100 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -36,6 +36,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Place search: the owner's two fixes to the changed-row report (three places closed for works kept, two counties by Prague dropped)](#2026-10-13---place-search-the-owners-two-fixes-to-the-changed-row-report-three-places-closed-for-works-kept-two-counties-by-prague-dropped)
 - [Place search: the owner's rulings of 2026-10-13 built on a branch, the 19 indexes rebuilt, every changed row reported; NOT landed](#2026-10-13---place-search-the-owners-rulings-of-2026-10-13-built-on-a-branch-the-19-indexes-rebuilt-every-changed-row-reported-not-landed)
 - [Place search: the rules of 2026-10-13 approved for landing, with two row fixes and the page section (owner)](#2026-10-13---place-search-the-rules-of-2026-10-13-approved-for-landing-with-two-row-fixes-and-the-page-section-owner)
+- [Place search: the top model reads places and landmarks, Sonnet screens streets (owner)](#2026-10-13---place-search-the-top-model-reads-places-and-landmarks-sonnet-screens-streets-owner)
 
 **2026-10-12**
 
@@ -5269,3 +5270,23 @@ japan-city template:
   typed word finds a misspelled name was not sized; the shared-Wikidata
   threshold of two (48 more rows) and the roman-road landmark rows are
   measured only.
+
+### 2026-10-13 - Place search: the top model reads places and landmarks, Sonnet screens streets (owner)
+
+- **The test.** Three cities wave 1 had read on the top model (Birmingham,
+  Boston, Tacoma) were read again by the `place-read` agent at two lower
+  tiers, from indexes as they stood before wave 1's drops, and scored
+  against the drops wave 1 applied. Dropped ids found, of 77: Sonnet 43,
+  Haiku 32. Dropped street names found, of 38: Sonnet 34, Haiku 15.
+- **What Sonnet missed:** 9 of Birmingham's 17 abandoned canals, plaques
+  named by a description, Boston's demolished and never-built rows, a
+  company's own node. Haiku missed 10 of Tacoma's 13 street names.
+- **The owner, to the recommendation "keep the top model for the place and
+  landmark rows, and let Sonnet do the street screen": "recommendation for
+  models sounds good".** Recorded in the `place-search-city` skill, step 5.
+- **Limits.** The test indexes predate the rules landed the same day
+  (86aadced), which drop gone places and bare type words before any read,
+  so the gap on a rules-built index is smaller and was not measured. Homes
+  could not be scored: wave 1's drop files do not mark which drops were
+  homes. Both tiers flagged far more rows than wave 1 dropped (Sonnet 671
+  across the three cities); those were not judged row by row.
