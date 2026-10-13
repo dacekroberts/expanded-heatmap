@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**133 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**134 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -70,6 +70,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Place search: Mexico City keeps its named private streets too (owner)](#2026-10-13---place-search-mexico-city-keeps-its-named-private-streets-too-owner)
 - [Place search: seven rulings on the final group's held rows (owner)](#2026-10-13---place-search-seven-rulings-on-the-final-groups-held-rows-owner)
 - [Place search: the outside model's flags measured against the tags on wave 1; four rulings (owner)](#2026-10-13---place-search-the-outside-models-flags-measured-against-the-tags-on-wave-1-four-rulings-owner)
+- [Place search: the seven rulings applied on the final group, three departures approved (owner)](#2026-10-13---place-search-the-seven-rulings-applied-on-the-final-group-three-departures-approved-owner)
 
 **2026-10-12**
 
@@ -6300,3 +6301,30 @@ japan-city template:
   away, and was merged into it), and Green Street is indexed as "Green".
 - **The drawn-station check is built** (`scripts/check_map_search.js`,
   446a3bee): 2,746 stations and 226 lines on the 19 live maps, all found.
+
+### 2026-10-13 - Place search: the seven rulings applied on the final group, three departures approved (owner)
+
+- **Applied on `search-final` (a48922bb):** Guadalajara 27,771 rows to
+  27,488, Rome 19,310 to 19,287, and single digits in Copenhagen, Oslo,
+  Cluj-Napoca, Yamagata and Most. 1,708 of the 1,810 held rows remain and
+  are settled by the existing rules in three read-only lanes (the owner's
+  "settle by existing rule", as for wave 1's undecided rows); only a class
+  no rule covers goes back to the owner, with a recommendation.
+- **Three departures from the rulings as given, each recommended and the
+  owner: "all approved".**
+  1. Kitakyushu's Onga River stays under its glitched name: those rows are
+     the river's only rows, and a drop would take the river out of search.
+     The repair belongs on OpenStreetMap and arrives at a refresh.
+  2. Guadalajara's 283 names ending in a house number stay dropped (550
+     ways), though the sample of 40 showed real residential lanes of gated
+     clusters labelled with their gate address, not addresses typed into a
+     name field as Cleanup had described them. The parent street stays in
+     the index. Cost: a search for the full gate address finds the street,
+     not the lane.
+  3. The 85 names kept by ruling sit in `PLACE_RULED_KEPT`, a record no
+     code reads, because check E of `check_place_search.py` refuses a
+     reviewed name without a leak word. At the big review they move into
+     the reviewed list and the check is widened to accept a name kept by a
+     recorded ruling.
+- **Standing instruction (owner, 2026-10-13):** anything brought back for a
+  ruling carries Cleanup's recommendation.
