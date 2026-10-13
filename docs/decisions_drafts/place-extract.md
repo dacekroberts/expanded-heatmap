@@ -1,3 +1,70 @@
+### 2026-10-13 - Shared-border streets (branch shared-border)
+
+- **Built the shared-border rule in the extract route only, as a named
+  option that is off by default, and turned it on for street ways.**
+  `osm_extract.query(shared_borders=[union names])` admits, into the unions
+  named, an element that fails every single-boundary test and passes rule 3
+  against the boundaries taken together (their union, holes kept).
+  `place_extract_fetch.SHARED_BORDER_UNIONS = ("streets",)` is the one
+  switch; `--overpass-exact` turns it off for a run. The main cache's
+  `_extract.shared_border` block lists every way admitted with the two
+  municipalities it lies between, and the provenance entry's `how` repeats
+  the count. Rejected: testing the union for every element (the
+  prototype's form), because the default must stay the proven Overpass
+  answer and a caller must be able to list what the departure added.
+  Selftest cases in both files: a border between two included areas in;
+  the outer edge out; a border with an area not included out; the edge of
+  a hole out, and in once an included area fills the hole. With the option
+  off Seattle's main cache is byte-identical to the proof's
+  (`data/_osm_extracts/build_test/seattle/`).
+- **Left the Overpass route as it is: a city fetched by
+  `place_index_fetch.py` does not have these ways.** No query was changed.
+  An Overpass-side equivalent would be one more query per
+  multi-municipality city (the named highway ways around the boundaries'
+  member ways at distance 0, with their nodes), filtered on this machine by
+  the same union test, merged into the main cache, mirrored by a new shape
+  in `place_extract_fetch.py` and proven again. Not built: the owner's call.
+- **Measured on six built cities, every changed row listed in
+  `data/_place_rules_2026-10-13/shared_border/report.md` and
+  `report.json`; no cache, index or map of any city was written.** Each
+  extract was read twice into scratch (rule off, rule on) and the index
+  built from each in memory. Seattle (11 municipalities, washington-261008):
+  59 ways admitted beside 47,810, all of six real streets (148th Avenue
+  Northeast 38 ways between Redmond and Bellevue, South 43rd Street 6,
+  International Boulevard 5, 42nd Avenue South 5, South 164th Street 3 and
+  68th Avenue South 2); none private, none dropped by the index's own
+  rules. Index rows 13,426 to 13,426: 1 street row added (South 43rd
+  Street), 2 extended (68th Avenue South, South 164th Street), 1 alias
+  gained (International Boulevard: State Route 99), and 1 row removed
+  because the admitted ways join two fragments of South 164th Street into
+  one row. Intersections 27,702 to 27,724: 22 added, 4 moved by 7.5 to 15
+  m, none removed. Vancouver (5 municipalities, southcoast-admreg-261012):
+  1 way of 6 m (Tenth Avenue, New Westminster and Burnaby), no row changed,
+  one drawn line longer. Tokyo (23 municipalities, kanto-261012): 0 ways.
+  Kyoto, Brussels and Tbilisi (one municipality each): 0 ways and identical
+  elements, as the rule gives by construction.
+- **Measured the tagged unions and left them off: the only elements on
+  shared borders are river ways.** With the rule on for the main and extra
+  queries as well it would admit 1 element in Seattle (Green River, Tukwila
+  and Kent), 4 in Vancouver (Brunette River 3, Fraser River North Arm 1) and
+  17 in Tokyo (旧中川, all 17), every one `waterway=river`, and nothing from
+  the extra query. Whether any of those rivers lacks a row today was not
+  measured. Adding `"main"` to `SHARED_BORDER_UNIONS` is a one-word change
+  for the owner to decide.
+- **Did not measure Montreal or Mexico City.** Montreal's smallest covering
+  region (quebec-261012, 1,161,775,276 bytes) is over the script's 1,000 MB
+  limit and was refused before its body was read; the limit is a person's
+  call and was not raised. Two regions were downloaded once each through
+  `osm_extract.download_extract` (southcoast-admreg-261012, 116,610,620
+  bytes; kanto-261012, 518,862,268 bytes).
+- **PROPOSAL for review time (a row for `docs/place_search_exclusions.md`,
+  which is not on this branch):** "Streets on a border between two searched
+  municipalities | In when the city's places were read from a regional
+  extract; missing when they were read from Overpass, which returns a way
+  only when it is inside one municipality | Seattle: 59 ways of six
+  streets". Also changed: the `osm-extract` and `place-search-city` skills
+  and `docs/commands.md`, one paragraph each.
+
 ### 2026-10-13 - Place search from regional extracts (branch place-extract)
 
 - **Built the extract route as two files: a general reader and this project's

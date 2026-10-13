@@ -396,7 +396,12 @@ All quoted in the drafts file; the short list:
    and records the download host and file in the provenance. Its element
    order is its own (ascending id), so same-name ties in the index can fall
    differently from an Overpass cache of the same data, and one or two
-   objects grazing the boundary can be added per city. Read the
+   objects grazing the boundary can be added per city. **It also admits
+   the street ways lying along a border two municipalities of `PLACE_AREA`
+   share** (`SHARED_BORDER_UNIONS`; Seattle 59 ways of six streets), which
+   the Overpass route does NOT return: a multi-municipality city has those
+   streets only when fetched this way, and its cache and provenance say how
+   many. `--overpass-exact` turns that off. Read the
    **`osm-extract` skill** first: the proof, the leftovers and the download
    server's conduct rules are there.
 4. **A new language first** (see "A new language" below), then copy

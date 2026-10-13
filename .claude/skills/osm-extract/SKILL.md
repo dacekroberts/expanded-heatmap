@@ -70,6 +70,19 @@ case that also shows what the broken rule would have answered.
    center latitudes one last digit off, and the offset form matched all 772,
    then all of Seattle's, Brussels' and Kyoto's without further change.
 
+**One named departure from rule 1, off by default: shared borders.**
+`osm_extract.query(..., shared_borders=[union names])` also admits, into the
+unions named, an element that fails every single-boundary test and passes
+rule 3 against the boundaries taken together (their union, holes kept): a
+street along the border two included municipalities share. The outer edge of
+the whole area, a border with an area that is not included and the edge of a
+hole nothing included fills all stay out. Overpass does not return these
+elements, so an answer made with the option on is NOT the Overpass answer:
+`query()` lists each admitted element with the boundaries it lies between
+under `"shared_border"`, and a caller must record and disclose them. One
+boundary admits nothing by construction. Prove a query with the option OFF
+(the proof below), then measure what the option adds as its own step.
+
 **Order is not reproduced, and is not meant to be.** Overpass's `qt` order
 follows its own disk layout. `osm_extract.query` returns nodes, ways and
 relations each by ascending id, so the same extract and query always give the
@@ -127,7 +140,9 @@ no evidence, only a parser that did not complain.
 2. Download each region's extract of THAT date:
    `python pipeline/osm_extract.py download <region-id> --dated <YYMMDD>`.
 3. Build beside the real caches, never over them:
-   `python scripts/heavy_job.py run --label <city>-place-extract --session <you> --wait 30 -- python pipeline/place_extract_fetch.py <city> --pbf <file> --out <dir>`.
+   `python scripts/heavy_job.py run --label <city>-place-extract --session <you> --wait 30 -- python pipeline/place_extract_fetch.py <city> --pbf <file> --out <dir> --overpass-exact`
+   (without `--overpass-exact` the shared-border streets come too, and the
+   comparison shows each as "only extract").
 4. `python scripts/place_extract_compare.py <city> <dir>`. Section A is the
    tie-break count (same elements, two orders); section B is every row that
    differs because an element differs.
@@ -210,6 +225,15 @@ written usage policy. Its "Download responsibly!" request is the policy, and
   region is chosen, held or downloaded for it; `--pbf` names a file). It
   writes only the caches that are missing; `--force` replaces. It takes no
   Overpass mirror lock and makes no Overpass request.
+- **Shared-border streets are ON for a city's caches**
+  (`place_extract_fetch.SHARED_BORDER_UNIONS = ("streets",)`): the main
+  cache's `_extract.shared_border` block names every way admitted and the
+  two municipalities it lies between, and the provenance entry's `how`
+  repeats the count. Measured 2026-10-13 (the drafts entry "Shared-border
+  streets" has every city): Seattle 59 ways, giving 1 street row added, 2
+  extended, 2 fragments of one street joined and 22 intersections added; a
+  one-municipality city 0. `--overpass-exact` gives the Overpass answer. A
+  city fetched by `place_index_fetch.py` has none of these ways.
 - A plan's empty search areas: `python scripts/place_search_area_lookup.py
   <plan.json> --source extract`.
 - Both are registered in `scripts/check_all.py` by their selftests, and
