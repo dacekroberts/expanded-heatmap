@@ -4334,6 +4334,44 @@ OSM_ATTRIBUTION = (
     'rel="noopener noreferrer">OpenStreetMap</a> contributors'
 )
 
+# THE OWNER'S RIGHTS ON A MAP FILE (owner, 2026-10-13, after a rights check
+# found that a saved or screenshotted map carried the OpenStreetMap credit
+# and nothing of the owner's). Two parts, both written by render_heatmap:
+#  - machine-readable tags in the head (RIGHTS_META; wording approved by the
+#    owner). They reserve the DESIGN AND TEXT only: the map's data is its
+#    publishers', as LICENSE says, and no tag may read as a claim over it.
+#  - a visible credit after the basemap's in the bottom attribution line
+#    (OWNER_CREDIT). It follows the OSM credit and never replaces it.
+# Fukui's output is offered under CC BY-SA 4.0 (LICENSE, "ONE EXCEPTION"), so
+# its rights tag says so instead of reserving everything.
+OWNER_NAME = "Dace Roberts"
+OWNER_CREDIT = f"Map design &copy; {OWNER_NAME}"
+# What both base layers (Business and Travel) show in the bottom line.
+MAP_ATTRIBUTION = OSM_ATTRIBUTION + " &middot; " + OWNER_CREDIT
+RIGHTS_META = {
+    "copyright": f"Writing and design \u00a9 2026 {OWNER_NAME}. All rights reserved.",
+    "dcterms.rightsHolder": OWNER_NAME,
+    "dcterms.rights": (f"Map design and text \u00a9 2026 {OWNER_NAME}, all rights reserved. Code: MIT "
+                       "License. Business, transit and basemap data remain under their publishers' "
+                       "terms; see the site's Required Notices page."),
+}
+RIGHTS_META_BY_CITY = {
+    "fukui": {
+        "dcterms.rights": (f"Map design and text \u00a9 2026 {OWNER_NAME}. This map's output is offered "
+                           "under CC BY-SA 4.0, as Fukui City's license for its source lists requires. "
+                           "Code: MIT License. Business, transit and basemap data remain under their "
+                           "publishers' terms; see the site's Required Notices page."),
+        "copyright": f"Writing and design \u00a9 2026 {OWNER_NAME}. This map's output: CC BY-SA 4.0.",
+    },
+}
+
+
+def rights_meta_html(slug):
+    """The head's rights tags for the map of `slug` (RIGHTS_META, with the
+    city's own wording where RIGHTS_META_BY_CITY has one)."""
+    tags = dict(RIGHTS_META, **RIGHTS_META_BY_CITY.get(slug, {}))
+    return "\n".join(f'<meta name="{k}" content="{html.escape(v, quote=True)}">' for k, v in tags.items())
+
 
 # THE OPEN BASEMAP (PROTOTYPE, DECISIONS.md 2026-10-07 "Four ideas assessed",
 # item 4). tile.openstreetmap.org forbids offline use and CARTO's terms forbid
@@ -4589,7 +4627,7 @@ class OpenBasemap(folium.map.Layer):
         self.libs = list(libs or OPEN_BASEMAP_LIBS)
         self.assets = assets or OPEN_BASEMAP_ASSETS
         self.travel_style_js = TRAVEL_STYLE_JS
-        self.attribution = OSM_ATTRIBUTION
+        self.attribution = MAP_ATTRIBUTION
 
 
 # THE FULL TRAVEL VERSION (owner, 2026-10-07/08; the drafts log has the
@@ -5436,7 +5474,7 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     # requires the target on every map.
     std_base = folium.TileLayer(
         tiles="OpenStreetMap", name="Business" if open_basemap else map_title,
-        attr=OSM_ATTRIBUTION,
+        attr=MAP_ATTRIBUTION,
     ).add_to(m)
     basemap_args = dict(open_basemap or {})
     routes = tuple(basemap_args.pop("routes", ()))
@@ -5678,6 +5716,7 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     # metadata only, never visible, read from the committed table, so no key
     # is needed to render. A map with no table entry renders unmarked and
     # `fingerprint.py coverage` fails it.
+    m.get_root().header.add_child(folium.Element(rights_meta_html(output_path.parent.name)))
     mark = fingerprint_mark(f"map/{output_path.parent.name}")
     if mark:
         m.get_root().header.add_child(folium.Element(
