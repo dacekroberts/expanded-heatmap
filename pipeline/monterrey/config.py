@@ -193,6 +193,31 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("es",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
+
+# Colonias drawn as areas on residential land, kept by id (owner, 2026-10-13):
+# the estate rule would drop them. The rows appear once PLACE_KEPT reaches
+# that rule (docs/decisions_drafts/search-final.md).
+PLACE_KEPT = {
+    "way/158750071": "'Pedregal La Silla', a colonia of the municipal Plano de Colonias (owner, 2026-10-13)",
+    "way/158890877": "'Lomas de Satélite', a colonia of the municipal Plano de Colonias (owner, 2026-10-13)",
+    "way/158890879": "'Villas de La Hacienda', a colonia of the municipal Plano de Colonias (owner, 2026-10-13)",
+    "way/158894383": "'Miradores Satélite', a colonia of the municipal Plano de Colonias (owner, 2026-10-13)",
+    "way/158894389": "'Privado Villalta', a colonia of the municipal Plano de Colonias (owner, 2026-10-13)",
+    "way/159105874": "'Jardin Español', a colonia of the municipal Plano de Colonias (owner, 2026-10-13)",
+    "way/159105883": "'Residencial La Española', a colonia of the municipal Plano de Colonias (owner, 2026-10-13)",
+    "way/159110480": "'La Herradura', a colonia of the municipal Plano de Colonias (owner, 2026-10-13)",
+    "way/159110481": "'Ancón del Huajuco', a colonia of the municipal Plano de Colonias (owner, 2026-10-13)",
+    "way/159110483": "'Valles de Chapultepec', a colonia of the municipal Plano de Colonias (owner, 2026-10-13)",
+    "way/162986859": "'Pedregal Contry', a colonia of the municipal Plano de Colonias (owner, 2026-10-13)",
+    "way/162986860": "'Rincon Colonial La Silla', a colonia of the municipal Plano de Colonias (owner, 2026-10-13)",
+    "way/162986862": "'Contry La Escondida', a colonia of the municipal Plano de Colonias (owner, 2026-10-13)",
+    "way/163034603": "'Contry Lux', a colonia of the municipal Plano de Colonias (owner, 2026-10-13)",
+    "way/163034604": "'Colonial La Silla', a colonia of the municipal Plano de Colonias (owner, 2026-10-13)",
+    "way/163034605": "'Las Musas', a colonia of the municipal Plano de Colonias (owner, 2026-10-13)",
+    "way/163117258": "'La Pastora', a colonia of the municipal Plano de Colonias (owner, 2026-10-13)",
+    "way/346622812": "'Fraccionamiento Valle de San Miguel Residencial', a colonia of the municipal Plano de Colonias (owner, 2026-10-13)",
+    "way/346622818": "'Villas de San Francisco', a colonia of the municipal Plano de Colonias (owner, 2026-10-13)",
+}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
     "way/510893060": "an office tower tagged a park",
