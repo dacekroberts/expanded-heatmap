@@ -172,7 +172,6 @@
  {"label": "a city's station ending is stripped", "old": "            for end in station_strip:", "new": "            for end in ():"},
  {"label": "store is set aside where it is a plain word", "old": "LEAK_SET_ASIDE = {\"da\": (\"store\",), \"nb\": (\"store\",), \"sv\": (\"store\",)}", "new": "LEAK_SET_ASIDE = {}"},
  {"label": "a glued street passes beside a leak word", "old": "GLUED_STREET_LANGUAGES = SUFFIX_WAY_LANGUAGES - {\"ko\"}", "new": "GLUED_STREET_LANGUAGES = set()"},
- {"label": "Swedish -gard is no way word on a footway", "old": "WAY_WORDS_OFF = {(\"sv\", \"footway\"): (\"gård\", \"gården\", \"gårdar\", \"gårdarna\")}", "new": "WAY_WORDS_OFF = {}"},
  {"label": "a Latvian house word closes a home's name", "old": "                 \"lv\": (\"villa\",), \"nb\": (\"gård\", \"hovedgård\", \"prestegård\")}", "new": "                 \"nb\": (\"gård\", \"hovedgård\", \"prestegård\")}"},
  {"label": "Romanian and Italian lead with the way word", "old": "WAY_WORD_LEADS = {\"fr\", \"ca\", \"es\", \"cs\", \"pt\", \"ro\", \"it\"}", "new": "WAY_WORD_LEADS = {\"fr\", \"ca\", \"es\", \"cs\", \"pt\"}"},
  {"label": "a language below the floor is read", "old": "    read = (*local, *also)", "new": "    read = local"},

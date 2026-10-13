@@ -344,9 +344,10 @@ def stations_per_municipality(munis, stations):
 # entries have a Wikipedia article in any language and caches the answer:
 #     {"_source": {...}, "articles": {"Q1": ["enwiki", "frwiki"], "Q2": [], "Q3": null}}
 # an empty list for an entry with no article, null for one the lookup could
-# not read. This module only READS the cache (a step never fetches): where an
-# object needs the answer and its entry is not in the cache, the step stops
-# naming the fetch script. Read for public art and libraries only (rules 16
+# not read. This module only READS the cache (a step never fetches). With no
+# cache on disk the rules fall back to the wikipedia tag and the step says
+# so; with a cache that lacks an entry the step needs, it stops naming the
+# fetch script. Read for public art and libraries only (rules 16
 # and 39); every other "own article" test still reads the wikipedia tag.
 def wikidata_cache(config):
     """The path of a city's Wikidata article cache: config.PLACE_WIKIDATA_JSON,
@@ -422,6 +423,10 @@ def run(config):
           f"{cpath.relative_to(STATIC_DIR).as_posix()} ({cpath.stat().st_size:,} bytes, "
           f"{report.get('crossing', 0):,} intersections) and {summary_path(slug).name}")
     print(f"  languages: {index['languages']['coverage']} -> the page names {index['languages']['listed']}")
+    if report.get("wikidata_cache_absent") and report.get("wikidata_entries_asked"):
+        print(f"  NO WIKIDATA CACHE at {wikidata_cache(config)}: {report['wikidata_entries_asked']:,} "
+              f"entries went unasked, so public art and libraries were held to the wikipedia tag alone. "
+              f"Run: python pipeline/place_wikidata_fetch.py {slug}")
     for k in sorted(report):
         print(f"  {k}: {report[k]:,}")
     return index
@@ -510,8 +515,13 @@ def build_city(config):
     stale = sorted(set(dropped) - found)
     if stale:
         sys.exit(f"config.PLACE_DROPPED names {stale}, not in the cache: remove them")
+    # A cache absent from disk is no answer: the rules fall back to the
+    # wikipedia tag alone, and run() says so. A cache that is there and lacks
+    # an entry the step needs is stale, and stops the step.
     known = read_wikidata_articles(wikidata_cache(config))
-    unasked = sorted(set(index.get("wikidata_asked", ())) - set(known or {}))
+    report["wikidata_cache_absent"] = int(known is None)
+    report["wikidata_entries_asked"] = len(index.get("wikidata_asked", ()))
+    unasked = [] if known is None else sorted(set(index.get("wikidata_asked", ())) - set(known))
     if unasked:
         sys.exit(f"{len(unasked)} Wikidata entr{'y' if len(unasked) == 1 else 'ies'} the index step needs "
                  f"({', '.join(unasked[:5])}{', ...' if len(unasked) > 5 else ''}) "
@@ -1076,10 +1086,6 @@ def _private_street(names, local):
 # "Kerkpad"; Korean 세종대로): _reads_as_way matches it as a word's ending there.
 SUFFIX_WAY_LANGUAGES = {"nl", "ko", "de", "da", "nb", "sv"}
 GLUED_STREET_LANGUAGES = SUFFIX_WAY_LANGUAGES - {"ko"}
-# A WAY WORD THAT IS NONE ON ONE CLASS OF WAY (candidate 37, owner
-# 2026-10-13): Swedish -gård names a street and, on a footway, a yard, a
-# churchyard or a garden.
-WAY_WORDS_OFF = {("sv", "footway"): ("gård", "gården", "gårdar", "gårdarna")}
 # Street names that carry no street word at all. Czech names a street with a
 # preposition ("Na Viničce", "U Vizerky", "Pod Havránkou") or an adjective
 # agreeing with the unwritten "ulice" ("Bělohorská", "Goyova"): Prague's
@@ -1844,7 +1850,7 @@ def _named_street(name, local):
 WAY_WORD_LEADS = {"fr", "ca", "es", "cs", "pt", "ro", "it"}
 
 
-def _reads_as_way(names, local, extra=(), highway=None):
+def _reads_as_way(names, local, extra=()):
     """True when a name reads as a way in English or a local language: a CJK
     way word anywhere in it (三条小橋), a Latin one as a whole word, or, in a
     language that compounds (SUFFIX_WAY_LANGUAGES), as a word's ending
@@ -1861,8 +1867,6 @@ def _reads_as_way(names, local, extra=(), highway=None):
             if ws and ((len(ws) > 1 and ws[0] in lead) or (ending and ws[-1].endswith(ending))):
                 return True
         for word in WAY_WORDS.get(code, ()):
-            if word in WAY_WORDS_OFF.get((code, highway), ()):
-                continue
             for n in names:
                 low = n.lower()
                 if code in SUFFIX_WAY_LANGUAGES:
@@ -2950,7 +2954,7 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
                 square_areas.append((w, t, names))
             continue
         if (t.get("highway") in MINOR_HIGHWAYS and not (t.get("wikidata") or t.get("wikipedia"))
-                and not _reads_as_way(names, local, way_words, t.get("highway"))
+                and not _reads_as_way(names, local, way_words)
                 and not (t.get("access") in ("private", "no") and _private_street(names, local))):
             report["minor_way_dropped_not_a_way_name"] += 1
             continue
@@ -4555,8 +4559,8 @@ def _selftest():
          ("street", "Store Kongensgade") in small["da"] and ("street", "Hotel Strandvej") in small["da"]
          and ("street", "Kirkestien") in small["da"] and ("place", "Store Plads") in small["da"]),
         ("Norwegian: a glued way word", ("street", "Storgata") in small["nb"]),
-        ("Swedish: -gården is no way word on a footway", ("street", "Stora gården") not in small["sv"]
-         and ("street", "Lilla gården") in small["sv"] and ("street", "Kungsgatan") in small["sv"]),
+        ("Swedish: a glued way word, and -gården a street ending on any way", ("street", "Kungsgatan") in small["sv"]
+         and ("street", "Stora gården") in small["sv"] and ("street", "Lilla gården") in small["sv"]),
         ("Latvian: a way word, and a house word closing a name", ("street", "Brīvības iela") in small["lv"]
          and ("landmark", "Mindeļa villa") not in small["lv"]),
         ("Romanian: a leading way word", ("street", "Strada Mare") in small["ro"]),
