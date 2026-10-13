@@ -2,6 +2,39 @@
 
 Newest first. Cleanup folds these into `DECISIONS.md` at review time.
 
+### 2026-10-13 - Tram rescope: Prague's trams are drawn in ten groups (owner), built on the branch; the page text is a draft
+
+- **Owner, 2026-10-13:** "1 yes" to the ten groups of the entry below, and
+  the label form: "label should be Trams 1 & 25 unless that is confusing.
+  commas before final number for groups larger than 2".
+- **Label form as built (this session's reading of that sentence):** two
+  routes "Trams 1 & 25"; three or more with a comma before the ampersand,
+  "Trams 2, 18, & 24". If the owner meant "Trams 2, 18 & 24" it is one line
+  in `config.tram_group_name`.
+- **Built.** `config.TRAM_GROUPS` holds the groups and their colors (the
+  trial's, pin floor 45, closest pair within 500 m 41.9). 13 lines, 196
+  stations, 21,462 of 25,185 storefronts in a ring (85.2%; 69.6% before).
+  Station rows and excluded reasons still name the single route ("Tram 5"),
+  which is the public name of the service.
+- **Labels (`scripts/check_map_labels.js` on the built map):** no problem
+  at 1024, 375 or 343.
+- **The four wide stop names** (Vinice, Palmovka, Nádraží Holešovice,
+  Želivského) were read from the feed's platform coordinates: each is one
+  junction with platforms on its different arms. Kept as one place each.
+- **Provenance.** `provenance.json` now records the re-pull (`gtfs_trams`,
+  bytes and SHA-256 computed from the file, retrieved time from its
+  modification time) and `fetch_sources.py` fetches `TRAM_GTFS_ZIP` beside
+  the metro's copy. The fetch script was not run.
+- **Drafts for the owner (not approved):** The lines bullets and the ring
+  share sentence on `app/pages/28_Prague_Heatmap.py`, the blurb in
+  `app/cities.py`, the Stations paragraph in `docs/excluded_categories.md`.
+- **For landing:** set `TRAM_DIR = DATA_PROCESSED`, re-run steps 1 and 3,
+  update `baseline.json`; the place-search index needs a rebuild (139 new
+  stations). No drift check was run from the branch. check_all 72 of 73
+  (Mexico City's search area, known).
+- **Re-check:** `docs/recheck_calendar.md`, 10-26, when the feed window
+  ends; why 30, 31, 32, 37 and 40 run and 14 and 16 do not was never read.
+
 ### 2026-10-13 - Tram rescope: Prague built with 28 tram routes (owner); per-route labels fail on phones, and a ten-group trial passes (the grouping is with the owner)
 
 - **Owner, 2026-10-13:** all 28 day routes ("yes your recommendations"),

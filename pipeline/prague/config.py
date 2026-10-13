@@ -179,19 +179,41 @@ TRAM_WIDE_PLACES = ("Vinice", "Palmovka", "Nádraží Holešovice", "Želivskéh
 TRAM_ATTACH_M = 150.0
 TRAM_ATTACH_NAMED_M = 400.0
 TRAM_THIN_SPACING_MILES = 0.5
+# ONE LABEL, LEGEND ROW AND COLOR PER GROUP OF ROUTES (owner, 2026-10-13). One
+# label per route was built first and failed the phone label check: 5
+# overlapping pairs at 375 px and 16 at 343, where the whole network shows in
+# about 175 by 170 px. The groups are the project's, not PID's: routes merged
+# by average shared track (track within 40 m, over the shorter route). Ten
+# groups place every label at 1024, 375 and 343; eight and twelve did not.
+# Two routes of a group share as little as 26% of their track (2 and 24).
+# Re-measure the groups if TRAM_LINES changes.
+#
 # PID gives every tram one color (#7A0603), so these are the project's: each
 # 45 or more (CIE76) from every category pin, 18 or more from every line
-# within 500 m (closest such pair 27.1, trams 6 and 9), 3:1 against both page
-# backgrounds. Searched 2026-10-13 on each route's most-used shape; re-run the
-# search if TRAM_LINES or the pin palette changes.
-TRAM_COLOURS = {
-    "1": "#C88800", "2": "#686818", "3": "#2848F8", "4": "#00A0B8", "5": "#D08068",
-    "6": "#F86008", "7": "#A06000", "8": "#B880A0", "9": "#B03808", "10": "#A09808",
-    "11": "#906888", "12": "#C870C8", "13": "#8800F8", "15": "#9030C0", "17": "#606070",
-    "18": "#C000F8", "19": "#0050F0", "20": "#F80000", "21": "#9840A0", "22": "#F800C8",
-    "24": "#68A000", "25": "#50A800", "26": "#989070", "30": "#F800F8", "31": "#F80028",
-    "32": "#00A800", "37": "#786028", "40": "#687000",
+# within 500 m (closest such pair 41.9, groups 1 & 25 and 8 & 26), 3:1
+# against both page backgrounds. Searched 2026-10-13 on the shapes step 1
+# chose; re-run the search if the groups or the pin palette change.
+TRAM_GROUPS = {
+    ("1", "25"): "#9840A0",
+    ("2", "18", "24"): "#2848F8",
+    ("3", "17", "20", "40"): "#686818",
+    ("4", "22"): "#D08068",
+    ("5", "12", "15", "21", "32"): "#606070",
+    ("6", "7", "19"): "#F86008",
+    ("8", "26"): "#F800C8",
+    ("9", "10"): "#C870C8",
+    ("11", "13"): "#989800",
+    ("30", "31", "37"): "#00A800",
 }
+
+
+def tram_group_name(group):
+    """("1", "25") -> "Trams 1 & 25"; ("2", "18", "24") -> "Trams 2, 18, & 24"
+    (the owner's label form, 2026-10-13)."""
+    if len(group) == 2:
+        return f"Trams {group[0]} & {group[1]}"
+    return "Trams " + ", ".join(group[:-1]) + f", & {group[-1]}"
+
 
 # --- Business filtering ------------------------------------------------
 

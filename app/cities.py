@@ -875,7 +875,7 @@ CITIES = [
         "rail_extra": "—",
         "record_kind": "National register",
         "categories": "All three",
-        "blurb": "Metro A, B and C",
+        "blurb": "Metro A, B and C; 28 tram routes",
         "region": "Czechia",
         "country": "Czechia",
         "in_default_view": False,

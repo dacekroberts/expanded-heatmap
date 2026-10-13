@@ -176,7 +176,7 @@ run on top of a metro network.
   Rotherham not drawn), Nottingham (Regional) (NET) and Blackpool (Regional) (the
   Blackpool Tramway).
 - **Trams not drawn:** Hong Kong Tramways (it runs beside the Island Line), Barcelona,
-  Paris (all but T3a and T3b; T2 and T9 are stubs), Prague, Rome (all but tram
+  Paris (all but T3a and T3b; T2 and T9 are stubs), Prague (tram 23 and the night trams only), Rome (all but tram
   8), Madrid (Metro Ligero ML2 and ML3, stubs), Berlin (BVG's 22 lines, an overlay on the U- and S-Bahn: they would add
   518 stops for about 7 more points of storefronts in the rings; owner,
   2026-09-28),
@@ -618,7 +618,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Aarhus | Letbane L2 on the city tramway (light rail) | Odderbanen and Grenaabanen (under the 15-minute test); L1 not drawn | OpenStreetMap | Kommune | 30 / 0 |
 | Odense | Odense Letbane, one tram line | Buses and regional trains | OpenStreetMap | Kommune | 0 / 0 |
 | **Czechia** | | | | | |
-| Prague | Metro A, B, C | Trams, funicular, ferries, suburban | PID GTFS | City | 0 / 0 |
+| Prague | Metro A, B, C + 28 day tram routes in ten groups (1 to 13, 15, 17 to 22, 24, 25, 26, 30, 31, 32, 37, 40) | Tram 23, night trams, funicular, ferries, suburban | PID GTFS | City | 0 / 108 |
 | Brno | Trams 1–10, 12 | Heritage tram H4, shuttle P1; S-trains, trolleybuses, ferry | KORDIS JMK GTFS (geometry OSM); gate 3 vs OSM agrees on 9 of 11 lines | City | 2 / 0 |
 | Plzeň | Trams 1, 2, 4 | Relief and depot runs 1X, 4X; trolleybuses | OpenStreetMap route relations; gate 3 vs PMDP GTFS (depot only) | City | 0 / 0 |
 | Olomouc | Trams 1–7 | — | OpenStreetMap route relations; gate 3 exact (IDOS) | City | 0 / 0 |

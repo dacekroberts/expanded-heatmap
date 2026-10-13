@@ -125,7 +125,7 @@ page.
   underground station, every terminus and every interchange is kept. It applies
   to San Francisco's Muni Metro and F Market & Wharves, Philadelphia's
   trolleys, the Boston Green Line's surface branches, the trams of Amsterdam,
-  Rotterdam, Riga and Milan, Toronto's streetcars, Rome's tram 8, Hong Kong's Light
+  Rotterdam, Riga, Milan and Prague, Toronto's streetcars, Rome's tram 8, Hong Kong's Light
   Rail, and the Brussels trams 10, 51 and 62.<!-- internal --> The reasoning is in
   `docs/sub_transit_line_filters.md`.<!-- /internal -->
 - **It is on a stretch that runs too rarely.** Light rail is drawn only where
@@ -2117,9 +2117,14 @@ name, or of a partnership, shows its address instead of its name.
 **Left off because they could not be placed** - 2 establishments whose address
 carries no coordinates.
 
-**All 58 metro stations are inside the city.** Trams, which run as a dense
-overlay on the metro, the Petřín funicular, ferries and suburban trains are not
-drawn. Flora, closed for reconstruction, is not drawn while closed.
+**Stations.** Metro A, B and C and PID's 28 daytime tram routes are drawn, as
+the timetable for October 13 to 26, 2026 ran them: Trams 1 to 13, 15, 17 to 22,
+24, 25, 26, 30, 31, 32, 37 and 40, in ten groups of routes that share track.
+108 tram stops are thinned by the spacing filter to about one per half mile.
+All 58 metro stations and every tram stop are inside the city. Tram 23, which
+runs every 30 minutes, the night trams 90 to 99, the Petřín funicular, ferries
+and suburban trains are not drawn. Flora's metro station, closed for
+reconstruction, is not drawn while closed; its tram stop is.
 
 ### Brno - Prague's register, and trams as the rapid transit
 

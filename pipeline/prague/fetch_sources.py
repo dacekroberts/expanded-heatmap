@@ -160,6 +160,11 @@ if __name__ == "__main__":
     fetch(config.GTFS_URL, config.GTFS_ZIP, "pid_gtfs.zip", b"PK\x03\x04", prov,
           "gtfs", args.force)
     prov["gtfs_feed_info"] = feed_window(config.GTFS_ZIP)
+    # The trams read a later pull of the same feed, under its own file name
+    # (tram rescope, 2026-10-13; config.TRAM_GTFS_ZIP).
+    fetch(config.GTFS_URL, config.TRAM_GTFS_ZIP, config.TRAM_GTFS_ZIP.name, b"PK\x03\x04",
+          prov, "gtfs_trams", args.force)
+    prov["gtfs_trams_feed_info"] = feed_window(config.TRAM_GTFS_ZIP)
     prov["osm_host"] = fetch_osm(args.force)
 
     config.PROVENANCE_JSON.write_text(json.dumps(prov, ensure_ascii=False, indent=2),

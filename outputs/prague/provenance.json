@@ -11,6 +11,18 @@
     "feed_start_date": "20260924",
     "publisher": "\"ROPID\""
   },
+  "gtfs_trams": {
+    "bytes": 50522796,
+    "file": "pid_gtfs_2026-10-13.zip",
+    "retrieved": "2026-10-13T19:35:57+00:00",
+    "sha256": "c007e46ed90ed9b0f99c98a8f93486b8c352f27e9435d36537ff2eeb0edce188",
+    "url": "https://data.pid.cz/PID_GTFS.zip"
+  },
+  "gtfs_trams_feed_info": {
+    "feed_end_date": "20261026",
+    "feed_start_date": "20261013",
+    "publisher": "\"ROPID\""
+  },
   "nace_level1": {
     "bytes": 3489,
     "file": "cz_nace_2025_level1.csv",

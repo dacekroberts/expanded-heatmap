@@ -98,8 +98,8 @@ standard rings.
 | In-ring share | Cities |
 |---|---|
 | **Over 95%** (6) | Barcelona 99.9, Osaka 98.2, Tokyo 97.6, Milan 96.8, Melbourne 96.0, Amsterdam 95.5 |
-| **80–95%** (30) | Madrid 94.8, Seoul 93.7, Rotterdam 92.8, Hong Kong 91.2, Higashiōsaka 90.3, Stockholm 89.4, Nishinomiya 89.3, Fuchū (Tokyo) 88.9, Copenhagen (Regional) 88.6, Thessaloniki 88.2, Tachikawa 88.1, Hino 87.3, Kobe 87.3, Chōfu 87.0, Kyoto 86.5, Uijeongbu 85.3, Naha 84.7, Funabashi 83.8, Nishitōkyō 83.6, Kawasaki 83.5, Sydney 83.4, Yokohama 83.4, Fukuoka 82.2, Berlin 82.0, Tama 81.9, Ibaraki (Osaka) 81.5, Higashimurayama 80.5, Bucheon 80.4, Yachiyo 80.3, Sapporo 80.2 |
-| **60–80%** (53) | Matsudo 79.8, Suita 79.7, Amagasaki 79.1, Yao 78.9, Toyonaka 78.8, Ichikawa 78.5, Taipei (Regional) 77.8, Yokosuka 77.8, Urayasu 77.6, Kadoma 77.5, Riga 77.5, Tokorozawa 77.4, Fujisawa 77.2, Boston 76.2, Seongnam 76.1, Sakai 75.3, Ōtsu 74.7, Yokkaichi 74.1, Washington D.C. 73.9, Busan 73.9, London 73.6, Sakura 72.5, Minoh 72.4, Bucharest 72.1, Takamatsu 71.8, Koshigaya 71.7, Kitakyushu 71.2, Daegu 71.0, San Francisco 70.8, Neyagawa 70.3, Kasukabe 69.8, Prague 69.6, Sasebo 69.3, Nara 68.8, Incheon 68.3, Himeji 67.2, Goyang 66.6, Sōka 66.5, Buenos Aires 66.3, Anyang (Regional) 65.8, Higashiyamato 65.6, Toronto 64.8, Ansan 63.8, Okayama 63.4, Hirakata 63.4, Kurume 63.2, Takatsuki 61.4, Rome 61.4, Tbilisi 60.9, Montréal 60.5, Fukui 60.5, Fukushima 60.3, Sagamihara 60.3 |
+| **80–95%** (31) | Madrid 94.8, Seoul 93.7, Rotterdam 92.8, Hong Kong 91.2, Higashiōsaka 90.3, Stockholm 89.4, Nishinomiya 89.3, Fuchū (Tokyo) 88.9, Copenhagen (Regional) 88.6, Thessaloniki 88.2, Tachikawa 88.1, Hino 87.3, Kobe 87.3, Chōfu 87.0, Kyoto 86.5, Uijeongbu 85.3, Prague 85.2, Naha 84.7, Funabashi 83.8, Nishitōkyō 83.6, Kawasaki 83.5, Sydney 83.4, Yokohama 83.4, Fukuoka 82.2, Berlin 82.0, Tama 81.9, Ibaraki (Osaka) 81.5, Higashimurayama 80.5, Bucheon 80.4, Yachiyo 80.3, Sapporo 80.2 |
+| **60–80%** (52) | Matsudo 79.8, Suita 79.7, Amagasaki 79.1, Yao 78.9, Toyonaka 78.8, Ichikawa 78.5, Taipei (Regional) 77.8, Yokosuka 77.8, Urayasu 77.6, Kadoma 77.5, Riga 77.5, Tokorozawa 77.4, Fujisawa 77.2, Boston 76.2, Seongnam 76.1, Sakai 75.3, Ōtsu 74.7, Yokkaichi 74.1, Washington D.C. 73.9, Busan 73.9, London 73.6, Sakura 72.5, Minoh 72.4, Bucharest 72.1, Takamatsu 71.8, Koshigaya 71.7, Kitakyushu 71.2, Daegu 71.0, San Francisco 70.8, Neyagawa 70.3, Kasukabe 69.8, Sasebo 69.3, Nara 68.8, Incheon 68.3, Himeji 67.2, Goyang 66.6, Sōka 66.5, Buenos Aires 66.3, Anyang (Regional) 65.8, Higashiyamato 65.6, Toronto 64.8, Ansan 63.8, Okayama 63.4, Hirakata 63.4, Kurume 63.2, Takatsuki 61.4, Rome 61.4, Tbilisi 60.9, Montréal 60.5, Fukui 60.5, Fukushima 60.3, Sagamihara 60.3 |
 | **40–60%** (42) | Edinburgh 59.4, Kure 58.6, Bergen 58.5, Philadelphia 58.4, Dublin 57.7, Kakogawa 57.1, Chicago 57.0, Kawaguchi 56.1, Yongin 55.4, Namyangju 54.9, Newcastle (Regional) 54.4, Gimpo 53.6, Kurashiki 53.5, Ōita 52.6, Liverpool (Regional) 52.1, Ageo (Regional) 51.9, Manchester (Regional) 51.8, Toyota 50.6, Okazaki 50.5, Tottori 50.5, Morioka 50.0, Fuji 49.6, Itami 49.6, Suwon 47.6, Utsunomiya 47.1, Ichinomiya 46.9, Matsumoto 46.8, Santos (Regional) 45.6, Tsu 45.5, Vancouver (Regional) 45.4, Shizuoka 44.2, Fukuyama 43.1, Shimonoseki 42.8, Glasgow 42.3, Ichihara 42.2, Daejeon 41.7, Kitchener–Waterloo (Regional) 41.5, Sacramento 41.3, Mexico City (Regional) 41.2, Calgary 40.8, Maebashi 40.5, Siheung 40.2 |
 | **Under 40%** (34) | Seattle (Regional) 38.4, Kanazawa 38.4, Gimhae 37.7, Minneapolis 35.8, Aomori 34.9, Iwaki 34.7, Palma 34.6, Yamagata 34.0, Hamamatsu 33.9, Akita 32.7, Matsue 32.5, Ottawa 32.4, Guadalajara (Regional) 31.4, Gifu 30.7, Gwangju 29.8, Dallas 26.4, Rio de Janeiro (Regional) 26.3, Monterrey (Regional) 25.1, San Diego 24.5, Mito 24.2, Los Angeles (Regional) 24.1, Buffalo 24.0, Recife (Regional) 23.4, São Paulo 23.0, Edmonton 22.2, Porto Alegre (Regional) 20.4, Taichung 19.2, Salvador 19.0, Belo Horizonte (Regional) 16.0, Brasília 13.8, Fortaleza (Regional) 13.5, Miami (Regional) 12.6, Taoyuan 11.7, Houston 7.4 |
 
@@ -134,6 +134,7 @@ standard rings.
 | Montpellier | 0.05 / 0.1 / 0.2 / 0.3 mi | 5,443 | 6,276 | 86.7% |
 | Kyoto | 0.1 / 0.2 / 0.3 / 0.6 mi | 28,008 | 32,390 | 86.5% |
 | Uijeongbu | 0.1 / 0.2 / 0.3 / 0.6 mi | 11,178 | 13,103 | 85.3% |
+| Prague | 0.1 / 0.2 / 0.3 / 0.6 mi | 21,462 | 25,185 | 85.2% |
 | Strasbourg | 0.05 / 0.1 / 0.2 / 0.3 mi | 4,779 | 5,614 | 85.1% |
 | Naha | 0.1 / 0.2 / 0.3 / 0.6 mi | 8,598 | 10,153 | 84.7% |
 | Orléans | 0.05 / 0.1 / 0.2 / 0.3 mi | 1,568 | 1,852 | 84.7% |
@@ -201,7 +202,6 @@ standard rings.
 | Neyagawa | 0.1 / 0.2 / 0.3 / 0.6 mi | 443 | 630 | 70.3% |
 | Kasukabe | 0.1 / 0.2 / 0.3 / 0.6 mi | 1,983 | 2,840 | 69.8% |
 | Liepāja | 0.05 / 0.1 / 0.2 / 0.3 mi | 489 | 702 | 69.7% |
-| Prague | 0.1 / 0.2 / 0.3 / 0.6 mi | 17,528 | 25,185 | 69.6% |
 | Sasebo | 0.1 / 0.2 / 0.3 / 0.6 mi | 1,697 | 2,450 | 69.3% |
 | Charleroi | 0.05 / 0.1 / 0.2 / 0.3 mi | 989 | 1,430 | 69.2% |
 | Valenciennes (Regional) | 0.05 / 0.1 / 0.2 / 0.3 mi | 1,609 | 2,330 | 69.1% |

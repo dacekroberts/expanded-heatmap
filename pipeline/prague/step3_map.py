@@ -40,9 +40,10 @@ from pipeline.prague.config import (  # noqa: E402
     ROUTE_TYPE_METRO,
     STATIONS_CSV,
     TAXONOMY_SYSTEM,
-    TRAM_COLOURS,
+    TRAM_GROUPS,
     TRAM_GTFS_ZIP,
     TRAM_SHAPES_JSON,
+    tram_group_name,
 )
 
 SYSTEM = "Metro"
@@ -92,15 +93,19 @@ def shape_ids_for_routes(zf):
 
 
 def tram_specs():
-    """The tram lines step 1 drew, each on the GTFS shapes it chose there.
-    Keys are "T1".."T40", apart from the metro's letters."""
+    """The tram groups, each on the GTFS shapes step 1 chose for its routes.
+    Keys are "T1_25" and so on, apart from the metro's letters."""
     shapes = json.loads(TRAM_SHAPES_JSON.read_text(encoding="utf-8"))
-    if set(shapes) != set(TRAM_COLOURS):
-        sys.exit(f"step 1 drew tram lines {sorted(shapes)}; config colours "
-                 f"{sorted(TRAM_COLOURS)}. Re-run the colour search (config).")
-    return {f"T{key}": (tuple(ids), TRAM_COLOURS[key], f"Tram {key}",
-                        LINE_LABEL_ENDS.get(f"T{key}"))
-            for key, ids in sorted(shapes.items(), key=lambda kv: int(kv[0]))}
+    grouped = [r for g in TRAM_GROUPS for r in g]
+    if sorted(grouped) != sorted(shapes):
+        sys.exit(f"step 1 drew tram lines {sorted(shapes)}; config.TRAM_GROUPS holds "
+                 f"{sorted(grouped)}. Re-measure the groups and colours (config).")
+    specs = {}
+    for group, colour in TRAM_GROUPS.items():
+        key = "T" + "_".join(group)
+        specs[key] = (tuple(s for r in group for s in shapes[r]), colour,
+                      tram_group_name(group), LINE_LABEL_ENDS.get(key))
+    return specs
 
 
 def main():
