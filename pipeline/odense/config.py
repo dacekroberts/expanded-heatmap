@@ -157,4 +157,39 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("da",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
+PLACE_DROPPED = {
+    "node/9604769794": "a duplicate of the church's own row 30 m away, which has the article",
+    "way/1287796022": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/1287796023": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/389590048": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/389590058": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/1107663663": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/1107663664": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/1218034386": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/389590047": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/1107667425": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/1107667426": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/389590045": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/389590057": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/793915482": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/1283255607": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/1325615134": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/1325615151": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/1325615152": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/1482147925": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/1482147926": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/389590046": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/389590051": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/400324787": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/1325615143": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/389590043": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/389590044": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/389674482": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/649600393": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/1287796018": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/389590052": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/389590053": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/839073188": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/461234065": "an aisle of a shopping center, drawn as footways and indoor corridors",
+}

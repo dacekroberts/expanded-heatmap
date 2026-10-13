@@ -196,4 +196,10 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("lv",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
+PLACE_DROPPED = {
+    "node/5061851416": "a typo of the tram stop Lokomotīvju depo, which keeps its own row",
+    "node/1410181183": "a statue with no article of its own; its wikidata is its subject's",
+    "way/1441826811": "a road-route description standing in for a name",
+    "way/1567346330": "a border-to-border route description standing in for a name",
+}

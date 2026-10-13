@@ -222,4 +222,42 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ro",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
+PLACE_DROPPED = {
+    "node/3480025393": "a bus station in as a station, no rail tag",
+    "way/242467499": "a developer's estate tagged a neighbourhood, the plural of the home word",
+    "node/8864235867": "a duplicate row, the same suburb is way/240575327 317 m away",
+    "node/13340068854": "a museum exhibit carrying its model's wikidata, not its own",
+    "node/13340068830": "a museum exhibit carrying its model's wikidata, not its own",
+    "way/1469721743": "a museum exhibit carrying its model's wikidata, not its own",
+    "way/1471899535": "a museum exhibit carrying its model's wikidata, not its own",
+    "node/13340068855": "a museum exhibit carrying its model's wikidata, not its own",
+    "way/85130630": "museum contents, an exhibit with no services by its own tag",
+    "node/14180087101": "a description standing in for a name, no article",
+    "way/552452874": "a web address standing in for a name",
+    "node/987457581": "a grave with no Wikipedia article of its own",
+    "way/13460652": "a name that says the thing is abandoned",
+    "node/509347116": "a convent tagged a place of worship, no article",
+    "node/1211865828": "a religious house tagged a place of worship, no article",
+    "node/5336508694": "a duplicate row, the same church is way/242104494 11 m away",
+    "way/150539862": "a service way named by an address, not a street",
+    "way/1547016258": "a service way named by an address, not a street",
+    "way/1122545151": "a service way named by an address, not a street",
+    "way/740314410": "a description (the metro's pedestrian underpass), not a street name",
+    "way/1520124749": "a description (the metro's pedestrian underpass), not a street name",
+    "way/23679712": "a description (the passage at the Grivița halt), not a street name",
+    "way/357222296": "a description (the passage at the Grivița halt), not a street name",
+    "way/1211546964": "a description (the passage at the Grivița halt), not a street name",
+    "way/1211546965": "a description (the passage at the Grivița halt), not a street name",
+    "way/226600474": "a road code standing in for a name",
+    "way/893631354": "a glitched name (double space, variant of another street)",
+    "way/661214156": "an address number as a name",
+    "way/546300765": "an address number as a name",
+    "way/23671202": "an address number as a name",
+    "way/198994299": "an address number as a name",
+    "way/151065621": "an address number as a name",
+    "way/202802925": "an address range as a name",
+    "way/202802930": "an address range as a name",
+    "way/877985328": "an address range as a name",
+    "way/877985329": "an address range as a name",
+}

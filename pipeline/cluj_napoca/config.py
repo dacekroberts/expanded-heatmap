@@ -220,4 +220,28 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ro",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
+PLACE_DROPPED = {
+    "way/669521911": "a duplicate place row, the node carries the same name",
+    "way/669535695": "a duplicate place row, the node carries the same name",
+    "node/4494264091": "a duplicate row, the same church as the way beside it",
+    "way/304949094": "an open-air museum exhibit, a farmstead with no article",
+    "way/278142636": "an open-air museum exhibit, a farmstead with no article",
+    "relation/4062712": "an open-air museum exhibit, a farmstead with no article",
+    "way/278142777": "an open-air museum exhibit, a description as its name",
+    "way/1424822217": "a description standing in for a name",
+    "way/278312124": "a description standing in for a name",
+    "node/3586268027": "a description with a code glued on, inside a firm's premises",
+    "way/1024562571": "dwellings with no article, a home",
+    "way/1337279960": "a house with no article, and a typo in the name",
+    "node/7848257077": "a religious residence with no article",
+    "way/1462802583": "a religious residence with no article",
+    "way/585206582": "a service way named by an address, not a street",
+    "way/585204635": "a service way named by an address, not a street",
+    "way/694262074": "a coded footway, no street name",
+    "way/223357863": "a coded footway, no street name",
+    "way/1549103365": "a name that says the bridge is temporary",
+    "way/1550723831": "a name that says the bridge is temporary",
+    "way/1550723832": "a name that says the bridge is temporary",
+    "way/356779834": "a glitched name, street word glued to the name",
+}

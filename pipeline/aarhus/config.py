@@ -194,4 +194,25 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("da",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
+PLACE_DROPPED = {
+    "way/461709351": "a description standing in for a name",
+    "way/577803300": "an address number standing in for a park's name",
+    "node/6449319096": "a description standing in for a name, on a relocated exhibit in a museum's grounds",
+    "way/188979243": "a mountain-bike trail, marked (MTB) in its name",
+    "way/1099329416": "a mountain-bike trail, marked (MTB) in its name",
+    "way/1099329417": "a mountain-bike trail, marked (MTB) in its name",
+    "way/1104582506": "a mountain-bike trail, marked (MTB) in its name",
+    "way/1104582507": "a mountain-bike trail, marked (MTB) in its name",
+    "way/156933798": "a mountain-bike trail, marked (MTB) in its name",
+    "way/327108573": "a mountain-bike trail, marked (MTB) in its name",
+    "way/1070681304": "a mountain-bike trail, marked (MTB) in its name",
+    "way/1083943888": "a mountain-bike trail, marked (MTB) in its name",
+    "way/1083943889": "a mountain-bike trail, marked (MTB) in its name",
+    "way/1084982800": "a mountain-bike trail, marked (MTB) in its name",
+    "way/1084982801": "a mountain-bike trail, marked (MTB) in its name",
+    "way/44333958": "a mountain-bike trail, marked (MTB) in its name",
+    "way/44461212": "a mountain-bike trail, marked (MTB) in its name",
+    "way/403491019": "a hospital entrance label, not a street",
+    "way/693472003": "a hospital entrance label, not a street",
+}

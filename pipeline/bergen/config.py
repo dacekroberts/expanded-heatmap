@@ -160,4 +160,42 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("nb",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
+PLACE_DROPPED = {
+    "node/5318178925": "an English description standing in for a name; a farmhouse ruin with no article",
+    "relation/5899026": "a boat club's name on a bay",
+    "way/1017790777": "an archery range tagged a park",
+    "node/3572625935": "a two-letter code standing in for a name (historic=monument)",
+    "node/3572625932": "a two-letter code standing in for a name (historic=monument)",
+    "node/3572625927": "a two-letter code standing in for a name (historic=monument)",
+    "node/3572625922": "a two-letter code standing in for a name (historic=monument)",
+    "node/3572625920": "a two-letter code standing in for a name (historic=monument)",
+    "node/3572625919": "a two-letter code standing in for a name (historic=monument)",
+    "node/3572625918": "a two-letter code standing in for a name (historic=monument)",
+    "node/3572625917": "a two-letter code standing in for a name (historic=monument)",
+    "node/3572625916": "a two-letter code standing in for a name (historic=monument)",
+    "node/3539683977": "a two-letter code standing in for a name (historic=monument)",
+    "node/3539683974": "a two-letter code standing in for a name (historic=monument)",
+    "node/3539683962": "a two-letter code standing in for a name (historic=monument)",
+    "node/3539683950": "a two-letter code standing in for a name (historic=monument)",
+    "node/3539683948": "a two-letter code standing in for a name (historic=monument)",
+    "node/3539683944": "a two-letter code standing in for a name (historic=monument)",
+    "node/3539683936": "a two-letter code standing in for a name (historic=monument)",
+    "node/3565684296": "a two-letter code standing in for a name (historic=monument)",
+    "node/3538949785": "a two-letter code standing in for a name (historic=monument)",
+    "node/3539632581": "a two-letter code standing in for a name (historic=monument)",
+    "node/3539631471": "a two-letter code standing in for a name (historic=monument)",
+    "node/3539632549": "a two-letter code standing in for a name (historic=monument)",
+    "node/3539631469": "a two-letter code standing in for a name (historic=monument)",
+    "node/3539683975": "a two-letter code standing in for a name (historic=monument)",
+    "node/3539683976": "a two-letter code standing in for a name (historic=monument)",
+    "way/4733446": "a duplicate of the same name in another case",
+    "way/121593086": "two path names joined in one name",
+    "way/462851084": "a type word (hiking path), no name",
+    "way/121758688": "a type word (bridleway), no name",
+    "way/220706100": "a description (footpath between two streets), read as a way by -gaten",
+    "way/1237868336": "a route description, read as a way by -vegen",
+    "way/1160372588": "a route description, read as a way by -bakken",
+    "way/145590613": "a route description, read as a way by -bakken",
+    "way/704279161": "a typing slip for Christiania postveg, which keeps its row",
+}

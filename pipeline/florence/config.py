@@ -144,4 +144,28 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("it",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
+PLACE_DROPPED = {
+    "way/870882759": "a dog-training club tagged a park",
+    "way/472637048": "a farmhouse ruin with no article",
+    "way/478064678": "a description standing in for a name",
+    "node/8669023184": "a memorial stone's inscription standing in for a name, no article",
+    "node/7959956070": "a duplicate row: the same synagogue as way/102979678",
+    "node/4713726602": "public art whose Wikipedia link is another subject's article, none of its own",
+    "way/1444307352": "an indoor aisle of the central market hall (indoor=yes), named after a town: no street",
+    "way/1444315433": "an indoor aisle of the central market hall (indoor=yes), named after a town: no street",
+    "way/1444307356": "an indoor aisle of the central market hall (indoor=yes), named after a town: no street",
+    "way/1444307435": "an indoor aisle of the central market hall (indoor=yes), named after a town: no street",
+    "way/1444307437": "an indoor aisle of the central market hall (indoor=yes), named after a town: no street",
+    "way/1444307354": "an indoor aisle of the central market hall (indoor=yes), named after a town: no street",
+    "way/1444307355": "an indoor aisle of the central market hall (indoor=yes), named after a town: no street",
+    "way/1087438300": "an indoor aisle of the central market hall (indoor=yes), named after a town: no street",
+    "way/1442609718": "an indoor aisle of the central market hall (indoor=yes), named after a town: no street",
+    "way/1444307353": "an indoor aisle of the central market hall (indoor=yes), named after a town: no street",
+    "way/1444307439": "an indoor aisle of the central market hall (indoor=yes), named after a town: no street",
+    "way/1444315434": "an indoor aisle of the central market hall (indoor=yes), named after a town: no street",
+    "way/1444307438": "an indoor aisle of the central market hall (indoor=yes), named after a town: no street",
+    "way/912178164": "a path's variant marked in the name, a description: no street name",
+    "way/680667747": "a list of house numbers standing in for a name",
+    "way/637311392": "a glitched name: a mistyped street word (Vie for Via)",
+}

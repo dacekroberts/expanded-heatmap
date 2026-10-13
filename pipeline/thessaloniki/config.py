@@ -210,4 +210,37 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("el",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
+PLACE_DROPPED = {
+    "node/12237396502": "a second row for a church that has a row (the weaker object)",
+    "node/12237325686": "a second row for a church that has a row (the weaker object)",
+    "node/12237339058": "a second row for a church that has a row (the weaker object)",
+    "node/12235030987": "a second row for a church that has a row (the weaker object)",
+    "node/12237391730": "a second row for a church that has a row (the weaker object)",
+    "node/12237210591": "a second row for a church that has a row (the weaker object)",
+    "node/12237344478": "a second row for a church that has a row (the weaker object)",
+    "node/12237355785": "a second row for a church that has a row (the weaker object)",
+    "node/12237319435": "a second row for a church that has a row (the weaker object)",
+    "node/12237318444": "a second row for a church that has a row (the weaker object)",
+    "node/12237325698": "a second row for a church that has a row (the weaker object)",
+    "node/12237391732": "a second row for a church that has a row (the weaker object)",
+    "node/12237334662": "a second row for a church that has a row (the weaker object)",
+    "node/12237355406": "a second row for a church that has a row (the weaker object)",
+    "node/12237398515": "a second row for a church that has a row (the weaker object)",
+    "node/12237351324": "a second row for a church that has a row (the weaker object)",
+    "way/162095177": "a second row for a church that has a row (the weaker object)",
+    "node/6266659563": "a monastery dependency with no article, beside its church's own row",
+    "way/162096499": "a duplicate row, the same cistern and Wikidata item as way/162096498",
+    "node/140160188": "a duplicate row, the city walls have a row with an article",
+    "way/618369634": "a name that says the thing is gone (former consulate); the museum in the building has a row",
+    "way/791928888": "a wrong object's name: a metropolitan area tagged a suburb",
+    "way/307657067": "a squatted ruin with no article",
+    "way/223440576": "a mansion with no article and no visiting shown",
+    "way/223440577": "a mansion with no article and no visiting shown",
+    "node/3144389818": "public art with no article; its Wikidata item is its subject's",
+    "way/14438255": "a ramp description (side road) on trunk links signed for a destination",
+    "way/690929059": "a ramp description (side road) on trunk links signed for a destination",
+    "way/690929061": "a ramp description (side road) on trunk links signed for a destination",
+    "way/181790555": "a cut name",
+    "way/255759934": "a cut name",
+}
