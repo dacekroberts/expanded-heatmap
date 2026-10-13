@@ -76,7 +76,11 @@ MUNIDS = tuple(REGIONAL_STATE_CODE + code for code in MUNICIPIOS)
 # The 11 stations of Líneas A, B and 2 in the four, by municipio (staging's
 # probe 2026-10-04, line membership re-measured 2026-10-06). Step 1 asserts
 # them by point in polygon on INEGI:MUNID.
-STATIONS_PER_MUNICIPIO = {"033": 5, "058": 3, "070": 2, "057": 1}
+#
+# Ecatepec went 5 -> 13 with the cable cars (2026-10-13): Mexicable Línea 1's
+# seven stations and Línea 2's La Mesa (Hank González is counted once, both
+# lines meet there).
+STATIONS_PER_MUNICIPIO = {"033": 13, "058": 3, "070": 2, "057": 1}
 
 # --- Paths ---------------------------------------------------------------
 
@@ -85,8 +89,12 @@ DATA_RAW = ROOT / "data" / "mexico_city" / "raw"
 # data/ is one junction shared by every worktree, and master's checks read
 # processed/: the regional build writes processed/regional/ until it lands
 # (regional-extension, Step 1). Fold back to processed/ on landing.
+#
+# TRAM RESCOPE, UNTIL IT LANDS: master reads processed/regional/, so the
+# cable-car build writes processed/regional/cable/ from its branch. Remove
+# the "cable" part in the landing commit and re-run steps 1 to 3 then.
 DATA_PROCESSED = (ROOT / "data" / "mexico_city" / "processed"
-                  / ("regional" if REGIONAL else ""))
+                  / ("regional" if REGIONAL else "") / "cable")
 OUTPUTS = ROOT / "outputs" / "mexico_city"
 
 HEATMAP_HTML = OUTPUTS / "heatmap.html"
@@ -279,6 +287,97 @@ LINE_COLOURS = {
     "B": "#B1B3B3",
     "12": "#877D20",   # darkened from OSM's #B0A32A - see above
     "L1": "#033574",   # darkened from OSM's #0554ba - see above
+}
+
+# --- Cable cars (tram rescope, 2026-10-13) ----------------------------------
+#
+# Cablebús (STE, Ciudad de México) and Mexicable (State of México) are drawn
+# (owner, 2026-10-13: "draw both"; docs/decisions_drafts/tram-rescope.md).
+# Toulouse's Téléo is the precedent for a drawn cable car. Measured before
+# the call: 15 of Cablebús's 19 stations lie beyond the 0.6 mile outer ring
+# of every Metro and Tren Ligero station, and 17,783 storefronts gain a ring.
+#
+# IN SERVICE ONLY: Mexicable Línea 3 (Naucalpan, OSM construction=gondola)
+# and Cablebús Líneas 4 to 6 are not open and are not listed here. Re-check
+# when one opens.
+#
+# One Overpass query, cached under a dated name (data/ is shared by every
+# worktree): every aerialway object in OSM_BBOX and the route=aerialway
+# relations (fetch_sources.py, Q_AERIALWAY).
+OSM_AERIALWAY_JSON = DATA_RAW / "osm_aerialway_2026-10-13.json"
+
+# Keyed by a config key, never by OSM `ref`: the five relations carry refs
+# "1", "2", "3", "1", "2", which collide with each other and with the Metro's.
+# Each line is selected by its route relation's ID.
+#
+#   relation  the route=aerialway relation (its member ways are the line)
+#   count     gate 3, the operator's own station count: Mexicable from the
+#             operator's site script (mexicable.com, read 2026-10-13);
+#             Cablebús Líneas 1 and 2 from archived copies of STE's pages
+#             (2024 and 2026-05-23); Línea 3 from es.wikipedia only, since
+#             ste.cdmx.gob.mx refuses every connection (secondary, and said so)
+#   extra     station objects that are NOT node members of the relation.
+#             Cablebús Línea 3's relation holds one untagged node and one way;
+#             its six stations are mapped as ways and relations, so they are
+#             named here by OSM type and id (measured 2026-10-13). Re-measure
+#             if the relation gains station members.
+CABLE_LINES = {
+    "CB1": {"name": "Cablebús Línea 1", "relation": 16949971, "count": 6,
+            "network": "Cablebús", "extra": ()},
+    "CB2": {"name": "Cablebús Línea 2", "relation": 16949984, "count": 7,
+            "network": "Cablebús", "extra": ()},
+    "CB3": {"name": "Cablebús Línea 3", "relation": 16949951, "count": 6,
+            "network": "Cablebús",
+            "extra": (("way", 1080401853), ("way", 1080401854),
+                      ("way", 1315197090), ("relation", 19353601),
+                      ("relation", 19353602), ("relation", 19353603))},
+    "MX1": {"name": "Mexicable Línea 1", "relation": 6632537, "count": 7,
+            "network": "Mexicable", "extra": ()},
+    "MX2": {"name": "Mexicable Línea 2", "relation": 18881337, "count": 7,
+            "network": "Mexicable", "extra": ()},
+}
+# One station OSM names two ways: Mexicable's Línea 1 and Línea 2 meet at Hank
+# González, mapped as two nodes 30 m apart ("Hank González" and "Carlos Hank
+# González"). {OSM name: the name kept}.
+#
+# And one name two places carry: Mexicable Línea 2's Periférico is 26 km from
+# the Tren Ligero's Periférico, so it is shown with its system's name (step 1
+# raised on the pair, 2026-10-13).
+CABLE_STATION_ALIASES = {
+    "Carlos Hank González": "Hank González",
+    "Periférico": "Periférico (Mexicable)",
+}
+# Cable stations that share a name with a Metro station already on the map
+# (Indios Verdes for both systems, Constitución de 1917, Santa Marta) are the
+# same interchange, 150 to 345 m from the Metro station. They ATTACH to it:
+# no second station, and the Metro station does not move. Step 1 raises if a
+# cable station attaches to a station farther than this, which would be two
+# places under one name rather than an interchange.
+CABLE_ATTACH_MAX_M = 400.0
+
+# COLOURS. Neither operator publishes a hex (searched 2026-10-13).
+#
+# Cablebús: STE draws all three lines in one light blue, and the only hex
+# found is es.wikipedia's #4EC3E0. Three drawn lines need three colours, so
+# Línea 1 keeps the system blue and Líneas 2 and 3 are darker shades of it,
+# hue kept (owner, 2026-10-13: "darker project shades sounds good"). The page
+# says so. CIE76: Línea 2 16.4 from Línea 1, Línea 3 23.9 from Línea 2; the
+# nearest Metro line is Línea 4 (23.5 from Cablebús Línea 1) and the nearest
+# pin Retail (44.4).
+#
+# Mexicable: the operator calls its lines Línea Roja and Línea Verde.
+# Wikipedia's reds sit 6.2 to 11.7 from the Food service pin, so the red here
+# is the colour nearest them that clears the pins by 20 and every line by 18
+# (#d85868: Food service 20.8, Línea 1 27.9, Línea 6 37.7). The green is
+# es.wikipedia's map green #95C344 darkened 10% for 3:1 on a white page
+# (#79a133: Línea 12 25.5, Línea 8 28.4, Personal services 38.5). Both are
+# this project's choices and the page says so (owner, 2026-10-13).
+CABLE_COLOURS = {
+    "CB1": "#4EC3E0",
+    "CB2": "#1f96b3",
+    "CB3": "#135c6d",
+    "MX1": "#d85868",
+    "MX2": "#79a133",
 }
 
 # --- Business filtering ------------------------------------------------

@@ -24,6 +24,7 @@ true:
 """
 
 import json
+import math
 import sys
 
 import geopandas as gpd
@@ -34,13 +35,19 @@ from shapely.ops import linemerge, polygonize, unary_union
 sys.path.insert(0, str(__import__("pathlib").Path(__file__).parent.parent.parent))
 
 from pipeline.stations import (
+    check_operator_counts,
     check_route_stops_covered,
+    projected_xy,
     route_stop_members,
     station_name_key,
     strip_line_designator,
     verify_stations,
 )
 from pipeline.mexico_city.config import (
+    CABLE_ATTACH_MAX_M,
+    CABLE_LINES,
+    CABLE_STATION_ALIASES,
+    OSM_AERIALWAY_JSON,
     CRS_GEOGRAPHIC,
     CRS_PROJECTED,
     EXCLUDED_STATIONS_CSV,
@@ -196,6 +203,108 @@ def load_scope():
     return unary_union([cdmx, union]), cdmx, by_code
 
 
+def _centre(element):
+    """(lat, lon) of a cached OSM object: a node's own point, or the centre
+    of a way's or relation's bounds (`out body geom` gives both)."""
+    if element["type"] == "node":
+        return element["lat"], element["lon"]
+    b = element["bounds"]
+    return (b["minlat"] + b["maxlat"]) / 2, (b["minlon"] + b["maxlon"]) / 2
+
+
+def load_cable_stations(grouped):
+    """The cable cars' stations (Cablebús and Mexicable), for the lines in
+    config.CABLE_LINES.
+
+    A line's stations are the aerialway=station NODE MEMBERS of its route
+    relation, plus the objects config names under `extra` (Cablebús Línea 3,
+    whose stations are not members). Gate 3 runs here per line against the
+    operator's count, and RAISES on a mismatch.
+
+    A cable station whose name key matches a station already in `grouped` is
+    the same interchange and ATTACHES to it: no row is added and the existing
+    station keeps its position. Averaging it in, as the Metro collapse does,
+    would move three Metro stations by up to 170 m.
+
+    Returns (new stations, every cable station point, attached rows)."""
+    data = read_cached(OSM_AERIALWAY_JSON, "cable cars")
+    by_id = {(e["type"], e["id"]): e for e in data["elements"]}
+    rows = []
+    for key, spec in CABLE_LINES.items():
+        rel = by_id.get(("relation", spec["relation"]))
+        if rel is None or rel.get("tags", {}).get("route") != "aerialway":
+            raise SystemExit(f"{spec['name']}: relation {spec['relation']} is "
+                             f"not a route=aerialway relation in "
+                             f"{OSM_AERIALWAY_JSON.name}.")
+        members = [("node", m["ref"]) for m in rel.get("members", [])
+                   if m.get("type") == "node"]
+        for ident in members + list(spec["extra"]):
+            element = by_id.get(ident)
+            tags = (element or {}).get("tags") or {}
+            if tags.get("aerialway") != "station":
+                if ident in spec["extra"]:
+                    raise SystemExit(f"{spec['name']}: {ident} is listed as a "
+                                     "station in config and is not one in the "
+                                     "cache.")
+                continue    # an untagged member node, never a station
+            name = (tags.get("name") or "").strip()
+            if not name:
+                raise SystemExit(f"{spec['name']}: station {ident} has no name.")
+            lat, lon = _centre(element)
+            rows.append({"line": key,
+                         "name": CABLE_STATION_ALIASES.get(name, name),
+                         "latitude": lat, "longitude": lon,
+                         "network": spec["network"]})
+    cable = pd.DataFrame(rows)
+    cable["key"] = cable["name"].map(station_name_key)
+
+    # Gate 3, per line: the operator's count against the build's.
+    actual = {CABLE_LINES[k]["name"]: int(n)
+              for k, n in cable.groupby("line")["key"].nunique().items()}
+    expected = {spec["name"]: spec["count"] for spec in CABLE_LINES.values()}
+    print("\n  cable cars, gate 3:")
+    mismatched = check_operator_counts(expected, actual)
+    if mismatched:
+        raise SystemExit(f"cable-car station counts disagree with the "
+                         f"operators: {mismatched}")
+
+    xy = projected_xy(cable.index, cable["longitude"], cable["latitude"],
+                      CRS_PROJECTED)
+    have = {station_name_key(n): i for i, n in grouped["name"].items()}
+    have_xy = projected_xy(grouped.index, grouped["longitude"],
+                           grouped["latitude"], CRS_PROJECTED)
+    new, attached = [], []
+    for key, g in cable.groupby("key", sort=True):
+        lines = ", ".join(CABLE_LINES[k]["name"] for k in sorted(set(g["line"])))
+        if key in have:
+            i = have[key]
+            far = max(math.dist(xy[j], have_xy[i]) for j in g.index)
+            if far > CABLE_ATTACH_MAX_M:
+                raise SystemExit(
+                    f"{g['name'].iloc[0]} ({lines}) is {far:,.0f} m from the "
+                    f"station of the same name, over {CABLE_ATTACH_MAX_M:.0f} "
+                    "m: two places under one name, not an interchange.")
+            attached.append({"index": i, "name": grouped.at[i, "name"],
+                             "lines": lines, "metres": round(far),
+                             "networks": sorted(set(g["network"]))})
+            continue
+        spread = max(math.dist(xy[a], xy[b]) for a in g.index for b in g.index)
+        if spread > CABLE_ATTACH_MAX_M:
+            raise SystemExit(f"{g['name'].iloc[0]} ({lines}): same-named cable "
+                             f"stations {spread:,.0f} m apart.")
+        new.append({"name": g["name"].iloc[0],
+                    "latitude": g["latitude"].mean(),
+                    "longitude": g["longitude"].mean(),
+                    "nodes": len(g),
+                    "networks": "; ".join(sorted(set(g["network"])))})
+    print(f"  cable cars: {len(cable)} station points on {len(CABLE_LINES)} "
+          f"lines -> {len(new)} new stations, {len(attached)} attached to a "
+          "station already on the map (not moved):")
+    for a in attached:
+        print(f"      {a['name']:24s} {a['metres']:4d} m   {a['lines']}")
+    return pd.DataFrame(new), cable, attached
+
+
 def main():
     print("=== Step 1: Mexico City stations (OpenStreetMap) ===\n")
 
@@ -313,6 +422,22 @@ def main():
     print("  stations per line, from route membership (not gate 3):")
     for ref in LINE_NAMES:
         print(f"      {LINE_NAMES[ref]:12s} {per_line.get(LINE_NAMES[ref], 0):4d}")
+
+    # --- the cable cars: added AFTER the Metro collapse, so none moves -----
+    before = grouped[["latitude", "longitude"]].copy()
+    cable_new, cable_points, attached = load_cable_stations(grouped)
+    for a in attached:
+        nets = set(filter(None, grouped.at[a["index"], "networks"].split("; ")))
+        grouped.at[a["index"], "networks"] = "; ".join(
+            sorted(nets | set(a["networks"])))
+    assert before.equals(grouped[["latitude", "longitude"]]), (
+        "a Metro or Tren Ligero station moved while the cable cars were added")
+    grouped = pd.concat([grouped, cable_new], ignore_index=True)
+    platforms = pd.concat([
+        platforms,
+        cable_points.assign(railway="aerialway")[
+            ["name", "railway", "network", "latitude", "longitude", "key"]],
+    ], ignore_index=True)
 
     # --- boundary filter --------------------------------------------------
     gdf = gpd.GeoDataFrame(

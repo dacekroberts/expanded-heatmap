@@ -3413,7 +3413,8 @@ def load_osm_line_shapes(osm_routes_json, line_specs, system_name):
     line_specs: {key: (ref, color, real-world public name, label end)}, the
     same 4-tuple as the GTFS loader, with OSM's `ref` tag standing in for a
     shape_id. `ref` is what riders see on the line ("1", "A", "12"), and in
-    CDMX it is populated on all 26 relations.
+    CDMX it is populated on all 26 relations. An int in its place is a
+    relation id, for lines whose `ref` tags collide.
 
     Returns {key: (segments, color, label, end)}, segments longest first.
     """
@@ -3434,7 +3435,13 @@ def load_osm_line_shapes(osm_routes_json, line_specs, system_name):
 
     lines = {}
     for key, (ref, color, label, end) in line_specs.items():
-        mine = [r for r in rels if r.get("tags", {}).get("ref") == ref]
+        # An int `ref` selects ONE relation by its OSM id, for lines whose
+        # `ref` tags collide: Mexico City's cable cars carry "1", "2", "3",
+        # "1", "2" over two systems (2026-10-13).
+        if isinstance(ref, int):
+            mine = [r for r in rels if r.get("id") == ref]
+        else:
+            mine = [r for r in rels if r.get("tags", {}).get("ref") == ref]
         if not mine:
             print(f"WARNING: OSM ref {ref!r} for the {label} is not in "
                   f"{osm_routes_json.name} - check the relation's tags.")

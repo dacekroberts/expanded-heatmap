@@ -24,6 +24,9 @@ from pipeline.map_common import load_osm_line_shapes, render_heatmap  # noqa: E4
 from pipeline.mexico_city.step1_stations import load_municipios  # noqa: E402
 from pipeline.mexico_city.config import (  # noqa: E402
     BUSINESSES_CLEAN_CSV,
+    CABLE_COLOURS,
+    CABLE_LINES,
+    OSM_AERIALWAY_JSON,
     CRS_GEOGRAPHIC,
     CRS_PROJECTED,
     HEATMAP_HTML,
@@ -49,6 +52,12 @@ from pipeline.mexico_city.config import (  # noqa: E402
 LINE_SPECS = {
     ref: (ref, LINE_COLOURS[ref], LINE_NAMES[ref], None)
     for ref in LINE_NAMES
+}
+# The cable cars (Cablebús and Mexicable), each selected by its route
+# relation's id because their `ref` tags collide (config.CABLE_LINES).
+CABLE_SPECS = {
+    key: (spec["relation"], CABLE_COLOURS[key], spec["name"], None)
+    for key, spec in CABLE_LINES.items()
 }
 
 
@@ -78,9 +87,19 @@ def city_boundary():
 
 
 def main():
-    for path in (STATIONS_CSV, BUSINESSES_CLEAN_CSV, OSM_ROUTES_JSON):
+    for path in (STATIONS_CSV, BUSINESSES_CLEAN_CSV, OSM_ROUTES_JSON,
+                 OSM_AERIALWAY_JSON):
         if not path.exists():
-            sys.exit(f"Missing {path}. Run step1 and step2 first.")
+            sys.exit(f"Missing {path}. Run fetch_sources.py, step1 and step2 "
+                     "first.")
+    lines = load_osm_line_shapes(OSM_ROUTES_JSON, LINE_SPECS,
+                                 "Metro CDMX and Tren Ligero")
+    cable = load_osm_line_shapes(OSM_AERIALWAY_JSON, CABLE_SPECS,
+                                 "Cablebús and Mexicable")
+    missing = [CABLE_LINES[k]["name"] for k in CABLE_SPECS if k not in cable]
+    if missing:
+        sys.exit(f"No geometry for {missing} in {OSM_AERIALWAY_JSON.name}.")
+    lines.update(cable)
 
     render_heatmap(
         output_path=HEATMAP_HTML,
@@ -90,8 +109,7 @@ def main():
         stations=pd.read_csv(STATIONS_CSV),
         businesses=pd.read_csv(BUSINESSES_CLEAN_CSV),
         taxonomy_system=TAXONOMY_SYSTEM,
-        lines=load_osm_line_shapes(OSM_ROUTES_JSON, LINE_SPECS,
-                                   "Metro CDMX and Tren Ligero"),
+        lines=lines,
         crs_geographic=CRS_GEOGRAPHIC,
         crs_projected=CRS_PROJECTED,
         ring_edges_meters=RING_EDGES_METERS,
