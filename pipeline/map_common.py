@@ -272,17 +272,50 @@ _THEME_TOGGLE_TEMPLATE = """
             .split('/').filter(Boolean);
         return decodeURIComponent(parts.length ? parts[parts.length - 1] : '');
     }
+    // The headers the links fall under (owner, 2026-10-13: non clickable
+    // section headers): [[header, number of links], ...] in the links' own
+    // order, from one hidden element beside them (components.render_city_nav,
+    // cities.MENU_GROUPS). Each header is an optgroup, which no browser lets
+    // a reader pick. With no such element, or one that does not count the
+    // links it sits beside, the menu is the plain list.
+    function cityGroups(n) {
+        var el = window.parent.document.querySelector('.st-key-map-only-nav [data-groups]');
+        try {
+            var groups = JSON.parse(el.getAttribute('data-groups')), total = 0;
+            groups.forEach(function (g) { total += g[1]; });
+            return total === n ? groups : null;
+        } catch (e) { return null; }
+    }
+    // Built again whenever the links or their headers have changed since the
+    // last build: the app page draws its links one by one, and a menu filled
+    // while half of them were there stayed short, and without its headers.
+    var menuBuilt = null;
     function fillMenu() {
-        if (menu.options.length > 1) return;    // already built
         var here = lastSegment(window.parent.location.pathname);
         var links = cityLinks();
-        for (var i = 0; i < links.length; i++) {
-            var name = links[i].textContent.trim();
-            if (lastSegment(links[i].getAttribute('href')) === here) continue;
-            var o = document.createElement('option');
-            o.value = name; o.textContent = name;
-            menu.appendChild(o);
-        }
+        var groups = cityGroups(links.length);
+        var state = links.length + (groups ? ':headers' : ':plain');
+        if (state === menuBuilt) return;
+        menuBuilt = state;
+        while (menu.children.length > 1) menu.removeChild(menu.lastChild);
+        groups = groups || [[null, links.length]];
+        var i = 0;
+        groups.forEach(function (g) {
+            var into = menu;
+            if (g[0] !== null) {
+                into = document.createElement('optgroup');
+                into.label = g[0];
+            }
+            for (var end = i + g[1]; i < end; i++) {
+                var name = links[i].textContent.trim();
+                if (lastSegment(links[i].getAttribute('href')) === here) continue;
+                var o = document.createElement('option');
+                o.value = name; o.textContent = name;
+                into.appendChild(o);
+            }
+            // A header over nothing (this map's city was its only one) is left out.
+            if (into !== menu && into.children.length) menu.appendChild(into);
+        });
         menu.hidden = menu.options.length < 2;
     }
     function goTo(link) {
@@ -1500,9 +1533,24 @@ CREDIT_TAB_SCRIPT = """
 # The legend's open/collapsed state is never touched. On a touch screen a tap
 # reaches here only when TAP_SELECT_SCRIPT found no dot, station or cluster
 # nearer than the nearest line.
+#
+# THE PICKED LOOK (built for the place search, 2026-10-12, where it lived in
+# the search script and so on the searched maps only; on every map since the
+# owner's word of 2026-10-13). A line PICKED, by its legend row, a tap or the
+# search, also gets a black casing under it (white on the dark map), its
+# label boxed, and the businesses stepped back (the dots, their cluster
+# bubbles and the heat at 0.28), until it is unpicked. A line merely hovered
+# gets none of it, and while the pointer hovers ANOTHER line the look is off
+# and returns with the pick. The casing is a copy of the line's own polylines
+# in the same renderer, put under the line's first path once restack() has
+# moved the line last.
 LINE_HIGHLIGHT_SCRIPT = """
 <style>
-.map-legend .hm-line-row { cursor: pointer; border-radius: 3px; }
+.map-legend .hm-line-row { cursor: pointer; border-radius: 3px;
+    /* A button, not text: a quick second click on a Mac selected the line's
+       name for copying instead of picking the line (owner's demo,
+       2026-10-13). The whole row is the target; hover is unchanged. */
+    -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
 .map-legend .hm-line-row:focus-visible { outline: none;
     background: rgba(127,127,127,0.16); box-shadow: 0 0 0 3px rgba(127,127,127,0.16); }
 @media (hover: hover) {
@@ -1514,6 +1562,15 @@ LINE_HIGHLIGHT_SCRIPT = """
 .map-legend.hm-picking .hm-line-row:not(.hm-on) { opacity: 0.6; }
 .leaflet-overlay-pane path.hm-line.hm-dim { stroke-opacity: 0.25; }
 .leaflet-overlay-pane path.hm-line.hm-hot { stroke-width: 7px; stroke-opacity: 1; }
+path.hm-pick-case { stroke: #000000; fill: none; }
+.dark-base path.hm-pick-case { stroke: #ffffff; }
+.hm-line-label.hm-pick-label { padding: 1px 6px; border-radius: 4px; background: #ffffff;
+    box-shadow: 0 0 0 2px #000000; }
+.dark-base .hm-line-label.hm-pick-label { background: #000000; box-shadow: 0 0 0 2px #ffffff; }
+/* The dots are the only paths drawn with fill-opacity 0.85 and a 1 px stroke. */
+.hm-line-picked .leaflet-overlay-pane path[fill-opacity="0.85"][stroke-width="1"],
+.hm-line-picked .leaflet-marker-pane .business-cluster-icon,
+.hm-line-picked .leaflet-heatmap-layer { opacity: 0.28; }
 </style>
 <script>
 (function () {
@@ -1550,6 +1607,37 @@ LINE_HIGHLIGHT_SCRIPT = """
         // 22 on a touch screen is TAP_SELECT_SCRIPT's REACH: a 44 px target.
         var TOL = mq("(pointer: coarse)") ? 22 : 7;
         var sel = null, hov = null, shown = null, outTimer = null;
+        var cased = null, casing = null;
+
+        // The picked look (THE PICKED LOOK above), for the picked line while
+        // it is the line shown. Called on every show(): a click on a row
+        // already shown for a hover changes the pick and not what is shown.
+        function look() {
+            var want = hov !== null ? hov : sel;
+            var k = sel !== null && want === sel ? sel : null;
+            if (k === cased) return;
+            var label;
+            if (cased !== null) {
+                label = document.querySelector('.hm-line-label[data-line="' + cased + '"]');
+                if (label) label.classList.remove("hm-pick-label");
+                if (casing) m.removeLayer(casing);
+                casing = null;
+            }
+            cased = k;
+            m.getContainer().classList.toggle("hm-line-picked", k !== null);
+            if (k === null) return;
+            label = document.querySelector('.hm-line-label[data-line="' + k + '"]');
+            if (label) label.classList.add("hm-pick-label");
+            var polys = lines[k].polys;
+            casing = L.featureGroup(polys.map(function (q) {
+                return L.polyline(q.getLatLngs(), {weight: 13, opacity: 1, className: "hm-pick-case",
+                    interactive: false, renderer: q._renderer});
+            })).addTo(m);
+            var first = polys[0]._path;
+            casing.eachLayer(function (c) {
+                if (c._path && first.parentNode) first.parentNode.insertBefore(c._path, first);
+            });
+        }
 
         // The picked line's paths go last within the run of line paths, so
         // above every other line and still under anything drawn after them.
@@ -1578,7 +1666,7 @@ LINE_HIGHLIGHT_SCRIPT = """
 
         function show() {
             var want = hov !== null ? hov : sel;
-            if (want === shown) return;
+            if (want === shown) { look(); return; }
             shown = want;
             keys.forEach(function (k) {
                 var on = k === want, rec = lines[k];
@@ -1595,6 +1683,7 @@ LINE_HIGHLIGHT_SCRIPT = """
             }
             if (legend) legend.classList.toggle("hm-picking", want !== null);
             restack(want);
+            look();
         }
         function pick(k) { sel = sel === k ? null : k; show(); }
         // A short delay before a hover ends, so moving from one line onto the
@@ -1645,6 +1734,10 @@ LINE_HIGHLIGHT_SCRIPT = """
                 var k = row.getAttribute("data-line");
                 if (!lines[k]) return;
                 row.addEventListener("click", function () { pick(k); });
+                // A double or triple click starts a text selection on the
+                // mousedown, before any click: stopped here, so repeated
+                // clicks only pick and unpick.
+                row.addEventListener("mousedown", function (e) { if (e.detail > 1) e.preventDefault(); });
                 row.addEventListener("keydown", function (e) {
                     if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(k); }
                 });
@@ -2189,11 +2282,14 @@ _PLACE_SEARCH_TEMPLATE = r"""
     path.hm-search-case { stroke: #ffffff; stroke-opacity: 0.95; fill: none; }
     path.hm-search-ring { stroke: @@LIGHT_ACCENT@@; stroke-opacity: 1;
         fill: @@LIGHT_ACCENT@@; fill-opacity: 0.14; }
-    path.hm-search-linecase { stroke: #000000; fill: none; }
-    .dark-base path.hm-search-linecase { stroke: #ffffff; }
-    .hm-line-label.hm-search-label { padding: 1px 6px; border-radius: 4px; background: #ffffff;
-        box-shadow: 0 0 0 2px #000000; }
-    .dark-base .hm-line-label.hm-search-label { background: #000000; box-shadow: 0 0 0 2px #ffffff; }
+    /* A picked street's whole length (owner, 2026-10-13): the ring's two
+       colours as a line, and the ring itself hidden once the line is drawn,
+       its name label left at the street's middle. */
+    path.hm-search-streetcase { stroke: #ffffff; stroke-opacity: 0.95; fill: none; }
+    path.hm-search-street { stroke: @@LIGHT_ACCENT@@; stroke-opacity: 1; fill: none; }
+    .dark-base path.hm-search-streetcase { stroke: @@DARK_PAGE@@; }
+    .dark-base path.hm-search-street { stroke: @@DARK_ACCENT@@; }
+    path.hm-search-hid { display: none; }
     .dark-base path.hm-search-case { stroke: @@DARK_PAGE@@; }
     .dark-base path.hm-search-ring { stroke: @@DARK_ACCENT@@; fill: @@DARK_ACCENT@@; fill-opacity: 0.2; }
     /* While the marker shows, the businesses step back: the dots (the only
@@ -2201,7 +2297,9 @@ _PLACE_SEARCH_TEMPLATE = r"""
        bubbles and the heat. Faded, never switched off: what is around the
        place is the answer the reader came for, and their layer choices are
        left as they are. Lines, stations and rings keep their strength. The
-       fade ends with the marker, or at the reader's first touch of the map. */
+       fade ends with the marker, or at the reader's first touch of the map.
+       A picked line fades them under a class of its own
+       (LINE_HIGHLIGHT_SCRIPT, hm-line-picked), which this never touches. */
     .hm-searching .leaflet-overlay-pane path[fill-opacity="0.85"][stroke-width="1"],
     .hm-searching .leaflet-marker-pane .business-cluster-icon,
     .hm-searching .leaflet-heatmap-layer { opacity: 0.28; }
@@ -2359,8 +2457,8 @@ _PLACE_SEARCH_TEMPLATE = r"""
     var CJK = /[@@CJK_CLASS@@]/;
     var MARKS = /[@@MARKS_CLASS@@]/g;
     var data = null, own = null, loading = null, fold = null, marker = null, timer = null;
-    var renderer = null, lineRow = null, casing = null, cased = null;
-    var byIndex = [], crossURL = null, crossings = null;
+    var renderer = null;
+    var byIndex = [], crossURL = null, crossings = null, streetURL = null, streets = null;
     // THE SEARCHED AREA (owner, 2026-10-12): the index names the
     // municipalities it covers and carries their merged outline
     // (place_index.outline). The outline is drawn only while the search box
@@ -2515,14 +2613,15 @@ _PLACE_SEARCH_TEMPLATE = r"""
                 fold = ix.fold || null;
                 useLanguages(ix.languages && ix.languages.local);
                 own = ownItems(map);
-                var rows = ix.rows.map(function (r) {
-                    return prep({kind: ix.kinds[r[0]], lat: r[1], lon: r[2], name: r[3],
+                var rows = ix.rows.map(function (r, i) {
+                    return prep({kind: ix.kinds[r[0]], lat: r[1], lon: r[2], name: r[3], row: i,
                                  names: [r[3]].concat(r[4] ? r[4].split("|") : []), bbox: r[5] || null});
                 });
                 // The rows in file order: the crossings file refers to streets
                 // by their place here.
                 byIndex = rows;
                 crossURL = ix.crossings || null;
+                streetURL = ix.streets || null;
                 area = ix.area || null;
                 data = own.concat(link(rows));
                 document.querySelector(".hm-search").setAttribute(
@@ -2564,6 +2663,41 @@ _PLACE_SEARCH_TEMPLATE = r"""
         // A failed fetch leaves the first file's answers, and is not retried.
         crossings.catch(function () { crossURL = null; });
         return crossings;
+    }
+
+    // Each street's drawn length, a third file fetched at the first street
+    // picked (owner, 2026-10-13): {rows, lines, scale}, `rows` ascending and
+    // each a street's place in the first file, `lines` its polylines beside
+    // it. A line is flat integers in units of 1/scale degree: the first
+    // point, then each later point as its difference from the one before.
+    // Resolves to a function from a row to its lines as [[lat, lon], ...].
+    function loadStreets() {
+        if (streets) return streets;
+        streets = getIndex(streetURL).then(function (txt) {
+            var f = JSON.parse(txt), k = f.scale || 100000;
+            return function (row) {
+                var lo = 0, hi = f.rows.length - 1;
+                while (lo <= hi) {
+                    var mid = (lo + hi) >> 1;
+                    if (f.rows[mid] === row) {
+                        return f.lines[mid].map(function (a) {
+                            var la = a[0], ln = a[1], pts = [[la / k, ln / k]];
+                            for (var i = 2; i < a.length; i += 2) {
+                                la += a[i];
+                                ln += a[i + 1];
+                                pts.push([la / k, ln / k]);
+                            }
+                            return pts;
+                        });
+                    }
+                    if (f.rows[mid] < row) lo = mid + 1; else hi = mid - 1;
+                }
+                return [];
+            };
+        });
+        // A failed fetch leaves the ring, and is not retried.
+        streets.catch(function () { streetURL = null; });
+        return streets;
     }
 
     // 2 for a word-start hit, 1 for a Latin word of 4 or more letters inside a
@@ -2714,24 +2848,27 @@ _PLACE_SEARCH_TEMPLATE = r"""
         list.forEach(function (d) {
             d._span = null;
             d._hood = null;
+            d._rows = null;
             if (d.kind !== "street") { kept.push({d: d}); return; }
             var key = norm(d.name), gs = groups[key] || (groups[key] = []), box = boxOf(d);
             for (var i = 0; i < gs.length; i++) {
                 var g = gs[i];
                 if (g.boxes.some(function (b) { return gapM(b, box) <= STRETCH_M; })) {
                     g.boxes.push(box);
+                    g.rows.push(d.row);
                     g.span = [Math.min(g.span[0], box[0]), Math.min(g.span[1], box[1]),
                               Math.max(g.span[2], box[2]), Math.max(g.span[3], box[3])];
                     if (off(d) < off(g.d)) g.d = d;
                     return;
                 }
             }
-            var ng = {d: d, boxes: [box], span: box.slice()};
+            var ng = {d: d, boxes: [box], span: box.slice(), rows: [d.row]};
             gs.push(ng);
             kept.push(ng);
         });
         var rows = kept.map(function (g) {
             if (g.boxes && g.boxes.length > 1) g.d._span = g.span;
+            if (g.rows) g.d._rows = g.rows;
             return g.d;
         });
         rows.forEach(function (d) {
@@ -2819,7 +2956,8 @@ _PLACE_SEARCH_TEMPLATE = r"""
                         'Search index <a href="https://opendatacommons.org/licenses/odbl/1-0/" ' +
                         'target="_blank" rel="noopener noreferrer">ODbL</a> (<a href="' + abs(URL) +
                         '" target="_blank" rel="noopener" download>download</a>' +
-                        (crossURL ? ', <a href="' + abs(crossURL) + '" target="_blank" rel="noopener" download>intersections</a>' : '') + ')');
+                        (crossURL ? ', <a href="' + abs(crossURL) + '" target="_blank" rel="noopener" download>intersections</a>' : '') +
+                        (streetURL ? ', <a href="' + abs(streetURL) + '" target="_blank" rel="noopener" download>streets</a>' : '') + ')');
                     // The line is taller now (two lines on a phone), and
                     // the legend's bottom is clamped for a one-line credit
                     // (_LEGEND_BOTTOM_CSS): it is raised by what the line
@@ -2845,13 +2983,15 @@ _PLACE_SEARCH_TEMPLATE = r"""
             // 2026-10-07). It replaced 4.3(a)'s longer example wording. The
             // offer covers the intersections file as well, which is part of
             // the same derived database (owner, 2026-10-11); its link shows
-            // once the index has named the file.
+            // once the index has named the file. The street lines file is a
+            // third part of it, with a third link (owner, 2026-10-13).
             c.innerHTML = 'Search data &copy; <a href="https://www.openstreetmap.org/copyright" ' +
                 'target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a> ' +
                 '(<a href="https://opendatacommons.org/licenses/odbl/1-0/" target="_blank" ' +
                 'rel="noopener noreferrer">ODbL</a>) · ' +
                 '<a href="' + abs(URL) + '" target="_blank" rel="noopener" download>Download this index</a>' +
-                (crossURL ? ' · <a href="' + abs(crossURL) + '" target="_blank" rel="noopener" download>intersections</a>' : '');
+                (crossURL ? ' · <a href="' + abs(crossURL) + '" target="_blank" rel="noopener" download>intersections</a>' : '') +
+                (streetURL ? ' · <a href="' + abs(streetURL) + '" target="_blank" rel="noopener" download>streets</a>' : '');
             list.appendChild(c);
         }
         // On a phone (under 480 px), with both groups shown, each heading folds
@@ -2984,10 +3124,10 @@ _PLACE_SEARCH_TEMPLATE = r"""
             input.blur();
             if (d.kind === "line") {
                 // The whole line in view, picked out as its legend row does
-                // (LINE_HIGHLIGHT_SCRIPT); a row already picked stays picked.
+                // (LINE_HIGHLIGHT_SCRIPT, which also gives it the picked
+                // look); a row already picked stays picked.
                 map.fitBounds([[d.bbox[0], d.bbox[1]], [d.bbox[2], d.bbox[3]]], {padding: [30, 30]});
                 if (d.row.getAttribute("aria-pressed") !== "true") d.row.click();
-                samplePick();
                 return;
             }
             if (d.kind === "mapstation") {
@@ -3019,6 +3159,25 @@ _PLACE_SEARCH_TEMPLATE = r"""
             ]).addTo(map);
             marker.getLayers()[1].bindTooltip(d.name, {permanent: true, direction: "top", pane: "hmsearchtip",
                 offset: [0, -16]}).openTooltip();
+            // A street's whole length, every stretch the result row stands
+            // for (oneRowAStreet), drawn when its file is in; the ring gives
+            // way to it and the name label stays. No file, or a street with
+            // no line in it, leaves the ring.
+            if (d.kind === "street" && streetURL && d._rows) {
+                var mine = marker, rowsOf = d._rows;
+                loadStreets().then(function (linesOf) {
+                    if (marker !== mine) return;
+                    var lines = [];
+                    rowsOf.forEach(function (r) { lines = lines.concat(linesOf(r)); });
+                    if (!lines.length) return;
+                    mine.getLayers().forEach(function (c) { if (c._path) c._path.classList.add("hm-search-hid"); });
+                    [["hm-search-streetcase", 9], ["hm-search-street", 5]].forEach(function (s) {
+                        mine.addLayer(L.polyline(lines, {weight: s[1], opacity: 1, className: s[0],
+                            pane: "hmsearch", renderer: renderer, interactive: false,
+                            lineCap: "round", lineJoin: "round"}));
+                    });
+                }, function () {});
+            }
             map.getContainer().classList.add("hm-searching");
             // The reader's first touch of the map ends the fade (the marker
             // stays its 12 seconds). Armed after the move this search makes.
@@ -3030,65 +3189,8 @@ _PLACE_SEARCH_TEMPLATE = r"""
             }, 400);
             timer = setTimeout(unmark, 12000);
         }
-        // A picked line's look, whether picked from the search, its legend
-        // row or the map: the businesses step back, a casing is drawn under
-        // the line and its label is boxed, until it is unpicked. The picked
-        // state is the legend row's aria-pressed, which LINE_HIGHLIGHT_SCRIPT
-        // sets in one place; that script also presses a row for a mouse
-        // hover, so the pick is read only after a click or a key, and a line
-        // merely hovered gets none of this. While the pointer hovers another
-        // line the look is off, and it returns with the pick. The casing is
-        // a copy of the line's own polylines in the same renderer, moved
-        // under the line's first path, which the highlight script has
-        // already put last among the lines.
-        function pressedRow() {
-            return document.querySelector('.hm-line-row[data-line][aria-pressed="true"]');
-        }
-        function lineState() {
-            var cur = pressedRow();
-            if (!cur) lineRow = null;
-            var want = lineRow && cur === lineRow ? lineRow.getAttribute("data-line") : null;
-            if (want === cased) return;
-            var label;
-            if (cased !== null) {
-                label = document.querySelector('.hm-line-label[data-line="' + cased + '"]');
-                if (label) label.classList.remove("hm-search-label");
-                if (casing) map.removeLayer(casing);
-                casing = null;
-            }
-            cased = want;
-            if (want === null) {
-                if (!marker) map.getContainer().classList.remove("hm-searching");
-                return;
-            }
-            map.getContainer().classList.add("hm-searching");
-            label = document.querySelector('.hm-line-label[data-line="' + want + '"]');
-            if (label) label.classList.add("hm-search-label");
-            var polys = [];
-            map.eachLayer(function (l) {
-                var c = l.options && l.options.className;
-                if (typeof c === "string" && l._path && (" " + c + " ").indexOf(" hm-line-" + want + " ") !== -1) polys.push(l);
-            });
-            if (!polys.length) return;
-            casing = L.featureGroup(polys.map(function (q) {
-                return L.polyline(q.getLatLngs(), {weight: 13, opacity: 1, className: "hm-search-linecase",
-                    interactive: false, renderer: q._renderer});
-            })).addTo(map);
-            var first = polys[0]._path;
-            casing.eachLayer(function (c) {
-                if (c._path && first.parentNode) first.parentNode.insertBefore(c._path, first);
-            });
-        }
-        function samplePick() { lineRow = pressedRow(); lineState(); }
-        Array.prototype.forEach.call(document.querySelectorAll(".hm-line-row[data-line]"), function (row) {
-            new MutationObserver(lineState).observe(row, {attributes: true, attributeFilter: ["aria-pressed"]});
-        });
-        ["click", "keyup"].forEach(function (ev) {
-            document.addEventListener(ev, function () { setTimeout(samplePick, 0); }, true);
-        });
         function unfade() {
-            // A picked line keeps its fade.
-            if (cased === null) map.getContainer().classList.remove("hm-searching");
+            map.getContainer().classList.remove("hm-searching");
             ["pointerdown", "wheel", "touchstart", "keydown"].forEach(function (ev) {
                 map.getContainer().removeEventListener(ev, unfade, {capture: true});
             });
@@ -4334,6 +4436,44 @@ OSM_ATTRIBUTION = (
     'rel="noopener noreferrer">OpenStreetMap</a> contributors'
 )
 
+# THE OWNER'S RIGHTS ON A MAP FILE (owner, 2026-10-13, after a rights check
+# found that a saved or screenshotted map carried the OpenStreetMap credit
+# and nothing of the owner's). Two parts, both written by render_heatmap:
+#  - machine-readable tags in the head (RIGHTS_META; wording approved by the
+#    owner). They reserve the DESIGN AND TEXT only: the map's data is its
+#    publishers', as LICENSE says, and no tag may read as a claim over it.
+#  - a visible credit after the basemap's in the bottom attribution line
+#    (OWNER_CREDIT). It follows the OSM credit and never replaces it.
+# Fukui's output is offered under CC BY-SA 4.0 (LICENSE, "ONE EXCEPTION"), so
+# its rights tag says so instead of reserving everything.
+OWNER_NAME = "Dace Roberts"
+OWNER_CREDIT = f"Map design &copy; {OWNER_NAME}"
+# What both base layers (Business and Travel) show in the bottom line.
+MAP_ATTRIBUTION = OSM_ATTRIBUTION + " &middot; " + OWNER_CREDIT
+RIGHTS_META = {
+    "copyright": f"Writing and design \u00a9 2026 {OWNER_NAME}. All rights reserved.",
+    "dcterms.rightsHolder": OWNER_NAME,
+    "dcterms.rights": (f"Map design and text \u00a9 2026 {OWNER_NAME}, all rights reserved. Code: MIT "
+                       "License. Business, transit and basemap data remain under their publishers' "
+                       "terms; see the site's Required Notices page."),
+}
+RIGHTS_META_BY_CITY = {
+    "fukui": {
+        "dcterms.rights": (f"Map design and text \u00a9 2026 {OWNER_NAME}. This map's output is offered "
+                           "under CC BY-SA 4.0, as Fukui City's license for its source lists requires. "
+                           "Code: MIT License. Business, transit and basemap data remain under their "
+                           "publishers' terms; see the site's Required Notices page."),
+        "copyright": f"Writing and design \u00a9 2026 {OWNER_NAME}. This map's output: CC BY-SA 4.0.",
+    },
+}
+
+
+def rights_meta_html(slug):
+    """The head's rights tags for the map of `slug` (RIGHTS_META, with the
+    city's own wording where RIGHTS_META_BY_CITY has one)."""
+    tags = dict(RIGHTS_META, **RIGHTS_META_BY_CITY.get(slug, {}))
+    return "\n".join(f'<meta name="{k}" content="{html.escape(v, quote=True)}">' for k, v in tags.items())
+
 
 # THE OPEN BASEMAP (PROTOTYPE, DECISIONS.md 2026-10-07 "Four ideas assessed",
 # item 4). tile.openstreetmap.org forbids offline use and CARTO's terms forbid
@@ -4589,7 +4729,7 @@ class OpenBasemap(folium.map.Layer):
         self.libs = list(libs or OPEN_BASEMAP_LIBS)
         self.assets = assets or OPEN_BASEMAP_ASSETS
         self.travel_style_js = TRAVEL_STYLE_JS
-        self.attribution = OSM_ATTRIBUTION
+        self.attribution = MAP_ATTRIBUTION
 
 
 # THE FULL TRAVEL VERSION (owner, 2026-10-07/08; the drafts log has the
@@ -5436,7 +5576,7 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     # requires the target on every map.
     std_base = folium.TileLayer(
         tiles="OpenStreetMap", name="Business" if open_basemap else map_title,
-        attr=OSM_ATTRIBUTION,
+        attr=MAP_ATTRIBUTION,
     ).add_to(m)
     basemap_args = dict(open_basemap or {})
     routes = tuple(basemap_args.pop("routes", ()))
@@ -5678,6 +5818,7 @@ def render_heatmap(*, output_path, map_title, city_name, system_name,
     # metadata only, never visible, read from the committed table, so no key
     # is needed to render. A map with no table entry renders unmarked and
     # `fingerprint.py coverage` fails it.
+    m.get_root().header.add_child(folium.Element(rights_meta_html(output_path.parent.name)))
     mark = fingerprint_mark(f"map/{output_path.parent.name}")
     if mark:
         m.get_root().header.add_child(folium.Element(

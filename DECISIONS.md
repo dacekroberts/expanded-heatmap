@@ -20,11 +20,14 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**88 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**91 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
 - [The id side file for the travel app, built on the 19 searched cities (owner)](#2026-10-13---the-id-side-file-for-the-travel-app-built-on-the-19-searched-cities-owner)
+- [A picked street is drawn at its whole length, from a street lines side file; the ring is the failsafe (owner)](#2026-10-13---a-picked-street-is-drawn-at-its-whole-length-from-a-street-lines-side-file-the-ring-is-the-failsafe-owner)
+- [The maps' Cities menu under non clickable headers, Japan last (owner)](#2026-10-13---the-maps-cities-menu-under-non-clickable-headers-japan-last-owner)
+- [Street lines: the teal stays, a third credit link, the 19 rebuilt; the picked-line look goes to every map (owner)](#2026-10-13---street-lines-the-teal-stays-a-third-credit-link-the-19-rebuilt-the-picked-line-look-goes-to-every-map-owner)
 
 **2026-10-12**
 
@@ -4894,3 +4897,107 @@ japan-city template:
   - **Held by** `check_place_search.py`, rule I (the hash is this index's,
     rows ascending and in range and never a street, ids well formed), and by
     the place index drift check, which compares every file the step writes.
+
+### 2026-10-13 - A picked street is drawn at its whole length, from a street lines side file; the ring is the failsafe (owner)
+
+- **Asked and decided by the owner** ("can we make searching a street
+  without an intersection show the whole length of the street?"; then "yes
+  build it as a side file, measure all 19 first"; then, on the rows with no
+  line, "ring where line is not possible is a good failsafe, record").
+  - **What is built** (branch `street-lines`, on `map-rights`; NOT on
+    master, no index rebuilt, no map re-rendered): the index step writes
+    `app/static/places/streets/<city>.json`, each street row's ways joined
+    end to end and simplified by 10 m in the city's own CRS
+    (`place_index.chain_ways`, `street_lines`, `STREET_SIMPLIFY_M`). The
+    index names the file under its hash (`"streets"`, a key added, schema
+    still 1). The map fetches it at the first street picked and draws the
+    line in the ring's colours; the name label stays.
+  - **The failsafe.** The ring is drawn first and hidden only once a line is
+    on the map, so it stays when the index names no street file, when the
+    fetch fails, and for a row with no line.
+  - **Why a side file.** Measured on Seattle before building: the shapes are
+    larger than the whole index (330 KB gzipped against 230 KB), so in the
+    index they would have more than doubled what opening the search costs.
+  - **How accurate, as told to the owner: mostly, not totally.** A line is
+    what OSM names with exactly the row's name: it stops where the name
+    changes (a third of Seattle's street names, 3,707 of 11,117, share a
+    base with a direction-word sibling such as Pike Street and East Pike
+    Street), at the edge of the search area, and at any gap. Not counted:
+    bridges and ramps under their own name.
+  - **Measured on the 19 built cities** (the real step, written nowhere):
+    15.6 MB raw and 5.8 MB gzipped in all; London 2,841 / 1,094 KB, Mexico
+    City 2,732 / 997, São Paulo 2,412 / 870, the smallest Brussels 75 / 29.
+    Of about 254,000 street rows, 11 have no line (four in São Paulo, one
+    each in seven cities). The delta-integer encoding is 62% of plain
+    coordinates' bytes on Seattle.
+  - **Tested** on a local Seattle map in the browser: "Pike Street" and
+    "Rainier Avenue South" drawn, the ring's two paths hidden, the label
+    shown. Not tested: a phone, a failed fetch in a browser.
+  - **Held by** `check_place_search.py` rule J (the file is this index's;
+    every line inside its street row's extent; selftest 28 of 28).
+  - **For future waves:** the `place-street-lines` skill.
+  - **Open with the owner:** the line's colour, a "streets" link in the
+    credit line, 10 or 20 m for the three largest cities, and the word to
+    rebuild the 19.
+
+### 2026-10-13 - The maps' Cities menu under non clickable headers, Japan last (owner)
+
+- **Decided by the owner** ("could we make collapsible region groups within
+  the list: or non clickable divider section headers?"; then "non clickable
+  headers sounds good"; then "also put japanese cities at the bottom since
+  they are the largest group").
+  - **Why headers and not collapsing groups.** The menu is the browser's own
+    dropdown, 236 cities in one run. A native dropdown takes headers
+    (optgroup) and cannot collapse; collapsing means a custom panel inside
+    the map, a larger build with more to get right on a phone.
+  - **The grouping** (`cities.MENU_GROUPS`, 43 headers): a country in one
+    region is one group under its name; a country in several regions is a
+    group per region, "Country · Region" ("United States · West", "Japan ·
+    Kansai"), because one header over Japan's 94 cities divides nothing.
+    The split is this session's choice, told to the owner, not yet answered.
+    Japan's 13 groups come last (`MENU_LAST`). `SWITCHER_ORDER` is unchanged.
+  - **How.** The app page writes the headers and their link counts in one
+    hidden element beside the hidden city links; the map's menu reads both.
+    A map rendered before this lists the links plainly, in the new order.
+  - **A fault found on the way and fixed:** the menu was built once and kept,
+    so one filled while the page had drawn only some links stayed short. It
+    is now rebuilt whenever the links or headers have changed.
+  - **Tested** on a local Seattle page: 43 headers, 236 options, Seattle
+    itself left out. Not tested: an iPhone's picker, Safari on a Mac.
+  - **Held** on branch `street-lines`; needs the full re-render and a reboot.
+
+### 2026-10-13 - Street lines: the teal stays, a third credit link, the 19 rebuilt; the picked-line look goes to every map (owner)
+
+- **Decided by the owner** ("yes roll out the highlight, region split is
+  good. ring teal is good, stands out. third link is okay. i give you word
+  to rebuild").
+  - **The street line keeps the search ring's teal.** Offered against it: a
+    white-cased dark line, since the teal sits near Seattle's green and blue
+    transit lines. The owner: it stands out.
+  - **The search credit gains a third link, "streets"**, in the bottom line
+    ("Search index ODbL (download, intersections, streets)") and in the box
+    form. The street file is part of the same ODbL database, so the 4.6
+    offer covers it; `docs/data_sources.md` says three files now.
+  - **The 19 built indexes are rebuilt with their street files** at 10 m.
+    The 1 MB first street pick in London, Mexico City and São Paulo was put
+    to the owner with a 20 m alternative; the word to rebuild came without
+    asking for it.
+  - **The Cities menu's region split stands** (the entry above).
+  - **The picked-line look on every map.** The casing, the boxed label and
+    the businesses stepping back were built inside the search script, so
+    only the 19 searched maps had them, and one legend click looked two ways
+    across the site. Moved into `LINE_HIGHLIGHT_SCRIPT`, which already holds
+    the pick (`sel`), so the search script's sampling of the legend row's
+    `aria-pressed` (a MutationObserver and document click and key listeners)
+    is gone. The fade is a class of its own (`hm-line-picked`), so the
+    search marker's fade (`hm-searching`) and a picked line's no longer
+    share one class and one owner. Classes renamed `hm-pick-case`,
+    `hm-pick-label`.
+  - **Tested locally** on a map without search and with 16 lines (Zurich:
+    pick, switch, unpick; the casing under its line; the dots at 0.28; one
+    label boxed) and on Saint-Etienne, where the trams share track, in both
+    themes; no console error. Not tested: a real hover while another line is
+    picked, a phone, the search picking a line after the move.
+  - **Asked by the owner, answered:** boundaries and street lines are built
+    in each batch, not at the end; both come from steps a wave already runs.
+  - **Held** on branch `street-lines` for the one full re-render.

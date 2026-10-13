@@ -417,14 +417,18 @@ sample batches after it); the other maps follow in the rollout's waves.<!-- /int
   `scripts/check_map_attribution.js` at more than one height after any
   change to it. `PLACE_CREDIT_BELOW` in `pipeline/map_common.py` puts the
   notice back in the box; never drop both.
-- **Access (§4.6):** each city's database is two files, both downloadable
+- **Access (§4.6):** each city's database is three files, all downloadable
   free of charge from the site: the index (`app/static/places/<city>.json`,
-  which the search box links) and its street-pair intersections
+  which the search box links), its street-pair intersections
   (`app/static/places/crossings/<city>.json`, split off 2026-10-08 so a
-  search downloads it only when it asks for an intersection), which the index
-  names by its path in its `crossings` field. Both carry the notice. The
+  search downloads it only when it asks for an intersection) and its street
+  lines (`app/static/places/streets/<city>.json`, added 2026-10-13: each
+  street's drawn length, downloaded at the first street picked). The index
+  names the other two by path in its `crossings` and `streets` fields, and
+  the search credit links all three ("download, intersections, streets";
+  owner, 2026-10-13). All carry the notice. The
   method that builds them is in the public repository. No technical
-  restriction on either file (§4.7).<!-- internal --> For review time: whether
+  restriction on any of the files (§4.7).<!-- internal --> For review time: whether
   the box's "Download this index" should also link the intersections file
   directly (a wording change for the owner), or the index's naming it is
   offer enough.<!-- /internal -->

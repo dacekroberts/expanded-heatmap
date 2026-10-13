@@ -52,6 +52,13 @@ index step measures each language's share of the places
      answered with stations and lines only while every local test passed.
      The map's script must take the prefix from the page (getIndex) and must
      not fetch the bare URL. A wave rendered from an older map_common fails.
+  J. The street lines file (app/static/places/streets/, owner 2026-10-13: a
+     picked street shows its whole length) is THIS index's: named in the
+     index under its current hash, its rows ascending and each a street row,
+     one list of lines a row, and every point of a line inside its street
+     row's own extent (STREET_PAD_DEG wider: the simplification and the
+     rounding). A line outside its row's extent is a line drawn on another
+     street. It carries the index's licence object.
   A and D apply to the intersections file too (app/static/places/crossings/,
      since 2026-10-08): the index names it under its current hash, and it
      holds only [lat, lon, street, street] rows and the index's licence.
@@ -89,8 +96,14 @@ def check_coverage(slug, index, stations, known=None):
     return []
 
 
-TOP_KEYS = {"license", "schema", "city", "languages", "fold", "kinds", "rows", "crossings", "area"}
+TOP_KEYS = {"license", "schema", "city", "languages", "fold", "kinds", "rows", "crossings", "streets",
+            "area"}
 CROSS_KEYS = {"license", "schema", "city", "part_of", "rows"}
+STREET_KEYS = {"license", "schema", "city", "part_of", "scale", "rows", "lines"}
+STREET_RE = re.compile(r"^/app/static/places/streets/([a-z0-9_]+)[.]json[?]v=([0-9a-f]+)$")
+# About 30 m of latitude: STREET_SIMPLIFY_M and the 5-decimal rounding of
+# both the line and the row's extent, with room.
+STREET_PAD_DEG = 0.0003
 URL_RE = re.compile(r"/app/static/places/([a-z0-9_]+)[.]json[?]v=([0-9a-f]+)")
 CROSS_RE = re.compile(r"^/app/static/places/crossings/([a-z0-9_]+)[.]json[?]v=([0-9a-f]+)$")
 BULLET = "never leaves your browser"
@@ -178,6 +191,55 @@ def check_crossings(slug, index):
         isinstance(i, int) and 0 <= i < len(rows) and rows[i][0] == street for i in r[2:4])]
     if bad:
         problems.append(f"D: {len(bad)} crossing row(s) not [lat, lon, street, street], e.g. {bad[0]}")
+    return problems
+
+
+def check_streets(slug, index, path=None):
+    """J: the street lines file named by the index is this index's."""
+    m = STREET_RE.match(str(index.get("streets", "")))
+    if not m or m.group(1) != slug:
+        return ["J: the index names no street lines file of its own"]
+    path = path or place_index.streets_path(slug)
+    if not path.exists():
+        return [f"J: no {path.name} under app/static/places/streets/: run the index step"]
+    if hashlib.sha256(path.read_bytes()).hexdigest()[:len(m.group(2))] != m.group(2):
+        return ["J: the index's street lines hash is stale (re-run the index step)"]
+    return street_problems(index, json.loads(path.read_text(encoding="utf-8")))
+
+
+def street_problems(index, st):
+    problems = []
+    if set(st) != STREET_KEYS:
+        problems.append(f"J: street lines keys {sorted(st)} are not {sorted(STREET_KEYS)}")
+    if st.get("license") != index.get("license"):
+        problems.append("J: the street lines file's licence object differs from the index's")
+    rows, lines, k = st.get("rows") or [], st.get("lines") or [], st.get("scale") or 0
+    if len(rows) != len(lines) or rows != sorted(set(rows)) or not k:
+        return problems + ["J: rows and lines are not two lists of one length, rows ascending, with a scale"]
+    street = index["kinds"].index("street") if "street" in index["kinds"] else -1
+    irows = index["rows"]
+    if any(not 0 <= i < len(irows) or irows[i][0] != street for i in rows):
+        return problems + ["J: the street lines file names a row out of range or not a street"]
+    off = 0
+    for i, ls in zip(rows, lines):
+        box = irows[i][5]
+        ok = bool(ls) and bool(box)
+        for a in ls if ok else ():
+            if len(a) < 4 or len(a) % 2 or not all(isinstance(v, int) for v in a):
+                ok = False
+                break
+            la, lo = a[0], a[1]
+            pts = [(la, lo)]
+            for j in range(2, len(a), 2):
+                la, lo = la + a[j], lo + a[j + 1]
+                pts.append((la, lo))
+            if any(not (box[0] - STREET_PAD_DEG <= y / k <= box[2] + STREET_PAD_DEG
+                        and box[1] - STREET_PAD_DEG <= x / k <= box[3] + STREET_PAD_DEG) for y, x in pts):
+                ok = False
+                break
+        off += not ok
+    if off:
+        problems.append(f"J: {off} street(s) with a line that is malformed or outside the street's own extent")
     return problems
 
 
@@ -292,6 +354,7 @@ def main():
         p += check_index(slug, index, summary)
         p += check_ids(slug, path.read_bytes(), index, place_index.ids_path(slug))
         p += check_crossings(slug, index)
+        p += check_streets(slug, index)
         p += check_junk(index)
         p += check_leaks(slug, index)
         p += check_visitable(slug)
@@ -343,6 +406,7 @@ def selftest():
                         "attribution": "© OpenStreetMap contributors"},
             "city": "X", "fold": None, "kinds": [], "rows": [[0, 1, 2, "a", "", 0]],
             "crossings": "/app/static/places/crossings/x.json?v=0", "schema": 1,
+            "streets": "/app/static/places/streets/x.json?v=0",
             "area": {"names": ["X"], "outline": [[1, 2, 1, 3, 2, 3, 1, 2]]}}
     ok = 0
     for label, langs, want in cases:
@@ -407,8 +471,21 @@ def selftest():
         got = len(check_fetch_path(text))
         ok += got == want
         print(f"  {'ok ' if got == want else 'BAD'} {label}: {got} problem(s)")
+    sidx = dict(base, kinds=["station", "street"],
+                rows=[[0, 10.0, 20.0, "A", "", 0], [1, 10.001, 20.001, "a street", "", [10.0, 20.0, 10.002, 20.002]]])
+    sfile = {"license": base["license"], "schema": 1, "city": "X", "part_of": "x.json", "scale": 100000}
+    street_cases = [
+        ("a line inside its street's extent", dict(sfile, rows=[1], lines=[[[1000000, 2000000, 200, 200]]]), 0),
+        ("a line that leaves its street", dict(sfile, rows=[1], lines=[[[1000000, 2000000, 5000, 200]]]), 1),
+        ("a line for a row that is no street", dict(sfile, rows=[0], lines=[[[1000000, 2000000, 1, 1]]]), 1),
+        ("a field from another source", dict(sfile, rows=[1], lines=[[[1000000, 2000000, 200, 200]]], width=[9]), 1),
+    ]
+    for label, st, want in street_cases:
+        got = len(street_problems(sidx, st))
+        ok += got == want
+        print(f"  {'ok ' if got == want else 'BAD'} {label}: {got} problem(s)")
     total = (len(cases) + 1 + len(leak_cases) + 1 + len(junk_cases) + len(visit_cases)
-             + len(cover_cases) + len(path_cases))
+             + len(cover_cases) + len(path_cases) + len(street_cases))
     print(f"{ok} of {total} cases behaved as intended.")
     return 0 if ok == total else 1
 
