@@ -2,6 +2,37 @@
 
 Newest first. Cleanup folds these into `DECISIONS.md` at review time.
 
+### 2026-10-13 - Tram rescope: Toronto's line list approved, then the feed shows three routes not running as streetcars (open, owner)
+
+- **Owner, 2026-10-13: "yes"** to Toronto's list: Lines 1, 2, 4, 5 and 6
+  unchanged, the 11 day streetcar routes 501 to 512 added ("Streetcar 501"
+  on the map, "Streetcar 501 Queen" in the legend), the 7 night routes not
+  drawn.
+- **What the feed then showed (read-only, the cached feed of 2026-09-21 and
+  a re-pull of 2026-10-13 under `gtfs_2026-10-13.zip`, window to
+  2026-10-31; both agree):**
+  - 503 Kingston Rd and 507 Long Branch run as replacement buses on every
+    trip (1,098 of 1,098 and 1,603 of 1,603; headsign "Replacement Bus").
+  - 506 Carlton and 512 St Clair run streetcars and a "B" replacement bus
+    side by side (1,010 of 2,025 and 1,101 of 2,462 trips are buses).
+  - 508 Lake Shore runs 35 trips, weekday peaks only: no weekday trip
+    between 09:00 and 15:00, so it fails the 15-minute test
+    (`docs/category_rules.md`, "Station scope").
+- **The precedents:** a stretch closed for works is drawn as the timetable
+  runs (Berlin's U6 Tegel branch, Prague's Flora, 2026-09-28/29), and a
+  stretch under the 15-minute test is not drawn (Aarhus). Applied here that
+  is 8 streetcar lines, not 11. The owner approved 11, so this goes back
+  to the owner before anything is built.
+- **In progress, uncommitted on the branch:** `pipeline/toronto/streetcars.py`
+  and config constants. Stops are grouped into places by distance (the
+  feed names stops per direction and has no parent stations), replacement
+  bus trips are left out, and the sub-transit-line filters thin the rest
+  (rapid-transit stations and terminals kept, one stop per half mile). The
+  interchange filter is narrowed to crossings and junctions, because 503,
+  504 and 508 share King Street for kilometres: with every shared stop
+  kept the dry run gave 141 new stations, with the narrower rule 107
+  (before the bus trips were taken out; to be re-measured).
+
 ### 2026-10-13 - Tram rescope: the many-route rule is per route (owner), and Prague's colors fit it (measured)
 
 - **Owner, 2026-10-13: "yes per route sounds good".** Toronto, Milan and
