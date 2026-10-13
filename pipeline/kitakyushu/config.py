@@ -317,4 +317,22 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
+PLACE_DROPPED = {
+    "way/548678511": "a duplicate row: the station building beside the station node already in",
+    "node/1423757432": "a duplicate row of a museum already in under its common name",
+    "way/1367616545": "an address area standing in for a park name; the area has its own place row",
+    "node/12709928505": "a memorial stone with no article of its own; its wikidata is its subject's",
+    "node/12627950261": "public art with no article of its own; its wikidata is the artist's",
+    "way/1357936490": "a university sports field tagged a park",
+    "way/1263422350": "a mall's indoor corridor with floors in the name",
+    "way/1123734862": "a station free-passage corridor",
+    "way/1258461239": "a station free-passage corridor",
+    "way/1272777119": "a direction-label connecting passage (stairs)",
+    "way/1274887621": "a bare type word (private road) as the whole name",
+    "way/1274887622": "a bare type word (private road) as the whole name",
+    "way/139411226": "a location description (in front of a park)",
+    "way/1106143887": "an address block number standing in for a name",
+    "way/598240333": "a glitched name (stray digit after the route code)",
+    "way/598240334": "a glitched name (stray digit after the route code)",
+}

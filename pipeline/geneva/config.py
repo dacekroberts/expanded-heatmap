@@ -175,5 +175,37 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("fr",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+PLACE_REVIEWED = {
+    "Chemin de l'Auberge": "a tertiary road, a real street name; the read of 2026-10-13",
+}
+# The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
+PLACE_DROPPED = {
+    "node/2406735664": "a business website name tagged a place of worship",
+    "node/10848739906": "a code name duplicating the church 23 m away",
+    "way/1444049097": "a description standing in for a name",
+    "way/877866134": "a description standing in for a name, tagged a park",
+    "way/440946686": "a spillway description glued on a river name",
+    "way/1457818734": "a name that says the thing is temporary",
+    "way/1457818735": "a name that says the thing is temporary",
+    "way/1457818736": "a name that says the thing is temporary",
+    "way/1457814057": "a status note glued on a river name; the river has its own row",
+    "way/1457814058": "a status note glued on a river name; the river has its own row",
+    "way/1457814068": "a status note glued on a river name; the river has its own row",
+    "way/77946742": "a duplicate row of the square 45 m away, the weaker one",
+    "node/13764446244": "a duplicate row of the park's own outline, the weaker one",
+    "node/12822448853": "a locality node duplicating the park row",
+    "node/12822076592": "a locality node duplicating the square row",
+    "node/13712206211": "a locality node duplicating the garden row",
+    "node/2562526841": "a parish node duplicating its church 45 m away",
+    "node/12467398443": "English glued on the name; a stone kept at a museum",
+    "way/83210157": "a lower-case duplicate of Chemin de Claire-Vue",
+    "way/1276734116": "a bare type word standing as the whole name",
+    "way/1276734120": "a bare type word standing as the whole name",
+    "way/1276734121": "a bare type word standing as the whole name",
+    "way/180632918": "an all-caps duplicate of Passage de la Tour",
+    "way/798427820": "a mis-capitalized duplicate of Chemin du 23-Août",
+    "way/409057998": "a direction label on a roundabout part",
+    "way/409257973": "a direction label on a roundabout part",
+    "way/408267999": "a direction label on a roundabout part",
+    "way/26180222": "a direction label glued to the name",
+}
