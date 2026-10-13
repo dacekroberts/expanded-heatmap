@@ -144,9 +144,19 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("cs",)
 PLACE_FOLD = None
+# Rows a reader held that the owner ruled to keep (2026-10-13;
+# docs/decisions_drafts/search-final.md). A record only: no code reads it.
+# A street is listed by name, a place by OSM id with its name. Not in
+# PLACE_REVIEWED, which check E holds to names carrying a leak word.
+PLACE_RULED_KEPT = {
+    "Přehradni cesta": "a misspelled street is still that street (owner, 2026-10-13)",
+}
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "node/11887477865": "a replica gun named for its model (owner, 2026-10-13)",
+    "node/639173485": "a memorial named by its inscription (owner, 2026-10-13)",
+    "relation/442417": "an administrative district reaching beyond the map, in as a place row (owner, 2026-10-13)",
     "relation/1266525": "a whole name that is only a type word (castle); the object itself has an article (owner, 2026-10-13)",
     "node/13894102732": "a bare quarter node doubling the district boundary row that already carries this short name (owner, 2026-10-13)",
     "node/13158629883": "a vanished object: a station closed in 1970, its site now under the lake",

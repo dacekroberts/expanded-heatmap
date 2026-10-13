@@ -1,3 +1,88 @@
+### 2026-10-13 - The owner's seven rulings on the held rows applied; Guadalajara's address-number names checked and dropped; what stays held (branch search-final)
+
+- **The owner, to seven calls put by the Cleanup session on its
+  recommendations: "agree with all seven".** Applied by a follow-up session
+  after the build session closed.
+  1. A misspelled street is still that street: kept. Monterrey 21 (the
+     restored private streets' list, "Calle Frida Khalo"), Guadalajara 4,
+     Bucharest "Prelugirea Ghencea", Most "Přehradni cesta".
+  2. Guadalajara's street names ending in a house number: dropped by id
+     after a tag check (below). 283 names, 550 ways.
+  3. Oslo: the 14 statues and memorials carrying their subject's article are
+     kept (only public art needs an article of its own); the 4 shielings
+     mapped as farmyards are dropped.
+  4. Rome's 23 bare type words on ruins and Cluj-Napoca's 4 type-phrase
+     names are dropped, and Cluj-Napoca way/276967051 with them (its real
+     name is in alt_name; there is no name-repair feature).
+  5. Copenhagen: the 9 area names on Christiania's paths are kept; the 2
+     allotment section names are dropped (20 ways). Kitakyushu's Onga River:
+     NOT applied, see below.
+  6. Monterrey: 17 avenue and motorway names carried by link ways, 11 names
+     with two type words in a row and 7 series-number names, all kept.
+  7. Most: the replica gun (node/11887477865), the memorial named by its
+     inscription (node/639173485) and "okres Most" as a place row
+     (relation/442417) dropped. Yamagata: the two organization-named halls
+     (way/106604427, way/967771539) dropped.
+- **The tag check of item 2, before any drop.** 40 names taken at even
+  steps through the 283, 90 ways, read from the cached tags. Every way is a
+  residential lane: across all 544 name-tagged ways, living_street 363,
+  residential 173, footway 7, path 1; none is a service way or a driveway.
+  253 of the 544 carry access=private, and 18 of the 40 sampled names have
+  a private way. 27 of the 40 (188 of the 283) are a cached street's name
+  plus a number ("Abeto 1300" beside "Calle Abeto", "Circuito Parques del
+  Centinela 777" on nine ways of one gated loop), and 9 of the other 13 are
+  "Calle" plus a four-digit number, 8 of them from one run of way ids
+  beside "Calle Paseo de la Serenata 5090B". They read as the lanes of a gated cluster or
+  a privada labelled with the address of its gate, which is what the reader
+  took them for. No tag (official_name, ref) marks a name that officially
+  ends in a number. So all 283 were dropped. **The limit:** tags cannot
+  show an official name, and three sampled names sit on open residential
+  ways with no access tag ("Privada San Narciso 253", "Calle Bugambilia
+  243", "Calle Isla Mexcaltitán 4722"); 291 of the 544 ways have no access
+  tag. Five of the 283 rows took their name from alt_name on ways whose own
+  name is a bare number ("6060"); those 6 ways are dropped too.
+- **Kitakyushu's Onga River is not dropped.** The ruling asked for a clean
+  row first, and there is none: the three ways (way/59967203, way/59967938,
+  way/59968835) all carry "遠賀川 (Onga River)" and make the river's only
+  row. Dropping them takes the river out of the search. Left for the owner
+  or a name-repair rule.
+- **Kept rows are recorded in a new config dict, `PLACE_RULED_KEPT`, not in
+  `PLACE_REVIEWED`.** The rulings said `PLACE_REVIEWED`, but check E refuses
+  a reviewed name that carries no leak word: measured, the 85 kept names
+  would add 85 E failures, and the skill says never loosen check E. No code
+  reads the new dict; a street is listed by name, a place by OSM id with
+  its name. 85 records: Monterrey 56, Oslo 14, Copenhagen 9, Guadalajara 4,
+  Bucharest 1, Most 1. Moving them is one script if Cleanup prefers another
+  home (`PLACE_KEPT` would also shield them from later rules).
+- **Nine configs changed, nine cities rebuilt, no network request.** Rows
+  before and after: Guadalajara 27,771 to 27,488; Rome 19,310 to 19,287;
+  Copenhagen 6,524 to 6,522; Oslo 4,789 to 4,785; Cluj-Napoca 1,486 to
+  1,481; Yamagata 971 to 969; Most 513 to 510; Monterrey 23,487 and
+  Bucharest 6,509 unchanged (records only, their indexes byte for byte the
+  same). Each dropped name is gone and each kept name is a row, checked by
+  name against the committed index; no other name lost a row. Oslo keeps
+  one "Nordseter" row, the suburb with its article (node/1362880981).
+- **`check_place_search.py`:** 32 problems, rule A on each of the 32 cities
+  (an index no map uses yet), nothing else.
+- **What stays held:** 1,708 of the 1,810 rows of `search-final-held.md`
+  (102 settled above), grouped by class across cities in
+  `docs/decisions_drafts/search-final-held-remaining.md`, each class with
+  its count, three examples and the readers' proposal where they gave one.
+  The largest: bare type words 361, estates and courtyards 180, codes and
+  address strings 158, duplicate rows 122, campus and facility roads 116.
+  Close to a ruling and left alone: Monterrey's 15 grave-accent typos and 2
+  spelling variants, Guadalajara's 25 "unsure house number" names.
+
+Findings for Cleanup:
+
+51. **`PLACE_REVIEWED` cannot record a row kept by ruling** unless the name
+    carries a leak word (check E's second half). `PLACE_RULED_KEPT` is a
+    record no code reads; a check that each of its entries is still a row
+    would make it more than a note.
+52. **A glitched name on a river's only row cannot be dropped without
+    losing the river** (Kitakyushu's Onga River): the case for a name-repair
+    rule that takes name:ja when `name` glues English on.
+
 ### 2026-10-13 - The owner's six answers after the build; named private streets kept in Guadalajara and Monterrey; the held rows written out (branch search-final)
 
 - **The owner, to six calls after the build: all approved.**

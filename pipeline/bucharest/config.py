@@ -221,6 +221,13 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ro",)
 PLACE_FOLD = None
+# Rows a reader held that the owner ruled to keep (2026-10-13;
+# docs/decisions_drafts/search-final.md). A record only: no code reads it.
+# A street is listed by name, a place by OSM id with its name. Not in
+# PLACE_REVIEWED, which check E holds to names carrying a leak word.
+PLACE_RULED_KEPT = {
+    "Prelugirea Ghencea": "a misspelled street is still that street (owner, 2026-10-13)",
+}
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {

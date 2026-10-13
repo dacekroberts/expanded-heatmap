@@ -273,9 +273,33 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("nb",)
 PLACE_FOLD = None
+# Rows a reader held that the owner ruled to keep (2026-10-13;
+# docs/decisions_drafts/search-final.md). A record only: no code reads it.
+# A street is listed by name, a place by OSM id with its name. Not in
+# PLACE_REVIEWED, which check E holds to names carrying a leak word.
+PLACE_RULED_KEPT = {
+    "node/12963921538": "'Albert Nordengen', a statue or public memorial is kept on its subject's article; only public art needs its own (owner, 2026-10-13)",
+    "node/2792079636": "'Amaldus Nielsen', a statue or public memorial is kept on its subject's article; only public art needs its own (owner, 2026-10-13)",
+    "node/12943856329": "'Arne Garborg', a statue or public memorial is kept on its subject's article; only public art needs its own (owner, 2026-10-13)",
+    "node/8070893062": "'Arno Berg', a statue or public memorial is kept on its subject's article; only public art needs its own (owner, 2026-10-13)",
+    "node/12092706789": "'Arvid Storsveen', a statue or public memorial is kept on its subject's article; only public art needs its own (owner, 2026-10-13)",
+    "node/13236628537": "'Civilingeniør H. E. Heyerdahl', a statue or public memorial is kept on its subject's article; only public art needs its own (owner, 2026-10-13)",
+    "node/12945442516": "'Edvard Grieg', a statue or public memorial is kept on its subject's article; only public art needs its own (owner, 2026-10-13)",
+    "node/12707314255": "'Eivind Berggrav', a statue or public memorial is kept on its subject's article; only public art needs its own (owner, 2026-10-13)",
+    "node/3725012224": "'Gunnar Schjelderup', a statue or public memorial is kept on its subject's article; only public art needs its own (owner, 2026-10-13)",
+    "node/6578285081": "'Jens Olav Walaas Selvaag', a statue or public memorial is kept on its subject's article; only public art needs its own (owner, 2026-10-13)",
+    "node/12092702402": "'John Collett', a statue or public memorial is kept on its subject's article; only public art needs its own (owner, 2026-10-13)",
+    "node/12950534556": "'Niels Henrik Abel 1802–1829', a statue or public memorial is kept on its subject's article; only public art needs its own (owner, 2026-10-13)",
+    "node/12978566131": "'Theodor Julius Løvstad (1843 - 1913)', a statue or public memorial is kept on its subject's article; only public art needs its own (owner, 2026-10-13)",
+    "node/2772161019": "'MS Scandinavian Star minnesmerke', a statue or public memorial is kept on its subject's article; only public art needs its own (owner, 2026-10-13)",
+}
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "way/26552882": "a shieling mapped as a farmyard, no article (owner, 2026-10-13)",
+    "way/100711546": "a shieling mapped as a farmyard, no article (owner, 2026-10-13)",
+    "way/852020349": "a shieling mapped as a farmyard, no article (owner, 2026-10-13)",
+    "way/102657082": "a shieling mapped as a farmyard, no article (owner, 2026-10-13)",
     "node/2284244739": "a company's name on a building (owner, 2026-10-13)",
     "node/2417487842": "a numbered sculpture group carrying another work's article and none of its own",
     "node/2417487843": "a numbered sculpture group carrying another work's article and none of its own",

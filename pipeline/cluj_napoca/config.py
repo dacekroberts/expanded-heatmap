@@ -226,6 +226,11 @@ PLACE_FOLD = None
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "way/276967051": "a denomination as the whole name; the real name is in alt_name and no rule repairs a name (owner, 2026-10-13)",
+    "way/1427758602": "a type phrase as the whole name (owner, 2026-10-13)",
+    "way/1145050481": "a type phrase as the whole name (owner, 2026-10-13)",
+    "way/276212112": "a type phrase as the whole name (owner, 2026-10-13)",
+    "node/4134073486": "a type phrase as the whole name (owner, 2026-10-13)",
     "way/278312772": "a denomination or its hall type as the whole name (owner, 2026-10-13)",
     "way/276704844": "a denomination or its hall type as the whole name (owner, 2026-10-13)",
     "way/275161895": "a denomination or its hall type as the whole name (owner, 2026-10-13)",

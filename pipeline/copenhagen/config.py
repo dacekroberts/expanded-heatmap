@@ -310,9 +310,44 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("da",)
 PLACE_FOLD = None
+# Rows a reader held that the owner ruled to keep (2026-10-13;
+# docs/decisions_drafts/search-final.md). A record only: no code reads it.
+# A street is listed by name, a place by OSM id with its name. Not in
+# PLACE_REVIEWED, which check E holds to names carrying a leak word.
+PLACE_RULED_KEPT = {
+    "Fabriksområdet": "a real local name on Christiania's paths (owner, 2026-10-13)",
+    "Nordområdet": "a real local name on Christiania's paths (owner, 2026-10-13)",
+    "Sydområdet": "a real local name on Christiania's paths (owner, 2026-10-13)",
+    "Flaskehalsen": "a real local name on Christiania's paths (owner, 2026-10-13)",
+    "Fredens Ark": "a real local name on Christiania's paths (owner, 2026-10-13)",
+    "Psyak": "a real local name on Christiania's paths (owner, 2026-10-13)",
+    "Løvehuset": "a real local name on Christiania's paths (owner, 2026-10-13)",
+    "Mælkebøtten": "a real local name on Christiania's paths (owner, 2026-10-13)",
+    "Mælkevejen": "a real local name on Christiania's paths (owner, 2026-10-13)",
+}
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "way/199817432": "an allotment section code beside the estate's name (owner, 2026-10-13)",
+    "way/199817433": "an allotment section code beside the estate's name (owner, 2026-10-13)",
+    "way/199817434": "an allotment section code beside the estate's name (owner, 2026-10-13)",
+    "way/209490451": "an allotment section code beside the estate's name (owner, 2026-10-13)",
+    "way/25316710": "an allotment section code beside the estate's name (owner, 2026-10-13)",
+    "way/25316719": "an allotment section code beside the estate's name (owner, 2026-10-13)",
+    "way/25316720": "an allotment section code beside the estate's name (owner, 2026-10-13)",
+    "way/25316724": "an allotment section code beside the estate's name (owner, 2026-10-13)",
+    "way/25316726": "an allotment section code beside the estate's name (owner, 2026-10-13)",
+    "way/25316728": "an allotment section code beside the estate's name (owner, 2026-10-13)",
+    "way/25316731": "an allotment section code beside the estate's name (owner, 2026-10-13)",
+    "way/25316737": "an allotment section code beside the estate's name (owner, 2026-10-13)",
+    "way/25316742": "an allotment section code beside the estate's name (owner, 2026-10-13)",
+    "way/307063770": "an allotment section code beside the estate's name (owner, 2026-10-13)",
+    "way/320849903": "an allotment section code beside the estate's name (owner, 2026-10-13)",
+    "way/320849907": "an allotment section code beside the estate's name (owner, 2026-10-13)",
+    "way/320849908": "an allotment section code beside the estate's name (owner, 2026-10-13)",
+    "way/320849913": "an allotment section code beside the estate's name (owner, 2026-10-13)",
+    "way/386982102": "an allotment section code beside the estate's name (owner, 2026-10-13)",
+    "way/33629014": "an allotment section code beside the estate's name (owner, 2026-10-13)",
     "way/118946532": "a mall's, estate's or facility's own name on its paths, not a street (owner, 2026-10-13)",
     "way/108175582": "a mall's, estate's or facility's own name on its paths, not a street (owner, 2026-10-13)",
     "way/116962121": "a mall's, estate's or facility's own name on its paths, not a street (owner, 2026-10-13)",

@@ -299,6 +299,8 @@ PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    "way/106604427": "an organization's name standing in for the hall's own name (owner, 2026-10-13)",
+    "way/967771539": "an organization's name standing in for the hall's own name (owner, 2026-10-13)",
     "node/8527320952": "a second node for one district name (owner, 2026-10-13)",
     "node/8527285076": "a second node for one district name (owner, 2026-10-13)",
     "node/8527320992": "a second node for one district name (owner, 2026-10-13)",
