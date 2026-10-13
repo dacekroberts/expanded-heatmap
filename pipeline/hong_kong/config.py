@@ -206,3 +206,8 @@ PLACE_DROPPED = {
     "way/1493422051": "a nunnery (萬佛堂), a religious residence tagged a place of worship, not notable",
     "way/763924400": "a retreat house (靜修院), a religious residence tagged a place of worship, not notable",
 }
+# Interchange names are street names here (owner, 2026-10-13: "keep as per-city
+# with reasoning"): admitted on purpose on 2026-10-08, the names are how the
+# junctions are known and signed in Hong Kong, and sixteen of the 44 rows are
+# tagged roundabouts. Every other city drops them (place_index.street_never).
+PLACE_KEEP_INTERCHANGES = True
