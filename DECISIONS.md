@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**113 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**114 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -50,6 +50,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Place search: the second rule batch and the final group (owner)](#2026-10-13---place-search-the-second-rule-batch-and-the-final-group-owner)
 - [Place search: named roundabouts and standing abandoned landmarks stay (owner)](#2026-10-13---place-search-named-roundabouts-and-standing-abandoned-landmarks-stay-owner)
 - [Place search: quiet stations, Brussels' two neighbors, hand work in its own session, where the retrospectives go (owner)](#2026-10-13---place-search-quiet-stations-brussels-two-neighbors-hand-work-in-its-own-session-where-the-retrospectives-go-owner)
+- [Place search: six corrections to the second rule batch before it lands (owner)](#2026-10-13---place-search-six-corrections-to-the-second-rule-batch-before-it-lands-owner)
 
 **2026-10-12**
 
@@ -5811,3 +5812,34 @@ japan-city template:
   delegation, the owner: "the hand work can start with deepseek delegation in
   its own session".** Branch `search-final`, cut from `search-rollout`;
   nothing pushed from it.
+
+### 2026-10-13 - Place search: six corrections to the second rule batch before it lands (owner)
+
+- **The batch as built changed 323,407 rows to 322,788 on the 19 live
+  cities** (the build agent's report, `data/_place_rules_2026-10-13/batch2/`).
+  Cleanup read the report and brought six rows-level problems, each with a
+  recommendation. **The owner: "1 i agree with you. 2. yes agreed. 3. keep as
+  per-city with reasoning. 4. keep by name. 5. stays. 6. yes stop area with
+  your rule".**
+- **(1) A register entry stays with a Wikidata entry of its own**, not only
+  with an article. As built the rule dropped Seattle's Ballard Locks, Pacific
+  Tower, the Naval Reserve Armory and the Canoe House beside 45 numbered
+  buildings; the Locks stay by name if they carry neither.
+- **(2) A street's way loses its landmark row only when a street row of the
+  same name exists.** Measured: 25 of 27 dropped rows stayed findable as
+  streets; Aurora Bridge (the road's name is Aurora Avenue) and one Seoul
+  park did not.
+- **(3) Hong Kong keeps its 44 interchange names, a per-city setting.** They
+  were admitted on purpose on 2026-10-08, and sixteen are tagged
+  roundabouts. Interchanges go everywhere else.
+- **(4) London's Greenway stays by name;** the bare word stays on the list
+  for other cities.
+- **(5) A disused place of worship with an article or entry of its own
+  stays** (Montreal's Eglise Saint-Enfant-Jesus du Mile-End), by the
+  abandoned-landmark ruling of this date.
+- **(6) A stop-area relation stays when no other row carries that station**
+  (two Washington streetcar stops).
+- **As built, not changed, the owner: "smaller points all look good":** Manchester's Circles stay by the junction tag,
+  White City Circle (no tag) by a per-city keep, interchanges go by name;
+  cemetery avenues and campus lawns have no safe test and stay as by-id
+  drops; end dates on landmarks are not read.
