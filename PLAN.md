@@ -282,6 +282,17 @@ Detail files: [japan](docs/plan_detail/japan.md),
     street-type bonus goes to streets only, so "Lake Shore Dr" lists the
     Drive, not the synagogue. Cherry-pick it, re-render the 19 searched
     maps, and take the "Known and left" line out of the skill.
+    **Also for that landing (owner, 2026-10-12), built on
+    `worktree-cleanup` and not on master:** the searched area's outline and
+    scope rule (`scripts/check_place_scope.py`; the 18 other built cities
+    still need their outline fetch and an index rebuild, then the size
+    table goes to the owner), the search credit in the map's bottom line
+    (run `check_map_attribution.js` with the search box opened, at several
+    heights), and the 7-day data-age guard in the fetch. **London's tile 2
+    is May data from `overpass.kumi.systems`: refetch it from
+    `overpass-api.de` when that mirror answers again (owner: "yes refetch
+    london tile"), rebuild London, report the rows that change.** Wave 1
+    refetches five main caches for the same reason.
   - **Idea for the next landing (owner, 2026-10-12): a button that
     returns a map to its starting view.** After a search the map stays
     at the found place and nothing restores the city-wide view (the
