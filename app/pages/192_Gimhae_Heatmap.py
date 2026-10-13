@@ -87,7 +87,7 @@ st.markdown(
 """
 )
 
-render_map_help('three business categories (Food service, Retail and Personal services)')
+render_map_help('three business categories (Food service, Retail and Personal services)', search='gimhae')
 render_excluded_stations("Gimhae")
 render_country_links('Gimhae')
 

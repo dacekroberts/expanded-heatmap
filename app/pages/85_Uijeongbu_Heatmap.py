@@ -84,7 +84,7 @@ st.markdown(
 """
 )
 
-render_map_help('three business categories (Food service, Retail and Personal services)')
+render_map_help('three business categories (Food service, Retail and Personal services)', search='uijeongbu')
 render_excluded_stations("Uijeongbu")
 render_country_links('Uijeongbu')
 

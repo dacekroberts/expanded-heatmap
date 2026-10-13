@@ -84,7 +84,7 @@ st.markdown(
 """
 )
 
-render_map_help('three business categories (Food service, Retail and Personal services)')
+render_map_help('three business categories (Food service, Retail and Personal services)', search='goyang')
 render_excluded_stations("Goyang")
 render_country_links('Goyang')
 

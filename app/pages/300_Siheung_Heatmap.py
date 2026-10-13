@@ -89,7 +89,7 @@ st.markdown(
 """
 )
 
-render_map_help('three business categories (Food service, Retail and Personal services)')
+render_map_help('three business categories (Food service, Retail and Personal services)', search='siheung')
 render_excluded_stations("Siheung")
 render_country_links('Siheung')
 

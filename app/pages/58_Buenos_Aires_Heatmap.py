@@ -71,7 +71,7 @@ st.markdown(
 """
 )
 
-render_map_help('three business categories (Retail, Food service and Personal services)')
+render_map_help('three business categories (Retail, Food service and Personal services)', search='buenos_aires')
 render_excluded_stations("Buenos Aires")
 render_country_links('Buenos Aires')
 

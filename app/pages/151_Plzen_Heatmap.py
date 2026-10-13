@@ -104,7 +104,7 @@ st.markdown(
 """
 )
 
-render_map_help('three business categories (Retail, Food service and Personal services)')
+render_map_help('three business categories (Retail, Food service and Personal services)', search='plzen')
 render_excluded_stations("Plzeň")
 render_country_links('Plzeň')
 
