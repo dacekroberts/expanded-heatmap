@@ -282,6 +282,9 @@ PLACE_DROPPED = {
     "relation/442269": "'okres Praha-západ', a county bordering Prague, not a district of the city",
     "node/3475173927": "'Rozhledna', a viewpoint under its type word (dropped by id: an artwork of the same title, with wikidata, keeps its name)",
     "node/11652593441": "'daněk bílý', an animal enclosure named for the animal",
+    # Second rows for one object, from the twin round of 2026-10-13: two rows of one
+    # kind and name sharing one Wikidata entry; the row with fewer tags goes.
+    "node/3629561232": "'Dubeč', a locality node beside the suburb node of the same name and entry, 391 m off (node 297896701)",
 }
 
 # Public art kept by the owner's word against the article rule (place_index,

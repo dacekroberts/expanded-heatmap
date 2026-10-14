@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**190 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**199 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -126,6 +126,15 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Place search wave 1: 34 maps rendered once on the final search script; then the owner's rulings on the screen's open calls, unrendered](#2026-10-13---place-search-wave-1-34-maps-rendered-once-on-the-final-search-script-then-the-owners-rulings-on-the-screens-open-calls-unrendered)
 - [Place search wave 1: the station rules (search-rules-8) merged; the helper screens, the twin check and 81 keeps applied; 34 indexes rebuilt, not rendered](#2026-10-13---place-search-wave-1-the-station-rules-search-rules-8-merged-the-helper-screens-the-twin-check-and-81-keeps-applied-34-indexes-rebuilt-not-rendered)
 - [Place search wave 1: the landmark patch and the brand and shop rulings merged; ten indexes rebuilt; the 34 maps rendered once on their final indexes](#2026-10-13---place-search-wave-1-the-landmark-patch-and-the-brand-and-shop-rulings-merged-ten-indexes-rebuilt-the-34-maps-rendered-once-on-their-final-indexes)
+- [Place search: the matcher branch merged; 17 live indexes rebuilt on the rules through the sixth pass](#2026-10-13---place-search-the-matcher-branch-merged-17-live-indexes-rebuilt-on-the-rules-through-the-sixth-pass)
+- [Place search: check E reads PLACE_RULED_KEPT; the Wikidata credit sentence; the 58 reviews listed](#2026-10-13---place-search-check-e-reads-place_ruled_kept-the-wikidata-credit-sentence-the-58-reviews-listed)
+- [Place search: a station the map draws is not closed by a disused tag](#2026-10-13---place-search-a-station-the-map-draws-is-not-closed-by-a-disused-tag)
+- [Place search: five rule faults mended, a sixth measured and not built](#2026-10-13---place-search-five-rule-faults-mended-a-sixth-measured-and-not-built)
+- [Place search: the full reads' rule faults (g to p) and PLACE_KEPT admitting a row; two faults of that commit found by measuring it, NOT committed](#2026-10-13---place-search-the-full-reads-rule-faults-g-to-p-and-place_kept-admitting-a-row-two-faults-of-that-commit-found-by-measuring-it-not-committed)
+- [Place search script: a dotted abbreviation in a name is found by its word; Milan rendered again and Prague rendered as the second trial (Cleanup agent, nothing pushed)](#2026-10-13---place-search-script-a-dotted-abbreviation-in-a-name-is-found-by-its-word-milan-rendered-again-and-prague-rendered-as-the-second-trial-cleanup-agent-nothing-pushed)
+- [Tram rescope becomes the first landing slice's branch; renders thinned to one a map (Cleanup agent, nothing pushed)](#2026-10-13---tram-rescope-becomes-the-first-landing-slices-branch-renders-thinned-to-one-a-map-cleanup-agent-nothing-pushed)
+- [Landing slice: the station rules (search-rules-8) merged and the 20 indexes rebuilt; 58 reviews no row needs removed (Cleanup agent, nothing pushed, no render)](#2026-10-13---landing-slice-the-station-rules-search-rules-8-merged-and-the-20-indexes-rebuilt-58-reviews-no-row-needs-removed-cleanup-agent-nothing-pushed-no-render)
+- [Landing slice: the landmark rules merged, the 20 indexes rebuilt, every map rendered once, all checks green (Cleanup agent, nothing pushed)](#2026-10-13---landing-slice-the-landmark-rules-merged-the-20-indexes-rebuilt-every-map-rendered-once-all-checks-green-cleanup-agent-nothing-pushed)
 
 **2026-10-12**
 
@@ -7843,3 +7852,226 @@ decided what is drawn. The same links are in `docs/recheck_calendar.md`.
 - **All 34 maps were rendered once, each by its own map step through the job gate, two at a time, on these final indexes:** 2 to 9 s a map, peak at most 0.23 GB (New York). The 34 `heatmap.html` files total 34,779,811 bytes against 31,954,248 on master (2,825,563 more, 8.8%).
 - **Checks.** `check_map_search.js`: all 34 OK, 2,062 drawn stations and 123 lines found, five New York warnings as before ("86 St", "Canal St", "Fulton St" past a phone's cap of 4). `check_place_search.py`: the 34 pass; it fails only the 19 live maps on a stale index URL. `check_render_current.py`: none of the 34; the 19 live maps and Milan. `check_map_attribution.js` at 1280 by 650 and 1280 by 812 on New York, Dublin and Tacoma: no problem at either height (credit clear at five of five points, the legend's clamp in force), served on 127.0.0.1 from a temporary launch entry removed afterwards. `check_place_scope.py`: 54 cities OK. `check_all.py`: 70 of 73 before the watch-file fix, the other two the live maps' (`check_place_search.py`, `check_render_current.py`), none of them this lane's.
 - **`pipeline/drift_check.py` was not run.** It re-runs steps 1 and 2, which write `data/<city>/processed/` in the folder every worktree shares, and the 34 cities are on master: no step is re-run from a branch for a city on master until it lands. No outputs file other than the indexes' summaries and the 34 maps changed.
+
+### 2026-10-13 - Place search: the matcher branch merged; 17 live indexes rebuilt on the rules through the sixth pass
+
+- **`search-rules-3-matcher` merged clean** (German and seven more languages in `pipeline/map_common.py`). No list was edited on both sides; the selftests and all rule breaks held. The maps are not rendered.
+- **17 live indexes rebuilt, each with its own index step, caches only, no network request** (Prague and Mexico City are another lane's). 251,418 rows to 248,045; every city at exactly the figure the sixth pass measured in memory. Lists by city in `data/_search_rollout/live_rules56/`.
+- **Rows that look wrong, not changed:** Chicago's Victory Monument (way/1361248798) is dropped as its subject's entry though the article is the monument's own; Chicago's Pullman National Historical Park (relation/11085705) is folded into the Pullman Administration Building and its name is no longer found.
+
+### 2026-10-13 - Place search: check E reads PLACE_RULED_KEPT; the Wikidata credit sentence; the 58 reviews listed
+
+- **`check_ruled_kept` in `scripts/check_place_search.py`.** Every entry of a config's `PLACE_RULED_KEPT` gives its why, is a row of the index (an OSM id through the id side file, a street by its name or an alternate name) and is not in `PLACE_DROPPED`. It shields nothing: `PLACE_KEPT` does that. Measured on search-final's 29 configs through git: 1,016 records, 1 failure (Most, node/3911158753). Eight selftest cases. No breaks file covers this check.
+- **The 58 reviews the leak-word test no longer needs are listed, not removed** (`data/_search_rollout/live_rules56/reviewed_not_needed.tsv`: Seoul 36, Paris 18, Busan 2, Brussels 1, Marseille 1). Check E has no message for them; it calls a review stale only when its name carries no leak word at all.
+- **One stale review removed, as check E asked:** Paris's "BIU Santé Pharmacie", a row the library rule took.
+- **About the Data:** the owner's sentence, "Whether a landmark has a Wikipedia article, one of the tests for listing it, is read from Wikidata (CC0).", is a bullet of its own after the Stations bullet under the place search heading of `docs/data_sources.md`, which the page renders.
+
+### 2026-10-13 - Place search: a station the map draws is not closed by a disused tag
+
+- **Found in Toronto (wave 1): seven Eglinton line stations the map draws had no row.** `station_closed()` read `disused:public_transport=station` before any guard, and the name guard misses them (the map says "Avenue Station", OpenStreetMap "Avenue").
+- **Spared: a station within 100 m of a map station whose name is its own or begins it, or the reverse (`STATION_DRAWN_M`, `drawn_station_here`). A dated closure still closes it.** Position alone was measured and rejected: it returns Grenoble's abandoned tramway stop at 56 m and Hong Kong's stop of 2002 at 46 m. `build()` takes the map's stations with their positions.
+- **Reach, from the place caches of 237 cities:** 20 closed-tagged stations within 500 m of a map station; 11 spared (Toronto 7, Riga 4), 9 still closed (`data/_search_rollout/live_rules56/disused_map_stations.tsv`). No live city of this branch changes. Toronto in memory with wave 1's config: all seven are rows.
+
+### 2026-10-13 - Place search: five rule faults mended, a sixth measured and not built
+
+- **The square merge loses no name.** A park named as a square merges only into a street row that bears its leading name, joiners set aside (`SQUARE_JOINERS`), never one spelled almost alike, and whatever merges leaves its spelling as an alternate name. Of the 43 squares the lanes listed as not findable, 28 return as rows and 15 become alternates. Sao Paulo 1,047 park merges to 1,021 (27 rows return, 48 alternates), Rio de Janeiro 244 to 234, Barcelona unchanged with 16 alternates.
+- **A stop's platform is no street**: `public_transport=platform` or `railway=platform` on a way, whatever its highway value. Milan loses 19 street rows, Prague 29 (24 names gone entirely, each a tram stop whose only ways under that name are platforms), Tokyo 6, Seattle 2, London 1.
+- **A place row folds only into a place row**: Prague's 18 boroughs return; Brno has 11 of the same case by its cache.
+- **A web address is no name.** Toronto's one and two in Oslo.
+- **A subway station also tagged a bus station: no fault in these rules.** Toronto's Broadview is a station row when built in memory; a case and a break hold it.
+- **The home test's plural was measured and NOT built.** It would take Boston's Smith Court Residences, Rome's Garden Houses and Dublin's Ice Houses; Toronto's two rows go by id.
+- Selftest 294 of 294; 248 breaks caught. `docs/place_search_exclusions.md` has the three classes.
+
+### 2026-10-13 - Place search: the full reads' rule faults (g to p) and PLACE_KEPT admitting a row; two faults of that commit found by measuring it, NOT committed
+
+- **Built in `pipeline/place_index.py` (73f025df), each with selftest cases and a break.** One stop, one row: a station word and a direction note in brackets are set aside in a stop's name, tram stops of one name merge out to 250 m (`PLATFORM_MERGE_M`, was 150), and station or halt nodes of one name and one railway value merge unless two carry different operators, networks or Wikidata entries. A route relation is no station, nor a school with no railway tag. A Japanese station name ending in a freight word, or a station whose whole operator tag is a freight railway, is no station. Names ending (閉鎖), (閉鎖中), (予定地), (廃駅), (폐역) are gone; 跡地 is read on stations only, since on a landmark it names a historic site's marker. A height is no name. `highway=bus_stop` is no landmark and no place. The denomination rule reads a leading elided article, PL Kyodan spelled out and a Kingdom Hall named short.
+- **Stations of different names never fold on a shared Wikidata entry (the coordinator relayed the owner's approval, 2026-10-13). This REVERSES the transfer-complex merge of the second batch for different names**: a complex is one row a name. It returns Toyama's 電鉄富山, Nagasaki's 浦上, Kobe's 三宮 and Hiroshima's 横川駅, and with them the rail halls under another name: London Victoria, London Liverpool Street, St Pancras International, Barcelona's ten "Barcelona-..." halls. Measured on 211 cities: 233 rows return in 51 cities (New York 34, Osaka 25, Barcelona 24, Berlin 20, London 10). Nagasaki's 浦上 was this merge, not its stray entrance tag.
+- **NOT built, with the reason.** A trailing platform number ("Gare de Tours 1" and "2"): the same fold joins "Terminal 1" and "Terminal 2". The entry-not-its-own test for places of worship: the test is already one carrier, not three, and an article under the object's own name was kept on purpose (London's meeting houses); Himeji's statues and the town halls stay by-id drops. Funabashi's ４号街区公園: the digits were no fault (NFKC is applied); no pattern holds that park name and no type word was to be added. Asking every station row for a railway tag: Kyoto's 鞍馬駅 and Seattle's South Bellevue carry none.
+- **`config.PLACE_KEPT` admits a row.** An id that is in the cache, has a name and bears no row gets one at the end of the build, after every drop and merge; only `PLACE_DROPPED` outranks it, and a kept id the cache lacks stops the build. This also holds a station against the closed tests, so the per-test keeps are no longer seen by any selftest and their five breaks were retired with four of the old complex and platform rules (259 breaks, none missed or stale). Measured: 19 rows admitted in 10 cities (Daejeon 3, Fukuoka 3, and two each in Gimpo, Goyang, Incheon, Yongin, Yokohama).
+- **Two faults of 73f025df, found by building every city under it, and held back.** A tram stop and a station of its name now share a key, and the mixed group merged nothing: 18 platform merges are undone (Prague 10, one each in eight cities). Yokohama's Osanbashi pier was admitted as a station row, since it carries public_transport=station. The fix is `data/_search_rollout/live_rules56/g_r_fix_not_committed.patch` (selftest 312 of 312 with it). Not committed: four lanes had merged 73f025df and the coordinator asked to be told first.
+- **Reach, exact.** 211 cities built in memory under the rules before and after, each with its own branch's config: rows or alternate names change in 66 cities (live 10, wave 1 11, extract run 30, final group 14, Milan), any build count in 88. Lists by branch in `data/_search_rollout/live_rules56/faults_reach.md`. The readers' freight, closed-name, height and route examples change one row in all (Sasebo's "32m"): the lanes had dropped them by id.
+- **The 17 live indexes rebuilt on 73f025df; 8 changed** (Barcelona, Brussels, Busan, Kyoto, London, Paris, Seoul, Tokyo). 251,418 rows on master to 248,075.
+
+### 2026-10-13 - Place search script: a dotted abbreviation in a name is found by its word; Milan rendered again and Prague rendered as the second trial (Cleanup agent, nothing pushed)
+
+- **Owner (relayed by Cleanup, 2026-10-13):** build the fix reported in the
+  entry below; this lane owns `pipeline/map_common.py` for the change.
+- **The change (7c3cb2a4, `pipeline/map_common.py` only).** In the search
+  script's `prep()`, a name holding letters joined by dots ("V.le", "P.za",
+  "P.ta") gains two tokens: the letters joined ("vle") and the word `ABBR`
+  holds for them ("viale"). Where the joined letters are no abbreviation,
+  the part before the first dot is tried alone ("S.LEONARDO" gains "san").
+  Nothing is added unless the page's languages list it in `ABBR`. Italian
+  `abbr` gains "pta": "porta".
+- **Milan, re-rendered.** The 49 abbreviated station names typed in full:
+  the map's own station is returned for 49 of 49 (4 before). The six that
+  found no station before (P.TA GENOVA F.S., P.ta Lodovica, P.za 5 Giornate,
+  P.za Ventiquattro Maggio, V.le Certosa Via Giorgini, V.le Certosa Via
+  Tibullo) each return their own station. The dotted and undotted typed
+  forms ("V.le Tunisia", "Vle Tunisia", "P.le Baracca") return the same
+  station first as before. `check_map_search.js milan`: 193 of 193 stations,
+  22 of 22 lines.
+- **Prague, rendered once** (15 s wall with the gate's start, peak 0.52 GB,
+  3.3 MB of HTML, 21,462 points, 196 stations). `check_map_search.js
+  prague`: 196 of 196 stations, 13 of 13 lines. **The change is a no-op
+  there by construction:** counted on the index and the map's stations,
+  Prague's names hold 5 dotted groups ("hl.n", "F.V.Veselého") and the rule
+  acts on none, since the Czech `abbr` table is empty. Its abbreviations end
+  in a dot instead: "sv." 48 names, "nám." 15, "ul." 13.
+- **Not covered, measured on Prague:** "nám." and "náměstí" find each other
+  already (one is the start of the other). "Kaple svaté Anny" does not find
+  "Kaple sv. Anny", and "ulice Bolzanova" does not find the stop whose alias
+  holds "(ul. Bolzanova)": a trailing-dot abbreviation whose table has no
+  word. Entries "sv" and "ul" in the Czech `abbr`, read from the name as
+  well as from the typed word, would cover them; not built, since it is a
+  second mechanism and a word list for the language's owner.
+- **Not covered in Milan:** "Sant'Agostino" does not return the map's
+  "S.AGOSTINO" ("s" gives "san", and "sant" is another word); the
+  OpenStreetMap station row of that name stands in. "VILLA S.G." is found
+  only as written. An OpenStreetMap station is still not LINKED to a map
+  station whose name differs by an abbreviation, so both rows show.
+- The search script has no self-test of its own; `check_map_search.js` is
+  its check. `check_no_em_dashes.py` OK.
+
+### 2026-10-13 - Tram rescope becomes the first landing slice's branch; renders thinned to one a map (Cleanup agent, nothing pushed)
+
+- **Owner (relayed by Cleanup, 2026-10-13):** `tram-rescope` carries the
+  first landing slice (the 17 live searched cities, Mexico City, Prague,
+  Milan, and Toronto's rescoped map); the search script is final at
+  7c3cb2a4. Then "thin the re-render": each map is rendered once, when its
+  index is final.
+- **Merged:** search-integration c56c8fb5 (26eaad38), no conflict; selftest
+  311 of 311; `check_place_index_drift.py` names all 20 indexes OK.
+- **No render was started for the 17 live cities or Mexico City**: the
+  change of plan arrived before the pool ran. Rendered so far, both on the
+  final search script: Milan (8 s wall with the gate's start, peak 0.20 GB,
+  6.4 MB, 45,999 points) and Prague (15 s, 0.52 GB, 3.3 MB, 21,462 points).
+  Prague's index is due to change with the station rules, so its map will be
+  rendered once more; Milan's is expected to stand.
+- **On the two rendered maps:** `check_map_search.js` finds 193 of 193 and
+  196 of 196 stations and 22 of 22 and 13 of 13 lines.
+  `check_map_attribution.js` (its body, run in the browser pane from a
+  temporary static server on 127.0.0.1, stopped and its launch entry
+  removed): no problem at 1280x650 and 1280x812 on both, nor at 375x812 on
+  Milan; the credit is clear at five of five points and the legend clamp is
+  in force. Only two maps exist to test, not three.
+- `check_render_current.py`: 18 maps stale (the 17 and Mexico City), as
+  expected until their one render; Toronto is not among them.
+- **Size against master:** Milan 5,312,979 to 6,445,039 bytes; Prague
+  2,268,788 to 3,292,656. Both carry the tram rescope as well as the search
+  block, so they do not measure the search block alone.
+
+### 2026-10-13 - Landing slice: the station rules (search-rules-8) merged and the 20 indexes rebuilt; 58 reviews no row needs removed (Cleanup agent, nothing pushed, no render)
+
+- **Merged:** 8d45eae5 (7de6f364) and then 0321cbb0 (b1a0f32f), no conflict;
+  selftest 326 of 326. The 20 indexes were rebuilt after each. The second
+  commit moved no row in any of the 20.
+- **Only station rows moved, in seven cities, and the full rebuild gives the
+  rules lane's measured counts exactly:** Barcelona +2 -8 and 5 renamed,
+  Brussels -5, London -8 and 7 renamed, Marseille -1, Paris -3, Prague -42
+  and 7 renamed, Tokyo one row under a new id. The other thirteen, Mexico
+  City and Milan among them, are byte-for-row unchanged in every kind.
+- **Prague is mended.** 42 tram stop rows fold (Palmovka 4, Želivského 4,
+  Nádraží Holešovice 3). No station name has three rows any more; 26 names
+  have two within 250 m, a metro row and a tram row each.
+- **London as intended:** Blackfriars, Cannon Street, Liverpool Street,
+  Marylebone and Victoria each fold their "London ..." rail row, the
+  prefixed spelling kept as an alternate; Paddington's three rows are one;
+  the two National Rail nodes of St Pancras International are one row,
+  still apart from "King's Cross St Pancras"; "Stratford International" and
+  its DLR row are untouched.
+- **Barcelona:** six "Barcelona-..." rail halls fold onto the metro row of
+  their entry (Arc de Triomf, El Clot, Fabra i Puig, Passeig de Gràcia, Sant
+  Andreu, Torre Baró | Vallbona). **Doubtful, for the rules lane:**
+  "Barcelona-Plaça Catalunya" (node 13671950492) and "Barcelona-Plaça
+  Espanya" stay rows of their own beside "Catalunya" (which already carries
+  the alias "Barcelona-Plaça de Catalunya") and "Espanya"; "Barcelona-La
+  Sagrera-Meridiana" and "Barcelona-Estació de França" stay too, the last
+  rightly (no metro row of its name).
+- **Brussels, Paris, Marseille:** each departed row is a tram stop folded
+  into the other tram stop of its name (the builder's log: merged_platform),
+  leaving the metro row and one tram row. Tokyo's 熊野前 is one row under
+  the tram stop's id.
+- **Tokyo, Kyoto, Seoul, Busan: the local-name guard returned nothing.** No
+  station row was added in any of the four, so there is no entrance, depot
+  or freight yard to flag. If the guard was meant to bring rows back, it did
+  not on these caches.
+- **58 `PLACE_REVIEWED` entries removed** as listed in
+  `data/_search_rollout/live_rules56/reviewed_not_needed.tsv` (Seoul 36,
+  Paris 18, Busan 2, Brussels 1, Marseille 1), by a script that proves
+  nothing else in each config changed. Check E passes for the five cities.
+- **Same-name round, stations:** Milan, Seattle, Tbilisi and Vancouver have
+  no repeated station name; Paris has 29 names with two rows within 250 m,
+  Prague 26, London 17, Tokyo 15 (interchanges of two modes or networks,
+  not read one by one here).
+- **Milan, two more by id (relayed by Cleanup, 2026-10-13):** the other seven
+  "Casa a Igloo" houses (ways 40500644, 59171470 to 59171473, 59171476,
+  59171477; eight identically tagged houses, and each single drop had
+  promoted the next to the row), under the first one's reason; and "Recinto
+  di San Vittore al Corpo" (way 421310870), a part 36 m from the mausoleum's
+  row. Each id matched its cached name first. No "Casa a Igloo" row remains;
+  rows 6,097 to 6,095. Milan's map is stale again until the one render pass.
+- **Checks:** `check_place_search.py` fails only on rule A (all 20 maps, not
+  rendered on their final index). Scope OK for 20; unopened
+  stations OK; index drift OK for 20.
+
+### 2026-10-13 - Landing slice: the landmark rules merged, the 20 indexes rebuilt, every map rendered once, all checks green (Cleanup agent, nothing pushed)
+
+- **Merged:** search-rules-8 at 1a0fedba (ba9cc762): the landmark patch
+  (a4718e28) and the owner's brand and shop rulings. Selftest 339 of 339.
+- **Rows moved (all 20 rebuilt):** Barcelona 1 alternate (Montjuïc);
+  Busan +1 (Busan Sea Life Aquarium); Chicago +2 -1 (Pullman National
+  Historical Park and Victory Monument in, the Pullman Administration
+  Building out); Hong Kong +3 (Peak Tram, Western Market, Hong Kong
+  Disneyland); Kyoto +1 (醍醐寺); London +7 (three universities, Harrods,
+  Harvey Nichols, The Old Curiosity Shop, Whitechapel Bell Foundry);
+  Marseille +1 and 5 alternates (Les Docks Village; the arrondissements);
+  Mexico City +1 (Six Flags Mexico); Milan 2 alternates; Paris +2 (Galerie
+  Vivienne, the flower market); Prague +5 boroughs and 13 alternates;
+  São Paulo +3 (two municipal markets, Shopping Light); Tokyo +5. The other
+  seven unchanged.
+- **The Pullman Administration Building is NOT a row, although it is in
+  `config.PLACE_KEPT` (added as asked, owner 2026-10-13).** The build log
+  shows the shared-entry rule drop it, then the kept-id admission at the end
+  refuse it as "a landmark row of that name is near" (`same_name_near`):
+  `add()` still sees the row the shared-entry rule removed. A fault in the
+  admission, for the rules lane; the entry stays in the config.
+- **Doubtful additions of the brand and shop rulings, for the rules lane:**
+  Tokyo's デハ268号 (a preserved railcar under its class's article), and
+  新宿眼科画廊 (a gallery: a dealer's gallery is the business, the precedent
+  of 2026-10-11).
+- **Reviewed under the rulings (check E):** "Harrods" (its alt name holds
+  "Ltd") and "The Old Curiosity Shop" in London, "Shopping Light" in São
+  Paulo.
+- **Twin round:** landmark and place rows of one kind and name within 1 km
+  were listed for the 20 cities. Pairs that share a Wikidata entry are one
+  object twice; the row with fewer tags is dropped by id: Rush Green
+  (London), San Miguel Ajusco (Mexico City), Dubeč (Prague), 동작구 (Seoul),
+  the Shota Rustaveli university (Tbilisi), 渋谷 and 神田須田町 (Tokyo). The
+  second round found none new. Kept: Prague's two "Obětem náletu 14.2.1945"
+  memorials (their entry is the air raid, not either memorial) and the two
+  "gorily" zoo nodes. Rows of one name with identical tags but no shared
+  entry were left: almost all are Kyoto's 町 of one name in different
+  districts and parks or medians drawn in segments.
+- **Renders, once each, three at a time through the gate** (wall seconds
+  with the gate's start, peak GB): Seoul 17 / 0.87, Mexico City 16 / 1.89,
+  London 6 / 0.66, São Paulo 8 / 0.24, Paris 24 / 0.92, Tokyo 10 / 0.25,
+  Busan 6 / 0.21, Kyoto 6 / 0.20, Barcelona 4 / 0.16, Hong Kong 4 / 0.15,
+  Milan 6 / 0.19, Chicago 6 / 0.21, Prague 25 / 0.44, Montreal 6 / 0.16,
+  Marseille 12 / 0.32, Seattle 4 / 0.12, Tbilisi 4 / 0.12, Vancouver 6 /
+  0.16, Brussels 7 / 0.16, Sydney 4 / 0.14. Toronto was current and not
+  rendered.
+- **Checks:** `check_map_search.js` 20 of 20 maps, 3,106 drawn stations and
+  263 lines found, Toronto skipped (no search block);
+  `check_place_search.py` OK for 20; `check_render_current.py` 237 current;
+  `check_place_scope.py` OK; index drift OK for 20; attribution clear at
+  1280x650 and 1280x812 on Sydney, Prague and Seoul; `check_all.py` 73 of
+  73.
+- **Judgment call: `pipeline/drift_check.py` was not run.** It re-runs steps
+  1 and 2, which write the shared `data/<city>/processed/`, and the
+  standing rule is that no step is re-run from a branch for a city on master
+  until it lands. The render and index checks above cover the outputs this
+  branch changed.
+- **Size:** the 21 maps are 123,979,538 bytes against 118,586,146 on master
+  (+5,393,392). About 8.5 KB a map is the search script; the rest is the
+  tram rescope of Mexico City, Milan, Prague and Toronto.

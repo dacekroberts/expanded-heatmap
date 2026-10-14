@@ -633,6 +633,10 @@ PLACE_DROPPED = {
     "way/1384190240": "a garden style's name on a part of a park",
     "way/1384190239": "a garden style's name on a part of a park",
     "node/4976908576": "'琵琶絵馬掛', a rack for votive tablets at a shrine",
+    # Second rows for one object, from the twin round of 2026-10-13: two rows of one
+    # kind and name sharing one Wikidata entry; the row with fewer tags goes.
+    "node/13597820348": "'渋谷', a second quarter node beside node 5296991942 of the same name and entry, 348 m off",
+    "node/13383312634": "'神田須田町', a second quarter node beside node 13383422982 of the same name and entry, 349 m off",
 }
 
 # Trade names read by eye as a person's own name and nothing else, on

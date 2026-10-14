@@ -211,8 +211,6 @@ PLACE_FOLD = None
 # Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
 # places, each with why; scripts/check_place_search.py fails on any other.
 PLACE_REVIEWED = {
-    "반여1동": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
-    "유창맨션앞교차로": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (batch 2b)",
 }
 # OSM objects a reading by eye found to be a business or a home that no rule
 # in place_index.py catches, each with why (place_index.build, `dropped`).

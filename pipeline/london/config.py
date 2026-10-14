@@ -273,6 +273,9 @@ PLACE_REVIEWED = {
     "Honourable Artillery Company Museum": "a museum (tourism=museum, Wikipedia); 'Company' is the regiment's name. Tagged access=private: put to the owner, batch 3",
     "Store Road": "a street's own name",
     "Store Street": "a street's own name",
+    # Admitted by the owner's commercial rulings of 2026-10-13 (search-rules-8, 1a0fedba): a shop or brand tag on a sight is outweighed by an article of the object's own.
+    "Harrods": "the department store's listed Knightsbridge building, a sight with an article of its own (en:Harrods); 'Ltd' is in its alt name, Harrods Ltd",
+    "The Old Curiosity Shop": "the 16th-century building Dickens's novel is linked to, a sight with an article of its own",
 }
 # OSM objects a reading by eye found to be a business or a home that no rule
 # in place_index.py catches, each with why (place_index.build, `dropped`).
@@ -372,6 +375,9 @@ PLACE_DROPPED = {
     "node/2014156881": "a dock's name alone on a bare monument node: a wrong object",
     "node/6343767873": "a boundary stone under the name of the common it once marked: a wrong object",
     "way/1340893634": "'Canada Gardens - Play Area', a play area named by its location and type",
+    # Second rows for one object, from the twin round of 2026-10-13: two rows of one
+    # kind and name sharing one Wikidata entry; the row with fewer tags goes.
+    "node/704603329": "'Rush Green', a locality node beside the suburb node of the same name and entry, 438 m off (node 12003255761)",
 }
 # Kept by the owner's word against the bare-type rule (place_index, PLACE_KEPT;
 # owner, 2026-10-13: "keep by name"): the Greenway is a named linear park, and

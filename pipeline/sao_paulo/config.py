@@ -187,6 +187,8 @@ PLACE_REVIEWED = {
     "Rua do Shopping": "a street's own name, of residential class or above, beside a shopping centre (put to the owner, batch 3)",
     "Rua do Shopping Interlagos": "a street's own name, of residential class or above, beside the shopping centre (put to the owner, batch 3)",
     "Mirante do Vale": "a notable office skyscraper (historic=building, tourism=attraction, wikidata Q42258); condomínio is only in its legal name",
+    # Admitted by the owner's commercial rulings of 2026-10-13 (search-rules-8, 1a0fedba): a shop or brand tag on a sight is outweighed by an article of the object's own.
+    "Shopping Light": "the Edifício Alexandre Mackenzie, the Light company's historic headquarters, a sight with an article of its own",
 }
 # OSM objects a reading by eye found to be a business or a home that no rule
 # in place_index.py catches, each with why (place_index.build, `dropped`).
