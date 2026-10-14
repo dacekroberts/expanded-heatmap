@@ -331,4 +331,35 @@ PLACE_REVIEWED = {
     "諏訪ハイツ入口": "a signed junction (highway=traffic_signals) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
     "駅南口第3駐輪場前": "a signed junction (highway=traffic_signals) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
 }
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read of this
+# index (rule passes 5 and 6), each id read with its cached name and its index
+# row; grouped by the reader's class.
+PLACE_DROPPED = {
+    # A station row that is no working passenger station (reader's drop; owner, 2026-10-13)
+    "relation/1837932": "'山陽新幹線'",
+    # A bare type word standing alone (reader's drop; owner, 2026-10-13)
+    "way/919672466": "'ちびっこひろば'",
+    "way/919694515": "'ちびっこひろば'",
+    "way/919722785": "'ちびっこひろば'",
+    "way/1361083769": "'ちびっこひろば'",
+    "way/579432075": "'ちびっこ広場'",
+    "way/718594316": "'ちびっこ広場'",
+    "way/1272715609": "'ちびっこ広場'",
+    "way/1378820577": "'ちびっこ広場'",
+    "way/1435011868": "'ちびっこ広場'",
+    "way/130371527": "'体育館'",
+    "way/106048303": "'大アリーナ'",
+    "way/1324746685": "'芝生ひろば'",
+    "way/1549422466": "'噴水跡'",
+    "node/12641906658": "'火葬場跡'",
+    # Worship named only by a body, a denomination or a chain (reader's drop; owner, 2026-10-13)
+    "node/5150001982": "'カトリック広島教区'",
+    "way/1428719569": "'立正佼成会'",
+    # A glitched name (reader's drop; owner, 2026-10-13)
+    "way/60380316": "'矢野安浦線'",
+    # Unsure in the read, dropped by ruling 5, a stock plaza or rest-area name with no place in it (owner, 2026-10-13)
+    "way/1324746671": "'水辺ひろば'",
+    "way/165029669": "'ふれあい広場'",
+    # Unsure in the read, dropped by ruling 3, a hall named only for what it enshrines or a deity's title alone (owner, 2026-10-13)
+    "node/4148961141": "'観音'",
+}

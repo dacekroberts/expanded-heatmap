@@ -282,4 +282,29 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read of this
+# index (rule passes 5 and 6), each id read with its cached name and its index
+# row; grouped by the reader's class.
+PLACE_DROPPED = {
+    # A bare type word standing alone (reader's drop; owner, 2026-10-13)
+    "way/562607520": "'ちびっこ広場'",
+    "way/553876476": "'幼児遊園'",
+    "node/10179264542": "'幼児遊園地'",
+    "way/677806475": "'地域交流広場'",
+    "way/585349438": "'多目的体験学習広場'",
+    "node/5575034823": "'合同社殿'",
+    "way/563157424": "'社殿'",
+    "way/620793316": "'社殿'",
+    "node/5368659852": "'祖霊舎'",
+    # Worship named only by a body, a denomination or a chain (reader's drop; owner, 2026-10-13)
+    "way/167431966": "'宗教真光'",
+    # A description standing in for a name (reader's drop; owner, 2026-10-13)
+    "node/4602358594": "'高知県指定有形文化財土佐西国第２２番札所'",
+    # A second row for one object (the surviving row named in each note) (reader's drop; owner, 2026-10-13)
+    "node/4964926935": "'Katsurahama shrine': an English label about 15 m from 海津見神社 (龍王宮) (node/3074312433), the shrine at Katsurahama: one object, two rows",
+}
+# Kept by the owner's word (place_index, PLACE_KEPT; owner, 2026-10-13): a famous
+# place the rules pass over for want of a tag, the id read with its cached name.
+PLACE_KEPT = {
+    "node/5099545223": "'はりまや橋', the Harimaya bridge (tourism=attraction, no Wikidata tag); its name was reached only through the tram stop and the park (owner, 2026-10-13)",
+}
