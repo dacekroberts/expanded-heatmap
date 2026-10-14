@@ -183,6 +183,9 @@ PLACE_REVIEWED = {
 }
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    # Places of worship named only by a denomination, a body or a hall type (the flag read of 2026-10-13, applied on the owner's word;
+    # docs/decisions_drafts/search-final.md).
+    "node/13137802412": "a place of worship named only by its denomination, body or hall type is dropped (owner 2026-10-13, four rulings 1; fifteen answers 6; sixteen rulings 2; owner 2026-10-13, the flag read's verdicts, all approved)",
     "node/9687617360": "a freight yard, depot or operating point, not a passenger station (owner, 2026-10-13)",
     "way/1455775297": "a lane named for its mode (owner, 2026-10-13)",
     "way/1455775298": "a lane named for its mode (owner, 2026-10-13)",

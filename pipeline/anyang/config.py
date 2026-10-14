@@ -162,6 +162,9 @@ _EXHIBIT = "a Railroad Museum exhibit whose article is its class's or kind's, no
 _MALL = "a corridor of an underground shopping mall, named for the mall"
 _NO_NAME = "a description standing in for a name"
 PLACE_DROPPED = {
+    # Codes and numbers beside a type word (the flag read of 2026-10-13, applied on the owner's word;
+    # docs/decisions_drafts/search-final.md).
+    "way/580706448": "a code or a number beside a type word is no name (CODED_TYPE, owner 2026-10-12; owner 2026-10-13, the flag read's verdicts, all approved)",
     "node/7817073349": "a rail yard (railway=yard) in the index as a station; no passenger tag "
                        "(owner, 2026-10-13)",
     "way/777263833": _ESTATE, "way/777264096": _ESTATE, "way/777262929": _ESTATE,

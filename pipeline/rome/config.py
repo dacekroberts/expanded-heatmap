@@ -254,6 +254,19 @@ PLACE_RULED_KEPT = {
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    # Bare type words and type phrases (the flag read of 2026-10-13, applied on the owner's word;
+    # docs/decisions_drafts/search-final.md).
+    "way/887827801": "a bare type word or a type phrase as the whole name is dropped (BARE_TYPE_NAMES, owner 2026-10-11; seven rulings 4, 2026-10-13; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "relation/1766534": "a bare type word or a type phrase as the whole name is dropped (BARE_TYPE_NAMES, owner 2026-10-11; seven rulings 4, 2026-10-13; owner 2026-10-13, the flag read's verdicts, all approved)",
+    # Descriptions, positions and site labels standing in for a name (the flag read of 2026-10-13, applied on the owner's word;
+    # docs/decisions_drafts/search-final.md).
+    "node/10873805537": "a description, a position or a site label standing in for a name is dropped (seven rulings 4; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "way/950196094": "a description, a position or a site label standing in for a name is dropped (seven rulings 4; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "node/10873805534": "a description, a position or a site label standing in for a name is dropped (seven rulings 4; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "node/10873805538": "a description, a position or a site label standing in for a name is dropped (seven rulings 4; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "relation/13382732": "a description, a position or a site label standing in for a name is dropped (seven rulings 4; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "relation/13382731": "a description, a position or a site label standing in for a name is dropped (seven rulings 4; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "node/10873805530": "a description, a position or a site label standing in for a name is dropped (seven rulings 4; owner 2026-10-13, the flag read's verdicts, all approved)",
     "way/1051597079": "a bare type word or type phrase as the whole name (owner, 2026-10-13)",
     "node/5262016102": "a bare type word or type phrase as the whole name (owner, 2026-10-13)",
     "way/158022402": "a bare type word or type phrase as the whole name (owner, 2026-10-13)",

@@ -233,6 +233,15 @@ PLACE_REVIEWED = {
 }
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    # Museum contents with no article of their own (the flag read of 2026-10-13, applied on the owner's word;
+    # docs/decisions_drafts/search-final.md).
+    "way/91892443": "museum contents stay only with a Wikipedia article of their own (fifteen answers 4, 2026-10-13; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "way/91892429": "museum contents stay only with a Wikipedia article of their own (fifteen answers 4, 2026-10-13; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "way/91892369": "museum contents stay only with a Wikipedia article of their own (fifteen answers 4, 2026-10-13; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "way/700747001": "museum contents stay only with a Wikipedia article of their own (fifteen answers 4, 2026-10-13; owner 2026-10-13, the flag read's verdicts, all approved)",
+    # Places of worship named by a body, left for the rules and still rows (the flag read of 2026-10-13, applied on the owner's word;
+    # docs/decisions_drafts/search-final.md).
+    "way/1308555384": "a place of worship named only by its denomination, body or hall type is dropped (four rulings 1; sixteen rulings 2; left for the rules and still a row, owner 2026-10-13)",
     "relation/13159520": "a dead railway alignment with no article",
     "way/791167448": "a freight yard, depot or operating point, not a passenger station (owner, 2026-10-13)",
     "node/2790112177": "a freight yard, depot or operating point, not a passenger station (owner, 2026-10-13)",

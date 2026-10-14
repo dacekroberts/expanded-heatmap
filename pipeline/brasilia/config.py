@@ -116,6 +116,58 @@ PLACE_REVIEWED = {
 }
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    # Places of worship named only by a denomination, a body or a hall type (the flag read of 2026-10-13, applied on the owner's word;
+    # docs/decisions_drafts/search-final.md).
+    "way/548613897": "a place of worship named only by its denomination, body or hall type is dropped (owner 2026-10-13, four rulings 1; fifteen answers 6; sixteen rulings 2; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "way/553623569": "a place of worship named only by its denomination, body or hall type is dropped (owner 2026-10-13, four rulings 1; fifteen answers 6; sixteen rulings 2; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "way/548613896": "a place of worship named only by its denomination, body or hall type is dropped (owner 2026-10-13, four rulings 1; fifteen answers 6; sixteen rulings 2; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "node/6554173382": "a place of worship named only by its denomination, body or hall type is dropped (owner 2026-10-13, four rulings 1; fifteen answers 6; sixteen rulings 2; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "node/2691215139": "a place of worship named only by its denomination, body or hall type is dropped (owner 2026-10-13, four rulings 1; fifteen answers 6; sixteen rulings 2; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "node/2691215140": "a place of worship named only by its denomination, body or hall type is dropped (owner 2026-10-13, four rulings 1; fifteen answers 6; sixteen rulings 2; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "way/387001569": "a place of worship named only by its denomination, body or hall type is dropped (owner 2026-10-13, four rulings 1; fifteen answers 6; sixteen rulings 2; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "node/6565022017": "a place of worship named only by its denomination, body or hall type is dropped (owner 2026-10-13, four rulings 1; fifteen answers 6; sixteen rulings 2; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "node/6565022014": "a place of worship named only by its denomination, body or hall type is dropped (owner 2026-10-13, four rulings 1; fifteen answers 6; sixteen rulings 2; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "node/2579649749": "a place of worship named only by its denomination, body or hall type is dropped (owner 2026-10-13, four rulings 1; fifteen answers 6; sixteen rulings 2; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "way/141146166": "a place of worship named only by its denomination, body or hall type is dropped (owner 2026-10-13, four rulings 1; fifteen answers 6; sixteen rulings 2; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "way/1210472189": "a place of worship named only by its denomination, body or hall type is dropped (owner 2026-10-13, four rulings 1; fifteen answers 6; sixteen rulings 2; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "node/6548601300": "a place of worship named only by its denomination, body or hall type is dropped (owner 2026-10-13, four rulings 1; fifteen answers 6; sixteen rulings 2; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "node/2580043656": "a place of worship named only by its denomination, body or hall type is dropped (owner 2026-10-13, four rulings 1; fifteen answers 6; sixteen rulings 2; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "way/264628703": "a place of worship named only by its denomination, body or hall type is dropped (owner 2026-10-13, four rulings 1; fifteen answers 6; sixteen rulings 2; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "way/1208359690": "a place of worship named only by its denomination, body or hall type is dropped (owner 2026-10-13, four rulings 1; fifteen answers 6; sixteen rulings 2; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "relation/16327500": "a place of worship named only by its denomination, body or hall type is dropped (owner 2026-10-13, four rulings 1; fifteen answers 6; sixteen rulings 2; owner 2026-10-13, the flag read's verdicts, all approved)",
+    # Codes and numbers beside a type word (the flag read of 2026-10-13, applied on the owner's word;
+    # docs/decisions_drafts/search-final.md).
+    "way/1207041185": "a code or a number beside a type word is no name (CODED_TYPE, owner 2026-10-12; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "way/681457632": "a code or a number beside a type word is no name (CODED_TYPE, owner 2026-10-12; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "way/291339706": "a code or a number beside a type word is no name (CODED_TYPE, owner 2026-10-12; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "way/557165362": "a code or a number beside a type word is no name (CODED_TYPE, owner 2026-10-12; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "way/681457636": "a code or a number beside a type word is no name (CODED_TYPE, owner 2026-10-12; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "way/681457634": "a code or a number beside a type word is no name (CODED_TYPE, owner 2026-10-12; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "way/681457637": "a code or a number beside a type word is no name (CODED_TYPE, owner 2026-10-12; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "way/681457633": "a code or a number beside a type word is no name (CODED_TYPE, owner 2026-10-12; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "way/554503954": "a code or a number beside a type word is no name (CODED_TYPE, owner 2026-10-12; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "way/554503949": "a code or a number beside a type word is no name (CODED_TYPE, owner 2026-10-12; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "way/554503898": "a code or a number beside a type word is no name (CODED_TYPE, owner 2026-10-12; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "way/554503972": "a code or a number beside a type word is no name (CODED_TYPE, owner 2026-10-12; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "way/554503937": "a code or a number beside a type word is no name (CODED_TYPE, owner 2026-10-12; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "way/554503927": "a code or a number beside a type word is no name (CODED_TYPE, owner 2026-10-12; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "way/554503922": "a code or a number beside a type word is no name (CODED_TYPE, owner 2026-10-12; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "way/554503912": "a code or a number beside a type word is no name (CODED_TYPE, owner 2026-10-12; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "way/554503909": "a code or a number beside a type word is no name (CODED_TYPE, owner 2026-10-12; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "way/560760959": "a code or a number beside a type word is no name (CODED_TYPE, owner 2026-10-12; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "way/560760957": "a code or a number beside a type word is no name (CODED_TYPE, owner 2026-10-12; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "way/560760960": "a code or a number beside a type word is no name (CODED_TYPE, owner 2026-10-12; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "way/560760964": "a code or a number beside a type word is no name (CODED_TYPE, owner 2026-10-12; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "way/554094523": "a code or a number beside a type word is no name (CODED_TYPE, owner 2026-10-12; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "way/554094009": "a code or a number beside a type word is no name (CODED_TYPE, owner 2026-10-12; owner 2026-10-13, the flag read's verdicts, all approved)",
+    # Religious offices, associations and education halls tagged a place of worship (the flag read of 2026-10-13, applied on the owner's word;
+    # docs/decisions_drafts/search-final.md).
+    "way/345714663": "a religious office, association or education hall tagged a place of worship is dropped (sixteen rulings 1, 2026-10-13; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "way/548613898": "a religious office, association or education hall tagged a place of worship is dropped (sixteen rulings 1, 2026-10-13; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "node/6565022005": "a religious office, association or education hall tagged a place of worship is dropped (sixteen rulings 1, 2026-10-13; owner 2026-10-13, the flag read's verdicts, all approved)",
+    # Places of worship named by a body, left for the rules and still rows (the flag read of 2026-10-13, applied on the owner's word;
+    # docs/decisions_drafts/search-final.md).
+    "node/11226860325": "a place of worship named only by its denomination, body or hall type is dropped (four rulings 1; sixteen rulings 2; left for the rules and still a row, owner 2026-10-13)",
     "way/548641830": "a park named by a planning or stage code (owner, 2026-10-13)",
     "way/548641838": "a park named by a planning or stage code (owner, 2026-10-13)",
     "way/548641834": "a park named by a planning or stage code (owner, 2026-10-13)",

@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/berlin.json",
-  "places": 42702,
+  "places": 42644,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "de"
     ],
     "coverage": {
-      "en": 0.004,
+      "en": 0.005,
       "de": 1.0
     },
     "list_share": 0.5,

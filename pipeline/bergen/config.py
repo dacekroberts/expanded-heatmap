@@ -232,6 +232,9 @@ PLACE_RULED_KEPT = {
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    # Places of worship named only by a denomination, a body or a hall type (the flag read of 2026-10-13, applied on the owner's word;
+    # docs/decisions_drafts/search-final.md).
+    "node/4183335789": "a place of worship named only by its denomination, body or hall type is dropped (owner 2026-10-13, four rulings 1; fifteen answers 6; sixteen rulings 2; owner 2026-10-13, the flag read's verdicts, all approved)",
     "way/836616889": "a mall's, estate's or facility's own name on its paths, not a street (owner, 2026-10-13)",
     "way/1527765183": "a house or cabin ruin with no article: a home until visiting is shown (owner, 2026-10-13)",
     "way/1527782252": "a house or cabin ruin with no article: a home until visiting is shown (owner, 2026-10-13)",

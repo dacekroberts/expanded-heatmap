@@ -1,3 +1,47 @@
+### 2026-10-13 - The owner's rulings on the flag read applied: 387 ids dropped in 18 cities, 12 of the 13 left-for-rules rows with them (branch search-final)
+
+- **The owner, relayed by the Cleanup session: "all approved".** Drop the
+  341 rows the flag read gave a drop verdict and the 13 left-for-rules rows
+  still in; leave the 227 unsure rows; keep Taoyuan's 新富 by id if
+  `PLACE_KEPT` beats the access test; leave Göteborg's "Örtagården", the two
+  parks folded beside a differently spelled street and Guadalajara's
+  "Glorieta Minerva" as built.
+- **Written to `PLACE_DROPPED` in 18 configs, 387 ids, each checked against
+  its cached names first**, at the head of the block, grouped by class under
+  a comment, each entry's reason citing the rulings that decide its class:
+  208 bare type words, 62 descriptions, 31 places of worship named by a
+  body, 26 codes beside a type, 6 religious offices, 4 museum contents, 3
+  businesses, 1 dead railway relation (341); 5 places of worship and 7
+  Guadalajara estate parks and median strips from the left-for-rules list
+  (12); and 34 twins (below).
+- **One of the 13 left in: Florence "Soka Gakkai" (node/573615484)** carries
+  wikipedia=it:Soka Gakkai. The article is the body's, not this hall's; the
+  instruction was to leave a row with a wikipedia tag and say so.
+- **34 twins, dropped with their row (finding 53).** A drop made a
+  same-named object beside it the row: Taipei 30 (古早厝地, 學勤路沿線綠地 and
+  籃球場 in chains, 古厝, 社區公園, 草地, 大學路沿線綠地),
+  Guadalajara 4 (two Belcanto rows, two Los Cantaros strips). Found by
+  comparing `place_ids.json` before and after each rebuild, five rounds
+  until none was left. Same name, same class, same ruling.
+- **新富 is NOT kept.** `config.PLACE_KEPT` does not reach the test: the
+  access rule in `build()` asks only whether the map draws the name. Nothing
+  written; the shared rule is not changed on this branch (finding 56
+  stands).
+- **Rows in the 18 rebuilt cities: 203,538 to 203,185 (-353); the group of
+  32: 264,049 to 263,696.** Every applied id is no row, no name gained a
+  row, and no row left beyond the drops, checked against d759ff13. Per city
+  (ids): Taipei 214, Berlin 58, Brasilia 44, Taoyuan 28, Guadalajara 13,
+  Rome 9, Riga 5, Bremen, Bucharest, Gelsenkirchen, Oslo and Taichung 2
+  each, Anyang, Bergen, Brussels (Regional), Florence, Gwangju and
+  Kitakyushu 1 each. Counts per city are in `applied_summary.tsv` beside
+  the lists.
+- **Checks.** `check_place_search.py`: 32 problems, rule A on each of the 32
+  cities, nothing else. `check_all.py`: 70 of 73; the other two are
+  `check_place_unopened.py` (finding 60, unchanged) and
+  `check_macro_facts.py`, which fails the same way on master's checkout: the
+  shared processed data holds the tram rescope's Mexico City count ahead of
+  its landing. `app/macro_facts.json` is left as committed.
+
 ### 2026-10-13 - The final group rebuilt on rule passes 5 and 6: 14 of 32 indexes changed, 354 rows left, 2 returned (branch search-final)
 
 - **Master e0138000 merged (bd0324fa), no conflict.** The worktree was on a

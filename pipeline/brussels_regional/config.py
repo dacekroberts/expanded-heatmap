@@ -328,6 +328,9 @@ PLACE_REVIEWED = {
 }
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    # Places of worship named by a body, left for the rules and still rows (the flag read of 2026-10-13, applied on the owner's word;
+    # docs/decisions_drafts/search-final.md).
+    "way/230206208": "a place of worship named only by its denomination, body or hall type is dropped (four rulings 1; sixteen rulings 2; left for the rules and still a row, owner 2026-10-13)",
     "way/1108911535": "a number or letter beside a type on a campus road (owner, 2026-10-13)",
     "way/134885700": "a number or letter beside a type on a campus road (owner, 2026-10-13)",
     "way/134885696": "a number or letter beside a type on a campus road (owner, 2026-10-13)",

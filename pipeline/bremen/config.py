@@ -285,6 +285,12 @@ PLACE_RULED_KEPT = {
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    # Bare type words and type phrases (the flag read of 2026-10-13, applied on the owner's word;
+    # docs/decisions_drafts/search-final.md).
+    "way/163219377": "a bare type word or a type phrase as the whole name is dropped (BARE_TYPE_NAMES, owner 2026-10-11; seven rulings 4, 2026-10-13; owner 2026-10-13, the flag read's verdicts, all approved)",
+    # Places of worship named only by a denomination, a body or a hall type (the flag read of 2026-10-13, applied on the owner's word;
+    # docs/decisions_drafts/search-final.md).
+    "way/34569279": "a place of worship named only by its denomination, body or hall type is dropped (owner 2026-10-13, four rulings 1; fifteen answers 6; sixteen rulings 2; owner 2026-10-13, the flag read's verdicts, all approved)",
     "way/23903836": "a generic path word as the whole name (owner, 2026-10-13)",
     "way/23903840": "a generic path word as the whole name (owner, 2026-10-13)",
     "way/23903841": "a generic path word as the whole name (owner, 2026-10-13)",

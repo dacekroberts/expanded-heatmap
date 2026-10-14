@@ -375,6 +375,9 @@ PLACE_RULED_KEPT = {
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    # Religious offices, associations and education halls tagged a place of worship (the flag read of 2026-10-13, applied on the owner's word;
+    # docs/decisions_drafts/search-final.md).
+    "node/6478103985": "a religious office, association or education hall tagged a place of worship is dropped (sixteen rulings 1, 2026-10-13; owner 2026-10-13, the flag read's verdicts, all approved)",
     "way/553454226": "a motorway ramp or interchange, a description (owner, 2026-10-13)",
     "way/553454232": "a motorway ramp or interchange, a description (owner, 2026-10-13)",
     "way/628456604": "a motorway ramp or interchange, a description (owner, 2026-10-13)",

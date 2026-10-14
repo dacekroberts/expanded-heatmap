@@ -248,6 +248,10 @@ PLACE_FOLD = None
 PLACE_REVIEWED = {}
 # The hand read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    # Descriptions, positions and site labels standing in for a name (the flag read of 2026-10-13, applied on the owner's word;
+    # docs/decisions_drafts/search-final.md).
+    "node/13956488410": "a description, a position or a site label standing in for a name is dropped (seven rulings 4; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "node/13956488405": "a description, a position or a site label standing in for a name is dropped (seven rulings 4; owner 2026-10-13, the flag read's verdicts, all approved)",
     "way/147192450": "a stadium's service ring, 14 of its 18 ways private",
     "way/147192451": "a stadium's service ring, 14 of its 18 ways private",
     "way/44387163": "a stadium's service ring, 14 of its 18 ways private",

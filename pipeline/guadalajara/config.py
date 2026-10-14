@@ -337,6 +337,27 @@ PLACE_REVIEWED = {
 }
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    # Same-named objects a drop above made a row (the flag read of 2026-10-13, applied on the owner's word;
+    # docs/decisions_drafts/search-final.md).
+    "way/825218312": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it, under the same class and ruling (finding 53; owner 2026-10-13, the flag read's verdicts)",
+    # Same-named objects a drop above made a row (the flag read of 2026-10-13, applied on the owner's word;
+    # docs/decisions_drafts/search-final.md).
+    "way/825218158": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it, under the same class and ruling (finding 53; owner 2026-10-13, the flag read's verdicts)",
+    "way/1034256426": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it, under the same class and ruling (finding 53; owner 2026-10-13, the flag read's verdicts)",
+    "way/1034256077": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it, under the same class and ruling (finding 53; owner 2026-10-13, the flag read's verdicts)",
+    # Bare type words and type phrases (the flag read of 2026-10-13, applied on the owner's word;
+    # docs/decisions_drafts/search-final.md).
+    "way/424436220": "a bare type word or a type phrase as the whole name is dropped (BARE_TYPE_NAMES, owner 2026-10-11; seven rulings 4, 2026-10-13; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "way/132676662": "a bare type word or a type phrase as the whole name is dropped (BARE_TYPE_NAMES, owner 2026-10-11; seven rulings 4, 2026-10-13; owner 2026-10-13, the flag read's verdicts, all approved)",
+    # Estate parks and median strips, left for the rules and still rows (the flag read of 2026-10-13, applied on the owner's word;
+    # docs/decisions_drafts/search-final.md).
+    "node/9527882478": "a facility of an estate tagged a park is dropped (sixteen rulings 7, the estate-facility ruling; left for the rules and still a row, owner 2026-10-13)",
+    "node/6141624470": "a facility of an estate tagged a park is dropped (sixteen rulings 7, the estate-facility ruling; left for the rules and still a row, owner 2026-10-13)",
+    "way/825216932": "a facility of an estate tagged a park is dropped (sixteen rulings 7, the estate-facility ruling; left for the rules and still a row, owner 2026-10-13)",
+    "way/825217128": "a facility of an estate tagged a park is dropped (sixteen rulings 7, the estate-facility ruling; left for the rules and still a row, owner 2026-10-13)",
+    "way/825218942": "a facility of an estate tagged a park is dropped (sixteen rulings 7, the estate-facility ruling; left for the rules and still a row, owner 2026-10-13)",
+    "way/825032654": "a facility of an estate tagged a park is dropped (sixteen rulings 7, the estate-facility ruling; left for the rules and still a row, owner 2026-10-13)",
+    "way/825032841": "a facility of an estate tagged a park is dropped (sixteen rulings 7, the estate-facility ruling; left for the rules and still a row, owner 2026-10-13)",
     "way/164764108": "an address number at the end of the name: lanes of a gated cluster or a privada labelled with its address (owner, 2026-10-13)",
     "way/164764113": "an address number at the end of the name: lanes of a gated cluster or a privada labelled with its address (owner, 2026-10-13)",
     "way/164764133": "an address number at the end of the name: lanes of a gated cluster or a privada labelled with its address (owner, 2026-10-13)",

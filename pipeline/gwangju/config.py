@@ -134,6 +134,9 @@ PLACE_REVIEWED = {name: _JUNCTION for name in (
 # customers-only service roads, candidate 1 the play-park and plaza rows
 # (docs/decisions_drafts/search-final.md, "Rule candidates").
 PLACE_DROPPED = {
+    # Bare type words and type phrases (the flag read of 2026-10-13, applied on the owner's word;
+    # docs/decisions_drafts/search-final.md).
+    "way/470162156": "a bare type word or a type phrase as the whole name is dropped (BARE_TYPE_NAMES, owner 2026-10-11; seven rulings 4, 2026-10-13; owner 2026-10-13, the flag read's verdicts, all approved)",
     "way/629024038": "a composer's birthplace, in on the composer's article; no sign it is open to visitors was checked (owner, 2026-10-13)",
     "way/444717696": "the air force unit as a second row for Gwangju Airport (owner, 2026-10-13)",
     "node/6411444468": "a development zone's planning label drawn as a place (owner, 2026-10-13)",

@@ -331,6 +331,10 @@ PLACE_RULED_KEPT = {
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    # Descriptions, positions and site labels standing in for a name (the flag read of 2026-10-13, applied on the owner's word;
+    # docs/decisions_drafts/search-final.md).
+    "way/1394242172": "a description, a position or a site label standing in for a name is dropped (seven rulings 4; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "node/12907562533": "a description, a position or a site label standing in for a name is dropped (seven rulings 4; owner 2026-10-13, the flag read's verdicts, all approved)",
     "way/26552882": "a shieling mapped as a farmyard, no article (owner, 2026-10-13)",
     "way/100711546": "a shieling mapped as a farmyard, no article (owner, 2026-10-13)",
     "way/852020349": "a shieling mapped as a farmyard, no article (owner, 2026-10-13)",
