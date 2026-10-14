@@ -143,4 +143,61 @@ PLACE_REVIEWED = {
     "창현아파트단지입구": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
     "효성아파트앞": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
 }
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read of this
+# index (rule passes 5 and 6), each id read with its cached name and its index
+# row; grouped by the reader's class.
+PLACE_DROPPED = {
+    # A station row that is no working passenger station (reader's drop; owner, 2026-10-13)
+    "node/5842009774": "'팔당역(폐역)'",
+    # A code or a number beside a type word, or a number alone (reader's drop; owner, 2026-10-13)
+    "node/14212399191": "'10통'",
+    "node/14212360663": "'11통'",
+    "node/14212390994": "'12통'",
+    "node/14212399199": "'13통'",
+    "node/14212399194": "'14통'",
+    "node/14212391000": "'15통'",
+    "node/14212399205": "'16통'",
+    "node/14212399140": "'17통'",
+    "node/14212399178": "'18통'",
+    "node/14212390959": "'19통'",
+    "node/14212399145": "'1통'",
+    "node/14212399104": "'20통'",
+    "node/14212360546": "'21통'",
+    "node/14212399134": "'22통'",
+    "node/14212390992": "'23통'",
+    "node/14212399117": "'24통'",
+    "node/14212399115": "'2통'",
+    "node/14212390980": "'3통'",
+    "node/14212399143": "'4통'",
+    "node/14212399180": "'50통'",
+    "node/14212399174": "'5통'",
+    "node/14212334998": "'61통'",
+    "node/14212360810": "'62통'",
+    "node/14212390965": "'6통'",
+    "node/14212399154": "'7통'",
+    "node/14212390985": "'8통'",
+    "node/14212390966": "'9통'",
+    # A description standing in for a name (reader's drop; owner, 2026-10-13)
+    "way/1068265437": "'다리 아래 쉼터'",
+    "way/789146064": "'땅밑집터 전시장'",
+    # A bare type word standing alone (reader's drop; owner, 2026-10-13)
+    "way/914511549": "'분수시계탑'",
+    "way/864119585": "'휴식공간'",
+    "node/10096927305": "'진입광장'",
+    "way/864684163": "'재실'",
+    "way/480153337": "'정자각'",
+    "node/11469141008": "'돌덧널 무덤'",
+    "node/11469141010": "'돌방 무덤'",
+    "node/10253004756": "'산성'",
+    # A business's or a mall's own facility (reader's drop; owner, 2026-10-13)
+    "node/8141896916": "'당구클럽'",
+    "node/8141908527": "'독수리 당구클럽'",
+    # Worship named only by a body, a denomination or a chain (reader's drop; owner, 2026-10-13)
+    "way/617951712": "'SDA교회'",
+    "node/4639636397": "'순복음교회'",
+    # A second row for one object (the surviving row named in each note) (reader's drop; owner, 2026-10-13)
+    "node/4656376558": "'보린교회 입구': \"entrance of Borin church\", a node 40 m from the church's own row",
+    # A religious office, hall or residence tagged a place of worship (reader's drop; owner, 2026-10-13)
+    "way/1219038711": "'장현교회 공감과공간(청소년부)'",
+    "node/9711322650": "'목양수양관'",
+}

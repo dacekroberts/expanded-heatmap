@@ -287,4 +287,19 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read of this
+# index (rule passes 5 and 6), each id read with its cached name and its index
+# row; grouped by the reader's class.
+PLACE_DROPPED = {
+    # A glitched name (reader's drop; owner, 2026-10-13)
+    "node/4292165694": "'Daimon Sugeih'",
+    # A bare type word standing alone (reader's drop; owner, 2026-10-13)
+    "node/9168531324": "'Wedding hall'",
+    "way/692342004": "'こども広場'",
+    "way/464732167": "'市民球場'",
+    "way/945765384": "'方形周溝墓'",
+    # Unsure in the read, dropped by ruling 3, a hall named only for what it enshrines or a deity's title alone (owner, 2026-10-13)
+    "way/674141433": "'十王堂'",
+    # Unsure in the read, dropped by ruling 4, a part of one shrine or temple as its own row (owner, 2026-10-13)
+    "node/6713566278": "'関山神社常夜灯'",
+}

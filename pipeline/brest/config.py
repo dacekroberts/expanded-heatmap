@@ -209,4 +209,24 @@ PLACE_FOLD = None
 PLACE_REVIEWED = {
     "Rue de la Brasserie": "a public street named for a building or institution on it, not a business (residential class; batch 2b precedent, _named_street); tags read 2026-10-13",
 }
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read of this
+# index (rule passes 5 and 6), each id read with its cached name and its index
+# row; grouped by the reader's class.
+PLACE_DROPPED = {
+    # A code or a number beside a type word, or a number alone (reader's drop; owner, 2026-10-13)
+    "node/2649489294": "'Fl298'",
+    "way/259508053": "'Fl307'",
+    "way/259519699": "'R626'",
+    "way/259519696": "'R633'",
+    "way/259519705": "'Leitstand I'",
+    "way/259519698": "'Leitstand II Fl304'",
+    # A second row for one object (the surviving row named in each note) (reader's drop; owner, 2026-10-13)
+    "node/12064854966": "'Entrée Abri Sadi Carnot': the entrance node of the Abri Sadi Carnot, about 140 m from the shelter's own row; same Wikidata entry and article",
+    "way/42531712": "'Naval Monument': the same memorial as \"Mémorial Américain (1914-1918)\" about 30 m away, same Wikidata entry and article; that row already carries \"Naval Monument\" as its alternate name",
+    # An exhibit or object kept on another's entry or article (reader's drop; owner, 2026-10-13)
+    "node/5256078601": "'S 622'",
+    # A religious office, hall or residence tagged a place of worship (reader's drop; owner, 2026-10-13)
+    "way/42538669": "'Aumônerie Catholique des Étudiants de Brest'",
+    # A description standing in for a name (reader's drop; owner, 2026-10-13)
+    "node/10542873124": "'Plateau Technique'",
+}
