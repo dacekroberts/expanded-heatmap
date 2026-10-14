@@ -1399,6 +1399,9 @@ JUNK_NAMES = {"untitled", "unnamed", "unknown", "noname", "no name", "nan", "nul
 _CONTACT = re.compile(r"[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}"
                       r"|(?:\+?1[ .\-]?)?\(?\d{3}\)?[ .\-]\d{3}[ .\-]\d{4}"
                       r"|(?<!\d)0\d{1,3}-\d{2,4}-\d{4}(?!\d)")
+# A web address is no name (a fault mended, 2026-10-13: Toronto's landmark
+# named "https://papemosque.ca/"). The scheme anywhere, or a leading "www.".
+_WEB_ADDRESS = re.compile(r"https?://|^www[.]", re.I)
 JUNK_MARKS = ("#n/a", "#ref", "#value", "#div/0", "#name?", "#num", "#null", "!error",
               chr(0xFFFD))  # the replacement character, a broken decode
 
@@ -1418,7 +1421,8 @@ def junk_name(name):
     lost = (low.startswith("?") and not low.startswith("? ")) or any(
         low[i] == "?" and low[i - 1].isalpha() and low[i + 1].isalpha() for i in range(1, len(low) - 1))
     return (lost or not any(c.isalpha() for c in low) or low.strip("!?.#() ") in JUNK_NAMES
-            or any(m in low for m in JUNK_MARKS) or bool(_CONTACT.search(name)))
+            or any(m in low for m in JUNK_MARKS) or bool(_CONTACT.search(name))
+            or bool(_WEB_ADDRESS.search(low)))
 
 
 # BARE TYPE WORDS (owner, 2026-10-11: "proposed list sounds good"): a name
@@ -3128,6 +3132,18 @@ SQUARE_NEAR_M = 150
 # streets and squares around it (_square_keys): "nám." is náměstí. The word
 # itself stays: Barcelona's Placeta del Pi and Plaça del Pi are two squares.
 SQUARE_ABBR = {"nam": "namesti"}
+# THE SQUARE MERGE LOSES NO NAME (a fault mended, 2026-10-13). A park named
+# as a square (the sixth pass) is one row with a street only when the street
+# row bears the park's own leading name, joiners set aside (SQUARE_JOINERS:
+# "Praça do Japão" is the street "Praça Japão"); a name spelled another way
+# ("Praça John Kennedy" beside "Praça Jonh Kennedy") or a street under
+# another name keeps the park its own row. Whatever merges, the row that
+# stays carries the merged square's exact spelling as an alternate name when
+# it differs. On the extract run 41 merged squares were not findable under
+# their names, 8 of them beside a street of another name
+# (data/_search_rollout/extract_rules56/squares_name_not_findable.tsv).
+SQUARE_JOINERS = frozenset(("de", "do", "da", "dos", "das", "du", "des", "del", "d", "la", "las", "los",
+                            "le", "les", "l", "el", "els"))
 
 
 def _square_keys(names):
@@ -3140,6 +3156,12 @@ def _square_keys(names):
         if ws:
             out.add(tuple([SQUARE_ABBR.get(ws[0], ws[0])] + ws[1:]))
     return out
+
+
+def _square_joined(names):
+    """_square_keys with the joiners after the first word set aside, each
+    name one string."""
+    return {"".join([ws[0]] + [w for w in ws[1:] if w not in SQUARE_JOINERS]) for ws in _square_keys(names)}
 
 
 # THE INDEX REACHES THE WHOLE MAP (owner, 2026-10-12). Mexico City's index
@@ -3515,6 +3537,14 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         hw = {v.strip() for v in str(t.get("highway") or "").split(";")}
         if t.get("highway") == "construction" and any(n in rebuilt for n in names):
             report["street_way_kept_rebuilt"] += 1
+        elif t.get("public_transport") == "platform" or t.get("railway") == "platform":
+            # A STOP'S PLATFORM IS NO STREET, whatever highway value it
+            # carries (a fault mended, 2026-10-13: SKIP_HIGHWAY read
+            # highway=platform alone, and Milan's 527 footways tagged
+            # public_transport=platform, named for their stops, were street
+            # rows). The stop's own row is its station's.
+            report["street_way_skipped_platform"] += 1
+            continue
         elif (hw & SKIP_HIGHWAY or t.get("area") == "yes"
                 or t.get("service") in SKIP_SERVICE):
             report["street_way_skipped"] += 1
@@ -4416,13 +4446,23 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             d = _dist_m((sq[1], sq[2]), (o[1], o[2]))
             if d > SQUARE_DUP_M:
                 continue
-            owords = _square_keys([o[3]] + (o[4].split("|") if o[4] else []))
-            # Spelt almost alike only under the same first word: Placeta del Pi
-            # and Plaça del Pi are two squares.
-            if keys & {"".join(w) for w in owords} or (d <= SQUARE_NEAR_M and any(
+            onames = [o[3]] + (o[4].split("|") if o[4] else [])
+            owords = _square_keys(onames)
+            # A park: only a street that bears its leading name
+            # (SQUARE_JOINERS), never one spelt almost alike.
+            if id(sq) in park_ids:
+                same = bool(_square_joined([sq[3]]) & _square_joined(onames))
+            else:
+                # Spelt almost alike only under the same first word: Placeta
+                # del Pi and Plaça del Pi are two squares.
+                same = bool(keys & {"".join(w) for w in owords}) or (d <= SQUARE_NEAR_M and any(
                     a[0] == b[0] and difflib.SequenceMatcher(None, "".join(a), "".join(b)).ratio() >= 0.9
-                    for a in words for b in owords)):
+                    for a in words for b in owords))
+            if same:
                 drop.add(id(sq))
+                if sq[3] not in onames:
+                    o[4] = "|".join(onames[1:] + [sq[3]])
+                    report["square_name_kept_as_alternate"] += 1
                 if id(sq) in park_ids:
                     report["park_dropped_street_duplicate"] += 1
                     note("park_street_duplicate", "merge", sq[7], sq[3],
@@ -4662,7 +4702,12 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         for r in items:
             if id(r) in gone or not site_relation(r):
                 continue
+            # A PLACE ROW FOLDS ONLY INTO A PLACE ROW (a fault mended,
+            # 2026-10-13): 18 Prague boroughs had no row under their own
+            # name, each boundary folded into its town hall, a landmark
+            # that carries the borough's Wikidata entry.
             other = next((o for o in items if o is not r and not site_relation(o)
+                          and (KINDS[r[0]] != "place" or KINDS[o[0]] == "place")
                           and _dist_m((r[1], r[2]), (o[1], o[2])) > ROW_MERGE_M), None)
             if other is not None:
                 gone.add(id(r))
@@ -5002,6 +5047,15 @@ def _selftest():
     node(47.7720, -122.32, name="Old 99", tourism="attraction", locomotive__type="steam", wikidata="Q904",
          wikipedia="en:Old 99")
     node(47.7000, -122.325, name="City College", amenity="college", wikidata="Q905")
+    # A borough's boundary and its town hall share one entry: two rows.
+    rel(47.7700, -122.345, name="Ward Nine", place="suburb", boundary="administrative", wikidata="Q970")
+    node(47.7600, -122.345, name="Ward Nine Town Hall", amenity="townhall", wikidata="Q970")
+    # A subway station that is also tagged a bus station.
+    node(47.5600, -122.31, name="Broadview", railway="station", station="subway", public_transport="station",
+         amenity="bus_station", bus="yes")
+    node(47.7710, -122.345, name="https://example.org/", historic="monument")
+    street("Tramstop Street", 47.5500, highway="footway", public_transport="platform")
+    street("Halt Lane", 47.5490, highway="footway", railway="platform")
     rel(47.7400, -122.325, name="City College", type="site", amenity="college", wikidata="Q905")
     node(47.7050, -122.325, name="Art School", amenity="college", wikidata="Q906")
     rel(47.7058, -122.325, name="Art School Grounds", type="site", amenity="college", wikidata="Q906")
@@ -5155,6 +5209,10 @@ def _selftest():
     street("Plaza Mayor", 40.4000, lon=-3.70)
     node(40.4005, -3.6995, name="Plaza Mayor", leisure="park")
     node(40.4100, -3.6995, name="Plaza Nueva", leisure="park")
+    street("Plaza Japón", 40.4300, lon=-3.70)
+    node(40.4305, -3.6995, name="Plaza del Japón", leisure="park")
+    street("Plaza Jonh Kennedy", 40.4400, lon=-3.70)
+    node(40.4405, -3.6995, name="Plaza John Kennedy", leisure="park")
     street("Avenida de Brasil", 40.4020, lon=-3.70)
     node(40.4022, -3.6995, name="Avenida de Brasil", leisure="park")
     street("Bosque Viejo", 40.4040, lon=-3.70)
@@ -5168,9 +5226,11 @@ def _selftest():
     node(40.4250, -3.6995, name="Estación de Mercancías Sur", railway="station")
     node(40.4260, -3.6995, name="Estación Cerrada", railway="station", operational_status="closed")
     es_rows = defaultdict(int)
+    es_alias = {}
     for r in build(es_els, city="Prueba", retrieved="2026-10-10", local=("es",),
                    map_stations=["Estación de Mercancías Sur"])[0]["rows"]:
         es_rows[(KINDS[r[0]], r[3])] += 1
+        es_alias[(KINDS[r[0]], r[3])] = r[4]
     fr_els = []
     target[0] = fr_els
     street("Rue de la Brasserie", 48.8500, lon=2.35)
@@ -5542,6 +5602,10 @@ def _selftest():
          es_rows[("landmark", "Plaza Mayor")] == 0 and es_rows[("street", "Plaza Mayor")] == 1),
         ("Spanish: a park named as a square with no street of its name stays",
          es_rows[("landmark", "Plaza Nueva")] == 1),
+        ("Spanish: a park and a street that differ by a joiner are one row, the park's spelling an alternate",
+         es_rows[("landmark", "Plaza del Japón")] == 0 and es_alias[("street", "Plaza Japón")] == "Plaza del Japón"),
+        ("Spanish: a park spelled another way than its street keeps its own row",
+         es_rows[("landmark", "Plaza John Kennedy")] == 1 and es_alias[("street", "Plaza Jonh Kennedy")] == ""),
         ("Spanish: a park under a street word, or no way word, stays beside a street of its name",
          es_rows[("landmark", "Avenida de Brasil")] == 1 and es_rows[("landmark", "Bosque Viejo")] == 1),
         ("worship_office: an English word is not read in a name that holds CJK",
@@ -5613,6 +5677,13 @@ def _selftest():
          and ("landmark", "Old 99") in rows),
         ("a site relation repeating a row's entry far off is no row", count[("landmark", "City College")] == 1),
         ("a site relation on its object stays", ("landmark", "Art School Grounds") in rows),
+        ("a borough's boundary does not fold into its town hall", ("place", "Ward Nine") in rows
+         and ("landmark", "Ward Nine Town Hall") in rows),
+        ("a subway station also tagged a bus station is a station", ("station", "Broadview") in rows),
+        ("a web address is no name", junk_name("https://example.org/") and junk_name("www.example.org")
+         and not junk_name("World Wide Web Plaza") and not any("example.org" in n for _, n in rows)),
+        ("a stop's platform drawn as a footway is no street", ("street", "Tramstop Street") not in rows
+         and ("street", "Halt Lane") not in rows),
         ("own_article: a list article with an anchor is not the object's",
          own_article({"wikipedia": "de:Liste der Kulturdenkmäler in Bremen-Mitte#1500,T008"}, ["Bacchus"])[0] == "not"),
         ("public art with an entry and no article is no row", ("landmark", "Bronze Horse") not in rows),

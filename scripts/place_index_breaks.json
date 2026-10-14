@@ -238,5 +238,13 @@
  {"label": "a station the map draws is spared the disused test", "old": "if closed and not _past(t.get(\"end_date\"), retrieved) and drawn_station_here(names, pt, drawn_at):", "new": "if False:"},
  {"label": "the disused guard asks for the map station's name", "old": "and any(name.startswith(f) or f.startswith(name) for f in own):", "new": "and own:"},
  {"label": "the disused guard asks for the map station's place", "old": "STATION_DRAWN_M = 100", "new": "STATION_DRAWN_M = 100000"},
- {"label": "a dated closure is never spared by the disused guard", "old": "if closed and not _past(t.get(\"end_date\"), retrieved) and drawn_station_here(names, pt, drawn_at):", "new": "if closed and drawn_station_here(names, pt, drawn_at):"}
+ {"label": "a dated closure is never spared by the disused guard", "old": "if closed and not _past(t.get(\"end_date\"), retrieved) and drawn_station_here(names, pt, drawn_at):", "new": "if closed and drawn_station_here(names, pt, drawn_at):"},
+ {"label": "a park spelled another way than its street keeps its row", "old": "same = bool(_square_joined([sq[3]]) & _square_joined(onames))", "new": "same = bool(keys & {\"\".join(w) for w in owords}) or any(difflib.SequenceMatcher(None, \"\".join(a), \"\".join(b)).ratio() >= 0.9 for a in words for b in owords)"},
+ {"label": "a joiner does not part a park from its street", "old": "if w not in SQUARE_JOINERS", "new": "if w"},
+ {"label": "a merged square's spelling stays as an alternate name", "old": "o[4] = \"|\".join(onames[1:] + [sq[3]])", "new": "pass"},
+ {"label": "a web address is junk", "old": "or bool(_WEB_ADDRESS.search(low)))", "new": ")"},
+ {"label": "a stop's platform is no street", "old": "elif t.get(\"public_transport\") == \"platform\" or t.get(\"railway\") == \"platform\":", "new": "elif False:"},
+ {"label": "a railway platform is no street either", "old": "elif t.get(\"public_transport\") == \"platform\" or t.get(\"railway\") == \"platform\":", "new": "elif t.get(\"public_transport\") == \"platform\":"},
+ {"label": "a place row never folds into a landmark", "old": "and (KINDS[r[0]] != \"place\" or KINDS[o[0]] == \"place\")", "new": ""},
+ {"label": "a rail station tag wins over a bus station's", "old": "if (t.get(\"public_transport\") == \"station\" and not t.get(\"railway\")", "new": "if (t.get(\"public_transport\") == \"station\""}
 ]
