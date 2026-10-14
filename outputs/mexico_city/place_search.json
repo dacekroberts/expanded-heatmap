@@ -1,7 +1,7 @@
 {
   "index": "app/static/places/mexico_city.json",
-  "places": 187426,
-  "data_retrieved": "2026-10-12",
+  "places": 205045,
+  "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "es"
@@ -52,6 +52,11 @@
       "osm": "relation/5605754",
       "name": "Ecatepec de Morelos",
       "stations": 13
+    },
+    {
+      "osm": "relation/5606521",
+      "name": "Tlalnepantla de Baz",
+      "stations": 4
     },
     {
       "osm": "relation/5606086",

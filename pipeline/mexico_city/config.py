@@ -409,12 +409,19 @@ MEXICO_CITY_BBOX = {
 # 5605754, Nezahualcoyotl 5606086, La Paz 5605964, Naucalpan de Juarez
 # 5606080. The index first landed cut to Ciudad de Mexico alone, and the 11
 # stations in the four had 0 or 1 places within 1 km (owner, 2026-10-12;
-# check H of check_place_search.py now refuses that). Overpass area id =
-# 3600000000 + relation id.
-PLACE_AREA = "(id:3601376330,3605605754,3605606086,3605605964,3605606080)"
-# NEW file names: data/ is shared by every worktree.
-PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
-PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
+# check H of check_place_search.py now refuses that). A sixth area since the
+# tram rescope (2026-10-13): Tlalnepantla de Baz, relation 5606521. The
+# Tren Suburbano's San Isidro and three more drawn stations sit in it, and the
+# scope rule adds every municipality a drawn station sits in. Overpass area
+# id = 3600000000 + relation id.
+PLACE_AREA = "(id:3601376330,3605605754,3605606086,3605605964,3605606080,3605606521)"
+# NEW file names: data/ is shared by every worktree. The caches of
+# 2026-10-13 are the six areas, filtered from the regional extract of
+# 2026-10-12 (pipeline/place_extract_fetch.py, no Overpass request); the
+# five-area outline is kept beside the current one as
+# osm_place_outline_v1_five_areas_2026-10-12.json.
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 # The local language of OSM's names here: Spanish.
 PLACE_LANGUAGES = ("es",)
 PLACE_FOLD = None
@@ -431,6 +438,12 @@ PLACE_REVIEWED = {
     "Privada 2 Estacionamiento Manuela Medina": "a street's own name in a housing unit, residential class",
     "Privada Estacionamiento": "a street's own name in a housing unit, residential class",
     "Cerrada la Tienda": "a street's own name",
+    # Tlalnepantla de Baz, from the six-area caches of 2026-10-13: OSM ways
+    # 175481910, 175481911, 175481920, 175481964 (name) and 175481967,
+    # 880038128, 880038129 (alt_name), all highway=tertiary. The initials are
+    # the avenue's name and end in the letters of the leak word "S.A.".
+    "Avenida A.N.D.S.A.": "a street's own name, tertiary class (an avenue named by initials)",
+    "Calle 2 de Abril": "a tertiary street whose alt_name is Avenida A.N.D.S.A., a street's own name",
 }
 # OSM objects a reading by eye found to be a business or a home that no rule
 # in place_index.py catches, each with why (place_index.build, `dropped`).
@@ -539,6 +552,20 @@ PLACE_DROPPED = {
     "node/10003160223": "a chapel that no longer exists (its name says so): a search would move the map to a place where it is not",
     "way/1418500626": "a park's name with a stray leading accent mark and a misspelling (glitched; the outside name net, 2026-10-12)",
     "way/639768197": "'Jeugos infantiles', the type words 'juegos infantiles' misspelled",
+    # Tlalnepantla de Baz, the read of the six-area index (2026-10-13). Each is
+    # decided by a recorded ruling, none by a new call: a name that is only
+    # its object's type is no name, and a description longer than a type word
+    # goes by id (owner, 2026-10-11; docs/place_search_exclusions.md,
+    # Landmarks, "A name that is only a type"). The words are left off
+    # BARE_TYPE_NAMES here because a list change reaches every Spanish city
+    # and is the rule-change protocol's, not a city build's.
+    "way/676954439": "'Glorieta', a park under the bare type word for a roundabout",
+    "way/520486348": "'Explanada', a park under the bare type word for an esplanade",
+    "node/4393398889": "'obelisco', a monument under its bare type word",
+    "way/1014962523": "'CANCHAS  DEPORTIVAS', the listed type words 'canchas deportivas' with two spaces between them",
+    "way/564478972": "'Parque Para Perros', a description (a park for dogs), the listed 'parque canino' in other words",
+    "way/1394023631": "'Parque con fuente', a description (a park with a fountain)",
+    "way/564479286": "'Area Comun/Canchas de Basquetball', a description of a housing unit's common area and courts",
 }
 
 # Public art kept by the owner's word against the article rule (place_index,
