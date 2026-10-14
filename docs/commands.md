@@ -50,6 +50,7 @@ python scripts/check_overpass_hosts.py [--live|--selftest]   # every Overpass mi
 python scripts/check_worktree_data.py <worktree> [--list]   # before removing a worktree
 python scripts/check_render_current.py                  # after merging
 python scripts/check_map_markup.py [--verbose]          # dark-mode label contrast, legend styles
+node scripts/check_map_search.js [<city> ...] [--json <file>]   # every drawn station and line is found by its map's own search box (headless Edge or Chrome, the page's real matcher); not in check_all.py (no browser there): run after any place-search render or matcher change, and before a search rollout review lands
 python scripts/check_line_identity.py [--rendered|--verbose]   # one colour per line across maps, neighbour rule on (pipeline/line_registry.py)
 python scripts/check_no_em_dashes.py                    # no em dash in any comment or docstring
 python scripts/check_name_keys.py [--selftest]          # withheld-name lists hold keys, not names

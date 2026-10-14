@@ -200,3 +200,19 @@ PLACE_VISITABLE = {
         "checked": "2026-10-08",
         "why": "the Norwood Park Historical Society's museum, open Saturdays noon to 4 pm"},
 }
+
+# Public art kept by the owner's word against the article rule (place_index,
+# PLACE_KEPT; owner, 2026-10-13). Each is a known work the Wikidata lookup
+# cannot admit; DECISIONS.md of that date lists the works left out.
+PLACE_KEPT = {
+    "node/10780734457": "'Sue the Dinosaur', its own article, on an entry the map also gives as its subject's (owner, 2026-10-13)",
+    "node/3554700407": "'Sir Georg Solti Bust', its own article, on an entry the map also gives as its subject's (owner, 2026-10-13)",
+    "node/7022676547": "'Jack Brickhouse', its own article, on an entry the map also gives as its subject's (owner, 2026-10-13)",
+    "node/667225235": "'A Signal of Peace', its own article, on an entry the map also gives as its subject's (owner, 2026-10-13)",
+    "node/3554716802": "'The Alarm', its own article, on an entry the map also gives as its subject's (owner, 2026-10-13)",
+    "way/210671752": "'Lion in an attitude of defiance', its own article, on an entry the map also gives as its subject's (owner, 2026-10-13)",
+    "way/210671756": "'Lion on the prowl', its own article, on an entry the map also gives as its subject's (owner, 2026-10-13)",
+    "way/1433718651": "'Richard Oglesby Monument', its own article, on an entry the map also gives as its subject's (owner, 2026-10-13)",
+    "way/1433718663": "'Alexander Hamilton Monument', its own article, on an entry the map also gives as its subject's (owner, 2026-10-13)",
+    "way/1433718665": "'John Peter Altgeld Momument', its own article, on an entry the map also gives as its subject's (owner, 2026-10-13)",
+}

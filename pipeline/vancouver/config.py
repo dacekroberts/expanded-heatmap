@@ -581,3 +581,10 @@ PLACE_DROPPED = {
     "way/542704847": "'122l Greenbelt', a parcel code beside a type word",
     "way/1290572402": "'15-H - Greenbelt', a parcel code beside a type word",
 }
+
+# Public art kept by the owner's word against the article rule (place_index,
+# PLACE_KEPT; owner, 2026-10-13). Each is a known work the Wikidata lookup
+# cannot admit; DECISIONS.md of that date lists the works left out.
+PLACE_KEPT = {
+    "node/4993471021": "'Harry Jerome', its own article, on an entry the map also gives as its subject's (owner, 2026-10-13)",
+}

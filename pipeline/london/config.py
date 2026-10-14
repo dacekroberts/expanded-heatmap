@@ -379,4 +379,6 @@ PLACE_DROPPED = {
 PLACE_KEPT = {
     "way/120317147": "'Greenway', a named linear park (owner, 2026-10-13)",
     "relation/17674520": "'Greenway', a named linear park (owner, 2026-10-13)",
+    # Public art kept against the article rule (owner, 2026-10-13).
+    "node/343354107": "'The Burghers Of Calais', its Wikidata entry has no article in any language (owner, 2026-10-13)",
 }

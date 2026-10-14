@@ -34,7 +34,7 @@ protocol in the `place-search-city` skill.
 | A minor way whose name does not read as a way | `MINOR_HIGHWAYS`, `WAY_WORDS`, `_reads_as_way`; kept with wikidata or wikipedia | street pass | 2026-10-07 |
 | A street named for a business, a home or private access | `LEAK_WORDS`, `_named_street` | street pass | 2026-10-08 |
 | A street whose every way is a private minor way | `street_open`; except a name led by `PRIVATE_STREET_LEAD` (French) | street pass | 2026-10-11 |
-| A street whose every way is private (access=private or no) on residential or unclassified | `PRIVATE_STREET_HIGHWAYS`, `street_public`; `PRIVATE_STREET_LEAD` and a way's own article keep one | street pass | 2026-10-13 |
+| A street whose every way is private (access=private or no) on residential or unclassified | `PRIVATE_STREET_HIGHWAYS`, `street_public`; `PRIVATE_STREET_LEAD` and a way's own article keep one; where a city sets `PLACE_KEEP_NAMED_PRIVATE_STREETS` only a code-named one goes | street pass | 2026-10-13 |
 | A busway or a race track | `NOT_STREET_HIGHWAYS`, `street_real`; a way's own article keeps one | street pass | 2026-10-13 |
 | A minor-way street named by a description, a bare type or way word, or a type and a code | `street_description`, `STREET_DESCRIPTIONS`; never a street with a way of residential class or above | street pass | 2026-10-13 |
 | A pedestrian area as a street | `area=yes` is skipped; with an article of its own it is a landmark | street pass, `square_areas` | 2026-10-08, 2026-10-13 |
@@ -74,7 +74,7 @@ read from Overpass. Seattle: 59 ways of six streets.
 | A stop-area relation beside its station's own row | `public_transport=stop_area` on a relation groups a station's parts; it stays where no other station row is within `OUTLINE_BESIDE_M`, bears its name within `OUTLINE_SAME_M` or shares its Wikidata entry (Washington's two streetcar stops) | merges | 2026-10-13 (second batch) |
 | A bus station that lists a rail mode | `amenity=bus_station` with no railway tag, whatever `light_rail=` or `train=` says | tagged pass | 2026-10-13 (second batch) |
 | A station's outline beside the station's own row | a way or relation tagged `public_transport=station` with no railway tag, within `OUTLINE_BESIDE_M` of a rail-tagged station row or `OUTLINE_SAME_M` of one of its name; one further off stays | merges | 2026-10-13 (second batch) |
-| A second row for one transfer complex | `COMPLEX_MERGE_M`: station rows sharing one Wikidata entry are one row, the others' names its aliases | merges | 2026-10-13 (second batch) |
+| A second row for one transfer complex | `COMPLEX_MERGE_M`: station rows sharing one Wikidata entry are one row, the others' names its aliases; never two names the map draws (`complex_parts`, the fifth pass) | merges | 2026-10-13 (second batch) |
 | A station with an end date written with stray characters ("=1959") | `_past` sets the characters aside; `station_closed` | tagged pass | 2026-10-13 (second batch) |
 
 ## Neighborhoods (places)
@@ -166,6 +166,74 @@ Danish, Norwegian or Swedish city (`LEAK_SET_ASIDE`); a glued street name passes
 word in a suffix language; a second language below the 90% floor is declared in
 `config.PLACE_LANGUAGES_ALSO`; `config.PLACE_STATION_STRIP` takes an ending off station names.
 Swedish "-gård" stays a street ending on every way (candidate 37, pulled by the owner).
+
+## The fifth pass (2026-10-13, branch search-rules-5)
+
+| Left out | Rule | Where | Kind |
+|---|---|---|---|
+| A place of worship named only by its denomination or hall type ("Kingdom Hall of Jehovah's Witnesses", "Methodist Church", "Gurdwara") | `worship_only`: every word a listed denomination word or phrase, a hall-type word or a joiner (`WORSHIP_DENOMINATIONS`, `WORSHIP_HALLS`, `WORSHIP_JOINERS`, per language; `WORSHIP_RESPELL` for a denomination as its mappers spell it), with one hall-type word at most; amenity=place_of_worship only, the leading name only | `landmark_drop` | landmark |
+| A station closed to the public | `STATION_PRIVATE_ACCESS`: access=private on a station object (Washington's Capitol subway, a railway's training stations in Tokyo); access=no is not read, since a public halt in Marseille carries it | tagged pass | station |
+
+**Kept against those rules:** a place of worship whose name holds any other word (a saint, a
+place, a street, an ordinal: "First Baptist Church"; a second hall-type word: "Temple Baptist
+Church"), one with a Wikipedia article of its own, and one named by id in `config.PLACE_KEPT`;
+a station the map draws, whatever its access tag (the station guard).
+
+**Two stations of the map are never one row (a fault mended, not a class left out):** the
+transfer-complex merge (`COMPLEX_MERGE_M`) folded Boston's Boylston into Park Street, since
+OpenStreetMap gives both nodes one Wikidata entry. A complex whose rows bear two or more
+names the map draws is split at those names (`complex_parts`); a row under any other name
+joins the nearest. Distance is not the test.
+
+**Not mended:** Boston's Green Street station is indexed as "Green" because that is its
+`name` in OpenStreetMap (relation 20304842); no rule strips a street word from a station
+name, and a name is not corrected here.
+
+## The sixth pass (2026-10-13, branch search-rules-5)
+
+From the sixteen rulings on the pilot reads and the held rows (`DECISIONS.md`, "the pilot reads
+and the held rows; sixteen rulings"), items 1, 2, 7 and 9 and the faults fixed without a ruling.
+
+| Left out | Rule | Where | Kind |
+|---|---|---|---|
+| The readers' bare type words in fifteen languages; spaced CJK forms ("어린이 공원"); "제1호근린공원", "開発2号公園", "Estação 3", "第一中庭" as codes beside a type | `BARE_TYPE_NAMES_6`, `_bare_word`, `CODED_TYPE` | `bare_type` | landmark, place, station (the guard decides) |
+| A church named only by its chain or body (ruling 2) | the fifth pass's rule with `WORSHIP_BODIES` and wider lists (Portuguese, Spanish, Dutch, Japanese, Chinese, Latvian); only joiners and one hall-type word may follow a body's name; a nationality is listed only inside a denomination's name | `worship_only` | landmark |
+| A religious office, education hall or residence tagged a place of worship (ruling 1) | `worship_office`: `WORSHIP_OFFICE_HEADS` (the name's head), `WORSHIP_OFFICE_WORDS` (a whole word; a CJK word anywhere); an English word is not read in a name that holds CJK | `landmark_drop` | landmark |
+| A facility of an apartment estate or a mall tagged a park, a playground or a square (ruling 7) | `estate_facility`: the operator names a condominium, a residents' body, an estate's management or a mall (`ESTATE_FACILITY_OPERATOR`); the operator heads the name and a facility word closes it; an estate's brand and a facility word (`ESTATE_BRANDS`, `ESTATE_FACILITY_ENDS`); a name that says "inside" | `landmark_drop` | landmark |
+| A park named as a square, beside a street row of its name (ruling 9) | `square_led`, `SQUARE_HEADS`, within `SQUARE_DUP_M`; against streets only | duplicate pass | landmark |
+| A station with operational_status=closed; a freight station by its name | `station_out_of_service`, `STATION_FREIGHT_WORDS` | tagged pass | station |
+| A station entrance or a ticket gate tagged a station | `STATION_ENTRANCES`: no row beside a station row of its name within `OUTLINE_SAME_M`, and none at all unless the map draws its name | merges | station |
+| A bus rapid transit station kept on its network tag | `BUS_NETWORK`: a bus network's tag is no rail sign for a station object with no railway tag | merges | station |
+| A suburb's or a borough's boundary beside its own node | `BOUNDARY_NODE_M`: the node of the same place value and name, a closing bracket set aside, within 5 km | place branch | place |
+| Ways with no entry beside the one relation of their name that carries it | `SEGMENTS_MIN` ways or more fold into the relation's row, at any distance | merges | landmark |
+| A name ending "(FECHADO)" | `HISTORICAL_NAME` | tagged pass | any |
+| "Hôtel particulier", "Ancien hôtel" as whole names | `BARE_TYPE_NAMES_6` | `bare_type` | landmark, place |
+
+**Kept against those rules:** an article of the object's own keeps a row against every one of
+them; for a place of worship an entry of its own with an article in the city's Wikidata cache
+keeps it too (the cache is read, never asked: `article_lookup_kind` is unchanged);
+`config.PLACE_KEPT`; a station the map draws (the station guard), which is why Amsterdam's
+diversion-only stop "Oranje Nassaulaan" stays. "Church of Christ Presbyterian" and
+"Russian-Ukrainian Seventh Day Adventist Church" keep their rows. A convent under a name of its
+own is a place, not an office (owner, 2026-10-13: "Convento de Santa Teresa"; "convento" is no
+office head), and Mexico City's "El Polvorín" is a proper name ("polvorín" is no bare type word).
+A park named for an estate
+with no facility word stays; a park under a street word or a garden word ("Avenida de Brasil",
+"Jardins de ...", a Paris "Square ...") stays beside the way of its name.
+
+**Where the leak-word test no longer fires (a fault mended):** a junction row; a French
+landmark named "Hôtel de", "Hôtel du", "Hôtel des", "Hôtel d'" or "Hôtel-" and a word
+(`FRENCH_MANSION`; a hotel business so named is held out by its lodging tag); a French street
+under "brasserie" (`LEAK_STREET_ALLOW`). `scripts/check_place_search.py` E reads a review of
+such a row as no longer needed, never as stale. "Hôtel" and a family name alone is still a
+review.
+
+**Listed and not built:** a square inside a mall, a theme park or a zoo known only by its
+coordinates (Osaka's ATC and Hankyu plazas, Universal Studios' zones, Tennoji Zoo); cemetery
+tombs tagged historic=monument (Madrid, 6); Japanese house words (住宅, 邸) on a listed house;
+Madrid's place=locality field names (ruling 8: counted per city in the batch 6 report, no rule);
+English "convent" and "seminary", Spanish orders' names, Korean halls' own names (참신관, 대건관);
+a relation folded into one of its own segments by `NEAR_DUP_M` before the segment merge.
 
 ## Considered and not built as rules
 
