@@ -2,6 +2,47 @@
 
 Newest first. Cleanup folds these into `DECISIONS.md` at review time.
 
+### 2026-10-13 - Place search script: a dotted abbreviation in a name is found by its word; Milan rendered again and Prague rendered as the second trial (Cleanup agent, nothing pushed)
+
+- **Owner (relayed by Cleanup, 2026-10-13):** build the fix reported in the
+  entry below; this lane owns `pipeline/map_common.py` for the change.
+- **The change (7c3cb2a4, `pipeline/map_common.py` only).** In the search
+  script's `prep()`, a name holding letters joined by dots ("V.le", "P.za",
+  "P.ta") gains two tokens: the letters joined ("vle") and the word `ABBR`
+  holds for them ("viale"). Where the joined letters are no abbreviation,
+  the part before the first dot is tried alone ("S.LEONARDO" gains "san").
+  Nothing is added unless the page's languages list it in `ABBR`. Italian
+  `abbr` gains "pta": "porta".
+- **Milan, re-rendered.** The 49 abbreviated station names typed in full:
+  the map's own station is returned for 49 of 49 (4 before). The six that
+  found no station before (P.TA GENOVA F.S., P.ta Lodovica, P.za 5 Giornate,
+  P.za Ventiquattro Maggio, V.le Certosa Via Giorgini, V.le Certosa Via
+  Tibullo) each return their own station. The dotted and undotted typed
+  forms ("V.le Tunisia", "Vle Tunisia", "P.le Baracca") return the same
+  station first as before. `check_map_search.js milan`: 193 of 193 stations,
+  22 of 22 lines.
+- **Prague, rendered once** (15 s wall with the gate's start, peak 0.52 GB,
+  3.3 MB of HTML, 21,462 points, 196 stations). `check_map_search.js
+  prague`: 196 of 196 stations, 13 of 13 lines. **The change is a no-op
+  there by construction:** counted on the index and the map's stations,
+  Prague's names hold 5 dotted groups ("hl.n", "F.V.Veselého") and the rule
+  acts on none, since the Czech `abbr` table is empty. Its abbreviations end
+  in a dot instead: "sv." 48 names, "nám." 15, "ul." 13.
+- **Not covered, measured on Prague:** "nám." and "náměstí" find each other
+  already (one is the start of the other). "Kaple svaté Anny" does not find
+  "Kaple sv. Anny", and "ulice Bolzanova" does not find the stop whose alias
+  holds "(ul. Bolzanova)": a trailing-dot abbreviation whose table has no
+  word. Entries "sv" and "ul" in the Czech `abbr`, read from the name as
+  well as from the typed word, would cover them; not built, since it is a
+  second mechanism and a word list for the language's owner.
+- **Not covered in Milan:** "Sant'Agostino" does not return the map's
+  "S.AGOSTINO" ("s" gives "san", and "sant" is another word); the
+  OpenStreetMap station row of that name stands in. "VILLA S.G." is found
+  only as written. An OpenStreetMap station is still not LINKED to a map
+  station whose name differs by an abbreviation, so both rows show.
+- The search script has no self-test of its own; `check_map_search.js` is
+  its check. `check_no_em_dashes.py` OK.
+
 ### 2026-10-13 - Tram rescope: Milan's map rendered once as the rollout's trial render, and its search tested in a browser (Cleanup agent, nothing pushed)
 
 - **Owner (relayed by Cleanup, 2026-10-13):** renders on branches are
