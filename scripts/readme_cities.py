@@ -1,4 +1,4 @@
-"""README's "Mapped so far" list, generated from app/cities.py.
+"""README's "Mapped cities" list, generated from app/cities.py.
 
     python scripts/readme_cities.py           # rewrite the list
     python scripts/readme_cities.py --check   # fail if it is stale (check_all runs this)
