@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/higashimurayama.json",
-  "places": 256,
+  "places": 255,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.496,
+      "en": 0.498,
       "ja": 1.0
     },
     "list_share": 0.5,

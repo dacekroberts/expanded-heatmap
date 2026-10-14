@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/hamamatsu.json",
-  "places": 3656,
+  "places": 3645,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.354,
+      "en": 0.355,
       "ja": 0.998
     },
     "list_share": 0.5,

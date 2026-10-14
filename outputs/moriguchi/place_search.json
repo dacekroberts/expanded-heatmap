@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/moriguchi.json",
-  "places": 503,
+  "places": 502,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.497,
+      "en": 0.498,
       "ja": 1.0
     },
     "list_share": 0.5,

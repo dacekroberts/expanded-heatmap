@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/suwon.json",
-  "places": 6272,
+  "places": 6265,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ko"
     ],
     "coverage": {
-      "en": 0.898,
+      "en": 0.899,
       "ko": 0.999
     },
     "list_share": 0.5,

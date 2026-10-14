@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/kawasaki.json",
-  "places": 3096,
+  "places": 3089,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.612,
+      "en": 0.613,
       "ja": 0.995
     },
     "list_share": 0.5,

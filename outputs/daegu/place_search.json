@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/daegu.json",
-  "places": 14394,
+  "places": 14361,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ko"
     ],
     "coverage": {
-      "en": 0.897,
+      "en": 0.899,
       "ko": 0.999
     },
     "list_share": 0.5,

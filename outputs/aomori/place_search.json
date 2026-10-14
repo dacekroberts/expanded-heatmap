@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/aomori.json",
-  "places": 1077,
+  "places": 1075,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.504,
+      "en": 0.505,
       "ja": 0.999
     },
     "list_share": 0.5,
