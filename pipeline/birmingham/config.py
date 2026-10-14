@@ -289,6 +289,10 @@ PLACE_DROPPED = {
     "node/9111254607": "'Christian Science Reading Room', a religious body's reading room, assembly hall or institute tagged a place of worship, not a congregation (owner, 2026-10-13, ruling 2; pattern screen)",
     "way/295736024": "'Christadelphian Hall', a place of worship named only by its body and a hall type, in a spelling the shared rule's lists do not hold (owner, 2026-10-13, the denomination ruling; pattern screen)",
     "way/95835712": "'Christadelphian Hall', a place of worship named only by its body and a hall type, in a spelling the shared rule's lists do not hold (owner, 2026-10-13, the denomination ruling; pattern screen)",
+    # The helper screens of 2026-10-13 (duplicates, parts in a church's grounds): rows that
+    # fall squarely in an owner ruling, each with its ruling.
+    "way/197389763": "'Wightwick Manor Gardens', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): the gardens of Wightwick Manor as their own row, 68 m from the manor's row (way/47799897, alt name Wightwick Manor and Gardens) and under the same Wikidata entry (Q7999662); the manor's row carries the article, this one does not",
+    "node/352742007": "'St Joseph's Church', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): an unmapped point 11 m from the building row St Josephs (way/204067535), both Roman Catholic, the same church under two spellings (the first screen's same-name test missed the apostrophe); neither has an entry; keep the building",
 }
 
 # Famous places kept by id: in the cache, passed over by the rules (place_index,

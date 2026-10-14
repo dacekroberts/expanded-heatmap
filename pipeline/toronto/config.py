@@ -554,4 +554,7 @@ PLACE_DROPPED = {
     # The pattern screen of 2026-10-13, the owner's rulings on its open calls: rows that fall squarely in one of the owner's
     # class rulings of that date, each with its ruling.
     "way/174506099": "'Municipal Park', a park named only by a type word (owner, 2026-10-13, on the pattern screen's open calls)",
+    # The helper screens of 2026-10-13 (duplicates, parts in a church's grounds): rows that
+    # fall squarely in an owner ruling, each with its ruling.
+    "node/2359498552": "'St Nicholas Parish', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): a bare point 34 m from the building Saint Nicholas Ukrainian Catholic Church (way/160879577): the same parish under a short name",
 }

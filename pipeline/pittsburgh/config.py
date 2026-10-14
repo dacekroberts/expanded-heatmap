@@ -183,4 +183,8 @@ PLACE_DROPPED = {
     "way/734088469": "'Pittsburgh Presbytery', office: a presbytery's office tagged place_of_worship, not a congregation (flag check, 2026-10-13)",
     "node/357377205": "'United Methodist Foundation of Western Pennsylvania', office: a foundation's office on a place_of_worship node, not a congregation (flag check, 2026-10-13)",
     "node/357376630": "'Reformed Presbyterian Church of North America', a place of worship named only by a denomination, a body or a chain, in a form the shared rule's lists do not hold; no wikipedia tag of its own (owner's rulings, 2026-10-13)",
+    # The helper screens of 2026-10-13 (duplicates, parts in a church's grounds): rows that
+    # fall squarely in an owner ruling, each with its ruling.
+    "node/1666922240": "'Stephen Foster Memorial Museum', a second row under one Wikidata entry within 300 m; the other row stays (owner, 2026-10-13, the Three Soldiers ruling: one work, one entry; helper screen): the museum inside the Stephen Foster Memorial, 16 m from the memorial's own row (way/121051329) and under the same entry (Q7609218); the memorial has the article",
+    "node/357375662": "'Friendship Community Church', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): a bare point 37 m from the building FRIENDSHIP COMMUNITY PRESBYTERIAN CHURCH (way/374295293): the same congregation under the short form of its name",
 }

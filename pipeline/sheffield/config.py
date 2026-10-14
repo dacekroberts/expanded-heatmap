@@ -226,6 +226,11 @@ PLACE_DROPPED = {
     # class rulings of that date, each with its ruling.
     "node/10600883216": "'Christian Science Reading Room', a religious body's reading room, assembly hall or institute tagged a place of worship, not a congregation (owner, 2026-10-13, ruling 2; pattern screen)",
     "way/256979767": "'St Thomas Philadelphia Teaching Hall', a part of one church as its own row, the church's own row within 300 m (owner, 2026-10-13, ruling 4; pattern screen)",
+    # The helper screens of 2026-10-13 (duplicates, parts in a church's grounds): rows that
+    # fall squarely in an owner ruling, each with its ruling.
+    "way/107247728": "'St Thomas Philadelphia Conference Centre', a part of one church as its own row, the church's own row within 300 m (owner, 2026-10-13, ruling 4; helper screen): the conference centre of one church campus, 107 m from the chapel and inside the campus row Network Church Sheffield, Philadelphia Campus (way/256979764); tagged a place of worship, no entry",
+    "way/107247716": "'St Thomas Philadelphia Playtime Centre', a part of one church as its own row, the church's own row within 300 m (owner, 2026-10-13, ruling 4; helper screen): the playtime centre of the same church campus, 72 m from the chapel; tagged a place of worship, no entry",
+    "node/279049943": "'The Methodist Church in Firth Park', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): 62 m from Firth Park Methodist Church (way/135461294, Wikidata Q26539718): the same congregation as a bare point under a reworded name",
 }
 
 # Places of worship kept by the owner's word against the denomination rule

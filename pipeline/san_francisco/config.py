@@ -370,4 +370,9 @@ PLACE_DROPPED = {
     "node/358803230": "'Chapel of Grace', a part of one church as its own row, the church's own row within 300 m (owner, 2026-10-13, ruling 4; pattern screen)",
     "way/651657468": "'Waterfront Plaza', a stock plaza or square name with no place in it (owner, 2026-10-13, ruling 5 and its follow-up: every plaza name with no place in it; pattern screen)",
     "way/1428380754": "'Waterfront Plaza', a stock plaza or square name with no place in it (owner, 2026-10-13, ruling 5 and its follow-up: every plaza name with no place in it; pattern screen)",
+    # The helper screens of 2026-10-13 (duplicates, parts in a church's grounds): rows that
+    # fall squarely in an owner ruling, each with its ruling.
+    "way/24563073": "'Yerba Buena Center for the Arts Gallery', a second row under one Wikidata entry within 300 m; the other row stays (owner, 2026-10-13, the Three Soldiers ruling: one work, one entry; helper screen): the gallery building of the Yerba Buena Center for the Arts, 89 m from the centre's own row (way/24563077) and under the centre's entry (Q1884883); no article of its own",
+    "node/358804822": "'Saint Stephen Baptist Church', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): a bare point 0 m from the building St Stephen Baptist Church (way/274389975): the same name spelt out",
+    "node/11464727187": "'Voice of Christ Church', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): a bare point 34 m from the building The Voice of Christ Full Gospel Church (way/260286250): the same congregation under a short name",
 }

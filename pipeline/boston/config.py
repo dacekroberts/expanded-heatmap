@@ -326,4 +326,9 @@ PLACE_DROPPED = {
     # The pattern screen of 2026-10-13, twin round of the owner's rulings: rows that fall squarely in one of the owner's
     # class rulings of that date, each with its ruling.
     "way/1429125836": "'Childrens Park', a park named only by a type word; the second way of the name, beside way/817356487 (owner, 2026-10-13, on the pattern screen's open calls; twin round)",
+    # The helper screens of 2026-10-13 (duplicates, parts in a church's grounds): rows that
+    # fall squarely in an owner ruling, each with its ruling.
+    "node/358284251": "'First Church of Roxbury', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): an imported point 60 m from the building row First Church In Roxbury (way/29716282), under the same Wikidata entry (Q22025677); the building carries the article tag, this point does not",
+    "node/158856419": "'Fort Warren', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): an imported populated-place point tagged a hamlet, 124 m from the fort's own row Fort Warren (node/7616159719) and under the same Wikidata entry (Q2287837); the fort's row carries the article, this one does not, and there is no hamlet on Georges Island",
+    "node/6144131365": "'Tufts University School of Medicine', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): a point for the Tufts medical school 66 m from the school's own row Tufts School of Medicine (relation/17053853), same Wikidata entry (Q7851551); the relation carries the article tag, this point does not",
 }

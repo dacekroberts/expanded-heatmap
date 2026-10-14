@@ -302,6 +302,9 @@ PLACE_DROPPED = {
     # The pattern screen of 2026-10-13, the owner's rulings on its open calls: rows that fall squarely in one of the owner's
     # class rulings of that date, each with its ruling.
     "way/469601882": "'The Atrium', a stock name with no place in it (owner, 2026-10-13, on the pattern screen's open calls: ruling 5)",
+    # The helper screens of 2026-10-13 (duplicates, parts in a church's grounds): rows that
+    # fall squarely in an owner ruling, each with its ruling.
+    "node/5286252216": "'Battalion Park geoglyphs', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): the hillside numbers of Battalion Park as their own row, 175 m from the park's row (way/48562535), under the same Wikidata entry (Q4245109) and the same article (en:Battalion Park): the part beside the whole",
 }
 
 # Famous places kept by id: in the cache, passed over by the rules (place_index,

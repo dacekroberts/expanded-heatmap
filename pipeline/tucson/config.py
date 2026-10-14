@@ -217,4 +217,7 @@ PLACE_DROPPED = {
     # class rulings of that date, each with its ruling.
     "way/32929786": "'The Main Mall', a stock name with no place in it (owner, 2026-10-13, on the pattern screen's open calls: ruling 5)",
     "way/50619003": "'The Main Mall', a stock name with no place in it (owner, 2026-10-13, on the pattern screen's open calls: ruling 5)",
+    # The helper screens of 2026-10-13 (duplicates, parts in a church's grounds): rows that
+    # fall squarely in an owner ruling, each with its ruling.
+    "way/236018494": "'Holy Resurrection Orthodox Church', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): 11 m from Holy Resurrection Antiochian Orthodox Christian Church (way/236018495), the building with the church's own website; this second outline carries the short form of the same name and no other tag",
 }

@@ -472,6 +472,12 @@ PLACE_DROPPED = {
     "node/358960851": "'Christian Science Reading Room', a religious body's reading room, assembly hall or institute tagged a place of worship, not a congregation (owner, 2026-10-13, ruling 2; pattern screen)",
     # Owner, 2026-10-13: one work under two rows; the way stays.
     "node/358960331": "'Three Servicemen Statue', a duplicate of The Three Soldiers (way/895985388), which stays: one work, one Wikidata entry, 270 m apart (owner, 2026-10-13); it was kept by id before",
+    # The helper screens of 2026-10-13 (duplicates, parts in a church's grounds): rows that
+    # fall squarely in an owner ruling, each with its ruling.
+    "node/9525437755": "'Tomb of the Virgin Mary', a part of one church or monastery as its own row, the church's own row within 300 m (owner, 2026-10-13, ruling 4; helper screen): a shrine in the grounds of the Franciscan Monastery, 77 m from the monastery's own row (relation/2786525); no entry of its own",
+    "node/12178593825": "'Grotto Of Gethsemane', a part of one church or monastery as its own row, the church's own row within 300 m (owner, 2026-10-13, ruling 4; helper screen): a grotto in the grounds of the Franciscan Monastery, about 80 m from the monastery's own row (relation/2786525); no entry of its own",
+    "node/9525441203": "'Grotto of Lourdes', a part of one church or monastery as its own row, the church's own row within 300 m (owner, 2026-10-13, ruling 4; helper screen): a grotto in the grounds of the Franciscan Monastery, about 80 m from the monastery's own row (relation/2786525); no entry of its own",
+    "way/66418999": "'Ulysses S. Grant Statue', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): the statue of the Ulysses S. Grant Memorial as its own row, 0 m from the memorial's row (relation/10015500) and under the same Wikidata entry (Q1571266) and article",
 }
 
 # Public art kept by the owner's word against the article rule (place_index,

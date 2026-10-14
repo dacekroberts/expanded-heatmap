@@ -779,4 +779,9 @@ PLACE_DROPPED = {
     "node/597058966": "'La Jolla California Institute of Religion', a religious body's reading room, assembly hall or institute tagged a place of worship, not a congregation (owner, 2026-10-13, ruling 2; pattern screen)",
     "node/358845506": "'San Diego California Institute of Religion', a religious body's reading room, assembly hall or institute tagged a place of worship, not a congregation (owner, 2026-10-13, ruling 2; pattern screen)",
     "node/13431026872": "'Adams Hall - College Avenue Baptist Church', a part of one church as its own row, the church's own row within 300 m (owner, 2026-10-13, ruling 4; pattern screen)",
+    # The helper screens of 2026-10-13 (duplicates, parts in a church's grounds): rows that
+    # fall squarely in an owner ruling, each with its ruling.
+    "node/358845480": "'Saint Johns Catholic Church Parish Hall', a part of one church as its own row, the church's own row within 300 m (owner, 2026-10-13, ruling 4; helper screen): a parish hall tagged a place of worship; its church Saint John the Evangelist Catholic Church has a row of its own 200 m away (way/1220548890), which the first screen's note did not find (it kept the hall for want of one)",
+    "node/358860851": "'Iglesia Presbiteriana', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): 14 m from Iglesia Presbiteriana Hispana (node/358845978): the same congregation, and this copy's name is a denomination alone",
+    "node/358846679": "'Mounta Olive Church of God in Christ', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): 85 m from Mount Olive Church of God in Christ (node/358860279): the same church under a misspelt name",
 }

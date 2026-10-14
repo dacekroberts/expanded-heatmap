@@ -764,6 +764,14 @@ PLACE_DROPPED = {
     "node/369038512": "'Little Neck Bay', one bay or channel labelled more than once; the row with the Wikidata entry or article stays (owner, 2026-10-13, ruling 9; pattern screen)",
     "way/999755798": "'Little Neck Bay', one bay or channel labelled more than once; the row with the Wikidata entry or article stays (owner, 2026-10-13, ruling 9; pattern screen)",
     "node/6030126915": "'Joseph Sanford Jr. Channel', one bay or channel labelled more than once; the row with the Wikidata entry or article stays (owner, 2026-10-13, ruling 9; pattern screen)",
+    # The helper screens of 2026-10-13 (duplicates, parts in a church's grounds): rows that
+    # fall squarely in an owner ruling, each with its ruling.
+    "node/4491242890": "'The Met Cloisters', a second row under one Wikidata entry within 300 m; the other row stays (owner, 2026-10-13, the Three Soldiers ruling: one work, one entry; helper screen): a museum point 13 m from The Cloisters' own row (relation/6424088), under the same entry (Q1138030) and article: one museum twice",
+    "node/4314829890": "'Liz Christy Garden', a second row under one Wikidata entry within 300 m; the other row stays (owner, 2026-10-13, the Three Soldiers ruling: one work, one entry; helper screen): an attraction point 33 m from the garden's own outline Liz Christy Community Garden (way/313996193), under the same entry (Q6660076): one garden twice",
+    "way/1305351668": "'Fairmount Playground Court', a second row under one Wikidata entry within 300 m; the other row stays (owner, 2026-10-13, the Three Soldiers ruling: one work, one entry; helper screen): a court of Fairmount Playground tagged a park, 53 m from the playground's row (way/1073423130) and carrying the playground's entry (Q34829396): a part as its own row",
+    "way/275979612": "'Saint Athanasius Catholic Church Repository', a part of one church as its own row, the church's own row within 300 m (owner, 2026-10-13, ruling 4; helper screen): a repository building tagged a place of worship, 13 m from its church's own row Saint Athanasius Roman Catholic Church (way/275979561)",
+    "node/357620992": "'City Tabernacle', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): a bare point 33 m from City Tabernacle of Seventh-day Adventists (node/13746714387): the same church under a short name",
+    "node/12590441901": "'St. John - St. Matthew-Emanuel Lutheran Church', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): a point 0 m from the building Saint John-Saint Matthew-Emanuel Lutheran Church (way/249631558): the same name abbreviated",
 }
 
 # Public art kept by the owner's word against the article rule (place_index,

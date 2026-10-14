@@ -241,4 +241,7 @@ PLACE_DROPPED = {
     "node/5764089857": "'Veterans Monument', description: bare memorial type: 'Veterans Monument'; a BARE_TYPE_NAMES word (flag check, 2026-10-13)",
     "way/338427485": "'Veterans Monument', description: bare memorial type: 'Veterans Monument'; a BARE_TYPE_NAMES word (flag check, 2026-10-13)",
     "node/7404076692": "'unseencandle', business: a trade name tagged a place of worship: amenity=place_of_worship; religion=pagan; one lower-case word (flag check, 2026-10-13)",
+    # The helper screens of 2026-10-13 (duplicates, parts in a church's grounds): rows that
+    # fall squarely in an owner ruling, each with its ruling.
+    "node/13465371242": "'Mary Grotto', a part of one church or monastery as its own row, the church's own row within 300 m (owner, 2026-10-13, ruling 4; helper screen): a Lourdes grotto (place_of_worship=lourdes_grotto) on the Rockhurst University campus, 173 m from the university's row (relation/20113421) and 224 m from the campus parish, Saint Francis-Xavier Church (way/356613075); no entry of its own and no place in the name",
 }
