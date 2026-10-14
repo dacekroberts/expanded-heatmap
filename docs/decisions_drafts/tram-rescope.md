@@ -2,6 +2,41 @@
 
 Newest first. Cleanup folds these into `DECISIONS.md` at review time.
 
+### 2026-10-13 - Tram rescope: Milan's map rendered once as the rollout's trial render, and its search tested in a browser (Cleanup agent, nothing pushed)
+
+- **Owner (relayed by Cleanup, 2026-10-13):** renders on branches are
+  approved, landing is not; Milan is the trial. `search-words-it` (acf21e2e,
+  six more Italian street words in the search script) was merged first
+  (2acffea2). Prague and Mexico City are NOT rendered: `map_common.py` may
+  change once more.
+- **The render.** `pipeline/milan/step3_map.py` through the gate: 8 s wall
+  with the gate's own start, peak 0.20 GB, 6.4 MB of HTML, 45,999 points,
+  193 stations. `check_place_search.py` names Milan OK.
+- **`scripts/check_map_search.js milan`:** 193 of 193 drawn stations and 22
+  of 22 lines found by the map's own search.
+- **Dotted abbreviations fail one way.** 49 of the map's station names hold
+  "V.le", "P.le", "P.za", "L.go", "C.so" or "P.ta". Typed as written, or
+  without the dot ("Vle Tunisia"), the map's station is first. Typed with
+  the word in full ("Viale Tunisia"), the map's own station is returned for
+  4 of 49; for 39 more an OpenStreetMap station row of the full name stands
+  in; **6 find no station at all** (P.TA GENOVA F.S., P.ta Lodovica, P.za 5
+  Giornate, P.za Ventiquattro Maggio, V.le Certosa Via Giorgini, V.le
+  Certosa Via Tibullo). Cause: `words()` splits "V.le" into "v" and "le",
+  and `ABBR` is read from the typed word to the name, never from the name
+  to the typed word. The fix is reported to the owner of `map_common.py`,
+  not made here.
+- **The six new street words work.** Typed in full, a street under each of
+  galleria, piazzetta, passaggio, cavalcavia, alzaia and bastioni is the
+  first result; without the lead word, "Giovanni Malagodi", "Naviglio
+  Pavese", "Naviglio Grande", "Porta Volta" and "Porta Nuova" each return
+  their passaggio, alzaia or bastioni street.
+- **Not tested:** the box itself on a phone, an intersection search (the
+  intersections file is not loaded by the harness; "Corso Buenos Aires e Via
+  Vitruvio" returned nothing and that is not a finding), the outline.
+- The queries went through the page's real `search()` from a scratch copy
+  of the check with a fixed query list; the repository's script is
+  unchanged.
+
 ### 2026-10-13 - Tram rescope: the final shared rules merged in; Mexico City, Prague and Milan rebuilt (Cleanup agent, nothing pushed)
 
 - **Merge.** search-integration 73f025df into `tram-rescope` (2c72a02d), no
