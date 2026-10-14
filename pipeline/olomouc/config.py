@@ -129,4 +129,24 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("cs",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/olomouc.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A second row of one object (owner, 2026-10-13)
+    "node/1854742729": "'Husův sbor': a second row for one tram stop: two stop positions of one name 155 m apart (the other is node/1854742728); every other stop in the city has one row",
+    "node/2380522561": "'Fort č. II - Radíkov': a monument node for Fort II Radíkov, 25 m from the fort's own row (way/751659540, with the article); the name differs only by \"č.\"",
+    # A bare type word (owner, 2026-10-13)
+    "node/899845197": "'Kaplička': \"little chapel\" alone; no wikidata",
+    "way/336715169": "'křesťanská kaple': \"Christian chapel\" alone, on building=civic with historic=monument; no wikidata",
+    "node/13608171150": "'poustevna': \"hermitage\" alone; the description calls it a place for prayer by an underground pool",
+    "way/1380614775": "'Okrasná zahrada': \"ornamental garden\" alone on leisure=park",
+    # Worship named only by its body or chain (owner, 2026-10-13)
+    "node/13566448864": "'Církev Ježíše Krista Svatých posledních dnů': named only by the body (the Latter-day Saints' church); wikidata and wikipedia are the body's, the congregation is in the description",
+    # Worship named only by a denomination (owner, 2026-10-13)
+    "way/53028659": "'Kostel Českobratrské církve Evangelické': \"church of the Evangelical Church of Czech Brethren\": the denomination alone",
+    # An apartment complex under a marketing name (owner, 2026-10-13)
+    "node/12802699361": "'Vilapark Tabulový vrch': a housing development under its marketing name (Vilapark) mapped as a locality; the real quarter Tabulový Vrch has its own row",
+    # The administrative district around the city (the Prague precedent) (owner, 2026-10-13)
+    "relation/441579": "'okres Olomouc': the district (okres) around the city, place=district: larger than the city, no neighborhood (the Prague precedent, dropped by id)",
+}

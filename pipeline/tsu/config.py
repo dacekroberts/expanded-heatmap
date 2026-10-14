@@ -272,4 +272,15 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/tsu.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A bare type word (owner, 2026-10-13)
+    "node/4413463932": "'あそび広場': \"play area\" (あそび広場) alone on leisure=park",
+    "way/973323596": "'グランドゴルフ場': \"ground golf course\" alone on leisure=park",
+    # A description standing in for a name (owner, 2026-10-13)
+    "way/965389247": "'千里ヶ丘地区災害緊急避難場所': \"Senrigaoka district emergency evacuation site\": a designation tagged a park, not a park's name",
+    # Unsure rows a ruling drops: a religious body's meeting hall or branch tagged a place of worship (ruling 2) (owner, 2026-10-13)
+    "way/547386165": "'創価学会三重文化会館': a religious body's meeting hall or branch tagged a place of worship",
+}

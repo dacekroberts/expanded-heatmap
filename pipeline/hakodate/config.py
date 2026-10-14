@@ -238,4 +238,23 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/hakodate.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A bare type word (owner, 2026-10-13)
+    "way/261182899": "'寺院・礼拝所': \"temple / place of worship\" alone: a legend label as the name",
+    # Unsure rows a ruling drops: a hall named only for what it enshrines, or a deity's title alone (ruling 3) (owner, 2026-10-13)
+    "node/13762891101": "'観世音菩薩': a hall named only for what it enshrines, or a deity's title alone",
+    # A religious office (owner, 2026-10-13)
+    "node/2700712810": "'函館 YWCA': a YWCA branch tagged a place of worship: an association's premises, not a church",
+    # Unsure rows a ruling drops: a branch temple's neighbourhood preaching halls named body, district and branch office (ruling 20) (owner, 2026-10-13)
+    "node/4743785772": "'本願寺派本願寺函館別院台町出張所': a branch temple's neighbourhood preaching halls named body, district and branch office",
+    # A number or code beside a type word (owner, 2026-10-13)
+    "node/12114609998": "'3合目': \"3rd stage\": a trail stage marker on Mt Hakodate tagged a locality",
+    "node/12139557108": "'5合目': \"5th stage\", as above",
+    "node/12114610602": "'6合目': \"6th stage\", as above",
+    "node/12114610603": "'7合目': \"7th stage\", as above",
+    # A glitched name (owner, 2026-10-13)
+    "node/3086048901": "'赤レンガ倉': a truncated name (the last character of 赤レンガ倉庫 is missing) on a locality node; the object is the Kanemori warehouse shopping complex",
+}

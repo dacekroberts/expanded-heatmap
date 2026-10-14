@@ -226,4 +226,28 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/tama.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A bare type word (owner, 2026-10-13)
+    "way/581044944": "'rose garden': \"rose garden\" alone, lower case, on leisure=park",
+    "node/3820070721": "'枝垂桜': \"weeping cherry\" alone: a tree mapped as a park node",
+    "way/1563005980": "'サービスヤード': \"service yard\" alone on place=square, inside 多摩中央公園",
+    # A description standing in for a name (owner, 2026-10-13)
+    "node/3820070720": "'枝垂桜用盛土': \"embankment for the weeping cherry\": a mapper's note as the name",
+    "way/1191834877": "'永山団地2の3の1の広場': an address as the name (\"the open space at Nagayama estate 2-3-1\"): a housing block's yard tagged a park",
+    # Unsure rows a ruling drops: a religious body's meeting hall or branch tagged a place of worship (ruling 2) (owner, 2026-10-13)
+    "node/2952506874": "'創価学会桜ケ丘文化会館': a religious body's meeting hall or branch tagged a place of worship",
+    # An apartment complex under a marketing name (owner, 2026-10-13)
+    "node/14117947779": "'ヒルサイドテラス豊ヶ丘1': one apartment complex under its marketing name, mapped as a neighbourhood",
+    # A second row of one object (owner, 2026-10-13)
+    "node/14131147581": "'永山２': a shortened block label (\"Nagayama 2\", no 丁目, no reading) 210 m from the district's own row 永山二丁目 (node/8726986617)",
+    "node/14131147582": "'永山２': a second \"Nagayama 2\" label, 320 m from 永山二丁目's own row",
+    "node/14130279676": "'永山５': \"Nagayama 5\" label, 200 m from 永山五丁目's own row (node/8726986623)",
+    "node/14117947778": "'豊ヶ丘１': \"Toyogaoka 1\" label, 220 m from 豊ケ丘一丁目's own row (node/8726986657)",
+    "node/14130250771": "'貝取２': \"Kaidori 2\" label, 170 m from 貝取二丁目's own row (node/8726986627)",
+    "node/14130201174": "'貝取４': \"Kaidori 4\" label, 210 m from 貝取四丁目's own row (node/8726986626)",
+    "node/14133181208": "'鶴巻五丁目': 鶴牧五丁目 written with the wrong character (巻), 230 m from the district's own row (node/8726976712)",
+    "node/14156511467": "'唐木田三丁目': a second 唐木田三丁目 node with no readings, 430 m from the district's own row (node/8726986645): outside the 300 m merge",
+}

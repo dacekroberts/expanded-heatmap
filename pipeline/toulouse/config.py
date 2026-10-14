@@ -412,4 +412,34 @@ PLACE_REVIEWED = {
     "Hôtel du Vieux-Raisin": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00094554, tourism=attraction, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
     "Rue de la Brasserie": "a public street named for a building or institution on it, not a business (residential class; batch 2b precedent, _named_street); tags read 2026-10-13",
 }
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/toulouse.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A second row of one object (owner, 2026-10-13)
+    "way/74253808": "'Métro Basso Cambo': the station building of Basso Cambo under a \"Métro\" prefix, 10 m from the station's own row (node/7681108802, with wikidata): two station rows, one station",
+    # An exhibit under its kind's article (owner, 2026-10-13)
+    "node/11637614767": "'Astrovan': an exhibit of the Cité de l'espace (tourism=attraction node inside the park) under the article of the vehicle it copies, not one of its own",
+    "node/8021491567": "'Chang'e 4': an exhibit of the Cité de l'espace under the article of the lunar mission, not one of its own",
+    # Public art under another object's article (owner, 2026-10-13)
+    "node/4010926188": "'Los Pès del parpalhòl': public art whose wikipedia tag is the artist's article (en:Jessica_Stockholder), not the work's; the wikidata entry alone admits none",
+    # A bare type word (owner, 2026-10-13)
+    "way/74708847": "'Pigeonnier': \"dovecote\" alone (the other one is named: Pigeonnier du Mirail); no wikidata",
+    "node/4352513993": "'Mosquée': \"mosque\" alone, no wikidata",
+    # A description standing in for a name (owner, 2026-10-13)
+    "node/786851741": "'Vestige de rempart': \"remnant of rampart\": a node carrying the article of the Gallo-Roman rampart, which has its own row (way/813973353) 240 m off",
+    "way/1302826712": "'Patio des laboratoires': \"the laboratories' patio\", a courtyard of a campus tagged a square",
+    "node/10125482128": "'Patio du café': \"the café's patio\", tagged a park",
+    "node/11771666480": "'les bancs sous l'arbre': \"the benches under the tree\", tagged a park",
+    "way/496429626": "'FATO': an aviation term (final approach and take-off area) on a locality inside the airport; description=Zone FATO Blagnac Airport",
+    # Worship named only by a denomination (owner, 2026-10-13)
+    "way/64850994": "'Église réformée évangélique': named only by the denomination (reformed evangelical church)",
+    "way/1433727903": "'église néo-apostolique': named only by the denomination (New Apostolic church)",
+    "way/64556070": "'Église Adventiste du Septiéme Jour': named only by the denomination (Seventh-day Adventist church)",
+    # Worship named only by its body or chain (owner, 2026-10-13)
+    "way/76333052": "'Eglise de Jesus-Christ des saints des derniers jours': named only by the body (the Latter-day Saints' church); the wikipedia tag is the body's article",
+    # A business (owner, 2026-10-13)
+    "node/10583845305": "'Wam Park - Toulouse - Sesquières': a wakeboard park under its brand and branch name, tagged leisure=park",
+    # Unsure rows a ruling drops: a facility of an estate, named inside the estate or run by its owners' body (the estate ruling) (owner, 2026-10-13)
+    "way/1472717153": "'Parc d'Ancely': a facility of an estate, named inside the estate or run by its owners' body",
+}
