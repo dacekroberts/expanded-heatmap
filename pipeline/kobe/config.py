@@ -333,4 +333,10 @@ PLACE_DROPPED = {
     # A part of a shrine with no row of its own, its worship hall kept (ruling 4; owner, 2026-10-13)
     "way/1380474588": "'六條八幡宮 本殿': unsure in the full read, dropped by the owner's ruling 4",
     "way/1380475293": "'六條八幡宮 薬師堂': unsure in the full read, dropped by the owner's ruling 4",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/897798963": "'霊法会': the twin of way/897798962; Worship named only by a body or a denomination (owner, 2026-10-13)",
+    # Twin round 2 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/897798964": "'霊法会': the twin of way/897798962; Worship named only by a body or a denomination (owner, 2026-10-13)",
 }

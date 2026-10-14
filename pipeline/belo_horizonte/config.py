@@ -203,4 +203,39 @@ PLACE_DROPPED = {
     "node/6664882431": "'testemunha de Jeová': \"Jehovah's witness\" in lower case, the body only",
     "node/1268819627": "'Seicho-no-ie': the body's name only (Seicho-no-ie); no religion tag",
     "way/1417654332": "'BATISTA DA LAGOINHA': the chain's name only, in capitals; 430 m from the mother church of that name (way/314210141, with wikidata)",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1519720027": "'Banquinho': the twin of way/1513891125; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017141439": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017141445": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017141451": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017141457": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017157486": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017157500": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017157516": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7096323831": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "way/758712794": "'Base Torre do Teleférico Itaú': the twin of node/7086210434; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017157522": "'Torre do Teleférico Itaú': the twin of node/7017141432; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017157553": "'Torre do Teleférico Itaú': the twin of node/7017141432; A description standing in for a name (owner, 2026-10-13)",
+    # Twin round 2 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1519720028": "'Banquinho': the twin of way/1513891125; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017141440": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017141441": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017141446": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017141459": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017141483": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017157496": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017157498": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017157501": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017157504": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017157505": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    # Twin round 3 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/7017141442": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017141460": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017141484": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017157499": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017157502": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017157512": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
 }

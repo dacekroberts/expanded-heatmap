@@ -430,6 +430,10 @@ PLACE_DROPPED = {
     "node/5780366418": "'横浜港': unsure in the full read, dropped by the owner's ruling 9",
     "node/5780366419": "'横浜港': unsure in the full read, dropped by the owner's ruling 9",
     "node/5780366420": "'横浜港': unsure in the full read, dropped by the owner's ruling 9",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/401934613": "'健康はらっぱ': the twin of way/401934612; A stock plaza name with no place in it (ruling 5; owner, 2026-10-13)",
+    "way/467970072": "'横穴墓': the twin of node/4030970255; A bare type word (owner, 2026-10-13)",
 }
 # Kept by the owner's word, by id (place_index, PLACE_KEPT; owner, 2026-10-13):
 # famous places in the cache that the rules pass over for want of a tag.

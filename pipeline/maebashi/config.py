@@ -337,4 +337,7 @@ PLACE_DROPPED = {
     "way/122486316": "'利根川自転車道の植え込み'",
     # Unsure in the read, dropped by ruling 3, a hall named only for what it enshrines or a deity's title alone (owner, 2026-10-13)
     "way/626010637": "'観音堂'",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/497734959": "'古墳': the twin of way/497734958; A bare type word standing alone (reader's drop; owner, 2026-10-13)",
 }

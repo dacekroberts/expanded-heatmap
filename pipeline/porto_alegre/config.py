@@ -158,4 +158,13 @@ PLACE_DROPPED = {
     "way/197054205": "'Rossi Estilo': a condominium's marketing name (Rossi Estilo) tagged a park (full read, estate facility)",
     # unsure in the full read, dropped by ruling 1: a park named only by a category and an inventory or lot number (owner, 2026-10-13)
     "way/243369444": "'Praça 2': Praça 2, the type and a number alone (my reading; about 60 lot-numbered squares the reader kept are not listed) (unsure in the full read; ruling 1)",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/61109539": "'Aves': the twin of way/61109537; zoo content: dropped in the full read (owner, 2026-10-13)",
+    "way/557349048": "'Igreja Nova Apostólica': the twin of node/5328138286; worship only: dropped in the full read (owner, 2026-10-13)",
+    "way/62009408": "'Macacos': the twin of way/61975486; zoo content: dropped in the full read (owner, 2026-10-13)",
+    "node/11191618808": "'Torii': the twin of node/2442008467; bare type: dropped in the full read (owner, 2026-10-13)",
 }
+# Why this index reaches more than 25 km past the map's stations
+# (scripts/check_place_scope.py, rule D): a far corner of the municipality itself.
+PLACE_SCOPE_REACH_REASON = "2026-10-13: Porto Alegre's far south (Praia do Lami) is inside the municipality, one of the six searched (owner)"

@@ -317,7 +317,6 @@ PLACE_FOLD = "ja"
 # places, each with why; scripts/check_place_search.py fails on any other.
 # Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
 PLACE_REVIEWED = {
-    "常磐畜産株式会社": "tags do not decide; kept (a historic=ruins node whose whole name is a company's, no article)",
 }
 # Dropped by id on the owner's rulings of 2026-10-13 on the full read of this
 # index (rule passes 5 and 6), each id read with its cached name and its index

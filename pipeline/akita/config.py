@@ -338,4 +338,9 @@ PLACE_DROPPED = {
     "way/808982679": "'キリスト集会所': 'Christ meeting hall': a generic name of a body's hall, no place name",
     # A religious office, hall, school or residence (owner, 2026-10-13)
     "way/764872642": "'天理教 秋田教務支庁': Tenrikyo's Akita diocesan administration office, not a church",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/744097062": "'プロムナード': the twin of way/736812864; A bare type word (owner, 2026-10-13)",
+    "way/744097064": "'プロムナード': the twin of way/736812864; A bare type word (owner, 2026-10-13)",
+    "way/627367953": "'街区公園': the twin of way/627367947; A bare type word (owner, 2026-10-13)",
 }

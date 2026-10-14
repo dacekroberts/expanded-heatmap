@@ -168,4 +168,57 @@ PLACE_DROPPED = {
     "node/12854046551": "'ILE ASE ODE OLUAMI': the same terreiro as node/12854094508 \"Ilê Axé Ode Oluami Osoosi\", about 70 m away",
     "node/12854046181": "'ILE AXE ORUM MOGI': the same terreiro as node/12854066351 \"Ilê Axé Orun-Mogi\", about 70 m away",
     "node/12854015095": "'Terreiro de Cosme e Damião da Bela União': the same terreiro as node/12854016018 \"Casa de Cosme e Damião da Bela União de Família\", about 45 m away",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1372007967": "'Edf. Conselheiro Joaquim Batista Neves | Poder Legislativo': the twin of way/1372007966; A glitched name (owner, 2026-10-13)",
+    "way/545024012": "'Igreja Casa da Benção': the twin of node/5268057426; Worship named only by its body or chain (owner, 2026-10-13)",
+    "way/1375080352": "'Tribunal De Justiça Do Estado Da Bahia | Sede Oficial | TJBA | Poder Judiciário': the twin of way/1375080351; A glitched name (owner, 2026-10-13)",
+    # Twin round 2 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1372007970": "'Edf. Conselheiro Joaquim Batista Neves | Poder Legislativo': the twin of way/1372007966; A glitched name (owner, 2026-10-13)",
+    "way/1375093587": "'Tribunal De Justiça Do Estado Da Bahia | Sede Oficial | TJBA | Poder Judiciário': the twin of way/1375080351; A glitched name (owner, 2026-10-13)",
+    # Twin round 3 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1372007971": "'Edf. Conselheiro Joaquim Batista Neves | Poder Legislativo': the twin of way/1372007966; A glitched name (owner, 2026-10-13)",
+    "way/1375093588": "'Tribunal De Justiça Do Estado Da Bahia | Sede Oficial | TJBA | Poder Judiciário': the twin of way/1375080351; A glitched name (owner, 2026-10-13)",
+    # Twin round 4 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1372007972": "'Edf. Conselheiro Joaquim Batista Neves | Poder Legislativo': the twin of way/1372007966; A glitched name (owner, 2026-10-13)",
+    "way/1375093589": "'Tribunal De Justiça Do Estado Da Bahia | Sede Oficial | TJBA | Poder Judiciário': the twin of way/1375080351; A glitched name (owner, 2026-10-13)",
+    # Twin round 5 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1372007973": "'Edf. Conselheiro Joaquim Batista Neves | Poder Legislativo': the twin of way/1372007966; A glitched name (owner, 2026-10-13)",
+    "way/1375093685": "'Tribunal De Justiça Do Estado Da Bahia | Sede Oficial | TJBA | Poder Judiciário': the twin of way/1375080351; A glitched name (owner, 2026-10-13)",
+    # Twin round 6 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1372007974": "'Edf. Conselheiro Joaquim Batista Neves | Poder Legislativo': the twin of way/1372007966; A glitched name (owner, 2026-10-13)",
+    "way/1375093686": "'Tribunal De Justiça Do Estado Da Bahia | Sede Oficial | TJBA | Poder Judiciário': the twin of way/1375080351; A glitched name (owner, 2026-10-13)",
+    # Twin round 7 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1372007975": "'Edf. Conselheiro Joaquim Batista Neves | Poder Legislativo': the twin of way/1372007966; A glitched name (owner, 2026-10-13)",
+    "way/1375093687": "'Tribunal De Justiça Do Estado Da Bahia | Sede Oficial | TJBA | Poder Judiciário': the twin of way/1375080351; A glitched name (owner, 2026-10-13)",
+    # Twin round 8 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1372007977": "'Edf. Conselheiro Joaquim Batista Neves | Poder Legislativo': the twin of way/1372007966; A glitched name (owner, 2026-10-13)",
+    "way/1375443919": "'Tribunal De Justiça Do Estado Da Bahia | Sede Oficial | TJBA | Poder Judiciário': the twin of way/1375080351; A glitched name (owner, 2026-10-13)",
+    # Twin round 9 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1372007978": "'Edf. Conselheiro Joaquim Batista Neves | Poder Legislativo': the twin of way/1372007966; A glitched name (owner, 2026-10-13)",
+    "way/1375443926": "'Tribunal De Justiça Do Estado Da Bahia | Sede Oficial | TJBA | Poder Judiciário': the twin of way/1375080351; A glitched name (owner, 2026-10-13)",
+    # Twin round 10 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1372016637": "'Edf. Conselheiro Joaquim Batista Neves | Poder Legislativo': the twin of way/1372007966; A glitched name (owner, 2026-10-13)",
+    "way/1375443927": "'Tribunal De Justiça Do Estado Da Bahia | Sede Oficial | TJBA | Poder Judiciário': the twin of way/1375080351; A glitched name (owner, 2026-10-13)",
+    # Twin round 11 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1375443928": "'Tribunal De Justiça Do Estado Da Bahia | Sede Oficial | TJBA | Poder Judiciário': the twin of way/1375080351; A glitched name (owner, 2026-10-13)",
+    # Twin round 12 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1375879044": "'Tribunal De Justiça Do Estado Da Bahia | Sede Oficial | TJBA | Poder Judiciário': the twin of way/1375080351; A glitched name (owner, 2026-10-13)",
+    # Twin round 13 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1375879046": "'Tribunal De Justiça Do Estado Da Bahia | Sede Oficial | TJBA | Poder Judiciário': the twin of way/1375080351; A glitched name (owner, 2026-10-13)",
 }
+# Why this index reaches more than 25 km past the map's stations
+# (scripts/check_place_scope.py, rule D): a far corner of the municipality itself.
+PLACE_SCOPE_REACH_REASON = "2026-10-13: the bay islands of the municipality (Ilha de Bom Jesus dos Passos) are inside its boundary (owner)"

@@ -256,4 +256,13 @@ PLACE_DROPPED = {
     "way/577602831": "'Président Marchal'",
     # A second row for one object (the surviving row named in each note) (reader's drop; owner, 2026-10-13)
     "node/1204341725": "'Château de la Tour': the castle itself has a landmark row 22 m away (Château de La Tour, node/1571474013); the locality is the same building",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/4224721827": "'Blason de la Ville de Nantes': the twin of node/1668802937; A description standing in for a name (reader's drop; owner, 2026-10-13)",
+    "node/4188327278": "'Blason de la ville de Nantes': the twin of node/3524434451; A description standing in for a name (reader's drop; owner, 2026-10-13)",
+    "node/4547027386": "'Niveau maximal de la crue de 1872': the twin of node/3424769959; A description standing in for a name (reader's drop; owner, 2026-10-13)",
+    "node/4547027387": "'Niveau maximal de la crue de 1910': the twin of node/5445380637; A description standing in for a name (reader's drop; owner, 2026-10-13)",
+    # Twin round 2 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/5445380638": "'Niveau maximal de la crue de 1910': the twin of node/5445380637; A description standing in for a name (reader's drop; owner, 2026-10-13)",
 }

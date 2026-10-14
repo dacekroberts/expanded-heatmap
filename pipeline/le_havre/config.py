@@ -229,4 +229,7 @@ PLACE_DROPPED = {
     # worship body: dropped in the full read (owner, 2026-10-13)
     "node/2598440240": "'Petites Sœurs des pauvres': named only by the religious order (Little Sisters of the Poor); the order's house, no name of its own, no wikidata (full read, worship body)",
     "node/11310310407": "'Association cultuelle israélite du Havre': named for the association that runs it (the Jewish worship association of Le Havre), a body's name, no religion building tag (full read, worship body)",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/265259452": "'R668': the twin of way/265259447; description: dropped in the full read (owner, 2026-10-13)",
 }

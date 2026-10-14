@@ -258,4 +258,7 @@ PLACE_DROPPED = {
     "way/442956408": "'Lébade de Blanquefort': a segment of the old road that the relation of the same name already lists (full read, duplicate)",
     "way/442965882": "'Lébade de Blanquefort': a segment of the old road that the relation of the same name already lists (full read, duplicate)",
     "way/770649587": "'Lébade de Blanquefort': a segment of the old road that the relation of the same name already lists (full read, duplicate)",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/922451454": "'Green Village - parc habité': the twin of way/922451453; estate facility: dropped in the full read (owner, 2026-10-13)",
 }

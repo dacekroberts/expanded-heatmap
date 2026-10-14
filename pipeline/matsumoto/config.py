@@ -212,3 +212,6 @@ PLACE_DROPPED = {
     "way/691453526": "'いこいの広場': a stock plaza or rest-area name with no place in it",
     "way/553893486": "'憩いの広場': a stock plaza or rest-area name with no place in it",
 }
+# Why this index reaches more than 25 km past the map's stations
+# (scripts/check_place_scope.py, rule D): a far corner of the municipality itself.
+PLACE_SCOPE_REACH_REASON = "2026-10-13: Mount Norikura, in the city's west, is inside its boundary (owner)"

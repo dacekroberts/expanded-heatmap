@@ -366,7 +366,6 @@ PLACE_FOLD = "ja"
 # places, each with why; scripts/check_place_search.py fails on any other.
 # Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
 PLACE_REVIEWED = {
-    "ホテル　ラ・レインボー(廃墟)": "a hotel's ruins (historic=ruins; the name itself says ruin), not a business (the Kyoto and Seattle precedents); tags read 2026-10-13",
 }
 # Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
 # reader's verdict file data/_search_rollout/reads_rules56/kurashiki.tsv), each
@@ -411,4 +410,7 @@ PLACE_DROPPED = {
     "node/10923509147": "'下津井電鉄福田駅跡': station sites of a closed railway",
     "node/10923517317": "'下津井電鉄稗田駅跡': station sites of a closed railway",
     "way/1175516454": "'下津井電鉄藤戸駅ホーム跡': station sites of a closed railway",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/658258709": "'１２－１号緑地': the twin of way/658258697; Unsure rows a ruling drops: a park named only by a category and a lot or inventory number (ruling 1) (owner, 2026-10-13)",
 }

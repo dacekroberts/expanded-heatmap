@@ -351,4 +351,7 @@ PLACE_DROPPED = {
     "way/573868596": "'健康増進広場': 健康増進広場, a zone label with no place in it (my reading of \"and the like\") (unsure in the full read; ruling 5)",
     # unsure in the full read, dropped by ruling 2: a religious body's meeting hall or branch tagged a place of worship (owner, 2026-10-13)
     "way/744899368": "'世界心道教 大阪支庁': a body's Osaka branch office (支庁) tagged a place of worship (unsure in the full read; ruling 2)",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/11107023384": "'常夜燈': the twin of node/11107023383; bare type: dropped in the full read (owner, 2026-10-13)",
 }

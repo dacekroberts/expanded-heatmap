@@ -337,4 +337,26 @@ PLACE_DROPPED = {
     "node/6380332926": "'Twenty-Six Martyrs Museum': the English-only twin of 日本二十六聖人記念館 (node/1423804998, 45 m), which stays as the row with the Japanese name",
     # the sea-crossing street row (owner, 2026-10-13)
     "way/673930211": "'国道499号（海上区間）': the sea section of National Route 499, drawn highway=planned: no road to find",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/804926286": "'シックナー': the twin of way/804926285; bare type: dropped in the full read (owner, 2026-10-13)",
+    "way/832757139": "'長崎北徳洲会病院　跡地': the twin of way/832757135; vanished: dropped in the full read (owner, 2026-10-13)",
+    # Twin round 2 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/804926287": "'シックナー': the twin of way/804926285; bare type: dropped in the full read (owner, 2026-10-13)",
+    # Twin round 3 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1540935329": "'シックナー': the twin of way/804926285; bare type: dropped in the full read (owner, 2026-10-13)",
+    # Twin round 4 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1540935330": "'シックナー': the twin of way/804926285; bare type: dropped in the full read (owner, 2026-10-13)",
+    # Twin round 5 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1540935331": "'シックナー': the twin of way/804926285; bare type: dropped in the full read (owner, 2026-10-13)",
+    # Twin round 6 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1540935332": "'シックナー': the twin of way/804926285; bare type: dropped in the full read (owner, 2026-10-13)",
 }
+# Why this index reaches more than 25 km past the map's stations
+# (scripts/check_place_scope.py, rule D): a far corner of the municipality itself.
+PLACE_SCOPE_REACH_REASON = "2026-10-13: Ikeshima island (池島) is part of the city (owner)"

@@ -311,3 +311,10 @@ PLACE_DROPPED = {
     # A deity's title alone (ruling 3; owner, 2026-10-13)
     "node/6736613331": "'馬頭観世音': unsure in the full read, dropped by the owner's ruling 3",
 }
+# Kept by the owner's word, by id (place_index, PLACE_KEPT; owner, 2026-10-13).
+PLACE_KEPT = {
+    "node/1781191908": "'山麓', the Mount Moiwa ropeway's base station (aerialway=station), kept so both ends are findable (owner, 2026-10-13)",
+}
+# Why this index reaches more than 25 km past the map's stations
+# (scripts/check_place_scope.py, rule D): a far corner of the municipality itself.
+PLACE_SCOPE_REACH_REASON = "2026-10-13: Minami Ward's mountains (喜茂別岳) are inside the city (owner)"

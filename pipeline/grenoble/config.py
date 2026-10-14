@@ -202,7 +202,6 @@ PLACE_FOLD = None
 # Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
 PLACE_REVIEWED = {
     "Berriat - Le Magasin": "a tram stop (railway=tram_stop), named for the place beside it (the Prague precedent, Hotel Golf); tags read 2026-10-13",
-    "La tourelle de l'hôtel rabot": "the history board of a listed turret (ref:mhs, heritage=3, Wikipedia): a monument, not a hotel; tags read 2026-10-13",
     "Magasin-CNAC": "a public contemporary art centre (tourism=museum, Wikipedia); 'Magasin' is its name, a former warehouse; tags read 2026-10-13",
     "Rue de l'Ancienne Brasserie": "a public street named for a building or institution on it, not a business (unclassified class; batch 2b precedent, _named_street); tags read 2026-10-13",
 }

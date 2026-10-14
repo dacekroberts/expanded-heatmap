@@ -163,3 +163,6 @@ PLACE_DROPPED = {
     "way/761911097": "'뀸의교회': misspelt second building of 꿈의교회 (way/474519770), 58 m away (full read, duplicate)",
     "node/13613615921": "'신당리마을': a village name stone tagged historic=monument, 24 m from the place row of the same name (node/13613615922) (full read, duplicate)",
 }
+# Why this index reaches more than 25 km past the map's stations
+# (scripts/check_place_scope.py, rule D): a far corner of the municipality itself.
+PLACE_SCOPE_REACH_REASON = "2026-10-13: Pungdo island (풍도동) is part of the city (owner)"

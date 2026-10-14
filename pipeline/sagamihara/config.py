@@ -546,4 +546,7 @@ PLACE_DROPPED = {
     # A religious body's hall or branch tagged a place of worship (ruling 2; owner, 2026-10-13)
     "node/1371772863": "'創価学会 相模原文化会館': unsure in the full read, dropped by the owner's ruling 2",
     "node/1451303273": "'宗教真光 相模原小修験道場': unsure in the full read, dropped by the owner's ruling 2",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1424329818": "'自主管理広場': the twin of way/1423590805; A bare type word (owner, 2026-10-13)",
 }

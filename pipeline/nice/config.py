@@ -238,4 +238,8 @@ PLACE_DROPPED = {
     "way/487779966": "'Ruhl Plage'",
     "way/487779964": "'Sporting Plage'",
     "relation/16442029": "'Plage Castel'",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/923675842": "'Cour de récréation': the twin of way/923675822; A bare type word standing alone (reader's drop; owner, 2026-10-13)",
+    "way/487779958": "'Li Rateta': the twin of way/487779956; Unsure in the read, dropped by ruling 11, a private beach concession tagged only a beach (owner, 2026-10-13)",
 }

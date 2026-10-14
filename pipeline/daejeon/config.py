@@ -156,6 +156,14 @@ PLACE_DROPPED = {
     "node/8395631086": "'평화의 소녀상': a local copy carrying the article of the Seoul original; public art with no article of its own (full read, article of its kind)",
     # unsure in the full read, dropped by ruling 2: a religious body's meeting hall or branch tagged a place of worship (owner, 2026-10-13)
     "node/6085773378": "'대철회관': 대철회관, a diocese's hall (회관) tagged a place of worship (my reading: a diocese is a body) (unsure in the full read; ruling 2)",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/584742322": "'예수 그리스도 후기 성도 교회': the twin of way/584742321; worship by denomination: dropped in the full read (owner, 2026-10-13)",
+    "way/472148695": "'유수지': the twin of way/472143829; bare type: dropped in the full read (owner, 2026-10-13)",
+    "way/840863360": "'진입광장': the twin of way/840863355; bare type: dropped in the full read (owner, 2026-10-13)",
+    # Twin round 2 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/584742323": "'예수 그리스도 후기 성도 교회': the twin of way/584742321; worship by denomination: dropped in the full read (owner, 2026-10-13)",
 }
 # Kept by the owner's word (place_index, PLACE_KEPT; owner, 2026-10-13): a famous
 # place the rules pass over for want of a tag, the id read with its cached name

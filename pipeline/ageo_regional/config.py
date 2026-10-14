@@ -232,4 +232,19 @@ PLACE_DROPPED = {
     "node/7432071819": "'薬師堂': 薬師堂, listed in the ruling (unsure in the full read; ruling 3)",
     "node/7463644378": "'薬師堂': 薬師堂, listed in the ruling (unsure in the full read; ruling 3)",
     "node/7429430454": "'観音堂': 観音堂, listed in the ruling (unsure in the full read; ruling 3)",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1079461672": "'公園（名称なし）': the twin of way/1079461606; description: dropped in the full read (owner, 2026-10-13)",
+    # Twin round 2 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1079461755": "'公園（名称なし）': the twin of way/1079461606; description: dropped in the full read (owner, 2026-10-13)",
+    # Twin round 3 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1079462027": "'公園（名称なし）': the twin of way/1079461606; description: dropped in the full read (owner, 2026-10-13)",
+    # Twin round 4 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1079462506": "'公園（名称なし）': the twin of way/1079461606; description: dropped in the full read (owner, 2026-10-13)",
+    # Twin round 5 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1079465736": "'公園（名称なし）': the twin of way/1079461606; description: dropped in the full read (owner, 2026-10-13)",
 }

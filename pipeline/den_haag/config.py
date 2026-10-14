@@ -270,4 +270,7 @@ PLACE_DROPPED = {
     "node/1566911426": "'Nationaal Bahá'í-centrum': the national office of the Baha'i community; its wikidata is the article on the faith in the Netherlands, not the building's (full read, worship body)",
     "node/1566929737": "'Ching Chueh Buddhist Association Netherlands': named only by the body (a Buddhist association, national) (full read, worship body)",
     "node/2731045197": "'Zen Heart Sangha Nederland': named only by the body (a sangha, national); the description tag repeats it (full read, worship body)",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/1528953782": "'Centraal Station/Schedeldoekshaven': the twin of node/632448218; station not: dropped in the full read (owner, 2026-10-13)",
 }

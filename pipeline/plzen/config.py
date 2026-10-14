@@ -185,4 +185,19 @@ PLACE_DROPPED = {
     # duplicate: dropped in the full read (owner, 2026-10-13)
     "node/7151032500": "'Náměstí Republiky': the other direction of one tram stop, 198 m from node/7151032497 (full read, duplicate)",
     "node/1610725461": "'Severka': the other direction of one tram stop, 195 m from node/912575382 (full read, duplicate)",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/45084498": "'hradební zeď': the twin of way/45063002; bare type: dropped in the full read (owner, 2026-10-13)",
+    "way/1187617466": "'hradební zeď': the twin of way/45063002; bare type: dropped in the full read (owner, 2026-10-13)",
+    "way/1241042963": "'hradební zeď': the twin of way/45063002; bare type: dropped in the full read (owner, 2026-10-13)",
+    # Twin round 2 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1130948431": "'hradební zeď': the twin of way/45063002; bare type: dropped in the full read (owner, 2026-10-13)",
+    "way/1241041990": "'hradební zeď': the twin of way/45063002; bare type: dropped in the full read (owner, 2026-10-13)",
+    # Twin round 3 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1241041995": "'hradební zeď': the twin of way/45063002; bare type: dropped in the full read (owner, 2026-10-13)",
+    # Twin round 4 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1241041997": "'hradební zeď': the twin of way/45063002; bare type: dropped in the full read (owner, 2026-10-13)",
 }

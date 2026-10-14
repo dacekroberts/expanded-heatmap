@@ -303,4 +303,16 @@ PLACE_DROPPED = {
     "node/4444013164": "'花見広場': 花見広場, a section label with no place in it (my reading of \"and the like\") (unsure in the full read; ruling 5)",
     # unsure in the full read, dropped by ruling 4: a part of one shrine or temple that has a row of its own within about 300 m (owner, 2026-10-13)
     "way/691903739": "'赤門': the gate of 慈光寺, whose row is 83 m away (unsure in the full read; ruling 4)",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/785513739": "'東屋': the twin of way/453231010; bare type: dropped in the full read (owner, 2026-10-13)",
+    # Twin round 2 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/785513740": "'東屋': the twin of way/453231010; bare type: dropped in the full read (owner, 2026-10-13)",
+    # Twin round 3 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/785513741": "'東屋': the twin of way/453231010; bare type: dropped in the full read (owner, 2026-10-13)",
+    # Twin round 4 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/785513742": "'東屋': the twin of way/453231010; bare type: dropped in the full read (owner, 2026-10-13)",
 }

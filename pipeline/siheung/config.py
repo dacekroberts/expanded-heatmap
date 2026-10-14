@@ -168,4 +168,15 @@ PLACE_DROPPED = {
     "way/472440125": "'우남퍼스트빌 놀이터'",
     # A second row for one object (the surviving row named in each note) (reader's drop; owner, 2026-10-13)
     "way/648191529": "'신천성당 성전': \"Sincheon church, sanctuary\": the building inside way/648014412 신천성당, 14 m away; one church, two rows",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/4635065491": "'사각정': the twin of node/4634867188; A bare type word standing alone (reader's drop; owner, 2026-10-13)",
+    "node/4642155855": "'사각정': the twin of node/4634867188; A bare type word standing alone (reader's drop; owner, 2026-10-13)",
+    "node/4642280915": "'사각정': the twin of node/4634867188; A bare type word standing alone (reader's drop; owner, 2026-10-13)",
+    "node/4650409327": "'사각정': the twin of node/4634867188; A bare type word standing alone (reader's drop; owner, 2026-10-13)",
+    "way/545670590": "'진입광장': the twin of way/545670586; A bare type word standing alone (reader's drop; owner, 2026-10-13)",
+    "way/545670594": "'휴게광장': the twin of way/545670584; A bare type word standing alone (reader's drop; owner, 2026-10-13)",
+    # Twin round 2 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/11640021860": "'사각정': the twin of node/4634867188; A bare type word standing alone (reader's drop; owner, 2026-10-13)",
 }

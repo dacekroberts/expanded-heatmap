@@ -155,4 +155,7 @@ PLACE_DROPPED = {
     "node/9174471900": "'남서울파크힐': one gated housing estate under its marketing name, mapped as a hamlet (full read, estate)",
     # unsure in the full read, dropped by ruling 5: a stock plaza or rest-area name with no place in it (owner, 2026-10-13)
     "way/1059805491": "'종합광장': 종합광장, general plaza, no place in it (unsure in the full read; ruling 5)",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/4652816470": "'연정교회(예전이름)': the twin of node/4652816469; glitch: dropped in the full read (owner, 2026-10-13)",
 }

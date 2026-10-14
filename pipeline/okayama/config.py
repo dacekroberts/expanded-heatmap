@@ -308,4 +308,7 @@ PLACE_DROPPED = {
     "way/677838024": "'玉井宮東照宮拝殿': the worship hall of the shrine whose main hall (玉井宮東照宮本殿, way/677838025) is a row beside it; one shrine, two rows",
     # A glitched name (reader's drop; owner, 2026-10-13)
     "node/6443744383": "'福渡/建部'",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/4041550852": "'寺社': the twin of node/4041550772; A bare type word standing alone (reader's drop; owner, 2026-10-13)",
 }

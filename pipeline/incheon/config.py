@@ -191,6 +191,11 @@ PLACE_DROPPED = {
     "way/691965965": "'천성선교원': a church's mission nursery, same compound (full read, religious education hall)",
     # duplicate: dropped in the full read (owner, 2026-10-13)
     "node/4637353478": "'제물표 교회 선교관': the same mission hall again at 0 m, name misspelt (full read, duplicate)",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1267597137": "'공개용지': the twin of way/1267597136; description: dropped in the full read (owner, 2026-10-13)",
+    "way/1245774449": "'바람의 숲': the twin of way/1245774448; estate facility: dropped in the full read (owner, 2026-10-13)",
+    "way/471666545": "'풋살경기장': the twin of way/471666489; bare type: dropped in the full read (owner, 2026-10-13)",
 }
 # Kept by the owner's word (place_index, PLACE_KEPT; owner, 2026-10-13): a famous
 # place the rules pass over for want of a tag, the id read with its cached name
@@ -199,3 +204,6 @@ PLACE_KEPT = {
     "node/7403763386": "'월미도', Wolmido (place=island, a Wikidata entry and no Wikipedia tag): a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
     "node/5634901321": "'인천차이나타운', Incheon Chinatown (tourism=viewpoint node, no Wikidata or Wikipedia tag): a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
 }
+# Why this index reaches more than 25 km past the map's stations
+# (scripts/check_place_scope.py, rule D): a far corner of the municipality itself.
+PLACE_SCOPE_REACH_REASON = "2026-10-13: Ongjin County's islands (Baengnyeong, 180 km out) are inside the metropolitan city (owner)"

@@ -148,4 +148,13 @@ PLACE_DROPPED = {
     "way/537839023": "'Congregação dos Sacerdotes do Sagrado Coração de Jesus': named only for the order of priests, no church or house name; the order's church is its own row (way/539849511) (full read, religious residence)",
     # a duplicate of a row that stays, dropped though it carries a wikipedia tag (owner, 2026-10-13)
     "node/5029162539": "'Museu do Homen do Nordeste': the museum twice, 60 m apart; this node is the misspelt one (\"Homen\"). It carries the article tags, the building way/991346779 carries the correct name (full read, duplicate)",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/655804298": "'DA AV ENGENHEIRO JOSÉ ESTELITA': the twin of way/655804270; glitch: dropped in the full read (owner, 2026-10-13)",
+    "way/673513092": "'DA AVENIDA MILITAR': the twin of way/673513091; glitch: dropped in the full read (owner, 2026-10-13)",
+    "way/745098088": "'Igreja Cristã Maranata': the twin of node/4961603922; worship body: dropped in the full read (owner, 2026-10-13)",
+    "way/675046851": "'Área das Piscinas': the twin of way/675046850; description: dropped in the full read (owner, 2026-10-13)",
+    # Twin round 2 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/673513093": "'DA AVENIDA MILITAR': the twin of way/673513091; glitch: dropped in the full read (owner, 2026-10-13)",
 }

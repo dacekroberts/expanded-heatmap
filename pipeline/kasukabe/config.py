@@ -242,4 +242,7 @@ PLACE_DROPPED = {
     # A stock plaza name with no place in it (ruling 5; owner, 2026-10-13)
     "node/7317731441": "'ふれあい広場': unsure in the full read, dropped by the owner's ruling 5",
     "way/907675594": "'道具広場': unsure in the full read, dropped by the owner's ruling 5",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/9166975083": "'絵馬掛け': the twin of node/8524582413; A bare type word (owner, 2026-10-13)",
 }

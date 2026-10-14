@@ -376,4 +376,90 @@ PLACE_DROPPED = {
     "node/9385022353": "'Le Stadium': a locality node \"Le Stadium\" 167 m from the stadium's own landmark row (way/802327323, wikidata)",
     "node/9385022347": "'Hameau d'Epinoy': \"Hameau d'Epinoy\" 198 m from the locality \"Epinoy\" (node/9385022346): one hamlet, two nodes",
     "node/9349940293": "'L'Hempempont': \"L'Hempempont\" 216 m from the suburb node \"Hempempont\" (node/931255150): one place, two nodes",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/2063752677": "'Immeuble': the twin of node/2063752667; A bare type word (owner, 2026-10-13)",
+    "node/2063752715": "'Immeuble': the twin of node/2063752667; A bare type word (owner, 2026-10-13)",
+    "node/2063752815": "'Immeuble': the twin of node/2063752667; A bare type word (owner, 2026-10-13)",
+    "node/2063752915": "'Immeubles': the twin of node/2063752905; A bare type word (owner, 2026-10-13)",
+    "node/2063753102": "'Immeubles': the twin of node/2063752905; A bare type word (owner, 2026-10-13)",
+    "node/2063753143": "'Immeubles': the twin of node/2063752905; A bare type word (owner, 2026-10-13)",
+    "node/2063753429": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    "node/2063753460": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    "node/2063753524": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    "node/2063753624": "'Maisons': the twin of node/2063753575; A bare type word (owner, 2026-10-13)",
+    "node/2063753723": "'Maisons': the twin of node/2063753575; A bare type word (owner, 2026-10-13)",
+    "node/2063754186": "'Maisons': the twin of node/2063753575; A bare type word (owner, 2026-10-13)",
+    # Twin round 2 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/2063752702": "'Immeuble': the twin of node/2063752667; A bare type word (owner, 2026-10-13)",
+    "node/2063752762": "'Immeuble': the twin of node/2063752667; A bare type word (owner, 2026-10-13)",
+    "node/2063753001": "'Immeubles': the twin of node/2063752905; A bare type word (owner, 2026-10-13)",
+    "node/2063753113": "'Immeubles': the twin of node/2063752905; A bare type word (owner, 2026-10-13)",
+    "node/2063753430": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    "node/2063753495": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    "node/2063753504": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    # Twin round 3 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/2063752688": "'Immeuble': the twin of node/2063752667; A bare type word (owner, 2026-10-13)",
+    "node/2063752697": "'Immeuble': the twin of node/2063752667; A bare type word (owner, 2026-10-13)",
+    "node/2063752741": "'Immeuble': the twin of node/2063752667; A bare type word (owner, 2026-10-13)",
+    "node/2063752759": "'Immeuble': the twin of node/2063752667; A bare type word (owner, 2026-10-13)",
+    "node/2063752878": "'Immeubles': the twin of node/2063752905; A bare type word (owner, 2026-10-13)",
+    "node/2063753433": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    "node/2063753501": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    "node/2063753515": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    # Twin round 4 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/2063752693": "'Immeuble': the twin of node/2063752667; A bare type word (owner, 2026-10-13)",
+    "node/2063752756": "'Immeuble': the twin of node/2063752667; A bare type word (owner, 2026-10-13)",
+    "node/2063752779": "'Immeuble': the twin of node/2063752667; A bare type word (owner, 2026-10-13)",
+    "node/2063752882": "'Immeubles': the twin of node/2063752905; A bare type word (owner, 2026-10-13)",
+    "node/2063753358": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    # Twin round 5 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/2063752709": "'Immeuble': the twin of node/2063752667; A bare type word (owner, 2026-10-13)",
+    "node/2063752774": "'Immeuble': the twin of node/2063752667; A bare type word (owner, 2026-10-13)",
+    "node/2063752891": "'Immeubles': the twin of node/2063752905; A bare type word (owner, 2026-10-13)",
+    "node/2063753327": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    # Twin round 6 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/2063752734": "'Immeuble': the twin of node/2063752667; A bare type word (owner, 2026-10-13)",
+    "node/2063752901": "'Immeubles': the twin of node/2063752905; A bare type word (owner, 2026-10-13)",
+    "node/2063753333": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    # Twin round 7 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/2063752737": "'Immeuble': the twin of node/2063752667; A bare type word (owner, 2026-10-13)",
+    "node/2063753009": "'Immeubles': the twin of node/2063752905; A bare type word (owner, 2026-10-13)",
+    "node/2063753362": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    # Twin round 8 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/2063752750": "'Immeuble': the twin of node/2063752667; A bare type word (owner, 2026-10-13)",
+    "node/2063752928": "'Immeubles': the twin of node/2063752905; A bare type word (owner, 2026-10-13)",
+    "node/2063753436": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    # Twin round 9 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/2063752972": "'Immeubles': the twin of node/2063752905; A bare type word (owner, 2026-10-13)",
+    "node/2063753380": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    # Twin round 10 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/2063752873": "'Immeubles': the twin of node/2063752905; A bare type word (owner, 2026-10-13)",
+    "node/2063753076": "'Immeubles': the twin of node/2063752905; A bare type word (owner, 2026-10-13)",
+    "node/2063753314": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    "node/2063753443": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    # Twin round 11 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/2063752865": "'Immeubles': the twin of node/2063752905; A bare type word (owner, 2026-10-13)",
+    "node/2063753089": "'Immeubles': the twin of node/2063752905; A bare type word (owner, 2026-10-13)",
+    "node/2063753307": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    "node/2063753320": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    "node/2063753463": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    # Twin round 12 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/2063752869": "'Immeubles': the twin of node/2063752905; A bare type word (owner, 2026-10-13)",
+    "node/2063753339": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    # Twin round 13 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/2063752872": "'Immeubles': the twin of node/2063752905; A bare type word (owner, 2026-10-13)",
+    "node/2063753352": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
 }

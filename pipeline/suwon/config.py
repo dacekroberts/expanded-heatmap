@@ -162,4 +162,8 @@ PLACE_DROPPED = {
     "way/547444348": "'청운당': a part of one temple that has no row of its own: the main hall stays as the way to find it, the other parts go",
     "way/547444343": "'향하당': a part of one temple that has no row of its own: the main hall stays as the way to find it, the other parts go",
     "way/741628552": "'회향원': a part of one temple that has no row of its own: the main hall stays as the way to find it, the other parts go",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1387264292": "'R4공원': the twin of way/841761806; A business (owner, 2026-10-13)",
+    "way/841767689": "'r3': the twin of way/841764718; A glitched name (owner, 2026-10-13)",
 }

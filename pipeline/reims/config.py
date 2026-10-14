@@ -258,4 +258,11 @@ PLACE_DROPPED = {
     # a duplicate of a row that stays, dropped though it carries a wikipedia tag (owner, 2026-10-13)
     "node/7388163831": "'Cathédrale de Reims': the cathedral again as an archaeological-site node with the cathedral's own wikidata Q206823, 40 m from Cathédrale Notre-Dame way/92294792 (full read, duplicate)",
     "node/7073407675": "'Ancien Collège des Jésuites': the Jesuit college again as a node with the same wikidata Q2983815, 45 m from Collège des Jésuites way/629160734 (full read, duplicate)",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/90722974": "'Ateliers de fabrication': the twin of way/90719109; description: dropped in the full read (owner, 2026-10-13)",
+    "way/1112303718": "'Îlot A': the twin of node/10178870778; description: dropped in the full read (owner, 2026-10-13)",
+    "way/933902245": "'Îlot H': the twin of node/8655840209; description: dropped in the full read (owner, 2026-10-13)",
+    "way/1112303730": "'Îlot I': the twin of node/10557477903; description: dropped in the full read (owner, 2026-10-13)",
+    "relation/15315311": "'Îlot J': the twin of way/1112303723; description: dropped in the full read (owner, 2026-10-13)",
 }

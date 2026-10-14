@@ -113,4 +113,8 @@ PLACE_DROPPED = {
     "node/5301079842": "'Igreja Cristã Maratana': the body's name only (Igreja Cristã Maranata, misspelled)",
     # A second row of one object (owner, 2026-10-13)
     "relation/18937523": "'Vila Matias': the boundary of the district that the node 200 m away names as Vila Mathias (node/615753011); same wikidata id, two spellings, two rows",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1235079669": "'ONG saude e familia': the twin of node/13228550047; A business (owner, 2026-10-13)",
+    "way/624095717": "'Rotatória 7': the twin of way/624095714; A description standing in for a name (owner, 2026-10-13)",
 }

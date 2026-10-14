@@ -156,3 +156,6 @@ PLACE_REVIEWED = {
     "Museu da Farmácia da Santa Casa de Misericórdia": "a museum (tourism=museum, wikidata); 'farmácia' is its subject; tags read 2026-10-13",
 }
 PLACE_DROPPED = {}
+# Why this index reaches more than 25 km past the map's stations
+# (scripts/check_place_scope.py, rule D): a far corner of the municipality itself.
+PLACE_SCOPE_REACH_REASON = "2026-10-13: the municipality's west zone (Santa Cruz, Guaratiba, Marambaia) has no station of the map (owner)"

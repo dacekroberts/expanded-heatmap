@@ -199,4 +199,11 @@ PLACE_DROPPED = {
     # A bare type word (owner, 2026-10-13)
     "way/734166397": "'駅前広場': 'station plaza' alone",
     "node/9623803257": "'題目塔': 'daimoku tower' alone, the type of the stone",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/9633105695": "'題目塔': the twin of node/9623803257; A bare type word (owner, 2026-10-13)",
+    "node/9633151357": "'題目塔': the twin of node/9623803257; A bare type word (owner, 2026-10-13)",
+    # Twin round 2 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/9633142633": "'題目塔': the twin of node/9623803257; A bare type word (owner, 2026-10-13)",
 }

@@ -372,4 +372,7 @@ PLACE_DROPPED = {
     "relation/15521856": "'大分駅前\u3000いこいの道': same park as 大分いこいの道 (relation/6196237), same centre point (full read, duplicate)",
     # unsure in the full read, dropped by ruling 4: a part of one shrine or temple that has a row of its own within about 300 m (owner, 2026-10-13)
     "way/497971792": "'中門跡': the middle gate's site of 豊後国分寺跡, whose row is 95 m away (my reading: a ruin of a part counts as a part) (unsure in the full read; ruling 4)",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "relation/12991158": "'史跡公園': the twin of way/496712027; bare type: dropped in the full read (owner, 2026-10-13)",
 }

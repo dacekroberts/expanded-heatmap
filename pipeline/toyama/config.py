@@ -339,3 +339,6 @@ PLACE_DROPPED = {
     "way/185976979": "'修景広場': 修景広場, landscaped plaza, no place in it (my reading of \"and the like\") (unsure in the full read; ruling 5)",
     "node/5302768591": "'ファミリー広場': ファミリー広場, family plaza, no place in it (my reading of \"and the like\") (unsure in the full read; ruling 5)",
 }
+# Why this index reaches more than 25 km past the map's stations
+# (scripts/check_place_scope.py, rule D): a far corner of the municipality itself.
+PLACE_SCOPE_REACH_REASON = "2026-10-13: peaks of the Northern Alps, in the city's southeast, are inside its boundary (owner)"

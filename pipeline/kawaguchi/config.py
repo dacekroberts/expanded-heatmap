@@ -295,4 +295,7 @@ PLACE_DROPPED = {
     # unsure in the full read, dropped by ruling 3: a hall named only for what it enshrines, or a deity's title alone (owner, 2026-10-13)
     "way/560361350": "'阿弥陀堂': 阿弥陀堂, listed in the ruling (unsure in the full read; ruling 3)",
     "way/675351923": "'太子堂': 太子堂, listed in the ruling (unsure in the full read; ruling 3)",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/12709285478": "'薬師堂': the twin of node/12709285476; bare type: dropped in the full read (owner, 2026-10-13)",
 }

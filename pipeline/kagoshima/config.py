@@ -303,4 +303,7 @@ PLACE_DROPPED = {
     "way/1559292982": "'花のプロムナード': a plaza or park-zone name with no place in it",
     "way/1559292984": "'育みの並木': a plaza or park-zone name with no place in it",
     "way/122886545": "'市民広場': a plaza or park-zone name with no place in it",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/9381683957": "'西本願寺鹿児島別院吉野出張所': the twin of node/3277897516; Unsure rows a ruling drops: a branch temple's neighbourhood preaching halls named body, district and branch office (ruling 20) (owner, 2026-",
 }

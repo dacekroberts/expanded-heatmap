@@ -258,3 +258,6 @@ PLACE_DROPPED = {
     # A glitched name (owner, 2026-10-13)
     "node/3086048901": "'赤レンガ倉': a truncated name (the last character of 赤レンガ倉庫 is missing) on a locality node; the object is the Kanemori warehouse shopping complex",
 }
+# Why this index reaches more than 25 km past the map's stations
+# (scripts/check_place_scope.py, rule D): a far corner of the municipality itself.
+PLACE_SCOPE_REACH_REASON = "2026-10-13: Cape Esan (恵山岬) is in the merged east of the city (owner)"

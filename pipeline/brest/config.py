@@ -229,4 +229,7 @@ PLACE_DROPPED = {
     "way/42538669": "'Aumônerie Catholique des Étudiants de Brest'",
     # A description standing in for a name (reader's drop; owner, 2026-10-13)
     "node/10542873124": "'Plateau Technique'",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/259519701": "'Fl298': the twin of node/2649489294; A code or a number beside a type word, or a number alone (reader's drop; owner, 2026-10-13)",
 }

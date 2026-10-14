@@ -215,3 +215,6 @@ PLACE_DROPPED = {
     # A home, or a private person's or family's own name (names withheld) (reader's drop; owner, 2026-10-13)
     "node/10806838300": "name withheld",
 }
+# Why this index reaches more than 25 km past the map's stations
+# (scripts/check_place_scope.py, rule D): a far corner of the municipality itself.
+PLACE_SCOPE_REACH_REASON = "2026-10-13: the Cabrera archipelago belongs to the municipality of Palma (owner)"

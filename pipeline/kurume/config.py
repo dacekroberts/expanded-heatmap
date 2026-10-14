@@ -232,6 +232,9 @@ PLACE_DROPPED = {
     # description: dropped in the full read (owner, 2026-10-13)
     "node/8616991277": "'ハンググライダー発進基地': \"hang-glider launch site\" on a park node (full read, description)",
     "node/5394847406": "'合川団地の公園': \"the park of the Aikawa housing estate\": a description, and an estate's own playground (full read, description)",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/559315944": "'合川団地の公園': the twin of node/5394847406; description: dropped in the full read (owner, 2026-10-13)",
 }
 # Kept by the owner's word (place_index, PLACE_KEPT; owner, 2026-10-13): a famous
 # place the rules pass over for want of a tag, the id read with its cached name

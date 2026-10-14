@@ -244,3 +244,6 @@ PLACE_DROPPED = {
     "node/7257280860": "'水汲遺跡\u3000碑': the marker stone of 水汲遺跡 (way/779476578), 50 m away, same tag (full read, duplicate)",
     "node/8096770904": "'上挙母': second node of one station, 20 m from node/7758318966 which carries the wikidata; same ref MY06 (full read, duplicate)",
 }
+# Why this index reaches more than 25 km past the map's stations
+# (scripts/check_place_scope.py, rule D): a far corner of the municipality itself.
+PLACE_SCOPE_REACH_REASON = "2026-10-13: the merged mountain towns in the city's east are inside its boundary (owner)"

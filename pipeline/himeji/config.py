@@ -327,4 +327,7 @@ PLACE_DROPPED = {
     "node/6516242538": "'第廿六番 法華山一乗寺': as above",
     "node/6516242540": "'第廿四番 紫雲山中山寺': as above",
     "node/6516185644": "'第廿番 西山善峰寺': as above",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1383475070": "'慰霊石': the twin of way/1383474229; A bare type word (owner, 2026-10-13)",
 }

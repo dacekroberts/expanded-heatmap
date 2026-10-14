@@ -340,4 +340,8 @@ PLACE_DROPPED = {
     "way/1340909488": "'歳徳神': a hall named only for what it enshrines, or a deity's title alone",
     "way/1350873707": "'歳徳神': a hall named only for what it enshrines, or a deity's title alone",
     "way/1354144166": "'歳徳神': a hall named only for what it enshrines, or a deity's title alone",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1271136917": "'幼児遊園': the twin of way/1271136916; A bare type word (owner, 2026-10-13)",
+    "way/1272713318": "'歳徳神': the twin of way/685632261; Unsure rows a ruling drops: a hall named only for what it enshrines, or a deity's title alone (ruling 3) (owner, 2026-10-13)",
 }

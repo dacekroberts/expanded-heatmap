@@ -327,4 +327,7 @@ PLACE_DROPPED = {
     "way/1491726155": "'善超寺 鐘楼': the bell tower of 善超寺 (way/1491727634), about 40 m from the temple's own row",
     # A religious body's hall or branch tagged a place of worship (ruling 2; owner, 2026-10-13)
     "way/560501109": "'天理教黒野支部': unsure in the full read, dropped by the owner's ruling 2",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/630283930": "'子ども広場': the twin of way/630283083; A bare type word (owner, 2026-10-13)",
 }

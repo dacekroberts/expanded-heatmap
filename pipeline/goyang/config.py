@@ -166,6 +166,18 @@ PLACE_DROPPED = {
     "way/959060335": "'예수그리스도 후기성도교회': 'Church of Jesus Christ of Latter-day Saints' alone, the body's name",
     # A duplicate of one object (owner, 2026-10-13)
     "node/3149124331": "'봉성암': 봉성암 as place=locality, 9 m from the hermitage's own row (way/1390896601, a place of worship)",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/10956478592": "'성랑지': the twin of node/10956478581; A bare type word (owner, 2026-10-13)",
+    "node/10956478595": "'성랑지': the twin of node/10956478581; A bare type word (owner, 2026-10-13)",
+    "node/10956478600": "'성랑지': the twin of node/10956478581; A bare type word (owner, 2026-10-13)",
+    # Twin round 2 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/10956478596": "'성랑지': the twin of node/10956478581; A bare type word (owner, 2026-10-13)",
+    "node/10956478603": "'성랑지': the twin of node/10956478581; A bare type word (owner, 2026-10-13)",
+    # Twin round 3 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/10956478597": "'성랑지': the twin of node/10956478581; A bare type word (owner, 2026-10-13)",
 }
 # Kept by the owner's word, by id (place_index, PLACE_KEPT; owner, 2026-10-13):
 # famous places in the cache that the rules pass over for want of a tag.

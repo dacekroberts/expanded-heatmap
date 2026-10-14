@@ -226,6 +226,9 @@ PLACE_DROPPED = {
     "node/4518281791": "'CITER 155 mm L 33 Modelo Argentino': a displayed gun; the wikidata and article are the gun model's, not this object's (full read, exhibit model wikidata)",
     # a duplicate of a row that stays, dropped though it carries a wikipedia tag (owner, 2026-10-13)
     "node/2667485376": "'Villa 21 -24 / Zavaleta': second object 93 m from Villa 21-24 (way/370229235), same article (full read, duplicate)",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/11505118443": "'Telégrafo de la Nación': the twin of node/11505118442; description: dropped in the full read (owner, 2026-10-13)",
 }
 # Kept by the owner's word (place_index, PLACE_KEPT; owner, 2026-10-13): a famous
 # place the rules pass over for want of a tag, the id read with its cached name

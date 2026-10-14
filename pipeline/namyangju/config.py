@@ -200,4 +200,12 @@ PLACE_DROPPED = {
     # A religious office, hall or residence tagged a place of worship (reader's drop; owner, 2026-10-13)
     "way/1219038711": "'장현교회 공감과공간(청소년부)'",
     "node/9711322650": "'목양수양관'",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/11469141009": "'돌덧널 무덤': the twin of node/11469141008; A bare type word standing alone (reader's drop; owner, 2026-10-13)",
+    "node/11469141011": "'돌방 무덤': the twin of node/11469141010; A bare type word standing alone (reader's drop; owner, 2026-10-13)",
+    "way/789146066": "'땅밑집터 전시장': the twin of way/789146064; A description standing in for a name (reader's drop; owner, 2026-10-13)",
+    # Twin round 2 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/789146067": "'땅밑집터 전시장': the twin of way/789146064; A description standing in for a name (reader's drop; owner, 2026-10-13)",
 }

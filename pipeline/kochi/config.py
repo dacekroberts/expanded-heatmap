@@ -302,6 +302,11 @@ PLACE_DROPPED = {
     "node/4602358594": "'高知県指定有形文化財土佐西国第２２番札所'",
     # A second row for one object (the surviving row named in each note) (reader's drop; owner, 2026-10-13)
     "node/4964926935": "'Katsurahama shrine': an English label about 15 m from 海津見神社 (龍王宮) (node/3074312433), the shrine at Katsurahama: one object, two rows",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1112599662": "'幼児遊園地': the twin of node/10179264542; A bare type word standing alone (reader's drop; owner, 2026-10-13)",
+    # A sea's label far offshore (owner, 2026-10-13)
+    "node/13339743364": "'土佐湾': one point for Tosa Bay, far offshore",
 }
 # Kept by the owner's word (place_index, PLACE_KEPT; owner, 2026-10-13): a famous
 # place the rules pass over for want of a tag, the id read with its cached name.

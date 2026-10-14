@@ -265,3 +265,6 @@ PLACE_DROPPED = {
     # glitch: dropped in the full read (owner, 2026-10-13)
     "node/2316488038": "'延寿院\u200e': name ends in an invisible U+200E mark; a real temple with wikidata, so a repair upstream would keep it (full read, glitch)",
 }
+# Why this index reaches more than 25 km past the map's stations
+# (scripts/check_place_scope.py, rule D): a far corner of the municipality itself.
+PLACE_SCOPE_REACH_REASON = "2026-10-13: Aoi Ward runs north into the Southern Alps (三峰岳, 塩見岳) (owner)"

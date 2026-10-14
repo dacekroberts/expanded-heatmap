@@ -377,6 +377,15 @@ PLACE_DROPPED = {
     "way/845522675": "'自由広場（北）'",
     "way/845764621": "'自由広場（南）'",
     "way/845813483": "'ふれあい広場'",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1296350490": "'ビレッジハウス姪浜の公園': the twin of way/1296350365; An estate's own facility or marketing name (reader's drop; owner, 2026-10-13)",
+    "way/1296340052": "'緑地': the twin of way/1296339994; A bare type word standing alone (reader's drop; owner, 2026-10-13)",
+    # Twin round 2 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1296340230": "'緑地': the twin of way/1296339994; A bare type word standing alone (reader's drop; owner, 2026-10-13)",
+    # A sea's label far offshore (owner, 2026-10-13)
+    "node/6355776632": "'玄界灘': one point for the Genkai Sea, far offshore",
 }
 # Kept by the owner's word (place_index, PLACE_KEPT; owner, 2026-10-13): a famous
 # place the rules pass over for want of a tag, the id read with its cached name.
@@ -385,3 +394,6 @@ PLACE_KEPT = {
     "way/108294913": "'九州大学病院キャンパス', Kyushu University's hospital campus (amenity=university, no Wikidata tag) (owner, 2026-10-13)",
     "way/169799218": "'九州大学 大橋キャンパス', Kyushu University's Ohashi campus (amenity=university, no Wikidata tag) (owner, 2026-10-13)",
 }
+# Why this index reaches more than 25 km past the map's stations
+# (scripts/check_place_scope.py, rule D): a far corner of the municipality itself.
+PLACE_SCOPE_REACH_REASON = "2026-10-13: Oronoshima island (小呂島) is part of the city (owner)"

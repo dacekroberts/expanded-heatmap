@@ -353,3 +353,6 @@ PLACE_DROPPED = {
     # Unsure rows a ruling drops: a park named only by a category and a lot or inventory number (ruling 1) (owner, 2026-10-13)
     "way/708756290": "'第一幼児公園': a park named only by a category and a lot or inventory number",
 }
+# Why this index reaches more than 25 km past the map's stations
+# (scripts/check_place_scope.py, rule D): a far corner of the municipality itself.
+PLACE_SCOPE_REACH_REASON = "2026-10-13: the city's mountain northeast (早坂峠) is inside its boundary (owner)"

@@ -204,3 +204,6 @@ PLACE_REVIEWED = {
 # name and tags (docs/decisions_drafts/search-rollout.md).
 PLACE_DROPPED = {
 }
+# Why this index reaches more than 25 km past the map's stations
+# (scripts/check_place_scope.py, rule D): a far corner of the municipality itself.
+PLACE_SCOPE_REACH_REASON = "2026-10-13: the metropolitan city's north, Gunwi County, is inside its boundary (owner)"

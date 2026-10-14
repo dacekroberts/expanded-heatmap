@@ -153,4 +153,7 @@ PLACE_DROPPED = {
     "node/14039871939": "'Torre da Vida': the same tower as way/1543028408 (Monumento Torre da Vida), 0 m apart",
     "way/499578851": "'Praça do João XXIII': the same square as way/720109743 (Praca Joao XXIII), 0 m apart",
     "node/9776212032": "'Igreja Deus é Amor | Paupina (Anexo)': the same hall as way/1097099286 (Deus e Amor Paupina), 44 m apart",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/377731874": "'Igreja Bola de Neve': the twin of way/377731871; Worship named only by a body, a denomination or a chain (reader's drop; owner, 2026-10-13)",
 }

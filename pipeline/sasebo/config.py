@@ -332,3 +332,6 @@ PLACE_DROPPED = {
     "node/11453229737": "'97m'",
     "node/12027995682": "'98m'",
 }
+# Why this index reaches more than 25 km past the map's stations
+# (scripts/check_place_scope.py, rule D): a far corner of the municipality itself.
+PLACE_SCOPE_REACH_REASON = "2026-10-13: Uku island (宇久町) is part of the city (owner)"

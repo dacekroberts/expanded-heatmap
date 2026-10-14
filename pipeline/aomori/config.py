@@ -241,4 +241,7 @@ PLACE_DROPPED = {
     "way/556743964": "'1号遊歩道緑地': a number and a category, no place in front (N号公園 family; my reading) (unsure in the full read; ruling 1)",
     "way/653750100": "'1号遊歩道緑地': a number and a category, no place in front (N号公園 family; my reading) (unsure in the full read; ruling 1)",
     "way/1187421879": "'1号遊歩道緑地': a number and a category, no place in front (N号公園 family; my reading) (unsure in the full read; ruling 1)",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1187421878": "'1号遊歩道緑地': the twin of way/556743666; unsure in the full read, dropped by ruling 1: a park named only by a category and an inventory or lot number (owner, 2026-10-13)",
 }
