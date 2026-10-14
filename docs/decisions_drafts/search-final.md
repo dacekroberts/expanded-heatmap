@@ -1,3 +1,91 @@
+### 2026-10-13 - The final group rebuilt on rule passes 5 and 6: 14 of 32 indexes changed, 354 rows left, 2 returned (branch search-final)
+
+- **Master e0138000 merged (bd0324fa), no conflict.** The worktree was on a
+  detached head at f09de085 with the branch still at abaf5c34; the branch
+  was moved forward to f09de085 first (an ancestor, nothing lost), so the
+  merge and this commit are on `search-final`.
+- **All 32 indexes rebuilt by their own index steps, one at a time through
+  the gate, no network request.** Every city's Wikidata cache already held
+  every id the rules ask about (no id to ask in any city). 18 indexes came
+  back byte for byte the same; 14 changed.
+- **Rows: 264,401 to 264,049.** Landmarks 28,595 to 28,244, places 12,779
+  to 12,778; stations, junctions, streets and the 411,939 intersections
+  did not move in count. By the class `build()` logs: 235 places of
+  worship named only by a denomination, a body or a hall type, 62 bare
+  type words, 29 parks named as a square folded into the street row of
+  their name, 22 segments folded into their relation's row, 3 estate
+  facilities, 2 religious education halls, 1 station on its access tag.
+- **The largest:** Brasilia 14,699 to 14,513 (183 churches named by their
+  body: Assembleia de Deus, Igreja Universal, Congregacao Crista), Taipei
+  35,924 to 35,865 (47 bare type words, most of them the shrine words
+  萬善堂 and 萬善祠 and the school gym words), Rome 19,260 to 19,235 (19
+  wall and aqueduct segments, 6 piazza parks), Brussels (Regional) 5,522
+  to 5,502, Taoyuan 13, Guadalajara 11, Monterrey 11, Geneva 10, Riga 8.
+- **Returned, 2:** Brussels "Hôtel des Douanes" (way/30094704; the leak
+  word test no longer reads a French "Hôtel des" as a hotel) and
+  Bucharest's station "Piața Victoriei 1" (node/582554910; a transfer
+  complex is split at the names the map draws).
+- **The 61 rows left for the rules: 48 taken, 13 still rows.** Taken: 43
+  as worship named by type, 2 as bare type words, 3 as estate facilities.
+  Still rows: 6 places of worship (Brasilia "Igreja Religiosa", Brussels
+  "Église évangélique arabe", Bucharest "Biserica Ortodoxa de Lemn",
+  Florence "Soka Gakkai", Riga "Kristiešu lūgšanu nams", Taipei "YMCA")
+  and 7 Guadalajara parks (two Belcanto rows, five Los Cantaros median
+  strips). Listed in `left_for_rules_reconciled.tsv`.
+- **The outside model's flags, read against cached tags: 2,921 flags, 2,450
+  rows to judge** (262 flagged names are no row now, 308 were settled
+  before by name or id; no flag is on a street). Verdicts: 1,882 keep, 341
+  drop, 227 unsure. Applied: none. The drops: 208 bare type words, 62
+  descriptions, 31 worship named by type, 26 codes beside a type, 6
+  religious offices, 4 museum contents, 3 businesses, 1 dead railway
+  relation. 183 of the drops are in Taipei, 58 in Berlin, 43 in Brasilia,
+  28 in Taoyuan.
+- **`PLACE_REVIEWED` entries the check no longer needs: 21** (Anyang 12 and
+  Gwangju 7 junction rows, Brussels' two "Brasserie" streets). No
+  `PLACE_RULED_KEPT` record is one the leak-word test fired on. Listed,
+  nothing removed.
+- **Checks.** `check_place_search.py`: 32 problems, rule A on each of the 32
+  cities, nothing else. `check_all.py`: 71 of 73; the second failure is
+  `check_place_unopened.py`, 225 problems, none from this rebuild (below).
+
+Findings for Cleanup:
+
+56. **A public station left on its access tag.** Taoyuan's 新富 (Xinfu,
+    node/4268315018) is a railway=halt of the national network with an
+    article of its own (zh:新富車站) and access=private; the fifth pass's
+    `STATION_PRIVATE_ACCESS` drops it and the station guard does not hold
+    it, since this map does not draw it. Recommended: an article of the
+    station's own keeps it against that rule, or a keep by id.
+57. **No German, Danish or Norwegian word list for worship named by type.**
+    Berlin, Bremen, Aarhus, Bergen, Copenhagen, Oslo, Odense and Zurich came
+    back unchanged; the flag read finds the class there by hand ("Evangelisch-
+    Freikirchliche Gemeinde" four times in Berlin, "Det Evangeliske Lutherske
+    Kirkesamfunn" in Bergen).
+58. **Taipei and Taoyuan still carry bare type words no list holds:** 古早厝地
+    on 28 ruins, 集合場, 籃球場, 社區公園, 有應公, 綠地, 草地, 大雄寶殿 and
+    campus position labels ending 前. 211 of the 341 flag drops are in the
+    two cities.
+59. **Brasilia's numbered sports courts are park rows:** "Quadra Poliesportiva
+    101", "Quadra comunitária da QR 114", "Quadra da 121", 21 rows, a code
+    beside a type that `CODED_TYPE` does not read in Portuguese.
+60. **`check_place_unopened.py` fails on this branch and did before the
+    rebuild:** 148 cities scaffolded by the rollout branch (b5b6ff82, in
+    this branch's history, not on master) have no summary yet, and 77
+    stations not yet open in Gwangju, Monterrey, Rome, Guadalajara and
+    Taipei have no row in the watch file (Gwangju's are in
+    `search-final_unopened_gwangju.md`). The counts in each summary are the
+    same before and after the rebuild.
+61. **A park folded into a street row under another spelling:** Geneva
+    "Place du 150eme" into "Place du 150ème", Monterrey "Plaza San Fernando"
+    into "Plaza De San Fernando". The park's own spelling is no longer
+    searchable; the square is.
+62. **Göteborg's "Örtagården" (node/1049157468, place=locality)** left as a
+    bare type word; the name may be a real locality's. One row.
+
+Lists: `data/_search_rollout/final_rules56/` (`summary.md`, one file per
+city, `left_for_rules_reconciled.tsv`, `flag_verdicts.tsv`,
+`review_entries_not_needed.tsv`).
+
 ### 2026-10-13 - The held rows settled in three lanes and the owner's ten rulings applied: 730 ids dropped, 931 keeps recorded, 61 rows left for the rule pass (branch search-final)
 
 - **The input.** Three read-only lanes settled the held rows of
