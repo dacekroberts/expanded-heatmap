@@ -183,6 +183,15 @@ PLACE_REVIEWED = {
 }
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    # Rows the read-only screen helper gave a drop verdict (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/473819618": "worship named only by a denomination: worship named only by a denomination, a body or a chain (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/867586492": "duplicate within 300 m: duplicates of one object (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/7300399950": "duplicate within 300 m: duplicates of one object (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/7300399923": "duplicate within 300 m: duplicates of one object (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    # A hall named only by its body, although it carries the body's article (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "node/573615484": "a place of worship named only by its body is dropped; its wikipedia tag is the body's article, not the hall's (ruling 2; owner 2026-10-13, relayed by Cleanup)",
     # Places of worship named only by a denomination, a body or a hall type (the flag read of 2026-10-13, applied on the owner's word;
     # docs/decisions_drafts/search-final.md).
     "node/13137802412": "a place of worship named only by its denomination, body or hall type is dropped (owner 2026-10-13, four rulings 1; fifteen answers 6; sixteen rulings 2; owner 2026-10-13, the flag read's verdicts, all approved)",

@@ -162,6 +162,9 @@ _EXHIBIT = "a Railroad Museum exhibit whose article is its class's or kind's, no
 _MALL = "a corridor of an underground shopping mall, named for the mall"
 _NO_NAME = "a description standing in for a name"
 PLACE_DROPPED = {
+    # Rows the read-only screen helper gave a drop verdict (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "node/442863042": "peak named only by a height: rule fault class (still applied by id) (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
     # A religious body's meeting halls and branches, and halls named only by a body and a hall type (the pattern screen of 2026-10-13;
     # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
     "way/1287595059": "a religious body's meeting hall or branch tagged a place of worship is dropped (ruling 2; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",

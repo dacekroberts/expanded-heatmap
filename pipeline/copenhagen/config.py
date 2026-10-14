@@ -385,6 +385,14 @@ PLACE_RULED_KEPT = {
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    # Rows the owner's later rulings of 2026-10-13 decide, and the twin checks' drops (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/26274768": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
+    # Rows the read-only screen helper gave a drop verdict (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "node/6512571485": "religious body's meeting hall: ruling 2 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/185253291": "religious body's meeting hall: ruling 2 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/350088175": "religious body's meeting hall: ruling 2 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
     "way/199817432": "an allotment section code beside the estate's name (owner, 2026-10-13)",
     "way/199817433": "an allotment section code beside the estate's name (owner, 2026-10-13)",
     "way/199817434": "an allotment section code beside the estate's name (owner, 2026-10-13)",

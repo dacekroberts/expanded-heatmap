@@ -340,6 +340,31 @@ PLACE_REVIEWED = {
 }
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    # Rows the owner's later rulings of 2026-10-13 decide, and the twin checks' drops (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/480542836": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
+    "way/480542841": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
+    "way/881848973": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
+    "node/6127610986": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
+    "node/5004308321": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
+    "node/5004308421": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
+    "node/638722682": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
+    "way/1056775991": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
+    "way/465216462": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; the twin check; owner 2026-10-13, relayed by Cleanup)",
+    "way/1486772605": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; the twin check; owner 2026-10-13, relayed by Cleanup)",
+    "way/1486774190": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; the twin check; owner 2026-10-13, relayed by Cleanup)",
+    "way/1486780496": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; the twin check; owner 2026-10-13, relayed by Cleanup)",
+    "way/1486773238": "a stock plaza name with no place in it is dropped, every outline of the name together (ruling 5; the second twin check; owner 2026-10-13, relayed by Cleanup)",
+    "way/1486773899": "a stock plaza name with no place in it is dropped, every outline of the name together (ruling 5; the second twin check; owner 2026-10-13, relayed by Cleanup)",
+    "way/1486774024": "a stock plaza name with no place in it is dropped, every outline of the name together (ruling 5; the second twin check; owner 2026-10-13, relayed by Cleanup)",
+    "way/1486774104": "a stock plaza name with no place in it is dropped, every outline of the name together (ruling 5; the second twin check; owner 2026-10-13, relayed by Cleanup)",
+    "way/1486778386": "a stock plaza name with no place in it is dropped, every outline of the name together (ruling 5; the second twin check; owner 2026-10-13, relayed by Cleanup)",
+    # Rows the read-only screen helper gave a drop verdict (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/1486758881": "stock plaza name: ruling 5 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/1486773700": "stock plaza name: ruling 5 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/1486776501": "stock plaza name: ruling 5 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/332025424": "park named by a category and a number: ruling 1 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
     # Same-named objects a drop above made a row (the pattern screen of 2026-10-13;
     # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
     "way/1486776393": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",

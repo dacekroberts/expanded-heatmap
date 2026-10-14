@@ -285,6 +285,15 @@ PLACE_RULED_KEPT = {
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    # Rows the owner's later rulings of 2026-10-13 decide, and the twin checks' drops (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/24620412": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
+    # Rows the read-only screen helper gave a drop verdict (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/179905789": "religious body's meeting hall: ruling 2 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/308985083": "religious body's meeting hall: ruling 2 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/184020365": "named only by its denomination: flag pass class (worship named only by a denomination, in this city's PLACE_DROPPED) (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/116530698": "named only by its denomination: flag pass class (worship named only by a denomination, in this city's PLACE_DROPPED) (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
     # A religious body's meeting halls and branches, and halls named only by a body and a hall type (the pattern screen of 2026-10-13;
     # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
     "way/72005297": "a religious body's meeting hall or branch tagged a place of worship is dropped (ruling 2; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",

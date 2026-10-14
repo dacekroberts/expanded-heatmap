@@ -340,6 +340,13 @@ PLACE_KEPT = {
 }
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    # Rows the owner's later rulings of 2026-10-13 decide, and the twin checks' drops (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/689161650": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
+    # Rows the read-only screen helper gave a drop verdict (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/155824188": "park named by a category and a number: ruling 1 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/547119958": "park named by a category and a number: ruling 1 and 5 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
     "way/939133719": "a generic footpath name (owner, 2026-10-13)",
     "way/939133722": "a generic footpath name (owner, 2026-10-13)",
     "way/542617754": "a park named by a planning or stage code (owner, 2026-10-13)",

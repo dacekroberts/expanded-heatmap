@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/odense.json",
-  "places": 5440,
+  "places": 5437,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "da"
     ],
     "coverage": {
-      "en": 0.002,
+      "en": 0.001,
       "da": 1.0
     },
     "list_share": 0.5,

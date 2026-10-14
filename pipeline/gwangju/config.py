@@ -134,6 +134,13 @@ PLACE_REVIEWED = {name: _JUNCTION for name in (
 # customers-only service roads, candidate 1 the play-park and plaza rows
 # (docs/decisions_drafts/search-final.md, "Rule candidates").
 PLACE_DROPPED = {
+    # Rows the read-only screen helper gave a drop verdict (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/1346388792": "religious body's meeting hall: ruling 2 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/638527739": "religious hall of a church: ruling 2 and 4 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/489694377": "religious hall of a church: ruling 2 and 4 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/842087085": "bare type-word park: bare type-word parks (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/473599629": "stock plaza name: ruling 5 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
     # A religious body's meeting halls and branches, and halls named only by a body and a hall type (the pattern screen of 2026-10-13;
     # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
     "way/504442482": "a religious body's meeting hall or branch tagged a place of worship is dropped (ruling 2; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",

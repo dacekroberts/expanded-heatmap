@@ -211,6 +211,18 @@ PLACE_RULED_KEPT = {
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    # Rows the owner's later rulings of 2026-10-13 decide, and the twin checks' drops (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "node/7147050239": "a numbered part of the fortress is dropped; the fortress's own row stays (owner 2026-10-13, relayed by Cleanup)",
+    "node/7147065467": "a numbered part of the fortress is dropped; the fortress's own row stays (owner 2026-10-13, relayed by Cleanup)",
+    "node/7147031520": "a numbered part of the fortress is dropped; the fortress's own row stays (owner 2026-10-13, relayed by Cleanup)",
+    "node/7431035976": "a numbered part of the fortress is dropped; the fortress's own row stays (owner 2026-10-13, relayed by Cleanup)",
+    "node/7431035980": "a numbered part of the fortress is dropped; the fortress's own row stays (owner 2026-10-13, relayed by Cleanup)",
+    "node/7147034743": "a numbered part of the fortress is dropped; the fortress's own row stays (owner 2026-10-13, relayed by Cleanup)",
+    "node/7817878774": "a numbered part of the fortress is dropped; the fortress's own row stays (owner 2026-10-13, relayed by Cleanup)",
+    "node/7431020429": "a numbered part of the fortress is dropped; the fortress's own row stays (owner 2026-10-13, relayed by Cleanup)",
+    "node/9241663423": "a numbered part of the fortress is dropped; the fortress's own row stays (owner 2026-10-13, relayed by Cleanup)",
+    "node/7147011555": "a numbered part of the fortress is dropped; the fortress's own row stays (owner 2026-10-13, relayed by Cleanup)",
     "node/9904435379": "a freight yard, depot or operating point, not a passenger station (owner, 2026-10-13)",
     "node/5061851416": "a typo of the tram stop Lokomotīvju depo, which keeps its own row",
     "node/1410181183": "a statue with no article of its own; its wikidata is its subject's",
@@ -219,4 +231,9 @@ PLACE_DROPPED = {
     # Held rows settled by the existing rules in three lanes and the owner's
     # rulings of 2026-10-13 (docs/decisions_drafts/search-final-held-applied.md).
     "node/8612313870": "Duplicates of one object are one row (NEAR_DUP_M, ROW_MERGE_M 2026-10-08 and 2026-10-13; six answers 6: second nodes of one district dropped); held rows settled 2026-10-13",
+}
+# Kept by id: admitted as rows although a rule passes them over (owner, 2026-10-13;
+# docs/decisions_drafts/search-final.md).
+PLACE_KEPT = {
+    "node/13119336816": "'Daugavpils Māla Mākslas Centrs', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
 }

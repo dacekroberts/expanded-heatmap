@@ -1,6 +1,6 @@
 {
   "index": "app/static/places/daugavpils.json",
-  "places": 1626,
+  "places": 1617,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
@@ -9,7 +9,7 @@
     "coverage": {
       "en": 0.01,
       "lv": 1.0,
-      "ru": 0.087
+      "ru": 0.088
     },
     "list_share": 0.5,
     "listed": [

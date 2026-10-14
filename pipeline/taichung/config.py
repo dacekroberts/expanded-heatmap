@@ -182,6 +182,18 @@ PLACE_RULED_KEPT = {
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    # Same-named objects a drop above made a row (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "node/13529262395": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    # Rows the owner's later rulings of 2026-10-13 decide, and the twin checks' drops (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "node/13529262394": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; the twin check; owner 2026-10-13, relayed by Cleanup)",
+    # Rows the read-only screen helper gave a drop verdict (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/1240365918": "duplicate within 300 m: duplicates of one object; block name (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/1240344546": "duplicate within 300 m: duplicates of one object (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/1240344547": "duplicate within 300 m: duplicates of one object (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/1240347186": "duplicate within 300 m: duplicates of one object; block name (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
     # Rows the read-only screen helper gave a drop verdict (the pattern screen of 2026-10-13;
     # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
     "node/14111447402": "twin of a dropped row: bare type word (flag pass) (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",

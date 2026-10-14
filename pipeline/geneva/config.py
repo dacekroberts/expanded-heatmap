@@ -209,6 +209,18 @@ PLACE_REVIEWED = {
 }
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    # Rows the owner's later rulings of 2026-10-13 decide, and the twin checks' drops (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/81482906": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
+    "node/1481253448": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
+    "node/13266892496": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
+    "node/13249887750": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
+    "node/12284825261": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
+    # Rows the read-only screen helper gave a drop verdict (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/1444049197": "twin of a dropped row: twins of PLACE_DROPPED (a description standing in for a name) (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/77946745": "duplicate within 300 m: duplicates of one object (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/2283383170": "worship named only by a denomination: worship named only by a denomination, a body or a chain (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
     "relation/4013107": "a freight yard, depot or operating point, not a passenger station (owner, 2026-10-13)",
     "node/12837201056": "a freight yard, depot or operating point, not a passenger station (owner, 2026-10-13)",
     "node/2406735664": "a business website name tagged a place of worship",
@@ -253,6 +265,9 @@ PLACE_DROPPED = {
 # Kept by id: admitted as rows although a rule passes them over (owner, 2026-10-13;
 # docs/decisions_drafts/search-final.md).
 PLACE_KEPT = {
+    "way/313487068": "'Banc de la Treille', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/2362831289": "'Maison Rousseau et Littérature', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/5170038": "'Île Jean-Jacques-Rousseau', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
     "way/1464178616": "'Mur des Réformateurs', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
     "node/3436729151": "'Patek Philippe Museum', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
     "way/87603849": "'Maison Tavel', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",

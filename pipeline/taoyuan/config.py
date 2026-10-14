@@ -196,6 +196,26 @@ PLACE_KEPT = {
 }
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    # Same-named objects a drop above made a row (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/989883702": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/992451616": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/1015197930": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/972550953": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    # Rows the owner's later rulings of 2026-10-13 decide, and the twin checks' drops (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "node/3494596006": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
+    "way/254620398": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
+    "way/989883701": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; the twin check; owner 2026-10-13, relayed by Cleanup)",
+    "way/992451613": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; the twin check; owner 2026-10-13, relayed by Cleanup)",
+    "way/1015197929": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; the twin check; owner 2026-10-13, relayed by Cleanup)",
+    "way/972550952": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; the twin check; owner 2026-10-13, relayed by Cleanup)",
+    "way/1030408468": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; the twin check; owner 2026-10-13, relayed by Cleanup)",
+    "way/1025745709": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; the twin check; owner 2026-10-13, relayed by Cleanup)",
+    "way/1017806952": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; the twin check; owner 2026-10-13, relayed by Cleanup)",
+    "way/991638650": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; the twin check; owner 2026-10-13, relayed by Cleanup)",
+    "way/993232058": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; the twin check; owner 2026-10-13, relayed by Cleanup)",
+    "way/975203545": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; the twin check; owner 2026-10-13, relayed by Cleanup)",
     # Rows the read-only screen helper gave a drop verdict (the pattern screen of 2026-10-13;
     # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
     "way/997132380": "hall named only for what it enshrines: ruling 3 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",

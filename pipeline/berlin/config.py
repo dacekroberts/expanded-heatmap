@@ -281,6 +281,48 @@ PLACE_REVIEWED = {
 }
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    # Rows the owner's later rulings of 2026-10-13 decide, and the twin checks' drops (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/1127998800": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; the twin check; owner 2026-10-13, relayed by Cleanup)",
+    # Same-named objects a drop above made a row (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "node/11346651887": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    # Same-named objects a drop above made a row (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "node/11346651390": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/455506242": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    # Rows the read-only screen helper gave a drop verdict (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "node/2867830690": "named only by its denomination: flag pass class (worship named only by a denomination, in this city's PLACE_DROPPED) (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/1556403863": "named only by its denomination: flag pass class (worship named only by a denomination, in this city's PLACE_DROPPED) (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/5034289021": "named only by its denomination: flag pass class (worship named only by a denomination, in this city's PLACE_DROPPED) (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/106483613": "named only by its denomination: flag pass class (worship named only by a denomination, in this city's PLACE_DROPPED) (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/4926337191": "named only by its denomination: flag pass class (worship named only by a denomination, in this city's PLACE_DROPPED) (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/105807837": "named only by its denomination: flag pass class (worship named only by a denomination, in this city's PLACE_DROPPED) (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/220402599": "named only by its denomination: flag pass class (worship named only by a denomination, in this city's PLACE_DROPPED) (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/11078119221": "religious body's meeting hall: ruling 2 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/1404465171": "religious body's meeting hall: ruling 2 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/1404484782": "religious body's meeting hall: ruling 2 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/11078106301": "religious body's meeting hall: ruling 2 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/11078121906": "religious body's meeting hall: ruling 2 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/25022864": "religious body's meeting hall: ruling 2 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/46670511": "religious body's meeting hall: ruling 2 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/96143069": "religious body's meeting hall: ruling 2 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/137930299": "religious body's meeting hall: ruling 2 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/296999883": "religious body's meeting hall: ruling 2 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/305825708": "religious body's meeting hall: ruling 2 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/24026432": "named only by its denomination: flag pass class (worship named only by a denomination, in this city's PLACE_DROPPED) (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/41401786": "named only by its denomination: flag pass class (worship named only by a denomination, in this city's PLACE_DROPPED) (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/74276969": "named only by its denomination: flag pass class (worship named only by a denomination, in this city's PLACE_DROPPED) (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/162475983": "named only by its denomination: flag pass class (worship named only by a denomination, in this city's PLACE_DROPPED) (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/552375223": "named only by its denomination: flag pass class (worship named only by a denomination, in this city's PLACE_DROPPED) (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/1094114018": "named only by its denomination: flag pass class (worship named only by a denomination, in this city's PLACE_DROPPED) (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/540969924": "named only by its denomination: flag pass class (worship named only by a denomination, in this city's PLACE_DROPPED) (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/11346642240": "twin of a dropped row: a seat drawn as a square (this city's PLACE_DROPPED) (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/495285969": "twin of a dropped row: abandoned motorway stub named by its section code (this city's PLACE_DROPPED) (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/53499649": "twin of a dropped row: dead railway alignment with no article (this city's PLACE_DROPPED) (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/83796012": "twin of a dropped row: dead railway alignment with no article (this city's PLACE_DROPPED) (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/128889573": "stock plaza name: ruling 5 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
     # Bare type words and type phrases (the flag read of 2026-10-13, applied on the owner's word;
     # docs/decisions_drafts/search-final.md).
     "way/152892264": "a bare type word or a type phrase as the whole name is dropped (BARE_TYPE_NAMES, owner 2026-10-11; seven rulings 4, 2026-10-13; owner 2026-10-13, the flag read's verdicts, all approved)",

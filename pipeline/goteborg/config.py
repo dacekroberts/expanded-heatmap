@@ -336,6 +336,20 @@ PLACE_RULED_KEPT = {
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    # Rows the owner's later rulings of 2026-10-13 decide, and the twin checks' drops (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/34247227": "a housing estate's courtyard tagged a place is dropped as an estate facility, every same-named object within 300 m with it (owner 2026-10-13, relayed by Cleanup)",
+    "way/34247224": "a housing estate's courtyard tagged a place is dropped as an estate facility, every same-named object within 300 m with it (owner 2026-10-13, relayed by Cleanup)",
+    "way/34247225": "a housing estate's courtyard tagged a place is dropped as an estate facility, every same-named object within 300 m with it (owner 2026-10-13, relayed by Cleanup)",
+    "way/103023809": "a housing estate's courtyard tagged a place is dropped as an estate facility, every same-named object within 300 m with it (owner 2026-10-13, relayed by Cleanup)",
+    "way/34247223": "a housing estate's courtyard tagged a place is dropped as an estate facility, every same-named object within 300 m with it (owner 2026-10-13, relayed by Cleanup)",
+    "node/7494992509": "a housing estate's courtyard tagged a place is dropped as an estate facility, every same-named object within 300 m with it (owner 2026-10-13, relayed by Cleanup)",
+    # Rows the owner's later rulings of 2026-10-13 decide, and the twin checks' drops (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/81369707": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
+    # Rows the read-only screen helper gave a drop verdict (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/96043866": "religious body's meeting hall: ruling 2 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
     "node/11067485073": "public art with no article of its own: one part of a planet walk sharing the walk's article",
     "node/12087404769": "public art with no article of its own: one part of a planet walk sharing the walk's article",
     "node/11067485074": "public art with no article of its own: one part of a planet walk sharing the walk's article",

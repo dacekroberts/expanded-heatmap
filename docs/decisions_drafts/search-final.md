@@ -1,3 +1,71 @@
+### 2026-10-13 - The pattern screen of the final group: 465 ids dropped, 46 kept by id, the station rules merged; the owner's rulings on the helpers' classes (branch search-final)
+
+- **A screen for the new classes instead of a full read (owner).** One main
+  pass over the 40,670 landmark and place rows by tags and name patterns in
+  each city's language, cross-checked city by city by two read-only helpers
+  (`data/_search_rollout/final_rules56/screen_helper/`), then two twin
+  checks. Every id was matched to its cached name before it was written;
+  every touched city was rebuilt through the gate, twin rounds until none.
+  Results: `data/_search_rollout/final_rules56/pattern_screen.md`.
+- **Dropped by id: 465** (main pass 143: numbered parks 69, a body's halls
+  39, a deity's title alone 21, stock plaza names 8, bare type parks 3,
+  duplicates 2, Florence's Soka Gakkai 1; the helpers' drop verdicts 217;
+  the owner's later calls and the twin checks 79; twins from the rebuild
+  rounds 26). Rows of the 32 indexes: 263,691 at 8c30328f to 263,270, the
+  station rules' 40 included.
+- **Kept by id, `PLACE_KEPT` now admitting a row: 46**, each a row after
+  the rebuild: 37 famous places in the cache with no row for want of a tag
+  (Kitakyushu 8, Gwangju 7 among them, Taoyuan's 大溪和平老街, Geneva's Mur
+  des Réformateurs) and keep_candidates group B (Daugavpils 1,
+  Gelsenkirchen 5, Geneva 3).
+- **Station rules merged (0321cbb0, 42a53518):** all 32 rebuilt, five
+  changed, 40 station rows folded, matching the station lane's measure:
+  Berlin 17 (Ostkreuz five rows to one), Brussels (Regional) 17, Bucharest
+  4 (Piața Sudului's tram rows), Bremen 1, Oslo 1.
+- **The owner's rulings of 2026-10-13, relayed by Cleanup, as applied:**
+  1. A body's meeting halls, Kingdom Halls and assembly halls are drops
+     (ruling 2), Kitakyushu's 14 天理教 分教会 with them; Florence
+     node/573615484 "Soka Gakkai" dropped (its article is the body's).
+  2. A worship row named only by a denomination, a body or a chain, with
+     no place or dedication and no branch tag, is a drop in every city:
+     applied to the backward helper's borderline rows and to every Latter-
+     day Saints row. Rows with a branch tag stay until after the landing.
+  3. Same-name park rows 300 m to 1 km apart: all kept.
+  4. A place node beside a same-named landmark: kept, except Stockholm's
+     four island nodes on the island's own Wikidata entry (Reimersholme,
+     Långholmen, Lilla Essingen, Stora Essingen), dropped. The 18 hamlet and
+     locality nodes named for a dropped family compound or farm stay.
+  5. Brasília's squares and parks with a sector code or place after the
+     number stay.
+  6. Daugavpils's ten numbered fortress parts dropped; the fortress's row
+     and Copenhagen's named bastions stay.
+  7. Göteborg's six estate courtyards (Amandas gård, Annas Gård, Fredrikas
+     Gård, Idas Gård, Julianas Gård, Pilegården) dropped as estate
+     facilities; Kemigården and Brasília's Galeria dos Estados stay for now.
+  8. Guadalajara's eight "Plaza verde" outlines dropped together (ruling
+     5); no row of the name remains.
+  9. Station pairs (`station_pairs.md`) tabled for next week.
+- **Also:** the stale `PLACE_RULED_KEPT` records of Most and Taipei
+  removed; `PLACE_SCOPE_REACH_REASON` recorded for Taichung, Brasília,
+  Taoyuan, Taipei and Guadalajara, each passing rule D of
+  search-scope-check on this tree.
+- **Bremen's area is the city, not the state:** relation 62559 is
+  admin_level 6, municipality key 04011000, place=city. The 23 rows past
+  25 km are the city's own Überseehafen exclave inside Bremerhaven, kept by
+  the owner (German answers 7). Not changed. Rule D will fail Bremen after
+  the landing unless a reason is recorded or the exclave is cut: for the
+  owner.
+- **Checks.** `check_place_search.py`: 49 problems by city, rule A only
+  (32 of this group, 17 live cities whose indexes the integration commit
+  rebuilt). `check_all.py`: 69 of 73; besides rule A, `check_macro_facts.py`
+  (Mexico City, the shared data), `check_place_unopened.py` (finding 60,
+  unchanged) and `check_render_current.py` (the 19 live searched maps,
+  stale against the merged search script). None is this group's.
+- **Left for the owner:** 312 borderline rows in
+  `pattern_screen_borderline.tsv`, by class in `pattern_screen.md`, and
+  ten denomination-like rows of the forward helper that are not
+  Latter-day Saints rows.
+
 ### 2026-10-13 - The final group rebuilt on the integrated rules: 263,696 to 263,691 rows, 新富 a station row again, no twin (branch search-final)
 
 - **`git merge --no-ff 73f025df` (search-integration), merge commit

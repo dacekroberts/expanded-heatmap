@@ -290,6 +290,15 @@ PLACE_RULED_KEPT = {
 PLACE_REVIEWED = {}
 # The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    # Rows the owner's later rulings of 2026-10-13 decide, and the twin checks' drops (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/181153125": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
+    "way/42067241": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
+    "node/459389822": "duplicate: a place node on the Wikidata entry of the island's own landmark row, which stays (owner 2026-10-13, relayed by Cleanup)",
+    "node/470618034": "duplicate: a place node on the Wikidata entry of the island's own landmark row, which stays (owner 2026-10-13, relayed by Cleanup)",
+    "node/470618434": "duplicate: a place node on the Wikidata entry of the island's own landmark row, which stays (owner 2026-10-13, relayed by Cleanup)",
+    "node/443304029": "duplicate: a place node on the Wikidata entry of the island's own landmark row, which stays (owner 2026-10-13, relayed by Cleanup)",
+    "node/1551361779": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; the twin check; owner 2026-10-13, relayed by Cleanup)",
     # Rows the read-only screen helper gave a drop verdict (the pattern screen of 2026-10-13;
     # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
     "node/6940314211": "religious body's meeting hall: ruling 2 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",

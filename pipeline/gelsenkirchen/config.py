@@ -248,6 +248,19 @@ PLACE_FOLD = None
 PLACE_REVIEWED = {}
 # The hand read of 2026-10-13 (docs/decisions_drafts/search-final.md).
 PLACE_DROPPED = {
+    # Same-named objects a drop above made a row (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "node/5359183650": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    # Rows the read-only screen helper gave a drop verdict (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "node/310751502": "religious body's meeting hall: ruling 2 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/254633833": "worship named only by a denomination: worship named only by a denomination, a body or a chain (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/145301515": "worship named only by a denomination: worship named only by a denomination, a body or a chain (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/145301478": "worship named only by a denomination: worship named only by a denomination, a body or a chain (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/281974847": "part of a church: ruling 4 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/131691262": "part of a church: ruling 4 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/4553571141": "part of a church: ruling 4 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/5359182390": "duplicate within 300 m: duplicates of one object (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
     # Descriptions, positions and site labels standing in for a name (the flag read of 2026-10-13, applied on the owner's word;
     # docs/decisions_drafts/search-final.md).
     "node/13956488410": "a description, a position or a site label standing in for a name is dropped (seven rulings 4; owner 2026-10-13, the flag read's verdicts, all approved)",
@@ -286,4 +299,13 @@ PLACE_DROPPED = {
     "way/418640757": "a section of the zoo, drawn as a park; the zoo has its own row",
     "way/244557929": "a park named for the cattle kept in it: a description",
     "way/556717431": "a description standing in for a name",
+}
+# Kept by id: admitted as rows although a rule passes them over (owner, 2026-10-13;
+# docs/decisions_drafts/search-final.md).
+PLACE_KEPT = {
+    "node/244915353": "'Amphitheater Gelsenkirchen', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/248922852": "'Consol Theater', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/1123451557": "'Herkules', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/2288376990": "'Nordsternturm', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/23015739": "'Westfälische Hochschule', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
 }
