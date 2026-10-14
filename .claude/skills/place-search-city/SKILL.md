@@ -421,7 +421,13 @@ All quoted in the drafts file; the short list:
    - **Two checks hold it, floor and ceiling.** `check_place_search.py` H
      fails an index that stops short of a station (Mexico City,
      2026-10-12); `check_place_scope.py` fails one that reaches a
-     municipality with no station and no recorded reason. The index step
+     municipality with no station and no recorded reason, and (rule D,
+     owner 2026-10-13) one whose farthest row lies more than 25 km from the
+     nearest station the committed map draws, unless the config records why
+     in `PLACE_SCOPE_REACH_REASON` (a dated string). Mendoza's scaffold
+     named the province for the department and passed every other rule,
+     its one area holding all seven stations; `--reach` prints each city's
+     figure. A reason is the owner's to give: correct the area first. The index step
      counts stations per municipality into `outputs/<city>/place_search.json`
      ("area"): read that list after the first build, before the eye read.
    - **The index step also writes `outputs/<city>/place_ids.json`** (owner,
