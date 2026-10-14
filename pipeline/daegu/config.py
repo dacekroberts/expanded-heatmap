@@ -203,5 +203,4 @@ PLACE_REVIEWED = {
 # Dropped by id on the leak-word read of 2026-10-13, each id read with its cached
 # name and tags (docs/decisions_drafts/search-rollout.md).
 PLACE_DROPPED = {
-    "node/436833410": "a junction node also tagged a shop (shop=variety_store), its English name a shop's description joined to the junction's: a glitched name, never repaired (큰장네거리); tags read 2026-10-13",
 }
