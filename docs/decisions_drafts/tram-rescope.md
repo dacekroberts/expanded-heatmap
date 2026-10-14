@@ -2,6 +2,34 @@
 
 Newest first. Cleanup folds these into `DECISIONS.md` at review time.
 
+### 2026-10-13 - Tram rescope: the final shared rules merged in; Mexico City, Prague and Milan rebuilt (Cleanup agent, nothing pushed)
+
+- **Merge.** search-integration 73f025df into `tram-rescope` (2c72a02d), no
+  conflict; `KNOWN_GAPS` stays empty; selftest 311 of 311.
+- **Rows.** Mexico City 67,338 to 67,336; Prague 10,435 to 10,431; Milan
+  6,119 to 6,097. The full account, with names, is
+  `data/_search_rollout/tram_rules56/final_rebuild.md`.
+- **Milan's 527-id platform tuple is removed.** Built in memory with the ids
+  and without, the index is the same 6,099 rows: the shared rule takes every
+  one, so none is kept by id. The rule takes 17 more stop names the list did
+  not hold.
+- **Owner, 2026-10-13, three Milan items:** the second "Ultima Cena" (node
+  3446474994) and "Chiesa parrocchiale di Santa Maria Assunta in Quintosole"
+  (way 360192664) dropped by id; both "Cascina Melghera" rows kept.
+- **Prague's 18 boroughs are rows again.** 24 street names leave, each a
+  stop platform by its tags.
+- **A fault for the rule's owner, not mended here:** in Prague 31 station
+  names have two to six rows within 250 m (Palmovka 6, Želivského 6), and
+  this build added 12. The same-name merge tests the whole 250 m cluster
+  with `_one_railway`; a cluster holding a metro station and tram stops is
+  mixed, so the tram stops no longer fold with each other.
+- **Judgment call: "twin round" was read as a same-name round**, every pair
+  of non-street rows of one kind and one name with its distance. Milan is
+  clean within 1 km.
+- **Checks.** E and H pass for the three; scope, index drift and unopened
+  checks OK. Rule A fails for all 20 searched maps: the merged matcher
+  changes the script every map carries.
+
 ### 2026-10-13 - Tram rescope: master merged in; place search rebuilt for Mexico City and Prague and built for Milan (Cleanup agent, nothing pushed, no map rendered)
 
 - **Merge.** `origin/master` (e0138000) into `tram-rescope`, 788ae80c. No
