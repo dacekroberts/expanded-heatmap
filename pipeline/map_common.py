@@ -2419,6 +2419,78 @@ _PLACE_SEARCH_TEMPLATE = r"""
         nl: {join: ["en"], stop: ["de", "het"],
              street: ["straat", "laan", "steenweg", "plein", "kaai", "dreef"],
              lead: [], station: [], abbr: {}},
+        // German (2026-10-13; docs/decisions_drafts/search-lang-de.md). The
+        // street word sits inside the name ("Hauptstrasse"), so a typed
+        // "Hauptstr." meets it as a prefix of the name's word, and "Str."
+        // alone through abbr. norm() writes sharp s as "ss" for every
+        // language and, where German is declared, "ae", "oe" and "ue" as the
+        // bare vowel on both sides (UMLAUT_FOLD). Not yet tried in a browser.
+        de: {join: ["und", "ecke"], stop: ["der", "die", "das", "den", "dem"],
+             street: ["strasse", "str", "weg", "allee", "platz", "gasse", "ring", "damm", "ufer",
+                      "chaussee"],
+             lead: [], station: ["bahnhof", "bf", "bhf", "hbf", "haltestelle"],
+             abbr: {"str": "strasse", "pl": "platz", "bf": "bahnhof", "bhf": "bahnhof",
+                    "hbf": "hauptbahnhof", "st": "sankt"}},
+        // da: search-final's search-lang-da.md (2026-10-13), as drafted; not yet tried in a browser.
+        da: {join: ["og"], stop: ["af", "den", "det", "de"],
+             street: ["gade", "vej", "alle", "plads", "torv", "straede", "boulevard", "sti", "bro",
+                      "kaj", "vaenge", "passage"],
+             lead: [], station: ["station", "st", "banegaard", "hovedbanegaard", "metro", "letbane"],
+             abbr: {"skt": "sankt", "sct": "sankt", "gl": "gammel", "ndr": "nordre", "sdr": "sondre",
+                    "nr": "norre", "kgs": "kongens", "chr": "christian", "ll": "lille"}},
+        // nb: search-final's search-lang-nb.md (2026-10-13), as drafted; not yet tried in a browser.
+        nb: {join: ["og"], stop: ["i", "på", "ved", "av"],
+             street: ["vei", "veien", "veg", "vegen", "gate", "gata", "gaten", "gt", "plass",
+                      "plassen", "pl", "alle", "sti", "stien", "torg", "terrasse", "bakken"],
+             lead: [], station: ["stasjon", "stasjonen", "holdeplass", "stoppested", "t-bane", "tbane"],
+             abbr: {"gt": "gate", "v": "vei", "vn": "veien", "pl": "plass", "dr": "doktor",
+                    "prof": "professor"}},
+        // sv: search-final's search-lang-sv.md (2026-10-13), as drafted; not yet tried in a browser.
+        sv: {join: ["och", "hörnet"], stop: ["den", "det", "de", "i", "på", "av", "vid"],
+             street: ["gatan", "gata", "vägen", "väg", "gränd", "stigen", "backen", "torget", "torg",
+                      "plan", "platsen", "plats", "allén", "allé", "gången"],
+             lead: [], station: ["station", "stationen", "centralstation", "hållplats", "tunnelbana",
+                                 "t-bana", "pendeltåg"],
+             abbr: {"g": "gatan", "v": "vägen", "gr": "gränd", "st": "sankt", "s:t": "sankt",
+                    "n": "norra", "s": "södra", "ö": "östra"}},
+        // lv: search-final's search-lang-lv.md (2026-10-13), as drafted; not yet tried in a browser.
+        lv: {join: ["un"], stop: [],
+             street: ["iela", "bulvaris", "prospekts", "gatve", "laukums", "aleja", "linija",
+                      "soseja", "cels", "dambis", "krastmala", "tilts", "skvers"],
+             lead: [], station: ["stacija", "pietura"],
+             abbr: {"bulv": "bulvaris", "prosp": "prospekts", "pr": "prospekts",
+                    "lauk": "laukums", "sk": "skersiela", "sv": "sveta"}},
+        // ro: search-final's search-lang-ro.md (2026-10-13), as drafted; not yet tried in a browser.
+        ro: {join: ["și", "si", "cu", "colț"], stop: ["de", "din", "la", "cel", "lui", "al", "a"],
+             street: ["strada", "str", "aleea", "al", "intrarea", "intr", "drumul", "dr", "bulevardul",
+                      "bd", "bdul", "bld", "blvd", "soseaua", "sos", "calea", "cal", "piata", "pta",
+                      "splaiul", "spl", "prelungirea", "prel", "fundatura", "fdt", "pasajul", "podul"],
+             lead: ["strada", "str", "aleea", "al", "intrarea", "intr", "drumul", "dr", "bulevardul",
+                    "bd", "bdul", "bld", "blvd", "soseaua", "sos", "calea", "cal", "splaiul", "spl",
+                    "prelungirea", "prel", "fundatura", "fdt"],
+             station: ["gara", "statia", "metrou", "halta"],
+             abbr: {"str": "strada", "bd": "bulevardul", "bdul": "bulevardul", "bld": "bulevardul",
+                    "blvd": "bulevardul", "sos": "soseaua", "pta": "piata", "spl": "splaiul",
+                    "prel": "prelungirea", "intr": "intrarea", "fdt": "fundatura", "sf": "sfantul",
+                    "dr": "doctor", "gen": "general", "ing": "inginer", "prof": "profesor"}},
+        // it: search-final's search-lang-it.md (2026-10-13), as drafted; not yet tried in a browser.
+        it: {join: ["e", "angolo"], stop: ["di", "del", "della", "dello", "dei", "degli", "delle", "da",
+                                            "il", "lo", "la", "i", "gli", "le", "l", "d"],
+             street: ["via", "v", "viale", "vle", "vicolo", "vic", "piazza", "pza", "pzza", "piazzale",
+                      "ple", "largo", "lgo", "corso", "cso", "lungotevere", "lgt", "lungarno", "ponte",
+                      "borgo", "circonvallazione", "strada"],
+             lead: ["via", "v", "viale", "vle", "vicolo", "vic", "corso", "cso", "lungotevere", "lgt",
+                    "lungarno", "borgo", "circonvallazione", "strada"],
+             station: ["stazione", "staz", "fermata", "metro"],
+             abbr: {"vle": "viale", "pza": "piazza", "pzza": "piazza", "ple": "piazzale", "lgo": "largo",
+                    "cso": "corso", "lgt": "lungotevere", "vic": "vicolo", "s": "san", "sta": "santa",
+                    "ss": "santi", "staz": "stazione"}},
+        // el: search-final's search-lang-el.md (2026-10-13), as drafted; not yet tried in a browser.
+        el: {join: ["και"], stop: ["του", "της", "των", "το", "την", "τον"],
+             street: ["οδος", "οδ", "λεωφορος", "λεωφ", "πλατεια", "πλ", "παροδος", "παρ", "στοα"],
+             lead: ["οδος", "οδ", "λεωφορος", "λεωφ", "παροδος", "παρ"],
+             station: ["σταθμος", "μετρο"],
+             abbr: {}},
         // Batch 2b (2026-10-08). Chinese and Korean names are one word each
         // to words(), so no street word is set aside and no connector is
         // split (和 and 과 sit inside names: 太和街); two streets are typed
@@ -2442,6 +2514,8 @@ _PLACE_SEARCH_TEMPLATE = r"""
         codes = (codes || []).slice();
         codes.slice().forEach(function (c) { (ALSO[c] || []).forEach(function (a) {
             if (codes.indexOf(a) < 0) codes.push(a); }); });
+        if (codes.indexOf("de") >= 0) UMLAUT_FOLD = true;
+        if (codes.indexOf("da") >= 0 || codes.indexOf("nb") >= 0) NORDIC_FOLD = true;
         codes.forEach(function (c) {
             var w = LANG_WORDS[c];
             if (!w) return;
@@ -2457,6 +2531,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
     var CJK = /[@@CJK_CLASS@@]/;
     var MARKS = /[@@MARKS_CLASS@@]/g;
     var data = null, own = null, loading = null, fold = null, marker = null, timer = null;
+    var UMLAUT_FOLD = false, NORDIC_FOLD = false;
     var renderer = null;
     var byIndex = [], crossURL = null, crossings = null, streetURL = null, streets = null;
     // THE SEARCHED AREA (owner, 2026-10-12): the index names the
@@ -2488,9 +2563,23 @@ _PLACE_SEARCH_TEMPLATE = r"""
     }
 
     function norm(s) {
-        s = String(s).normalize("NFKC").toLowerCase().normalize("NFD")
-            .replace(MARKS, "").normalize("NFC");
+        s = String(s).normalize("NFKC").toLowerCase();
+        // Before the marks go: a with a ring is "aa" in Danish and Norwegian.
+        if (NORDIC_FOLD) s = s.replace(/å/g, "aa");
+        s = s.normalize("NFD").replace(MARKS, "").normalize("NFC");
         if (fold === "ja") s = s.replace(/ou/g, "o").replace(/uu/g, "u").replace(/oo/g, "o");
+        // Sharp s is "ss" (Zurich writes only "strasse"). Where German is
+        // declared, a typed "ae", "oe" or "ue" meets the umlaut, whose marks
+        // are stripped above: both sides lose the "e".
+        s = s.replace(/ß/g, "ss");
+        if (UMLAUT_FOLD) s = s.replace(/ae/g, "a").replace(/oe/g, "o").replace(/ue/g, "u");
+        // Greek final sigma is sigma (candidate 31; place_index.fold_name's
+        // casefold does the same). Romanian's cedilla and comma letters meet
+        // already: both lose their mark above (candidate 35).
+        s = s.replace(/ς/g, "σ");
+        // Danish and Norwegian letters no mark is stripped from, written as
+        // the drafted word lists write them: ae, o, aa.
+        if (NORDIC_FOLD) s = s.replace(/æ/g, "ae").replace(/ø/g, "o");
         return s;
     }
     function words(s) { return norm(s).split(/[^\p{L}\p{N}]+/u).filter(Boolean); }
