@@ -537,4 +537,22 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the full read of 2026-10-13 under the owner's rulings of the
+# same day, each id read with its cached name (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    # description: dropped in the full read (owner, 2026-10-13)
+    "way/563158301": "'小さな公園': \"a small park\": a mapper's description, one of three such rows in one Kannabe housing area (full read, description)",
+    "way/558233712": "'滑り台の公園': \"the park with the slide\": a mapper's description, 60 m from the row above (full read, description)",
+    # bare type: dropped in the full read (owner, 2026-10-13)
+    "way/734020459": "'第一公園': \"Park No. 1\": a number and the type word, no place name (full read, bare type)",
+    "way/734020419": "'第二公園': \"Park No. 2\", 180 m from the row above (full read, bare type)",
+    "way/546939114": "'緑地公園': \"green-space park\": two type words, no place name (full read, bare type)",
+    "node/9103354510": "'竪穴式住居跡': \"pit-dwelling remains\": the kind of site as the whole name (full read, bare type)",
+    # worship body: dropped in the full read (owner, 2026-10-13)
+    "node/5904181553": "'崇教真光福山大修験道場': Sukyo Mahikari's Fukuyama training hall: a body's name plus its hall, no religion tag (full read, worship body)",
+    "way/1042091966": "'立正佼成会': Rissho Kosei-kai, the body's name alone; not in the rule's list of bodies (full read, worship body)",
+    # duplicate: dropped in the full read (owner, 2026-10-13)
+    "node/5372768934": "'一三軒家こども広場': same children's plaza as 十三軒屋こども広場 way/558233126, 15 m away, with the first character mistyped (full read, duplicate)",
+    # unsure in the full read, dropped by ruling 5: a stock plaza or rest-area name with no place in it (owner, 2026-10-13)
+    "way/403838301": "'ふれあい広場': ふれあい広場, listed in the ruling (unsure in the full read; ruling 5)",
+}

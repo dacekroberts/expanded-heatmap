@@ -206,4 +206,27 @@ PLACE_FOLD = None
 PLACE_REVIEWED = {
     "Rue du Commandant Chef d'Hôtel": "a residential street named for a person; 'hôtel' is part of the surname; tags read 2026-10-13",
 }
-PLACE_DROPPED = {}
+# Dropped by id on the full read of 2026-10-13 under the owner's rulings of the
+# same day, each id read with its cached name (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    # description: dropped in the full read (owner, 2026-10-13)
+    "way/265259446": "'L409': a bunker under its construction-type code alone (historic=bunker), one of four within 120 m (full read, description)",
+    "way/265259454": "'L411a': a bunker under its construction-type code alone (full read, description)",
+    "way/265259450": "'R134': a bunker under its construction-type code alone (full read, description)",
+    "way/265259447": "'R668': a bunker under its construction-type code alone (full read, description)",
+    "way/263547537": "'Tourelle 1': \"Turret 1\": a bunker under a type word and a number (full read, description)",
+    "node/6482562558": "'Poste 3': \"Berth 3\": a numbered quay berth of the commercial port as place=locality; ten in a row along one quay, about 400 m apart (full read, description)",
+    "node/6482562559": "'Poste 4': \"Berth 4\", as above (full read, description)",
+    "node/6482562560": "'Poste 5': \"Berth 5\", as above (full read, description)",
+    "node/6482562561": "'Poste 6': \"Berth 6\", as above (full read, description)",
+    "node/6482562562": "'Poste 7': \"Berth 7\", as above (full read, description)",
+    "node/6482562563": "'Poste 8': \"Berth 8\", as above (full read, description)",
+    "node/6482562564": "'Poste 9': \"Berth 9\", as above (full read, description)",
+    "node/6482562565": "'Poste 10': \"Berth 10\", as above (full read, description)",
+    "node/6482562566": "'Poste 11': \"Berth 11\", as above (full read, description)",
+    "node/6482562567": "'Poste 12': \"Berth 12\", as above (full read, description)",
+    "node/7815602667": "'CIM - Poste 8': a terminal operator's initials and a berth number, on another quay (full read, description)",
+    # worship body: dropped in the full read (owner, 2026-10-13)
+    "node/2598440240": "'Petites Sœurs des pauvres': named only by the religious order (Little Sisters of the Poor); the order's house, no name of its own, no wikidata (full read, worship body)",
+    "node/11310310407": "'Association cultuelle israélite du Havre': named for the association that runs it (the Jewish worship association of Le Havre), a body's name, no religion building tag (full read, worship body)",
+}

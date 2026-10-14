@@ -216,4 +216,29 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the full read of 2026-10-13 under the owner's rulings of the
+# same day, each id read with its cached name (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    # duplicate: dropped in the full read (owner, 2026-10-13)
+    "node/11044604585": "'新青森': a second node for Shin-Aomori, 89 m from the station's own row (node/3921354047, which holds the wikidata); no wikidata here, so the complex merge did not join them (full read, duplicate)",
+    # glitched: dropped in the full read (owner, 2026-10-13)
+    "way/1104917599": "'川上神社y': a stray Latin letter on the end of the shrine's name (full read, glitched)",
+    "node/12801643801": "'永い燃のにュメンド': garbled characters; the English name shows it should read as the red-thread monument (full read, glitched)",
+    "node/13726825101": "'経緯度無': \"no latitude and longitude\": not a name, the English alias shows a latitude and longitude marker was meant (full read, glitched)",
+    # description: dropped in the full read (owner, 2026-10-13)
+    "node/13727136901": "'青森県歴史街道の図': \"map of the historic roads of Aomori Prefecture\": an information board (full read, description)",
+    # bare type: dropped in the full read (owner, 2026-10-13)
+    "node/9886617307": "'聖堂': \"church hall\", no congregation named (full read, bare type)",
+    "way/678314017": "'憩いの広場': \"rest lawn\", a section label 98 m from 運動広場 (full read, bare type)",
+    "way/678314019": "'運動広場': \"sports ground\", a section label (full read, bare type)",
+    # religious office: dropped in the full read (owner, 2026-10-13)
+    "way/1076075812": "'実践倫理宏正会 青森支部': the Aomori branch office of an ethics society; no religion tag (full read, religious office)",
+    "way/1115536900": "'生長の家 青森県強化部': the prefectural \"propagation department\" of Seicho-no-Ie, an office of the body (full read, religious office)",
+    # unsure in the full read, dropped by ruling 3: a hall named only for what it enshrines, or a deity's title alone (owner, 2026-10-13)
+    "way/836787053": "'恵比寿像': 恵比寿像, a deity's statue alone, 18 m from 事代主神社's row (unsure in the full read; ruling 3)",
+    # unsure in the full read, dropped by ruling 1: a park named only by a category and an inventory or lot number (owner, 2026-10-13)
+    "way/556743666": "'1号遊歩道緑地': a number and a category, no place in front (N号公園 family; my reading) (unsure in the full read; ruling 1)",
+    "way/556743964": "'1号遊歩道緑地': a number and a category, no place in front (N号公園 family; my reading) (unsure in the full read; ruling 1)",
+    "way/653750100": "'1号遊歩道緑地': a number and a category, no place in front (N号公園 family; my reading) (unsure in the full read; ruling 1)",
+    "way/1187421879": "'1号遊歩道緑地': a number and a category, no place in front (N号公園 family; my reading) (unsure in the full read; ruling 1)",
+}

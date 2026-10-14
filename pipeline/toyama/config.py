@@ -324,4 +324,18 @@ PLACE_FOLD = "ja"
 PLACE_REVIEWED = {
     "オークスカナルパークホテル富山前": "a tram stop (railway=tram_stop), named for the place beside it (the Prague precedent, Hotel Golf); tags read 2026-10-13",
 }
-PLACE_DROPPED = {}
+# Dropped by id on the full read of 2026-10-13 under the owner's rulings of the
+# same day, each id read with its cached name (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    # bare type: dropped in the full read (owner, 2026-10-13)
+    "node/6868723858": "'お地蔵様': the whole name is the type word for a Jizo statue, with an honorific; no proper name (full read, bare type)",
+    "way/1080296907": "'展望台': \"observation deck\", a type word alone, mapped as a park (full read, bare type)",
+    "node/881600596": "'神社': \"shrine\", the type word alone (full read, bare type)",
+    "node/884386183": "'神社': \"shrine\", the type word alone (full read, bare type)",
+    "node/11478275305": "'村社': \"village shrine\", a shrine rank alone with no shrine name (the two rows that add a name to it stay) (full read, bare type)",
+    # worship body: dropped in the full read (owner, 2026-10-13)
+    "way/538380937": "'立正佼成会': named only by the religious body (Rissho Kosei-kai), no hall name (full read, worship body)",
+    # unsure in the full read, dropped by ruling 5: a stock plaza or rest-area name with no place in it (owner, 2026-10-13)
+    "way/185976979": "'修景広場': 修景広場, landscaped plaza, no place in it (my reading of \"and the like\") (unsure in the full read; ruling 5)",
+    "node/5302768591": "'ファミリー広場': ファミリー広場, family plaza, no place in it (my reading of \"and the like\") (unsure in the full read; ruling 5)",
+}

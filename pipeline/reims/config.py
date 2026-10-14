@@ -213,4 +213,46 @@ PLACE_REVIEWED = {
     "Jardin du Musée-hôtel Le Vergeur": "a public garden named for the museum-mansion beside it (leisure=park, Wikipedia); tags read 2026-10-13",
     "Musée Hôtel le Vergeur": "a museum in a hôtel particulier (tourism=museum, Wikipedia); tags read 2026-10-13",
 }
-PLACE_DROPPED = {}
+# Dropped by id on the full read of 2026-10-13 under the owner's rulings of the
+# same day, each id read with its cached name (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    # description: dropped in the full read (owner, 2026-10-13)
+    "way/741215757": "'parc et residence': \"park and residence\" in lower case: a mapper's note on the grounds of a housing block, tagged leisure=park (full read, description)",
+    "way/222784804": "'jardin du couvent': \"the convent's garden\" in lower case: a description, and the garden of a religious residence (full read, description)",
+    "way/625755903": "'Terrain rue de la Maladrerie': \"plot on rue de la Maladrerie\": a description of a city-owned plot, tagged leisure=park (full read, description)",
+    "node/6944372085": "'Les grands magasins (art déco)': \"the department stores (art deco)\": a description with a mapper's style note in brackets, historic=monument on a node (full read, description)",
+    "node/7036857830": "'Restitution d'un tumulus Gaulois': \"reconstruction of a Gaulish tumulus\", access=no: a description of an exhibit that cannot be entered (full read, description)",
+    "node/7036921358": "'Restitution d'une tombe à char gauloise': \"reconstruction of a Gaulish chariot tomb\", access=no, 60 m from the row above (full read, description)",
+    "way/90719109": "'Ateliers de fabrication': \"manufacturing workshops\": the function of a building in an industrial site, building=industrial (full read, description)",
+    "way/90730629": "'Ateliers de réparation': \"repair workshops\": as above, 200 m away (full read, description)",
+    "node/10178870778": "'Îlot A': \"Block A\": a planning block's letter as a quarter's name (full read, description)",
+    "way/934172282": "'Îlot G': \"Block G\": a block's letter; the description says detached housing built about 1972 (full read, description)",
+    "node/8655840209": "'Îlot H': \"Block H\": a block's letter; the alt name (Secteur Tourangeaux) is the real one (full read, description)",
+    "node/10557477903": "'Îlot I': \"Block I\": a block's letter (full read, description)",
+    "way/1112303723": "'Îlot J': \"Block J\": a block's letter, 200 m from Block I (full read, description)",
+    # bare type: dropped in the full read (owner, 2026-10-13)
+    "way/904713009": "'Cour d'honneur': \"Cour d'honneur\" (court of honour), the type alone on place=square (full read, bare type)",
+    "node/6942475486": "'Ancienne fontaine': \"Ancienne fontaine\" (old fountain), the type alone (full read, bare type)",
+    "node/5326108648": "'Monument de guerre': \"Monument de guerre\" (war monument), the type alone (full read, bare type)",
+    "way/741060562": "'Secteur pavillonnaire': \"detached-housing sector\": a housing type as the name of a neighbourhood (description tag says the same) (full read, bare type)",
+    "way/659405177": "'Secteur collectif': \"collective-housing sector\": a housing type as the name; the description names the real district (ZAC de la Bonne Femme) (full read, bare type)",
+    # worship body: dropped in the full read (owner, 2026-10-13)
+    "way/92308609": "'Mission chrétienne': \"Christian mission\": no congregation's name, denomination=evangelical only (full read, worship body)",
+    "way/92294275": "'Association de la Mosquée et du Centre Islamique de Reims': named for the association that runs it (\"Association of the Mosque and Islamic Centre of Reims\"), a body's name (full read, worship body)",
+    "node/7456690318": "'Maison Diocesaine Saint-Sixte': the diocesan house, a religious office tagged a place of worship (full read, worship body)",
+    # business: dropped in the full read (owner, 2026-10-13)
+    "relation/8823000": "'Champagne Henriot': a champagne house under its trade name (website and description say it trades), tagged historic=industrial on a site relation; no wikidata (full read, business)",
+    "way/633476015": "'Forbo Sarlino': a working factory under its company name (operator is the company, an S.A.S.), tagged historic=industrial (full read, business)",
+    # vanished: dropped in the full read (owner, 2026-10-13)
+    "way/633713396": "'Anciens Établissements Taillet': the description says the site was demolished in 2013 (full read, vanished)",
+    # duplicate: dropped in the full read (owner, 2026-10-13)
+    "way/629186116": "'Ancienne église Saint-Michel': the doorway of the former Saint-Michel church, at the same point as Église Saint-Michel de Reims node/8189738891, which has the wikidata (full read, duplicate)",
+    "node/6985672067": "'Cité Warnier-David': the Warnier-David garden city as a node, 10 m from the relation Cité-Jardin Warnier-David relation/10308807 (full read, duplicate)",
+    "node/6939127890": "'SIR 1': \"SIR 1\", an abbreviation; same alt name as the quarter Wilson 1 way/659403552, 100 m away (full read, duplicate)",
+    # home: dropped in the full read (owner, 2026-10-13)
+    "way/640089704": "'Tours Naudin': one apartment complex listed as a neighbourhood: the description says three residential towers, the operator is the landlord (full read, home)",
+    "way/650768925": "'Maison blanche Centre commercial': one landlord's 13 flats around a shopping centre (description), named for the shopping centre (full read, home)",
+    "way/764274824": "'Murigny Simon Courbet Forestier': one landlord's 44 dwellings (description), named for its three streets (full read, home)",
+    # estate marketing: dropped in the full read (owner, 2026-10-13)
+    "way/751139188": "'Plein R': a developer's programme name: the description says a housing programme on a former school site, carried by a developer (full read, estate marketing)",
+}

@@ -163,4 +163,71 @@ PLACE_REVIEWED = {
     "Hotel de Inmigrantes": "the former immigrants' reception building, a historic site (historic=yes, Wikipedia), never a hotel business; tags read 2026-10-13",
     "Museo de la Inmigración": "a national museum (tourism=museum, Wikipedia); its official name is the immigrants' reception building it occupies; tags read 2026-10-13",
 }
-PLACE_DROPPED = {}
+# Dropped by id on the full read of 2026-10-13 under the owner's rulings of the
+# same day, each id read with its cached name (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    # duplicate: dropped in the full read (owner, 2026-10-13)
+    "node/14056991105": "'LACROZE': all-caps second node 22 m from Federico Lacroze (node/4742293526), no network or wikidata (full read, duplicate)",
+    "node/14107942301": "'Plaza Serrano': node 9 m from Plazoleta Julio Cortazar (way/28075876), which already carries Plaza Serrano as alt (full read, duplicate)",
+    "node/13363621269": "'Barrrio Estación Buenos Aires': misspelled second object 77 m from Barrio Estacion Buenos Aires (way/911575169) (full read, duplicate)",
+    # worship body: dropped in the full read (owner, 2026-10-13)
+    "node/5999506369": "'Asociación Escuela Científica Basilio': named only for the body (Escuela Cientifica Basilio, a spiritist association with many branches) (full read, worship body)",
+    "node/7715457122": "'Asociación Escuela Científica Basilio': named only for the body (Escuela Cientifica Basilio) (full read, worship body)",
+    "way/476445070": "'Escuela Cienifica Basilio': named only for the body (Escuela Cientifica Basilio, misspelled) (full read, worship body)",
+    "node/7830965876": "'Escuela Científica Basilio': named only for the body (Escuela Cientifica Basilio) (full read, worship body)",
+    "node/7830981245": "'Escuela Científica Basilio': named only for the body (Escuela Cientifica Basilio) (full read, worship body)",
+    "way/838851914": "'Escuela Científica Basilio': named only for the body (Escuela Cientifica Basilio) (full read, worship body)",
+    "way/839187880": "'Escuela Científica Basilio': named only for the body (Escuela Cientifica Basilio) (full read, worship body)",
+    "way/839189979": "'Escuela Científica Basilio': named only for the body (Escuela Cientifica Basilio) (full read, worship body)",
+    "node/4600750048": "'Legión de la Buena Voluntad': named only for the body (Legion de la Buena Voluntad, a charity) (full read, worship body)",
+    "node/6455355048": "'Institución religiosa Perfecta Libertad': named only for the body (Perfect Liberty), with a describing prefix (full read, worship body)",
+    "way/471645167": "'Perfecta Libertad': named only for the body (Perfect Liberty) (full read, worship body)",
+    # worship chain: dropped in the full read (owner, 2026-10-13)
+    "node/13930001523": "'Beit Jabad': bare chain name (Beit Jabad = Chabad house), no branch name; the branches with a district name stay (full read, worship chain)",
+    "way/1528638181": "'Beit Jabad': bare chain name (Beit Jabad), no branch name (full read, worship chain)",
+    "way/1528639499": "'Beit Jabad': bare chain name (Beit Jabad), no branch name (full read, worship chain)",
+    "node/13807329079": "'Universal': bare chain name (Iglesia Universal), one of 8 rows (full read, worship chain)",
+    "way/462861855": "'Universal': bare chain name (Iglesia Universal) (full read, worship chain)",
+    "way/465528474": "'Universal': bare chain name (Iglesia Universal) (full read, worship chain)",
+    "way/471566093": "'Universal': bare chain name (Iglesia Universal) (full read, worship chain)",
+    "way/471658030": "'Universal': bare chain name (Iglesia Universal) (full read, worship chain)",
+    "way/474419009": "'Universal': bare chain name (Iglesia Universal) (full read, worship chain)",
+    "way/476136230": "'Universal': bare chain name (Iglesia Universal) (full read, worship chain)",
+    "way/476369223": "'Universal': bare chain name (Iglesia Universal) (full read, worship chain)",
+    "node/4600429917": "'Dios es Amor': chain name only (Dios es Amor, a Pentecostal chain), two rows (full read, worship chain)",
+    "node/10672175803": "'Dios es Amor': chain name only (Dios es Amor) (full read, worship chain)",
+    "node/6250407903": "'Iglesia de Dios Ministerial de Jesucristo Internacional': chain name only (Iglesia de Dios Ministerial de Jesucristo Internacional) (full read, worship chain)",
+    "node/12038563167": "'Iglesia Internacional de la Gracia de Dios': chain name only (Iglesia Internacional de la Gracia de Dios) (full read, worship chain)",
+    "node/3013496107": "'Fo Guang Shan': order name only (Fo Guang Shan), no temple name (full read, worship chain)",
+    # worship denomination: dropped in the full read (owner, 2026-10-13)
+    "way/476127761": "'Ejército de Salvación': named only for the body (Salvation Army in Spanish) (full read, worship denomination)",
+    "node/7817419187": "'Iglesia Discípulos de Cristo': denomination name only (Disciples of Christ) (full read, worship denomination)",
+    "node/4604136546": "'Iglesia Evangelica Asamblea de Dios': denomination name only (Assemblies of God) (full read, worship denomination)",
+    "way/471568299": "'Iglesia Evangelica Asamblea Cristiana': denomination name only (Asamblea Cristiana) (full read, worship denomination)",
+    "way/461199072": "'Iglesia Nueva Apolistica': denomination name only (New Apostolic Church, misspelled) (full read, worship denomination)",
+    "node/12091422128": "'Inglesia Adventista del Séptimo Día': denomination name only (Seventh-day Adventist, misspelled Inglesia) (full read, worship denomination)",
+    "node/4604227104": "'Iglesia Pentecostal del Nombre de Jesucristo': denomination name only (Pentecostal church of the Name of Jesus Christ) (full read, worship denomination)",
+    "node/4604492723": "'I.P.U': denomination by its initials only (I.P.U) (full read, worship denomination)",
+    "way/473851726": "'Saion del Reino de los Testigos de Jehová': Kingdom Hall of Jehovah's Witnesses in Spanish, no congregation name (misspelled Saion) (full read, worship denomination)",
+    "node/6988522185": "'Salón del Reino de los Testigos de Jehovah': Kingdom Hall of Jehovah's Witnesses in Spanish, no congregation name (full read, worship denomination)",
+    # bare type: dropped in the full read (owner, 2026-10-13)
+    "way/477529958": "'Templo Evangélico': whole name is a type (evangelical temple) (full read, bare type)",
+    "way/150886580": "'Oratorio': whole name is the type word Oratorio (full read, bare type)",
+    "node/13107830803": "'Mirador': whole name is the type word Mirador, a node tagged park (full read, bare type)",
+    "way/448424194": "'Patio Recreativo': whole name is a type (recreation patio) (full read, bare type)",
+    # business: dropped in the full read (owner, 2026-10-13)
+    "node/7455156501": "'Infobip Argentina': a software company's office tagged place of worship (full read, business)",
+    "node/7455156500": "'Infobip Latam': a software company's office tagged place of worship (full read, business)",
+    # description: dropped in the full read (owner, 2026-10-13)
+    "node/11330221269": "'Estátuas dos personagens ao longo da rua': a visitor's description in Portuguese (statues of the characters along the street), tagged monument (full read, description)",
+    "node/11505118444": "'Ladrillos de máquina históricos': describes old machine-made bricks, historic=paving_stones (full read, description)",
+    "node/11505118442": "'Telégrafo de la Nación': the lettering on a manhole cover, historic=manhole_cover (full read, description)",
+    # exhibit model wikidata: dropped in the full read (owner, 2026-10-13)
+    "node/4518281791": "'CITER 155 mm L 33 Modelo Argentino': a displayed gun; the wikidata and article are the gun model's, not this object's (full read, exhibit model wikidata)",
+}
+# Kept by the owner's word (place_index, PLACE_KEPT; owner, 2026-10-13): a famous
+# place the rules pass over for want of a tag, the id read with its cached name
+# (docs/decisions_drafts/search-rollout.md). Not yet confirmed by a rebuild.
+PLACE_KEPT = {
+    "node/4827933621": "'Puente de la Mujer', the footbridge, cached as a viewpoint node with no Wikidata or Wikipedia tag: a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+}

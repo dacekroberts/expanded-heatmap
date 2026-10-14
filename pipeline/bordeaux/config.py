@@ -221,4 +221,41 @@ PLACE_REVIEWED = {
     "Musée des Arts Décoratifs et du Design": "a museum (tourism=museum, ref:mhs, wikidata); its other name is the hôtel particulier it occupies; tags read 2026-10-13",
     "Saint-Bruno - Hôtel de Région": "a tram stop (railway=tram_stop), named for the place beside it (the Prague precedent, Hotel Golf); tags read 2026-10-13",
 }
-PLACE_DROPPED = {}
+# Dropped by id on the full read of 2026-10-13 under the owner's rulings of the
+# same day, each id read with its cached name (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    # station duplicate: dropped in the full read (owner, 2026-10-13)
+    "node/7035371688": "'Hippodrome - Terminus partiel': a short-turn platform of Hippodrome, 11 m from the Hippodrome row (node/6897913826); gtfs:stop_name is plain Hippodrome (full read, station duplicate)",
+    # worship only: dropped in the full read (owner, 2026-10-13)
+    "way/173368701": "'Action Missionnaire des Assemblées de Dieu France': the body's name alone (Assemblées de Dieu mission) (full read, worship only)",
+    "node/13230313190": "'Centre d'Accueil Universel - Centre Évangélique': a chain's name and a type (Centre d'Accueil Universel is the Universal church's French name) (full read, worship only)",
+    "node/11828838502": "'JW': the denomination's initials alone (full read, worship only)",
+    "node/2517774593": "'Église Orthodoxe de France': the body's name alone (Église Orthodoxe de France) (full read, worship only)",
+    "way/154397081": "'Église néo-apostolique': denomination alone (New Apostolic) (full read, worship only)",
+    "way/226889773": "'Église évangeliste libre': denomination alone (free evangelical, misspelled) (full read, worship only)",
+    "node/12180567342": "'Évangélique reformé': denomination words alone, no hall word (full read, worship only)",
+    # worship office: dropped in the full read (owner, 2026-10-13)
+    "way/164301410": "'Aumônerie des jeunes': \"youth chaplaincy\": a religious office named by its type, tagged a place of worship (full read, worship office)",
+    "way/163476643": "'Maison Paroissiale Des Ardillos': a parish house tagged a place of worship (full read, worship office)",
+    "way/173366452": "'Salle paroissiale catholique Lahary': a parish hall tagged a place of worship (full read, worship office)",
+    "way/173358816": "'Salles paroissiales catholiques Migron': parish halls tagged a place of worship (full read, worship office)",
+    # bare type: dropped in the full read (owner, 2026-10-13)
+    "way/167434241": "'Mosquée': \"Mosque\" alone (full read, bare type)",
+    "way/199588398": "'Manège à chevaux': \"horse ring\" alone, tagged a park (full read, bare type)",
+    "way/1413497420": "'Cour d'honneur': \"main courtyard\" alone (full read, bare type)",
+    "way/65822209": "'Espace vert': \"green space\" alone (full read, bare type)",
+    "way/65822222": "'Espaces verts': \"green spaces\" alone (full read, bare type)",
+    "way/551414069": "'Parvis': \"forecourt\" alone (full read, bare type)",
+    "way/27583757": "'Théâtre de verdure': \"open-air theatre\" alone, tagged a park (full read, bare type)",
+    # business: dropped in the full read (owner, 2026-10-13)
+    "way/199588399": "'Club de tir à l'arc Indian’s Arc': an archery club tagged a park (full read, business)",
+    # estate facility: dropped in the full read (owner, 2026-10-13)
+    "way/922451453": "'Green Village - parc habité': operator is a co-owners' body (SDC Green Village); the name says \"inhabited park\"; construction=residential (full read, estate facility)",
+    "way/1074467253": "'Parc des Olympiades': operator is a housing residence (Résidence des Olympiades) (full read, estate facility)",
+    # duplicate: dropped in the full read (owner, 2026-10-13)
+    "way/703841537": "'Palais Gallien': the Palais Gallien as a park with access=no, 0 m from the ruins row that carries the entry (relation/9786800) (full read, duplicate)",
+    "way/1023103704": "'Lébade de Blanquefort': a segment of the old road that the relation of the same name already lists (relation/6593638) (full read, duplicate)",
+    "way/442956408": "'Lébade de Blanquefort': a segment of the old road that the relation of the same name already lists (full read, duplicate)",
+    "way/442965882": "'Lébade de Blanquefort': a segment of the old road that the relation of the same name already lists (full read, duplicate)",
+    "way/770649587": "'Lébade de Blanquefort': a segment of the old road that the relation of the same name already lists (full read, duplicate)",
+}

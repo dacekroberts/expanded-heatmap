@@ -193,4 +193,22 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the full read of 2026-10-13 under the owner's rulings of the
+# same day, each id read with its cached name (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    # station ride: dropped in the full read (owner, 2026-10-13)
+    "node/14203211463": "'モノレールのりば': \"monorail boarding point\": a ride on private grounds (its note says tickets are bought at a reception desk), and a bare description (full read, station ride)",
+    # worship only: dropped in the full read (owner, 2026-10-13)
+    "node/4405131869": "'ユース・ウィズ・ア・ミッション': a mission body's local base, named by the body alone; no religion tag (full read, worship only)",
+    # bare type: dropped in the full read (owner, 2026-10-13)
+    "node/5281672569": "'地蔵菩薩': \"Jizo bodhisattva\" alone: a roadside statue's type (full read, bare type)",
+    "relation/4109933": "'噴水広場': \"fountain plaza\" alone (full read, bare type)",
+    # description: dropped in the full read (owner, 2026-10-13)
+    "node/8288778318": "'津之江水路の沿革': \"history of the Tsunoe waterway\": the title of an information board, tagged a monument (full read, description)",
+    "node/8379999618": "'辻': a single character (\"crossroads\") tagged a monument (full read, description)",
+    # vanished: dropped in the full read (owner, 2026-10-13)
+    "way/414295157": "'雲峯神社跡地': the name says \"site of the former Unpo shrine\"; still tagged a place of worship (full read, vanished)",
+    "node/4420298772": "'高槻フラワーパーク（閉鎖中）': the name ends \"(closed)\" in Japanese (閉鎖中) (full read, vanished)",
+    # glitch: dropped in the full read (owner, 2026-10-13)
+    "way/82209879": "'芥川 (Akutagawa)': a second row for the Akuta river with the romanised name glued into the name tag in brackets (full read, glitch)",
+}

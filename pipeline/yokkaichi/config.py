@@ -237,4 +237,21 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the full read of 2026-10-13 under the owner's rulings of the
+# same day, each id read with its cached name (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    # bare type: dropped in the full read (owner, 2026-10-13)
+    "way/493209706": "'子ども広場': whole name is \"children's plaza\" (full read, bare type)",
+    "way/482667332": "'市民農園': whole name is \"citizens' allotment\", tagged a park (full read, bare type)",
+    "way/473681617": "'総合体育館': whole name is \"general gymnasium\", no city in the name, no wikidata (full read, bare type)",
+    "way/1320951385": "'郷倉': whole name is \"village storehouse\", historic=building with no other tag (full read, bare type)",
+    "way/1320938913": "'神馬舎': whole name is \"sacred horse stable\": an outbuilding of 長倉神社 (way/1320944565, 30 m) tagged a place of worship (full read, bare type)",
+    # duplicate: dropped in the full read (owner, 2026-10-13)
+    "way/546706297": "'聖武天皇社 拝殿': the worship hall building inside 聖武天皇社 (way/503015183, same point); name:en is \"shirine\" (full read, duplicate)",
+    "node/13339639791": "'田村寺': same temple as 弘法山\u3000田村寺 (node/13339595078), 15 m away (full read, duplicate)",
+    # description: dropped in the full read (owner, 2026-10-13)
+    "way/59239609": "'谷川支流': \"tributary of the Tani river\": a description, not a river's name (full read, description)",
+    "way/59239734": "'鹿化川支流': \"tributary of the Kabake river\": a description, not a river's name (full read, description)",
+    # unsure in the full read, dropped by ruling 2: a religious body's meeting hall or branch tagged a place of worship (owner, 2026-10-13)
+    "node/5459320738": "'幸福の科学 四日市支部': a body's name and the word branch (支部) (unsure in the full read; ruling 2)",
+}

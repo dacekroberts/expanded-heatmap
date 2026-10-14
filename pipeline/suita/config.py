@@ -323,4 +323,32 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the full read of 2026-10-13 under the owner's rulings of the
+# same day, each id read with its cached name (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    # station freight: dropped in the full read (owner, 2026-10-13)
+    "node/13362855144": "'吹田貨物ターミナル': a freight terminal (貨物ターミナル), operator JR Freight; no passenger tags (full read, station freight)",
+    # bare type: dropped in the full read (owner, 2026-10-13)
+    "way/1219698862": "'ちびっこ遊園': \"kids' playground\" alone (full read, bare type)",
+    "way/488799235": "'子供の遊び場': \"children's play area\" alone (full read, bare type)",
+    "way/491595287": "'州浜': \"pebble shore\": a Japanese garden feature's type word, tagged a beach (full read, bare type)",
+    "node/11107023383": "'常夜燈': \"night lantern\" alone; the historic tag repeats the name (full read, bare type)",
+    "way/510199798": "'母屋': \"main house\": one building of a listed residence, named by its type only (full read, bare type)",
+    "way/650066167": "'キザラ': \"wood shed\": one outbuilding of a listed residence, named by its type only (full read, bare type)",
+    "way/1279386753": "'井戸屋': \"well house\": one outbuilding of a listed residence, named by its type only (full read, bare type)",
+    "way/1279386757": "'内蔵': \"inner storehouse\": one outbuilding of a listed residence, named by its type only (full read, bare type)",
+    "way/1279386759": "'土蔵一': \"storehouse one\": one outbuilding of a listed residence, type and number (full read, bare type)",
+    "way/1282913012": "'土蔵二': \"storehouse two\": one outbuilding of a listed residence, type and number (full read, bare type)",
+    "way/1282912992": "'旧勘定部屋棟': \"former counting-room wing\": one wing of a listed residence, named by its type only (full read, bare type)",
+    "way/1282913017": "'玄関棟': \"entrance wing\": one wing of a listed residence, named by its type only (full read, bare type)",
+    "way/650066172": "'納屋': \"barn\": one outbuilding of a listed residence, named by its type only (full read, bare type)",
+    "way/1282913018": "'茶室': \"tea room\": one building of a listed residence; its own name is only in the bracket (full read, bare type)",
+    "way/510199797": "'長屋門': \"row-house gate\": the gate of a listed residence, named by its type only (full read, bare type)",
+    "way/1279386752": "'離れ座敷': \"detached parlour\": one building of a listed residence, named by its type only (full read, bare type)",
+    # description: dropped in the full read (owner, 2026-10-13)
+    "node/11107023385": "'祭神一覧掲示': \"notice listing the enshrined deities\": a signboard, the historic tag repeats the name (full read, description)",
+    # unsure in the full read, dropped by ruling 5: a stock plaza or rest-area name with no place in it (owner, 2026-10-13)
+    "way/573868596": "'健康増進広場': 健康増進広場, a zone label with no place in it (my reading of \"and the like\") (unsure in the full read; ruling 5)",
+    # unsure in the full read, dropped by ruling 2: a religious body's meeting hall or branch tagged a place of worship (owner, 2026-10-13)
+    "way/744899368": "'世界心道教 大阪支庁': a body's Osaka branch office (支庁) tagged a place of worship (unsure in the full read; ruling 2)",
+}

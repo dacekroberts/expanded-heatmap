@@ -228,4 +228,13 @@ PLACE_REVIEWED = {
     "Hôtel des Barres": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00112277, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
     "Hôtel du Président Bouhier": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00112322, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
 }
-PLACE_DROPPED = {}
+# Dropped by id on the full read of 2026-10-13 under the owner's rulings of the
+# same day, each id read with its cached name (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    # bare type: dropped in the full read (owner, 2026-10-13)
+    "node/2807522079": "'Ancienne villa': \"former villa\" alone, tagged ruins; no entry (full read, bare type)",
+    "node/11962674945": "'La voie romaine': \"the Roman road\" alone, tagged ruins (full read, bare type)",
+    "node/5830232912": "'Pavillons d'angle': \"corner pavilions\" alone, tagged historic=building; no entry (full read, bare type)",
+    # description: dropped in the full read (owner, 2026-10-13)
+    "node/1639637250": "'Un Pignon de la Grande Église': \"a gable of the great church\": a description of a fragment, no entry (full read, description)",
+}

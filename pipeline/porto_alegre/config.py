@@ -89,4 +89,73 @@ PLACE_DROPPED = {
     "node/9758495470": "a closed business under its own name and the status '(closed)', tagged ruins, no article (the '(geschlossen)' precedent) (Motel serra Verde (FECHADO)); tags read 2026-10-13",
     "node/10003286571": "a closed business under its own name and the status '(closed)', tagged ruins, no article (the '(geschlossen)' precedent) (Nacional Supermercado (FECHADO)); tags read 2026-10-13",
     "node/12128874866": "a closed business under its own name and the status '(closed)', tagged ruins, no article (the '(geschlossen)' precedent) (Sasun Indústria de Produtos Termo-Transferíveis Ltda (FECHADO)); tags read 2026-10-13",
+    # The entries below: the full read of 2026-10-13 under the owner's rulings of the
+    # same day, each id read with its cached name (docs/decisions_drafts/search-rollout.md).
+    # home: dropped in the full read (owner, 2026-10-13)
+    "node/13686487028": "'Condominio Encosta do Cerro': a gated condominium mapped as a neighbourhood (full read, home)",
+    # duplicate: dropped in the full read (owner, 2026-10-13)
+    "way/1376631466": "'Carioca (ocupação)': second row for Carioca (node/7906709047, about 180 m), with a mapper's bracket (full read, duplicate)",
+    "way/512384395": "'Pasqualine': misspelled second row for Pasqualini (node/7898855163, about 220 m) (full read, duplicate)",
+    "way/512369456": "'Vachi': misspelled second row for Vacchi (node/7898855110, about 110 m) (full read, duplicate)",
+    "way/377514290": "'Praça Prof. Emilio M. Ripoll': second row for Praça Professor Emilio Mabilde Ripoll (way/38744201, 11 m), abbreviated (full read, duplicate)",
+    # bare type: dropped in the full read (owner, 2026-10-13)
+    "way/909121471": "'Area Verde Três': \"Green Area Three\": a lot code beside a type word (full read, bare type)",
+    "way/1216499868": "'Cachorrodromo': \"dog park\" alone (full read, bare type)",
+    "way/217350354": "'Pedalinhos': \"pedal boats\": a ride in Parque Farroupilha tagged a park (full read, bare type)",
+    "way/1295815686": "'Praça comunitária': \"community square\" alone (full read, bare type)",
+    "way/542275958": "'Praça infantil': \"children's square\" (playground) alone (full read, bare type)",
+    "way/340141441": "'praça de lazer': \"leisure square\" alone, lower case (full read, bare type)",
+    "way/837405874": "'centro afro': \"afro centre\" alone, lower case (full read, bare type)",
+    "node/2442008467": "'Torii': \"Torii\" alone; also barrier=gate (full read, bare type)",
+    # worship only: dropped in the full read (owner, 2026-10-13)
+    "node/3832738698": "'Assembéia de Deus': denomination alone (Assembleia de Deus, misspelled, so the rule missed it) (full read, worship only)",
+    "node/7688082990": "'Capela Luterana': hall word and denomination only (full read, worship only)",
+    "node/5351883425": "'Encontros De Fé': the chain's name alone (Encontros de Fé) (full read, worship only)",
+    "node/11067493579": "'Encontros de Fé': the chain's name alone (Encontros de Fé) (full read, worship only)",
+    "way/805559540": "'Igreja Evangélica Encontros de Fé': hall type and the chain's name alone (full read, worship only)",
+    "node/2697121804": "'IURD - Igreja Universal do Reino de Deus': the chain's initials and name alone (IURD) (full read, worship only)",
+    "way/424643512": "'IURD - Igreja Universal do Reino de Deus': the chain's initials and name alone (IURD) (full read, worship only)",
+    "way/650817283": "'Igreja Universal do Reino de Deus - IURD': the chain's name and initials alone (IURD) (full read, worship only)",
+    "way/426621953": "'Igreja Brasil Para Cristo': the body's name alone (O Brasil Para Cristo) (full read, worship only)",
+    "node/9509591228": "'Igreja o Brasil para Cristo': the body's name alone (O Brasil Para Cristo) (full read, worship only)",
+    "way/693804475": "'Igreja Do Nazareno': denomination alone (Nazarene) (full read, worship only)",
+    "node/6537014436": "'Igreja Nazareno': denomination alone (Nazarene) (full read, worship only)",
+    "node/5328138286": "'Igreja Nova Apostólica': denomination alone (New Apostolic) (full read, worship only)",
+    "node/1220447811": "'Igreja Pentecostal Unida do Brasil': the body's name alone (Igreja Pentecostal Unida do Brasil) (full read, worship only)",
+    "node/4430045360": "'Igreja Pentecostal Unida do Brasil': the body's name alone (Igreja Pentecostal Unida do Brasil) (full read, worship only)",
+    "way/558634347": "'Igreja do E Qauandrangular': the Foursquare body's name alone, garbled (\"E Qauandrangular\") (full read, worship only)",
+    "way/569186273": "'Igreja evangelica luterana do Brasil': the body's name alone (Igreja Evangélica Luterana do Brasil), lower case (full read, worship only)",
+    "node/1043931244": "'Salão das Testemunhas de Jeová': Kingdom Hall named by the denomination alone (full read, worship only)",
+    "node/431739366": "'Salão de Assembleias das Testemunhas de Jeová': Jehovah's Witnesses assembly hall named by the denomination alone (full read, worship only)",
+    "node/6688250944": "'Seicho-No-Ie': the movement's name alone; the wikidata and wikipedia are the movement's, not this hall's (full read, worship only)",
+    # zoo content: dropped in the full read (owner, 2026-10-13)
+    "way/62009396": "'Avestruzes': zoo enclosure tagged a park, named by the animal (Sapucaia zoo) (full read, zoo content)",
+    "way/61109537": "'Aves': zoo enclosure tagged a park, named by the animal (full read, zoo content)",
+    "way/62009406": "'Camelos': zoo enclosure tagged a park, named by the animal (full read, zoo content)",
+    "way/62009410": "'Capivaras': zoo enclosure tagged a park, named by the animal (full read, zoo content)",
+    "way/61109541": "'Cervos': zoo enclosure tagged a park, named by the animal (full read, zoo content)",
+    "way/62009393": "'Elefantes': zoo enclosure tagged a park, named by the animal (full read, zoo content)",
+    "way/62009409": "'Hipopótamos': zoo enclosure tagged a park, named by the animal (full read, zoo content)",
+    "way/62009397": "'Javalis': zoo enclosure tagged a park, named by the animal (full read, zoo content)",
+    "way/62009411": "'Leões, Felinos e Ursos': zoo enclosure tagged a park, named by the animals (full read, zoo content)",
+    "way/418208793": "'Lhamas': zoo enclosure tagged a park, named by the animal (full read, zoo content)",
+    "way/61975486": "'Macacos': zoo enclosure tagged a park, named by the animal (full read, zoo content)",
+    "way/62009392": "'Rinocerontes': zoo enclosure tagged a park, named by the animal (full read, zoo content)",
+    "way/61109526": "'Répteis': zoo enclosure tagged a park, named by the animal (full read, zoo content)",
+    "way/62009395": "'Zebras': zoo enclosure tagged a park, named by the animal (full read, zoo content)",
+    # worship office: dropped in the full read (owner, 2026-10-13)
+    "node/3779015843": "'Caju Casa Marista da Juventude': a Marist youth house tagged a place of worship (full read, worship office)",
+    "way/1250679463": "'Casa de formação coração de jesus': a formation house (seminary residence) tagged a place of worship, no entry (full read, worship office)",
+    "way/484442705": "'Franciscanos - Sede Provincial': a Franciscan province's head office tagged a place of worship (full read, worship office)",
+    # business: dropped in the full read (owner, 2026-10-13)
+    "node/4635195791": "'Plantão MRV obra': a builder's sales stand at a construction site (MRV), tagged a place of worship (full read, business)",
+    # description: dropped in the full read (owner, 2026-10-13)
+    "node/7183201904": "'Escola Infantil Municipal (obra inacabada - em ruínas)': a mapper's note on an unfinished school building, not a name (full read, description)",
+    "node/9010182267": "'Imagem religiosa': \"religious image\": a description, not a name (full read, description)",
+    "way/887354383": "'praça da rua de cima': \"square of the street above\": a description (full read, description)",
+    "way/1418731209": "'Área de descanso dos funcionários REFAP': \"rest area of the REFAP employees\": a refinery's staff area, tagged a beach (full read, description)",
+    # estate facility: dropped in the full read (owner, 2026-10-13)
+    "way/197054205": "'Rossi Estilo': a condominium's marketing name (Rossi Estilo) tagged a park (full read, estate facility)",
+    # unsure in the full read, dropped by ruling 1: a park named only by a category and an inventory or lot number (owner, 2026-10-13)
+    "way/243369444": "'Praça 2': Praça 2, the type and a number alone (my reading; about 60 lot-numbered squares the reader kept are not listed) (unsure in the full read; ruling 1)",
 }

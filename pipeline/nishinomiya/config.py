@@ -264,4 +264,21 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the full read of 2026-10-13 under the owner's rulings of the
+# same day, each id read with its cached name (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    # bare type: dropped in the full read (owner, 2026-10-13)
+    "way/1105865465": "'コミュニティ花壇': \"community flower bed\", a type label on a park polygon (the neighbouring bed that carries a district name stays) (full read, bare type)",
+    "way/1184391020": "'バスケットコート': \"basketball court\", the type word alone, tagged a park (full read, bare type)",
+    "node/3743709586": "'展望ポイント': \"viewpoint\", the type word alone, tagged a peak (full read, bare type)",
+    "node/6640322381": "'常夜灯': \"night lantern\", the object type alone (full read, bare type)",
+    "node/7605965113": "'水位柱': \"water-level post\", the object type alone (full read, bare type)",
+    # estate facility: dropped in the full read (owner, 2026-10-13)
+    "way/585266205": "'シェラビア東山台5番街プレイロット': the play lot of one numbered block of a named condominium estate (full read, estate facility)",
+    "way/1105670303": "'メルカード武庫川公園': operator is the estate's own management office; the park carries the apartment complex's name (full read, estate facility)",
+    "way/818948135": "'鷲林寺ガーデンコート': a housing development's marketing name (\"... Garden Court\") on a park polygon, no park word (full read, estate facility)",
+    # worship body: dropped in the full read (owner, 2026-10-13)
+    "node/11043422633": "'崇教真光': named only for the religious body (Sukyo Mahikari) (full read, worship body)",
+    "way/383937652": "'生長の家': named only for the religious body (Seicho-no-Ie) (full read, worship body)",
+    "way/1214350286": "'誠成公倫': named only for the religious body (full read, worship body)",
+}

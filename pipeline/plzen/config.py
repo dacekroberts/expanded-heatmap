@@ -153,4 +153,36 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("cs",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the full read of 2026-10-13 under the owner's rulings of the
+# same day, each id read with its cached name (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    # bare type: dropped in the full read (owner, 2026-10-13)
+    "node/2159233439": "'Boží muka': whole name is \"wayside shrine\" (the tag's own type); a wikidata entry but no article tag; its description names it by village only (full read, bare type)",
+    "node/2172454447": "'Boží muka': whole name is \"wayside shrine\"; a wikidata entry but no article tag (full read, bare type)",
+    "way/110350245": "'Kaplička': whole name is \"little chapel\"; description \"Kaple v Radčicích\"; a wikidata entry but no article tag (full read, bare type)",
+    "node/2131490904": "'Smírčí kříž': whole name is \"conciliation cross\" (the type); a wikidata entry but no article tag (full read, bare type)",
+    "node/2712651090": "'Pomník padlým': whole name is \"memorial to the fallen\"; a wikidata entry but no article tag (full read, bare type)",
+    "node/296833802": "'Pomník obětem': whole name is \"memorial to the victims\"; a wikidata entry but no article tag (full read, bare type)",
+    "way/109352289": "'Hokejbalový stadion': whole name is \"ball hockey stadium\", no club or place in it (full read, bare type)",
+    "way/45063002": "'hradební zeď': whole name is \"rampart wall\": a stretch of the town walls, which have their own row městské hradby Plzně (relation/17051693, 177 m) (full read, bare type)",
+    "way/1128816120": "'hradební zeď': the same, a second stretch (251 m from the walls' row) (full read, bare type)",
+    "way/1241042964": "'hradební zeď': the same, a third stretch (full read, bare type)",
+    "way/1128816119": "'parkánová zeď': whole name is \"outer ward wall\": a stretch of the same walls (264 m from their row) (full read, bare type)",
+    "node/10269528149": "'Arboretum': whole name is the type word, 106 m from the landmark row Arboretum Sofronka (relation/17712017) (full read, bare type)",
+    # removed: dropped in the full read (owner, 2026-10-13)
+    "way/1385867926": "'dům U Zvonu': building=no with was:building=residential: a house that no longer stands, kept as historic=building (full read, removed)",
+    # worship body only: dropped in the full read (owner, 2026-10-13)
+    "node/13587107786": "'Církev Ježíše Krista Svatých posledních dnů': named only by its body; the wikidata Q42504 and the article are the Church's, not this meeting house's (description says \"Sbor Plzeň\"), so the article guard kept it (full read, worship body only)",
+    # worship denomination only: dropped in the full read (owner, 2026-10-13)
+    "way/109465719": "'Evangelická církev metodistická': whole name is the denomination (\"Evangelical Methodist Church\"), no name of its own (full read, worship denomination only)",
+    "way/110293340": "'Modlitebna Církve adventistů sedmého dne': \"prayer house of the Seventh-day Adventist Church\": a hall-type word and the denomination, nothing else (full read, worship denomination only)",
+    # description: dropped in the full read (owner, 2026-10-13)
+    "node/12581572903": "'Afrika': a zone of the zoo (93 m from the Zoo Plzeň row) tagged place=locality (full read, description)",
+    "node/12581572905": "'Amerika': a zone of the zoo (83 m from the zoo row) tagged place=locality (full read, description)",
+    "node/12581572914": "'Asie': a zone of the zoo (275 m from the zoo row) tagged place=locality (full read, description)",
+    "node/12581572904": "'Austrálie': a zone of the zoo (345 m from the zoo row's centre, inside its grounds by the id run) tagged place=locality (full read, description)",
+    "node/12581572906": "'Evropa': a zone of the zoo (144 m from the zoo row) tagged place=locality (full read, description)",
+    # duplicate: dropped in the full read (owner, 2026-10-13)
+    "node/7151032500": "'Náměstí Republiky': the other direction of one tram stop, 198 m from node/7151032497 (full read, duplicate)",
+    "node/1610725461": "'Severka': the other direction of one tram stop, 195 m from node/912575382 (full read, duplicate)",
+}

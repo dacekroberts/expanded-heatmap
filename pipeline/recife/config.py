@@ -85,4 +85,65 @@ PLACE_REVIEWED = {
     "Rua do Hotel Pousada do Vale": "tags do not decide; kept (one residential way with no access tag, named whole for a hotel)",
     "Shopping": "a subway station (railway=station), named for the place beside it (the Prague precedent, Hotel Golf); tags read 2026-10-13",
 }
-PLACE_DROPPED = {}
+# Dropped by id on the full read of 2026-10-13 under the owner's rulings of the
+# same day, each id read with its cached name (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    # glitch: dropped in the full read (owner, 2026-10-13)
+    "way/655804270": "'DA AV ENGENHEIRO JOSÉ ESTELITA': truncated register entry: the park's name minus its first word (\"... of Av. X\"), all caps; a street address standing in for a name (full read, glitch)",
+    "way/673701083": "'DA AV NORTE MIGUEL ARRAES DE ALENCAR': truncated register entry, \"of Av. X\" with no head word (full read, glitch)",
+    "way/673513091": "'DA AVENIDA MILITAR': truncated register entry, \"of Avenida X\" with no head word (full read, glitch)",
+    "way/660887080": "'DA AVENIDA PREFEITO ARTUR LIMA CAVALCANTI': truncated register entry, \"of Avenida X\" with no head word (full read, glitch)",
+    "way/673896929": "'DA RUA ARNOLDO MAGALHÃES': truncated register entry, \"of Rua X\" with no head word (full read, glitch)",
+    "way/673671219": "'DA RUA DESENHISTA EULINO SANTOS': truncated register entry, \"of Rua X\" with no head word; the square of that name is its own row (way/673671220) (full read, glitch)",
+    "way/673677243": "'DA RUA HERCÍLIA DE MEDEIROS': truncated register entry, \"of Rua X\" with no head word (full read, glitch)",
+    "way/655715015": "'DA RUA OLIVIA MENELAU': truncated register entry, \"of Rua X\" with no head word (full read, glitch)",
+    "way/673701084": "'DA RUA TIJUCAL': truncated register entry, \"of Rua X\" with no head word (full read, glitch)",
+    "way/673515352": "'da Rua da Aurora': same class in lower case: \"da Rua da Aurora\", no head word (full read, glitch)",
+    "node/5729134436": "'Busto de....': \"Bust of ....\": the mapper never filled in whose (full read, glitch)",
+    "way/655365057": "'Praça do S': name cut off after \"Praça do S\" (full read, glitch)",
+    # description: dropped in the full read (owner, 2026-10-13)
+    "way/666325252": "'Rua Barão de Caiara': a street name alone (\"Rua X\") on a park polygon (full read, description)",
+    "way/556302956": "'Laguinho e Arredores': \"small lake and surroundings\", a mapper's description (full read, description)",
+    "way/1562587356": "'Pracinha com brinquedos': \"little square with toys\", a mapper's description (full read, description)",
+    "way/675046850": "'Área das Piscinas': \"pool area\" on a footway area tagged a square; a facility label, far outside the centre (full read, description)",
+    "way/607806652": "'Praça Adotada: Espaço Verde': \"Adopted square: green space\", a sign about an adoption scheme, not a name (full read, description)",
+    # bare type: dropped in the full read (owner, 2026-10-13)
+    "way/1523863380": "'Feira': \"Feira\" (market), the type word alone, on a park (full read, bare type)",
+    "way/678531208": "'Palco': \"Palco\" (stage), the type word alone, on a square (full read, bare type)",
+    "node/7750478180": "'Sino': \"Sino\" (bell), the object type alone (full read, bare type)",
+    "way/651714244": "'Relógio Solar': \"Relógio Solar\" (sundial), the object type alone; one of the pieces mapped inside Oficina Brennand (full read, bare type)",
+    "way/1284272034": "'salão do rei': \"salão do rei\", the hall type cut short and lower case (full read, bare type)",
+    "way/1284275854": "'igreja petencostal': \"pentecostal church\", misspelt and lower case, no name (full read, bare type)",
+    "node/11914405258": "'Igreja evnagelica': \"evangelical church\", misspelt, no name (full read, bare type)",
+    # business: dropped in the full read (owner, 2026-10-13)
+    "way/549211982": "'Food Park do Shooping Recife': a mall's food-truck area tagged a park (Shopping Recife) (full read, business)",
+    "way/545703562": "'Sport Club do Recife': a members' sports club's grounds tagged a park; the stadium has its own row (full read, business)",
+    # estate facility: dropped in the full read (owner, 2026-10-13)
+    "way/620659500": "'Conjunto Habitacional Aritana': a housing estate's name (\"Conjunto Habitacional ...\") on its recreation ground (full read, estate facility)",
+    "way/560507213": "'Praça do Condominio Maria Amelia': \"square of Condominium X\": a condominium's own facility (full read, estate facility)",
+    # worship body: dropped in the full read (owner, 2026-10-13)
+    "way/810633429": "'Assembelia de Deus': denomination name alone, misspelt (\"Assembelia\"), so the rule's spelling missed it (full read, worship body)",
+    "way/646110066": "'Assembéia de Deus': denomination name alone, misspelt (\"Assembéia\") (full read, worship body)",
+    "way/588708253": "'Assembléia de Deus Recife': the regional body's name alone (denomination + city); six rows carry the identical name with no congregation (full read, worship body)",
+    "way/593431540": "'Assembléia de Deus Recife': as above (full read, worship body)",
+    "way/620395283": "'Assembléia de Deus Recife': as above (full read, worship body)",
+    "way/672361663": "'Assembléia de Deus Recife': as above (full read, worship body)",
+    "way/895719153": "'Assembléia de Deus Recife': as above (full read, worship body)",
+    "way/996906496": "'Assembléia de Deus Recife': as above (full read, worship body)",
+    "way/543913231": "'Congregação Cristão do Brasil': denomination name alone (Congregação Cristã no Brasil, misspelt) (full read, worship body)",
+    "node/4961603922": "'Igreja Cristã Maranata': denomination name alone (Igreja Cristã Maranata) (full read, worship body)",
+    "node/6974922139": "'Igreja Cristã Maranata': denomination name alone (Igreja Cristã Maranata) (full read, worship body)",
+    "way/744959187": "'Igreja Maranata': denomination name alone, short form (Maranata) (full read, worship body)",
+    "node/11914390400": "'Igreja Presbiteriana do Brasil': national denomination's name alone (full read, worship body)",
+    "way/424470021": "'Igreja Presbiteriana do Brasil': national denomination's name alone (full read, worship body)",
+    "node/6720139480": "'Igreja Presbiteriana do Brasil': national denomination name alone, the third row of it (full read, worship body)",
+    "way/549207073": "'Igreja de Jesus Cristo dos Últimos Dias': denomination name alone (Latter-day Saints, shortened) (full read, worship body)",
+    "node/6974046922": "'Salão de Assembléias Testemunhas de Jeová': \"assembly hall of\" the denomination, no place name (full read, worship body)",
+    "node/5108575000": "'Vale do Amanhecer': the movement's name alone (Vale do Amanhecer) (full read, worship body)",
+    "node/6973937771": "'Vale do Amanhecer': the movement's name alone (Vale do Amanhecer) (full read, worship body)",
+    "node/8747225514": "'Verbo Da Vida': a church chain's name alone (Verbo da Vida) (full read, worship body)",
+    "way/744959191": "'Igreja Verbo da Vida': a church chain's name alone (Igreja Verbo da Vida) (full read, worship body)",
+    "node/2889084347": "'CEBB': an organisation's acronym alone (a Buddhist study centre network) (full read, worship body)",
+    # religious residence: dropped in the full read (owner, 2026-10-13)
+    "way/537839023": "'Congregação dos Sacerdotes do Sagrado Coração de Jesus': named only for the order of priests, no church or house name; the order's church is its own row (way/539849511) (full read, religious residence)",
+}

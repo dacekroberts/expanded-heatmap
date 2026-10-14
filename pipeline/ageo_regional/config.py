@@ -209,4 +209,27 @@ PLACE_FOLD = "ja"
 PLACE_REVIEWED = {
     "平塚団地入口": "a signed junction (highway=traffic_signals) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
 }
-PLACE_DROPPED = {}
+# Dropped by id on the full read of 2026-10-13 under the owner's rulings of the
+# same day, each id read with its cached name (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    # description: dropped in the full read (owner, 2026-10-13)
+    "way/1079461606": "'公園（名称なし）': \"park (no name)\": the mapper's placeholder (full read, description)",
+    "way/1079459995": "'公園（名称無し）': \"park (no name)\" in the other spelling: the mapper's placeholder (full read, description)",
+    # bare type: dropped in the full read (owner, 2026-10-13)
+    "way/1203123528": "'ちびっこパーク': \"kiddies' park\", a type word in katakana with no place name; one of six such rows on separate plots in the west of the city (full read, bare type)",
+    "way/1183471305": "'アスレチックパーク': \"athletic park\", type word alone (full read, bare type)",
+    "way/1203136407": "'キッズパーク': \"kids park\", type word alone (full read, bare type)",
+    "way/1183471310": "'グランドゴルフパーク': \"ground golf park\", type word alone (full read, bare type)",
+    "way/1203123532": "'コミュニティ広場': \"community plaza\", type word alone (full read, bare type)",
+    "way/1203123529": "'フィットネスパーク': \"fitness park\", type word alone (full read, bare type)",
+    # business: dropped in the full read (owner, 2026-10-13)
+    "way/1296820699": "'GLP Ageo Promenade': a logistics developer's brand on the walkway of its warehouse site, tagged a park (full read, business)",
+    # estate facility: dropped in the full read (owner, 2026-10-13)
+    "way/993389034": "'尾山台団地5街区広場': the plaza of block 5 of one housing estate (danchi) (full read, estate facility)",
+    "way/1079461265": "'尾山台団地センター広場': the centre plaza of the same housing estate (full read, estate facility)",
+    "way/1080545665": "'尾山台団地防災広場': the same estate's disaster-assembly plaza, tagged place=square (full read, estate facility)",
+    # unsure in the full read, dropped by ruling 3: a hall named only for what it enshrines, or a deity's title alone (owner, 2026-10-13)
+    "node/7432071819": "'薬師堂': 薬師堂, listed in the ruling (unsure in the full read; ruling 3)",
+    "node/7463644378": "'薬師堂': 薬師堂, listed in the ruling (unsure in the full read; ruling 3)",
+    "node/7429430454": "'観音堂': 観音堂, listed in the ruling (unsure in the full read; ruling 3)",
+}
