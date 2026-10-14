@@ -2,6 +2,60 @@
 
 Newest first. Cleanup folds these into `DECISIONS.md` at review time.
 
+### 2026-10-13 - Landing slice: the station rules (search-rules-8) merged and the 20 indexes rebuilt; 58 reviews no row needs removed (Cleanup agent, nothing pushed, no render)
+
+- **Merged:** 8d45eae5 (7de6f364) and then 0321cbb0 (b1a0f32f), no conflict;
+  selftest 326 of 326. The 20 indexes were rebuilt after each. The second
+  commit moved no row in any of the 20.
+- **Only station rows moved, in seven cities, and the full rebuild gives the
+  rules lane's measured counts exactly:** Barcelona +2 -8 and 5 renamed,
+  Brussels -5, London -8 and 7 renamed, Marseille -1, Paris -3, Prague -42
+  and 7 renamed, Tokyo one row under a new id. The other thirteen, Mexico
+  City and Milan among them, are byte-for-row unchanged in every kind.
+- **Prague is mended.** 42 tram stop rows fold (Palmovka 4, Želivského 4,
+  Nádraží Holešovice 3). No station name has three rows any more; 26 names
+  have two within 250 m, a metro row and a tram row each.
+- **London as intended:** Blackfriars, Cannon Street, Liverpool Street,
+  Marylebone and Victoria each fold their "London ..." rail row, the
+  prefixed spelling kept as an alternate; Paddington's three rows are one;
+  the two National Rail nodes of St Pancras International are one row,
+  still apart from "King's Cross St Pancras"; "Stratford International" and
+  its DLR row are untouched.
+- **Barcelona:** six "Barcelona-..." rail halls fold onto the metro row of
+  their entry (Arc de Triomf, El Clot, Fabra i Puig, Passeig de Gràcia, Sant
+  Andreu, Torre Baró | Vallbona). **Doubtful, for the rules lane:**
+  "Barcelona-Plaça Catalunya" (node 13671950492) and "Barcelona-Plaça
+  Espanya" stay rows of their own beside "Catalunya" (which already carries
+  the alias "Barcelona-Plaça de Catalunya") and "Espanya"; "Barcelona-La
+  Sagrera-Meridiana" and "Barcelona-Estació de França" stay too, the last
+  rightly (no metro row of its name).
+- **Brussels, Paris, Marseille:** each departed row is a tram stop folded
+  into the other tram stop of its name (the builder's log: merged_platform),
+  leaving the metro row and one tram row. Tokyo's 熊野前 is one row under
+  the tram stop's id.
+- **Tokyo, Kyoto, Seoul, Busan: the local-name guard returned nothing.** No
+  station row was added in any of the four, so there is no entrance, depot
+  or freight yard to flag. If the guard was meant to bring rows back, it did
+  not on these caches.
+- **58 `PLACE_REVIEWED` entries removed** as listed in
+  `data/_search_rollout/live_rules56/reviewed_not_needed.tsv` (Seoul 36,
+  Paris 18, Busan 2, Brussels 1, Marseille 1), by a script that proves
+  nothing else in each config changed. Check E passes for the five cities.
+- **Same-name round, stations:** Milan, Seattle, Tbilisi and Vancouver have
+  no repeated station name; Paris has 29 names with two rows within 250 m,
+  Prague 26, London 17, Tokyo 15 (interchanges of two modes or networks,
+  not read one by one here).
+- **Milan, two more by id (relayed by Cleanup, 2026-10-13):** the other seven
+  "Casa a Igloo" houses (ways 40500644, 59171470 to 59171473, 59171476,
+  59171477; eight identically tagged houses, and each single drop had
+  promoted the next to the row), under the first one's reason; and "Recinto
+  di San Vittore al Corpo" (way 421310870), a part 36 m from the mausoleum's
+  row. Each id matched its cached name first. No "Casa a Igloo" row remains;
+  rows 6,097 to 6,095. Milan's map is stale again until the one render pass.
+- **Checks:** `check_place_search.py` fails only on rule A (all 20 maps, not
+  rendered on their final index). Scope OK for 20; unopened
+  stations OK; index drift OK for 20.
+
 ### 2026-10-13 - Tram rescope becomes the first landing slice's branch; renders thinned to one a map (Cleanup agent, nothing pushed)
 
 - **Owner (relayed by Cleanup, 2026-10-13):** `tram-rescope` carries the

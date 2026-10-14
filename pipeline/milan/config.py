@@ -359,4 +359,17 @@ PLACE_DROPPED = {
     # "Cascina Melghera" rows stay.
     "node/3446474994": "'Ultima Cena', a second row of that name at the Cimitero Monumentale, no entry; the Leonardo is node 304775593 (owner, 2026-10-13)",
     "way/360192664": "'Chiesa parrocchiale di Santa Maria Assunta in Quintosole', a second row for the church, way 360192654, 20 m off (owner, 2026-10-13)",
+    # The other seven of the eight identically tagged Casa a Igloo houses: with
+    # way 40500643 dropped above, each single drop promoted the next to the row.
+    # The whole chain goes under the first one's reason (2026-10-13).
+    "way/40500644": "'Casa a Igloo', one of eight houses under one name; the article and entry are the Maggiolina quarter's (owner, 2026-10-13)",
+    "way/59171470": "'Casa a Igloo', one of eight houses under one name; the article and entry are the Maggiolina quarter's (owner, 2026-10-13)",
+    "way/59171471": "'Casa a Igloo', one of eight houses under one name; the article and entry are the Maggiolina quarter's (owner, 2026-10-13)",
+    "way/59171472": "'Casa a Igloo', one of eight houses under one name; the article and entry are the Maggiolina quarter's (owner, 2026-10-13)",
+    "way/59171473": "'Casa a Igloo', one of eight houses under one name; the article and entry are the Maggiolina quarter's (owner, 2026-10-13)",
+    "way/59171476": "'Casa a Igloo', one of eight houses under one name; the article and entry are the Maggiolina quarter's (owner, 2026-10-13)",
+    "way/59171477": "'Casa a Igloo', one of eight houses under one name; the article and entry are the Maggiolina quarter's (owner, 2026-10-13)",
+    # A part of the mausoleum's own row (node 4210845344, 36 m off; the
+    # wave 1 screen, 2026-10-13): the second of two rows for one object.
+    "way/421310870": "'Recinto di San Vittore al Corpo', a part 36 m from the row 'Mausoleo imperiale e Recinto di San Vittore al Corpo', one Wikidata entry (2026-10-13)",
 }

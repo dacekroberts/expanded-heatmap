@@ -292,8 +292,6 @@ PLACE_FOLD = None
 # Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
 # places, each with why; scripts/check_place_search.py fails on any other.
 PLACE_REVIEWED = {
-    "Musée Cantini": "a city art museum (tourism=museum) in a 17th-century town mansion; "
-                     "its alt_name is the mansion's, 'Hôtel de la Compagnie du Cap Nègre'",
     "Place de l'Hôtel des Postes": "a public street named for a building or institution on it, not a business (batch 2b, _named_street)",
     "Rue de Salon": "a public street named for a building or institution on it, not a business (batch 2b, _named_street)",
     "Rue de l'Hotel-Dieu": "a public street named for a building or institution on it, not a business (batch 2b, _named_street)",
