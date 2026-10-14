@@ -1,0 +1,70 @@
+{
+  "index": "app/static/places/miami.json",
+  "places": 18992,
+  "data_retrieved": "2026-10-12",
+  "languages": {
+    "local": [
+      "en"
+    ],
+    "coverage": {
+      "en": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "English"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/1216769",
+      "name": "Miami",
+      "stations": 29
+    },
+    {
+      "osm": "relation/118853",
+      "name": "Hialeah",
+      "stations": 3
+    },
+    {
+      "osm": "way/33614621",
+      "name": "Brownsville",
+      "stations": 2
+    },
+    {
+      "osm": "relation/1216645",
+      "name": "Coral Gables",
+      "stations": 1
+    },
+    {
+      "osm": "way/33614629",
+      "name": "Gladeview",
+      "stations": 1
+    },
+    {
+      "osm": "relation/9853985",
+      "name": "Glenvar Heights",
+      "stations": 1
+    },
+    {
+      "osm": "relation/1244549",
+      "name": "Kendall",
+      "stations": 1
+    },
+    {
+      "osm": "relation/118855",
+      "name": "Medley",
+      "stations": 1
+    },
+    {
+      "osm": "relation/118861",
+      "name": "South Miami",
+      "stations": 1
+    },
+    {
+      "osm": "way/33614661",
+      "name": "West Little River",
+      "stations": 1
+    }
+  ]
+}

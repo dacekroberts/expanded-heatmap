@@ -273,3 +273,70 @@ BOSTON_BBOX = {
     "lon_min": -71.35,
     "lon_max": -70.90,
 }
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-12) ---
+
+PLACE_AREA = "(id:3602315704)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
+PLACE_LANGUAGES = ("en",)
+PLACE_FOLD = None
+# Read and kept, 2026-10-13 (the flag check of wave 1; the owner's ruling
+# to settle unsure rows by the existing rules). None carries a leak word,
+# so check E takes no PLACE_REVIEWED entry for it; the reason is kept here.
+#   node/4362209489 'Skinny House': tourism=attraction and an article of its own: a home tagged an attraction is kept
+PLACE_REVIEWED = {
+    "Ancient and Honorable Artillery Company Museum": "a museum (tourism=museum, Wikipedia); the Company is a militia company",
+    "Massachusetts College of Pharmacy and Health Science": "a university (amenity=college, Wikipedia)",
+    "Central Parking Access Road": "a public secondary road at the airport, named for its function (owner, 2026-10-13: reviewed)",
+}
+PLACE_DROPPED = {
+    "relation/17935032": "'Smith Court Residences', private residences, named as such, whatever their wikidata: homes",
+    "way/240390123": "'Modern Theatre Residence Hall', a university residence hall: a home",
+    "node/358284346": "'Immaculate Conception-Salesian Rectory', a rectory tagged a place of worship, not notable: a religious residence, by id",
+    "node/358277212": "'Saint Margarets Convent', a convent tagged a place of worship, not notable: a religious residence, by id",
+    "node/367779308": "'Saint Theresa's Convent', a convent tagged a place of worship, not notable: a religious residence, by id",
+    "node/7745736227": "'Boston Duck Tours', a tour operator's record at one departure point; the wikidata is the company's",
+    "way/702789227": "'Chinatown Archaeological Site', a temporary 2019 dig, over by its own description",
+    "way/1316241908": "'Proposed Dedham Heritage Rail Trail', a proposed trail, not built; the trail is its own row",
+    "way/1112835157": "'Upper Plaza', a position word and a type word: a description",
+    "way/823307806": "'Sitting Grove', a description standing in for a name",
+    "node/13809760118": "'Hyde Park Library, Cleary Square', a library and its address as a park's name",
+    "node/367779573": "'Huntington Theatre Company', the company's own node, 14 m from its theatre's row, which stays (owner, 2026-10-13)",
+    "way/96268219": "'The Green', an article and a type word: a bare type",
+    "way/345146747": "'The Grove', an article and a type word: a bare type",
+    "way/197735258": "'Service Road', a bare type as a street's name, and access=no on every way (owner, 2026-10-13)",
+    "way/197735260": "'Service Road', a bare type as a street's name, and access=no on every way (owner, 2026-10-13)",
+    "way/591677320": "'Service Road', a bare type as a street's name, and access=no on every way (owner, 2026-10-13)",
+    "way/1046209412": "'Service Road', a bare type as a street's name, and access=no on every way (owner, 2026-10-13)",
+    "way/1232128799": "'Service Road', a bare type as a street's name, and access=no on every way (owner, 2026-10-13)",
+    "way/1348342171": "'Doubletree', a hotel brand as a road's whole name: the business's own road",
+    "relation/20582057": "'B.A.A. 10k', event: a running race's route relation (route=running) with the event's article: an event, not a place (flag check, 2026-10-13)",
+    "way/1479920617": "'Civil War-era Castmate', description: a ruin named by a description (misspelled), its position a rough estimate by its own note (flag check, 2026-10-13)",
+    "node/7748212236": "'Clef Sculpture', public art, no own article: tourism=artwork whose wikipedia tag is its subject's article (en:Clef), not its own (flag check, 2026-10-13)",
+    "node/12299462771": "'Historic Springhouse', description: a ruin named by 'Historic' and a type word (precedent: New York's 'Historic Stone Chimney') (flag check, 2026-10-13)",
+    # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "node/358283788": "'Our Lady of Lourdes Parish Center', a part of one church as its own row, the church's own row within 300 m (owner, 2026-10-13, ruling 4; pattern screen)",
+    "way/862891605": "'Shoppers Plaza', a stock plaza or square name with no place in it (owner, 2026-10-13, ruling 5 and its follow-up: every plaza name with no place in it; pattern screen)",
+    # The pattern screen of 2026-10-13, the owner's rulings on its open calls: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "way/817356487": "'Childrens Park', a park named only by a type word (owner, 2026-10-13, on the pattern screen's open calls)",
+    "node/368984899": "'Chelsea River', a bay node beside the river's own row: one river labelled twice (owner, 2026-10-13, on the pattern screen's open calls: ruling 9)",
+    # The pattern screen of 2026-10-13, twin round of the owner's rulings: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "way/1429125836": "'Childrens Park', a park named only by a type word; the second way of the name, beside way/817356487 (owner, 2026-10-13, on the pattern screen's open calls; twin round)",
+    # The helper screens of 2026-10-13 (duplicates, parts in a church's grounds): rows that
+    # fall squarely in an owner ruling, each with its ruling.
+    "node/358284251": "'First Church of Roxbury', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): an imported point 60 m from the building row First Church In Roxbury (way/29716282), under the same Wikidata entry (Q22025677); the building carries the article tag, this point does not",
+    "node/158856419": "'Fort Warren', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): an imported populated-place point tagged a hamlet, 124 m from the fort's own row Fort Warren (node/7616159719) and under the same Wikidata entry (Q2287837); the fort's row carries the article, this one does not, and there is no hamlet on Georges Island",
+    "node/6144131365": "'Tufts University School of Medicine', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): a point for the Tufts medical school 66 m from the school's own row Tufts School of Medicine (relation/17053853), same Wikidata entry (Q7851551); the relation carries the article tag, this point does not",
+}
+
+# Public sights kept by id: in the cache, passed over by the rules (place_index,
+# PLACE_KEPT; owner, 2026-10-13).
+PLACE_KEPT = {
+    "node/358275870": "'Boston Tea Party - Ships and Museum', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/7778321750": "'Custom House Tower Observation Deck', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/29921494": "'Francis D. Martini Memorial Shell', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+}

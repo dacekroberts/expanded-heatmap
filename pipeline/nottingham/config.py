@@ -172,3 +172,41 @@ METERS_PER_MILE = 1609.344
 RING_EDGES_MILES = [0.0, 0.05, 0.1, 0.2, 0.3]
 RING_EDGES_METERS = [m * METERS_PER_MILE for m in RING_EDGES_MILES]
 RING_LABELS = ["0-0.05 mi", "0.05-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi"]
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-12) ---
+
+PLACE_AREA = "(id:3600077311,3600123292,3600154043,3600154058)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
+PLACE_LANGUAGES = ("en",)
+PLACE_FOLD = None
+PLACE_REVIEWED = {}
+PLACE_DROPPED = {
+    "way/244468048": "'Geological walk', a description standing in for a name",
+    "node/2400164517": "'Moat (site of)', a description (\"site of\") standing in for a name",
+    "relation/17280686": "'WW2 Bunkers', a description standing in for a name",
+    "node/1349348375": "'Gatepier at South Lodge', a description of a gate pier",
+    "node/13524967129": "'NTU Prayer Room', a prayer room: a bare type",
+    "node/4715712714": "'QMC Prayer Room Level 3', a prayer room: a bare type",
+    "node/13524956164": "'UoN Prayer Room Portland Building', a prayer room: a bare type",
+    "way/1460685283": "'Main Chapel', a building part named by a type word",
+    "way/1460685281": "'West Chapel', a building part named by a type word",
+    "node/3310059291": "'NTU Main Entrance', an entrance described, indexed as a junction",
+    "way/1100953705": "'Judges Retiring Room', a room's name on a museum building: a wrong object's name",
+    "node/605141968": "'Nottingham Midland Station', a plaque carrying the station's name: a wrong object's name",
+    "way/193747067": "'Stanford Hall Rehabilitation Estate', not open to the public",
+    "relation/5514628": "'Medieval village', a description standing in for a name; a bare type goes whatever the object carries (owner, 2026-10-13)",
+    "way/371452526": "'Moats & fishponds', a description standing in for a name; a bare type goes whatever the object carries (owner, 2026-10-13)",
+    "node/1366881581": "'Nottingham Smiths Bank Branch', plaque: memorial=plaque; openplaques:id; wikipedia=en:Smith's Bank is the bank's (a plaque under its subject's article) (flag check, 2026-10-13)",
+    "node/2335829586": "'Village Cross', description: historic=cross; name is type words; wikidata, no article (flag check, 2026-10-13)",
+    "node/2970658303": "'Wharf Crane 1', description: historic=crane; name is a type and a number (flag check, 2026-10-13)",
+    "node/2970658304": "'Wharf Crane 2', description: historic=crane; name is a type and a number (flag check, 2026-10-13)",
+    "node/11869567639": "'Aerodrome', description: place=neighbourhood; name \"Aerodrome\"; no wikidata (bare type word on a place) (flag check, 2026-10-13)",
+    "node/706725025": "'Gotham Moor Farm', home: place=locality; name ends \"Farm\"; no other tag (a farm mapped as a locality) (flag check, 2026-10-13)",
+    "node/4351842912": "'Wiverton Hall', home: place=locality; name ends \"Hall\"; no other tag (a house mapped as a locality, as Dublin's by-id drops) (flag check, 2026-10-13)",
+    "way/342863745": "'Bus Link', description: type words only (flag check, 2026-10-13)",
+    # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "way/344273943": "'Christadelphian Hall', a place of worship named only by its body and a hall type, in a spelling the shared rule's lists do not hold (owner, 2026-10-13, the denomination ruling; pattern screen)",
+    "way/469499415": "'The Square', a stock plaza or square name with no place in it (owner, 2026-10-13, ruling 5 and its follow-up: every plaza name with no place in it; pattern screen)",
+}

@@ -91,7 +91,7 @@ st.markdown(
 """
 )
 
-render_map_help('business categories (Food service and Food shops)')
+render_map_help('business categories (Food service and Food shops)', search='newcastle')
 render_excluded_stations("Newcastle (Regional)")
 render_country_links('Newcastle (Regional)')
 

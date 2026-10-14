@@ -84,7 +84,7 @@ st.markdown(
 """
 )
 
-render_map_help('business layers')
+render_map_help('business layers', search='minneapolis')
 render_excluded_stations("Minneapolis")
 render_country_links('Minneapolis')
 

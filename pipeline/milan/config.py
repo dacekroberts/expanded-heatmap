@@ -21,12 +21,15 @@ OUTPUTS = ROOT / "outputs" / "milan"
 HEATMAP_HTML = OUTPUTS / "heatmap.html"
 EXCLUDED_STATIONS_CSV = OUTPUTS / "excluded_stations.csv"
 
-STATIONS_CSV = DATA_PROCESSED / "stations.csv"
+# Metro and tram stations together since the tram rescope (owner
+# 2026-10-13). TRAM_DIR was a branch-only folder until the landing.
+TRAM_DIR = DATA_PROCESSED
+STATIONS_CSV = TRAM_DIR / "stations.csv"
 BUSINESSES_CLEAN_CSV = DATA_PROCESSED / "businesses_clean.csv"
 # One feature per drawn line, written by step 1 from ds539's 31
 # alignment variants - which is the shape map_common's GeoJSON loader
 # expects, and the reason step 1 rather than step 3 does the selecting.
-LINES_GEOJSON = DATA_PROCESSED / "metro_lines.geojson"
+LINES_GEOJSON = TRAM_DIR / "metro_lines.geojson"
 
 # Raw inputs, all downloaded by fetch_sources.py - deliberately NOT named
 # step*.py, so drift_check.py never runs it.
@@ -205,6 +208,57 @@ STATION_ALIASES = {
     "CADORNA FN M2": "CADORNA FN",
 }
 
+# --- Trams (tram rescope, owner 2026-10-13) ---------------------------------
+
+# All 17 ATM tram routes are drawn, one label and one legend row each
+# ("Tram N"), on the per-route rule Amsterdam, Brussels and Zurich follow.
+# Stops are thinned by docs/sub_transit_line_filters.md, as Toronto's
+# streetcars are (pipeline/milan/trams.py). Reasoning and measurements:
+# docs/decisions_drafts/tram-rescope.md, "Milan".
+TRAM_SHAPES_JSON = TRAM_DIR / "tram_shapes.json"
+
+# The feed's 17 route_short_names (route_type 0). trams.py stops if the feed
+# carries another set: a route added or withdrawn is a scope decision.
+TRAM_LINES = ("1", "2", "3", "4", "5", "7", "9", "10", "12", "14", "15",
+              "16", "19", "24", "27", "31", "33")
+
+# The feed's tram timetable runs 2026-09-14 to 2026-10-02
+# (feed_info.txt surface_end_date); the portal still served that edition on
+# 2026-10-13. Five routes are on diversion for works in it (2, 4, 7, 14, 16,
+# by their own route_long_name) and are drawn as the timetable runs them.
+# Re-read when AMAT republishes: docs/recheck_calendar.md.
+TRAM_TIMETABLE = ("2026-09-14", "2026-10-02")
+# The weekday the 15-minute test is read on (10:00 to 15:00, the busier
+# direction). 7 and 33 run exactly every 15.0 minutes and pass.
+TRAM_HEADWAY_DAY = "20260930"
+TRAM_MAX_HEADWAY_MIN = 15.0
+
+# A stop pattern is regular when it carries at least this share of its
+# line's trips; depot runs and short workings fall under it.
+TRAM_REGULAR_TRIP_SHARE = 0.10
+# The feed has no parent_station; stops of one name are grouped first, then
+# by distance, never past MAX_SPREAD (Toronto's measured values).
+TRAM_PLACE_LINK_M = 60.0
+TRAM_PLACE_CROSS_M = 120.0
+TRAM_PLACE_MAX_SPREAD_M = 200.0
+# A tram stop this close to a drawn metro station is that station, or within
+# the NAMED distance when its name carries the station's ("duomo m1 m3").
+TRAM_ATTACH_M = 150.0
+TRAM_ATTACH_NAMED_M = 400.0
+TRAM_THIN_SPACING_MILES = 0.5
+
+# ATM gives the trams no route_color, so these are the project's, searched
+# with pipeline/linecolour.py against the five metro colours and the pins:
+# CIE76 45 or more from every pin, 18 or more from every line within 500 m.
+# Re-run the search if a line or a metro colour changes.
+TRAM_COLOURS = {
+    "1": "#8800F8", "2": "#C08068", "3": "#B88888", "4": "#50A800",
+    "5": "#0088A0", "7": "#889800", "9": "#C870C8", "10": "#D07800",
+    "12": "#00A0C0", "14": "#689000", "15": "#B86000", "16": "#F800D8",
+    "19": "#606820", "24": "#00A800", "27": "#7850E8", "31": "#F83800",
+    "33": "#F840F0",
+}
+
 # --- Business filtering ------------------------------------------------
 
 TAXONOMY_SYSTEM = "milan_source"
@@ -227,4 +281,82 @@ MILAN_BBOX = {
     "lat_max": 45.56,
     "lon_min": 9.02,
     "lon_max": 9.30,
+}
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
+
+# The search area is the map's: the Comune di Milano, relation 44915
+# (admin_level 8), the boundary the businesses are cut to (BOUNDARY_GEOJSON).
+# All 193 drawn stations sit in it (read from the nord-ovest extract,
+# 2026-10-13), so the scope rule adds nothing. The caches are filtered from
+# that extract by pipeline/place_extract_fetch.py, no Overpass request.
+PLACE_AREA = "(id:3600044915)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
+PLACE_LANGUAGES = ("it",)
+PLACE_FOLD = None
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+PLACE_REVIEWED = {
+    # OSM node 4895322676, tourism=attraction, with a Wikipedia article of its own.
+    "Albergo diurno Venezia": "the 1920s public baths under Piazza Oberdan, a heritage site open to visitors; 'albergo diurno' is a day bathhouse, not lodging",
+}
+# Stop platforms drawn as footways and named for their stop were 527 by-id
+# drops here until the shared rule landed (a stop's platform way is no
+# street, place_index, 2026-10-13). Measured in memory on the cache of
+# 2026-10-13: the index is the same 6,099 rows with the ids and without,
+# so none is kept by id.
+# OSM objects a reading by eye found that no rule in place_index.py catches,
+# each with why (place_index.build, `dropped`).
+PLACE_DROPPED = {
+    "way/1210693372": "'Area esterna', a description (outside area) on a park; a description goes by id (owner, 2026-10-11)",
+    "node/12278859101": "'ricostruzione di sarcofago romano con coperchio originale', a description standing in for a name (owner, 2026-10-11)",
+    "node/11701168833": "'Nuova Zona Residenziale', a description (new residential zone) on a neighbourhood node (owner, 2026-10-11)",
+    "node/487236104": "'Molino della Torretta / Casa di Maurizio', a locality named as a person's house; a place named for a home is out (exclusions, Neighborhoods)",
+    "node/4127952389": "a place of worship named only by its body, Chiesa di Gesu Cristo dei Santi degli Ultimi Giorni, no article (fifth pass; sixth pass, ruling 2; the Italian list does not hold it)",
+    "node/4129960591": "a place of worship named only by its body, the same name as node 4127952389 (fifth pass; ruling 2)",
+    "way/317741575": "a place of worship named only by its body, the same name as node 4127952389 (fifth pass; ruling 2)",
+    "node/252641374": "a place of worship named only by its denomination, Chiesa Cristiana Avventista del Settimo Giorno, no article (fifth pass; ruling 2)",
+    "node/308832288": "a place of worship named only by its denomination, Chiesa Evangelica Metodista, no article (fifth pass; ruling 2)",
+    "way/39600109": "a place of worship named only by its denomination, Chiesa Neo-apostolica, no article (fifth pass; ruling 2)",
+    "way/498032877": "a place of worship named only by its denomination, Chiesa Cristiana Evangelica Pentecostale, no article (fifth pass; ruling 2)",
+    "way/381749179": "a place of worship named only by its body, Chiesa Evangelica ADI, no article (fifth pass; ruling 2)",
+    "node/4895158258": "a place of worship named only by its body, Chiesa Cristiana Evangelica delle Assemblee di Dio in Italia, no article (fifth pass; ruling 2)",
+    "node/5033959323": "a place of worship named only by its body, Chiesa di Cristo, no article (fifth pass; ruling 2)",
+    # The owner's rulings on the read of 2026-10-13 ("all approved"), each id checked against its cached name.
+    "relation/7147393": "'Casa Castini', a historic building named as a house, no article of its own (owner, 2026-10-13)",
+    "way/483746402": "'Casa Cicchieri', a historic building named as a house, no article of its own (owner, 2026-10-13)",
+    "way/434686810": "'Casa Pirovano', a historic building named as a house, no article of its own (owner, 2026-10-13)",
+    "relation/383081": "'Casa Rovida', a historic building named as a house, a Wikidata entry and no article (owner, 2026-10-13)",
+    "relation/5230029": "'Casa del Cedro', a historic building named as a house, a Wikidata entry and no article (owner, 2026-10-13)",
+    "way/40500643": "'Casa a Igloo', a house whose article and entry are the Maggiolina quarter's, not its own (owner, 2026-10-13)",
+    "node/5012707146": "'Cascina Gobba', a tram stop closed in 1978, disused:railway=tram_stop (owner, 2026-10-13)",
+    "node/5012719007": "'Cimiano', a tram stop closed in 1978, disused:railway=tram_stop (owner, 2026-10-13)",
+    "node/5012706744": "'Crescenzago', a tram stop closed in 1978, disused:railway=tram_stop (owner, 2026-10-13)",
+    "node/5012719006": "'Molino / Deposito Molino Nuovo', a tram stop closed in 1978, disused:railway=tram_stop (owner, 2026-10-13)",
+    "way/1315555952": "'East Garden (ex De Nora)', a development's brand as a place (owner, 2026-10-13)",
+    "node/7739405052": "'La Viridiana', a development's brand as a place (owner, 2026-10-13)",
+    "node/12321144590": "'Giunglabuca', a nickname for a lot beside a development, as a place (owner, 2026-10-13)",
+    "way/1046937862": "'EuroMilano', a developer's name as a place (owner, 2026-10-13)",
+    "relation/7350160": "'Milano 2', outside the Comune di Milano (owner, 2026-10-13)",
+    "relation/6589616": "'Pero', outside the Comune di Milano, its own municipality (owner, 2026-10-13)",
+    "way/637300770": "'Armenia Films', a company's name on a park (owner, 2026-10-13)",
+    "node/5355438258": "'Hayabusa Reiki Dojo', a business tagged a place of worship (owner, 2026-10-13)",
+    "node/13185691618": "'Lanciatore Vega', an exhibit under its kind's Wikidata entry (owner, 2026-10-13)",
+    "way/49876675": "'PalaSharp', a venue closed in 2011, end_date behind the cache (owner, 2026-10-13)",
+    "relation/8254358": "'Tranvia Milano-Lodi', a closed tramway as a route relation (owner, 2026-10-13)",
+    "node/11368588671": "'Precotto (Interno deposito)', a tram stop inside the depot (owner, 2026-10-13)",
+    "node/9353157893": "'Chiesa di San Dionigi in Santi Clemente e Guido', a grotto and memorial under the church's name; the church is way 35839780 (owner, 2026-10-13)",
+    "relation/6708199": "'Cassina Triulza', a second row for Cascina Triulza, node 4499103326, one Wikidata entry (owner, 2026-10-13)",
+    "way/404140241": "'Ronchetto Sul Naviglio', a second row for the node Ronchetto sul Naviglio (owner, 2026-10-13: true duplicates only)",
+    "way/404140229": "'Parco Sempione', a census area repeating the park's own landmark row (owner, 2026-10-13: true duplicates only)",
+    "way/1389243680": "'Stadio San Siro Milano', a second row for the stadium, Stadio Giuseppe Meazza (owner, 2026-10-13)",
+    "way/1528994787": "'Giardino Gonin Giordani', the second of two rows for one garden, just past the merge distance (owner, 2026-10-13)",
+    "way/330106398": "'Giardino Mario Capponi', the second of two rows for one garden, just past the merge distance (owner, 2026-10-13)",
+    "way/4017879": "'Parco di via Dezza', the second of two rows for one park, just past the merge distance (owner, 2026-10-13)",
+    "node/10676509698": "'Circo Romano', a second row for way 421120725, one Wikidata entry (owner, 2026-10-13)",
+    # Owner, 2026-10-13, the three items left by the rulings above. Both
+    # "Cascina Melghera" rows stay.
+    "node/3446474994": "'Ultima Cena', a second row of that name at the Cimitero Monumentale, no entry; the Leonardo is node 304775593 (owner, 2026-10-13)",
+    "way/360192664": "'Chiesa parrocchiale di Santa Maria Assunta in Quintosole', a second row for the church, way 360192654, 20 m off (owner, 2026-10-13)",
 }

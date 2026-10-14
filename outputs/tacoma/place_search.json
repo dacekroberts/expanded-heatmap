@@ -1,0 +1,25 @@
+{
+  "index": "app/static/places/tacoma.json",
+  "places": 7468,
+  "data_retrieved": "2026-10-12",
+  "languages": {
+    "local": [
+      "en"
+    ],
+    "coverage": {
+      "en": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "English"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/8348295",
+      "name": "Tacoma",
+      "stations": 12
+    }
+  ]
+}

@@ -14,6 +14,8 @@ OUTPUTS = ROOT / "outputs" / "toronto"
 HEATMAP_HTML = OUTPUTS / "heatmap.html"
 EXCLUDED_STATIONS_CSV = OUTPUTS / "excluded_stations.csv"
 
+# Rapid-transit stations and streetcar stations together since the tram
+# rescope (owner 2026-10-13).
 STATIONS_CSV = DATA_PROCESSED / "stations.csv"
 BUSINESSES_CLEAN_CSV = DATA_PROCESSED / "businesses_clean.csv"
 BUSINESSES_GEOCODED_CSV = DATA_PROCESSED / "businesses_geocoded.csv"
@@ -168,6 +170,109 @@ LINE_SHAPES = {
     "6": "1125786",
 }
 LINE_LABEL_ENDS = {}
+
+# --- Streetcars (tram rescope; owner, 2026-10-13) ---------------------------
+#
+# The owner's list: the day streetcar routes, one label and legend row each
+# ("Streetcar 501" on the map, "Streetcar 501 Queen" in the legend). The night
+# routes run their day routes' streets and are not drawn. A route joining or
+# leaving either set is a scope decision: pipeline/toronto/streetcars.py
+# stops if the feed's streetcar routes are not exactly these two sets.
+# docs/decisions_drafts/tram-rescope.md has the overlap test that brought
+# them in (305 of 558 stops beyond every rapid-transit station's outer ring).
+STREETCAR_LINES = {
+    "501": "Queen", "503": "Kingston Rd", "504": "King", "505": "Dundas",
+    "506": "Carlton", "507": "Long Branch", "508": "Lake Shore",
+    "509": "Harbourfront", "510": "Spadina", "511": "Bathurst",
+    "512": "St Clair",
+}
+STREETCAR_NIGHT_NOT_DRAWN = ("301", "303", "304", "305", "306", "310", "312")
+STREETCAR_LINE_NAMES = {k: f"Streetcar {k}" for k in STREETCAR_LINES}
+STREETCAR_LEGEND_NAMES = {k: f"Streetcar {k} {v}" for k, v in STREETCAR_LINES.items()}
+
+# THREE OF THE ELEVEN ARE NOT DRAWN (owner, 2026-10-13: "follow those rules
+# (8 not 11) note the drops and reasoning"). Both rules are
+# docs/category_rules.md, "Station scope":
+#   503 Kingston Rd, 507 Long Branch: CLOSED FOR WORKS. Every trip in the
+#     feed's window (to 2026-10-31) is a replacement bus, 1,098 of 1,098 and
+#     1,603 of 1,603, so the lines are drawn as the timetable runs: not at
+#     all (Berlin's U6 Tegel branch, Prague's Flora).
+#   508 Lake Shore: THE 15-MINUTE TEST. 35 trips, weekday peaks only, none
+#     between 09:00 and 15:00 (Aarhus's converted railways).
+# 512 St Clair runs streetcars east of Lansdowne and a replacement bus west
+# of it; 506 Carlton's "506B" bus runs beside a streetcar that covers the
+# whole route. Read on the cached feed and a re-pull of 2026-10-13, which
+# agree. streetcars.py compares all of this with the feed and stops when a
+# line returns, closes or changes frequency. Each value: the street-name
+# prefixes whose stops are recorded as that line's own.
+STREETCAR_CLOSED_FOR_WORKS = {
+    "503": ("Kingston Rd", "Bingham Loop"),
+    "507": ("Lake Shore Blvd West", "Long Branch Loop", "Humber Loop"),
+}
+STREETCAR_PART_CLOSED = {"512": ("St Clair Ave West", "St. Clair Ave West", "Gunns Loop")}
+STREETCAR_INFREQUENT = ("508",)
+STREETCAR_NOT_DRAWN_NEAR_M = 100.0
+
+# STREETCAR COLOURS: THE PROJECT PALETTE. The TTC gives every streetcar route
+# one red (route_color ED1C24), so eight lines cannot be told apart by it.
+# Chosen 2026-10-13 from the sRGB cube in steps of 8, Lines 1 to 6 held on
+# their colours above: 3:1 on both map pages, CIE76 >= 45 from every pin,
+# >= 18 from every line within 500 m; each line takes the colour farthest
+# from every line already chosen, the most crowded line first. Measured:
+#   501 #608000  pins 45.0  nearest line 37.7 (506)
+#   504 #00A800  pins 46.1  nearest line 37.9 (501)
+#   505 #0050F8  pins 49.7  nearest line 38.6 (511)
+#   506 #886010  pins 68.7  nearest line 37.7 (501)
+#   509 #C870C8  pins 45.3  nearest line 36.2 (Line 4)
+#   510 #F80028  pins 47.0  nearest line 45.0 (Line 5)
+#   511 #A000F8  pins 79.9  nearest line 37.7 (Line 4)
+#   512 #00A0C0  pins 45.2  nearest line 35.9 (Line 6)
+# Re-run the search if a line returns (503, 507, 508) or a rapid-transit
+# colour moves. The three lines not drawn hold no colour.
+STREETCAR_COLOURS = {
+    "501": "#608000", "504": "#00A800", "505": "#0050F8", "506": "#886010",
+    "509": "#C870C8", "510": "#F80028", "511": "#A000F8", "512": "#00A0C0",
+}
+
+# Trips with this in the headsign are buses filed under a streetcar route.
+STREETCAR_BUS_HEADSIGN = "Bus"
+
+# A line's REGULAR route: the stop patterns each run by at least this share of
+# the line's trips. Short turns and diversions under it add no stops.
+STREETCAR_REGULAR_TRIP_SHARE = 0.10
+
+# The feed names a streetcar stop per direction ("... at Spadina Ave East
+# Side"), `parent_station` is empty, and 280 of 469 names sit on one stop id,
+# so stops are grouped into places by DISTANCE, measured 2026-10-13 on 662
+# stop ids (nearest other stop: median 37 m, 95th percentile 131 m):
+#   within PLACE_LINK_M of each other, or
+#   within PLACE_CROSS_M and sharing no line-and-direction (the far-side stop
+#   of the other direction, or the crossing line's stop at one intersection).
+# No merge may stretch a place past PLACE_MAX_SPREAD_M (the widest real
+# crossing measured, Queen at Spadina with its Richmond stop, is 183 m).
+STREETCAR_PLACE_LINK_M = 60.0
+STREETCAR_PLACE_CROSS_M = 120.0
+STREETCAR_PLACE_MAX_SPREAD_M = 200.0
+
+# A streetcar place at a drawn rapid-transit station IS that station: it adds
+# no station and moves none, and it resets the spacing count. Within
+# ATTACH_M (40 stop ids measured under 150 m; "Queen St West at University
+# Ave - Osgoode Station" is 38 m), or named for the station and within
+# ATTACH_NAMED_M ("Spadina Station" is 162 m from the subway's point).
+STREETCAR_ATTACH_M = 150.0
+STREETCAR_ATTACH_NAMED_M = 400.0
+
+# Sub-transit-line filters (docs/sub_transit_line_filters.md), as Amsterdam's
+# trams: rapid-transit stations and each line's terminals kept, the rest one
+# per half mile along the line's own stop sequence.
+STREETCAR_THIN_SPACING_MILES = 0.5
+
+# The 15-minute test (docs/category_rules.md, "Station scope"): the weekday
+# 09:00 to 15:00 headway each line must hold, one direction.
+STREETCAR_MAX_HEADWAY_MIN = 15.0
+
+# Step 1 writes the line shapes it chose here; step 4 reads them.
+STREETCAR_SHAPES_JSON = DATA_PROCESSED / "streetcar_shapes.json"
 
 # PLATFORM-TO-STATION COLLAPSE, AND THIS CITY IS WHY THE PROJECT DISTRUSTS
 # STATION COUNTS AT ALL.
@@ -326,4 +431,130 @@ TORONTO_BBOX = {
     "lat_max": 43.88,
     "lon_min": -79.67,
     "lon_max": -79.09,
+}
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-12) ---
+
+PLACE_AREA = "(id:3600324211)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
+PLACE_LANGUAGES = ("en",)
+PLACE_FOLD = None
+PLACE_REVIEWED = {
+    "Former Cherry Street Hotel": "a heritage building with an article of its own; the hotel is long gone and the name is the building's (eye read, 2026-10-13)",
+    "Pharmacy": "a Line 5 station named for Pharmacy Avenue (eye read, 2026-10-13)",
+    "Pharmacy Avenue": "a public street; the word is its name (eye read, 2026-10-13)",
+}
+PLACE_DROPPED = {
+    # A description standing in for a name (owner, 2026-10-13, ruling 1 of the sixteen:
+    # a description is no name, on any kind of row).
+    "node/1224160700": "'near dam', description: a note about the spot, not a name (leisure=park) (eye read, 2026-10-13)",
+    "node/11006264026": "'poison ivy patch', description: a hazard note mapped as a park (leisure=park) (eye read, 2026-10-13)",
+    "node/11987305484": "'poison ivy patch', description: a hazard note mapped as a park (leisure=park) (eye read, 2026-10-13)",
+    "way/1043535103": "'Recreation facilities', description: bare description of the land use (leisure=park) (eye read, 2026-10-13)",
+    "way/851813413": "'Bike park', description: type words only (two words, so the bare-type rule missed it) (leisure=park) (eye read, 2026-10-13)",
+    "node/13477377836": "'Fighter Jet', description: an exhibit named by its kind and tagged historic=monument, so the exhibit rule did not see it; 52 m from Ship Gun (historic=monument) (eye read, 2026-10-13)",
+    "node/13477390034": "'Ship Gun', description: an exhibit named by its kind and tagged historic=monument (historic=monument) (eye read, 2026-10-13)",
+    "node/1434830620": "'Masjid Mosque', description: two type words, the same word in two languages (amenity=place_of_worship; religion=muslim) (eye read, 2026-10-13)",
+    "node/7118137220": "'Sunrise propane explotion site', description: a description of an event site, access=no, misspelled (historic=ruins; access=no) (eye read, 2026-10-13)",
+    "way/991330013": "'Lower Field', description: a private school's field named by position (operator Havergal College) (leisure=park; operator=Havergal College) (eye read, 2026-10-13)",
+    # A glitched name: a web address, a cut-off or misspelt name, a registry's
+    # owner field (the settled call: no glitched name; owner, 2026-10-13, ruling 1).
+    "node/13275652357": "'https://papemosque.ca/', glitch: a web address as the name; junk_name catches emails and phone numbers but not URLs (amenity=place_of_worship; religion=muslim) (eye read, 2026-10-13)",
+    "node/13438140202": "'Jeanne Lamon Hal', glitch: truncated word (Hall); has wikidata but glitched names are never repaired (amenity=theatre; operator=Trinity-St Paul's Centre; wikidata=Q137721255) (eye read, 2026-10-13)",
+    "way/273616109": "'Turnberry South Park31', glitch: stray digits glued on (Park31) (leisure=park) (eye read, 2026-10-13)",
+    "way/70510030": "'Trustees Of St Stephens', glitch: the owning legal body's name on a church building (register import) (amenity=place_of_worship; building=church; religion=christian) (eye read, 2026-10-13)",
+    "node/437992446": "'Armeniam Brotherhood Bible', glitch: truncated and misspelled (Armenian Brotherhood Bible Church) (amenity=place_of_worship; religion=christian; denomination=protestant) (eye read, 2026-10-13)",
+    # Homes with no sign of visiting (the settled call; owner, 2026-10-13, class n).
+    "node/4075560133": "'James Quinn Houses', home: heritage-listed private houses named for a person; HOME_NAME ends on house, not houses (historic=building) (eye read, 2026-10-13)",
+    "node/4075557362": "'James Quinn Row Houses', home: heritage-listed private row houses named for a person; HOME_NAME ends on house, not houses (historic=building) (eye read, 2026-10-13)",
+    # A business's own name on a building, nothing else to visit under that name
+    # (the settled call: a business is no place; owner, 2026-10-13).
+    "way/34530511": "'Medieval Times Dinner & Tournament', business: a dinner-show chain's name on the building (old_name Government Building); wikidata, no wikipedia tag (amenity=theatre; building=yes; wikidata=Q124858754; old_name=Government Building) (eye read, 2026-10-13)",
+    # A place of worship named only by a denomination, a body or a chain, in a
+    # form the shared rule's lists do not hold (owner, 2026-10-13, ruling 8
+    # of the sixteen and ruling 2 of the pilot readers').
+    "way/106344256": "'Christadelphians', worship body only: a denomination's name and nothing else (amenity=place_of_worship; building=church; religion=christian; denomination=christadelphian) (eye read, 2026-10-13)",
+    "node/269537587": "'The Christadelphians', worship body only: a denomination's name and nothing else (amenity=place_of_worship; religion=christian; denomination=christadelphian) (eye read, 2026-10-13)",
+    "way/130797701": "'Iglesia Ni Cristo', worship body only: a church body's name and nothing else; three rows of it (amenity=place_of_worship; building=church; religion=christian) (eye read, 2026-10-13)",
+    "way/43810815": "'Iglesia Ni Cristo', worship body only: a church body's name and nothing else (amenity=place_of_worship; building=yes; religion=christian) (eye read, 2026-10-13)",
+    "way/70509052": "'Iglesia Ni Cristo', worship body only: a church body's name and nothing else (amenity=place_of_worship; building=church; religion=christian) (eye read, 2026-10-13)",
+    "way/804686171": "'Religious Society of Friends', worship body only: a denomination's formal name; alias Quakers (amenity=place_of_worship; building=yes; religion=christian; denomination=quaker) (eye read, 2026-10-13)",
+    "node/9351319692": "'Plymouth Brethren Christian Church', worship body only: a denomination's name and nothing else (amenity=place_of_worship; religion=christian) (eye read, 2026-10-13)",
+    "node/13676197381": "'The Redeemed Christian Church of God', worship body only: a denomination's name and nothing else (amenity=place_of_worship; religion=christian) (eye read, 2026-10-13)",
+    "way/662147911": "'World Mission Society Church of God', worship body only: a church body's name and nothing else (amenity=place_of_worship; building=church; religion=christian) (eye read, 2026-10-13)",
+    "node/9755574528": "'Community of Christ', worship body only: a denomination's name; Etobicoke Community of Christ carries a locality and stays (amenity=place_of_worship; building=church; religion=christian) (eye read, 2026-10-13)",
+    "node/6491159741": "'Celestial Church of Christ', worship body only: a denomination's name and nothing else (amenity=place_of_worship; religion=christian) (eye read, 2026-10-13)",
+    "way/230123044": "'Church of God of Prophecy', worship body only: a denomination's name and nothing else (amenity=place_of_worship; building=church; religion=christian; denomination=protestant) (eye read, 2026-10-13)",
+    "node/6348392721": "'Church of God International', worship body only: a church body's name and nothing else (amenity=place_of_worship; religion=christian) (eye read, 2026-10-13)",
+    "way/62360416": "'Brahma Kumaris', worship body only: a movement's name and nothing else (amenity=place_of_worship; building=temple; religion=hindu) (eye read, 2026-10-13)",
+    "node/6525130537": "'Foursquare Gospel Church', worship body only: a denomination's name and nothing else (amenity=place_of_worship; religion=christian) (eye read, 2026-10-13)",
+    "way/657934800": "'Christ Embassy', worship body only: a church chain's name; Christ Embassy Scarborough carries a locality and stays (amenity=place_of_worship; building=industrial; religion=christian) (eye read, 2026-10-13)",
+    "node/13924345420": "'The Original Swaminarayan Sampraday', worship body only: a sect's name, 8 m from the temple row of the same site (amenity=place_of_worship; religion=hindu) (eye read, 2026-10-13)",
+    # A religious residence or office tagged a place of worship (owner,
+    # 2026-10-13, ruling 1 of the pilot readers').
+    "node/5813870311": "'Passionist Missionaries', religious residence or office: a religious order's house or office tagged a place of worship; no wikidata (amenity=place_of_worship; religion=christian; denomination=roman_catholic) (eye read, 2026-10-13)",
+    # A vanished thing with no article (owner, 2026-10-13, ruling 16 of the sixteen).
+    "way/164254284": "'Eglinton Ave. Gospel Hall', vanished: demolished:building=yes; note tag says the site is being redeveloped (amenity=place_of_worship; religion=christian; denomination=gospel; demolished:building=yes) (eye read, 2026-10-13)",
+    # A second object beside the row of the same thing (owner, 2026-10-13, ruling 9).
+    "node/2283661472": "'Bank of Upper Canada Building National Historic Site of Canada', duplicate: 0 m from Bank of Upper Canada Building (node/4227123357, the row with the article); this is the designation plaque (historic=monument) (eye read, 2026-10-13)",
+    "way/1416813033": "'Fort York National Historic Site', duplicate: 11 m from Fort York (way/13740577, the row with the article); the same site under its designation (historic=fort; building=no; access=yes) (eye read, 2026-10-13)",
+    "node/1593379560": "'The Power Plant Contemporary Art Gallery', duplicate: 22 m from The Power Plant (way/35893777), same wikidata Q7757923 (tourism=gallery; wikidata=Q7757923; wikipedia=en:The Power Plant) (eye read, 2026-10-13)",
+    "node/343288369": "'Anewen Greenbelt', duplicate: misspelling of Anewan Greenbelt (way/224896527), a node 1.1 km along the same greenbelt (leisure=park) (eye read, 2026-10-13)",
+    # A marker carrying the name of the street or district it stands in, not
+    # its own (the description ruling; owner, 2026-10-13, ruling 1).
+    "node/2356786701": "'Church Avenue', wrong object's name: a transit history marker carrying a street's name (historic=marker) (eye read, 2026-10-13)",
+    "node/2356786702": "'Willowdale', wrong object's name: a heritage plaque carrying the district's name; the district has its own place rows (historic=marker) (eye read, 2026-10-13)",
+    # The city's parcel names on parks (road allowance, traffic island, boulevard
+    # lands, a centre's grounds): a description of the land, no name (owner,
+    # 2026-10-13, "all approved", on the eye read's unsure rows).
+    "way/224933163": "'Bernard Avenue Road Allowance', parcel name: city inventory name for a road allowance kept as green space (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    "way/224933085": "'Bemersyde Drive Cul-De-Sac', parcel name: city inventory name for a cul-de-sac island (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    "way/206680191": "'Dunstable Place Dul-De-Sac', parcel name: city inventory name for a cul-de-sac island, misspelled (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    "way/225618642": "'Burnside Dr Boulevard', parcel name: city inventory name for a boulevard strip (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    "way/224914819": "'Austin Terrace Boulevard Lands', parcel name: city inventory name for boulevard lands (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    "way/224917750": "'Bathurst St Slopes', parcel name: city inventory name for a slope (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    "way/224917752": "'Bathurst St Slopes', parcel name: another way of the same parcel name, beside way/224917750 (leisure=park) (owner, 2026-10-13)",
+    "way/224917753": "'Bathurst St Slopes', parcel name: another way of the same parcel name, beside way/224917750 (leisure=park) (owner, 2026-10-13)",
+    "way/224917754": "'Bathurst St Slopes', parcel name: another way of the same parcel name, beside way/224917750 (leisure=park) (owner, 2026-10-13)",
+    "way/225519236": "'Boyington Property', parcel name: city inventory name, a former owner's property (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    "way/43532084": "'Harrison Properties', parcel name: city inventory name, a former owner's properties (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    "way/225007516": "'Birchmount/Parkette Traffic Island', parcel name: city inventory name for a traffic island (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    "way/37356608": "'Indian Mound Traffic Island', parcel name: city inventory name for a traffic island (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    "way/206039903": "'Lake Shore Teachers College Centre Island', parcel name: city inventory name for a traffic island (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    "way/224889845": "'Albion Arena', parcel name: an arena's grounds tagged a park under the arena's name (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    "way/224916810": "'Banbury Community Centre', parcel name: a community centre's grounds tagged a park under the centre's name (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    "way/225008607": "'Birkdale Community Centre', parcel name: a community centre's grounds tagged a park under the centre's name (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    "way/544833799": "'Morningside Church Park Area', parcel name: a description of land beside a church (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    "way/32326100": "'Hinder Area', parcel name: city inventory name; the alias West Don Parkland is the public name (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    # Places of worship named by a body, the read's unsure ones (owner,
+    # 2026-10-13, "all approved": the denomination ruling reaches them).
+    "way/56301067": "'The Universal Church', worship body only: reads as a chain's short name; no brand or operator tag (amenity=place_of_worship; building=yes; religion=christian) (eye read, unsure; owner, 2026-10-13)",
+    "way/43810107": "'Church Of Jesus Christ', worship body only: generic body name from a 2009 import (amenity=place_of_worship; building=church; religion=christian; denomination=protestant) (eye read, unsure; owner, 2026-10-13)",
+    "node/2355313610": "'Christian Congregation', worship body only: generic name from a register import (amenity=place_of_worship; religion=christian) (eye read, unsure; owner, 2026-10-13)",
+    "way/662769454": "'United Brethren in Christ Church', worship body only: a denomination's name plus Church (amenity=place_of_worship; building=church; religion=christian) (eye read, unsure; owner, 2026-10-13)",
+    "way/43810825": "'The Ethiopian Orthodox Tewaheda Church', worship body only: a national church's name, no parish name (amenity=place_of_worship; building=church; religion=christian) (eye read, unsure; owner, 2026-10-13)",
+    "way/168461275": "'Seventh Day Adventist Church Reform Movement', worship body only: a denomination's name, no congregation name (amenity=place_of_worship; building=church; religion=christian; denomination=seventh_day_adventist) (eye read, unsure; owner, 2026-10-13)",
+    "way/191842893": "'Georgian Orthodox Church in Canada', worship body only: a national church's name, no parish name (amenity=place_of_worship; building=chapel; religion=christian) (eye read, unsure; owner, 2026-10-13)",
+    "node/12744674541": "'Polskie Kościoły Pełnej Ewangelii', worship body only: Polish for a federation of churches, no congregation name (amenity=place_of_worship; religion=christian; denomination=pentecostal) (eye read, unsure; owner, 2026-10-13)",
+    # Condominium, co-op or office-estate grounds tagged a park (owner,
+    # 2026-10-13, "all approved": the estate-facility ruling, ruling 7).
+    "way/468762447": "'Bohemian Embassy Courtyard', estate facility: courtyard of what reads as a condominium building, tagged a park; the condominium is inferred from the name, no tag confirms it (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    "way/1308504910": "'Time and Space Courtyard', estate facility: courtyard of what reads as a condominium development, tagged a park; inferred from the name (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    "node/9596082843": "'Childrens Community Garden', estate facility: a housing co-op members' garden (operator names the co-op members) (leisure=park; operator=Community Co-op Memebers) (eye read, unsure; owner, 2026-10-13)",
+    "way/702116997": "'Arnell Plaza', estate facility: privately owned public space of a building (note tag), access=permissive (leisure=park; access=permissive) (eye read, unsure; owner, 2026-10-13)",
+    "way/1043315847": "'Atria North Park', estate facility: grounds named for an office complex; no operator tag (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    "way/1043315848": "'Atria South Park', estate facility: grounds named for an office complex; no operator tag (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    # NOT dropped: way/137923889 'Morgan Meighen & Associates', a tenant's name on
+    # the old Toronto Street Post Office, which has an article of its own; the
+    # building is the landmark (owner, 2026-10-13: restore).
+    # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "node/14183595174": "'Alumni Plaza', a stock plaza or square name with no place in it (owner, 2026-10-13, ruling 5 and its follow-up: every plaza name with no place in it; pattern screen)",
+    # The pattern screen of 2026-10-13, the owner's rulings on its open calls: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "way/174506099": "'Municipal Park', a park named only by a type word (owner, 2026-10-13, on the pattern screen's open calls)",
+    # The helper screens of 2026-10-13 (duplicates, parts in a church's grounds): rows that
+    # fall squarely in an owner ruling, each with its ruling.
+    "node/2359498552": "'St Nicholas Parish', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): a bare point 34 m from the building Saint Nicholas Ukrainian Catholic Church (way/160879577): the same parish under a short name",
 }

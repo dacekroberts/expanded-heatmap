@@ -19,6 +19,7 @@ import geopandas as gpd
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline import place_index  # noqa: E402
 from pipeline.map_common import load_line_shapes, render_heatmap  # noqa: E402
 from pipeline.miami.config import (  # noqa: E402
     BUSINESSES_CLEAN_CSV,
@@ -92,6 +93,7 @@ def main():
         # do (median 235 m apart). Metrorail's own are well separated (median
         # 1,149 m), which is why the shared ring edges were kept rather than
         # reduced the way New York's were.
+        place_index_url=place_index.index_url("miami"),
     )
 
 

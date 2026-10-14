@@ -321,3 +321,126 @@ MIAMI_BBOX = {
     "lon_min": -80.90,
     "lon_max": -80.10,
 }
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-12) ---
+
+# The five municipalities the map names, then the census-designated place
+# holding each station on unincorporated land (owner, 2026-10-13: "approve
+# the narrowed shape"), not Miami-Dade County (1210692), which the wave's
+# plan gave. Found through Nominatim and the OSM API, 2026-10-13, each
+# station tested against the area's own geometry:
+#   relation 1216769 Miami, 118853 Hialeah, 1216645 Coral Gables,
+#   118855 Medley, 118861 South Miami;
+#   way 33614621 Brownsville: Brownsville and Earlington Heights stations;
+#   way 33614629 Gladeview: M.L. King station;
+#   way 33614661 West Little River: Northside station (4 m outside
+#     Gladeview at its full coordinates, measured on the first fetch);
+#   relation 9853985 Glenvar Heights: Dadeland North station;
+#   relation 1244549 Kendall: Dadeland South station.
+# Miami International Airport station sits in none of them: no named area
+# smaller than the county holds it (not the aerodrome, way 113657169, nor
+# the City of Miami). Left outside the search area on the owner's word
+# (2026-10-13: "1. leave it outside, record the exception"): the fetch's
+# area line reports 1 of 42 stations outside every area, and that is the
+# recorded exception, not a gap to close by widening the area.
+PLACE_AREA = "(id:3601216769,3600118853,3601216645,3600118855,3600118861,2433614621,2433614629,2433614661,3609853985,3601244549)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
+PLACE_LANGUAGES = ("en",)
+PLACE_FOLD = None
+PLACE_REVIEWED = {}
+PLACE_DROPPED = {
+    "node/14190528505": "'Brightline MiamiCentral Station', a description standing in for a name (owner, 2026-10-13)",
+    "node/358726513": "'Monastery of the Exaltation of the Most Holy Cross', a religious residence",
+    "node/358705528": "'Saint Sophias Church', a duplicate beside the same thing's own row (owner, 2026-10-13)",
+    "node/358729276": "'Saint Kierans Church', a duplicate beside the same thing's own row (owner, 2026-10-13)",
+    "node/358709835": "'Jose Marti Riverfront Park', a duplicate beside the same thing's own row (owner, 2026-10-13)",
+    "way/375788345": "'Grace Evangelical', a duplicate beside the same thing's own row (owner, 2026-10-13)",
+    "node/11226837657": "'Torch of Friendship', a duplicate beside the same thing's own row (owner, 2026-10-13)",
+    "way/11145509": "'Dadeland Mall', a shopping centre's own way, named for it",
+    "way/11145510": "'Dadeland Mall', a shopping centre's own way, named for it",
+    "way/11145511": "'Dadeland Mall', a shopping centre's own way, named for it",
+    "way/11145512": "'Dadeland Mall', a shopping centre's own way, named for it",
+    "way/132683109": "'Dadeland Mall', a shopping centre's own way, named for it",
+    "way/420897742": "'Dadeland Mall', a shopping centre's own way, named for it",
+    "way/420897743": "'Dadeland Mall', a shopping centre's own way, named for it",
+    "way/420897744": "'Dadeland Mall', a shopping centre's own way, named for it",
+    "way/420897746": "'Dadeland Mall', a shopping centre's own way, named for it",
+    "way/420897747": "'Dadeland Mall', a shopping centre's own way, named for it",
+    "way/420897761": "'Dadeland Mall', a shopping centre's own way, named for it",
+    "way/420897765": "'Dadeland Mall', a shopping centre's own way, named for it",
+    "way/420897766": "'Dadeland Mall', a shopping centre's own way, named for it",
+    "way/465982577": "'Dadeland Mall', a shopping centre's own way, named for it",
+    "way/535301879": "'Dadeland Mall', a shopping centre's own way, named for it",
+    "way/727945007": "'Dadeland Mall', a shopping centre's own way, named for it",
+    "way/1052983247": "'Dadeland Mall', a shopping centre's own way, named for it",
+    "way/1052983248": "'Dadeland Mall', a shopping centre's own way, named for it",
+    "way/1287229012": "'Dadeland Mall', a shopping centre's own way, named for it",
+    "way/1287229013": "'Dadeland Mall', a shopping centre's own way, named for it",
+    "way/1422940188": "'Dadeland Mall', a shopping centre's own way, named for it",
+    "way/1422940189": "'Dadeland Mall', a shopping centre's own way, named for it",
+    "way/1422940190": "'Dadeland Mall', a shopping centre's own way, named for it",
+    "way/1422940191": "'Dadeland Mall', a shopping centre's own way, named for it",
+    "way/1422940192": "'Dadeland Mall', a shopping centre's own way, named for it",
+    "way/1422940193": "'Dadeland Mall', a shopping centre's own way, named for it",
+    "way/1423313792": "'Dadeland Mall', a shopping centre's own way, named for it",
+    "way/1423317845": "'Dadeland Mall', a shopping centre's own way, named for it",
+    "way/1564263387": "'Dadeland Mall', a shopping centre's own way, named for it",
+    "way/1564263388": "'Dadeland Mall', a shopping centre's own way, named for it",
+    "way/1564263389": "'Dadeland Mall', a shopping centre's own way, named for it",
+    "way/1564263390": "'Dadeland Mall', a shopping centre's own way, named for it",
+    "way/11152692": "'Dadeland Mall Circle East', a shopping centre's own way, named for it",
+    "way/1423313783": "'Dadeland Mall Circle East', a shopping centre's own way, named for it",
+    "way/1423313784": "'Dadeland Mall Circle East', a shopping centre's own way, named for it",
+    "way/1423313785": "'Dadeland Mall Circle East', a shopping centre's own way, named for it",
+    "way/1423313786": "'Dadeland Mall Circle East', a shopping centre's own way, named for it",
+    "way/968911204": "'Dadeland Mall Circle South', a shopping centre's own way, named for it",
+    "way/1422940186": "'Dadeland Mall Circle South', a shopping centre's own way, named for it",
+    "way/1422940187": "'Dadeland Mall Circle South', a shopping centre's own way, named for it",
+    "way/314486142": "'Flooded Former Bike Path', a description standing in for a name (owner, 2026-10-13)",
+    "way/1140708011": "'Florida's Turnpike Thru Lane', a description standing in for a name (owner, 2026-10-13)",
+    "way/1237941689": "'Florida's Turnpike Thru Lanes', a description standing in for a name (owner, 2026-10-13)",
+    "way/1237941690": "'Florida's Turnpike Thru Lanes', a description standing in for a name (owner, 2026-10-13)",
+    "way/1237965580": "'Florida's Turnpike Thru Lanes', a description standing in for a name (owner, 2026-10-13)",
+    "way/1237965582": "'Florida's Turnpike Thru Lanes', a description standing in for a name (owner, 2026-10-13)",
+    "way/1237965584": "'Florida's Turnpike Thru Lanes', a description standing in for a name (owner, 2026-10-13)",
+    "way/775090699": "'State Road 821 Access Road', a description standing in for a name (owner, 2026-10-13)",
+    "way/118022775": "'WASD Access Road', a description standing in for a name (owner, 2026-10-13)",
+    "way/11143024": "'Northwest 7th Avcr', a glitched name (cut short, stray characters or two names in one), not repaired (owner, 2026-10-13)",
+    "way/167158237": "'Northwest 7th Avcr', a glitched name (cut short, stray characters or two names in one), not repaired (owner, 2026-10-13)",
+    "way/11127596": "'Southwest 61st Ctcr', a glitched name (cut short, stray characters or two names in one), not repaired (owner, 2026-10-13)",
+    "way/536843564": "'Southwest 61st Ctcr', a glitched name (cut short, stray characters or two names in one), not repaired (owner, 2026-10-13)",
+    "way/1163237149": "'Southwest 61st Ctcr', a glitched name (cut short, stray characters or two names in one), not repaired (owner, 2026-10-13)",
+    "way/1313188612": "'Southwest 113th Plcr West', a glitched name (cut short, stray characters or two names in one), not repaired (owner, 2026-10-13)",
+    "way/11132743": "'Southwest 93rd Placetiger:cfcc=A41', a notice or code glued onto the name: a glitch (owner, 2026-10-13)",
+    "way/190819763": "'Northwest 11700 Block', a description standing in for a name (owner, 2026-10-13)",
+    "way/11118926": "'Poinciana Closed Road', a description standing in for a name (owner, 2026-10-13)",
+    "way/278805163": "'Southwest 112th Street', not a street: another kind of object indexed as one",
+    "way/278805207": "'Southwest 112th Street', not a street: another kind of object indexed as one",
+    "way/806890613": "'Southwest 124th Street', not a street: another kind of object indexed as one",
+    "way/806890614": "'Southwest 124th Street', not a street: another kind of object indexed as one",
+    "way/806890617": "'Southwest 120th Street', not a street: another kind of object indexed as one",
+    "way/806890618": "'Southwest 120th Street', not a street: another kind of object indexed as one",
+    "way/806899638": "'Southwest 144th Street', not a street: another kind of object indexed as one",
+    "way/806899639": "'Southwest 144th Street', not a street: another kind of object indexed as one",
+    "way/806899644": "'Southwest 128th Street', not a street: another kind of object indexed as one",
+    "way/806899645": "'Southwest 128th Street', not a street: another kind of object indexed as one",
+    "node/6942721481": "'Medley Landfill', private facility: a landfill tagged a peak: an operating waste site, by id (flag check, 2026-10-13)",
+    "node/11226868716": "'HMS Bounty', glitch: GNIS artifact: a replica ship's name on a hamlet node; the ship is not there (flag check, 2026-10-13)",
+    "node/153971407": "'Medley Lakeside Retirement Community', a housing development mapped as a place (owner, 2026-10-13)",
+    # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "way/552197202": "'Alhambra Tower Plaza', the grounds of an office or apartment building, or of a housing estate by its operator, tagged a park or square (owner, 2026-10-13, the estate-facility ruling as applied to Toronto; pattern screen)",
+}
+
+# Public sights kept by id: in the cache, passed over by the rules (place_index,
+# PLACE_KEPT; owner, 2026-10-13).
+PLACE_KEPT = {
+    "node/4587210554": "'Calle Ocho Walk of Fame', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "relation/10225212": "'Fairchild Botanical Garden', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/435748157": "'Historic Black Police Precinct Courthouse and Museum', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/589514585": "'Institute of Contemporary Art, Miami', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/117926304": "'Jungle Island', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/435847255": "'Rubell Museum', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/1420651228": "'The Kampong', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+}

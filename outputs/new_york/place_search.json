@@ -1,0 +1,45 @@
+{
+  "index": "app/static/places/new_york.json",
+  "places": 64506,
+  "data_retrieved": "2026-10-12",
+  "languages": {
+    "local": [
+      "en"
+    ],
+    "coverage": {
+      "en": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "English"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/9691750",
+      "name": "Brooklyn",
+      "stations": 169
+    },
+    {
+      "osm": "relation/8398124",
+      "name": "Manhattan",
+      "stations": 153
+    },
+    {
+      "osm": "relation/9691819",
+      "name": "Queens",
+      "stations": 83
+    },
+    {
+      "osm": "relation/9691916",
+      "name": "The Bronx",
+      "stations": 70
+    },
+    {
+      "osm": "relation/9691948",
+      "name": "Staten Island",
+      "stations": 21
+    }
+  ]
+}

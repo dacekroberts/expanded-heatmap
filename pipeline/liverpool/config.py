@@ -193,3 +193,73 @@ METERS_PER_MILE = 1609.344
 RING_EDGES_MILES = [0.0, 0.1, 0.2, 0.3, 0.6]
 RING_EDGES_METERS = [m * METERS_PER_MILE for m in RING_EDGES_MILES]
 RING_LABELS = ["0-0.1 mi", "0.1-0.2 mi", "0.2-0.3 mi", "0.3-0.6 mi"]
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-12) ---
+
+PLACE_AREA = "(id:3600162456,3600172987,3600173023,3600173025)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
+PLACE_LANGUAGES = ("en",)
+PLACE_FOLD = None
+# Read and kept, 2026-10-13 (the flag check of wave 1; the owner's ruling
+# to settle unsure rows by the existing rules). None carries a leak word,
+# so check E takes no PLACE_REVIEWED entry for it; the reason is kept here.
+#   way/403494967 'Knowsley Hall': castle_type=stately with an article of its own: an estate landmark (owner, 2026-10-13)
+PLACE_REVIEWED = {
+    "Shop Lane": "a residential street, no business tag",
+    "Shop Road": "a residential street, no business tag",
+    "Store Street": "a residential street, no business tag",
+}
+PLACE_DROPPED = {
+    "way/213185601": "'O2 Academy Liverpool', a music venue under the business's name; its wikidata is a war memorial's",
+    "way/468775286": "'Grassy Area', a description standing in for a name",
+    "node/14239583820": "'Green Steps and seating', a description standing in for a name",
+    "node/14046835501": "'Small Park', a description standing in for a name",
+    "node/14060339701": "'Jummah Salah in Sanctuary', a prayer time and room described, on a node",
+    "node/14062423501": "'Prescot Pentecostal Fellowship - Malayalam Worship (Prescot, Whiston, St Helens, Liverpool)', a description and a list of towns glued onto the name",
+    "way/961084795": "'Church war menorial', a description standing in for a name",
+    "way/867557845": "'Rollercoaster', a bare type word",
+    "way/924786893": "'Magazine', a bare type word, and access=no",
+    "node/250248091": "'The Cenotaph', a bare type word, unregistered",
+    "node/14003191230": "'Lady Chapel', a cathedral's own chapel named by its type",
+    "way/820210048": "'Rose Garden', a bare type word",
+    "way/993737151": "'Rose Garden', a bare type word",
+    "node/11218735692": "'R&H 224347', a code as the whole name",
+    "way/218395071": "'Liverpool Waters Phase FOUR', a development phase's code as a neighbourhood",
+    "node/14156631958": "a grave named for the private person buried there (owner, 2026-10-13: a person's own name goes)",
+    "node/14156631959": "a grave named for the private person buried there (owner, 2026-10-13: a person's own name goes)",
+    "node/14156272962": "a grave named for the private person buried there (owner, 2026-10-13: a person's own name goes)",
+    "node/14156631960": "a grave named for the person buried there, carrying that person's article (owner, 2026-10-13)",
+    "node/14156631961": "a grave named for the person buried there, carrying that person's article (owner, 2026-10-13)",
+    "node/9886100436": "'Former Otterspool Café', a ruin, derelict since the 1980s by its own note, named as the business it was (owner, 2026-10-13)",
+    "node/9112841769": "'Cunscough Hall (site of)', the site of a vanished hall (owner, 2026-10-13: a search must not land where the thing is not)",
+    "node/10678274526": "'Site of Roman Bridge', the site of a vanished bridge (owner, 2026-10-13)",
+    "way/407236266": "'Bidston Dock Landfill', a filled dock that is landfill today (owner, 2026-10-13)",
+    "way/508028510": "'Tidal Footpath to Hilbre Island (Check Tide Times and  crossing advice before using)', a notice glued onto the path's name: a glitch (owner, 2026-10-13)",
+    "way/177924955": "'Tidal Footpath to Hilbre Island (Check Tide Times and crossing advice before using)', a notice glued onto the path's name: a glitch (owner, 2026-10-13)",
+    "way/177923987": "'Tidal Footpath to Hilbre Island (Check Tide Times and crossing advice before using)', a notice glued onto the path's name: a glitch (owner, 2026-10-13)",
+    "way/215065604": "'\"Monkey Steps\"', quotation marks in the name: a glitch (owner, 2026-10-13)",
+    "way/32232883": "'Access Road', a bare type as a street's name (owner, 2026-10-13)",
+    "way/30809283": "'Driveway', a bare type as a street's name (owner, 2026-10-13)",
+    "way/1250879819": "'Linnet House Driveway', a house's own driveway described (owner, 2026-10-13)",
+    "way/488484882": "'Elm House Service Road', a house's own service road described (owner, 2026-10-13)",
+    "way/996898342": "'Temporary cycle path', a description as a street's name (owner, 2026-10-13)",
+    "way/933851271": "'Liverpool North Extension Railway', an abandoned railway's name on a cycleway: a wrong object's name (owner, 2026-10-13)",
+    "way/37393365": "'Liver Industrial Estate', an industrial estate's own road",
+    "way/37393366": "'Liver Industrial Estate', an industrial estate's own road",
+    "way/254831404": "'Woodside Bus Station', a bus station indexed as a street (owner, 2026-10-13)",
+    "node/8647055259": "'Dingle', a demolished station, by its own description, whatever its article (owner, 2026-10-13: \"2. drop\")",
+    "node/2789978938": "'Squares with Two Circles', artwork without article: tourism=artwork; wikipedia=en:List of public art in Liverpool (the wikipedia tag is a list page, not the work's article) (flag check, 2026-10-13)",
+    # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "way/1088408935": "'The Cargo Building Courtyard', the grounds of an office or apartment building, or of a housing estate by its operator, tagged a park or square (owner, 2026-10-13, the estate-facility ruling as applied to Toronto; pattern screen)",
+}
+
+# Famous places kept by id: in the cache, passed over by the rules (place_index,
+# PLACE_KEPT; owner, 2026-10-13).
+PLACE_KEPT = {
+    "node/12496037807": "'Tate Liverpool', one of the city's best-known sights, in the cache with no row (tourism=gallery, no wikidata or wikipedia tag): a famous place the rules pass over (owner, 2026-10-13; pattern screen)",
+    "node/4112789484": "'Another Place', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/4541388783": "'Open Eye Gallery', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/348160621": "'The Bluecoat', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+}

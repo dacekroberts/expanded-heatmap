@@ -328,3 +328,103 @@ EDMONTON_BBOX = {
     "lon_min": -113.75,
     "lon_max": -113.23,
 }
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-12) ---
+
+PLACE_AREA = "(id:3602564500)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
+PLACE_LANGUAGES = ("en",)
+PLACE_FOLD = None
+# Read and kept, 2026-10-13 (the flag check of wave 1; the owner's ruling
+# to settle unsure rows by the existing rules). None carries a leak word,
+# so check E takes no PLACE_REVIEWED entry for it; the reason is kept here.
+#   way/565123468 'Union Bank Inn': a heritage building with a Wikidata entry, tagged as the building: the Panama Hotel precedent
+PLACE_REVIEWED = {
+    "Transit Hotel": "a historic building (historic=building, Wikipedia) tagged as the building, not the business: the Panama Hotel precedent",
+}
+PLACE_DROPPED = {
+    "way/632373455": "'Pointe Uptown Courtyard', a condominium complex's courtyard, by its own description: homes",
+    "way/325217107": "'Mahamevnawa Buddhist Monastery Edmonton', a monastery tagged a place of worship, not notable: a religious residence, by id",
+    "way/325035890": "'Truc Lam Monastery', a monastery tagged a place of worship, not notable: a religious residence, by id",
+    "relation/15307341": "'Sisters of Our Lady of Charity', a religious order's house tagged a place of worship, not notable: a religious residence, by id",
+    "way/325268748": "'Hangar 11', destroyed in a fire (end_date=2024-04-22): removed",
+    "way/325267625": "'Courtyard #1', a numbered courtyard: a code and a type word, unregistered",
+    "way/1216140709": "'Courtyard #2', a numbered courtyard: a code and a type word, unregistered",
+    "way/325267631": "'Courtyard #3', a numbered courtyard: a code and a type word, unregistered",
+    "way/325267628": "'Courtyard #4', a numbered courtyard: a code and a type word, unregistered",
+    "way/325267630": "'Courtyard #5', a numbered courtyard: a code and a type word, unregistered",
+    "way/325267624": "'Courtyard #6', a numbered courtyard: a code and a type word, unregistered",
+    "way/325267629": "'Courtyard #7', a numbered courtyard: a code and a type word, unregistered",
+    "node/5262997168": "'Jagre Ridge Golf Course hole # 15 scenic park area north of pond', a sentence describing a spot on a golf course",
+    "way/544443569": "'Jagare Ridge Excercise Warm Up Park', a description of an exercise area",
+    "way/1545297602": "'Future School Site', a description (a future school site) tagged a park",
+    "way/320156860": "'Ellerslie RoadBaptist Church', two words glued in the name: a glitch",
+    "way/322564914": "'Jesus Christ of Latter Day Saints 116 St', the name is cut short and carries an address: a glitch",
+    "node/14123836433": "a place of worship named for a living person (owner, 2026-10-13: a person's own name goes)",
+    "node/13529947384": "'1905 Street', a paid living-history park's ride indexed as a station: not transit (owner, 2026-10-13)",
+    "node/13529947382": "'1920 Street', a paid living-history park's ride indexed as a station: not transit (owner, 2026-10-13)",
+    "node/7759136178": "'Fort Edmonton', a paid living-history park's ride indexed as a station: not transit (owner, 2026-10-13)",
+    "node/12205260322": "'107 Street', a railway society's heritage streetcar indexed as a station: not transit (owner, 2026-10-13)",
+    "node/11432449223": "'Government Centre Plaza', a railway society's heritage streetcar indexed as a station: not transit (owner, 2026-10-13)",
+    "node/1859336998": "'Old Strathcona', a railway society's heritage streetcar indexed as a station: not transit (owner, 2026-10-13)",
+    "node/12205260321": "'Whyte Avenue', a railway society's heritage streetcar indexed as a station: not transit (owner, 2026-10-13)",
+    "way/126176089": "'Al Rashid Mosque', a building inside a paid living-history park (owner, 2026-10-13: the venue stays, its buildings go)",
+    "way/322271762": "'Anglican Church of St. Michael & All Angels', a building inside a paid living-history park (owner, 2026-10-13)",
+    "way/322271977": "'Bellerose School', a building inside a paid living-history park (owner, 2026-10-13)",
+    "way/126176098": "'Boat Shed', a building inside a paid living-history park (owner, 2026-10-13)",
+    "way/126310518": "'Fire Hall, Town Hall, & Police Station', a building inside a paid living-history park (owner, 2026-10-13)",
+    "way/583356195": "'Gyro Park & Playground', a feature inside a paid living-history park (owner, 2026-10-13)",
+    "way/126176084": "'J.B. Little Brickyard', a feature inside a paid living-history park (owner, 2026-10-13)",
+    "way/583356194": "'Memorial Gardens', a feature inside a paid living-history park (owner, 2026-10-13)",
+    "way/322275095": "'Methodist Church', a building inside a paid living-history park (owner, 2026-10-13)",
+    "way/322264619": "'Métis Cabin', a building inside a paid living-history park (owner, 2026-10-13)",
+    "way/322272371": "'N.W.M.P Jail', a building inside a paid living-history park (owner, 2026-10-13)",
+    "way/322272995": "'N.W.M.P. Gun Shed', a building inside a paid living-history park (owner, 2026-10-13)",
+    "way/126176103": "'Rundle Chapel', a building inside a paid living-history park (owner, 2026-10-13)",
+    "way/1474850843": "'Secord Complex', a building inside a paid living-history park (owner, 2026-10-13)",
+    "way/264249452": "'St Anthony's Church', a building inside a paid living-history park (owner, 2026-10-13)",
+    "way/583862187": "'Tent City', a feature inside a paid living-history park (owner, 2026-10-13)",
+    "way/64842311": "'1885 Street', a street inside a paid living-history park (access=customers) (owner, 2026-10-13)",
+    "way/126176114": "'1905 Street', a street inside a paid living-history park (access=customers) (owner, 2026-10-13)",
+    "way/64842309": "'1905 Street', a street inside a paid living-history park (access=customers) (owner, 2026-10-13)",
+    "way/64842310": "'1920 Street', a street inside a paid living-history park (access=customers) (owner, 2026-10-13)",
+    "way/126176088": "'1920 Street', a street inside a paid living-history park (access=customers) (owner, 2026-10-13)",
+    "way/126176126": "'1920 Street', a street inside a paid living-history park (access=customers) (owner, 2026-10-13)",
+    "way/1018647812": "'Peavey Station', a relocated station building inside a railway museum (owner, 2026-10-13)",
+    "way/413765132": "'Saint Albert Canadian National Railway Station', a relocated station building inside a railway museum (owner, 2026-10-13)",
+    "way/1452723963": "'Alley Access', a bare type as a street's name (owner, 2026-10-13)",
+    "way/934500134": "'Alley Access', a bare type as a street's name (owner, 2026-10-13)",
+    "way/844073649": "'Cloverdale Bridge Detour', a detour described (owner, 2026-10-13)",
+    "way/1218687582": "'Cloverdale Bridge Detour alt', a detour described (owner, 2026-10-13)",
+    "way/1094390587": "'Go Trail Alt', a description as a street's name (owner, 2026-10-13)",
+    "way/547299003": "'Off-Leash Path', a description as a street's name (owner, 2026-10-13)",
+    "way/1279241230": "'On-Leash Path', a description as a street's name (owner, 2026-10-13)",
+    "way/98223790": "'51222 Range Road 260', an address as a street's name (owner, 2026-10-13)",
+    "way/614250085": "'Goodwin Park & Benches', glitch: stray words glued to the name: '& Benches' after the park's name, by id; not repaired (flag check, 2026-10-13)",
+    "node/11940488893": "'Heritage Mall', business: former shopping mall: a demolished mall, by id (flag check, 2026-10-13)",
+    "way/521942121": "'Rehwinkel Parsonage', home: clergy residence with an entry and no home tag: a parsonage; 'parsonage' is not in HOME_NAME (flag check, 2026-10-13)",
+    "way/322971597": "'Oblats Maison Provinciale', a religious residence (amenity=monastery); its Wikidata entry is the heritage register's and has no article: a home (wave 1's unsure rows, settled on the Wikidata lookup and the existing rules, 2026-10-13)",
+    "way/323353112": "'Ukrainian Orthodox Church of Canada', a place of worship named only by a denomination, a body or a chain, in a form the shared rule's lists do not hold; no wikipedia tag of its own (owner's rulings, 2026-10-13)",
+    # The pattern screen of 2026-10-13, the owner's rulings on its open calls: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "way/478357009": "'Orchards Residents Association Park', a residents' association's own park by its name (owner, 2026-10-13, on the pattern screen's open calls: the estate-facility ruling)",
+    "way/1113191734": "'East Lawn', a stock name with no place in it (owner, 2026-10-13, on the pattern screen's open calls: ruling 5)",
+    # The helper screens of 2026-10-13 (duplicates, parts in a church's grounds): rows that
+    # fall squarely in an owner ruling, each with its ruling.
+    "way/217654799": "'Engineering Quad', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13, the class ruled in Melbourne; helper screen): a University of Alberta campus quad tagged leisure=park (operator the university), named by a faculty and a type only; the rules already leave out the campus's Main Quad (way/51065510); recommend drop (Corbett Quad and Rutherford Quad carry a person's name and stay)",
+    "way/51065522": "'Arts/Business Quad', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13, the class ruled in Melbourne; helper screen): a University of Alberta campus quad tagged leisure=park (operator the university), named by two faculties and a type only; recommend drop, as Engineering Quad",
+    # The pattern screen of 2026-10-13, the wave 1 twin check: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "node/13529947385": "'1905 Street', the second stop position of a paid living-history park's ride, the twin of node/13529947384: not transit (owner, 2026-10-13; the wave 1 twin check)",
+}
+
+# Public sights kept by id: in the cache, passed over by the rules (place_index,
+# PLACE_KEPT; owner, 2026-10-13).
+PLACE_KEPT = {
+    "way/156535044": "'John Janzen Nature Centre', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/226584734": "'John Walter Museum', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/632192116": "'Legislative Assembly Interpretive Centre', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/169998562": "'MacEwan University City Centre Campus', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/4263896991": "'Neon Sign Museum', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+}

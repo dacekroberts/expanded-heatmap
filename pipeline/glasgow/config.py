@@ -133,3 +133,67 @@ GLASGOW_BBOX = {
     "lon_min": -4.42,
     "lon_max": -4.05,
 }
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-12) ---
+
+PLACE_AREA = "(id:3601906767)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
+PLACE_LANGUAGES = ("en",)
+PLACE_FOLD = None
+# Read and kept, 2026-10-13 (wave 1's unsure rows, settled on a one-off
+# Wikidata lookup and the existing rules; owner, 2026-10-13). None carries
+# a leak word, so check E takes no PLACE_REVIEWED entry; the reason is kept here.
+#   way/178206517 'Balgray Tower': historic=castle with an article of its own (Wikidata lookup, 2026-10-13): a landmark people look for
+PLACE_REVIEWED = {}
+PLACE_DROPPED = {
+    "node/5595785628": "'Sandyhills Parish Church Manse', a manse tagged a place of worship: a minister's residence",
+    "node/6917284302": "'Kennishead Flats', tower blocks mapped as a neighbourhood node: homes",
+    "way/1385345354": "'Newton Street EV Charging Hub', a charging site's own road",
+    "way/660545306": "'Glasgow Tigers', a speedway team's name on its track (highway=raceway)",
+    "way/1328175953": "'Common Ground', a description on a private body's plot",
+    "way/1328175405": "'Common Lanscaped Area', a description on a private body's plot",
+    "way/1328175406": "'Coomon Lanscaped Area', a description on a private body's plot",
+    "way/1328173541": "'Landscaped Area', a description on a private body's plot",
+    "node/13161702802": "'New Chapel', a chapel named by a type word, one of two beside a garden of remembrance",
+    "node/13161702803": "'Old Chapel', a chapel named by a type word, one of two beside a garden of remembrance",
+    "way/387063804": "'The Entrance Facade', a description standing in for a name",
+    "node/9454970862": "'Suspension Bridge', a bare type word on a ruin",
+    "node/4769764432": "'Old Ironstone Pit', one description on eight points",
+    "node/4769764433": "'Old Ironstone Pit', one description on eight points",
+    "node/4769764442": "'Old Ironstone Pit', one description on eight points",
+    "node/4769764465": "'Old Ironstone Pit', one description on eight points",
+    "node/4769764443": "'Old Ironstone Pit', one description on eight points",
+    "node/4769764428": "'Old Ironstone Pit', one description on eight points",
+    "node/4769764430": "'Old Ironstone Pit', one description on eight points",
+    "node/4769764431": "'Old Ironstone Pit', one description on eight points",
+    "node/4769755746": "'Pit No9', a code and a type word, unregistered",
+    "way/221338076": "'Nelson Monument', a second drawing of the monument way/101931684, which stays",
+    "node/3686170727": "'Robroyston House (site of)', the site of a vanished house (historic=site)",
+    "way/1312996667": "'Access path to Easterhouse train station', a description as a street's name (owner, 2026-10-13)",
+    "way/50682496": "'Steps & Lift between road & platform levels', a description as a street's name (owner, 2026-10-13)",
+    "way/133199243": "'Steps to Low Level Patforms', a description as a street's name (owner, 2026-10-13)",
+    "way/656254491": "'Golspie Street Bus Lane', a description as a street's name (owner, 2026-10-13)",
+    "way/656254488": "'Golspie Street Bus Lane', a description as a street's name (owner, 2026-10-13)",
+    "way/1434729942": "'Golspie Street Bus Lane', a description as a street's name (owner, 2026-10-13)",
+    "way/656254487": "'Golspie Street Bus Lane', a description as a street's name (owner, 2026-10-13)",
+    "way/656254492": "'Golspie Street Bus Lane', a description as a street's name (owner, 2026-10-13)",
+    "way/656254493": "'Golspie Street Bus Lane', a description as a street's name (owner, 2026-10-13)",
+    "way/1314410927": "'3 Normal Avenue', an address as a street's name (owner, 2026-10-13)",
+    "way/1449900788": "'50 School Drive', an address as a street's name (owner, 2026-10-13)",
+    "way/1551158323": "'B765', a road number in the name field (owner, 2026-10-13)",
+    "way/1551158324": "'B765', a road number in the name field (owner, 2026-10-13)",
+    "way/1551158325": "'B765', a road number in the name field (owner, 2026-10-13)",
+    "way/1551158327": "'B765', a road number in the name field (owner, 2026-10-13)",
+    "node/6465079383": "'Crookston Home', home: place=quarter; name ends \"Home\"; no other tag (a care home's site mapped as a quarter) (flag check, 2026-10-13)",
+    # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "way/148531852": "'Christadelphian Hall', a place of worship named only by its body and a hall type, in a spelling the shared rule's lists do not hold (owner, 2026-10-13, the denomination ruling; pattern screen)",
+    "way/542179822": "'The Courtyard', a stock plaza or square name with no place in it (owner, 2026-10-13, ruling 5 and its follow-up: every plaza name with no place in it; pattern screen)",
+}
+
+# Public sights kept by id: in the cache, passed over by the rules (place_index,
+# PLACE_KEPT; owner, 2026-10-13).
+PLACE_KEPT = {
+    "node/11964734024": "'Glasgow City Chambers', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+}

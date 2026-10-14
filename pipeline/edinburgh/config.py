@@ -154,3 +154,65 @@ BUSINESS_BBOX = {"lat_min": 55.8, "lat_max": 56.02, "lon_min": -3.48, "lon_max":
 # (hues), LINE_COLOURS, OPERATOR_STATION_COUNTS, OPERATOR_COUNTS_SOURCE,
 # SPACING_MIN_M, MEDIAN_GAP_BOUNDS_M, NAPTAN_EXPLAINED, the ring edges.
 # ===========================================================================
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-12) ---
+
+PLACE_AREA = "(id:3601920901)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
+PLACE_LANGUAGES = ("en",)
+PLACE_FOLD = None
+PLACE_REVIEWED = {}
+PLACE_DROPPED = {
+    "way/454542979": "'Westfield St James Quarter', a shopping mall mapped as a quarter (landuse=retail)",
+    "relation/11913072": "'Castlebrae Business Centre', a listed former school under the name of the business centre in it; no article, so no Panama Hotel precedent",
+    "node/6285079351": "'Home Farm Cottages', a row of cottages mapped as a hamlet: homes",
+    "node/27236546": "'OPD1', a bare code on a locality node: a description",
+    "node/27236545": "'OPD2', a bare code on a locality node: a description",
+    "node/27235585": "'OPD5', a bare code on a locality node: a description",
+    "node/27235589": "'OPD6', a bare code on a locality node: a description",
+    "way/1377428318": "'Gasholder 1', a code and a type word, unregistered",
+    "way/109243252": "'Old Norton Quarry (filled)', a status note in the name: a description",
+    "node/13799890500": "'Former Edmonstone Policies Park', a description (\"Former ...\") on a locality node",
+    "node/13138138611": "'Research Park', a bare type word as a neighbourhood",
+    "way/220274539": "'Centre Court', a court's label, not a name",
+    "node/4768575847": "'Stone Arch', a description on a monument node",
+    "node/360303994": "'Cup and Ring Marked Rocks', a description of the site's type",
+    "node/11181555589": "'Muslim Prayer Room', a bare type word",
+    "node/13564998178": "'The Jellicoe Express -- 1917 - 2017', stray dashes and dates in the name, and the wikidata is the railway company's: a glitch",
+    "node/13920130909": "'Juniper Green', a monument carrying the village's name; the suburb is its own row: a wrong object's name",
+    "way/1092353112": "'Fairafar Fish pass', a fish pass mapped as a river",
+    "way/172583336": "'West Pilton Park', access=no; its description says closed for redevelopment until late 2027 (owner, 2026-10-13: closed a year or more by its own tags goes)",
+    "way/445214679": "'East Sands of Leith', a beach inside the docks; its description says closed to the public (owner, 2026-10-13)",
+    "node/10119378951": "'Mercat Cross', a bare type word, unregistered",
+    "way/4626459": "'GlenleaCottages', words glued in the name: a glitch (owner, 2026-10-13)",
+    "way/4600438": "'E Hermiston', a street name cut short (owner, 2026-10-13)",
+    "way/674912509": "'Kitchen Service Road', a description as a street's name (owner, 2026-10-13)",
+    "way/1353807786": "'Kitchen Service Road', a description as a street's name (owner, 2026-10-13)",
+    "way/62826109": "'West Court 1-4', an address range as a street's name (owner, 2026-10-13)",
+    "node/7640171528": "'Gate 1', description: junction=yes; name is \"Gate\" and a number (a site gate under a type and a number; two rows) (flag check, 2026-10-13)",
+    "node/27235441": "'Gate 1', description: junction=yes; name is \"Gate\" and a number (a site gate under a type and a number; two rows) (flag check, 2026-10-13)",
+    "node/7640171529": "'Gate 2', description: junction=yes; name is \"Gate\" and a number (flag check, 2026-10-13)",
+    "node/3916870381": "'Gate 2', description: junction=yes; name is \"Gate\" and a number (flag check, 2026-10-13)",
+    "node/7640171530": "'Gate 3', description: junction=yes; name is \"Gate\" and a number (flag check, 2026-10-13)",
+    "node/364342890": "'Gate 3', description: junction=yes; name is \"Gate\" and a number (flag check, 2026-10-13)",
+    "node/3180121762": "'Gate 4', description: junction=yes; name is \"Gate\" and a number (flag check, 2026-10-13)",
+    "node/5002102714": "'Birth Chamber', description: historic=room; description says a room in the castle (a room inside a building) (flag check, 2026-10-13)",
+    "way/37616520": "'Former Lime Kilns', description: historic=ruins; name is \"Former\" and a type (flag check, 2026-10-13)",
+    "way/1474280377": "'Frederick Douglass', a mural kept only on its subject's Wikidata entry (owner, 2026-10-13)",
+    # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "node/4999592333": "'Christian Science Reading Room', a religious body's reading room, assembly hall or institute tagged a place of worship, not a congregation (owner, 2026-10-13, ruling 2; pattern screen)",
+}
+
+# Public sights kept by id: in the cache, passed over by the rules (place_index,
+# PLACE_KEPT; owner, 2026-10-13).
+PLACE_KEPT = {
+    "relation/952934": "'Edinburgh Zoo', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/87686771": "'Floral Clock', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/3356785113": "'Forth Bridges Viewpoint', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/70954978": "'Scottish Storytelling Centre', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/239893682": "'St Anthony's Chapel', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/79689765": "'Summerhall', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/3072411821": "'Surgeons' Hall Museums', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+}

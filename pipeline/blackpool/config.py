@@ -158,3 +158,37 @@ NAPTAN_NAME_ALIASES = {
     "St Chad's": "St Chad's Road",         # 4 m
     "Talbot Road": "Talbot Square",        # 3 m; NaPTAN's record created 2024-05-29, with the spur
 }
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-12) ---
+
+PLACE_AREA = "(id:3600148603,3600148604)"
+# The index reaches more than 25 km past the map's stations, a far corner of the
+# municipality's own area: recorded for rule D of scripts/check_place_scope.py
+# (measured 25.8 km on the index of 2026-10-13; remove it if a rebuild falls within 25 km).
+PLACE_SCOPE_REACH_REASON = "2026-10-13: the Borough of Wyre, the tramway's second district, runs east to the Bowland fells, 26 km past the nearest station (owner)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
+PLACE_LANGUAGES = ("en",)
+PLACE_FOLD = None
+PLACE_REVIEWED = {
+    "Cliffs Hotel": "a Blackpool Tramway stop named for the building beside it; no hotel object is indexed",
+}
+PLACE_DROPPED = {
+    "way/988369957": "'Hackensall Hall', a manor house (historic=manor, building=farm, Grade II) with no sign of visiting: a home, whatever its article",
+    "node/14103850197": "'Whipping Post', description: historic=pillory; name is type words; wikidata, no article (flag check, 2026-10-13)",
+}
+
+# Public sights kept by id: in the cache, passed over by the rules (place_index,
+# PLACE_KEPT; owner, 2026-10-13).
+PLACE_KEPT = {
+    "way/461836152": "'Blackpool Model Village', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/213926756": "'Comedy Carpet', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/244465533": "'Farmer Parrs Animal World', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/160459195": "'Fleetwood Market', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/212855703": "'Grand Theatre', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/160334750": "'Marine Hall', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/3651059551": "'Mirror Ball', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/146615125": "'SEA LIFE Blackpool', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/12906096154": "'Showtown Blackpool', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/1137370186": "'The Blackpool Opera House', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+}

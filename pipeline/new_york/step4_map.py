@@ -32,6 +32,7 @@ import geopandas as gpd
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline import place_index  # noqa: E402
 from pipeline.map_common import load_line_shapes, render_heatmap  # noqa: E402
 from pipeline.new_york.config import (  # noqa: E402
     BUSINESSES_GEOCODED_CSV,
@@ -122,6 +123,7 @@ def main():
         # indistinct wash over Manhattan. They read cleanly around the
         # outer-borough and Staten Island stations, so they stay available in
         # the layer control instead of being dropped. See render_heatmap.
+        place_index_url=place_index.index_url("new_york"),
     )
 
 

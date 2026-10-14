@@ -28,6 +28,12 @@ index step measures each language's share of the places
      reviewed name still occurs (a stale entry is a list nobody reads). Kyoto
      found a hotel's footpath, a supermarket's car park and "private land"
      before the minor-way rule; one ruin is reviewed.
+     A row kept by an owner's ruling that carries no leak word is recorded in
+     config.PLACE_RULED_KEPT ({OSM id or street name: why}; the big review,
+     2026-10-13) and held here too: every entry gives its why, names a row of
+     the index (a place by its id in the id side file, a street by its name)
+     and is not in PLACE_DROPPED. A ruled keep a later rule has taken fails by
+     name instead of going unnoticed.
   D. ODbL: the index holds only the fields place_index writes (6 per row, the
      known top-level keys), its licence object names ODbL and the OSM credit,
      LICENSE carves app/static/places/ out, and docs/data_sources.md has the
@@ -80,16 +86,10 @@ if hasattr(sys.stdout, "reconfigure"):
 # H: a city whose index is known not to reach its whole map, with the date
 # and the reason. A dated defect, not a pass; an entry whose city has no gap
 # left fails, so the list only shrinks.
-# Emptied when Mexico City's index was rebuilt for its regional map, 2026-10-12.
-# Mexico City again, 2026-10-13 (owner): the tram rescope's steps were re-run
-# ahead of its landing, so the shared processed stations hold San Isidro
-# (Tlalnepantla de Baz), which the landed index's area does not reach. Leaves
-# with the big review, when the rescope and an index over the wider area land
-# together (the caches are in data/mexico_city/raw/place_wide_2026-10-13/).
-KNOWN_GAPS = {
-    "mexico_city": "2026-10-13: the tram rescope's stations are on disk before its landing; "
-                   "San Isidro is outside the landed index's area",
-}
+# Empty since Mexico City's index was rebuilt over Tlalnepantla de Baz as
+# well, with the tram rescope's stations, 2026-10-13 (it was emptied once
+# before, 2026-10-12, when the index first reached the regional map).
+KNOWN_GAPS = {}
 
 
 def quiet_of(slug):
@@ -298,6 +298,46 @@ def check_leaks(slug, index, reviewed=None):
     return problems
 
 
+def check_ruled_kept(slug, index, ids=None, ruled=None, dropped=None):
+    """E: every entry of config.PLACE_RULED_KEPT (a row kept by an owner's
+    ruling, with no leak word to put it in PLACE_REVIEWED) is still a row of
+    the index. A key of the form type/number is an OSM id and must be in the
+    id side file (`ids`, outputs/<slug>/place_ids.json's "osm" list, which
+    check I holds to this index); any other key is a name and must be a
+    row's name or one of its alternate names. The record shields nothing
+    (PLACE_KEPT does that): it fails when a later rule or drop takes the row."""
+    if ruled is None:
+        try:
+            config = importlib.import_module(f"pipeline.{slug}.config")
+        except ImportError:
+            return []
+        ruled = getattr(config, "PLACE_RULED_KEPT", {})
+        dropped = getattr(config, "PLACE_DROPPED", {})
+    if not ruled:
+        return []
+    if not isinstance(ruled, dict):
+        return ["E: PLACE_RULED_KEPT is not a dict of {OSM id or street name: why}"]
+    if ids is None:
+        ipath = place_index.ids_path(slug)
+        ids = json.loads(ipath.read_text(encoding="utf-8")).get("osm", []) if ipath.is_file() else []
+    ids = set(ids)
+    names = {n for r in index.get("rows", []) for n in [r[3]] + (r[4].split("|") if r[4] else [])}
+    problems = []
+    for key, why in ruled.items():
+        if not (isinstance(why, str) and why.strip()):
+            problems.append(f"E: PLACE_RULED_KEPT gives no why for {key!r}")
+        if key in (dropped or {}):
+            problems.append(f"E: {key!r} is in PLACE_RULED_KEPT and in PLACE_DROPPED: one of them is wrong")
+        elif re.fullmatch(r"(node|way|relation)/[0-9]+", str(key)):
+            if key not in ids:
+                problems.append(f"E: PLACE_RULED_KEPT names {key}, which is no row of the index (a rule took it, "
+                                f"or it joined another row): keep it by id in PLACE_KEPT, or remove the entry")
+        elif key not in names:
+            problems.append(f"E: PLACE_RULED_KEPT names {key!r}, which is no row of the index: remove the entry, "
+                            f"or put the ruling back")
+    return problems
+
+
 def check_visitable(slug, visitable=None, today=None):
     """G: every visitable former home (config.PLACE_VISITABLE) is sound and
     checked within place_index.VISITABLE_MAX_DAYS of today (owner, 2026-10-08:
@@ -386,6 +426,7 @@ def main():
         p += check_streets(slug, index)
         p += check_junk(index)
         p += check_leaks(slug, index)
+        p += check_ruled_kept(slug, index)
         p += check_visitable(slug)
         stations = place_index.map_stations(importlib.import_module(f"pipeline.{slug}.config"))
         if stations is None:
@@ -466,6 +507,25 @@ def selftest():
         got = len(check_leaks("x", dict(base, languages=ja, rows=rows), reviewed))
         ok += got == want
         print(f"  {'ok ' if got == want else 'BAD'} {label}: {got} problem(s)")
+    # PLACE_RULED_KEPT (the big review, 2026-10-13): a recorded keep is a
+    # row of the index, a place by id and a street by name.
+    krows = [[0, 1, 2, "Old Mill", "", 0], [1, 1, 2, "Mill Lane", "Mill Ln", 0]]
+    kids = ["way/7"]
+    ruled_cases = [
+        ("a ruled keep by id and one by street name", {"way/7": "'Old Mill', stands", "Mill Lane": "a road"}, {}, 0),
+        ("a ruled keep under an alternate name", {"Mill Ln": "a road"}, {}, 0),
+        ("a ruled keep whose id is no row", {"way/8": "'Old Barn', stands"}, {}, 1),
+        ("a ruled keep whose street is no row", {"Barn Lane": "a road"}, {}, 1),
+        ("a ruled keep with no why", {"way/7": ""}, {}, 1),
+        ("a ruled keep that is also dropped", {"way/7": "stands"}, {"way/7": "a home"}, 1),
+        ("an id is never read as a name", {"way/9": "a row named way/9"}, {}, 1),
+        ("no record at all", {}, {}, 0),
+    ]
+    for label, ruled, dropped, want in ruled_cases:
+        got = len(check_ruled_kept("x", dict(base, languages=ja, rows=krows + [[0, 1, 2, "way/9", "", 0]]),
+                                   kids, ruled, dropped))
+        ok += got == want
+        print(f"  {'ok ' if got == want else 'BAD'} {label}: {got} problem(s)")
     got = len(check_crossings("x", dict(base, crossings="/app/static/places/y.json?v=0")))
     ok += got == 1
     print(f"  {'ok ' if got == 1 else 'BAD'} an index naming another file as its crossings: {got} problem(s)")
@@ -540,7 +600,7 @@ def selftest():
         got = len(street_problems(sidx, st))
         ok += got == want
         print(f"  {'ok ' if got == want else 'BAD'} {label}: {got} problem(s)")
-    total = (len(cases) + 1 + len(leak_cases) + 1 + len(junk_cases) + len(visit_cases)
+    total = (len(cases) + 1 + len(leak_cases) + len(ruled_cases) + 1 + len(junk_cases) + len(visit_cases)
              + len(cover_cases) + len(quiet_cases) + len(path_cases) + len(street_cases))
     print(f"{ok} of {total} cases behaved as intended.")
     return 0 if ok == total else 1

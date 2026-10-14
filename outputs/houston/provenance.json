@@ -1,9 +1,74 @@
 {
-  "written_utc": "2026-09-30T01:20:27+00:00",
   "as_of_date": "2026-09-29",
+  "boundary": {
+    "query": {
+      "f": "geojson",
+      "outFields": "GEOID,NAME,AREALAND,AREAWATER",
+      "outSR": "4326",
+      "where": "GEOID='4835000'"
+    },
+    "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/Places_CouSub_ConCity_SubMCD/MapServer/4/query"
+  },
+  "files_utc": {
+    "Export_SiteAddresses.zip": "2026-09-30T01:15:53+00:00",
+    "city_boundary_tiger.geojson": "2026-09-30T01:20:27+00:00",
+    "osm_rail.json": "2026-09-30T01:15:55+00:00",
+    "sales_tax_permits_houston.csv": "2026-09-30T01:15:37+00:00"
+  },
+  "osm_bbox": [
+    29.6,
+    -95.5,
+    29.9,
+    -95.25
+  ],
+  "osm_host": "overpass-api.de",
+  "osm_place_outline": {
+    "bytes": 480186,
+    "elements": 1,
+    "file": "osm_place_outline_v1.json",
+    "host": "download.geofabrik.de (texas-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:60];\narea(id:3602688911)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T09:38:47+00:00",
+    "sha256": "e89c7e65609d177c8ad46ca2cf382de5ad162b6c4450e4bef27213663118a0ea"
+  },
+  "osm_places": {
+    "bytes": 52707419,
+    "elements": 414683,
+    "file": "osm_places_2026-10-12.json",
+    "host": "download.geofabrik.de (texas-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3602688911)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T09:38:50+00:00",
+    "sha256": "acc4183f5e0a123fd08f4302f0580bc16fdf814a794ef77296445ee6849330d1"
+  },
+  "osm_places_extra": {
+    "bytes": 150193,
+    "elements": 555,
+    "file": "osm_places_extra_2026-10-12.json",
+    "host": "download.geofabrik.de (texas-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3602688911)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T09:38:55+00:00",
+    "sha256": "964f4f6d2ea46c566e33ee6db555accf82f451baa615dde73e78d58dca5dc76a"
+  },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 2363,
+    "file": "wikidata_articles_2026-10-12.json",
+    "host": "www.wikidata.org",
+    "ids": 59,
+    "ids_not_read": 0,
+    "ids_with_article": 36,
+    "ids_without_article": 23,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "52dbc57f4cb46e3c8f0587219997550782dc6f83030a838cc46801c94aa26a03"
+  },
   "register": {
-    "url": "https://data.texas.gov/resource/jrea-zgmq.json",
-    "where": "upper(outlet_city)='HOUSTON' AND outlet_inside_outside_city_limits_indicator='Y'",
     "fields": [
       ":id",
       "outlet_number",
@@ -18,29 +83,10 @@
       "outlet_permit_issue_date",
       "outlet_first_sales_date",
       "taxpayer_organization_type"
-    ]
+    ],
+    "url": "https://data.texas.gov/resource/jrea-zgmq.json",
+    "where": "upper(outlet_city)='HOUSTON' AND outlet_inside_outside_city_limits_indicator='Y'"
   },
   "site_addresses": "https://mycity.houstontx.gov/mycitydocs/download/Export_SiteAddresses.zip",
-  "boundary": {
-    "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/Places_CouSub_ConCity_SubMCD/MapServer/4/query",
-    "query": {
-      "where": "GEOID='4835000'",
-      "outFields": "GEOID,NAME,AREALAND,AREAWATER",
-      "outSR": "4326",
-      "f": "geojson"
-    }
-  },
-  "osm_host": "overpass-api.de",
-  "osm_bbox": [
-    29.6,
-    -95.5,
-    29.9,
-    -95.25
-  ],
-  "files_utc": {
-    "sales_tax_permits_houston.csv": "2026-09-30T01:15:37+00:00",
-    "Export_SiteAddresses.zip": "2026-09-30T01:15:53+00:00",
-    "city_boundary_tiger.geojson": "2026-09-30T01:20:27+00:00",
-    "osm_rail.json": "2026-09-30T01:15:55+00:00"
-  }
+  "written_utc": "2026-09-30T01:20:27+00:00"
 }

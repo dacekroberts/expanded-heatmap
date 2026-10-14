@@ -116,20 +116,29 @@ This is open work, not a record: update an item here as it moves, and send a fin
 
 ## Trams left off built maps
 
-- [ ] **Trams left off built maps: QUEUED after the search-rules landing (owner, 2026-10-13; parked 2026-09-27 to 2026-10-13); the owner
-  decides case by case.** Estimate and recommendations:
-  `docs/tram_rescope_estimate.md` (light batch yes, REM first; Paris T3 yes;
-  Toronto, Milan, Prague not yet, a label and legend rule then a Toronto
-  pilot; Barcelona likely yes; Hong Kong Tramways out; Cablebús yes; about
-  55–85% of one 5-hour window). ▶ In progress: specs for REM, Rome 8, Madrid
-  ML1, Paris T3a/T3b and SF F Market (`docs/tram_rescope_specs.md`), with
-  Main Build on a branch for review time. Rescoping is main's work, city by
-  city.
-  - **Candidates (stops in scope):** Toronto streetcars (476); Milan (323 of
-    341; no ATM colours); Prague (285); Paris T3a/T3b and edges of T2/T9
-    (62); Barcelona TRAM T1-T6 (9–10 each; one OSM colour, so a colour rule);
-    Rome tram 8 (40); Madrid ML1 (9); SF F Market (46); Fortaleza's VLT (11,
-    failed the rail test); Montreal's REM. D.C. Streetcar ended 2026-03-31.
+- [ ] **Trams left off built maps: the rest is in its own session since
+  2026-10-13 (branch `tram-rescope`); the owner decides case by case.**
+  **Built and on master since 2026-09-27** (merge be2e3713): Montreal's REM,
+  Rome's tram 8, Madrid's ML1, Paris T3a and T3b, San Francisco's F Market &
+  Wharves. Mexico City's Cablebús and Mexicable are built on the branch (2026-10-13). Toronto's eight running streetcar lines are built on the branch (2026-10-13; 503, 507 and 508 wait on the TTC's timetable after 10-31, `docs/recheck_calendar.md`). Milan's 17 tram lines are built on the branch (2026-10-13, on ATM's timetable to 10-02; re-read when AMAT republishes, `docs/recheck_calendar.md`). Prague's 28 day tram routes are built on the branch in ten label groups
+  (2026-10-13; re-read after the feed window ends 10-26). **Left:** none. Hong Kong Tramways is out (owner).
+  Estimate as first written: `docs/tram_rescope_estimate.md`.
+  - **Barcelona TRAM: OUT (owner, 2026-10-13).** Measured that day: none of
+    its 28 stops inside the city is beyond the 0.6 mile ring of a drawn
+    station, and rings on them add no storefront. The page's "not drawn"
+    wording is owed, for the owner's approval.
+  - **Cablebús, measured 2026-10-13:** all 19 stations now carry
+    coordinates in OSM, and 15 are beyond the 0.6 mile ring of drawn rail;
+    17,783 storefronts would gain a ring. Mexicable (out, owner 2026-10-04)
+    is the open question beside it.
+  - **Rome's other trams (2, 3, 5, 14, 19):** tram 3 runs Trastevere - Porta
+    Maggiore since 2026-09-07; the whole network is due back by 2026-11-23
+    (`docs/recheck_calendar.md`). ⏸ **Parked by the owner 2026-10-13 as ONE
+    decision for all five after 2026-11-23**; none drawn before.
+  - **Candidate still open:** none. Toronto's streetcars, Milan's trams and
+    Prague's 28 day tram routes (ten label groups) are built on the branch;
+    Barcelona TRAM is out.
+    Fortaleza's VLT failed the rail test. D.C. Streetcar ended 2026-03-31.
   - **Seoul's Wirye Line is not open:** re-check in January 2027; if open,
     count its stops inside Seoul for the rescope.
   - **Cablebús:** L1 6, L2 7 and L3 6 stations, all in CDMX; no official

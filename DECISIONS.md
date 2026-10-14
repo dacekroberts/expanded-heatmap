@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**142 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**190 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -79,6 +79,53 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Place search, the sixth pass: two owner rulings on its report (El Polvorín, named convents)](#2026-10-13---place-search-the-sixth-pass-two-owner-rulings-on-its-report-el-polvorín-named-convents)
 - [The heavy-job cap is eight for the search rollout; wave 1 rebuilt on the final rules (owner)](#2026-10-13---the-heavy-job-cap-is-eight-for-the-search-rollout-wave-1-rebuilt-on-the-final-rules-owner)
 - [Place search: the extract run's full reads, the rulings on them and the rule faults they found (owner)](#2026-10-13---place-search-the-extract-runs-full-reads-the-rulings-on-them-and-the-rule-faults-they-found-owner)
+- [Place search wave 1: fourteen indexes built, read by eye and held to the settled calls](#2026-10-13---place-search-wave-1-fourteen-indexes-built-read-by-eye-and-held-to-the-settled-calls)
+- [Place search wave 1: the owner's sixteen rulings on what the first fourteen eye reads found](#2026-10-13---place-search-wave-1-the-owners-sixteen-rulings-on-what-the-first-fourteen-eye-reads-found)
+- [Place search wave 1: four more cities built, read and applied on the street-lines master; overpass-api.de down a second time](#2026-10-13---place-search-wave-1-four-more-cities-built-read-and-applied-on-the-street-lines-master-overpass-apide-down-a-second-time)
+- [Place search wave 1: Buffalo's and Miami's areas found without Overpass; the airport station left outside; wave 1 first on overpass-api.de](#2026-10-13---place-search-wave-1-buffalos-and-miamis-areas-found-without-overpass-the-airport-station-left-outside-wave-1-first-on-overpass-apide)
+- [Tram rescope: the light batch and Paris were already built; two docs corrected (branch)](#2026-10-13---tram-rescope-the-light-batch-and-paris-were-already-built-two-docs-corrected-branch)
+- [Tram rescope: Rome's tram 3 not built on its own; Barcelona TRAM measured (branch)](#2026-10-13---tram-rescope-romes-tram-3-not-built-on-its-own-barcelona-tram-measured-branch)
+- [Tram rescope: Rome's trams parked as one decision after 2026-11-23; Barcelona drawn as two lines (owner)](#2026-10-13---tram-rescope-romes-trams-parked-as-one-decision-after-2026-11-23-barcelona-drawn-as-two-lines-owner)
+- [Tram rescope: Barcelona's trams stay out, the page to say why (owner); Cablebus measured](#2026-10-13---tram-rescope-barcelonas-trams-stay-out-the-page-to-say-why-owner-cablebus-measured)
+- [Place search wave 1: the last fifteen cities fetched from extracts, built, read and applied; 33 of 33 built, none rendered](#2026-10-13---place-search-wave-1-the-last-fifteen-cities-fetched-from-extracts-built-read-and-applied-33-of-33-built-none-rendered)
+- [Mexico City (Regional): Cablebus and Mexicable both drawn (owner)](#2026-10-13---mexico-city-regional-cablebus-and-mexicable-both-drawn-owner)
+- [Place search wave 1: the owner's rulings on the fifteen held classes and on Melbourne's lanes](#2026-10-13---place-search-wave-1-the-owners-rulings-on-the-fifteen-held-classes-and-on-melbournes-lanes)
+- [Place search wave 1: named roundabouts and standing abandoned landmarks stay; 256 by-id drops taken back](#2026-10-13---place-search-wave-1-named-roundabouts-and-standing-abandoned-landmarks-stay-256-by-id-drops-taken-back)
+- [Mexico City (Regional): the cable cars built on the branch; colors and names (owner); Tlalnepantla open](#2026-10-13---mexico-city-regional-the-cable-cars-built-on-the-branch-colors-and-names-owner-tlalnepantla-open)
+- [Mexico City (Regional): Tlalnepantla de Baz added, page text approved, the title names the cable cars (owner)](#2026-10-13---mexico-city-regional-tlalnepantla-de-baz-added-page-text-approved-the-title-names-the-cable-cars-owner)
+- [Tram rescope: Toronto, Milan and Prague pass the overlap test (measured, nothing built)](#2026-10-13---tram-rescope-toronto-milan-and-prague-pass-the-overlap-test-measured-nothing-built)
+- [Tram rescope: the many-route rule is per route (owner), and Prague's colors fit it (measured)](#2026-10-13---tram-rescope-the-many-route-rule-is-per-route-owner-and-pragues-colors-fit-it-measured)
+- [Place search wave 1: the render moves to Cleanup and this session retires after the rebuild](#2026-10-13---place-search-wave-1-the-render-moves-to-cleanup-and-this-session-retires-after-the-rebuild)
+- [Tram rescope: Toronto's line list approved, then the feed shows three routes not running as streetcars (open, owner)](#2026-10-13---tram-rescope-torontos-line-list-approved-then-the-feed-shows-three-routes-not-running-as-streetcars-open-owner)
+- [Tram rescope: Toronto built with eight streetcar lines; 503, 507 and 508 not drawn (owner)](#2026-10-13---tram-rescope-toronto-built-with-eight-streetcar-lines-503-507-and-508-not-drawn-owner)
+- [Tram rescope: the sources behind Toronto's closed routes (owner: "save sources")](#2026-10-13---tram-rescope-the-sources-behind-torontos-closed-routes-owner-save-sources)
+- [Tram rescope: Toronto's thinning rule, colors and page text approved (owner)](#2026-10-13---tram-rescope-torontos-thinning-rule-colors-and-page-text-approved-owner)
+- [Tram rescope: Milan's 17 tram routes measured; the line list is with the owner (open, nothing built)](#2026-10-13---tram-rescope-milans-17-tram-routes-measured-the-line-list-is-with-the-owner-open-nothing-built)
+- [Tram rescope: Milan built with all 17 tram lines (owner); page text and stop-name form are drafts](#2026-10-13---tram-rescope-milan-built-with-all-17-tram-lines-owner-page-text-and-stop-name-form-are-drafts)
+- [Tram rescope: Milan approved as built (owner)](#2026-10-13---tram-rescope-milan-approved-as-built-owner)
+- [Tram rescope: Prague's tram routes and label placement measured; the line list is with the owner (open, nothing built)](#2026-10-13---tram-rescope-pragues-tram-routes-and-label-placement-measured-the-line-list-is-with-the-owner-open-nothing-built)
+- [Tram rescope: Prague's 23 regular routes alone leave six stops with no drawn tram; the recommendation moves to all 28 day routes (open, nothing built)](#2026-10-13---tram-rescope-pragues-23-regular-routes-alone-leave-six-stops-with-no-drawn-tram-the-recommendation-moves-to-all-28-day-routes-open-nothing-built)
+- [Tram rescope: Prague built with 28 tram routes (owner); per-route labels fail on phones, and a ten-group trial passes (the grouping is with the owner)](#2026-10-13---tram-rescope-prague-built-with-28-tram-routes-owner-per-route-labels-fail-on-phones-and-a-ten-group-trial-passes-the-grouping-is-with-the-owner)
+- [Place search wave 1: rebuilt on the second rule batch, redundant drops removed, Melbourne's lanes admitted; the branch is complete, unrendered](#2026-10-13---place-search-wave-1-rebuilt-on-the-second-rule-batch-redundant-drops-removed-melbournes-lanes-admitted-the-branch-is-complete-unrendered)
+- [Tram rescope: Prague's trams are drawn in ten groups (owner), built on the branch; the page text is a draft](#2026-10-13---tram-rescope-pragues-trams-are-drawn-in-ten-groups-owner-built-on-the-branch-the-page-text-is-a-draft)
+- [Tram rescope: the owner signs off Prague's page text and label form, and Toronto's and Mexico City's page text](#2026-10-13---tram-rescope-the-owner-signs-off-pragues-page-text-and-label-form-and-torontos-and-mexico-citys-page-text)
+- [Place search wave 1: rebuilt on the third and fourth rule passes with the Wikidata lookup read; 13 redundant drops removed; unrendered](#2026-10-13---place-search-wave-1-rebuilt-on-the-third-and-fourth-rule-passes-with-the-wikidata-lookup-read-13-redundant-drops-removed-unrendered)
+- [Place search wave 1: the checked flags applied by id; nine known works kept by id; 32 indexes rebuilt, unrendered](#2026-10-13---place-search-wave-1-the-checked-flags-applied-by-id-nine-known-works-kept-by-id-32-indexes-rebuilt-unrendered)
+- [Place search wave 1: the 58 unsure rows settled on a one-off Wikidata lookup; 22 dropped, 3 kept, 33 left in; four estate parks dropped; ten indexes rebuilt, unrendered](#2026-10-13---place-search-wave-1-the-58-unsure-rows-settled-on-a-one-off-wikidata-lookup-22-dropped-3-kept-33-left-in-four-estate-parks-dropped-ten-indexes-rebuilt-unrendered)
+- [Tram rescope: landing preparation, the four cities back on their normal processed paths (Cleanup, nothing pushed)](#2026-10-13---tram-rescope-landing-preparation-the-four-cities-back-on-their-normal-processed-paths-cleanup-nothing-pushed)
+- [Place search wave 1: rebuilt on rule passes 5 and 6; 604 rows left, 2 returned; unrendered](#2026-10-13---place-search-wave-1-rebuilt-on-rule-passes-5-and-6-604-rows-left-2-returned-unrendered)
+- [Place search wave 1: four places of worship kept by id, eight dropped by id, Toronto built; unrendered](#2026-10-13---place-search-wave-1-four-places-of-worship-kept-by-id-eight-dropped-by-id-toronto-built-unrendered)
+- [Place search wave 1: Toronto's eye read applied; 44 rows dropped by id, three names reviewed](#2026-10-13---place-search-wave-1-torontos-eye-read-applied-44-rows-dropped-by-id-three-names-reviewed)
+- [Tram rescope: master merged in; place search rebuilt for Mexico City and Prague and built for Milan (Cleanup agent, nothing pushed, no map rendered)](#2026-10-13---tram-rescope-master-merged-in-place-search-rebuilt-for-mexico-city-and-prague-and-built-for-milan-cleanup-agent-nothing-pushed-no-map-rendered)
+- [Place search wave 1: the owner's rulings on Toronto's 70 unsure rows; 30 more dropped by id, one restored](#2026-10-13---place-search-wave-1-the-owners-rulings-on-torontos-70-unsure-rows-30-more-dropped-by-id-one-restored)
+- [Place search wave 1: the final shared rules merged; 34 indexes rebuilt; Toronto's seven stations are rows](#2026-10-13---place-search-wave-1-the-final-shared-rules-merged-34-indexes-rebuilt-torontos-seven-stations-are-rows)
+- [Tram rescope: the final shared rules merged in; Mexico City, Prague and Milan rebuilt (Cleanup agent, nothing pushed)](#2026-10-13---tram-rescope-the-final-shared-rules-merged-in-mexico-city-prague-and-milan-rebuilt-cleanup-agent-nothing-pushed)
+- [Tram rescope: Milan's map rendered once as the rollout's trial render, and its search tested in a browser (Cleanup agent, nothing pushed)](#2026-10-13---tram-rescope-milans-map-rendered-once-as-the-rollouts-trial-render-and-its-search-tested-in-a-browser-cleanup-agent-nothing-pushed)
+- [Place search wave 1: the pattern screen; 67 rows dropped by id, four famous places kept, ten reach reasons recorded](#2026-10-13---place-search-wave-1-the-pattern-screen-67-rows-dropped-by-id-four-famous-places-kept-ten-reach-reasons-recorded)
+- [Place search: the station faults t to y (rules only)](#2026-10-13---place-search-the-station-faults-t-to-y-rules-only)
+- [Place search wave 1: 34 maps rendered once on the final search script; then the owner's rulings on the screen's open calls, unrendered](#2026-10-13---place-search-wave-1-34-maps-rendered-once-on-the-final-search-script-then-the-owners-rulings-on-the-screens-open-calls-unrendered)
+- [Place search wave 1: the station rules (search-rules-8) merged; the helper screens, the twin check and 81 keeps applied; 34 indexes rebuilt, not rendered](#2026-10-13---place-search-wave-1-the-station-rules-search-rules-8-merged-the-helper-screens-the-twin-check-and-81-keeps-applied-34-indexes-rebuilt-not-rendered)
+- [Place search wave 1: the landmark patch and the brand and shop rulings merged; ten indexes rebuilt; the 34 maps rendered once on their final indexes](#2026-10-13---place-search-wave-1-the-landmark-patch-and-the-brand-and-shop-rulings-merged-ten-indexes-rebuilt-the-34-maps-rendered-once-on-their-final-indexes)
 
 **2026-10-12**
 
@@ -122,6 +169,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [A registered code is a name: Seattle's 27 buildings and Prague's 14 stations go back (owner)](#2026-10-12---a-registered-code-is-a-name-seattles-27-buildings-and-pragues-14-stations-go-back-owner)
 - [Korean brand names may appear in public chain tables; the Chicago ranking fix and small open items (owner)](#2026-10-12---korean-brand-names-may-appear-in-public-chain-tables-the-chicago-ranking-fix-and-small-open-items-owner)
 - [Place search gets a defined area: the scope rule, the outline on the map, the credit in the bottom line, the boundary fetched first (owner)](#2026-10-12---place-search-gets-a-defined-area-the-scope-rule-the-outline-on-the-map-the-credit-in-the-bottom-line-the-boundary-fetched-first-owner)
+- [Place search wave 1: the scaffold, the fetch and the two-mirror pilot](#2026-10-12---place-search-wave-1-the-scaffold-the-fetch-and-the-two-mirror-pilot)
 
 **2026-10-11**
 
@@ -6671,3 +6719,1127 @@ japan-city template:
   (owner: "skip full reads"): the classes are mostly Japanese and Korean
   and those groups are mostly American and European. A pattern screen for
   the classes runs after their rebuilds instead.
+
+### 2026-10-12 - Place search wave 1: the scaffold, the fetch and the two-mirror pilot
+
+- **The wave was scaffolded from Cleanup's plan after one tags-only query confirmed all 62 boundary relations** (commit 1b528549: 34 config blocks, 34 `step2b` files, 34 page arguments, 27 map-step edits). Two plan areas were wider than their maps and were held: Buffalo (Erie County, where the map is cut to the City of Buffalo) and Miami (Miami-Dade County, where the map names five municipalities and seven stations on unincorporated land). The other 32 match what their configs cut to; the boundary-first fetch later confirmed 19 of them with no station outside its area and no municipality without one.
+- **The one-query-per-mirror pilot, run at the owner's word, carried 0 of 4 cities and was stopped.** Pinned to overpass-api.de: Manchester failed at 252.6 s, San Diego at 77.7 s, Ottawa at 251.0 s, each on two HTTP errors; pinned to kumi.systems: New Orleans failed at 601.4 s on two read timeouts, then came back unpinned in 368.6 s. A pinned fetch made two tries on one mirror where an unpinned one makes up to four across two. The owner ruled no second pilot this wave.
+- **Nineteen cities were fetched unpinned before overpass-api.de stopped answering (about 23:50Z); five of their main caches came from kumi.systems with data three to four months old** (New Orleans and Sacramento 2026-06-01, Kitchener-Waterloo and Melbourne 2026-07-15, Washington D.C. 2026-07-24). The owner ruled a refetch of those five from overpass-api.de under new file names; Cleanup built the 7-day guard. Their indexes are not built. Fifteen cities are unfetched: Liverpool, Newcastle, Philadelphia, Dallas, Pittsburgh, Birmingham, Buffalo, Miami and the eight heavy ones.
+
+### 2026-10-13 - Place search wave 1: fourteen indexes built, read by eye and held to the settled calls
+
+- **Fourteen of the wave's 34 indexes were built and measured** (Blackpool, Tacoma, Tucson, Kansas City, Edinburgh, Glasgow, Sheffield, Nottingham, Minneapolis, Boston, San Francisco, Dublin, Calgary, Edmonton), on master 3abb2c7b's rules. First open, gzipped, after the drops of commit c6a37aef: Dublin 303 KB, Calgary 223, Nottingham 197, Tucson 147, Sheffield 144, Glasgow 139, Kansas City 129, Edmonton 127, Boston 120, Edinburgh 116, Blackpool 89, San Francisco 74, Minneapolis 41, Tacoma 38; São Paulo's is 1,235 KB, so none is near the 1.5 times mark. Every city measured English 1.0. Street coverage (distinct indexed street names over distinct names of named highway ways in the cache, before any drop): 89.2% (San Francisco) to 97.5% (Tucson), all at or above the 85% bar; the names left out are mostly service roads and footways. `check_place_scope.py` passed all 33 searched cities and `check_place_search.py` H failed none of the fourteen.
+- **Each of the fourteen was read by a `place-read` agent, and 275 objects were dropped by id and 11 names reviewed under calls already settled** (commit c6a37aef): Blackpool 1, Tacoma 7, Tucson 8, Kansas City 13, Edinburgh 25, Glasgow 25, Sheffield 28, Nottingham 14, Minneapolis 17, San Francisco 13, Dublin 68, Boston 15, Calgary 20, Edmonton 21. The classes: homes and religious residences, a business's own feature or road, removed objects, glitched names, descriptions and bare type words on landmarks and places, and, in Minneapolis, five stations tagged `opening_date=2027-06-12` that the not-open test did not skip. Plain misspellings were counted and kept, as batch 3 did. **The reads screened streets by pattern and did not read them line by line** (Dublin 13,677 street rows, Calgary 11,207), read no crossings file, and checked nothing outside the cache: every opening or residence claim rests on tags.
+- **Thirteen rows were added to `docs/place_search_unopened_stations.json`** for the stations Calgary's (9, the Green Line's) and Edmonton's (4) builds skipped, each with a null line and its reason: the stations carry no line tag and no route query was made (commit 3402a020).
+
+### 2026-10-13 - Place search wave 1: the owner's sixteen rulings on what the first fourteen eye reads found
+
+- **The owner ruled on sixteen classes no settled call covered, and the by-id part was applied in the fourteen built wave cities.** The owner's words (2026-10-13): "1. yes, 2. drop and create a rule, 3 keep, state site-wide that for searches a small percentage of establishments publish typos (so we don't get blamed) maybe we can add a rule that makes searching the intended word 'road, baptist' gets allowed as an auto-search hint. 4.one row a stop, rule for cleanup. 5. drop they are not transit. apply to any other non-transit, transportation adjacent items across all cities as rule. 6.keep the venue and ride but drop the rest, consider rule. 7. keep okay, consider rule. 8. keep and consider rule. 9. drop company node, make a note of doubling or duplicate nodes as a potential rule 10. reviewed. 11 applies. 12.leave to web check -> rule. 13. keep, web-check as you said. 14. drop all four -> rule", then "15 and 16: agree with recommendations, suggest rules". The questions, in order: (1) whether "no glitched name" and "a description is no name" reach street rows; (2) streets whose every way is private, on residential or unclassified; (3) plain misspellings; (4) one stop listed as a row per platform; (5) museum, heritage and amusement rides indexed as stations; (6) features inside a paid venue; (7) ticketed commercial attractions with an article; (8) a place of worship named only by its denomination; (9) Boston's theatre company node beside its theatre's row; (10) Boston's airport road named for its function; (11) a bare type word on a registered object; (12) castles and tower houses with no sign of visiting; (13) homes tagged as attractions; (14) a person's own name (a plaque to a private person, a place of worship named for a living person, two graves admitted on the buried person's article); (15) places present but closed, where the recommendation was to drop what its own tags say is closed for a year or more and keep the rest; (16) vanished or abolished things with an article, where the recommendation was to drop them.
+- **Applied by id (commit 45d996e7): 271 objects dropped and one name reviewed in 13 cities.** Tacoma 16, Tucson 16, Kansas City 43, Edinburgh 13, Glasgow 18, Sheffield 7, Nottingham 2, Minneapolis 14, San Francisco 32, Dublin 33, Boston 9 (and "Central Parking Access Road" reviewed), Calgary 22, Edmonton 46. Street names were resolved to every named highway way of that exact name in the city's cache; every id was checked against its cached name before it was written (scratch scripts, not in the repository). Left for a rule and NOT dropped by id: private residential streets (ruling 2), row-per-platform stations (ruling 4), and Nottingham's described street names, whose ids were lost when its read's report file was never written. Named cycle facilities ("106 Street Protected Bike Lane", "X regional pathway", "X Bikeway") were left in as signed routes, a judgment the owner has not ruled on.
+- **Held back from ruling 11, for the owner: Edinburgh's "Mercat Cross" on the Royal Mile (way/164545444, wikidata and wikipedia).** A bare type word by the rule and a famous landmark; the unregistered second "Mercat Cross" (node/10119378951) was dropped.
+- **The rule work went to Cleanup, with counts per wave city** (messages of 2026-10-13): streets held to the description and bare-type tests; private residential streets; one row a stop; non-transit rides as stations; paid-venue interiors; duplicates; the bare type words the reads found; and the gaps in shared rules (the not-open test missing `opening_date` and `disused:railway=station`, `highway=platform`, raceway and busway ways as streets, notable-only satisfied by another thing's wikidata, a district's `ref:nrhp` registering each member, registered bridges under their street's name, `CODED_TYPE` on junctions, on "No9" and on "type #n"). Cleanup's answer: an entry a later rule also catches is redundant, not refused.
+
+### 2026-10-13 - Place search wave 1: four more cities built, read and applied on the street-lines master; overpass-api.de down a second time
+
+- **Master 4d7cf5f9 (street lines) was merged and all 14 built indexes were rebuilt with their street files; Liverpool, Pittsburgh, Newcastle and Birmingham were fetched, built, read by a `place-read` agent and applied by id.** Fetched 23 of 34, built 18. First open, gzipped: Birmingham 340 KB, Liverpool 325, Newcastle 312, Pittsburgh 115. Street coverage 95.1% (Birmingham) to 97.7% (Liverpool). Every station sits inside its search area (Liverpool 59 over four districts, Newcastle 60 over five, Birmingham 35 over three, Pittsburgh 20). Dropped by id under the settled calls and the owner's rulings of 2026-10-13: Liverpool 34 objects and 10 ways with three street names reviewed (commit 64c3477b), Pittsburgh 15 objects and 22 ways (64c3477b), Newcastle 97 objects with "Store Street" reviewed (981608ab), Birmingham 91 (706b997e). After the rebuilds `check_place_search.py` failed the 18 on rule A only (not rendered) and `check_place_scope.py` passed 37 cities.
+- **Held back and why.** Not dropped by id, because Cleanup builds the rule: private residential streets (Birmingham 272 names, Liverpool 62, Newcastle 37, Pittsburgh 37), plaques under a person's name (Birmingham 11), row-per-platform stations. Not dropped, on the owner's "famous landmark rule takes priority over others" (relayed by Cleanup, 2026-10-13): rows with a Wikipedia article of their own that a read marked for dropping (Liverpool six, Pittsburgh one, Birmingham two). Left in as judgment the owner has not ruled on: numbered public footpaths and alleys, named cycle facilities and park paths, back lanes named for two streets, the Tyne foot and cycle tunnels, churches whose closure is stated only in the name, and ruins tagged access=no.
+- **Rule gaps the four reads added, sent to Cleanup:** the not-open test does not read `construction=yes` on a tram stop (Birmingham's Digbeth High Street, dropped by id); a highway way tagged `historic=roman_road` becomes a landmark row under the road's name (Newcastle 7 rows, Liverpool 3; not dropped, since the id would take the street too); tourist railways tagged `usage=tourism` are indexed as stations (Liverpool 4, Newcastle 3, Birmingham 1; dropped by id).
+- **The owner ruled on five held rows and on Miami's search area (2026-10-13: "1. leave dropped 2. drop 3. keep 4. keep. 5. propose", then "approve the narrowed shape").** Described street names already dropped by id stay dropped, including the few on residential roads that Cleanup's coming rule (minor ways only) would not reach. Liverpool's Dingle (node/8647055259), a demolished station with its own article, was dropped by id (commit b8f4c1c8). Newcastle Castle's Keep and Black Gate stay, parts of a ticketed venue that are the famous parts. Pittsburgh's two inclines stay as transit, four station rows. **Miami's area is narrowed from Miami-Dade County to the five municipalities the map names (Miami 29 stations, Hialeah 3, Coral Gables 1, Medley 1, South Miami 1, from `outputs/miami/station_municipalities.csv`) plus the smallest named area holding each of the seven stations on unincorporated land** (Brownsville, Earlington Heights, M.L. King, Northside, Miami International Airport, Dadeland North, Dadeland South). The areas are not yet confirmed: that takes one light query, and the measured index size goes to the owner before the city is built. The alternative, the whole county under a recorded owner's word, was rejected.
+- **overpass-api.de answered its status page from 05:39Z to about 07:12Z and then stopped again.** In that window it carried four cities and refused Dallas and Philadelphia twice each. Unfetched: Dallas (its last query only), Philadelphia, Manchester, San Diego, Ottawa, Houston, Toronto, Los Angeles, New York, Buffalo and Miami; the owner's five refetches are also still owed.
+
+### 2026-10-13 - Place search wave 1: Buffalo's and Miami's areas found without Overpass; the airport station left outside; wave 1 first on overpass-api.de
+
+- **With every Overpass server unanswering (overpass-api.de, kumi.systems and private.coffee, 07:44Z and 08:13Z), the owner approved Nominatim and the OSM API for the wave's two light lookups** ("yes to 1, send 2 to cleanup as a proposal"; both hosts are OpenStreetMap's own, about 60 small requests, one at a time). The second option, regional extracts filtered locally as a standing fallback, went to Cleanup as a proposal and is not built. A third public Overpass server was left as something to watch ("3. agreed we can monitor").
+- **Buffalo's area is the City of Buffalo's relation, 175031 (wikidata Q40435), in place of Erie County** (commit 75da0336). Nominatim knows the city only as a node: the relation's `boundary` and `admin_level` tags were absent at version 49, edited 2026-10-11. Its 17 outer ways close into a polygon. Not verified: that Overpass still serves it as an area, and how many of the map's stations sit inside; the fetch's first query answers both.
+- **Miami's area is nine boundaries** (commit 75da0336): the five municipalities (relations 1216769 Miami, 118853 Hialeah, 1216645 Coral Gables, 118855 Medley, 118861 South Miami) and four census-designated places, Brownsville (way 33614621: Brownsville and Earlington Heights stations), Gladeview (way 33614629: M.L. King and Northside), Glenvar Heights (relation 9853985: Dadeland North) and Kendall (relation 1244549: Dadeland South). Each of the seven unincorporated stations was tested against each area's own geometry from the OSM API.
+- **Miami International Airport station is left outside the search area, a recorded exception (owner, 2026-10-13: "1. leave it outside, record the exception").** No named area smaller than the county holds it: not the aerodrome (way 113657169), not the City of Miami. The alternatives rejected were adding the aerodrome's outline, which still would not hold the station, and something wider. The exception is recorded in `pipeline/miami/config.py` beside `PLACE_AREA`. Whether check H (an indexed place within its distance of every station) passes for that station is not yet known; if it fails after the build, the entry `KNOWN_GAPS` needs is Cleanup's to add, with these words.
+- **An extract counts as the refetch (owner, 2026-10-13: "yes").** Asked whether the five cities whose place data came months old from kumi.systems (Kitchener-Waterloo, Melbourne, New Orleans, Sacramento, Washington D.C.) and the eleven unfetched ones may come from Cleanup's extract route once it is on master, in place of overpass-api.de, which the earlier ruling named. The reason for that ruling was current data; an extract is cut daily, carries its own date and is held to the same 7-day test. Not yet used: the module is not on master. Whichever of overpass-api.de and the extract route is ready first serves each city.
+- **Wave 1 goes first on overpass-api.de (owner, 2026-10-13: "yes, message cleanup, wave 1 goes first").** Cleanup restarted its night runner for waves 2 to 7 on kumi.systems only until this session reports its queue done; this session's queue runs pinned to overpass-api.de so neither waits on the other's lock.
+
+### 2026-10-13 - Tram rescope: the light batch and Paris were already built; two docs corrected (branch)
+
+- **The session's handoff named Montreal's REM as the first build. It is
+  built, with the other four: all five landed on 2026-09-27.** Commits
+  c8c1c53a (REM, 78 stations), eedeb329 (Rome tram 8, 94), 5f9106e5
+  (Madrid ML1, 200), 821ca1a9 (Paris T3a and T3b, 280), f3e051d7 (San
+  Francisco F Market & Wharves, 57), merged in be2e3713. Measured
+  2026-10-13 on origin/master 1b5f4df8: `git log --since=2026-09-26
+  --until=2026-09-29`, and each committed `outputs/<city>/heatmap.html`
+  carries its line's label.
+- **What that changes for place search** (sent to Cleanup the same day, the
+  owner having approved the message): no index rebuild is owed for trams in
+  Montreal, Paris or San Francisco. Paris's search area counts 280 stations.
+  Montreal's counts 79 across five municipalities against 78 rows in
+  `stations.csv`; the difference is not traced (lead: a station counted in
+  two overlapping municipal polygons).
+- **Corrected on this branch, at Cleanup's request:** a status block at the
+  top of `docs/tram_rescope_estimate.md` and `docs/tram_rescope_specs.md`,
+  and the "Trams left off built maps" item of
+  `docs/plan_detail/city_watch.md`. `DECISIONS.md` and `PLAN.md` are
+  Cleanup's.
+- **Downstream inputs changed by this branch so far:** none.
+
+### 2026-10-13 - Tram rescope: Rome's tram 3 not built on its own; Barcelona TRAM measured (branch)
+
+- **Rome's tram 3 was offered as a go-ahead "if it's an overall small
+  addition" (owner, 2026-10-13) and is NOT built: the session judged it not
+  small overall, and brought it back.** Mechanically it is small: one
+  relation pair fetched under a new file name, one more key beside tram 8,
+  the same half-mile thinning. What makes it larger: tram 3 runs only
+  Trastevere - Porta Maggiore today, with buses on Porta Maggiore - Valle
+  Giulia; and ATAC's trams 2, 5, 14 and 19 return in phases with the whole
+  network due by 2026-11-23 (`docs/recheck_calendar.md`, whose row already
+  names drawing them as the owner's call). Drawing 3 alone now means a
+  partial line redrawn in six weeks, and a map that shows one returned tram
+  and not the four that follow. Recommended instead: one Rome tram decision
+  after 2026-11-23, for all five. Not measured: tram 3's stop count, color
+  and distance from the metro; no Rome query was run.
+- **Barcelona TRAM, measured from OpenStreetMap** (one Overpass query,
+  2026-10-13, overpass.kumi.systems, bbox `41.30,2.03,41.50,2.30`, cached
+  as `data/barcelona/raw/osm_tram_routes_2026-10-13.json`; the metro cache
+  is untouched): 12 route relations, two per line, networks `Trambaix` (T1,
+  T2, T3) and `Trambesòs` (T4, T5, T6), operator TRAM. Distinct stop names
+  inside the municipal boundary: T1, T2 and T3 the SAME 9 (Francesc Macià to
+  Zona Universitària and Ernest Lluch); T4 10 (Verdaguer to El Maresme and
+  Fòrum); T5 and T6 the SAME 10 (Ciutadella | Vila Olímpica to Besòs);
+  Glòries is on T4 and on T5/T6, so 28 distinct stops. The count of
+  2026-09-27 (9 to 10 each) stands.
+- **Color:** all six carry `colour=#007165`. Against the 16 drawn lines the
+  nearest is the Montjuïc funicular (#006847), Delta-E 13.9, over
+  `pipeline/linecolour.py`'s floor of 10. Two tram keys in that one green
+  would be Delta-E 0 from each other, which the check refuses. Whether TRAM
+  itself publishes per-line colors was not checked.
+- **Nothing built, no step run, no output changed.** The color rule and how
+  many lines are drawn go to the owner.
+
+### 2026-10-13 - Tram rescope: Rome's trams parked as one decision after 2026-11-23; Barcelona drawn as two lines (owner)
+
+- **Rome, the owner: "yes one rome decision sounds good as a parked
+  item"**, to the recommendation below it: one decision on trams 2, 3, 5, 14
+  and 19 after ATAC's network is back (due 2026-11-23), none drawn before.
+  Rome's rail is final as it stands until then, so the rescope no longer
+  holds Rome out of the search rollout; a later tram build rebuilds its
+  index.
+- **Barcelona, the owner, on the color call: "option sounds best, note the
+  page shade add"**, to option 1: two drawn lines, "Trambaix (T1, T2, T3)"
+  and "Trambesòs (T4, T5, T6)", one in TRAM's green and one in a shade of
+  this project's, the page saying the shade is the project's. Rejected: one
+  key over two disconnected pieces of track (this map split L9 and L10 for
+  that reason); three keys, which needs two project shades.
+- **The shade, measured, not yet approved:** TRAM's #007165 moved in HSL
+  lightness only, the smallest 0.02 step that clears Delta-E 13 from it
+  (Rome's and Oslo's rule): #00524a at -0.06, 13.3 from TRAM's green, 18.6
+  from the Montjuïc funicular, 45.5 from the nearest pin (Personal
+  services). The lighter side clears 13 only at +0.08 (#009a89) and sits
+  22.0 from that pin.
+- **Measured the same day, and it changes the case for drawing them: no
+  tram stop inside Barcelona is beyond the metro's reach.** Of the 28
+  stops, 0 are farther than the 966 m outer ring from a drawn metro or
+  funicular station (median 302 m, farthest 807 m; 6 beyond 0.3 mi, 9
+  within 0.1 mi). Rome's tram 8 had 15 of 16 beyond it. With rings on all
+  28, the storefronts beyond 0.6 mi stay at 22 of 35,309; 2,341 storefronts
+  (6.6%) change ring, all inward (0-0.1 mi 7,257 to 8,192; 0.3-0.6 mi 3,215
+  to 2,093). Read from `data/barcelona/processed/` as it stood, not
+  re-run. Stop spacing inside the city: Trambaix median 417 m, T4 527 m,
+  T5 and T6 about 510 m. The estimate's reason ("reach districts beyond the
+  metro") holds for the networks' outer ends, which are outside the city
+  and off this map. Brought to the owner before any build.
+
+### 2026-10-13 - Tram rescope: Barcelona's trams stay out, the page to say why (owner); Cablebus measured
+
+- **Barcelona, the owner: "2 leave it out" and "and state why"**, to the
+  measurement in the entry below: none of the 28 tram stops inside the city
+  is beyond the 0.6 mile outer ring of a drawn station (farthest 807 m), and
+  rings on them would bring no storefront inside the rings (22 of 35,309
+  beyond, before and after). This supersedes "two drawn lines" of the same
+  day, which the owner chose before the overlap was measured; the shade
+  #00524a is not used. It is Hong Kong Tramways' reason, measured.
+- **Owed, as wording for the owner:** a "not drawn" bullet on Barcelona's
+  page (it has none for the trams), and the sentence in
+  `docs/excluded_categories.md` that gives the trams' reason as "falls
+  outside the network-identity test that picks out its metro", which is how
+  they were filtered, not why they are out. Drafted in chat 2026-10-13;
+  nothing in `app/` or that file is changed until approved.
+- **Kept:** `data/barcelona/raw/osm_tram_routes_2026-10-13.json`, the
+  evidence. No Barcelona step ran; no index rebuild is owed.
+- **Cablebus has coordinates now.** The watch list said "no official list or
+  coordinates yet". All 19 stations are in the place-search cache of
+  2026-10-12 (`data/mexico_city/raw/osm_places_2026-10-12.json`,
+  `aerialway=station`): Línea 1 six (Indios Verdes to Cuautepec), Línea 2
+  seven (Constitución de 1917 to Santa Marta), Línea 3 six (Los Pinos /
+  Constituyentes to Vasco de Quiroga), all inside Ciudad de México. Línea 3
+  held one stop in OSM on 2026-09-27. The cable geometry is not in that
+  cache; one Overpass query for it failed on both mirrors the same day
+  (overpass-api.de URLError, kumi.systems 504) and was not retried.
+- **Cablebus passes the test Barcelona failed.** Measured against the 180
+  drawn stations in `data/mexico_city/processed/stations.csv` as it stood:
+  15 of the 19 are beyond the 966 m outer ring (5 on each line), the
+  farthest 6,542 m (Cuautepec); the four within it are the interchanges
+  (Indios Verdes 290 m, Constitución de 1917 171 m, Santa Marta 150 m, Los
+  Pinos / Constituyentes 154 m). Station spacing: medians 1,727 m, 1,613 m
+  and 1,011 m. With rings on the 19, storefronts beyond 0.6 mi go from
+  257,649 of 407,629 (63.2%) to 239,866 (58.8%): 17,783 storefronts gain a
+  ring. Not re-run; `heavy_job.py` measured the read at 0.35 GB.
+- **Raised for the owner, not decided:** Mexicable is out of the regional
+  page by the owner's call of 2026-10-04, recorded as "a cable car". Its
+  Línea 1 has seven stations in Ecatepec, 3.3 to 7.7 km from any drawn
+  station, and Línea 2 two more there. Drawing Cablebus while Mexicable is
+  out for being a cable car needs either the same call for both or a
+  different stated reason.
+
+### 2026-10-13 - Place search wave 1: the last fifteen cities fetched from extracts, built, read and applied; 33 of 33 built, none rendered
+
+- **Wave 1 is 33 cities: Toronto is left out (owner, 2026-10-13: "toronto left out").** Cleanup relayed that tram-rescope cities are held out of the rollout as a last batch and Toronto's rescope is open. Its caches were fetched and nothing else was done; `scripts/check_place_unopened.py` still fails on Toronto's stub `place_search.json`, a leftover for the landing.
+- **The remaining cities came from regional extracts once the owner said an extract counts as the refetch** (the entry below). Fifteen cities were fetched on 2026-10-13 from extracts dated 2026-10-12T20:21:35Z, each with every station inside its area but Miami's recorded airport station: Buffalo, New York (496 stations), Miami, New Orleans, Houston, Sacramento, San Diego, Los Angeles (with Long Beach), Kitchener-Waterloo, Washington D.C., Melbourne and Philadelphia whole; Dallas, Ottawa and Manchester keep their Overpass main cache (overpass-api.de, 2026-10-12 and 2026-10-13) and took only the second cache from an extract, at most a day apart. The five cities whose first caches were months old, and Buffalo, whose first cache was Erie County's, write to new file names (`osm_places_2026-10-13.json`, `osm_places_extra_2026-10-13.json`); the old files stay on disk. Philadelphia was read from Pennsylvania's and New Jersey's files as one (Cleanup's set reader, master 06be902f): the owner's relayed yes to the 1.8 GB US Northeast file was never used and nothing of that size was downloaded. Washington D.C. needed one small file; an earlier statement to Cleanup that it might span regions was wrong.
+- **Miami gained a tenth area.** The first fetch reported two stations outside: Northside is 4 m outside Gladeview at its full coordinates (the first test used four decimals) and sits in West Little River (way 33614661, a census-designated place), added under the shape the owner approved. 41 of 42 stations are inside an area; the airport station is the recorded exception, and check H passes for it unaided.
+- **Ottawa's build first stopped on the station-reach test** for Bowesville, a park-and-ride inside the area with no indexed point within 1 km. Cleanup changed the test to count a street whose line passes within the distance (master c5b402ad); nothing was changed on this branch.
+- **Each of the fifteen was read under the owner's split of 2026-10-13: the session's top model for station, junction, place and landmark rows, a Sonnet-tier reader for the street screen** (New York's non-street rows by two readers). Dropped by id under the settled calls and the rulings, and names reviewed: Buffalo 27, New York 366 and 4, Miami 106, New Orleans 45 and 1, Dallas 169 and 1, Houston 226, Sacramento 49, San Diego 555 and 1, Los Angeles 271 and 4, Ottawa 55, Kitchener-Waterloo 84, Washington D.C. 101 and 1, Manchester 112 and 2, Melbourne 229, Philadelphia 191 and 3: 2,586 objects and 17 names. First open, gzipped, after the drops: Manchester 541 KB, Los Angeles 407, Houston 355, New York 333, San Diego 250, Dallas 221, Ottawa 208, Philadelphia 146, Sacramento 108, Miami 77, Washington D.C. 71, New Orleans 67, Kitchener-Waterloo 65, Buffalo 40, Melbourne 32. Street coverage 86.9% (Washington D.C.) to 95.9% (Manchester), and Melbourne 79.4%. After the rebuilds `check_place_search.py` fails the 33 on rule A only and `check_place_scope.py` passes 52 cities. 24 stations the builds skipped as not open went into the watch file (Ottawa 22, their line read from the station's own network tag; Los Angeles 1; Manchester 1).
+- **Limits of these reads.** No reader used the network, so every closure, opening and ownership claim rests on cached tags. San Diego's street reader read 2,177 unusual names line by line and only screened the other 8,296 by pattern; Los Angeles's read about a third of its 3,299 numbered alleys line by line; the non-street readers read plainly named parks, churches and schools by name without tags. What a reader inferred from a name or from position alone was held, not dropped.
+- **Melbourne's street coverage is under the 85% bar for a recorded reason, put to the owner.** 331 of 1,604 names are left out: about 180 are public lanes named "X Place", "Court", "Mews" or "Terrace" on service ways and 16 are arcades (Royal Arcade among them), because `WAY_WORDS` leaves those words out on the batch 2b audit (about 40% private driveways in Seattle and Vancouver). The options given: add the words for Melbourne only (Cleanup's and this session's recommendation), admit them everywhere on lanes with no access restriction, or leave it and record the figure. Not decided.
+- **Held for the owner, not dropped, with the readers' counts:** named bridges, viaducts and tunnels indexed as streets (New York 96, Manchester 84, Los Angeles 32, Ottawa 23, Washington D.C. 23, Houston 21 and its ten downtown pedestrian tunnels, San Diego 19, Philadelphia 18, Melbourne 11); roundabouts and interchanges as streets (Manchester 43) and ramps named for a road (Melbourne 17); numbered alleys (Los Angeles 3,299) and alleys named by their two cross streets (Sacramento 266); two real names in one on arterials and trails (New York 17, Los Angeles 13, Philadelphia 13, Kitchener-Waterloo 9, Ottawa 7, Miami 5); frontage and service roads named for a freeway (Houston 28, Dallas 12, New York 26); descriptive cycle-facility names (Washington D.C. 37, Los Angeles 33, New York 23); cemetery and church-ground avenues (New York 20, Washington D.C. 26, Philadelphia 26); standing but abandoned or ruined landmarks (Buffalo's twelve grain elevators and terminal, New York 14, Philadelphia 13, Manchester 2); one stop or station as several rows under different names (New Orleans 11 pairs, New York 26 complexes, Philadelphia 15, Dallas 5, Houston 5); register districts' members by number where not dropped (Brooklyn Navy Yard 67); campus lawns and courts named for a building (Melbourne 16, Kitchener-Waterloo 6); housing complexes' parks and estates where only the name ties them to the complex (New York 36, Los Angeles 25, Houston 20, Ottawa 14); homes with an article and no sign of visiting (Philadelphia 10, Washington D.C. 5); parks named as an intersection (Buffalo 6).
+- **Twenty rule findings went to Cleanup in two messages**, as a second rule batch after this landing: among them bare type words the list misses, "(historical)" not read as gone, stop_area relations and station outlines indexed as stations, platform, busway, corridor and proposed ways under a street's name, express-lane and HOV labels as street names, a district's shared register reference counting as each member's notability, and highway ways reaching the landmark kind through a memorial or attraction tag.
+
+### 2026-10-13 - Mexico City (Regional): Cablebus and Mexicable both drawn (owner)
+
+- **The owner: "1. draw both"**, to "Draw both: one rule for cable cars on
+  one page, and Ecatepec's hill districts get rings", against drawing
+  Cablebus alone with a different stated reason for Mexicable. This
+  supersedes the Mexicable half of the call of 2026-10-04 ("Out, the
+  owner's call: ... Mexicable (a cable car)",
+  `docs/build_briefs/mexico_city_regional.md`); the Tren Suburbano and El
+  Insurgente stay out on commuter spacing. Toulouse's Téléo is the
+  precedent for a drawn cable car.
+- **Not yet verified, and the build checks each before drawing:** which
+  Mexicable lines are in revenue service and which of their stations fall
+  inside Ecatepec and Naucalpan; each system's own line names, colors and
+  station counts; the cable geometry.
+- **Measured later the same day; nothing built.** OSM, one Overpass query
+  (overpass-api.de, after four failed attempts on both mirrors), cached as
+  `data/mexico_city/raw/osm_aerialway_2026-10-13.json`, 80 elements: five
+  `route=aerialway` relations (Cablebús Línea 1, 2, 3; Mexicable Línea 1,
+  2), none with a `colour`. Cablebús Línea 3's relation holds one node and
+  one way; its six stations are ways and relations, so step 1 cannot take
+  that line from relation membership alone.
+- **Five lines are in service; Mexicable Línea 3 (Naucalpan) is not** (OSM
+  `construction=gondola`; press gives the first quarter of 2027), nor
+  Cablebús Líneas 4 to 6. Operator station counts: Mexicable Línea 1 seven
+  and Línea 2 seven, from the operator's own site script (mexicable.com,
+  primary, read 2026-10-13); Cablebús Línea 1 six and Línea 2 seven from
+  archived copies of STE's pages (primary, dated 2024 and 2026-05-23);
+  Línea 3 six from es.wikipedia only (secondary). ste.cdmx.gob.mx refused
+  every connection, as every cdmx.gob.mx host has.
+- **Scope, by point in polygon:** all 19 Cablebús stations are in Ciudad de
+  México. Mexicable Línea 1's seven are in Ecatepec. Of Línea 2's seven,
+  Indios Verdes is in Ciudad de México, La Mesa and Hank González in
+  Ecatepec, and four (Tanque de Agua, Periférico, San Isidro, Dr. Jorge
+  Jiménez Cantú) are outside the map, in Tlalnepantla per the operator's
+  postcodes: listed as left out, the line drawn to its ends.
+- **Stations that are already on the map under the same name:** Indios
+  Verdes (both systems), Constitución de 1917 and Santa Marta meet Metro
+  stations 150 to 345 m away, and the two Hank González stations are 30 m
+  apart. Step 1 averages same-named nodes today, which would move three
+  Metro stations; the build must attach them without moving any.
+- **Colors, for the owner:** STE uses one light blue for all three Cablebús
+  lines, and the only hex found is es.wikipedia's #4EC3E0 (23.5 from Metro
+  Línea 4, 49.3 from the nearest pin). Mexicable calls its lines Línea Roja
+  and Línea Verde and publishes no hex; Wikipedia's reds sit 6.2 to 16.1
+  from the Food service pin and 12.3 to 19.9 from Metro Línea 1; its greens
+  19.9 to 33.3 from Metro Línea 3.
+
+### 2026-10-13 - Place search wave 1: the owner's rulings on the fifteen held classes and on Melbourne's lanes
+
+- **The owner agreed with every recommendation on the held classes (2026-10-13: "by letter i agree with all recommendations") and on Melbourne ("1. sounds good for melbourne").** The classes and the rulings, as put: (a) named bridges, viaducts and tunnels indexed as streets: keep; (b) roundabouts, interchanges and ramps named for a road: drop; (c) numbered alleys ("Alley 87582"): drop; (d) alleys named by their two cross streets: drop; (e) two real names in one on a road or trail: keep; (f) frontage and service roads named for a freeway: keep; (g) cycle facilities named for the street they run on: drop; (h) cemetery and church-ground avenues: drop; (i) standing but abandoned or ruined landmarks: keep those with their own article, drop the rest; (j) one stop or station as several rows under different names: left to Cleanup's row-per-stop rule; (k) numbered buildings of a register district: drop; (l) campus lawns and courts named for a building: drop; (m) housing complexes' parks and estates tied to the complex only by name: keep; (n) homes with an article and no sign of visiting: drop; (o) parks named only as an intersection: keep. Melbourne: the words the lanes need ("place", "arcade" and the like) are added for Melbourne only, not for every city.
+- **Applied by id in ten cities, 1,895 ids:** Manchester 332 (43 roundabout and interchange names), Melbourne 123 (18 ramp names, 2 cycle facilities, 15 campus lawns and courts), Sacramento 416 (266 cross-street alleys, 10 numbered alleys, 6 cycle facilities), Houston 103 (10 cycle facilities), Los Angeles 233 (33 cycle facilities, one cemetery road), Washington D.C. 531 (37 cycle facilities, 26 cemetery avenues, four homes), Kitchener-Waterloo 7, New York 98 (20 cemetery avenues, 62 Brooklyn Navy Yard members, nine ruins with no article), Philadelphia 43 (26 cemetery avenues, three abandoned buildings with no article, eight homes), Buffalo 9 (the grain elevators with no article). Every id was checked against its cached name before it was written. After the rebuilds `check_place_search.py` fails the 33 on rule A only and `check_place_scope.py` passes 52 cities.
+- **Not applied, and why.** (c) Los Angeles's 3,299 numbered alleys were not dropped by id: that many entries is a rule's work, so the pattern went to Cleanup. (g) New York's and Philadelphia's cycle classes were not applied, because their readers mixed park paths and proper trail names into the class, and Miami's and San Diego's hold proper trail names (the M-Path, the Commodore Trail). (l) One Melbourne court is a highway way and was left. (n) Homes tagged as a museum or an attraction were kept as showing a sign of visiting (the John Coltrane House, Commandant's Quarters, Twin Oaks). (k) Five Brooklyn Navy Yard rows were kept on the reader's word: the historic district, the Navy Yard Center, the Barrier Forts Monument, Dry Dock 1 and Building 77.
+- **The street coverage figure falls where named ways are dropped on purpose,** since it counts every name on a named highway way: Washington D.C. 86.9% to 83.3%, Sacramento 91.8% to 86.0%, Melbourne 79.4% to 73.2% (before its lanes are added), Los Angeles 89.5% to 88.8%, Manchester 95.9% to 95.5%. The names now left out are the owner's drops, not streets missed.
+- **Melbourne's words are not yet added:** `place_index.py` has no per-city word setting, and adding one is shared code, so it went to Cleanup with the owner's word.
+
+### 2026-10-13 - Place search wave 1: named roundabouts and standing abandoned landmarks stay; 256 by-id drops taken back
+
+- **The owner reversed two of the lettered rulings, and the by-id drops for them were removed (owner, 2026-10-13, relayed by Cleanup: "keep the named roundabouts, keep all standing abandoned landmarks"; confirmed in this session: "1 yes, 2 yes to both").** The lettered list had dropped named roundabouts with interchanges and ramps (b) and kept an abandoned or ruined landmark only with an article of its own (i); Cleanup's list of the same day said keep for both, and the owner chose that. Taken out of `PLACE_DROPPED`: Manchester 235 ids (20 "X Roundabout" names, 173 ids; 10 "X Circle" names, 62 ids), Buffalo 9, New York 9, Philadelphia 3: 256 ids. No index was rebuilt: the one rebuild after the second rule batch lands covers it.
+- **"X Circle" counts as a named roundabout in Manchester, and the two "Island" names stay dropped as interchanges (owner, same words, on this session's recommendation).** The ten Circles are the named roundabouts of Trafford Park and Salford Quays (Centenary Circle, White City Circle, Village Circle). "Simister Island" (13 ways) is a motorway junction; "The Island" (3 ways) is the weaker call, its tags not checked. Still dropped under (b): Manchester's 11 "X Interchange" names and the two Islands, 97 ids, and Melbourne's ramp names.
+
+### 2026-10-13 - Mexico City (Regional): the cable cars built on the branch; colors and names (owner); Tlalnepantla open
+
+- **The owner, on the Cablebús colors: "darker project shades sounds good,
+  feel free to use other colors if we run into color similarity
+  conflicts"**, to "three drawn lines, the system blue on Línea 1 and two
+  darker project shades on the others, and the page saying so", against one
+  legend entry for all three. **On the Mexicable names: "labels sound
+  good"**, to "Mexicable Línea 1" and "Mexicable Línea 2" in a red and a
+  green chosen by this project, against the operator's Línea Roja and Línea
+  Verde.
+- **Colors (branch, inside those calls; `pipeline/mexico_city/config.py`,
+  `CABLE_COLOURS`):** Cablebús Línea 1 #4EC3E0 (es.wikipedia's system blue),
+  Línea 2 #1f96b3 (16.4 from Línea 1), Línea 3 #135c6d (23.9 from Línea 2);
+  the nearest Metro line to any of the three is Línea 4 at 23.5, the nearest
+  pin Retail at 44.4. Mexicable Línea 1 #d85868, the color nearest
+  Wikipedia's reds that clears every pin by 20 and every line by 18 (Food
+  service 20.8, Línea 1 27.9, Línea 6 37.7). Mexicable Línea 2 #79a133,
+  es.wikipedia's map green #95C344 darkened 10% for 3:1 on a white page
+  (Línea 12 25.5, Línea 8 28.4, Personal services 38.5).
+- **Built (commit bff95ea7), nothing on master's path touched.** Steps write
+  `data/mexico_city/processed/regional/cable/` until landing; the landing
+  commit removes the `cable` part of `DATA_PROCESSED` and re-runs steps 1 to
+  3. Step 2 did not change, and its output was copied into that folder.
+- **Stations: 180 to 204 in scope.** 33 cable station points give 28 new
+  stations, 24 in scope and 4 outside. Gate 3 runs per cable line and
+  matches: 6, 7, 6, 7, 7. Ecatepec goes from 5 stations to 13
+  (`STATIONS_PER_MUNICIPIO`). Storefronts inside a ring: 149,980 to 172,362
+  of 407,628.
+- **Same-named interchanges attach, and no existing station moves**
+  (asserted in step 1, and compared row by row: 0 of 180 moved). Indios
+  Verdes (345 m at the farthest cable node), Constitución de 1917 (171 m)
+  and Santa Marta (150 m) keep the Metro station's point and get no second
+  station. Mexicable's two Hank González nodes, 30 m apart, are one station.
+  Los Pinos / Constituyentes (Cablebús Línea 3) stays its own station 154 m
+  from the Metro's Constituyentes: a different name, as Barcelona's Sant
+  Gervasi and Plaça Molina are.
+- **A name two places carry:** Mexicable's Periférico is 26 km from the Tren
+  Ligero's Periférico; the attach check raised on it, and the Mexicable one
+  is shown as "Periférico (Mexicable)".
+- **Cablebús Línea 3's stations are named in config by OSM id** (three ways,
+  three relations), since its relation holds no station member; its count
+  of six is from es.wikipedia only. Re-measure if the relation gains
+  members.
+- **Shared code:** `map_common.load_osm_line_shapes` takes a relation id in
+  place of a `ref`, because the five relations' refs are "1", "2", "3", "1",
+  "2". No other map's output changes.
+- **Checked:** line identity, no-fetch, em dashes, scope disclosure,
+  provenance (names the city OK), map markup (237 maps, 0 problems); the 18
+  labels by the label check's own tests at 1024 and 375 wide, 0 problems.
+  Not yet run: the drift check, the privacy check (step 2 unchanged), the
+  full `check_all.py`.
+- **Open, the owner's: Tlalnepantla de Baz.** Mexicable Línea 2's four
+  middle stations stand in its detached eastern part. Measured from the
+  cached register: Tlalnepantla has 19,483 storefronts under this map's
+  filter, 5,260 of them in the eastern part and 2,940 within 0.6 miles of
+  the four stations. Precedent for adding it: Naucalpan, kept for one
+  station (22,216 storefronts). Recommended: add it, in the same build. As
+  built, the four are in `outputs/mexico_city/excluded_stations.csv` and
+  the line is drawn through.
+- **Owed before landing:** the page's bullets for the cable cars (a draft,
+  the owner's to approve), `docs/excluded_categories.md` (it still says
+  Mexicable is not drawn), `docs/map_inconsistencies.md` (the table row and
+  item 12), `docs/data_sources/mexico.md`, the brief's line 24, the map
+  title and `system_name` (they still read "Metro CDMX and Tren Ligero"),
+  the search index rebuilt on the new stations (Cleanup).
+
+### 2026-10-13 - Mexico City (Regional): Tlalnepantla de Baz added, page text approved, the title names the cable cars (owner)
+
+- **The owner: "1 add, 2 bullets looks good, Tlalnepantla added. 3. name
+  cable cars"**, to three calls: add Tlalnepantla de Baz as a fifth
+  municipio (against leaving Mexicable Línea 2's four stations out); the
+  drafted page bullets for the cable cars, with the municipio added; and a
+  map title that names the cable cars (against keeping "Metro CDMX:
+  commercial density around stations"). The precedent stated for adding it:
+  Naucalpan, kept for one station.
+- **Scope now:** Ciudad de México and five municipios (`cve_mun` 104,
+  relation 5606521, 80.3 km²; the union 494.2 km², gated at 410 to 600).
+  The five boundaries are a new cache,
+  `osm_municipios_15_2026-10-13.json` (overpass.kumi.systems, after a 504
+  from overpass-api.de); master's four-municipio cache is untouched. No new
+  download: the cached State of México register holds Tlalnepantla.
+- **Figures:** 208 stations (204 plus the four), none left out, and no
+  station's rings reach outside the scope. 427,123 storefronts written
+  (407,629 before), 427,121 on the map after the contact scrub, 175,939 in a
+  ring. Tlalnepantla brings 19,483 storefronts; 405 entidad 15 storefronts
+  fall outside the scope polygon (416 before).
+- **Privacy verdict: publish, the same structural position as before.**
+  `check_personal_exposure.py mexico_city` over 175,939 pins: no
+  registrant-name column is loaded, 0 e-mails and 0 phone numbers in a
+  displayed name, the one c/o the same sign abbreviation, 33.1% on the
+  person-name heuristic (32.2% before; the Spanish sign convention). The
+  19,494 added rows were read for contact details: five long digit runs,
+  all LICONSA outlet numbers, and one e-mail-shaped sign name, which the
+  render's contact scrub drops. Cleanup: this needs its row in
+  `docs/privacy_verdicts.md` when the entry is folded.
+- **Wording (branch, for review):** the map title is "Metro CDMX, Cablebús
+  and Mexicable: commercial density around stations" and the Overview blurb
+  "Metro CDMX (Líneas 1–9, A, B and 12), the STE Tren Ligero and the
+  Cablebús and Mexicable cable cars, with five State of México municipios";
+  the owner asked for the cable cars to be named and did not see these
+  exact strings. The page's regional bullet gained one sentence
+  ("Mexicable runs through Ecatepec and Tlalnepantla.") and "four" became
+  "five". `docs/excluded_categories.md`'s regional paragraphs carry the
+  five-municipio counts, each recomputed by a script that first reproduced
+  the published four-municipio figures exactly; its sentence on rings
+  crossing the city line is replaced, since none now does.
+- **Not done, and it blocks the drift check: the search index.**
+  `step2b_place_index.py` refuses, as check H does: San Isidro has no
+  indexed place within 1 km, because `PLACE_AREA` does not cover
+  Tlalnepantla. It needs area id 3605606521 added, a place fetch under new
+  cache names, the index rebuilt and the new rows read. Left to Cleanup
+  with the search work (the handoff's rule). Until then
+  `outputs/mexico_city/baseline.json` and `place_search.json` are not
+  updated, and `check_all.py` fails on `check_place_search.py` alone (72 of
+  73; `macro_facts.json` and Mexico City's row of `ring_shares.json` were
+  rewritten). `check_deploy_imports.py` was not run: this worktree has no
+  `.venv-lean`.
+
+### 2026-10-13 - Tram rescope: Toronto, Milan and Prague pass the overlap test (measured, nothing built)
+
+- **The test that left Barcelona's trams out, run on the three cities not
+  yet started.** Tram stops are each city's cached GTFS stops served by
+  `route_type` 0, collapsed on the stop name; distances in the city's own
+  UTM zone; the storefronts are the built map's. Read-only.
+- **Toronto:** 558 tram stops on 20 routes; 305 (55%) are beyond the 0.6
+  mile outer ring of all 108 drawn stations (median 1,174 m). Storefronts
+  beyond every ring: 9,466 of 18,215 (52.0%) now, 5,855 (32.1%) with the
+  tram stops ringed; 3,611 gain a ring.
+- **Milan:** 325 tram stops with a storefront in reach, on 17 routes; 66
+  (20%) beyond every drawn station (median 408 m). Storefronts beyond every
+  ring: 6,030 of 47,540 (12.7%) now, 1,467 (3.1%) with the trams; 4,563
+  gain a ring.
+- **Prague:** 285 tram stops on 37 routes; 95 (33%) beyond every drawn
+  station (median 720 m). Storefronts beyond every ring: 7,657 of 25,185
+  (30.4%) now, 3,678 (14.6%) with the trams; 3,979 gain a ring.
+- **Reading:** none is Barcelona's case (0 of 28 stops beyond, 0
+  storefronts gained). The trams reach storefronts the metro does not in
+  all three, so the open question is the label and legend rule for 17 to
+  37 routes on one map, not whether to draw them.
+- **Limits:** the route lists include night routes (Toronto's 300s,
+  Prague's 91 to 99) that repeat day routes' streets, and Toronto's
+  `route_type` 0 includes Lines 5 and 6; neither changes the storefront
+  counts. Stops are collapsed by name, not by the station rule a build
+  would use.
+- **Cleanup's sequencing for Mexico City (its message, same day):** the
+  search rebuild waits for the second search rule batch on master and
+  lands in the tram segment of the final group; `PLACE_AREA` and the place
+  caches are not touched on this branch, and `check_place_search.py` stays
+  failing here until then.
+
+### 2026-10-13 - Tram rescope: the many-route rule is per route (owner), and Prague's colors fit it (measured)
+
+- **Owner, 2026-10-13: "yes per route sounds good".** Toronto, Milan and
+  Prague take the rule the built tram maps already follow (Amsterdam's 16
+  trams, Brussels, Zurich, Ostrava, Brno, Göteborg): one on-map label and
+  one legend row per day route, named "Tram N" (Toronto: "Streetcar N").
+  Night routes are not drawn, since they run the day routes' streets
+  (Toronto's 301 to 312, Prague's 91 to 99), and the page says so. All
+  three operators give every tram one color, so colors come from the
+  project palette by the color search. Toronto's Lines 5 and 6 keep their
+  own names and feed colors.
+- **Not chosen: grouping by corridor (New York's trunks).** New York's
+  groups are the operator's own; none of these three publishes tram
+  trunks, so the groups would be the project's. Kept only as the fallback
+  if Prague's labels cannot be placed.
+- **Prague's colors, measured at the owner's request (read-only).** Each
+  tram route's most-used GTFS shape, Metro A, B and C on their built
+  colors, the sRGB cube in steps of 8, farthest-point greedy with the
+  most-crowded line first. Rules: 3:1 on both pages, CIE76 18 from every
+  line within 500 m, 10 from every other line, and a pin floor.
+  - 25 day routes (1 to 13, 15 to 26), 28 lines: fits at pin floors 45, 30
+    and 20. At 45: 3,817 colors available, closest pair within 500 m 27.1,
+    closest tram to a pin 45.2.
+  - With 31, 32 and 40 as well, 31 lines: fits at all three floors; at 45
+    the closest pair within 500 m is 25.1.
+  - A tram has 22 other lines within 500 m on average (most 27 of 27), so
+    nearly every pair is held to 18. Dark-mode labels separate and
+    `check_line_colours` passes in every run.
+- **Limits:** the colors found are a feasibility result, not the palette a
+  build would record. Label placement for 28 labels is not measured. Metro
+  C stays 21.2 from the Food service pins, as built.
+
+### 2026-10-13 - Place search wave 1: the render moves to Cleanup and this session retires after the rebuild
+
+- **The wave's render, `check_all.py` run and browser test pass from this session to Cleanup, at the one big review (owner, 2026-10-13: "we can do it cleanup's way, work pipeline is slowing down so retiring sessions is a good idea").** The handoff had this session run them as its step 7. What stays here once the second rule batch is on master: merge master, rebuild the 33 indexes, remove the by-id drops a rule now covers, add Melbourne's lane words, re-read what the rules newly admit (Melbourne's lanes, the roundabouts and abandoned landmarks taken back), and commit configs, indexes and this file on `search-wave1`. **The built indexes are therefore committed before the maps are rendered**, where they had been left uncommitted to go in with the maps; `check_place_search.py` rule A (not rendered) will fail the 33 on the branch until Cleanup's render.
+
+### 2026-10-13 - Tram rescope: Toronto's line list approved, then the feed shows three routes not running as streetcars (open, owner)
+
+- **Owner, 2026-10-13: "yes"** to Toronto's list: Lines 1, 2, 4, 5 and 6
+  unchanged, the 11 day streetcar routes 501 to 512 added ("Streetcar 501"
+  on the map, "Streetcar 501 Queen" in the legend), the 7 night routes not
+  drawn.
+- **What the feed then showed (read-only, the cached feed of 2026-09-21 and
+  a re-pull of 2026-10-13 under `gtfs_2026-10-13.zip`, window to
+  2026-10-31; both agree):**
+  - 503 Kingston Rd and 507 Long Branch run as replacement buses on every
+    trip (1,098 of 1,098 and 1,603 of 1,603; headsign "Replacement Bus").
+  - 506 Carlton and 512 St Clair run streetcars and a "B" replacement bus
+    side by side (1,010 of 2,025 and 1,101 of 2,462 trips are buses).
+  - 508 Lake Shore runs 35 trips, weekday peaks only: no weekday trip
+    between 09:00 and 15:00, so it fails the 15-minute test
+    (`docs/category_rules.md`, "Station scope").
+- **The precedents:** a stretch closed for works is drawn as the timetable
+  runs (Berlin's U6 Tegel branch, Prague's Flora, 2026-09-28/29), and a
+  stretch under the 15-minute test is not drawn (Aarhus). Applied here that
+  is 8 streetcar lines, not 11. The owner approved 11, so this goes back
+  to the owner before anything is built.
+- **In progress, uncommitted on the branch:** `pipeline/toronto/streetcars.py`
+  and config constants. Stops are grouped into places by distance (the
+  feed names stops per direction and has no parent stations), replacement
+  bus trips are left out, and the sub-transit-line filters thin the rest
+  (rapid-transit stations and terminals kept, one stop per half mile). The
+  interchange filter is narrowed to crossings and junctions, because 503,
+  504 and 508 share King Street for kilometres: with every shared stop
+  kept the dry run gave 141 new stations, with the narrower rule 107
+  (before the bus trips were taken out; to be re-measured).
+
+### 2026-10-13 - Tram rescope: Toronto built with eight streetcar lines; 503, 507 and 508 not drawn (owner)
+
+- **Owner, 2026-10-13: "follow those rules (8 not 11) note the drops and
+  reasoning".** Drawn: 501 Queen, 504 King, 505 Dundas, 506 Carlton, 509
+  Harbourfront, 510 Spadina, 511 Bathurst, 512 St Clair, beside Lines 1,
+  2, 4, 5 and 6 (13 lines).
+- **The three drops and the rule behind each** (`docs/category_rules.md`,
+  "Station scope"):
+  - **503 Kingston Rd, 507 Long Branch: closed for works.** Every trip in
+    the feed to 2026-10-31 is a replacement bus, so they are drawn as the
+    timetable runs, which is not at all (Berlin's U6 Tegel branch,
+    Prague's Flora). 15 and 31 stops of their own are listed as closed
+    for works.
+  - **512 St Clair west of Lansdowne: closed for works.** The line is
+    drawn to Lansdowne; 10 stops west of it are listed.
+  - **508 Lake Shore: the 15-minute test.** 35 weekday peak trips, none
+    between 09:00 and 15:00 (Aarhus). Every stop it serves is on a drawn
+    line, so it adds no row.
+  - The seven night routes run their day routes' streets (owner's list).
+- **They come back by themselves being noticed:** `streetcars.py` compares
+  config's closed and infrequent sets with the feed and stops the build
+  when a line returns, closes or changes frequency.
+  `docs/recheck_calendar.md` carries the dates and what to do (owner,
+  same day: "put in the timeline into the timetable documentation of
+  future openings/updates i need to check"), with Mexico City's unopened
+  cable lines beside them.
+- **Stop selection** (`pipeline/toronto/streetcars.py`): replacement bus
+  trips left out by headsign; 506 stop ids grouped into 237 places by
+  distance (60 m, or 120 m when two stops share no line and direction; no
+  merge past 200 m; same-named stops first). 15 places are a drawn
+  rapid-transit station (within 150 m, or named for it within 400 m) and
+  add nothing. The rest take the sub-transit-line filters at half a mile.
+- **Judgment call, on a measurement:** filter 4 ("a stop shared by two or
+  more lines is kept") is narrowed to the stop that has a line its
+  neighbor lacks (a crossing, or the last shared stop before two lines
+  part). With every shared stop kept: 82 new stations; with the narrower
+  rule: 68, then 66 after two pairs closer than 150 m were merged.
+- **Result:** 108 rapid-transit + 66 streetcar = 174 stations; 156 stops
+  thinned, 56 closed for works, 2 outside the city. Storefronts in a ring
+  8,749 -> 11,803 of 18,215. Labels pass at 1024 and 375 wide, 13 labels.
+- **Colors: the project palette**, since the TTC gives every streetcar one
+  red. From the color search with Lines 1 to 6 held: 501 #608000, 504
+  #00A800, 505 #0050F8, 506 #886010, 509 #C870C8, 510 #F80028, 511
+  #A000F8, 512 #00A0C0; every one at least 45 from the pins and 35 from
+  every other line. **For the owner's eye; not yet approved.**
+- **Page text is a draft for the owner:** the Toronto page's four new
+  bullets, the Overview blurb, and the Stations paragraph and two list
+  additions in What Is Excluded.
+- **Left for landing (Cleanup):** `STATIONS_CSV` and
+  `STREETCAR_SHAPES_JSON` point at `processed/tram/` on this branch; drop
+  "tram" and re-run steps 1 and 4. `baseline.json` is not updated (step 1
+  emits six new figures), and the drift check was not run from the branch
+  because Toronto's step 2 writes the shared processed folder. Step 2 is
+  untouched, so no new privacy read is owed. `check_all.py`: 72 of 73, the
+  one failure Mexico City's search check, as agreed.
+
+### 2026-10-13 - Tram rescope: the sources behind Toronto's closed routes (owner: "save sources")
+
+Search results of 2026-10-13, none read in full; the feed, not these,
+decided what is drawn. The same links are in `docs/recheck_calendar.md`.
+- 507 Long Branch, bus-replaced from 2026-06-07 for the Long Branch Loop
+  track renewal, phase 2 to 2026-10-31:
+  https://www.ttc.ca/about-the-ttc/projects-and-plans/Long-Branch-Loop-Track-Renewal
+  and
+  https://www.ttc.ca/service-advisories/Service-Changes/501-301-507-508-Long-Branch-Loop-Streetcar-Track-Renewal-Work
+- 512 St Clair, bus west of Lansdowne to 2026-10-31 for the rail bridge:
+  https://www.ttc.ca/service-advisories/Service-Changes/512-312-Route-change-due-to-rail-bridge-construction
+- 503 and 508 during about ten months of King Street West construction
+  (news): https://www.blogto.com/city/2026/09/toronto-construction-busiest-ttc-routes-10-months/
+  and the City's page, https://www.toronto.ca/kingwestconstruction
+- The TTC's running list of streetcar changes, the page to re-read after
+  2026-10-31: https://www.ttc.ca/service-advisories/Streetcar-Service-Changes
+- The feed itself: the City's CKAN package `ttc-routes-and-schedules`
+  (`config.GTFS_URL`), cached as `data/toronto/raw/gtfs.zip` (2026-09-21)
+  and `gtfs_2026-10-13.zip`.
+
+### 2026-10-13 - Tram rescope: Toronto's thinning rule, colors and page text approved (owner)
+
+- **Owner, 2026-10-13: "1 yes sounds good. 2. approved. 3. concatenate if
+  possible but content looks good".** (1) The crossing-or-junction form of
+  the interchange filter stands for Toronto. (2) The eight streetcar
+  colors are approved as recorded in `pipeline/toronto/config.py`. (3)
+  The page bullets' content is approved; they were shortened the same day
+  with no fact added or dropped (the lines bullet takes the labeling
+  clause, the colors bullet loses its second explanation of Line 2, the
+  not-drawn bullet takes the "listed below" pointer). The Overview blurb
+  and the What Is Excluded additions went with them.
+
+### 2026-10-13 - Tram rescope: Milan's 17 tram routes measured; the line list is with the owner (open, nothing built)
+
+- **The feed.** `https://dati.comune.milano.it/gtfs.zip` re-pulled
+  2026-10-13 as `data/milan/raw/gtfs_2026-10-13.zip`: byte-identical to the
+  cache of 2026-09-22 (sha256 f0959217..., feed_version 423, the portal's
+  resource last modified 2026-09-21). Its `feed_info.txt` says
+  `surface_end_date` 20261002: every tram service runs 2026-09-14 to
+  2026-10-02 and none after. No newer edition is published, so the tram
+  timetable read here ended eleven days before the reading.
+- **17 tram routes** (1, 2, 3, 4, 5, 7, 9, 10, 12, 14, 15, 16, 19, 24, 27,
+  31, 33), no night routes, no replacement-bus trips under a tram id
+  (headsigns read). Weekday 2026-09-30, 10:00 to 15:00, busier direction:
+  headways 4.5 (14) to 15.0 minutes (7 and 33, 20 trips each way in five
+  hours). All 17 pass the 15-minute test; 7 and 33 sit exactly on it.
+- **Works in the feed's own route names:** 2 ("lav. torino"), 4 ("lavori
+  testi"), 7 ("lavori prol per c.na gobba"), 14 ("lav. orefici"), 16
+  ("lav. umbria - maj"). The precedent is drawn as the timetable runs.
+- **Scope:** 722 tram stop ids, 341 stop names, 323 names inside the
+  comune. Route 15 has 17 of 62 stop ids outside (Rozzano) and route 31
+  has 18 of 31 outside (Cinisello Balsamo). No `parent_station`.
+- **Colors (measured, `pipeline/linecolour.py`, most-used shape per
+  route):** 17 project colors fit beside the five metro colors at a pin
+  floor of 45; closest pair within 500 m 41.7 (M2 and tram 4); dark-mode
+  labels separate; `check_line_colours` passes. A tram has 12.3 other
+  lines within 500 m on average (18 at most). Label placement for 22
+  lines is not measured.
+- **Recommended to the owner, not decided:** all 17 as "Tram N", drawn as
+  the timetable runs, stops outside the comune listed, half-mile thinning
+  as in Toronto.
+
+### 2026-10-13 - Tram rescope: Milan built with all 17 tram lines (owner); page text and stop-name form are drafts
+
+- **Owner, 2026-10-13: "i agree with your applications from precedent.
+  project colors okay. all 17", then "build now and add the re-check to
+  the future logs".** So: all 17 routes as "Tram N"; 7 and 33 drawn at
+  exactly 15.0 minutes; the five routes on diversion drawn as the
+  timetable ran them; 15 and 31 drawn whole with their stops outside the
+  comune listed; half-mile thinning with the crossing-or-junction rule
+  (Toronto's, approved there the same day).
+- **Built on the branch** (`pipeline/milan/trams.py`, steps 1 and 3):
+  22 lines, 193 stations (104 metro + 89 tram). 710 tram stop ids on
+  regular patterns make 312 places; 46 are a drawn metro station, 19 are
+  outside the comune, 158 are thinned. Keeping every stop shared by two
+  or more lines would have kept 137 new stations instead of 89.
+  Storefronts in a ring: 45,999 of 47,540 (41,510 before).
+- **Colors** in `config.TRAM_COLOURS`: every tram 45 or more from every
+  pin (closest 45.2, Tram 12 against Retail); `check_line_colours` passes
+  at render. The search ran on each route's most-used shape.
+- **Labels:** `scripts/check_map_labels.js` reports no problem at 1024,
+  375 and 343 wide; 22 labels, 22 legend rows, the legend scrolls.
+- **Judgment calls made in the build, for the owner at review time:**
+  - *Stop names.* The feed writes them in lower case ("p.za ventiquattro
+    maggio"). They are shown as "P.za Ventiquattro Maggio": a capital on
+    each word, small Italian words and the second half of "p.za", "v.le",
+    "c.so", "l.go", "p.ta", "p.le" left small. The metro stations keep
+    ATM's upper-case names from its GIS layer, so the two forms sit side
+    by side on one map.
+  - *A stop the feed names for its metro lines* ("stazione centrale m2
+    m3") is that metro station when one is within 400 m; otherwise 150 m.
+  - *One stop id has no name* (17369) and is left out.
+  - *"Via Curiel Via Maggi (Rozzano)"* is drawn: its point is inside the
+    comune's polygon whatever its name says.
+- **Page text is a draft** (The lines bullets of
+  `app/pages/20_Milan_Heatmap.py`), as are the Milan sentences changed in
+  `docs/excluded_categories.md`: Milan taken out of the "trams left out"
+  example, added to the spacing-filter list, and a new Stations paragraph.
+- **Re-check:** `docs/recheck_calendar.md`, action list and calendar row.
+  Step 1 stops if the feed's surface dates or tram route list differ from
+  the config, so a new edition cannot be drawn unread.
+- **Branch-only paths:** `config.TRAM_DIR` is `processed/tram/`; at
+  landing set it to `DATA_PROCESSED` and re-run steps 1 and 3.
+  `baseline.json` is not updated and no drift check ran (step 2 writes
+  the shared folder). Step 2 is untouched, so no privacy re-read is owed.
+- **Owed later:** Toronto's and Milan's modules are near copies; a shared
+  one belongs with Prague, the third use.
+
+### 2026-10-13 - Tram rescope: Milan approved as built (owner)
+
+- **Owner, 2026-10-13, after the four items put for approval (the stop-name
+  form, The lines bullets, the What Is Excluded sentences, the 17 colors):
+  "milan looks great".** Read by the session as approving all four as
+  built in 1dadd89c; no item was singled out. Nothing changed after it.
+
+### 2026-10-13 - Tram rescope: Prague's tram routes and label placement measured; the line list is with the owner (open, nothing built)
+
+- **The feed.** `https://data.pid.cz/PID_GTFS.zip` re-pulled 2026-10-13 as
+  `data/prague/raw/pid_gtfs_2026-10-13.zip` (feed_info 2026-10-13 to
+  2026-10-26). The cache of 2026-09-24 is untouched.
+- **39 tram routes** (route_type 0). Read on Wednesday 2026-10-14, 10:00 to
+  15:00, the busier direction:
+  - 23 numbered day routes at 4.8 to 10.0 minutes: 1 to 13, 15, 17 to 22,
+    24, 25, 26. There is no 14 and no 16 in this feed.
+  - Four more day routes at 4.5 to 10.0 minutes: 30, 31, 32 and 40. Why
+    they run was not read; the numbers are outside the regular 1 to 26.
+  - 37 at 9.7 minutes, the only tram the feed flags
+    `is_substitute_transport`.
+  - 23 at 30.0 minutes, 07:27 to 18:51: fails the 15-minute test.
+  - Ten night routes, 90 to 99 (`is_night`): not drawn, on the per-route
+    rule.
+- **Colors (measured, the method of the Milan entry):** 28 trams beside
+  the three metro colors fit at a pin floor of 45, closest pair within
+  500 m 27.1 (trams 6 and 9); the 23 regular routes alone fit at 29.2
+  (trams 2 and 8). A tram has 18.6 other lines within 500 m on average.
+- **Label placement (measured, a trial render to the session scratchpad,
+  each route on its most-used shape, the metro-only station set,
+  `scripts/check_map_labels.js`):**
+  - 28 trams, 31 lines: no problem at 1024; three label overlaps at 375
+    (13/15, 18/21, 22/26); five at 343 (Metro A/9, 1/25, 4/5, 6/18, 12/13).
+  - 23 trams, 26 lines: no problem at 1024 or 375; two overlaps at 343
+    (8/12, 11/13).
+  - No per-line label end was set; whether overrides clear the overlaps is
+    not measured.
+- **Nothing built, no step run, no output changed.** Prague has a place
+  search index, so a new station set owes Cleanup a rebuild.
+
+### 2026-10-13 - Tram rescope: Prague's 23 regular routes alone leave six stops with no drawn tram; the recommendation moves to all 28 day routes (open, nothing built)
+
+- **Measured** on the feed of 2026-10-13, weekday 2026-10-14, by stop name:
+  276 of 284 tram stop names have one of the 23 regular day routes.
+  - Strážní, Chmelnice, Kněžská luka and Spojovací (the Spojovací branch)
+    have only 30, 31 and 37.
+  - Třebenická has only 30. Smíchovské nádraží has only 32 and 40.
+  - Královka and Hládkov have only 23, every 30 minutes, which fails the
+    15-minute test whichever set is drawn.
+- **Route ends in the feed:** 30 Sídliště Ďáblice to Spojovací, 31 to
+  Spojovací, 37 Lehovec to Spojovací, 32 to Slivenec, 40 to Sídliště
+  Modřany. Why the regular routes are off those stops was not read.
+- **What it changes.** The earlier recommendation (23 routes) would leave
+  running track undrawn. Milan and Zurich draw the timetable as it runs, so
+  the recommendation to the owner is now all 28 day routes at 15 minutes or
+  better; 23 routes plus 30 and 32 (25 lines) is the smallest set that
+  covers the six stops. 37 adds no stop that 30 and 31 lack.
+- **Not decided:** the set, and what to do if label overlaps remain on
+  phones after label-end overrides. Both are the owner's.
+
+### 2026-10-13 - Tram rescope: Prague built with 28 tram routes (owner); per-route labels fail on phones, and a ten-group trial passes (the grouping is with the owner)
+
+- **Owner, 2026-10-13:** all 28 day routes ("yes your recommendations"),
+  tram 37 drawn ("draw"), and corridor grouping if label overlaps remain
+  ("corridor grouping").
+- **Built on the branch, per route.** `pipeline/prague/trams.py` (the
+  Toronto and Milan rules; a place is a stop name, since PID's node 1040
+  holds both Anděl and Na Knížecí), steps 1 and 3, config. Steps write and
+  read `data/prague/processed/tram/`. The trams read the re-pull
+  `pid_gtfs_2026-10-13.zip` (`TRAM_GTFS_ZIP`, window asserted); the metro
+  still reads the cache of 2026-09-24. `provenance.json` does not record
+  the re-pull yet: owed at landing, with a refetch.
+- **Measured:** 281 tram places, none outside the city; 34 are a drawn
+  metro station; 108 thinned to one per half mile; 139 new stations. 57
+  metro + 139 tram = 196 stations, nearest-neighbor median 477 m, closest
+  pair 153 m. 21,462 of 25,185 storefronts in a ring (17,528 before).
+  Midday headways 4.5 to 10.0 minutes; tram 23 at 30.0, not drawn.
+  Four stop names have platforms more than 200 m apart and are kept as one
+  place each (`TRAM_WIDE_PLACES`), on the names alone, not a map read.
+  Flora's tram stop is a tram station while the metro station stays listed
+  as closed for works.
+- **Per-route labels (`scripts/check_map_labels.js`, 31 labels):** no
+  problem at 1024; five overlaps at 375; sixteen at 343. At 343 the phone
+  fit shows the whole network at zoom 10.25 in about 175 by 170 px, less
+  room than 31 labels need, so moving label ends cannot clear it (not
+  tried, on that measurement).
+- **Grouping trial (session scratchpad, nothing in the repo).** Routes
+  merged by average shared track (track within 40 m, over the shorter
+  route). Ten groups: 1+25; 2+18+24; 3+17+20+40; 4+22; 5+12+15+21+32;
+  6+7+19; 8+26; 9+10; 11+13; 30+31+37. Labels "Trams 1, 25" and so on, one
+  color per group at pin floor 45 (closest pair within 500 m 41.9). 13
+  labels: no problem at 1024, 375 or 343. Eight groups leave one label
+  under the legend at 1024; twelve leave one there and one overlap at 343.
+- **The limit:** these are the project's groups, not PID's. Two routes in
+  a group share as little as 26% of their track (2 and 24), so a group's
+  color follows several streets, not one corridor.
+- **Not decided:** grouped or per route with overlaps. The owner's.
+
+### 2026-10-13 - Place search wave 1: rebuilt on the second rule batch, redundant drops removed, Melbourne's lanes admitted; the branch is complete, unrendered
+
+- **Master 4c89e15b (the second rule batch) was merged, 2,100 by-id drops the rules now cover were removed from 32 configs, and all 33 indexes were rebuilt and are committed here, before any map is rendered.** An entry was removed when a row under its cached name no longer left the index because of it (each city built twice in memory, with and without its drops; a drop on one way of a longer street was kept, since it changes the drawn line). 2,952 by-id drops and 33 reviewed names remain. Against the indexes as they stood: 3,709 rows gone (Los Angeles 3,319, its numbered alleys by rule, never dropped by id) and 255 added. Largest first opens, gzipped: Manchester 541 KB, Los Angeles 358, Houston 354, New York 331, Birmingham 325. `check_place_search.py` fails the 33 on rule A only (not rendered); `check_place_scope.py` passes 52 cities.
+- **Melbourne's nine lane words are in `PLACE_WAY_WORDS` (owner, 2026-10-13: "1. sounds good for melbourne", then "1 melbourne looks good" on the measured list): place, arcade, court, mews, terrace, close, parade, crescent, esplanade.** "drive" is left out (8 names, mostly venue roads, 3 private). They admitted 209 street rows, read by eye in this session, not by a `place-read` agent: 6 names (10 ways) were dropped by id under settled calls, three station entrance labels and two stores' own arcades (Kmart Centre Arcade, Target Centre Arcade); 203 stay. Street coverage went from 73.2% to 85.7% on the measure that counts every named highway way.
+- **The rows the two reversed rulings brought back were checked against the rebuild: Manchester's 20 Roundabouts and 10 Circles (White City Circle, which carries no junction tag, is a row), Buffalo's 9, New York's 9 and Philadelphia's 3 abandoned landmarks.** No reader re-read them: each was read once before it was dropped.
+- **Five Brooklyn Navy Yard rows a reader had kept go with the register rule (owner, 2026-10-13: "i accept your calls"):** the Historic District, Dry Dock 1, Building 77, the Navy Yard Center and the Barrier Forts Monument carry the district's register number and no Wikidata entry of their own. `config.PLACE_KEPT` would bring one back.
+- **Street coverage, on the measure that counts ruled drops as misses, with the reason beside each figure under 85%:** Los Angeles 69.0% (3,299 numbered-alley names out by rule; 89.5% before any ruling), Washington D.C. 83.3% (cycle facilities and cemetery avenues; 86.9% before), Sacramento 86.0%, Melbourne 85.7%, Manchester 95.6%. Cleanup agreed the bar should be measured against the names the rulings keep; that measure is not in the repository yet, so only this one is recorded.
+- **Six stations the builds skip as not open were added to the watch file** (Minneapolis five, `opening_date=2027-06-12`; Birmingham's second Digbeth High Street node, `construction=yes`): the not-open test now reads those tags, so their by-id drops were redundant and the watch check asked for rows.
+- **One slip, found by comparing each rebuilt index with its predecessor and put right:** the redundancy test matched an entry by its cached name, and a Washington D.C. church whose name tag holds two names joined by a semicolon was removed though still needed; the entry is back. No other added row traces to a removed entry.
+- **Left open, for Cleanup at the big review.** The render, `check_all.py` and the browser test of the 33 (the owner's word above). Toronto: caches fetched, nothing built, and `check_place_unopened.py` fails on its stub `outputs/toronto/place_search.json`. Cycle facilities in New York, Philadelphia, Miami and San Diego that the narrow rule leaves (the readers mixed proper trails into the class; none dropped by id). The web checks earlier entries name (castles, homes tagged as attractions). Manchester's "The Island" (3 ways), dropped as an interchange with its tags unchecked. The read files are in this session's scratchpad, not the repository: `reads/<city>/drops.txt` and `reads/<city>/streets/street_drops.txt`.
+
+### 2026-10-13 - Tram rescope: Prague's trams are drawn in ten groups (owner), built on the branch; the page text is a draft
+
+- **Owner, 2026-10-13:** "1 yes" to the ten groups of the entry below, and
+  the label form: "label should be Trams 1 & 25 unless that is confusing.
+  commas before final number for groups larger than 2".
+- **Label form as built (this session's reading of that sentence):** two
+  routes "Trams 1 & 25"; three or more with a comma before the ampersand,
+  "Trams 2, 18, & 24". If the owner meant "Trams 2, 18 & 24" it is one line
+  in `config.tram_group_name`.
+- **Built.** `config.TRAM_GROUPS` holds the groups and their colors (the
+  trial's, pin floor 45, closest pair within 500 m 41.9). 13 lines, 196
+  stations, 21,462 of 25,185 storefronts in a ring (85.2%; 69.6% before).
+  Station rows and excluded reasons still name the single route ("Tram 5"),
+  which is the public name of the service.
+- **Labels (`scripts/check_map_labels.js` on the built map):** no problem
+  at 1024, 375 or 343.
+- **The four wide stop names** (Vinice, Palmovka, Nádraží Holešovice,
+  Želivského) were read from the feed's platform coordinates: each is one
+  junction with platforms on its different arms. Kept as one place each.
+- **Provenance.** `provenance.json` now records the re-pull (`gtfs_trams`,
+  bytes and SHA-256 computed from the file, retrieved time from its
+  modification time) and `fetch_sources.py` fetches `TRAM_GTFS_ZIP` beside
+  the metro's copy. The fetch script was not run.
+- **Drafts for the owner (not approved):** The lines bullets and the ring
+  share sentence on `app/pages/28_Prague_Heatmap.py`, the blurb in
+  `app/cities.py`, the Stations paragraph in `docs/excluded_categories.md`.
+- **For landing:** set `TRAM_DIR = DATA_PROCESSED`, re-run steps 1 and 3,
+  update `baseline.json`; the place-search index needs a rebuild (139 new
+  stations). No drift check was run from the branch. check_all 72 of 73
+  (Mexico City's search area, known).
+- **Re-check:** `docs/recheck_calendar.md`, 10-26, when the feed window
+  ends; why 30, 31, 32, 37 and 40 run and 14 and 16 do not was never read.
+
+### 2026-10-13 - Tram rescope: the owner signs off Prague's page text and label form, and Toronto's and Mexico City's page text
+
+- **Owner, 2026-10-13:** "i sign off on all the waiting on you items
+  (unless my version of label comma is grammatically incorrect)". The
+  items put to the owner were: Prague's page text (The lines bullets, the
+  "more than eight storefronts in ten" sentence, the Overview blurb), the
+  label comma, and the page text of Toronto and Mexico City.
+- **The label comma stays as built**, "Trams 2, 18, & 24". A comma before
+  an ampersand is not a grammatical error; it is a style choice (the
+  Chicago Manual drops it, "2, 18 & 24"). Reported to the owner as that,
+  with the one-line change in `config.tram_group_name` if they prefer the
+  other.
+- With Milan approved earlier the same day, all four rescoped cities'
+  page text is approved. Landing is Cleanup's, at review time.
+
+### 2026-10-13 - Place search wave 1: rebuilt on the third and fourth rule passes with the Wikidata lookup read; 13 redundant drops removed; unrendered
+
+- **Master 50d551f4 (the third and fourth rule passes) was merged with no conflict, the Wikidata lookup was run for the 33 cities, and all 33 indexes were rebuilt and are committed here unrendered.** The lookup ran as one heavy job, one city after another: 1,262 entries asked in 52 requests, 696 with an article, one San Francisco entry missing on Wikidata, no batch refused. Each cache is `data/<city>/raw/wikidata_articles_<date>.json` (a new file name beside the place cache) and each city's `provenance.json` gained `place_search_wikidata`. No Overpass request was made and no step ran for a city on master.
+- **No index step stopped:** no stale `PLACE_DROPPED` or `PLACE_KEPT` id, no station without a place, no entry missing from a cache. `PLACE_KEPT` was not used.
+- **Measured against the indexes at cf9155f3: 307,677 rows to 306,979; 810 gone, 112 new** (`data/_search_rollout/wave1_rules34/changed_rows.md` and `.json`, every row listed with the rule class from the build's own log). Gone: 436 libraries and 289 works of public art with no article of their own, 46 private residential streets, 13 station outlines beside their station's row, 9 monuments drawn in segments, 8 site relations that repeat another row, 8 bare type words behind an article ("The Lawn", "The Tower", "The Piazza"), one bus transit center. New: 110 streets (public on foot, by the foot-access rule) and Blackpool's Tower tram stop (the station guard). A river row that only gained its way's id in the side file is counted as the same row.
+- **Public art and libraries, every named object of the caches: art 351 kept by the tag, 108 kept by Wikidata, 5,191 held out; libraries 95, 96 and 1,532.** Most held out carry no entry and were never rows. The five largest indexes, as art tag / Wikidata / out, then libraries: Manchester 2/1/102 and 5/0/83; Los Angeles 6/10/307 and 3/13/111; New York 76/7/380 and 15/8/229; Houston 24/4/218 and 4/3/48; Birmingham 27/2/508 and 6/1/57. Washington D.C. keeps the most by Wikidata (46 works, 28 libraries).
+- **The redundant-drops pass removed 13 by-id entries from six configs** (Glasgow 1, Los Angeles 2, New York 4, Kitchener-Waterloo 1, Ottawa 3, Edinburgh 2); 2,939 remain. The name test of the earlier pass proposed 53; each was then proved one at a time, and an entry was removed only when the build without it equalled the build with it (rows, street lines, row ids, intersections). 40 proposed entries were still needed and stay (Minneapolis's four city-limit signs, New York's fourteen demolished el stations): the name test alone would have brought rows back.
+- **`check_all.py`: 71 of 73 pass.** `check_place_search.py` fails the 33 on rule A only (an index no map uses: the render is Cleanup's, at the big review). `check_place_unopened.py` fails on Toronto's stub `outputs/toronto/place_search.json`, as before this rebuild. `check_render_current.py`, `check_place_scope.py` (52 cities) and `check_provenance.py` pass.
+- **Not read by eye, and left open as judgment calls.** (1) 130 rows went although their Wikidata entry has an article, because another object of the cache carries the entry: New York's "John Lennon's Imagine" mosaic (the Strawberry Fields entry), Washington's "Three Servicemen Statue" (its memorial way carries the same entry and stays), Philadelphia's AMOR, New York's Balto, about 100 Birmingham works that carry their station's or their trail's entry, and 19 New York Public Library branches under the system's entry. (2) Edinburgh's mural "Frederick Douglass" (way/1474280377) is kept by the lookup on the person's entry (Q215562, 73 articles; no subject tag says so): a by-id drop if the subject-entry ruling is meant to reach it. (3) Minneapolis's Walker Library (way/45415844) goes because a venue in its old building carries its entry; Miami's Arcola Lakes Branch Library (node/3151901058) goes although its cached entry has two articles. (4) Known works with an entry and no article in any language go: Houston's Broken Obelisk, Los Angeles's Giant Binoculars, the New York Public Library's lions Patience and Fortitude, Manchester's Albert Memorial, Dublin's Five Lamps and Children of Lir, and 22 works of the Minneapolis Sculpture Garden. (5) The 110 new streets were not read by a `place-read` agent; some read as descriptions (Houston's four "Fannin Station East/North/South/West", "Terminal B Bus/Taxi Lane", Dublin's "Arrivals Road", Nottingham's "Bus Link", "Stone Path", "Opened Levee Path"). (6) The 204 rows the lookup keeps were listed, not read one by one.
+
+### 2026-10-13 - Place search wave 1: the checked flags applied by id; nine known works kept by id; 32 indexes rebuilt, unrendered
+
+- **Master c4714367 was merged with no conflict (so `PLACE_KEPT` beats the article rule), and the three lanes' verdicts on DeepSeek's flags were applied to 32 of the wave's 33 configs under the owner's rulings of 2026-10-13, as Cleanup relayed them.** Input: `data/_search_rollout/wave1_flag_check/` (`lane_A.tsv`, `lane_B.tsv`, `lane_C.tsv`, `new_streets.tsv`: 260 drops, 95 unsure rows, 12 already reviewed). Every id was checked against its cached name before it was written, with no mismatch. No network request was made. The full list is `applied.md` in that folder (not committed: `data/_*/` is ignored).
+- **Dropped by id: 193 rows, 204 ids.** 179 were lane drops (12 of them the new streets: 8 descriptions and Houston's four "Fannin Station" complex roads) and 14 were unsure rows settled as drops. 28 of the 193 are housing developments mapped as places (the owner: "2 drop by id"): New York's three "X Houses" nodes, Philadelphia's Abbotsford Homes, Los Angeles's six "X at Porter Ranch" and "The Legends at Cascades", San Diego's two "The X at Y" and its 11 "Villa" nodes in one district, and four more of the kind. Edinburgh's mural "Frederick Douglass" (way/1474280377), admitted on its subject's Wikidata entry, is one of the 193. The ids outnumber the rows because a street is dropped by each of its ways and five rows had a second object of the same name and class beside them (Kansas City's "Veterans Monument", Ottawa's "Iltis", San Diego's "Aztec Bowl seats", Los Angeles's "The Heights at Porter Ranch", Newcastle's "ampitheatre"); the last two were found by the rebuild, which left their rows standing.
+- **The unsure rows were settled by the existing rules (the owner: "4, settle by existing rule"): 21 kept, 14 dropped, 58 left in the index as still unsure.** Kept on a tourism tag or an article of the object's own: The Dakota, Temple of Dendur and Knowsley Hall (named by the owner), Skinny House, Mish House, the Wyckoff-Bennett-Mont residence, Twin Oaks, 1100 Wilshire, The Penn Club (the article is the building's), Biddle House (`access=yes`), Pellman Cottage (a ruin), Ottawa's "St. Barnabas Church," (an article of its own; the trailing comma is OpenStreetMap's), four Playa Vista parks tied to an estate only by name, the Golden Gate Fortune Cookie Factory, House of Air, Magowan's Infinite Mirror Maze and "gas monkey live" (commercial attractions with a tourism tag), and Edmonton's Union Bank Inn (the Panama Hotel precedent). Dropped: the Knickerbocker Clubhouse (a private club with no article), Washington's Moishe House (a communal residence), Prospect Studios (a business with nothing else) and the 11 "Villa" nodes. **An article was read from the object's own `wikipedia` tag only:** the cities' Wikidata caches hold public art and library entries, so no unsure row's entry was in one. The 58 still unsure are rows the tags do not decide (San Diego's 11 business parks and centres tagged places, lodges and tower houses with no sign of who lives there, ships with no tourism tag, three campus and terminal streets).
+- **No keep was written to `PLACE_REVIEWED`, against the instruction.** Check E of `check_place_search.py` fails on a reviewed name that carries no leak word, and none of the 21 does. Each keep sits with its reason in a comment block above `PLACE_REVIEWED` in its city's config. The lanes' 12 reviewed keeps were already entries.
+- **Nine known works are kept by id in `PLACE_KEPT`** (the owner, for the live cities: "yes if not costly"): New York's John Lennon's Imagine, Balto, Patience and Fortitude; Washington's Three Servicemen Statue; Philadelphia's AMOR; Houston's Broken Obelisk; Los Angeles's Giant Binoculars; Manchester's Albert Memorial. Each has a row after the rebuild. The Five Lamps and Walker Library were left dropped, as ruled.
+- **Left for a shared rule and not touched: 82 rows** (`left_for_rules.tsv`): 77 places of worship named only by a denomination or a hall type (one of them an unsure row, Pittsburgh's "Reformed Presbyterian Church of North America"), the Capitol subway's three `access=private` stations (Hart, Rayburn and Russell; the ruling named two), and Boston's Boylston and "Green". Fourteen other place-of-worship drops were applied, because the lane's reason was not the name's class: nine church bodies' offices, a business, a duplicate building, a mapper's description ("Prominent Church"), a coded name at an apartment address and Newcastle's "St Mark (closed)".
+- **Two lane drops were not applied, on the tags:** New York's Circle Line (way/278353405, `tourism=attraction` with the attraction's article; the owner's ruling 7 of the sixteen keeps a ticketed commercial attraction with an article) and San Diego's Las Americas Premium Outlets (way/31554299, `tourism=attraction` with a Wikidata entry). Both go back to the owner.
+- **The 32 changed cities were rebuilt through the job gate, three at a time; no step stopped.** 300,403 rows to 300,219 (184 fewer: the 193 dropped rows less the nine kept). Every dropped row is gone and every kept row present, checked by id and by name within 400 m; checks E and F pass on the 32; no comment carries an em dash. Tucson did not change. Nothing is rendered.
+
+### 2026-10-13 - Place search wave 1: the 58 unsure rows settled on a one-off Wikidata lookup; 22 dropped, 3 kept, 33 left in; four estate parks dropped; ten indexes rebuilt, unrendered
+
+- **The owner approved a one-off Wikidata lookup for the 58 rows the flag check left unsure, outside the kinds the fetch script is narrowed to (owner, 2026-10-13: "all approved").** Ten of the 58 objects carry a `wikidata` tag; the other 48 carry none and nothing was asked about them. The ten ids went to `wbgetentities` (`props=sitelinks`) in **one request on 2026-10-13**, through `pipeline/place_wikidata_fetch.py`'s own `ask_batch`, `_fetch` and `parse_entities`, imported and unchanged, under its conduct rules and its own User-Agent; no retry was needed. **Four entries have a Wikipedia article and six have none.** The answers are in `data/_search_rollout/wave1_flag_check/unsure_wikidata_2026-10-13.json` (scratch, ignored by git); no city's `wikidata_articles` cache was written and no provenance recorded. The fetch script and the narrow lookup rule are unchanged.
+- **Dropped by id, 22 rows.** San Diego's 11 business parks and centres mapped as a quarter or neighbourhood by one mapper, none with a Wikidata entry (the owner's ruling): Otay International Center, Plaza Sorrento, Rancho Bernardo Business Park, Rancho Peñasquitos Town Center, Sabre Springs Town Center, Science Research Park, Scripps Ranch Business Park, Scripps Ranch Technology Park, Spectrum Center, University Towne Center and Uptown Medical Complex. Los Angeles's American Gold Star Manor (a seniors' housing complex) and San Fernando Gardens (a public housing project), both mapped as neighbourhoods with no entry. Homes: New York's George F. Baker Jr. and Sr. Houses (an article of their own, no tourism tag: the "homes with an article and no home tag" class), Edmonton's Oblats Maison Provinciale (a religious residence; its entry is the heritage register's, no article), Manchester's North Lodge (a listed lodge, entry with no article), Newcastle's Dial Cottage (named a home by its own name) and Lizard House (a house mapped as a locality, as Nottingham's Wiverton Hall). Businesses with nothing else: Sheffield's St Mary's Catholic Club (a social club tagged a place of worship, with a food premises number; no article) and Melbourne's Rooftop Cinema (no article). Bare type words: Edinburgh's "Fort" (no entry) and Los Angeles's "Botanical Garden" (way/467345451), whose entry has an article but is also on way/158612447 "Rainforest", so the article is the whole garden's and not this section's own.
+- **Kept, 3 rows, each noted above `PLACE_REVIEWED` as the earlier pass did:** Glasgow's Balgray Tower (`historic=castle`, an article of its own), Los Angeles's Villa Aurora (an article of its own in three languages and an institution's website on the object; no tag marks it a private home) and Newcastle's "Anglican Mortuary Chapel (derelict)" (a standing derelict chapel with an entry of its own and no article: a standing abandoned landmark stays whatever its article).
+- **Still undecided and left in the index, 33 rows; 32 carry no Wikidata entry, so the lookup had nothing to say about them.** New York: Mary A. Whalen (a ship with no entry on the object), Dale Avenue and Martin Luther Avenue North (one private way each; Dale Avenue also has a public residential way). Philadelphia: Baptist Ushers Brotherhood, Ten Box, Winston Commons. Washington: Earthquake Overthrust Fault. Los Angeles: Ernest E. Debs. San Diego: Cañonto Martha, Eureka Lemon, Onap (San Buenaventura). San Francisco: No Temas El Señor Esta Contigo, Sinai Memorial Chapel. Houston: The Home of Easy Credit, Weslayan Plaza. Minneapolis: On the Plaza. Kansas City: Blue Level Terrace. Sacramento: Sacramento Valley Conservancy. Miami: Holiday Acres, Sun-Tan Village. Edmonton: ATB Place. Calgary: Nostalgia Townlet, Rose Ranch. Dublin: MV Cill Airne. Birmingham: Wolse Basin, Wolves Indoor Football Academy, Muffin's Den. Manchester: Medlock Diversion Tunnel. Liverpool: 35 Rodney Street (the one with an entry: a listed building's, no article; the tags do not say what the building is used for). Sheffield: St Thomas Philadelphia Conference Centre and Playtime Centre, Kelham Island Community. Kitchener-Waterloo: Transit Plaza Road. Each needs a look at the place or a web check, which this task did not allow.
+- **Four Los Angeles "parks" that are amenity spaces of one housing development are dropped by id (owner, 2026-10-13: facilities of an apartment estate tagged a park are dropped):** way/563505217 "Common Grounds", way/484279014 "Kinesthetics", way/562954916 "The Lounge", way/562958436 "The Pointe". The earlier pass had kept them as parks tied to an estate only by name; their keep notes are removed. This narrows that line of the third pass for these four: none carries an operator tag, so `ESTATE_OPERATOR` still does not reach them and they stay by-id drops.
+- **Judgment calls in these verdicts, for the owner to reverse by id if wrong:** the Baker Houses are dropped on the name alone (no tag says whether anyone lives there); University Towne Center is dropped with the other ten although the district also uses the mall's name; "Fort" may be Leith's Fort district; North Lodge and Lizard House are dropped on a house word with no home tag; Villa Aurora is kept although it is an artists' residence.
+- **Ten configs changed and their indexes were rebuilt through the job gate, three at a time; no step stopped.** Every id was checked against its cached name before it was written. Rows in the ten: 126,118 to 126,092 (26 fewer: 22 and 4); the 32 indexes of the flag check, 300,219 to 300,193. Glasgow's config changed by a comment only and its index is unchanged. Every dropped row is gone and every kept row present, by id in `place_ids.json` and by name. `check_place_search.py` fails the 33 on rule A only (not rendered); no comment carries an em dash. Nothing is rendered.
+
+### 2026-10-13 - Tram rescope: landing preparation, the four cities back on their normal processed paths (Cleanup, nothing pushed)
+
+- **Owner, 2026-10-13:** approved starting the landing preparation. Done on
+  the branch by a Cleanup agent; nothing pushed, master not merged in.
+- **Flipped:** Toronto's `STATIONS_CSV` and `STREETCAR_SHAPES_JSON`, Milan's
+  and Prague's `TRAM_DIR`, and the `cable` part of Mexico City's
+  `DATA_PROCESSED`. Each city's steps were then re-run and write the shared
+  `data/<city>/processed/` (Mexico City: `processed/regional/`).
+- **Re-run, against the approved figures (all match):**
+  - Toronto, steps 1 to 4: 174 stations (108 + 66), 11,803 of 18,215
+    storefronts in a ring.
+  - Milan, steps 1 to 3: 193 stations (104 + 89), 22 lines, 45,999 of 47,540.
+  - Prague, steps 1 to 3: 196 stations (57 + 139), 21,462 of 25,185.
+  - Mexico City, steps 1 to 3: 208 stations, 427,123 storefronts written,
+    427,121 on the map, 175,939 in a ring.
+- **Drift:** zero in all four; every `outputs/<city>/` file is identical to
+  the committed one (the maps after Folium-id normalization). Each new
+  station and shape file is byte-identical to the branch-only copy it
+  replaces.
+- **Baselines updated:** Toronto five new figures, Milan six, Prague six and
+  `stations_excluded` 1 to 109 (the 108 thinned tram stops), Mexico City
+  twelve figures moved to the five-municipio counts.
+- **Judgment call: Prague's and Mexico City's drift check ran without
+  `step2b_place_index.py`.** The search rebuild waits for a rule landing, and
+  the full check would have rebuilt both indexes on the new stations. The
+  other steps ran through `drift_check.py`'s own functions (offline guard,
+  output and baseline comparison) from a scratch wrapper. Neither index was
+  touched.
+- **Judgment call: Prague's feed was not refetched.** The entry of the same
+  day already recorded the re-pull in `provenance.json` from the cached
+  file; its bytes and SHA-256 were re-measured and match. A refetch would
+  have had to change `TRAM_GTFS_ZIP` and could have moved the approved
+  station set for no gain.
+- **Left in place:** `data/<city>/processed/tram/` (three cities) and
+  `data/mexico_city/processed/regional/cable/`, now unused copies. The
+  dry-run blocks at the foot of `streetcars.py` and both `trams.py` read
+  `stations.csv` as the metro-only set and are stale since the flip; each
+  carries a comment saying so.
+- **Checks:** line identity 0 problems; provenance names all four OK;
+  `check_all.py` 72 of 73, the one failure Mexico City's check H (San
+  Isidro, the stale search index, as before).
+- **Until the branch lands, master's code reads the new station files**
+  from the shared folder: a master drift check or index step for these four
+  cities sees 174, 193, 196 and 208 stations.
+
+### 2026-10-13 - Place search wave 1: rebuilt on rule passes 5 and 6; 604 rows left, 2 returned; unrendered
+
+- **Master e0138000 (rule passes 5 and 6) was merged with no conflict and all 33 indexes were rebuilt, each by its own index step through the job gate, one at a time.** The place and Wikidata caches on disk were read; no request of any kind was made, no step stopped, and no index step asked for a Wikidata entry its cache lacks. No config changed: no by-id drop or keep was added or removed. Nothing is rendered.
+- **Rows: 306,771 to 306,169; 604 left and 2 returned** (every row, with its OSM id, rule class and tags, in `data/_search_rollout/wave1_rules56/<city>.tsv`; totals in `summary.md` there; neither is committed). Left: 597 places of worship named only by a denomination, chain or hall type (`worship_type`: 128 "The Church of Jesus Christ of Latter-day Saints", 199 Kingdom Halls and Jehovah's Witnesses rows under 23 spellings, 43 "Church of Christ"), Sheffield's "Diocese of Hallam Pastoral Centre" (`worship_office`) and the six `access=private` station rows of the Capitol subway in Washington D.C. (Hart, Rayburn, Russell, Dirksen and two "U.S. Capitol"). Returned: Boston's Boylston and New York's World Trade Center, each a station of its map that had been folded into the row of a neighbour sharing its Wikidata entry (`complex_kept_apart`). Largest changes: New York 82 fewer, Los Angeles 65, Birmingham 47, San Diego 34, Houston 26, Calgary 25. Melbourne is unchanged. Intersections are unchanged in every city (545,513).
+- **The 82 rows left for a shared rule: 72 are taken, 10 are still rows** (`left_for_rules_reconciled.tsv`). Taken: 69 of the 77 places of worship and the three Capitol subway stations. Still rows, each holding a word the lists do not: New York's "La Sinagoga", Pittsburgh's "Reformed Presbyterian Church of North America", Ottawa's "Paroisses Catholiques Romaines", San Francisco's "Casa de Oracion", Houston's "Iglesia Evangelica", Edmonton's "Ukrainian Orthodox Church of Canada", Birmingham's "Mosque & Islamic Centre" and Newcastle's "Society of Saint Pius X". Boston's "Green" is still a row (its `name` in OpenStreetMap, recorded as not mended) and Boylston is a row again, which was the fault.
+- **Possible wrong drops, listed for the owner and not acted on.** The denomination rule keeps a row only on a `wikipedia` tag of its own or an entry in the city's Wikidata cache, and the cache holds public art and libraries only, so a church with a Wikidata entry and no `wikipedia` tag goes. Fourteen dropped rows carry a register tag. The ones that read as known buildings: Los Angeles node/358828101 (`wikidata=Q8022900`, `alt_name=Wilshire Ward`), Manchester's Friends Meeting House way/31231628 (`wikidata=Q26579212`), Dublin's Unitarian Church way/230568525 (`heritage=4`), and Sheffield's "Church Of Christ" way/108732648 (`denomination=anglican`, `wikidata=Q105102971`: an Anglican church under a name the rule reads as a denomination's). Whether each entry has an article was not checked: no request was allowed.
+- **No wave 1 `PLACE_REVIEWED` entry is one the check no longer needs.** Across every searched city on this branch 58 are (Seoul 37, Paris 17, Busan 2, Brussels 1, Marseille 1: junction rows and French mansions), listed in `reviewed_not_needed.tsv`; none was removed, and none is stale.
+- **Toronto was not built.** It has place caches and no Wikidata cache; a build in memory (nothing written) gives 14,157 rows, 478 of them stations, on the shared 174 stations, every one with a place near it, and 43 Wikidata entries a lookup would have to ask first. It has never had an index, so there are no station rows before.
+- **`check_all.py`: 70 of 73.** `check_place_search.py` fails the 33 on rule A only (not rendered). `check_place_unopened.py` fails on Toronto as before. `check_macro_facts.py` fails on Mexico City (Regional), 407,628 recorded against 427,121 in the shared processed data: the tram rescope's steps were re-run in the shared `data/` ahead of its landing, and `regen_generated.py` rewrote `app/macro_facts.json` after the merge for that reason alone; the rewrite was put back, since Mexico City is another lane's.
+
+### 2026-10-13 - Place search wave 1: four places of worship kept by id, eight dropped by id, Toronto built; unrendered
+
+- **The owner kept the four possible wrong drops of the entry below by id (owner, 2026-10-13, relayed by Cleanup: "keep all four by id").** In `PLACE_KEPT`, each with its deciding tags: Los Angeles node/358828101 (the Wilshire Ward chapel, `wikidata=Q8022900`), Manchester way/31231628 (the Mount Street Friends Meeting House, `wikidata=Q26579212`), Dublin way/230568525 (the Unitarian Church on St Stephen's Green, `heritage=4`) and Sheffield way/108732648 ("Church Of Christ", `denomination=anglican`, `wikidata=Q105102971`). `PLACE_KEPT` beats the denomination rule as written (`kept_ids` is tested before the article test), so no shared code changed. Each row is back after the rebuild, by id in `place_ids.json`. The nine weaker cases stay dropped. Dublin and Sheffield gain a `PLACE_KEPT` block.
+- **The eight places of worship the rules still left as rows are dropped by id, under the owner's rulings of 2026-10-13 on worship named only by a denomination, a body or a chain (relayed by Cleanup).** New York node/5171173318 "La Sinagoga", Pittsburgh node/357376630 "Reformed Presbyterian Church of North America", Ottawa way/294669471 "Paroisses Catholiques Romaines", San Francisco node/13724228886 "Casa de Oracion", Houston way/1326179987 "Iglesia Evangelica", Edmonton way/323353112 "Ukrainian Orthodox Church of Canada", Birmingham way/300020975 "Mosque & Islamic Centre", Newcastle way/401459740 "Society of Saint Pius X". Each id was read against its cached name and tags first; none carries a `wikipedia` or `wikidata` tag. Each row is gone after the rebuild.
+- **Twelve indexes rebuilt through the job gate, one at a time; the 33 hold 306,165 rows** (306,169 less the eight, plus the four).
+- **Toronto is built on the shared 174 stations (108 and the tram rescope's 66 streetcar stops), and is unread.** The Wikidata lookup was approved for it (relayed by Cleanup, 2026-10-13) and run once with the script's own conduct, after checking that no other lookup was running: 72 entries asked in two requests (the script asks every public art and library entry of the cache, where the index step needs 43), 32 with an article, none missing; cache `data/toronto/raw/wikidata_articles_2026-10-12.json`, recorded in `outputs/toronto/provenance.json`. The index: **14,160 rows: 478 stations, 2,498 landmarks, 409 places, 10,775 streets; 21,794 intersections**; first file 1,001,403 bytes. All 174 stations sit in the one area and each has an indexed place within the step's distance, so check H passes. `check_place_unopened.py` now passes: its failure was the stub `place_search.json`, which the build replaced.
+- **Toronto, open for the reader and the owner.** (1) **Seven stations the map draws have no station row within 500 m**: Avenue, Fairbank, Forest Hill, Keelesdale, Laird, Oakwood and Wynford, the Eglinton line's, which the cache of 2026-10-12 tags `disused:public_transport=station` and the build drops as closed (nodes 2939406800, 2497449178, 12695332354, 13429325097, 10129010418, 2497449187, 13335979104). The station guard did not keep them: the map names them "Avenue Station" and OpenStreetMap "Avenue", and Toronto's config sets no `PLACE_STATION_STRIP`. The other 167 have a station row within 250 m (163 within 100 m). Not changed here. (2) **Check E fails on three names**: "Former Cherry Street Hotel", "Pharmacy" and "Pharmacy Avenue"; the last two read as a street and its stop, for `PLACE_REVIEWED` once read. (3) No row was read by eye; `PLACE_DROPPED` is empty.
+- **Added after the commit: the guess about `PLACE_STATION_STRIP` was tested and is wrong, and Toronto's config is unchanged.** Four builds in memory, nothing written: as committed, 478 station rows and the seven Eglinton stations out; with `PLACE_STATION_STRIP = (" Station",)`, the seven still out and eleven other station rows renamed or merged ("Union Station" to "Union", "Main Street Station" folded away; 477 rows); with the seven ids in `PLACE_KEPT`, and then in `PLACE_CLOSED_FOR_WORKS`, no change. The cause is in shared code: `station_closed()` (a `disused:` prefix on `public_transport`) is applied before any guard, where the three tests after it (no passengers, private access, out of service) each spare a station the map draws; and the map's names carry "Station" where OpenStreetMap's do not, so a guard by name would not match these seven either. What would do it, for Cleanup: let `PLACE_KEPT` or `PLACE_CLOSED_FOR_WORKS` keep a station by id against the closed test, or a newer cache once the mappers retag the line. Until then 167 of Toronto's 174 map stations have a station row within 250 m; the seven are found by their streets and places only.
+- **`check_all.py`: 71 of 73.** `check_place_search.py` fails 34 cities on rule A (not rendered) and Toronto on the three check E names as well; `check_macro_facts.py` fails on Mexico City (Regional) as in the entry below, and `app/macro_facts.json` is left as committed.
+
+### 2026-10-13 - Place search wave 1: Toronto's eye read applied; 44 rows dropped by id, three names reviewed
+
+- **The 44 rows a `place-read` agent marked `drop` in Toronto's index are in `PLACE_DROPPED` by id, grouped by class with the ruling that decides each** (`data/_search_rollout/reads_rules56/toronto.tsv`, 114 rows; relayed by Cleanup). Descriptions 10, glitched names 5, homes 2, businesses 2, places of worship named only by a body 17, a religious residence 1, a vanished hall 1, duplicates 4, markers under another object's name 2. Every id was checked against its cached name before it was written. **The 70 rows marked `unsure` are untouched and with the owner**, the Baitul Wahid alias among them.
+- **Three names are in `PLACE_REVIEWED` for check E:** "Former Cherry Street Hotel" (a heritage building with an article of its own), "Pharmacy" (a Line 5 station) and "Pharmacy Avenue" (its street).
+- **Rebuilt through the job gate: 14,160 rows to 14,116**, the 44 and nothing else; none of the 44 ids is in `place_ids.json`; intersections 21,794. `check_place_search.py` fails Toronto on rule A only (not rendered). One drop to note: way/137923889 "Morgan Meighen & Associates" carries `wikipedia=en:Toronto Street Post Office` and `old_name=Toronto Street Post Office`; it goes as a tenant's name on the building, so the post office has no row under either name.
+
+### 2026-10-13 - Tram rescope: master merged in; place search rebuilt for Mexico City and Prague and built for Milan (Cleanup agent, nothing pushed, no map rendered)
+
+- **Merge.** `origin/master` (e0138000) into `tram-rescope`, 788ae80c. No
+  conflict: both configs merged by git, each side's settings kept.
+  `app/ring_shares.json` regenerated. The four cities then showed zero drift
+  with the index step left out (the scratch wrapper of the entry below).
+  `check_macro_facts.py` passes; Mexico City (Regional) reads 427,121.
+- **Mexico City (adb4c5c1).** `PLACE_AREA` gains Tlalnepantla de Baz
+  (relation 5606521; 4 drawn stations). The six-area caches read earlier the
+  same day from the held extract (mexico-261012, data 2026-10-12T20:21:35Z)
+  were adopted by copy under new names, `osm_places_2026-10-13.json` and
+  `osm_places_extra_2026-10-13.json`, and recorded in provenance by the
+  extract route's own recorder; the script's kept-cache area check passes.
+  The five-area outline is kept as
+  `osm_place_outline_v1_five_areas_2026-10-12.json`. No refetch.
+  - **Judgment call: the Wikidata cache was copied to
+    `wikidata_articles_2026-10-13.json` before the lookup**, since the cache
+    name follows the place cache's and a fresh name would have asked every
+    id again. One request, one new id.
+  - Rows 61,199 to 67,345 (streets 55,682 to 61,711, places 2,986 to 3,023,
+    landmarks 2,290 to 2,391, stations 240 to 219, junction 1). The index
+    was last built before the rule passes of 2026-10-13, so the change
+    mixes the area and the rules.
+  - Check H passes on its own; `KNOWN_GAPS` is empty again. San Isidro is a
+    Mexicable terminal, so it is no station row by rule; it is covered by
+    the places around it and found from the map's own station list.
+  - 223 non-street rows are new to the cache (182 landmarks, 39 places, 2
+    stations). Seven dropped by id under the bare-type and description
+    rulings of 2026-10-11 (Glorieta, Explanada, obelisco, CANCHAS
+    DEPORTIVAS with two spaces, Parque Para Perros, Parque con fuente, Area
+    Comun/Canchas de Basquetball). Two street names reviewed for the leak
+    word "s.a." (Avenida A.N.D.S.A. and its alternate Calle 2 de Abril).
+  - **For the owner, 14 rows** in `data/_search_rollout/tram_rules56/mexico_city.tsv`
+    (verdict unsure), each with a recommendation.
+- **Prague (ef1e64eb).** Rebuilt from the caches of 2026-10-08 on the 196
+  stations; no request. Rows 10,790 to 10,435. Check H passes: no tram stop
+  is without an indexed place within 1 km, and no quiet station is listed.
+  Station rows are OpenStreetMap's (431 to 429, two merges), not the map's
+  196: the map's stations reach the box from the map itself.
+  - Every departure is a landed rule of 2026-10-13: 292 works of public art
+    with no article, 36 boundary relations repeating another row's entry,
+    11 libraries, 5 street ways as landmarks, 4 halls named by denomination,
+    4 segment merges, 3 private living streets, the city's own boundary.
+  - **For the owner: 18 boroughs now have no row under their own name**
+    (Praha 1, 3, 4, 7, 9, 10, 14, 16, 18, 20, 22 and seven "Praha-X"). The
+    row that keeps each one's Wikidata entry is its TOWN HALL, a landmark,
+    not a place node. Recommendation: the site-relation rule should fold a
+    boundary only into a place row; a rule change, so the protocol's.
+- **Milan (e1ed8d65).** No built Italian city gave an admin level, so the
+  area lookup left it for a person. **Judgment call, by the scope rule: the
+  Comune di Milano, relation 44915 (admin_level 8)**, the boundary the
+  businesses are cut to; all 193 stations sit in it. One extract download
+  (nord-ovest-261013, 593 MB), no Overpass request, two Wikidata requests
+  for 64 ids.
+  - 6,149 rows: 4,378 streets, 996 landmarks, 482 stations, 293 places;
+    8,798 intersections. Italian 100%. Check H passes.
+  - **Judgment call: 527 ways dropped by id as stop platforms.** Milan draws
+    stop platforms as `highway=footway` with `public_transport=platform`,
+    named for the stop ("V.le Sarca Via Chiese"), and the street pass read
+    372 such names as streets. A platform is no street by the first row of
+    the exclusions record; the rule reads `highway=platform` only. Prague
+    has 20 such names, Mexico City none; other cities were not measured.
+    Recommendation: a rule on the platform tag, which would replace the
+    list.
+  - Also by id: three descriptions, ten places of worship named only by
+    their body or denomination (the Italian list does not hold them), one
+    locality named as a person's house. "Albergo diurno Venezia" reviewed
+    as a place.
+  - Street coverage 84.0% of named-way names after the platform drop
+    (91.1% before); the names left out are footways (514, the platforms
+    among them), platforms (134), service roads (92).
+  - The eye read: the `place-read` agent read all 1,006 landmark and 295
+    place rows line by line; the caller read the 482 station rows; streets
+    were screened by pattern, not read. 102 rows are with the owner in
+    `data/_search_rollout/tram_rules56/milan.tsv`: 33 "Casa X" historic
+    buildings (no Italian house lead in the lists), 26 farmsteads and mills
+    tagged places, 4 tram stops closed in 1978, 14 second rows, others.
+  - **Owed before Milan's map is rendered:** `map_common.LANG_WORDS` has no
+    Italian entry on this branch (the matcher words are on another branch).
+  - The scaffold set `search='milan'` on the page; the bullet is the
+    template's. No other page text is needed (flag for review time).
+- **Owner, 2026-10-13 ("all approved"), relayed by Cleanup and applied by
+  id, each id checked against its cached name:**
+  - Milan's search area is approved (relation 44915). The 527 platform ways
+    stay by id until the shared rule on the platform tag replaces them. The
+    street names flagged by pattern are left alone.
+  - Mexico City, 7 dropped: the park "Alcoholicos Anonimos", Center Park
+    and FUNO Center, "IJSUD", the street altar, the second cathedral node,
+    the locality "Jardines del Recuerdo". The other seven stay. Rows 67,345
+    to 67,338.
+  - Milan, 31 ids dropped: six "Casa X" buildings with no article of their
+    own (Castini, Cicchieri, Pirovano, Rovida, del Cedro, and Casa a Igloo,
+    whose article is the Maggiolina quarter's); the four tram stops closed
+    in 1978; East Garden, La Viridiana, Giunglabuca, EuroMilano; Milano 2
+    and Pero; Armenia Films, Hayabusa Reiki Dojo, Lanciatore Vega,
+    PalaSharp, Tranvia Milano-Lodi, Precotto (Interno deposito); the grotto
+    under a church's name; and eight true duplicates (Cassina Triulza,
+    Ronchetto Sul Naviglio, the census area Parco Sempione, Stadio San Siro
+    Milano, Giardino Gonin Giordani, Giardino Mario Capponi, Parco di via
+    Dezza, the node Circo Romano). Rows 6,149 to 6,119: 30 rows for 31 ids,
+    one id's row having been its twin's.
+  - Kept: the 27 "Casa X" with an article, the 26 farmsteads and mills, the
+    census-area names (Ticinese, Adriano, Comasina among them), "Ultima
+    Cena" (node 304775593).
+  - **Judgment call, two pairs left as they are:** "Cascina Melghera" (two
+    nodes 2.6 km apart, which one is misplaced is not known from the tags)
+    and the two Quintosole church rows 20 m apart under different names.
+    Neither is a duplicate the tags settle.
+  - Check H, check E, the scope check and the index drift check pass for
+    both cities. The verdict lists in `data/_search_rollout/tram_rules56/`
+    are the read as it stood before these rulings.
+- **Checks.** `check_all.py`: one failure, `check_place_search.py` rule A for
+  the three maps not rendered since their index step. Scope check OK (20
+  cities), index drift OK, provenance names the three OK.
+
+### 2026-10-13 - Place search wave 1: the owner's rulings on Toronto's 70 unsure rows; 30 more dropped by id, one restored
+
+- **The owner ruled on the 70 rows Toronto's eye read left unsure (2026-10-13, "all approved", relayed by Cleanup).** DROP: the 16 city parcel names on parks ("Road Allowance", "Traffic Island", "Boulevard Lands" and the like: a description of the land), the 8 places of worship named by a body (the denomination ruling) and the 6 condominium, co-op or office-estate grounds tagged a park (the estate-facility ruling). KEEP, as the rows they are, with no config entry: the 15 parks named by a street address (the city's official parkette names), the 10 duplicates and stray points, and every other unsure row (14, the Baitul Wahid alias among them). RESTORE: way/137923889 "Morgan Meighen & Associates", a tenant's name on the old Toronto Street Post Office, which has an article of its own: the building is the landmark, so its by-id drop of the entry below is removed and a comment in the config says so.
+- **Applied by id in `pipeline/toronto/config.py`, 30 entries in three groups, each citing the ruling; every id was checked against its cached name.** "Bathurst St Slopes" is four ways of one name, so its other three (way/224917752, 224917753, 224917754) are dropped with it: the first rebuild left the row standing on the next way. `PLACE_DROPPED` holds 76 ids (44, less the one restored, plus 30 and 3). **Rebuilt through the job gate: 14,116 rows to 14,087** (30 fewer, one more); none of the 76 ids is in `place_ids.json` and way/137923889 is; intersections 21,794. `check_place_search.py` fails Toronto on rule A only (not rendered).
+
+### 2026-10-13 - Place search wave 1: the final shared rules merged; 34 indexes rebuilt; Toronto's seven stations are rows
+
+- **73f025df (search-integration: the matcher and rule faults a to r) was merged with `--no-ff` and no conflict; the 17 live cities' indexes came with it and were not rebuilt here.** `place_index.py --selftest` holds 311 of 311 and `check_place_search.py --selftest` 45 of 45. `regen_generated.py` rewrote `app/macro_facts.json` for Mexico City's shared data again; the rewrite was put back.
+- **The 33 indexes and Toronto were rebuilt by their own index steps through the job gate, two at a time; no step stopped and no request was made.** Rows: 320,252 to 320,276; 16 left and 40 returned, station rows but for one Dublin street row; intersections 567,307 to 567,307. Every row is in `data/_search_rollout/wave1_rules56/final_rebuild.md` (not committed).
+- **What moved.** 29 stations returned because stations of different names are no longer folded on a shared Wikidata entry (New York 16, Houston 6, Philadelphia 4, Calgary's 8 Street Southwest, Newcastle's Northumberland Park, Glasgow's "Partick (Rail)"); 15 platform or stop-position rows folded into their station within 250 m (Toronto 8, Melbourne 3, Blackpool, Dublin, Manchester, Miami). **Toronto's seven Eglinton stations are station rows** (Avenue, Fairbank, Forest Hill, Keelesdale, Laird, Oakwood, Wynford), kept as stations of the map against the disused tag. No square returned and no landmark or place row changed.
+- **The twin round found nothing**: no new row carries the name of an object a `PLACE_DROPPED` id removes. No config changed.
+- **Left open, not acted on.** Houston's four downtown stations are two rows each, one per direction ("Convention District (eastbound)" and "(westbound)", Main Street Square, Museum District, Theater District), and no row carries the plain name the map draws. Toronto's four streetcar stops named for a subway station ("Main Street Station", "St. Clair Station", "St. Clair West Station", "Dundas West Station") are two rows each a few metres apart, which the one-stop-one-row rule does not fold. Dublin's one "Abbey Street" street row fewer was not traced.
+- **`check_place_search.py`: 51 cities fail on rule A only** (not rendered: the 34 here and the 17 live cities whose indexes came with the merge); no check E failure.
+
+### 2026-10-13 - Tram rescope: the final shared rules merged in; Mexico City, Prague and Milan rebuilt (Cleanup agent, nothing pushed)
+
+- **Merge.** search-integration 73f025df into `tram-rescope` (2c72a02d), no
+  conflict; `KNOWN_GAPS` stays empty; selftest 311 of 311.
+- **Rows.** Mexico City 67,338 to 67,336; Prague 10,435 to 10,431; Milan
+  6,119 to 6,097. The full account, with names, is
+  `data/_search_rollout/tram_rules56/final_rebuild.md`.
+- **Milan's 527-id platform tuple is removed.** Built in memory with the ids
+  and without, the index is the same 6,099 rows: the shared rule takes every
+  one, so none is kept by id. The rule takes 17 more stop names the list did
+  not hold.
+- **Owner, 2026-10-13, three Milan items:** the second "Ultima Cena" (node
+  3446474994) and "Chiesa parrocchiale di Santa Maria Assunta in Quintosole"
+  (way 360192664) dropped by id; both "Cascina Melghera" rows kept.
+- **Prague's 18 boroughs are rows again.** 24 street names leave, each a
+  stop platform by its tags.
+- **A fault for the rule's owner, not mended here:** in Prague 31 station
+  names have two to six rows within 250 m (Palmovka 6, Želivského 6), and
+  this build added 12. The same-name merge tests the whole 250 m cluster
+  with `_one_railway`; a cluster holding a metro station and tram stops is
+  mixed, so the tram stops no longer fold with each other.
+- **Judgment call: "twin round" was read as a same-name round**, every pair
+  of non-street rows of one kind and one name with its distance. Milan is
+  clean within 1 km.
+- **Checks.** E and H pass for the three; scope, index drift and unopened
+  checks OK. Rule A fails for all 20 searched maps: the merged matcher
+  changes the script every map carries.
+
+### 2026-10-13 - Tram rescope: Milan's map rendered once as the rollout's trial render, and its search tested in a browser (Cleanup agent, nothing pushed)
+
+- **Owner (relayed by Cleanup, 2026-10-13):** renders on branches are
+  approved, landing is not; Milan is the trial. `search-words-it` (acf21e2e,
+  six more Italian street words in the search script) was merged first
+  (2acffea2). Prague and Mexico City are NOT rendered: `map_common.py` may
+  change once more.
+- **The render.** `pipeline/milan/step3_map.py` through the gate: 8 s wall
+  with the gate's own start, peak 0.20 GB, 6.4 MB of HTML, 45,999 points,
+  193 stations. `check_place_search.py` names Milan OK.
+- **`scripts/check_map_search.js milan`:** 193 of 193 drawn stations and 22
+  of 22 lines found by the map's own search.
+- **Dotted abbreviations fail one way.** 49 of the map's station names hold
+  "V.le", "P.le", "P.za", "L.go", "C.so" or "P.ta". Typed as written, or
+  without the dot ("Vle Tunisia"), the map's station is first. Typed with
+  the word in full ("Viale Tunisia"), the map's own station is returned for
+  4 of 49; for 39 more an OpenStreetMap station row of the full name stands
+  in; **6 find no station at all** (P.TA GENOVA F.S., P.ta Lodovica, P.za 5
+  Giornate, P.za Ventiquattro Maggio, V.le Certosa Via Giorgini, V.le
+  Certosa Via Tibullo). Cause: `words()` splits "V.le" into "v" and "le",
+  and `ABBR` is read from the typed word to the name, never from the name
+  to the typed word. The fix is reported to the owner of `map_common.py`,
+  not made here.
+- **The six new street words work.** Typed in full, a street under each of
+  galleria, piazzetta, passaggio, cavalcavia, alzaia and bastioni is the
+  first result; without the lead word, "Giovanni Malagodi", "Naviglio
+  Pavese", "Naviglio Grande", "Porta Volta" and "Porta Nuova" each return
+  their passaggio, alzaia or bastioni street.
+- **Not tested:** the box itself on a phone, an intersection search (the
+  intersections file is not loaded by the harness; "Corso Buenos Aires e Via
+  Vitruvio" returned nothing and that is not a finding), the outline.
+- The queries went through the page's real `search()` from a scratch copy
+  of the check with a fixed query list; the repository's script is
+  unchanged.
+
+### 2026-10-13 - Place search wave 1: the pattern screen; 67 rows dropped by id, four famous places kept, ten reach reasons recorded
+
+- **The owner ruled no full read for wave 1 and a screen for the new classes instead (relayed by Cleanup, 2026-10-13).** The landmark and place rows of the 33 indexes and Toronto were screened by tags and English name patterns for the classes of the owner's class rulings of that date (`data/_search_rollout/reads_rules56/_rulings.md`, with the follow-up: ruling 5 covers every plaza name with no place in it; a park named only by a type word goes, compass, "Central" and generic official names stay). About 870 candidates; each one's tags were read from the cache; no request was made. The full result is `data/_search_rollout/wave1_rules56/pattern_screen.md` (not committed).
+- **Applied by id, 67 rows in 23 configs, only where a row falls squarely in a ruling:** 7 parks named by a category and a number (New York's "Playground 11, 80, 103, 115, 286" and "Plaza 67", Washington's "Square 80"); 11 halls and offices of a religious body (six "Christian Science Reading Room", two Jehovah's Witnesses assembly halls, three LDS institutes of religion); 8 places of worship named only by a body in a spelling the rule misses (five "Christadelphian Hall", three misspelt Kingdom Halls); 7 parts of a church beside the church's own row; 13 stock plaza and square names ("Central Square", "The Courtyard", "Civic Plaza", "The Square", "Campus Plaza", "Alumni Plaza", "Waterfront Plaza"); 7 grounds of an office or apartment building or of a housing estate by its operator; 14 second labels of one bay, channel or river (New York's Jamaica Bay basins as a node and a way each, Ottawa's "Carp RIver"). Every id was checked against its cached name; none has a `wikipedia` tag.
+- **Borderline, listed with a recommendation and not applied** (the report's table): the type-word parks above all. The screen found 102 ("Riverside Park", "Memorial Park", "City Park", "Peace Gardens", "Jubilee Park"), and in English these are official names, several of famous parks, so none was dropped by pattern; five read as a type word alone ("School Field", "Village Green", "Municipal Park", "Linear Park", "Childrens Park") and are recommended for a drop. Also left: stake centres, fellowship halls with no row of their own church, "Market Square" and "The Mall", veterans' plazas, Blackpool Pleasure Beach's 15 rides (each with an article), subdivision pools tagged parks. **One judgment in what was applied:** New York's numbered playgrounds are the city's official names and three carry a Wikidata entry; ruling 1 takes them as written.
+- **Four famous places are kept by id in `PLACE_KEPT`, each a row after the rebuild:** Birmingham Museum and Art Gallery (way/406003396) and Tate Liverpool (node/12496037807), both without a Wikidata or Wikipedia tag; Calgary's Canada Olympic Park (way/12244405); Dublin's General Post Office (relation/289528), which has an entry and an article and is held out all the same (`building=retail`): a rule fault for Cleanup. Listed and not added: Los Angeles's Queen Mary (a hotel by its tags). Twenty-odd sights have no object under their name in the cache at all (the Chrysler Building, Albert Dock, West Edmonton Mall): a follow-up after the landing.
+- **24 indexes rebuilt through the job gate, two at a time: 320,276 rows to 320,213 across the 34.** The twin round found nothing. `check_all.py` 70 of 73: Mexico City's macro-facts line, rule A on 51 cities (34 unrendered, 17 live maps with a stale index URL since the integration merge), and, new since that merge, `check_render_current.py` on the 19 live searched maps (an older search script). Nothing is rendered.
+- **Reach reasons (owner, 2026-10-13, relayed by Cleanup):** `PLACE_SCOPE_REACH_REASON`, a dated sentence ending "(owner)", is recorded in ten configs whose index reaches more than 25 km past the map's stations for being a municipality's own far corner, each confirmed on the current index with the measure of `search-scope-check`'s rule D (45f8480d), which then reports each as kept: Houston 58.4 km, Ottawa 48.4, San Francisco 48.3, New Orleans 44.7, San Diego 37.4, Tucson 31.5, Kansas City 30.9, Los Angeles 27.4, Blackpool 25.8, Dallas 25.3. The other 24 are within the limit.
+
+### 2026-10-13 - Place search: the station faults t to y (rules only)
+
+- **An article of the object's own outweighs a sight's brand tag and a sight's or a market hall's shop tag; lodging and food stay out (owner's rulings, 2026-10-13, relayed by Cleanup).** "Own" is the meaning `KEPT_COMMERCIAL_REASONS` already uses (`own_article`: not a section, not the subject's, brand's or operator's article, not one another object in the cache carries). A sight is a tourism, historic or heritage tag (`_sight`); for a shop tag a market hall (`SIGHT_MARKET_AMENITIES`, amenity=marketplace) counts too, since the owner named Feskekörka, which carries no sight tag. Narrowest reading chosen for shops: an ordinary shop with an article but no sight tag stays out, and a shop sight under an article another object carries stays out (a chain's article); tested in the self-test ("Corner Books", "Chain Gallery North" and "South") and by reading every row the rule adds. Food, lodging, cuisine and craft signs are never outweighed (Barcelona's Museu de la Xocolata, a cafe; Tokyo's いせ辰, craft=handicraft; the 49 hotels, hostels, restaurants, cafes, pubs and bars). Not admitted: Akihabara's ディアステージ (amenity=theatre and shop=yes, no sight tag) and the lane's brand objects with no sight tag (VELTINS-Arena, Arkéa Arena, the Hong Kong colleges, the libraries without heritage). The self-test case "a brand with its own article is no row" was turned round by the ruling and now reads "a brand beside a tourism tag is outweighed by an article of its own". Measured on every searched city of every branch (466 readings): 37 rows added in 22 cities, none removed; flagged as near a branch shop: Harvey Nichols (London; its article is the chain's company article, carried by the one store in the cache), Åhléns (Stockholm's flagship, `branch=Stockholm City`), Legoland Discovery Center (Tokyo); no lodging or food place. Reims's Hôtel des postes (way/92303084) returns as intended; Washington's National Archives (way/66418953) is not returned by either commit's rules, its row stands only by id. Self-test 339 of 339; 283 breaks caught. Reach: `data/_search_rollout/reads_rules56/part9_landmarks.md`, the second heading.
+
+- **Applied the integration lane's landmark patch as two rule faults mended (owner confirmed, 2026-10-13, relayed by Cleanup).** `data/_search_rollout/live_rules56/landmark_faults.patch` applied cleanly on 0321cbb0; self-test 332 of 332, 278 breaks caught, files LF, no em dashes. (1) A subject tag that repeats the object's own article or entry is not read when the article's title, a bracketed or comma qualifier set aside, is one of the object's names (`article_names_object`), never on a grave or a plaque: Chicago's Victory Monument (way/1361248798) returns, and no other landmark. (2) A site or boundary relation folded into a row of ANOTHER name keeps its own row when its article is named for it, and otherwise leaves its name as an alternate of that row. Measured on every searched city of every branch (466 readings, 237 cities; every object but street ways, the real `build()` of both versions): rows of other kinds than streets move in 22 cities, 38 rows added, 1 removed, 31 given an alternate. The lane's 48 cases are all among them; the rest are the same class where the relation's name was already an alternate somewhere (Brno 6, Prague 2 rows and 3 alternates, Plzeň 1, and Barcelona, Kyoto's 醍醐寺, Birmingham, Newcastle, Nottingham, Toronto), so 22 cities change rather than 16. Nine returned boroughs share their name with a station row named for them (Brno 5, Prague 2) and Plzeň's "Plzeň 5-Křimice" stands beside the quarter "Křimice"; none is a second row of one kind. The one row lost: Chicago's Pullman Administration Building (way/210701534), taken by the shared-entry rule once the park's row returns; the owner keeps it by id. Washington's National Archives (way/66418953) does not return: its entry is its operator's (`operator:wikidata`), which this patch does not read; kept by id there. Files: `pipeline/place_index.py`, `scripts/place_index_breaks.json`, `docs/place_search_exclusions.md`; reach in `data/_search_rollout/reads_rules56/part9_landmarks.md`.
+
+- **A kept id is a station only by its railway tag (fault r of 73f025df mended), and the integration lane's uncommitted patch was reconciled.** `data/_search_rollout/live_rules56/g_r_fix_not_committed.patch` held two mends. Its (r) part was applied as written: an id in `config.PLACE_KEPT` that bears no row is admitted as a station only on `railway` station, halt or tram_stop, else as a place by its place tag, else as a landmark; `public_transport=station` alone also sits on ferry terminals, and Yokohama's Osanbashi pier (way/84830302) had come in as a station row. Reach: Yokohama's pier and Sapporo's 山麓 (node/1781191908, the ropeway's base, an `aerialway=station` kept by id in the rollout worktree's uncommitted config) become landmark rows; no other kept id moves. Sapporo's mid station 中腹 stays a station row on its `funicular=yes`, so the ropeway's two ends are now of two kinds: a call for the owner. Its (g) part was NOT applied: it keys the same-name merge by railway value, which gives the same groups as (y) below (each railway value clustered on its own within `PLATFORM_MERGE_M`), and all 18 merges it names fold under (y) (Prague 10; Amsterdam, Brussels, Brussels (Regional), Bucharest, Ghent, Hiroshima, Oslo, Saint-Etienne). The reach was re-measured with each city's real name passed to `build()` (the first run passed the slug, which hid one fold): Den Haag's "Centraal Station" folds into "Den Haag Centraal" under (x), so 32 groups fold and 68 of the 109 parted rows stay separate, and the station rows change in 34 distinct city results (21 added, 152 removed, 43 renamed or given alternates). `docs/place_search_exclusions.md` gained the rows for g to y. Self-test 326 of 326; 275 breaks caught.
+
+- **Mended five station faults in `pipeline/place_index.py` on top of 73f025df and measured a sixth that changes no row; no index was rebuilt.** Measured by running the real `build()` of 73f025df and of this commit over the station-candidate objects of every searched city on every branch (237 cities, 389 city and branch readings; streets and other kinds not exercised, so a full rebuild can differ where a station meets another kind). The station rows change in 31 distinct city results: 21 rows added, 149 removed, 42 renamed or given alternates. The list of cities and every row is in `data/_search_rollout/reads_rules56/part8_reach.md`.
+  - **(t) The station guard reads the local name.** `map_stations(config, local_names=True)` adds one entry a station for each `name_<language>` column of `stations.csv` (`name_ja`, `name_ko`, `name_zh`, `name_el` across the 237 files), and the local name without a closing station word (Taoyuan's file says "山鼻站", the row "山鼻"). The guard matched no station row in 116 of 116 cities with such a column and matches in all of them now. No row returned in any city: no station the map draws had been dropped by the bare-type, passenger, access, out-of-service, entrance or no-railway-tag tests, so there was no junk to weigh and no narrowing was needed. Only `build_city()` asks for the local names; the coverage check reads `map_stations()` as before.
+  - **(u) A live stop the map draws is not unbuilt by a stray prefixed key.** Spared from the not-open test: a live `railway` value, no `proposed=yes` or `construction=yes`, no opening date ahead, and a map station at its place under its name (`drawn_station_here`). Reach: Montpellier's 18 line 5 stops and nothing else.
+  - **(v) Not built.** (u) returns "Gambetta - Saint-Denis" (node/11885078576), the stop the map draws there, so a row for node/3127521470 "Saint-Denis" would be a second row for one stop.
+  - **(w) A compass direction in brackets is a direction note, and a folded stop takes the plain name.** `_DIRECTION_NOTE` reads "(eastbound)", "(westbound)", "(northbound)", "(southbound)"; counted on the caches of 237 cities these are Houston's 8 nodes and no other, and no "EB" or "inbound" form occurs, so none was added. A stop folded by the one-stop-one-row merge whose kept name bears a direction note is renamed to the plain name, the noted spellings its alternates: Houston's four stations, and Nice's "Grand Arénas (dir Nice)" becomes "Grand Arénas".
+  - **(x) One station under near-identical names is one row.** Among stations of one Wikidata entry the name is compared by `_complex_core`: a closing note in round brackets set aside, then a station word, then the city's name as a leading word parted by a space or a hyphen (`build()`'s `city`, never a guess). Rows fold only on equal cores, so the city word goes only where what follows is another row's whole core. Kobe keeps 三宮 and 神戸三宮: no separator follows 神戸. Two names the map draws stay two rows. The folded row takes the name the map draws, else the shortest. 31 groups fold (Berlin 14, London 7, Barcelona 6, Amsterdam, Glasgow, Kagoshima, Newcastle 1 each); 69 of the 109 rows 73f025df parted stay separate. Not built: a variant character (Taipei's 台北車站 and 臺北, no fold table), a leading line letter ("S Friedrichstraße"), angle brackets (押上).
+  - **(y) Within a mixed group each railway value folds on its own.** With the station word set aside, tram stops named for a metro station share its key, and the mixed group folded nothing. Prague loses 42 doubled tram-stop rows; Toronto's four doubled streetcar stops are this same fault; 107 distinct rows fold in 20 cities (Brussels (Regional) 17, Rotterdam 10, Brussels 5).
+  Rejected: forcing Houston's Central Station (three platform nodes, "Main", "Rusk", "Capitol", where the map draws "Central Station Main" and "Central Station Capitol / Rusk") into two rows. Files: `pipeline/place_index.py` (`map_stations`, `build_city`, `build`, `_DIRECTION_NOTE`, `_complex_core`, `complex_parts`, `_selftest`), `scripts/place_index_breaks.json` (self-test 326 of 326; 274 breaks caught, none missed).
+
+### 2026-10-13 - Place search wave 1: 34 maps rendered once on the final search script; then the owner's rulings on the screen's open calls, unrendered
+
+- **7c3cb2a4 (tram-rescope at the commit that finalises the search script) was merged with `--no-ff` and no conflict** (commit 88d8a283): the search script's last changes and the tram rescope itself, with Toronto's rescoped map step. `regen_generated.py` found every generated file current.
+- **All 34 maps were rendered with search, each by its own map step through the job gate, three at a time, and committed (9101b6b2) on the indexes of 69c7eb4f.** No render stopped and none asked for a cache. Wall time 2 to 8 s a map, gate included (New York 8 s, Los Angeles and Toronto 5 s); peak memory at most 0.23 GB (New York). The 34 `heatmap.html` files total 34,779,811 bytes against 31,954,248 on master (2,825,563 more, 8.8%). On those renders: `check_map_search.js` found every drawn station and line on all 34 (2,062 stations, 123 lines; five New York warnings, a station at rank 5 or 6 past a phone's cap of 4: "86 St", "Canal St", "Fulton St"); `check_place_search.py` passed the 34 and Milan, failing only the 19 live maps on a stale index URL; `check_render_current.py` failed those 19 and Milan, none of the 34. **The attribution check at two viewport heights was not run:** the owner then ruled each map is rendered once, when its index is final, and the checks wait for that render.
+- **The owner's rule on renders (2026-10-13, relayed by Cleanup: "thin the re-render"): a map is rendered once, when its index is final.** The twelve cities rebuilt below therefore carry a map one index behind until the final render; rule A fails them until then.
+- **The owner's rulings on the pattern screen's open calls (2026-10-13, relayed by Cleanup), applied by id.** RESTORED: New York's numbered rows that carry a Wikidata entry of their own, "Playground 80", "Playground 115", "Playground 286" and "Plaza 67". The ruling said three, from this lane's count; four of the six carry an entry, and all four are restored on the ruling's own test. "Playground 11" and "Playground 103" stay dropped. DROPPED: the five parks named only by a type word ("School Field" in Manchester, "Village Green" in Dublin, "Municipal Park" in Toronto, "Linear Park" in Ottawa, "Childrens Park" in Boston); Houston's four subdivision pools tagged parks; Edmonton's "Orchards Residents Association Park" and "East Lawn"; Tucson's two "The Main Mall"; Calgary's "The Atrium"; Boston's "Chelsea River" bay node (the river's row stays). KEPT by id: Los Angeles's Queen Mary (way/438331516), a row again. The dozen unsure plaza names and the recommended keeps stay.
+- **Washington's "Three Servicemen Statue" (node/358960331) is taken out of `PLACE_KEPT` and dropped by id (owner, 2026-10-13): a duplicate of "The Three Soldiers" (way/895985388), one work and one Wikidata entry 270 m apart.** The way is still a row after the rebuild. This reverses that node's keep of the flag-check entry below.
+- **Twelve indexes rebuilt through the job gate, two at a time: 320,213 rows to 320,202 across the 34.** The twin round found one: Boston's "Childrens Park" is two ways, and the second (way/1429125836) took the row, so it is dropped under the same class; a second round found none.
+- **Dublin's General Post Office (relation/289528), kept by id in the screen, was held out by the commercial rule on its `brand=An Post` tag** (`_commercial_reasons` returns "brand"), against a `tourism=attraction` tag and an article of its own.
+
+### 2026-10-13 - Place search wave 1: the station rules (search-rules-8) merged; the helper screens, the twin check and 81 keeps applied; 34 indexes rebuilt, not rendered
+
+- **search-rules-8 was merged in two steps, 8d45eae5 and its final commit 0321cbb0 (station faults t to y), with no conflict; `place_index.py --selftest` holds 326 of 326.** All 34 indexes were rebuilt through the job gate, two at a time, and the cities touched after that once more. Against the indexes of 71ef7d2f: 320,202 rows to 320,196; **station rows 3,377 to 3,360**. The station changes match the station lane's own measure: Edinburgh 4 fewer (tram stop positions folded into Edinburgh Gateway, Edinburgh Park Central, Haymarket and West End), Glasgow "Partick (Rail)" and "Partick (Subway)" one row "Partick" with both as aliases (owner, 2026-10-13: accepted), Houston's four direction pairs one row each ("Convention District", "Main Street Square", "Museum District", "Theater District", the direction names as aliases), Manchester's Harbour City, Newcastle's "Northumberland Park (Metro)" into "Northumberland Park", San Francisco's Glen Park, Toronto's four doubled streetcar stops ("Main Street Station", "St. Clair Station", "St. Clair West Station", "Dundas West Station"), and Edmonton's second "1905 Street" ride stop (below). Dublin, Boston and New York's station rows did not change. Houston's Central Station is still three rows (Capitol, Main, Rusk) where the map draws two names; the box finds both. **Every drawn station has a station row within 300 m but two:** Miami International Airport (outside the search area, the recorded exception) and Sacramento's Dos Rios (1,047 m from the nearest station row).
+- **The helper screens (all 34 cities' files, `data/_search_rollout/wave1_rules56/screen_helper/`) were applied by id where a row falls squarely in an owner ruling: 48 rows.** 38 helper `drop` rows (one object under two rows or one Wikidata entry within 300 m, the other row staying, under the Three Soldiers ruling; parts of a church or monastery beside its own row, ruling 4) and ten campus lawns and courts named for a building or by function, the class the owner ruled in Melbourne (Rice's Central, Academic and Engineering Quadrangles, Rice Physics Quad and Graduate Student Commons; CSUN's University Library Lawn; Occidental's President's Garden; Edmonton's Engineering Quad and Arts/Business Quad; Manchester's University Green). Each id was matched to its cached name and to a row first. Two helper drops were not applied, being rows the owner kept among Toronto's 70 unsure rows (CN Tower Edge Walk, St Philips Parish Hall). Courts named for a person or donor, Holcomb Mall and The Commons stay borderline. 131 borderline rows are in `helper_applied.md` by class with the helper's recommendation, with two owner calls in short (one congregation as two imported points, a class; the Greenway bridges, now ruled), the famous sights the helpers found as keep-by-id candidates, and Milan's rows for the first slice (its config not edited here). Stale names in the map data (Houston's "Reliant Stadium", Kitchener's misspelt gallery, Kansas City's Loose Park) are listed and left.
+- **Minneapolis: the 21 Midtown Greenway street-bridge rows under the greenway's entry Q6843083 are dropped by id (owner, 2026-10-13: one object labelled many times); the greenway's own row, relation/20711846, stays.**
+- **Kept by id:** New York's Museum of the Moving Image outline (way/280571506; its point is dropped as a duplicate, so the museum had no row); Washington's National Archives building (way/66418953; held out because its Wikidata entry equals its operator's); and the 79 group B rows of `keep_candidates_wave1_final.tsv` on this branch in 18 cities (owner, 2026-10-13, as a class: "a public sight the rules pass over for want of a tag"), one id per sight as that file's notes say. Every kept id is a row after the rebuild.
+- **Twin rounds.** This lane's own found Melbourne's second "Chemical Engineering Lawn" way (dropped under the same class). The wave's twin check (`twins_check.tsv`, 26 rows) added two this lane's test missed, since it placed ways by a centre the caches do not carry: Edmonton's second "1905 Street" stop position (node/13529947385) and San Diego's bare "Aztec Center" monument node (node/6548523724). Houston's "Terraces on Memorial" neighbourhood node stays; the reason on its six dropped streets now says a gated subdivision's private streets (its outline is tagged `residential=single_family`), not an apartment complex. No twin is left.
+- **One stale review removed:** Los Angeles's `PLACE_REVIEWED` entry "Fire Station No. 30, Engine Company No. 30" (check E failed once the helper's duplicate drop took that row; the African American Firefighter Museum row of the same building and entry stays).
+- **Checks:** `check_place_search.py` fails rule A only (the maps wait for the final render); `check_place_index_drift.py` passes all 34 here and drifts on ten live cities whose indexes came from earlier merges (Barcelona, Brussels, Busan, Kyoto, London, Marseille, Paris, Prague, Seoul, Tokyo), not this lane's. Nothing is rendered.
+
+### 2026-10-13 - Place search wave 1: the landmark patch and the brand and shop rulings merged; ten indexes rebuilt; the 34 maps rendered once on their final indexes
+
+- **search-rules-8 at 1a0fedba (the landmark patch a4718e28 and the owner's rulings on brands and shops: a brand tag beside a sight and a shop tag on a sight or a market hall are outweighed by an article of the object's own; lodging and food stay out) was merged with `--no-ff` and no conflict; `place_index.py --selftest` holds 339 of 339.** The cities the two commits change were rebuilt through the job gate, two at a time, as `part9_landmarks.md` on that branch measured them; Milan was left to the first slice. One row returned in each but New York: Birmingham City University, the University of Salford (Manchester), the University of Sunderland (Newcastle), the University of Nottingham (alias University Park), Ottawa's Wellington Village and Toronto's Rockcliffe-Smythe (site relations with an article named for them); Edinburgh's Camera Obscura & World of Illusions, Philadelphia's Philly AIDS Thrift @ Giovanni's Room, San Francisco's City Lights Booksellers and Toronto's First Toronto Post Office (sights with an article, a brand or shop tag beside it). New York changed one row's alternate names only. The twin round found none; Washington's National Archives (way/66418953) and New York's Museum of the Moving Image (way/280571506) are still rows by `PLACE_KEPT`. Across the 34: 320,196 rows to 320,206.
+- **Manchester's Crumpsall stop position (node/7007839003) left the unopened-stations watch file:** the station rules now keep a not-open stop the map draws, and it folds into Crumpsall's open row, so `check_place_unopened.py` asked for its removal.
+- **All 34 maps were rendered once, each by its own map step through the job gate, two at a time, on these final indexes:** 2 to 9 s a map, peak at most 0.23 GB (New York). The 34 `heatmap.html` files total 34,779,811 bytes against 31,954,248 on master (2,825,563 more, 8.8%).
+- **Checks.** `check_map_search.js`: all 34 OK, 2,062 drawn stations and 123 lines found, five New York warnings as before ("86 St", "Canal St", "Fulton St" past a phone's cap of 4). `check_place_search.py`: the 34 pass; it fails only the 19 live maps on a stale index URL. `check_render_current.py`: none of the 34; the 19 live maps and Milan. `check_map_attribution.js` at 1280 by 650 and 1280 by 812 on New York, Dublin and Tacoma: no problem at either height (credit clear at five of five points, the legend's clamp in force), served on 127.0.0.1 from a temporary launch entry removed afterwards. `check_place_scope.py`: 54 cities OK. `check_all.py`: 70 of 73 before the watch-file fix, the other two the live maps' (`check_place_search.py`, `check_render_current.py`), none of them this lane's.
+- **`pipeline/drift_check.py` was not run.** It re-runs steps 1 and 2, which write `data/<city>/processed/` in the folder every worktree shares, and the 34 cities are on master: no step is re-run from a branch for a city on master until it lands. No outputs file other than the indexes' summaries and the 34 maps changed.

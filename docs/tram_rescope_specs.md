@@ -1,5 +1,11 @@
 # Tram rescopes, light and medium — build specs
 
+**Status, 2026-10-13: all five are BUILT and on master since 2026-09-27**
+(merge be2e3713; commits c8c1c53a, eedeb329, 5f9106e5, 821ca1a9, f3e051d7).
+This page is the record of what the builds were given, not open work. Each
+city's config holds what was built where it differs from a spec (the REM as
+one drawn line, Rome's base service, Madrid's 9 ML1 stations).
+
 **Written 2026-09-27 by Staging for the build session (owner's split: Staging
 specs, build implements).** The owner cleared the light and medium categories
 of `docs/tram_rescope_estimate.md` for this window. Measured from the cached

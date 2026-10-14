@@ -178,3 +178,46 @@ TUCSON_BBOX = {
     "lon_min": -111.20,
     "lon_max": -110.65,
 }
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-12) ---
+
+PLACE_AREA = "(id:3600253824)"
+# The index reaches more than 25 km past the map's stations, a far corner of the
+# municipality's own area: recorded for rule D of scripts/check_place_scope.py
+# (measured 31.5 km on the index of 2026-10-13; remove it if a rebuild falls within 25 km).
+PLACE_SCOPE_REACH_REASON = "2026-10-13: the city limits' far southeast lies 32 km past the nearest station (owner)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
+PLACE_LANGUAGES = ("en",)
+PLACE_FOLD = None
+PLACE_REVIEWED = {}
+PLACE_DROPPED = {
+    "way/34197140": "'Pharmacy', a campus building labelled by a bare type word; its wikidata is the college's",
+    "way/1024676831": "'Carlos Y. Velasco House', a historic building named as a person's house, with no sign of visiting: a home",
+    "way/34762263": "'Charles O. Brown House', a historic building named as a person's house, with no sign of visiting: a home",
+    "way/463119416": "'Benedictine Sisters of Perpetual Adoration', a monastery tagged a place of worship and named for its order, not notable: a religious residence, by id",
+    "node/989215892": "'Pascua Yaqui Village', a church carrying the neighbourhood's name; the neighbourhood is its own row: a wrong object's name",
+    "way/866398527": "'Pascua Yaqui Village', a church carrying the neighbourhood's name; the neighbourhood is its own row: a wrong object's name",
+    "way/237171619": "'buses only', a notice as a street's name (owner, 2026-10-13)",
+    "way/1466658006": "'Arroyo Chico Urban Greenway on E Winsett Street', a description as a street's name (owner, 2026-10-13)",
+    "way/761669341": "'EastLustrumLane', words glued in the name: a glitch (owner, 2026-10-13)",
+    "way/761669342": "'NorthDecadeDrive', words glued in the name: a glitch (owner, 2026-10-13)",
+    "way/110477504": "'West Calle RioNaranja', words glued in the name: a glitch (owner, 2026-10-13)",
+    "way/835958387": "'East Placitade Dos Pesos', words glued in the name: a glitch (owner, 2026-10-13)",
+    "way/216865281": "'East East Balance Lane', a doubled word: a glitch (owner, 2026-10-13)",
+    "way/16922356": "'East East Circle Drive', a doubled word: a glitch (owner, 2026-10-13)",
+    "way/1052553846": "'West Silverlake Roa', a street name cut short (owner, 2026-10-13)",
+    "way/765581116": "'East Golf Links Roas', a street name cut short (owner, 2026-10-13)",
+    "way/765587054": "'East Golf Links Roas', a street name cut short (owner, 2026-10-13)",
+    "way/358416314": "'Pvr Dr-8721', a code as a street's name (owner, 2026-10-13)",
+    # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "way/34228242": "'Tucson LDS Institute of Religion', a religious body's reading room, assembly hall or institute tagged a place of worship, not a congregation (owner, 2026-10-13, ruling 2; pattern screen)",
+    # The pattern screen of 2026-10-13, the owner's rulings on its open calls: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "way/32929786": "'The Main Mall', a stock name with no place in it (owner, 2026-10-13, on the pattern screen's open calls: ruling 5)",
+    "way/50619003": "'The Main Mall', a stock name with no place in it (owner, 2026-10-13, on the pattern screen's open calls: ruling 5)",
+    # The helper screens of 2026-10-13 (duplicates, parts in a church's grounds): rows that
+    # fall squarely in an owner ruling, each with its ruling.
+    "way/236018494": "'Holy Resurrection Orthodox Church', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): 11 m from Holy Resurrection Antiochian Orthodox Christian Church (way/236018495), the building with the church's own website; this second outline carries the short form of the same name and no other tag",
+}

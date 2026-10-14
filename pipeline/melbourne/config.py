@@ -181,3 +181,134 @@ MELBOURNE_BBOX = {
     "lon_min": 144.88,
     "lon_max": 145.01,
 }
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-12) ---
+
+PLACE_AREA = "(id:3602404870)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
+PLACE_LANGUAGES = ("en",)
+PLACE_FOLD = None
+# Melbourne's public lanes are service ways named "X Place", "Court", "Mews"
+# and the like, and its arcades are named footways; the shared word list
+# leaves these out (owner, 2026-10-13). Measured on the 2026-10-13 cache: 208
+# names on minor ways, 9 of them private on every way. "drive" is left out:
+# 8 names, mostly venue roads. Re-measure if the cache is refetched.
+PLACE_WAY_WORDS = ("place", "arcade", "court", "mews", "terrace", "close", "parade", "crescent",
+                   "esplanade")
+PLACE_REVIEWED = {}
+PLACE_DROPPED = {
+    "way/448062027": "'Campbell Arcade entrance', a description standing in for a name: a station entrance label",
+    "way/448062028": "'Campbell Arcade entrance', a description standing in for a name: a station entrance label",
+    "way/1443830592": "'Entrance/Exit 2 - Royal Parade East', a description standing in for a name: a station entrance label",
+    "way/1443830593": "'Entrance/Exit 2 - Royal Parade East', a description standing in for a name: a station entrance label",
+    "way/1453794762": "'Entrance/Exit 2 - Royal Parade East', a description standing in for a name: a station entrance label",
+    "way/1457002174": "'Entrance/Exit 2 - Royal Parade East', a description standing in for a name: a station entrance label",
+    "way/1427037793": "'Entrance/Exit 3 - Royal Parade West', a description standing in for a name: a station entrance label",
+    "way/1443830586": "'Entrance/Exit 3 - Royal Parade West', a description standing in for a name: a station entrance label",
+    "way/46503769": "'Kmart Centre Arcade', a store's own arcade: a business's feature",
+    "way/736359880": "'Target Centre Arcade', a store's own arcade: a business's feature",
+    "node/3954625843": "'Colonial Tramcar Restaurant Departure Point', a business's own feature under its own name",
+    "node/245509493": "'Gate 4', an institution's own way, named for it",
+    "node/10753062227": "'Gate 4', a description standing in for a name (owner, 2026-10-13)",
+    "way/113543952": "'Carlton Housing Estate', a housing estate's own way, named for the estate",
+    "way/218014207": "'Kings Business Park', a business's own feature under its own name",
+    "way/556369063": "'Cenotaph', a bare type word for a name (owner, 2026-10-13)",
+    "way/665730564": "'Linear Park', a bare type word for a name (owner, 2026-10-13)",
+    "way/25759724": "'Flemington Grandstand', an interior section of a paid venue, which keeps its own row (owner, 2026-10-13)",
+    "way/1090140273": "'Mounting Yard', an interior section of a paid venue, which keeps its own row (owner, 2026-10-13)",
+    "way/93507531": "'Nursery Enclosure', an interior section of a paid venue, which keeps its own row (owner, 2026-10-13)",
+    "way/510098082": "'Main Arena', an interior section of a paid venue, which keeps its own row (owner, 2026-10-13)",
+    "way/57007031": "'A Shed', not a street: another kind of object indexed as one",
+    "way/57007027": "'D Shed', not a street: another kind of object indexed as one",
+    "way/1388702395": "'Elizabeth Street entrance', a description standing in for a name (owner, 2026-10-13)",
+    "way/46325052": "'Flinders Street entrance', a description standing in for a name (owner, 2026-10-13)",
+    "way/712606596": "'Federation Square Eastern Access Road', a description standing in for a name (owner, 2026-10-13)",
+    "way/10586965": "'Stadium Access Road', a description standing in for a name (owner, 2026-10-13)",
+    "way/385053611": "'Stadium Access Road', a description standing in for a name (owner, 2026-10-13)",
+    "way/716689898": "'Stadium Access Road', a description standing in for a name (owner, 2026-10-13)",
+    "way/716689899": "'Stadium Access Road', a description standing in for a name (owner, 2026-10-13)",
+    "way/24531277": "'Tennis Centre Access Road', a description standing in for a name (owner, 2026-10-13)",
+    "way/198715389": "'Tennis Centre Access Road', a description standing in for a name (owner, 2026-10-13)",
+    "way/220562504": "'Tennis Centre Access Road', a description standing in for a name (owner, 2026-10-13)",
+    "way/1211734385": "'Tennis Centre Access Road', a description standing in for a name (owner, 2026-10-13)",
+    "way/1352841564": "'Tennis Centre Access Road', a description standing in for a name (owner, 2026-10-13)",
+    "way/1352841565": "'Tennis Centre Access Road', a description standing in for a name (owner, 2026-10-13)",
+    "way/580418119": "'Footscray Road Service Road', a description standing in for a name (owner, 2026-10-13)",
+    "way/837329912": "'Footscray Road Service Road', a description standing in for a name (owner, 2026-10-13)",
+    "way/1504318456": "'Footscray Road Service Road', a description standing in for a name (owner, 2026-10-13)",
+    "way/1540932749": "'Rose Street to Kay Street Shimmy Path', a description standing in for a name (owner, 2026-10-13)",
+    "way/92388006": "'alternative Stockmans Trail access', a description standing in for a name (owner, 2026-10-13)",
+    "way/92388009": "'alternative Stockmans Trail access', a description standing in for a name (owner, 2026-10-13)",
+    "way/1428195598": "'Entrance/Exit - Laurens Street', a description standing in for a name (owner, 2026-10-13)",
+    "way/1428195601": "'Entrance/Exit - Laurens Street', a description standing in for a name (owner, 2026-10-13)",
+    "way/1453493846": "'Entrance/Exit - Laurens Street', a description standing in for a name (owner, 2026-10-13)",
+    "way/1453493848": "'Entrance/Exit - Laurens Street', a description standing in for a name (owner, 2026-10-13)",
+    "way/1453493853": "'Entrance/Exit - Laurens Street', a description standing in for a name (owner, 2026-10-13)",
+    "way/1453494809": "'Entrance/Exit - Laurens Street', a description standing in for a name (owner, 2026-10-13)",
+    "way/1427026307": "'Entrance/Exit 1 - Collins Street', a description standing in for a name (owner, 2026-10-13)",
+    "way/1453811135": "'Entrance/Exit 1 - Collins Street', a description standing in for a name (owner, 2026-10-13)",
+    "way/1453811222": "'Entrance/Exit 1 - Collins Street', a description standing in for a name (owner, 2026-10-13)",
+    "way/1561889887": "'Entrance/Exit 1 - Collins Street', a description standing in for a name (owner, 2026-10-13)",
+    "way/1305336495": "'Entrance/Exit 1 - Grattan Street East', a description standing in for a name (owner, 2026-10-13)",
+    "way/1426780032": "'Entrance/Exit 1 - Grattan Street East', a description standing in for a name (owner, 2026-10-13)",
+    "way/1443830597": "'Entrance/Exit 1 - Grattan Street East', a description standing in for a name (owner, 2026-10-13)",
+    "way/1453794765": "'Entrance/Exit 1 - Grattan Street East', a description standing in for a name (owner, 2026-10-13)",
+    "way/1453780430": "'Entrance/Exit 1 - Swanston Street', a description standing in for a name (owner, 2026-10-13)",
+    "way/1425742264": "'Entrance/Exit 2 - Franklin Street', a description standing in for a name (owner, 2026-10-13)",
+    "way/1445905447": "'Entrance/Exit 2 - Swanson Street', a description standing in for a name (owner, 2026-10-13)",
+    "way/1453794757": "'Entrance/Exit 4 -Grattan Street West', a description standing in for a name (owner, 2026-10-13)",
+    "way/1453794759": "'Entrance/Exit 4 -Grattan Street West', a description standing in for a name (owner, 2026-10-13)",
+    "way/1453794760": "'Entrance/Exit 4 -Grattan Street West', a description standing in for a name (owner, 2026-10-13)",
+    "way/1123803835": "'Dryburgh Street', not a street: another kind of object indexed as one",
+    "way/27462933": "'Dynon Rd Trail', a cycle facility named for the street it runs on: a description (owner, 2026-10-13)",
+    "way/96009611": "'Dynon Rd Trail', a cycle facility named for the street it runs on: a description (owner, 2026-10-13)",
+    "way/817791712": "'Dynon Rd Trail', a cycle facility named for the street it runs on: a description (owner, 2026-10-13)",
+    "way/966091179": "'Dynon Rd Trail', a cycle facility named for the street it runs on: a description (owner, 2026-10-13)",
+    "way/1442729342": "'Dynon Rd Trail', a cycle facility named for the street it runs on: a description (owner, 2026-10-13)",
+    "way/1531135345": "'Dynon Rd Trail', a cycle facility named for the street it runs on: a description (owner, 2026-10-13)",
+    "way/5150608": "'Footscray Road Trail', a cycle facility named for the street it runs on: a description (owner, 2026-10-13)",
+    "way/29404570": "'Footscray Road Trail', a cycle facility named for the street it runs on: a description (owner, 2026-10-13)",
+    "way/33109940": "'Footscray Road Trail', a cycle facility named for the street it runs on: a description (owner, 2026-10-13)",
+    "way/56722930": "'Footscray Road Trail', a cycle facility named for the street it runs on: a description (owner, 2026-10-13)",
+    "way/56722931": "'Footscray Road Trail', a cycle facility named for the street it runs on: a description (owner, 2026-10-13)",
+    "way/1138559289": "'Footscray Road Trail', a cycle facility named for the street it runs on: a description (owner, 2026-10-13)",
+    "way/1138559291": "'Footscray Road Trail', a cycle facility named for the street it runs on: a description (owner, 2026-10-13)",
+    "way/1500954780": "'Footscray Road Trail', a cycle facility named for the street it runs on: a description (owner, 2026-10-13)",
+    "way/1500954781": "'Footscray Road Trail', a cycle facility named for the street it runs on: a description (owner, 2026-10-13)",
+    "way/1500954782": "'Footscray Road Trail', a cycle facility named for the street it runs on: a description (owner, 2026-10-13)",
+    "way/1504294876": "'Footscray Road Trail', a cycle facility named for the street it runs on: a description (owner, 2026-10-13)",
+    "way/1504294877": "'Footscray Road Trail', a cycle facility named for the street it runs on: a description (owner, 2026-10-13)",
+    "way/697043127": "'Old Geology Courtyard', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13)",
+    "way/697042317": "'Physics Courtyard', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13)",
+    "way/694844702": "'Zoology Lawn', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13)",
+    "way/22979222": "'North Lawn', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13)",
+    "way/1151115379": "'1888 Courtyard', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13)",
+    "way/23766733": "'1888 South Lawn', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13)",
+    "node/12136918864": "'South Court', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13)",
+    "way/233484534": "'University Lawn', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13)",
+    "way/22881658": "'South Lawn', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13)",
+    "way/177482300": "'MacFarland Court', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13)",
+    "way/178457735": "'University Cenotaph Garden', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13)",
+    "way/1262092867": "'Welcome Garden', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13)",
+    "way/1030920902": "'Picken Lawn', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13)",
+    "way/403420628": "'The Bulpadock', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13)",
+    "way/33297408": "'Wildlife Reserve', description: leisure=park; name is type words only (flag check, 2026-10-13)",
+    "node/4464271092": "'Rooftop Cinema', a rooftop cinema tagged a theatre; its Wikidata entry has no article: a business with nothing else (wave 1's unsure rows, settled on the Wikidata lookup and the existing rules, 2026-10-13)",
+    # The helper screens of 2026-10-13 (duplicates, parts in a church's grounds): rows that
+    # fall squarely in an owner ruling, each with its ruling.
+    "node/13626510201": "'Arts Centre Melbourne (Theatres Building)', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): one building of the Arts Centre as its own row, 260 m from the row Arts Centre Melbourne (relation/6592679), under the same Wikidata entry (Q4801443) and the same article: the part beside the whole",
+    "way/773893269": "'RMIT School of Architecture & Urban Design', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): one school's building under the campus's Wikidata entry (Q5123539) and article (RMIT Melbourne City campus), 232 m from the row RMIT University (way/26564452) and 233 m from RMIT University (City Campus) (way/772558888): a part under the whole's entry",
+    "way/23717107": "'Chemical Engineering Lawn', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13, the class ruled in Melbourne; helper screen): a campus lawn named by function, tagged a park (operator University of Melbourne): the same class as the fifteen rows this config already drops by the owner's word of 2026-10-13 (South Lawn, Zoology Lawn, Physics Courtyard and the rest); this one was missed",
+    # The pattern screen of 2026-10-13, twin round of the helper screens: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "way/383402003": "'Chemical Engineering Lawn', a campus lawn or court named for a building or by function: a description; the second way of the name, beside way/23717107 (owner, 2026-10-13, the class ruled in Melbourne; twin round)",
+}
+
+# Public sights kept by id: in the cache, passed over by the rules (place_index,
+# PLACE_KEPT; owner, 2026-10-13).
+PLACE_KEPT = {
+    "node/585344628": "'RMIT Capitol Theatre', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "relation/15629064": "'The University of Melbourne, Parkville Campus', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/1156270659": "'The University of Melbourne, Southbank Campus', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+}

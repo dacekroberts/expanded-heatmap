@@ -43,13 +43,21 @@ st.markdown(
     """
 **The lines**
 
-- **Five lines are drawn** from the TTC's own route geometry: Lines 1, 2 and 4 of the
-  subway, and Lines 5 and 6, which are light rail.
-- Four of the five use the TTC's own colors; Line 2's green was darkened because the
-  agency's green is almost exactly the green used for Personal services pins, and the two
-  were indistinguishable where a line ran under its own stations.
-- **The 18 streetcar routes are not included** — they run in traffic every block or two, and
-  adding them would quadruple the station count and change what this map is about.
+- **Thirteen lines are drawn** from the TTC's own route geometry, each labeled on the map and
+  in the legend: subway Lines 1, 2 and 4, light rail Lines 5 and 6, and **eight streetcar
+  lines** (501 Queen, 504 King, 505 Dundas, 506 Carlton, 509 Harbourfront, 510 Spadina,
+  511 Bathurst and 512 St Clair).
+- The subway and light rail lines use the TTC's own colors, except Line 2: its green was
+  darkened because it is almost exactly the green of the Personal services pins. The TTC
+  gives every streetcar route the same red, so the streetcar lines are shown in colors chosen
+  for this map.
+- Streetcars stop every block or two, so only about
+  one stop per half mile is drawn as a station; subway and light rail stations, stops where
+  streetcar lines cross or part, and each line's last stop are always drawn.
+- **Three streetcar routes are not drawn.** 503 Kingston Rd and 507 Long Branch run as
+  replacement buses in the timetable to October 31, 2026, as does 512 St Clair west of
+  Lansdowne Avenue (closed for works). 508 Lake Shore runs only at weekday rush hours, and
+  the seven overnight routes follow their day routes. Every stop left out is listed below.
 - **Two stations are missing on purpose.** Line 1 continues past the city limit into York
   Region, so Highway 407 and Vaughan Metropolitan Centre sit outside Toronto and outside this
   map; they are listed below. Everything else the TTC signs as a
@@ -84,7 +92,7 @@ st.markdown(
 """
 )
 
-render_map_help('three business categories (Food service, Personal services and “Vape, secondhand, precious-metal, pawn shops”)')
+render_map_help('three business categories (Food service, Personal services and “Vape, secondhand, precious-metal, pawn shops”)', search='toronto')
 render_excluded_stations("Toronto")
 render_country_links('Toronto')
 

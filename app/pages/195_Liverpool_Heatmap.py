@@ -105,7 +105,7 @@ st.markdown(
 """
 )
 
-render_map_help('business categories (Food service and Food shops)')
+render_map_help('business categories (Food service and Food shops)', search='liverpool')
 render_excluded_stations("Liverpool (Regional)")
 render_country_links("Liverpool (Regional)")
 

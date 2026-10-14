@@ -183,3 +183,58 @@ NAPTAN_NAME_ALIASES = {
     # keeps OSM's name, Shalesmoor (owner, 2026-10-02).
     "Kelham Island": "Shalesmoor",
 }
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-12) ---
+
+PLACE_AREA = "(id:3600106956)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
+PLACE_LANGUAGES = ("en",)
+PLACE_FOLD = None
+PLACE_REVIEWED = {
+    "Stony Ridge Hotel": "the ruin of a former inn on the moor (historic=ruins), no business tag",
+    "Store Street": "an ordinary residential street",
+}
+PLACE_DROPPED = {
+    "node/304384666": "'The Methodist Church Birley Carr', no longer a church; its description says now apartments",
+    "way/111377893": "'Intake Methodist Church', its note says it was this church: removed",
+    "node/257665636": "'Shirefreen UJnited Reformed Church', a garbled node duplicate of way/146060385, which stays",
+    "way/23558502": "'WW1 Firing Range', a description, no name",
+    "node/7342668317": "'WWII Bomb Crater', a description, no name",
+    "way/793510476": "'WW2 Tank training target winch.', a description, no name",
+    "way/794550759": "'WW2 Tank training target winch.', a description, no name",
+    "node/1819023474": "'Broadfield Business Park', a business park tagged a locality",
+    "way/1251515880": "'Heeley Retail Park', a retail park's own road",
+    "way/32146892": "'Heeley Retail Park', a retail park's own road",
+    "way/819927110": "'Heeley Retail Park', a retail park's own road",
+    "way/32216819": "'Heeley Retail Park', a retail park's own road",
+    "way/274667024": "'Heeley Retail Park', a retail park's own road",
+    "way/25881747": "'Hydra Business Park', a business park's own road",
+    "way/24616480": "'Newton Business Centre', a business centre's own road",
+    "way/24616535": "'Rotunda Business Centre', a business centre's own road",
+    "way/28711277": "'Ernest Copley House', a housing block's name on its own drive",
+    "way/24202284": "'Westnall House', a housing block's name on its own drive",
+    "way/22338566": "'Crabtree Grange Sheltered', sheltered housing's name on its own drive",
+    "way/134120847": "'Packhorse Bridge', a bare type word; a bare type goes whatever the object carries (owner, 2026-10-13)",
+    "way/425751776": "'Rear Access To Deep Lane', a description as a street's name (owner, 2026-10-13)",
+    "way/27827397": "'Rear Access To Deep Lane', a description as a street's name (owner, 2026-10-13)",
+    "way/27827398": "'Rear Access To Deep Lane', a description as a street's name (owner, 2026-10-13)",
+    "way/847232420": "'Merchants Crescent, Exchange Street', two street names glued in one: a glitch (owner, 2026-10-13)",
+    "node/1759007086": "'Waverley Cottages', a housing development mapped as a place (owner, 2026-10-13)",
+    "way/360039994": "'St Mary's Catholic Club', a social club tagged a place of worship, with a food premises number (fhrs:id); its Wikidata entry has no article: a club with nothing else (wave 1's unsure rows, settled on the Wikidata lookup and the existing rules, 2026-10-13)",
+    # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "node/10600883216": "'Christian Science Reading Room', a religious body's reading room, assembly hall or institute tagged a place of worship, not a congregation (owner, 2026-10-13, ruling 2; pattern screen)",
+    "way/256979767": "'St Thomas Philadelphia Teaching Hall', a part of one church as its own row, the church's own row within 300 m (owner, 2026-10-13, ruling 4; pattern screen)",
+    # The helper screens of 2026-10-13 (duplicates, parts in a church's grounds): rows that
+    # fall squarely in an owner ruling, each with its ruling.
+    "way/107247728": "'St Thomas Philadelphia Conference Centre', a part of one church as its own row, the church's own row within 300 m (owner, 2026-10-13, ruling 4; helper screen): the conference centre of one church campus, 107 m from the chapel and inside the campus row Network Church Sheffield, Philadelphia Campus (way/256979764); tagged a place of worship, no entry",
+    "way/107247716": "'St Thomas Philadelphia Playtime Centre', a part of one church as its own row, the church's own row within 300 m (owner, 2026-10-13, ruling 4; helper screen): the playtime centre of the same church campus, 72 m from the chapel; tagged a place of worship, no entry",
+    "node/279049943": "'The Methodist Church in Firth Park', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): 62 m from Firth Park Methodist Church (way/135461294, Wikidata Q26539718): the same congregation as a bare point under a reworded name",
+}
+
+# Places of worship kept by the owner's word against the denomination rule
+# (place_index, worship_only; owner, 2026-10-13: "keep all four by id").
+PLACE_KEPT = {
+    "way/108732648": "'Church Of Christ', an Anglican church (denomination=anglican, wikidata=Q105102971, no wikipedia tag) whose name the rule reads as the denomination's (owner, 2026-10-13)",
+}

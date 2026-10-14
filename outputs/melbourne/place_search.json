@@ -1,0 +1,25 @@
+{
+  "index": "app/static/places/melbourne.json",
+  "places": 4272,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "en"
+    ],
+    "coverage": {
+      "en": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "English"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/2404870",
+      "name": "City of Melbourne",
+      "stations": 17
+    }
+  ]
+}

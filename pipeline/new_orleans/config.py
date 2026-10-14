@@ -291,3 +291,36 @@ PERSON_NAMED = (
     "92d5e04658992158", "c9df58b3997cff84", "bc9e58efb3ee62b6", "cbefd6b38b896b41",
     "61594c65500878ef",
 )
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-12) ---
+
+PLACE_AREA = "(id:3600131885)"
+# The index reaches more than 25 km past the map's stations, a far corner of the
+# municipality's own area: recorded for rule D of scripts/check_place_scope.py
+# (measured 44.7 km on the index of 2026-10-13; remove it if a rebuild falls within 25 km).
+PLACE_SCOPE_REACH_REASON = "2026-10-13: Orleans Parish runs east to the Rigolets, 45 km past the nearest station (owner)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
+PLACE_LANGUAGES = ("en",)
+PLACE_FOLD = None
+PLACE_REVIEWED = {
+    "New Orleans Pharmacy Museum": "a museum with its own article, not a pharmacy",
+}
+PLACE_DROPPED = {
+    "node/358369618": "'Mount Carmel Convent', a religious residence",
+    "node/358385658": "'Saint Clare's Monastery', a religious residence",
+    "node/358384791": "'Saint Davids Convent', a religious residence",
+    "node/367132756": "'School Sisters of Notre Dame Convent', a religious residence",
+    "node/358385765": "'Sisters of Saint Francis Convent', a religious residence",
+    "node/358385100": "'Sisters of the Sacred Heart Convent', a religious residence",
+    "node/1563066006": "'MM 82.0', a mile marker's code as a place name: a placeholder",
+    "way/318497231": "'Đền Quốc Tổ', a duplicate at the same point as the shrine's own row (way/764984245) (owner, 2026-10-13)",
+    "way/12703611": "'Interchange Rdwy', a description as a street's name (owner, 2026-10-13)",
+    "way/12703442": "'Public Road', a description as a street's name (owner, 2026-10-13)",
+    "way/342634291": "'Public Road', a description as a street's name (owner, 2026-10-13)",
+    "way/38476785": "'Algiers Point Ferry Landing', a ferry landing indexed as a street (access=no, building=yes)",
+    "way/319241443": "'Chợ Phiên', a market indexed as a street (amenity=marketplace)",
+    "node/358399750": "'Federation of Churches', organisation office: a church body's name on a GNIS place-of-worship node: a federation, not a congregation; decided by the name, not a tag (flag check, 2026-10-13)",
+    "node/6568622287": "'Vietnam War Monument', description: bare memorial type: 'Vietnam War Monument'; like the listed war-memorial words (flag check, 2026-10-13)",
+    "node/13102822879": "'Melia Subdivision', a housing development mapped as a place (owner, 2026-10-13)",
+}

@@ -1,0 +1,136 @@
+{
+  "index": "app/static/places/ottawa.json",
+  "places": 25271,
+  "data_retrieved": "2026-10-12",
+  "languages": {
+    "local": [
+      "en"
+    ],
+    "coverage": {
+      "en": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "English"
+    ]
+  },
+  "stations_not_open": [
+    {
+      "osm": "node/14123790221",
+      "name": "Barrhaven Centre",
+      "tag": "proposed:railway=station"
+    },
+    {
+      "osm": "node/14123790222",
+      "name": "Strandherd",
+      "tag": "proposed:railway=station"
+    },
+    {
+      "osm": "node/14123790223",
+      "name": "Longfields",
+      "tag": "proposed:railway=station"
+    },
+    {
+      "osm": "node/14123790224",
+      "name": "Fallowfield",
+      "tag": "proposed:railway=station"
+    },
+    {
+      "osm": "node/14123790225",
+      "name": "Nepean Sportsplex",
+      "tag": "proposed:railway=station"
+    },
+    {
+      "osm": "node/14123790226",
+      "name": "Knoxdale",
+      "tag": "proposed:railway=station"
+    },
+    {
+      "osm": "node/14123790227",
+      "name": "Tallwood",
+      "tag": "proposed:railway=station"
+    },
+    {
+      "osm": "node/7005149037",
+      "name": "Iris",
+      "tag": "construction:railway=station"
+    },
+    {
+      "osm": "node/7005150826",
+      "name": "Algonquin",
+      "tag": "construction:railway=station"
+    },
+    {
+      "osm": "node/7005150827",
+      "name": "Queensview",
+      "tag": "construction:railway=station"
+    },
+    {
+      "osm": "node/7005150828",
+      "name": "Pinecrest",
+      "tag": "construction:railway=station"
+    },
+    {
+      "osm": "node/7005150829",
+      "name": "Bayshore",
+      "tag": "construction:railway=station"
+    },
+    {
+      "osm": "node/7005150830",
+      "name": "Moodie",
+      "tag": "construction:railway=station"
+    },
+    {
+      "osm": "node/7005163192",
+      "name": "Westboro",
+      "tag": "construction:railway=station"
+    },
+    {
+      "osm": "node/7005163193",
+      "name": "Kichi Zìbì",
+      "tag": "construction:railway=station"
+    },
+    {
+      "osm": "node/7005163194",
+      "name": "Sherbourne",
+      "tag": "construction:railway=station"
+    },
+    {
+      "osm": "node/7005163195",
+      "name": "New Orchard",
+      "tag": "construction:railway=station"
+    },
+    {
+      "osm": "node/7005163196",
+      "name": "Lincoln Fields",
+      "tag": "construction:railway=station"
+    },
+    {
+      "osm": "node/7005273615",
+      "name": "Place-d'Orléans",
+      "tag": "construction:railway=station"
+    },
+    {
+      "osm": "node/7005273616",
+      "name": "Convent Glen",
+      "tag": "construction:railway=station"
+    },
+    {
+      "osm": "node/7005273617",
+      "name": "Jeanne-d'Arc",
+      "tag": "construction:railway=station"
+    },
+    {
+      "osm": "node/7005273618",
+      "name": "Montréal",
+      "tag": "construction:railway=station"
+    }
+  ],
+  "area": [
+    {
+      "osm": "relation/4136816",
+      "name": "Ottawa",
+      "stations": 25
+    }
+  ]
+}

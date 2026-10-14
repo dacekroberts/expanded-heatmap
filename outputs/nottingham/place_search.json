@@ -1,0 +1,40 @@
+{
+  "index": "app/static/places/nottingham.json",
+  "places": 22140,
+  "data_retrieved": "2026-10-12",
+  "languages": {
+    "local": [
+      "en"
+    ],
+    "coverage": {
+      "en": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "English"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/123292",
+      "name": "Nottingham",
+      "stations": 35
+    },
+    {
+      "osm": "relation/154058",
+      "name": "Broxtowe",
+      "stations": 9
+    },
+    {
+      "osm": "relation/77311",
+      "name": "Rushcliffe",
+      "stations": 4
+    },
+    {
+      "osm": "relation/154043",
+      "name": "Ashfield",
+      "stations": 2
+    }
+  ]
+}

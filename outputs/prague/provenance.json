@@ -11,6 +11,18 @@
     "feed_start_date": "20260924",
     "publisher": "\"ROPID\""
   },
+  "gtfs_trams": {
+    "bytes": 50522796,
+    "file": "pid_gtfs_2026-10-13.zip",
+    "retrieved": "2026-10-13T19:35:57+00:00",
+    "sha256": "c007e46ed90ed9b0f99c98a8f93486b8c352f27e9435d36537ff2eeb0edce188",
+    "url": "https://data.pid.cz/PID_GTFS.zip"
+  },
+  "gtfs_trams_feed_info": {
+    "feed_end_date": "20261026",
+    "feed_start_date": "20261013",
+    "publisher": "\"ROPID\""
+  },
   "nace_level1": {
     "bytes": 3489,
     "file": "cz_nace_2025_level1.csv",
@@ -79,6 +91,19 @@
     "query": "[out:json][timeout:170];\narea(id:3600435514)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
     "retrieved": "2026-10-08T19:04:06+00:00",
     "sha256": "ce77c64b2ec437be41ac6fa10edd21f5ed232af8eb64de539c5a1ea5fa9be12a"
+  },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 12970,
+    "file": "wikidata_articles_2026-10-08.json",
+    "host": "www.wikidata.org",
+    "ids": 376,
+    "ids_not_read": 0,
+    "ids_with_article": 71,
+    "ids_without_article": 305,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "fd0656b91edeea2b4e73569035466d45d68d3dcff22c2e4f38a5d859f6885451"
   },
   "res": {
     "bytes": 543309993,

@@ -1,0 +1,71 @@
+{
+  "index": "app/static/places/calgary.json",
+  "places": 31553,
+  "data_retrieved": "2026-10-12",
+  "languages": {
+    "local": [
+      "en"
+    ],
+    "coverage": {
+      "en": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "English"
+    ]
+  },
+  "stations_not_open": [
+    {
+      "osm": "node/13505344037",
+      "name": "Inglewood / Ramsay",
+      "tag": "construction:railway=station"
+    },
+    {
+      "osm": "node/13505344038",
+      "name": "26 Avenue SE",
+      "tag": "construction:railway=station"
+    },
+    {
+      "osm": "node/13505344039",
+      "name": "Highfield",
+      "tag": "construction:railway=station"
+    },
+    {
+      "osm": "node/13505344040",
+      "name": "Lynnwood/Millican",
+      "tag": "construction:railway=station"
+    },
+    {
+      "osm": "node/13505344041",
+      "name": "Ogden",
+      "tag": "construction:railway=station"
+    },
+    {
+      "osm": "node/13505344042",
+      "name": "South Hill",
+      "tag": "construction:railway=station"
+    },
+    {
+      "osm": "node/13505344043",
+      "name": "Quarry Park",
+      "tag": "construction:railway=station"
+    },
+    {
+      "osm": "node/13505344044",
+      "name": "Douglas Glen",
+      "tag": "construction:railway=station"
+    },
+    {
+      "osm": "node/8017899203",
+      "name": "Shepard",
+      "tag": "construction:railway=station"
+    }
+  ],
+  "area": [
+    {
+      "osm": "relation/3227127",
+      "name": "Calgary",
+      "stations": 45
+    }
+  ]
+}

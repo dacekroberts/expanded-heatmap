@@ -25,6 +25,7 @@ import zipfile
 from pathlib import Path
 
 import geopandas as gpd
+import numpy as np
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
@@ -32,6 +33,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline import stations as station_gates  # noqa: E402
 from pipeline.baseline import emit  # noqa: E402
 from pipeline.prague import config  # noqa: E402
+from pipeline.prague import trams as tram_stops  # noqa: E402
 from pipeline.prague.boundary import city_polygon  # noqa: E402
 
 
@@ -171,17 +173,47 @@ def main():
                       "latitude": closed["latitude"], "longitude": closed["longitude"]},
                      columns=cols),
     ], ignore_index=True)
-    out.to_csv(config.EXCLUDED_STATIONS_CSV, index=False, encoding="utf-8")
     keep = (inside.rename_axis("stop_id").reset_index()
             .rename(columns={"stop_name": "station"})
             [["stop_id", "station", "lines", "latitude", "longitude"]].sort_values("station"))
-    keep.to_csv(config.STATIONS_CSV, index=False, encoding="utf-8")
+
+    # --- trams (tram rescope, owner 2026-10-13) ------------------------------
+    # Everything above is the metro set, unchanged. The tram stops are
+    # selected against it: a stop at one of these stations adds nothing, the
+    # rest are thinned (pipeline/prague/trams.py). Flora's tram stop is a
+    # station in its own right while the metro station is closed.
+    n_metro = len(keep)
+    region = gpd.GeoSeries([poly], crs=config.CRS_GEOGRAPHIC).to_crs(config.CRS_PROJECTED)
+    tr = tram_stops.build(keep[["station", "latitude", "longitude"]], region.iloc[0])
+    clash = set(tr["stations"]["station"]) & set(keep["station"])
+    if clash:
+        sys.exit(f"tram stations share a name with metro stations: {sorted(clash)}")
+    keep = pd.concat([keep, tr["stations"]], ignore_index=True)
+    nn_all = station_gates.nearest_neighbour_m(keep["longitude"], keep["latitude"],
+                                               config.CRS_PROJECTED)
+    print(f"\n  {n_metro} metro + {len(tr['stations'])} tram = {len(keep)} stations; "
+          f"nearest-neighbour median {np.median(nn_all):.0f} m, closest pair {nn_all.min():.0f} m")
+    nn_new = nn_all[n_metro:]
+    if len(nn_new) and nn_new.min() < config.TRAM_ATTACH_M / 2:
+        worst = keep.iloc[n_metro + int(nn_new.argmin())]["station"]
+        sys.exit(f"tram station {worst} is closer than half the attach distance to another "
+                 f"station: it should be that station, or one of the two.")
+    keep = keep.sort_values("station").reset_index(drop=True)
+    out = pd.concat([out, pd.DataFrame(tr["excluded"], columns=cols)], ignore_index=True)
+
+    out.to_csv(config.EXCLUDED_STATIONS_CSV, index=False, encoding="utf-8", lineterminator="\n")
+    config.STATIONS_CSV.parent.mkdir(parents=True, exist_ok=True)
+    keep.to_csv(config.STATIONS_CSV, index=False, encoding="utf-8", lineterminator="\n")
+    config.TRAM_SHAPES_JSON.write_text(json.dumps(tr["shapes"], indent=1), encoding="utf-8")
     print(f"\n  {len(keep)} stations -> {config.STATIONS_CSV.relative_to(config.ROOT)}; "
           f"{len(out)} excluded")
     emit("platforms", len(platforms))
     emit("stations", len(st_rows))
-    emit("stations_in_scope", len(keep))
+    emit("stations_in_scope", n_metro)
     emit("stations_excluded", len(out))
+    for key, value in tr["counts"].items():
+        emit(key, value)
+    emit("stations_drawn", len(keep))
 
 
 if __name__ == "__main__":

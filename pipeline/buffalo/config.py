@@ -203,3 +203,53 @@ BUFFALO_BBOX = {
     "lon_min": -78.94,
     "lon_max": -78.77,
 }
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-12) ---
+
+# The City of Buffalo's own relation (175031, wikidata Q40435), not Erie
+# County (36074), which the wave's plan gave: the map is cut to the city.
+# Found through the OSM API while Overpass was down, 2026-10-13. Its
+# boundary and admin_level tags were absent at version 49 (edited
+# 2026-10-11), so Nominatim returns only the city's node; its 17 outer
+# ways still close. Re-check the tags if a fetch says the area names no
+# boundary.
+PLACE_AREA = "(id:3600175031)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
+PLACE_LANGUAGES = ("en",)
+PLACE_FOLD = None
+PLACE_REVIEWED = {}
+PLACE_DROPPED = {
+    "way/565952876": "'Sisters of Mercy Convent', a religious residence",
+    "way/822147974": "'Worthington Business Center', a business park under its own name",
+    "way/136633533": "'duende at silo city', a venue's name on an abandoned building: a business's own feature",
+    "node/2485087172": "'Visiting Ship's Dock', a description standing in for a name (a mooring described)",
+    "node/11254346490": "'Baldt Stockless Merchant Ship's Anchor', an exhibit inside a paid venue, named by its model (owner, 2026-10-13: keep the venue, drop the rest)",
+    "node/357552762": "'Cazenovia Park', a duplicate node beside the park's own row (way/24049866) (owner, 2026-10-13)",
+    "way/266437258": "'Service Access Rd', a description as a street's name (owner, 2026-10-13)",
+    "way/93266150": "'Service Trail', a description as a street's name (owner, 2026-10-13)",
+    "way/119950400": "'Service Trail / service road', two descriptions in one as a street's name (owner, 2026-10-13)",
+    "way/1549971632": "'Service Trail / service road', two descriptions in one as a street's name (owner, 2026-10-13)",
+    "way/118671448": "'Tifft service road', a description as a street's name (owner, 2026-10-13)",
+    "way/12277149": "'Park Entrance Road', a description as a street's name (owner, 2026-10-13)",
+    "way/12284654": "'Park Exit Road', a description as a street's name (owner, 2026-10-13)",
+    "way/96510219": "'Park Exit Road', a description as a street's name (owner, 2026-10-13)",
+    "way/992055009": "'Former International Branch Foot Path', a description as a street's name (owner, 2026-10-13)",
+    "way/350947330": "'Maryner Home', a housing complex's own way, named for the building",
+    "way/350947331": "'Maryner Home', a housing complex's own way, named for the building",
+    "way/41833639": "'Maryner Towers', a housing complex's own way, named for the building",
+    "way/651955543": "'Hotel Henry Way', a hotel's own drive, named for the business",
+    "way/651955544": "'Hotel Henry Way', a hotel's own drive, named for the business",
+    "way/651955545": "'Hotel Henry Way', a hotel's own drive, named for the business",
+    "way/1245814901": "'Robert T. Coles House and Studio', home: historic building named as a house, article, no museum or attraction tag: the 'homes with an article and no home tag' class, by id (flag check, 2026-10-13)",
+    "way/583414129": "'Viola Park Median', description: traffic median tagged leisure=park, named for its street (flag check, 2026-10-13)",
+    "way/446576640": "'W Genesee St. Median', description: traffic median tagged leisure=park, named for its street (flag check, 2026-10-13)",
+}
+
+# Public sights kept by id: in the cache, passed over by the rules (place_index,
+# PLACE_KEPT; owner, 2026-10-13).
+PLACE_KEPT = {
+    "node/256127867": "'Delaware Park Japanese Gardens', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "relation/10749000": "'Erie Community College City Campus', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/1014540898": "'North Hall - The Karpeles Manuscript Library Museum', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+}

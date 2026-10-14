@@ -246,3 +246,73 @@ CALGARY_BBOX = {
     "lon_min": -114.35,
     "lon_max": -113.85,
 }
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-12) ---
+
+PLACE_AREA = "(id:3603227127)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
+PLACE_LANGUAGES = ("en",)
+PLACE_FOLD = None
+PLACE_REVIEWED = {}
+PLACE_DROPPED = {
+    "way/749024649": "'Lake Sundance', a residents' association's lake; its description says exclusive to residents",
+    "way/640136474": "'Cranston Residents Association', named for the residents' association whose facility it is",
+    "node/11345358876": "'Cedarglen Living Park Area', a home builder's own park area (operator)",
+    "way/1451256862": "'Tennis and Pickleball Courts', a community centre's courts described",
+    "node/12292137635": "'Old Car', a description on a ruin",
+    "node/11882099334": "'Carrington Lake Greenspace', a green space described on a park node",
+    "way/171072776": "'St. Boniface School', a park carrying a school's name: a wrong object's name",
+    "way/418093972": "'City of Calgary Parks Depot', a works depot tagged a park; its note says not a public park area",
+    "way/417053234": "'City of Calgary Parks, Baker Park Depot', a works depot tagged a park",
+    "way/449759375": "'City of Calgary Parks, Northern Hills Depot', a works depot tagged a park",
+    "node/12057686213": "'Studio Back Lot', a description on a locality node",
+    "node/12056311379": "'Back Lot', a description on a locality node",
+    "node/12056311444": "'Circus', a description on a locality node beside the two above",
+    "node/6820512169": "'Archway', a bare type word on a monument node",
+    "node/4937528021": "'Sda', an abbreviation as the whole name: a glitch",
+    "way/1367619198": "'Varsity Bible Church3', a stray digit in the name: a glitch",
+    "node/10671933496": "'Liony', a park node with a stray name and nothing nearby: a glitch",
+    "way/775912343": "'Good Shepard', the name is cut short: a glitch",
+    "way/292899925": "'Avatamsaka Monastery', a monastery tagged a place of worship, not notable: a religious residence, by id",
+    "node/91101428": "'Laggan', a paid heritage park's steam ride indexed as a station: not transit (owner, 2026-10-13)",
+    "node/91101477": "'Midnapore', a paid heritage park's steam ride indexed as a station: not transit (owner, 2026-10-13)",
+    "node/91101397": "'Shepard', a paid heritage park's steam ride indexed as a station: not transit (owner, 2026-10-13)",
+    "node/2461159295": "'Andrew', a paid heritage park's streetcar ride indexed as a station: not transit (owner, 2026-10-13)",
+    "node/1838951589": "'Dominion', a paid heritage park's streetcar ride indexed as a station: not transit (owner, 2026-10-13)",
+    "node/1839019736": "'Encana', a paid heritage park's streetcar ride indexed as a station: not transit (owner, 2026-10-13)",
+    "way/230774486": "'Bowell Station', a relocated station building inside a paid heritage park (owner, 2026-10-13: the venue stays, its buildings go)",
+    "way/230774477": "'Laggan Station', a relocated station building inside a paid heritage park (owner, 2026-10-13)",
+    "way/173080711": "'Midnapore Station', a relocated station building inside a paid heritage park (owner, 2026-10-13)",
+    "way/214247826": "'Shepard Station', a relocated station building inside a paid heritage park (owner, 2026-10-13)",
+    "way/1258294434": "'Indigenous Encampment', an exhibit area inside a paid heritage park (owner, 2026-10-13)",
+    "way/417717507": "'informal path (steep)', a description as a street's name (owner, 2026-10-13)",
+    "way/584509583": "'paved path', a description as a street's name (owner, 2026-10-13)",
+    "way/474938660": "'Adhoc Footpath', a description as a street's name (owner, 2026-10-13)",
+    "way/202595253": "'Cycle/ Walking Path', a description as a street's name (owner, 2026-10-13)",
+    "way/1268209044": "'Cycle/ Walking Path', a description as a street's name (owner, 2026-10-13)",
+    "way/1475415225": "'Pedestrian Footpath to Park', a description as a street's name (owner, 2026-10-13)",
+    "way/142048372": "'No More path', a description as a street's name (owner, 2026-10-13)",
+    "way/24786148": "'14 St bridge ramp', a description as a street's name (owner, 2026-10-13)",
+    "way/171942409": "'14 St bridge ramp', a description as a street's name (owner, 2026-10-13)",
+    "way/27527016": "'Queen's Park Cemetery 10 Street entrance', a description as a street's name (owner, 2026-10-13)",
+    "way/1323935108": "'NE Lion Guard', description: compass code beside a type: one of a bridge's four lions, by id (flag check, 2026-10-13)",
+    "way/1323935109": "'NW Lion Guard', description: compass code beside a type: one of a bridge's four lions, by id (flag check, 2026-10-13)",
+    "way/264219626": "'Southwood off-leash area 2', description: type and a number: 'off-leash area 2'; CODED_TYPE could take 'off-leash area N' (flag check, 2026-10-13)",
+    # The pattern screen of 2026-10-13, the owner's rulings on its open calls: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "way/469601882": "'The Atrium', a stock name with no place in it (owner, 2026-10-13, on the pattern screen's open calls: ruling 5)",
+    # The helper screens of 2026-10-13 (duplicates, parts in a church's grounds): rows that
+    # fall squarely in an owner ruling, each with its ruling.
+    "node/5286252216": "'Battalion Park geoglyphs', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): the hillside numbers of Battalion Park as their own row, 175 m from the park's row (way/48562535), under the same Wikidata entry (Q4245109) and the same article (en:Battalion Park): the part beside the whole",
+}
+
+# Famous places kept by id: in the cache, passed over by the rules (place_index,
+# PLACE_KEPT; owner, 2026-10-13).
+PLACE_KEPT = {
+    "way/12244405": "'Canada Olympic Park', one of the city's best-known sights, in the cache with no row (tourism=attraction, leisure=park, no wikidata or wikipedia tag): a famous place the rules pass over (owner, 2026-10-13; pattern screen)",
+    "node/1379435639": "'Calgary Farmers' Market', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/5319586638": "'National Music Centre', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/4365625291": "'Scotsman's Hill', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/2428783013": "'Wonderland', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+}

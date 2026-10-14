@@ -1,0 +1,25 @@
+{
+  "index": "app/static/places/toronto.json",
+  "places": 35879,
+  "data_retrieved": "2026-10-12",
+  "languages": {
+    "local": [
+      "en"
+    ],
+    "coverage": {
+      "en": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "English"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/324211",
+      "name": "Toronto",
+      "stations": 174
+    }
+  ]
+}

@@ -69,7 +69,7 @@ st.markdown(
 """
 )
 
-render_map_help('three business categories (Retail, Food service and Personal services)')
+render_map_help('three business categories (Retail, Food service and Personal services)', search='san_francisco')
 render_excluded_stations("San Francisco")
 render_country_links('San Francisco')
 

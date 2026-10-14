@@ -1,23 +1,69 @@
 {
-  "written_utc": "2026-09-30T19:59:02+00:00",
-  "osm_host": "overpass-api.de",
+  "as_of_date": "2026-09-30",
+  "files_utc": {
+    "city_boundary_tiger.geojson": "2026-09-30T19:55:35+00:00",
+    "county_subdivisions_tiger.geojson": "2026-09-30T19:55:37+00:00",
+    "geocoded_food_facilities.csv": "2026-09-30T19:55:38+00:00",
+    "osm_rail.json": "2026-09-30T19:59:02+00:00"
+  },
   "osm_bbox": [
     40.28,
     -80.15,
     40.5,
     -79.9
   ],
-  "as_of_date": "2026-09-30",
-  "register_date": "2025-08-27",
-  "files_utc": {
-    "geocoded_food_facilities.csv": "2026-09-30T19:55:38+00:00",
-    "city_boundary_tiger.geojson": "2026-09-30T19:55:35+00:00",
-    "county_subdivisions_tiger.geojson": "2026-09-30T19:55:37+00:00",
-    "osm_rail.json": "2026-09-30T19:59:02+00:00"
+  "osm_host": "overpass-api.de",
+  "osm_place_outline": {
+    "bytes": 136541,
+    "elements": 1,
+    "file": "osm_place_outline_v1.json",
+    "host": "overpass.kumi.systems",
+    "how": "fetched",
+    "osm_base": "2026-07-24T11:04:51Z",
+    "query": "[out:json][timeout:60];\narea(id:3600188553)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T06:11:11+00:00",
+    "sha256": "b7e2a916671dabef51b263644f47a54bf4ae4b9cba095479edb4690dd2c497d7"
   },
+  "osm_places": {
+    "bytes": 10091844,
+    "elements": 81414,
+    "file": "osm_places_2026-10-12.json",
+    "host": "overpass-api.de",
+    "how": "kept (on disk from an earlier run)",
+    "osm_base": "2026-10-12T22:41:05Z",
+    "query": "[out:json][timeout:170];\narea(id:3600188553)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-12T22:42:51+00:00",
+    "sha256": "25109ae07bc19725933896a393d9665993b15b36ee3b3c681bf8f6a1e0d0f329"
+  },
+  "osm_places_extra": {
+    "bytes": 51643,
+    "elements": 167,
+    "file": "osm_places_extra_2026-10-12.json",
+    "host": "overpass-api.de",
+    "how": "fetched",
+    "osm_base": "2026-10-13T06:10:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3600188553)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T06:11:41+00:00",
+    "sha256": "f0fb2620c870de28a23cb47ecb60dd641bc37551a760c4af6cc7af2104a59f0a"
+  },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 757,
+    "file": "wikidata_articles_2026-10-12.json",
+    "host": "www.wikidata.org",
+    "ids": 13,
+    "ids_not_read": 0,
+    "ids_with_article": 12,
+    "ids_without_article": 1,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "6573be5af20d5d3a7e7283850a718dc4bf838a64680a3c7dc1cf2833b5ba0c96"
+  },
+  "register_date": "2025-08-27",
   "sources": {
     "food_facilities": {
       "endpoint": "https://data.wprdc.org/datastore/dump/112a3821-334d-4f3f-ab40-4de1220b1a0a"
     }
-  }
+  },
+  "written_utc": "2026-09-30T19:59:02+00:00"
 }

@@ -1,21 +1,67 @@
 {
-  "written_utc": "2026-09-30T04:51:55+00:00",
-  "osm_host": "overpass.kumi.systems",
+  "as_of_date": "2026-09-29",
+  "feed_info": "\"20260929\",\"1.0\",\"Ottawa\",\"http://www.ottawa.ca\",\"\"",
+  "files_utc": {
+    "osm_rail.json": "2026-09-30T04:51:55+00:00",
+    "wards_2022_2026.geojson": "2026-09-30T04:51:08+00:00",
+    "yelp_ottawa_healthscores_FoodSafety.zip": "2026-09-30T03:19:02+00:00"
+  },
   "osm_bbox": [
     45.2,
     -76.0,
     45.55,
     -75.4
   ],
-  "as_of_date": "2026-09-29",
-  "feed_info": "\"20260929\",\"1.0\",\"Ottawa\",\"http://www.ottawa.ca\",\"\"",
-  "files_utc": {
-    "yelp_ottawa_healthscores_FoodSafety.zip": "2026-09-30T03:19:02+00:00",
-    "wards_2022_2026.geojson": "2026-09-30T04:51:08+00:00",
-    "osm_rail.json": "2026-09-30T04:51:55+00:00"
+  "osm_host": "overpass.kumi.systems",
+  "osm_place_outline": {
+    "bytes": 179620,
+    "elements": 1,
+    "file": "osm_place_outline_v1.json",
+    "host": "download.geofabrik.de (ontario-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:60];\narea(id:3604136816)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T09:57:21+00:00",
+    "sha256": "c3ad8356276cb550cc0e605433629053bb93c0911fd903b54e612c791ecef4f6"
+  },
+  "osm_places": {
+    "bytes": 29954905,
+    "elements": 251797,
+    "file": "osm_places_2026-10-12.json",
+    "host": "overpass-api.de",
+    "how": "fetched",
+    "osm_base": "2026-10-12T22:14:34Z",
+    "query": "[out:json][timeout:170];\narea(id:3604136816)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-12T22:17:29+00:00",
+    "sha256": "5d24814bcca41b03738a28ac554e02912ce8a73aed9bee08718edd67d1cc1e45"
+  },
+  "osm_places_extra": {
+    "bytes": 182438,
+    "elements": 435,
+    "file": "osm_places_extra_2026-10-12.json",
+    "host": "download.geofabrik.de (ontario-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3604136816)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T09:57:21+00:00",
+    "sha256": "22f9955c65d8aa2703c726361a912d250966dfa9343320ab7fd48e8e04ca3566"
+  },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 990,
+    "file": "wikidata_articles_2026-10-12.json",
+    "host": "www.wikidata.org",
+    "ids": 9,
+    "ids_not_read": 0,
+    "ids_with_article": 5,
+    "ids_without_article": 4,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "f3ce7bbcce294015087ada76a0a2720f0f2f462b50f4ef963a56c922c1cf8279"
   },
   "sources": {
     "feed": "https://opendata.ottawa.ca/inspections/yelp_ottawa_healthscores_FoodSafety.zip",
     "wards": "https://services.arcgis.com/G6F8XLCl5KtAlZ2G/arcgis/rest/services/Wards_2022_2026/FeatureServer/0/query"
-  }
+  },
+  "written_utc": "2026-09-30T04:51:55+00:00"
 }

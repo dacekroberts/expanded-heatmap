@@ -152,3 +152,87 @@ OTTAWA_BBOX = {
     "lon_min": -76.40,
     "lon_max": -75.24,
 }
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-12) ---
+
+PLACE_AREA = "(id:3604136816)"
+# The index reaches more than 25 km past the map's stations, a far corner of the
+# municipality's own area: recorded for rule D of scripts/check_place_scope.py
+# (measured 48.4 km on the index of 2026-10-13; remove it if a rebuild falls within 25 km).
+PLACE_SCOPE_REACH_REASON = "2026-10-13: the amalgamated city holds its rural west, 48 km past the nearest station (owner)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
+PLACE_LANGUAGES = ("en",)
+PLACE_FOLD = None
+# Read and kept, 2026-10-13 (the flag check of wave 1; the owner's ruling
+# to settle unsure rows by the existing rules). None carries a leak word,
+# so check E takes no PLACE_REVIEWED entry for it; the reason is kept here.
+#   way/242719863 'St. Barnabas Church,': a church with an article of its own; the trailing comma is OpenStreetMap's and stops no search
+PLACE_REVIEWED = {}
+PLACE_DROPPED = {
+    "relation/7057829": "'Chapel Hill South', a duplicate beside the same thing's own row (owner, 2026-10-13)",
+    "node/12170991637": "'Artillery Piece', a description standing in for a name (owner, 2026-10-13)",
+    "way/1289234021": "'Helicopter', a bare type word for a name (owner, 2026-10-13)",
+    "way/1289234022": "'LAV', a type or model word standing in for a name (owner, 2026-10-13)",
+    "node/9767324163": "'Plane', a bare type word for a name (owner, 2026-10-13)",
+    "node/1772920299": "'T-33', a type or model word standing in for a name (owner, 2026-10-13)",
+    "node/9767324164": "'Tank', a bare type word for a name (owner, 2026-10-13)",
+    "node/12033927455": "'2017 Ottawa', a description standing in for a name (owner, 2026-10-13)",
+    "node/11954817794": "'Bob Mills Plaque', a plaque or grave under a private person's name (owner, 2026-10-13)",
+    "node/11340125935": "'Shea woods car', abandoned by its own tags (owner, 2026-10-13)",
+    "node/4949334102": "'Naval Rod is Station 1940-1947', a notice or code glued onto the name: a glitch (owner, 2026-10-13)",
+    "node/12319507802": "'Baxter Conservation Area back entrance', a description standing in for a name (owner, 2026-10-13)",
+    "way/746264619": "'Flower gardens', a description standing in for a name (owner, 2026-10-13)",
+    "way/68709999": "'NCC', an operator's initials standing in for a name",
+    "way/1102388336": "'Future Elsie McGill Park', not yet open by its own tags or name (owner, 2026-10-13)",
+    "way/1102388337": "'Future Mieshimin Park', not yet open by its own tags or name (owner, 2026-10-13)",
+    "way/447222172": "'Chaplain Services', a duplicate beside the same thing's own row (owner, 2026-10-13)",
+    "way/491014702": "'Photo Equatorial Building', a single building's own way, named for the building",
+    "way/491014701": "'South Azimuth Building', a single building's own way, named for the building",
+    "node/4485797712": "'Babs Asper Theatre', an interior section of a paid venue, which keeps its own row (owner, 2026-10-13)",
+    "node/4485797711": "'Fourth Stage', an interior section of a paid venue, which keeps its own row (owner, 2026-10-13)",
+    "node/2291903243": "'Southam Hall', an interior section of a paid venue, which keeps its own row (owner, 2026-10-13)",
+    "node/5991684085": "'Reconciliation', a duplicate beside the same thing's own row (owner, 2026-10-13)",
+    "way/238904302": "'Billings Estate Museum: Main House', a duplicate beside the same thing's own row (owner, 2026-10-13)",
+    "way/526261452": "'50 (Winter Trail)', a notice or code glued onto the name: a glitch (owner, 2026-10-13)",
+    "way/496702956": "'53 (Winter Trail)', a notice or code glued onto the name: a glitch (owner, 2026-10-13)",
+    "way/930751009": "'Need to be Name path', a placeholder standing in for a name",
+    "way/743011242": "'The Dog Went This way', a description standing in for a name (owner, 2026-10-13)",
+    "way/475591082": "'Main Road', a description standing in for a name (owner, 2026-10-13)",
+    "way/475591089": "'Main Road', a description standing in for a name (owner, 2026-10-13)",
+    "way/545959909": "'Primary Path', a description standing in for a name (owner, 2026-10-13)",
+    "way/743011245": "'Primary Path', a description standing in for a name (owner, 2026-10-13)",
+    "way/743011232": "'Redundant Way', a mapper's note standing in for a name",
+    "way/163534607": "'Stone Dust Path', a description standing in for a name (owner, 2026-10-13)",
+    "way/720680367": "'Beaver Bridge ◆', a glitched name (a stray symbol), not repaired (owner, 2026-10-13)",
+    "way/474206003": "'Confederation Bridge 🟦', a glitched name (a stray symbol), not repaired (owner, 2026-10-13)",
+    "way/680344191": "'Piste cyclable', a bare type word for a name (owner, 2026-10-13)",
+    "way/1126824853": "'McArthur Aveune Cycle Path', a description standing in for a name (owner, 2026-10-13)",
+    "way/1126824854": "'McArthur Aveune Cycle Path', a description standing in for a name (owner, 2026-10-13)",
+    "way/1536388116": "'McArthur Aveune Cycle Path', a description standing in for a name (owner, 2026-10-13)",
+    "way/1278571389": "'Trail 24 - 3.5km', a notice or code glued onto the name: a glitch (owner, 2026-10-13)",
+    "way/789366448": "'Stairs to UCU Terrace', a description standing in for a name (owner, 2026-10-13)",
+    "way/714849837": "'World Exchange Plaza Level 1', an interior section of a paid venue, which keeps its own row (owner, 2026-10-13)",
+    "way/714849838": "'World Exchange Plaza Level 1', an interior section of a paid venue, which keeps its own row (owner, 2026-10-13)",
+    "way/714849839": "'World Exchange Plaza Level 1', an interior section of a paid venue, which keeps its own row (owner, 2026-10-13)",
+    "way/714851527": "'World Exchange Plaza Level 1', an interior section of a paid venue, which keeps its own row (owner, 2026-10-13)",
+    "way/714851529": "'World Exchange Plaza Level 2', an interior section of a paid venue, which keeps its own row (owner, 2026-10-13)",
+    "way/714851530": "'World Exchange Plaza Level 2', an interior section of a paid venue, which keeps its own row (owner, 2026-10-13)",
+    "way/545918946": "'Dead End Street', a description standing in for a name (owner, 2026-10-13)",
+    "way/430405250": "'Miners Trail shortcut', a description standing in for a name (owner, 2026-10-13)",
+    "relation/9788372": "'Casino Lac Leamy Plaza', business: a casino's own plaza under the casino's name (place=square) (flag check, 2026-10-13)",
+    "way/1314967982": "'Iltis', description: a display vehicle tagged historic=monument and named by its model alone (two outlines, way/1314967982 and way/1314967983) (flag check, 2026-10-13)",
+    "way/1314967983": "'Iltis', description: a display vehicle tagged historic=monument and named by its model alone (two outlines, way/1314967982 and way/1314967983) (flag check, 2026-10-13)",
+    "way/545714255": "'Kanata Town Centre Stormwater Pond', description: stormwater pond tagged leisure=park (flag check, 2026-10-13)",
+    "way/483954792": "'Mather Award Ditch', description: drainage ditch tagged leisure=park (flag check, 2026-10-13)",
+    "node/12627526960": "'Ottawa's Highest Point', description: natural=peak named by a description (flag check, 2026-10-13)",
+    "way/1324953278": "'The 8th Canadian Hussars (Princess Louise's) Sherman 'Easy Eight' M4A2(76) W HVSS tank', description: a display tank's outline named by a long description, 1 m from the memorial's own node (node/6977909007, 'Royal Canadian Armoured Corps Sherman Tank Memorial') (flag check, 2026-10-13)",
+    "way/294669471": "'Paroisses Catholiques Romaines', a place of worship named only by a denomination, a body or a chain, in a form the shared rule's lists do not hold; no wikipedia tag of its own (owner's rulings, 2026-10-13)",
+    # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "way/639573159": "'The Little Park', the grounds of an office or apartment building, or of a housing estate by its operator, tagged a park or square (owner, 2026-10-13, the estate-facility ruling as applied to Toronto; pattern screen)",
+    "way/1312713051": "'Carp RIver', a second river row under a mistyped name beside the river's own row (owner, 2026-10-13, ruling 9 and the glitched-name call; pattern screen)",
+    # The pattern screen of 2026-10-13, the owner's rulings on its open calls: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "way/548432118": "'Linear Park', a park named only by a type word (owner, 2026-10-13, on the pattern screen's open calls)",
+}

@@ -16,6 +16,7 @@ that reaches a stop the kept ones do not, stop when the route's stops are
 covered. Metro A's shapes still run through Flora, closed or not - the track
 is there - so the line needs no special case.
 """
+import json
 import sys
 import zipfile
 from pathlib import Path
@@ -39,9 +40,14 @@ from pipeline.prague.config import (  # noqa: E402
     ROUTE_TYPE_METRO,
     STATIONS_CSV,
     TAXONOMY_SYSTEM,
+    TRAM_GROUPS,
+    TRAM_GTFS_ZIP,
+    TRAM_SHAPES_JSON,
+    tram_group_name,
 )
 
 SYSTEM = "Metro"
+SYSTEM_SHOWN = "Metro and trams"
 # Per-line label end override: "start" or "end". Default picks the tail
 # farthest from the other lines, on the stretch inside the city.
 LINE_LABEL_ENDS = {}
@@ -86,8 +92,25 @@ def shape_ids_for_routes(zf):
     return chosen
 
 
+def tram_specs():
+    """The tram groups, each on the GTFS shapes step 1 chose for its routes.
+    Keys are "T1_25" and so on, apart from the metro's letters."""
+    shapes = json.loads(TRAM_SHAPES_JSON.read_text(encoding="utf-8"))
+    grouped = [r for g in TRAM_GROUPS for r in g]
+    if sorted(grouped) != sorted(shapes):
+        sys.exit(f"step 1 drew tram lines {sorted(shapes)}; config.TRAM_GROUPS holds "
+                 f"{sorted(grouped)}. Re-measure the groups and colours (config).")
+    specs = {}
+    for group, colour in TRAM_GROUPS.items():
+        key = "T" + "_".join(group)
+        specs[key] = (tuple(s for r in group for s in shapes[r]), colour,
+                      tram_group_name(group), LINE_LABEL_ENDS.get(key))
+    return specs
+
+
 def main():
-    for path in (STATIONS_CSV, BUSINESSES_CLEAN_CSV, GTFS_ZIP):
+    for path in (STATIONS_CSV, BUSINESSES_CLEAN_CSV, GTFS_ZIP, TRAM_GTFS_ZIP,
+                 TRAM_SHAPES_JSON):
         if not path.exists():
             sys.exit(f"Missing {path}. Run the earlier steps first.")
     print("Line shapes:")
@@ -104,11 +127,12 @@ def main():
         output_path=HEATMAP_HTML,
         map_title="Prague Metro Business Density Heatmap",
         city_name="Prague",
-        system_name=SYSTEM,
+        system_name=SYSTEM_SHOWN,
         stations=stations,
         businesses=businesses,
         taxonomy_system=TAXONOMY_SYSTEM,
-        lines=load_line_shapes(GTFS_ZIP, line_specs, SYSTEM),
+        lines={**load_line_shapes(GTFS_ZIP, line_specs, SYSTEM),
+               **load_line_shapes(TRAM_GTFS_ZIP, tram_specs(), "PID tram")},
         crs_geographic=CRS_GEOGRAPHIC,
         crs_projected=CRS_PROJECTED,
         ring_edges_meters=RING_EDGES_METERS,

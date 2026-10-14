@@ -1,0 +1,25 @@
+{
+  "index": "app/static/places/houston.json",
+  "places": 55069,
+  "data_retrieved": "2026-10-12",
+  "languages": {
+    "local": [
+      "en"
+    ],
+    "coverage": {
+      "en": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "English"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/2688911",
+      "name": "Houston",
+      "stations": 40
+    }
+  ]
+}

@@ -502,7 +502,7 @@ def build_city(config):
                           visitable=live, rebuilt=rebuilt, closed_for_works=set(works),
                           way_words=tuple(getattr(config, "PLACE_WAY_WORDS", ())),
                           kept=set(getattr(config, "PLACE_KEPT", {})),
-                          map_stations=[n for n, _, _ in (map_stations(config) or [])],
+                          map_stations=list(map_stations(config, local_names=True) or []),
                           also=tuple(getattr(config, "PLACE_LANGUAGES_ALSO", ())),
                           station_strip=tuple(getattr(config, "PLACE_STATION_STRIP", ())),
                           articles=read_wikidata_articles(wikidata_cache(config)),
@@ -540,6 +540,11 @@ def build_city(config):
     stale = sorted(set(dropped) - found)
     if stale:
         sys.exit(f"config.PLACE_DROPPED names {stale}, not in the cache: remove them")
+    # A kept id the cache does not hold keeps nothing: stop, never pass.
+    stale = sorted(set(getattr(config, "PLACE_KEPT", {})) - found)
+    if stale:
+        sys.exit(f"config.PLACE_KEPT names {stale}, not in the cache: remove them (the object left "
+                 f"OpenStreetMap or its id changed), or fetch again")
     # A cache absent from disk is no answer: the rules fall back to the
     # wikipedia tag alone, and run() says so. A cache that is there and lacks
     # an entry the step needs is stale, and stops the step.
@@ -1205,6 +1210,7 @@ OTHER_MODES = ("bus", "ferry", "trolleybus", "coach", "minibus")
 # transport interchanges (amenity=bus_station), ferry piers and the Ngong
 # Ping cable-car terminal (aerialway=station), 2026-10-08.
 NOT_RAIL = {"amenity": {"bus_station", "ferry_terminal"}, "aerialway": {"station"}}
+NOT_STATION_AMENITY = {"school", "kindergarten", "college", "university"}
 # A commercial building is a business unless notable: Sydney's numbered
 # "Bay 0" to "Bay 15", historic=building on building=commercial (2026-10-08).
 # A hotel building likewise (Barcelona's Casa Cambó, building=hotel, batch 2a).
@@ -1399,6 +1405,13 @@ JUNK_NAMES = {"untitled", "unnamed", "unknown", "noname", "no name", "nan", "nul
 _CONTACT = re.compile(r"[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}"
                       r"|(?:\+?1[ .\-]?)?\(?\d{3}\)?[ .\-]\d{3}[ .\-]\d{4}"
                       r"|(?<!\d)0\d{1,3}-\d{2,4}-\d{4}(?!\d)")
+# A web address is no name (a fault mended, 2026-10-13: Toronto's landmark
+# named "https://papemosque.ca/"). The scheme anywhere, or a leading "www.".
+_WEB_ADDRESS = re.compile(r"https?://|^www[.]", re.I)
+# A height is no name (a fault mended, 2026-10-13: peaks named "109m",
+# "120.6m", "222M"; Sasebo 74, Nagasaki 22). The number-alone rule reads a
+# number with the metre sign as a number alone. The whole name only.
+_HEIGHT_ONLY = re.compile(r"\d+(?:[.,]\d+)?\s*m", re.I)
 JUNK_MARKS = ("#n/a", "#ref", "#value", "#div/0", "#name?", "#num", "#null", "!error",
               chr(0xFFFD))  # the replacement character, a broken decode
 
@@ -1418,7 +1431,9 @@ def junk_name(name):
     lost = (low.startswith("?") and not low.startswith("? ")) or any(
         low[i] == "?" and low[i - 1].isalpha() and low[i + 1].isalpha() for i in range(1, len(low) - 1))
     return (lost or not any(c.isalpha() for c in low) or low.strip("!?.#() ") in JUNK_NAMES
-            or any(m in low for m in JUNK_MARKS) or bool(_CONTACT.search(name)))
+            or any(m in low for m in JUNK_MARKS) or bool(_CONTACT.search(name))
+            or bool(_WEB_ADDRESS.search(low))
+            or bool(_HEIGHT_ONLY.fullmatch(unicodedata.normalize("NFKC", low))))
 
 
 # BARE TYPE WORDS (owner, 2026-10-11: "proposed list sounds good"): a name
@@ -1908,7 +1923,11 @@ WORSHIP_JOINERS = {"en": ("of", "the", "and", "for"), "fr": ("de", "des", "du", 
 # A denomination spelt as its mappers spell it, read as its listed phrase
 # (wave 1: "Jehova's Witnesses", "Jehovahs Witness", "Jehovah's Wittnesses",
 # "Jehovah's Withesses", each on a Kingdom Hall).
-WORSHIP_RESPELL = {"en": ((re.compile(r"\bjehovah?s? wit{1,2}[nh]ess(?:es)?\b"), "jehovahs witnesses"),)}
+WORSHIP_RESPELL = {"en": ((re.compile(r"\bjehovah?s? wit{1,2}[nh]ess(?:es)?\b"), "jehovahs witnesses"),),
+                   # Matching faults mended (2026-10-13), no body added: a
+                   # listed body spelled out, and a listed hall named short.
+                   "ja": ((re.compile(r"パーフェクト\s*リバティー\s*教団"), "pl教団"),),
+                   "pt": ((re.compile(r"\bsalao (d[ao]s testemunhas de jeova)\b"), r"salao do reino \1"),)}
 _WORSHIP_PATTERNS = {}
 
 
@@ -1916,6 +1935,9 @@ def _worship_fold(name):
     low = unicodedata.normalize("NFKC", name).lower()
     if not _CJK_WORD.search(low):
         low = _unaccent(low)
+    # A leading elided article is set aside ("L'Église de Jésus-Christ ...";
+    # a matching fault mended, 2026-10-13).
+    low = re.sub(r"^l['’ʼ`]", "", low)
     low = re.sub(r"['’ʼ`]", "", low)
     return " ".join(re.sub(r"[^\w]+", " ", low, flags=re.UNICODE).replace("_", " ").split())
 
@@ -2210,6 +2232,23 @@ MODEL_EXHIBITS = {"aircraft", "tank", "cannon", "missile", "rocket", "vehicle"}
 RAIL_EXHIBITS = {"locomotive", "railway_car"}
 
 
+# AN ARTICLE NAMED FOR THE OBJECT IS THE OBJECT'S (a fault mended,
+# 2026-10-13: Chicago's Victory Monument, way/1361248798, carries its own
+# entry as subject:wikidata too, was read as standing on its subject's and
+# had no row). The article's title, a bracketed or comma qualifier set aside
+# ("Victory Monument (Chicago)", "General Post Office, Dublin"), is one of
+# the object's names. Never on a grave or a plaque, which is named for its
+# subject (own_article). Measured on 211 cities: 36 landmarks dropped by the
+# subject-entry test, 5 of them under an article of their own name.
+_TITLE_QUALIFIER = re.compile(r"\s*(?:\([^)]*\)|,.*)$")
+
+
+def article_names_object(wp, names):
+    title = article_title(wp or "")
+    keys = {fold_name(title), fold_name(_TITLE_QUALIFIER.sub("", title))} - {""}
+    return any(fold_name(n) in keys for n in names if n)
+
+
 def _titled_by_name(tags):
     title = fold_name(article_title(tags.get("wikipedia") or ""))
     return bool(title) and title == fold_name(tags.get("name") or "")
@@ -2407,7 +2446,12 @@ def own_article(tags, names, shared=False):
     if "#" in wp:
         return "not", "a section of another article"
     wd = (tags.get("wikidata") or "").strip()
+    # A subject tag that repeats the object's own article or entry says
+    # nothing when the article is named for the object (article_names_object).
+    named = not grave_or_plaque(tags) and article_names_object(wp, names)
     for key in _SUBJECT_KEYS:
+        if key == "subject" and named:
+            continue
         if (tags.get(f"{key}:wikipedia") or "").strip() == wp:
             return "not", f"the article is its {key}'s ({key}:wikipedia)"
         if wd and wd in [v.strip() for v in (tags.get(f"{key}:wikidata") or "").split(";")]:
@@ -2565,6 +2609,15 @@ STATION_PRIVATE_ACCESS = ("private",)
 # Measured on the 19 live cities, 2026-10-13: 3 rows leave, all entrances in
 # Tokyo (北口, 日暮里駅 南改札口, 熊野前駅出入口); on the five pilot cities 7.
 STATION_FREIGHT_WORDS = {"es": ("mercancías",)}
+# Faults the full reads found (2026-10-13). A Japanese station name that
+# ENDS in a freight word (川崎貨物, 福岡貨物ターミナル, 吹田貨物ターミナル), a
+# station whose operator is a freight railway and nothing else (the whole
+# operator tag: a passenger station shared with one lists both), and a
+# station name ending 跡地, a former site. 跡地 is read on stations only: on
+# a landmark it names a historic site's marker.
+STATION_FREIGHT_ENDS = {"ja": ("貨物", "貨物ターミナル", "貨物駅")}
+STATION_FREIGHT_OPERATORS = frozenset(("jr貨物", "日本貨物鉄道", "神奈川臨海鉄道", "ftl"))
+STATION_FORMER_ENDS = {"ja": ("跡地",)}
 STATION_ENTRANCES = {"subway_entrance", "train_station_entrance"}
 BUS_NETWORK = re.compile(r"\bBRT\b|\bbus\b|autob[uú]s|[oô]nibus", re.I)
 
@@ -2579,6 +2632,14 @@ def station_out_of_service(tags, names, local):
         for w in STATION_FREIGHT_WORDS.get(c, ()):
             if re.search(rf"\b{re.escape(_unaccent(w))}\b", low):
                 return f"a freight station by its name ({w})"
+        for w in STATION_FREIGHT_ENDS.get(c, ()):
+            if low.endswith(w) and len(low) > len(w):
+                return f"a freight station by its name ({w})"
+        for w in STATION_FORMER_ENDS.get(c, ()):
+            if low.endswith(w) and len(low) > len(w):
+                return f"a former site by its name ({w})"
+    if unicodedata.normalize("NFKC", str(tags.get("operator") or "")).strip().lower() in STATION_FREIGHT_OPERATORS:
+        return f"a freight railway's station (operator={tags['operator']})"
     return None
 
 
@@ -2594,6 +2655,40 @@ def station_closed(tags, retrieved):
     if _past(tags.get("end_date"), retrieved):
         return f"end_date={tags['end_date']}"
     return None
+
+
+# A STATION THE MAP DRAWS IS NOT CLOSED BY A DISUSED TAG (the station guard,
+# 2026-10-13; found in Toronto, wave 1). Seven Eglinton line stations the
+# map draws carry disused:public_transport=station in OpenStreetMap and had
+# no station row; the name guard of the three tests below misses them (the
+# map says "Avenue Station", OSM "Avenue"). Spared: a station within
+# STATION_DRAWN_M of a map station whose name is its own or begins it (or
+# the reverse), names folded. Position alone is not enough and neither is
+# the name. Measured on the caches of 237 cities, closed-tagged stations
+# within 500 m of a map station: 20. The test spares 11 (Toronto's 7 at 7
+# to 50 m; Riga's 4 tram stops at 1 to 50 m) and leaves 9: under another
+# name Grenoble's abandoned tramway stop at 56 m and Hong Kong's stop of
+# 2002 at 46 m; too far Rio de Janeiro's Olaria bus station at 179 m and
+# Edmonton's old NAIT at 251 m. A dated closure (end_date before the cache)
+# is never spared, whatever else the object carries: Rio de Janeiro's
+# Bonsucesso, the map station's own name at 66 m, closed in 2016, and
+# Minneapolis's Target Field commuter platform at 52 m, closed in 2026.
+# Re-measure
+# (data/_search_rollout/live_rules56/disused_map_stations.tsv) if the
+# distance or the name test changes.
+STATION_DRAWN_M = 100
+
+
+def drawn_station_here(names, pt, drawn_at):
+    """True when a station the map draws (`drawn_at`: [(folded name, lat,
+    lon)]) lies within STATION_DRAWN_M of `pt` and one of `names`, folded,
+    is its name, begins it or is begun by it."""
+    own = [f for f in (fold_name(n) for n in names) if f]
+    for name, lat, lon in drawn_at:
+        if name and _dist_m(pt, (lat, lon)) <= STATION_DRAWN_M \
+                and any(name.startswith(f) or f.startswith(name) for f in own):
+            return True
+    return False
 
 
 def station_ride(tags):
@@ -2733,7 +2828,51 @@ ISLAND_VALUES = {"island", "islet"}
 # row a platform (294 rows on the 19, 205 of them in Prague). Rows that
 # differ in mode or network are an interchange and stay two rows (261), and
 # so do same-mode rows that are not tram stops (35).
-PLATFORM_MERGE_M = 150
+PLATFORM_MERGE_M = 250
+# ONE STOP, ONE ROW (faults the full reads found, 2026-10-13). Was 150 m and
+# tram stops of one folded name only. Now: the name is read with a station
+# word and a direction note in brackets set aside (_stop_key: "奈多駅" is
+# "奈多", "Grand Arénas (dir Nice)" is "Grand Arénas"); tram stops of one
+# such name chained within PLATFORM_MERGE_M are one row (Den Haag's four
+# stops stand 170 to 230 m apart); and so are stations or halts of one
+# railway value, UNLESS two of them carry different operators, networks or
+# Wikidata entries, which is an interchange of two railways and stays two
+# rows (Hiroshima's 新白島, Kochi's 朝倉, Seongnam's 모란). NOT built: a
+# trailing platform number ("Gare de Tours 1" and "2"), which would also
+# join "Terminal 1" and "Terminal 2"; those go by id.
+# A COMPASS DIRECTION IN BRACKETS IS A DIRECTION NOTE (a fault mended,
+# 2026-10-13): four Houston stations were a row a platform, "Convention
+# District (eastbound)" and "(westbound)", and none under the name the map
+# draws. Counted on the caches of 237 cities: these 8 nodes and no other
+# station or stop; no "EB" or "inbound" form occurs, so none is read. A
+# folded stop whose kept name bears a note takes the plain name, the noted
+# spellings its alternates (fold_stop, in build()).
+# WITHIN A MIXED GROUP, EACH RAILWAY VALUE FOLDS ON ITS OWN (the same day):
+# with the station word set aside, a streetcar stop "Main Street Station"
+# shares its key with the subway station "Main Street", and the mixed group
+# folded nothing, so Toronto had two rows a few metres apart for each of four
+# such stops. Reach of both: data/_search_rollout/reads_rules56/part8_reach.md.
+_DIRECTION_NOTE = re.compile(r"\s*[(（]\s*(?:(?:dir[.]?|direction|richting|vers)\s[^)）]*"
+                             r"|(?:north|south|east|west)bound\s*)[)）]\s*$", re.I)
+
+
+def _stop_key(name):
+    return _station_core(_DIRECTION_NOTE.sub("", name))
+
+
+def _one_railway(members):
+    """True when station rows of one name may be one row: all tram stops, or
+    nodes all of one railway value (station, halt) with no two different
+    operators, networks or Wikidata entries among them."""
+    kinds = {m[9].get("railway") for m in members}
+    if kinds == {"tram_stop"}:
+        return True
+    if len(kinds) != 1 or not (kinds & {"station", "halt"}):
+        return False
+    if not all(m[7].startswith("node/") for m in members):
+        return False                      # an outline is the outline merge's
+    return all(len({(m[9].get(k) or "").strip() for m in members} - {""}) <= 1
+               for k in ("operator", "network", "wikidata"))
 # ONE ROW A THING (owner, 2026-10-13): junction, place and landmark rows of
 # one folded name chained within ROW_MERGE_M are one thing in several rows
 # (417 on the 19: Hong Kong's signalled junctions a row a signal, Kyoto's 町
@@ -2834,8 +2973,11 @@ def dead_railway(tags):
 # list, 2026-10-13): "(geschlossen)", "(abgebrannt)", "(stillgelegt)",
 # "(außer Betrieb)". NOT "ehem." or "ehemalig": it leads 39 Berlin landmark
 # names, several of them standing buildings.
+# And the marks the full reads found (2026-10-13), in either bracket form:
+# (閉鎖), (閉鎖中), (予定地), （廃駅）, (폐역).
 HISTORICAL_NAME = re.compile(
-    r"\((?:historical|geschlossen|abgebrannt|stillgelegt|außer betrieb|ausser betrieb|fechado|fechada)\)\s*$", re.I)
+    r"[(（](?:historical|geschlossen|abgebrannt|stillgelegt|außer betrieb|ausser betrieb|fechado|fechada"
+    r"|閉鎖|閉鎖中|予定地|廃駅|폐역)[)）]\s*$", re.I)
 # REGISTER AND INVENTORY ENTRIES (rule 4): historic=maritime, naval, military
 # and engine are the values a register district's members and a museum's
 # hardware carry. A landmark of these values needs a Wikipedia article of its
@@ -2995,19 +3137,56 @@ def _station_core(name):
 # station at 350 m. On the 19 live cities it undoes 2 of the 210 merges:
 # London's Monument beside Bank (354 m) and Barcelona's Provença beside
 # Diagonal (191 m). Needs STATIONS_CSV on the machine, as the guard does.
-def complex_parts(members, drawn):
+# ONE STATION UNDER NEAR-IDENTICAL NAMES IS ONE ROW (a fault mended,
+# 2026-10-13; the cost side of the rule in complex_parts). Berlin had
+# "Alexanderplatz" beside "Berlin Alexanderplatz" and five rows for Ostkreuz
+# ("Berlin Ostkreuz (Ostbahn)", "Ostkreuz (Ringbahn)"). Among stations of one
+# Wikidata entry the name is compared by a core (_complex_core) that sets
+# aside, in this order: a closing note in round brackets; a station word
+# (_station_core); and the city's name as a LEADING WORD, parted from the
+# rest by a space or a hyphen. Rows fold only on EQUAL cores, so the city
+# word goes only where what follows it is the whole core of another row.
+# The city's name is build()'s `city`, never a guess. Kobe keeps two rows:
+# "神戸三宮" has no separator after 神戸 (and the city reads "Kobe"), so 三宮
+# is not its core. Rows of one core that bear two names the map draws stay
+# apart, as before. NOT built: a variant character (Taipei's 台北車站 beside
+# 臺北; fold_name has no table for 台 and 臺), a leading line letter
+# ("S Friedrichstraße") and angle brackets (押上).
+_BRACKET_NOTE = re.compile(r"\s*[(（][^)）]*[)）]\s*$")
+
+
+def _complex_core(name, city=""):
+    """The core of a station name among stations of one Wikidata entry."""
+    base = _BRACKET_NOTE.sub("", name).strip() or name
+    if city:
+        m = re.match(rf"\s*{re.escape(city)}[\s\-–]+(\S.*)$", base, re.I)
+        if m and _station_core(m.group(1)):
+            base = m.group(1)
+    return _station_core(base)
+
+
+def complex_parts(members, drawn, city=""):
     """`members` (station rows of one Wikidata entry, chained within
-    COMPLEX_MERGE_M) split into the groups that merge: one group, unless two
-    or more of their folded names are in `drawn`."""
-    names = sorted({fold_name(r[3]) for r in members} & set(drawn))
-    if len(names) < 2:
-        return [members]
-    parts = {n: [r for r in members if fold_name(r[3]) == n] for n in names}
+    COMPLEX_MERGE_M) split into the groups that merge: one group a name."""
+    # STATIONS OF DIFFERENT NAMES DO NOT FOLD ON A SHARED ENTRY ALONE (owner,
+    # 2026-10-13, the full reads): Toyama's 電鉄富山 carried JR 富山's entry
+    # and had no row, Nagasaki's JR 浦上 was an alias of its tram stop,
+    # Kagoshima's JR station an alias of 鹿児島駅前. Rows of one name, read by
+    # its core (_complex_core), are one row; every other name keeps its own.
+    parts = defaultdict(list)
     for r in members:
-        if fold_name(r[3]) not in parts:
-            near = min(names, key=lambda n: (min(_dist_m((r[1], r[2]), (o[1], o[2])) for o in parts[n]), n))
-            parts[near].append(r)
-    return [parts[n] for n in names]
+        parts[_complex_core(r[3], city)].append(r)
+    out = []
+    for n in sorted(parts):
+        if len({fold_name(r[3]) for r in parts[n]} & set(drawn)) > 1:
+            # Two names the map draws are two rows.
+            strict = defaultdict(list)
+            for r in parts[n]:
+                strict[_station_core(r[3])].append(r)
+            out += [strict[k] for k in sorted(strict)]
+        else:
+            out.append(parts[n])
+    return out
 
 
 def street_never(name):
@@ -3094,6 +3273,18 @@ SQUARE_NEAR_M = 150
 # streets and squares around it (_square_keys): "nám." is náměstí. The word
 # itself stays: Barcelona's Placeta del Pi and Plaça del Pi are two squares.
 SQUARE_ABBR = {"nam": "namesti"}
+# THE SQUARE MERGE LOSES NO NAME (a fault mended, 2026-10-13). A park named
+# as a square (the sixth pass) is one row with a street only when the street
+# row bears the park's own leading name, joiners set aside (SQUARE_JOINERS:
+# "Praça do Japão" is the street "Praça Japão"); a name spelled another way
+# ("Praça John Kennedy" beside "Praça Jonh Kennedy") or a street under
+# another name keeps the park its own row. Whatever merges, the row that
+# stays carries the merged square's exact spelling as an alternate name when
+# it differs. On the extract run 41 merged squares were not findable under
+# their names, 8 of them beside a street of another name
+# (data/_search_rollout/extract_rules56/squares_name_not_findable.tsv).
+SQUARE_JOINERS = frozenset(("de", "do", "da", "dos", "das", "du", "des", "del", "d", "la", "las", "los",
+                            "le", "les", "l", "el", "els"))
 
 
 def _square_keys(names):
@@ -3106,6 +3297,12 @@ def _square_keys(names):
         if ws:
             out.add(tuple([SQUARE_ABBR.get(ws[0], ws[0])] + ws[1:]))
     return out
+
+
+def _square_joined(names):
+    """_square_keys with the joiners after the first word set aside, each
+    name one string."""
+    return {"".join([ws[0]] + [w for w in ws[1:] if w not in SQUARE_JOINERS]) for ws in _square_keys(names)}
 
 
 # THE INDEX REACHES THE WHOLE MAP (owner, 2026-10-12). Mexico City's index
@@ -3143,11 +3340,14 @@ def quiet_stations(quiet, stations, bare):
 _STATION_COLS = (("latitude", "longitude"), ("lat", "lon"), ("stop_lat", "stop_lon"), ("lat", "lng"))
 
 
-def map_stations(config):
+def map_stations(config, local_names=False):
     """[(name, lat, lon)] for the stations a city's map draws, from
     config.STATIONS_CSV, or None when that file is not on this machine
     (data/ is not committed). Exits on a file whose columns it cannot read,
-    since a coverage check that silently reads nothing is no check."""
+    since a coverage check that silently reads nothing is no check.
+
+    `local_names`: one more entry a station for each local name its row
+    carries (the name_<language> columns), for build()'s station guard."""
     import csv
     import sys
     path = getattr(config, "STATIONS_CSV", None)
@@ -3163,7 +3363,26 @@ def map_stations(config):
         sys.exit(f"{path}: no latitude and longitude columns among {list(rows[0])}; "
                  f"add the pair to place_index._STATION_COLS")
     name = cols.get("station") or cols.get("name") or cols.get("stop_name") or list(rows[0])[0]
-    return [(r[name], float(r[pair[0]]), float(r[pair[1]])) for r in rows]
+    out = [(r[name], float(r[pair[0]]), float(r[pair[1]])) for r in rows]
+    if local_names:
+        # THE GUARD READS THE LOCAL NAME TOO (a fault mended, 2026-10-13).
+        # `station` is romanised in the Japanese, Korean, Taiwanese and Greek
+        # cities' files ("Dentetsu-Toyama") and an index row's first name is
+        # the local one, so the guard set matched no station row in 102 of
+        # the 146 cities read (89 with name_ja, 13 with name_ko). The local
+        # columns across the 237 files: name_ja, name_ko, name_zh, name_el.
+        # A local name closing on a station word is entered without it too
+        # (Taoyuan's file says "山鼻站", the index row "山鼻").
+        # Reach: data/_search_rollout/reads_rules56/part8_reach.md.
+        local = [c for c in rows[0] if c.lower().startswith("name_")]
+        ends = [e for e in STATION_NAME_ENDS if not e.isascii()]
+        for r in rows:
+            for c in local:
+                own = (r[c] or "").strip()
+                for n in [own] + [own[:-len(e)] for e in ends if own.endswith(e) and len(own) > len(e)]:
+                    if n and n != r[name]:
+                        out.append((n, float(r[pair[0]]), float(r[pair[1]])))
+    return out
 
 
 def decode_lines(encoded, scale=100000):
@@ -3261,6 +3480,28 @@ def _commercial(tags):
 # 2026-10-13; landmark_drop): a private operator and an office tag, nothing
 # else. operator:type=business or commercial is not among them.
 KEPT_COMMERCIAL_REASONS = {"office", "operator:type=private"}
+# A SIGHT'S BRAND OR SHOP TAG (owner, 2026-10-13, relayed by Cleanup): an
+# article of the object's own (the same "own" as above) outweighs a brand
+# tag where the object also carries a tourism, historic or heritage tag
+# (Dublin's General Post Office, Hong Kong Disneyland, the Peak Tram), and a
+# shop tag on such a sight or on a market hall (Harrods, El Ateneo Grand
+# Splendid, Galerías Pacífico, Feskekörka). Lodging and food stay out: their
+# signs (tourism=hotel and the like, a food amenity, cuisine, craft) are
+# never outweighed. An ordinary shop with an article stays out (no sight
+# tag), and so does one under a chain's or a brand's article (not its own:
+# own_article, an article another object carries or the brand's own).
+# Measured: data/_search_rollout/reads_rules56/part9_landmarks.md, the
+# second heading.
+SIGHT_MARKET_AMENITIES = {"marketplace"}
+
+
+def _sight(tags, market=False):
+    """A tourism, historic or heritage tag; with `market`, a market hall's
+    amenity too."""
+    return bool(tags.get("tourism") or tags.get("historic") not in (None, "no") or tags.get("heritage")
+                or (market and tags.get("amenity") in SIGHT_MARKET_AMENITIES))
+
+
 # What a rule's record keeps of an object's tags (build()'s `log`).
 _LOG_KEYS = {"wikidata", "wikipedia", "heritage", "ref:nrhp", "historic", "tourism", "amenity", "building",
              "leisure", "landuse", "access", "memorial", "cemetery", "tomb", "place", "railway",
@@ -3299,8 +3540,9 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
     register-entry rules (config.PLACE_KEPT).
     `keep_interchanges`: this city's interchange names are street names
     (config.PLACE_KEEP_INTERCHANGES).
-    `map_stations`: the names of the stations the city's map draws
-    (map_stations()), for the station guard.
+    `map_stations`: the stations the city's map draws (map_stations()), for
+    the station guard: names, or (name, lat, lon) where the positions are
+    known (the disused test's guard, drawn_station_here, reads them).
     `also`: languages declared below the floor (config.PLACE_LANGUAGES_ALSO).
     `station_strip`: endings taken off station names (config.PLACE_STATION_STRIP).
     `articles`: the city's Wikidata article cache (read_wikidata_articles),
@@ -3316,6 +3558,7 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
     def langs_of(t):
         return _langs(t, local) | {a for a in also if t.get(f"name:{a}")}
     kept_ids = set(kept)
+    kept_given = frozenset(kept)          # config.PLACE_KEPT as given (the admission at the end)
     # A RIVER IS ONE ROW OF MANY WAYS (candidate 28, owner 2026-10-13): its
     # row carries the id of its lowest-numbered way in place_ids.json, and an
     # id of ANY of its ways in config.PLACE_DROPPED or PLACE_KEPT stands for
@@ -3336,7 +3579,8 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
                 dropped.add(f"{e['type']}/{e['id']}")
             elif ns and ns[0] in river_names["kept"]:
                 kept_ids.add(f"{e['type']}/{e['id']}")
-    drawn = {fold_name(n) for n in map_stations}
+    drawn = {fold_name(n if isinstance(n, str) else n[0]) for n in map_stations}
+    drawn_at = [(fold_name(n[0]), n[1], n[2]) for n in map_stations if not isinstance(n, str)]
 
     def note(cls, act, osm, name, why="", tags=None, bbox=None, ways=None):
         if log is not None:
@@ -3479,6 +3723,14 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         hw = {v.strip() for v in str(t.get("highway") or "").split(";")}
         if t.get("highway") == "construction" and any(n in rebuilt for n in names):
             report["street_way_kept_rebuilt"] += 1
+        elif t.get("public_transport") == "platform" or t.get("railway") == "platform":
+            # A STOP'S PLATFORM IS NO STREET, whatever highway value it
+            # carries (a fault mended, 2026-10-13: SKIP_HIGHWAY read
+            # highway=platform alone, and Milan's 527 footways tagged
+            # public_transport=platform, named for their stops, were street
+            # rows). The stop's own row is its station's.
+            report["street_way_skipped_platform"] += 1
+            continue
         elif (hw & SKIP_HIGHWAY or t.get("area") == "yes"
                 or t.get("service") in SKIP_SERVICE):
             report["street_way_skipped"] += 1
@@ -3773,8 +4025,14 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             # private operator or an office tag (115 measured: private
             # universities and museums, parliaments, town halls). A brand, a
             # shop or a lodging tag still keeps a row out (the Panama Hotel
-            # precedent: the building, never the business).
-            if not (own and set(why) <= KEPT_COMMERCIAL_REASONS):
+            # precedent: the building, never the business), except a
+            # sight's brand or shop tag (_sight; owner, 2026-10-13).
+            allowed = set(KEPT_COMMERCIAL_REASONS)
+            if _sight(t):
+                allowed.add("brand")
+            if _sight(t, market=True):
+                allowed.add("shop")
+            if not (own and set(why) <= allowed):
                 return "commercial", names
             kept.append("commercial")
         # A PARK AN APARTMENT ESTATE RUNS (the third list, 2026-10-13): a
@@ -4067,6 +4325,19 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             note("station_stop_area", "drop", oid, names[0], "public_transport=stop_area, no railway tag", t)
             continue
         station = t.get("railway") in ("station", "halt", "tram_stop") or t.get("public_transport") == "station"
+        # A RAILWAY LINE IS NO STATION, AND NEITHER IS A SCHOOL (faults
+        # mended, 2026-10-13): a route relation tagged public_transport=
+        # station (the 山陽新幹線 in Hiroshima and Kakogawa), and an object
+        # with no railway tag whose amenity is a school's (NOT_STATION_AMENITY;
+        # Yao's 八尾市立東中学校 with a stray station=subway). The school goes
+        # on to the landmark rules. NOT built: asking every station row for a
+        # railway tag, which Kyoto's 鞍馬駅 and Seattle's South Bellevue lack.
+        if station and e["type"] == "relation" and t.get("type") == "route":
+            report["station_skipped_route_relation"] += 1
+            note("station_route_relation", "drop", oid, names[0], "type=route", t)
+            continue
+        if station and not t.get("railway") and t.get("amenity") in NOT_STATION_AMENITY:
+            station = False
         rail_mode = any(t.get(k) == "yes" for k in RAIL_MODES)
         if (t.get("public_transport") == "station" and not t.get("railway")
                 # A bus station is no rail station whatever rail mode it
@@ -4087,6 +4358,18 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
                                              "proposed:public_transport", "construction:public_transport")
                      if t.get(k)), None) \
             or (f"opening_date={t['opening_date']}" if _future(t.get("opening_date"), retrieved) else None)
+        # A LIVE STATION THE MAP DRAWS IS NOT UNBUILT BY A STRAY PREFIXED KEY
+        # (a fault mended, 2026-10-13): 17 stops of Montpellier's line 5, 35
+        # nodes, are railway=tram_stop with construction:railway=tram_stop
+        # left on them, and had no row. Spared: a live railway value, no
+        # proposed=yes or construction=yes, no opening date ahead, and a map
+        # station at its place under its name (drawn_station_here).
+        if (station and lifecycle_tag and t.get("railway") in ("station", "halt", "tram_stop")
+                and not any(t.get(k) == "yes" for k in ("proposed", "construction"))
+                and not _future(t.get("opening_date"), retrieved)
+                and drawn_station_here(names, pt, drawn_at)):
+            note("station_not_open_tag_drawn", "kept", oid, names[0], f"{lifecycle_tag}, a station of the map", t)
+            lifecycle_tag = None
         if station and (t.get("railway") in ("construction", "proposed", "disused", "abandoned", "razed")
                         or lifecycle_tag):
             # Busan's seven light-rail stations under construction carry
@@ -4124,6 +4407,15 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
                 names = list(dict.fromkeys(n[:-len(end)].rstrip() if n.endswith(end) and len(n) > len(end) else n
                                            for n in names))
             closed = station_closed(t, retrieved)
+            # A station the map draws, at its place and under its name, is
+            # not closed by a disused tag (drawn_station_here); a dated
+            # closure still closes it.
+            if closed and not _past(t.get("end_date"), retrieved) and drawn_station_here(names, pt, drawn_at):
+                note("station_closed_tag_drawn", "kept", oid, names[0], f"{closed}, a station of the map", t)
+                closed = None
+            # A station kept by id (config.PLACE_KEPT; Taoyuan's 新富, a halt
+            # tagged access=private) is admitted at the end of the build,
+            # whatever these tests say.
             # NO PASSENGERS, NO STATION (candidate 42, owner 2026-10-13):
             # passenger=no or public_transport=no on a station is a freight
             # or works halt. A station the map draws stays (the guard).
@@ -4161,6 +4453,14 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
                 note(f"station_{skip[0]}", "drop", oid, names[0], skip[1], t)
                 continue
             add("station", pt, names, langs, osm=oid, tags=t)
+            continue
+        # A BUS STOP IS NO LANDMARK AND NO PLACE, whatever other key it
+        # carries (a fault mended, 2026-10-13: Nara's bus stop with a stray
+        # historic tag). highway=bus_stop only: public_transport=platform
+        # also sits on piers and squares that are places.
+        if t.get("highway") == "bus_stop":
+            report["dropped_bus_stop"] += 1
+            note("bus_stop", "drop", oid, names[0], "highway=bus_stop", t)
             continue
         verdict, why = article(e, t, names, pt)
         own = verdict == "own"
@@ -4374,13 +4674,23 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             d = _dist_m((sq[1], sq[2]), (o[1], o[2]))
             if d > SQUARE_DUP_M:
                 continue
-            owords = _square_keys([o[3]] + (o[4].split("|") if o[4] else []))
-            # Spelt almost alike only under the same first word: Placeta del Pi
-            # and Plaça del Pi are two squares.
-            if keys & {"".join(w) for w in owords} or (d <= SQUARE_NEAR_M and any(
+            onames = [o[3]] + (o[4].split("|") if o[4] else [])
+            owords = _square_keys(onames)
+            # A park: only a street that bears its leading name
+            # (SQUARE_JOINERS), never one spelt almost alike.
+            if id(sq) in park_ids:
+                same = bool(_square_joined([sq[3]]) & _square_joined(onames))
+            else:
+                # Spelt almost alike only under the same first word: Placeta
+                # del Pi and Plaça del Pi are two squares.
+                same = bool(keys & {"".join(w) for w in owords}) or (d <= SQUARE_NEAR_M and any(
                     a[0] == b[0] and difflib.SequenceMatcher(None, "".join(a), "".join(b)).ratio() >= 0.9
-                    for a in words for b in owords)):
+                    for a in words for b in owords))
+            if same:
                 drop.add(id(sq))
+                if sq[3] not in onames:
+                    o[4] = "|".join(onames[1:] + [sq[3]])
+                    report["square_name_kept_as_alternate"] += 1
                 if id(sq) in park_ids:
                     report["park_dropped_street_duplicate"] += 1
                     note("park_street_duplicate", "merge", sq[7], sq[3],
@@ -4413,6 +4723,16 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             report[f"{KINDS[r[0]]}_merged_{cls}"] += 1
             note(f"merged_{cls}", "merge", r[7], r[3], f"into {keep[7]} ({KINDS[r[0]]})", r[9])
         keep[4] = "|".join(alias)
+        return keep
+
+    def fold_stop(members):
+        """One stop, one row (merge), under the plain name when the kept
+        name bears a direction note (_DIRECTION_NOTE, 2026-10-13)."""
+        keep = merge(members, "platform")
+        plain = _DIRECTION_NOTE.sub("", keep[3]).strip()
+        if plain and plain != keep[3]:
+            keep[4] = "|".join([keep[3]] + [a for a in keep[4].split("|") if a and a != plain])
+            keep[3] = plain
 
     # SEGMENTS BESIDE THE RELATION THAT CARRIES THE ARTICLE (a fault mended,
     # the sixth pass, 2026-10-13; SEGMENTS_MIN). Amsterdam's museum railway
@@ -4452,7 +4772,7 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
     for r in rows:
         if r[7] and KINDS[r[0]] in ("station", "junction", "place", "landmark") and fold_name(r[3]) \
                 and id(r) not in gone:
-            by_name[(r[0], fold_name(r[3]))].append(r)
+            by_name[(r[0], _stop_key(r[3]) if KINDS[r[0]] == "station" else fold_name(r[3]))].append(r)
     for (kind, _), items in by_name.items():
         if len(items) < 2:
             continue
@@ -4461,8 +4781,18 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             members = [items[i] for i in group]
             if not station:
                 merge(members, "duplicate")
-            elif all(m[9].get("railway") == "tram_stop" for m in members):
-                merge(members, "platform")
+            elif _one_railway(members):
+                fold_stop(members)
+            else:
+                # A mixed group: each railway value on its own (2026-10-13).
+                by_value = defaultdict(list)
+                for m in members:
+                    by_value[m[9].get("railway") or ""].append(m)
+                for value in sorted(by_value):
+                    part = by_value[value]
+                    for sub in _clusters([(r[1], r[2]) for r in part], PLATFORM_MERGE_M):
+                        if _one_railway([part[i] for i in sub]):
+                            fold_stop([part[i] for i in sub])
     # ONE LINEAR MONUMENT DRAWN IN SEGMENTS IS ONE ROW (candidate 40, owner
     # 2026-10-13): landmark rows of one folded name and one Wikidata entry,
     # every one a way or a relation, at any distance (Rome's Aurelian Walls,
@@ -4595,10 +4925,23 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
     for wd in sorted(by_item):
         items = [r for r in by_item[wd] if id(r) not in gone]
         for group in _clusters([(r[1], r[2]) for r in items], COMPLEX_MERGE_M):
-            parts = complex_parts([items[i] for i in group], drawn)
+            parts = complex_parts([items[i] for i in group], drawn, city)
             for part in parts:
                 if len(part) > 1:
-                    merge(part, "complex")
+                    spelled = list(dict.fromkeys(r[3] for r in part))
+                    keep = merge(part, "complex")
+                    if len({_station_core(n) for n in spelled}) > 1:
+                        # Near-identical names (_complex_core): the row takes
+                        # the name the map draws, else the shortest; a note
+                        # in brackets goes where the map draws the rest.
+                        best = min(spelled, key=lambda n: (fold_name(n) not in drawn, len(n), n))
+                        bare = _BRACKET_NOTE.sub("", best).strip()
+                        if bare and fold_name(bare) in drawn:
+                            best = bare
+                        if best != keep[3]:
+                            keep[4] = "|".join([keep[3]] + [a for a in keep[4].split("|") if a and a != best])
+                            keep[3] = best
+                        note("complex_one_core", "merge", keep[7], keep[3], f"{wd}: " + " = ".join(spelled), keep[9])
                 if len(parts) > 1:
                     note("complex_kept_apart", "kept", part[0][7], part[0][3],
                          f"{wd} is shared with another station of the map", part[0][9])
@@ -4620,8 +4963,31 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
         for r in items:
             if id(r) in gone or not site_relation(r):
                 continue
+            # A PLACE ROW FOLDS ONLY INTO A PLACE ROW (a fault mended,
+            # 2026-10-13): 18 Prague boroughs had no row under their own
+            # name, each boundary folded into its town hall, a landmark
+            # that carries the borough's Wikidata entry.
             other = next((o for o in items if o is not r and not site_relation(o)
+                          and (KINDS[r[0]] != "place" or KINDS[o[0]] == "place")
                           and _dist_m((r[1], r[2]), (o[1], o[2])) > ROW_MERGE_M), None)
+            # THE RELATION'S NAME IS NOT LOST (a fault mended, 2026-10-13:
+            # Chicago's Pullman National Historical Park was folded into the
+            # Pullman Administration Building, which carries the park's
+            # entry, and the park's name found nothing). Under another name
+            # than the row it repeats, a relation with an article named for
+            # it keeps its own row; any other leaves its name as an
+            # alternate on that row. Measured on 211 cities: 93 folds, 65
+            # under another name, 48 of them with the name found nowhere
+            # (23 keep a row, 25 become alternates).
+            if other is not None and fold_name(other[3]) != fold_name(r[3]):
+                if article_names_object(r[9].get("wikipedia"), [r[3]]):
+                    note("site_relation_kept", "kept", r[7], r[3], "an article named for it, under another name", r[9])
+                    other = None
+                else:
+                    alias = [a for a in other[4].split("|") if a]
+                    if r[3] != other[3] and r[3] not in alias:
+                        other[4] = "|".join(alias + [r[3]])
+                        report["site_relation_name_kept_as_alternate"] += 1
             if other is not None:
                 gone.add(id(r))
                 report[KINDS[r[0]]] -= 1
@@ -4651,6 +5017,43 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             note("shared_wikidata_two", "measure", r[7], r[3], f"{held} on 2 rows", r[9])
     if gone:
         rows[:] = [r for r in rows if id(r) not in gone]
+    # PLACE_KEPT ADMITS A ROW (owner, 2026-10-13: a famous place the rules
+    # pass over for want of a Wikidata or Wikipedia tag is kept by id). Read
+    # last, after every drop and merge: an id of config.PLACE_KEPT that is in
+    # the cache, has a name and bears no row gets one, a landmark unless its
+    # tags make it a station or a place (a ferry terminal way, a marketplace
+    # node, a bridge node under a tram stop's name). Only PLACE_DROPPED
+    # outranks it. Not for a way kept as a river or a street (a waterway or
+    # highway tag): those ids stand for rows that carry no id. A row of the
+    # same kind and name beside it is that row already (add()).
+    have = {r[7] for r in rows if r[7]}
+    wanted = {k for k in kept_given if k not in have and k not in dropped}
+    if wanted:
+        for e in elements:
+            oid = f"{e['type']}/{e['id']}"
+            t = e.get("tags") or {}
+            if oid not in wanted or (e["type"] == "way" and (t.get("waterway") or t.get("highway"))):
+                continue
+            wanted.discard(oid)
+            names = _local_first(t, _names(t, name_tags), read)
+            pt = _point(e)
+            if pt is None and e.get("nodes"):
+                pts = [nodes[n] for n in e["nodes"] if n in nodes]
+                pt = (sum(q[0] for q in pts) / len(pts), sum(q[1] for q in pts) / len(pts)) if pts else None
+            if not names or not pt:
+                note("kept_by_id_no_row", "measure", oid, names[0] if names else "", "no name or no point", t)
+                continue
+            # A station by its railway tag alone (a fault of 73f025df mended,
+            # 2026-10-13): public_transport=station also sits on ferry
+            # terminals, and Yokohama's Osanbashi pier (way/84830302) was
+            # admitted as a station row.
+            kind = ("station" if t.get("railway") in ("station", "halt", "tram_stop")
+                    else "place" if t.get("place") in PLACE_VALUES else "landmark")
+            before = len(rows)
+            add(kind, pt, names, langs_of(t), area=e["type"] != "node", osm=oid, tags=dict(t))
+            if len(rows) > before:
+                report[f"{kind}_admitted_by_id"] += 1
+                note("kept_by_id_admitted", "kept", oid, names[0], f"config.PLACE_KEPT, a {kind} row", t)
     rows.sort(key=lambda r: (r[0], r[3]))
     river_ids = [r.pop().get("_river") for r in rows]     # the object's tags
     row_langs = [r.pop() for r in rows]
@@ -4729,8 +5132,8 @@ def _selftest():
     """The 2026-10-13 rules on a made-up city: each case is a row that is
     there, or is not, only because of the rule it names (break a rule in a
     copy and its case fails: scripts/rule_breaks.py with
-    scripts/place_index_breaks.json). Reads no file and builds everything it
-    needs here."""
+    scripts/place_index_breaks.json). Reads no file of the repository and
+    builds everything it needs here."""
     els, ids = [], iter(range(1, 100000))
     target = [els]
 
@@ -4820,6 +5223,19 @@ def _selftest():
     node(47.7000, -122.32, name="Hill College", amenity="college", operator__type="private",
          wikipedia="en:Hill College")
     node(47.7005, -122.32, name="Brand Museum", tourism="museum", brand="Brand", wikipedia="en:Brand Museum")
+    # A sight's brand or shop tag (owner, 2026-10-13): a brand with no sight
+    # tag; a shop sight; a market hall; an ordinary shop; a shop sight under
+    # a chain's article two objects carry; a hotel and a cafe on sights.
+    node(47.3000, -122.28, name="Brand College", amenity="college", brand="Brand", wikipedia="en:Brand College")
+    node(47.3010, -122.28, name="Old Arcade", tourism="attraction", shop="mall", wikipedia="en:Old Arcade")
+    node(47.3020, -122.28, name="Fish Hall", amenity="marketplace", shop="seafood", wikipedia="en:Fish Hall")
+    node(47.3030, -122.28, name="Corner Books", shop="books", wikipedia="en:Corner Books")
+    node(47.3040, -122.28, name="Chain Gallery North", tourism="attraction", shop="gift", wikipedia="en:Chain Gallery")
+    node(47.3150, -122.28, name="Chain Gallery South", tourism="attraction", shop="gift", wikipedia="en:Chain Gallery")
+    node(47.3060, -122.28, name="Grand Old Hotel", tourism="hotel", historic="building", brand="Grand",
+         wikipedia="en:Grand Old Hotel")
+    node(47.3070, -122.28, name="Cocoa Museum", tourism="museum", amenity="cafe", shop="deli",
+         wikipedia="en:Cocoa Museum")
     node(47.7010, -122.32, name="Fenced Library", amenity="library", access="private",
          wikipedia="en:Fenced Library")
     node(47.7015, -122.32, name="Fenced Garden", leisure="garden", access="private", wikidata="Q8",
@@ -4960,6 +5376,31 @@ def _selftest():
     node(47.7720, -122.32, name="Old 99", tourism="attraction", locomotive__type="steam", wikidata="Q904",
          wikipedia="en:Old 99")
     node(47.7000, -122.325, name="City College", amenity="college", wikidata="Q905")
+    # A site relation under another name than the row that carries its entry.
+    node(47.3700, -122.325, name="Mill Works Office", historic="building", wikidata="Q981",
+         wikipedia="en:Mill Works Historic Park")
+    rel(47.3740, -122.325, name="Mill Works Historic Park", type="site", historic="yes", wikidata="Q981",
+        wikipedia="en:Mill Works Historic Park")
+    node(47.3600, -122.325, name="Canal Museum", tourism="museum", wikidata="Q982")
+    rel(47.3640, -122.325, name="Canal Museum Grounds", type="site", tourism="museum", wikidata="Q982")
+    # Public art whose article another tag than subject repeats: the public
+    # art rule's own test still keeps it (the break on that test needs it).
+    node(47.3300, -122.325, name="Sun Dial", tourism="artwork", wikipedia="en:Sun Dial",
+         name__etymology__wikipedia="en:Sun Dial")
+    # A subject tag that repeats the object's own entry.
+    node(47.3500, -122.325, name="Peace Monument", historic="memorial", memorial="war_memorial", wikidata="Q983",
+         subject__wikidata="Q983", wikipedia="en:Peace Monument (Testville)")
+    node(47.3400, -122.325, name="Fire Memorial", historic="memorial", memorial="war_memorial", wikidata="Q984",
+         subject__wikidata="Q984", wikipedia="en:Great Fire of Testville")
+    # A borough's boundary and its town hall share one entry: two rows.
+    rel(47.7700, -122.345, name="Ward Nine", place="suburb", boundary="administrative", wikidata="Q970")
+    node(47.7600, -122.345, name="Ward Nine Town Hall", amenity="townhall", wikidata="Q970")
+    # A subway station that is also tagged a bus station.
+    node(47.5600, -122.31, name="Broadview", railway="station", station="subway", public_transport="station",
+         amenity="bus_station", bus="yes")
+    node(47.7710, -122.345, name="https://example.org/", historic="monument")
+    street("Tramstop Street", 47.5500, highway="footway", public_transport="platform")
+    street("Halt Lane", 47.5490, highway="footway", railway="platform")
     rel(47.7400, -122.325, name="City College", type="site", amenity="college", wikidata="Q905")
     node(47.7050, -122.325, name="Art School", amenity="college", wikidata="Q906")
     rel(47.7058, -122.325, name="Art School Grounds", type="site", amenity="college", wikidata="Q906")
@@ -5021,8 +5462,64 @@ def _selftest():
     node(47.6440, -122.31, name="Methodist Church", railway="halt", amenity="place_of_worship")
     node(47.6430, -122.31, name="Senate Halt", railway="station", access="private")
     node(47.6420, -122.31, name="Members Halt", railway="station", access="private")
+    # The disused test's guard: a map station at the node and under its
+    # name; one under another name; one far off; one with a dated closure.
+    node(47.6000, -122.31, name="Laird", railway="station", disused__public_transport="station")
+    node(47.5900, -122.31, name="Old Depot", railway="station", disused__railway="station")
+    node(47.5800, -122.31, name="Wynford", railway="station", disused__public_transport="station")
+    node(47.5700, -122.31, name="Oakwood", railway="station", disused__railway="station", end_date="2016-10-14")
     node(47.6410, -122.31, name="Fenced Halt", railway="halt", access="no")
     node(47.8960, -122.31, name="Park Row", railway="station", wikidata="Q960")
+    # One name, one entry, 400 m apart: one row (the complex merge).
+    node(47.5300, -122.31, name="Pair Hall", railway="station", wikidata="Q9961")
+    node(47.5336, -122.31, name="Pair Hall", railway="station", wikidata="Q9961")
+    # One stop, one row (the full reads' faults, 2026-10-13).
+    node(47.5200, -122.31, name="Quay Stop", railway="tram_stop")
+    node(47.5218, -122.31, name="Quay Stop", railway="tram_stop")
+    node(47.5100, -122.31, name="Harbour (dir North)", railway="tram_stop")
+    node(47.5105, -122.31, name="Harbour (dir South)", railway="tram_stop")
+    # A compass direction in brackets; a mixed group (2026-10-13).
+    node(47.3900, -122.29, name="Depot Square (eastbound)", railway="station", wikidata="Q9963")
+    node(47.3909, -122.29, name="Depot Square (westbound)", railway="station", wikidata="Q9963")
+    node(47.3800, -122.29, name="Loop", railway="station")
+    node(47.3806, -122.29, name="Loop Station", railway="tram_stop")
+    node(47.3815, -122.29, name="Loop Station", railway="tram_stop")
+    # Near-identical names on one entry (2026-10-13): the city's name
+    # leading and a note in brackets; the city's name before another name;
+    # two names the map draws; a note the map does not draw.
+    node(47.3700, -122.29, name="Central", railway="station", wikidata="Q9964", operator="Metro")
+    node(47.3705, -122.29, name="Testville Central", railway="station", wikidata="Q9964", operator="Rail")
+    node(47.3710, -122.29, name="Central (Ring line)", railway="station", wikidata="Q9964", operator="Ring")
+    node(47.3600, -122.29, name="Gate Lane", railway="station", wikidata="Q9965", operator="Metro")
+    node(47.3605, -122.29, name="Testville North Gate Lane", railway="station", wikidata="Q9965", operator="Rail")
+    node(47.3500, -122.29, name="Dock (Rail)", railway="station", wikidata="Q9966", operator="Rail")
+    node(47.3505, -122.29, name="Dock (Tube)", railway="station", wikidata="Q9966", operator="Metro")
+    node(47.3400, -122.29, name="Ferry Road (Rail)", railway="station", wikidata="Q9967", operator="Rail")
+    node(47.3405, -122.29, name="Ferry Road (Tube)", railway="station", wikidata="Q9967", operator="Metro")
+    node(47.5000, -122.31, name="Mill Junction", railway="station")
+    node(47.5015, -122.31, name="Mill Junction", railway="station")
+    node(47.4900, -122.31, name="Two Lines", railway="station", operator="North Railway")
+    node(47.4915, -122.31, name="Two Lines", railway="station", operator="South Railway")
+    rel(47.4800, -122.31, name="Trunk Line", type="route", public_transport="station", train="yes")
+    node(47.4000, -122.31, name="Far Hall", railway="station", wikidata="Q9962")
+    node(47.4270, -122.31, name="Far Hall", railway="station", wikidata="Q9962")
+    # A stray construction: key on a live stop (2026-10-13): at a map station
+    # of its name; with construction=yes as well; with an opening date
+    # ahead; with no live railway value.
+    node(47.3900, -122.31, name="Avenue Five", railway="tram_stop", construction__railway="tram_stop")
+    node(47.3800, -122.31, name="Flagged Road", railway="tram_stop", construction__railway="tram_stop",
+         construction="yes")
+    node(47.3700, -122.31, name="Dated Road", railway="tram_stop", construction__railway="tram_stop",
+         opening_date="2027-01-01")
+    node(47.3600, -122.31, name="Shell Road", public_transport="station", train="yes",
+         construction__public_transport="station")
+    area(47.4700, -122.31, name="East School", amenity="school", public_transport="station", station="subway")
+    node(47.4600, -122.31, name="Library West Gate", highway="bus_stop", historic="Old Park Gate")
+    kept_halt = node(47.4500, -122.31, name="Kept Halt", railway="halt", access="private")
+    ferry = node(47.4400, -122.31, name="Old Ferry Terminal", amenity="ferry_terminal", public_transport="station")
+    node(47.4300, -122.31, name="Tram Bridge", railway="tram_stop")
+    bridge = node(47.4301, -122.31, name="Tram Bridge", tourism="viewpoint")
+    shut_halt = node(47.4200, -122.31, name="Dropped Halt", railway="halt")
     node(47.8962, -122.31, name="Park Row Concourse", railway="station", wikidata="Q960")
     node(47.8990, -122.31, name="Boyle Square", railway="station", wikidata="Q960")
     # --- The sixth pass (2026-10-13).
@@ -5107,6 +5604,10 @@ def _selftest():
     street("Plaza Mayor", 40.4000, lon=-3.70)
     node(40.4005, -3.6995, name="Plaza Mayor", leisure="park")
     node(40.4100, -3.6995, name="Plaza Nueva", leisure="park")
+    street("Plaza Japón", 40.4300, lon=-3.70)
+    node(40.4305, -3.6995, name="Plaza del Japón", leisure="park")
+    street("Plaza Jonh Kennedy", 40.4400, lon=-3.70)
+    node(40.4405, -3.6995, name="Plaza John Kennedy", leisure="park")
     street("Avenida de Brasil", 40.4020, lon=-3.70)
     node(40.4022, -3.6995, name="Avenida de Brasil", leisure="park")
     street("Bosque Viejo", 40.4040, lon=-3.70)
@@ -5120,9 +5621,11 @@ def _selftest():
     node(40.4250, -3.6995, name="Estación de Mercancías Sur", railway="station")
     node(40.4260, -3.6995, name="Estación Cerrada", railway="station", operational_status="closed")
     es_rows = defaultdict(int)
+    es_alias = {}
     for r in build(es_els, city="Prueba", retrieved="2026-10-10", local=("es",),
                    map_stations=["Estación de Mercancías Sur"])[0]["rows"]:
         es_rows[(KINDS[r[0]], r[3])] += 1
+        es_alias[(KINDS[r[0]], r[3])] = r[4]
     fr_els = []
     target[0] = fr_els
     street("Rue de la Brasserie", 48.8500, lon=2.35)
@@ -5149,7 +5652,13 @@ def _selftest():
                                                   ("Igreja do Seminário", {"amenity": "place_of_worship"}),
                                                   ("Convento de Santa Teresa", {"amenity": "place_of_worship"})]),
             ("ja", [("試験通", "residential")], [("大師堂", {"place": "quarter"}),
-                                                  ("大師堂", {"amenity": "place_of_worship"})])):
+                                                  ("大師堂", {"amenity": "place_of_worship"}),
+                                                  ("川崎貨物", {"railway": "station"}),
+                                                  ("北港", {"railway": "station", "operator": "JR貨物"}),
+                                                  ("南港", {"railway": "station", "operator": "JR東日本;JR貨物"}),
+                                                  ("工場跡地", {"railway": "station"}),
+                                                  ("東口 (閉鎖)", {"railway": "station"}),
+                                                  ("西町（廃駅）", {"railway": "station"})])):
         target[0] = []
         for k, (name, hw) in enumerate(streets):
             street(name, 55.0 + k * 0.001, highway=hw, lon=12.0)
@@ -5167,19 +5676,27 @@ def _selftest():
     log = []
     index, report = build(els, city="Testville", retrieved="2026-10-10", local=("en",), log=log,
                           map_stations=["Barn", "Works Halt", "Members Halt", "Park Row", "Boyle Square",
-                                        "Drawn Gate"],
+                                        "Drawn Gate", ("Laird Station", 47.6003, -122.31),
+                                        ("Mill Road", 47.5900, -122.31), ("Wynford Station", 47.5830, -122.31),
+                                        ("Oakwood", 47.5700, -122.31), ("Avenue Five", 47.3900, -122.31),
+                                        ("Flagged Road", 47.3800, -122.31), ("Dated Road", 47.3700, -122.31),
+                                        ("Shell Road", 47.3600, -122.31), "Dock (Rail)", "Dock (Tube)",
+                                        "Ferry Road"],
                           articles={"Q930": ["enwiki"], "Q920": ["enwiki"], "Q921": ["enwiki"], "Q922": [], "Q923": ["frwiki"],
                                     "Q924": None},
                           closed_for_works={f"node/{works}", f"node/{gone_id}"})
     worded, worded_report = build(els, city="Testville", retrieved="2026-10-10", local=("en",),
                       closed_for_works={f"node/{works}", f"node/{gone_id}"}, way_words=("place",),
-                      kept={f"node/{dam}", f"node/{green}", f"way/{colonia}", f"node/{witnesses}"},
+                      kept={f"node/{dam}", f"node/{green}", f"way/{colonia}", f"node/{witnesses}",
+                            f"node/{kept_halt}", f"node/{ferry}", f"node/{bridge}"},
                       keep_interchanges=True,
                       keep_named_private=True,
                       station_strip=(" Tram",))
     worded_rows = {(KINDS[r[0]], r[3]) for r in worded["rows"]}
     dropped_rows = {(KINDS[r[0]], r[3]) for r in build(
-        els, city="Testville", retrieved="2026-10-10", local=("en",), dropped={f"way/{river[3]}": "why"},
+        els, city="Testville", retrieved="2026-10-10", local=("en",),
+        dropped={f"way/{river[3]}": "why", f"node/{shut_halt}": "why", f"node/{ferry}": "why"},
+        kept={f"node/{ferry}"},
         closed_for_works={f"node/{works}", f"node/{gone_id}"})[0]["rows"]}
     rows = {(KINDS[r[0]], r[3]) for r in index["rows"]}
     count = defaultdict(int)
@@ -5187,6 +5704,29 @@ def _selftest():
         count[(KINDS[r[0]], r[3])] += 1
     alias = {(KINDS[r[0]], r[3]): r[4] for r in index["rows"]}
     not_open = {r["name"] for r in index["stations_not_open"]}
+    # Kobe's pair on one entry (2026-10-13): as OpenStreetMap spells it, and
+    # with a space after the city's name.
+    kobe = {}
+    for spelled in ("神戸三宮", "神戸 三宮"):
+        target[0] = []
+        node(34.6940, 135.1950, name=spelled, railway="station", wikidata="Q377926", operator="阪急電鉄")
+        node(34.6950, 135.1950, name="三宮", railway="station", wikidata="Q377926", operator="神戸市交通局")
+        street("試験通", 34.6900, lon=135.19)
+        kobe[spelled] = {r[3] for r in build(target[0], city="神戸", retrieved="2026-10-10", local=("ja",),
+                                             fold="ja")[0]["rows"] if KINDS[r[0]] == "station"}
+    target[0] = els
+    kobe_rows, kobe_spaced_rows = kobe["神戸三宮"], kobe["神戸 三宮"]
+    # map_stations: a local name column joins the guard's names (2026-10-13).
+    # The one file this test reads is its own, in a temporary folder.
+    import tempfile
+    import types
+    with tempfile.TemporaryDirectory() as tmp:
+        stations_csv = Path(tmp) / "stations.csv"
+        stations_csv.write_bytes("station,name_ja,latitude,longitude\nDentetsu-Toyama,電鉄富山,36.7,137.2\n"
+                                 "Latin Only,,36.8,137.2\nShanbi,山鼻站,25.0,121.2\n".encode("utf-8"))
+        guard_config = types.SimpleNamespace(STATIONS_CSV=stations_csv)
+        csv_names = [n for n, _, _ in map_stations(guard_config)]
+        guard_names = [n for n, _, _ in map_stations(guard_config, local_names=True)]
     cases = [
         # (what the rule says, True when the index agrees)
         ("a public street is a row", ("street", "Main Street") in rows),
@@ -5243,7 +5783,17 @@ def _selftest():
         ("a bare type word under the type's article is no row", ("landmark", "Fountain") not in rows),
         ("a bare type word under a shared article is no row", ("landmark", "Sundial") not in rows),
         ("a private operator with its own article is a row", ("landmark", "Hill College") in rows),
-        ("a brand with its own article is no row", ("landmark", "Brand Museum") not in rows),
+        # Was "a brand with its own article is no row"; turned round by the
+        # owner's ruling of 2026-10-13 (a sight's brand tag).
+        ("a brand beside a tourism tag is outweighed by an article of its own", ("landmark", "Brand Museum") in rows),
+        ("a brand with no sight tag still keeps a row out", ("landmark", "Brand College") not in rows),
+        ("a shop tag on a sight is outweighed by an article of its own", ("landmark", "Old Arcade") in rows),
+        ("a shop tag on a market hall is outweighed by an article of its own", ("landmark", "Fish Hall") in rows),
+        ("an ordinary shop with an article stays out", ("landmark", "Corner Books") not in rows),
+        ("a shop sight under an article another object carries stays out",
+         not any(n.startswith("Chain Gallery") for _, n in rows)),
+        ("a hotel stays out with an article, a historic tag and a brand", ("landmark", "Grand Old Hotel") not in rows),
+        ("a cafe stays out on a sight with an article", ("landmark", "Cocoa Museum") not in rows),
         ("private access on a library with its own article is a row", ("landmark", "Fenced Library") in rows),
         ("private access on a garden stays a home's", ("landmark", "Fenced Garden") not in rows),
         ("private access on a palace stays a home's", ("landmark", "Fenced Palace") not in rows),
@@ -5366,6 +5916,21 @@ def _selftest():
         ("a place-of-worship node beside the way of its name is one row", count[("landmark", "St Luke")] == 1),
         ("a station with passenger=no is no station", ("station", "Freight Yard") not in rows),
         ("a map station tagged public_transport=no stays", ("station", "Works Halt") in rows),
+        ("a station the map draws at its place stays against a disused tag (the station guard)",
+         ("station", "Laird") in rows and ("station", "Laird") not in worded_rows),
+        ("a disused station beside a map station of another name is no row", ("station", "Old Depot") not in rows),
+        ("a disused station far from the map station of its name is no row", ("station", "Wynford") not in rows),
+        ("a station with a dated closure is no row, a map station or not", ("station", "Oakwood") not in rows),
+        ("a live stop the map draws stays against a stray construction: key",
+         ("station", "Avenue Five") in rows and ("station", "Avenue Five") not in worded_rows),
+        ("construction=yes is not spared, a map station or not", ("station", "Flagged Road") not in rows),
+        ("an opening date ahead is not spared, a map station or not", ("station", "Dated Road") not in rows),
+        ("a prefixed key is spared only beside a live railway value", ("station", "Shell Road") not in rows),
+        ("map_stations: the station column alone unless asked",
+         csv_names == ["Dentetsu-Toyama", "Latin Only", "Shanbi"]),
+        ("map_stations: a local name is one more entry for the guard",
+         guard_names[:4] == ["Dentetsu-Toyama", "Latin Only", "Shanbi", "電鉄富山"] and "山鼻站" in guard_names),
+        ("map_stations: a local name is entered without its station word too", "山鼻" in guard_names),
         ("a city's station ending is stripped", ("station", "Mill Stop Tram") in rows
          and ("station", "Mill Stop") in worded_rows and ("station", "Mill Stop Tram") not in worded_rows),
         ("Danish: store is no leak word, and a glued street passes beside one",
@@ -5438,13 +6003,12 @@ def _selftest():
         ("two stations of the map that share an entry are two rows", count[("station", "Park Row")] == 1
          and count[("station", "Boyle Square")] == 1
          and "Boyle Square" not in alias.get(("station", "Park Row"), "")),
-        ("a row under no map name joins the nearest map station of its complex",
-         ("station", "Park Row Concourse") not in rows
-         and "Park Row Concourse" in alias.get(("station", "Park Row"), "")
-         and "Park Row Concourse" not in alias.get(("station", "Boyle Square"), "")),
-        ("with no map station named, a complex is one row",
+        ("a station under another name keeps its row, whatever entry it shares",
+         ("station", "Park Row Concourse") in rows
+         and "Park Row Concourse" not in alias.get(("station", "Park Row"), "")),
+        ("with no map station named, stations of three names that share an entry are three rows",
          sum((k, n) in worded_rows for k, n in (("station", "Park Row"), ("station", "Park Row Concourse"),
-                                                ("station", "Boyle Square"))) == 1),
+                                                ("station", "Boyle Square"))) == 3),
         # --- The sixth pass (2026-10-13).
         ("a denomination after a body's name keeps a place of worship",
          ("landmark", "Church of Christ Presbyterian") in rows and ("landmark", "Church of God") not in rows),
@@ -5487,6 +6051,10 @@ def _selftest():
          es_rows[("landmark", "Plaza Mayor")] == 0 and es_rows[("street", "Plaza Mayor")] == 1),
         ("Spanish: a park named as a square with no street of its name stays",
          es_rows[("landmark", "Plaza Nueva")] == 1),
+        ("Spanish: a park and a street that differ by a joiner are one row, the park's spelling an alternate",
+         es_rows[("landmark", "Plaza del Japón")] == 0 and es_alias[("street", "Plaza Japón")] == "Plaza del Japón"),
+        ("Spanish: a park spelled another way than its street keeps its own row",
+         es_rows[("landmark", "Plaza John Kennedy")] == 1 and es_alias[("street", "Plaza Jonh Kennedy")] == ""),
         ("Spanish: a park under a street word, or no way word, stays beside a street of its name",
          es_rows[("landmark", "Avenida de Brasil")] == 1 and es_rows[("landmark", "Bosque Viejo")] == 1),
         ("worship_office: an English word is not read in a name that holds CJK",
@@ -5558,6 +6126,77 @@ def _selftest():
          and ("landmark", "Old 99") in rows),
         ("a site relation repeating a row's entry far off is no row", count[("landmark", "City College")] == 1),
         ("a site relation on its object stays", ("landmark", "Art School Grounds") in rows),
+        ("a site relation with an article named for it keeps its row beside a member of another name",
+         ("landmark", "Mill Works Historic Park") in rows and ("landmark", "Mill Works Office") in rows),
+        ("a site relation under another name leaves its name as an alternate of the row it repeats",
+         ("landmark", "Canal Museum Grounds") not in rows
+         and "Canal Museum Grounds" in alias.get(("landmark", "Canal Museum"), "")),
+        ("a subject tag that repeats the object's own entry does not take a landmark named by its article",
+         ("landmark", "Peace Monument") in rows),
+        ("a landmark under its subject's article and entry is still no row", ("landmark", "Fire Memorial") not in rows),
+        ("public art under an article of its own name stays, whatever other tag repeats the article",
+         ("landmark", "Sun Dial") in rows),
+        ("article_names_object: a bracketed or comma qualifier is set aside, another title is not the name",
+         article_names_object("en:Victory Monument (Chicago)", ["Victory Monument"])
+         and article_names_object("en:General Post Office, Dublin", ["General Post Office"])
+         and not article_names_object("en:Haymarket affair", ["Haymarket Memorial"])
+         and not article_names_object("", ["Anything"])),
+        ("tram stops of one name 200 m apart are one row", count[("station", "Quay Stop")] == 1),
+        ("a direction note in brackets does not part a stop's platforms",
+         count[("station", "Harbour (dir North)")] + count[("station", "Harbour (dir South)")] == 0
+         and count[("station", "Harbour")] == 1),
+        ("a folded stop takes the plain name, the noted spellings its alternates",
+         set(alias.get(("station", "Harbour"), "").split("|")) == {"Harbour (dir North)", "Harbour (dir South)"}),
+        ("a compass direction in brackets is a direction note", count[("station", "Depot Square")] == 1
+         and not any(n.startswith("Depot Square (") for _, n in rows)),
+        ("tram stops fold beside a station of their name, which keeps its row",
+         count[("station", "Loop Station")] == 1 and count[("station", "Loop")] == 1),
+        ("one entry: the city's name leading and a note in brackets are set aside, one row under the short name",
+         count[("station", "Central")] == 1 and not any(n in ("Testville Central", "Central (Ring line)") for _, n in rows)
+         and {"Testville Central", "Central (Ring line)"} <= set(alias.get(("station", "Central"), "").split("|"))),
+        ("one entry: the city's name before another name is another station",
+         ("station", "Gate Lane") in rows and ("station", "Testville North Gate Lane") in rows),
+        ("one entry: two names the map draws are two rows whatever their core",
+         ("station", "Dock (Rail)") in rows and ("station", "Dock (Tube)") in rows),
+        ("one entry: a note in brackets goes where the map draws the rest",
+         count[("station", "Ferry Road")] == 1 and not any(n.startswith("Ferry Road (") for _, n in rows)
+         and sum(n.startswith("Ferry Road (") for _, n in worded_rows) == 1),
+        ("one entry: a city name with no separator after it is part of the name (Kobe)",
+         kobe_rows == {"神戸三宮", "三宮"} and kobe_spaced_rows == {"三宮"}),
+        ("two station rows of one name and no second operator are one row", count[("station", "Mill Junction")] == 1),
+        ("two operators' stations of one name stay two rows", count[("station", "Two Lines")] == 2),
+        ("a route relation is no station", not any(n == "Trunk Line" for _, n in rows)),
+        ("a school tagged a station with no railway tag is no station", ("station", "East School") not in rows),
+        ("a bus stop is no landmark", not any(n == "Library West Gate" for _, n in rows)),
+        ("PLACE_KEPT admits a row for an object in no landmark class",
+         ("landmark", "Old Ferry Terminal") in worded_rows and ("landmark", "Old Ferry Terminal") not in rows),
+        ("a kept bridge under a tram stop's name is its own landmark row",
+         ("landmark", "Tram Bridge") in worded_rows and ("station", "Tram Bridge") in worded_rows
+         and ("landmark", "Tram Bridge") not in rows),
+        ("PLACE_DROPPED reaches a station by id, and outranks PLACE_KEPT",
+         ("station", "Dropped Halt") in rows and ("station", "Dropped Halt") not in dropped_rows
+         and ("landmark", "Old Ferry Terminal") not in dropped_rows),
+        ("PLACE_KEPT holds a station against the closed tests", ("station", "Kept Halt") in worded_rows
+         and ("station", "Kept Halt") not in rows),
+        ("Japanese: a freight terminal by its name or its operator is no station",
+         ("station", "川崎貨物") not in small["ja"] and ("station", "北港") not in small["ja"]
+         and ("station", "南港") in small["ja"]),
+        ("Japanese: a station named as a former or closed site is no row",
+         ("station", "工場跡地") not in small["ja"] and not any(n in ("東口 (閉鎖)", "西町（廃駅）") for _, n in small["ja"])),
+        ("a height is no name", junk_name("109m") and junk_name("120.6m") and junk_name("222M")
+         and not junk_name("8 Mile") and not junk_name("M109")),
+        ("the denomination rule reads a leading elided article and two listed bodies spelled out",
+         worship_only("L'Église de Jésus-Christ des Saints des Derniers Jours", ("fr",))
+         and not worship_only("L'Église Saint-Paul", ("fr",))
+         and worship_only("パーフェクトリバティー教団", ("ja",))
+         and worship_only("Salão das Testemunhas de Jeová", ("pt",))),
+        ("a borough's boundary does not fold into its town hall", ("place", "Ward Nine") in rows
+         and ("landmark", "Ward Nine Town Hall") in rows),
+        ("a subway station also tagged a bus station is a station", ("station", "Broadview") in rows),
+        ("a web address is no name", junk_name("https://example.org/") and junk_name("www.example.org")
+         and not junk_name("World Wide Web Plaza") and not any("example.org" in n for _, n in rows)),
+        ("a stop's platform drawn as a footway is no street", ("street", "Tramstop Street") not in rows
+         and ("street", "Halt Lane") not in rows),
         ("own_article: a list article with an anchor is not the object's",
          own_article({"wikipedia": "de:Liste der Kulturdenkmäler in Bremen-Mitte#1500,T008"}, ["Bacchus"])[0] == "not"),
         ("public art with an entry and no article is no row", ("landmark", "Bronze Horse") not in rows),
@@ -5566,10 +6205,11 @@ def _selftest():
         ("a dead railway alignment with no article is no row", not any(n == "Old Branch Line" for _, n in rows)),
         ("a dead railway alignment with an article stays", any(n == "Old Trunk Line" for _, n in rows)),
         ("a standing structure under a railway lifecycle tag stays", ("landmark", "Rail Water Tower") in rows),
-        ("station rows sharing an item within 600 m are one row, the other name an alias",
-         count[("station", "Times Square")] + count[("station", "Port Authority")] == 1
-         and any(a in alias.get(("station", b), "") for a, b in (("Times Square", "Port Authority"),
-                                                                 ("Port Authority", "Times Square")))),
+        ("station rows of different names sharing an item are two rows, neither an alias",
+         count[("station", "Times Square")] == 1 and count[("station", "Port Authority")] == 1
+         and "Port Authority" not in alias.get(("station", "Times Square"), "")),
+        ("station rows of one name sharing an item within 600 m are one row", count[("station", "Pair Hall")] == 1),
+        ("station rows of one name sharing an item 3 km apart are two", count[("station", "Far Hall")] == 2),
         ("station rows sharing an item 3 km apart are two", ("station", "North Loop") in rows
          and ("station", "South Loop") in rows),
         ("an end date with a stray character closes a station", ("station", "Stray Station") not in rows),

@@ -139,3 +139,38 @@ TACOMA_BBOX = {
     "lon_min": -122.65,
     "lon_max": -122.30,
 }
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-12) ---
+
+PLACE_AREA = "(id:3608348295)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
+PLACE_LANGUAGES = ("en",)
+PLACE_FOLD = None
+PLACE_REVIEWED = {}
+PLACE_DROPPED = {
+    "node/5691446641": "'Whispering Firs Condominiums', a condominium complex mapped as a neighbourhood node: homes",
+    "way/1032999207": "'Sacred Heart Convent', a convent tagged a place of worship, not notable: a religious residence, by id",
+    "way/587121586": "'Tacoma Golf Center', a closed golf business indexed through historic=ruins (abandoned:leisure=golf_course)",
+    "way/32827130": "'Tacoma Fire Communications Manager', a job title as a building's name (a GNIS import artifact): a glitch, not repaired",
+    "way/1034352798": "'Церковь Христиан Адвентистов Седьмого Дня Seventh-day Adventist Church', Cyrillic and English glued in one name, neither a name:<language> value: a glitch",
+    "way/39675002": "'Tacoma Mall', a shopping mall's name on its own internal road",
+    "way/1100744270": "'Tacoma Mall', a shopping mall's name on its own internal road",
+    "way/587121672": "'Cheney Stadium Access Closed During Games', a notice standing in for a street's name (owner, 2026-10-13: descriptions reach streets)",
+    "way/23646743": "'Thomp Yakim Trans', a street name cut short (owner, 2026-10-13)",
+    "way/12244205": "'Nelighthouse Drive', a direction prefix glued onto the name: a glitch (owner, 2026-10-13)",
+    "way/12207844": "'Exit', a bare type word as a street's name (owner, 2026-10-13)",
+    "way/708702031": "'Boat Launch', a description as a street's name (owner, 2026-10-13)",
+    "way/708702032": "'Boat Launch', a description as a street's name (owner, 2026-10-13)",
+    "way/405960652": "'Ferry Waiting Lanes', a description as a street's name (owner, 2026-10-13)",
+    "way/1190287393": "'Ferry Waiting Lanes', a description as a street's name (owner, 2026-10-13)",
+    "way/747856425": "'Staff foot path', a description as a street's name (owner, 2026-10-13)",
+    "way/747856424": "'Staff footpath', a description as a street's name (owner, 2026-10-13)",
+    "way/24728039": "'Henry Foss Bus Zone', a school's bus bay described (owner, 2026-10-13)",
+    "way/12207857": "'Mildred St Exit Road', a description as a street's name (owner, 2026-10-13)",
+    "way/1422578262": "'South 18th Street Bicycle Diverter', traffic furniture described (owner, 2026-10-13)",
+    "way/1422579401": "'South J Street Bicycle Diverter Cut-Through', traffic furniture described (owner, 2026-10-13)",
+    "way/1061967365": "'Wilderness Cut Off2', a missing space; the street is its own row: a glitch (owner, 2026-10-13)",
+    "way/1032792013": "'Associated Ministries of Tacoma', organisation office: a church body's name on a place-of-worship object: an interfaith association; decided by the name, not a tag (flag check, 2026-10-13)",
+    "relation/13312852": "'Turning Basin', description: bare type word: a port turning basin under its type alone (flag check, 2026-10-13)",
+}

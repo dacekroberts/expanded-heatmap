@@ -89,7 +89,7 @@ st.markdown(
 """
 )
 
-render_map_help('three business categories (Retail, Food service and Personal services)')
+render_map_help('three business categories (Retail, Food service and Personal services)', search='miami')
 render_excluded_stations("Miami (Regional)")
 render_country_links('Miami (Regional)')
 

@@ -1,16 +1,16 @@
 {
-  "bucket_food_service": 69112,
-  "bucket_personal_services": 42688,
-  "bucket_retail": 296246,
-  "businesses_clean_rows": 407629,
+  "bucket_food_service": 72727,
+  "bucket_personal_services": 45023,
+  "bucket_retail": 309779,
+  "businesses_clean_rows": 427123,
   "denue_15_rows": 820853,
   "denue_rows": 462732,
-  "fijo_rows": 635245,
-  "in_scope_15_rows": 199571,
-  "outside_scope_15_rows": 416,
-  "storefront_rows": 408046,
-  "storefronts": 407628,
-  "storefronts_food_service": 69049,
-  "storefronts_personal_services": 42652,
-  "storefronts_retail": 295927
+  "fijo_rows": 667302,
+  "in_scope_15_rows": 232964,
+  "outside_scope_15_rows": 405,
+  "storefront_rows": 427529,
+  "storefronts": 427121,
+  "storefronts_food_service": 72668,
+  "storefronts_personal_services": 44989,
+  "storefronts_retail": 309464
 }

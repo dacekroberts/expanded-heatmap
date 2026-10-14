@@ -136,3 +136,55 @@ PITTSBURGH_BBOX = {
     "lon_min": -80.12,
     "lon_max": -79.84,
 }
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-12) ---
+
+PLACE_AREA = "(id:3600188553)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
+PLACE_LANGUAGES = ("en",)
+PLACE_FOLD = None
+PLACE_REVIEWED = {}
+PLACE_DROPPED = {
+    "way/537224189": "'Residence at South High', a former school that is flats today (building:use=apartments): a home",
+    "node/367965930": "'Prince of Peace Convent', a convent tagged a place of worship, not notable: a religious residence, by id",
+    "node/367965935": "'Saint Benedict the Moor Convent', a convent tagged a place of worship, not notable: a religious residence, by id",
+    "relation/7698043": "'Saint Paul of the Cross Monastery', a monastery tagged a place of worship, not notable: a religious residence, by id",
+    "node/367965888": "'Sisters of Divine Providence Convent', a convent tagged a place of worship, not notable: a religious residence, by id",
+    "node/367965956": "'Sisters of Divine Providence Convent', a convent tagged a place of worship, not notable: a religious residence, by id",
+    "way/360679760": "'Sisters of Divine Providence Convent', a convent tagged a place of worship, not notable: a religious residence, by id",
+    "way/360096976": "'Sisters of our Lady of Charity Nativity Convent', a convent tagged a place of worship, not notable: a religious residence, by id",
+    "way/1309939297": "'Lower Terrace', a position word and a type word: a description",
+    "way/1309936316": "'Upper Terrace', a position word and a type word: a description",
+    "way/643831506": "'Welcome to Bloomfield', a sign's text as a park's name: a description",
+    "way/1158542112": "'Bakery Square back road', a description as a street's name (owner, 2026-10-13)",
+    "way/1159977650": "'benches off Forbes path', a description as a street's name (owner, 2026-10-13)",
+    "way/1225771234": "'hole in fence near Street Bede's', a description as a street's name (owner, 2026-10-13)",
+    "way/849023377": "'railroad access trail', a description as a street's name (owner, 2026-10-13)",
+    "way/1469825952": "'slag cover curve path', a description as a street's name (owner, 2026-10-13)",
+    "way/1469825950": "'slag park cover path', a description as a street's name (owner, 2026-10-13)",
+    "way/1469825951": "'slag park cover path', a description as a street's name (owner, 2026-10-13)",
+    "way/27611337": "'Trail Connection', a bare type as a street's name (owner, 2026-10-13)",
+    "way/332483382": "'Trail Connection', a bare type as a street's name (owner, 2026-10-13)",
+    "way/1411692474": "'Negley Run Shared sidewalk and bike lane', a description as a street's name (owner, 2026-10-13)",
+    "way/1364118669": "'Nine Mile Run Trail (detour)', a detour described (owner, 2026-10-13)",
+    "way/366749509": "'Farmhouse to Pool Walk', a description as a street's name (owner, 2026-10-13)",
+    "way/72650862": "'VA Hospital', a building's name on a road: a wrong object's name (owner, 2026-10-13)",
+    "way/1211966263": "'Pedestrian Four Way Crossing', a description as a street's name (owner, 2026-10-13)",
+    "way/1245172077": "'Pedestrian Four Way Crossing', a description as a street's name (owner, 2026-10-13)",
+    "way/1245172078": "'Pedestrian Four Way Crossing', a description as a street's name (owner, 2026-10-13)",
+    "way/1245172079": "'Pedestrian Four Way Crossing', a description as a street's name (owner, 2026-10-13)",
+    "way/156465727": "'Middle Access Drive', a description as a street's name (owner, 2026-10-13)",
+    "way/156465730": "'Middle Access Drive', a description as a street's name (owner, 2026-10-13)",
+    "way/849512141": "'Shelby', a street name cut short (owner, 2026-10-13)",
+    "way/11717499": "'Tarraganno', a street name cut short (owner, 2026-10-13)",
+    "way/841978019": "'Zahniser', a street name cut short (owner, 2026-10-13)",
+    "node/357375146": "'Christian Associates of Southwest Pennsylvania', office: a church body's office on a place_of_worship node (GNIS import), not a congregation (flag check, 2026-10-13)",
+    "way/734088469": "'Pittsburgh Presbytery', office: a presbytery's office tagged place_of_worship, not a congregation (flag check, 2026-10-13)",
+    "node/357377205": "'United Methodist Foundation of Western Pennsylvania', office: a foundation's office on a place_of_worship node, not a congregation (flag check, 2026-10-13)",
+    "node/357376630": "'Reformed Presbyterian Church of North America', a place of worship named only by a denomination, a body or a chain, in a form the shared rule's lists do not hold; no wikipedia tag of its own (owner's rulings, 2026-10-13)",
+    # The helper screens of 2026-10-13 (duplicates, parts in a church's grounds): rows that
+    # fall squarely in an owner ruling, each with its ruling.
+    "node/1666922240": "'Stephen Foster Memorial Museum', a second row under one Wikidata entry within 300 m; the other row stays (owner, 2026-10-13, the Three Soldiers ruling: one work, one entry; helper screen): the museum inside the Stephen Foster Memorial, 16 m from the memorial's own row (way/121051329) and under the same entry (Q7609218); the memorial has the article",
+    "node/357375662": "'Friendship Community Church', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): a bare point 37 m from the building FRIENDSHIP COMMUNITY PRESBYTERIAN CHURCH (way/374295293): the same congregation under the short form of its name",
+}

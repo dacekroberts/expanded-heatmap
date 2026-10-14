@@ -53,26 +53,45 @@ if PROVENANCE_JSON.exists():
         if _start and _end:
             _bits.append(f"metro timetable data valid **{_start[:4]}-{_start[4:6]}-{_start[6:]}** "
                          f"to **{_end[:4]}-{_end[4:6]}-{_end[6:]}** (PID)")
+        _tram = _prov.get("gtfs_trams_feed_info") or {}
+        _start, _end = _tram.get("feed_start_date", ""), _tram.get("feed_end_date", "")
+        if _start and _end:
+            _bits.append(f"tram timetable data valid **{_start[:4]}-{_start[4:6]}-{_start[6:]}** "
+                         f"to **{_end[:4]}-{_end[4:6]}-{_end[6:]}** (PID)")
         if _bits:
             render_caption("Snapshot: " + "; ".join(_bits) + ".")
     except (ValueError, OSError, AttributeError):
         # A malformed provenance file must not take the page down.
         pass
 
-# Approved by the owner 2026-09-24; set as bullets 2026-10-01.
+# Approved by the owner 2026-09-24; set as bullets 2026-10-01. The lines bullets and the
+# ring share were redrafted for the tram rescope and approved by the owner 2026-10-13.
 st.markdown(
     """
 **The lines**
 
-- Three lines are drawn, **Metro A, B and C**, each labeled on the map and in the legend,
-  redrawn from the Prague Integrated Transport system's (PID) own route geometry in the
-  operator's colors. Line A is shown a shade lighter so it stays distinct from the green of the
-  personal-services dots.
+- The map covers the **City of Prague** and draws **Metro A, B and C** and the city's
+  **28 daytime tram routes**, from the Prague Integrated Transport system's (PID) own route
+  geometry. Every line is labeled on the map and in the legend.
+- The metro lines are in the operator's colors. Line A is shown a shade lighter so it stays
+  distinct from the green of the personal-services dots.
+- PID gives every tram the same color, and 28 separate labels do not fit on a phone. So the
+  routes that share the most track are drawn as **ten groups**, each with one label and one color
+  chosen for this map: Trams 1 & 25; 2, 18, & 24; 3, 17, 20, & 40; 4 & 22; 5, 12, 15, 21, & 32;
+  6, 7, & 19; 8 & 26; 9 & 10; 11 & 13; and 30, 31, & 37. The groups are this map's own, not
+  PID's.
+- Trams stop every block or two, so only about one stop per half mile is drawn as a station;
+  metro stations, stops where tram routes cross or part, and each route's last stop are always
+  drawn.
+- The tram routes follow PID's timetable for October 13 to 26, 2026. Trams 30, 31, 32, 37 and
+  40 ran in it and are drawn. Tram 23, which runs every 30 minutes, and the night trams 90 to 99
+  are not.
 - **Flora station on line A is closed for reconstruction** until about the end of February 2027. Like
-  the timetable, the map leaves it out until it reopens.
-- Trams, the Petřín funicular, ferries and suburban trains are not drawn.
-- The map covers the **City of Prague**, and every metro station lies inside it, so none is left
-  out.
+  the timetable, the map leaves the metro station out until it reopens; the Flora tram stop is
+  drawn.
+- The Petřín funicular, ferries and suburban trains are not drawn.
+- Every metro station and tram stop lies inside the city. The tram stops left out by the
+  half-mile spacing are listed below.
 
 **The businesses**
 
@@ -87,7 +106,7 @@ st.markdown(
 - **Where a business belongs to a person trading in their own name, or to a partnership, the map
   shows its address instead of its name.** Where such an establishment is at the owner's own
   registered address, which is usually their home, it is left off the map altogether.
-- **About seven storefronts in ten sit within a station ring.**
+- **More than eight storefronts in ten sit within a station ring.**
 
 **Reading the density**
 

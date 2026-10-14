@@ -301,3 +301,78 @@ PARCEL_RESIDENTIAL = frozenset({"Single Family Residential"})
 # Nearest-parcel tolerance for the spatial join. At 40 m the match rate is
 # 93.4% with a median distance of 1.4 m.
 PARCEL_TOLERANCE_M = 40.0
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-12) ---
+
+PLACE_AREA = "(id:3600111968)"
+# The index reaches more than 25 km past the map's stations, a far corner of the
+# municipality's own area: recorded for rule D of scripts/check_place_scope.py
+# (measured 48.3 km on the index of 2026-10-13; remove it if a rebuild falls within 25 km).
+PLACE_SCOPE_REACH_REASON = "2026-10-13: the Farallon Islands are in the city and county, 48 km out to sea (owner)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
+PLACE_LANGUAGES = ("en",)
+PLACE_FOLD = None
+# Read and kept, 2026-10-13 (the flag check of wave 1; the owner's ruling
+# to settle unsure rows by the existing rules). None carries a leak word,
+# so check E takes no PLACE_REVIEWED entry for it; the reason is kept here.
+#   node/1308317902 'Golden Gate Fortune Cookie Factory': tourism=attraction with a Wikidata entry: a commercial attraction with a tourism tag stays
+#   node/4659836677 'House of Air': tourism=theme_park with a Wikidata entry: a commercial attraction with a tourism tag stays
+#   node/2365845678 'Magowan's Infinite Mirror Maze': tourism=attraction, attraction=maze: a commercial attraction with a tourism tag stays
+#   way/263823315 'Mish House': tourism=attraction and an article of its own: a home tagged an attraction is kept
+PLACE_REVIEWED = {}
+PLACE_DROPPED = {
+    "way/260181659": "'Dashiell Hammett Place', an apartment building (rooms=22) named for a former resident: a home",
+    "way/289372464": "a place of worship with a person's own name glued onto its name: a glitch, not repaired",
+    "way/289665929": "'Luke Bt. St. Church', the words of the name are transposed: a glitch",
+    "way/32776568": "'Boiler rooms', a description on a ruin",
+    "way/1214385020": "'moscone dog play area', a lower-case description",
+    "relation/6260731": "'Baker Beach (Clothing-Optional Area)', a labelled part of the beach, admitted on its parent's wikidata",
+    "way/25371892": "'United States Mint', a fenced outline with access=no; the Mint is its own row (way/115944818)",
+    "way/260524896": "'Gold Mountain Monastery', a monastery tagged a place of worship, not notable: a religious residence, by id",
+    "node/358805109": "'Paradise Monastery of San Francisco', a monastery tagged a place of worship, not notable: a religious residence, by id",
+    "node/4969302973": "'Tze Zhan Monastery', a monastery tagged a place of worship, not notable: a religious residence, by id",
+    "way/260152155": "'Russian Orthodox Convent of Our Lady of Vladimir', a convent tagged a place of worship, not notable: a religious residence, by id",
+    "way/289952218": "'Saint Elizabeth Rectory Chapel', a rectory chapel, not notable: a religious residence, by id",
+    "node/7621537973": "'S.E.A.T Tram', an on-island visitor shuttle indexed as a station: not transit (owner, 2026-10-13)",
+    "way/288340245": "'Post Chapel', a bare type word, unregistered",
+    "node/11008350407": "'Crown Point Press', a dealer's gallery is the business itself, whatever its article (owner, 2026-10-11)",
+    "node/2627794649": "'Gallery Paule Anglim', a dealer's gallery is the business itself, whatever its article (owner, 2026-10-11)",
+    "way/8921036": "'Schofield', a street name cut short; the road is its own row (owner, 2026-10-13)",
+    "way/333915482": "'Lobby Shops', a description as a street's name (owner, 2026-10-13)",
+    "way/617730081": "'Route 80', a route number in the name field (owner, 2026-10-13)",
+    "way/1343735695": "'Route 80', a route number in the name field (owner, 2026-10-13)",
+    "way/123741465": "'Route 80', a route number in the name field (owner, 2026-10-13)",
+    "way/254299122": "'Route 80', a route number in the name field (owner, 2026-10-13)",
+    "way/510583844": "'Route 80', a route number in the name field (owner, 2026-10-13)",
+    "way/859701761": "'Route 80', a route number in the name field (owner, 2026-10-13)",
+    "way/31129732": "'Route 80', a route number in the name field (owner, 2026-10-13)",
+    "way/123741454": "'Route 80', a route number in the name field (owner, 2026-10-13)",
+    "way/394443188": "'Route 80', a route number in the name field (owner, 2026-10-13)",
+    "way/394443190": "'Route 80', a route number in the name field (owner, 2026-10-13)",
+    "way/845978827": "'Route 80', a route number in the name field (owner, 2026-10-13)",
+    "way/394443187": "'Route 80', a route number in the name field (owner, 2026-10-13)",
+    "way/617730080": "'Route 80', a route number in the name field (owner, 2026-10-13)",
+    "way/1343730967": "'Route 80', a route number in the name field (owner, 2026-10-13)",
+    "way/202485364": "'Route 80', a route number in the name field (owner, 2026-10-13)",
+    "way/394443189": "'Route 80', a route number in the name field (owner, 2026-10-13)",
+    "way/31129771": "'Route 80', a route number in the name field (owner, 2026-10-13)",
+    "way/513706009": "'Route 80', a route number in the name field (owner, 2026-10-13)",
+    "way/839972870": "'Route 80', a route number in the name field (owner, 2026-10-13)",
+    "way/120813417": "'Route 80', a route number in the name field (owner, 2026-10-13)",
+    "way/123741452": "'Route 80', a route number in the name field (owner, 2026-10-13)",
+    "node/8722361747": "'Down to the Seas in Ships', interpretive panel tagged a monument: historic=monument; inscription is a panel's text; no wikidata (flag check, 2026-10-13)",
+    "node/8744048933": "'Whaling Out of San Francisco', interpretive panel tagged a monument: historic=monument; inscription is a panel's text; no wikidata (flag check, 2026-10-13)",
+    "node/13724228886": "'Casa de Oracion', a place of worship named only by a denomination, a body or a chain, in a form the shared rule's lists do not hold; no wikipedia tag of its own (owner's rulings, 2026-10-13)",
+    # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "node/10553806550": "'Christian Science Reading Room', a religious body's reading room, assembly hall or institute tagged a place of worship, not a congregation (owner, 2026-10-13, ruling 2; pattern screen)",
+    "node/358803230": "'Chapel of Grace', a part of one church as its own row, the church's own row within 300 m (owner, 2026-10-13, ruling 4; pattern screen)",
+    "way/651657468": "'Waterfront Plaza', a stock plaza or square name with no place in it (owner, 2026-10-13, ruling 5 and its follow-up: every plaza name with no place in it; pattern screen)",
+    "way/1428380754": "'Waterfront Plaza', a stock plaza or square name with no place in it (owner, 2026-10-13, ruling 5 and its follow-up: every plaza name with no place in it; pattern screen)",
+    # The helper screens of 2026-10-13 (duplicates, parts in a church's grounds): rows that
+    # fall squarely in an owner ruling, each with its ruling.
+    "way/24563073": "'Yerba Buena Center for the Arts Gallery', a second row under one Wikidata entry within 300 m; the other row stays (owner, 2026-10-13, the Three Soldiers ruling: one work, one entry; helper screen): the gallery building of the Yerba Buena Center for the Arts, 89 m from the centre's own row (way/24563077) and under the centre's entry (Q1884883); no article of its own",
+    "node/358804822": "'Saint Stephen Baptist Church', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): a bare point 0 m from the building St Stephen Baptist Church (way/274389975): the same name spelt out",
+    "node/11464727187": "'Voice of Christ Church', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): a bare point 34 m from the building The Voice of Christ Full Gospel Church (way/260286250): the same congregation under a short name",
+}

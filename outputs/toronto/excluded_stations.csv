@@ -1,3 +1,215 @@
-station,latitude,longitude,lines,distance_outside_m
-Highway 407 Station,43.783359,-79.523454,Line 1 Yonge-University,875.6
-Vaughan Metropolitan Centre Station,43.794021,-79.527906,Line 1 Yonge-University,2112.8
+station,latitude,longitude,lines,reason
+Highway 407 Station,43.783359,-79.523454,Line 1 Yonge-University,"outside the City of Toronto, 876 m beyond the boundary"
+Vaughan Metropolitan Centre Station,43.794021,-79.527906,Line 1 Yonge-University,"outside the City of Toronto, 2113 m beyond the boundary"
+Bathurst St at Carr St,43.648849,-79.40463,Streetcar 511,"spacing filter on Streetcar 511: 0.118 mi after Bathurst St at Queen St West, under 0.5 mi"
+Bathurst St at Fort York Blvd,43.638816,-79.400618,Streetcar 511,"spacing filter on Streetcar 511: 0.164 mi after Fleet St at Bathurst St, under 0.5 mi"
+Bathurst St at Harbord St,43.661517,-79.409752,Streetcar 511,"spacing filter on Streetcar 511: 0.366 mi after Bathurst St at College St, under 0.5 mi"
+Bathurst St at Nassau St - Toronto Western Hospital,43.654539,-79.40691,Streetcar 511,"spacing filter on Streetcar 511: 0.16 mi after Bathurst St at Dundas St West - Toronto Western Hospital, under 0.5 mi"
+Bathurst St at Niagara St,43.641906,-79.401865,Streetcar 511,"spacing filter on Streetcar 511: 0.386 mi after Fleet St at Bathurst St, under 0.5 mi"
+Bathurst St at Ulster St,43.6598,-79.409056,Streetcar 511,"spacing filter on Streetcar 511: 0.242 mi after Bathurst St at College St, under 0.5 mi"
+Bay St at College St,43.660589,-79.386667,Streetcar 506,"spacing filter on Streetcar 506: 0.368 mi after Bay St at Dundas St West, under 0.5 mi"
+Bay St at Elm St,43.657262,-79.384347,Streetcar 506,"spacing filter on Streetcar 506: 0.108 mi after Bay St at Dundas St West, under 0.5 mi"
+Bay St at Gerrard St West,43.65869,-79.384943,Streetcar 506,"spacing filter on Streetcar 506: 0.211 mi after Bay St at Dundas St West, under 0.5 mi"
+Broadview Ave at Jack Layton Way,43.666481,-79.353132,"Streetcar 504, Streetcar 505","spacing filter on Streetcar 504: 0.226 mi after Broadview Ave at Withrow Ave, under 0.5 mi"
+Broadview Ave at Langley Ave-Hennick Bridgepoint Hospital,43.667872,-79.353313,"Streetcar 504, Streetcar 505","spacing filter on Streetcar 504: 0.13 mi after Broadview Ave at Withrow Ave, under 0.5 mi"
+Broadview Ave at Millbrook Cres,43.672021,-79.354949,"Streetcar 504, Streetcar 505","spacing filter on Streetcar 504: 0.378 mi after Broadview Station, under 0.5 mi"
+Broadview Ave at Mountstephen St,43.664019,-79.352005,"Streetcar 504, Streetcar 505","spacing filter on Streetcar 504: 0.105 mi after Broadview Ave at Gerrard St East, under 0.5 mi"
+Broadview Ave at Wolfrey Ave,43.674325,-79.357123,"Streetcar 504, Streetcar 505","spacing filter on Streetcar 504: 0.185 mi after Broadview Station, under 0.5 mi"
+Cherry St at Front St East,43.652677,-79.357966,Streetcar 504,"spacing filter on Streetcar 504: 0.138 mi after Distillery Loop, under 0.5 mi"
+Church St at Queen St East,43.652849,-79.375619,Streetcar 501,"spacing filter on Streetcar 501: 0.457 mi after Queen St East at Ontario St, under 0.5 mi"
+College St at Augusta Ave,43.657363,-79.403165,Streetcar 506,"spacing filter on Streetcar 506: 0.162 mi after College St at Spadina Ave, under 0.5 mi"
+College St at Beverley St,43.658674,-79.396057,Streetcar 506,"spacing filter on Streetcar 506: 0.292 mi after Queen's Park Station, under 0.5 mi"
+College St at Borden St,43.65696,-79.405147,Streetcar 506,"spacing filter on Streetcar 506: 0.265 mi after College St at Spadina Ave, under 0.5 mi"
+College St at Brock Ave,43.651792,-79.436328,Streetcar 506,"spacing filter on Streetcar 506: 0.351 mi after College St at Havelock St, under 0.5 mi"
+College St at Dovercourt Rd,43.653601,-79.426374,Streetcar 506,"spacing filter on Streetcar 506: 0.384 mi after College St at Crawford St, under 0.5 mi"
+College St at Dufferin St,43.652546,-79.432542,Streetcar 506,"spacing filter on Streetcar 506: 0.154 mi after College St at Havelock St, under 0.5 mi"
+College St at Euclid Ave,43.65571,-79.411374,Streetcar 506,"spacing filter on Streetcar 506: 0.194 mi after Bathurst St at College St, under 0.5 mi"
+College St at Grace St,43.654945,-79.415629,Streetcar 506,"spacing filter on Streetcar 506: 0.414 mi after Bathurst St at College St, under 0.5 mi"
+College St at McCaul St,43.659189,-79.3935,Streetcar 506,"spacing filter on Streetcar 506: 0.159 mi after Queen's Park Station, under 0.5 mi"
+College St at Ossington Ave,43.654365,-79.422747,Streetcar 506,"spacing filter on Streetcar 506: 0.195 mi after College St at Crawford St, under 0.5 mi"
+Coxwell Ave at Gerrard St East,43.675378,-79.319967,Streetcar 506,"spacing filter on Streetcar 506: 0.322 mi after Gerrard St East at Bowmore Rd, under 0.5 mi"
+Dufferin St at King St West,43.63886,-79.427213,Streetcar 504,"spacing filter on Streetcar 504: 0.286 mi after King St West at Atlantic Ave, under 0.5 mi"
+Dufferin St at Liberty St,43.63718,-79.426699,Streetcar 504,"spacing filter on Streetcar 504: 0.405 mi after King St West at Atlantic Ave, under 0.5 mi"
+Dufferin St at Springhurst Ave,43.635014,-79.425934,Streetcar 504,"spacing filter on Streetcar 504: 0.042 mi from Dufferin Gate Loop, under 0.5 mi"
+Dundas St East at Jarvis St,43.657055,-79.374542,"Streetcar 505, Streetcar 506","spacing filter on Streetcar 505: 0.455 mi after Dundas St East at Parliament St, under 0.5 mi"
+Dundas St East at Ontario St,43.658857,-79.368505,"Streetcar 505, Streetcar 506","spacing filter on Streetcar 505: 0.127 mi after Dundas St East at Parliament St, under 0.5 mi"
+Dundas St East at River St,43.661189,-79.358143,Streetcar 505,"spacing filter on Streetcar 505: 0.343 mi after Broadview Ave at Dundas St East, under 0.5 mi"
+Dundas St East at Sherbourne St,43.658313,-79.371091,"Streetcar 505, Streetcar 506","spacing filter on Streetcar 505: 0.262 mi after Dundas St East at Parliament St, under 0.5 mi"
+Dundas St West at Beverley St,43.653799,-79.393843,Streetcar 505,"spacing filter on Streetcar 505: 0.29 mi after St Patrick Station, under 0.5 mi"
+Dundas St West at Brock Ave,43.649882,-79.435611,Streetcar 505,"spacing filter on Streetcar 505: 0.251 mi after Dundas St West at Dufferin St, under 0.5 mi"
+Dundas St West at Chestnut St,43.655237,-79.385998,Streetcar 505,"spacing filter on Streetcar 505: 0.116 mi after Bay St at Dundas St West, under 0.5 mi"
+Dundas St West at Denison Ave,43.652026,-79.402263,Streetcar 505,"spacing filter on Streetcar 505: 0.221 mi after Dundas St West at Spadina Ave, under 0.5 mi"
+Dundas St West at Dovercourt Rd,43.649439,-79.424721,Streetcar 505,"spacing filter on Streetcar 505: 0.326 mi after Dundas St West at Shaw St, under 0.5 mi"
+Dundas St West at Grace St,43.650679,-79.414013,Streetcar 505,"spacing filter on Streetcar 505: 0.415 mi after Bathurst St at Dundas St West - Toronto Western Hospital, under 0.5 mi"
+Dundas St West at Lisgar St,43.649494,-79.426678,Streetcar 505,"spacing filter on Streetcar 505: 0.424 mi after Dundas St West at Shaw St, under 0.5 mi"
+Dundas St West at Manning Ave,43.651286,-79.410924,Streetcar 505,"spacing filter on Streetcar 505: 0.254 mi after Bathurst St at Dundas St West - Toronto Western Hospital, under 0.5 mi"
+Dundas St West at McCaul St,43.654315,-79.391381,Streetcar 505,"spacing filter on Streetcar 505: 0.162 mi after St Patrick Station, under 0.5 mi"
+Dundas St West at Ossington Ave,43.64935,-79.420717,Streetcar 505,"spacing filter on Streetcar 505: 0.125 mi after Dundas St West at Shaw St, under 0.5 mi"
+Dundas St West at Sorauren Ave,43.651223,-79.445384,"Streetcar 505, Streetcar 506","spacing filter on Streetcar 505: 0.28 mi after College St at Lansdowne Ave, under 0.5 mi"
+Dundas St West at Sterling Rd,43.650658,-79.443014,"Streetcar 505, Streetcar 506","spacing filter on Streetcar 505: 0.155 mi after College St at Lansdowne Ave, under 0.5 mi"
+Exhibition Loop at Manitoba Dr,43.636511,-79.41471,Streetcar 509,"spacing filter on Streetcar 509: 0.08 mi from Exhibition Loop, under 0.5 mi"
+Fleet St at Fort York Blvd,43.636339,-79.406837,"Streetcar 509, Streetcar 511","spacing filter on Streetcar 509: 0.333 mi after Fleet St at Bathurst St, under 0.5 mi"
+Gerrard St East at Alton Ave,43.670334,-79.330555,Streetcar 506,"spacing filter on Streetcar 506: 0.465 mi after Gerrard St East at Ashdale Ave, under 0.5 mi"
+Gerrard St East at Beaton Ave,43.676169,-79.316983,Streetcar 506,"spacing filter on Streetcar 506: 0.163 mi after Gerrard St East at Bowmore Rd, under 0.5 mi"
+Gerrard St East at Blackburn St,43.664818,-79.355143,Streetcar 506,"spacing filter on Streetcar 506: 0.134 mi after Broadview Ave at Gerrard St East, under 0.5 mi"
+Gerrard St East at Carlaw Ave,43.667721,-79.342327,Streetcar 506,"spacing filter on Streetcar 506: 0.484 mi after Gerrard St East at Leslie St, under 0.5 mi"
+Gerrard St East at Coxwell Ave,43.672926,-79.319489,Streetcar 506,"spacing filter on Streetcar 506: 0.493 mi after Gerrard St East at Bowmore Rd, under 0.5 mi"
+Gerrard St East at De Grassi St,43.666309,-79.348587,Streetcar 506,"spacing filter on Streetcar 506: 0.178 mi after Gerrard St East at Logan Ave, under 0.5 mi"
+Gerrard St East at Golfview Ave,43.681872,-79.308575,Streetcar 506,"spacing filter on Streetcar 506: 0.139 mi after Gerrard St East at Glenmount Park Rd, under 0.5 mi"
+Gerrard St East at Greenwood Ave,43.670902,-79.328006,Streetcar 506,"spacing filter on Streetcar 506: 0.331 mi after Gerrard St East at Ashdale Ave, under 0.5 mi"
+Gerrard St East at Jones Ave,43.669206,-79.3356,Streetcar 506,"spacing filter on Streetcar 506: 0.131 mi after Gerrard St East at Leslie St, under 0.5 mi"
+Gerrard St East at Kingsmount Park Rd,43.679655,-79.312824,Streetcar 506,"spacing filter on Streetcar 506: 0.401 mi after Gerrard St East at Glenmount Park Rd, under 0.5 mi"
+Gerrard St East at Main St,43.68401,-79.300297,Streetcar 506,"spacing filter on Streetcar 506: 0.357 mi after Main Street Station, under 0.5 mi"
+Gerrard St East at Marjory Ave,43.66877,-79.33754,Streetcar 506,"spacing filter on Streetcar 506: 0.233 mi after Gerrard St East at Leslie St, under 0.5 mi"
+Gerrard St East at Norwood Rd,43.683349,-79.302967,Streetcar 506,"spacing filter on Streetcar 506: 0.498 mi after Main Street Station, under 0.5 mi"
+Gerrard St East at Pape Ave,43.668139,-79.34037,Streetcar 506,"spacing filter on Streetcar 506: 0.381 mi after Gerrard St East at Leslie St, under 0.5 mi"
+Gerrard St East at River St,43.66369,-79.359191,Streetcar 506,"spacing filter on Streetcar 506: 0.351 mi after Broadview Ave at Gerrard St East, under 0.5 mi"
+Gerrard St East at Sumach St,43.663166,-79.361433,Streetcar 506,"spacing filter on Streetcar 506: 0.469 mi after Broadview Ave at Gerrard St East, under 0.5 mi"
+Gerrard St East at Woodbine Ave,43.680782,-79.310711,Streetcar 506,"spacing filter on Streetcar 506: 0.27 mi after Gerrard St East at Glenmount Park Rd, under 0.5 mi"
+Gerrard St East at Woodfield Rd,43.671812,-79.323922,Streetcar 506,"spacing filter on Streetcar 506: 0.117 mi after Gerrard St East at Ashdale Ave, under 0.5 mi"
+Howard Park Ave at Indian Rd,43.650659,-79.454976,Streetcar 506,"spacing filter on Streetcar 506: 0.207 mi after Howard Park Ave at Roncesvalles Ave, under 0.5 mi"
+Howard Park Ave at Parkside Dr,43.649108,-79.457435,Streetcar 506,"spacing filter on Streetcar 506: 0.37 mi after Howard Park Ave at Roncesvalles Ave, under 0.5 mi"
+King St East at Church St,43.649911,-79.374399,Streetcar 504,"spacing filter on Streetcar 504: 0.439 mi after King St East at Ontario St, under 0.5 mi"
+King St East at Parliament St,43.652733,-79.363196,Streetcar 504,"spacing filter on Streetcar 504: 0.46 mi after King St East at River St, under 0.5 mi"
+King St East at Sackville St,43.654451,-79.360272,Streetcar 504,"spacing filter on Streetcar 504: 0.271 mi after King St East at River St, under 0.5 mi"
+King St East at Sherbourne St,43.651258,-79.368251,Streetcar 504,"spacing filter on Streetcar 504: 0.117 mi after King St East at Ontario St, under 0.5 mi"
+King St East at Sumach St,43.655469,-79.358521,Streetcar 504,"spacing filter on Streetcar 504: 0.159 mi after King St East at River St, under 0.5 mi"
+King St West at Dowling Ave,43.636663,-79.438549,Streetcar 504,"spacing filter on Streetcar 504: 0.277 mi after King St West at Dunn Ave, under 0.5 mi"
+King St West at Jameson Ave,43.637171,-79.436038,Streetcar 504,"spacing filter on Streetcar 504: 0.147 mi after King St West at Dunn Ave, under 0.5 mi"
+King St West at Jarvis St,43.650466,-79.371871,Streetcar 504,"spacing filter on Streetcar 504: 0.306 mi after King St East at Ontario St, under 0.5 mi"
+King St West at Joe Shuster Way,43.639698,-79.423566,Streetcar 504,"spacing filter on Streetcar 504: 0.094 mi after King St West at Atlantic Ave, under 0.5 mi"
+King St West at John St,43.646576,-79.389714,Streetcar 504,"spacing filter on Streetcar 504: 0.258 mi after St Andrew Station, under 0.5 mi"
+King St West at Niagara St,43.642898,-79.40765,Streetcar 504,"spacing filter on Streetcar 504: 0.28 mi after Bathurst St at King St West, under 0.5 mi"
+King St West at Peter St,43.646131,-79.391827,Streetcar 504,"spacing filter on Streetcar 504: 0.368 mi after St Andrew Station, under 0.5 mi"
+King St West at Portland St,43.644493,-79.399722,Streetcar 504,"spacing filter on Streetcar 504: 0.244 mi after King St West at Spadina Ave, under 0.5 mi"
+King St West at Shaw St,43.641419,-79.414996,Streetcar 504,"spacing filter on Streetcar 504: 0.159 mi after King St West at Strachan Ave, under 0.5 mi"
+King St West at Spencer Ave,43.638222,-79.430879,Streetcar 504,"spacing filter on Streetcar 504: 0.475 mi after King St West at Atlantic Ave, under 0.5 mi"
+King St West at Sudbury St,43.640959,-79.417331,Streetcar 504,"spacing filter on Streetcar 504: 0.28 mi after King St West at Strachan Ave, under 0.5 mi"
+King St West at Tecumseth St,43.643392,-79.405206,Streetcar 504,"spacing filter on Streetcar 504: 0.153 mi after Bathurst St at King St West, under 0.5 mi"
+King St West at Wilson Park Rd,43.636987,-79.44228,Streetcar 504,"spacing filter on Streetcar 504: 0.466 mi after King St West at Dunn Ave, under 0.5 mi"
+Parliament St at Oak St,43.661338,-79.366656,Streetcar 506,"spacing filter on Streetcar 506: 0.159 mi after Gerrard St East at Sackville St, under 0.5 mi"
+Queen St East at Beech Ave,43.672644,-79.287568,Streetcar 501,"spacing filter on Streetcar 501: 0.283 mi after Queen St East at Neville Park Blvd, under 0.5 mi"
+Queen St East at Bellefair Ave,43.670068,-79.299833,Streetcar 501,"spacing filter on Streetcar 501: 0.376 mi after Queen St East at Glen Manor Dr, under 0.5 mi"
+Queen St East at Brooklyn Ave,43.662044,-79.335622,Streetcar 501,"spacing filter on Streetcar 501: 0.405 mi after Queen St East at Alton Ave, under 0.5 mi"
+Queen St East at Carlaw Ave,43.661048,-79.340081,Streetcar 501,"spacing filter on Streetcar 501: 0.117 mi after Queen St East at Pape Ave, under 0.5 mi"
+Queen St East at Carroll St,43.658313,-79.352279,"Streetcar 501, Streetcar 504","spacing filter on Streetcar 501: 0.129 mi after Broadview Ave at Queen St East, under 0.5 mi"
+Queen St East at Greenwood Ave,43.664367,-79.325336,Streetcar 501,"spacing filter on Streetcar 501: 0.457 mi after Queen St East at Coxwell Ave, under 0.5 mi"
+Queen St East at Jarvis St,43.6537,-79.37323,Streetcar 501,"spacing filter on Streetcar 501: 0.324 mi after Queen St East at Ontario St, under 0.5 mi"
+Queen St East at Jones Ave,43.662681,-79.332747,Streetcar 501,"spacing filter on Streetcar 501: 0.254 mi after Queen St East at Alton Ave, under 0.5 mi"
+Queen St East at Kingston Rd,43.667214,-79.312543,Streetcar 501,"spacing filter on Streetcar 501: 0.472 mi after Queen St East at Elmer Ave, under 0.5 mi"
+Queen St East at Leslie St,43.663237,-79.330243,Streetcar 501,"spacing filter on Streetcar 501: 0.123 mi after Queen St East at Alton Ave, under 0.5 mi"
+Queen St East at Lockwood Rd,43.668001,-79.309115,Streetcar 501,"spacing filter on Streetcar 501: 0.292 mi after Queen St East at Elmer Ave, under 0.5 mi"
+Queen St East at Logan Ave,43.6603,-79.343414,Streetcar 501,"spacing filter on Streetcar 501: 0.292 mi after Queen St East at Pape Ave, under 0.5 mi"
+Queen St East at Parliament St,43.655581,-79.364481,Streetcar 501,"spacing filter on Streetcar 501: 0.423 mi after King St East at River St, under 0.5 mi"
+Queen St East at Sackville St,43.656224,-79.361612,Streetcar 501,"spacing filter on Streetcar 501: 0.273 mi after King St East at River St, under 0.5 mi"
+Queen St East at Saulter St,43.659531,-79.346825,Streetcar 501,"spacing filter on Streetcar 501: 0.471 mi after Queen St East at Pape Ave, under 0.5 mi"
+Queen St East at Sherbourne St,43.654513,-79.369436,Streetcar 501,"spacing filter on Streetcar 501: 0.125 mi after Queen St East at Ontario St, under 0.5 mi"
+Queen St East at Silver Birch Ave,43.673149,-79.285157,Streetcar 501,"spacing filter on Streetcar 501: 0.158 mi after Queen St East at Neville Park Blvd, under 0.5 mi"
+Queen St East at Sumach St,43.656828,-79.358907,Streetcar 501,"spacing filter on Streetcar 501: 0.131 mi after King St East at River St, under 0.5 mi"
+Queen St East at Wineva Ave,43.671076,-79.295179,Streetcar 501,"spacing filter on Streetcar 501: 0.133 mi after Queen St East at Glen Manor Dr, under 0.5 mi"
+Queen St East at Woodbine Ave,43.668735,-79.305802,Streetcar 501,"spacing filter on Streetcar 501: 0.119 mi after Queen St East at Elmer Ave, under 0.5 mi"
+Queen St East at Woodfield Rd,43.665247,-79.321352,Streetcar 501,"spacing filter on Streetcar 501: 0.248 mi after Queen St East at Coxwell Ave, under 0.5 mi"
+Queen St West at Augusta Ave,43.648052,-79.399702,Streetcar 501,"spacing filter on Streetcar 501: 0.166 mi after Queen St West at Spadina Ave, under 0.5 mi"
+Queen St West at Brock Ave,43.641466,-79.432328,Streetcar 501,"spacing filter on Streetcar 501: 0.232 mi after Queen St West at Sudbury St, under 0.5 mi"
+Queen St West at Dovercourt Rd,43.643481,-79.422378,Streetcar 501,"spacing filter on Streetcar 501: 0.314 mi after Queen St West at Shaw St, under 0.5 mi"
+Queen St West at Dunn Ave,43.641047,-79.434364,Streetcar 501,"spacing filter on Streetcar 501: 0.338 mi after Queen St West at Sudbury St, under 0.5 mi"
+Queen St West at Jameson Ave,43.640538,-79.43699,Streetcar 501,"spacing filter on Streetcar 501: 0.474 mi after Queen St West at Sudbury St, under 0.5 mi"
+Queen St West at John St,43.649853,-79.391073,Streetcar 501,"spacing filter on Streetcar 501: 0.236 mi after Osgoode Station, under 0.5 mi"
+Queen St West at Niagara St,43.646028,-79.409705,Streetcar 501,"spacing filter on Streetcar 501: 0.298 mi after Bathurst St at Queen St West, under 0.5 mi"
+Queen St West at Ossington Ave,43.644172,-79.418833,Streetcar 501,"spacing filter on Streetcar 501: 0.13 mi after Queen St West at Shaw St, under 0.5 mi"
+Queen St West at Soho St,43.649343,-79.39353,Streetcar 501,"spacing filter on Streetcar 501: 0.364 mi after Osgoode Station, under 0.5 mi"
+Queen St West at St Patrick St,43.65048,-79.388482,Streetcar 501,"spacing filter on Streetcar 501: 0.1 mi after Osgoode Station, under 0.5 mi"
+Queen St West at Strachan Ave,43.645331,-79.41318,Streetcar 501,"spacing filter on Streetcar 501: 0.479 mi after Bathurst St at Queen St West, under 0.5 mi"
+Queen St West at Tecumseth St,43.646666,-79.406575,Streetcar 501,"spacing filter on Streetcar 501: 0.135 mi after Bathurst St at Queen St West, under 0.5 mi"
+Queen St West at Triller Ave,43.639206,-79.443627,Streetcar 501,"spacing filter on Streetcar 501: 0.135 mi after Queen St West at Beaty Ave, under 0.5 mi"
+Queens Quay West at Dan Leckie Way,43.636184,-79.39797,Streetcar 509,"spacing filter on Streetcar 509: 0.328 mi after Spadina Ave at Queens Quay West, under 0.5 mi"
+Queens Quay West at Dan Leckie Way East Side,43.636798,-79.396172,Streetcar 509,"spacing filter on Streetcar 509: 0.21 mi from Fleet St at Bathurst St, under 0.5 mi"
+Queens Quay West at Rees St,43.638753,-79.386977,"Streetcar 509, Streetcar 510","spacing filter on Streetcar 509: 0.28 mi after Queens Quay West at Harbourfront Centre, under 0.5 mi"
+Queens Quay/Ferry Docks Station,43.641614,-79.377139,"Streetcar 509, Streetcar 510","spacing filter on Streetcar 509: 0.331 mi after Union Station, under 0.5 mi"
+Richmond St West at York St,43.650603,-79.38422,Streetcar 501,"spacing filter on Streetcar 501: 0.284 mi after Queen Station, under 0.5 mi"
+Roncesvalles Ave at Galley Ave,43.64326,-79.447873,Streetcar 504,"spacing filter on Streetcar 504: 0.318 mi after King St West at Queen St West, under 0.5 mi"
+Roncesvalles Ave at Grenadier Rd,43.648762,-79.449996,Streetcar 504,"spacing filter on Streetcar 504: 0.195 mi after Roncesvalles Ave at Fermanagh Ave, under 0.5 mi"
+Roncesvalles Ave at Marion St,43.641043,-79.447015,Streetcar 504,"spacing filter on Streetcar 504: 0.159 mi after King St West at Queen St West, under 0.5 mi"
+Spadina Ave at Bremner Blvd,43.641023,-79.393183,Streetcar 510,"spacing filter on Streetcar 510: 0.333 mi after King St West at Spadina Ave, under 0.5 mi"
+Spadina Ave at Front St West,43.643058,-79.394028,Streetcar 510,"spacing filter on Streetcar 510: 0.186 mi after King St West at Spadina Ave, under 0.5 mi"
+Spadina Ave at Harbord St,43.664094,-79.402485,Streetcar 510,"spacing filter on Streetcar 510: 0.319 mi after Spadina Station, under 0.5 mi"
+Spadina Ave at Harbord St South Side,43.662648,-79.401984,Streetcar 510,"spacing filter on Streetcar 510: 0.422 mi after Spadina Station, under 0.5 mi"
+Spadina Ave at Nassau St,43.655526,-79.399074,Streetcar 510,"spacing filter on Streetcar 510: 0.173 mi after College St at Spadina Ave, under 0.5 mi"
+Spadina Ave at Sullivan St,43.651155,-79.397332,Streetcar 510,"spacing filter on Streetcar 510: 0.127 mi after Dundas St West at Spadina Ave, under 0.5 mi"
+St Clair Ave West at Avenue Rd,43.686601,-79.401493,Streetcar 512,"spacing filter on Streetcar 512: 0.188 mi after St Clair Ave West at Dunvegan Rd, under 0.5 mi"
+St Clair Ave West at Christie St,43.68169,-79.425721,Streetcar 512,"spacing filter on Streetcar 512: 0.164 mi after St Clair Ave West at Arlington Ave, under 0.5 mi"
+St Clair Ave West at Deer Park Cres,43.687263,-79.398053,Streetcar 512,"spacing filter on Streetcar 512: 0.366 mi after St Clair Ave West at Dunvegan Rd, under 0.5 mi"
+St Clair Ave West at Dufferin St,43.677933,-79.443056,Streetcar 512,"spacing filter on Streetcar 512: 0.422 mi after Earlscourt Loop at St Clair Ave West, under 0.5 mi"
+St Clair Ave West at Earlscourt Ave,43.677044,-79.447046,Streetcar 512,"spacing filter on Streetcar 512: 0.213 mi after Earlscourt Loop at St Clair Ave West, under 0.5 mi"
+St Clair Ave West at Glenholme Ave,43.678985,-79.438072,Streetcar 512,"spacing filter on Streetcar 512: 0.117 mi after St Clair Ave West at Northcliffe Blvd, under 0.5 mi"
+St Clair Ave West at Lansdowne Ave,43.676353,-79.450021,Streetcar 512,"spacing filter on Streetcar 512: 0.056 mi after Earlscourt Loop at St Clair Ave West, under 0.5 mi"
+St Clair Ave West at Oakwood Ave,43.679665,-79.435265,Streetcar 512,"spacing filter on Streetcar 512: 0.265 mi after St Clair Ave West at Northcliffe Blvd, under 0.5 mi"
+St Clair Ave West at Russell Hill Rd,43.685333,-79.407855,Streetcar 512,"spacing filter on Streetcar 512: 0.407 mi after St Clair West Station, under 0.5 mi"
+St Clair Ave West at Spadina Rd,43.684617,-79.411135,Streetcar 512,"spacing filter on Streetcar 512: 0.236 mi after St Clair West Station, under 0.5 mi"
+St Clair Ave West at Tweedsmuir Ave,43.684087,-79.413523,Streetcar 512,"spacing filter on Streetcar 512: 0.111 mi after St Clair West Station, under 0.5 mi"
+St Clair Ave West at Vaughan Rd,43.682656,-79.420844,Streetcar 512,"spacing filter on Streetcar 512: 0.114 mi from St Clair Ave West at Bathurst St, under 0.5 mi"
+St Clair Ave West at Winona Dr,43.680259,-79.432498,Streetcar 512,"spacing filter on Streetcar 512: 0.409 mi after St Clair Ave West at Northcliffe Blvd, under 0.5 mi"
+St Clair Ave West at Wychwood Ave,43.682135,-79.423465,Streetcar 512,"spacing filter on Streetcar 512: 0.281 mi after St Clair Ave West at Arlington Ave, under 0.5 mi"
+The Queensway at Colborne Lodge Dr,43.639566,-79.458635,Streetcar 501,"spacing filter on Streetcar 501: 0.084 mi from The Queensway at Colborne Lodge Dr West Side, under 0.5 mi"
+The Queensway at Ellis Ave,43.637929,-79.465682,Streetcar 501,"spacing filter on Streetcar 501: 0.218 mi from The Queensway at Windermere Ave, under 0.5 mi"
+The Queensway at Ellis Ave West Side,43.637677,-79.467157,Streetcar 501,"spacing filter on Streetcar 501: 0.365 mi after The Queensway at Colborne Lodge Dr West Side, under 0.5 mi"
+The Queensway at Glendale Ave - St Joseph's Health Centre,43.639361,-79.451305,Streetcar 501,"spacing filter on Streetcar 501: 0.273 mi after King St West at Queen St West, under 0.5 mi"
+The Queensway at Parkside Dr,43.639706,-79.454049,Streetcar 501,"spacing filter on Streetcar 501: 0.412 mi after King St West at Queen St West, under 0.5 mi"
+The Queensway at South Kingsway,43.635738,-79.473222,Streetcar 501,"spacing filter on Streetcar 501: 0.194 mi after The Queensway at Windermere Ave, under 0.5 mi"
+York St at Adelaide St West,43.649422,-79.384314,Streetcar 501,"spacing filter on Streetcar 501: 0.125 mi from St Andrew Station, under 0.5 mi"
+Bingham Loop,43.68146,-79.285,Streetcar 503,closed for works: Streetcar 503 Kingston Rd runs as a replacement bus in the timetable to 2026-10-31
+Kingston Rd at Beech Ave,43.680164,-79.290892,Streetcar 503,closed for works: Streetcar 503 Kingston Rd runs as a replacement bus in the timetable to 2026-10-31
+Kingston Rd at Bingham Ave,43.680647,-79.285096,Streetcar 503,closed for works: Streetcar 503 Kingston Rd runs as a replacement bus in the timetable to 2026-10-31
+Kingston Rd at Brookside Dr,43.677113,-79.303837,Streetcar 503,closed for works: Streetcar 503 Kingston Rd runs as a replacement bus in the timetable to 2026-10-31
+Kingston Rd at Columbine Ave,43.67138,-79.31031,Streetcar 503,closed for works: Streetcar 503 Kingston Rd runs as a replacement bus in the timetable to 2026-10-31
+Kingston Rd at Dixon Ave,43.669775,-79.311175,Streetcar 503,closed for works: Streetcar 503 Kingston Rd runs as a replacement bus in the timetable to 2026-10-31
+Kingston Rd at Dundas St East,43.670087,-79.311229,Streetcar 503,closed for works: Streetcar 503 Kingston Rd runs as a replacement bus in the timetable to 2026-10-31
+Kingston Rd at Elmer Ave,43.675537,-79.306008,Streetcar 503,closed for works: Streetcar 503 Kingston Rd runs as a replacement bus in the timetable to 2026-10-31
+Kingston Rd at Glen Manor Dr,43.679631,-79.294644,Streetcar 503,closed for works: Streetcar 503 Kingston Rd runs as a replacement bus in the timetable to 2026-10-31
+Kingston Rd at Lee Ave,43.678012,-79.301308,Streetcar 503,closed for works: Streetcar 503 Kingston Rd runs as a replacement bus in the timetable to 2026-10-31
+Kingston Rd at Main St,43.679023,-79.297762,Streetcar 503,closed for works: Streetcar 503 Kingston Rd runs as a replacement bus in the timetable to 2026-10-31
+Kingston Rd at Scarborough Rd,43.680468,-79.287193,Streetcar 503,closed for works: Streetcar 503 Kingston Rd runs as a replacement bus in the timetable to 2026-10-31
+Kingston Rd at Southwood Dr,43.678753,-79.298363,Streetcar 503,closed for works: Streetcar 503 Kingston Rd runs as a replacement bus in the timetable to 2026-10-31
+Kingston Rd at Waverley Rd,43.676824,-79.304185,Streetcar 503,closed for works: Streetcar 503 Kingston Rd runs as a replacement bus in the timetable to 2026-10-31
+Kingston Rd at Woodbine Ave,43.673673,-79.308088,Streetcar 503,closed for works: Streetcar 503 Kingston Rd runs as a replacement bus in the timetable to 2026-10-31
+Lake Shore Blvd West at Brookers Lane,43.62699,-79.479017,Streetcar 507,closed for works: Streetcar 507 Long Branch runs as a replacement bus in the timetable to 2026-10-31
+Lake Shore Blvd West at Burlington St,43.617151,-79.487284,Streetcar 507,closed for works: Streetcar 507 Long Branch runs as a replacement bus in the timetable to 2026-10-31
+Lake Shore Blvd West at Colonel Samuel Smith Park Dr,43.598047,-79.517179,Streetcar 507,closed for works: Streetcar 507 Long Branch runs as a replacement bus in the timetable to 2026-10-31
+Lake Shore Blvd West at Fifth St,43.601151,-79.503113,Streetcar 507,closed for works: Streetcar 507 Long Branch runs as a replacement bus in the timetable to 2026-10-31
+Lake Shore Blvd West at First St,43.60214,-79.498592,Streetcar 507,closed for works: Streetcar 507 Long Branch runs as a replacement bus in the timetable to 2026-10-31
+Lake Shore Blvd West at Hillside Ave,43.611265,-79.490136,Streetcar 507,closed for works: Streetcar 507 Long Branch runs as a replacement bus in the timetable to 2026-10-31
+Lake Shore Blvd West at Islington Ave,43.600896,-79.505092,Streetcar 507,closed for works: Streetcar 507 Long Branch runs as a replacement bus in the timetable to 2026-10-31
+Lake Shore Blvd West at Kipling Ave,43.598331,-79.516749,Streetcar 507,closed for works: Streetcar 507 Long Branch runs as a replacement bus in the timetable to 2026-10-31
+Lake Shore Blvd West at Legion Rd,43.620165,-79.483763,Streetcar 507,closed for works: Streetcar 507 Long Branch runs as a replacement bus in the timetable to 2026-10-31
+Lake Shore Blvd West at Long Branch Ave,43.594303,-79.53413,Streetcar 507,closed for works: Streetcar 507 Long Branch runs as a replacement bus in the timetable to 2026-10-31
+Lake Shore Blvd West at Louisa St,43.618371,-79.486679,Streetcar 507,closed for works: Streetcar 507 Long Branch runs as a replacement bus in the timetable to 2026-10-31
+Lake Shore Blvd West at Miles Rd,43.607993,-79.490263,Streetcar 507,closed for works: Streetcar 507 Long Branch runs as a replacement bus in the timetable to 2026-10-31
+Lake Shore Blvd West at Mimico Ave,43.613542,-79.489314,Streetcar 507,closed for works: Streetcar 507 Long Branch runs as a replacement bus in the timetable to 2026-10-31
+Lake Shore Blvd West at Norris Cres,43.610699,-79.489978,Streetcar 507,closed for works: Streetcar 507 Long Branch runs as a replacement bus in the timetable to 2026-10-31
+Lake Shore Blvd West at Park Lawn Rd,43.62278,-79.481308,Streetcar 507,closed for works: Streetcar 507 Long Branch runs as a replacement bus in the timetable to 2026-10-31
+Lake Shore Blvd West at Royal York Rd,43.603496,-79.493243,Streetcar 507,closed for works: Streetcar 507 Long Branch runs as a replacement bus in the timetable to 2026-10-31
+Lake Shore Blvd West at Seventh St,43.600638,-79.505392,Streetcar 507,closed for works: Streetcar 507 Long Branch runs as a replacement bus in the timetable to 2026-10-31
+Lake Shore Blvd West at Superior Ave,43.614817,-79.488619,Streetcar 507,closed for works: Streetcar 507 Long Branch runs as a replacement bus in the timetable to 2026-10-31
+Lake Shore Blvd West at Symons St,43.608629,-79.490452,Streetcar 507,closed for works: Streetcar 507 Long Branch runs as a replacement bus in the timetable to 2026-10-31
+Lake Shore Blvd West at Tenth St,43.599877,-79.508796,Streetcar 507,closed for works: Streetcar 507 Long Branch runs as a replacement bus in the timetable to 2026-10-31
+Lake Shore Blvd West at Third St,43.601653,-79.500866,Streetcar 507,closed for works: Streetcar 507 Long Branch runs as a replacement bus in the timetable to 2026-10-31
+Lake Shore Blvd West at Thirteenth St,43.599214,-79.51196,Streetcar 507,closed for works: Streetcar 507 Long Branch runs as a replacement bus in the timetable to 2026-10-31
+Lake Shore Blvd West at Thirtieth St,43.595472,-79.52966,Streetcar 507,closed for works: Streetcar 507 Long Branch runs as a replacement bus in the timetable to 2026-10-31
+Lake Shore Blvd West at Thirty First St,43.595155,-79.530407,Streetcar 507,closed for works: Streetcar 507 Long Branch runs as a replacement bus in the timetable to 2026-10-31
+Lake Shore Blvd West at Thirty Seventh St,43.593334,-79.538348,Streetcar 507,closed for works: Streetcar 507 Long Branch runs as a replacement bus in the timetable to 2026-10-31
+Lake Shore Blvd West at Twenty Eighth St,43.595685,-79.527699,Streetcar 507,closed for works: Streetcar 507 Long Branch runs as a replacement bus in the timetable to 2026-10-31
+Lake Shore Blvd West at Twenty Ninth St,43.595809,-79.528185,Streetcar 507,closed for works: Streetcar 507 Long Branch runs as a replacement bus in the timetable to 2026-10-31
+Lake Shore Blvd West at Twenty Second St,43.597116,-79.521413,Streetcar 507,closed for works: Streetcar 507 Long Branch runs as a replacement bus in the timetable to 2026-10-31
+Lake Shore Blvd West at Twenty Seventh St,43.596328,-79.525043,Streetcar 507,closed for works: Streetcar 507 Long Branch runs as a replacement bus in the timetable to 2026-10-31
+Lake Shore Blvd West at Twenty Sixth St,43.596668,-79.524268,Streetcar 507,closed for works: Streetcar 507 Long Branch runs as a replacement bus in the timetable to 2026-10-31
+Long Branch Loop - Long Branch GO Station,43.592111,-79.5437,Streetcar 507,closed for works: Streetcar 507 Long Branch runs as a replacement bus in the timetable to 2026-10-31
+Gunns Loop at St Clair Ave West,43.671912,-79.471837,Streetcar 512,closed for works: this stretch of Streetcar 512 St Clair runs as a replacement bus in the timetable to 2026-10-31
+St Clair Ave West at Caledonia Park Rd,43.675211,-79.454887,Streetcar 512,closed for works: this stretch of Streetcar 512 St Clair runs as a replacement bus in the timetable to 2026-10-31
+St Clair Ave West at Caledonia Rd,43.675536,-79.454364,Streetcar 512,closed for works: this stretch of Streetcar 512 St Clair runs as a replacement bus in the timetable to 2026-10-31
+St Clair Ave West at Hounslow Heath Rd,43.674054,-79.460091,Streetcar 512,closed for works: this stretch of Streetcar 512 St Clair runs as a replacement bus in the timetable to 2026-10-31
+St Clair Ave West at Keele St/ Weston Rd,43.672376,-79.467746,Streetcar 512,closed for works: this stretch of Streetcar 512 St Clair runs as a replacement bus in the timetable to 2026-10-31
+St Clair Ave West at Laughton Ave,43.674577,-79.45772,Streetcar 512,closed for works: this stretch of Streetcar 512 St Clair runs as a replacement bus in the timetable to 2026-10-31
+St Clair Ave West at Old Weston Rd,43.673441,-79.463154,Streetcar 512,closed for works: this stretch of Streetcar 512 St Clair runs as a replacement bus in the timetable to 2026-10-31
+St Clair Ave West at Silverthorn Ave,43.67433,-79.459897,Streetcar 512,closed for works: this stretch of Streetcar 512 St Clair runs as a replacement bus in the timetable to 2026-10-31
+St Clair Ave West at Weston Rd/ Keele St,43.672435,-79.468189,Streetcar 512,closed for works: this stretch of Streetcar 512 St Clair runs as a replacement bus in the timetable to 2026-10-31
+St. Clair Ave West at Cloverdale Rd,43.673996,-79.461403,Streetcar 512,closed for works: this stretch of Streetcar 512 St Clair runs as a replacement bus in the timetable to 2026-10-31

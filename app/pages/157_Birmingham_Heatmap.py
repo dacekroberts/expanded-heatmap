@@ -106,7 +106,7 @@ st.markdown(
 """
 )
 
-render_map_help('business categories (Food service and Food shops)')
+render_map_help('business categories (Food service and Food shops)', search='birmingham')
 render_excluded_stations("Birmingham (Regional)")
 render_country_links("Birmingham (Regional)")
 

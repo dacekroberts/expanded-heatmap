@@ -2,17 +2,17 @@
  "san_diego": {
   "in_ring": 2267,
   "all": 9235,
-  "map_blob": "0043b713b786fe2ed375c82b2aee38f469b5896f"
+  "map_blob": "580638bd0b12e2a6a6a60692e167dff93adc3894"
  },
  "san_francisco": {
   "in_ring": 8302,
   "all": 11726,
-  "map_blob": "5a2f847f09f8f7d08b24cb7ae4f008b34440d0f8"
+  "map_blob": "720bc44e3bf53c3facf418dfdb54ebeeb1f08b5a"
  },
  "los_angeles": {
   "in_ring": 14642,
   "all": 60740,
-  "map_blob": "2aec6e1b935f83975b9a995bcec5c6ec8d408741"
+  "map_blob": "00f4304a2004d4b99ecfa124473ebbf1c1182474"
  },
  "chicago": {
   "in_ring": 11685,
@@ -22,27 +22,27 @@
  "new_york": {
   "in_ring": 44360,
   "all": 62441,
-  "map_blob": "c25530aa8b1b64e9b1485ce0c2d7874b99acd355"
+  "map_blob": "50f41bd9d8401e1e7ceebe13b270521cba2f72c4"
  },
  "philadelphia": {
   "in_ring": 4851,
   "all": 8301,
-  "map_blob": "31ad147aa4ca654615b08a508e75bd08df2dd476"
+  "map_blob": "b1ffedb3783319febbda8bc6edc444199341b090"
  },
  "miami": {
   "in_ring": 3733,
   "all": 29549,
-  "map_blob": "b0ebbc33e3a0d16689de3a7ef639a3f8c1baf0d5"
+  "map_blob": "bc6e7608fa7408de9ae2a49bc9fe5bc911a182e7"
  },
  "boston": {
   "in_ring": 2410,
   "all": 3164,
-  "map_blob": "ce56220c3e12f8fdbdb778c2a3beab4d386c13fc"
+  "map_blob": "82e645ad2e9592f0d23350131a360fbea4cc9704"
  },
  "washington_dc": {
   "in_ring": 3845,
   "all": 5203,
-  "map_blob": "f8e597289a47eeefe627f399dba58d1ccddbb59f"
+  "map_blob": "e052be490b5ce21e576d64fbfc3519af1d82fc99"
  },
  "vancouver": {
   "in_ring": 7010,
@@ -57,22 +57,22 @@
  "calgary": {
   "in_ring": 6156,
   "all": 15072,
-  "map_blob": "bc25708eb712b29b408ed560f7d6bac6a72db6a5"
+  "map_blob": "c34df9ac27a0db5115633d2ce43c01f5ba24cd88"
  },
  "edmonton": {
   "in_ring": 2374,
   "all": 10702,
-  "map_blob": "475d81fcc63900e64e5076157b7c3bc99b37072a"
+  "map_blob": "c106fc465f37cce0b39b46384db3695c51a36bf3"
  },
  "toronto": {
-  "in_ring": 8749,
+  "in_ring": 11803,
   "all": 18215,
-  "map_blob": "b0de1105ac1e7b9c995140b3e4d58a506336bf73"
+  "map_blob": "943458af71897018a8732170d5418f49f9423904"
  },
  "mexico_city": {
-  "in_ring": 149980,
-  "all": 407628,
-  "map_blob": "e5281faa4cbd0d472ccce9fdf9954ebdf85ba27d"
+  "in_ring": 175939,
+  "all": 427121,
+  "map_blob": "bda917bfce1781d38146bfb78e4d4b1f85884852"
  },
  "guadalajara": {
   "in_ring": 36729,
@@ -92,12 +92,12 @@
  "dublin": {
   "in_ring": 7411,
   "all": 12844,
-  "map_blob": "718a3b1c3dc17d9a5ee6f136456ac4f7ec16f3f6"
+  "map_blob": "fa83f68eb99c0d90823828337014d81f497b1b26"
  },
  "milan": {
-  "in_ring": 41510,
+  "in_ring": 45999,
   "all": 47540,
-  "map_blob": "a90824a5fbfa551abb54507ee9a049676fae0ee0"
+  "map_blob": "5fa7750137f99500214e6ade1abcea20bcb95931"
  },
  "paris": {
   "in_ring": 85228,
@@ -135,9 +135,9 @@
   "map_blob": "3bdf7633a062e45dd5db1ea9a7a9102c271d0295"
  },
  "prague": {
-  "in_ring": 17528,
+  "in_ring": 21462,
   "all": 25185,
-  "map_blob": "b8f6f603b5a6fb5efca9869d509ed414d8b4564a"
+  "map_blob": "ae83e8918ab4000b3f1926a2cd11d5e4acf73bb9"
  },
  "amsterdam": {
   "in_ring": 12648,
@@ -292,12 +292,12 @@
  "glasgow": {
   "in_ring": 1993,
   "all": 4708,
-  "map_blob": "901dfd46c00f3d8535997642286330985347df4c"
+  "map_blob": "0d86443986776940b22d3f0fb18671618e0284e9"
  },
  "newcastle": {
   "in_ring": 3358,
   "all": 6171,
-  "map_blob": "8eddbbad3c6f8b0b1bb34c9788d3e12d6c2c3db5"
+  "map_blob": "14567d0f01f80e5506a4dc76d88fb07f7b6bfde9"
  },
  "sydney": {
   "in_ring": 5901,
@@ -307,7 +307,7 @@
  "melbourne": {
   "in_ring": 4760,
   "all": 4959,
-  "map_blob": "0b3fe4def3c75683d6c0a87d51c4fb424c7e4f2b"
+  "map_blob": "00ce6e25d380bb861fef8f554159e6399ee3c989"
  },
  "stockholm": {
   "in_ring": 4666,
@@ -362,17 +362,17 @@
  "buffalo": {
   "in_ring": 376,
   "all": 1564,
-  "map_blob": "bde58831234e8f5395776f73414d45451b07ac67"
+  "map_blob": "2b8d4a7343d38f5e816ad7643a5e2d826acb44d2"
  },
  "sacramento": {
   "in_ring": 1378,
   "all": 3335,
-  "map_blob": "ea27033544e032bbecaf2732d7c529531bb69252"
+  "map_blob": "703b9a37735eea13c2f720e6544469ee8d3d13d9"
  },
  "houston": {
   "in_ring": 2224,
   "all": 29912,
-  "map_blob": "61608b488852753bbe2617edb0b79a58777c1281"
+  "map_blob": "498ed099dcaf8c1816a819ddff6c2a5bbbc3af69"
  },
  "odense": {
   "in_ring": 1154,
@@ -392,17 +392,17 @@
  "kansas_city": {
   "in_ring": 451,
   "all": 3561,
-  "map_blob": "102cec7a5974a5cb83ce19ab51e25ce43f848287"
+  "map_blob": "8b2f92007a1f5fcfe14c804d6b3fdd75144380a0"
  },
  "tucson": {
   "in_ring": 340,
   "all": 5243,
-  "map_blob": "f1ee48eeac17fc023727057468050eb453864c14"
+  "map_blob": "cd75442e206ed7e887a778b2d9f3b34d1e4c2303"
  },
  "new_orleans": {
   "in_ring": 2140,
   "all": 4689,
-  "map_blob": "ef2d637c8a5723e9f6ab5b466b027b24838a2ebf"
+  "map_blob": "eb0c190d410d70b86a61316ef5f27445e0c5bcf2"
  },
  "florence": {
   "in_ring": 4435,
@@ -527,22 +527,22 @@
  "ottawa": {
   "in_ring": 1586,
   "all": 4896,
-  "map_blob": "7657eaeacbdfdb0add6ecf4cee77fea474a00148"
+  "map_blob": "e0b8546096ecf2413897e23aa49caaed26d2c834"
  },
  "minneapolis": {
   "in_ring": 641,
   "all": 1793,
-  "map_blob": "ccf2e86ed776eac56ea39c90540693761dd0a2db"
+  "map_blob": "2586f8d9eb0e90d7687a001b421678871aafc879"
  },
  "pittsburgh": {
   "in_ring": 316,
   "all": 1730,
-  "map_blob": "b823704b466995e8a02e5a149301c66991bb50ef"
+  "map_blob": "ef20deedbd0d8f44f4d59bbf46104d3fd6cced96"
  },
  "kitchener_waterloo": {
   "in_ring": 865,
   "all": 2086,
-  "map_blob": "ade8d7ffdb86bd65b5dd5404f4b02a180140c8ff"
+  "map_blob": "ca157928c314c64767027eb32b76790ada574473"
  },
  "palma": {
   "in_ring": 1187,
@@ -582,7 +582,7 @@
  "dallas": {
   "in_ring": 4197,
   "all": 15884,
-  "map_blob": "ab51875808d0175105380e644fdb23ab116ba37b"
+  "map_blob": "c45192996700149f5100e119bdbee159c64d17ce"
  },
  "angers": {
   "in_ring": 1907,
@@ -622,32 +622,32 @@
  "manchester": {
   "in_ring": 6202,
   "all": 11963,
-  "map_blob": "5de8f0cdb9b9f1bf0ffc5125b570073b4fcb398f"
+  "map_blob": "39d2c540b9ddce101a7db3a93b331f2083d55f9c"
  },
  "birmingham": {
   "in_ring": 1642,
   "all": 9383,
-  "map_blob": "fe549ab007d6b600b47e9ce6e73058de4e210452"
+  "map_blob": "887c537c75f0949996941219fcc0911176a83ed7"
  },
  "edinburgh": {
   "in_ring": 2226,
   "all": 3750,
-  "map_blob": "d58571f58ca569df209658b0477b019d2ff7d35e"
+  "map_blob": "dc98980754cdd820186e254d122ca988283b8298"
  },
  "sheffield": {
   "in_ring": 1162,
   "all": 3348,
-  "map_blob": "06f1eb1b5a17d76f998ab3902e4f0a1a8dab75e7"
+  "map_blob": "ffc1a53878ac666c8499ba531c85de1953d40605"
  },
  "nottingham": {
   "in_ring": 1210,
   "all": 3478,
-  "map_blob": "4cc7cac993d788f956355ba841edabcd0b16bef0"
+  "map_blob": "0363fa10e120a38e827986b0c82dd16c29d4ee5d"
  },
  "blackpool": {
   "in_ring": 820,
   "all": 1648,
-  "map_blob": "b19f4f0ca1f66e6eb4042630ee07b50b7c973341"
+  "map_blob": "7ecf4cdd4e5d20f467d14e2edfcbe38b1a799de0"
  },
  "matsuyama": {
   "in_ring": 5142,
@@ -822,12 +822,12 @@
  "liverpool": {
   "in_ring": 3732,
   "all": 7170,
-  "map_blob": "c7a95bfd76860374bc780168a907e5efdaa79b22"
+  "map_blob": "874b1d47f80eb3aa48d1d979fe03a4e56e3a5fd0"
  },
  "tacoma": {
   "in_ring": 503,
   "all": 2851,
-  "map_blob": "16d55fc0429b9b8b9743854d95ac549aad376344"
+  "map_blob": "e59a16b0b537be0231058017e13486a19a07ca76"
  },
  "mendoza": {
   "in_ring": 641,

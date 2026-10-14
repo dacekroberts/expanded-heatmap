@@ -4,8 +4,8 @@ All the work is pipeline/place_index.py (run); this file names the city. Places
 only, never business records (DECISIONS.md, "Four ideas assessed before the
 large review", item 3). Runs before step 3, whose map carries the index's hash.
 
-Input:  data/mexico_city/raw/osm_places_2026-10-11.json        (pipeline/place_index_fetch.py)
-        data/mexico_city/raw/osm_places_extra_2026-10-11.json  (the same, its second query)
+Input:  config.PLACE_OSM_JSON and config.PLACE_OSM_EXTRA_JSON, the caches
+        pipeline/place_extract_fetch.py or place_index_fetch.py writes
 Output: app/static/places/mexico_city.json  (served by Streamlit's static serving;
         ODbL 1.0, the notice inside the file);
         outputs/mexico_city/place_search.json  (the page's summary: the languages

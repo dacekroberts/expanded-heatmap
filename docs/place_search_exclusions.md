@@ -39,6 +39,7 @@ protocol in the `place-search-city` skill.
 | A minor-way street named by a description, a bare type or way word, or a type and a code | `street_description`, `STREET_DESCRIPTIONS`; never a street with a way of residential class or above | street pass | 2026-10-13 |
 | A pedestrian area as a street | `area=yes` is skipped; with an article of its own it is a landmark | street pass, `square_areas` | 2026-10-08, 2026-10-13 |
 | A way whose highway tag lists a skipped value beside another (`platform;bus_stop`) | each value of the tag is read against `SKIP_HIGHWAY`, under whatever name | street pass | 2026-10-13 (second batch) |
+| A stop's platform drawn as a footway or any other highway value | `public_transport=platform` or `railway=platform` on the way | street pass | 2026-10-13 (a fault mended) |
 | A street private on every way, where some ways are alleys | `PRIVATE_STREET_SERVICES`: a private `service=alley` way is read as a private residential one | street pass | 2026-10-13 (second batch) |
 | An interchange, a ramp, a name ending "Drwy" | `street_never`, whatever the ways (interchange names are kept in a city whose config sets `PLACE_KEEP_INTERCHANGES`: Hong Kong); a name ending "Ramp", "Ramp On" or "Ramp Of" on ramp-class ways only (`RAMP_NAME`, `RAMP_HIGHWAYS`); a circular junction whose every way is a motorway's | street pass | 2026-10-13 (second batch) |
 | An HOV or managed-lane label | `MANAGED_LANE`, on a street whose every way is a motorway's | street pass | 2026-10-13 (second batch) |
@@ -120,7 +121,7 @@ read from Overpass. Seattle: 59 ways of six streets.
 
 | Left out | Rule | Where | Decided |
 |---|---|---|---|
-| A name that is no name: a placeholder, an error value, a number alone, contact details | `JUNK_NAMES`, `JUNK_MARKS`, `_CONTACT` | `junk_name`, check F | 2026-10-08 |
+| A name that is no name: a placeholder, an error value, a number alone, contact details, a web address | `JUNK_NAMES`, `JUNK_MARKS`, `_CONTACT`, `_WEB_ADDRESS` | `junk_name`, check F | 2026-10-08, 2026-10-13 |
 | A name in a third script, where a local name exists | `_local_first`; never repaired | `_names` | 2026-10-11 |
 | A junction named by a number | `junction_numbered` | tagged pass | 2026-10-08 |
 
@@ -200,7 +201,7 @@ and the held rows; sixteen rulings"), items 1, 2, 7 and 9 and the faults fixed w
 | A church named only by its chain or body (ruling 2) | the fifth pass's rule with `WORSHIP_BODIES` and wider lists (Portuguese, Spanish, Dutch, Japanese, Chinese, Latvian); only joiners and one hall-type word may follow a body's name; a nationality is listed only inside a denomination's name | `worship_only` | landmark |
 | A religious office, education hall or residence tagged a place of worship (ruling 1) | `worship_office`: `WORSHIP_OFFICE_HEADS` (the name's head), `WORSHIP_OFFICE_WORDS` (a whole word; a CJK word anywhere); an English word is not read in a name that holds CJK | `landmark_drop` | landmark |
 | A facility of an apartment estate or a mall tagged a park, a playground or a square (ruling 7) | `estate_facility`: the operator names a condominium, a residents' body, an estate's management or a mall (`ESTATE_FACILITY_OPERATOR`); the operator heads the name and a facility word closes it; an estate's brand and a facility word (`ESTATE_BRANDS`, `ESTATE_FACILITY_ENDS`); a name that says "inside" | `landmark_drop` | landmark |
-| A park named as a square, beside a street row of its name (ruling 9) | `square_led`, `SQUARE_HEADS`, within `SQUARE_DUP_M`; against streets only | duplicate pass | landmark |
+| A park named as a square, beside a street row of its name (ruling 9) | `square_led`, `SQUARE_HEADS`, within `SQUARE_DUP_M`; against streets only, and only a street row that bears the park's leading name, joiners set aside (`SQUARE_JOINERS`); the park's spelling stays as an alternate name on the street row (a fault mended, 2026-10-13) | duplicate pass | landmark |
 | A station with operational_status=closed; a freight station by its name | `station_out_of_service`, `STATION_FREIGHT_WORDS` | tagged pass | station |
 | A station entrance or a ticket gate tagged a station | `STATION_ENTRANCES`: no row beside a station row of its name within `OUTLINE_SAME_M`, and none at all unless the map draws its name | merges | station |
 | A bus rapid transit station kept on its network tag | `BUS_NETWORK`: a bus network's tag is no rail sign for a station object with no railway tag | merges | station |
@@ -234,6 +235,57 @@ tombs tagged historic=monument (Madrid, 6); Japanese house words (住宅, 邸) o
 Madrid's place=locality field names (ruling 8: counted per city in the batch 6 report, no rule);
 English "convent" and "seminary", Spanish orders' names, Korean halls' own names (참신관, 대건관);
 a relation folded into one of its own segments by `NEAR_DUP_M` before the segment merge.
+
+## The full reads' faults, g to y (2026-10-13, 73f025df and branch search-rules-8)
+
+Letters are the faults' own (g to s in 73f025df's commit, t to y in `search-rules-8`'s); the
+reach of t to y is `data/_search_rollout/reads_rules56/part8_reach.md`.
+
+| Left out | Rule | Where | Kind |
+|---|---|---|---|
+| A second row for one stop (g, w, y) | `PLATFORM_MERGE_M` (250 m), `_stop_key`: a station word and a direction note in brackets set aside, a compass direction included (`_DIRECTION_NOTE`: "(dir Nice)", "(eastbound)"); tram stops of one such name are one row, and so are station or halt nodes of one railway value unless two carry different operators, networks or Wikidata entries (`_one_railway`); in a group of several railway values each value folds on its own, so tram stops fold beside a metro station of their name; a folded stop whose kept name bears a direction note takes the plain name (`fold_stop`) | merges | station |
+| A second row for one station under near-identical names on one Wikidata entry (x) | `_complex_core`: a closing note in round brackets, the city's name as a leading word before a space or a hyphen, and a station word are set aside; equal cores are one row under the name the map draws, else the shortest, the other spellings its alternates | `complex_parts` | station |
+| A route relation tagged a station; a school tagged a station with no railway tag (i) | type=route on the relation; `NOT_STATION_AMENITY` | tagged pass | station |
+| A Japanese freight terminal; a station named as a former site (k, l) | `STATION_FREIGHT_ENDS`, `STATION_FREIGHT_OPERATORS` (the whole operator tag), `STATION_FORMER_ENDS` | `station_out_of_service` | station |
+| A name ending "(閉鎖)", "(閉鎖中)", "(予定地)", "(廃駅)", "(폐역)" (l) | `HISTORICAL_NAME` | tagged pass | any |
+| A height standing as a name ("109m") (m) | `_HEIGHT_ONLY` | `junk_name` | any |
+| A bus stop under a landmark or place tag (o) | highway=bus_stop | tagged pass | landmark, place |
+| A place of worship named by its denomination behind an elided article, or by a listed body spelled out (p) | `WORSHIP_RESPELL` | `worship_only` | landmark |
+
+**Kept or returned by these faults:** stations of different names never fold on a shared Wikidata
+entry alone (h: Toyama's 電鉄富山, Kobe's 三宮 beside 神戸三宮, which has no separator after the
+city's name and so keeps its own core); two names the map draws stay two rows whatever their
+core; an id in `config.PLACE_KEPT` that bears no row gets one at the end of the build, a station
+only by its railway tag, else a place by its place tag, else a landmark (q, r: Yokohama's
+Osanbashi pier is a landmark), and only `config.PLACE_DROPPED` outranks it; the station guard
+reads the map's local names as well (`map_stations(local_names=True)`: `name_ja`, `name_ko`,
+`name_zh`, `name_el`) (t); a live stop the map draws at its place is not held as unbuilt by a
+stray `construction:` or `proposed:` key (u: Montpellier's line 5).
+
+**Listed and not built:** a trailing platform number ("Gare de Tours 1"); a second row for a
+no-railway-tag node beside a rail-tagged row of another name (v: Montpellier's "Saint-Denis",
+whose stop has its own row); a variant character among stations of one entry (Taipei's 台北車站
+beside 臺北); a leading line letter ("S Friedrichstraße"); angle brackets (押上〈スカイツリー前〉);
+Houston's Central Station, three platform rows where the map draws two names.
+
+## Landmarks with an article of their own and no row (2026-10-13, branch search-rules-8)
+
+Two rule faults mended (owner confirmed, 2026-10-13). Reach:
+`data/_search_rollout/reads_rules56/part9_landmarks.md`; causes:
+`data/_search_rollout/live_rules56/landmark_faults.md`.
+
+| Left out | Rule | Where | Kind |
+|---|---|---|---|
+| A landmark that stands on its subject's article or entry | `_SUBJECT_KEYS`; the subject key is NOT read when the article's title, a bracketed or comma qualifier set aside, is one of the object's names (`article_names_object`), never on a grave or a plaque | `own_article` | landmark |
+| A site or boundary relation that repeats another row's entry more than 300 m off | `SITE_RELATION_TYPES`, `ROW_MERGE_M`; under ANOTHER name than that row, the relation keeps its own row when its article is named for it, and otherwise its name becomes an alternate of the row it folds into | merges | landmark, place |
+| A business: a brand or a shop tag (owner's rulings, 2026-10-13) | `COMMERCIAL_KEYS`; an article of the object's own now outweighs a brand tag beside a tourism, historic or heritage tag, and a shop tag on such a sight or on a market hall (`_sight`, `SIGHT_MARKET_AMENITIES`); lodging, food, cuisine and craft signs are never outweighed, and an ordinary shop with an article stays out | `landmark_drop` | landmark |
+
+**Returned by these:** Chicago's Victory Monument and Pullman National Historical Park; university
+sites in London, Berlin, Birmingham, Manchester, Newcastle and Nottingham; Brno's, Prague's,
+Ostrava's and Plzeň's boroughs with an article under the borough's name ("Brno-Bystrc",
+"Praha-Troja"); Kyoto's 醍醐寺. With the park's row back its entry is on three rows in Chicago, and
+the shared-entry rule (`SHARED_WIKIDATA_MIN`) takes the Pullman Administration Building
+(way/210701534), kept by id on the owner's word.
 
 ## Considered and not built as rules
 

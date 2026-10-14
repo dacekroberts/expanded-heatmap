@@ -1,29 +1,75 @@
 {
-  "written_utc": "2026-09-30T21:04:38+00:00",
-  "osm_host": "overpass.kumi.systems",
+  "as_of_date": "2026-07-03",
+  "files_utc": {
+    "Inspections.zip": "2026-09-30T21:01:38+00:00",
+    "Inspections_PS.zip": "2026-09-30T21:01:39+00:00",
+    "cities_and_towns.geojson": "2026-09-30T21:01:40+00:00",
+    "food_facilities.geojson": "2026-09-30T21:01:29+00:00",
+    "ion_stops.json": "2026-09-30T21:01:40+00:00",
+    "osm_rail.json": "2026-09-30T21:04:38+00:00",
+    "personal_facilities.geojson": "2026-09-30T21:01:30+00:00"
+  },
   "osm_bbox": [
     43.38,
     -80.6,
     43.52,
     -80.4
   ],
-  "as_of_date": "2026-07-03",
-  "zip_member_date": "2026-07-03",
-  "files_utc": {
-    "food_facilities.geojson": "2026-09-30T21:01:29+00:00",
-    "personal_facilities.geojson": "2026-09-30T21:01:30+00:00",
-    "Inspections.zip": "2026-09-30T21:01:38+00:00",
-    "Inspections_PS.zip": "2026-09-30T21:01:39+00:00",
-    "cities_and_towns.geojson": "2026-09-30T21:01:40+00:00",
-    "ion_stops.json": "2026-09-30T21:01:40+00:00",
-    "osm_rail.json": "2026-09-30T21:04:38+00:00"
+  "osm_host": "overpass.kumi.systems",
+  "osm_place_outline": {
+    "bytes": 54057,
+    "elements": 2,
+    "file": "osm_place_outline_v1.json",
+    "host": "overpass.kumi.systems",
+    "how": "fetched",
+    "osm_base": "2026-06-01T08:52:28Z",
+    "query": "[out:json][timeout:60];\narea(id:3602062153,3602062154)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T03:17:20+00:00",
+    "sha256": "d0c293ec93109eb01617f364aa84b0264da055a44ff46a13bc82be11ba3610f4"
+  },
+  "osm_places": {
+    "bytes": 9487657,
+    "elements": 87703,
+    "file": "osm_places_2026-10-13.json",
+    "host": "download.geofabrik.de (ontario-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3602062153,3602062154)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T10:00:20+00:00",
+    "sha256": "d2b35e3a26aca2a40722280850b999c6ace3dfcc6f2f91c5c22ef80dfae376a7"
+  },
+  "osm_places_extra": {
+    "bytes": 37747,
+    "elements": 116,
+    "file": "osm_places_extra_2026-10-13.json",
+    "host": "download.geofabrik.de (ontario-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3602062153,3602062154)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T10:00:21+00:00",
+    "sha256": "bf55602d5daea450cdf2e3d4a4a4e107713889ba13b7a82dc7ad634bd50d1e0c"
+  },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 333,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 5,
+    "ids_not_read": 0,
+    "ids_with_article": 2,
+    "ids_without_article": 3,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "d23ab104a09265915fb647f031045e3f86024984066eb5933da02d2e6b49db3f"
   },
   "sources": {
-    "food_layer": "https://utility.arcgis.com/usrsvcs/servers/61a7a8d8775e4da381d9718658c0d842/rest/services/OpenData/OpenData/MapServer/17",
-    "personal_layer": "https://utility.arcgis.com/usrsvcs/servers/d96eeb0cd02e4b45ba52bc1a918c6218/rest/services/OpenData/OpenData/MapServer/18",
-    "food_zip": "https://webapps.regionofwaterloo.ca/open-data-downloads/SSIS/Hedgehog/Inspections.zip",
-    "personal_zip": "https://webapps.regionofwaterloo.ca/open-data-downloads/SSIS/Hedgehog/Inspections_PS.zip",
     "cities": "https://utility.arcgis.com/usrsvcs/servers/61a7a8d8775e4da381d9718658c0d842/rest/services/OpenData/OpenData/MapServer/15",
-    "ion_stops": "https://utility.arcgis.com/usrsvcs/servers/61a7a8d8775e4da381d9718658c0d842/rest/services/OpenData/OpenData/MapServer/5"
-  }
+    "food_layer": "https://utility.arcgis.com/usrsvcs/servers/61a7a8d8775e4da381d9718658c0d842/rest/services/OpenData/OpenData/MapServer/17",
+    "food_zip": "https://webapps.regionofwaterloo.ca/open-data-downloads/SSIS/Hedgehog/Inspections.zip",
+    "ion_stops": "https://utility.arcgis.com/usrsvcs/servers/61a7a8d8775e4da381d9718658c0d842/rest/services/OpenData/OpenData/MapServer/5",
+    "personal_layer": "https://utility.arcgis.com/usrsvcs/servers/d96eeb0cd02e4b45ba52bc1a918c6218/rest/services/OpenData/OpenData/MapServer/18",
+    "personal_zip": "https://webapps.regionofwaterloo.ca/open-data-downloads/SSIS/Hedgehog/Inspections_PS.zip"
+  },
+  "written_utc": "2026-09-30T21:04:38+00:00",
+  "zip_member_date": "2026-07-03"
 }
