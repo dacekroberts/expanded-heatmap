@@ -202,4 +202,22 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/chofu.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A description standing in for a name (owner, 2026-10-13)
+    "way/939615627": "'東京外環道用地': 東京外環道用地 = \"land for the Tokyo Outer Ring Road\", a reserved road plot tagged a park (three rows)",
+    "way/939615628": "'東京外環道用地': 東京外環道用地 = \"land for the Tokyo Outer Ring Road\", a reserved road plot tagged a park",
+    "way/939514450": "'東京外環道用地(H21-13)': the same road-land description with a parcel code (H21-13) in the name",
+    # A bare type word (owner, 2026-10-13)
+    "way/939514448": "'第一仲よし広場(H21-12)': 第一仲よし広場 = \"No. 1 children's plaza\" with a parcel code (H21-12) and no district name; same mapper's batch as the road plots",
+    "way/154997461": "'七丁目憩い広場': 七丁目憩い広場 = \"7-chome rest plaza\", a block number beside the type word, no town name",
+    "way/483377369": "'交流広場': 交流広場 = \"exchange plaza\", the type word alone",
+    # Worship named only by its body or chain (owner, 2026-10-13)
+    "node/7601864403": "'世界平和統一家庭協会': named only by the body (the Unification Church's Japanese name)",
+    # An exhibit under its kind's article (owner, 2026-10-13)
+    "node/14272546694": "'民間航空機用FJR710ジェットエンジン': a jet engine on display (historic=machine), named by its model, no Wikidata entry of its own",
+    # Unsure rows a ruling drops: a religious body's meeting hall or branch tagged a place of worship (ruling 2) (owner, 2026-10-13)
+    "relation/21425556": "'生長の家本部練成道場': a religious body's meeting hall or branch tagged a place of worship",
+}

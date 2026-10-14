@@ -339,4 +339,23 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/ichinomiya.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A bare type word (owner, 2026-10-13)
+    "node/745778836": "'神社': 神社 = \"shrine\", the type word alone (three rows carry it; the bare-type rule did not take them)",
+    "node/916949764": "'神社': 神社 = \"shrine\", the type word alone",
+    "way/79092249": "'神社': 神社 = \"shrine\", the type word alone",
+    "way/486363900": "'砂場': 砂場 = \"sandpit\", tagged natural=beach",
+    "way/485878099": "'イベント広場': イベント広場 = \"event plaza\", the type word alone",
+    "way/485850616": "'殉国碑': 殉国碑 = \"memorial to the war dead\", the monument's type alone, tagged historic=archaeological_site",
+    # A religious office (owner, 2026-10-13)
+    "way/268218690": "'真光錬成館': 真光錬成館 = a religious body's (Mahikari) training hall, tagged a place of worship",
+    # A glitched name (owner, 2026-10-13)
+    "node/5802579848": "'Church of Olidammara': a church of a role-playing-game deity, religion=pagan; a joke entry, not a real place of worship",
+    # A second row of one object (owner, 2026-10-13)
+    "way/486345097": "'金刀比羅社(一宮市本町)敷地': 敷地 = \"grounds\" of the shrine 金刀比羅社(一宮市本町) (way/244650489), the same object tagged a park with a description word added",
+    # Unsure rows a ruling drops: a stock plaza or rest-area name with no place in it (ruling 5) (owner, 2026-10-13)
+    "way/106774199": "'つどいの広場': a stock plaza or rest-area name with no place in it",
+}
