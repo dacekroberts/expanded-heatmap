@@ -278,7 +278,13 @@ def check_leaks(slug, index, reviewed=None):
     hits = place_index.leak_hits(index, index.get("languages", {}).get("local", []))
     problems = [f"E: {name!r} carries {word!r}: drop it by a rule in place_index.py, or review it "
                 f"in config.PLACE_REVIEWED with why it is a place" for name, word in hits if name not in reviewed]
-    hit_names = {name for name, _ in hits}
+    # A review is stale when its name carries no leak word at all. One whose
+    # row the test no longer fires on (a junction, a French mansion, a street
+    # under an allowed word: place_index.leak_hits, the sixth pass,
+    # 2026-10-13) is no longer needed and is no failure: it is left to be
+    # removed by hand.
+    hit_names = {name for name, _ in place_index.leak_hits(
+        index, index.get("languages", {}).get("local", []), exempt=False)}
     problems += [f"E: PLACE_REVIEWED names {name!r}, which no longer carries a leak word: remove it"
                  for name in reviewed if name not in hit_names]
     return problems
@@ -442,6 +448,11 @@ def selftest():
         ("a reviewed ruin", [[0, 1, 2, "愛宕山ホテル跡", "", 0]], {"愛宕山ホテル跡": "a ruin"}, 0),
         ("a stale review", [[0, 1, 2, "三条通", "", 0]], {"愛宕山ホテル跡": "a ruin"}, 1),
         ("an English alias", [[0, 1, 2, "某", "Sunrise Apartments", 0]], {}, 1),
+        # The sixth pass (2026-10-13): a junction row is not listed, and a
+        # review of one is no longer needed without being stale.
+        ("a junction named for a hotel", [[1, 1, 2, "リッチモンドホテル前", "", 0]], {}, 0),
+        ("a review the test no longer needs", [[1, 1, 2, "リッチモンドホテル前", "", 0]],
+         {"リッチモンドホテル前": "a signed junction"}, 0),
     ]
     for label, rows, reviewed, want in leak_cases:
         got = len(check_leaks("x", dict(base, languages=ja, rows=rows), reviewed))

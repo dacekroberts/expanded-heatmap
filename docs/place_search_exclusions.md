@@ -189,6 +189,49 @@ joins the nearest. Distance is not the test.
 `name` in OpenStreetMap (relation 20304842); no rule strips a street word from a station
 name, and a name is not corrected here.
 
+## The sixth pass (2026-10-13, branch search-rules-5)
+
+From the sixteen rulings on the pilot reads and the held rows (`DECISIONS.md`, "the pilot reads
+and the held rows; sixteen rulings"), items 1, 2, 7 and 9 and the faults fixed without a ruling.
+
+| Left out | Rule | Where | Kind |
+|---|---|---|---|
+| The readers' bare type words in fifteen languages; spaced CJK forms ("어린이 공원"); "제1호근린공원", "開発2号公園", "Estação 3", "第一中庭" as codes beside a type | `BARE_TYPE_NAMES_6`, `_bare_word`, `CODED_TYPE` | `bare_type` | landmark, place, station (the guard decides) |
+| A church named only by its chain or body (ruling 2) | the fifth pass's rule with `WORSHIP_BODIES` and wider lists (Portuguese, Spanish, Dutch, Japanese, Chinese, Latvian); only joiners and one hall-type word may follow a body's name; a nationality is listed only inside a denomination's name | `worship_only` | landmark |
+| A religious office, education hall or residence tagged a place of worship (ruling 1) | `worship_office`: `WORSHIP_OFFICE_HEADS` (the name's head), `WORSHIP_OFFICE_WORDS` (a whole word; a CJK word anywhere); an English word is not read in a name that holds CJK | `landmark_drop` | landmark |
+| A facility of an apartment estate or a mall tagged a park, a playground or a square (ruling 7) | `estate_facility`: the operator names a condominium, a residents' body, an estate's management or a mall (`ESTATE_FACILITY_OPERATOR`); the operator heads the name and a facility word closes it; an estate's brand and a facility word (`ESTATE_BRANDS`, `ESTATE_FACILITY_ENDS`); a name that says "inside" | `landmark_drop` | landmark |
+| A park named as a square, beside a street row of its name (ruling 9) | `square_led`, `SQUARE_HEADS`, within `SQUARE_DUP_M`; against streets only | duplicate pass | landmark |
+| A station with operational_status=closed; a freight station by its name | `station_out_of_service`, `STATION_FREIGHT_WORDS` | tagged pass | station |
+| A station entrance or a ticket gate tagged a station | `STATION_ENTRANCES`: no row beside a station row of its name within `OUTLINE_SAME_M`, and none at all unless the map draws its name | merges | station |
+| A bus rapid transit station kept on its network tag | `BUS_NETWORK`: a bus network's tag is no rail sign for a station object with no railway tag | merges | station |
+| A suburb's or a borough's boundary beside its own node | `BOUNDARY_NODE_M`: the node of the same place value and name, a closing bracket set aside, within 5 km | place branch | place |
+| Ways with no entry beside the one relation of their name that carries it | `SEGMENTS_MIN` ways or more fold into the relation's row, at any distance | merges | landmark |
+| A name ending "(FECHADO)" | `HISTORICAL_NAME` | tagged pass | any |
+| "Hôtel particulier", "Ancien hôtel" as whole names | `BARE_TYPE_NAMES_6` | `bare_type` | landmark, place |
+
+**Kept against those rules:** an article of the object's own keeps a row against every one of
+them; for a place of worship an entry of its own with an article in the city's Wikidata cache
+keeps it too (the cache is read, never asked: `article_lookup_kind` is unchanged);
+`config.PLACE_KEPT`; a station the map draws (the station guard), which is why Amsterdam's
+diversion-only stop "Oranje Nassaulaan" stays. "Church of Christ Presbyterian" and
+"Russian-Ukrainian Seventh Day Adventist Church" keep their rows. A park named for an estate
+with no facility word stays; a park under a street word or a garden word ("Avenida de Brasil",
+"Jardins de ...", a Paris "Square ...") stays beside the way of its name.
+
+**Where the leak-word test no longer fires (a fault mended):** a junction row; a French
+landmark named "Hôtel de", "Hôtel du", "Hôtel des", "Hôtel d'" or "Hôtel-" and a word
+(`FRENCH_MANSION`; a hotel business so named is held out by its lodging tag); a French street
+under "brasserie" (`LEAK_STREET_ALLOW`). `scripts/check_place_search.py` E reads a review of
+such a row as no longer needed, never as stale. "Hôtel" and a family name alone is still a
+review.
+
+**Listed and not built:** a square inside a mall, a theme park or a zoo known only by its
+coordinates (Osaka's ATC and Hankyu plazas, Universal Studios' zones, Tennoji Zoo); cemetery
+tombs tagged historic=monument (Madrid, 6); Japanese house words (住宅, 邸) on a listed house;
+Madrid's place=locality field names (ruling 8: counted per city in the batch 6 report, no rule);
+English "convent" and "seminary", Spanish orders' names, Korean halls' own names (참신관, 대건관);
+a relation folded into one of its own segments by `NEAR_DUP_M` before the segment merge.
+
 ## Considered and not built as rules
 
 Castles (a web check is owed), coded names the rule misses and zoo contents
