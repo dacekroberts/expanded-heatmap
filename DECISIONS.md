@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**222 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**230 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -158,6 +158,14 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [The pattern screen of the final group: 465 ids dropped, 46 kept by id, the station rules merged; the owner's rulings on the helpers' classes (branch search-final)](#2026-10-13---the-pattern-screen-of-the-final-group-465-ids-dropped-46-kept-by-id-the-station-rules-merged-the-owners-rulings-on-the-helpers-classes-branch-search-final)
 - [The owner's two calls on the screen: Bremen's reach reason recorded, the 13 denomination-like rows dropped (branch search-final)](#2026-10-13---the-owners-two-calls-on-the-screen-bremens-reach-reason-recorded-the-13-denomination-like-rows-dropped-branch-search-final)
 - [The last rule commits merged (1a0fedba), VELTINS-Arena kept, the 32 maps rendered once; the browser checks not run (branch search-final)](#2026-10-13---the-last-rule-commits-merged-1a0fedba-veltins-arena-kept-the-32-maps-rendered-once-the-browser-checks-not-run-branch-search-final)
+- [Search rollout: the extract run's 151 cities rebuilt on the third and fourth rule passes (branch search-rollout)](#2026-10-13---search-rollout-the-extract-runs-151-cities-rebuilt-on-the-third-and-fourth-rule-passes-branch-search-rollout)
+- [Search rollout: check E settled by the existing rules on the extract run's 73 cities; 52 unopened stations added to the watch file (branch search-rollout)](#2026-10-13---search-rollout-check-e-settled-by-the-existing-rules-on-the-extract-runs-73-cities-52-unopened-stations-added-to-the-watch-file-branch-search-rollout)
+- [Search rollout: the extract run's 151 cities rebuilt on rule passes 5 and 6 (branch search-rollout)](#2026-10-13---search-rollout-the-extract-runs-151-cities-rebuilt-on-rule-passes-5-and-6-branch-search-rollout)
+- [Search rollout: Mendoza's searched area corrected from the province to its department (branch search-rollout)](#2026-10-13---search-rollout-mendozas-searched-area-corrected-from-the-province-to-its-department-branch-search-rollout)
+- [Search rollout: the final shared rules merged, every city rebuilt once, twin rounds, reach reasons (branch search-rollout)](#2026-10-13---search-rollout-the-final-shared-rules-merged-every-city-rebuilt-once-twin-rounds-reach-reasons-branch-search-rollout)
+- [Search rollout: the station rules (search-rules-8, faults t to y) merged and tried on 168 cities (branch search-rollout)](#2026-10-13---search-rollout-the-station-rules-search-rules-8-faults-t-to-y-merged-and-tried-on-168-cities-branch-search-rollout)
+- [Search rollout: the landmark patch and the brand and shop rulings merged; the 151 extract-built maps rendered once; full checks (branch search-rollout)](#2026-10-13---search-rollout-the-landmark-patch-and-the-brand-and-shop-rulings-merged-the-151-extract-built-maps-rendered-once-full-checks-branch-search-rollout)
+- [Place search: the rollout lands on every map in one push; the heavy-job cap back to four (owner)](#2026-10-13---place-search-the-rollout-lands-on-every-map-in-one-push-the-heavy-job-cap-back-to-four-owner)
 
 **2026-10-12**
 
@@ -9446,3 +9454,161 @@ Report: `data/_search_rollout/final_rules56/final_rebuild.md`, lists under
   load the maps in a browser, and the maps load Leaflet, jQuery and
   Bootstrap from public CDNs; this session runs with no network. They need a
   session that may use the network, or a local copy of those libraries.
+
+### 2026-10-13 - Search rollout: the extract run's 151 cities rebuilt on the third and fourth rule passes (branch search-rollout)
+
+- **Committed the extract run as it stood (cfa030e7), merged master at 50d551f4 (6c82294a, no conflict), then rebuilt all 151 cities in three stages, each committed whole.** Nothing rendered, nothing pushed, no shared rule code edited. The record is `data/_search_rollout/extract_rules34/summary.md` and `.json`, with the check logs beside them.
+- **Re-filtered all 151 with `place_extract_fetch.py <city> --force`, from the extracts on disk.** Each run named its file with `--pbf` (two files for Gimpo and Incheon) and ran with `HEATMAP_NO_NETWORK=1`, so no request was possible; `--force` wrote over this run's own three caches only. Reason for `--pbf`: without it the script chooses a region and can ask the server for sizes. 151 of 151 exit 0, none skipped. The shared-border rule admits 243 street ways in 10 cities: Recife 48, Fortaleza 34, Porto Alegre 30, Belo Horizonte 29, Valenciennes 28, Grenoble 23, Rouen 18, Bordeaux 16, Lille 11, Nantes 6; the other 11 cities with several municipalities gain none.
+- **Wikidata lookup: one job, one city after another, 1,942 entries in 118 cities, every batch answered at its first try.** 33 cities carry no entry on a work of public art or a library; nothing was asked for them and no cache file exists, so their step reads the tag alone, which gives the same result. Bordeaux has one entry Wikidata does not hold.
+- **All 151 indexes rebuilt, no step stopped.** Rows across the 151, before to after: stations 6,807 to 6,479; junctions 22,426 to 22,426; landmarks 82,664 to 81,314; places 64,091 to 64,004; streets 283,931 to 284,122; intersections 573,077 to 573,849. Public art kept: 456 with a wikipedia tag, 97 without (on Wikidata); libraries 198 and 53. The split is counted from the id side file and the caches, not printed by the step. The largest first-open index is Rio de Janeiro, 640 KB gzipped.
+- **Not decided here, for the owner or the eye read:**
+  - Check E, 334 names carrying a leak word in 73 cities (Toulouse 38, Dijon 25, Yongin 22, Lille 20, Uijeongbu 14, Bucheon 12, Bordeaux 11, Montpellier 10): a rule, a drop or a `PLACE_REVIEWED` entry each. The list is `check_place_search.log` in the summary folder.
+  - `check_place_unopened.py` B, 54 stations the builds skipped as not open and the watch file lacks: Montpellier 35, Salvador 7, Belo Horizonte 5, Gimhae 2, Anyang, Gwangju, Incheon, Rio de Janeiro and Uijeongbu 1 each. Each row needs its line and where the line came from, so none was written.
+  - Most and Yamagata still carry the summaries of their failed builds (no `stations_not_open`). Neither is among the 151; both wait for `PLACE_QUIET_STATIONS`.
+- **Found, not fixed: `check_barred_marks.py` reads Angers's barred mark inside Mendoza's street names.** `app/static/places/mendoza.json` holds "Hipólito Irigoyen", "Bernardo de Irigoyen", "Barrio Irigo Giorgiani" and three more, and the check matches the mark as a substring. The names were in the index before this rebuild. Whether the check should match whole words, or skip another city's index, is a call on shared code.
+- **`check_all.py`: 70 of 73 pass.** Failing: `check_place_search.py` (rule A on all 151, expected with no render, and E above), `check_place_unopened.py` (above) and `check_barred_marks.py` (above).
+- **Not done:** no eye read, no render, no browser test, no row written to the unopened-stations watch file.
+
+### 2026-10-13 - Search rollout: check E settled by the existing rules on the extract run's 73 cities; 52 unopened stations added to the watch file (branch search-rollout)
+
+- **The 334 names failing check E are not all streets.** Counted from the index rows: 156 landmarks, 130 junctions, 36 streets, 12 stations. Each was settled by the precedent for its own kind, read from its cached tags, one city at a time through the job gate. The full list, with ids, verdict and reason, is `data/_search_rollout/extract_rules34/leak_streets.tsv` (on disk only: `data/_*/` is not committed). No shared rule code edited, nothing rendered, nothing pushed, no network request.
+- **Kept and reviewed in `PLACE_REVIEWED`: 325 names in 73 cities** (Toulouse 38, Dijon 25, Yongin 22, Lille 18, Uijeongbu 14, Bucheon 12, Bordeaux 11, Montpellier 10, Ansan 9, Gimhae 8).
+  - Junctions, 128: every one is a node tagged `junction=yes` or `highway=traffic_signals` named for the building beside it. Kept on the Seoul and Busan precedent (batch 2b): a road feature, not the building. 97 Korean, 31 Japanese.
+  - Landmarks, 149: 108 French and Belgian listed mansions and public buildings named "Hôtel ..." (`ref:mhs` or a heritage tag, or tagged an attraction with a Wikidata entry), kept on the Paris precedent as the building's historic name. The other 41 each carry a reason of their own: museums, universities and colleges whose field is the word (the Tokyo precedent), hotel ruins (the Kyoto and Seattle precedents), and two notable buildings that still house what their name carries (the Panama Hotel precedent: Strasbourg's Gallia, Yokohama's Mitsui Sumitomo branch).
+  - Streets, 36: every one has a way of residential class or above (or pedestrian, living street) and none is tagged private. Kept on the batch 2b precedent (`_named_street`) and São Paulo's Rua do Shopping.
+  - Stations, 12: tram stops and stations named for the place beside them (the Prague precedent, Hotel Golf).
+- **Dropped in `PLACE_DROPPED`: 9 names, 12 ids, in 4 cities.**
+  - Lille: "Hôtel particulier" (four listed buildings under the bare type, nodes 2063752623, 2063752640, 2063752650, 2063752654) and "Ancien hôtel" (node 2063752408). A type or a description standing in for a name; none has an article. The fourth node surfaced only after the first three were dropped, so the rebuild was run twice.
+  - Porto Alegre: four closed businesses tagged `historic=ruins` whose names end "(FECHADO)" (the "(geschlossen)" precedent), and "2 - Ruínas Restaurante" (a number and a description).
+  - Daegu: 큰장네거리 (node 436833410), a junction node also tagged `shop=variety_store` whose English name is a shop's description joined to the junction's. A glitched name, never repaired; the junction leaves the search with it.
+  - Gimpo: node 414915406, a junction whose name is wrapped in stray brackets. A glitched name.
+- **Tags do not decide, kept and listed (2):** Iwaki's 常磐畜産株式会社 (a `historic=ruins` node whose whole name is a company's, no article) and Recife's "Rua do Hotel Pousada do Vale" (one residential way, no access tag, named whole for a hotel).
+- **Rule candidates, not built (shared code):**
+  - Leak words on junction rows, Korean 99 and Japanese 31: a junction row is a road feature whatever building its name carries. 128 of the 130 were kept; the 2 dropped were glitched names.
+  - "hôtel", French, 125 landmark rows: a listed building (`ref:mhs` or `heritage`) named "Hôtel ..." is a mansion or a public building, not a hotel.
+  - "hôtel dieu" without the hyphen, French, 5 rows (Nantes 3, Rennes, Rouen): `LEAK_ALLOW` holds only the hyphenated form. Likewise "hôtel de police", "hôtel de région", "hôtel du département", "hôtel des postes", "hôtel communal", 6 rows.
+  - "brasserie", French, 10 streets, every one "Rue de la ... Brasserie" on a residential-class way.
+  - "hôtel particulier" and "ancien hôtel" as French bare type names, 5 objects in Lille.
+  - A name ending "(FECHADO)", Portuguese, 4 rows: the Portuguese form of the "(geschlossen)" rule.
+  - "cafe", English, 3 Brazilian streets: a surname (Café) in an alternate name.
+- **Unopened stations: 52 rows added to `docs/place_search_unopened_stations.json`**, every field from cached OpenStreetMap files: Montpellier 35, Salvador 7, Belo Horizonte 5, Gimhae 2, Incheon, Rio de Janeiro and Uijeongbu 1 each.
+  - The place caches hold no relation members, so memberships were read from each city's cached rail file. Montpellier's 35 stops are members of route relations 19846275 and 19846276 (tram, ref 5) in `data/montpellier/raw/osm_routes.json`: line "Tram 5", source "relation". No other city's rail cache holds a relation with one of its stations.
+  - By tag, the `network` value where it names a line: Belo Horizonte 4 ("Linha 2"), Salvador 5.
+  - Null with a reason, 8, nothing looked up: Belo Horizonte's Barreiro, Gimhae's 장유 and 신월, Incheon's 학익 (a network, no line), Rio de Janeiro's Gávea, Salvador's Almeida Brandão and Calçada (a network, no line), Uijeongbu's 탑석.
+  - `open_namesake_in_index` is true for Salvador's Calçada and Uijeongbu's 탑석.
+  - The brief counted 54; the check lists 52 skipped stations in this branch's cities. Anyang and Gwangju fail for another reason (no `stations_not_open`: scaffolded in wave 2, not built) and are not among the 151. Most and Yamagata likewise, on stale summaries. All four left alone.
+- **All 73 cities rebuilt through the gate, three at a time, every one exit 0.** `PLACE_REVIEWED` is read by the check, not by the build, so 69 indexes came back byte-identical; Daegu, Gimpo, Lille and Porto Alegre lost 1, 1, 4 and 5 rows.
+- **Checks after:** `check_place_search.py` fails on rule A alone, 151 cities (an index no map uses, expected with no render); check E is clear. `check_place_unopened.py` fails on the four cities named above. `check_place_index_drift.py`: the 151 OK.
+- **`check_barred_marks.py`, confirmed and not edited:** it matches Angers's mark as a substring in six names of `app/static/places/mendoza.json`: "Hipólito Irigoyen", "Plaza Hipólito Irigoyen", "Bernardo de Irigoyen", "Martín de Irigoyen", "Irigoyen" and "Barrio Irigo Giorgiani". The first five are a surname; the last holds the mark as a whole word.
+- **Not done:** no eye read of the 151, no render, no browser test. The reads here cover only rows carrying a leak word.
+
+### 2026-10-13 - Search rollout: the extract run's 151 cities rebuilt on rule passes 5 and 6 (branch search-rollout)
+
+- **Merged master at e0138000 (3ca0fa0f, no conflict), then rebuilt all 151 indexes, each by its own index step, from the place caches on disk.** Two runner processes through the job gate, disjoint halves, one city at a time each, every child with `HEATMAP_NO_NETWORK=1`. No extract, Overpass or Wikidata request; nothing rendered, nothing pushed, no shared rule code edited, no by-id drop or keep added. The record is `data/_search_rollout/extract_rules56/` (on disk only): `summary.md`, `summary.json`, one `<city>.tsv` per changed city, the build logs and the check logs.
+- **Wikidata: no city had an id to ask.** Each city's ids were counted against its cache before anything ran, by the fetch script's own `collect_ids`. The 118 caches hold every id the rules ask about; the 33 cities with nothing to ask got an empty cache from `pipeline/place_wikidata_fetch.py` (no request), which also recorded it in each city's `provenance.json`.
+- **151 of 151 built, exit 0; 126 indexes changed, 25 are byte-identical.** Rows across the 151, before to after: stations 6,479 to 6,461; junctions 22,425 to 22,425; landmarks 81,305 to 79,278; places 64,004 to 63,997; streets 284,122 to 284,120; intersections 573,849 to 573,847.
+- **2,103 rows left, each attributed from build()'s own log in a second, in-memory build that writes nothing:** worship named by a denomination or chain 980; a park named as a square merged into its street row 827; bare type words 191; religious offices 39; estate and mall facilities 32; stations under a bare type 13; segment merges 7; closed or private stations 4; station entrances 4; and 2 each for a described street, a station with no railway tag and a suburb boundary beside its own node.
+- **49 rows returned:** 44 French landmarks named "Hôtel de/du/des ..." that the old leak-word test had taken (Montpellier 15, Avignon 14, Dijon 5), and 5 stations kept apart from a namesake that shares their Wikidata entry (Amsterdam 4, Madrid 1). Rio de Janeiro's "Convento de Santa Teresa" and Madrid's five (below) never left a committed index, so they show in no list.
+- **Largest changes:** Rio de Janeiro 490 rows left, Porto Alegre 200, Salvador 188, Belo Horizonte 177, Recife 146, Santos 106, Fortaleza 88, Madrid 82, Osaka 68, Daegu 33. The Brazilian cities and Madrid are the square rule and the worship rule; Osaka and Daegu the bare types, estate facilities and offices.
+- **For the owner or the readers, nothing changed here:**
+  - 41 merged squares whose own name is no longer the name or another name of any row (`squares_name_not_findable.tsv`). Most sit beside a street row spelled another way ("Praça do Japão" beside "Praça Japão"); 8 were merged into a street row of a different name altogether (Belo Horizonte's Praça Alberto Mazoni and Praça Nova República, Porto Alegre's Praça Osvaldo Schwerdt, Recife's Praça do Parnamirim, Rio's Largo do Bicão, Praça Poeta Duque Costa and Praça da Harmonia, Santos's Praça Azevedo Junior). Three of the 41 carry an entry: Porto Alegre's Praça do Japão, Rio's Largo de São Francisco de Paula and Praça da Harmonia.
+  - Rows with an entry of their own taken under a generic name: Kumamoto's 仏舎利塔 (way/489068359, the Hanaokayama Peace Pagoda), Strasbourg's two "Église Protestante" (way/46986392, way/48558298), Valenciennes's "Temple protestant" (way/110103951), four "Temple antoiniste" (Nantes, Nice, Orléans, Rouen; the owner left Paris's as built), Amsterdam's "Zonder Titel" (node/2937809212).
+  - No named convent or monastery left any index.
+- **The five pilot cities:** 149 reader drops are still rows and are not by-id drops (`pilot_still_rows.tsv`: Rio de Janeiro 54, Madrid 39, Osaka 24, Amsterdam 17, Daegu 15). Madrid's four named convents and its bare "Polvorín" (node/5129628112) are listed apart in `madrid_five_owner_word.tsv`: they stay rows by the owner's rulings on the rule and need an owner word before any by-id drop.
+- **Checks:** `check_place_search.py` fails on rule A alone, the 151 (no render); check E is clear. `check_all.py` 70 of 73: that, `check_place_unopened.py` on Anyang, Gwangju, Most and Yamagata as recorded, and `check_macro_facts.py` on Mexico City (407,628 recorded, 427,121 in the shared processed data: the tram rescope's work on disk before its landing; the merge's regeneration rewrote `app/macro_facts.json` to match and that rewrite was put back, since Mexico City is another lane's). `check_barred_marks.py` passes now.
+- **Owner rulings on this report (2026-10-13, "all approved"), applied by id, each id read with its cached name first:**
+  - Madrid: the bare "Polvorín" (node/5129628112) is dropped in `PLACE_DROPPED`, the type word standing alone. The four named convents stay rows and need no entry.
+  - Kumamoto: 仏舎利塔 (way/489068359, the Hanaokayama Peace Pagoda) is kept in `PLACE_KEPT`. The by-id keep beats the bare-type rule (`landmark_drop` tests the id first) and the row is back.
+  - Left dropped: Strasbourg's two "Église Protestante", Valenciennes's "Temple protestant", the four "Temple antoiniste", Amsterdam's "Zonder Titel".
+  - Only Madrid and Kumamoto were rebuilt, through the gate: Madrid 32,710 to 32,709 places, Kumamoto 2,022 to 2,023. Each city's index, intersections file, street lines file, `place_ids.json` and `place_search.json` changed; no other city's file did.
+- **Not done:** no eye read, no render, no browser test. `check_place_index_drift.py` was not run to its end.
+
+### 2026-10-13 - Search rollout: Mendoza's searched area corrected from the province to its department (branch search-rollout)
+
+- **Mendoza's index covered Mendoza Province, not the city.** The scaffold had set `PLACE_AREA` to relation 153540 (admin_level 4, the province of the same name), found by Mendoza's reader: 653 peaks and 155 rivers out to Malargüe and Aconcagua. Set to relation 2204157, Departamento Capital (admin_level 5), which holds all seven stations and is the boundary the map's businesses are cut to. Read from the lookup cache already on disk (`data/mendoza/raw/osm_place_area_lookup_2026-10-13.json`, the extract route), so no lookup was run again.
+- **New caches under new names, from the held Argentina extract (`argentina-261012.osm.pbf`), no download, no Overpass:** `osm_places_v2_2026-10-13.json` (9,654 elements) and `osm_places_extra_v2_2026-10-13.json` (65). The province's caches stay on disk under the old names. The outline cache has one fixed name: the province's was copied to `osm_place_outline_v1_province_2026-10-13.json` and then replaced (approved for this one city).
+- **Wikidata: nothing asked.** The old cache was copied to `wikidata_articles_v2_2026-10-13.json`; it holds both ids the new area asks about.
+- **Rows before to after:** stations 81 to 7; landmarks 1,688 to 119; places 926 to 20; streets 9,775 to 623; intersections 26,922 to 1,884. The seven stations are the map's seven.
+- **`PLACE_REVIEWED` emptied:** its three hotel ruins lay in the province and are no longer rows; check E named each as stale.
+- **Why `check_place_scope.py` passed it:** rule B only refuses a named area with no station inside, and the province holds all seven; nothing asks whether a smaller boundary would hold them. A cheap test, not built (shared check): the index's reach beyond the stations' bounding box, or the area's admin_level against the business boundary's.
+- **The same screen run on every searched city, nothing changed** (`data/_search_rollout/extract_rules56/scope_screen.tsv`, 170 cities): 18 indexes reach more than 25 km beyond their stations on some side. Each names the city's own municipality: a wide municipal territory or its islands (Incheon 176 km, Shizuoka 58, Sasebo 51, Palma 50 with Cabrera), not a wrong boundary. Naha (239 km), Nagasaki (79) and Kagoshima (64) owe their reach to one street row each, the sea section of a national highway (国道390号, 国道499号, 国道58号 "海上区間"), a row for a reader or a rule.
+- **The reader's verdicts on the province-wide index** (`data/_search_rollout/reads_rules56/mendoza.tsv`, 40 drop, 52 unsure): 3 drops and 1 unsure are still rows (Iglesia Adventista Séptimo Día node/2443028624, Templo Evangelico Metodista way/255485266, Hermanas de Nuestra Señora de la Caridad del Buen Pastor node/3639401230; unsure Jardines Dalvian relation/21131495).
+- **Checks:** `check_place_search.py` fails Mendoza on rule A alone; `check_place_scope.py` OK. Not rendered, nothing pushed.
+
+### 2026-10-13 - Search rollout: the final shared rules merged, every city rebuilt once, twin rounds, reach reasons (branch search-rollout)
+
+- **Merged the integration branch at 73f025df (77371e8a, `--no-ff`, no conflict in any file), then rebuilt 168 of the branch's 170 searched cities,** each by its own index step, four runner processes through the cleanup worktree's gate, every child with `HEATMAP_NO_NETWORK=1`. Selftest 311 of 311. No request of any kind, nothing rendered, nothing pushed, no shared code edited. The merge's regeneration rewrote `app/macro_facts.json` for Mexico City again (the tram rescope's data on the shared disk) and that rewrite was put back. The record is `data/_search_rollout/extract_rules56/final_rebuild.md` (on disk only), with `final_lists/<city>.tsv` and the rounds' twin lists.
+- **Not rebuilt, both another lane's:** Mexico City's step stops on San Isidro (the dated known gap of check H). Prague was rebuilt and put back to the merge's index: its committed index is older than the article rule, and a rebuild takes 375 rows by rule (292 works of public art and 11 libraries with no article among them) and adds 16; the list is `prague_if_rebuilt.tsv`.
+- **Rows across the 170, before to after:** stations 10,360 to 10,297; junctions 24,410 to 24,409; landmarks 123,151 to 120,715; places 82,110 to 81,945; streets 524,599 to 524,585; intersections 1,078,725 to 1,078,710. Removed by id 2,755; removed by rules 47 (29 platforms merged into their stop, 10 stop names that were streets in Ostrava and Liberec, the sea roads by way id); added by rules 99 (51 stations of different names no longer folded on a shared Wikidata entry, about 30 squares returned where the street row beside them bears another name, Brno's 8 boroughs); added by keeps 24.
+- **Twin rounds: 222 same-named neighbours dropped by id in 47 cities over 13 rounds; round 14 found none.** A twin is a row new against the pre-rebuild index with the kind and name of a row a `PLACE_DROPPED` id removed; each went under the class of the row it replaced, in its config under a "Twin round N" comment. Lille 60 (Immeuble, Immeubles, Maison, Maisons on a register's nodes), Belo Horizonte 29 (the cableway's pylons, ruling 21), Salvador 24. Kept, 11: the survivor where the dropped row was a second row of one object. Antwerp's Groenplaats came back as two rows for one dropped.
+- **Owner rulings applied with the rebuild (2026-10-13):** Sapporo's 山麓 (node/1781191908, the Mount Moiwa ropeway's base station) kept by id, now a station row. Two sea labels dropped by id: Kochi's 土佐湾 (node/13339743364) and Fukuoka's 玄界灘 (node/6355776632).
+- **`PLACE_SCOPE_REACH_REASON` written in 17 configs,** one dated sentence each, for rule D of `check_place_scope.py` (branch search-scope-check; not on this branch yet), each city's reach measured on its rebuilt index with that rule's own code: Incheon 179.6 km, Shizuoka 67.6, Palma 56.4, Sasebo 51.4, Rio de Janeiro 46.1, Ansan 41.6, Daegu 40.7, Toyota 39.7, Fukuoka 37.7, Hakodate 33.0, Morioka 28.6, Porto Alegre 28.3, Sapporo 28.2, Matsumoto 27.0, Toyama 27.0, Nagasaki 26.5, Salvador 26.2. None for Kochi (12.6 km) or Naha (3.2 km).
+- **Four `PLACE_REVIEWED` entries removed** (Grenoble, Iwaki, Kurashiki, Orléans): each named a row a reader's id has since dropped, and check E called each stale.
+- **Confirmed:** no id in any `PLACE_DROPPED` is still a row. Of the 48 `PLACE_KEPT` ids on the branch 46 have a row; Kochi's はりまや橋 (node/5099545223) is findable under the tram stop's row of the same name and has no landmark row of its own, and Seattle's second "Large Lock" way is folded into the first. The four sea roads are gone (Naha, Nagasaki, Kagoshima two); Oita's 国道197号（海上区間） is still a street row, named by no ruling. Nagasaki's node/4448589490 and node/1423804998, Ichikawa's 里見公園 and Belo Horizonte's node/7051900020 are rows. Returned stations: Toyama's 電鉄富山, Nagasaki's 浦上, Kobe's 三宮, Kagoshima's 鹿児島. Still missing: Montpellier's Saint-Denis (node/3127521470, `public_transport=station` alone).
+- **Checks:** `check_place_scope.py` OK. `check_place_search.py`: rule A on the 151 unrendered cities, and "the map's index URL is stale" on 17 live cities whose indexes this rebuild changed (they want the one render); E clear; Mexico City the known gap.
+- **Not done:** no render, no browser test, no eye read of the twins' replacements beyond the lists.
+
+### 2026-10-13 - Search rollout: the station rules (search-rules-8, faults t to y) merged and tried on 168 cities (branch search-rollout)
+
+- **Merged 8d45eae5 and 0321cbb0 (2ef28f28, cb46aded; no conflict), selftest 326 of 326, then rebuilt every city of the branch but Prague and Mexico City** (the tram-rescope branch owns both and its versions win at landing), four runners through the cleanup worktree's gate, no request, no render, nothing pushed. The record is `data/_search_rollout/extract_rules56/rules8_trial.md` with `rules8_station_changes.tsv` and `rules8_drawn_without_row.tsv`; the judgement of each fold against its map is the helper's `station_fold_check.md` (no fault).
+- **Station rows 9,626 to 9,605 across the 168; 17 cities' station rows changed, 149 indexes are byte-identical (Tokyo and Oita change with no station row added or removed).** Folds: London 8 (London Victoria and the other termini under their plain names), Barcelona 6, Brussels 5, Amsterdam 3, Ghent 3, Paris 3, Rotterdam 2, and one each in Den Haag, Hiroshima, Kagoshima, Marseille, Saint-Étienne. Returned: Montpellier 18. Antwerp's two are the twins dropped by id (below); Nice's row changed its name; Sapporo's and Yokohama's one each became landmark rows.
+- **Montpellier's 18 are the Tram 5 stops OpenStreetMap draws as under construction.** The map draws them, so the guard for drawn stations no longer skips them; 16 drawn stations gained a row. Its `stations_not_open` is empty now and its 35 rows left `docs/place_search_unopened_stations.json` (86 to 51), as `check_place_unopened.py` asked. "Saint-Denis" (node/3127521470) is still not a row.
+- **Fault (t) changed no row in a Japanese or Korean city,** as the station lane measured. 17 drawn stations have no station row under their name or within 200 m, every one of them before as well (Takamatsu 5, Tokyo 2, Toulouse 2 and eight more).
+- **Against the lane's measure:** Lille is unchanged here, and Tokyo's one change is the point of 熊野前 (about 55 m, no row added or removed), so 19 indexes changed in all; Antwerp, Lille, Nice and most of Rotterdam move little because the configs already drop those platform twins by id, and those drops stay.
+- **Nice: two by-id drops removed** (node/6261860788, node/6261860785, the directional twins of Grand Arénas): they stopped the rule folding the stop. Rebuilt: one station row "Grand Arénas" with the three directional spellings as other names.
+- **Owner rulings applied (2026-10-13):** Oita's 国道197号（海上区間） (way/683627211) dropped under the sea-crossing ruling. Sapporo's ropeway base 山麓 (node/1781191908) as a landmark row beside the mid station 中腹 as a station row is accepted: both are findable. Yokohama's Osanbashi terminal is a landmark row by the same rule.
+- **Antwerp's Groenplaats was twins, not a rule effect:** a stop node and a platform node promoted when the reader's two duplicates were dropped (node/1635630608, node/2207804047), then a third (node/2610365437) in the one twin round. All dropped under the duplicate class; the premetro station's row stays. The twin test now drops a duplicate's twin when a row of that name from before the rebuild still stands.
+- **Checks:** `check_place_scope.py` OK; `check_place_search.py` rule A on the 151 unrendered cities and a stale index URL on 17 live cities, E clear; `check_place_unopened.py` on the recorded four.
+- **Not done:** no render, no browser test.
+
+### 2026-10-13 - Search rollout: the landmark patch and the brand and shop rulings merged; the 151 extract-built maps rendered once; full checks (branch search-rollout)
+
+- **Merged search-rules-8 at 1a0fedba (9f3cca75, `--no-ff`, no conflict): the landmark patch a4718e28 and the owner's brand and shop rulings.** Selftest 339 of 339; `app/macro_facts.json` was not rewritten. Nothing pushed.
+- **Rebuilt the twelve cities the two commits change, through the gate; every change is the one the rules lane measured (part9_landmarks.md):** Brno +18 (its boroughs' relations, each with an article under another name), Ostrava +1 (Moravská Ostrava a Přívoz), Plzeň +1 (Plzeň 5-Křimice) and two alternates (Zoo Plzeň, Smetanovy sady), Antwerp, Rotterdam and Rouen one alternate each (Sint-Mariaburg, Maasvlakte, Saint-Clément - Jardin des Plantes), Buenos Aires +2 (El Ateneo Grand Splendid, Galerías Pacífico), Ghent +1 (Maison Jules), Madrid +1 (Mercado de la Cebada), Osaka +1 (道頓堀グリコサイン), Reims +1 (Reims Cérès), Rio de Janeiro +1 (Museu Casa do Pontal). No row removed. One twin round found none. The live cities on this branch were left to the first slice.
+- **Rendered each of the 151 extract-built maps once,** each by its own map step, two runners through the gate (peaks 0.75 and 0.68 GB), every child with `HEATMAP_NO_NETWORK=1`, each written heatmap turned to LF. No step touched `data/<city>/processed` except Brno's map step, which writes its own filtered route file (`osm_tram_operator.json`) from the raw OSM file on every render: its normal behaviour, the same content from the same input.
+- **Checks on the 151:**
+  - `check_map_search.js`: 151 OK, every drawn station (5,580) and line (696) found, no warning.
+  - `check_place_search.py`: the 151 pass; the 17 failures are live cities' stale index URLs (the first slice's render) and Mexico City's dated gap.
+  - `check_render_current.py`: the 151 current; the 19 stale maps are the live cities, Mexico City and Prague.
+  - `check_map_attribution.js` at 1280x650 and 375x812 on all 151 (302 runs, each map loaded in a frame of that size, served on 127.0.0.1 from this worktree by a temporary launch entry since removed): the credit clear at every probe, the legend clamp in force on every run.
+  - `check_place_scope.py`: OK.
+  - `check_all.py`: 69 of 73. Not this lane's: `check_macro_facts.py` (Mexico City, the tram rescope's data on the shared disk), `check_place_search.py` and `check_render_current.py` (as above), `check_place_unopened.py` (the recorded Anyang, Gwangju, Most and Yamagata).
+  - `drift_check.py --render-only --jobs 3`: no drift in any of the 151. Drift in the 19 live cities, Milan and Toronto (maps rendered before the current shared code, other lanes' cities), and four steps failed in cities not built for search (Anyang, Gwangju, Most, Yamagata). Every file the run rewrote was put back with `git checkout -- outputs/`. The full drift check was not run: it re-runs steps 1 and 2, which write `data/<city>/processed/` on the disk every worktree shares.
+- **Not done:** no push, no deploy-verify of the app pages.
+
+### 2026-10-13 - Place search: the rollout lands on every map in one push; the heavy-job cap back to four (owner)
+
+- **One push for four slices** (owner: "one push"): the first slice
+  (`tram-rescope`: the 17 live maps, Mexico City, Milan, Prague, Toronto),
+  wave 1 (`search-wave1`, 34), the final group (`search-final`, 32) and the
+  extract run (`search-rollout`, 151), each merged locally onto the cleanup
+  branch as soon as its lane was green, then one combined check. All 237
+  maps now carry place search.
+- **Every slice was verified in the app before landing** (deploy-verify,
+  city-added scope, per slice, the extract run in three lanes): every page
+  loads, a station and a landmark search re-centre the map, the credit and
+  legend hold. Each lane's `check_map_search.js` found every drawn station
+  and line.
+- **183 maps rendered a second time.** The final group and the extract run
+  were rendered before the first slice's search-script change (a dotted
+  abbreviation found by its word) reached them, so after the merges
+  `check_render_current.py` failed them; they were re-rendered once on the
+  merged tree, eight jobs at a time, and `check_map_search.js` re-run on all
+  183 (none failing). Render-once held per branch but not across branches
+  that changed shared code at different times.
+- **77 unopened stations added to the watch file** (Gwangju 35, Rome 22,
+  Monterrey 18, Guadalajara 1, Taipei 1), built from the cached tags; no
+  opening date is recorded, as the file has no field for one.
+- **Owner calls made tonight:** Bremen's reach recorded with a reason (the
+  city's own port enclave); 13 rows named only by a religious body dropped;
+  Harvey Nichols, Ahlens, Legoland Discovery Center and two Tokyo rows let
+  in for a second look next week; the Pullman Administration Building left
+  without a row until the kept-id admission fault is fixed.
+- **Streamlit's anonymous usage metrics** went to Streamlit's own host from
+  some deploy-verify runs whose server did not read the project config; no
+  personal data. Turning them off in the config is queued for 2026-10-18.
+- **The heavy-job cap is back to four** (`scripts/heavy_job.py`), as set
+  when it was raised for the rollout.
+- **Held until 2026-10-18 12:05** (owner: usage ran out): every follow-up,
+  in `data/_search_rollout/post_landing_queue.md` and the Cleanup handoff
+  note.

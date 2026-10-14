@@ -369,5 +369,77 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("fr",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "Ancien hôtel Arquata": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00094531, tourism=attraction, wikidata Q22938604): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Ancien hôtel de Bonfontan": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00094534, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Faculté de Pharmacie": "a subway station (railway=station), named for the place beside it (the Prague precedent, Hotel Golf); tags read 2026-10-13",
+    "Hôtel Boysson": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00094537, tourism=attraction, wikidata Q15950571): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Caulet-Resseguier": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00094540, tourism=attraction, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Dahus": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00094539, tourism=attraction, wikidata Q15950425): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Magnier et Jean-Burnet": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00094559, tourism=attraction, wikidata Q22938631): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Mansencal": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00094557, tourism=attraction, wikidata Q22938627): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Marvéjol": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00094558, tourism=attraction, wikidata Q22938630): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Pierre Comère": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00094564, tourism=attraction, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Reynier": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00094568, tourism=attraction, wikidata Q22938642): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Réquy": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00094567, tourism=attraction, wikidata Q21294389): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Sipière": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00125578, tourism=attraction, wikidata Q22969013): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel d'Arnaud de Brucelles": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00094530, tourism=attraction, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel d'Assézat": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00094532, tourism=museum, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel d'Espie": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00094543, tourism=attraction, wikidata Q3145723): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel d'Hautpoul": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00094636, tourism=attraction, wikidata Q22938838): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Bagis": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00094563, tourism=attraction, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Bernuy": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00094533, tourism=attraction, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Bruni": "a historic mansion tagged an attraction, a hôtel in the French sense (tourism=attraction, wikidata Q21294384): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Castagnier d'Auriac": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA31000072, tourism=attraction, wikidata Q22996464): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Cheverry": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00094541, tourism=attraction, wikidata Q22938611): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Claude de Saint-Félix": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00094542, tourism=attraction, wikidata Q21294388): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Felzins": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00094548, tourism=attraction, wikidata Q21294385): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Gayssion": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00094549, tourism=attraction, wikidata Q22938617): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Guillaume de Bernuy": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00094550, tourism=attraction, wikidata Q22938620): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Jean de Ulmo": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00094553, tourism=attraction, wikidata Q3145732): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Lestang": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00094555, tourism=attraction, wikidata Q22938626): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Nupces": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00094560, tourism=attraction, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Puivert": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00094566, tourism=attraction, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Puymaurin": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00094565, tourism=attraction, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Pénautier": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00094562, tourism=attraction, wikidata Q22938635): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Saint-Germain": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00094570, tourism=attraction, wikidata Q22938645): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de la Fage": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00094547, tourism=attraction, wikidata Q22938616): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de la Mamye": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00094556, tourism=attraction, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel des chevaliers de Saint-Jean de Jérusalem": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00094571, tourism=attraction, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel du Vieux-Raisin": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00094554, tourism=attraction, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Rue de la Brasserie": "a public street named for a building or institution on it, not a business (residential class; batch 2b precedent, _named_street); tags read 2026-10-13",
+}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/toulouse.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A second row of one object (owner, 2026-10-13)
+    "way/74253808": "'Métro Basso Cambo': the station building of Basso Cambo under a \"Métro\" prefix, 10 m from the station's own row (node/7681108802, with wikidata): two station rows, one station",
+    # An exhibit under its kind's article (owner, 2026-10-13)
+    "node/11637614767": "'Astrovan': an exhibit of the Cité de l'espace (tourism=attraction node inside the park) under the article of the vehicle it copies, not one of its own",
+    "node/8021491567": "'Chang'e 4': an exhibit of the Cité de l'espace under the article of the lunar mission, not one of its own",
+    # Public art under another object's article (owner, 2026-10-13)
+    "node/4010926188": "'Los Pès del parpalhòl': public art whose wikipedia tag is the artist's article (en:Jessica_Stockholder), not the work's; the wikidata entry alone admits none",
+    # A bare type word (owner, 2026-10-13)
+    "way/74708847": "'Pigeonnier': \"dovecote\" alone (the other one is named: Pigeonnier du Mirail); no wikidata",
+    "node/4352513993": "'Mosquée': \"mosque\" alone, no wikidata",
+    # A description standing in for a name (owner, 2026-10-13)
+    "node/786851741": "'Vestige de rempart': \"remnant of rampart\": a node carrying the article of the Gallo-Roman rampart, which has its own row (way/813973353) 240 m off",
+    "way/1302826712": "'Patio des laboratoires': \"the laboratories' patio\", a courtyard of a campus tagged a square",
+    "node/10125482128": "'Patio du café': \"the café's patio\", tagged a park",
+    "node/11771666480": "'les bancs sous l'arbre': \"the benches under the tree\", tagged a park",
+    "way/496429626": "'FATO': an aviation term (final approach and take-off area) on a locality inside the airport; description=Zone FATO Blagnac Airport",
+    # Worship named only by a denomination (owner, 2026-10-13)
+    "way/64850994": "'Église réformée évangélique': named only by the denomination (reformed evangelical church)",
+    "way/1433727903": "'église néo-apostolique': named only by the denomination (New Apostolic church)",
+    "way/64556070": "'Église Adventiste du Septiéme Jour': named only by the denomination (Seventh-day Adventist church)",
+    # Worship named only by its body or chain (owner, 2026-10-13)
+    "way/76333052": "'Eglise de Jesus-Christ des saints des derniers jours': named only by the body (the Latter-day Saints' church); the wikipedia tag is the body's article",
+    # A business (owner, 2026-10-13)
+    "node/10583845305": "'Wam Park - Toulouse - Sesquières': a wakeboard park under its brand and branch name, tagged leisure=park",
+    # Unsure rows a ruling drops: a facility of an estate, named inside the estate or run by its owners' body (the estate ruling) (owner, 2026-10-13)
+    "way/1472717153": "'Parc d'Ancely': a facility of an estate, named inside the estate or run by its owners' body",
+}

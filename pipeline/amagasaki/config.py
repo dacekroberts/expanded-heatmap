@@ -273,5 +273,26 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "名神町南団地前": "a signed junction (highway=traffic_signals) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/amagasaki.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # Worship named only by a body or a denomination (owner, 2026-10-13)
+    "way/201049474": "'パーフェクト リバティ 教団': the whole name is the body's ('Perfect Liberty Kyodan', written with spaces); the city's named PL church (PL尼崎中央教会) keeps its row",
+    "way/526346151": "'真如苑': the whole name is the body's (Shinnyo-en), no place or hall name",
+    "node/8601041421": "'創価学会 尼崎文化会館': Soka Gakkai and 'Amagasaki culture hall': a body, a city and a hall type (文化会館); same class as Gifu's way/1263674027",
+    # A facility of a mall (owner, 2026-10-13)
+    "way/1205242287": "'緑遊広場': the operator is the Q's Mall shopping centre; the mall-operator rule did not read キューズモール",
+    # A description standing in for a name (owner, 2026-10-13)
+    "way/879068532": "'元尼崎センタープール管理用地': 'former Amagasaki Center Pool management land': a land parcel's description, run by a power-line land office, not a park",
+    # A duplicate of one object (owner, 2026-10-13)
+    "node/3077953298": "'潮江素盞鳴神社': the same shrine as way/568693541 潮江素盞嗚神社 at the same coordinates; the two names differ by one character (鳴 for 嗚), so the name merge did not fold them",
+    # A deity's title alone (ruling 3; owner, 2026-10-13)
+    "node/7140685291": "'不動明王像': unsure in the full read, dropped by the owner's ruling 3",
+}

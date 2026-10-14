@@ -165,5 +165,34 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("fr",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "Hôtel de Grady": "a listed historic mansion or public building, a hôtel in the French sense (heritage=4, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Hayme de Bomal": "a listed historic mansion or public building, a hôtel in the French sense (heritage=4, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Soer de Solières": "a listed historic mansion or public building, a hôtel in the French sense (heritage=4, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel des Comtes de Méan": "a listed historic mansion or public building, a hôtel in the French sense (heritage=4, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Rue de l'Hôtel Communal": "a public street named for a building or institution on it, not a business (residential class; batch 2b precedent, _named_street); tags read 2026-10-13",
+    "Rue de la Brasserie": "a public street named for a building or institution on it, not a business (residential class; batch 2b precedent, _named_street); tags read 2026-10-13",
+    "Rue de la Clinique": "a public street named for a building or institution on it, not a business (residential class; batch 2b precedent, _named_street); tags read 2026-10-13",
+}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/liege.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A bare type word (owner, 2026-10-13)
+    "way/1049278203": "'Château': \"Château\" alone, a type word; a manor with no name and no wikidata",
+    # A description standing in for a name (owner, 2026-10-13)
+    "way/864688945": "'Allée d'arbres bordant l'Ourthe': \"row of trees along the Ourthe\", a description tagged a park",
+    "node/11229108965": "'Les Ardentes': a music festival's name on a park node open only in July (opening_hours=Jul); an event, not a place",
+    # A business (owner, 2026-10-13)
+    "node/14137473873": "'ULiège CARE Numérique': a university service unit carrying the university's own wikidata and article, not its own",
+    # A glitched name (owner, 2026-10-13)
+    "way/170317356": "'P4': a building code as the name; the article is the former abbey's, not this building's",
+    "way/1220477594": "'P6': a building code as the name; the article is the former abbey's, not this building's",
+    # A second row of one object (owner, 2026-10-13)
+    "relation/19701505": "'Monument Interallié': the tower of Mémorial Interallié relation/19701171, 14 m away; same article, no wikidata of its own",
+    # Worship named only by its body or chain (owner, 2026-10-13)
+    "node/13653534252": "'Église Universelle du Royaume de Dieu': named only by the church body (a worldwide chain), no place or hall name",
+}

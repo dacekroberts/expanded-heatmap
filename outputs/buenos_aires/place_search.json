@@ -1,0 +1,26 @@
+{
+  "index": "app/static/places/buenos_aires.json",
+  "places": 20423,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "es"
+    ],
+    "coverage": {
+      "en": 0.002,
+      "es": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Spanish"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/3082668",
+      "name": "Autonomous City of Buenos Aires",
+      "stations": 89
+    }
+  ]
+}

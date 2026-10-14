@@ -1,0 +1,36 @@
+{
+  "index": "app/static/places/recife.json",
+  "places": 45715,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "pt"
+    ],
+    "coverage": {
+      "en": 0.0,
+      "pt": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Portuguese"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/303585",
+      "name": "Recife",
+      "stations": 19
+    },
+    {
+      "osm": "relation/303709",
+      "name": "Jaboatão dos Guararapes",
+      "stations": 9
+    },
+    {
+      "osm": "relation/303695",
+      "name": "Camaragibe",
+      "stations": 1
+    }
+  ]
+}

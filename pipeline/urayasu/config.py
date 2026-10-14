@@ -250,4 +250,22 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/urayasu.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A ride in a park indexed as a station (owner, 2026-10-13)
+    "node/859663338": "'ウエスタンリバー鉄道': the boarding point of a theme-park ride tagged railway=station; no operator, no wikidata",
+    # A description standing in for a name (owner, 2026-10-13)
+    "way/219072935": "'空き地': \"vacant lot\", a description tagged a park",
+    "node/12033513644": "'東京ディズニーランド・エレクトリカルパレード・ドリームライツ': a parade (an event) tagged a theatre; the article is the show's",
+    "node/12055263732": "'スカイ・フル・オブ・カラーズ': a fireworks show (an event) tagged a theatre; the article is the show's",
+    # A second row of one object (owner, 2026-10-13)
+    "way/219368940": "'清瀧神社本殿': the main hall of 清瀧神社 node/2282795178, 14 m away, carrying the same wikidata",
+}
+# Kept by the owner's word (place_index, PLACE_KEPT; owner, 2026-10-13): a famous
+# place the rules pass over for want of a tag, the id read with its cached name.
+PLACE_KEPT = {
+    "way/1282875870": "'東京ディズニーランド': Tokyo Disneyland, the park itself (brand tag, no Wikidata tag on the way) (owner, 2026-10-13)",
+    "way/203538370": "'東京ディズニーシー': Tokyo DisneySea, the park itself (brand tag, no Wikidata tag on the way) (owner, 2026-10-13)",
+}

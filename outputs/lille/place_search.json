@@ -1,0 +1,76 @@
+{
+  "index": "app/static/places/lille.json",
+  "places": 17260,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "fr"
+    ],
+    "coverage": {
+      "en": 0.001,
+      "fr": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "French"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/58404",
+      "name": "Lille",
+      "stations": 30
+    },
+    {
+      "osm": "relation/59551",
+      "name": "Tourcoing",
+      "stations": 12
+    },
+    {
+      "osm": "relation/59043",
+      "name": "Roubaix",
+      "stations": 11
+    },
+    {
+      "osm": "relation/58686",
+      "name": "Marcq-en-Barœul",
+      "stations": 10
+    },
+    {
+      "osm": "relation/58213",
+      "name": "Villeneuve-d'Ascq",
+      "stations": 9
+    },
+    {
+      "osm": "relation/59041",
+      "name": "Wasquehal",
+      "stations": 6
+    },
+    {
+      "osm": "relation/58677",
+      "name": "Croix",
+      "stations": 4
+    },
+    {
+      "osm": "relation/58617",
+      "name": "La Madeleine",
+      "stations": 3
+    },
+    {
+      "osm": "relation/58583",
+      "name": "Mons-en-Barœul",
+      "stations": 3
+    },
+    {
+      "osm": "relation/59056",
+      "name": "Mouvaux",
+      "stations": 2
+    },
+    {
+      "osm": "relation/58897",
+      "name": "Lambersart",
+      "stations": 1
+    }
+  ]
+}

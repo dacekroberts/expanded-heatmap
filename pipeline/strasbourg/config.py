@@ -196,5 +196,25 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("fr",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "Restaurant Universitaire Gallia": "a notable university building that houses the student restaurant its name carries (amenity=university, Wikipedia fr:Gallia (Strasbourg)): the building, not a business (the Panama Hotel precedent); tags read 2026-10-13",
+    "Rue de l'Auberge de Jeunesse": "a public street named for a building or institution on it, not a business (living_street, residential class; batch 2b precedent, _named_street); tags read 2026-10-13",
+}
+# Dropped by id on the full read of 2026-10-13 under the owner's rulings of the
+# same day, each id read with its cached name (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    # bare type: dropped in the full read (owner, 2026-10-13)
+    "way/47228307": "'Blockhaus': whole name is the type word Blockhaus, a ruined bunker (full read, bare type)",
+    "way/48453831": "'Blockhaus maginot': a type and its kind (Maginot blockhouse), no name of its own (full read, bare type)",
+    # description: dropped in the full read (owner, 2026-10-13)
+    "way/723890228": "'Abri de défense passive ligne Maginot': describes the object (civil defence shelter, Maginot line), no name of its own (full read, description)",
+    # duplicate: dropped in the full read (owner, 2026-10-13)
+    "node/10296813419": "'Union des affaires culturelles Turco-Islamiques de Strasbourg': the body's long name on a second node 29 m from the row carrying its short name (node/10296813420) (full read, duplicate)",
+    # estate: dropped in the full read (owner, 2026-10-13)
+    "way/1055071420": "'Le jardin des poètes': one residence under its marketing name: the note tag says it is the residence's name and the source is a developer's listing (full read, estate)",
+    # worship denomination: dropped in the full read (owner, 2026-10-13)
+    "node/2294757912": "'Église évangélique méthodiste': denomination name only (evangelical methodist church), no wikidata (full read, worship denomination)",
+}

@@ -313,5 +313,24 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read of this
+# index (rule passes 5 and 6), each id read with its cached name and its index
+# row; grouped by the reader's class.
+PLACE_DROPPED = {
+    # A bare type word standing alone (reader's drop; owner, 2026-10-13)
+    "node/11081216363": "'Odo お堂'",
+    "way/625750973": "'憩いの広場'",
+    # A glitched name (reader's drop; owner, 2026-10-13)
+    "node/10966173756": "'Unknown Park'",
+    # A business's or a mall's own facility (reader's drop; owner, 2026-10-13)
+    "node/2382896721": "'常磐畜産株式会社'",
+    # A second row for one object (the surviving row named in each note) (reader's drop; owner, 2026-10-13)
+    "node/2342894036": "'いわき21世紀の森公園': the park's name on a stadium node, 188 m from the park's own row way/477128070; the stadium has its own row",
+    # Unsure in the read, dropped by ruling 4, a part of one shrine or temple as its own row (owner, 2026-10-13)
+    "node/5952393092": "'金毘羅さま　鳥居'",
+}

@@ -1,0 +1,26 @@
+{
+  "index": "app/static/places/toulouse.json",
+  "places": 10718,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "fr"
+    ],
+    "coverage": {
+      "en": 0.001,
+      "fr": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "French"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/35738",
+      "name": "Toulouse",
+      "stations": 48
+    }
+  ]
+}

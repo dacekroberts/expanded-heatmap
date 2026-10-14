@@ -1,0 +1,27 @@
+{
+  "index": "app/static/places/kumamoto.json",
+  "places": 2012,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "ja"
+    ],
+    "coverage": {
+      "en": 0.547,
+      "ja": 0.997
+    },
+    "list_share": 0.5,
+    "listed": [
+      "English",
+      "Japanese"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/4000503",
+      "name": "Kumamoto",
+      "stations": 61
+    }
+  ]
+}

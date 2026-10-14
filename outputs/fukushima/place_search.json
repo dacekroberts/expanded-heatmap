@@ -1,0 +1,26 @@
+{
+  "index": "app/static/places/fukushima.json",
+  "places": 1000,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "ja"
+    ],
+    "coverage": {
+      "en": 0.312,
+      "ja": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Japanese"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/4137581",
+      "name": "Fukushima",
+      "stations": 22
+    }
+  ]
+}

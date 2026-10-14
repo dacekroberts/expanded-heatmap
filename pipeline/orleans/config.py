@@ -195,5 +195,63 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("fr",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "Hôtel Brachet et jardin de la Vieille Intendance": "a historic mansion tagged an attraction, a hôtel in the French sense (tourism=attraction, wikidata Q22997019): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Cabu - Musée historique et archéologique de l'Orléanais": "a historic mansion tagged an attraction, a hôtel in the French sense (tourism=attraction, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Groslot": "a historic mansion tagged an attraction, a hôtel in the French sense (tourism=attraction, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Sanxerre": "a historic mansion tagged an attraction, a hôtel in the French sense (tourism=attraction, wikidata Q22944450): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Toutin": "a historic mansion tagged an attraction, a hôtel in the French sense (tourism=attraction, wikidata Q22944559): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel des Créneaux": "a historic mansion tagged an attraction, a hôtel in the French sense (tourism=attraction, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/orleans.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A second row of one object (owner, 2026-10-13)
+    "node/2136003267": "'Guy Marie Robié': the second platform node of the stop Guy Marie Riobé (node/1576849093, 20 m away), with the name misspelt Robié",
+    "node/1914487530": "'Cathédrale': one platform of the stop \"Cathédrale Hôtel de Ville\" (node/1865589193, 65 m away; both carry the stop area code TCAHDV), under a shortened name",
+    "way/1518765969": "'Hôtel Groslot, actuellement Hôtel de ville pour la célébration des mariages': the same building as node/6894974505 \"Hôtel Groslot\" (same Wikidata entry, 25 m away), under a register title with a description in it",
+    "node/9677370119": "'Notre Dame de Recouvrance': the same church as way/113997491 \"Église Notre-Dame-de-Recouvrance\" (same Wikidata entry, 30 m away)",
+    "node/11752236683": "'Église Saint-Euverte d'Orléans': the same church as way/113692150 \"Église Saint-Euverte\" (same Wikidata entry, 35 m away)",
+    "node/6895191699": "'Temple protestant d'Orléans': the same temple as way/152140295 \"Église Réformée d'Orléans\" (same Wikidata entry, under 10 m away); either row could be the one kept, the node's name is the article's title",
+    "node/11389672570": "'Parc Floral': a node \"Parc Floral\" inside way/491694575 \"Parc Floral de la Source\", which carries the article",
+    "way/491692199": "'Parc du square Poursine': the same square as way/1149849950 \"Square Poursine\", same spot",
+    # A monument-register entry named only by type and house number (owner, 2026-10-13)
+    "relation/1026963": "'Immeuble n°1': \"Immeuble n°1\": a listed residential building of the rue Royale row named by type and house number only (23 such rows; each has its own Wikidata entry, which is why the rules kept them)",
+    "way/66182556": "'Immeuble n°3': \"Immeuble n°3\", type and house number only",
+    "way/113978057": "'Immeuble n°11': \"Immeuble n°11\", type and house number only",
+    "way/113703665": "'Immeuble n°12': \"Immeuble n°12\", type and house number only",
+    "way/113977920": "'Immeuble n°13': \"Immeuble n°13\", type and house number only",
+    "way/113703576": "'Immeuble n°14': \"Immeuble n°14\", type and house number only",
+    "way/113978004": "'Immeuble n°15': \"Immeuble n°15\", type and house number only",
+    "way/113977906": "'Immeuble n°17': \"Immeuble n°17\", type and house number only",
+    "way/113978227": "'Immeuble n°19': \"Immeuble n°19\", type and house number only",
+    "way/113704116": "'Immeuble n°20': \"Immeuble n°20\", type and house number only",
+    "way/113977374": "'Immeuble n°21': \"Immeuble n°21\", type and house number only",
+    "way/113978190": "'Immeuble n°25': \"Immeuble n°25\", type and house number only",
+    "way/113704415": "'Immeuble n°26': \"Immeuble n°26\", type and house number only",
+    "way/113977714": "'Immeuble n°27': \"Immeuble n°27\", type and house number only",
+    "way/113704539": "'Immeuble n°28': \"Immeuble n°28\", type and house number only",
+    "way/113978295": "'Immeuble n°29': \"Immeuble n°29\", type and house number only",
+    "way/113703636": "'Immeuble n°30': \"Immeuble n°30\", type and house number only",
+    "way/113977934": "'Immeuble n°31': \"Immeuble n°31\", type and house number only",
+    "way/113703873": "'Immeuble n°32': \"Immeuble n°32\", type and house number only",
+    "way/113977597": "'Immeuble n°33': \"Immeuble n°33\", type and house number only",
+    "way/113703701": "'Immeuble n°34': \"Immeuble n°34\", type and house number only",
+    "way/113998175": "'Immeuble n°45': \"Immeuble n°45\", type and house number only",
+    "way/113978280": "'Immeuble et maison n°2-4': \"Immeuble et maison n°2-4\", type and house numbers only",
+    # A bare type word (owner, 2026-10-13)
+    "node/9813839781": "'Jardins ouvriers': \"Jardins ouvriers\" = allotment gardens, the type alone (operator=AOJOF)",
+    "node/10200585078": "'Campus Universitaire': \"Campus Universitaire\", the type alone, tagged place=hamlet",
+    # Worship named only by its body or chain (owner, 2026-10-13)
+    "node/9480618626": "'Église néo-apostolique': \"Église néo-apostolique\", the denomination alone",
+    # A religious office (owner, 2026-10-13)
+    "node/9480671086": "'Évêché': \"Évêché\" = the bishop's house and offices, a bare type word, tagged a place of worship",
+    # A glitched name (owner, 2026-10-13)
+    "node/8388112099": "'All de Mistigris': \"All de Mistigris\": Allée cut to \"All\"; a street's name on a place=locality node",
+    "node/8388112102": "'All de la Loire': \"All de la Loire\": Allée cut to \"All\"; a street's name on a place=locality node",
+    "node/8388112098": "'Res La Mouchetière': \"Res La Mouchetière\": Résidence cut to \"Res\"; a housing residence on a place=locality node",
+}

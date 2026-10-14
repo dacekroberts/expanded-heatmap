@@ -195,4 +195,15 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("fr",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read of this
+# index (rule passes 5 and 6), each id read with its cached name and its index
+# row; grouped by the reader's class.
+PLACE_DROPPED = {
+    # A second row for one object (the surviving row named in each note) (reader's drop; owner, 2026-10-13)
+    "way/34081028": "'Institut supérieur des Beaux Arts': the same school as \"Institut supérieur des Beaux Arts (ISBA)\" 15 m away, same Wikidata entry; that row has the article",
+    "way/753537545": "'Fort de la Dame Blanche': the same fort as \"Fort de Chailluz\" 25 m away (each carries the other's name as a local or alternate name); that row has the Wikidata entry and the article",
+    # Worship named only by a body, a denomination or a chain (reader's drop; owner, 2026-10-13)
+    "way/71969822": "'Assemblée de Dieu'",
+    # A bare type word standing alone (reader's drop; owner, 2026-10-13)
+    "node/12613392270": "'Caborde'",
+}

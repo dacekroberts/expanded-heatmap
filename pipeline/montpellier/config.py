@@ -197,5 +197,34 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("fr",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "Hôtel Haguenot": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00103568, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Rey": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00103583, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Bardy": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00103548, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Baudon de Mauny": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00103549, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Guidais": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00103567, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel des Trésoriers de France": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00103592, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel du Département": "a tram stop (railway=tram_stop), named for the place beside it (the Prague precedent, Hotel Golf); tags read 2026-10-13",
+    "Mo.Co Hôtel des Collections": "a public contemporary art venue run by the metropolis (tourism=gallery, wikidata); 'Hôtel des Collections' is its name; tags read 2026-10-13",
+    "Musée Sabatier d'Espeyran": "a public museum run by the metropolis (tourism=gallery, wikidata); its official name is the hôtel particulier it occupies; tags read 2026-10-13",
+    "Rue de l'École de Pharmacie": "a public street named for a building or institution on it, not a business (pedestrian class; batch 2b precedent, _named_street); tags read 2026-10-13",
+}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read of this
+# index (rule passes 5 and 6), each id read with its cached name and its index
+# row; grouped by the reader's class.
+PLACE_DROPPED = {
+    # Worship named only by a body, a denomination or a chain (reader's drop; owner, 2026-10-13)
+    "node/2131164709": "'Association des Projets de Bienfaisance Islamique en France'",
+    "way/76169444": "'Église évangélique de Pentecôte'",
+    # A religious office, hall or residence tagged a place of worship (reader's drop; owner, 2026-10-13)
+    "way/532679205": "'Maison diocésaine Villa Maguelone'",
+    # A bare type word standing alone (reader's drop; owner, 2026-10-13)
+    "node/13087054901": "'Observatoire'",
+    # A description standing in for a name (reader's drop; owner, 2026-10-13)
+    "node/9354168315": "'Vieille porte'",
+    # A second row for one object (the surviving row named in each note) (reader's drop; owner, 2026-10-13)
+    "way/1205422498": "'Lez': the river Lez a second time; way/146376980 (Le Lez) is the same river with the article",
+}

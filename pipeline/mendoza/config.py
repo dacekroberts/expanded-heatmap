@@ -135,10 +135,32 @@ MENDOZA_BBOX = {
 
 # --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
 
-PLACE_AREA = "(id:3600153540)"
-PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
-PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
+# The searched area is relation 2204157, Departamento Capital (admin_level 5):
+# the department that holds all seven stations of the map and the boundary its
+# businesses are cut to (data/mendoza/raw/osm_place_area_lookup_2026-10-13.json,
+# read from the Argentina extract). The scaffold had set relation 153540, the
+# province of the same name (admin_level 4); the caches of that area stay on
+# disk under the unversioned names, and the province's outline is kept as
+# osm_place_outline_v1_province_2026-10-13.json
+# (docs/decisions_drafts/search-rollout.md, 2026-10-13).
+PLACE_AREA = "(id:3602204157)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_v2_2026-10-13.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_v2_2026-10-13.json"
 PLACE_LANGUAGES = ("es",)
 PLACE_FOLD = None
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+# The three hotel ruins reviewed on 2026-10-13 lay in the province, outside the
+# department; none is a row since the area was corrected.
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/mendoza.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # Worship named only by a body or a denomination (owner, 2026-10-13)
+    "node/2443028624": "'Iglesia Adventista Séptimo Día': 'Iglesia Adventista Séptimo Día' alone, a denomination (and tagged denomination=jehovahs_witness)",
+    "way/255485266": "'Templo Evangelico Metodista': 'Templo Evangelico Metodista' alone, a denomination",
+    # A religious office, hall, school or residence (owner, 2026-10-13)
+    "node/3639401230": "'Hermanas de Nuestra Señora de la Caridad del Buen Pastor': a congregation of sisters as the name; 10 m from Iglesia El Buen Pastor (node/3724765420), which is the church row",
+}

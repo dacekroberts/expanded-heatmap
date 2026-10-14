@@ -114,5 +114,48 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ko",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "두산아파트앞삼거리": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "한신아파트삼거리": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "환승주차장삼거리": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+}
+# Dropped by id on the full read of 2026-10-13 under the owner's rulings of the
+# same day, each id read with its cached name (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    # estate facility: dropped in the full read (owner, 2026-10-13)
+    "way/850079175": "'12단지 주공공원': the park of an apartment estate's block 12 (Jugong), tagged park (full read, estate facility)",
+    "way/842276167": "'3단지 관리사무소 앞 공원': describes a spot inside an apartment estate (the park in front of block 3's management office) (full read, estate facility)",
+    "way/842276653": "'3단지 테니스장 공터': describes a spot inside an apartment estate (the empty lot by block 3's tennis court) (full read, estate facility)",
+    "way/842499612": "'건영 3단지 공원': the park of one apartment estate block (Geonyeong block 3) (full read, estate facility)",
+    "way/472844688": "'매화1단지 놀이터': the playground of one apartment estate block (Maehwa block 1) (full read, estate facility)",
+    "way/471318610": "'하얀마을 놀이터': the playground of an apartment village (Hayan maeul), tagged park (full read, estate facility)",
+    "way/890919704": "'청구 5단지 테니스장': the tennis court of one apartment estate block (Cheonggu block 5), tagged park (full read, estate facility)",
+    "way/1352026618": "'봇들마을 5단지 광장': the square of one apartment estate block (Botdeul maeul block 5) (full read, estate facility)",
+    "way/850136104": "'주공 소공원': small park named only for the estate builder (Jugong) (full read, estate facility)",
+    "way/1493282006": "'진경산수원': a garden whose operator tag is an apartment complex (full read, estate facility)",
+    # business: dropped in the full read (owner, 2026-10-13)
+    "node/4648779486": "'NAVER': a company's name on a node tagged monument (full read, business)",
+    # bare type: dropped in the full read (owner, 2026-10-13)
+    "way/468337416": "'부처석상': whole name is a type (stone Buddha statue), tagged place of worship (full read, bare type)",
+    "way/437236113": "'잔디광장': whole name is a type (lawn plaza) (full read, bare type)",
+    "way/429223452": "'저류지': whole name is a type (retention basin), tagged park (full read, bare type)",
+    "way/882707364": "'가로공원': whole name is a type (street park) (full read, bare type)",
+    # glitch: dropped in the full read (owner, 2026-10-13)
+    "node/4652816469": "'연정교회(예전이름)': mapper's note (former name) glued to the name (full read, glitch)",
+    "way/1180292474": "'판교 꿈꾸는교': name cut one syllable short of the word for church (full read, glitch)",
+    # religious residence: dropped in the full read (owner, 2026-10-13)
+    "node/11942351602": "'정토사 요사채 염불원': the monks' quarters and chanting hall of a temple that has its own row, tagged place of worship (full read, religious residence)",
+    # religious office: dropped in the full read (owner, 2026-10-13)
+    "node/8116836672": "'금광교회 비전센터': a church's vision centre (an education and office hall), tagged place of worship (full read, religious office)",
+    "node/13440336213": "'하나님의교회 세계복음선교협회 총회': a denomination's general assembly office (office=religion); the wikidata is the body's (full read, religious office)",
+    # estate: dropped in the full read (owner, 2026-10-13)
+    "node/9174471900": "'남서울파크힐': one gated housing estate under its marketing name, mapped as a hamlet (full read, estate)",
+    # unsure in the full read, dropped by ruling 5: a stock plaza or rest-area name with no place in it (owner, 2026-10-13)
+    "way/1059805491": "'종합광장': 종합광장, general plaza, no place in it (unsure in the full read; ruling 5)",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/4652816470": "'연정교회(예전이름)': the twin of node/4652816469; glitch: dropped in the full read (owner, 2026-10-13)",
+}

@@ -257,5 +257,106 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "旧上海銀行長崎支店記念館": "a museum in a former bank branch (tourism=museum, wikidata); tags read 2026-10-13",
+}
+# Dropped by id on the full read of 2026-10-13 under the owner's rulings of the
+# same day, each id read with its cached name (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    # station not: dropped in the full read (owner, 2026-10-13)
+    "node/13589111881": "'２階のりば': \"2nd floor boarding point\": a landing of the Glover Sky Road inclined lift (location read from the coordinates, not a tag), tagged railway=station; five such rows within 100 m (full read, station not)",
+    "node/13589111880": "'３階のりば': \"3rd floor boarding point\": lift landing, as above (full read, station not)",
+    "node/13589111862": "'4階のりば': \"4th floor boarding point\": lift landing, as above (full read, station not)",
+    "node/5825876719": "'5階のりば': \"5th floor boarding point\": lift landing, as above (full read, station not)",
+    "node/3971461428": "'First floor': \"First floor\": lift landing, as above; English description as the name (full read, station not)",
+    # station ride: dropped in the full read (owner, 2026-10-13)
+    "node/12833741145": "'坑外停留所': stop of the Ikeshima coal mine tour trolley (network tag), a visitor ride inside a closed mine, not public transport (full read, station ride)",
+    "node/13203819348": "'坑道奥部停留所': stop of the Ikeshima coal mine tour trolley, as above (full read, station ride)",
+    # description: dropped in the full read (owner, 2026-10-13)
+    "way/921231168": "'Lourdes apparitions': English phrase for an event (the Lourdes apparitions) on a leisure=park way; no Japanese name (full read, description)",
+    "node/8670287395": "'長崎西国三十三ヶ所第六番霊場': \"Nagasaki Saigoku 33, station no. 6\": a pilgrimage number as the name, 10 m from 準提観音堂, the same object (full read, description)",
+    "node/8522889970": "'222M': the name is the summit height alone (ele tag carries the same figure); natural=peak with no name of its own (full read, description)",
+    "node/8421889994": "'235M': the name is the summit height alone (ele tag carries the same figure); natural=peak with no name of its own (full read, description)",
+    "node/8421837130": "'258M': the name is the summit height alone (ele tag carries the same figure); natural=peak with no name of its own (full read, description)",
+    "node/8421837132": "'264M': the name is the summit height alone (ele tag carries the same figure); natural=peak with no name of its own (full read, description)",
+    "node/8421889995": "'269M': the name is the summit height alone (ele tag carries the same figure); natural=peak with no name of its own (full read, description)",
+    "node/8421837131": "'285M': the name is the summit height alone (ele tag carries the same figure); natural=peak with no name of its own (full read, description)",
+    "node/8421837129": "'288M': the name is the summit height alone (ele tag carries the same figure); natural=peak with no name of its own (full read, description)",
+    "node/8421891225": "'296M': the name is the summit height alone (ele tag carries the same figure); natural=peak with no name of its own (full read, description)",
+    "node/8421891226": "'299M': the name is the summit height alone (ele tag carries the same figure); natural=peak with no name of its own (full read, description)",
+    "node/8430869120": "'300M': the name is the summit height alone (ele tag carries the same figure); natural=peak with no name of its own (full read, description)",
+    "node/8421837133": "'308M': the name is the summit height alone (ele tag carries the same figure); natural=peak with no name of its own (full read, description)",
+    "node/8430863016": "'321M': the name is the summit height alone (ele tag carries the same figure); natural=peak with no name of its own (full read, description)",
+    "node/8444267981": "'328M': the name is the summit height alone (ele tag carries the same figure); natural=peak with no name of its own (full read, description)",
+    "node/8422054828": "'344M': the name is the summit height alone (ele tag carries the same figure); natural=peak with no name of its own (full read, description)",
+    "node/8430869121": "'352M': the name is the summit height alone (ele tag carries the same figure); natural=peak with no name of its own (full read, description)",
+    "node/8430869124": "'363M': the name is the summit height alone (ele tag carries the same figure); natural=peak with no name of its own (full read, description)",
+    "node/8422054895": "'364M': the name is the summit height alone (ele tag carries the same figure); natural=peak with no name of its own (full read, description)",
+    "node/8421891266": "'365M': the name is the summit height alone (ele tag carries the same figure); natural=peak with no name of its own (full read, description)",
+    "node/8430869117": "'371M': the name is the summit height alone (ele tag carries the same figure); natural=peak with no name of its own (full read, description)",
+    "node/8421837134": "'408M': the name is the summit height alone (ele tag carries the same figure); natural=peak with no name of its own (full read, description)",
+    "node/8421837135": "'415M': the name is the summit height alone (ele tag carries the same figure); natural=peak with no name of its own (full read, description)",
+    "node/8421889993": "'494M': the name is the summit height alone (ele tag carries the same figure); natural=peak with no name of its own (full read, description)",
+    # bare type: dropped in the full read (owner, 2026-10-13)
+    "way/726601264": "'第1公園': \"Park No. 1\": a number and the type word, no place name; five of them and 近隣公園 in one housing area (full read, bare type)",
+    "way/726601266": "'第2公園': \"Park No. 2\", as above (full read, bare type)",
+    "way/726601166": "'第3公園': \"Park No. 3\", as above (full read, bare type)",
+    "way/726601147": "'第4公園': \"Park No. 4\", as above (full read, bare type)",
+    "way/726606597": "'第5公園': \"Park No. 5\", as above (full read, bare type)",
+    "way/726601260": "'近隣公園': \"neighbourhood park\", the planning class of park as the whole name (full read, bare type)",
+    "node/12833647798": "'観音堂': Kannon hall under its type alone (full read, bare type)",
+    "node/8703317304": "'虚空蔵菩薩': a bodhisattva's name alone (rule has 文殊菩薩) (full read, bare type)",
+    "node/8631608084": "'大山祇大神': a deity's name alone (Oyamatsumi), wayside shrine (full read, bare type)",
+    "node/8499751046": "'山大神': \"mountain god\", wayside shrine under the deity's title alone (full read, bare type)",
+    "way/766193659": "'七面堂': Shichimen hall under its type alone, same family as 大師堂 in the rule (full read, bare type)",
+    "node/12833589536": "'龍神のほこら': \"the dragon god's little shrine\": a description, and 祠 is a rule word (full read, bare type)",
+    "node/13651317328": "'織部灯籠': \"Oribe lantern\", a style of stone lantern (rule has 灯籠), tagged historic=monument (full read, bare type)",
+    "way/804926285": "'シックナー': \"thickener\", a piece of mine plant under its type alone (full read, bare type)",
+    # worship body: dropped in the full read (owner, 2026-10-13)
+    "way/721182768": "'創価学会\u3000長崎平和会館': Soka Gakkai hall: the body's name plus \"Nagasaki Peace Hall\"; the rule lists 創価学会 but 会館 is not a hall word, and the name has a full-width space (full read, worship body)",
+    "way/714959019": "'真如苑 長崎支部': Shinnyo-en \"Nagasaki branch\": a body's branch office, no religion tag (full read, worship body)",
+    # duplicate: dropped in the full read (owner, 2026-10-13)
+    "node/3828906061": "'深祟寺': same temple as 深崇寺 way/717026793 at the same point, with the middle character mistyped (full read, duplicate)",
+    "way/1174875329": "'原爆落下中心碑': the hypocenter monument again, 10 m from 爆心地碑 way/375933470; its wikidata Q488 is the bombing's, not the monument's (full read, duplicate)",
+    # vanished: dropped in the full read (owner, 2026-10-13)
+    "node/1423807344": "'活水女子大学\u3000戸町キャンパス\u3000跡地': \"former site of the Kwassui Women's University Tomachi campus\": a gone object, MLIT import node retagged historic=ruins (full read, vanished)",
+    "way/832757134": "'長崎北徳洲会病院': a hospital that moved, tagged historic=ruins; business, and its site is the next row (full read, vanished)",
+    "way/832757135": "'長崎北徳洲会病院\u3000跡地': \"former site\" of the same hospital, 30 m away (full read, vanished)",
+    # unsure in the full read, dropped by ruling 3: a hall named only for what it enshrines, or a deity's title alone (owner, 2026-10-13)
+    "node/8689377669": "'天地神明': 天地神明, a dedication alone (deity titles alone fall under ruling 3) (unsure in the full read; ruling 3)",
+    "node/8449085251": "'八天狗': 八天狗, named only for what it enshrines (unsure in the full read; ruling 3)",
+    "node/8670288823": "'準提観音堂': 準提観音堂, a hall named only for the Kannon form it enshrines (my reading) (unsure in the full read; ruling 3)",
+    # unsure in the full read, dropped by ruling 9: one bay or sea labeled many times, one row stays (owner, 2026-10-13)
+    "node/5461068827": "'長崎港': 長崎港 labeled again; the harbour's own relation/9381185 stays (unsure in the full read; ruling 9)",
+    "node/5461085980": "'長崎港': 長崎港 labeled again; the harbour's own relation/9381185 stays (unsure in the full read; ruling 9)",
+    # duplicate: the pair's English-only row goes, the row with the local-language name stays (owner, 2026-10-13)
+    "node/6380332923": "'Sanno Shrine': the English-only twin of 山王神社（被爆クスノキの在る神社） (node/4448589490, 15 m), which stays as the row with the Japanese name",
+    "node/6380332926": "'Twenty-Six Martyrs Museum': the English-only twin of 日本二十六聖人記念館 (node/1423804998, 45 m), which stays as the row with the Japanese name",
+    # the sea-crossing street row (owner, 2026-10-13)
+    "way/673930211": "'国道499号（海上区間）': the sea section of National Route 499, drawn highway=planned: no road to find",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/804926286": "'シックナー': the twin of way/804926285; bare type: dropped in the full read (owner, 2026-10-13)",
+    "way/832757139": "'長崎北徳洲会病院　跡地': the twin of way/832757135; vanished: dropped in the full read (owner, 2026-10-13)",
+    # Twin round 2 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/804926287": "'シックナー': the twin of way/804926285; bare type: dropped in the full read (owner, 2026-10-13)",
+    # Twin round 3 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1540935329": "'シックナー': the twin of way/804926285; bare type: dropped in the full read (owner, 2026-10-13)",
+    # Twin round 4 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1540935330": "'シックナー': the twin of way/804926285; bare type: dropped in the full read (owner, 2026-10-13)",
+    # Twin round 5 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1540935331": "'シックナー': the twin of way/804926285; bare type: dropped in the full read (owner, 2026-10-13)",
+    # Twin round 6 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1540935332": "'シックナー': the twin of way/804926285; bare type: dropped in the full read (owner, 2026-10-13)",
+}
+# Why this index reaches more than 25 km past the map's stations
+# (scripts/check_place_scope.py, rule D): a far corner of the municipality itself.
+PLACE_SCOPE_REACH_REASON = "2026-10-13: Ikeshima island (池島) is part of the city (owner)"

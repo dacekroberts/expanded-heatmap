@@ -325,4 +325,19 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read of this
+# index (rule passes 5 and 6), each id read with its cached name and its index
+# row; grouped by the reader's class.
+PLACE_DROPPED = {
+    # A bare type word standing alone (reader's drop; owner, 2026-10-13)
+    "way/548734277": "'ちびっこ広場'",
+    "way/558663346": "'子どもの遊び場'",
+    "way/497734958": "'古墳'",
+    # A description standing in for a name (reader's drop; owner, 2026-10-13)
+    "way/122486316": "'利根川自転車道の植え込み'",
+    # Unsure in the read, dropped by ruling 3, a hall named only for what it enshrines or a deity's title alone (owner, 2026-10-13)
+    "way/626010637": "'観音堂'",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/497734959": "'古墳': the twin of way/497734958; A bare type word standing alone (reader's drop; owner, 2026-10-13)",
+}

@@ -197,4 +197,11 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("fr",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/valenciennes.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A description standing in for a name (owner, 2026-10-13)
+    "way/814239955": "'Parcelle MQCV': \"Parcelle MQCV\": a plot label with an acronym, a mapper's working name",
+    "node/13051860765": "'Vestiges archéologiques antiques et médiévaux': \"ancient and medieval archaeological remains\": the monument register's description, no name and no place",
+}

@@ -187,4 +187,23 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/nishitokyo.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A facility of an apartment estate (owner, 2026-10-13)
+    "way/556775155": "'ひばりが丘団地3号棟前広場': 'plaza in front of block 3' of the Hibarigaoka housing estate, tagged a park",
+    "way/556492989": "'ひばりが丘団地5号棟前広場': 'plaza in front of block 5' of the same estate",
+    # A description standing in for a name (owner, 2026-10-13)
+    "way/549768662": "'西東京いこいの森公園 アプローチ': the approach path of 西東京いこいの森公園, which has its own row (way/88018962)",
+    # A bare type word (owner, 2026-10-13)
+    "way/734166397": "'駅前広場': 'station plaza' alone",
+    "node/9623803257": "'題目塔': 'daimoku tower' alone, the type of the stone",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/9633105695": "'題目塔': the twin of node/9623803257; A bare type word (owner, 2026-10-13)",
+    "node/9633151357": "'題目塔': the twin of node/9623803257; A bare type word (owner, 2026-10-13)",
+    # Twin round 2 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/9633142633": "'題目塔': the twin of node/9623803257; A bare type word (owner, 2026-10-13)",
+}

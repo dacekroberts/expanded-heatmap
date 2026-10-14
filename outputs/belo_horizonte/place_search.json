@@ -1,0 +1,57 @@
+{
+  "index": "app/static/places/belo_horizonte.json",
+  "places": 58057,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "pt"
+    ],
+    "coverage": {
+      "en": 0.0,
+      "pt": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Portuguese"
+    ]
+  },
+  "stations_not_open": [
+    {
+      "osm": "node/10912659382",
+      "name": "Estação Vista Alegre",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/10912659385",
+      "name": "Estação de Metrô Barreiro",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/12214028264",
+      "name": "Estação Nova Cintra",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/2602348024",
+      "name": "Estação Ferrugem",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/4966532108",
+      "name": "Estação Nova Gameleira",
+      "tag": "railway=proposed"
+    }
+  ],
+  "area": [
+    {
+      "osm": "relation/368782",
+      "name": "Belo Horizonte",
+      "stations": 20
+    },
+    {
+      "osm": "relation/368786",
+      "name": "Contagem",
+      "stations": 2
+    }
+  ]
+}

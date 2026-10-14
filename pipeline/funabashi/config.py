@@ -323,4 +323,19 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/funabashi.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A description standing in for a name (owner, 2026-10-13)
+    "way/308156212": "'まちかどスポーツ広場': 'street-corner sports square': the city's class name for small sports lots, no name of its own",
+    "way/447362763": "'福祉と緑の宣言都市': the name is a city slogan ('city declared for welfare and greenery'), the text of a sign, on a small green; no park name",
+    # A code beside a type word (owner, 2026-10-13)
+    "way/911272878": "'４号街区公園': 'No. 4 block park': a number and the park class (街区公園), no district name; the full-width digit may be why CODED_TYPE missed it",
+    # A school's or an organisation's ground tagged a park (owner, 2026-10-13)
+    "way/260577019": "'中央保育園園庭': 'Chuo nursery school yard' (園庭): the playground of a nursery, not a public park",
+    # A duplicate of one object (owner, 2026-10-13)
+    "way/431902047": "'船橋大神宮': the shrine's main building, about 55 m from the grounds' row 意富比神社 (way/55679263, alt_name=船橋大神宮, wikipedia=ja:意富比神社)",
+    # A deity's title alone (ruling 3; owner, 2026-10-13)
+    "node/3297981961": "'正一位伏見稲荷大明神': unsure in the full read, dropped by the owner's ruling 3",
+}

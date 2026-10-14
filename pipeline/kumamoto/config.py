@@ -262,4 +262,31 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/kumamoto.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A business (owner, 2026-10-13)
+    "way/1446759353": "'グループホーム響き上代': the name is a care group home's (グループホーム), on an object whose English name says Nonaka Kannon hall: a tenant's or wrong object's name on a worship row",
+    # A glitched name (owner, 2026-10-13)
+    "node/10129352504": "'帯山五丁目': a bus stop (bus operator, timetable link, shelter tag) mistagged leisure=park; the name is the stop's, also a town block's",
+    # A second row of one object (owner, 2026-10-13)
+    "node/6395865344": "'Honmyoji': romaji-only second node of 本妙寺 (node/1423805703, wikidata) 197 m away; one temple, two rows",
+    "node/6189660883": "'熊本城稲荷大明神': 14 m from 熊本城稲荷神社 (way/660867656, wikidata): the same shrine under its other name",
+    "node/10927626527": "'出水神社参道': the approach path (参道) of 出水神社 (way/277383478) 116 m away, tagged as a second place of worship",
+    "node/12917866203": "'大江神社 手水舎': the purification basin (手水舎) of 大江神社, 18 m from the shrine's own row node/12917866202",
+    "node/12917826136": "'是法神社 手水舎': the purification basin (手水舎) of 是法神社, 18 m from the shrine's own row node/12917826133",
+    # A ride in a park indexed as a station (owner, 2026-10-13)
+    "node/8423867176": "'園内モノレールのりば': \"monorail boarding point inside the park\": a ride (zoo and botanical garden), not a railway station",
+    "node/8423867177": "'子ども列車のりば': \"children's train boarding point\": a park ride, 0 public service",
+    # Unsure rows a ruling drops: a stock plaza or rest-area name with no place in it (ruling 5) (owner, 2026-10-13)
+    "node/5307973546": "'みんなの広場': a stock plaza or rest-area name with no place in it",
+    # Owner, 2026-10-13: ruling 5 covers every plaza name with no place in it
+    "node/5294876877": "'湧水広場': a plaza or park-zone name with no place in it",
+}
+# Kept by the owner's word against the bare-type rule (place_index, PLACE_KEPT;
+# owner, 2026-10-13), the id read with its cached name
+# (docs/decisions_drafts/search-rollout.md).
+PLACE_KEPT = {
+    "way/489068359": "'仏舎利塔', the Hanaokayama Peace Pagoda: a monument with a Wikidata entry of its own (Q1456873), taken as a bare type word (owner, 2026-10-13)",
+}

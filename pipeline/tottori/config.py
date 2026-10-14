@@ -238,4 +238,32 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/tottori.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # Worship named only by its body or chain (owner, 2026-10-13)
+    "node/11416571301": "'MOAインターナショナル': the name is only the religious body (MOA International); no branch or place name, no religion tag",
+    # A bare type word (owner, 2026-10-13)
+    "way/1074679293": "'テニス場': \"tennis ground\", a type word; a court inside the Fuse sports park tagged a stadium",
+    "way/399683910": "'野球場': \"baseball ground\", a type word; a facility of the Fuse sports park",
+    "way/358227005": "'陸上競技場': \"athletics stadium\", a type word; a facility of the Fuse sports park",
+    "way/602204728": "'投てき練習場': \"throwing practice ground\", a facility type, not a name",
+    "way/602426553": "'中央広場': \"central plaza\", a type word; a square inside the Fuse sports park",
+    "node/5725877481": "'親水広場': \"waterside plaza\", a type word; a point inside the Fuse sports park",
+    "node/4265566627": "'親水公園': \"waterside park\", a park type with no place name",
+    "node/4489250849": "'緑地公園': \"green-space park\", two type words and no place name",
+    "node/11262433345": "'御神燈': \"sacred lantern\", the object's type; tagged a monument",
+    # A description standing in for a name (owner, 2026-10-13)
+    "way/399712885": "'第一補助競技場': \"first auxiliary field\", a numbered facility of the sports park, not a name",
+    "way/454856539": "'第二補助競技場': \"second auxiliary field\", a numbered facility of the sports park, not a name",
+    "way/729336309": "'小さい公園': \"small park\", a mapper's description",
+    "node/13063048596": "'火山灰露出地': \"volcanic ash exposure\", a description of the ground in the dunes; two rows carry it",
+    "node/13063105320": "'火山灰露出地': \"volcanic ash exposure\", the second row of the same description, 600 m from the first",
+    # A second row of one object (owner, 2026-10-13)
+    "way/391990007": "'犬山神社祈祷殿': the prayer hall of 犬山神社 (way/391990005, 155 m), a part of the shrine with a row of its own",
+    # Unsure rows a ruling drops: a park named only by a category and a lot or inventory number (ruling 1) (owner, 2026-10-13)
+    "way/377421649": "'１号公園': a park named only by a category and a lot or inventory number",
+    # Unsure rows a ruling drops: a religious body's meeting hall or branch tagged a place of worship (ruling 2) (owner, 2026-10-13)
+    "way/423955062": "'真如苑 鳥取布教所': a religious body's meeting hall or branch tagged a place of worship",
+}

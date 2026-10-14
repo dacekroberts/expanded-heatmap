@@ -1,0 +1,26 @@
+{
+  "index": "app/static/places/tottori.json",
+  "places": 10437,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "ja"
+    ],
+    "coverage": {
+      "en": 0.089,
+      "ja": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Japanese"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/4110890",
+      "name": "Tottori",
+      "stations": 13
+    }
+  ]
+}

@@ -107,7 +107,7 @@ st.markdown(
 """
 )
 
-render_map_help('three business categories (Retail, Food service and Personal services)')
+render_map_help('three business categories (Retail, Food service and Personal services)', search='santos')
 render_excluded_stations("Santos (Regional)")
 render_country_links('Santos (Regional)')
 

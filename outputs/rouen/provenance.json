@@ -21,19 +21,19 @@
     "how": "filtered from a regional extract",
     "osm_base": "2026-10-12T20:21:35Z",
     "query": "[out:json][timeout:60];\narea(id:3600075628,3600093029,3600093030,3600102144,3600102145)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
-    "retrieved": "2026-10-13T10:18:13+00:00",
+    "retrieved": "2026-10-13T22:28:36+00:00",
     "sha256": "51de45072a2979e4039cf87404fd21f81efb14a257e813a9bfeab3525384fb4d"
   },
   "osm_places": {
-    "bytes": 4942373,
-    "elements": 41944,
+    "bytes": 4955406,
+    "elements": 42033,
     "file": "osm_places_2026-10-13.json",
     "host": "download.geofabrik.de (haute-normandie-261012.osm.pbf, filtered on this machine)",
-    "how": "filtered from a regional extract",
+    "how": "filtered from a regional extract; shared-border rule on for streets: 18 element(s) admitted that the Overpass query does not return",
     "osm_base": "2026-10-12T20:21:35Z",
     "query": "[out:json][timeout:170];\narea(id:3600075628,3600093029,3600093030,3600102144,3600102145)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
-    "retrieved": "2026-10-13T10:18:13+00:00",
-    "sha256": "a3278ceb8ad4d486031b865430ec89b893057c66e8f70c6e4c9670aa1d076e4a"
+    "retrieved": "2026-10-13T22:28:36+00:00",
+    "sha256": "a687df8f8855ea99d72f610d7483f7b944bd22d90df3c1d81a48f89bbad81e3a"
   },
   "osm_places_extra": {
     "bytes": 44354,
@@ -43,11 +43,24 @@
     "how": "filtered from a regional extract",
     "osm_base": "2026-10-12T20:21:35Z",
     "query": "[out:json][timeout:170];\narea(id:3600075628,3600093029,3600093030,3600102144,3600102145)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
-    "retrieved": "2026-10-13T10:18:13+00:00",
+    "retrieved": "2026-10-13T22:28:37+00:00",
     "sha256": "107960e5709d38f7ba75b900aa4c3cf5f2d908738e8a66de86dae400a4b5f2a9"
   },
   "osm_query": "[out:json][timeout:120];relation[\"type\"=\"route\"][\"route\"~\"^(tram|light_rail)$\"](49.34,0.99,49.49,1.17);out geom;",
   "osm_relations": 6,
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 304,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 3,
+    "ids_not_read": 0,
+    "ids_with_article": 1,
+    "ids_without_article": 2,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "9464597fdcab471ab7f969fce381700c55289e361382f54631e8ec0cf7b75981"
+  },
   "sirene_etab_last_modified": "2026-09-01T09:08:32.653000+00:00",
   "sirene_etab_title": "Sirene : Fichier StockEtablissement - 01 septembre 2026 (format parquet)",
   "sirene_geoloc_last_modified": "2026-09-21T07:01:06.423000+00:00",

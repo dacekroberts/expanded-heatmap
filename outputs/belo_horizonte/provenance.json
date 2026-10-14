@@ -1,28 +1,74 @@
 {
   "cnefe:3106200_BELO_HORIZONTE.zip": {
-    "file": "3106200_BELO_HORIZONTE.zip",
-    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/31_MG/3106200_BELO_HORIZONTE.zip",
     "bytes": 34957820,
-    "sha256": "a12fdb9c9db381787ccee814ec6c6e7de30f780a952d7be6dc70176ecf48892c",
+    "file": "3106200_BELO_HORIZONTE.zip",
+    "last_modified": "Mon, 20 May 2024 22:53:05 GMT",
     "retrieved": "2026-09-24T15:56:23+00:00 (cache file time)",
-    "last_modified": "Mon, 20 May 2024 22:53:05 GMT"
+    "sha256": "a12fdb9c9db381787ccee814ec6c6e7de30f780a952d7be6dc70176ecf48892c",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/31_MG/3106200_BELO_HORIZONTE.zip"
+  },
+  "cnefe:3118601_CONTAGEM.zip": {
+    "bytes": 7697598,
+    "file": "3118601_CONTAGEM.zip",
+    "last_modified": "Mon, 20 May 2024 22:53:09 GMT",
+    "retrieved": "2026-09-28T05:27:25+00:00 (cache file time)",
+    "sha256": "16a86dbb4059813c6c7e365be58f42f1200ad331bd1db6352a44ddff027980f5",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/31_MG/3118601_CONTAGEM.zip"
   },
   "osm_municipios": {
     "file": "osm_municipios.json",
     "host": "overpass-api.de",
     "retrieved": "2026-09-24T15:58:49+00:00 (cache file time)"
   },
+  "osm_place_outline": {
+    "bytes": 367412,
+    "elements": 2,
+    "file": "osm_place_outline_v1.json",
+    "host": "download.geofabrik.de (sudeste-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:60];\narea(id:3600368782,3600368786)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T22:27:10+00:00",
+    "sha256": "61493d5a7bb0dd208d1d7efaa62ca6e07fd3663513d5556cd80eddae7d45d391"
+  },
+  "osm_places": {
+    "bytes": 18287893,
+    "elements": 172850,
+    "file": "osm_places_2026-10-13.json",
+    "host": "download.geofabrik.de (sudeste-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract; shared-border rule on for streets: 29 element(s) admitted that the Overpass query does not return",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3600368782,3600368786)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T22:27:10+00:00",
+    "sha256": "feb424e97abdf9565a51ed0ac22940f7d44bffe9d3bef1cc4c3218b906dd5114"
+  },
+  "osm_places_extra": {
+    "bytes": 107329,
+    "elements": 397,
+    "file": "osm_places_extra_2026-10-13.json",
+    "host": "download.geofabrik.de (sudeste-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3600368782,3600368786)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T22:27:11+00:00",
+    "sha256": "fb397b9479bed2d411f7cf11137b28a309d7cd898fe24b80cb4f2fa16844161d"
+  },
   "osm_rail": {
     "file": "osm_rail.json",
     "host": "overpass-api.de",
     "retrieved": "2026-09-24T16:00:26+00:00 (cache file time)"
   },
-  "cnefe:3118601_CONTAGEM.zip": {
-    "file": "3118601_CONTAGEM.zip",
-    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/31_MG/3118601_CONTAGEM.zip",
-    "bytes": 7697598,
-    "sha256": "16a86dbb4059813c6c7e365be58f42f1200ad331bd1db6352a44ddff027980f5",
-    "retrieved": "2026-09-28T05:27:25+00:00 (cache file time)",
-    "last_modified": "Mon, 20 May 2024 22:53:09 GMT"
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 269,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 2,
+    "ids_not_read": 0,
+    "ids_with_article": 2,
+    "ids_without_article": 0,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "4d9599385982e0b6a5eb853db791113177d6e67b2e3c872bbdfa0d0370741eb7"
   }
 }

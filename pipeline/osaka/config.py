@@ -347,5 +347,11 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
-PLACE_REVIEWED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "三先商店会通": "a street's own name on two unclassified ways: a shopping association's street, a place (as 商店街 is); tags read 2026-10-13",
+    "法円坂遺跡復原倉庫建物": "a rebuilt ancient storehouse at an archaeological site (historic=ruins); its English name holds 'store'; tags read 2026-10-13",
+}
 PLACE_DROPPED = {}

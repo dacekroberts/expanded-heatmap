@@ -122,5 +122,47 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ko",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "근청아파트입구삼거리": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "대우6차아파트": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "라성호텔단일로": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "문화광장 공영주차장사거리": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "본오1차아파트삼거리": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "삼성빌라삼거리": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "전원주택사거리": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "전원주택삼거리": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "중앙역주차장": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+}
+# Dropped by id on the full read of 2026-10-13 under the owner's rulings of the
+# same day, each id read with its cached name (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    # bare type: dropped in the full read (owner, 2026-10-13)
+    "way/472068018": "'게이트볼장': whole name is \"gateball court\", tagged leisure=stadium (full read, bare type)",
+    "way/471350102": "'스케이트장': whole name is \"skating rink\", tagged a park (full read, bare type)",
+    "way/946204522": "'생태공원': whole name is \"ecological park\" (full read, bare type)",
+    "way/1442814625": "'야외조각공원': whole name is \"outdoor sculpture park\" (full read, bare type)",
+    "way/936598496": "'잔디광장': whole name is \"lawn plaza\" (full read, bare type)",
+    "way/544091557": "'동네 놀이터': \"neighbourhood playground\": a type word with a generic qualifier (full read, bare type)",
+    "node/4636729494": "'시계탑': whole name is \"clock tower\", historic=monument only (full read, bare type)",
+    "node/8348409417": "'시계탑': whole name is \"clock tower\", historic=monument only (a second one, 5 km away) (full read, bare type)",
+    "node/13389265935": "'헬멧': whole name is \"helmet\": an object word on a historic=monument node, nothing else (full read, bare type)",
+    # description: dropped in the full read (owner, 2026-10-13)
+    "way/472068011": "'큰나무 쉼터': \"big tree rest spot\": a mapper's description tagged a park (full read, description)",
+    "way/538921474": "'제2과기대 후문 흡연장': \"smoking area at the back gate of the second science college\" tagged a park (full read, description)",
+    "node/414878174": "'안산시-화성시계': \"Ansan city / Hwaseong city boundary\": a boundary point tagged place=locality (full read, description)",
+    # religious office: dropped in the full read (owner, 2026-10-13)
+    "way/468617606": "'천주교안산대리구청': the Catholic vicariate's office (대리구청) tagged a place of worship (full read, religious office)",
+    # religious residence: dropped in the full read (owner, 2026-10-13)
+    "way/646518233": "'도미니코 수도회': building=monastery named only \"Dominican Order\": a residence with no name of its own, no wikidata (full read, religious residence)",
+    # worship denomination only: dropped in the full read (owner, 2026-10-13)
+    "node/13714961558": "'여호와의증인의왕국회관': \"Kingdom Hall of Jehovah's Witnesses\" written without spaces, no congregation name; the rule did not take the unspaced form (full read, worship denomination only)",
+    # duplicate: dropped in the full read (owner, 2026-10-13)
+    "way/761911097": "'뀸의교회': misspelt second building of 꿈의교회 (way/474519770), 58 m away (full read, duplicate)",
+    "node/13613615921": "'신당리마을': a village name stone tagged historic=monument, 24 m from the place row of the same name (node/13613615922) (full read, duplicate)",
+}
+# Why this index reaches more than 25 km past the map's stations
+# (scripts/check_place_scope.py, rule D): a far corner of the municipality itself.
+PLACE_SCOPE_REACH_REASON = "2026-10-13: Pungdo island (풍도동) is part of the city (owner)"

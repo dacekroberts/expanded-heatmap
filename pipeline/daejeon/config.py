@@ -111,5 +111,65 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ko",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "계룡아파트삼거리": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "롯데마트삼거리": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "리베라호텔네거리": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+}
+# Dropped by id on the full read of 2026-10-13 under the owner's rulings of the
+# same day, each id read with its cached name (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    # glitched: dropped in the full read (owner, 2026-10-13)
+    "node/462083659": "'(... Fortress)': a name cut down to an ellipsis and one English word (full read, glitched)",
+    # bare type: dropped in the full read (owner, 2026-10-13)
+    "way/687287292": "'sadang': \"sadang\" is the Korean word for a shrine, romanised (full read, bare type)",
+    "node/4631163316": "'절': \"temple\" (full read, bare type)",
+    "way/496707703": "'본당': \"main hall\" (full read, bare type)",
+    "way/1533010772": "'워쉽센터': \"worship center\", no congregation named (full read, bare type)",
+    "way/840863353": "'기념광장': \"memorial plaza\" (full read, bare type)",
+    "way/840863355": "'진입광장': \"entrance plaza\", 213 m from 기념광장 (full read, bare type)",
+    "way/472045058": "'원형광장': \"circular plaza\" (full read, bare type)",
+    "way/1212175831": "'중정': \"courtyard\" (full read, bare type)",
+    "way/1149063414": "'캠핑장': \"campsite\" (full read, bare type)",
+    "way/472143829": "'유수지': \"retention basin\" (full read, bare type)",
+    "way/499258562": "'유수지': \"retention basin\" (full read, bare type)",
+    # description: dropped in the full read (owner, 2026-10-13)
+    "way/1346324317": "'도서관 앞 마당': \"yard in front of the library\" (full read, description)",
+    "way/1316464421": "'고려시대 건물터': \"building site of the Goryeo period\": a caption, no site name (full read, description)",
+    "node/4902307746": "'고려시대 도로': \"road of the Goryeo period\": a caption (full read, description)",
+    "node/4912416078": "'청동기시대 집자리 유적': \"Bronze Age dwelling remains\": a caption (full read, description)",
+    "node/4643402883": "'구봉중 농구장': \"Gubong Middle School basketball court\": a school's court tagged a stadium (full read, description)",
+    # estate facility: dropped in the full read (owner, 2026-10-13)
+    "way/469676883": "'4단지 광장': \"complex 4 plaza\": named only by an apartment block number (full read, estate facility)",
+    "way/469664013": "'5단지 공원': \"complex 5 park\": named only by an apartment block number (full read, estate facility)",
+    # duplicate: dropped in the full read (owner, 2026-10-13)
+    "way/499318498": "'자광사 본당': the main hall of 자광사, 11 m from the temple's own row (full read, duplicate)",
+    "way/499318499": "'자광사 일주문': the gate of 자광사, 38 m from the temple's own row (full read, duplicate)",
+    # religious education hall: dropped in the full read (owner, 2026-10-13)
+    "way/584945724": "'증산도교육문화회관': the Jeungsando education and culture hall (full read, religious education hall)",
+    # worship by denomination: dropped in the full read (owner, 2026-10-13)
+    "way/584742321": "'예수 그리스도 후기 성도 교회': the Church of Jesus Christ of Latter-day Saints, the body's name alone (full read, worship by denomination)",
+    # article of its kind: dropped in the full read (owner, 2026-10-13)
+    "node/8395631086": "'평화의 소녀상': a local copy carrying the article of the Seoul original; public art with no article of its own (full read, article of its kind)",
+    # unsure in the full read, dropped by ruling 2: a religious body's meeting hall or branch tagged a place of worship (owner, 2026-10-13)
+    "node/6085773378": "'대철회관': 대철회관, a diocese's hall (회관) tagged a place of worship (my reading: a diocese is a body) (unsure in the full read; ruling 2)",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/584742322": "'예수 그리스도 후기 성도 교회': the twin of way/584742321; worship by denomination: dropped in the full read (owner, 2026-10-13)",
+    "way/472148695": "'유수지': the twin of way/472143829; bare type: dropped in the full read (owner, 2026-10-13)",
+    "way/840863360": "'진입광장': the twin of way/840863355; bare type: dropped in the full read (owner, 2026-10-13)",
+    # Twin round 2 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/584742323": "'예수 그리스도 후기 성도 교회': the twin of way/584742321; worship by denomination: dropped in the full read (owner, 2026-10-13)",
+}
+# Kept by the owner's word (place_index, PLACE_KEPT; owner, 2026-10-13): a famous
+# place the rules pass over for want of a tag, the id read with its cached name
+# (docs/decisions_drafts/search-rollout.md). Not yet confirmed by a rebuild.
+PLACE_KEPT = {
+    "way/30614864": "'한밭수목원동', Hanbat Arboretum, east garden (leisure=garden, no Wikidata or Wikipedia tag): a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+    "way/30614866": "'한밭수목원서', Hanbat Arboretum, west garden (leisure=garden, no Wikidata or Wikipedia tag): a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+    "way/68169809": "'대전오월드', O-World (tourism=theme_park, no Wikidata or Wikipedia tag): a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+}

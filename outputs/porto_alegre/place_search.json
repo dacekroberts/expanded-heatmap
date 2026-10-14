@@ -1,0 +1,51 @@
+{
+  "index": "app/static/places/porto_alegre.json",
+  "places": 47740,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "pt"
+    ],
+    "coverage": {
+      "en": 0.001,
+      "pt": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Portuguese"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/242574",
+      "name": "Canoas",
+      "stations": 6
+    },
+    {
+      "osm": "relation/242397",
+      "name": "Porto Alegre",
+      "stations": 6
+    },
+    {
+      "osm": "relation/242616",
+      "name": "Novo Hamburgo",
+      "stations": 4
+    },
+    {
+      "osm": "relation/242399",
+      "name": "São Leopoldo",
+      "stations": 3
+    },
+    {
+      "osm": "relation/242471",
+      "name": "Sapucaia do Sul",
+      "stations": 2
+    },
+    {
+      "osm": "relation/242778",
+      "name": "Esteio",
+      "stations": 1
+    }
+  ]
+}

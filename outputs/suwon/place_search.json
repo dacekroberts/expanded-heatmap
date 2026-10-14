@@ -1,0 +1,27 @@
+{
+  "index": "app/static/places/suwon.json",
+  "places": 6230,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "ko"
+    ],
+    "coverage": {
+      "en": 0.904,
+      "ko": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "English",
+      "Korean"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/2409182",
+      "name": "Suwon-si",
+      "stations": 14
+    }
+  ]
+}

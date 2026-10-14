@@ -281,4 +281,29 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read of this
+# index (rule passes 5 and 6), each id read with its cached name and its index
+# row; grouped by the reader's class.
+PLACE_DROPPED = {
+    # A bare type word standing alone (reader's drop; owner, 2026-10-13)
+    "node/10299479140": "'緑地'",
+    # A code or a number beside a type word, or a number alone (reader's drop; owner, 2026-10-13)
+    "way/1518651775": "'2丁目公園'",
+    # An estate's own facility or marketing name (reader's drop; owner, 2026-10-13)
+    "way/610064889": "'ソフトタウン行徳A棟公園'",
+    "way/610064888": "'ソフトタウン行徳B棟公園'",
+    # Worship named only by a body, a denomination or a chain (reader's drop; owner, 2026-10-13)
+    "node/5126201318": "'市川に在る教会 集会所'",
+    # A second row for one object (the surviving row named in each note) (reader's drop; owner, 2026-10-13)
+    "way/595073164": "'大柏川第一調整池緑地': 0 m from 大柏川第一調節池緑地 (relation/18720840, wikidata=Q11436227); one park, this row under a misspelling",
+    "way/1104426738": "'姥山貝塚公園': 0 m from 姥山貝塚 (node/4721872749, leisure=park with the article); one park",
+    "node/9295666175": "'里美公園': 206 m from 里見公園 (relation/7889603); the node misspells the name its own article gives, and the correctly named relation has no article tag",
+    "node/1397090036": "'明戸古墳石棺': 21 m from 明戸古墳 (node/1397090035); the coffin of the tumulus, kept on the tumulus's article",
+    # Unsure in the read, dropped by ruling 5, a stock plaza or rest-area name with no place in it (owner, 2026-10-13)
+    "node/6194546489": "'いこいの広場'",
+    # Unsure in the read, dropped by the estate ruling, a facility of an estate named for a block or run by the estate itself (owner, 2026-10-13)
+    "way/642019891": "'市営住宅大町(D)児童遊園地'",
+    "way/642019890": "'市営住宅大町(E)児童遊園地'",
+    "way/642019899": "'柏井市営住宅(A)児童遊園地'",
+    "way/642019900": "'柏井市営住宅(B)児童遊園地'",
+}

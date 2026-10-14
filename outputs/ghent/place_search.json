@@ -1,0 +1,26 @@
+{
+  "index": "app/static/places/ghent.json",
+  "places": 9233,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "nl"
+    ],
+    "coverage": {
+      "en": 0.002,
+      "nl": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Dutch"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/897671",
+      "name": "Ghent",
+      "stations": 49
+    }
+  ]
+}

@@ -259,4 +259,23 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/fukui.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A second row of one object (owner, 2026-10-13)
+    "node/14071538577": "'仁愛女子高校': a second row for one tram stop: railway=halt with no other tag, 145 m from the station's own row (node/6966993327, with the article)",
+    "way/219779628": "'柴田神社拝殿': the worship hall (拝殿) of 柴田神社, 10 m from the shrine's own row (way/219779627, with the article)",
+    # Worship named only by its body or chain (owner, 2026-10-13)
+    "node/12103870779": "'立正佼成会': named only by the body (Rissho Kosei-kai); no religion tag",
+    "node/12104015515": "'生長の家': named only by the body (Seicho-no-Ie); no religion tag",
+    "node/11212354802": "'末日イエス・キリスト教会': named only by the body, and that shortened (the Latter-day Saints' church name without its middle); no ward or city in the name",
+    # Unsure rows a ruling drops: a religious body's meeting hall or branch tagged a place of worship (ruling 2) (owner, 2026-10-13)
+    "node/1910884328": "'創価学会 福井平和会館': a religious body's meeting hall or branch tagged a place of worship",
+    # Unsure rows a ruling drops: a hall named only for what it enshrines, or a deity's title alone (ruling 3) (owner, 2026-10-13)
+    "node/11816388279": "'毘沙門天': a hall named only for what it enshrines, or a deity's title alone",
+    # A bare type word (owner, 2026-10-13)
+    "node/12009613983": "'一里塚跡': \"site of a milestone mound\" alone; the other one in the city carries its place name (荒井一里塚跡)",
+    # A description standing in for a name (owner, 2026-10-13)
+    "node/7202212086": "'世界人類が平和でありますように': the inscription of a peace pole (\"May peace prevail on earth\") as the name",
+}

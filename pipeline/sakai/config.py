@@ -312,4 +312,74 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read of this
+# index (rule passes 5 and 6), each id read with its cached name and its index
+# row; grouped by the reader's class.
+PLACE_DROPPED = {
+    # A code or a number beside a type word, or a number alone (reader's drop; owner, 2026-10-13)
+    "way/1172221921": "'1号プレイロット'",
+    "way/809972339": "'堺市第54-04号公共緑地'",
+    "way/866458916": "'堺市第54-07号公共緑地'",
+    "way/806479168": "'堺市第54-08号公共緑地'",
+    "way/1191641351": "'堺市第54-13号公共緑地'",
+    "way/808872368": "'堺市第55-02号公共緑地'",
+    "way/808872341": "'堺市第55-05号公共緑地'",
+    "way/1125503233": "'堺市第55-07号公共緑地'",
+    "way/732172918": "'堺市第55-08号公共緑地'",
+    "way/1036881929": "'堺市第55-10号公共緑地'",
+    "way/1037388465": "'堺市第55-11号公共緑地'",
+    "way/1011461713": "'堺市第55-12号公共緑地'",
+    "way/907777132": "'堺市第55-13号公共緑地'",
+    "way/899452401": "'堺市第56-02号公共緑地'",
+    "way/1033894051": "'堺市第56-07号公共緑地'",
+    "way/806479069": "'堺市第57-08号公共緑地'",
+    "way/998801956": "'堺市第57-14号公共緑地'",
+    "way/1153593578": "'堺市第57-16号公共緑地'",
+    "way/741741820": "'堺市第58-01号公共緑地'",
+    "way/1030978044": "'堺市第58-05号公共緑地'",
+    "way/1030122807": "'堺市第58-08号公共緑地'",
+    "way/1131760314": "'堺市第58-12号公共緑地'",
+    "way/806479174": "'堺市第59-01号公共緑地'",
+    "way/1153593577": "'堺市第59-04号公共緑地'",
+    "way/1041220715": "'堺市第59-05号公共緑地'",
+    # A bare type word standing alone (reader's drop; owner, 2026-10-13)
+    "way/1375426314": "'ちびっこひろば'",
+    "way/235939754": "'いこいの広場'",
+    "way/1002105448": "'イベント広場'",
+    "node/7602221596": "'地蔵尊'",
+    # Unsure in the read, dropped by ruling 3, a hall named only for what it enshrines or a deity's title alone (owner, 2026-10-13)
+    "node/7602219295": "'地蔵堂'",
+    "way/868390284": "'行者堂'",
+    # A second row for one object (the surviving row named in each note) (reader's drop; owner, 2026-10-13)
+    "way/807645144": "'大仙緑道1': one numbered segment of the greenway 大仙緑道, whose relation has its own row (relation/ row 大仙緑道); official_name is the greenway's",
+    "way/807645143": "'大仙緑道10': one numbered segment of the greenway 大仙緑道, whose relation has its own row (relation/ row 大仙緑道); official_name is the greenway's",
+    "way/807645142": "'大仙緑道11': one numbered segment of the greenway 大仙緑道, whose relation has its own row (relation/ row 大仙緑道); official_name is the greenway's",
+    "way/807645141": "'大仙緑道12': one numbered segment of the greenway 大仙緑道, whose relation has its own row (relation/ row 大仙緑道); official_name is the greenway's",
+    "way/807645140": "'大仙緑道13': one numbered segment of the greenway 大仙緑道, whose relation has its own row (relation/ row 大仙緑道); official_name is the greenway's",
+    "way/807645139": "'大仙緑道14': one numbered segment of the greenway 大仙緑道, whose relation has its own row (relation/ row 大仙緑道); official_name is the greenway's",
+    "way/807645138": "'大仙緑道15': one numbered segment of the greenway 大仙緑道, whose relation has its own row (relation/ row 大仙緑道); official_name is the greenway's",
+    "way/807645137": "'大仙緑道16': one numbered segment of the greenway 大仙緑道, whose relation has its own row (relation/ row 大仙緑道); official_name is the greenway's",
+    "way/807645145": "'大仙緑道2': one numbered segment of the greenway 大仙緑道, whose relation has its own row (relation/ row 大仙緑道); official_name is the greenway's",
+    "way/807645146": "'大仙緑道3': one numbered segment of the greenway 大仙緑道, whose relation has its own row (relation/ row 大仙緑道); official_name is the greenway's",
+    "way/807645147": "'大仙緑道4': one numbered segment of the greenway 大仙緑道, whose relation has its own row (relation/ row 大仙緑道); official_name is the greenway's",
+    "way/807645152": "'大仙緑道5': one numbered segment of the greenway 大仙緑道, whose relation has its own row (relation/ row 大仙緑道); official_name is the greenway's",
+    "way/807645151": "'大仙緑道6': one numbered segment of the greenway 大仙緑道, whose relation has its own row (relation/ row 大仙緑道); official_name is the greenway's",
+    "way/807645150": "'大仙緑道7': one numbered segment of the greenway 大仙緑道, whose relation has its own row (relation/ row 大仙緑道); official_name is the greenway's",
+    "way/807645149": "'大仙緑道8': one numbered segment of the greenway 大仙緑道, whose relation has its own row (relation/ row 大仙緑道); official_name is the greenway's",
+    "way/807645148": "'大仙緑道9': one numbered segment of the greenway 大仙緑道, whose relation has its own row (relation/ row 大仙緑道); official_name is the greenway's",
+    "way/1219102530": "'太井４号公園': same park as 太井4号公園 (Healing Garden), about 35 m away, written with a full-width digit",
+    # A business's or a mall's own facility (reader's drop; owner, 2026-10-13)
+    "way/1239504050": "'ドラッグコスモス深井畑山店広場'",
+    "way/1052472763": "'邦和病院広場'",
+    "way/1010750148": "'アリくん広場'",
+    "way/1005017464": "'リオちゃん広場'",
+    "way/968910853": "'まんざき広場'",
+    "way/1061442167": "'クスノキ広場'",
+    "way/1011820209": "'金岡町公園広場'",
+    "way/1220090738": "'ベルファミリアの森'",
+    # An estate's own facility or marketing name (reader's drop; owner, 2026-10-13)
+    "way/1029383540": "'畑山公園'",
+    "way/1373508768": "'ふれあい広場'",
+    # A description standing in for a name (reader's drop; owner, 2026-10-13)
+    "node/9611089981": "'竪穴式石室復元'",
+}

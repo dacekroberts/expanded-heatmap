@@ -234,4 +234,43 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("nl",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the full read of 2026-10-13 under the owner's rulings of the
+# same day, each id read with its cached name (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    # station not: dropped in the full read (owner, 2026-10-13)
+    "node/632448218": "'Centraal Station/Schedeldoekshaven': the description tag says it is a \"Hulphalte\" used only in case of diversions: no regular service stops here (full read, station not)",
+    # description: dropped in the full read (owner, 2026-10-13)
+    "way/4475253": "'Bunschotensestraat': a green strip whose whole name is the street it lies on (a -straat name on leisure=park) (full read, description)",
+    "way/4475256": "'Spakenburgsestraat': a green strip named only by its street (leisure=park, landuse=forest), 70 m from the row above (full read, description)",
+    "way/965325056": "'Steve Bikostraat': a green strip named only by its street (leisure=park, landuse=forest) (full read, description)",
+    # duplicate: dropped in the full read (owner, 2026-10-13)
+    "node/4421669605": "'Lourdes Grotto': the Lourdes grotto chapel again under an English name, 10 m from Lourdeskapel node/1475154377 (which has the wikidata) (full read, duplicate)",
+    "way/289066419": "'Mauritshuis, the Royal Dutch Shell wing': a wing of the Mauritshuis named for its sponsor, 30 m from the Mauritshuis row; its wikipedia tag is the museum's (full read, duplicate)",
+    # business: dropped in the full read (owner, 2026-10-13)
+    "way/267507653": "'Make art worthy': a tenant's name on the Valkenboskerk: the wikidata and wikipedia tags are the church building's, the name is the arts venture inside it (full read, business)",
+    # bare type: dropped in the full read (owner, 2026-10-13)
+    "way/1310637955": "'Folly': \"Folly\", the type word alone (historic=Folly) (full read, bare type)",
+    "node/9609206047": "'Bunker': \"Bunker\", the type word alone (full read, bare type)",
+    "node/1536492831": "'Waterpomp': \"Waterpomp\" (water pump), the type word alone (full read, bare type)",
+    "node/9464381411": "'Schaltbunker': \"Schaltbunker\", a German type word for a kind of bunker, alone (full read, bare type)",
+    "node/2748346684": "'Islamitisch Centrum': \"Islamitisch Centrum\" (Islamic centre), the type alone on a node (full read, bare type)",
+    # worship body: dropped in the full read (owner, 2026-10-13)
+    "way/265342024": "'de Zevende-dags Adventisten': named only by the denomination (Seventh-day Adventists), with an article in front (full read, worship body)",
+    "way/267538968": "'Evangelische Broedergemeente (Hernhutters)': named only by the denomination (Moravian Church, both its Dutch names) (full read, worship body)",
+    "node/6297692817": "'Oud Gereformeerde Gemeenschap': named only by the denomination (Old Reformed) (full read, worship body)",
+    "way/250675077": "'Oud Gereformeerde Gemeente': named only by the denomination; the operator tag is the same body (full read, worship body)",
+    "way/267844139": "'Gemeente van Christus': \"Gemeente van Christus\", the Dutch for Church of Christ, which the rule lists in English only (full read, worship body)",
+    "way/58625236": "'Nieuw-Apostolische Kerk': named only by the denomination (New Apostolic Church) (full read, worship body)",
+    "node/2723985323": "'Hersteld Apostolistische Zendingskerk': named only by the denomination (Restored Apostolic Mission Church) (full read, worship body)",
+    "node/2729415963": "'Ahmadiyya Anjuman Isha 'at Islam Nederland': named only by the body (Ahmadiyya Anjuman Isha'at Islam, Netherlands) (full read, worship body)",
+    "way/426241876": "'Ahmadiyya Anjuman Isha'at Islam Lahore': named only by the body (Ahmadiyya Anjuman Isha'at Islam Lahore); old_name is a church name (full read, worship body)",
+    "node/2726065242": "'Minhaj-ul-Quran': named only by the body (Minhaj-ul-Quran) (full read, worship body)",
+    "node/2729417219": "'Jamiat Ahl Al Hadith': named only by the body (Jamiat Ahl al-Hadith) (full read, worship body)",
+    "node/1566853588": "'Moslim Informatie Centrum': an information centre, a religious office by its own name (alt: Stichting ...), tagged a place of worship (full read, worship body)",
+    "node/1566911426": "'Nationaal Bahá'í-centrum': the national office of the Baha'i community; its wikidata is the article on the faith in the Netherlands, not the building's (full read, worship body)",
+    "node/1566929737": "'Ching Chueh Buddhist Association Netherlands': named only by the body (a Buddhist association, national) (full read, worship body)",
+    "node/2731045197": "'Zen Heart Sangha Nederland': named only by the body (a sangha, national); the description tag repeats it (full read, worship body)",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/1528953782": "'Centraal Station/Schedeldoekshaven': the twin of node/632448218; station not: dropped in the full read (owner, 2026-10-13)",
+}

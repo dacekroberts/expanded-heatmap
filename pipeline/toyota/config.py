@@ -222,4 +222,28 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the full read of 2026-10-13 under the owner's rulings of the
+# same day, each id read with its cached name (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    # bare type: dropped in the full read (owner, 2026-10-13)
+    "way/246266985": "'グラウンド': whole name is the type word \"ground\" (full read, bare type)",
+    "node/7283585974": "'ステージ': whole name is the type word \"stage\" (full read, bare type)",
+    "way/155160128": "'陸上トラック': whole name is \"athletics track\"; no operator or wikidata (full read, bare type)",
+    # business: dropped in the full read (owner, 2026-10-13)
+    "node/6049303485": "'チャペルグレイス Produced by IZUMODEN': wedding hall chapel of a ceremony company (name carries \"Produced by IZUMODEN\"), tagged worship (full read, business)",
+    # home: dropped in the full read (owner, 2026-10-13)
+    "way/1216903463": "'小島プレス工業社員寮の公園': \"park of the Kojima Press company dormitory\", operator is the company: a residents' facility (full read, home)",
+    # description: dropped in the full read (owner, 2026-10-13)
+    "way/1216903464": "'小島プレス工業社員寮前整備緑道': \"improved greenway in front of the Kojima Press company dormitory\": a mapper's description, 20 m from the row above (full read, description)",
+    "way/1216903478": "'鹿島神社併設公園': \"park attached to Kashima shrine\": a description; the shrine has its own row 10 m away (full read, description)",
+    "way/1216903497": "'枝垂緑道中継ロータリー': \"Shidare greenway relay rotary\": a feature of a greenway described, tagged park (full read, description)",
+    "way/1216882368": "'枝垂緑道休憩エリア': \"Shidare greenway rest area\": a feature described, tagged park (full read, description)",
+    "way/1216903515": "'枝垂緑道東屋': \"Shidare greenway gazebo\": a shelter described, tagged park (full read, description)",
+    # duplicate: dropped in the full read (owner, 2026-10-13)
+    "node/11275599162": "'枝垂緑道休憩所': \"Shidare greenway rest place\": same object as way/1216882368, 25 m away (full read, duplicate)",
+    "node/7257280860": "'水汲遺跡\u3000碑': the marker stone of 水汲遺跡 (way/779476578), 50 m away, same tag (full read, duplicate)",
+    "node/8096770904": "'上挙母': second node of one station, 20 m from node/7758318966 which carries the wikidata; same ref MY06 (full read, duplicate)",
+}
+# Why this index reaches more than 25 km past the map's stations
+# (scripts/check_place_scope.py, rule D): a far corner of the municipality itself.
+PLACE_SCOPE_REACH_REASON = "2026-10-13: the merged mountain towns in the city's east are inside its boundary (owner)"

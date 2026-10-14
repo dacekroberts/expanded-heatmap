@@ -277,4 +277,25 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the full read of 2026-10-13 under the owner's rulings of the
+# same day, each id read with its cached name (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    # glitch: dropped in the full read (owner, 2026-10-13)
+    "way/621470725": "'川口市並木町公园': last character is the simplified Chinese form of \"park\" (园), not the Japanese one; a search in Japanese never matches it (full read, glitch)",
+    # duplicate: dropped in the full read (owner, 2026-10-13)
+    "node/12709313822": "'宝厳院水舎': the wash-basin shelter of the temple that already has its row (node/12709313821, 15 m away), tagged a place of worship of its own (full read, duplicate)",
+    "node/12709285479": "'宝厳院仁王門': the gate of the same temple, 25 m from the temple's row (full read, duplicate)",
+    "node/12709285477": "'宝厳院薬師堂': a hall of the same temple, 30 m from the temple's row (full read, duplicate)",
+    "relation/20129763": "'西光院本堂': the main hall of the temple that has its own row with the article (way/596489512), 45 m away (full read, duplicate)",
+    "way/1037871040": "'鳩ヶ谷氷川神社': one shrine twice, 15 m apart: this building outline and node/1986152896, which carries the English name; either may go, the node has more (full read, duplicate)",
+    # bare type: dropped in the full read (owner, 2026-10-13)
+    "node/12709285476": "'薬師堂': \"Yakushi hall\", the hall type alone, 20 m from the temple's row and beside the row that names the same hall with the temple's name (full read, bare type)",
+    # religious office: dropped in the full read (owner, 2026-10-13)
+    "node/12709273774": "'慈林薬師会館': a meeting hall (kaikan) of the same temple precinct tagged a place of worship (full read, religious office)",
+    # unsure in the full read, dropped by ruling 3: a hall named only for what it enshrines, or a deity's title alone (owner, 2026-10-13)
+    "way/560361350": "'阿弥陀堂': 阿弥陀堂, listed in the ruling (unsure in the full read; ruling 3)",
+    "way/675351923": "'太子堂': 太子堂, listed in the ruling (unsure in the full read; ruling 3)",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/12709285478": "'薬師堂': the twin of node/12709285476; bare type: dropped in the full read (owner, 2026-10-13)",
+}

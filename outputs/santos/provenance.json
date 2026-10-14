@@ -1,28 +1,74 @@
 {
   "cnefe:3548500_SANTOS.zip": {
-    "file": "3548500_SANTOS.zip",
-    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/35_SP/3548500_SANTOS.zip",
     "bytes": 3948134,
-    "sha256": "f49d02bb7f71373b65c3c73e5636a89633116209668a1754a4d1fb8e94121d4f",
+    "file": "3548500_SANTOS.zip",
+    "last_modified": "Mon, 20 May 2024 22:54:01 GMT",
     "retrieved": "2026-09-24T15:57:15+00:00 (cache file time)",
-    "last_modified": "Mon, 20 May 2024 22:54:01 GMT"
+    "sha256": "f49d02bb7f71373b65c3c73e5636a89633116209668a1754a4d1fb8e94121d4f",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/35_SP/3548500_SANTOS.zip"
   },
   "cnefe:3551009_SAO_VICENTE.zip": {
-    "file": "3551009_SAO_VICENTE.zip",
-    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/35_SP/3551009_SAO_VICENTE.zip",
     "bytes": 3189142,
-    "sha256": "6e88b5ad49f8d1482d7134abacb2c51496ee00e6174f2f73aad4e7558d809c5b",
+    "file": "3551009_SAO_VICENTE.zip",
+    "last_modified": "Mon, 20 May 2024 22:54:03 GMT",
     "retrieved": "2026-09-24T15:57:18+00:00 (cache file time)",
-    "last_modified": "Mon, 20 May 2024 22:54:03 GMT"
+    "sha256": "6e88b5ad49f8d1482d7134abacb2c51496ee00e6174f2f73aad4e7558d809c5b",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/35_SP/3551009_SAO_VICENTE.zip"
   },
   "osm_municipios": {
     "file": "osm_municipios.json",
     "host": "overpass-api.de",
     "retrieved": "2026-09-24T17:05:37+00:00 (cache file time)"
   },
+  "osm_place_outline": {
+    "bytes": 183065,
+    "elements": 2,
+    "file": "osm_place_outline_v1.json",
+    "host": "download.geofabrik.de (sudeste-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:60];\narea(id:3600297995,3600298442)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T22:24:26+00:00",
+    "sha256": "95feca933a149ab08e4e90cfe0f7d7836aa67f4fa1dce2b2ebb97a751ab6e530"
+  },
+  "osm_places": {
+    "bytes": 3453791,
+    "elements": 32494,
+    "file": "osm_places_2026-10-13.json",
+    "host": "download.geofabrik.de (sudeste-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract; shared-border rule on for streets: 0 element(s) admitted that the Overpass query does not return",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3600297995,3600298442)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T22:24:26+00:00",
+    "sha256": "5b9165e8c72976749cca2683f27f696523ad54d28d0efe9601a28937565ef82d"
+  },
+  "osm_places_extra": {
+    "bytes": 28215,
+    "elements": 112,
+    "file": "osm_places_extra_2026-10-13.json",
+    "host": "download.geofabrik.de (sudeste-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3600297995,3600298442)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T22:24:26+00:00",
+    "sha256": "a60cc0c10665cc5e3876c6a21a78b24891b3f077a20db7534e89ddb2201b57fb"
+  },
   "osm_rail": {
     "file": "osm_rail.json",
     "host": "overpass-api.de",
     "retrieved": "2026-09-24T17:05:40+00:00 (cache file time)"
+  },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 317,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 2,
+    "ids_not_read": 0,
+    "ids_with_article": 2,
+    "ids_without_article": 0,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "26fffe9e49f1f98cadb132421c7b4c0db6c9dc337a36629e57bddc5f6eb27122"
   }
 }

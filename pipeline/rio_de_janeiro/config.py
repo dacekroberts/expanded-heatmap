@@ -141,3 +141,21 @@ if REGIONAL:
                           "its stops beyond Gramacho not ringed: fails the rail test")
 SPACING_MIN_M = 300.0
 COLLAPSE_MAX_SPREAD_M = 400
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
+
+PLACE_AREA = "(id:3602220782,3602697338)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
+PLACE_LANGUAGES = ("pt",)
+PLACE_FOLD = None
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "Museu da Farmácia da Santa Casa de Misericórdia": "a museum (tourism=museum, wikidata); 'farmácia' is its subject; tags read 2026-10-13",
+}
+PLACE_DROPPED = {}
+# Why this index reaches more than 25 km past the map's stations
+# (scripts/check_place_scope.py, rule D): a far corner of the municipality itself.
+PLACE_SCOPE_REACH_REASON = "2026-10-13: the municipality's west zone (Santa Cruz, Guaratiba, Marambaia) has no station of the map (owner)"

@@ -119,5 +119,37 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ko",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "공구상가삼거리": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "공영주차장삼거리": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "극동아파트 교차로": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "극동아파트앞": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "대진아파트앞교차로": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "두산아파트입구": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "복사골아파트": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "삼익아파트입구": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "성림연립앞": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "아파트형공장삼거리": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "영안아파트": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "우성아파트입구": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+}
+# Dropped by id on the full read of 2026-10-13 under the owner's rulings of the
+# same day, each id read with its cached name (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    # estate facility: dropped in the full read (owner, 2026-10-13)
+    "way/472047721": "'201동 옥상공원': \"block 201 rooftop park\": an apartment block's roof garden (full read, estate facility)",
+    "way/472047719": "'202동 옥상공원': \"block 202 rooftop park\": an apartment block's roof garden (full read, estate facility)",
+    # worship office: dropped in the full read (owner, 2026-10-13)
+    "node/7142102685": "'꼰솔라따 선교수도회': a missionary order's house named by the order alone (Consolata Missionaries), tagged a place of worship; no entry (full read, worship office)",
+    # business: dropped in the full read (owner, 2026-10-13)
+    "node/4631505143": "'동우빌 고시텔': a goshitel (rented rooms) tagged a place of worship (full read, business)",
+    # description: dropped in the full read (owner, 2026-10-13)
+    "way/289842007": "'부청시청 잔디밭': \"city hall lawn\" (the city's name misspelled); operator is the city hall (full read, description)",
+    "way/1206300925": "'시민운동장 농구장': \"citizens' stadium basketball court\": a court described, tagged a park (full read, description)",
+    "node/4820719536": "'중앙광장, 휴게소': \"central plaza, rest area\": two type words with a comma (full read, description)",
+    # bare type: dropped in the full read (owner, 2026-10-13)
+    "node/4811262689": "'중앙광장': \"central plaza\" alone (full read, bare type)",
+}

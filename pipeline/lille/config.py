@@ -304,5 +304,162 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("fr",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "Hôtel Bidé de la Grandville": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00107594, tourism=attraction, wikidata Q17630181): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Castiaux": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00107597, tourism=attraction, wikidata Q15950414): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Delbecque": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00107598, tourism=attraction, wikidata Q22960790): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Petipas de Walle": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00107605, tourism=attraction, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Ramery": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00107607, tourism=attraction, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Scrive": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00107593, tourism=attraction, wikidata Q22960788): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Van Zeller": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00107609, tourism=attraction, wikidata Q18736729): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Van der Cruisse de Waziers": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00107608, tourism=attraction, wikidata Q18736728): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Wallaert": "a listed historic mansion or public building, a hôtel in the French sense (heritage=3, tourism=attraction, wikidata Q98704425): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel d'Ailly-d'Aigrenont": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00107591, tourism=attraction, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Lamissart": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00107601, tourism=attraction, wikidata Q3145873): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Madre": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00107602, tourism=attraction, wikidata Q22960791): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de l'Intendance": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00107599, tourism=attraction, wikidata Q18005453): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel des Postes": "a listed building tagged an attraction (ref:mhs, heritage=3, wikidata): a post office building's name, not a hotel; tags read 2026-10-13",
+    "Hôtel particulier (hôtel de Tenremonde)": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00107915, tourism=attraction, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Rue de la Brasserie": "a public street named for a building or institution on it, not a business (residential class; the two parking aisles of the name are left out by rule); tags read 2026-10-13",
+    "Rue de la Grande Brasserie": "a public street named for a building or institution on it, not a business (residential class; batch 2b precedent, _named_street); tags read 2026-10-13",
+    "Rue du Magasin": "a public street named for a building or institution on it, not a business (residential class; batch 2b precedent, _named_street); tags read 2026-10-13",
+}
+# Dropped by id on the leak-word read of 2026-10-13, each id read with its cached
+# name and tags (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    "node/2063752408": "a description standing in for a name ('former mansion'): a listed building with no name of its own in OSM and no article (Ancien hôtel); tags read 2026-10-13",
+    "node/2063752623": "a bare type standing in for a name ('private mansion') on four listed buildings, none with a name of its own in OSM or an article (Hôtel particulier); tags read 2026-10-13",
+    "node/2063752640": "a bare type standing in for a name ('private mansion') on four listed buildings, none with a name of its own in OSM or an article (Hôtel particulier); tags read 2026-10-13",
+    "node/2063752650": "a bare type standing in for a name ('private mansion') on four listed buildings, none with a name of its own in OSM or an article (Hôtel particulier); tags read 2026-10-13",
+    "node/2063752654": "a bare type standing in for a name ('private mansion') on four listed buildings, none with a name of its own in OSM or an article (Hôtel particulier); tags read 2026-10-13",
+    # Added on the owner's rulings of 2026-10-13 on the full read (the reader's
+    # verdict file data/_search_rollout/reads_rules56/lille.tsv), each id read
+    # with its cached name; grouped by class.
+    # A bare type word (owner, 2026-10-13)
+    "node/2063752667": "'Immeuble': \"Immeuble\" (building): the monument register's type word standing in for a name, on a private building listed for its facades; its own wikidata is why the bare-type rule let it through",
+    "node/2063752726": "'Immeuble': \"Immeuble\", same class (a listed carved sign set in a facade)",
+    "node/2063752810": "'Immeuble': \"Immeuble\", same class",
+    "node/2063752905": "'Immeubles': \"Immeubles\" (buildings), same class",
+    "node/2063753139": "'Immeubles': \"Immeubles\", same class",
+    "node/2063753276": "'Maison': \"Maison\" (house): type word alone on a private house listed for its facades; also a home",
+    "node/2063753420": "'Maison': \"Maison\", same class",
+    "node/2063753440": "'Maison': \"Maison\", same class",
+    "node/2063753519": "'Maison': \"Maison\", same class",
+    "node/2063753575": "'Maisons': \"Maisons\" (houses), same class",
+    "node/2063753634": "'Maisons': \"Maisons\", same class",
+    "node/2063754170": "'Maisons': \"Maisons\", same class",
+    "way/76662559": "'Pigeonnier': \"Pigeonnier\" (dovecote), a type word alone; the wikidata and article are the chateau's, not its own",
+    "node/5871747099": "'Pirogue': \"Pirogue\" (dugout canoe): an exhibit 30 m inside Parc Archéologique Asnapio, named by its type",
+    "node/13980947601": "'Mosquée': \"Mosquée\" alone",
+    # A description standing in for a name (owner, 2026-10-13)
+    "node/2063753249": "'Maison de fond de cour': \"Maison de fond de cour\" (house at the back of a courtyard): the register's description of a private house, no name",
+    "node/13329930129": "'Riverside Viewpoint': an English description (\"Riverside Viewpoint\") with a malformed article link to another place's park",
+    "way/1087868029": "'Pommiers en libre cueillette (ville nouricière)': \"apple trees, free picking (nourishing city)\": a mapper's note about a planting, not a park's name",
+    # A business (owner, 2026-10-13)
+    "way/40875556": "'Terres d'aventure': \"Terres d'aventure\" is a travel agency, the shop tenant; the listed object is the first-floor apartment of the corner building",
+    "node/8995839603": "'Lycée européen Thérèse d'Avila': a lycee's name on a place-of-worship node: a school, or its chapel carrying the school's name",
+    # A religious office (owner, 2026-10-13)
+    "way/77491411": "'Aumônerie Romero': \"Aumônerie Romero\": a student chaplaincy, an office and meeting room rather than a church",
+    # Worship named only by its body or chain (owner, 2026-10-13)
+    "way/85096961": "'Église Protestante Unie de France': named only by the denomination's national body (Église Protestante Unie de France)",
+    "node/12544983261": "'Église évangélique assemblée de dieu': \"Église évangélique assemblée de dieu\": a denomination's name alone",
+    # A station not open to the public (owner, 2026-10-13)
+    "node/745664618": "'Station d'essais techniques des 4 Cantons': \"technical test station of 4 Cantons\": the metro's test track facility, no passenger service",
+    # A second row of one object (owner, 2026-10-13)
+    "way/1166758999": "'Gare de Lille-Flandres': second row of Lille-Flandres (node/8745537419, same UIC and GTFS stop id) 191 m away",
+    "node/8773867859": "'Gare Lille Flandres': second stop position of the tram stop Gare Lille Flandres, 43 m from node/871279130",
+    "node/1219182102": "'Pont de Wasquehal': second stop position of Pont de Wasquehal, 177 m from node/1219181688",
+    "node/1219181778": "'Wasquehal – Pavé de Lille': second stop position of Wasquehal – Pavé de Lille, 85 m from node/1219181445",
+    "node/9385022353": "'Le Stadium': a locality node \"Le Stadium\" 167 m from the stadium's own landmark row (way/802327323, wikidata)",
+    "node/9385022347": "'Hameau d'Epinoy': \"Hameau d'Epinoy\" 198 m from the locality \"Epinoy\" (node/9385022346): one hamlet, two nodes",
+    "node/9349940293": "'L'Hempempont': \"L'Hempempont\" 216 m from the suburb node \"Hempempont\" (node/931255150): one place, two nodes",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/2063752677": "'Immeuble': the twin of node/2063752667; A bare type word (owner, 2026-10-13)",
+    "node/2063752715": "'Immeuble': the twin of node/2063752667; A bare type word (owner, 2026-10-13)",
+    "node/2063752815": "'Immeuble': the twin of node/2063752667; A bare type word (owner, 2026-10-13)",
+    "node/2063752915": "'Immeubles': the twin of node/2063752905; A bare type word (owner, 2026-10-13)",
+    "node/2063753102": "'Immeubles': the twin of node/2063752905; A bare type word (owner, 2026-10-13)",
+    "node/2063753143": "'Immeubles': the twin of node/2063752905; A bare type word (owner, 2026-10-13)",
+    "node/2063753429": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    "node/2063753460": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    "node/2063753524": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    "node/2063753624": "'Maisons': the twin of node/2063753575; A bare type word (owner, 2026-10-13)",
+    "node/2063753723": "'Maisons': the twin of node/2063753575; A bare type word (owner, 2026-10-13)",
+    "node/2063754186": "'Maisons': the twin of node/2063753575; A bare type word (owner, 2026-10-13)",
+    # Twin round 2 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/2063752702": "'Immeuble': the twin of node/2063752667; A bare type word (owner, 2026-10-13)",
+    "node/2063752762": "'Immeuble': the twin of node/2063752667; A bare type word (owner, 2026-10-13)",
+    "node/2063753001": "'Immeubles': the twin of node/2063752905; A bare type word (owner, 2026-10-13)",
+    "node/2063753113": "'Immeubles': the twin of node/2063752905; A bare type word (owner, 2026-10-13)",
+    "node/2063753430": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    "node/2063753495": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    "node/2063753504": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    # Twin round 3 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/2063752688": "'Immeuble': the twin of node/2063752667; A bare type word (owner, 2026-10-13)",
+    "node/2063752697": "'Immeuble': the twin of node/2063752667; A bare type word (owner, 2026-10-13)",
+    "node/2063752741": "'Immeuble': the twin of node/2063752667; A bare type word (owner, 2026-10-13)",
+    "node/2063752759": "'Immeuble': the twin of node/2063752667; A bare type word (owner, 2026-10-13)",
+    "node/2063752878": "'Immeubles': the twin of node/2063752905; A bare type word (owner, 2026-10-13)",
+    "node/2063753433": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    "node/2063753501": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    "node/2063753515": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    # Twin round 4 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/2063752693": "'Immeuble': the twin of node/2063752667; A bare type word (owner, 2026-10-13)",
+    "node/2063752756": "'Immeuble': the twin of node/2063752667; A bare type word (owner, 2026-10-13)",
+    "node/2063752779": "'Immeuble': the twin of node/2063752667; A bare type word (owner, 2026-10-13)",
+    "node/2063752882": "'Immeubles': the twin of node/2063752905; A bare type word (owner, 2026-10-13)",
+    "node/2063753358": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    # Twin round 5 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/2063752709": "'Immeuble': the twin of node/2063752667; A bare type word (owner, 2026-10-13)",
+    "node/2063752774": "'Immeuble': the twin of node/2063752667; A bare type word (owner, 2026-10-13)",
+    "node/2063752891": "'Immeubles': the twin of node/2063752905; A bare type word (owner, 2026-10-13)",
+    "node/2063753327": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    # Twin round 6 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/2063752734": "'Immeuble': the twin of node/2063752667; A bare type word (owner, 2026-10-13)",
+    "node/2063752901": "'Immeubles': the twin of node/2063752905; A bare type word (owner, 2026-10-13)",
+    "node/2063753333": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    # Twin round 7 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/2063752737": "'Immeuble': the twin of node/2063752667; A bare type word (owner, 2026-10-13)",
+    "node/2063753009": "'Immeubles': the twin of node/2063752905; A bare type word (owner, 2026-10-13)",
+    "node/2063753362": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    # Twin round 8 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/2063752750": "'Immeuble': the twin of node/2063752667; A bare type word (owner, 2026-10-13)",
+    "node/2063752928": "'Immeubles': the twin of node/2063752905; A bare type word (owner, 2026-10-13)",
+    "node/2063753436": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    # Twin round 9 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/2063752972": "'Immeubles': the twin of node/2063752905; A bare type word (owner, 2026-10-13)",
+    "node/2063753380": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    # Twin round 10 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/2063752873": "'Immeubles': the twin of node/2063752905; A bare type word (owner, 2026-10-13)",
+    "node/2063753076": "'Immeubles': the twin of node/2063752905; A bare type word (owner, 2026-10-13)",
+    "node/2063753314": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    "node/2063753443": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    # Twin round 11 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/2063752865": "'Immeubles': the twin of node/2063752905; A bare type word (owner, 2026-10-13)",
+    "node/2063753089": "'Immeubles': the twin of node/2063752905; A bare type word (owner, 2026-10-13)",
+    "node/2063753307": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    "node/2063753320": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    "node/2063753463": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    # Twin round 12 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/2063752869": "'Immeubles': the twin of node/2063752905; A bare type word (owner, 2026-10-13)",
+    "node/2063753339": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+    # Twin round 13 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/2063752872": "'Immeubles': the twin of node/2063752905; A bare type word (owner, 2026-10-13)",
+    "node/2063753352": "'Maison': the twin of node/2063753276; A bare type word (owner, 2026-10-13)",
+}

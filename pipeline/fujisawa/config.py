@@ -404,5 +404,43 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "中部駐車場前": "a signed junction (highway=traffic_signals) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "片瀬海岸地下駐車場入口": "a signed junction (highway=traffic_signals) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "西部駐車場前": "a signed junction (highway=traffic_signals) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "辻堂海浜公園東駐車場前": "a signed junction (highway=traffic_signals) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "辻堂海浜公園西駐車場南": "a signed junction (highway=traffic_signals) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read of this
+# index (rule passes 5 and 6), each id read with its cached name and its index
+# row; grouped by the reader's class.
+PLACE_DROPPED = {
+    # A bare type word standing alone (reader's drop; owner, 2026-10-13)
+    "way/1031393242": "'緑の広場'",
+    "way/1135905538": "'緑の広場'",
+    "way/1467102881": "'緑の広場'",
+    "way/214177596": "'緑の広場'",
+    "node/10931689472": "'休憩広場'",
+    "node/7921943544": "'永代供養塔'",
+    "way/1369399151": "'不動尊堂'",
+    "node/2299128875": "'太子堂'",
+    "node/13351373099": "'稲荷大神'",
+    # A code or a number beside a type word, or a number alone (reader's drop; owner, 2026-10-13)
+    "way/1415449803": "'第135号みどりの広場'",
+    "way/547261539": "'第162号 緑の広場'",
+    "way/677638527": "'第195号 みどりの広場'",
+    "way/270106859": "'第233号 緑の広場'",
+    "way/556084224": "'第39号緑の広場'",
+    "way/806853393": "'緑の広場43号'",
+    # Unsure in the read, dropped by ruling 3, a hall named only for what it enshrines or a deity's title alone (owner, 2026-10-13)
+    "way/1151377970": "'豊受大神'",
+    # A religious office, hall or residence tagged a place of worship (reader's drop; owner, 2026-10-13)
+    "node/7660152676": "'聖心の布教姉妹会'",
+    # A second row for one object (the surviving row named in each note) (reader's drop; owner, 2026-10-13)
+    "node/4255746102": "'カトリック藤沢教会': 29 m from 藤沢カトリック教会 (way/426269618, the building): one church, two rows under two word orders",
+    # Closed, not built or gone (reader's drop; owner, 2026-10-13)
+    "node/12877086197": "'村岡新駅（仮称）'",
+}

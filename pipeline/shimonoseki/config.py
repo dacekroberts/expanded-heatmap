@@ -222,4 +222,36 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the full read of 2026-10-13 under the owner's rulings of the
+# same day, each id read with its cached name (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    # bare type: dropped in the full read (owner, 2026-10-13)
+    "way/389150325": "'土俵': \"sumo ring\" alone, tagged a place of worship (full read, bare type)",
+    "way/1001085283": "'農村公園': \"rural park\" alone (full read, bare type)",
+    "way/488785143": "'運動広場': \"sports ground\" alone (full read, bare type)",
+    # business: dropped in the full read (owner, 2026-10-13)
+    "node/4607738483": "'菊川典礼会館': a funeral hall (典礼会館) tagged a place of worship (full read, business)",
+    # estate facility: dropped in the full read (owner, 2026-10-13)
+    "way/1112862070": "'高杉団地内公園': \"park inside the Takasugi housing estate\" (団地内公園) (full read, estate facility)",
+    # duplicate: dropped in the full read (owner, 2026-10-13)
+    "node/5244210886": "'毘沙ノ鼻': the cape as a locality, 234 m from the viewpoint row of the same name that carries the entry (node/920270977) (full read, duplicate)",
+    # unsure in the full read, dropped by ruling E: a facility of an estate named for a block or as inside the estate (owner, 2026-10-13)
+    "way/1030843952": "'リフレッシュタウン室津内公園': a park \"inside\" (内) a housing development (unsure in the full read; ruling E)",
+    # unsure in the full read, dropped by ruling 2: a religious body's meeting hall or branch tagged a place of worship (owner, 2026-10-13)
+    "way/483838357": "'創価学会 下関平和会館': 創価学会 ... 平和会館, listed in the ruling (unsure in the full read; ruling 2)",
+    # unsure in the full read, dropped by ruling 4: a part of one shrine or temple that has a row of its own within about 300 m (owner, 2026-10-13)
+    "way/1363532011": "'功山寺山門': the gate of 功山寺, whose row is 67 m away (unsure in the full read; ruling 4)",
+    "node/10275623667": "'正一位立石稲荷大明神 奥之院': the inner shrine of 正一位立石稲荷大明神, whose row is 19 m away (unsure in the full read; ruling 4)",
+    # unsure in the full read, dropped by ruling 9: one bay or sea labeled many times, one row stays (owner, 2026-10-13)
+    "node/4697079700": "'響灘': one sea labeled twelve times; node/5244181726 stays (unsure in the full read; ruling 9)",
+    "node/4697161256": "'響灘': one sea labeled twelve times; node/5244181726 stays (unsure in the full read; ruling 9)",
+    "node/4697192905": "'響灘': one sea labeled twelve times; node/5244181726 stays (unsure in the full read; ruling 9)",
+    "node/4702867668": "'響灘': one sea labeled twelve times; node/5244181726 stays (unsure in the full read; ruling 9)",
+    "node/5244178585": "'響灘': one sea labeled twelve times; node/5244181726 stays (unsure in the full read; ruling 9)",
+    "node/5244182659": "'響灘': one sea labeled twelve times; node/5244181726 stays (unsure in the full read; ruling 9)",
+    "node/5244187854": "'響灘': one sea labeled twelve times; node/5244181726 stays (unsure in the full read; ruling 9)",
+    "node/5244198711": "'響灘': one sea labeled twelve times; node/5244181726 stays (unsure in the full read; ruling 9)",
+    "node/5244203995": "'響灘': one sea labeled twelve times; node/5244181726 stays (unsure in the full read; ruling 9)",
+    "node/5244210339": "'響灘': one sea labeled twelve times; node/5244181726 stays (unsure in the full read; ruling 9)",
+    "node/5244217951": "'響灘': one sea labeled twelve times; node/5244181726 stays (unsure in the full read; ruling 9)",
+}

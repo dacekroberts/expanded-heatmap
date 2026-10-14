@@ -197,5 +197,46 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("fr",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "Rue de l'Hôtel des Postes": "a public street named for a building or institution on it, not a business (tertiary class; batch 2b precedent, _named_street); tags read 2026-10-13",
+}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read of this
+# index (rule passes 5 and 6), each id read with its cached name and its index
+# row; grouped by the reader's class.
+PLACE_DROPPED = {
+    # Worship named only by a body, a denomination or a chain (reader's drop; owner, 2026-10-13)
+    "way/141316195": "'JW'",
+    "way/139138100": "'Calvary Chapel'",
+    "node/1327949579": "'Église Néo Apostolique'",
+    "way/144390480": "'Église adventiste du Septième Jour'",
+    "node/13376754372": "'Église de Scientologie'",
+    # A religious office, hall or residence tagged a place of worship (reader's drop; owner, 2026-10-13)
+    "way/141276024": "'Évêché de Nice'",
+    # A description standing in for a name (reader's drop; owner, 2026-10-13)
+    "way/1214617353": "'clocher de l'église'",
+    # A bare type word standing alone (reader's drop; owner, 2026-10-13)
+    "way/923675822": "'Cour de récréation'",
+    "way/923675828": "'Snack'",
+    # Unsure in the read, dropped by ruling 11, a private beach concession tagged only a beach (owner, 2026-10-13)
+    "way/487779952": "'Bambou Plage'",
+    "way/487779950": "'Cocoon Beach'",
+    "way/487779969": "'Beau Rivage'",
+    "way/487779961": "'Bella Nissa'",
+    "way/487779963": "'Blue Beach'",
+    "way/487779967": "'Galion Plage'",
+    "way/487779959": "'La Vela'",
+    "way/487779941": "'Les Canailles'",
+    "way/487779956": "'Li Rateta'",
+    "way/487779965": "'Lido Plage'",
+    "way/487779971": "'Opera Plage'",
+    "way/487779966": "'Ruhl Plage'",
+    "way/487779964": "'Sporting Plage'",
+    "relation/16442029": "'Plage Castel'",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/923675842": "'Cour de récréation': the twin of way/923675822; A bare type word standing alone (reader's drop; owner, 2026-10-13)",
+    "way/487779958": "'Li Rateta': the twin of way/487779956; Unsure in the read, dropped by ruling 11, a private beach concession tagged only a beach (owner, 2026-10-13)",
+}

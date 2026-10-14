@@ -1,42 +1,88 @@
 {
+  "cnefe:3301702_DUQUE_DE_CAXIAS.zip": {
+    "bytes": 10850283,
+    "file": "3301702_DUQUE_DE_CAXIAS.zip",
+    "last_modified": "Mon, 20 May 2024 22:53:37 GMT",
+    "retrieved": "2026-09-28T05:27:32+00:00 (cache file time)",
+    "sha256": "a623c397f2ea1da70a901117d2abedb360e08ff31ec1690e346a69ba7949c14c",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/33_RJ/3301702_DUQUE_DE_CAXIAS.zip"
+  },
   "cnefe:3304557_RIO_DE_JANEIRO.zip": {
-    "file": "3304557_RIO_DE_JANEIRO.zip",
-    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/33_RJ/3304557_RIO_DE_JANEIRO.zip",
     "bytes": 94594981,
-    "sha256": "688e6693ebb93eac908033c238bfb1372771f49c0a6fd1ba566ea1fecfb16c91",
+    "file": "3304557_RIO_DE_JANEIRO.zip",
+    "last_modified": "Mon, 20 May 2024 22:53:43 GMT",
     "retrieved": "2026-09-24T15:56:14+00:00 (cache file time)",
-    "last_modified": "Mon, 20 May 2024 22:53:43 GMT"
-  },
-  "rio_metro_estacoes_19": {
-    "file": "rio_metro_estacoes_19.geojson",
-    "url": "https://pgeo3.rio.rj.gov.br/arcgis/rest/services/Transporte_Trafego/Transporte_publico/MapServer/19/query?where=1%3D1&outFields=*&outSR=4326&f=geojson",
-    "bytes": 20517,
-    "sha256": "c598b5772dea1f631d077a1c85703b2fbf4374796733498aa7884735c9bd2c08",
-    "retrieved": "2026-09-24T17:05:41+00:00 (cache file time)"
-  },
-  "rio_metro_linhas_18": {
-    "file": "rio_metro_linhas_18.geojson",
-    "url": "https://pgeo3.rio.rj.gov.br/arcgis/rest/services/Transporte_Trafego/Transporte_publico/MapServer/18/query?where=1%3D1&outFields=*&outSR=4326&f=geojson",
-    "bytes": 14627,
-    "sha256": "9f51183d52f00a7e047827837414c677038cfbe4f8a6f6cdfa4a59867de672bb",
-    "retrieved": "2026-09-24T17:05:42+00:00 (cache file time)"
+    "sha256": "688e6693ebb93eac908033c238bfb1372771f49c0a6fd1ba566ea1fecfb16c91",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/33_RJ/3304557_RIO_DE_JANEIRO.zip"
   },
   "osm_municipios": {
     "file": "osm_municipios.json",
     "host": "overpass.kumi.systems",
     "retrieved": "2026-09-24T15:58:34+00:00 (cache file time)"
   },
+  "osm_place_outline": {
+    "bytes": 1006517,
+    "elements": 2,
+    "file": "osm_place_outline_v1.json",
+    "host": "download.geofabrik.de (sudeste-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:60];\narea(id:3602220782,3602697338)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T22:33:29+00:00",
+    "sha256": "d70fec39f147c25d9e4dcf1191cc4650b239d6b04783b6a75a3c86106ab981f4"
+  },
+  "osm_places": {
+    "bytes": 40732050,
+    "elements": 400208,
+    "file": "osm_places_2026-10-13.json",
+    "host": "download.geofabrik.de (sudeste-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract; shared-border rule on for streets: 0 element(s) admitted that the Overpass query does not return",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3602220782,3602697338)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T22:33:30+00:00",
+    "sha256": "c59dacce41dd7c1058b43c3ef405ce8b4dd77ce8c21b20518affbe4f8566c23c"
+  },
+  "osm_places_extra": {
+    "bytes": 204893,
+    "elements": 759,
+    "file": "osm_places_extra_2026-10-13.json",
+    "host": "download.geofabrik.de (sudeste-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3602220782,3602697338)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T22:33:32+00:00",
+    "sha256": "bdabf848b1032f8c100a000a9868b68428264c631fa2e783021da488fbc3e70c"
+  },
   "osm_rail": {
     "file": "osm_rail.json",
     "host": "overpass-api.de",
     "retrieved": "2026-09-24T15:58:45+00:00 (cache file time)"
   },
-  "cnefe:3301702_DUQUE_DE_CAXIAS.zip": {
-    "file": "3301702_DUQUE_DE_CAXIAS.zip",
-    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/33_RJ/3301702_DUQUE_DE_CAXIAS.zip",
-    "bytes": 10850283,
-    "sha256": "a623c397f2ea1da70a901117d2abedb360e08ff31ec1690e346a69ba7949c14c",
-    "retrieved": "2026-09-28T05:27:32+00:00 (cache file time)",
-    "last_modified": "Mon, 20 May 2024 22:53:37 GMT"
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 2747,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 76,
+    "ids_not_read": 0,
+    "ids_with_article": 9,
+    "ids_without_article": 67,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "2ad28d5e00bc054abfe35d31f39c221b57dd561ca5d47d3a6c65c6b9b16d6fa6"
+  },
+  "rio_metro_estacoes_19": {
+    "bytes": 20517,
+    "file": "rio_metro_estacoes_19.geojson",
+    "retrieved": "2026-09-24T17:05:41+00:00 (cache file time)",
+    "sha256": "c598b5772dea1f631d077a1c85703b2fbf4374796733498aa7884735c9bd2c08",
+    "url": "https://pgeo3.rio.rj.gov.br/arcgis/rest/services/Transporte_Trafego/Transporte_publico/MapServer/19/query?where=1%3D1&outFields=*&outSR=4326&f=geojson"
+  },
+  "rio_metro_linhas_18": {
+    "bytes": 14627,
+    "file": "rio_metro_linhas_18.geojson",
+    "retrieved": "2026-09-24T17:05:42+00:00 (cache file time)",
+    "sha256": "9f51183d52f00a7e047827837414c677038cfbe4f8a6f6cdfa4a59867de672bb",
+    "url": "https://pgeo3.rio.rj.gov.br/arcgis/rest/services/Transporte_Trafego/Transporte_publico/MapServer/18/query?where=1%3D1&outFields=*&outSR=4326&f=geojson"
   }
 }

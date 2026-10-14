@@ -1,0 +1,27 @@
+{
+  "index": "app/static/places/namyangju.json",
+  "places": 2514,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "ko"
+    ],
+    "coverage": {
+      "en": 0.641,
+      "ko": 0.999
+    },
+    "list_share": 0.5,
+    "listed": [
+      "English",
+      "Korean"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/2409175",
+      "name": "Namyangju-si",
+      "stations": 17
+    }
+  ]
+}

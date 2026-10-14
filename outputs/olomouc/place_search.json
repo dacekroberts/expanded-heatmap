@@ -1,0 +1,26 @@
+{
+  "index": "app/static/places/olomouc.json",
+  "places": 2280,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "cs"
+    ],
+    "coverage": {
+      "en": 0.006,
+      "cs": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Czech"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/437057",
+      "name": "Olomouc",
+      "stations": 36
+    }
+  ]
+}

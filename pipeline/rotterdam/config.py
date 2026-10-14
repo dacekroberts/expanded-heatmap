@@ -240,4 +240,37 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("nl",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the full read of 2026-10-13 under the owner's rulings of the
+# same day, each id read with its cached name (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    # station not passenger: dropped in the full read (owner, 2026-10-13)
+    "node/290920719": "'Opstelspoor De Esch': name says a stabling siding (opstelspoor) at De Esch, not a stop passengers use (full read, station not passenger)",
+    # duplicate: dropped in the full read (owner, 2026-10-13)
+    "node/4002902580": "'Eendrachtsplein': second stop_position of one tram stop, 49 m from node/666972237 (full read, duplicate)",
+    "node/4204114599": "'Heemraadsplein': second stop_position of one tram stop, 201 m from node/668725829 (full read, duplicate)",
+    "node/3469142365": "'Marconiplein': second stop_position of one tram stop, 82 m from node/3468022988 (full read, duplicate)",
+    "node/6486371652": "'Noordsingel': second stop_position of one tram stop, 160 m from node/668733215 (full read, duplicate)",
+    "node/582544759": "'Oostplein': one of five stop_position nodes of the Oostplein tram stop, all within 281 m; node/2388757909 would stay beside the metro row (full read, duplicate)",
+    "node/2388757864": "'Oostplein': one of five stop_position nodes of the Oostplein tram stop; node/2388757909 would stay (full read, duplicate)",
+    "node/2388757969": "'Oostplein': one of five stop_position nodes of the Oostplein tram stop; node/2388757909 would stay (full read, duplicate)",
+    "node/6337907117": "'Oostplein': one of five stop_position nodes of the Oostplein tram stop; node/2388757909 would stay (full read, duplicate)",
+    "node/6137626904": "'Rotterdam Centraal': one of three tram stop_position nodes at Rotterdam Centraal, 110 m from node/2351978940 (full read, duplicate)",
+    "node/6137626907": "'Rotterdam Centraal': one of three tram stop_position nodes at Rotterdam Centraal, 65 m from node/2351978940 (full read, duplicate)",
+    "node/2351978945": "'Stadhuis': second stop_position of one tram stop, 33 m from node/2351978944 (full read, duplicate)",
+    "way/1529035134": "'Vroesenpark': second way of one tram stop, 0 m from way/1529035133 (full read, duplicate)",
+    "node/2788985004": "'Petrakerkgemeente': the congregation as a second node 11 m from its church (way/54085634) (full read, duplicate)",
+    # bare type: dropped in the full read (owner, 2026-10-13)
+    "way/140531841": "'Strand': whole name is the type word Strand (beach) (full read, bare type)",
+    "way/297314211": "'Naaktstrand': whole name is a type (nudist beach); the named Hoek van Holland one is a separate row (full read, bare type)",
+    # worship denomination: dropped in the full read (owner, 2026-10-13)
+    "way/275004870": "'Nederlandse Gereformeerde Kerk': denomination name only (Nederlandse Gereformeerde Kerk), same as its operator tag (full read, worship denomination)",
+    "way/272932469": "'Geref. kerken in Ned. Vrijgemaakt': denomination name only, abbreviated (Gereformeerde Kerken vrijgemaakt) (full read, worship denomination)",
+    "way/273954608": "'Kerk van de Nazarener': denomination name only (Church of the Nazarene) (full read, worship denomination)",
+    "way/268184800": "'Kerk van Christus': denomination name only (Church of Christ), denomination tag iglesia_ni_cristo (full read, worship denomination)",
+    # business: dropped in the full read (owner, 2026-10-13)
+    "way/274110898": "'Monuta Memoriam': a funeral company's branch (the website tag is the company's), tagged multifaith place of worship (full read, business)",
+    # religious office: dropped in the full read (owner, 2026-10-13)
+    "node/1588781716": "'Jeugdgebouw GK': a church's youth building, tagged place of worship (full read, religious office)",
+    # exhibit kind wikidata: dropped in the full read (owner, 2026-10-13)
+    "node/8773049806": "'Darwins nandoe': an animal enclosure in the zoo (attraction=animal); the wikidata is the species' (full read, exhibit kind wikidata)",
+}

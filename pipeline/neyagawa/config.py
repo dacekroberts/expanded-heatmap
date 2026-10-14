@@ -189,4 +189,16 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read of this
+# index (rule passes 5 and 6), each id read with its cached name and its index
+# row; grouped by the reader's class.
+PLACE_DROPPED = {
+    # A bare type word standing alone (reader's drop; owner, 2026-10-13)
+    "way/584188150": "'テニスコート'",
+    "node/9295480072": "'ちびっこ老人憩いの広場'",
+    "way/771039305": "'水辺の広場'",
+    # A description standing in for a name (reader's drop; owner, 2026-10-13)
+    "way/573117279": "'小規模公園(すべり台)'",
+    # An estate's own facility or marketing name (reader's drop; owner, 2026-10-13)
+    "way/844102843": "'ブランズタワー公開敷地'",
+}

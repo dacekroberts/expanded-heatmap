@@ -236,5 +236,98 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "市農協本店前": "a signed junction (highway=traffic_signals) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/himeji.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A business (owner, 2026-10-13)
+    "way/448494074": "'MAC-C 建設室': a company's construction office (建設室) in the Daicel works, beside ダイセル異人館; historic=building only, no article",
+    # A home (owner, 2026-10-13)
+    "way/317473256": "'今村家住宅': a family's house (家住宅) with historic=building only: no tourism tag, no article, no public function in the tags",
+    "way/318663064": "'伊豆原家住宅': a family's house (家住宅), historic=building only",
+    "way/318663066": "'山下家住宅': a family's house (家住宅), historic=building only",
+    "way/318663074": "'福居家住宅': a family's house (家住宅), historic=building only",
+    "node/2494628956": "'吉中家住宅': a family's house (家住宅), historic=building only",
+    "node/2494628871": "'東城家住宅': a family's house (家住宅), historic=building only",
+    "node/2494626547": "'大西邸': a person's residence (邸), historic=building only",
+    # A bare type word (owner, 2026-10-13)
+    "way/422892360": "'テニスコート': \"tennis court\" alone on leisure=park",
+    "node/8810858673": "'社': \"shrine\" (社) alone",
+    "way/1383474229": "'慰霊石': \"memorial stone\" alone, a part of a shrine mapped as a worship building; four such parts within 40 m",
+    "way/1383474230": "'狛犬': \"guardian dogs\" alone, a part of the same shrine",
+    "way/1383474231": "'神輿矢倉': \"portable-shrine store\" alone, a part of the same shrine",
+    "way/690896261": "'礎石': \"foundation stone\" alone, a part of the same shrine",
+    "node/2837149399": "'狛犬(あ)': \"guardian dog (a)\": a part of 射楯兵主神社 mapped as a monument",
+    "node/2837155336": "'狛犬(ん)': \"guardian dog (un)\", as above",
+    "node/2837155185": "'神馬': \"sacred horse\" alone, a statue in the same shrine",
+    "node/2517279557": "'石鳥居': \"stone torii\" alone",
+    "node/2483283827": "'鯱': \"shachi\" (roof ornament) alone, a display at the castle",
+    "node/2494654291": "'道標': \"waymarker\" (道標) alone",
+    "node/2500255274": "'道標': \"waymarker\" (道標) alone",
+    "node/2494633302": "'題目碑': \"daimoku stele\" alone",
+    "node/2494718444": "'常明燈': \"ever-burning lantern\" alone",
+    "node/2483253200": "'石灯籠': \"stone lantern\" alone, tagged an archaeological site",
+    "node/2483159390": "'竪濠': \"vertical moat\" alone (alt \"Moat\"), in the castle",
+    # A number or code beside a type word (owner, 2026-10-13)
+    "way/1356926899": "'第一公園': \"Park No. 1\": a number beside the type; four such lots within 400 m of each other",
+    "way/1356926898": "'第二公園': \"Park No. 2\", as above",
+    "way/1240623047": "'第三公園': \"Park No. 3\", as above",
+    "way/1240623048": "'第四公園': \"Park No. 4\", as above",
+    # A religious office (owner, 2026-10-13)
+    "way/1383473155": "'地蔵盆宮脇集会所': a neighbourhood meeting hall (集会所) tagged a place of worship",
+    # A description standing in for a name (owner, 2026-10-13)
+    "way/1376608794": "'由耒': \"origin\" (由来, written with a variant character): the notice board of a shrine tagged a place of worship; inscription=由耒",
+    "node/2483153738": "'迎賓館側 石灯籠': \"stone lantern beside the guest house\"",
+    "node/2483149646": "'公園中心のモニュメント': \"the monument in the middle of the park\"",
+    # Unsure rows a ruling drops: a hall named only for what it enshrines, or a deity's title alone (ruling 3) (owner, 2026-10-13)
+    "way/490276770": "'布袋尊': a hall named only for what it enshrines, or a deity's title alone",
+    "node/6188120540": "'観音堂': a hall named only for what it enshrines, or a deity's title alone",
+    "way/670512729": "'大日堂': a hall named only for what it enshrines, or a deity's title alone",
+    "way/694036719": "'薬師堂': a hall named only for what it enshrines, or a deity's title alone",
+    "way/1376502295": "'文珠堂': a hall named only for what it enshrines, or a deity's title alone",
+    "way/523948806": "'不動堂': a hall named only for what it enshrines, or a deity's title alone",
+    # A second row of one object (owner, 2026-10-13)
+    "way/670263469": "'湊神社境内': the grounds (境内) of Minato shrine, 55 m from 湊神社本殿 (way/670263470): two rows, one shrine",
+    # Unsure rows a ruling drops: a part of one temple that has no row of its own: the main hall stays as the way to find it, the other parts go (ruling 4) (owner, 2026-10-13)
+    "node/2505452132": "'随願寺念仏堂': a part of one temple that has no row of its own: the main hall stays as the way to find it, the other parts go",
+    # Unsure rows a ruling drops: a part of one shrine or temple as its own row, the shrine or temple a row within about 300 m (ruling 4) (owner, 2026-10-13)
+    "way/694036712": "'三十三所堂': a part of one shrine or temple as its own row, the shrine or temple a row within about 300 m",
+    "way/523948797": "'開山堂': a part of one shrine or temple as its own row, the shrine or temple a row within about 300 m",
+    # Unsure rows a ruling drops: a religious body's meeting hall or branch tagged a place of worship (ruling 2) (owner, 2026-10-13)
+    "way/427173626": "'創価学会 姫路平和講堂': a religious body's meeting hall or branch tagged a place of worship",
+    # Public art under another object's article (owner, 2026-10-13)
+    "node/6516185671": "'第一番 那智山青岸渡寺': a Kannon statue of a replica 33-temple pilgrimage on 書写山; the wikipedia tag is the real temple's in another prefecture, not the statue's; 25 such rows",
+    "node/6516185664": "'第七番 東光山龍蓋寺': as above",
+    "node/6516185668": "'第三番 風猛山粉河寺': as above",
+    "node/6516242523": "'第丗三番 谷汲山華厳寺': as above",
+    "node/6516242533": "'第丗二番 繖山観音正寺': as above",
+    "node/6516242535": "'第丗番 竹生島宝厳寺': as above",
+    "node/6516185657": "'第九番 興福寺南円堂': as above",
+    "node/6516185669": "'第二番 紀三井山金剛宝寺': as above",
+    "node/6516185666": "'第五番 紫雲山葛井寺': as above",
+    "node/6516185662": "'第八番 豊山長谷寺': as above",
+    "node/6516185655": "'第十一番 深雪山醍醐寺': as above",
+    "node/6516185648": "'第十七番 補陀洛山六波羅蜜寺': as above",
+    "node/6516185653": "'第十三番 石光山石山寺': as above",
+    "node/6516185646": "'第十九番 革堂行願寺': as above",
+    "node/6516185647": "'第十八番 紫雲山頂法寺': as above",
+    "node/6516185649": "'第十六番 音羽山清水寺': as above",
+    "node/6516185656": "'第十番 明星山三室戸寺': as above",
+    "node/6516185667": "'第四番 槙尾山施福寺': as above",
+    "node/6516185643": "'第廿一番 菩提山穴太寺': as above",
+    "node/6516242542": "'第廿三番 応頂山勝尾寺': as above",
+    "node/6516242539": "'第廿五番 御嶽山清水寺': as above",
+    "node/6516242537": "'第廿八番 成相山成相寺': as above",
+    "node/6516242538": "'第廿六番 法華山一乗寺': as above",
+    "node/6516242540": "'第廿四番 紫雲山中山寺': as above",
+    "node/6516185644": "'第廿番 西山善峰寺': as above",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1383475070": "'慰霊石': the twin of way/1383474229; A bare type word (owner, 2026-10-13)",
+}

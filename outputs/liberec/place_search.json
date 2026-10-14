@@ -1,0 +1,31 @@
+{
+  "index": "app/static/places/liberec.json",
+  "places": 4500,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "cs"
+    ],
+    "coverage": {
+      "en": 0.003,
+      "cs": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Czech"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/439073",
+      "name": "Liberec",
+      "stations": 34
+    },
+    {
+      "osm": "relation/438931",
+      "name": "Jablonec nad Nisou",
+      "stations": 6
+    }
+  ]
+}

@@ -77,12 +77,12 @@
  "guadalajara": {
   "in_ring": 36729,
   "all": 116945,
-  "map_blob": "48bec7d81300a1d1029ef2d159d55f9f8d1c7c8e"
+  "map_blob": "00c766ac79cc2bd8675626cbce70eea3b80c1732"
  },
  "madrid": {
   "in_ring": 49537,
   "all": 52240,
-  "map_blob": "eeff6446473ecce46b13294afad8251aa2627cc9"
+  "map_blob": "93b827dedf99d554ea3d9fe1403ea7dd124a0d21"
  },
  "barcelona": {
   "in_ring": 35287,
@@ -112,27 +112,27 @@
  "toulouse": {
   "in_ring": 5532,
   "all": 8592,
-  "map_blob": "4b11cf608b2e42e79b8a441ee4b9c0be6bf16f16"
+  "map_blob": "07147c79f14646c39e98725bf68700bdceb9c82e"
  },
  "lille": {
   "in_ring": 7162,
   "all": 11733,
-  "map_blob": "aaba949def85dfd74334f9d9dfbc500dcdfa1f36"
+  "map_blob": "f178216733075d59495f6c7927066fb584402869"
  },
  "rennes": {
   "in_ring": 2353,
   "all": 3445,
-  "map_blob": "fdb251376d315cd9945faec9494e917bb73b0524"
+  "map_blob": "0f1a2b4093c87b138b8a2aaff82c93d7ac9cb115"
  },
  "oslo": {
   "in_ring": 8080,
   "all": 10678,
-  "map_blob": "64925d634b6f74d4107130be11553b59d41a9614"
+  "map_blob": "9a4b9ebedfd36b02fe7faa969ad6ba20a53a8289"
  },
  "copenhagen": {
   "in_ring": 16545,
   "all": 18677,
-  "map_blob": "88a25d3b6864babf1880d01748d95b8888b4dc74"
+  "map_blob": "61d8a2986abb1a427295b21e6f640477e45d51ae"
  },
  "prague": {
   "in_ring": 21462,
@@ -142,12 +142,12 @@
  "amsterdam": {
   "in_ring": 12648,
   "all": 13238,
-  "map_blob": "c3a3ff731a5acf946095e8dabff248d5ca4aeab3"
+  "map_blob": "297d85a3ba00f5dbf53c08a024d90e3a964b9d88"
  },
  "rome": {
   "in_ring": 60739,
   "all": 98897,
-  "map_blob": "c70023977c839d1983ed0d9d89cd099e788d136c"
+  "map_blob": "0470d8f8e03facf5fb85dd766e8b601c535a5a4f"
  },
  "sao_paulo": {
   "in_ring": 50436,
@@ -157,47 +157,47 @@
  "rio_de_janeiro": {
   "in_ring": 33029,
   "all": 125440,
-  "map_blob": "612d632ec1974d80d6ae0a2f2bb8d28e6b811b80"
+  "map_blob": "3f5f7162fd9e862b1524ec8ee4395c24914bf300"
  },
  "belo_horizonte": {
   "in_ring": 9346,
   "all": 58552,
-  "map_blob": "07842ba1e6f4c676337778e58f8c9a349b792b52"
+  "map_blob": "b478fbd9d3e4e74c1aa252356fdbf71f52581498"
  },
  "brasilia": {
   "in_ring": 5072,
   "all": 36700,
-  "map_blob": "dabb89eca0765a7f9df729600a64ce3dbabddbb2"
+  "map_blob": "eb87ba033938af58169571181ea4e81ce95cb232"
  },
  "salvador": {
   "in_ring": 10070,
   "all": 52986,
-  "map_blob": "b57b896ade7410105bb638d3b2b4bff5197783ad"
+  "map_blob": "59a5f01b2120bd7103c7984e09d35e2a0f952d7d"
  },
  "fortaleza": {
   "in_ring": 8537,
   "all": 63036,
-  "map_blob": "4d16040e84f78ef85f61037cef1dad9a14b61415"
+  "map_blob": "992b782f3875893a886eaafe17b27b5be177e190"
  },
  "porto_alegre": {
   "in_ring": 7425,
   "all": 36454,
-  "map_blob": "7ae0b0ae6c5d611c6e7c4395d59d52b1c050e196"
+  "map_blob": "e8ecfca6645ffb4524864e280402e17eff373fca"
  },
  "recife": {
   "in_ring": 10365,
   "all": 44332,
-  "map_blob": "7448870c6650aec701a6fead5e74e746671b196a"
+  "map_blob": "f62465221400278af5982d0972813389b9065fa4"
  },
  "santos": {
   "in_ring": 5391,
   "all": 11822,
-  "map_blob": "2c5d7054a6b4cb13c82d4735eac1dd564c1ee455"
+  "map_blob": "288dddc02098a8dcce78419d61f2acd7aec0b261"
  },
  "rotterdam": {
   "in_ring": 6982,
   "all": 7520,
-  "map_blob": "4796193671624b2ba269c5eadf3c580d596c15ac"
+  "map_blob": "f79b12c812ff65944aeb7298405ab1b5f9b3adf4"
  },
  "hong_kong": {
   "in_ring": 19275,
@@ -207,7 +207,7 @@
  "riga": {
   "in_ring": 5213,
   "all": 6725,
-  "map_blob": "4e83c5022abf437791eea7a96fbb685acb98a235"
+  "map_blob": "3ad402e6dbfddf5c8c0f37b7f927f6496a85e8cc"
  },
  "seoul": {
   "in_ring": 224381,
@@ -217,22 +217,22 @@
  "taichung": {
   "in_ring": 12250,
   "all": 63780,
-  "map_blob": "f8e85932ddad66c04d52326a4e73d629717f4f84"
+  "map_blob": "f0d0acf07c0f7091bd97e470766d6704cb7ba26e"
  },
  "taoyuan": {
   "in_ring": 5104,
   "all": 43532,
-  "map_blob": "9174006568c088a548510cab02cba231817e6eb4"
+  "map_blob": "7f0f86c2068053422390ac3b5b40a6f0a79d1a8f"
  },
  "taipei": {
   "in_ring": 100505,
   "all": 129102,
-  "map_blob": "dcc9ce76c3b9c2192632a6c6c1a68a8e397515ef"
+  "map_blob": "ed18e3fb397d7b3dcbab66146d1090562236c07a"
  },
  "daegu": {
   "in_ring": 47724,
   "all": 67212,
-  "map_blob": "65bf90ee00c2486cbb45d0b72628a63769b5e9ec"
+  "map_blob": "90a839a1ff719feb491fa16e072119c414de2586"
  },
  "busan": {
   "in_ring": 66348,
@@ -242,27 +242,27 @@
  "monterrey": {
   "in_ring": 14630,
   "all": 58329,
-  "map_blob": "6baa237d786c050a6078ef2a81028c0a8f2cb399"
+  "map_blob": "e16bb2fed062ce872c627c27f6e54aaff0f5c81c"
  },
  "kobe": {
   "in_ring": 23804,
   "all": 27280,
-  "map_blob": "0f91002d2aef1155fd40abbadd93802c2e85ecde"
+  "map_blob": "8098a7e3051036a186f539f9327abcee3a5bfab2"
  },
  "osaka": {
   "in_ring": 71690,
   "all": 73011,
-  "map_blob": "8965169e5cc8050381c1b6411a985e211bccf9ef"
+  "map_blob": "e91038cfe109a4d9900a78086758ac0c935002a2"
  },
  "sapporo": {
   "in_ring": 23009,
   "all": 28688,
-  "map_blob": "32efe5deb61547137dd9e3de7b95a6c8207f64f7"
+  "map_blob": "02616115036d2b0f4868fa0635373831640c3a9c"
  },
  "fukuoka": {
   "in_ring": 24607,
   "all": 29943,
-  "map_blob": "0daf3089a02ea6af32920e6df3b5fba0970f96b8"
+  "map_blob": "20cb52e1de2a27fe22ff6575a7648c9faa3c3023"
  },
  "kyoto": {
   "in_ring": 28008,
@@ -277,7 +277,7 @@
  "berlin": {
   "in_ring": 49394,
   "all": 60268,
-  "map_blob": "e50d536904526fd0e2a715b34d1554c8c127f427"
+  "map_blob": "cbf2a01a5bc7f685a7927b0ac3498f2aa194ca79"
  },
  "london": {
   "in_ring": 41574,
@@ -287,7 +287,7 @@
  "buenos_aires": {
   "in_ring": 41633,
   "all": 62765,
-  "map_blob": "e25e76d05d3ba9e8f364a82bfa65c5872939c685"
+  "map_blob": "cec0b06ab57577dc51519979f85732ceff09ba29"
  },
  "glasgow": {
   "in_ring": 1993,
@@ -312,52 +312,52 @@
  "stockholm": {
   "in_ring": 4666,
   "all": 5218,
-  "map_blob": "4a629e6597869d33e3370d3261d0b8761a9d8a74"
+  "map_blob": "13efbae01fd417b255bc90c356acfe8c19a7191e"
  },
  "bucharest": {
   "in_ring": 11242,
   "all": 15589,
-  "map_blob": "e6189887be854447fc3f195474ba52496fdfabf4"
+  "map_blob": "8685c950b73d051533d5856294cfac45ba14a1c5"
  },
  "incheon": {
   "in_ring": 56426,
   "all": 82671,
-  "map_blob": "b861b2ec4de83fcedb28547bf2ca82d69b14efa1"
+  "map_blob": "d6a87f6964c43a6e7d69b60adbcae96268ce0f13"
  },
  "goyang": {
   "in_ring": 18519,
   "all": 27808,
-  "map_blob": "40d6bb57d6a35a1d7fd962eed5f1694d09de6290"
+  "map_blob": "ec5a6a71556dfca5c89804dd3d5fdf928da497fa"
  },
  "seongnam": {
   "in_ring": 19418,
   "all": 25529,
-  "map_blob": "9e768c05394d5b2454bd42497cf24afde2091ec6"
+  "map_blob": "0aa2ac2f5ddf1784b31299f9c30c2a105113c41f"
  },
  "yongin": {
   "in_ring": 13003,
   "all": 23481,
-  "map_blob": "49297d144a64ed75a8e0c8b5f2c030e3d3792892"
+  "map_blob": "fdaa20bd4db59cbf4ea8b257144424ac4b46cb14"
  },
  "suwon": {
   "in_ring": 15928,
   "all": 33433,
-  "map_blob": "3be7975e936541fe5e7fc75c07f16977deec122f"
+  "map_blob": "d445a5a91385a4f9a0e8711a1266cd7e2756e5b8"
  },
  "bucheon": {
   "in_ring": 18093,
   "all": 22512,
-  "map_blob": "b6eb47c856ed4a0f87726aff262d9461bf9c7438"
+  "map_blob": "903b553702e90c5880bcfea898a75bfe660d2dd4"
  },
  "bergen": {
   "in_ring": 2106,
   "all": 3597,
-  "map_blob": "4d440ceca97c0b4eb9094900d2ff78c5dfa435ac"
+  "map_blob": "bd862331badb7dae5db452c9a6653017d9a3b5fe"
  },
  "aarhus": {
   "in_ring": 1300,
   "all": 5102,
-  "map_blob": "0186006387b9ff22f4fced574e21f48068b906cc"
+  "map_blob": "947b5a74e5368a8f21c7bca24f5b8756ba35e09b"
  },
  "buffalo": {
   "in_ring": 376,
@@ -377,17 +377,17 @@
  "odense": {
   "in_ring": 1154,
   "all": 2834,
-  "map_blob": "daa4c0576fcb733f19c5e7e3a0c0b6ce2fa412b8"
+  "map_blob": "f5068592293b750682c498d63dfcddd420b0debe"
  },
  "liepaja": {
   "in_ring": 489,
   "all": 702,
-  "map_blob": "67e3c6a5527a85a41f27b0323b636f8c96b39570"
+  "map_blob": "a3bae548f82669d3aaa292fc8476fe5e40ef1bcd"
  },
  "daugavpils": {
   "in_ring": 656,
   "all": 819,
-  "map_blob": "81d62a5bc15284f0846c1e28048eb1fe59220d0d"
+  "map_blob": "b5e96f8d69853cd46a9f779a8d9df914e27819b5"
  },
  "kansas_city": {
   "in_ring": 451,
@@ -407,122 +407,122 @@
  "florence": {
   "in_ring": 4435,
   "all": 12052,
-  "map_blob": "152d5d728d9d74a8b229cf02369c16b04656a8aa"
+  "map_blob": "20b8c340df1f26510580f3acc05a0db3c816f2a0"
  },
  "goteborg": {
   "in_ring": 2256,
   "all": 2989,
-  "map_blob": "8d01b1fc45da55500da40ddad446e7a934d4e786"
+  "map_blob": "e7bf2d57b9664977fda486d5cdb9c9f53ea7695e"
  },
  "den_haag": {
   "in_ring": 5781,
   "all": 6213,
-  "map_blob": "9d3fe53f75ef15e8125266b757e8079e11861823"
+  "map_blob": "98ca159734ad869464f7e7a8e74c68b1e7bf703c"
  },
  "zurich": {
   "in_ring": 3099,
   "all": 3363,
-  "map_blob": "6e4985ed761bbbe7eb14a8e5b3b80fc22f5f0f5f"
+  "map_blob": "31afae28b2a0b9a2d0f168af173defb71eba2420"
  },
  "le_mans": {
   "in_ring": 1462,
   "all": 1991,
-  "map_blob": "ecdb5a0bfd7acd4d30c870e0323fe2f8a8c9a2b5"
+  "map_blob": "58a04054b92ec1ef6e667c999a05cc8a946e7e7e"
  },
  "besancon": {
   "in_ring": 1300,
   "all": 2042,
-  "map_blob": "05390f0b8b0c627237f5a96473dc98a4f1f95a3c"
+  "map_blob": "34b2e5845a7ad189406935e9275f20a9bf1d1338"
  },
  "avignon": {
   "in_ring": 622,
   "all": 2416,
-  "map_blob": "c2ab0fb0d3339fe61161a07103a52f7019e4602c"
+  "map_blob": "7e26fced66df93436d5e409628730295879f9f29"
  },
  "tours": {
   "in_ring": 1741,
   "all": 2652,
-  "map_blob": "26ed5841a6b14fea81355dc663c76d0fc4468d99"
+  "map_blob": "177ea81210f833e3543b255680d6a13bfd2420bc"
  },
  "dijon": {
   "in_ring": 1777,
   "all": 2668,
-  "map_blob": "97a4b52eb63e5017891c147e0fc4281156f35624"
+  "map_blob": "bce49507ab0cb017903f0a04371c3f7c1a20f1d6"
  },
  "reims": {
   "in_ring": 1457,
   "all": 2662,
-  "map_blob": "c0c4ff4aa840c6d765bc6cc2d8f78ce638b8ed2e"
+  "map_blob": "e6fda1586ef0f1f7c131bf36fa8d22a510b5661c"
  },
  "orleans": {
   "in_ring": 1568,
   "all": 1852,
-  "map_blob": "0a54af132a0c1e8bca4a0830fff524530736776c"
+  "map_blob": "d5c03fc7378eee70fa588a08e25976552681bc31"
  },
  "mulhouse": {
   "in_ring": 1704,
   "all": 2155,
-  "map_blob": "7d7913a9784c53b49b71f7a81666518ec10fd4c2"
+  "map_blob": "aca874de1e292eca554ff0e55b0e5d0d5ac18177"
  },
  "brest": {
   "in_ring": 1517,
   "all": 1980,
-  "map_blob": "5c090c563d56b62a0caecccc12f591988d6bb10a"
+  "map_blob": "d8711f2fce19767b01b148b27a7745419a131150"
  },
  "saint_etienne": {
   "in_ring": 2276,
   "all": 2998,
-  "map_blob": "abe7e68c1dbe43b7b4483c2f853f43ac9c214a31"
+  "map_blob": "d0ae6a74521a7fa29a58379a892bb41a36185578"
  },
  "nice": {
   "in_ring": 8086,
   "all": 10063,
-  "map_blob": "1d829a8c64f5cfff450a6d05527fcc5fcb4751e2"
+  "map_blob": "a11aee6ec9eb31c1f5231f706bfd1094cd17f740"
  },
  "montpellier": {
   "in_ring": 5443,
   "all": 6276,
-  "map_blob": "d35682076f3a4535416909d72ac0a5d76ee83256"
+  "map_blob": "6b70e8e67b0e9f8a6178547a446fbc455294baf2"
  },
  "strasbourg": {
   "in_ring": 4779,
   "all": 5614,
-  "map_blob": "cc165c7ccc67226997577d9954afa7c60581be91"
+  "map_blob": "2af28632392e290a8740e148d2fc10015376856b"
  },
  "le_havre": {
   "in_ring": 1461,
   "all": 2433,
-  "map_blob": "b2d999280cabbcfdbb713785ee97895f1d7ae751"
+  "map_blob": "2a31c543482c583d2c200e4e26a13dbc6f3d2700"
  },
  "caen": {
   "in_ring": 1567,
   "all": 2214,
-  "map_blob": "1cbc9b50ecc15e660330e6a6fe4cdad204642aa4"
+  "map_blob": "035077f6c57e6fc5fe94526bb1f0e812f3b48716"
  },
  "rouen": {
   "in_ring": 2584,
   "all": 4167,
-  "map_blob": "f8d612705a9c494e035bf0db2112a4c43c611b32"
+  "map_blob": "2b7b67cae68efdf398f254175fc4de8b953dd141"
  },
  "bordeaux": {
   "in_ring": 8381,
   "all": 12807,
-  "map_blob": "664328d8766c38ee9bdd39312a27078ddcb3f2eb"
+  "map_blob": "c72e0acdc9be0abb48bb27efa66150c3fcc4cc73"
  },
  "nantes": {
   "in_ring": 4146,
   "all": 6570,
-  "map_blob": "56569a50fb95483fff7dc65044fb07b0d6c79769"
+  "map_blob": "0420ec8c4da0b750bd8baa917207f384c559720c"
  },
  "grenoble": {
   "in_ring": 4534,
   "all": 5781,
-  "map_blob": "8e036072bf1961ee52cd35a994bf4f883a13d13f"
+  "map_blob": "65a9f14e3fcc1ef58f4b6e49042ee79c61459385"
  },
  "valenciennes": {
   "in_ring": 1609,
   "all": 2330,
-  "map_blob": "07441443196c0c0c253cbbd150e03528102cd13b"
+  "map_blob": "138603afcb6e52c5a589c164413ed1f4c6468fe8"
  },
  "ottawa": {
   "in_ring": 1586,
@@ -547,37 +547,37 @@
  "palma": {
   "in_ring": 1187,
   "all": 3432,
-  "map_blob": "367a9395c83ac5d2e22353734ff9ff1d8d838e86"
+  "map_blob": "ff163a721f283f7bc5d604a7955102661a1c7614"
  },
  "yokohama": {
   "in_ring": 6542,
   "all": 7845,
-  "map_blob": "3248cd510454232e569191adb2d229d8c36a782f"
+  "map_blob": "4d0938aca9a7f94ebfdf729c1ac93525fbd5b8d9"
  },
  "hiroshima": {
   "in_ring": 9139,
   "all": 13688,
-  "map_blob": "ae4f950ee35c83acd007ddcdf4f51c5effc53c2e"
+  "map_blob": "5999671f76bcfd755f5d30234b8dc927c2c8a2bb"
  },
  "namyangju": {
   "in_ring": 10067,
   "all": 18344,
-  "map_blob": "d8a90219a96859f86a369c9ddfde19d9f03fbca1"
+  "map_blob": "af715047648a9fda765eb197f83bc829140a7069"
  },
  "ansan": {
   "in_ring": 12575,
   "all": 19711,
-  "map_blob": "9dea8064172f3439342a15f2a018a359d0eab010"
+  "map_blob": "cf8b09eca926f93aa3acfe82f9b5d8c3c6b96263"
  },
  "uijeongbu": {
   "in_ring": 11178,
   "all": 13103,
-  "map_blob": "7d13de13778f53e1038dfd874f3b7ca1f36c18a6"
+  "map_blob": "1a85612954259b0f0f6f21826b1bce08bcb7f7b7"
  },
  "anyang": {
   "in_ring": 15799,
   "all": 23999,
-  "map_blob": "57b454a0a62292f9d156824b408e1a9d0a4f1312"
+  "map_blob": "30d7ededb98c66c7879040a6fc95affefcbf11be"
  },
  "dallas": {
   "in_ring": 4197,
@@ -587,37 +587,37 @@
  "angers": {
   "in_ring": 1907,
   "all": 2530,
-  "map_blob": "b2922a66554a54d2eebd8342a24d12a420216231"
+  "map_blob": "257bc16e2eeb69bcd25020df6d87646f030c6043"
  },
  "brno": {
   "in_ring": 5932,
   "all": 7200,
-  "map_blob": "335796efa10a80ed50236cce964c053cb6c5190a"
+  "map_blob": "32025213404ff0d3482ec33b181bf327dfff7ec0"
  },
  "plzen": {
   "in_ring": 2508,
   "all": 3508,
-  "map_blob": "10378fd854b0c6c880c40f6738b2143d355acab0"
+  "map_blob": "5a73a5a6658e1303e611da8043057631ae832d2a"
  },
  "olomouc": {
   "in_ring": 1742,
   "all": 2235,
-  "map_blob": "0886019fc4e04ca6ab5fb95c2b5a2fbd2e8c76f4"
+  "map_blob": "3bf86fef8cd5d758b90699c75f7935e64b89447d"
  },
  "ostrava": {
   "in_ring": 2941,
   "all": 3960,
-  "map_blob": "f2e9cfb03f4f439e94b2f8e780d0bdd441ac1cb4"
+  "map_blob": "320ade9e14e519c83a06b4d7d124559ff2df1bcd"
  },
  "liberec": {
   "in_ring": 1405,
   "all": 2488,
-  "map_blob": "6bf3cf71e61eaebe9dfe5769d1a14c64d3a56b4e"
+  "map_blob": "e59d15130d8bf3b5cfb353236cc4b4070a283454"
  },
  "most": {
   "in_ring": 664,
   "all": 1025,
-  "map_blob": "da8acab805f74d4d135d0168577e24dcbc75f696"
+  "map_blob": "d558efb92ac6dafe7ffa1d3f5c81ad9172bff20e"
  },
  "manchester": {
   "in_ring": 6202,
@@ -652,62 +652,62 @@
  "matsuyama": {
   "in_ring": 5142,
   "all": 9341,
-  "map_blob": "008f3b61f55d31ab1b624edd72bf641116baa9c1"
+  "map_blob": "59b4505206a27ee92957e45e2a04b74ed2a49af2"
  },
  "toyama": {
   "in_ring": 3058,
   "all": 6600,
-  "map_blob": "01a67ca7869e48e84efd09b1998251ce70b24537"
+  "map_blob": "508accc269b0bfc65d6232f96297261edce16606"
  },
  "kumamoto": {
   "in_ring": 5488,
   "all": 10162,
-  "map_blob": "a4d226c961909677f85fc7b773ff9020a72ea1a1"
+  "map_blob": "dddb3fef8da1316f5aa604d2238125f7588a21d2"
  },
  "fukui": {
   "in_ring": 2984,
   "all": 4934,
-  "map_blob": "2f31f71e9aa82e713b3cf4af3ffb42e8d09f8e5c"
+  "map_blob": "ceac0235f5c53c4129884bc03bde9cfa053b74d5"
  },
  "nagasaki": {
   "in_ring": 4174,
   "all": 7269,
-  "map_blob": "c3e4a82e574457c22de9b7084c64a207538b3a4d"
+  "map_blob": "b5dd10bb0ba369f1c6e2a33f1f94b222bfe5d3cf"
  },
  "utsunomiya": {
   "in_ring": 3789,
   "all": 8043,
-  "map_blob": "9fdbe6b67f7ef8ab558a38ef2895da6284e11b94"
+  "map_blob": "a5681a0dd795c1f55987bd935c087090626beb31"
  },
  "kitakyushu": {
   "in_ring": 10577,
   "all": 14859,
-  "map_blob": "08392d90c31c164dd1adf9935a3e3015e13bcc4e"
+  "map_blob": "d38844a58bbb991051c6f76a3b0d9a72ab2be5aa"
  },
  "sakai": {
   "in_ring": 6041,
   "all": 8021,
-  "map_blob": "95a15acddbaa967427e23e14bd98aed205d31dfd"
+  "map_blob": "f7a95fb3c0667b97fafb90c2a08fb944332e174c"
  },
  "hakodate": {
   "in_ring": 331,
   "all": 1077,
-  "map_blob": "5250cd95e2bf7099b6d4022d80394aa10774bb0f"
+  "map_blob": "40f78112a550b375db23063ca46569f40f45f761"
  },
  "kagoshima": {
   "in_ring": 3972,
   "all": 6586,
-  "map_blob": "7f9b5cab99e924563b81da7d184e1d348c5b0b89"
+  "map_blob": "7d70937783c9ce0a5a0075c2a4637de248a38097"
  },
  "okayama": {
   "in_ring": 4167,
   "all": 6570,
-  "map_blob": "2dc551642d7a26194890206f55a992c7e674a2d5"
+  "map_blob": "fe618e29b5562c4c3fd802dfa15739dc7d2c4db5"
  },
  "kochi": {
   "in_ring": 678,
   "all": 1406,
-  "map_blob": "8db3430def7ca0c8e2b46d4f1559e669ff37d6f2"
+  "map_blob": "9e12fec6cbe8c70946d34b62399283c4c731559f"
  },
  "seattle": {
   "in_ring": 5548,
@@ -722,72 +722,72 @@
  "kawasaki": {
   "in_ring": 9931,
   "all": 11899,
-  "map_blob": "f74dc86837dbb0b2cdf0c2031e6a101f5110baa6"
+  "map_blob": "d6653a9550e98da15a43f0686abd25ab9a9ac1e3"
  },
  "yokosuka": {
   "in_ring": 3533,
   "all": 4543,
-  "map_blob": "3a15213f26010103e7b84661831c010a97749f40"
+  "map_blob": "23a5a5e83b4f77f4feedf5abfc5b36c80e512667"
  },
  "himeji": {
   "in_ring": 5711,
   "all": 8499,
-  "map_blob": "68da945450117a44b4070d75672b67c7a902081f"
+  "map_blob": "3879741cb4bf7a365d8d3082ae51a3fc0fe13790"
  },
  "nishinomiya": {
   "in_ring": 4935,
   "all": 5529,
-  "map_blob": "dd93400f6f1572ec79edafd61f29ba18323be905"
+  "map_blob": "e51a8e6dc2a306bcf3516f6891b6c78c435c8027"
  },
  "takamatsu": {
   "in_ring": 5611,
   "all": 7819,
-  "map_blob": "e5043e833407f18316fa9eeb2038cf9275438a8c"
+  "map_blob": "12babb3dde98382432c8b20a5761b9e98e6040a3"
  },
  "toyota": {
   "in_ring": 2216,
   "all": 4380,
-  "map_blob": "cfa161d31e25c8d752a49c3386f6f2449f5fa6de"
+  "map_blob": "514f01b91460c2b5279826b2e4bebd6720d1cde5"
  },
  "yokkaichi": {
   "in_ring": 3193,
   "all": 4307,
-  "map_blob": "ad88ac23015da0e059572a146354acfc2bea97b0"
+  "map_blob": "59be4e27a61f50292f68c25be3d2a073bd104a13"
  },
  "otsu": {
   "in_ring": 3369,
   "all": 4509,
-  "map_blob": "31ce3d6ee89771024d11b43bcf0523680e73f00b"
+  "map_blob": "ba9828e5030e0b937ec429dc3ffd25ab7db5cc0c"
  },
  "nara": {
   "in_ring": 3315,
   "all": 4820,
-  "map_blob": "3acbceaebefce422118acd51128421bd98ebd7ef"
+  "map_blob": "2099542080ba9693f6ad74a8e052b4356fb4fceb"
  },
  "hamamatsu": {
   "in_ring": 1080,
   "all": 3187,
-  "map_blob": "3e29249d8605de8a4180f9e724e21a62ab0482ae"
+  "map_blob": "0f10e8705b026f46e0ae3edecd509b649bfa1971"
  },
  "higashiosaka": {
   "in_ring": 5220,
   "all": 5778,
-  "map_blob": "0bf6ba3b3efcb9c83a113ef6cb4709c5074849f6"
+  "map_blob": "1c1fa1c54abe1f5ca3ca4509a037f6aee22070c2"
  },
  "kurume": {
   "in_ring": 1943,
   "all": 3072,
-  "map_blob": "732ffc277578be57d77dd2b94350c524a00ec0f7"
+  "map_blob": "caff87d1d87f1a5a126ed311faa82d4baa726b35"
  },
  "sasebo": {
   "in_ring": 1697,
   "all": 2450,
-  "map_blob": "dac1cef21d13d51c3c12bbf056352439db8d8c16"
+  "map_blob": "7ef59f3190a5374605de7bcd7642d76d5f02f249"
  },
  "shimonoseki": {
   "in_ring": 1276,
   "all": 2980,
-  "map_blob": "6a0280d1ebb9637f4046f13e275a66b8c9ef948e"
+  "map_blob": "5a07249236cf0a9ef38f50fc61281f77f9011150"
  },
  "brussels": {
   "in_ring": 4762,
@@ -797,27 +797,27 @@
  "antwerp": {
   "in_ring": 3973,
   "all": 4881,
-  "map_blob": "f1724d3abd4c363bd91406ef38bd3d2dab1f401e"
+  "map_blob": "5ac714564bd9710a61984ab98a9f80eabaac786e"
  },
  "ghent": {
   "in_ring": 1596,
   "all": 2730,
-  "map_blob": "c5b10fd9f22cb7bf4d18a1c8e71a47c58a753bc0"
+  "map_blob": "f66b79f85dc9e6ad7a46510c168395cb5818b7f2"
  },
  "charleroi": {
   "in_ring": 989,
   "all": 1430,
-  "map_blob": "8364fca8b753aeb500dc94d7ea75ef3bf22b0901"
+  "map_blob": "20ca0610dbffd75c4a0cf4ed7f67ddb2036eec72"
  },
  "liege": {
   "in_ring": 1336,
   "all": 2345,
-  "map_blob": "fdfc48fb655b07612245895df064e48c3a516002"
+  "map_blob": "be190958a0357f2149d1a5e02f0700f59c55150c"
  },
  "brussels_regional": {
   "in_ring": 10006,
   "all": 13680,
-  "map_blob": "6216e24295b97e31a6d2310bc15752ca5357bce2"
+  "map_blob": "5d1038077748fc5be3a17c2b8f4ffd95b1f0d8ef"
  },
  "liverpool": {
   "in_ring": 3732,
@@ -832,356 +832,356 @@
  "mendoza": {
   "in_ring": 641,
   "all": 4406,
-  "map_blob": "d9e916ecfd0ea7c7b951dcf5a3539de58d5221e9"
+  "map_blob": "c963441af2f6f86b126d7d2b4a2e3769b6ab6e06"
  },
  "daejeon": {
   "in_ring": 21252,
   "all": 50939,
-  "map_blob": "4e7625d55e2ffc0b8681481b5358a65e32566a4b"
+  "map_blob": "b8b343cc1db2d1f88fee514a191d01d721efeae3"
  },
  "gwangju": {
   "in_ring": 14077,
   "all": 47214,
-  "map_blob": "805d0462d3de3f32a8bda8388e2320532738deb3"
+  "map_blob": "fa0fe5d6ba6f4c50566d673ae8da4f8139f09204"
  },
  "gimhae": {
   "in_ring": 6736,
   "all": 17879,
-  "map_blob": "e0cabd2c00ba4c08e7e13475ca038b2f4b9aa36c"
+  "map_blob": "43b4b7b953554149687ccca4971b7c0cba4e51fc"
  },
  "gimpo": {
   "in_ring": 7187,
   "all": 13398,
-  "map_blob": "afd5ebe8703e5816dbc0a6ecdce6809c0f2189ee"
+  "map_blob": "225889ada4b02ac5b5b7c8377f267173dcf0c4d2"
  },
  "siheung": {
   "in_ring": 6106,
   "all": 15206,
-  "map_blob": "61cada81df0ab2750df896a335e1dd9cda724458"
+  "map_blob": "da535c4ded6af53b980af8f22b552b3bfcb70e59"
  },
  "geneva": {
   "in_ring": 4839,
   "all": 5863,
-  "map_blob": "e1a4d47836ad46eff3d8524da4aeaff58e23aa10"
+  "map_blob": "e2316d94195dc140b4ad808db594b493c2529515"
  },
  "thessaloniki": {
   "in_ring": 6292,
   "all": 7132,
-  "map_blob": "0bd75918af89b2e546b2b3c647d942ba1db54378"
+  "map_blob": "a01e62f724d0825cc21bfcbcae0a9607885775ee"
  },
  "gelsenkirchen": {
   "in_ring": 1160,
   "all": 1776,
-  "map_blob": "833dfd87073268ec761464d966dcbfab19b5d7cc"
+  "map_blob": "40293ffe78d232a20206296bae49c560b2f89151"
  },
  "bremen": {
   "in_ring": 2148,
   "all": 3153,
-  "map_blob": "a287b222dd51302bd94e6e5e7c99d2e84e01c6ee"
+  "map_blob": "fdb208f0daad2d37f65d361dfde6e1273db6d4f7"
  },
  "higashiyamato": {
   "in_ring": 548,
   "all": 835,
-  "map_blob": "8c6f77c1d8e32eb745b9d9bf246845ad2c68f607"
+  "map_blob": "c1d672a7718f50e349f6ef64ed2a90780849b684"
  },
  "nishitokyo": {
   "in_ring": 1619,
   "all": 1936,
-  "map_blob": "eb57b1764fb8210e01453880ed51701a5774b2a0"
+  "map_blob": "d597d6f7fc0615cbfbea7e2da44466b488905000"
  },
  "tama": {
   "in_ring": 1162,
   "all": 1419,
-  "map_blob": "6b8b8be6dd34e614381701fa02ca028cb45131b8"
+  "map_blob": "492583b510647bc7a3c869740639172ff12261a7"
  },
  "higashimurayama": {
   "in_ring": 1153,
   "all": 1432,
-  "map_blob": "09db0bddf99d29f7ac008692d11e299066b8fd80"
+  "map_blob": "ac6fb4dc69cb71acf6ffa825b94c063026a2338d"
  },
  "ageo_regional": {
   "in_ring": 1367,
   "all": 2633,
-  "map_blob": "27c81b1f4fcde05a977b4f37226569bee14ad59e"
+  "map_blob": "bd06a1bbbf714eb388481c524740b4c3af6b0b5f"
  },
  "fuchu_tokyo": {
   "in_ring": 2300,
   "all": 2586,
-  "map_blob": "a388c2557c59810d590a31c072dd85af4eed3838"
+  "map_blob": "da61bf253d2dc84a8873dcd170e5b19f3e42dca0"
  },
  "chofu": {
   "in_ring": 2184,
   "all": 2510,
-  "map_blob": "47b9987d64c8ff48476b8a83f5170d658db3f417"
+  "map_blob": "505dc7664024e313484c6e0e72ab6766054cfac1"
  },
  "tachikawa": {
   "in_ring": 2988,
   "all": 3392,
-  "map_blob": "b91c001bfcad12935a156820b4d34582e5ab5ba0"
+  "map_blob": "1baab93d4a90a50c3d330c4b2552f3602d028e3c"
  },
  "hino": {
   "in_ring": 1173,
   "all": 1344,
-  "map_blob": "cc606ced304c50bde140ba19cdcf54e5b1c9ecf7"
+  "map_blob": "6308913e319b25d9ee20447a7cb0753cdea41b7d"
  },
  "soka": {
   "in_ring": 1806,
   "all": 2716,
-  "map_blob": "e6f9486455f8275afc689291655f0baadd8fe8b1"
+  "map_blob": "0faf0489d51c17c58a31a8a1c7b1a9bd4841efe3"
  },
  "tokorozawa": {
   "in_ring": 2969,
   "all": 3834,
-  "map_blob": "ed377be49493c2862ceedcd9fa8d91237a6a17d6"
+  "map_blob": "1ebfac290963b16e1883318a63777ca94a148c84"
  },
  "kasukabe": {
   "in_ring": 1983,
   "all": 2840,
-  "map_blob": "88610937e5cab28cd3fd3eca6ba3c7388f2d875a"
+  "map_blob": "87d52e6c2308ca4e049e6129ef642e3b54605d3f"
  },
  "toyonaka": {
   "in_ring": 4100,
   "all": 5205,
-  "map_blob": "e8c590ca58c693fe5d48be9704c80f6c9380f221"
+  "map_blob": "b5be6826761a4b0e27c221bbd8aa11a2288c5750"
  },
  "hirakata": {
   "in_ring": 2919,
   "all": 4607,
-  "map_blob": "c1a249026c6c42127c7385c42b5814b7d51471b3"
+  "map_blob": "d51f19c00344d079eed38a62e9a4dd8644d70ec7"
  },
  "suita": {
   "in_ring": 3197,
   "all": 4012,
-  "map_blob": "90bbf912ef8b1c9915beed3ba5dc1dfb400039ec"
+  "map_blob": "3d833dab761b7915eeb4371fbd43c47ebb4d8ed3"
  },
  "itami": {
   "in_ring": 1181,
   "all": 2383,
-  "map_blob": "a838db067e8c6a72edbf0d21f2d3bccf55a7524d"
+  "map_blob": "cbf8116300ef50d5cff02c98203a1b17cf55e3de"
  },
  "kakogawa": {
   "in_ring": 2113,
   "all": 3701,
-  "map_blob": "6be4706d273d073d223c5368cb5d448ec1a5fdeb"
+  "map_blob": "093b3a8d9cf8fb702ebc0dbc122a90e571c90de7"
  },
  "amagasaki": {
   "in_ring": 5838,
   "all": 7385,
-  "map_blob": "3fa69e3eda551729c56c3b0f154a2a6a2a2d1e92"
+  "map_blob": "d3cc6650078e4e9279c3cc448c0579ee45d90a7a"
  },
  "uji": {
   "in_ring": 724,
   "all": 1284,
-  "map_blob": "556a4e9aa604dece3384ad90396fb0b2083e5131"
+  "map_blob": "97ef1a93b4ec6b2d8c9911e70cebefa73b275d3f"
  },
  "maebashi": {
   "in_ring": 1901,
   "all": 4696,
-  "map_blob": "036d752d4b7e2babf5df62c73d206b8ac150515e"
+  "map_blob": "5d281ac618063da60a68c651b1d642614bd49616"
  },
  "fukuyama": {
   "in_ring": 2745,
   "all": 6365,
-  "map_blob": "c52123d50b03c901e6a1adf4e2cab9257522a1f0"
+  "map_blob": "03ecac450f9f9929156c2cee6227fff16784cd13"
  },
  "ichinomiya": {
   "in_ring": 1890,
   "all": 4029,
-  "map_blob": "e29f5609f8b6b621e77ef6778857c497a62566e3"
+  "map_blob": "5cd6bee9c2afa824de24da8910590928f79b5cd4"
  },
  "tsu": {
   "in_ring": 1472,
   "all": 3234,
-  "map_blob": "203f8b00f6ab4780474556ca920b80efbde7ca17"
+  "map_blob": "3200b0d798056ca683b57fe9c9df2d8560470881"
  },
  "fukushima": {
   "in_ring": 2016,
   "all": 3343,
-  "map_blob": "9a1a1c717441452dbe07321b6fd0f6d6dcb15a0d"
+  "map_blob": "1fd6f133c612cba8662def598978a901cd747064"
  },
  "iwaki": {
   "in_ring": 1296,
   "all": 3730,
-  "map_blob": "2c94eca8b144c3e07916535d021029cfb35f9667"
+  "map_blob": "756906ad16fa07d2052d965d5a43924d651e1917"
  },
  "akita": {
   "in_ring": 1622,
   "all": 4961,
-  "map_blob": "f988c9d3e63cdb7db6103388420fcdf75346929f"
+  "map_blob": "db7aa33d4f84e7e401bd44ae9b5cce3eea06dda1"
  },
  "oita": {
   "in_ring": 3372,
   "all": 6405,
-  "map_blob": "d30d6dceef292f74fffd899e70062491dd3b9447"
+  "map_blob": "af4bdd594d2c8cf0d49b2c3353659016cb77ca9e"
  },
  "gifu": {
   "in_ring": 1844,
   "all": 6005,
-  "map_blob": "c46525227c82b77cd550bf27c1843b20d1d3b726"
+  "map_blob": "3924cf3138e9ca595d93a1ddf9ef409ba7ec5fae"
  },
  "mito": {
   "in_ring": 981,
   "all": 4053,
-  "map_blob": "4564bb84ff0bc015f094eebb13854e5bb9665b4d"
+  "map_blob": "f559bc586c8cf531137dd4fc586f3dbd7e431c5f"
  },
  "morioka": {
   "in_ring": 2303,
   "all": 4609,
-  "map_blob": "755ad28c4982b952dd57e48676b5e9e7d64a8b19"
+  "map_blob": "8364557d54ae37e995500afc59cbdb3d1712ac05"
  },
  "ibaraki_osaka": {
   "in_ring": 506,
   "all": 621,
-  "map_blob": "6a28dddb0585318ab21c17bab657b1fd0bc95b10"
+  "map_blob": "4df0a1b8a3a8e5694e307508f1ec617563eee599"
  },
  "minoh": {
   "in_ring": 213,
   "all": 294,
-  "map_blob": "4d115ea5722993863289cab954bbcf8170ddc0e0"
+  "map_blob": "72f0104daf68e81661c315abdad6dfc0bf1a3f8d"
  },
  "moriguchi": {
   "in_ring": 176,
   "all": 375,
-  "map_blob": "d5541becaa009e5605c2240990ef8d52db577bf5"
+  "map_blob": "db2a821163f7d79eaa08affa05db5ea0eb26dc2d"
  },
  "kadoma": {
   "in_ring": 259,
   "all": 334,
-  "map_blob": "40bdb9f9e998b9fe487171704301df7a96179454"
+  "map_blob": "aa92f73d365c2f294922b7d4beefddab2454b9ce"
  },
  "neyagawa": {
   "in_ring": 443,
   "all": 630,
-  "map_blob": "747b741ba6dcf07cd7d6fdf2e9ba12106bfbcc4d"
+  "map_blob": "187467558a4f76148fa1d9ddc9496808ae9aa89c"
  },
  "yao": {
   "in_ring": 1544,
   "all": 1956,
-  "map_blob": "699bf35941b5ee0d1519543d75431a933f23338f"
+  "map_blob": "6706aa4f67040805d89f488d7df5097216529855"
  },
  "takatsuki": {
   "in_ring": 1181,
   "all": 1922,
-  "map_blob": "2364e68ba359a667c3448c283e5c625c8a27b826"
+  "map_blob": "693e8cac02cbdc326817b529b059896b04836e23"
  },
  "cluj_napoca": {
   "in_ring": 1237,
   "all": 3801,
-  "map_blob": "82d6ebce7da697d6109d308c32852f653c031c9f"
+  "map_blob": "4cd7fea530f83d4b359d3a5453756e93bd710c4b"
  },
  "shizuoka": {
   "in_ring": 1216,
   "all": 2752,
-  "map_blob": "379cae150551a9ccd90d294516a1d9d0f42e2be6"
+  "map_blob": "af8a514d911c65aafb09ec24b98f7f99b09d7530"
  },
  "kanazawa": {
   "in_ring": 2837,
   "all": 7388,
-  "map_blob": "00ed4f4b96c1ad81683befd12a3fea6e0005680a"
+  "map_blob": "ba877611673e3320bf0ec39e03e7dfe49ab17633"
  },
  "okazaki": {
   "in_ring": 1825,
   "all": 3614,
-  "map_blob": "40e9edcb39b3ec8b48ed71d4f3b93ceb2a496310"
+  "map_blob": "216dd1807a5e43349cff4a72e861e829965505a1"
  },
  "aomori": {
   "in_ring": 1231,
   "all": 3528,
-  "map_blob": "73b30733549ded1268cf776e01b8943dd4249bbd"
+  "map_blob": "02c03d97f41f13b27ce26c03be490747e2d885d5"
  },
  "matsue": {
   "in_ring": 299,
   "all": 919,
-  "map_blob": "9ca254672482f7db05ad1223fc3813c2a2e63681"
+  "map_blob": "a9aff96dd602e70c1a246a93d91e0ca213b0d87e"
  },
  "fuji": {
   "in_ring": 412,
   "all": 831,
-  "map_blob": "cebf2cc6a16679779dce97de025dee3abdcac620"
+  "map_blob": "fa567e0d4a1159eed7c8026cc2a3dcc13f20f4e6"
  },
  "matsumoto": {
   "in_ring": 456,
   "all": 975,
-  "map_blob": "23efabe0ce1365f09e7421ad080951d64e7d2966"
+  "map_blob": "553c31440e94ed215304ffc00980688329355bd5"
  },
  "tottori": {
   "in_ring": 1131,
   "all": 2240,
-  "map_blob": "26d67f9fe733c60c701d17bf4058a1c96272bd46"
+  "map_blob": "cce72bc53c9b6fee6299e87e8529a7207733f1f4"
  },
  "yamagata": {
   "in_ring": 1114,
   "all": 3280,
-  "map_blob": "15b005a410581afd2fd1568752ac3bf18a08045c"
+  "map_blob": "894d92b2bb9315e0add64627b337fab7b90e377a"
  },
  "kure": {
   "in_ring": 935,
   "all": 1595,
-  "map_blob": "ddfb2e8c7374f22be8cbced7a47a2646beadfb76"
+  "map_blob": "824f6f0c539a7c1076cf70345051315696a10616"
  },
  "kurashiki": {
   "in_ring": 2574,
   "all": 4815,
-  "map_blob": "8492ffdbcf3b8e1615f1a36c7c992427d4240291"
+  "map_blob": "a7e574d92258cbb18013bd693f8903a69815eb6b"
  },
  "naha": {
   "in_ring": 8598,
   "all": 10153,
-  "map_blob": "ddaa20c7fc5735df026962d018e641b0c572afcc"
+  "map_blob": "c5dfe8d8f92337eba08b0bfcd23f886784efac57"
  },
  "koshigaya": {
   "in_ring": 2934,
   "all": 4092,
-  "map_blob": "e45a48458eee34ee3e70f89fdd1f1959997b309a"
+  "map_blob": "cd0075aeffc59ea754a2ee4ee6033d8f51230f1d"
  },
  "sagamihara": {
   "in_ring": 3339,
   "all": 5539,
-  "map_blob": "3dd5a3f7629e007cc52fd971c8a774b16cc965da"
+  "map_blob": "84273af638622d4de57fa6d7f53beff6df71e8a6"
  },
  "fujisawa": {
   "in_ring": 3821,
   "all": 4947,
-  "map_blob": "364db44374c4bb81d4c60d248871cb1d373eed26"
+  "map_blob": "801b6db8fbe566323ee8283090a1c1733a957769"
  },
  "kawaguchi": {
   "in_ring": 2980,
   "all": 5312,
-  "map_blob": "f1c3dcd332282e10f805d41e50b3f9441f3a5bfd"
+  "map_blob": "200c6676c05ed7408eac6dc77338b2d195087765"
  },
  "funabashi": {
   "in_ring": 1234,
   "all": 1473,
-  "map_blob": "82e667d06c84630c0fb01e49cd8de0642468362d"
+  "map_blob": "69e0cea78ef09ca03e57e98cb33b4b43ef508069"
  },
  "matsudo": {
   "in_ring": 1000,
   "all": 1253,
-  "map_blob": "0c19d3cc2f90eb3a820399ef15822da06c5e0e23"
+  "map_blob": "81e687300d0dd3cba1dad5ee8dcd9aae81725be4"
  },
  "ichikawa": {
   "in_ring": 798,
   "all": 1017,
-  "map_blob": "39a079991137c878820b6023c038ad8231a4f910"
+  "map_blob": "8c7d2cbcec2a78246356e87cc4bb6be7d9b85ef9"
  },
  "urayasu": {
   "in_ring": 253,
   "all": 326,
-  "map_blob": "16a2b9efe1f53e833607e7621a4c227d4ca6775a"
+  "map_blob": "1832ea55de76b5f409398e4751d072dde14b1b44"
  },
  "sakura": {
   "in_ring": 322,
   "all": 444,
-  "map_blob": "dffcc40f239852c4a66469b395261522eed4b08b"
+  "map_blob": "bb4e930a7ceeb23fb2dd552c0e45be795d1b4e37"
  },
  "yachiyo": {
   "in_ring": 441,
   "all": 549,
-  "map_blob": "d91217aa96b3ba8e545c841a807ddca29aa8cd2d"
+  "map_blob": "e819d9181f098b506b68685d8cc5a48f01d211ff"
  },
  "ichihara": {
   "in_ring": 299,
   "all": 708,
-  "map_blob": "ae238345897874b90d17997a2b31189a406d8c9e"
+  "map_blob": "888bc878dfac7d5d4a12411a7fc1e28c5c9835ed"
  }
 }

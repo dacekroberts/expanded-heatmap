@@ -283,4 +283,65 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/matsue.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # Worship named only by its body or chain (owner, 2026-10-13)
+    "node/3739108617": "'MOA会館': MOA (a religious body) plus the hall word 会館 only, no place or proper name",
+    "way/1296963682": "'世界平和統一家庭連合': named only by the body (Family Federation for World Peace and Unification)",
+    "way/1102649247": "'世界真光文明教団': named only by the body (Sekai Mahikari Bunmei Kyodan)",
+    "way/1083509449": "'黒住教': named only by the body (Kurozumikyo)",
+    "way/1233811182": "'黒住教': named only by the body (Kurozumikyo)",
+    # A bare type word (owner, 2026-10-13)
+    "way/1274758376": "'テニスコート': テニスコート = \"tennis court\", tagged leisure=stadium, no article",
+    "way/557648812": "'宮庫': 宮庫 = shrine storehouse, the whole name is the type word",
+    "way/616221085": "'宮庫': 宮庫 = shrine storehouse, the whole name is the type word",
+    "way/631717596": "'宮庫': 宮庫 = shrine storehouse, the whole name is the type word",
+    "way/647113939": "'子供広場': 子供広場 = \"children's square\"",
+    "way/1271136916": "'幼児遊園': 幼児遊園 = \"toddlers' playground\"",
+    "way/1115107371": "'遊具': 遊具 = \"play equipment\", tagged a park",
+    "way/556737326": "'門': 門 = \"gate\", tagged a place of worship",
+    "node/13394188818": "'御神木': 御神木 = \"sacred tree\", a node inside 神魂神社 tagged a place of worship",
+    "way/1087660031": "'永代供養堂': 永代供養堂 = \"perpetual memorial hall\", a building of 善光寺 named by its type",
+    # A religious office (owner, 2026-10-13)
+    "way/1077667592": "'世界メシア教 中国教区': 世界メシア教's regional diocese (教区) office tagged a place of worship",
+    "way/1084201319": "'偕和會 松江事務所': 事務所 = office of an association, tagged a place of worship",
+    "way/1243083515": "'岡田茂吉研究所': 研究所 = research institute of a religious body, tagged a place of worship",
+    "way/318202607": "'曹洞宗島根県第二宗務所': 宗務所 = Soto sect district administrative office, tagged a place of worship",
+    "way/1077667586": "'英霊にこたえる会 島根県本部': prefectural headquarters (本部) of a veterans' association, tagged a place of worship",
+    # A description standing in for a name (owner, 2026-10-13)
+    "way/562739697": "'堀立柱建物': 堀立柱建物 = \"post-built building\", a reconstructed exhibit named by its type inside 田和山史跡公園",
+    "way/558125768": "'掘立柱住居': 掘立柱住居 = \"post-built dwelling\", a reconstructed exhibit named by its type",
+    "way/562739328": "'竪穴住居': 竪穴住居 = \"pit dwelling\", a reconstructed exhibit named by its type",
+    "way/558125755": "'竪穴式住居': 竪穴式住居 = \"pit dwelling\", a reconstructed exhibit named by its type",
+    # An object no longer there (owner, 2026-10-13)
+    "node/10607758224": "'風見大権現跡地': 跡地 = \"former site\" of a shrine, still tagged a place of worship",
+    # Unsure rows a ruling drops: a hall named only for what it enshrines, or a deity's title alone (ruling 3) (owner, 2026-10-13)
+    "way/685632261": "'歳徳神': a hall named only for what it enshrines, or a deity's title alone",
+    "way/685636836": "'歳徳神': a hall named only for what it enshrines, or a deity's title alone",
+    "way/893920584": "'歳徳神': a hall named only for what it enshrines, or a deity's title alone",
+    "way/1081527567": "'歳徳神': a hall named only for what it enshrines, or a deity's title alone",
+    "way/1082686932": "'歳徳神': a hall named only for what it enshrines, or a deity's title alone",
+    "way/1084140738": "'歳徳神': a hall named only for what it enshrines, or a deity's title alone",
+    "way/1087094896": "'歳徳神': a hall named only for what it enshrines, or a deity's title alone",
+    "way/1106535363": "'歳徳神': a hall named only for what it enshrines, or a deity's title alone",
+    "way/1121641187": "'歳徳神': a hall named only for what it enshrines, or a deity's title alone",
+    "way/1133083031": "'歳徳神': a hall named only for what it enshrines, or a deity's title alone",
+    "way/1133116196": "'歳徳神': a hall named only for what it enshrines, or a deity's title alone",
+    "way/1143876224": "'歳徳神': a hall named only for what it enshrines, or a deity's title alone",
+    "way/1211718017": "'歳徳神': a hall named only for what it enshrines, or a deity's title alone",
+    "way/1230074012": "'歳徳神': a hall named only for what it enshrines, or a deity's title alone",
+    "way/1251561084": "'歳徳神': a hall named only for what it enshrines, or a deity's title alone",
+    "way/1272713317": "'歳徳神': a hall named only for what it enshrines, or a deity's title alone",
+    "way/1273313566": "'歳徳神': a hall named only for what it enshrines, or a deity's title alone",
+    "way/1299967615": "'歳徳神': a hall named only for what it enshrines, or a deity's title alone",
+    "way/1338985201": "'歳徳神': a hall named only for what it enshrines, or a deity's title alone",
+    "way/1340909488": "'歳徳神': a hall named only for what it enshrines, or a deity's title alone",
+    "way/1350873707": "'歳徳神': a hall named only for what it enshrines, or a deity's title alone",
+    "way/1354144166": "'歳徳神': a hall named only for what it enshrines, or a deity's title alone",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1271136917": "'幼児遊園': the twin of way/1271136916; A bare type word (owner, 2026-10-13)",
+    "way/1272713318": "'歳徳神': the twin of way/685632261; Unsure rows a ruling drops: a hall named only for what it enshrines, or a deity's title alone (ruling 3) (owner, 2026-10-13)",
+}

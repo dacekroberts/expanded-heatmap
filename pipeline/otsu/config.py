@@ -238,4 +238,42 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/otsu.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # Worship named only by its body or chain (owner, 2026-10-13)
+    "way/1527036423": "'創価学会滋賀文化会館': a religious body, the prefecture and a hall type (文化会館); no name of its own",
+    # A religious office (owner, 2026-10-13)
+    "node/5828934094": "'天台宗務庁': the Tendai school's administrative headquarters, tagged a place of worship; an office (宗務庁)",
+    "node/5828955595": "'天台宗滋賀教区宗務所': the Tendai school's Shiga diocese office (宗務所), tagged a place of worship",
+    # A glitched name (owner, 2026-10-13)
+    "node/5831770485": "'市寸飛び': a garbled name: the alias on the same object reads 市寸嶌神社, and 飛び is no part of a shrine name",
+    # A bare type word (owner, 2026-10-13)
+    "node/5828955597": "'祖師堂': \"founder's hall\", a hall type alone; stands 22 m from 律院's halls, which have their own rows",
+    "way/244377072": "'神門': \"shrine gate\", a type word alone; the gate of 建部大社, 24 m from that shrine's row",
+    "way/318178352": "'英霊塔': \"tower to the war dead\", a memorial type alone, no place or unit in the name (the rule has 表忠碑 and 戦没記念碑, not this)",
+    "way/918501679": "'児童遊園地': \"children's playground\", a type word alone (the rule has 児童遊園 and 遊園, not 児童遊園地)",
+    "way/1042902987": "'児童遊園地': \"children's playground\", a type word alone; a second lot 16 km from the other",
+    "way/1372585362": "'イベント広場': \"event plaza\", a type word alone; leisure=park only",
+    # A second row of one object (owner, 2026-10-13)
+    "node/5828954892": "'律院 護摩堂': the goma hall of 律院, beside the temple's own row (node/4634885903, about 75 m)",
+    "node/5828955699": "'律院本堂': the main hall of 律院, beside the temple's own row (about 55 m)",
+    "way/586731328": "'建部大社本殿': the main sanctuary of 建部大社, 35 m from the shrine's own row (way/385897025)",
+    "way/584534246": "'建部大社権殿': the second sanctuary of 建部大社, 35 m from the shrine's own row",
+    "node/5677576223": "'壽量院東門': the east gate of 壽量院, 55 m from the temple's own row (node/5677583422); a gate tagged a place of worship",
+    "node/5831904091": "'西教寺総門': the main gate of 西教寺, on the approach about 230 m from the temple's own row (node/4796184322); a gate tagged a place of worship",
+    # An exhibit under its kind's article (owner, 2026-10-13)
+    "way/362090955": "'京阪80型81': a preserved Keihan tram car, name = type and car number, no Wikidata. Tagged historic=Railway_vehicle (capital R, a value the exhibit rule does not list), so it slipped past the railway-car rule",
+    # A number or code beside a type word (owner, 2026-10-13)
+    "way/583391219": "'1号公園': \"park no. 1\": a number and a type, no name (the rule reads 開発N号公園 only)",
+    "way/583100386": "'2号公園': \"park no. 2\": a number and a type, no name",
+    # Unsure rows a ruling drops: a hall named only for what it enshrines, or a deity's title alone (ruling 3) (owner, 2026-10-13)
+    "node/13648862882": "'天津彦根神': a hall named only for what it enshrines, or a deity's title alone",
+    "node/13648997074": "'活津彦根神': a hall named only for what it enshrines, or a deity's title alone",
+    "node/13649010304": "'熊野樟日神': a hall named only for what it enshrines, or a deity's title alone",
+    "node/13648995581": "'菊理姫神': a hall named only for what it enshrines, or a deity's title alone",
+    "node/8265608919": "'南無地蔵大菩薩': a hall named only for what it enshrines, or a deity's title alone",
+    # Unsure rows a ruling drops: a part of one shrine or temple as its own row, the shrine or temple a row within about 300 m (ruling 4) (owner, 2026-10-13)
+    "node/12054111965": "'祖霊社': a part of one shrine or temple as its own row, the shrine or temple a row within about 300 m",
+}

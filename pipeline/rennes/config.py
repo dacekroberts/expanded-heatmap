@@ -304,5 +304,38 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("fr",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "Hôtel de Blossac": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00090686, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Cintré": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00090691, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Rue de l'Hôtel Dieu": "a public street named for a building or institution on it, not a business (primary class; batch 2b precedent, _named_street); tags read 2026-10-13",
+}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/rennes.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # An exhibit, not a place (owner, 2026-10-13)
+    "node/5111111160": "'Diffusion de matières premières': 'Diffusion de matières premières': a display case's title in a museum (historic=artifact), not a place",
+    "node/5111042629": "'La céramique': 'La céramique': a display case's title (historic=artifact)",
+    "node/5111111158": "'Les ensembles métalliques': 'Les ensembles métalliques': a display case's title (historic=artifact)",
+    "node/5111042632": "'Les objets du quotidien': 'Les objets du quotidien': a display case's title (historic=artifact)",
+    "node/5111111159": "'Économie et diffusion culturelle': 'Économie et diffusion culturelle': a display case's title (historic=artifact)",
+    "node/5111151636": "'Pirogue en chêne du Xe siècle': 'Pirogue en chêne du Xe siècle': an indoor exhibit (historic=ship), described not named, no wikidata",
+    "node/5111200384": "'Pilier d'une allée couverte de Saint-Jean-Brevelay': a cast (description=moulage, replication=yes) of a dolmen pillar, an indoor exhibit, no wikidata",
+    # A bare type word (owner, 2026-10-13)
+    "node/2174768742": "'Grotte': 'Grotte' alone, tagged historic=ruins",
+    # A description standing in for a name (owner, 2026-10-13)
+    "node/10881019669": "'petite cabane': 'petite cabane' (small hut) mapped as a park",
+    # Worship named only by a body or a denomination (owner, 2026-10-13)
+    "way/80898364": "'Église Adventiste du septième jour': 'Église Adventiste du septième jour' alone, a denomination",
+    # A religious office, hall, school or residence (owner, 2026-10-13)
+    "way/80669188": "'Aumônerie de Beaulieu - ACER Rennes': a student chaplaincy (aumônerie) tagged a place of worship",
+    # A duplicate of one object (owner, 2026-10-13)
+    "way/23800489": "'Université de Rennes 1 - Campus de Beaulieu': 'Université de Rennes 1 - Campus de Beaulieu': second row for the Beaulieu campus, 150 m from 'Campus de Beaulieu' (way/694988930, the campus's own wikidata)",
+    # A grave named for the person buried, under that person's article (ruling 14; owner, 2026-10-13)
+    "node/3964623483": "'Abbé Joseph Turmel': unsure in the full read, dropped by the owner's ruling 14",
+    "node/3964623487": "'Barthélémy Pocquet du Haut-Jussé': unsure in the full read, dropped by the owner's ruling 14",
+    "node/3964623499": "'Louis Arthur Le Moyne de la Borderie': unsure in the full read, dropped by the owner's ruling 14",
+}

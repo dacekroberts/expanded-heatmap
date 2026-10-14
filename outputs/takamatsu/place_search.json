@@ -1,0 +1,26 @@
+{
+  "index": "app/static/places/takamatsu.json",
+  "places": 1515,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "ja"
+    ],
+    "coverage": {
+      "en": 0.401,
+      "ja": 0.992
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Japanese"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/4051287",
+      "name": "Takamatsu",
+      "stations": 46
+    }
+  ]
+}

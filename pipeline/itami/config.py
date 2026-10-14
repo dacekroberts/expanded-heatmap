@@ -260,4 +260,20 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/itami.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A facility of a mall (owner, 2026-10-13)
+    "way/611954719": "'セルシー広場': the plaza of the closed Senri Selcy mall, tagged access=no and disused=yes",
+    # A bare type word (owner, 2026-10-13)
+    "way/746335766": "'ミニ公園': ミニ公園 = \"mini park\"",
+    "way/951901064": "'一丁目公園': 一丁目公園 = \"1-chome park\", a block number beside the type word, no town name",
+    "way/699873216": "'親水公園': 親水公園 = \"waterside park\", the type word alone (two rows carry it)",
+    "way/1451298409": "'親水公園': 親水公園 = \"waterside park\", the type word alone (two rows carry it)",
+    "node/6704972153": "'常夜灯': 常夜灯 = \"night lantern\", the object's type, tagged historic=archaeological_site",
+    # A glitched name (owner, 2026-10-13)
+    "node/13300620746": "'日本キリスト教団 梅花教会3': a stray digit 3 glued to the church's name (梅花教会3)",
+    # A second row of one object (owner, 2026-10-13)
+    "node/4123785032": "'有岡城公園': the same castle-site park as relation/9190577 有岡城跡公園 (which carries the article), about 35 m away",
+}

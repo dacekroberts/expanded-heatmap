@@ -1,0 +1,91 @@
+{
+  "index": "app/static/places/bordeaux.json",
+  "places": 21330,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "fr"
+    ],
+    "coverage": {
+      "en": 0.0,
+      "fr": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "French"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/105270",
+      "name": "Bordeaux",
+      "stations": 56
+    },
+    {
+      "osm": "relation/105275",
+      "name": "Mérignac",
+      "stations": 17
+    },
+    {
+      "osm": "relation/105281",
+      "name": "Pessac",
+      "stations": 13
+    },
+    {
+      "osm": "relation/88808",
+      "name": "Cenon",
+      "stations": 8
+    },
+    {
+      "osm": "relation/88807",
+      "name": "Lormont",
+      "stations": 8
+    },
+    {
+      "osm": "relation/105278",
+      "name": "Bègles",
+      "stations": 7
+    },
+    {
+      "osm": "relation/105271",
+      "name": "Bruges",
+      "stations": 5
+    },
+    {
+      "osm": "relation/105280",
+      "name": "Eysines",
+      "stations": 5
+    },
+    {
+      "osm": "relation/105283",
+      "name": "Le Bouscat",
+      "stations": 5
+    },
+    {
+      "osm": "relation/105267",
+      "name": "Talence",
+      "stations": 5
+    },
+    {
+      "osm": "relation/105277",
+      "name": "Blanquefort",
+      "stations": 2
+    },
+    {
+      "osm": "relation/105273",
+      "name": "Villenave-d'Ornon",
+      "stations": 2
+    },
+    {
+      "osm": "relation/88809",
+      "name": "Floirac",
+      "stations": 1
+    },
+    {
+      "osm": "relation/105276",
+      "name": "Le Haillan",
+      "stations": 1
+    }
+  ]
+}

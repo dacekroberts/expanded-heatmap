@@ -260,4 +260,36 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/nara.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A bus stop indexed as a landmark (owner, 2026-10-13)
+    "node/3012477773": "'県立図書情報館西口': a bus stop (\"prefectural library west entrance\") that reached the landmarks through a misused historic= tag holding an old stop name",
+    # A glitched name (owner, 2026-10-13)
+    "node/13375784420": "'Ancien réservoir d'eau du Haut District': a French name (\"old water reservoir of the upper district\") on a node in Nara: another object's name, in a third language",
+    # A bare type word (owner, 2026-10-13)
+    "way/238705780": "'体育館': \"体育館\" (gymnasium), a type word alone, on a school building",
+    "node/5701461559": "'狛犬': \"狛犬\" (guardian dog statue): a shrine fitting named by its type",
+    "node/9653679028": "'円墳': \"円墳\" (round burial mound): a type word alone; its neighbours carry numbered names (三角点山1号墳)",
+    "node/11288092062": "'勧請縄': \"勧請縄\" (ritual rope across a village entrance): the object's type alone; 上脇垣内勧請縄 has a hamlet name and stays",
+    "node/11288092063": "'勧請縄': \"勧請縄\", same as above, second node",
+    # A description standing in for a name (owner, 2026-10-13)
+    "node/5701401614": "'四神の置物': \"四神の置物\" (ornament of the four gods): a mapper's label for a figure, not a place of worship's name",
+    # A second row of one object (owner, 2026-10-13)
+    "node/2447751663": "'元興寺小塔院跡': 29 m from 小塔院 (node/11170898973, its own wikidata): the same precinct, with the parent temple's wikidata and a castle tag",
+    "relation/5351297": "'奈良女子大学 (Nara Women's University)': second row of 奈良女子大学 (way/671544248, same wikidata) 224 m away, with the English name glued on",
+    "way/1134492960": "'延命地蔵尊': 11 m from 隼神社 (node/1852762953) and carrying that shrine's wikidata and article: one small precinct, two rows",
+    # A religious body's meeting hall (owner, 2026-10-13)
+    "way/309747909": "'創価学会 奈良国際友好会館': Soka Gakkai \"Nara international friendship hall\": a body's meeting hall, body and hall type only",
+    # A religious office (owner, 2026-10-13)
+    "way/446766977": "'宗教法人神慈秀明会 奈良支部': \"religious corporation Shinji Shumeikai, Nara branch\": a body's branch office by its legal name",
+    # Unsure rows a ruling drops: a part of one shrine or temple as its own row, the shrine or temple a row within about 300 m (ruling 4) (owner, 2026-10-13)
+    "way/210215586": "'歓喜寺　地蔵堂': a part of one shrine or temple as its own row, the shrine or temple a row within about 300 m",
+    # Unsure rows a ruling drops: a hall named only for what it enshrines, or a deity's title alone (ruling 3) (owner, 2026-10-13)
+    "way/310511017": "'薬師如来 青面金剛 弘法大師': a hall named only for what it enshrines, or a deity's title alone",
+    "node/9402587514": "'地蔵堂': a hall named only for what it enshrines, or a deity's title alone",
+    "way/259537530": "'地蔵堂': a hall named only for what it enshrines, or a deity's title alone",
+    "node/9402532978": "'薬師堂': a hall named only for what it enshrines, or a deity's title alone",
+    "node/10266992457": "'行者堂': a hall named only for what it enshrines, or a deity's title alone",
+}

@@ -242,4 +242,96 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read of this
+# index (rule passes 5 and 6), each id read with its cached name and its index
+# row; grouped by the reader's class.
+PLACE_DROPPED = {
+    # A bare type word standing alone (reader's drop; owner, 2026-10-13)
+    "node/4773807038": "'Public parc'",
+    # An exhibit or object kept on another's entry or article (reader's drop; owner, 2026-10-13)
+    "node/1423797459": "'ハウステンボス美術館・博物館'",
+    # A second row for one object (the surviving row named in each note) (reader's drop; owner, 2026-10-13)
+    "node/5575184930": "'佐世保市立尾崎公園': 75 m from 尾崎公園 (node/5269602407), one park under its long and short name",
+    # A code or a number beside a type word, or a number alone (reader's drop; owner, 2026-10-13)
+    "way/1296720530": "'第17番礼所'",
+    # An estate's own facility or marketing name (reader's drop; owner, 2026-10-13)
+    "node/11335010063": "'タマタウン野中'",
+    # A peak named only by its height (reader's drop; owner, 2026-10-13)
+    "node/12027995691": "'109m'",
+    "node/12027995687": "'116m'",
+    "node/11453229738": "'117m'",
+    "node/12027995685": "'118m'",
+    "node/12027995688": "'119m'",
+    "node/12027810781": "'120.6m'",
+    "node/12027995710": "'122.4m'",
+    "node/12015550544": "'136m'",
+    "node/12027995708": "'143m'",
+    "node/9613311229": "'146.5m'",
+    "node/12027995686": "'149.4m'",
+    "node/11124422476": "'149m'",
+    "node/12027995690": "'149m'",
+    "node/11453229760": "'14m'",
+    "node/12027995709": "'172m'",
+    "node/12027995693": "'21m'",
+    "node/1484329139": "'224m'",
+    "node/1484314024": "'225m'",
+    "node/11453229751": "'22m'",
+    "node/11453229748": "'23m'",
+    "node/11453229745": "'23m'",
+    "node/11453229759": "'23m'",
+    "node/11453229742": "'23m'",
+    "node/11453229743": "'25m'",
+    "node/12027995700": "'25m'",
+    "node/12027995719": "'25m'",
+    "node/11453229744": "'28m'",
+    "node/1484286169": "'305m'",
+    "node/11453229750": "'32m'",
+    "node/12027995698": "'32m'",
+    "node/12027995717": "'32m'",
+    "node/12027810782": "'337.4m'",
+    "node/12027810790": "'337m'",
+    "node/12027995720": "'34m'",
+    "node/12027810784": "'366.2m'",
+    "node/12027995701": "'37.4m'",
+    "node/11453229747": "'38m'",
+    "node/12027810791": "'397m'",
+    "node/12027810789": "'398m'",
+    "node/12027995692": "'39m'",
+    "node/12027995703": "'39m'",
+    "node/12027995721": "'42.9m'",
+    "node/12027810785": "'423m'",
+    "node/11453229752": "'42m'",
+    "node/12027995702": "'42m'",
+    "node/12027995704": "'42m'",
+    "node/11453229756": "'43m'",
+    "node/12027810788": "'444m'",
+    "node/11453229753": "'44m'",
+    "node/11453229754": "'47m'",
+    "node/11453229746": "'48m'",
+    "node/11453229740": "'50m'",
+    "node/12027995715": "'52m'",
+    "node/12027995706": "'53m'",
+    "node/12027995712": "'54m'",
+    "node/11453229749": "'55.7m'",
+    "node/12027995716": "'56m'",
+    "node/12027995713": "'57m'",
+    "node/12027995707": "'60m'",
+    "node/12015550543": "'63m'",
+    "node/11453229741": "'73m'",
+    "node/12027995684": "'75m'",
+    "node/12027995711": "'76.4m'",
+    "node/12027995689": "'78m'",
+    "node/11453229739": "'83m'",
+    "node/12027995714": "'83m'",
+    "node/12015550542": "'84.6m'",
+    "node/12027995683": "'84m'",
+    "node/11453229755": "'85.1m'",
+    "node/12027995722": "'87m'",
+    "node/1484324805": "'91m'",
+    "node/11453229736": "'94m'",
+    "node/11453229737": "'97m'",
+    "node/12027995682": "'98m'",
+}
+# Why this index reaches more than 25 km past the map's stations
+# (scripts/check_place_scope.py, rule D): a far corner of the municipality itself.
+PLACE_SCOPE_REACH_REASON = "2026-10-13: Uku island (宇久町) is part of the city (owner)"

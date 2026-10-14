@@ -216,4 +216,29 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the full read of 2026-10-13 under the owner's rulings of the
+# same day, each id read with its cached name (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    # bare type: dropped in the full read (owner, 2026-10-13)
+    "node/5193497122": "'からくり時計': \"mechanical clock\" (full read, bare type)",
+    "node/4715909191": "'歌碑': \"poem stone\", at the same point as 十三町 (full read, bare type)",
+    "node/4715944091": "'狛犬': \"guardian dogs\", a pair of shrine statues (full read, bare type)",
+    # milestone as monument: dropped in the full read (owner, 2026-10-13)
+    "node/4715944092": "'二町': \"2 cho\": a distance stone on the Mount Kora approach, tagged a monument, so the milestone rule did not see it (full read, milestone as monument)",
+    "node/4715943191": "'四町': \"4 cho\": distance stone, 215 m from 二町 (full read, milestone as monument)",
+    "node/4715904693": "'十三町': \"13 cho\": distance stone on the same approach (full read, milestone as monument)",
+    # grave as monument: dropped in the full read (owner, 2026-10-13)
+    "node/4715928692": "'即心の墓': \"grave of Sokushin\": a grave with no article, tagged a monument, so the grave rule did not see it (full read, grave as monument)",
+    # description: dropped in the full read (owner, 2026-10-13)
+    "node/8616991277": "'ハンググライダー発進基地': \"hang-glider launch site\" on a park node (full read, description)",
+    "node/5394847406": "'合川団地の公園': \"the park of the Aikawa housing estate\": a description, and an estate's own playground (full read, description)",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/559315944": "'合川団地の公園': the twin of node/5394847406; description: dropped in the full read (owner, 2026-10-13)",
+}
+# Kept by the owner's word (place_index, PLACE_KEPT; owner, 2026-10-13): a famous
+# place the rules pass over for want of a tag, the id read with its cached name
+# (docs/decisions_drafts/search-rollout.md). Not yet confirmed by a rebuild.
+PLACE_KEPT = {
+    "node/2517072847": "'石橋文化センター', Ishibashi Cultural Center (tourism=gallery node, no Wikidata or Wikipedia tag): a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+}

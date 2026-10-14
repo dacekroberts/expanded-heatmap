@@ -115,5 +115,43 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ko",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "대동할인마트앞교차로": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "명진빌라앞교차로": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "성원아파트삼거리": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "연지현대아파트앞교차로": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "영신빌라입구교차로": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "차쉼터카클리닉앞교차로": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "청원한마음아파트입구교차로": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "코아약국앞교차로": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read of this
+# index (rule passes 5 and 6), each id read with its cached name and its index
+# row; grouped by the reader's class.
+PLACE_DROPPED = {
+    # A station row that is no working passenger station (reader's drop; owner, 2026-10-13)
+    "node/6539104985": "'김해낙동강레일파크'",
+    # A business's or a mall's own facility (reader's drop; owner, 2026-10-13)
+    "node/368861344": "'대신관광여행사'",
+    # A bare type word standing alone (reader's drop; owner, 2026-10-13)
+    "way/532724690": "'공연장'",
+    "way/415837542": "'분수광장'",
+    "way/474076009": "'인라인스케이트장'",
+    "way/784692655": "'체육공원'",
+    "way/783836630": "'수변공원'",
+    "way/891377763": "'일반공원'",
+    "way/530434453": "'폐교'",
+    "way/474821348": "'홍보탑'",
+    # A description standing in for a name (reader's drop; owner, 2026-10-13)
+    "way/415837529": "'가족테마존'",
+    "way/891370880": "'생태숲존'",
+    "node/10814372259": "'내대암봉벤치'",
+    # A code or a number beside a type word, or a number alone (reader's drop; owner, 2026-10-13)
+    "node/1906094779": "'조난위치표지목(김해13-2)'",
+    # An estate's own facility or marketing name (reader's drop; owner, 2026-10-13)
+    "way/783823614": "'4단지어린이놀이터'",
+    "way/1315615415": "'모아미래도6단지 썬큰광장'",
+}

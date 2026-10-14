@@ -71,3 +71,50 @@ NODE_NAMES = {12396988316: 'Mercado', 12396988312: 'Paquetá', 12396988308: 'Pou
 GATE3 = {'lines': {'L1': 15}, 'network': 27, 'source': "pt.wikipedia 'VLT da Baixada Santista', read 2026-09-24 - secondary; L1 15 stations (14 shared with L2), 12 new on L2 - 27 in all"}
 SPACING_MIN_M = 300.0
 COLLAPSE_MAX_SPREAD_M = 400
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
+
+PLACE_AREA = "(id:3600297995,3600298442)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
+PLACE_LANGUAGES = ("pt",)
+PLACE_FOLD = None
+PLACE_REVIEWED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/santos.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A ride in a park indexed as a station (owner, 2026-10-13)
+    "node/1547020332": "'Heritage Tram Stop': an English description (\"heritage tram stop\") of a stop of the tourist tram in the old centre; railway=tram_stop, a stop position, no name of its own",
+    # A glitched name (owner, 2026-10-13)
+    "relation/5216236": "'Jardins da Orla de São Vicente Garotas baratas - Praia do Itararé': a vandalised name: two abusive words are inserted in the middle of the seafront gardens' name",
+    # A bare type word (owner, 2026-10-13)
+    "node/5301541680": "'Cascata': \"waterfall\", a type word on a node tagged a monument; one of three such nodes by one mapper",
+    "node/2067315379": "'Mesquita': \"mosque\", the type word alone",
+    # A description standing in for a name (owner, 2026-10-13)
+    "node/5301131888": "'Cobertura Plana': \"flat roof\", a description tagged a monument",
+    "node/5301542414": "'Parede de escalada': \"climbing wall\", a description tagged a monument",
+    "way/548741362": "'Quiosques Canal 1': \"kiosks, canal 1\", a row of beach kiosks described by where they stand, tagged a park",
+    "way/548742396": "'Quiosques Canal 2': \"kiosks, canal 2\", a row of beach kiosks described by where they stand, tagged a park",
+    "way/624095698": "'Rotatória 1': \"roundabout 1\", a traffic island numbered by a mapper, tagged a park",
+    "way/624095701": "'Rotatória 2': \"roundabout 2\", a traffic island numbered by a mapper",
+    "way/624095703": "'Rotatória 3': \"roundabout 3\", a traffic island numbered by a mapper",
+    "way/624095706": "'Rotatória 4': \"roundabout 4\", a traffic island numbered by a mapper",
+    "way/624095708": "'Rotatória 5': \"roundabout 5\", a traffic island numbered by a mapper",
+    "way/624095711": "'Rotatória 6': \"roundabout 6\", a traffic island numbered by a mapper",
+    "way/624095714": "'Rotatória 7': \"roundabout 7\", a traffic island numbered by a mapper",
+    # A facility of an apartment estate (owner, 2026-10-13)
+    "way/1307544848": "'Playground dos Moradores': \"the residents' playground\", a residents' facility tagged a park",
+    # A business (owner, 2026-10-13)
+    "node/13228550047": "'ONG saude e familia': an organisation's name (an NGO) on a node tagged a park",
+    # Worship named only by its body or chain (owner, 2026-10-13)
+    "node/4018487913": "'Bola de Neve': the chain's name only (Bola de Neve), no place name",
+    "node/4858522579": "'Igreja Luterana': \"Lutheran church\", a denomination and nothing else",
+    "node/5301079842": "'Igreja Cristã Maratana': the body's name only (Igreja Cristã Maranata, misspelled)",
+    # A second row of one object (owner, 2026-10-13)
+    "relation/18937523": "'Vila Matias': the boundary of the district that the node 200 m away names as Vila Mathias (node/615753011); same wikidata id, two spellings, two rows",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1235079669": "'ONG saude e familia': the twin of node/13228550047; A business (owner, 2026-10-13)",
+    "way/624095717": "'Rotatória 7': the twin of way/624095714; A description standing in for a name (owner, 2026-10-13)",
+}

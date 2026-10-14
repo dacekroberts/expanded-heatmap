@@ -283,4 +283,13 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the full read of 2026-10-13 under the owner's rulings of the
+# same day, each id read with its cached name (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    # station ride: dropped in the full read (owner, 2026-10-13)
+    "node/10594575218": "'てっぺんとりで': a ride's stop inside the Ehime Kodomo no Shiro theme park (146 m from the park's point), railway=station with no operator or wikidata (full read, station ride)",
+    # duplicate: dropped in the full read (owner, 2026-10-13)
+    "node/3601165451": "'本町1丁目': second platform node of one tram stop, same name and ref 25, 177 m from node/3601165450 (full read, duplicate)",
+    "node/12827570072": "'Matsuyama Castle': English-named second node 82 m from the castle's own row (node/611661255), which already carries Matsuyama Castle as alt (full read, duplicate)",
+    "way/588273947": "'湯築城址': the site area of Yuzuki castle, 45 m from the castle's own row (node/2460130038, with wikidata) (full read, duplicate)",
+}

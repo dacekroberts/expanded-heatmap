@@ -195,5 +195,23 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("fr",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "Collection Lambert": "a contemporary art museum (tourism=museum, ref:mhs, Wikipedia); its other name is the hôtel particulier it occupies; tags read 2026-10-13",
+    "Hôtel de Salvati-Palasse": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00081875, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de l'Espine": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00081852, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de la Bastide": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00081841, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+}
+# Dropped by id on the full read of 2026-10-13 under the owner's rulings of the
+# same day, each id read with its cached name (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    # description: dropped in the full read (owner, 2026-10-13)
+    "node/13858131961": "'Reste des remparts': \"remains of the ramparts\": a description on a historic=ruins node; the walls have their own row Remparts d'Avignon (relation/6594149) (full read, description)",
+    # worship denomination only: dropped in the full read (owner, 2026-10-13)
+    "way/83759543": "'Centre Évangélique libre protestant': \"free evangelical protestant centre\": a hall-type word and denomination words, no name of its own (the other centre, \"... Les Sources\", has one) (full read, worship denomination only)",
+    # business: dropped in the full read (owner, 2026-10-13)
+    "way/305565978": "'Les Naïades I': landuse=commercial: one commercial complex (block I) tagged place=neighbourhood (full read, business)",
+    "way/959847872": "'SNCF - Technicentre PACA Avignon': landuse=railway, operator SNCF: a rolling-stock workshop tagged place=locality (full read, business)",
+}

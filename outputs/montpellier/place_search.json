@@ -1,0 +1,31 @@
+{
+  "index": "app/static/places/montpellier.json",
+  "places": 9227,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "fr"
+    ],
+    "coverage": {
+      "en": 0.0,
+      "fr": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "French"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/28722",
+      "name": "Montpellier",
+      "stations": 87
+    },
+    {
+      "osm": "relation/28720",
+      "name": "Saint-Jean-de-Védas",
+      "stations": 1
+    }
+  ]
+}

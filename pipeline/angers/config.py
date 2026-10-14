@@ -202,5 +202,22 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("fr",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "Hôtel de Flore": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs IA49000871, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Tinténiac": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00108905, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel des Pénitentes": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs IA49000884, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read of this
+# index (rule passes 5 and 6), each id read with its cached name and its index
+# row; grouped by the reader's class.
+PLACE_DROPPED = {
+    # A bare type word standing alone (reader's drop; owner, 2026-10-13)
+    "way/564155490": "'Espace de recueillement'",
+    # Worship named only by a body, a denomination or a chain (reader's drop; owner, 2026-10-13)
+    "way/968896735": "'Mosquée turque'",
+    # A description standing in for a name (reader's drop; owner, 2026-10-13)
+    "way/1127456767": "'Anciennes latrines'",
+}

@@ -1,0 +1,27 @@
+{
+  "index": "app/static/places/fuchu_tokyo.json",
+  "places": 1030,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "ja"
+    ],
+    "coverage": {
+      "en": 0.529,
+      "ja": 0.995
+    },
+    "list_share": 0.5,
+    "listed": [
+      "English",
+      "Japanese"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/5302327",
+      "name": "Fuchu",
+      "stations": 14
+    }
+  ]
+}

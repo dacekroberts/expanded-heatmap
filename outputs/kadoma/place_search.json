@@ -1,0 +1,31 @@
+{
+  "index": "app/static/places/kadoma.json",
+  "places": 831,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "ja"
+    ],
+    "coverage": {
+      "en": 0.468,
+      "ja": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Japanese"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/358693",
+      "name": "Kadoma",
+      "stations": 4
+    },
+    {
+      "osm": "relation/358685",
+      "name": "Moriguchi",
+      "stations": 1
+    }
+  ]
+}

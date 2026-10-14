@@ -37,26 +37,26 @@
   "osm_boundary_host": "overpass-api.de",
   "osm_fetched": "2026-09-30T23:46:13+00:00",
   "osm_place_outline": {
-    "bytes": 188478,
+    "bytes": 188740,
     "elements": 2,
     "file": "osm_place_outline_v1.json",
-    "host": "overpass.kumi.systems",
-    "how": "kept (on disk from an earlier run)",
-    "osm_base": "2026-07-24T11:04:51Z",
-    "query": "[out:json][timeout:60];\narea(id:3600439073,3600438931)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
-    "retrieved": "2026-10-13T07:50:47+00:00",
-    "sha256": "806490fbdb5ac8bdd45abc9b4992186f65060eb9821946a577b040c537ee8573"
-  },
-  "osm_places": {
-    "bytes": 3640409,
-    "elements": 32973,
-    "file": "osm_places_2026-10-13.json",
     "host": "download.geofabrik.de (liberecky-261012.osm.pbf, filtered on this machine)",
     "how": "filtered from a regional extract",
     "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:60];\narea(id:3600439073,3600438931)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T22:04:05+00:00",
+    "sha256": "8e49ff7be2df24bf7733f010edd141d29eb4d85c863cad1f648b7011bdc77e9b"
+  },
+  "osm_places": {
+    "bytes": 3640639,
+    "elements": 32973,
+    "file": "osm_places_2026-10-13.json",
+    "host": "download.geofabrik.de (liberecky-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract; shared-border rule on for streets: 0 element(s) admitted that the Overpass query does not return",
+    "osm_base": "2026-10-12T20:21:35Z",
     "query": "[out:json][timeout:170];\narea(id:3600439073,3600438931)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
-    "retrieved": "2026-10-13T09:40:32+00:00",
-    "sha256": "ad8bf9df27c07c9035a001d519f11cc7fa10256c15e5ab2b950a78277bd59ad9"
+    "retrieved": "2026-10-13T22:04:05+00:00",
+    "sha256": "49b6de7da51dcd5b55472568004cfcd2280486d6ec8f6ebf221fba53e0de1933"
   },
   "osm_places_extra": {
     "bytes": 55574,
@@ -66,10 +66,23 @@
     "how": "filtered from a regional extract",
     "osm_base": "2026-10-12T20:21:35Z",
     "query": "[out:json][timeout:170];\narea(id:3600439073,3600438931)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
-    "retrieved": "2026-10-13T09:40:32+00:00",
+    "retrieved": "2026-10-13T22:04:05+00:00",
     "sha256": "5d25c80781f8ab40949795e201d77971307acf5d53f3970a3166191f44aeb431"
   },
   "osm_tram_host": "overpass-api.de",
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 682,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 18,
+    "ids_not_read": 0,
+    "ids_with_article": 4,
+    "ids_without_article": 14,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "d0d9f4b168c79d103e8cfbe4b8b72a3f7abfbfc3d68eddb3370e4491bb2b3b44"
+  },
   "res": {
     "bytes": 543309993,
     "file": "res_data.csv",

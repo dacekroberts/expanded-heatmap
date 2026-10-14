@@ -290,4 +290,12 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the full read of 2026-10-13 under the owner's rulings of the
+# same day, each id read with its cached name (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    # bare type: dropped in the full read (owner, 2026-10-13)
+    "way/728155551": "'ビオトープゾーン': \"biotope zone\": a zone of a larger park under its type alone (full read, bare type)",
+    "node/4402333459": "'薬師堂': Yakushi hall under its type alone, same family as 大師堂 in the rule (full read, bare type)",
+    "node/11896906579": "'稲荷大明神': \"Inari Daimyojin\", the deity's title alone; the rule has 正一位稲荷大明神 only (full read, bare type)",
+    "way/923052262": "'稲荷大神': \"Inari Okami\", the deity's name alone (full read, bare type)",
+}

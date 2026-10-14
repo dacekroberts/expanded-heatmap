@@ -169,4 +169,28 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("cs",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/ostrava.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A duplicate of one object (owner, 2026-10-13)
+    "node/3290624267": "'Mariánské náměstí': second of three tram-stop rows named Mariánské náměstí within 221 m (node/3290624266 kept): one stop, three platform nodes",
+    "node/3296974442": "'Mariánské náměstí': third of three tram-stop rows named Mariánské náměstí within 221 m (node/3290624266 kept)",
+    "node/3268543065": "'VŠB-TUO': second tram-stop row named VŠB-TUO 151 m from node/660800827: one stop, two platform nodes",
+    "node/3304701394": "'Hranečník (St. 5)': Hranečník terminus listed twice, the platform number glued to the name ('St. 5'; 'St. 1' is node/3301463547, about 120 m away)",
+    "node/3304701398": "'Nová Huť hlavní brána 2': Nová Huť hlavní brána listed twice with the platform number glued on ('2'; '1' is node/3304701399, about 60 m away)",
+    "node/2326099516": "'ZOO Ostrava': the zoo as a node inside the zoo's own outline (way/32949583), both with wikidata Q3562223 and the node's name already the outline's short_name",
+    # Worship named only by a body or a denomination (owner, 2026-10-13)
+    "node/13587047983": "'Církev Ježíše Krista Svatých posledních dnů': named only by the denomination; its wikidata and wikipedia are the denomination's own (Q42504), not this congregation's; the cached description holds the local name",
+    "way/38028785": "'Církev bratrská': named only by the denomination (Church of the Brethren), no congregation or place name",
+    "way/52605531": "'Církev československá husitská': named only by the denomination (Czechoslovak Hussite Church), no wikidata",
+    # A bare type word (owner, 2026-10-13)
+    "way/184549169": "'Kaplička': 'little chapel'; the chapel's own name is only in the cached description; it carries a wikidata id, which may be why the bare-type rule let it through",
+    "way/59349272": "'Obecní kaple': 'municipal chapel', a type",
+    "way/74404440": "'Multifunkční hala': 'multipurpose hall', a type on a stadium outline",
+    "node/11985257476": "'hřbitovní stéla': 'cemetery stele', an object type, no wikidata",
+    "node/13208401433": "'dekorativní stěna': 'decorative wall', an object type; carries a wikidata id of the artwork, title equally generic",
+    "node/924221483": "'bludný balvan': 'erratic boulder' in lower case; the cached description gives the place; carries a wikidata id",
+    # A business (owner, 2026-10-13)
+    "node/4228877490": "'PROJEKTSTUDIO': a design firm's name in capitals on a node tagged only historic=monument",
+}

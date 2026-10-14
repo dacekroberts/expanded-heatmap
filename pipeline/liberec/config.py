@@ -154,5 +154,23 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("cs",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "Lékárna": "a tram stop (railway=tram_stop), named for the place beside it (the Prague precedent, Hotel Golf); tags read 2026-10-13",
+}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/liberec.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A duplicate of one object (owner, 2026-10-13)
+    "node/6052648541": "'Rybníček': second tram-stop row named Rybníček 230 m from node/6052648126: one stop, two platform nodes",
+    # Worship named only by a body or a denomination (owner, 2026-10-13)
+    "node/13587125832": "'Církev Ježíše Krista Svatých posledních dnů': named only by the denomination; its wikidata and wikipedia are the denomination's own (Q42504), not this congregation's",
+    # A bare type word (owner, 2026-10-13)
+    "way/467394744": "'Kaplička': 'little chapel'; the chapel's own name is only in the cached description; it carries a wikidata id, which may be why the bare-type rule let it through",
+    # A vanished object (owner, 2026-10-13)
+    "node/2906245014": "'bývalá vila Brosche': 'former Brosche villa' as a locality: a house that is gone, and a family's home when it stood",
+    "node/4017971823": "'bývalý skokanský můstek': 'former ski jump' as a locality: a description of something no longer there",
+}

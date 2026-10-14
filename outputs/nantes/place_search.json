@@ -1,0 +1,51 @@
+{
+  "index": "app/static/places/nantes.json",
+  "places": 16779,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "fr"
+    ],
+    "coverage": {
+      "en": 0.0,
+      "fr": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "French"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/59874",
+      "name": "Nantes",
+      "stations": 56
+    },
+    {
+      "osm": "relation/64362",
+      "name": "Saint-Herblain",
+      "stations": 10
+    },
+    {
+      "osm": "relation/60972",
+      "name": "Orvault",
+      "stations": 7
+    },
+    {
+      "osm": "relation/60966",
+      "name": "Rezé",
+      "stations": 7
+    },
+    {
+      "osm": "relation/65561",
+      "name": "Bouguenais",
+      "stations": 3
+    },
+    {
+      "osm": "relation/73554",
+      "name": "La Chapelle-sur-Erdre",
+      "stations": 1
+    }
+  ]
+}

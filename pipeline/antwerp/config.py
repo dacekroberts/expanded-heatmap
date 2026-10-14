@@ -230,4 +230,46 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("nl",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the full read of 2026-10-13 under the owner's rulings of the
+# same day, each id read with its cached name (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    # bare type: dropped in the full read (owner, 2026-10-13)
+    "way/264005096": "'Poortgebouw': whole name is \"gatehouse\"; building=yes historic=city_gate, no wikidata (full read, bare type)",
+    # description: dropped in the full read (owner, 2026-10-13)
+    "node/2402302141": "'Stenen schandpaal': \"stone pillory\": a description of the object; its local name De Kaak is only the alt_name (full read, description)",
+    # business: dropped in the full read (owner, 2026-10-13)
+    "way/495714676": "'Stadscampus: Vrijzinnige Dienst': a university service office (alt_name Preventiedienst, operator the university) named on a historic building: a tenant's name (full read, business)",
+    # worship denomination only: dropped in the full read (owner, 2026-10-13)
+    "way/385150383": "'Christelijke Gereformeerde Kerk - Evangelisch Centrum': the name is the denomination tag word for word (denomination:nl=Christelijk Gereformeerd) plus \"evangelical centre\"; no name of its own (full read, worship denomination only)",
+    # duplicate: dropped in the full read (owner, 2026-10-13)
+    "relation/16871589": "'De Wilde Zee': same neighbourhood as the node row Wilde Zee (node/5484709895, alt De Wilde Zee), 13 m away (full read, duplicate)",
+    "relation/20034485": "'Oude Groenenhoek (Berchem)': the boundary of the quarter beside its own node Oude Groenenhoek (node/11470764555), 57 m (full read, duplicate)",
+    "relation/16915210": "'Kruininge-Bremweide (Deurne)': the boundary of the neighbourhood beside its own node Kruininge-Bremweide (node/11476470015), 261 m (full read, duplicate)",
+    "relation/17149135": "'Oosterveld (Antwerpen)': the boundary of the quarter beside its own node Oosterveld (node/301430807), 294 m (full read, duplicate)",
+    "node/2206330113": "'Diamant': a platform node of the premetro station Diamant (node/12095463891, the one with the article), 89 m (full read, duplicate)",
+    "node/2206330114": "'Diamant': second platform node of the same station, 7 m from node/2206330113 (full read, duplicate)",
+    "node/1635630580": "'Groenplaats': a tram stop node 21 m from the premetro station Groenplaats (node/12095480888, the one with the article) (full read, duplicate)",
+    "node/2207804046": "'Groenplaats': a platform node 24 m from the station Groenplaats (node/12095480888) (full read, duplicate)",
+    "node/2202073276": "'Antwerp Expo': the other direction of one tram stop, 163 m from node/2202073275 (full read, duplicate)",
+    "node/2205844971": "'Bres': the other direction of one tram stop, 197 m from node/2205844970 (full read, duplicate)",
+    "node/2109888549": "'Grens Kiel': the other direction of one tram stop, 161 m from node/1543582526 (full read, duplicate)",
+    "node/582900810": "'Jan Moorkens': the other direction of one tram stop, 171 m from node/582900802 (full read, duplicate)",
+    "node/2205844988": "'Kasteelplein': the other direction of one tram stop, 161 m from node/2205844982 (full read, duplicate)",
+    "node/2203691676": "'Kerkstraat': the other direction of one tram stop, 191 m from node/2203691675 (full read, duplicate)",
+    "node/12618378801": "'Lamorinièrestraat': the other direction of one tram stop, 256 m from node/582888357 (full read, duplicate)",
+    "node/12361661877": "'Paardenmarkt': the other direction of one tram stop, 171 m from node/7004037897 (full read, duplicate)",
+    "node/616349933": "'Rerum Novarum': the other direction of one tram stop, 154 m from node/616349924 (full read, duplicate)",
+    "node/616349961": "'Ringlaan': the other direction of one tram stop, 197 m from node/616349950 (full read, duplicate)",
+    "node/660416299": "'Sporthal': the other direction of one tram stop, 153 m from node/660414460 (full read, duplicate)",
+    "node/2202086566": "'deSingel': the other direction of one tram stop, 196 m from node/2202086562 (full read, duplicate)",
+    # a duplicate of a row that stays, dropped though it carries a wikipedia tag (owner, 2026-10-13)
+    "way/996504876": "'Chinatown': same thing as the place row Van Wesenbekestraat (relation/16884611, alt Chinatown), 7 m away, same wikidata Q2932425 (full read, duplicate)",
+    # Twins of a dropped duplicate (owner, 2026-10-13): a stop node and a platform node of the premetro
+    # station Groenplaats (node/12095480888, the row that stays), promoted when node/1635630580 and
+    # node/2207804046 were dropped; the same class, a second row of one object.
+    "node/1635630608": "'Groenplaats': the twin of node/1635630580; duplicate: dropped in the full read",
+    "node/2207804047": "'Groenplaats': the twin of node/2207804046; duplicate: dropped in the full read",
+    # Twin round 1 after the station rules (owner, 2026-10-13): a same-named neighbouring object
+    # promoted into the place of a row dropped by id; each under the class of the row it replaced.
+    "node/2610365437": "'Groenplaats': the twin of node/1635630580; duplicate: dropped in the full read (owner, 2026-10-13)",
+}

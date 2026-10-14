@@ -201,5 +201,24 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("fr",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "Esplanade de l'Hôtel Dieu": "a public street named for a building or institution on it, not a business (living_street class; batch 2b precedent, _named_street); tags read 2026-10-13",
+}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read of this
+# index (rule passes 5 and 6), each id read with its cached name and its index
+# row; grouped by the reader's class.
+PLACE_DROPPED = {
+    # A business's or a mall's own facility (reader's drop; owner, 2026-10-13)
+    "way/666468202": "'Association pour la Protection du Site Naturel de Repainville'",
+    # A bare type word standing alone (reader's drop; owner, 2026-10-13)
+    "way/830255713": "'Le Jardin Partagé'",
+    # A glitched name (reader's drop; owner, 2026-10-13)
+    "node/1846752977": "'Locomotove Pacific 231, monument historique'",
+    "node/9556359802": "'U1'",
+    "node/9556359803": "'U2'",
+    # A description standing in for a name (reader's drop; owner, 2026-10-13)
+    "node/11989648589": "'Socle d'un ancien calvaire du prieuré Saint-Michel'",
+}

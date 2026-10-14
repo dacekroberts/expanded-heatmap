@@ -1,0 +1,31 @@
+{
+  "index": "app/static/places/itami.json",
+  "places": 4197,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "ja"
+    ],
+    "coverage": {
+      "en": 0.238,
+      "ja": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Japanese"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/901525",
+      "name": "Itami",
+      "stations": 5
+    },
+    {
+      "osm": "relation/358672",
+      "name": "Toyonaka",
+      "stations": 1
+    }
+  ]
+}

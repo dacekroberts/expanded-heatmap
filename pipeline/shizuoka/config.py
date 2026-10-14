@@ -244,4 +244,27 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the full read of 2026-10-13 under the owner's rulings of the
+# same day, each id read with its cached name (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    # worship body: dropped in the full read (owner, 2026-10-13)
+    "node/1520555256": "'インナートリップセンター静岡': no religion tag; the name is a religious body's training hall (Inner Trip is the Reiyukai's name for its centres, from memory, not from a tag), not a named temple (full read, worship body)",
+    # bare type: dropped in the full read (owner, 2026-10-13)
+    "way/322456336": "'ピクニック広場': \"picnic plaza\" with no proper name; same family as the rule words 芝生広場, 多目的広場, 自由広場 (full read, bare type)",
+    "node/1835094117": "'地蔵堂': Jizo hall under its type alone; the rule has 地蔵 and 大師堂 but not 地蔵堂 (full read, bare type)",
+    "node/1827258314": "'文殊堂': Monju hall under its type alone (rule has 文殊菩薩, 大師堂) (full read, bare type)",
+    "way/139539753": "'閻魔堂': Enma hall under its type alone (full read, bare type)",
+    "node/4348068104": "'稲荷大明神': \"Inari Daimyojin\", the deity's title alone; the rule has 正一位稲荷大明神 only (full read, bare type)",
+    "node/5839586855": "'忠霊塔': war-dead memorial tower under its type alone (rule has 表忠碑, 戦没記念碑); 忠霊塔公園 nearby is a separate named park and stays (full read, bare type)",
+    "node/11770747381": "'耕地整理記念碑': \"land readjustment memorial stone\", a type of monument, tagged leisure=park on a node (full read, bare type)",
+    # description: dropped in the full read (owner, 2026-10-13)
+    "way/59331678": "'大慈悲院川の一部': \"part of the Daijihiin river\": a mapper's note as the name (note tag carries the river's name); 大慈悲院川 has its own row (full read, description)",
+    "way/171793464": "'駐屯地 外曲輪': \"garrison, outer bailey\": two feature words, no proper name, tagged a park beside the Mariko castle ruins (full read, description)",
+    "way/232598645": "'東キャンプ場': \"east campsite\", a part of 浜石野外センター (its own row, 150 m) (full read, description)",
+    "way/232598659": "'西キャンプ場': \"west campsite\", a part of 浜石野外センター (its own row, 100 m) (full read, description)",
+    # glitch: dropped in the full read (owner, 2026-10-13)
+    "node/2316488038": "'延寿院\u200e': name ends in an invisible U+200E mark; a real temple with wikidata, so a repair upstream would keep it (full read, glitch)",
+}
+# Why this index reaches more than 25 km past the map's stations
+# (scripts/check_place_scope.py, rule D): a far corner of the municipality itself.
+PLACE_SCOPE_REACH_REASON = "2026-10-13: Aoi Ward runs north into the Southern Alps (三峰岳, 塩見岳) (owner)"

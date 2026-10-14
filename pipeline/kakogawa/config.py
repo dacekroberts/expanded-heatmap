@@ -253,4 +253,26 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read of this
+# index (rule passes 5 and 6), each id read with its cached name and its index
+# row; grouped by the reader's class.
+PLACE_DROPPED = {
+    # A station row that is no working passenger station (reader's drop; owner, 2026-10-13)
+    "relation/1837932": "'山陽新幹線'",
+    # A second row for one object (the surviving row named in each note) (reader's drop; owner, 2026-10-13)
+    "node/5002453193": "'今福八幡宮': same spot (0 m) as way/1016747708 今福厄除八幡宮; one shrine, two rows",
+    "node/9299758414": "'厄除八幡宮（宗佐の厄神さん）': 9 m from way/996893877 宗佐厄神八幡神社 (wikidata, reg_name=宗佐の厄神さん); one shrine, two rows",
+    "node/11709777659": "'日岡御陵': 49 m from way/544053408 日岡陵古墳 (wikidata); the same imperial tumulus under its other name",
+    "node/9176345468": "'横蔵寺　寳雲閣': one of three rows for the halls of one temple, 24 m from node/9176345500 横蔵寺　本堂, which would stay",
+    "node/9176345501": "'横蔵寺　観音堂': as above, 18 m from the main hall's row",
+    # A description standing in for a name (reader's drop; owner, 2026-10-13)
+    "way/706569808": "'浜の宮天神社　倉庫'",
+    # A bare type word standing alone (reader's drop; owner, 2026-10-13)
+    "node/12690278763": "'地蔵堂'",
+    "node/11710394085": "'釣り鐘堂'",
+    # Unsure in the read, dropped by ruling 3, a hall named only for what it enshrines or a deity's title alone (owner, 2026-10-13)
+    "way/545764856": "'薬師堂'",
+    "way/1368595133": "'正一位光慧大明神'",
+    # Unsure in the read, dropped by ruling 4, a part of one shrine or temple as its own row (owner, 2026-10-13)
+    "node/4871185075": "'水浄'",
+}

@@ -127,5 +127,56 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ko",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "MTV동양파라곤아파트앞": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "동보아파트삼거리": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "동원아파트삼거리": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "유천아파트앞삼거리": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "유통상가사거리": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "이마트사거리": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "중심상가로": "a street's own name on tertiary and residential ways ('central shopping district road'), a public road; tags read 2026-10-13",
+}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read of this
+# index (rule passes 5 and 6), each id read with its cached name and its index
+# row; grouped by the reader's class.
+PLACE_DROPPED = {
+    # A bare type word standing alone (reader's drop; owner, 2026-10-13)
+    "node/4640011427": "'자판기'",
+    "node/4634867188": "'사각정'",
+    "node/4640011481": "'사각정'",
+    "node/4640175682": "'사각정'",
+    "node/4650409325": "'사각정'",
+    "node/4640057105": "'소공연장'",
+    "node/4650409326": "'건축비'",
+    "way/478860911": "'공원 무대'",
+    "way/631442844": "'농구장'",
+    "way/667714296": "'중앙광장'",
+    "way/545670593": "'중심광장'",
+    "way/545670586": "'진입광장'",
+    "way/545670584": "'휴게광장'",
+    # A description standing in for a name (reader's drop; owner, 2026-10-13)
+    "node/4640175680": "'운동기구집합소'",
+    "node/4642314537": "'둥굴둥굴동상'",
+    "node/4640011423": "'생각하는 동상'",
+    "node/4640080473": "'옥구공원 입구'",
+    "node/4642270072": "'송운중학교 입구'",
+    "node/4642270071": "'송운초등학교 입구'",
+    # An estate's own facility or marketing name (reader's drop; owner, 2026-10-13)
+    "way/472440125": "'우남퍼스트빌 놀이터'",
+    # A second row for one object (the surviving row named in each note) (reader's drop; owner, 2026-10-13)
+    "way/648191529": "'신천성당 성전': \"Sincheon church, sanctuary\": the building inside way/648014412 신천성당, 14 m away; one church, two rows",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/4635065491": "'사각정': the twin of node/4634867188; A bare type word standing alone (reader's drop; owner, 2026-10-13)",
+    "node/4642155855": "'사각정': the twin of node/4634867188; A bare type word standing alone (reader's drop; owner, 2026-10-13)",
+    "node/4642280915": "'사각정': the twin of node/4634867188; A bare type word standing alone (reader's drop; owner, 2026-10-13)",
+    "node/4650409327": "'사각정': the twin of node/4634867188; A bare type word standing alone (reader's drop; owner, 2026-10-13)",
+    "way/545670590": "'진입광장': the twin of way/545670586; A bare type word standing alone (reader's drop; owner, 2026-10-13)",
+    "way/545670594": "'휴게광장': the twin of way/545670584; A bare type word standing alone (reader's drop; owner, 2026-10-13)",
+    # Twin round 2 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/11640021860": "'사각정': the twin of node/4634867188; A bare type word standing alone (reader's drop; owner, 2026-10-13)",
+}

@@ -174,5 +174,47 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("es",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "Gran Hotel CaixaForum": "a listed former hotel building that houses a museum (tourism=museum, heritage=3, Wikipedia): the building, not a hotel business; tags read 2026-10-13",
+}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read of this
+# index (rule passes 5 and 6), each id read with its cached name and its index
+# row; grouped by the reader's class.
+PLACE_DROPPED = {
+    # A bare type word standing alone (reader's drop; owner, 2026-10-13)
+    "way/1564327608": "'Esglèsia evangèlica'",
+    "way/799328359": "'convent'",
+    "way/872249711": "'antic oratori'",
+    "way/291799259": "'Es Castell'",
+    # Worship named only by a body, a denomination or a chain (reader's drop; owner, 2026-10-13)
+    "way/921074330": "'Església anglicana'",
+    "node/7379720281": "'Església sueca'",
+    "way/379782287": "'Jesucrist dels Sants dels Darrers Dies'",
+    "node/7570269588": "'Congregación Cristiana'",
+    # A religious office, hall or residence tagged a place of worship (reader's drop; owner, 2026-10-13)
+    "way/762551453": "'Germanes Carmelites del Sagrat Cor'",
+    "way/474606239": "'Germanes de la Caritat'",
+    "way/866906755": "'Germanes de la Caritat'",
+    "way/696730863": "'Seminari major'",
+    "way/763491415": "'Residència d'estudiants Sebastià Gili'",
+    # A business's or a mall's own facility (reader's drop; owner, 2026-10-13)
+    "way/963499685": "'Parque Centro Comercial FAN'",
+    # A second row for one object (the surviving row named in each note) (reader's drop; owner, 2026-10-13)
+    "way/108941321": "'Poble Espanol': a misspelt second row for Poble Espanyol (relation/1546327, 65 m, with the article); a building of the attraction tagged a castle",
+    "way/193918304": "'Forns de guix de dalt': the same kilns as Forns de dalt de Son Quint (way/193918309, 0 m), under the less specific name",
+    "node/14256547276": "'CESAG': a college's acronym tagged a neighbourhood, 0 m from the college's own landmark row (way/989025527)",
+    # A description standing in for a name (reader's drop; owner, 2026-10-13)
+    "way/1411623468": "'Zona peatonal UIB'",
+    "way/962650292": "'Zona esportiva UIB'",
+    "way/247844167": "'UIB berenadors'",
+    # A glitched name (reader's drop; owner, 2026-10-13)
+    "node/4311727289": "'בית כנסת מיורקה'",
+    # A home, or a private person's or family's own name (names withheld) (reader's drop; owner, 2026-10-13)
+    "node/10806838300": "name withheld",
+}
+# Why this index reaches more than 25 km past the map's stations
+# (scripts/check_place_scope.py, rule D): a far corner of the municipality itself.
+PLACE_SCOPE_REACH_REASON = "2026-10-13: the Cabrera archipelago belongs to the municipality of Palma (owner)"

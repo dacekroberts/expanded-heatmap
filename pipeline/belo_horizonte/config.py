@@ -82,3 +82,160 @@ NODE_NAMES = {}
 GATE3 = {'lines': {'1': 21, '2': 2}, 'network': 22, 'source': "pt.wikipedia 'Metrô de Belo Horizonte', read 2026-09-24 - secondary; its text: 22 stations in operation. Its table's Linha 1 '20 (+1 being built)' is stale: the +1, Nova Suíça, opened with Linha 2 on 2026-07-03 as the interchange, so Linha 1 21, Linha 2 2"}
 SPACING_MIN_M = 300.0
 COLLAPSE_MAX_SPREAD_M = 400
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
+
+PLACE_AREA = "(id:3600368782,3600368786)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
+PLACE_LANGUAGES = ("pt",)
+PLACE_FOLD = None
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "Estação Minas Shopping": "a subway station (railway=station), named for the place beside it (the Prague precedent, Hotel Golf); tags read 2026-10-13",
+    "Rua Shopping Center Norte": "a street's own name on two residential ways beside a shopping centre (the São Paulo precedent, Rua do Shopping); tags read 2026-10-13",
+}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/belo_horizonte.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A freight station (owner, 2026-10-13)
+    "node/9972254898": "'Terminal Ferroviário Olhos D'água - TOD - VALE': a mining company's rail loading terminal (the name carries the company and the terminal's code); railway=station only, no passenger tag",
+    # A second row of one object (owner, 2026-10-13)
+    "way/31281822": "'Horto': the building of Estação Horto (node/5365389740, 0 m), a second station row for one station",
+    "way/768847795": "'Edificio Sede MHAB': \"headquarters building\" of the Museu Histórico Abílio Barreto (way/116188123, 50 m); its wikipedia tag is the museum's",
+    "node/14232143396": "'Centro de Arte e Esporte Unificado (CEU) Ressaca': a node 10 m from the way of the same centre (way/1563584811), the name differing by one plural",
+    "node/5256902956": "'Casa de Úmbanda Ogun & Yara': a node 15 m from the same house's building (way/556110113), spelled slightly differently",
+    "node/7040648653": "'Paroquia São Judas Tadeu': a node on the same parish church as way/753547704 (0 m), the names one letter apart",
+    # A description standing in for a name (owner, 2026-10-13)
+    "node/11882677777": "'3rd age gym park': an English description of an outdoor gym for older people, tagged a park",
+    "way/1513891125": "'Banquinho': \"little bench\", a mapper's note on a patch tagged a park",
+    "way/923601612": "'MIRANTE 01': \"viewpoint 01\", a type word and a number, tagged a park",
+    "way/923601613": "'MIRANTE 02': \"viewpoint 02\", a type word and a number, tagged a park",
+    "way/1165408267": "'Praça de Exercícios': \"exercise square\", a function, not a name",
+    "way/550168435": "'Praça de Retorno': \"U-turn square\", a traffic function, not a name",
+    "way/629554650": "'praça sem nome': \"square without a name\"",
+    "way/227940848": "'Área de Retenção de Água Pluvial': \"stormwater retention area\", infrastructure described, tagged a park",
+    "way/556139331": "'Área de preservação': \"preservation area\", a type phrase with no place name",
+    "way/1018560345": "'calçada rua castelo': \"sidewalk of Castelo street\", a description of a strip tagged a park",
+    "relation/16288874": "'Sala ecológica': \"ecological room\", a facility of a private school (operator=Colégio Batista Mineiro), tagged a park",
+    "way/555968563": "'Igreja 2': \"church 2\", a placeholder",
+    "way/555970733": "'Igreja 3': \"church 3\", a placeholder",
+    "node/7017141452": "'Base da Torre do Teleférico Itaú': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7017157527": "'Base da Torre do Teleférico das Caçambas': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7017157556": "'Base da Torre do Teleférico das Caçambas': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "way/750467848": "'Base da Torre do Teleférico das Caçambas Itaú': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "way/750467840": "'Base da Torre do Teleférico das Caçambas da Cimento Portland Itaú': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7096323830": "'Torre Teleférico SJ Da Lapa a Cid Industrial': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7096323829": "'Torre do Teleférico Caçambas': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7086210429": "'Torre do Teleférico Itaú': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7017141474": "'Torre do Teleférico das Caçambas': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7017141438": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7017141443": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7017141448": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7017141450": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7017141458": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7017141462": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7017157485": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7017157503": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7017157513": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7086210434": "'Base Torre do Teleférico Itaú': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7051900026": "'Base da Torre do Teleférico Itaú': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7051900027": "'Base da Torre do Teleférico Itaú': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7017141461": "'Torre do Teleférico Caçambas Itaú': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7017157518": "'Torre do Teleférico Cimento Itaú': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7017141432": "'Torre do Teleférico Itaú': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7017141444": "'Torre do Teleférico Itaú': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7017141464": "'Torre do Teleférico Itaú': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7017141473": "'Torre do Teleférico Itaú': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7017157497": "'Torre do Teleférico Itaú': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7017157514": "'Torre do Teleférico Itaú': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7017157519": "'Torre do Teleférico Itaú': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7017157532": "'Torre do Teleférico Itaú': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7017157557": "'Torre do Teleférico Itaú': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7017141449": "'Torre do Teleférico da Cimentos Itaú': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7017141433": "'Torre do Teleférico das Caçambas': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7017141463": "'Torre do Teleférico das Caçambas': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7017157515": "'Torre do Teleférico das Caçambas': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7017157495": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7017157517": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7017157521": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7017157554": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7017157520": "'Torre do Teleférico das Caçambas de Cimento': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    "node/7017157555": "'Torre do Teleférico das Caçambas de Cimento': a pylon (or its base) of the disused Itaú cement bucket cableway, named by what it is; 44 such rows, many with one shared name",
+    # An object no longer there (owner, 2026-10-13)
+    "node/7017141447": "'Torre do Teleférico Removida': the name itself says the cableway tower was removed",
+    # A bare type word (owner, 2026-10-13)
+    "way/750467854": "'Torre da Caixa D'Água': \"water tank tower\", a type phrase on a ruin mapped as a locality",
+    # A business (owner, 2026-10-13)
+    "node/13234570591": "'Viver bem corretora de seguros': an insurance broker's trade name mapped as a locality",
+    "way/1106509969": "'Elevetec Sistemas': a company name (an elevator systems firm) on a building tagged a place of worship",
+    "node/5217109740": "'Creche Recanto do Menor': a daycare (creche) by its own name, tagged a place of worship",
+    # A religious education hall (owner, 2026-10-13)
+    "way/1330301884": "'Catequese Nossa Senhora do Santíssimo Sacramento': a catechesis building of a parish, religious education and not the church",
+    # A religious office (owner, 2026-10-13)
+    "way/1527550263": "'Região Episcopal Nossa Senhora Aparecida': an archdiocesan region's administrative seat tagged a place of worship",
+    # A religious residence named only by its order (owner, 2026-10-13)
+    "way/839383895": "'Congregação das Pequenas Irmãs da Divina Providência': a congregation of sisters, named only by the order, tagged historic=monument and nothing else; no wikidata",
+    # Worship named only by its body or chain (owner, 2026-10-13)
+    "node/1270005359": "'Comunidade Evangélica': \"evangelical community\", a denomination and nothing else",
+    "way/555968485": "'Igreja crente': \"believers' church\", a generic word for an evangelical church, lower case",
+    "node/9571714876": "'Igreja Cristã Maranata': the body's name only (Igreja Cristã Maranata)",
+    "way/627817052": "'Igreja Cristã Maranata': the body's name only (Igreja Cristã Maranata)",
+    "node/4580191293": "'Igreja Maranata': the same body's short name only; denomination=orthodox is wrong",
+    "node/1876746978": "'Igreja Jesus Cristo dos Santos dos Últimos Dias': the body's name only (the Latter-day Saints, with \"de\" missing so the rule's list does not match)",
+    "way/581779140": "'Igreja Jesus Cristo dos Santos dos Últimos Dias': the body's name only (the Latter-day Saints, with \"de\" missing)",
+    "way/528233119": "'Igreja Messiânica Mundical do Brasil': the body's name only (Igreja Messiânica Mundial do Brasil, misspelled \"Mundical\")",
+    "node/6260553979": "'Igreja Missionária Pentecostal': two denomination words and no name",
+    "node/13758753891": "'Igreja Misssionária': \"missionary church\", misspelled, no name",
+    "way/556111551": "'Igreja Pentecostal do Brasil': a denomination's national name only",
+    "node/1270005375": "'Igreja Plesbiteriana Pentecostal': two denomination words (one misspelled) and no name",
+    "node/5256906271": "'Igreja Presbiteriana do Brasil': the national body's name only (Igreja Presbiteriana do Brasil)",
+    "node/1268796096": "'Igreja Un. do Reino de Deus': the chain's name only, abbreviated (\"Un.\" for Universal)",
+    "node/1710069337": "'Igreja Universal Reino de Deus': the chain's name only, with \"do\" missing",
+    "node/1829326166": "'Igreja do Evangelho Qadrangular': the body's name only, misspelled (\"Qadrangular\")",
+    "node/7766337051": "'Igreja do evangelo quadrangular': the body's name only, misspelled; service_times says temporarily closed",
+    "way/164249413": "'Igreja do Nazareno': the body's name only (Church of the Nazarene)",
+    "way/744508837": "'Igreja evangélica assebléia de Deus': the body's name only (Assembleia de Deus, misspelled)",
+    "way/1375463550": "'Igreja Evangélica Apostólica': two denomination words and no name",
+    "node/6664882431": "'testemunha de Jeová': \"Jehovah's witness\" in lower case, the body only",
+    "node/1268819627": "'Seicho-no-ie': the body's name only (Seicho-no-ie); no religion tag",
+    "way/1417654332": "'BATISTA DA LAGOINHA': the chain's name only, in capitals; 430 m from the mother church of that name (way/314210141, with wikidata)",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1519720027": "'Banquinho': the twin of way/1513891125; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017141439": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017141445": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017141451": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017141457": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017157486": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017157500": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017157516": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7096323831": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "way/758712794": "'Base Torre do Teleférico Itaú': the twin of node/7086210434; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017157522": "'Torre do Teleférico Itaú': the twin of node/7017141432; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017157553": "'Torre do Teleférico Itaú': the twin of node/7017141432; A description standing in for a name (owner, 2026-10-13)",
+    # Twin round 2 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/1519720028": "'Banquinho': the twin of way/1513891125; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017141440": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017141441": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017141446": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017141459": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017141483": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017157496": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017157498": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017157501": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017157504": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017157505": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    # Twin round 3 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/7017141442": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017141460": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017141484": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017157499": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017157502": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+    "node/7017157512": "'Torre do Teleférico das Caçambas da Cimento Portland Itaú': the twin of node/7017141438; A description standing in for a name (owner, 2026-10-13)",
+}

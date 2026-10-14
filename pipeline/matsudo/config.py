@@ -264,5 +264,32 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "日本大学松戸歯学部附属歯科衛生専門学校": "a college (amenity=college, Wikipedia); 歯科 is its field, not a clinic (the Tokyo precedent); tags read 2026-10-13",
+}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/matsudo.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A second row of one object (owner, 2026-10-13)
+    "way/25519624": "'Hirota Park': a second outline of 広田公園 (way/237752348) at the same point, under the English name only; that row already carries \"Hirota Park\" as its alias",
+    "node/335853461": "'Inari Jinja': a node 11 m from the shrine's own outline 稲荷神社 (way/584494848), under a romanised name; one shrine, two rows",
+    "way/566037518": "'日蓮宗妙典寺': the temple's building 9 m from its own node 妙典寺 (node/1457549005, with the Wikidata entry); the name only adds the school (日蓮宗) in front, so the merge did not fold them",
+    "node/856340447": "'高靇神社': a node at the same point as the shrine's outline 髙靇神社 (way/1016749771); one Wikidata entry and one article on both, the names differ by 高 and 髙",
+    "way/376573344": "'六高台1丁目': a block's boundary beside its own node 六高台一丁目 (node/10074021268), 80 m off; the names differ only by the digit form (1 and 一), so the merge did not fold them",
+    "way/376573343": "'六高台2丁目': as 六高台1丁目: its node 六高台二丁目 (node/10074021267) is 65 m off",
+    "way/376573345": "'六高台3丁目': as 六高台1丁目: its node 六高台三丁目 (node/10074021266) is 40 m off",
+    # A bare type word (owner, 2026-10-13)
+    "node/1347577171": "'地蔵尊': \"Jizo\", a type word alone on a wayside statue tagged a place of worship (the rule has 地蔵, not 地蔵尊)",
+    "way/1132102362": "'ウッドデッキ': \"wood deck\": a feature of a park mapped as leisure=park, a type word alone",
+    # A number or code beside a type word (owner, 2026-10-13)
+    "way/1567615843": "'スポーツ広場A': \"sports ground A\": a type and a letter, a field of 東部スポーツパーク (which has its own row)",
+    "way/471812809": "'スポーツ広場B': \"sports ground B\": a type and a letter, as スポーツ広場A",
+    # Unsure rows a ruling drops: a stock plaza or rest-area name with no place in it (ruling 5) (owner, 2026-10-13)
+    "way/707988142": "'つどいの広場': a stock plaza or rest-area name with no place in it",
+    # Owner, 2026-10-13: ruling 5 covers every plaza name with no place in it
+    "way/707988143": "'みどりの里': a plaza or park-zone name with no place in it",
+}

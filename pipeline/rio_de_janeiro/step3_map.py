@@ -11,6 +11,7 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline import place_index  # noqa: E402
 from pipeline.map_common import load_geojson_line_shapes, render_heatmap  # noqa: E402
 from pipeline.rio_de_janeiro import config as c  # noqa: E402
 from pipeline.rio_de_janeiro.boundary import city_polygon  # noqa: E402
@@ -35,6 +36,7 @@ def main():
         lines=lines, crs_geographic=c.CRS_GEOGRAPHIC, crs_projected=c.CRS_PROJECTED,
         ring_edges_meters=c.RING_EDGES_METERS, ring_labels=c.RING_LABELS,
         label_focus=city_polygon(verbose=False),
+        place_index_url=place_index.index_url("rio_de_janeiro"),
     )
 
 

@@ -281,4 +281,38 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the full read of 2026-10-13 under the owner's rulings of the
+# same day, each id read with its cached name (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    # not there: dropped in the full read (owner, 2026-10-13)
+    "way/965390267": "'1号公園(予定地)': \"park no. 1 (planned site)\": not built, and a number and a type for a name (full read, not there)",
+    "way/965390276": "'2号公園(予定地)': planned site, same set (full read, not there)",
+    "way/965390278": "'3号公園(予定地)': planned site, same set (full read, not there)",
+    "way/364600055": "'栃木県体育館(閉鎖)': the name ends \"(closed)\"; no lifecycle tag, so the rule did not see it (full read, not there)",
+    "way/364600053": "'栃木県武道館(閉鎖)': the name ends \"(closed)\" (full read, not there)",
+    # description: dropped in the full read (owner, 2026-10-13)
+    "way/730210197": "'宇都宮駅東地区整備事業（複合施設棟2予定地）': \"station east redevelopment (planned site of complex building 2)\": a project note on a square outline (full read, description)",
+    # religious office: dropped in the full read (owner, 2026-10-13)
+    "way/965152307": "'栃木県神社庁': the prefectural office of the shrine association, no religion tag (full read, religious office)",
+    # bare type: dropped in the full read (owner, 2026-10-13)
+    "way/453231010": "'東屋': \"gazebo\" (full read, bare type)",
+    "way/482939150": "'イギリス式庭園': \"English-style garden\", a section label; 55 m from 日本式庭園 (full read, bare type)",
+    "way/502815896": "'日本式庭園': \"Japanese-style garden\", a section label (full read, bare type)",
+    # unsure in the full read, dropped by ruling 5: a stock plaza or rest-area name with no place in it (owner, 2026-10-13)
+    "way/607083344": "'ちびっこひろば': ちびっこひろば, a stock plaza name with no place in it (my reading of \"and the like\") (unsure in the full read; ruling 5)",
+    "node/4444013164": "'花見広場': 花見広場, a section label with no place in it (my reading of \"and the like\") (unsure in the full read; ruling 5)",
+    # unsure in the full read, dropped by ruling 4: a part of one shrine or temple that has a row of its own within about 300 m (owner, 2026-10-13)
+    "way/691903739": "'赤門': the gate of 慈光寺, whose row is 83 m away (unsure in the full read; ruling 4)",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/785513739": "'東屋': the twin of way/453231010; bare type: dropped in the full read (owner, 2026-10-13)",
+    # Twin round 2 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/785513740": "'東屋': the twin of way/453231010; bare type: dropped in the full read (owner, 2026-10-13)",
+    # Twin round 3 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/785513741": "'東屋': the twin of way/453231010; bare type: dropped in the full read (owner, 2026-10-13)",
+    # Twin round 4 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "way/785513742": "'東屋': the twin of way/453231010; bare type: dropped in the full read (owner, 2026-10-13)",
+}

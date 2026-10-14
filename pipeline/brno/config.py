@@ -162,4 +162,31 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("cs",)
 PLACE_FOLD = None
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/brno.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A ride in a park indexed as a station (owner, 2026-10-13)
+    "node/1780777501": "'Amfiteátr': a stop of a miniature park railway (network=Parková dráha Brno) inside the leisure park beside the Olympia mall",
+    # A second row of one object (owner, 2026-10-13)
+    "node/3390714486": "'Kořískova': the second stop position of the tram stop Kořískova (node/3390714485, 191 m); two rows for one stop",
+    # An exhibit under its kind's article (owner, 2026-10-13)
+    "node/13687240641": "'BTR-60': an armoured vehicle on display; its wikidata (Q159911) is the vehicle type's, not this object's",
+    "node/10827478269": "'Pes hřivnatý': an animal enclosure in the zoo (attraction=animal); wikipedia and species tags are the species'",
+    # Worship named only by its body or chain (owner, 2026-10-13)
+    "node/296684871": "'Apoštolská církev': the body's name only (Apoštolská církev)",
+    "way/50049009": "'Církev Bratrská': the body's name only (Církev bratrská)",
+    "way/44961142": "'Církev Ježíše Krista Svatých posledních dnů': the body's name only (the Latter-day Saints); its wikidata (Q42504) is the worldwide church's, not this building's",
+    "way/107974611": "'Sbor páně církve československé': \"the Lord's congregation of the Czechoslovak church\", the body and a hall word, no place or patron name",
+    # A bare type word (owner, 2026-10-13)
+    "node/1230829082": "'Modlitebna': \"prayer house\", a hall-type word alone; the body is in church=",
+    "way/33442187": "'Kaplicka': \"little chapel\" (without the diacritic), a type word alone, no wikidata",
+    "node/13123042641": "'Nemocniční kaple': \"hospital chapel\", a type phrase with no hospital or patron named",
+    "node/2638709618": "'včelnice': \"apiary\", a type word in lower case mapped as a locality",
+    # A description standing in for a name (owner, 2026-10-13)
+    "way/54169948": "'H (márnice)': a building letter and \"(mortuary)\" on a cemetery chapel; a plan label, not a name, though it carries a wikidata id",
+    "way/577506970": "'Parčík na nároží Vídeňská - Polní': \"little park on the corner of Vídeňská and Polní\", a description by two streets",
+    "node/2048574305": "'bývalý lyžařský skokanský můstek': \"former ski jump\", a description of something gone, mapped as a locality",
+    # A glitched name (owner, 2026-10-13)
+    "node/2559843513": "'Západ´': a peak named \"Západ\" with a stray acute accent glued on",
+}

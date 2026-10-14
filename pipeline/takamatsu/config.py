@@ -280,4 +280,21 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/takamatsu.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A freight station (owner, 2026-10-13)
+    "node/956845175": "'高松貨物ターミナル': Takamatsu Freight Terminal: a JR Freight yard, no passenger service, tagged a plain railway=station",
+    # A business (owner, 2026-10-13)
+    "node/2502341212": "'ベルモニー会館勅使': Belmony Kaikan Chokushi: a funeral-hall chain's branch tagged a Christian place of worship",
+    # A religious office, hall, school or residence (owner, 2026-10-13)
+    "way/813833989": "'天理教 香川教務支庁': Tenrikyo's Kagawa diocesan administration office, not a church",
+    # A glitched name (owner, 2026-10-13)
+    "way/1036093757": "'天理教東': 'Tenrikyo East': the name stops short of the church's own name",
+    # Worship named only by a body or a denomination (owner, 2026-10-13)
+    "way/1053229412": "'日本キリスト教団': named only by the body (United Church of Christ in Japan), no congregation name",
+    "way/1271198679": "'霊友会': named only by the body (Reiyukai); branch tag says the Shikoku regional office",
+    # A bare type word (owner, 2026-10-13)
+    "node/2274052604": "'納骨堂': 'ossuary', a type",
+}

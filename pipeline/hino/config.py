@@ -220,4 +220,16 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the full read of 2026-10-13 under the owner's rulings of the
+# same day, each id read with its cached name (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    # worship by denomination: dropped in the full read (owner, 2026-10-13)
+    "node/11455392909": "'崇教真光': Sukyo Mahikari, the body's name alone (full read, worship by denomination)",
+    "node/1937705666": "'立正佼成会': Rissho Kosei-kai, the body's name alone; the branch is in a tag the index does not read (full read, worship by denomination)",
+    # religious office: dropped in the full read (owner, 2026-10-13)
+    "node/2160283128": "'宝泉寺会館': the assembly hall (会館) of 寳泉寺, 155 m from the temple's own row (full read, religious office)",
+    # not there: dropped in the full read (owner, 2026-10-13)
+    "node/11552548544": "'日本野鳥の会ＷＩＮＧ跡地': \"former site of the Wild Bird Society's WING\": an evacuation ground named for a facility that has gone (full read, not there)",
+    # unsure in the full read, dropped by ruling 8: a zoo's zone tagged a place (owner, 2026-10-13)
+    "way/781674243": "'アフリカ園': the African zone of Tama Zoo tagged a place (unsure in the full read; ruling 8)",
+}

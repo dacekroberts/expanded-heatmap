@@ -1,0 +1,62 @@
+{
+  "index": "app/static/places/salvador.json",
+  "places": 35730,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "pt"
+    ],
+    "coverage": {
+      "en": 0.0,
+      "pt": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Portuguese"
+    ]
+  },
+  "stations_not_open": [
+    {
+      "osm": "node/2641671393",
+      "name": "Almeida Brandão",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/2641671401",
+      "name": "Praia Grande",
+      "tag": "construction:railway=stop"
+    },
+    {
+      "osm": "node/4485717580",
+      "name": "Calçada",
+      "tag": "construction=yes"
+    },
+    {
+      "osm": "way/1457154320",
+      "name": "Baixa do Fiscal",
+      "tag": "construction=yes"
+    },
+    {
+      "osm": "way/1457154321",
+      "name": "Pedreira",
+      "tag": "construction=yes"
+    },
+    {
+      "osm": "way/1457869126",
+      "name": "Ferry boat",
+      "tag": "proposed=yes"
+    },
+    {
+      "osm": "way/1457869127",
+      "name": "São Joaquim",
+      "tag": "proposed=yes"
+    }
+  ],
+  "area": [
+    {
+      "osm": "relation/362362",
+      "name": "Salvador",
+      "stations": 20
+    }
+  ]
+}

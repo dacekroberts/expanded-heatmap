@@ -197,5 +197,38 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("fr",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "Ancien hôtel du Doyenné de Saint-Gatien": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00098169, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Goüin": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00098170, tourism=museum, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel des ducs de Touraine": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00098168, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Portail de l'hôtel des trésoriers de Saint-Martin": "a listed gateway tagged an attraction (barrier=sally_port, heritage=2, ref:mhs, wikidata): a monument, not a hotel; tags read 2026-10-13",
+    "Ruines de l'Hôtel de Beaune-Semblançay": "the listed ruins of a Renaissance mansion (historic=ruins, ref:mhs, Wikipedia); tags read 2026-10-13",
+}
+# Dropped by id on the full read of 2026-10-13 under the owner's rulings of the
+# same day, each id read with its cached name (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    # duplicate: dropped in the full read (owner, 2026-10-13)
+    "node/2439033646": "'Gare de Tours 2': the tram stop at the railway station twice, at the same point: platform 2 of the stop whose platform 1 is node/2380890444; the platform number is part of the name (local_ref=2) (full read, duplicate)",
+    "node/2439033652": "'Jean Jaurès 2': the Jean Jaurès tram stop twice, 60 m apart: the second platform, numbered in the name (full read, duplicate)",
+    "way/69469160": "'Pavillon de l'Octroi': one of the two toll pavilions, 35 m from the site relation that has the article and the listing (relation/7603658) (full read, duplicate)",
+    # bare type: dropped in the full read (owner, 2026-10-13)
+    "way/49357257": "'Centre Commercial': \"shopping centre\", the type words alone, on a hedged park polygon (full read, bare type)",
+    # description: dropped in the full read (owner, 2026-10-13)
+    "node/11111659905": "'Ancien pressoir à vin': \"old wine press\", a description of the object (historic=pressoir, not a known tag value) (full read, description)",
+    "node/5132993446": "'Deux Caves du 10e et du 15e Siècle': the heritage register's description of the listing (\"two cellars of the 10th and 15th century\"), a room inside a building (full read, description)",
+    "relation/7610969": "'Maisons du 15e siècle': the heritage register's description (\"15th-century houses\"); the houses are homes with no name of their own (full read, description)",
+    "way/868720179": "'parc paysager société crématiste': lower-case mapper's description: the landscaped grounds of a cremation society (full read, description)",
+    # estate facility: dropped in the full read (owner, 2026-10-13)
+    "way/1209385863": "'Parc de la Cité Bords de Loire': access=customers: the grounds of one residence, not a public park (full read, estate facility)",
+    # religious residence: dropped in the full read (owner, 2026-10-13)
+    "way/74370359": "'Presbytère (Paroisse St Maurice)': a presbytery (priests' house) tagged a place of worship, named for the parish (full read, religious residence)",
+    "way/143581025": "'Presbytère Saint-François de Paule': a presbytery tagged a place of worship; the church of that name is its own row (full read, religious residence)",
+    # worship body: dropped in the full read (owner, 2026-10-13)
+    "way/73676398": "'Église Adventiste du Septième Jour': denomination name alone (full read, worship body)",
+    "way/315316288": "'Association Culturelle Turque de Tours': named only for the association that runs it; the prayer room has no name of its own (full read, worship body)",
+    # business: dropped in the full read (owner, 2026-10-13)
+    "way/1551359567": "'Excelia Business School': a private business school (operator:type=private); the article is the school group's, not this building's (full read, business)",
+}

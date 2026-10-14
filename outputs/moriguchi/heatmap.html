@@ -23,7 +23,7 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_6be28dd3df020dbd9e643e14e4c85297 {
+                #map_26c5e0bea99a648cfaa7999f5c5d4027 {
                     position: relative;
                     width: 1000.0px;
                     height: 650.0px;
@@ -501,7 +501,7 @@
 (function () {
     var MAP_W = 1000, MAP_H = 650;
     var BOUNDS = [[34.69738, 135.53329], [34.75953, 135.57831500000003]];            // [[south, west], [north, east]]
-    var NAME = "map_6be28dd3df020dbd9e643e14e4c85297";
+    var NAME = "map_26c5e0bea99a648cfaa7999f5c5d4027";
     var tries = 0;
     // The view Folium baked in, captured before any fit runs. apply() restores
     // it when the map returns to full width - see the else branch there.
@@ -728,7 +728,7 @@
     
 <script>
 (function () {
-    var NAME = "map_6be28dd3df020dbd9e643e14e4c85297";
+    var NAME = "map_26c5e0bea99a648cfaa7999f5c5d4027";
     var MARGIN = 6;     // px kept between a label's text and the frame edge
     var GAP = 4;        // px between a re-placed label and its line's tip
     var CLEAR = 2;      // px a label keeps from a button, control or legend
@@ -890,7 +890,7 @@
     
 <script>
 (function () {
-    var NAME = "map_6be28dd3df020dbd9e643e14e4c85297";
+    var NAME = "map_26c5e0bea99a648cfaa7999f5c5d4027";
     // One event of at least this many normalized units (L.DomEvent.
     // getWheelDelta) marks a notched wheel: Chrome and Edge on Windows give
     // 50 per notch, Firefox's line mode 60. Trackpads send many events of a
@@ -959,7 +959,7 @@
     
 <script>
 (function () {
-    var NAME = "map_6be28dd3df020dbd9e643e14e4c85297";
+    var NAME = "map_26c5e0bea99a648cfaa7999f5c5d4027";
     function start() {
         var m = window[NAME], ac = m && m.attributionControl;
         if (!ac || typeof ac.options.prefix !== "string") return;
@@ -1005,7 +1005,7 @@ path.hm-pick-case { stroke: #000000; fill: none; }
 </style>
 <script>
 (function () {
-    var NAME = "map_6be28dd3df020dbd9e643e14e4c85297";
+    var NAME = "map_26c5e0bea99a648cfaa7999f5c5d4027";
     var tries = 0;
 
     function start() {
@@ -1208,8 +1208,8 @@ path.hm-pick-case { stroke: #000000; fill: none; }
 </style>
 <script>
 (function () {
-    var NAME = "map_6be28dd3df020dbd9e643e14e4c85297", STD = "tile_layer_d33da47c8c77af5a0302e620316ee47d", OPEN = "open_basemap_11a89c7959ffd595d87c0fdbd67516a7";
-    var BUSINESS = [["heat_map_b810536c58d96e1dcbb9e73d875d45f2", true], ["heat_map_c71da7f522985823d3aca60c7a7172ba", false], ["feature_group_d0e1a2fbccf6db9370a404c2a1aabefb", false], ["feature_group_41f866ad527fcb272ff2207cc26d6b08", false], ["feature_group_efed9fc21a453f51a371f01031793d89", false], ["feature_group_9059432ade1d21d51a3e1f30882aeb99", false], ["feature_group_cdbfe4ab735d1c2373996514cd3326bb", true]];
+    var NAME = "map_26c5e0bea99a648cfaa7999f5c5d4027", STD = "tile_layer_896a8e5d145a6de765d4bac849a1193b", OPEN = "open_basemap_99afad2179de2dfc9bbbb5ee8b7d6fd6";
+    var BUSINESS = [["heat_map_488028be33103248c79efd16435c9912", true], ["heat_map_16d913a5d6c3fe07afecee7b2e777850", false], ["feature_group_c98203b2df689400b2a4e5c515519b88", false], ["feature_group_73d2d70059fc7736a6c2b03405d0f2a0", false], ["feature_group_540b65126ab7f46cad0c6f90b9842a11", false], ["feature_group_f63d00e9b587e3a043b0b0c6374db699", false], ["feature_group_146317dc30a24932c7776f994512fadc", true]];
     var KEY = "expanded-heatmap-basemap";
     var tries = 0;
     function saved() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
@@ -1272,7 +1272,7 @@ path.hm-pick-case { stroke: #000000; fill: none; }
 </style>
 <script>
 (function () {
-    var NAME = "map_6be28dd3df020dbd9e643e14e4c85297";
+    var NAME = "map_26c5e0bea99a648cfaa7999f5c5d4027";
     var TEXT = "Use two fingers to move the map";
     var HINT_MS = 1500;     // shown this long after the last one-finger move
     var FADE_MS = 300;      // a little over the CSS transition
@@ -1367,7 +1367,7 @@ path.hm-pick-case { stroke: #000000; fill: none; }
 </style>
 <script>
 (function () {
-    var NAME = "map_6be28dd3df020dbd9e643e14e4c85297";
+    var NAME = "map_26c5e0bea99a648cfaa7999f5c5d4027";
     var REACH = 22;         // px from a center or centerline: a 44 px target
     var TIE_PX = 2;         // edges this close count as a tie, broken by kind
     var ROOM_PX = 200;      // map height the panel needs above the legend
@@ -1562,16 +1562,1154 @@ path.hm-pick-case { stroke: #000000; fill: none; }
     start();
 })();
 </script>
+    
+<style>
+    /* The two-finger notice above the open search box (Leaflet's controls
+       sit at 1000): on a phone the box covered half of it (owner's iPhone,
+       2026-10-08). The notice is brief and lets touches through. */
+    .hm-touch-hint { z-index: 1100; }
+    .hm-search { background: #ffffff; color: #1c2b2a;
+        border: 2px solid rgba(0,0,0,0.2); border-radius: 4px; font: 13px var(--hm-font, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", "Hiragino Sans", "Yu Gothic", Meiryo, "Apple SD Gothic Neo", "Malgun Gothic", "PingFang TC", "Microsoft JhengHei", "PingFang SC", "Microsoft YaHei", Arial, sans-serif); }
+    .hm-search-row { display: flex; align-items: center; }
+    .hm-search-btn { width: 30px; height: 30px; border: 0; background: transparent;
+        color: inherit; cursor: pointer; padding: 0; display: flex;
+        align-items: center; justify-content: center; }
+    .hm-search-input { display: none; width: 230px; border: 0; outline: none;
+        background: transparent; color: inherit; font: inherit; font-size: 16px;
+        padding: 4px 6px 4px 0; }
+    .hm-search.open .hm-search-input { display: block; }
+    .hm-search-list { display: none; max-height: 260px; overflow-y: auto;
+        border-top: 1px solid #999999; width: 260px; }
+    .hm-search.open .hm-search-list.has { display: block; }
+    .hm-search-item { padding: 6px 8px; cursor: pointer; line-height: 1.3; }
+    .hm-search-item:hover, .hm-search-item.on { background: rgba(13,148,136,0.14); }
+    .hm-search-sub { font-size: 11px; opacity: 0.75; }
+    .hm-search-note { padding: 6px 8px; font-size: 12px; opacity: 0.8; }
+    .hm-search-head { padding: 5px 8px 1px; font-size: 11px; font-weight: 600; opacity: 0.65; }
+    .hm-search-pills { display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 8px 7px; }
+    .hm-search-list [hidden] { display: none !important; }
+    .hm-search-fold { display: block; width: 100%; text-align: left; background: none; border: 0;
+        color: inherit; font: inherit; font-size: 11px; font-weight: 600; cursor: pointer;
+        padding: 6px 8px 4px; }
+    .hm-search-fold:focus-visible { outline: 2px solid #0d9488; outline-offset: -2px; }
+    .hm-search-pill { display: inline-flex; align-items: center; gap: 5px; padding: 3px 8px;
+        border: 1px solid #999999; border-radius: 999px; background: rgba(13,148,136,0.07);
+        color: inherit; font: inherit; font-size: 12px; line-height: 1.4; cursor: pointer; }
+    .hm-search-pill:hover, .hm-search-pill.on, .hm-search-pill:focus-visible {
+        background: rgba(13,148,136,0.2); border-color: #0d9488; outline: none; }
+    .hm-pill-line { width: 14px; height: 4px; border-radius: 2px; flex: none; }
+    .hm-pill-station { width: 8px; height: 8px; border-radius: 50%; flex: none;
+        background: #1a5490; }
+    .dark-base .hm-search-pill { border-color: var(--dm-border); }
+    .dark-base .hm-pill-station { background: var(--dm-station); }
+    .hm-search-credit { padding: 4px 8px 6px; font-size: 11px; opacity: 0.8;
+        border-top: 1px solid #999999; }
+    .hm-search-credit a { color: inherit; }
+    .hm-search-area { stroke: #0d9488; }
+    .dark-base .hm-search-area { stroke: #5eead4; }
+    .hm-search-btn:focus-visible, .hm-search-input:focus-visible {
+        outline: 2px solid #0d9488; outline-offset: 1px; }
+    .dark-base .hm-search { background: var(--dm-surface); color: var(--dm-text);
+        border-color: var(--dm-border); }
+    .dark-base .hm-search-list, .dark-base .hm-search-credit { border-top-color: var(--dm-border); }
+    @media (max-width: 480px) { .hm-search-input { width: 160px; } .hm-search-list { width: 190px; } }
+    /* THE FOUND PLACE'S MARKER (owner, 2026-10-11, after the phone test: "the
+       highlight feature gets dwarfed by nearby businesses and the heat
+       layer"; and "green highlight ring is too dull on dark mode"). Two rings
+       in a pane of their own above the dots (640: over Leaflet's marker pane
+       at 600, under its tooltips at 650): a casing in the page's colour and
+       the accent over it, the dark accent on the dark map. Colours here, not
+       in the path's own attributes, so the theme button recolours a marker
+       already shown. */
+    .leaflet-hmsearch-pane, .leaflet-hmsearchtip-pane { pointer-events: none; }
+    path.hm-search-case { stroke: #ffffff; stroke-opacity: 0.95; fill: none; }
+    path.hm-search-ring { stroke: #0d9488; stroke-opacity: 1;
+        fill: #0d9488; fill-opacity: 0.14; }
+    /* A picked street's whole length (owner, 2026-10-13): the ring's two
+       colours as a line, and the ring itself hidden once the line is drawn,
+       its name label left at the street's middle. */
+    path.hm-search-streetcase { stroke: #ffffff; stroke-opacity: 0.95; fill: none; }
+    path.hm-search-street { stroke: #0d9488; stroke-opacity: 1; fill: none; }
+    .dark-base path.hm-search-streetcase { stroke: #0B1220; }
+    .dark-base path.hm-search-street { stroke: #5eead4; }
+    path.hm-search-hid { display: none; }
+    .dark-base path.hm-search-case { stroke: #0B1220; }
+    .dark-base path.hm-search-ring { stroke: #5eead4; fill: #5eead4; fill-opacity: 0.2; }
+    /* While the marker shows, the businesses step back: the dots (the only
+       paths drawn with fill-opacity 0.85 and a 1 px stroke), their cluster
+       bubbles and the heat. Faded, never switched off: what is around the
+       place is the answer the reader came for, and their layer choices are
+       left as they are. Lines, stations and rings keep their strength. The
+       fade ends with the marker, or at the reader's first touch of the map.
+       A picked line fades them under a class of its own
+       (LINE_HIGHLIGHT_SCRIPT, hm-line-picked), which this never touches. */
+    .hm-searching .leaflet-overlay-pane path[fill-opacity="0.85"][stroke-width="1"],
+    .hm-searching .leaflet-marker-pane .business-cluster-icon,
+    .hm-searching .leaflet-heatmap-layer { opacity: 0.28; }
+</style>
+<script>
+(function () {
+    var NAME = "map_26c5e0bea99a648cfaa7999f5c5d4027", URL = "/app/static/places/moriguchi.json?v=f22ccf01c590";
+    // THE APP IS NOT ALWAYS AT THE HOST'S ROOT. Streamlit Community Cloud
+    // serves it under /~/+/, so "/app/static/..." asked of the host's root
+    // found nothing there, and the deployed search answered only with the
+    // map's own stations and lines: no street, landmark or neighborhood was
+    // ever found live (the owner's London report, 2026-10-12). Every local
+    // check had passed, the app there being at the root. The page's own path
+    // gives the prefix; the plain path is tried second, for a map opened
+    // outside the app. An answer that is not JSON (a host's HTML shell,
+    // status 200) counts as a failure.
+    var BASE = (function () {
+        try {
+            if (window.parent === window) return "";
+            var here = window.parent.location.pathname;
+            return here.substring(0, here.lastIndexOf("/"));
+        } catch (e) { return ""; }
+    })();
+    function abs(u) { return u && u.charAt(0) === "/" ? BASE + u : u; }
+    function getIndex(u) {
+        var opt = {credentials: "omit", referrerPolicy: "no-referrer"};
+        function text(r) { if (!r.ok) throw new Error(r.status); return r.text(); }
+        function json(txt) { if (txt.charAt(0) !== "{") throw new Error("not an index"); return txt; }
+        return fetch(abs(u), opt).then(text).then(json).catch(function (e) {
+            if (!BASE) throw e;
+            return fetch(u, opt).then(text).then(json);
+        });
+    }
+    var STATION_COLOR = "#1a5490", LINK_M = 300, DUP_M = 1500;
+    var MIN_LATIN = 4, MIN_CJK = 2, RING_M = 483;
+    // Suggestions at most: the map's own (pills) and other places, fewer on a
+    // phone (under 480 px) to keep the list off most of the map.
+    function narrow() { return (document.documentElement.clientWidth || window.innerWidth) < 480; }
+    function caps() { return narrow() ? {own: 4, places: 3, alone: 5} : {own: 6, places: 6, alone: 8}; }
+    var KIND_LABEL = {line: "Line", mapstation: "Station", station: "Station not on this map",
+                      junction: "Intersection", landmark: "Landmark", place: "Neighborhood",
+                      street: "Street", crossing: "Intersection"};
+    var KIND_RANK = {line: 0, mapstation: 0, junction: 1, landmark: 2, station: 3, place: 3,
+                     street: 4, crossing: 5};
+    var STOP = {"and": 1, "at": 1, "of": 1, "the": 1, "x": 1, "corner": 1, "&": 1, "y": 1};
+    var STATION_WORDS = {"station": 1, "sta": 1, "stn": 1, "eki": 1, "駅": 1};
+    // A station word written onto the name with no space (四条駅, 金鐘站,
+    // 강남역): the query less its last character still finds the station
+    // (batch 2b, 2026-10-08, for Chinese and Korean).
+    var STATION_SUFFIX = {"駅": 1, "站": 1, "역": 1};
+    var JUNK_Q = /#(n[/]?a|ref|value|div|name|num|null)|!error/i;
+    var STREET_WORDS = {"street": 1, "st": 1, "avenue": 1, "ave": 1, "road": 1, "rd": 1,
+                        "boulevard": 1, "blvd": 1, "drive": 1, "dr": 1, "way": 1,
+                        "dori": 1, "通": 1, "通り": 1};
+    // A typed street word's full form, to rank that street type first.
+    var STREET_TYPE = {"st": "street", "ave": "avenue", "rd": "road", "dr": "drive",
+                       "blvd": "boulevard"};
+    // English abbreviations that are not the start of the word they stand for
+    // (prefixes such as "ave" for avenue match as they are): a
+    // typed one also tries the full word (sample cities, 2026-10-08).
+    var ABBR = {"blvd": "boulevard", "ct": "court", "hwy": "highway", "pkwy": "parkway",
+                "ln": "lane", "mt": "mount", "ft": "fort", "sq": "square", "fwy": "freeway",
+                "expy": "expressway", "ctr": "center", "jct": "junction", "ne": "northeast",
+                "nw": "northwest", "se": "southeast", "sw": "southwest"};
+    // Street words that LEAD a name in the local language ("Rue Peel", "Carrer
+    // de Balmes"): a query beginning with one asks for a street, as an English
+    // one ending with "St" does.
+    var STREET_LEAD = {};
+    // The local languages' words (batch 2a, 2026-10-08), switched on by the
+    // index's declared languages (languages.local), never for every map: a
+    // Czech "a" as a connector would split "Avenue A and 5th" in an English
+    // city. join: the word between two streets ("Rue Neuve et Boulevard
+    // Adolphe Max"); stop: articles a query may add or leave out; street and
+    // lead: street words, optional on streets, lead ones first in a name;
+    // station: a station word; abbr: abbreviations that are not prefixes
+    // ("St-Denis" for Saint-Denis; "avda" tries "av", which begins both
+    // avinguda and avenida). Words as norm() leaves them, accents stripped.
+    var LANG_WORDS = {
+        fr: {join: ["et"], stop: ["de", "du", "des", "la", "le", "les", "l", "d"],
+             street: ["rue", "avenue", "av", "boulevard", "bd", "chemin", "ch", "place", "quai",
+                      "allee", "impasse", "montee", "square", "promenade"],
+             lead: ["rue", "avenue", "av", "boulevard", "bd", "chemin", "ch", "quai", "allee", "impasse"],
+             // "metro": Marseille's feed names ten stations "Métro Vieux Port".
+             station: ["gare", "metro"],
+             abbr: {"bd": "boulevard", "st": "saint", "ste": "sainte", "ch": "chemin"}},
+        ca: {join: ["i"], stop: ["de", "del", "dels", "la", "el", "les", "els", "l", "d"],
+             street: ["carrer", "c", "avinguda", "av", "avda", "passeig", "pg", "placa", "rambla",
+                      "rbla", "ronda", "travessera", "via", "passatge"],
+             lead: ["carrer", "c", "avinguda", "av", "avda", "passeig", "pg", "rambla", "rbla",
+                    "ronda", "travessera", "passatge"],
+             station: ["estacio"], abbr: {"pg": "passeig", "rbla": "rambla", "avda": "av"}},
+        // Mexico City's street types and their abbreviations (batch 3,
+        // 2026-10-11): calzada, eje, cerrada, privada, andador, callejon.
+        es: {join: ["y"], stop: ["de", "del", "la", "el", "los", "las"],
+             street: ["calle", "c", "avenida", "av", "avda", "paseo", "plaza", "ronda", "pasaje",
+                      "calzada", "calz", "eje", "cerrada", "cda", "privada", "priv", "andador",
+                      "callejon", "retorno", "circuito", "prolongacion", "prol", "boulevard", "blvd"],
+             lead: ["calle", "c", "avenida", "av", "avda", "paseo", "ronda", "pasaje", "calzada",
+                    "calz", "cerrada", "cda", "privada", "priv", "andador", "callejon", "retorno",
+                    "circuito", "prolongacion", "prol", "boulevard", "blvd"],
+             station: ["estacion", "metro"],
+             abbr: {"avda": "av", "pza": "plaza", "pso": "paseo", "calz": "calzada", "cda": "cerrada",
+                    "priv": "privada", "prol": "prolongacion", "blvd": "boulevard"}},
+        // Portuguese (Sao Paulo, batch 3, 2026-10-11): "e" between two
+        // streets; titles a street name is typed with (Dr., Prof., Eng.).
+        pt: {join: ["e"], stop: ["de", "do", "da", "dos", "das"],
+             street: ["rua", "r", "avenida", "av", "alameda", "al", "travessa", "tv", "praca", "pca",
+                      "largo", "estrada", "rodovia", "viela", "viaduto", "ladeira"],
+             lead: ["rua", "r", "avenida", "av", "alameda", "al", "travessa", "tv", "largo",
+                    "estrada", "rodovia", "viela", "viaduto", "ladeira"],
+             station: ["estacao", "metro"],
+             abbr: {"al": "alameda", "tv": "travessa", "pca": "praca", "dr": "doutor",
+                    "prof": "professor", "eng": "engenheiro", "sta": "santa", "sto": "santo"}},
+        cs: {join: ["a"], stop: [],
+             street: ["ulice", "ul", "trida", "namesti", "nam", "nabrezi"],
+             lead: [], station: ["stanice", "nadrazi"], abbr: {}},
+        nl: {join: ["en"], stop: ["de", "het"],
+             street: ["straat", "laan", "steenweg", "plein", "kaai", "dreef"],
+             lead: [], station: [], abbr: {}},
+        // German (2026-10-13; docs/decisions_drafts/search-lang-de.md). The
+        // street word sits inside the name ("Hauptstrasse"), so a typed
+        // "Hauptstr." meets it as a prefix of the name's word, and "Str."
+        // alone through abbr. norm() writes sharp s as "ss" for every
+        // language and, where German is declared, "ae", "oe" and "ue" as the
+        // bare vowel on both sides (UMLAUT_FOLD). Not yet tried in a browser.
+        de: {join: ["und", "ecke"], stop: ["der", "die", "das", "den", "dem"],
+             street: ["strasse", "str", "weg", "allee", "platz", "gasse", "ring", "damm", "ufer",
+                      "chaussee"],
+             lead: [], station: ["bahnhof", "bf", "bhf", "hbf", "haltestelle"],
+             abbr: {"str": "strasse", "pl": "platz", "bf": "bahnhof", "bhf": "bahnhof",
+                    "hbf": "hauptbahnhof", "st": "sankt"}},
+        // da: search-final's search-lang-da.md (2026-10-13), as drafted; not yet tried in a browser.
+        da: {join: ["og"], stop: ["af", "den", "det", "de"],
+             street: ["gade", "vej", "alle", "plads", "torv", "straede", "boulevard", "sti", "bro",
+                      "kaj", "vaenge", "passage"],
+             lead: [], station: ["station", "st", "banegaard", "hovedbanegaard", "metro", "letbane"],
+             abbr: {"skt": "sankt", "sct": "sankt", "gl": "gammel", "ndr": "nordre", "sdr": "sondre",
+                    "nr": "norre", "kgs": "kongens", "chr": "christian", "ll": "lille"}},
+        // nb: search-final's search-lang-nb.md (2026-10-13), as drafted; not yet tried in a browser.
+        nb: {join: ["og"], stop: ["i", "på", "ved", "av"],
+             street: ["vei", "veien", "veg", "vegen", "gate", "gata", "gaten", "gt", "plass",
+                      "plassen", "pl", "alle", "sti", "stien", "torg", "terrasse", "bakken"],
+             lead: [], station: ["stasjon", "stasjonen", "holdeplass", "stoppested", "t-bane", "tbane"],
+             abbr: {"gt": "gate", "v": "vei", "vn": "veien", "pl": "plass", "dr": "doktor",
+                    "prof": "professor"}},
+        // sv: search-final's search-lang-sv.md (2026-10-13), as drafted; not yet tried in a browser.
+        sv: {join: ["och", "hörnet"], stop: ["den", "det", "de", "i", "på", "av", "vid"],
+             street: ["gatan", "gata", "vägen", "väg", "gränd", "stigen", "backen", "torget", "torg",
+                      "plan", "platsen", "plats", "allén", "allé", "gången"],
+             lead: [], station: ["station", "stationen", "centralstation", "hållplats", "tunnelbana",
+                                 "t-bana", "pendeltåg"],
+             abbr: {"g": "gatan", "v": "vägen", "gr": "gränd", "st": "sankt", "s:t": "sankt",
+                    "n": "norra", "s": "södra", "ö": "östra"}},
+        // lv: search-final's search-lang-lv.md (2026-10-13), as drafted; not yet tried in a browser.
+        lv: {join: ["un"], stop: [],
+             street: ["iela", "bulvaris", "prospekts", "gatve", "laukums", "aleja", "linija",
+                      "soseja", "cels", "dambis", "krastmala", "tilts", "skvers"],
+             lead: [], station: ["stacija", "pietura"],
+             abbr: {"bulv": "bulvaris", "prosp": "prospekts", "pr": "prospekts",
+                    "lauk": "laukums", "sk": "skersiela", "sv": "sveta"}},
+        // ro: search-final's search-lang-ro.md (2026-10-13), as drafted; not yet tried in a browser.
+        ro: {join: ["și", "si", "cu", "colț"], stop: ["de", "din", "la", "cel", "lui", "al", "a"],
+             street: ["strada", "str", "aleea", "al", "intrarea", "intr", "drumul", "dr", "bulevardul",
+                      "bd", "bdul", "bld", "blvd", "soseaua", "sos", "calea", "cal", "piata", "pta",
+                      "splaiul", "spl", "prelungirea", "prel", "fundatura", "fdt", "pasajul", "podul"],
+             lead: ["strada", "str", "aleea", "al", "intrarea", "intr", "drumul", "dr", "bulevardul",
+                    "bd", "bdul", "bld", "blvd", "soseaua", "sos", "calea", "cal", "splaiul", "spl",
+                    "prelungirea", "prel", "fundatura", "fdt"],
+             station: ["gara", "statia", "metrou", "halta"],
+             abbr: {"str": "strada", "bd": "bulevardul", "bdul": "bulevardul", "bld": "bulevardul",
+                    "blvd": "bulevardul", "sos": "soseaua", "pta": "piata", "spl": "splaiul",
+                    "prel": "prelungirea", "intr": "intrarea", "fdt": "fundatura", "sf": "sfantul",
+                    "dr": "doctor", "gen": "general", "ing": "inginer", "prof": "profesor"}},
+        // it: search-final's search-lang-it.md (2026-10-13), as drafted; not yet tried in a browser.
+        it: {join: ["e", "angolo"], stop: ["di", "del", "della", "dello", "dei", "degli", "delle", "da",
+                                            "il", "lo", "la", "i", "gli", "le", "l", "d"],
+             street: ["via", "v", "viale", "vle", "vicolo", "vic", "piazza", "pza", "pzza", "piazzale",
+                      "ple", "largo", "lgo", "corso", "cso", "lungotevere", "lgt", "lungarno", "ponte",
+                      "borgo", "circonvallazione", "strada",
+                      // Six more, counted on Milan's index (136 of 4,640 street names; owner,
+                      // 2026-10-13). Squares, arcades and overpasses stay out of lead, as piazza and ponte.
+                      "galleria", "piazzetta", "passaggio", "cavalcavia", "alzaia", "bastioni"],
+             lead: ["via", "v", "viale", "vle", "vicolo", "vic", "corso", "cso", "lungotevere", "lgt",
+                    "lungarno", "borgo", "circonvallazione", "strada", "passaggio", "alzaia", "bastioni"],
+             station: ["stazione", "staz", "fermata", "metro"],
+             abbr: {"vle": "viale", "pza": "piazza", "pzza": "piazza", "ple": "piazzale", "lgo": "largo",
+                    "cso": "corso", "pta": "porta", "lgt": "lungotevere", "vic": "vicolo", "s": "san", "sta": "santa",
+                    "ss": "santi", "staz": "stazione"}},
+        // el: search-final's search-lang-el.md (2026-10-13), as drafted; not yet tried in a browser.
+        el: {join: ["και"], stop: ["του", "της", "των", "το", "την", "τον"],
+             street: ["οδος", "οδ", "λεωφορος", "λεωφ", "πλατεια", "πλ", "παροδος", "παρ", "στοα"],
+             lead: ["οδος", "οδ", "λεωφορος", "λεωφ", "παροδος", "παρ"],
+             station: ["σταθμος", "μετρο"],
+             abbr: {}},
+        // Batch 2b (2026-10-08). Chinese and Korean names are one word each
+        // to words(), so no street word is set aside and no connector is
+        // split (和 and 과 sit inside names: 太和街); two streets are typed
+        // with "/" or "&" between them. 站 and 역 are station words through
+        // STATION_SUFFIX above.
+        zh: {join: [], stop: [], street: [], lead: [], station: ["站"], abbr: {}},
+        ko: {join: [], stop: [], street: [], lead: [], station: ["역"], abbr: {}},
+        // Georgian: "და" (and) between two streets; the street word follows
+        // the name ("რუსთაველის გამზირი"); "მეტრო" names a metro station.
+        ka: {join: ["და"], stop: [],
+             street: ["ქუჩა", "გამზირი", "ქ", "გამზ", "მოედანი", "ჩიხი", "შესახვევი"],
+             lead: [], station: ["მეტრო", "სადგური"], abbr: {"ქ": "ქუჩა", "გამზ": "გამზირი"}}
+    };
+    var PAIR_SPLIT = /\s+(?:and|at|x|y)\s+|\s*[&\/@]\s*/;
+    // A language whose city is also searched in another: Barcelona's names are
+    // Catalan and carry Spanish on under 1% of rows, but a reader may type
+    // "Calle Balmes" (batch 2a, 2026-10-08).
+    var ALSO = {ca: ["es"]};
+    function useLanguages(codes) {
+        var joins = ["and", "at", "x", "y"];
+        codes = (codes || []).slice();
+        codes.slice().forEach(function (c) { (ALSO[c] || []).forEach(function (a) {
+            if (codes.indexOf(a) < 0) codes.push(a); }); });
+        if (codes.indexOf("de") >= 0) UMLAUT_FOLD = true;
+        if (codes.indexOf("da") >= 0 || codes.indexOf("nb") >= 0) NORDIC_FOLD = true;
+        codes.forEach(function (c) {
+            var w = LANG_WORDS[c];
+            if (!w) return;
+            w.join.forEach(function (x) { if (joins.indexOf(x) < 0) joins.push(x); STOP[x] = 1; });
+            w.stop.forEach(function (x) { STOP[x] = 1; });
+            w.street.forEach(function (x) { STREET_WORDS[x] = 1; });
+            w.lead.forEach(function (x) { STREET_LEAD[x] = 1; });
+            w.station.forEach(function (x) { STATION_WORDS[x] = 1; });
+            Object.keys(w.abbr).forEach(function (k) { ABBR[k] = w.abbr[k]; });
+        });
+        PAIR_SPLIT = new RegExp("\\s+(?:" + joins.join("|") + ")\\s+|\\s*[&\\/@]\\s*");
+    }
+    var CJK = /[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uac00-\ud7af\uf900-\ufaff]/;
+    var MARKS = /[\u0300-\u036f]/g;
+    var data = null, own = null, loading = null, fold = null, marker = null, timer = null;
+    var UMLAUT_FOLD = false, NORDIC_FOLD = false;
+    var renderer = null;
+    var byIndex = [], crossURL = null, crossings = null, streetURL = null, streets = null;
+    // THE SEARCHED AREA (owner, 2026-10-12): the index names the
+    // municipalities it covers and carries their merged outline
+    // (place_index.outline). The outline is drawn only while the search box
+    // is open, so the map is not given a standing border; a search that finds
+    // nothing says where search stops.
+    var area = null, areaLayer = null;
+    var CREDIT_BELOW = true;
+    function showArea(map, on) {
+        if (areaLayer) { map.removeLayer(areaLayer); areaLayer = null; }
+        if (!on || !area || !area.outline || !area.outline.length) return;
+        var polys = area.outline.map(function (r) {
+            var ring = [];
+            for (var i = 0; i + 1 < r.length; i += 2) ring.push([r[i], r[i + 1]]);
+            return [ring];
+        });
+        areaLayer = L.polygon(polys, {fill: false, weight: 2, dashArray: "6 5", opacity: 0.9,
+                                      interactive: false, className: "hm-search-area"}).addTo(map);
+    }
+    // "Seattle", "Seattle and Bellevue", "Seattle and 10 more": the index
+    // lists the municipality with the most of the map's stations first.
+    function areaName() {
+        var n = (area && area.names || []).filter(Boolean);
+        if (!n.length) return "";
+        if (n.length === 1) return n[0];
+        if (n.length === 2) return n[0] + " and " + n[1];
+        return n[0] + " and " + (n.length - 1) + " more";
+    }
+
+    function norm(s) {
+        s = String(s).normalize("NFKC").toLowerCase();
+        // Before the marks go: a with a ring is "aa" in Danish and Norwegian.
+        if (NORDIC_FOLD) s = s.replace(/å/g, "aa");
+        s = s.normalize("NFD").replace(MARKS, "").normalize("NFC");
+        if (fold === "ja") s = s.replace(/ou/g, "o").replace(/uu/g, "u").replace(/oo/g, "o");
+        // Sharp s is "ss" (Zurich writes only "strasse"). Where German is
+        // declared, a typed "ae", "oe" or "ue" meets the umlaut, whose marks
+        // are stripped above: both sides lose the "e".
+        s = s.replace(/ß/g, "ss");
+        if (UMLAUT_FOLD) s = s.replace(/ae/g, "a").replace(/oe/g, "o").replace(/ue/g, "u");
+        // Greek final sigma is sigma (candidate 31; place_index.fold_name's
+        // casefold does the same). Romanian's cedilla and comma letters meet
+        // already: both lose their mark above (candidate 35).
+        s = s.replace(/ς/g, "σ");
+        // Danish and Norwegian letters no mark is stripped from, written as
+        // the drafted word lists write them: ae, o, aa.
+        if (NORDIC_FOLD) s = s.replace(/æ/g, "ae").replace(/ø/g, "o");
+        return s;
+    }
+    function words(s) { return norm(s).split(/[^\p{L}\p{N}]+/u).filter(Boolean); }
+    // The searchable forms of one entry's names.
+    function prep(d) {
+        var toks = [], solo = [];
+        d.names.forEach(function (n) {
+            var ws = words(n);
+            toks = toks.concat(ws);
+            solo = solo.concat(ws);
+            // A dotted abbreviation in a NAME (2026-10-13): Milan's map writes
+            // "V.le Tunisia" and "P.za Piemonte", which words() splits at the
+            // dot, so "Viale Tunisia" missed the station. The letters joined
+            // ("vle") and the word ABBR holds for them ("viale") are tokens
+            // too. Where the joined letters are no abbreviation, the part
+            // before the first dot is tried alone ("S.Leonardo" gains "san").
+            // Only a word the page's languages list in ABBR is ever added, so
+            // a name gains its own abbreviation's word and nothing else.
+            (norm(n).match(/\p{L}+(?:\.\p{L}+)+/gu) || []).forEach(function (g) {
+                var j = g.replace(/\./g, ""), k = typeof ABBR[j] === "string" ? j : g.split(".")[0];
+                if (typeof ABBR[k] === "string") toks.push(k, ABBR[k]);
+            });
+            // Joined too, so "Kinkakuji" finds "Kinkaku-ji".
+            if (ws.length > 1 && !CJK.test(n)) toks.push(ws.join(""));
+        });
+        d.bares = d.names.map(function (n) { return words(n).join(""); });
+        d.hay = " " + toks.join(" ") + " ";
+        // The words alone, for in-word hits: a joined form let "star" match
+        // inside "Rest Area" (Sydney, 2026-10-08).
+        d.solo = " " + solo.join(" ") + " ";
+        d.flat = norm(d.names.join(" | "));
+        d.first = norm(d.name);
+        return d;
+    }
+    function metres(a, b) {
+        var k = Math.cos((a.lat + b.lat) / 2 * Math.PI / 180);
+        return Math.sqrt(Math.pow((a.lat - b.lat) * 110540, 2) + Math.pow((a.lon - b.lon) * 111320 * k, 2));
+    }
+
+    // The map's own stations (the station markers and their tooltips) and
+    // lines (the legend's rows, the polylines of each), as the reader sees them.
+    function ownItems(map) {
+        var out = [], seen = {};
+        map.eachLayer(function (l) {
+            if (!(l instanceof L.CircleMarker) || l instanceof L.Circle) return;
+            if (l.options.color !== STATION_COLOR || !l.getTooltip()) return;
+            var c = l.getTooltip().getContent(), tmp = document.createElement("div");
+            tmp.innerHTML = typeof c === "string" ? c : (c && c.innerHTML) || "";
+            var b = tmp.querySelector("b"), name = ((b || tmp).textContent || "").trim();
+            var ll = l.getLatLng(), key = name + "@" + ll.lat + "," + ll.lng;
+            if (!name || seen[key]) return;
+            seen[key] = 1;
+            out.push({kind: "mapstation", name: name, names: [name], lat: ll.lat, lon: ll.lng, bbox: null});
+        });
+        document.querySelectorAll(".map-legend .hm-line-row[data-line]").forEach(function (row) {
+            var n = row.getAttribute("data-line"), name = (row.textContent || "").trim(), bounds = null,
+                color = null;
+            map.eachLayer(function (l) {
+                var cls = " " + ((l.options && l.options.className) || "") + " ";
+                if (l instanceof L.Polyline && cls.indexOf(" hm-line-" + n + " ") >= 0 && l.getBounds) {
+                    color = color || l.options.color;
+                    bounds = bounds ? bounds.extend(l.getBounds()) : L.latLngBounds(l.getBounds().getSouthWest(),
+                                                                                    l.getBounds().getNorthEast());
+                }
+            });
+            if (!name || !bounds) return;
+            var c = bounds.getCenter();
+            out.push({kind: "line", name: name, names: [name], lat: c.lat, lon: c.lng, row: row, color: color,
+                      bbox: [bounds.getSouth(), bounds.getWest(), bounds.getNorth(), bounds.getEast()]});
+        });
+        return out.map(prep);
+    }
+
+    // The core of a station name: its words, less a bracketed operator
+    // ("Arashiyama (Hankyu)") and words such as "station" or 駅.
+    function core(name) {
+        return words(String(name).replace(/[(（][^)）]*[)）]/g, " "))
+            .filter(function (w) { return !STATION_WORDS[w]; });
+    }
+    // An OSM station joins the nearest map station within LINK_M whose name it
+    // shares: the same core, or the same first word of 3 or more letters
+    // (Tōjiin and "Tōjiin・Ritsumeikan University"). The FIRST word, never any
+    // word: any word joined the scenic line's "Torokko Saga" to Saga-Arashiyama
+    // and the Eizan Cable's station to Yase-Hieizanguchi (Kyoto, 2026-10-07).
+    // A second pass joins one whose names the map station already holds
+    // (Randen's 西院, read "Sai", joins Saiin through Hankyu's). A joined OSM
+    // station lends the map station its names and is not listed itself; one
+    // that joins none is labeled as not on the map.
+    function link(rows) {
+        var stations = own.filter(function (d) { return d.kind === "mapstation"; });
+        stations.forEach(function (s) { s._core = core(s.name); });
+        function same(d, s) {
+            return d.names.some(function (n) {
+                if (CJK.test(n)) return false;
+                var c = core(n);
+                return c.length && (c.join("") === s._core.join("") || (c[0].length >= 3 && c[0] === s._core[0]));
+            });
+        }
+        function held(d, s) { return d.names.some(function (n) { return s.names.indexOf(n) >= 0; }); }
+        function join(d, test) {
+            var best = null, bestM = LINK_M + 1;
+            stations.forEach(function (s) {
+                var m = metres(d, s);
+                if (m < bestM && test(d, s)) { best = s; bestM = m; }
+            });
+            if (!best) return false;
+            d.names.forEach(function (n) { if (best.names.indexOf(n) < 0) best.names.push(n); });
+            best._linked = true;
+            return true;
+        }
+        var rest = rows.filter(function (d) { return d.kind !== "station" || !join(d, same); });
+        rest = rest.filter(function (d) { return d.kind !== "station" || !join(d, held); });
+        // Same name as a map station but too far to join: a stray duplicate in
+        // OSM (Kyoto's third 山科, 900 m east of the station), dropped rather
+        // than labeled as not on the map.
+        rest = rest.filter(function (d) {
+            return d.kind !== "station" || !stations.some(function (s) {
+                return metres(d, s) <= DUP_M && (same(d, s) || held(d, s));
+            });
+        });
+        stations.forEach(function (s) { if (s._linked) prep(s); });
+        return rest;
+    }
+
+    function load(map) {
+        if (!own) own = ownItems(map);
+        if (loading) return loading;
+        var t0 = performance.now();
+        loading = getIndex(URL)
+            .then(function (txt) {
+                var ix = JSON.parse(txt);
+                fold = ix.fold || null;
+                useLanguages(ix.languages && ix.languages.local);
+                own = ownItems(map);
+                var rows = ix.rows.map(function (r, i) {
+                    return prep({kind: ix.kinds[r[0]], lat: r[1], lon: r[2], name: r[3], row: i,
+                                 names: [r[3]].concat(r[4] ? r[4].split("|") : []), bbox: r[5] || null});
+                });
+                // The rows in file order: the crossings file refers to streets
+                // by their place here.
+                byIndex = rows;
+                crossURL = ix.crossings || null;
+                streetURL = ix.streets || null;
+                area = ix.area || null;
+                data = own.concat(link(rows));
+                document.querySelector(".hm-search").setAttribute(
+                    "data-load-ms", Math.round(performance.now() - t0));
+                return data;
+            });
+        loading.catch(function () { loading = null; });
+        return loading;
+    }
+    // The street-pair intersections, a second file fetched only when a
+    // search asks for one (owner, 2026-10-08: the index's size, iPhone
+    // memory above all): a query in two halves ("5th and Pike"), or one of
+    // several words that finds no place in the first file ("Clark Lake").
+    // Each row is [lat, lon, street A, street B], the streets by their place
+    // in the first file; the name and the English pair are built from them.
+    function needCrossings(q, found) {
+        if (!crossURL || crossings) return false;
+        if (pairOf(q)) return true;
+        var qs = words(q).filter(function (w) { return !STOP[w]; });
+        return qs.length > 1 && !found.some(function (d) { return !isOwn(d); });
+    }
+    function loadCrossings() {
+        if (crossings) return crossings;
+        var t0 = performance.now();
+        crossings = getIndex(crossURL)
+            .then(function (txt) {
+                function latin(d) { return d.names.slice(1).filter(function (n) { return !CJK.test(n); })[0]; }
+                JSON.parse(txt).rows.forEach(function (r) {
+                    var a = byIndex[r[2]], b = byIndex[r[3]];
+                    if (!a || !b) return;
+                    var names = [a.name + " / " + b.name], ea = latin(a), eb = latin(b);
+                    if (ea && eb) names.push(ea + " / " + eb);
+                    data.push(prep({kind: "crossing", lat: r[0], lon: r[1], name: names[0], names: names,
+                                    bbox: null}));
+                });
+                document.querySelector(".hm-search").setAttribute(
+                    "data-crossings-ms", Math.round(performance.now() - t0));
+            });
+        // A failed fetch leaves the first file's answers, and is not retried.
+        crossings.catch(function () { crossURL = null; });
+        return crossings;
+    }
+
+    // Each street's drawn length, a third file fetched at the first street
+    // picked (owner, 2026-10-13): {rows, lines, scale}, `rows` ascending and
+    // each a street's place in the first file, `lines` its polylines beside
+    // it. A line is flat integers in units of 1/scale degree: the first
+    // point, then each later point as its difference from the one before.
+    // Resolves to a function from a row to its lines as [[lat, lon], ...].
+    function loadStreets() {
+        if (streets) return streets;
+        streets = getIndex(streetURL).then(function (txt) {
+            var f = JSON.parse(txt), k = f.scale || 100000;
+            return function (row) {
+                var lo = 0, hi = f.rows.length - 1;
+                while (lo <= hi) {
+                    var mid = (lo + hi) >> 1;
+                    if (f.rows[mid] === row) {
+                        return f.lines[mid].map(function (a) {
+                            var la = a[0], ln = a[1], pts = [[la / k, ln / k]];
+                            for (var i = 2; i < a.length; i += 2) {
+                                la += a[i];
+                                ln += a[i + 1];
+                                pts.push([la / k, ln / k]);
+                            }
+                            return pts;
+                        });
+                    }
+                    if (f.rows[mid] < row) lo = mid + 1; else hi = mid - 1;
+                }
+                return [];
+            };
+        });
+        // A failed fetch leaves the ring, and is not retried.
+        streets.catch(function () { streetURL = null; });
+        return streets;
+    }
+
+    // 2 for a word-start hit, 1 for a Latin word of 4 or more letters inside a
+    // romanized compound ("imadegawa" in "Horikawaimadegawa"), 0 for none.
+    function wordHit(d, w) {
+        if (CJK.test(w)) return d.flat.indexOf(w) >= 0 ? 2 : 0;
+        // A number is itself or its ordinal: "1" found 145th (Seattle).
+        if (/^[0-9]+$/.test(w)) return ["", "st", "nd", "rd", "th"].some(function (x) {
+            return d.hay.indexOf(" " + w + x + " ") >= 0; }) ? 2 : 0;
+        if (d.hay.indexOf(" " + w) >= 0) return 2;
+        if (ABBR[w] && d.hay.indexOf(" " + ABBR[w]) >= 0) return 2;
+        return w.length >= 4 && d.solo.indexOf(w) >= 0 ? 1 : 0;
+    }
+    function isStation(d) { return d.kind === "station" || d.kind === "mapstation"; }
+    // A query in two halves ("Clark and Lake", "5th & Pike", "四条 / 烏丸"):
+    // each half's words, street words left out unless that empties it.
+    function pairOf(q) {
+        var parts = norm(q).split(PAIR_SPLIT).map(function (p) {
+            // Articles left out too: "Carrer de Aragó" for Carrer d'Aragó.
+            var ws = words(p), core = ws.filter(function (w) { return !STREET_WORDS[w] && !STOP[w]; });
+            return core.length ? core : ws;
+        }).filter(function (ws) { return ws.length; });
+        return parts.length === 2 ? parts : null;
+    }
+    function sideHit(side, ws) {
+        var hay = " " + words(side).join(" ") + " ", flat = norm(side);
+        return ws.every(function (w) {
+            if (CJK.test(w)) return flat.indexOf(w) >= 0;
+            return hay.indexOf(" " + w) >= 0 || (ABBR[w] && hay.indexOf(" " + ABBR[w]) >= 0);
+        });
+    }
+    function pairHit(d, pair) {
+        return d.names.some(function (n) {
+            var s = n.split(" / ");
+            return s.length === 2 && ((sideHit(s[0], pair[0]) && sideHit(s[1], pair[1]))
+                                      || (sideHit(s[1], pair[0]) && sideHit(s[0], pair[1])));
+        });
+    }
+    function hits(d, qs) {
+        d._weak = 0;
+        for (var i = 0; i < qs.length; i++) {
+            var w = qs[i], h = wordHit(d, w);
+            if (h === 1) d._weak += 1;
+            if (h) continue;
+            if (STATION_WORDS[w] && isStation(d)) continue;
+            if (STREET_WORDS[w] && (d.kind === "street" || d.kind === "crossing" || d.kind === "junction")) continue;
+            if (CJK.test(w) && w.length > 1 && STATION_SUFFIX[w.charAt(w.length - 1)] && isStation(d)
+                && d.flat.indexOf(w.slice(0, -1)) >= 0) continue;
+            return false;
+        }
+        return true;
+    }
+    function search(q) {
+        var qs = words(q).filter(function (w) { return !STOP[w]; });
+        if (!qs.length) return [];
+        var out = data.filter(function (d) { return hits(d, qs); });
+        if (!out.length && qs.length === 1 && CJK.test(qs[0]) && qs[0].length >= 3) {
+            // One CJK word that matches nothing: try it as two (烏丸四条).
+            for (var k = 1; k < qs[0].length && !out.length; k++) {
+                var two = [qs[0].slice(0, k), qs[0].slice(k)];
+                out = data.filter(function (d) { return hits(d, two); });
+            }
+        }
+        var nq = norm(q).trim(), bare = words(q).join(""), phrase = words(q).join(" "), pair = pairOf(q);
+        // A street word last asks for a street ("Lake Shore Dr" before the
+        // Lake Shore Drive Synagogue, whose name the query begins); first, it
+        // is often Saint or Doctor ("St Mary's", "Dr Martin Luther King").
+        // In French, Catalan or Spanish the street word leads ("Rue Peel").
+        var typeW = STREET_WORDS[qs[qs.length - 1]] ? qs[qs.length - 1] : (STREET_LEAD[qs[0]] ? qs[0] : null);
+        var streetQ = qs.length > 1 && typeW;
+        out.forEach(function (d) {
+            var s = KIND_RANK[d.kind] * 3 + Math.min(d.name.length, 40) / 10 + d._weak * 20;
+            // The name itself before another street's alternate name: "Paseo
+            // de la Reforma" listed two roads carrying it as an old or
+            // alternate name ahead of the avenue (Mexico City, live, 2026-10-12).
+            // So: the name itself, then a name holding the whole phrase
+            // ("Avenida Paseo de la Reforma", "New Oxford Street"), then an
+            // alternate name that is the phrase (which still leads where the
+            // typed name is the English of a local one: "Sanjo Street").
+            if (norm(d.name) === nq || words(d.name).join("") === bare) s -= 100;
+            else if ((" " + words(d.name).join(" ") + " ").indexOf(" " + phrase + " ") >= 0) s -= 80;
+            else if (d.bares.indexOf(bare) >= 0 || d.names.some(function (n) { return norm(n) === nq; })) s -= 70;
+            else if (d.first.indexOf(nq) === 0) s -= 40;
+            // "Damen and North": the crossing whose two streets take the two
+            // halves, before North Damen Avenue's other crossings (Chicago,
+            // 2026-10-08).
+            if (pair && d.kind === "crossing" && pairHit(d, pair)) s -= 60;
+            var streetD = d.kind === "street" || d.kind === "crossing" || d.kind === "junction";
+            if (streetQ && streetD) s -= 45;
+            // And its own type first: "NE 45th St" is the Street, not the Court.
+            // Streets only: given to every kind, it put the Lake Shore Drive
+            // Synagogue, a landmark holding the word "drive", 0.5 ahead of
+            // the Drive for "Lake Shore Dr" (Chicago, live, 2026-10-12).
+            if (streetQ && streetD && d.hay.indexOf(" " + (STREET_TYPE[typeW] || ABBR[typeW] || typeW) + " ") >= 0) s -= 5;
+            // Whole words before parts: "Art Institute" before "Arturo ...".
+            // An abbreviation counts as its whole word: "bd St-Laurent" is
+            // Boulevard Saint-Laurent before Boulevard Laurentien (batch 2a).
+            if (qs.every(function (w) { return d.hay.indexOf(" " + w + " ") >= 0
+                    || (ABBR[w] && d.hay.indexOf(" " + ABBR[w] + " ") >= 0); })) s -= 4;
+            d._s = s;
+        });
+        // The map's own stations and lines first, as their own group, and only
+        // from the start of a word: an in-word hit put Takaragaike under "kara"
+        // and Umekōji-Kyotonishi under "Nish" (Kyoto, 2026-10-07).
+        out.sort(function (a, b) { return a._s - b._s; });
+        var cap = caps();
+        var mine = out.filter(function (d) { return isOwn(d) && !d._weak; }).slice(0, cap.own);
+        var rest = oneRowAStreet(out.filter(function (d) { return !isOwn(d); }))
+            .slice(0, mine.length ? cap.places : cap.alone);
+        return mine.concat(rest);
+    }
+    // ONE ROW FOR A STREET'S STRETCHES (owner, 2026-10-12). The index joins
+    // the ways of one name only where they share a node, so a street cut by
+    // a railway, a square or a renamed block is several rows: live, "North
+    // Bell Avenue" filled all five of Chicago's slots and "Brick Lane" four
+    // of London's, pushing every other answer out. Street rows of one name
+    // whose extents lie within STRETCH_M of each other are one suggestion:
+    // the stretch nearest the middle of the view, opening on all of them.
+    // A same-named street farther off stays its own row, because most
+    // repeats are other streets: measured on the 19 indexes, joining at
+    // 600 m takes London's 55,283 street rows to 55,003 and leaves its four
+    // Brick Lanes and 53 of 56 High Streets apart (2 km would still leave
+    // 41). Those rows are told apart instead: each carries the nearest
+    // neighborhood in the index within NEAR_PLACE_M, and the nearest to the
+    // middle of the view comes first. Re-measure STRETCH_M if the index's
+    // street grid changes (pipeline/place_index.py, 2 km cells).
+    var STRETCH_M = 600, NEAR_PLACE_M = 4000, hoods = null;
+    function nearHood(d) {
+        if (!hoods) hoods = data.filter(function (x) { return x.kind === "place"; });
+        var best = null, bestM = NEAR_PLACE_M, k = Math.cos(d.lat * Math.PI / 180);
+        for (var i = 0; i < hoods.length; i++) {
+            var h = hoods[i], dy = (h.lat - d.lat) * 111320, dx = (h.lon - d.lon) * 111320 * k;
+            var m = Math.sqrt(dx * dx + dy * dy);
+            if (m < bestM) { bestM = m; best = h; }
+        }
+        return best ? best.name : null;
+    }
+    function boxOf(d) { return d.bbox || [d.lat, d.lon, d.lat, d.lon]; }
+    function gapM(a, b) {
+        var dy = Math.max(0, a[0] - b[2], b[0] - a[2]) * 111320;
+        var dx = Math.max(0, a[1] - b[3], b[1] - a[3]) * 111320 * Math.cos((a[0] + b[0]) / 2 * Math.PI / 180);
+        return Math.sqrt(dx * dx + dy * dy);
+    }
+    function oneRowAStreet(list) {
+        var groups = {}, kept = [], mid = null;
+        try { var c = window[NAME].getCenter(); mid = [c.lat, c.lng]; } catch (e) { mid = null; }
+        function off(d) { return mid ? Math.pow(d.lat - mid[0], 2) + Math.pow(d.lon - mid[1], 2) : 0; }
+        list.forEach(function (d) {
+            d._span = null;
+            d._hood = null;
+            d._rows = null;
+            if (d.kind !== "street") { kept.push({d: d}); return; }
+            var key = norm(d.name), gs = groups[key] || (groups[key] = []), box = boxOf(d);
+            for (var i = 0; i < gs.length; i++) {
+                var g = gs[i];
+                if (g.boxes.some(function (b) { return gapM(b, box) <= STRETCH_M; })) {
+                    g.boxes.push(box);
+                    g.rows.push(d.row);
+                    g.span = [Math.min(g.span[0], box[0]), Math.min(g.span[1], box[1]),
+                              Math.max(g.span[2], box[2]), Math.max(g.span[3], box[3])];
+                    if (off(d) < off(g.d)) g.d = d;
+                    return;
+                }
+            }
+            var ng = {d: d, boxes: [box], span: box.slice(), rows: [d.row]};
+            gs.push(ng);
+            kept.push(ng);
+        });
+        var rows = kept.map(function (g) {
+            if (g.boxes && g.boxes.length > 1) g.d._span = g.span;
+            if (g.rows) g.d._rows = g.rows;
+            return g.d;
+        });
+        rows.forEach(function (d) {
+            if (d.kind === "street" && groups[norm(d.name)].length > 1) d._hood = nearHood(d);
+        });
+        // Equal answers nearest the view first; the sort is stable, so every
+        // other order stands.
+        return rows.sort(function (a, b) {
+            return a._s - b._s || (a.kind === "street" && b.kind === "street"
+                                   && norm(a.name) === norm(b.name) ? off(a) - off(b) : 0);
+        });
+    }
+    function isOwn(d) { return d.kind === "line" || d.kind === "mapstation"; }
+    // WORK IN PROGRESS (owner, 2026-10-07): the suggestion rules below (the
+    // keyword gate, the caps, the pills) are a first cut, to be tuned against
+    // real search terms in testing; the aim is as few items as do the job,
+    // phones above all. It may go live in this state at the owner's call.
+    // Nothing is suggested until a full keyword is typed (owner, 2026-10-07:
+    // "North" for Northgate Station, "JR" for a JR line): a whole word of some
+    // name ("JR", "Oak", "5th"), at least MIN_LATIN letters of one, at least
+    // MIN_CJK characters of Chinese, Japanese or Korean, or a second word.
+    function ready(q) {
+        var qs = words(q).filter(function (w) { return !STOP[w]; });
+        if (!qs.length) return false;
+        // Several words count only with one real word among them: "#N/A" is
+        // "n" and "a", and found intersections everywhere (owner's junk
+        // searches, 2026-10-08).
+        if (qs.length > 1) return qs.some(function (w) { return w.length > 1 || CJK.test(w) || /[0-9]/.test(w); });
+        var w = qs[0];
+        if (CJK.test(w)) return w.length >= MIN_CJK;
+        if (w.length >= MIN_LATIN) return true;
+        return data.some(function (d) { return d.hay.indexOf(" " + w + " ") >= 0; });
+    }
+
+    function start() {
+        var map = window[NAME];
+        if (!map || !window.L) return;
+        var Ctl = L.Control.extend({
+            options: {position: "topleft"},
+            onAdd: function () {
+                var box = L.DomUtil.create("div", "hm-search leaflet-control");
+                box.innerHTML =
+                    '<div class="hm-search-row">' +
+                    '<button type="button" class="hm-search-btn" aria-label="Search places" title="Search places">' +
+                    '<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="6.5" cy="6.5" r="5" ' +
+                    'fill="none" stroke="currentColor" stroke-width="2"/><path d="M10.5 10.5L15 15" stroke="currentColor" ' +
+                    'stroke-width="2" stroke-linecap="round"/></svg></button>' +
+                    '<input class="hm-search-input" type="search" role="combobox" aria-expanded="false" ' +
+                    'aria-label="Search streets, intersections, stations, lines and places" ' +
+                    'placeholder="Street, station, place" autocomplete="off" autocorrect="off" ' +
+                    'autocapitalize="off" spellcheck="false" enterkeyhint="search"></div>' +
+                    '<div class="hm-search-list" role="listbox"></div>';
+                L.DomEvent.disableClickPropagation(box);
+                L.DomEvent.disableScrollPropagation(box);
+                return box;
+            }
+        });
+        map.addControl(new Ctl());
+        var box = document.querySelector(".hm-search");
+        var btn = box.querySelector(".hm-search-btn");
+        var input = box.querySelector(".hm-search-input");
+        var list = box.querySelector(".hm-search-list");
+        var shown = [], on = -1;
+
+        function note(text) {
+            var n = document.createElement("div");
+            n.className = "hm-search-note";
+            n.textContent = text;
+            list.appendChild(n);
+            list.classList.add("has");
+        }
+        var creditBelow = false;
+        // `found` is false for a search that found nothing: the note above
+        // it already says where search stops, so the area line is left out
+        // (owner, 2026-10-12).
+        function credit(found) {
+            var c = document.createElement("div");
+            c.className = "hm-search-credit";
+            if (CREDIT_BELOW && map.attributionControl) {
+                if (!creditBelow) {
+                    creditBelow = true;
+                    var creditEl = map.attributionControl.getContainer();
+                    var creditH = creditEl ? creditEl.offsetHeight : 0;
+                    map.attributionControl.addAttribution(
+                        'Search index <a href="https://opendatacommons.org/licenses/odbl/1-0/" ' +
+                        'target="_blank" rel="noopener noreferrer">ODbL</a> (<a href="' + abs(URL) +
+                        '" target="_blank" rel="noopener" download>download</a>' +
+                        (crossURL ? ', <a href="' + abs(crossURL) + '" target="_blank" rel="noopener" download>intersections</a>' : '') +
+                        (streetURL ? ', <a href="' + abs(streetURL) + '" target="_blank" rel="noopener" download>streets</a>' : '') + ')');
+                    // The line is taller now (two lines on a phone), and
+                    // the legend's bottom is clamped for a one-line credit
+                    // (_LEGEND_BOTTOM_CSS): it is raised by what the line
+                    // grew. Measured 2026-10-13 at a 343 px map: the line
+                    // goes from 14 to 28 px and an open legend's bottom 4 px
+                    // sat under it.
+                    var grew = creditEl ? creditEl.offsetHeight - creditH : 0;
+                    var lg = document.querySelector(".map-legend");
+                    if (lg && grew > 0) {
+                        var was = lg.style.bottom || getComputedStyle(lg).bottom;
+                        lg.style.bottom = "calc(" + was + " + " + grew + "px)";
+                    }
+                }
+                if (found === false || !areaName()) return;
+                c.textContent = "Search covers " + areaName() + ", outlined on the map.";
+                list.appendChild(c);
+                return;
+            }
+            // The short credit (owner, 2026-10-07, to save space in the box):
+            // the OSM Attribution Guideline's "© OpenStreetMap contributors"
+            // form, linked to the copyright page, the licence named and linked
+            // (ODbL 4.3), and the download link as the 4.6 offer (licence read
+            // 2026-10-07). It replaced 4.3(a)'s longer example wording. The
+            // offer covers the intersections file as well, which is part of
+            // the same derived database (owner, 2026-10-11); its link shows
+            // once the index has named the file. The street lines file is a
+            // third part of it, with a third link (owner, 2026-10-13).
+            c.innerHTML = 'Search data &copy; <a href="https://www.openstreetmap.org/copyright" ' +
+                'target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a> ' +
+                '(<a href="https://opendatacommons.org/licenses/odbl/1-0/" target="_blank" ' +
+                'rel="noopener noreferrer">ODbL</a>) · ' +
+                '<a href="' + abs(URL) + '" target="_blank" rel="noopener" download>Download this index</a>' +
+                (crossURL ? ' · <a href="' + abs(crossURL) + '" target="_blank" rel="noopener" download>intersections</a>' : '') +
+                (streetURL ? ' · <a href="' + abs(streetURL) + '" target="_blank" rel="noopener" download>streets</a>' : '');
+            list.appendChild(c);
+        }
+        // On a phone (under 480 px), with both groups shown, each heading folds
+        // its group (owner, 2026-10-07): the map's own open, the places folded,
+        // and a reader's choice kept while they type.
+        var folded = {own: false, places: true};
+        function head(text, group, count, foldable) {
+            var h = document.createElement(foldable ? "button" : "div");
+            h.className = "hm-search-head";
+            if (foldable) {
+                h.type = "button";
+                h.className += " hm-search-fold";
+                h.setAttribute("aria-expanded", folded[group] ? "false" : "true");
+                h.textContent = (folded[group] ? "▸ " : "▾ ") + text + " (" + count + ")";
+                h.addEventListener("click", function () { folded[group] = !folded[group]; render(); });
+            } else {
+                h.textContent = text;
+            }
+            list.appendChild(h);
+        }
+        function render() {
+            list.innerHTML = "";
+            on = -1;
+            shown = [];
+            // Empty, or no full keyword yet: what the search is for (owner,
+            // 2026-10-07), and the credit, which shows whenever the box is open.
+            // Before a full keyword, the map's own stations and lines still
+            // answer, from the start of a word (owner, 2026-10-11: "l" showed
+            // the Linhas through a place with a word L, "lin" showed nothing,
+            // "linh" showed them again). The index's places wait for the
+            // keyword, as before.
+            var gated = !!data && !ready(input.value);
+            var early = gated && input.value.trim() && !JUNK_Q.test(input.value)
+                ? search(input.value).filter(isOwn) : [];
+            if (!input.value.trim() || (gated && !early.length)) {
+                note("Finds streets, intersections, stations, lines, neighborhoods and landmarks. " +
+                     "Businesses are not searchable, and what you type stays in your browser.");
+                credit();
+                input.setAttribute("aria-expanded", "false");
+                return;
+            }
+            if (!data) { note("Loading places…"); return; }
+            // An error value typed in ("#N/A", "#REF!", "!ERROR!") finds
+            // nothing, as no index holds one (place_index.junk_name).
+            if (JUNK_Q.test(input.value)) { note("No street, station or place by that name"); credit(false); return; }
+            shown = gated ? early : search(input.value);
+            if (!gated && needCrossings(input.value, shown)) {
+                // Shown again when the intersections arrive, or as it stands
+                // if they cannot.
+                loadCrossings().then(render, render);
+                if (!shown.length) { note("Loading intersections…"); return; }
+            }
+            if (!shown.length) {
+                note("No street, station or place by that name");
+                // The owner's wording (2026-10-12).
+                if (area) note("Search covers the outlined area only. Zoom out to see it.");
+                credit(false);
+                return;
+            }
+            var nOwn = shown.filter(isOwn).length, nPlaces = shown.length - nOwn;
+            var foldable = nOwn > 0 && nPlaces > 0 && narrow();
+            var pills = null, rows = null;
+            shown.forEach(function (d, i) {
+                // A map station shows its Japanese (or other) name beside the
+                // map's; an OSM entry its first Latin alias.
+                var other = d.kind === "mapstation" ? d.names[1]
+                    : d.names.slice(1).filter(function (n) { return !CJK.test(n); })[0];
+                var label = KIND_LABEL[d.kind] + (other && other !== d.name ? " · " + other : "");
+                if (isOwn(d)) {
+                    // The map's own stations and lines as pills (owner,
+                    // 2026-10-07), side by side so several share a row: a
+                    // line's in its map colour, a station's with the station
+                    // dot. The kind and other name are the pill's title.
+                    if (!pills) {
+                        head("On this map", "own", nOwn, foldable);
+                        pills = document.createElement("div");
+                        pills.className = "hm-search-pills";
+                        pills.hidden = foldable && folded.own;
+                        list.appendChild(pills);
+                    }
+                    var pill = document.createElement("button");
+                    pill.type = "button";
+                    pill.className = "hm-search-pill";
+                    pill.setAttribute("data-i", i);
+                    pill.title = label;
+                    pill.setAttribute("aria-label", d.name + ", " + label);
+                    var sw = document.createElement("span");
+                    sw.className = d.kind === "line" ? "hm-pill-line" : "hm-pill-station";
+                    if (d.kind === "line" && d.color) sw.style.background = d.color;
+                    pill.appendChild(sw);
+                    pill.appendChild(document.createTextNode(d.name));
+                    pill.addEventListener("click", function () { go(i); });
+                    pills.appendChild(pill);
+                    return;
+                }
+                if (!rows) {
+                    if (pills) head("Places", "places", nPlaces, foldable);
+                    rows = document.createElement("div");
+                    rows.hidden = foldable && folded.places;
+                    list.appendChild(rows);
+                }
+                var el = document.createElement("div");
+                el.className = "hm-search-item";
+                el.setAttribute("role", "option");
+                el.setAttribute("data-i", i);
+                var top = document.createElement("div");
+                // One of several streets of this name carries its
+                // neighborhood in parentheses (owner, 2026-10-12: "Brick
+                // Lane (Mile End New Town)"; oneRowAStreet). The mark on the
+                // map keeps the street's own name.
+                top.textContent = d.name + (d._hood && d._hood !== d.name ? " (" + d._hood + ")" : "");
+                var sub = document.createElement("div");
+                sub.className = "hm-search-sub";
+                sub.textContent = label;
+                el.appendChild(top);
+                el.appendChild(sub);
+                el.addEventListener("click", function () { go(i); });
+                rows.appendChild(el);
+            });
+            credit();
+            list.classList.add("has");
+            input.setAttribute("aria-expanded", "true");
+        }
+        function go(i) {
+            var d = shown[i];
+            if (!d) return;
+            unmark();
+            list.classList.remove("has");
+            input.setAttribute("aria-expanded", "false");
+            input.blur();
+            if (d.kind === "line") {
+                // The whole line in view, picked out as its legend row does
+                // (LINE_HIGHLIGHT_SCRIPT, which also gives it the picked
+                // look); a row already picked stays picked.
+                map.fitBounds([[d.bbox[0], d.bbox[1]], [d.bbox[2], d.bbox[3]]], {padding: [30, 30]});
+                if (d.row.getAttribute("aria-pressed") !== "true") d.row.click();
+                return;
+            }
+            if (d.kind === "mapstation") {
+                // The station with its outermost ring in view, whether or not
+                // the rings are switched on (owner, 2026-10-07).
+                map.fitBounds(L.latLng(d.lat, d.lon).toBounds(2 * RING_M), {padding: [20, 20]});
+            } else if (d._span || d.bbox) {
+                // every stretch of the street in view (oneRowAStreet)
+                var bb = d._span || d.bbox;
+                map.fitBounds([[bb[0], bb[1]], [bb[2], bb[3]]], {maxZoom: 16, padding: [30, 30]});
+            } else {
+                map.setView([d.lat, d.lon], Math.max(map.getZoom(), 16));
+            }
+            // A temporary marker, not interactive, so a tap still reaches the
+            // dots and rings under it: the casing, then the ring over it.
+            if (!map.getPane("hmsearch")) {
+                map.createPane("hmsearch").style.zIndex = 640;
+                // The name label has a pane of its own: TAP_SELECT_SCRIPT
+                // hides Leaflet's tooltip pane on a touch screen, where a
+                // hover label has no use, and this one is the search's answer.
+                map.createPane("hmsearchtip").style.zIndex = 645;
+                renderer = L.svg({pane: "hmsearch"});
+            }
+            marker = L.featureGroup([
+                L.circleMarker([d.lat, d.lon], {radius: 17, weight: 8, className: "hm-search-case",
+                    pane: "hmsearch", renderer: renderer, interactive: false}),
+                L.circleMarker([d.lat, d.lon], {radius: 17, weight: 4, className: "hm-search-ring",
+                    pane: "hmsearch", renderer: renderer, interactive: false})
+            ]).addTo(map);
+            marker.getLayers()[1].bindTooltip(d.name, {permanent: true, direction: "top", pane: "hmsearchtip",
+                offset: [0, -16]}).openTooltip();
+            // A street's whole length, every stretch the result row stands
+            // for (oneRowAStreet), drawn when its file is in; the ring gives
+            // way to it and the name label stays. No file, or a street with
+            // no line in it, leaves the ring.
+            if (d.kind === "street" && streetURL && d._rows) {
+                var mine = marker, rowsOf = d._rows;
+                loadStreets().then(function (linesOf) {
+                    if (marker !== mine) return;
+                    var lines = [];
+                    rowsOf.forEach(function (r) { lines = lines.concat(linesOf(r)); });
+                    if (!lines.length) return;
+                    mine.getLayers().forEach(function (c) { if (c._path) c._path.classList.add("hm-search-hid"); });
+                    [["hm-search-streetcase", 9], ["hm-search-street", 5]].forEach(function (s) {
+                        mine.addLayer(L.polyline(lines, {weight: s[1], opacity: 1, className: s[0],
+                            pane: "hmsearch", renderer: renderer, interactive: false,
+                            lineCap: "round", lineJoin: "round"}));
+                    });
+                }, function () {});
+            }
+            map.getContainer().classList.add("hm-searching");
+            // The reader's first touch of the map ends the fade (the marker
+            // stays its 12 seconds). Armed after the move this search makes.
+            setTimeout(function () {
+                if (!marker) return;
+                ["pointerdown", "wheel", "touchstart", "keydown"].forEach(function (ev) {
+                    map.getContainer().addEventListener(ev, unfade, {capture: true, passive: true});
+                });
+            }, 400);
+            timer = setTimeout(unmark, 12000);
+        }
+        function unfade() {
+            map.getContainer().classList.remove("hm-searching");
+            ["pointerdown", "wheel", "touchstart", "keydown"].forEach(function (ev) {
+                map.getContainer().removeEventListener(ev, unfade, {capture: true});
+            });
+        }
+        function unmark() {
+            clearTimeout(timer);
+            if (marker) map.removeLayer(marker);
+            marker = null;
+            unfade();
+        }
+        function open() {
+            box.classList.add("open");
+            input.focus();
+            load(map).then(function () { showArea(map, true); render(); }, function () {
+                // No index (a map opened outside the site): the map's own
+                // stations and lines still answer.
+                data = own;
+                render();
+                note("Streets and places are searchable on the site's own map pages");
+            });
+        }
+        btn.addEventListener("click", function () {
+            // The button closes an open box, typed text or not (a phone has
+            // no Escape key); the text is cleared, as Escape clears it.
+            if (box.classList.contains("open")) {
+                input.value = "";
+                render();
+                box.classList.remove("open");
+                showArea(map, false);
+                return;
+            }
+            open();
+        });
+        input.addEventListener("input", render);
+        input.addEventListener("keydown", function (e) {
+            e.stopPropagation();
+            // Pills and rows alike, in the order shown.
+            var items = Array.prototype.filter.call(list.querySelectorAll("[data-i]"),
+                function (el) { return !el.closest("[hidden]"); });   // a folded group's are skipped
+            if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+                e.preventDefault();
+                if (!items.length) return;
+                on = (on + (e.key === "ArrowDown" ? 1 : items.length - 1)) % items.length;
+                items.forEach(function (el, k) { el.classList.toggle("on", k === on); });
+            } else if (e.key === "Enter") {
+                e.preventDefault();
+                if (items.length) go(Number(items[on >= 0 ? on : 0].getAttribute("data-i")));
+            } else if (e.key === "Escape") {
+                input.value = "";
+                render();
+                box.classList.remove("open");
+                showArea(map, false);
+            }
+        });
+    }
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", start);
+    } else {
+        start();
+    }
+})();
+</script>
     <div hidden data-ehm="ehm:v1:map/moriguchi:752ce2309e0fb948"></div>
     
-            <div class="folium-map" id="map_6be28dd3df020dbd9e643e14e4c85297" ></div>
+            <div class="folium-map" id="map_26c5e0bea99a648cfaa7999f5c5d4027" ></div>
         
 </body>
 <script>
     
     
-            var map_6be28dd3df020dbd9e643e14e4c85297 = L.map(
-                "map_6be28dd3df020dbd9e643e14e4c85297",
+            var map_26c5e0bea99a648cfaa7999f5c5d4027 = L.map(
+                "map_26c5e0bea99a648cfaa7999f5c5d4027",
                 {
                     center: [34.728455, 135.55580249999997],
                     crs: L.CRS.EPSG3857,
@@ -1589,7 +2727,7 @@ path.hm-pick-case { stroke: #000000; fill: none; }
 
         
     
-            var tile_layer_d33da47c8c77af5a0302e620316ee47d = L.tileLayer(
+            var tile_layer_896a8e5d145a6de765d4bac849a1193b = L.tileLayer(
                 "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
                 {
   "minZoom": 0,
@@ -1606,10 +2744,10 @@ path.hm-pick-case { stroke: #000000; fill: none; }
             );
         
     
-            tile_layer_d33da47c8c77af5a0302e620316ee47d.addTo(map_6be28dd3df020dbd9e643e14e4c85297);
+            tile_layer_896a8e5d145a6de765d4bac849a1193b.addTo(map_26c5e0bea99a648cfaa7999f5c5d4027);
         
     
-        var open_basemap_11a89c7959ffd595d87c0fdbd67516a7 = (function () {
+        var open_basemap_99afad2179de2dfc9bbbb5ee8b7d6fd6 = (function () {
             var LIBS = ["https://files.dacekroberts.dev/lib/maplibre-gl.css", "https://files.dacekroberts.dev/lib/maplibre-gl.js", "https://files.dacekroberts.dev/lib/leaflet-maplibre-gl.js", "https://files.dacekroberts.dev/lib/pmtiles.js", "https://files.dacekroberts.dev/lib/basemaps.js"], loading = null;
             function load() {
                 if (loading) return loading;
@@ -2066,7 +3204,7 @@ if (typeof module !== "undefined" && module.exports) module.exports = travelStyl
         })();
         
     
-            var heat_map_b810536c58d96e1dcbb9e73d875d45f2 = L.heatLayer(
+            var heat_map_488028be33103248c79efd16435c9912 = L.heatLayer(
                 JSON.parse("[[34.734008,135.558932],[34.729942,135.562233],[34.725929,135.559193],[34.728313,135.560964],[34.727856,135.562616],[34.730644,135.559317],[34.730644,135.559317],[34.730472,135.56114],[34.73235,135.5649],[34.73028,135.55822],[34.739091,135.56721],[34.725565,135.556339],[34.738395,135.563392],[34.74229,135.566423],[34.742344,135.564551],[34.734825,135.569179],[34.734991,135.56642],[34.733807,135.565421],[34.753113,135.578088],[34.724942,135.555198],[34.725565,135.556339],[34.73257,135.557366],[34.747567,135.580429],[34.731924,135.556471],[34.736445,135.564195],[34.728386,135.563638],[34.733899,135.566294],[34.73563,135.567449],[34.732272,135.557682],[34.735418,135.564186],[34.733705,135.559268],[34.730859,135.555716],[34.735551,135.563823],[34.734008,135.558932],[34.731516,135.557318],[34.733188,135.564489],[34.729942,135.562233],[34.732862,135.565506],[34.72693,135.557062],[34.733198,135.558233],[34.728328,135.562805],[34.745185,135.577816],[34.745313,135.577032],[34.740509,135.566531],[34.734312,135.564937],[34.733551,135.563734],[34.738774,135.564376],[34.735156,135.562534],[34.730303,135.56009],[34.745971,135.576531],[34.731308,135.556679],[34.730849,135.557621],[34.725734,135.557505],[34.724942,135.555198],[34.732715,135.565179],[34.733847,135.559102],[34.737012,135.566495],[34.73563,135.567449],[34.728048,135.556529],[34.745765,135.577818],[34.727676,135.556814],[34.733743,135.564203],[34.737076,135.563556],[34.737196,135.566111],[34.730303,135.56009],[34.728137,135.557205],[34.748852,135.580346],[34.748852,135.580346],[34.735094,135.563712],[34.732272,135.557682],[34.73199,135.557979],[34.734883,135.562683],[34.748115,135.577535],[34.732901,135.55855],[34.733646,135.568273],[34.727764,135.560531],[34.735818,135.563476],[34.73029,135.556317],[34.745715,135.57633],[34.731203,135.557235],[34.739345,135.564891],[34.73257,135.557366],[34.734388,135.566093],[34.729548,135.559113],[34.73823,135.568945],[34.736199,135.565524],[34.734753,135.564077],[34.747567,135.580429],[34.737845,135.564816],[34.749806,135.579457],[34.749806,135.579457],[34.732862,135.565506],[34.732474,135.560678],[34.734312,135.564937],[34.736695,135.566232],[34.736811,135.563885],[34.728692,135.55634],[34.738201,135.565265],[34.739001,135.566396],[34.749806,135.579457],[34.738774,135.564376],[34.739171,135.565816],[34.732531,135.562363],[34.736445,135.564195],[34.734308,135.557747],[34.735156,135.562534],[34.735094,135.563712],[34.733286,135.565542],[34.734991,135.56642],[34.730303,135.56009],[34.734312,135.564937],[34.738774,135.564376],[34.748773,135.576855],[34.740426,135.566018],[34.749806,135.579457],[34.747053,135.576144],[34.73496,135.565309],[34.749869,135.577176],[34.748852,135.580346],[34.732638,135.559268],[34.734308,135.557747],[34.735818,135.563476],[34.734883,135.562683],[34.747053,135.576144],[34.736445,135.564195],[34.73496,135.565309],[34.749806,135.579457],[34.733166,135.559898],[34.73563,135.567449],[34.738461,135.564618],[34.73563,135.567449],[34.733346,135.558055],[34.734734,135.569616],[34.748115,135.577535],[34.738182,135.563628],[34.72904,135.559549],[34.747053,135.576144],[34.734312,135.564937],[34.729606,135.555378],[34.73473,135.556997],[34.731801,135.554987],[34.735094,135.563712],[34.732455,135.555943],[34.733346,135.558055],[34.733807,135.565421],[34.735094,135.563712],[34.740008,135.566535],[34.73496,135.565309],[34.737821,135.564035],[34.751346,135.579986],[34.730933,135.55509],[34.736022,135.563199],[34.735818,135.563476],[34.737625,135.562915],[34.73029,135.556317],[34.732091,135.556276],[34.740426,135.566018],[34.731015,135.555566],[34.732531,135.562363],[34.73529,135.564598],[34.736311,135.565901],[34.732862,135.565506],[34.751682,135.581794],[34.730078,135.556551],[34.738774,135.564376],[34.73496,135.565309],[34.751107,135.578072],[34.732542,135.569182],[34.735551,135.563823],[34.734248,135.563394],[34.739136,135.565507],[34.731252,135.560078],[34.734312,135.564937],[34.730303,135.56009],[34.735818,135.563476],[34.73496,135.565309]]"),
                 {
   "minOpacity": 0.35,
@@ -2084,10 +3222,10 @@ if (typeof module !== "undefined" && module.exports) module.exports = travelStyl
             );
         
     
-            heat_map_b810536c58d96e1dcbb9e73d875d45f2.addTo(map_6be28dd3df020dbd9e643e14e4c85297);
+            heat_map_488028be33103248c79efd16435c9912.addTo(map_26c5e0bea99a648cfaa7999f5c5d4027);
         
     
-            var heat_map_c71da7f522985823d3aca60c7a7172ba = L.heatLayer(
+            var heat_map_16d913a5d6c3fe07afecee7b2e777850 = L.heatLayer(
                 JSON.parse("[[34.754866,135.595191],[34.743776,135.562445],[34.748509,135.587117],[34.748833,135.588943],[34.747905,135.592773],[34.751315,135.593382],[34.734008,135.558932],[34.755818,135.592027],[34.755535,135.590915],[34.725111,135.565924],[34.726612,135.569763],[34.723295,135.578749],[34.729942,135.562233],[34.727198,135.572096],[34.754587,135.596479],[34.754743,135.603853],[34.751925,135.595002],[34.750141,135.595429],[34.750748,135.595474],[34.751652,135.59937],[34.755631,135.597434],[34.750182,135.605328],[34.752376,135.603634],[34.730947,135.574579],[34.751922,135.569415],[34.752297,135.572844],[34.725929,135.559193],[34.728313,135.560964],[34.732111,135.56993],[34.749565,135.605727],[34.746886,135.593381],[34.748451,135.595699],[34.747549,135.598891],[34.748423,135.600194],[34.747101,135.601451],[34.745775,135.602879],[34.723307,135.571617],[34.720005,135.580609],[34.723332,135.565309],[34.723106,135.565925],[34.724981,135.568339],[34.727856,135.562616],[34.745452,135.576347],[34.748262,135.567275],[34.743128,135.566785],[34.744396,135.57881],[34.752506,135.565705],[34.748335,135.566961],[34.730644,135.559317],[34.730644,135.559317],[34.749393,135.564869],[34.747782,135.601893],[34.752788,135.59253],[34.730472,135.56114],[34.76135,135.588227],[34.755204,135.594917],[34.745472,135.602002],[34.752486,135.59255],[34.73235,135.5649],[34.730863,135.573276],[34.73028,135.55822],[34.720766,135.566622],[34.743088,135.577964],[34.739091,135.56721],[34.749836,135.601053],[34.752886,135.593781],[34.725565,135.556339],[34.738395,135.563392],[34.726715,135.571291],[34.74229,135.566423],[34.733134,135.575369],[34.746965,135.595991],[34.733803,135.571738],[34.750483,135.59968],[34.728314,135.575316],[34.762277,135.5896],[34.742344,135.564551],[34.749247,135.592127],[34.755802,135.58777],[34.734825,135.569179],[34.741907,135.570001],[34.745079,135.564821],[34.734991,135.56642],[34.733807,135.565421],[34.753113,135.578088],[34.724942,135.555198],[34.750914,135.568766],[34.761635,135.589259],[34.725565,135.556339],[34.76288,135.595578],[34.73257,135.557366],[34.747567,135.580429],[34.747371,135.567155],[34.744518,135.566893],[34.719587,135.575876],[34.755831,135.578855],[34.733824,135.575942],[34.724961,135.575044],[34.731924,135.556471],[34.75424,135.596637],[34.760232,135.592788],[34.736445,135.564195],[34.728386,135.563638],[34.733899,135.566294],[34.73563,135.567449],[34.732272,135.557682],[34.762843,135.592209],[34.735418,135.564186],[34.733705,135.559268],[34.730859,135.555716],[34.735551,135.563823],[34.747952,135.583319],[34.747248,135.592549],[34.752297,135.590574],[34.749582,135.592352],[34.749448,135.585764],[34.74743,135.589487],[34.748615,135.589299],[34.751315,135.593382],[34.734008,135.558932],[34.734245,135.572448],[34.731516,135.557318],[34.754042,135.592868],[34.755535,135.590915],[34.760236,135.596612],[34.753445,135.591972],[34.754943,135.592361],[34.756788,135.591823],[34.756978,135.593919],[34.759248,135.594848],[34.725111,135.565924],[34.724607,135.565128],[34.733188,135.564489],[34.724576,135.578068],[34.729942,135.562233],[34.72914,135.57194],[34.73371,135.572493],[34.733803,135.571738],[34.727605,135.572412],[34.75054,135.604712],[34.750023,135.5936],[34.75461,135.593701],[34.733677,135.575156],[34.733677,135.575156],[34.726563,135.575609],[34.732862,135.565506],[34.754572,135.577356],[34.72693,135.557062],[34.733198,135.558233],[34.728466,135.570215],[34.730547,135.569848],[34.748645,135.605149],[34.747235,135.599411],[34.749671,135.59588],[34.746575,135.594599],[34.747025,135.596728],[34.747395,135.59686],[34.748006,135.600189],[34.748437,135.594946],[34.747315,135.604831],[34.721567,135.566621],[34.719137,135.567136],[34.724263,135.566572],[34.728328,135.562805],[34.745286,135.566252],[34.746271,135.562902],[34.745185,135.577816],[34.745313,135.577032],[34.743128,135.577622],[34.740509,135.566531],[34.729398,135.571947],[34.750726,135.603245],[34.734312,135.564937],[34.722011,135.581789],[34.732426,135.572647],[34.733551,135.563734],[34.753718,135.603137],[34.738774,135.564376],[34.745107,135.576963],[34.741992,135.569423],[34.751643,135.595576],[34.735156,135.562534],[34.730303,135.56009],[34.745971,135.576531],[34.759862,135.592784],[34.731308,135.556679],[34.730849,135.557621],[34.753264,135.593081],[34.723744,135.565662],[34.725734,135.557505],[34.757489,135.589205],[34.750483,135.59968],[34.748457,135.601516],[34.724942,135.555198],[34.732578,135.57808],[34.732715,135.565179],[34.734188,135.571526],[34.733847,135.559102],[34.737012,135.566495],[34.73563,135.567449],[34.719767,135.566419],[34.728048,135.556529],[34.758149,135.586638],[34.744457,135.566461],[34.745765,135.577818],[34.727676,135.556814],[34.743769,135.577303],[34.733743,135.564203],[34.748522,135.593535],[34.752137,135.591933],[34.737076,135.563556],[34.737196,135.566111],[34.730303,135.56009],[34.747101,135.601451],[34.728137,135.557205],[34.734983,135.57073],[34.748852,135.580346],[34.748852,135.580346],[34.749793,135.605777],[34.735094,135.563712],[34.748489,135.604331],[34.732315,135.572055],[34.749186,135.592941],[34.730323,135.570667],[34.732272,135.557682],[34.73199,135.557979],[34.734883,135.562683],[34.748115,135.577535],[34.756421,135.588341],[34.748003,135.599158],[34.732901,135.55855],[34.733646,135.568273],[34.727764,135.560531],[34.735818,135.563476],[34.73029,135.556317],[34.724338,135.580228],[34.745715,135.57633],[34.731203,135.557235],[34.753145,135.590927],[34.752091,135.596572],[34.757978,135.586034],[34.749319,135.605694],[34.739345,135.564891],[34.74865,135.590603],[34.73257,135.557366],[34.734388,135.566093],[34.743009,135.565102],[34.729548,135.559113],[34.752164,135.595528],[34.73823,135.568945],[34.736199,135.565524],[34.734753,135.564077],[34.747567,135.580429],[34.737845,135.564816],[34.749806,135.579457],[34.749806,135.579457],[34.732862,135.565506],[34.732474,135.560678],[34.734312,135.564937],[34.736695,135.566232],[34.743142,135.564339],[34.736811,135.563885],[34.751652,135.59937],[34.728692,135.55634],[34.75646,135.597625],[34.738201,135.565265],[34.739001,135.566396],[34.749806,135.579457],[34.752548,135.595035],[34.738774,135.564376],[34.73371,135.572493],[34.739171,135.565816],[34.732531,135.562363],[34.754173,135.580755],[34.736445,135.564195],[34.754737,135.59195],[34.736339,135.573783],[34.734308,135.557747],[34.735156,135.562534],[34.735094,135.563712],[34.733286,135.565542],[34.734991,135.56642],[34.734248,135.570539],[34.730303,135.56009],[34.752227,135.599362],[34.734312,135.564937],[34.738774,135.564376],[34.748773,135.576855],[34.740426,135.566018],[34.749806,135.579457],[34.747053,135.576144],[34.749577,135.585077],[34.745683,135.601773],[34.73496,135.565309],[34.749869,135.577176],[34.748852,135.580346],[34.737898,135.56996],[34.760775,135.591445],[34.732638,135.559268],[34.752325,135.591574],[34.734308,135.557747],[34.745775,135.602879],[34.74981,135.606296],[34.735818,135.563476],[34.734883,135.562683],[34.747053,135.576144],[34.736445,135.564195],[34.73496,135.565309],[34.749806,135.579457],[34.733166,135.559898],[34.73563,135.567449],[34.759653,135.593327],[34.738461,135.564618],[34.730663,135.570858],[34.73563,135.567449],[34.738019,135.570293],[34.733346,135.558055],[34.734734,135.569616],[34.748115,135.577535],[34.726582,135.579247],[34.738182,135.563628],[34.72904,135.559549],[34.730143,135.573252],[34.747053,135.576144],[34.734312,135.564937],[34.729606,135.555378],[34.753348,135.596418],[34.73473,135.556997],[34.731801,135.554987],[34.735094,135.563712],[34.758134,135.589142],[34.758134,135.589142],[34.732455,135.555943],[34.753777,135.575487],[34.733346,135.558055],[34.733807,135.565421],[34.735094,135.563712],[34.740008,135.566535],[34.73496,135.565309],[34.737821,135.564035],[34.751346,135.579986],[34.730933,135.55509],[34.734248,135.570539],[34.736022,135.563199],[34.725192,135.576121],[34.734789,135.57103],[34.735818,135.563476],[34.737625,135.562915],[34.760842,135.586349],[34.73029,135.556317],[34.732091,135.556276],[34.740426,135.566018],[34.731015,135.555566],[34.747952,135.583319],[34.732531,135.562363],[34.73529,135.564598],[34.736311,135.565901],[34.732862,135.565506],[34.751682,135.581794],[34.730078,135.556551],[34.738774,135.564376],[34.73496,135.565309],[34.751107,135.578072],[34.732542,135.569182],[34.735551,135.563823],[34.734248,135.563394],[34.739136,135.565507],[34.731252,135.560078],[34.734312,135.564937],[34.730303,135.56009],[34.748532,135.583595],[34.750483,135.59968],[34.735818,135.563476],[34.74981,135.606296],[34.73496,135.565309]]"),
                 {
   "minOpacity": 0.35,
@@ -2105,351 +3243,351 @@ if (typeof module !== "undefined" && module.exports) module.exports = travelStyl
             );
         
     
-            var feature_group_d0e1a2fbccf6db9370a404c2a1aabefb = L.featureGroup(
+            var feature_group_c98203b2df689400b2a4e5c515519b88 = L.featureGroup(
                 {
 }
             );
         
     
-            var circle_6cf8d00ebdd2c0c86f2aa6f1f2bad4ac = L.circle(
+            var circle_ad5f7590ba5a30cdb97c2e6d08d8dc39 = L.circle(
                 [34.749495, 135.578315],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 80.4672, "stroke": true, "weight": 1}
-            ).addTo(feature_group_d0e1a2fbccf6db9370a404c2a1aabefb);
+            ).addTo(feature_group_c98203b2df689400b2a4e5c515519b88);
         
     
-            var circle_86797b97af53208b81e4ea91f6534ec0 = L.circle(
+            var circle_a7380458b059a1ef9a8dde5ad378e248 = L.circle(
                 [34.730635, 135.559785],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 80.4672, "stroke": true, "weight": 1}
-            ).addTo(feature_group_d0e1a2fbccf6db9370a404c2a1aabefb);
+            ).addTo(feature_group_c98203b2df689400b2a4e5c515519b88);
         
     
-            var circle_8b5d7fa523e12210950e76eba3adae3a = L.circle(
+            var circle_c615526ef9aa788a70062d093eeb91e0 = L.circle(
                 [34.73844, 135.564345],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 80.4672, "stroke": true, "weight": 1}
-            ).addTo(feature_group_d0e1a2fbccf6db9370a404c2a1aabefb);
+            ).addTo(feature_group_c98203b2df689400b2a4e5c515519b88);
         
     
-            var circle_462981a82db15a15eb3bb5fbf13f3643 = L.circle(
+            var circle_53a3fb080b4f5ba2e78d0f306c63aadb = L.circle(
                 [34.735253, 135.565161],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 80.4672, "stroke": true, "weight": 1}
-            ).addTo(feature_group_d0e1a2fbccf6db9370a404c2a1aabefb);
+            ).addTo(feature_group_c98203b2df689400b2a4e5c515519b88);
         
     
-            var circle_453aacacf93c7521f52332fbe24a432a = L.circle(
+            var circle_9750ead2c052a45c03a9b181afe8419b = L.circle(
                 [34.731294, 135.555278],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 80.4672, "stroke": true, "weight": 1}
-            ).addTo(feature_group_d0e1a2fbccf6db9370a404c2a1aabefb);
+            ).addTo(feature_group_c98203b2df689400b2a4e5c515519b88);
         
     
-            var circle_2255b7be29437f5a651a15df1f295161 = L.circle(
+            var circle_2c614e8bb63e1a61b9cafc0a54ac84bc = L.circle(
                 [34.7279, 135.557445],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 80.4672, "stroke": true, "weight": 1}
-            ).addTo(feature_group_d0e1a2fbccf6db9370a404c2a1aabefb);
+            ).addTo(feature_group_c98203b2df689400b2a4e5c515519b88);
         
     
-            var feature_group_41f866ad527fcb272ff2207cc26d6b08 = L.featureGroup(
+            var feature_group_73d2d70059fc7736a6c2b03405d0f2a0 = L.featureGroup(
                 {
 }
             );
         
     
-            var circle_8252da6d7bb98776640e8c165a4e7bc3 = L.circle(
+            var circle_b5720b1c19b87edb92ad0aa5de303d02 = L.circle(
                 [34.749495, 135.578315],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
-            ).addTo(feature_group_41f866ad527fcb272ff2207cc26d6b08);
+            ).addTo(feature_group_73d2d70059fc7736a6c2b03405d0f2a0);
         
     
-            var circle_cdd5ac26e45a04859653e5fea5f253ba = L.circle(
+            var circle_8fa01cd72ee337756678967af7606635 = L.circle(
                 [34.730635, 135.559785],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
-            ).addTo(feature_group_41f866ad527fcb272ff2207cc26d6b08);
+            ).addTo(feature_group_73d2d70059fc7736a6c2b03405d0f2a0);
         
     
-            var circle_65942dae51448fbea543c8a96807b7c0 = L.circle(
+            var circle_6d2700a569041bb0ec30f146e15036dd = L.circle(
                 [34.73844, 135.564345],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
-            ).addTo(feature_group_41f866ad527fcb272ff2207cc26d6b08);
+            ).addTo(feature_group_73d2d70059fc7736a6c2b03405d0f2a0);
         
     
-            var circle_8362401f207e6154449cbd3569813fc7 = L.circle(
+            var circle_56a9769af814f0c401acbc7dd67f4cae = L.circle(
                 [34.735253, 135.565161],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
-            ).addTo(feature_group_41f866ad527fcb272ff2207cc26d6b08);
+            ).addTo(feature_group_73d2d70059fc7736a6c2b03405d0f2a0);
         
     
-            var circle_12a9f0dbc8cd48651f74d6ed4e1b7299 = L.circle(
+            var circle_b364d705e8d621a63902598084ba46f8 = L.circle(
                 [34.731294, 135.555278],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
-            ).addTo(feature_group_41f866ad527fcb272ff2207cc26d6b08);
+            ).addTo(feature_group_73d2d70059fc7736a6c2b03405d0f2a0);
         
     
-            var circle_61d3adb0091992379a232347407bf298 = L.circle(
+            var circle_9d80ab6b91a2800c994a8cd5f25887e5 = L.circle(
                 [34.7279, 135.557445],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 160.9344, "stroke": true, "weight": 1}
-            ).addTo(feature_group_41f866ad527fcb272ff2207cc26d6b08);
+            ).addTo(feature_group_73d2d70059fc7736a6c2b03405d0f2a0);
         
     
-            var feature_group_efed9fc21a453f51a371f01031793d89 = L.featureGroup(
+            var feature_group_540b65126ab7f46cad0c6f90b9842a11 = L.featureGroup(
                 {
 }
             );
         
     
-            var circle_ad2f50beec593024ce2c4ebae4c5aa63 = L.circle(
+            var circle_2035908b6197c477e34bf08de83a2beb = L.circle(
                 [34.749495, 135.578315],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
-            ).addTo(feature_group_efed9fc21a453f51a371f01031793d89);
+            ).addTo(feature_group_540b65126ab7f46cad0c6f90b9842a11);
         
     
-            var circle_dd6b506ae9c8b90b326cb1034ec586b8 = L.circle(
+            var circle_9ab9f42b242bc1fbfbb2f101aa5b786b = L.circle(
                 [34.730635, 135.559785],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
-            ).addTo(feature_group_efed9fc21a453f51a371f01031793d89);
+            ).addTo(feature_group_540b65126ab7f46cad0c6f90b9842a11);
         
     
-            var circle_5f8aa8d2d36390e28e06b51aab47b96b = L.circle(
+            var circle_8c51c13deedb070babf6f0637855fe58 = L.circle(
                 [34.73844, 135.564345],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
-            ).addTo(feature_group_efed9fc21a453f51a371f01031793d89);
+            ).addTo(feature_group_540b65126ab7f46cad0c6f90b9842a11);
         
     
-            var circle_c8b088080788a422693768125e391f14 = L.circle(
+            var circle_4685959f1839d0f259e1a614135c44ee = L.circle(
                 [34.735253, 135.565161],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
-            ).addTo(feature_group_efed9fc21a453f51a371f01031793d89);
+            ).addTo(feature_group_540b65126ab7f46cad0c6f90b9842a11);
         
     
-            var circle_55a6fabf29ca44268ccd5ee7261c601b = L.circle(
+            var circle_abb14ea6a121ba32fcff1702bf7cbfcc = L.circle(
                 [34.731294, 135.555278],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
-            ).addTo(feature_group_efed9fc21a453f51a371f01031793d89);
+            ).addTo(feature_group_540b65126ab7f46cad0c6f90b9842a11);
         
     
-            var circle_abd2a88109e37eda7661d2652f995511 = L.circle(
+            var circle_23fe65adcd04c9674ec7d70e307cb67a = L.circle(
                 [34.7279, 135.557445],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 321.8688, "stroke": true, "weight": 1}
-            ).addTo(feature_group_efed9fc21a453f51a371f01031793d89);
+            ).addTo(feature_group_540b65126ab7f46cad0c6f90b9842a11);
         
     
-            var feature_group_9059432ade1d21d51a3e1f30882aeb99 = L.featureGroup(
+            var feature_group_f63d00e9b587e3a043b0b0c6374db699 = L.featureGroup(
                 {
 }
             );
         
     
-            var circle_f137448ceb658a06ff0cbe6bcd846850 = L.circle(
+            var circle_120e98f7cc53517a63f59ec3af73615d = L.circle(
                 [34.749495, 135.578315],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
-            ).addTo(feature_group_9059432ade1d21d51a3e1f30882aeb99);
+            ).addTo(feature_group_f63d00e9b587e3a043b0b0c6374db699);
         
     
-            var circle_95b6429fbeb424847f19cd996a101b5b = L.circle(
+            var circle_9542e090598f66401689a9c61d298f8a = L.circle(
                 [34.730635, 135.559785],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
-            ).addTo(feature_group_9059432ade1d21d51a3e1f30882aeb99);
+            ).addTo(feature_group_f63d00e9b587e3a043b0b0c6374db699);
         
     
-            var circle_b22e53d8d90b3b14355e3ae411469aa9 = L.circle(
+            var circle_c4509d29b34fff71faf2241c698d2329 = L.circle(
                 [34.73844, 135.564345],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
-            ).addTo(feature_group_9059432ade1d21d51a3e1f30882aeb99);
+            ).addTo(feature_group_f63d00e9b587e3a043b0b0c6374db699);
         
     
-            var circle_545d285057dcfa3baad04a861563657e = L.circle(
+            var circle_c68f61e312b107fa136b9e8d65157962 = L.circle(
                 [34.735253, 135.565161],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
-            ).addTo(feature_group_9059432ade1d21d51a3e1f30882aeb99);
+            ).addTo(feature_group_f63d00e9b587e3a043b0b0c6374db699);
         
     
-            var circle_83bab96b7689e2414996256ebd398baf = L.circle(
+            var circle_915eafb61ea5af3f77415f67d11d7e7f = L.circle(
                 [34.731294, 135.555278],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
-            ).addTo(feature_group_9059432ade1d21d51a3e1f30882aeb99);
+            ).addTo(feature_group_f63d00e9b587e3a043b0b0c6374db699);
         
     
-            var circle_0251ef210453b6f4c450c623edd8a0a1 = L.circle(
+            var circle_e5c0d141721c3844aefd30c6b82df065 = L.circle(
                 [34.7279, 135.557445],
                 {"bubblingMouseEvents": true, "color": "#2c3e50", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#2c3e50", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.5, "radius": 482.8032, "stroke": true, "weight": 1}
-            ).addTo(feature_group_9059432ade1d21d51a3e1f30882aeb99);
+            ).addTo(feature_group_f63d00e9b587e3a043b0b0c6374db699);
         
     
-            var feature_group_4b9dc63759cdaf5e313c158b4d2ec1ca = L.featureGroup(
+            var feature_group_0145fb10478f58adb6ceb49e5b3edb02 = L.featureGroup(
                 {
 }
             );
         
     
-            var poly_line_eb621e19ed641967b7fc1beac4002c9a = L.polyline(
+            var poly_line_38a665d08bd97a27085d065aa4c3e75c = L.polyline(
                 [[34.69738, 135.53329], [34.69757, 135.5336], [34.69769, 135.53383], [34.69782, 135.53412], [34.69797, 135.53462], [34.69803, 135.53484], [34.69829, 135.53592], [34.69845, 135.53637], [34.69868, 135.53691], [34.69884, 135.53719], [34.69906, 135.53753], [34.69919, 135.53769], [34.69943, 135.53793], [34.70013, 135.53845], [34.70128, 135.53924], [34.70199, 135.53973], [34.70297, 135.54038], [34.703, 135.54042], [34.70351, 135.54077], [34.70413, 135.54118], [34.70431, 135.54128], [34.70456, 135.54146], [34.7046, 135.54149], [34.70503, 135.54179], [34.70527, 135.54195], [34.70537, 135.54202], [34.70555, 135.54215], [34.70566, 135.54222], [34.70574, 135.54227], [34.70578, 135.54229], [34.7058, 135.54231], [34.7063, 135.54266], [34.70639, 135.54272], [34.70649, 135.54279], [34.7067, 135.54293], [34.70678, 135.54298]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_4b9dc63759cdaf5e313c158b4d2ec1ca);
+            ).addTo(feature_group_0145fb10478f58adb6ceb49e5b3edb02);
         
     
-            var poly_line_b26ffbebe0d64e41d3401b34cb65a625 = L.polyline(
+            var poly_line_23aa5d82fdd21851eeb10859ace3c81b = L.polyline(
                 [[34.74783, 135.61195], [34.74815, 135.61248], [34.74842, 135.61277], [34.74874, 135.61309], [34.7492, 135.61348], [34.75044, 135.61455], [34.75164, 135.61553], [34.75325, 135.61681], [34.75339, 135.61695], [34.7535, 135.61706], [34.75395, 135.61743], [34.75423, 135.61762], [34.75433, 135.61769], [34.75451, 135.61778], [34.75481, 135.61789], [34.75523, 135.61796], [34.75571, 135.61799], [34.7561, 135.61797], [34.75619, 135.61797], [34.75675, 135.61793], [34.75701, 135.61791], [34.75735, 135.61789], [34.75809, 135.61789], [34.75825, 135.61792], [34.75873, 135.61807], [34.75967, 135.61841], [34.7613, 135.61902], [34.76185, 135.61924], [34.76248, 135.6195], [34.76267, 135.6196], [34.76295, 135.61977], [34.76322, 135.61999], [34.76331, 135.62006]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_4b9dc63759cdaf5e313c158b4d2ec1ca);
+            ).addTo(feature_group_0145fb10478f58adb6ceb49e5b3edb02);
         
     
-            var poly_line_3ddea0fe7431d22333e3f215642a79c3 = L.polyline(
+            var poly_line_eda93bba6514ee0db9d2e6ebc00bde2b = L.polyline(
                 [[34.78394, 135.63083], [34.7837, 135.63078], [34.78334, 135.63069], [34.78275, 135.63046], [34.78194, 135.63013], [34.7817, 135.63], [34.78133, 135.62981], [34.77958, 135.62881], [34.77634, 135.62689], [34.77458, 135.62586], [34.7742, 135.62566], [34.77392, 135.62554], [34.7735, 135.62544], [34.77318, 135.6254], [34.77306, 135.6254], [34.77287, 135.62538], [34.77275, 135.62537], [34.77259, 135.62537], [34.77251, 135.62536], [34.77207, 135.62535], [34.76981, 135.62529], [34.76905, 135.62523], [34.76882, 135.62518], [34.76843, 135.62506], [34.76815, 135.62493], [34.76783, 135.62474], [34.76756, 135.62455], [34.76723, 135.62427], [34.76635, 135.62337], [34.76522, 135.62218], [34.76519, 135.62213], [34.76461, 135.62145]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_4b9dc63759cdaf5e313c158b4d2ec1ca);
+            ).addTo(feature_group_0145fb10478f58adb6ceb49e5b3edb02);
         
     
-            var poly_line_17c3c7694abd4b75f779b5b5b442e212 = L.polyline(
+            var poly_line_85f182f76d2accd77879ba0bdab3c468 = L.polyline(
                 [[34.71302, 135.54726], [34.7131, 135.54731], [34.71319, 135.54738], [34.71327, 135.54743], [34.71337, 135.5475], [34.71341, 135.54753], [34.71379, 135.54779], [34.71392, 135.54787], [34.71408, 135.54798], [34.71414, 135.54803], [34.71421, 135.54807], [34.7145, 135.54826], [34.71452, 135.54829], [34.71457, 135.54832], [34.71519, 135.54875], [34.71525, 135.54879], [34.7153, 135.54882], [34.71568, 135.54908], [34.71576, 135.54914], [34.71583, 135.54919], [34.71614, 135.5494], [34.71692, 135.54993], [34.71699, 135.54998], [34.71718, 135.55011], [34.71723, 135.55014], [34.71731, 135.5502], [34.71794, 135.55064], [34.71827, 135.55087], [34.71881, 135.55125], [34.7189, 135.55131]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_4b9dc63759cdaf5e313c158b4d2ec1ca);
+            ).addTo(feature_group_0145fb10478f58adb6ceb49e5b3edb02);
         
     
-            var poly_line_9c161ceff38726f45ec4f7c2ba6a7405 = L.polyline(
+            var poly_line_c06da57f50a4f8c1d1095bbe921f67bc = L.polyline(
                 [[34.73599, 135.56606], [34.73639, 135.56665], [34.73674, 135.56725], [34.73685, 135.56746], [34.73714, 135.56813], [34.73727, 135.56846], [34.73735, 135.56871], [34.73738, 135.56879], [34.73749, 135.56912], [34.73762, 135.56972], [34.73772, 135.57054], [34.73775, 135.57124], [34.73775, 135.57165], [34.73775, 135.57259], [34.73769, 135.57365], [34.73759, 135.57452], [34.73758, 135.57455], [34.73758, 135.57465], [34.73756, 135.57474], [34.73754, 135.57493]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_4b9dc63759cdaf5e313c158b4d2ec1ca);
+            ).addTo(feature_group_0145fb10478f58adb6ceb49e5b3edb02);
         
     
-            var poly_line_8a8acf12ff79e279b4637f04b7927c50 = L.polyline(
+            var poly_line_84379f0fbeb2c50576d00262759b51ab = L.polyline(
                 [[34.71223, 135.54671], [34.71202, 135.54657], [34.71181, 135.54642], [34.71177, 135.54639], [34.71155, 135.54624], [34.71152, 135.54622], [34.71127, 135.54605], [34.7106, 135.54559], [34.7105, 135.54552], [34.71031, 135.54539], [34.71025, 135.54535], [34.70975, 135.54501], [34.70967, 135.54496], [34.7095, 135.54484], [34.70941, 135.54478], [34.7082, 135.54395], [34.70812, 135.5439], [34.70788, 135.54374], [34.70782, 135.54369]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_4b9dc63759cdaf5e313c158b4d2ec1ca);
+            ).addTo(feature_group_0145fb10478f58adb6ceb49e5b3edb02);
         
     
-            var poly_line_62f2280bfd011465559ab0020ea32977 = L.polyline(
+            var poly_line_8e864531980d26cd9c2d4858abc59ba8 = L.polyline(
                 [[34.72344, 135.5544], [34.72341, 135.55439], [34.72324, 135.55427], [34.72299, 135.5541], [34.72272, 135.55391], [34.72215, 135.55352], [34.72185, 135.55332], [34.72177, 135.55327], [34.72169, 135.55321], [34.72157, 135.55313], [34.72148, 135.55307], [34.72096, 135.5527], [34.72053, 135.55242], [34.72007, 135.55209], [34.72001, 135.55205]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_4b9dc63759cdaf5e313c158b4d2ec1ca);
+            ).addTo(feature_group_0145fb10478f58adb6ceb49e5b3edb02);
         
     
-            var poly_line_7a337a96eeeef7add2eb7b5b8890ec0b = L.polyline(
+            var poly_line_100d16a2501e99aff06a2a88ab2c6dc7 = L.polyline(
                 [[34.74033, 135.59218], [34.7407, 135.59309], [34.74098, 135.59391], [34.74122, 135.59463], [34.74185, 135.59667], [34.7422, 135.59779], [34.74235, 135.59841], [34.74248, 135.59912], [34.74254, 135.59965], [34.7426, 135.60088], [34.74266, 135.6014], [34.74273, 135.60179]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_4b9dc63759cdaf5e313c158b4d2ec1ca);
+            ).addTo(feature_group_0145fb10478f58adb6ceb49e5b3edb02);
         
     
-            var poly_line_df2294b4cdd43aad86710bbf5b24d12d = L.polyline(
+            var poly_line_1e3918a1c9f639c27659ff3fd9088dc4 = L.polyline(
                 [[34.72839, 135.55776], [34.72848, 135.55781], [34.72867, 135.55794], [34.72894, 135.55814], [34.72903, 135.55822], [34.72914, 135.55831], [34.72922, 135.55837], [34.72937, 135.55851], [34.72947, 135.55861], [34.72985, 135.55894], [34.72988, 135.55898], [34.73023, 135.55933]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_4b9dc63759cdaf5e313c158b4d2ec1ca);
+            ).addTo(feature_group_0145fb10478f58adb6ceb49e5b3edb02);
         
     
-            var poly_line_c1edac7cc3a1b3674f87e581b318f789 = L.polyline(
+            var poly_line_37ce48e55d842df6b0f4ab917e92934a = L.polyline(
                 [[34.73825, 135.58395], [34.73826, 135.58405], [34.73844, 135.58545], [34.73848, 135.58571], [34.73855, 135.58622], [34.73886, 135.58846], [34.73897, 135.58901], [34.73904, 135.58929], [34.73915, 135.58969], [34.73923, 135.58991], [34.73953, 135.5906]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_4b9dc63759cdaf5e313c158b4d2ec1ca);
+            ).addTo(feature_group_0145fb10478f58adb6ceb49e5b3edb02);
         
     
-            var poly_line_9a3c6b58803fade3950588eff6627783 = L.polyline(
+            var poly_line_a3e88b59f2224d8a763880fa5bf429b1 = L.polyline(
                 [[34.7432, 135.60338], [34.74344, 135.6038], [34.74378, 135.60444], [34.74452, 135.60563], [34.74565, 135.60743], [34.74618, 135.60833], [34.74648, 135.60887], [34.74717, 135.61049]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_4b9dc63759cdaf5e313c158b4d2ec1ca);
+            ).addTo(feature_group_0145fb10478f58adb6ceb49e5b3edb02);
         
     
-            var poly_line_a032d581dab5df6e66eb1110a25d8b66 = L.polyline(
+            var poly_line_3666898954588ac7d88addad23af94ef = L.polyline(
                 [[34.73714, 135.57685], [34.73713, 135.57779], [34.73717, 135.57824], [34.7372, 135.57852], [34.73728, 135.57899], [34.73737, 135.57937], [34.7375, 135.57994], [34.73795, 135.58205]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_4b9dc63759cdaf5e313c158b4d2ec1ca);
+            ).addTo(feature_group_0145fb10478f58adb6ceb49e5b3edb02);
         
     
-            var poly_line_3b890ebb588a2e84c0e1749290779636 = L.polyline(
+            var poly_line_752885beca0dc74d47bdefc333438842 = L.polyline(
                 [[34.72467, 135.55524], [34.72479, 135.55532], [34.7249, 135.5554], [34.72603, 135.55618], [34.72695, 135.5568], [34.72697, 135.55683], [34.72741, 135.55713]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_4b9dc63759cdaf5e313c158b4d2ec1ca);
+            ).addTo(feature_group_0145fb10478f58adb6ceb49e5b3edb02);
         
     
-            var poly_line_ebdbd073d82a715d655e36f8cd987bd8 = L.polyline(
+            var poly_line_5f439a5e014f2b4b6a580d524d65ddd8 = L.polyline(
                 [[34.74273, 135.60179], [34.74282, 135.60218], [34.7429, 135.60249], [34.74302, 135.60292], [34.7432, 135.60338]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_4b9dc63759cdaf5e313c158b4d2ec1ca);
+            ).addTo(feature_group_0145fb10478f58adb6ceb49e5b3edb02);
         
     
-            var poly_line_4652804dc94503d498024d11c6cbcfa4 = L.polyline(
+            var poly_line_7cd0098f6d5ebf4dbaa21efb289d192b = L.polyline(
                 [[34.76331, 135.62006], [34.7635, 135.62024], [34.76409, 135.62085], [34.76451, 135.62134], [34.76461, 135.62145]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_4b9dc63759cdaf5e313c158b4d2ec1ca);
+            ).addTo(feature_group_0145fb10478f58adb6ceb49e5b3edb02);
         
     
-            var poly_line_380ac41e963fb24cac657ae3ba7e0db3 = L.polyline(
+            var poly_line_0362c56efef05db2f816add60ad7692c = L.polyline(
                 [[34.73104, 135.56024], [34.73274, 135.56221], [34.73277, 135.56226], [34.73433, 135.56405], [34.73451, 135.56427]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_4b9dc63759cdaf5e313c158b4d2ec1ca);
+            ).addTo(feature_group_0145fb10478f58adb6ceb49e5b3edb02);
         
     
-            var poly_line_63fb294c25fad230b7ae894e21ef8033 = L.polyline(
+            var poly_line_04caf68252818fba19db524d508764e1 = L.polyline(
                 [[34.74717, 135.61049], [34.7472, 135.61055], [34.74783, 135.61195]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_4b9dc63759cdaf5e313c158b4d2ec1ca);
+            ).addTo(feature_group_0145fb10478f58adb6ceb49e5b3edb02);
         
     
-            var poly_line_2d74f921e02d0a1fb30ce5bd1ba843a4 = L.polyline(
+            var poly_line_8cef05ac7f3c45f2c925dced4657f105 = L.polyline(
                 [[34.73451, 135.56427], [34.73521, 135.5651], [34.73599, 135.56606]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_4b9dc63759cdaf5e313c158b4d2ec1ca);
+            ).addTo(feature_group_0145fb10478f58adb6ceb49e5b3edb02);
         
     
-            var poly_line_45c981fc2e562d3a819d2e475b186d3f = L.polyline(
+            var poly_line_2a403fa138cb1858cf13ab783760417b = L.polyline(
                 [[34.73953, 135.5906], [34.73976, 135.59109], [34.74033, 135.59218]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_4b9dc63759cdaf5e313c158b4d2ec1ca);
+            ).addTo(feature_group_0145fb10478f58adb6ceb49e5b3edb02);
         
     
-            var poly_line_dc40fdb773b32190e2994545caa39d1f = L.polyline(
+            var poly_line_13ad8b66160e1f225470073dc70efee6 = L.polyline(
                 [[34.73023, 135.55933], [34.73104, 135.56024]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_4b9dc63759cdaf5e313c158b4d2ec1ca);
+            ).addTo(feature_group_0145fb10478f58adb6ceb49e5b3edb02);
         
     
-            var poly_line_0415520f05a6c56e50b894ad446846cb = L.polyline(
+            var poly_line_af838a91480b02e4f62f05e751acfc1e = L.polyline(
                 [[34.73754, 135.57493], [34.73714, 135.57685]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_4b9dc63759cdaf5e313c158b4d2ec1ca);
+            ).addTo(feature_group_0145fb10478f58adb6ceb49e5b3edb02);
         
     
-            var poly_line_559653d08aa28afb2d01e1261722eee0 = L.polyline(
+            var poly_line_0b4faff58eeed93cfcad4be49c049632 = L.polyline(
                 [[34.73795, 135.58205], [34.73825, 135.58395]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_4b9dc63759cdaf5e313c158b4d2ec1ca);
+            ).addTo(feature_group_0145fb10478f58adb6ceb49e5b3edb02);
         
     
-            var poly_line_6acef9cbfdbb50c16edbb1afd57da494 = L.polyline(
+            var poly_line_72f7bb5658cd967055c0fe1d6db8bc06 = L.polyline(
                 [[34.7189, 135.55131], [34.72001, 135.55205]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_4b9dc63759cdaf5e313c158b4d2ec1ca);
+            ).addTo(feature_group_0145fb10478f58adb6ceb49e5b3edb02);
         
     
-            var poly_line_3614b72ccb40a920f9e60a70192a4ea2 = L.polyline(
+            var poly_line_2fac80322008badd2c1944ab2c7272d1 = L.polyline(
                 [[34.72344, 135.5544], [34.72467, 135.55524]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_4b9dc63759cdaf5e313c158b4d2ec1ca);
+            ).addTo(feature_group_0145fb10478f58adb6ceb49e5b3edb02);
         
     
-            var poly_line_470e0a9ab3231c698f29419c91b8eb8d = L.polyline(
+            var poly_line_6430407dc3c8bf4d57832d0180164759 = L.polyline(
                 [[34.71223, 135.54671], [34.71302, 135.54726]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_4b9dc63759cdaf5e313c158b4d2ec1ca);
+            ).addTo(feature_group_0145fb10478f58adb6ceb49e5b3edb02);
         
     
-            var poly_line_94e698bb407a0d7d2fd28d068465de67 = L.polyline(
+            var poly_line_b7ddb3f2006ba79cf5d776bcbd30055f = L.polyline(
                 [[34.70678, 135.54298], [34.70782, 135.54369]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_4b9dc63759cdaf5e313c158b4d2ec1ca);
+            ).addTo(feature_group_0145fb10478f58adb6ceb49e5b3edb02);
         
     
-            var poly_line_bfaa985d5a185111547d7e9cfa8e405f = L.polyline(
+            var poly_line_1558e3347fb9492490acc05e3d379ae1 = L.polyline(
                 [[34.72741, 135.55713], [34.72839, 135.55776]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-0", "color": "#7B7B5A", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#7B7B5A", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_4b9dc63759cdaf5e313c158b4d2ec1ca);
+            ).addTo(feature_group_0145fb10478f58adb6ceb49e5b3edb02);
         
     
-            var marker_e506190326bd532ccab6ae804ec72bd2 = L.marker(
+            var marker_25e318a61fbe73dff63e2c70a392a2bb = L.marker(
                 [34.69738, 135.53329],
                 {
   "zIndexOffset": 1000,
 }
-            ).addTo(feature_group_4b9dc63759cdaf5e313c158b4d2ec1ca);
+            ).addTo(feature_group_0145fb10478f58adb6ceb49e5b3edb02);
         
     
-            var div_icon_66b39dbacafe15c339c7b49534de1c3d = L.divIcon({
+            var div_icon_dc22079a995d908b55fdc5cbf9aa8e7b = L.divIcon({
   "html": "\n            \u003cdiv class=\"hm-line-label\" data-line=\"0\" style=\"\n                position: absolute; left: 0; top: 0;\n                transform: translate(-50%, -50%) translate(-31.9px, 13.3px);\n                font-size: 14px; font-weight: bold; color: #787858; --dm-label: #81815e;\n                text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff,\n                             -1px 1px 0 #ffffff, 1px 1px 0 #ffffff,\n                             0 0 6px #ffffff;\n                white-space: nowrap; pointer-events: none;\n            \"\u003eKeihan Main Line\u003c/div\u003e\n        ",
   "iconSize": [0, 0],
   "iconAnchor": [0, 0],
@@ -2457,99 +3595,99 @@ if (typeof module !== "undefined" && module.exports) module.exports = travelStyl
 });
         
     
-                marker_e506190326bd532ccab6ae804ec72bd2.setIcon(div_icon_66b39dbacafe15c339c7b49534de1c3d);
+                marker_25e318a61fbe73dff63e2c70a392a2bb.setIcon(div_icon_dc22079a995d908b55fdc5cbf9aa8e7b);
             
     
-            feature_group_4b9dc63759cdaf5e313c158b4d2ec1ca.addTo(map_6be28dd3df020dbd9e643e14e4c85297);
+            feature_group_0145fb10478f58adb6ceb49e5b3edb02.addTo(map_26c5e0bea99a648cfaa7999f5c5d4027);
         
     
-            var feature_group_34b68238ab9fb3d37cf4861b3b2c169c = L.featureGroup(
+            var feature_group_4352a59c71523a3588b3b4fc635c83e7 = L.featureGroup(
                 {
 }
             );
         
     
-            var poly_line_832f3c79948ae8087d6e918ab6d82ac0 = L.polyline(
+            var poly_line_ffec9489dc536efde991fe67701ee930 = L.polyline(
                 [[34.74902, 135.57771], [34.74722, 135.57545], [34.74539, 135.57308], [34.74532, 135.573], [34.74508, 135.57272], [34.74306, 135.57015], [34.74258, 135.56958], [34.74042, 135.56683], [34.73901, 135.56508]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#933CA5", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#933CA5", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_34b68238ab9fb3d37cf4861b3b2c169c);
+            ).addTo(feature_group_4352a59c71523a3588b3b4fc635c83e7);
         
     
-            var poly_line_a43bc11b87f0964b7cf90a81ea9f74bb = L.polyline(
+            var poly_line_6962c801fde89fe16d6ff51063b8b56b = L.polyline(
                 [[34.73057, 135.55376], [34.72979, 135.55264], [34.72919, 135.55181], [34.72888, 135.55143], [34.72856, 135.55104], [34.7281, 135.55076], [34.72683, 135.55023], [34.72558, 135.54974], [34.72495, 135.5495]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#933CA5", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#933CA5", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_34b68238ab9fb3d37cf4861b3b2c169c);
+            ).addTo(feature_group_4352a59c71523a3588b3b4fc635c83e7);
         
     
-            var poly_line_a01d674b8bce3ab79ad83aaa9cd4dc66 = L.polyline(
+            var poly_line_1a8a1dd444abd94f40340eb5dfd34c65 = L.polyline(
                 [[34.71472, 135.54443], [34.71436, 135.54368], [34.71413, 135.54324], [34.7138, 135.5428], [34.71349, 135.54245], [34.71277, 135.54173], [34.71163, 135.54068], [34.71128, 135.54037], [34.71009, 135.53927]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#933CA5", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#933CA5", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_34b68238ab9fb3d37cf4861b3b2c169c);
+            ).addTo(feature_group_4352a59c71523a3588b3b4fc635c83e7);
         
     
-            var poly_line_fb496ebe0a832972dcdbd5cdfbd57e3b = L.polyline(
+            var poly_line_87d80cdc74c95b7dff1ed04c994f3947 = L.polyline(
                 [[34.71009, 135.53927], [34.70902, 135.53821], [34.70871, 135.53783], [34.70855, 135.53759], [34.7085, 135.53739], [34.70849, 135.53721]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#933CA5", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#933CA5", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_34b68238ab9fb3d37cf4861b3b2c169c);
+            ).addTo(feature_group_4352a59c71523a3588b3b4fc635c83e7);
         
     
-            var poly_line_b986cd2481cea8f3591ee504d7b2f62d = L.polyline(
+            var poly_line_42888e2e5ee2ac54678e8489e65368d1 = L.polyline(
                 [[34.7235, 135.54901], [34.71791, 135.54728], [34.71615, 135.54675], [34.71596, 135.5467], [34.71575, 135.54657], [34.71562, 135.5464]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#933CA5", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#933CA5", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_34b68238ab9fb3d37cf4861b3b2c169c);
+            ).addTo(feature_group_4352a59c71523a3588b3b4fc635c83e7);
         
     
-            var poly_line_1be67ab77681fccbb0e3dc7b8c0fd4a6 = L.polyline(
+            var poly_line_17c0deabb64e2e58c57528f3db097b94 = L.polyline(
                 [[34.73787, 135.56361], [34.7377, 135.56339], [34.73619, 135.56145], [34.7356, 135.56075], [34.73345, 135.55797], [34.7316, 135.55524]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#933CA5", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#933CA5", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_34b68238ab9fb3d37cf4861b3b2c169c);
+            ).addTo(feature_group_4352a59c71523a3588b3b4fc635c83e7);
         
     
-            var poly_line_5379b5e3758d6cf899874dc470cf992f = L.polyline(
+            var poly_line_bf7a720976b2e97433787e60701733a1 = L.polyline(
                 [[34.70849, 135.53721], [34.70851, 135.53673], [34.70896, 135.52802], [34.70901, 135.52722]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#933CA5", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#933CA5", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_34b68238ab9fb3d37cf4861b3b2c169c);
+            ).addTo(feature_group_4352a59c71523a3588b3b4fc635c83e7);
         
     
-            var poly_line_1fcf167e5f7d33c61f443fed680f0b76 = L.polyline(
+            var poly_line_f6ef4b1b94266f0b8b0c31a6e703ecad = L.polyline(
                 [[34.71562, 135.5464], [34.71548, 135.54613], [34.71472, 135.54443]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#933CA5", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#933CA5", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_34b68238ab9fb3d37cf4861b3b2c169c);
+            ).addTo(feature_group_4352a59c71523a3588b3b4fc635c83e7);
         
     
-            var poly_line_e02fea6dfcd0e0678688062df4a70e09 = L.polyline(
+            var poly_line_42f0b5bac0ed15699737b0befbb7a461 = L.polyline(
                 [[34.7316, 135.55524], [34.73126, 135.55475], [34.73057, 135.55376]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#933CA5", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#933CA5", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_34b68238ab9fb3d37cf4861b3b2c169c);
+            ).addTo(feature_group_4352a59c71523a3588b3b4fc635c83e7);
         
     
-            var poly_line_b875e8ef3ab11b101e4762dd9ffc82f7 = L.polyline(
+            var poly_line_1e02bb7f33db3ddf2df59740be831311 = L.polyline(
                 [[34.73901, 135.56508], [34.73787, 135.56361]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#933CA5", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#933CA5", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_34b68238ab9fb3d37cf4861b3b2c169c);
+            ).addTo(feature_group_4352a59c71523a3588b3b4fc635c83e7);
         
     
-            var poly_line_0537b5aef41290808b147779f7f6f21f = L.polyline(
+            var poly_line_b676ae7212654953b9bf062ed73eba40 = L.polyline(
                 [[34.72495, 135.5495], [34.7235, 135.54901]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#933CA5", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#933CA5", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_34b68238ab9fb3d37cf4861b3b2c169c);
+            ).addTo(feature_group_4352a59c71523a3588b3b4fc635c83e7);
         
     
-            var poly_line_63b68e5663581e486ccea8815ab1c735 = L.polyline(
+            var poly_line_aa2590e53efa12dd08ce1b33f888254b = L.polyline(
                 [[34.74997, 135.57892], [34.74902, 135.57771]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-1", "color": "#933CA5", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#933CA5", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_34b68238ab9fb3d37cf4861b3b2c169c);
+            ).addTo(feature_group_4352a59c71523a3588b3b4fc635c83e7);
         
     
-            var marker_7fa67f3725b628473370e06e1214e233 = L.marker(
+            var marker_78098e74d102862f2766e439282b852c = L.marker(
                 [34.74902, 135.57771],
                 {
   "zIndexOffset": 1000,
 }
-            ).addTo(feature_group_34b68238ab9fb3d37cf4861b3b2c169c);
+            ).addTo(feature_group_4352a59c71523a3588b3b4fc635c83e7);
         
     
-            var div_icon_ea5c7ebd02a5d9117c36b91f74d37d0e = L.divIcon({
+            var div_icon_ebe1f08f33bc27ee061a3f540dc5333c = L.divIcon({
   "html": "\n            \u003cdiv class=\"hm-line-label\" data-line=\"1\" style=\"\n                position: absolute; left: 0; top: 0;\n                transform: translate(-50%, -50%) translate(15.8px, -15.1px);\n                font-size: 14px; font-weight: bold; color: #933CA5; --dm-label: #b15bc3;\n                text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff,\n                             -1px 1px 0 #ffffff, 1px 1px 0 #ffffff,\n                             0 0 6px #ffffff;\n                white-space: nowrap; pointer-events: none;\n            \"\u003eTanimachi Line\u003c/div\u003e\n        ",
   "iconSize": [0, 0],
   "iconAnchor": [0, 0],
@@ -2557,135 +3695,135 @@ if (typeof module !== "undefined" && module.exports) module.exports = travelStyl
 });
         
     
-                marker_7fa67f3725b628473370e06e1214e233.setIcon(div_icon_ea5c7ebd02a5d9117c36b91f74d37d0e);
+                marker_78098e74d102862f2766e439282b852c.setIcon(div_icon_ebe1f08f33bc27ee061a3f540dc5333c);
             
     
-            feature_group_34b68238ab9fb3d37cf4861b3b2c169c.addTo(map_6be28dd3df020dbd9e643e14e4c85297);
+            feature_group_4352a59c71523a3588b3b4fc635c83e7.addTo(map_26c5e0bea99a648cfaa7999f5c5d4027);
         
     
-            var feature_group_e8380dc014438e06d18202b809ffa600 = L.featureGroup(
+            var feature_group_c3ef69436f5e90d449b23fc064f0ef75 = L.featureGroup(
                 {
 }
             );
         
     
-            var poly_line_33c127aa79ff1af41cfcd75fd2a3c1d8 = L.polyline(
+            var poly_line_3a91987dd367e3adc5577d733b2ff11a = L.polyline(
                 [[34.75953, 135.54724], [34.75949, 135.54724], [34.75734, 135.54716], [34.7563, 135.54709], [34.75594, 135.54707], [34.75576, 135.54706], [34.75558, 135.54698], [34.75544, 135.54689], [34.75523, 135.54667], [34.75504, 135.54646], [34.75492, 135.54631], [34.75473, 135.54597], [34.75456, 135.54555], [34.75452, 135.54546], [34.75445, 135.54535], [34.75435, 135.54524], [34.75422, 135.54517], [34.75405, 135.54511], [34.75258, 135.54465]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-2", "color": "#E77512", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#E77512", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_e8380dc014438e06d18202b809ffa600);
+            ).addTo(feature_group_c3ef69436f5e90d449b23fc064f0ef75);
         
     
-            var poly_line_9ea0a5d1db3aa76c6f239775a0cb3d0c = L.polyline(
+            var poly_line_0d1525af27d5009611eb796ce0a69078 = L.polyline(
                 [[34.71527, 135.55759], [34.71528, 135.55696], [34.71532, 135.5549], [34.71537, 135.55308], [34.71544, 135.55098], [34.71553, 135.54825], [34.71556, 135.54725], [34.71555, 135.54703], [34.71551, 135.54684], [34.71545, 135.5467], [34.71538, 135.54661], [34.71529, 135.54653], [34.71515, 135.54647], [34.71498, 135.54644], [34.7145, 135.54644], [34.71358, 135.54644]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-2", "color": "#E77512", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#E77512", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_e8380dc014438e06d18202b809ffa600);
+            ).addTo(feature_group_c3ef69436f5e90d449b23fc064f0ef75);
         
     
-            var poly_line_8570af1bdb1c9c69b06dbaf961024563 = L.polyline(
+            var poly_line_ee6026f8c7709ee8569d8729ed9201d2 = L.polyline(
                 [[34.72155, 135.56079], [34.7211, 135.56078], [34.71891, 135.5607], [34.7171, 135.56062], [34.71589, 135.56058], [34.71563, 135.56055], [34.7155, 135.5605], [34.71539, 135.56041], [34.7153, 135.56025], [34.71525, 135.56004], [34.71523, 135.55978], [34.71524, 135.55892]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-2", "color": "#E77512", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#E77512", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_e8380dc014438e06d18202b809ffa600);
+            ).addTo(feature_group_c3ef69436f5e90d449b23fc064f0ef75);
         
     
-            var poly_line_326eef2bbaa0d2b01af40e142d0d8b65 = L.polyline(
+            var poly_line_50f41609e1d21c5910a46ac4767288ab = L.polyline(
                 [[34.73092, 135.55663], [34.72893, 135.55878], [34.72775, 135.56001], [34.72722, 135.56049], [34.72694, 135.56068], [34.72659, 135.56084], [34.72621, 135.56093], [34.7257, 135.56094], [34.72498, 135.56089], [34.72276, 135.56083]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-2", "color": "#E77512", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#E77512", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_e8380dc014438e06d18202b809ffa600);
+            ).addTo(feature_group_c3ef69436f5e90d449b23fc064f0ef75);
         
     
-            var poly_line_509b5e62290c01af80e994ecf56d6013 = L.polyline(
+            var poly_line_9243fe0d068941edd22465ff08aa73d1 = L.polyline(
                 [[34.69254, 135.5461], [34.69187, 135.54602], [34.69066, 135.54589], [34.68956, 135.54575], [34.68837, 135.54559], [34.687, 135.54542], [34.68543, 135.54519], [34.68392, 135.54498], [34.68224, 135.54474], [34.68204, 135.54471]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-2", "color": "#E77512", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#E77512", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_e8380dc014438e06d18202b809ffa600);
+            ).addTo(feature_group_c3ef69436f5e90d449b23fc064f0ef75);
         
     
-            var poly_line_58bfa1d927da0b4b2c574501b9b98120 = L.polyline(
+            var poly_line_12c6613041a5e4b750b385c1dc34d162 = L.polyline(
                 [[34.75165, 135.54438], [34.74579, 135.54264], [34.74565, 135.54262], [34.74556, 135.54263], [34.74543, 135.54266], [34.7453, 135.54274], [34.74515, 135.54291], [34.74445, 135.54398]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-2", "color": "#E77512", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#E77512", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_e8380dc014438e06d18202b809ffa600);
+            ).addTo(feature_group_c3ef69436f5e90d449b23fc064f0ef75);
         
     
-            var poly_line_cd0d02aacaedb11e2188f1eeb973461c = L.polyline(
+            var poly_line_75cc84f8414f0a049c1ff697f179f942 = L.polyline(
                 [[34.74353, 135.54496], [34.74251, 135.546], [34.74159, 135.54693], [34.7395, 135.54888], [34.738, 135.55024], [34.73542, 135.55255], [34.73269, 135.55497], [34.7321, 135.5555]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-2", "color": "#E77512", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#E77512", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_e8380dc014438e06d18202b809ffa600);
+            ).addTo(feature_group_c3ef69436f5e90d449b23fc064f0ef75);
         
     
-            var poly_line_c123cd84810436b55314e14009c3457b = L.polyline(
+            var poly_line_2b2a76e0af628c4684c586c27330f69a = L.polyline(
                 [[34.71247, 135.54644], [34.712, 135.54644], [34.7087, 135.54638], [34.70704, 135.54637], [34.70521, 135.54635], [34.70255, 135.54632], [34.70163, 135.5463]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-2", "color": "#E77512", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#E77512", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_e8380dc014438e06d18202b809ffa600);
+            ).addTo(feature_group_c3ef69436f5e90d449b23fc064f0ef75);
         
     
-            var poly_line_b351356be77dd981a945319ab0a6ab04 = L.polyline(
+            var poly_line_6f09800f2d6ff9a1f181246787023c7d = L.polyline(
                 [[34.70049, 135.54629], [34.70012, 135.54628], [34.698, 135.54625], [34.69619, 135.54622], [34.69428, 135.5462], [34.69346, 135.54618]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-2", "color": "#E77512", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#E77512", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_e8380dc014438e06d18202b809ffa600);
+            ).addTo(feature_group_c3ef69436f5e90d449b23fc064f0ef75);
         
     
-            var poly_line_88dda2bd0107c4a864dd5b3e2daea7a9 = L.polyline(
+            var poly_line_3f542a72adfbb7918210314a8e4089e9 = L.polyline(
                 [[34.74445, 135.54398], [34.744, 135.54448], [34.74353, 135.54496]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-2", "color": "#E77512", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#E77512", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_e8380dc014438e06d18202b809ffa600);
+            ).addTo(feature_group_c3ef69436f5e90d449b23fc064f0ef75);
         
     
-            var poly_line_7828456e862c51130b6b467b63ca63fe = L.polyline(
+            var poly_line_7af6d74977c76e07fc0f14db70b8eb8f = L.polyline(
                 [[34.7321, 135.5555], [34.73118, 135.55635], [34.73092, 135.55663]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-2", "color": "#E77512", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#E77512", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_e8380dc014438e06d18202b809ffa600);
+            ).addTo(feature_group_c3ef69436f5e90d449b23fc064f0ef75);
         
     
-            var poly_line_59ce13d1e2b6b8282773114b2b51a8c7 = L.polyline(
+            var poly_line_5984eb5200c751b2bdeda99afa9c4f30 = L.polyline(
                 [[34.69346, 135.54618], [34.69303, 135.54617], [34.69254, 135.5461]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-2", "color": "#E77512", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#E77512", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_e8380dc014438e06d18202b809ffa600);
+            ).addTo(feature_group_c3ef69436f5e90d449b23fc064f0ef75);
         
     
-            var poly_line_a34b1fd65cdd9dc1df6e376f4fd83fa5 = L.polyline(
+            var poly_line_b1503d6751fc6caedd744cec86bf05ca = L.polyline(
                 [[34.76071, 135.54728], [34.75953, 135.54724]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-2", "color": "#E77512", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#E77512", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_e8380dc014438e06d18202b809ffa600);
+            ).addTo(feature_group_c3ef69436f5e90d449b23fc064f0ef75);
         
     
-            var poly_line_3875cc618fb46124f2ad9c80fdc20780 = L.polyline(
+            var poly_line_eb309d803819ec705d8eca5ca9630500 = L.polyline(
                 [[34.75258, 135.54465], [34.75165, 135.54438]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-2", "color": "#E77512", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#E77512", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_e8380dc014438e06d18202b809ffa600);
+            ).addTo(feature_group_c3ef69436f5e90d449b23fc064f0ef75);
         
     
-            var poly_line_04d61bf3a6594e5493718f35d68d0896 = L.polyline(
+            var poly_line_618962c744a567a4aaa9afddffc743cd = L.polyline(
                 [[34.72276, 135.56083], [34.72155, 135.56079]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-2", "color": "#E77512", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#E77512", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_e8380dc014438e06d18202b809ffa600);
+            ).addTo(feature_group_c3ef69436f5e90d449b23fc064f0ef75);
         
     
-            var poly_line_45ba9d9dc6f65d032c0db558dda17e9e = L.polyline(
+            var poly_line_fbbed9584d5356f2b877b7d5864db272 = L.polyline(
                 [[34.71358, 135.54644], [34.71247, 135.54644]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-2", "color": "#E77512", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#E77512", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_e8380dc014438e06d18202b809ffa600);
+            ).addTo(feature_group_c3ef69436f5e90d449b23fc064f0ef75);
         
     
-            var poly_line_d6e954a1ec0a53527c4e2404446d17f4 = L.polyline(
+            var poly_line_c725ba62efd8b009e18b9cc3038038c9 = L.polyline(
                 [[34.70163, 135.5463], [34.70049, 135.54629]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-2", "color": "#E77512", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#E77512", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_e8380dc014438e06d18202b809ffa600);
+            ).addTo(feature_group_c3ef69436f5e90d449b23fc064f0ef75);
         
     
-            var poly_line_76e38eabcc0cded31b3358fa879c48ae = L.polyline(
+            var poly_line_fc7196777440f4d9136e24b09b83c9d7 = L.polyline(
                 [[34.71524, 135.55892], [34.71527, 135.55759]],
                 {"bubblingMouseEvents": true, "className": "hm-line hm-line-2", "color": "#E77512", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#E77512", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.85, "smoothFactor": 1.0, "stroke": true, "weight": 4}
-            ).addTo(feature_group_e8380dc014438e06d18202b809ffa600);
+            ).addTo(feature_group_c3ef69436f5e90d449b23fc064f0ef75);
         
     
-            var marker_c852457c565b75500207837ca0a73f09 = L.marker(
+            var marker_00fd77407766da6a2e752ace1f506094 = L.marker(
                 [34.75953, 135.54724],
                 {
   "zIndexOffset": 1000,
 }
-            ).addTo(feature_group_e8380dc014438e06d18202b809ffa600);
+            ).addTo(feature_group_c3ef69436f5e90d449b23fc064f0ef75);
         
     
-            var div_icon_4d8f1ecfc7b6542a61e7248bb27fb460 = L.divIcon({
+            var div_icon_865ffc0708f4ef44be08a26c12728524 = L.divIcon({
   "html": "\n            \u003cdiv class=\"hm-line-label\" data-line=\"2\" style=\"\n                position: absolute; left: 0; top: 0;\n                transform: translate(-50%, -50%) translate(0.9px, -17.0px);\n                font-size: 14px; font-weight: bold; color: #E77512; --dm-label: #e77512;\n                text-shadow: -1px -1px 0 #0B1220, 1px -1px 0 #0B1220,\n                             -1px 1px 0 #0B1220, 1px 1px 0 #0B1220,\n                             0 0 6px #0B1220;\n                white-space: nowrap; pointer-events: none;\n            \"\u003eImazatosuji Line\u003c/div\u003e\n        ",
   "iconSize": [0, 0],
   "iconAnchor": [0, 0],
@@ -2693,25 +3831,25 @@ if (typeof module !== "undefined" && module.exports) module.exports = travelStyl
 });
         
     
-                marker_c852457c565b75500207837ca0a73f09.setIcon(div_icon_4d8f1ecfc7b6542a61e7248bb27fb460);
+                marker_00fd77407766da6a2e752ace1f506094.setIcon(div_icon_865ffc0708f4ef44be08a26c12728524);
             
     
-            feature_group_e8380dc014438e06d18202b809ffa600.addTo(map_6be28dd3df020dbd9e643e14e4c85297);
+            feature_group_c3ef69436f5e90d449b23fc064f0ef75.addTo(map_26c5e0bea99a648cfaa7999f5c5d4027);
         
     
-            var feature_group_80b3b9394d45f67221c8f2ba051496c7 = L.featureGroup(
+            var feature_group_323ec693e44f435f94ee279c89047f0b = L.featureGroup(
                 {
 }
             );
         
     
-            var circle_marker_492523ad44e671b825b83eb0b0ffc224 = L.circleMarker(
+            var circle_marker_3fc16e59b8b41c2ed0db408cb6eb83dc = L.circleMarker(
                 [34.749495, 135.578315],
                 {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
-            ).addTo(feature_group_80b3b9394d45f67221c8f2ba051496c7);
+            ).addTo(feature_group_323ec693e44f435f94ee279c89047f0b);
         
     
-            circle_marker_492523ad44e671b825b83eb0b0ffc224.bindTooltip(
+            circle_marker_3fc16e59b8b41c2ed0db408cb6eb83dc.bindTooltip(
                 `<div>
                      <b>Dainichi</b>
                  </div>`,
@@ -2721,13 +3859,13 @@ if (typeof module !== "undefined" && module.exports) module.exports = travelStyl
             );
         
     
-            var circle_marker_ab062f7c72c5f2bdbae26a41acb5ba53 = L.circleMarker(
+            var circle_marker_7d611e4cf1c693176254b2253beede17 = L.circleMarker(
                 [34.730635, 135.559785],
                 {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
-            ).addTo(feature_group_80b3b9394d45f67221c8f2ba051496c7);
+            ).addTo(feature_group_323ec693e44f435f94ee279c89047f0b);
         
     
-            circle_marker_ab062f7c72c5f2bdbae26a41acb5ba53.bindTooltip(
+            circle_marker_7d611e4cf1c693176254b2253beede17.bindTooltip(
                 `<div>
                      <b>Doi</b>
                  </div>`,
@@ -2737,13 +3875,13 @@ if (typeof module !== "undefined" && module.exports) module.exports = travelStyl
             );
         
     
-            var circle_marker_a70c55e4dfa438211aaa98a1286a281c = L.circleMarker(
+            var circle_marker_807630449a352798d16c24964488ea4b = L.circleMarker(
                 [34.73844, 135.564345],
                 {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
-            ).addTo(feature_group_80b3b9394d45f67221c8f2ba051496c7);
+            ).addTo(feature_group_323ec693e44f435f94ee279c89047f0b);
         
     
-            circle_marker_a70c55e4dfa438211aaa98a1286a281c.bindTooltip(
+            circle_marker_807630449a352798d16c24964488ea4b.bindTooltip(
                 `<div>
                      <b>Moriguchi</b>
                  </div>`,
@@ -2753,13 +3891,13 @@ if (typeof module !== "undefined" && module.exports) module.exports = travelStyl
             );
         
     
-            var circle_marker_cccff6b0e4a08a22cdadf032226ac9b2 = L.circleMarker(
+            var circle_marker_ec32c01d7ffd45305bb255198ec88b44 = L.circleMarker(
                 [34.735253, 135.565161],
                 {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
-            ).addTo(feature_group_80b3b9394d45f67221c8f2ba051496c7);
+            ).addTo(feature_group_323ec693e44f435f94ee279c89047f0b);
         
     
-            circle_marker_cccff6b0e4a08a22cdadf032226ac9b2.bindTooltip(
+            circle_marker_ec32c01d7ffd45305bb255198ec88b44.bindTooltip(
                 `<div>
                      <b>Moriguchishi</b>
                  </div>`,
@@ -2769,13 +3907,13 @@ if (typeof module !== "undefined" && module.exports) module.exports = travelStyl
             );
         
     
-            var circle_marker_1198f1387019e52c4dea46f3a258c736 = L.circleMarker(
+            var circle_marker_2ea942c6e4f1d396760089b863a05c26 = L.circleMarker(
                 [34.731294, 135.555278],
                 {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
-            ).addTo(feature_group_80b3b9394d45f67221c8f2ba051496c7);
+            ).addTo(feature_group_323ec693e44f435f94ee279c89047f0b);
         
     
-            circle_marker_1198f1387019e52c4dea46f3a258c736.bindTooltip(
+            circle_marker_2ea942c6e4f1d396760089b863a05c26.bindTooltip(
                 `<div>
                      <b>Taishibashi-Imaichi</b>
                  </div>`,
@@ -2785,13 +3923,13 @@ if (typeof module !== "undefined" && module.exports) module.exports = travelStyl
             );
         
     
-            var circle_marker_b63507d006f98e163c2a2554c764cb72 = L.circleMarker(
+            var circle_marker_79feae415f9841470cf4faf25d288408 = L.circleMarker(
                 [34.7279, 135.557445],
                 {"bubblingMouseEvents": true, "color": "#1a5490", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1a5490", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 3}
-            ).addTo(feature_group_80b3b9394d45f67221c8f2ba051496c7);
+            ).addTo(feature_group_323ec693e44f435f94ee279c89047f0b);
         
     
-            circle_marker_b63507d006f98e163c2a2554c764cb72.bindTooltip(
+            circle_marker_79feae415f9841470cf4faf25d288408.bindTooltip(
                 `<div>
                      <b>Takii</b>
                  </div>`,
@@ -2801,16 +3939,16 @@ if (typeof module !== "undefined" && module.exports) module.exports = travelStyl
             );
         
     
-            feature_group_80b3b9394d45f67221c8f2ba051496c7.addTo(map_6be28dd3df020dbd9e643e14e4c85297);
+            feature_group_323ec693e44f435f94ee279c89047f0b.addTo(map_26c5e0bea99a648cfaa7999f5c5d4027);
         
     
-            var feature_group_cdbfe4ab735d1c2373996514cd3326bb = L.featureGroup(
+            var feature_group_146317dc30a24932c7776f994512fadc = L.featureGroup(
                 {
 }
             );
         
     
-            var fast_marker_cluster_7ad1af85a051037b871e5d876a6f16f4 = (function(){
+            var fast_marker_cluster_bc64366b2476b766ca1095ca4be74d5c = (function(){
                 var callback = 
         (function () {
             var CATEGORIES = ["\u7406\u5bb9\u6240", "\u7f8e\u5bb9\u6240"];
@@ -2861,41 +3999,41 @@ if (typeof module !== "undefined" && module.exports) module.exports = travelStyl
                     marker.addTo(cluster);
                 }
 
-                cluster.addTo(feature_group_cdbfe4ab735d1c2373996514cd3326bb);
+                cluster.addTo(feature_group_146317dc30a24932c7776f994512fadc);
                 return cluster;
             })();
         
     
-            fast_marker_cluster_7ad1af85a051037b871e5d876a6f16f4.addTo(feature_group_cdbfe4ab735d1c2373996514cd3326bb);
+            fast_marker_cluster_bc64366b2476b766ca1095ca4be74d5c.addTo(feature_group_146317dc30a24932c7776f994512fadc);
         
     
-            feature_group_cdbfe4ab735d1c2373996514cd3326bb.addTo(map_6be28dd3df020dbd9e643e14e4c85297);
+            feature_group_146317dc30a24932c7776f994512fadc.addTo(map_26c5e0bea99a648cfaa7999f5c5d4027);
         
     
-            var layer_control_4df350304946c5d469af0cdcec2af2ae_layers = {
+            var layer_control_50b0618ed17adce038164a4007a5604d_layers = {
                 base_layers : {
-                    "Business" : tile_layer_d33da47c8c77af5a0302e620316ee47d,
-                    "Travel" : open_basemap_11a89c7959ffd595d87c0fdbd67516a7,
+                    "Business" : tile_layer_896a8e5d145a6de765d4bac849a1193b,
+                    "Travel" : open_basemap_99afad2179de2dfc9bbbb5ee8b7d6fd6,
                 },
                 overlays :  {
-                    "Commercial Density (Within Station Proximity)" : heat_map_b810536c58d96e1dcbb9e73d875d45f2,
-                    "Commercial Density (All Moriguchi Businesses)" : heat_map_c71da7f522985823d3aca60c7a7172ba,
-                    "Concentric Ring 1: 0-0.05 mi" : feature_group_d0e1a2fbccf6db9370a404c2a1aabefb,
-                    "Concentric Ring 2: 0.05-0.1 mi" : feature_group_41f866ad527fcb272ff2207cc26d6b08,
-                    "Concentric Ring 3: 0.1-0.2 mi" : feature_group_efed9fc21a453f51a371f01031793d89,
-                    "Concentric Ring 4: 0.2-0.3 mi" : feature_group_9059432ade1d21d51a3e1f30882aeb99,
-                    "\u003cb\u003eBusinesses: Personal services (176)\u003c/b\u003e" : feature_group_cdbfe4ab735d1c2373996514cd3326bb,
+                    "Commercial Density (Within Station Proximity)" : heat_map_488028be33103248c79efd16435c9912,
+                    "Commercial Density (All Moriguchi Businesses)" : heat_map_16d913a5d6c3fe07afecee7b2e777850,
+                    "Concentric Ring 1: 0-0.05 mi" : feature_group_c98203b2df689400b2a4e5c515519b88,
+                    "Concentric Ring 2: 0.05-0.1 mi" : feature_group_73d2d70059fc7736a6c2b03405d0f2a0,
+                    "Concentric Ring 3: 0.1-0.2 mi" : feature_group_540b65126ab7f46cad0c6f90b9842a11,
+                    "Concentric Ring 4: 0.2-0.3 mi" : feature_group_f63d00e9b587e3a043b0b0c6374db699,
+                    "\u003cb\u003eBusinesses: Personal services (176)\u003c/b\u003e" : feature_group_146317dc30a24932c7776f994512fadc,
                 },
             };
-            let layer_control_4df350304946c5d469af0cdcec2af2ae = L.control.layers(
-                layer_control_4df350304946c5d469af0cdcec2af2ae_layers.base_layers,
-                layer_control_4df350304946c5d469af0cdcec2af2ae_layers.overlays,
+            let layer_control_50b0618ed17adce038164a4007a5604d = L.control.layers(
+                layer_control_50b0618ed17adce038164a4007a5604d_layers.base_layers,
+                layer_control_50b0618ed17adce038164a4007a5604d_layers.overlays,
                 {
   "position": "topleft",
   "collapsed": true,
   "autoZIndex": true,
 }
-            ).addTo(map_6be28dd3df020dbd9e643e14e4c85297);
+            ).addTo(map_26c5e0bea99a648cfaa7999f5c5d4027);
 
         
 </script>

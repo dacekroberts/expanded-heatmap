@@ -349,4 +349,30 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/fukushima.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A bare type word (owner, 2026-10-13)
+    "way/239521690": "'拝殿・本殿': \"拝殿・本殿\" (worship hall and main hall): building types alone, 41 m from the shrine rows of the Gokoku shrine precinct",
+    "way/549240959": "'車祓い所': \"車祓い所\" (car blessing bay): a shrine facility named by its use, in the same precinct",
+    "node/5305595802": "'なで牛': \"なで牛\" (the ox statue visitors stroke): a shrine fitting, 61 m from 信夫山天満宮",
+    "way/550335190": "'休憩所': \"休憩所\" (rest area): a type word alone",
+    "way/105833007": "'多目的運動広場': \"多目的運動広場\" (multi-purpose sports ground): a facility type alone, inside the Azuma sports park",
+    "node/2602825832": "'補助陸上競技場': \"補助陸上競技場\" (auxiliary athletics field): a facility type alone, inside the Azuma sports park",
+    # A second row of one object (owner, 2026-10-13)
+    "node/3450095565": "'春日神社拝殿': the worship hall (拝殿) of 春日神社, 14 m from the shrine's own row way/337932446",
+    "node/3450095566": "'春日神社本殿': the main hall (本殿) of 春日神社, 11 m from the shrine's own row way/337932446",
+    # A description standing in for a name (owner, 2026-10-13)
+    "node/6581807787": "'方木田集会場': \"方木田集会場\": a neighbourhood meeting hall, not a place of worship",
+    "way/550329499": "'信夫山公園第２展望台周辺': \"around the second lookout of Shinobuyama park\": a mapper's description of a patch of the park",
+    # Unsure rows a ruling drops: a stock plaza or rest-area name with no place in it (ruling 5) (owner, 2026-10-13)
+    "way/734026595": "'イベント広場': a stock plaza or rest-area name with no place in it",
+    # Unsure rows a ruling drops: a hall named only for what it enshrines, or a deity's title alone (ruling 3) (owner, 2026-10-13)
+    "node/5305596851": "'お稲荷様': a hall named only for what it enshrines, or a deity's title alone",
+    # Owner, 2026-10-13: ruling 5 covers every plaza name with no place in it
+    "way/1566652681": "'山頂広場': a plaza or park-zone name with no place in it",
+    "node/8428655629": "'巨石広場': a plaza or park-zone name with no place in it",
+    "way/243546133": "'木陰広場': a plaza or park-zone name with no place in it",
+    "way/550336321": "'冒険の森': a plaza or park-zone name with no place in it",
+}

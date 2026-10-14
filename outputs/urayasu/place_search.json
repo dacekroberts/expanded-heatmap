@@ -1,0 +1,26 @@
+{
+  "index": "app/static/places/urayasu.json",
+  "places": 613,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "ja"
+    ],
+    "coverage": {
+      "en": 0.287,
+      "ja": 0.946
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Japanese"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/2679929",
+      "name": "Urayasu",
+      "stations": 7
+    }
+  ]
+}

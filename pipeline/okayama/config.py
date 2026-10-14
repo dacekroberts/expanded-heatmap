@@ -239,5 +239,76 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "インターナショナル岡山歯科衛生専門学校": "a college (amenity=college, Wikipedia); 歯科 is its field, not a clinic (the Tokyo precedent); tags read 2026-10-13",
+    "半田山ハイツ口": "a signed junction (highway=traffic_signals) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read of this
+# index (rule passes 5 and 6), each id read with its cached name and its index
+# row; grouped by the reader's class.
+PLACE_DROPPED = {
+    # Worship named only by a body, a denomination or a chain (reader's drop; owner, 2026-10-13)
+    "node/4943592061": "'PL'",
+    "node/12520450027": "'パーフェクトリバティー教団'",
+    "way/515122138": "'エボバの証人の王国会館'",
+    "way/684695947": "'冨士大石寺顕正会'",
+    "way/640428108": "'宗教法人世界平和統一家庭連合'",
+    "node/12570416058": "'日本キリスト教団'",
+    "node/14024121569": "'日本福音ルーテル教会'",
+    "node/13429650485": "'黒住教'",
+    "way/559655460": "'東方之光'",
+    # A religious office, hall or residence tagged a place of worship (reader's drop; owner, 2026-10-13)
+    "way/463576131": "'天理教　岡山教務支庁'",
+    # A bare type word standing alone (reader's drop; owner, 2026-10-13)
+    "way/1044279748": "'テニスコート'",
+    "way/1110671251": "'休憩所'",
+    "way/559114886": "'屋外広場'",
+    "way/1044271714": "'緑地'",
+    "node/4041550772": "'寺社'",
+    "node/4172495906": "'寺社'",
+    "way/494832978": "'地蔵堂'",
+    "way/537891738": "'地蔵堂'",
+    "way/585839819": "'地蔵堂'",
+    "node/6982142291": "'観音堂'",
+    "way/484306560": "'薬師堂'",
+    "node/1909425741": "'阿弥陀堂'",
+    "way/488833675": "'不動明王堂'",
+    "node/13415042658": "'不動明王'",
+    "way/585851230": "'毘沙門天'",
+    "node/4978713640": "'稲荷大明神'",
+    "node/4740866583": "'正一位稲荷大神'",
+    "way/480174742": "'南無正一位稲荷大明神'",
+    "way/1451570077": "'竪穴式住居'",
+    # Unsure in the read, dropped by ruling 3, a hall named only for what it enshrines or a deity's title alone (owner, 2026-10-13)
+    "way/584346704": "'大國主神'",
+    "node/5272947640": "'天照皇大神'",
+    "node/4865942378": "'恵比寿大神'",
+    "node/5222571355": "'戎乃神'",
+    # Unsure in the read, dropped by ruling 5, a stock plaza or rest-area name with no place in it (owner, 2026-10-13)
+    "way/586957045": "'ふれあい広場'",
+    # A description standing in for a name (reader's drop; owner, 2026-10-13)
+    "way/446750530": "'近代化産業遺産'",
+    "node/7159729462": "'築城時の石垣'",
+    "node/7159818375": "'点字ブロック世界初敷設場所'",
+    # A home, or a private person's or family's own name (names withheld) (reader's drop; owner, 2026-10-13)
+    "node/12561205246": "name withheld",
+    # A code or a number beside a type word, or a number alone (reader's drop; owner, 2026-10-13)
+    "way/584569676": "'六十二番'",
+    "way/585851224": "'六十二番'",
+    "way/544262145": "'第七拾二番'",
+    "way/499418456": "'第五十一番大師堂'",
+    "way/536242183": "'八十一番大師堂'",
+    "way/667987384": "'八十二番大師堂'",
+    # A business's or a mall's own facility (reader's drop; owner, 2026-10-13)
+    "node/13033182775": "'クレド岡山 ふれあい広場'",
+    # A second row for one object (the surviving row named in each note) (reader's drop; owner, 2026-10-13)
+    "way/677838024": "'玉井宮東照宮拝殿': the worship hall of the shrine whose main hall (玉井宮東照宮本殿, way/677838025) is a row beside it; one shrine, two rows",
+    # A glitched name (reader's drop; owner, 2026-10-13)
+    "node/6443744383": "'福渡/建部'",
+    # Twin round 1 (owner, 2026-10-13): a same-named neighbouring object promoted into the place of
+    # a row dropped by id; each dropped under the class of the row it replaced.
+    "node/4041550852": "'寺社': the twin of node/4041550772; A bare type word standing alone (reader's drop; owner, 2026-10-13)",
+}

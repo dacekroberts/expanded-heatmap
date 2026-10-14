@@ -245,4 +245,42 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read of this
+# index (rule passes 5 and 6), each id read with its cached name and its index
+# row; grouped by the reader's class.
+PLACE_DROPPED = {
+    # A business's or a mall's own facility (reader's drop; owner, 2026-10-13)
+    "node/4185447405": "'セレモニーホール三ヶ日葬祭センター'",
+    # Worship named only by a body, a denomination or a chain (reader's drop; owner, 2026-10-13)
+    "node/7208469398": "'MCGI'",
+    "node/3612460545": "'ルーテル教会'",
+    "node/3587038416": "'立正佼成会'",
+    "way/289670543": "'イグレシア・ニ・キリスト'",
+    "way/757846126": "'世界真光文明教団'",
+    "way/858176401": "'崇教真光'",
+    # A bare type word standing alone (reader's drop; owner, 2026-10-13)
+    "way/244952095": "'寺'",
+    "way/365119183": "'御旅所'",
+    "way/566035413": "'神門'",
+    "node/5456885106": "'住居跡'",
+    "way/255788415": "'コミュニティー広場'",
+    "way/818010148": "'憩いの広場'",
+    # A religious office, hall or residence tagged a place of worship (reader's drop; owner, 2026-10-13)
+    "node/4194458140": "'須倍神社々務所'",
+    "way/487713879": "'浜松司牧センター'",
+    "way/542222336": "'長徳寺同朋会館'",
+    # A second row for one object (the surviving row named in each note) (reader's drop; owner, 2026-10-13)
+    "way/556263168": "'浜名湖チャペル2': a second building of the chapel row way/556263151 about 130 m away, numbered 2",
+    "node/5487635613": "'大蒲公園　看板': the park's signboard mapped as a park; the park has its own row",
+    "node/4641765647": "'意昌庵': the same temple as way/469917145 9 m away, under a variant last character",
+    # An estate's own facility or marketing name (reader's drop; owner, 2026-10-13)
+    "way/562128994": "'千人塚団地子供の遊び場'",
+    # A home, or a private person's or family's own name (names withheld) (reader's drop; owner, 2026-10-13)
+    "node/12570605962": "name withheld",
+    # A description standing in for a name (reader's drop; owner, 2026-10-13)
+    "node/5160237360": "'せせらぎ水路'",
+    # Unsure in the read, dropped by ruling 5, a stock plaza or rest-area name with no place in it (owner, 2026-10-13)
+    "way/711547659": "'ちびっこ広場'",
+    "way/1138704295": "'ふれあいの場'",
+    "way/657891275": "'門前広場'",
+}
