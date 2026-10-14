@@ -310,4 +310,78 @@ PLACE_FOLD = "ja"
 PLACE_REVIEWED = {
     "歯科大　西入口": "a signed junction (highway=traffic_signals) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
 }
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read of this
+# index (rule passes 5 and 6), each id read with its cached name and its index
+# row; grouped by the reader's class.
+PLACE_DROPPED = {
+    # A station row that is no working passenger station (reader's drop; owner, 2026-10-13)
+    "node/1250743978": "'福岡貨物ターミナル'",
+    # A second row for one object (the surviving row named in each note) (reader's drop; owner, 2026-10-13)
+    "node/13284625562": "'奈多駅': a second node 0 m from the station row 奈多 (node/7736891450)",
+    "way/736953961": "'薬院大通り駅': an outline 30 m from the station row 薬院大通 (node/7721059701), under a misspelt name",
+    "node/9219754634": "'中司孫太郎稲荷': 14 m from 中司孫太郎稲荷神社 (way/565190124), one shrine",
+    "node/14025343603": "'安楽平城': 9 m from 安楽平城跡 (node/9419689004), one castle site",
+    # A bare type word standing alone (reader's drop; owner, 2026-10-13)
+    "node/4443396904": "'Shinto Shrine'",
+    "node/5177680928": "'神社'",
+    "node/9219754652": "'石仏'",
+    "node/13676970774": "'納骨堂'",
+    "way/1195946357": "'納骨堂'",
+    "node/7077424153": "'遙拜所'",
+    "way/1296339994": "'緑地'",
+    "way/1309712471": "'砂浜'",
+    "way/1296347993": "'子ども広場'",
+    "way/1377381364": "'ドッグラン'",
+    "node/598510950": "'魚市場'",
+    # A description standing in for a name (reader's drop; owner, 2026-10-13)
+    "node/6797982286": "'unknown shrine'",
+    "way/845749796": "'噴水広場'",
+    "relation/8535125": "'多目的芝生広場'",
+    "way/998569716": "'東側展望広場'",
+    "way/724468462": "'水処理センター屋上テニスコート'",
+    "way/285556625": "'西鉄バスの廃バス'",
+    "node/5370990735": "'東住吉公園 かげぼうし日時計'",
+    # A glitched name (reader's drop; owner, 2026-10-13)
+    "way/1158836885": "'樋井川🍀4号公園'",
+    # An estate's own facility or marketing name (reader's drop; owner, 2026-10-13)
+    "way/1309702987": "'アーベインルネス井尻公園'",
+    "way/1296350365": "'ビレッジハウス姪浜の公園'",
+    "way/1296351636": "'大町団地内の公園'",
+    "way/1296349779": "'九大職員宿舎の公園'",
+    "way/1302692025": "'城の原団地の公園'",
+    "node/11428878807": "'サークルプレイス'",
+    # A business's or a mall's own facility (reader's drop; owner, 2026-10-13)
+    "node/9021654093": "'西日本シティ銀行 HKT48劇場'",
+    # An exhibit or object kept on another's entry or article (reader's drop; owner, 2026-10-13)
+    "node/13920682161": "'Fuku/Luck, Fuku=Luck, Matrix'",
+    # Worship named only by a body, a denomination or a chain (reader's drop; owner, 2026-10-13)
+    "way/1175789810": "'神慈秀明会'",
+    # A religious office, hall or residence tagged a place of worship (reader's drop; owner, 2026-10-13)
+    "way/1102740589": "'油山シャロームチャペルミッションセンター'",
+    # Unsure in the read, dropped by ruling 2, a religious body's meeting hall or branch tagged a place of worship (owner, 2026-10-13)
+    "node/12014840698": "'天理教四ツ水布教所'",
+    "way/668783993": "'創価学会 九州世界女性会館'",
+    "way/668783954": "'創価学会 九州文化会館'",
+    "way/668783974": "'創価学会 九州文化会館 別館'",
+    "way/668783948": "'創価学会 九州池田講堂'",
+    "way/840934800": "'創価学会 博多会館'",
+    "way/714379678": "'創価学会 城南文化会館'",
+    "way/1384924281": "'創価学会 早良文化会館'",
+    "node/495989484": "'創価学会 福岡中央文化会館'",
+    "way/715716501": "'創価学会 福岡南文化会館'",
+    "way/668783994": "'創価学会 芙蓉会館'",
+    "node/13429708949": "'創価学会福岡平和会館'",
+    "node/12014834550": "'創価学会福岡西文化会館'",
+    # Unsure in the read, dropped by ruling 5, a stock plaza or rest-area name with no place in it (owner, 2026-10-13)
+    "way/845517509": "'健康広場'",
+    "way/845522675": "'自由広場（北）'",
+    "way/845764621": "'自由広場（南）'",
+    "way/845813483": "'ふれあい広場'",
+}
+# Kept by the owner's word (place_index, PLACE_KEPT; owner, 2026-10-13): a famous
+# place the rules pass over for want of a tag, the id read with its cached name.
+PLACE_KEPT = {
+    "relation/2255755": "'九州大学 伊都キャンパス', Kyushu University's Ito campus (amenity=university, no Wikidata tag) (owner, 2026-10-13)",
+    "way/108294913": "'九州大学病院キャンパス', Kyushu University's hospital campus (amenity=university, no Wikidata tag) (owner, 2026-10-13)",
+    "way/169799218": "'九州大学 大橋キャンパス', Kyushu University's Ohashi campus (amenity=university, no Wikidata tag) (owner, 2026-10-13)",
+}

@@ -208,4 +208,15 @@ PLACE_FOLD = "ja"
 PLACE_REVIEWED = {
     "焼山南ハイツ入口": "a signed junction (highway=traffic_signals) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
 }
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read of this
+# index (rule passes 5 and 6), each id read with its cached name and its index
+# row; grouped by the reader's class.
+PLACE_DROPPED = {
+    # A bare type word standing alone (reader's drop; owner, 2026-10-13)
+    "way/1104955761": "'ちびっこ広場'",
+    "way/623460008": "'野外活動センター'",
+    # Unsure in the read, dropped by ruling 5, a stock plaza or rest-area name with no place in it (owner, 2026-10-13)
+    "way/1105778272": "'水の広場'",
+    # Unsure in the read, dropped by ruling 2, a religious body's meeting hall or branch tagged a place of worship (owner, 2026-10-13)
+    "way/607186136": "'創価学会呉会館'",
+}
