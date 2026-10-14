@@ -83,6 +83,36 @@ Newest first. Cleanup folds these into `DECISIONS.md` at review time.
     Italian entry on this branch (the matcher words are on another branch).
   - The scaffold set `search='milan'` on the page; the bullet is the
     template's. No other page text is needed (flag for review time).
+- **Owner, 2026-10-13 ("all approved"), relayed by Cleanup and applied by
+  id, each id checked against its cached name:**
+  - Milan's search area is approved (relation 44915). The 527 platform ways
+    stay by id until the shared rule on the platform tag replaces them. The
+    street names flagged by pattern are left alone.
+  - Mexico City, 7 dropped: the park "Alcoholicos Anonimos", Center Park
+    and FUNO Center, "IJSUD", the street altar, the second cathedral node,
+    the locality "Jardines del Recuerdo". The other seven stay. Rows 67,345
+    to 67,338.
+  - Milan, 31 ids dropped: six "Casa X" buildings with no article of their
+    own (Castini, Cicchieri, Pirovano, Rovida, del Cedro, and Casa a Igloo,
+    whose article is the Maggiolina quarter's); the four tram stops closed
+    in 1978; East Garden, La Viridiana, Giunglabuca, EuroMilano; Milano 2
+    and Pero; Armenia Films, Hayabusa Reiki Dojo, Lanciatore Vega,
+    PalaSharp, Tranvia Milano-Lodi, Precotto (Interno deposito); the grotto
+    under a church's name; and eight true duplicates (Cassina Triulza,
+    Ronchetto Sul Naviglio, the census area Parco Sempione, Stadio San Siro
+    Milano, Giardino Gonin Giordani, Giardino Mario Capponi, Parco di via
+    Dezza, the node Circo Romano). Rows 6,149 to 6,119: 30 rows for 31 ids,
+    one id's row having been its twin's.
+  - Kept: the 27 "Casa X" with an article, the 26 farmsteads and mills, the
+    census-area names (Ticinese, Adriano, Comasina among them), "Ultima
+    Cena" (node 304775593).
+  - **Judgment call, two pairs left as they are:** "Cascina Melghera" (two
+    nodes 2.6 km apart, which one is misplaced is not known from the tags)
+    and the two Quintosole church rows 20 m apart under different names.
+    Neither is a duplicate the tags settle.
+  - Check H, check E, the scope check and the index drift check pass for
+    both cities. The verdict lists in `data/_search_rollout/tram_rules56/`
+    are the read as it stood before these rulings.
 - **Checks.** `check_all.py`: one failure, `check_place_search.py` rule A for
   the three maps not rendered since their index step. Scope check OK (20
   cities), index drift OK, provenance names the three OK.

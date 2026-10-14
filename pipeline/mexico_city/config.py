@@ -566,6 +566,14 @@ PLACE_DROPPED = {
     "way/564478972": "'Parque Para Perros', a description (a park for dogs), the listed 'parque canino' in other words",
     "way/1394023631": "'Parque con fuente', a description (a park with a fountain)",
     "way/564479286": "'Area Comun/Canchas de Basquetball', a description of a housing unit's common area and courts",
+    # The owner's rulings on the read of 2026-10-13 ("all approved"), each id checked against its cached name.
+    "way/520486350": "'Alcoholicos Anonimos', an organisation's name on a park (owner, 2026-10-13)",
+    "way/1548669456": "'Center Park', a park run by a property trust, a mall's grounds (owner, 2026-10-13; ruling 7's class)",
+    "way/1548630508": "'FUNO Center', a park under a property trust's own name (owner, 2026-10-13; ruling 7's class)",
+    "node/4411942889": "'IJSUD', a place of worship named only by its body's initials (owner, 2026-10-13; ruling 2's class)",
+    "node/6937971008": "'Altar a la Virgen De Guadalupe.', a street altar, not notable (owner, 2026-10-13; the shrine calls of 2026-10-12)",
+    "node/13599795588": "'Cátedra Arquidiócesis de Tlalnepantla', a second row for the cathedral, relation 20952002 (owner, 2026-10-13)",
+    "node/9646767715": "'Jardines del Recuerdo', a locality under a private cemetery's name (owner, 2026-10-13)",
 }
 
 # Public art kept by the owner's word against the article rule (place_index,
