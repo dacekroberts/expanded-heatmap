@@ -2,6 +2,51 @@
 
 Newest first. Cleanup folds these into `DECISIONS.md` at review time.
 
+### 2026-10-13 - Tram rescope: landing preparation, the four cities back on their normal processed paths (Cleanup, nothing pushed)
+
+- **Owner, 2026-10-13:** approved starting the landing preparation. Done on
+  the branch by a Cleanup agent; nothing pushed, master not merged in.
+- **Flipped:** Toronto's `STATIONS_CSV` and `STREETCAR_SHAPES_JSON`, Milan's
+  and Prague's `TRAM_DIR`, and the `cable` part of Mexico City's
+  `DATA_PROCESSED`. Each city's steps were then re-run and write the shared
+  `data/<city>/processed/` (Mexico City: `processed/regional/`).
+- **Re-run, against the approved figures (all match):**
+  - Toronto, steps 1 to 4: 174 stations (108 + 66), 11,803 of 18,215
+    storefronts in a ring.
+  - Milan, steps 1 to 3: 193 stations (104 + 89), 22 lines, 45,999 of 47,540.
+  - Prague, steps 1 to 3: 196 stations (57 + 139), 21,462 of 25,185.
+  - Mexico City, steps 1 to 3: 208 stations, 427,123 storefronts written,
+    427,121 on the map, 175,939 in a ring.
+- **Drift:** zero in all four; every `outputs/<city>/` file is identical to
+  the committed one (the maps after Folium-id normalization). Each new
+  station and shape file is byte-identical to the branch-only copy it
+  replaces.
+- **Baselines updated:** Toronto five new figures, Milan six, Prague six and
+  `stations_excluded` 1 to 109 (the 108 thinned tram stops), Mexico City
+  twelve figures moved to the five-municipio counts.
+- **Judgment call: Prague's and Mexico City's drift check ran without
+  `step2b_place_index.py`.** The search rebuild waits for a rule landing, and
+  the full check would have rebuilt both indexes on the new stations. The
+  other steps ran through `drift_check.py`'s own functions (offline guard,
+  output and baseline comparison) from a scratch wrapper. Neither index was
+  touched.
+- **Judgment call: Prague's feed was not refetched.** The entry of the same
+  day already recorded the re-pull in `provenance.json` from the cached
+  file; its bytes and SHA-256 were re-measured and match. A refetch would
+  have had to change `TRAM_GTFS_ZIP` and could have moved the approved
+  station set for no gain.
+- **Left in place:** `data/<city>/processed/tram/` (three cities) and
+  `data/mexico_city/processed/regional/cable/`, now unused copies. The
+  dry-run blocks at the foot of `streetcars.py` and both `trams.py` read
+  `stations.csv` as the metro-only set and are stale since the flip; each
+  carries a comment saying so.
+- **Checks:** line identity 0 problems; provenance names all four OK;
+  `check_all.py` 72 of 73, the one failure Mexico City's check H (San
+  Isidro, the stale search index, as before).
+- **Until the branch lands, master's code reads the new station files**
+  from the shared folder: a master drift check or index step for these four
+  cities sees 174, 193, 196 and 208 stations.
+
 ### 2026-10-13 - Tram rescope: the owner signs off Prague's page text and label form, and Toronto's and Mexico City's page text
 
 - **Owner, 2026-10-13:** "i sign off on all the waiting on you items
