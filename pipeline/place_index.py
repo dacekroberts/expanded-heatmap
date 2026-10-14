@@ -1642,10 +1642,11 @@ BARE_TYPE_NAMES = {
 # rows (data/_search_rollout/final_held_settle; Taichung 127, Brasilia 45).
 # The guards are unchanged: an article of the object's own keeps a row,
 # config.PLACE_KEPT keeps one, a station of the map or of a rail network is
-# never dropped. Measured on the 19 live cities, 2026-10-13: 15 rows leave
-# (Busan 5, Mexico City 5, Kyoto 2, Seoul 2, Tokyo 1), none in Sao Paulo or
-# Hong Kong; on the five pilot cities 99, 98 of them a reader's drop. NOT
-# here, though readers dropped rows under each: Spanish "mirador",
+# never dropped. Measured on the 19 live cities, 2026-10-13: 13 rows leave
+# (Busan 5, Mexico City 3, Kyoto 2, Seoul 2, Tokyo 1), none in Sao Paulo or
+# Hong Kong; on the five pilot cities 98, 97 of them a reader's drop. NOT
+# here, though readers dropped rows under each: Spanish "polvorín" (owner,
+# 2026-10-13: Mexico City's "El Polvorín" is a proper name), "mirador",
 # "parque hundido" (Mexico City's park of that name), "las estufas" and
 # "plaza gastronómica", Portuguese "cruz", and the sentence-long
 # descriptions no list can hold.
@@ -1663,7 +1664,7 @@ BARE_TYPE_NAMES_6 = {
            "parque de esportes", "parque de uso múltiplo", "praça comunitária pública",
            "praça de entrequadras", "pracinha da igreja", "calçada arborizada", "circo", "cras",
            "totem", "horatorio", "largo"),
-    "es": ("hórreo", "laberinto", "parque lineal", "parterre", "polvorín", "puente", "reloj de sol",
+    "es": ("hórreo", "laberinto", "parque lineal", "parterre", "puente", "reloj de sol",
            "capilla universitaria", "capilla del hospital", "antiguas tuberías",
            "antiguo depósito de agua", "canchas deportivas", "unidad deportiva", "arboretum",
            "parque público", "parque comunitario", "parque recreactivo", "astas", "pileta",
@@ -1960,20 +1961,25 @@ def worship_only(name, local):
 # WORSHIP (owner, 2026-10-13, the sixteen rulings, 1: "dropped; a monastery
 # or convent with an article of its own stays"; the sixth pass). Asked of
 # amenity=place_of_worship landmarks, of the leading name. A Latin-script
-# word is the name's HEAD (WORSHIP_OFFICE_HEADS: "Convento de las Clarisas")
-# or stands anywhere as a whole word (WORSHIP_OFFICE_WORDS: "Catholic Diocese
+# word is the name's HEAD (WORSHIP_OFFICE_HEADS: "Seminário Arquidiocesano de
+# São José") or stands anywhere as a whole word (WORSHIP_OFFICE_WORDS: "Catholic Diocese
 # of San Diego", "Pittsburgh Presbytery"); a CJK or Hangul word stands
 # anywhere, since the type closes the name ("대구대영교회 교육관"). Kept: an
 # article of the object's own, an entry of its own with an article in the
 # Wikidata cache, an id in config.PLACE_KEPT.
+# A NAMED CONVENT IS A PLACE, NOT AN OFFICE (owner, 2026-10-13, on the sixth
+# pass's report): "convento" is no head in Spanish or Portuguese, so Rio de
+# Janeiro's "Convento de Santa Teresa" and Madrid's "Convento de Santa
+# Catalina de Siena" and "Convento de las Clarisas" keep their rows. The
+# bare word "Convento" alone is still a bare type word (BARE_TYPE_NAMES).
 # Each word is in a reader's drops under this class. Measured on the 19 live
 # cities, 2026-10-13: 21 rows leave (Seoul 15, Busan 4, London 1, Tokyo 1);
-# on the five pilot cities 17. NOT listed, the evidence being one
+# on the five pilot cities 11 (Daegu 10, Rio de Janeiro 1). NOT listed, the evidence being one
 # row or none: English "convent" and "seminary", Spanish "hermanas",
 # "misioneras" and "oblatas" (an order's name heading a house), Korean
 # 참신관 and 대건관 (a hall's own name), "ministries", "foundation" and
 # "associates" (each also a congregation's name).
-WORSHIP_OFFICE_HEADS = {"es": ("convento",), "pt": ("convento", "seminario")}
+WORSHIP_OFFICE_HEADS = {"pt": ("seminario",)}
 WORSHIP_OFFICE_WORDS = {
     "en": ("diocese", "archdiocese", "presbytery", "federation of churches"),
     "ko": ("교육관", "교육원", "비전관", "교구청", "수녀회", "신학대학", "교사실"),
@@ -5139,6 +5145,9 @@ def _selftest():
             ("it", [("Via Roma", "footway"), ("Via Albergo Vecchio", "residential")],
              [("Chiesa", {"amenity": "place_of_worship"})]),
             ("el", [("Αριστοτέλους", "footway"), ("Οδός Ερμού", "footway")], []),
+            ("pt", [("Rua Um", "residential")], [("Seminário Maior", {"amenity": "place_of_worship"}),
+                                                  ("Igreja do Seminário", {"amenity": "place_of_worship"}),
+                                                  ("Convento de Santa Teresa", {"amenity": "place_of_worship"})]),
             ("ja", [("試験通", "residential")], [("大師堂", {"place": "quarter"}),
                                                   ("大師堂", {"amenity": "place_of_worship"})])):
         target[0] = []
@@ -5449,11 +5458,15 @@ def _selftest():
          and ("landmark", "Catholic Diocese of Testville") not in rows),
         ("an office word no reader's row supports keeps its row", ("landmark", "St Clare Convent") in rows),
         ("worship_office: a head leads the name, a CJK word stands anywhere, a city's languages only",
-         worship_office("Convento de las Clarisas", ("es",)) and not worship_office("Iglesia del Convento", ("es",))
-         and not worship_office("Convento de las Clarisas", ("fr",)) and worship_office("八幡神社社務所", ("ja",))
+         worship_office("Seminário Maior de São José", ("pt",)) and not worship_office("Igreja do Seminário", ("pt",))
+         and not worship_office("Seminário Maior de São José", ("es",)) and worship_office("八幡神社社務所", ("ja",))
          and not worship_office("八幡神社", ("ja",))),
-        ("Spanish: a convent tagged a place of worship is no row", es_rows[("landmark", "Convento de las Clarisas")] == 0
-         and es_rows[("landmark", "Iglesia del Convento")] == 1),
+        ("a named convent is a place and keeps its row", es_rows[("landmark", "Convento de las Clarisas")] == 1
+         and es_rows[("landmark", "Iglesia del Convento")] == 1
+         and ("landmark", "Convento de Santa Teresa") in small["pt"]),
+        ("Portuguese: a seminary tagged a place of worship is no row, by the name's head",
+         ("landmark", "Seminário Maior") not in small["pt"] and ("landmark", "Igreja do Seminário") in small["pt"]),
+        ("Polvorín behind an article is a name", not bare_type("El Polvorín", ("es",)) and bare_type("Hórreo", ("es",))),
         ("Korean: a church's education hall is no row", ("landmark", "시험교회 교육관") not in ko_rows
          and ("landmark", "시험교회") in ko_rows),
         ("a park a homes association runs is no row", ("landmark", "Lakeside Green") not in rows),

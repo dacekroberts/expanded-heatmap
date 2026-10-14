@@ -199,7 +199,7 @@
  {"label": "a nationality is listed only inside a denomination's name", "old": "\"roman\", \"rc\", \"lds\", \"greek orthodox\",", "new": "\"roman\", \"rc\", \"lds\", \"russian\", \"greek orthodox\","},
  {"label": "a religious office is dropped", "old": "else \"worship_office\" if worship_office(names[0], local) else None)", "new": "else None)"},
  {"label": "an office head leads the name", "old": "    if any(low == h or low.startswith(h + \" \") for c in codes", "new": "    if any(h in low for c in codes"},
- {"label": "an office word is read in the city's languages", "old": "WORSHIP_OFFICE_HEADS = {\"es\": (\"convento\",),", "new": "WORSHIP_OFFICE_HEADS = {\"fr\": (\"convento\",),"},
+ {"label": "an office word is read in the city's languages", "old": "WORSHIP_OFFICE_HEADS = {\"pt\": (\"seminario\",)}", "new": "WORSHIP_OFFICE_HEADS = {\"es\": (\"seminario\",)}"},
  {"label": "an English office word is not read in a CJK name", "old": "    mixed = bool(_CJK_WORD.search(low))", "new": "    mixed = False"},
  {"label": "an English office word is listed", "old": "\"en\": (\"diocese\", \"archdiocese\", \"presbytery\", \"federation of churches\"),", "new": "\"en\": (\"archdiocese\", \"federation of churches\"),"},
  {"label": "an estate's or a mall's facility is dropped", "old": "        if facility and not own and oid not in kept_ids:", "new": "        if False:"},
@@ -232,5 +232,7 @@
  {"label": "leak_hits lists no junction row", "old": "        if kind == \"junction\":\n            continue", "new": "        if False:\n            continue"},
  {"label": "leak_hits lists no street under an allowed word", "old": "LEAK_STREET_ALLOW = {\"fr\": (\"brasserie\",)}", "new": "LEAK_STREET_ALLOW = {}"},
  {"label": "a name ending (FECHADO) is closed", "old": "außer betrieb|ausser betrieb|fechado|fechada)", "new": "außer betrieb|ausser betrieb)"},
- {"label": "a settlement named by a type word keeps its place row", "old": "            if names[0].strip() in BARE_WORD_SETTLEMENTS:", "new": "            if False:"}
+ {"label": "a settlement named by a type word keeps its place row", "old": "            if names[0].strip() in BARE_WORD_SETTLEMENTS:", "new": "            if False:"},
+ {"label": "a named convent is no office", "old": "WORSHIP_OFFICE_HEADS = {\"pt\": (\"seminario\",)}", "new": "WORSHIP_OFFICE_HEADS = {\"es\": (\"convento\",), \"pt\": (\"convento\", \"seminario\")}"},
+ {"label": "polvorín is no bare type word", "old": "\"es\": (\"hórreo\", \"laberinto\", \"parque lineal\", \"parterre\", \"puente\", \"reloj de sol\",", "new": "\"es\": (\"hórreo\", \"laberinto\", \"parque lineal\", \"parterre\", \"polvorín\", \"puente\", \"reloj de sol\","}
 ]

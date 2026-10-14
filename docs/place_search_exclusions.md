@@ -214,7 +214,10 @@ them; for a place of worship an entry of its own with an article in the city's W
 keeps it too (the cache is read, never asked: `article_lookup_kind` is unchanged);
 `config.PLACE_KEPT`; a station the map draws (the station guard), which is why Amsterdam's
 diversion-only stop "Oranje Nassaulaan" stays. "Church of Christ Presbyterian" and
-"Russian-Ukrainian Seventh Day Adventist Church" keep their rows. A park named for an estate
+"Russian-Ukrainian Seventh Day Adventist Church" keep their rows. A convent under a name of its
+own is a place, not an office (owner, 2026-10-13: "Convento de Santa Teresa"; "convento" is no
+office head), and Mexico City's "El Polvorín" is a proper name ("polvorín" is no bare type word).
+A park named for an estate
 with no facility word stays; a park under a street word or a garden word ("Avenida de Brasil",
 "Jardins de ...", a Paris "Square ...") stays beside the way of its name.
 
