@@ -205,4 +205,23 @@ PLACE_FOLD = None
 PLACE_REVIEWED = {
     "Rue du Magasin à Poudre": "a public street named for a building or institution on it, not a business (tertiary class; batch 2b precedent, _named_street); tags read 2026-10-13",
 }
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/caen.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # Worship named only by a body or a denomination (owner, 2026-10-13)
+    "way/155677465": "'Église Réformée de France': the whole name is the national body's ('Reformed Church of France'), no place or dedication; the French word lists of worship_only do not hold 'réformée'",
+    # A school's or an organisation's ground tagged a park (owner, 2026-10-13)
+    "way/1434177332": "'Scouts et Guides de France (Territoire Basse-Normandie)': the name is the scout association and its regional branch, the operator the same body: its grounds, not a public park",
+    # A description standing in for a name (owner, 2026-10-13)
+    "node/12437436718": "'Ancien souterrain': 'former underground passage': a label on a spot inside the castle, no name",
+    "node/12437436717": "'Ancienne maison médiévale': 'former medieval house': as above, same run of nodes in the castle",
+    "node/12437436719": "'Anciennes forges et écuries': 'former forges and stables': as above",
+    # A glitched name (owner, 2026-10-13)
+    "node/2428836194": "'Temple Gallo-Roman _Fanum': a stray underscore in the name, and 'Roman' for 'romain'; no wikidata, no clean name in another tag",
+    # A duplicate of one object (owner, 2026-10-13)
+    "node/3119272607": "'L'Abbaye aux Hommes': the abbey again, about 80 m from its own row Abbaye aux Hommes (way/155629494, wikidata=Q376932); the leading article kept the two names apart",
+    "way/794839194": "'Vestiges de l'ancienne église Saint-Gilles': the same ruin as Église Saint-Gilles (way/205610832, the same Q3581709 and article), about 10 m away",
+    # A bare type word (owner, 2026-10-13)
+    "node/13076197526": "'Hôtel de Ville': 'town hall' alone, admitted by the abbey's article, at the same point as the abbey's own row (way/155629494)",
+}

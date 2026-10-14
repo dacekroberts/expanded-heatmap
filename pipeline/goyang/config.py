@@ -123,4 +123,53 @@ PLACE_REVIEWED = {
     "청원오피스텔삼거리": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
     "호수공원제2주차장삼거리": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
 }
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/goyang.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A facility of an apartment estate (owner, 2026-10-13)
+    "node/4640268385": "'17단지 테니스장': 'complex 17 tennis court'; description says residents' tennis court (주민 테니스장); mapped as a park",
+    "node/6223247156": "'3단지 중앙 조형물': 'complex 3 central sculpture': an apartment complex's own ornament, tagged historic=monument",
+    "way/469013826": "'무원 1단지 사각정 공동 쉼터': 'Muwon complex 1 pavilion shared rest area': an apartment complex's garden (description says so), mapped as a park",
+    "way/779019527": "'현대밀라트c동 중앙정원': 'Hyundai Millat block C central garden': one apartment block's garden, mapped as a park",
+    "way/468976153": "'5단지 공원': 'complex 5 park' (5단지 공원): named only by an apartment complex number",
+    # A bare type word (owner, 2026-10-13)
+    "way/480574782": "'간이공원': 간이공원 (minor park), a type phrase",
+    "way/472095764": "'저류지': 저류지 (retention basin) mapped as a park",
+    "way/655130560": "'공개공지': 공개공지 (privately owned public open space), a planning term",
+    "way/655205767": "'중앙광장': 중앙광장 (central plaza) alone",
+    "way/655231498": "'중앙광장': 중앙광장 (central plaza) alone",
+    "way/476360782": "'대성전': 대성전: the hall type every Confucian school has; one of seven halls of one school mapped by type only (ways 476360781 to 476360787)",
+    "way/476360781": "'명륜당': 명륜당 (lecture hall), same school, hall type only",
+    "way/476360783": "'동무': 동무 (east shrine hall), same school, hall type only",
+    "way/476360784": "'서무': 서무 (west shrine hall), same school, hall type only",
+    "way/476360786": "'동재': 동재 (east dormitory), same school, hall type only",
+    "way/476360785": "'서재': 서재 (west dormitory), same school, hall type only",
+    "way/476360787": "'전사청': 전사청 (ritual preparation hall), same school, hall type only",
+    "node/10956478581": "'성랑지': 성랑지 (guard post site): the kind of remain, one of four identical rows along the fortress wall",
+    "node/10956478593": "'성랑지': 성랑지: same",
+    "node/10956478598": "'성랑지': 성랑지: same",
+    "node/10956478604": "'성랑지': 성랑지: same",
+    "node/10956478594": "'여장': 여장 (parapet): the kind of remain",
+    # A description standing in for a name (owner, 2026-10-13)
+    "way/469495398": "'공원놀이터 운동기구': 'park playground exercise equipment'",
+    "way/657924524": "'그린스쿨 조성사업': 'green school development project': a works title mapped as a park",
+    "way/655293774": "'ein grüner Garten': 'ein grüner Garten' (German: a green garden) on a place=square; no Korean name",
+    "node/4634856762": "'밤가시초가 안내판': 'Bamgasi thatched house information board': a signboard tagged historic=monument; the house has its own row",
+    "node/4634871337": "'정발산동 주민 안내판': 'Jeongbalsan-dong residents' notice board' tagged historic=monument",
+    # A religious office, hall, school or residence (owner, 2026-10-13)
+    "way/658707970": "'정발산공원 공원관리과': 'Jeongbalsan Park, parks management division': the park office, mapped as a park",
+    # A business (owner, 2026-10-13)
+    "node/6137514839": "'경희 KO ONEW 체육관': 'Kyunghee ... gymnasium' (체육관): a martial arts gym tagged a place of worship, religion=taoist",
+    "way/470470457": "'일산 장례식장': 일산 장례식장 (Ilsan funeral hall) tagged a place of worship",
+    # Worship named only by a body or a denomination (owner, 2026-10-13)
+    "way/959060335": "'예수그리스도 후기성도교회': 'Church of Jesus Christ of Latter-day Saints' alone, the body's name",
+    # A duplicate of one object (owner, 2026-10-13)
+    "node/3149124331": "'봉성암': 봉성암 as place=locality, 9 m from the hermitage's own row (way/1390896601, a place of worship)",
+}
+# Kept by the owner's word, by id (place_index, PLACE_KEPT; owner, 2026-10-13):
+# famous places in the cache that the rules pass over for want of a tag.
+PLACE_KEPT = {
+    "way/32006947": "'일산호수공원', Ilsan Lake Park: a park and attraction with no Wikidata or Wikipedia tag; a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+    "way/32007357": "'서오릉', the Seooreung royal tombs: historic=yes with no Wikidata or Wikipedia tag; a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+}

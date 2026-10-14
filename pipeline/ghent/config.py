@@ -151,4 +151,23 @@ PLACE_FOLD = None
 PLACE_REVIEWED = {
     "Hotel d'Hane-Steenhuyse": "a listed 18th-century town palace (historic=castle, heritage=4, access=yes, Wikipedia): the mansion's historic name, not a hotel business; tags read 2026-10-13",
 }
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/ghent.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A duplicate of one object (owner, 2026-10-13)
+    "way/501797353": "'Borstbeeld van Albert Mechelynck': 'Bust of Albert Mechelynck', an untagged outline at the same point as the statue node 'Albert Mechelynck' (node/5743387245), which carries the wikidata",
+    "way/501448548": "'Heilig-Hartbeeld van Joseph Cornelius': outline at the same point as the statue node 'Heilig-Hartbeeld van J. Cornelius' (node/5637268219), which carries the wikidata: one object, two rows",
+    # A bare type word (owner, 2026-10-13)
+    "way/1274661032": "'Dorpsplein': 'village square', a type",
+    "node/1305702967": "'Lourdesgrot': 'Lourdes grotto', the type of shrine (place_of_worship=lourdes_grotto) and nothing else",
+    "node/10556594152": "'Lourdesgrot': 'Lourdes grotto', the type of shrine and nothing else",
+    # A description standing in for a name (owner, 2026-10-13)
+    "way/1296358417": "'Kelders en ondergrondse tunnel': 'cellars and underground tunnel', a description on historic=ruins",
+    # A business (owner, 2026-10-13)
+    "way/210984965": "'Ensemble vzw': a non-profit's name on a heritage building; the cached note says it only runs the building temporarily, and old_name holds the building's own name",
+    # Worship named only by a body or a denomination (owner, 2026-10-13)
+    "way/793478769": "'Universele': one word of a body's name; the cached description gives it in full (Universal Church of the Kingdom of God), no congregation name",
+    # A facility of an apartment estate (owner, 2026-10-13)
+    "way/962867473": "'Sente Clarenhof': a courtyard garden tagged a park with operator=Syndicus (a residents' co-ownership manager)",
+}

@@ -299,4 +299,32 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/gifu.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A ride or corner of a park (owner, 2026-10-13)
+    "node/4908542287": "'ゴーカート': 'go-kart': a ride of 岐阜ファミリーパーク (way/493158487) mapped as a park node",
+    "node/4908542293": "'サイクルレール': 'cycle rail': a ride of 岐阜ファミリーパーク",
+    "node/4908542285": "'バッテリーカー': 'battery car': a ride of 岐阜ファミリーパーク",
+    "node/4908542292": "'ボブスレー': 'bobsleigh': a ride of 岐阜ファミリーパーク",
+    "node/4908542291": "'スーパーモービル': a ride of 岐阜ファミリーパーク under the ride's product name; same node run as the go-kart and bobsleigh",
+    # A description standing in for a name (owner, 2026-10-13)
+    "node/4908542286": "'スワンボート乗り場': 'swan boat landing': a facility of 岐阜ファミリーパーク",
+    "node/4908542290": "'くものす遊具': 'spider-web play equipment': play equipment of 岐阜ファミリーパーク",
+    "node/4908542289": "'芝すべり': 'grass slide': a slope of 岐阜ファミリーパーク",
+    "node/7234840234": "'芝生の丘': 'lawn hill': a spot inside 岐阜メモリアルセンター (way/466208222)",
+    "way/505742313": "'岐阜市子ども遊び場': 'Gifu City children's playground': the city's class of small playgrounds, no name of its own",
+    # A bare type word (owner, 2026-10-13)
+    "way/547689755": "'グラウンド': 'ground' (sports field) alone; グラウンド is not in the bare type list",
+    "way/630283083": "'子ども広場': 'children's square' alone",
+    # A code beside a type word (owner, 2026-10-13)
+    "way/493156670": "'岐阜市子ども遊び場（三輪南No39-10）': the class name and an inventory number; run by a housing estate's residents' association",
+    "way/493157072": "'岐阜市子ども遊び場（三輪南No39-14）': the class name and an inventory number; run by a residents' association",
+    # Worship named only by a body or a denomination (owner, 2026-10-13)
+    "way/1263674027": "'創価学会 岐阜文化会館': Soka Gakkai and 'Gifu culture hall': a body's name, a city and a hall type (文化会館)",
+    # A duplicate of one object (owner, 2026-10-13)
+    "way/1491726155": "'善超寺 鐘楼': the bell tower of 善超寺 (way/1491727634), about 40 m from the temple's own row",
+    # A religious body's hall or branch tagged a place of worship (ruling 2; owner, 2026-10-13)
+    "way/560501109": "'天理教黒野支部': unsure in the full read, dropped by the owner's ruling 2",
+}

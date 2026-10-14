@@ -527,4 +527,23 @@ PLACE_FOLD = "ja"
 PLACE_REVIEWED = {
     "グリーンパーク前": "a signed junction (highway=traffic_signals) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
 }
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/sagamihara.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A bare type word (owner, 2026-10-13)
+    "way/591113947": "'こども広場': こども広場 (children's plaza), a type phrase with no name",
+    "way/283545769": "'スポーツ 広場': スポーツ 広場 (sports ground), a type phrase with no name",
+    "way/891179023": "'イベント広場': イベント広場 (event plaza), a type phrase with no name",
+    "way/1423590805": "'自主管理広場': 自主管理広場 (self-managed plaza): the planning term for an open space a development's owner must keep, not a name",
+    "way/1424310151": "'自主管理広場': 自主管理広場: same planning term",
+    "way/1425728141": "'自主管理広場': 自主管理広場: same planning term",
+    "node/4841144424": "'道祖神': 道祖神 (roadside guardian stone), the kind of object, with the alternative name 'god'",
+    # A description standing in for a name (owner, 2026-10-13)
+    "node/3787184062": "'お祈りスペース': お祈りスペース (prayer space): a room's label, tagged a place of worship with no religion",
+    # A stock plaza name with no place in it (ruling 5; owner, 2026-10-13)
+    "way/1472195055": "'水の広場': unsure in the full read, dropped by the owner's ruling 5",
+    # A religious body's hall or branch tagged a place of worship (ruling 2; owner, 2026-10-13)
+    "node/1371772863": "'創価学会 相模原文化会館': unsure in the full read, dropped by the owner's ruling 2",
+    "node/1451303273": "'宗教真光 相模原小修験道場': unsure in the full read, dropped by the owner's ruling 2",
+}

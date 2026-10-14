@@ -209,4 +209,37 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/kasukabe.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A bare type word (owner, 2026-10-13)
+    "node/8524592818": "'おみくじ結所': 'fortune-slip tying rack': a fitting of 春日部八幡神社's precinct, not a place of worship",
+    "node/8524592834": "'大絵馬': 'large votive tablet': an object in the same precinct",
+    "node/8524582413": "'絵馬掛け': 'votive-tablet rack' in 春日部八幡神社's precinct",
+    "node/9166975047": "'絵馬掛け': 'votive-tablet rack' in 米島香取神社's precinct",
+    "node/8524582416": "'神輿殿': 'portable-shrine store': a building type, in 春日部八幡神社's precinct",
+    "node/8521153704": "'奥の院': 'inner sanctuary': a part of 春日部八幡神社 named by its type",
+    "way/730780113": "'中庭': 'courtyard' alone (the sixth pass lists 第一中庭 as a code beside a type; the bare word is still in)",
+    # A duplicate of one object (owner, 2026-10-13)
+    "node/9174434929": "'水角神社拝殿': the worship hall of 水角神社 (way/993043308), a few metres from the shrine's own row",
+    "node/9174434930": "'水角神社本殿': the main hall of 水角神社 (way/993043308)",
+    "node/9176209325": "'水角稲荷神社拝殿': the worship hall of 水角稲荷神社 (way/923377476), same point",
+    "node/9176209326": "'水角稲荷神社本殿': the main hall of 水角稲荷神社 (way/923377476), same point",
+    "node/9166974953": "'永沼八幡神社拝殿': the worship hall of 永沼八幡神社 (way/992168816), same point",
+    "node/9166974954": "'永沼八幡神社本殿': the main hall of 永沼八幡神社 (way/992168816)",
+    "node/9166975028": "'米島香取神社拝殿': the worship hall of 米島香取神社 (way/992168836)",
+    "node/9166975029": "'米島香取神社本殿': the main hall of 米島香取神社 (way/992168836), same point",
+    "node/8528762820": "'村社女體神社本殿': the main hall of the shrine whose worship hall is node/8528762819 (村社女體神社拝殿) at the same point",
+    "node/5379769367": "'外谷津第二公園': the same park as way/739462702, named 米島中央公園（外谷津第2公園）, about 15 m away; the names differ (二 against 2, and the bracket), so the name merge did not fold them",
+    # A facility of an apartment estate (owner, 2026-10-13)
+    "way/895624705": "'武里団地内公園': 'park inside Takesato housing estate': the name says inside (団地内), the form the sixth pass rules out; no operator tag",
+    # A facility of a mall (owner, 2026-10-13)
+    "node/7317731440": "'イオンふるさとの森': the Aeon mall's planted strip, brand first and a facility word; the mall reading is from the name and the position, no operator tag",
+    "node/7317731439": "'イオンポケットパーク': the Aeon mall's 'pocket park'; as the row above, about 55 m away",
+    # A building tagged a place (owner, 2026-10-13)
+    "way/268619159": "'埼玉県春日部地方庁舎': a prefectural office building carrying place=city; no neighborhood, and no landmark tag either",
+    # A stock plaza name with no place in it (ruling 5; owner, 2026-10-13)
+    "node/7317731441": "'ふれあい広場': unsure in the full read, dropped by the owner's ruling 5",
+    "way/907675594": "'道具広場': unsure in the full read, dropped by the owner's ruling 5",
+}

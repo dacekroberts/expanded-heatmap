@@ -288,4 +288,54 @@ PLACE_REVIEWED = {
     "北都銀行本店前": "a signed junction (highway=traffic_signals) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
     "日銀秋田支店前": "a signed junction (highway=traffic_signals) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
 }
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/akita.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A description standing in for a name (owner, 2026-10-13)
+    "way/907366896": "'お休み処': 'rest spot', a note on a patch tagged a park, not a name",
+    "way/744099535": "'公園(楢山城南新町)': the word park plus the district in brackets",
+    "way/744099529": "'公園（仁井田本町三丁目１７）': the word park plus a street address in brackets",
+    "way/744094679": "'公園（南浜）': the word park plus the district in brackets",
+    "node/9999304124": "'屋上芝生': 'rooftop lawn', a node tagged a park",
+    "way/461532917": "'東側ポケットパーク': 'east side pocket park', a position and a type beside the station",
+    "way/461532923": "'西側ポケットパーク': 'west side pocket park', a position and a type",
+    "node/7245163612": "'掘削機': 'excavator', an object type on a historic=ruins node",
+    "way/760880602": "'駅前': 'in front of the station', a position tagged a square (at Akita Port station)",
+    # A bare type word (owner, 2026-10-13)
+    "way/966991605": "'展望テラス': 'viewing terrace' tagged a park",
+    "way/763066215": "'団地公園': 'estate park', no district in the name",
+    "way/627367947": "'街区公園': 'block park', the municipal park class alone",
+    "way/461635009": "'第一街区公園': 'No. 1 block park' with no district: the class and a number",
+    "way/629179048": "'第四街区公園': 'No. 4 block park' with no district: the class and a number",
+    "way/753491636": "'河川公園': 'riverside park', a type",
+    "way/766255666": "'河川敷広場': 'riverbed open space', a type",
+    "way/737529011": "'運動広場': 'sports ground' tagged a square",
+    "way/373746779": "'補助陸上競技場': 'auxiliary athletics field', a type; the main stadium beside it has its own row",
+    "way/736812864": "'プロムナード': 'promenade' tagged a park",
+    "way/744097061": "'プロムナード': 'promenade' tagged a park",
+    "way/744097063": "'プロムナード': 'promenade' tagged a park",
+    "way/421212834": "'放水路': 'spillway'; the real name (Fujikura Dam spillway) is only in official_name",
+    "way/739764926": "'神社': 'shrine' alone",
+    "node/7813053662": "'社': 'shrine' (one character); cached description says a small wayside hokora",
+    "node/8058430261": "'氏神様': 'tutelary deity', a type of household or hamlet shrine",
+    "way/737035892": "'霊堂': 'mausoleum hall', a type",
+    "way/587386874": "'霊屋': 'mausoleum', a type",
+    "way/867961795": "'神輿庫': 'portable-shrine storehouse', a type of outbuilding",
+    "way/908806905": "'里宮 拝殿': 'village shrine, worship hall': a building part; Takao Shrine Satomiya (way/908806906) has its own row beside it",
+    "way/813063231": "'御聖堂': 'chapel' alone; it stands beside the Hodono convent (way/813063223)",
+    # A part of a shrine or temple that has its own row (ruling 4; owner, 2026-10-13)
+    "node/7156579206": "'奥宮遥拝所': unsure in the full read, dropped by the owner's ruling 4",
+    # A home (owner, 2026-10-13)
+    "way/843959341": "'屋敷神': 'household shrine' (yashiki-gami): a private house's own shrine, and a type word",
+    "way/846785626": "'屋敷神': 'household shrine': a private house's own shrine, and a type word",
+    "way/862404293": "'屋敷神': 'household shrine': a private house's own shrine, and a type word",
+    "way/864029692": "'屋敷神': 'household shrine': a private house's own shrine, and a type word",
+    "way/864029727": "'屋敷神(稲荷神社)': 'household shrine (Inari shrine)': a private house's own shrine",
+    # Worship named only by a body or a denomination (owner, 2026-10-13)
+    "way/574880259": "'生長の家': named only by the body (Seicho-no-Ie); branch tag says the prefecture's teaching office, a religious office",
+    "way/176596225": "'真如苑': named only by the body (Shinnyo-en)",
+    "way/808982679": "'キリスト集会所': 'Christ meeting hall': a generic name of a body's hall, no place name",
+    # A religious office, hall, school or residence (owner, 2026-10-13)
+    "way/764872642": "'天理教 秋田教務支庁': Tenrikyo's Akita diocesan administration office, not a church",
+}

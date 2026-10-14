@@ -154,4 +154,13 @@ PLACE_FOLD = None
 # The three hotel ruins reviewed on 2026-10-13 lay in the province, outside the
 # department; none is a row since the area was corrected.
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/mendoza.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # Worship named only by a body or a denomination (owner, 2026-10-13)
+    "node/2443028624": "'Iglesia Adventista Séptimo Día': 'Iglesia Adventista Séptimo Día' alone, a denomination (and tagged denomination=jehovahs_witness)",
+    "way/255485266": "'Templo Evangelico Metodista': 'Templo Evangelico Metodista' alone, a denomination",
+    # A religious office, hall, school or residence (owner, 2026-10-13)
+    "node/3639401230": "'Hermanas de Nuestra Señora de la Caridad del Buen Pastor': a congregation of sisters as the name; 10 m from Iglesia El Buen Pastor (node/3724765420), which is the church row",
+}

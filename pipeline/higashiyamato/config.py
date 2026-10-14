@@ -197,4 +197,25 @@ PLACE_FOLD = "ja"
 PLACE_REVIEWED = {
     "昭和記念公園駐車場前": "a signed junction (highway=traffic_signals) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
 }
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/higashiyamato.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A business (owner, 2026-10-13)
+    "way/506484553": "'アニヴェルセル立川': a wedding hall of the Anniversaire chain: the name is the brand and the city; the chain reading is from the name, the tags carry no shop or brand key",
+    # Worship named only by a body or a denomination (owner, 2026-10-13)
+    "way/525342660": "'創価学会立川文化会館': Soka Gakkai and 'Tachikawa culture hall'; same class as Gifu's and Amagasaki's",
+    # A bare type word (owner, 2026-10-13)
+    "way/825386382": "'パブリックスクエア': 'public square' in katakana, one of two squares side by side in a commercial complex north of Tachikawa station; no name of its own",
+    "node/7159800489": "'大広間': 'great hall': garden room B of the same set",
+    # An exhibit, not a place (owner, 2026-10-13)
+    "node/13598142530": "'ダイダラボッチ像': the entry and the article are the folklore giant's, not this statue's; the wikipedia tag admits it as if the article were its own",
+    # A description standing in for a name (owner, 2026-10-13)
+    "node/7159800490": "'エントランス(出会いの間)': one of eight lettered 'rooms' (ref A to H) of one garden beside 昭和天皇記念館, mapped as localities within about 120 m; an entrance, not a place",
+    "node/7159800488": "'花と香りの間': garden room C of the same set",
+    "node/7159800487": "'小さな丘の間': garden room D of the same set",
+    "node/7159800486": "'実りの間': garden room E of the same set",
+    "node/7159800485": "'エクボの間': garden room F of the same set",
+    "node/7159763183": "'シンボルツリーの間': garden room G of the same set",
+    "node/7159763182": "'小さな池の間': garden room H of the same set",
+}

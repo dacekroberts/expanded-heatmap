@@ -244,4 +244,15 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/minoh.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A description standing in for a name (owner, 2026-10-13)
+    "way/82722271": "'支流(1)': 'tributary (1)': a mapper's label for an unnamed culverted stream",
+    "way/82725498": "'支流(2)': 'tributary (2)': a mapper's label for an unnamed stream",
+    "way/82720138": "'箕面川支流': 'tributary of the Minoh river': a description, not the stream's name",
+    "node/11035174641": "'生活環境保全林': 'living-environment conservation forest': a forestry land class mapped as a locality, not a name",
+    # A religious office, hall, school or residence (owner, 2026-10-13)
+    "way/528257270": "'大阪聖ヨゼフ宣教修道女会 本部': headquarters (本部) of a congregation of missionary sisters tagged a place of worship; no wikidata; name is the body's, not a church's",
+}
