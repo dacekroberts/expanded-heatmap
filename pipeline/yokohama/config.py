@@ -294,4 +294,146 @@ PLACE_REVIEWED = {
     "旧東京三菱銀行横浜中央支店": "a former bank branch's historic building (historic=building, disused:amenity=bank, Wikipedia); tags read 2026-10-13",
     "海の公園駐車場": "a signed junction (highway=traffic_signals) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
 }
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/yokohama.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A freight station (owner, 2026-10-13)
+    "node/9216709070": "'横浜羽沢': JR Freight terminal, tagged railway=yard; no passenger service",
+    "node/9235961237": "'本牧埠頭': Kanagawa Rinkai Railway Honmoku line freight station; no public_transport tag, no operator; freight status from the Wikipedia title's subject, not read from a tag",
+    "node/9235961228": "'横浜本牧': Kanagawa Rinkai Railway Honmoku line freight station; no public_transport tag, no operator; freight status from the Wikipedia title's subject, not read from a tag",
+    # A description standing in for a name (owner, 2026-10-13)
+    "node/5500338625": "'ローラー 滑り台': roller slide: play equipment inside こどもの国 tagged place=locality",
+    "way/411854014": "'記念館前広場': plaza in front of the memorial hall, place=square; a position, not a name",
+    "way/1005181974": "'地蔵前': tagged place_of_worship; description says a rest space in front of the sports ground, called 地蔵前 for a Jizo statue",
+    "way/54014079": "'自動車祈祷所': car-blessing station, a facility of a shrine",
+    "node/3281630739": "'創建当時の手水鉢': the washbasin from the founding, a description of an object in a shrine",
+    "node/4549051125": "'レンガ造り井戸遺構': brick well remains, a description",
+    "node/3162356393": "'近代横浜の土木遺構': civil-engineering remains of modern Yokohama, a description",
+    "node/3125367986": "'明治10年代に築造されたレンガ造りマンホールと下水管': a sentence: brick manhole and sewer pipe built in the Meiji 10s",
+    "node/10228274670": "'南無阿弥陀仏': the inscription on a stone (the nembutsu) used as its name; subject:wikidata is the phrase's",
+    "node/4135769751": "'弥生時代竪穴住居跡': Yayoi-period pit-dwelling site, a description",
+    "way/353839010": "'竪穴住居 (古墳時代)': reconstructed pit dwelling (period in brackets) on the 三殿台遺跡 museum site; type plus period",
+    "way/353839017": "'竪穴住居 (弥生時代)': reconstructed pit dwelling (period in brackets) on the 三殿台遺跡 museum site; type plus period",
+    "way/353839027": "'竪穴住居 (縄文時代)': reconstructed pit dwelling (period in brackets) on the 三殿台遺跡 museum site; type plus period",
+    "way/211888263": "'竪穴住居跡保護棟': shelter over the pit-dwelling remains, a description of a museum building",
+    # A bare type word (owner, 2026-10-13)
+    "way/1386119418": "'北門': North Gate of the zoo (よこはま動物園ズーラシア) tagged place=locality",
+    "way/1386119417": "'噴水口': fountain entrance, a gate area of the zoo tagged place=locality",
+    "way/1385476089": "'入口広場': entrance plaza; bare type, sub-area of an unnamed site",
+    "way/1385476088": "'遊具広場': play-equipment plaza; bare type, 33 m from 入口広場",
+    "node/10744697588": "'展望広場': viewing plaza; bare type, one of nine feature nodes around 山田富士公園",
+    "node/13061227467": "'大花壇': big flowerbed, a feature of 里山ガーデン",
+    "way/1189959380": "'子供の遊び場': children's playground, nothing else in the name",
+    "way/544526752": "'休憩広場': rest plaza, nothing else in the name",
+    "way/822449870": "'休憩広場': rest plaza, nothing else in the name",
+    "way/451864744": "'いこいの広場': rest plaza (いこいの広場), generic",
+    "node/4376980455": "'中央広場': central plaza, a node inside こどもの国",
+    "way/919965979": "'三角広場': triangle plaza, shape plus type word",
+    "node/4742515545": "'アスレチック': athletic (obstacle playground), bare type; node in the 若葉台 estate",
+    "way/312561833": "'はらっぱ': open field (はらっぱ), bare type; access=permissive",
+    "way/155090287": "'西口広場': west-exit plaza, beside 玄海田公園; a position word plus the type",
+    "way/718090787": "'野外音楽堂': outdoor music stage inside 横浜国立大学's campus (14 m from its row)",
+    "way/379492148": "'野鳥観察園': bird-watching garden, bare type",
+    "node/8820556564": "'噴水広場': fountain plaza, place=square, bare type",
+    "node/8820556562": "'橋詰広場': bridge-end plaza, place=square, bare type",
+    "way/1251513064": "'サンクンガーデン': sunken garden, place=square, bare type",
+    "node/606299780": "'お稲荷さん': お稲荷さん: the everyday word for any Inari shrine",
+    "way/570400736": "'お稲荷さん': お稲荷さん: the everyday word for any Inari shrine",
+    "node/4401908193": "'不動尊': 不動尊: the deity's title alone, no religion tag",
+    "way/1047766486": "'不動明王': 不動明王: the deity's name alone",
+    "node/5614821891": "'弁財天': 弁財天: the deity's name alone",
+    "node/5353492532": "'馬頭観音': 馬頭観音: a wayside statue type, no religion tag",
+    "node/4323455110": "'観音堂': 観音堂: Kannon hall, type word alone",
+    "node/3591840311": "'聖母像': 聖母像: statue of the Virgin, type word alone; historic=wayside_shrine",
+    "node/10315177065": "'境内社': 境内社: precinct sub-shrine, type word alone",
+    "node/607854159": "'奥宮': 奥宮: inner shrine, type word alone",
+    "way/592971949": "'大殿（本堂）': 大殿（本堂）: main hall, a building of a temple that has its own row",
+    "node/7895797998": "'やぐら': やぐら: the type word for a Kamakura cave tomb",
+    "node/7958450252": "'五輪塔群': 五輪塔群: group of five-ring stupas, type alone",
+    "node/8024058989": "'多宝塔': 多宝塔: pagoda type alone",
+    "node/7927454502": "'社号標': 社号標: shrine name-post, type alone",
+    "node/7965703150": "'永代有縁墓': 永代有縁墓: perpetual communal grave, type alone",
+    "way/411635694": "'転車台': 転車台: turntable, type alone (a second row 国鉄横浜機関区高島車庫転車台 carries a name)",
+    "way/382196925": "'貝塚跡': 貝塚跡: shell-mound site, type alone; fenced, no entry per its note",
+    "node/4030970255": "'横穴墓': 横穴墓: cave tomb, type alone; its note says the entrance was backfilled and nothing shows",
+    # A zoo's zone tagged a place (ruling 8; owner, 2026-10-13)
+    "way/1386119419": "'自然体験林': unsure in the full read, dropped by the owner's ruling 8",
+    "way/1386110713": "'アジアの熱帯林': unsure in the full read, dropped by the owner's ruling 8",
+    "way/1386110720": "'アフリカのサバンナ': unsure in the full read, dropped by the owner's ruling 8",
+    "way/1386110719": "'アフリカの熱帯雨林': unsure in the full read, dropped by the owner's ruling 8",
+    "way/1386110718": "'アマゾンの密林': unsure in the full read, dropped by the owner's ruling 8",
+    "way/1386110714": "'オセアニアの草原': unsure in the full read, dropped by the owner's ruling 8",
+    "way/1386110716": "'中央アジアの高地': unsure in the full read, dropped by the owner's ruling 8",
+    "way/1386110715": "'亜寒帯の森': unsure in the full read, dropped by the owner's ruling 8",
+    "way/1386110717": "'日本の山里': unsure in the full read, dropped by the owner's ruling 8",
+    "node/4819642542": "'牛・羊の牧場': unsure in the full read, dropped by the owner's ruling 8",
+    # A facility of an apartment estate (owner, 2026-10-13)
+    "way/529967377": "'A棟前公園': park in front of Block A, access=no: a housing block's own yard",
+    "way/1002275475": "'ジャンボ公園': description: the park under the apartment block, a nickname inside the 若葉台 estate",
+    # A stock plaza name with no place in it (ruling 5; owner, 2026-10-13)
+    "way/401934612": "'健康はらっぱ': unsure in the full read, dropped by the owner's ruling 5",
+    "way/566058987": "'まちのはらっぱ': unsure in the full read, dropped by the owner's ruling 5",
+    "way/436377439": "'ふれあい広場': unsure in the full read, dropped by the owner's ruling 5",
+    "way/482615135": "'ふれあい広場': unsure in the full read, dropped by the owner's ruling 5",
+    "node/11046749816": "'みどりの広場': unsure in the full read, dropped by the owner's ruling 5",
+    # A business (owner, 2026-10-13)
+    "node/13061209778": "'フォレストアドベンチャー・よこはま': Forest Adventure, a commercial ropes-course brand, tagged leisure=park with opening hours",
+    "way/136169519": "'緑テニスガーデン': tennis club tagged leisure=park, sport=tennis; business status inferred from the name and sport tag, not read from an operator",
+    "node/7137060251": "'ベイバイクポート高島交番横': a Bay Bike share port tagged place=square",
+    "way/253766166": "'アニヴェルセル ヒルズ横浜': Anniversaire, a wedding-hall brand; building=church",
+    "node/7641996794": "'湘和会堂手広': 湘和会堂 is a funeral-hall chain; business status from the chain name, no operator tag",
+    # A facility of a mall (owner, 2026-10-13)
+    "way/340589456": "'ジョイナス彫刻の森公園': rooftop garden of the Joinus mall: level=8, opening_hours, access=permissive",
+    "node/6134577923": "'クイーンズスクエア横浜': Queen's Square Yokohama, a shopping mall, tagged place=square",
+    "node/4742537879": "'ふれあい広場': description: an eating space inside 若葉台ショッピングタウン",
+    # Private fenced land (owner, 2026-10-13)
+    "way/575960803": "'ドコモの広場': access=no, barrier=fence, natural=grassland: a company's fenced lot tagged place=square",
+    # A school's or an organisation's ground tagged a park (owner, 2026-10-13)
+    "way/682390328": "'三保幼稚園グランド': a kindergarten's sports ground tagged leisure=park",
+    "way/693665694": "'慶應義塾大学矢上キャンパス グラウンド': a university campus sports ground tagged leisure=park",
+    # Worship named only by a body or a denomination (owner, 2026-10-13)
+    "node/2264281995": "'救世軍': named only The Salvation Army",
+    "node/3110465448": "'末日聖徒 イエス・キリスト教会': named only by the denomination (LDS church), two rows 12 km apart",
+    "node/4257392913": "'末日聖徒 イエス・キリスト教会': named only by the denomination (LDS church), two rows 12 km apart",
+    # A religious office, hall, school or residence (owner, 2026-10-13)
+    "node/1791225855": "'アルペなんみんセンター': a refugee support centre (Arrupe) tagged place_of_worship",
+    "way/1395251840": "'創価学会 港南文化会館': a Soka Gakkai culture hall (文化会館)",
+    "node/14021361319": "'祠 伏見稲荷大社講務本庁扱所': name reads small shrine + Fushimi Inari lecture-office handling point",
+    # A glitched name (owner, 2026-10-13)
+    "node/5047803357": "'不動尊󠄂': 不動尊 with a variation selector glued on (U+E0102); note says the name was guessed from the torii",
+    # A part of a shrine or temple that has its own row (ruling 4; owner, 2026-10-13)
+    "way/34547350": "'舞殿': unsure in the full read, dropped by the owner's ruling 4",
+    "way/34582197": "'齋館': unsure in the full read, dropped by the owner's ruling 4",
+    "way/684563337": "'祖霊社': unsure in the full read, dropped by the owner's ruling 4",
+    # A deity's title alone (ruling 3; owner, 2026-10-13)
+    "way/1432001415": "'猿田彦神・猿田毘古神': unsure in the full read, dropped by the owner's ruling 3",
+    # A religious body's hall or branch tagged a place of worship (ruling 2; owner, 2026-10-13)
+    "way/853374064": "'浄光寺 西谷千丸台会館': unsure in the full read, dropped by the owner's ruling 2",
+    # A duplicate of one object (owner, 2026-10-13)
+    "way/467970071": "'横穴墓': 横穴墓: type word alone, about 35 m from the row 宮ノ前横穴墓群 (node/7740692035), whose article its wikidata Q97613655 names",
+    "way/282460558": "'万騎ヶ原第十公園': 21 m from 万騎が原第十公園 (way/282460581), same park, ヶ/が spelling",
+    "way/89559575": "'横浜媽祖廟': 9 m from 媽祖廟 (way/47883239, the row with wikidata); the same temple",
+    "node/5246704074": "'杉山神社': 0 m from 中山杉山神社 (way/248177452); the same shrine as a node",
+    "way/381661096": "'元町公園 ベーリックホール': 0 m from ベーリックホール (way/381661095, tourism=attraction with wikidata); the same building tagged a park",
+    "node/1420813557": "'横浜三渓園': about 40 m from 三溪園 (way/312888383), same wikidata Q4249885; a 2006 register point tagged museum",
+    "way/453730067": "'日本基督教団鎌倉教会会堂': 22 m from 日本基督教団鎌倉教会 (way/704515208); the church building beside the church's own row",
+    "way/304571245": "'横浜栄養専門学校 第二校舎': second building of 横浜栄養専門学校, 89 m from its row (node/3098676837), same wikidata Q60986236",
+    # An exhibit, not a place (owner, 2026-10-13)
+    "way/504387758": "'横浜市電1156号': preserved tram car in a park, historic=train, no wikidata; the exhibit rule lists locomotive and railway_car but not train",
+    "way/312883210": "'蒸気機関車D51 516号機': preserved steam locomotive in a park, historic=train, no wikidata; same gap in the exhibit rule",
+    # One bay labeled many times (ruling 9; owner, 2026-10-13)
+    "node/5780338763": "'横浜港': unsure in the full read, dropped by the owner's ruling 9",
+    "node/5780338764": "'横浜港': unsure in the full read, dropped by the owner's ruling 9",
+    "node/5780338765": "'横浜港': unsure in the full read, dropped by the owner's ruling 9",
+    "node/5780338766": "'横浜港': unsure in the full read, dropped by the owner's ruling 9",
+    "node/5780366418": "'横浜港': unsure in the full read, dropped by the owner's ruling 9",
+    "node/5780366419": "'横浜港': unsure in the full read, dropped by the owner's ruling 9",
+    "node/5780366420": "'横浜港': unsure in the full read, dropped by the owner's ruling 9",
+}
+# Kept by the owner's word, by id (place_index, PLACE_KEPT; owner, 2026-10-13):
+# famous places in the cache that the rules pass over for want of a tag.
+PLACE_KEPT = {
+    "way/84830302": "'横浜港大さん橋国際客船ターミナル', Osanbashi pier: tagged a ferry terminal only; a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+    "way/138101264": "'日本丸', the sail training ship Nippon Maru: historic=ship with no Wikidata or Wikipedia tag; a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+}

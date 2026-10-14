@@ -268,4 +268,69 @@ PLACE_FOLD = "ja"
 PLACE_REVIEWED = {
     "摩耶観光ホテル跡": "the ruins of the Maya Kanko Hotel (historic=archaeological_site, Wikipedia), a historic site (the Kyoto precedent); tags read 2026-10-13",
 }
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/kobe.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A freight station (owner, 2026-10-13)
+    "node/12973629790": "'神戸貨物ターミナル': JR Freight terminal (operator 日本貨物鉄道), no passenger service",
+    # A duplicate of one object (owner, 2026-10-13)
+    "node/9773914626": "'新開地': second row of Shinkaichi station, 148 m from node/823218395 which carries the wikidata",
+    "way/1088384269": "'日本基智教団 鷹取教会': misspelt twin (基智 for 基督) of node/6829609287, 10 m away",
+    # An exhibit, not a place (owner, 2026-10-13)
+    "node/11397131007": "'0系新幹線': a train type on a node, historic=railway, no wikidata; the exhibit rule lists locomotive and railway_car but not this value",
+    "node/11397131008": "'こだま151系': a train type on a node, historic=railway, no wikidata; 10 m from the 0系 row",
+    # A description standing in for a name (owner, 2026-10-13)
+    "way/469257549": "'イベント広場': 'event plaza', a use not a name",
+    "way/737065008": "'北エントランス': 'north entrance' of a park, tagged a park",
+    "way/737065103": "'南エントランス': 'south entrance' of the same park",
+    "node/8481218360": "'ネットのオブジェ': 'net object', a note about play equipment",
+    "node/13946671192": "'お堂(道祖神)': 'small hall (dosojin)', a description with the type in brackets",
+    "way/380399422": "'サブ球場': 'sub ground'; the real name is only in name:en",
+    "way/98624012": "'チャペル ５号館': 'chapel, building 5': a campus building label",
+    "way/443981255": "'チャペル（8号館）': 'chapel (building 8)': a campus building label",
+    "way/1383793623": "'天端の石敷き': 'stone paving at the top edge', a part of the Maiko battery site (way/1383793624 is the site row)",
+    "way/643050720": "'扇型広場': 'fan-shaped plaza', a feature of the Kobe Design University campus",
+    "way/704482271": "'新館広場': 'new building plaza', a feature of the same campus",
+    "node/6499080522": "'神戸にある教会': 'a church in Kobe'",
+    "node/9495158513": "'神様を祀っている小さな社': 'a small shrine enshrining a god'",
+    "way/505705256": "'裏庭': 'back yard'",
+    # A bare type word (owner, 2026-10-13)
+    "relation/4853874": "'テニスコート': 'tennis courts' tagged a park",
+    "way/354710811": "'プレイロット': 'play lot' alone",
+    "way/558526642": "'小公園': 'small park' alone",
+    "way/1380465279": "'本殿兼拝殿': 'main hall and worship hall' alone",
+    "way/1380489356": "'梵鐘': 'temple bell' alone",
+    "way/1380473102": "'舞台': 'stage' alone, a shrine outbuilding",
+    "way/1144239935": "'緑地公園': 'green-space park' alone",
+    "node/10206729919": "'防火水そう': 'fire cistern' alone, tagged an archaeological site",
+    # A hall named only for what it enshrines (ruling 3; owner, 2026-10-13)
+    "node/6894974387": "'地蔵堂': unsure in the full read, dropped by the owner's ruling 3",
+    "node/6481934018": "'薬師堂': unsure in the full read, dropped by the owner's ruling 3",
+    "node/6815171018": "'薬師堂': unsure in the full read, dropped by the owner's ruling 3",
+    "node/6888610289": "'薬師堂': unsure in the full read, dropped by the owner's ruling 3",
+    # A deity's title alone (ruling 3; owner, 2026-10-13)
+    "way/737065092": "'大明神': unsure in the full read, dropped by the owner's ruling 3",
+    # A business (owner, 2026-10-13)
+    "node/10148511251": "'メトロ卓球場': underground table tennis hall tagged a stadium",
+    # A religious office, hall, school or residence (owner, 2026-10-13)
+    "way/463575054": "'天理教 兵庫教務支庁': Tenrikyo diocese administration office",
+    "node/6817059689": "'日本基督教団 兵庫教区事務所': United Church of Christ district office",
+    # A religious body's hall or branch tagged a place of worship (ruling 2; owner, 2026-10-13)
+    "way/1479677990": "'創価学会長田文化会館': unsure in the full read, dropped by the owner's ruling 2",
+    # Worship named only by a body or a denomination (owner, 2026-10-13)
+    "way/1360922055": "'崇教真光': named only by the religious body",
+    "way/897798962": "'霊法会': named only by the religious body",
+    # A stock plaza name with no place in it (ruling 5; owner, 2026-10-13)
+    "way/780107853": "'交流広場': unsure in the full read, dropped by the owner's ruling 5",
+    # A facility of an apartment estate (owner, 2026-10-13)
+    "way/660140480": "'市営青木南住宅集会所': a municipal housing block's meeting hall tagged a park",
+    # A facility of an estate named "inside the estate" (owner, 2026-10-13)
+    "way/733806683": "'落合団地内公園': unsure in the full read, dropped by the owner's ruling on estate facilities",
+    # A closed station's platform (owner, 2026-10-13)
+    "way/397791466": "'（廃駅）菊水山駅 新開地方面ホーム': platform of the closed Kikusuiyama station, access=no, name prefixed (廃駅)",
+    "way/397791467": "'（廃駅）菊水山駅 有馬温泉･三田･粟生方面ホーム': other platform of the same closed station",
+    # A part of a shrine with no row of its own, its worship hall kept (ruling 4; owner, 2026-10-13)
+    "way/1380474588": "'六條八幡宮 本殿': unsure in the full read, dropped by the owner's ruling 4",
+    "way/1380475293": "'六條八幡宮 薬師堂': unsure in the full read, dropped by the owner's ruling 4",
+}

@@ -279,4 +279,35 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/sapporo.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A duplicate of one object (owner, 2026-10-13)
+    "node/10255638451": "'さっぽろ': Toho line platform node of the one Sapporo subway station; 264 m from the kept row node/7805229113 (ref=N06, wikidata). Odori, the other interchange, has one row",
+    "node/6215959869": "'北海道神宮神門': the shrine's gate; 90 m from 北海道神宮 way/146432491",
+    "way/167925849": "'浄恩寺山門': the temple's gate; 61 m from 浄恩寺 way/356345534",
+    "way/986952884": "'札幌伏見稲荷神社手水舎': the shrine's hand-washing pavilion; 22 m from 札幌伏見稲荷神社 node/3887704767",
+    "node/14272694860": "'札幌市時計台の時計装置': the clock mechanism inside the Clock Tower; 8 m from 札幌市時計台 way/64747104",
+    "node/1802776888": "'富丘東公園 (Tomioka Higashi Park)': 8 m from 富丘東公園 way/169107025; the English name is glued into name",
+    # A business (owner, 2026-10-13)
+    "node/3594110793": "'やわらぎ斎場西町': a funeral hall (斎場) of a funeral company chain, tagged worship",
+    "node/6248253197": "'アールベルアンジェ札幌ラ・ベール教会': wedding chapel; the description tag says so",
+    # A religious office, hall, school or residence (owner, 2026-10-13)
+    "way/384480134": "'新健康協会 札幌支部': branch office (支部) of a body, named body plus branch",
+    "node/1224740865": "'北海道聖書学院(HBI)': a bible college (聖書学院), religious education tagged worship",
+    # Worship named only by a body or a denomination (owner, 2026-10-13)
+    "node/5114010199": "'日本イエス・キリスト教団': name is the denomination alone; the church's own name sits in branch=",
+    "node/4292081805": "'霊波の光': name is the religious body alone, no branch name",
+    # A description standing in for a name (owner, 2026-10-13)
+    "node/9122650387": "'願い石': a wishing stone inside 札幌伏見稲荷神社 (same spot as its 手水舎); an object type, not a place of worship",
+    "node/12021852774": "'古いお札・お守り納所': the drop-off point for old charms inside 北海道神宮",
+    "node/12021740377": "'祈祷受付': the prayer reception desk inside 北海道神宮",
+    # A bare type word (owner, 2026-10-13)
+    "way/862352652": "'サイロ': whole name is the type word (silo); an exhibit building of 北海道開拓の村",
+    "way/472423524": "'野球場': whole name is the type word (baseball field)",
+    # A religious body's hall or branch tagged a place of worship (ruling 2; owner, 2026-10-13)
+    "node/8919328977": "'アレフ 札幌白石施設': unsure in the full read, dropped by the owner's ruling 2",
+    # A deity's title alone (ruling 3; owner, 2026-10-13)
+    "node/6736613331": "'馬頭観世音': unsure in the full read, dropped by the owner's ruling 3",
+}

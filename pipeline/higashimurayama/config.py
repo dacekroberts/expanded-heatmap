@@ -228,4 +228,12 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/higashimurayama.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A religious office, hall, school or residence (owner, 2026-10-13)
+    "node/9923691123": "'東京聖書学院': a seminary tagged a place of worship, no wikidata on the object",
+    # A part of a shrine or temple that has its own row (ruling 4; owner, 2026-10-13)
+    "way/451506760": "'正福寺本堂': unsure in the full read, dropped by the owner's ruling 4",
+}

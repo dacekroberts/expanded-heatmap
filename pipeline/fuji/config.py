@@ -299,4 +299,14 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/fuji.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A description standing in for a name (owner, 2026-10-13)
+    "way/1272406197": "'Old electric locomotives and cars': an English description of rolling stock on display, tagged a monument; no wikidata",
+    # A bare type word (owner, 2026-10-13)
+    "way/1208746160": "'児童遊び場': 'children's play area' alone",
+    # A duplicate of one object (owner, 2026-10-13)
+    "way/445137992": "'石坂川(暗渠)': the culverted section of 石坂川 (way/445137991, about 600 m upstream), named with '(culvert)' in brackets",
+}
