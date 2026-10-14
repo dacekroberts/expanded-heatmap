@@ -428,6 +428,9 @@ PLACE_DROPPED = {
     # The pattern screen of 2026-10-13, the owner's rulings on its open calls: rows that fall squarely in one of the owner's
     # class rulings of that date, each with its ruling.
     "way/719011797": "'Village Green', a park named only by a type word (owner, 2026-10-13, on the pattern screen's open calls)",
+    # The helper screens of 2026-10-13 (duplicates, parts in a church's grounds): rows that
+    # fall squarely in an owner ruling, each with its ruling.
+    "node/3950323926": "'Kilmainham Jail Museum', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): the museum point of Kilmainham Gaol, 34 m from the gaol's own row (way/41662413, alt name Kilmainham Jail), under the same Wikidata entry (Q1049842) and the same article: one sight twice",
 }
 
 # Places of worship kept by the owner's word against the denomination rule
@@ -435,4 +438,12 @@ PLACE_DROPPED = {
 PLACE_KEPT = {
     "way/230568525": "'Unitarian Church', the St Stephen's Green church (denomination=unitarian, building=church, heritage=4, no wikidata or wikipedia tag): a known building under its denomination's name (owner, 2026-10-13)",
     "relation/289528": "'General Post Office', one of the city's best-known sights, in the cache with no row (tourism=attraction, building=retail, wikidata=Q1339254 and its own article; held out by the rules all the same): a famous place the rules pass over (owner, 2026-10-13; pattern screen)",
+    "relation/4547344": "'Custom House', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/332211029": "'Forty Foot', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/1740224383": "'Gaelic Athletic Association Museum', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/9683454002": "'Guinness Brewery Gate', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/660711306": "'Liberty Hall Theatre', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/1418111967": "'National Museum of Ireland, Collins Barracks', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/109491574": "'Papal Cross', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/661187320": "'Richmond Barracks', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
 }

@@ -272,7 +272,6 @@ PLACE_FOLD = None
 #   node/4773740642 '1100 Wilshire': tourism=attraction with a Wikidata entry and no home tag
 #   way/414615365 'Villa Aurora': an article of its own in three languages (Wikidata lookup, 2026-10-13) and an institution's website on the object: a cultural monument, no private home by its tags
 PLACE_REVIEWED = {
-    "Fire Station No. 30, Engine Company No. 30": "a registered historic fire station with its own article",
     "Hotel Rosslyn": "a historic building with its own article, not a trading hotel",
     "Ralphs Grocery Store": "a registered historic building with its own article",
     "The Jim Henson Company Lot": "a historic studio lot with its own article",
@@ -738,6 +737,16 @@ PLACE_DROPPED = {
     # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
     # class rulings of that date, each with its ruling.
     "node/358850323": "'Immaculate Conception Parish Center', a part of one church as its own row, the church's own row within 300 m (owner, 2026-10-13, ruling 4; pattern screen)",
+    # The helper screens of 2026-10-13 (duplicates, parts in a church's grounds): rows that
+    # fall squarely in an owner ruling, each with its ruling.
+    "node/369164732": "'La Brea Tar Pits', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): a point 66 m from the row La Brea Tar Pits and Museum (way/913293610) under the same Wikidata entry (Q1147168); the way carries the article tag and its name contains this one, so no search is lost",
+    "relation/15768202": "'Historic Filipinotown', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): the historic district as a landmark row, 90 m from the place row Historic Filipinotown (node/10841306582): same name, same Wikidata entry (Q3138354), same article; one neighbourhood twice, the place row is the one to keep",
+    "node/2832811432": "'Fire Station No. 30, Engine Company No. 30', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): a point at the same spot (0 m) as the row African American Firefighter Museum (way/428152638), same Wikidata entry (Q5451472) and same article; its historic tag is a broken value (museu); one building twice. The station's name goes with it (the museum row has no alt name)",
+    "node/4213558285": "'El Pueblo de Los Angeles Historical Monument', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): a point 71 m from the place row Pueblo de Los Angeles Historical Monument (relation/18114621), same Wikidata entry (Q6682294) and the same name bar the article; the relation is the whole district; neither has an article tag",
+    # The helper screens of 2026-10-13 (duplicates, parts in a church's grounds): rows that
+    # fall squarely in an owner ruling, each with its ruling.
+    "relation/7014295": "'University Library Lawn', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13, the class ruled in Melbourne; helper screen): a campus lawn tagged a park (the note tag gives its former name, the Oviatt Lawn), 77 m from the row University Library (relation/6427398); no place in the name; recommend drop",
+    "node/2632851990": "'President's Garden', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13, the class ruled in Melbourne; helper screen): a garden point on the Occidental College campus tagged a park, 133 m from the college's row (way/439655732); a stock name and no other tag; recommend drop",
 }
 
 # Public art kept by the owner's word against the article rule (place_index,
@@ -749,4 +758,5 @@ PLACE_KEPT = {
     # owner, 2026-10-13: "keep all four by id").
     "node/358828101": "'The Church of Jesus Christ of Latter-day Saints', the Wilshire Ward chapel (alt_name=Wilshire Ward, wikidata=Q8022900, an entry of its own and no wikipedia tag): a known building under its denomination's name (owner, 2026-10-13)",
     "way/438331516": "'The Queen Mary', one of the city's best-known sights, in the cache with no row (tourism=hotel, historic=ship, wikidata=Q752939; held out as a hotel): a famous place the rules pass over (owner, 2026-10-13; pattern screen)",
+    "way/419974642": "'Skirball Cultural Center', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
 }

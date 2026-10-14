@@ -259,4 +259,7 @@ PLACE_DROPPED = {
 # PLACE_KEPT; owner, 2026-10-13).
 PLACE_KEPT = {
     "node/12496037807": "'Tate Liverpool', one of the city's best-known sights, in the cache with no row (tourism=gallery, no wikidata or wikipedia tag): a famous place the rules pass over (owner, 2026-10-13; pattern screen)",
+    "node/4112789484": "'Another Place', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/4541388783": "'Open Eye Gallery', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/348160621": "'The Bluecoat', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
 }

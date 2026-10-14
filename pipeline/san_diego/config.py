@@ -784,4 +784,7 @@ PLACE_DROPPED = {
     "node/358845480": "'Saint Johns Catholic Church Parish Hall', a part of one church as its own row, the church's own row within 300 m (owner, 2026-10-13, ruling 4; helper screen): a parish hall tagged a place of worship; its church Saint John the Evangelist Catholic Church has a row of its own 200 m away (way/1220548890), which the first screen's note did not find (it kept the hall for want of one)",
     "node/358860851": "'Iglesia Presbiteriana', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): 14 m from Iglesia Presbiteriana Hispana (node/358845978): the same congregation, and this copy's name is a denomination alone",
     "node/358846679": "'Mounta Olive Church of God in Christ', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): 85 m from Mount Olive Church of God in Christ (node/358860279): the same church under a misspelt name",
+    # The pattern screen of 2026-10-13, the wave 1 twin check: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "node/6548523724": "'Aztec Center', a bare monument node carrying only the student union's name, amid the dropped campus paths of that name: the campus body's own feature under its own name (owner, 2026-10-13; the wave 1 twin check)",
 }

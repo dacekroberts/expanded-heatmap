@@ -410,4 +410,21 @@ PLACE_DROPPED = {
     # class rulings of that date, each with its ruling.
     "way/478357009": "'Orchards Residents Association Park', a residents' association's own park by its name (owner, 2026-10-13, on the pattern screen's open calls: the estate-facility ruling)",
     "way/1113191734": "'East Lawn', a stock name with no place in it (owner, 2026-10-13, on the pattern screen's open calls: ruling 5)",
+    # The helper screens of 2026-10-13 (duplicates, parts in a church's grounds): rows that
+    # fall squarely in an owner ruling, each with its ruling.
+    "way/217654799": "'Engineering Quad', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13, the class ruled in Melbourne; helper screen): a University of Alberta campus quad tagged leisure=park (operator the university), named by a faculty and a type only; the rules already leave out the campus's Main Quad (way/51065510); recommend drop (Corbett Quad and Rutherford Quad carry a person's name and stay)",
+    "way/51065522": "'Arts/Business Quad', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13, the class ruled in Melbourne; helper screen): a University of Alberta campus quad tagged leisure=park (operator the university), named by two faculties and a type only; recommend drop, as Engineering Quad",
+    # The pattern screen of 2026-10-13, the wave 1 twin check: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "node/13529947385": "'1905 Street', the second stop position of a paid living-history park's ride, the twin of node/13529947384: not transit (owner, 2026-10-13; the wave 1 twin check)",
+}
+
+# Public sights kept by id: in the cache, passed over by the rules (place_index,
+# PLACE_KEPT; owner, 2026-10-13).
+PLACE_KEPT = {
+    "way/156535044": "'John Janzen Nature Centre', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/226584734": "'John Walter Museum', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/632192116": "'Legislative Assembly Interpretive Centre', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/169998562": "'MacEwan University City Centre Campus', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/4263896991": "'Neon Sign Museum', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
 }

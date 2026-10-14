@@ -166,4 +166,28 @@ PLACE_DROPPED = {
     # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
     # class rulings of that date, each with its ruling.
     "node/13788625447": "'Flagpole Plaza', a stock plaza or square name with no place in it (owner, 2026-10-13, ruling 5 and its follow-up: every plaza name with no place in it; pattern screen)",
+    # The Midtown Greenway's street bridges, each a row under the greenway's own Wikidata
+    # entry (Q6843083): one object labelled many times; the greenway's row
+    # (relation/20711846) stays (owner, 2026-10-13, on the helper screen's call).
+    "way/715627914": "'10th Avenue Bridge', a street bridge over the Midtown Greenway under the greenway's entry Q6843083: one object labelled many times (owner, 2026-10-13)",
+    "way/715627915": "'11th Avenue Bridge', a street bridge over the Midtown Greenway under the greenway's entry Q6843083: one object labelled many times (owner, 2026-10-13)",
+    "way/715627916": "'12th Avenue Bridge', a street bridge over the Midtown Greenway under the greenway's entry Q6843083: one object labelled many times (owner, 2026-10-13)",
+    "way/715627917": "'13th Avenue Bridge', a street bridge over the Midtown Greenway under the greenway's entry Q6843083: one object labelled many times (owner, 2026-10-13)",
+    "way/715627918": "'14th Avenue Bridge', a street bridge over the Midtown Greenway under the greenway's entry Q6843083: one object labelled many times (owner, 2026-10-13)",
+    "way/715627919": "'15th Avenue Bridge', a street bridge over the Midtown Greenway under the greenway's entry Q6843083: one object labelled many times (owner, 2026-10-13)",
+    "way/715627921": "'16th Avenue Bridge', a street bridge over the Midtown Greenway under the greenway's entry Q6843083: one object labelled many times (owner, 2026-10-13)",
+    "way/715627922": "'17th Avenue Bridge', a street bridge over the Midtown Greenway under the greenway's entry Q6843083: one object labelled many times (owner, 2026-10-13)",
+    "way/715627923": "'18th Avenue Bridge', a street bridge over the Midtown Greenway under the greenway's entry Q6843083: one object labelled many times (owner, 2026-10-13)",
+    "way/715627904": "'1st Avenue Bridge', a street bridge over the Midtown Greenway under the greenway's entry Q6843083: one object labelled many times (owner, 2026-10-13)",
+    "way/715627894": "'Aldrich Avenue Bridge', a street bridge over the Midtown Greenway under the greenway's entry Q6843083: one object labelled many times (owner, 2026-10-13)",
+    "way/715627920": "'Bloomington Avenue Bridge', a street bridge over the Midtown Greenway under the greenway's entry Q6843083: one object labelled many times (owner, 2026-10-13)",
+    "way/715627892": "'Colfax Avenue Bridge', a street bridge over the Midtown Greenway under the greenway's entry Q6843083: one object labelled many times (owner, 2026-10-13)",
+    "way/715627911": "'Columbus Avenue Bridge', a street bridge over the Midtown Greenway under the greenway's entry Q6843083: one object labelled many times (owner, 2026-10-13)",
+    "way/715627898": "'Grand Avenue Bridge', a street bridge over the Midtown Greenway under the greenway's entry Q6843083: one object labelled many times (owner, 2026-10-13)",
+    "way/715627897": "'Harriet Avenue Bridge', a street bridge over the Midtown Greenway under the greenway's entry Q6843083: one object labelled many times (owner, 2026-10-13)",
+    "way/715627903": "'Nicollet Avenue Bridge', a street bridge over the Midtown Greenway under the greenway's entry Q6843083: one object labelled many times (owner, 2026-10-13)",
+    "way/715627909": "'Oakland Avenue Bridge', a street bridge over the Midtown Greenway under the greenway's entry Q6843083: one object labelled many times (owner, 2026-10-13)",
+    "way/715627900": "'Pillsbury Avenue Bridge', a street bridge over the Midtown Greenway under the greenway's entry Q6843083: one object labelled many times (owner, 2026-10-13)",
+    "way/715627899": "'Pleasant Avenue Bridge', a street bridge over the Midtown Greenway under the greenway's entry Q6843083: one object labelled many times (owner, 2026-10-13)",
+    "way/715627905": "'Stevens Avenue Bridge', a street bridge over the Midtown Greenway under the greenway's entry Q6843083: one object labelled many times (owner, 2026-10-13)",
 }

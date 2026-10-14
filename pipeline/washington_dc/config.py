@@ -484,4 +484,5 @@ PLACE_DROPPED = {
 # PLACE_KEPT; owner, 2026-10-13). Each is a known work the Wikidata lookup
 # cannot admit; DECISIONS.md of that date lists the works left out.
 PLACE_KEPT = {
+    "way/66418953": "'U.S. National Archives', owner, 2026-10-13: a famous place the rules pass over; held out because its Wikidata entry equals its operator's",
 }

@@ -782,4 +782,5 @@ PLACE_KEPT = {
     "node/2727025839": "'Balto', a known work the article rule drops for want of an article of its own (owner, 2026-10-13)",
     "node/7826843768": "'Patience', a known work the article rule drops for want of an article of its own (owner, 2026-10-13)",
     "node/7826843767": "'Fortitude', a known work the article rule drops for want of an article of its own (owner, 2026-10-13)",
+    "way/280571506": "'Museum of the Moving Image', a museum with no row: its point (node/368061644) was dropped by id as a duplicate and this outline is not a row by the rules; kept so the museum is found (owner, 2026-10-13, relayed by Cleanup)",
 }

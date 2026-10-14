@@ -238,12 +238,12 @@ PLACE_DROPPED = {
     "way/431231415": "'Olive Garden', a private way the private-street rule did not reach",
     "way/460418570": "'Olive Garden', a private way the private-street rule did not reach",
     "way/460418571": "'Olive Garden', a private way the private-street rule did not reach",
-    "way/156937672": "'Terraces on Memorial', a home: an apartment complex's own feature",
-    "way/258186241": "'Terraces on Memorial', a home: an apartment complex's own feature",
-    "way/258186242": "'Terraces on Memorial', a home: an apartment complex's own feature",
-    "way/258186243": "'Terraces on Memorial', a home: an apartment complex's own feature",
-    "way/481943538": "'Terraces on Memorial', a home: an apartment complex's own feature",
-    "way/481943539": "'Terraces on Memorial', a home: an apartment complex's own feature",
+    "way/156937672": "'Terraces on Memorial', a home: a gated subdivision's private streets (its outline way/626738334 is tagged residential=single_family; the neighbourhood's own place node stays a row)",
+    "way/258186241": "'Terraces on Memorial', a home: a gated subdivision's private streets (its outline way/626738334 is tagged residential=single_family; the neighbourhood's own place node stays a row)",
+    "way/258186242": "'Terraces on Memorial', a home: a gated subdivision's private streets (its outline way/626738334 is tagged residential=single_family; the neighbourhood's own place node stays a row)",
+    "way/258186243": "'Terraces on Memorial', a home: a gated subdivision's private streets (its outline way/626738334 is tagged residential=single_family; the neighbourhood's own place node stays a row)",
+    "way/481943538": "'Terraces on Memorial', a home: a gated subdivision's private streets (its outline way/626738334 is tagged residential=single_family; the neighbourhood's own place node stays a row)",
+    "way/481943539": "'Terraces on Memorial', a home: a gated subdivision's private streets (its outline way/626738334 is tagged residential=single_family; the neighbourhood's own place node stays a row)",
     "way/21871010": "'Champion Rod and Gun Club Road', a business's own way, named for the business",
     "way/15368123": "'San Jacinto College One Boulevard', an institution's own way, named for it",
     "way/15290865": "'East Rent Car Road', a description standing in for a name (owner, 2026-10-13)",
@@ -304,6 +304,13 @@ PLACE_DROPPED = {
     "way/672940015": "'Sherwood Trals Pool', a subdivision's pool tagged a park (owner, 2026-10-13, on the pattern screen's open calls: the estate-facility ruling)",
     "way/665973718": "'Southwest Crossing Community Pool', a subdivision's pool tagged a park (owner, 2026-10-13, on the pattern screen's open calls: the estate-facility ruling)",
     "way/672198879": "'Elm Grove Community Center & Pool Complex', a subdivision's pool tagged a park (owner, 2026-10-13, on the pattern screen's open calls: the estate-facility ruling)",
+    # The helper screens of 2026-10-13 (duplicates, parts in a church's grounds): rows that
+    # fall squarely in an owner ruling, each with its ruling.
+    "way/543779024": "'Central Quadrangle', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13, the class ruled in Melbourne; helper screen): a quad on the Rice University campus tagged a park, named by position and type only, no other tag; recommend drop",
+    "way/543427276": "'Graduate Student Commons', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13, the class ruled in Melbourne; helper screen): a commons on the Rice University campus tagged a park, no place in the name, no other tag; recommend drop",
+    "way/543427272": "'Academic Quadrangle', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13, the class ruled in Melbourne; helper screen): Rice's main quad tagged a park; the name has no place in it but the alt name (Rice Academic Quad) does; recommend drop, a keep is defensible on the alt name",
+    "way/543427274": "'Engineering Quadrangle', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13, the class ruled in Melbourne; helper screen): a Rice quad tagged a park; the name has no place in it but the alt name (Rice Engineering Quad) does; recommend drop, a keep is defensible on the alt name",
+    "way/543427275": "'Rice Physics Quad', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13, the class ruled in Melbourne; helper screen): a Rice quad tagged a park and named by department, no other tag, 34 m from the school's own row; the campus name is in it, but it is the class Melbourne's config drops by the owner's word (a campus lawn or court named for a building or by function); recommend drop",
 }
 
 # Public art kept by the owner's word against the article rule (place_index,
@@ -311,4 +318,9 @@ PLACE_DROPPED = {
 # cannot admit; DECISIONS.md of that date lists the works left out.
 PLACE_KEPT = {
     "way/1393576367": "'Broken Obelisk', a known work the article rule drops for want of an article of its own (owner, 2026-10-13)",
+    "way/434295606": "'Harris County Heritage Society Museum', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/368164895": "'Museum of Printing History', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/43023428": "'POST Houston', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/10983985806": "'Project Row Houses', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/1059226634": "'Rienzi', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
 }

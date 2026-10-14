@@ -295,4 +295,20 @@ PLACE_DROPPED = {
     "way/403420628": "'The Bulpadock', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13)",
     "way/33297408": "'Wildlife Reserve', description: leisure=park; name is type words only (flag check, 2026-10-13)",
     "node/4464271092": "'Rooftop Cinema', a rooftop cinema tagged a theatre; its Wikidata entry has no article: a business with nothing else (wave 1's unsure rows, settled on the Wikidata lookup and the existing rules, 2026-10-13)",
+    # The helper screens of 2026-10-13 (duplicates, parts in a church's grounds): rows that
+    # fall squarely in an owner ruling, each with its ruling.
+    "node/13626510201": "'Arts Centre Melbourne (Theatres Building)', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): one building of the Arts Centre as its own row, 260 m from the row Arts Centre Melbourne (relation/6592679), under the same Wikidata entry (Q4801443) and the same article: the part beside the whole",
+    "way/773893269": "'RMIT School of Architecture & Urban Design', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): one school's building under the campus's Wikidata entry (Q5123539) and article (RMIT Melbourne City campus), 232 m from the row RMIT University (way/26564452) and 233 m from RMIT University (City Campus) (way/772558888): a part under the whole's entry",
+    "way/23717107": "'Chemical Engineering Lawn', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13, the class ruled in Melbourne; helper screen): a campus lawn named by function, tagged a park (operator University of Melbourne): the same class as the fifteen rows this config already drops by the owner's word of 2026-10-13 (South Lawn, Zoology Lawn, Physics Courtyard and the rest); this one was missed",
+    # The pattern screen of 2026-10-13, twin round of the helper screens: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "way/383402003": "'Chemical Engineering Lawn', a campus lawn or court named for a building or by function: a description; the second way of the name, beside way/23717107 (owner, 2026-10-13, the class ruled in Melbourne; twin round)",
+}
+
+# Public sights kept by id: in the cache, passed over by the rules (place_index,
+# PLACE_KEPT; owner, 2026-10-13).
+PLACE_KEPT = {
+    "node/585344628": "'RMIT Capitol Theatre', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "relation/15629064": "'The University of Melbourne, Parkville Campus', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/1156270659": "'The University of Melbourne, Southbank Campus', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
 }

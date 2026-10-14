@@ -311,4 +311,8 @@ PLACE_DROPPED = {
 # PLACE_KEPT; owner, 2026-10-13).
 PLACE_KEPT = {
     "way/12244405": "'Canada Olympic Park', one of the city's best-known sights, in the cache with no row (tourism=attraction, leisure=park, no wikidata or wikipedia tag): a famous place the rules pass over (owner, 2026-10-13; pattern screen)",
+    "node/1379435639": "'Calgary Farmers' Market', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/5319586638": "'National Music Centre', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/4365625291": "'Scotsman's Hill', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/2428783013": "'Wonderland', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
 }

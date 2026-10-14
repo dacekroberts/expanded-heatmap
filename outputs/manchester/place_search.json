@@ -1,6 +1,6 @@
 {
   "index": "app/static/places/manchester.json",
-  "places": 70455,
+  "places": 70458,
   "data_retrieved": "2026-10-12",
   "languages": {
     "local": [
@@ -14,13 +14,7 @@
       "English"
     ]
   },
-  "stations_not_open": [
-    {
-      "osm": "node/7007839003",
-      "name": "Crumpsall",
-      "tag": "construction:public_transport=stop_position"
-    }
-  ],
+  "stations_not_open": [],
   "area": [
     {
       "osm": "relation/146656",

@@ -316,3 +316,12 @@ PLACE_DROPPED = {
     "way/328834824": "'Preston Trail Golf Club Drive', an institution's own way, named for it",
     "way/497536284": "'Pet Station', description: a pet area under a describing label, by id (flag check, 2026-10-13)",
 }
+
+# Public sights kept by id: in the cache, passed over by the rules (place_index,
+# PLACE_KEPT; owner, 2026-10-13).
+PLACE_KEPT = {
+    "node/10181518641": "'Cattle Drive', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/465025459": "'Children's Aquarium', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/566519228": "'Kalita Humphreys (Frank Lloyd Wright) Theater Center', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/13588658701": "'Music Hall at Fair Park', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+}

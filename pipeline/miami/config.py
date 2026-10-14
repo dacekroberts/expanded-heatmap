@@ -432,3 +432,15 @@ PLACE_DROPPED = {
     # class rulings of that date, each with its ruling.
     "way/552197202": "'Alhambra Tower Plaza', the grounds of an office or apartment building, or of a housing estate by its operator, tagged a park or square (owner, 2026-10-13, the estate-facility ruling as applied to Toronto; pattern screen)",
 }
+
+# Public sights kept by id: in the cache, passed over by the rules (place_index,
+# PLACE_KEPT; owner, 2026-10-13).
+PLACE_KEPT = {
+    "node/4587210554": "'Calle Ocho Walk of Fame', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "relation/10225212": "'Fairchild Botanical Garden', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/435748157": "'Historic Black Police Precinct Courthouse and Museum', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/589514585": "'Institute of Contemporary Art, Miami', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/117926304": "'Jungle Island', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/435847255": "'Rubell Museum', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/1420651228": "'The Kampong', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+}

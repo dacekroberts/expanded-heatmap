@@ -204,3 +204,15 @@ PLACE_DROPPED = {
     # class rulings of that date, each with its ruling.
     "node/4999592333": "'Christian Science Reading Room', a religious body's reading room, assembly hall or institute tagged a place of worship, not a congregation (owner, 2026-10-13, ruling 2; pattern screen)",
 }
+
+# Public sights kept by id: in the cache, passed over by the rules (place_index,
+# PLACE_KEPT; owner, 2026-10-13).
+PLACE_KEPT = {
+    "relation/952934": "'Edinburgh Zoo', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/87686771": "'Floral Clock', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/3356785113": "'Forth Bridges Viewpoint', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/70954978": "'Scottish Storytelling Centre', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/239893682": "'St Anthony's Chapel', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/79689765": "'Summerhall', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/3072411821": "'Surgeons' Hall Museums', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+}

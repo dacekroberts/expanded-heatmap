@@ -299,4 +299,5 @@ PLACE_DROPPED = {
 # PLACE_KEPT; owner, 2026-10-13).
 PLACE_KEPT = {
     "way/406003396": "'Birmingham Museum and Art Gallery', one of the city's best-known sights, in the cache with no row (tourism=museum, no wikidata or wikipedia tag): a famous place the rules pass over (owner, 2026-10-13; pattern screen)",
+    "way/191725370": "'The Ring Open Market', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
 }

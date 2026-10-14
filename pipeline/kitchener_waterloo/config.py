@@ -269,3 +269,11 @@ PLACE_DROPPED = {
     # class rulings of that date, each with its ruling.
     "way/925949128": "'Civic Plaza', a stock plaza or square name with no place in it (owner, 2026-10-13, ruling 5 and its follow-up: every plaza name with no place in it; pattern screen)",
 }
+
+# Public sights kept by id: in the cache, passed over by the rules (place_index,
+# PLACE_KEPT; owner, 2026-10-13).
+PLACE_KEPT = {
+    "node/6647152056": "'City of Waterloo Museum', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/1926344376": "'Earth Sciences Museum', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/144763561": "'Ken Seiling Waterloo Region Museum', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+}

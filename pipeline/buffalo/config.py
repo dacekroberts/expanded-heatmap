@@ -245,3 +245,11 @@ PLACE_DROPPED = {
     "way/583414129": "'Viola Park Median', description: traffic median tagged leisure=park, named for its street (flag check, 2026-10-13)",
     "way/446576640": "'W Genesee St. Median', description: traffic median tagged leisure=park, named for its street (flag check, 2026-10-13)",
 }
+
+# Public sights kept by id: in the cache, passed over by the rules (place_index,
+# PLACE_KEPT; owner, 2026-10-13).
+PLACE_KEPT = {
+    "node/256127867": "'Delaware Park Japanese Gardens', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "relation/10749000": "'Erie Community College City Campus', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/1014540898": "'North Hall - The Karpeles Manuscript Library Museum', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+}

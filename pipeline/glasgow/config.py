@@ -191,3 +191,9 @@ PLACE_DROPPED = {
     "way/148531852": "'Christadelphian Hall', a place of worship named only by its body and a hall type, in a spelling the shared rule's lists do not hold (owner, 2026-10-13, the denomination ruling; pattern screen)",
     "way/542179822": "'The Courtyard', a stock plaza or square name with no place in it (owner, 2026-10-13, ruling 5 and its follow-up: every plaza name with no place in it; pattern screen)",
 }
+
+# Public sights kept by id: in the cache, passed over by the rules (place_index,
+# PLACE_KEPT; owner, 2026-10-13).
+PLACE_KEPT = {
+    "node/11964734024": "'Glasgow City Chambers', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+}

@@ -387,6 +387,9 @@ PLACE_DROPPED = {
     # The pattern screen of 2026-10-13, the owner's rulings on its open calls: rows that fall squarely in one of the owner's
     # class rulings of that date, each with its ruling.
     "way/257808358": "'School Field', a park named only by a type word (owner, 2026-10-13, on the pattern screen's open calls)",
+    # The helper screens of 2026-10-13 (duplicates, parts in a church's grounds): rows that
+    # fall squarely in an owner ruling, each with its ruling.
+    "way/1069063535": "'University Green', a campus lawn or court named for a building or by function: a description (owner, 2026-10-13, the class ruled in Melbourne; helper screen): a campus green tagged a park (operator The University of Manchester, surface grass), named by owner type and type word only; recommend drop",
 }
 
 # Public art kept by the owner's word against the article rule (place_index,
@@ -397,4 +400,9 @@ PLACE_KEPT = {
     # A place of worship kept against the denomination rule (worship_only;
     # owner, 2026-10-13: "keep all four by id").
     "way/31231628": "'Friends Meeting House', the listed Mount Street meeting house (denomination=quaker, wikidata=Q26579212, no wikipedia tag): a known building under its hall type's name (owner, 2026-10-13)",
+    "node/3590482371": "'Arndale Market', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/2626249338": "'Band on the Wall', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/38889744": "'Bury Market', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/28088152": "'Heaton Park Tramway', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/1551797579": "'Royal Exchange Theatre', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
 }

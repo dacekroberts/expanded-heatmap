@@ -332,3 +332,11 @@ PLACE_DROPPED = {
     "node/158856419": "'Fort Warren', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): an imported populated-place point tagged a hamlet, 124 m from the fort's own row Fort Warren (node/7616159719) and under the same Wikidata entry (Q2287837); the fort's row carries the article, this one does not, and there is no hamlet on Georges Island",
     "node/6144131365": "'Tufts University School of Medicine', one object under two rows within 300 m; the other row stays (owner, 2026-10-13, the duplicates class of the pattern screen and the Three Soldiers ruling; helper screen): a point for the Tufts medical school 66 m from the school's own row Tufts School of Medicine (relation/17053853), same Wikidata entry (Q7851551); the relation carries the article tag, this point does not",
 }
+
+# Public sights kept by id: in the cache, passed over by the rules (place_index,
+# PLACE_KEPT; owner, 2026-10-13).
+PLACE_KEPT = {
+    "node/358275870": "'Boston Tea Party - Ships and Museum', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/7778321750": "'Custom House Tower Observation Deck', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/29921494": "'Francis D. Martini Memorial Shell', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+}

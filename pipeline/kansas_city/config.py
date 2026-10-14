@@ -245,3 +245,14 @@ PLACE_DROPPED = {
     # fall squarely in an owner ruling, each with its ruling.
     "node/13465371242": "'Mary Grotto', a part of one church or monastery as its own row, the church's own row within 300 m (owner, 2026-10-13, ruling 4; helper screen): a Lourdes grotto (place_of_worship=lourdes_grotto) on the Rockhurst University campus, 173 m from the university's row (relation/20113421) and 224 m from the campus parish, Saint Francis-Xavier Church (way/356613075); no entry of its own and no place in the name",
 }
+
+# Public sights kept by id: in the cache, passed over by the rules (place_index,
+# PLACE_KEPT; owner, 2026-10-13).
+PLACE_KEPT = {
+    "relation/19184935": "'Ewing and Muriel Kauffman Memorial Garden', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/14239851327": "'Kaleidoscope', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/132570887": "'Kansas City Public Library Central Library', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/4625212873": "'Money Museum', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/6171269243": "'Sea Life Aquarium Kansas City', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/9866172007": "'Shuttlecocks', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+}
