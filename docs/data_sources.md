@@ -389,6 +389,8 @@ sample batches after it); the other maps follow in the rollout's waves.<!-- /int
   records and no data from any other source.
 - **Stations:** Search finds stations that are open. A station OpenStreetMap
   still marks as planned or under construction is not listed until it opens.
+- Whether a landmark has a Wikipedia article, one of the tests for listing it,
+  is read from Wikidata (CC0).
 - **PERMITTED WITH CONDITIONS** (<!-- internal -->`licence-read` 2026-10-07; <!-- /internal -->ODbL 1.0 and the OpenStreetMap
   Foundation's Geocoding, Substantial, Produced Work and Attribution
   guidelines, read 2026-10-07). A whole city's index is a Derivative Database:
