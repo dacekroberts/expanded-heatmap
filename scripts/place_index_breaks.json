@@ -234,5 +234,9 @@
  {"label": "a name ending (FECHADO) is closed", "old": "außer betrieb|ausser betrieb|fechado|fechada)", "new": "außer betrieb|ausser betrieb)"},
  {"label": "a settlement named by a type word keeps its place row", "old": "            if names[0].strip() in BARE_WORD_SETTLEMENTS:", "new": "            if False:"},
  {"label": "a named convent is no office", "old": "WORSHIP_OFFICE_HEADS = {\"pt\": (\"seminario\",)}", "new": "WORSHIP_OFFICE_HEADS = {\"es\": (\"convento\",), \"pt\": (\"convento\", \"seminario\")}"},
- {"label": "polvorín is no bare type word", "old": "\"es\": (\"hórreo\", \"laberinto\", \"parque lineal\", \"parterre\", \"puente\", \"reloj de sol\",", "new": "\"es\": (\"hórreo\", \"laberinto\", \"parque lineal\", \"parterre\", \"polvorín\", \"puente\", \"reloj de sol\","}
+ {"label": "polvorín is no bare type word", "old": "\"es\": (\"hórreo\", \"laberinto\", \"parque lineal\", \"parterre\", \"puente\", \"reloj de sol\",", "new": "\"es\": (\"hórreo\", \"laberinto\", \"parque lineal\", \"parterre\", \"polvorín\", \"puente\", \"reloj de sol\","},
+ {"label": "a station the map draws is spared the disused test", "old": "if closed and not _past(t.get(\"end_date\"), retrieved) and drawn_station_here(names, pt, drawn_at):", "new": "if False:"},
+ {"label": "the disused guard asks for the map station's name", "old": "and any(name.startswith(f) or f.startswith(name) for f in own):", "new": "and own:"},
+ {"label": "the disused guard asks for the map station's place", "old": "STATION_DRAWN_M = 100", "new": "STATION_DRAWN_M = 100000"},
+ {"label": "a dated closure is never spared by the disused guard", "old": "if closed and not _past(t.get(\"end_date\"), retrieved) and drawn_station_here(names, pt, drawn_at):", "new": "if closed and drawn_station_here(names, pt, drawn_at):"}
 ]

@@ -502,7 +502,7 @@ def build_city(config):
                           visitable=live, rebuilt=rebuilt, closed_for_works=set(works),
                           way_words=tuple(getattr(config, "PLACE_WAY_WORDS", ())),
                           kept=set(getattr(config, "PLACE_KEPT", {})),
-                          map_stations=[n for n, _, _ in (map_stations(config) or [])],
+                          map_stations=list(map_stations(config) or []),
                           also=tuple(getattr(config, "PLACE_LANGUAGES_ALSO", ())),
                           station_strip=tuple(getattr(config, "PLACE_STATION_STRIP", ())),
                           articles=read_wikidata_articles(wikidata_cache(config)),
@@ -2596,6 +2596,40 @@ def station_closed(tags, retrieved):
     return None
 
 
+# A STATION THE MAP DRAWS IS NOT CLOSED BY A DISUSED TAG (the station guard,
+# 2026-10-13; found in Toronto, wave 1). Seven Eglinton line stations the
+# map draws carry disused:public_transport=station in OpenStreetMap and had
+# no station row; the name guard of the three tests below misses them (the
+# map says "Avenue Station", OSM "Avenue"). Spared: a station within
+# STATION_DRAWN_M of a map station whose name is its own or begins it (or
+# the reverse), names folded. Position alone is not enough and neither is
+# the name. Measured on the caches of 237 cities, closed-tagged stations
+# within 500 m of a map station: 20. The test spares 11 (Toronto's 7 at 7
+# to 50 m; Riga's 4 tram stops at 1 to 50 m) and leaves 9: under another
+# name Grenoble's abandoned tramway stop at 56 m and Hong Kong's stop of
+# 2002 at 46 m; too far Rio de Janeiro's Olaria bus station at 179 m and
+# Edmonton's old NAIT at 251 m. A dated closure (end_date before the cache)
+# is never spared, whatever else the object carries: Rio de Janeiro's
+# Bonsucesso, the map station's own name at 66 m, closed in 2016, and
+# Minneapolis's Target Field commuter platform at 52 m, closed in 2026.
+# Re-measure
+# (data/_search_rollout/live_rules56/disused_map_stations.tsv) if the
+# distance or the name test changes.
+STATION_DRAWN_M = 100
+
+
+def drawn_station_here(names, pt, drawn_at):
+    """True when a station the map draws (`drawn_at`: [(folded name, lat,
+    lon)]) lies within STATION_DRAWN_M of `pt` and one of `names`, folded,
+    is its name, begins it or is begun by it."""
+    own = [f for f in (fold_name(n) for n in names) if f]
+    for name, lat, lon in drawn_at:
+        if name and _dist_m(pt, (lat, lon)) <= STATION_DRAWN_M \
+                and any(name.startswith(f) or f.startswith(name) for f in own):
+            return True
+    return False
+
+
 def station_ride(tags):
     """The tag that says a station is a ride's and not a transit stop: a
     tourist or miniature railway inside a park or a museum (14 rows on the
@@ -3299,8 +3333,9 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
     register-entry rules (config.PLACE_KEPT).
     `keep_interchanges`: this city's interchange names are street names
     (config.PLACE_KEEP_INTERCHANGES).
-    `map_stations`: the names of the stations the city's map draws
-    (map_stations()), for the station guard.
+    `map_stations`: the stations the city's map draws (map_stations()), for
+    the station guard: names, or (name, lat, lon) where the positions are
+    known (the disused test's guard, drawn_station_here, reads them).
     `also`: languages declared below the floor (config.PLACE_LANGUAGES_ALSO).
     `station_strip`: endings taken off station names (config.PLACE_STATION_STRIP).
     `articles`: the city's Wikidata article cache (read_wikidata_articles),
@@ -3336,7 +3371,8 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
                 dropped.add(f"{e['type']}/{e['id']}")
             elif ns and ns[0] in river_names["kept"]:
                 kept_ids.add(f"{e['type']}/{e['id']}")
-    drawn = {fold_name(n) for n in map_stations}
+    drawn = {fold_name(n if isinstance(n, str) else n[0]) for n in map_stations}
+    drawn_at = [(fold_name(n[0]), n[1], n[2]) for n in map_stations if not isinstance(n, str)]
 
     def note(cls, act, osm, name, why="", tags=None, bbox=None, ways=None):
         if log is not None:
@@ -4124,6 +4160,12 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
                 names = list(dict.fromkeys(n[:-len(end)].rstrip() if n.endswith(end) and len(n) > len(end) else n
                                            for n in names))
             closed = station_closed(t, retrieved)
+            # A station the map draws, at its place and under its name, is
+            # not closed by a disused tag (drawn_station_here); a dated
+            # closure still closes it.
+            if closed and not _past(t.get("end_date"), retrieved) and drawn_station_here(names, pt, drawn_at):
+                note("station_closed_tag_drawn", "kept", oid, names[0], f"{closed}, a station of the map", t)
+                closed = None
             # NO PASSENGERS, NO STATION (candidate 42, owner 2026-10-13):
             # passenger=no or public_transport=no on a station is a freight
             # or works halt. A station the map draws stays (the guard).
@@ -5021,6 +5063,12 @@ def _selftest():
     node(47.6440, -122.31, name="Methodist Church", railway="halt", amenity="place_of_worship")
     node(47.6430, -122.31, name="Senate Halt", railway="station", access="private")
     node(47.6420, -122.31, name="Members Halt", railway="station", access="private")
+    # The disused test's guard: a map station at the node and under its
+    # name; one under another name; one far off; one with a dated closure.
+    node(47.6000, -122.31, name="Laird", railway="station", disused__public_transport="station")
+    node(47.5900, -122.31, name="Old Depot", railway="station", disused__railway="station")
+    node(47.5800, -122.31, name="Wynford", railway="station", disused__public_transport="station")
+    node(47.5700, -122.31, name="Oakwood", railway="station", disused__railway="station", end_date="2016-10-14")
     node(47.6410, -122.31, name="Fenced Halt", railway="halt", access="no")
     node(47.8960, -122.31, name="Park Row", railway="station", wikidata="Q960")
     node(47.8962, -122.31, name="Park Row Concourse", railway="station", wikidata="Q960")
@@ -5167,7 +5215,9 @@ def _selftest():
     log = []
     index, report = build(els, city="Testville", retrieved="2026-10-10", local=("en",), log=log,
                           map_stations=["Barn", "Works Halt", "Members Halt", "Park Row", "Boyle Square",
-                                        "Drawn Gate"],
+                                        "Drawn Gate", ("Laird Station", 47.6003, -122.31),
+                                        ("Mill Road", 47.5900, -122.31), ("Wynford Station", 47.5830, -122.31),
+                                        ("Oakwood", 47.5700, -122.31)],
                           articles={"Q930": ["enwiki"], "Q920": ["enwiki"], "Q921": ["enwiki"], "Q922": [], "Q923": ["frwiki"],
                                     "Q924": None},
                           closed_for_works={f"node/{works}", f"node/{gone_id}"})
@@ -5366,6 +5416,11 @@ def _selftest():
         ("a place-of-worship node beside the way of its name is one row", count[("landmark", "St Luke")] == 1),
         ("a station with passenger=no is no station", ("station", "Freight Yard") not in rows),
         ("a map station tagged public_transport=no stays", ("station", "Works Halt") in rows),
+        ("a station the map draws at its place stays against a disused tag (the station guard)",
+         ("station", "Laird") in rows and ("station", "Laird") not in worded_rows),
+        ("a disused station beside a map station of another name is no row", ("station", "Old Depot") not in rows),
+        ("a disused station far from the map station of its name is no row", ("station", "Wynford") not in rows),
+        ("a station with a dated closure is no row, a map station or not", ("station", "Oakwood") not in rows),
         ("a city's station ending is stripped", ("station", "Mill Stop Tram") in rows
          and ("station", "Mill Stop") in worded_rows and ("station", "Mill Stop Tram") not in worded_rows),
         ("Danish: store is no leak word, and a glued street passes beside one",
