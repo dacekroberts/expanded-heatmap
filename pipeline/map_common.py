@@ -2486,7 +2486,7 @@ _PLACE_SEARCH_TEMPLATE = r"""
                     "lungarno", "borgo", "circonvallazione", "strada", "passaggio", "alzaia", "bastioni"],
              station: ["stazione", "staz", "fermata", "metro"],
              abbr: {"vle": "viale", "pza": "piazza", "pzza": "piazza", "ple": "piazzale", "lgo": "largo",
-                    "cso": "corso", "lgt": "lungotevere", "vic": "vicolo", "s": "san", "sta": "santa",
+                    "cso": "corso", "pta": "porta", "lgt": "lungotevere", "vic": "vicolo", "s": "san", "sta": "santa",
                     "ss": "santi", "staz": "stazione"}},
         // el: search-final's search-lang-el.md (2026-10-13), as drafted; not yet tried in a browser.
         el: {join: ["και"], stop: ["του", "της", "των", "το", "την", "τον"],
@@ -2593,6 +2593,18 @@ _PLACE_SEARCH_TEMPLATE = r"""
             var ws = words(n);
             toks = toks.concat(ws);
             solo = solo.concat(ws);
+            // A dotted abbreviation in a NAME (2026-10-13): Milan's map writes
+            // "V.le Tunisia" and "P.za Piemonte", which words() splits at the
+            // dot, so "Viale Tunisia" missed the station. The letters joined
+            // ("vle") and the word ABBR holds for them ("viale") are tokens
+            // too. Where the joined letters are no abbreviation, the part
+            // before the first dot is tried alone ("S.Leonardo" gains "san").
+            // Only a word the page's languages list in ABBR is ever added, so
+            // a name gains its own abbreviation's word and nothing else.
+            (norm(n).match(/\p{L}+(?:\.\p{L}+)+/gu) || []).forEach(function (g) {
+                var j = g.replace(/\./g, ""), k = typeof ABBR[j] === "string" ? j : g.split(".")[0];
+                if (typeof ABBR[k] === "string") toks.push(k, ABBR[k]);
+            });
             // Joined too, so "Kinkakuji" finds "Kinkaku-ji".
             if (ws.length > 1 && !CJK.test(n)) toks.push(ws.join(""));
         });
