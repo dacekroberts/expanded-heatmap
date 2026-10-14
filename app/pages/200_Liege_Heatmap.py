@@ -88,7 +88,7 @@ st.markdown(
 """
 )
 
-render_map_help("two business categories (Retail and Food service)")
+render_map_help("two business categories (Retail and Food service)", search='liege')
 render_excluded_stations("Liège")
 render_country_links("Liège")
 

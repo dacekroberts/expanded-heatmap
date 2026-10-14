@@ -89,7 +89,7 @@ st.markdown(
 """
 )
 
-render_map_help("three business categories (Food shops, Food service and Personal services)")
+render_map_help("three business categories (Food shops, Food service and Personal services)", search='kakogawa')
 render_excluded_stations("Kakogawa")
 render_country_links("Kakogawa")
 

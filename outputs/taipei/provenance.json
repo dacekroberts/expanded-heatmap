@@ -1,46 +1,92 @@
 {
   "fia_register": {
-    "file": "BGMOPEN1.zip",
-    "url": "https://eip.fia.gov.tw/data/BGMOPEN1.zip",
     "bytes": 66343427,
     "data_date": "2026-09-25",
+    "file": "BGMOPEN1.zip",
+    "retrieved": "2026-09-25T15:10:16+00:00",
     "sha256": "95b08653facc371b44c3281e45256de6dbed3c68955d467faa28ea9a28155000",
-    "retrieved": "2026-09-25T15:10:16+00:00"
+    "url": "https://eip.fia.gov.tw/data/BGMOPEN1.zip"
   },
   "metro_list": {
-    "file": "taipei_metro_stations.csv",
-    "url": "https://data.taipei/api/dataset/8bf00fa8-86a5-437e-b5c7-9bc0fe0e2971/resource/e3c0e67f-5916-405f-ad9a-41f52a65c2d2/download",
     "bytes": 3624,
+    "file": "taipei_metro_stations.csv",
+    "retrieved": "2026-09-25T15:10:16+00:00",
     "sha256": "68c5c58e2a574d79e4dee32181dde678cb16be72df097cbf318ba95d4d02221b",
-    "retrieved": "2026-09-25T15:10:16+00:00"
-  },
-  "osm_rail": {
-    "file": "osm_rail_routes.json",
-    "url": "https://overpass-api.de/api/interpreter",
-    "query": "[out:json][timeout:600];relation[\"type\"=\"route\"][\"route\"~\"^(subway|light_rail|monorail)$\"](24.93,121.36,25.2,121.66)->.r;.r out geom;node(r.r);out body;",
-    "bytes": 1191739,
-    "sha256": "8731fc76ebdf7e119510372023c3aca80ce8c688e9c61172eab92aa15ccc6168",
-    "elements": {
-      "relation": 37,
-      "node": 262
-    },
-    "osm_base": "2026-09-25T15:09:20Z",
-    "retrieved": "2026-09-25T15:10:26+00:00"
-  },
-  "taipei_doorplates": {
-    "file": "taipei_doorplate_20260902.csv",
-    "url": "https://data.taipei/api/dataset/b7c8e724-1e98-45ee-a0bd-f3840623ed97/resource/ce76ca0c-7f94-4935-ab47-1d2a41ca2abb/download",
-    "bytes": 124547303,
-    "sha256": "cdae1c5db7c76a729211fa5946cd2af6d7c6ef27b4ef8b1c14420a229682db55",
-    "retrieved": "2026-09-25T15:12:59+00:00",
-    "edition": "臺北市門牌位置數值資料 20260902"
+    "url": "https://data.taipei/api/dataset/8bf00fa8-86a5-437e-b5c7-9bc0fe0e2971/resource/e3c0e67f-5916-405f-ad9a-41f52a65c2d2/download"
   },
   "new_taipei_doorplates": {
-    "file": "new_taipei_doorplate.csv",
-    "url": "https://data.ntpc.gov.tw/api/datasets/d7b568ab-3819-40c8-a6e7-a6b199443101/csv/file",
     "bytes": 192881415,
-    "sha256": "72007bb772475b817a8685dce8e9e99d390835ba0151b4c60c62f8af80ccf034",
+    "edition": "新北市門牌位置數值資料 11509",
+    "file": "new_taipei_doorplate.csv",
     "retrieved": "2026-09-25T15:18:59+00:00",
-    "edition": "新北市門牌位置數值資料 11509"
+    "sha256": "72007bb772475b817a8685dce8e9e99d390835ba0151b4c60c62f8af80ccf034",
+    "url": "https://data.ntpc.gov.tw/api/datasets/d7b568ab-3819-40c8-a6e7-a6b199443101/csv/file"
+  },
+  "osm_place_outline": {
+    "bytes": 881872,
+    "elements": 2,
+    "file": "osm_place_outline_v1.json",
+    "host": "download.geofabrik.de (taiwan-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:60];\narea(id:3601293250,3601527220)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T19:20:55+00:00",
+    "sha256": "d0ddc286d441addb53bc19eaa9bd5a1787e583c5caa5dc3054b9874f91f5e2cc"
+  },
+  "osm_places": {
+    "bytes": 50220960,
+    "elements": 451180,
+    "file": "osm_places_2026-10-13.json",
+    "host": "download.geofabrik.de (taiwan-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3601293250,3601527220)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T19:20:57+00:00",
+    "sha256": "7257461969a20de94973be87ab003d1fc05d5d9ef86a21b403f190a431324e1f"
+  },
+  "osm_places_extra": {
+    "bytes": 368781,
+    "elements": 1134,
+    "file": "osm_places_extra_2026-10-13.json",
+    "host": "download.geofabrik.de (taiwan-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3601293250,3601527220)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T19:20:58+00:00",
+    "sha256": "468ebc4b614614d52128d191253bd9e81d2ecfa0c83011a49e8b091df152826e"
+  },
+  "osm_rail": {
+    "bytes": 1191739,
+    "elements": {
+      "node": 262,
+      "relation": 37
+    },
+    "file": "osm_rail_routes.json",
+    "osm_base": "2026-09-25T15:09:20Z",
+    "query": "[out:json][timeout:600];relation[\"type\"=\"route\"][\"route\"~\"^(subway|light_rail|monorail)$\"](24.93,121.36,25.2,121.66)->.r;.r out geom;node(r.r);out body;",
+    "retrieved": "2026-09-25T15:10:26+00:00",
+    "sha256": "8731fc76ebdf7e119510372023c3aca80ce8c688e9c61172eab92aa15ccc6168",
+    "url": "https://overpass-api.de/api/interpreter"
+  },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 2834,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 71,
+    "ids_not_read": 0,
+    "ids_with_article": 21,
+    "ids_without_article": 50,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "778819a8c5d38f28627e136ae3a6d0dcae60aacd8086c7131b9f8ff25a514df8"
+  },
+  "taipei_doorplates": {
+    "bytes": 124547303,
+    "edition": "臺北市門牌位置數值資料 20260902",
+    "file": "taipei_doorplate_20260902.csv",
+    "retrieved": "2026-09-25T15:12:59+00:00",
+    "sha256": "cdae1c5db7c76a729211fa5946cd2af6d7c6ef27b4ef8b1c14420a229682db55",
+    "url": "https://data.taipei/api/dataset/b7c8e724-1e98-45ee-a0bd-f3840623ed97/resource/ce76ca0c-7f94-4935-ab47-1d2a41ca2abb/download"
   }
 }

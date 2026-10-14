@@ -85,7 +85,7 @@ st.markdown(
 """
 )
 
-render_map_help('three business categories (Food service, Retail and Personal services)')
+render_map_help('three business categories (Food service, Retail and Personal services)', search='daejeon')
 render_excluded_stations("Daejeon")
 render_country_links('Daejeon')
 

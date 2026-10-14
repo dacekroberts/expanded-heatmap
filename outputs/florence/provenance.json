@@ -1,43 +1,89 @@
 {
-  "written_utc": "2026-10-01T02:11:06+00:00",
+  "files_utc": {
+    "attivita_estetiche_od.json": "2026-10-01T02:09:53+00:00",
+    "commercio_sede_fissa_od.json": "2026-10-01T02:09:50+00:00",
+    "osm_comuni.json": "2026-10-01T02:11:06+00:00",
+    "osm_rail.json": "2026-10-01T02:10:17+00:00",
+    "pubblici_esercizi_od.json": "2026-10-01T02:09:51+00:00",
+    "tintolavanderie_od.json": "2026-10-01T02:09:54+00:00"
+  },
   "layers": {
     "commercio": {
-      "url": "https://datigis.comune.fi.it/json/commercio_sede_fissa_od.json",
       "features": 7546,
-      "last_modified": "Wed, 30 Sep 2026 02:15:03 GMT"
-    },
-    "pubblici_esercizi": {
-      "url": "https://datigis.comune.fi.it/json/pubblici_esercizi_od.json",
-      "features": 3421,
-      "last_modified": "Wed, 30 Sep 2026 02:25:02 GMT"
+      "last_modified": "Wed, 30 Sep 2026 02:15:03 GMT",
+      "url": "https://datigis.comune.fi.it/json/commercio_sede_fissa_od.json"
     },
     "estetiche": {
-      "url": "https://datigis.comune.fi.it/json/attivita_estetiche_od.json",
       "features": 1495,
-      "last_modified": "Thu, 01 Oct 2026 02:05:05 GMT"
+      "last_modified": "Thu, 01 Oct 2026 02:05:05 GMT",
+      "url": "https://datigis.comune.fi.it/json/attivita_estetiche_od.json"
+    },
+    "pubblici_esercizi": {
+      "features": 3421,
+      "last_modified": "Wed, 30 Sep 2026 02:25:02 GMT",
+      "url": "https://datigis.comune.fi.it/json/pubblici_esercizi_od.json"
     },
     "tintolavanderie": {
-      "url": "https://datigis.comune.fi.it/json/tintolavanderie_od.json",
       "features": 179,
-      "last_modified": "Wed, 30 Sep 2026 02:35:01 GMT"
+      "last_modified": "Wed, 30 Sep 2026 02:35:01 GMT",
+      "url": "https://datigis.comune.fi.it/json/tintolavanderie_od.json"
     }
   },
   "osm": {
-    "rail_host": "overpass-api.de",
-    "comuni_host": "overpass.kumi.systems",
     "bbox": [
       43.72,
       11.15,
       43.84,
       11.34
-    ]
+    ],
+    "comuni_host": "overpass.kumi.systems",
+    "rail_host": "overpass-api.de"
   },
-  "files_utc": {
-    "commercio_sede_fissa_od.json": "2026-10-01T02:09:50+00:00",
-    "pubblici_esercizi_od.json": "2026-10-01T02:09:51+00:00",
-    "attivita_estetiche_od.json": "2026-10-01T02:09:53+00:00",
-    "tintolavanderie_od.json": "2026-10-01T02:09:54+00:00",
-    "osm_rail.json": "2026-10-01T02:10:17+00:00",
-    "osm_comuni.json": "2026-10-01T02:11:06+00:00"
-  }
+  "osm_place_outline": {
+    "bytes": 73705,
+    "elements": 1,
+    "file": "osm_place_outline_v1.json",
+    "host": "download.geofabrik.de (centro-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:60];\narea(id:3600042602)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T19:19:05+00:00",
+    "sha256": "ba4e13ebfbbb10df934ee86b73c3ee19d4bc7500fa4c6a17fb844a028b6fd580"
+  },
+  "osm_places": {
+    "bytes": 8421882,
+    "elements": 75736,
+    "file": "osm_places_2026-10-13.json",
+    "host": "download.geofabrik.de (centro-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3600042602)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T19:19:05+00:00",
+    "sha256": "f31aa0a0ad771528cfc8a472b5226822bdfb11e07c0703c5bebc54965e525c88"
+  },
+  "osm_places_extra": {
+    "bytes": 118824,
+    "elements": 468,
+    "file": "osm_places_extra_2026-10-13.json",
+    "host": "download.geofabrik.de (centro-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3600042602)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T19:19:05+00:00",
+    "sha256": "ed13517e68bf527ce7b904051feb689852f5bdd000d5d54de9a107de7b36ba81"
+  },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 9254,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 251,
+    "ids_not_read": 0,
+    "ids_with_article": 36,
+    "ids_without_article": 215,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "edf656dd7a45b5cb634f4f572aa87d6a1cc6a1ab4f742172f6cf80171f68d3fa"
+  },
+  "written_utc": "2026-10-01T02:11:06+00:00"
 }

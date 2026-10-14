@@ -91,7 +91,7 @@ st.markdown(
 """
 )
 
-render_map_help("business layer")
+render_map_help("business layer", search='moriguchi')
 render_excluded_stations("Moriguchi")
 render_country_links("Moriguchi")
 

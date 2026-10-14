@@ -1,0 +1,114 @@
+{
+  "index": "app/static/places/brussels_regional.json",
+  "places": 14260,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "fr",
+      "nl"
+    ],
+    "coverage": {
+      "en": 0.005,
+      "fr": 1.0,
+      "nl": 0.954
+    },
+    "list_share": 0.5,
+    "listed": [
+      "French",
+      "Dutch"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/58253",
+      "name": "Uccle - Ukkel",
+      "stations": 21
+    },
+    {
+      "osm": "relation/58260",
+      "name": "Schaerbeek - Schaarbeek",
+      "stations": 20
+    },
+    {
+      "osm": "relation/58254",
+      "name": "Anderlecht",
+      "stations": 11
+    },
+    {
+      "osm": "relation/58250",
+      "name": "Ixelles - Elsene",
+      "stations": 11
+    },
+    {
+      "osm": "relation/58258",
+      "name": "Jette",
+      "stations": 10
+    },
+    {
+      "osm": "relation/60167",
+      "name": "Woluwe-Saint-Lambert - Sint-Lambrechts-Woluwe",
+      "stations": 9
+    },
+    {
+      "osm": "relation/60168",
+      "name": "Woluwe-Saint-Pierre - Sint-Pieters-Woluwe",
+      "stations": 9
+    },
+    {
+      "osm": "relation/58263",
+      "name": "Auderghem - Oudergem",
+      "stations": 8
+    },
+    {
+      "osm": "relation/58252",
+      "name": "Etterbeek",
+      "stations": 8
+    },
+    {
+      "osm": "relation/58255",
+      "name": "Molenbeek-Saint-Jean - Sint-Jans-Molenbeek",
+      "stations": 8
+    },
+    {
+      "osm": "relation/58248",
+      "name": "Saint-Gilles - Sint-Gillis",
+      "stations": 8
+    },
+    {
+      "osm": "relation/58249",
+      "name": "Forest - Vorst",
+      "stations": 7
+    },
+    {
+      "osm": "relation/60140",
+      "name": "Berchem-Sainte-Agathe - Sint-Agatha-Berchem",
+      "stations": 4
+    },
+    {
+      "osm": "relation/58256",
+      "name": "Koekelberg",
+      "stations": 4
+    },
+    {
+      "osm": "relation/60144",
+      "name": "Evere",
+      "stations": 2
+    },
+    {
+      "osm": "relation/58257",
+      "name": "Ganshoren",
+      "stations": 2
+    },
+    {
+      "osm": "relation/58264",
+      "name": "Watermael-Boitsfort - Watermaal-Bosvoorde",
+      "stations": 2
+    },
+    {
+      "osm": "relation/58262",
+      "name": "Saint-Josse-ten-Noode - Sint-Joost-ten-Node",
+      "stations": 1
+    }
+  ]
+}

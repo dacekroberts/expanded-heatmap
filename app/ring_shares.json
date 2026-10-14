@@ -77,7 +77,7 @@
  "guadalajara": {
   "in_ring": 36729,
   "all": 116945,
-  "map_blob": "02a060f809979d296216c7b712b6b21719a59470"
+  "map_blob": "48bec7d81300a1d1029ef2d159d55f9f8d1c7c8e"
  },
  "madrid": {
   "in_ring": 49537,
@@ -127,12 +127,12 @@
  "oslo": {
   "in_ring": 8080,
   "all": 10678,
-  "map_blob": "63f9b95665ca279e5153b479c2b2fbb1865d3d39"
+  "map_blob": "64925d634b6f74d4107130be11553b59d41a9614"
  },
  "copenhagen": {
   "in_ring": 16545,
   "all": 18677,
-  "map_blob": "3bdf7633a062e45dd5db1ea9a7a9102c271d0295"
+  "map_blob": "88a25d3b6864babf1880d01748d95b8888b4dc74"
  },
  "prague": {
   "in_ring": 21462,
@@ -147,7 +147,7 @@
  "rome": {
   "in_ring": 60739,
   "all": 98897,
-  "map_blob": "6fb2738449a41af81c4bd32652c24301fb47a733"
+  "map_blob": "c70023977c839d1983ed0d9d89cd099e788d136c"
  },
  "sao_paulo": {
   "in_ring": 50436,
@@ -167,7 +167,7 @@
  "brasilia": {
   "in_ring": 5072,
   "all": 36700,
-  "map_blob": "5c4bedaa2d50f7b5d4d0e929d27060a0551d34cb"
+  "map_blob": "dabb89eca0765a7f9df729600a64ce3dbabddbb2"
  },
  "salvador": {
   "in_ring": 10070,
@@ -207,7 +207,7 @@
  "riga": {
   "in_ring": 5213,
   "all": 6725,
-  "map_blob": "71b420d146c9e96fb2c9ad3ff08c6d315d5fbb04"
+  "map_blob": "4e83c5022abf437791eea7a96fbb685acb98a235"
  },
  "seoul": {
   "in_ring": 224381,
@@ -217,17 +217,17 @@
  "taichung": {
   "in_ring": 12250,
   "all": 63780,
-  "map_blob": "c2cb1c5ce01b5fe325fe39614ec5497d2b8e32f8"
+  "map_blob": "f8e85932ddad66c04d52326a4e73d629717f4f84"
  },
  "taoyuan": {
   "in_ring": 5104,
   "all": 43532,
-  "map_blob": "7e786d9c6d710825a14ea84007d9d56d827c7350"
+  "map_blob": "9174006568c088a548510cab02cba231817e6eb4"
  },
  "taipei": {
   "in_ring": 100505,
   "all": 129102,
-  "map_blob": "fff2618e689cc7ddfbdbef0fddeb6ca3cedd2344"
+  "map_blob": "dcc9ce76c3b9c2192632a6c6c1a68a8e397515ef"
  },
  "daegu": {
   "in_ring": 47724,
@@ -242,7 +242,7 @@
  "monterrey": {
   "in_ring": 14630,
   "all": 58329,
-  "map_blob": "b479057e74236b8d571569fb6e30f13639f695da"
+  "map_blob": "6baa237d786c050a6078ef2a81028c0a8f2cb399"
  },
  "kobe": {
   "in_ring": 23804,
@@ -277,7 +277,7 @@
  "berlin": {
   "in_ring": 49394,
   "all": 60268,
-  "map_blob": "93053ec7866b3215915b1a40b48628041a3bf56f"
+  "map_blob": "e50d536904526fd0e2a715b34d1554c8c127f427"
  },
  "london": {
   "in_ring": 41574,
@@ -312,12 +312,12 @@
  "stockholm": {
   "in_ring": 4666,
   "all": 5218,
-  "map_blob": "e117dbd70cf19fb0a494a4ac0cc85b84201af462"
+  "map_blob": "4a629e6597869d33e3370d3261d0b8761a9d8a74"
  },
  "bucharest": {
   "in_ring": 11242,
   "all": 15589,
-  "map_blob": "2e900eb7316ab66de6d713e57659de640d4e298a"
+  "map_blob": "e6189887be854447fc3f195474ba52496fdfabf4"
  },
  "incheon": {
   "in_ring": 56426,
@@ -352,12 +352,12 @@
  "bergen": {
   "in_ring": 2106,
   "all": 3597,
-  "map_blob": "f30ac841a133ecec98687f23f26cd16647553b89"
+  "map_blob": "4d440ceca97c0b4eb9094900d2ff78c5dfa435ac"
  },
  "aarhus": {
   "in_ring": 1300,
   "all": 5102,
-  "map_blob": "02475e60e70f9e088b821942a21db5b96325cb89"
+  "map_blob": "0186006387b9ff22f4fced574e21f48068b906cc"
  },
  "buffalo": {
   "in_ring": 376,
@@ -377,17 +377,17 @@
  "odense": {
   "in_ring": 1154,
   "all": 2834,
-  "map_blob": "a3b18073d513bf775a93de7f09b50e0af09c8581"
+  "map_blob": "daa4c0576fcb733f19c5e7e3a0c0b6ce2fa412b8"
  },
  "liepaja": {
   "in_ring": 489,
   "all": 702,
-  "map_blob": "3013141dd368b42c638d76d58570adf0b1bd19b1"
+  "map_blob": "67e3c6a5527a85a41f27b0323b636f8c96b39570"
  },
  "daugavpils": {
   "in_ring": 656,
   "all": 819,
-  "map_blob": "bc610b2b1d20ccfde69d02eff4b7eac52d3411ed"
+  "map_blob": "81d62a5bc15284f0846c1e28048eb1fe59220d0d"
  },
  "kansas_city": {
   "in_ring": 451,
@@ -407,12 +407,12 @@
  "florence": {
   "in_ring": 4435,
   "all": 12052,
-  "map_blob": "6cf435b181976c5e9d6dc1d4072fa794a7343f6c"
+  "map_blob": "152d5d728d9d74a8b229cf02369c16b04656a8aa"
  },
  "goteborg": {
   "in_ring": 2256,
   "all": 2989,
-  "map_blob": "c7dd789bc9da14d8c028c5f32cad8b611b6cafad"
+  "map_blob": "8d01b1fc45da55500da40ddad446e7a934d4e786"
  },
  "den_haag": {
   "in_ring": 5781,
@@ -422,7 +422,7 @@
  "zurich": {
   "in_ring": 3099,
   "all": 3363,
-  "map_blob": "5b133d758b1eb4213226d8a533434dea37c93608"
+  "map_blob": "6e4985ed761bbbe7eb14a8e5b3b80fc22f5f0f5f"
  },
  "le_mans": {
   "in_ring": 1462,
@@ -577,7 +577,7 @@
  "anyang": {
   "in_ring": 15799,
   "all": 23999,
-  "map_blob": "dcae064782cf62f087f7f28004b765063034d126"
+  "map_blob": "57b454a0a62292f9d156824b408e1a9d0a4f1312"
  },
  "dallas": {
   "in_ring": 4197,
@@ -617,7 +617,7 @@
  "most": {
   "in_ring": 664,
   "all": 1025,
-  "map_blob": "d2519fd43c2f701c14a13cc762d9a09a7fd09d4e"
+  "map_blob": "da8acab805f74d4d135d0168577e24dcbc75f696"
  },
  "manchester": {
   "in_ring": 6202,
@@ -682,7 +682,7 @@
  "kitakyushu": {
   "in_ring": 10577,
   "all": 14859,
-  "map_blob": "a1bcaf7272b71e33e98e39c2b732d94875c2a586"
+  "map_blob": "08392d90c31c164dd1adf9935a3e3015e13bcc4e"
  },
  "sakai": {
   "in_ring": 6041,
@@ -817,7 +817,7 @@
  "brussels_regional": {
   "in_ring": 10006,
   "all": 13680,
-  "map_blob": "db8195eecb68258ad21fe10064d324057c4db640"
+  "map_blob": "6216e24295b97e31a6d2310bc15752ca5357bce2"
  },
  "liverpool": {
   "in_ring": 3732,
@@ -842,7 +842,7 @@
  "gwangju": {
   "in_ring": 14077,
   "all": 47214,
-  "map_blob": "0ff687e39afe1e0bdcbf8a4c5fc304ededf134a2"
+  "map_blob": "805d0462d3de3f32a8bda8388e2320532738deb3"
  },
  "gimhae": {
   "in_ring": 6736,
@@ -862,22 +862,22 @@
  "geneva": {
   "in_ring": 4839,
   "all": 5863,
-  "map_blob": "9be2723ed728ae4274b23159f71bb1ddd82d8dc8"
+  "map_blob": "e1a4d47836ad46eff3d8524da4aeaff58e23aa10"
  },
  "thessaloniki": {
   "in_ring": 6292,
   "all": 7132,
-  "map_blob": "8724a5102e85871f80e92fb6257a0bfdad13c3c6"
+  "map_blob": "0bd75918af89b2e546b2b3c647d942ba1db54378"
  },
  "gelsenkirchen": {
   "in_ring": 1160,
   "all": 1776,
-  "map_blob": "2376082f457049e01ee37e1b6fc36f4a721f9b1e"
+  "map_blob": "833dfd87073268ec761464d966dcbfab19b5d7cc"
  },
  "bremen": {
   "in_ring": 2148,
   "all": 3153,
-  "map_blob": "f38774f0f342d35312e30c8abfece44e162f241a"
+  "map_blob": "a287b222dd51302bd94e6e5e7c99d2e84e01c6ee"
  },
  "higashiyamato": {
   "in_ring": 548,
@@ -1067,7 +1067,7 @@
  "cluj_napoca": {
   "in_ring": 1237,
   "all": 3801,
-  "map_blob": "30ada83ca8b3308f075a48874101e19e49188d94"
+  "map_blob": "82d6ebce7da697d6109d308c32852f653c031c9f"
  },
  "shizuoka": {
   "in_ring": 1216,
@@ -1112,7 +1112,7 @@
  "yamagata": {
   "in_ring": 1114,
   "all": 3280,
-  "map_blob": "0e8c274e79f9c33317f88d0546e3887e82392bac"
+  "map_blob": "15b005a410581afd2fd1568752ac3bf18a08045c"
  },
  "kure": {
   "in_ring": 935,

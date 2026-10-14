@@ -1,15 +1,63 @@
 {
-  "written_utc": "2026-10-04T07:44:24+00:00",
   "favv": {
-    "url": "https://www.static.favv.be/bo-documents/inter_actieve_actoren_EN.csv",
     "extract_date": "2026-09-28",
     "fetched": "2026-10-04T03:46:44Z",
     "last_modified": "Mon, 28 Sep 2026 05:40:14 GMT",
-    "sha256": "0814582efcc0abd4ccd4d07e8920d62c16258e13c21e93cf21a16c021ac670fa"
+    "sha256": "0814582efcc0abd4ccd4d07e8920d62c16258e13c21e93cf21a16c021ac670fa",
+    "url": "https://www.static.favv.be/bo-documents/inter_actieve_actoren_EN.csv"
+  },
+  "gtfs": {
+    "feed_end_date": "20261130",
+    "feed_start_date": "20261003",
+    "feed_version": "20261003_20261130_003000",
+    "fetched": "2026-10-03",
+    "sha256": "4b43c28120063a6ceb7a9de8bd0f913cfb58ad2d6a6b03b0cfab34d4e2159921",
+    "url": "https://api-management-discovery-production.azure-api.net/api/gtfs/feed/delijn/static"
+  },
+  "osm_communes": {
+    "bbox": [
+      51.12,
+      4.28,
+      51.34,
+      4.58
+    ],
+    "host": "overpass-api.de"
+  },
+  "osm_place_outline": {
+    "bytes": 103914,
+    "elements": 1,
+    "file": "osm_place_outline_v1.json",
+    "host": "download.geofabrik.de (belgium-261008.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-08T20:21:06Z",
+    "query": "[out:json][timeout:60];\narea(id:3600059518)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T10:12:06+00:00",
+    "sha256": "8076b5e5d2470e4ef2a17ad0fb2c8c3e8080728e2163372015190cff96915504"
+  },
+  "osm_places": {
+    "bytes": 8765056,
+    "elements": 69523,
+    "file": "osm_places_2026-10-13.json",
+    "host": "download.geofabrik.de (belgium-261008.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-08T20:21:06Z",
+    "query": "[out:json][timeout:170];\narea(id:3600059518)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T10:12:07+00:00",
+    "sha256": "57b42c539d2ee351455b306bfe870edeb2b2783788112ff1249139b6404fde63"
+  },
+  "osm_places_extra": {
+    "bytes": 224996,
+    "elements": 642,
+    "file": "osm_places_extra_2026-10-13.json",
+    "host": "download.geofabrik.de (belgium-261008.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-08T20:21:06Z",
+    "query": "[out:json][timeout:170];\narea(id:3600059518)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T10:12:08+00:00",
+    "sha256": "6737ead84377c709d48916b3333e6ea43102a32430534a301f7e8534d346361d"
   },
   "vkbo": {
-    "url": "https://geo.api.vlaanderen.be/VKBO/wfs",
-    "typeNames": "VKBO:Vkbo",
+    "fetched_utc": "2026-10-04T07:44:24+00:00",
     "propertyName": [
       "Ondernemingsnr",
       "Type_onderneming",
@@ -19,29 +67,14 @@
       "OIDN",
       "SHAPE"
     ],
-    "fetched_utc": "2026-10-04T07:44:24+00:00",
     "rows": 142183,
     "rows_per_nis": {
       "11002": 142008,
       "11007": 175
     },
-    "sha256": "6df2170da843008f20d3cbaad7852a178cc602e591da2a6dfda5444ffa499bda"
+    "sha256": "6df2170da843008f20d3cbaad7852a178cc602e591da2a6dfda5444ffa499bda",
+    "typeNames": "VKBO:Vkbo",
+    "url": "https://geo.api.vlaanderen.be/VKBO/wfs"
   },
-  "gtfs": {
-    "url": "https://api-management-discovery-production.azure-api.net/api/gtfs/feed/delijn/static",
-    "fetched": "2026-10-03",
-    "feed_start_date": "20261003",
-    "feed_end_date": "20261130",
-    "feed_version": "20261003_20261130_003000",
-    "sha256": "4b43c28120063a6ceb7a9de8bd0f913cfb58ad2d6a6b03b0cfab34d4e2159921"
-  },
-  "osm_communes": {
-    "host": "overpass-api.de",
-    "bbox": [
-      51.12,
-      4.28,
-      51.34,
-      4.58
-    ]
-  }
+  "written_utc": "2026-10-04T07:44:24+00:00"
 }

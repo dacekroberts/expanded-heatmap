@@ -83,7 +83,7 @@ st.markdown(
 """
 )
 
-render_map_help("business layer")
+render_map_help("business layer", search='hakodate')
 render_excluded_stations("Hakodate")
 render_country_links("Hakodate")
 

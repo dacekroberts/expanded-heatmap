@@ -1,72 +1,105 @@
 {
-  "ros02": {
-    "file": "ros02_data.csv",
-    "url": "",
-    "bytes": 58507315,
-    "sha256": "a17749249c8cbb4bfe1569f38635e29e56cd7b6f18806f3d5298f2fe4340d810",
-    "retrieved": "shared national cache (data/czechia/raw), checked 2026-09-30T23:42:24+00:00"
-  },
-  "res": {
-    "file": "res_data.csv",
-    "url": "",
-    "bytes": 543309993,
-    "sha256": "c6b6031d0598ce95117de7980c5f52d1d8675b49f92ddbb72f80e201d5dc4fdc",
-    "retrieved": "shared national cache (data/czechia/raw), checked 2026-09-30T23:42:25+00:00"
-  },
   "nace_level1": {
-    "file": "cz_nace_2025_level1.csv",
-    "url": "",
     "bytes": 3489,
+    "file": "cz_nace_2025_level1.csv",
+    "retrieved": "shared national cache (data/czechia/raw), checked 2026-09-30T23:42:25+00:00",
     "sha256": "04af65726c38444d4f8d0cbb1999fbafb94c4c9fd1dbbedae628be977ae5f79c",
-    "retrieved": "shared national cache (data/czechia/raw), checked 2026-09-30T23:42:25+00:00"
+    "url": ""
   },
   "nace_level2": {
-    "file": "cz_nace_2025_level2.csv",
-    "url": "",
     "bytes": 14016,
+    "file": "cz_nace_2025_level2.csv",
+    "retrieved": "shared national cache (data/czechia/raw), checked 2026-09-30T23:42:25+00:00",
     "sha256": "3b301176e60bc18d912086afb2f24136450773150441de18d13b5543b6b05edc",
-    "retrieved": "shared national cache (data/czechia/raw), checked 2026-09-30T23:42:25+00:00"
+    "url": ""
   },
   "nace_level3": {
-    "file": "cz_nace_2025_level3.csv",
-    "url": "",
     "bytes": 47490,
+    "file": "cz_nace_2025_level3.csv",
+    "retrieved": "shared national cache (data/czechia/raw), checked 2026-09-30T23:42:25+00:00",
     "sha256": "7e47f8d581c0c3bbc18d71ca0a1e52c2418ea16a4f03f3b215e15eaee08a3d4d",
-    "retrieved": "shared national cache (data/czechia/raw), checked 2026-09-30T23:42:25+00:00"
+    "url": ""
   },
   "nace_level4": {
-    "file": "cz_nace_2025_level4.csv",
-    "url": "",
     "bytes": 103402,
+    "file": "cz_nace_2025_level4.csv",
+    "retrieved": "shared national cache (data/czechia/raw), checked 2026-09-30T23:42:25+00:00",
     "sha256": "37526e7a5ca1d4b468cef11c30e1644c30eaa4193b553fe1c33b5df4d60ecb48",
-    "retrieved": "shared national cache (data/czechia/raw), checked 2026-09-30T23:42:25+00:00"
+    "url": ""
   },
   "nace_level5": {
-    "file": "cz_nace_2025_level5.csv",
-    "url": "",
     "bytes": 115587,
+    "file": "cz_nace_2025_level5.csv",
+    "retrieved": "shared national cache (data/czechia/raw), checked 2026-09-30T23:42:25+00:00",
     "sha256": "df261a1fbfeef605c8eba6ac7c8fb3b6252c15adc1e87f3431db7e661f5f0fb5",
-    "retrieved": "shared national cache (data/czechia/raw), checked 2026-09-30T23:42:25+00:00"
+    "url": ""
+  },
+  "osm_boundary_host": "overpass-api.de",
+  "osm_fetched": "2026-10-01T00:39:56+00:00",
+  "osm_place_outline": {
+    "bytes": 90910,
+    "elements": 1,
+    "file": "osm_place_outline_v1.json",
+    "host": "overpass.kumi.systems",
+    "how": "kept (on disk from an earlier run)",
+    "osm_base": "2026-07-15T15:22:01Z",
+    "query": "[out:json][timeout:60];\narea(id:3600438344)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T08:29:55+00:00",
+    "sha256": "1532dfcc8871dfb9870d83bd14a7fec6629c1c18ec9f086190b1b169596cd181"
+  },
+  "osm_places": {
+    "bytes": 3868408,
+    "elements": 34475,
+    "file": "osm_places_2026-10-13.json",
+    "host": "download.geofabrik.de (plzensky-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3600438344)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T09:29:33+00:00",
+    "sha256": "c35ce4c2218740f16a8dc46c043439fd348a7668feef9fff69db6694d6529063"
+  },
+  "osm_places_extra": {
+    "bytes": 78257,
+    "elements": 237,
+    "file": "osm_places_extra_2026-10-13.json",
+    "host": "download.geofabrik.de (plzensky-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3600438344)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T09:29:34+00:00",
+    "sha256": "5e32ea0f08b91e41a06b3be3a46398a5e8f09659ae7f64f856eb8af4ac237989"
+  },
+  "osm_tram_host": "overpass.kumi.systems",
+  "pmdp_gtfs": {
+    "bytes": 950393,
+    "file": "pmdp_gtfs.zip",
+    "retrieved": "2026-10-01T00:36:37+00:00",
+    "sha256": "e638c2b3ae9705b938d6a9402a149c94838db04ebaa8b93b2f98ce2ecd8ba331",
+    "url": "https://jizdnirady.pmdp.cz/jr/gtfs"
+  },
+  "res": {
+    "bytes": 543309993,
+    "file": "res_data.csv",
+    "retrieved": "shared national cache (data/czechia/raw), checked 2026-09-30T23:42:25+00:00",
+    "sha256": "c6b6031d0598ce95117de7980c5f52d1d8675b49f92ddbb72f80e201d5dc4fdc",
+    "url": ""
+  },
+  "ros02": {
+    "bytes": 58507315,
+    "file": "ros02_data.csv",
+    "retrieved": "shared national cache (data/czechia/raw), checked 2026-09-30T23:42:24+00:00",
+    "sha256": "a17749249c8cbb4bfe1569f38635e29e56cd7b6f18806f3d5298f2fe4340d810",
+    "url": ""
   },
   "ros02_snapshot": "2026-08-31",
   "ruian": {
     "554791": {
-      "file": "ruian_adr_554791.csv.zip",
-      "url": "https://vdp.cuzk.gov.cz/vymenny_format/csv/20260831_OB_554791_ADR.csv.zip",
       "bytes": 655885,
-      "sha256": "f09a8dc7ce83e5f9087c4157f555ebb99aeacefc0079e0a933d6368ebb2a9107",
+      "edition": "20260831_OB_554791_ADR.csv.zip",
+      "file": "ruian_adr_554791.csv.zip",
       "retrieved": "2026-10-01T00:36:35+00:00",
-      "edition": "20260831_OB_554791_ADR.csv.zip"
+      "sha256": "f09a8dc7ce83e5f9087c4157f555ebb99aeacefc0079e0a933d6368ebb2a9107",
+      "url": "https://vdp.cuzk.gov.cz/vymenny_format/csv/20260831_OB_554791_ADR.csv.zip"
     }
-  },
-  "osm_boundary_host": "overpass-api.de",
-  "osm_tram_host": "overpass.kumi.systems",
-  "osm_fetched": "2026-10-01T00:39:56+00:00",
-  "pmdp_gtfs": {
-    "file": "pmdp_gtfs.zip",
-    "url": "https://jizdnirady.pmdp.cz/jr/gtfs",
-    "bytes": 950393,
-    "sha256": "e638c2b3ae9705b938d6a9402a149c94838db04ebaa8b93b2f98ce2ecd8ba331",
-    "retrieved": "2026-10-01T00:36:37+00:00"
   }
 }

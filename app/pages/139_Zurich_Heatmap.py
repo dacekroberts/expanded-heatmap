@@ -119,7 +119,7 @@ st.markdown(
 """
 )
 
-render_map_help('two business categories (Licensed shops and Food service)')
+render_map_help('two business categories (Licensed shops and Food service)', search='zurich')
 render_excluded_stations("Zurich")
 render_country_links('Zurich')
 

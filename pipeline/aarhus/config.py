@@ -185,3 +185,85 @@ AARHUS_BBOX = {
     "lon_min": 9.93,
     "lon_max": 10.43,
 }
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
+
+PLACE_AREA = "(id:3601784663)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
+PLACE_LANGUAGES = ("da",)
+PLACE_FOLD = None
+# Rows a reader held that the owner ruled to keep (2026-10-13;
+# docs/decisions_drafts/search-final.md). A record only: no code reads it.
+# A street is listed by name, a place by OSM id with its name. Not in
+# PLACE_REVIEWED, which check E holds to names carrying a leak word.
+PLACE_RULED_KEPT = {
+    # Held rows kept by the existing rules in three lanes and the owner's
+    # rulings of 2026-10-13 (docs/decisions_drafts/search-final-held-applied.md).
+    # A home, family or person row is listed by id alone.
+    "way/125793727": "'\"Nullet\"', A misspelled, cut or abbreviated name is still that place and no name is repaired (owner 2026-10-13, seven rulings 1; the typo line)",
+    "node/13717918789": "'DSB Centralværksted Mindesmærke', Statues, busts and public memorials stay, and monuments are not held to the notable rule (owner 2026-10-13, personal names 2; 2026-10-11 answer 5, measured and put back)",
+    "way/617763066": "'Egå Engvej park og legeplads', A place name plus a type word is a name; the bare-type rule takes only a name that is all type (BARE_TYPE_NAMES, matched as the whole name)",
+    "way/621192243": "'Egå dam park', A place name plus a type word is a name; the bare-type rule takes only a name that is all type (BARE_TYPE_NAMES, matched as the whole name)",
+    "way/482180292": "'Gammel Skejby legeplads', A place name plus a type word is a name; the bare-type rule takes only a name that is all type (BARE_TYPE_NAMES, matched as the whole name)",
+    "node/9534520440": "'Sankt Olufs Kirke', A landmark that stands, ruined, abandoned or under a former-use name, stays (owner 2026-10-13: keep all standing abandoned landmarks; third list 11: former in a name is not read as gone)",
+    "node/12887631803": "'Egeplænen', Named sections of public gardens stay (owner 2026-10-13, fifteen answers 14)",
+    "node/12887631805": "'Fyrreplænen', Named sections of public gardens stay (owner 2026-10-13, fifteen answers 14)",
+    "node/12887631804": "'Gravhøjen', Named sections of public gardens stay (owner 2026-10-13, fifteen answers 14)",
+    "node/12887631806": "'Grotten', Named sections of public gardens stay (owner 2026-10-13, fifteen answers 14)",
+    "Rampen": "The description, code and ramp-name rules read minor or ramp-class ways only; another street keeps such a name (owner 2026-10-13: The Avenue stays; German answers 3: Weg A and Weg B)",
+    "Agro Food Park": "A site's own name on a residential or larger way reads as the street's name and stays (owner 2026-10-13, fifteen answers 9, as measured)",
+    "Logistikparken": "A site's own name on a residential or larger way reads as the street's name and stays (owner 2026-10-13, fifteen answers 9, as measured)",
+    "Bane 17-21": "Numbered roads on larger ways stay (owner 2026-10-13, fifteen answers 10)",
+    "Path of Discovery": "Named public trails stay (owner 2026-10-13, German answers 4)",
+    "Busgaden": "The description, code and ramp-name rules read minor or ramp-class ways only; another street keeps such a name (owner 2026-10-13: The Avenue stays; German answers 3: Weg A and Weg B)",
+    "Lystrup Busvej": "The description, code and ramp-name rules read minor or ramp-class ways only; another street keeps such a name (owner 2026-10-13: The Avenue stays; German answers 3: Weg A and Weg B)",
+}
+PLACE_REVIEWED = {}
+# The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
+PLACE_DROPPED = {
+    # Rows the owner's later rulings of 2026-10-13 decide, and the twin checks' drops (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "node/5693733830": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
+    # Rows the owner's later rulings of 2026-10-13 decide, and the twin checks' drops (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/90425324": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
+    # Rows the read-only screen helper gave a drop verdict (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/87670206": "religious body's meeting hall: ruling 2 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/219874518": "religious body's meeting hall: ruling 2 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/405261348": "religious body's meeting hall: ruling 2 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/461709351": "a description standing in for a name",
+    "way/577803300": "an address number standing in for a park's name",
+    "node/6449319096": "a description standing in for a name, on a relocated exhibit in a museum's grounds",
+    "way/188979243": "a mountain-bike trail, marked (MTB) in its name",
+    "way/1099329416": "a mountain-bike trail, marked (MTB) in its name",
+    "way/1099329417": "a mountain-bike trail, marked (MTB) in its name",
+    "way/1104582506": "a mountain-bike trail, marked (MTB) in its name",
+    "way/1104582507": "a mountain-bike trail, marked (MTB) in its name",
+    "way/156933798": "a mountain-bike trail, marked (MTB) in its name",
+    "way/327108573": "a mountain-bike trail, marked (MTB) in its name",
+    "way/1070681304": "a mountain-bike trail, marked (MTB) in its name",
+    "way/1083943888": "a mountain-bike trail, marked (MTB) in its name",
+    "way/1083943889": "a mountain-bike trail, marked (MTB) in its name",
+    "way/1084982800": "a mountain-bike trail, marked (MTB) in its name",
+    "way/1084982801": "a mountain-bike trail, marked (MTB) in its name",
+    "way/44333958": "a mountain-bike trail, marked (MTB) in its name",
+    "way/44461212": "a mountain-bike trail, marked (MTB) in its name",
+    "way/403491019": "a hospital entrance label, not a street",
+    "way/693472003": "a hospital entrance label, not a street",
+    # Held rows settled by the existing rules in three lanes and the owner's
+    # rulings of 2026-10-13 (docs/decisions_drafts/search-final-held-applied.md).
+    "way/148254169": "A home with no sign of visiting is no row; an article or a heritage listing is not enough (home rule 2026-10-08; fifteen answers 2); held rows settled 2026-10-13",
+    "node/5528603819": "Motorway ramps and interchange names are dropped (owner 2026-10-13, fourteen answers 2; second batch question b); held rows settled 2026-10-13",
+    "way/482609784": "A bare type word or a type phrase as the whole name is dropped (BARE_TYPE_NAMES, owner 2026-10-11; seven rulings 4, 2026-10-13; a Wikidata entry alone does not keep it, keep-against-drop ruling 5); held rows settled 2026-10-13",
+    "way/496428589": "A bare type word or a type phrase as the whole name is dropped (BARE_TYPE_NAMES, owner 2026-10-11; seven rulings 4, 2026-10-13; a Wikidata entry alone does not keep it, keep-against-drop ruling 5); held rows settled 2026-10-13",
+    "node/5290181294": "Duplicates of one object are one row (NEAR_DUP_M, ROW_MERGE_M 2026-10-08 and 2026-10-13; six answers 6: second nodes of one district dropped); held rows settled 2026-10-13",
+    "way/1281370998": "Museum, zoo and theme-park contents stay only with a Wikipedia article of their own (owner 2026-10-13, fifteen answers 4); held rows settled 2026-10-13",
+    "way/1280496716": "Museum, zoo and theme-park contents stay only with a Wikipedia article of their own (owner 2026-10-13, fifteen answers 4); held rows settled 2026-10-13",
+    "node/6446305089": "Museum, zoo and theme-park contents stay only with a Wikipedia article of their own (owner 2026-10-13, fifteen answers 4); held rows settled 2026-10-13",
+    "node/3760236264": "Museum, zoo and theme-park contents stay only with a Wikipedia article of their own (owner 2026-10-13, fifteen answers 4); held rows settled 2026-10-13",
+    "node/3760236263": "Museum, zoo and theme-park contents stay only with a Wikipedia article of their own (owner 2026-10-13, fifteen answers 4); held rows settled 2026-10-13",
+    "way/149563662": "Museum, zoo and theme-park contents stay only with a Wikipedia article of their own (owner 2026-10-13, fifteen answers 4); held rows settled 2026-10-13",
+    "way/619447381": "Lanes named for their mode are dropped (owner 2026-10-13, fourteen answers 3); held rows settled 2026-10-13",
+}

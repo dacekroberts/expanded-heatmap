@@ -296,3 +296,13 @@ RAW_CLASSIFICATION_COLUMN = "naf_label"
 # The box catches a CORRUPT coordinate; the commune filter does the scoping.
 LILLE_BBOX = {"lat_min": 50.58, "lat_max": 50.77,
               "lon_min": 2.95, "lon_max": 3.24}
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
+
+PLACE_AREA = "(id:3600058213,3600058404,3600058583,3600058617,3600058677,3600058686,3600058897,3600059041,3600059043,3600059056,3600059551)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
+PLACE_LANGUAGES = ("fr",)
+PLACE_FOLD = None
+PLACE_REVIEWED = {}
+PLACE_DROPPED = {}

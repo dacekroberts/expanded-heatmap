@@ -1,40 +1,73 @@
 {
-  "cnefe:2611606_RECIFE.zip": {
-    "file": "2611606_RECIFE.zip",
-    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/26_PE/2611606_RECIFE.zip",
-    "bytes": 17729524,
-    "sha256": "db8987a56019df7aaa4a2793b4fc31c8b2a439ede5a6bea3661e069d208e75c6",
-    "retrieved": "2026-09-24T15:57:06+00:00 (cache file time)",
-    "last_modified": "Mon, 20 May 2024 22:52:32 GMT"
-  },
-  "cnefe:2607901_JABOATAO_DOS_GUARARAPES.zip": {
-    "file": "2607901_JABOATAO_DOS_GUARARAPES.zip",
-    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/26_PE/2607901_JABOATAO_DOS_GUARARAPES.zip",
-    "bytes": 7528738,
-    "sha256": "3aa0581f96bcc6ebf74967a61810c47d036d55677936f74cb906eed15a729cc9",
-    "retrieved": "2026-09-24T15:57:09+00:00 (cache file time)",
-    "last_modified": "Mon, 20 May 2024 22:52:28 GMT"
-  },
   "cnefe:2602902_CABO_DE_SANTO_AGOSTINHO.zip": {
-    "file": "2602902_CABO_DE_SANTO_AGOSTINHO.zip",
-    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/26_PE/2602902_CABO_DE_SANTO_AGOSTINHO.zip",
     "bytes": 2470937,
-    "sha256": "5a4581fdf2cbccbcfcb2b238de76d2788805e964a7a4dae7a8f3b5effa35b596",
+    "file": "2602902_CABO_DE_SANTO_AGOSTINHO.zip",
+    "last_modified": "Mon, 20 May 2024 22:52:26 GMT",
     "retrieved": "2026-09-24T15:57:11+00:00 (cache file time)",
-    "last_modified": "Mon, 20 May 2024 22:52:26 GMT"
+    "sha256": "5a4581fdf2cbccbcfcb2b238de76d2788805e964a7a4dae7a8f3b5effa35b596",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/26_PE/2602902_CABO_DE_SANTO_AGOSTINHO.zip"
   },
   "cnefe:2603454_CAMARAGIBE.zip": {
-    "file": "2603454_CAMARAGIBE.zip",
-    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/26_PE/2603454_CAMARAGIBE.zip",
     "bytes": 1592566,
-    "sha256": "747dc81136861280232752c37478364b760a03a807ac72884fdc7348674b8afa",
+    "file": "2603454_CAMARAGIBE.zip",
+    "last_modified": "Mon, 20 May 2024 22:52:26 GMT",
     "retrieved": "2026-09-24T15:57:13+00:00 (cache file time)",
-    "last_modified": "Mon, 20 May 2024 22:52:26 GMT"
+    "sha256": "747dc81136861280232752c37478364b760a03a807ac72884fdc7348674b8afa",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/26_PE/2603454_CAMARAGIBE.zip"
+  },
+  "cnefe:2607901_JABOATAO_DOS_GUARARAPES.zip": {
+    "bytes": 7528738,
+    "file": "2607901_JABOATAO_DOS_GUARARAPES.zip",
+    "last_modified": "Mon, 20 May 2024 22:52:28 GMT",
+    "retrieved": "2026-09-24T15:57:09+00:00 (cache file time)",
+    "sha256": "3aa0581f96bcc6ebf74967a61810c47d036d55677936f74cb906eed15a729cc9",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/26_PE/2607901_JABOATAO_DOS_GUARARAPES.zip"
+  },
+  "cnefe:2611606_RECIFE.zip": {
+    "bytes": 17729524,
+    "file": "2611606_RECIFE.zip",
+    "last_modified": "Mon, 20 May 2024 22:52:32 GMT",
+    "retrieved": "2026-09-24T15:57:06+00:00 (cache file time)",
+    "sha256": "db8987a56019df7aaa4a2793b4fc31c8b2a439ede5a6bea3661e069d208e75c6",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/26_PE/2611606_RECIFE.zip"
   },
   "osm_municipios": {
     "file": "osm_municipios.json",
     "host": "overpass-api.de",
     "retrieved": "2026-09-24T16:52:12+00:00 (cache file time)"
+  },
+  "osm_place_outline": {
+    "bytes": 291610,
+    "elements": 3,
+    "file": "osm_place_outline_v1.json",
+    "host": "download.geofabrik.de (nordeste-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:60];\narea(id:3600303585,3600303695,3600303709)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T10:14:13+00:00",
+    "sha256": "26ace771d52356c88f8b1a1f55e5855806248f0906539f689da5fa1d79ffc09c"
+  },
+  "osm_places": {
+    "bytes": 18979656,
+    "elements": 178662,
+    "file": "osm_places_2026-10-13.json",
+    "host": "download.geofabrik.de (nordeste-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3600303585,3600303695,3600303709)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T10:14:14+00:00",
+    "sha256": "55ef8274dfc10e9e35f249560c5deb764b4c3d33bd8a8c6196f5d8543e6c18b1"
+  },
+  "osm_places_extra": {
+    "bytes": 100262,
+    "elements": 480,
+    "file": "osm_places_extra_2026-10-13.json",
+    "host": "download.geofabrik.de (nordeste-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3600303585,3600303695,3600303709)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T10:14:14+00:00",
+    "sha256": "65bf89b1d36ec7c5fa465b6e056780aebb340b1f6632d7ee4d1aa7d402c77980"
   },
   "osm_rail": {
     "file": "osm_rail.json",

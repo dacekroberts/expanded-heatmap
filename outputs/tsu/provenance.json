@@ -64,6 +64,39 @@
     "sha256": "d0ff240bb86b42f4cac06009951c59f1482c5085ac51041eecd75fa7e133e17c",
     "url": "https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2025/N03-20250101_24_GML.zip"
   },
+  "osm_place_outline": {
+    "bytes": 257500,
+    "elements": 1,
+    "file": "osm_place_outline_v1.json",
+    "host": "download.geofabrik.de (kansai-261008.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-08T20:21:06Z",
+    "query": "[out:json][timeout:60];\narea(id:3604538734)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T11:10:44+00:00",
+    "sha256": "135f02ad1d692f0edc1be63ad7285e14d05cbd263968b24d7c1dbf7367dd7fa7"
+  },
+  "osm_places": {
+    "bytes": 3029724,
+    "elements": 25900,
+    "file": "osm_places_2026-10-13.json",
+    "host": "download.geofabrik.de (kansai-261008.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-08T20:21:06Z",
+    "query": "[out:json][timeout:170];\narea(id:3604538734)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T11:10:44+00:00",
+    "sha256": "03b27cc24409731078d36b4ab67bee552c9e1630ad65438e57bb9ed6cba0ceeb"
+  },
+  "osm_places_extra": {
+    "bytes": 12710,
+    "elements": 31,
+    "file": "osm_places_extra_2026-10-13.json",
+    "host": "download.geofabrik.de (kansai-261008.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-08T20:21:06Z",
+    "query": "[out:json][timeout:170];\narea(id:3604538734)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T11:10:44+00:00",
+    "sha256": "1e60b64d478f7f7d565db81bee70b0e605a5cfe9c4c3625878743bbb2f595e2b"
+  },
   "osm_station_names": {
     "bytes": 41895,
     "elements": 67,

@@ -1,34 +1,80 @@
 {
   "cnefe:5300108_BRASILIA.zip": {
-    "file": "5300108_BRASILIA.zip",
-    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/53_DF/5300108_BRASILIA.zip",
     "bytes": 19814371,
-    "sha256": "b263c241a5fd250716d9031d96eacca0e6a221ef614c7253028d2187ee1dfb35",
+    "file": "5300108_BRASILIA.zip",
+    "last_modified": "Mon, 20 May 2024 22:55:08 GMT",
     "retrieved": "2026-09-24T15:56:31+00:00 (cache file time)",
-    "last_modified": "Mon, 20 May 2024 22:55:08 GMT"
-  },
-  "df_estacoes_metro": {
-    "file": "df_estacoes_metro.json",
-    "url": "https://catalogo.ipe.df.gov.br/geoserver/geonode/wfs?service=WFS&version=2.0.0&request=GetFeature&outputFormat=application/json&srsName=EPSG:4326&typeNames=geonode:ESTACOES_METRO",
-    "bytes": 9160,
-    "sha256": "6928ddbdd79392b421fda9ea2887a57a2de0c7a5a8b3472373f81d7937748002",
-    "retrieved": "2026-09-24T17:05:44+00:00 (cache file time)"
+    "sha256": "b263c241a5fd250716d9031d96eacca0e6a221ef614c7253028d2187ee1dfb35",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/53_DF/5300108_BRASILIA.zip"
   },
   "df_estacoes_em_construcao": {
-    "file": "df_estacoes_em_construcao.json",
-    "url": "https://catalogo.ipe.df.gov.br/geoserver/geonode/wfs?service=WFS&version=2.0.0&request=GetFeature&outputFormat=application/json&srsName=EPSG:4326&typeNames=geonode:ESTACOES_EM_CONSTRUCAO",
     "bytes": 4467,
+    "file": "df_estacoes_em_construcao.json",
+    "retrieved": "2026-09-24T17:05:44+00:00 (cache file time)",
     "sha256": "5dbe6584794b9fac4883dc938e190df73e34d97238e3bd2a143f8b5e7edd31e0",
-    "retrieved": "2026-09-24T17:05:44+00:00 (cache file time)"
+    "url": "https://catalogo.ipe.df.gov.br/geoserver/geonode/wfs?service=WFS&version=2.0.0&request=GetFeature&outputFormat=application/json&srsName=EPSG:4326&typeNames=geonode:ESTACOES_EM_CONSTRUCAO"
+  },
+  "df_estacoes_metro": {
+    "bytes": 9160,
+    "file": "df_estacoes_metro.json",
+    "retrieved": "2026-09-24T17:05:44+00:00 (cache file time)",
+    "sha256": "6928ddbdd79392b421fda9ea2887a57a2de0c7a5a8b3472373f81d7937748002",
+    "url": "https://catalogo.ipe.df.gov.br/geoserver/geonode/wfs?service=WFS&version=2.0.0&request=GetFeature&outputFormat=application/json&srsName=EPSG:4326&typeNames=geonode:ESTACOES_METRO"
   },
   "osm_municipios": {
     "file": "osm_municipios.json",
     "host": "overpass-api.de",
     "retrieved": "2026-09-24T16:00:31+00:00 (cache file time)"
   },
+  "osm_place_outline": {
+    "bytes": 351445,
+    "elements": 1,
+    "file": "osm_place_outline_v1.json",
+    "host": "download.geofabrik.de (centro-oeste-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:60];\narea(id:3600421151)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T19:22:46+00:00",
+    "sha256": "1492f3d7e52f595a03c5bd360517b449da0339a2e30a4f6ef210301baefcee67"
+  },
+  "osm_places": {
+    "bytes": 17425944,
+    "elements": 167157,
+    "file": "osm_places_2026-10-13.json",
+    "host": "download.geofabrik.de (centro-oeste-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3600421151)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T19:22:47+00:00",
+    "sha256": "59f3d65b17d2b913ea3c859e16264f77a139f910c926a591073d4b2927efb380"
+  },
+  "osm_places_extra": {
+    "bytes": 223415,
+    "elements": 1130,
+    "file": "osm_places_extra_2026-10-13.json",
+    "host": "download.geofabrik.de (centro-oeste-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3600421151)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T19:22:47+00:00",
+    "sha256": "c0222872e4726dda8c3cfe2fba52db3d2e119c5a236cedd2ef33e7bb09e1c71f"
+  },
   "osm_rail": {
     "file": "osm_rail.json",
     "host": "overpass-api.de",
     "retrieved": "2026-09-24T16:03:47+00:00 (cache file time)"
+  },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 1595,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 13,
+    "ids_not_read": 0,
+    "ids_with_article": 4,
+    "ids_without_article": 9,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "f6633c4d142e3d355ba32c3758672eb8d422ee7840530686e4e924d609904e42"
   }
 }

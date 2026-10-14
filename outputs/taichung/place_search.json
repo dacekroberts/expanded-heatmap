@@ -1,0 +1,26 @@
+{
+  "index": "app/static/places/taichung.json",
+  "places": 61489,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "zh"
+    ],
+    "coverage": {
+      "en": 0.322,
+      "zh": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Chinese"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/2921154",
+      "name": "Taichung",
+      "stations": 18
+    }
+  ]
+}

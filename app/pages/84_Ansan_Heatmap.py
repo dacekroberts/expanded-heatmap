@@ -86,7 +86,7 @@ st.markdown(
 """
 )
 
-render_map_help('three business categories (Food service, Retail and Personal services)')
+render_map_help('three business categories (Food service, Retail and Personal services)', search='ansan')
 render_excluded_stations("Ansan")
 render_country_links('Ansan')
 

@@ -85,7 +85,7 @@ st.markdown(
 """
 )
 
-render_map_help("business layer")
+render_map_help("business layer", search='minoh')
 render_excluded_stations("Minoh")
 render_country_links("Minoh")
 

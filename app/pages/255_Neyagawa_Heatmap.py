@@ -81,7 +81,7 @@ st.markdown(
 """
 )
 
-render_map_help("business layer")
+render_map_help("business layer", search='neyagawa')
 render_excluded_stations("Neyagawa")
 render_country_links("Neyagawa")
 

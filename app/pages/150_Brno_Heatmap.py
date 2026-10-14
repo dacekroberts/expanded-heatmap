@@ -109,7 +109,7 @@ st.markdown(
 """
 )
 
-render_map_help('three business categories (Retail, Food service and Personal services)')
+render_map_help('three business categories (Retail, Food service and Personal services)', search='brno')
 render_excluded_stations("Brno")
 render_country_links('Brno')
 

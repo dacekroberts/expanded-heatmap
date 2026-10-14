@@ -211,3 +211,90 @@ CLUJ_NAPOCA_BBOX = {
     "lon_min": 23.43,
     "lon_max": 23.76,
 }
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
+
+PLACE_AREA = "(id:3603277038)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
+PLACE_LANGUAGES = ("ro",)
+# Hungarian names sit on a share of the rows, below the floor (owner, 2026-10-13: "declare").
+PLACE_LANGUAGES_ALSO = ("hu",)
+# Tram stops are mapped with the mode glued on; the index takes it off.
+PLACE_STATION_STRIP = (" Tram",)
+PLACE_FOLD = None
+# Rows a reader held that the owner ruled to keep (2026-10-13;
+# docs/decisions_drafts/search-final.md). A record only: no code reads it.
+# A street is listed by name, a place by OSM id with its name. Not in
+# PLACE_REVIEWED, which check E holds to names carrying a leak word.
+PLACE_RULED_KEPT = {
+    # Held rows kept by the existing rules in three lanes and the owner's
+    # rulings of 2026-10-13 (docs/decisions_drafts/search-final-held-applied.md).
+    # A home, family or person row is listed by id alone.
+    "way/469783140": "'La Barieră', A park tied to a housing complex, a company or a neighbour only by its name stays (owner 2026-10-13, second batch g; parks named only as an intersection stay)",
+    "way/1548857318": "'Parc Platinia', A park tied to a housing complex, a company or a neighbour only by its name stays (owner 2026-10-13, second batch g; parks named only as an intersection stay)",
+    "way/275141007": "'Fosta \"Casină Română\"', A landmark that stands, ruined, abandoned or under a former-use name, stays (owner 2026-10-13: keep all standing abandoned landmarks; third list 11: former in a name is not read as gone)",
+    "way/247586801": "'Fostul Sediu al Băncii \"Economu\"', A landmark that stands, ruined, abandoned or under a former-use name, stays (owner 2026-10-13: keep all standing abandoned landmarks; third list 11: former in a name is not read as gone)",
+    "node/12236485011": "A place name plus a type word is a name; the bare-type rule takes only a name that is all type (BARE_TYPE_NAMES, matched as the whole name)",
+    "node/3462446035": "A place name plus a type word is a name; the bare-type rule takes only a name that is all type (BARE_TYPE_NAMES, matched as the whole name)",
+    "node/12297324584": "'Sigla CUG', Statues, busts and public memorials stay, and monuments are not held to the notable rule (owner 2026-10-13, personal names 2; 2026-10-11 answer 5, measured and put back)",
+    "way/247586363": "A historic building that is no home and no business by its tags stays; historic kinds need no article (landmark rules 2026-10-07)",
+    "way/202393357": "A historic building that is no home and no business by its tags stays; historic kinds need no article (landmark rules 2026-10-07)",
+    "way/278311108": "A historic building that is no home and no business by its tags stays; historic kinds need no article (landmark rules 2026-10-07)",
+    "way/237819797": "A historic building that is no home and no business by its tags stays; historic kinds need no article (landmark rules 2026-10-07)",
+    "node/13607820451": "A place of worship under a name of its own needs no article (NOTABLE_ONLY 2026-10-07; Anyang 2026-10-13: where the tags show worship or cannot tell, it stays)",
+    "node/2018383621": "'Clujana h', A station of a rail network is not dropped for its name (station guard, owner 2026-10-13)",
+    "Strada Tetarom": "A site's road with a street word is kept (owner 2026-10-13, fifteen answers 9; six answers 4)",
+    "Strada Tehnofrig": "A site's road with a street word is kept (owner 2026-10-13, fifteen answers 9; six answers 4)",
+    "Strada Căminele Hașdeu": "A site's road with a street word is kept (owner 2026-10-13, fifteen answers 9; six answers 4)",
+    "Rozelor": "A misspelled, cut or abbreviated name is still that place and no name is repaired (owner 2026-10-13, seven rulings 1; the typo line)",
+    "Constantin Brâncoveanu": "A misspelled, cut or abbreviated name is still that place and no name is repaired (owner 2026-10-13, seven rulings 1; the typo line)",
+    "Nadasel": "A misspelled, cut or abbreviated name is still that place and no name is repaired (owner 2026-10-13, seven rulings 1; the typo line)",
+}
+PLACE_REVIEWED = {}
+# The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
+PLACE_DROPPED = {
+    # Rows the owner's later rulings of 2026-10-13 decide, and the twin checks' drops (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "node/5257876595": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
+    "way/276967051": "a denomination as the whole name; the real name is in alt_name and no rule repairs a name (owner, 2026-10-13)",
+    "way/1427758602": "a type phrase as the whole name (owner, 2026-10-13)",
+    "way/1145050481": "a type phrase as the whole name (owner, 2026-10-13)",
+    "way/276212112": "a type phrase as the whole name (owner, 2026-10-13)",
+    "node/4134073486": "a type phrase as the whole name (owner, 2026-10-13)",
+    "way/278312772": "a denomination or its hall type as the whole name (owner, 2026-10-13)",
+    "way/276704844": "a denomination or its hall type as the whole name (owner, 2026-10-13)",
+    "way/275161895": "a denomination or its hall type as the whole name (owner, 2026-10-13)",
+    "way/207452268": "a denomination or its hall type as the whole name (owner, 2026-10-13)",
+    "node/11491274868": "a denomination or its hall type as the whole name (owner, 2026-10-13)",
+    "way/283161804": "a denomination or its hall type as the whole name (owner, 2026-10-13)",
+    "way/258878037": "a denomination or its hall type as the whole name (owner, 2026-10-13)",
+    "node/14270671517": "a denomination or its hall type as the whole name (owner, 2026-10-13)",
+    "node/8257918819": "a denomination or its hall type as the whole name (owner, 2026-10-13)",
+    "node/9346436677": "a freight yard, depot or operating point, not a passenger station (owner, 2026-10-13)",
+    "way/669521911": "a duplicate place row, the node carries the same name",
+    "way/669535695": "a duplicate place row, the node carries the same name",
+    "node/4494264091": "a duplicate row, the same church as the way beside it",
+    "way/304949094": "an open-air museum exhibit, a farmstead with no article",
+    "way/278142636": "an open-air museum exhibit, a farmstead with no article",
+    "relation/4062712": "an open-air museum exhibit, a farmstead with no article",
+    "way/278142777": "an open-air museum exhibit, a description as its name",
+    "way/1424822217": "a description standing in for a name",
+    "way/278312124": "a description standing in for a name",
+    "node/3586268027": "a description with a code glued on, inside a firm's premises",
+    "way/1024562571": "dwellings with no article, a home",
+    "way/1337279960": "a house with no article, and a typo in the name",
+    "node/7848257077": "a religious residence with no article",
+    "way/1462802583": "a religious residence with no article",
+    "way/585206582": "a service way named by an address, not a street",
+    "way/585204635": "a service way named by an address, not a street",
+    "way/694262074": "a coded footway, no street name",
+    "way/223357863": "a coded footway, no street name",
+    "way/1549103365": "a name that says the bridge is temporary",
+    "way/1550723831": "a name that says the bridge is temporary",
+    "way/1550723832": "a name that says the bridge is temporary",
+    "way/356779834": "a glitched name, street word glued to the name",
+    # Held rows settled by the existing rules in three lanes and the owner's
+    # rulings of 2026-10-13 (docs/decisions_drafts/search-final-held-applied.md).
+    "way/343528767": "A row that is only the site's own name is dropped when minor ways alone carry it (owner 2026-10-13, fifteen answers 9); held rows settled 2026-10-13",
+}

@@ -1,0 +1,71 @@
+{
+  "index": "app/static/places/copenhagen.json",
+  "places": 16608,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "da"
+    ],
+    "coverage": {
+      "en": 0.006,
+      "da": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Danish"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/2192363",
+      "name": "Copenhagen Municipality",
+      "stations": 64
+    },
+    {
+      "osm": "relation/2186643",
+      "name": "Gladsaxe Municipality",
+      "stations": 10
+    },
+    {
+      "osm": "relation/2186660",
+      "name": "Frederiksberg Municipality",
+      "stations": 9
+    },
+    {
+      "osm": "relation/2183062",
+      "name": "Lyngby-Taarbæk Municipality",
+      "stations": 9
+    },
+    {
+      "osm": "relation/2192190",
+      "name": "Brøndby Municipality",
+      "stations": 4
+    },
+    {
+      "osm": "relation/2190423",
+      "name": "Glostrup Municipality",
+      "stations": 4
+    },
+    {
+      "osm": "relation/2191207",
+      "name": "Herlev Municipality",
+      "stations": 4
+    },
+    {
+      "osm": "relation/2187129",
+      "name": "Vallensbæk Municipality",
+      "stations": 3
+    },
+    {
+      "osm": "relation/2187055",
+      "name": "Ishøj Municipality",
+      "stations": 2
+    },
+    {
+      "osm": "relation/2191218",
+      "name": "Rødovre Municipality",
+      "stations": 1
+    }
+  ]
+}

@@ -96,7 +96,7 @@ st.markdown(
 """
 )
 
-render_map_help("two business categories (Food shops and Food service)")
+render_map_help("two business categories (Food shops and Food service)", search='yamagata')
 render_excluded_stations("Yamagata")
 render_country_links("Yamagata")
 

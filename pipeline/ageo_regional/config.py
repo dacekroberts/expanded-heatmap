@@ -195,3 +195,13 @@ AGEO_REGIONAL_BBOX = {
     "lon_max": OSM_BBOX[3],
 }
 CITY_BBOX = AGEO_REGIONAL_BBOX
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
+
+PLACE_AREA = "(id:3601769172,3601769174)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
+PLACE_LANGUAGES = ("ja",)
+PLACE_FOLD = "ja"
+PLACE_REVIEWED = {}
+PLACE_DROPPED = {}

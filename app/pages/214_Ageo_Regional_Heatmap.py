@@ -92,7 +92,7 @@ st.markdown(
 - **About 52% of storefronts sit within a ring.**
 """
 )
-render_map_help("three business categories (Food shops, Food service and Personal services)")
+render_map_help("three business categories (Food shops, Food service and Personal services)", search='ageo_regional')
 render_excluded_stations("Ageo (Regional)")
 render_country_links("Ageo (Regional)")
 

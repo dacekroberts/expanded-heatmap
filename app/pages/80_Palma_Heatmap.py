@@ -90,7 +90,7 @@ st.markdown(
 """
 )
 
-render_map_help('business layer')
+render_map_help('business layer', search='palma')
 render_excluded_stations("Palma")
 render_country_links('Palma')
 

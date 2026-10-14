@@ -148,3 +148,81 @@ ODENSE_BBOX = {
     "lon_min": 10.18,
     "lon_max": 10.60,
 }
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
+
+PLACE_AREA = "(id:3602178124)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
+PLACE_LANGUAGES = ("da",)
+PLACE_FOLD = None
+# Rows a reader held that the owner ruled to keep (2026-10-13;
+# docs/decisions_drafts/search-final.md). A record only: no code reads it.
+# A street is listed by name, a place by OSM id with its name. Not in
+# PLACE_REVIEWED, which check E holds to names carrying a leak word.
+PLACE_RULED_KEPT = {
+    # Held rows kept by the existing rules in three lanes and the owner's
+    # rulings of 2026-10-13 (docs/decisions_drafts/search-final-held-applied.md).
+    # A home, family or person row is listed by id alone.
+    "node/11291844293": "admitted by the index rule for its kind; no drop rule or ruling reaches it by tags or name",
+    "way/190246768": "admitted by the index rule for its kind; no drop rule or ruling reaches it by tags or name",
+    "way/153974860": "admitted by the index rule for its kind; no drop rule or ruling reaches it by tags or name",
+    "way/619756408": "'Galleri Galschiøt', an article of the object's own outweighs a business or private-operator sign (keep beats drop, 2026-10-13)",
+    "node/7216857415": "'Adskilte', a monument is not held to the article rule and nothing in its tags says artwork (measured 2026-10-11, not applied)",
+    "node/9129919110": "'Forn Siðrs Runesten', a statue, bust or public memorial is kept, on its subject's article or none (personal-names ruling; seven rulings no. 3)",
+    "way/146056535": "'Dalum Klosterkirke', a named place of worship needs no article; its name is no denomination or hall type alone (NOTABLE_ONLY exception)",
+    "way/681478283": "'Sønderparken', admitted by the index rule for its kind; no drop rule or ruling reaches it by tags or name",
+    "node/7164850197": "'Odinstårnet (model)', a statue, bust or public memorial is kept, on its subject's article or none (personal-names ruling; seven rulings no. 3)",
+    "Cortex Park": "a site's road with a street word, or a site name on residential or larger ways, stays (15 answers no. 9; six answers no. 4)",
+    "Cortex Park Vest": "a site's road with a street word, or a site name on residential or larger ways, stays (15 answers no. 9; six answers no. 4)",
+    "Servicebyen": "a site's road with a street word, or a site name on residential or larger ways, stays (15 answers no. 9; six answers no. 4)",
+    "Campusvej": "a site's road with a street word, or a site name on residential or larger ways, stays (15 answers no. 9; six answers no. 4)",
+    "Hospitalsringen": "a site's road with a street word, or a site name on residential or larger ways, stays (15 answers no. 9; six answers no. 4)",
+    "Søndre Hospitalsvej": "a site's road with a street word, or a site name on residential or larger ways, stays (15 answers no. 9; six answers no. 4)",
+    "Vestre Hospitalsvej": "a site's road with a street word, or a site name on residential or larger ways, stays (15 answers no. 9; six answers no. 4)",
+    "Helikoptervej": "a site's road with a street word, or a site name on residential or larger ways, stays (15 answers no. 9; six answers no. 4)",
+}
+PLACE_REVIEWED = {}
+# The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
+PLACE_DROPPED = {
+    # Rows the owner's later rulings of 2026-10-13 decide, and the twin checks' drops (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/263538602": "a place of worship named only by a denomination, a body or a chain, with no place or dedication in the name and no branch tag, is dropped (four rulings 1; ruling 2; owner 2026-10-13, relayed by Cleanup)",
+    # Rows the read-only screen helper gave a drop verdict (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/97370926": "religious body's meeting hall: ruling 2 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/376241930": "religious body's meeting hall: ruling 2 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/9604769794": "a duplicate of the church's own row 30 m away, which has the article",
+    "way/1287796022": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/1287796023": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/389590048": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/389590058": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/1107663663": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/1107663664": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/1218034386": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/389590047": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/1107667425": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/1107667426": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/389590045": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/389590057": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/793915482": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/1283255607": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/1325615134": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/1325615151": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/1325615152": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/1482147925": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/1482147926": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/389590046": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/389590051": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/400324787": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/1325615143": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/389590043": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/389590044": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/389674482": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/649600393": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/1287796018": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/389590052": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/389590053": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/839073188": "an aisle of a shopping center, drawn as footways and indoor corridors",
+    "way/461234065": "an aisle of a shopping center, drawn as footways and indoor corridors",
+}

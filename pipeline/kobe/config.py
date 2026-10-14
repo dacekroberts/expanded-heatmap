@@ -254,3 +254,13 @@ PERSON_NAMED = (
     # the second read, labels with a hiragana part (2026-10-12)
     "5a755b9787b3505a",
 )
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
+
+PLACE_AREA = "(id:3600900329)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
+PLACE_LANGUAGES = ("ja",)
+PLACE_FOLD = "ja"
+PLACE_REVIEWED = {}
+PLACE_DROPPED = {}

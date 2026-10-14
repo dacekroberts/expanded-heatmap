@@ -97,7 +97,7 @@ st.markdown(
 """
 )
 
-render_map_help("two business categories (Food shops and Food service)")
+render_map_help("two business categories (Food shops and Food service)", search='yao')
 render_excluded_stations("Yao")
 render_country_links("Yao")
 

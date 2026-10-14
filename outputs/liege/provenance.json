@@ -1,41 +1,74 @@
 {
-  "written_utc": "2026-10-04T07:41:29+00:00",
-  "tec_gtfs": {
-    "url": "https://api-management-discovery-production.azure-api.net/api/gtfs/feed/tec/static",
-    "publisher": "LETEC (TEC), via the Belgian Mobility Company portal",
-    "fetched_utc": "2026-10-04T06:40:22+00:00",
-    "bytes": 84926285,
-    "sha256": "6fce0898d83a51c7e78c62ce16d76fd8130ee46190ff764450515927868e091b",
-    "feed_version": "20261002",
-    "feed_start_date": "20261002",
-    "feed_end_date": "20261225",
-    "zip_entries_dated": "2026-10-04 03:05",
-    "licence": "CC BY 4.0 (Belgian Mobility Company portal terms, art. 3)",
-    "approved": "owner, 2026-10-03 (Belgium build call 1: the cached feeds ratified)"
-  },
   "logic": {
-    "url": "https://geoservices.wallonie.be/geotraitement/spwdatadownload/results/5f56d784-2fd7-47eb-a62a-991d4741a67d/LOGIC_2024_GEOPACKAGE_3812.zip",
-    "zip_sha256": "1b42f6ffd4607af6ba67b84968b1d3faa93251e81edb2d69fd6773f89d315ac2",
-    "zip_bytes": 3172940,
-    "gpkg_sha256": "0c5a469745f595ba33cc19cbedb8de3afe128e31ed722b8add097a06d51a1a31",
-    "files_dated": "2025-04-09",
-    "citation": "Source : Service public de Wallonie (SPW) - Offre commerciale en Wallonie (LoGIC 2024) (2025-04-09)",
     "catalogue": "https://metawal.wallonie.be/geonetwork/srv/api/records/5f56d784-2fd7-47eb-a62a-991d4741a67d",
-    "licence": "CC BY 4.0 (Metawal record 5f56d784-2fd7-47eb-a62a-991d4741a67d)",
+    "citation": "Source : Service public de Wallonie (SPW) - Offre commerciale en Wallonie (LoGIC 2024) (2025-04-09)",
+    "files_dated": "2025-04-09",
+    "gpkg_sha256": "0c5a469745f595ba33cc19cbedb8de3afe128e31ed722b8add097a06d51a1a31",
     "ins": 62063,
+    "licence": "CC BY 4.0 (Metawal record 5f56d784-2fd7-47eb-a62a-991d4741a67d)",
     "points": 3761,
     "surveyed_from": "2024-07-08",
-    "surveyed_to": "2024-08-26"
+    "surveyed_to": "2024-08-26",
+    "url": "https://geoservices.wallonie.be/geotraitement/spwdatadownload/results/5f56d784-2fd7-47eb-a62a-991d4741a67d/LOGIC_2024_GEOPACKAGE_3812.zip",
+    "zip_bytes": 3172940,
+    "zip_sha256": "1b42f6ffd4607af6ba67b84968b1d3faa93251e81edb2d69fd6773f89d315ac2"
   },
   "osm_communes": {
-    "host": "overpass-api.de",
     "bbox": [
       50.56,
       5.48,
       50.71,
       5.68
     ],
-    "nis": "62063",
-    "file_utc": "2026-10-04T07:25:30+00:00"
-  }
+    "file_utc": "2026-10-04T07:25:30+00:00",
+    "host": "overpass-api.de",
+    "nis": "62063"
+  },
+  "osm_place_outline": {
+    "bytes": 52256,
+    "elements": 1,
+    "file": "osm_place_outline_v1.json",
+    "host": "download.geofabrik.de (belgium-261008.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-08T20:21:06Z",
+    "query": "[out:json][timeout:60];\narea(id:3601681788)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T10:14:27+00:00",
+    "sha256": "f9511a6d50b0b160e1cd781c040d54c9d756cf4239416fb1a63bb217d8572f87"
+  },
+  "osm_places": {
+    "bytes": 4646461,
+    "elements": 38783,
+    "file": "osm_places_2026-10-13.json",
+    "host": "download.geofabrik.de (belgium-261008.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-08T20:21:06Z",
+    "query": "[out:json][timeout:170];\narea(id:3601681788)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T10:14:27+00:00",
+    "sha256": "f108ba0c40523ced400a78168dbdde20d1fd4c1ee6e85558db82786702619e9a"
+  },
+  "osm_places_extra": {
+    "bytes": 88498,
+    "elements": 291,
+    "file": "osm_places_extra_2026-10-13.json",
+    "host": "download.geofabrik.de (belgium-261008.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-08T20:21:06Z",
+    "query": "[out:json][timeout:170];\narea(id:3601681788)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T10:14:27+00:00",
+    "sha256": "d71206b4e1c5fb0ab0204e22ed3ea6891d19a6e6aaf977d9bf2d949c832448eb"
+  },
+  "tec_gtfs": {
+    "approved": "owner, 2026-10-03 (Belgium build call 1: the cached feeds ratified)",
+    "bytes": 84926285,
+    "feed_end_date": "20261225",
+    "feed_start_date": "20261002",
+    "feed_version": "20261002",
+    "fetched_utc": "2026-10-04T06:40:22+00:00",
+    "licence": "CC BY 4.0 (Belgian Mobility Company portal terms, art. 3)",
+    "publisher": "LETEC (TEC), via the Belgian Mobility Company portal",
+    "sha256": "6fce0898d83a51c7e78c62ce16d76fd8130ee46190ff764450515927868e091b",
+    "url": "https://api-management-discovery-production.azure-api.net/api/gtfs/feed/tec/static",
+    "zip_entries_dated": "2026-10-04 03:05"
+  },
+  "written_utc": "2026-10-04T07:41:29+00:00"
 }

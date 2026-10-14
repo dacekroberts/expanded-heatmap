@@ -20,6 +20,7 @@ import geopandas as gpd
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline import place_index  # noqa: E402
 from pipeline.linecolour import check_line_colours  # noqa: E402
 from pipeline.map_common import load_geojson_line_shapes, render_heatmap  # noqa: E402
 from pipeline.madrid.config import (  # noqa: E402
@@ -133,6 +134,7 @@ def main():
         # corner at 343 px; the wider placer clears it (measured by injection,
         # docs/plan_detail/labels_and_macro_map.md).
         dense_labels=True,
+        place_index_url=place_index.index_url("madrid"),
     )
 
 

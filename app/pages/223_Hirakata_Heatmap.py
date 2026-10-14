@@ -88,7 +88,7 @@ st.markdown(
 """
 )
 
-render_map_help("three business categories (Food shops, Food service and Personal services)")
+render_map_help("three business categories (Food shops, Food service and Personal services)", search='hirakata')
 render_excluded_stations("Hirakata")
 render_country_links("Hirakata")
 

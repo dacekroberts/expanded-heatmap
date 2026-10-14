@@ -1,7 +1,62 @@
 {
   "fetched_utc": "2026-09-29T08:27:45+00:00",
+  "osm_addresses": "osm_addresses_2026-09-28.csv",
+  "osm_place_outline": {
+    "bytes": 60906,
+    "elements": 1,
+    "file": "osm_place_outline_v1.json",
+    "host": "download.geofabrik.de (romania-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:60];\narea(id:3600377733)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T19:29:09+00:00",
+    "sha256": "b02c7d3d3ea97142562196a6130d1b32e445587111d8eec4c3abf8e79fc3ffa7"
+  },
+  "osm_places": {
+    "bytes": 11470192,
+    "elements": 96108,
+    "file": "osm_places_2026-10-13.json",
+    "host": "download.geofabrik.de (romania-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3600377733)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T19:29:09+00:00",
+    "sha256": "5417b93fa533c04c5da8cbda6d4e11736b5e721d7005e0a5a290def00b550a37"
+  },
+  "osm_places_extra": {
+    "bytes": 168333,
+    "elements": 530,
+    "file": "osm_places_extra_2026-10-13.json",
+    "host": "download.geofabrik.de (romania-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3600377733)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T19:29:09+00:00",
+    "sha256": "bdfafb6d03f9f143f8eb65eaac4e75997c95169e0784cbb901f3200aa15e9496"
+  },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 2494,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 36,
+    "ids_not_read": 0,
+    "ids_with_article": 35,
+    "ids_without_article": 1,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "ade4ac09d042305c0c4703454b2ee77fb29073f5953bf7e1e2bce77e0865f864"
+  },
   "register_date": "2026-08-25",
   "register_files_sha256": {
+    "non-animal/01.-FABRICAREA-PAINII.xlsx": "cc9c3ed541159ab990845c341ba7f11845a9d13ef800653ad2da113a05a06af6",
+    "non-animal/02.-FABRICAREA-PRAJITURILOR-A-PRODUSELOR-PROASPETE-DE-PATISERIE.xlsx": "081dc27f739f01424d207bc544523b173e8ff5f839c80c47ad7da61bcfaab93c",
+    "non-animal/03.-FABRICAREA-PAINII-FABRICAREA-PRAJITURILOR-A-PRODUSELOR-PROASPETE-DE-PATISERIE.xlsx": "5d25e9357ab110de97622687b97e4ec04f34e008d96947d347c1fc14ad711cf7",
+    "non-animal/24.-FABRICAREA-INGHETATEI.xlsx": "206cfc828d10efc5b274a1df99aa8d07b1c71ff186af1717e67a633eec2e3384",
+    "non-animal/33.-COMERT-CU-AMANUNTUL-EXCLUSIV-SUPERMARKETURI-HIPERMARKETURI.xlsx": "30867121c2100d5c7ec623e526881469a2165e043046d14c2792b0c5396d9617",
+    "non-animal/34.-SUPERMARKET-HIPERMARKET.xlsx": "b1628ffd3c5870e0aa05970f046a3bea1a8cf49ec881995325777770e9330f88",
+    "non-animal/36.-BARURI.xlsx": "eab91027f4b99e2cebda515dafe72bdcf370362c43fa5d29f508ce420a8b3886",
+    "non-animal/42.-UNITATI-DE-COMERCIALIZARE-A-PRODUSELOR-ALIMENTARE-DE-ORIGINE-NONANIMALA-CONGELATE-REFRIGERATE.xlsx": "da5c7e2a03d0cf9dff507d2bf6e15575bb63d00f427d1bbeeadc8505d858f909",
     "raw/01-CARMANGERIE.xlsx": "3b13434e4e3cd85a50fcb8d1989e46d453159ccc34b800566ee1c032995a133a",
     "raw/02.-MACELARIE.xlsx": "3d11a184654b049de8d0e818a23d59db40ad13ea7110cdf50717a63a4cfe5670",
     "raw/11-MAGAZIN-DE-DESFACERE-PESTE-PESCARIE.xlsx": "419db7efb97c6c9476b7d2d760779a509f5d3ef0c31d68452e56f23f504c7ebb",
@@ -10,15 +65,6 @@
     "raw/20-PIZZERIE.xlsx": "3a7655688cca630c9a2ed6a63b188d60c6c9dff7ecf04eebc49c0d4b98f2b8e5",
     "raw/23-COFETARIE-PATISERIE.xlsx": "7549ab134b5a519430c863bb189cb7aa9af8291f353c2201c34773be3f5a04ec",
     "raw/25-MAGAZIN-ALIMENTAR.xlsx": "639cbb07dc5f289932911c96806a1b3c98db06845f5dca89258c62e75f1f13f7",
-    "raw/26-HIPERMARKET-SUPERMARKET.xlsx": "4bc41e29f86b8d67187a5171701d8961a701863a01e5ce5d0f48ad90e7cc807b",
-    "non-animal/01.-FABRICAREA-PAINII.xlsx": "cc9c3ed541159ab990845c341ba7f11845a9d13ef800653ad2da113a05a06af6",
-    "non-animal/02.-FABRICAREA-PRAJITURILOR-A-PRODUSELOR-PROASPETE-DE-PATISERIE.xlsx": "081dc27f739f01424d207bc544523b173e8ff5f839c80c47ad7da61bcfaab93c",
-    "non-animal/03.-FABRICAREA-PAINII-FABRICAREA-PRAJITURILOR-A-PRODUSELOR-PROASPETE-DE-PATISERIE.xlsx": "5d25e9357ab110de97622687b97e4ec04f34e008d96947d347c1fc14ad711cf7",
-    "non-animal/24.-FABRICAREA-INGHETATEI.xlsx": "206cfc828d10efc5b274a1df99aa8d07b1c71ff186af1717e67a633eec2e3384",
-    "non-animal/33.-COMERT-CU-AMANUNTUL-EXCLUSIV-SUPERMARKETURI-HIPERMARKETURI.xlsx": "30867121c2100d5c7ec623e526881469a2165e043046d14c2792b0c5396d9617",
-    "non-animal/34.-SUPERMARKET-HIPERMARKET.xlsx": "b1628ffd3c5870e0aa05970f046a3bea1a8cf49ec881995325777770e9330f88",
-    "non-animal/36.-BARURI.xlsx": "eab91027f4b99e2cebda515dafe72bdcf370362c43fa5d29f508ce420a8b3886",
-    "non-animal/42.-UNITATI-DE-COMERCIALIZARE-A-PRODUSELOR-ALIMENTARE-DE-ORIGINE-NONANIMALA-CONGELATE-REFRIGERATE.xlsx": "da5c7e2a03d0cf9dff507d2bf6e15575bb63d00f427d1bbeeadc8505d858f909"
-  },
-  "osm_addresses": "osm_addresses_2026-09-28.csv"
+    "raw/26-HIPERMARKET-SUPERMARKET.xlsx": "4bc41e29f86b8d67187a5171701d8961a701863a01e5ce5d0f48ad90e7cc807b"
+  }
 }

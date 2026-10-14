@@ -1,0 +1,137 @@
+{
+  "index": "app/static/places/rome.json",
+  "places": 47730,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "it"
+    ],
+    "coverage": {
+      "en": 0.004,
+      "it": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Italian"
+    ]
+  },
+  "stations_not_open": [
+    {
+      "osm": "node/1096111371",
+      "name": "Statuario Sud",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/1134680982",
+      "name": "Appia Antica",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/1140775415",
+      "name": "Val d'Ala Ovest",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/1141333328",
+      "name": "Ponte Lanciani",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/1147549879",
+      "name": "Porta Furba",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/1156709478",
+      "name": "Selinunte - Quadraro",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/1157717949",
+      "name": "Cavalieri di Malta",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/1157718031",
+      "name": "Magliana Vecchia",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/1166323520",
+      "name": "Castel Giubileo - Colle Salario",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/1357610139",
+      "name": "Fioranello",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/1357773612",
+      "name": "Falcognana",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/1420850128",
+      "name": "Piana del Sole Est",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/1420850715",
+      "name": "Massimina Ovest",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/1420850782",
+      "name": "Massimina",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/1618285423",
+      "name": "Ciampino Nord",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/1618285459",
+      "name": "Gregna di Sant'Andrea",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/260721424",
+      "name": "Villa Pamphili",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/261594311",
+      "name": "Statuario Appio Claudio",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/262476871",
+      "name": "Valle Copella",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/3835784594",
+      "name": "Igea",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/738537504",
+      "name": "Serpentara",
+      "tag": "railway=proposed"
+    },
+    {
+      "osm": "node/8210679921",
+      "name": "Fontana Candida",
+      "tag": "railway=proposed"
+    }
+  ],
+  "area": [
+    {
+      "osm": "relation/41485",
+      "name": "Rome",
+      "stations": 94
+    }
+  ]
+}

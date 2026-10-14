@@ -1,0 +1,132 @@
+{
+  "index": "app/static/places/monterrey.json",
+  "places": 74210,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "es"
+    ],
+    "coverage": {
+      "en": 0.0,
+      "es": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Spanish"
+    ]
+  },
+  "stations_not_open": [
+    {
+      "osm": "node/13907175065",
+      "name": "Y Griega",
+      "tag": "construction=yes"
+    },
+    {
+      "osm": "node/13907211604",
+      "name": "Parque Fundidora",
+      "tag": "construction=yes"
+    },
+    {
+      "osm": "node/13907211626",
+      "name": "Churubusco",
+      "tag": "construction=yes"
+    },
+    {
+      "osm": "node/13909322739",
+      "name": "Lindavista",
+      "tag": "construction=yes"
+    },
+    {
+      "osm": "node/13909322754",
+      "name": "Libertad",
+      "tag": "construction=yes"
+    },
+    {
+      "osm": "node/13909322765",
+      "name": "Bonifacio Salinas",
+      "tag": "construction=yes"
+    },
+    {
+      "osm": "node/13909408168",
+      "name": "San Rafael",
+      "tag": "construction=yes"
+    },
+    {
+      "osm": "node/13909408194",
+      "name": "La Victoria",
+      "tag": "construction=yes"
+    },
+    {
+      "osm": "node/13909715782",
+      "name": "La Talaverna",
+      "tag": "construction=yes"
+    },
+    {
+      "osm": "node/13909731702",
+      "name": "La Fe",
+      "tag": "construction=yes"
+    },
+    {
+      "osm": "way/1261980346",
+      "name": "Ginecología",
+      "tag": "construction=yes"
+    },
+    {
+      "osm": "way/1525868871",
+      "name": "Puente del Papa",
+      "tag": "construction=yes"
+    },
+    {
+      "osm": "way/1525868872",
+      "name": "Macroplaza",
+      "tag": "construction=yes"
+    },
+    {
+      "osm": "way/1529639866",
+      "name": "Serafin Pena",
+      "tag": "construction=yes"
+    },
+    {
+      "osm": "way/1529639867",
+      "name": "Pino Suárez",
+      "tag": "construction=yes"
+    },
+    {
+      "osm": "way/1529639870",
+      "name": "Fuerza Civil",
+      "tag": "construction=yes"
+    },
+    {
+      "osm": "way/1529639873",
+      "name": "Obispado / Torre Rise",
+      "tag": "construction=yes"
+    },
+    {
+      "osm": "way/1529668156",
+      "name": "Barrio Antiguo",
+      "tag": "construction=yes"
+    }
+  ],
+  "area": [
+    {
+      "osm": "relation/5606060",
+      "name": "Monterrey",
+      "stations": 29
+    },
+    {
+      "osm": "relation/5606272",
+      "name": "San Nicolás de los Garza",
+      "stations": 5
+    },
+    {
+      "osm": "relation/5605824",
+      "name": "Guadalupe",
+      "stations": 3
+    },
+    {
+      "osm": "relation/5605805",
+      "name": "General Escobedo",
+      "stations": 1
+    }
+  ]
+}

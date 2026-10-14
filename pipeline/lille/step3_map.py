@@ -28,6 +28,7 @@ import pandas as pd
 from shapely.geometry import shape
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline import place_index  # noqa: E402
 from pipeline.lille.config import (  # noqa: E402
     BUSINESSES_CLEAN_CSV,
     CRS_GEOGRAPHIC,
@@ -103,6 +104,7 @@ def main():
         # label belongs on the stretch this map counts, and that is all eleven.
         label_focus=shape(json.loads(SERVED_BOUNDARY_GEOJSON.read_text(
             encoding="utf-8"))["geometry"]),
+        place_index_url=place_index.index_url("lille"),
     )
 
 

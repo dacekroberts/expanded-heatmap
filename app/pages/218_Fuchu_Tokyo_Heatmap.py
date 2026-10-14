@@ -106,7 +106,7 @@ st.markdown(
 """
 )
 
-render_map_help("three business categories (Food shops, Food service and Personal services)")
+render_map_help("three business categories (Food shops, Food service and Personal services)", search='fuchu_tokyo')
 render_excluded_stations("Fuchū (Tokyo)")
 render_country_links("Fuchū (Tokyo)")
 

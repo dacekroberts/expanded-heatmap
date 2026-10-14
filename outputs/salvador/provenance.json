@@ -1,16 +1,49 @@
 {
   "cnefe:2927408_SALVADOR.zip": {
-    "file": "2927408_SALVADOR.zip",
-    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/29_BA/2927408_SALVADOR.zip",
     "bytes": 52084744,
-    "sha256": "9157a664cebff83d22b79a6865e7dd0e41952f1c7c1458b9abc827e906977610",
+    "file": "2927408_SALVADOR.zip",
+    "last_modified": "Mon, 20 May 2024 22:52:57 GMT",
     "retrieved": "2026-09-24T15:56:38+00:00 (cache file time)",
-    "last_modified": "Mon, 20 May 2024 22:52:57 GMT"
+    "sha256": "9157a664cebff83d22b79a6865e7dd0e41952f1c7c1458b9abc827e906977610",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/29_BA/2927408_SALVADOR.zip"
   },
   "osm_municipios": {
     "file": "osm_municipios.json",
     "host": "overpass.kumi.systems",
     "retrieved": "2026-09-24T16:07:09+00:00 (cache file time)"
+  },
+  "osm_place_outline": {
+    "bytes": 65406,
+    "elements": 1,
+    "file": "osm_place_outline_v1.json",
+    "host": "download.geofabrik.de (nordeste-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:60];\narea(id:3600362362)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T10:14:14+00:00",
+    "sha256": "4548d1919c8ceff723338c2ff49ca89bb00794e67288f99dcdb7662fbe2ac8c7"
+  },
+  "osm_places": {
+    "bytes": 19030784,
+    "elements": 190432,
+    "file": "osm_places_2026-10-13.json",
+    "host": "download.geofabrik.de (nordeste-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3600362362)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T10:14:15+00:00",
+    "sha256": "d62a536c9322ecfc3671d8959a3cf18a4b3134ae90ee84dbd4b5e30547273be1"
+  },
+  "osm_places_extra": {
+    "bytes": 51763,
+    "elements": 208,
+    "file": "osm_places_extra_2026-10-13.json",
+    "host": "download.geofabrik.de (nordeste-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3600362362)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T10:14:15+00:00",
+    "sha256": "a814a37301bc885f3949e6ff2c1ec2d27e9c2d682e6922304c9080c4e5b6a509"
   },
   "osm_rail": {
     "file": "osm_rail.json",

@@ -1,52 +1,98 @@
 {
+  "doorplates": {
+    "bytes": 94461884,
+    "edition": "TGOS_A68000_11508",
+    "file": "taoyuan_doorplate.csv",
+    "retrieved": "2026-09-25T11:49:57+00:00",
+    "sha256": "8ada880927ab2ebfeaf60e0ba2efcf60662fb7859af35aa17808099b6dca0641",
+    "url": "https://opendata.tycg.gov.tw/api/dataset/ec47dbd5-9ed8-4c8d-8ce1-ccb63b1b72e6/resource/d00ecba4-dec2-4a62-bfc7-989a8359cebe/download"
+  },
   "fia_register": {
-    "file": "BGMOPEN1.zip",
-    "url": "https://eip.fia.gov.tw/data/BGMOPEN1.zip",
     "bytes": 66343427,
     "data_date": "2026-09-25",
+    "file": "BGMOPEN1.zip",
+    "retrieved": "2026-09-25T11:47:53+00:00",
     "sha256": "95b08653facc371b44c3281e45256de6dbed3c68955d467faa28ea9a28155000",
-    "retrieved": "2026-09-25T11:47:53+00:00"
-  },
-  "doorplates": {
-    "file": "taoyuan_doorplate.csv",
-    "edition": "TGOS_A68000_11508",
-    "url": "https://opendata.tycg.gov.tw/api/dataset/ec47dbd5-9ed8-4c8d-8ce1-ccb63b1b72e6/resource/d00ecba4-dec2-4a62-bfc7-989a8359cebe/download",
-    "bytes": 94461884,
-    "sha256": "8ada880927ab2ebfeaf60e0ba2efcf60662fb7859af35aa17808099b6dca0641",
-    "retrieved": "2026-09-25T11:49:57+00:00"
+    "url": "https://eip.fia.gov.tw/data/BGMOPEN1.zip"
   },
   "metro_network": {
-    "file": "metro_network.xml",
-    "url": "https://opendata.tycg.gov.tw/api/dataset/434a3d9f-ebc1-474b-b8b7-da53eb340b48/resource/35cd3ed3-42a4-401d-90bd-7f5b82588169/download",
     "bytes": 815,
+    "file": "metro_network.xml",
+    "retrieved": "2026-09-25T11:49:57+00:00",
     "sha256": "92105db531ce3457dd59bd7b634f1d00056da78efbf7b2df355d3a64cae32e85",
-    "retrieved": "2026-09-25T11:49:57+00:00"
+    "url": "https://opendata.tycg.gov.tw/api/dataset/434a3d9f-ebc1-474b-b8b7-da53eb340b48/resource/35cd3ed3-42a4-401d-90bd-7f5b82588169/download"
   },
   "metro_route_stations": {
-    "file": "metro_route_stations.xml",
-    "url": "https://opendata.tycg.gov.tw/api/dataset/8c1fe832-fe4a-4033-a283-25ab39a99d93/resource/5535111f-9af5-40b9-9e58-a4d382fb8b2c/download",
     "bytes": 4574,
+    "file": "metro_route_stations.xml",
+    "retrieved": "2026-09-25T11:49:58+00:00",
     "sha256": "40ccbe31c60234eb4d5130d45a94e7ba9b66b7f96a95724a8a98543118fd8120",
-    "retrieved": "2026-09-25T11:49:58+00:00"
+    "url": "https://opendata.tycg.gov.tw/api/dataset/8c1fe832-fe4a-4033-a283-25ab39a99d93/resource/5535111f-9af5-40b9-9e58-a4d382fb8b2c/download"
   },
   "national_stations": {
-    "file": "national_metro_stations.zip",
-    "url": "https://opdadm.moi.gov.tw/api/v1/no-auth/resource/api/dataset/63A7BA62-C429-4F2D-8B73-21AAB9E6EAE0/resource/4C11DFAE-ED20-4843-89E7-08D23CADAA16/download",
     "bytes": 43634,
+    "file": "national_metro_stations.zip",
+    "retrieved": "2026-09-25T11:49:59+00:00",
     "sha256": "bb830f0a0cfe721df86e2435d29f90d36584d6c1809b48dd01c5cd0412f2c089",
-    "retrieved": "2026-09-25T11:49:59+00:00"
+    "url": "https://opdadm.moi.gov.tw/api/v1/no-auth/resource/api/dataset/63A7BA62-C429-4F2D-8B73-21AAB9E6EAE0/resource/4C11DFAE-ED20-4843-89E7-08D23CADAA16/download"
+  },
+  "osm_place_outline": {
+    "bytes": 217286,
+    "elements": 1,
+    "file": "osm_place_outline_v1.json",
+    "host": "download.geofabrik.de (taiwan-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:60];\narea(id:3602770986)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T19:18:37+00:00",
+    "sha256": "d56f7cf9a65bd8caaeaf498febbf2a0e7e4c8e0ad6b3a0d23ff645850daf44cf"
+  },
+  "osm_places": {
+    "bytes": 24388288,
+    "elements": 234170,
+    "file": "osm_places_2026-10-13.json",
+    "host": "download.geofabrik.de (taiwan-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3602770986)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T19:18:37+00:00",
+    "sha256": "9ba7e1d5bb8fd4ac294331b26b4ca72662543048d2b0bacbf814357efbe22a7d"
+  },
+  "osm_places_extra": {
+    "bytes": 77784,
+    "elements": 224,
+    "file": "osm_places_extra_2026-10-13.json",
+    "host": "download.geofabrik.de (taiwan-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3602770986)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T19:18:38+00:00",
+    "sha256": "d5fcd7c48fc0fb3be5bed61d5af40154709f704c1076616db38bfd39a9eb5994"
   },
   "osm_rail": {
-    "file": "osm_rail_routes.json",
-    "url": "https://overpass-api.de/api/interpreter",
-    "query": "[out:json][timeout:300];relation[\"type\"=\"route\"][\"route\"~\"^(subway|light_rail|train)$\"][\"name\"~\"機場\"](24.58,120.97,25.13,121.53)->.r;.r out geom;node(r.r);out body;",
     "bytes": 326287,
-    "sha256": "4b34f9e198ea86751b0abd37628cf82ad134a142f7b5752cc16fd5227aa28420",
     "elements": {
-      "relation": 7,
-      "node": 44
+      "node": 44,
+      "relation": 7
     },
+    "file": "osm_rail_routes.json",
     "osm_base": "2026-09-25T11:48:03Z",
-    "retrieved": "2026-09-25T11:50:05+00:00"
+    "query": "[out:json][timeout:300];relation[\"type\"=\"route\"][\"route\"~\"^(subway|light_rail|train)$\"][\"name\"~\"機場\"](24.58,120.97,25.13,121.53)->.r;.r out geom;node(r.r);out body;",
+    "retrieved": "2026-09-25T11:50:05+00:00",
+    "sha256": "4b34f9e198ea86751b0abd37628cf82ad134a142f7b5752cc16fd5227aa28420",
+    "url": "https://overpass-api.de/api/interpreter"
+  },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 673,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 12,
+    "ids_not_read": 0,
+    "ids_with_article": 6,
+    "ids_without_article": 6,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "4b1a31e8581925e9159f3908338585a4154d0051c4cb497eb6c995850638e096"
   }
 }

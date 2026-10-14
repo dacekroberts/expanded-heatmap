@@ -1,0 +1,37 @@
+{
+  "index": "app/static/places/taipei.json",
+  "places": 85194,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "zh"
+    ],
+    "coverage": {
+      "en": 0.325,
+      "zh": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Chinese"
+    ]
+  },
+  "stations_not_open": [
+    {
+      "osm": "way/1168339047",
+      "name": "LG08A莒光站",
+      "tag": "opening_date=2027-12-31"
+    }
+  ],
+  "area": [
+    {
+      "osm": "relation/1527220",
+      "name": "New Taipei",
+      "stations": 153
+    },
+    {
+      "osm": "relation/1293250",
+      "name": "Taipei",
+      "stations": 74
+    }
+  ]
+}

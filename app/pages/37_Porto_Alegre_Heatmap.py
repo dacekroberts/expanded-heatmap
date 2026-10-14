@@ -108,7 +108,7 @@ st.markdown(
 """
 )
 
-render_map_help('three business categories (Retail, Food service and Personal services)')
+render_map_help('three business categories (Retail, Food service and Personal services)', search='porto_alegre')
 render_excluded_stations("Porto Alegre (Regional)")
 render_country_links('Porto Alegre (Regional)')
 

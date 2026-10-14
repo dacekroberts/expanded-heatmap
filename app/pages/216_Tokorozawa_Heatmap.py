@@ -89,7 +89,7 @@ st.markdown(
 - **About 77% of storefronts sit within a ring.**
 """
 )
-render_map_help("three business categories (Food shops, Food service and Personal services)")
+render_map_help("three business categories (Food shops, Food service and Personal services)", search='tokorozawa')
 render_excluded_stations("Tokorozawa")
 render_country_links("Tokorozawa")
 

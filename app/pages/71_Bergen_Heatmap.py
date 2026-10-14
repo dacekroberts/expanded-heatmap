@@ -113,7 +113,7 @@ st.markdown(
 """
 )
 
-render_map_help('three business categories (Retail, Food service and Personal services)')
+render_map_help('three business categories (Retail, Food service and Personal services)', search='bergen')
 render_excluded_stations("Bergen")
 render_country_links('Bergen')
 

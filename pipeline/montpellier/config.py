@@ -189,3 +189,13 @@ RAW_CLASSIFICATION_COLUMN = "naf_label"
 # Sanity bounds: the commune's extent plus ~0.02 deg, from the EPCI
 # contours. They catch a corrupt coordinate; the commune filter scopes.
 MONTPELLIER_BBOX = {"lat_min": 43.55, "lat_max": 43.67, "lon_min": 3.79, "lon_max": 3.96}
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
+
+PLACE_AREA = "(id:3600028720,3600028722)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
+PLACE_LANGUAGES = ("fr",)
+PLACE_FOLD = None
+PLACE_REVIEWED = {}
+PLACE_DROPPED = {}

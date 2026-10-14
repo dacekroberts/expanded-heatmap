@@ -1,0 +1,26 @@
+{
+  "index": "app/static/places/oslo.json",
+  "places": 9669,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "nb"
+    ],
+    "coverage": {
+      "en": 0.007,
+      "nb": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Norwegian"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/2775550",
+      "name": "Oslo",
+      "stations": 155
+    }
+  ]
+}

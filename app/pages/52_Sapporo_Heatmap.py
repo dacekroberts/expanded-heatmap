@@ -76,7 +76,7 @@ st.markdown(
 """
 )
 
-render_map_help('three business categories (Food shops, Food service and Personal services)')
+render_map_help('three business categories (Food shops, Food service and Personal services)', search='sapporo')
 render_excluded_stations("Sapporo")
 render_country_links('Sapporo')
 

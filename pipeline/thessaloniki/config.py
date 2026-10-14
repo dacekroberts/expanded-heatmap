@@ -201,3 +201,76 @@ THESSALONIKI_BBOX = {
     "lon_min": 22.88,
     "lon_max": 23.00,
 }
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
+
+PLACE_AREA = "(id:3601770680)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
+PLACE_LANGUAGES = ("el",)
+PLACE_FOLD = None
+# Rows a reader held that the owner ruled to keep (2026-10-13;
+# docs/decisions_drafts/search-final.md). A record only: no code reads it.
+# A street is listed by name, a place by OSM id with its name. Not in
+# PLACE_REVIEWED, which check E holds to names carrying a leak word.
+PLACE_RULED_KEPT = {
+    # Held rows kept by the existing rules in three lanes and the owner's
+    # rulings of 2026-10-13 (docs/decisions_drafts/search-final-held-applied.md).
+    # A home, family or person row is listed by id alone.
+    "node/1923779650": "'Λαχανόκηποι', duplicates of one object are one row (NEAR_DUP_M, ROW_MERGE_M; second nodes of one name dropped, six answers #6)",
+    "node/1922578065": "'Σφαγεία', duplicates of one object are one row (NEAR_DUP_M, ROW_MERGE_M; second nodes of one name dropped, six answers #6)",
+    "way/223419001": "a home is kept only when open to visit or with an article of its own (home rule, 2026-10-08, 2026-10-13)",
+    "way/161685655": "places of worship need no article (NOTABLE_ONLY, 2026-10-07); the tags show a place of worship",
+    "node/13036876527": "'Μονή Βλατάδων', a neighborhood is a place row beside the landmark it is named for (PLACE_VALUES); its Wikidata entry is its own",
+    "node/6893513887": "'Οθωμανική Κρήνη ή Σαρκοφάγος ή Νέκυια', two real names in one stay as written (second batch question d; candidate 23)",
+    "way/161717969": "'I.N. Αμώμου Συλλήψεως της Θεοτόκου', a misspelled or glitched name is still that place (seven rulings #1; typo line, 2026-10-13)",
+    "relation/17126327": "'Νοσοκομείο Λοιμωδών Νόσων', a historic site needs no article (NOTABLE_ONLY covers tourism, amenity, aeroway only; SKIP_HISTORIC does not list this kind)",
+    "Θεσσαλονίκη - Νέα Μουδανιά": "the description rule never takes a street with a way of residential class or above (street_description; 15 answers #9)",
+    "Μενέλαου - Μπακατσέλου": "two real names in one stay as written (second batch question d; candidate 23)",
+}
+PLACE_REVIEWED = {}
+# The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
+PLACE_DROPPED = {
+    "node/12237396502": "a second row for a church that has a row (the weaker object)",
+    "node/12237325686": "a second row for a church that has a row (the weaker object)",
+    "node/12237339058": "a second row for a church that has a row (the weaker object)",
+    "node/12235030987": "a second row for a church that has a row (the weaker object)",
+    "node/12237391730": "a second row for a church that has a row (the weaker object)",
+    "node/12237210591": "a second row for a church that has a row (the weaker object)",
+    "node/12237344478": "a second row for a church that has a row (the weaker object)",
+    "node/12237355785": "a second row for a church that has a row (the weaker object)",
+    "node/12237319435": "a second row for a church that has a row (the weaker object)",
+    "node/12237318444": "a second row for a church that has a row (the weaker object)",
+    "node/12237325698": "a second row for a church that has a row (the weaker object)",
+    "node/12237391732": "a second row for a church that has a row (the weaker object)",
+    "node/12237334662": "a second row for a church that has a row (the weaker object)",
+    "node/12237355406": "a second row for a church that has a row (the weaker object)",
+    "node/12237398515": "a second row for a church that has a row (the weaker object)",
+    "node/12237351324": "a second row for a church that has a row (the weaker object)",
+    "way/162095177": "a second row for a church that has a row (the weaker object)",
+    "node/6266659563": "a monastery dependency with no article, beside its church's own row",
+    "way/162096499": "a duplicate row, the same cistern and Wikidata item as way/162096498",
+    "node/140160188": "a duplicate row, the city walls have a row with an article",
+    "way/618369634": "a name that says the thing is gone (former consulate); the museum in the building has a row",
+    "way/791928888": "a wrong object's name: a metropolitan area tagged a suburb",
+    "way/307657067": "a squatted ruin with no article",
+    "way/223440576": "a mansion with no article and no visiting shown",
+    "way/223440577": "a mansion with no article and no visiting shown",
+    "node/3144389818": "public art with no article; its Wikidata item is its subject's",
+    "way/14438255": "a ramp description (side road) on trunk links signed for a destination",
+    "way/690929059": "a ramp description (side road) on trunk links signed for a destination",
+    "way/690929061": "a ramp description (side road) on trunk links signed for a destination",
+    "way/181790555": "a cut name",
+    "way/255759934": "a cut name",
+    # Held rows settled by the existing rules in three lanes and the owner's
+    # rulings of 2026-10-13 (docs/decisions_drafts/search-final-held-applied.md).
+    "way/1093329659": "bare type word or type phrase as the whole name, no article of its own (BARE_TYPE_NAMES; owner 2026-10-11; seven rulings #4, 2026-10-13); held rows settled 2026-10-13",
+    "node/4397147141": "duplicates of one object are one row (NEAR_DUP_M, ROW_MERGE_M; second nodes of one name dropped, six answers #6); held rows settled 2026-10-13",
+    "node/8285166887": "duplicates of one object are one row (NEAR_DUP_M, ROW_MERGE_M; second nodes of one name dropped, six answers #6); held rows settled 2026-10-13",
+    "way/110348838": "campus lawns and courts go, by id (wave 1 lettered list, owner 2026-10-13; Goteborg campus yards, 15 answers #1); held rows settled 2026-10-13",
+    "way/110348832": "campus lawns and courts go, by id (wave 1 lettered list, owner 2026-10-13; Goteborg campus yards, 15 answers #1); held rows settled 2026-10-13",
+    "way/1462945298": "a description standing in for a name is dropped (settled call of the reads; seven rulings #4; Ostia finds named by location, 15 answers #8); held rows settled 2026-10-13",
+    "node/12062844326": "a description standing in for a name is dropped (settled call of the reads; seven rulings #4; Ostia finds named by location, 15 answers #8); held rows settled 2026-10-13",
+    "node/1258982282": "duplicates of one object are one row (NEAR_DUP_M, ROW_MERGE_M; second nodes of one name dropped, six answers #6); segmented monuments keep one row (15 answers #7); held rows settled 2026-10-13",
+    "way/27445346": "an object admitted only by another object's entry or name is dropped (Gwangju read, settled call; SUBJECT_ENTRY_KEYS); held rows settled 2026-10-13",
+}

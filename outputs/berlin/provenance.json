@@ -1,8 +1,61 @@
 {
-  "fetched_utc": "2026-09-29T00:43:05+00:00",
-  "businesses_url": "https://media.githubusercontent.com/media/IHKBerlin/IHKBerlin_Gewerbedaten/master/data/IHKBerlin_Gewerbedaten.csv",
-  "gtfs_url": "https://www.vbb.de/gtfs",
   "boundary_url": "https://gdi.berlin.de/services/wfs/alkis_land?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&TYPENAMES=alkis_land:landesgrenze&OUTPUTFORMAT=application/json&SRSNAME=EPSG:4326",
+  "businesses_url": "https://media.githubusercontent.com/media/IHKBerlin/IHKBerlin_Gewerbedaten/master/data/IHKBerlin_Gewerbedaten.csv",
+  "feed_info": {
+    "missing_feed_info": true
+  },
+  "fetched_utc": "2026-09-29T00:43:05+00:00",
+  "gtfs_calendar": {
+    "end": "20261212",
+    "start": "20260924"
+  },
+  "gtfs_url": "https://www.vbb.de/gtfs",
+  "osm_place_outline": {
+    "bytes": 263713,
+    "elements": 1,
+    "file": "osm_place_outline_v1.json",
+    "host": "download.geofabrik.de (berlin-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:60];\narea(id:3600062422)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T18:12:27+00:00",
+    "sha256": "85766c5e88878fb81734db1a2d34cbc509872790232acd57f1ac16525e8f4c1e"
+  },
+  "osm_places": {
+    "bytes": 96929968,
+    "elements": 470891,
+    "file": "osm_places_2026-10-13.json",
+    "host": "download.geofabrik.de (berlin-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3600062422)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T18:12:29+00:00",
+    "sha256": "3715767789c0c8832a3d3e6c8059c169e2c8251f15425c3bd0431178ea468312"
+  },
+  "osm_places_extra": {
+    "bytes": 1112712,
+    "elements": 2918,
+    "file": "osm_places_extra_2026-10-13.json",
+    "host": "download.geofabrik.de (berlin-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3600062422)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T18:12:30+00:00",
+    "sha256": "418222ac20371f6459aee4279b4bd565cd9d38ee11b9a29b3e3ff1cb9aacbd73"
+  },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 33405,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 1214,
+    "ids_not_read": 0,
+    "ids_with_article": 104,
+    "ids_without_article": 1110,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "4e977fe44b476b7a6538aed2027944f88ecf14ed9cd4665b92b63ed804381b6a"
+  },
   "register_columns": [
     "opendata_id",
     "city",
@@ -25,12 +78,5 @@
     "Prognoseraum",
     "Ortsteil"
   ],
-  "feed_info": {
-    "missing_feed_info": true
-  },
-  "gtfs_calendar": {
-    "start": "20260924",
-    "end": "20261212"
-  },
   "register_date": "2026-09-01"
 }

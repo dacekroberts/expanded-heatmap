@@ -87,7 +87,7 @@ st.markdown(
 """
 )
 
-render_map_help("business layer")
+render_map_help("business layer", search='ibaraki_osaka')
 render_excluded_stations("Ibaraki (Osaka)")
 render_country_links("Ibaraki (Osaka)")
 

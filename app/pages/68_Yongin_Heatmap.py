@@ -83,7 +83,7 @@ st.markdown(
 """
 )
 
-render_map_help('three business categories (Food service, Retail and Personal services)')
+render_map_help('three business categories (Food service, Retail and Personal services)', search='yongin')
 render_excluded_stations("Yongin")
 render_country_links('Yongin')
 

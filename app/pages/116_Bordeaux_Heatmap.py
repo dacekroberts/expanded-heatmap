@@ -100,7 +100,7 @@ st.markdown(
 """
 )
 
-render_map_help("three business categories (Retail, Food service and Personal services)")
+render_map_help("three business categories (Retail, Food service and Personal services)", search='bordeaux')
 render_excluded_stations("Bordeaux (Regional)")
 render_country_links("Bordeaux (Regional)")
 

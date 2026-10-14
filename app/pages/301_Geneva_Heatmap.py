@@ -105,7 +105,7 @@ st.markdown(
 """
 )
 
-render_map_help('three business categories (Retail, Food service and Personal services)')
+render_map_help('three business categories (Retail, Food service and Personal services)', search='geneva')
 render_excluded_stations("Geneva (Regional)")
 render_country_links('Geneva (Regional)')
 

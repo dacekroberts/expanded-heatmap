@@ -136,3 +136,53 @@ MOST_BBOX = {
 # --- The macro map ---------------------------------------------------------
 MAP_MODE = "tram"
 MAP_COVERAGE = "full"
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
+
+PLACE_AREA = "(id:3600436570,3600436574)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
+PLACE_LANGUAGES = ("cs",)
+PLACE_FOLD = None
+# Rows a reader held that the owner ruled to keep (2026-10-13;
+# docs/decisions_drafts/search-final.md). A record only: no code reads it.
+# A street is listed by name, a place by OSM id with its name. Not in
+# PLACE_REVIEWED, which check E holds to names carrying a leak word.
+PLACE_RULED_KEPT = {
+    "Přehradni cesta": "a misspelled street is still that street (owner, 2026-10-13)",
+    # Held rows kept by the existing rules in three lanes and the owner's
+    # rulings of 2026-10-13 (docs/decisions_drafts/search-final-held-applied.md).
+    # A home, family or person row is listed by id alone.
+    "node/4223957714": "'Lounická kopec', a misspelled name is still that place (owner 2026-10-13, seven rulings no. 1)",
+}
+PLACE_REVIEWED = {}
+# The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
+PLACE_DROPPED = {
+    "node/11887477865": "a replica gun named for its model (owner, 2026-10-13)",
+    "node/639173485": "a memorial named by its inscription (owner, 2026-10-13)",
+    "relation/442417": "an administrative district reaching beyond the map, in as a place row (owner, 2026-10-13)",
+    "relation/1266525": "a whole name that is only a type word (castle); the object itself has an article (owner, 2026-10-13)",
+    "node/13894102732": "a bare quarter node doubling the district boundary row that already carries this short name (owner, 2026-10-13)",
+    "node/13158629883": "a vanished object: a station closed in 1970, its site now under the lake",
+    # Held rows settled by the existing rules in three lanes and the owner's
+    # rulings of 2026-10-13 (docs/decisions_drafts/search-final-held-applied.md).
+    "way/1467701572": "a description standing in for a name is dropped by id (settled read call; wave 1 precedent); held rows settled 2026-10-13",
+}
+# QUIET STATIONS (owner, 2026-10-13): stops inside the search area with
+# nothing indexable within 1 km, so the coverage rule skips them. All three
+# are inside Litvínov, at the Záluží chemical works; ustecky-261012 holds no
+# named highway way within 1 km of any, in any municipality. Read by shared
+# code once Cleanup lands it; re-measure if the area or the cache changes.
+PLACE_QUIET_STATIONS = {
+    "Záluží, areál Hlubina": "nearest index row 1,065 m, nearest indexed street line 1,112 m; "
+                             "owner, 2026-10-13",
+    "Záluží, doprava": "nearest index row 1,388 m, nearest indexed street line 1,688 m; "
+                       "owner, 2026-10-13",
+    "Záluží, čerpací stanice": "nearest index row 1,308 m, nearest indexed street line 2,707 m; "
+                               "owner, 2026-10-13",
+}
+# Kept by id: admitted as rows although a rule passes them over (owner, 2026-10-13;
+# docs/decisions_drafts/search-final.md).
+PLACE_KEPT = {
+    "way/50164668": "'Oblastní muzeum a galerie', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+}

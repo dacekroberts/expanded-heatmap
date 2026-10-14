@@ -112,7 +112,7 @@ st.markdown(
 """
 )
 
-render_map_help('business categories (Food service and Food shops)')
+render_map_help('business categories (Food service and Food shops)', search='goteborg')
 render_excluded_stations("Göteborg")
 render_country_links('Göteborg')
 

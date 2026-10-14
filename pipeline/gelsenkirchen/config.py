@@ -237,3 +237,76 @@ GELSENKIRCHEN_BBOX = {
     "lon_min": 6.97,
     "lon_max": 7.16,
 }
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
+
+PLACE_AREA = "(id:3600062522)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
+PLACE_LANGUAGES = ("de",)
+PLACE_FOLD = None
+PLACE_REVIEWED = {}
+# The hand read of 2026-10-13 (docs/decisions_drafts/search-final.md).
+PLACE_DROPPED = {
+    # Same-named objects a drop above made a row (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "node/5359183650": "a same-named object beside a row dropped by id, which that drop made the row: dropped with it under the same ruling (finding 53; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    # Rows the read-only screen helper gave a drop verdict (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "node/310751502": "religious body's meeting hall: ruling 2 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/254633833": "worship named only by a denomination: worship named only by a denomination, a body or a chain (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/145301515": "worship named only by a denomination: worship named only by a denomination, a body or a chain (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/145301478": "worship named only by a denomination: worship named only by a denomination, a body or a chain (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/281974847": "part of a church: ruling 4 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/131691262": "part of a church: ruling 4 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/4553571141": "part of a church: ruling 4 (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "node/5359182390": "duplicate within 300 m: duplicates of one object (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    # Descriptions, positions and site labels standing in for a name (the flag read of 2026-10-13, applied on the owner's word;
+    # docs/decisions_drafts/search-final.md).
+    "node/13956488410": "a description, a position or a site label standing in for a name is dropped (seven rulings 4; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "node/13956488405": "a description, a position or a site label standing in for a name is dropped (seven rulings 4; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "way/147192450": "a stadium's service ring, 14 of its 18 ways private",
+    "way/147192451": "a stadium's service ring, 14 of its 18 ways private",
+    "way/44387163": "a stadium's service ring, 14 of its 18 ways private",
+    "way/44387164": "a stadium's service ring, 14 of its 18 ways private",
+    "way/44387166": "a stadium's service ring, 14 of its 18 ways private",
+    "way/44387167": "a stadium's service ring, 14 of its 18 ways private",
+    "way/44387168": "a stadium's service ring, 14 of its 18 ways private",
+    "way/44387174": "a stadium's service ring, 14 of its 18 ways private",
+    "way/44387175": "a stadium's service ring, 14 of its 18 ways private",
+    "way/44387177": "a stadium's service ring, 14 of its 18 ways private",
+    "way/44387180": "a stadium's service ring, 14 of its 18 ways private",
+    "way/44387181": "a stadium's service ring, 14 of its 18 ways private",
+    "way/44387189": "a stadium's service ring, 14 of its 18 ways private",
+    "way/44387190": "a stadium's service ring, 14 of its 18 ways private",
+    "way/44387191": "a stadium's service ring, 14 of its 18 ways private",
+    "way/44387198": "a stadium's service ring, 14 of its 18 ways private",
+    "way/44387199": "a stadium's service ring, 14 of its 18 ways private",
+    "way/45421550": "a stadium's service ring, 14 of its 18 ways private",
+    "way/145171446": "a description standing in for a name",
+    "node/9645844304": "one of seven prayer stones tagged a place of worship, no register key; the group row node/4553571141 stays (owner, 2026-10-13)",
+    "node/9645844303": "one of seven prayer stones tagged a place of worship, no register key; the group row node/4553571141 stays (owner, 2026-10-13)",
+    "node/9645844302": "one of seven prayer stones tagged a place of worship, no register key; the group row node/4553571141 stays (owner, 2026-10-13)",
+    "node/9645844301": "one of seven prayer stones tagged a place of worship, no register key; the group row node/4553571141 stays (owner, 2026-10-13)",
+    "node/9645844300": "one of seven prayer stones tagged a place of worship, no register key; the group row node/4553571141 stays (owner, 2026-10-13)",
+    "node/9645844299": "one of seven prayer stones tagged a place of worship, no register key; the group row node/4553571141 stays (owner, 2026-10-13)",
+    "node/9645844298": "one of seven prayer stones tagged a place of worship, no register key; the group row node/4553571141 stays (owner, 2026-10-13)",
+    "way/322467166": "a kindergarten tagged a place of worship",
+    "node/8998470682": "a church youth office tagged a place of worship",
+    "way/418609149": "a section of the zoo, drawn as a park; the zoo has its own row",
+    "way/418609413": "a section of the zoo, drawn as a park; the zoo has its own row",
+    "way/418624765": "a section of the zoo, drawn as a park; the zoo has its own row",
+    "way/418640757": "a section of the zoo, drawn as a park; the zoo has its own row",
+    "way/244557929": "a park named for the cattle kept in it: a description",
+    "way/556717431": "a description standing in for a name",
+}
+# Kept by id: admitted as rows although a rule passes them over (owner, 2026-10-13;
+# docs/decisions_drafts/search-final.md).
+PLACE_KEPT = {
+    "way/147192563": "'VELTINS-Arena', owner, 2026-10-13: brand ruling; no sight tag, so the rule passes over it",
+    "node/244915353":"'Amphitheater Gelsenkirchen', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/248922852": "'Consol Theater', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/1123451557": "'Herkules', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "node/2288376990": "'Nordsternturm', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/23015739": "'Westfälische Hochschule', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+}

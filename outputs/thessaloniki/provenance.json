@@ -1,52 +1,98 @@
 {
   "licences": {
-    "file": "tsp_poi_energes_adeies_katastimaton.geojson",
-    "url": "https://sdi.thessaloniki.gr/geoserver/wfs?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&TYPENAMES=saloniki:tsp_poi_energes_adeies_katastimaton&OUTPUTFORMAT=application/json&SORTBY=gid",
-    "page": "https://data.gov.gr/dataset/gis-thessaloniki-wms-saloniki-tsp_poi_energes_adeies_katastimaton",
-    "licence": "https://creativecommons.org/licenses/by/4.0/",
     "bytes": 4274423,
-    "sha256": "ff9a494f6445daf26ca2cebfb9566e28b69999f0bd3adb12006e81c99014252e",
-    "rows": 8103,
+    "data_date": null,
+    "file": "tsp_poi_energes_adeies_katastimaton.geojson",
+    "licence": "https://creativecommons.org/licenses/by/4.0/",
+    "page": "https://data.gov.gr/dataset/gis-thessaloniki-wms-saloniki-tsp_poi_energes_adeies_katastimaton",
     "retrieved": "2026-10-04",
-    "data_date": null
+    "rows": 8103,
+    "sha256": "ff9a494f6445daf26ca2cebfb9566e28b69999f0bd3adb12006e81c99014252e",
+    "url": "https://sdi.thessaloniki.gr/geoserver/wfs?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&TYPENAMES=saloniki:tsp_poi_energes_adeies_katastimaton&OUTPUTFORMAT=application/json&SORTBY=gid"
   },
   "osm": {
+    "bytes": 943609,
     "file": "osm_all.json",
     "host": "overpass-api.de",
+    "osm_base": "2026-10-07T08:09:20Z",
     "query": "[out:json][timeout:180];relation[\"type\"=\"route\"][\"route\"~\"^(subway|light_rail)$\"](40.54,22.87,40.68,23.02)->.r;(node[\"railway\"=\"station\"](40.54,22.87,40.68,23.02);way[\"railway\"=\"station\"](40.54,22.87,40.68,23.02);)->.s;relation[\"boundary\"=\"administrative\"][\"admin_level\"~\"^(7|8)$\"](40.54,22.87,40.68,23.02)->.b;.r out geom;node(r.r);out body;.s out tags center;.b out geom;",
-    "bytes": 943609,
-    "sha256": "c07dcf83061f5e49f5f60e2b0c373b4862abc7f7bbfcf3cbe443f04a0704ee60",
-    "osm_base": "2026-10-07T08:09:20Z"
-  },
-  "osm_rail": {
-    "file": "osm_rail_routes.json",
-    "split_from": "osm_all.json",
-    "bytes": 31902,
-    "sha256": "5856ce8f4d7ad0fcc14d986c9523b8c1a5d4150b680beef68fcd8d65646108c4",
-    "elements": {
-      "relation": 4,
-      "node": 36
-    },
-    "osm_base": "2026-10-07T08:09:20Z"
-  },
-  "osm_station_names": {
-    "file": "osm_station_names.json",
-    "split_from": "osm_all.json",
-    "bytes": 11121,
-    "sha256": "f6e147a920b15612d968a64e95adbbc769d1b918acdbfceee553b691a5f31dce",
-    "elements": {
-      "node": 19
-    },
-    "osm_base": "2026-10-07T08:09:20Z"
+    "sha256": "c07dcf83061f5e49f5f60e2b0c373b4862abc7f7bbfcf3cbe443f04a0704ee60"
   },
   "osm_boundary": {
-    "file": "osm_boundaries.json",
-    "split_from": "osm_all.json",
     "bytes": 900459,
-    "sha256": "48b60733af8dcfd23c0667c0500832e40f506a44526c56b07f14139b81a76274",
     "elements": {
       "relation": 26
     },
-    "osm_base": "2026-10-07T08:09:20Z"
+    "file": "osm_boundaries.json",
+    "osm_base": "2026-10-07T08:09:20Z",
+    "sha256": "48b60733af8dcfd23c0667c0500832e40f506a44526c56b07f14139b81a76274",
+    "split_from": "osm_all.json"
+  },
+  "osm_place_outline": {
+    "bytes": 49481,
+    "elements": 1,
+    "file": "osm_place_outline_v1.json",
+    "host": "download.geofabrik.de (greece-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:60];\narea(id:3601770680)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T19:32:20+00:00",
+    "sha256": "649a369100020022c014c39b425d4dfd3f176fdd0f4dc302673b2e9683687653"
+  },
+  "osm_places": {
+    "bytes": 2806221,
+    "elements": 22573,
+    "file": "osm_places_2026-10-13.json",
+    "host": "download.geofabrik.de (greece-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3601770680)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T19:32:20+00:00",
+    "sha256": "2a124513d0748e68ccc59396230b6200e48e26fbe0cc7e2eeff095cbae4fba90"
+  },
+  "osm_places_extra": {
+    "bytes": 64854,
+    "elements": 167,
+    "file": "osm_places_extra_2026-10-13.json",
+    "host": "download.geofabrik.de (greece-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3601770680)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T19:32:20+00:00",
+    "sha256": "ca93e3a6405ad002c43048b676788e7304d6be141b7bc7bd934b6fd5d522eaf5"
+  },
+  "osm_rail": {
+    "bytes": 31902,
+    "elements": {
+      "node": 36,
+      "relation": 4
+    },
+    "file": "osm_rail_routes.json",
+    "osm_base": "2026-10-07T08:09:20Z",
+    "sha256": "5856ce8f4d7ad0fcc14d986c9523b8c1a5d4150b680beef68fcd8d65646108c4",
+    "split_from": "osm_all.json"
+  },
+  "osm_station_names": {
+    "bytes": 11121,
+    "elements": {
+      "node": 19
+    },
+    "file": "osm_station_names.json",
+    "osm_base": "2026-10-07T08:09:20Z",
+    "sha256": "f6e147a920b15612d968a64e95adbbc769d1b918acdbfceee553b691a5f31dce",
+    "split_from": "osm_all.json"
+  },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 3028,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 59,
+    "ids_not_read": 0,
+    "ids_with_article": 6,
+    "ids_without_article": 53,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "b51dd44a99401732d2b1b1224e4a895227c57e7c2af75cbe0c22f4287f4e7b0b"
   }
 }

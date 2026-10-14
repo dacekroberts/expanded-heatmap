@@ -83,7 +83,7 @@ st.markdown(
 """
 )
 
-render_map_help("business layer")
+render_map_help("business layer", search='matsumoto')
 render_excluded_stations("Matsumoto")
 render_country_links("Matsumoto")
 

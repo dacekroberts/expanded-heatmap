@@ -1,0 +1,26 @@
+{
+  "index": "app/static/places/thessaloniki.json",
+  "places": 5988,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "el"
+    ],
+    "coverage": {
+      "en": 0.038,
+      "el": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Greek"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/1770680",
+      "name": "Municipality of Thessaloniki",
+      "stations": 13
+    }
+  ]
+}

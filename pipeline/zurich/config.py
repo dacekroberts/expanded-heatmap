@@ -241,3 +241,78 @@ ZURICH_BBOX = {
     "lon_min": 8.44,
     "lon_max": 8.63,
 }
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
+
+PLACE_AREA = "(id:3601682248)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
+PLACE_LANGUAGES = ("de",)
+PLACE_FOLD = None
+# Rows a reader held that the owner ruled to keep (2026-10-13;
+# docs/decisions_drafts/search-final.md). A record only: no code reads it.
+# A street is listed by name, a place by OSM id with its name. Not in
+# PLACE_REVIEWED, which check E holds to names carrying a leak word.
+PLACE_RULED_KEPT = {
+    # Held rows kept by the existing rules in three lanes and the owner's
+    # rulings of 2026-10-13 (docs/decisions_drafts/search-final-held-applied.md).
+    # A home, family or person row is listed by id alone.
+    "Geroldrampe": "Zurich's five named city ramps stay (six answers #5, 2026-10-13)",
+    "Hardturmrampe": "Zurich's five named city ramps stay (six answers #5, 2026-10-13)",
+    "Hönggerrampe": "Zurich's five named city ramps stay (six answers #5, 2026-10-13)",
+    "Sihlquai-Nordrampe": "Zurich's five named city ramps stay (six answers #5, 2026-10-13)",
+    "Sihlquai-Südrampe": "Zurich's five named city ramps stay (six answers #5, 2026-10-13)",
+}
+PLACE_REVIEWED = {}
+# The read of 2026-10-13 (docs/decisions_drafts/search-final.md).
+PLACE_DROPPED = {
+    # A second row for one object within 300 m (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "node/7598544728": "duplicates of one object are one row: a place row on the landmark of its name (owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    "way/326495496": "an address number standing in for a name",
+    "way/326495497": "an address number standing in for a name",
+    "way/1246474482": "a motorway interchange label, not a street (owner, 2026-10-13)",
+    "way/1296447019": "a motorway interchange label, not a street (owner, 2026-10-13)",
+    "way/1296449228": "a motorway interchange label, not a street (owner, 2026-10-13)",
+    "way/624393070": "a motorway interchange label, not a street (owner, 2026-10-13)",
+    "way/78508613": "a motorway interchange label, not a street (owner, 2026-10-13)",
+    "way/9623274": "a motorway interchange label, not a street (owner, 2026-10-13)",
+    "way/9623489": "a motorway interchange label, not a street (owner, 2026-10-13)",
+    "way/37380208": "an open-air pool tagged a park",
+    "way/251217100": "a minigolf course tagged a park",
+    "node/11608454406": "a dealer's gallery: the business itself, no article",
+    "node/11608530438": "a dealer's gallery: the business itself, no article",
+    "node/11391982379": "a dealer's gallery: the business itself, no article",
+    "node/11592562428": "a dealer's gallery: the business itself, no article",
+    "node/10967823417": "a dealer's gallery: the business itself, no article",
+    "node/11608415098": "a dealer's gallery: the business itself, no article",
+    "node/11608133255": "a dealer's gallery: the business itself, no article",
+    "node/13430911922": "a church office, by its own name",
+    "way/846870093": "a housing cooperative's courtyard (operator tag), drawn as a park",
+    "way/846870094": "a housing cooperative's courtyard (operator tag), drawn as a park",
+    "node/2441908509": "a religious residence tagged a place of worship, not notable",
+    "way/1523570871": "a description standing in for a name",
+    "way/1081831416": "a description standing in for a name",
+    "way/1530821189": "a description standing in for a name",
+    "way/1285454510": "a description standing in for a name",
+    "way/495443771": "a description; the museum has its own row",
+    "way/362880331": "a numbered, closed utility building, no register key",
+    "node/5760205836": "a catalogue description standing in for a title",
+    "node/5777113927": "a catalogue description standing in for a title",
+    "node/4581891780": "a catalogue description standing in for a title",
+    "node/13609130931": "a catalogue description standing in for a title",
+    "node/4580439956": "a catalogue description standing in for a title",
+    "node/7405145706": "a zoo enclosure admitted by the breed's article",
+    "node/7059852579": "one statue admitted by an event's article",
+    "node/4472488146": "a library branch admitted by the network's entry",
+    "node/4854152865": "a name cut short",
+    "relation/9379205": "a site relation placed far from both campuses; the campuses have rows",
+    "way/4803419": "a description standing in for a name",
+    "way/4803422": "a description standing in for a name",
+    "way/38693549": "a description standing in for a name",
+    "way/445984147": "a garage's staircase, named by a description",
+    "way/1346762935": "a switchback on a forest track, not a square",
+    "way/28047106": "a switchback on a forest track, not a square",
+    "way/551828960": "a switchback on a forest track, not a square",
+    "way/147046115": "two names in one string with a stray slash; Lochenweg has its own row",
+}

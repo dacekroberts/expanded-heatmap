@@ -88,7 +88,7 @@ st.markdown(
 """
 )
 
-render_map_help('three business categories (Food service, Retail and Personal services)')
+render_map_help('three business categories (Food service, Retail and Personal services)', search='namyangju')
 render_excluded_stations("Namyangju")
 render_country_links('Namyangju')
 

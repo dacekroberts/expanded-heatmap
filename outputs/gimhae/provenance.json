@@ -1,51 +1,84 @@
 {
-  "semas": {
-    "file": "sbiz_15083033.zip",
-    "page": "https://www.data.go.kr/data/15083033/fileData.do",
-    "url": "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003695831&fileDetailSn=1&insertDataPrcus=N",
-    "bytes": 352699739,
-    "sha256": "57aa361544108ff4fc73334f87d2ced61e41fe8638dd70bcd842930f865d2386",
-    "retrieved": "2026-09-29T09:34:52+00:00",
-    "edition": "2026-06-30"
-  },
   "osm": {
+    "bytes": 223081,
     "file": "osm_all.json",
     "host": "overpass-api.de",
+    "osm_base": "2026-10-04T07:22:05Z",
     "query": "[out:json][timeout:600];relation[\"type\"=\"route\"][\"route\"~\"^(subway|light_rail|monorail|tram)$\"](35.13,128.68,35.41,129.03)->.r;(node[\"railway\"=\"station\"](35.13,128.68,35.41,129.03);way[\"railway\"=\"station\"](35.13,128.68,35.41,129.03);)->.s;relation[\"boundary\"=\"administrative\"][\"admin_level\"=\"6\"][\"name\"=\"김해시\"](35.13,128.68,35.41,129.03)->.b;.r out geom;node(r.r);out body;.s out tags center;.b out geom;",
-    "bytes": 223081,
-    "sha256": "ed7d381799820b76e262f07606a6af65d90e7bdabe61953787e268564cd9e6e7",
-    "osm_base": "2026-10-04T07:22:05Z"
+    "sha256": "ed7d381799820b76e262f07606a6af65d90e7bdabe61953787e268564cd9e6e7"
+  },
+  "osm_boundary": {
+    "bytes": 16394,
+    "elements": {
+      "relation": 1
+    },
+    "file": "osm_boundary.json",
+    "osm_base": "2026-10-04T07:22:05Z",
+    "sha256": "3c309e8e24d54151aa517fa68dd7d1a7d37bb1bc3750303715be77be10c0d360",
+    "split_from": "osm_all.json"
+  },
+  "osm_place_outline": {
+    "bytes": 16933,
+    "elements": 1,
+    "file": "osm_place_outline_v1.json",
+    "host": "download.geofabrik.de (south-korea-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:60];\narea(id:3607224485)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T09:33:38+00:00",
+    "sha256": "48a5317c906a8e71a3945371dc2a0b4139bdd68a457de5fc1f5e2ba0e0132b3f"
+  },
+  "osm_places": {
+    "bytes": 3638904,
+    "elements": 30484,
+    "file": "osm_places_2026-10-13.json",
+    "host": "download.geofabrik.de (south-korea-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3607224485)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T09:33:38+00:00",
+    "sha256": "e7e03f1001f722603037414274539056a577804bdfa9a40adc37a7669a3ebef1"
+  },
+  "osm_places_extra": {
+    "bytes": 17522,
+    "elements": 56,
+    "file": "osm_places_extra_2026-10-13.json",
+    "host": "download.geofabrik.de (south-korea-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3607224485)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T09:33:38+00:00",
+    "sha256": "d79717cf0faa65ad7308441574653513d7c8934ccd42acd299382b8d40c3259b"
   },
   "osm_rail": {
-    "file": "osm_rail_routes.json",
-    "split_from": "osm_all.json",
     "bytes": 175207,
-    "sha256": "e26a1388305e02684f057c2c9e9b2bfa592685c59ac61d5736e7b3e2c09f3bfe",
     "elements": {
-      "relation": 6,
-      "node": 161
+      "node": 161,
+      "relation": 6
     },
-    "osm_base": "2026-10-04T07:22:05Z"
+    "file": "osm_rail_routes.json",
+    "osm_base": "2026-10-04T07:22:05Z",
+    "sha256": "e26a1388305e02684f057c2c9e9b2bfa592685c59ac61d5736e7b3e2c09f3bfe",
+    "split_from": "osm_all.json"
   },
   "osm_station_names": {
-    "file": "osm_station_names.json",
-    "split_from": "osm_all.json",
     "bytes": 31313,
-    "sha256": "e5a4256b9ca7e95e3ce658925c6feb84d40fb5fd5c455c3390b366979b70a881",
     "elements": {
       "node": 59,
       "way": 4
     },
-    "osm_base": "2026-10-04T07:22:05Z"
+    "file": "osm_station_names.json",
+    "osm_base": "2026-10-04T07:22:05Z",
+    "sha256": "e5a4256b9ca7e95e3ce658925c6feb84d40fb5fd5c455c3390b366979b70a881",
+    "split_from": "osm_all.json"
   },
-  "osm_boundary": {
-    "file": "osm_boundary.json",
-    "split_from": "osm_all.json",
-    "bytes": 16394,
-    "sha256": "3c309e8e24d54151aa517fa68dd7d1a7d37bb1bc3750303715be77be10c0d360",
-    "elements": {
-      "relation": 1
-    },
-    "osm_base": "2026-10-04T07:22:05Z"
+  "semas": {
+    "bytes": 352699739,
+    "edition": "2026-06-30",
+    "file": "sbiz_15083033.zip",
+    "page": "https://www.data.go.kr/data/15083033/fileData.do",
+    "retrieved": "2026-09-29T09:34:52+00:00",
+    "sha256": "57aa361544108ff4fc73334f87d2ced61e41fe8638dd70bcd842930f865d2386",
+    "url": "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000003695831&fileDetailSn=1&insertDataPrcus=N"
   }
 }

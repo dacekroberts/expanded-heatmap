@@ -137,3 +137,60 @@ BRANCH_MIN_M = 60.0
 CITY_PREFIX = "경기도 안양시"
 TAXONOMY_SYSTEM = "korea_sbiz"
 RAW_CLASSIFICATION_COLUMN = "kind"
+
+# --- Place search (scripts/place_search_scaffold.py, 2026-10-13) ---
+
+# The regional map's three municipalities, REGIONAL_RELATIONS above (owner,
+# 2026-10-13): the plan's city-alone area left 7 of 14 stations outside.
+PLACE_AREA = "(id:3602409161,3602409167,3602409184)"
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
+PLACE_LANGUAGES = ("ko",)
+PLACE_FOLD = None
+# The read of 2026-10-13 (docs/decisions_drafts/search-final.md). Signed
+# junctions (junction=yes) named for the building beside them: a road feature,
+# not the building (Seoul's precedent, batch 2b).
+_JUNCTION = "a signed junction (junction=yes) named for the building beside it: a road feature, not the building"
+PLACE_REVIEWED = {name: _JUNCTION for name in (
+    "8단지입구사거리", "LG아파트삼거리", "개나리아파트삼거리", "동백아파트앞교차로", "무궁화APT사거리",
+    "삼호아파트삼거리", "포은신안아파트삼거리", "대우사원주택앞교차로", "롯데마트사거리", "보우상가사거리",
+    "스마트호텔삼거리", "공용주차장앞교차로")}
+# Candidate 3 would make the _ESTATE ids redundant, candidate 7 the _EXHIBIT
+# ids (docs/decisions_drafts/search-final.md, "Rule candidates").
+_ESTATE = "an apartment estate's own garden or playground, run by its management office (operator tag)"
+_EXHIBIT = "a Railroad Museum exhibit whose article is its class's or kind's, not the object's own"
+_MALL = "a corridor of an underground shopping mall, named for the mall"
+_NO_NAME = "a description standing in for a name"
+PLACE_DROPPED = {
+    # Rows the read-only screen helper gave a drop verdict (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "node/442863042": "peak named only by a height: rule fault class (still applied by id) (the screen helper's verdict; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    # A religious body's meeting halls and branches, and halls named only by a body and a hall type (the pattern screen of 2026-10-13;
+    # data/_search_rollout/reads_rules56/_rulings.md, docs/decisions_drafts/search-final.md).
+    "way/1287595059": "a religious body's meeting hall or branch tagged a place of worship is dropped (ruling 2; owner 2026-10-13, the rulings on the full reads applied by the pattern screen)",
+    # Codes and numbers beside a type word (the flag read of 2026-10-13, applied on the owner's word;
+    # docs/decisions_drafts/search-final.md).
+    "way/580706448": "a code or a number beside a type word is no name (CODED_TYPE, owner 2026-10-12; owner 2026-10-13, the flag read's verdicts, all approved)",
+    "node/7817073349": "a rail yard (railway=yard) in the index as a station; no passenger tag "
+                       "(owner, 2026-10-13)",
+    "way/777263833": _ESTATE, "way/777264096": _ESTATE, "way/777262929": _ESTATE,
+    "way/777263610": _ESTATE, "way/746342781": _ESTATE,
+    "way/1464246217": "a diocese's vicariate office, tagged a place of worship",
+    "way/453505500": "a building's own name, tagged a place of worship; the church has its own row",
+    "way/544121611": _NO_NAME, "way/471352325": _NO_NAME, "way/634086695": _NO_NAME,
+    "node/5932343049": "a name cut short (a monument named only for the forces it honors)",
+    "way/829939493": _EXHIBIT, "way/829939495": _EXHIBIT, "way/829939494": _EXHIBIT,
+    "way/829939499": _EXHIBIT, "way/829939487": _EXHIBIT, "way/829939488": _EXHIBIT,
+    "way/829939503": _EXHIBIT, "way/829939489": _EXHIBIT,
+    "way/1339371333": "a footbridge link from a station to a department store, named for the store",
+    "way/682618785": _NO_NAME, "way/682618787": _NO_NAME, "way/696843589": _NO_NAME,
+    **{f"way/{i}": _MALL for i in (
+        837760800, 837760801, 837760802, 837760805, 837760806, 837760808, 837760809, 837760810,
+        837760812, 837760813, 837760814, 837760815, 837760816, 837760817, 837760818, 843067493,
+        844174049, 844174050, 844174051)},
+}
+# Kept by id: admitted as rows although a rule passes them over (owner, 2026-10-13;
+# docs/decisions_drafts/search-final.md).
+PLACE_KEPT = {
+    "way/156206585": "'의왕조류생태과학관', a famous place the rules pass over for want of a tag (owner, 2026-10-13)",
+}

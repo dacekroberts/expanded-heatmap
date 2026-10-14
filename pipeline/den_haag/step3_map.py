@@ -22,6 +22,7 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline import place_index  # noqa: E402
 from pipeline.map_common import load_osm_line_shapes, render_heatmap  # noqa: E402
 from pipeline.den_haag.config import (  # noqa: E402
     BUSINESSES_CLEAN_CSV,
@@ -77,6 +78,7 @@ def main():
         ring_edges_meters=RING_EDGES_METERS,
         ring_labels=RING_LABELS,
         label_focus=gemeente_geometry(),
+        place_index_url=place_index.index_url("den_haag"),
     )
 
 

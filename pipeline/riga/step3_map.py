@@ -14,6 +14,7 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline import place_index  # noqa: E402
 from pipeline.map_common import load_line_shapes, render_heatmap  # noqa: E402
 from pipeline.riga import config  # noqa: E402
 from pipeline.riga.step1_stations import city_polygon  # noqa: E402
@@ -44,6 +45,7 @@ def main():
         ring_edges_meters=config.RING_EDGES_METERS,
         ring_labels=config.RING_LABELS,
         label_focus=city_polygon()[2],
+        place_index_url=place_index.index_url("riga"),
     )
 
 

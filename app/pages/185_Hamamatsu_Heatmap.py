@@ -85,7 +85,7 @@ st.markdown(
 """
 )
 
-render_map_help("business layer")
+render_map_help("business layer", search='hamamatsu')
 render_excluded_stations("Hamamatsu")
 render_country_links("Hamamatsu")
 

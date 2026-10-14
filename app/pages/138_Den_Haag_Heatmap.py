@@ -116,7 +116,7 @@ st.markdown(
 """
 )
 
-render_map_help('two business categories (Shops and services, and Food service)')
+render_map_help('two business categories (Shops and services, and Food service)', search='den_haag')
 render_excluded_stations("Den Haag")
 render_country_links('Den Haag')
 

@@ -17,6 +17,7 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline import place_index  # noqa: E402
 
 from pipeline.map_common import load_osm_line_shapes, render_heatmap  # noqa: E402
 from pipeline.guadalajara.step1_stations import load_boundaries       # noqa: E402
@@ -67,6 +68,7 @@ def main():
         label_focus=union,
         # The whole-city layer (117,454 points) is back (owner, 2026-09-27),
         # with Mexico City's; it had been dropped to match that city.
+        place_index_url=place_index.index_url("guadalajara"),
     )
 
 

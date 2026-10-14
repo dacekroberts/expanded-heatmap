@@ -1,0 +1,224 @@
+{
+  "index": "app/static/places/gwangju.json",
+  "places": 11954,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "ko"
+    ],
+    "coverage": {
+      "en": 0.93,
+      "ko": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "English",
+      "Korean"
+    ]
+  },
+  "stations_not_open": [
+    {
+      "osm": "node/10678377251",
+      "name": "양림",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/10678377253",
+      "name": "용봉",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/10678377254",
+      "name": "오치",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/10678377255",
+      "name": "매곡",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/10678377256",
+      "name": "삼각",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/10678377257",
+      "name": "일곡",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/10678377258",
+      "name": "본촌산단",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/10678377260",
+      "name": "양산",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/10678377261",
+      "name": "용두",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/10678377262",
+      "name": "신용",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/10678377263",
+      "name": "지스트",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/10678377264",
+      "name": "첨단사거리",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/10678377265",
+      "name": "응암공원",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/10678377266",
+      "name": "하남산단",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/10678377267",
+      "name": "수완",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/10678377268",
+      "name": "운남",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/10678377270",
+      "name": "시청",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/10678377271",
+      "name": "치평",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/10678377272",
+      "name": "금호",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/13509361841",
+      "name": "유덕",
+      "tag": "construction:railway=station"
+    },
+    {
+      "osm": "node/6253309709",
+      "name": "유덕",
+      "tag": "construction:railway=station"
+    },
+    {
+      "osm": "node/6356359134",
+      "name": "금부",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/6356359135",
+      "name": "마재",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/6356359136",
+      "name": "월드컵경기장",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/6356359137",
+      "name": "풍암",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/6356359138",
+      "name": "원광대병원",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/6356359139",
+      "name": "주월",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/6356359140",
+      "name": "백운(남구청)",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/6356362774",
+      "name": "조선대",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/6390594777",
+      "name": "지산(법원·검찰청)",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/6390594778",
+      "name": "두암",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/6390594779",
+      "name": "서방사거리(교대)",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/8201420439",
+      "name": "광주",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/8201420440",
+      "name": "전남대(북구청)",
+      "tag": "railway=construction"
+    },
+    {
+      "osm": "node/8201420445",
+      "name": "상무",
+      "tag": "railway=construction"
+    }
+  ],
+  "area": [
+    {
+      "osm": "relation/4162635",
+      "name": "Dong-gu",
+      "stations": 7
+    },
+    {
+      "osm": "relation/7348759",
+      "name": "Seo-gu",
+      "stations": 7
+    },
+    {
+      "osm": "relation/7348758",
+      "name": "Gwangsan-gu",
+      "stations": 5
+    },
+    {
+      "osm": "relation/7348741",
+      "name": "Nam-gu",
+      "stations": 1
+    },
+    {
+      "osm": "relation/7348583",
+      "name": "Buk-gu",
+      "stations": 0,
+      "kept": "part of the boundary the map's businesses are cut to; owner, 2026-10-13"
+    }
+  ]
+}

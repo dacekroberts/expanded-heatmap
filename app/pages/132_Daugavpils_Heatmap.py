@@ -109,7 +109,7 @@ st.markdown(
 """
 )
 
-render_map_help('two business categories (Shops and services, and Food service)')
+render_map_help('two business categories (Shops and services, and Food service)', search='daugavpils')
 render_excluded_stations("Daugavpils")
 render_country_links('Daugavpils')
 

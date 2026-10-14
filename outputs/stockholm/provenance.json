@@ -1,6 +1,52 @@
 {
   "fetched_utc": "2026-09-29T07:11:31+00:00",
+  "osm_place_outline": {
+    "bytes": 46468,
+    "elements": 1,
+    "file": "osm_place_outline_v1.json",
+    "host": "download.geofabrik.de (sweden-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:60];\narea(id:3600398021)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T19:24:20+00:00",
+    "sha256": "ded3f3d0606f7ea133316a2e15b1da9666ff572ad18c97c671ca4b3ef067704c"
+  },
+  "osm_places": {
+    "bytes": 16614630,
+    "elements": 143007,
+    "file": "osm_places_2026-10-13.json",
+    "host": "download.geofabrik.de (sweden-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3600398021)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T19:24:20+00:00",
+    "sha256": "7d6927b97ccce6cef1b0000400b70006fe939465742b8321eca001be3875775a"
+  },
+  "osm_places_extra": {
+    "bytes": 717553,
+    "elements": 3967,
+    "file": "osm_places_extra_2026-10-13.json",
+    "host": "download.geofabrik.de (sweden-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3600398021)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T19:24:21+00:00",
+    "sha256": "ca074aa90da7a54fd301384aa39c74191c6fb60a7514f1ee61881aabc2ad7a4d"
+  },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 8144,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 138,
+    "ids_not_read": 0,
+    "ids_with_article": 82,
+    "ids_without_article": 56,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "5256ae8e9b4306623cf44483636ed6b3f8b59f3a45667f02c6447feb5079e155"
+  },
+  "register_last_edited": "2025-10-22",
   "register_layer_url": "https://services-eu1.arcgis.com/81H0sgjoIWj6WxIM/arcgis/rest/services/Livsmedelstillsyn/FeatureServer/41",
-  "register_rows": 289742,
-  "register_last_edited": "2025-10-22"
+  "register_rows": 289742
 }

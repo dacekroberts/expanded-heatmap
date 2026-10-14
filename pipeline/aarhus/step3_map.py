@@ -23,6 +23,7 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from pipeline import place_index  # noqa: E402
 from pipeline.aarhus.config import (  # noqa: E402
     BUSINESSES_CLEAN_CSV,
     CRS_GEOGRAPHIC,
@@ -78,6 +79,7 @@ def main():
         ring_edges_meters=RING_EDGES_METERS,
         ring_labels=RING_LABELS,
         label_focus=scope_geometry(),
+        place_index_url=place_index.index_url("aarhus"),
     )
 
 

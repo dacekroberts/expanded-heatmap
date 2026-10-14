@@ -1,56 +1,89 @@
 {
-  "cnefe:4314902_PORTO_ALEGRE.zip": {
-    "file": "4314902_PORTO_ALEGRE.zip",
-    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/43_RS/4314902_PORTO_ALEGRE.zip",
-    "bytes": 17172345,
-    "sha256": "a1ce72d376ad7d122600425f2508749a85691bbed08ad5021369f45e8c89d403",
-    "retrieved": "2026-09-24T15:56:52+00:00 (cache file time)",
-    "last_modified": "Mon, 20 May 2024 22:54:47 GMT"
-  },
   "cnefe:4304606_CANOAS.zip": {
-    "file": "4304606_CANOAS.zip",
-    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/43_RS/4304606_CANOAS.zip",
     "bytes": 3546253,
-    "sha256": "093333faa826d05b81a537497149e66b7fa69ecd9793f18cc5bce494872f9ea6",
+    "file": "4304606_CANOAS.zip",
+    "last_modified": "Mon, 20 May 2024 22:54:39 GMT",
     "retrieved": "2026-09-24T15:56:54+00:00 (cache file time)",
-    "last_modified": "Mon, 20 May 2024 22:54:39 GMT"
+    "sha256": "093333faa826d05b81a537497149e66b7fa69ecd9793f18cc5bce494872f9ea6",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/43_RS/4304606_CANOAS.zip"
   },
   "cnefe:4307708_ESTEIO.zip": {
-    "file": "4307708_ESTEIO.zip",
-    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/43_RS/4307708_ESTEIO.zip",
     "bytes": 744631,
-    "sha256": "f677384cffe622c24d5b36fa96fb6364facda91c6ba069d4a1840470dd3c8da3",
+    "file": "4307708_ESTEIO.zip",
+    "last_modified": "Mon, 20 May 2024 22:54:42 GMT",
     "retrieved": "2026-09-24T15:56:56+00:00 (cache file time)",
-    "last_modified": "Mon, 20 May 2024 22:54:42 GMT"
-  },
-  "cnefe:4320008_SAPUCAIA_DO_SUL.zip": {
-    "file": "4320008_SAPUCAIA_DO_SUL.zip",
-    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/43_RS/4320008_SAPUCAIA_DO_SUL.zip",
-    "bytes": 1370445,
-    "sha256": "90d2fef1d06c1e64334c3cca628c98087bbdfd056fcd481eb1967d4e5e069401",
-    "retrieved": "2026-09-24T15:56:58+00:00 (cache file time)",
-    "last_modified": "Mon, 20 May 2024 22:54:49 GMT"
-  },
-  "cnefe:4318705_SAO_LEOPOLDO.zip": {
-    "file": "4318705_SAO_LEOPOLDO.zip",
-    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/43_RS/4318705_SAO_LEOPOLDO.zip",
-    "bytes": 2436268,
-    "sha256": "f6630b8004d51330d6600fb9009e830ca56dafbc4cc0fbf70b9066799070fbf4",
-    "retrieved": "2026-09-24T15:57:00+00:00 (cache file time)",
-    "last_modified": "Mon, 20 May 2024 22:54:49 GMT"
+    "sha256": "f677384cffe622c24d5b36fa96fb6364facda91c6ba069d4a1840470dd3c8da3",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/43_RS/4307708_ESTEIO.zip"
   },
   "cnefe:4313409_NOVO_HAMBURGO.zip": {
-    "file": "4313409_NOVO_HAMBURGO.zip",
-    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/43_RS/4313409_NOVO_HAMBURGO.zip",
     "bytes": 2739559,
-    "sha256": "749ff5f68670c1337f4c07e12b2c4bec0d95f15b6b72146e3be0d056b3c85c43",
+    "file": "4313409_NOVO_HAMBURGO.zip",
+    "last_modified": "Mon, 20 May 2024 22:54:44 GMT",
     "retrieved": "2026-09-24T15:57:03+00:00 (cache file time)",
-    "last_modified": "Mon, 20 May 2024 22:54:44 GMT"
+    "sha256": "749ff5f68670c1337f4c07e12b2c4bec0d95f15b6b72146e3be0d056b3c85c43",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/43_RS/4313409_NOVO_HAMBURGO.zip"
+  },
+  "cnefe:4314902_PORTO_ALEGRE.zip": {
+    "bytes": 17172345,
+    "file": "4314902_PORTO_ALEGRE.zip",
+    "last_modified": "Mon, 20 May 2024 22:54:47 GMT",
+    "retrieved": "2026-09-24T15:56:52+00:00 (cache file time)",
+    "sha256": "a1ce72d376ad7d122600425f2508749a85691bbed08ad5021369f45e8c89d403",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/43_RS/4314902_PORTO_ALEGRE.zip"
+  },
+  "cnefe:4318705_SAO_LEOPOLDO.zip": {
+    "bytes": 2436268,
+    "file": "4318705_SAO_LEOPOLDO.zip",
+    "last_modified": "Mon, 20 May 2024 22:54:49 GMT",
+    "retrieved": "2026-09-24T15:57:00+00:00 (cache file time)",
+    "sha256": "f6630b8004d51330d6600fb9009e830ca56dafbc4cc0fbf70b9066799070fbf4",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/43_RS/4318705_SAO_LEOPOLDO.zip"
+  },
+  "cnefe:4320008_SAPUCAIA_DO_SUL.zip": {
+    "bytes": 1370445,
+    "file": "4320008_SAPUCAIA_DO_SUL.zip",
+    "last_modified": "Mon, 20 May 2024 22:54:49 GMT",
+    "retrieved": "2026-09-24T15:56:58+00:00 (cache file time)",
+    "sha256": "90d2fef1d06c1e64334c3cca628c98087bbdfd056fcd481eb1967d4e5e069401",
+    "url": "https://ftp.ibge.gov.br/Cadastro_Nacional_de_Enderecos_para_Fins_Estatisticos/Censo_Demografico_2022/Arquivos_CNEFE/CSV/Municipio/43_RS/4320008_SAPUCAIA_DO_SUL.zip"
   },
   "osm_municipios": {
     "file": "osm_municipios.json",
     "host": "overpass-api.de",
     "retrieved": "2026-09-24T16:07:25+00:00 (cache file time)"
+  },
+  "osm_place_outline": {
+    "bytes": 353514,
+    "elements": 6,
+    "file": "osm_place_outline_v1.json",
+    "host": "download.geofabrik.de (sul-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:60];\narea(id:3600242397,3600242399,3600242471,3600242574,3600242616,3600242778)->.a;\n(\n  rel(pivot.a);\n  way(pivot.a);\n);\nout geom;\n",
+    "retrieved": "2026-10-13T10:11:42+00:00",
+    "sha256": "4caf8101fe66bf4e644c4ffda0e0eee2930af8f3da51dea4698dab38b60bc9a6"
+  },
+  "osm_places": {
+    "bytes": 18489430,
+    "elements": 150285,
+    "file": "osm_places_2026-10-13.json",
+    "host": "download.geofabrik.de (sul-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3600242397,3600242399,3600242471,3600242574,3600242616,3600242778)->.a;\nway[\"highway\"][\"name\"](area.a)->.w;\n.w out body qt;\nnode(w.w);\nout skel qt;\n(\n  node[\"place\"][\"name\"](area.a);\n  node[\"name\"][\"highway\"=\"traffic_signals\"](area.a);\n  node[\"name\"][\"junction\"](area.a);\n  nwr[\"railway\"~\"^(station|halt|tram_stop)$\"][\"name\"](area.a);\n  nwr[\"public_transport\"=\"station\"][\"name\"](area.a);\n  nwr[\"tourism\"~\"^(attraction|museum|viewpoint|gallery|zoo|aquarium|theme_park)$\"][\"name\"](area.a);\n  nwr[\"historic\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"place_of_worship\"][\"name\"](area.a);\n  nwr[\"leisure\"~\"^(park|garden)$\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(university|college)$\"][\"name\"](area.a);\n  nwr[\"amenity\"=\"marketplace\"][\"name\"](area.a);\n  node[\"natural\"=\"peak\"][\"name\"](area.a);\n  way[\"waterway\"=\"river\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T10:11:43+00:00",
+    "sha256": "1b841963c7329d7fb344d6a4afe80470d2044f24640512d2899866f9d05a8b10"
+  },
+  "osm_places_extra": {
+    "bytes": 142149,
+    "elements": 518,
+    "file": "osm_places_extra_2026-10-13.json",
+    "host": "download.geofabrik.de (sul-261012.osm.pbf, filtered on this machine)",
+    "how": "filtered from a regional extract",
+    "osm_base": "2026-10-12T20:21:35Z",
+    "query": "[out:json][timeout:170];\narea(id:3600242397,3600242399,3600242471,3600242574,3600242616,3600242778)->.a;\n(\n  way[\"place\"][\"name\"](area.a);\n  rel[\"place\"][\"name\"](area.a);\n  nwr[\"tourism\"=\"artwork\"][\"name\"](area.a);\n  nwr[\"leisure\"=\"stadium\"][\"name\"](area.a);\n  nwr[\"amenity\"~\"^(townhall|library|theatre|arts_centre)$\"][\"name\"](area.a);\n  nwr[\"aeroway\"=\"aerodrome\"][\"name\"](area.a);\n  nwr[\"natural\"~\"^(beach|bay)$\"][\"name\"](area.a);\n);\nout tags center qt;\n",
+    "retrieved": "2026-10-13T10:11:45+00:00",
+    "sha256": "fb1065dbb86fb6890efee8a10cd45546a0dfee7a8f79943d7eb757c609870246"
   },
   "osm_rail": {
     "file": "osm_rail.json",

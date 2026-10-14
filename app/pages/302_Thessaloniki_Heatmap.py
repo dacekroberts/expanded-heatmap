@@ -94,7 +94,7 @@ st.markdown(
 """
 )
 
-render_map_help("three business categories (Food shops, Food service and Personal services)")
+render_map_help("three business categories (Food shops, Food service and Personal services)", search='thessaloniki')
 render_excluded_stations("Thessaloniki")
 render_country_links("Thessaloniki")
 
