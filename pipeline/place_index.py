@@ -4975,8 +4975,11 @@ def build(elements, *, city, retrieved, local, fold=None, dropped=(), visitable=
             if not names or not pt:
                 note("kept_by_id_no_row", "measure", oid, names[0] if names else "", "no name or no point", t)
                 continue
+            # A station by its railway tag alone (a fault of 73f025df mended,
+            # 2026-10-13): public_transport=station also sits on ferry
+            # terminals, and Yokohama's Osanbashi pier (way/84830302) was
+            # admitted as a station row.
             kind = ("station" if t.get("railway") in ("station", "halt", "tram_stop")
-                    or t.get("public_transport") == "station"
                     else "place" if t.get("place") in PLACE_VALUES else "landmark")
             before = len(rows)
             add(kind, pt, names, langs_of(t), area=e["type"] != "node", osm=oid, tags=dict(t))
@@ -5416,7 +5419,7 @@ def _selftest():
     area(47.4700, -122.31, name="East School", amenity="school", public_transport="station", station="subway")
     node(47.4600, -122.31, name="Library West Gate", highway="bus_stop", historic="Old Park Gate")
     kept_halt = node(47.4500, -122.31, name="Kept Halt", railway="halt", access="private")
-    ferry = node(47.4400, -122.31, name="Old Ferry Terminal", amenity="ferry_terminal")
+    ferry = node(47.4400, -122.31, name="Old Ferry Terminal", amenity="ferry_terminal", public_transport="station")
     node(47.4300, -122.31, name="Tram Bridge", railway="tram_stop")
     bridge = node(47.4301, -122.31, name="Tram Bridge", tourism="viewpoint")
     shut_halt = node(47.4200, -122.31, name="Dropped Halt", railway="halt")
