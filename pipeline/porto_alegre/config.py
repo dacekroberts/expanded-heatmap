@@ -74,5 +74,19 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("pt",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "Rua Arthur da Costa e Silva": "a residential street; 'cafe' is a surname in its other name; tags read 2026-10-13",
+    "Rua José Linhares": "a residential street; 'cafe' is a surname in its other name; tags read 2026-10-13",
+}
+# Dropped by id on the leak-word read of 2026-10-13, each id read with its cached
+# name and tags (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    "way/374506833": "a number and a description standing in for a name ('2 - restaurant ruins'), no article (2 - Ruínas Restaurante); tags read 2026-10-13",
+    "node/9755888551": "a closed business under its own name and the status '(closed)', tagged ruins, no article (the '(geschlossen)' precedent) (Motel Kasulo (FECHADO)); tags read 2026-10-13",
+    "node/9758495470": "a closed business under its own name and the status '(closed)', tagged ruins, no article (the '(geschlossen)' precedent) (Motel serra Verde (FECHADO)); tags read 2026-10-13",
+    "node/10003286571": "a closed business under its own name and the status '(closed)', tagged ruins, no article (the '(geschlossen)' precedent) (Nacional Supermercado (FECHADO)); tags read 2026-10-13",
+    "node/12128874866": "a closed business under its own name and the status '(closed)', tagged ruins, no article (the '(geschlossen)' precedent) (Sasun Indústria de Produtos Termo-Transferíveis Ltda (FECHADO)); tags read 2026-10-13",
+}

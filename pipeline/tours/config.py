@@ -197,5 +197,14 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("fr",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "Ancien hôtel du Doyenné de Saint-Gatien": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00098169, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Goüin": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00098170, tourism=museum, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel des ducs de Touraine": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00098168, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Portail de l'hôtel des trésoriers de Saint-Martin": "a listed gateway tagged an attraction (barrier=sally_port, heritage=2, ref:mhs, wikidata): a monument, not a hotel; tags read 2026-10-13",
+    "Ruines de l'Hôtel de Beaune-Semblançay": "the listed ruins of a Renaissance mansion (historic=ruins, ref:mhs, Wikipedia); tags read 2026-10-13",
+}
 PLACE_DROPPED = {}

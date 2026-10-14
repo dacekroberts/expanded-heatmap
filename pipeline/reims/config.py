@@ -204,5 +204,13 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("fr",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "Hôtel Ponsardin": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00078793, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Bézannes": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00078790, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Jardin du Musée-hôtel Le Vergeur": "a public garden named for the museum-mansion beside it (leisure=park, Wikipedia); tags read 2026-10-13",
+    "Musée Hôtel le Vergeur": "a museum in a hôtel particulier (tourism=museum, Wikipedia); tags read 2026-10-13",
+}
 PLACE_DROPPED = {}

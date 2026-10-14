@@ -191,5 +191,17 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ko",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "궁전맨션삼거리": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "삼일호텔네거리": "a signed junction (junction=yes) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "새한아파트": "a signed junction (highway=traffic_signals) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+    "중동아파트": "a signed junction (highway=traffic_signals) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
+}
+# Dropped by id on the leak-word read of 2026-10-13, each id read with its cached
+# name and tags (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    "node/436833410": "a junction node also tagged a shop (shop=variety_store), its English name a shop's description joined to the junction's: a glitched name, never repaired (큰장네거리); tags read 2026-10-13",
+}

@@ -78,5 +78,11 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("pt",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "Rua do Hotel Pousada do Vale": "tags do not decide; kept (one residential way with no access tag, named whole for a hotel)",
+    "Shopping": "a subway station (railway=station), named for the place beside it (the Prague precedent, Hotel Golf); tags read 2026-10-13",
+}
 PLACE_DROPPED = {}

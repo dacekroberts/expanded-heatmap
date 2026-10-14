@@ -145,5 +145,10 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("nl",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "Hotel d'Hane-Steenhuyse": "a listed 18th-century town palace (historic=castle, heritage=4, access=yes, Wikipedia): the mansion's historic name, not a hotel business; tags read 2026-10-13",
+}
 PLACE_DROPPED = {}

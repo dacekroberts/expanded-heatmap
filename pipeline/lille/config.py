@@ -304,5 +304,35 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("fr",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "Hôtel Bidé de la Grandville": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00107594, tourism=attraction, wikidata Q17630181): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Castiaux": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00107597, tourism=attraction, wikidata Q15950414): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Delbecque": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00107598, tourism=attraction, wikidata Q22960790): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Petipas de Walle": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00107605, tourism=attraction, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Ramery": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00107607, tourism=attraction, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Scrive": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00107593, tourism=attraction, wikidata Q22960788): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Van Zeller": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00107609, tourism=attraction, wikidata Q18736729): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Van der Cruisse de Waziers": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00107608, tourism=attraction, wikidata Q18736728): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Wallaert": "a listed historic mansion or public building, a hôtel in the French sense (heritage=3, tourism=attraction, wikidata Q98704425): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel d'Ailly-d'Aigrenont": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00107591, tourism=attraction, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Lamissart": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00107601, tourism=attraction, wikidata Q3145873): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Madre": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00107602, tourism=attraction, wikidata Q22960791): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de l'Intendance": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00107599, tourism=attraction, wikidata Q18005453): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel des Postes": "a listed building tagged an attraction (ref:mhs, heritage=3, wikidata): a post office building's name, not a hotel; tags read 2026-10-13",
+    "Hôtel particulier (hôtel de Tenremonde)": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00107915, tourism=attraction, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Rue de la Brasserie": "a public street named for a building or institution on it, not a business (residential class; the two parking aisles of the name are left out by rule); tags read 2026-10-13",
+    "Rue de la Grande Brasserie": "a public street named for a building or institution on it, not a business (residential class; batch 2b precedent, _named_street); tags read 2026-10-13",
+    "Rue du Magasin": "a public street named for a building or institution on it, not a business (residential class; batch 2b precedent, _named_street); tags read 2026-10-13",
+}
+# Dropped by id on the leak-word read of 2026-10-13, each id read with its cached
+# name and tags (docs/decisions_drafts/search-rollout.md).
+PLACE_DROPPED = {
+    "node/2063752408": "a description standing in for a name ('former mansion'): a listed building with no name of its own in OSM and no article (Ancien hôtel); tags read 2026-10-13",
+    "node/2063752623": "a bare type standing in for a name ('private mansion') on four listed buildings, none with a name of its own in OSM or an article (Hôtel particulier); tags read 2026-10-13",
+    "node/2063752640": "a bare type standing in for a name ('private mansion') on four listed buildings, none with a name of its own in OSM or an article (Hôtel particulier); tags read 2026-10-13",
+    "node/2063752650": "a bare type standing in for a name ('private mansion') on four listed buildings, none with a name of its own in OSM or an article (Hôtel particulier); tags read 2026-10-13",
+    "node/2063752654": "a bare type standing in for a name ('private mansion') on four listed buildings, none with a name of its own in OSM or an article (Hôtel particulier); tags read 2026-10-13",
+}

@@ -198,5 +198,34 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("fr",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "Hôtel Aubriot": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA21000053, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Brûlart": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00112286, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Esmonin de Dampierre": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00112294, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Fevret de Saint-Mesmin": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00112296, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Fyot de Mimeure": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00112298, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Gauthier": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00112299, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Grasset": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00112302, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Muteau": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00112751, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Nicolas Rolin": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00112315, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Perreney de Baleure": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00112318, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Pouffier": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00112320, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Rigoley de Chevigny": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00112431, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Thomas Berbisey": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00112330, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Viard de Samerey": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00112326, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Cirey": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00112297, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Gissey": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00112300, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Lux": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00112311, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Sassenay": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00112327, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Talmay": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00112278, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Thianges": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00112329, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Vienne": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00112332, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Vogüé": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00112333, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de la Mare": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00112312, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel des Barres": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00112277, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel du Président Bouhier": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00112322, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+}
 PLACE_DROPPED = {}

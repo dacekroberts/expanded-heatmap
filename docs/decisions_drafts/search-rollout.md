@@ -1,3 +1,36 @@
+### 2026-10-13 - Search rollout: check E settled by the existing rules on the extract run's 73 cities; 52 unopened stations added to the watch file (branch search-rollout)
+
+- **The 334 names failing check E are not all streets.** Counted from the index rows: 156 landmarks, 130 junctions, 36 streets, 12 stations. Each was settled by the precedent for its own kind, read from its cached tags, one city at a time through the job gate. The full list, with ids, verdict and reason, is `data/_search_rollout/extract_rules34/leak_streets.tsv` (on disk only: `data/_*/` is not committed). No shared rule code edited, nothing rendered, nothing pushed, no network request.
+- **Kept and reviewed in `PLACE_REVIEWED`: 325 names in 73 cities** (Toulouse 38, Dijon 25, Yongin 22, Lille 18, Uijeongbu 14, Bucheon 12, Bordeaux 11, Montpellier 10, Ansan 9, Gimhae 8).
+  - Junctions, 128: every one is a node tagged `junction=yes` or `highway=traffic_signals` named for the building beside it. Kept on the Seoul and Busan precedent (batch 2b): a road feature, not the building. 97 Korean, 31 Japanese.
+  - Landmarks, 149: 108 French and Belgian listed mansions and public buildings named "Hôtel ..." (`ref:mhs` or a heritage tag, or tagged an attraction with a Wikidata entry), kept on the Paris precedent as the building's historic name. The other 41 each carry a reason of their own: museums, universities and colleges whose field is the word (the Tokyo precedent), hotel ruins (the Kyoto and Seattle precedents), and two notable buildings that still house what their name carries (the Panama Hotel precedent: Strasbourg's Gallia, Yokohama's Mitsui Sumitomo branch).
+  - Streets, 36: every one has a way of residential class or above (or pedestrian, living street) and none is tagged private. Kept on the batch 2b precedent (`_named_street`) and São Paulo's Rua do Shopping.
+  - Stations, 12: tram stops and stations named for the place beside them (the Prague precedent, Hotel Golf).
+- **Dropped in `PLACE_DROPPED`: 9 names, 12 ids, in 4 cities.**
+  - Lille: "Hôtel particulier" (four listed buildings under the bare type, nodes 2063752623, 2063752640, 2063752650, 2063752654) and "Ancien hôtel" (node 2063752408). A type or a description standing in for a name; none has an article. The fourth node surfaced only after the first three were dropped, so the rebuild was run twice.
+  - Porto Alegre: four closed businesses tagged `historic=ruins` whose names end "(FECHADO)" (the "(geschlossen)" precedent), and "2 - Ruínas Restaurante" (a number and a description).
+  - Daegu: 큰장네거리 (node 436833410), a junction node also tagged `shop=variety_store` whose English name is a shop's description joined to the junction's. A glitched name, never repaired; the junction leaves the search with it.
+  - Gimpo: node 414915406, a junction whose name is wrapped in stray brackets. A glitched name.
+- **Tags do not decide, kept and listed (2):** Iwaki's 常磐畜産株式会社 (a `historic=ruins` node whose whole name is a company's, no article) and Recife's "Rua do Hotel Pousada do Vale" (one residential way, no access tag, named whole for a hotel).
+- **Rule candidates, not built (shared code):**
+  - Leak words on junction rows, Korean 99 and Japanese 31: a junction row is a road feature whatever building its name carries. 128 of the 130 were kept; the 2 dropped were glitched names.
+  - "hôtel", French, 125 landmark rows: a listed building (`ref:mhs` or `heritage`) named "Hôtel ..." is a mansion or a public building, not a hotel.
+  - "hôtel dieu" without the hyphen, French, 5 rows (Nantes 3, Rennes, Rouen): `LEAK_ALLOW` holds only the hyphenated form. Likewise "hôtel de police", "hôtel de région", "hôtel du département", "hôtel des postes", "hôtel communal", 6 rows.
+  - "brasserie", French, 10 streets, every one "Rue de la ... Brasserie" on a residential-class way.
+  - "hôtel particulier" and "ancien hôtel" as French bare type names, 5 objects in Lille.
+  - A name ending "(FECHADO)", Portuguese, 4 rows: the Portuguese form of the "(geschlossen)" rule.
+  - "cafe", English, 3 Brazilian streets: a surname (Café) in an alternate name.
+- **Unopened stations: 52 rows added to `docs/place_search_unopened_stations.json`**, every field from cached OpenStreetMap files: Montpellier 35, Salvador 7, Belo Horizonte 5, Gimhae 2, Incheon, Rio de Janeiro and Uijeongbu 1 each.
+  - The place caches hold no relation members, so memberships were read from each city's cached rail file. Montpellier's 35 stops are members of route relations 19846275 and 19846276 (tram, ref 5) in `data/montpellier/raw/osm_routes.json`: line "Tram 5", source "relation". No other city's rail cache holds a relation with one of its stations.
+  - By tag, the `network` value where it names a line: Belo Horizonte 4 ("Linha 2"), Salvador 5.
+  - Null with a reason, 8, nothing looked up: Belo Horizonte's Barreiro, Gimhae's 장유 and 신월, Incheon's 학익 (a network, no line), Rio de Janeiro's Gávea, Salvador's Almeida Brandão and Calçada (a network, no line), Uijeongbu's 탑석.
+  - `open_namesake_in_index` is true for Salvador's Calçada and Uijeongbu's 탑석.
+  - The brief counted 54; the check lists 52 skipped stations in this branch's cities. Anyang and Gwangju fail for another reason (no `stations_not_open`: scaffolded in wave 2, not built) and are not among the 151. Most and Yamagata likewise, on stale summaries. All four left alone.
+- **All 73 cities rebuilt through the gate, three at a time, every one exit 0.** `PLACE_REVIEWED` is read by the check, not by the build, so 69 indexes came back byte-identical; Daegu, Gimpo, Lille and Porto Alegre lost 1, 1, 4 and 5 rows.
+- **Checks after:** `check_place_search.py` fails on rule A alone, 151 cities (an index no map uses, expected with no render); check E is clear. `check_place_unopened.py` fails on the four cities named above. `check_place_index_drift.py`: the 151 OK.
+- **`check_barred_marks.py`, confirmed and not edited:** it matches Angers's mark as a substring in six names of `app/static/places/mendoza.json`: "Hipólito Irigoyen", "Plaza Hipólito Irigoyen", "Bernardo de Irigoyen", "Martín de Irigoyen", "Irigoyen" and "Barrio Irigo Giorgiani". The first five are a surname; the last holds the mark as a whole word.
+- **Not done:** no eye read of the 151, no render, no browser test. The reads here cover only rows carrying a leak word.
+
 ### 2026-10-13 - Search rollout: the extract run's 151 cities rebuilt on the third and fourth rule passes (branch search-rollout)
 
 - **Committed the extract run as it stood (cfa030e7), merged master at 50d551f4 (6c82294a, no conflict), then rebuilt all 151 cities in three stages, each committed whole.** Nothing rendered, nothing pushed, no shared rule code edited. The record is `data/_search_rollout/extract_rules34/summary.md` and `.json`, with the check logs beside them.

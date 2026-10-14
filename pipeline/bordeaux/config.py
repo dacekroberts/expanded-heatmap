@@ -205,5 +205,20 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("fr",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "Ancienne Préfecture de Gironde": "the former prefecture, a listed building (ref:mhs, Wikipedia); its other name is the hôtel particulier it occupies; tags read 2026-10-13",
+    "Hôtel Gradis": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00083195, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Lisleferme": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00083198, tourism=attraction, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Bryas": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA33000157, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Police": "a tram stop (railway=tram_stop), named for the place beside it (the Prague precedent, Hotel Golf); tags read 2026-10-13",
+    "Hôtel de la Marine": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00083200, tourism=attraction, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel des archives départementales de la Gironde": "the departmental archives' listed building (ref:mhs, Wikipedia): a public institution's building, not a hotel; tags read 2026-10-13",
+    "Hôtel des douanes": "the customs house, a listed monument (heritage=2, ref:mhs, Wikipedia): a public institution's building, not a hotel; tags read 2026-10-13",
+    "Hôtel particulier Mel de Fontenay": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA33000101, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Musée des Arts Décoratifs et du Design": "a museum (tourism=museum, ref:mhs, wikidata); its other name is the hôtel particulier it occupies; tags read 2026-10-13",
+    "Saint-Bruno - Hôtel de Région": "a tram stop (railway=tram_stop), named for the place beside it (the Prague precedent, Hotel Golf); tags read 2026-10-13",
+}
 PLACE_DROPPED = {}

@@ -140,5 +140,12 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("es",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "Hotel Termas del Sosneado": "a hotel's ruins (historic=hotel, ruins=yes, Wikipedia), not a business; tags read 2026-10-13",
+    "Ruinas Hotel Puente del Inca": "a hotel's ruins (historic=ruins, ruins=hotel), not a business; tags read 2026-10-13",
+    "Viejo Hotel Cacheuta": "a hotel's ruins (historic=ruins), not a business; tags read 2026-10-13",
+}
 PLACE_DROPPED = {}

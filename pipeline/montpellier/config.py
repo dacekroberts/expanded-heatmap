@@ -197,5 +197,19 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("fr",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "Hôtel Haguenot": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00103568, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Rey": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00103583, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Bardy": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00103548, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Baudon de Mauny": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00103549, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel de Guidais": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00103567, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel des Trésoriers de France": "a listed historic mansion or public building, a hôtel in the French sense (ref:mhs PA00103592, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel du Département": "a tram stop (railway=tram_stop), named for the place beside it (the Prague precedent, Hotel Golf); tags read 2026-10-13",
+    "Mo.Co Hôtel des Collections": "a public contemporary art venue run by the metropolis (tourism=gallery, wikidata); 'Hôtel des Collections' is its name; tags read 2026-10-13",
+    "Musée Sabatier d'Espeyran": "a public museum run by the metropolis (tourism=gallery, wikidata); its official name is the hôtel particulier it occupies; tags read 2026-10-13",
+    "Rue de l'École de Pharmacie": "a public street named for a building or institution on it, not a business (pedestrian class; batch 2b precedent, _named_street); tags read 2026-10-13",
+}
 PLACE_DROPPED = {}

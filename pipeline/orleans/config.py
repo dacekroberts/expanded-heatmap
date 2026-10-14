@@ -195,5 +195,16 @@ PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("fr",)
 PLACE_FOLD = None
-PLACE_REVIEWED = {}
+# Index rows carrying a business or home word (place_index.LEAK_WORDS) that are
+# places, each with why; scripts/check_place_search.py fails on any other.
+# Read from the cached tags, 2026-10-13 (docs/decisions_drafts/search-rollout.md).
+PLACE_REVIEWED = {
+    "Hôtel Brachet et jardin de la Vieille Intendance": "a historic mansion tagged an attraction, a hôtel in the French sense (tourism=attraction, wikidata Q22997019): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Cabu - Musée historique et archéologique de l'Orléanais": "a historic mansion tagged an attraction, a hôtel in the French sense (tourism=attraction, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Groslot": "a historic mansion tagged an attraction, a hôtel in the French sense (tourism=attraction, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Groslot, actuellement Hôtel de ville pour la célébration des mariages": "a listed Renaissance mansion in use as a town hall (amenity=townhall, ref:mhs, Wikipedia); the long name is OSM's; tags read 2026-10-13",
+    "Hôtel Sanxerre": "a historic mansion tagged an attraction, a hôtel in the French sense (tourism=attraction, wikidata Q22944450): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel Toutin": "a historic mansion tagged an attraction, a hôtel in the French sense (tourism=attraction, wikidata Q22944559): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+    "Hôtel des Créneaux": "a historic mansion tagged an attraction, a hôtel in the French sense (tourism=attraction, Wikipedia): the building's historic name, not a hotel business (the Paris precedent); tags read 2026-10-13",
+}
 PLACE_DROPPED = {}
