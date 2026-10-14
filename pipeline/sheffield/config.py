@@ -223,3 +223,9 @@ PLACE_DROPPED = {
     "node/1759007086": "'Waverley Cottages', a housing development mapped as a place (owner, 2026-10-13)",
     "way/360039994": "'St Mary's Catholic Club', a social club tagged a place of worship, with a food premises number (fhrs:id); its Wikidata entry has no article: a club with nothing else (wave 1's unsure rows, settled on the Wikidata lookup and the existing rules, 2026-10-13)",
 }
+
+# Places of worship kept by the owner's word against the denomination rule
+# (place_index, worship_only; owner, 2026-10-13: "keep all four by id").
+PLACE_KEPT = {
+    "way/108732648": "'Church Of Christ', an Anglican church (denomination=anglican, wikidata=Q105102971, no wikipedia tag) whose name the rule reads as the denomination's (owner, 2026-10-13)",
+}

@@ -740,6 +740,7 @@ PLACE_DROPPED = {
     "way/1110193734": "'Zoo Center Path', description: a path inside a paid zoo (flag check, 2026-10-13)",
     "way/221286927": "'Zoo Center Path', description: a path inside a paid zoo (flag check, 2026-10-13)",
     "way/266940034": "'George F. Baker Jr. and Sr. Houses', houses with an article of their own and no tourism tag: a home is kept only when open to visit or tagged an attraction (wave 1's unsure rows, settled on the Wikidata lookup and the existing rules, 2026-10-13)",
+    "node/5171173318": "'La Sinagoga', a place of worship named only by a denomination, a body or a chain, in a form the shared rule's lists do not hold; no wikipedia tag of its own (owner's rulings, 2026-10-13)",
 }
 
 # Public art kept by the owner's word against the article rule (place_index,

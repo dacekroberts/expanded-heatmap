@@ -738,4 +738,7 @@ PLACE_DROPPED = {
 # cannot admit; DECISIONS.md of that date lists the works left out.
 PLACE_KEPT = {
     "node/7857202407": "'Giant Binoculars', a known work the article rule drops for want of an article of its own (owner, 2026-10-13)",
+    # A place of worship kept against the denomination rule (worship_only;
+    # owner, 2026-10-13: "keep all four by id").
+    "node/358828101": "'The Church of Jesus Christ of Latter-day Saints', the Wilshire Ward chapel (alt_name=Wilshire Ward, wikidata=Q8022900, an entry of its own and no wikipedia tag): a known building under its denomination's name (owner, 2026-10-13)",
 }

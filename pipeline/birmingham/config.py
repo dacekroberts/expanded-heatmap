@@ -283,4 +283,5 @@ PLACE_DROPPED = {
     "node/1686189422": "'Victorian Sewer', description: historic=monument; name is a type; no wikidata (flag check, 2026-10-13)",
     "node/12819635574": "'Whistle Blizzard', artwork, borrowed article: tourism=artwork; wikipedia=en:Cloudburst; wikidata=Q180382 (41 wikis); level=-2 (the article is a weather term) (flag check, 2026-10-13)",
     "node/12849822859": "'City', description: place=hamlet; name \"City\"; no wikidata (bare type word on a place) (flag check, 2026-10-13)",
+    "way/300020975": "'Mosque & Islamic Centre', a place of worship named only by a denomination, a body or a chain, in a form the shared rule's lists do not hold; no wikipedia tag of its own (owner's rulings, 2026-10-13)",
 }

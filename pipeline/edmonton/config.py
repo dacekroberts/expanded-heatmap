@@ -405,4 +405,5 @@ PLACE_DROPPED = {
     "node/11940488893": "'Heritage Mall', business: former shopping mall: a demolished mall, by id (flag check, 2026-10-13)",
     "way/521942121": "'Rehwinkel Parsonage', home: clergy residence with an entry and no home tag: a parsonage; 'parsonage' is not in HOME_NAME (flag check, 2026-10-13)",
     "way/322971597": "'Oblats Maison Provinciale', a religious residence (amenity=monastery); its Wikidata entry is the heritage register's and has no article: a home (wave 1's unsure rows, settled on the Wikidata lookup and the existing rules, 2026-10-13)",
+    "way/323353112": "'Ukrainian Orthodox Church of Canada', a place of worship named only by a denomination, a body or a chain, in a form the shared rule's lists do not hold; no wikipedia tag of its own (owner's rulings, 2026-10-13)",
 }

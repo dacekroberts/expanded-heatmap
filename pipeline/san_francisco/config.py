@@ -359,4 +359,5 @@ PLACE_DROPPED = {
     "way/123741452": "'Route 80', a route number in the name field (owner, 2026-10-13)",
     "node/8722361747": "'Down to the Seas in Ships', interpretive panel tagged a monument: historic=monument; inscription is a panel's text; no wikidata (flag check, 2026-10-13)",
     "node/8744048933": "'Whaling Out of San Francisco', interpretive panel tagged a monument: historic=monument; inscription is a panel's text; no wikidata (flag check, 2026-10-13)",
+    "node/13724228886": "'Casa de Oracion', a place of worship named only by a denomination, a body or a chain, in a form the shared rule's lists do not hold; no wikipedia tag of its own (owner's rulings, 2026-10-13)",
 }

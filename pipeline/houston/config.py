@@ -287,6 +287,7 @@ PLACE_DROPPED = {
     "way/449021475": "'Fannin Station South', private complex street: access=private; foot, bicycle and motor_vehicle permissive; name is a development's and a compass point (flag check, 2026-10-13)",
     "way/449021473": "'Fannin Station West', private complex street: access=private; foot, bicycle and motor_vehicle permissive; name is a development's and a compass point (flag check, 2026-10-13)",
     "way/449021474": "'Fannin Station West', private complex street: access=private; foot, bicycle and motor_vehicle permissive; name is a development's and a compass point (flag check, 2026-10-13)",
+    "way/1326179987": "'Iglesia Evangelica', a place of worship named only by a denomination, a body or a chain, in a form the shared rule's lists do not hold; no wikipedia tag of its own (owner's rulings, 2026-10-13)",
 }
 
 # Public art kept by the owner's word against the article rule (place_index,

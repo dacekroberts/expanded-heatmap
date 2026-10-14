@@ -423,3 +423,9 @@ PLACE_DROPPED = {
     "node/3562604733": "'W&R Jacob & Co. Limited', business: historic=building; note=Carved stone sign from factory (a company's name on a carved sign) (flag check, 2026-10-13)",
     "node/3804149636": "'Saint Vincent's Graveyard (site of)', not there: place=locality; name ends \"(site of)\" (a site-of name) (flag check, 2026-10-13)",
 }
+
+# Places of worship kept by the owner's word against the denomination rule
+# (place_index, worship_only; owner, 2026-10-13: "keep all four by id").
+PLACE_KEPT = {
+    "way/230568525": "'Unitarian Church', the St Stephen's Green church (denomination=unitarian, building=church, heritage=4, no wikidata or wikipedia tag): a known building under its denomination's name (owner, 2026-10-13)",
+}

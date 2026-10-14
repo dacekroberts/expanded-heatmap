@@ -387,4 +387,7 @@ PLACE_DROPPED = {
 # cannot admit; DECISIONS.md of that date lists the works left out.
 PLACE_KEPT = {
     "way/570278857": "'Albert Memorial', a known work the article rule drops for want of an article of its own (owner, 2026-10-13)",
+    # A place of worship kept against the denomination rule (worship_only;
+    # owner, 2026-10-13: "keep all four by id").
+    "way/31231628": "'Friends Meeting House', the listed Mount Street meeting house (denomination=quaker, wikidata=Q26579212, no wikipedia tag): a known building under its hall type's name (owner, 2026-10-13)",
 }

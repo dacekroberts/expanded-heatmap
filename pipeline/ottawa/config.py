@@ -223,4 +223,5 @@ PLACE_DROPPED = {
     "way/483954792": "'Mather Award Ditch', description: drainage ditch tagged leisure=park (flag check, 2026-10-13)",
     "node/12627526960": "'Ottawa's Highest Point', description: natural=peak named by a description (flag check, 2026-10-13)",
     "way/1324953278": "'The 8th Canadian Hussars (Princess Louise's) Sherman 'Easy Eight' M4A2(76) W HVSS tank', description: a display tank's outline named by a long description, 1 m from the memorial's own node (node/6977909007, 'Royal Canadian Armoured Corps Sherman Tank Memorial') (flag check, 2026-10-13)",
+    "way/294669471": "'Paroisses Catholiques Romaines', a place of worship named only by a denomination, a body or a chain, in a form the shared rule's lists do not hold; no wikipedia tag of its own (owner's rulings, 2026-10-13)",
 }
