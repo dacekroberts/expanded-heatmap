@@ -237,4 +237,18 @@ PLACE_REVIEWED = {
     "大津シーハイツ入口": "a signed junction (highway=traffic_signals) named for the building beside it: a road feature, not the building (the Seoul and Busan precedent); tags read 2026-10-13",
     "神奈川歯科大学": "a university (amenity=university, Wikipedia); 歯科 is its field, not a clinic (the Tokyo precedent); tags read 2026-10-13",
 }
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/yokosuka.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A bare type word (owner, 2026-10-13)
+    "node/13327905092": "'掘井戸': \"掘井戸\" (dug well): a type word alone, a feature label 78 m inside 千代ケ崎砲台跡 (way/626401256, wikidata)",
+    "way/1446654149": "'第一砲座': \"第一砲座\" (gun pit no. 1): a part label of 千代ケ崎砲台跡, 55 m from its row; no name of its own",
+    "way/1446654150": "'第二砲座': \"第二砲座\" (gun pit no. 2), same battery, same class",
+    "way/1446654151": "'第三砲座': \"第三砲座\" (gun pit no. 3), same battery, same class",
+    "node/13327905071": "'近接防御砲台': \"近接防御砲台\" (close-defence battery): a part label of the same battery, 123 m from its row",
+    "node/13327905072": "'右翼観測所跡': \"右翼観測所跡\" (right-wing observation post site): a part label of the same battery",
+    "node/13327905094": "'左翼観測所跡': \"左翼観測所跡\" (left-wing observation post site): a part label of the same battery",
+    # A religious office (owner, 2026-10-13)
+    "node/9254805747": "'社会福祉法人 横須賀基督教社会館': \"social welfare corporation Yokosuka Christian community house\": a welfare body by its legal form, not a church",
+}

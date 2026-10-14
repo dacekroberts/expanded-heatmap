@@ -335,4 +335,45 @@ PLACE_DROPPED = {
     "node/2063752640": "a bare type standing in for a name ('private mansion') on four listed buildings, none with a name of its own in OSM or an article (Hôtel particulier); tags read 2026-10-13",
     "node/2063752650": "a bare type standing in for a name ('private mansion') on four listed buildings, none with a name of its own in OSM or an article (Hôtel particulier); tags read 2026-10-13",
     "node/2063752654": "a bare type standing in for a name ('private mansion') on four listed buildings, none with a name of its own in OSM or an article (Hôtel particulier); tags read 2026-10-13",
+    # Added on the owner's rulings of 2026-10-13 on the full read (the reader's
+    # verdict file data/_search_rollout/reads_rules56/lille.tsv), each id read
+    # with its cached name; grouped by class.
+    # A bare type word (owner, 2026-10-13)
+    "node/2063752667": "'Immeuble': \"Immeuble\" (building): the monument register's type word standing in for a name, on a private building listed for its facades; its own wikidata is why the bare-type rule let it through",
+    "node/2063752726": "'Immeuble': \"Immeuble\", same class (a listed carved sign set in a facade)",
+    "node/2063752810": "'Immeuble': \"Immeuble\", same class",
+    "node/2063752905": "'Immeubles': \"Immeubles\" (buildings), same class",
+    "node/2063753139": "'Immeubles': \"Immeubles\", same class",
+    "node/2063753276": "'Maison': \"Maison\" (house): type word alone on a private house listed for its facades; also a home",
+    "node/2063753420": "'Maison': \"Maison\", same class",
+    "node/2063753440": "'Maison': \"Maison\", same class",
+    "node/2063753519": "'Maison': \"Maison\", same class",
+    "node/2063753575": "'Maisons': \"Maisons\" (houses), same class",
+    "node/2063753634": "'Maisons': \"Maisons\", same class",
+    "node/2063754170": "'Maisons': \"Maisons\", same class",
+    "way/76662559": "'Pigeonnier': \"Pigeonnier\" (dovecote), a type word alone; the wikidata and article are the chateau's, not its own",
+    "node/5871747099": "'Pirogue': \"Pirogue\" (dugout canoe): an exhibit 30 m inside Parc Archéologique Asnapio, named by its type",
+    "node/13980947601": "'Mosquée': \"Mosquée\" alone",
+    # A description standing in for a name (owner, 2026-10-13)
+    "node/2063753249": "'Maison de fond de cour': \"Maison de fond de cour\" (house at the back of a courtyard): the register's description of a private house, no name",
+    "node/13329930129": "'Riverside Viewpoint': an English description (\"Riverside Viewpoint\") with a malformed article link to another place's park",
+    "way/1087868029": "'Pommiers en libre cueillette (ville nouricière)': \"apple trees, free picking (nourishing city)\": a mapper's note about a planting, not a park's name",
+    # A business (owner, 2026-10-13)
+    "way/40875556": "'Terres d'aventure': \"Terres d'aventure\" is a travel agency, the shop tenant; the listed object is the first-floor apartment of the corner building",
+    "node/8995839603": "'Lycée européen Thérèse d'Avila': a lycee's name on a place-of-worship node: a school, or its chapel carrying the school's name",
+    # A religious office (owner, 2026-10-13)
+    "way/77491411": "'Aumônerie Romero': \"Aumônerie Romero\": a student chaplaincy, an office and meeting room rather than a church",
+    # Worship named only by its body or chain (owner, 2026-10-13)
+    "way/85096961": "'Église Protestante Unie de France': named only by the denomination's national body (Église Protestante Unie de France)",
+    "node/12544983261": "'Église évangélique assemblée de dieu': \"Église évangélique assemblée de dieu\": a denomination's name alone",
+    # A station not open to the public (owner, 2026-10-13)
+    "node/745664618": "'Station d'essais techniques des 4 Cantons': \"technical test station of 4 Cantons\": the metro's test track facility, no passenger service",
+    # A second row of one object (owner, 2026-10-13)
+    "way/1166758999": "'Gare de Lille-Flandres': second row of Lille-Flandres (node/8745537419, same UIC and GTFS stop id) 191 m away",
+    "node/8773867859": "'Gare Lille Flandres': second stop position of the tram stop Gare Lille Flandres, 43 m from node/871279130",
+    "node/1219182102": "'Pont de Wasquehal': second stop position of Pont de Wasquehal, 177 m from node/1219181688",
+    "node/1219181778": "'Wasquehal – Pavé de Lille': second stop position of Wasquehal – Pavé de Lille, 85 m from node/1219181445",
+    "node/9385022353": "'Le Stadium': a locality node \"Le Stadium\" 167 m from the stadium's own landmark row (way/802327323, wikidata)",
+    "node/9385022347": "'Hameau d'Epinoy': \"Hameau d'Epinoy\" 198 m from the locality \"Epinoy\" (node/9385022346): one hamlet, two nodes",
+    "node/9349940293": "'L'Hempempont': \"L'Hempempont\" 216 m from the suburb node \"Hempempont\" (node/931255150): one place, two nodes",
 }

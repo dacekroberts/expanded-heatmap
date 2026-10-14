@@ -232,4 +232,14 @@ PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
-PLACE_DROPPED = {}
+# Dropped by id on the owner's rulings of 2026-10-13 on the full read (the
+# reader's verdict file data/_search_rollout/reads_rules56/fuchu_tokyo.tsv), each
+# id read with its cached name; grouped by class.
+PLACE_DROPPED = {
+    # A bare type word (owner, 2026-10-13)
+    "way/938310411": "'噴水塔': \"噴水塔\" (fountain tower): a type word alone, a cemetery fitting",
+    # A second row of one object (owner, 2026-10-13)
+    "node/1420785095": "'東京農工大学（農学部）': second row of 東京農工大学 (way/75035101, same wikidata) 222 m away, with the faculty in brackets",
+    # Unsure rows a ruling drops: a facility of an estate, named inside the estate or run by its owners' body (the estate ruling) (owner, 2026-10-13)
+    "way/723155649": "'第七西府町住宅内公園': a facility of an estate, named inside the estate or run by its owners' body",
+}
