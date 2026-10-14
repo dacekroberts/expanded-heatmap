@@ -366,7 +366,6 @@ PLACE_DROPPED = {
     # A business's own name on a building, nothing else to visit under that name
     # (the settled call: a business is no place; owner, 2026-10-13).
     "way/34530511": "'Medieval Times Dinner & Tournament', business: a dinner-show chain's name on the building (old_name Government Building); wikidata, no wikipedia tag (amenity=theatre; building=yes; wikidata=Q124858754; old_name=Government Building) (eye read, 2026-10-13)",
-    "way/137923889": "'Morgan Meighen & Associates', business: an investment firm's name on a historic building; the article and old_name are Toronto Street Post Office, so the row as named is the tenant (historic=yes; building=yes; wikidata=Q7826523; wikipedia=en:Toronto Street Post Office; old_name=Toronto Street Post Office) (eye read, 2026-10-13)",
     # A place of worship named only by a denomination, a body or a chain, in a
     # form the shared rule's lists do not hold (owner, 2026-10-13, ruling 8
     # of the sixteen and ruling 2 of the pilot readers').
@@ -401,4 +400,47 @@ PLACE_DROPPED = {
     # its own (the description ruling; owner, 2026-10-13, ruling 1).
     "node/2356786701": "'Church Avenue', wrong object's name: a transit history marker carrying a street's name (historic=marker) (eye read, 2026-10-13)",
     "node/2356786702": "'Willowdale', wrong object's name: a heritage plaque carrying the district's name; the district has its own place rows (historic=marker) (eye read, 2026-10-13)",
+    # The city's parcel names on parks (road allowance, traffic island, boulevard
+    # lands, a centre's grounds): a description of the land, no name (owner,
+    # 2026-10-13, "all approved", on the eye read's unsure rows).
+    "way/224933163": "'Bernard Avenue Road Allowance', parcel name: city inventory name for a road allowance kept as green space (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    "way/224933085": "'Bemersyde Drive Cul-De-Sac', parcel name: city inventory name for a cul-de-sac island (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    "way/206680191": "'Dunstable Place Dul-De-Sac', parcel name: city inventory name for a cul-de-sac island, misspelled (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    "way/225618642": "'Burnside Dr Boulevard', parcel name: city inventory name for a boulevard strip (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    "way/224914819": "'Austin Terrace Boulevard Lands', parcel name: city inventory name for boulevard lands (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    "way/224917750": "'Bathurst St Slopes', parcel name: city inventory name for a slope (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    "way/224917752": "'Bathurst St Slopes', parcel name: another way of the same parcel name, beside way/224917750 (leisure=park) (owner, 2026-10-13)",
+    "way/224917753": "'Bathurst St Slopes', parcel name: another way of the same parcel name, beside way/224917750 (leisure=park) (owner, 2026-10-13)",
+    "way/224917754": "'Bathurst St Slopes', parcel name: another way of the same parcel name, beside way/224917750 (leisure=park) (owner, 2026-10-13)",
+    "way/225519236": "'Boyington Property', parcel name: city inventory name, a former owner's property (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    "way/43532084": "'Harrison Properties', parcel name: city inventory name, a former owner's properties (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    "way/225007516": "'Birchmount/Parkette Traffic Island', parcel name: city inventory name for a traffic island (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    "way/37356608": "'Indian Mound Traffic Island', parcel name: city inventory name for a traffic island (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    "way/206039903": "'Lake Shore Teachers College Centre Island', parcel name: city inventory name for a traffic island (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    "way/224889845": "'Albion Arena', parcel name: an arena's grounds tagged a park under the arena's name (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    "way/224916810": "'Banbury Community Centre', parcel name: a community centre's grounds tagged a park under the centre's name (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    "way/225008607": "'Birkdale Community Centre', parcel name: a community centre's grounds tagged a park under the centre's name (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    "way/544833799": "'Morningside Church Park Area', parcel name: a description of land beside a church (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    "way/32326100": "'Hinder Area', parcel name: city inventory name; the alias West Don Parkland is the public name (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    # Places of worship named by a body, the read's unsure ones (owner,
+    # 2026-10-13, "all approved": the denomination ruling reaches them).
+    "way/56301067": "'The Universal Church', worship body only: reads as a chain's short name; no brand or operator tag (amenity=place_of_worship; building=yes; religion=christian) (eye read, unsure; owner, 2026-10-13)",
+    "way/43810107": "'Church Of Jesus Christ', worship body only: generic body name from a 2009 import (amenity=place_of_worship; building=church; religion=christian; denomination=protestant) (eye read, unsure; owner, 2026-10-13)",
+    "node/2355313610": "'Christian Congregation', worship body only: generic name from a register import (amenity=place_of_worship; religion=christian) (eye read, unsure; owner, 2026-10-13)",
+    "way/662769454": "'United Brethren in Christ Church', worship body only: a denomination's name plus Church (amenity=place_of_worship; building=church; religion=christian) (eye read, unsure; owner, 2026-10-13)",
+    "way/43810825": "'The Ethiopian Orthodox Tewaheda Church', worship body only: a national church's name, no parish name (amenity=place_of_worship; building=church; religion=christian) (eye read, unsure; owner, 2026-10-13)",
+    "way/168461275": "'Seventh Day Adventist Church Reform Movement', worship body only: a denomination's name, no congregation name (amenity=place_of_worship; building=church; religion=christian; denomination=seventh_day_adventist) (eye read, unsure; owner, 2026-10-13)",
+    "way/191842893": "'Georgian Orthodox Church in Canada', worship body only: a national church's name, no parish name (amenity=place_of_worship; building=chapel; religion=christian) (eye read, unsure; owner, 2026-10-13)",
+    "node/12744674541": "'Polskie Kościoły Pełnej Ewangelii', worship body only: Polish for a federation of churches, no congregation name (amenity=place_of_worship; religion=christian; denomination=pentecostal) (eye read, unsure; owner, 2026-10-13)",
+    # Condominium, co-op or office-estate grounds tagged a park (owner,
+    # 2026-10-13, "all approved": the estate-facility ruling, ruling 7).
+    "way/468762447": "'Bohemian Embassy Courtyard', estate facility: courtyard of what reads as a condominium building, tagged a park; the condominium is inferred from the name, no tag confirms it (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    "way/1308504910": "'Time and Space Courtyard', estate facility: courtyard of what reads as a condominium development, tagged a park; inferred from the name (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    "node/9596082843": "'Childrens Community Garden', estate facility: a housing co-op members' garden (operator names the co-op members) (leisure=park; operator=Community Co-op Memebers) (eye read, unsure; owner, 2026-10-13)",
+    "way/702116997": "'Arnell Plaza', estate facility: privately owned public space of a building (note tag), access=permissive (leisure=park; access=permissive) (eye read, unsure; owner, 2026-10-13)",
+    "way/1043315847": "'Atria North Park', estate facility: grounds named for an office complex; no operator tag (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    "way/1043315848": "'Atria South Park', estate facility: grounds named for an office complex; no operator tag (leisure=park) (eye read, unsure; owner, 2026-10-13)",
+    # NOT dropped: way/137923889 'Morgan Meighen & Associates', a tenant's name on
+    # the old Toronto Street Post Office, which has an article of its own; the
+    # building is the landmark (owner, 2026-10-13: restore).
 }
