@@ -303,7 +303,8 @@ PLACE_DROPPED = {
 # Kept by id: admitted as rows although a rule passes them over (owner, 2026-10-13;
 # docs/decisions_drafts/search-final.md).
 PLACE_KEPT = {
-    "node/244915353": "'Amphitheater Gelsenkirchen', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
+    "way/147192563": "'VELTINS-Arena', owner, 2026-10-13: brand ruling; no sight tag, so the rule passes over it",
+    "node/244915353":"'Amphitheater Gelsenkirchen', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
     "node/248922852": "'Consol Theater', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
     "node/1123451557": "'Herkules', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
     "node/2288376990": "'Nordsternturm', owner, 2026-10-13: a public sight the rules pass over for want of a tag",
