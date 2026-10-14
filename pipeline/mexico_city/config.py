@@ -95,11 +95,10 @@ DATA_RAW = ROOT / "data" / "mexico_city" / "raw"
 # processed/: the regional build writes processed/regional/ until it lands
 # (regional-extension, Step 1). Fold back to processed/ on landing.
 #
-# TRAM RESCOPE, UNTIL IT LANDS: master reads processed/regional/, so the
-# cable-car build writes processed/regional/cable/ from its branch. Remove
-# the "cable" part in the landing commit and re-run steps 1 to 3 then.
+# The cable-car build wrote processed/regional/cable/ from its branch until
+# the tram rescope landed (2026-10-13).
 DATA_PROCESSED = (ROOT / "data" / "mexico_city" / "processed"
-                  / ("regional" if REGIONAL else "") / "cable")
+                  / ("regional" if REGIONAL else ""))
 OUTPUTS = ROOT / "outputs" / "mexico_city"
 
 HEATMAP_HTML = OUTPUTS / "heatmap.html"
