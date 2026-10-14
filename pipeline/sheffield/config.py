@@ -222,6 +222,10 @@ PLACE_DROPPED = {
     "way/847232420": "'Merchants Crescent, Exchange Street', two street names glued in one: a glitch (owner, 2026-10-13)",
     "node/1759007086": "'Waverley Cottages', a housing development mapped as a place (owner, 2026-10-13)",
     "way/360039994": "'St Mary's Catholic Club', a social club tagged a place of worship, with a food premises number (fhrs:id); its Wikidata entry has no article: a club with nothing else (wave 1's unsure rows, settled on the Wikidata lookup and the existing rules, 2026-10-13)",
+    # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "node/10600883216": "'Christian Science Reading Room', a religious body's reading room, assembly hall or institute tagged a place of worship, not a congregation (owner, 2026-10-13, ruling 2; pattern screen)",
+    "way/256979767": "'St Thomas Philadelphia Teaching Hall', a part of one church as its own row, the church's own row within 300 m (owner, 2026-10-13, ruling 4; pattern screen)",
 }
 
 # Places of worship kept by the owner's word against the denomination rule

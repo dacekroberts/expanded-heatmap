@@ -305,6 +305,10 @@ PARCEL_TOLERANCE_M = 40.0
 # --- Place search (scripts/place_search_scaffold.py, 2026-10-12) ---
 
 PLACE_AREA = "(id:3600111968)"
+# The index reaches more than 25 km past the map's stations, a far corner of the
+# municipality's own area: recorded for rule D of scripts/check_place_scope.py
+# (measured 48.3 km on the index of 2026-10-13; remove it if a rebuild falls within 25 km).
+PLACE_SCOPE_REACH_REASON = "2026-10-13: the Farallon Islands are in the city and county, 48 km out to sea (owner)"
 PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
 PLACE_LANGUAGES = ("en",)
@@ -360,4 +364,10 @@ PLACE_DROPPED = {
     "node/8722361747": "'Down to the Seas in Ships', interpretive panel tagged a monument: historic=monument; inscription is a panel's text; no wikidata (flag check, 2026-10-13)",
     "node/8744048933": "'Whaling Out of San Francisco', interpretive panel tagged a monument: historic=monument; inscription is a panel's text; no wikidata (flag check, 2026-10-13)",
     "node/13724228886": "'Casa de Oracion', a place of worship named only by a denomination, a body or a chain, in a form the shared rule's lists do not hold; no wikipedia tag of its own (owner's rulings, 2026-10-13)",
+    # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "node/10553806550": "'Christian Science Reading Room', a religious body's reading room, assembly hall or institute tagged a place of worship, not a congregation (owner, 2026-10-13, ruling 2; pattern screen)",
+    "node/358803230": "'Chapel of Grace', a part of one church as its own row, the church's own row within 300 m (owner, 2026-10-13, ruling 4; pattern screen)",
+    "way/651657468": "'Waterfront Plaza', a stock plaza or square name with no place in it (owner, 2026-10-13, ruling 5 and its follow-up: every plaza name with no place in it; pattern screen)",
+    "way/1428380754": "'Waterfront Plaza', a stock plaza or square name with no place in it (owner, 2026-10-13, ruling 5 and its follow-up: every plaza name with no place in it; pattern screen)",
 }

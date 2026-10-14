@@ -163,4 +163,7 @@ PLACE_DROPPED = {
     "way/1360166213": "'Minneapolis Skyway (Tunnel)', a description as a street's name (owner, 2026-10-13)",
     "way/1026174773": "'Loren L. Chadwick Cottages', home: houses with an article and no home tag: private cottages; HOME_NAME misses the plural, by id (flag check, 2026-10-13)",
     "way/1053667647": "'Stone Path', description: a surface and a type word (flag check, 2026-10-13)",
+    # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "node/13788625447": "'Flagpole Plaza', a stock plaza or square name with no place in it (owner, 2026-10-13, ruling 5 and its follow-up: every plaza name with no place in it; pattern screen)",
 }

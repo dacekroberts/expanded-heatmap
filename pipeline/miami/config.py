@@ -428,4 +428,7 @@ PLACE_DROPPED = {
     "node/6942721481": "'Medley Landfill', private facility: a landfill tagged a peak: an operating waste site, by id (flag check, 2026-10-13)",
     "node/11226868716": "'HMS Bounty', glitch: GNIS artifact: a replica ship's name on a hamlet node; the ship is not there (flag check, 2026-10-13)",
     "node/153971407": "'Medley Lakeside Retirement Community', a housing development mapped as a place (owner, 2026-10-13)",
+    # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "way/552197202": "'Alhambra Tower Plaza', the grounds of an office or apartment building, or of a housing estate by its operator, tagged a park or square (owner, 2026-10-13, the estate-facility ruling as applied to Toronto; pattern screen)",
 }

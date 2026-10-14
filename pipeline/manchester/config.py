@@ -380,6 +380,10 @@ PLACE_DROPPED = {
     "way/486642351": "'Whittaker Lane Grass Patch', description: leisure=park; grass=mown; name ends \"Grass Patch\" (flag check, 2026-10-13)",
     "node/14085210191": "'Hill Top Mews', a housing development mapped as a place (owner, 2026-10-13)",
     "way/1222568239": "'North Lodge', a listed lodge under a position word and a type word; its Wikidata entry has no article and no tag marks it open to visit: a home (wave 1's unsure rows, settled on the Wikidata lookup and the existing rules, 2026-10-13)",
+    # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "way/557643019": "'Assembly Hall of Jehovah's Witnesses', a religious body's reading room, assembly hall or institute tagged a place of worship, not a congregation (owner, 2026-10-13, ruling 2; pattern screen)",
+    "node/286960803": "'Christadelphian Hall', a place of worship named only by its body and a hall type, in a spelling the shared rule's lists do not hold (owner, 2026-10-13, the denomination ruling; pattern screen)",
 }
 
 # Public art kept by the owner's word against the article rule (place_index,

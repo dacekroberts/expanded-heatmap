@@ -569,6 +569,11 @@ PLACE_DROPPED = {
     "node/10037203113": "'USS Whidbey Island (LSD-41)', not a place: a laid-up navy ship, historic=ship with no tourism tag: movable, and not visitable (flag check, 2026-10-13)",
     "node/158312745": "'Abbotsford Homes', a housing development mapped as a place (owner, 2026-10-13)",
     "way/432901522": "'Port Richmond Polish Neighborhood', description: a mapper's description of an area drawn as a neighbourhood, no wikidata (flag check, 2026-10-13)",
+    # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "way/193817072": "'Jevovah's Witness Kingdom Hall', a place of worship named only by its body and a hall type, in a spelling the shared rule's lists do not hold (owner, 2026-10-13, the denomination ruling; pattern screen)",
+    "way/334438129": "'Saint Patrick Hall', a part of one church as its own row, the church's own row within 300 m (owner, 2026-10-13, ruling 4; pattern screen)",
+    "way/40085567": "'Monument Plaza', a stock plaza or square name with no place in it (owner, 2026-10-13, ruling 5 and its follow-up: every plaza name with no place in it; pattern screen)",
 }
 
 # Public art kept by the owner's word against the article rule (place_index,

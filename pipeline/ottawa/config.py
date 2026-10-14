@@ -156,6 +156,10 @@ OTTAWA_BBOX = {
 # --- Place search (scripts/place_search_scaffold.py, 2026-10-12) ---
 
 PLACE_AREA = "(id:3604136816)"
+# The index reaches more than 25 km past the map's stations, a far corner of the
+# municipality's own area: recorded for rule D of scripts/check_place_scope.py
+# (measured 48.4 km on the index of 2026-10-13; remove it if a rebuild falls within 25 km).
+PLACE_SCOPE_REACH_REASON = "2026-10-13: the amalgamated city holds its rural west, 48 km past the nearest station (owner)"
 PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
 PLACE_LANGUAGES = ("en",)
@@ -224,4 +228,8 @@ PLACE_DROPPED = {
     "node/12627526960": "'Ottawa's Highest Point', description: natural=peak named by a description (flag check, 2026-10-13)",
     "way/1324953278": "'The 8th Canadian Hussars (Princess Louise's) Sherman 'Easy Eight' M4A2(76) W HVSS tank', description: a display tank's outline named by a long description, 1 m from the memorial's own node (node/6977909007, 'Royal Canadian Armoured Corps Sherman Tank Memorial') (flag check, 2026-10-13)",
     "way/294669471": "'Paroisses Catholiques Romaines', a place of worship named only by a denomination, a body or a chain, in a form the shared rule's lists do not hold; no wikipedia tag of its own (owner's rulings, 2026-10-13)",
+    # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "way/639573159": "'The Little Park', the grounds of an office or apartment building, or of a housing estate by its operator, tagged a park or square (owner, 2026-10-13, the estate-facility ruling as applied to Toronto; pattern screen)",
+    "way/1312713051": "'Carp RIver', a second river row under a mistyped name beside the river's own row (owner, 2026-10-13, ruling 9 and the glitched-name call; pattern screen)",
 }

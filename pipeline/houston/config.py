@@ -173,6 +173,10 @@ HOUSTON_BBOX = {
 # --- Place search (scripts/place_search_scaffold.py, 2026-10-12) ---
 
 PLACE_AREA = "(id:3602688911)"
+# The index reaches more than 25 km past the map's stations, a far corner of the
+# municipality's own area: recorded for rule D of scripts/check_place_scope.py
+# (measured 58.4 km on the index of 2026-10-13; remove it if a rebuild falls within 25 km).
+PLACE_SCOPE_REACH_REASON = "2026-10-13: the city limits' annexed arms reach far northwest and to Lake Houston, 58 km past the nearest station (owner)"
 PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
 PLACE_LANGUAGES = ("en",)
@@ -288,6 +292,12 @@ PLACE_DROPPED = {
     "way/449021473": "'Fannin Station West', private complex street: access=private; foot, bicycle and motor_vehicle permissive; name is a development's and a compass point (flag check, 2026-10-13)",
     "way/449021474": "'Fannin Station West', private complex street: access=private; foot, bicycle and motor_vehicle permissive; name is a development's and a compass point (flag check, 2026-10-13)",
     "way/1326179987": "'Iglesia Evangelica', a place of worship named only by a denomination, a body or a chain, in a form the shared rule's lists do not hold; no wikipedia tag of its own (owner's rulings, 2026-10-13)",
+    # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "node/356830966": "'Jehovah Witness Kingdom Hall Church', a place of worship named only by its body and a hall type, in a spelling the shared rule's lists do not hold (owner, 2026-10-13, the denomination ruling; pattern screen)",
+    "way/723572376": "'Student Life Plaza', a stock plaza or square name with no place in it (owner, 2026-10-13, ruling 5 and its follow-up: every plaza name with no place in it; pattern screen)",
+    "way/625071581": "'Amegy Tower Park', the grounds of an office or apartment building, or of a housing estate by its operator, tagged a park or square (owner, 2026-10-13, the estate-facility ruling as applied to Toronto; pattern screen)",
+    "way/624788476": "'Penwell Tower Park', the grounds of an office or apartment building, or of a housing estate by its operator, tagged a park or square (owner, 2026-10-13, the estate-facility ruling as applied to Toronto; pattern screen)",
 }
 
 # Public art kept by the owner's word against the article rule (place_index,

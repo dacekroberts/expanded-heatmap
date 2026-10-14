@@ -284,4 +284,15 @@ PLACE_DROPPED = {
     "node/12819635574": "'Whistle Blizzard', artwork, borrowed article: tourism=artwork; wikipedia=en:Cloudburst; wikidata=Q180382 (41 wikis); level=-2 (the article is a weather term) (flag check, 2026-10-13)",
     "node/12849822859": "'City', description: place=hamlet; name \"City\"; no wikidata (bare type word on a place) (flag check, 2026-10-13)",
     "way/300020975": "'Mosque & Islamic Centre', a place of worship named only by a denomination, a body or a chain, in a form the shared rule's lists do not hold; no wikipedia tag of its own (owner's rulings, 2026-10-13)",
+    # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "node/9111254607": "'Christian Science Reading Room', a religious body's reading room, assembly hall or institute tagged a place of worship, not a congregation (owner, 2026-10-13, ruling 2; pattern screen)",
+    "way/295736024": "'Christadelphian Hall', a place of worship named only by its body and a hall type, in a spelling the shared rule's lists do not hold (owner, 2026-10-13, the denomination ruling; pattern screen)",
+    "way/95835712": "'Christadelphian Hall', a place of worship named only by its body and a hall type, in a spelling the shared rule's lists do not hold (owner, 2026-10-13, the denomination ruling; pattern screen)",
+}
+
+# Famous places kept by id: in the cache, passed over by the rules (place_index,
+# PLACE_KEPT; owner, 2026-10-13).
+PLACE_KEPT = {
+    "way/406003396": "'Birmingham Museum and Art Gallery', one of the city's best-known sights, in the cache with no row (tourism=museum, no wikidata or wikipedia tag): a famous place the rules pass over (owner, 2026-10-13; pattern screen)",
 }

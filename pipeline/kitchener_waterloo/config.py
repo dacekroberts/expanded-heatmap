@@ -265,4 +265,7 @@ PLACE_DROPPED = {
     "node/9998016266": "'Beechwood Bridle Gate Homes Association', private facility: homeowners' association grounds tagged leisure=park; the name is the association's (flag check, 2026-10-13)",
     "way/258818568": "'Beechwood II Homes Association Recreation Centre', private facility: homeowners' association recreation centre tagged leisure=park (flag check, 2026-10-13)",
     "way/169192754": "'Highgate Road SWP', description: stormwater pond tagged leisure=park (SWP) (flag check, 2026-10-13)",
+    # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "way/925949128": "'Civic Plaza', a stock plaza or square name with no place in it (owner, 2026-10-13, ruling 5 and its follow-up: every plaza name with no place in it; pattern screen)",
 }

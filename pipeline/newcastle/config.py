@@ -269,4 +269,7 @@ PLACE_DROPPED = {
     "node/9661326717": "'Dial Cottage (George Stevensons Listed Home)', named a home by its own name, no Wikidata entry and no tourism tag: a home is kept only when open to visit or tagged an attraction (wave 1's unsure rows, settled on the Wikidata lookup and the existing rules, 2026-10-13)",
     "node/467128730": "'Lizard House', place=locality; name ends 'House'; no other tag (a house mapped as a locality, as Nottingham's Wiverton Hall) (wave 1's unsure rows, settled on the Wikidata lookup and the existing rules, 2026-10-13)",
     "way/401459740": "'Society of Saint Pius X', a place of worship named only by a denomination, a body or a chain, in a form the shared rule's lists do not hold; no wikipedia tag of its own (owner's rulings, 2026-10-13)",
+    # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "node/4772419736": "'Kingdom Hall Of Jehovas's Witnesses', a place of worship named only by its body and a hall type, in a spelling the shared rule's lists do not hold (owner, 2026-10-13, the denomination ruling; pattern screen)",
 }

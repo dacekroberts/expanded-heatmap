@@ -422,10 +422,14 @@ PLACE_DROPPED = {
     "way/1189827843": "'Rathdown Union Workhouse, site of', not there: historic=workhouse; name ends \", site of\" (a site-of name) (flag check, 2026-10-13)",
     "node/3562604733": "'W&R Jacob & Co. Limited', business: historic=building; note=Carved stone sign from factory (a company's name on a carved sign) (flag check, 2026-10-13)",
     "node/3804149636": "'Saint Vincent's Graveyard (site of)', not there: place=locality; name ends \"(site of)\" (a site-of name) (flag check, 2026-10-13)",
+    # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "way/136549341": "'Central Square', a stock plaza or square name with no place in it (owner, 2026-10-13, ruling 5 and its follow-up: every plaza name with no place in it; pattern screen)",
 }
 
 # Places of worship kept by the owner's word against the denomination rule
 # (place_index, worship_only; owner, 2026-10-13: "keep all four by id").
 PLACE_KEPT = {
     "way/230568525": "'Unitarian Church', the St Stephen's Green church (denomination=unitarian, building=church, heritage=4, no wikidata or wikipedia tag): a known building under its denomination's name (owner, 2026-10-13)",
+    "relation/289528": "'General Post Office', one of the city's best-known sights, in the cache with no row (tourism=attraction, building=retail, wikidata=Q1339254 and its own article; held out by the rules all the same): a famous place the rules pass over (owner, 2026-10-13; pattern screen)",
 }

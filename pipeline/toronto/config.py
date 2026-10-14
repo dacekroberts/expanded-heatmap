@@ -443,4 +443,7 @@ PLACE_DROPPED = {
     # NOT dropped: way/137923889 'Morgan Meighen & Associates', a tenant's name on
     # the old Toronto Street Post Office, which has an article of its own; the
     # building is the landmark (owner, 2026-10-13: restore).
+    # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "node/14183595174": "'Alumni Plaza', a stock plaza or square name with no place in it (owner, 2026-10-13, ruling 5 and its follow-up: every plaza name with no place in it; pattern screen)",
 }

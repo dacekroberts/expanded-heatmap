@@ -182,6 +182,10 @@ TUCSON_BBOX = {
 # --- Place search (scripts/place_search_scaffold.py, 2026-10-12) ---
 
 PLACE_AREA = "(id:3600253824)"
+# The index reaches more than 25 km past the map's stations, a far corner of the
+# municipality's own area: recorded for rule D of scripts/check_place_scope.py
+# (measured 31.5 km on the index of 2026-10-13; remove it if a rebuild falls within 25 km).
+PLACE_SCOPE_REACH_REASON = "2026-10-13: the city limits' far southeast lies 32 km past the nearest station (owner)"
 PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
 PLACE_LANGUAGES = ("en",)
@@ -206,4 +210,7 @@ PLACE_DROPPED = {
     "way/765581116": "'East Golf Links Roas', a street name cut short (owner, 2026-10-13)",
     "way/765587054": "'East Golf Links Roas', a street name cut short (owner, 2026-10-13)",
     "way/358416314": "'Pvr Dr-8721', a code as a street's name (owner, 2026-10-13)",
+    # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "way/34228242": "'Tucson LDS Institute of Religion', a religious body's reading room, assembly hall or institute tagged a place of worship, not a congregation (owner, 2026-10-13, ruling 2; pattern screen)",
 }

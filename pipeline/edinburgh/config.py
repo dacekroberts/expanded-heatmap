@@ -200,4 +200,7 @@ PLACE_DROPPED = {
     "node/5002102714": "'Birth Chamber', description: historic=room; description says a room in the castle (a room inside a building) (flag check, 2026-10-13)",
     "way/37616520": "'Former Lime Kilns', description: historic=ruins; name is \"Former\" and a type (flag check, 2026-10-13)",
     "way/1474280377": "'Frederick Douglass', a mural kept only on its subject's Wikidata entry (owner, 2026-10-13)",
+    # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "node/4999592333": "'Christian Science Reading Room', a religious body's reading room, assembly hall or institute tagged a place of worship, not a congregation (owner, 2026-10-13, ruling 2; pattern screen)",
 }

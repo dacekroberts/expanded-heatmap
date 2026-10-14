@@ -240,6 +240,10 @@ SOLE_OWNERSHIP_TYPE = "SOLE"
 # --- Place search (scripts/place_search_scaffold.py, 2026-10-12) ---
 
 PLACE_AREA = "(id:3600253832)"
+# The index reaches more than 25 km past the map's stations, a far corner of the
+# municipality's own area: recorded for rule D of scripts/check_place_scope.py
+# (measured 37.4 km on the index of 2026-10-13; remove it if a rebuild falls within 25 km).
+PLACE_SCOPE_REACH_REASON = "2026-10-13: the city limits reach the San Pasqual Valley, 37 km past the nearest station (owner)"
 PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
 PLACE_LANGUAGES = ("en",)
@@ -770,4 +774,9 @@ PLACE_DROPPED = {
     "node/14131530331": "'Scripps Ranch Technology Park', a business park or centre mapped as a neighbourhood, one of 11 community-plan sub-areas by one mapper, no Wikidata entry (owner, 2026-10-13)",
     "node/14095801948": "'Spectrum Center', a business park or centre mapped as a quarter, one of 11 community-plan sub-areas by one mapper, no Wikidata entry (owner, 2026-10-13)",
     "node/13513291492": "'Uptown Medical Complex', a business park or centre mapped as a quarter, one of 11 community-plan sub-areas by one mapper, no Wikidata entry (owner, 2026-10-13)",
+    # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "node/597058966": "'La Jolla California Institute of Religion', a religious body's reading room, assembly hall or institute tagged a place of worship, not a congregation (owner, 2026-10-13, ruling 2; pattern screen)",
+    "node/358845506": "'San Diego California Institute of Religion', a religious body's reading room, assembly hall or institute tagged a place of worship, not a congregation (owner, 2026-10-13, ruling 2; pattern screen)",
+    "node/13431026872": "'Adams Hall - College Avenue Baptist Church', a part of one church as its own row, the church's own row within 300 m (owner, 2026-10-13, ruling 4; pattern screen)",
 }

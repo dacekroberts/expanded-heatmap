@@ -186,4 +186,8 @@ PLACE_DROPPED = {
     "way/1551158325": "'B765', a road number in the name field (owner, 2026-10-13)",
     "way/1551158327": "'B765', a road number in the name field (owner, 2026-10-13)",
     "node/6465079383": "'Crookston Home', home: place=quarter; name ends \"Home\"; no other tag (a care home's site mapped as a quarter) (flag check, 2026-10-13)",
+    # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "way/148531852": "'Christadelphian Hall', a place of worship named only by its body and a hall type, in a spelling the shared rule's lists do not hold (owner, 2026-10-13, the denomination ruling; pattern screen)",
+    "way/542179822": "'The Courtyard', a stock plaza or square name with no place in it (owner, 2026-10-13, ruling 5 and its follow-up: every plaza name with no place in it; pattern screen)",
 }

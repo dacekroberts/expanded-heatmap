@@ -205,4 +205,8 @@ PLACE_DROPPED = {
     "node/706725025": "'Gotham Moor Farm', home: place=locality; name ends \"Farm\"; no other tag (a farm mapped as a locality) (flag check, 2026-10-13)",
     "node/4351842912": "'Wiverton Hall', home: place=locality; name ends \"Hall\"; no other tag (a house mapped as a locality, as Dublin's by-id drops) (flag check, 2026-10-13)",
     "way/342863745": "'Bus Link', description: type words only (flag check, 2026-10-13)",
+    # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "way/344273943": "'Christadelphian Hall', a place of worship named only by its body and a hall type, in a spelling the shared rule's lists do not hold (owner, 2026-10-13, the denomination ruling; pattern screen)",
+    "way/469499415": "'The Square', a stock plaza or square name with no place in it (owner, 2026-10-13, ruling 5 and its follow-up: every plaza name with no place in it; pattern screen)",
 }

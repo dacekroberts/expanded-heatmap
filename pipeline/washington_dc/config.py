@@ -465,6 +465,11 @@ PLACE_DROPPED = {
     "way/640685801": "'Grove 24 Trail', description: an informal trail under a grove number (flag check, 2026-10-13)",
     "way/199920712": "'Leavey Center Entrance bridge', description: a campus footbridge named for a building (flag check, 2026-10-13)",
     "way/199920714": "'Leavey Center Entrance bridge', description: a campus footbridge named for a building (flag check, 2026-10-13)",
+    # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "way/59246906": "'Square 80', a park named only by a category and an inventory number (owner, 2026-10-13, ruling 1 of the class rulings; pattern screen)",
+    "node/358958281": "'Christian Science Reading Room', a religious body's reading room, assembly hall or institute tagged a place of worship, not a congregation (owner, 2026-10-13, ruling 2; pattern screen)",
+    "node/358960851": "'Christian Science Reading Room', a religious body's reading room, assembly hall or institute tagged a place of worship, not a congregation (owner, 2026-10-13, ruling 2; pattern screen)",
 }
 
 # Public art kept by the owner's word against the article rule (place_index,

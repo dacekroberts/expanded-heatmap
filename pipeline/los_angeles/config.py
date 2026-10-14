@@ -258,6 +258,10 @@ LONG_BEACH_BOUNDARY_NAME = "LONG BEACH"
 # --- Place search (scripts/place_search_scaffold.py, 2026-10-12) ---
 
 PLACE_AREA = "(id:3600112100,3600207359)"
+# The index reaches more than 25 km past the map's stations, a far corner of the
+# municipality's own area: recorded for rule D of scripts/check_place_scope.py
+# (measured 27.4 km on the index of 2026-10-13; remove it if a rebuild falls within 25 km).
+PLACE_SCOPE_REACH_REASON = "2026-10-13: the west San Fernando Valley's edge, inside the city limits, lies 27 km past the nearest station (owner)"
 PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
 PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
 PLACE_LANGUAGES = ("en",)
@@ -731,6 +735,9 @@ PLACE_DROPPED = {
     "way/484279014": "'Kinesthetics', an amenity space of one housing development tagged leisure=park: facilities of an apartment estate tagged a park are dropped (owner, 2026-10-13)",
     "way/562954916": "'The Lounge', an amenity space of one housing development tagged leisure=park: facilities of an apartment estate tagged a park are dropped (owner, 2026-10-13)",
     "way/562958436": "'The Pointe', an amenity space of one housing development tagged leisure=park: facilities of an apartment estate tagged a park are dropped (owner, 2026-10-13)",
+    # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "node/358850323": "'Immaculate Conception Parish Center', a part of one church as its own row, the church's own row within 300 m (owner, 2026-10-13, ruling 4; pattern screen)",
 }
 
 # Public art kept by the owner's word against the article rule (place_index,

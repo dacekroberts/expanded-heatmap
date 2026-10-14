@@ -300,3 +300,9 @@ PLACE_DROPPED = {
     "way/1323935109": "'NW Lion Guard', description: compass code beside a type: one of a bridge's four lions, by id (flag check, 2026-10-13)",
     "way/264219626": "'Southwood off-leash area 2', description: type and a number: 'off-leash area 2'; CODED_TYPE could take 'off-leash area N' (flag check, 2026-10-13)",
 }
+
+# Famous places kept by id: in the cache, passed over by the rules (place_index,
+# PLACE_KEPT; owner, 2026-10-13).
+PLACE_KEPT = {
+    "way/12244405": "'Canada Olympic Park', one of the city's best-known sights, in the cache with no row (tourism=attraction, leisure=park, no wikidata or wikipedia tag): a famous place the rules pass over (owner, 2026-10-13; pattern screen)",
+}

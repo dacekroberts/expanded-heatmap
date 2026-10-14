@@ -315,4 +315,8 @@ PLACE_DROPPED = {
     "way/1479920617": "'Civil War-era Castmate', description: a ruin named by a description (misspelled), its position a rough estimate by its own note (flag check, 2026-10-13)",
     "node/7748212236": "'Clef Sculpture', public art, no own article: tourism=artwork whose wikipedia tag is its subject's article (en:Clef), not its own (flag check, 2026-10-13)",
     "node/12299462771": "'Historic Springhouse', description: a ruin named by 'Historic' and a type word (precedent: New York's 'Historic Stone Chimney') (flag check, 2026-10-13)",
+    # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "node/358283788": "'Our Lady of Lourdes Parish Center', a part of one church as its own row, the church's own row within 300 m (owner, 2026-10-13, ruling 4; pattern screen)",
+    "way/862891605": "'Shoppers Plaza', a stock plaza or square name with no place in it (owner, 2026-10-13, ruling 5 and its follow-up: every plaza name with no place in it; pattern screen)",
 }

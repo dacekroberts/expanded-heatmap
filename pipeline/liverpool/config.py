@@ -250,4 +250,13 @@ PLACE_DROPPED = {
     "way/254831404": "'Woodside Bus Station', a bus station indexed as a street (owner, 2026-10-13)",
     "node/8647055259": "'Dingle', a demolished station, by its own description, whatever its article (owner, 2026-10-13: \"2. drop\")",
     "node/2789978938": "'Squares with Two Circles', artwork without article: tourism=artwork; wikipedia=en:List of public art in Liverpool (the wikipedia tag is a list page, not the work's article) (flag check, 2026-10-13)",
+    # The pattern screen of 2026-10-13: rows that fall squarely in one of the owner's
+    # class rulings of that date, each with its ruling.
+    "way/1088408935": "'The Cargo Building Courtyard', the grounds of an office or apartment building, or of a housing estate by its operator, tagged a park or square (owner, 2026-10-13, the estate-facility ruling as applied to Toronto; pattern screen)",
+}
+
+# Famous places kept by id: in the cache, passed over by the rules (place_index,
+# PLACE_KEPT; owner, 2026-10-13).
+PLACE_KEPT = {
+    "node/12496037807": "'Tate Liverpool', one of the city's best-known sights, in the cache with no row (tourism=gallery, no wikidata or wikipedia tag): a famous place the rules pass over (owner, 2026-10-13; pattern screen)",
 }
