@@ -1,6 +1,7 @@
-"""The heavy-job gate: at most four heavy jobs on the machine, each admitted
+"""The heavy-job gate: at most MAX_JOBS heavy jobs on the machine, each admitted
 against the memory actually available (owner, 2026-09-30; three since
-2026-10-04; four since 2026-10-05, when the machine went from 16 GB to 32 GB).
+2026-10-04; four since 2026-10-05, when the machine went from 16 GB to 32 GB;
+eight for the search rollout, 2026-10-13, to go back to four after it lands).
 
 WHY A GATE, NOT A MONITOR. Every session shares one machine (16 GB until
 2026-10-05, 32 GB since). On
@@ -64,7 +65,13 @@ ROOT = Path(__file__).resolve().parents[1]
 # since i have no other open processes"); four from 2026-10-05, when the RAM
 # went from 16 GB to 32 GB (owner: "tweak our memory gate"). The count now
 # guards the 6 physical cores more than memory; memory still decides each job.
-MAX_JOBS = 4
+# Eight from 2026-10-13 FOR THE SEARCH ROLLOUT (owner: "yes open the gates",
+# "no other project currently running heavy"): measured that evening with
+# four lanes running, 15.1 GB of 31.9 free, every python process together
+# 0.9 GB, CPU 45% of 8 cores and 16 threads; an index build peaks at 0.2 to
+# 2 GB. The memory test below is unchanged and still refuses a job that does
+# not fit. Back to four after the rollout lands unless the owner keeps it.
+MAX_JOBS = 8
 MARGIN_GB = 2.0
 DEFAULT_PEAK_GB = 8.0
 BIG_PROCESS_GB = 1.5

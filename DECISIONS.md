@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**140 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**141 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -77,6 +77,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Place search, the fifth rule pass: worship names, closed stations, two map stations in one complex](#2026-10-13---place-search-the-fifth-rule-pass-worship-names-closed-stations-two-map-stations-in-one-complex)
 - [Place search, the sixth rule pass: the pilot readers' classes, built from the sixteen rulings](#2026-10-13---place-search-the-sixth-rule-pass-the-pilot-readers-classes-built-from-the-sixteen-rulings)
 - [Place search, the sixth pass: two owner rulings on its report (El Polvorín, named convents)](#2026-10-13---place-search-the-sixth-pass-two-owner-rulings-on-its-report-el-polvorín-named-convents)
+- [The heavy-job cap is eight for the search rollout; wave 1 rebuilt on the final rules (owner)](#2026-10-13---the-heavy-job-cap-is-eight-for-the-search-rollout-wave-1-rebuilt-on-the-final-rules-owner)
 
 **2026-10-12**
 
@@ -6527,3 +6528,49 @@ japan-city template:
 - **"El Polvorín" is a proper name: "polvorín" left the Spanish bare-type list.** Mexico City's two rows return (node/9984413805, way/1139703548). Madrid's bare "Polvorín" (node/5129628112), which its reader dropped, returns with them and goes back to a by-id drop there. Rule A now takes 13 rows on the 19 live cities and 98 on the five pilot cities.
 - **A convent under a name of its own is a place, not an office: "convento" left `WORSHIP_OFFICE_HEADS` in Spanish and Portuguese.** Returning: Rio de Janeiro's "Convento de Santa Teresa"; Madrid's "Convento de Santa Catalina de Siena" and four convents its reader had dropped ("Convento de las Clarisas", "Convento de las Carmelitas Descalzas", "Convento Carmelitas Descalzas de Santa Ana y San José", "Convento de las Siervas de María"); Brasilia's "Convento Congregação Irmas de Maria". None on a live city: no live Spanish or Portuguese city had such a row. The head mechanism stays for Portuguese "seminário" (Rio's "Seminário Arquidiocesano de São José" still goes); the bare word "Convento" alone is still a bare type word. Rule C now takes 11 pilot rows (Daegu 10, Rio 1) and the same 21 live rows.
 - **The pilot count moves with the rulings:** of the readers' 310 drops, 18 were gone before the sixth pass, 147 are taken by it (152 before these rulings) and 145 remain. The batch 6 report was regenerated. Selftest 284 of 284, with the Spanish convent case turned round and the head and city's-languages cases moved to Portuguese; two breaks added and one re-pointed.
+
+### 2026-10-13 - The heavy-job cap is eight for the search rollout; wave 1 rebuilt on the final rules (owner)
+
+- **The cap goes from four to eight until the rollout lands (owner: "yes
+  open the gates", "no other project currently running heavy").** Measured
+  with four lanes running: 15.1 GB of 31.9 free, every Python process
+  together 0.9 GB, CPU 45% of 8 cores and 16 threads; an index build peaks
+  at 0.2 to 2 GB against the 3 GB the lanes declared. Only the count
+  changes: the gate's memory test (peak plus a 2 GB margin must be free)
+  still refuses a job that does not fit. Recommended because the render of
+  about 235 maps is the block ahead. Back to four after the landing unless
+  the owner keeps it.
+- **Three ways of working approved the same evening ("yes for all"):** an
+  integration branch (`search-integration`) prepares the big review now
+  (the held matcher branch, the 17 live cities' indexes on the final rules,
+  the review's tidying); maps may be rendered on that branch as each group
+  goes final, the landing, deploy-verify and push still waiting for the
+  owner's call; the full reads cover stations, landmarks and places and
+  skip junctions ("keep places"). On the five pilot reads no reader dropped
+  a junction in 1,135 rows; stations 24 of 974, landmarks 265 of 9,066,
+  places 21 of 3,762.
+- **Wave 1 on rule passes 5 and 6** (`search-wave1`, 18285853): 306,771
+  rows to 306,165 in 33 cities. 597 places of worship named only by a
+  denomination left (199 Kingdom Halls, 128 Latter-day Saints
+  meetinghouses), 6 Capitol subway stations, one diocesan office; Boston's
+  Boylston and New York's World Trade Center returned. Of the 82 rows left
+  for the rules, 72 were taken; eight more places of worship were dropped
+  by id under the same rulings.
+- **Four churches the denomination rule took are kept by id (owner: "keep
+  all four by id")**: Los Angeles node/358828101 (the Wilshire Ward chapel,
+  its own Wikidata entry), Manchester way/31231628 (the listed Mount Street
+  meeting house), Dublin way/230568525 (heritage-tagged), Sheffield
+  way/108732648 (Anglican, read as the denomination). Identified from tags
+  and memory, no web check; the cost of being wrong is four generic names
+  staying. Nine weaker cases (an entry or a heritage tag on an ordinary
+  congregation) stay dropped ("leave nine weak case dropped").
+- **Toronto has its first index**: 14,160 rows on the 174 stations of the
+  rescoped map; its Wikidata lookup asked 72 entries in two requests (the
+  script asks every public-art and library entry in the cache; the index
+  needs 43). Seven Eglinton line stations the map draws have no station
+  row: the closed-station test reads a disused tag before any guard, where
+  its three sibling tests spare a station the map draws. Treated as a
+  fault and fixed on the integration branch, its reach measured over every
+  searched city's caches before any rebuild. `PLACE_STATION_STRIP` was
+  tested and not set: it does not return the seven and renames eleven
+  other stations.

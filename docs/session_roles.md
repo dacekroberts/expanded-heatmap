@@ -174,7 +174,7 @@ for them, or add it after they commit.
 
 Every session shares one machine (32 GB), and
 overlapping heavy jobs have run it out of memory and closed the Claude app
-(`#sr-heavy-jobs`, `#memory`). **Four heavy jobs at most, each admitted by
+(`#sr-heavy-jobs`, `#memory`). **Four heavy jobs at most (eight during the search rollout, from 2026-10-13 until it lands), each admitted by
 `scripts/heavy_job.py`**
 against the memory actually available; the memory test, not the count, is
 what usually refuses a job. If refusals or a slow machine become common,

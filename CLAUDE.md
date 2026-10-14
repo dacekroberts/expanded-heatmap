@@ -180,7 +180,7 @@ the bracketed anchor** - read it before relaxing a rule, not before obeying one.
   merge if behind, push, nothing slow in between; re-fetch if a gate re-runs
   after that merge. [#fetch-before-push]
 - **Python is capped at 8 GB a process, 16 GB with its children**
-  (`scripts/python_memcap.py`). **At most four heavy jobs, each admitted by
+  (`scripts/python_memcap.py`). **At most four heavy jobs (eight during the search rollout, owner 2026-10-13), each admitted by
   the gate: `python scripts/heavy_job.py run --label <job> --session <you> --
   <command>`**; a refused job waits (`--wait <min>`), `status` names what holds
   the memory; peaks in `docs/session_roles.md`. Drift checks `--jobs 3` at
