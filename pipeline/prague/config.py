@@ -24,10 +24,9 @@ HEATMAP_HTML = OUTPUTS / "heatmap.html"
 # station-line pairs inside it, so this is expected to be written EMPTY.
 EXCLUDED_STATIONS_CSV = OUTPUTS / "excluded_stations.csv"
 
-# Until the tram rescope lands, steps 1 and 3 write and read a branch-only
-# folder: data/ is shared by every worktree. At landing set TRAM_DIR =
-# DATA_PROCESSED and re-run steps 1 and 3.
-TRAM_DIR = DATA_PROCESSED / "tram"
+# Metro and tram stations together since the tram rescope (owner
+# 2026-10-13). TRAM_DIR was a branch-only folder until the landing.
+TRAM_DIR = DATA_PROCESSED
 STATIONS_CSV = TRAM_DIR / "stations.csv"
 TRAM_SHAPES_JSON = TRAM_DIR / "tram_shapes.json"
 BUSINESSES_CLEAN_CSV = DATA_PROCESSED / "businesses_clean.csv"

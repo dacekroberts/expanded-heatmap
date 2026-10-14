@@ -331,7 +331,10 @@ if __name__ == "__main__":
 
     sys.stdout.reconfigure(encoding="utf-8")
     poly = gpd.GeoSeries([city_polygon(verbose=False)], crs=config.CRS_GEOGRAPHIC)
-    built = pd.read_csv(config.DATA_PROCESSED / "stations.csv")   # the metro set as master built it
+    # DRY RUN ONLY, AND STALE SINCE THE LANDING: stations.csv now holds the
+    # tram stations too, so this feeds them back in as metro stations.
+    # Step 1 passes the metro set itself and is the figure to trust.
+    built = pd.read_csv(config.DATA_PROCESSED / "stations.csv")
     res = build(built, poly.to_crs(config.CRS_PROJECTED).iloc[0])
     print(f"\n{res['counts']}\nattached: {res['attached']}")
     print(res["stations"].to_string())

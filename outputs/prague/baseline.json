@@ -4,12 +4,18 @@
   "name_shown": 12932,
   "platforms": 122,
   "stations": 58,
-  "stations_excluded": 1,
+  "stations_drawn": 196,
+  "stations_excluded": 109,
   "stations_in_scope": 57,
   "storefront_rows": 26711,
   "storefronts": 25185,
   "storefronts_food_service": 7572,
   "storefronts_personal_services": 8399,
   "storefronts_placed": 25185,
-  "storefronts_retail": 9214
+  "storefronts_retail": 9214,
+  "tram_places": 281,
+  "tram_places_at_metro_stations": 34,
+  "tram_places_outside": 0,
+  "tram_stations_new": 139,
+  "tram_stops_thinned": 108
 }
