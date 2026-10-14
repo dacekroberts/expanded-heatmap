@@ -2,6 +2,67 @@
 
 Newest first. Cleanup folds these into `DECISIONS.md` at review time.
 
+### 2026-10-13 - Landing slice: the landmark rules merged, the 20 indexes rebuilt, every map rendered once, all checks green (Cleanup agent, nothing pushed)
+
+- **Merged:** search-rules-8 at 1a0fedba (ba9cc762): the landmark patch
+  (a4718e28) and the owner's brand and shop rulings. Selftest 339 of 339.
+- **Rows moved (all 20 rebuilt):** Barcelona 1 alternate (Montjuïc);
+  Busan +1 (Busan Sea Life Aquarium); Chicago +2 -1 (Pullman National
+  Historical Park and Victory Monument in, the Pullman Administration
+  Building out); Hong Kong +3 (Peak Tram, Western Market, Hong Kong
+  Disneyland); Kyoto +1 (醍醐寺); London +7 (three universities, Harrods,
+  Harvey Nichols, The Old Curiosity Shop, Whitechapel Bell Foundry);
+  Marseille +1 and 5 alternates (Les Docks Village; the arrondissements);
+  Mexico City +1 (Six Flags Mexico); Milan 2 alternates; Paris +2 (Galerie
+  Vivienne, the flower market); Prague +5 boroughs and 13 alternates;
+  São Paulo +3 (two municipal markets, Shopping Light); Tokyo +5. The other
+  seven unchanged.
+- **The Pullman Administration Building is NOT a row, although it is in
+  `config.PLACE_KEPT` (added as asked, owner 2026-10-13).** The build log
+  shows the shared-entry rule drop it, then the kept-id admission at the end
+  refuse it as "a landmark row of that name is near" (`same_name_near`):
+  `add()` still sees the row the shared-entry rule removed. A fault in the
+  admission, for the rules lane; the entry stays in the config.
+- **Doubtful additions of the brand and shop rulings, for the rules lane:**
+  Tokyo's デハ268号 (a preserved railcar under its class's article), and
+  新宿眼科画廊 (a gallery: a dealer's gallery is the business, the precedent
+  of 2026-10-11).
+- **Reviewed under the rulings (check E):** "Harrods" (its alt name holds
+  "Ltd") and "The Old Curiosity Shop" in London, "Shopping Light" in São
+  Paulo.
+- **Twin round:** landmark and place rows of one kind and name within 1 km
+  were listed for the 20 cities. Pairs that share a Wikidata entry are one
+  object twice; the row with fewer tags is dropped by id: Rush Green
+  (London), San Miguel Ajusco (Mexico City), Dubeč (Prague), 동작구 (Seoul),
+  the Shota Rustaveli university (Tbilisi), 渋谷 and 神田須田町 (Tokyo). The
+  second round found none new. Kept: Prague's two "Obětem náletu 14.2.1945"
+  memorials (their entry is the air raid, not either memorial) and the two
+  "gorily" zoo nodes. Rows of one name with identical tags but no shared
+  entry were left: almost all are Kyoto's 町 of one name in different
+  districts and parks or medians drawn in segments.
+- **Renders, once each, three at a time through the gate** (wall seconds
+  with the gate's start, peak GB): Seoul 17 / 0.87, Mexico City 16 / 1.89,
+  London 6 / 0.66, São Paulo 8 / 0.24, Paris 24 / 0.92, Tokyo 10 / 0.25,
+  Busan 6 / 0.21, Kyoto 6 / 0.20, Barcelona 4 / 0.16, Hong Kong 4 / 0.15,
+  Milan 6 / 0.19, Chicago 6 / 0.21, Prague 25 / 0.44, Montreal 6 / 0.16,
+  Marseille 12 / 0.32, Seattle 4 / 0.12, Tbilisi 4 / 0.12, Vancouver 6 /
+  0.16, Brussels 7 / 0.16, Sydney 4 / 0.14. Toronto was current and not
+  rendered.
+- **Checks:** `check_map_search.js` 20 of 20 maps, 3,106 drawn stations and
+  263 lines found, Toronto skipped (no search block);
+  `check_place_search.py` OK for 20; `check_render_current.py` 237 current;
+  `check_place_scope.py` OK; index drift OK for 20; attribution clear at
+  1280x650 and 1280x812 on Sydney, Prague and Seoul; `check_all.py` 73 of
+  73.
+- **Judgment call: `pipeline/drift_check.py` was not run.** It re-runs steps
+  1 and 2, which write the shared `data/<city>/processed/`, and the
+  standing rule is that no step is re-run from a branch for a city on master
+  until it lands. The render and index checks above cover the outputs this
+  branch changed.
+- **Size:** the 21 maps are 123,979,538 bytes against 118,586,146 on master
+  (+5,393,392). About 8.5 KB a map is the search script; the rest is the
+  tram rescope of Mexico City, Milan, Prague and Toronto.
+
 ### 2026-10-13 - Landing slice: the station rules (search-rules-8) merged and the 20 indexes rebuilt; 58 reviews no row needs removed (Cleanup agent, nothing pushed, no render)
 
 - **Merged:** 8d45eae5 (7de6f364) and then 0321cbb0 (b1a0f32f), no conflict;

@@ -574,6 +574,9 @@ PLACE_DROPPED = {
     "node/6937971008": "'Altar a la Virgen De Guadalupe.', a street altar, not notable (owner, 2026-10-13; the shrine calls of 2026-10-12)",
     "node/13599795588": "'Cátedra Arquidiócesis de Tlalnepantla', a second row for the cathedral, relation 20952002 (owner, 2026-10-13)",
     "node/9646767715": "'Jardines del Recuerdo', a locality under a private cemetery's name (owner, 2026-10-13)",
+    # Second rows for one object, from the twin round of 2026-10-13: two rows of one
+    # kind and name sharing one Wikidata entry; the row with fewer tags goes.
+    "node/11264983243": "'San Miguel Ajusco', a quarter node beside the town node of the same name and entry, 633 m off (node 5039503788)",
 }
 
 # Public art kept by the owner's word against the article rule (place_index,

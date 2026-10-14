@@ -314,4 +314,7 @@ PLACE_DROPPED = {
     "node/4640090321": "a convent (수도회), a religious residence tagged a place of worship, not notable",
     "way/466726989": "a convent (여자수도회), a religious residence tagged a place of worship, not notable",
     "node/11466734881": "a prayer house (기도원), a religious residence tagged a place of worship, not notable",
+    # Second rows for one object, from the twin round of 2026-10-13: two rows of one
+    # kind and name sharing one Wikidata entry; the row with fewer tags goes.
+    "node/13942059129": "'동작구', a second borough node, tags identical to node 1918413460, 881 m off",
 }

@@ -205,6 +205,11 @@ PLACE_VISITABLE = {
 # PLACE_KEPT; owner, 2026-10-13). Each is a known work the Wikidata lookup
 # cannot admit; DECISIONS.md of that date lists the works left out.
 PLACE_KEPT = {
+    # The landmark patch (search-rules-8, a4718e28) returns the Pullman National
+    # Historical Park's site relation as a row; the park's entry Q7259479 is then
+    # on three rows and the shared-entry rule drops the building. Kept by id
+    # (owner, 2026-10-13).
+    "way/210701534": "'Pullman Administration Building', the clock-tower building at the heart of the Pullman National Historical Park, dropped only because the park's entry is shared (owner, 2026-10-13)",
     "node/10780734457": "'Sue the Dinosaur', its own article, on an entry the map also gives as its subject's (owner, 2026-10-13)",
     "node/3554700407": "'Sir Georg Solti Bust', its own article, on an entry the map also gives as its subject's (owner, 2026-10-13)",
     "node/7022676547": "'Jack Brickhouse', its own article, on an entry the map also gives as its subject's (owner, 2026-10-13)",

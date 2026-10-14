@@ -232,6 +232,9 @@ PLACE_DROPPED = {
     "way/1105505029": "the Gabashvili house: shown from its yard on tours, no public interior stated; not established at an official source",
     "relation/2139317": "the Kalantarov house: its entry marked closed, described as flats (https://scantbilisi.ge/en/objects/335/satesto); not established at an official source",
     "node/12475777017": "a church's name cut short before the word for church (glitched; the outside name net, 2026-10-12)",
+    # Second rows for one object, from the twin round of 2026-10-13: two rows of one
+    # kind and name sharing one Wikidata entry; the row with fewer tags goes.
+    "node/10300242379": "'შოთა რუსთაველის თეატრისა და კინოს უნივერსიტეტი', a second node of the university, one entry with node 12760152304, 630 m off",
 }
 # Streets closed for rebuilding, kept although OSM draws them
 # highway=construction (place_index.build, `rebuilt`; owner, 2026-10-11): by
