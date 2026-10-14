@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/ansan.json",
-  "places": 4733,
+  "places": 4716,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ko"
     ],
     "coverage": {
-      "en": 0.777,
+      "en": 0.78,
       "ko": 1.0
     },
     "list_share": 0.5,

@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/kochi.json",
-  "places": 1310,
+  "places": 1297,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.194,
+      "en": 0.195,
       "ja": 1.0
     },
     "list_share": 0.5,

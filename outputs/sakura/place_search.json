@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/sakura.json",
-  "places": 434,
+  "places": 431,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.221,
+      "en": 0.223,
       "ja": 1.0
     },
     "list_share": 0.5,

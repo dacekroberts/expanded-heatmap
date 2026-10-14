@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/hino.json",
-  "places": 568,
+  "places": 563,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.496,
+      "en": 0.499,
       "ja": 0.956
     },
     "list_share": 0.5,

@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/brno.json",
-  "places": 6011,
+  "places": 6003,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "cs"
     ],
     "coverage": {
-      "en": 0.004,
+      "en": 0.003,
       "cs": 1.0
     },
     "list_share": 0.5,

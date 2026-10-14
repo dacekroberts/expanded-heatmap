@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/siheung.json",
-  "places": 2773,
+  "places": 2752,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ko"
     ],
     "coverage": {
-      "en": 0.85,
+      "en": 0.856,
       "ko": 1.0
     },
     "list_share": 0.5,

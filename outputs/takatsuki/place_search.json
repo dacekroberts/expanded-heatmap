@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/takatsuki.json",
-  "places": 829,
+  "places": 820,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.615,
+      "en": 0.62,
       "ja": 1.0
     },
     "list_share": 0.5,

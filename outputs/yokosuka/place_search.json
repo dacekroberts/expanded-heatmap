@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/yokosuka.json",
-  "places": 1016,
+  "places": 1008,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.51,
+      "en": 0.514,
       "ja": 0.989
     },
     "list_share": 0.5,

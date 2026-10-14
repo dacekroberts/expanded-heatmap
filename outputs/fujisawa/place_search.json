@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/fujisawa.json",
-  "places": 1137,
+  "places": 1118,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.311,
+      "en": 0.317,
       "ja": 1.0
     },
     "list_share": 0.5,

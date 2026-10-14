@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/fukuyama.json",
-  "places": 1328,
+  "places": 1318,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.539,
+      "en": 0.543,
       "ja": 1.0
     },
     "list_share": 0.5,

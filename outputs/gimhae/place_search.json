@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/gimhae.json",
-  "places": 3690,
+  "places": 3674,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ko"
     ],
     "coverage": {
-      "en": 0.893,
+      "en": 0.896,
       "ko": 1.0
     },
     "list_share": 0.5,

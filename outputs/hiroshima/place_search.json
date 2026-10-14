@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/hiroshima.json",
-  "places": 4260,
+  "places": 4240,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.455,
+      "en": 0.456,
       "ja": 0.999
     },
     "list_share": 0.5,

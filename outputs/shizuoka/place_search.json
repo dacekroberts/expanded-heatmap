@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/shizuoka.json",
-  "places": 2827,
+  "places": 2814,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.198,
+      "en": 0.199,
       "ja": 1.0
     },
     "list_share": 0.5,

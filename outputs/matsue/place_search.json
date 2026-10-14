@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/matsue.json",
-  "places": 1819,
+  "places": 1772,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.291,
+      "en": 0.299,
       "ja": 1.0
     },
     "list_share": 0.5,

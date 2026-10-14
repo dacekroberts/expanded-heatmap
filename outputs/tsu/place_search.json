@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/tsu.json",
-  "places": 1357,
+  "places": 1353,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.489,
+      "en": 0.491,
       "ja": 0.999
     },
     "list_share": 0.5,

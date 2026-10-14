@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/nara.json",
-  "places": 2006,
+  "places": 1988,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.606,
+      "en": 0.61,
       "ja": 0.999
     },
     "list_share": 0.5,

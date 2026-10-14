@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/yokohama.json",
-  "places": 11626,
+  "places": 11515,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.376,
+      "en": 0.378,
       "ja": 0.999
     },
     "list_share": 0.5,

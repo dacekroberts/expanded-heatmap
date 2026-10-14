@@ -1,14 +1,14 @@
 {
   "index": "app/static/places/matsumoto.json",
-  "places": 1131,
+  "places": 1125,
   "data_retrieved": "2026-10-13",
   "languages": {
     "local": [
       "ja"
     ],
     "coverage": {
-      "en": 0.409,
-      "ja": 0.998
+      "en": 0.412,
+      "ja": 0.999
     },
     "list_share": 0.5,
     "listed": [
