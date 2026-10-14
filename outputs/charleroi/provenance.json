@@ -57,6 +57,19 @@
     "retrieved": "2026-10-13T22:16:01+00:00",
     "sha256": "2cc7b43a16be569aaa0a32df17df9be4f751b8b62dfe2a5dc8e8d614c6d295c2"
   },
+  "place_search_wikidata": {
+    "api": "wbgetentities, props=sitelinks",
+    "bytes": 186,
+    "file": "wikidata_articles_2026-10-13.json",
+    "host": "www.wikidata.org",
+    "ids": 0,
+    "ids_not_read": 0,
+    "ids_with_article": 0,
+    "ids_without_article": 0,
+    "licence": "CC0 1.0",
+    "retrieved": "2026-10-13",
+    "sha256": "66eabaeb6fb9e927b746d9a9ce4402ca98fef1deaa2cccdcfbc7a21a21f21dfd"
+  },
   "tec_gtfs": {
     "approved": "owner, 2026-10-03 (Belgium build call 1: the cached feeds ratified)",
     "bytes": 84926285,
