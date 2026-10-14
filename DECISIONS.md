@@ -20,7 +20,7 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 
 ## Index
 
-**136 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
+**140 entries.** Generated - run `python scripts/decisions_index.py` after appending, or `--check` to verify. Newest first, matching the file itself.
 
 **2026-10-13**
 
@@ -73,6 +73,10 @@ are in `docs/decisions/<Sunday>.md`, moved there verbatim by
 - [Place search: the seven rulings applied on the final group, three departures approved (owner)](#2026-10-13---place-search-the-seven-rulings-applied-on-the-final-group-three-departures-approved-owner)
 - [Place search: the pilot reads and the held rows; sixteen rulings (owner)](#2026-10-13---place-search-the-pilot-reads-and-the-held-rows-sixteen-rulings-owner)
 - [Place search: the outside model fails the one-in-twenty line, so the rest of the extract run is read in full; the fifth rule pass (owner)](#2026-10-13---place-search-the-outside-model-fails-the-one-in-twenty-line-so-the-rest-of-the-extract-run-is-read-in-full-the-fifth-rule-pass-owner)
+- [Place search: rule passes 5 and 6 land as rules; the tram rescope's steps re-run ahead of its landing (owner)](#2026-10-13---place-search-rule-passes-5-and-6-land-as-rules-the-tram-rescopes-steps-re-run-ahead-of-its-landing-owner)
+- [Place search, the fifth rule pass: worship names, closed stations, two map stations in one complex](#2026-10-13---place-search-the-fifth-rule-pass-worship-names-closed-stations-two-map-stations-in-one-complex)
+- [Place search, the sixth rule pass: the pilot readers' classes, built from the sixteen rulings](#2026-10-13---place-search-the-sixth-rule-pass-the-pilot-readers-classes-built-from-the-sixteen-rulings)
+- [Place search, the sixth pass: two owner rulings on its report (El Polvorín, named convents)](#2026-10-13---place-search-the-sixth-pass-two-owner-rulings-on-its-report-el-polvorín-named-convents)
 
 **2026-10-12**
 
@@ -6435,3 +6439,91 @@ japan-city template:
 - **The final group's held rows are applied** (`search-final`, fa610fa1):
   730 ids dropped in 27 cities, 931 keeps recorded, 256,955 rows to
   256,360; 61 left for the rules, 41 undecided left in.
+
+### 2026-10-13 - Place search: rule passes 5 and 6 land as rules; the tram rescope's steps re-run ahead of its landing (owner)
+
+- **Landed as rules only** (`search-rules-5`): no index and no map changes
+  on master until the big review's render. Measured in memory on the 19
+  live cities, the sixth pass takes 322,751 rows to 321,576.
+- **The sixth pass, from the pilot readers' classes:** a park named as a
+  square that repeats a street row is one row, 1,120 (Sao Paulo 1,045,
+  Barcelona 39); religious offices and education halls 21 (Seoul 15); a
+  church named only by its chain 17, with 8 returning; bare type words in
+  more languages 15; segments beside the relation that carries the entry
+  10; station leaks 3; the leak-word test stops flagging French "Hotel de"
+  mansions and junction rows, 3 returning. On the five pilot cities it
+  takes 152 of the readers' 310 drops; 18 were gone already and 140 remain,
+  one-offs for the full reads to settle by id.
+- **Nine items went to the owner with a recommendation each. The owner:
+  "All approved".**
+  1. The square merge stays at its full size, Portuguese included. The
+     ruling was shown 50 Madrid rows and the rule takes 1,120; every name
+     is still found through its street row, and the result is the street
+     around the square, not the park inside it.
+  2. "El Polvorin" (Mexico City, 2 rows) is a proper name: the word leaves
+     the Spanish bare-type list.
+  3. A convent with a name of its own stays (Rio's Santa Teresa, Madrid's
+     Santa Catalina de Siena): "convento" leaves the office heads.
+  4. Two Seoul education halls stay dropped; the temple beside one stays.
+  5. Taipei's library named only "Library" stays dropped.
+  6. Paris's "Temple Antoiniste" stays dropped; the Wikidata lookup is not
+     widened to places of worship for one row.
+  7. No rule for place=locality rows with no Wikidata entry (Hong Kong 755,
+     Madrid 372, London 155, Prague 116): village and field names.
+  8. Squares named only by coordinates, cemetery tombs, Japanese house
+     words and Amsterdam's diversion stop are left to the readers, by id.
+  9. Mexico City is a dated known gap of check H for this push (below).
+- **The tram rescope's steps were re-run ahead of its landing** (owner:
+  "yes sounds good"; `tram-rescope`, a6d43e8a, nothing pushed). Toronto 108
+  stations to 174, Milan 104 to 193, Prague 57 to 196, Mexico City 180 to
+  208, each the approved figure, each with zero drift and every map file
+  identical to the approved build. The shared `data/` folder holds the new
+  station sets from now on, so check H refuses Mexico City on San Isidro
+  until its index is rebuilt over the wider area: recorded in `KNOWN_GAPS`,
+  leaving at the big review.
+- **Approved with it:** Prague's refetch counts as discharged (the cached
+  timetable's size and hash match the provenance record; a fresh pull
+  belongs with the re-check after 2026-10-26); the branch-only folders
+  (`processed/tram/` in three cities, Mexico City's `regional/cable/`) are
+  removed after the landing, not before.
+- **Mexico City's wider search area is read** (the five areas and
+  Tlalnepantla de Baz, 3605606521) from the held regional extract of
+  2026-10-12, with no Overpass request, into
+  `data/mexico_city/raw/place_wide_2026-10-13/`: 596,781 elements, all 208
+  stations inside the area. Not yet in provenance; the rebuild adopts it.
+- **A header image on the README** (`docs/assets/readme-header.png`, from
+  Visuals; owner: "1 yes 2 no number"): the alt text carries no city count,
+  so it cannot go stale. The image itself says 237 and is redrawn by
+  Visuals when cities are added.
+- The three entries below are the branch's drafts, folded as written.
+
+### 2026-10-13 - Place search, the fifth rule pass: worship names, closed stations, two map stations in one complex
+
+- **Built the shared rule that a place of worship named only by its denomination or hall type is no row (owner, 2026-10-13: "1 shared rule").** `worship_only` in `pipeline/place_index.py`, asked of amenity=place_of_worship landmarks and of the leading name only: the name is bare when every word is a listed denomination word or phrase, a hall-type word or a joiner, with one hall-type word at most. Any other word keeps the row (a saint, a place, a street, an ordinal: "First Baptist Church"), and so does a second hall-type word ("Temple Baptist Church", London's "Temple Church"). Kept against it: a Wikipedia article of the object's own, and an id in `config.PLACE_KEPT`. A station is never read by it. Of the 77 rows wave 1's readers confirmed by hand, it reads 73; the four it leaves are "Ukrainian Orthodox Church of Canada" (a place word), "Mosque & Islamic Centre" (two hall-type words), "Prominent Church" and "Society of Saint Pius X", which stay by-id drops in their cities. Measured on the 19 live cities, built in memory before and after: 563 rows leave (Sao Paulo 232, London 106, Seattle 37, Tokyo 37, Chicago 34, Mexico City 29, Montreal 21, Vancouver 21, Seoul 14, Paris 13, Kyoto 5, Marseille 5, Prague 4, Hong Kong 3, Busan 2; none in Barcelona, Brussels, Sydney or Tbilisi). Rejected: adding the words to `BARE_TYPE_NAMES`, which is matched as the whole name and on every landmark and place, and could not hold "Kingdom Hall of Jehovah's Witnesses" in its seven spellings.
+- **Word lists beyond English hold only what a cache shows, and the Portuguese and Japanese ones are the large ones: flagged for the owner.** French, Spanish, Portuguese, Czech, Korean and Japanese lists were added from names read in the live caches (and, for Spanish and French, wave 1's hand-confirmed rows); Catalan, Dutch, Chinese and Georgian have none, since no such name was found. Sao Paulo's 232 rows are mostly four denominations named alone: "Congregação Cristã no Brasil" (57 with its spellings), "Assembleia de Deus" (50), "Igreja Universal do Reino de Deus" (36) and the Latter-day Saints (23), then 15 Kingdom Halls. Tokyo's 37 are 創価学会 (20), 天理教 (8), 幸福の科学 (6) and three Kingdom Halls. Each is the class the ruling names, but the ruling's examples were English: pulling a language's list is one line and returns its rows.
+- **Rows the rule takes that a reader might keep, listed and not decided.** London's "The Citadel" (one hall-type word behind an article) and "United Synagogue"; Chicago's "Church of Christ Presbyterian"; Seattle's "Russian-Ukrainian Seventh Day Adventist Church"; Paris's three "Temple Antoiniste", two of which carry a Wikidata entry of their own and no wikipedia tag (eight leaving rows carry a Wikidata entry; none carries a wikipedia tag). The Wikidata lookup is asked of public art and libraries only (`article_lookup_kind`), so an entry alone keeps none of these.
+- **Built the shared rule that a station closed to the public gets no row (owner, 2026-10-13: "3 shared rule"), NARROWED to access=private.** `STATION_PRIVATE_ACCESS`. The ruling said private or no. On the 19 live cities seven station objects carry one or the other: four were no rows already (bus stations and depots), two are the practice stations of a railway's training centre in Tokyo (大田, 志茂田, access=private, usage=training), and one is a public national-rail halt, Marseille's Sainte-Marthe-en-Provence, which carries access=no on its building node. access=no is therefore not read; Washington's six Capitol subway objects (Hart, Rayburn, Dirksen, Russell and two "U.S. Capitol") all carry access=private and all leave, built in memory from the wave 1 config. A station the map draws stays whatever its access tag (the station guard; a selftest case holds it). 2 rows leave on the 19.
+- **Mended the complex merge: two stations of the map are never one row.** Found in Boston (wave 1): Boylston's node carries Park Street's Wikidata entry (Q4846582), so the merge of 2026-10-13 folded Boylston into Park Street as an alias. `complex_parts` splits a complex at the names the map draws when it bears two or more of them; a row under any other name joins the nearest. Distance was measured and rejected as the test: of the 31 merges under different names on the 19, Barcelona's "Barcelona-Passeig de Gràcia" is its metro station's own rail hall at 357 m and Boylston is another station at 350 m. On the 19 it undoes 2 of 210 merges: London's Monument returns beside Bank (354 m) and Barcelona's Provença beside Diagonal (191 m; the Diagonal row is now another of its nodes). Boston built in memory: Boylston and Park Street are two rows. The test needs `STATIONS_CSV` on the machine, as the bare-type guard does.
+- **Boston's "Green Street" is "Green" because OpenStreetMap names it so: not mended.** The station relation (20304842) is tagged name=Green; no rule strips a street word from a station name, and Boston sets no `PLACE_STATION_STRIP`. A name is not corrected in the index (the page says so). The map draws "Green Street", so the row is found by "Green" and not by "Green Street": a fix would be an alias from the map's own station name, which is a new mechanism and is put to the owner, not built.
+- **Checks.** `python pipeline/place_index.py --selftest`: all cases hold, 19 of them new. `python scripts/rule_breaks.py pipeline/place_index.py scripts/place_index_breaks.json`: every break caught, 15 of them new. Changed rows: `data/_place_rules_2026-10-13/batch5/changed_rows.md` and `.json` (323,314 rows before, 322,751 after; intersections unchanged at 532,670). No index file was rebuilt: the 19 committed indexes and wave 1's still hold the rows listed, until the rule-change protocol's rebuild.
+
+### 2026-10-13 - Place search, the sixth rule pass: the pilot readers' classes, built from the sixteen rulings
+
+- **Built items 1, 2, 7 and 9 of the sixteen rulings and the faults fixed without a ruling, in `pipeline/place_index.py`, and measured them against the readers' own lists.** Base cc786292 (the fifth pass with origin/master a04fc593 merged). Every city was built in memory before and after; the five pilot cities from the `search-rollout` worktree's configs with `PLACE_DROPPED` emptied in memory. Of the pilot readers' 310 drops, 18 were no rows already (the fifth pass), this pass takes 152, and 140 remain: descriptions too long for any list (40), zoo, theme-park and mall contents known only by coordinates, cemetery tombs and event spots (27), businesses (25), homes (15), duplicates (13), glitched names (11), private grounds (6), estates as places (3). The pass also takes 365 pilot rows no reader listed as a drop: 296 are parks named as a square beside the street of that name (Rio de Janeiro 244, Madrid 52), 62 are places of worship named by a chain (most left "unsure" by the reader, which ruling 2 settles), and the rest are named in the next bullets. Report: `data/_place_rules_2026-10-13/batch6/changed_rows.md` and `.json`.
+- **A. Bare type words: the readers' whole names in fifteen languages (`BARE_TYPE_NAMES_6`), spaced CJK forms, and four codes beside a type.** 99 pilot rows leave (98 a reader's drop: Rio 37, Osaka 35, Madrid 12, Daegu 12, Amsterdam 3) and 15 on the 19 live cities (Busan 5, Mexico City 5, Kyoto 2, Seoul 2, Tokyo 1). Left out, though readers dropped rows under each: Spanish "mirador" and Portuguese "cruz" (both neighbourhood names), "parque hundido" (Mexico City's park), "las estufas", "plaza gastronómica". Four words are settlements' own names in Taipei, Taoyuan and Yamagata (水源地, 堰堤, 苗圃, 大師堂) and are kept on a place row (`BARE_WORD_SETTLEMENTS`). Possible wrong drops: Mexico City's two "El Polvorín" (the word behind an article), and Taipei's library named 圖書館 with a Wikidata entry, which its reader kept.
+- **B. A church named only by its chain or body, inside the fifth pass's rule.** The fifth pass's lists already took 173 of Rio de Janeiro's rows and 23 of Osaka's; the wider lists take 39 and 12 more (Rio's "Igreja Universal", "Nova Vida", "Igreja Messiânica Mundial do Brasil"; Osaka's 金光教, PL教団, 辯天宗), Madrid 13, Amsterdam 10. Of the five rows flagged after the fifth pass: "Church of Christ Presbyterian" and "Russian-Ukrainian Seventh Day Adventist Church" keep their rows by two new tests (nothing but joiners and one hall-type word may follow a body's name; a nationality is listed only inside a denomination's name), "United Synagogue" and "The Citadel" still go. On the 19 live cities 17 more rows leave (Sao Paulo 12) and 8 return (Chicago 2, Seattle 2, Vancouver 1, London 3). An entry of the object's own with an article in the city's Wikidata cache now keeps a row: London's "Christian Science Church" and "Salvation Army" return on it. **The cache is read and not asked**: `article_lookup_kind` still names public art and libraries only, so an entry the fetch never asked about (Paris's "Temple Antoiniste") keeps nothing until the fetch is widened, which needs a network run and the owner's word.
+- **C. Religious offices, education halls and residences tagged a place of worship (`worship_office`).** 17 pilot rows (12 a reader's drop) and 21 live rows (Seoul 15, Busan 4, London 1, Tokyo 1). Listed: English "diocese", "archdiocese", "presbytery", "federation of churches"; Spanish and Portuguese "convento", Portuguese "seminário" as the name's head; Korean 교육관, 교육원, 비전관, 교구청, 수녀회, 신학대학, 교사실; Japanese 社務所, 教化部; Chinese 校牧室. Left out for want of evidence: English "convent" and "seminary", Spanish orders' names, Korean halls' own names. Possible wrong drops: Rio's "Convento de Santa Teresa" and Madrid's "Convento de Santa Catalina de Siena" (convents with no wikipedia tag, which ruling 1 drops), and Seoul's "한국순교성인시성기념교육관" and "조계사 교육관".
+- **D. Facilities of an estate or a mall (`estate_facility`).** 15 pilot rows (Daegu 11, Rio 3, Osaka 1), none on the 19 live cities. The operator-heads-the-name sign was narrowed after it took Seattle's "Seattle University Park" and four Tokyo ward parks: it now needs a facility word closing the name. Not built: squares inside a mall, a theme park or a zoo known only by coordinates (Osaka, about 13 rows).
+- **E. A park named as a square beside a street row of its name is one row: 1,120 rows on the 19 live cities, 1,045 of them in Sao Paulo. Flagged for the owner.** The ruling was shown Madrid's 50; the rule takes 52 there and 244 in Rio. In Brazil nearly every "Praça X" is drawn as a park and as the street around it, so the Portuguese count is twenty times the evidence. Every such name is still found (its street row stands), but the landmark row and its point inside the square go. Narrowed twice on measurement: square words only (a park under a street word or a garden word keeps its row: Barcelona's 19 "Jardins de ...", Madrid's "Avenida de Brasil"), and French "square" left out (a Paris square is a garden). Dropping `"pt"` from `SQUARE_HEADS` returns the 1,045 and Rio's 244.
+- **F. Station leaks.** operational_status=closed and a freight word in the name (Madrid's two), a station entrance or ticket gate (Madrid 1, Osaka 2, Tokyo 3 on the live cities), a bus rapid transit station kept on its network tag (Rio 2). Amsterdam's diversion-only stop "Oranje Nassaulaan" is on the city's map, so the station guard keeps it and no rule was built.
+- **G, H.** A suburb's boundary beside its own suburb node (`BOUNDARY_NODE_M`, 5 km): Rio's two; rule 10 read settlement nodes only. Ways with no entry beside the one relation of their name that carries it (`SEGMENTS_MIN`): Amsterdam's 7, Seoul's city wall 8, a Tokyo park 2; in the final group Rome's Aurelian Walls fold 24 more ways.
+- **I. The leak-word test (the coordinator's item, a fault).** `leak_hits` no longer lists a junction row, a French landmark named "Hôtel de/du/des/d'" or "Hôtel-" and a word, or a French street under "brasserie"; a name ending "(FECHADO)" is closed; "Hôtel particulier" and "Ancien hôtel" are bare type words. Three live rows return (Brussels' Hôtel des Douanes, Paris's Hôtel de Poulpry and Hôtel du Petit Monaco), none leaves. 58 of the 133 `PLACE_REVIEWED` entries on the live cities are no longer needed (38 junctions, Seoul 36; 20 mansions, Paris 18); none was removed, and check E reads such a review as not needed, never as stale. "Hôtel" and a family name alone ("Hôtel Gradis", about 40 of the 135) is still a review.
+- **Counted for ruling 8, nothing changed: place=locality rows with no wikidata.** Hong Kong 755, Madrid 372, London 155, Prague 116, Busan 60, Marseille 55, Mexico City 44, Kyoto 37, Seoul 37, Montreal 31, Tokyo 22, Paris 17, Vancouver 17, Amsterdam 15, Barcelona 14, Sydney 13, Seattle 7, Rio de Janeiro 7, Daegu 6, Chicago 3, Sao Paulo 3, Tbilisi 2, Brussels 1, Osaka 0.
+- **Checks.** Selftest 282 of 282 (46 new); rule breaks 234 caught, none missed or stale (39 new, 11 earlier ones re-pointed at the rewritten code); `scripts/check_place_search.py --selftest` with two new leak cases. No index was rebuilt: every committed index still holds the rows listed.
+
+### 2026-10-13 - Place search, the sixth pass: two owner rulings on its report (El Polvorín, named convents)
+
+- **The owner approved the sixth pass as built, rule E with Portuguese included, and ruled on two of the rows it flagged.** Left as built by the same word: Seoul's two education halls, Taipei's library named 圖書館, Paris's "Temple Antoiniste", no rule for place=locality, and the four classes not built, which go to readers by id.
+- **"El Polvorín" is a proper name: "polvorín" left the Spanish bare-type list.** Mexico City's two rows return (node/9984413805, way/1139703548). Madrid's bare "Polvorín" (node/5129628112), which its reader dropped, returns with them and goes back to a by-id drop there. Rule A now takes 13 rows on the 19 live cities and 98 on the five pilot cities.
+- **A convent under a name of its own is a place, not an office: "convento" left `WORSHIP_OFFICE_HEADS` in Spanish and Portuguese.** Returning: Rio de Janeiro's "Convento de Santa Teresa"; Madrid's "Convento de Santa Catalina de Siena" and four convents its reader had dropped ("Convento de las Clarisas", "Convento de las Carmelitas Descalzas", "Convento Carmelitas Descalzas de Santa Ana y San José", "Convento de las Siervas de María"); Brasilia's "Convento Congregação Irmas de Maria". None on a live city: no live Spanish or Portuguese city had such a row. The head mechanism stays for Portuguese "seminário" (Rio's "Seminário Arquidiocesano de São José" still goes); the bare word "Convento" alone is still a bare type word. Rule C now takes 11 pilot rows (Daegu 10, Rio 1) and the same 21 live rows.
+- **The pilot count moves with the rulings:** of the readers' 310 drops, 18 were gone before the sixth pass, 147 are taken by it (152 before these rulings) and 145 remain. The batch 6 report was regenerated. Selftest 284 of 284, with the Spanish convent case turned round and the head and city's-languages cases moved to Portuguese; two breaks added and one re-pointed.
