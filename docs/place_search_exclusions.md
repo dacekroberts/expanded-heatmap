@@ -236,6 +236,38 @@ Madrid's place=locality field names (ruling 8: counted per city in the batch 6 r
 English "convent" and "seminary", Spanish orders' names, Korean halls' own names (참신관, 대건관);
 a relation folded into one of its own segments by `NEAR_DUP_M` before the segment merge.
 
+## The full reads' faults, g to y (2026-10-13, 73f025df and branch search-rules-8)
+
+Letters are the faults' own (g to s in 73f025df's commit, t to y in `search-rules-8`'s); the
+reach of t to y is `data/_search_rollout/reads_rules56/part8_reach.md`.
+
+| Left out | Rule | Where | Kind |
+|---|---|---|---|
+| A second row for one stop (g, w, y) | `PLATFORM_MERGE_M` (250 m), `_stop_key`: a station word and a direction note in brackets set aside, a compass direction included (`_DIRECTION_NOTE`: "(dir Nice)", "(eastbound)"); tram stops of one such name are one row, and so are station or halt nodes of one railway value unless two carry different operators, networks or Wikidata entries (`_one_railway`); in a group of several railway values each value folds on its own, so tram stops fold beside a metro station of their name; a folded stop whose kept name bears a direction note takes the plain name (`fold_stop`) | merges | station |
+| A second row for one station under near-identical names on one Wikidata entry (x) | `_complex_core`: a closing note in round brackets, the city's name as a leading word before a space or a hyphen, and a station word are set aside; equal cores are one row under the name the map draws, else the shortest, the other spellings its alternates | `complex_parts` | station |
+| A route relation tagged a station; a school tagged a station with no railway tag (i) | type=route on the relation; `NOT_STATION_AMENITY` | tagged pass | station |
+| A Japanese freight terminal; a station named as a former site (k, l) | `STATION_FREIGHT_ENDS`, `STATION_FREIGHT_OPERATORS` (the whole operator tag), `STATION_FORMER_ENDS` | `station_out_of_service` | station |
+| A name ending "(閉鎖)", "(閉鎖中)", "(予定地)", "(廃駅)", "(폐역)" (l) | `HISTORICAL_NAME` | tagged pass | any |
+| A height standing as a name ("109m") (m) | `_HEIGHT_ONLY` | `junk_name` | any |
+| A bus stop under a landmark or place tag (o) | highway=bus_stop | tagged pass | landmark, place |
+| A place of worship named by its denomination behind an elided article, or by a listed body spelled out (p) | `WORSHIP_RESPELL` | `worship_only` | landmark |
+
+**Kept or returned by these faults:** stations of different names never fold on a shared Wikidata
+entry alone (h: Toyama's 電鉄富山, Kobe's 三宮 beside 神戸三宮, which has no separator after the
+city's name and so keeps its own core); two names the map draws stay two rows whatever their
+core; an id in `config.PLACE_KEPT` that bears no row gets one at the end of the build, a station
+only by its railway tag, else a place by its place tag, else a landmark (q, r: Yokohama's
+Osanbashi pier is a landmark), and only `config.PLACE_DROPPED` outranks it; the station guard
+reads the map's local names as well (`map_stations(local_names=True)`: `name_ja`, `name_ko`,
+`name_zh`, `name_el`) (t); a live stop the map draws at its place is not held as unbuilt by a
+stray `construction:` or `proposed:` key (u: Montpellier's line 5).
+
+**Listed and not built:** a trailing platform number ("Gare de Tours 1"); a second row for a
+no-railway-tag node beside a rail-tagged row of another name (v: Montpellier's "Saint-Denis",
+whose stop has its own row); a variant character among stations of one entry (Taipei's 台北車站
+beside 臺北); a leading line letter ("S Friedrichstraße"); angle brackets (押上〈スカイツリー前〉);
+Houston's Central Station, three platform rows where the map draws two names.
+
 ## Considered and not built as rules
 
 Castles (a web check is owed), coded names the rule misses and zoo contents

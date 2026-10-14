@@ -272,5 +272,6 @@
  {"label": "the city's name is set aside only before a separator", "old": "]+(\\S.*)$\", base, re.I)", "new": "]*(\\S.*)$\", base, re.I)"},
  {"label": "two names the map draws stay two rows among one core", "old": "        if len({fold_name(r[3]) for r in parts[n]} & set(drawn)) > 1:", "new": "        if False:"},
  {"label": "a row folded on its core takes the short name", "old": "                        if best != keep[3]:", "new": "                        if False:"},
- {"label": "a note in brackets goes where the map draws the rest", "old": "                        if bare and fold_name(bare) in drawn:", "new": "                        if False:"}
+ {"label": "a note in brackets goes where the map draws the rest", "old": "                        if bare and fold_name(bare) in drawn:", "new": "                        if False:"},
+ {"label": "a kept id is a station only by its railway tag", "old": "            kind = (\"station\" if t.get(\"railway\") in (\"station\", \"halt\", \"tram_stop\")", "new": "            kind = (\"station\" if (t.get(\"railway\") or t.get(\"public_transport\"))"}
 ]
