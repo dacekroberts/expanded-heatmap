@@ -63,10 +63,9 @@ left out where it only runs over the top of a metro.** Many of these maps draw l
 San Diego, San Francisco, Los Angeles, Edmonton, Calgary, Miami and Dublin
 among them - Marseille draws its three Tramway lines beside its two Métro
 lines, and Toulouse draws T1 beside Métro A and B. Where a tram network is left
-out, the city already has a metro and the trams run over the top of it: Milan's
-17 tram routes stop a block or two apart and the agency publishes no color for
-any of them, and Barcelona's tram falls outside the network-identity test that
-picks out its metro. San Francisco's cable cars are out as a different mode. Its
+out, the city already has a metro and the trams run over the top of it:
+Barcelona's 28 tram stops inside the city all sit within about
+half a mile of a metro or funicular station. San Francisco's cable cars are out as a different mode. Its
 F Market & Wharves streetcar, once left out as a separately branded service, is
 drawn for its waterfront, as Rome's tram 8, Madrid's Metro Ligero line 1, Paris's
 T3a and T3b and Montréal's REM are drawn for districts their metros do not reach.
@@ -107,7 +106,7 @@ page.
   Metrorail reaches Maryland and Virginia, and Toronto's Line 1 ends past the
   city limit at Highway 407. **Several maps are deliberately regional instead**
   — among them Miami with its county, Vancouver with four neighbors, Mexico
-  City with four State of México municipios, Guadalajara with three
+  City with five State of México municipios, Guadalajara with three
   neighboring municipios, and Lille across eleven communes — because there one
   registry covers the whole area. Guadalajara
   goes one step further and leaves out a municipio it could have included:
@@ -126,14 +125,16 @@ page.
   underground station, every terminus and every interchange is kept. It applies
   to San Francisco's Muni Metro and F Market & Wharves, Philadelphia's
   trolleys, the Boston Green Line's surface branches, the trams of Amsterdam,
-  Rotterdam and Riga, Rome's tram 8, Hong Kong's Light Rail, and the Brussels
-  trams 10, 51 and 62.<!-- internal --> The reasoning is in
+  Rotterdam, Riga, Milan and Prague, Toronto's streetcars, Rome's tram 8, Hong Kong's Light
+  Rail, and the Brussels trams 10, 51 and 62.<!-- internal --> The reasoning is in
   `docs/sub_transit_line_filters.md`.<!-- /internal -->
 - **It is on a stretch that runs too rarely.** Light rail is drawn only where
   it runs at least every 15 minutes by day. Aarhus's Letbane runs every 7 to 8
   minutes on its city tramway but every 30 minutes on the two converted railway
   lines it continues onto, to Odder and to Grenaa, so their stops inside the
-  city are left out and those lines are not drawn.
+  city are left out and those lines are not drawn. Toronto's 508 Lake Shore
+  streetcar runs only at weekday rush hours and is not drawn either; every
+  stop it serves is on a line that is.
 
 **A thinned stop does not leave a hole in the map.** Stops are thinned to half a
 mile apart and the outermost ring reaches 0.6 miles, so the stations that were
@@ -1358,6 +1359,16 @@ licenses, of which 19,575 are storefronts. Every one of the 92 categories has
 a written verdict, and one never seen before stops the build rather than being
 silently left out.
 
+**Stations.** The TTC's subway Lines 1, 2 and 4, light rail Lines 5 and 6 and
+eight streetcar lines are drawn: 501, 504, 505, 506, 509, 510, 511 and 512.
+156 streetcar stops are thinned by the spacing filter to about one per half
+mile. Streetcars 503 and 507 run as replacement buses on every trip in the
+timetable to October 31, 2026, and 512 is a bus west of Lansdowne Avenue; 56
+stops on those stretches are listed as closed for works. Streetcar 508, which
+runs only at weekday rush hours, and the seven overnight streetcar routes are
+not drawn. Two Line 1 stations stand past the city limit. GO Transit is not
+drawn.
+
 **One row per license, and `Category` is single-valued** - which is Calgary's
 double-counting problem without Calgary's delimiter to resolve it. A restaurant
 with a patio holds two licenses and appears as two rows, so endorsements are
@@ -1472,7 +1483,7 @@ would distort the map: across the wards holding at least 200 storefront rows
 the match rate runs 75.4% to 99.3%, a **1.3x spread** with a standard deviation
 of 5.7 points.
 
-### Mexico City (Regional) - street stalls, a nonstore twin, four State of México municipios, and a heuristic that does not speak Spanish
+### Mexico City (Regional) - street stalls, a nonstore twin, five State of México municipios, and a heuristic that does not speak Spanish
 
 **Semifijo premises are excluded — 20,586 of 462,732 economic units (4.45%),
 of which 18,264 would otherwise have classified into a bucket.** DENUE records
@@ -1518,26 +1529,28 @@ nouns — also trips it. The heuristic is tuned for English "SMITH JOHN" forms
 and does not transfer to Spanish ones. Nothing is filtered on that number.
 
 
-**The four State of México municipios** (Ecatepec de Morelos, Nezahualcóyotl, La Paz
-and Naucalpan de Juárez) add the same exclusions from the same register: semifijo
-premises, 6,472 of 199,571 units (3.24%), 5,397 of which would otherwise classify; among
-fixed premises, public toilets and shoe-shine stands (`812130`) 578, the "other personal
-services" catch-all (`812990`) 354, funeral services 241, parking (`812410`) 226, event
-caterers 43, nonstore retail (`469`) 29, food trucks 10 and institutional canteens 8.
-Pawnshops (`522452`) count as retail: 177.
+**The five State of México municipios** (Ecatepec de Morelos, Nezahualcóyotl, La Paz,
+Naucalpan de Juárez and Tlalnepantla de Baz) add the same exclusions from the same register:
+semifijo premises, 7,808 of 232,964 units (3.35%), 6,601 of which would otherwise classify;
+among fixed premises, public toilets and shoe-shine stands (`812130`) 637, the "other
+personal services" catch-all (`812990`) 430, parking (`812410`) 314, funeral services 303,
+event caterers 60, nonstore retail (`469`) 38, food trucks 19 and institutional canteens 16.
+Pawnshops (`522452`) count as retail: 207.
 
-**Storefronts located outside the region are dropped**: 416 of 127,860 (0.33%) from the
-four municipios. 398 are one cluster that DENUE codes Nezahualcóyotl but that falls just
+**Storefronts located outside the region are dropped**: 405 of 147,343 (0.27%) from the
+five municipios. 398 are one cluster that DENUE codes Nezahualcóyotl but that falls just
 east of the municipio's boundary as OpenStreetMap draws it, more than 5 km from any station.
 
-**The rest of the State of México is not covered.** Its other 121 municipios have no
-station on these lines; Politécnico's and El Rosario's rings reach under 1% across the city
-line into municipios that are not covered.
+**The rest of the State of México is not covered.** Its other 120 municipios have no
+station on the drawn lines, and no station's rings reach into them.
 
 **Stations.** Línea B's eight stations in Ecatepec de Morelos and Nezahualcóyotl, Línea A's
 two in La Paz, and Línea 2's terminus, Cuatro Caminos, in Naucalpan de Juárez are drawn and
-ringed. No station on the drawn lines is left out. The Tren Suburbano, El Insurgente and
-Mexicable are not drawn.
+ringed. So are two cable-car systems: Cablebús Líneas 1 to 3 in Ciudad de México, Mexicable
+Línea 1 in Ecatepec de Morelos, and Mexicable Línea 2, which runs from Indios Verdes through
+Tlalnepantla de Baz to Ecatepec. No station on the drawn lines is left out. Mexicable Línea 3
+and Cablebús Líneas 4 to 6 are not open and are not drawn. The Tren Suburbano and El
+Insurgente are not drawn, on commuter spacing.
 ### Guadalajara (Regional) - a municipio with no station, and the same Spanish-name artifact
 
 **Everything excluded in Mexico City is excluded here, for the same reasons and
@@ -1711,6 +1724,14 @@ city's map worth knowing before reading its food-service colors.
 
 Milan's registers carry no funeral code; about 29 funeral services reach the
 non-food shop layer through the shop register, and they stay.
+
+**Stations.** ATM's five metro lines and 17 tram lines are drawn: Trams 1, 2,
+3, 4, 5, 7, 9, 10, 12, 14, 15, 16, 19, 24, 27, 31 and 33, as the timetable for
+September 14 to October 2, 2026 ran them. 158 tram stops are thinned by the
+spacing filter to about one per half mile. Twenty-one metro stations and 19
+tram stops stand outside the Comune di Milano; the tram stops are the outer
+ends of Tram 15 in Rozzano and Tram 31 in Cinisello Balsamo. The Passante and
+Trenord's suburban trains are not drawn.
 
 ### Paris - four trades with no premises, and two catch-alls the publisher's own hierarchy settled
 
@@ -2096,9 +2117,14 @@ name, or of a partnership, shows its address instead of its name.
 **Left off because they could not be placed** - 2 establishments whose address
 carries no coordinates.
 
-**All 58 metro stations are inside the city.** Trams, which run as a dense
-overlay on the metro, the Petřín funicular, ferries and suburban trains are not
-drawn. Flora, closed for reconstruction, is not drawn while closed.
+**Stations.** Metro A, B and C and PID's 28 daytime tram routes are drawn, as
+the timetable for October 13 to 26, 2026 ran them: Trams 1 to 13, 15, 17 to 22,
+24, 25, 26, 30, 31, 32, 37 and 40, in ten groups of routes that share track.
+108 tram stops are thinned by the spacing filter to about one per half mile.
+All 58 metro stations and every tram stop are inside the city. Tram 23, which
+runs every 30 minutes, the night trams 90 to 99, the Petřín funicular, ferries
+and suburban trains are not drawn. Flora's metro station, closed for
+reconstruction, is not drawn while closed; its tram stop is.
 
 ### Brno - Prague's register, and trams as the rapid transit
 

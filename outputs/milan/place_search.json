@@ -1,0 +1,26 @@
+{
+  "index": "app/static/places/milan.json",
+  "places": 14895,
+  "data_retrieved": "2026-10-13",
+  "languages": {
+    "local": [
+      "it"
+    ],
+    "coverage": {
+      "en": 0.002,
+      "it": 1.0
+    },
+    "list_share": 0.5,
+    "listed": [
+      "Italian"
+    ]
+  },
+  "stations_not_open": [],
+  "area": [
+    {
+      "osm": "relation/44915",
+      "name": "Milan",
+      "stations": 193
+    }
+  ]
+}

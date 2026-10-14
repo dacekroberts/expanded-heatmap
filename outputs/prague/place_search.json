@@ -1,13 +1,13 @@
 {
   "index": "app/static/places/prague.json",
-  "places": 25733,
+  "places": 25381,
   "data_retrieved": "2026-10-08",
   "languages": {
     "local": [
       "cs"
     ],
     "coverage": {
-      "en": 0.017,
+      "en": 0.016,
       "cs": 1.0
     },
     "list_share": 0.5,
@@ -46,7 +46,7 @@
     {
       "osm": "relation/435514",
       "name": "Prague",
-      "stations": 57
+      "stations": 196
     }
   ]
 }

@@ -24,7 +24,11 @@ HEATMAP_HTML = OUTPUTS / "heatmap.html"
 # station-line pairs inside it, so this is expected to be written EMPTY.
 EXCLUDED_STATIONS_CSV = OUTPUTS / "excluded_stations.csv"
 
-STATIONS_CSV = DATA_PROCESSED / "stations.csv"
+# Metro and tram stations together since the tram rescope (owner
+# 2026-10-13). TRAM_DIR was a branch-only folder until the landing.
+TRAM_DIR = DATA_PROCESSED
+STATIONS_CSV = TRAM_DIR / "stations.csv"
+TRAM_SHAPES_JSON = TRAM_DIR / "tram_shapes.json"
 BUSINESSES_CLEAN_CSV = DATA_PROCESSED / "businesses_clean.csv"
 
 # Raw inputs. `fetch_sources.py` downloads them; no step may fetch. ROS02, RES
@@ -132,6 +136,83 @@ OPERATOR_STATION_COUNTS = {"Metro A": 17, "Metro B": 24, "Metro C": 20,
                            "Metro (network)": 58}
 OPERATOR_COUNTS_SOURCE = ("A 17 / B 24 / C 20, 58 stations: en.wikipedia Prague Metro "
                           "(secondary), read 2026-09-24")
+
+# --- Trams (tram rescope, owner 2026-10-13) ------------------------------------
+#
+# SUPERSEDES "metro only" above: every day tram route at 15 minutes or better
+# is drawn, one line each ("Tram N"), as the timetable runs (owner,
+# 2026-10-13; docs/decisions_drafts/tram-rescope.md). Stops take the
+# sub-transit-line filters in pipeline/prague/trams.py.
+#
+# The tram feed is a re-pull of GTFS_URL under its own name (data/ is shared
+# by every worktree); the metro above still reads GTFS_ZIP. Its two-week
+# window is asserted, so a new edition stops the build until the routes are
+# re-read.
+TRAM_GTFS_ZIP = DATA_RAW / "pid_gtfs_2026-10-13.zip"
+TRAM_FEED_WINDOW = ("20261013", "20261026")
+# 23 regular routes (no 14 or 16 in this feed) and five that run only for now:
+# 30, 31 and 37 are the only trams on the Spojovací branch, 30 the only one at
+# Třebenická, 32 and 40 the only ones at Smíchovské nádraží (measured
+# 2026-10-13). 37 is flagged is_substitute_transport and drawn all the same
+# (owner). Why the regular routes are off those stops was not read.
+TRAM_LINES = ("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13",
+              "15", "17", "18", "19", "20", "21", "22", "24", "25", "26",
+              "30", "31", "32", "37", "40")
+# Day routes not drawn, each with why. Night routes 90 to 99 (is_night) are
+# not drawn on the per-route rule and need no row here.
+TRAM_NOT_DRAWN = {"23": "every 30 minutes at midday, fails the 15-minute test"}
+# Wednesday in the feed window; 10:00 to 15:00, the busier direction.
+TRAM_HEADWAY_DAY = "20261014"
+TRAM_MAX_HEADWAY_MIN = 15.0
+# A stop pattern is regular at this share of its line's trips or more.
+TRAM_REGULAR_TRIP_SHARE = 0.10
+# A tram stop this close to a drawn metro station is that station; a stop of
+# the station's own name, to the wider distance (Toronto's and Milan's values).
+TRAM_PLACE_MAX_SPREAD_M = 200.0
+# Stop names whose platforms sit farther apart than that, each read and kept
+# as one place. A name appearing or leaving stops the build.
+# Measured 2026-10-13: Vinice 210 m (platforms staggered along one street);
+# Palmovka 256 m, Nádraží Holešovice 319 m and Želivského 326 m are metro
+# stations with tram platforms on more than one side, and attach to them.
+TRAM_WIDE_PLACES = ("Vinice", "Palmovka", "Nádraží Holešovice", "Želivského")
+TRAM_ATTACH_M = 150.0
+TRAM_ATTACH_NAMED_M = 400.0
+TRAM_THIN_SPACING_MILES = 0.5
+# ONE LABEL, LEGEND ROW AND COLOR PER GROUP OF ROUTES (owner, 2026-10-13). One
+# label per route was built first and failed the phone label check: 5
+# overlapping pairs at 375 px and 16 at 343, where the whole network shows in
+# about 175 by 170 px. The groups are the project's, not PID's: routes merged
+# by average shared track (track within 40 m, over the shorter route). Ten
+# groups place every label at 1024, 375 and 343; eight and twelve did not.
+# Two routes of a group share as little as 26% of their track (2 and 24).
+# Re-measure the groups if TRAM_LINES changes.
+#
+# PID gives every tram one color (#7A0603), so these are the project's: each
+# 45 or more (CIE76) from every category pin, 18 or more from every line
+# within 500 m (closest such pair 41.9, groups 1 & 25 and 8 & 26), 3:1
+# against both page backgrounds. Searched 2026-10-13 on the shapes step 1
+# chose; re-run the search if the groups or the pin palette change.
+TRAM_GROUPS = {
+    ("1", "25"): "#9840A0",
+    ("2", "18", "24"): "#2848F8",
+    ("3", "17", "20", "40"): "#686818",
+    ("4", "22"): "#D08068",
+    ("5", "12", "15", "21", "32"): "#606070",
+    ("6", "7", "19"): "#F86008",
+    ("8", "26"): "#F800C8",
+    ("9", "10"): "#C870C8",
+    ("11", "13"): "#989800",
+    ("30", "31", "37"): "#00A800",
+}
+
+
+def tram_group_name(group):
+    """("1", "25") -> "Trams 1 & 25"; ("2", "18", "24") -> "Trams 2, 18, & 24"
+    (the owner's label form, 2026-10-13)."""
+    if len(group) == 2:
+        return f"Trams {group[0]} & {group[1]}"
+    return "Trams " + ", ".join(group[:-1]) + f", & {group[-1]}"
+
 
 # --- Business filtering ------------------------------------------------
 

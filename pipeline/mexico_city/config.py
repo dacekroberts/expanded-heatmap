@@ -59,7 +59,7 @@ from pipeline.countries.mexico import (  # noqa: F401
 REGIONAL = True
 NAME = "Mexico City (Regional)" if REGIONAL else "Mexico City"
 
-# The four State of México municipios, keyed on INEGI's code as Monterrey's
+# The five State of México municipios, keyed on INEGI's code as Monterrey's
 # are (pipeline/monterrey/config.py): OSM's `INEGI:MUNID` equals DENUE's
 # cve_ent + cve_mun, so register and boundaries join on one code. The names
 # exist only to be ASSERTED against DENUE's own `municipio` column, so a wrong
@@ -71,12 +71,21 @@ MUNICIPIOS = {
     "058": "Nezahualcóyotl",
     "070": "La Paz",
     "057": "Naucalpan de Juárez",
+    # Added with the cable cars (owner, 2026-10-13: "1 add"): Mexicable Línea
+    # 2's four middle stations stand in its detached eastern part. 19,483
+    # storefronts under this map's filter, 2,940 of them within 0.6 miles of
+    # the four (measured from the cached register that day).
+    "104": "Tlalnepantla de Baz",
 }
 MUNIDS = tuple(REGIONAL_STATE_CODE + code for code in MUNICIPIOS)
 # The 11 stations of Líneas A, B and 2 in the four, by municipio (staging's
 # probe 2026-10-04, line membership re-measured 2026-10-06). Step 1 asserts
 # them by point in polygon on INEGI:MUNID.
-STATIONS_PER_MUNICIPIO = {"033": 5, "058": 3, "070": 2, "057": 1}
+#
+# Ecatepec went 5 -> 13 with the cable cars (2026-10-13): Mexicable Línea 1's
+# seven stations and Línea 2's La Mesa (Hank González is counted once, both
+# lines meet there).
+STATIONS_PER_MUNICIPIO = {"033": 13, "058": 3, "070": 2, "057": 1, "104": 4}
 
 # --- Paths ---------------------------------------------------------------
 
@@ -85,6 +94,9 @@ DATA_RAW = ROOT / "data" / "mexico_city" / "raw"
 # data/ is one junction shared by every worktree, and master's checks read
 # processed/: the regional build writes processed/regional/ until it lands
 # (regional-extension, Step 1). Fold back to processed/ on landing.
+#
+# The cable-car build wrote processed/regional/cable/ from its branch until
+# the tram rescope landed (2026-10-13).
 DATA_PROCESSED = (ROOT / "data" / "mexico_city" / "processed"
                   / ("regional" if REGIONAL else ""))
 OUTPUTS = ROOT / "outputs" / "mexico_city"
@@ -136,8 +148,10 @@ DENUE_REGIONAL_ZIPS = tuple(
 OSM_STATIONS_JSON = DATA_RAW / "osm_stations.json"
 OSM_ROUTES_JSON = DATA_RAW / "osm_routes.json"
 OSM_BOUNDARY_JSON = DATA_RAW / "osm_boundary.json"
-# The four municipios' admin_level=6 relations, by INEGI:MUNID (REGIONAL only).
-OSM_MUNICIPIOS_JSON = DATA_RAW / "osm_municipios_15.json"
+# The five municipios' admin_level=6 relations, by INEGI:MUNID (REGIONAL only).
+# A dated name since Tlalnepantla was added: data/ is shared by every
+# worktree, and master reads the four-municipio cache osm_municipios_15.json.
+OSM_MUNICIPIOS_JSON = DATA_RAW / "osm_municipios_15_2026-10-13.json"
 
 # --- OpenStreetMap fetch --------------------------------------------------
 
@@ -281,6 +295,97 @@ LINE_COLOURS = {
     "L1": "#033574",   # darkened from OSM's #0554ba - see above
 }
 
+# --- Cable cars (tram rescope, 2026-10-13) ----------------------------------
+#
+# Cablebús (STE, Ciudad de México) and Mexicable (State of México) are drawn
+# (owner, 2026-10-13: "draw both"; docs/decisions_drafts/tram-rescope.md).
+# Toulouse's Téléo is the precedent for a drawn cable car. Measured before
+# the call: 15 of Cablebús's 19 stations lie beyond the 0.6 mile outer ring
+# of every Metro and Tren Ligero station, and 17,783 storefronts gain a ring.
+#
+# IN SERVICE ONLY: Mexicable Línea 3 (Naucalpan, OSM construction=gondola)
+# and Cablebús Líneas 4 to 6 are not open and are not listed here. Re-check
+# when one opens.
+#
+# One Overpass query, cached under a dated name (data/ is shared by every
+# worktree): every aerialway object in OSM_BBOX and the route=aerialway
+# relations (fetch_sources.py, Q_AERIALWAY).
+OSM_AERIALWAY_JSON = DATA_RAW / "osm_aerialway_2026-10-13.json"
+
+# Keyed by a config key, never by OSM `ref`: the five relations carry refs
+# "1", "2", "3", "1", "2", which collide with each other and with the Metro's.
+# Each line is selected by its route relation's ID.
+#
+#   relation  the route=aerialway relation (its member ways are the line)
+#   count     gate 3, the operator's own station count: Mexicable from the
+#             operator's site script (mexicable.com, read 2026-10-13);
+#             Cablebús Líneas 1 and 2 from archived copies of STE's pages
+#             (2024 and 2026-05-23); Línea 3 from es.wikipedia only, since
+#             ste.cdmx.gob.mx refuses every connection (secondary, and said so)
+#   extra     station objects that are NOT node members of the relation.
+#             Cablebús Línea 3's relation holds one untagged node and one way;
+#             its six stations are mapped as ways and relations, so they are
+#             named here by OSM type and id (measured 2026-10-13). Re-measure
+#             if the relation gains station members.
+CABLE_LINES = {
+    "CB1": {"name": "Cablebús Línea 1", "relation": 16949971, "count": 6,
+            "network": "Cablebús", "extra": ()},
+    "CB2": {"name": "Cablebús Línea 2", "relation": 16949984, "count": 7,
+            "network": "Cablebús", "extra": ()},
+    "CB3": {"name": "Cablebús Línea 3", "relation": 16949951, "count": 6,
+            "network": "Cablebús",
+            "extra": (("way", 1080401853), ("way", 1080401854),
+                      ("way", 1315197090), ("relation", 19353601),
+                      ("relation", 19353602), ("relation", 19353603))},
+    "MX1": {"name": "Mexicable Línea 1", "relation": 6632537, "count": 7,
+            "network": "Mexicable", "extra": ()},
+    "MX2": {"name": "Mexicable Línea 2", "relation": 18881337, "count": 7,
+            "network": "Mexicable", "extra": ()},
+}
+# One station OSM names two ways: Mexicable's Línea 1 and Línea 2 meet at Hank
+# González, mapped as two nodes 30 m apart ("Hank González" and "Carlos Hank
+# González"). {OSM name: the name kept}.
+#
+# And one name two places carry: Mexicable Línea 2's Periférico is 26 km from
+# the Tren Ligero's Periférico, so it is shown with its system's name (step 1
+# raised on the pair, 2026-10-13).
+CABLE_STATION_ALIASES = {
+    "Carlos Hank González": "Hank González",
+    "Periférico": "Periférico (Mexicable)",
+}
+# Cable stations that share a name with a Metro station already on the map
+# (Indios Verdes for both systems, Constitución de 1917, Santa Marta) are the
+# same interchange, 150 to 345 m from the Metro station. They ATTACH to it:
+# no second station, and the Metro station does not move. Step 1 raises if a
+# cable station attaches to a station farther than this, which would be two
+# places under one name rather than an interchange.
+CABLE_ATTACH_MAX_M = 400.0
+
+# COLOURS. Neither operator publishes a hex (searched 2026-10-13).
+#
+# Cablebús: STE draws all three lines in one light blue, and the only hex
+# found is es.wikipedia's #4EC3E0. Three drawn lines need three colours, so
+# Línea 1 keeps the system blue and Líneas 2 and 3 are darker shades of it,
+# hue kept (owner, 2026-10-13: "darker project shades sounds good"). The page
+# says so. CIE76: Línea 2 16.4 from Línea 1, Línea 3 23.9 from Línea 2; the
+# nearest Metro line is Línea 4 (23.5 from Cablebús Línea 1) and the nearest
+# pin Retail (44.4).
+#
+# Mexicable: the operator calls its lines Línea Roja and Línea Verde.
+# Wikipedia's reds sit 6.2 to 11.7 from the Food service pin, so the red here
+# is the colour nearest them that clears the pins by 20 and every line by 18
+# (#d85868: Food service 20.8, Línea 1 27.9, Línea 6 37.7). The green is
+# es.wikipedia's map green #95C344 darkened 10% for 3:1 on a white page
+# (#79a133: Línea 12 25.5, Línea 8 28.4, Personal services 38.5). Both are
+# this project's choices and the page says so (owner, 2026-10-13).
+CABLE_COLOURS = {
+    "CB1": "#4EC3E0",
+    "CB2": "#1f96b3",
+    "CB3": "#135c6d",
+    "MX1": "#d85868",
+    "MX2": "#79a133",
+}
+
 # --- Business filtering ------------------------------------------------
 
 
@@ -304,12 +409,19 @@ MEXICO_CITY_BBOX = {
 # 5605754, Nezahualcoyotl 5606086, La Paz 5605964, Naucalpan de Juarez
 # 5606080. The index first landed cut to Ciudad de Mexico alone, and the 11
 # stations in the four had 0 or 1 places within 1 km (owner, 2026-10-12;
-# check H of check_place_search.py now refuses that). Overpass area id =
-# 3600000000 + relation id.
-PLACE_AREA = "(id:3601376330,3605605754,3605606086,3605605964,3605606080)"
-# NEW file names: data/ is shared by every worktree.
-PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-12.json"
-PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-12.json"
+# check H of check_place_search.py now refuses that). A sixth area since the
+# tram rescope (2026-10-13): Tlalnepantla de Baz, relation 5606521. The
+# Tren Suburbano's San Isidro and three more drawn stations sit in it, and the
+# scope rule adds every municipality a drawn station sits in. Overpass area
+# id = 3600000000 + relation id.
+PLACE_AREA = "(id:3601376330,3605605754,3605606086,3605605964,3605606080,3605606521)"
+# NEW file names: data/ is shared by every worktree. The caches of
+# 2026-10-13 are the six areas, filtered from the regional extract of
+# 2026-10-12 (pipeline/place_extract_fetch.py, no Overpass request); the
+# five-area outline is kept beside the current one as
+# osm_place_outline_v1_five_areas_2026-10-12.json.
+PLACE_OSM_JSON = DATA_RAW / "osm_places_2026-10-13.json"
+PLACE_OSM_EXTRA_JSON = DATA_RAW / "osm_places_extra_2026-10-13.json"
 # The local language of OSM's names here: Spanish.
 PLACE_LANGUAGES = ("es",)
 PLACE_FOLD = None
@@ -326,6 +438,12 @@ PLACE_REVIEWED = {
     "Privada 2 Estacionamiento Manuela Medina": "a street's own name in a housing unit, residential class",
     "Privada Estacionamiento": "a street's own name in a housing unit, residential class",
     "Cerrada la Tienda": "a street's own name",
+    # Tlalnepantla de Baz, from the six-area caches of 2026-10-13: OSM ways
+    # 175481910, 175481911, 175481920, 175481964 (name) and 175481967,
+    # 880038128, 880038129 (alt_name), all highway=tertiary. The initials are
+    # the avenue's name and end in the letters of the leak word "S.A.".
+    "Avenida A.N.D.S.A.": "a street's own name, tertiary class (an avenue named by initials)",
+    "Calle 2 de Abril": "a tertiary street whose alt_name is Avenida A.N.D.S.A., a street's own name",
 }
 # OSM objects a reading by eye found to be a business or a home that no rule
 # in place_index.py catches, each with why (place_index.build, `dropped`).
@@ -434,6 +552,28 @@ PLACE_DROPPED = {
     "node/10003160223": "a chapel that no longer exists (its name says so): a search would move the map to a place where it is not",
     "way/1418500626": "a park's name with a stray leading accent mark and a misspelling (glitched; the outside name net, 2026-10-12)",
     "way/639768197": "'Jeugos infantiles', the type words 'juegos infantiles' misspelled",
+    # Tlalnepantla de Baz, the read of the six-area index (2026-10-13). Each is
+    # decided by a recorded ruling, none by a new call: a name that is only
+    # its object's type is no name, and a description longer than a type word
+    # goes by id (owner, 2026-10-11; docs/place_search_exclusions.md,
+    # Landmarks, "A name that is only a type"). The words are left off
+    # BARE_TYPE_NAMES here because a list change reaches every Spanish city
+    # and is the rule-change protocol's, not a city build's.
+    "way/676954439": "'Glorieta', a park under the bare type word for a roundabout",
+    "way/520486348": "'Explanada', a park under the bare type word for an esplanade",
+    "node/4393398889": "'obelisco', a monument under its bare type word",
+    "way/1014962523": "'CANCHAS  DEPORTIVAS', the listed type words 'canchas deportivas' with two spaces between them",
+    "way/564478972": "'Parque Para Perros', a description (a park for dogs), the listed 'parque canino' in other words",
+    "way/1394023631": "'Parque con fuente', a description (a park with a fountain)",
+    "way/564479286": "'Area Comun/Canchas de Basquetball', a description of a housing unit's common area and courts",
+    # The owner's rulings on the read of 2026-10-13 ("all approved"), each id checked against its cached name.
+    "way/520486350": "'Alcoholicos Anonimos', an organisation's name on a park (owner, 2026-10-13)",
+    "way/1548669456": "'Center Park', a park run by a property trust, a mall's grounds (owner, 2026-10-13; ruling 7's class)",
+    "way/1548630508": "'FUNO Center', a park under a property trust's own name (owner, 2026-10-13; ruling 7's class)",
+    "node/4411942889": "'IJSUD', a place of worship named only by its body's initials (owner, 2026-10-13; ruling 2's class)",
+    "node/6937971008": "'Altar a la Virgen De Guadalupe.', a street altar, not notable (owner, 2026-10-13; the shrine calls of 2026-10-12)",
+    "node/13599795588": "'Cátedra Arquidiócesis de Tlalnepantla', a second row for the cathedral, relation 20952002 (owner, 2026-10-13)",
+    "node/9646767715": "'Jardines del Recuerdo', a locality under a private cemetery's name (owner, 2026-10-13)",
 }
 
 # Public art kept by the owner's word against the article rule (place_index,

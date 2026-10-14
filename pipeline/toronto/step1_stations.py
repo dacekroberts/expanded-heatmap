@@ -46,6 +46,7 @@ which this brief once called a research problem and is a regex.
 Run:  python pipeline/toronto/step1_stations.py
 """
 
+import json
 import sys
 import zipfile
 from pathlib import Path
@@ -56,6 +57,7 @@ import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from pipeline.baseline import emit  # noqa: E402
+from pipeline.toronto import streetcars as streetcar_stops  # noqa: E402
 from pipeline.stations import nearest_neighbour_m, verify_stations  # noqa: E402
 from pipeline.toronto.config import (  # noqa: E402
     CITY_BOUNDARY_ZIP,
@@ -77,6 +79,8 @@ from pipeline.toronto.config import (  # noqa: E402
     STATIONS_COLLAPSED_EXPECTED,
     STATION_STRIP_PATTERNS,
     STATIONS_CSV,
+    STREETCAR_ATTACH_M,
+    STREETCAR_SHAPES_JSON,
     SUBWAY_ONLY_STATIONS_EXPECTED,
     SUBWAY_ROUTE_TYPE,
 )
@@ -281,23 +285,48 @@ def main():
     if len(kept) != IN_CITY_STATIONS_EXPECTED:
         print(f"  NOTE: expected {IN_CITY_STATIONS_EXPECTED} in-city stations")
 
+    # --- streetcars (tram rescope, owner 2026-10-13) -------------------------
+    # Everything above is the rapid-transit set, unchanged. The streetcar
+    # stops are selected against it: a stop at one of these stations adds
+    # nothing, the rest are thinned (pipeline/toronto/streetcars.py).
+    sc = streetcar_stops.build(kept[["station", "latitude", "longitude"]], geom)
+    clash = set(sc["stations"]["station"]) & set(kept["station"])
+    if clash:
+        sys.exit(f"streetcar stations share a name with rapid-transit stations: {sorted(clash)}")
+    every = pd.concat([kept[["station", "latitude", "longitude"]],
+                       sc["stations"][["station", "latitude", "longitude"]]], ignore_index=True)
+    nn_all = nearest_neighbour_m(every["longitude"], every["latitude"], CRS_PROJECTED)
+    print(f"\n{len(kept)} rapid-transit + {len(sc['stations'])} streetcar = {len(every)} stations; "
+          f"nearest-neighbour median {np.median(nn_all):.0f} m, closest pair {nn_all.min():.0f} m")
+    nn_new = nn_all[len(kept):]
+    if len(nn_new) and nn_new.min() < STREETCAR_ATTACH_M / 2:
+        sys.exit("a streetcar station closer than half the attach distance to another "
+                 "station: it should be that station, or one of the two.")
+
     # --- outputs ------------------------------------------------------------
     EXCLUDED_STATIONS_CSV.parent.mkdir(parents=True, exist_ok=True)
-    outside.drop(columns="geometry").assign(
-        distance_outside_m=[round(r.distance(geom), 1) for r in outside.geometry]
-        if len(outside) else pd.Series(dtype=float)
-    )[["station", "latitude", "longitude", "lines", "distance_outside_m"]] \
-        .to_csv(EXCLUDED_STATIONS_CSV, index=False)
+    out_rows = [{"station": r.station, "latitude": r.latitude, "longitude": r.longitude,
+                 "lines": r.lines,
+                 "reason": f"outside the City of Toronto, "
+                           f"{round(r.geometry.distance(geom))} m beyond the boundary"}
+                for r in outside.itertuples()]
+    pd.DataFrame(out_rows + sc["excluded"],
+                 columns=["station", "latitude", "longitude", "lines", "reason"]) \
+        .to_csv(EXCLUDED_STATIONS_CSV, index=False, encoding="utf-8", lineterminator="\n")
     STATIONS_CSV.parent.mkdir(parents=True, exist_ok=True)
-    kept.sort_values("station")[["station", "latitude", "longitude"]].to_csv(
-        STATIONS_CSV, index=False)
+    every.sort_values("station")[["station", "latitude", "longitude"]].to_csv(
+        STATIONS_CSV, index=False, encoding="utf-8", lineterminator="\n")
+    STREETCAR_SHAPES_JSON.write_text(json.dumps(sc["shapes"], indent=1), encoding="utf-8")
+    for key, value in sc["counts"].items():
+        emit(key, value)
+    emit("stations_drawn", len(every))
     # Watched by drift_check against outputs/toronto/baseline.json - these are
     # the figures that can move while the rendered map still looks plausible.
     emit("platforms", len(served))
     emit("stations_collapsed", len(stations))
     emit("stations_in_city", len(kept))
-    print(f"\nWrote {len(kept)} stations to {STATIONS_CSV}")
-    print(f"Wrote {EXCLUDED_STATIONS_CSV} ({len(outside)} excluded)")
+    print(f"\nWrote {len(every)} stations to {STATIONS_CSV}")
+    print(f"Wrote {EXCLUDED_STATIONS_CSV} ({len(out_rows) + len(sc['excluded'])} excluded)")
 
 
 if __name__ == "__main__":

@@ -2478,12 +2478,15 @@ _PLACE_SEARCH_TEMPLATE = r"""
                                             "il", "lo", "la", "i", "gli", "le", "l", "d"],
              street: ["via", "v", "viale", "vle", "vicolo", "vic", "piazza", "pza", "pzza", "piazzale",
                       "ple", "largo", "lgo", "corso", "cso", "lungotevere", "lgt", "lungarno", "ponte",
-                      "borgo", "circonvallazione", "strada"],
+                      "borgo", "circonvallazione", "strada",
+                      // Six more, counted on Milan's index (136 of 4,640 street names; owner,
+                      // 2026-10-13). Squares, arcades and overpasses stay out of lead, as piazza and ponte.
+                      "galleria", "piazzetta", "passaggio", "cavalcavia", "alzaia", "bastioni"],
              lead: ["via", "v", "viale", "vle", "vicolo", "vic", "corso", "cso", "lungotevere", "lgt",
-                    "lungarno", "borgo", "circonvallazione", "strada"],
+                    "lungarno", "borgo", "circonvallazione", "strada", "passaggio", "alzaia", "bastioni"],
              station: ["stazione", "staz", "fermata", "metro"],
              abbr: {"vle": "viale", "pza": "piazza", "pzza": "piazza", "ple": "piazzale", "lgo": "largo",
-                    "cso": "corso", "lgt": "lungotevere", "vic": "vicolo", "s": "san", "sta": "santa",
+                    "cso": "corso", "pta": "porta", "lgt": "lungotevere", "vic": "vicolo", "s": "san", "sta": "santa",
                     "ss": "santi", "staz": "stazione"}},
         // el: search-final's search-lang-el.md (2026-10-13), as drafted; not yet tried in a browser.
         el: {join: ["και"], stop: ["του", "της", "των", "το", "την", "τον"],
@@ -2590,6 +2593,18 @@ _PLACE_SEARCH_TEMPLATE = r"""
             var ws = words(n);
             toks = toks.concat(ws);
             solo = solo.concat(ws);
+            // A dotted abbreviation in a NAME (2026-10-13): Milan's map writes
+            // "V.le Tunisia" and "P.za Piemonte", which words() splits at the
+            // dot, so "Viale Tunisia" missed the station. The letters joined
+            // ("vle") and the word ABBR holds for them ("viale") are tokens
+            // too. Where the joined letters are no abbreviation, the part
+            // before the first dot is tried alone ("S.Leonardo" gains "san").
+            // Only a word the page's languages list in ABBR is ever added, so
+            // a name gains its own abbreviation's word and nothing else.
+            (norm(n).match(/\p{L}+(?:\.\p{L}+)+/gu) || []).forEach(function (g) {
+                var j = g.replace(/\./g, ""), k = typeof ABBR[j] === "string" ? j : g.split(".")[0];
+                if (typeof ABBR[k] === "string") toks.push(k, ABBR[k]);
+            });
             // Joined too, so "Kinkakuji" finds "Kinkaku-ji".
             if (ws.length > 1 && !CJK.test(n)) toks.push(ws.join(""));
         });
@@ -3502,7 +3517,8 @@ def load_osm_line_shapes(osm_routes_json, line_specs, system_name):
     line_specs: {key: (ref, color, real-world public name, label end)}, the
     same 4-tuple as the GTFS loader, with OSM's `ref` tag standing in for a
     shape_id. `ref` is what riders see on the line ("1", "A", "12"), and in
-    CDMX it is populated on all 26 relations.
+    CDMX it is populated on all 26 relations. An int in its place is a
+    relation id, for lines whose `ref` tags collide.
 
     Returns {key: (segments, color, label, end)}, segments longest first.
     """
@@ -3523,7 +3539,13 @@ def load_osm_line_shapes(osm_routes_json, line_specs, system_name):
 
     lines = {}
     for key, (ref, color, label, end) in line_specs.items():
-        mine = [r for r in rels if r.get("tags", {}).get("ref") == ref]
+        # An int `ref` selects ONE relation by its OSM id, for lines whose
+        # `ref` tags collide: Mexico City's cable cars carry "1", "2", "3",
+        # "1", "2" over two systems (2026-10-13).
+        if isinstance(ref, int):
+            mine = [r for r in rels if r.get("id") == ref]
+        else:
+            mine = [r for r in rels if r.get("tags", {}).get("ref") == ref]
         if not mine:
             print(f"WARNING: OSM ref {ref!r} for the {label} is not in "
                   f"{osm_routes_json.name} - check the relation's tags.")

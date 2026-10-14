@@ -1,5 +1,13 @@
 # Tram rescope of built cities — estimated load and recommendations
 
+**Status, 2026-10-13: the light batch and Paris are BUILT and on master since
+2026-09-27** (merge be2e3713): Montréal's REM (c8c1c53a), Rome's tram 8
+(eedeb329), Madrid's ML1 (5f9106e5), Paris T3a and T3b (821ca1a9) and San
+Francisco's F Market & Wharves (f3e051d7). The tram list is complete too
+(14295f0b). What is left of this page: Barcelona TRAM, Mexico City's
+Cablebús, and the heavy three (Toronto, Milan, Prague). The text below is the
+estimate as written that morning, before any of it was built.
+
 **Saved 2026-09-27 for later (owner). Nothing is rescoped, and nothing here
 is decided.** The rescopes are held by the owner (PLAN, "Trams left off built
 maps"), and Band T's group decision is deferred until the full tram list and

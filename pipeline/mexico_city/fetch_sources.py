@@ -4,7 +4,7 @@
     python pipeline/mexico_city/fetch_sources.py --regional [--skip-osm]
 
 `--regional` (implied when config.REGIONAL is on) also fetches what Mexico
-City (Regional) adds: DENUE entidad 15 in its two parts and the four State of
+City (Regional) adds: DENUE entidad 15 in its two parts and the five State of
 México municipio boundaries. `--skip-osm` leaves every Overpass query unasked
 (one query in flight per session; CLAUDE.md).
 
@@ -59,6 +59,7 @@ from pipeline.mexico_city.config import (  # noqa: E402
     DENUE_URL,
     DENUE_ZIP,
     MUNIDS,
+    OSM_AERIALWAY_JSON,
     OSM_BBOX,
     OSM_BOUNDARY_JSON,
     OSM_MUNICIPIOS_JSON,
@@ -97,7 +98,7 @@ out geom;
 """
 
 
-# Mexico City (Regional): the four municipios by INEGI's code, Monterrey's
+# Mexico City (Regional): the five municipios by INEGI's code, Monterrey's
 # query (pipeline/monterrey/fetch_sources.py). `INEGI:MUNID` is DENUE's
 # cve_ent + cve_mun, so boundaries and register join on one key. Bounded by
 # the bbox, osm-rail's rule (an unbounded name search once found Guadalajara,
@@ -110,6 +111,21 @@ Q_MUNICIPIOS = f"""
   relation["boundary"="administrative"]["admin_level"="6"]["INEGI:MUNID"~"^({_IDS})$"]({OSM_BBOX});
 );
 out geom;
+"""
+
+# The cable cars (Cablebús and Mexicable, tram rescope 2026-10-13): every
+# aerialway object in the box and the route=aerialway relations, in ONE query.
+# `out body geom` because Cablebús Línea 3's stations are ways and relations,
+# and each relation's member ways are the line the map draws. It took five
+# attempts over two mirrors on the day it was cached, hence the long deadline.
+Q_AERIALWAY = f"""[out:json][timeout:90];
+(
+  node["aerialway"="station"]({OSM_BBOX});
+  way["aerialway"]({OSM_BBOX});
+  relation["aerialway"]({OSM_BBOX});
+  relation["type"="route"]["route"~"^(aerialway|gondola|cable_car)$"]({OSM_BBOX});
+);
+out body geom;
 """
 
 
@@ -226,6 +242,10 @@ def main():
                                        force=args.force)
             print(f"  municipios: {OSM_MUNICIPIOS_JSON.name}, "
                   f"{len(elements):,} elements via {host}")
+        elements, host = osm_fetch(Q_AERIALWAY, OSM_AERIALWAY_JSON,
+                                   force=args.force, deadline=1500, retries=4)
+        print(f"  cable cars: {OSM_AERIALWAY_JSON.name}, "
+              f"{len(elements):,} elements via {host}")
 
     print("\nBusinesses (INEGI DENUE):")
     download_denue(args.force)

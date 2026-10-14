@@ -163,7 +163,7 @@ run on top of a metro network.
 - **Trams or light rail drawn:** San Diego, San Francisco (Muni Metro; the F Market &
   Wharves from 2026-09-27), Los Angeles,
   Philadelphia (trolleys), Boston (Green Line, Mattapan), Calgary, Edmonton, Toronto
-  (Lines 5 and 6 only), Mexico City (Tren Ligero), Guadalajara, Dublin (Luas),
+  (Lines 5 and 6; eight streetcar lines on the tram-rescope branch, 2026-10-13), Mexico City (Tren Ligero), Guadalajara, Dublin (Luas),
   Marseille, Toulouse, Lille, Oslo, Amsterdam, Rotterdam, Rio (VLT), Santos (VLT),
   Hong Kong (Light Rail), Riga (its trams are the whole network), Montréal (the
   REM, an automated light metro), Rome (tram 8, thinned), Madrid (Metro Ligero
@@ -175,8 +175,8 @@ run on top of a metro network.
   Midlands Metro), Edinburgh (Edinburgh Trams), Sheffield (Supertram; the Tram-Train to
   Rotherham not drawn), Nottingham (Regional) (NET) and Blackpool (Regional) (the
   Blackpool Tramway).
-- **Trams not drawn:** Hong Kong Tramways (it runs beside the Island Line), Toronto's 18 streetcar routes, Milan (17 routes), Barcelona,
-  Paris (all but T3a and T3b; T2 and T9 are stubs), Prague, Rome (all but tram
+- **Trams not drawn:** Hong Kong Tramways (it runs beside the Island Line), Barcelona,
+  Paris (all but T3a and T3b; T2 and T9 are stubs), Prague (tram 23 and the night trams only), Rome (all but tram
   8), Madrid (Metro Ligero ML2 and ML3, stubs), Berlin (BVG's 22 lines, an overlay on the U- and S-Bahn: they would add
   518 stops for about 7 more points of storefronts in the rings; owner,
   2026-09-28),
@@ -214,7 +214,7 @@ register covers them all, or because the rail network only makes sense that way.
   (Blackpool and Wyre), Seattle (Regional) (11 cities, five
   publishers, each in the places it covers), Geneva (Regional) (the 12 Swiss
   communes its trams serve), Anyang (Regional) (with Gunpo and Uiwang), Mexico City
-  (Regional) (with four State of México municipios), Copenhagen (Regional) (with
+  (Regional) (with five State of México municipios), Copenhagen (Regional) (with
   Frederiksberg and the eight Letbane municipalities).
 - **Cover more than one municipality but are not labelled:** Montréal (the
   agglomeration: 19 boroughs and 15 related municipalities), Dublin (four local
@@ -561,10 +561,10 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Calgary | CTrain Red, Blue (light rail) | — | Calgary Transit GTFS | City | 0 / 0 |
 | Edmonton | LRT Capital, Metro, Valley | 3 non-revenue stops | ETS GTFS; gate 3 exact | City | 0 / 0 |
 | Kitchener–Waterloo (Regional) | ION light rail (GRT route 301) | GO Transit's Kitchener line (suburban rail); ION's bus to Cambridge | OpenStreetMap route relations (the light-rail builds' source); gate 3 exact against the Region's ION Stops layer | Two cities (the Region's Kitchener and Waterloo polygons) | 0 / 0 |
-| Toronto | Subway 1, 2, 4 + LRT 5, 6 | 18 streetcar routes; GO | TTC GTFS (City CKAN) | City | 2 / 0 |
+| Toronto | Subway 1, 2, 4 + LRT 5, 6 + streetcars 501, 504, 505, 506, 509, 510, 511, 512 | Streetcars 503, 507 (closed for works), 508 (peaks only), 7 night routes; GO | TTC GTFS (City CKAN) | City | 2 / 156 |
 | Ottawa | O-Train Lines 1, 2 and 4 (light rail) | Buses, the Transitway | OpenStreetMap route relations (OC Transpo's GTFS licence unread); gate 3 exact against Wikipedia | City (its own wards) | 0 / 0 |
 | **Mexico** | | | | | |
-| Mexico City (Regional) | Metro, 12 lines + Tren Ligero | not stated (Tren Suburbano, Cablebús) | OpenStreetMap | CDMX and four State of México municipios | 0 / 0 |
+| Mexico City (Regional) | Metro, 12 lines + Tren Ligero + Cablebús Líneas 1-3 + Mexicable Líneas 1-2 | Tren Suburbano, El Insurgente (commuter spacing); Mexicable Línea 3 and Cablebús Líneas 4-6 (not open) | OpenStreetMap | CDMX and five State of México municipios | 0 / 0 |
 | Guadalajara (Regional) | Tren Ligero L1–L4 | — | OpenStreetMap (only GTFS expired 2023, lacks L4) | 4 municipios; Tonalá out | no CSV (all in scope) / 0 |
 | Monterrey (Regional) | Metrorrey L1–L3 | Líneas 4 and 6 (monorail, under construction) | OpenStreetMap (no agency data published); L3 in the operator's red | 4 municipios, by INEGI code | no CSV (all in scope) / 0 |
 | **Spain** | | | | | |
@@ -574,7 +574,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | **Ireland** | | | | | |
 | Dublin | Luas Red, Green + DART | Commuter, InterCity | NTA national GTFS; gate 3 exact | 4 local authorities | 2 / 0 |
 | **Italy** | | | | | |
-| Milan | Metro M1–M5 | 17 trams; Passante, Trenord | ATM GIS layers (+GTFS colours) | Comune | 21 / 0 |
+| Milan | Metro M1–M5 + trams 1, 2, 3, 4, 5, 7, 9, 10, 12, 14, 15, 16, 19, 24, 27, 31, 33 | Passante, Trenord | ATM GIS layers (metro); ATM GTFS (trams, metro colours) | Comune | 40 / 158 |
 | Rome | Metro A, B, B1, C + Roma–Viterbo (urban) + Tram 8 | Other trams (2, 5, 14, 19 bus-replaced; 3 running again from 2026-09-07 but not in the cached feed); 8 prolungato; Roma–Lido; suburban | OpenStreetMap | Comune | 1 / 9 |
 | Florence | Tramvia T1 and T2 | Buses, trains; T3 and T4 (building) | OpenStreetMap; gate 3 exact | Comune | 4 / 0 |
 | **France** | | | | | |
@@ -618,7 +618,7 @@ left out as outside the scope / surface stops dropped by the spacing filter.
 | Aarhus | Letbane L2 on the city tramway (light rail) | Odderbanen and Grenaabanen (under the 15-minute test); L1 not drawn | OpenStreetMap | Kommune | 30 / 0 |
 | Odense | Odense Letbane, one tram line | Buses and regional trains | OpenStreetMap | Kommune | 0 / 0 |
 | **Czechia** | | | | | |
-| Prague | Metro A, B, C | Trams, funicular, ferries, suburban | PID GTFS | City | 0 / 0 |
+| Prague | Metro A, B, C + 28 day tram routes in ten groups (1 to 13, 15, 17 to 22, 24, 25, 26, 30, 31, 32, 37, 40) | Tram 23, night trams, funicular, ferries, suburban | PID GTFS | City | 0 / 108 |
 | Brno | Trams 1–10, 12 | Heritage tram H4, shuttle P1; S-trains, trolleybuses, ferry | KORDIS JMK GTFS (geometry OSM); gate 3 vs OSM agrees on 9 of 11 lines | City | 2 / 0 |
 | Plzeň | Trams 1, 2, 4 | Relief and depot runs 1X, 4X; trolleybuses | OpenStreetMap route relations; gate 3 vs PMDP GTFS (depot only) | City | 0 / 0 |
 | Olomouc | Trams 1–7 | — | OpenStreetMap route relations; gate 3 exact (IDOS) | City | 0 / 0 |
@@ -1690,7 +1690,8 @@ wording lands at review time.
     not a reason to exclude. Mexico City's Cablebús and Tren Suburbano, and
     Montréal's REM and exo, are not mentioned in any file read. Unknown whether they
     were considered. *(2026-09-27: the REM is now drawn; exo, Cablebús and the
-    Tren Suburbano remain open.)*
+    Tren Suburbano remain open. 2026-10-13: Cablebús and Mexicable are drawn, the
+    owner's call; the Tren Suburbano stays out on commuter spacing.)*
 13. **Undisclosed floors in the first US cities: settled 2026-10-04 (owner).**
     Re-measured: Los Angeles 8.8% of City rows have no NAICS code; San Francisco
     21.4% of OPEN rows (the 37% counted closed locations, which the map also

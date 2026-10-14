@@ -86,16 +86,10 @@ if hasattr(sys.stdout, "reconfigure"):
 # H: a city whose index is known not to reach its whole map, with the date
 # and the reason. A dated defect, not a pass; an entry whose city has no gap
 # left fails, so the list only shrinks.
-# Emptied when Mexico City's index was rebuilt for its regional map, 2026-10-12.
-# Mexico City again, 2026-10-13 (owner): the tram rescope's steps were re-run
-# ahead of its landing, so the shared processed stations hold San Isidro
-# (Tlalnepantla de Baz), which the landed index's area does not reach. Leaves
-# with the big review, when the rescope and an index over the wider area land
-# together (the caches are in data/mexico_city/raw/place_wide_2026-10-13/).
-KNOWN_GAPS = {
-    "mexico_city": "2026-10-13: the tram rescope's stations are on disk before its landing; "
-                   "San Isidro is outside the landed index's area",
-}
+# Empty since Mexico City's index was rebuilt over Tlalnepantla de Baz as
+# well, with the tram rescope's stations, 2026-10-13 (it was emptied once
+# before, 2026-10-12, when the index first reached the regional map).
+KNOWN_GAPS = {}
 
 
 def quiet_of(slug):

@@ -448,7 +448,7 @@ CITIES = [
         "rail_extra": "Trams",
         "record_kind": "License register",
         "categories": "Retail thin",
-        "blurb": "TTC (Lines 1, 2 and 4 subway; Lines 5 and 6 LRT)",
+        "blurb": "TTC (Lines 1, 2 and 4 subway; Lines 5 and 6 LRT; eight streetcar lines)",
         # OUTSIDE THE DEFAULT VIEW, like the other Canadian cities. Toronto is
         # the closest of the four to the framed region - its longitude sits
         # inside the US span and its latitude only just north of Boston's - so
@@ -476,7 +476,7 @@ CITIES = [
         "rail_extra": "Trams",
         "record_kind": "National register",
         "categories": "All three",
-        "blurb": "Metro CDMX (Líneas 1–9, A, B and 12) and the STE Tren Ligero, with four State of México municipios",
+        "blurb": "Metro CDMX (Líneas 1–9, A, B and 12), the STE Tren Ligero and the Cablebús and Mexicable cable cars, with five State of México municipios",
         "region": "Mexico",
         "country": "Mexico",
         # Outside the United States frame, like every Canadian city - see
@@ -654,7 +654,7 @@ CITIES = [
         "rail_extra": "—",
         "record_kind": "License register",
         "categories": "All three",
-        "blurb": "Metro M1-M5 (rossa, verde, gialla, blu, lilla)",
+        "blurb": "Metro M1-M5 (rossa, verde, gialla, blu, lilla); 17 tram lines",
         "region": "Europe West",
         "country": "Italy",
         "in_default_view": False,
@@ -875,7 +875,7 @@ CITIES = [
         "rail_extra": "—",
         "record_kind": "National register",
         "categories": "All three",
-        "blurb": "Metro A, B and C",
+        "blurb": "Metro A, B and C; 28 tram routes",
         "region": "Czechia",
         "country": "Czechia",
         "in_default_view": False,

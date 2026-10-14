@@ -47,14 +47,21 @@ st.markdown(
     """
 **The lines**
 
-- The map covers the **Comune di Milano** and draws the five metro lines - **M1 (linea rossa)**,
-  **M2 (linea verde)**, **M3 (linea gialla)**, **M4 (linea blu)** and **M5 (linea lilla)** - each
-  labeled on the map and in the legend, in ATM's own colors.
-- Milan's 17 tram routes are **not** drawn. They form a dense street-running network with stops
-  a block or two apart, which needs different treatment from a metro, and the agency publishes no
-  color for any of them.
+- The map covers the **Comune di Milano** and draws **22 lines**, each labeled on the map and in
+  the legend: the five metro lines - **M1 (linea rossa)**, **M2 (linea verde)**,
+  **M3 (linea gialla)**, **M4 (linea blu)** and **M5 (linea lilla)** - and **17 tram lines**
+  (Tram 1, 2, 3, 4, 5, 7, 9, 10, 12, 14, 15, 16, 19, 24, 27, 31 and 33).
+- The metro lines are in ATM's own colors. ATM publishes no color for its trams, so the tram
+  lines are shown in colors chosen for this map.
+- Trams stop every block or two, so only about
+  one stop per half mile is drawn as a station; metro stations, stops where tram lines cross or
+  part, and each line's last stop are always drawn.
+- The tram lines follow ATM's timetable for September 14 to October 2, 2026, the latest the
+  city has published. Trams 2, 4, 7, 14 and 16 were on diversion for works in it and are drawn
+  as they ran.
 - Twenty-one metro stations lie outside the comune - the ends of M1 at Rho and Sesto, M2 at
-  Gessate and Cologno, M4 at Linate - and are listed below.
+  Gessate and Cologno, M4 at Linate - as do the outer stops of Tram 15 in Rozzano and Tram 31
+  in Cinisello Balsamo. Every stop left out is listed below.
 
 **The businesses**
 
@@ -79,7 +86,7 @@ st.markdown(
 """
 )
 
-render_map_help('three business categories (Retail, Food service and Personal services)')
+render_map_help('three business categories (Retail, Food service and Personal services)', search='milan')
 render_excluded_stations("Milan")
 render_country_links('Milan')
 

@@ -14,6 +14,8 @@ OUTPUTS = ROOT / "outputs" / "toronto"
 HEATMAP_HTML = OUTPUTS / "heatmap.html"
 EXCLUDED_STATIONS_CSV = OUTPUTS / "excluded_stations.csv"
 
+# Rapid-transit stations and streetcar stations together since the tram
+# rescope (owner 2026-10-13).
 STATIONS_CSV = DATA_PROCESSED / "stations.csv"
 BUSINESSES_CLEAN_CSV = DATA_PROCESSED / "businesses_clean.csv"
 BUSINESSES_GEOCODED_CSV = DATA_PROCESSED / "businesses_geocoded.csv"
@@ -168,6 +170,109 @@ LINE_SHAPES = {
     "6": "1125786",
 }
 LINE_LABEL_ENDS = {}
+
+# --- Streetcars (tram rescope; owner, 2026-10-13) ---------------------------
+#
+# The owner's list: the day streetcar routes, one label and legend row each
+# ("Streetcar 501" on the map, "Streetcar 501 Queen" in the legend). The night
+# routes run their day routes' streets and are not drawn. A route joining or
+# leaving either set is a scope decision: pipeline/toronto/streetcars.py
+# stops if the feed's streetcar routes are not exactly these two sets.
+# docs/decisions_drafts/tram-rescope.md has the overlap test that brought
+# them in (305 of 558 stops beyond every rapid-transit station's outer ring).
+STREETCAR_LINES = {
+    "501": "Queen", "503": "Kingston Rd", "504": "King", "505": "Dundas",
+    "506": "Carlton", "507": "Long Branch", "508": "Lake Shore",
+    "509": "Harbourfront", "510": "Spadina", "511": "Bathurst",
+    "512": "St Clair",
+}
+STREETCAR_NIGHT_NOT_DRAWN = ("301", "303", "304", "305", "306", "310", "312")
+STREETCAR_LINE_NAMES = {k: f"Streetcar {k}" for k in STREETCAR_LINES}
+STREETCAR_LEGEND_NAMES = {k: f"Streetcar {k} {v}" for k, v in STREETCAR_LINES.items()}
+
+# THREE OF THE ELEVEN ARE NOT DRAWN (owner, 2026-10-13: "follow those rules
+# (8 not 11) note the drops and reasoning"). Both rules are
+# docs/category_rules.md, "Station scope":
+#   503 Kingston Rd, 507 Long Branch: CLOSED FOR WORKS. Every trip in the
+#     feed's window (to 2026-10-31) is a replacement bus, 1,098 of 1,098 and
+#     1,603 of 1,603, so the lines are drawn as the timetable runs: not at
+#     all (Berlin's U6 Tegel branch, Prague's Flora).
+#   508 Lake Shore: THE 15-MINUTE TEST. 35 trips, weekday peaks only, none
+#     between 09:00 and 15:00 (Aarhus's converted railways).
+# 512 St Clair runs streetcars east of Lansdowne and a replacement bus west
+# of it; 506 Carlton's "506B" bus runs beside a streetcar that covers the
+# whole route. Read on the cached feed and a re-pull of 2026-10-13, which
+# agree. streetcars.py compares all of this with the feed and stops when a
+# line returns, closes or changes frequency. Each value: the street-name
+# prefixes whose stops are recorded as that line's own.
+STREETCAR_CLOSED_FOR_WORKS = {
+    "503": ("Kingston Rd", "Bingham Loop"),
+    "507": ("Lake Shore Blvd West", "Long Branch Loop", "Humber Loop"),
+}
+STREETCAR_PART_CLOSED = {"512": ("St Clair Ave West", "St. Clair Ave West", "Gunns Loop")}
+STREETCAR_INFREQUENT = ("508",)
+STREETCAR_NOT_DRAWN_NEAR_M = 100.0
+
+# STREETCAR COLOURS: THE PROJECT PALETTE. The TTC gives every streetcar route
+# one red (route_color ED1C24), so eight lines cannot be told apart by it.
+# Chosen 2026-10-13 from the sRGB cube in steps of 8, Lines 1 to 6 held on
+# their colours above: 3:1 on both map pages, CIE76 >= 45 from every pin,
+# >= 18 from every line within 500 m; each line takes the colour farthest
+# from every line already chosen, the most crowded line first. Measured:
+#   501 #608000  pins 45.0  nearest line 37.7 (506)
+#   504 #00A800  pins 46.1  nearest line 37.9 (501)
+#   505 #0050F8  pins 49.7  nearest line 38.6 (511)
+#   506 #886010  pins 68.7  nearest line 37.7 (501)
+#   509 #C870C8  pins 45.3  nearest line 36.2 (Line 4)
+#   510 #F80028  pins 47.0  nearest line 45.0 (Line 5)
+#   511 #A000F8  pins 79.9  nearest line 37.7 (Line 4)
+#   512 #00A0C0  pins 45.2  nearest line 35.9 (Line 6)
+# Re-run the search if a line returns (503, 507, 508) or a rapid-transit
+# colour moves. The three lines not drawn hold no colour.
+STREETCAR_COLOURS = {
+    "501": "#608000", "504": "#00A800", "505": "#0050F8", "506": "#886010",
+    "509": "#C870C8", "510": "#F80028", "511": "#A000F8", "512": "#00A0C0",
+}
+
+# Trips with this in the headsign are buses filed under a streetcar route.
+STREETCAR_BUS_HEADSIGN = "Bus"
+
+# A line's REGULAR route: the stop patterns each run by at least this share of
+# the line's trips. Short turns and diversions under it add no stops.
+STREETCAR_REGULAR_TRIP_SHARE = 0.10
+
+# The feed names a streetcar stop per direction ("... at Spadina Ave East
+# Side"), `parent_station` is empty, and 280 of 469 names sit on one stop id,
+# so stops are grouped into places by DISTANCE, measured 2026-10-13 on 662
+# stop ids (nearest other stop: median 37 m, 95th percentile 131 m):
+#   within PLACE_LINK_M of each other, or
+#   within PLACE_CROSS_M and sharing no line-and-direction (the far-side stop
+#   of the other direction, or the crossing line's stop at one intersection).
+# No merge may stretch a place past PLACE_MAX_SPREAD_M (the widest real
+# crossing measured, Queen at Spadina with its Richmond stop, is 183 m).
+STREETCAR_PLACE_LINK_M = 60.0
+STREETCAR_PLACE_CROSS_M = 120.0
+STREETCAR_PLACE_MAX_SPREAD_M = 200.0
+
+# A streetcar place at a drawn rapid-transit station IS that station: it adds
+# no station and moves none, and it resets the spacing count. Within
+# ATTACH_M (40 stop ids measured under 150 m; "Queen St West at University
+# Ave - Osgoode Station" is 38 m), or named for the station and within
+# ATTACH_NAMED_M ("Spadina Station" is 162 m from the subway's point).
+STREETCAR_ATTACH_M = 150.0
+STREETCAR_ATTACH_NAMED_M = 400.0
+
+# Sub-transit-line filters (docs/sub_transit_line_filters.md), as Amsterdam's
+# trams: rapid-transit stations and each line's terminals kept, the rest one
+# per half mile along the line's own stop sequence.
+STREETCAR_THIN_SPACING_MILES = 0.5
+
+# The 15-minute test (docs/category_rules.md, "Station scope"): the weekday
+# 09:00 to 15:00 headway each line must hold, one direction.
+STREETCAR_MAX_HEADWAY_MIN = 15.0
+
+# Step 1 writes the line shapes it chose here; step 4 reads them.
+STREETCAR_SHAPES_JSON = DATA_PROCESSED / "streetcar_shapes.json"
 
 # PLATFORM-TO-STATION COLLAPSE, AND THIS CITY IS WHY THE PROJECT DISTRUSTS
 # STATION COUNTS AT ALL.

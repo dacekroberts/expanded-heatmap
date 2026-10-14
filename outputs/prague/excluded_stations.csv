@@ -1,2 +1,110 @@
 station,lines,reason,latitude,longitude
 Flora,A,"line A, closed for works (reconstruction since 1 February 2026), reopening about the end of February 2027 (DPP)",50.078289,14.462677
+Arbesovo náměstí,"Tram 9, Tram 12, Tram 15, Tram 20","spacing filter on Tram 9: 0.353 mi after Újezd, under 0.5 mi",50.076067,14.40409
+Belárie,"Tram 3, Tram 17, Tram 20, Tram 40","spacing filter on Tram 3: 0.313 mi after Modřanská škola, under 0.5 mi",50.013287,14.401838
+Blatiny,"Tram 9, Tram 10","spacing filter on Tram 9: 0.282 mi after Slánská, under 0.5 mi",50.06575,14.302934
+Botanická zahrada,"Tram 2, Tram 18, Tram 24","spacing filter on Tram 2: 0.207 mi after Albertov, under 0.5 mi",50.070776,14.419264
+Brusnice,Tram 22,"spacing filter on Tram 22: 0.3 mi after Pražský hrad, under 0.5 mi",50.092989,14.391496
+Chaplinovo náměstí,"Tram 5, Tram 12, Tram 15, Tram 21, Tram 32","spacing filter on Tram 5: 0.496 mi after Geologická, under 0.5 mi",50.035004,14.377767
+Ciolkovského,"Tram 20, Tram 26","spacing filter on Tram 20: 0.174 mi after Sídliště Na Dědině, under 0.5 mi",50.087938,14.306892
+Divadlo pod Palmovkou,"Tram 3, Tram 24, Tram 30","spacing filter on Tram 3: 0.145 mi from Palmovka, under 0.5 mi",50.105659,14.472753
+Dubečská,"Tram 22, Tram 26","spacing filter on Tram 22: 0.244 mi after Nádraží Zahradní Město, under 0.5 mi",50.065358,14.502352
+Hasičská stanice Modřany,Tram 17,"spacing filter on Tram 17: 0.321 mi after Observatoř Libuš, under 0.5 mi",50.005962,14.439931
+Hlušičkova,"Tram 9, Tram 10","spacing filter on Tram 9: 0.472 mi after Krematorium Motol, under 0.5 mi",50.063864,14.316034
+Holešovická tržnice,"Tram 1, Tram 5, Tram 25","spacing filter on Tram 1: 0.457 mi after Dělnická, under 0.5 mi",50.098288,14.444672
+Hostivařská,"Tram 22, Tram 26","spacing filter on Tram 22: 0.319 mi after Nádraží Hostivař, under 0.5 mi",50.052722,14.529939
+Italská,"Tram 11, Tram 13","spacing filter on Tram 11: 0.265 mi after Muzeum, under 0.5 mi",50.078161,14.436041
+Jana Masaryka,"Tram 4, Tram 21, Tram 22","spacing filter on Tram 4: 0.296 mi after Krymská, under 0.5 mi",50.073292,14.441085
+Karlovy lázně,"Tram 2, Tram 17, Tram 18","spacing filter on Tram 2: 0.27 mi after Národní divadlo, under 0.5 mi",50.084668,14.413606
+Karlínské náměstí,"Tram 3, Tram 8, Tram 12, Tram 24","spacing filter on Tram 3: 0.317 mi after Florenc, under 0.5 mi",50.092751,14.445695
+Kavalírka,"Tram 7, Tram 9, Tram 10","spacing filter on Tram 7: 0.362 mi after Kotlářka, under 0.5 mi",50.070076,14.370758
+Kněžská luka,"Tram 30, Tram 31, Tram 37","spacing filter on Tram 30: 0.282 mi after Chmelnice, under 0.5 mi",50.092167,14.492725
+Krematorium Strašnice,"Tram 7, Tram 11, Tram 26","spacing filter on Tram 7: 0.174 mi after Vinice, under 0.5 mi",50.077236,14.485164
+Královský letohrádek,Tram 22,"spacing filter on Tram 22: 0.267 mi after Malostranská, under 0.5 mi",50.094246,14.404764
+Kyselova,Tram 30,"spacing filter on Tram 30: 0.263 mi after Ládví, under 0.5 mi",50.126166,14.463702
+Křížová,"Tram 4, Tram 20","spacing filter on Tram 4: 0.477 mi after Anděl, under 0.5 mi",50.063141,14.404698
+Laurová,"Tram 4, Tram 20","spacing filter on Tram 4: 0.186 mi after Braunova, under 0.5 mi",50.06114,14.397774
+Letenské náměstí,"Tram 1, Tram 8, Tram 12, Tram 25, Tram 26","spacing filter on Tram 1: 0.436 mi after Strossmayerovo náměstí, under 0.5 mi",50.099976,14.423605
+Líbeznická,"Tram 17, Tram 24","spacing filter on Tram 17: 0.178 mi after Březiněveská, under 0.5 mi",50.128943,14.455515
+Malešická továrna,Tram 11,"spacing filter on Tram 11: 0.46 mi after Depo Hostivař, under 0.5 mi",50.077229,14.524976
+Malostranské náměstí,"Tram 12, Tram 15, Tram 20, Tram 22","spacing filter on Tram 12: 0.482 mi after Újezd, under 0.5 mi",50.088125,14.404404
+Marjánka,"Tram 22, Tram 25","spacing filter on Tram 22: 0.297 mi after Malovanka, under 0.5 mi",50.084551,14.375587
+Mezi Hřbitovy,"Tram 10, Tram 26","spacing filter on Tram 10: 0.204 mi after Nákladové nádraží Žižkov, under 0.5 mi",50.081657,14.471742
+Modřanská rokle,"Tram 3, Tram 17, Tram 20, Tram 40","spacing filter on Tram 3: 0.316 mi after Levského, under 0.5 mi",50.006239,14.429376
+Motol,"Tram 9, Tram 10","spacing filter on Tram 9: 0.473 mi after Hotel Golf, under 0.5 mi",50.067694,14.336104
+Myslíkova,Tram 5,"spacing filter on Tram 5: 0.155 mi after Národní třída, under 0.5 mi",50.078041,14.418475
+Na Pískách,"Tram 20, Tram 26","spacing filter on Tram 20: 0.243 mi after Hadovka, under 0.5 mi",50.099022,14.370018
+Na Veselí,Tram 18,"spacing filter on Tram 18: 0.16 mi after Vozovna Pankrác, under 0.5 mi",50.05641,14.44132
+Nad Trojou,Tram 17,"spacing filter on Tram 17: 0.374 mi after Trojská, under 0.5 mi",50.120354,14.439337
+Novoměstská radnice,"Tram 2, Tram 3, Tram 6, Tram 18, Tram 22, Tram 24","spacing filter on Tram 2: 0.233 mi after Karlovo náměstí, under 0.5 mi",50.077518,14.419602
+Nádraží Libeň,"Tram 8, Tram 37","spacing filter on Tram 8: 0.347 mi after Arena Libeň jih, under 0.5 mi",50.10199,14.502199
+Nádraží Modřany,"Tram 3, Tram 17, Tram 20, Tram 40","spacing filter on Tram 3: 0.334 mi after Čechova čtvrť, under 0.5 mi",50.004261,14.40334
+Nádraží Vysočany,"Tram 12, Tram 31","spacing filter on Tram 12: 0.204 mi after Poliklinika Vysočany, under 0.5 mi",50.110232,14.498928
+Obchodní centrum Hostivař,"Tram 22, Tram 26","spacing filter on Tram 22: 0.225 mi after Na Groši, under 0.5 mi",50.053862,14.519045
+Obora Hvězda,"Tram 22, Tram 25","spacing filter on Tram 22: 0.29 mi after Vypich, under 0.5 mi",50.078188,14.341104
+Ocelářská,"Tram 8, Tram 37","spacing filter on Tram 8: 0.264 mi after Balabenka, under 0.5 mi",50.103521,14.4883
+Ohrada,"Tram 30, Tram 31, Tram 37","spacing filter on Tram 30: 0.368 mi after Krejcárek, under 0.5 mi",50.090628,14.469661
+Okrouhlická,"Tram 3, Tram 24, Tram 30","spacing filter on Tram 3: 0.177 mi after Vychovatelna, under 0.5 mi",50.119679,14.460331
+Olšanská,"Tram 9, Tram 26","spacing filter on Tram 9: 0.199 mi after Nákladové nádraží Žižkov, under 0.5 mi",50.083451,14.464969
+Orionka,Tram 10,"spacing filter on Tram 10: 0.203 mi after Flora, under 0.5 mi",50.07556,14.459223
+Ortenovo náměstí,"Tram 1, Tram 5, Tram 25","spacing filter on Tram 1: 0.356 mi after Nádraží Holešovice, under 0.5 mi",50.107718,14.447827
+Otakarova,"Tram 2, Tram 6, Tram 7, Tram 19","spacing filter on Tram 2: 0.074 mi from Náměstí Bratří Synků, under 0.5 mi",50.065579,14.440476
+Ořechovka,"Tram 1, Tram 2","spacing filter on Tram 1: 0.462 mi after Vozovna Střešovice, under 0.5 mi",50.092869,14.379297
+Palouček,"Tram 18, Tram 19","spacing filter on Tram 18: 0.365 mi after Pražského povstání, under 0.5 mi",50.061493,14.437209
+Park Maxe van der Stoela,Tram 25,"spacing filter on Tram 25: 0.287 mi after Vozovna Střešovice, under 0.5 mi",50.090382,14.385702
+Perunova,Tram 10,"spacing filter on Tram 10: 0.422 mi after Flora, under 0.5 mi",50.075423,14.454289
+Plynárna Michle,"Tram 11, Tram 24","spacing filter on Tram 11: 0.174 mi after Chodovská, under 0.5 mi",50.056526,14.464954
+Plzeňka,"Tram 5, Tram 12, Tram 15, Tram 20","spacing filter on Tram 5: 0.475 mi after Anděl, under 0.5 mi",50.063929,14.408641
+Pobřežní cesta,"Tram 3, Tram 17, Tram 20, Tram 40","spacing filter on Tram 3: 0.357 mi after Nádraží Braník, under 0.5 mi",50.033905,14.407696
+Pod Jezerkou,"Tram 11, Tram 24","spacing filter on Tram 11: 0.275 mi after Michelská, under 0.5 mi",50.058125,14.450046
+Pod Karlovem,"Tram 6, Tram 11","spacing filter on Tram 6: 0.268 mi after Bruselská, under 0.5 mi",50.069145,14.432668
+Podkovářská,"Tram 8, Tram 37","spacing filter on Tram 8: 0.255 mi after Kabešova, under 0.5 mi",50.102959,14.513914
+Poliklinika Modřany,"Tram 3, Tram 17, Tram 20, Tram 40","spacing filter on Tram 3: 0.201 mi after U Libušského potoka, under 0.5 mi",50.004692,14.419161
+Poštovka,"Tram 9, Tram 10","spacing filter on Tram 9: 0.393 mi after Kotlářka, under 0.5 mi",50.068525,14.35401
+Poštovská,Tram 12,"spacing filter on Tram 12: 0.369 mi after Vysočanská, under 0.5 mi",50.110592,14.509273
+Prašný most,"Tram 1, Tram 2, Tram 25","spacing filter on Tram 1: 0.413 mi after Hradčanská, under 0.5 mi",50.094786,14.394878
+Pražské Jezulátko,"Tram 12, Tram 15, Tram 20, Tram 22","spacing filter on Tram 12: 0.312 mi from Újezd, under 0.5 mi",50.085659,14.404176
+Právnická fakulta,Tram 17,"spacing filter on Tram 17: 0.226 mi after Staroměstská, under 0.5 mi",50.091478,14.417732
+Radhošťská,"Tram 11, Tram 13","spacing filter on Tram 11: 0.3 mi after Jiřího z Poděbrad, under 0.5 mi",50.077633,14.457482
+Sibeliova,"Tram 1, Tram 2","spacing filter on Tram 1: 0.255 mi after Vozovna Střešovice, under 0.5 mi",50.092825,14.383945
+Slavia - Nádraží Eden,"Tram 6, Tram 7, Tram 19, Tram 21, Tram 22","spacing filter on Tram 6: 0.411 mi after Koh-i-noor, under 0.5 mi",50.069496,14.4706
+Staré Strašnice,"Tram 22, Tram 26","spacing filter on Tram 22: 0.194 mi after Radošovická, under 0.5 mi",50.068261,14.492823
+Strážní,"Tram 30, Tram 31, Tram 37","spacing filter on Tram 30: 0.283 mi after Vozovna Žižkov, under 0.5 mi",50.092253,14.481274
+Střelničná,Tram 30,"spacing filter on Tram 30: 0.477 mi after Ládví, under 0.5 mi",50.125773,14.458929
+Svatoplukova,"Tram 2, Tram 7, Tram 18, Tram 24","spacing filter on Tram 2: 0.31 mi after Divadlo Na Fidlovačce, under 0.5 mi",50.06506,14.429745
+Sídliště Hloubětín,"Tram 12, Tram 37","spacing filter on Tram 12: 0.299 mi after Hloubětín, under 0.5 mi",50.106529,14.543161
+Sídliště Libuš,Tram 17,"spacing filter on Tram 17: 0.213 mi after Libuš, under 0.5 mi",50.005968,14.453914
+Sídliště Modřany,"Tram 3, Tram 17, Tram 20, Tram 40","spacing filter on Tram 3: 0.14 mi after Levského, under 0.5 mi",50.005135,14.432946
+Sídliště Červený Vrch,"Tram 20, Tram 26","spacing filter on Tram 20: 0.164 mi after Bořislavka, under 0.5 mi",50.098024,14.359237
+Teplárna Michle,"Tram 11, Tram 24","spacing filter on Tram 11: 0.36 mi after Spořilov, under 0.5 mi",50.05282,14.474681
+Thákurova,"Tram 20, Tram 26","spacing filter on Tram 20: 0.299 mi after Dejvická, under 0.5 mi",50.100109,14.386468
+Tusarova,"Tram 1, Tram 5, Tram 25","spacing filter on Tram 1: 0.164 mi after Dělnická, under 0.5 mi",50.100777,14.450017
+Tyršův dům,"Tram 12, Tram 15, Tram 20, Tram 22","spacing filter on Tram 12: 0.21 mi after Újezd, under 0.5 mi",50.084187,14.404471
+Třebenická,Tram 30,"spacing filter on Tram 30: 0.208 mi after Sídliště Ďáblice, under 0.5 mi",50.129536,14.480905
+U Elektry,"Tram 8, Tram 37","spacing filter on Tram 8: 0.484 mi after Kabešova, under 0.5 mi",50.103468,14.519
+U Kaštanu,"Tram 22, Tram 25","spacing filter on Tram 22: 0.355 mi after Drinopol, under 0.5 mi",50.083653,14.363112
+U Průhonu,"Tram 1, Tram 5, Tram 25","spacing filter on Tram 1: 0.123 mi from Dělnická, under 0.5 mi",50.104923,14.450027
+U Zvonu,"Tram 7, Tram 9, Tram 10","spacing filter on Tram 7: 0.337 mi after Klamovka, under 0.5 mi",50.071589,14.387319
+Urxova,"Tram 3, Tram 8, Tram 12, Tram 24","spacing filter on Tram 3: 0.298 mi after Křižíkova, under 0.5 mi",50.095228,14.456759
+Veletržní palác,"Tram 6, Tram 17","spacing filter on Tram 6: 0.184 mi after Výstaviště, under 0.5 mi",50.101864,14.432998
+Vinohradské hřbitovy,"Tram 7, Tram 11, Tram 26","spacing filter on Tram 7: 0.402 mi after Vinice, under 0.5 mi",50.07773,14.480093
+Vlastina,"Tram 20, Tram 26","spacing filter on Tram 20: 0.293 mi after Divoká Šárka, under 0.5 mi",50.091261,14.316939
+Vodičkova,"Tram 3, Tram 5, Tram 6, Tram 9, Tram 24","spacing filter on Tram 3: 0.124 mi after Národní třída, under 0.5 mi",50.079848,14.423084
+Vojenská nemocnice,"Tram 1, Tram 2","spacing filter on Tram 1: 0.429 mi after Baterie, under 0.5 mi",50.091757,14.360056
+Vosmíkových,"Tram 3, Tram 24, Tram 30","spacing filter on Tram 3: 0.177 mi after U Kříže, under 0.5 mi",50.114378,14.47329
+Vozovna Hloubětín,Tram 12,"spacing filter on Tram 12: 0.124 mi after Nový Hloubětín, under 0.5 mi",50.107784,14.528329
+Vozovna Motol,"Tram 9, Tram 10","spacing filter on Tram 9: 0.256 mi after Hotel Golf, under 0.5 mi",50.067871,14.340981
+Vozovna Vokovice,"Tram 20, Tram 26","spacing filter on Tram 20: 0.275 mi after Nad Džbánem, under 0.5 mi",50.093045,14.330969
+Vršovické náměstí,"Tram 4, Tram 21, Tram 22","spacing filter on Tram 4: 0.208 mi after Čechovo náměstí, under 0.5 mi",50.069096,14.45455
+Václavské náměstí,"Tram 3, Tram 5, Tram 6, Tram 9, Tram 24","spacing filter on Tram 3: 0.297 mi after Národní třída, under 0.5 mi",50.081816,14.425506
+Zborov - Strašnické divadlo,"Tram 11, Tram 19","spacing filter on Tram 11: 0.287 mi after Solidarita, under 0.5 mi",50.077297,14.500696
+Zlíchov,"Tram 5, Tram 12, Tram 15, Tram 21, Tram 32","spacing filter on Tram 5: 0.33 mi after Lihovar, under 0.5 mi",50.046173,14.407837
+Černý kůň,"Tram 3, Tram 17, Tram 20, Tram 40","spacing filter on Tram 3: 0.31 mi after Hodkovičky, under 0.5 mi",50.022932,14.403652
+Červený Vrch,"Tram 20, Tram 26","spacing filter on Tram 20: 0.463 mi after Bořislavka, under 0.5 mi",50.096863,14.35275
+Říčanova,"Tram 22, Tram 25","spacing filter on Tram 22: 0.286 mi after Břevnovský klášter, under 0.5 mi",50.081355,14.352998
+Škola Radlice,"Tram 4, Tram 20","spacing filter on Tram 4: 0.425 mi after Braunova, under 0.5 mi",50.059441,14.393083
+Špitálská,Tram 12,"spacing filter on Tram 12: 0.178 mi after Vysočanská, under 0.5 mi",50.11101,14.505019
+Štvanice,"Tram 5, Tram 12","spacing filter on Tram 5: 0.34 mi after Vltavská, under 0.5 mi",50.095398,14.436995
+Štěpničná,Tram 30,"spacing filter on Tram 30: 0.394 mi after Sídliště Ďáblice, under 0.5 mi",50.127991,14.477471
+Štěpánská,"Tram 4, Tram 6, Tram 10, Tram 21, Tram 22","spacing filter on Tram 4: 0.343 mi after I. P. Pavlova, under 0.5 mi",50.075644,14.422876
+Šumavská,Tram 10,"spacing filter on Tram 10: 0.26 mi after Vinohradská vodárna, under 0.5 mi",50.075346,14.44387
