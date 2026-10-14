@@ -291,4 +291,9 @@ PLACE_REVIEWED = {
     "Calle de la Farmacia": "a public street named for a building or institution on it, not a business (living_street class; batch 2b precedent, _named_street); tags read 2026-10-13",
     "Museo de la Farmacia Hispana": "a museum (tourism=museum, wikidata); 'farmacia' is its subject; tags read 2026-10-13",
 }
-PLACE_DROPPED = {}
+# Dropped by id on the owner's ruling of 2026-10-13, the id read with its cached
+# name (docs/decisions_drafts/search-rollout.md). The four named convents the
+# reader dropped stay rows by the same ruling and need no entry.
+PLACE_DROPPED = {
+    "node/5129628112": "'Polvorín', the type word standing alone (historic=monument, no entry); the rule keeps the word for El Polvorín elsewhere (owner, 2026-10-13)",
+}

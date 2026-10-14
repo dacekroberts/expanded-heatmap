@@ -263,3 +263,9 @@ PLACE_LANGUAGES = ("ja",)
 PLACE_FOLD = "ja"
 PLACE_REVIEWED = {}
 PLACE_DROPPED = {}
+# Kept by the owner's word against the bare-type rule (place_index, PLACE_KEPT;
+# owner, 2026-10-13), the id read with its cached name
+# (docs/decisions_drafts/search-rollout.md).
+PLACE_KEPT = {
+    "way/489068359": "'仏舎利塔', the Hanaokayama Peace Pagoda: a monument with a Wikidata entry of its own (Q1456873), taken as a bare type word (owner, 2026-10-13)",
+}

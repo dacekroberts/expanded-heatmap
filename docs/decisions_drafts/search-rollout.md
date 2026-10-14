@@ -12,6 +12,11 @@
   - No named convent or monastery left any index.
 - **The five pilot cities:** 149 reader drops are still rows and are not by-id drops (`pilot_still_rows.tsv`: Rio de Janeiro 54, Madrid 39, Osaka 24, Amsterdam 17, Daegu 15). Madrid's four named convents and its bare "Polvorín" (node/5129628112) are listed apart in `madrid_five_owner_word.tsv`: they stay rows by the owner's rulings on the rule and need an owner word before any by-id drop.
 - **Checks:** `check_place_search.py` fails on rule A alone, the 151 (no render); check E is clear. `check_all.py` 70 of 73: that, `check_place_unopened.py` on Anyang, Gwangju, Most and Yamagata as recorded, and `check_macro_facts.py` on Mexico City (407,628 recorded, 427,121 in the shared processed data: the tram rescope's work on disk before its landing; the merge's regeneration rewrote `app/macro_facts.json` to match and that rewrite was put back, since Mexico City is another lane's). `check_barred_marks.py` passes now.
+- **Owner rulings on this report (2026-10-13, "all approved"), applied by id, each id read with its cached name first:**
+  - Madrid: the bare "Polvorín" (node/5129628112) is dropped in `PLACE_DROPPED`, the type word standing alone. The four named convents stay rows and need no entry.
+  - Kumamoto: 仏舎利塔 (way/489068359, the Hanaokayama Peace Pagoda) is kept in `PLACE_KEPT`. The by-id keep beats the bare-type rule (`landmark_drop` tests the id first) and the row is back.
+  - Left dropped: Strasbourg's two "Église Protestante", Valenciennes's "Temple protestant", the four "Temple antoiniste", Amsterdam's "Zonder Titel".
+  - Only Madrid and Kumamoto were rebuilt, through the gate: Madrid 32,710 to 32,709 places, Kumamoto 2,022 to 2,023. Each city's index, intersections file, street lines file, `place_ids.json` and `place_search.json` changed; no other city's file did.
 - **Not done:** no eye read, no render, no browser test. `check_place_index_drift.py` was not run to its end.
 
 ### 2026-10-13 - Search rollout: check E settled by the existing rules on the extract run's 73 cities; 52 unopened stations added to the watch file (branch search-rollout)
